@@ -39,6 +39,13 @@
     canvas.addEventListener('contextmenu', (e) => e.preventDefault());
     canvas.addEventListener('mouseleave', () => { game.hover = null; UI.hideTooltip(); });
 
+    // 滚轮缩放（以光标为锚点，缩放前后光标指向的世界坐标不变）
+    canvas.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      const r = canvas.getBoundingClientRect();
+      cam.zoomAt(e.clientX - r.left, e.clientY - r.top, e.deltaY < 0 ? 1.12 : 1 / 1.12);
+    }, { passive: false });
+
     window.addEventListener('keydown', (e) => {
       const tag = e.target && e.target.tagName;
       if (tag === 'TEXTAREA' || tag === 'INPUT') return;
@@ -47,16 +54,16 @@
       else if (e.key === 'f' || e.key === 'F') {
         cam.cx = game.pos.x; cam.cy = game.pos.y; cam.clamp();
       }
-      else if (e.key === 'n' || e.key === 'N') { game.toggles.index = !game.toggles.index; UI.el.tglIndex.checked = game.toggles.index; }
+      else if (e.key === 'n' || e.key === 'N') { game.toggles.index = !game.toggles.index; if (UI.el.tglIndex) UI.el.tglIndex.checked = game.toggles.index; }
     });
 
     UI.el.bagBtn.addEventListener('click', () => showBackpack());
 
     UI.el.rollBtn.addEventListener('click', roll);
-    UI.el.tglIndex.addEventListener('change', e => { game.toggles.index = e.target.checked; });
-    UI.el.btnExport.addEventListener('click', showExportOverlay);
-    UI.el.btnImport.addEventListener('click', showImportOverlay);
-    UI.el.btnClear.addEventListener('click', showClearOverlay);
+    if (UI.el.tglIndex) UI.el.tglIndex.addEventListener('change', e => { game.toggles.index = e.target.checked; });
+    if (UI.el.btnExport) UI.el.btnExport.addEventListener('click', showExportOverlay);
+    if (UI.el.btnImport) UI.el.btnImport.addEventListener('click', showImportOverlay);
+    if (UI.el.btnClear) UI.el.btnClear.addEventListener('click', showClearOverlay);
     initDevMode();
     bindDevMode();
 
@@ -90,7 +97,7 @@
   }
 
   // 结点命中：世界坐标附近最近结点（阈值内才算中）
-  const NODE_HIT_R = 24;
+  const NODE_HIT_R = 34;
   function pickNode(wx, wy) {
     let best = null, bd = 1e9;
     for (const n of game.nodes) {
@@ -140,9 +147,13 @@
   // ---------- 主循环 ----------
   const ELAPSED_STATES = new Set(['idle', 'rolling', 'moving', 'modal']);
   let lastT = performance.now();
+  let coverTitle = null, coverExit = null;   // 标题 / 退出界面（DOMContentLoaded 时缓存）
   function loop(now) {
+    requestAnimationFrame(loop);
     const dt = Math.min(0.05, (now - lastT) / 1000);
     lastT = now;
+    // 标题 / 退出界面盖住画布时跳过整帧渲染（省电省 GPU，回来时 dt 已钳制不会跳变）
+    if ((coverTitle && !coverTitle.hidden) || (coverExit && !coverExit.hidden)) return;
     game.time += dt;
     if (ELAPSED_STATES.has(game.state)) game.elapsed += dt;
     // 移动时镜头平滑跟随棋子
@@ -157,7 +168,6 @@
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     try { SDT.Renderer.draw(ctx, game); } catch (e) { console.error('渲染异常：', e); }
     UI.refreshTime(game);
-    requestAnimationFrame(loop);
   }
 
   function resize() {
@@ -180,7 +190,7 @@
     // 音效/背景乐开关（持久化在 sound.js）
     const btnMute = document.getElementById('btnMute');
     if (btnMute) {
-      const syncMute = () => { btnMute.innerHTML = SDT.Icons.img(SDT.Sound.muted ? 'cross' : 'gear', '', SDT.Sound.muted ? '已静音' : '声音开启'); };
+      const syncMute = () => { btnMute.classList.toggle('muted', !!SDT.Sound.muted); };
       btnMute.addEventListener('click', () => {
         SDT.Sound.setMuted(!SDT.Sound.muted);
         syncMute();
@@ -196,6 +206,8 @@
 // ---------- 启动 ----------
   window.addEventListener('DOMContentLoaded', () => {
     UI.init();
+    coverTitle = document.getElementById('title');
+    coverExit = document.getElementById('exitScr');
     resize();
     cam = new SDT.Camera(MAP, canvas.clientWidth || 800, canvas.clientHeight || 600);
     game.cam = cam;
@@ -204,7 +216,8 @@
     rebuildNotes();
 
     const bw = MAP.cols * MAP.tile, bh = MAP.rows * MAP.tile;
-    cam.zoom = Math.min((cam.viewW - 60) / bw, (cam.viewH - 60) / bh);
+    // 一屏最多看到地图约一半（对角留白），玩家可滚轮缩放 / 拖拽浏览
+    cam.zoom = Math.min(2.4, Math.max(1.0, cam.viewW / (bw * 0.55), cam.viewH / (bh * 0.55)));
     cam.cx = bw / 2; cam.cy = bh / 2;
     cam.clamp();
 

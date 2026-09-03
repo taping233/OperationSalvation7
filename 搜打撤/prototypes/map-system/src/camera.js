@@ -18,13 +18,6 @@
     this.viewW = w; this.viewH = h;
   };
 
-  Camera.prototype.worldToScreen = function (wx, wy) {
-    return {
-      x: (wx - this.cx) * this.zoom + this.viewW / 2,
-      y: (wy - this.cy) * this.zoom + this.viewH / 2,
-    };
-  };
-
   Camera.prototype.screenToWorld = function (sx, sy) {
     return {
       x: (sx - this.viewW / 2) / this.zoom + this.cx,
@@ -48,7 +41,7 @@
   };
 
   Camera.prototype.clamp = function () {
-    const m = 96; // 允许超出地图边缘的余量（屏幕像素/世界像素按 zoom 换算）
+    const m = 160; // 允许超出地图边缘的空白余量（世界像素，按 zoom 换算到屏幕）
     const halfW = this.viewW / 2 / this.zoom;
     const halfH = this.viewH / 2 / this.zoom;
     const mapW = this.map.cols * this.map.tile;

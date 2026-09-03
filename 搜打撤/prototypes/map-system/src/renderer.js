@@ -17,10 +17,10 @@
   const TAU = Math.PI * 2;
   const T0 = SDT.MAP.tile;   // 缩放基准单位（特效 / 棋子尺寸用）
 
-  const NODE_R = 17;         // 普通结点半径（世界像素）
-  const BOSS_R = 20;         // BOSS 结点半径
-  const ALTAR_R = 22;        // 祭坛结点半径
-  const LINK_GAP = 24;       // 连线两端距结点边缘的留白
+  const NODE_R = 26;         // 普通结点半径（世界像素）
+  const BOSS_R = 30;         // BOSS 结点半径
+  const ALTAR_R = 32;        // 祭坛结点半径
+  const LINK_GAP = 34;       // 连线两端距结点边缘的留白
 
   const COLORS = {
     bgTop: '#17252b',
@@ -31,7 +31,7 @@
 
   // 局内壁纸：视频版（Wallpaper Engine 素材）
   const environmentBackdrop = document.createElement('video');
-  environmentBackdrop.src = 'assets/wallpaper-0319.mp4';
+  environmentBackdrop.src = 'assets/wallpaper-改版.mp4';
   environmentBackdrop.muted = true;
   environmentBackdrop.loop = true;
   environmentBackdrop.playsInline = true;
@@ -176,10 +176,6 @@
         ctx.beginPath(); ctx.moveTo(cx - 12 * u, cy - 2 * u); ctx.lineTo(cx + 12 * u, cy - 2 * u); ctx.stroke();
         break;
       }
-      case 'fire': { // 火焰（结点上直接绘制，辉光由 drawFires 统一加）
-        drawFlame(ctx, cx, cy, u, 1, t);
-        break;
-      }
       case 'chest': { // 宝箱
         rrect(ctx, cx - 11 * u, cy - 3 * u, 22 * u, 12 * u, 2 * u);
         fillStroke(ctx, '#8a5a2b', '#4a2f12', 1.8 * u);
@@ -288,6 +284,56 @@
   const isCurLayer = (game, li) => li === game.layerIdx;
   const nodeRadius = (n) => n.li === -1 ? (n.def.type === 'altar' ? ALTAR_R : BOSS_R) : NODE_R;
 
+  /* ============ 结点位图图标（assets/icons，惰性加载；未就绪回退简笔画） ============
+   * 物资拾获（币/木材/口粮）合并用随机事件图标；环间门与出口门合并用同一张门。
+   * 出生入口没有位图，恒用简笔画旗帜。 */
+  const BITMAP_SRC = {
+    battle: 'battle', event: 'event', coin: 'event', wood: 'event', rations: 'event',
+    shop: 'shop', fire: 'fire', chest: 'chest', key: 'key',
+    emergencyExit: 'extract', door: 'door', altar: 'altar', boss: 'boss',
+    entrance: 'entrance', player: 'player',
+  };
+  const bitmapCache = {};
+  function bitmapFor(type) {
+    const name = BITMAP_SRC[type];
+    if (!name) return null;
+    let e = bitmapCache[name];
+    if (!e) {
+      e = bitmapCache[name] = { img: new Image(), ok: false };
+      e.img.onload = () => { e.ok = true; };
+      e.img.src = 'assets/icons/' + name + '.png';
+    }
+    return e.ok ? e.img : null;
+  }
+  // 画圆形位图结点：深色圆底 + 圆形裁剪位图 + 层色描边；无位图返回 false 由调用方回退
+  function drawBitmapIcon(ctx, type, cx, cy, R, cur, z) {
+    const img = bitmapFor(type);
+    if (!img) return false;
+    ctx.fillStyle = '#1d1c1a';
+    circle(ctx, cx, cy, R);
+    ctx.fill();
+    ctx.save();
+    circle(ctx, cx, cy, R * 0.97);
+    ctx.clip();
+    ctx.drawImage(img, cx - R * 0.91, cy - R * 0.91, R * 1.82, R * 1.82);
+    ctx.restore();
+    ctx.strokeStyle = cur ? 'rgba(235,205,140,0.5)' : 'rgba(180,160,120,0.22)';
+    ctx.lineWidth = 1.6 / z;
+    circle(ctx, cx, cy, R);
+    ctx.stroke();
+    return true;
+  }
+
+  // 重要结点的微光环绕色
+  const GLISTEN = {
+    altar: 'rgba(154,124,200,0.9)', boss: 'rgba(255,110,90,0.85)',
+    door: 'rgba(225,192,120,0.85)', emergencyExit: 'rgba(82,210,115,0.85)',
+    entrance: 'rgba(82,210,115,0.85)',
+  };
+
+  // 呼吸相位（确定性，结点各自错拍）
+  const nodePhase = (n) => hash2(n.li * 31 + n.idx, 9) * TAU;
+
   /* ============================================================
    * 结点几何缓存（连线 Path2D 确定性生成，同输入必得同一条线）
    * ============================================================ */
@@ -324,14 +370,16 @@
       return arr;
     };
 
-    const links = [];       // 环内相邻结点连线
-    const doorLinks = [];   // 环间门连线（金色 / 出口绿色，带箭头）
+    // 逐帧性能：同层连线合并为一条 Path2D，每层一次描边（实描 + 点划叠加）
+    const linksByLayer = game.nodePos.map(() => new Path2D());
     game.nodePos.forEach((arr, li) => {
       arr.forEach((p, i) => {
         const q = arr[(i + 1) % arr.length];
-        links.push({ li, path: hand(trim(p, q, LINK_GAP), trim(q, p, LINK_GAP), li * 57 + i * 13 + 1) });
+        const p2 = hand(trim(p, q, LINK_GAP), trim(q, p, LINK_GAP), li * 57 + i * 13 + 1);
+        linksByLayer[li].addPath(p2);
       });
     });
+    const doorLinks = [];   // 环间门连线（金色 / 出口绿色，带箭头；条数少，逐帧逐条描）
     game.layerData.forEach((ld, li) => {
       for (const d of (ld.doors || [])) {
         if (d.reverse) continue;
@@ -361,7 +409,7 @@
       }
       return { minX, maxX, minY, maxY };
     });
-    geo = { src: game.nodes, nodes, links, doorLinks, altarLinks, bounds, altarNode };
+    geo = { src: game.nodes, nodes, linksByLayer, doorLinks, altarLinks, bounds, altarNode };
     return geo;
   }
 
@@ -478,40 +526,22 @@
     b.translate(BOARD_PAD, BOARD_PAD);
     const g = nodeGeo(game);
 
-    // 结点：落影 + 盘面 + 手绘感双圈描边
+    // 结点：落影 + 深色圆底盘面（层色只留极淡的 tint，呼吸缩放时不露亮边；描边/微光在动态层画）
     for (const n of g.nodes) {
-      const cur = isCurLayer(game, n.li);
       const layerColor = n.li >= 0 ? (map.layers[n.li].color || '#6e5133')
         : (SDT.MAP.centerColor || '#4a3763');
-      const boss = n.li === -1 && n.def.type === 'boss';
       // 纸面落影
       b.fillStyle = 'rgba(0,0,0,0.38)';
       b.beginPath();
       b.ellipse(n.x + 2.5, n.y + 4, n.r * 1.02, n.r * 0.62, 0, 0, TAU);
       b.fill();
-      // 盘面：层色 → 深色的径向渐变
-      const base = mixHex(layerColor, COLORS.mixTo, cur ? 0 : 0.46);
+      // 盘面：层色微 tint 的深色径向渐变
+      const base = mixHex(layerColor, '#141210', 0.82);
       const rg = b.createRadialGradient(n.x - n.r * 0.3, n.y - n.r * 0.4, n.r * 0.2, n.x, n.y, n.r);
-      rg.addColorStop(0, shade(base, 0.10));
-      rg.addColorStop(1, shade(base, -0.10));
-      circle(b, n.x, n.y, n.r);
+      rg.addColorStop(0, shade(base, 0.05));
+      rg.addColorStop(1, shade(base, -0.08));
+      circle(b, n.x, n.y, n.r * 1.02);
       b.fillStyle = rg; b.fill();
-      // 双圈：外圈完整微偏心，内圈淡
-      const wob = (hash2(n.li * 31 + n.idx * 7, n.li * 13 + 3) - 0.5) * 1.6;
-      b.strokeStyle = cur ? 'rgba(235,205,140,0.55)' : 'rgba(180,160,120,0.28)';
-      b.lineWidth = 2;
-      circle(b, n.x + wob, n.y, n.r);
-      b.stroke();
-      b.strokeStyle = cur ? 'rgba(235,205,140,0.22)' : 'rgba(180,160,120,0.14)';
-      b.lineWidth = 1;
-      circle(b, n.x - wob, n.y + 0.5, n.r - 3.5);
-      b.stroke();
-      if (boss && cur) { // BOSS 结点红色警示环
-        b.strokeStyle = 'rgba(255,110,90,0.55)';
-        b.lineWidth = 1.5;
-        circle(b, n.x, n.y, n.r + 3);
-        b.stroke();
-      }
     }
 
     // 入口底光（第一环入口结点）
@@ -564,43 +594,63 @@
     boardCanvas = c;
   }
 
-  // ---------- 图标层（当前环明亮+悬浮呼吸，其余虚化） ----------
+  // ---------- 图标层（圆形位图结点：呼吸缩放；当前环明亮，其余虚化） ----------
   function drawIcons(ctx, game) {
-    const u = T0 / 48, t = game.time;
+    const u = T0 / 48, t = game.time, z = game.cam.zoom;
     const g = nodeGeo(game);
     ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
     for (const n of g.nodes) {
       if (n.def.type === 'fire') continue; // 火堆由 drawFires 统一绘制
       const cur = isCurLayer(game, n.li);
+      const phase = nodePhase(n);
+      // 呼吸缩放（各结点错拍）+ 当前环轻微悬浮
+      const R = n.r * (1 + 0.045 * Math.sin(t * 2.1 + phase));
       ctx.save();
-      ctx.globalAlpha = cur ? 1 : 0.30;
-      if (cur) {
-        ctx.translate(0, Math.sin(t * 2.2 + hash2(n.li * 31 + n.idx, 5) * 6.28) * 1.6 * u);
-        ctx.shadowColor = n.def.type === 'boss' ? 'rgba(255,90,80,0.6)'
-          : n.def.type === 'altar' ? 'rgba(154,124,200,0.7)'
-          : 'rgba(255,240,200,0.35)';
-        ctx.shadowBlur = 6;
+      ctx.globalAlpha = cur ? 1 : 0.32;
+      if (!drawBitmapIcon(ctx, n.def.type, n.x, n.y + (cur ? Math.sin(t * 2.2 + phase) * 1.6 * u : 0), R, cur, z)) {
+        if (cur) {
+          ctx.translate(0, Math.sin(t * 2.2 + phase) * 1.6 * u);
+          ctx.shadowColor = n.def.type === 'boss' ? 'rgba(255,90,80,0.6)'
+            : n.def.type === 'altar' ? 'rgba(154,124,200,0.7)'
+            : 'rgba(255,240,200,0.35)';
+          ctx.shadowBlur = 6;
+        }
+        drawIcon(ctx, n.def, n.x, n.y, u, t);
       }
-      drawIcon(ctx, n.def, n.x, n.y, u, t);
+      // 重要结点：微光环绕（旋转虚线光环 + 呼吸明暗）
+      const glow = GLISTEN[n.def.type];
+      if (glow) {
+        ctx.save();
+        ctx.globalAlpha = (cur ? 0.9 : 0.28) * (0.72 + 0.28 * Math.sin(t * 1.7 + phase));
+        ctx.strokeStyle = glow;
+        ctx.lineWidth = 1.5 / z;
+        ctx.setLineDash([4 / z, 7 / z]);
+        ctx.lineDashOffset = -(t * 10) / z;
+        circle(ctx, n.x, n.y, n.r * 1.26 + Math.sin(t * 1.3 + phase) * 2);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.restore();
+      }
       ctx.restore();
     }
   }
 
-  // ---------- 手绘连线（环内线实描+点划叠加；门/祭坛线流光虚线逐帧） ----------
+  // ---------- 手绘连线（环内线按层合并批描：实描+点划叠加；门/祭坛线流光虚线逐帧） ----------
   function drawLinks(ctx, game) {
     const g = nodeGeo(game);
     const z = game.cam.zoom, curLi = game.layerIdx, t = game.time;
     ctx.save();
     ctx.lineCap = 'round';
-    for (const l of g.links) {
-      ctx.globalAlpha = l.li === curLi ? 1 : 0.28;
-      ctx.strokeStyle = COLORS.ringLink;
-      ctx.lineWidth = (l.li === curLi ? 2.5 : 2.0) / z;
-      ctx.stroke(l.path);
-      ctx.globalAlpha = l.li === curLi ? 0.55 : 0.14;
+    ctx.strokeStyle = COLORS.ringLink;
+    for (let li = 0; li < g.linksByLayer.length; li++) {
+      const cur = li === curLi, path = g.linksByLayer[li];
+      ctx.globalAlpha = cur ? 1 : 0.28;
+      ctx.lineWidth = (cur ? 2.5 : 2.0) / z;
+      ctx.stroke(path);
+      ctx.globalAlpha = cur ? 0.55 : 0.14;
       ctx.lineWidth = 3.2 / z;
       ctx.setLineDash([1.5 / z, 9 / z]);
-      ctx.stroke(l.path);
+      ctx.stroke(path);
       ctx.setLineDash([]);
     }
     // 环间门：金色流光（出口绿色）
@@ -632,17 +682,32 @@
     for (const n of g.nodes) {
       if (n.def.type !== 'fire') continue;
       const cur = isCurLayer(game, n.li);
+      const phase = nodePhase(n);
+      const R = n.r * (1 + 0.045 * Math.sin(t * 2.1 + phase));
       ctx.save();
       ctx.globalAlpha = cur ? 1 : 0.35;
-      ctx.fillStyle = 'rgba(242,133,74,0.14)';
-      circle(ctx, n.x, n.y, n.r + 2);
-      ctx.fill();
-      ctx.strokeStyle = 'rgba(242,133,74,0.75)';
-      ctx.lineWidth = 1.8 / cam.zoom;
-      circle(ctx, n.x, n.y, n.r + 2);
-      ctx.stroke();
-      if (cur) { ctx.shadowColor = 'rgba(242,133,74,0.55)'; ctx.shadowBlur = 12; }
-      drawFlame(ctx, n.x, n.y, u, 1.15, t);
+      // 圆形位图火堆（呼吸缩放）+ 橙色微光环绕；无位图回退辉光环 + 简笔火焰
+      if (drawBitmapIcon(ctx, 'fire', n.x, n.y, R, cur, cam.zoom)) {
+        const p = (Math.sin(t * 2.4 + phase) + 1) / 2;
+        ctx.globalAlpha = (cur ? 0.9 : 0.3) * (0.7 + 0.3 * p);
+        ctx.strokeStyle = 'rgba(242,133,74,0.85)';
+        ctx.lineWidth = 1.5 / cam.zoom;
+        ctx.setLineDash([4 / cam.zoom, 7 / cam.zoom]);
+        ctx.lineDashOffset = -(t * 10) / cam.zoom;
+        circle(ctx, n.x, n.y, n.r * 1.26 + p * 2);
+        ctx.stroke();
+        ctx.setLineDash([]);
+      } else {
+        ctx.fillStyle = 'rgba(242,133,74,0.14)';
+        circle(ctx, n.x, n.y, n.r + 2);
+        ctx.fill();
+        ctx.strokeStyle = 'rgba(242,133,74,0.75)';
+        ctx.lineWidth = 1.8 / cam.zoom;
+        circle(ctx, n.x, n.y, n.r + 2);
+        ctx.stroke();
+        if (cur) { ctx.shadowColor = 'rgba(242,133,74,0.55)'; ctx.shadowBlur = 12; }
+        drawFlame(ctx, n.x, n.y, u, 1.15, t);
+      }
       ctx.restore();
     }
   }
@@ -699,29 +764,7 @@
   }
 
   // ---------- 当前环名胶囊标签 ----------
-  function drawLayerLabel(ctx, game) {
-    const cam = game.cam;
-    const g = nodeGeo(game);
-    const ld = game.layerData[game.layerIdx];
-    const bd = g.bounds[game.layerIdx];
-    if (!bd) return;
-    const label = `当前 · ${ld.name}`;
-    ctx.font = font(cam, 11);
-    const tw = ctx.measureText(label).width;
-    let ly = bd.minY - 26 / cam.zoom;
-    if (ly < 14 / cam.zoom) ly = bd.maxY + 26 / cam.zoom;
-    const lx = (bd.minX + bd.maxX) / 2;
-    const pw = tw + 22 / cam.zoom, ph = 20 / cam.zoom;
-    ctx.fillStyle = 'rgba(20,14,6,0.85)';
-    rrect(ctx, lx - pw / 2, ly - ph / 2, pw, ph, ph / 2);
-    ctx.fill();
-    ctx.strokeStyle = 'rgba(216,180,106,0.5)';
-    ctx.lineWidth = 1 / cam.zoom;
-    ctx.stroke();
-    ctx.fillStyle = 'rgba(242,226,184,0.95)';
-    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-    ctx.fillText(label, lx, ly + 0.5 / cam.zoom);
-  }
+  // 已移除：环层名改为 DOM 固定横幅（#layerBanner），始终以固定大小显示在视口顶部居中。
 
   function drawHover(ctx, game) {
     if (!game.hover) return;
@@ -776,49 +819,48 @@
     ctx.beginPath();
     ctx.ellipse(px, groundY + s * 0.14, s * (0.68 + pulse * 0.1), s * (0.23 + pulse * 0.03), 0, 0, TAU);
     ctx.stroke();
-    // —— 木制桌游棋子：底座 + 锥形身 + 圆头 ——
-    const ink = 'rgba(43,28,16,0.9)';
-    ctx.fillStyle = '#6b4a26';
-    ctx.beginPath(); ctx.ellipse(px, groundY, s * 0.46, s * 0.17, 0, 0, TAU); ctx.fill();
-    ctx.strokeStyle = ink; ctx.lineWidth = 1.4 / z; ctx.stroke();
-    const bodyGrad = ctx.createLinearGradient(px - s * 0.34, 0, px + s * 0.34, 0);
-    bodyGrad.addColorStop(0, '#7a5426');
-    bodyGrad.addColorStop(0.42, '#c99a54');
-    bodyGrad.addColorStop(0.68, '#a87838');
-    bodyGrad.addColorStop(1, '#63431e');
-    ctx.fillStyle = bodyGrad;
-    ctx.beginPath();
-    ctx.moveTo(px - s * 0.42, groundY - s * 0.02);
-    ctx.bezierCurveTo(px - s * 0.3, groundY - s * 0.5, px - s * 0.22, groundY - s * 0.68, px - s * 0.19, groundY - s * 0.92);
-    ctx.lineTo(px + s * 0.19, groundY - s * 0.92);
-    ctx.bezierCurveTo(px + s * 0.22, groundY - s * 0.68, px + s * 0.3, groundY - s * 0.5, px + s * 0.42, groundY - s * 0.02);
-    ctx.closePath();
-    ctx.fill();
-    ctx.strokeStyle = 'rgba(43,28,16,0.85)'; ctx.lineWidth = 1.4 / z; ctx.stroke();
-    // 领口铜环
-    ctx.strokeStyle = 'rgba(217,169,78,0.85)';
-    ctx.lineWidth = 1.6 / z;
-    ctx.beginPath();
-    ctx.moveTo(px - s * 0.21, groundY - s * 0.8);
-    ctx.lineTo(px + s * 0.21, groundY - s * 0.8);
-    ctx.stroke();
-    // 头
-    const headY = groundY - s * 1.06;
-    const headGrad = ctx.createRadialGradient(px - s * 0.08, headY - s * 0.08, 1, px, headY, s * 0.27);
-    headGrad.addColorStop(0, '#eed8a4');
-    headGrad.addColorStop(0.6, '#c99a54');
-    headGrad.addColorStop(1, '#7a5622');
-    ctx.fillStyle = headGrad;
-    ctx.beginPath(); ctx.arc(px, headY, s * 0.24, 0, TAU); ctx.fill();
-    ctx.strokeStyle = 'rgba(43,28,16,0.85)'; ctx.lineWidth = 1.4 / z; ctx.stroke();
-    // 高光
-    ctx.fillStyle = 'rgba(255,248,225,0.7)';
-    ctx.beginPath(); ctx.arc(px - s * 0.08, headY - s * 0.09, s * 0.05, 0, TAU); ctx.fill();
-    // 名牌胶囊
+    // —— 当前位置：青色定位针（位图优先，针尖落在脚下；无位图回退木棋子） ——
+    const pinSize = T0 * 1.7;
+    const hopLift = game.hop * T0 * 0.35;   // 步行跳跃的抬升
+    const pinImg = bitmapFor('player');
+    if (pinImg) {
+      ctx.drawImage(pinImg, px - pinSize / 2, groundY - pinSize * 0.94 - hopLift, pinSize, pinSize);
+    } else {
+      const ink = 'rgba(43,28,16,0.9)';
+      const gy = groundY - hopLift;
+      ctx.fillStyle = '#6b4a26';
+      ctx.beginPath(); ctx.ellipse(px, gy, s * 0.46, s * 0.17, 0, 0, TAU); ctx.fill();
+      ctx.strokeStyle = ink; ctx.lineWidth = 1.4 / z; ctx.stroke();
+      const bodyGrad = ctx.createLinearGradient(px - s * 0.34, 0, px + s * 0.34, 0);
+      bodyGrad.addColorStop(0, '#7a5426');
+      bodyGrad.addColorStop(0.42, '#c99a54');
+      bodyGrad.addColorStop(0.68, '#a87838');
+      bodyGrad.addColorStop(1, '#63431e');
+      ctx.fillStyle = bodyGrad;
+      ctx.beginPath();
+      ctx.moveTo(px - s * 0.42, gy - s * 0.02);
+      ctx.bezierCurveTo(px - s * 0.3, gy - s * 0.5, px - s * 0.22, gy - s * 0.68, px - s * 0.19, gy - s * 0.92);
+      ctx.lineTo(px + s * 0.19, gy - s * 0.92);
+      ctx.bezierCurveTo(px + s * 0.22, gy - s * 0.68, px + s * 0.3, gy - s * 0.5, px + s * 0.42, gy - s * 0.02);
+      ctx.closePath();
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(43,28,16,0.85)'; ctx.lineWidth = 1.4 / z; ctx.stroke();
+      const headY = gy - s * 1.06;
+      const headGrad = ctx.createRadialGradient(px - s * 0.08, headY - s * 0.08, 1, px, headY, s * 0.27);
+      headGrad.addColorStop(0, '#eed8a4');
+      headGrad.addColorStop(0.6, '#c99a54');
+      headGrad.addColorStop(1, '#7a5622');
+      ctx.fillStyle = headGrad;
+      ctx.beginPath(); ctx.arc(px, headY, s * 0.24, 0, TAU); ctx.fill();
+      ctx.strokeStyle = 'rgba(43,28,16,0.85)'; ctx.lineWidth = 1.4 / z; ctx.stroke();
+      ctx.fillStyle = 'rgba(255,248,225,0.7)';
+      ctx.beginPath(); ctx.arc(px - s * 0.08, headY - s * 0.09, s * 0.05, 0, TAU); ctx.fill();
+    }
+    // 名牌胶囊（钉在定位针上方）
     const label = '你';
     ctx.font = font(cam, 10);
     const tw = ctx.measureText(label).width;
-    const lw2 = tw + 12 / z, lh = 15 / z, lx = px, ly = groundY - s * 1.5 - 8 / z;
+    const lw2 = tw + 12 / z, lh = 15 / z, lx = px, ly = groundY - pinSize * 1.08 - hopLift;
     ctx.fillStyle = 'rgba(22,15,6,0.85)';
     rrect(ctx, lx - lw2 / 2, ly - lh / 2, lw2, lh, lh / 2);
     ctx.fill();
@@ -933,7 +975,6 @@
     drawIcons(ctx, game);
     drawIndexes(ctx, game);
     drawEntrancePulse(ctx, game);
-    drawLayerLabel(ctx, game);
     drawMoveTarget(ctx, game);
     drawHover(ctx, game);
     drawPlayer(ctx, game);
