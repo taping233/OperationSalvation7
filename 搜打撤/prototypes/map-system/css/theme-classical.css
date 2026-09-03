@@ -1,0 +1,291 @@
+/* v0.31 主题层：方舟骨架 × 中式古典活动皮（深红檀木 + 哑光香槟金） */
+  :root { --ink:#0d0d0d; --bg:#141414; --desk1:#202020; --desk2:#131313;
+    --panel:#202020; --panel2:#131313; --inset:#0e0e0e; --line:#767676; --line2:#a4a4a4;
+    --txt:#e7e7e7; --sub:#b6b6b6; --dim:#8b8b8b; --amber:#b4b4b4; --amber-soft:#ebebeb;
+    --gold:#b4b4b4; --ember:#686868; --ember-hi:#393939; --ok:#909090; --arcane:#898989;
+    --red:#373737; --red-deep:#202020; --zhu:#393939; --paper:#ebebeb; --ink-txt:#303030;
+    --cal:"STZhongsong","STKaiti","KaiTi","SimSun",serif;
+    --serif:"Segoe UI", "Microsoft YaHei", sans-serif; }
+  html,body { background:var(--ink); color:var(--txt); letter-spacing:.02em; }
+  #sidebar { width:286px; min-width:286px; padding:14px 12px; gap:10px; background:
+    repeating-linear-gradient(135deg,rgba(180,180,180,.03) 0 1px,transparent 1px 9px),
+    linear-gradient(180deg,var(--desk1),var(--desk2)); border-right:1px solid #a4a4a4; }
+  #sidebar header h1 { font-family:var(--cal); letter-spacing:3px; color:#f1f1f1; }
+  .panel { border-radius:2px; background:linear-gradient(160deg,rgba(32,32,32,.97),rgba(19,19,19,.97)); border-color:var(--line);
+    box-shadow:0 4px 14px rgba(0,0,0,.4); }
+  .panel::before { background:linear-gradient(90deg,transparent,rgba(164,164,164,.35),transparent); }
+  .panel h3 { font-family:var(--cal); color:#b4b4b4; letter-spacing:2px; }
+  .panel h3::before,.panel h3::after { background:linear-gradient(90deg,transparent,rgba(164,164,164,.55)); }
+  .panel h3::after { background:linear-gradient(90deg,rgba(164,164,164,.55),transparent); }
+  #viewport { background:radial-gradient(circle at 52% 42%,#373737 0%,#202020 55%,#141414 100%); }
+  #viewport::before { content:""; position:absolute; inset:0; pointer-events:none; opacity:.14; z-index:0;
+    background:linear-gradient(128deg,transparent 0 46%,rgba(164,164,164,.18) 46.2% 46.5%,transparent 46.7%),
+      repeating-linear-gradient(0deg,transparent 0 35px,rgba(235,235,235,.04) 36px,transparent 37px); }
+  #map, #canvas, .map-canvas { position:relative; z-index:1; }
+  button,.mini-btn,.hs-btn,.ov-btn,.menu-btn { border-radius:2px !important; text-transform:none; letter-spacing:1px; }
+  .mini-btn,.hs-btn,.ov-btn { background:linear-gradient(180deg,#202020,#131313); border-color:#767676; color:#e7e7e7; }
+  .mini-btn:hover,.hs-btn:hover,.ov-btn:hover { border-color:#a4a4a4; box-shadow:0 0 12px rgba(180,180,180,.2); }
+  #bagBtn,#rollBtn,.ov-btn.ok,.hs-btn.gold { background:linear-gradient(180deg,#3b3b3b,#292929); border-color:#b4b4b4; color:#ebebeb; font-family:var(--cal); }
+  #bagBtn:hover,#rollBtn:hover,.ov-btn.ok:hover,.hs-btn.gold:hover { box-shadow:0 0 14px rgba(180,180,180,.28); }
+  .hs-card { border-radius:2px; box-shadow:0 5px 14px rgba(0,0,0,.5); }
+  #title::before { opacity:.3; background-image:linear-gradient(90deg,rgba(164,164,164,.5) 1px,transparent 1px),linear-gradient(rgba(164,164,164,.2) 1px,transparent 1px); background-size:72px 72px; animation:none; mask-image:linear-gradient(90deg,#000000,transparent 68%); }
+  #title::after { opacity:.14; background-image:repeating-linear-gradient(135deg,transparent 0 22px,rgba(180,180,180,.8) 23px,transparent 24px); animation:none; }
+  .title-ver { color:#8b8b8b; }
+  .menu-btn { background:rgba(19,19,19,.82); border-color:rgba(164,164,164,.55); font-family:var(--cal); }
+  .menu-btn:hover:not(:disabled) { background:rgba(38,38,38,.92); border-color:#b4b4b4; }
+  #overlay .card { border-radius:2px; background:linear-gradient(160deg,#202020,#131313); border-color:#767676; }
+  #overlay .card::before { background:linear-gradient(90deg,transparent,#b4b4b4,transparent); }
+  /* 战斗终端：我方固定左侧，敌方右侧，行动区和手牌维持原 DOM/拖拽事件 */
+  #overlay .bt-foes { display:grid; grid-template-columns:minmax(170px,.72fr) minmax(300px,1.8fr) minmax(118px,.44fr); gap:12px; align-items:stretch; }
+  #overlay .bt-foes > .bt-self { grid-column:1; grid-row:1 / span 2; flex-direction:column; justify-content:center; text-align:center; min-width:0; }
+  #overlay .bt-foes > .bt-self .bt-fportrait { width:min(128px,100%); min-width:0; margin:0 auto 6px; border-color:var(--ok); }
+  #overlay .bt-foes > .bt-self .bt-finfo { width:100%; }
+  #overlay .bt-foes > .bt-foe:not(.bt-self) { grid-column:2; min-width:0; }
+  #overlay .bt-foes > .bt-ops-col { grid-column:3; grid-row:1 / span 2; min-width:0; }
+  #overlay .bt-player { border-color:#767676; background:rgba(19,19,19,.8); }
+  #overlay .bt-hand { border-top:1px solid rgba(164,164,164,.3); padding-top:16px; }
+  #overlay .bt-fportrait { border-radius:2px; border-color:#767676; }
+  #overlay .bt-foe { border-radius:2px; background:linear-gradient(160deg,#202020,#131313); border-color:#767676; }
+  #overlay .bt-foe.can-target { border-color:#b4b4b4; box-shadow:0 0 14px rgba(180,180,180,.25); }
+  @media (max-width: 760px) {
+    #overlay .bt-foes { grid-template-columns:minmax(130px,.7fr) minmax(190px,1.3fr); }
+    #overlay .bt-foes > .bt-ops-col { grid-column:1 / -1; grid-row:auto; flex-direction:row; }
+  }
+  /* 场景契约背景挂点：全部环境位图均为原创日系动画概念美术。 */
+  #overlay .scene[data-asset-key] { min-height:340px; background-color:#101010; background-size:cover; background-position:center; }
+  #overlay .scene[data-asset-key]::before { content:""; position:absolute; inset:0; z-index:0; pointer-events:none; background:linear-gradient(90deg,rgba(9,9,9,.94),rgba(9,9,9,.72) 46%,rgba(9,9,9,.34)); }
+  #overlay .scene[data-asset-key] > * { z-index:1; }
+  #overlay .scene[data-asset-key="scene-battle-bg"] { background-image:url('../assets/scenes/scene-battle-anime-v2.png'); }
+  #overlay .scene[data-asset-key="scene-shop-bg"] { background-image:url('../assets/scenes/scene-shop-anime-v2.png'); }
+  #overlay .scene[data-asset-key="scene-event-bg"] { background-image:url('../assets/scenes/scene-event-anime-v2.png'); }
+  #overlay .scene[data-asset-key="scene-fire-bg"] { background-image:url('../assets/scenes/scene-fire-anime-v2.png'); }
+  #overlay .scene[data-asset-key="scene-chest-bg"] { background-image:url('../assets/scenes/scene-chest-anime-v2.png'); }
+  #overlay .scene[data-asset-key="scene-door-bg"] { background-image:url('../assets/scenes/scene-door-anime-v2.png'); }
+  #overlay .scene[data-asset-key="scene-altar-bg"] { background-image:url('../assets/scenes/scene-altar-anime-v2.png'); }
+  #overlay .scene[data-asset-key="scene-extract-bg"] { background-image:url('../assets/scenes/scene-extract-anime-v2.png'); }
+  #overlay .scene[data-asset-key="scene-pickup-coin"] { background-image:url('../assets/scenes/scene-pickup-coin-anime-v2.png'); }
+  #overlay .scene[data-asset-key="scene-pickup-wood"] { background-image:url('../assets/scenes/scene-pickup-wood-anime-v2.png'); }
+  #overlay .scene[data-asset-key="scene-pickup-rations"] { background-image:url('../assets/scenes/scene-pickup-rations-anime-v2.png'); }
+  #overlay .scene[data-asset-key="scene-pickup-key"] { background-image:url('../assets/scenes/scene-pickup-key-anime-v2.png'); }
+  #overlay .scene[data-asset-key="scene-event-timeskip"] { background-image:url('../assets/scenes/event-timeskip-anime-v2.png'); }
+  #overlay .scene[data-asset-key="scene-event-demondeal"] { background-image:url('../assets/scenes/event-demondeal-anime-v2.png'); }
+  #overlay .scene[data-asset-key="scene-event-bandits"] { background-image:url('../assets/scenes/event-bandits-anime-v2.png'); }
+  #overlay .scene[data-asset-key="scene-event-mystery"] { background-image:url('../assets/scenes/event-mystery-anime-v2.png'); }
+  #overlay .scene[data-asset-key="scene-event-goldmine"] { background-image:url('../assets/scenes/event-goldmine-anime-v2.png'); }
+  #overlay .scene[data-asset-key="scene-event-goldhammer"] { background-image:url('../assets/scenes/event-goldhammer-anime-v2.png'); }
+  #overlay .scene[data-asset-key="scene-event-relief"] { background-image:url('../assets/scenes/event-relief-anime-v2.png'); }
+  #overlay .scene[data-asset-key="scene-event-airdrop"] { background-image:url('../assets/scenes/event-airdrop-anime-v2.png'); }
+  #overlay .scene[data-asset-key="scene-event-chestdraw"] { background-image:url('../assets/scenes/event-chestdraw-anime-v2.png'); }
+  #overlay .scene[data-asset-key="scene-event-systemsupply"] { background-image:url('../assets/scenes/event-systemsupply-anime-v2.png'); }
+  .battle-stage { position:relative; isolation:isolate; margin:-12px; padding:14px 12px 12px; min-height:520px; overflow:hidden; background-size:cover; background-position:center; }
+  .battle-stage-shade { position:absolute; inset:0; z-index:-1; background:linear-gradient(180deg,rgba(9,9,9,.58),rgba(9,9,9,.88) 62%,rgba(9,9,9,.97)); pointer-events:none; }
+  .battle-stage[data-asset-key="battle-normal"] { background-image:url('../assets/scenes/battle-normal-anime-v2.png'); }
+  .battle-stage[data-asset-key="battle-boss-general"] { background-image:url('../assets/scenes/battle-boss-general-anime-v2.png'); }
+  .battle-stage[data-asset-key="battle-boss-orc"] { background-image:url('../assets/scenes/battle-boss-orc-anime-v2.png'); }
+  .battle-stage[data-asset-key="battle-boss-element"] { background-image:url('../assets/scenes/battle-boss-element-anime-v2.png'); }
+
+  /* ============ v0.31 方舟骨架×中式古典重皮：卡牌层 ============ */
+  .hs-card { --gem:#858585; --type:#a4a4a4; border-radius:0; padding:.38em;
+    border:1px solid #a4a4a4;
+    background:
+      repeating-linear-gradient(105deg,rgba(48,48,48,.04) 0 2px,transparent 2px 6px),
+      linear-gradient(165deg,#ebebeb 0%,#e6e6e6 60%,#dbdbdb 100%);
+    clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,0 100%);
+    box-shadow:0 .34em 1em rgba(0,0,0,.5); }
+  .tp0{--type:#929292}.tp1{--type:#767676}.tp2{--type:#8a8a8a}.tp3{--type:#a4a4a4}
+  .tp4{--type:#b4b4b4}.tp5{--type:#858585}.tp6{--type:#898989}
+  .rv0{--gem:#858585}.rv1{--gem:#999999}.rv2{--gem:#8a8a8a}.rv3{--gem:#898989}.rv4{--gem:#b4b4b4}.rv5{--gem:#686868}
+  .rv0,.rv1,.rv2,.rv3,.rv4,.rv5 { box-shadow:0 .34em 1em rgba(0,0,0,.5), inset 3px 0 0 var(--gem); }
+  .hsc-cost,.hsc-dmg,.hsc-val { width:2.15em;height:2.15em;border-radius:2px;clip-path:none;
+    border:1px solid #a4a4a4;filter:none;text-shadow:none;padding:0;justify-content:center;color:#ebebeb; }
+  .hsc-cost { top:-.28em;left:-.28em;background:#303030; }
+  .hsc-dmg { bottom:-.28em;left:-.28em;background:#393939; }
+  .hsc-val { bottom:-.28em;right:-.28em;background:#303030; }
+  .hsc-art { height:5.2em;margin:.14em .08em 0;border-radius:1px;border:1px solid #767676;
+    background:linear-gradient(160deg,rgba(164,164,164,.14),transparent 50%),#141414;
+    box-shadow:inset 0 -1em 1.4em rgba(0,0,0,.4);overflow:hidden; }
+  .hsc-art::after { content:'';position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--type);opacity:.75; }
+  .hsc-art .art-card-image { width:100%;height:100%;object-fit:cover;filter:none; }
+  .hsc-name { margin:.3em .08em 0;padding:.22em .35em;border-radius:1px;text-align:left;
+    font-family:var(--cal);color:#303030;background:transparent;border:0;border-left:3px solid var(--type);letter-spacing:.04em; }
+  .hsc-type { color:#5c5c5c;text-align:left;padding-left:.45em;letter-spacing:.11em; }
+  .hsc-kw { justify-content:flex-start;padding-left:.25em; }
+  .hsc-kw span { border-radius:1px;color:#303030;background:rgba(164,164,164,.22);border-color:#767676; }
+  .hsc-gem { width:1.5em;height:.18em;margin:.2em .3em 0;transform:none;border:0;background:var(--gem);box-shadow:none; }
+  .hsc-desc { margin:.2em .08em .08em;padding:.32em .42em;border-radius:1px;justify-content:flex-start;text-align:left;
+    background:#131313;color:#e7e7e7;border:1px solid #767676;box-shadow:none; }
+  .hsc-desc:empty::before { color:#8b8b8b; }
+  .hsc-dmg i,.hsc-val i,.hsc-dmg b,.hsc-val b { text-shadow:none; }
+
+  .hs-back { border-radius:0;background:
+      repeating-linear-gradient(90deg,rgba(235,235,235,.03) 0 1px,transparent 1px 7px),
+      linear-gradient(165deg,#191919,#0e0e0e)!important;border:1px solid #a4a4a4;
+    box-shadow:inset 0 0 0 3px #0e0e0e,inset 0 0 0 4px #767676,0 2px 6px rgba(0,0,0,.5);
+    clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,0 100%); }
+  .hs-back::before { inset:7%;border:1px solid #767676;border-radius:0;
+    background:repeating-linear-gradient(90deg,transparent 0 7px,rgba(164,164,164,.06) 7px 8px),
+      repeating-linear-gradient(0deg,transparent 0 7px,rgba(164,164,164,.06) 7px 8px); }
+  .hs-back::after { content:'';position:absolute;inset:4%;pointer-events:none;
+    border-left:3px solid var(--back-accent,#858585);
+    border-top:1px solid #767676;
+    background:
+      linear-gradient(to bottom right,transparent 0 calc(14px - 1px),var(--back-accent,#858585) calc(14px - 1px) 14px,transparent 14px) top right/14px 14px no-repeat,
+      linear-gradient(to bottom right,var(--back-accent,#858585) 0 1px,transparent 1px) top right/14px 14px no-repeat,
+      linear-gradient(to top left,transparent 0 calc(10px - 1px),var(--back-accent,#858585) calc(10px - 1px) 10px,transparent 10px) bottom left/10px 10px no-repeat;
+    clip-path:polygon(0 0,100% 0,100% 76%,76% 100%,0 100%); }
+  .hs-back .hsb-emblem { width:34%;height:34%;display:grid;place-items:center;color:var(--back-accent,#858585);text-shadow:none; }
+  .hs-back .hsb-emblem .ic { width:100%;height:100%;filter:none; }
+  .hs-back .hsb-shine { background:linear-gradient(120deg,transparent 43%,rgba(235,235,235,.07) 50%,transparent 57%); }
+  .hb-classic{--back-accent:#858585}.hb-wolf{--back-accent:#909090}.hb-coin{--back-accent:#b4b4b4}
+  .hb-vault{--back-accent:#8a8a8a}.hb-boss{--back-accent:#686868}.hb-altar{--back-accent:#898989}.hb-pet{--back-accent:#929292}
+  .hb-classic .hsb-emblem { display:none; }
+  .art-portrait { width:100%;height:100%;display:block; }
+  .bt-fportrait { border-radius:2px!important;border-color:#767676!important;background:#0e0e0e!important; }
+
+  /* ===== v0.31 方舟骨架×中式古典重皮 ===== */
+  /* —— 全站字体与通用控件 —— */
+  #app h1,#app h2,#app h3,#overlay .ov-btn,#overlay .mini-btn,.hub-tab .tab-txt,
+  #btnDeploy,#bagBtn,#rollBtn,.menu-btn,.hsc-name { font-family:var(--cal); }
+  .mini-btn,.hs-btn,.ov-btn,.menu-btn,#btnDeploy {
+    clip-path:polygon(0 0,calc(100% - 9px) 0,100% 9px,100% 100%,0 100%); }
+  /* 英文小标签注记（::after content 注入，不改 DOM） */
+  #charPanel h3::after,#statsPanel h3::after,#dicePanel h3::after,
+  .hub-card h3::after,#ovTitle::after {
+    content:attr(data-en); }
+  #charPanel h3::after{content:"CLASS"} #statsPanel h3::after{content:"STATUS"}
+  #dicePanel h3::after{content:"DICE"}
+  .hub-card h3::after{content:"INTEL"} 
+  .deploy-grid .hub-card:nth-child(1) h3::after{content:"SORTIE"}
+  .deploy-grid .hub-card:nth-child(2) h3::after{content:"BRIEFING"}
+  #charPanel h3::after,#statsPanel h3::after,#dicePanel h3::after,
+  .hub-card h3::after {
+    float:right;font-family:var(--serif);font-size:10px;letter-spacing:.15em;
+    color:rgba(182,182,182,.55);font-weight:400;margin-left:8px; }
+
+  /* —— 印章（朱砂方章） —— */
+  .hub-head h2::before,#ovTitle::before {
+    content:"营";display:inline-block;width:26px;height:26px;line-height:26px;margin-right:10px;
+    background:#393939;border:1px solid #2c2c2c;outline:1px solid rgba(235,235,235,.25);outline-offset:-4px;
+    border-radius:2px;transform:rotate(-3deg);opacity:.92;color:#f1f1f1;
+    font-family:var(--cal);font-size:15px;text-align:center;vertical-align:-4px; }
+  #ovTitle::before{content:"战"}
+  #ovTitle { font-family:var(--cal);color:#e7e7e7;letter-spacing:.12em;
+    border-bottom:1px solid rgba(164,164,164,.45);padding-bottom:8px;text-shadow:0 2px 8px rgba(0,0,0,.55); }
+  #ovTitle::after { content:"BATTLE";float:right;font-family:var(--serif);font-size:10px;
+    letter-spacing:.15em;color:rgba(182,182,182,.55);font-weight:400;line-height:26px; }
+
+  /* —— 基地 hub —— */
+  .pg.hub { background:
+      radial-gradient(ellipse at 50% -10%,rgba(55,55,55,.9),rgba(32,32,32,.96) 60%),
+      linear-gradient(180deg,#141414,#0d0d0d); }
+  .hub-head { border-bottom:1px solid #444444;
+    background:linear-gradient(180deg,rgba(32,32,32,.55),rgba(13,13,13,0)) !important; }
+  .hub-head h2 { font-family:var(--cal);color:#f1f1f1;letter-spacing:.14em;
+    text-shadow:0 2px 8px rgba(0,0,0,.55); }
+  .hub-head .sub { color:#8b8b8b; }
+  .hub-head .sub::after { content:" · BASE HUB";font-size:10px;letter-spacing:.15em;color:rgba(182,182,182,.55); }
+  .res-chip { background:rgba(19,19,19,.9);border:1px solid #767676;border-radius:2px;color:#e7e7e7; }
+  .res-chip b { color:#b4b4b4; }
+  .hub-tabs { border-bottom:0;padding-bottom:6px;position:relative; }
+  .hub-tabs::after { content:"";display:block;position:absolute;left:0;right:0;bottom:-2px;height:8px;opacity:.5;
+    background:repeating-linear-gradient(90deg,#a4a4a4 0 2px,transparent 2px 4px,#a4a4a4 4px 5px,transparent 5px 10px); }
+  .hub-tab { border:1px solid transparent;border-radius:2px;background:transparent;color:#e7e7e7;clip-path:none; }
+  .hub-tab .tab-ico { border:1px solid #444444;border-radius:2px;background:rgba(14,14,14,.6); }
+  .hub-tab .tab-txt { font-family:var(--cal);letter-spacing:.2em; }
+  .hub-tab[data-tab]::before { content:"01";position:absolute;top:6px;left:10px;font-family:var(--serif);
+    font-size:10px;letter-spacing:.12em;color:#b4b4b4;opacity:.9; }
+  .hub-tab[data-tab="stash"]::before{content:"02"} .hub-tab[data-tab="upgrade"]::before{content:"03"}
+  .hub-tab[data-tab="classes"]::before{content:"04"} .hub-tab[data-tab="ach"]::before{content:"05"}
+  .hub-tab .tab-txt::after { content:"SORTIE";display:block;font-family:var(--serif);font-size:9px;
+    letter-spacing:.15em;color:rgba(182,182,182,.55); }
+  .hub-tab[data-tab="stash"] .tab-txt::after{content:"DEPOT"}
+  .hub-tab[data-tab="upgrade"] .tab-txt::after{content:"UPGRADE"}
+  .hub-tab[data-tab="classes"] .tab-txt::after{content:"CLASS"}
+  .hub-tab[data-tab="ach"] .tab-txt::after{content:"ACHIEVEMENT"}
+  .hub-tab:hover { color:#f1f1f1;background:rgba(164,164,164,.08); }
+  .hub-card { border-radius:0;border:1px solid #767676;
+    background:linear-gradient(160deg,rgba(32,32,32,.94),rgba(19,19,19,.94));
+    clip-path:polygon(0 0,calc(100% - 11px) 0,100% 11px,100% 100%,0 100%); }
+  .hub-card > h3 { color:#b4b4b4;font-family:var(--cal);letter-spacing:.14em; }
+  .hub-tab.on { border-color:#a4a4a4;color:#b4b4b4;background:rgba(14,14,14,.75);
+    box-shadow:inset 3px 0 0 #b4b4b4; }
+  .hub-tab.on .tab-ico { border-color:#b4b4b4; }
+  /* 玩法选择卡：编号 + 斜切角 + 选中金竖条（不铺色） */
+  .mode-card { position:relative;border:1px solid #767676;border-radius:0;background:rgba(14,14,14,.6);
+    clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,0 100%);color:#e7e7e7; }
+  .mode-card::before { content:"NO.01";position:absolute;top:6px;right:12px;font-family:var(--serif);
+    font-size:10px;letter-spacing:.14em;color:rgba(182,182,182,.55); }
+  .mode-card:nth-child(2)::before{content:"NO.02"} .mode-card:nth-child(3)::before{content:"NO.03"}
+  .mode-card.on { border-color:#b4b4b4;box-shadow:inset 3px 0 0 #b4b4b4,0 0 10px rgba(180,180,180,.18); }
+  .mode-card.on b { color:#b4b4b4; }
+  .mode-card .mode-ckpt { border:1px solid #2c2c2c;border-radius:2px;background:rgba(57,57,57,.18);
+    color:#767676;font-size:10px; }
+  /* 出征预报 chips（宣纸底） */
+  .deploy-forecast .fc-chip,.fc-chip { background:#ebebeb;border:1px solid #a4a4a4;border-radius:2px;color:#303030; }
+  .fc-chip b { color:#373737; }
+  /* 宝藏大门 */
+  .gate-strip,.hub-card.gate-strip { background:linear-gradient(160deg,rgba(25,25,25,.97),rgba(14,14,14,.97)); }
+  .gate-ready { border-color:rgba(180,180,180,.65) !important;
+    box-shadow:0 0 14px rgba(180,180,180,.25); }
+  /* 出发主按钮：实底朱红 + 两侧灯笼 */
+  #btnDeploy { background:linear-gradient(180deg,#3b3b3b,#292929);border:1px solid #b4b4b4;
+    color:#ebebeb;font-size:17px;letter-spacing:.4em;padding:12px 46px;position:relative; }
+  #btnDeploy::before,#btnDeploy::after { content:"";position:absolute;top:50%;width:16px;height:20px;
+    transform:translateY(-50%);opacity:.85;
+    background:linear-gradient(180deg,transparent 0 3px,#393939 3px 17px,transparent 17px);
+    border-radius:5px / 7px;
+    box-shadow:0 4px 0 -1px #b4b4b4,0 -4px 0 -1px #b4b4b4; }
+  #btnDeploy::before{left:10px} #btnDeploy::after{right:10px}
+
+  /* —— 标题页 —— */
+  .menu-btn { border-radius:0;letter-spacing:.3em; }
+  .menu-btn.primary { background:linear-gradient(180deg,#3b3b3b,#292929);border-color:#b4b4b4;color:#ebebeb; }
+  .menu-btn.primary:hover:not(:disabled) { box-shadow:0 0 12px rgba(180,180,180,.3); }
+  .title-ver::after { content:" · CN-CLASSICAL RESKIN";letter-spacing:.15em; }
+
+  /* —— 战斗 HUD —— */
+  #overlay .card { border:1px solid #767676;
+    clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,0 100%); }
+  #overlay .bt-self .bt-fportrait { border-color:#6F9E6A; }
+  #overlay .bt-self .bt-hpwrap i { background:linear-gradient(90deg,#6F9E6A,#8FBF8A) !important; }
+  #overlay .bt-foe:not(.bt-self) .bt-hpwrap i { background:linear-gradient(90deg,#A01828,#C8503C) !important; }
+  .bt-hpwrap { background:#0d0d0d;border:1px solid rgba(118,118,118,.6);border-radius:2px; }
+  .bt-hpwrap span { color:#f1f1f1;text-shadow:0 1px 2px rgba(0,0,0,.8); }
+  .bt-foe b { color:#e7e7e7; }
+  .bt-tags { color:#b6b6b6; }
+  .bt-player { color:#e7e7e7; } .bt-player b { color:#b4b4b4; }
+  .bt-pile { background:rgba(14,14,14,.75);border-color:#767676;color:#b6b6b6;border-radius:2px; }
+  .bt-pile b { color:#e7e7e7; }
+  .bt-card.sel .hs-card { border-color:#b4b4b4;box-shadow:0 0 12px rgba(180,180,180,.35),inset 3px 0 0 var(--gem); }
+  .bt-infuse { background:rgba(155,127,184,.08);border-color:#9B7FB8;border-radius:2px; }
+  .bt-infuse b { color:#C5AEDF; }
+  .ov-note,.hint { color:#b6b6b6; }
+  .battle-stage-shade { background:linear-gradient(180deg,rgba(13,13,13,.5),rgba(13,13,13,.85) 62%,rgba(13,13,13,.96)); }
+
+  /* —— 侧边栏 —— */
+  #sidebar header h1 { border-left:3px solid #b4b4b4;padding-left:10px; }
+  #sidebar header h1 span { color:#b6b6b6;font-size:12px;letter-spacing:.2em; }
+  #sidebar .hero-name,#charPanel .hero-name { color:#f1f1f1; }
+
+  /* —— 设置弹窗：黑白灰单色风（仅作用含 .settings 的弹窗，不影响其他 overlay） —— */
+  #overlay .card:has(.settings) { background:linear-gradient(180deg,#232323,#111111); border:1px solid #6a6a6a; }
+  #overlay .card:has(.settings)::before { background:linear-gradient(90deg,transparent,#cfcfcf,transparent); }
+  #overlay .card:has(.settings) h2 { color:#f2f2f2; font-family:"Microsoft YaHei","PingFang SC",sans-serif; letter-spacing:.3em; }
+  #overlay .card:has(.settings) .settings { font-family:"Microsoft YaHei","PingFang SC",sans-serif; color:#e0e0e0; }
+  #overlay .card:has(.settings) .chk { color:#d6d6d6; }
+  #overlay .card:has(.settings) .chk input { accent-color:#bdbdbd; }
+  #overlay .card:has(.settings) .chk.vol input[type="range"] { accent-color:#bdbdbd; }
+  #overlay .card:has(.settings) .set-h { color:#ffffff; border-bottom:1px solid #4a4a4a; }
+  #overlay .card:has(.settings) .hint { color:#9a9a9a; }
+  #overlay .card:has(.settings) .mini-btn { background:linear-gradient(180deg,#3a3a3a,#262626); border-color:#7a7a7a; color:#e6e6e6; border-radius:2px; }
+  #overlay .card:has(.settings) .mini-btn:hover { border-color:#cfcfcf; box-shadow:0 0 10px rgba(255,255,255,.15); }
+  #overlay .card:has(.settings) .ov-btn { background:linear-gradient(180deg,#3a3a3a,#262626); border-color:#7a7a7a; color:#e6e6e6; border-radius:2px; }
+  #overlay .card:has(.settings) .ov-btn.ok { background:linear-gradient(180deg,#f2f2f2,#c9c9c9); border-color:#ffffff; color:#111111; }
+  #overlay .card:has(.settings) .ov-btn.ok:hover { box-shadow:0 0 14px rgba(255,255,255,.3); }
+
+  /* —— 稀有度菱形（右上，金描边+稀有度色，叠于斜切角内侧） —— */
+  .hs-card::before { content:'';position:absolute;top:5px;right:5px;width:9px;height:9px;z-index:3;
+    transform:rotate(45deg);background:var(--gem);border:1px solid #a4a4a4; }
+
+
+

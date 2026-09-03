@@ -1,0 +1,9 @@
+node_modules/
+.playwright-cli/
+output/
+搜打撤/desktop/electron/
+图片/
+搜打撤/desktop-app/dist/
+搜打撤/desktop-app/dist2/
+搜打撤/desktop-app/build/
+*.asar

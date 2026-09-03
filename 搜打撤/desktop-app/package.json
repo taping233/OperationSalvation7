@@ -1,0 +1,28 @@
+{
+  "name": "codename7-soudache",
+  "productName": "搜打撤·代号7",
+  "version": "1.0.0",
+  "description": "搜打撤 · 代号7 桌面版",
+  "main": "main.js",
+  "author": "taping",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win portable"
+  },
+  "devDependencies": {
+    "electron": "^33.0.0",
+    "electron-builder": "^25.0.0"
+  },
+  "build": {
+    "appId": "com.taping.codename7",
+    "productName": "搜打撤·代号7",
+    "files": ["main.js", "server.js", "game/**/*"],
+    "win": {
+      "icon": "app.ico",
+      "target": ["portable"]
+    },
+    "portable": {
+      "artifactName": "搜打撤-代号7.exe"
+    }
+  }
+}

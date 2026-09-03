@@ -1,0 +1,88 @@
+/* 搜打撤 v0.30 — bitmap-only art adapter. */
+(function () {
+  'use strict';
+  const SDT = window.SDT = window.SDT || {};
+  const ROOT = 'assets/';
+  const FALLBACK = 'ui/icons/question.png';
+  const CLASS_IDS = Object.freeze({
+    '刺客':'assassin','剑客':'sword','术士':'warlock','法师':'mage','牧师':'priest','授印者':'sealer',
+    '降临者':'descend','召唤师':'summoner','守卫':'guard','游侠':'ranger','战士':'warrior'
+  });
+  const CLASS_NAMES = Object.freeze(Object.fromEntries(Object.entries(CLASS_IDS).map(([name, id]) => [id, name])));
+  const MONSTER_IDS = new Set(['infantry','archer','bandit','cavalry','orc_jav','orc_axe','wolf_rider','fire_el','water_el','grass_el','dragon','boss_general','boss_orc','boss_elem']);
+  const CARD_FAMILIES = new Set(['hero','event','martial-ranged','martial-melee','healing','spell','equipment-armor','equipment-weapon','equipment-utility','resource-key','resource-valuables','resource-material','consumable','unknown']);
+  const missingKeys = new Set();
+  const esc = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+
+  function reportMissing(kind, key) {
+    const label = `${kind}:${String(key || '(empty)')}`;
+    if (!missingKeys.has(label)) {
+      missingKeys.add(label);
+      console.error(`[SDT.Art] missing asset mapping: ${label}`);
+    }
+  }
+  function image(src, cls, alt, key, style) {
+    return `<img class="${esc(cls)}" src="${ROOT}${esc(src)}" alt="${esc(alt)}" data-asset-key="${esc(key)}"${style ? ` style="${esc(style)}"` : ''} draggable="false" loading="eager">`;
+  }
+  function fallback(kind, key, alt) {
+    reportMissing(kind, key);
+    return image(FALLBACK, 'art-missing', alt || '美术资源缺失', `missing-${kind}-${key || 'empty'}`);
+  }
+  function cardFamily(card) {
+    const name = String(card && card.name || '');
+    const type = String(card && card.type || '');
+    if (type === '英雄卡') return 'hero';
+    if (type === '事件') return 'event';
+    if (type === '武术') return /箭|射|弓/.test(name) ? 'martial-ranged' : 'martial-melee';
+    if (type === '法术') return /治|愈|疗|回复/.test(name) ? 'healing' : 'spell';
+    if (type === '装备') {
+      if (/甲|盾|堡垒|龟/.test(name)) return 'equipment-armor';
+      if (/剑|刃|刀|弓|箭|杖/.test(name)) return 'equipment-weapon';
+      return 'equipment-utility';
+    }
+    if (type === '资源') {
+      if (/钥匙/.test(name)) return 'resource-key';
+      if (/币|钻石|令牌|水晶|弹珠/.test(name)) return 'resource-valuables';
+      return 'resource-material';
+    }
+    if (type === '道具') return /药|绷带|医疗|治伤/.test(name) ? 'healing' : 'consumable';
+    return 'unknown';
+  }
+  function resolveClass(value) {
+    if (CLASS_IDS[value]) return CLASS_IDS[value];
+    if (CLASS_NAMES[value]) return value;
+    return '';
+  }
+
+  SDT.Art = {
+    classArt(className) {
+      const id = resolveClass(className);
+      if (!id) return fallback('class', className, className || '未知职业');
+      return image(`portraits/classes/${id}.png`, 'art-portrait', CLASS_NAMES[id], `class-${id}`);
+    },
+    monsterArt(id) {
+      if (!MONSTER_IDS.has(id)) return fallback('enemy', id, id || '未知敌人');
+      return image(`portraits/enemies/${id}.png`, 'art-portrait art-hostile', id, `enemy-${id}`);
+    },
+    has(id) { return Boolean(resolveClass(id)) || MONSTER_IDS.has(id); },
+    cardIcon(card) {
+      const family = cardFamily(card);
+      if (!CARD_FAMILIES.has(family)) return fallback('card', family, card && card.name || '未知卡牌');
+      return image(`cards/${family}.png`, 'art-card-image', card && card.name || family, `card-${family}`, 'width:100%;height:100%;object-fit:cover;display:block');
+    },
+    gateIcon(ready) {
+      const state = ready ? 'unlock' : 'lock';
+      return image(`ui/icons/${state}.png`, 'art-gate-image', ready ? '宝藏大门可开启' : '宝藏大门未解锁', `gate-${state}`, 'width:100%;height:auto;display:block');
+    },
+    el(id, kind, cls) {
+      return `<span class="art ${esc(cls || '')}">${kind === 'class' ? this.classArt(id) : this.monsterArt(id)}</span>`;
+    },
+    cardFamily,
+    manifest: Object.freeze({
+      classes: Object.freeze(Object.values(CLASS_IDS).map(id => `portraits/classes/${id}.png`)),
+      enemies: Object.freeze(Array.from(MONSTER_IDS, id => `portraits/enemies/${id}.png`)),
+      cards: Object.freeze(Array.from(CARD_FAMILIES, id => `cards/${id}.png`))
+    }),
+    missingKeys
+  };
+})();
