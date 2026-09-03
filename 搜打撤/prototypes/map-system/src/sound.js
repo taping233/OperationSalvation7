@@ -14,13 +14,13 @@
   const bgm = new Audio(BGM_URL);
   bgm.loop = true;
   bgm.preload = 'auto';
-  bgm.volume = BASE_MUSIC * musicVol;
   let ctx = null, master = null, sfxGain = null, clickGain = null, clickComp = null;
   // 三级开关：muted 全局静音（侧边栏 [[icon:gear]]）· musicOff 只关音乐 · sfxOff 只关音效（设置页）
   let muted = false, musicOff = false, sfxOff = false;
   // 音量 0~1，随 localStorage 持久化；音乐基准 0.45，音效基准 0.9
   let musicVol = 1, sfxVol = 1;
   const BASE_MUSIC = 0.45, BASE_SFX = 0.9;
+  bgm.volume = BASE_MUSIC * musicVol;
   try {
     muted = localStorage.getItem('sdt-muted') === '1';
     musicOff = localStorage.getItem('sdt-music-off') === '1';
