@@ -7,6 +7,8 @@
   "author": "taping",
   "scripts": {
     "start": "electron .",
+    "sync": "powershell -NoProfile -ExecutionPolicy Bypass -File ../scripts/sync-desktop.ps1",
+    "predist": "npm run sync",
     "dist": "electron-builder --win portable"
   },
   "devDependencies": {
