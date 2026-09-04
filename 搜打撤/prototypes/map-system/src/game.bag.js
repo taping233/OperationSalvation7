@@ -1,3 +1,12 @@
+/* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
+const UI = window.SDT.UI;
+const SDT = window.SDT;
+import { esc } from './shared.js';
+import { MAP, bagCap, safeCap } from './game.core.js';
+import { escAttr } from './shared.js';
+import { cardStacks, doDeath, game, newUid, safeUsed, saveGame, usedSlots } from './game.core.js';
+import { openAltarModal } from './game.run.js';
+import { _set_cardPageOpen } from './game.cardslib.js';
 
   function cardHealAmount(card) {
     const m = /回复\s*(\d+)\s*点生命/.exec(card.desc || '');
@@ -58,9 +67,9 @@
 
   // 整堆移动：背包格 ⇄ 安全格（同名卡一起移动）
   function moveStackSafe(name, toSafe) {
-    // 初始牌「杀」不能带出背包：不入安全格（也就不会经宠物运回仓库）
+    // 初始牌「初始攻击」不能带出背包：不入安全格（也就不会经宠物运回仓库）
     if (toSafe && name === SDT.Cards.SHA.name) {
-      UI.log('[[icon:cross]] 初始牌「杀」无法移出背包——每局固定携带，不入安全格 / 仓库', 'warn');
+      UI.log('[[icon:cross]] 初始牌「初始攻击」无法移出背包——每局固定携带，不入安全格 / 仓库', 'warn');
       return;
     }
     const list = game.ownedCards.filter(o => !!o.safe !== !!toSafe && o.card.name === name);
@@ -120,7 +129,7 @@
 
   function discardOwnedCard(name, fromSafe) {
     if (name === SDT.Cards.SHA.id || name === SDT.Cards.SHA.name) {
-      UI.log('[[icon:pen]] 初始牌「杀」不可丢弃', 'warn');
+      UI.log('[[icon:pen]] 初始牌「初始攻击」不可丢弃', 'warn');
       return false;
     }
     const i = game.ownedCards.findIndex(o => !!o.safe === !!fromSafe && o.card.name === name);
@@ -191,7 +200,7 @@
     }
     game.state = 'modal';
     backpackOpen = true;
-    cardPageOpen = false;
+    _set_cardPageOpen(false);
     syncCardOrder();
     const cap = bagCap(), sCap = safeCap();
     const total = game.inventory.reduce((a, b) => a + b.value * (b.count || 1), 0);
@@ -246,29 +255,53 @@
           <div class="pk-row"><span>[[icon:cards]] <b>${esc(p.card.name)}</b>${p.count > 1 ? ` ×${p.count}` : ''}</span>
           <span class="dim">${p.card.cost}费 · 无法使用</span></div>`).join('')
       : '<p class="ov-empty" style="margin:2px 0 0">（空——对小怪使用过的卡牌会进入这里）</p>';
-    // 事件记录：本局触发过的事件卡（事件卡只能经棋盘事件格触发）
-    const evLog = game.eventLog || [];
-    const eventHTML = evLog.length
-      ? evLog.map(e => `
-          <div class="pk-row"><span>[[icon:dice]] <b>${esc(e.name)}</b></span>
-          <span class="dim">${esc(e.desc || '')}${e.turn ? ` · 第 ${e.turn} 轮` : ''}</span></div>`).join('')
-      : '<p class="ov-empty" style="margin:2px 0 0">（还没有触发过事件——事件卡只能在棋盘的事件格触发）</p>';
+    // 说明文字统一收进 ? 帮助弹层
+    UI.registerHelp('bag', {
+      title: '背包说明',
+      html: `
+        <p class="help-item"><b>背包格</b>物资与卡牌混占格数（同名堆叠只占 1 格）。双击卡牌翻面看卡背；按住拖动整理顺序，拖入下方安全格即存入。</p>
+        <p class="help-item"><b>安全格</b>由宠物阿七看守：撤离失败或放弃对局时，只有安全格里的卡牌会被抢运回基地，其余全部丢失。容量在基地「升级」页用口粮升级。</p>
+        <p class="help-item"><b>消耗口袋</b>对小怪用过的卡、注能消耗的卡会进到这里：本局无法再用，容量无限。基地可免费复原；火堆每次休整可复原 2 张；道具「能源水晶」可就地复原 3 张。</p>
+        <p class="help-item"><b>丢弃</b>把卡牌拖到背包页面外的空地可申请丢弃 1 张——丢弃的牌无法取回，请谨慎操作。</p>`,
+      back: () => showBackpack(true),
+    });
     UI.showOverlay('[[icon:bag]] 背包', `<div class="bag-view">
-      <p class="ov-stats">物资+卡牌 <b>${usedSlots()}/${cap}</b> 格（¥${total.toLocaleString()}） · [[icon:lock]] 安全格 <b>${safeStacks.length}/${sCap}</b> · [[icon:pocket]] 消耗口袋 <b>${pkN}</b> 张
-        <span class="dim">· 双击卡牌翻面看卡背 · 按住卡牌拖动可整理顺序 / 拖入安全格</span></p>
-      <div class="bag-grid">${cells}</div>
-      <h3 class="set-h">[[icon:lock]] 安全格 <span class="set-tip">宠物看守 · 撤离失败时里面的卡牌安全运回基地 · 容量在基地用口粮升级</span></h3>
-      <div class="bag-grid safe-grid">${safeCells}</div>
-      <h3 class="set-h">[[icon:pocket]] 消耗口袋 <span class="set-tip">对小怪用过的卡 / 注能消耗的卡 · 容量无限 · 复原后才能继续使用（基地免费复原 / 火堆复原 2 张 / 能源水晶就地复原 3 张）· 丢弃的牌无法取回</span></h3>
-      <div class="pk-list">${pocketHTML}</div>
-      <h3 class="set-h">[[icon:dice]] 事件记录 <span class="set-tip">本局触发过的事件卡 · 共 ${evLog.length} 次</span></h3>
-      <div class="pk-list">${eventHTML}</div>
-      <p class="bag-drop-note">点击卡牌查看完整说明；按住拖动整理，拖到背包面板外的空地可申请丢弃。</p>
-      <div class="ov-btns"><button class="ov-btn ok" data-act="closeBag">合上背包</button></div></div>`, 'bag');
+      <header class="bag-head">
+        <div class="bag-head-info">
+          <h2>[[icon:bag]] 背包 ${UI.helpBtn('bag')}</h2>
+          <div class="bag-chips">
+            <span class="fc-chip">格数 <b>${usedSlots()}/${cap}</b></span>
+            <span class="fc-chip">总值 <b>¥${total.toLocaleString()}</b></span>
+            <span class="fc-chip">[[icon:lock]] 安全格 <b>${safeStacks.length}/${sCap}</b></span>
+            <span class="fc-chip">[[icon:pocket]] 消耗口袋 <b>${pkN}</b> 张</span>
+          </div>
+        </div>
+        <button class="bag-close" data-act="closeBag" title="关闭背包（B）" aria-label="关闭背包">
+          <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
+            <path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </header>
+      <div class="bag-layout">
+        <div class="bag-main">
+          <h3 class="set-h">[[icon:bag]] 背包格</h3>
+          <div class="bag-grid">${cells}</div>
+          <h3 class="set-h">[[icon:lock]] 安全格</h3>
+          <div class="bag-grid safe-grid">${safeCells}</div>
+        </div>
+        <aside class="bag-side">
+          <div class="bag-side-card">
+            <h3 class="set-h">[[icon:pocket]] 消耗口袋 <span class="set-tip">${pkN} 张</span></h3>
+            <div class="pk-list">${pocketHTML}</div>
+          </div>
+        </aside>
+      </div></div>`, 'bagpage');
     UI.act('inspectStack', (d) => showBagCardDetail(d.name, d.safe === '1'));
     UI.act('closeBag', closeBackpack);
     bindBagDrag();   // v0.21：3D 拖拽排序 / 双击翻卡背
   }
+
+  let backpackOpen = false;   // 背包弹窗开关（必须声明：showBackpack 打开路径会读取它）
 
   // ---------- 背包拖拽（v0.21）：3D 立体手感 · 堆排序 · 拖入/拖出安全格 ----------
   let bagDrag = null;   // {name, fromSafe, cell, ghost, card3d, sx, sy, lx, ly, vx, vy, moved}
@@ -471,6 +504,8 @@
   // 小怪战：使用过的卡进消耗口袋；BOSS 战：卡牌完好保留；
   // 注能消耗的卡（consumedUids）：无论战斗类型都进消耗口袋（可在火堆复原）。
   // 胜利 100% 掉宝箱（按所在环层 / BOSS 固定 BOSS宝箱），开完宝箱再续流。
+  // ESM：循环导入下本模块体可能先于 game.core 执行，顶层读 game 会 TDZ，延迟到 boot 统一绑定
+  function bindBagMixins() {
   game.onBattleEnd = function (opts, playedUids, win, consumedUids) {
     UI.hideOverlay();
     if (win === false) { game.bossCleanupPending = false; doDeath(); return; }
@@ -478,7 +513,7 @@
       const moved = [];
       uids.forEach(uid => {
         const i = game.ownedCards.findIndex(o => o.uid === uid);
-        if (i < 0) return;   // 战斗内临时卡（杀/发现/随机卡）战后消散，自动跳过
+        if (i < 0) return;   // 战斗内临时卡（初始攻击/发现/随机卡）战后消散，自动跳过
         moved.push(game.ownedCards[i].card);
         game.ownedCards.splice(i, 1);
       });
@@ -544,4 +579,6 @@
     }
     afterRewards();
   };
+  }
 
+export { bindBagMixins, showBackpack };

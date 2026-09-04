@@ -10,3 +10,5 @@ const SDT = window.SDT;
 const UI = SDT.UI;
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const escAttr = (s) => esc(s).replace(/"/g, '&quot;');
+
+export { SDT, UI, esc, escAttr };

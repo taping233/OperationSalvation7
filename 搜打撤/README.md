@@ -44,19 +44,36 @@
 - 「退出游戏」会真正退出程序；单实例运行（重复双击只唤起已有窗口）
 - 运行时已内置于 `desktop/electron/`；若缺失（如换机器），执行一次
   `powershell -ExecutionPolicy Bypass -File desktop\setup.ps1` 自动下载
+- 唯一桌面外壳位于 `desktop-app/`；开发时直接读取 `prototypes/map-system` 源码，打包时先由 Vite 构建（`desktop-app/game/`）再由 electron-builder 收入构建产物
+- 游戏版本以 `prototypes/map-system/version.json` 为唯一依据；启动和打包前会校验桌面包版本是否一致
 
-### 网页版（无需安装任何东西）
+### 网页版（开发调试）
 
-双击打开：
+游戏源码为 ES Module 并由 Vite 管线构建，**双击 index.html 无法运行**（浏览器拦截 file:// 模块）。三种方式：
 
+```bash
+# 开发服务器（热更新，根目录执行）
+npm run dev
+
+# 构建产物预览
+npm run build && npm run preview
+
+# 或任意静态服务器（模块脚本需 http(s) 访问）
+# 在 prototypes/map-system 下：
+powershell -ExecutionPolicy Bypass -File serve.ps1   # http://127.0.0.1:8137/
 ```
-prototypes/map-system/index.html
+
+> 桌面版与网页版是**同一份源码**：桌面外壳开发态直接加载 `prototypes/map-system`，
+> 改网页版源码 = 改桌面版；打包则使用 `npm run build` 的产物。
+
+### 测试与构建（根目录）
+
+```bash
+npm install        # 首次
+npm test           # Vitest 单元测试（combat/cards/base+meta）
+npm run build      # Vite 构建 → desktop-app/game/（JS/CSS 内容哈希 + 资产版本号）
+node prototypes/map-system/selftest.js   # 源码契约自测（零依赖）
 ```
-
-（或在 prototypes/map-system 下执行 `powershell -ExecutionPolicy Bypass -File serve.ps1` 后访问 http://127.0.0.1:8137/）
-
-> 桌面版与网页版是**同一份代码**：桌面外壳直接加载 `prototypes/map-system`，
-> 改网页版源码 = 改桌面版，改完重启桌面程序即可生效。
 
 - **空格/回车** 掷骰子；拖拽平移视角、滚轮缩放
 - **G** 网格线、**N** 格子编号（编号 = 事件表的键）
@@ -150,8 +167,17 @@ cells: {
 sdt-game/
 ├─ README.md                 本文件
 ├─ 启动搜打撤.bat            ★ 桌面版：双击启动
-├─ desktop/                  桌面版（Electron 外壳）
-│  ├─ app/                   外壳代码（main.js / preload.js / icon.ico）
+├─ package.json              ★ 游戏源码工程（Vite + Vitest，license MIT）
+├─ vite.config.js            构建配置：产物出 desktop-app/game/，静态资产拷贝与版本注入
+├─ tests/                    Vitest 单元测试（combat / cards / base+meta）
+├─ scripts/                  esm-convert 等一次性迁移工具
+├─ desktop-app/              ★ 唯一 Electron 外壳与打包配置
+│  ├─ main.js                自定义 app:// 协议与窗口生命周期
+│  ├─ preload.js             最小桌面桥（退出游戏）
+│  ├─ game/                  ★ Vite 构建产物（npm run build 生成，打包入口）
+│  └─ package.json           npm start / npm run dist
+├─ desktop/                  桌面运行时与辅助脚本
+│  ├─ app/                   旧入口兼容转发（不再包含独立外壳实现）
 │  ├─ electron/              Electron 运行时（setup.ps1 自动下载）
 │  ├─ setup.ps1              首次安装运行时（缺失时执行一次）
 │  └─ make-icon.ps1          重新生成应用图标

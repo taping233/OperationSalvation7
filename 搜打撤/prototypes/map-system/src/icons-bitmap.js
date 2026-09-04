@@ -1,6 +1,6 @@
-/* v0.30 bitmap-only icon adapter. Replaces icons.js after every PNG exists. */
-(function () {
   'use strict';
+import { BUILD_VERSION, assetUrl } from './asset-url.js';
+
   const SDT = window.SDT = window.SDT || {};
   const ROOT = 'assets/ui/icons/';
   const NAMES = new Set('heart broken coin pouch sword swords bag dice upload download book cards home fire skull gem lantern key lock unlock crystal trash door exit tools pocket broom wood bread trophy paw map notes medal shield plate blood flask scroll save helmet question sparkles bolt recycle check cross arrow play skip hourglass gear pen folder archive mouse flag slime demon runner'.split(' '));
@@ -14,7 +14,7 @@
     }
   }
   function safe(name) { if (NAMES.has(name)) return name; reportMissing('icon', name); return 'question'; }
-  function url(name) { return `${ROOT}${safe(name)}.png`; }
+  function url(name) { return assetUrl(`${ROOT}${safe(name)}.png`); }
   function img(name, cls, alt) { const n=safe(name); return `<img class="ic${cls?' '+esc(cls):''}" src="${url(n)}" alt="${esc(alt||n)}" data-asset-key="icon-${esc(n)}" draggable="false" loading="eager">`; }
 
   const MAP = Object.create(null);
@@ -62,10 +62,37 @@
   }
   const TYPE_ART={'武术':'swords','法术':'sparkles','道具':'flask','装备':'shield','事件':'question','英雄卡':'helmet','资源':'gem'};
   if(typeof document!=='undefined'&&document.body)hydrate(document.body);
-  if(typeof MutationObserver!=='undefined'&&typeof document!=='undefined'&&document.body){const observer=new MutationObserver(records=>records.forEach(record=>{if(record.type==='attributes')hydrate(record.target);else record.addedNodes.forEach(node=>{if(node.nodeType===1||node.nodeType===3)hydrate(node.nodeType===1?node:node.parentNode);});}));observer.observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['title','placeholder','aria-label']});}
+  if (typeof MutationObserver!=='undefined'&&typeof document!=='undefined'&&document.body){
+    // 战斗/背包会一次重建上百节点：合并同帧变更，但只扫描真正新增的子树，
+    // 避免每次小改动都从 document.body 重新遍历整页。
+    let hydrateQueued=false;
+    const dirtyRoots=new Set();
+    const flush=()=>{
+      hydrateQueued=false;
+      const roots=Array.from(dirtyRoots);
+      dirtyRoots.clear();
+      roots.forEach((root,i)=>{
+        if(!root||!root.isConnected) return;
+        if(roots.some((parent,j)=>j!==i&&parent!==root&&parent.contains&&parent.contains(root))) return;
+        hydrate(root);
+      });
+    };
+    const schedule=typeof requestAnimationFrame==='function'?requestAnimationFrame:setTimeout;
+    const observer=new MutationObserver(records=>{
+      records.forEach(record=>{
+        if(record.type==='attributes') dirtyRoots.add(record.target);
+        else record.addedNodes.forEach(node=>dirtyRoots.add(node.nodeType===Node.ELEMENT_NODE?node:node.parentElement));
+      });
+      if(hydrateQueued||!dirtyRoots.size)return;
+      hydrateQueued=true;
+      schedule(flush);
+    });
+    observer.observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['title','placeholder','aria-label']});
+  }
   if (typeof window !== 'undefined') window.addEventListener('error', event => {
     const target=event.target;
     if(target&&target.tagName==='IMG'&&target.dataset&&target.dataset.assetKey) reportMissing('file',target.getAttribute('src'));
   }, true);
   SDT.Icons={img,url,rich,hydrate,TYPE_ART,DEFS:{},NAMES,missingKeys};
-})();
+
+export { MAP, ROOT, SDT, esc, missingKeys, reportMissing };

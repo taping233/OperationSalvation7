@@ -20,14 +20,18 @@
  * ============================================================ */
 window.SDT = window.SDT || {};
 
+/* ESM 垫片：本模块是首个模块，必须在自己创建命名空间之后才能捕获引用 */
+const SDT = window.SDT;
+
 SDT.MAP = {
   version: '0.3',
   boardId: 'B1',
-  boardName: '废校操场 · 三环棋盘',
-  // 16×16 仅作为世界坐标基准（768px 世界）；轨道拓扑仍由 makeRing 的 8×8 抽象环生成，
-  // 结点坐标全部来自 buildNodePositions，与格子坐标解耦。
-  cols: 16,
-  rows: 16,
+  boardName: '第七净化区 · 三环荒土',
+  // 30×30 仅作为世界坐标基准（1440px 世界）；轨道拓扑仍由 makeRing 的 8×8 抽象环生成，
+  // 结点坐标全部来自 buildNodePositions，与格子坐标解耦。地图允许超出视口，靠镜头拖拽/缩放浏览，
+  // 默认倍率下一屏最多看到地图约一半（见 game.boot.js 启动段）。
+  cols: 30,
+  rows: 30,
   tile: 48,
 
   rules: {
@@ -51,8 +55,8 @@ SDT.MAP = {
     battleStartDraw: 5,      // BOSS战：开局抽牌数
     battleTurnDraw: 1,       // BOSS战：每回合开始抽牌数
     battleHandMax: 8,        // BOSS战：手牌上限（超出则不抽）
-    bossDeckSize: 15,        // BOSS战：需从背包选入的非道具卡牌数（另自动编入 starterSha 张杀）
-    starterSha: 5,           // 每局开始随身携带的初始牌「杀」张数（占 1 格背包）
+    bossDeckSize: 15,        // BOSS战：需从背包选入的非道具卡牌数（另自动编入 starterSha 张初始攻击）
+    starterSha: 5,           // 每局开始随身携带的初始牌「初始攻击」张数（占 1 格背包）
   },
 
   // ---------- 结点布局（分布式结点地图的唯一真源） ----------
@@ -60,11 +64,11 @@ SDT.MAP = {
   // 每环按轨道顺序在极坐标上均匀取角 + 半径按环 + hash 抖动 + 同环间距防重叠微调；
   // 中央祭坛在正中心，三只 BOSS 环绕。布局确定（无随机数），同输入必得同输出。
   nodeLayout: {
-    radii: [330, 232, 138],  // 三环基础半径（外 / 中 / 内）
-    radiusJitter: 30,        // 半径抖动幅度（± 一半）
+    radii: [560, 390, 225],  // 三环基础半径（外 / 中 / 内）
+    radiusJitter: 44,        // 半径抖动幅度（± 一半）
     angleJitter: 0.38,       // 角度抖动（占相邻角距的比例上限）
-    bossRadius: 62,          // BOSS 结点环绕祭坛的半径
-    minGap: 62,              // 同环相邻结点的最小间距（含结点半径余量）
+    bossRadius: 96,          // BOSS 结点环绕祭坛的半径
+    minGap: 116,             // 同环相邻结点的最小间距（含结点半径余量）
   },
 
   buildNodePositions(logicalCounts) {
@@ -143,29 +147,29 @@ SDT.MAP = {
     { name: '旧地图',   value: 20, tier: 'C' },
   ],
   eventEnemies: [ // 事件卡战斗敌人（盗匪横行 / 闪金之锤 等 <事件战斗>）
-    { id: 'bandit', name: '土匪', hp: 3, atk: 3 },
+    { id: 'bandit', name: '掠夺者', hp: 3, atk: 3 },
   ],
   randomEvents: [ // 事件格
-    { w: 3, coins: [1, 3], text: '在草丛里捡到零散硬币' },
-    { w: 2, item: 'chest', text: '翻到一份被遗落的物资' },
-    { w: 2, nothing: true, text: '清风拂过，什么也没发生' },
-    { w: 1, coins: [4, 6], text: '意外之财！' },
+    { w: 3, coins: [1, 3], text: '在瓦砾堆里捡到几枚旧世界硬币' },
+    { w: 2, item: 'chest', text: '翻到一批先行者遗留的物资' },
+    { w: 2, nothing: true, text: '辐射风掠过荒原，什么也没发生' },
+    { w: 1, coins: [4, 6], text: '找到一只未撬过的保险柜！' },
   ],
 
   // ---------- 怪物图鉴（设计者 2026-09-02 定版，数值 = 攻击力-生命） ----------
   // art = art.js 立绘 id；越往内层（layerIdx 越大）敌人越强。
   monsters: {
-    infantry:   { id: 'infantry',   name: '步兵',       atk: 4, hp: 4, behavior: 'strike' },
-    archer:     { id: 'archer',     name: '弓兵',       atk: 5, hp: 3, behavior: 'volley' },
-    bandit:     { id: 'bandit',     name: '土匪',       atk: 3, hp: 3, behavior: 'strike' },
-    cavalry:    { id: 'cavalry',    name: '骑兵',       atk: 5, hp: 6, behavior: 'charge' },
-    orc_jav:    { id: 'orc_jav',    name: '兽人投矛手', atk: 6, hp: 4, behavior: 'volley' },
-    orc_axe:    { id: 'orc_axe',    name: '兽人斧手',   atk: 4, hp: 7, behavior: 'guard' },
-    wolf_rider: { id: 'wolf_rider', name: '兽人狼骑兵', atk: 7, hp: 6, behavior: 'charge' },
-    fire_el:    { id: 'fire_el',    name: '火元素',     atk: 10, hp: 7, behavior: 'burn' },
-    water_el:   { id: 'water_el',   name: '水元素',     atk: 7, hp: 10, behavior: 'guard' },
-    grass_el:   { id: 'grass_el',   name: '草元素',     atk: 5, hp: 12, behavior: 'curse' },
-    dragon:     { id: 'dragon',     name: '龙',         atk: 7, hp: 40, elite: true, behavior: 'dragon' },
+    infantry:   { id: 'infantry',   name: '荒民打手',   atk: 4, hp: 4, behavior: 'strike' },
+    archer:     { id: 'archer',     name: '废土猎手',   atk: 5, hp: 3, behavior: 'volley' },
+    bandit:     { id: 'bandit',     name: '掠夺者',     atk: 3, hp: 3, behavior: 'strike' },
+    cavalry:    { id: 'cavalry',    name: '机车掠袭者', atk: 5, hp: 6, behavior: 'charge' },
+    orc_jav:    { id: 'orc_jav',    name: '畸变投掷者', atk: 6, hp: 4, behavior: 'volley' },
+    orc_axe:    { id: 'orc_axe',    name: '畸变屠夫',   atk: 4, hp: 7, behavior: 'guard' },
+    wolf_rider: { id: 'wolf_rider', name: '畸变狼骑兵', atk: 7, hp: 6, behavior: 'charge' },
+    fire_el:    { id: 'fire_el',    name: '灼热异变体', atk: 10, hp: 7, behavior: 'burn' },
+    water_el:   { id: 'water_el',   name: '腐蚀异变体', atk: 7, hp: 10, behavior: 'guard' },
+    grass_el:   { id: 'grass_el',   name: '滋生异变体', atk: 5, hp: 12, behavior: 'curse' },
+    dragon:     { id: 'dragon',     name: '巨兽「荒渊」', atk: 7, hp: 40, elite: true, behavior: 'dragon' },
   },
   // 各环层遭遇表：battle 格随机抽一种遭遇（1-3 只）；elite 为稀有强敌遭遇
   encounters: [
@@ -176,17 +180,17 @@ SDT.MAP = {
       elite: { pool: ['dragon'], size: [1, 1], chance: 0.25, strategy: '精英预警：高生命单体，撤退仍可保住已结算的战利品' } },
   ],
   enemyPool: [   // 兼容旧引用（事件战等）：统一指向新表
-    { id: 'bandit', name: '土匪', hp: 3, atk: 3 },
+    { id: 'bandit', name: '掠夺者', hp: 3, atk: 3 },
   ],
 
   // ---------- 战斗胜利宝箱掉落（设计者 2026-09-02 定版：战胜怪物 100% 掉宝箱） ----------
   // 四种宝箱规格：cards=直接获得的随机卡张数 / pickFrom=随机 N 张选 1 /
   // coins=[min,max] 内含随机币；boss 额外掉金币/银币/铜币卡其一，并有 30% 概率掉金色令牌
   chestKinds: {
-    small:  { name: '小宝箱',    icon: '[[icon:archive]]', cards: 1, coins: [1, 2] },
-    medium: { name: '中宝箱',    icon: '[[icon:archive]]', pickFrom: 3, coins: [2, 3] },
-    large:  { name: '大宝箱',    icon: '[[icon:tools]]', cards: 3, coins: [3, 4] },
-    boss:   { name: 'BOSS宝箱', icon: '[[icon:medal]]', cards: 5, coins: null,
+    small:  { name: '小型物资箱', icon: '[[icon:archive]]', cards: 1, coins: [1, 2] },
+    medium: { name: '密封物资箱', icon: '[[icon:archive]]', pickFrom: 3, coins: [2, 3] },
+    large:  { name: '军用保险柜', icon: '[[icon:tools]]', cards: 3, coins: [3, 4] },
+    boss:   { name: '首脑保险柜', icon: '[[icon:medal]]', cards: 5, coins: null,
               coinCards: ['金币', '银币', '铜币'], tokenChance: 0.3 },
   },
   // 环层掉落表（键 = layerIdx）：击败该环敌人掉什么，多组组合时等概率随机一组。
@@ -203,11 +207,11 @@ SDT.MAP = {
   altar: {
     pos: [3, 3],
     bosses: [
-      { id: 'boss_general', name: '将军',     hp: 50, atk: 5, cell: [4, 3], icon: '将',
+      { id: 'boss_general', name: '锈蚀将军', hp: 50, atk: 5, cell: [4, 3], icon: '将',
         affix: 'grow',  affixName: '军威', behavior: 'general', affixDesc: '每个回合结束时攻击力 +2' },
-      { id: 'boss_orc',     name: '兽人首领', hp: 45, atk: 4, cell: [4, 4], icon: '兽',
+      { id: 'boss_orc',     name: '兽群之主', hp: 45, atk: 4, cell: [4, 4], icon: '兽',
         affix: 'frenzy', affixName: '狂乱', behavior: 'orc_boss', affixDesc: '每回合攻击两次，每次附加 1 层流血或中毒' },
-      { id: 'boss_elem',    name: '元素领主', hp: 48, atk: 8, cell: [3, 4], icon: '元',
+      { id: 'boss_elem',    name: '辐射领主', hp: 48, atk: 8, cell: [3, 4], icon: '元',
         affix: 'aegis', affixName: '元素庇幕', behavior: 'element_boss', affixDesc: '偶数回合减免所有伤害（破甲可克制）' },
     ],
   },
@@ -215,11 +219,11 @@ SDT.MAP = {
   // ---------- 三个环层 ----------
   layers: [
     {
-      id: 'L1', name: '第一环 · 操场外圈', inset: 0, color: '#6e5133',   // 古铜沙岩：荒芜外环
+      id: 'L1', name: '外环 · 荒地边缘', nameEn: 'The Ashen Fringe', inset: 0, color: '#6e5133',   // 铁锈沙土：荒地外环
       risk: '低', tempo: '补给与试探（战斗较少，适合整备）',
 
       entrances: [0, 7, 14, 21],
-      entranceNames: ['入口A · 西北角', '入口B · 东北角', '入口C · 东南角', '入口D · 西南角'],
+      entranceNames: ['清扫口A · 西北角', '清扫口B · 东北角', '清扫口C · 东南角', '清扫口D · 西南角'],
       doors: [   // 出口和下一层的入口（exit=true 表示可从此撤离）
         { pair: 'p1', at: 1,  toLayer: 1, arriveAt: 0,  exit: true },  // (1,0)↔(1,1)
         { pair: 'p2', at: 8,  toLayer: 1, arriveAt: 5,  exit: true },  // (7,1)↔(6,1)
@@ -255,7 +259,7 @@ SDT.MAP = {
     },
 
     {
-      id: 'L2', name: '第二环 · 校舍中庭', inset: 1, color: '#3d5a50',   // 苔绿石庭：中环庭园
+      id: 'L2', name: '中环 · 废墟市街', nameEn: 'The Rusted Blocks', inset: 1, color: '#3d5a50',   // 锈绿残垣：中环街区
       risk: '中', tempo: '分岔与取舍（战斗、钥匙、商店交错）',
 
       doors: [
@@ -287,7 +291,7 @@ SDT.MAP = {
     },
 
     {
-      id: 'L3', name: '第三环 · 内庭', inset: 2, color: '#443a63',   // 奥术紫岩：内环秘境
+      id: 'L3', name: '内环 · 污染核心区', nameEn: 'The Contaminated Core', inset: 2, color: '#443a63',   // 病变紫岩：污染核心
       risk: '高', tempo: '高压冲刺（高价值、精英预警、紧急撤离）',
 
       altarEntrances: [
@@ -313,9 +317,9 @@ SDT.MAP = {
 
   // ---------- 中央 2×2（渲染与悬浮提示用；战斗经由祭坛触发） ----------
   center: [
-    { x: 3, y: 3, type: 'altar', name: '祭坛' },
-    { x: 4, y: 3, type: 'boss', icon: '将', name: '将军 · 550HP' },
-    { x: 3, y: 4, type: 'boss', icon: '元', name: '元素领主 · 400HP' },
-    { x: 4, y: 4, type: 'boss', icon: '兽', name: '兽人首领 · 320HP' },
+    { x: 3, y: 3, type: 'altar', name: '污染核心' },
+    { x: 4, y: 3, type: 'boss', icon: '将', name: '锈蚀将军 · 550HP' },
+    { x: 3, y: 4, type: 'boss', icon: '元', name: '辐射领主 · 400HP' },
+    { x: 4, y: 4, type: 'boss', icon: '兽', name: '兽群之主 · 320HP' },
   ],
 };

@@ -3,7 +3,7 @@ rem Codename 7 (SaoDaChe) - local desktop launcher
 setlocal
 set "ROOT=%~dp0"
 set "ELECTRON=%ROOT%desktop\electron\electron.exe"
-set "APPDIR=%ROOT%desktop\app"
+set "APPDIR=%ROOT%desktop-app"
 if not exist "%ELECTRON%" (
   echo [ERROR] Electron runtime not found:
   echo   %ELECTRON%

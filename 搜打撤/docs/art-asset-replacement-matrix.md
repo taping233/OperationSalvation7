@@ -7,7 +7,7 @@
 | 类别 | 原语义/当前接入 | 替换资产与生成提示词 | 尺寸 / SHA-256 | 接入点 | 目检 |
 |---|---|---|---|---|---|
 | 标题/主菜单 | 代号7 标题、开始/设置/退出 | `title-hero-codename7-anime.png`；原世界观灾后校园搜索员，明确二维日系动画线稿与赛璐璐明暗，右侧角色、左侧 UI 留白 | 1672×941 / `70A6211BD9FE3B7BA5317BF60230BEE4BFFA634FB2B314647DC9E281D7D4BD36` | `index.html #title` | 已检：无图内文字、Logo、水印；1920×1080 与 1150×700 实际渲染通过 |
-| 品牌标识/应用图标 | 深紫金色衬线 7、内嵌旧 favicon | `brand-mark-codename7.png`；石墨折角铭牌、硬边 7、冷青校准线、微量琥珀警示块 | 256×256 PNG / `0E5C9813F04A022F401B5175696A3CA5D590ED7B1120D7250055774141D5BE74`；ICO / `BCBC0874E039113B8275634C0C3A21C42818CDB8BC48124ACB931028529E12EF` | `index.html rel=icon`、`desktop/app/main.js`、`desktop/app/icon.ico` | 已检：全链路仅位图；32px 仍可辨；PNG 含 alpha；ICO 可解码；重复生成哈希一致 |
+| 品牌标识/应用图标 | 深紫金色衬线 7、内嵌旧 favicon | `brand-mark-codename7.png`；石墨折角铭牌、硬边 7、冷青校准线、微量琥珀警示块 | 256×256 PNG / `0E5C9813F04A022F401B5175696A3CA5D590ED7B1120D7250055774141D5BE74`；ICO 以当前 `desktop-app/app.ico` 为准 | `index.html rel=icon`、`desktop-app/main.js`、`desktop-app/app.ico` | 已检：全链路仅位图；32px 仍可辨；PNG 含 alpha |
 | 基地·出发 | 选择玩法、出征预报 | 黑白灰终端面板，青/琥珀动作色（CSS） | — | `.hub-*`, `.mode-card` | 已检：语义保持 |
 | 基地·仓库 | 卡牌仓库与安全格 | 石墨卡槽、状态色（CSS） | — | `.bag-*`, `.vault-*` | 已检：语义保持 |
 | 基地·升级/职业/成就 | 进度、职业、奖励 | 工业模块与冷光分隔（CSS） | — | `.hub-tab`, `.cls-*`, `.ach-*` | 已检：语义保持 |

@@ -1,34 +1,6 @@
-/* ============================================================
- * 搜打撤 v0.8 —— 卡牌系统数据（localStorage 持久化）
- *
- * 卡牌要素（开发者可在"卡牌制作坊"里自行设计）：
- *   id      自动生成
- *   name    名称
- *   cost    费用：0 ~ 5 费（桌游手绘卡最高 5 费，如「狙击」）
- *   rarity  稀有度：初始 / 古朴 / 稀有 / 史诗 / 传说 / 衍生
- *   type    类型：武术 / 法术 / 道具 / 装备 / 事件 / 英雄卡 / 资源
- *   dmg     伤害词条：仅武术/法术卡有效，战斗中对目标造成 N 点伤害
- *   dmgType 伤害类型词条（四类伤害体系，design.md §3，dmg>0 时有效）：
- *           'attack' 攻（+n）= n + 攻击力，可触发流血 ｜ 'spell' n' = n + 法伤加成
- *           'fixed' n 固定伤害，不受任何加成（如「射击」2 点固定）
- *           'true'  n'' 真实伤害，无视一切防御手段
- *           缺失时由 ensureDmgTypes() 按描述/类型自动回填（规则见 deriveDmgType）
- *   draw    抽卡词条 N：对战 BOSS 时从牌库抽 N 张；对战普通敌人时改为获得 N 张杀
- *           （设计者 2026-09-02 定版；缺失时由 ensureEffectFields() 按描述「抽 N 张牌」回填）
- *   infuse  注能词条 N：打出这张卡时需先选择并消耗 N 张手牌才能发动
- *           （被消耗的牌进消耗口袋，可在火堆复原；「注能(小)」按 1 层计；
- *           缺失时由 ensureEffectFields() 按描述「注能(N)/注能(小)」回填）
- *   heal    回复词条 N：回复 N 点生命（禁疗时无效；可由「回复 N 点生命/+N 血」回填）
- *   armor   护甲词条 N：获得 N 点护甲（可由「获得 N 点护甲/+N 甲」回填）
- *   desc    效果描述（可选）
- *   value   币值 [[icon:coin]]：桌游道具卡的标注价值（右下角金色角标，商店收购参考价）
- *   sellable 可否出售：true = 可出售（缺省视为不可出售；描述带「可出售」备注的卡
- *           同样视为可出售，完整判定规则见 isSellable()）
- *   unrandom 随机池排除：true = 无法被随机或发现获得（传说特例卡，设计者
- *           2026-09-01 定版：非常强力，只能通过设计者指定的途径获取，
- *           不进商店随机槽位与「发现/随机获取」效果卡池，判定见 isRandomObtainable()）
- * ============================================================ */
-(function () {
+/* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
+const SDT = window.SDT;
+
   const KEY = 'sdt-cards-v1';
   // 桌游道具卡播种记录：每批一个标记，只播一次，之后删改都尊重玩家
   const TT_KEY = 'sdt-cards-tt-seeded';
@@ -205,10 +177,10 @@
       rarity: '稀有', type: '道具', desc: '回复 10 点生命。',
     },
 
-    // 内置初始牌「杀」：每局开始固定携带 5 张（同名堆叠只占 1 格背包）。
+    // 内置初始牌「初始攻击」：每局开始固定携带 5 张（同名堆叠只占 1 格背包）。
     // 1 费 · 攻（+0）＝ 伤害等同于攻击力（combat.js：攻击伤害 = 卡面值 + 攻击力）
     SHA: {
-      id: 'builtin-sha', name: '杀', cost: 1,
+      id: 'builtin-sha', name: '初始攻击', cost: 1,
       rarity: '初始', type: '武术', dmg: 0, dmgType: 'attack',
       desc: '攻（+0）：造成等同于攻击力的伤害。',
     },
@@ -255,7 +227,7 @@
       { id: 'tt2-apollo',     name: '阿波罗的礼物', cost: 2, rarity: '史诗', type: '装备', desc: '限定：获得 1 点能量，抽 2 张牌；发现或随机获取任何牌时，可直接施放（不受限定限制）。' },
       { id: 'tt2-pearlbox',   name: '珍珠盒',   cost: 4, rarity: '稀有', type: '装备', desc: '可以容纳所有资源卡牌。' },
       { id: 'tt2-wreck',      name: '沉船宝藏', cost: 4, rarity: '史诗', type: '装备', desc: '抽到或消耗时，获取 1 张随机卡牌。' },
-      { id: 'tt2-treasuremap', name: '寻宝图', cost: 4, rarity: '古朴', type: '装备', desc: '限定：将 2 张大宝箱置入牌库，抽 1 张牌。' },
+      { id: 'tt2-treasuremap', name: '寻宝图', cost: 4, rarity: '古朴', type: '装备', desc: '限定：将 2 张军用保险柜的物资置入牌库，抽 1 张牌。' },
       { id: 'tt2-pouch',      name: '神秘口袋', cost: 3, rarity: '稀有', type: '装备', desc: '贮藏至多 3 张牌。' },
       { id: 'tt2-venomstaff', name: '毒木杖',   cost: 2, rarity: '古朴', type: '装备', desc: '限定：施放中毒牌时，每 1 层法伤加成，额外施放 1 次。' },
       { id: 'tt2-frostsword', name: '寒冰剑',   cost: 2, rarity: '古朴', type: '装备', desc: '对冰冻角色伤害 +2。' },
@@ -435,13 +407,13 @@
     TABLETOP6: [
       { id: 'tt6-timeskip',    name: '时空孔隙',   cost: 0, rarity: '衍生', type: '事件', unrandom: true, desc: '前进 6 格。' },
       { id: 'tt6-demondeal',   name: '恶魔交易',   cost: 0, rarity: '衍生', type: '事件', unrandom: true, desc: '-1 血，获得传奇武器。' },
-      { id: 'tt6-bandits',     name: '盗匪横行',   cost: 0, rarity: '衍生', type: '事件', battle: true, unrandom: true, desc: '土匪 ×5。奖励：中宝箱 ×2。' },
+      { id: 'tt6-bandits',     name: '盗匪横行',   cost: 0, rarity: '衍生', type: '事件', battle: true, unrandom: true, desc: '掠夺者 ×5。奖励：密封物资箱 ×2。' },
       { id: 'tt6-mystery',     name: '神秘补给',   cost: 0, rarity: '衍生', type: '事件', unrandom: true, desc: '获得彩色令牌（特殊单位），+2 币。' },
       { id: 'tt6-goldmine',    name: '金矿',       cost: 0, rarity: '衍生', type: '事件', unrandom: true, desc: '获得 3 币。' },
       { id: 'tt6-goldhammer',  name: '闪金之锤',   cost: 0, rarity: '衍生', type: '事件', battle: true, unrandom: true, desc: '造成 5 点伤害，若斩杀敌人，+2 币。' },
       { id: 'tt6-relief',      name: '爱心救济站', cost: 0, rarity: '衍生', type: '事件', unrandom: true, desc: '回复 6 血。' },
       { id: 'tt6-airdrop',     name: '空中补给',   cost: 0, rarity: '衍生', type: '事件', unrandom: true, desc: '从木材、口粮、绷带、碘酒中抽取一项。' }, // 后两项重辨存疑
-      { id: 'tt6-chestdraw',   name: '宝箱',       cost: 0, rarity: '衍生', type: '事件', unrandom: true, desc: '从小、中宝箱中抽取 1 个。' },
+      { id: 'tt6-chestdraw',   name: '遗留物资',   cost: 0, rarity: '衍生', type: '事件', unrandom: true, desc: '从遗留物资箱中撬开 1 个。' },
       { id: 'tt6-systemsupply', name: '系统补给',  cost: 0, rarity: '衍生', type: '事件', unrandom: true, desc: '获得彩色令牌（特殊单位），木材 ×1。' }, // 卡名/描述重辨存疑，与「神秘补给」同系列
     ],
 
@@ -449,7 +421,7 @@
     // 每列第一张为职业代表卡（角标「职业·类型·N[[icon:coin]]」），N 按币值处理（有 free 角标
     // 的卡同时标 N，若 N 是费用会自相矛盾）；[[icon:crystal]] = 古朴 / [[icon:crystal]][[icon:crystal]] = 稀有 / 无 = 初始，
     // 「free」角标 = 0 费，其余卡未标费用按强度代拟。
-    // 设计者定版：开局从两个随机职业中选 1 个并获得 1 张该职业随机卡（与 5 张杀
+    // 设计者定版：开局从两个随机职业中选 1 个并获得 1 张该职业随机卡（与 5 张初始攻击
     // 一起）；职业卡有自己的稀有度但**不会进随机池**（unrandom）。
     // cls = 职业；战斗/火堆/商店的实装见 game.js。
     TABLETOP7: [
@@ -578,7 +550,7 @@
       { id: 'coin',    name: '富商锦缎', icon: 'coin',    from: '成就「小有积蓄」' },
       { id: 'vault',   name: '仓廪木纹', icon: 'pocket',  from: '成就「仓廪充实」' },
       { id: 'boss',    name: '弑神黑曜', icon: 'demon',   from: '成就「弑神者」' },
-      { id: 'altar',   name: '祭坛星轨', icon: 'crystal', from: '成就「祭坛征服者」' },
+      { id: 'altar',   name: '核心星轨', icon: 'crystal', from: '成就「净化征服者」' },
       { id: 'pet',     name: '忠犬爪印', icon: 'paw',     from: '成就「最忠实的伙伴」' },
     ],
 
@@ -614,7 +586,7 @@
       const drawN = +(c.draw || 0), infN = +(c.infuse || 0);
       const healN = +(c.heal || 0), armN = +(c.armor || 0);
       const kwArr = [];
-      if (drawN > 0) kwArr.push(`<span class="kw-draw" title="抽卡 ${drawN}：BOSS 战从牌库抽 ${drawN} 张 · 普通战斗改为获得 ${drawN} 张杀">${SDT.Icons.img('cards')}抽 ${drawN}</span>`);
+      if (drawN > 0) kwArr.push(`<span class="kw-draw" title="抽卡 ${drawN}：BOSS 战从牌库抽 ${drawN} 张 · 普通战斗改为获得 ${drawN} 张初始攻击">${SDT.Icons.img('cards')}抽 ${drawN}</span>`);
       if (infN > 0) kwArr.push(`<span class="kw-infuse" title="注能(${infN})：打出时需先选择 ${infN} 张手牌消耗才能发动">${SDT.Icons.img('crystal')}注能 ${infN}</span>`);
       if (healN > 0) kwArr.push(`<span class="kw-heal" title="回复 ${healN} 点生命（禁疗时无效）">${SDT.Icons.img('heart')}回 ${healN}</span>`);
       if (armN > 0) kwArr.push(`<span class="kw-armor" title="获得 ${armN} 点护甲">${SDT.Icons.img('plate')}甲 ${armN}</span>`);
@@ -636,7 +608,7 @@
       </div>`;
     },
 
-    // 播入初始牌「杀」（只播一次，之后删改都尊重玩家）
+    // 播入初始牌「初始攻击」（只播一次，之后删改都尊重玩家）
     ensureSha() {
       SDT.Cards.seedBatch([SDT.Cards.SHA], 'sdt-cards-sha-seeded');
     },
@@ -679,11 +651,33 @@
       SDT.Cards.seedBatch(SDT.Cards.TABLETOP6, TT6_KEY, 'tt6');
       SDT.Cards.seedBatch(SDT.Cards.TABLETOP7, TT7_KEY, 'tt7');
       SDT.Cards.seedBatch(SDT.Cards.TABLETOP8, TT8_KEY, 'tt8');
+      SDT.Cards.ensureHeroFields();   // 修复早期制作坊保存丢失的 cls/hero（专属立绘依赖）
     },
 
     // 英雄卡查询（第八批）：heroOf(职业) 返回该职业唯一英雄卡
     heroOf(cls) {
       return SDT.Cards.all().find(c => c.hero && c.cls === cls) || null;
     },
+
+    // 英雄卡字段回填：早期制作坊保存会丢掉 cls/hero，导致专属立绘与 heroOf 失效。
+    // 只按 id 补缺失的 cls / hero / tokenOf / unrandom，不覆盖玩家改过的名字与描述。
+    ensureHeroFields() {
+      try {
+        const defs = SDT.Cards.TABLETOP8;
+        const cards = SDT.Cards.all();
+        let dirty = false;
+        for (const c of cards) {
+          if (!/^tt8-/.test(String(c.id || ''))) continue;
+          const def = defs.find(d => d.id === c.id);
+          if (!def) continue;
+          if (def.cls && !c.cls) { c.cls = def.cls; dirty = true; }
+          if (def.hero && !c.hero) { c.hero = true; dirty = true; }
+          if (def.tokenOf && !c.tokenOf) { c.tokenOf = def.tokenOf; dirty = true; }
+          if (def.unrandom && !c.unrandom) { c.unrandom = true; dirty = true; }
+        }
+        if (dirty) SDT.Cards.saveAll(cards);
+      } catch (e) { /* 隐私模式等场景静默跳过 */ }
+    },
   };
-})();
+
+export { KEY };

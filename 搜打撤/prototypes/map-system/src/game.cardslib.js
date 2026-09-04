@@ -1,3 +1,10 @@
+/* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
+const SDT = window.SDT;
+const UI = window.SDT.UI;
+import { esc } from './shared.js';
+import { escAttr } from './shared.js';
+import { game } from './game.core.js';
+import { closeBase, renderHub, _set_deployPick } from './game.hub.js';
   const RARITIES = SDT.Cards.RARITIES;
   const TYPES = SDT.Cards.TYPES;
   const TYPE_ICON = SDT.Cards.TYPE_ICON;
@@ -17,6 +24,51 @@
     tick() { SDT.Sound.sfx('hover'); },
     ding() { SDT.Sound.sfx('ding'); },
   };
+
+  // ======== 机制词条（制作坊一键写入规范句式，battle.core.applyTextEffects 按文本结算） ========
+  // sen：匹配描述中整条机制句（含句尾标点）；cnt：读当前次数（第一个捕获组）
+  // tpl(n)：生成规范句式；max：可叠加的最大次数（1 = 只能开/关）
+  const MECH_GROUPS = [
+    { name: '诅咒 · 拖到敌人身上', items: [
+      { k: 'bleed',   label: '流血', icon: 'blood',   tpl: n => `附加 ${n} 层流血。`, sen: /附加\s*\d*\s*层?\s*流血[^。；;]*。?/, cnt: /附加\s*(\d+)\s*层?\s*流血/, max: 5 },
+      { k: 'poison',  label: '中毒', icon: 'skull',   tpl: n => `附加 ${n} 层中毒。`, sen: /附加\s*(?:\d+\s*层)?\s*中毒[^。；;]*。?/, cnt: /附加\s*(?:(\d+)\s*层)?\s*中毒/, max: 5 },
+      { k: 'freeze',  label: '冰冻', icon: 'crystal', tpl: n => `附加冰冻，持续 ${n} 回合。`, sen: /附加冰冻[^。；;]*。?/, cnt: /持续\s*(\d+)\s*回合/, max: 3 },
+      { k: 'silence', label: '沉默', icon: 'cross',   tpl: n => `附加沉默，持续 ${n} 回合。`, sen: /附加沉默[^。；;]*。?/, cnt: /持续\s*(\d+)\s*回合/, max: 3 },
+      { k: 'abreak',  label: '破甲', icon: 'tools',   tpl: () => `附加破甲。`, sen: /附加破甲[^。；;]*。?/, max: 1 },
+      { k: 'healban', label: '禁疗', icon: 'heart',   tpl: () => `附加禁疗。`, sen: /附加禁疗[^。；;]*。?/, max: 1 },
+    ] },
+    { name: '祝福 · 作用于自己', items: [
+      { k: 'stealth', label: '潜行', icon: 'runner',  tpl: n => `获得潜行，持续 ${n} 回合。`, sen: /获得潜行[^。；;]*。?/, cnt: /持续\s*(\d+)\s*回合/, max: 3 },
+      { k: 'immune',  label: '免疫伤害', icon: 'sparkles', tpl: n => `免疫伤害，持续 ${n} 回合。`, sen: /免疫伤害[^。；;]*。?/, cnt: /持续\s*(\d+)\s*回合/, max: 3 },
+      { k: 'atkUp',   label: '攻击力+', icon: 'swords', tpl: n => `获得 ${n} 点攻击力。`, sen: /获得\s*\d+\s*点\s*攻击力[^。；;]*。?/, cnt: /获得\s*(\d+)\s*点\s*攻击力/, max: 5 },
+      { k: 'spellUp', label: '法伤+', icon: 'crystal',  tpl: n => `法伤 +${n}。`, sen: /法伤\s*\+\s*\d+[^。；;]*。?/, cnt: /法伤\s*\+\s*(\d+)/, max: 5 },
+      { k: 'reduce',  label: '减伤', icon: 'plate',    tpl: n => `减伤 ${n}。`, sen: /减伤\s*\d*[^。；;]*。?/, cnt: /减伤\s*(\d+)/, max: 5 },
+      { k: 'shield',  label: '护盾', icon: 'shield',   tpl: n => `获得 ${n} 点护盾。`, sen: /获得\s*\d+\s*点?\s*护盾[^。；;]*。?/, cnt: /获得\s*(\d+)\s*点?\s*护盾/, max: 9 },
+      { k: 'guard',   label: '格挡', icon: 'shield',   tpl: () => `本回合所受伤害降为 1。`, sen: /本回合所受伤害降为[^。；;]*。?/, max: 1 },
+      { k: 'purify',  label: '净化', icon: 'sparkles', tpl: () => `净化。`, sen: /净化[^。；;]*。?/, max: 1 },
+    ] },
+    { name: '资源 · 抽牌 / 能量', items: [
+      { k: 'drawTxt', label: '抽牌', icon: 'cards',  tpl: n => `抽 ${n} 张牌。`, sen: /抽\s*\d+\s*张牌[^。；;]*。?/, cnt: /抽\s*(\d+)\s*张牌/, max: 5 },
+      { k: 'discover', label: '发现', icon: 'lantern', tpl: n => `发现 ${n} 张卡牌。`, sen: /发现\s*\d*\s*张?\s*(?:传说)?(?:卡牌|牌|卡)[^。；;]*。?/, cnt: /发现\s*(\d+)\s*张?\s*(?:传说)?(?:卡牌|牌|卡)/, max: 3 },
+      { k: 'random', label: '随机卡牌', icon: 'question', tpl: n => `获得 ${n} 张随机卡牌。`, sen: /(?:获得|获取)?\s*\d+\s*张随机卡牌[^。；;]*。?/, cnt: /获得\s*(\d+)\s*张随机卡牌/, max: 3 },
+      { k: 'energy', label: '获得能量', icon: 'bolt', tpl: n => `获得 ${n} 点能量。`, sen: /获得\s*\d+\s*点?能量(?!上限)[^。；;]*。?/, cnt: /获得\s*(\d+)\s*点?能量/, max: 3 },
+      { k: 'maxEner', label: '能量上限+', icon: 'bolt', tpl: () => `能量上限 +1。`, sen: /能量上限\s*\+\s*\d+[^。；;]*。?/, max: 1 },
+    ] },
+  ];
+  const MECH_ALL = MECH_GROUPS.flatMap(g => g.items);
+
+  // 描述里追加 / 递增次数 / 整句移除一条机制句式，返回新描述
+  function mechToggle(desc, item) {
+    if (!item.sen.test(desc)) {
+      const phrase = item.tpl(1);
+      return desc.trim() ? desc.replace(/\s*$/, '') + (/[。；;]$/.test(desc.trim()) ? '' : '；') + phrase : phrase;
+    }
+    const m = desc.match(item.cnt);
+    const n = m ? +(m[1] || 1) : 1;
+    if (item.max > 1 && n < item.max) return desc.replace(item.sen, item.tpl(n + 1));
+    // 已到上限或不可叠加 → 整句移除，并清掉开头残留的分隔符
+    return desc.replace(item.sen, '').replace(/^[；;\s]+/, '').trim();
+  }
 
   // 卡面渲染（已迁至 SDT.Cards.cardHTML，卡牌库/商店/背包/战斗共用）
   const cardHTML = (c, cls) => SDT.Cards.cardHTML(c, cls);
@@ -182,8 +234,39 @@
       value: card ? Math.max(0, +card.value || 0) : 0,
       // 出售资格：默认不可出售；编辑旧卡时按 isSellable 回显（含「可出售」备注推导）
       sellable: card ? SDT.Cards.isSellable(card) : false,
+      // 身份字段原样保留：制作坊表单不编辑它们，但保存时必须带回，
+      // 否则 upsert 整卡替换会丢 cls/hero（英雄卡专属立绘与 heroOf 依赖）
+      cls: card ? (card.cls || '') : '',
+      hero: card ? !!card.hero : false,
+      tokenOf: card ? (card.tokenOf || undefined) : undefined,
+      unrandom: card ? !!card.unrandom : false,
     };
     renderDesigner();
+  }
+
+  // 机制词条按钮组（on 态 + 次数角标实时反映描述内容）
+  function mechChipsHTML() {
+    return MECH_GROUPS.map(g => `
+      <div class="mech-group">
+        <div class="mech-group-name">${g.name}</div>
+        <div class="mech-chips">${g.items.map(it => {
+          const on = it.sen.test(draft.desc);
+          const m = on ? draft.desc.match(it.cnt) : null;
+          const n = m ? +(m[1] || 1) : 0;
+          return `<button type="button" class="mech-chip${on ? ' on' : ''}" data-act="mech" data-k="${it.k}" title="${escAttr(it.tpl(Math.max(1, n)))}（点击${on ? (it.max > 1 && n < it.max ? '叠加次数' : '移除') : '写入描述'}）">${SDT.Icons.img(it.icon)}${it.label}${n > 1 ? `<em>${n}</em>` : ''}</button>`;
+        }).join('')}</div>
+      </div>`).join('');
+  }
+
+  // 机制词条改动后：同步描述框 / 字数 / 按钮态 / 卡面预览
+  function mechSyncUI() {
+    const ta = document.getElementById('cardDesc');
+    if (ta) ta.value = draft.desc;
+    const cnt = document.getElementById('descCount');
+    if (cnt) cnt.textContent = `${draft.desc.length}/100`;
+    const wrap = document.getElementById('mechChips');
+    if (wrap) wrap.innerHTML = mechChipsHTML();
+    updateDesignerPreview();
   }
 
   function renderDesigner() {
@@ -204,11 +287,21 @@
             <p class="stage-hint">[[icon:mouse]] 移动鼠标可以转动卡牌</p>
           </div>
           <div class="cdes-form">
+            <div class="cdes-sec"><span>基础设定</span></div>
             <div class="cdes-row"><label>卡牌名称</label>
               <input id="cardName" type="text" maxlength="12" value="${escAttr(draft.name)}" placeholder="起个名字（≤12 字）"></div>
             <div class="cdes-row"><label>类型 <span class="row-tip">决定卡牌边框与图腾</span></label>
               <div class="seg type-seg">${TYPES.map(t =>
                 `<button data-act="pickType" data-t="${t}" class="${draft.type === t ? 'on' : ''}">${SDT.Icons.img(SDT.Cards.TYPE_ART[t] || 'question')}${t}</button>`).join('')}</div></div>
+            <div class="cdes-duo">
+              <div class="cdes-row"><label>费用</label>
+                <div class="seg">${[0, 1, 2, 3, 4, 5].map(v =>
+                  `<button class="cost-gem${draft.cost === v ? ' on' : ''}" data-act="pickCost" data-v="${v}">${v}</button>`).join('')}</div></div>
+              <div class="cdes-row"><label>稀有度 <span class="row-tip">边框光效 · 商店价格</span></label>
+                <div class="seg">${RARITIES.map((r, i) =>
+                  `<button class="rar-dot rv${i}${draft.rarity === r ? ' on' : ''}" data-act="pickRar" data-r="${r}"><i></i>${r}</button>`).join('')}</div></div>
+            </div>
+            <div class="cdes-sec"><span>战斗词条</span></div>
             <div class="cdes-row" id="rowDmg" ${isDmgType ? '' : 'hidden'}><label>伤害词条 <span class="row-tip">武术 / 法术专属 · 四类伤害体系（design.md §3）</span></label>
               <div class="seg dmgtype-seg">${SDT.Cards.DMG_TYPE_ORDER.map(dt => {
                 const m = SDT.Cards.DMG_TYPE_META[dt];
@@ -220,15 +313,17 @@
                 <button class="hs-btn round" data-act="dmgAdj" data-v="1" title="增加">＋</button>
                 <span class="dmg-hint">显示为卡牌左下角的<span class="dmg-num">红色伤害宝石</span></span>
               </div></div>
-            <div class="cdes-row"><label>抽卡 / 注能 <span class="row-tip">抽卡 N：BOSS 战从牌库抽 N 张 · 普通战斗改为获得 N 张杀 ｜ 注能 N：打出前需先选择 N 张手牌消耗</span></label>
+            <div class="cdes-row"><label>抽卡 <span class="row-tip">BOSS 战从牌库抽 N 张 · 普通战斗改为获得 N 张初始攻击</span></label>
               <div class="dmg-ctl">
-                <span class="dmg-hint" style="margin-right:4px">[[icon:cards]] 抽卡</span>
                 ${[0, 1, 2, 3, 4, 5].map(v =>
                   `<button class="cost-gem${draft.draw === v ? ' on' : ''}" data-act="pickDraw" data-v="${v}">${v}</button>`).join('')}
-                <span class="dmg-hint" style="margin:0 4px 0 14px">[[icon:flask]] 注能</span>
+                <span class="dmg-hint">0 = 无该词条</span>
+              </div></div>
+            <div class="cdes-row"><label>注能 <span class="row-tip">打出前需先选择 N 张手牌消耗</span></label>
+              <div class="dmg-ctl">
                 ${[0, 1, 2, 3, 4, 5].map(v =>
                   `<button class="cost-gem${draft.infuse === v ? ' on' : ''}" data-act="pickInfuse" data-v="${v}">${v}</button>`).join('')}
-                <span class="dmg-hint">0 = 无该词条；卡面类型行下方会显示角标</span>
+                <span class="dmg-hint">0 = 无该词条；有注能时卡面类型行下方会显示角标</span>
               </div></div>
             <div class="cdes-row"><label>回复 / 护甲 <span class="row-tip">简单词条 · 战斗中拖到自己身上打出；禁疗会阻止回复</span></label>
               <div class="dmg-ctl">
@@ -238,12 +333,12 @@
                 <input id="cardArmor" type="number" min="0" max="99" value="${draft.armor}">
                 <span class="dmg-hint">0 = 无该词条；可与描述中的其他效果组合</span>
               </div></div>
-            <div class="cdes-row"><label>费用</label>
-              <div class="seg">${[0, 1, 2, 3, 4, 5].map(v =>
-                `<button class="cost-gem${draft.cost === v ? ' on' : ''}" data-act="pickCost" data-v="${v}">${v}</button>`).join('')}</div></div>
-            <div class="cdes-row"><label>稀有度 <span class="row-tip">影响卡面宝石、边框光效与商店价格</span></label>
-              <div class="seg">${RARITIES.map((r, i) =>
-                `<button class="rar-dot rv${i}${draft.rarity === r ? ' on' : ''}" data-act="pickRar" data-r="${r}"><i></i>${r}</button>`).join('')}</div></div>
+            <div class="cdes-sec"><span>机制词条</span><em>点击写入规范句式 · 战斗中自动实装</em></div>
+            <div class="cdes-row" id="mechChips">${mechChipsHTML()}</div>
+            <p class="dmg-hint" style="margin:-6px 0 22px">[[icon:lantern]] 再点一次叠加次数，到上限后再点移除；句式与战斗结算（battle.core 词条解析）一一对应，也可在描述里手写其他效果。</p>
+            <div class="cdes-sec"><span>描述与经济</span></div>
+            <div class="cdes-row"><label>效果描述 <span class="row-tip">可选</span><span class="pg-spacer"></span><span class="desc-count" id="descCount">${draft.desc.length}/100</span></label>
+              <textarea id="cardDesc" rows="4" maxlength="100" placeholder="点上方机制词条自动生成，或手写描述。">${esc(draft.desc)}</textarea></div>
             <div class="cdes-row" id="rowValue"><label>币值 [[icon:coin]] <span class="row-tip">卡牌右下角金色角标 · 商店收购参考价</span></label>
               <div class="dmg-ctl">
                 <button class="hs-btn round" data-act="valAdj" data-v="-1" title="减少">−</button>
@@ -252,8 +347,6 @@
                 <label class="sellable-tgl" title="所有卡牌默认不可出售，勾选后才能在商店卖掉"><input type="checkbox" id="cardSellable" ${draft.sellable ? 'checked' : ''}> 可出售</label>
                 <span class="dmg-hint">0 = 不显示角标；勾「可出售」才能卖给商店</span>
               </div></div>
-            <div class="cdes-row"><label>效果描述 <span class="row-tip">可选</span></label>
-              <textarea id="cardDesc" rows="4" maxlength="100" placeholder="描述这张卡的效果，例如：攻（+3），附加流血。">${esc(draft.desc)}</textarea></div>
             <p class="dmg-hint">[[icon:lantern]] 保存后可在商店刷出、在战斗中实装；数据保存在本浏览器。</p>
           </div>
         </div>
@@ -262,7 +355,14 @@
     bindDesignerTilt();
     UI._inputHandler = (e) => {
       if (e.target.id === 'cardName') draft.name = e.target.value;
-      else if (e.target.id === 'cardDesc') draft.desc = e.target.value;
+      else if (e.target.id === 'cardDesc') {
+        draft.desc = e.target.value;
+        const cnt = document.getElementById('descCount');
+        if (cnt) cnt.textContent = `${draft.desc.length}/100`;
+        // 手动改动描述后同步机制按钮态（不重写 textarea，保持光标）
+        const wrap = document.getElementById('mechChips');
+        if (wrap) wrap.innerHTML = mechChipsHTML();
+      }
       else if (e.target.id === 'cardDmg') draft.dmg = Math.max(0, Math.min(99, Math.floor(+e.target.value || 0)));
       else if (e.target.id === 'cardHeal') draft.heal = Math.max(0, Math.min(99, Math.floor(+e.target.value || 0)));
       else if (e.target.id === 'cardArmor') draft.armor = Math.max(0, Math.min(99, Math.floor(+e.target.value || 0)));
@@ -271,6 +371,14 @@
       else return;
       updateDesignerPreview();
     };
+    UI.act('mech', (d) => {
+      const item = MECH_ALL.find(it => it.k === d.k);
+      if (!item) return;
+      draft.desc = mechToggle(draft.desc, item);
+      if (draft.desc.length > 100) { UI.log('描述超过 100 字上限，最后一条词条放不下了', 'warn'); mechSyncUI(); return; }
+      Sfx.tick();
+      mechSyncUI();
+    });
     UI.act('closeDesigner', closeDesigner);
     UI.act('pickType', (d) => {
       draft.type = d.t;
@@ -348,6 +456,10 @@
       value: draft.value,
       sellable: draft.sellable === true,  // 显式记录出售资格（缺省 false = 默认不可出售）
     });
+    if (draft.cls) card.cls = draft.cls;         // 身份字段回写（见 openCardDesigner 草稿注释）
+    if (draft.hero) card.hero = true;
+    if (draft.tokenOf) card.tokenOf = draft.tokenOf;
+    if (draft.unrandom) card.unrandom = true;
     lastSavedId = card.id;
     Sfx.ding();
     UI.log(`[[icon:cards]] 卡牌【<b>${esc(card.name)}</b>】已${wasEditing ? '更新' : '保存到卡牌库'}`, 'ok');
@@ -363,7 +475,7 @@
   // Esc / 点击页面外深色背景 → 关闭大页面（制作坊先回库 / 基地 / 出征整备回基地）
   function closeCardPageTop() {
     if (document.getElementById('cdesStage')) closeDesigner();
-    else if (document.getElementById('depMain')) { deployPick = null; renderHub(); }
+    else if (document.getElementById('depMain')) { _set_deployPick(null); renderHub(); }
     else if (document.getElementById('hubMain')) closeBase();
     else closeLibPage();
   }
@@ -435,3 +547,7 @@
   }
 
   // ---------- 输入 ----------
+
+export { Sfx, cardHTML, cardPageOpen, closeCardPageTop, openCardDesigner, openCardLibrary };
+const _set_cardPageOpen = (v) => { cardPageOpen = v; };
+export { _set_cardPageOpen };

@@ -1,19 +1,6 @@
-/* ============================================================
- * 搜打撤 v0.8 —— 渲染器（分布式结点地图 · 手绘连线）
- * 每个逻辑格是一枚散布的圆形结点（几何唯一来源：game.nodes /
- * game.nodePos / game.centerPos，由 mapData.buildNodePositions 生成）；
- * 同环相邻结点、环间门与祭坛引导线用手绘风格线段连接
- * （确定性抖动曲线，结点边缘留白）。
- *
- * 性能策略：
- *   - 静态内容烘焙到离屏画布：星云底光（一次）、结点底盘/双圈描边/
- *     入口底光/祭坛底光/备注标记（换层 / 改备注时重建）。
- *   - 连线为预生成 Path2D，逐帧只描边；粒子数组预计算，
- *     每帧零字符串拼接、零渐变重建、零数组分配。
- * 对外暴露 SDT.FX：float(飘字) / pulse(脉冲) / shake(震屏) / clear()
- * ============================================================ */
-(function () {
-  const SDT = window.SDT;
+
+  import { BUILD_VERSION, assetUrl } from './asset-url.js';
+const SDT = window.SDT;
   const TAU = Math.PI * 2;
   const T0 = SDT.MAP.tile;   // 缩放基准单位（特效 / 棋子尺寸用）
 
@@ -29,30 +16,16 @@
     ringLink: 'rgba(226,202,150,0.66)',   // 环内相邻结点的羊皮纸连线
   };
 
-  // 局内壁纸：视频版（Wallpaper Engine 素材）
-  const environmentBackdrop = document.createElement('video');
-  environmentBackdrop.src = 'assets/wallpaper-改版.mp4';
-  environmentBackdrop.muted = true;
-  environmentBackdrop.loop = true;
-  environmentBackdrop.playsInline = true;
-  environmentBackdrop.autoplay = true;
-  { const s = environmentBackdrop.style;   // 留在 DOM 里但不可见，保证 Chromium 持续解码
-    s.position = 'fixed'; s.left = '-10px'; s.top = '0';
-    s.width = '1px'; s.height = '1px'; s.opacity = '0'; s.pointerEvents = 'none'; }
-  if (document.body) document.body.appendChild(environmentBackdrop);
-  else document.addEventListener('DOMContentLoaded', () => document.body.appendChild(environmentBackdrop));
-  environmentBackdrop.play().catch(() => {
-    environmentBackdrop.addEventListener('canplay', () => environmentBackdrop.play().catch(() => {}));
-  });
+  // 局内壁纸：静态图版（残骸海岸）。静态图无逐帧解码开销，比视频版更省 GPU
+  const environmentBackdrop = new Image();
+  environmentBackdrop.src = assetUrl('assets/board-backdrop-wreck.png');
 
-  function drawCover(ctx, media, width, height) {
-    const isVideo = media.tagName === 'VIDEO';
-    const mw = isVideo ? media.videoWidth : media.naturalWidth;
-    const mh = isVideo ? media.videoHeight : media.naturalHeight;
-    if (isVideo ? media.readyState < 2 : (!media.complete || !mw)) return;
+  function drawCover(ctx, image, width, height) {
+    const mw = image.naturalWidth, mh = image.naturalHeight;
+    if (!image.complete || !mw) return;
     const scale = Math.max(width / mw, height / mh);
     const w = mw * scale, h = mh * scale;
-    ctx.drawImage(media, (width - w) / 2, (height - h) / 2, w, h);
+    ctx.drawImage(image, (width - w) / 2, (height - h) / 2, w, h);
   }
 
   // ---------- FX：飘字 / 落点脉冲 / 震屏 ----------
@@ -301,7 +274,7 @@
     if (!e) {
       e = bitmapCache[name] = { img: new Image(), ok: false };
       e.img.onload = () => { e.ok = true; };
-      e.img.src = 'assets/icons/' + name + '.png';
+      e.img.src = assetUrl('assets/icons/' + name + '.png');
     }
     return e.ok ? e.img : null;
   }
@@ -812,55 +785,32 @@
     ctx.beginPath();
     ctx.ellipse(px, groundY + s * 0.14, s * 0.5 * (1 - game.hop * 0.22), s * 0.16, 0, 0, TAU);
     ctx.fill();
-    // 呼吸光圈（椭圆，贴地）
+    // 呼吸光圈（椭圆，贴地；与浅红标记同色系）
     const pulse = (Math.sin(game.time * 3.2) + 1) / 2;
-    ctx.strokeStyle = `rgba(240,200,110,${(0.34 - pulse * 0.18).toFixed(3)})`;
+    ctx.strokeStyle = `rgba(255,132,115,${(0.34 - pulse * 0.18).toFixed(3)})`;
     ctx.lineWidth = 2 / z;
     ctx.beginPath();
     ctx.ellipse(px, groundY + s * 0.14, s * (0.68 + pulse * 0.1), s * (0.23 + pulse * 0.03), 0, 0, TAU);
     ctx.stroke();
-    // —— 当前位置：青色定位针（位图优先，针尖落在脚下；无位图回退木棋子） ——
-    const pinSize = T0 * 1.7;
-    const hopLift = game.hop * T0 * 0.35;   // 步行跳跃的抬升
-    const pinImg = bitmapFor('player');
-    if (pinImg) {
-      ctx.drawImage(pinImg, px - pinSize / 2, groundY - pinSize * 0.94 - hopLift, pinSize, pinSize);
-    } else {
-      const ink = 'rgba(43,28,16,0.9)';
-      const gy = groundY - hopLift;
-      ctx.fillStyle = '#6b4a26';
-      ctx.beginPath(); ctx.ellipse(px, gy, s * 0.46, s * 0.17, 0, 0, TAU); ctx.fill();
-      ctx.strokeStyle = ink; ctx.lineWidth = 1.4 / z; ctx.stroke();
-      const bodyGrad = ctx.createLinearGradient(px - s * 0.34, 0, px + s * 0.34, 0);
-      bodyGrad.addColorStop(0, '#7a5426');
-      bodyGrad.addColorStop(0.42, '#c99a54');
-      bodyGrad.addColorStop(0.68, '#a87838');
-      bodyGrad.addColorStop(1, '#63431e');
-      ctx.fillStyle = bodyGrad;
-      ctx.beginPath();
-      ctx.moveTo(px - s * 0.42, gy - s * 0.02);
-      ctx.bezierCurveTo(px - s * 0.3, gy - s * 0.5, px - s * 0.22, gy - s * 0.68, px - s * 0.19, gy - s * 0.92);
-      ctx.lineTo(px + s * 0.19, gy - s * 0.92);
-      ctx.bezierCurveTo(px + s * 0.22, gy - s * 0.68, px + s * 0.3, gy - s * 0.5, px + s * 0.42, gy - s * 0.02);
-      ctx.closePath();
-      ctx.fill();
-      ctx.strokeStyle = 'rgba(43,28,16,0.85)'; ctx.lineWidth = 1.4 / z; ctx.stroke();
-      const headY = gy - s * 1.06;
-      const headGrad = ctx.createRadialGradient(px - s * 0.08, headY - s * 0.08, 1, px, headY, s * 0.27);
-      headGrad.addColorStop(0, '#eed8a4');
-      headGrad.addColorStop(0.6, '#c99a54');
-      headGrad.addColorStop(1, '#7a5622');
-      ctx.fillStyle = headGrad;
-      ctx.beginPath(); ctx.arc(px, headY, s * 0.24, 0, TAU); ctx.fill();
-      ctx.strokeStyle = 'rgba(43,28,16,0.85)'; ctx.lineWidth = 1.4 / z; ctx.stroke();
-      ctx.fillStyle = 'rgba(255,248,225,0.7)';
-      ctx.beginPath(); ctx.arc(px - s * 0.08, headY - s * 0.09, s * 0.05, 0, TAU); ctx.fill();
-    }
+    // —— 当前位置：浅红色圆圈标记（贴地，呼吸缩放，取消头像图） ——
+    const markR = T0 * 0.66 * (1 + pulse * 0.10);
+    ctx.fillStyle = 'rgba(255,120,105,0.16)';
+    circle(ctx, px, groundY, markR);
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(255,132,115,0.95)';
+    ctx.lineWidth = 3.2 / z;
+    circle(ctx, px, groundY, markR);
+    ctx.stroke();
+    // 外扩涟漪：一圈淡出
+    ctx.strokeStyle = `rgba(255,132,115,${(0.55 - pulse * 0.4).toFixed(3)})`;
+    ctx.lineWidth = 2 / z;
+    circle(ctx, px, groundY, markR * (1.15 + pulse * 0.35));
+    ctx.stroke();
     // 名牌胶囊（钉在定位针上方）
     const label = '你';
     ctx.font = font(cam, 10);
     const tw = ctx.measureText(label).width;
-    const lw2 = tw + 12 / z, lh = 15 / z, lx = px, ly = groundY - pinSize * 1.08 - hopLift;
+    const lw2 = tw + 12 / z, lh = 15 / z, lx = px, ly = groundY - markR - 16 / z;
     ctx.fillStyle = 'rgba(22,15,6,0.85)';
     rrect(ctx, lx - lw2 / 2, ly - lh / 2, lw2, lh, lh / 2);
     ctx.fill();
@@ -947,7 +897,7 @@
     const cam = game.cam, map = game.map;
     const T = map.tile, W = map.cols * T, H = map.rows * T;
     const grads = screenGrads(ctx, cam);
-    // 壁纸视频整层铺底，未就绪时回退纯色；原 bg 渐变降为 50% 遮罩保证结点可读
+    // 静态壁纸整层铺底，未就绪时回退纯色；原 bg 渐变降为 50% 遮罩保证结点可读
     ctx.fillStyle = '#0B0E12';
     ctx.fillRect(0, 0, cam.viewW, cam.viewH);
     drawCover(ctx, environmentBackdrop, cam.viewW, cam.viewH);
@@ -988,4 +938,5 @@
   }
 
   SDT.Renderer = { draw };
-})();
+
+export { FX, SDT };

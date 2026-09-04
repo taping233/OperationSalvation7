@@ -1,23 +1,4 @@
-/* ============================================================
- * 搜打撤 v0.18 —— 战斗胜利宝箱掉落（设计者 2026-09-02 定版）
- *
- * 战胜怪物 100% 掉落宝箱，掉落内容按所在环层决定（MAP.layerChests）：
- *   外层：小宝箱 1-2 个
- *   中层：中宝箱 ×2 或 大宝箱 ×1（等概率）
- *   内层：大宝箱+小宝箱 或 大宝箱+中宝箱（等概率）
- *   BOSS：BOSS宝箱 ×1（5 张随机卡 + 金币/银币/铜币其一 + 30% 金色令牌）
- *
- * 宝箱规格（MAP.chestKinds）：
- *   小宝箱 [[icon:archive]] 1 张随机卡 + 1-2 币
- *   中宝箱 [[icon:archive]] 随机 3 张卡选 1 张 + 2-3 币
- *   大宝箱 [[icon:tools]] 3 张随机卡 + 3-4 币
- *   BOSS宝箱 [[icon:medal]] 5 张随机卡 + 币卡 + 金色令牌(30%)
- *
- * 随机卡池与商店随机槽同源：排除衍生卡与传说特例卡（unrandom，
- * SDT.Cards.isRandomObtainable）；同一宝箱内尽量不重复。
- * 开箱 UI 逐个弹窗结算，全部开完后回调 onDone（game.onBattleEnd 续流）。
- * ============================================================ */
-(function () {
+
   const SDT = window.SDT;
   const UI = SDT.UI;
 
@@ -126,47 +107,13 @@
       return;
     }
     cur = rollContents(queue[idx].kind);
-    renderOpening();
     idx++;
+    render();
+    scheduleRevealSfx();
   }
 
-  // ---------- 开箱动画：蓄力摇幌 → 爆开 → 卡牌飞出揭晓 ----------
-  function renderOpening() {
-    const K = KINDS()[cur.kind];
-    UI.showOverlay(`${K.icon} ${K.name}`, `
-      <div class="chest-stage">
-        <div class="chest-glow"></div>
-        <div class="chest-box" id="chestBox"><span>${K.icon}</span></div>
-        <p class="chest-hint">正在开启……</p>
-      </div>`);
-    const shakes = [0, 220, 440, 660];
-    shakes.forEach((t, i) => setTimeout(() => {
-      const b = document.getElementById('chestBox');
-      if (!b) return;
-      b.classList.remove('shake-1', 'shake-2', 'shake-3');
-      b.classList.add('shake-' + Math.min(3, i + 1));
-      SDT.Sound.sfx('chestShake');
-    }, t));
-    setTimeout(() => {
-      if (!document.getElementById('chestBox')) return;   // 界面已被外部关闭
-      SDT.Sound.sfx('chestBurst');
-      render();
-      scheduleRevealSfx();
-    }, 920);
-  }
-
-  // 逐卡揭晓音效：史诗叮鸣、传说号角
-  function scheduleRevealSfx() {
-    (cur.cards || []).forEach((c, i) => {
-      setTimeout(() => {
-        if (!document.querySelector('.bt-hand')) return;
-        SDT.Sound.sfx('reveal');
-        if (c.rarity === '传说') SDT.Sound.sfx('legend');
-        else if (c.rarity === '史诗') SDT.Sound.sfx('ding');
-      }, 140 + i * 170);
-    });
-  }
-
+  // ---------- 开箱浮层：悬在当前画面上的紧凑面板（杀戮尖塔「搜刮!」式） ----------
+  // 不再整屏接管：模态卡片直接浮在棋盘/结算画面上，逐卡揭晓后收下继续。
   const riOf = (card) => Math.max(0, SDT.Cards.RARITIES.indexOf(card.rarity));
 
   function render() {
@@ -183,11 +130,11 @@
         (cur.tokenHit ? ' · <b class="gold">[[icon:sparkles]] 金色令牌！</b>' : '');
     const ops = isPick
       ? '<p class="ov-note">点击一张卡牌收下，其余两张散落在风中……</p>'
-      : `<div class="ov-btns"><button class="ov-btn ok" data-act="chestTake">[[icon:archive]] 全部收下${cur.coins ? `（含 ${cur.coins} 币）` : ''}</button></div>`;
-    UI.showOverlay(`${K.icon} 开启${K.name} · 第 ${idx} / ${queue.length} 个`, `
-      <p class="ov-stats">${lootLine}</p>
+      : `<div class="scene-ops"><button class="ov-btn ok" data-act="chestTake">[[icon:archive]] 全部收下${cur.coins ? `（含 ${cur.coins} 币）` : ''}</button></div>`;
+    UI.showOverlay(`[[icon:archive]] 搜刮！${K.name} · 第 ${idx} / ${queue.length}`, `
+      <p class="evt-sts-desc">${lootLine}</p>
       ${cur.cards.length ? `<div class="bt-hand">${cardsHTML}</div>` : '<p class="ov-empty">（卡牌库是空的，什么也没开出）</p>'}
-      ${ops}`, true);
+      ${ops}`, 'chest');
     UI.act('chestTake', takeAll);
     UI.act('chestPick', (d) => {
       const card = cur.cards[+d.i];
@@ -198,13 +145,26 @@
     UI.refresh(G);
   }
 
+  // 逐卡揭晓音效：史诗叮鸣、传说号角
+  function scheduleRevealSfx() {
+    (cur.cards || []).forEach((c, i) => {
+      setTimeout(() => {
+        if (!document.querySelector('.bt-hand')) return;
+        SDT.Sound.sfx('reveal');
+        if (c.rarity === '传说') SDT.Sound.sfx('legend');
+        else if (c.rarity === '史诗') SDT.Sound.sfx('ding');
+      }, 140 + i * 170);
+    });
+  }
+
   function takeAll() {
     cur.cards.forEach(card => G.grantCard(card));
     if (cur.coins) G.gainCoins(cur.coins);
-    if (!cur.cards.length && !cur.coins) UI.log('（空宝箱……）', 'dim');
+    if (!cur.cards.length && !cur.coins) UI.log('（空的——早被别的拾荒者搬空了……）', 'dim');
     next();
   }
 
   window.SDT = window.SDT || {};
   window.SDT.Chests = { rollDrops, dropText, open, rollContents };
-})();
+
+export { G, SDT, UI, render };

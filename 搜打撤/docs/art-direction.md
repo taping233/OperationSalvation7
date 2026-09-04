@@ -39,6 +39,6 @@
 ## 已接入资产
 
 - `assets/title-hero-codename7-anime.png`：标题主视觉，1672×941，SHA-256 `70A6211BD9FE3B7BA5317BF60230BEE4BFFA634FB2B314647DC9E281D7D4BD36`。明确二维日系动画线稿与赛璐璐明暗，沿用灾后校园搜索员世界观；用于 `index.html` 的 `#title` 背景。旧 `title-hero-codename7-v2.png` 与 `title-cover-codename7.png` 已同步覆盖为同一成品，避免遗留旧写实/烛火奇幻画面。
-- `assets/brand-mark-codename7.png`：确定性工业战术“7”位图标识，256×256、SHA-256 `0E5C9813F04A022F401B5175696A3CA5D590ED7B1120D7250055774141D5BE74`；用作网页 PNG favicon，并由 `desktop/make-icon.ps1` 将同一 PNG 数据封装为 `desktop/app/icon.ico`。ICO SHA-256 `BCBC0874E039113B8275634C0C3A21C42818CDB8BC48124ACB931028529E12EF`。
+- `assets/brand-mark-codename7.png`：确定性工业战术“7”位图标识，256×256；用作网页 PNG favicon，并由 `desktop/make-icon.ps1` 将同一 PNG 数据封装为唯一桌面外壳的 `desktop-app/app.ico`。
 
 环境资产第二次独立生成请求因网络错误未产出，未引入外部或版权素材。

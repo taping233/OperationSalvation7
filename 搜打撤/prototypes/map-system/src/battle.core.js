@@ -1,3 +1,9 @@
+/* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
+const SDT = window.SDT;
+const UI = window.SDT.UI;
+import { esc } from './shared.js';
+import { render } from './battle.view.js';
+import { escAttr } from './shared.js';
 /* battle.core.js —— 战斗逻辑：牌库/出牌结算/词条时点/回合流转（渲染在 battle.view.js） */
 /* ============================================================
  * 搜打撤 v0.24 —— M1 两类战斗（多敌人 + 拖拽选目标 + BOSS 词缀 + 词条时点体系）
@@ -24,6 +30,9 @@
   let delayed = [];          // 「回合开始时」延迟效果 [{text, cardName, repeat}]（repeat=装备每回合触发）
   let noDrawNext = false;    // 「下回合无法抽牌」标记（下个回合开始消耗掉）
   let viewingGrave = false;  // 正在查看墓地（BOSS 战专属：消耗过的牌 + 类型统计）
+  let floats = [];           // 待展示的飘字/受击特效 [{unit:'self'|敌人idx, text, cls}]（渲染后由 battle.view 消费）
+  const KILL_CHEER = ['👍', '✌️', '✨'];   // 击杀后自己头上的随机欢呼贴纸
+  let dreadShown = false;    // BOSS 登场竖线阴影每场只演一次
   let spellCost1 = false;    // 「本局对战内所有法术 1 费」（银河之旅，战斗内永久）
   let selPool = [], selShaN = 0, sel = new Set(), lastDeckSel = [];
 
@@ -171,15 +180,12 @@
   // 「本局对战内」持续效果：注册并结算其中已支持的部分（增益本身即战斗内长期有效）
   function registerBattle(card, clause, target) {
     G.log(`[[icon:question]] <b>本局对战内</b>：${esc(clause)}（整场战斗有效，离开战斗失效）`, 'ok');
-    let did = true;
     const inner = clause.replace(/^(本局对战内|本场对战|本场战斗)[中内]?[：:，,]?\s*/, '');
     if (/所有法术[^。]*?1\s*费/.test(inner)) {
       spellCost1 = true;
       G.log('[[icon:sparkles]] 持续规则：你的所有法术均按 <b>1</b> 费打出', 'ok');
     }
-    const res = applyTextEffects(card, inner, target);
-    if (!did || !res.did) { /* 增益部分照常结算；没有可结算部分时保持注册文案 */ }
-    return did || res.did;
+    return applyTextEffects(card, inner, target).did;
   }
 
   // 「被注能时」条件效果：作为注能牺牲品被消耗时触发（未被使用，主效果不结算）
@@ -294,7 +300,7 @@
       healed = true;
       if ((pstat.status.healban || 0) > 0) {
         G.log(`[[icon:heart]] 禁疗中：回复 ${hm[1]} 点生命无效（还剩 ${pstat.status.healban} 回合）`, 'warn');
-      } else G.heal(+hm[1]);
+      } else { G.heal(+hm[1]); floats.push({ unit: 'self', text: '💚', cls: 'stk', warm: true }); }
       did = true;
     }
     const am = desc.match(/获得\s*(\d+)\s*点?\s*护甲/) || desc.match(/\+\s*(\d+)\s*甲/);
@@ -324,7 +330,7 @@
         G.log(`[[icon:cards]] <b>${esc(card.name)}</b>：抽了 ${got} 张牌`, 'sys');
       } else {
         grantSha(n);
-        G.log(`[[icon:cards]] <b>${esc(card.name)}</b>：获得 ${n} 张【杀】（普通战斗抽牌效果改为获得杀）`, 'sys');
+        G.log(`[[icon:cards]] <b>${esc(card.name)}</b>：获得 ${n} 张【初始攻击】（普通战斗抽牌效果改为获得初始攻击）`, 'sys');
       }
       did = true; drawn = true;
     }
@@ -433,7 +439,7 @@
       const n = +(card.heal || 0);
       if ((pstat.status.healban || 0) > 0) {
         G.log(`[[icon:heart]] 禁疗中：回复 ${n} 点生命无效（还剩 ${pstat.status.healban} 回合）`, 'warn');
-      } else G.heal(n);
+      } else { G.heal(n); floats.push({ unit: 'self', text: '💚', cls: 'stk', warm: true }); }
       did = true;
     }
     if (!res.armored && +(card.armor || 0) > 0) {
@@ -449,7 +455,7 @@
         G.log(`[[icon:cards]] <b>${esc(card.name)}</b>：抽了 ${got} 张牌`, 'sys');
       } else {
         grantSha(n);
-        G.log(`[[icon:cards]] <b>${esc(card.name)}</b>：获得 ${n} 张【杀】（普通战斗抽牌效果改为获得杀）`, 'sys');
+        G.log(`[[icon:cards]] <b>${esc(card.name)}</b>：获得 ${n} 张【初始攻击】（普通战斗抽牌效果改为获得初始攻击）`, 'sys');
       }
       did = true;
     }
@@ -490,17 +496,18 @@
 
   function beginNormal() {
     drawPile = []; discard = []; granted = []; played = []; consumed = []; grave = [];
-    hand = G.ownedCards.map(o => o.uid);
+    // 道具/资源/事件卡默认不进手牌（v0.32：手牌只放可直接打出的战斗卡）
+    hand = G.ownedCards.filter(o => !['道具', '资源', '事件'].includes(o.card.type)).map(o => o.uid);
     maxEnergy = R().battleEnergy;
     energy = maxEnergy;
     turn = 1; busy = false;
     pdef = { shield: 0, armor: 0, guard: false };
     pstat = Combat.ensureStatus({ hp: G.hp });
-    infusing = null; discovering = null; discoverQueue = []; pendingTarget = null;
-    delayed = []; noDrawNext = false; spellCost1 = false; viewingGrave = false;
+    infusing = null; discovering = null; discoverQueue = []; pendingTarget = null; floats = [];
+    delayed = []; noDrawNext = false; spellCost1 = false; viewingGrave = false; dreadShown = false;
     G.state = 'modal';
     if (alive().length > 1) G.log(`[[icon:question]] 以一敌多：伤害类卡牌需<b>拖到目标身上</b>打出；群体伤害直接点击生效`, 'sys');
-    G.log(`[[icon:cards]] 普通战斗无需抽牌：随身 <b>${hand.length}</b> 张卡全部可直接打出 · 每回合固定 <b>${maxEnergy}</b> 费`, 'sys');
+    G.log(`[[icon:cards]] 普通战斗无需抽牌：随身 <b>${hand.length}</b> 张战斗卡直接可打出（道具/资源/事件卡不在手牌中） · 每回合固定 <b>${maxEnergy}</b> 费`, 'sys');
     render();
   }
 
@@ -508,8 +515,8 @@
   function renderSelect() {
     const need = R().bossDeckSize;
     // 无法打出的卡不可编入：道具（只能在普通战斗使用）/ 资源与事件（无法在对战中打出）
-    selPool = G.ownedCards.filter(o => !['道具', '资源', '事件'].includes(o.card.type) && o.card.name !== '杀');
-    const shas = G.ownedCards.filter(o => o.card.name === '杀');
+    selPool = G.ownedCards.filter(o => !['道具', '资源', '事件'].includes(o.card.type) && o.card.name !== '初始攻击');
+    const shas = G.ownedCards.filter(o => o.card.name === '初始攻击');
     selShaN = Math.min(shas.length, R().starterSha);
     sel = new Set(lastDeckSel.filter(u => selPool.some(o => o.uid === u)));
     const cap = Math.min(need, selPool.length);
@@ -523,11 +530,11 @@
       : '<p class="ov-empty">背包里没有可编入的非道具卡牌……</p>';
     const boss = foes[0];
     UI.showOverlay('[[icon:demon]] BOSS战 · 编组牌库', `
-      <p class="ov-stats">从背包选 <b>${need}</b> 张<b>非道具</b>卡牌，与 <b>${selShaN}</b> 张杀组成牌库 ·
+      <p class="ov-stats">从背包选 <b>${need}</b> 张<b>非道具</b>卡牌，与 <b>${selShaN}</b> 张初始攻击组成牌库 ·
         开局抽 ${R().battleStartDraw} 张 · 每回合开始抽 ${R().battleTurnDraw} 张 · 每回合固定 ${R().battleEnergy} 费</p>
       ${boss.affix ? `<p class="ov-note">[[icon:question]] <b>${esc(boss.name)}</b> 词缀【${AFFIX_META[boss.affix].icon} ${AFFIX_META[boss.affix].name}】${esc(AFFIX_META[boss.affix].desc)}</p>` : ''}
-      <p class="ov-note">[[icon:lock]] 固定编入：杀 ×${selShaN}${shas.length < R().starterSha ? `（杀不足 ${R().starterSha} 张——部分进消耗口袋了）` : ''}
-        · [[icon:cross]] 道具 / 资源 / 事件卡与杀不可选入（资源与事件卡无法在对战中打出，道具卡只能在普通战斗中使用）</p>
+      <p class="ov-note">[[icon:lock]] 固定编入：初始攻击 ×${selShaN}${shas.length < R().starterSha ? `（初始攻击不足 ${R().starterSha} 张——部分进消耗口袋了）` : ''}
+        · [[icon:cross]] 道具 / 资源 / 事件卡与初始攻击不可选入（资源与事件卡无法在对战中打出，道具卡只能在普通战斗中使用）</p>
       <h3 class="set-h">可选卡牌 <span class="bs-count" id="bsCount"></span></h3>
       <div class="bt-hand">${cardsHTML}</div>
       <div class="ov-btns">
@@ -536,7 +543,7 @@
       </div>`, true);
     UI.act('bossSel', (d) => toggleSel(d.uid));
     UI.act('bossGo', beginBoss);
-    UI.act('bossCancel', () => { G.log('[[icon:runner]] 你放下了挑战，BOSS 仍在祭坛等待', 'sys'); finish(null); });
+    UI.act('bossCancel', () => { G.log('[[icon:runner]] 你放下了挑战，首脑仍在污染核心深处盘踞', 'sys'); finish(null); });
     refreshSelBar();
   }
 
@@ -564,7 +571,7 @@
   function beginBoss() {
     const need = Math.min(R().bossDeckSize, selPool.length);
     if (sel.size < need) return;
-    const shas = G.ownedCards.filter(o => o.card.name === '杀').slice(0, R().starterSha).map(o => o.uid);
+    const shas = G.ownedCards.filter(o => o.card.name === '初始攻击').slice(0, R().starterSha).map(o => o.uid);
     lastDeckSel = [...sel];
     drawPile = shuffle([...sel].concat(shas));
     hand = []; discard = []; granted = []; played = []; consumed = []; grave = [];
@@ -573,10 +580,10 @@
     turn = 1; busy = false;
     pdef = { shield: 0, armor: 0, guard: false };
     pstat = Combat.ensureStatus({ hp: G.hp });
-    infusing = null; discovering = null; discoverQueue = []; pendingTarget = null;
-    delayed = []; noDrawNext = false; spellCost1 = false; viewingGrave = false;
+    infusing = null; discovering = null; discoverQueue = []; pendingTarget = null; floats = [];
+    delayed = []; noDrawNext = false; spellCost1 = false; viewingGrave = false; dreadShown = false;
     G.state = 'modal';
-    G.log(`[[icon:cards]] 牌库编成：自选 ${sel.size} 张非道具卡 + 杀 ×${shas.length} = <b>${drawPile.length}</b> 张 ·
+    G.log(`[[icon:cards]] 牌库编成：自选 ${sel.size} 张非道具卡 + 初始攻击 ×${shas.length} = <b>${drawPile.length}</b> 张 ·
       开局抽 ${R().battleStartDraw} · 每回合开始抽 ${R().battleTurnDraw} · 每回合固定 <b>${maxEnergy}</b> 费`, 'sys');
     drawCards(R().battleStartDraw);
     render();
@@ -645,10 +652,23 @@
     execPlay(uid, card, [], target);
   }
 
+  // v0.32 堆叠手牌：点击的是一叠同名卡的代表性 uid——选中/取消该叠中的一张
   function toggleInfusePick(uid) {
     if (!infusing || uid === infusing.uid) return;
-    if (infusing.picked.has(uid)) infusing.picked.delete(uid);
-    else if (infusing.picked.size < infusing.need) infusing.picked.add(uid);
+    const entry = findCard(uid);
+    if (!entry) return;
+    const groupUids = hand.filter(h => {
+      if (h === infusing.uid) return false;
+      const o = findCard(h);
+      return o && o.card.name === entry.card.name;
+    });
+    const pickedInGroup = groupUids.filter(u => infusing.picked.has(u));
+    if (pickedInGroup.length) {
+      infusing.picked.delete(pickedInGroup[pickedInGroup.length - 1]);
+    } else {
+      const free = groupUids.find(u => !infusing.picked.has(u));
+      if (free && infusing.picked.size < infusing.need) infusing.picked.add(free);
+    }
     render();
   }
   function cancelInfuse() { infusing = null; render(); }
@@ -708,21 +728,27 @@
     return foe.affix === 'aegis' && turn % 2 === 0 && (foe.status.abreak || 0) <= 0;
   }
 
+  // 敌人数组下标（飘字特效用）：按对象引用找 idx
+  function foeIdx(foe) { return foes.indexOf(foe); }
+
   // 对单个敌人结算一次伤害（含潜行/免伤/死亡处理），返回实际伤害
   function hitFoe(foe, card, amount, type, seg) {
     if (foe.dead) return 0;
     if (aegisBlocked(foe)) {
       SDT.Sound.sfx('parry');
+      floats.push({ unit: foeIdx(foe), text: '免伤', cls: 'block' });
       G.log(`[[icon:crystal]] ${seg || ''}<b>${esc(foe.name)}</b> 的元素庇幕展开：伤害被完全减免！（破甲可击碎）`, 'warn');
       return 0;
     }
     const r = Combat.dealDamage({ atk: G.atk, spellPower: G.spellPower || 0 }, foe, amount, type);
     if (r.stealthed) {
       SDT.Sound.sfx('parry');
+      floats.push({ unit: foeIdx(foe), text: '未命中', cls: 'block' });
       G.log(`[[icon:runner]] ${seg || ''}<b>${esc(foe.name)}</b> 处于<b>潜行</b>中：无法成为被攻击对象！`, 'warn');
       return 0;
     }
     SDT.Sound.sfx('hit');
+    if (r.dealt > 0) floats.push({ unit: foeIdx(foe), text: '-' + r.dealt, cls: 'dmg' });
     G.log(`[[icon:play]] <b>${esc(card.name)}</b>${seg || ''} → ${esc(foe.name)}：造成 <b>${r.dealt}</b> 点${Combat.TYPE_NAME[type]}` +
       (r.log.length ? `（${r.log.join('，')}）` : ''), 'sys');
     // 造成伤害会破除自己的潜行（不造成伤害便不会破除）
@@ -732,6 +758,8 @@
     if (foe.hp <= 0 && !foe.dead) {
       foe.dead = true;
       G.log(`[[icon:skull]] <b>${esc(foe.name)}</b> 被击倒！（剩 ${alive().length} 个敌人）`, 'ok');
+      floats.push({ unit: foeIdx(foe), text: '💥', cls: 'stk' });
+      floats.push({ unit: 'self', text: KILL_CHEER[Math.floor(Math.random() * KILL_CHEER.length)], cls: 'stk stk-late' });
     }
     return r.dealt;
   }
@@ -777,8 +805,9 @@
     const r = Combat.dealDamage({ atk: foe.atk }, playerRef, 0, Combat.TYPES.ATTACK);
     G.hp = Math.max(0, playerRef.hp);
     SDT.Sound.sfx('hurt');
+    floats.push({ unit: 'self', text: '-' + r.dealt, cls: 'hurt' });
+    if (r.dealt > 0) floats.push({ unit: 'self', text: '💢', cls: 'stk stk-late' });
     G.log(`[[icon:demon]] <b>${esc(foe.name)}</b> 反击：你受到 <b>${r.dealt}</b> 点攻击伤害（${G.hp}/${G.maxHp}）`, 'warn');
-    if (SDT.FX) SDT.FX.shake(6, 0.35);
     return r.dealt;
   }
 
@@ -801,8 +830,8 @@
     const pr = Combat.tickPoison(pref);
     G.hp = Math.max(0, pref.hp);
     if (pr) {
+      floats.push({ unit: 'self', text: '-' + pr.dealt, cls: 'hurt' });
       G.log(`[[icon:skull]] 中毒结算：你受到 <b>${pr.dealt}</b> 点固定伤害（${G.hp}/${G.maxHp}）`, 'warn');
-      if (SDT.FX) SDT.FX.shake(5, 0.3);
     }
     // 计时状态不在玩家阶段递减——共享回合钟统一在每回合结束（afterEnemies 末尾）递减
     render();
@@ -845,8 +874,14 @@
     foes.forEach(foe => {
       if (foe.dead) return;
       const er = Combat.tickPoison(foe);
-      if (er) G.log(`[[icon:skull]] 中毒结算：<b>${esc(foe.name)}</b> 受到 <b>${er.dealt}</b> 点固定伤害（${Math.max(0, foe.hp)}/${foe.maxHp}）`, 'sys');
-      if (foe.hp <= 0 && !foe.dead) { foe.dead = true; G.log(`[[icon:skull]] <b>${esc(foe.name)}</b> 毒发倒地！（剩 ${alive().length} 个敌人）`, 'ok'); }
+      if (er) {
+        floats.push({ unit: foes.indexOf(foe), text: '-' + er.dealt, cls: 'dmg' });
+        G.log(`[[icon:skull]] 中毒结算：<b>${esc(foe.name)}</b> 受到 <b>${er.dealt}</b> 点固定伤害（${Math.max(0, foe.hp)}/${foe.maxHp}）`, 'sys');
+      }
+      if (foe.hp <= 0 && !foe.dead) { foe.dead = true;
+        G.log(`[[icon:skull]] <b>${esc(foe.name)}</b> 毒发倒地！（剩 ${alive().length} 个敌人）`, 'ok');
+        floats.push({ unit: foes.indexOf(foe), text: '💥', cls: 'stk' });
+        floats.push({ unit: 'self', text: KILL_CHEER[Math.floor(Math.random() * KILL_CHEER.length)], cls: 'stk stk-late' }); }
     });
     if (!alive().length) { busy = false; finish(true); return; }
     // 军威（将军）：回合结束时攻击力 +2
@@ -874,7 +909,7 @@
         G.log(`[[icon:sword]] <b>剑仙形态</b>：额外抽了 ${got} 张牌`, 'ok');
       } else {
         grantSha(1);
-        G.log(`[[icon:sword]] <b>剑仙形态</b>：额外获得 1 张【杀】（普通战斗抽牌效果改为获得杀）`, 'ok');
+        G.log(`[[icon:sword]] <b>剑仙形态</b>：额外获得 1 张【初始攻击】（普通战斗抽牌效果改为获得初始攻击）`, 'ok');
       }
     }
     // —— 新回合开始：「回合开始时」延迟段结算 ——
@@ -910,8 +945,8 @@
     played = []; consumed = [];
     drawPile = []; hand = []; discard = []; granted = []; grave = [];
     sel = new Set();
-    infusing = null; discovering = null; discoverQueue = []; pendingTarget = null;
-    delayed = []; noDrawNext = false; spellCost1 = false; viewingGrave = false;
+    infusing = null; discovering = null; discoverQueue = []; pendingTarget = null; floats = [];
+    delayed = []; noDrawNext = false; spellCost1 = false; viewingGrave = false; dreadShown = false;
     G.state = 'idle';
     G.battleActive = false;
     opts.foeNames = foes.map(f => f.name);
@@ -948,3 +983,14 @@
     UI.refresh(G);
   }
 
+export { AFFIX_META, Combat, G, R, aegisBlocked, busy, cancelInfuse, confirmInfuse, curseChips, discard, discovering, drawPile, dreadShown, effCostOf, endTurn, energy, findCard, flee, floats, foes, grave, hand, infuseOf, infusing, maxEnergy, mode, opts, pdef, pendingHint, pendingTarget, pickDiscover, pileTip, play, pstat, refillDrawPile, renderGrave, start, targetSide, toggleInfusePick, turn, unplayableReason, viewingGrave };
+const _set_viewingGrave = (v) => { viewingGrave = v; };
+export { _set_viewingGrave };
+const _set_pendingTarget = (v) => { pendingTarget = v; };
+export { _set_pendingTarget };
+const _set_pendingHint = (v) => { pendingHint = v; };
+export { _set_pendingHint };
+const _set_dreadShown = (v) => { dreadShown = v; };
+export { _set_dreadShown };
+const _set_floats = (v) => { floats = v; };
+export { _set_floats };

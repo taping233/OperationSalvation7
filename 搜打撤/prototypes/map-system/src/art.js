@@ -1,6 +1,7 @@
-/* 搜打撤 v0.30 — bitmap-only art adapter. */
-(function () {
+
   'use strict';
+import { BUILD_VERSION, assetUrl } from './asset-url.js';
+
   const SDT = window.SDT = window.SDT || {};
   const ROOT = 'assets/';
   const FALLBACK = 'ui/icons/question.png';
@@ -11,6 +12,22 @@
   const CLASS_NAMES = Object.freeze(Object.fromEntries(Object.entries(CLASS_IDS).map(([name, id]) => [id, name])));
   const MONSTER_IDS = new Set(['infantry','archer','bandit','cavalry','orc_jav','orc_axe','wolf_rider','fire_el','water_el','grass_el','dragon','boss_general','boss_orc','boss_elem']);
   const CARD_FAMILIES = new Set(['hero','event','martial-ranged','martial-melee','healing','spell','equipment-armor','equipment-weapon','equipment-utility','resource-key','resource-valuables','resource-material','consumable','unknown']);
+  // 资源卡专属立绘（assets/cards/resources/<key>.png），按卡名精确匹配；
+  // 未命中时回退到 resource-key/valuables/material 家族图
+  const RESOURCE_ART = Object.freeze({
+    '制式口粮': 'ration-std',
+    '口粮': 'ration',
+    '双份口粮': 'ration-double',
+    '钥匙': 'key',
+    '一串钥匙': 'keys-bunch',
+    '一把钥匙': 'key-one',
+    '木材': 'wood',
+    '大量木材': 'wood-lots',
+    '一捆木材': 'wood-bundle',
+    '石榴石弹珠': 'garnet-marble',
+    '经济卡包': 'econpack',
+    '钻石': 'diamond',
+  });
   const missingKeys = new Set();
   const esc = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 
@@ -22,7 +39,7 @@
     }
   }
   function image(src, cls, alt, key, style) {
-    return `<img class="${esc(cls)}" src="${ROOT}${esc(src)}" alt="${esc(alt)}" data-asset-key="${esc(key)}"${style ? ` style="${esc(style)}"` : ''} draggable="false" loading="eager">`;
+    return `<img class="${esc(cls)}" src="${assetUrl(ROOT + src)}" alt="${esc(alt)}" data-asset-key="${esc(key)}"${style ? ` style="${esc(style)}"` : ''} draggable="false" loading="eager">`;
   }
   function fallback(kind, key, alt) {
     reportMissing(kind, key);
@@ -54,11 +71,39 @@
     return '';
   }
 
+  // ---------- 战场立绘抠图：离线预烘，运行时只做路径映射 ----------
+  // 预烘素材在 assets/portraits/cut/{classes,enemies}/（与源图同名），
+  // 由 tools/bake-cutouts.js 生成（等比降采样 + 洪泛去纸色背景）；
+  // 素材更新后重跑一次脚本即可。运行时零图像处理，预烘缺失时回退原图。
+  const cutoutSrcFor = (src) => {
+    // img.src 形如 "assets/portraits/<组>/<名>.png"（image() 会补 assets/ 前缀）
+    const m = /^assets\/portraits\/(classes|enemies)\/([^/]+)$/.exec(String(src || ''));
+    return m ? `assets/portraits/cut/${m[1]}/${m[2]}` : null;
+  };
+  { // 启动后空闲预解码全套预烘图：战斗首帧换图零延迟
+    const precache = () => {
+      const groups = { classes: Object.values(CLASS_IDS), enemies: Array.from(MONSTER_IDS) };
+      Object.keys(groups).forEach(group => groups[group].forEach(id => {
+        const im = new Image();
+        im.src = `assets/portraits/cut/${group}/${id}.png`;
+      }));
+    };
+    if (typeof requestIdleCallback === 'function') requestIdleCallback(precache, { timeout: 8000 });
+    else setTimeout(precache, 1500);
+  }
+
   SDT.Art = {
     classArt(className) {
       const id = resolveClass(className);
       if (!id) return fallback('class', className, className || '未知职业');
       return image(`portraits/classes/${id}.png`, 'art-portrait', CLASS_NAMES[id], `class-${id}`);
+    },
+    // 角色选择页大幅立绘：全身像 portraits/full/<id>.png（1038×1516 全身立绘烘焙版，688×1012）；
+    // 缺失时回退半身像 portraits/classes/<id>.png
+    classFullArt(className) {
+      const id = resolveClass(className);
+      if (!id) return image('cards/hero.png', 'art-full', className || '未知角色', `class-full-${className || 'unknown'}`);
+      return image(`portraits/full/${id}.png`, 'art-full', CLASS_NAMES[id], `class-full-${id}`);
     },
     monsterArt(id) {
       if (!MONSTER_IDS.has(id)) return fallback('enemy', id, id || '未知敌人');
@@ -68,6 +113,14 @@
     cardIcon(card) {
       const family = cardFamily(card);
       if (!CARD_FAMILIES.has(family)) return fallback('card', family, card && card.name || '未知卡牌');
+      const resourceKey = family === 'resource-key' || family === 'resource-valuables' || family === 'resource-material'
+        ? RESOURCE_ART[String(card && card.name || '')] : '';
+      if (resourceKey) return image(`cards/resources/${resourceKey}.png`, 'art-card-image', card && card.name || resourceKey, `card-${resourceKey}`, 'width:100%;height:100%;object-fit:cover;display:block');
+      // 英雄卡：按职业取专属立绘（assets/cards/hero-<职业id>.png），缺失回退通用 hero.png
+      if (family === 'hero') {
+        const clsId = resolveClass(card && card.cls);
+        if (clsId) return image(`cards/hero-${clsId}.png`, 'art-card-image', card && card.name || clsId, `card-hero-${clsId}`, 'width:100%;height:100%;object-fit:cover;display:block');
+      }
       return image(`cards/${family}.png`, 'art-card-image', card && card.name || family, `card-${family}`, 'width:100%;height:100%;object-fit:cover;display:block');
     },
     gateIcon(ready) {
@@ -77,6 +130,20 @@
     el(id, kind, cls) {
       return `<span class="art ${esc(cls || '')}">${kind === 'class' ? this.classArt(id) : this.monsterArt(id)}</span>`;
     },
+    // ---------- 战场立绘：直接换用预烘抠图（缺失时回退原图，零主线程开销） ----------
+    cutoutFigures(root) {
+      (root || document).querySelectorAll('.sts-figure img').forEach(img => {
+        const cut = cutoutSrcFor(img.getAttribute('src'));
+        if (!cut || img.dataset.cut === cut) return;
+        img.dataset.cut = cut;
+        const orig = img.getAttribute('src');
+        img.onerror = () => {   // 预烘图缺失/损坏：回退原图
+          img.onerror = null;
+          if (img.getAttribute('src') === cut) img.src = orig;
+        };
+        img.src = cut;
+      });
+    },
     cardFamily,
     manifest: Object.freeze({
       classes: Object.freeze(Object.values(CLASS_IDS).map(id => `portraits/classes/${id}.png`)),
@@ -85,4 +152,5 @@
     }),
     missingKeys
   };
-})();
+
+export { ROOT, SDT, esc, missingKeys, reportMissing };

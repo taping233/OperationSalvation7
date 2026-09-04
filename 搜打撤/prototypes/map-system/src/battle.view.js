@@ -1,3 +1,10 @@
+/* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
+const SDT = window.SDT;
+const UI = window.SDT.UI;
+import { esc } from './shared.js';
+import { G, pendingHint, pendingTarget, viewingGrave } from './battle.core.js';
+import { escAttr } from './shared.js';
+import { AFFIX_META, Combat, R, aegisBlocked, busy, dreadShown, floats, cancelInfuse, confirmInfuse, curseChips, discard, discovering, drawPile, effCostOf, endTurn, energy, findCard, flee, foes, grave, hand, infuseOf, infusing, maxEnergy, mode, opts, pdef, pickDiscover, pileTip, play, pstat, refillDrawPile, renderGrave, start, targetSide, toggleInfusePick, turn, unplayableReason, _set_viewingGrave, _set_pendingTarget, _set_pendingHint, _set_dreadShown, _set_floats } from './battle.core.js';
 /* battle.view.js —— 战斗渲染：战场 DOM/手牌/指向施法箭头/拖拽预览 */
   // ---------- 渲染 ----------
   function render() {
@@ -18,22 +25,36 @@
     }
     const cards = hand.map(findCard).filter(Boolean);
     const infusingNow = !!infusing;
-    const handHTML = cards.length
-      ? cards.map(o => {
-          const isSelf = infusingNow && o.uid === infusing.uid;
-          const picked = infusingNow && infusing.picked.has(o.uid);
-          const targeted = !infusingNow && pendingTarget && pendingTarget.uid === o.uid;
-          const effCost = effCostOf(o.card);
-          const blocked = infusingNow ? null : unplayableReason(o.card);   // 无法使用的卡：虚化禁用
-          const side = (!infusingNow && !blocked) ? targetSide(o.card) : null;
+    // —— 同名卡堆叠（v0.32 杀戮尖塔式手牌）：同名同描述的卡只占一个位置，显示 ×N ——
+    // 注能中：注能主卡单独一块展示，其同名燃料照常成组（点击组 = 消耗组内一张）
+    const groups = [];
+    const pushGroup = (o) => {
+      const g = groups.find(g => g.card.name === o.card.name && g.card.desc === o.card.desc);
+      if (g) g.uids.push(o.uid); else groups.push({ card: o.card, uids: [o.uid], self: false });
+    };
+    if (infusingNow) {
+      cards.forEach(o => { if (o.uid !== infusing.uid) pushGroup(o); });
+      const infEntry = findCard(infusing.uid);
+      if (infEntry) groups.push({ card: infEntry.card, uids: [infusing.uid], self: true });
+    } else cards.forEach(pushGroup);
+    const N = groups.length;
+    const handHTML = N
+      ? groups.map((g, i) => {
+          const uid = g.uids[0];
+          const isSelf = infusingNow && g.self;
+          const pickedN = infusingNow ? g.uids.filter(u => infusing.picked.has(u)).length : 0;
+          const targeted = !infusingNow && pendingTarget && pendingTarget.uid === uid;
+          const effCost = effCostOf(g.card);
+          const blocked = infusingNow ? null : unplayableReason(g.card);   // 无法使用的卡：虚化禁用
+          const side = (!infusingNow && !blocked) ? targetSide(g.card) : null;
           let cls = '';
-          if (infusingNow) cls = isSelf ? ' infuse-self' : (picked ? ' sel' : '');
+          if (infusingNow) cls = isSelf ? ' infuse-self' : (pickedN ? ' sel' : '');
           else if (blocked) cls = ' off';
           else if (targeted) cls = ' targeting';
           else if ((effCost > energy || busy)) cls = ' off';
-          const costTip = effCost !== o.card.cost ? `（[[icon:sparkles]] 宇宙形态：按 1 费打出）` : '';
+          const costTip = effCost !== g.card.cost ? `（[[icon:sparkles]] 宇宙形态：按 1 费打出）` : '';
           const tip = infusingNow
-            ? (isSelf ? '正在注能的卡牌' : '点击选择消耗（注能）')
+            ? (isSelf ? '正在注能的卡牌' : `点击选择消耗（注能）${g.uids.length > 1 ? `· 本叠还有 ${g.uids.length} 张` : ''}`)
             : blocked
               ? `[[icon:cross]] 无法打出：${blocked}`
               : side === 'enemy'
@@ -41,13 +62,19 @@
               : side === 'self'
                 ? `费用 ${effCost}${costTip} · 拖到左侧「你」的立绘上（治疗 / 净化 / 护盾）`
                 : `费用 ${effCost}${costTip} · 点击出牌` +
-                  (infuseOf(o.card) > 0 ? ` · 注能(${infuseOf(o.card)})：需先选 ${infuseOf(o.card)} 张手牌消耗` : '');
+                  (infuseOf(g.card) > 0 ? ` · 注能(${infuseOf(g.card)})：需先选 ${infuseOf(g.card)} 张手牌消耗` : '');
           const badge = side === 'enemy' ? '<span class="bt-tt">[[icon:swords]]</span>'
             : side === 'self' ? '<span class="bt-tt">[[icon:heart]]</span>' : '';
-          const costBadge = effCost !== o.card.cost ? '<span class="bt-cost1" title="宇宙形态：所有卡牌 1 费">[[icon:bolt]]1</span>' : '';
-          return `<div class="bt-card${cls}${side ? ' need-target' : ''}" data-act="btPlay" data-uid="${o.uid}"
-            data-aim="${side ? '1' : ''}" data-side="${side || ''}" title="${escAttr(tip)}">
-            ${SDT.Cards.cardHTML(o.card, 'sm')}
+          const costBadge = effCost !== g.card.cost ? '<span class="bt-cost1" title="宇宙形态：所有卡牌 1 费">[[icon:bolt]]1</span>' : '';
+          const cnt = g.uids.length > 1 ? `<span class="bt-count" title="同名卡 ${g.uids.length} 张堆叠为一叠">×${g.uids.length}</span>` : '';
+          // 扇形手牌：越靠边旋转越大（transform-origin 在卡片上方远处形成圆弧）
+          const off = i - (N - 1) / 2;
+          const rot = (off * Math.min(5, 44 / N)).toFixed(2);
+          const ml = i === 0 ? '0' : (N > 9 ? '-34px' : N > 6 ? '-14px' : '0');
+          return `<div class="bt-card${cls}${side ? ' need-target' : ''}" data-act="btPlay" data-uid="${uid}"
+            data-aim="${side ? '1' : ''}" data-side="${side || ''}" style="--rot:${rot}deg;margin-left:${ml}" title="${escAttr(tip)}">
+            ${SDT.Cards.cardHTML(g.card, 'sm')}
+            ${cnt}
             ${badge}
             ${costBadge}
           </div>`;
@@ -57,17 +84,18 @@
           ? '<p class="ov-empty">手牌打空了……下回合开始会再抽 1 张</p>'
           : '<p class="ov-empty">牌库与弃牌堆都空了——只能结束回合硬抗，或撤退</p>'
         : '<p class="ov-empty">没有能出的卡了……（打出过的卡本场不可再用）</p>';
+    const drawPileHTML = mode === 'boss'
+      ? `<span class="bt-pile" title="牌库：${escAttr(pileTip(drawPile))}"><span class="bt-pilecard">${SDT.Cards.cardBackHTML()}</span><b>${drawPile.length}</b></span>` : '';
     const pilesHTML = mode === 'boss' ? `
-        <span class="bt-pile" title="牌库：${escAttr(pileTip(drawPile))}"><span class="bt-pilecard">${SDT.Cards.cardBackHTML()}</span>牌库 <b>${drawPile.length}</b></span>
-        <span class="bt-pile" title="弃牌堆：${escAttr(pileTip(discard))}（牌库抽空后自动洗回）"><span class="bt-pilecard down">${SDT.Cards.cardBackHTML()}</span>[[icon:recycle]] 弃牌 <b>${discard.length}</b></span>
-        <span class="bt-pile clickable" data-act="btGrave" title="墓地：${escAttr(pileTip(grave))}（被消耗的牌 · 不参与洗回 · 点击查看）"><span class="bt-pilecard down">${SDT.Cards.cardBackHTML()}</span>[[icon:skull]] 墓地 <b>${grave.length}</b></span>` : '';
+        <span class="bt-pile" title="弃牌堆：${escAttr(pileTip(discard))}（牌库抽空后自动洗回）"><span class="bt-pilecard down">${SDT.Cards.cardBackHTML()}</span><b>${discard.length}</b></span>
+        <span class="bt-pile clickable" data-act="btGrave" title="墓地：${escAttr(pileTip(grave))}（被消耗的牌 · 不参与洗回 · 点击查看）"><span class="bt-pilecard down">${SDT.Cards.cardBackHTML()}</span>[[icon:skull]] <b>${grave.length}</b></span>` : '';
     const tip = mode === 'boss'
-      ? `开局抽 ${R().battleStartDraw} · 每回合开始抽 ${R().battleTurnDraw} · 弃牌堆抽空后自动洗回 · 墓地（被消耗的牌）不洗回 · 点击「墓地」查看`
-      : '普通战斗无需抽牌 ·「抽 N 张牌」效果改为获得 N 张杀 · 指向卡须拖到目标身上（[[icon:swords]]敌人 · [[icon:heart]]自己）';
+      ? `开局抽 ${R().battleStartDraw} · 每回合开始抽 ${R().battleTurnDraw} · 弃牌堆抽空后自动洗回 · 墓地（被消耗的牌）不洗回`
+      : '普通战斗无需抽牌 ·「抽 N 张牌」效果改为获得 N 张初始攻击 · 指向卡须拖到目标身上（[[icon:swords]]敌人 · [[icon:heart]]自己）';
     const infuseBar = infusingNow ? `
       <div class="bt-infuse">
         [[icon:flask]] <b>注能(${infusing.need})</b>：选择 <b>${infusing.need}</b> 张手牌消耗，才能打出【${esc(infusing.card.name)}】
-        （已选 <b>${infusing.picked.size}/${infusing.need}</b> · 被消耗的牌战后进消耗口袋，可在火堆复原）
+        （已选 <b>${infusing.picked.size}/${infusing.need}</b> · 同名堆叠每点一次消耗一张 · 被消耗的牌战后进消耗口袋，可在火堆复原）
         <button class="mini-btn ok" data-act="btInfuseGo" ${infusing.picked.size !== infusing.need ? 'disabled' : ''}>[[icon:swords]] 发动</button>
         <button class="mini-btn" data-act="btInfuseCancel">[[icon:cross]] 取消</button>
       </div>` : '';
@@ -80,62 +108,65 @@
         ${pendingHint ? `<span class="bt-hint-warn">[[icon:question]] ${pendingHint}</span>` : ''}
         <button class="mini-btn" data-act="btPickCancel">[[icon:cross]] 取消</button>
       </div>` : '';
-    // —— 我方立绘（治疗/净化/护盾类卡牌的拖放目标） ——
+    // —— 我方单位（左下站立；治疗/净化/护盾类卡牌的拖放目标） ——
     const selfPct = Math.max(0, G.hp / G.maxHp * 100);
     const selfLock = pendingTarget && lockSide === 'self';
     const selfHTML = `
-      <div class="bt-foe bt-self${selfLock ? ' can-target' : ''}" id="btSelf"
+      <div class="sts-unit sts-me${selfLock ? ' can-target' : ''}" id="btSelf"
         title="你自己——治疗 / 净化 / 护盾 / 格挡类卡牌拖到这里打出">
-        <span class="bt-self-tag">你</span>
-        <div class="bt-fportrait">${G.myClass && SDT.Art.has(G.myClass) ? SDT.Art.classArt(G.myClass) : SDT.Icons.img('helmet')}</div>
-        <div class="bt-finfo">
-          <b>${esc(G.myClass || '流放者')}</b>
-          <div class="bt-hpwrap"><i style="width:${selfPct.toFixed(1)}%"></i><span>${Math.max(0, G.hp)}/${G.maxHp}</span></div>
-          <span class="bt-tags">[[icon:swords]] ${G.atk}${pdef.shield ? ' · [[icon:shield]] 盾 ' + pdef.shield : ''}${pdef.armor ? ' · [[icon:plate]] 甲 ' + pdef.armor : ''}${pdef.guard ? ' · 格挡中' : ''}</span>
+        <div class="sts-figure">${G.myClass && SDT.Art.has(G.myClass) ? SDT.Art.classArt(G.myClass) : SDT.Icons.img('helmet')}</div>
+        <div class="sts-nameplate">
+          <b>${esc(G.myClass || '旅人')}</b><span class="sts-you">你</span>
+          <div class="bt-hpwrap sts-hp"><i style="width:${selfPct.toFixed(1)}%"></i><span>${Math.max(0, G.hp)}/${G.maxHp}</span></div>
+          <div class="sts-stats">[[icon:swords]] ${G.atk}${pdef.shield ? ' · [[icon:shield]] 盾 ' + pdef.shield : ''}${pdef.armor ? ' · [[icon:plate]] 甲 ' + pdef.armor : ''}${pdef.guard ? ' · 格挡中' : ''}</div>
+          ${curseChips(pstat.status) ? `<div class="sts-chips">${curseChips(pstat.status)}</div>` : ''}
         </div>
       </div>`;
-    // —— 敌人区（多敌人横排；词缀角标；免伤高亮） ——
+    // —— 敌方单位（右下站立横排；意图气泡在头顶；词缀角标；免伤高亮） ——
     const foesHTML = foes.map((f, idx) => {
       const aff = f.affix && AFFIX_META[f.affix];
       const immune = aegisBlocked(f);
-      return `<div class="bt-foe${opts.isBoss || f.affix ? ' bt-boss' : ''}${f.dead ? ' dead' : ''}${immune ? ' aegis' : ''}${pendingTarget && lockSide === 'enemy' && !f.dead ? ' can-target' : ''}" data-foe-id="${escAttr(f.id || f.name)}"
+      return `<div class="sts-unit sts-foe bt-foe${opts.isBoss || f.affix ? ' is-boss' : ''}${f.dead ? ' dead' : ''}${immune ? ' aegis' : ''}${pendingTarget && lockSide === 'enemy' && !f.dead ? ' can-target' : ''}" data-foe-id="${escAttr(f.id || f.name)}"
           data-eidx="${idx}" title="${aff ? escAttr(aff.name + '：' + aff.desc) : ''}">
-          <div class="bt-fportrait">${f.id && SDT.Art.has(f.id) ? SDT.Art.monsterArt(f.id) : SDT.Icons.img('slime')}</div>
-          <div class="bt-finfo">
+          ${!f.dead && f.intent ? `<div class="sts-intent" title="下一回合预告">${f.intent.icon} ${esc(f.intent.label)}${f.intent.damage ? ` · ${f.intent.damage}` : ''}</div>` : ''}
+          <div class="sts-figure">${f.id && SDT.Art.has(f.id) ? SDT.Art.monsterArt(f.id) : SDT.Icons.img('slime')}</div>
+          <div class="sts-nameplate">
             <b>${esc(f.name)}</b>${f.dead ? ' <span class="bt-deadmark">[[icon:cross]]</span>' : ''}
             ${aff ? `<span class="bt-affix" title="${escAttr(aff.desc)}">${aff.icon} ${aff.name}</span>` : ''}
-          ${!f.dead && f.intent ? `<span class="bt-intent" data-intent="${escAttr(f.intent.kind)}" title="下一回合预告">${f.intent.icon} ${esc(f.intent.label)}${f.intent.damage ? ` · ${f.intent.damage}` : ''}</span>` : ''}
-          <div class="bt-hpwrap"><i style="width:${Math.max(0, f.hp / f.maxHp * 100).toFixed(1)}%"></i><span>${Math.max(0, f.hp)}/${f.maxHp}</span></div>
-          <span class="bt-tags">[[icon:swords]] ${f.atk}${f.affix === 'frenzy' ? ' ×2' : ''}${immune ? ' · [[icon:crystal]] 庇幕免伤中' : ''}${curseChips(f.status) ? ' · ' + curseChips(f.status) : ''}</span>
-        </div>
-      </div>`;
+            <div class="bt-hpwrap sts-hp"><i style="width:${Math.max(0, f.hp / f.maxHp * 100).toFixed(1)}%"></i><span>${Math.max(0, f.hp)}/${f.maxHp}</span></div>
+            <div class="sts-stats">[[icon:swords]] ${f.atk}${f.affix === 'frenzy' ? ' ×2' : ''}${immune ? ' · [[icon:crystal]] 庇幕免伤中' : ''}</div>
+            ${curseChips(f.status) ? `<div class="sts-chips">${curseChips(f.status)}</div>` : ''}
+          </div>
+        </div>`;
     }).join('');
     const battleAssetKey = opts.isBoss
       ? ({ boss_general: 'battle-boss-general', boss_orc: 'battle-boss-orc', boss_elem: 'battle-boss-element' }[foes[0] && foes[0].id] || 'battle-boss-general')
       : 'battle-normal';
     UI.showOverlay(`${opts.isBoss ? '[[icon:demon]] BOSS战' : '[[icon:swords]] 遭遇战'} · 第 ${turn} 回合`, `
-      <div class="battle-stage" data-asset-key="${battleAssetKey}">
+      <div class="battle-stage sts" data-asset-key="${battleAssetKey}">
       <div class="battle-stage-shade"></div>
-      <div class="bt-foes">${selfHTML}${foesHTML}
-        <div class="bt-ops-col">
-          <button class="ov-btn ${busy || infusingNow ? '' : 'ok'}" data-act="btEnd" ${busy || infusingNow ? 'disabled' : ''}>[[icon:skip]] 结束回合</button>
-          <button class="ov-btn" data-act="btFlee" ${busy || infusingNow ? 'disabled' : ''}>[[icon:runner]] 撤退</button>
-        </div>
-      </div>
-      <div class="bt-player">
-        [[icon:heart]] <b>${G.hp}/${G.maxHp}</b> · [[icon:bolt]] 能量 <b>${energy}/${maxEnergy}</b>
-        ${pilesHTML}
-        ${pdef.shield ? ` · [[icon:shield]] 盾 ${pdef.shield}` : ''}${pdef.armor ? ` · [[icon:plate]] 甲 ${pdef.armor}` : ''}${pdef.guard ? ' · [[icon:shield]] 格挡中' : ''}
-        ${curseChips(pstat.status) ? ' · ' + curseChips(pstat.status) : ''}
-        <span class="bt-tip">${tip}</span>
+      <div class="sts-arena">
+        ${selfHTML}
+        <div class="sts-foes">${foesHTML}</div>
       </div>
       ${infuseBar}
       ${targetBar}
-      <div class="bt-hand">${handHTML}</div>
-      <p class="ov-note">${!opts.isBoss && opts.strategy ? `[[icon:gear]] 敌情预告：${esc(opts.strategy)} · ` : ''}${opts.isBoss
-        ? 'BOSS战：使用过的卡牌战后完好保留；注能消耗的牌进墓地（不洗回），战胜 BOSS 后整理背包时可放回'
-        : '小怪战：打出过的卡战后进入消耗口袋（获得的杀与发现的卡是临时卡，战后消散）'}</p>
-      </div>`, true);
+      <div class="sts-hud">
+        <div class="sts-hud-l">
+          <div class="sts-energy" title="能量：每回合固定 ${maxEnergy} 费">[[icon:bolt]] <b>${energy}</b><span>/${maxEnergy}</span></div>
+          ${drawPileHTML}
+        </div>
+        <div class="bt-hand sts-hand" title="${escAttr(tip)}">${handHTML}</div>
+        <div class="sts-hud-r">
+          ${pilesHTML}
+          <button class="ov-btn ghost" data-act="btFlee" ${busy || infusingNow ? 'disabled' : ''}>[[icon:runner]] 撤退</button>
+          <button class="ov-btn ${busy || infusingNow ? '' : 'ok'}" data-act="btEnd" ${busy || infusingNow ? 'disabled' : ''}>[[icon:skip]] 结束回合</button>
+        </div>
+      </div>
+      <p class="sts-note">${!opts.isBoss && opts.strategy ? `[[icon:gear]] 敌情预告：${esc(opts.strategy)} · ` : ''}${opts.isBoss
+        ? 'BOSS战：卡牌战后完好保留；注能消耗的牌进墓地（不洗回），战胜后整理背包时可放回'
+        : '小怪战：打出过的卡战后进入消耗口袋（初始攻击与发现的卡是临时卡，战后消散）'}</p>
+      </div>`, 'battle');
     UI.act('btPlay', (d) => {
       if (Date.now() - aimPlayedAt < 300) return;   // 指向松手刚打出，忽略残留 click
       if (infusingNow) return toggleInfusePick(d.uid);
@@ -143,10 +174,10 @@
     });
     UI.act('btEnd', endTurn);
     UI.act('btFlee', flee);
-    UI.act('btGrave', () => { viewingGrave = true; render(); });
+    UI.act('btGrave', () => { _set_viewingGrave(true); render(); });
     UI.act('btInfuseGo', confirmInfuse);
     UI.act('btInfuseCancel', cancelInfuse);
-    UI.act('btPickCancel', () => { pendingTarget = null; pendingHint = ''; render(); });
+    UI.act('btPickCancel', () => { _set_pendingTarget(null); _set_pendingHint(''); render(); });
     // —— 指向施法（炉石/杀戮尖塔式）：按住指向卡轻微拎起，弯曲箭头跟随指针 ——
     //    指向敌人 = 红色箭头，指向自己（立绘）= 绿色箭头；松手在目标身上即打出。
     //    轻点卡牌 = 仅锁定（提示条引导），与既有交互兼容。
@@ -154,8 +185,8 @@
     body.querySelectorAll('.bt-foe[data-eidx]').forEach(el => {
       el.addEventListener('click', () => {
         // 点击敌人不再确认（必须指向松手），只给纠正提示
-        if (pendingTarget && lockSide === 'enemy') pendingHint = '请按住卡牌「拖向」敌人身上松手';
-        else if (pendingTarget && lockSide === 'self') pendingHint = '[[icon:heart]] 治疗 / 净化卡要拖到左侧「你」的立绘上';
+        if (pendingTarget && lockSide === 'enemy') _set_pendingHint('请按住卡牌「拖向」敌人身上松手');
+        else if (pendingTarget && lockSide === 'self') _set_pendingHint('[[icon:heart]] 治疗 / 净化卡要拖到左侧「你」的立绘上');
         if (pendingTarget) render();
       });
     });
@@ -163,13 +194,66 @@
     if (selfEl) {
       selfEl.addEventListener('click', () => {
         if (pendingTarget && lockSide === 'self') { play(pendingTarget.uid, 'self'); return; }
-        if (pendingTarget) { pendingHint = '[[icon:heart]] 这是治疗 / 净化类卡牌——请拖到「你」的立绘上'; render(); }
+        if (pendingTarget) { _set_pendingHint('[[icon:heart]] 这是治疗 / 净化类卡牌——请拖到「你」的立绘上'); render(); }
       });
     }
     body.querySelectorAll('.bt-card[data-aim="1"]').forEach(el => {
       el.addEventListener('pointerdown', (e) => { if (e.button === 0) startAim(e, el); });
     });
+    // 人物去纸色背景，像模型一样站在场景里（art.js 内按图缓存，二次渲染零成本）
+    if (SDT.Art.cutoutFigures) SDT.Art.cutoutFigures(body);
+    // BOSS 登场演出：竖线阴影压过场景 2.4s（每场一次）
+    if (opts.isBoss && !dreadShown) {
+      _set_dreadShown(true);
+      const st = body.querySelector('.battle-stage');
+      if (st) { st.classList.add('fx-dread'); setTimeout(() => st.classList.remove('fx-dread'), 2500); }
+    }
+    spawnFloats(body);
     UI.refresh(G);
+  }
+
+  // ---------- 战斗特效（v0.32.2）：伤害/受击飘字 + 受击抖动 + 红闪 ----------
+  // 飘字挂在 #overlay 层而不是 ovBody——ovBody 每次渲染整块重建，飘字动画会被腰斩
+  function spawnFloats(body) {
+    if (!floats.length) return;
+    const list = floats;
+    _set_floats([]);
+    const ov = UI.el.overlay;
+    const ovR = ov.getBoundingClientRect();
+    list.forEach(f => {
+      const isSelf = f.unit === 'self';
+      const figEl = isSelf
+        ? body.querySelector('#btSelf .sts-figure')
+        : body.querySelector(`.sts-foe[data-eidx="${f.unit}"] .sts-figure`);
+      if (!figEl) return;
+      // 受击反馈：单位抖动；自己掉血再叠一层全屏红闪
+      figEl.classList.add(isSelf ? 'fx-hit-self' : 'fx-hit');
+      setTimeout(() => figEl.classList.remove(isSelf ? 'fx-hit-self' : 'fx-hit'), 480);
+      if (isSelf) hurtFlash(ov);
+      if (f.warm) {   // 治疗暖色滤镜（表情反馈·零美术）
+        figEl.classList.add('fx-warm');
+        setTimeout(() => figEl.classList.remove('fx-warm'), 950);
+      }
+      const stk = (f.cls || '').includes('stk');   // 表情贴纸：挂在头顶而非胸前
+      const r = figEl.getBoundingClientRect();
+      const span = document.createElement('span');
+      span.className = 'sts-float ' + (f.cls || 'dmg');
+      span.textContent = f.text;
+      span.style.left = (r.left - ovR.left + r.width / 2) + 'px';
+      span.style.top = (r.top - ovR.top + r.height * (stk ? 0.02 : 0.32)) + 'px';
+      ov.appendChild(span);
+      span.addEventListener('animationend', () => span.remove(), { once: true });
+      setTimeout(() => span.remove(), 1400);   // 兜底：animationend 偶尔不触发时清掉不可见残骸
+    });
+  }
+  // 全屏受击红闪（径向暗角，600ms 淡出）
+  function hurtFlash(ov) {
+    if (ov.querySelector('.sts-hurtflash')) return;   // 连续受击不叠层
+    const div = document.createElement('div');
+    div.className = 'sts-hurtflash';
+    ov.appendChild(div);
+    div.addEventListener('animationend', () => div.remove(), { once: true });
+    setTimeout(() => div.remove(), 1000);   // 兜底清理
   }
 
   // ---------- 指向施法：拎起 + 弯曲箭头 ----------
@@ -324,7 +408,7 @@
       return;
     }
     // 轻点 = 锁定（提示条引导）；拖了但没拖到目标 = 保持锁定，可再指一次
-    if (wasMoved) { pendingTarget = { uid: a.uid, card: a.card }; pendingHint = ''; render(); }
+    if (wasMoved) { _set_pendingTarget({ uid: a.uid, card: a.card }); _set_pendingHint(''); render(); }
   }
   function cancelAim() {
     window.removeEventListener('pointermove', moveAim, true);
@@ -378,3 +462,5 @@
 
   window.SDT = window.SDT || {};
   window.SDT.Battle = { start, _test: { refillDrawPile } };
+
+export { render };

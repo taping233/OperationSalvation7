@@ -1,27 +1,41 @@
 {
   "name": "codename7-soudache",
   "productName": "搜打撤·代号7",
-  "version": "1.0.0",
+  "version": "0.51.0",
   "description": "搜打撤 · 代号7 桌面版",
   "main": "main.js",
   "author": "taping",
   "scripts": {
-    "start": "electron .",
-    "sync": "powershell -NoProfile -ExecutionPolicy Bypass -File ../scripts/sync-desktop.ps1",
-    "predist": "npm run sync",
-    "dist": "electron-builder --win portable"
+    "check:version": "node ../scripts/check-version.cjs",
+    "prestart": "npm run check:version",
+    "start": "set \"ELECTRON_OVERRIDE_DIST_PATH=..\\desktop\\electron\" && electron .",
+    "predist": "npm run check:version",
+    "dist": "npm run build:game && electron-builder --win portable",
+    "build:game": "npm run build --prefix .."
   },
   "devDependencies": {
-    "electron": "^33.0.0",
-    "electron-builder": "^25.0.0"
+    "electron": "44.1.0",
+    "electron-builder": "25.0.0"
   },
   "build": {
     "appId": "com.taping.codename7",
     "productName": "搜打撤·代号7",
-    "files": ["main.js", "server.js", "game/**/*"],
+    "files": [
+      "main.js",
+      "preload.js",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "game",
+        "to": "game"
+      }
+    ],
     "win": {
       "icon": "app.ico",
-      "target": ["portable"]
+      "target": [
+        "portable"
+      ]
     },
     "portable": {
       "artifactName": "搜打撤-代号7.exe"

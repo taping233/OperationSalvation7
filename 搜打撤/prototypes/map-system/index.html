@@ -8,137 +8,143 @@
 <link rel="stylesheet" href="css/base.css" />
 <link rel="stylesheet" href="css/theme-classical.css" />
 <link rel="stylesheet" href="css/title-soft.css" />
+<link rel="stylesheet" href="css/ui-soft.css" />
 </head>
 <body>
 <div id="app">
   <aside id="sidebar">
-    <header>
-      <div class="hd-row">
-        <div class="hd-btns">
-          <button id="btnHome" class="exit-btn" title="离开对局（可保存或放弃） / 回主菜单">
-            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
-              <path d="M9 4h9a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 18 20H9"
-                    fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
-              <path d="M4 12h10M4 12l4-4M4 12l4 4"
-                    fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-          <button id="btnMute" title="音效 / 背景乐开关">[[icon:gear]]</button>
-        </div>
-      </div>
-    </header>
-
     <section class="panel" id="charPanel">
       <div id="heroRow">
-        <div class="hero-ava" id="heroAva">旅</div>
-        <div class="hero-main">
-          <div class="hero-top">
-            <span class="hero-name">流放者</span>
-            <span class="hero-cls" id="heroCls"></span>
-          </div>
-          <div id="hpBarWrap"><div id="hpBar"></div><b id="hpText">30/30</b></div>
-          <div id="charRow">
-            <span class="chip-mini" title="持有金币">[[icon:coin]]<b id="charCoins">0</b></span>
-            <span class="chip-mini" title="攻击力">[[icon:swords]]<b id="charAtk">4</b></span>
-            <button id="bagBtn" title="打开 / 关闭背包（B）">[[icon:bag]] <span class="bag-label">背包</span> <b id="bagCount">0/16</b></button>
-          </div>
-        </div>
+        <div class="hero-ava" id="heroAva">医</div>
       </div>
     </section>
 
+    <section class="panel" id="bagPanel">
+      <button id="bagBtn" title="打开 / 关闭背包（B）">[[icon:bag]] <span class="bag-label">背包</span> <b id="bagCount">0/16</b></button>
+      <div class="hero-name" id="heroName">未选择角色</div>
+    </section>
+
     <section class="panel" id="statsPanel">
-      <div class="stat stat-layer"><label>环层</label><b id="statLayer">—</b></div>
-      <div class="stat"><label>行动</label><b id="statTurn">0</b></div>
-      <div class="stat"><label>价值</label><b id="statValue" class="gold">¥0</b></div>
+      <div class="stat stat-duo"><label>行动 · 价值</label>
+        <b><span id="statTurn">0</span><em class="duo-sep">/</em><span id="statValue" class="gold">¥0</span></b>
+      </div>
     </section>
 
     <section class="panel" id="dicePanel">
       <div id="diceRow">
         <button id="rollBtn">[[icon:dice]] 掷骰子移动</button>
-        <div id="diceFace">·</div>
+        <div id="diceFace" class="idle-dice"></div>
       </div>
       <div id="diceHist"></div>
-    </section>
-
-    <section class="panel" id="stairsPanel" hidden>
-      <h3>已发现的特殊节点</h3>
-      <div id="stairsList"></div>
-    </section>
-
-    <details class="panel tools-panel">
-      <summary>[[icon:tools]] 工具 · 备注 · 规则</summary>
-      <div class="tools-body">
-        <h3 class="tool-h">视图</h3>
-        <label class="chk"><input type="checkbox" id="tglIndex" checked> 结点编号 <kbd>N</kbd></label>
-
-        <h3 class="tool-h">格子备注</h3>
-        <div class="btn-row">
-          <button id="btnExport" class="mini-btn">[[icon:upload]] 导出</button>
-          <button id="btnImport" class="mini-btn">[[icon:download]] 导入</button>
-          <button id="btnClear" class="mini-btn danger">清空</button>
-        </div>
-        <p class="hint">点击地图上的结点输入文字说明（<b>琥珀色圆点</b> = 已写备注），「导出」的 JSON 可发回来落成正式事件。</p>
-
-        <h3 class="tool-h">开发者模式</h3>
-        <label class="chk"><input type="checkbox" id="tglDev"> 启用开发者模式</label>
-        <div id="devTools" hidden>
-          <div class="dev-row"><label>[[icon:dice]] 骰子</label>
-            <select id="devDice">
-              <option value="0">随机 (1-6)</option>
-              <option value="1">固定 1 点</option>
-              <option value="2">固定 2 点</option>
-              <option value="3">固定 3 点</option>
-              <option value="4">固定 4 点</option>
-              <option value="5">固定 5 点</option>
-              <option value="6">固定 6 点</option>
-            </select>
-          </div>
-          <div class="dev-row btns">
-            <button id="btnCombatTest" class="mini-btn">[[icon:swords]] 伤害自测</button>
-            <button id="btnDevRes" class="mini-btn">[[icon:wood]][[icon:bread]] 基地资源 +2</button>
-          </div>
-        </div>
-
-        <h3 class="tool-h">规则 / 操作</h3>
-        <p class="hint">
-          掷骰沿当前环的结点顺时针走，落脚触发结点事件；环间门可往返，外圈门可撤离，内庭紧急撤离点花 10 币直接撤离。<br>
-          三个存档档位的基地与进度互相独立；进档后若有未完成对局会直接续打，否则先进基地再出发。<br>
-          放弃对局：带入的卡牌全部丢失，对局中获得的卡只有安全格里的会被宠物运回。<br>
-          背包里双击卡牌翻面看卡背，按住拖动可整理顺序 / 拖入安全格；卡背在基地成就页解锁装备。<br>
-          <kbd>空格</kbd> 掷骰 · <kbd>B</kbd> 背包 · <kbd>F</kbd> 镜头居中 · 拖拽平移 · 点结点写备注
-        </p>
+      <div id="devTools" class="dev-dice-tools" hidden>
+        <label for="devDice">[[icon:tools]] 骰子点数</label>
+        <select id="devDice" aria-label="选择下一次骰子点数">
+          <option value="0">随机 1–6</option>
+          <option value="1">固定 1 点</option>
+          <option value="2">固定 2 点</option>
+          <option value="3">固定 3 点</option>
+          <option value="4">固定 4 点</option>
+          <option value="5">固定 5 点</option>
+          <option value="6">固定 6 点</option>
+        </select>
       </div>
-    </details>
+    </section>
+
   </aside>
 
   <main id="viewport">
     <canvas id="game"></canvas>
-    <div id="hintBar">
-      <span><kbd>空格</kbd> 掷骰</span><span class="sep">·</span>
-      <span>拖拽平移</span><span class="sep">·</span>
-      <span><kbd>F</kbd> 镜头居中</span><span class="sep">·</span>
-      <span><kbd>B</kbd> 背包</span><span class="sep">·</span>
-      <span>点结点写备注</span>
+    <div id="layerBanner" aria-hidden="true">
+      <div class="lb-zh" id="layerBannerZh">—</div>
+      <div class="lb-en" id="layerBannerEn"></div>
+    </div>
+    <div id="resHud">
+      <span class="chip-mini res-gold" title="持有金币" data-tip="持有金币">
+        <svg class="res-ic" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+          <rect x="2" y="2" width="20" height="20" rx="3" fill="url(#resGoldGrad)"/>
+          <circle cx="12" cy="12" r="7.2" fill="none" stroke="#5c3d00" stroke-width="1.4"/>
+          <circle cx="12" cy="12" r="4.6" fill="none" stroke="#5c3d00" stroke-width="1" opacity=".7"/>
+          <path d="M12 8.2l1.1 2.4 2.6.3-1.9 1.8.5 2.6-2.3-1.3-2.3 1.3.5-2.6-1.9-1.8 2.6-.3z"
+                fill="#5c3d00" stroke="none"/>
+          <path d="M4 4h16" stroke="#ffe9a8" stroke-width="1" opacity=".5"/>
+          <defs>
+            <linearGradient id="resGoldGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#f4c95c"/>
+              <stop offset=".5" stop-color="#e0a52e"/>
+              <stop offset="1" stop-color="#b97b14"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <b id="charCoins">0</b>
+      </span>
+      <span class="chip-mini res-atk" title="攻击力" data-tip="攻击力">
+        <svg class="res-ic" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+          <path d="M6.2 11.2V8.8a1.5 1.5 0 0 1 3 0v2.2" fill="none" stroke="#4fd6b0" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M9.2 11V8a1.5 1.5 0 0 1 3 0v3.2" fill="none" stroke="#4fd6b0" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M12.2 11.2V8.6a1.5 1.5 0 0 1 3 0v3.6" fill="none" stroke="#4fd6b0" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M15.2 12.4v-1a1.5 1.5 0 0 1 3 0v4a5.4 5.4 0 0 1-5.4 5.4h-1.2a5.4 5.4 0 0 1-5.4-5.4v-5.2"
+                fill="none" stroke="#4fd6b0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <b id="charAtk">4</b>
+      </span>
+    </div>
+    <div id="topBtns">
+      <button id="btnHome" class="exit-btn" title="离开对局（可保存或放弃） / 回主菜单">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+          <path d="M9 4h9a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 18 20H9"
+                fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+          <path d="M4 12h10M4 12l4-4M4 12l4 4"
+                fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <button id="btnMute" title="音效 / 背景乐开关">
+        <svg class="ic-sound-on" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+          <path d="M4 9.5v5h3.5L13 19V5L7.5 9.5H4z" fill="currentColor"/>
+          <path d="M16 8.6a5 5 0 0 1 0 6.8M18.6 6a8.4 8.4 0 0 1 0 12"
+                fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
+        </svg>
+        <svg class="ic-sound-off" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+          <path d="M4 9.5v5h3.5L13 19V5L7.5 9.5H4z" fill="currentColor"/>
+          <path d="M16.5 9.5l5 5M21.5 9.5l-5 5"
+                fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <div id="hpHud" title="生命值">
+        <div class="hp-hud-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="20" height="20">
+            <path d="M12 3l7 3v5c0 4.4-3 8.4-7 10-4-1.6-7-5.6-7-10V6l7-3z"
+                  fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M12 8v6M9 11h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="hp-hud-body">
+          <span class="hp-hud-label">目标生命值</span>
+          <b id="hpText">30/30</b>
+          <div id="hpBarWrap"><div id="hpBar"></div></div>
+        </div>
+      </div>
     </div>
     <div id="tooltip" hidden></div>
     <div id="title">
+      <div class="title-bg" aria-hidden="true"></div>
       <div class="title-inner">
-        <p class="title-kicker">ACCESS TERMINAL // CODENAME-07</p>
+        <p class="title-kicker">SURVIVAL LOG // 方舟医疗救援组织 // CODENAME 7</p>
         <h1 class="cn-title">代号：柒</h1>
-        <p class="en-subtitle">CRISIS CONTRACT · CONTINGENCY PROTOCOL</p>
+        <p class="en-subtitle">升格会 · ASCENSION COUNCIL</p>
         <div class="menu">
-          <button class="menu-btn primary" id="mStart" data-no="01">开 始 游 戏</button>
-          <button class="menu-btn" id="mSettings" data-no="02">设　　　置</button>
-          <button class="menu-btn" id="btnCardLib" data-no="03">卡　牌　库</button>
-          <button class="menu-btn" id="btnCardDesigner" data-no="04">卡 牌 制 作</button>
-          <button class="menu-btn" id="mExit" data-no="05">退　出　游　戏</button>
+          <button class="menu-btn primary" id="mStart" data-no="01"><span class="num">01</span><span class="en">START</span><span class="cn">开始游戏</span></button>
+          <button class="menu-btn" id="mSettings" data-no="02"><span class="num">02</span><span class="en">SETTINGS</span><span class="cn">设置</span></button>
+          <button class="menu-btn" id="btnCardLib" data-no="03"><span class="num">03</span><span class="en">CARD LIBRARY</span><span class="cn">卡牌库</span></button>
+          <button class="menu-btn" id="btnCardDesigner" data-no="04"><span class="num">04</span><span class="en">CARD DESIGNER</span><span class="cn">卡牌制作</span></button>
+          <button class="menu-btn" id="mExit" data-no="05"><span class="num">05</span><span class="en">EXIT</span><span class="cn">退出游戏</span></button>
         </div>
-        <p class="title-ver">CODENAME 7 · v0.22 开发中 · CONTINGENCY UI</p>
+        <p class="title-ver">CODENAME 7 · <span id="gameVersion">v…</span> 末世荒土 · 开发中</p>
+        <p class="title-credits">制作者：太平 · 创 · Tang</p>
       </div>
     </div>
     <div id="exitScr" hidden>
       <div class="title-inner">
-        <p class="exit-msg">游戏已退出 · 感谢游玩《代号7》</p>
+        <p class="exit-msg">信号已断开 · 愿荒原风指引你归来《代号7》</p>
         <button class="menu-btn" id="mBack">重 新 进 入</button>
       </div>
     </div>
@@ -151,28 +157,6 @@
   </main>
 </div>
 
-<script src="src/mapData.js"></script>
-<script src="src/art.js"></script>
-<script src="src/icons-bitmap.js"></script>
-<script src="src/sound.js"></script>
-<script src="src/camera.js"></script>
-<script src="src/notes.js"></script>
-<script src="src/cards.js"></script>
-<script src="src/combat.js"></script>
-<script src="src/base.js"></script>
-<script src="src/meta.js"></script>
-<script src="src/renderer.js"></script>
-<script src="src/ui.js"></script>
-<script src="src/shared.js"></script>
-<script src="src/battle.core.js"></script>
-<script src="src/battle.view.js"></script>
-<script src="src/chests.js"></script>
-<script src="src/game.core.js"></script>
-<script src="src/game.run.js"></script>
-<script src="src/game.hub.js"></script>
-<script src="src/game.bag.js"></script>
-<script src="src/game.notes.js"></script>
-<script src="src/game.cardslib.js"></script>
-<script src="src/game.boot.js"></script>
+<script type="module" src="./src/main.js"></script>
 </body>
 </html>

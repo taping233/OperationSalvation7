@@ -1,16 +1,26 @@
+/* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
+const SDT = window.SDT;
+const UI = window.SDT.UI;
+import { esc } from './shared.js';
+import { FX, MAP, bagCap } from './game.core.js';
+import { BUILD_VERSION, assetUrl } from './asset-url.js';
+import { tone } from './sound.js';
+import { escAttr } from './shared.js';
+import { opts } from './battle.core.js';
+import { cellCenter, clearSave, curLayer, enterLayer, gainCoins, game, modeCfg, newUid, pick, rndDice, saveGame, scaledEnemy, syncPlayTime, usedSlots, weighted } from './game.core.js';
+import { openBaseHub } from './game.hub.js';
+import { Sfx, cardHTML, _set_cardPageOpen } from './game.cardslib.js';
   function roll() {
     if (game.state !== 'idle') return;
     game.state = 'rolling';
     SDT.Sound.sfx('dice');
+    const fixed = game.devMode && game.nextDice > 0;
+    const n = fixed ? game.nextDice : rndDice();
     UI.el.diceFace.classList.add('rolling');
-    UI.refresh(game);
-    const spin = setInterval(() => { UI.el.diceFace.textContent = rndDice(); }, 70);
+    UI.drawDice(n); // 立方体带整圈翻转的 transition，滚到 n 点朝前的朝向
     setTimeout(() => {
-      clearInterval(spin);
       UI.el.diceFace.classList.remove('rolling');
       UI.popNum(UI.el.diceFace);
-      const fixed = game.nextDice > 0;
-      const n = fixed ? game.nextDice : rndDice();
       game.dice = n;
       game.diceHistory.push(n);
       game.turn++;
@@ -18,13 +28,15 @@
       UI.log(`[[icon:dice]] 掷出 <b>${n}</b> 点${fixed ? '（开发者固定）' : ''}，顺时针移动 ${n} 格`, 'sys');
       UI.refresh(game);
       moveBy(n);
-    }, 560);
+    }, 640);
   }
 
   function moveBy(n) {
     game.state = 'moving';
-    const count = curLayer().logical.length; // 火堆合并后按逻辑格计数，避免越界
+    const layer = curLayer();
+    const count = layer.logical.length; // 火堆合并后按逻辑格计数，避免越界
     const target = (game.trackPos + n) % count;
+    preloadCellScene(layer, target);
     game.moveTarget = target;
     const stepIn = () => {
       if (game.trackPos === target) { game.hop = 0; game.moveTarget = null; resolveCell(); return; }
@@ -58,29 +70,30 @@
   const SCENES = {
     battle: { icon: '[[icon:swords]]', title: '遭遇战', tone: 'battle', btn: '应 战',
       lines: ['{name}从废墟的阴影中逼近，战斗一触即发！', '脚步声戛然而止——{name}发现了你！',
-        '「这是我的地盘。」{name}拦住了去路。', '尘土飞扬，{name}的轮廓自浓雾中缓缓显形……'] },
-    shop: { icon: '[[icon:bag]]', title: '流动商栈', tone: 'shop', btn: '逛逛货品',
-      lines: ['布帘后传来拨算盘的脆响：「哟，稀客！上好的货都在这儿。」', '商人掀开木箱盖子：「看中什么，价钱好商量。」'] },
+        '「这片废土是我的猎场。」{name}拦住了去路。', '沙尘翻涌，{name}的轮廓自辐射尘雾中缓缓显形……'] },
+    shop: { icon: '[[icon:bag]]', title: '拾荒商队', tone: 'shop', btn: '看看货品',
+      lines: ['帆布帐篷下传来砂轮磨刀的声响：「哟，医疗队的稀客！以物易物，童叟无欺。」',
+        '商队头目掀开防水布：「旧世界的玩意儿，能换你兜里的币就归你。」'] },
     event: { icon: '[[icon:question]]', title: '奇遇', tone: 'event', btn: '一探究竟',
-      lines: ['空气里飘着奇异的气息，似乎有什么即将发生……', '脚下的碎砖微微震颤，冥冥中似有目光落在你身上。'] },
+      lines: ['盖革计数器忽然轻颤，空气里有种说不出的味道……', '脚下的碎砖微微震颤，荒土深处似有目光落在你身上。'] },
     fire: { icon: '[[icon:fire]]', title: '营火休整', tone: 'fire', btn: '坐下歇脚',
-      lines: ['篝火噼啪作响，暖意顺着指尖爬了上来。', '有人刚离开不久——柴禾还新着呢。'] },
-    chest: { icon: '[[icon:archive]]', title: '宝箱', tone: 'chest', btn: '撬开箱子',
-      lines: ['草叶半掩着一只落满灰尘的箱子，锁扣早已锈蚀……', '箱子的缝隙里透出微光——运气不错。'] },
+      lines: ['废料燃起的篝火噼啪作响，暖意顺着指尖爬了上来。', '有人刚离开不久——灭火的沙土还是新的。'] },
+    chest: { icon: '[[icon:archive]]', title: '遗留物资', tone: 'chest', btn: '撬开柜子',
+      lines: ['瓦砾半掩着一只落满灰尘的保险柜，锁扣早已锈蚀……', '物资箱的缝隙里透出微光——运气不错。'] },
     coin: { icon: '[[icon:coin]]', title: '拾获', tone: 'pick', auto: true,
-      lines: ['路边的草丛里，有什么东西闪了一下。', '「叮」——一枚硬币从瓦砾堆里滚了出来。'] },
+      lines: ['路边的瓦砾堆里，有什么东西闪了一下。', '「叮」——一枚旧世界硬币从锈铁皮里滚了出来。'] },
     wood: { icon: '[[icon:wood]]', title: '拾获', tone: 'pick', auto: true,
-      lines: ['一根结实的木梁斜靠在墙角，正好能用上。'] },
+      lines: ['一根还没被白蚁蛀空的建材斜靠在断墙边，正好能用上。'] },
     rations: { icon: '[[icon:bread]]', title: '拾获', tone: 'pick', auto: true,
-      lines: ['压扁的背囊里，居然还有未开封的口粮！'] },
+      lines: ['压扁的背囊里，居然还有未开封的应急口粮！'] },
     key: { icon: '[[icon:key]]', title: '拾获', tone: 'pick', auto: true,
-      lines: ['一把泛着幽光的钥匙躺在石缝里——它能打开哪扇门？'] },
-    door: { icon: '[[icon:door]]', title: '环间门', tone: 'door', btn: '靠 近',
-      lines: ['古老的门扉无声地敞开着，另一侧的光影陌生而深邃。'] },
-    altar: { icon: '[[icon:crystal]]', title: '祭坛入口', tone: 'altar', btn: '踏入祭坛',
-      lines: ['石阶尽头，紫色符文在黑暗中明灭，空气凝重得令人窒息……'] },
+      lines: ['一把泛着幽光的钥匙躺在碎石缝里——它能打开哪扇门？'] },
+    door: { icon: '[[icon:door]]', title: '隔离闸门', tone: 'door', btn: '靠 近',
+      lines: ['厚重的隔离闸门无声地滑开，另一侧的光影陌生而深邃。'] },
+    altar: { icon: '[[icon:crystal]]', title: '污染核心', tone: 'altar', btn: '深入污染区',
+      lines: ['裂谷尽头，紫色的辐射结晶在黑暗中明灭，空气凝重得令人窒息……'] },
     exit: { icon: '[[icon:exit]]', title: '撤离点', tone: 'exit', btn: '前往撤离点',
-      lines: ['一枚信号弹拖着尾烟升上天空——撤离点就在眼前！'] },
+      lines: ['一枚信号弹拖着尾烟升上天空——营地的回收队就在眼前！'] },
   };
   // 场景契约：assetKey 由美术/CSS 代理消费；本层只保证稳定 ID、容器 class 与 data 属性。
   const SCENE_META = {
@@ -98,7 +111,56 @@
     'tt6-relief': ['event-relief', 'scene-event-relief', 'scene-event-relief'], 'tt6-airdrop': ['event-airdrop', 'scene-event-airdrop', 'scene-event-airdrop'],
     'tt6-chestdraw': ['event-chestdraw', 'scene-event-chestdraw', 'scene-event-chestdraw'], 'tt6-systemsupply': ['event-systemsupply', 'scene-event-systemsupply', 'scene-event-systemsupply'],
   };
+  const PRELOAD_SCENES = Object.freeze({
+    battle: 'battle-normal-anime-v2.png', coin: 'scene-pickup-coin-anime-v2.png',
+    wood: 'scene-pickup-wood-anime-v2.png', rations: 'scene-pickup-rations-anime-v2.png',
+    key: 'scene-pickup-key-anime-v2.png', fire: 'scene-fire-anime-v2.png',
+    shop: 'scene-shop-anime-v2.png', emergencyExit: 'scene-extract-anime-v2.png',
+    door: 'scene-door-anime-v2.png', altar: 'scene-altar-anime-v2.png'
+  });
+  const IMMEDIATE_SCENES = new Set(['battle', 'coin', 'wood', 'rations', 'key', 'fire']);
+  let scenePreload = null;
+  function preloadScene(name) {
+    if (!name || (scenePreload && scenePreload.name === name)) return;
+    const img = new Image();
+    img.decoding = 'async';
+    img.src = assetUrl(`assets/scenes/${name}`);
+    scenePreload = { name, img };
+    if (img.decode) img.decode().catch(() => {});
+  }
+  function preloadCellScene(layer, idx) {
+    const cell = layer.logical[idx];
+    const cellType = cell && cell.def && cell.def.type;
+    const door = (layer.doors || []).some(d => d.at === idx);
+    const altar = (layer.altarEntrances || []).some(a => a.at === idx);
+    const immediate = IMMEDIATE_SCENES.has(cellType);
+    const type = immediate ? cellType : door ? 'door' : altar ? 'altar' : cellType;
+    preloadScene(PRELOAD_SCENES[type]);
+  }
   let sceneState = null;
+
+  // ---------- 全屏节点页外壳：杀戮尖塔式——整屏场景背景图，标题与选项虚化在右侧毛玻璃面板 ----------
+  // o = { tone: 场景分色(sc-*), icon, title, sub, body, foot, asset: 背景图 asset-key（缺省按 tone 映射） }
+  const NODE_BG = { door: 'scene-door-bg', altar: 'scene-altar-bg', fire: 'scene-fire-bg',
+    exit: 'scene-extract-bg', shop: 'scene-shop-bg', event: 'scene-event-bg' };
+  function nodeShell(o) {
+    const bg = o.asset || NODE_BG[o.tone] || '';
+    UI.showOverlay('', `
+      <div class="pg node-pg sc-${o.tone}"${bg ? ` data-asset-key="${escAttr(bg)}"` : ''}>
+        <div class="node-panel">
+          <header class="pg-head">
+            <h2>${o.icon} ${o.title}</h2>
+            ${o.sub ? `<span class="sub">${o.sub}</span>` : ''}
+          </header>
+          <div class="node-main">${o.body}</div>
+          ${o.foot ? `<footer class="node-foot">${o.foot}</footer>` : ''}
+        </div>
+      </div>`, 'page');
+  }
+  // 杀戮尖塔式选项条：主标题 + 后果说明（复用事件页 .evt-opt 样式）
+  function nodeOpt(act, label, detail, tone = '', extra = '') {
+    return `<button class="evt-opt ${tone}" data-act="${act}" ${extra}><b>${label}</b>${detail ? `<span>${detail}</span>` : ''}</button>`;
+  }
 
   // 打开场景：对话展示 →（点击任意处继续）→ onDone 开启真正内容
   // opts.foes = 遭遇敌人数组：战斗场景展示统一位图敌人立绘。
@@ -131,7 +193,6 @@
     UI.act('sceneGo', () => finishScene());
     UI.refresh(game);
   }
-
   function finishScene() {
     if (!sceneState) return;
     const cb = sceneState.onDone;
@@ -151,6 +212,18 @@
     game.state = 'idle';
     saveGame();
     UI.refresh(game);
+  }
+
+  // 拾取页：杀戮尖塔式右栏——拾获叙事 + 大字收益 + 继续按钮
+  const PICKUP_BG = { coin: 'scene-pickup-coin', wood: 'scene-pickup-wood',
+    rations: 'scene-pickup-rations', key: 'scene-pickup-key' };
+  function openPickupPage(kind, gain, onDone) {
+    const f = SCENES[kind];
+    nodeShell({ tone: 'pickup', asset: PICKUP_BG[kind], icon: f.icon, title: f.title,
+      sub: pick(f.lines),
+      body: `<p class="gain-big">${gain}</p>
+        <button class="evt-opt ok" data-act="pickupGo"><b>继 续</b></button>` });
+    UI.act('pickupGo', () => { UI.hideOverlay(); onDone(); });
   }
 
   // ---------- 遭遇组建（设计者 2026-09-02 定版：按环层抽怪，1-3 只，越内层越强） ----------
@@ -188,12 +261,9 @@
       event: '#41d0a8', emergencyExit: '#52d273' };
     FX.pulse(game.pos.x, game.pos.y, PULSE_COL[def && def.type] || '#d8b46a');
 
-    // 1) 战斗格：遭遇战场景（展示敌人立绘）→ 战斗
+    // 1) 战斗格：直接进入遭遇战（无场景演出）
     if (def && def.type === 'battle') {
-      const encounter = buildEncounter(game.layerIdx);
-      openScene('battle', { name: encounter[0].name, foes: encounter,
-        gain: `风险：${encounter.risk} · ${encounter.strategy}`,
-        onDone: () => openBattleCell(def, encounter) });
+      openBattleCell(def, buildEncounter(game.layerIdx));
       return;
     }
 
@@ -202,8 +272,8 @@
     if (def && INSTANT_TYPES.includes(def.type)) {
       runInstant(def, () => {
         // 即时效果完成 → 本格若兼为节点（如带商店的门、祭坛入口）继续节点演出
-        if (door) { openScene('door', { onDone: () => openDoorModal(door, def) }); return; }
-        if (altarE) { openScene('altar', { onDone: () => openAltarEntranceModal(altarE, def) }); return; }
+        if (door) { openDoorModal(door, def); return; }
+        if (altarE) { openAltarEntranceModal(altarE, def); return; }
         finishInstant();
       });
       return;
@@ -217,11 +287,11 @@
       return;
     }
 
-    // 3) 节点类：门 / 祭坛入口 / 紧急撤离 / 商店（场景演出 → 节点弹窗）
-    if (door) { openScene('door', { onDone: () => openDoorModal(door, def) }); return; }
-    if (altarE) { openScene('altar', { onDone: () => openAltarEntranceModal(altarE, def) }); return; }
-    if (def && def.type === 'emergencyExit') { openScene('exit', { onDone: openEmergencyModal }); return; }
-    if (def && def.type === 'shop') { openScene('shop', { onDone: openShop }); return; }
+    // 3) 节点类：门 / 祭坛入口 / 紧急撤离 / 商店（跳过过渡场景，直接进入节点页）
+    if (door) { openDoorModal(door, def); return; }
+    if (altarE) { openAltarEntranceModal(altarE, def); return; }
+    if (def && def.type === 'emergencyExit') { openEmergencyModal(); return; }
+    if (def && def.type === 'shop') { openShop(); return; }
 
     game.state = 'idle';
     saveGame();
@@ -238,7 +308,7 @@
 
   // 宝箱格 / 事件卡开真宝箱：开完回待机并存档（场景演出后由本函数自行收尾）
   function openChestsOnCell(chests, text) {
-    UI.log(`[[icon:archive]] ${text || '捡到了' + SDT.Chests.dropText(chests)}`, 'loot');
+    UI.log(`[[icon:archive]] ${text || '回收了' + SDT.Chests.dropText(chests)}`, 'loot');
     SDT.Chests.open(game, chests, () => {
       game.state = 'idle';
       saveGame();
@@ -253,18 +323,18 @@
     switch (def.type) {
       case 'coin': {
         const n = Math.max(1, Math.round((def.n || 1) * (modeCfg().coinMul || 1)));   // 与 gainCoins 同口径（含玩法倍率）
-        openScene('coin', { gain: `+${n} 币`, onDone: () => { gainCoins(def.n || 1); done(); } });
+        openPickupPage('coin', `+${n} 币`, () => { gainCoins(def.n || 1); done(); });
         break;
       }
-      case 'wood': openScene('wood', { gain: `木材 +${def.n || 1}`, onDone: () => { game.addItem(MAP.items.wood, def.n || 1); done(); } }); break;
-      case 'chest': openScene('chest', { onDone: () => openChestsOnCell([{ kind: 'small' }]) }); break;   // 宝箱格：开 1 个真小宝箱
-      case 'rations': openScene('rations', { gain: `口粮 +${MAP.items.rations.count || 1}`, onDone: () => { game.addItem(MAP.items.rations); done(); } }); break;
-      case 'key': openScene('key', { gain: `钥匙 ×1`, onDone: () => { game.addItem(MAP.items.key); done(); } }); break;
+      case 'wood': openPickupPage('wood', `木材 +${def.n || 1}`, () => { game.addItem(MAP.items.wood, def.n || 1); done(); }); break;
+      case 'chest': openChestsOnCell([{ kind: 'small' }]); break;   // 物资格：开 1 个小型遗留物资箱
+      case 'rations': openPickupPage('rations', `口粮 +${MAP.items.rations.count || 1}`, () => { game.addItem(MAP.items.rations); done(); }); break;
+      case 'key': openPickupPage('key', `钥匙 ×1`, () => { game.addItem(MAP.items.key); done(); }); break;
       case 'fire':
-        openScene('fire', { onDone: () => openFireRest() });   // 火堆：回 10 血 + 消耗口袋复原 2 张 + 30% 额外职业卡
+        openFireRest();   // 火堆：回 10 血 + 消耗口袋复原 2 张 + 30% 额外职业卡
         break;
       case 'event': {
-        openScene('event', { onDone: () => { runEventDeck(); done(); } });
+        runEventDeck(); done();   // 事件：直接进事件页（选项在右侧）
         break;
       }
       default: done(); break;
@@ -296,15 +366,18 @@
     UI.log(`[[icon:archive]] 获得卡牌【<b>${esc(tpl.name)}</b>】`, 'loot');
     return true;
   }
-  game.grantCard = grantEventCard;   // 宝箱等模块发卡（同名并入 / 容量满拒绝）
+  // ESM：循环导入下本模块体先于 game.core 执行，顶层读 game 会 TDZ，延迟到 boot 统一绑定
+  function bindRunMixins() {
+    game.grantCard = grantEventCard;   // 宝箱等模块发卡（同名并入 / 容量满拒绝）
+  }
 
   // ---------- 火堆（设计者 2026-09-02 定版：回 10 血 + 消耗口袋选 2 张复原 +
   //           30% 几率额外随机获得 1 张职业卡） ----------
   function openFireRest() {
     game.heal(MAP.rules.fireHeal);
-    UI.log(`[[icon:fire]] 火堆：围火休整，回复 <b>${MAP.rules.fireHeal}</b> 点生命`, 'ok');
+    UI.log(`[[icon:fire]] 营火休整：清创包扎，回复 <b>${MAP.rules.fireHeal}</b> 点生命`, 'ok');
     if (Math.random() < 0.3) {
-      UI.log('[[icon:wood]] 火堆余烬里翻出了一张别人掉落的职业卡！', 'loot');
+      UI.log('[[icon:wood]] 营火余烬里翻出了一张先行者掉落的职业卡！', 'loot');
       grantEventCard(SDT.Cards.randomClassCard());
     }
     game.state = 'modal';
@@ -325,10 +398,12 @@
             <div class="pk-row"><span>[[icon:cards]] <b>${esc(p.card.name)}</b>${p.count > 1 ? ` ×${p.count}` : ''}</span>
             <button class="mini-btn ok" data-act="restoreOne" data-i="${i}" ${left <= 0 ? 'disabled' : ''}>复原一张</button></div>`).join('')
         : '<p class="ov-empty" style="margin:2px 0 0">（消耗口袋是空的——对小怪用过的卡牌会进入这里）</p>';
-      UI.showOverlay('[[icon:fire]] 火堆休整', `
-        <p class="ov-stats">还可从消耗口袋中复原 <b>${left}</b> 张（最多 ${picks} 张）。</p>
-        <div class="pk-list">${rows}</div>
-        <div class="ov-btns"><button class="ov-btn ok" data-act="fireDone">继续旅程</button></div>`);
+      nodeShell({
+        tone: 'fire', icon: '[[icon:fire]]', title: '营火休整',
+        sub: `还可从消耗口袋中复原 <b>${left}</b> 张（最多 ${picks} 张）`,
+        body: `<div class="pk-list">${rows}</div>`,
+        foot: `<button class="ov-btn ok" data-act="fireDone">[[icon:runner]] 继续旅程</button>`,
+      });
     };
     const finish = () => { UI.hideOverlay(); if (done) done(); };
     UI.act('restoreOne', (d) => {
@@ -346,31 +421,156 @@
     render();
   }
 
-  // ---------- 职业选择（开局从两个随机职业选 1，与 5 张杀一起获得 1 张该职业随机卡） ----------
+  // ---------- 角色选择（开局从全部角色中自由选 1，与 5 张初始攻击一起获得 1 张该角色随机卡） ----------
+  // 各角色的背景故事与出发任务（角色选择页展示）
+  const CLASS_STORY = {
+    '刺客': {
+      tag: '暗巷收刀人',
+      bg: '旧城暗巷里最安静的影子，靠一柄短刃替商行"处理麻烦"。没人见过他出刀，只见过结果。',
+      task: '潜入最深处的宝库，取回"无面者"的封印钥匙，并在追兵合围前活着撤离。',
+    },
+    '剑客': {
+      tag: '独行的佩剑客',
+      bg: '背一柄旧剑走遍十六州，只为找回被师兄带走的那半卷剑谱。剑出鞘时，从不问对方有多少人。',
+      task: '循剑谱残页的线索深入遗迹，在藏经阁取得完整剑谱，带剑撤离。',
+    },
+    '术士': {
+      tag: '禁咒的继承者',
+      bg: '被学院除名的天才，因钻研禁忌咒文而被通缉。诅咒在他左臂上生长，也给他力量。',
+      task: '找到先代术士的祭坛，用一场完整的禁咒仪式压制左臂的诅咒，并夺走祭坛上的秘宝。',
+    },
+    '法师': {
+      tag: '星图测绘员',
+      bg: '皇家学院的首席测绘师，毕生绘制"活动地脉"的星图。她相信宝藏的位置写在星星的偏移里。',
+      task: '在遗迹深处架设三座测星仪，校准星图并回收古代魔导核心，天亮前撤离。',
+    },
+    '牧师': {
+      tag: '灰袍巡回者',
+      bg: '不属于任何教团的灰袍修士，为战乱之地的伤者包扎，也为亡者祷告。他背囊里永远有一格留给别人的药。',
+      task: '护送遇险商队余部穿过战区，在圣祠取得愈合金像，全员撤离。',
+    },
+    '授印者': {
+      tag: '守印一族的末裔',
+      bg: '古老守印家族的最后一人，掌心生来就有一枚会发烫的封印。家族遗产是责任，也是追杀令。',
+      task: '找回被夺走的家族印玺，在封印之地重新落印，将追猎者甩在门后。',
+    },
+    '降临者': {
+      tag: '自云上而来',
+      bg: '从没人见过他落地的那一刻——他只是某天出现在坍塌的神殿里，衣角还带着云上的风。他自己也不记得来处。',
+      task: '循着本能的指引收拢散落的"天界残片"，在身体被这个世界同化之前离开。',
+    },
+    '召唤师': {
+      tag: '灵契商行的少东家',
+      bg: '灵契商行的继承人，能和见过的任何生灵签订临时契约。商行破产了，剩下的只有一柜子契约书。',
+      task: '用最后的契约书召回祖辈封存的灵体，护送商行金库余货出境变卖，重振家业。',
+    },
+    '守卫': {
+      tag: '不退的老门卫',
+      bg: '为旧王陵守了三十年门的退伍老兵，王陵封了，他没走。他守的从来不是门，是门后的人。',
+      task: '在王陵坍塌前护送考古队撤离，顺手把三十年来欠他的那份抚恤金从陵库里"领"回来。',
+    },
+    '游侠': {
+      tag: '风语斥候',
+      bg: '在边荒靠给商队带路为生的斥候，认得每一处水源和每一张兽皮下的陷阱。风改变方向时，她比风先知道。',
+      task: '抢先在佣兵团之前标定宝藏坐标，布下陷阱迟滞追兵，携带测绘图撤离。',
+    },
+    '战士': {
+      tag: '佣兵团老团长',
+      bg: '解散前的"铁砧佣兵团"团长，打过所有能叫上名字的仗。如今兵团只剩他一个人和一面团旗。',
+      task: '接下悬赏最高的委托，正面击破盘踞遗迹的匪帮，把团旗插在宝藏堆上再撤离。',
+    },
+  };
   function openClassChoice() {
-    const classes = SDT.Cards.CLASSES.filter(cl => SDT.Cards.classPool(cl).length);
-    if (classes.length < 2) return;
-    const picks = [];
-    while (picks.length < 2) {
-      const cl = classes[Math.floor(Math.random() * classes.length)];
-      if (!picks.includes(cl)) picks.push(cl);
-    }
+    const picks = SDT.Cards.CLASSES.filter(cl => SDT.Cards.classPool(cl).length);
+    if (!picks.length) return;
     game.state = 'modal';
-    UI.showOverlay('[[icon:medal]] 选择你的职业', `
-      <p class="ov-stats">本次对战从两个随机职业中选择 1 个，并立即获得 1 张该职业的随机卡牌（与 5 张「杀」一起带入背包）。</p>
-      <div class="cls-choice">${picks.map(cl => `
-        <button class="cls-pick" data-act="pickClass" data-cls="${escAttr(cl)}" title="选择 ${escAttr(cl)}">
-          <span class="cls-pick-art">${SDT.Art.classArt(cl)}</span>
-          <b>${esc(cl)}</b>
-          <span class="cls-pick-lv">熟练度 Lv.${SDT.Meta.classLv(cl)} · ${SDT.Meta.perkText(SDT.Meta.classLv(cl))}</span>
-        </button>`).join('')}</div>`);
-    UI.act('pickClass', (d) => {
-      const cl = d.cls;
+    let sel = null;
+    let view = 'select'; // 'select' 主选角页 | 'pool' 二级卡池页
+    const poolCount = cl => SDT.Cards.classPool(cl).length;
+    // 主选角页：左侧全角色网格，右侧大幅立绘 + 背景故事 + 出发任务；卡池收进二级页
+    const render = () => {
+      if (view === 'pool') return renderPool();
+      const story = sel ? CLASS_STORY[sel] : null;
+      const lv = sel ? SDT.Meta.classLv(sel) : 0;
+      UI.showOverlay('[[icon:medal]] 选择你的角色', `
+        <div class="pg cls-page">
+          <header class="pg-head">
+            <h2>[[icon:medal]] 选择你的角色</h2>
+            <span class="sub">本次对战从全部角色中自由选择 1 个 · 确认后获得 1 张该角色的随机卡牌（与 5 张「初始攻击」一起带入背包）</span>
+          </header>
+          <div class="cls-body">
+            <div class="cls-grid">${picks.map(cl => `
+              <button class="cls-pick${cl === sel ? ' sel' : ''}" data-act="selClass" data-cls="${escAttr(cl)}" title="查看 ${escAttr(cl)}">
+                <span class="cls-pick-art">${SDT.Art.classArt(cl)}</span>
+                <b>${esc(cl)}</b>
+                <span class="cls-pick-lv">熟练度 Lv.${SDT.Meta.classLv(cl)}</span>
+              </button>`).join('')}</div>
+            <aside class="cls-detail hub-card">
+              ${sel && story ? `
+                <div class="cls-figure">${SDT.Art.classFullArt(sel)}</div>
+                <div class="cls-detail-head">
+                  <div class="cls-detail-meta">
+                    <b class="cls-detail-name">${esc(sel)}</b>
+                    <span class="cls-detail-tag">${esc(story.tag)}</span>
+                    <span class="cls-detail-lv">熟练度 Lv.${lv} · ${SDT.Meta.perkText(lv)}</span>
+                  </div>
+                </div>
+                <h3>背景故事</h3>
+                <p class="cls-story">${esc(story.bg)}</p>
+                <h3>出发任务</h3>
+                <p class="cls-story">${esc(story.task)}</p>
+                <button class="ov-btn cls-pool-btn" data-act="clsPool">[[icon:cards]] 查看角色卡池（${poolCount(sel)} 张）</button>
+              ` : `
+                <p class="cls-empty">[[icon:medal]]<br>从左侧选择一个角色<br>查看立绘、背景故事与出发任务</p>
+              `}
+            </aside>
+          </div>
+          <footer class="cls-foot">
+            <button class="ov-btn ok" data-act="pickClass" ${sel ? '' : 'disabled'}>${sel ? `确 认 · ${esc(sel)}` : '请先选择角色'}</button>
+          </footer>
+        </div>`, 'page');
+    };
+    // 二级页：该角色的卡池全览
+    const renderPool = () => {
+      const pool = SDT.Cards.classPool(sel);
+      UI.showOverlay(`[[icon:cards]] ${esc(sel)} · 角色卡池`, `
+        <div class="pg cls-page cls-pool-page">
+          <header class="pg-head">
+            <h2>[[icon:cards]] ${esc(sel)} · 角色卡池（${pool.length} 张）</h2>
+            <span class="sub">确认选择「${esc(sel)}」后，从以下卡池中随机获得 1 张（与 5 张「初始攻击」一起带入背包）</span>
+          </header>
+          <div class="cls-pool cls-pool-full">${pool.map(c => SDT.Cards.cardHTML(c, 'sm')).join('')}</div>
+          <footer class="cls-foot">
+            <button class="ov-btn" data-act="clsBack">[[icon:medal]] 返回选角</button>
+            <button class="ov-btn ok" data-act="pickClass">确 认 · ${esc(sel)}</button>
+          </footer>
+        </div>`, 'page');
+    };
+    UI.act('selClass', (d) => {
+      if (d.cls === sel) return;
+      sel = d.cls;
+      Sfx.tick();
+      render();
+    });
+    UI.act('clsPool', () => {
+      if (!sel) return;
+      view = 'pool';
+      Sfx.tick();
+      render();
+    });
+    UI.act('clsBack', () => {
+      view = 'select';
+      Sfx.tick();
+      render();
+    });
+    UI.act('pickClass', () => {
+      if (!sel) return;
+      const cl = sel;
       game.myClass = cl;
       game.classCard = null;
       const card = SDT.Cards.randomClassCard(cl);
       UI.hideOverlay();
-      UI.log(`[[icon:medal]] 本局职业：<b>${esc(cl)}</b>`, 'ok');
+      UI.log(`[[icon:medal]] 本局角色：<b>${esc(cl)}</b>`, 'ok');
       // 熟练度加成：每级（Lv.1 起）生命上限 +2，立即生效
       const lv = SDT.Meta.classLv(cl);
       if (lv > 1) {
@@ -381,13 +581,13 @@
       if (card) {
         game.classCard = { ...card };
         game.ownedCards.push({ uid: newUid(), card: game.classCard, brought: 1 });
-        UI.log(`[[icon:archive]] 获得职业卡【<b>${esc(card.name)}</b>】（${esc(cl)}）`, 'loot');
+        UI.log(`[[icon:archive]] 获得角色卡【<b>${esc(card.name)}</b>】（${esc(cl)}）`, 'loot');
       }
       game.state = 'idle';
       saveGame();
       UI.refresh(game);
     });
-    UI.refresh(game);
+    render();
   }
 
   function triggerEventCard(card) {
@@ -396,23 +596,23 @@
     UI.log(`[[icon:dice]] 触发事件【<b>${esc(card.name)}</b>】${card.desc ? '· ' + esc(card.desc) : ''}`, 'sys');
     // 主界面大字揭晓：展示事件卡卡面与描述，点击任意处后结算
     game.state = 'modal';
-    cardPageOpen = false;
+    _set_cardPageOpen(false);
     SDT.Sound.sfx('scene');
     const choices = eventChoiceSpec(card);
     const sceneMeta = EVENT_SCENE_META[card.id] || ['event-custom', 'scene-event-custom', 'scene-event-custom'];
-    UI.showOverlay('', `
-      <div class="scene sc-event ${sceneMeta[1]}" data-act="evtNext" data-scene-id="${sceneMeta[0]}" data-asset-key="${sceneMeta[2]}">
-        <div class="scene-glow"></div>
-        <div class="evt-reveal">
-          <div class="evt-card">${SDT.Cards.cardHTML(card)}</div>
-          <div class="evt-info">
-            <h2 class="scene-title evt-title">[[icon:dice]] ${esc(card.name)}</h2>
-            <div class="scene-line evt-line"><p>${esc(card.desc || '神秘事件发生了……')}</p></div>
-            ${choices ? `<div class="ov-btns evt-choices">${choices.map((o, i) => `<button class="ov-btn ${o.tone || ''}" data-act="evtChoice" data-i="${i}">${esc(o.label)}${o.detail ? `<small>${esc(o.detail)}</small>` : ''}</button>`).join('')}</div>` : ''}
-            <p class="scene-hint">[[icon:sparkles]] 点击任意处继续 [[icon:sparkles]]</p>
-          </div>
-        </div>
-      </div>`, 'scene');
+    // 杀戮尖塔式事件页：整屏事件背景，右侧毛玻璃面板放标题、叙事与选项条
+    const optHTML = choices
+      ? choices.map((o, i) => `
+          <button class="evt-opt ${o.tone || ''}" data-act="evtChoice" data-i="${i}">
+            <b>${esc(o.label)}</b>
+            ${o.detail ? `<span>${esc(o.detail)}</span>` : ''}
+          </button>`).join('')
+      : `<button class="evt-opt ok" data-act="evtNext"><b>继 续</b></button>`;
+    nodeShell({
+      tone: 'event', asset: sceneMeta[2], icon: '[[icon:dice]]', title: card.name,
+      sub: esc(card.desc || '神秘事件发生了……'),
+      body: optHTML,
+    });
     UI.act('evtChoice', (d) => {
       if (!choices) return;
       const choice = choices[+d.i];
@@ -442,8 +642,8 @@
       { label: '应急处理', detail: '回复 3 血', tone: 'ok', run: settle(() => game.heal(3)) },
     ];
     if (card.id === 'tt6-chestdraw') return [
-      { label: '撬开小宝箱', detail: '低风险：1 张卡 + 1~2 币', run: () => openChestsOnCell([{ kind: 'small' }], '你选择了稳妥的小宝箱') },
-      { label: '赌一把中宝箱', detail: '高回报：三选一 + 2~3 币', tone: 'ok', run: () => openChestsOnCell([{ kind: 'medium' }], '你选择了高风险的中宝箱') },
+      { label: '撬开小型物资箱', detail: '低风险：1 张卡 + 1~2 币', run: () => openChestsOnCell([{ kind: 'small' }], '你选择了稳妥的小型物资箱') },
+      { label: '赌一把密封物资箱', detail: '高回报：三选一 + 2~3 币', tone: 'ok', run: () => openChestsOnCell([{ kind: 'medium' }], '你选择了高风险的密封物资箱') },
     ];
     return null;
   }
@@ -486,7 +686,7 @@
         break;
       case 'tt6-chestdraw': {  // 宝箱：从小、中宝箱中抽 1 个（开真宝箱）
         const kind = Math.random() < 0.5 ? 'small' : 'medium';
-        openChestsOnCell([{ kind }], '你撬开了一个宝箱');
+        openChestsOnCell([{ kind }], '你撬开了一个遗留物资箱');
         break;
       }
       case 'tt6-demondeal': {  // 恶魔交易：-1 血，获得传奇武器（暂从传说装备/武术中随机）
@@ -497,8 +697,8 @@
         break;
       }
       case 'tt6-bandits': {  // 盗匪横行：土匪 ×5（多敌事件战斗），战胜奖励中宝箱 ×2（开真宝箱）
-        UI.log('[[icon:swords]] 土匪一伙（×5）拦住了去路！', 'warn');
-        game.pendingEventLoot = { text: '中宝箱 ×2', chests: ['medium', 'medium'] };
+        UI.log('[[icon:swords]] 掠夺者一伙（×5）拦住了去路！', 'warn');
+        game.pendingEventLoot = { text: '密封物资箱 ×2', chests: ['medium', 'medium'] };
         game.state = 'modal';
         const tpl = MAP.monsters.bandit;
         const gang = [];
@@ -528,18 +728,19 @@
     game.state = 'modal';
     game.discoveredPairs.add(door.pair);
     const target = MAP.layers[door.toLayer];
-    const btns = [];
-    if (door.exit) btns.push('<button class="ov-btn ok" data-act="extractNow">[[icon:exit]] 撤离</button>');
-    btns.push(`<button class="ov-btn ok" data-act="goDoor">[[icon:door]] ${door.reverse ? '返回' : '进入'}${target.name}</button>`);
-    if (cellDef && cellDef.type === 'shop') btns.push('<button class="ov-btn" data-act="doorShop">[[icon:bag]] 逛商店</button>');
-    btns.push('<button class="ov-btn" data-act="stayHere">留下</button>');
-    UI.showOverlay('[[icon:door]] 环间门', `
-      <p class="ov-stats">此门连通 <b>${target.name}</b>，可自由往返${door.exit ? '；也可选择就此撤离' : ''}。</p>
-      <div class="ov-btns">${btns}</div>`);
+    nodeShell({
+      tone: 'door', icon: '[[icon:door]]', title: '环间门',
+      sub: `这道隔离闸门连通 <b>${target.name}</b>，可自由往返${door.exit ? '；也可选择就此撤离' : ''}`,
+      body:
+        nodeOpt('goDoor', `${door.reverse ? '返回' : '进入'}${target.name}`, '穿过闸门，前往另一环', 'ok') +
+        (door.exit ? nodeOpt('extractNow', '就此撤离', '带着背包立即结算撤离', 'ok') : '') +
+        (cellDef && cellDef.type === 'shop' ? nodeOpt('doorShop', '逛商队', '闸门旁的拾荒商队还在营业') : '') +
+        nodeOpt('stayHere', '留下', '留在当前格子，稍后再决定'),
+    });
     UI.act('extractNow', () => { UI.hideOverlay(); doExtract(); });
     UI.act('goDoor', () => {
       UI.hideOverlay();
-      UI.log(`穿过环间门 → <b>${target.name}</b>`, 'sys');
+      UI.log(`穿过隔离闸门 → <b>${target.name}</b>`, 'sys');
       enterLayer(door.toLayer, door.arriveAt);
     });
     UI.act('doorShop', () => openShop());
@@ -550,17 +751,19 @@
   function openAltarEntranceModal(altarE, cellDef) {
     game.state = 'modal';
     game.discoveredPairs.add(altarE.pair);
-    const btns = ['<button class="ov-btn ok" data-act="enterAltar">[[icon:crystal]] 进入祭坛</button>'];
-    if (cellDef && cellDef.type === 'shop') btns.push('<button class="ov-btn" data-act="doorShop">[[icon:bag]] 逛商店</button>');
-    btns.push('<button class="ov-btn" data-act="stayHere">留下</button>');
-    UI.showOverlay('[[icon:crystal]] 祭坛入口', `
-      <p class="ov-stats">中央祭坛盘踞着三只 BOSS：将军(5-50) / 元素领主(8-48) / 兽人首领(4-45)，各怀词缀，小心应对</p>
-      <div class="ov-btns">${btns}</div>`);
+    nodeShell({
+      tone: 'altar', icon: '[[icon:crystal]]', title: '污染核心入口',
+      sub: '污染核心盘踞着三只变异体首脑：锈蚀将军(5-50) / 辐射领主(8-48) / 兽群之主(4-45)，各怀词缀，小心应对',
+      body:
+        nodeOpt('enterAltar', '深入污染区', '踏入辐射结晶之中，挑战盘踞的变异体首脑', 'ok') +
+        (cellDef && cellDef.type === 'shop' ? nodeOpt('doorShop', '逛商队', '入口处的拾荒商队还在营业') : '') +
+        nodeOpt('stayHere', '留下', '留在当前格子，稍后再决定'),
+    });
     UI.act('enterAltar', () => {
       game.altarFrom = { li: game.layerIdx, idx: game.trackPos, pair: altarE.pair };
       game.pos = { ...game.centerPos[0] };   // 中央祭坛结点
       UI.hideOverlay();
-      UI.log('踏入<b>祭坛</b>……空气凝重起来', 'sys');
+      UI.log('踏入<b>污染核心</b>……盖革计数器的咔嗒声密了起来', 'sys');
       openAltarModal();
     });
     UI.act('doorShop', () => openShop());
@@ -573,12 +776,17 @@
     const bosses = MAP.altar.bosses.map(b => scaledEnemy(b));
     const btns = bosses.map((b, i) => {
       const aff = b.affix ? MAP.altar.bosses[i].affixDesc : '';
-      return `<button class="ov-btn danger" data-act="fightBoss" data-i="${i}" title="${escAttr(aff)}">[[icon:swords]] ${b.name}（${b.atk}-${b.hp}）</button>`;
+      return `<button class="evt-opt danger withart" data-act="fightBoss" data-i="${i}">
+        <span class="evt-opt-art">${SDT.Art.has(b.id) ? SDT.Art.monsterArt(b.id) : ''}</span>
+        <span class="evt-opt-txt"><b>${esc(b.name)}（${b.atk}-${b.hp}）</b><span>${esc(aff || 'BOSS 战使用过的卡牌不会消耗')}</span></span>
+      </button>`;
     }).join('');
     const eliteTip = modeCfg().enemyMul !== 1 ? ` · 精英 ×${modeCfg().enemyMul}` : '';
-    UI.showOverlay('[[icon:crystal]] 祭坛 · BOSS 巢穴', `
-      <p class="ov-stats">选择挑战的 BOSS（悬停查看词缀 · BOSS战使用过的卡牌不会消耗${eliteTip}）</p>
-      <div class="ov-btns">${btns}<button class="ov-btn" data-act="leaveAltar">离开祭坛</button></div>`);
+    nodeShell({
+      tone: 'altar', icon: '[[icon:crystal]]', title: '污染核心 · 变异巢穴',
+      sub: `选择挑战的 BOSS（BOSS战使用过的卡牌不会消耗${eliteTip}）`,
+      body: btns + nodeOpt('leaveAltar', '撤离污染区', '退回入口格，从长计议'),
+    });
     UI.act('fightBoss', (d) => {
       const b = MAP.altar.bosses[+d.i];
       SDT.Battle.start(game, scaledEnemy(b), { isBoss: true, returnTo: 'altar', name: b.name });
@@ -591,7 +799,7 @@
         game.pos = cellCenter(f.li, f.idx);
       }
       game.state = 'idle';
-      UI.log('退出祭坛，回到入口格', 'dim');
+      UI.log('退出污染核心，回到入口格', 'dim');
       UI.refresh(game);
     });
     UI.refresh(game);
@@ -600,12 +808,13 @@
   function openEmergencyModal() {
     game.state = 'modal';
     const can = game.coins >= MAP.rules.emergencyExitCost;
-    UI.showOverlay('[[icon:cross]] 紧急撤离点', `
-      <p class="ov-stats">花费 <b>${MAP.rules.emergencyExitCost}</b> 币立即撤离（你有 ${game.coins} 币）</p>
-      <div class="ov-btns">
-        <button class="ov-btn ${can ? 'ok' : ''}" data-act="payExit">[[icon:coin]] 花币撤离</button>
-        <button class="ov-btn" data-act="stayHere">留下</button>
-      </div>`);
+    nodeShell({
+      tone: 'exit', icon: '[[icon:cross]]', title: '紧急撤离点',
+      sub: `花费 <b>${MAP.rules.emergencyExitCost}</b> 币立即撤离（你有 <b class="gold">${game.coins}</b> 币）`,
+      body:
+        nodeOpt('payExit', '花币撤离', `支付 ${MAP.rules.emergencyExitCost} 币，立即结算撤离`, can ? 'ok' : '') +
+        nodeOpt('stayHere', '留下', '继续探索本环，撤离点随时还在'),
+    });
     UI.act('payExit', () => {
       if (game.coins < MAP.rules.emergencyExitCost) { UI.log('币不够，无法紧急撤离', 'warn'); SDT.Sound.sfx('error'); return; }
       game.coins -= MAP.rules.emergencyExitCost;
@@ -655,9 +864,10 @@
   }
 
   function openShop() {
-    if (game.state !== 'idle' && game.state !== 'modal') return;
+    // 普通商店由落格结算直接打开，此时状态仍是 moving；门/祭坛旁商店则是 modal。
+    if (!['idle', 'moving', 'modal'].includes(game.state)) return;
     game.state = 'modal';
-    cardPageOpen = false;  // 商店覆盖卡牌页面时结束页面态
+    _set_cardPageOpen(false);  // 商店覆盖卡牌页面时结束页面态
     game.shopStock = generateShopStock();
     renderShop();
   }
@@ -667,7 +877,10 @@
       if (s.empty) return `<div class="shop-slot"><div class="shop-empty">${s.label || '无货'}</div></div>`;
       if (s.sold) return `<div class="shop-slot sold"><div class="shop-empty">已售出</div></div>`;
       const afford = game.coins >= s.price;
-      return `<div class="shop-slot">${s.mystery ? '<div class="shop-empty" style="margin:0 0 4px">[[icon:dice]] 随机卡牌 · 3 币</div>' : ''}${cardHTML(s.card)}
+      if (s.mystery) return `<div class="shop-slot"><div class="shop-empty">[[icon:dice]] 随机卡牌</div>
+        <button class="mini-btn ok" data-act="buyCard" data-i="${i}" ${afford ? '' : 'disabled'}>[[icon:coin]] ${s.price} 币</button>
+      </div>`;
+      return `<div class="shop-slot">${cardHTML(s.card)}
         <button class="mini-btn ok" data-act="buyCard" data-i="${i}" ${afford ? '' : 'disabled'}>[[icon:coin]] ${s.price} 币</button>
       </div>`;
     }).join('');
@@ -680,12 +893,30 @@
             <button class="mini-btn ok" data-act="sellCard" data-uid="${o.uid}">出售 ＋${SDT.Cards.sellPrice(o.card)} 币</button>
           </div>`).join('')
       : '<p class="shop-sell-empty">没有可出售的卡牌——只有带「可出售」备注的卡才能卖给商店（默认不可出售）。</p>';
-    UI.showOverlay('[[icon:bag]] 商店', `
-      <p class="ov-stats">你有 <b class="gold">${game.coins}</b> 币 · 每次光顾随机进货：6 张随机卡 + 1 张初始牌 + 金疮药 + 1 个「随机卡牌」栏位（3 币）</p>
-      <div class="shop-grid">${slots}</div>
-      <h3 class="set-h">出售卡牌 <span class="set-tip">默认不可出售 · 仅限带「可出售」备注的卡 · 收购价 = 币值 [[icon:coin]]</span></h3>
-      <div class="shop-sell">${sellItems}</div>
-      <div class="ov-btns"><button class="ov-btn" data-act="closeShop">离开商店</button></div>`, true);
+    UI.registerHelp('shop', {
+      title: '商店说明',
+      html: `
+        <p class="help-item"><b>进货</b>商队每次靠站随机卸货：6 张随机卡 + 1 张初始牌 + 金疮药 + 1 个「神秘货箱」栏位（3 币，买到随机卡牌）。</p>
+        <p class="help-item"><b>出售</b>默认所有卡牌不可出售；只有带「可出售」备注的卡才能卖给商店，收购价 = 卡面币值。</p>`,
+      back: () => renderShop(),
+    });
+    UI.showOverlay('', `
+      <div class="pg shop-pg node-pg sc-shop" data-asset-key="scene-shop-bg">
+        <header class="pg-head">
+          <h2>[[icon:bag]] 拾荒商队 ${UI.helpBtn('shop')}</h2>
+          <span class="pg-spacer"></span>
+          <span class="hub-res"><span class="res-chip">[[icon:coin]] <b class="gold">${game.coins}</b> 币</span></span>
+        </header>
+        <div class="shop-grid">
+          ${slots}
+          <aside class="shop-side">
+            <div class="shop-coinbox">[[icon:coin]] 持有 <b class="gold">${game.coins}</b> 币</div>
+            <button class="ov-btn" data-act="closeShop">[[icon:exit]] 离开商店</button>
+          </aside>
+        </div>
+        <h3 class="set-h">出售卡牌</h3>
+        <div class="shop-sell">${sellItems}</div>
+      </div>`, 'page');
     UI.act('buyCard', (d) => {
       const s = game.shopStock[+d.i];
       if (!s || s.sold || s.empty) return;
@@ -723,7 +954,7 @@
   }
 
   // 撤离成功 → 「整理入库」交互：把背包中的物品放回仓库（不入库的会丢失）。
-  // 「杀」为初始牌不可入库；木材/口粮自动入库；消耗口袋自动回收。
+  // 「初始攻击」为初始牌不可入库；木材/口粮自动入库；消耗口袋自动回收。
   let extractLeft = null;   // 待整理的卡牌堆 [{card, count}]（撤离整理页暂存）
 
   function doExtract() {
@@ -741,7 +972,7 @@
     // 卡牌堆交给整理界面，由玩家决定入不入库
     const byName = new Map();
     game.ownedCards.forEach(o => {
-      if (B.isSha(o.card)) return;              // 「杀」不可入库
+      if (B.isSha(o.card)) return;              // 「初始攻击」不可入库
       const s = byName.get(o.card.name);
       if (s) s.count++;
       else byName.set(o.card.name, { card: { ...o.card }, count: 1 });
@@ -770,17 +1001,26 @@
       </div>`;
     }).join('');
     const shaRow = shaN
-      ? `<div class="pk-row dep-row locked"><span>[[icon:cards]] [[icon:lock]] <b>杀</b> ×${shaN}
+      ? `<div class="pk-row dep-row locked"><span>[[icon:cards]] [[icon:lock]] <b>初始攻击</b> ×${shaN}
           <span class="dim">· 初始牌不可入库（每局自动携带 ${MAP.rules.starterSha} 张）</span></span>
           <span class="dim">遗落</span></div>`
       : '';
     const totalLeft = extractLeft.reduce((a, b) => a + b.count, 0);
     game.state = 'done';
-    cardPageOpen = false;   // 整理页必须点「完成整理」结束（防止 Esc 绕过丢失提醒）
+    _set_cardPageOpen(false);   // 整理页必须点「完成整理」结束（防止 Esc 绕过丢失提醒）
+    UI.registerHelp('extract', {
+      title: '整理入库说明',
+      html: `
+        <p class="help-item"><b>背包卡牌</b>点击「入库」放回仓库；仓库容量不足时无法入库，未入库的卡牌将在撤离中丢失。</p>
+        <p class="help-item"><b>自动入库</b>木材/口粮自动入库（纯资源没有丢弃的意义）；消耗口袋自动回收（基地/火堆可复原）；「初始攻击」不可入库（每局自动携带）。</p>
+        <p class="help-item"><b>仓库容量</b>可在基地「升级」页用 [[icon:wood]] 木材×${MAP.rules.stashUpgradeWood} 扩建 +${MAP.rules.stashUpgradeSlots} 张；仓库里的卡牌下次出发时可以携带。</p>`,
+      back: () => renderExtractStash(),
+    });
     UI.showOverlay('', `
       <div class="pg hub" id="exMain">
         <header class="hub-head">
           <h2>[[icon:exit]] 撤离成功 · 整理入库</h2>
+          ${UI.helpBtn('extract')}
           <span class="sub">把背包中的物品放回仓库——未入库的卡牌将在撤离中丢失</span>
           <span class="pg-spacer"></span>
           <span class="hub-res">
@@ -790,7 +1030,7 @@
         </header>
         <div class="dep-body">
           <section class="hub-card">
-            <h3>[[icon:bag]] 背包卡牌 <span class="set-tip">点击「入库」放回仓库 · 容量不足时无法入库</span></h3>
+            <h3>[[icon:bag]] 背包卡牌</h3>
             <div class="dep-list">${rows || '<p class="ov-empty" style="margin:6px 0 0">背包里没有可入库的卡牌。</p>'}${shaRow}</div>
           </section>
           <section class="hub-card">
@@ -799,8 +1039,6 @@
             <div class="pk-row"><span>[[icon:bread]] 口粮 ×<b>${ratN}</b></span><span class="dim">已入库（升级安全格用）</span></div>
             ${otherN ? `<div class="pk-row"><span>[[icon:bag]] 其余物资 ×<b>${otherN}</b></span><span class="dim">未能带出 · 价值已计入本局得分</span></div>` : ''}
             <div class="pk-row"><span>[[icon:pocket]] 消耗口袋</span><span class="dim">已自动回收（基地可复原）</span></div>
-            <p class="hint">提示：仓库容量可在基地「升级」页用 [[icon:wood]] 木材×${MAP.rules.stashUpgradeWood} 扩建 +${MAP.rules.stashUpgradeSlots} 张；
-              仓库里的卡牌下次出发时可以携带。</p>
             ${extractLeft.length ? `<button class="ov-btn ok" data-act="exAll" ${room > 0 && totalLeft <= room ? '' : 'disabled'}
               style="width:100%">[[icon:archive]] 全部入库（${Math.min(totalLeft, room)}/${totalLeft} 张可入）</button>` : ''}
             <div class="dep-foot" style="margin-top:10px">
@@ -853,18 +1091,21 @@
     const s = Math.floor(game.elapsed);
     const timeStr = String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0');
     UI.log(`<b>[[icon:exit]] 撤离成功！</b>共 ${game.turn - 1} 次行动；运回基地：木材×${woodN}、口粮×${ratN}，仓库现有 ${B.stashUsed()}/${B.stashCap()} 张`, 'ok');
-    UI.showOverlay('[[icon:exit]] 撤离成功', `
-      <p class="ov-stats">用时 <b>${timeStr}</b> · 行动 <b>${game.turn - 1}</b> 次 · 剩余生命 <b style="color:#7fdd9c">${game.hp}/${game.maxHp}</b> ·
-        本局携带 <b class="gold">${game.coins} 币</b>（留在局中） · 物资价值 <b class="gold">¥${total.toLocaleString()}</b></p>
-      <p class="ov-note">[[icon:home]] 已运回基地：[[icon:wood]] 木材 ×${woodN} · [[icon:bread]] 口粮 ×${ratN} · [[icon:archive]] 仓库 <b>${B.stashUsed()}/${B.stashCap()}</b> 张 ·
-        [[icon:sparkles]] 图鉴 <b>${Object.keys(B.data.collection).length}</b></p>
-      <p class="ov-note">下次出发时可以从仓库选择卡牌携带；储备币 <b>${B.data.coins}</b> 币将作为开局币随身带走。</p>
-      <div class="ov-btns">
+    nodeShell({
+      tone: 'exit', icon: '[[icon:exit]]', title: '撤离成功',
+      sub: `用时 <b>${timeStr}</b> · 行动 <b>${game.turn - 1}</b> 次 · 剩余生命 <b style="color:#7fdd9c">${game.hp}/${game.maxHp}</b> ·
+        本局携带 <b class="gold">${game.coins} 币</b>（留在局中） · 物资价值 <b class="gold">¥${total.toLocaleString()}</b>`,
+      body: `
+        <p class="ov-note">[[icon:home]] 已运回基地：[[icon:wood]] 木材 ×${woodN} · [[icon:bread]] 口粮 ×${ratN} · [[icon:archive]] 仓库 <b>${B.stashUsed()}/${B.stashCap()}</b> 张 ·
+          [[icon:sparkles]] 图鉴 <b>${Object.keys(B.data.collection).length}</b></p>
+        <p class="ov-note">下次出发时可以从仓库选择卡牌携带；储备币 <b>${B.data.coins}</b> 币将作为开局币随身带走。</p>`,
+      foot: `
         <button class="ov-btn" data-act="goBase">[[icon:home]] 回基地</button>
-        <button class="ov-btn ok" data-act="again">再出发</button>
-      </div>`);
+        <button class="ov-btn ok" data-act="again">[[icon:runner]] 再出发</button>`,
+    });
     UI.act('goBase', () => { UI.hideOverlay(); openBaseHub('deploy'); });
     UI.act('again', () => { UI.hideOverlay(); openBaseHub('deploy'); });
     UI.refresh(game);
   }
 
+export { bindRunMixins, openAltarModal, openClassChoice, openShop, roll };

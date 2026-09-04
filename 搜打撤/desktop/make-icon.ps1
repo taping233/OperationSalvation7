@@ -72,7 +72,7 @@ $bw.Write([uint32]22)
 $bw.Write($png)
 $bw.Flush()
 
-$out = Join-Path $PSScriptRoot 'app\icon.ico'
+$out = Join-Path $PSScriptRoot '..\desktop-app\app.ico'
 [System.IO.File]::WriteAllBytes($out, $ico.ToArray())
 Write-Host "OK -> $out"
 Write-Host "OK -> $webAsset"

@@ -1,5 +1,28 @@
+/* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
+const UI = window.SDT.UI;
+const SDT = window.SDT;
+import { TYPE_NAME } from './game.notes.js';
+import { MAP } from './game.core.js';
+import { SLOT_COUNT, buildDerived, cam, canvas, ctx, dpr, exitToTitle, game, hasRun, migrateOldSave, openSettings, quitGame, saveGame, showTitle, startNewGame, _set_dpr, _set_cam } from './game.core.js';
+import { bindRunMixins, openShop, roll } from './game.run.js';
+import { openBaseHub } from './game.hub.js';
+import { bindBagMixins, showBackpack } from './game.bag.js';
+import { bindDevMode, bindNotesMixins, initDevMode, openCellEditor, rebuildNotes, showClearOverlay, showExportOverlay, showImportOverlay } from './game.notes.js';
+import { cardPageOpen, closeCardPageTop, openCardDesigner, openCardLibrary } from './game.cardslib.js';
   function bindInput() {
     let dragging = false, downPos = null, lastPos = null;
+    let hoverFrame = 0, pendingHover = null;
+
+    const scheduleHover = (e) => {
+      pendingHover = { clientX: e.clientX, clientY: e.clientY };
+      if (hoverFrame) return;
+      hoverFrame = requestAnimationFrame(() => {
+        hoverFrame = 0;
+        const point = pendingHover;
+        pendingHover = null;
+        if (point) updateHover(point);
+      });
+    };
 
     canvas.addEventListener('mousedown', (e) => {
       downPos = lastPos = { x: e.clientX, y: e.clientY };
@@ -19,7 +42,7 @@
         }
         lastPos = { x: e.clientX, y: e.clientY };
       }
-      updateHover(e);
+      scheduleHover(e);
     });
 
     window.addEventListener('mouseup', (e) => {
@@ -37,7 +60,7 @@
     });
 
     canvas.addEventListener('contextmenu', (e) => e.preventDefault());
-    canvas.addEventListener('mouseleave', () => { game.hover = null; UI.hideTooltip(); });
+    canvas.addEventListener('mouseleave', () => { pendingHover = null; game.hover = null; UI.hideTooltip(); });
 
     // 滚轮缩放（以光标为锚点，缩放前后光标指向的世界坐标不变）
     canvas.addEventListener('wheel', (e) => {
@@ -59,6 +82,20 @@
 
     UI.el.bagBtn.addEventListener('click', () => showBackpack());
 
+    // 右上角资源 HUD：悬停显示项目自带提示框（与地图节点同款）
+    const vpEl = UI.el.viewport;
+    document.querySelectorAll('#resHud .chip-mini[data-tip]').forEach(chip => {
+      const show = (e) => {
+        const r = vpEl.getBoundingClientRect();
+        const coins = chip.querySelector('#charCoins'), atk = chip.querySelector('#charAtk');
+        const line = coins ? `当前 <b>${game.coins}</b> 币` : `当前 <b>${game.atk}</b> 点 · 攻击伤害 = 卡面值 + 攻击力`;
+        UI.showTooltip(e.clientX - r.left, e.clientY - r.top, chip.dataset.tip, [line]);
+      };
+      chip.addEventListener('mouseenter', show);
+      chip.addEventListener('mousemove', show);
+      chip.addEventListener('mouseleave', () => UI.hideTooltip());
+    });
+
     UI.el.rollBtn.addEventListener('click', roll);
     if (UI.el.tglIndex) UI.el.tglIndex.addEventListener('change', e => { game.toggles.index = e.target.checked; });
     if (UI.el.btnExport) UI.el.btnExport.addEventListener('click', showExportOverlay);
@@ -66,25 +103,6 @@
     if (UI.el.btnClear) UI.el.btnClear.addEventListener('click', showClearOverlay);
     initDevMode();
     bindDevMode();
-
-    // 已发现门/祭坛的快捷前往
-    UI.el.stairsList.addEventListener('click', (e) => {
-      const btn = e.target.closest('[data-godoor],[data-goaltar]');
-      if (!btn || game.state !== 'idle') return;
-      if (btn.dataset.godoor) {
-        const door = (curLayer().doors || []).find(d => d.pair === btn.dataset.godoor);
-        if (!door) return;
-        UI.log(`穿过环间门 → <b>${MAP.layers[door.toLayer].name}</b>`, 'sys');
-        enterLayer(door.toLayer, door.arriveAt);
-      } else {
-        const ae = (curLayer().altarEntrances || []).find(a => a.pair === btn.dataset.goaltar);
-        if (!ae) return;
-        game.altarFrom = { li: game.layerIdx, idx: game.trackPos, pair: ae.pair };
-        game.pos = { ...game.centerPos[0] };   // 中央祭坛结点
-        UI.log('踏入<b>祭坛</b>……', 'sys');
-        openAltarModal();
-      }
-    });
 
     // 卡牌大页面：Esc 关闭 / 点击深色背景关闭
     // （用 click 而非 mousedown 关背景，保证关闭前 mouseup 仍处于 modal 态，不会误触格子编辑）
@@ -108,8 +126,13 @@
   }
 
   function updateHover(e) {
-    canvas.style.cursor = 'crosshair';
     const r = canvas.getBoundingClientRect();
+    if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) {
+      game.hover = null;
+      UI.hideTooltip();
+      return;
+    }
+    canvas.style.cursor = 'crosshair';
     const w = cam.screenToWorld(e.clientX - r.left, e.clientY - r.top);
     const n = pickNode(w.x, w.y);
     if (n !== game.hover) SDT.Sound.sfx('hover');   // 悬停结点变化时轻提示一声
@@ -130,12 +153,12 @@
       const eIdx = (loc.layer.entrances || []).indexOf(loc.idx);
       if (eIdx >= 0) lines.push(`[[icon:door]] 出生入口：${loc.layer.entranceNames[eIdx]}`);
       if (door) lines.push(`[[icon:door]] 环间门${door.reverse ? '（返回）' : ''}${door.exit ? ' / 撤离出口' : ''} ⇄ ${MAP.layers[door.toLayer].name}`);
-      if (altarE) lines.push('[[icon:crystal]] 祭坛入口');
+      if (altarE) lines.push('[[icon:crystal]] 污染核心入口');
       if (def && def.type !== 'entrance') lines.push(`事件：${TYPE_NAME[def.type] || def.type}${def.n ? `（+${def.n}币）` : ''}`);
       else if (eIdx < 0 && !door && !altarE) lines.push('普通格');
     } else {
       title = node.def.name || '中央区';
-      if (node.def.type === 'boss') lines.push('经由祭坛挑战（M1 实装战斗）');
+      if (node.def.type === 'boss') lines.push('经由污染核心挑战（M1 实装战斗）');
       if (node.def.type === 'altar') lines.push('BOSS 巢穴入口');
     }
     const note = SDT.Notes.get(MAP.boardId, node.li, node.idx);
@@ -154,8 +177,14 @@
     lastT = now;
     // 标题 / 退出界面盖住画布时跳过整帧渲染（省电省 GPU，回来时 dt 已钳制不会跳变）
     if ((coverTitle && !coverTitle.hidden) || (coverExit && !coverExit.hidden)) return;
+    // 全屏不透明页（事件/节点/背包页/房间战斗）盖住画布时同样跳帧，不重绘被遮挡的画布
+    const ov = UI.el.overlay;
+    const covered = !ov.hidden && (ov.classList.contains('opaque') || ov.classList.contains('room-view'));
     game.time += dt;
     if (ELAPSED_STATES.has(game.state)) game.elapsed += dt;
+    // 同步到 body，驱动 CSS 状态样式（提示条显隐 / 掷骰按钮呼吸灯）
+    if (document.body.dataset.state !== game.state) document.body.dataset.state = game.state;
+    if (covered) return;
     // 移动时镜头平滑跟随棋子
     if (game.state === 'moving') {
       const k = Math.min(1, dt * 5);
@@ -163,15 +192,13 @@
       cam.cy += (game.pos.y - cam.cy) * k;
       cam.clamp();
     }
-    // 同步到 body，驱动 CSS 状态样式（提示条显隐 / 掷骰按钮呼吸灯）
-    if (document.body.dataset.state !== game.state) document.body.dataset.state = game.state;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     try { SDT.Renderer.draw(ctx, game); } catch (e) { console.error('渲染异常：', e); }
     UI.refreshTime(game);
   }
 
   function resize() {
-    dpr = window.devicePixelRatio || 1;
+    _set_dpr(window.devicePixelRatio || 1);
     canvas.width = canvas.clientWidth * dpr;
     canvas.height = canvas.clientHeight * dpr;
     if (cam) cam.resize(canvas.clientWidth, canvas.clientHeight);
@@ -200,16 +227,35 @@
     window.addEventListener('beforeunload', saveGame);
   }
 
-    // 跨拆分文件的调试入口汇总（原 game.js 单文件时靠函数提升，现放到全部模块加载后执行）
-  Object.assign(game.debug, { openShop, showBackpack, openCardDesigner, openCardLibrary, openBase: openBaseHub });
-
 // ---------- 启动 ----------
   window.addEventListener('DOMContentLoaded', () => {
+    fetch('version.json', { cache: 'no-store' })
+      .then(response => {
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return response.json();
+      })
+      .then(manifest => {
+        const el = document.getElementById('gameVersion');
+        if (/^\d+\.\d+(\.\d+)?$/.test(manifest.version)) {
+          if (el) el.textContent = `v${manifest.version}`;
+          document.title = `搜打撤 · 代号7 v${manifest.version}`;
+        }
+      })
+      .catch(error => console.warn('无法读取游戏版本：', error));
+    // 全部模块求值完成后才绑定跨文件 mixin（循环导入下各模块体不能在顶层读 game）
+    bindRunMixins();
+    bindBagMixins();
+    bindNotesMixins();
+    // 跨拆分文件的调试入口汇总（原 game.js 单文件时靠函数提升）
+    Object.assign(game.debug, { openShop, showBackpack, openCardDesigner, openCardLibrary, openBase: openBaseHub });
     UI.init();
+    // 应用设置里持久化的界面开关（提示条 / 环层横幅）
+    document.body.classList.toggle('no-hintbar', localStorage.getItem('sdt-hintbar') === '0');
+    document.body.classList.toggle('no-banner', localStorage.getItem('sdt-banner') === '0');
     coverTitle = document.getElementById('title');
     coverExit = document.getElementById('exitScr');
     resize();
-    cam = new SDT.Camera(MAP, canvas.clientWidth || 800, canvas.clientHeight || 600);
+    _set_cam(new SDT.Camera(MAP, canvas.clientWidth || 800, canvas.clientHeight || 600));
     game.cam = cam;
 
     buildDerived();
@@ -224,7 +270,7 @@
     bindInput();
     bindTitle();
   SDT.Cards.ensureStarters();    // 补入初始牌（缺失时）
-  SDT.Cards.ensureSha();         // 播入初始牌「杀」（只播一次）
+  SDT.Cards.ensureSha();         // 播入初始牌「初始攻击」（只播一次）
   SDT.Cards.ensureTabletop();    // 播入桌游手绘道具卡（只播一次）
   SDT.Cards.ensureDmgTypes();    // 伤害类型词条回填（只补缺失值，不覆盖玩家标注）
   SDT.Cards.ensureEffectFields(); // 抽卡/注能词条回填（只补缺失值，不覆盖玩家标注）
@@ -238,3 +284,5 @@
     showTitle();          // 开机进入《代号7》标题界面
     requestAnimationFrame(loop);
   });
+
+export { resize };

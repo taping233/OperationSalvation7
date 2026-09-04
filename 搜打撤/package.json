@@ -1,0 +1,25 @@
+{
+  "name": "codename7-soudache-game",
+  "private": true,
+  "version": "0.51.0",
+  "license": "MIT",
+  "type": "module",
+  "description": "搜打撤 · 代号7 游戏源码（Vite + Vitest）",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "acorn": "^8.14.0",
+    "acorn-walk": "^8.3.4",
+    "jsdom": "^25.0.1",
+    "vite": "^6.0.0",
+    "vitest": "^3.0.0"
+  },
+  "dependencies": {
+    "pixi.js": "^8.20.1"
+  }
+}

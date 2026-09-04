@@ -1,6 +1,17 @@
+/* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
+const SDT = window.SDT;
+const UI = window.SDT.UI;
+import { esc } from './shared.js';
+import { MAP } from './game.core.js';
+import { escAttr } from './shared.js';
+import { MODES, game, newRun, setLobby, showTitle } from './game.core.js';
+import { Sfx, _set_cardPageOpen } from './game.cardslib.js';
+
+// 基地当前页签（原为隐式全局，ESM 严格模式下必须显式声明）
+let hubTab = 'deploy';
   function openBaseHub(tab) {
     game.state = 'modal';
-    cardPageOpen = true;
+    _set_cardPageOpen(true);
     setLobby(true);           // 基地也属于非对局界面：隐藏左侧栏
     hubTab = tab || 'deploy';
     SDT.Sound.music('base');   // 基地氛围
@@ -11,8 +22,11 @@
   function renderHub() {
     const B = SDT.Base;
     const M = SDT.Meta;
-    cardPageOpen = true;      // Hub 页面：Esc / 点击背景可关闭
+    _set_cardPageOpen(true);      // Hub 页面：Esc / 点击背景可关闭
     const pending = M.pendingAch().length;
+    // 页签切换时才播放入场动画（页内操作重渲染不闪）
+    const tabChanged = renderHub._lastTab !== hubTab;
+    renderHub._lastTab = hubTab;
     // v0.22 图标页签：大图标为主 + 小字注记（仓库=木房子）
     const TABS = [
       { id: 'deploy', icon: 'flag', name: '出发' },
@@ -26,12 +40,12 @@
       : hubTab === 'upgrade' ? hubUpgradeHTML()
       : hubTab === 'classes' ? hubClassesHTML()
       : hubAchHTML();
+    registerHubHelp(hubTab);
     UI.showOverlay('', `
-      <div class="pg hub" id="hubMain">
+      <div class="pg hub hub-${hubTab}" id="hubMain">
         <button class="pg-close" data-act="closeBase" title="关闭（Esc）">[[icon:cross]]</button>
-        <header class="hub-head">
-          <h2>[[icon:home]] 基地</h2>
-          <span class="sub">代号7 · 局外营盘</span>
+        <header class="hub-head hub-head-min">
+          ${UI.helpBtn('hub-' + hubTab)}
           <span class="pg-spacer"></span>
           <span class="hub-res">
             <span class="res-chip">[[icon:wood]] 木材 <b>${B.data.wood}</b></span>
@@ -46,7 +60,7 @@
             `<span class="tab-txt">${t.name}</span>` +
             `${t.id === 'ach' && pending ? '<span class="dot"></span>' : ''}</button>`).join('')}
           </nav>
-          <div class="hub-page">${body}</div>
+          <div class="hub-page${tabChanged ? ' page-in' : ''}">${body}</div>
         </div>
       </div>`, 'page');
     UI.act('hubTab', (d) => { hubTab = d.tab; renderHub(); });
@@ -86,7 +100,7 @@
     UI.act('restoreCard', (d) => {
       const r = B.restore(+d.i);
       if (r === true) { Sfx.ding(); UI.log('[[icon:check]] 卡牌已复原，回到卡牌仓库', 'ok'); }
-      else if (r === 'sha') UI.log('[[icon:cards]] 初始牌「杀」无需入库——每局自动携带，已直接消耗', 'dim');
+      else if (r === 'sha') UI.log('[[icon:cards]] 初始牌「初始攻击」无需入库——每局自动携带，已直接消耗', 'dim');
       else if (r === 'full') UI.log(`[[icon:archive]] 仓库容量不足（${B.stashUsed()}/${B.stashCap()} 张），先卖出或升级仓库`, 'warn');
       if (r) renderHub();
     });
@@ -111,6 +125,42 @@
     UI.act('closeBase', closeBase);
   }
 
+  // —— 基地各页签的 ? 帮助主题（说明文字统一收进二级界面，不在页面直铺） ——
+  function registerHubHelp(tab) {
+    const R = MAP.rules;
+    const T = {
+      deploy: { title: '出发说明', items: [
+        ['玩法选择', '出发后会随机空降到外圈入口，并从全部职业中自由选择 1 个本局职业（熟练度提供常驻加成）。'],
+        ['出征预报', '点击「出发」后会打开出征整备：选择要从仓库携带的卡牌——只有带上的卡才能在战斗中使用。撤离成功后也会出现整理界面，让你把背包战利品放回仓库。'],
+        ['宝藏大门', '在棋盘的钥匙格收集钥匙，集齐 ' + (SDT.Base.KEY_NEEDED || 10) + ' 把可开启特殊关卡（关卡制作中）。'],
+      ] },
+      stash: { title: '仓库说明', items: [
+        ['卡牌仓库', '点击物品可卖出换储备币，或收藏进图鉴（传说卡与桌游珍宝是特殊收藏品，收藏后完成对应成就，收藏期间不可卖出）。出发时自选携带。'],
+        ['消耗口袋', '对战小怪用过的卡会随撤离回到这里，复原后回仓库。'],
+        ['物资', '点击木材/口粮可卖出换储备币（卖出后不可买回）：木材用于背包与仓库扩建，口粮用于安全格升级。储备币会在下次出发时随身带走。'],
+      ] },
+      upgrade: { title: '升级说明', items: [
+        ['背包扩建', '每消耗木材 ×' + R.bagUpgradeWood + ' 扩建 1 格，上限 ' + R.bagMax + ' 格。'],
+        ['仓库扩建', '每消耗木材 ×' + R.stashUpgradeWood + ' 扩建 ' + R.stashUpgradeSlots + ' 张容量，上限 ' + R.stashMax + ' 张。'],
+        ['宠物小屋', '宠物「阿七」看守着背包的安全格——撤离失败时，它会把安全格里的卡牌抢运回基地。每消耗口粮 ×' + R.safeUpgradeRations + ' 升级 1 格，上限 ' + R.safeMax + ' 格。'],
+      ] },
+      classes: { title: '职业说明', items: [
+        ['熟练度', '每局出发时从全部角色中自由选择 1 个；击败敌人、撤离成功都会累积所选角色的熟练度经验，升级获得常驻加成（下一局出征生效）。'],
+      ] },
+      ach: { title: '成就与卡背', items: [
+        ['卡背图鉴', '牌库堆 / 背包翻面使用的卡背；领取对应成就奖励解锁，点击即可装备。'],
+        ['成就', '达成条件后自动解锁（页内显示奖励内容），回基地点击「领取」获得物资与卡背奖励。'],
+      ] },
+    };
+    const t = T[tab];
+    if (!t) return;
+    UI.registerHelp('hub-' + tab, {
+      title: t.title,
+      html: t.items.map(([k, v]) => `<p class="help-item"><b>${k}</b>${v}</p>`).join(''),
+      back: () => renderHub(),
+    });
+  }
+
   // —— 出发页：选择玩法 + 出征预报 + 宝藏大门 ——
   function hubDeployHTML() {
     const B = SDT.Base;
@@ -129,7 +179,6 @@
               <span class="mode-ckpt">${md.ckpt}</span>
             </button>`).join('')}
           </div>
-          <p class="hint" style="margin-top:10px">出发后会随机空降到外圈入口，并从两个随机职业中选 1 个本局职业（熟练度提供常驻加成）。</p>
         </section>
         <section class="hub-card">
           <h3>[[icon:notes]] 出征预报</h3>
@@ -142,7 +191,6 @@
             <span class="fc-chip">[[icon:lock]] 安全格 <b>${B.safeCap()} 格</b></span>
             <span class="fc-chip">[[icon:archive]] 仓库 <b>${B.stashUsed()}/${B.stashCap()} 张</b></span>
           </div>
-          <p class="hint">点击「出发」后会打开<b>出征整备</b>：选择要从仓库携带的卡牌（它们才能在战斗中使用）。撤离成功后，也会出现整理界面让你把背包战利品放回仓库。</p>
           <div class="deploy-foot">
             <button id="btnDeploy" data-act="deploy">出 发</button>
           </div>
@@ -161,16 +209,18 @@
   }
 
   // ---------- 出征整备（点击「出发」后）：选择从仓库携带的卡牌 ----------
-  // 带入背包的卡牌才能在战斗中使用；「杀」固定携带、不入库也不会出现在这里。
+  // 带入背包的卡牌才能在战斗中使用；「初始攻击」固定携带、不入库也不会出现在这里。
   let deployPick = null;    // 卡名 => 携带张数（出发准备页的暂存选择）
   let deployHint = '';      // 页内提示（容量不足等）
+  let deployJustOpened = false;   // 出发准备页刚打开（只播一次入场动画）
 
   function openDepartPrep() {
     const B = SDT.Base;
     game.state = 'modal';
     deployHint = '';
     deployPick = {};
-    // 预选：尽量全带（同名堆叠占 1 格背包，「杀」已固定占 1 格）
+    deployJustOpened = true;   // 页面初次打开时播放入场动画
+    // 预选：尽量全带（同名堆叠占 1 格背包，「初始攻击」已固定占 1 格）
     let slots = 1;
     B.data.stash.forEach(s => {
       if (slots >= B.bagCap()) return;
@@ -204,12 +254,21 @@
     const slots = deploySlotsUsed();
     const full = slots >= B.bagCap();
     game.state = 'modal';
-    cardPageOpen = true;
+    _set_cardPageOpen(true);
+    UI.registerHelp('deploy-prep', {
+      title: '出征整备说明',
+      html: `
+        <p class="help-item"><b>携带规则</b>只有从这里带入背包的仓库卡牌才能在战斗中使用；同名堆叠只占 1 格。</p>
+        <p class="help-item"><b>初始攻击</b>「初始攻击」×${MAP.rules.starterSha} 每局固定携带，不入库也不出现在上方列表。</p>
+        <p class="help-item"><b>格数</b>背包格数 = 卡牌种类数 + 初始攻击；背包容量可在基地「升级」页用木材扩建。</p>`,
+      back: () => renderDepartPrep(),
+    });
     UI.showOverlay('', `
       <div class="pg hub" id="depMain">
         <button class="pg-close" data-act="depBack" title="返回基地（Esc）">[[icon:cross]]</button>
         <header class="hub-head">
           <h2>[[icon:bag]] 出征整备</h2>
+          ${UI.helpBtn('deploy-prep')}
           <span class="sub">玩法【${MODES[m].name}】 · 选择要从仓库带入背包的卡牌</span>
           <span class="pg-spacer"></span>
           <span class="hub-res">
@@ -217,17 +276,16 @@
             <span class="res-chip">[[icon:coin]] 携带 <b>${B.data.coins}</b> 币</span>
           </span>
         </header>
-        <div class="dep-body">
+        <div class="dep-body${deployJustOpened ? ' page-in' : ''}">
           <section class="hub-card">
-            <h3>[[icon:archive]] 仓库卡牌 <span class="set-tip">带入的卡牌才能在战斗中使用 · 「杀」×${MAP.rules.starterSha} 固定携带</span></h3>
+            <h3>[[icon:archive]] 仓库卡牌</h3>
             <div class="dep-list">${deployPickRowsHTML()}</div>
           </section>
           <section class="hub-card">
             <h3>[[icon:bag]] 背包预览</h3>
-            <div class="pk-row"><span>[[icon:cards]] <b>杀</b> <span class="dim">×${MAP.rules.starterSha} · 固定携带（不可入库）</span></span></div>
+            <div class="pk-row"><span>[[icon:cards]] <b>初始攻击</b> <span class="dim">×${MAP.rules.starterSha} · 固定携带（不可入库）</span></span></div>
             ${Object.keys(deployPick).filter(k => deployPick[k] > 0).map(k =>
               `<div class="pk-row"><span>[[icon:cards]] <b>${esc(k)}</b> <span class="dim">×${deployPick[k]}</span></span></div>`).join('')}
-            <p class="hint">[[icon:bag]] 格数 = 卡牌种类数 + 杀（同名堆叠只占 1 格）；背包容量可在基地「升级」页用木材扩建。</p>
             ${deployHint ? `<p class="hint warn-hint">${deployHint}</p>` : ''}
             <div class="dep-foot">
               <button class="dep-back" data-act="depBack">← 返回</button>
@@ -262,14 +320,15 @@
       const picks = deployPick;
       deployPick = null;
       UI.hideOverlay();
-      cardPageOpen = false;
+      _set_cardPageOpen(false);
       newRun(B.data.selMode, picks);
     });
     UI.act('depBack', () => { deployPick = null; renderHub(); });
+    deployJustOpened = false;   // 首帧渲染完成，后续页内操作不再播动画
   }
 
   function deploySlotsUsed() {
-    let n = 1;   // 「杀」×5 固定占 1 格
+    let n = 1;   // 「初始攻击」×5 固定占 1 格
     Object.keys(deployPick || {}).forEach(k => { if (deployPick[k] > 0) n++; });
     return n;
   }
@@ -299,19 +358,19 @@
     return `
       <div class="hub-two">
         <section class="hub-card">
-          <h3>[[icon:archive]] 卡牌仓库 <span class="set-tip">点击物品可卖出 / [[icon:sparkles]]收藏 · 出发时自选携带</span></h3>
+          <h3>[[icon:archive]] 卡牌仓库</h3>
           <div class="base-line">仓库容量 <b>${used}</b> / ${cap} 张 · [[icon:sparkles]] 图鉴 <b>${collN}</b></div>
           <div class="base-bar"><i style="width:${(used / cap * 100).toFixed(1)}%"></i></div>
           <div class="stash-list">${stashRows}</div>
         </section>
         <section class="hub-card">
-          <h3>[[icon:pocket]] 消耗口袋 <span class="set-tip">共 ${pkN} 张 · 复原后回仓库</span></h3>
+          <h3>[[icon:pocket]] 消耗口袋 <span class="set-tip">共 ${pkN} 张</span></h3>
           <div class="stash-list">${B.data.pocket.length
             ? B.data.pocket.map((p, i) => `
               <div class="pk-row"><span>[[icon:cards]] <b>${esc(p.card.name)}</b>${p.count > 1 ? ` ×${p.count}` : ''}</span>
               <button class="mini-btn ok" data-act="restoreCard" data-i="${i}">[[icon:check]] 复原</button></div>`).join('')
             : '<p class="ov-empty" style="margin:2px 0 0">（空——对战小怪用过的卡会随撤离回到这里）</p>'}</div>
-          <h3 style="margin-top:14px">[[icon:archive]] 物资 <span class="set-tip">点击可卖出换储备币</span></h3>
+          <h3 style="margin-top:14px">[[icon:archive]] 物资</h3>
           <div class="pk-row stash-row" data-act="rawItem" data-kind="wood" title="点击查看：卖出">
             <span>[[icon:wood]] <b>木材</b> ×<b>${B.data.wood}</b></span><span class="dim">收购 ${MAP.items.wood.value} 币/个 · 背包扩建用</span>
           </div>
@@ -331,7 +390,7 @@
     const price = SDT.Cards.sellPrice(s.card);
     const special = isSpecialCollect(s.card);
     game.state = 'modal';
-    cardPageOpen = false;   // 弹窗层级：只能通过按钮返回仓库（Esc 不关闭）
+    _set_cardPageOpen(false);   // 弹窗层级：只能通过按钮返回仓库（Esc 不关闭）
     UI.showOverlay(marked ? '[[icon:sparkles]] 已收藏' : '[[icon:archive]] 仓库物品', `
       <div class="stash-pop-card">${SDT.Cards.cardHTML(s.card, 'sm')}</div>
       <p class="ov-stats">×${s.count} 张 · 收购价 <b class="gold">${price} 币</b>/张
@@ -374,7 +433,7 @@
     const item = kind === 'wood' ? MAP.items.wood : MAP.items.rations;
     const have = B.data[kind];
     game.state = 'modal';
-    cardPageOpen = false;   // 弹窗层级：只能通过按钮返回仓库
+    _set_cardPageOpen(false);   // 弹窗层级：只能通过按钮返回仓库
     UI.showOverlay(`[[icon:archive]] ${item.name}`, `
       <p class="ov-stats">储备 <b>${have}</b> 个 · 收购价 <b class="gold">${item.value} 币</b>/个</p>
       <p class="ov-note">${kind === 'wood' ? '木材用于扩建背包与仓库容量' : '口粮用于升级宠物安全格'}——卖出后不可买回，确定吗？</p>
@@ -406,7 +465,6 @@
           <h3>[[icon:bag]] 背包扩建</h3>
           <div class="base-line">背包容量 <b>${B.bagCap()}</b> / ${R.bagMax} 格</div>
           <div class="base-bar"><i style="width:${(B.bagCap() / R.bagMax * 100).toFixed(1)}%"></i></div>
-          <p class="hint">每消耗 [[icon:wood]] 木材 ×${R.bagUpgradeWood} 扩建 1 格。</p>
           <button class="ov-btn ok" data-act="upBag" ${B.canUpgradeBag() ? '' : 'disabled'}>[[icon:wood]] ×${R.bagUpgradeWood} 扩建 +1 格</button>
           ${B.bagCap() >= R.bagMax ? '<p class="hint ok-hint">[[icon:check]] 已达上限</p>' : ''}
         </section>
@@ -414,17 +472,15 @@
           <h3>[[icon:archive]] 仓库扩建</h3>
           <div class="base-line">仓库容量 <b>${B.stashCap()}</b> / ${R.stashMax} 张</div>
           <div class="base-bar"><i style="width:${(B.stashCap() / R.stashMax * 100).toFixed(1)}%"></i></div>
-          <p class="hint">每消耗 [[icon:wood]] 木材 ×${R.stashUpgradeWood} 扩建 ${R.stashUpgradeSlots} 张容量（仓库现有 ${B.stashUsed()} 张）。</p>
           <button class="ov-btn ok" data-act="upStash" ${B.canUpgradeStash() ? '' : 'disabled'}>[[icon:wood]] ×${R.stashUpgradeWood} 扩建 +${R.stashUpgradeSlots} 张</button>
           ${B.stashCap() >= R.stashMax ? '<p class="hint ok-hint">[[icon:check]] 已达上限</p>' : ''}
         </section>
         <section class="hub-card">
           <h3>[[icon:paw]] 宠物小屋</h3>
           <div class="pet-row"><span class="pet-ava">[[icon:paw]]</span>
-            <div>宠物<b>「阿七」</b>看守着背包的安全格<br><span class="dim">撤离失败时，它会把安全格里的卡牌抢运回来</span></div></div>
+            <div>宠物<b>「阿七」</b>看守着背包的安全格</div></div>
           <div class="base-line">安全格 <b>${B.safeCap()}</b> / ${R.safeMax} 格</div>
           <div class="base-bar green"><i style="width:${(B.safeCap() / R.safeMax * 100).toFixed(1)}%"></i></div>
-          <p class="hint">每消耗 [[icon:bread]] 口粮 ×${R.safeUpgradeRations} 升级 1 格。</p>
           <button class="ov-btn ok" data-act="upSafe" ${B.canUpgradeSafe() ? '' : 'disabled'}>[[icon:bread]] ×${R.safeUpgradeRations} 升级 +1 安全格</button>
           ${B.safeCap() >= R.safeMax ? '<p class="hint ok-hint">[[icon:check]] 已达上限</p>' : ''}
         </section>
@@ -446,7 +502,6 @@
     return `
       <section class="hub-card">
         <h3>[[icon:medal]] 职业熟练度</h3>
-        <p class="hint" style="margin:0 0 10px">每局出发时从两个随机职业中选 1 个；击败敌人、撤离成功都会累积所选职业的熟练度经验，升级获得常驻加成（下一局出征生效）。</p>
         <div class="ach-list">${rows}</div>
       </section>`;
   }
@@ -488,20 +543,24 @@
     }).join('');
     return `
       <section class="hub-card">
-        <h3>[[icon:cards]] 卡背图鉴 <span class="set-tip">牌库堆 / 背包翻面使用的卡背 · 领取对应成就奖励解锁</span></h3>
+        <h3>[[icon:cards]] 卡背图鉴</h3>
         <div class="back-grid">${backsHTML}</div>
       </section>
       <section class="hub-card">
-        <h3>[[icon:trophy]] 成就 <span class="set-tip">${doneN} / ${M.ACHIEVEMENTS.length} 已解锁 · 解锁后回基地领取物资奖励</span></h3>
+        <h3>[[icon:trophy]] 成就 <span class="set-tip">${doneN} / ${M.ACHIEVEMENTS.length} 已解锁</span></h3>
         <div class="ach-list">${rows}</div>
       </section>`;
   }
 
   function closeBase() {
-    cardPageOpen = false;
+    _set_cardPageOpen(false);
     UI.hideOverlay();
     showTitle();   // 基地只在局外（标题/撤离结算后）可达，关闭即回主菜单
   }
 
   // ---------- 背包（物资+卡牌混占格 · 安全格 · 消耗口袋） ----------
   // 设计者 2026-09-02 定版：从背包丢弃的牌无法取回；消耗的牌可在火堆复原
+
+export { closeBase, deployPick, openBaseHub, renderHub };
+const _set_deployPick = (v) => { deployPick = v; };
+export { _set_deployPick };

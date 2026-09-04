@@ -1,3 +1,10 @@
+/* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
+const SDT = window.SDT;
+const UI = window.SDT.UI;
+import { esc } from './shared.js';
+import { MAP } from './game.core.js';
+import { game } from './game.core.js';
+import { openCardDesigner, openCardLibrary } from './game.cardslib.js';
   function rebuildNotes() {
     // 兼容旧版楼层键名（F1 → B1）
     const data = SDT.Notes.all();
@@ -46,10 +53,10 @@
       info.push(`${ld.name} · 轨道编号 <b>${idx}</b>`);
       if (eIdx >= 0) info.push(`[[icon:door]] 出生入口：${ld.entranceNames[eIdx]}`);
       if (door) info.push(`[[icon:door]] 环间门${door.exit ? '（撤离出口）' : ''} ⇄ ${MAP.layers[door.toLayer].name}`);
-      if (altarE) info.push('[[icon:crystal]] 祭坛入口');
+      if (altarE) info.push('[[icon:crystal]] 污染核心入口');
       info.push(`事件配置：${lc.def ? TYPE_NAME[lc.def.type] + (lc.def.n ? ` +${lc.def.n}币` : '') : '无'}`);
     } else {
-      info.push(`中央区：${node ? node.def.name : '祭坛'}`);
+      info.push(`中央区：${node ? node.def.name : '污染核心'}`);
     }
     game.state = 'modal';
     UI.showOverlay('[[icon:pen]] 编辑结点备注', `
@@ -185,44 +192,31 @@
   const TYPE_NAME = {
     coin: '硬币', wood: '木材', battle: '战斗', event: '随机事件', shop: '商店',
     fire: '火堆', chest: '宝箱', rations: '口粮', key: '钥匙',
-    emergencyExit: '紧急撤离点', door: '环间门', altar: '祭坛', boss: 'BOSS', entrance: '出生入口',
+    emergencyExit: '紧急撤离点', door: '隔离闸门', altar: '污染核心', boss: '首脑', entrance: '清扫口',
   };
-  game.TYPE_NAME = TYPE_NAME;
+  // ESM：延迟绑定（同 bindRunMixins 注释）
+  function bindNotesMixins() {
+    game.TYPE_NAME = TYPE_NAME;
+  }
 
   // ---------- 开发者模式 ----------
   function initDevMode() {
     game.devMode = localStorage.getItem('sdt-dev') === '1';
-    UI.el.tglDev.checked = game.devMode;
     UI.el.devTools.hidden = !game.devMode;
-    game.nextDice = parseInt(localStorage.getItem('sdt-dev-dice') || '0', 10) || 0;
+    const savedDice = parseInt(localStorage.getItem('sdt-dev-dice') || '0', 10);
+    game.nextDice = savedDice >= 1 && savedDice <= 6 ? savedDice : 0;
     UI.el.devDice.value = String(game.nextDice);
   }
 
   function bindDevMode() {
-    UI.el.tglDev.addEventListener('change', (e) => {
-      game.devMode = e.target.checked;
-      localStorage.setItem('sdt-dev', game.devMode ? '1' : '0');
-      UI.el.devTools.hidden = !game.devMode;
-      UI.log(game.devMode ? '[[icon:tools]] 开发者模式已开启' : '开发者模式已关闭', 'sys');
-    });
     UI.el.devDice.addEventListener('change', (e) => {
-      game.nextDice = +e.target.value;
+      const value = +e.target.value;
+      game.nextDice = value >= 1 && value <= 6 ? value : 0;
       localStorage.setItem('sdt-dev-dice', String(game.nextDice));
       UI.log(game.nextDice > 0 ? `[[icon:tools]] 骰子已固定为 ${game.nextDice} 点` : '骰子恢复随机', 'sys');
     });
     UI.el.btnCardDesigner.addEventListener('click', () => openCardDesigner(null));
     UI.el.btnCardLib.addEventListener('click', openCardLibrary);
-    UI.el.btnDevRes.addEventListener('click', () => {
-      const B = SDT.Base;
-      B.data.wood += 2; B.data.rations += 2; B.save();
-      UI.log('[[icon:tools]] 基地资源 +2 木材 +2 口粮（测试用）', 'sys');
-    });
-    UI.el.btnCombatTest.addEventListener('click', () => {
-      const r = SDT.Combat.selfTest();
-      r.lines.forEach(l => game.log(l, 'sys'));
-      if (!r.pass) console.error('[Combat] 自测失败：', r.failed);
-      game.log(r.pass ? '[[icon:check]] 四类伤害体系自测全部通过（' + r.total + ' 项）'
-                      : '[[icon:cross]] 自测存在失败用例，详见浏览器控制台（F12）', r.pass ? 'sys' : 'warn');
-    });
   }
 
+export { TYPE_NAME, bindDevMode, bindNotesMixins, initDevMode, openCellEditor, rebuildNotes, showClearOverlay, showExportOverlay, showImportOverlay };

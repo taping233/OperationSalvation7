@@ -3,8 +3,8 @@ $ErrorActionPreference = 'Stop'
 
 $repo = Split-Path -Parent $PSScriptRoot
 $target = Join-Path $repo 'desktop\electron\electron.exe'
-$appDir = Join-Path $repo 'desktop\app'
-$icon = Join-Path $repo 'desktop\app\icon.ico'
+$appDir = Join-Path $repo 'desktop-app'
+$icon = Join-Path $repo 'desktop-app\app.ico'
 $lnkPath = Join-Path ([Environment]::GetFolderPath('Desktop')) '搜打撤 代号7.lnk'
 
 $ws = New-Object -ComObject WScript.Shell

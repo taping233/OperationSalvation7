@@ -1,31 +1,10 @@
-/* ============================================================
- * 搜打撤 v0.23 —— 基地系统（按存档档位隔离，localStorage 持久化）
- *
- * 设计者规则（2026-09-03 定版）：
- *   1. 新档案从零开始：木材 0 · 口粮 0（资源全靠对局搬回 / 成就奖励）。
- *   2. 背包扩建：初始 16 格，每消耗 木材 ×2 扩建 1 格，上限 30 格。
- *   3. 仓库扩建：卡牌仓库初始 25 张容量，每消耗 木材 ×2 扩建 3 张，上限 49 张。
- *   4. 宠物安全格：初始 2 格，每消耗 口粮 ×2 升级 1 格，上限 6 格。
- *      安全格里的卡牌在撤离失败（死亡）时由宠物抢运回基地，其余全丢。
- *   5. 消耗口袋：对战小怪（非 BOSS）使用过的卡牌存放处，容量无限；
- *      未复原不能继续使用（基地免费复原 / 能源水晶就地复原 3 张）。
- *      「杀」为初始牌：会经消耗口袋复原回背包，但不会入库（复原即销毁，
- *      每局自动重新携带 5 张）。
- *   6. 仓库物品可点击：卖出（换成储备币）/ 收藏（[[icon:sparkles]]图鉴，特殊收藏品完成成就）。
- *      储备币在下次出发时随身带走，作为本局开局币。
- *
- * v0.21+：三个存档档位的基地完全独立——
- *   木材/口粮/扩建等级/仓库/消耗口袋/储备币/收藏图鉴/职业熟练度/成就/卡背
- *   均随档位保存。存储键：sdt-base-v2-slot{1..3}；旧版全局键 sdt-base-v1
- *   启动时自动迁入已有对局存档的档位（没有则迁入档位 1）。
- * ============================================================ */
-(function () {
+
   const SLOT_KEY = (i) => 'sdt-base-v2-slot' + i;
   const LEGACY_KEY = 'sdt-base-v1';   // 旧版全局基地（v0.20 及之前），启动时迁移
   const rules = () => window.SDT.MAP.rules;
-  // 「杀」初始牌：能进消耗口袋（对局中复原用），但永远不入卡牌仓库
+  // 「初始攻击」初始牌：能进消耗口袋（对局中复原用），但永远不入卡牌仓库
   const isSha = (card) => !!card && (card.id === 'builtin-sha' ||
-    (card.id === undefined && card.name === '杀'));
+    (card.id === undefined && card.name === '初始攻击'));
 
   // 初始基地：新档案从零开始，资源全靠对局搬回与成就奖励
   function def() {
@@ -34,7 +13,7 @@
       bagUp: 0, safeUp: 0,
       stashUp: 0,     // 仓库扩建等级（每次 +3 张容量）
       coins: 0,       // 储备币：卖出仓库物品所得，出发时随身带走
-      stash: [],      // 卡牌仓库 [{card, count}]——出发时自选携带；「杀」不可入库
+      stash: [],      // 卡牌仓库 [{card, count}]——出发时自选携带；「初始攻击」不可入库
       pocket: [],     // 基地消耗口袋 [{card, count}]，复原后才回仓库
       collection: {}, // 收藏图鉴 [卡牌id] => { name, rarity, ts }（[[icon:sparkles]]收藏中的物品）
       // ---- 局外成长（v0.9 职业熟练度与成就） ----
@@ -129,7 +108,7 @@
     const C = window.SDT.Cards;
     if (!C || typeof C.all !== 'function') return;
     const pool = C.all().filter(c =>
-      c.rarity !== '衍生' && c.name !== '杀' && C.isRandomObtainable(c));
+      c.rarity !== '衍生' && c.name !== '初始攻击' && C.isRandomObtainable(c));
     if (!pool.length) return;
     const weights = C.SHOP_WEIGHTS ? Object.entries(C.SHOP_WEIGHTS) : null;
     const totalW = weights ? weights.reduce((a, b) => a + b[1], 0) : 0;
@@ -231,7 +210,7 @@
   }
 
   // 卡牌入库（同名堆叠）。toPocket = true 时进基地消耗口袋（仍待复原）。
-  // 「杀」不会进入卡牌仓库（初始牌每局自动携带；容量由交互层用 stashRoom() 把关）。
+  // 「初始攻击」不会进入卡牌仓库（初始牌每局自动携带；容量由交互层用 stashRoom() 把关）。
   function depositCards(cards, toPocket) {
     const list = toPocket ? data.pocket : data.stash;
     (cards || []).forEach(c => {
@@ -249,7 +228,7 @@
     const stack = data.pocket[i];
     if (!stack) return false;
     if (isSha(stack.card)) {
-      data.pocket.splice(i, 1);   // 「杀」每局自动带 5 张，无需保存
+      data.pocket.splice(i, 1);   // 「初始攻击」每局自动带 5 张，无需保存
       save();
       return 'sha';
     }
@@ -348,4 +327,5 @@
     isSha,
     isBackUnlocked, unlockBack, setBack, backSel,
   };
-})();
+
+export { bagCap, hasSlot, safeCap };

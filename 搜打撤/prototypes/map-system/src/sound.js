@@ -1,26 +1,22 @@
-/* ============================================================
- * 搜打撤 v0.3 —— 音频（程序化战斗音效 + 文件背景乐）
- *
- * 全部由 WebAudio 合成，无音频文件、离线可用：
- *   · 音效 SFX：出牌/命中/受击/格挡庇幕/治疗/金币/骰子/场景/胜利/失败…
- *   · 背景乐 BGM：assets/bgm-black-stream-sea.mp3，循环播放；
- *     title/board/base/battle 只负责控制播放状态，不重启曲目。
- *
- * 浏览器自动播放策略：首次用户点击/按键后才会真正出声（ensure() 恢复
- * AudioContext）；静音状态持久化在 localStorage('sdt-muted')。
- * ============================================================ */
-(function () {
-  const BGM_URL = 'assets/bgm-black-stream-sea.mp3';
+
+  import { BUILD_VERSION, assetUrl } from './asset-url.js';
+const BGM_URL = assetUrl('assets/bgm-black-stream-sea.mp3');
+  // 开屏（标题）专用曲目：《直到大地变成一颗酸橙》
+  const TITLE_BGM_URL = assetUrl('assets/bgm-sour-orange-earth.mp3');
   const bgm = new Audio(BGM_URL);
   bgm.loop = true;
   bgm.preload = 'auto';
+  const titleBgm = new Audio(TITLE_BGM_URL);
+  titleBgm.loop = true;
+  titleBgm.preload = 'auto';
   let ctx = null, master = null, sfxGain = null, clickGain = null, clickComp = null;
   // 三级开关：muted 全局静音（侧边栏 [[icon:gear]]）· musicOff 只关音乐 · sfxOff 只关音效（设置页）
   let muted = false, musicOff = false, sfxOff = false;
-  // 音量 0~1，随 localStorage 持久化；音乐基准 0.45，音效基准 0.9
+  // 音量 0~1，随 localStorage 持久化；音乐基准 0.45，音效基准 2.5
   let musicVol = 1, sfxVol = 1;
-  const BASE_MUSIC = 0.45, BASE_SFX = 0.9;
+  const BASE_MUSIC = 0.45, BASE_SFX = 2.5;
   bgm.volume = BASE_MUSIC * musicVol;
+  titleBgm.volume = BASE_MUSIC * musicVol;
   try {
     muted = localStorage.getItem('sdt-muted') === '1';
     musicOff = localStorage.getItem('sdt-music-off') === '1';
@@ -46,7 +42,7 @@
   }
 
   /* ---------- 开关音效：Kenney switch（CC0），预解码缓存，随机选一 ---------- */
-  const SWITCH_URLS = [1, 2, 3, 4, 5, 6].map(i => 'assets/sfx/switch' + i + '.wav');
+  const SWITCH_URLS = [1, 2, 3, 4, 5, 6].map(i => assetUrl('assets/sfx/switch' + i + '.wav'));
   let switchBuffers = null;
   function loadSwitches() {
     if (switchBuffers) return;
@@ -61,7 +57,7 @@
   }
 
   /* ---------- 悬停音效：Kenney rollover（CC0），预解码缓存，随机选一 ---------- */
-  const HOVER_URLS = [1, 2, 3, 4, 5, 6].map(i => 'assets/sfx/rollover' + i + '.wav');
+  const HOVER_URLS = [1, 2, 3, 4, 5, 6].map(i => assetUrl('assets/sfx/rollover' + i + '.wav'));
   let hoverBuffers = null;
   function loadHovers() {
     if (hoverBuffers) return;
@@ -76,7 +72,7 @@
   }
 
   /* ---------- 点击音效：Kenney UI Audio（CC0）WAV，预解码缓存，随机选一 ---------- */
-  const CLICK_URLS = [1, 2, 3, 4, 5].map(i => 'assets/sfx/click' + i + '.wav');
+  const CLICK_URLS = [1, 2, 3, 4, 5].map(i => assetUrl('assets/sfx/click' + i + '.wav'));
   let clickBuffers = null; // null=未加载 []=全部失败 Array=已解码
   function loadClicks() {
     if (clickBuffers) return;
@@ -214,10 +210,14 @@
 
   /* ---------- 文件背景乐 ---------- */
   let musicMode = null;
+  function activeBgm() { return musicMode === 'title' ? titleBgm : bgm; }
   function syncBgm() {
+    const on = musicMode && !muted && !musicOff;
     bgm.muted = muted || musicOff;
-    if (!musicMode) { bgm.pause(); return; }
-    if (!bgm.muted) bgm.play().catch(() => {});
+    titleBgm.muted = muted || musicOff;
+    const cur = activeBgm();
+    [bgm, titleBgm].forEach(t => { if (t !== cur || !on) t.pause(); });
+    if (on) cur.play().catch(() => {});
   }
   function music(mode) {
     if (mode === musicMode) { syncBgm(); return; }
@@ -246,6 +246,7 @@
     musicVol = Math.min(1, Math.max(0, +v || 0));
     try { localStorage.setItem('sdt-music-vol', String(musicVol)); } catch (e) {}
     bgm.volume = BASE_MUSIC * musicVol;
+    titleBgm.volume = BASE_MUSIC * musicVol;
   }
   function setSfxVolume(v) {
     sfxVol = Math.min(1, Math.max(0, +v || 0));
@@ -290,4 +291,5 @@
     get musicVolume() { return musicVol; },
     get sfxVolume() { return sfxVol; },
   };
-})();
+
+export { tone };

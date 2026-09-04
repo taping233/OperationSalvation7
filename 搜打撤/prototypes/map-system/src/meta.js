@@ -1,15 +1,4 @@
-/* ============================================================
- * 搜打撤 v0.9 —— 局外成长：职业熟练度等级 + 成就（数据存于基地存档）
- *
- * 职业：与卡牌库的职业卡同源（SDT.Cards.CLASSES，开局二选一）。
- * 每个职业有持久熟练度等级（1~10），以该职业出征时：
- *   每级 生命上限 +2（Lv.1 为基础，升级立即生效于下一局出征）。
- * 经验（计入本局所选职业）：小怪 +6 · BOSS +40
- *   · 撤离成功 +20+2×行动次数 · 撤离失败安慰 +5（受玩法经验倍率修正）
- *
- * 成就：基于基地统计自动解锁，回基地领取少量物资奖励。
- * ============================================================ */
-(function () {
+
   const SDT = window.SDT;
 
   const LEVEL_MAX = 10;
@@ -58,9 +47,9 @@
       reward: { rations: 2 }, done: (s) => s.extracts >= 3 },
     { id: 'kill10', icon: '[[icon:swords]]', name: '猎手', desc: '累计击败 10 个敌人',
       reward: { wood: 2 }, back: 'wolf', done: (s) => s.kills >= 10 },
-    { id: 'firstBoss', icon: '[[icon:skull]]', name: '弑神者', desc: '首次击败祭坛 BOSS',
+    { id: 'firstBoss', icon: '[[icon:skull]]', name: '破壁者', desc: '首次击败污染核心的变异首脑',
       reward: { wood: 3 }, back: 'boss', done: (s) => s.bossKills.length >= 1 },
-    { id: 'allBoss', icon: '[[icon:crystal]]', name: '祭坛征服者', desc: '击败全部 3 只祭坛 BOSS',
+    { id: 'allBoss', icon: '[[icon:crystal]]', name: '净化征服者', desc: '击败全部 3 只变异首脑',
       reward: { rations: 3 }, back: 'altar', done: (s) => s.bossKills.length >= 3 },
     { id: 'rich30', icon: '[[icon:coin]]', name: '小有积蓄', desc: '单局撤离时携带 ≥ 30 币',
       reward: { rations: 2 }, back: 'coin', done: (s) => s.bestRunCoins >= 30 },
@@ -193,4 +182,5 @@
     ACHIEVEMENTS, achById, isUnlocked, isClaimed, pendingAch, claim, checkUnlocks, syncBackUnlocks,
     track, setXpMul,
   };
-})();
+
+export { SDT };

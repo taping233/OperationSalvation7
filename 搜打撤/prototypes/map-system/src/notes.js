@@ -1,9 +1,5 @@
-/* ============================================================
- * 搜打撤 v0.2.1 —— 格子备注存储（localStorage 持久化）
- * 键：`楼层id|x,y`；值：备注文字。
- * 导出 JSON 交给开发者/AI 后，可据此把备注落成正式格子事件。
- * ============================================================ */
-(function () {
+/* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
+const SDT = window.SDT;
   const KEY = 'sdt-cell-notes-v1';
 
   function all() {
@@ -28,4 +24,5 @@
 
   window.SDT = window.SDT || {};
   SDT.Notes = { all, get, set, clearAll };
-})();
+
+export { KEY };
