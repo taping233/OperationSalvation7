@@ -2,8 +2,8 @@
 const UI = window.SDT.UI;
 const SDT = window.SDT;
 import { TYPE_NAME } from './game.notes.js';
-import { MAP } from './game.core.js';
-import { SLOT_COUNT, buildDerived, cam, canvas, configureGameRuntime, ctx, dpr, exitToTitle, game, hasRun, migrateOldSave, openSettings, quitGame, saveGame, showTitle, startNewGame, _set_dpr, _set_cam } from './game.core.js';
+import { MAP } from './game.session.js';
+import { SLOT_COUNT, buildDerived, cam, canvas, configureGameRuntime, ctx, dpr, exitToTitle, game, hasRun, migrateOldSave, openSettings, quitGame, saveGame, showTitle, startNewGame, _set_dpr, _set_cam } from './game.session.js';
 import { bindRunMixins, openClassChoice, openShop, roll } from './game.run.js';
 import { openBaseHub } from './game.hub.js';
 import { bindBagMixins, showBackpack } from './game.bag.js';

@@ -85,7 +85,7 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     expect(typeof g.debug.openShop).toBe('function'); // boot 调试入口
   });
   it('SDT 命名空间核心模块均已发布', () => {
-    for (const k of ['RULES', 'MAP', 'Art', 'Icons', 'Sound', 'Camera', 'Notes', 'Cards', 'Combat', 'Base', 'Meta', 'RenderScheduler', 'Renderer', 'UI', 'Battle', 'Chests']) {
+    for (const k of ['RULES', 'MAP', 'Art', 'Icons', 'Sound', 'Camera', 'Notes', 'Cards', 'Base', 'Meta', 'RenderScheduler', 'Renderer', 'UI', 'Battle', 'Chests']) {
       expect(window.SDT[k], `window.SDT.${k} 未发布`).toBeTruthy();
     }
     expect(typeof window.SDT.Battle.getSnapshot).toBe('function');

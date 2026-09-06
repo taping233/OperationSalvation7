@@ -2,8 +2,8 @@
 const SDT = window.SDT;
 const UI = window.SDT.UI;
 import { esc } from './shared.js';
-import { MAP } from './game.core.js';
-import { game } from './game.core.js';
+import { MAP } from './game.session.js';
+import { game } from './game.session.js';
   function rebuildNotes() {
     // 兼容旧版楼层键名（F1 → B1）
     const data = SDT.Notes.all();

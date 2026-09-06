@@ -13,7 +13,7 @@
 - `BattleSession` / `window.SDT.Battle.start(game, enemies, options)`：开始战斗；后者是兼容门面。
 - `window.SDT.Battle.getSnapshot()`：取得战斗只读快照。
 - `window.SDT.Battle.commands`：统一战斗命令，包括出牌、注能、结束回合、逃跑和墓地操作。
-- `configureGameRuntime()`：由启动模块注入界面跳转，避免 `game.core` 反向依赖页面模块。
+- `configureGameRuntime()`：由启动模块注入界面跳转，避免 `game.session` 反向依赖页面模块。
 - `configureCardNavigation()`：由基地模块注入卡牌页面关闭与刷新行为。
 - `RenderScheduler`：统一控制活动 60 FPS、空闲 30 FPS和遮罩暂停。
 
@@ -21,7 +21,7 @@
 
 - `game.store.js`：创建可变会话状态，并通过 `getSnapshot()` 暴露不可变快照。
 - `game.storage.js`：三槽对局存档键、读写和 v1 迁移。
-- `game.session.js`：会话派生数据与对局生命周期；`game.menu.js` 负责标题、选档、离开和设置页面；`game.core.js` 只保留兼容转发。
+- `game.session.js`：会话派生数据与对局生命周期；`game.menu.js` 负责标题、选档、离开和设置页面。
 - `game.run.data.js`：场景、事件与职业叙事授权数据；`game.run.shop.js`：商店进货、购买和出售；`game.run.js`：移动、格子、事件、祭坛与撤离流程。
 - `game.hub.js` / `game.bag.js`：基地与背包页面。
 - `battle.core.js`：战斗状态和命令；不访问 DOM，也不依赖战斗视图。BOSS 编组和墓地页面同样由快照驱动。

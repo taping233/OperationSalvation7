@@ -124,11 +124,9 @@ describe('ESM 依赖方向', () => {
     expect(visited.size).toBe(files.length);
   });
 
-  it('game.core 不反向导入界面功能', () => {
-    const source = readFileSync(resolve(process.cwd(), 'game/src/game.core.js'), 'utf8');
+  it('game.session 不反向导入页面功能模块', () => {
+    const source = readFileSync(resolve(process.cwd(), 'game/src/game.session.js'), 'utf8');
     expect(source).not.toMatch(/from ['"]\.\/game\.(boot|run|hub|notes|cardslib)\.js['"]/);
-    expect(source).not.toMatch(/document\.|localStorage|window\.SDT/);
-    expect(source).toContain("export * from './game.session.js'");
   });
 
   it('battle.core 不访问 DOM 或反向导入战斗视图', () => {

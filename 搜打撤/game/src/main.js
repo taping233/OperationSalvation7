@@ -33,7 +33,7 @@ import './battle.view.js';
 import './chests.js';
 import './game.storage.js';
 import './game.store.js';
-import './game.core.js';
+import './game.session.js';
 import './game.run.js';
 import './game.hub.js';
 import './game.bag.js';

@@ -2,9 +2,9 @@
 const UI = window.SDT.UI;
 const SDT = window.SDT;
 import { esc } from './shared.js';
-import { MAP, bagCap, safeCap } from './game.core.js';
+import { MAP, bagCap, safeCap } from './game.session.js';
 import { escAttr } from './shared.js';
-import { cardStacks, doDeath, game, newUid, safeUsed, saveGame, usedSlots } from './game.core.js';
+import { cardStacks, doDeath, game, newUid, safeUsed, saveGame, usedSlots } from './game.session.js';
 import { openAltarModal, showRunTransition } from './game.run.js';
 import { _set_cardPageOpen } from './game.cardslib.js';
 
@@ -504,7 +504,7 @@ import { _set_cardPageOpen } from './game.cardslib.js';
   // 小怪战：使用过的卡进消耗口袋；BOSS 战：卡牌完好保留；
   // 注能消耗的卡（consumedUids）：无论战斗类型都进消耗口袋（可在火堆复原）。
   // 胜利 100% 掉宝箱（按所在环层 / BOSS 固定 BOSS宝箱），开完宝箱再续流。
-  // ESM：循环导入下本模块体可能先于 game.core 执行，顶层读 game 会 TDZ，延迟到 boot 统一绑定
+  // ESM：循环导入下本模块体可能先于 game.session 执行，顶层读 game 会 TDZ，延迟到 boot 统一绑定
   function bindBagMixins() {
   game.onBattleEnd = async function (opts, playedUids, win, consumedUids) {
     UI.hideOverlay();

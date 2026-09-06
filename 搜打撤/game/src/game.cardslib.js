@@ -3,7 +3,7 @@ const SDT = window.SDT;
 const UI = window.SDT.UI;
 import { esc } from './shared.js';
 import { escAttr } from './shared.js';
-import { game } from './game.core.js';
+import { game } from './game.session.js';
 
 const navigation = {
   closeBase: () => {},

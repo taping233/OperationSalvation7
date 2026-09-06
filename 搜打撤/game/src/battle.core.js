@@ -6,6 +6,7 @@ import { createEffectExecutor, splitEffectClauses } from './battle.effects.js';
 import { refillDrawPile, shuffleCards } from './battle.deck.js';
 import { isAreaEffect, targetSideFor, unplayableReasonFor } from './battle.rules.js';
 import { Random } from './random.js';
+import * as Combat from './combat.js';
 /* battle.core.js —— 战斗逻辑：牌库/出牌结算/词条时点/回合流转（渲染由注入的视图完成） */
 /* ============================================================
  * 搜打撤 v0.24 —— M1 两类战斗（多敌人 + 拖拽选目标 + BOSS 词缀 + 词条时点体系）
@@ -14,7 +15,7 @@ import { Random } from './random.js';
  *   随身全部可用卡（含道具卡）直接作为手牌，打出的卡本场不可再用；
  *   每回合固定 2 费（rules.battleEnergy）；
  * ============================================================ */
-  const Combat = SDT.Combat;
+  // Combat 已改为 ESM 直接导入；SDT.Cards / SDT.MAP 仍走兼容门面（待后续收敛）
 
   let renderBattle = () => {};
   function configureBattleRenderer(renderer) {

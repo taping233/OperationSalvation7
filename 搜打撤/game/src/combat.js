@@ -1,5 +1,4 @@
-/* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
-const SDT = window.SDT;
+/* combat.js —— 战斗公式：四类伤害 / 诅咒 / 增益 / 状态计时（纯计算，不访问 DOM） */
   const TYPES = { ATTACK: 'attack', SPELL: 'spell', FIXED: 'fixed', TRUE: 'true' };
   const TYPE_NAME = { attack: '攻击伤害', spell: '法术伤害', fixed: '固定伤害', true: '真实伤害' };
 
@@ -416,11 +415,9 @@ const SDT = window.SDT;
     return { pass: failed.length === 0, total, failed, lines };
   }
 
-  SDT.Combat = { TYPES, TYPE_NAME, dealDamage, previewDamage,
-                 addBleed, clearBleed,
-                 CURSES, CURSE_META, addCurse, hasCurse, purify,
-                 BUFFS, BUFF_META, addBlessing, isStealthed, breakStealth,
-                 tickPoison, tickDurations, canAct,
-                 parseNotation, ensureStatus, selfTest };
-
-export { TYPES, TYPE_NAME };
+export { TYPES, TYPE_NAME, dealDamage, previewDamage,
+         addBleed, clearBleed,
+         CURSES, CURSE_META, addCurse, hasCurse, purify,
+         BUFFS, BUFF_META, addBlessing, isStealthed, breakStealth,
+         tickPoison, tickDurations, canAct,
+         parseNotation, ensureStatus, selfTest };

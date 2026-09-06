@@ -3,9 +3,9 @@ import { characterName } from './characters.js';
 const SDT = window.SDT;
 const UI = window.SDT.UI;
 import { esc } from './shared.js';
-import { MAP } from './game.core.js';
+import { MAP } from './game.session.js';
 import { escAttr } from './shared.js';
-import { MODES, game, newRun, setLobby, showTitle } from './game.core.js';
+import { MODES, game, newRun, setLobby, showTitle } from './game.session.js';
 import { Sfx, configureCardNavigation, _set_cardPageOpen } from './game.cardslib.js';
 
 // 基地当前页签（原为隐式全局，ESM 严格模式下必须显式声明）

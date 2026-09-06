@@ -3,10 +3,10 @@ import { CHARACTERS, characterFor, characterName } from './characters.js';
 const SDT = window.SDT;
 const UI = window.SDT.UI;
 import { esc } from './shared.js';
-import { FX, MAP, bagCap } from './game.core.js';
+import { FX, MAP, bagCap } from './game.session.js';
 import { tone } from './sound.js';
 import { escAttr } from './shared.js';
-import { cellCenter, clearSave, curLayer, enterLayer, gainCoins, game, modeCfg, newUid, pick, rndDice, saveGame, scaledEnemy, syncPlayTime, usedSlots, weighted } from './game.core.js';
+import { cellCenter, clearSave, curLayer, enterLayer, gainCoins, game, modeCfg, newUid, pick, rndDice, saveGame, scaledEnemy, syncPlayTime, usedSlots, weighted } from './game.session.js';
 import { openBaseHub } from './game.hub.js';
 import { Sfx, cardHTML, _set_cardPageOpen } from './game.cardslib.js';
 import { CLASS_STORY, EVENT_SCENE_META, IMMEDIATE_SCENES, NODE_BG, PICKUP_BG, PRELOAD_SCENES, SCENES, SCENE_META } from './game.run.data.js';
@@ -364,7 +364,7 @@ import { eventNarrative } from './narrative.js';
     UI.log(`[[icon:archive]] 获得卡牌【<b>${esc(tpl.name)}</b>】`, 'loot');
     return true;
   }
-  // ESM：循环导入下本模块体先于 game.core 执行，顶层读 game 会 TDZ，延迟到 boot 统一绑定
+  // ESM：循环导入下本模块体先于 game.session 执行，顶层读 game 会 TDZ，延迟到 boot 统一绑定
   function bindRunMixins() {
     game.grantCard = grantEventCard;   // 宝箱等模块发卡（同名并入 / 容量满拒绝）
   }
