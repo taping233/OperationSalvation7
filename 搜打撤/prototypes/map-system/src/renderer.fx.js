@@ -79,7 +79,8 @@ const T0 = SDT.MAP.tile;   // 缩放基准单位（特效尺寸用）
       dx += Math.sin(t * 93) * d;
       dy += Math.cos(t * 81) * d;
     }
-    return [dx, dy];
+    // 整数像素偏移：避免亚像素重采样，也降低高频合成下的光栅化压力
+    return [Math.round(dx), Math.round(dy)];
   }
 
   function drawFX(ctx, game) {

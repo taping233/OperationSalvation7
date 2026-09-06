@@ -29,7 +29,8 @@ const SDT = window.SDT;
     const c = document.createElement('canvas');
     c.width = Math.max(1, Math.round(cam.viewW * (window.devicePixelRatio || 1)));
     c.height = Math.max(1, Math.round(cam.viewH * (window.devicePixelRatio || 1)));
-    const b = c.getContext('2d');
+    // alpha:false：不透明烘焙层走更省显存带宽的合成路径，也规避透明纹理混合异常
+    const b = c.getContext('2d', { alpha: false });
     b.scale(c.width / cam.viewW, c.height / cam.viewH);
     // 壁纸未就绪时回退纯色；就绪后整层铺底，bg 渐变降为 50% 遮罩保证结点可读
     b.fillStyle = '#0B0E12';
