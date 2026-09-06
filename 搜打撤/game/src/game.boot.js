@@ -30,11 +30,13 @@ configureGameRuntime({ openClassChoice, openBaseHub, rebuildNotes, resize: () =>
     canvas.addEventListener('mousedown', (e) => {
       downPos = lastPos = { x: e.clientX, y: e.clientY };
       dragging = false;
+      game.camDragging = false;
     });
 
     window.addEventListener('mousemove', (e) => {
       if (downPos) {
         if (!dragging && Math.hypot(e.clientX - downPos.x, e.clientY - downPos.y) > 6) dragging = true;
+        game.camDragging = dragging;   // 拖拽中主循环不得抢镜头（留言：地图无法正常拖动）
         if (dragging) {
           const dx = e.clientX - lastPos.x, dy = e.clientY - lastPos.y;
           cam.panBy(dx, dy);
@@ -61,6 +63,7 @@ configureGameRuntime({ openClassChoice, openBaseHub, rebuildNotes, resize: () =>
         }
       }
       downPos = null;
+      game.camDragging = false;
     });
 
     canvas.addEventListener('contextmenu', (e) => e.preventDefault());
@@ -206,8 +209,11 @@ configureGameRuntime({ openClassChoice, openBaseHub, rebuildNotes, resize: () =>
     // 同样 idle 60；战斗页盖在画布上时（自绘场景大图基本不透明，画布只从边缝透出）
     // 也降到 idle 60：底图隔着重度 blur(6px) 无人能分辨帧率，省下的余量让给战斗页动画。
     const active = !battleBehind && (game.battleActive || game.state === 'moving' || game.state === 'rolling' || !!fxActive);
-    // 镜头帧率无关地平滑追随棋子（指数趋近，勿用每帧固定 0.1 的 lerp）；大距离跳变（读档/新局/切层）直接贴合
-    if (cam && game.pos && (cam.cx !== game.pos.x || cam.cy !== game.pos.y)) {
+    // 镜头平滑追随仅在棋子移动中生效（指数趋近，帧率无关；大距离跳变直接贴合）。
+    // 站立/拖拽时镜头完全归玩家：早先每帧无差别追随会把玩家拖拽的镜头拉回去，
+    // 拖动观感失效（老板留言：地图无法正常拖动）。
+    const followCam = game.state === 'moving' && !game.camDragging;
+    if (followCam && cam && game.pos && (cam.cx !== game.pos.x || cam.cy !== game.pos.y)) {
       if (Math.abs(game.pos.x - cam.cx) + Math.abs(game.pos.y - cam.cy) > MAP.tile * 4) {
         cam.cx = game.pos.x; cam.cy = game.pos.y;
       } else {
