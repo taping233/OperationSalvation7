@@ -433,3 +433,61 @@
     #resHud .res-gold:hover .res-ic {
       animation: none !important; }
   }
+
+
+  /* ============ 场景贴图映射（data-asset-key → 背景图） ============
+     2026-09-06 自 theme-classical.css 迁移：冬季主题换皮时该映射层整体丢失，
+     导致事件/战斗/商店等弹层只剩渐变兜底无贴图。与主题无关，归属资产层。 */
+  #overlay .scene[data-asset-key] { min-height:340px; background-color:#101010; background-size:cover; background-position:center; }
+  #overlay .scene[data-asset-key]::before { content:""; position:absolute; inset:0; z-index:0; pointer-events:none; background:linear-gradient(90deg,rgba(9,9,9,.94),rgba(9,9,9,.72) 46%,rgba(9,9,9,.34)); }
+  #overlay .scene[data-asset-key] > * { z-index:1; }
+
+  #overlay .scene[data-asset-key="scene-battle-bg"] { background-image:url('../assets/scenes/battle-normal-anime-v2.webp'); }
+  #overlay .scene[data-asset-key="scene-shop-bg"] { background-image:url('../assets/scenes/scene-shop-anime-v2.webp'); }
+  #overlay .scene[data-asset-key="scene-event-bg"] { background-image:url('../assets/scenes/scene-altar-anime-v2.webp'); }
+  #overlay .scene[data-asset-key="scene-fire-bg"] { background-image:url('../assets/scenes/scene-fire-anime-v2.webp'); }
+  #overlay .scene[data-asset-key="scene-chest-bg"] { background-image:url('../assets/scenes/scene-chest-anime-v2.webp'); }
+  #overlay .scene[data-asset-key="scene-door-bg"] { background-image:url('../assets/scenes/scene-door-anime-v2.webp'); }
+  #overlay .scene[data-asset-key="scene-altar-bg"] { background-image:url('../assets/scenes/scene-altar-anime-v2.webp'); }
+  #overlay .scene[data-asset-key="scene-extract-bg"] { background-image:url('../assets/scenes/scene-extract-anime-v2.webp'); }
+  #overlay .scene[data-asset-key="scene-pickup-coin"] { background-image:url('../assets/scenes/scene-pickup-coin-anime-v2.webp'); }
+  #overlay .scene[data-asset-key="scene-pickup-wood"] { background-image:url('../assets/scenes/scene-pickup-wood-anime-v2.webp'); }
+  #overlay .scene[data-asset-key="scene-pickup-rations"] { background-image:url('../assets/scenes/scene-pickup-rations-anime-v2.webp'); }
+  #overlay .scene[data-asset-key="scene-pickup-key"] { background-image:url('../assets/scenes/scene-pickup-key-anime-v2.webp'); }
+  #overlay .scene[data-asset-key="scene-event-timeskip"] { background-image:url('../assets/scenes/scene-altar-anime-v2.webp'); }
+  #overlay .scene[data-asset-key="scene-event-demondeal"] { background-image:url('../assets/scenes/scene-door-anime-v2.webp'); }
+  #overlay .scene[data-asset-key="scene-event-bandits"] { background-image:url('../assets/scenes/event-bandits-anime-v2.webp'); }
+  #overlay .scene[data-asset-key="scene-event-mystery"] { background-image:url('../assets/scenes/scene-pickup-key-anime-v2.webp'); }
+  #overlay .scene[data-asset-key="scene-event-goldmine"] { background-image:url('../assets/scenes/scene-pickup-coin-anime-v2.webp'); }
+  #overlay .scene[data-asset-key="scene-event-goldhammer"] { background-image:url('../assets/scenes/scene-fire-anime-v2.webp'); }
+  #overlay .scene[data-asset-key="scene-event-relief"] { background-image:url('../assets/scenes/scene-pickup-rations-anime-v2.webp'); }
+  #overlay .scene[data-asset-key="scene-event-airdrop"] { background-image:url('../assets/scenes/scene-extract-anime-v2.webp'); }
+  #overlay .scene[data-asset-key="scene-event-chestdraw"] { background-image:url('../assets/scenes/scene-chest-anime-v2.webp'); }
+  #overlay .scene[data-asset-key="scene-event-systemsupply"] { background-image:url('../assets/scenes/scene-pickup-wood-anime-v2.webp'); }
+
+  #overlay .node-pg[data-asset-key="scene-door-bg"] { background-image:url('../assets/scenes/scene-door-anime-v2.webp'); }
+  #overlay .node-pg[data-asset-key="scene-altar-bg"] { background-image:url('../assets/scenes/scene-altar-anime-v2.webp'); }
+  #overlay .node-pg[data-asset-key="scene-fire-bg"] { background-image:url('../assets/scenes/scene-fire-anime-v2.webp'); }
+  #overlay .node-pg[data-asset-key="scene-extract-bg"] { background-image:url('../assets/scenes/scene-extract-anime-v2.webp'); }
+  #overlay .node-pg[data-asset-key="scene-shop-bg"] { background-image:url('../assets/scenes/scene-shop-anime-v2.webp'); }
+  #overlay .node-pg[data-asset-key="scene-event-bg"] { background-image:url('../assets/scenes/scene-altar-anime-v2.webp'); }
+  #overlay .node-pg[data-asset-key="scene-pickup-coin"] { background-image:url('../assets/scenes/scene-pickup-coin-anime-v2.webp'); }
+  #overlay .node-pg[data-asset-key="scene-pickup-wood"] { background-image:url('../assets/scenes/scene-pickup-wood-anime-v2.webp'); }
+  #overlay .node-pg[data-asset-key="scene-pickup-rations"] { background-image:url('../assets/scenes/scene-pickup-rations-anime-v2.webp'); }
+  #overlay .node-pg[data-asset-key="scene-pickup-key"] { background-image:url('../assets/scenes/scene-pickup-key-anime-v2.webp'); }
+  #overlay .node-pg[data-asset-key="scene-event-timeskip"] { background-image:url('../assets/scenes/scene-altar-anime-v2.webp'); }
+  #overlay .node-pg[data-asset-key="scene-event-demondeal"] { background-image:url('../assets/scenes/scene-door-anime-v2.webp'); }
+  #overlay .node-pg[data-asset-key="scene-event-bandits"] { background-image:url('../assets/scenes/event-bandits-anime-v2.webp'); }
+  #overlay .node-pg[data-asset-key="scene-event-mystery"] { background-image:url('../assets/scenes/scene-pickup-key-anime-v2.webp'); }
+  #overlay .node-pg[data-asset-key="scene-event-goldmine"] { background-image:url('../assets/scenes/scene-pickup-coin-anime-v2.webp'); }
+  #overlay .node-pg[data-asset-key="scene-event-goldhammer"] { background-image:url('../assets/scenes/scene-fire-anime-v2.webp'); }
+  #overlay .node-pg[data-asset-key="scene-event-relief"] { background-image:url('../assets/scenes/scene-pickup-rations-anime-v2.webp'); }
+  #overlay .node-pg[data-asset-key="scene-event-airdrop"] { background-image:url('../assets/scenes/scene-extract-anime-v2.webp'); }
+  #overlay .node-pg[data-asset-key="scene-event-chestdraw"] { background-image:url('../assets/scenes/scene-chest-anime-v2.webp'); }
+  #overlay .node-pg[data-asset-key="scene-event-systemsupply"] { background-image:url('../assets/scenes/scene-pickup-wood-anime-v2.webp'); }
+
+  .battle-stage { background-size:cover; background-position:center; }
+  .battle-stage[data-asset-key="battle-normal"] { background-image:url('../assets/scenes/battle-normal-anime-v2.webp'); }
+  .battle-stage[data-asset-key="battle-boss-general"] { background-image:url('../assets/scenes/battle-normal-anime-v2.webp'); }
+  .battle-stage[data-asset-key="battle-boss-orc"] { background-image:url('../assets/scenes/event-bandits-anime-v2.webp'); }
+  .battle-stage[data-asset-key="battle-boss-element"] { background-image:url('../assets/scenes/scene-altar-anime-v2.webp'); }
