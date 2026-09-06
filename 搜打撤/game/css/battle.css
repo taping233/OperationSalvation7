@@ -50,7 +50,8 @@
   .bt-pick { border-color: rgba(196,196,196,.5); }
 
 /* ============ v0.32 杀戮尖塔式战场（battle 弹窗模式：左我方右敌方 + 底部扇形手牌） ============ */
-#overlay .card.battle { width:min(1280px,97%); height:min(880px,95%); padding:0;
+/* 2026-09-06 留言：战斗界面全屏化 */
+#overlay .card.battle { width:100%; height:100%; max-width:none; max-height:none; padding:0;
   display:flex; flex-direction:column; overflow:hidden; text-align:left; }
 #overlay .card.battle > h2 { flex:0 0 auto; font-size:15px; letter-spacing:2px; padding:8px 18px; margin:0;
   background:rgba(10,10,10,.62); border-bottom:1px solid #3a3a3a; }
@@ -103,8 +104,9 @@
 #overlay .battle-stage.sts .bt-fpreview { top:-108px; }
 
 /* —— HUD：能量球 + 牌堆 | 扇形手牌 | 弃牌/墓地 + 操作 —— */
+/* 2026-09-06 留言：手牌区加大+稍微透明，让战斗背景透过来 */
 .sts-hud { flex:0 0 auto; display:flex; align-items:flex-end; gap:14px; padding:6px 16px 8px; z-index:5;
-  background:linear-gradient(180deg,rgba(4,4,4,0),rgba(4,4,4,.74) 34%); }
+  background:linear-gradient(180deg,rgba(4,4,4,0),rgba(4,4,4,.48) 34%); }
 .sts-hud-l, .sts-hud-r { display:flex; align-items:flex-end; gap:8px; }
 .sts-hud-l { min-width:118px; }
 .sts-hud-r { min-width:118px; }
@@ -239,3 +241,11 @@
 .sts-hand .hs-card .hsc-desc span { -webkit-line-clamp: 4; }
 /* #12 双击放大 */
 .sts-hand .bt-card.zoomed { transform: translateY(-70px) scale(1.55) !important; z-index: 30; }
+
+/* ============ 2026-09-06 留言批次：手牌加大 + 描述完整露出 + 微透明 ============ */
+.sts-hand { min-height: 256px; }
+.sts-hand .hs-card.sm { font-size: 14px; }
+.sts-hand .hs-card .hsc-desc { font-size: 12px; line-height: 1.38; }
+.sts-hand .hs-card .hsc-desc span { -webkit-line-clamp: 6; }
+.sts-hand .bt-card { opacity: .93; }
+.sts-hand .bt-card:hover { opacity: 1; }

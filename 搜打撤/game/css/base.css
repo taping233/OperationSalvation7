@@ -298,7 +298,9 @@
   .tier-bd-EV { border-color: #8c8c8c; }
 
   /* ---------- ? 帮助按钮与弹层（页面说明文字统一收进二级界面） ---------- */
+  /* 2026-09-06 留言：问号在圆钮内严格居中 */
   .help-btn { flex: 0 0 auto; width: 28px; height: 28px; margin-left: 2px; padding: 0;
+    display: inline-flex; align-items: center; justify-content: center;
     border: 1px solid #4a4a4a; border-radius: 50%; background: rgba(20,20,20,.7); color: #b9b9b9;
     font-size: 14px; font-weight: 800; line-height: 1; cursor: pointer; transition: all .14s; }
   .help-btn:hover { color: #f2f2f2; border-color: #9c9c9c;

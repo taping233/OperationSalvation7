@@ -6,7 +6,7 @@ import { esc } from './shared.js';
 import { FX, MAP, bagCap } from './game.session.js';
 import { tone } from './sound.js';
 import { escAttr } from './shared.js';
-import { cellCenter, clearSave, curLayer, enterLayer, gainCoins, game, modeCfg, newUid, pick, rndDice, saveGame, scaledEnemy, syncPlayTime, usedSlots, weighted } from './game.session.js';
+import { cellCenter, clearSave, curLayer, enterLayer, exitToTitle, gainCoins, game, modeCfg, newUid, pick, rndDice, saveGame, scaledEnemy, syncPlayTime, usedSlots, weighted } from './game.session.js';
 import { openBaseHub } from './game.hub.js';
 import { Sfx, cardHTML, _set_cardPageOpen } from './game.cardslib.js';
 import { CLASS_STORY, EVENT_SCENE_META, IMMEDIATE_SCENES, NODE_BG, PICKUP_BG, PRELOAD_SCENES, SCENES, SCENE_META } from './game.run.data.js';
@@ -316,9 +316,27 @@ import { eventNarrative } from './narrative.js';
     if (def && def.type === 'emergencyExit') { enterNode('emergencyExit', openEmergencyModal); return; }
     if (def && def.type === 'shop') { enterNode('shop', openShop); return; }
 
+    // 4) 空白安全格（无任何事件）：给完整提示页（2026-09-06 留言）
+    if (!def) { openBlankSafePage(); return; }
+
     game.state = 'idle';
     saveGame();
     UI.refresh(game);
+  }
+
+  // 空白安全节点提示页：明确告诉玩家这格无事发生（背景图后续再补）
+  function openBlankSafePage() {
+    game.state = 'modal';
+    nodeShell({
+      tone: 'safe', icon: '[[icon:check]]', title: '安全地带',
+      sub: '空白的安全节点',
+      body: `<div class="blank-safe-gain">
+        <p class="gain-big">无事发生</p>
+        <p class="ov-note">四周静悄悄的——这里没有埋伏，也没有拾获。整理一下背包，准备继续深入。</p>
+      </div>`,
+      foot: `<button class="ov-btn ok fire-done-btn" data-act="blankSafeDone"><svg class="svg-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h13M12 5.5 18.5 12 12 18.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> 继续旅程</button>`,
+    });
+    UI.act('blankSafeDone', () => { UI.hideOverlay(); finishInstant(); });
   }
 
   // 战斗格 → 遭遇战（encounter 已在场景前组建好传入，保证场景与战斗一致）
@@ -417,7 +435,7 @@ import { eventNarrative } from './narrative.js';
   function openFireRest() {
     game.heal(MAP.rules.fireHeal);
     UI.log(`[[icon:fire]] <b>进入火堆</b>：自动回复 <b>${MAP.rules.fireHeal}</b> 点生命（体力不恢复，谨慎消耗）`, 'ok');
-    SDT.Sound.sfx('levelup');
+    // 2026-09-06 留言：火堆界面的音效删掉（原 levelup 提示音）
     if (Random.random('card') < MAP.rules.fireClassCardChance) {
       UI.log('[[icon:wood]] 营火余烬里翻出了一张先行者掉落的职业卡！', 'loot');
       grantEventCard(SDT.Cards.randomClassCard());
@@ -444,7 +462,7 @@ import { eventNarrative } from './narrative.js';
         tone: 'fire', icon: '[[icon:fire]]', title: '营火休整',
         sub: `还可从消耗口袋中复原 <b>${left}</b> 张（最多 ${picks} 张）`,
         body: `<div class="pk-list">${rows}</div>`,
-        foot: `<button class="ov-btn ok" data-act="fireDone">[[icon:runner]] 继续旅程</button>`,
+        foot: `<button class="ov-btn ok fire-done-btn" data-act="fireDone"><svg class="ic svg-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h13M12 5.5 18.5 12 12 18.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> 继续旅程</button>`,
       });
     };
     const finish = () => { UI.hideOverlay(); if (done) done(); };
@@ -474,47 +492,36 @@ import { eventNarrative } from './narrative.js';
     let sel = null;
     let view = 'select'; // 'select' 主选角页 | 'pool' 二级卡池页
     const poolCount = cl => SDT.Cards.classPool(cl).length;
-    // 主选角页：左侧全角色网格，右侧大幅立绘 + 背景故事 + 出发任务；卡池收进二级页
+    // 主选角页（2026-09-06 留言重做，排版参考杀戮尖塔 2 选人界面）：
+    // 选中角色大幅立绘居右撑满，左侧信息面板（名字/来历/熟练度/故事/任务），
+    // 底部全角色头像条，左下角红色返回键、右下角大确认键；卡池收进二级页
     const render = () => {
       if (view === 'pool') return renderPool();
       const story = sel ? characterFor(sel) : null;
       const lv = sel ? SDT.Meta.classLv(sel) : 0;
-      UI.showOverlay('[[icon:medal]] 选择你的角色', `
-        <div class="pg cls-page">
-          <header class="pg-head">
-            <h2>[[icon:medal]] 选择你的角色</h2>
-            <span class="sub">本次对战从全部角色中自由选择 1 个 · 确认后获得 2 张该角色的随机卡牌（与 5 张「初始攻击」、1 张「火球」一起带入背包）</span>
-          </header>
-          <div class="cls-body">
-            <div class="cls-grid">${picks.map(cl => `
-              <button class="cls-pick${cl === sel ? ' sel' : ''}" data-act="selClass" data-cls="${escAttr(cl)}" title="查看 ${escAttr(cl)}">
-                <span class="cls-pick-art">${SDT.Art.classArt(cl)}</span>
-                <b>${esc(characterName(cl))}</b>
-                <span class="cls-pick-lv">熟练度 Lv.${SDT.Meta.classLv(cl)}</span>
-              </button>`).join('')}</div>
-            <aside class="cls-detail hub-card">
+      const roster = picks.map(cl => ({ cl, c: characterFor(cl) }));
+      UI.showOverlay('', `
+        <div class="pg cls2-page">
+          <div class="cls2-stage">
+            ${sel ? `<div class="cls2-fullart">${SDT.Art.classFullArt(sel)}</div>` : ''}
+            <aside class="cls2-panel${sel ? '' : ' cls2-none'}">
               ${sel && story ? `
-                <div class="cls-figure">${SDT.Art.classFullArt(sel)}</div>
-                <div class="cls-detail-head">
-                  <div class="cls-detail-meta">
-                    <b class="cls-detail-name">${esc(characterName(sel))}</b>
-                    <span class="cls-detail-tag">${esc(story.tag)}</span>
-                    <span class="cls-detail-lv">熟练度 Lv.${lv} · ${SDT.Meta.perkText(lv)}</span>
-                  </div>
-                </div>
-                <h3>背景故事</h3>
-                <p class="cls-story">${esc(story.bg)}</p>
+                <h2 class="cls2-name">${esc(story.name)}</h2>
+                <div class="cls2-tag">${esc(story.tag)}</div>
+                <div class="cls2-lv">[[icon:medal]] ${esc(sel)} · 熟练度 Lv.${lv} · ${SDT.Meta.perkText(lv)}</div>
+                <p class="cls2-story">${esc(story.bg)}</p>
                 <h3>出发任务</h3>
-                <p class="cls-story">${esc(story.task)}</p>
-                <button class="ov-btn cls-pool-btn" data-act="clsPool">[[icon:cards]] 查看角色卡池（${poolCount(sel)} 张）</button>
-              ` : `
-                <p class="cls-empty">[[icon:medal]]<br>从左侧选择一个角色<br>查看立绘、背景故事与出发任务</p>
-              `}
+                <p class="cls2-story">${esc(story.task)}</p>
+                <button class="ov-btn cls2-pool-btn" data-act="clsPool">[[icon:cards]] 查看角色卡池（${poolCount(sel)} 张）</button>`
+              : '<p class="cls2-hint">[[icon:medal]]<br>从下方选择一名角色</p>'}
             </aside>
           </div>
-          <footer class="cls-foot">
-            <button class="ov-btn ok" data-act="pickClass" ${sel ? '' : 'disabled'}>${sel ? `确 认 · ${esc(characterName(sel))}` : '请先选择角色'}</button>
-          </footer>
+          <div class="cls2-strip">${roster.map(({ cl, c }) => `
+            <button class="cls2-face${cl === sel ? ' sel' : ''}" data-act="selClass" data-cls="${escAttr(cl)}" title="${escAttr(c.name)} · ${escAttr(c.tag)}">
+              ${SDT.Art.classArt(cl)}<b>${esc(c.name)}</b>
+            </button>`).join('')}</div>
+          <button class="cls2-back" data-act="cls2Quit" title="返回标题界面"><svg class="svg-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.5 5.5 4 12l6.5 6.5M4.6 12H20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <button class="cls2-confirm" data-act="pickClass" ${sel ? '' : 'disabled'} title="${sel ? `确认 · ${escAttr(characterName(sel))}` : '请先选择角色'}"><svg class="svg-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12.5 10 18 19.5 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         </div>`, 'page');
     };
     // 二级页：该角色的卡池全览
@@ -522,11 +529,12 @@ import { eventNarrative } from './narrative.js';
       const pool = SDT.Cards.classPool(sel);
       UI.showOverlay(`[[icon:cards]] ${esc(characterName(sel))} · 角色卡池`, `
         <div class="pg cls-page cls-pool-page">
+          <button class="pg-close" data-act="clsBack" title="返回选角（Esc）">[[icon:cross]]</button>
           <header class="pg-head">
             <h2>[[icon:cards]] ${esc(characterName(sel))} · 角色卡池（${pool.length} 张）</h2>
             <span class="sub">确认选择「${esc(characterName(sel))}」后，从以下卡池中随机获得 1 张（与 5 张「初始攻击」一起带入背包）</span>
           </header>
-          <div class="cls-pool cls-pool-full">${pool.map(c => SDT.Cards.cardHTML(c, 'sm')).join('')}</div>
+          <div class="cls-pool cls-pool-full">${pool.map(c => SDT.Cards.cardHTML(c)).join('')}</div>
           <footer class="cls-foot">
             <button class="ov-btn" data-act="clsBack">[[icon:medal]] 返回选角</button>
             <button class="ov-btn ok" data-act="pickClass">确 认 · ${esc(characterName(sel))}</button>
@@ -549,6 +557,10 @@ import { eventNarrative } from './narrative.js';
       view = 'select';
       Sfx.tick();
       render();
+    });
+    UI.act('cls2Quit', () => {   // 左下角返回键：放弃选角回标题（弹层淡出后 exitToTitle 的弹窗守卫才放行）
+      UI.hideOverlay();
+      setTimeout(() => exitToTitle(), 240);
     });
     UI.act('pickClass', () => {
       if (!sel) return;

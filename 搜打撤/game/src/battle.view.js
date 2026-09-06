@@ -279,11 +279,8 @@ import { BattleSession, commands, configureBattleRenderer, getSnapshot, viewApi 
           <button class="ov-btn ghost" data-act="btFlee" ${busy || infusingNow ? 'disabled' : ''}>[[icon:runner]] 撤退</button>
           <button class="ov-btn ${busy || infusingNow ? '' : 'ok'}" data-act="btEnd" ${busy || infusingNow ? 'disabled' : ''}>[[icon:skip]] 结束回合</button>
         </div>
-      </div>
-      <p class="sts-note">${!opts.isBoss && opts.strategy ? `[[icon:gear]] 敌情预告：${esc(opts.strategy)} · ` : ''}${opts.isBoss
-        ? 'BOSS战：卡牌战后完好保留；注能消耗的牌进墓地（不洗回），战胜后整理背包时可放回'
-        : '小怪战：打出过的卡战后进入消耗口袋（初始攻击与发现的卡是临时卡，战后消散）'}</p>
       </div>`, 'battle');
+    // sts-note 底部说明行已删（留言 2026-09-06：把下面的文字都去掉）
     UI.act('btPlay', (d) => {
       if (Date.now() - aimPlayedAt < 300) return;   // 指向松手刚打出，忽略残留 click
       if (infusingNow) return toggleInfusePick(d.uid);

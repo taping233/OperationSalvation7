@@ -174,7 +174,7 @@ function createGameMenuController(deps) {
         <div class="guide-row"><b>滚轮</b><span>缩放地图</span></div>
       </div>
       <p class="ov-note">「开始远征」选择档位进入基地；整备卡牌与物资后出发，搜打撤一气呵成。</p>
-      <div class="ov-btns"><button class="ov-btn" data-act="guideBack">返回 <i class="en">BACK</i></button></div>`, true);
+      <div class="ov-btns"><button class="ov-btn back-sm" data-act="guideBack">返回 <i class="en">BACK</i></button></div>`, true);
     UI.act('guideBack', () => { UI.hideOverlay(); game.state = 'title'; });
   }
 
@@ -199,7 +199,7 @@ function createGameMenuController(deps) {
     UI.showOverlay('[[icon:medal]] 成就总览', `
       <p class="ov-note">${note}</p>
       <div class="ach-list">${rows}</div>
-      <div class="ov-btns"><button class="ov-btn" data-act="achBack">返回 <i class="en">BACK</i></button></div>`, true);
+      <div class="ov-btns"><button class="ov-btn back-sm" data-act="achBack">返回 <i class="en">BACK</i></button></div>`, true);
     UI.act('achBack', () => { UI.hideOverlay(); game.state = 'title'; });
   }
 

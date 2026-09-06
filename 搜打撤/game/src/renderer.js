@@ -548,7 +548,7 @@ const SDT = window.SDT;
   function drawPlayer(ctx, game) {
     const cam = game.cam, z = cam.zoom;
     const px = game.pos.x;
-    const groundY = game.pos.y + T0 * 0.18;
+    const groundY = game.pos.y;               // 俯视图：玩家标记与所在结点中心对齐（留言：红圈不居中）
     const s = T0 * 0.40;                       // 棋子尺寸
     ctx.save();
     // 地影（跳起时收窄）

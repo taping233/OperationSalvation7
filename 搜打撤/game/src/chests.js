@@ -127,13 +127,19 @@ import { Random } from './random.js';
         (cur.tokenHit ? ' · <b class="gold">[[icon:sparkles]] 金色令牌！</b>' : '');
     const ops = isPick
       ? '<p class="ov-note">点击一张卡牌收下，其余两张散落在风中……</p>'
-      : `<div class="scene-ops"><button class="ov-btn ok" data-act="chestTake">[[icon:archive]] 全部收下${cur.coins ? `（含 ${cur.coins} 币）` : ''}</button></div>`;
+      // 2026-09-06 留言：全部收下移到右边，左侧加跳过（散落不要了）
+      : `<div class="scene-ops chest-ops"><button class="ov-btn" data-act="chestSkip">跳过</button><button class="ov-btn ok" data-act="chestTake">[[icon:archive]] 全部收下${cur.coins ? `（含 ${cur.coins} 币）` : ''}</button></div>`;
     UI.showOverlay(`[[icon:archive]] 搜刮！${cur.isClass ? '职业·' : ''}${K.name} · 第 ${idx} / ${queue.length}`, `
       ${cur.isClass ? '<p class="evt-sts-desc cls-chest-note">黑色职业宝箱：只掉落<b>职业卡牌</b></p>' : ''}
       <p class="evt-sts-desc">${lootLine}</p>
       ${cur.cards.length ? `<div class="bt-hand">${cardsHTML}</div>` : '<p class="ov-empty">（卡牌库是空的，什么也没开出）</p>'}
       ${ops}`, 'chest');
     UI.act('chestTake', takeAll);
+    UI.act('chestSkip', () => {
+      if (cur.coins) G.gainCoins(cur.coins);   // 币是无主物，跳过也收；卡牌散落
+      UI.log('（你留下开出的卡牌，转身走了……）', 'dim');
+      next();
+    });
     UI.act('chestPick', (d) => {
       const card = cur.cards[+d.i];
       if (card) G.grantCard(card);

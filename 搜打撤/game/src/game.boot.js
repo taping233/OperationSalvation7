@@ -322,7 +322,7 @@ configureGameRuntime({ openClassChoice, openBaseHub, rebuildNotes, resize: () =>
     cam.clamp();
 
     bindInput();
-    for (const [id,key] of [['sceneRotateL','q'],['sceneRotateR','e'],['sceneFocus','f'],['sceneOverview','g']]) document.getElementById(id)?.addEventListener('click',()=>window.dispatchEvent(new KeyboardEvent('keydown',{key})));
+    // 镜头快捷键按钮（旋转/定位/全景）已按 2026-09-06 留言删除，键盘 Q/E/F/G 仍可用
     const quality=document.getElementById('sceneQuality');
     if(quality){if(SDT.Renderer.metrics)quality.value=SDT.Renderer.metrics.quality;quality.addEventListener('change',()=>SDT.Renderer.setQuality?.(quality.value));}
     document.getElementById('sceneFps')?.addEventListener('change',e=>{renderScheduler.activeInterval=1000/Number(e.target.value);renderScheduler.invalidate();});
