@@ -1,7 +1,7 @@
 import { readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { Random, SeededRandomService, setRandomService } from '../prototypes/map-system/src/random.js';
+import { Random, SeededRandomService, setRandomService } from '../game/src/random.js';
 
 describe('带种子的随机数服务', () => {
   it('同 seed、同命名流产生相同序列', () => {
@@ -38,7 +38,7 @@ describe('带种子的随机数服务', () => {
   });
 
   it('源码不再绕过随机数服务，且对局存档包含 seed 与流状态', () => {
-    const root = resolve(process.cwd(), 'prototypes/map-system/src');
+    const root = resolve(process.cwd(), 'game/src');
     const sources = readdirSync(root)
       .filter(name => name.endsWith('.js') && name !== 'random.js')
       .map(name => readFileSync(resolve(root, name), 'utf8'));

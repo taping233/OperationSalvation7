@@ -7,7 +7,7 @@ from PIL import Image, ImageChops
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE = ROOT / "prototypes" / "map-system" / "assets" / "winter-ui" / "menu-emblems" / "source"
+SOURCE = ROOT / "game" / "assets" / "winter-ui" / "menu-emblems" / "source"
 OUTPUT = SOURCE.parent
 EMBLEMS = {
     "prebattle-snow": "战前准备 · 雪花星盘",

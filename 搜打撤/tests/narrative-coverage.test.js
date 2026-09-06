@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { Story } from 'inkjs';
-import storyContent from '../prototypes/map-system/src/generated/narrative-events.js';
-import { KNOTS } from '../prototypes/map-system/src/narrative.js';
+import storyContent from '../game/src/generated/narrative-events.js';
+import { KNOTS } from '../game/src/narrative.js';
 
 // ink 分支全量走查（dialogue-systems / procedural-gen 验证纪律）：
 // 对每个事件 knot，按选择序列 BFS 展开全部路径，断言

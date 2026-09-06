@@ -3,7 +3,7 @@
  *
  * 用法：node scripts/esm-convert.mjs [--dry]
  *
- * 输入：prototypes/map-system/src/*.js（23 个全局脚本）
+ * 输入：game/src/*.js（23 个全局脚本）
  * 输出：就地改写每个文件
  *   1. IIFE 解包：`(function (…) { … })();` → 顶层语句
  *   2. 依据 acorn 符号分析生成跨文件 `import { … } from './x.js'`
@@ -18,7 +18,7 @@ import path from 'node:path';
 import { parse } from 'acorn';
 import { simple, base } from 'acorn-walk';
 
-const SRC_DIR = path.resolve(import.meta.dirname, '..', 'prototypes', 'map-system', 'src');
+const SRC_DIR = path.resolve(import.meta.dirname, '..', 'game', 'src');
 const DRY = process.argv.includes('--dry');
 // 与原 index.html 一致的加载顺序（shared.js 原本排第 13，其垫片只服务其后的文件）
 const ORDER = ['mapData','art','icons-bitmap','sound','camera','notes','cards','combat','base','meta','renderer','ui','shared','battle.core','battle.view','chests','game.core','game.run','game.hub','game.bag','game.notes','game.cardslib','game.boot'];

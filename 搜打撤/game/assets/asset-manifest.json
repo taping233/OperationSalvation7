@@ -1,7 +1,7 @@
 {
  "_comment": "资产清单(create-game-assets模板裁剪版): path/ext/bytes/license。assets:audit 校验未登记文件。",
  "generated": "2026-09-06",
- "count": 346,
+ "count": 321,
  "assets": [
   {
    "path": "bgm-black-stream-sea.mp3",
@@ -13,12 +13,6 @@
    "path": "bgm-sour-orange-earth.mp3",
    "ext": "mp3",
    "bytes": 3745036,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "board-backdrop-wreck.png",
-   "ext": "png",
-   "bytes": 920934,
    "license": "项目自有（自制/AI 生成）"
   },
   {
@@ -289,150 +283,6 @@
    "path": "icon-council.png",
    "ext": "png",
    "bytes": 1427010,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "icons-orig/altar.png",
-   "ext": "png",
-   "bytes": 59356,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "icons-orig/battle.png",
-   "ext": "png",
-   "bytes": 62026,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "icons-orig/boss.png",
-   "ext": "png",
-   "bytes": 73434,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "icons-orig/chest.png",
-   "ext": "png",
-   "bytes": 85730,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "icons-orig/door.png",
-   "ext": "png",
-   "bytes": 74085,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "icons-orig/entrance.png",
-   "ext": "png",
-   "bytes": 52260,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "icons-orig/event.png",
-   "ext": "png",
-   "bytes": 55659,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "icons-orig/extract.png",
-   "ext": "png",
-   "bytes": 62618,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "icons-orig/fire.png",
-   "ext": "png",
-   "bytes": 96218,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "icons-orig/key.png",
-   "ext": "png",
-   "bytes": 74018,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "icons-orig/player.png",
-   "ext": "png",
-   "bytes": 58356,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "icons-orig/shop.png",
-   "ext": "png",
-   "bytes": 70403,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "icons-source-web/altar.png",
-   "ext": "png",
-   "bytes": 941316,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "icons-source-web/battle.png",
-   "ext": "png",
-   "bytes": 1068624,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "icons-source-web/boss.png",
-   "ext": "png",
-   "bytes": 1022305,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "icons-source-web/chest.png",
-   "ext": "png",
-   "bytes": 972420,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "icons-source-web/door.png",
-   "ext": "png",
-   "bytes": 1030027,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "icons-source-web/entrance.png",
-   "ext": "png",
-   "bytes": 1001309,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "icons-source-web/event.png",
-   "ext": "png",
-   "bytes": 995392,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "icons-source-web/extract.png",
-   "ext": "png",
-   "bytes": 1045343,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "icons-source-web/fire.png",
-   "ext": "png",
-   "bytes": 1037588,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "icons-source-web/key.png",
-   "ext": "png",
-   "bytes": 964758,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "icons-source-web/player.png",
-   "ext": "png",
-   "bytes": 1183189,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "icons-source-web/shop.png",
-   "ext": "png",
-   "bytes": 1107396,
    "license": "项目自有（自制/AI 生成）"
   },
   {

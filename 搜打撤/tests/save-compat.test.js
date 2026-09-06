@@ -1,12 +1,12 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { RunStorage } from '../prototypes/map-system/src/game.storage.js';
+import { RunStorage } from '../game/src/game.storage.js';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };
-await import('../prototypes/map-system/src/cards.js');
-await import('../prototypes/map-system/src/base.js');
-await import('../prototypes/map-system/src/meta.js');
+await import('../game/src/cards.js');
+await import('../game/src/base.js');
+await import('../game/src/meta.js');
 
 const fixture = name => JSON.parse(readFileSync(resolve(process.cwd(), `tests/fixtures/${name}`), 'utf8'));
 const Base = window.SDT.Base;

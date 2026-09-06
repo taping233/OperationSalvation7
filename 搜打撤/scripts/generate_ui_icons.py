@@ -2,7 +2,7 @@
 from pathlib import Path
 from PIL import Image, ImageDraw
 
-ROOT = Path(__file__).resolve().parents[1] / "prototypes" / "map-system" / "assets" / "ui" / "icons"
+ROOT = Path(__file__).resolve().parents[1] / "game" / "assets" / "ui" / "icons"
 S = 128
 INK, PALE, CYAN, AMBER, CORAL, STEEL = "#080b0e", "#dce3e6", "#5cb9bc", "#e5b449", "#d96755", "#718088"
 NAMES = "heart broken coin pouch sword swords bag dice upload download book cards home fire skull gem lantern key lock unlock crystal trash door exit tools pocket broom wood bread trophy paw map notes medal shield plate blood flask scroll save helmet question sparkles bolt recycle check cross arrow play skip hourglass gear pen folder archive mouse flag slime demon runner".split()

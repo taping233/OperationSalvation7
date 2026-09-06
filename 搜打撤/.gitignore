@@ -3,6 +3,6 @@ desktop-app/build.log
 *.log
 desktop-app/dist-shell-check/
 desktop/_fps_probe_tmp.cjs
-prototypes/map-system/tools/_fps_probe_tmp.*
+game/tools/_fps_probe_tmp.*
 output/
 .playwright-cli/

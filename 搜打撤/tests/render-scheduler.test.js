@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { RenderScheduler } from '../prototypes/map-system/src/render-scheduler.js';
+import { RenderScheduler } from '../game/src/render-scheduler.js';
 
 describe('RenderScheduler', () => {
   it('空闲最多 30 FPS，活动状态允许 120 FPS', () => {

@@ -1,7 +1,7 @@
 /* cards.js 单元测试：抽卡/注能/回复/护甲词条推导 + 卡面角标（迁移自 selftest.js 第 2 节） */
 import { describe, it, expect, beforeAll } from 'vitest';
 window.SDT = window.SDT || { Icons: { img: () => '' } };
-await import('../prototypes/map-system/src/cards.js');
+await import('../game/src/cards.js');
 
 let Cards;
 beforeAll(() => { Cards = window.SDT.Cards; });

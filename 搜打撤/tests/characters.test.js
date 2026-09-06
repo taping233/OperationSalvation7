@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { CHARACTERS, characterFor, migrateCharacterProgress, migrateRunCharacter } from '../prototypes/map-system/src/characters.js';
+import { CHARACTERS, characterFor, migrateCharacterProgress, migrateRunCharacter } from '../game/src/characters.js';
 describe('人物身份与历史存档', () => {
   it('五人各有唯一身份及规则，历史职业可解析', () => {
     expect(new Set(CHARACTERS.map(c => c.id)).size).toBe(5);

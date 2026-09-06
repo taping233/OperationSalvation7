@@ -5,7 +5,7 @@ import { Compiler } from 'inkjs/full';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const sourcePath = path.join(root, 'narrative', 'events.ink');
-const outputPath = path.join(root, 'prototypes', 'map-system', 'src', 'generated', 'narrative-events.js');
+const outputPath = path.join(root, 'game', 'src', 'generated', 'narrative-events.js');
 const source = await readFile(sourcePath, 'utf8');
 const errors = [];
 let story;

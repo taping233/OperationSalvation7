@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { MECH_ALL } from '../prototypes/map-system/src/mech-sentences.js';
-import { createEffectExecutor } from '../prototypes/map-system/src/battle.effects.js';
+import { MECH_ALL } from '../game/src/mech-sentences.js';
+import { createEffectExecutor } from '../game/src/battle.effects.js';
 
 // 元测试（性质锁定）：制作坊的每一条机制句式，都必须能被
 // applyTextEffects 的文本解释层识别并产生效果 —— 即「新卡零专属代码即可生效」。

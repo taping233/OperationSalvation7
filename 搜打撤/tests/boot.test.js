@@ -47,7 +47,7 @@ globalThis.fetch = window.fetch = () => Promise.resolve({ ok: true, status: 200,
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 {
-  const html = readFileSync(resolve(process.cwd(), 'prototypes/map-system/index.html'), 'utf8');
+  const html = readFileSync(resolve(process.cwd(), 'game/index.html'), 'utf8');
   const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
   const body = bodyMatch[1].replace(/<script[\s\S]*?<\/script>/g, '');
   document.head.innerHTML = '';
@@ -56,7 +56,7 @@ import { resolve } from 'node:path';
 
 // 模块加载（DOMContentLoaded 已在 jsdom 环境建立时派发过，
 // boot.js 的监听随后注册，故下方手动再派发一次触发启动链）
-await import('../prototypes/map-system/src/main.js');
+await import('../game/src/main.js');
 document.dispatchEvent(new Event('DOMContentLoaded', { bubbles: true }));
 // fetch .then 与 UI 初始化里的微任务需要清一轮
 await new Promise(r => setTimeout(r, 0));

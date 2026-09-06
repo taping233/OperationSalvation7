@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import { readFileSync, readdirSync } from 'node:fs';
 import { basename, join, resolve } from 'node:path';
-import { RULES } from '../prototypes/map-system/src/rules.js';
-import '../prototypes/map-system/src/mapData.js';
-import { createEffectExecutor, splitEffectClauses } from '../prototypes/map-system/src/battle.effects.js';
-import { RunStorage } from '../prototypes/map-system/src/game.storage.js';
-import { GameStore } from '../prototypes/map-system/src/game.store.js';
+import { RULES } from '../game/src/rules.js';
+import '../game/src/mapData.js';
+import { createEffectExecutor, splitEffectClauses } from '../game/src/battle.effects.js';
+import { RunStorage } from '../game/src/game.storage.js';
+import { GameStore } from '../game/src/game.store.js';
 
 describe('规则与接口契约', () => {
   it('关键玩法数值保持冻结且与现行规则一致', () => {
@@ -100,7 +100,7 @@ describe('旧对局存档迁移', () => {
 
 describe('ESM 依赖方向', () => {
   it('src 模块不存在循环依赖', () => {
-    const root = resolve(process.cwd(), 'prototypes/map-system/src');
+    const root = resolve(process.cwd(), 'game/src');
     const files = readdirSync(root).filter(name => name.endsWith('.js'));
     const graph = new Map(files.map(name => [name, []]));
     for (const name of files) {
@@ -125,14 +125,14 @@ describe('ESM 依赖方向', () => {
   });
 
   it('game.core 不反向导入界面功能', () => {
-    const source = readFileSync(resolve(process.cwd(), 'prototypes/map-system/src/game.core.js'), 'utf8');
+    const source = readFileSync(resolve(process.cwd(), 'game/src/game.core.js'), 'utf8');
     expect(source).not.toMatch(/from ['"]\.\/game\.(boot|run|hub|notes|cardslib)\.js['"]/);
     expect(source).not.toMatch(/document\.|localStorage|window\.SDT/);
     expect(source).toContain("export * from './game.session.js'");
   });
 
   it('battle.core 不访问 DOM 或反向导入战斗视图', () => {
-    const source = readFileSync(resolve(process.cwd(), 'prototypes/map-system/src/battle.core.js'), 'utf8');
+    const source = readFileSync(resolve(process.cwd(), 'game/src/battle.core.js'), 'utf8');
     expect(source).not.toMatch(/from\s+['"][^'"]*battle\.view\.js['"]|\bUI\.|document\./);
   });
 });
@@ -142,12 +142,12 @@ describe('Electron 启动契约', () => {
     const main = readFileSync(resolve(process.cwd(), 'desktop-app/main.js'), 'utf8');
     const pkg = JSON.parse(readFileSync(resolve(process.cwd(), 'desktop-app/package.json'), 'utf8'));
     expect(main).toContain("path.join(__dirname, 'game')");
-    expect(main).not.toMatch(/prototypes['"],\s*['"]map-system/);
+    expect(main).not.toMatch(/prototypes|map-system/);
     expect(pkg.scripts.prestart.indexOf('build:game')).toBeLessThan(pkg.scripts.prestart.indexOf('check:version'));
   });
 
   it('首页监听在 DOMContentLoaded 的易失败初始化链之前绑定', () => {
-    const source = readFileSync(resolve(process.cwd(), 'prototypes/map-system/src/game.boot.js'), 'utf8');
+    const source = readFileSync(resolve(process.cwd(), 'game/src/game.boot.js'), 'utf8');
     const earlyBind = source.indexOf('\n  bindTitle();');
     const boot = source.indexOf("window.addEventListener('DOMContentLoaded'");
     expect(earlyBind).toBeGreaterThan(0);

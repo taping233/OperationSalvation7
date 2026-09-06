@@ -2,12 +2,11 @@ const fs = require('fs');
 const path = require('path');
 
 const root = path.resolve(__dirname, '..');
-const manifestPath = path.join(root, 'prototypes', 'map-system', 'version.json');
+const manifestPath = path.join(root, 'game', 'version.json');
 const canonical = JSON.parse(fs.readFileSync(manifestPath, 'utf8')).version;
 const mirrors = [
   path.join(root, 'desktop-app', 'package.json'),
   path.join(root, 'desktop-app', 'package-lock.json'),
-  path.join(root, 'desktop', 'app', 'package.json'),
 ];
 
 if (!/^\d+\.\d+\.\d+$/.test(canonical)) {

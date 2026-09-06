@@ -10,7 +10,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { parse } from 'acorn';
 
-const DIR = path.resolve(import.meta.dirname, '..', 'prototypes', 'map-system', 'src');
+const DIR = path.resolve(import.meta.dirname, '..', 'game', 'src');
 const files = fs.readdirSync(DIR).filter(f => f.endsWith('.js') && f !== 'main.js');
 
 const importsOf = new Map(); // file → Map(name → dep)

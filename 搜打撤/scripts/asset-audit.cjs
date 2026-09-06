@@ -3,7 +3,7 @@ const { existsSync, readFileSync, readdirSync, statSync } = require('node:fs');
 const path = require('node:path');
 
 const root = path.resolve(__dirname, '..');
-const sourceRoot = path.join(root, 'prototypes', 'map-system', 'assets');
+const sourceRoot = path.join(root, 'game', 'assets');
 const buildRoot = process.argv[2]
   ? path.resolve(root, process.argv[2])
   : path.join(root, 'desktop-app', 'game');

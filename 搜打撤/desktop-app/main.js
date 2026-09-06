@@ -121,7 +121,7 @@ ipcMain.handle('suggestions-append', (_event, entry) => {
   if (!item.text) return { ok: false };
   const targets = app.isPackaged
     ? [path.join(app.getPath('userData'), 'suggestions.json')]
-    : [path.join(__dirname, '..', 'prototypes', 'map-system', 'output', 'suggestions.json'),
+    : [path.join(__dirname, '..', 'game', 'output', 'suggestions.json'),
        path.join(app.getPath('userData'), 'suggestions.json')];
   for (const file of targets) {
     try {

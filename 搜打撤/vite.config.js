@@ -41,7 +41,7 @@ function clearGeneratedDir(dir) {
 }
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
-const GAME_ROOT = path.join(ROOT, 'prototypes', 'map-system');
+const GAME_ROOT = path.join(ROOT, 'game');
 const OUT_DIR = process.env.SDT_BUILD_OUT_DIR
   ? path.resolve(ROOT, process.env.SDT_BUILD_OUT_DIR)
   : path.join(ROOT, 'desktop-app', 'game');

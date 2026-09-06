@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { checkConnectivity } from '../prototypes/map-system/src/map-graph.js';
+import { checkConnectivity } from '../game/src/map-graph.js';
 
 // 环层图连通性（procedural-gen）：闭环轨道 + 双向门结构下，
 // 从 (0层,0号) 出发必须能到达全部结点；门缺失/单向会造成孤岛。

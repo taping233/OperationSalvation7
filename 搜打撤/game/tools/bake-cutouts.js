@@ -2,7 +2,7 @@
  * 离线烘焙战场立绘抠图（把原运行时 makeCutout 挪到构建期）
  *
  * 用法（在 搜打撤/ 目录下）：
- *   ./desktop/electron/electron.exe prototypes/map-system/tools/bake-cutouts.js
+ *   ./desktop/electron/electron.exe game/tools/bake-cutouts.js
  *
  * 读取 assets/portraits/{classes,enemies}/*.png，按 art.js 战场同款算法
  * （等比降到高 760 → 四边洪泛去纸色背景 → 轮廓半透明羽化）处理后，

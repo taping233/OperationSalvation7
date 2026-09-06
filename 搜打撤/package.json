@@ -17,7 +17,7 @@
     "test:watch": "vitest",
     "perf": "node scripts/perf-benchmark.cjs",
     "assets:audit": "node scripts/asset-audit.cjs",
-    "sfx:gen": "node prototypes/map-system/scripts/jsfxr-generate.cjs"
+    "sfx:gen": "node game/scripts/jsfxr-generate.cjs"
   },
   "devDependencies": {
     "acorn": "^8.14.0",

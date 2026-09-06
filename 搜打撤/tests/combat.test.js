@@ -2,7 +2,7 @@
 import { describe, it, expect } from 'vitest';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };
-await import('../prototypes/map-system/src/combat.js');
+await import('../game/src/combat.js');
 const Combat = window.SDT.Combat;
 
 describe('combat.selfTest（内置四类伤害/诅咒用例）', () => {

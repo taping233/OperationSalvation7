@@ -9,13 +9,13 @@ npm run dev
 npm run narrative:compile
 npm test
 npm run build
-node prototypes/map-system/selftest.js
+node game/selftest.js
 node scripts/check-version.cjs
 npm run perf
 npm run assets:audit
 ```
 
-桌面开发态不能直接读取 `prototypes/map-system`：原生 `app://` 不解析 `howler` 等裸模块导入。`desktop-app` 的 `prestart` 会先运行 Vite 构建，再从 `desktop-app/game` 加载，避免入口模块失败后首页按钮全部失效。桌面启动和发布统一使用 `desktop-app/node_modules/electron` 的运行时；`prestart` / `predist` 会先检查文件与版本。
+桌面开发态不能直接读取 `game`：原生 `app://` 不解析 `howler` 等裸模块导入。`desktop-app` 的 `prestart` 会先运行 Vite 构建，再从 `desktop-app/game` 加载，避免入口模块失败后首页按钮全部失效。桌面启动和发布统一使用 `desktop-app/node_modules/electron` 的运行时；`prestart` / `predist` 会先检查文件与版本。
 
 ## 修改约定
 
@@ -31,7 +31,7 @@ npm run assets:audit
 
 ## 发布检查
 
-依次执行测试、源码自测、版本一致性检查、Vite 构建和 Electron 冒烟。版本唯一真源为 `prototypes/map-system/version.json`。`npm run dist --prefix desktop-app` 会在唯一临时目录中完成 Electron 封装，成功后再替换 `desktop-app/dist/搜打撤-代号7.exe`，避免旧 `win-unpacked` 文件锁破坏发布。
+依次执行测试、源码自测、版本一致性检查、Vite 构建和 Electron 冒烟。版本唯一真源为 `game/version.json`。`npm run dist --prefix desktop-app` 会在唯一临时目录中完成 Electron 封装，成功后再替换 `desktop-app/dist/搜打撤-代号7.exe`，避免旧 `win-unpacked` 文件锁破坏发布。
 
 ## 原型纪律（2026-09-06，源自 gamedev skills / prototype-fast）
 

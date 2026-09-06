@@ -2,7 +2,7 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageFilter
 import math
 
-ROOT = Path(__file__).resolve().parents[1] / "prototypes" / "map-system" / "assets"
+ROOT = Path(__file__).resolve().parents[1] / "game" / "assets"
 GRAPHITE = (8, 12, 16, 255)
 PANEL = (21, 29, 35, 255)
 STEEL = (82, 98, 106, 255)

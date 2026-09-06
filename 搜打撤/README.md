@@ -11,13 +11,13 @@ npm install
 npm run dev
 ```
 
-`index.html` 使用 ESM，不能通过 `file://` 直接双击运行。`npm run dev` 由 Vite 读取 `prototypes/map-system`；桌面启动会先构建，再读取 `desktop-app/game`，确保第三方 ESM 依赖已经打包。
+`index.html` 使用 ESM，不能通过 `file://` 直接双击运行。`npm run dev` 由 Vite 读取 `game`；桌面启动会先构建，再读取 `desktop-app/game`，确保第三方 ESM 依赖已经打包。
 
 ## 常用检查
 
 ```powershell
 npm test
-node prototypes/map-system/selftest.js
+node game/selftest.js
 node scripts/check-version.cjs
 npm run build
 npm run perf
@@ -42,4 +42,4 @@ npm run perf
 - [后续路线图](docs/roadmap.md)
 - [已完成版本记录](docs/changelog.md)
 
-美术方向、资产清单和替换矩阵继续保存在 `docs/` 对应独立文档中。
+美术方向与资产清单保存在 `docs/` 对应独立文档中；阶段性历史文档在 `docs/archive/`。

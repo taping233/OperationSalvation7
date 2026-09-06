@@ -2,7 +2,7 @@
 
 状态：平面设计交付审阅，等待老板反馈后继续本轮程序化 3D 重建。
 
-生成图 `prototypes/map-system/design/art-direction-board.png` 仅用于配色、建筑、材质和空间气氛。正式平面稿入口为 `prototypes/map-system/design/overview.html`；生成图不是游戏规格。
+生成图 `game/design/art-direction-board.png` 仅用于配色、建筑、材质和空间气氛。正式平面稿入口为 `game/design/overview.html`；生成图不是游戏规格。
 
 | 概念图偏差 | 实际规则 | 平面稿处理 |
 | --- | --- | --- |

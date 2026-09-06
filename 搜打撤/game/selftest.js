@@ -55,7 +55,7 @@ check('BOSS·三类独立意图模式', /general.*军威强化/.test(src('battle
 check('敌人·全部图鉴具备行为钩子', ['infantry','archer','bandit','cavalry','orc_jav','orc_axe','wolf_rider','fire_el','water_el','grass_el','dragon'].every(k => new RegExp(`${k}[^\n]*behavior:`).test(mapSource)), true);
 check('事件·二选一与三选一分支', (() => {
   // v0.52 起事件分支文本真源在 narrative/events.ink（经 scripts/compile-narrative.mjs 编译）
-  const ink = fs.readFileSync(path.join(HERE, '..', '..', 'narrative', 'events.ink'), 'utf8');
+  const ink = fs.readFileSync(path.join(HERE, '..', 'narrative', 'events.ink'), 'utf8');
   return /tt6_goldmine[\s\S]*?收下 3 币/.test(ink) && /tt6_airdrop[\s\S]*?应急处理/.test(ink) && /tt6_chestdraw[\s\S]*?密封物资箱/.test(ink);
 })(), true);
 check('兼容·未知事件仍走旧效果', /return null;/.test(gameSource) && /applyEventEffect\(card\)/.test(gameSource), true);

@@ -32,7 +32,7 @@ ${serverLog}`));
 async function orchestrate() {
   const node = process.execPath;
   const vite = path.join(ROOT, 'node_modules', 'vite', 'bin', 'vite.js');
-  const electron = path.join(ROOT, 'desktop', 'electron', 'electron.exe');
+  const electron = path.join(ROOT, 'desktop-app', 'node_modules', 'electron', 'dist', 'electron.exe');
   const server = spawn(node, [vite, '--host', '127.0.0.1', '--port', String(PORT), '--strictPort'], {
     cwd: ROOT,
     stdio: ['ignore', 'pipe', 'pipe'],

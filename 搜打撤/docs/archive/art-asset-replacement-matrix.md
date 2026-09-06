@@ -73,6 +73,6 @@ Constraints: completely original; no logos, trademarks, watermark, named-game or
 
 ## 验收边界
 
-- 所有成品必须复制到 `prototypes/map-system/assets/` 分层目录；不得引用 `.codex/generated_images`。
+- 所有成品必须复制到 `game/assets/` 分层目录；不得引用 `.codex/generated_images`。
 - 每张图目检无水印/文字/官方标识，哈希与引用点补齐后才标记完成。
 - 10 把钥匙特殊关卡不制作资产。

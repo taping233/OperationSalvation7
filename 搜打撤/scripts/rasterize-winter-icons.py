@@ -7,7 +7,7 @@ from PIL import Image
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE = ROOT / "prototypes" / "map-system" / "assets" / "winter-ui"
+SOURCE = ROOT / "game" / "assets" / "winter-ui"
 OUTPUT = SOURCE / "raster"
 ICONS = (
     "snowflakes",

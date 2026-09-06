@@ -1,6 +1,6 @@
 # 非场景位图资源清单（v0.30）
 
-> 运行时根目录：`prototypes/map-system/assets/`。最终仅允许 PNG/WebP/ICO；不得引用生成缓存、inline SVG、`.svg` 或 `data:image/svg+xml`。
+> 运行时根目录：`game/assets/`。最终仅允许 PNG/WebP/ICO；不得引用生成缓存、inline SVG、`.svg` 或 `data:image/svg+xml`。
 
 ## 职业立绘（768×1024，PNG）
 
