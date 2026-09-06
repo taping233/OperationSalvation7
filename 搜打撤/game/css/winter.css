@@ -20,7 +20,7 @@ button,input,select,textarea{font-family:inherit}button{border-radius:1px;transi
 .ak-hud>*{animation:akIn .5s cubic-bezier(.2,.7,.3,1) both}.ak-hud>:nth-child(n+5){animation-delay:70ms}.ak-hud>:nth-child(n+9){animation-delay:140ms}.ak-hud>:nth-child(n+13){animation-delay:210ms}
 @keyframes akIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 #exitScr{background:linear-gradient(130deg,#132c39,#0a1821)}#exitScr .title-inner{display:grid;place-content:center;text-align:center;gap:30px}#exitScr .menu-btn{padding:16px;background:#ddb876;color:#152b35;border:0}.exit-msg{font-size:24px;letter-spacing:4px}
-#sidebar{height:105px;min-height:105px;padding:12px 28px;gap:26px;border-top:1px solid #6f8994;background:linear-gradient(105deg,#122a36,#1b3541);overflow:hidden;box-shadow:0 -5px 25px #0b233555}#sidebar .panel{border:0;border-right:1px solid #425d6880;background:none;box-shadow:none;padding:2px 22px 2px 0}#charPanel{display:none}#bagPanel{min-width:185px;display:flex;align-items:center;gap:18px}#heroName{font-size:18px;letter-spacing:3px;white-space:nowrap}#bagBtn{background:#2c4652;border:1px solid #728b91;padding:12px;min-height:50px}#statsPanel{min-width:180px;flex:1!important}#dicePanel{width:260px;min-width:240px}#rollBtn{background:#dec28e;color:#17303e;font-weight:700;min-height:44px;padding:10px 20px;border:0;box-shadow:none}#rollBtn:hover{background:#f0d5a1}#diceHist{font-size:9px;color:#8da6af}#layerBanner{top:20px;padding:10px 28px;background:#132b36e8;border-bottom:2px solid #d5b47d}#layerBanner .lb-zh{font:18px var(--font-ui);letter-spacing:5px}#layerBanner .lb-en{font:9px 'Cascadia Code';letter-spacing:3px;color:#c0bd9f}#topBtns{left:22px;top:20px}#resHud{top:20px;right:22px}#hpHud{background:#132b36;border:1px solid #637c89;box-shadow:none;clip-path:none}.hp-hud-icon,.hp-hud-label{background:#547c90}.hp-hud-label{font-weight:400;letter-spacing:2px}#topBtns #btnHome{background:linear-gradient(160deg,#A02020 0%,#701616 100%);border:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 2px 6px rgba(0,0,0,.45);color:#f3eae8}#topBtns #btnHome:hover{background:linear-gradient(160deg,#B82A2A 0%,#82201B 100%);color:#fff}#topBtns #btnMute{background:#142c38;border:1px solid #637c89;box-shadow:none}#resHud .chip-mini{background:#132b36e8;border:1px solid #637c89;box-shadow:none;min-width:92px;height:42px}#resHud .res-gold b{color:#e2c28b}
+#sidebar{height:105px;min-height:105px;padding:12px 28px;gap:26px;border-top:1px solid #6f8994;background:linear-gradient(105deg,#122a36,#1b3541);overflow:hidden;box-shadow:0 -5px 25px #0b233555}#sidebar .panel{border:0;border-right:1px solid #425d6880;background:none;box-shadow:none;padding:2px 22px 2px 0}#charPanel{display:flex;align-items:center;min-width:0;padding:0 6px}.hero-ava{width:78px;min-width:78px;height:78px;align-self:center;flex:none;border-radius:8px;overflow:hidden;border:1px solid #728b91;box-shadow:0 2px 8px #0b233566}.hero-ava img.art-avatar{width:100%;height:100%;object-fit:cover;object-position:center}#bagPanel{min-width:185px;display:flex;align-items:center;gap:18px}#heroName{font-size:18px;letter-spacing:3px;white-space:nowrap}#bagBtn{background:#2c4652;border:1px solid #728b91;padding:12px;min-height:50px}#statsPanel{min-width:180px;flex:1!important}#dicePanel{width:260px;min-width:240px}#rollBtn{background:#dec28e;color:#17303e;font-weight:700;min-height:44px;padding:10px 20px;border:0;box-shadow:none}#rollBtn:hover{background:#f0d5a1}#diceHist{font-size:9px;color:#8da6af}#layerBanner{top:20px;padding:10px 28px;background:#132b36e8;border-bottom:2px solid #d5b47d}#layerBanner .lb-zh{font:18px var(--font-ui);letter-spacing:5px}#layerBanner .lb-en{font:9px 'Cascadia Code';letter-spacing:3px;color:#c0bd9f}#topBtns{left:22px;top:20px}#resHud{top:20px;right:22px}#hpHud{background:#132b36;border:1px solid #637c89;box-shadow:none;clip-path:none}.hp-hud-icon,.hp-hud-label{background:#547c90}.hp-hud-label{font-weight:400;letter-spacing:2px}#topBtns #btnHome{background:linear-gradient(160deg,#A02020 0%,#701616 100%);border:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 2px 6px rgba(0,0,0,.45);color:#f3eae8}#topBtns #btnHome:hover{background:linear-gradient(160deg,#B82A2A 0%,#82201B 100%);color:#fff}#topBtns #btnMute{background:#142c38;border:1px solid #637c89;box-shadow:none}#resHud .chip-mini{background:#132b36e8;border:1px solid #637c89;box-shadow:none;min-width:92px;height:42px}#resHud .res-gold b{color:#e2c28b}
 #mapLabels{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:2}#mapLabels[hidden]{display:none}.map-label{position:absolute;left:0;top:0;min-width:20px;text-align:center;padding:3px 6px;color:#dceae7;background:#152e3bd9;border-bottom:1px solid #9ebac0;opacity:.6;font:10px 'Cascadia Code';white-space:nowrap}.map-label.current{opacity:1;color:#f3e3c3;background:#152a34f0;border-color:#d9bd89}.map-label.destination{color:#f3d2a1;border-color:#dab27a}
 #sceneTools{position:absolute;right:22px;bottom:24px;z-index:7;display:flex;gap:5px}#sceneTools button{padding:9px 13px;background:#17303ce8;color:#d4e4e6;border:1px solid #75929d;font-size:11px}body.lobby #sceneTools,body.scene-battle-3d #sceneTools{display:none}
 #overlay{background:#071720a8;backdrop-filter:blur(6px)}#overlay.opaque{background:linear-gradient(125deg,#142e3b,#0f202c);backdrop-filter:none}#overlay .card{border:1px solid #697f87;background:linear-gradient(125deg,#203a48,#132a36);box-shadow:0 25px 100px #05131a99;border-radius:1px}#overlay .card::before{display:none}#overlay .card.page,#overlay .card.bag-page{border:0;border-radius:0;background:linear-gradient(125deg,#1b3645,#102431)}#overlay h2,.pg-head h2{color:#e8eeea;font-weight:400;letter-spacing:4px}.pg-head,.hub-head{border-bottom:1px solid #68808b;padding-bottom:20px}.pg-close{background:#244653;border:1px solid #77919b;box-shadow:none}.pg-close:hover{background:#6a5148}.ov-btn,.mini-btn,.hub-tab,.step-btn{background:#24424f;border:1px solid #607c86;color:#e3eeea;border-radius:1px;box-shadow:none}.ov-btn:hover,.mini-btn:hover{background:#365b69;border-color:#cadcd9}.ov-btn.ok,.mini-btn.ok{background:#d8bc86;border-color:#d8bc86;color:#152e3b}.ov-btn.danger{background:#7a443e;color:#f3dcd5;border-color:#be8c7e}.ov-note,.ov-stats,.ov-empty{color:#b6c9ce;line-height:1.8}.hub-card,.cls-card,.ach-row{background:#193441;border:1px solid #486674;border-radius:1px;box-shadow:none}.hub-card h3{font-weight:400;letter-spacing:3px;color:#e3e6d8}.hub-tabs{gap:10px;padding-top:10px}.hub-tab{border:0;background:none;color:#9db4bd}.hub-tab.on{background:#d7c193;color:#16323e;box-shadow:none}.res-chip,.fc-chip{background:#102833;border:1px solid #4c6a76;border-radius:1px;color:#b3c9ce}.res-chip b,.fc-chip b{color:#e5d4ae}.mode-card{background:#1b3947;border:1px solid #536f7c;border-radius:1px;box-shadow:none;min-height:96px}.mode-card.on{background:#2d4a55;border-color:#d4b582;box-shadow:inset 3px 0 #d4b582}.mode-card .mode-info b{font-size:21px;letter-spacing:3px;font-weight:400}.mode-card .mode-info span{color:#b0c5ca}.mode-card .mode-ckpt{color:#d7c69e}.deploy-forecast{gap:12px}#btnDeploy{background:#dfc691;border:0;border-radius:0;color:#17323f;box-shadow:none;padding:18px 42px;font-weight:500;letter-spacing:5px}.gate-strip{background:#213946;border:1px solid #5e727a}
@@ -183,7 +183,7 @@ body:has(#overlay.opaque:not([hidden])) #sidebar{visibility:hidden}
 .fire-done-btn{padding:14px 34px;font-size:17px;letter-spacing:2px;display:inline-flex;align-items:center;gap:9px}
 .fire-done-btn .svg-ic{width:20px;height:20px;flex:0 0 auto}
 /* 宝箱页操作条：全部收下右移 + 左侧跳过 */
-.scene-ops.chest-ops{justify-content:flex-end;gap:14px}
+.scene-ops.chest-ops{justify-content:space-between;gap:14px;padding:0 4px}
 /* 空白安全节点提示页 */
 .blank-safe-gain{display:flex;flex-direction:column;align-items:center;gap:10px}
 .blank-safe-gain .bsq-icon{width:54px;height:54px;opacity:.9}
@@ -197,7 +197,7 @@ body:has(#overlay.opaque:not([hidden])) #sidebar{visibility:hidden}
 .cn-title em.art-cn{display:inline-block;margin-left:.62em}
 /* 设置 / 收藏图鉴圆钮下移 */
 .ak-lib{top:45%}
-.ak-set{top:59%}
+.ak-set{top:76%}
 /* 制作坊舞台区下边框 */
 .cdes-stage{border-bottom:1px solid #68808b}
 /* 卡牌库重排版（2026-09-06 留言）：卡片太挤 → 紧凑卡面只留卡面+名字，
@@ -207,3 +207,322 @@ body:has(#overlay.opaque:not([hidden])) #sidebar{visibility:hidden}
 .hs-card.lib .hsc-art{height:5.8em}
 /* 滚动性能：视口外的卡条整体跳过布局/绘制（242 张全量卡面的滚动卡顿源） */
 .lib-item{content-visibility:auto;contain-intrinsic-size:auto 224px}
+
+/* —— 留言批次 2026-09-07：战斗视图占满 + 玩家立绘放大 —— */
+/* 战斗场景占满：标题条悬浮在场景上，不再占一行黑底 */
+#overlay .card.battle > h2{position:absolute;top:0;left:0;right:0;z-index:6;margin:0;background:none;border-bottom:0;text-shadow:0 1px 10px #000,0 0 3px #000}
+/* 底部 HUD 暗渐变减淡，消除"黑边"观感 */
+#overlay .battle-stage .sts-hud{background:linear-gradient(180deg,rgba(4,4,4,0),rgba(4,4,4,.18) 55%)}
+/* 手牌区：宽度约界面一半（白底按 2026-09-07 二批留言撤回） */
+#overlay .battle-stage .sts-hud .bt-hand{flex:1 1 auto;max-width:50%;margin:0 auto;padding:14px 12px 8px}
+/* 玩家立绘再放大：与右侧敌人立绘对齐 */
+.sts-me{width:min(34vw,430px)!important}
+.sts-me .sts-figure{width:100%!important}
+.sts-me .sts-figure img{width:100%;height:auto}
+
+/* —— 留言批次 2026-09-07 二批：标题页图鉴移位 + 选人页切换动画 —— */
+.ak-lib{top:57%}
+/* 切换角色：大幅立绘从右滑入淡现、信息面板淡入下沉（纯 transform/opacity，不引逐帧 filter） */
+@keyframes cls2ArtIn{from{opacity:0;transform:translateX(26px)}to{opacity:1;transform:none}}
+@keyframes cls2PanelIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.cls2-fullart img.art-figure,.cls2-fullart img.art-figure-back{animation:cls2ArtIn .3s ease-out both}
+.cls2-panel>*{animation:cls2PanelIn .26s ease-out both}
+.cls2-panel>*:nth-child(2){animation-delay:.04s}
+.cls2-panel>*:nth-child(3){animation-delay:.08s}
+.cls2-panel>*:nth-child(n+4){animation-delay:.12s}
+
+/* ═══════════ 留言批次 2026-09-07 三批（19:00-19:19 共 19 条） ═══════════ */
+
+/* —— 页面全屏化：page 界面不再限制在 1220×880 内，占满整个视口（下边栏随之不可见） —— */
+#overlay .card.page:has(.cls2-page),
+#overlay .card.page:has(#hubMain),
+#overlay .card.page:has(.settings-page),
+#overlay .card.page:has(.clib-main),
+#overlay .card.page:has(.cdes-main){width:100%;height:100%;max-width:none;max-height:none}
+
+/* —— 弹层内返回键统一沉到右下角（快速参考 / 成就总览） —— */
+.ov-btns-corner{grid-template-columns:1fr!important;padding-top:16px}
+.ov-btns-corner .back-sm{justify-self:end}
+
+/* —— 关闭叉号：悬停转动半圈（transform 动画，不引逐帧 filter） —— */
+.pg-close .ic{transition:transform .45s cubic-bezier(.34,1.3,.5,1)}
+.pg-close:hover .ic{transform:rotate(180deg)}
+
+/* —— 选档页：右上叉号改为「返回」键沉到右下角，主体上移让返回键显眼 —— */
+.pg.slot-page .pg-back{position:absolute;z-index:5;right:22px;bottom:20px;display:inline-flex;align-items:center;gap:8px;
+  padding:12px 26px;font-size:14px;letter-spacing:3px;color:#e3eeea;cursor:pointer;border-radius:8px;
+  background:linear-gradient(160deg,#244653,#1a3441);border:1px solid #77919b;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 2px 10px rgba(0,0,0,.4);transition:all .15s}
+.pg.slot-page .pg-back:hover{background:linear-gradient(160deg,#325a69,#22404e);border-color:#cadcd9;transform:translateY(-1px)}
+.pg.slot-page .pg-back .en{font:10px 'Cascadia Code';letter-spacing:2px;opacity:.7}
+.pg.slot-page .slot-page-head{padding-top:0;margin-top:-6px}
+.pg.slot-page .slot-deck{padding-bottom:34px}
+
+/* —— 基地主页：四面留白 + 壁纸（老板指定图，assets/scenes/hub-wallpaper.jpg） —— */
+#hubMain{padding:22px 30px 26px}
+#hubMain .hub-head{padding:12px 12px 12px 16px;border-radius:10px;background:rgba(10,20,28,.55);border:1px solid #68808b55}
+#hubMain .hub-body{margin-top:14px;border-radius:10px}
+#hubMain{background:
+  linear-gradient(180deg,rgba(9,18,26,.66),rgba(9,18,26,.8)),
+  url('../assets/scenes/hub-wallpaper.jpg') center/cover no-repeat fixed}
+
+/* —— 设置页：重排（行距/分组拉开）+ 色调与成就页统一（深蓝金） —— */
+.pg.settings-page{background:linear-gradient(125deg,#1b3645,#102431)}
+.pg.settings-page .settings{max-width:860px;margin:0 auto;padding:10px 26px 30px!important}
+.pg.settings-page .set-h{display:flex;align-items:center;gap:8px;font-size:15px;letter-spacing:3px;color:#e8eeea;
+  margin:30px 0 14px;padding-bottom:9px;border-bottom:1px solid #68808b66}
+.pg.settings-page .set-h:first-child{margin-top:8px}
+.pg.settings-page .set-h .set-en{margin-left:auto;font-size:10px;color:#9db4bd;letter-spacing:2px}
+.pg.settings-page .chk{font-size:14.5px;padding:9px 12px;border-radius:8px;background:#19344155;border:1px solid #48667433;margin-bottom:8px;transition:background .15s}
+.pg.settings-page .chk:hover{background:#19344188}
+.pg.settings-page .chk .set-en{margin-left:auto;font-size:10px;color:#9db4bd;letter-spacing:1.5px}
+.pg.settings-page .chk input{width:16px;height:16px}
+.pg.settings-page .chk.vol{padding:12px}
+.pg.settings-page .hint{color:#8fa5ad;font-size:12px;line-height:1.9;margin:10px 2px}
+.pg.settings-page .btn-row{gap:12px;margin-top:10px}
+.pg.settings-page .btn-row .mini-btn{padding:11px 0;font-size:13px}
+.pg.settings-page .ov-btns{justify-content:flex-end;margin-top:22px}
+
+/* —— 制作坊：四周留空（内容不再贴边） —— */
+.pg.cdes{padding:20px 34px 26px}
+.pg.cdes .cdes-main{border-radius:10px;overflow:hidden;border:1px solid #68808b33}
+.pg.cdes .cdes-stage{border-bottom:1px solid #8fa5ad}
+
+/* —— 卡牌库：一行六张 + 卡面占比放大 + 立绘完整展示 —— */
+.lib-grid{grid-template-columns:repeat(6,minmax(0,1fr))!important;gap:0!important;padding:0!important}
+@media(max-width:1100px){.lib-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}}
+@media(max-width:860px){.lib-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
+#overlay .lib-cardwrap .hs-card{width:100%;height:auto;aspect-ratio:10/14;font-size:clamp(11px,.95vw,14px)}
+#overlay .lib-cardwrap .hsc-art{height:7.4em}
+#overlay .lib-cardwrap .hsc-art .art-card-image{object-fit:contain;background:radial-gradient(ellipse at 50% 40%,#2c2c31,#191920 82%)}
+
+/* —— 卡牌库：浅色展示区 + 横竖辅助线（2026-09-07 追加留言） —— */
+.clib-main{background:linear-gradient(165deg,#ece9e2,#d9d6cd)!important}
+.clib-preview{background:linear-gradient(180deg,#e2dfd7,#d2cfc6)!important;border-right:1px solid #b7b4aa!important}
+.clib-preview .pv-hint{color:#5f5c53}
+.clib-preview .pv-hint b{color:#3c3a33}
+.clib-preview .pv-empty .ic{opacity:.45;filter:brightness(.55)}
+.lib-grid{background:transparent}
+.lib-item{border-right:1px solid #bbb8ae;border-bottom:1px solid #bbb8ae;padding:16px 12px 14px;margin:0}
+.lib-item:nth-child(6n){border-right-color:#bbb8ae}
+.clib-empty{color:#6b685b}
+
+/* —— 标题页：ASCENSION COUNCIL 与「已成功撤离 n 次」水平对齐（撤离行在左、字牌并排其右） —— */
+.ak-bp{bottom:auto;top:63%;right:10%;transform:translateY(1px)}
+.ak-sec span,.ak-sec b{vertical-align:middle}
+
+/* —— 过场/特写通用动画（rtIn/rtOut：淡入淡出） —— */
+@keyframes rtIn{from{opacity:0}to{opacity:1}}
+@keyframes rtOut{from{opacity:1}to{opacity:0}}
+
+/* —— 传说卡获得特写（全屏金光揭晓） —— */
+#legendGet{position:fixed;inset:0;z-index:400;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+  background:rgba(4,8,12,.86);cursor:pointer;animation:rtIn .3s ease-out both}
+#legendGet.lg-out{animation:rtOut .4s ease-in both}
+#legendGet .lg-beam{position:absolute;left:50%;top:-12%;width:34vmin;height:130%;transform:translateX(-50%) rotate(6deg);
+  background:linear-gradient(180deg,rgba(240,200,120,.28),rgba(240,200,120,.05) 62%,transparent);filter:blur(8px);pointer-events:none}
+#legendGet .lg-kicker{font:11px 'Cascadia Code';letter-spacing:8px;color:#e5c793;text-shadow:0 0 18px rgba(216,182,128,.6)}
+#legendGet .lg-card{position:relative;z-index:1;animation:legendPop .5s cubic-bezier(.2,1.4,.4,1) .1s both}
+#legendGet .lg-name{font-size:20px;letter-spacing:6px;color:#f3e3c3;z-index:1}
+#legendGet .lg-hint{font-size:11px;letter-spacing:3px;color:#8da6af;z-index:1}
+@keyframes legendPop{from{opacity:0;transform:translateY(46px) scale(.7) rotate(-4deg)}to{opacity:1;transform:none}}
+
+/* ═══════════ 留言批次 2026-09-07 四批（19:58-20:05 Edge 5199 共 11 条） ═══════════ */
+
+/* —— 标题页：底部引言往下调 —— */
+.title-quote{bottom:3%}
+
+/* —— 制作坊：下边框上方留空多一些 + 舞台卡牌缩小一点 —— */
+#cardPreview .hs-card{transform:scale(1.22)}
+.cdes-stage{padding-bottom:44px}
+/* 右侧设计数值方框改浅色背景 */
+.cdes-form .dmg-ctl input[type="number"]{background:#ece9e2;color:#2c2a33;border-color:#b7b4aa}
+.cdes-form .dmg-ctl input[type="number"]:focus{border-color:#8a8677}
+/* 叉号与「保存到卡牌库」水平对齐（pg.cdes 顶部 padding 20px + pg-head 内按钮中心线） */
+#overlay .pg.cdes .pg-close{top:34px}
+
+/* —— 设置页：背景多加透明度，透出标题页壁纸 —— */
+#overlay.opaque:has(.pg.settings-page){background:rgba(8,20,29,.62);backdrop-filter:blur(3px)}
+#overlay .card.page:has(.pg.settings-page){background:linear-gradient(160deg,rgba(27,54,69,.38),rgba(16,36,49,.5))}
+.pg.settings-page{background:linear-gradient(160deg,rgba(27,54,69,.32),rgba(16,36,49,.45))}
+
+/* —— 选档页：返回键正好触底 —— */
+.pg.slot-page .pg-back{bottom:6px;right:18px}
+.pg.slot-page .slot-deck{padding-bottom:16px}
+
+/* —— 基地页：hub-card 框改浅色背景（与卡牌库浅色展示区同系），文字随之深色化 —— */
+#overlay .hub-card,#overlay .hub-card.gate-strip{background:linear-gradient(168deg,#ece9e2,#dcd8ce);border-color:#b7b4aa}
+#overlay .hub-card h3{color:#3c3a33}
+#overlay .hub-card h3 .ic,#overlay .hub-card .base-line .ic,#overlay .hub-card .pk-row .ic,
+#overlay .hub-card .ov-btn .ic,#overlay .hub-card .mini-btn .ic,#overlay .hub-card .hint .ic{filter:brightness(.42) saturate(1.15)}
+#overlay .hub-card .set-tip{color:#8a8677}
+#overlay .hub-card .pk-row,#overlay .hub-card .stash-row,#overlay .hub-card .dep-row{border-bottom-color:#c9c5b8}
+#overlay .hub-card .pk-row,#overlay .hub-card .base-line,#overlay .hub-card .dim,
+#overlay .hub-card .hint,#overlay .hub-card .ov-empty,#overlay .hub-card .xp-txt,
+#overlay .hub-card .ach-info span,#overlay .hub-card .ach-info b,#overlay .hub-card .pet-row div,
+#overlay .hub-card .si-line,#overlay .hub-card .back-card b{color:#4a473e}
+#overlay .hub-card .base-line b,#overlay .hub-card .pk-row b{color:#7a5c22}
+#overlay .hub-card .ok-hint{color:#3f6e46}
+#overlay .hub-card .base-bar{background:#d3cfc2}
+#overlay .hub-card .xp-bar{background:#d3cfc2}
+#overlay .hub-card .res-chip,#overlay .hub-card .fc-chip{background:#f7f5ef;border-color:#bcb8aa;color:#55524a}
+#overlay .hub-card .res-chip b,#overlay .hub-card .fc-chip b{color:#7a5c22}
+#overlay .hub-card .res-chip .ic,#overlay .hub-card .fc-chip .ic{filter:brightness(.42) saturate(1.15)}
+#overlay .hub-card .mode-card{background:#f7f5ef;border-color:#c9c5b8}
+#overlay .hub-card .mode-card.on{background:#fff;border-color:#b8934c;box-shadow:inset 3px 0 #b8934c}
+#overlay .hub-card .mode-card .mode-info b{color:#3c3a33}
+#overlay .hub-card .mode-card .mode-info span{color:#6b685b}
+#overlay .hub-card .mode-card .mode-ckpt{color:#8a6a2f}
+#overlay .hub-card .mode-card .mode-ico .ic{filter:brightness(.42) saturate(1.15)}
+#overlay .hub-card .ov-btn,#overlay .hub-card .mini-btn{background:#e2dfd5;border-color:#a8a496;color:#3c3a33}
+#overlay .hub-card .ov-btn:hover,#overlay .hub-card .mini-btn:hover{background:#d5d1c3;border-color:#7d796b}
+#overlay .hub-card .ov-btn.ok,#overlay .hub-card .mini-btn.ok{background:#d8bc86;border-color:#c8a860;color:#17303e}
+#overlay .hub-card .ov-btn.danger,#overlay .hub-card .mini-btn.danger{background:#8f4a42;border-color:#a8695f;color:#f3dcd5}
+#overlay .hub-card .back-card{background:#f7f5ef;border-color:#c9c5b8}
+#overlay .hub-card .back-card .dim{color:#6b685b}
+#overlay .hub-card .ach-row{border-bottom-color:#c9c5b8}
+#overlay .hub-card .gate-txt b,#overlay .hub-card .gate-txt span{color:#4a473e}
+#overlay .hub-card .stash-pop-card{color:#4a473e}
+#overlay .hub-card .rw{color:#6b685b}
+#overlay .hub-card .got{color:#3f6e46}
+
+/* —— 出征整备页（depMain）：沿用基地主页壁纸 —— */
+#depMain{padding:22px 30px 26px;background:
+  linear-gradient(180deg,rgba(9,18,26,.66),rgba(9,18,26,.8)),
+  url('../assets/scenes/hub-wallpaper.jpg') center/cover no-repeat fixed}
+#depMain .hub-head{padding:12px 12px 12px 16px;border-radius:10px;background:rgba(10,20,28,.55);border:1px solid #68808b55}
+
+/* —— 出征整备：图像化卡面网格（左）+ 背包格子（右），支持拖拽 —— */
+.dep-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:12px 10px;
+  max-height:56vh;overflow-y:auto;padding:6px 4px 2px}
+.dep-card{position:relative;width:min-content;cursor:grab;border-radius:8px;transition:transform .14s,filter .14s}
+.dep-card:active{cursor:grabbing}
+.dep-card:hover{transform:translateY(-3px)}
+.dep-card .hs-card{font-size:10px}
+.dep-card .dep-own{position:absolute;left:5px;bottom:5px;z-index:3;padding:1px 7px;border-radius:999px;
+  background:rgba(30,28,22,.78);color:#efe9da;font-size:10px;letter-spacing:1px;pointer-events:none}
+.dep-card .dep-n{position:absolute;top:-7px;right:-7px;z-index:4;min-width:22px;height:22px;padding:0 6px;
+  border-radius:11px;background:#b8934c;border:1.5px solid #f0e2c0;color:#2c230f;font-size:12.5px;font-weight:800;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(40,30,10,.4);pointer-events:none}
+.dep-card.picked{filter:drop-shadow(0 0 7px rgba(184,147,76,.55))}
+.dep-card.picked::after{content:'';position:absolute;inset:-2px;border:2px solid #b8934c;border-radius:9px;pointer-events:none}
+/* 背包格：第 1 格固定初始攻击，其余空格虚线；拖入高亮 */
+.bag-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(86px,1fr));gap:9px;
+  padding:10px;border:1.5px dashed #9a9585;border-radius:10px;min-height:170px;align-items:start;transition:background .15s,border-color .15s}
+.bag-grid.drop-here{background:rgba(184,147,76,.14);border-color:#b8934c}
+.bag-cell{position:relative;aspect-ratio:10/14;border:1.5px dashed #b3af9f;border-radius:8px;overflow:visible}
+.bag-cell .hs-card{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:6.6px;margin:0}
+.bag-cell.empty{background:rgba(60,58,51,.05)}
+.bag-cell.fixed{border:1.5px solid #c2ad7f;background:rgba(184,147,76,.12)}
+.bag-cell.filled{border-style:solid;border-color:#8f8a78;cursor:pointer;border-radius:8px;overflow:visible;transition:transform .14s}
+.bag-cell.filled:hover{transform:translateY(-2px)}
+.bag-cell .dep-n{position:absolute;top:-8px;right:-8px;z-index:4;min-width:20px;height:20px;padding:0 5px;
+  border-radius:10px;background:#3c3a33;border:1.5px solid #d8cba4;color:#f0e2c0;font-size:11px;font-weight:800;
+  display:flex;align-items:center;justify-content:center;pointer-events:none}
+.bag-cell.fixed .dep-n{background:#b8934c;color:#2c230f;border-color:#f0e2c0}
+.dep-cards .ov-empty{grid-column:1/-1;margin:6px 0}
+
+/* ═══════════ 留言批次 2026-09-07 五批（20:18-20:47 Edge 5199 共 13 条） ═══════════ */
+
+/* —— 卡牌库：编辑/删除键错位修复——lib-item 是 flex，卡面宽度被卡名长短撑开，
+      高度参差不齐导致按钮高度不一；让卡面统一满格宽 + 10/14 比例，按钮自然对齐 —— */
+#overlay .lib-item .lib-cardwrap{width:100%}
+#overlay .lib-cardwrap .hs-card{width:100%!important}
+/* 滚动中（.scrolling 由 JS 挂）禁用 hover 缩放，消除滑动时逐卡层切换开销 */
+.lib-grid.scrolling .lib-cardwrap{pointer-events:none}
+
+/* —— 基地浅色化补漏：pk-row 行底仍是深黑、ach-row 仍是深蓝，看不清 —— */
+#overlay .hub-card .pk-row,#overlay .pk-row{background:#f7f5ef;border-color:#c9c5b8}
+#overlay .hub-card .pk-row .dim,#overlay .pk-row .dim{color:#8a8677}
+#overlay .hub-card .stash-row:hover{background:#efece2;border-color:#a8a496}
+#overlay .hub-card .stash-row.collected{background:linear-gradient(180deg,#fbf9f3,#f0ede3);border-color:#b8934c}
+#overlay .hub-card .ach-row{background:#f7f5ef;border-color:#c9c5b8}
+#overlay .hub-card .ach-row.done{background:linear-gradient(180deg,#fbf9f3,#f0ede3);border-color:#b8934c}
+#overlay .hub-card .ach-ico{border-color:#c9c5b8;background:radial-gradient(ellipse at 50% 30%,#efece2,#dcd8ce 85%)}
+#overlay .hub-card .ach-row .rw{color:#6b685b}
+#overlay .hub-card .ach-ops .mini-btn{background:#e2dfd5;border-color:#a8a496;color:#3c3a33}
+#overlay .hub-card .dep-stepper .step-btn{background:#e2dfd5;border-color:#a8a496;color:#3c3a33}
+
+/* —— 选人页：「查看角色卡池」点不到——cls2-strip 全宽透明容器（z:3）盖住面板底部，
+      加上左下返回键重叠；让条只命头像本身，面板底部抬高让卡池按钮露出 —— */
+.cls2-strip{pointer-events:none}
+.cls2-strip .cls2-face{pointer-events:auto}
+.cls2-panel{padding-bottom:176px}
+
+
+/* ═══════════ 留言批次 2026-09-07 六批（20:48-21:06 Edge 5199 共 11 条） ═══════════ */
+
+/* —— 选人页等 page 弹层打开时，底部黑边+骰子(下边栏)露出来：
+      sidebar 之前只 visibility:hidden 仍占 105px 布局位，这里彻底移出布局 —— */
+body:has(#overlay.opaque:not([hidden])) #sidebar{display:none!important}
+
+/* —— 卡牌库：卡面插画占据卡面主体，删掉大面积黑色衬底 —— */
+#overlay .lib-cardwrap .hsc-art{height:auto;flex:1;min-height:9.5em}
+/* art.js 给 img 内联了 object-fit:cover（裁人物），必须 !important 扳回 contain 保完整 */
+#overlay .lib-cardwrap .hsc-art .art-card-image{object-fit:contain!important;background:none}
+#overlay .lib-cardwrap .hs-card{background:linear-gradient(165deg,#e9e5da,#c9c5b8)}
+#overlay .lib-cardwrap .hsc-name{color:#3c3a33;background:#f7f5ef}
+
+/* —— 卡牌库悬停预览面板性能：固定内容尺寸防重排抖动 —— */
+.clib-preview{contain:layout style}
+.clib-preview .pv-hint{min-height:5.2em}
+
+/* —— 基地人物页：无/常无欲立绘裁成半身特写（顶部对齐放大） —— */
+#overlay .cls-hub-art{width:64px;height:88px}
+#overlay .cls-hub-art img.art-figure{height:100%;width:100%;object-fit:cover;object-position:center 8%;}
+#overlay .cls-hub-art .roster-portrait{height:100%;width:100%}
+
+/* —— 选人页：查看角色卡池按钮点击缩放反馈 + 卡池页缩放入场 —— */
+.cls2-pool-btn:active{transform:scale(.94)}
+@keyframes poolIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:none}}
+#overlay .card.page:has(.cls-pool-page){animation:poolIn .26s cubic-bezier(.22,1.2,.36,1)}
+
+/* —— 出征整备：背包格卡面加大；剩余为 0 的左侧卡面置灰 —— */
+.bag-grid{grid-template-columns:repeat(auto-fill,minmax(104px,1fr))}
+.bag-cell .hs-card{font-size:7.6px}
+.dep-card.drained{opacity:.38;filter:grayscale(.8);cursor:default}
+.dep-card.drained:hover{transform:none}
+
+/* —— 卡牌放大特写（背包卡面点击）：背景虚化压暗 + 缩放弹出/收回 —— */
+#cardZoom{position:fixed;inset:0;z-index:400;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;cursor:pointer}
+#cardZoom .cz-backdrop{position:absolute;inset:0;background:rgba(6,10,14,.66);backdrop-filter:blur(9px);animation:czFade .2s ease both}
+#cardZoom .cz-card{position:relative;z-index:1;animation:czIn .24s cubic-bezier(.2,1.3,.4,1) both}
+#cardZoom .cz-card .hs-card{font-size:34px;box-shadow:0 24px 80px rgba(0,0,0,.7),0 0 40px rgba(216,182,128,.25)}
+#cardZoom .cz-foot{position:relative;z-index:1;animation:czIn .24s .05s cubic-bezier(.2,1.3,.4,1) both}
+#cardZoom .cz-hint{position:relative;z-index:1;font-size:11px;letter-spacing:3px;color:#c9d4d8;animation:czFade .3s .1s ease both}
+#cardZoom.cz-out .cz-backdrop{animation:czFadeOut .24s ease both}
+#cardZoom.cz-out .cz-card,#cardZoom.cz-out .cz-foot{animation:czOut .24s ease both}
+@keyframes czIn{from{opacity:0;transform:scale(.55)}to{opacity:1;transform:none}}
+@keyframes czOut{from{opacity:1;transform:none}to{opacity:0;transform:scale(.6)}}
+@keyframes czFade{from{opacity:0}to{opacity:1}}
+@keyframes czFadeOut{from{opacity:1}to{opacity:0}}
+
+/* —— 制作坊：×挪进灰色主体框右上角，保存到卡牌库按钮随之左移 —— */
+#overlay .pg.cdes .pg-close{top:92px;right:50px}
+#overlay .pg.cdes .pg-head{padding-right:140px}
+
+/* —— 2026-09-07 留言批次 —— */
+/* 顶部环层横幅背景透明：只留文字（背景块+金边框一并去掉） */
+#layerBanner{background:transparent;border-bottom:0}
+
+/* 战斗弹层黑边收口：战斗时 card 同时挂 battle+room，
+   #overlay.room-view .card.room 的 padding/深灰渐变/ovBody 限宽以更高优先级
+   压过战斗全屏规则，四周漏出黑边——这里以更高优先级统一压回全屏 */
+#overlay.room-view .card.room.battle{padding:0;border:0;background:none;justify-content:flex-start;overflow:hidden}
+#overlay.room-view .card.room.battle #ovBody{width:100%;max-width:none;margin:0}
+#overlay.room-view .card.room.battle > h2{position:absolute;top:0;left:0;right:0;z-index:6;margin:0;
+  font-size:15px;letter-spacing:2px;padding:8px 18px;background:rgba(10,10,10,.62);border-bottom:1px solid #3a3a3a;text-align:left}
+
+/* 头像彩蛋：连点两下以上左右抖动 */
+.hero-ava.ava-shake{animation:avaShake .45s ease}
+@keyframes avaShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}50%{transform:translateX(6px)}75%{transform:translateX(-3px)}}
+
+/* 基地页：右上关闭钮删除，hub-head 左侧加返回键 */
+#hubMain .hub-back{display:inline-flex;align-items:center;gap:7px;padding:8px 18px;background:#24424f;
+  border:1px solid #607c86;color:#e3eeea;border-radius:1px;font-size:12.5px;letter-spacing:2px;white-space:nowrap}
+#hubMain .hub-back:hover{background:#365b69;border-color:#cadcd9}
+
+/* 地图定位按钮（镜头回到当前位置，同 F 键）：与静音钮同款外观 */
+#topBtns #btnLocate{border:1px solid #637c89;background:#142c38;box-shadow:none;color:#d8e2e6;
+  font-size:15px;padding:0;width:44px;border-radius:3px;display:flex;align-items:center;justify-content:center}
+#topBtns #btnLocate:hover{background:#1d3d4c;color:#fff}

@@ -13,6 +13,12 @@ const MIGRATIONS = {
 // 读档异常原因（index -> 'corrupt' | 'tooNew'），供 UI 查询展示
 const issues = {};
 
+// 2026-09-07 留言：点「开始探索」会卡一下 = openSlotPicker 同步 readSlot×5 + Base.peek×5
+// 全量 JSON.parse。对局存档大（ownedCards/eventLog），这里缓存解析结果。
+// 缓存值带原始串指纹：localStorage 被绕过 write 直写（旧版代码/另一标签页/测试）
+// 后指纹失配自动重解析，不会读到脏缓存；省的是昂贵的 parse+迁移，getItem 照常执行。
+const readCache = new Map();
+
 const RunStorage = Object.freeze({
   key: RUN_KEY,
   corruptKey: CORRUPT_KEY,
@@ -23,7 +29,9 @@ const RunStorage = Object.freeze({
   read(index) {
     let raw = null;
     try { raw = localStorage.getItem(RUN_KEY(index)); } catch { return null; }
-    if (raw == null) return null;
+    if (raw == null) { readCache.delete(index); return null; }
+    const hit = readCache.get(index);
+    if (hit && hit.raw === raw) return hit.data;
     let data;
     try { data = JSON.parse(raw); } catch { return this._corrupt(index, raw); }
     if (!data || typeof data !== 'object') return this._corrupt(index, raw);
@@ -41,7 +49,9 @@ const RunStorage = Object.freeze({
       mv++;
       data.version = mv;
     }
-    return migrateRunCharacter(data);
+    data = migrateRunCharacter(data);
+    readCache.set(index, { raw, data });
+    return data;
   },
   // 坏档处理：原串备份到 corrupt 键后返回 null（原键不动，由玩家决定是否覆盖重开）
   _corrupt(index, raw) {
@@ -55,6 +65,7 @@ const RunStorage = Object.freeze({
   write(index, value) {
     try {
       localStorage.setItem(RUN_KEY(index), JSON.stringify({ ...value, version: SAVE_VERSION }));
+      readCache.delete(index);
       delete issues[index];
       try { localStorage.removeItem(CORRUPT_KEY(index)); } catch { /* 无关紧要 */ }
       return true;
@@ -65,6 +76,7 @@ const RunStorage = Object.freeze({
       localStorage.removeItem(RUN_KEY(index));
       localStorage.removeItem(CORRUPT_KEY(index));
     } catch { /* 存储不可用 */ }
+    readCache.delete(index);
     delete issues[index];
   },
   migrateLegacy() {
@@ -72,6 +84,7 @@ const RunStorage = Object.freeze({
       const old = localStorage.getItem(OLD_SAVE_KEY);
       if (old && !localStorage.getItem(RUN_KEY(1))) localStorage.setItem(RUN_KEY(1), old);
       localStorage.removeItem(OLD_SAVE_KEY);
+      readCache.clear();
     } catch { /* 存储不可用 */ }
   },
 });

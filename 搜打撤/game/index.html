@@ -30,7 +30,6 @@
 
     <section class="panel" id="bagPanel">
       <button id="bagBtn" title="打开 / 关闭背包（B）">[[icon:bag]] <span class="bag-label">背包</span> <b id="bagCount">0/16</b></button>
-      <div class="hero-name" id="heroName">未选择角色</div>
     </section>
 
     <section class="panel" id="statsPanel">
@@ -99,6 +98,14 @@
       </span>
     </div>
     <div id="topBtns">
+      <button id="btnLocate" title="镜头回到当前位置（F）">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+          <circle cx="12" cy="12" r="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+          <circle cx="12" cy="12" r="1.6" fill="currentColor"/>
+          <path d="M12 2.5v4M12 17.5v4M2.5 12h4M17.5 12h4"
+                stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </button>
       <button id="btnHome" class="exit-btn" title="离开对局（可保存或放弃） / 回主菜单">
         <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
           <path d="M9 4h9a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 18 20H9"
@@ -194,7 +201,7 @@
           </button>
           <!-- 中下：撤离次数（真实数据） -->
           <div class="ak-sec" title="最近档案的累计撤离次数">
-            <b id="akExtracts">0</b><span>次撤离</span>
+            <span>已成功撤离 </span><b id="akExtracts">0</b><span> 次</span>
           </div>
           <!-- 右下字牌 + 开始探索 -->
           <div class="ak-bp" aria-hidden="true">

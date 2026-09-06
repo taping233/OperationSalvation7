@@ -173,8 +173,8 @@ function createGameMenuController(deps) {
         <div class="guide-row"><b>鼠标拖拽</b><span>平移地图</span></div>
         <div class="guide-row"><b>滚轮</b><span>缩放地图</span></div>
       </div>
-      <p class="ov-note">「开始远征」选择档位进入基地；整备卡牌与物资后出发，搜打撤一气呵成。</p>
-      <div class="ov-btns"><button class="ov-btn back-sm" data-act="guideBack">返回 <i class="en">BACK</i></button></div>`, true);
+      <!-- 2026-09-07 留言：底部说明句与返回键删除/移位——说明句去掉，返回键沉到右下角 -->
+      <div class="ov-btns ov-btns-corner"><button class="ov-btn back-sm" data-act="guideBack">返回 <i class="en">BACK</i></button></div>`, true);
     UI.act('guideBack', () => { UI.hideOverlay(); game.state = 'title'; });
   }
 
@@ -199,7 +199,7 @@ function createGameMenuController(deps) {
     UI.showOverlay('[[icon:medal]] 成就总览', `
       <p class="ov-note">${note}</p>
       <div class="ach-list">${rows}</div>
-      <div class="ov-btns"><button class="ov-btn back-sm" data-act="achBack">返回 <i class="en">BACK</i></button></div>`, true);
+      <div class="ov-btns ov-btns-corner"><button class="ov-btn back-sm" data-act="achBack">返回 <i class="en">BACK</i></button></div>`, true);
     UI.act('achBack', () => { UI.hideOverlay(); game.state = 'title'; });
   }
 
@@ -344,7 +344,8 @@ function createGameMenuController(deps) {
           <i class="bokeh"></i><i class="bokeh"></i><i class="bokeh"></i><i class="bokeh"></i>
           ${SLOT_BG_SILHOUETTES}
         </div>
-        <button class="pg-close" data-act="slotBack" title="返回标题界面">[[icon:cross]]</button>
+        <!-- 2026-09-07 留言：右上叉号改为「返回」键沉到右下角，页面主体整体上移让返回键显眼 -->
+        <button class="pg-back" data-act="slotBack">返回 <i class="en">BACK</i></button>
         <span class="slot-page-help">${UI.helpBtn('slots')}</span>
         <header class="slot-page-head">
           <span class="slot-page-en">选择存档</span>
@@ -378,13 +379,23 @@ function createGameMenuController(deps) {
     UI.act('newSlot', (d) => launch(+d.slot, () => { SDT.Base.reset(+d.slot); runtime.openBaseHub('deploy'); }));
     UI.act('enterSlot', (d) => {
       const slot = +d.slot;
-      launch(slot, () => {
+      launch(slot, async () => {
         // 上一局未结束 → 直接进入未完成对局；否则先进基地
         // 有存档键但读不出（损坏/版本过新）→ loadGame 内部会给出具体原因，先回基地
-        if (RunStorage.has(slot)) {
+        const resumed = RunStorage.has(slot);
+        if (resumed) {
           if (!loadGame(slot) && !RunStorage.issue(slot)) { UI.log('对局存档读取失败，先回基地', 'warn'); }
-          runtime.openBaseHub('deploy');
-        } else runtime.openBaseHub('deploy');
+        }
+        // 2026-09-07 留言：进入对局缺少动画——复用启程过渡（大门场景）；
+        // 经 runtime 注入（boot 装配），避免 menu→run 直接依赖形成循环
+        await runtime.showRunTransition({
+          tone: 'door', asset: 'scene-door-bg',
+          eyebrow: resumed ? 'EXPEDITION RESUMED' : 'BASE LINKED',
+          title: resumed ? '继续对局' : '进入存档',
+          detail: '远征尚未结束 · 回到基地整备出发',
+          duration: 900,
+        });
+        runtime.openBaseHub('deploy');
       });
     });
     UI.act('overwriteSlot', (d) => {
@@ -491,7 +502,7 @@ function createGameMenuController(deps) {
     game.state = 'modal';
     UI.showOverlay('', `
       <div class="pg settings-page">
-        <button class="pg-close" data-act="closeSettings" title="关闭（点此返回）">[[icon:cross]]</button>
+        <!-- 2026-09-07 留言：右上叉号去掉，返回走底部「返回」按钮或 Esc -->
         <header class="pg-head"><h2>[[icon:gear]] 设置</h2><span class="pg-spacer"></span></header>
         <div class="settings">
         <h3 class="set-h">[[icon:gear]] 通用 <span class="set-en">GENERAL</span></h3>

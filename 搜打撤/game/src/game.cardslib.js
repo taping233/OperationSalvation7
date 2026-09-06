@@ -173,9 +173,22 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
     // 记住上一张预览的卡，扫过同一张卡时不再整页重建预览 DOM / 重复播悬停音；
     // 2026-09-06 留言（库页滑动很卡）：预览大图的解码/重建在主线程，滚动扫过时
     // 再加 90ms 去抖——只有停留的卡才真正重建，滚动风暴中预览零重建。
+    // 2026-09-07 留言（滑动依然有点卡）：滚动期间整段禁掉 hover——Chromium 滚动
+    // 会重算 hover 目标触发 mouseover 风暴（含卡面 :hover 缩放的层级切换），
+    // 给网格挂 .scrolling 类，滚动静默 160ms 后恢复。
     let lastPreviewId = null;
     let previewTimer = null;
+    let scrollTimer = null;
+    const grid = document.getElementById('libGrid');
+    if (grid) {
+      grid.addEventListener('scroll', () => {
+        grid.classList.add('scrolling');
+        if (scrollTimer) clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(() => grid.classList.remove('scrolling'), 160);
+      }, { passive: true });
+    }
     UI._hoverHandler = (e) => {
+      if (grid && grid.classList.contains('scrolling')) return;
       const w = e.target.closest ? e.target.closest('[data-card]') : null;
       const id = w ? w.dataset.card : null;
       if (id === lastPreviewId) return;

@@ -113,8 +113,26 @@ import { BUILD_VERSION, assetUrl } from './asset-url.js';
 
 // 走运行时拷贝路径（portraits 在 RUNTIME_ASSET_DIRS），避免 new URL 哈希版与拷贝版双打包
 const rosterUrl = assetUrl('assets/portraits/expedition-roster.webp');
+// 个别角色配独立宽幅立绘（portraits/full/<角色id>.webp）：整张原图全图展示，不切远征队合影
+const FIGURE_FULL_ART = Object.freeze({
+  shuangling: 'portraits/full/shuangling.webp',
+  baiqi: 'portraits/full/baiqi.webp',
+});
+// 个别角色配 Q 版战斗头像（portraits/avatars/<角色id>.webp）：局内下边栏人物面板用
+const AVATAR_ART = Object.freeze({
+  shuangling: 'portraits/avatars/shuangling.webp',
+  baiqi: 'portraits/avatars/baiqi.webp',
+});
 function characterArt(value, full=false) {
  const c=characterFor(value); if(!c)return null;
+ const figure = FIGURE_FULL_ART[c.id];
+ if (figure && full) {
+   // 选人页大幅位：主体层铺满 + 同图模糊延伸层填满左侧空区（各图用自身色调向左晕开）
+   const back = image(figure, 'art-figure-back', '', `figure-back-${c.id}`);
+   const main = image(figure, 'art-figure', c.name, `figure-${c.id}`);
+   return `<span class="art-figure-wrap">${back}${main}</span>`;
+ }
+ if (figure) return image(figure, 'art-figure', c.name, `figure-${c.id}`);
  const ranges=[[0,355],[338,672],[655,1010],[991,1397],[1380,1672]];
  const [left,right]=ranges[CHARACTERS.indexOf(c)],width=right-left;
  const position=left/(1672-width)*100;
@@ -135,6 +153,12 @@ function characterArt(value, full=false) {
       const id = resolveClass(className);
       if (!id) return image('cards/hero.webp', 'art-full', className || '未知角色', `class-full-${className || 'unknown'}`);
       return image(`portraits/full/${id}.webp`, 'art-full', CLASS_NAMES[id], `class-full-${id}`);
+    },
+    // Q 版战斗头像：局内下边栏人物面板；未配置 Q 版的角色回退常规立绘
+    classAvatarArt(className) {
+      const c = characterFor(className);
+      if (c && AVATAR_ART[c.id]) return image(AVATAR_ART[c.id], 'art-avatar', c.name, `avatar-${c.id}`);
+      return this.classArt(className);
     },
     monsterArt(id) {
       if (!MONSTER_IDS.has(id)) return fallback('enemy', id, id || '未知敌人');

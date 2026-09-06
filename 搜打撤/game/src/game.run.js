@@ -41,7 +41,7 @@ import { eventNarrative } from './narrative.js';
     const fixed = game.devMode && game.nextDice > 0;
     const n = fixed ? game.nextDice : rndDice();
     UI.el.diceFace.classList.add('rolling');
-    UI.drawDice(n); // 立方体带整圈翻转的 transition，滚到 n 点朝前的朝向
+    UI.drawDice(n, true); // force：与上一点数相同也整圈翻滚（2026-09-07 留言：同面也要有动画）
     setTimeout(() => {
       UI.el.diceFace.classList.remove('rolling');
       UI.popNum(UI.el.diceFace);
@@ -423,6 +423,8 @@ import { eventNarrative } from './narrative.js';
     }
     game.ownedCards.push({ uid: newUid(), card: { ...tpl } });
     UI.log(`[[icon:archive]] 获得卡牌【<b>${esc(tpl.name)}</b>】`, 'loot');
+    // 2026-09-07 留言：传说获得要有提示界面——特写揭晓，不再只默默进背包
+    if (tpl.rarity === '传说') UI.showLegendGet(tpl);
     return true;
   }
   // ESM：循环导入下本模块体先于 game.session 执行，顶层读 game 会 TDZ，延迟到 boot 统一绑定
@@ -590,9 +592,24 @@ import { eventNarrative } from './narrative.js';
           UI.log(`[[icon:archive]] 获得角色卡【<b>${esc(card2.name)}</b>】（${esc(characterName(cl))}）·第 2 张职业卡已入包`, 'loot');
         }
       }
-      game.state = 'idle';
-      saveGame();
-      UI.refresh(game);
+      // 2026-09-07 留言：选人进局要有过渡动画——复用节点过场（大门场景 + 角色名揭晓）；
+      // 启程文案按人物区分（对应各自 tag 的语气）
+      const START_LINES = {
+        shuangling: '刀锋出鞘，踏雪先行',
+        baiqi: '契约既成，答案待启',
+        lituan: '口袋里的星图，亮了',
+        xuanli: '最后一道防线，就位',
+        dengkui: '灯已点亮，照归途',
+      };
+      const startLine = START_LINES[characterFor(cl).id] || '整备完毕，探索开始';
+      showRunTransition({
+        tone: 'door', asset: 'scene-door-bg', eyebrow: 'EXPEDITION START',
+        title: characterName(cl), detail: startLine, duration: 1600,
+      }).then(() => {
+        game.state = 'idle';
+        saveGame();
+        UI.refresh(game);
+      });
     });
     render();
   }

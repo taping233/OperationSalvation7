@@ -13,6 +13,7 @@ const runtime = {
   openBaseHub: () => {},
   rebuildNotes: () => {},
   resize: () => {},
+  showRunTransition: async () => {},
 };
 
 function configureGameRuntime(hooks) {

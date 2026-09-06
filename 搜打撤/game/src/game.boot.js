@@ -3,15 +3,15 @@ const UI = window.SDT.UI;
 const SDT = window.SDT;
 import { TYPE_NAME } from './game.notes.js';
 import { MAP } from './game.session.js';
-import { SLOT_COUNT, buildDerived, cam, canvas, configureGameRuntime, ctx, dpr, exitToTitle, game, hasRun, migrateOldSave, openSettings, quitGame, saveGame, showTitle, startNewGame, _set_dpr, _set_cam } from './game.session.js';
-import { bindRunMixins, openClassChoice, openShop, roll } from './game.run.js';
+import { SLOT_COUNT, buildDerived, cam, canvas, configureGameRuntime, ctx, dpr, exitToTitle, game, hasRun, migrateOldSave, openSettings, quitGame, saveGame, setLobby, showTitle, startNewGame, _set_dpr, _set_cam } from './game.session.js';
+import { bindRunMixins, openClassChoice, openShop, roll, showRunTransition } from './game.run.js';
 import { openBaseHub } from './game.hub.js';
 import { bindBagMixins, showBackpack } from './game.bag.js';
 import { bindDevMode, bindNotesMixins, initDevMode, openCellEditor, rebuildNotes, showClearOverlay, showExportOverlay, showImportOverlay } from './game.notes.js';
 import { cardPageOpen, closeCardPageTop, openCardDesigner, openCardLibrary } from './game.cardslib.js';
 import { renderScheduler } from './render-scheduler.js';
 
-configureGameRuntime({ openClassChoice, openBaseHub, rebuildNotes, resize: () => resize() });
+configureGameRuntime({ openClassChoice, openBaseHub, rebuildNotes, resize: () => resize(), showRunTransition });
   function bindInput() {
     let dragging = false, downPos = null, lastPos = null;
     let hoverFrame = 0, pendingHover = null;
@@ -95,6 +95,12 @@ configureGameRuntime({ openClassChoice, openBaseHub, rebuildNotes, resize: () =>
     });
 
     UI.el.bagBtn.addEventListener('click', () => showBackpack());
+
+    // 定位按钮：与键盘 F（camFocus）同一动作——镜头立即回到棋子当前位置
+    const btnLocate = document.getElementById('btnLocate');
+    if (btnLocate) btnLocate.addEventListener('click', () => {
+      cam.cx = game.pos.x; cam.cy = game.pos.y; cam.clamp(); renderScheduler.invalidate();
+    });
 
     // 右上角资源 HUD：悬停显示项目自带提示框（与地图节点同款）
     const vpEl = UI.el.viewport;
@@ -201,6 +207,9 @@ configureGameRuntime({ openClassChoice, openBaseHub, rebuildNotes, resize: () =>
     if (ELAPSED_STATES.has(game.state)) game.elapsed += sdt;
     // 同步到 body，驱动 CSS 状态样式（提示条显隐 / 掷骰按钮呼吸灯）
     if (document.body.dataset.state !== game.state) document.body.dataset.state = game.state;
+    // 标题页无侧栏不变式（2026-09-07 留言：下边栏跑到主页反复出现）：回主页的任何路径
+    // 只要漏调 setLobby(true)，下一帧在这里被强制纠正——不再依赖每个流程点自觉
+    if (game.state === 'title' && !document.body.classList.contains('lobby')) setLobby(true);
     const fxActive = SDT.FX && (SDT.FX.floats.length || SDT.FX.pulses.length || SDT.FX.shakes.length);
     // 帧率分两档（功耗权衡）：active 120 只留给快节奏状态（掷骰/移动/特效/战斗——
     // 帧率拉满才不掉帧感）；对局站立 idle 的棋盘动画全是慢速环境效果（呼吸/火光/流光

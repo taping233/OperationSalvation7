@@ -15,7 +15,7 @@ import { Random } from './random.js';
         statTurn: $('statTurn'), statValue: $('statValue'),
         hpBar: $('hpBar'), hpBarWrap: $('hpBarWrap'), hpText: $('hpText'), charCoins: $('charCoins'),
         charAtk: $('charAtk'),
-        heroAva: $('heroAva'), heroName: $('heroName'),
+        heroAva: $('heroAva'),
         bagCount: $('bagCount'), bagBtn: $('bagBtn'), btnHome: $('btnHome'),
         rollBtn: $('rollBtn'), diceFace: $('diceFace'), diceHist: $('diceHist'), staminaVal: $('staminaVal'), staminaRow: $('staminaRow'),
         log: $('log'),
@@ -44,6 +44,19 @@ import { Random } from './random.js';
       this.el.ovBody.addEventListener('mouseover', (e) => {
         if (this._hoverHandler) this._hoverHandler(e);
       });
+      // 彩蛋（2026-09-07 留言）：连按两下以上头像，左右抖动一下
+      let avaTaps = 0, avaTapTimer = null;
+      this.el.heroAva.addEventListener('click', () => {
+        avaTaps++;
+        clearTimeout(avaTapTimer);
+        avaTapTimer = setTimeout(() => { avaTaps = 0; }, 600);
+        if (avaTaps < 2) return;
+        avaTaps = 0;
+        const ava = this.el.heroAva;
+        ava.classList.remove('ava-shake');
+        void ava.offsetWidth;
+        ava.classList.add('ava-shake');
+      });
       this.buildDiceCube();
     },
 
@@ -54,7 +67,8 @@ import { Random } from './random.js';
     // 点 ? 打开帮助，点「返回」执行 back() 重绘原页面。
     registerHelp(id, def) { this.helpTopics[id] = def; },
     helpBtn(id) {
-      return `<button class="help-btn" data-act="openHelp" data-page="${id}" title="查看说明">？</button>`;
+      // 2026-09-07 留言：全角"？ "字形墨迹不居中，换 SVG 问号保证几何居中
+      return `<button class="help-btn" data-act="openHelp" data-page="${id}" title="查看说明"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M8.1 9a3.9 3.9 0 1 1 6.05 3.27c-1.25.83-2.15 1.55-2.15 3.03v.3" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/><circle cx="12" cy="19.7" r="1.35" fill="currentColor"/></svg></button>`;
     },
     showHelp(page) {
       const t = this.helpTopics[page];
@@ -91,9 +105,11 @@ import { Random } from './random.js';
     },
 
     // 让立方体翻滚着停在 v 点朝上的朝向；外层 tilt 只负责俯视观察，不改变落定点数。
-    drawDice(v) {
+    // force=true：掷骰流程主动调用——与上一点数相同也翻滚（2026-09-07 留言：同面也要有动画）；
+    // refresh 的被动同步不带 force，同值跳过避免每次刷新都空转。
+    drawDice(v, force) {
       const face = this.el.diceFace, cube = face.querySelector('.dice-cube');
-      if (!cube || v === this._drawn) return; // 同值跳过，避免刷新时重置翻转动画
+      if (!cube || (!force && v === this._drawn)) return;
       this._drawn = v;
       if (v == null) {
         face.classList.add('idle-dice');
@@ -110,6 +126,50 @@ import { Random } from './random.js';
                        this._diceRot[1] + spinY + ry - (this._diceRot[1] % 360),
                        this._diceRot[2] + spinZ + rz - (this._diceRot[2] % 360)];
       cube.style.transform = `rotateX(${this._diceRot[0]}deg) rotateY(${this._diceRot[1]}deg) rotateZ(${this._diceRot[2]}deg)`;
+    },
+
+    // 传说卡获得特写（2026-09-07 留言：获得传说物品没有提示和界面）：
+    // 全屏暗幕 + 金色光柱 + 大卡面揭晓，点击任意处或 2.8s 后自动收场。
+    showLegendGet(card) {
+      if (!card) return;
+      const old = document.getElementById('legendGet');
+      if (old) old.remove();
+      const el = document.createElement('div');
+      el.id = 'legendGet';
+      el.innerHTML = `<div class="lg-beam" aria-hidden="true"></div>
+        <span class="lg-kicker">LEGENDARY · 传说</span>
+        <div class="lg-card">${SDT.Cards.cardHTML(card, 'lg')}</div>
+        <b class="lg-name">${card.name}</b>
+        <span class="lg-hint">点击任意处继续</span>`;
+      const close = () => { el.classList.add('lg-out'); setTimeout(() => el.remove(), 420); };
+      el.addEventListener('click', close, { once: true });
+      document.body.appendChild(el);
+      SDT.Sound.sfx('legend');
+      setTimeout(() => { if (el.isConnected) close(); }, 2800);
+    },
+
+    // 卡牌放大特写（2026-09-07 留言：背包卡面点击放大查看）：
+    // 背景虚化压暗，卡牌 lg 大面居中弹出（缩放动画），点击任意处缩回；opts.footer 可挂额外按钮。
+    showCardZoom(card, opts = {}) {
+      if (!card) return;
+      const old = document.getElementById('cardZoom');
+      if (old) old.remove();
+      const el = document.createElement('div');
+      el.id = 'cardZoom';
+      el.innerHTML = `<div class="cz-backdrop" aria-hidden="true"></div>
+        <div class="cz-card">${SDT.Cards.cardHTML(card, 'lg')}</div>
+        ${opts.footer ? `<div class="cz-foot">${opts.footer}</div>` : ''}
+        <span class="cz-hint">点击任意处收回</span>`;
+      const close = () => {
+        el.classList.add('cz-out');
+        setTimeout(() => el.remove(), 260);
+      };
+      el.addEventListener('click', (e) => {
+        if (e.target.closest('.cz-foot button')) return;   // footer 按钮走自己的 handler
+        close();
+      }, { once: true });
+      document.body.appendChild(el);
+      SDT.Sound.sfx('hover');
     },
     refreshTime(game) {
       // 每帧调用：状态未翻转时不触碰 DOM
@@ -166,8 +226,7 @@ import { Random } from './random.js';
       const cls = game.myClass || '';
       if (this._lastHeroCls !== cls) {
         this._lastHeroCls = cls;
-        this.el.heroAva.innerHTML = (cls && SDT.Art) ? SDT.Art.classArt(cls) : '旅';
-        this.el.heroName.textContent = characterName(game.characterId || cls);
+        this.el.heroAva.innerHTML = (cls && SDT.Art) ? SDT.Art.classAvatarArt(cls) : '旅';
       }
       // 物资 + 卡牌混占背包格；安全格 / 消耗口袋见背包弹窗，容量由基地决定
       const used = game.usedSlots ? game.usedSlots() : game.inventory.length;

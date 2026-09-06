@@ -65,6 +65,7 @@ import { _set_cardPageOpen } from './game.cardslib.js';
       const got = pool[Math.floor(Random.random('loot') * pool.length)];
       game.ownedCards.push({ uid: newUid(), card: { ...got } });
       UI.log(`[[icon:sparkles]] 使用【<b>${esc(card.name)}</b>】：获得传说卡【<b>${esc(got.name)}</b>】`, 'loot');
+      UI.showLegendGet(got);   // 2026-09-07 留言：传说获得要有提示界面
       saveGame();
       showBackpack(true);
       return;
@@ -617,7 +618,14 @@ import { _set_cardPageOpen } from './game.cardslib.js';
     if (win !== true) {   // 撤退：不发宝箱、不发事件奖励
       game.bossCleanupPending = false;
       game.pendingEventLoot = null;
-      if (opts.returnTo === 'altar') UI.log('[[icon:runner]] 你撤出了 BOSS战', 'sys');
+      // 2026-09-07 留言：撤退要有文案和动画——复用启程过渡（撤离点场景）
+      await showRunTransition({
+        tone: 'exit', asset: 'scene-extract-bg',
+        eyebrow: 'TACTICAL RETREAT', title: '全身而退',
+        detail: opts.isBoss ? '你撤出了 BOSS战 · 已结算的战利品完好保存' : '撤出战斗 · 打出过的卡照常结算',
+        duration: 1050,
+      });
+      UI.log('[[icon:runner]] ' + (opts.isBoss ? '你撤出了 BOSS战' : '你撤出了战斗（打出过的卡照常结算）'), 'sys');
       settle();
       return;
     }

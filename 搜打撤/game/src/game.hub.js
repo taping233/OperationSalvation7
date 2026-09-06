@@ -44,8 +44,8 @@ let hubTab = 'deploy';
     registerHubHelp(hubTab);
     UI.showOverlay('', `
       <div class="pg hub hub-${hubTab}" id="hubMain">
-        <button class="pg-close" data-act="closeBase" title="关闭（Esc）">[[icon:cross]]</button>
         <header class="hub-head hub-head-min">
+          <button class="hub-back" data-act="closeBase" title="返回主菜单（Esc）">← 返回</button>
           ${UI.helpBtn('hub-' + hubTab)}
           <span class="pg-spacer"></span>
           <span class="hub-res">
@@ -221,13 +221,7 @@ let hubTab = 'deploy';
     deployHint = '';
     deployPick = {};
     deployJustOpened = true;   // 页面初次打开时播放入场动画
-    // 预选：尽量全带（同名堆叠占 1 格背包，「初始攻击」已固定占 1 格）
-    let slots = 1;
-    B.data.stash.forEach(s => {
-      if (slots >= B.bagCap()) return;
-      deployPick[s.card.name] = s.count;
-      slots++;
-    });
+    // 2026-09-07 留言：仓库卡牌不再自动塞进背包——全部留在左侧，由玩家自己拖
     renderDepartPrep();
   }
 
@@ -236,15 +230,17 @@ let hubTab = 'deploy';
     if (!B.data.stash.length) {
       return '<p class="ov-empty" style="margin:6px 0 0">仓库里还没有卡牌——撤离成功后在整理界面把战利品放回仓库，下次出征就能带上了。</p>';
     }
+    // 2026-09-07 留言：不再自动塞进背包，全部由玩家从左往右拖；
+    // 卡面上的「仓 ×N」实时显示剩余可带数量，拖一张少一张
     return B.data.stash.map(s => {
       const n = deployPick[s.card.name] || 0;
-      return `<div class="pk-row dep-row">
-        <span class="dep-name">[[icon:cards]] <b>${esc(s.card.name)}</b>${s.count > 1 ? ` <span class="dim">仓 ${s.count}</span>` : ''}</span>
-        <span class="dep-stepper">
-          <button class="step-btn" data-act="pickSub" data-name="${escAttr(s.card.name)}" ${n <= 0 ? 'disabled' : ''}>−</button>
-          <b class="dep-n${n > 0 ? ' on' : ''}">${n}</b>
-          <button class="step-btn" data-act="pickAdd" data-name="${escAttr(s.card.name)}" ${n >= s.count ? 'disabled' : ''}>＋</button>
-        </span>
+      const left = Math.max(0, s.count - n);
+      return `<div class="dep-card${n > 0 ? ' picked' : ''}${left <= 0 ? ' drained' : ''}" draggable="true"
+          data-act="pickAdd" data-name="${escAttr(s.card.name)}"
+          title="${escAttr(s.card.name)} · 点击或拖到右侧背包带入（还可带 ${left}）">
+        ${SDT.Cards.cardHTML(s.card, 'sm')}
+        <span class="dep-own">仓 ×${left}</span>
+        ${n > 0 ? `<b class="dep-n" title="已选带入 ${n} 张">${n}</b>` : ''}
       </div>`;
     }).join('');
   }
@@ -259,18 +255,32 @@ let hubTab = 'deploy';
     UI.registerHelp('deploy-prep', {
       title: '出征整备说明',
       html: `
-        <p class="help-item"><b>携带规则</b>只有从这里带入背包的仓库卡牌才能在战斗中使用；同名堆叠只占 1 格。</p>
-        <p class="help-item"><b>初始攻击</b>「初始攻击」×${MAP.rules.starterSha} 每局固定携带，不入库也不出现在上方列表。</p>
+        <p class="help-item"><b>携带规则</b>仓库卡牌留在左侧，点击卡面或拖到右侧背包才会带入；点击背包卡面可放大查看，拖回左侧即移除。</p>
+        <p class="help-item"><b>初始攻击</b>「初始攻击」×${MAP.rules.starterSha} 默认在背包（固定携带，不可移除，不入库）。</p>
         <p class="help-item"><b>格数</b>背包格数 = 卡牌种类数 + 初始攻击；背包容量可在基地「升级」页用木材扩建。</p>`,
       back: () => renderDepartPrep(),
     });
+    // 右侧背包格：第 1 格固定「初始攻击」（默认在背包、不可移除），其余按已选卡牌顺序落格；
+    // 点击背包卡面 = 放大特写（2026-09-07 留言），移除靠拖回左侧卡牌区
+    const pickedNames = Object.keys(deployPick).filter(k => deployPick[k] > 0);
+    let bagCells = `<div class="bag-cell fixed" title="初始攻击 ×${MAP.rules.starterSha} · 默认在背包，固定携带">
+      ${SDT.Cards.cardHTML(SDT.Cards.SHA, 'sm')}<b class="dep-n on">×${MAP.rules.starterSha}</b></div>`;
+    for (let i = 1; i < B.bagCap(); i++) {
+      const name = pickedNames[i - 1];
+      const stack = name ? B.data.stash.find(s => s.card.name === name) : null;
+      bagCells += stack
+        ? `<div class="bag-cell filled" draggable="true" data-act="bagZoom" data-name="${escAttr(name)}"
+             title="${escAttr(name)} ×${deployPick[name]} · 点击查看大卡，拖回左侧移除">
+            ${SDT.Cards.cardHTML(stack.card, 'sm')}<b class="dep-n on">${deployPick[name]}</b></div>`
+        : '<div class="bag-cell empty" aria-hidden="true"></div>';
+    }
     UI.showOverlay('', `
       <div class="pg hub" id="depMain">
-        <button class="pg-close" data-act="depBack" title="返回基地（Esc）">[[icon:cross]]</button>
+        <!-- 2026-09-07 留言：右上「返回基地」叉号删掉，返回走左下「← 返回」按钮 -->
         <header class="hub-head">
           <h2>[[icon:bag]] 出征整备</h2>
           ${UI.helpBtn('deploy-prep')}
-          <span class="sub">玩法【${MODES[m].name}】 · 选择要从仓库带入背包的卡牌</span>
+          <span class="sub">玩法【${MODES[m].name}】 · 点卡面或拖拽带入背包</span>
           <span class="pg-spacer"></span>
           <span class="hub-res">
             <span class="res-chip">[[icon:bag]] 背包 <b class="${full ? 'fulled' : ''}">${slots}/${B.bagCap()}</b> 格</span>
@@ -279,14 +289,12 @@ let hubTab = 'deploy';
         </header>
         <div class="dep-body${deployJustOpened ? ' page-in' : ''}">
           <section class="hub-card">
-            <h3>[[icon:archive]] 仓库卡牌</h3>
-            <div class="dep-list">${deployPickRowsHTML()}</div>
+            <h3>[[icon:archive]] 携带卡牌</h3>
+            <div class="dep-cards" id="depPool">${deployPickRowsHTML()}</div>
           </section>
           <section class="hub-card">
-            <h3>[[icon:bag]] 背包预览</h3>
-            <div class="pk-row"><span>[[icon:cards]] <b>初始攻击</b> <span class="dim">×${MAP.rules.starterSha} · 固定携带（不可入库）</span></span></div>
-            ${Object.keys(deployPick).filter(k => deployPick[k] > 0).map(k =>
-              `<div class="pk-row"><span>[[icon:cards]] <b>${esc(k)}</b> <span class="dim">×${deployPick[k]}</span></span></div>`).join('')}
+            <h3>[[icon:bag]] 背包预览 <span class="set-tip">拖入卡牌即可携带</span></h3>
+            <div class="bag-grid${full ? ' full' : ''}" id="depBag">${bagCells}</div>
             ${deployHint ? `<p class="hint warn-hint">${deployHint}</p>` : ''}
             <div class="dep-foot">
               <button class="dep-back" data-act="depBack">← 返回</button>
@@ -295,28 +303,69 @@ let hubTab = 'deploy';
           </section>
         </div>
       </div>`, 'page');
-    UI.act('pickAdd', (d) => {
+    const addPick = (name) => {
       const B2 = SDT.Base;
-      const stack = B2.data.stash.find(x => x.card.name === d.name);
+      const stack = B2.data.stash.find(x => x.card.name === name);
       if (!stack) return;
-      const cur = deployPick[d.name] || 0;
+      const cur = deployPick[name] || 0;
       if (cur >= stack.count) return;
       if (cur === 0 && deploySlotsUsed() >= B2.bagCap()) {
-        deployHint = `[[icon:bag]] 背包格数已满（${B2.bagCap()} 格）——先减少其他卡牌，或回基地用木材扩建背包。`;
+        deployHint = `[[icon:bag]] 背包格数已满（${B2.bagCap()} 格）——先移出其他卡牌，或回基地用木材扩建背包。`;
         renderDepartPrep();
         return;
       }
       deployHint = '';
-      deployPick[d.name] = cur + 1;
+      deployPick[name] = cur + 1;
       renderDepartPrep();
-    });
-    UI.act('pickSub', (d) => {
-      const cur = deployPick[d.name] || 0;
+    };
+    const subPick = (name) => {
+      const cur = deployPick[name] || 0;
       if (cur <= 0) return;
-      deployPick[d.name] = cur - 1;
+      deployPick[name] = cur - 1;
       deployHint = '';
       renderDepartPrep();
+    };
+    UI.act('pickAdd', (d) => addPick(d.name));
+    UI.act('pickSub', (d) => subPick(d.name));
+    // 背包卡面点击：放大特写；特写里保留「移出背包」兜底，拖回左侧也可移除
+    UI.act('bagZoom', (d) => {
+      const n = deployPick[d.name] || 0;
+      if (n <= 0) return;
+      const stack = SDT.Cards.SHA.name === d.name ? { card: SDT.Cards.SHA } : B.data.stash.find(s => s.card.name === d.name);
+      if (!stack) return;
+      UI.showCardZoom(stack.card, {
+        footer: `<button class="ov-btn" data-act="bagZoomRemove" data-name="${escAttr(d.name)}">移出背包（-1）</button>`,
+      });
+      UI.act('bagZoomRemove', (d2) => {
+        document.getElementById('cardZoom')?.querySelector('.cz-backdrop')?.click();
+        subPick(d2.name);
+      });
     });
+    // 拖拽：仓库卡面 → 背包格带入；背包卡面拖回仓库区移除
+    const pool = document.getElementById('depPool');
+    const bag = document.getElementById('depBag');
+    if (pool && bag) {
+      [pool, bag].forEach(el => el.addEventListener('dragstart', (e) => {
+        const card = e.target.closest && e.target.closest('[data-name][draggable]');
+        if (!card) return;
+        e.dataTransfer.setData('text/plain', card.dataset.name);
+        e.dataTransfer.effectAllowed = 'copyMove';
+      }));
+      bag.addEventListener('dragover', (e) => { e.preventDefault(); bag.classList.add('drop-here'); });
+      bag.addEventListener('dragleave', () => bag.classList.remove('drop-here'));
+      bag.addEventListener('drop', (e) => {
+        e.preventDefault();
+        bag.classList.remove('drop-here');
+        const name = e.dataTransfer.getData('text/plain');
+        if (name) addPick(name);   // addPick 内部校验仓库中是否存在
+      });
+      pool.addEventListener('dragover', (e) => { e.preventDefault(); });
+      pool.addEventListener('drop', (e) => {
+        e.preventDefault();
+        const name = e.dataTransfer.getData('text/plain');
+        if (name) subPick(name);
+      });
+    }
     UI.act('confirmDeploy', () => {
       const picks = deployPick;
       deployPick = null;
