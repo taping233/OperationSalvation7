@@ -1,6 +1,6 @@
 /* 跨模块规则的唯一代码真源。文档规则见 docs/rules.md。 */
 const groups = {
-  map: { diceSides: 6, stepMs: 340, emergencyExitCost: 10, fireHeal: 10, fireClassCardChance: 0.3 },
+  map: { diceSides: 3, stepMs: 340, emergencyExitCost: 10, fireHeal: 8, fireClassCardChance: 0.3, staminaMax: 60, staminaWarn: 10 },
   battle: { energy: 2, startDraw: 5, turnDraw: 1, handMax: 8, bossDeckSize: 15, starterAttack: 5 },
   backpack: { start: 16, max: 30, upgradeWood: 2, safeStart: 2, safeMax: 6, safeUpgradeRations: 2 },
   base: { stashStart: 25, stashMax: 49, stashUpgradeWood: 2, stashUpgradeSlots: 3 },
@@ -16,6 +16,8 @@ const RULES = Object.freeze({
   emergencyExitCost: groups.map.emergencyExitCost,
   fireHeal: groups.map.fireHeal,
   fireClassCardChance: groups.map.fireClassCardChance,
+  staminaMax: groups.map.staminaMax,
+  staminaWarn: groups.map.staminaWarn,
   playerMaxHp: groups.growth.playerMaxHp,
   playerAtk: groups.growth.playerAtk,
   bagSize: groups.backpack.start,

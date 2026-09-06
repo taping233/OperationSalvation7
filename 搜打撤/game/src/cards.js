@@ -518,12 +518,12 @@ import { Random } from './random.js';
       { id: 'tt3-thunderblast',  name: '雷殛',     cost: 3, rarity: '传说', type: '法术', dmg: 7, dmgType: 'spell', desc: "7′，墓地指定 1 张牌，伤害 +1。", value: 5 }, // 传说系列重拍：desc 重辨（原文疑「蓄地槽…」），机制沿旧读「从墓地指定」
       { id: 'tt3-flux-slash',    name: '流光斩',   cost: 2, rarity: '传说', type: '武术', dmg: 1, dmgType: 'attack', desc: '攻1，附加 2 层流血；将流光斩复制放入牌库。', value: 5 }, // 传说系列重拍：改武术、攻1、复制入牌库（原文「流光照影放入牌库」重辨存疑）
       { id: 'tt3-galaxy-mirage', name: '银河幻境', cost: 2, rarity: '史诗', type: '法术', desc: '布下幻阵，治疗所有队友。', value: 5 },
-      { id: 'tt3-immortal-blade', name: '不朽神剑', cost: 2, rarity: '传说', type: '装备', unrandom: true, desc: '对战开始时，你的攻击化为 1 张不朽斩。', value: 5 }, // 传说系列重拍：效果按本批照片重写
-      { id: 'tt3-diamond',       name: '钻石',     cost: 0, rarity: '传说', type: '资源', unrandom: true, desc: '贵重货币，可出售。', value: 16 },
+      { id: 'tt3-immortal-blade', name: '不朽神剑', cost: 2, rarity: '传说', type: '装备', desc: '对战开始时，你的攻击化为 1 张不朽斩。', value: 5 }, // 传说系列重拍：效果按本批照片重写
+      { id: 'tt3-diamond',       name: '钻石',     cost: 0, rarity: '传说', type: '资源', desc: '贵重货币，可出售。', value: 16 },
       { id: 'tt3-master-staff',  name: '大师的神杖', cost: 2, rarity: '稀有', type: '道具', desc: '回合开始时回复 5 点生命。', value: 5 },
-      { id: 'tt3-chaos-eye',     name: '混沌之眼', cost: 1, rarity: '传说', type: '装备', unrandom: true, desc: '装备：血量上限 +10，牌库上限 5。', value: 5 }, // 传说系列重拍：卡名/效果按本批照片（旧读「混沌眼」「生命上限+10」）
+      { id: 'tt3-chaos-eye',     name: '混沌之眼', cost: 1, rarity: '传说', type: '装备', desc: '装备：血量上限 +10，牌库上限 5。', value: 5 }, // 传说系列重拍：卡名/效果按本批照片（旧读「混沌眼」「生命上限+10」）
       { id: 'tt3-execute',       name: '斩杀',     cost: 3, rarity: '传说', type: '武术', dmg: 9, dmgType: 'spell', desc: "对 9 血以下角色造成 9′。", value: 5 }, // 传说系列重拍：角标武术、阈值 9 血
-      { id: 'tt3-savior-elixir', name: '救世灵药', cost: 0, rarity: '传说', type: '道具', unrandom: true, desc: '回复 99 点生命（相当于回满）。', value: 5 },
+      { id: 'tt3-savior-elixir', name: '救世灵药', cost: 0, rarity: '传说', type: '道具', desc: '回复 99 点生命（相当于回满）。', value: 5 },
       // —— 装备（武器/防具/符印一摞；角标与描述已按第四批高清照片逐张重辨修正，
       //     未在本摞照片中出现的条目（魔纹银剑/深红丝袋/圣杖/玄龟/草甲/逆弓/聚魔之血/深衍日记）保持原样）——
       { id: 'tt3-silver-runesword', name: '魔纹银剑', cost: 2, rarity: '稀有', type: '装备', desc: '装备：攻击 +3。', value: 3 },
@@ -575,8 +575,8 @@ import { Random } from './random.js';
     // 照片中另 8 张为已有卡重拍：斩杀/流光斩/剑落纷霜/雷殛/混沌之眼/不朽神剑
     // 已在 TABLETOP3 升传说并按照片修订，救世灵药/钻石仅补 unrandom 标记。
     TABLETOP5: [
-      { id: 'tt5-archstaff',    name: '大法师的权杖', cost: 2, rarity: '传说', type: '装备', unrandom: true, desc: '回合开始时，法伤 +1。', value: 5 },
-      { id: 'tt5-galaxy-voyage', name: '银河之旅',   cost: 4, rarity: '传说', type: '法术', unrandom: true, desc: '本场对战中，你的所有法术均为 1 费。', value: 5 }, // 原文单字「术」，按法术解读
+      { id: 'tt5-archstaff',    name: '大法师的权杖', cost: 2, rarity: '传说', type: '装备', desc: '回合开始时，法伤 +1。', value: 5 },
+      { id: 'tt5-galaxy-voyage', name: '银河之旅',   cost: 4, rarity: '传说', type: '法术', desc: '本场对战中，你的所有法术均为 1 费。', value: 5 }, // 原文单字「术」，按法术解读
     ],
 
     // 桌游手绘卡 · 第六批（2026-09-01「事件卡」照片，10 张）：

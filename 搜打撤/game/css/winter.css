@@ -164,3 +164,13 @@ body:has(#overlay.opaque:not([hidden])) #sidebar{visibility:hidden}
 .slot-card.slot-art-5 .slot-card-bg{background-image:url('../assets/slot-bg-knight-fantasy.webp');background-size:500% 100%;background-position:100% center}
 /* #11 制作坊全屏界面 */
 #overlay .card.page:has(.cdes){width:100%;height:100%;max-width:none;max-height:none}
+
+/* 体力系统（2026-09-06） */
+.stamina-row{margin-top:6px;font-size:12px;color:#9db4bd;display:flex;align-items:center;gap:5px}
+.stamina-row b{color:#e4eeea}
+.stamina-row.stamina-low,.stamina-row.stamina-low b{color:#ff7b6b}
+
+/* 祭坛献祭选卡（2026-09-06） */
+.sac-list{display:flex;flex-direction:column;gap:6px;max-height:52vh;overflow:auto;margin:10px 0}
+.sac-row{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;border:1px solid #42616d;background:#112936;color:#dfe9e6;border-radius:2px;cursor:pointer;text-align:left}
+.sac-row.sac-sel{border-color:#c8b483;background:#333c39}

@@ -36,6 +36,8 @@ import * as Combat from './combat.js';
   let pdef = null, pstat = null;
   let busy = false;
   let infusing = null, discovering = null, discoverQueue = [];
+  let handSelecting = null;              // 手牌选卡（2026-09-06 #24/#25）：{n,type,act,thenText}
+  const handSelectQueue = [];
   let pendingTarget = null;  // 已锁定待拖拽的出牌 {uid, card}（必须拖到目标身上）
   let pendingHint = '';      // 拖拽提示（拖错目标时给出纠正文案）
   let delayed = [];          // 「回合开始时」延迟效果 [{text, cardName, repeat}]（repeat=装备每回合触发）
@@ -127,6 +129,9 @@ import * as Combat from './combat.js';
     randomDiscoverCard,
     addTempCard,
     addDeckCard,
+    queueHandSelect: job => { handSelectQueue.push(job); processHandSelect(); },
+    restoreConsumed: n => restoreConsumed(n),
+    random01: () => Random.random('battle'),
     allCards: () => SDT.Cards.all(),
     shuffleDeck: () => { drawPile = shuffle(drawPile); return drawPile.length; },
     addEnergy: amount => { energy += amount; return energy; },
@@ -307,7 +312,7 @@ import * as Combat from './combat.js';
     turn = 1; busy = false;
     pdef = { shield: 0, armor: 0, guard: false };
     pstat = Combat.ensureStatus({ hp: G.hp });
-    infusing = null; discovering = null; discoverQueue = []; pendingTarget = null; floats = [];
+    infusing = null; discovering = null; discoverQueue = []; handSelecting = null; handSelectQueue.length = 0; pendingTarget = null; floats = [];
     delayed = []; noDrawNext = false; spellCost1 = false; viewingGrave = false; dreadShown = false; selectingDeck = false;
     G.state = 'modal';
     if (alive().length > 1) G.log(`[[icon:question]] 以一敌多：伤害类卡牌需<b>拖到目标身上</b>打出；群体伤害直接点击生效`, 'sys');
@@ -442,10 +447,10 @@ import * as Combat from './combat.js';
     execPlay(uid, card, fuel, alive()[0] || null);
   }
 
-  function execPlay(uid, card, fuelUids, target) {
+  function execPlay(uid, card, fuelUids, target, freeCost) {
     const effCost = effCostOf(card);
     if (effCost !== card.cost) G.log(`[[icon:sparkles]] 宇宙形态：【${esc(card.name)}】按 <b>1</b> 费打出（原 ${card.cost} 费）`, 'sys');
-    energy -= effCost;
+    if (!freeCost) energy -= effCost;
     played.push(uid);
     SDT.Sound.sfx('card');
     hand = hand.filter(h => h !== uid && !fuelUids.includes(h));
@@ -526,20 +531,58 @@ import * as Combat from './combat.js';
     return r.dealt;
   }
 
-  function randomDiscoverCard(rarity) {
-    const pool = SDT.Cards.all().filter(c =>
-      c.rarity !== '衍生' && SDT.Cards.isRandomObtainable(c) && (!rarity || c.rarity === rarity));
+  function randomDiscoverCard(rarity, otherCls) {
+    // 2026-09-06 #28：「发现其它职业」限定池 = 其他职业的职业卡（不含本职业）
+    const pool = otherCls
+      ? SDT.Cards.all().filter(c => c.rarity === '职业' && c.cls && c.cls !== G.myClass)
+      : SDT.Cards.all().filter(c =>
+          c.rarity !== '衍生' && SDT.Cards.isRandomObtainable(c) && (!rarity || c.rarity === rarity));
     if (!pool.length) return null;
     return pool[Math.floor(Random.random('battle') * pool.length)];
   }
 
+  // —— 手牌选卡（2026-09-06 #24/#25）：「选择 N 张手牌中的 X 施放/消耗」通用执行 ——
+  function processHandSelect() {
+    if (handSelecting || !handSelectQueue.length) return;
+    const job = handSelectQueue.shift();
+    handSelecting = { n: job.n || 1, type: job.type || null, act: job.act || 'play', thenText: job.thenText || '' };
+    requestBattleRender();
+  }
+  function pickHandSelect(uid) {
+    if (!handSelecting) return;
+    const entry = findCard(uid);
+    if (!entry) return;
+    if (handSelecting.act === 'play') {
+      handSelecting = null;
+      execPlay(uid, entry.card, [], alive()[0] || null, true);   // 选卡施放：不扣费
+      return;
+    }
+    hand = hand.filter(h => h !== uid);
+    consumed.push(uid);
+    G.log(`[[icon:flask]] 消耗了手牌中的【<b>${esc(entry.card.name)}</b>】`, 'sys');
+    handSelecting.n -= 1;
+    if (handSelecting.n > 0) { requestBattleRender(); return; }
+    const job = handSelecting;
+    handSelecting = null;
+    if (job.thenText) applyTextEffects(entry.card, job.thenText, null);
+    if (!alive().length) { finish(true); return; }
+    processHandSelect();
+    requestBattleRender();
+  }
+  // 战斗内复原：从消耗堆拿回 n 张到手牌（2026-09-06 #16）
+  function restoreConsumed(n) {
+    let cnt = 0;
+    while (cnt < n && consumed.length) { hand.push(consumed.pop()); cnt++; }
+    if (cnt) G.log(`[[icon:gem]] 复原 ${cnt} 张消耗卡，回到手牌`, 'ok');
+    return cnt;
+  }
   function processDiscoverQueue() {
     if (discovering || !discoverQueue.length) return;
     const job = discoverQueue.shift();
     const options = [];
     const taken = new Set();
     for (let i = 0; i < 3; i++) {
-      const c = randomDiscoverCard(job.rarity);
+      const c = randomDiscoverCard(job.rarity, job.otherCls);
       if (c && !taken.has(c.id)) { taken.add(c.id); options.push(c); }
     }
     if (!options.length) { G.log('（卡牌库是空的，没有可发现的卡牌）', 'dim'); return; }
@@ -765,6 +808,7 @@ import * as Combat from './combat.js';
       grave: Object.freeze(grave.slice()),
       infusing: readonlyInfusing,
       discovering: readonlyDiscovering,
+      handSelecting: readonlyHandSelecting,
       pendingTarget: pendingTarget ? Object.freeze({ ...pendingTarget, card: freezeObject(pendingTarget.card) }) : null,
       pendingHint,
       viewingGrave,
@@ -794,6 +838,7 @@ import * as Combat from './combat.js';
     confirmDeck: beginBoss,
     cancelDeck: cancelDeckSelection,
     pickDiscover,
+    pickHandSelect,
     setPendingHint,
     lockPendingTarget,
   });

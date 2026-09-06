@@ -35,6 +35,7 @@ function createEffectExecutor(deps) {
     log, escapeHtml, heal, pushFloat, drawCards, grantStarterAttack,
     markNoDrawNext, queueDiscover, randomDiscoverCard, addTempCard,
     addDeckCard, allCards, shuffleDeck, addEnergy, addEnergyCap,
+    queueHandSelect, restoreConsumed, random01,
   } = deps;
 
   return function applyTextEffects(card, text, target) {
@@ -59,7 +60,13 @@ function createEffectExecutor(deps) {
     if (!/免疫冰冻|对冰冻/.test(desc) && /附加冰冻|冰冻\s*所有|冰冻\s*\d+\s*名|冻结/.test(desc)) {
       const fm = desc.match(/(?:冻结|冰冻)状态\s*(\d+)\s*回合/);
       const n = fm ? +fm[1] : (durOv ? +durOv : 1);
-      if (curseTarget) { combat.addCurse(curseTarget, 'freeze', n); log(`[[icon:crystal]] <b>${esc(curseTarget.name)}</b> 被冰冻 ${n} 回合（无法行动）`, 'sys'); did = true; }
+      // 2026-09-06 #13：desc 带「冰冻 N 名」时对前 N 个存活目标生效（原实现只冻 1 人）
+      const multi = desc.match(/(?:冰冻|冻结)\s*(\d+)\s*名/);
+      if (multi && +multi[1] > 1) {
+        const targets = getAlive().slice(0, +multi[1]);
+        targets.forEach(t => combat.addCurse(t, 'freeze', n));
+        if (targets.length) { log(`[[icon:crystal]] ${targets.map(t => esc(t.name)).join('、')} 被冰冻 ${n} 回合（无法行动）`, 'sys'); did = true; }
+      } else if (curseTarget) { combat.addCurse(curseTarget, 'freeze', n); log(`[[icon:crystal]] <b>${esc(curseTarget.name)}</b> 被冰冻 ${n} 回合（无法行动）`, 'sys'); did = true; }
     }
     if (/沉默/.test(desc)) {
       const n = durOv ? +durOv : 1;
@@ -137,6 +144,40 @@ function createEffectExecutor(deps) {
       } else { heal(+hm[1]); pushFloat({ unit: 'self', text: '💚', cls: 'stk', warm: true }); }
       did = true;
     }
+    // 2026-09-06 #16：战斗内复原消耗卡（从消耗堆拿回手牌）
+    const rstM = desc.match(/复原\s*(?:最多)?\s*(\d+)?\s*张/);
+    if (rstM) { const c = restoreConsumed(+(rstM[1] || 1)); if (c) did = true; }
+    // 2026-09-06 #24/#25：通用「选择手牌施放 / 消耗手牌」
+    if (!did) {
+      const selPlay = desc.match(/选择\s*(\d+|一|两|二|三)\s*张(?:手牌中的)?(武术|法术|装备|牌)[^，。]*?(?:施放|打出)/);
+      if (selPlay) {
+        const numMap = { '一': 1, '两': 2, '二': 2, '三': 3 };
+        const n = numMap[selPlay[1]] || +selPlay[1] || 1;
+        queueHandSelect({ n, type: selPlay[2] === '牌' ? null : selPlay[2], act: 'play' });
+        log(`[[icon:cards]] 从手牌选择 <b>${n}</b> 张${selPlay[2] === '牌' ? '' : selPlay[2]}牌打出`, 'sys');
+        did = true;
+      } else {
+        const consM = desc.match(/消耗\s*(一张|两|二|三|\d+)\s*张?\s*(?:手牌中的)?(武术|法术|装备|牌)牌?[,，]\s*(.+)$/);
+        if (consM) {
+          const numMap = { '一': 1, '两': 2, '二': 2, '三': 3 };
+          const n = numMap[consM[1]] || +consM[1] || 1;
+          queueHandSelect({ n, type: consM[2] === '牌' ? null : consM[2], act: 'consume', thenText: consM[3] });
+          did = true;
+        }
+      }
+    }
+    // 2026-09-06 #15：随机神秘效果（神秘药水）——战斗内随机三选一
+    if (!did && /随机神秘效果/.test(desc)) {
+      const r = random01();
+      if (r < 1 / 3) { heal(8); log('[[icon:flask]] 神秘药水：回复 <b>8</b> 点生命', 'ok'); }
+      else if (r < 2 / 3) { drawCards(2); log('[[icon:flask]] 神秘药水：抽 <b>2</b> 张牌', 'ok'); }
+      else {
+        const c = randomDiscoverCard(null);
+        if (c) { addTempCard(c); log(`[[icon:flask]] 神秘药水：随机获得【<b>${esc(c.name)}</b>】置入手牌`, 'loot'); }
+        else log('[[icon:flask]] 神秘药水：卡牌库是空的，什么也没有发生', 'dim');
+      }
+      did = true;
+    }
     const am = desc.match(/获得\s*(\d+)\s*点?\s*护甲/) || desc.match(/\+\s*(\d+)\s*甲/);
     if (am) { armored = true; pdef.armor += +am[1]; log(`[[icon:plate]] 获得 ${am[1]} 点护甲`, 'sys'); did = true; }
     const sm = desc.match(/获得\s*(\d+)\s*点?\s*护盾/);
@@ -172,8 +213,8 @@ function createEffectExecutor(deps) {
       log('[[icon:cross]] 已标记：<b>下回合开始无法抽牌</b>', 'sys');
       did = true;
     }
-    const dcm = desc.match(/发现\s*(?:(\d+)\s*张)?\s*(传说)?(?:卡牌|牌|卡)/);
-    if (dcm) { queueDiscover({ n: dcm[1] ? +dcm[1] : 1, rarity: dcm[2] || null }); did = true; }
+    const dcm = desc.match(/发现\s*(?:(\d+)\s*张)?\s*(传说|其它职业的?)?\s*(?:职业的?)?(?:卡牌|牌|卡)/);
+    if (dcm) { queueDiscover({ n: dcm[1] ? +dcm[1] : 1, rarity: dcm[2] === '传说' ? '传说' : null, otherCls: !!dcm[2] && dcm[2] !== '传说' }); did = true; }
     const rm = desc.match(/(?:获得|获取)\s*(\d+)\s*张随机卡牌/) || desc.match(/随机获取\s*(\d+)\s*张卡牌/);
     if (rm) {
       const n = +(rm[1] || rm[2]);

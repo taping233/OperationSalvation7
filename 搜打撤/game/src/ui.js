@@ -17,7 +17,7 @@ import { Random } from './random.js';
         charAtk: $('charAtk'),
         heroAva: $('heroAva'), heroName: $('heroName'),
         bagCount: $('bagCount'), bagBtn: $('bagBtn'), btnHome: $('btnHome'),
-        rollBtn: $('rollBtn'), diceFace: $('diceFace'), diceHist: $('diceHist'),
+        rollBtn: $('rollBtn'), diceFace: $('diceFace'), diceHist: $('diceHist'), staminaVal: $('staminaVal'), staminaRow: $('staminaRow'),
         log: $('log'),
         overlay: $('overlay'), ovTitle: $('ovTitle'), ovBody: $('ovBody'),
         tooltip: $('tooltip'),
@@ -176,6 +176,9 @@ import { Random } from './random.js';
       if (this._lastBagKey !== bagKey) {
         this._lastBagKey = bagKey;
         this.el.bagCount.textContent = bagKey;
+        // 2026-09-06 #18：背包满/接近满时图标标红
+        if (this.el.bagBtn) this.el.bagBtn.classList.toggle('bag-full', used >= cap);
+        else if (this.el.bagCount.parentElement) this.el.bagCount.parentElement.classList.toggle('bag-full', used >= cap);
       }
 
       // 掷骰按钮：状态未变化时不重建 innerHTML（refresh 调用频繁）
@@ -187,6 +190,15 @@ import { Random } from './random.js';
           : game.state === 'rolling' ? SDT.Icons.rich('[[icon:dice]] 骰子转动中…') : SDT.Icons.rich('[[icon:hourglass]] …');
       }
 
+      // 体力（2026-09-06 #29）：≤10 标红警告
+      if (this.el.staminaVal && game.runActive) {
+        const st = game.stamina == null ? SDT.MAP.rules.staminaMax : game.stamina;
+        if (this._lastStamina !== st) {
+          this._lastStamina = st;
+          this.el.staminaVal.textContent = st;
+          this.el.staminaRow.classList.toggle('stamina-low', st <= SDT.MAP.rules.staminaWarn);
+        }
+      }
       // 骰子面：右侧桌上骰子，用点数替代数字
       this.drawDice(game.dice);
       if (this._lastDice !== undefined && game.dice != null && this._lastDice !== game.dice) {
@@ -256,6 +268,9 @@ import { Random } from './random.js';
       this.el.overlay.classList.remove('closing');
       this.el.ovTitle.classList.toggle('bad', /失败|清空|删除|倒下/.test(title));
       this.el.ovTitle.innerHTML = SDT.Icons.rich(title);
+      // 2026-09-06 #17：战利品结算页 = 战斗胜利动画（1.4s 强调入场）
+      const victoryCard = this.el.ovBody.parentElement;
+      if (victoryCard && /搜刮！/.test(title)) { victoryCard.classList.remove('fx-victory'); void victoryCard.offsetWidth; victoryCard.classList.add('fx-victory'); }
       this.el.ovBody.innerHTML = SDT.Icons.rich(bodyHtml);
       const card = this.el.ovBody.parentElement;
       card.classList.toggle('wide', mode === true || mode === 'wide' || mode === 'chest');

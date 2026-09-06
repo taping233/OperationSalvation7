@@ -11,7 +11,7 @@ describe('规则与接口契约', () => {
   it('关键玩法数值保持冻结且与现行规则一致', () => {
     expect(Object.isFrozen(RULES)).toBe(true);
     expect(RULES).toMatchObject({
-      diceSides: 6,
+      diceSides: 3,
       emergencyExitCost: 10,
       playerMaxHp: 30,
       bagSize: 16,
@@ -22,7 +22,7 @@ describe('规则与接口契约', () => {
       bossDeckSize: 15,
       starterSha: 5,
     });
-    expect(RULES.map).toEqual({ diceSides: 6, stepMs: 340, emergencyExitCost: 10, fireHeal: 10, fireClassCardChance: 0.3 });
+    expect(RULES.map).toEqual({ diceSides: 3, stepMs: 340, emergencyExitCost: 10, fireHeal: 8, staminaMax: 60, staminaWarn: 10, fireClassCardChance: 0.3 });
     expect(RULES.battle.energy).toBe(2);
     expect(RULES.backpack).toMatchObject({ start: 16, max: 30, safeStart: 2, safeMax: 6 });
     expect(RULES.base.stashMax).toBe(49);

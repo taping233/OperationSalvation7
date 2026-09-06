@@ -212,3 +212,30 @@
   72% { opacity:.8; }
   100% { opacity:0; background:repeating-linear-gradient(90deg,rgba(0,0,0,.6) 0 3px,transparent 3px 9px); }
 }
+
+/* ============ 2026-09-06 批次D 表现 ============ */
+/* #17 击杀动画：阵亡敌人 1s 白闪 → 塌缩消散 */
+.sts-foe.dead .sts-figure { animation: fx-die 1s ease forwards; }
+@keyframes fx-die {
+  0% { filter: none; opacity: 1; transform: none; }
+  18% { filter: brightness(3) saturate(0); opacity: 1; }
+  55% { filter: brightness(1.4) grayscale(1); opacity: .8; transform: rotate(6deg) translateY(6px); }
+  100% { filter: grayscale(1) brightness(.6); opacity: .18; transform: rotate(10deg) translateY(14px) scale(.96); }
+}
+/* #17 胜利动画：战利品结算页 1.4s 强调入场 */
+.card.fx-victory { animation: fx-victory 1.4s cubic-bezier(.2,.9,.3,1) both; }
+@keyframes fx-victory {
+  0% { transform: scale(.82) translateY(24px); }
+  45% { transform: scale(1.03); box-shadow: 0 0 60px rgba(245,197,66,.45); }
+  100% { transform: scale(1); box-shadow: 0 14px 40px rgba(0,0,0,.5); }
+}
+/* #14 悬停桥：卡牌下缘保持命中区，防止反复升降抖动 */
+.sts-hand .bt-card::after { content: ''; position: absolute; left: -6px; right: -6px; bottom: -30px; height: 30px; }
+/* #34 切行按钮 */
+.bt-row-switch { align-self: flex-end; margin: 0 12px 4px 0; }
+/* #35 卡牌描述最多 3 行；战斗内手牌小一号字尽量少遮挡 */
+.hsc-desc span { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.sts-hand .hs-card .hsc-desc { font-size: 10.5px; line-height: 1.35; }
+.sts-hand .hs-card .hsc-desc span { -webkit-line-clamp: 4; }
+/* #12 双击放大 */
+.sts-hand .bt-card.zoomed { transform: translateY(-70px) scale(1.55) !important; z-index: 30; }

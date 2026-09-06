@@ -28,6 +28,11 @@ import { eventNarrative } from './narrative.js';
     if (game.state !== 'idle') return;
     game.state = 'rolling';
     SDT.Sound.sfx('dice');
+    // 体力系统（2026-09-06）：每掷一次骰子 -1，≤10 警告，0 时无法撤离
+    if (game.stamina == null) game.stamina = MAP.rules.staminaMax;
+    game.stamina = Math.max(0, game.stamina - 1);
+    if (game.stamina === 0) UI.log('[[icon:hourglass]] <b>体力耗尽！</b>你已无法撤离——立刻寻找补给或降低消耗', 'warn');
+    else if (game.stamina <= MAP.rules.staminaWarn) UI.log(`[[icon:hourglass]] <b>体力告急</b>：仅剩 ${game.stamina} 点`, 'warn');
     const fixed = game.devMode && game.nextDice > 0;
     const n = fixed ? game.nextDice : rndDice();
     UI.el.diceFace.classList.add('rolling');
@@ -43,6 +48,13 @@ import { eventNarrative } from './narrative.js';
       UI.refresh(game);
       moveBy(n);
     }, 640);
+    // 防卡死看门狗（2026-09-06 #30）：动画中断导致停留在 rolling 时强制续行
+    setTimeout(() => {
+      if (game.state === 'rolling') {
+        UI.el.diceFace.classList.remove('rolling');
+        moveBy(n);
+      }
+    }, 5000);
   }
 
   function moveBy(n) {
@@ -236,6 +248,13 @@ import { eventNarrative } from './narrative.js';
       const tpl = MAP.monsters[pool[Math.floor(Random.random('enemy') * pool.length)]];
       list.push(scaledEnemy({ ...tpl }));
     }
+    // 2026-09-06 #6：外层遭遇含掠夺者(3-3)时，敌人数量至少 3（掠夺者成群出没）
+    if (layerIdx === 0 && list.some(e => e.id === 'bandit') && list.length < 3) {
+      while (list.length < 3) {
+        const tpl = MAP.monsters[pool[Math.floor(Random.random('enemy') * pool.length)]];
+        list.push(scaledEnemy({ ...tpl }));
+      }
+    }
     // 元数据不参与战斗结算，仅用于战前预告和战斗内提示；旧敌人对象仍保持原字段。
     list.risk = risk;
     list.strategy = strategy;
@@ -326,9 +345,25 @@ import { eventNarrative } from './narrative.js';
         openPickupPage('coin', `+${n} 币`, () => { gainCoins(base); done(); });
         break;
       }
-      case 'wood': openPickupPage('wood', `木材 +${def.n || 1}`, () => { game.addItem(MAP.items.wood, def.n || 1); done(); }); break;
+      case 'wood': {
+        // 2026-09-06 #11：资源格改为把「木材」以卡牌形式入包（可拖动/点击）
+        const card = SDT.Cards.all().find(c => c.id === 'tt-wood');
+        const cnt = def.n || 1;
+        openPickupPage('wood', `木材卡 ×${cnt}`, () => {
+          for (let i = 0; i < cnt && card; i++) game.grantCard(card);
+          done();
+        });
+      } break;
       case 'chest': openChestsOnCell([{ kind: 'small' }]); break;   // 物资格：开 1 个小型遗留物资箱
-      case 'rations': openPickupPage('rations', `口粮 +${MAP.items.rations.count || 1}`, () => { game.addItem(MAP.items.rations); done(); }); break;
+      case 'rations': {
+        // 2026-09-06 #11：口粮同样以卡牌形式入包
+        const card = SDT.Cards.all().find(c => c.id === 'tt-rations');
+        const cnt = MAP.items.rations.count || 1;
+        openPickupPage('rations', `口粮卡 ×${cnt}`, () => {
+          for (let i = 0; i < cnt && card; i++) game.grantCard(card);
+          done();
+        });
+      } break;
       case 'key': openPickupPage('key', `钥匙 ×1`, () => { game.addItem(MAP.items.key); done(); }); break;
       case 'fire':
         openFireRest();   // 火堆：回 10 血 + 消耗口袋复原 2 张 + 30% 额外职业卡
@@ -375,7 +410,8 @@ import { eventNarrative } from './narrative.js';
   //           30% 几率额外随机获得 1 张职业卡） ----------
   function openFireRest() {
     game.heal(MAP.rules.fireHeal);
-    UI.log(`[[icon:fire]] 营火休整：清创包扎，回复 <b>${MAP.rules.fireHeal}</b> 点生命`, 'ok');
+    UI.log(`[[icon:fire]] <b>进入火堆</b>：自动回复 <b>${MAP.rules.fireHeal}</b> 点生命（体力不恢复，谨慎消耗）`, 'ok');
+    SDT.Sound.sfx('levelup');
     if (Random.random('card') < MAP.rules.fireClassCardChance) {
       UI.log('[[icon:wood]] 营火余烬里翻出了一张先行者掉落的职业卡！', 'loot');
       grantEventCard(SDT.Cards.randomClassCard());
@@ -409,6 +445,8 @@ import { eventNarrative } from './narrative.js';
     UI.act('restoreOne', (d) => {
       const p = game.usedPocket[+d.i];
       if (!p || left <= 0) return;
+      // 2026-09-06 #18：背包满时不能复原
+      if (usedSlots() >= bagCap()) { UI.log(`[[icon:bag]] 背包已满（${usedSlots()}/${bagCap()}），无法复原`, 'warn'); SDT.Sound.sfx('deny'); return; }
       const card = p.card;
       p.count--;
       if (p.count <= 0) game.usedPocket.splice(+d.i, 1);
@@ -686,6 +724,20 @@ import { eventNarrative } from './narrative.js';
         nodeOpt('stayHere', '留下', '留在当前格子，稍后再决定'),
     });
     UI.act('enterAltar', () => {
+      // 2026-09-06 #27：BOSS 牌库需 15 张，无法准备 → 被赶出祭坛退回上一格
+      const selectable = game.ownedCards.filter(o => !['道具', '资源', '事件', '生物'].includes(o.card.type) && o.card.name !== '初始攻击').length
+        + Math.min(game.ownedCards.filter(o => o.card.name === '初始攻击').length, MAP.rules.starterSha);
+      if (selectable < MAP.rules.bossDeckSize) {
+        UI.log(`[[icon:crystal]] 可用卡牌不足 <b>${MAP.rules.bossDeckSize}</b> 张（现有 ${selectable}），无法挑战污染核心——被赶出了祭坛`, 'warn');
+        SDT.Sound.sfx('error');
+        game.layerIdx = game.layerIdx;   // 保持当前层
+        game.trackPos = Math.max(0, game.trackPos - 1);
+        game.pos = cellCenter(game.layerIdx, game.trackPos);
+        game.state = 'idle';
+        saveGame();
+        UI.refresh(game);
+        return;
+      }
       game.altarFrom = { li: game.layerIdx, idx: game.trackPos, pair: altarE.pair };
       game.pos = { ...game.centerPos[0] };   // 中央祭坛结点
       UI.hideOverlay();
@@ -695,6 +747,42 @@ import { eventNarrative } from './narrative.js';
     UI.act('doorShop', () => openShop());
     UI.act('stayHere', () => { UI.hideOverlay(); game.state = 'idle'; UI.refresh(game); });
     UI.refresh(game);
+  }
+
+  // 背包献祭选卡器（2026-09-06 #26）：从背包选 n 张卡，确认后消耗并回调
+  function openBagSacrifice(n, done) {
+    game.state = 'modal';
+    const sel = new Set();
+    const render = () => {
+      const rows = game.ownedCards.map(o => `
+        <button class="pk-row sac-row${sel.has(o.uid) ? ' sac-sel' : ''}" data-act="sacPick" data-uid="${escAttr(o.uid)}">
+          <span>[[icon:cards]] <b>${esc(o.card.name)}</b>${o.card.cost != null ? ` · ${o.card.cost} 费` : ''}</span>
+          <span>${sel.has(o.uid) ? '[[icon:cross]] 已选' : ''}</span>
+        </button>`).join('');
+      UI.showOverlay('[[icon:crystal]] 选择要献祭的卡牌', `
+        <p class="ov-note">选择 <b>${n}</b> 张卡牌献祭（已选 <b>${sel.size}</b>）</p>
+        <div class="sac-list">${rows}</div>
+        <div class="scene-ops">
+          <button class="ov-btn ok" data-act="sacConfirm" ${sel.size !== n ? 'disabled' : ''}>[[icon:crystal]] 确认献祭</button>
+          <button class="ov-btn" data-act="sacCancel">[[icon:exit]] 取消</button>
+        </div>`);
+    };
+    UI.act('sacPick', (d) => {
+      const o = game.ownedCards.find(x => x.uid === d.uid);
+      if (!o) return;
+      if (sel.has(o.uid)) sel.delete(o.uid);
+      else if (sel.size < n) sel.add(o.uid);
+      Sfx.tick();
+      render();
+    });
+    UI.act('sacCancel', () => { UI.hideOverlay(); openAltarModal(); });
+    UI.act('sacConfirm', () => {
+      const chosen = game.ownedCards.filter(o => sel.has(o.uid));
+      game.ownedCards = game.ownedCards.filter(o => !sel.has(o.uid));
+      UI.hideOverlay();
+      done(chosen);
+    });
+    render();
   }
 
   function openAltarModal() {
@@ -711,7 +799,11 @@ import { eventNarrative } from './narrative.js';
     nodeShell({
       tone: 'altar', icon: '[[icon:crystal]]', title: '污染核心 · 变异巢穴',
       sub: `选择挑战的 BOSS（BOSS战使用过的卡牌不会消耗${eliteTip}）`,
-      body: btns + nodeOpt('leaveAltar', '撤离污染区', '退回入口格，从长计议'),
+      body: btns +
+        nodeOpt('altarSacrificeLegend', '献祭 3 张卡牌', '消耗背包中 3 张卡牌，随机获取 1 张传说卡') +
+        nodeOpt('altarSacrificeHero', '献祭 5 张卡牌', '消耗背包中 5 张卡牌，获得 1 张本职业英雄卡') +
+        nodeOpt('altarRestore3', '复原消耗卡', '从消耗口袋中选择 3 张卡牌复原回背包') +
+        nodeOpt('leaveAltar', '撤离污染区', '退回入口格，从长计议'),
     });
     UI.act('fightBoss', (d) => {
       const b = MAP.altar.bosses[+d.i];
@@ -727,6 +819,33 @@ import { eventNarrative } from './narrative.js';
       game.state = 'idle';
       UI.log('退出污染核心，回到入口格', 'dim');
       UI.refresh(game);
+    });
+    // 2026-09-06 #26：献祭换卡与消耗卡复原
+    UI.act('altarSacrificeLegend', () => {
+      openBagSacrifice(3, (chosen) => {
+        const pool = SDT.Cards.all().filter(c => c.rarity === '传说' && SDT.Cards.isRandomObtainable(c));
+        const card = pool.length ? pick(pool) : null;
+        if (card) game.grantCard(card);
+        UI.log(`[[icon:crystal]] 献祭 ${chosen.map(o => `【${esc(o.card.name)}】`).join('')}，祭坛回赠传说卡【<b>${esc(card ? card.name : '???')}</b>】`, 'loot');
+        saveGame();
+        openAltarModal();
+      });
+    });
+    UI.act('altarSacrificeHero', () => {
+      openBagSacrifice(5, (chosen) => {
+        const pool = SDT.Cards.classPool(game.myClass).filter(c => c.type === '英雄卡');
+        const card = pool.length ? pick(pool) : null;
+        if (card) game.grantCard(card);
+        UI.log(`[[icon:crystal]] 献祭 ${chosen.map(o => `【${esc(o.card.name)}】`).join('')}，祭坛回赠本职业英雄卡【<b>${esc(card ? card.name : '???')}</b>】`, 'loot');
+        saveGame();
+        openAltarModal();
+      });
+    });
+    UI.act('altarRestore3', () => {
+      openPocketRestore(3, () => {
+        saveGame();
+        openAltarModal();
+      });
     });
     UI.refresh(game);
   }
@@ -757,6 +876,15 @@ import { eventNarrative } from './narrative.js';
   let extractLeft = null;   // 待整理的卡牌堆 [{card, count}]（撤离整理页暂存）
 
   function doExtract() {
+    // 体力系统（2026-09-06 #29）：体力为 0 时撤离失败
+    if ((game.stamina == null ? MAP.rules.staminaMax : game.stamina) <= 0) {
+      UI.log('[[icon:hourglass]] <b>体力耗尽</b>——你瘫倒在撤离信标旁，撤离失败！', 'warn');
+      SDT.Sound.sfx('error');
+      UI.hideOverlay();
+      game.state = 'idle';
+      UI.refresh(game);
+      return;
+    }
     syncPlayTime();
     game.state = 'done';
     game.runActive = false;

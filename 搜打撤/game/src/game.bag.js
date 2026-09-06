@@ -5,6 +5,7 @@ import { esc } from './shared.js';
 import { MAP, bagCap, safeCap } from './game.session.js';
 import { escAttr } from './shared.js';
 import { cardStacks, doDeath, game, newUid, safeUsed, saveGame, usedSlots } from './game.session.js';
+import { Random } from './random.js';
 import { openAltarModal, showRunTransition } from './game.run.js';
 import { _set_cardPageOpen } from './game.cardslib.js';
 
@@ -53,6 +54,50 @@ import { _set_cardPageOpen } from './game.cardslib.js';
       game.ownedCards.splice(i, 1);
       UI.log(`使用资源卡【<b>${esc(card.name)}</b>】`, 'sys');
       game.addItem(MAP.items.wood, +wm[1]);
+      showBackpack(true);
+      return;
+    }
+    // 2026-09-06 #10：金色令牌（抽取 1 张传说卡 → 背包中使用改为直接获得传说卡）
+    if (card.id === 'tt-token-gold' || /抽取\s*1\s*张传说卡/.test(desc)) {
+      const pool = SDT.Cards.all().filter(c => c.rarity === '传说' && SDT.Cards.isRandomObtainable(c));
+      if (!pool.length) { UI.log('卡牌库中没有可获得的传说卡', 'warn'); return; }
+      game.ownedCards.splice(i, 1);
+      const got = pool[Math.floor(Random.random('loot') * pool.length)];
+      game.ownedCards.push({ uid: newUid(), card: { ...got } });
+      UI.log(`[[icon:sparkles]] 使用【<b>${esc(card.name)}</b>】：获得传说卡【<b>${esc(got.name)}</b>】`, 'loot');
+      saveGame();
+      showBackpack(true);
+      return;
+    }
+    // 2026-09-06 #10：彩色令牌（觉醒）→ 获得本职业英雄卡
+    if (card.id === 'tt-token-color' || /觉醒/.test(desc)) {
+      const pool = SDT.Cards.classPool(game.myClass).filter(c => c.type === '英雄卡');
+      if (!pool.length) { UI.log('该职业没有可觉醒的英雄卡', 'warn'); return; }
+      game.ownedCards.splice(i, 1);
+      const got = pool[Math.floor(Random.random('loot') * pool.length)];
+      game.ownedCards.push({ uid: newUid(), card: { ...got } });
+      UI.log(`[[icon:sparkles]] 使用【<b>${esc(card.name)}</b>】觉醒：获得本职业英雄卡【<b>${esc(got.name)}</b>】`, 'loot');
+      saveGame();
+      showBackpack(true);
+      return;
+    }
+    // 2026-09-06 #15：神秘药水（随机神秘效果）→ 背包中随机三选一
+    if (card.id === 'tt3-mystery-potion' || /随机神秘效果/.test(desc)) {
+      game.ownedCards.splice(i, 1);
+      const r = Random.random('loot');
+      if (r < 1 / 3) {
+        game.heal(8);
+        UI.log('[[icon:flask]] 神秘药水：回复 <b>8</b> 点生命', 'ok');
+      } else if (r < 2 / 3) {
+        game.coins += 3;
+        UI.log('[[icon:flask]] 神秘药水：获得 <b>3</b> 币', 'coin');
+      } else {
+        const pool = SDT.Cards.all().filter(c => SDT.Cards.isRandomObtainable(c));
+        const got = pool.length ? pool[Math.floor(Random.random('loot') * pool.length)] : null;
+        if (got) game.ownedCards.push({ uid: newUid(), card: { ...got } });
+        UI.log(`[[icon:flask]] 神秘药水：随机获得【<b>${esc(got ? got.name : '???')}</b>】`, 'loot');
+      }
+      saveGame();
       showBackpack(true);
       return;
     }
@@ -167,12 +212,27 @@ import { _set_cardPageOpen } from './game.cardslib.js';
       </div>
       <div class="ov-btns">
         ${usable ? '<button class="ov-btn ok" data-act="useDetailCard">使用这张道具</button>' : ''}
+        ${o.card.id === 'tt-token-gold' && game.ownedCards.filter(x => x.card.id === 'tt-token-gold').length >= 3
+          ? '<button class="ov-btn ok" data-act="craftColorToken">合成彩色令牌（3 金 → 1 彩）</button>' : ''}
         ${fromSafe ? '<button class="ov-btn" data-act="detailFromSafe">移回背包</button>' :
           (o.card.id === SDT.Cards.SHA.id ? '' : '<button class="ov-btn" data-act="detailToSafe">移入安全格</button>')}
         ${o.card.id === SDT.Cards.SHA.id ? '' : '<button class="ov-btn danger" data-act="detailDiscard">丢弃 1 张</button>'}
         <button class="ov-btn" data-act="detailBack">返回背包</button>
       </div>`, true);
     UI.act('useDetailCard', () => useOwnedCard(o.uid));
+    UI.act('craftColorToken', () => {
+      // 2026-09-06 #10：3 张金色令牌合成 1 张彩色令牌
+      const golds = game.ownedCards.filter(x => x.card.id === 'tt-token-gold').slice(0, 3);
+      if (golds.length < 3) { UI.log('金色令牌不足 3 张，无法合成', 'warn'); return; }
+      const goldIds = new Set(golds.map(g => g.uid));
+      game.ownedCards = game.ownedCards.filter(x => !goldIds.has(x.uid));
+      const color = SDT.Cards.all().find(c => c.id === 'tt-token-color');
+      if (color) game.ownedCards.push({ uid: newUid(), card: { ...color } });
+      UI.log('[[icon:sparkles]] 合成成功：3 张金色令牌 → 1 张<b>彩色令牌</b>', 'loot');
+      saveGame();
+      backpackOpen = true;
+      showBackpack(true);
+    });
     UI.act('detailFromSafe', () => moveStackSafe(name, false));
     UI.act('detailToSafe', () => moveStackSafe(name, true));
     UI.act('detailDiscard', () => showDiscardConfirm(name, fromSafe));
@@ -181,6 +241,11 @@ import { _set_cardPageOpen } from './game.cardslib.js';
 
   function showBackpack(refreshOnly) {
     if (!game.runActive) return;   // v0.21：只有对局中才有背包（基地/标题界面不响应 B）
+    // 2026-09-06 #22：开箱流程进行中打开背包会吞掉后续奖励——直接拦截
+    if (SDT.Chests && SDT.Chests.isOpen && SDT.Chests.isOpen()) {
+      UI.log('[[icon:lock]] 开箱进行中，先把宝箱开完再打开背包', 'warn');
+      return;
+    }
     if (game.battleActive || game.bossCleanupPending) {
       UI.log(game.battleActive
         ? '[[icon:lock]] 战斗中无法打开背包；请使用手牌完成战斗或撤退'

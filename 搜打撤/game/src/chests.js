@@ -167,6 +167,6 @@ import { Random } from './random.js';
   }
 
   window.SDT = window.SDT || {};
-  window.SDT.Chests = { rollDrops, dropText, open, rollContents };
+  window.SDT.Chests = { rollDrops, dropText, open, rollContents, isOpen: () => !!(cur || queue.length) };
 
 export { G, SDT, UI, render };

@@ -152,12 +152,16 @@ SDT.MAP = {
     dragon:     { id: 'dragon',     name: '巨兽「荒渊」', atk: 7, hp: 40, elite: true, behavior: 'dragon' },
   },
   // 各环层遭遇表：battle 格随机抽一种遭遇（1-3 只）；elite 为稀有强敌遭遇
+  // 2026-09-06 #6-8 遭遇表定版（设计者口径，敌人 = 攻-血）：
+  //   外层 2-4 只：荒民打手4-4 / 废土猎手5-3 / 掠夺者3-3 / 机车掠袭者5-6（含掠夺者时 ≥3 只）
+  //   中层 2-3 只：畸变投掷者6-4 / 畸变屠夫4-7 / 畸变狼骑兵7-6
+  //   内层 1-3 只：灼热异变体10-7 / 腐蚀异变体7-10 / 滋生异变体5-12；巨兽「荒渊」7-40 固定单体（25% 概率遭遇）
   encounters: [
-    { pool: ['infantry', 'archer', 'bandit'], size: [1, 2], risk: '低', strategy: '试探：单体攻击，适合熟悉手牌与攒资源' },                       // 外圈
-    { pool: ['cavalry', 'orc_jav', 'orc_axe', 'wolf_rider'], size: [1, 2], risk: '中', strategy: '压迫：高攻与厚血混编，优先处理投矛手' },        // 中圈
-    { pool: ['fire_el', 'water_el', 'grass_el'], size: [2, 3],                      // 内圈
+    { pool: ['infantry', 'archer', 'bandit', 'cavalry'], size: [2, 4], risk: '低', strategy: '试探：单体攻击，适合熟悉手牌与攒资源；遇掠夺者必成群（≥3）' },
+    { pool: ['orc_jav', 'orc_axe', 'wolf_rider'], size: [2, 3], risk: '中', strategy: '压迫：高攻与厚血混编，优先处理投矛手' },
+    { pool: ['fire_el', 'water_el', 'grass_el'], size: [1, 3],
       risk: '高', strategy: '变阵：多敌人持续施压，注意元素的不同攻防节奏',
-      elite: { pool: ['dragon'], size: [1, 1], chance: 0.25, strategy: '精英预警：高生命单体，撤退仍可保住已结算的战利品' } },
+      elite: { pool: ['dragon'], size: [1, 1], chance: 0.25, strategy: '精英预警：巨兽「荒渊」固定单体，撤退仍可保住已结算的战利品' } },
   ],
   enemyPool: [   // 兼容旧引用（事件战等）：统一指向新表
     { id: 'bandit', name: '掠夺者', hp: 3, atk: 3 },

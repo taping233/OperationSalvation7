@@ -334,6 +334,7 @@ function configureGameRuntime(hooks) {
         eventLog: game.eventLog || [],
         discovered: [...game.discoveredPairs],
         diceHistory: game.diceHistory, elapsed: game.elapsed,
+        stamina: game.stamina == null ? MAP.rules.staminaMax : game.stamina,
         slot: activeSlot, savedAt: Date.now(),
       });
   }
@@ -389,6 +390,7 @@ function configureGameRuntime(hooks) {
     game.discoveredPairs = new Set(s.discovered || []);
     game.diceHistory = s.diceHistory || [];
     game.elapsed = s.elapsed || 0;
+    game.stamina = typeof s.stamina === 'number' ? s.stamina : MAP.rules.staminaMax;   // 旧档无体力字段 → 回满
     // 旧存档只有本局 elapsed：首次读取时把它安全迁入累计游玩时间。
     if ((SDT.Base.data.stats.playSeconds || 0) < game.elapsed) {
       SDT.Base.data.stats.playSeconds = game.elapsed;
@@ -446,6 +448,7 @@ function configureGameRuntime(hooks) {
     setLobby(false);          // 进入棋盘：恢复左侧栏
     game.inventory = [];
     game.ownedCards = [];
+    game.stamina = MAP.rules.staminaMax;   // 体力系统（2026-09-06 #29）
     game.cardOrder = [];
     game.usedPocket = [];
     game.eventLog = [];

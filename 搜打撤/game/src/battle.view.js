@@ -24,6 +24,16 @@ import { BattleSession, commands, configureBattleRenderer, getSnapshot, viewApi 
   const toggleInfusePick = commands.selectInfusion;
   const closeGrave = commands.closeGrave;
   const selectDeckCard = commands.selectDeckCard;
+  const pickHandSelect = commands.pickHandSelect;
+  let handRow = 0;   // 手牌行号（2026-09-06 #34：>8 张分行）
+  // 双击放大（2026-09-06 #12）：事件委托，双击手牌卡放大/还原
+  document.addEventListener('dblclick', (e) => {
+    const el = e.target && e.target.closest && e.target.closest('.sts-hand .bt-card');
+    if (!el) return;
+    const was = el.classList.contains('zoomed');
+    document.querySelectorAll('.sts-hand .bt-card.zoomed').forEach(x => x.classList.remove('zoomed'));
+    if (!was) el.classList.add('zoomed');
+  });
   const confirmDeck = commands.confirmDeck;
   const cancelDeck = commands.cancelDeck;
 
@@ -88,12 +98,26 @@ import { BattleSession, commands, configureBattleRenderer, getSnapshot, viewApi 
   function render(snapshot = getSnapshot()) {
     const {
       mode, turn, energy, maxEnergy, busy, opts, player, pdef, pstat,
-      foes, hand, drawPile, discard, grave, infusing, discovering,
+      foes, hand, drawPile, discard, grave, infusing, discovering, handSelecting,
       pendingTarget, pendingHint, viewingGrave, dreadShown, deckSelection,
     } = snapshot;
     if (aim) cancelAim();   // 重渲染时中止进行中的指向（DOM 将重建）
     if (deckSelection) { renderDeckSelection(snapshot); return; }
     if (viewingGrave) { renderGrave(snapshot); return; }
+    if (handSelecting) {
+      // 2026-09-06 #24/#25：从手牌选择卡牌施放/消耗的通用弹层
+      const pool = hand.map(findCard).filter(o => o && (!handSelecting.type || o.card.type === handSelecting.type));
+      const optsHTML = pool.map(o => `
+        <div class="bt-card" data-act="btPickHand" data-uid="${o.uid}" title="点击选择">
+          ${SDT.Cards.cardHTML(o.card, 'sm')}
+        </div>`).join('');
+      UI.showOverlay(`${opts.isBoss ? '[[icon:demon]] BOSS战' : '[[icon:swords]] 遭遇战'} · 第 ${turn} 回合 · [[icon:cards]] 选择手牌`, `
+        <p class="ov-stats">从手牌中选择 <b>${handSelecting.n}</b> 张${handSelecting.type ? `<b>${handSelecting.type}</b>` : '卡牌'}${handSelecting.act === 'play' ? '打出（不扣费）' : '消耗'}</p>
+        <div class="bt-hand">${optsHTML || '<p class="ov-empty">手牌中没有符合条件的卡牌</p>'}</div>`, true);
+      UI.act('btPickHand', (d) => pickHandSelect(d.uid));
+      UI.refresh(SDT.game);
+      return;
+    }
     if (discovering) {
       const optsHTML = discovering.options.map((c, i) => `
         <div class="bt-card" data-act="btDiscover" data-i="${i}" title="点击置入手牌">
@@ -121,9 +145,15 @@ import { BattleSession, commands, configureBattleRenderer, getSnapshot, viewApi 
       const infEntry = findCard(infusing.uid);
       if (infEntry) groups.push({ card: infEntry.card, uids: [infusing.uid], self: true });
     } else cards.forEach(pushGroup);
-    const N = groups.length;
+    // 2026-09-06 #34：手牌 >8 张分行，只显示当前行，切行按钮切换
+    const ROW_MAX = 8;
+    const rows = [];
+    for (let ri = 0; ri < groups.length; ri += ROW_MAX) rows.push(groups.slice(ri, ri + ROW_MAX));
+    if (handRow >= rows.length) handRow = 0;
+    const shownGroups = rows.length > 1 ? rows[handRow] : groups;
+    const N = shownGroups.length;
     const handHTML = N
-      ? groups.map((g, i) => {
+      ? shownGroups.map((g, i) => {
           const uid = g.uids[0];
           const isSelf = infusingNow && g.self;
           const pickedN = infusingNow ? g.uids.filter(u => infusing.picked.includes(u)).length : 0;
@@ -241,6 +271,7 @@ import { BattleSession, commands, configureBattleRenderer, getSnapshot, viewApi 
           ${drawPileHTML}
         </div>
         <div class="bt-hand sts-hand" title="${escAttr(tip)}">${handHTML}</div>
+        ${rows.length > 1 ? `<button class="mini-btn bt-row-switch" data-act="btSwitchRow" title="切换手牌行">⇄ ${handRow + 1} / ${rows.length} 行</button>` : ''}
         <div class="sts-hud-r">
           ${pilesHTML}
           <button class="ov-btn ghost" data-act="btFlee" ${busy || infusingNow ? 'disabled' : ''}>[[icon:runner]] 撤退</button>
@@ -262,6 +293,7 @@ import { BattleSession, commands, configureBattleRenderer, getSnapshot, viewApi 
     UI.act('btInfuseGo', confirmInfuse);
     UI.act('btInfuseCancel', cancelInfuse);
     UI.act('btPickCancel', cancelPendingTarget);
+    UI.act('btSwitchRow', () => { handRow = (handRow + 1) % rows.length; render(); });
     // —— 指向施法（炉石/杀戮尖塔式）：按住指向卡轻微拎起，弯曲箭头跟随指针 ——
     //    指向敌人 = 红色箭头，指向自己（立绘）= 绿色箭头；松手在目标身上即打出。
     //    轻点卡牌 = 仅锁定（提示条引导），与既有交互兼容。
@@ -302,7 +334,9 @@ import { BattleSession, commands, configureBattleRenderer, getSnapshot, viewApi 
     if (!list.length) return;
     const ov = UI.el.overlay;
     const ovR = ov.getBoundingClientRect();
-    list.forEach(f => {
+    const perUnit = {};   // #19：同单位多段伤害错峰呈现
+    list.forEach((f, listIdx) => {
+      const fire = () => {
       const isSelf = f.unit === 'self';
       const figEl = isSelf
         ? body.querySelector('#btSelf .sts-figure')
@@ -333,6 +367,11 @@ import { BattleSession, commands, configureBattleRenderer, getSnapshot, viewApi 
       ov.appendChild(span);
       span.addEventListener('animationend', () => span.remove(), { once: true });
       setTimeout(() => span.remove(), 1400);   // 兜底：animationend 偶尔不触发时清掉不可见残骸
+      };
+      const uk = f.unit == null ? 'self' : f.unit;
+      perUnit[uk] = (perUnit[uk] || 0);
+      const delay = perUnit[uk]++ * 320;   // 同单位每多一段 +320ms
+      if (delay) setTimeout(fire, delay); else fire();
     });
   }
   // 全屏受击红闪（径向暗角，600ms 淡出）

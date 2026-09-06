@@ -1,6 +1,8 @@
 import { Random } from './random.js';
 import { esc } from './shared.js';
 
+let shopOnClose = null;
+
 function createShopController({
   UI,
   SDT,
@@ -49,11 +51,12 @@ function createShopController({
     return slots;
   }
 
-  function openShop() {
+  function openShop(onClose) {
     if (!['idle', 'moving', 'modal'].includes(game.state)) return;
     game.state = 'modal';
     setCardPageOpen(false);
     game.shopStock = generateShopStock();
+    shopOnClose = onClose || null;
     renderShop();
   }
 
@@ -141,7 +144,9 @@ function createShopController({
     UI.act('closeShop', () => {
       UI.hideOverlay();
       game.state = 'idle';
-      UI.refresh(game);
+      const cb = shopOnClose; shopOnClose = null;
+      // 2026-09-06 #20：商队逛完回到节点选择界面（环间门 / 祭坛入口）
+      if (cb) cb(); else UI.refresh(game);
     });
     UI.refresh(game);
   }
