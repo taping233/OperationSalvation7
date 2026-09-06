@@ -191,3 +191,19 @@ body:has(#overlay.opaque:not([hidden])) #sidebar{visibility:hidden}
 .svg-ic{width:1.15em;height:1.15em;vertical-align:-0.18em}
 /* 返回 BACK 按钮：做小（帮助/成就页） */
 .back-sm{padding:7px 18px;font-size:12px;min-width:0;width:auto;justify-self:center}
+
+/* ===== 2026-09-06 留言批次三（15:26-15:28） ===== */
+/* 标题「冬日猜想」四字右移错开 */
+.cn-title em.art-cn{display:inline-block;margin-left:.62em}
+/* 设置 / 收藏图鉴圆钮下移 */
+.ak-lib{top:45%}
+.ak-set{top:59%}
+/* 制作坊舞台区下边框 */
+.cdes-stage{border-bottom:1px solid #68808b}
+/* 卡牌库重排版（2026-09-06 留言）：卡片太挤 → 紧凑卡面只留卡面+名字，
+   完整卡面与描述看右侧悬停预览（点开具体看）；lib = 库列表专属紧凑卡 */
+.hs-card.lib{height:auto;min-height:0}
+.hs-card.lib .hsc-desc,.hs-card.lib .hsc-type,.hs-card.lib .hsc-kw{display:none}
+.hs-card.lib .hsc-art{height:5.8em}
+/* 滚动性能：视口外的卡条整体跳过布局/绘制（242 张全量卡面的滚动卡顿源） */
+.lib-item{content-visibility:auto;contain-intrinsic-size:auto 224px}

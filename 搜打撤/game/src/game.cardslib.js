@@ -94,7 +94,7 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
     }
     return cards.map(c => `
       <div class="lib-item${c.id === lastSavedId ? ' saved' : ''}">
-        <div class="lib-cardwrap" data-act="editCard" data-card="${c.id}" title="点击编辑">${cardHTML(c)}</div>
+        <div class="lib-cardwrap" data-act="editCard" data-card="${c.id}" title="点击编辑 · 悬停查看完整卡面与描述">${cardHTML(c, 'lib')}</div>
         <div class="lib-actions">
           <button class="hs-btn sm" data-act="editCard" data-id="${c.id}">编辑</button>
           <button class="hs-btn sm danger" data-act="delCard" data-id="${c.id}">删除</button>
@@ -134,7 +134,9 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
         </div>
       </div>`, 'page');
     lastSavedId = null;
-    lastPreviewId = null;   // 预览窗格已随页面重置为空，悬停去重标记一并复位
+    // 注意：lastPreviewId 在下方悬停处理段声明（函数内 let），此处不可提前赋值——
+    // 昨晚"悬停去重"改动曾在此赋值触发 TDZ ReferenceError，导致后续全部 UI.act
+    // 注册被跳过，卡牌库整页按钮（含右上关闭钮）无响应（老板留言：退出点不动）。
     UI.act('closeCardPage', closeLibPage);
     UI.act('newCard', () => openCardDesigner(null));
     UI.act('libTab', (d) => { libFilter.tab = d.t; renderCardLibrary(); });
@@ -168,16 +170,24 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
       if (grid) grid.innerHTML = libGridHTML();
     };
     // 悬停大图预览（炉石式）。mouseover 会因子元素冒泡重复触发：
-    // 记住上一张预览的卡，扫过同一张卡时不再整页重建预览 DOM / 重复播悬停音
-    // （与 sound.js 全局悬停音的 lastHoverBtn 去重同款做法）
+    // 记住上一张预览的卡，扫过同一张卡时不再整页重建预览 DOM / 重复播悬停音；
+    // 2026-09-06 留言（库页滑动很卡）：预览大图的解码/重建在主线程，滚动扫过时
+    // 再加 90ms 去抖——只有停留的卡才真正重建，滚动风暴中预览零重建。
     let lastPreviewId = null;
+    let previewTimer = null;
     UI._hoverHandler = (e) => {
       const w = e.target.closest ? e.target.closest('[data-card]') : null;
-      if (!w || w.dataset.card === lastPreviewId) return;
-      lastPreviewId = w.dataset.card;
-      const card = libCards.find(c => c.id === w.dataset.card);
-      const pv = document.getElementById('libPreview');
-      if (card && pv) { pv.innerHTML = libPreviewHTML(card); Sfx.tick(); }
+      const id = w ? w.dataset.card : null;
+      if (id === lastPreviewId) return;
+      lastPreviewId = id;
+      if (previewTimer) clearTimeout(previewTimer);
+      if (!id) return;   // 移出卡面：保留当前预览不动
+      previewTimer = setTimeout(() => {
+        previewTimer = null;
+        const card = libCards.find(c => c.id === id);
+        const pv = document.getElementById('libPreview');
+        if (card && pv) { pv.innerHTML = libPreviewHTML(card); Sfx.tick(); }
+      }, 90);
     };
     UI.refresh(game);
   }
