@@ -383,6 +383,10 @@ import { _set_cardPageOpen } from './game.cardslib.js';
       bagTiltBound = true;
       document.addEventListener('mousemove', (e) => {
         if (bagDrag || UI.el.overlay.hidden) return;
+        // 卡槽只存在于背包页（mode==='bagpage' 时 overlay 带 bag-full 类）：
+        // 其他弹层（基地/商店/战斗/撤离页…）打开时直接跳出，
+        // 避免每次鼠标移动都白跑一轮 querySelectorAll + closest。
+        if (!UI.el.overlay.classList.contains('bag-full')) return;
         const root = UI.el.ovBody;
         root.querySelectorAll('.card-slot.tilted, .safe-slot.tilted').forEach(c => {
           c.classList.remove('tilted');
@@ -459,6 +463,12 @@ import { _set_cardPageOpen } from './game.cardslib.js';
     return { kind: 'area', el: cell };   // 空格 / 物资格 = 放到卡牌区末尾
   }
 
+  // 当前高亮的落点格：pointermove 是高频路径，用追踪变量替代每次全树查询 .drop-here
+  let bagDropMarked = null;
+  function clearBagDropMark() {
+    if (bagDropMarked) { bagDropMarked.classList.remove('drop-here'); bagDropMarked = null; }
+  }
+
   function onBagDragMove(e) {
     if (!bagDrag) return;
     const dx = e.clientX - bagDrag.lx, dy = e.clientY - bagDrag.ly;
@@ -478,13 +488,15 @@ import { _set_cardPageOpen } from './game.cardslib.js';
       bagDrag.card3d.style.transform =
         `translate(-50%, -62%) rotateX(${rx.toFixed(1)}deg) rotateY(${ry.toFixed(1)}deg) scale(1.07)`;
     }
-    document.querySelectorAll('#ovBody .drop-here').forEach(el => el.classList.remove('drop-here'));
+    clearBagDropMark();
     const t = bagDropTarget(e.clientX, e.clientY, bagDrag.cell);
-    if (t && t.el) t.el.classList.add('drop-here');
+    if (t && t.el) { t.el.classList.add('drop-here'); bagDropMarked = t.el; }
   }
 
   function onBagDragUp(e) {
     window.removeEventListener('pointermove', onBagDragMove);
+    clearBagDropMark();
+    // 兜底清一次（战斗悬停等也用 drop-here 类；一次性查询开销可忽略）
     document.querySelectorAll('#ovBody .drop-here').forEach(el => el.classList.remove('drop-here'));
     const d = bagDrag;
     bagDrag = null;

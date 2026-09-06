@@ -24,9 +24,14 @@ import { eventNarrative } from './narrative.js';
     setCardPageOpen: _set_cardPageOpen,
     usedSlots,
   });
+  // 掷骰序号：每次 roll 自增。作用：作废旧一掷的 5s 看门狗——连续快掷时，
+  // 旧看门狗醒来会命中新一掷的 rolling 窗口（state==='rolling' 检查挡不住它），
+  // 叠加一次 moveBy 造成两条步进链并发（棋子乱跳 + 落格双重结算 + 双重存档）。
+  let rollSeq = 0;
   function roll() {
     if (game.state !== 'idle') return;
     game.state = 'rolling';
+    const seq = ++rollSeq;
     SDT.Sound.sfx('dice');
     // 体力系统（2026-09-06）：每掷一次骰子 -1，≤10 警告，0 时无法撤离
     if (game.stamina == null) game.stamina = MAP.rules.staminaMax;
@@ -49,8 +54,9 @@ import { eventNarrative } from './narrative.js';
       moveBy(n);
     }, 640);
     // 防卡死看门狗（2026-09-06 #30）：动画中断导致停留在 rolling 时强制续行
+    // （seq 检查：只认自己这一掷，已被新一掷作废的旧看门狗直接退场）
     setTimeout(() => {
-      if (game.state === 'rolling') {
+      if (game.state === 'rolling' && seq === rollSeq) {
         UI.el.diceFace.classList.remove('rolling');
         moveBy(n);
       }

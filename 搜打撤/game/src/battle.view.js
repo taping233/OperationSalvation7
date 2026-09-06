@@ -225,6 +225,7 @@ import { BattleSession, commands, configureBattleRenderer, getSnapshot, viewApi 
     // —— 我方单位（左下站立；治疗/净化/护盾类卡牌的拖放目标） ——
     const selfPct = Math.max(0, player.hp / player.maxHp * 100);
     const selfLock = pendingTarget && lockSide === 'self';
+    const selfChips = curseChips(pstat.status);   // 只构建一次（原来自条件+输出各调一次）
     const selfHTML = `
       <div class="sts-unit sts-me${selfLock ? ' can-target' : ''}" id="btSelf"
         title="你自己——治疗 / 净化 / 护盾 / 格挡类卡牌拖到这里打出">
@@ -233,13 +234,14 @@ import { BattleSession, commands, configureBattleRenderer, getSnapshot, viewApi 
           <b>${esc(characterName(player.characterId || player.myClass))}</b><span class="sts-you">你</span>
           <div class="bt-hpwrap sts-hp"><i style="width:${selfPct.toFixed(1)}%"></i><span>${Math.max(0, player.hp)}/${player.maxHp}</span></div>
           <div class="sts-stats">[[icon:swords]] ${player.atk}${pdef.shield ? ' · [[icon:shield]] 盾 ' + pdef.shield : ''}${pdef.armor ? ' · [[icon:plate]] 甲 ' + pdef.armor : ''}${pdef.guard ? ' · 格挡中' : ''}</div>
-          ${curseChips(pstat.status) ? `<div class="sts-chips">${curseChips(pstat.status)}</div>` : ''}
+          ${selfChips ? `<div class="sts-chips">${selfChips}</div>` : ''}
         </div>
       </div>`;
     // —— 敌方单位（右下站立横排；意图气泡在头顶；词缀角标；免伤高亮） ——
     const foesHTML = foes.map((f, idx) => {
       const aff = f.affix && AFFIX_META[f.affix];
       const immune = aegisBlocked(f);
+      const chips = curseChips(f.status);   // 只构建一次（原来自条件+输出各调一次）
       return `<div class="sts-unit sts-foe bt-foe${opts.isBoss || f.affix ? ' is-boss' : ''}${f.dead ? ' dead' : ''}${immune ? ' aegis' : ''}${pendingTarget && lockSide === 'enemy' && !f.dead ? ' can-target' : ''}" data-foe-id="${escAttr(f.id || f.name)}"
           data-eidx="${idx}" title="${aff ? escAttr(aff.name + '：' + aff.desc) : ''}">
           ${!f.dead && f.intent ? `<div class="sts-intent" title="下一回合预告">${f.intent.icon} ${esc(f.intent.label)}${f.intent.damage ? ` · ${f.intent.damage}` : ''}</div>` : ''}
@@ -249,7 +251,7 @@ import { BattleSession, commands, configureBattleRenderer, getSnapshot, viewApi 
             ${aff ? `<span class="bt-affix" title="${escAttr(aff.desc)}">${aff.icon} ${aff.name}</span>` : ''}
             <div class="bt-hpwrap sts-hp"><i style="width:${Math.max(0, f.hp / f.maxHp * 100).toFixed(1)}%"></i><span>${Math.max(0, f.hp)}/${f.maxHp}</span></div>
             <div class="sts-stats">[[icon:swords]] ${f.atk}${f.affix === 'frenzy' ? ' ×2' : ''}${immune ? ' · [[icon:crystal]] 庇幕免伤中' : ''}</div>
-            ${curseChips(f.status) ? `<div class="sts-chips">${curseChips(f.status)}</div>` : ''}
+            ${chips ? `<div class="sts-chips">${chips}</div>` : ''}
           </div>
         </div>`;
     }).join('');
@@ -403,9 +405,10 @@ import { BattleSession, commands, configureBattleRenderer, getSnapshot, viewApi 
     if (s) s.remove();
   }
   // 更新弯曲箭头：Canvas 绘制二次贝塞尔上弓与箭头，避免矢量 DOM 资源。
-  function aimArrowUpdate(x1, y1, x2, y2, color) {
+  // vr 可传入调用方缓存的 overlay rect（拖拽高频路径避免每次 pointermove 强制读布局）
+  function aimArrowUpdate(x1, y1, x2, y2, color, vr) {
     const canvas = aimCanvasEnsure();
-    const vr = UI.el.overlay.getBoundingClientRect();
+    vr = vr || UI.el.overlay.getBoundingClientRect();
     const ratio = Math.max(1, window.devicePixelRatio || 1);
     const width = Math.max(1, Math.round(vr.width));
     const height = Math.max(1, Math.round(vr.height));
@@ -448,14 +451,16 @@ import { BattleSession, commands, configureBattleRenderer, getSnapshot, viewApi 
   }
   // 指针处的有效目标（enemy 卡找活着的敌人 / self 卡找自己的立绘）
   // side 显式传入：endAim 时全局 aim 已清空，不能再依赖它
-  function aimHoverAt(x, y, side) {
+  // snap 可传入指向开始时缓存的快照（见 startAim）——拖拽 pointermove 高频路径
+  // 每次都重建整棵冻结快照是纯浪费；指向期间战斗状态不会变（重渲染会 cancelAim）
+  function aimHoverAt(x, y, side, snap) {
     const elAt = document.elementFromPoint(x, y);
     if (!elAt || !side) return null;
     if (side === 'enemy') {
       const foeEl = elAt.closest('.bt-foe[data-eidx]');
       if (foeEl) {
         const idx = +foeEl.dataset.eidx;
-        const foe = getSnapshot().foes[idx];
+        const foe = (snap || getSnapshot()).foes[idx];
         if (foe && !foe.dead) return { kind: 'enemy', idx, el: foeEl };
       }
       return null;
@@ -480,7 +485,8 @@ import { BattleSession, commands, configureBattleRenderer, getSnapshot, viewApi 
     aimArrowRemove();
   }
   function startAim(e, el) {
-    const { busy, infusing, discovering, energy } = getSnapshot();
+    const snap = getSnapshot();
+    const { busy, infusing, discovering, energy } = snap;
     if (busy || infusing || discovering || aim) return;
     const uid = el.dataset.uid;
     const entry = findCard(uid);
@@ -494,6 +500,7 @@ import { BattleSession, commands, configureBattleRenderer, getSnapshot, viewApi 
       uid, card: entry.card, side, el,
       ax: r.left + r.width / 2 - vr.left, ay: r.top - vr.top + 6,
       sx: e.clientX, sy: e.clientY, moved: false, hover: null,
+      snap, vr,   // 指向期间的快照/overlay rect 缓存：期间战斗状态不会变（重渲染会 cancelAim），pointermove 高频路径直接复用
     };
     el.classList.add('aim-lift');
     SDT.Sound.sfx('hover');
@@ -506,19 +513,19 @@ import { BattleSession, commands, configureBattleRenderer, getSnapshot, viewApi 
     if (!aim) return;
     if (!aim.moved && Math.hypot(e.clientX - aim.sx, e.clientY - aim.sy) < 6) return;
     aim.moved = true;
-    const vr = UI.el.overlay.getBoundingClientRect();
-    const hit = aimHoverAt(e.clientX, e.clientY, aim.side);
+    const vr = aim.vr;   // 指向期间 overlay 尺寸不变（重渲染会 cancelAim），缓存省去每次 move 的布局读取
+    const hit = aimHoverAt(e.clientX, e.clientY, aim.side, aim.snap);
     if (aim.hover && (!hit || hit.el !== aim.hover.el)) aimClearHover();
     let tx = e.clientX - vr.left, ty = e.clientY - vr.top;
     if (hit) {
       const hr = hit.el.getBoundingClientRect();
       tx = hr.left + hr.width / 2 - vr.left;
       ty = hr.top + hr.height / 2 - vr.top;
-      if (hit.kind === 'enemy') { hit.el.classList.add('drag-over'); showFoePreview(hit.el, hit.idx, aim.card); }
+      if (hit.kind === 'enemy') { hit.el.classList.add('drag-over'); showFoePreview(hit.el, hit.idx, aim.card, aim.snap); }
       else hit.el.classList.add('drop-here');
       aim.hover = hit;
     }
-    aimArrowUpdate(aim.ax, aim.ay, tx, ty, AIM_COLOR[hit ? hit.kind : aim.side]);
+    aimArrowUpdate(aim.ax, aim.ay, tx, ty, AIM_COLOR[hit ? hit.kind : aim.side], vr);
   }
   function endAim(e) {
     window.removeEventListener('pointermove', moveAim, true);
@@ -529,7 +536,7 @@ import { BattleSession, commands, configureBattleRenderer, getSnapshot, viewApi 
     if (!a) return;
     const wasMoved = a.moved;
     a.moved = false;
-    const hit = wasMoved ? aimHoverAt(e.clientX, e.clientY, a.side) : null;
+    const hit = wasMoved ? aimHoverAt(e.clientX, e.clientY, a.side, a.snap) : null;
     aimCleanup(a);
     if (wasMoved && hit) {
       aimPlayedAt = Date.now();
@@ -550,9 +557,10 @@ import { BattleSession, commands, configureBattleRenderer, getSnapshot, viewApi 
   }
 
   // ---------- 指向悬停效果预览（松手前暗示打出结果；card = 指向中的卡） ----------
-  function showFoePreview(el, idx, card) {
+  // snap 可传入指向期间缓存的快照（见 startAim），避免拖拽路径反复重建快照
+  function showFoePreview(el, idx, card, snap) {
     if (el.querySelector('.bt-fpreview')) return;   // 已显示则不重建（move 连续触发）
-    const snapshot = getSnapshot();
+    const snapshot = snap || getSnapshot();
     const foe = snapshot.foes[idx];
     const useCard = card || (snapshot.pendingTarget && snapshot.pendingTarget.card) || null;
     if (!foe || foe.dead || !useCard) return;

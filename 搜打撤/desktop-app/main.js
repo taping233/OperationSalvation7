@@ -55,6 +55,7 @@ function createWindow() {
     height: 950,
     minWidth: 1150,
     minHeight: 700,
+    fullscreen: true,
     backgroundColor: '#080b0e',
     title: `搜打撤 · 代号7 v${gameVersion()}`,
     icon: path.join(__dirname, 'app.ico'),
@@ -77,6 +78,10 @@ function createWindow() {
   win.webContents.on('before-input-event', (event, input) => {
     if (input.type === 'keyDown' && input.key === 'F12') {
       win.webContents.toggleDevTools();
+      event.preventDefault();
+    }
+    if (input.type === 'keyDown' && input.key === 'F11') {
+      win.setFullScreen(!win.isFullScreen());
       event.preventDefault();
     }
   });

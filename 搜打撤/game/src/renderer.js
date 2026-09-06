@@ -18,6 +18,11 @@ const SDT = window.SDT;
     ringLink: 'rgba(226,202,150,0.66)',   // 环内相邻结点的羊皮纸连线
   };
 
+  // 逐帧零分配：setLineDash 只拷贝值不持有数组引用，复用同一缓冲即可
+  const DASH2 = [0, 0];                  // 两段式点划（虚线流光全用这种）
+  const NO_DASH = [];                    // 还原实线（空点划，常量复用）
+  function setDash(c, seg1, seg2) { DASH2[0] = seg1; DASH2[1] = seg2; c.setLineDash(DASH2); }
+
   // 局内壁纸：静态图版（残骸海岸）。静态图无逐帧解码开销，比视频版更省 GPU
   const environmentBackdrop = new Image();
   let backdropCanvas = null;               // 壁纸合成层（尺寸或就绪状态变化时重建）
@@ -151,7 +156,7 @@ const SDT = window.SDT;
   let boardCanvas = null;               // 结点静态层
   const BOARD_PAD = T0 * 1.5;           // 画布外扩（容纳投影 / 底光溢出）
   const boardKey = { layerIdx: -1, notes: null, bs: 0 };
-  let gradCache = null;                 // { key, bg, vig } 屏幕空间渐变
+  let gradCache = null;                 // { w, h, bg, vig } 屏幕空间渐变
 
   const bakeScale = () => Math.min(4, Math.max(2, (window.devicePixelRatio || 1) * 2));
 
@@ -226,10 +231,17 @@ const SDT = window.SDT;
 
   function drawMotes(ctx, game, H) {
     const t = game.time;
+    // 分色两趟批绘（同 drawStars）：fillStyle 只设两次，不再逐粒重设
+    ctx.fillStyle = 'rgb(214,182,130)';
     for (const m of motes) {
-      const a = Math.max(0, 0.05 + 0.05 * Math.sin(t * 1.4 + m.ph));
-      ctx.fillStyle = m.gold ? 'rgb(245,205,120)' : 'rgb(214,182,130)';
-      ctx.globalAlpha = a;
+      if (m.gold) continue;
+      ctx.globalAlpha = Math.max(0, 0.05 + 0.05 * Math.sin(t * 1.4 + m.ph));
+      ctx.beginPath(); ctx.arc(m.x, (m.y0 + t * m.spd) % H, m.r, 0, TAU); ctx.fill();
+    }
+    ctx.fillStyle = 'rgb(245,205,120)';
+    for (const m of motes) {
+      if (!m.gold) continue;
+      ctx.globalAlpha = Math.max(0, 0.05 + 0.05 * Math.sin(t * 1.4 + m.ph));
       ctx.beginPath(); ctx.arc(m.x, (m.y0 + t * m.spd) % H, m.r, 0, TAU); ctx.fill();
     }
     ctx.globalAlpha = 1;
@@ -353,11 +365,11 @@ const SDT = window.SDT;
         ctx.globalAlpha = (cur ? 0.9 : 0.28) * (0.72 + 0.28 * Math.sin(t * 1.7 + phase));
         ctx.strokeStyle = glow;
         ctx.lineWidth = 1.5 / z;
-        ctx.setLineDash([4 / z, 7 / z]);
+        setDash(ctx, 4 / z, 7 / z);
         ctx.lineDashOffset = -(t * 10) / z;
         circle(ctx, n.x, n.y, n.r * 1.26 + Math.sin(t * 1.3 + phase) * 2);
         ctx.stroke();
-        ctx.setLineDash([]);
+        ctx.setLineDash(NO_DASH);
         ctx.restore();
       }
       ctx.restore();
@@ -378,13 +390,13 @@ const SDT = window.SDT;
       ctx.stroke(path);
       ctx.globalAlpha = cur ? 0.55 : 0.14;
       ctx.lineWidth = 3.2 / z;
-      ctx.setLineDash([1.5 / z, 9 / z]);
+      setDash(ctx, 1.5 / z, 9 / z);
       ctx.stroke(path);
-      ctx.setLineDash([]);
+      ctx.setLineDash(NO_DASH);
     }
     // 环间门：金色流光（出口绿色）
     ctx.lineWidth = 1.9 / z;
-    ctx.setLineDash([5 / z, 5 / z]);
+    setDash(ctx, 5 / z, 5 / z);
     ctx.lineDashOffset = -(t * 16) / z;
     for (const s of g.doorLinks) {
       const relevant = s.fromLi === curLi || s.toLayer === curLi;
@@ -400,7 +412,7 @@ const SDT = window.SDT;
       ctx.globalAlpha = curLi === 2 ? 0.85 : 0.2;
       for (const l of g.altarLinks) { ctx.stroke(l.path); ctx.fill(l.arrow); }
     }
-    ctx.setLineDash([]);
+    ctx.setLineDash(NO_DASH);
     ctx.restore();
   }
 
@@ -421,11 +433,11 @@ const SDT = window.SDT;
         ctx.globalAlpha = (cur ? 0.9 : 0.3) * (0.7 + 0.3 * p);
         ctx.strokeStyle = 'rgba(242,133,74,0.85)';
         ctx.lineWidth = 1.5 / cam.zoom;
-        ctx.setLineDash([4 / cam.zoom, 7 / cam.zoom]);
+        setDash(ctx, 4 / cam.zoom, 7 / cam.zoom);
         ctx.lineDashOffset = -(t * 10) / cam.zoom;
         circle(ctx, n.x, n.y, n.r * 1.26 + p * 2);
         ctx.stroke();
-        ctx.setLineDash([]);
+        ctx.setLineDash(NO_DASH);
       } else {
         ctx.fillStyle = 'rgba(242,133,74,0.14)';
         circle(ctx, n.x, n.y, n.r + 2);
@@ -481,14 +493,14 @@ const SDT = window.SDT;
     const a = deep ? 0.55 : 0.20, z = game.cam.zoom;
     ctx.save();
     ctx.lineWidth = 1.6 / z;
-    ctx.setLineDash([7 / z, 9 / z]);
+    setDash(ctx, 7 / z, 9 / z);
     ctx.strokeStyle = `rgba(154,124,200,${a})`;
     ctx.lineDashOffset = -(game.time * 14) / z;
     ctx.beginPath(); ctx.arc(cx, cy, T0 * 1.05, 0, TAU); ctx.stroke();
     ctx.strokeStyle = `rgba(186,150,230,${a * 0.8})`;
     ctx.lineDashOffset = (game.time * 10) / z;
     ctx.beginPath(); ctx.arc(cx, cy, T0 * 0.72, 0, TAU); ctx.stroke();
-    ctx.setLineDash([]);
+    ctx.setLineDash(NO_DASH);
     ctx.restore();
   }
 
@@ -530,6 +542,9 @@ const SDT = window.SDT;
     ctx.restore();
   }
 
+  // 名牌文本宽度缓存（字体串只随 zoom 变；避免逐帧 measureText 分配 TextMetrics）
+  const nameplate = { key: '', w: 0 };
+
   function drawPlayer(ctx, game) {
     const cam = game.cam, z = cam.zoom;
     const px = game.pos.x;
@@ -565,7 +580,8 @@ const SDT = window.SDT;
     // 名牌胶囊（钉在定位针上方）
     const label = '你';
     ctx.font = font(cam, 10);
-    const tw = ctx.measureText(label).width;
+    if (nameplate.key !== ctx.font) { nameplate.key = ctx.font; nameplate.w = ctx.measureText(label).width; }
+    const tw = nameplate.w;
     const lw2 = tw + 12 / z, lh = 15 / z, lx = px, ly = groundY - markR - 16 / z;
     ctx.fillStyle = 'rgba(22,15,6,0.85)';
     rrect(ctx, lx - lw2 / 2, ly - lh / 2, lw2, lh, lh / 2);
@@ -580,10 +596,9 @@ const SDT = window.SDT;
   }
 
 
-  // ---------- 屏幕空间渐变（背景 / 暗角，仅在窗口尺寸变化时重建） ----------
+  // ---------- 屏幕空间渐变（背景 / 暗角，仅在窗口尺寸变化时重建；数值比较避免逐帧拼 key 字符串） ----------
   function screenGrads(ctx, cam) {
-    const key = cam.viewW + 'x' + cam.viewH;
-    if (gradCache && gradCache.key === key) return gradCache;
+    if (gradCache && gradCache.w === cam.viewW && gradCache.h === cam.viewH) return gradCache;
     const bg = ctx.createLinearGradient(0, 0, 0, cam.viewH);
     bg.addColorStop(0, COLORS.bgTop);
     bg.addColorStop(1, COLORS.bgBottom);
@@ -591,7 +606,7 @@ const SDT = window.SDT;
     const vig = ctx.createRadialGradient(cam.viewW / 2, cam.viewH / 2, r * 0.55, cam.viewW / 2, cam.viewH / 2, r * 1.05);
     vig.addColorStop(0, 'rgba(0,0,0,0)');
     vig.addColorStop(1, 'rgba(12,6,2,0.55)');
-    gradCache = { key, bg, vig };
+    gradCache = { w: cam.viewW, h: cam.viewH, bg, vig };
     return gradCache;
   }
 

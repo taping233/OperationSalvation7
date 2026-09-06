@@ -6,7 +6,9 @@ const BGM_URL = new URL('../assets/bgm-black-stream-sea.mp3', import.meta.url).h
 const TITLE_BGM_URL = new URL('../assets/bgm-sour-orange-earth.mp3', import.meta.url).href;
 // BGM 是 4.6/7.6 MB 的长音频，走 HTML5 流式播放，避免 WebAudio 整段解码阻塞并占用大块内存。
 const bgm = new Howl({ src: [BGM_URL], loop: true, html5: true, preload: false, volume: 0 });
-const titleBgm = new Howl({ src: [TITLE_BGM_URL], loop: true, html5: true, preload: true, volume: 0 });
+// 开屏曲目不预载（3.7MB）：自动播放策略下首次交互前必然无声，改为首次 syncBgm 时按需加载，
+// 启动带宽让给首屏图与字体；Howler 对 preload:false 的实例会在 play() 时自动 load。
+const titleBgm = new Howl({ src: [TITLE_BGM_URL], loop: true, html5: true, preload: false, volume: 0 });
   let ctx = null, master = null, sfxGain = null, clickGain = null, clickComp = null;
   // 三级开关：muted 全局静音（侧边栏 [[icon:gear]]）· musicOff 只关音乐 · sfxOff 只关音效（设置页）
   let muted = false, musicOff = false, sfxOff = false;
@@ -330,9 +332,12 @@ const titleBgm = new Howl({ src: [TITLE_BGM_URL], loop: true, html5: true, prelo
 
   /* ---------- 文件背景乐 ---------- */
   let musicMode = null;
+  // 自动播放策略：首次交互前 BGM 必然无声。此时不触发 play()——preload:false 的 Howl
+  // 会在 play() 时立即 load（标题曲 3.7MB），把启动带宽让给首屏图与字体；首次交互 kick() 后再开播。
+  let userGestured = false;
   function activeBgm() { return musicMode === 'title' ? titleBgm : bgm; }
   function syncBgm() {
-    const on = musicMode && !muted && !musicOff;
+    const on = musicMode && !muted && !musicOff && userGestured;
     const cur = activeBgm();
     const target = BASE_MUSIC * dbGain(musicVol) * (ducked ? 0.45 : 1);
     [bgm, titleBgm].forEach(track => {
@@ -346,6 +351,9 @@ const titleBgm = new Howl({ src: [TITLE_BGM_URL], loop: true, html5: true, prelo
     });
     if (!on) return;
     cur.mute(false);
+    // preload:false 的 Howl 在 play() 时只挂起等待、不会自动加载，必须先显式 load()。
+    // 走到这里必然已过首次交互门控（userGestured），是曲目的预期加载时机。
+    if (cur.state() === 'unloaded') cur.load();
     if (!cur.playing()) {
       cur.volume(0);
       cur.play();
@@ -398,6 +406,12 @@ const titleBgm = new Howl({ src: [TITLE_BGM_URL], loop: true, html5: true, prelo
   // 自动播放策略：首次交互后恢复上下文；若此前已选定 BGM 则立即开声
   function kick() {
     if (!ensure()) return;
+    // 已解锁且 BGM 正常播放、WebAudio 也未挂起时，后续每次按键/点击直接跳过——
+    // 否则每个输入都重走 syncBgm（Howler mute/volume 写入），还会打断进行中的音量淡入淡出。
+    // ctx 挂起（浏览器音频策略）时不得早退，否则跳过 resume 会让音效一直哑着。
+    if (userGestured && musicMode && activeBgm().playing()
+      && (!Howler.ctx || Howler.ctx.state === 'running')) return;
+    userGestured = true;
     if (Howler.ctx && Howler.ctx.state === 'suspended') Howler.ctx.resume().catch(() => {});
     syncBgm();
   }

@@ -784,8 +784,9 @@ import { Random } from './random.js';
       // 稀有度展示（2026-09-04 定版）：有效稀有度一律经 rarityOf 推导——
       // 英雄卡与其衍生牌 = 棱彩（rv-prism 渐变流转，传说英雄走金光变体 rv-gold）；
       // 衍生物继承创造者稀有度；攻击词条允许负数字。
-      const isPrism = SDT.Cards.rarityOf(c) === '棱彩';
+      // （性能：rarityOf 对衍生牌会全量解析卡库 JSON——只调一次，别重复调）
       const ro = SDT.Cards.rarityOf(c);
+      const isPrism = ro === '棱彩';
       const rvCls = isPrism
         ? ('rv-prism' + ((c.rarity === '传说' ||
             (c.tokenOf && (SDT.Cards.all().find(x => x.id === c.tokenOf) || {}).rarity === '传说')) ? ' rv-gold' : ''))

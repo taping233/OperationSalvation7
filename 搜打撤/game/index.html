@@ -4,6 +4,12 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="icon" type="image/png" href="assets/brand-mark-codename7.png" />
+<!-- 首屏关键资源提前预载：标题壁纸是首屏最大图，中文字体决定标题文字渲染；
+     其余资源（BGM/立绘/卡面）保持按需加载，避免挤占启动带宽 -->
+<link rel="preload" as="image" href="assets/reconstruction/wallpaper-original.webp" />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/cascadia-code-400.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/notosans-sc-400.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/notosans-sc-700.woff2" crossorigin />
 <title>升格会的冬日猜想</title>
 <link rel="stylesheet" href="css/base.css" />
 <link rel="stylesheet" href="css/cards.css" />

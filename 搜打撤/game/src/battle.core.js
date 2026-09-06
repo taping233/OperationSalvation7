@@ -768,7 +768,40 @@ import * as Combat from './combat.js';
     requestBattleRender();
   }
 
+  // —— 快照缓存（2026-09-06 性能修复）——
+  // battle.view 的 render 与拖拽指向路径（pointermove 每秒可近百次）都会调 getSnapshot，
+  // 旧实现每次都全量拷贝 + Object.freeze 一整棵快照树（一次 20-40 个冻结对象）。
+  // 战斗状态全部由本模块变量持有、只在下方各命令函数中变更，故按「输入签名」记忆化：
+  // 状态没变就直接复用上一次的冻结快照（消费方拿到的仍是同一份只读快照，冻结模式不变）。
+  // ⚠ 新增快照字段时，必须把它的输入同步追加进 snapshotSignature()，否则视图会读到陈旧状态。
+  let snapCache = null, snapSig = null;
+  const STATUS_SIG_KEYS = [...Combat.CURSES, ...Combat.BUFFS];   // status 全部数值键（bleed/poison 已含在 CURSES）
+  const statusSig = (st) => st ? STATUS_SIG_KEYS.map(k => k + ':' + (st[k] || 0)).join(',') : '';
+  function snapshotSignature() {
+    const sig = [mode, turn, energy, maxEnergy, busy, opts,
+      pendingHint, viewingGrave, dreadShown, selectingDeck, selShaN, handSelectQueue.length];
+    if (G) sig.push(G.hp, G.maxHp, G.atk, G.spellPower || 0, G.myClass || '', G.characterId || '');
+    if (pdef) sig.push(pdef.shield, pdef.armor, pdef.guard);
+    sig.push(statusSig(pstat && pstat.status), pstat ? pstat.hp : 0);
+    sig.push(foes.length);
+    for (const f of foes) {
+      sig.push(f.id, f.name, f.behavior, f.affix, f.affixName, f.dead, f.hp, f.maxHp, f.atk, statusSig(f.status));
+      if (f.defense) sig.push(f.defense.shield, f.defense.armor, f.defense.guard);
+      sig.push(f.intent);   // intent 只被整体替换不就地改，引用比较即可
+    }
+    sig.push(hand.join(','), drawPile.join(','), discard.join(','), grave.join(','));
+    if (infusing) sig.push(infusing.uid, infusing.need, infusing.card, infusing.picked.size, [...infusing.picked].sort().join(','));
+    if (discovering) sig.push(discovering.n, discovering.rarity, discovering.options.length);
+    if (handSelecting) sig.push(handSelecting.n, handSelecting.type, handSelecting.act, handSelecting.thenText);
+    if (pendingTarget) sig.push(pendingTarget.uid, pendingTarget.card);
+    if (selectingDeck) sig.push(sel.size, [...sel].sort().join(','), selPool.length);
+    return sig.join('\u0001');
+  }
+
   function getSnapshot() {
+    const sig = snapshotSignature();
+    if (snapCache && sig === snapSig) return snapCache;
+    snapSig = sig;
     const freezeObject = value => value ? Object.freeze({ ...value }) : value;
     const statusOf = value => value ? Object.freeze({ ...value.status }) : null;
     const playerStatus = pstat ? Object.freeze({ ...pstat, status: statusOf(pstat) }) : null;
@@ -788,6 +821,7 @@ import * as Combat from './combat.js';
       ...discovering,
       options: Object.freeze(discovering.options.map(freezeObject)),
     }) : null;
+    const readonlyHandSelecting = handSelecting ? Object.freeze({ ...handSelecting }) : null;
     const deckSelection = selectingDeck ? Object.freeze({
       need: R().bossDeckSize,
       starterCount: selShaN,
@@ -795,7 +829,7 @@ import * as Combat from './combat.js';
       cards: Object.freeze(selPool.map(entry => Object.freeze({ uid: entry.uid, card: freezeObject(entry.card) }))),
       boss: readonlyFoes[0] || null,
     }) : null;
-    return Object.freeze({
+    snapCache = Object.freeze({
       mode, turn, energy, maxEnergy, busy,
       opts: freezeObject(opts),
       player: G ? Object.freeze({ hp: G.hp, maxHp: G.maxHp, atk: G.atk, spellPower: G.spellPower || 0, myClass: G.myClass || null, characterId: G.characterId || null }) : null,
@@ -815,6 +849,7 @@ import * as Combat from './combat.js';
       dreadShown,
       deckSelection,
     });
+    return snapCache;
   }
 
   function openGrave() { viewingGrave = true; requestBattleRender(); }

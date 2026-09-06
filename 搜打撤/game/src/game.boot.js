@@ -190,7 +190,8 @@ configureGameRuntime({ openClassChoice, openBaseHub, rebuildNotes, resize: () =>
     if ((coverTitle && !coverTitle.hidden) || (coverExit && !coverExit.hidden)) return;
     // 全屏不透明页（事件/节点/背包页/房间战斗）盖住画布时同样跳帧，不重绘被遮挡的画布
     const ov = UI.el.overlay;
-    const covered = document.hidden || (!ov.hidden && !ov.querySelector('.battle-stage') && (ov.classList.contains('opaque') || ov.classList.contains('room-view')));
+    const battleBehind = !ov.hidden && !!ov.querySelector('.battle-stage');
+    const covered = document.hidden || (!ov.hidden && !battleBehind && (ov.classList.contains('opaque') || ov.classList.contains('room-view')));
     const ts = (SDT.FX && SDT.FX.timeScale) || 1;
     const sdt = dt * ts;   // hit-stop 冻结世界：逻辑时间缩放，rAF 与恢复计时仍走真实时间
     game.time += sdt;
@@ -198,8 +199,13 @@ configureGameRuntime({ openClassChoice, openBaseHub, rebuildNotes, resize: () =>
     // 同步到 body，驱动 CSS 状态样式（提示条显隐 / 掷骰按钮呼吸灯）
     if (document.body.dataset.state !== game.state) document.body.dataset.state = game.state;
     const fxActive = SDT.FX && (SDT.FX.floats.length || SDT.FX.pulses.length || SDT.FX.shakes.length);
-    // 对局内（含站立 idle：棋盘火光/结点呼吸是持续动画）一律 active 120；标题等未开局画面走 idle 60
-    const active = game.runActive || game.battleActive || game.state === 'moving' || game.state === 'rolling' || !!fxActive;
+    // 帧率分两档（功耗权衡）：active 120 只留给快节奏状态（掷骰/移动/特效/战斗——
+    // 帧率拉满才不掉帧感）；对局站立 idle 的棋盘动画全是慢速环境效果（呼吸/火光/流光
+    // 均为 1Hz 量级正弦），60fps 与 120fps 观感无差，功耗直接减半。拖拽/缩放等输入
+    // 走 renderScheduler.invalidate() 逐事件触发绘制，不受降档影响。标题等未开局画面
+    // 同样 idle 60；战斗页盖在画布上时（自绘场景大图基本不透明，画布只从边缝透出）
+    // 也降到 idle 60：底图隔着重度 blur(6px) 无人能分辨帧率，省下的余量让给战斗页动画。
+    const active = !battleBehind && (game.battleActive || game.state === 'moving' || game.state === 'rolling' || !!fxActive);
     // 镜头帧率无关地平滑追随棋子（指数趋近，勿用每帧固定 0.1 的 lerp）；大距离跳变（读档/新局/切层）直接贴合
     if (cam && game.pos && (cam.cx !== game.pos.x || cam.cy !== game.pos.y)) {
       if (Math.abs(game.pos.x - cam.cx) + Math.abs(game.pos.y - cam.cy) > MAP.tile * 4) {
@@ -230,6 +236,9 @@ configureGameRuntime({ openClassChoice, openBaseHub, rebuildNotes, resize: () =>
     _set_dpr(window.devicePixelRatio || 1);
     canvas.width = canvas.clientWidth * dpr;
     canvas.height = canvas.clientHeight * dpr;
+    // 后备存储是物理像素，而 Renderer.draw 全程用 CSS 坐标；不缩放的话
+    // dpr>1 的屏幕（如 150% 缩放的 Edge）只画到左上 1/dpr 区域，其余是未初始化显存（绿噪点）。
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     if (cam) cam.resize(canvas.clientWidth, canvas.clientHeight);
     renderScheduler.invalidate();
   }

@@ -201,18 +201,37 @@ const TAU = Math.PI * 2;
     }
     return e.ok ? e.img : null;
   }
-  // 画圆形 SVG 结点：深色圆底 + 圆形裁剪图标 + 层色描边；未就绪时返回 false 由调用方回退
-  function drawBitmapIcon(ctx, type, cx, cy, R, cur, z) {
+  // 画圆形 SVG 结点：深色圆底 + 圆形裁剪图标 + 层色描边；未就绪时返回 false 由调用方回退。
+  // 性能（2026-09-06）：圆底+裁剪贴图按类型烘焙进离屏 canvas（内容只依赖类型，与呼吸缩放/
+  // 悬浮/透明度/描边色无关——这些由调用方每帧实时施加在 drawImage/stroke 上）。此前每结点
+  // 每帧 save→clip→drawImage→restore，60 结点 120fps 时 clip 栈是单帧最大 CPU 项；
+  // 烘焙后每帧只剩一次 drawImage + 一次描边（描边保持 1.6/z 屏幕恒宽，视觉与旧实现一致）。
+  const bakedCache = {};
+  const BAKE_SIZE = 256;   // 棋盘结点屏幕直径上限约 100px，256 烘焙约 2.5x 超采样
+  function bakedIconFor(type) {
+    let e = bakedCache[type];
+    if (e) return e;
     const img = bitmapFor(type);
-    if (!img) return false;
-    ctx.fillStyle = '#1d1c1a';
-    circle(ctx, cx, cy, R);
-    ctx.fill();
-    ctx.save();
-    circle(ctx, cx, cy, R * 0.97);
-    ctx.clip();
-    ctx.drawImage(img, cx - R * 0.91, cy - R * 0.91, R * 1.82, R * 1.82);
-    ctx.restore();
+    if (!img) return null;
+    const S = BAKE_SIZE, R = S / 2;
+    const c = document.createElement('canvas');
+    c.width = c.height = S;
+    const g = c.getContext('2d');
+    g.fillStyle = '#1d1c1a';
+    circle(g, R, R, R - 1 / (S / 2));   // 半径缩半像素，避免画布边缘裁掉抗锯齿带
+    g.fill();
+    g.save();
+    circle(g, R, R, R * 0.97);
+    g.clip();
+    g.drawImage(img, R - R * 0.91, R - R * 0.91, R * 1.82, R * 1.82);
+    g.restore();
+    e = bakedCache[type] = c;
+    return e;
+  }
+  function drawBitmapIcon(ctx, type, cx, cy, R, cur, z) {
+    const baked = bakedIconFor(type);
+    if (!baked) return false;
+    ctx.drawImage(baked, cx - R, cy - R, R * 2, R * 2);
     ctx.strokeStyle = cur ? 'rgba(235,205,140,0.5)' : 'rgba(180,160,120,0.22)';
     ctx.lineWidth = 1.6 / z;
     circle(ctx, cx, cy, R);

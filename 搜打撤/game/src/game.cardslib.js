@@ -134,6 +134,7 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
         </div>
       </div>`, 'page');
     lastSavedId = null;
+    lastPreviewId = null;   // 预览窗格已随页面重置为空，悬停去重标记一并复位
     UI.act('closeCardPage', closeLibPage);
     UI.act('newCard', () => openCardDesigner(null));
     UI.act('libTab', (d) => { libFilter.tab = d.t; renderCardLibrary(); });
@@ -166,10 +167,14 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
       const grid = document.getElementById('libGrid');
       if (grid) grid.innerHTML = libGridHTML();
     };
-    // 悬停大图预览（炉石式）
+    // 悬停大图预览（炉石式）。mouseover 会因子元素冒泡重复触发：
+    // 记住上一张预览的卡，扫过同一张卡时不再整页重建预览 DOM / 重复播悬停音
+    // （与 sound.js 全局悬停音的 lastHoverBtn 去重同款做法）
+    let lastPreviewId = null;
     UI._hoverHandler = (e) => {
       const w = e.target.closest ? e.target.closest('[data-card]') : null;
-      if (!w) return;
+      if (!w || w.dataset.card === lastPreviewId) return;
+      lastPreviewId = w.dataset.card;
       const card = libCards.find(c => c.id === w.dataset.card);
       const pv = document.getElementById('libPreview');
       if (card && pv) { pv.innerHTML = libPreviewHTML(card); Sfx.tick(); }

@@ -68,6 +68,7 @@ const T0 = SDT.MAP.tile;   // 缩放基准单位（特效尺寸用）
   SDT.FX = FX;
 
   // ---------- FX 渲染（脉冲 / 飘字 / 震屏偏移） ----------
+  const SHAKE_OUT = [0, 0];   // 复用输出缓冲：唯一调用方在绘制当帧立即解构，不持有引用 → 逐帧零分配
   function shakeOffset(t) {
     let dx = 0, dy = 0;
     for (let i = FX.shakes.length - 1; i >= 0; i--) {
@@ -80,7 +81,8 @@ const T0 = SDT.MAP.tile;   // 缩放基准单位（特效尺寸用）
       dy += Math.cos(t * 81) * d;
     }
     // 整数像素偏移：避免亚像素重采样，也降低高频合成下的光栅化压力
-    return [Math.round(dx), Math.round(dy)];
+    SHAKE_OUT[0] = Math.round(dx); SHAKE_OUT[1] = Math.round(dy);
+    return SHAKE_OUT;
   }
 
   function drawFX(ctx, game) {
