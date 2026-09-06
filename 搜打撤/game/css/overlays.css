@@ -490,3 +490,9 @@
   #sugLayer .sug-where:empty { display:none; }
   #sugLayer .sug-tip { color:#8b8b8b; font-size:11.5px; margin:0 0 10px; }
   #sugLayer .sug-btns { display:flex; gap:10px; justify-content:flex-end; }
+
+  /* ============ 职业宝箱（黑箱，2026-09-06）：只掉落职业卡牌 ============ */
+  .cls-chest-note { color: #c9b98a; }
+  .cls-chest-note b { color: #e8d9a8; }
+  .bt-card.cls-chest .hs-card { border-color: #15151b; box-shadow: 0 .34em 1em rgba(0,0,0,.65), inset 0 0 0 1px #2c2c36;
+    background: linear-gradient(165deg, #2a2a33 0%, #12121a 55%, #1d1d26 100%); }

@@ -27,7 +27,7 @@ function createShopController({
     const pickRandomCard = () => {
       for (let tries = 0; tries < 50; tries++) {
         const rarity = pickWeightedRarity();
-        const pool = lib.filter(card => card.rarity === rarity);
+        const pool = lib.filter(card => card.rarity === rarity && SDT.Cards.isRandomObtainable(card));
         if (pool.length) return pool[Math.floor(Random.random('shop') * pool.length)];
       }
       return lib.length ? lib[Math.floor(Random.random('shop') * lib.length)] : null;
@@ -40,10 +40,7 @@ function createShopController({
         ? { card, price: SDT.Cards.PRICE[card.rarity] || 2, sold: false }
         : { empty: true, label: '卡牌库无货' });
     }
-    const starters = lib.filter(card => card.rarity === '初始');
-    slots.push(starters.length
-      ? { card: starters[Math.floor(Random.random('shop') * starters.length)], price: SDT.Cards.PRICE['初始'], sold: false }
-      : { empty: true, label: '暂无初始牌' });
+    // 初始牌槽位已移除：杀/火球为初始牌，不上架（2026-09-06）；神秘货箱特殊栏位仍可能刷出
     slots.push({ card: SDT.Cards.POTION, price: 3, sold: false });
     const mysteryCard = lib.length ? lib[Math.floor(Random.random('shop') * lib.length)] : null;
     slots.push(mysteryCard
@@ -84,7 +81,7 @@ function createShopController({
     UI.registerHelp('shop', {
       title: '商店说明',
       html: `
-        <p class="help-item"><b>进货</b>商队每次靠站随机卸货：6 张随机卡 + 1 张初始牌 + 金疮药 + 1 个「神秘货箱」栏位（3 币，买到随机卡牌）。</p>
+        <p class="help-item"><b>进货</b>商队每次靠站随机卸货：6 张随机卡 + 金疮药 + 1 个「神秘货箱」栏位（3 币，买到随机卡牌）。</p>
         <p class="help-item"><b>出售</b>默认所有卡牌不可出售；只有带「可出售」备注的卡才能卖给商店，收购价 = 卡面币值。</p>`,
       back: renderShop,
     });

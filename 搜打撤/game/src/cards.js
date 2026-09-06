@@ -225,18 +225,23 @@ import { Random } from './random.js';
     // 商店随机槽位的稀有度权重
     SHOP_WEIGHTS: { '初始': 30, '古朴': 30, '稀有': 20, '史诗': 12, '传说': 8 },
 
-    // 卡牌爆率（设计者 2026-09-05 定版，宝箱掉落等「生成一张卡」场景同源）：
-    //   先按稀有度掷档：古朴 = 稀有 ×1.5，稀有 = 史诗 ×1.5（古朴:稀有:史诗 = 2.25:1.5:1）；
-    //   传说 / 职业 / 初始卡不会直接生成（不在权重表即不出）；
+    // 卡牌爆率（设计者 2026-09-06 定版，宝箱掉落等「生成一张卡」场景同源）：
+    //   先按稀有度掷档：稀有 = 古朴 ×1/2，史诗 = 稀有 ×1/2，传说 = 史诗 ×1/3
+    //   （古朴:稀有:史诗:传说 = 4:2:1:1/3，传说进入常规掉落）；
+    //   精英突袭玩法下 稀有/史诗/传说 权重 ×1.2（高稀有度爆率 +20%）；
     //   同稀有度内 资源 / 道具 的爆率比其他类型低 20%（×0.8）；
+    //   职业 / 初始卡不会直接生成（不在权重表即不出）；
     //   宝箱只会开出 武术 / 法术 / 装备 / 道具 / 资源 五类。
-    DROP_WEIGHTS: { '古朴': 2.25, '稀有': 1.5, '史诗': 1 },
+    DROP_WEIGHTS: { '古朴': 4, '稀有': 2, '史诗': 1, '传说': 1 / 3 },
     DROP_DISCOUNT_TYPES: ['道具', '资源'],
     DROP_TYPES: ['武术', '法术', '装备', '道具', '资源'],
     // 按爆率随机抽 1 张掉落卡；taken = Set<id>（同一宝箱内尽量不重复，可选）
     randomDropCard(taken) {
       const hasTaken = !!(taken && taken.size);
-      const entries = Object.entries(SDT.Cards.DROP_WEIGHTS);
+      // 精英突袭：稀有/史诗/传说 权重 ×1.2（高稀有度爆率 +20%，2026-09-06）
+      const elite = typeof window !== 'undefined' && window.SDT && window.SDT.game && window.SDT.game.mode === 'elite';
+      const entries = Object.entries(SDT.Cards.DROP_WEIGHTS)
+        .map(([r, w]) => [r, elite && r !== '古朴' ? w * 1.2 : w]);
       const totalW = entries.reduce((a, b) => a + b[1], 0);
       for (let tries = 0; tries < 50; tries++) {
         // ① 稀有度先掷档（2.25:1.5:1，不受卡库各稀有度卡牌数量影响）
@@ -315,6 +320,7 @@ import { Random } from './random.js';
     // 2026-09-05 增补：英雄卡 / 生物图鉴 / 棱彩稀有度（含元素之门等英雄衍生物）同样排除；
     // 后续 M1 实装发现/随机词条时必须经过本判定过滤）
     isRandomObtainable(card) {
+      if (card.rarity === '初始') return false;
       if (card.rarity === '职业') return false;
       if (card.type === '英雄卡' || card.type === '生物') return false;
       if (card.rarity === '棱彩') return false;
@@ -449,7 +455,7 @@ import { Random } from './random.js';
       { id: 'tt3-plate',         name: '铠甲',     cost: 1, rarity: '初始', type: '武术', desc: '获得 3 点护甲。', value: 2 },
       { id: 'tt3-venom-arrow',   name: '毒箭',     cost: 2, rarity: '古朴', type: '武术', dmg: 1, dmgType: 'attack', desc: '攻⁺1，附加中毒。' },
       { id: 'tt3-toxin',         name: '毒药',     cost: 0, rarity: '初始', type: '武术', desc: '附加 1 层中毒。' },
-      { id: 'tt3-frostfall',     name: '剑落纷霜', cost: 2, rarity: '传说', type: '武术', dmg: 5, dmgType: 'attack', unrandom: true, desc: '攻5，破坏敌方手牌中 1 张武术。', value: 5 }, // 传说系列重拍：首张照片，效果修订（旧读「破坏冰阵」）
+      { id: 'tt3-frostfall',     name: '剑落纷霜', cost: 2, rarity: '传说', type: '武术', dmg: 5, dmgType: 'attack', desc: '攻5，破坏敌方手牌中 1 张武术。', value: 5 }, // 传说系列重拍：首张照片，效果修订（旧读「破坏冰阵」）
       // —— 武术（本摞照片重辨补录 1 张）——
       { id: 'tt3wu-shike',       name: '割蚀',     cost: 2, rarity: '古朴', type: '武术', desc: '降低 1 名敌人 2 攻，附加流血。' },
       // —— 法术 / 药水（第一摞 28 张）——
@@ -467,7 +473,7 @@ import { Random } from './random.js';
       { id: 'tt3-python-potion', name: '巨蟒药水', cost: 2, rarity: '古朴', type: '道具', desc: '召唤巨蟒助战。', value: 2 },
       { id: 'tt3-chain-lightning', name: '闪电链', cost: 2, rarity: '古朴', type: '法术', desc: "3′，2 段伤害。" },
       { id: 'tt3-houyi-potion',  name: '后羿药水', cost: 2, rarity: '古朴', type: '道具', desc: '本回合攻击 +2。', value: 2 },
-      { id: 'tt3-fireball',      name: '火球',     cost: 2, rarity: '古朴', type: '法术', dmg: 4, desc: '造成 4 点伤害（4′）。' },
+      { id: 'tt3-fireball',      name: '火球',     cost: 2, rarity: '古朴', type: '法术', dmg: 4, unrandom: true, desc: '造成 4 点伤害（4′）。' }, // 初始牌：每局固定携带 1 张，不随机掉落/发现/上架（2026-09-06）
       { id: 'tt3-holy-water',    name: '圣水',     cost: 2, rarity: '古朴', type: '法术', desc: '回复 4 点生命，净化负面效果。', value: 2 },
       { id: 'tt3-skewer',        name: '穿刺',     cost: 2, rarity: '古朴', type: '法术', dmg: 2, desc: '造成 2 点伤害，无视护甲。', value: 3 },
       { id: 'tt3-holy-shield',   name: '圣盾',     cost: 1, rarity: '职业', type: '法术', cls: '牧师', unrandom: true, desc: '获得 5 点护甲。', value: 2 }, // 2026-09-05 职业整合：原地转为牧师职业卡
@@ -509,14 +515,14 @@ import { Random } from './random.js';
       { id: 'tt3sp-shadowshot',   name: '暗影射击', cost: 2, rarity: '职业', type: '法术', cls: '降临者', unrandom: true, desc: "3′，若对手处于诅咒状态，额外施放 1 次。", value: 2 }, // 2026-09-05 职业整合：原地转为降临者职业卡
       { id: 'tt3sp-cursewave',    name: '诅咒光波', cost: 3, rarity: '稀有', type: '法术', desc: "注能(1)：1′ 冰冻、流血、中毒。" },
       // —— 杂项（第三摞 9 张：高费大招与宝物）——
-      { id: 'tt3-thunderblast',  name: '雷殛',     cost: 3, rarity: '传说', type: '法术', dmg: 7, dmgType: 'spell', unrandom: true, desc: "7′，墓地指定 1 张牌，伤害 +1。", value: 5 }, // 传说系列重拍：desc 重辨（原文疑「蓄地槽…」），机制沿旧读「从墓地指定」
-      { id: 'tt3-flux-slash',    name: '流光斩',   cost: 2, rarity: '传说', type: '武术', dmg: 1, dmgType: 'attack', unrandom: true, desc: '攻1，附加 2 层流血；将流光斩复制放入牌库。', value: 5 }, // 传说系列重拍：改武术、攻1、复制入牌库（原文「流光照影放入牌库」重辨存疑）
+      { id: 'tt3-thunderblast',  name: '雷殛',     cost: 3, rarity: '传说', type: '法术', dmg: 7, dmgType: 'spell', desc: "7′，墓地指定 1 张牌，伤害 +1。", value: 5 }, // 传说系列重拍：desc 重辨（原文疑「蓄地槽…」），机制沿旧读「从墓地指定」
+      { id: 'tt3-flux-slash',    name: '流光斩',   cost: 2, rarity: '传说', type: '武术', dmg: 1, dmgType: 'attack', desc: '攻1，附加 2 层流血；将流光斩复制放入牌库。', value: 5 }, // 传说系列重拍：改武术、攻1、复制入牌库（原文「流光照影放入牌库」重辨存疑）
       { id: 'tt3-galaxy-mirage', name: '银河幻境', cost: 2, rarity: '史诗', type: '法术', desc: '布下幻阵，治疗所有队友。', value: 5 },
       { id: 'tt3-immortal-blade', name: '不朽神剑', cost: 2, rarity: '传说', type: '装备', unrandom: true, desc: '对战开始时，你的攻击化为 1 张不朽斩。', value: 5 }, // 传说系列重拍：效果按本批照片重写
       { id: 'tt3-diamond',       name: '钻石',     cost: 0, rarity: '传说', type: '资源', unrandom: true, desc: '贵重货币，可出售。', value: 16 },
       { id: 'tt3-master-staff',  name: '大师的神杖', cost: 2, rarity: '稀有', type: '道具', desc: '回合开始时回复 5 点生命。', value: 5 },
       { id: 'tt3-chaos-eye',     name: '混沌之眼', cost: 1, rarity: '传说', type: '装备', unrandom: true, desc: '装备：血量上限 +10，牌库上限 5。', value: 5 }, // 传说系列重拍：卡名/效果按本批照片（旧读「混沌眼」「生命上限+10」）
-      { id: 'tt3-execute',       name: '斩杀',     cost: 3, rarity: '传说', type: '武术', dmg: 9, dmgType: 'spell', unrandom: true, desc: "对 9 血以下角色造成 9′。", value: 5 }, // 传说系列重拍：角标武术、阈值 9 血
+      { id: 'tt3-execute',       name: '斩杀',     cost: 3, rarity: '传说', type: '武术', dmg: 9, dmgType: 'spell', desc: "对 9 血以下角色造成 9′。", value: 5 }, // 传说系列重拍：角标武术、阈值 9 血
       { id: 'tt3-savior-elixir', name: '救世灵药', cost: 0, rarity: '传说', type: '道具', unrandom: true, desc: '回复 99 点生命（相当于回满）。', value: 5 },
       // —— 装备（武器/防具/符印一摞；角标与描述已按第四批高清照片逐张重辨修正，
       //     未在本摞照片中出现的条目（魔纹银剑/深红丝袋/圣杖/玄龟/草甲/逆弓/聚魔之血/深衍日记）保持原样）——

@@ -320,8 +320,10 @@ import { eventNarrative } from './narrative.js';
     const done = after || finishInstant;
     switch (def.type) {
       case 'coin': {
-        const n = Math.max(1, Math.round((def.n || 1) * (modeCfg().coinMul || 1)));   // 与 gainCoins 同口径（含玩法倍率）
-        openPickupPage('coin', `+${n} 币`, () => { gainCoins(def.n || 1); done(); });
+        // 金币格收益 -1（2026-09-06 设计者定版）；展示与入账同口径（含玩法倍率）
+        const base = Math.max(1, (def.n || 1) - 1);
+        const n = Math.max(1, Math.round(base * (modeCfg().coinMul || 1)));
+        openPickupPage('coin', `+${n} 币`, () => { gainCoins(base); done(); });
         break;
       }
       case 'wood': openPickupPage('wood', `木材 +${def.n || 1}`, () => { game.addItem(MAP.items.wood, def.n || 1); done(); }); break;
@@ -437,7 +439,7 @@ import { eventNarrative } from './narrative.js';
         <div class="pg cls-page">
           <header class="pg-head">
             <h2>[[icon:medal]] 选择你的角色</h2>
-            <span class="sub">本次对战从全部角色中自由选择 1 个 · 确认后获得 1 张该角色的随机卡牌（与 5 张「初始攻击」一起带入背包）</span>
+            <span class="sub">本次对战从全部角色中自由选择 1 个 · 确认后获得 2 张该角色的随机卡牌（与 5 张「初始攻击」、1 张「火球」一起带入背包）</span>
           </header>
           <div class="cls-body">
             <div class="cls-grid">${picks.map(cl => `
@@ -511,6 +513,9 @@ import { eventNarrative } from './narrative.js';
       game.characterId = characterFor(cl).id;
       game.classCard = null;
       const card = SDT.Cards.randomClassCard(cl);
+      // 2026-09-06：开局获得 2 张本职业卡牌（原 1 张），尽量不重复
+      let card2 = SDT.Cards.randomClassCard(cl);
+      for (let i = 0; i < 8 && card2 && card && card2.id === card.id; i++) card2 = SDT.Cards.randomClassCard(cl);
       UI.hideOverlay();
       UI.log(`[[icon:medal]] 本局角色：<b>${esc(characterName(cl))}</b>`, 'ok');
       // 熟练度加成：每级（Lv.1 起）生命上限 +2，立即生效
@@ -524,6 +529,10 @@ import { eventNarrative } from './narrative.js';
         game.classCard = { ...card };
         game.ownedCards.push({ uid: newUid(), card: game.classCard, brought: 1 });
         UI.log(`[[icon:archive]] 获得角色卡【<b>${esc(card.name)}</b>】（${esc(characterName(cl))}）`, 'loot');
+        if (card2 && card2.id !== card.id) {
+          game.ownedCards.push({ uid: newUid(), card: { ...card2 }, brought: 1 });
+          UI.log(`[[icon:archive]] 获得角色卡【<b>${esc(card2.name)}</b>】（${esc(characterName(cl))}）·第 2 张职业卡已入包`, 'loot');
+        }
       }
       game.state = 'idle';
       saveGame();

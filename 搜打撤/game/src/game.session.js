@@ -39,8 +39,8 @@ function configureGameRuntime(hooks) {
       desc: '完整三环棋盘：掷骰环走、搜刮战斗，从外圈门撤离。原版规则的完整体验。',
       enemyMul: 1, coinMul: 1, xpMul: 1, startCoins: 0, healMul: 1, ckpt: '规则无修正' },
     elite: { id: 'elite', icon: '[[icon:fire]]', name: '精英突袭',
-      desc: '敌人与 BOSS 属性 ×1.5，战斗掉落金币 ×1.5，人物经验 +50%。高风险高回报。',
-      enemyMul: 1.5, coinMul: 1.5, xpMul: 1.5, startCoins: 0, healMul: 1, ckpt: '敌人 ×1.5 · 经验 +50%' },
+      desc: '敌人与 BOSS 属性 ×1.5，战斗掉落金币 ×1.5，人物经验 +50%，高稀有度卡牌爆率 +20%。高风险高回报。',
+      enemyMul: 1.5, coinMul: 1.5, xpMul: 1.5, startCoins: 0, healMul: 1, ckpt: '敌人 ×1.5 · 经验 +50% · 高稀有掉落 +20%' },
     casual: { id: 'casual', icon: '[[icon:home]]', name: '悠闲行军',
       desc: '开局携带 10 币，火堆与治疗效果 ×2，人物经验 -20%。适合练级与囤积基地物资。',
       enemyMul: 1, coinMul: 1, xpMul: 0.8, startCoins: 10, healMul: 2, ckpt: '开局 +10 币 · 治疗 ×2' },
@@ -415,13 +415,16 @@ function configureGameRuntime(hooks) {
   const newUid = () => 'o' + Date.now().toString(36) +
     Math.floor(Random.random('identity') * 46656).toString(36) + Math.floor(Random.random('identity') * 1296).toString(36);
 
-  // 每局开始：固定携带 5 张初始牌「初始攻击」（同名堆叠，只占 1 格背包）
+  // 每局开始：固定携带 5 张初始牌「初始攻击」（同名堆叠，只占 1 格背包）+ 1 张「火球」
   // brought=1：开局带入的卡（放弃对局时无条件丢失，v0.21 规则）
   function grantStarterSha() {
     const sha = SDT.Cards.all().find(c => c.id === SDT.Cards.SHA.id) || SDT.Cards.SHA;
     for (let i = 0; i < MAP.rules.starterSha; i++) {
       game.ownedCards.push({ uid: newUid(), card: { ...sha }, brought: 1 });
     }
+    // 火球为初始牌（2026-09-06）：每局固定携带 1 张，不随机掉落/发现/上架
+    const fb = SDT.Cards.all().find(c => c.id === 'tt3-fireball');
+    if (fb) game.ownedCards.push({ uid: newUid(), card: { ...fb }, brought: 1 });
   }
 
   // 把出发准备页选择的仓库卡牌带入背包（picks: 卡名 => 张数）
@@ -467,7 +470,7 @@ function configureGameRuntime(hooks) {
     UI.log(`欢迎来到<b>代号7</b>：本次玩法【<b>${modeCfg().name}</b>】——${modeCfg().ckpt}`, 'sys');
     UI.log('掷骰环走，落脚触发事件；外环闸门可撤离，深处有污染核心与变异首脑', 'sys');
     grantStarterSha();
-    UI.log(`[[icon:cards]] 随身携带初始牌【<b>初始攻击</b>】×${MAP.rules.starterSha}（固定携带 · 不可入库 / 安全格）`, 'sys');
+    UI.log(`[[icon:cards]] 随身携带初始牌【<b>初始攻击</b>】×${MAP.rules.starterSha}、【<b>火球</b>】×1（固定携带 · 不可入库 / 安全格）`, 'sys');
     applyDeployPicks(picks);    // 出发准备页选择的仓库卡牌
     const reserve = SDT.Base.takeReserveCoins();
     if (reserve) {

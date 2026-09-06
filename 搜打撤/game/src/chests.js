@@ -14,9 +14,20 @@ import { Random } from './random.js';
   const rndInt = (a, b) => a + Math.floor(Random.random('loot') * (b - a + 1));
 
   // 掷一个宝箱的完整内容：cards=开出的卡（中宝箱为 3 选 1 候选），coins=内含币
-  function rollContents(kind) {
+  function rollContents(kind, isClass) {
     const K = KINDS()[kind] || KINDS().small;
-    const c = { kind, cards: [], coins: 0 };
+    const c = { kind, cards: [], coins: 0, isClass: !!isClass };
+    // 职业宝箱：只掉落本职业的职业卡牌（2026-09-06）
+    if (isClass && kind !== 'boss') {
+      const pool = (G && G.myClass ? SDT.Cards.classPool(G.myClass) : []).filter(x => x.rarity === '职业');
+      const n0 = K.pickFrom || K.cards || 0;
+      for (let i = 0; i < n0; i++) {
+        if (!pool.length) break;
+        c.cards.push(pool[Math.floor(Random.random('loot') * pool.length)]);
+      }
+      if (K.coins) c.coins = rndInt(K.coins[0], K.coins[1]);
+      return c;
+    }
     // 随机卡池（2026-09-05 设计者定版爆率）：只开 武术/法术/装备/道具/资源 五类，
     // 稀有度 古朴:稀有:史诗 = 2.25:1.5:1，资源/道具再 ×0.8；传说/职业/初始不直接生成
     // （统一走 SDT.Cards.randomDropCard，职业卡只能从职业卡池获取）；同一宝箱内尽量不重复
@@ -52,17 +63,22 @@ import { Random } from './random.js';
     const out = [];
     combo.forEach(part => {
       const n = Array.isArray(part.n) ? rndInt(part.n[0], part.n[1]) : (part.n || 0);
-      for (let i = 0; i < n; i++) out.push({ kind: part.k });
+      for (let i = 0; i < n; i++) {
+        // 职业宝箱（2026-09-06）：黑箱，出现概率为普通宝箱的 1/3，只掉落职业卡牌
+        const isClass = Random.random('loot') < 1 / 3;
+        out.push({ kind: part.k, isClass });
+      }
     });
+    if (out.some(c => c.isClass)) UI.log('[[icon:archive]] 出现黑色<b>职业宝箱</b>——只掉落职业卡牌！', 'loot');
     return out;
   }
 
   // 掉落摘要文案：小宝箱×2、大宝箱×1
   function dropText(chests) {
     const counts = {};
-    chests.forEach(c => { counts[c.kind] = (counts[c.kind] || 0) + 1; });
+    chests.forEach(c => { const k = c.kind + (c.isClass ? ':cls' : ''); counts[k] = (counts[k] || 0) + 1; });
     return Object.entries(counts)
-      .map(([k, n]) => `<b>${n}</b> 个${KINDS()[k].name}`)
+      .map(([k, n]) => `<b>${n}</b> 个${k.endsWith(':cls') ? '职业·' : ''}${KINDS()[k.split(':')[0]].name}`)
       .join('，');
   }
 
@@ -86,7 +102,8 @@ import { Random } from './random.js';
       if (cb) cb();
       return;
     }
-    cur = rollContents(queue[idx].kind);
+    cur = rollContents(queue[idx].kind, queue[idx].isClass);
+    cur.isClass = !!queue[idx].isClass;
     idx++;
     render();
     scheduleRevealSfx();
@@ -100,7 +117,7 @@ import { Random } from './random.js';
     const K = KINDS()[cur.kind];
     const isPick = !!K.pickFrom;   // 中宝箱：3 选 1
     const cardsHTML = cur.cards.map((card, i) => `
-      <div class="bt-card chest-fly rl-${riOf(card)}" style="animation-delay:${i * 160}ms"
+      <div class="bt-card chest-fly rl-${riOf(card)}${cur.isClass ? ' cls-chest' : ''}" style="animation-delay:${i * 160}ms"
         ${isPick ? `data-act="chestPick" data-i="${i}" title="点击收下这张"` : 'title="收下时放入背包"'}>
         ${SDT.Cards.cardHTML(card, 'sm')}
       </div>`).join('');
@@ -111,7 +128,8 @@ import { Random } from './random.js';
     const ops = isPick
       ? '<p class="ov-note">点击一张卡牌收下，其余两张散落在风中……</p>'
       : `<div class="scene-ops"><button class="ov-btn ok" data-act="chestTake">[[icon:archive]] 全部收下${cur.coins ? `（含 ${cur.coins} 币）` : ''}</button></div>`;
-    UI.showOverlay(`[[icon:archive]] 搜刮！${K.name} · 第 ${idx} / ${queue.length}`, `
+    UI.showOverlay(`[[icon:archive]] 搜刮！${cur.isClass ? '职业·' : ''}${K.name} · 第 ${idx} / ${queue.length}`, `
+      ${cur.isClass ? '<p class="evt-sts-desc cls-chest-note">黑色职业宝箱：只掉落<b>职业卡牌</b></p>' : ''}
       <p class="evt-sts-desc">${lootLine}</p>
       ${cur.cards.length ? `<div class="bt-hand">${cardsHTML}</div>` : '<p class="ov-empty">（卡牌库是空的，什么也没开出）</p>'}
       ${ops}`, 'chest');
