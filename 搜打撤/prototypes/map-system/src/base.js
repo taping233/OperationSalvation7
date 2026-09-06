@@ -1,3 +1,6 @@
+import { migrateCharacterProgress } from './characters.js';
+
+import { Random } from './random.js';
 
   const SLOT_KEY = (i) => 'sdt-base-v2-slot' + i;
   const LEGACY_KEY = 'sdt-base-v1';   // 旧版全局基地（v0.20 及之前），启动时迁移
@@ -59,7 +62,7 @@
     if (!d.backs || typeof d.backs !== 'object') d.backs = { classic: true };
     d.backs.classic = true;   // 默认卡背永远可用
     if (!d.backSel || !d.backs[d.backSel]) d.backSel = 'classic';
-    return d;
+    return migrateCharacterProgress(d);
   }
 
   function parseRaw(i) {
@@ -118,17 +121,17 @@
       let card = null;
       if (weights) {
         for (let t = 0; t < 30 && !card; t++) {
-          let roll = Math.random() * totalW, rar = null;
+          let roll = Random.random('card') * totalW, rar = null;
           for (const [r, w] of weights) { roll -= w; if (roll <= 0) { rar = r; break; } }
           if (!rar) rar = weights[0][0];
           const sub = pool.filter(c => c.rarity === rar && !taken.has(c.id));
-          if (sub.length) card = sub[Math.floor(Math.random() * sub.length)];
+          if (sub.length) card = sub[Math.floor(Random.random('card') * sub.length)];
         }
       }
       if (!card) {
         const sub = pool.filter(c => !taken.has(c.id));
         if (!sub.length) break;
-        card = sub[Math.floor(Math.random() * sub.length)];
+        card = sub[Math.floor(Random.random('card') * sub.length)];
       }
       taken.add(card.id);
       data.stash.push({ card: { ...card }, count: 1 });

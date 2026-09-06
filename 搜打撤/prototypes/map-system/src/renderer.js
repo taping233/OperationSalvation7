@@ -1,5 +1,7 @@
 
-  import { BUILD_VERSION, assetUrl } from './asset-url.js';
+import { circle, drawCover, font, hash2, mixHex, rrect, shade } from './renderer.primitives.js';
+import { drawFlame, drawIcon, drawBitmapIcon } from './renderer.icons.js';
+import { shakeOffset, drawFX } from './renderer.fx.js';
 const SDT = window.SDT;
   const TAU = Math.PI * 2;
   const T0 = SDT.MAP.tile;   // 缩放基准单位（特效 / 棋子尺寸用）
@@ -18,284 +20,37 @@ const SDT = window.SDT;
 
   // 局内壁纸：静态图版（残骸海岸）。静态图无逐帧解码开销，比视频版更省 GPU
   const environmentBackdrop = new Image();
-  environmentBackdrop.src = assetUrl('assets/board-backdrop-wreck.png');
-
-  function drawCover(ctx, image, width, height) {
-    const mw = image.naturalWidth, mh = image.naturalHeight;
-    if (!image.complete || !mw) return;
-    const scale = Math.max(width / mw, height / mh);
-    const w = mw * scale, h = mh * scale;
-    ctx.drawImage(image, (width - w) / 2, (height - h) / 2, w, h);
+  let backdropCanvas = null;               // 壁纸合成层（尺寸或就绪状态变化时重建）
+  const backdropKey = { w: 0, h: 0, ready: false };
+  function ensureBackdrop(cam) {
+    const ready = environmentBackdrop.complete && environmentBackdrop.naturalWidth > 0;
+    if (backdropCanvas && backdropKey.w === cam.viewW && backdropKey.h === cam.viewH && backdropKey.ready === ready) return backdropCanvas;
+    backdropKey.w = cam.viewW; backdropKey.h = cam.viewH; backdropKey.ready = ready;
+    const c = document.createElement('canvas');
+    c.width = Math.max(1, Math.round(cam.viewW * (window.devicePixelRatio || 1)));
+    c.height = Math.max(1, Math.round(cam.viewH * (window.devicePixelRatio || 1)));
+    const b = c.getContext('2d');
+    b.scale(c.width / cam.viewW, c.height / cam.viewH);
+    // 壁纸未就绪时回退纯色；就绪后整层铺底，bg 渐变降为 50% 遮罩保证结点可读
+    b.fillStyle = '#0B0E12';
+    b.fillRect(0, 0, cam.viewW, cam.viewH);
+    if (ready) drawCover(b, environmentBackdrop, cam.viewW, cam.viewH);
+    b.globalAlpha = 0.5;
+    const bg = b.createLinearGradient(0, 0, 0, cam.viewH);
+    bg.addColorStop(0, COLORS.bgTop);
+    bg.addColorStop(1, COLORS.bgBottom);
+    b.fillStyle = bg;
+    b.fillRect(0, 0, cam.viewW, cam.viewH);
+    backdropCanvas = c;
+    return c;
   }
+  environmentBackdrop.addEventListener('load', () => { backdropCanvas = null; SDT.RenderScheduler?.invalidate(); });
+  environmentBackdrop.src = new URL('../assets/board-backdrop-wreck.webp', import.meta.url).href;
 
-  // ---------- FX：飘字 / 落点脉冲 / 震屏 ----------
-  const FX = {
-    floats: [], pulses: [], shakes: [],
-    // v0.22：飘字加大加久（结算反馈要一眼看清，不能一闪而过）
-    float(text, wx, wy, color, big) {
-      this.floats.push({ text, x: wx + (Math.random() - 0.5) * 10, y: wy,
-        color, big: !!big, t0: -1, dur: big ? 2.1 : 1.7 });
-    },
-    pulse(wx, wy, color) { this.pulses.push({ x: wx, y: wy, color, t0: -1, dur: 0.55 }); },
-    shake(power, dur) { this.shakes.push({ power, dur, t0: -1 }); },
-    clear() { this.floats.length = 0; this.pulses.length = 0; this.shakes.length = 0; },
-  };
-  SDT.FX = FX;
-
-  // ---------- 小工具 ----------
-  function hash2(x, y) {
-    let n = (x * 374761393 + y * 668265263) >>> 0;
-    n = ((n ^ (n >>> 13)) * 1274126177) >>> 0;
-    return ((n ^ (n >>> 16)) >>> 0) / 4294967296;
-  }
-
-  function shade(hex, amt) {
-    const n = parseInt(hex.slice(1), 16);
-    const r = Math.max(0, Math.min(255, Math.round(((n >> 16) & 255) + 255 * amt)));
-    const g = Math.max(0, Math.min(255, Math.round(((n >> 8) & 255) + 255 * amt)));
-    const b = Math.max(0, Math.min(255, Math.round((n & 255) + 255 * amt)));
-    return `rgb(${r},${g},${b})`;
-  }
-
-  function mixHex(a, b, t) {
-    const na = parseInt(a.slice(1), 16), nb = parseInt(b.slice(1), 16);
-    const ch = (s) => Math.round(((na >> s) & 255) + (((nb >> s) & 255) - ((na >> s) & 255)) * t);
-    return '#' + ((1 << 24) + (ch(16) << 16) + (ch(8) << 8) + ch(0)).toString(16).slice(1);
-  }
-
-  function font(cam, size) {
-    return `bold ${size / cam.zoom}px "Segoe UI","Microsoft YaHei",sans-serif`;
-  }
-
-  function circle(ctx, x, y, r) { ctx.beginPath(); ctx.arc(x, y, r, 0, TAU); }
-  function rrect(ctx, x, y, w, h, r) {
-    ctx.beginPath();
-    ctx.moveTo(x + r, y);
-    ctx.arcTo(x + w, y, x + w, y + h, r);
-    ctx.arcTo(x + w, y + h, x, y + h, r);
-    ctx.arcTo(x, y + h, x, y, r);
-    ctx.arcTo(x, y, x + w, y, r);
-    ctx.closePath();
-  }
-  function fillStroke(ctx, fill, stroke, lw) {
-    if (fill) { ctx.fillStyle = fill; ctx.fill(); }
-    if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = lw; ctx.stroke(); }
-  }
-
-  // 火焰（h/w 可分离抖动，产生摇曳感）
-  function drawFlame(ctx, cx, cy, u, scale, t) {
-    scale = scale || 1;
-    const w = scale, h = scale * (1 + 0.08 * Math.sin((t || 0) * 7 + cx * 0.11));
-    ctx.fillStyle = '#f2854a';
-    ctx.beginPath();
-    ctx.moveTo(cx, cy - 11 * u * h);
-    ctx.bezierCurveTo(cx + 9 * u * w, cy - 3 * u * h, cx + 8 * u * w, cy + 5 * u * h, cx, cy + 9 * u * h);
-    ctx.bezierCurveTo(cx - 8 * u * w, cy + 5 * u * h, cx - 9 * u * w, cy - 3 * u * h, cx, cy - 11 * u * h);
-    ctx.fill();
-    ctx.fillStyle = '#ffd166';
-    ctx.beginPath();
-    ctx.moveTo(cx, cy - 4 * u * h);
-    ctx.bezierCurveTo(cx + 4.5 * u * w, cy + 1 * u * h, cx + 4 * u * w, cy + 5 * u * h, cx, cy + 9 * u * h);
-    ctx.bezierCurveTo(cx - 4 * u * w, cy + 5 * u * h, cx - 4.5 * u * w, cy + 1 * u * h, cx, cy - 4 * u * h);
-    ctx.fill();
-  }
-
-  /* ============ 卡通图标（以结点中心 cx,cy 为原点，u = 缩放） ============ */
-  function drawIcon(ctx, def, cx, cy, u, t) {
-    const k = def.type;
-    switch (k) {
-      case 'coin': { // 金币
-        circle(ctx, cx, cy, 10 * u); fillStroke(ctx, '#f5c542', '#a8791b', 2 * u);
-        circle(ctx, cx, cy, 6 * u); fillStroke(ctx, null, '#ffe28a', 1.6 * u);
-        break;
-      }
-      case 'wood': { // 原木
-        rrect(ctx, cx - 13 * u, cy - 5 * u, 22 * u, 10 * u, 4 * u);
-        fillStroke(ctx, '#8a5a2b', '#59391a', 1.8 * u);
-        circle(ctx, cx + 9 * u, cy, 6 * u); fillStroke(ctx, '#c8956a', '#59391a', 1.8 * u);
-        circle(ctx, cx + 9 * u, cy, 2.5 * u); fillStroke(ctx, null, '#8a5a2b', 1.4 * u);
-        break;
-      }
-      case 'battle': { // 交叉双剑
-        ctx.strokeStyle = '#d8dde4'; ctx.lineWidth = 3 * u; ctx.lineCap = 'round';
-        ctx.beginPath(); ctx.moveTo(cx - 9 * u, cy - 9 * u); ctx.lineTo(cx + 9 * u, cy + 9 * u); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(cx + 9 * u, cy - 9 * u); ctx.lineTo(cx - 9 * u, cy + 9 * u); ctx.stroke();
-        ctx.strokeStyle = '#f5c542'; ctx.lineWidth = 2.2 * u;
-        ctx.beginPath(); ctx.moveTo(cx - 6 * u, cy + 3 * u); ctx.lineTo(cx - 2 * u, cy + 7 * u); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(cx + 6 * u, cy + 3 * u); ctx.lineTo(cx + 2 * u, cy + 7 * u); ctx.stroke();
-        ctx.lineCap = 'butt';
-        break;
-      }
-      case 'event': { // 问号气泡
-        circle(ctx, cx, cy, 11 * u); fillStroke(ctx, '#2ba58a', '#17705c', 2 * u);
-        ctx.fillStyle = '#eafffa';
-        ctx.font = `bold ${15 * u}px "Segoe UI",sans-serif`;
-        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-        ctx.fillText('?', cx, cy + 1 * u);
-        break;
-      }
-      case 'shop': { // 商店（遮阳篷店面）
-        rrect(ctx, cx - 11 * u, cy - 2 * u, 22 * u, 12 * u, 1.5 * u);
-        fillStroke(ctx, '#e8d3ae', '#7c5a33', 1.8 * u);
-        rrect(ctx, cx - 3.5 * u, cy + 2 * u, 7 * u, 8 * u, 1 * u); // 门
-        fillStroke(ctx, '#7c5a33', null, 0);
-        for (let i = 0; i < 3; i++) { // 三片红白篷
-          ctx.fillStyle = i % 2 === 0 ? '#e0453a' : '#f5efe2';
-          ctx.beginPath();
-          ctx.arc(cx - 7.5 * u + i * 7.5 * u, cy - 2 * u, 4.4 * u, Math.PI, 0);
-          ctx.closePath(); ctx.fill();
-        }
-        ctx.strokeStyle = '#7c5a33'; ctx.lineWidth = 1.6 * u;
-        ctx.beginPath(); ctx.moveTo(cx - 12 * u, cy - 2 * u); ctx.lineTo(cx + 12 * u, cy - 2 * u); ctx.stroke();
-        break;
-      }
-      case 'chest': { // 宝箱
-        rrect(ctx, cx - 11 * u, cy - 3 * u, 22 * u, 12 * u, 2 * u);
-        fillStroke(ctx, '#8a5a2b', '#4a2f12', 1.8 * u);
-        rrect(ctx, cx - 11 * u, cy - 10 * u, 22 * u, 8 * u, 3 * u);
-        fillStroke(ctx, '#a86e38', '#4a2f12', 1.8 * u);
-        rrect(ctx, cx - 2.2 * u, cy - 4 * u, 4.4 * u, 5.5 * u, 1 * u);
-        fillStroke(ctx, '#f5c542', '#a8791b', 1.2 * u);
-        break;
-      }
-      case 'rations': { // 面包
-        ctx.beginPath(); ctx.ellipse(cx, cy + 1 * u, 11 * u, 7 * u, 0, 0, TAU);
-        fillStroke(ctx, '#d9a05b', '#8a5a2b', 1.8 * u);
-        ctx.strokeStyle = '#8a5a2b'; ctx.lineWidth = 1.6 * u;
-        ctx.beginPath(); ctx.moveTo(cx - 4 * u, cy - 3 * u); ctx.lineTo(cx - 1 * u, cy - 1 * u); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(cx + 1 * u, cy - 3 * u); ctx.lineTo(cx + 4 * u, cy - 1 * u); ctx.stroke();
-        break;
-      }
-      case 'key': { // 钥匙
-        ctx.strokeStyle = '#f5c542'; ctx.lineWidth = 2.6 * u; ctx.lineCap = 'round';
-        circle(ctx, cx - 6 * u, cy - 3 * u, 4.5 * u); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(cx - 2 * u, cy - 0.5 * u); ctx.lineTo(cx + 10 * u, cy + 3 * u); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(cx + 5 * u, cy + 1.5 * u); ctx.lineTo(cx + 4 * u, cy + 5.5 * u); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(cx + 8.5 * u, cy + 2.7 * u); ctx.lineTo(cx + 7.5 * u, cy + 6.7 * u); ctx.stroke();
-        ctx.lineCap = 'butt';
-        break;
-      }
-      case 'emergencyExit': { // 紧急撤离（绿色圆牌 + 出箭头）
-        circle(ctx, cx, cy, 11 * u); fillStroke(ctx, '#2f9e44', '#1b6b2c', 2 * u);
-        ctx.strokeStyle = '#eaffef'; ctx.lineWidth = 2.4 * u; ctx.lineCap = 'round';
-        ctx.beginPath(); ctx.moveTo(cx - 5 * u, cy); ctx.lineTo(cx + 5 * u, cy); ctx.stroke();
-        ctx.beginPath();
-        ctx.moveTo(cx + 5.5 * u, cy);
-        ctx.lineTo(cx + 1.5 * u, cy - 3.5 * u);
-        ctx.moveTo(cx + 5.5 * u, cy);
-        ctx.lineTo(cx + 1.5 * u, cy + 3.5 * u);
-        ctx.stroke();
-        ctx.lineCap = 'butt';
-        break;
-      }
-      case 'door': { // 拱门（出口门为绿色 + 出箭头）
-        const col = def.exit ? '#52d273' : '#c9b28a';
-        const stk = def.exit ? '#2e7d43' : '#6b5a3a';
-        ctx.beginPath();
-        ctx.moveTo(cx - 8 * u, cy + 10 * u);
-        ctx.lineTo(cx - 8 * u, cy - 1 * u);
-        ctx.arc(cx, cy - 1 * u, 8 * u, Math.PI, 0);
-        ctx.lineTo(cx + 8 * u, cy + 10 * u);
-        ctx.closePath();
-        fillStroke(ctx, col, stk, 1.8 * u);
-        if (def.exit) { // 白色出箭头
-          ctx.strokeStyle = '#eaffef'; ctx.lineWidth = 2.2 * u; ctx.lineCap = 'round';
-          ctx.beginPath(); ctx.moveTo(cx, cy + 7 * u); ctx.lineTo(cx, cy - 3 * u); ctx.stroke();
-          ctx.beginPath();
-          ctx.moveTo(cx, cy - 4 * u);
-          ctx.lineTo(cx - 3.5 * u, cy - 0.5 * u);
-          ctx.moveTo(cx, cy - 4 * u);
-          ctx.lineTo(cx + 3.5 * u, cy - 0.5 * u);
-          ctx.stroke();
-          ctx.lineCap = 'butt';
-        } else {
-          circle(ctx, cx + 4.5 * u, cy + 4 * u, 1.3 * u); fillStroke(ctx, '#6b5a3a', null, 0);
-        }
-        break;
-      }
-      case 'altar': { // 祭坛（水晶 + 底座）
-        rrect(ctx, cx - 8 * u, cy + 5 * u, 16 * u, 4.5 * u, 1.5 * u);
-        fillStroke(ctx, '#6b4bb0', '#3d2a6e', 1.6 * u);
-        ctx.beginPath();
-        ctx.moveTo(cx, cy - 10 * u);
-        ctx.lineTo(cx + 7 * u, cy);
-        ctx.lineTo(cx, cy + 6 * u);
-        ctx.lineTo(cx - 7 * u, cy);
-        ctx.closePath();
-        fillStroke(ctx, '#c79bf7', '#7e4fd0', 1.8 * u);
-        circle(ctx, cx - 2 * u, cy - 2 * u, 1.4 * u); fillStroke(ctx, '#f2e8ff', null, 0);
-        break;
-      }
-      case 'boss': { // 骷髅
-        circle(ctx, cx, cy - 2 * u, 9 * u); fillStroke(ctx, '#f0e6d2', '#6b5b4a', 1.8 * u);
-        rrect(ctx, cx - 5 * u, cy + 5 * u, 10 * u, 5.5 * u, 2 * u);
-        fillStroke(ctx, '#f0e6d2', '#6b5b4a', 1.6 * u);
-        ctx.fillStyle = '#2b2016';
-        circle(ctx, cx - 3.5 * u, cy - 2 * u, 2 * u); ctx.fill();
-        circle(ctx, cx + 3.5 * u, cy - 2 * u, 2 * u); ctx.fill();
-        ctx.beginPath();
-        ctx.moveTo(cx, cy + 1 * u); ctx.lineTo(cx - 1.5 * u, cy + 3.5 * u); ctx.lineTo(cx + 1.5 * u, cy + 3.5 * u);
-        ctx.closePath(); ctx.fill();
-        ctx.strokeStyle = '#6b5b4a'; ctx.lineWidth = 1 * u;
-        ctx.beginPath(); ctx.moveTo(cx, cy + 6 * u); ctx.lineTo(cx, cy + 9.5 * u); ctx.stroke();
-        break;
-      }
-      case 'entrance': { // 入口旗帜
-        ctx.strokeStyle = '#8a5a2b'; ctx.lineWidth = 2.4 * u;
-        ctx.beginPath(); ctx.moveTo(cx - 6 * u, cy - 11 * u); ctx.lineTo(cx - 6 * u, cy + 11 * u); ctx.stroke();
-        ctx.beginPath();
-        ctx.moveTo(cx - 5 * u, cy - 10 * u);
-        ctx.lineTo(cx + 10 * u, cy - 5.5 * u);
-        ctx.lineTo(cx - 5 * u, cy - 1 * u);
-        ctx.closePath();
-        fillStroke(ctx, '#52d273', '#2e7d43', 1.6 * u);
-        break;
-      }
-    }
-  }
 
   const isCurLayer = (game, li) => li === game.layerIdx;
   const nodeRadius = (n) => n.li === -1 ? (n.def.type === 'altar' ? ALTAR_R : BOSS_R) : NODE_R;
 
-  /* ============ 结点位图图标（assets/icons，惰性加载；未就绪回退简笔画） ============
-   * 物资拾获（币/木材/口粮）合并用随机事件图标；环间门与出口门合并用同一张门。
-   * 出生入口没有位图，恒用简笔画旗帜。 */
-  const BITMAP_SRC = {
-    battle: 'battle', event: 'event', coin: 'event', wood: 'event', rations: 'event',
-    shop: 'shop', fire: 'fire', chest: 'chest', key: 'key',
-    emergencyExit: 'extract', door: 'door', altar: 'altar', boss: 'boss',
-    entrance: 'entrance', player: 'player',
-  };
-  const bitmapCache = {};
-  function bitmapFor(type) {
-    const name = BITMAP_SRC[type];
-    if (!name) return null;
-    let e = bitmapCache[name];
-    if (!e) {
-      e = bitmapCache[name] = { img: new Image(), ok: false };
-      e.img.onload = () => { e.ok = true; };
-      e.img.src = assetUrl('assets/icons/' + name + '.png');
-    }
-    return e.ok ? e.img : null;
-  }
-  // 画圆形位图结点：深色圆底 + 圆形裁剪位图 + 层色描边；无位图返回 false 由调用方回退
-  function drawBitmapIcon(ctx, type, cx, cy, R, cur, z) {
-    const img = bitmapFor(type);
-    if (!img) return false;
-    ctx.fillStyle = '#1d1c1a';
-    circle(ctx, cx, cy, R);
-    ctx.fill();
-    ctx.save();
-    circle(ctx, cx, cy, R * 0.97);
-    ctx.clip();
-    ctx.drawImage(img, cx - R * 0.91, cy - R * 0.91, R * 1.82, R * 1.82);
-    ctx.restore();
-    ctx.strokeStyle = cur ? 'rgba(235,205,140,0.5)' : 'rgba(180,160,120,0.22)';
-    ctx.lineWidth = 1.6 / z;
-    circle(ctx, cx, cy, R);
-    ctx.stroke();
-    return true;
-  }
 
   // 重要结点的微光环绕色
   const GLISTEN = {
@@ -823,59 +578,6 @@ const SDT = window.SDT;
     ctx.restore();
   }
 
-  // ---------- FX 渲染（脉冲 / 飘字 / 震屏偏移） ----------
-  function shakeOffset(t) {
-    let dx = 0, dy = 0;
-    for (let i = FX.shakes.length - 1; i >= 0; i--) {
-      const s = FX.shakes[i];
-      if (s.t0 < 0) s.t0 = t;
-      const k = (t - s.t0) / s.dur;
-      if (k >= 1) { FX.shakes.splice(i, 1); continue; }
-      const d = s.power * (1 - k);
-      dx += Math.sin(t * 93) * d;
-      dy += Math.cos(t * 81) * d;
-    }
-    return [dx, dy];
-  }
-
-  function drawFX(ctx, game) {
-    const z = game.cam.zoom, t = game.time;
-    // 落点脉冲
-    for (let i = FX.pulses.length - 1; i >= 0; i--) {
-      const p = FX.pulses[i];
-      if (p.t0 < 0) p.t0 = t;
-      const k = (t - p.t0) / p.dur;
-      if (k >= 1) { FX.pulses.splice(i, 1); continue; }
-      ctx.save();
-      ctx.strokeStyle = p.color;
-      ctx.globalAlpha = (1 - k) * 0.85;
-      ctx.lineWidth = 2.5 / z * (1 - k * 0.5);
-      ctx.beginPath(); ctx.arc(p.x, p.y, T0 * (0.3 + k * 0.75), 0, TAU); ctx.stroke();
-      ctx.globalAlpha = (1 - k) * 0.22;
-      ctx.fillStyle = p.color;
-      ctx.beginPath(); ctx.arc(p.x, p.y, T0 * (0.3 + k * 0.75), 0, TAU); ctx.fill();
-      ctx.restore();
-    }
-    // 飘字
-    ctx.save();
-    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-    for (let i = FX.floats.length - 1; i >= 0; i--) {
-      const f = FX.floats[i];
-      if (f.t0 < 0) f.t0 = t;
-      const k = (t - f.t0) / f.dur;
-      if (k >= 1) { FX.floats.splice(i, 1); continue; }
-      const ease = 1 - Math.pow(1 - k, 3);
-      ctx.font = `800 ${(f.big ? 26 : 19) / z}px "Segoe UI","Microsoft YaHei",sans-serif`;
-      ctx.globalAlpha = k > 0.72 ? (1 - k) / 0.28 : 1;
-      const y = f.y - T0 * (0.5 + ease * 0.95);
-      ctx.lineWidth = 5.5 / z;
-      ctx.strokeStyle = 'rgba(5,8,12,0.85)';
-      ctx.strokeText(f.text, f.x, y);
-      ctx.fillStyle = f.color;
-      ctx.fillText(f.text, f.x, y);
-    }
-    ctx.restore();
-  }
 
   // ---------- 屏幕空间渐变（背景 / 暗角，仅在窗口尺寸变化时重建） ----------
   function screenGrads(ctx, cam) {
@@ -897,15 +599,8 @@ const SDT = window.SDT;
     const cam = game.cam, map = game.map;
     const T = map.tile, W = map.cols * T, H = map.rows * T;
     const grads = screenGrads(ctx, cam);
-    // 静态壁纸整层铺底，未就绪时回退纯色；原 bg 渐变降为 50% 遮罩保证结点可读
-    ctx.fillStyle = '#0B0E12';
-    ctx.fillRect(0, 0, cam.viewW, cam.viewH);
-    drawCover(ctx, environmentBackdrop, cam.viewW, cam.viewH);
-    ctx.save();
-    ctx.globalAlpha = 0.5;
-    ctx.fillStyle = grads.bg;
-    ctx.fillRect(0, 0, cam.viewW, cam.viewH);
-    ctx.restore();
+    // 静态壁纸 + 50% 渐变遮罩已烘焙成单张合成层，逐帧一次 drawImage（见 ensureBackdrop）
+    ctx.drawImage(ensureBackdrop(cam), 0, 0, cam.viewW, cam.viewH);
 
     const [sx, sy] = shakeOffset(game.time);
     ctx.save();
@@ -939,4 +634,4 @@ const SDT = window.SDT;
 
   SDT.Renderer = { draw };
 
-export { FX, SDT };
+export { SDT };

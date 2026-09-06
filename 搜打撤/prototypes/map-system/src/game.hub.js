@@ -1,3 +1,4 @@
+import { characterName } from './characters.js';
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const SDT = window.SDT;
 const UI = window.SDT.UI;
@@ -5,7 +6,7 @@ import { esc } from './shared.js';
 import { MAP } from './game.core.js';
 import { escAttr } from './shared.js';
 import { MODES, game, newRun, setLobby, showTitle } from './game.core.js';
-import { Sfx, _set_cardPageOpen } from './game.cardslib.js';
+import { Sfx, configureCardNavigation, _set_cardPageOpen } from './game.cardslib.js';
 
 // 基地当前页签（原为隐式全局，ESM 严格模式下必须显式声明）
 let hubTab = 'deploy';
@@ -32,7 +33,7 @@ let hubTab = 'deploy';
       { id: 'deploy', icon: 'flag', name: '出发' },
       { id: 'stash', icon: 'home', name: '仓库' },
       { id: 'upgrade', icon: 'tools', name: '升级' },
-      { id: 'classes', icon: 'medal', name: '职业' },
+      { id: 'classes', icon: 'medal', name: '人物' },
       { id: 'ach', icon: 'trophy', name: '成就' },
     ];
     const body = hubTab === 'deploy' ? hubDeployHTML()
@@ -130,7 +131,7 @@ let hubTab = 'deploy';
     const R = MAP.rules;
     const T = {
       deploy: { title: '出发说明', items: [
-        ['玩法选择', '出发后会随机空降到外圈入口，并从全部职业中自由选择 1 个本局职业（熟练度提供常驻加成）。'],
+        ['玩法选择', '出发后会随机空降到外圈入口，并从全部人物中自由选择 1 个本局人物（熟练度提供常驻加成）。'],
         ['出征预报', '点击「出发」后会打开出征整备：选择要从仓库携带的卡牌——只有带上的卡才能在战斗中使用。撤离成功后也会出现整理界面，让你把背包战利品放回仓库。'],
         ['宝藏大门', '在棋盘的钥匙格收集钥匙，集齐 ' + (SDT.Base.KEY_NEEDED || 10) + ' 把可开启特殊关卡（关卡制作中）。'],
       ] },
@@ -144,7 +145,7 @@ let hubTab = 'deploy';
         ['仓库扩建', '每消耗木材 ×' + R.stashUpgradeWood + ' 扩建 ' + R.stashUpgradeSlots + ' 张容量，上限 ' + R.stashMax + ' 张。'],
         ['宠物小屋', '宠物「阿七」看守着背包的安全格——撤离失败时，它会把安全格里的卡牌抢运回基地。每消耗口粮 ×' + R.safeUpgradeRations + ' 升级 1 格，上限 ' + R.safeMax + ' 格。'],
       ] },
-      classes: { title: '职业说明', items: [
+      classes: { title: '人物说明', items: [
         ['熟练度', '每局出发时从全部角色中自由选择 1 个；击败敌人、撤离成功都会累积所选角色的熟练度经验，升级获得常驻加成（下一局出征生效）。'],
       ] },
       ach: { title: '成就与卡背', items: [
@@ -487,21 +488,21 @@ let hubTab = 'deploy';
       </div>`;
   }
 
-  // —— 职业页：各职业熟练度等级 ——
+  // —— 人物页：各人物熟练度等级 ——
   function hubClassesHTML() {
     const rows = SDT.Meta.classSummary().map(c => `
       <div class="ach-row${c.lv > 1 || c.xp > 0 ? ' done' : ''}">
         <div class="cls-hub-art">${SDT.Art.classArt(c.cls)}</div>
         <div class="ach-info">
-          <b>${esc(c.cls)} <span style="color:#e0a458;font-size:12px">Lv.${c.lv}${c.maxed ? ' · MAX' : ''}</span></b>
-          <span>熟练加成：${SDT.Meta.perkText(c.lv)}（出征时生效） · 职业卡 ${c.pool} 张</span>
+          <b>${esc(characterName(c.cls))} <span style="color:#e0a458;font-size:12px">Lv.${c.lv}${c.maxed ? ' · MAX' : ''}</span></b>
+          <span>熟练加成：${SDT.Meta.perkText(c.lv)}（出征时生效） · 人物卡 ${c.pool} 张</span>
           <div class="xp-bar"><i style="width:${c.maxed ? 100 : (c.xp / c.need * 100).toFixed(1)}%"></i></div>
           <div class="xp-txt">${c.maxed ? '已满级' : `经验 ${c.xp} / ${c.need}`}</div>
         </div>
       </div>`).join('');
     return `
       <section class="hub-card">
-        <h3>[[icon:medal]] 职业熟练度</h3>
+        <h3>[[icon:medal]] 人物熟练度</h3>
         <div class="ach-list">${rows}</div>
       </section>`;
   }
@@ -562,5 +563,8 @@ let hubTab = 'deploy';
   // 设计者 2026-09-02 定版：从背包丢弃的牌无法取回；消耗的牌可在火堆复原
 
 export { closeBase, deployPick, openBaseHub, renderHub };
-const _set_deployPick = (v) => { deployPick = v; };
-export { _set_deployPick };
+configureCardNavigation({
+  closeBase,
+  renderHub,
+  resetDeployPick: () => { deployPick = null; },
+});

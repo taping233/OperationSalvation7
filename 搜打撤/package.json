@@ -6,11 +6,18 @@
   "type": "module",
   "description": "搜打撤 · 代号7 游戏源码（Vite + Vitest）",
   "scripts": {
+    "narrative:compile": "node scripts/compile-narrative.mjs",
+    "predev": "npm run narrative:compile",
     "dev": "vite",
+    "prebuild": "npm run narrative:compile",
     "build": "vite build",
     "preview": "vite preview",
+    "pretest": "npm run narrative:compile",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "perf": "node scripts/perf-benchmark.cjs",
+    "diagnostics:gpu": "desktop\\electron\\electron.exe scripts\\electron-gpu-info.cjs",
+    "assets:audit": "node scripts/asset-audit.cjs"
   },
   "devDependencies": {
     "acorn": "^8.14.0",
@@ -20,6 +27,12 @@
     "vitest": "^3.0.0"
   },
   "dependencies": {
-    "pixi.js": "^8.20.1"
+    "@pixi/particle-emitter": "^5.0.10",
+    "howler": "^2.2.4",
+    "inkjs": "^2.4.0",
+    "motion": "^13.2.0",
+    "pixi.js": "^7.4.3",
+    "sortablejs": "^1.15.7",
+    "three": "0.185.1"
   }
 }

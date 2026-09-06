@@ -1,3 +1,5 @@
+import { RULES } from './rules.js';
+
 /* ============================================================
  * 搜打撤 v0.3 —— 三环棋盘数据（按设计者的格子备注重建）
  *
@@ -34,30 +36,8 @@ SDT.MAP = {
   rows: 30,
   tile: 48,
 
-  rules: {
-    diceSides: 6,
-    stepMs: 340,            // 棋子步行动画：原速度的 0.5 倍（只影响地图移动）
-    emergencyExitCost: 10,   // 紧急撤离点价格（币）
-    playerMaxHp: 30,         // 人物初始（最大）生命
-    playerAtk: 4,            // 人物初始攻击力
-    fireHeal: 10,            // 火堆休整恢复量（设计者 2026-09-02 定版：火堆回复 10 血）
-    bagSize: 16,             // 背包初始格数（基地可扩建）
-    bagMax: 30,              // 背包格数上限
-    bagUpgradeWood: 2,       // 每扩建 1 格背包消耗的木材（基地）
-    safeStart: 2,            // 宠物安全格初始格数
-    safeMax: 6,              // 宠物安全格上限
-    safeUpgradeRations: 2,   // 每升级 1 格安全格消耗的口粮（基地）
-    stashStart: 25,          // 卡牌仓库初始容量（张）
-    stashMax: 49,            // 卡牌仓库容量上限（25 + 8 次 ×3）
-    stashUpgradeWood: 2,     // 每次仓库扩建消耗的木材（基地）
-    stashUpgradeSlots: 3,    // 每次仓库扩建增加的容量（张）
-    battleEnergy: 2,         // 战斗：每回合固定能量（费，普通/BOSS 通用）
-    battleStartDraw: 5,      // BOSS战：开局抽牌数
-    battleTurnDraw: 1,       // BOSS战：每回合开始抽牌数
-    battleHandMax: 8,        // BOSS战：手牌上限（超出则不抽）
-    bossDeckSize: 15,        // BOSS战：需从背包选入的非道具卡牌数（另自动编入 starterSha 张初始攻击）
-    starterSha: 5,           // 每局开始随身携带的初始牌「初始攻击」张数（占 1 格背包）
-  },
+  // 对局模式会临时调整治疗等数值，因此地图持有基线规则的可变副本。
+  rules: { ...RULES },
 
   // ---------- 结点布局（分布式结点地图的唯一真源） ----------
   // 为每个 (li, idx) 逻辑格确定性生成结点中心坐标（世界像素）：

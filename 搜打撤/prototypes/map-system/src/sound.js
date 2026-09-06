@@ -1,22 +1,18 @@
-
-  import { BUILD_VERSION, assetUrl } from './asset-url.js';
-const BGM_URL = assetUrl('assets/bgm-black-stream-sea.mp3');
-  // 开屏（标题）专用曲目：《直到大地变成一颗酸橙》
-  const TITLE_BGM_URL = assetUrl('assets/bgm-sour-orange-earth.mp3');
-  const bgm = new Audio(BGM_URL);
-  bgm.loop = true;
-  bgm.preload = 'auto';
-  const titleBgm = new Audio(TITLE_BGM_URL);
-  titleBgm.loop = true;
-  titleBgm.preload = 'auto';
+import { Howl, Howler } from 'howler';
+import { assetUrl } from './asset-url.js';
+import { Random } from './random.js';
+const BGM_URL = new URL('../assets/bgm-black-stream-sea.mp3', import.meta.url).href;
+// 开屏（标题）专用曲目：《直到大地变成一颗酸橙》
+const TITLE_BGM_URL = new URL('../assets/bgm-sour-orange-earth.mp3', import.meta.url).href;
+// BGM 是 4.6/7.6 MB 的长音频，走 HTML5 流式播放，避免 WebAudio 整段解码阻塞并占用大块内存。
+const bgm = new Howl({ src: [BGM_URL], loop: true, html5: true, preload: false, volume: 0 });
+const titleBgm = new Howl({ src: [TITLE_BGM_URL], loop: true, html5: true, preload: true, volume: 0 });
   let ctx = null, master = null, sfxGain = null, clickGain = null, clickComp = null;
   // 三级开关：muted 全局静音（侧边栏 [[icon:gear]]）· musicOff 只关音乐 · sfxOff 只关音效（设置页）
   let muted = false, musicOff = false, sfxOff = false;
   // 音量 0~1，随 localStorage 持久化；音乐基准 0.45，音效基准 2.5
   let musicVol = 1, sfxVol = 1;
   const BASE_MUSIC = 0.45, BASE_SFX = 2.5;
-  bgm.volume = BASE_MUSIC * musicVol;
-  titleBgm.volume = BASE_MUSIC * musicVol;
   try {
     muted = localStorage.getItem('sdt-muted') === '1';
     musicOff = localStorage.getItem('sdt-music-off') === '1';
@@ -38,7 +34,34 @@ const BGM_URL = assetUrl('assets/bgm-black-stream-sea.mp3');
     loadClicks();
     loadHovers();
     loadSwitches();
+    loadBattle();
     return true;
+  }
+
+  // 所有短音效共享两路解码队列。首次交互仍可立即使用合成音回退，后台不再同时解码 47 个文件。
+  const decodeQueue = [];
+  let activeDecodes = 0;
+  const MAX_CONCURRENT_DECODES = 2;
+  function pumpDecodeQueue() {
+    while (activeDecodes < MAX_CONCURRENT_DECODES && decodeQueue.length) {
+      const job = decodeQueue.shift();
+      activeDecodes++;
+      fetch(job.url)
+        .then(r => { if (!r.ok) throw new Error(r.status); return r.arrayBuffer(); })
+        .then(ab => ctx.decodeAudioData(ab))
+        .then(normalizeBuffer)
+        .then(job.resolve, job.reject)
+        .finally(() => {
+          activeDecodes--;
+          setTimeout(pumpDecodeQueue, 0);
+        });
+    }
+  }
+  function decodeQueued(url) {
+    return new Promise((resolve, reject) => {
+      decodeQueue.push({ url, resolve, reject });
+      pumpDecodeQueue();
+    });
   }
 
   /* ---------- 开关音效：Kenney switch（CC0），预解码缓存，随机选一 ---------- */
@@ -48,8 +71,7 @@ const BGM_URL = assetUrl('assets/bgm-black-stream-sea.mp3');
     if (switchBuffers) return;
     switchBuffers = [];
     Promise.all(SWITCH_URLS.map(u =>
-      fetch(u).then(r => { if (!r.ok) throw new Error(r.status); return r.arrayBuffer(); })
-        .then(ab => normalize(ctx.decodeAudioData(ab)))
+      decodeQueued(u)
     )).then(bufs => {
       const ok = bufs.filter(Boolean);
       if (ok.length) switchBuffers = ok;
@@ -63,8 +85,7 @@ const BGM_URL = assetUrl('assets/bgm-black-stream-sea.mp3');
     if (hoverBuffers) return;
     hoverBuffers = [];
     Promise.all(HOVER_URLS.map(u =>
-      fetch(u).then(r => { if (!r.ok) throw new Error(r.status); return r.arrayBuffer(); })
-        .then(ab => normalize(ctx.decodeAudioData(ab)))
+      decodeQueued(u)
     )).then(bufs => {
       const ok = bufs.filter(Boolean);
       if (ok.length) hoverBuffers = ok;
@@ -78,33 +99,31 @@ const BGM_URL = assetUrl('assets/bgm-black-stream-sea.mp3');
     if (clickBuffers) return;
     clickBuffers = []; // 占位：解码完成前先回退合成音
     Promise.all(CLICK_URLS.map(u =>
-      fetch(u).then(r => { if (!r.ok) throw new Error(r.status); return r.arrayBuffer(); })
-        .then(ab => normalize(ctx.decodeAudioData(ab)))
+      decodeQueued(u)
     )).then(bufs => {
       const ok = bufs.filter(Boolean);
       if (ok.length) clickBuffers = ok;
     }).catch(() => { /* 保留空数组，回退合成音 */ });
   }
   // 峰值归一化：Kenney 原始文件响度差异大且偏轻，统一拉到 95% 满幅
-  function normalize(promise) {
-    return promise.then(buf => {
-      try {
-        const peak = Math.max(1e-6, Math.max(...Array.from({ length: buf.numberOfChannels }, (_, c) =>
-          Math.max(...buf.getChannelData(c).map(Math.abs)))));
-        const k = 0.95 / peak;
-        if (Math.abs(k - 1) < 0.05) return buf;
-        for (let c = 0; c < buf.numberOfChannels; c++) {
-          const d = buf.getChannelData(c);
-          for (let i = 0; i < d.length; i++) d[i] *= k;
-        }
-      } catch (e) { /* 归一化失败就用原样 */ }
-      return buf;
-    });
+  function normalizeBuffer(buf) {
+    let peak = 1e-6;
+    for (let c = 0; c < buf.numberOfChannels; c++) {
+      const data = buf.getChannelData(c);
+      for (let i = 0; i < data.length; i++) peak = Math.max(peak, Math.abs(data[i]));
+    }
+    const k = 0.95 / peak;
+    if (Math.abs(k - 1) < 0.05) return buf;
+    for (let c = 0; c < buf.numberOfChannels; c++) {
+      const data = buf.getChannelData(c);
+      for (let i = 0; i < data.length; i++) data[i] *= k;
+    }
+    return buf;
   }
   function playClick() {
     if (clickBuffers && clickBuffers.length) {
       const src = ctx.createBufferSource();
-      src.buffer = clickBuffers[Math.floor(Math.random() * clickBuffers.length)];
+      src.buffer = clickBuffers[Math.floor(Random.random('audio') * clickBuffers.length)];
       src.connect(clickGain || sfxGain);
       src.start();
     } else {
@@ -114,7 +133,7 @@ const BGM_URL = assetUrl('assets/bgm-black-stream-sea.mp3');
   function playHover() {
     if (hoverBuffers && hoverBuffers.length) {
       const src = ctx.createBufferSource();
-      src.buffer = hoverBuffers[Math.floor(Math.random() * hoverBuffers.length)];
+      src.buffer = hoverBuffers[Math.floor(Random.random('audio') * hoverBuffers.length)];
       const g = ctx.createGain(); g.gain.value = 0.12; // 归一化后很响，压低成轻提示
       src.connect(g); g.connect(sfxGain);
       src.start();
@@ -125,7 +144,7 @@ const BGM_URL = assetUrl('assets/bgm-black-stream-sea.mp3');
   function playSwitch() {
     if (switchBuffers && switchBuffers.length) {
       const src = ctx.createBufferSource();
-      src.buffer = switchBuffers[Math.floor(Math.random() * switchBuffers.length)];
+      src.buffer = switchBuffers[Math.floor(Random.random('audio') * switchBuffers.length)];
       const g = ctx.createGain(); g.gain.value = 0.5;
       src.connect(g); g.connect(sfxGain);
       src.start();
@@ -133,6 +152,43 @@ const BGM_URL = assetUrl('assets/bgm-black-stream-sea.mp3');
       tone({ f: 700, f2: 1050, type: 'square', dur: .05, vol: .03 });
     }
   }
+  /* ---------- 战斗/开箱采样：Kenney Impact Sounds / RPG Audio / Music Jingles（CC0）----------
+     预解码缓存，按键随机选一；归一化后按 BATTLE_GAIN 压回各自响度。
+     加载失败时该键缺位，sfx() 自动回退下方 SFX 表的合成音。 */
+  const BATTLE_URLS = {
+    hit:        [1, 2, 3, 4].map(i => assetUrl(`assets/sfx/battle/hit-${i}.ogg`)),
+    hurt:       [1, 2].map(i => assetUrl(`assets/sfx/battle/hurt-${i}.ogg`)),
+    parry:      [1, 2].map(i => assetUrl(`assets/sfx/battle/parry-${i}.ogg`)),
+    curse:      [1, 2].map(i => assetUrl(`assets/sfx/battle/curse-${i}.ogg`)),
+    heal:       [1, 2, 3].map(i => assetUrl(`assets/sfx/battle/heal-${i}.ogg`)),
+    chestShake: [1, 2].map(i => assetUrl(`assets/sfx/battle/chestshake-${i}.ogg`)),
+    chestBurst: [1, 2, 3].map(i => assetUrl(`assets/sfx/battle/chestburst-${i}.ogg`)),
+    reveal:     [1, 2, 3].map(i => assetUrl(`assets/sfx/battle/reveal-${i}.ogg`)),
+    legend:     [1, 2, 3].map(i => assetUrl(`assets/sfx/battle/legend-${i}.ogg`)),
+    victory:    [1, 2].map(i => assetUrl(`assets/sfx/battle/victory-${i}.ogg`)),
+    defeat:     [1].map(i => assetUrl(`assets/sfx/battle/defeat-${i}.ogg`)),
+  };
+  // 采样峰值统一到 95% 后偏响，按键系数压回（参考原合成音的相对响度）
+  const BATTLE_GAIN = {
+    hit: 0.55, hurt: 0.55, parry: 0.4, curse: 0.35, heal: 0.45,
+    chestShake: 0.5, chestBurst: 0.65, reveal: 0.45, legend: 0.55,
+    victory: 0.5, defeat: 0.5,
+  };
+  let battleBuffers = null; // null=未加载 {}=加载中/部分就绪
+  function loadBattle() {
+    if (battleBuffers) return;
+    battleBuffers = {};
+    const jobs = Object.entries(BATTLE_URLS).map(([key, urls]) =>
+      Promise.all(urls.map(u =>
+        decodeQueued(u)
+      )).then(bufs => {
+        const ok = bufs.filter(Boolean);
+        if (ok.length) battleBuffers[key] = ok;
+      }).catch(() => { /* 该键缺位，回退合成音 */ })
+    );
+    Promise.all(jobs).catch(() => { /* 各键已自行容错 */ });
+  }
+
   const now = () => ctx.currentTime;
 
   // 单音：f 起始频率，f2 可选滑动终点
@@ -153,7 +209,7 @@ const BGM_URL = assetUrl('assets/bgm-black-stream-sea.mp3');
     const len = Math.max(1, Math.floor(ctx.sampleRate * dur));
     const buf = ctx.createBuffer(1, len, ctx.sampleRate);
     const d = buf.getChannelData(0);
-    for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+    for (let i = 0; i < len; i++) d[i] = Random.random('audio') * 2 - 1;
     const src = ctx.createBufferSource(); src.buffer = buf;
     const bp = ctx.createBiquadFilter(); bp.type = type; bp.Q.value = 0.8;
     bp.frequency.setValueAtTime(fHi, t0);
@@ -182,7 +238,18 @@ const BGM_URL = assetUrl('assets/bgm-black-stream-sea.mp3');
     parry:  () => { tone({ f: 1250, f2: 1850, type: 'sine', dur: .12, vol: .05 }); tone({ f: 2600, type: 'sine', dur: .07, vol: .02, delay: .05 }); },
     heal:   () => { tone({ f: 520, f2: 780, type: 'sine', dur: .18, vol: .04 }); tone({ f: 660, f2: 990, type: 'sine', dur: .2, vol: .03, delay: .09 }); },
     coin:   () => { tone({ f: 1250, type: 'triangle', dur: .09, vol: .045 }); tone({ f: 1870, type: 'triangle', dur: .14, vol: .035, delay: .06 }); },
-    dice:   () => { for (let i = 0; i < 5; i++) noise({ dur: .03, vol: .03, delay: i * .05, fHi: 3200, fLo: 1600 }); },
+    dice:   () => {
+      // 老板留言 #56：骰子滚动声改为多段随机碰撞嗒声（匹配 640ms 翻滚期，末段落定重音）
+      let t = 0;
+      while (t < .52) {
+        const step = .035 + Math.random() * .05;
+        noise({ dur: .018 + Math.random() * .022, vol: .022 + Math.random() * .03, delay: t, fHi: 4200, fLo: 1400 });
+        if (Math.random() < .4) tone({ f: 2100 + Math.random() * 1500, type: 'sine', dur: .03, vol: .012, delay: t });
+        t += step;
+      }
+      noise({ dur: .05, vol: .05, delay: .54, fHi: 2600, fLo: 700 });
+      tone({ f: 190, f2: 120, type: 'sine', dur: .09, vol: .04, delay: .54 });
+    },
     scene:  () => noise({ dur: .32, vol: .032, fHi: 1300, fLo: 280 }),
     flee:   () => noise({ dur: .26, vol: .04, fHi: 700, fLo: 2600 }),
     ding:   () => { tone({ f: 880, type: 'triangle', dur: .12, vol: .05 }); tone({ f: 1318, type: 'triangle', dur: .18, vol: .04, delay: .09 }); },
@@ -203,8 +270,22 @@ const BGM_URL = assetUrl('assets/bgm-black-stream-sea.mp3');
   };
   function sfx(name) {
     if (muted || sfxOff) return;
+    if (!ensure()) return;
+    // 战斗/开箱采样优先（随机选一），未就绪或缺位时回退合成音
+    const pool = battleBuffers && battleBuffers[name];
+    if (pool && pool.length) {
+      try {
+        const src = ctx.createBufferSource();
+        src.buffer = pool[Math.floor(Random.random('audio') * pool.length)];
+        const g = ctx.createGain();
+        g.gain.value = BATTLE_GAIN[name] || 0.5;
+        src.connect(g); g.connect(sfxGain);
+        src.start();
+        return;
+      } catch (e) { /* 落入合成回退 */ }
+    }
     const fn = SFX[name];
-    if (!fn || !ensure()) return;
+    if (!fn) return;
     try { fn(); } catch (e) { /* 静默 */ }
   }
 
@@ -213,11 +294,24 @@ const BGM_URL = assetUrl('assets/bgm-black-stream-sea.mp3');
   function activeBgm() { return musicMode === 'title' ? titleBgm : bgm; }
   function syncBgm() {
     const on = musicMode && !muted && !musicOff;
-    bgm.muted = muted || musicOff;
-    titleBgm.muted = muted || musicOff;
     const cur = activeBgm();
-    [bgm, titleBgm].forEach(t => { if (t !== cur || !on) t.pause(); });
-    if (on) cur.play().catch(() => {});
+    const target = BASE_MUSIC * musicVol;
+    [bgm, titleBgm].forEach(track => {
+      track.mute(!on);
+      if ((track !== cur || !on) && track.playing()) {
+        track.fade(track.volume(), 0, 280);
+        setTimeout(() => {
+          if (track !== activeBgm() || !musicMode || muted || musicOff) track.pause();
+        }, 300);
+      }
+    });
+    if (!on) return;
+    cur.mute(false);
+    if (!cur.playing()) {
+      cur.volume(0);
+      cur.play();
+      cur.fade(0, target, 420);
+    } else cur.volume(target);
   }
   function music(mode) {
     if (mode === musicMode) { syncBgm(); return; }
@@ -228,6 +322,7 @@ const BGM_URL = assetUrl('assets/bgm-black-stream-sea.mp3');
     muted = !!m;
     try { localStorage.setItem('sdt-muted', muted ? '1' : '0'); } catch (e) {}
     if (master) master.gain.value = muted ? 0 : 1;
+    Howler.mute(muted);
     syncBgm();
   }
   // 只关音乐（设置页）：立即静音已排程的乐句；重开时恢复当前 BGM
@@ -245,8 +340,9 @@ const BGM_URL = assetUrl('assets/bgm-black-stream-sea.mp3');
   function setMusicVolume(v) {
     musicVol = Math.min(1, Math.max(0, +v || 0));
     try { localStorage.setItem('sdt-music-vol', String(musicVol)); } catch (e) {}
-    bgm.volume = BASE_MUSIC * musicVol;
-    titleBgm.volume = BASE_MUSIC * musicVol;
+    const target = BASE_MUSIC * musicVol;
+    bgm.volume(target);
+    titleBgm.volume(target);
   }
   function setSfxVolume(v) {
     sfxVol = Math.min(1, Math.max(0, +v || 0));
@@ -256,6 +352,7 @@ const BGM_URL = assetUrl('assets/bgm-black-stream-sea.mp3');
   // 自动播放策略：首次交互后恢复上下文；若此前已选定 BGM 则立即开声
   function kick() {
     if (!ensure()) return;
+    if (Howler.ctx && Howler.ctx.state === 'suspended') Howler.ctx.resume().catch(() => {});
     syncBgm();
   }
   document.addEventListener('pointerdown', kick);

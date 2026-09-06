@@ -5,7 +5,7 @@ import { esc } from './shared.js';
 import { MAP, bagCap, safeCap } from './game.core.js';
 import { escAttr } from './shared.js';
 import { cardStacks, doDeath, game, newUid, safeUsed, saveGame, usedSlots } from './game.core.js';
-import { openAltarModal } from './game.run.js';
+import { openAltarModal, showRunTransition } from './game.run.js';
 import { _set_cardPageOpen } from './game.cardslib.js';
 
   function cardHealAmount(card) {
@@ -506,7 +506,7 @@ import { _set_cardPageOpen } from './game.cardslib.js';
   // 胜利 100% 掉宝箱（按所在环层 / BOSS 固定 BOSS宝箱），开完宝箱再续流。
   // ESM：循环导入下本模块体可能先于 game.core 执行，顶层读 game 会 TDZ，延迟到 boot 统一绑定
   function bindBagMixins() {
-  game.onBattleEnd = function (opts, playedUids, win, consumedUids) {
+  game.onBattleEnd = async function (opts, playedUids, win, consumedUids) {
     UI.hideOverlay();
     if (win === false) { game.bossCleanupPending = false; doDeath(); return; }
     const toPocket = (uids, why) => {
@@ -544,6 +544,14 @@ import { _set_cardPageOpen } from './game.cardslib.js';
       settle();
       return;
     }
+    await showRunTransition({
+      tone: opts.isBoss ? 'altar' : 'battle',
+      asset: 'scene-battle-bg',
+      eyebrow: opts.isBoss ? 'TARGET ELIMINATED' : 'AREA SECURED',
+      title: opts.isBoss ? '首脑已击破' : '战斗胜利',
+      detail: opts.isBoss ? '污染反应正在消退 · 准备整理战利品' : '威胁解除 · 正在回收战利品',
+      duration: opts.isBoss ? 1350 : 1050,
+    });
     UI.log(opts.isBoss ? '[[icon:trophy]] <b>BOSS战胜利！</b>' : '[[icon:trophy]] 战斗胜利！', 'ok');
     game.bossCleanupPending = !!opts.isBoss;
     // 击杀统计/经验：按击败的敌人数计（BOSS 逐个记名，供祭坛征服者成就）

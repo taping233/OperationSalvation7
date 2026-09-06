@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="board.css">
+<style>
+  .bg { position: absolute; inset: 0; background:
+      radial-gradient(1200px 700px at 50% 12%, #16222B 0%, #0B1015 55%, #07090C 100%); }
+  .bg::before { content: ""; position: absolute; inset: 0;
+    background-image: radial-gradient(rgba(237,242,245,.10) 1px, transparent 1.5px); background-size: 34px 34px; }
+  /* 极光幕 */
+  .bg::after { content: ""; position: absolute; inset: 0; opacity: .5;
+    background: radial-gradient(900px 420px at 24% 6%, rgba(111,184,196,.20), transparent 70%),
+                radial-gradient(1100px 480px at 78% 4%, rgba(173,157,221,.14), transparent 70%); }
+
+  /* 顶部 HUD */
+  .topbar { position: absolute; top: 0; left: 0; right: 0; z-index: 20; display: flex; align-items: center; padding: 30px 60px; gap: 26px; }
+  .hp-chip { display: flex; align-items: center; gap: 14px; height: 58px; padding: 0 28px 0 18px;
+    clip-path: polygon(0 0, 100% 0, calc(100% - 16px) 100%, 0 100%); }
+  .hp-chip .k { font-size: 15px; letter-spacing: .22em; color: var(--fog); }
+  .hp-chip .v { font: 800 26px ui-monospace, monospace; color: var(--ice); }
+  .hp-chip .v small { font-size: 15px; color: var(--fog); }
+  .step-track { flex: 1; display: flex; align-items: center; gap: 0; margin: 0 30px; }
+  .step-track .seg { flex: 1; height: 2px; background: rgba(237,242,245,.16); position: relative; }
+  .step-track .seg.on { background: var(--snow); }
+  .step-track .seg .lab { position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
+    font: 500 11px ui-monospace, monospace; letter-spacing: .3em; color: var(--fog); white-space: nowrap; }
+  .step-track .seg.on .lab { color: var(--snow); }
+  .step-track .seg .dot { position: absolute; top: -4px; left: 50%; transform: translateX(-50%) rotate(45deg);
+    width: 10px; height: 10px; background: var(--fog); }
+  .step-track .seg.on .dot { background: var(--snow); box-shadow: 0 0 12px rgba(237,242,245,.8); }
+  .act { text-align: right; }
+  .act .v { font: 800 30px ui-monospace, monospace; color: var(--amber); }
+  .act .k { font: 500 10px ui-monospace, monospace; letter-spacing: .34em; color: var(--fog); }
+
+  .screen-title { position: absolute; top: 128px; width: 100%; text-align: center; z-index: 20; }
+  .screen-title .zh { font-size: 34px; font-weight: 900; letter-spacing: .5em; text-indent: .5em; }
+  .screen-title .en { margin-top: 8px; }
+
+  /* 职业卡列 */
+  .rail { position: absolute; left: 0; right: 0; top: 300px; bottom: 130px; z-index: 20;
+    display: flex; justify-content: center; gap: 22px; padding: 0 90px; }
+  .ccard { width: 300px; position: relative; background: linear-gradient(175deg, #18242E 0%, #0C1218 74%);
+    border: 1px solid rgba(237,242,245,.16); border-top: 3px solid var(--cc);
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 22px), calc(100% - 22px) 100%, 0 100%);
+    display: flex; flex-direction: column; padding: 22px 22px 20px; transition: none; }
+  .ccard .glow { position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(240px 190px at 50% 0%, color-mix(in srgb, var(--cc) 26%, transparent), transparent 78%); }
+  .ccard .icon { width: 92px; height: 92px; margin: 6px auto 0; position: relative; }
+  .ccard .icon .r1 { position: absolute; inset: 0; border: 2px solid var(--cc); transform: rotate(45deg); }
+  .ccard .icon .r2 { position: absolute; inset: 14px; border: 1px solid color-mix(in srgb, var(--cc) 55%, transparent); transform: rotate(45deg); }
+  .ccard .icon .core { position: absolute; inset: 32px; background: var(--cc); clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); filter: drop-shadow(0 0 14px var(--cc)); }
+  .ccard .cls-name { margin-top: 18px; text-align: center; font-size: 30px; font-weight: 900; letter-spacing: .34em; text-indent: .34em; }
+  .ccard .cls-tag { margin-top: 6px; text-align: center; font-size: 13px; letter-spacing: .2em; color: var(--cc); }
+  .ccard .portrait { margin: 16px auto 0; width: 200px; height: 236px; overflow: hidden; position: relative;
+    clip-path: polygon(0 10px, 10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%); }
+  .ccard .portrait img { width: 100%; height: 100%; object-fit: cover; object-position: top; filter: saturate(.9); }
+  .ccard .hero-list { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+  .ccard .hero-list span { font-size: 11px; padding: 3px 9px; border: 1px solid color-mix(in srgb, var(--cc) 45%, transparent);
+    color: color-mix(in srgb, var(--cc) 80%, #fff); letter-spacing: .12em; }
+  .ccard .desc { margin-top: 14px; font-size: 13px; line-height: 1.75; color: #B9C6CD; }
+  .ccard .foot { margin-top: auto; display: flex; justify-content: space-between; align-items: center; padding-top: 12px;
+    border-top: 1px dashed rgba(237,242,245,.16); }
+  .ccard .foot .cards { font: 500 11px ui-monospace, monospace; letter-spacing: .14em; color: var(--fog); }
+  .ccard .foot .pick { width: 30px; height: 30px; border: 1px solid var(--cc); transform: rotate(45deg); position: relative; }
+  .ccard .foot .pick::after { content: ""; position: absolute; inset: 8px; background: var(--cc); opacity: .35; }
+  .ccard.main { outline: 2px solid var(--cc); outline-offset: 6px; }
+  .ccard.main::before { content: "SELECTED"; position: absolute; top: -34px; left: 50%; transform: translateX(-50%);
+    font: 700 12px ui-monospace, monospace; letter-spacing: .4em; color: var(--cc); }
+
+  .arrow { position: absolute; top: 46%; z-index: 25; width: 58px; height: 58px; border: 1px solid var(--frost-line);
+    background: rgba(20,27,34,.85); display: flex; align-items: center; justify-content: center;
+    font: 300 26px ui-monospace, monospace; color: var(--fog); }
+  .arrow.l { left: 34px; } .arrow.r { right: 34px; }
+
+  .bottom-hint { position: absolute; bottom: 52px; width: 100%; text-align: center; z-index: 20; }
+</style>
+</head>
+<body>
+<div class="board">
+  <div class="screen">
+    <div class="bg"></div>
+
+    <div class="topbar">
+      <div class="hp-chip cut-panel edge-shell">
+        <span class="k">目标生命</span><span class="v">4<small>/4</small></span>
+      </div>
+      <div class="hp-chip cut-panel edge-shell">
+        <span class="k">指挥</span><span class="v">LV.1</span>
+      </div>
+      <div class="step-track">
+        <div class="seg on"><span class="dot"></span><span class="lab">选择职业</span></div>
+        <div class="seg on"><span class="dot"></span><span class="lab">装备卡组</span></div>
+        <div class="seg"><span class="dot"></span><span class="lab">部署出击</span></div>
+      </div>
+      <div class="act"><div class="v">20</div><div class="k">初始行动力</div></div>
+    </div>
+
+    <div class="screen-title">
+      <div class="zh">选择远征队员</div>
+      <div class="en tag-en dim">PICK YOUR OPERATOR · 五职系独立卡池</div>
+    </div>
+
+    <div class="rail">
+      <div class="ccard main" style="--cc:var(--cls-xiake);">
+        <div class="glow"></div>
+        <div class="icon"><span class="r1"></span><span class="r2"></span><span class="core"></span></div>
+        <div class="cls-name">侠客</div>
+        <div class="cls-tag">突进 · 斩击</div>
+        <div class="portrait"><img src="../assets/char-shuangling.png"></div>
+        <div class="hero-list"><span>白梅落影·妄</span><span>天剑诛魔·云阳</span><span>无量仙剑·云风</span></div>
+        <div class="desc">沿风雪前沿突进，以连段斩击与潜匿压制精锐目标，高风险高收益。</div>
+        <div class="foot"><span class="cards">10 职业 + 3 英雄</span><span class="pick"></span></div>
+      </div>
+
+      <div class="ccard" style="--cc:var(--cls-zhanshi);">
+        <div class="glow"></div>
+        <div class="icon"><span class="r1"></span><span class="r2"></span><span class="core"></span></div>
+        <div class="cls-name">战士</div>
+        <div class="cls-tag">重击 · 护甲</div>
+        <div class="portrait"><img src="../assets/char-xuanli.png"></div>
+        <div class="hero-list"><span>龙吟沧海·关云长</span><span>圣剑誓约·亚瑟</span></div>
+        <div class="desc">守住最后一道防线，用护甲吸收与反击撕开正面战线。</div>
+        <div class="foot"><span class="cards">10 职业 + 2 英雄</span><span class="pick"></span></div>
+      </div>
+
+      <div class="ccard" style="--cc:var(--cls-mushi);">
+        <div class="glow"></div>
+        <div class="icon"><span class="r1"></span><span class="r2"></span><span class="core"></span></div>
+        <div class="cls-name">牧师</div>
+        <div class="cls-tag">修复 · 抑制</div>
+        <div class="portrait"><img src="../assets/char-dengkui.png"></div>
+        <div class="hero-list"><span>浪掷风吟·露娜拉</span><span>无极梦魇·血苑修罗</span></div>
+        <div class="desc">为归途留一盏灯：治疗、净化诅咒，把队友从崩溃边缘拉回来。</div>
+        <div class="foot"><span class="cards">11 职业 + 2 英雄</span><span class="pick"></span></div>
+      </div>
+
+      <div class="ccard" style="--cc:var(--cls-fashi);">
+        <div class="glow"></div>
+        <div class="icon"><span class="r1"></span><span class="r2"></span><span class="core"></span></div>
+        <div class="cls-name">法师</div>
+        <div class="cls-tag">元素 · 装置</div>
+        <div class="portrait"><img src="../assets/char-lituan.png"></div>
+        <div class="hero-list"><span>明灯千里·孔明</span><span>神话终章·雷修斯</span></div>
+        <div class="desc">从废品中拼出星图：冰封、奥术与召唤装置的元素调度者。</div>
+        <div class="foot"><span class="cards">10 职业 + 2 英雄</span><span class="pick"></span></div>
+      </div>
+
+      <div class="ccard" style="--cc:var(--cls-jianglin);">
+        <div class="glow"></div>
+        <div class="icon"><span class="r1"></span><span class="r2"></span><span class="core"></span></div>
+        <div class="cls-name">降临者</div>
+        <div class="cls-tag">契印 · 异变</div>
+        <div class="portrait"><img src="../assets/char-baiqi.png"></div>
+        <div class="hero-list"><span>邪渊主宰·妲莉薇特</span><span>楔天玄翼·焚殃</span></div>
+        <div class="desc">以契约交换答案：火焰与深渊降临，代价随力量一同到来。</div>
+        <div class="foot"><span class="cards">11 职业 + 2 英雄</span><span class="pick"></span></div>
+      </div>
+    </div>
+
+    <div class="arrow l">‹</div>
+    <div class="arrow r">›</div>
+
+    <div class="bottom-hint">
+      <span class="tag-en dim">HOVER TO INSPECT · CLICK TO DEPLOY</span>
+    </div>
+  </div>
+
+  <div class="board-head">
+    <div class="id"><span class="chip">B3</span> SQUAD SELECT · 出征编组</div>
+    <div class="tag-en dim" style="text-align:right;">REF · IS SQUAD RAIL<br>CLASS-COLOR GLOW CARDS</div>
+  </div>
+  <div class="spec leader" style="left:130px; top:330px;">职业卡 = 深色发光卡：顶部职业菱徽辉光 + 人设立绘中段 + 英雄卡 chip<br>选中态：职业色外框 + SELECTED 浮标</div>
+  <div class="spec" style="right:120px; top:96px;">顶 HUD：目标生命 / 指挥等级 / 三段式流程轨<br>对应现游戏「目标生命值 + 指挥等级」机制原样保留</div>
+  <div class="board-foot">
+    <span>FROST TERMINAL V1</span><span class="rule"></span><span>SHEET 04 / 09</span>
+  </div>
+</div>
+</body>
+</html>

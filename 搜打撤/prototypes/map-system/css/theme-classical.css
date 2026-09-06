@@ -4,8 +4,8 @@
     --txt:#eae2d2; --sub:#b5a888; --dim:#8d8168; --amber:#c9a874; --amber-soft:#ece4d2;
     --gold:#c9a874; --ember:#686868; --ember-hi:#393939; --ok:#8f9a76; --arcane:#8d8398;
     --red:#373737; --red-deep:#202020; --zhu:#393939; --paper:#ece4d2; --ink-txt:#303030;
-    --cal:"STZhongsong","STKaiti","KaiTi","SimSun",serif;
-    --serif:"Segoe UI", "Microsoft YaHei", sans-serif; }
+    --cal:var(--font-ui);
+    --serif:var(--font-ui); }
   html,body { background:var(--ink); color:var(--txt); letter-spacing:.02em; }
   #sidebar { width:100%; min-width:0; padding:10px 12px; gap:10px; background:
     repeating-linear-gradient(135deg,rgba(180,180,180,.03) 0 1px,transparent 1px 9px),
@@ -55,55 +55,55 @@
   #overlay .scene[data-asset-key] { min-height:340px; background-color:#101010; background-size:cover; background-position:center; }
   #overlay .scene[data-asset-key]::before { content:""; position:absolute; inset:0; z-index:0; pointer-events:none; background:linear-gradient(90deg,rgba(9,9,9,.94),rgba(9,9,9,.72) 46%,rgba(9,9,9,.34)); }
   #overlay .scene[data-asset-key] > * { z-index:1; }
-  #overlay .scene[data-asset-key="scene-battle-bg"] { background-image:url('../assets/scenes/scene-battle-anime-v2.png'); }
-  #overlay .scene[data-asset-key="scene-shop-bg"] { background-image:url('../assets/scenes/scene-shop-anime-v2.png'); }
-  #overlay .scene[data-asset-key="scene-event-bg"] { background-image:url('../assets/scenes/scene-event-anime-v2.png'); }
-  #overlay .scene[data-asset-key="scene-fire-bg"] { background-image:url('../assets/scenes/scene-fire-anime-v2.png'); }
-  #overlay .scene[data-asset-key="scene-chest-bg"] { background-image:url('../assets/scenes/scene-chest-anime-v2.png'); }
-  #overlay .scene[data-asset-key="scene-door-bg"] { background-image:url('../assets/scenes/scene-door-anime-v2.png'); }
-  #overlay .scene[data-asset-key="scene-altar-bg"] { background-image:url('../assets/scenes/scene-altar-anime-v2.png'); }
-  #overlay .scene[data-asset-key="scene-extract-bg"] { background-image:url('../assets/scenes/scene-extract-anime-v2.png'); }
-  #overlay .scene[data-asset-key="scene-pickup-coin"] { background-image:url('../assets/scenes/scene-pickup-coin-anime-v2.png'); }
-  #overlay .scene[data-asset-key="scene-pickup-wood"] { background-image:url('../assets/scenes/scene-pickup-wood-anime-v2.png'); }
-  #overlay .scene[data-asset-key="scene-pickup-rations"] { background-image:url('../assets/scenes/scene-pickup-rations-anime-v2.png'); }
-  #overlay .scene[data-asset-key="scene-pickup-key"] { background-image:url('../assets/scenes/scene-pickup-key-anime-v2.png'); }
-  #overlay .scene[data-asset-key="scene-event-timeskip"] { background-image:url('../assets/scenes/event-timeskip-anime-v2.png'); }
-  #overlay .scene[data-asset-key="scene-event-demondeal"] { background-image:url('../assets/scenes/event-demondeal-anime-v2.png'); }
-  #overlay .scene[data-asset-key="scene-event-bandits"] { background-image:url('../assets/scenes/event-bandits-anime-v2.png'); }
-  #overlay .scene[data-asset-key="scene-event-mystery"] { background-image:url('../assets/scenes/event-mystery-anime-v2.png'); }
-  #overlay .scene[data-asset-key="scene-event-goldmine"] { background-image:url('../assets/scenes/event-goldmine-anime-v2.png'); }
-  #overlay .scene[data-asset-key="scene-event-goldhammer"] { background-image:url('../assets/scenes/event-goldhammer-anime-v2.png'); }
-  #overlay .scene[data-asset-key="scene-event-relief"] { background-image:url('../assets/scenes/event-relief-anime-v2.png'); }
-  #overlay .scene[data-asset-key="scene-event-airdrop"] { background-image:url('../assets/scenes/event-airdrop-anime-v2.png'); }
-  #overlay .scene[data-asset-key="scene-event-chestdraw"] { background-image:url('../assets/scenes/event-chestdraw-anime-v2.png'); }
-  #overlay .scene[data-asset-key="scene-event-systemsupply"] { background-image:url('../assets/scenes/event-systemsupply-anime-v2.png'); }
+  #overlay .scene[data-asset-key="scene-battle-bg"] { background-image:url('../assets/scenes/battle-normal-anime-v2.png'); }
+  #overlay .scene[data-asset-key="scene-shop-bg"] { background-image:url('../assets/scenes/scene-shop-anime-v2.webp'); }
+  #overlay .scene[data-asset-key="scene-event-bg"] { background-image:url('../assets/scenes/scene-altar-anime-v2.webp'); }
+  #overlay .scene[data-asset-key="scene-fire-bg"] { background-image:url('../assets/scenes/scene-fire-anime-v2.webp'); }
+  #overlay .scene[data-asset-key="scene-chest-bg"] { background-image:url('../assets/scenes/scene-chest-anime-v2.webp'); }
+  #overlay .scene[data-asset-key="scene-door-bg"] { background-image:url('../assets/scenes/scene-door-anime-v2.webp'); }
+  #overlay .scene[data-asset-key="scene-altar-bg"] { background-image:url('../assets/scenes/scene-altar-anime-v2.webp'); }
+  #overlay .scene[data-asset-key="scene-extract-bg"] { background-image:url('../assets/scenes/scene-extract-anime-v2.webp'); }
+  #overlay .scene[data-asset-key="scene-pickup-coin"] { background-image:url('../assets/scenes/scene-pickup-coin-anime-v2.webp'); }
+  #overlay .scene[data-asset-key="scene-pickup-wood"] { background-image:url('../assets/scenes/scene-pickup-wood-anime-v2.webp'); }
+  #overlay .scene[data-asset-key="scene-pickup-rations"] { background-image:url('../assets/scenes/scene-pickup-rations-anime-v2.webp'); }
+  #overlay .scene[data-asset-key="scene-pickup-key"] { background-image:url('../assets/scenes/scene-pickup-key-anime-v2.webp'); }
+  #overlay .scene[data-asset-key="scene-event-timeskip"] { background-image:url('../assets/scenes/scene-altar-anime-v2.webp'); }
+  #overlay .scene[data-asset-key="scene-event-demondeal"] { background-image:url('../assets/scenes/scene-door-anime-v2.webp'); }
+  #overlay .scene[data-asset-key="scene-event-bandits"] { background-image:url('../assets/scenes/event-bandits-anime-v2.webp'); }
+  #overlay .scene[data-asset-key="scene-event-mystery"] { background-image:url('../assets/scenes/scene-pickup-key-anime-v2.webp'); }
+  #overlay .scene[data-asset-key="scene-event-goldmine"] { background-image:url('../assets/scenes/scene-pickup-coin-anime-v2.webp'); }
+  #overlay .scene[data-asset-key="scene-event-goldhammer"] { background-image:url('../assets/scenes/scene-fire-anime-v2.webp'); }
+  #overlay .scene[data-asset-key="scene-event-relief"] { background-image:url('../assets/scenes/scene-pickup-rations-anime-v2.webp'); }
+  #overlay .scene[data-asset-key="scene-event-airdrop"] { background-image:url('../assets/scenes/scene-extract-anime-v2.webp'); }
+  #overlay .scene[data-asset-key="scene-event-chestdraw"] { background-image:url('../assets/scenes/scene-chest-anime-v2.webp'); }
+  #overlay .scene[data-asset-key="scene-event-systemsupply"] { background-image:url('../assets/scenes/scene-pickup-wood-anime-v2.webp'); }
   /* 节点页（门/祭坛/火堆/撤离/商店/事件）：整屏背景图挂点，右侧毛玻璃面板浮于其上 */
-  #overlay .node-pg[data-asset-key="scene-door-bg"] { background-image:url('../assets/scenes/scene-door-anime-v2.png'); }
-  #overlay .node-pg[data-asset-key="scene-altar-bg"] { background-image:url('../assets/scenes/scene-altar-anime-v2.png'); }
-  #overlay .node-pg[data-asset-key="scene-fire-bg"] { background-image:url('../assets/scenes/scene-fire-anime-v2.png'); }
-  #overlay .node-pg[data-asset-key="scene-extract-bg"] { background-image:url('../assets/scenes/scene-extract-anime-v2.png'); }
-  #overlay .node-pg[data-asset-key="scene-shop-bg"] { background-image:url('../assets/scenes/scene-shop-anime-v2.png'); }
-  #overlay .node-pg[data-asset-key="scene-event-bg"] { background-image:url('../assets/scenes/scene-event-anime-v2.png'); }
-  #overlay .node-pg[data-asset-key="scene-pickup-coin"] { background-image:url('../assets/scenes/scene-pickup-coin-anime-v2.png'); }
-  #overlay .node-pg[data-asset-key="scene-pickup-wood"] { background-image:url('../assets/scenes/scene-pickup-wood-anime-v2.png'); }
-  #overlay .node-pg[data-asset-key="scene-pickup-rations"] { background-image:url('../assets/scenes/scene-pickup-rations-anime-v2.png'); }
-  #overlay .node-pg[data-asset-key="scene-pickup-key"] { background-image:url('../assets/scenes/scene-pickup-key-anime-v2.png'); }
-  #overlay .node-pg[data-asset-key="scene-event-timeskip"] { background-image:url('../assets/scenes/event-timeskip-anime-v2.png'); }
-  #overlay .node-pg[data-asset-key="scene-event-demondeal"] { background-image:url('../assets/scenes/event-demondeal-anime-v2.png'); }
-  #overlay .node-pg[data-asset-key="scene-event-bandits"] { background-image:url('../assets/scenes/event-bandits-anime-v2.png'); }
-  #overlay .node-pg[data-asset-key="scene-event-mystery"] { background-image:url('../assets/scenes/event-mystery-anime-v2.png'); }
-  #overlay .node-pg[data-asset-key="scene-event-goldmine"] { background-image:url('../assets/scenes/event-goldmine-anime-v2.png'); }
-  #overlay .node-pg[data-asset-key="scene-event-goldhammer"] { background-image:url('../assets/scenes/event-goldhammer-anime-v2.png'); }
-  #overlay .node-pg[data-asset-key="scene-event-relief"] { background-image:url('../assets/scenes/event-relief-anime-v2.png'); }
-  #overlay .node-pg[data-asset-key="scene-event-airdrop"] { background-image:url('../assets/scenes/event-airdrop-anime-v2.png'); }
-  #overlay .node-pg[data-asset-key="scene-event-chestdraw"] { background-image:url('../assets/scenes/event-chestdraw-anime-v2.png'); }
-  #overlay .node-pg[data-asset-key="scene-event-systemsupply"] { background-image:url('../assets/scenes/event-systemsupply-anime-v2.png'); }
+  #overlay .node-pg[data-asset-key="scene-door-bg"] { background-image:url('../assets/scenes/scene-door-anime-v2.webp'); }
+  #overlay .node-pg[data-asset-key="scene-altar-bg"] { background-image:url('../assets/scenes/scene-altar-anime-v2.webp'); }
+  #overlay .node-pg[data-asset-key="scene-fire-bg"] { background-image:url('../assets/scenes/scene-fire-anime-v2.webp'); }
+  #overlay .node-pg[data-asset-key="scene-extract-bg"] { background-image:url('../assets/scenes/scene-extract-anime-v2.webp'); }
+  #overlay .node-pg[data-asset-key="scene-shop-bg"] { background-image:url('../assets/scenes/scene-shop-anime-v2.webp'); }
+  #overlay .node-pg[data-asset-key="scene-event-bg"] { background-image:url('../assets/scenes/scene-altar-anime-v2.webp'); }
+  #overlay .node-pg[data-asset-key="scene-pickup-coin"] { background-image:url('../assets/scenes/scene-pickup-coin-anime-v2.webp'); }
+  #overlay .node-pg[data-asset-key="scene-pickup-wood"] { background-image:url('../assets/scenes/scene-pickup-wood-anime-v2.webp'); }
+  #overlay .node-pg[data-asset-key="scene-pickup-rations"] { background-image:url('../assets/scenes/scene-pickup-rations-anime-v2.webp'); }
+  #overlay .node-pg[data-asset-key="scene-pickup-key"] { background-image:url('../assets/scenes/scene-pickup-key-anime-v2.webp'); }
+  #overlay .node-pg[data-asset-key="scene-event-timeskip"] { background-image:url('../assets/scenes/scene-altar-anime-v2.webp'); }
+  #overlay .node-pg[data-asset-key="scene-event-demondeal"] { background-image:url('../assets/scenes/scene-door-anime-v2.webp'); }
+  #overlay .node-pg[data-asset-key="scene-event-bandits"] { background-image:url('../assets/scenes/event-bandits-anime-v2.webp'); }
+  #overlay .node-pg[data-asset-key="scene-event-mystery"] { background-image:url('../assets/scenes/scene-pickup-key-anime-v2.webp'); }
+  #overlay .node-pg[data-asset-key="scene-event-goldmine"] { background-image:url('../assets/scenes/scene-pickup-coin-anime-v2.webp'); }
+  #overlay .node-pg[data-asset-key="scene-event-goldhammer"] { background-image:url('../assets/scenes/scene-fire-anime-v2.webp'); }
+  #overlay .node-pg[data-asset-key="scene-event-relief"] { background-image:url('../assets/scenes/scene-pickup-rations-anime-v2.webp'); }
+  #overlay .node-pg[data-asset-key="scene-event-airdrop"] { background-image:url('../assets/scenes/scene-extract-anime-v2.webp'); }
+  #overlay .node-pg[data-asset-key="scene-event-chestdraw"] { background-image:url('../assets/scenes/scene-chest-anime-v2.webp'); }
+  #overlay .node-pg[data-asset-key="scene-event-systemsupply"] { background-image:url('../assets/scenes/scene-pickup-wood-anime-v2.webp'); }
   .battle-stage { position:relative; isolation:isolate; margin:-12px; padding:14px 12px 12px; min-height:520px; overflow:hidden; background-size:cover; background-position:center; }
   .battle-stage-shade { position:absolute; inset:0; z-index:-1; background:linear-gradient(180deg,rgba(9,9,9,.58),rgba(9,9,9,.88) 62%,rgba(9,9,9,.97)); pointer-events:none; }
   .battle-stage[data-asset-key="battle-normal"] { background-image:url('../assets/scenes/battle-normal-anime-v2.png'); }
-  .battle-stage[data-asset-key="battle-boss-general"] { background-image:url('../assets/scenes/battle-boss-general-anime-v2.png'); }
-  .battle-stage[data-asset-key="battle-boss-orc"] { background-image:url('../assets/scenes/battle-boss-orc-anime-v2.png'); }
-  .battle-stage[data-asset-key="battle-boss-element"] { background-image:url('../assets/scenes/battle-boss-element-anime-v2.png'); }
+  .battle-stage[data-asset-key="battle-boss-general"] { background-image:url('../assets/scenes/battle-normal-anime-v2.png'); }
+  .battle-stage[data-asset-key="battle-boss-orc"] { background-image:url('../assets/scenes/event-bandits-anime-v2.webp'); }
+  .battle-stage[data-asset-key="battle-boss-element"] { background-image:url('../assets/scenes/scene-altar-anime-v2.webp'); }
 
   /* ============ v0.31 方舟骨架×中式古典重皮：卡牌层 ============ */
   .hs-card { --gem:#858585; --type:#a68e66; border-radius:0; padding:.38em;
@@ -218,7 +218,7 @@
   .si-line { display:flex; align-items:baseline; gap:12px; }
   .si-line em { font-family:var(--serif); font-style:normal; font-size:9px; letter-spacing:.35em;
     color:#666666; min-width:104px; white-space:nowrap; }
-  .si-line .num { font-family:"Century Gothic","Segoe UI","Microsoft YaHei",sans-serif;
+  .si-line .num { font-family:var(--font-ui);
     font-size:17px; color:#f2f2f2; letter-spacing:.06em; text-shadow:none; }
   .si-line .si-sub { color:#7d7d7d; font-size:12px; overflow:hidden; text-overflow:ellipsis;
     white-space:nowrap; }
@@ -369,8 +369,8 @@
   /* —— 设置弹窗：黑白灰单色风（仅作用含 .settings 的弹窗，不影响其他 overlay） —— */
   #overlay .card:has(.settings) { background:linear-gradient(180deg,#232323,#111111); border:1px solid #6a6a6a; }
   #overlay .card:has(.settings)::before { background:linear-gradient(90deg,transparent,#cfcfcf,transparent); }
-  #overlay .card:has(.settings) h2 { color:#f2f2f2; font-family:"Microsoft YaHei","PingFang SC",sans-serif; letter-spacing:.3em; }
-  #overlay .card:has(.settings) .settings { font-family:"Microsoft YaHei","PingFang SC",sans-serif; color:#e0e0e0; }
+  #overlay .card:has(.settings) h2 { color:#f2f2f2; font-family:var(--font-ui); letter-spacing:.3em; }
+  #overlay .card:has(.settings) .settings { font-family:var(--font-ui); color:#e0e0e0; }
   #overlay .card:has(.settings) .chk { color:#d6d6d6; }
   #overlay .card:has(.settings) .chk input { accent-color:#bdbdbd; }
   #overlay .card:has(.settings) .chk.vol input[type="range"] { accent-color:#bdbdbd; }

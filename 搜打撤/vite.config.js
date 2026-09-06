@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
 import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync, rmSync, chmodSync } from 'node:fs';
+import { execSync } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -18,9 +19,33 @@ function copyDir(src, dest) {
   }
 }
 
+function clearGeneratedDir(dir) {
+  const expectedParent = path.join(ROOT, 'desktop-app');
+  const relative = path.relative(expectedParent, dir);
+  if (!relative || relative.startsWith('..') || path.isAbsolute(relative) || !path.basename(dir).startsWith('game')) {
+    throw new Error(`Refusing to clear unexpected build directory: ${dir}`);
+  }
+  if (!existsSync(dir)) return;
+  // node 的 rmSync 在部分环境下会静默失败（不删除也不报错），旧哈希产物因此逐次堆积；
+  // 改用系统原生命令删除，删除后必须校验目录确实消失，失败则大声警告并给出手动命令
+  const nativeRemove = process.platform === 'win32'
+    ? `rd /s /q "${dir}"`
+    : `rm -rf "${dir}"`;
+  try { execSync(nativeRemove, { stdio: 'ignore' }); } catch { /* 由下方 existsSync 兜底校验 */ }
+  if (existsSync(dir)) {
+    console.warn('[assets] WARNING: 旧产物目录删除失败，本次构建将与旧产物混叠！');
+    console.warn(`[assets] 请先手动执行删除再构建: ${nativeRemove}`);
+  } else {
+    console.log(`[assets] cleared generated directory: ${dir}`);
+  }
+}
+
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const GAME_ROOT = path.join(ROOT, 'prototypes', 'map-system');
-const OUT_DIR = path.join(ROOT, 'desktop-app', 'game');
+const OUT_DIR = process.env.SDT_BUILD_OUT_DIR
+  ? path.resolve(ROOT, process.env.SDT_BUILD_OUT_DIR)
+  : path.join(ROOT, 'desktop-app', 'game');
+const RUNTIME_ASSET_DIRS = ['cards', 'portraits', 'icons', path.join('ui', 'icons'), 'sfx'];
 
 // 构建版本号：取 version.json 的版本 + 当前时间戳，供 assetUrl() 做资产缓存失效
 function buildVersion() {
@@ -32,15 +57,31 @@ function buildVersion() {
   }
 }
 
-// 把运行时字符串路径引用的资产（assets/**）与 version.json 拷进产物；
-// CSS/JS 静态引用的资产由 Vite 自带管线哈希，不走这里。
+// 只复制无法由 Vite 静态分析的动态资源族；其余图片、场景和音乐交给
+// new URL(..., import.meta.url) / CSS 管线哈希，避免产物同时保留哈希版和原始版。
 function copyStatic() {
   return {
     name: 'copy-static',
+    apply: 'build',
+    buildStart() {
+      clearGeneratedDir(OUT_DIR);
+      console.log(`[assets] cleared generated directory: ${OUT_DIR}`);
+    },
     closeBundle() {
       const srcAssets = path.join(GAME_ROOT, 'assets');
-      if (existsSync(srcAssets)) copyDir(srcAssets, path.join(OUT_DIR, 'assets'));
+      for (const relativeDir of RUNTIME_ASSET_DIRS) {
+        const source = path.join(srcAssets, relativeDir);
+        if (existsSync(source)) copyDir(source, path.join(OUT_DIR, 'assets', relativeDir));
+      }
       writeFileSync(path.join(OUT_DIR, 'version.json'), readFileSync(path.join(GAME_ROOT, 'version.json')));
+      // 哨兵：正常构建产出 1 个入口 + 1 个异步 index chunk（共 2 个）；更多说明旧产物未清掉
+      const jsDir = path.join(OUT_DIR, 'assets', 'js');
+      if (existsSync(jsDir)) {
+        const entries = readdirSync(jsDir).filter(name => /^index-.*\.js$/.test(name));
+        if (entries.length > 2) {
+          console.warn(`[assets] WARNING: 产物中出现 ${entries.length} 个 index bundle（应为 2 个），旧产物未清理干净: ${entries.join(', ')}`);
+        }
+      }
     },
   };
 }

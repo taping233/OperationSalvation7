@@ -38,7 +38,10 @@
 
 ## 已接入资产
 
-- `assets/title-hero-codename7-anime.png`：标题主视觉，1672×941，SHA-256 `70A6211BD9FE3B7BA5317BF60230BEE4BFFA634FB2B314647DC9E281D7D4BD36`。明确二维日系动画线稿与赛璐璐明暗，沿用灾后校园搜索员世界观；用于 `index.html` 的 `#title` 背景。旧 `title-hero-codename7-v2.png` 与 `title-cover-codename7.png` 已同步覆盖为同一成品，避免遗留旧写实/烛火奇幻画面。
-- `assets/brand-mark-codename7.png`：确定性工业战术“7”位图标识，256×256；用作网页 PNG favicon，并由 `desktop/make-icon.ps1` 将同一 PNG 数据封装为唯一桌面外壳的 `desktop-app/app.ico`。
+- 标题页视觉（2026-09-05 起为现行真源；旧 `title-hero-codename7-anime.png`、`title-hero-codename7-v2.png`、`title-cover-codename7.png` 及历代候选图已删除）：
+  - `assets/title-winter-reverie.png`：`index.html` 冬日标题横幅图 `<img class=”winter-title-art”>`，1920×1080，SHA-256 `F055FAC72BBD0ACDAF03559CFFA71DF4824F009F94694CFF9381FD3EDEA53CE2`。
+  - `assets/title-wallpaper-ruin-girl-1080p.webp`：`#title` 默认背景（`css/title-soft.css`），SHA-256 `518EBDC22ABA5136C7E5853C84E7B4C2F853B2544D93DE324CA210A40C86F7E9`。
+  - 标题壁纸切换器（`src/game.boot.js`）按顺序接入 5 张 1080p 调色 webp：`title-hero-ascension-cartoon-1080p-winter-graded.webp`（`A742F65A55F6BE3AD6868323795221BA9670147F63DDE5DDFFB42C41506277C3`）、`title-wallpaper-02-whitehair-man-1080p-winter-graded.webp`（`15890BE673408B28CE3394A73FA8A82EB6ECA0435E0A32644BEF4AD94F39BA77`）、`title-wallpaper-03-capped-youth-1080p-winter-graded.webp`（`73BA2A046842EA32B8CF1D7B3D2D336CDC56B4E54953B7DF9257244982E8B8D7`）、`title-wallpaper-04-whitehair-woman-1080p-winter-graded.webp`（`9188DBBEBC815089C2CE56F173504798991EC81F19C31BD72A6D6A77EF1E3083`）、`title-wallpaper-05-white-suit-man-1080p-winter-graded.webp`（`D696B5211FF3E4D4A17980ACB39489959A71B3FAE73860051FBD3E49E7501866`）。
+- `assets/brand-mark-codename7.png`：确定性工业战术”7”位图标识，256×256；用作网页 PNG favicon，并由 `desktop/make-icon.ps1` 将同一 PNG 数据封装为唯一桌面外壳的 `desktop-app/app.ico`。
 
 环境资产第二次独立生成请求因网络错误未产出，未引入外部或版权素材。

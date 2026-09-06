@@ -1,4 +1,4 @@
-# Generate the desktop icon and a matching web PNG from one deterministic brand mark.
+# Generate the web brand PNG and package the white-haired heroine avatar as the desktop icon.
 $ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName System.Drawing
 
@@ -50,11 +50,29 @@ $g.DrawLine($rule, 49, 178, 101, 178)
 $g.Dispose()
 $pngStream = New-Object System.IO.MemoryStream
 $bmp.Save($pngStream, [System.Drawing.Imaging.ImageFormat]::Png)
-$png = $pngStream.ToArray()
+$brandPng = $pngStream.ToArray()
 $bmp.Dispose()
 
 $webAsset = Join-Path $PSScriptRoot '..\prototypes\map-system\assets\brand-mark-codename7.png'
-[System.IO.File]::WriteAllBytes($webAsset, $png)
+[System.IO.File]::WriteAllBytes($webAsset, $brandPng)
+
+$iconSource = Join-Path $PSScriptRoot '..\prototypes\map-system\assets\app-icon-white-haired-hero.png'
+$source = [System.Drawing.Bitmap]::FromFile($iconSource)
+$iconBitmap = New-Object System.Drawing.Bitmap($size, $size, [System.Drawing.Imaging.PixelFormat]::Format32bppArgb)
+$iconGraphics = [System.Drawing.Graphics]::FromImage($iconBitmap)
+$iconGraphics.CompositingMode = [System.Drawing.Drawing2D.CompositingMode]::SourceCopy
+$iconGraphics.CompositingQuality = [System.Drawing.Drawing2D.CompositingQuality]::HighQuality
+$iconGraphics.InterpolationMode = [System.Drawing.Drawing2D.InterpolationMode]::HighQualityBicubic
+$iconGraphics.SmoothingMode = [System.Drawing.Drawing2D.SmoothingMode]::HighQuality
+$iconGraphics.PixelOffsetMode = [System.Drawing.Drawing2D.PixelOffsetMode]::HighQuality
+$iconGraphics.DrawImage($source, 0, 0, $size, $size)
+$iconGraphics.Dispose()
+$source.Dispose()
+
+$iconPngStream = New-Object System.IO.MemoryStream
+$iconBitmap.Save($iconPngStream, [System.Drawing.Imaging.ImageFormat]::Png)
+$iconPng = $iconPngStream.ToArray()
+$iconBitmap.Dispose()
 
 $ico = New-Object System.IO.MemoryStream
 $bw = New-Object System.IO.BinaryWriter($ico)
@@ -67,12 +85,13 @@ $bw.Write([byte]0)
 $bw.Write([byte]0)
 $bw.Write([uint16]1)
 $bw.Write([uint16]32)
-$bw.Write([uint32]$png.Length)
+$bw.Write([uint32]$iconPng.Length)
 $bw.Write([uint32]22)
-$bw.Write($png)
+$bw.Write($iconPng)
 $bw.Flush()
 
 $out = Join-Path $PSScriptRoot '..\desktop-app\app.ico'
 [System.IO.File]::WriteAllBytes($out, $ico.ToArray())
 Write-Host "OK -> $out"
+Write-Host "SOURCE -> $iconSource"
 Write-Host "OK -> $webAsset"

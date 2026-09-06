@@ -1,30 +1,32 @@
 # 代号7 美术资产语义替换矩阵
 
 > 资产原则：角色与场景位图均由内置 ImageGen 独立生成；要求精确小尺寸字形的应用/UI 图标允许由项目内确定性脚本直接生成 PNG/ICO，不使用 SVG。参考仅限高层视觉语言，未复制角色、五官、发型、服装、构图或水印。未列出哈希的条目尚未生成，避免把占位误报为成品。
+>
+> 2026-09-05 变更：场景大图全部转为 q85 WebP（源 PNG 已删除）；内容完全相同的 10 组场景图按"标准节点名保留、事件/BOSS 背景共用"合并（删除 18 个冗余 PNG，回收约 33MB）；战斗/开箱音效接入 Kenney 采样（CC0，见 `assets/sfx/battle/`）；全站字体换为内嵌终端栈（Cascadia Code + 思源黑体子集，OFL，见 `assets/fonts/`），清除 Century Gothic/幼圆/中宋楷体等系统衬线与商业字体依赖。
 
 ## 总览矩阵
 
 | 类别 | 原语义/当前接入 | 替换资产与生成提示词 | 尺寸 / SHA-256 | 接入点 | 目检 |
 |---|---|---|---|---|---|
-| 标题/主菜单 | 代号7 标题、开始/设置/退出 | `title-hero-codename7-anime.png`；原世界观灾后校园搜索员，明确二维日系动画线稿与赛璐璐明暗，右侧角色、左侧 UI 留白 | 1672×941 / `70A6211BD9FE3B7BA5317BF60230BEE4BFFA634FB2B314647DC9E281D7D4BD36` | `index.html #title` | 已检：无图内文字、Logo、水印；1920×1080 与 1150×700 实际渲染通过 |
+| 标题/主菜单 | 代号7 标题、开始/设置/退出 | `title-winter-reverie.png`（标题横幅）+ `title-wallpaper-ruin-girl-1080p.webp`（默认背景）+ 5 张 `*-1080p-winter-graded.webp` 壁纸切换（`game.boot.js`）；哈希与接入点见 [art-direction.md](art-direction.md) 已接入资产。2026-09-05 清理：旧 `title-hero-codename7-anime/v2/cover` 与历代候选图、4K 母图、未调色 webp、旧标题视频、未接入 BGM 已删除 | 见 art-direction.md | `index.html #title`、`css/title-soft.css`、`src/game.boot.js` | 已检：在用图零缺失 |
 | 品牌标识/应用图标 | 深紫金色衬线 7、内嵌旧 favicon | `brand-mark-codename7.png`；石墨折角铭牌、硬边 7、冷青校准线、微量琥珀警示块 | 256×256 PNG / `0E5C9813F04A022F401B5175696A3CA5D590ED7B1120D7250055774141D5BE74`；ICO 以当前 `desktop-app/app.ico` 为准 | `index.html rel=icon`、`desktop-app/main.js`、`desktop-app/app.ico` | 已检：全链路仅位图；32px 仍可辨；PNG 含 alpha |
 | 基地·出发 | 选择玩法、出征预报 | 黑白灰终端面板，青/琥珀动作色（CSS） | — | `.hub-*`, `.mode-card` | 已检：语义保持 |
 | 基地·仓库 | 卡牌仓库与安全格 | 石墨卡槽、状态色（CSS） | — | `.bag-*`, `.vault-*` | 已检：语义保持 |
 | 基地·升级/职业/成就 | 进度、职业、奖励 | 工业模块与冷光分隔（CSS） | — | `.hub-tab`, `.cls-*`, `.ach-*` | 已检：语义保持 |
 | 三环地图/棋子 | 校园三环棋盘、玩家棋子 | 冷灰网格、斜切辅助线（CSS） | — | `#viewport`, renderer canvas | 已检：不遮挡棋盘 |
-| 事件·时空孔隙 | 前进 6 格 | `scenes/event-timespace-rift-v1.png`；灾后学校体育馆空间裂隙，冷青能量 | 1672×941 / `43356731441F6BB4ADE06AEFB6D56606B88ECA1950C4C38C124D7A4102447EBC` | 待 sceneId/assetKey 契约；目标 `.scene.sc-event` | 已检：无字、无水印 |
-| 事件·恶魔交易 | -1 血、传奇武器 | `scenes/event-demondeal-v1.png`；灾后学校维修隧道的未知交易台 | 1672×941 / `8A48B8C8BB189B4F1D928E8FC3AA677C1B86BD00A747D23251448AB10192DBE2` | `[data-asset-key="event-demondeal"]` | 已检：无字、无水印 |
-| 事件·盗匪横行 | 土匪×5、多敌战斗 | `scenes/event-bandits-v1.png`；暴雨废校走廊五个原创掠夺者 | 1672×941 / `15B7EF057789818E8AE9E38DFEB4EEE6CD80DC01CFA9186615A19616EAFC5F71` | `[data-asset-key="event-bandits"]` / `.bt-foes` | 已检：无字、无水印 |
-| 事件·神秘补给 | 彩色令牌、+2 币 | 原创应急补给柜；待生成 | — | `.scene.sc-event` | 待生成 |
-| 事件·金矿 | +3 币 | 原创地下维修层矿化裂缝；待生成 | — | `.scene.sc-event` | 待生成 |
-| 事件·闪金之锤 | 5 伤害事件战斗 | 原创临时动力锤与废校机房；待生成 | — | `.scene.sc-event` / `.bt-foes` | 待生成 |
-| 事件·爱心救济站 | 回复 6 血 | 原创校医室救济台；待生成 | — | `.scene.sc-event` | 待生成 |
-| 事件·空中补给 | 随机资源 | 原创天窗下的空投箱；待生成 | — | `.scene.sc-event` | 待生成 |
-| 事件·宝箱 | 抽取宝箱 | 原创地下储藏室箱体；待生成 | — | `.scene.sc-event` / chest overlay | 待生成 |
-| 事件·系统补给 | 令牌、木材 | 原创无人机补给终端；待生成 | — | `.scene.sc-event` | 待生成 |
-| battle | 玩家 vs 普通敌人 | 角色/怪物体系现为独立 SVG 图鉴；新增背景待契约 | — | `.bt-self`, `.bt-foe`, `.bt-fportrait` | CSS 已验收 |
-| Boss battle | 玩家 vs 将军/兽人首领/元素领主 | 3 个 Boss 保持语义独立；新增背景待生成 | — | `.bt-boss` | 待生成 |
-| shop/fire/chest/door/altar/extract/pick | 商店、火堆、宝箱、门、祭坛、撤离、拾取 | 各自 tone 色与终端层已接入；独立背景待生成 | — | `.sc-shop` 等 | CSS 已检 |
+| 事件·时空孔隙 | 前进 6 格 | `scenes/scene-altar-anime-v2.webp`（与祭坛/通用事件背景同图） | 1672×941 / q85 webp | `[data-asset-key="scene-event-timeskip"]` | 已检：无字、无水印 |
+| 事件·恶魔交易 | -1 血、传奇武器 | `scenes/scene-door-anime-v2.webp`（与环间门背景同图） | 1672×941 / q85 webp | `[data-asset-key="scene-event-demondeal"]` | 已检：无字、无水印 |
+| 事件·盗匪横行 | 土匪×5、多敌战斗 | `scenes/event-bandits-anime-v2.webp`（与兽人 Boss 战背景同图） | 1672×941 / q85 webp | `[data-asset-key="scene-event-bandits"]` / `.bt-foes` | 已检：无字、无水印 |
+| 事件·神秘补给 | 彩色令牌、+2 币 | `scenes/scene-pickup-key-anime-v2.webp`（与钥匙拾取同图） | 1672×941 / q85 webp | `[data-asset-key="scene-event-mystery"]` | 已检 |
+| 事件·金矿 | +3 币 | `scenes/scene-pickup-coin-anime-v2.webp`（与金币拾取同图） | 1672×941 / q85 webp | `[data-asset-key="scene-event-goldmine"]` | 已检 |
+| 事件·闪金之锤 | 5 伤害事件战斗 | `scenes/scene-fire-anime-v2.webp`（与营火背景同图） | 1672×941 / q85 webp | `[data-asset-key="scene-event-goldhammer"]` | 已检 |
+| 事件·爱心救济站 | 回复 6 血 | `scenes/scene-pickup-rations-anime-v2.webp`（与口粮拾取同图） | 1672×941 / q85 webp | `[data-asset-key="scene-event-relief"]` | 已检 |
+| 事件·空中补给 | 随机资源 | `scenes/scene-extract-anime-v2.webp`（与撤离点背景同图） | 1672×941 / q85 webp | `[data-asset-key="scene-event-airdrop"]` | 已检 |
+| 事件·宝箱 | 抽取宝箱 | `scenes/scene-chest-anime-v2.webp`（与遗留物资格同图） | 1672×941 / q85 webp | `[data-asset-key="scene-event-chestdraw"]` | 已检 |
+| 事件·系统补给 | 令牌、木材 | `scenes/scene-pickup-wood-anime-v2.webp`（与木材拾取同图） | 1672×941 / q85 webp | `[data-asset-key="scene-event-systemsupply"]` | 已检 |
+| battle | 玩家 vs 普通敌人 | `scenes/battle-normal-anime-v2.webp`（与将军 Boss 战背景同图） | 1672×941 / q85 webp | `.bt-self`, `.bt-foe`, `.bt-fportrait` | 已检 |
+| Boss battle | 玩家 vs 将军/兽人首领/元素领主 | 与普通战斗/盗匪/祭坛背景共用（同图去重，语义由敌人立绘区分） | — | `.bt-boss` | 已检 |
+| shop/fire/chest/door/altar/extract/pick | 商店、火堆、宝箱、门、祭坛、撤离、拾取 | 各自独立 `scene-*-anime-v2.webp`（商店/火堆/撤离为独占图，其余见上） | — | `.sc-shop` 等 | 已检 |
 | 11 职业 | 刺客、剑客、术士、法师、牧师、授印者、降临者、召唤师、守卫、游侠、战士 | 每职业保持武器/职业语义，当前 `classArt()` SVG；独立位图待生成 | — | `SDT.Art.classArt()` | 语义表已盘点 |
 | 11 普通/精英怪 | 步兵、弓兵、土匪、骑兵、兽人投矛手、兽人斧手、兽人狼骑兵、火元素、水元素、草元素、龙 | 每个 id 独立保持行为/元素语义，当前 `monsterArt()` SVG；位图待生成 | — | `SDT.Art.monsterArt()` | 语义表已盘点 |
 | 3 Boss | 将军、兽人首领、元素领主 | grow/frenzy/aegis 语义保持；位图待生成 | — | `monsterArt(boss_*)` | 语义已盘点 |

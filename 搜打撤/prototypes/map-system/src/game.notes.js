@@ -4,7 +4,6 @@ const UI = window.SDT.UI;
 import { esc } from './shared.js';
 import { MAP } from './game.core.js';
 import { game } from './game.core.js';
-import { openCardDesigner, openCardLibrary } from './game.cardslib.js';
   function rebuildNotes() {
     // 兼容旧版楼层键名（F1 → B1）
     const data = SDT.Notes.all();
@@ -215,8 +214,6 @@ import { openCardDesigner, openCardLibrary } from './game.cardslib.js';
       localStorage.setItem('sdt-dev-dice', String(game.nextDice));
       UI.log(game.nextDice > 0 ? `[[icon:tools]] 骰子已固定为 ${game.nextDice} 点` : '骰子恢复随机', 'sys');
     });
-    UI.el.btnCardDesigner.addEventListener('click', () => openCardDesigner(null));
-    UI.el.btnCardLib.addEventListener('click', openCardLibrary);
   }
 
 export { TYPE_NAME, bindDevMode, bindNotesMixins, initDevMode, openCellEditor, rebuildNotes, showClearOverlay, showExportOverlay, showImportOverlay };

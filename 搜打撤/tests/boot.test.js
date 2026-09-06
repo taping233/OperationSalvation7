@@ -41,14 +41,15 @@ window.AudioContext = window.AudioContext || class FakeAudioContext {
   close() { return Promise.resolve(); }
 };
 // fetch（boot 顶层拉 version.json，失败会走 .catch 分支，不影响启动）
-window.fetch = window.fetch || (() => Promise.resolve({ ok: false, status: 404, json: () => Promise.resolve({}) }));
+globalThis.fetch = window.fetch = () => Promise.resolve({ ok: true, status: 200, json: () => Promise.resolve({ version: '0.51.0' }) });
 
 // 注入真实页面结构：读取 index.html，剥掉 script/link（模块由动态 import 接管）
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 {
   const html = readFileSync(resolve(process.cwd(), 'prototypes/map-system/index.html'), 'utf8');
-  const body = html.slice(html.indexOf('<body>') + 6, html.indexOf('</body>')).replace(/<script[\s\S]*?<\/script>/g, '');
+  const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+  const body = bodyMatch[1].replace(/<script[\s\S]*?<\/script>/g, '');
   document.head.innerHTML = '';
   document.body.innerHTML = body;
 }
@@ -84,8 +85,32 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     expect(typeof g.debug.openShop).toBe('function'); // boot 调试入口
   });
   it('SDT 命名空间核心模块均已发布', () => {
-    for (const k of ['MAP', 'Art', 'Icons', 'Sound', 'Camera', 'Notes', 'Cards', 'Combat', 'Base', 'Meta', 'Renderer', 'UI', 'Battle', 'Chests']) {
+    for (const k of ['RULES', 'MAP', 'Art', 'Icons', 'Sound', 'Camera', 'Notes', 'Cards', 'Combat', 'Base', 'Meta', 'RenderScheduler', 'Renderer', 'UI', 'Battle', 'Chests']) {
       expect(window.SDT[k], `window.SDT.${k} 未发布`).toBeTruthy();
+    }
+    expect(typeof window.SDT.Battle.getSnapshot).toBe('function');
+    expect(Object.isFrozen(window.SDT.Battle)).toBe(true);
+    for (const command of ['playCard', 'selectInfusion', 'confirmInfusion', 'cancelInfusion', 'endTurn', 'flee', 'openGrave', 'closeGrave', 'selectDeckCard', 'confirmDeck', 'cancelDeck', 'cancelPendingTarget']) {
+      expect(typeof window.SDT.Battle.commands[command], `Battle.commands.${command} 未发布`).toBe('function');
+    }
+  });
+  it('第一次投掷前显示完整的静止骰子', () => {
+    const face = document.getElementById('diceFace');
+    expect(face.classList.contains('idle-dice')).toBe(true);
+    expect(face.querySelectorAll('.dice-f')).toHaveLength(6);
+    expect(face.querySelector('.dice-cube').style.transform).toBe('rotateX(90deg) rotateY(0deg) rotateZ(0deg)');
+  });
+  it('骰子六种结果都以目标点数朝上的姿态落定', () => {
+    const expected = {
+      1: [90, 0, 0], 2: [0, 0, 0], 3: [0, 0, 270],
+      4: [0, 0, 90], 5: [180, 0, 0], 6: [270, 0, 0],
+    };
+    for (let value = 1; value <= 6; value++) {
+      window.SDT.UI.drawDice(value);
+      const transform = document.querySelector('#diceFace .dice-cube').style.transform;
+      const angles = [...transform.matchAll(/rotate[XYZ]\((-?\d+)deg\)/g)]
+        .map(match => ((+match[1] % 360) + 360) % 360);
+      expect(angles, `${value} 点没有朝上落定`).toEqual(expected[value]);
     }
   });
 });

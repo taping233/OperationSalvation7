@@ -20,7 +20,7 @@
   /* base.css 的 #overlay .card.page h2 {display:none} 会误伤 pg-head 里的页面标题，这里恢复 */
   #overlay .card.page .pg:not(.hub) .pg-head h2 {
     display: flex; align-items: center; gap: 8px;
-    font-family: "幼圆","YouYuan","圆体-简","Yuanti SC","PingFang SC","Microsoft YaHei",sans-serif;
+    font-family: var(--font-ui);
     font-size: 27px; font-weight: 700; letter-spacing: 6px; color: #f2f2f2;
     text-shadow: 0 1px 10px rgba(0,0,0,.5);
   }
@@ -124,11 +124,11 @@
   .settings .chk { font-size: 16.5px; color: #d5d5d5; padding: 12px 2px; gap: 10px;
     border-bottom: 1px dashed rgba(237,237,237,.08); }
   .settings .chk:last-of-type { border-bottom: none; }
-  .settings .set-en { margin-left: auto; padding-left: 12px; font-family: "Century Gothic", "Segoe UI", sans-serif;
+  .settings .set-en { margin-left: auto; padding-left: 12px; font-family: var(--font-ui);
     font-size: 11px; letter-spacing: .18em; color: rgba(237,237,237,.38); font-weight: 400; white-space: nowrap; }
   .settings .chk input { width: 17px; height: 17px; accent-color: #d4b078; }
   .settings .set-h { display: flex; align-items: center; gap: 10px;
-    font-family: "幼圆","YouYuan","圆体-简","Yuanti SC","PingFang SC","Microsoft YaHei",sans-serif;
+    font-family: var(--font-ui);
     font-size: 15px; color: #bdbdbd; letter-spacing: 4px; margin: 26px 0 10px; font-weight: 700; }
   .settings .set-h .ic { width: 16px; height: 16px; vertical-align: -0.18em; }
   .settings .set-h::before, .settings .set-h::after { content: ''; height: 1px; flex: 1; min-width: 8px; }

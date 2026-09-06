@@ -12,5 +12,20 @@ if not exist "%ELECTRON%" (
   pause
   exit /b 1
 )
+where npm >nul 2>nul
+if errorlevel 1 (
+  echo [ERROR] npm was not found. Install Node.js before launching the development build.
+  pause
+  exit /b 1
+)
+pushd "%APPDIR%"
+call npm run prestart
+if errorlevel 1 (
+  echo [ERROR] Game build or desktop runtime check failed.
+  popd
+  pause
+  exit /b 1
+)
 start "" "%ELECTRON%" "%APPDIR%"
+popd
 endlocal

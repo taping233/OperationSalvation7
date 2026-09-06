@@ -1,3 +1,5 @@
+import { characterName } from './characters.js';
+import { Random } from './random.js';
   const SDT = window.SDT;
   const $ = (id) => document.getElementById(id);
 
@@ -66,6 +68,7 @@
     // 数值变化时弹跳一下（retrigger 动画）
     popNum(el) {
       if (!el) return;
+      if (SDT.Motion) { SDT.Motion.pop(el); return; }
       el.classList.remove('popnum');
       void el.offsetWidth;
       el.classList.add('popnum');
@@ -82,10 +85,12 @@
       }).join('');
       this.el.diceFace.innerHTML =
         `<div class="dice-hop"><div class="dice-tilt"><div class="dice-cube">${faces}</div></div></div>`;
-      this._diceRot = [0, 0];
+      // 尚未投掷时也摆一颗完整骰子：1 点朝上，作为第一次翻滚的起始姿态。
+      this._diceRot = [90, 0, 0];
+      this.el.diceFace.querySelector('.dice-cube').style.transform = 'rotateX(90deg) rotateY(0deg) rotateZ(0deg)';
     },
 
-    // 让立方体翻滚着停在 v 点朝前的朝向（参考 roll-a-die 的角度映射）
+    // 让立方体翻滚着停在 v 点朝上的朝向；外层 tilt 只负责俯视观察，不改变落定点数。
     drawDice(v) {
       const face = this.el.diceFace, cube = face.querySelector('.dice-cube');
       if (!cube || v === this._drawn) return; // 同值跳过，避免刷新时重置翻转动画
@@ -96,13 +101,15 @@
       }
       face.classList.remove('idle-dice');
       // 与上次点数相同也强制换一条翻转路径：追加的整圈数与方向每次随机
-      const spinX = (720 + 360 * Math.floor(Math.random() * 2)) * (Math.random() < .5 ? -1 : 1);
-      const spinY = (720 + 360 * Math.floor(Math.random() * 2)) * (Math.random() < .5 ? -1 : 1);
-      const REST = { 1: [0, 0], 6: [0, 180], 3: [0, -90], 4: [0, 90], 2: [-90, 0], 5: [90, 0] };
-      const [rx, ry] = REST[v];
+      const spinX = (720 + 360 * Math.floor(Random.random('visual') * 2)) * (Random.random('visual') < .5 ? -1 : 1);
+      const spinY = (720 + 360 * Math.floor(Random.random('visual') * 2)) * (Random.random('visual') < .5 ? -1 : 1);
+      const spinZ = 360 * (1 + Math.floor(Random.random('visual') * 2)) * (Random.random('visual') < .5 ? -1 : 1);
+      const REST = { 1: [90, 0, 0], 6: [-90, 0, 0], 3: [0, 0, -90], 4: [0, 0, 90], 2: [0, 0, 0], 5: [180, 0, 0] };
+      const [rx, ry, rz] = REST[v];
       this._diceRot = [this._diceRot[0] + spinX + rx - (this._diceRot[0] % 360),
-                       this._diceRot[1] + spinY + ry - (this._diceRot[1] % 360)];
-      cube.style.transform = `rotateX(${this._diceRot[0]}deg) rotateY(${this._diceRot[1]}deg)`;
+                       this._diceRot[1] + spinY + ry - (this._diceRot[1] % 360),
+                       this._diceRot[2] + spinZ + rz - (this._diceRot[2] % 360)];
+      cube.style.transform = `rotateX(${this._diceRot[0]}deg) rotateY(${this._diceRot[1]}deg) rotateZ(${this._diceRot[2]}deg)`;
     },
     refreshTime(game) {
       // 每帧调用：状态未翻转时不触碰 DOM
@@ -122,36 +129,54 @@
         this.el.layerZh.textContent = layer ? layer.name : '—';
         this.el.layerEn.textContent = layer && layer.nameEn ? layer.nameEn : '';
       }
-      this.el.statTurn.textContent = game.turn - 1;
+      const turn = game.turn - 1;
+      if (this._lastTurn !== turn) {
+        this._lastTurn = turn;
+        this.el.statTurn.textContent = turn;
+      }
       const valTotal = game.inventory.reduce((a, b) => a + b.value * (b.count || 1), 0);
-      this.el.statValue.textContent = '¥' + valTotal.toLocaleString();
-      if (this._lastValue != null && this._lastValue !== valTotal) this.popNum(this.el.statValue);
-      this._lastValue = valTotal;
+      if (this._lastValue !== valTotal) {
+        this.el.statValue.textContent = '¥' + valTotal.toLocaleString();
+        if (this._lastValue != null) this.popNum(this.el.statValue);
+        this._lastValue = valTotal;
+      }
 
       // 人物：血条 + 经济 + 背包格数
       const pct = Math.max(0, game.hp / game.maxHp);
-      this.el.hpBar.style.width = (pct * 100).toFixed(1) + '%';
-      this.el.hpBar.style.background = pct > 0.5 ? 'linear-gradient(90deg,#2f6f9f,#55a4d6)'
-        : pct > 0.25 ? 'linear-gradient(90deg,#b08238,#d4a44e)' : 'linear-gradient(90deg,#b8453a,#d97a52)';
-      this.el.hpBarWrap.classList.toggle('low', pct <= 0.25 && game.hp > 0);
-      this.el.hpText.innerHTML = `${game.hp}<span class="hp-rest">/${game.maxHp}</span>`;
-      this.el.charCoins.textContent = game.coins;
-      if (this._lastCoins != null && this._lastCoins !== game.coins) this.popNum(this.el.charCoins);
-      this._lastCoins = game.coins;
-      this.el.charAtk.textContent = game.atk;
-      if (this._lastAtk != null && this._lastAtk !== game.atk) this.popNum(this.el.charAtk);
-      this._lastAtk = game.atk;
+      const hpKey = `${game.hp}/${game.maxHp}`;
+      if (this._lastHpKey !== hpKey) {
+        this._lastHpKey = hpKey;
+        this.el.hpBar.style.width = (pct * 100).toFixed(1) + '%';
+        this.el.hpBar.style.background = pct > 0.5 ? 'linear-gradient(90deg,#2f6f9f,#55a4d6)'
+          : pct > 0.25 ? 'linear-gradient(90deg,#b08238,#d4a44e)' : 'linear-gradient(90deg,#b8453a,#d97a52)';
+        this.el.hpBarWrap.classList.toggle('low', pct <= 0.25 && game.hp > 0);
+        this.el.hpText.innerHTML = `${game.hp}<span class="hp-rest">/${game.maxHp}</span>`;
+      }
+      if (this._lastCoins !== game.coins) {
+        this.el.charCoins.textContent = game.coins;
+        if (this._lastCoins != null) this.popNum(this.el.charCoins);
+        this._lastCoins = game.coins;
+      }
+      if (this._lastAtk !== game.atk) {
+        this.el.charAtk.textContent = game.atk;
+        if (this._lastAtk != null) this.popNum(this.el.charAtk);
+        this._lastAtk = game.atk;
+      }
       // 头像与职业（选职业后同步；头像使用职业立绘）
       const cls = game.myClass || '';
       if (this._lastHeroCls !== cls) {
         this._lastHeroCls = cls;
         this.el.heroAva.innerHTML = (cls && SDT.Art) ? SDT.Art.classArt(cls) : '旅';
-        this.el.heroName.textContent = cls || '未选择角色';
+        this.el.heroName.textContent = characterName(game.characterId || cls);
       }
       // 物资 + 卡牌混占背包格；安全格 / 消耗口袋见背包弹窗，容量由基地决定
       const used = game.usedSlots ? game.usedSlots() : game.inventory.length;
       const cap = game.bagCap ? game.bagCap() : game.map.rules.bagSize;
-      this.el.bagCount.textContent = `${used}/${cap}`;
+      const bagKey = `${used}/${cap}`;
+      if (this._lastBagKey !== bagKey) {
+        this._lastBagKey = bagKey;
+        this.el.bagCount.textContent = bagKey;
+      }
 
       // 掷骰按钮：状态未变化时不重建 innerHTML（refresh 调用频繁）
       if (this._lastRollState !== game.state) {
@@ -257,6 +282,7 @@
       const prevMode = this._lastMode;
       this._lastMode = mode;
       this.el.overlay.hidden = false;
+      if ((!wasOpen || prevMode !== mode) && SDT.Motion) SDT.Motion.overlayIn(card);
       // 只在弹窗真正打开/切换模式时播开窗音效——战斗内反复 render 不刷音效
       if (!wasOpen || prevMode !== mode) SDT.Sound.sfx('open');
     },
@@ -269,9 +295,8 @@
       this._hoverHandler = null;
       SDT.Sound.sfx('close');
       const card = this.el.ovBody.parentElement;
-      // 不透明整屏页没有淡出动画，直接还原并隐藏（等 150ms 只会白占主循环判断）
-      const instant = this.el.overlay.classList.contains('opaque')
-        || this.el.overlay.classList.contains('room-view');
+      // 不透明整屏页淡出：boss 留言 #52 要求所有界面退出都有过渡动画（200ms 淡出+下移）
+      const instant = this.el.overlay.classList.contains('room-view');
       const finish = () => {
         this._hideTimer = null;
         card.classList.remove('wide');
@@ -291,7 +316,7 @@
       this.el.overlay.classList.add('closing');
       // 等淡出动画播完再真正隐藏并还原布局类，避免淡出期间跳版；
       // 期间 hidden 仍为 false，输入拦截逻辑不受影响
-      this._hideTimer = setTimeout(finish, 150);
+      this._hideTimer = setTimeout(finish, 210);
     },
   };
 

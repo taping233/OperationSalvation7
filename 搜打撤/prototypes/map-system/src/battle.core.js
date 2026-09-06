@@ -1,10 +1,12 @@
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const SDT = window.SDT;
-const UI = window.SDT.UI;
 import { esc } from './shared.js';
-import { render } from './battle.view.js';
 import { escAttr } from './shared.js';
-/* battle.core.js —— 战斗逻辑：牌库/出牌结算/词条时点/回合流转（渲染在 battle.view.js） */
+import { createEffectExecutor, splitEffectClauses } from './battle.effects.js';
+import { refillDrawPile, shuffleCards } from './battle.deck.js';
+import { isAreaEffect, targetSideFor, unplayableReasonFor } from './battle.rules.js';
+import { Random } from './random.js';
+/* battle.core.js —— 战斗逻辑：牌库/出牌结算/词条时点/回合流转（渲染由注入的视图完成） */
 /* ============================================================
  * 搜打撤 v0.24 —— M1 两类战斗（多敌人 + 拖拽选目标 + BOSS 词缀 + 词条时点体系）
  *
@@ -13,6 +15,14 @@ import { escAttr } from './shared.js';
  *   每回合固定 2 费（rules.battleEnergy）；
  * ============================================================ */
   const Combat = SDT.Combat;
+
+  let renderBattle = () => {};
+  function configureBattleRenderer(renderer) {
+    renderBattle = typeof renderer === 'function' ? renderer : () => {};
+  }
+  const requestBattleRender = () => {
+    renderBattle(getSnapshot());
+  };
 
   let G = null;
   let foes = [];         // 敌人数组 [{id,name,hp,maxHp,atk,affix,affixName,dead,status,defense}]
@@ -30,11 +40,11 @@ import { escAttr } from './shared.js';
   let delayed = [];          // 「回合开始时」延迟效果 [{text, cardName, repeat}]（repeat=装备每回合触发）
   let noDrawNext = false;    // 「下回合无法抽牌」标记（下个回合开始消耗掉）
   let viewingGrave = false;  // 正在查看墓地（BOSS 战专属：消耗过的牌 + 类型统计）
-  let floats = [];           // 待展示的飘字/受击特效 [{unit:'self'|敌人idx, text, cls}]（渲染后由 battle.view 消费）
+  let floats = [];           // 待展示的飘字/受击特效 [{unit:'self'|敌人idx, text, cls}]（渲染后由视图消费）
   const KILL_CHEER = ['👍', '✌️', '✨'];   // 击杀后自己头上的随机欢呼贴纸
   let dreadShown = false;    // BOSS 登场竖线阴影每场只演一次
   let spellCost1 = false;    // 「本局对战内所有法术 1 费」（银河之旅，战斗内永久）
-  let selPool = [], selShaN = 0, sel = new Set(), lastDeckSel = [];
+  let selPool = [], selShaN = 0, sel = new Set(), lastDeckSel = [], selectingDeck = false;
 
   const R = () => SDT.MAP.rules;
   const alive = () => foes.filter(f => !f.dead);
@@ -56,18 +66,7 @@ import { escAttr } from './shared.js';
     return { kind, icon: meta[0], label: meta[1] + suffix, damage: Math.max(0, def.atk || 0) };
   }
 
-  function shuffle(a) {
-    for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
-    return a;
-  }
-
-  // 只有弃牌堆能补回牌库。墓地刻意不作为参数，避免任何抽牌路径误把消耗牌洗回。
-  function refillDrawPile(deck, discardPile) {
-    if (deck.length || !discardPile.length) return 0;
-    const recycled = shuffle(discardPile.splice(0));
-    deck.push(...recycled);
-    return recycled.length;
-  }
+  const shuffle = shuffleCards;
 
   function pileTip(uids) {
     const cnt = {};
@@ -110,6 +109,29 @@ import { escAttr } from './shared.js';
     for (let i = 0; i < n; i++) addTempCard(base);
   }
 
+  const applyTextEffects = createEffectExecutor({
+    combat: Combat,
+    getAlive: alive,
+    getPlayerStatus: () => pstat,
+    getPlayerDefense: () => pdef,
+    getMode: () => mode,
+    log: (message, kind) => G.log(message, kind),
+    escapeHtml: esc,
+    heal: amount => G.heal(amount),
+    pushFloat: value => floats.push(value),
+    drawCards,
+    grantStarterAttack: grantSha,
+    markNoDrawNext: () => { noDrawNext = true; },
+    queueDiscover: value => discoverQueue.push(value),
+    randomDiscoverCard,
+    addTempCard,
+    addDeckCard,
+    allCards: () => SDT.Cards.all(),
+    shuffleDeck: () => { drawPile = shuffle(drawPile); return drawPile.length; },
+    addEnergy: amount => { energy += amount; return energy; },
+    addEnergyCap: amount => { maxEnergy += amount; energy += amount; return maxEnergy; },
+  });
+
   const findCard = (uid) =>
     G.ownedCards.find(o => o.uid === uid) || granted.find(o => o.uid === uid) || null;
   const drawOf = (card) => +(card.draw || 0) || SDT.Cards.deriveDraw(card) || 0;
@@ -124,7 +146,7 @@ import { escAttr } from './shared.js';
   };
 
   // 群体伤害判定（设计者：群体伤害不用选目标）
-  const isAOE = (card) => /所有敌人|群体|全体/.test(String(card.desc || ''));
+  const isAOE = isAreaEffect;
 
   // ---------- 生效时刻 / 持续时间 / 生效条件（设计者 2026-09-02 定版） ----------
   // 卡牌描述按句切分（。；；换行），每句归入一种生效方式：
@@ -134,22 +156,7 @@ import { escAttr } from './shared.js';
   //   「被注能时：X」                  → 生效条件词条：只有作为注能牺牲品被消耗时
   //     才结算 X（打出时跳过——牺牲品没有被「使用」，主效果不触发）；未来会有更多条件
   //   其余句子 → 立即生效
-  function splitClauses(desc) {
-    const out = { immediate: [], turnStart: [], battle: [], onInfused: [] };
-    String(desc || '').split(/[。；;\n]/).forEach(s0 => {
-      const s = s0.trim();
-      if (!s) return;
-      let m;
-      if ((m = s.match(/^被注能时[：:，,]?\s*(.+)$/))) { out.onInfused.push(m[1]); return; }
-      if ((m = s.match(/^(每回合开始时|下回合开始时?|下个回合开始时?|回合开始时)[：:，,]?\s*(.+)$/))) {
-        out.turnStart.push({ text: m[2], each: /^每回合开始时/.test(s) });
-        return;
-      }
-      if (/^(本局对战内|本场对战|本场战斗)/.test(s)) { out.battle.push(s); return; }
-      out.immediate.push(s);
-    });
-    return out;
-  }
+  const splitClauses = splitEffectClauses;
 
   // 注册「回合开始时」延迟段（repeat = 装备卡或「每回合开始时」，每回合开始重复触发）
   function registerTurnStart(card, items) {
@@ -201,211 +208,6 @@ import { escAttr } from './shared.js';
       applyTextEffects(card, text, target);
     });
     return true;
-  }
-
-  // 文本效果结算：诅咒/祝福/治疗/护甲/护盾/格挡/净化/抽牌/发现/随机/能量。
-  // 立即出牌、回合开始延迟段、被注能条件段共用；返回 { did, drawn }
-  function applyTextEffects(card, text, target) {
-    const desc = String(text || '');
-    let did = false;
-    // 「持续 N 回合」通用时长覆盖（持续 1 回合 = 本回合结束前生效）
-    const durOv = (desc.match(/持续\s*(\d+)\s*回合/) || [])[1];
-    const curseTarget = (target && !target.dead) ? target : alive()[0] || null;
-    // —— 附加诅咒 ——
-    const bm = desc.match(/附加\s*(\d+)\s*层?\s*流血/);
-    if (bm || /附加流血/.test(desc)) {
-      const n = bm ? +bm[1] : 1;
-      if (curseTarget) { Combat.addCurse(curseTarget, 'bleed', n); G.log(`[[icon:blood]] <b>${esc(curseTarget.name)}</b> 附加 ${n} 层流血`, 'sys'); did = true; }
-    }
-    const pm = desc.match(/附加\s*(?:(\d+)\s*层)?\s*中毒/);
-    if (pm) {
-      const n = pm[1] ? +pm[1] : 1;
-      if (curseTarget) { Combat.addCurse(curseTarget, 'poison', n); G.log(`[[icon:skull]] <b>${esc(curseTarget.name)}</b> 附加 ${n} 层中毒（每层回合末 1 点固定伤害）`, 'sys'); did = true; }
-    }
-    if (!/免疫冰冻|对冰冻/.test(desc) && /附加冰冻|冰冻\s*所有|冰冻\s*\d+\s*名|冻结/.test(desc)) {
-      const fm = desc.match(/(?:冻结|冰冻)状态\s*(\d+)\s*回合/);
-      const n = fm ? +fm[1] : (durOv ? +durOv : 1);
-      if (curseTarget) { Combat.addCurse(curseTarget, 'freeze', n); G.log(`[[icon:crystal]] <b>${esc(curseTarget.name)}</b> 被冰冻 ${n} 回合（无法行动）`, 'sys'); did = true; }
-    }
-    if (/沉默/.test(desc)) {
-      const n = durOv ? +durOv : 1;
-      if (curseTarget) { Combat.addCurse(curseTarget, 'silence', n); G.log(`[[icon:cross]] <b>${esc(curseTarget.name)}</b> 被沉默 ${n} 回合（技能无效，攻击除外）`, 'sys'); did = true; }
-    }
-    if (/破甲/.test(desc)) {
-      const n = durOv ? +durOv : 2;
-      if (curseTarget) { Combat.addCurse(curseTarget, 'abreak', n); G.log(`[[icon:tools]] <b>${esc(curseTarget.name)}</b> 破甲 ${n} 回合（无法减免伤害——元素庇幕失效）`, 'sys'); did = true; }
-    }
-    if (/禁疗/.test(desc)) {
-      const n = durOv ? +durOv : 2;
-      if (curseTarget) { Combat.addCurse(curseTarget, 'healban', n); G.log(`[[icon:heart]] <b>${esc(curseTarget.name)}</b> 禁疗 ${n} 回合（无法回复生命）`, 'sys'); did = true; }
-    }
-    // —— 附加祝福 ——
-    if (/潜行/.test(desc)) {
-      const stm = desc.match(/潜行(?:状态)?\s*(\d+)\s*回合/);
-      const n = stm ? +stm[1] : (durOv ? +durOv : 1);
-      Combat.addBlessing(pstat, 'stealth', n);
-      G.log(`[[icon:runner]] <b>祝福·潜行</b>：${n} 回合内无法成为被攻击对象（造成伤害会破除）`, 'ok');
-      did = true;
-    }
-    const atkB = !/状态下/.test(desc)
-      ? (desc.match(/攻击\s*\+\s*(\d+)/) || desc.match(/攻\s*\+\s*(\d+)/) ||
-         desc.match(/\+\s*(\d+)\s*攻/) || desc.match(/获得\s*(\d+)\s*点?攻击力?/))
-      : null;
-    if (atkB) {
-      Combat.addBlessing(pstat, 'atkUp', +atkB[1]);
-      G.log(`[[icon:swords]] <b>祝福·攻击力增加</b>：攻击力 +${atkB[1]}（本场战斗，当前加成 ${pstat.status.atkUp}）`, 'ok');
-      did = true;
-    }
-    const spB = !/状态下/.test(desc)
-      ? (desc.match(/法伤\s*\+\s*(\d+)/) || desc.match(/法术伤害\s*\+\s*(\d+)/))
-      : null;
-    if (spB) {
-      Combat.addBlessing(pstat, 'spellUp', +spB[1]);
-      G.log(`[[icon:crystal]] <b>祝福·法伤增加</b>：法术伤害 +${spB[1]}（本场战斗，当前加成 ${pstat.status.spellUp}）`, 'ok');
-      did = true;
-    }
-    if (/免疫伤害/.test(desc) || /无敌/.test(desc)) {
-      const im = desc.match(/(\d+)\s*回合内[^。]*无敌/) || desc.match(/无敌[^。]*?(\d+)\s*回合/);
-      const n = im ? +im[1] : (durOv ? +durOv : 1);
-      Combat.addBlessing(pstat, 'immune', n);
-      G.log(`[[icon:sparkles]] <b>祝福·免疫伤害</b>：${n} 回合内不受到任何伤害`, 'ok');
-      did = true;
-    }
-    const rdB = desc.match(/减伤\s*(\d+)?/);
-    if (rdB) {
-      const n = rdB[1] ? +rdB[1] : 1;
-      Combat.addBlessing(pstat, 'reduce', n);
-      G.log(`[[icon:plate]] <b>祝福·减伤</b>：每次受到的伤害 -${n}（本场战斗）`, 'ok');
-      did = true;
-    }
-    if (/剑仙形态/.test(desc) || /每回合额外抽\s*\d+\s*张/.test(desc)) {
-      Combat.addBlessing(pstat, 'swordForm');
-      G.log(`[[icon:sword]] <b>祝福·剑仙形态</b>：回合开始时额外抽 1 张牌（本局对战）`, 'ok');
-      did = true;
-    }
-    if (/自然形态/.test(desc) || /回合开始时[^。]*获得\s*\d+\s*点?能量/.test(desc)) {
-      Combat.addBlessing(pstat, 'natureForm');
-      G.log(`[[icon:wood]] <b>祝福·自然形态</b>：回合开始时额外获得 1 点能量（本局对战）`, 'ok');
-      did = true;
-    }
-    if (/宇宙形态/.test(desc)) {
-      Combat.addBlessing(pstat, 'cosmosForm');
-      G.log(`[[icon:sparkles]] <b>祝福·宇宙形态</b>：本局对战内，所有卡牌变为 1 费`, 'ok');
-      did = true;
-    }
-    // —— 治疗 / 护甲 / 护盾 / 格挡（回复与护甲是正式词条，禁疗时回复无效） ——
-    let healed = false, armored = false;
-    const hm = desc.match(/回复\s*(\d+)\s*(?:点\s*生命|点?血)/) || desc.match(/\+\s*(\d+)\s*血/);
-    if (hm) {
-      healed = true;
-      if ((pstat.status.healban || 0) > 0) {
-        G.log(`[[icon:heart]] 禁疗中：回复 ${hm[1]} 点生命无效（还剩 ${pstat.status.healban} 回合）`, 'warn');
-      } else { G.heal(+hm[1]); floats.push({ unit: 'self', text: '💚', cls: 'stk', warm: true }); }
-      did = true;
-    }
-    const am = desc.match(/获得\s*(\d+)\s*点?\s*护甲/) || desc.match(/\+\s*(\d+)\s*甲/);
-    if (am) { armored = true; pdef.armor += +am[1]; G.log(`[[icon:plate]] 获得 ${am[1]} 点护甲`, 'sys'); did = true; }
-    const sm = desc.match(/获得\s*(\d+)\s*点?\s*护盾/);
-    if (sm) { pdef.shield += +sm[1]; G.log(`[[icon:shield]] 获得 ${sm[1]} 点护盾`, 'sys'); did = true; }
-    if (/本回合所受伤害降为/.test(desc)) {
-      pdef.guard = true;
-      G.log('[[icon:shield]] 格挡：本回合所受伤害降为 1', 'sys');
-      did = true;
-    }
-    // —— 净化 ——
-    if (/净化/.test(desc)) {
-      const cleared = Combat.purify(pstat);
-      G.log(cleared.length
-        ? `[[icon:sparkles]] 净化：清除了身上的 ${cleared.map(k => Combat.CURSE_META[k].name).join('、')}`
-        : '[[icon:sparkles]] 净化：身上没有诅咒，干干净净', 'ok');
-      did = true;
-    }
-    // —— 抽牌（按文本；卡面结构化 draw 字段由 resolveCard 兜底） ——
-    let drawn = false;
-    const dm = desc.match(/抽\s*(\d+)\s*张牌/);
-    if (dm) {
-      const n = +dm[1];
-      if (mode === 'boss') {
-        const got = drawCards(n);
-        G.log(`[[icon:cards]] <b>${esc(card.name)}</b>：抽了 ${got} 张牌`, 'sys');
-      } else {
-        grantSha(n);
-        G.log(`[[icon:cards]] <b>${esc(card.name)}</b>：获得 ${n} 张【初始攻击】（普通战斗抽牌效果改为获得初始攻击）`, 'sys');
-      }
-      did = true; drawn = true;
-    }
-    // —— 下回合无法抽牌 ——
-    if (/下回合无法抽牌|下个回合无法抽牌/.test(desc)) {
-      noDrawNext = true;
-      G.log('[[icon:cross]] 已标记：<b>下回合开始无法抽牌</b>', 'sys');
-      did = true;
-    }
-    // —— 发现 ——
-    const dcm = desc.match(/发现\s*(?:(\d+)\s*张)?\s*(传说)?(?:卡牌|牌|卡)/);
-    if (dcm) { discoverQueue.push({ n: dcm[1] ? +dcm[1] : 1, rarity: dcm[2] || null }); did = true; }
-    // —— 随机获得 ——
-    const rm = desc.match(/(?:获得|获取)\s*(\d+)\s*张随机卡牌/) || desc.match(/随机获取\s*(\d+)\s*张卡牌/);
-    if (rm) {
-      const n = +(rm[1] || rm[2]);
-      let got = 0;
-      for (let i = 0; i < n; i++) {
-        const c = randomDiscoverCard(null);
-        if (c) { addTempCard(c); got++; }
-      }
-      G.log(`[[icon:cards]] <b>${esc(card.name)}</b>：随机获得 ${got} 张卡牌（置入手牌，战后消散）`, 'loot');
-      did = true;
-    }
-    // —— 将 x 洗入牌库（v0.24：牌库概念，仅对战 BOSS 生效；普通战斗该卡被虚化禁用）——
-    // 「洗入 N 张随机卡牌」= 随机 N 张插入牌库；「将 x 洗入/放入/置入牌库」= 指定卡 x
-    // （含「流光斩复制」这类复制衍生）插入牌库，然后把牌库顺序洗混
-    const shR = desc.match(/洗入\s*(\d+)\s*张随机卡牌/);
-    const shN = desc.match(/将\s*(?:(\d+)\s*张)?\s*([^\s，,。；;、]+?)(?:复制)?(?:洗入|放入|置入)牌库/);
-    if (shR || shN) {
-      const added = [];
-      if (shR) {
-        for (let i = 0; i < +shR[1]; i++) {
-          const c = randomDiscoverCard(null);
-          if (c) { addDeckCard(c); added.push(c.name); }
-        }
-      }
-      if (shN) {
-        const tpl = SDT.Cards.all().find(c => c.name === shN[2]);
-        const count = shN[1] ? +shN[1] : 1;
-        if (tpl) {
-          for (let i = 0; i < count; i++) { addDeckCard(tpl); added.push(tpl.name); }
-        } else {
-          G.log(`[[icon:question]] 【${esc(card.name)}】找不到可洗入牌库的卡牌「${esc(shN[2])}」（占位）`, 'warn');
-        }
-      }
-      if (added.length) {
-        drawPile = shuffle(drawPile);
-        const cnt = {};
-        added.forEach(n => { cnt[n] = (cnt[n] || 0) + 1; });
-        G.log(`[[icon:recycle]] <b>${esc(card.name)}</b>：将 ${Object.keys(cnt).map(n => `【${esc(n)}】×${cnt[n]}`).join('、')} 洗入牌库` +
-          `（牌库 ${drawPile.length} 张，已洗混）`, 'sys');
-        did = true;
-      }
-    }
-    // —— 将 x 置入手牌（v0.24：创造衍生卡 x 放进手牌；发现/随机获得同样是「置入手牌」
-    //     的位置词条——三者都把获取的卡放进手牌，区别只在拿哪张）——
-    const hdN = desc.match(/将\s*(?:(\d+)\s*张)?\s*([^\s，,。；;、]+?)(?:复制)?置入手牌/);
-    if (hdN) {
-      const tpl = SDT.Cards.all().find(c => c.name === hdN[2]);
-      const count = hdN[1] ? +hdN[1] : 1;
-      if (tpl) {
-        for (let i = 0; i < count; i++) addTempCard(tpl);
-        G.log(`[[icon:cards]] <b>${esc(card.name)}</b>：将 ${count} 张【${esc(tpl.name)}】置入手牌（战斗内临时卡，战后消散）`, 'loot');
-      } else {
-        G.log(`[[icon:question]] 【${esc(card.name)}】找不到可置入手牌的卡牌「${esc(hdN[2])}」（占位）`, 'warn');
-      }
-      did = true;
-    }
-    // —— 能量 ——
-    const em = desc.match(/获得\s*(\d+)\s*点?能量/);
-    if (em) { energy += +em[1]; G.log(`[[icon:bolt]] 获得 ${em[1]} 点能量（当前 ${energy}）`, 'sys'); did = true; }
-    const cm = desc.match(/能量上限\s*\+\s*(\d+)/);
-    if (cm) { maxEnergy += +cm[1]; energy += +cm[1]; G.log(`[[icon:bolt]] 本场战斗能量上限 +${cm[1]}（每回合 ${maxEnergy} 费）`, 'sys'); did = true; }
-    return { did, drawn, healed, armored };
   }
 
   // 出牌结算（目标：单点卡 = target；群体卡 = 所有存活敌人）
@@ -490,82 +292,50 @@ import { escAttr } from './shared.js';
     G.state = 'modal';
     const names = foes.map(f => `${f.name}(${f.atk}-${f.hp})`).join('、');
     G.log(`[[icon:swords]] <b>${opts.isBoss ? 'BOSS战' : '遭遇战'}【${esc(names)}】</b>${!opts.isBoss && opts.risk ? ` · 风险<b>${esc(opts.risk)}</b>` : ''}`, 'warn');
-    if (mode === 'boss') renderSelect();
+    if (mode === 'boss') prepareDeckSelection();
     else beginNormal();
   }
 
   function beginNormal() {
     drawPile = []; discard = []; granted = []; played = []; consumed = []; grave = [];
-    // 道具/资源/事件卡默认不进手牌（v0.32：手牌只放可直接打出的战斗卡）
-    hand = G.ownedCards.filter(o => !['道具', '资源', '事件'].includes(o.card.type)).map(o => o.uid);
+    // 道具/资源/事件/生物卡默认不进手牌（v0.32：手牌只放可直接打出的战斗卡）
+    hand = G.ownedCards.filter(o => !['道具', '资源', '事件', '生物'].includes(o.card.type)).map(o => o.uid);
     maxEnergy = R().battleEnergy;
     energy = maxEnergy;
     turn = 1; busy = false;
     pdef = { shield: 0, armor: 0, guard: false };
     pstat = Combat.ensureStatus({ hp: G.hp });
     infusing = null; discovering = null; discoverQueue = []; pendingTarget = null; floats = [];
-    delayed = []; noDrawNext = false; spellCost1 = false; viewingGrave = false; dreadShown = false;
+    delayed = []; noDrawNext = false; spellCost1 = false; viewingGrave = false; dreadShown = false; selectingDeck = false;
     G.state = 'modal';
     if (alive().length > 1) G.log(`[[icon:question]] 以一敌多：伤害类卡牌需<b>拖到目标身上</b>打出；群体伤害直接点击生效`, 'sys');
     G.log(`[[icon:cards]] 普通战斗无需抽牌：随身 <b>${hand.length}</b> 张战斗卡直接可打出（道具/资源/事件卡不在手牌中） · 每回合固定 <b>${maxEnergy}</b> 费`, 'sys');
-    render();
+    requestBattleRender();
   }
 
   // ---------- BOSS战：编组牌库 ----------
-  function renderSelect() {
+  function prepareDeckSelection() {
     const need = R().bossDeckSize;
-    // 无法打出的卡不可编入：道具（只能在普通战斗使用）/ 资源与事件（无法在对战中打出）
-    selPool = G.ownedCards.filter(o => !['道具', '资源', '事件'].includes(o.card.type) && o.card.name !== '初始攻击');
+    selPool = G.ownedCards.filter(o => !['道具', '资源', '事件', '生物'].includes(o.card.type) && o.card.name !== '初始攻击');
     const shas = G.ownedCards.filter(o => o.card.name === '初始攻击');
     selShaN = Math.min(shas.length, R().starterSha);
-    sel = new Set(lastDeckSel.filter(u => selPool.some(o => o.uid === u)));
+    sel = new Set(lastDeckSel.filter(uid => selPool.some(entry => entry.uid === uid)));
     const cap = Math.min(need, selPool.length);
     while (sel.size > cap) sel.delete(sel.values().next().value);
-
-    const cardsHTML = selPool.length
-      ? selPool.map(o => `
-          <div class="bt-card${sel.has(o.uid) ? ' sel' : ''}" data-act="bossSel" data-uid="${o.uid}" title="点击 编入/移出 牌库">
-            ${SDT.Cards.cardHTML(o.card, 'sm')}
-          </div>`).join('')
-      : '<p class="ov-empty">背包里没有可编入的非道具卡牌……</p>';
-    const boss = foes[0];
-    UI.showOverlay('[[icon:demon]] BOSS战 · 编组牌库', `
-      <p class="ov-stats">从背包选 <b>${need}</b> 张<b>非道具</b>卡牌，与 <b>${selShaN}</b> 张初始攻击组成牌库 ·
-        开局抽 ${R().battleStartDraw} 张 · 每回合开始抽 ${R().battleTurnDraw} 张 · 每回合固定 ${R().battleEnergy} 费</p>
-      ${boss.affix ? `<p class="ov-note">[[icon:question]] <b>${esc(boss.name)}</b> 词缀【${AFFIX_META[boss.affix].icon} ${AFFIX_META[boss.affix].name}】${esc(AFFIX_META[boss.affix].desc)}</p>` : ''}
-      <p class="ov-note">[[icon:lock]] 固定编入：初始攻击 ×${selShaN}${shas.length < R().starterSha ? `（初始攻击不足 ${R().starterSha} 张——部分进消耗口袋了）` : ''}
-        · [[icon:cross]] 道具 / 资源 / 事件卡与初始攻击不可选入（资源与事件卡无法在对战中打出，道具卡只能在普通战斗中使用）</p>
-      <h3 class="set-h">可选卡牌 <span class="bs-count" id="bsCount"></span></h3>
-      <div class="bt-hand">${cardsHTML}</div>
-      <div class="ov-btns">
-        <button class="ov-btn ok" id="bsGo" data-act="bossGo"></button>
-        <button class="ov-btn" data-act="bossCancel">↩ 放弃挑战</button>
-      </div>`, true);
-    UI.act('bossSel', (d) => toggleSel(d.uid));
-    UI.act('bossGo', beginBoss);
-    UI.act('bossCancel', () => { G.log('[[icon:runner]] 你放下了挑战，首脑仍在污染核心深处盘踞', 'sys'); finish(null); });
-    refreshSelBar();
+    selectingDeck = true;
+    requestBattleRender();
   }
 
-  function toggleSel(uid) {
+  function toggleDeckCard(uid) {
+    if (!selectingDeck || !selPool.some(entry => entry.uid === uid)) return;
     if (sel.has(uid)) sel.delete(uid); else sel.add(uid);
-    const el = UI.el.ovBody && UI.el.ovBody.querySelector(`div[data-uid="${uid}"]`);
-    if (el) el.classList.toggle('sel', sel.has(uid));
-    refreshSelBar();
+    requestBattleRender();
   }
 
-  function refreshSelBar() {
-    const need = Math.min(R().bossDeckSize, selPool.length);
-    const cnt = UI.el.ovBody && UI.el.ovBody.querySelector('#bsCount');
-    const btn = UI.el.ovBody && UI.el.ovBody.querySelector('#bsGo');
-    if (cnt) cnt.textContent = `已选 ${sel.size}/${R().bossDeckSize}`;
-    if (btn) {
-      const ok = sel.size >= need;
-      btn.disabled = !ok;
-      btn.innerHTML = ok
-        ? `${SDT.Icons.img('swords')} 开始战斗（牌库 ${sel.size + selShaN} 张）`
-        : `还需选择 ${need - sel.size} 张…`;
-    }
+  function cancelDeckSelection() {
+    if (!selectingDeck) return;
+    G.log('[[icon:runner]] 你放下了挑战，首脑仍在污染核心深处盘踞', 'sys');
+    finish(null);
   }
 
   function beginBoss() {
@@ -573,6 +343,7 @@ import { escAttr } from './shared.js';
     if (sel.size < need) return;
     const shas = G.ownedCards.filter(o => o.card.name === '初始攻击').slice(0, R().starterSha).map(o => o.uid);
     lastDeckSel = [...sel];
+    selectingDeck = false;
     drawPile = shuffle([...sel].concat(shas));
     hand = []; discard = []; granted = []; played = []; consumed = []; grave = [];
     maxEnergy = R().battleEnergy;
@@ -581,12 +352,12 @@ import { escAttr } from './shared.js';
     pdef = { shield: 0, armor: 0, guard: false };
     pstat = Combat.ensureStatus({ hp: G.hp });
     infusing = null; discovering = null; discoverQueue = []; pendingTarget = null; floats = [];
-    delayed = []; noDrawNext = false; spellCost1 = false; viewingGrave = false; dreadShown = false;
+    delayed = []; noDrawNext = false; spellCost1 = false; viewingGrave = false; dreadShown = false; selectingDeck = false;
     G.state = 'modal';
     G.log(`[[icon:cards]] 牌库编成：自选 ${sel.size} 张非道具卡 + 初始攻击 ×${shas.length} = <b>${drawPile.length}</b> 张 ·
       开局抽 ${R().battleStartDraw} · 每回合开始抽 ${R().battleTurnDraw} · 每回合固定 <b>${maxEnergy}</b> 费`, 'sys');
     drawCards(R().battleStartDraw);
-    render();
+    requestBattleRender();
   }
 
   // ---------- 目标规则（v0.22 设计者定版：指向性卡必须拖到目标身上） ----------
@@ -594,25 +365,14 @@ import { escAttr } from './shared.js';
   // 'self'  = 治疗/净化/护甲/护盾/格挡类 → 拖到自己（立绘）身上
   // null    = 群体卡与无指向效果（抽牌/发现/能量…）→ 直接点击打出
   function targetSide(card) {
-    if (isAOE(card)) return null;
-    const desc = String(card.desc || '');
-    const isDmgType = SDT.Cards.DMG_TYPES.includes(card.type);
-    if (isDmgType || card.dmgType === 'attack') return 'enemy';
-    if (+(card.heal || 0) > 0 || +(card.armor || 0) > 0 ||
-        /回复\s*\d+\s*(?:点\s*生命|点?血)|净化|获得\s*\d+\s*点?\s*护甲|\+\s*\d+\s*甲|获得\s*\d+\s*点?\s*护盾|所受伤害降为/.test(desc)) return 'self';
-    return null;
+    return targetSideFor(card, SDT.Cards.DMG_TYPES);
   }
 
   // ---------- 不可打出判定（v0.24：无法使用的卡在手中虚化、无法触发并提示原因） ----------
   // 资源/事件卡任何战斗都打不出；牌库/墓地类词条只有对战 BOSS 才生效
   // （普通战斗没有牌库与墓地概念）；道具卡只能在普通战斗中使用。
   function unplayableReason(card) {
-    if (card.type === '资源') return '资源卡无法在对战中打出（资源在背包中使用或出售）';
-    if (card.type === '事件') return '事件卡只能在棋盘的事件格中触发，无法打出';
-    if (mode === 'boss' && card.type === '道具') return '道具卡只能在普通战斗中使用（BOSS 战牌库不含道具）';
-    if (mode === 'normal' && /洗入|置入牌库|放入牌库|牌库底|牌库上限/.test(String(card.desc || '')))
-      return '「牌库」词条只有对战 BOSS 时生效——普通战斗没有牌库与墓地，无法打出';
-    return null;
+    return unplayableReasonFor(card, mode);
   }
 
   function play(uid, side) {
@@ -632,18 +392,18 @@ import { escAttr } from './shared.js';
         return;
       }
       infusing = { uid, card, need: infN, picked: new Set() };
-      render();
+      requestBattleRender();
       return;
     }
     // 目标校验：指向性卡必须拖到对应目标（点卡只是锁定提示，不会打出）
     const need = targetSide(card);
     let target = null;
     if (need === 'enemy') {
-      if (side == null || side === 'self') { pendingTarget = { uid, card }; pendingHint = ''; render(); return; }
+      if (side == null || side === 'self') { pendingTarget = { uid, card }; pendingHint = ''; requestBattleRender(); return; }
       target = foes[+side];
-      if (!target || target.dead) { pendingTarget = { uid, card }; pendingHint = ''; render(); return; }
+      if (!target || target.dead) { pendingTarget = { uid, card }; pendingHint = ''; requestBattleRender(); return; }
     } else if (need === 'self') {
-      if (side !== 'self') { pendingTarget = { uid, card }; pendingHint = ''; render(); return; }
+      if (side !== 'self') { pendingTarget = { uid, card }; pendingHint = ''; requestBattleRender(); return; }
     } else {
       target = alive()[0] || null;
     }
@@ -669,9 +429,9 @@ import { escAttr } from './shared.js';
       const free = groupUids.find(u => !infusing.picked.has(u));
       if (free && infusing.picked.size < infusing.need) infusing.picked.add(free);
     }
-    render();
+    requestBattleRender();
   }
-  function cancelInfuse() { infusing = null; render(); }
+  function cancelInfuse() { infusing = null; requestBattleRender(); }
   function confirmInfuse() {
     if (!infusing || infusing.picked.size !== infusing.need) return;
     const { uid, card } = infusing;
@@ -700,7 +460,7 @@ import { escAttr } from './shared.js';
     resolveCard(card, target);
     if (!alive().length) { finish(true); return; }
     processDiscoverQueue();
-    render();
+    requestBattleRender();
   }
 
   // 状态角标：祝福（绿）+ 诅咒（红）
@@ -759,7 +519,7 @@ import { escAttr } from './shared.js';
       foe.dead = true;
       G.log(`[[icon:skull]] <b>${esc(foe.name)}</b> 被击倒！（剩 ${alive().length} 个敌人）`, 'ok');
       floats.push({ unit: foeIdx(foe), text: '💥', cls: 'stk' });
-      floats.push({ unit: 'self', text: KILL_CHEER[Math.floor(Math.random() * KILL_CHEER.length)], cls: 'stk stk-late' });
+      floats.push({ unit: 'self', text: KILL_CHEER[Math.floor(Random.random('battle') * KILL_CHEER.length)], cls: 'stk stk-late' });
     }
     return r.dealt;
   }
@@ -768,7 +528,7 @@ import { escAttr } from './shared.js';
     const pool = SDT.Cards.all().filter(c =>
       c.rarity !== '衍生' && SDT.Cards.isRandomObtainable(c) && (!rarity || c.rarity === rarity));
     if (!pool.length) return null;
-    return pool[Math.floor(Math.random() * pool.length)];
+    return pool[Math.floor(Random.random('battle') * pool.length)];
   }
 
   function processDiscoverQueue() {
@@ -782,7 +542,7 @@ import { escAttr } from './shared.js';
     }
     if (!options.length) { G.log('（卡牌库是空的，没有可发现的卡牌）', 'dim'); return; }
     discovering = { options, n: job.n, rarity: job.rarity };
-    render();
+    requestBattleRender();
   }
 
   function pickDiscover(i) {
@@ -796,7 +556,7 @@ import { escAttr } from './shared.js';
     if (!alive().length) { finish(true); return; }
     if (n > 1) discoverQueue.unshift({ n: n - 1, rarity });
     processDiscoverQueue();
-    render();
+    requestBattleRender();
   }
 
   // 玩家受到一次攻击（含流血加成 / 格挡），返回实际伤害
@@ -813,7 +573,7 @@ import { escAttr } from './shared.js';
 
   // 附加 1 层流血或中毒（兽人首领狂乱用）
   function frenzyCurse(foe) {
-    const key = Math.random() < 0.5 ? 'bleed' : 'poison';
+    const key = Random.random('status') < 0.5 ? 'bleed' : 'poison';
     Combat.addCurse(pstat, key, 1);
     SDT.Sound.sfx('curse');
     G.log(`[[icon:bolt]] <b>${esc(foe.name)}</b> 的攻击附加了 <b>1</b> 层${Combat.CURSE_META[key].name}`, 'warn');
@@ -834,7 +594,7 @@ import { escAttr } from './shared.js';
       G.log(`[[icon:skull]] 中毒结算：你受到 <b>${pr.dealt}</b> 点固定伤害（${G.hp}/${G.maxHp}）`, 'warn');
     }
     // 计时状态不在玩家阶段递减——共享回合钟统一在每回合结束（afterEnemies 末尾）递减
-    render();
+    requestBattleRender();
     if (G.hp <= 0) { busy = false; finish(false); return; }
     // —— 敌人回合：逐个行动 ——
     const acting = alive();
@@ -862,7 +622,7 @@ import { escAttr } from './shared.js';
           if (foe.affix === 'frenzy') frenzyCurse(foe);
         }
       }
-      render();
+      requestBattleRender();
       if (G.hp <= 0) { busy = false; finish(false); return; }
       setTimeout(step, 420);
     };
@@ -881,7 +641,7 @@ import { escAttr } from './shared.js';
       if (foe.hp <= 0 && !foe.dead) { foe.dead = true;
         G.log(`[[icon:skull]] <b>${esc(foe.name)}</b> 毒发倒地！（剩 ${alive().length} 个敌人）`, 'ok');
         floats.push({ unit: foes.indexOf(foe), text: '💥', cls: 'stk' });
-        floats.push({ unit: 'self', text: KILL_CHEER[Math.floor(Math.random() * KILL_CHEER.length)], cls: 'stk stk-late' }); }
+        floats.push({ unit: 'self', text: KILL_CHEER[Math.floor(Random.random('battle') * KILL_CHEER.length)], cls: 'stk stk-late' }); }
     });
     if (!alive().length) { busy = false; finish(true); return; }
     // 军威（将军）：回合结束时攻击力 +2
@@ -922,7 +682,7 @@ import { escAttr } from './shared.js';
       drawCards(R().battleTurnDraw);
     }
     busy = false;
-    render();
+    requestBattleRender();
   }
 
   function tickDurationsLog(status, who) {
@@ -946,7 +706,7 @@ import { escAttr } from './shared.js';
     drawPile = []; hand = []; discard = []; granted = []; grave = [];
     sel = new Set();
     infusing = null; discovering = null; discoverQueue = []; pendingTarget = null; floats = [];
-    delayed = []; noDrawNext = false; spellCost1 = false; viewingGrave = false; dreadShown = false;
+    delayed = []; noDrawNext = false; spellCost1 = false; viewingGrave = false; dreadShown = false; selectingDeck = false;
     G.state = 'idle';
     G.battleActive = false;
     opts.foeNames = foes.map(f => f.name);
@@ -957,40 +717,89 @@ import { escAttr } from './shared.js';
   // ---------- 墓地查看（BOSS 战专属：普通战斗没有牌库/墓地概念） ----------
   // 玩家点「墓地」可看到自己消耗过哪些牌（注能牺牲品等），并按卡牌类型统计数量。
   // 墓地不参与洗回；战胜 BOSS 后的「整理背包」环节可把这些牌放回背包或丢弃。
-  function renderGrave() {
-    const cards = grave.map(findCard).filter(Boolean);
-    const byType = {};
-    cards.forEach(o => { byType[o.card.type] = (byType[o.card.type] || 0) + 1; });
-    const statLine = Object.keys(byType).length
-      ? Object.entries(byType).sort((a, b) => b[1] - a[1]).map(([t, n]) => `${esc(t)} <b>${n}</b>`).join(' · ')
-      : '（墓地还是空的——注能等效果消耗的牌会进入这里）';
-    const byName = {};
-    cards.forEach(o => {
-      if (!byName[o.card.name]) byName[o.card.name] = { card: o.card, count: 0 };
-      byName[o.card.name].count++;
-    });
-    const listHTML = Object.values(byName).map(s => `
-      <div class="bt-gy-row" title="${escAttr(s.card.desc || '')}">
-        <span>[[icon:cards]] <b>${esc(s.card.name)}</b>${s.count > 1 ? ` ×${s.count}` : ''}</span>
-        <span class="bt-gy-meta">${esc(s.card.type)} · ${s.card.cost}费 · ${esc(s.card.rarity || '')}</span>
-      </div>`).join('');
-    UI.showOverlay(`${opts.isBoss ? '[[icon:demon]] BOSS战' : '[[icon:swords]] 遭遇战'} · 第 ${turn} 回合 · [[icon:skull]] 墓地`, `
-      <p class="ov-stats">被消耗的牌共 <b>${cards.length}</b> 张 —— ${statLine}</p>
-      <div class="bt-gy-list">${listHTML}</div>
-      <p class="ov-note">墓地中的牌<b>不会在牌库空后洗回</b>；打出的牌进弃牌堆（会洗回循环）。战胜 BOSS 后可在「整理背包」环节把这些牌放回背包或丢弃。</p>
-      <div class="ov-btns"><button class="ov-btn ok" data-act="btGraveBack">↩ 返回战斗</button></div>`, true);
-    UI.act('btGraveBack', () => { viewingGrave = false; render(); });
-    UI.refresh(G);
+  function closeGrave() {
+    viewingGrave = false;
+    requestBattleRender();
   }
 
-export { AFFIX_META, Combat, G, R, aegisBlocked, busy, cancelInfuse, confirmInfuse, curseChips, discard, discovering, drawPile, dreadShown, effCostOf, endTurn, energy, findCard, flee, floats, foes, grave, hand, infuseOf, infusing, maxEnergy, mode, opts, pdef, pendingHint, pendingTarget, pickDiscover, pileTip, play, pstat, refillDrawPile, renderGrave, start, targetSide, toggleInfusePick, turn, unplayableReason, viewingGrave };
-const _set_viewingGrave = (v) => { viewingGrave = v; };
-export { _set_viewingGrave };
-const _set_pendingTarget = (v) => { pendingTarget = v; };
-export { _set_pendingTarget };
-const _set_pendingHint = (v) => { pendingHint = v; };
-export { _set_pendingHint };
-const _set_dreadShown = (v) => { dreadShown = v; };
-export { _set_dreadShown };
-const _set_floats = (v) => { floats = v; };
-export { _set_floats };
+  function getSnapshot() {
+    const freezeObject = value => value ? Object.freeze({ ...value }) : value;
+    const statusOf = value => value ? Object.freeze({ ...value.status }) : null;
+    const playerStatus = pstat ? Object.freeze({ ...pstat, status: statusOf(pstat) }) : null;
+    const playerDefense = freezeObject(pdef);
+    const readonlyFoes = foes.map(foe => Object.freeze({
+      ...foe,
+      status: statusOf(foe),
+      defense: freezeObject(foe.defense),
+      intent: freezeObject(foe.intent),
+    }));
+    const readonlyInfusing = infusing ? Object.freeze({
+      ...infusing,
+      card: freezeObject(infusing.card),
+      picked: Object.freeze([...infusing.picked]),
+    }) : null;
+    const readonlyDiscovering = discovering ? Object.freeze({
+      ...discovering,
+      options: Object.freeze(discovering.options.map(freezeObject)),
+    }) : null;
+    const deckSelection = selectingDeck ? Object.freeze({
+      need: R().bossDeckSize,
+      starterCount: selShaN,
+      selected: Object.freeze([...sel]),
+      cards: Object.freeze(selPool.map(entry => Object.freeze({ uid: entry.uid, card: freezeObject(entry.card) }))),
+      boss: readonlyFoes[0] || null,
+    }) : null;
+    return Object.freeze({
+      mode, turn, energy, maxEnergy, busy,
+      opts: freezeObject(opts),
+      player: G ? Object.freeze({ hp: G.hp, maxHp: G.maxHp, atk: G.atk, spellPower: G.spellPower || 0, myClass: G.myClass || null, characterId: G.characterId || null }) : null,
+      pdef: playerDefense,
+      pstat: playerStatus,
+      foes: Object.freeze(readonlyFoes),
+      hand: Object.freeze(hand.slice()),
+      drawPile: Object.freeze(drawPile.slice()),
+      discard: Object.freeze(discard.slice()),
+      grave: Object.freeze(grave.slice()),
+      infusing: readonlyInfusing,
+      discovering: readonlyDiscovering,
+      pendingTarget: pendingTarget ? Object.freeze({ ...pendingTarget, card: freezeObject(pendingTarget.card) }) : null,
+      pendingHint,
+      viewingGrave,
+      dreadShown,
+      deckSelection,
+    });
+  }
+
+  function openGrave() { viewingGrave = true; requestBattleRender(); }
+  function cancelPendingTarget() { pendingTarget = null; pendingHint = ''; requestBattleRender(); }
+  function setPendingHint(value) { pendingHint = String(value || ''); requestBattleRender(); }
+  function lockPendingTarget(value) { pendingTarget = value; pendingHint = ''; requestBattleRender(); }
+  function markDreadShown() { dreadShown = true; }
+  function takeFloats() { const list = floats; floats = []; return list; }
+
+  const commands = Object.freeze({
+    playCard: play,
+    selectInfusion: toggleInfusePick,
+    confirmInfusion: confirmInfuse,
+    cancelInfusion: cancelInfuse,
+    endTurn,
+    flee,
+    openGrave,
+    cancelPendingTarget,
+    closeGrave,
+    selectDeckCard: toggleDeckCard,
+    confirmDeck: beginBoss,
+    cancelDeck: cancelDeckSelection,
+    pickDiscover,
+    setPendingHint,
+    lockPendingTarget,
+  });
+
+const viewApi = Object.freeze({
+  AFFIX_META, Combat, R, aegisBlocked, curseChips, effCostOf, findCard,
+  infuseOf, markDreadShown, pileTip, refillDrawPile,
+  takeFloats, targetSide, unplayableReason,
+});
+const BattleSession = Object.freeze({ start, getSnapshot, commands });
+
+export { BattleSession, commands, configureBattleRenderer, getSnapshot, start, viewApi };

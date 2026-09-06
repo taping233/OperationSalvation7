@@ -4,7 +4,16 @@ const UI = window.SDT.UI;
 import { esc } from './shared.js';
 import { escAttr } from './shared.js';
 import { game } from './game.core.js';
-import { closeBase, renderHub, _set_deployPick } from './game.hub.js';
+
+const navigation = {
+  closeBase: () => {},
+  renderHub: () => {},
+  resetDeployPick: () => {},
+};
+
+function configureCardNavigation(hooks) {
+  Object.assign(navigation, hooks || {});
+}
   const RARITIES = SDT.Cards.RARITIES;
   const TYPES = SDT.Cards.TYPES;
   const TYPE_ICON = SDT.Cards.TYPE_ICON;
@@ -85,10 +94,11 @@ import { closeBase, renderHub, _set_deployPick } from './game.hub.js';
     const q = libFilter.q.trim().toLowerCase();
     return libCards.filter(c =>
       (libFilter.tab === '全部' || c.type === libFilter.tab) &&
-      (libFilter.rar === '全部' || c.rarity === libFilter.rar) &&
+      // 稀有度按有效稀有度筛选（2026-09-04 定版：棱彩已实装进卡牌库——英雄卡与其衍生牌 rarityOf 推导为「棱彩」，可经下拉筛选）
+      (libFilter.rar === '全部' || SDT.Cards.rarityOf(c) === libFilter.rar) &&
       (!q || (c.name || '').toLowerCase().includes(q) || (c.desc || '').toLowerCase().includes(q))
     ).sort((a, b) => (a.cost - b.cost) ||
-      (RARITIES.indexOf(b.rarity) - RARITIES.indexOf(a.rarity)) ||
+      (RARITIES.indexOf(SDT.Cards.rarityOf(b)) - RARITIES.indexOf(SDT.Cards.rarityOf(a))) ||
       String(a.name).localeCompare(b.name, 'zh'));
   }
 
@@ -102,7 +112,7 @@ import { closeBase, renderHub, _set_deployPick } from './game.hub.js';
     const kw = [drawN ? `抽卡 ${drawN}` : '', infN ? `注能(${infN})` : '',
       healN ? `回复 ${healN}` : '', armorN ? `护甲 ${armorN}` : ''].filter(Boolean).join(' · ');
     const kwTxt = kw ? `<br>效果词条：<b>${kw}</b>` : '';
-    return `${cardHTML(c, 'lg')}<p class="pv-hint">${esc(c.type)} · ${esc(c.rarity)}${dmgTxt}${kwTxt}<br>点击卡牌进入制作坊编辑</p>`;
+    return `${cardHTML(c, 'lg')}<p class="pv-hint">${esc(c.type)} · ${esc(SDT.Cards.rarityOf(c))}${dmgTxt}${kwTxt}<br>点击卡牌进入制作坊编辑</p>`;
   }
 
   function libGridHTML() {
@@ -276,7 +286,6 @@ import { closeBase, renderHub, _set_deployPick } from './game.hub.js';
         <button class="pg-close" data-act="closeDesigner" title="${designerReturnLib ? '返回卡牌库（Esc）' : '关闭（Esc）'}">[[icon:cross]]</button>
         <header class="pg-head">
           <h2>[[icon:cards]] 卡牌制作坊</h2>
-          <span class="sub">${editingCard ? `正在编辑「${esc(editingCard.name)}」` : '设计一张属于你的卡牌，左侧实时预览'}</span>
           <span class="pg-spacer"></span>
           ${designerReturnLib ? '<button class="hs-btn" data-act="closeDesigner">← 返回卡牌库</button>' : ''}
           <button class="hs-btn gold" data-act="saveCard">[[icon:save]] ${editingCard ? '保存修改' : '保存到卡牌库'}</button>
@@ -425,16 +434,7 @@ import { closeBase, renderHub, _set_deployPick } from './game.hub.js';
   }
 
   function bindDesignerTilt() {
-    const stage = document.getElementById('cdesStage');
-    const tilt = document.getElementById('cardTilt');
-    if (!stage || !tilt) return;
-    stage.addEventListener('mousemove', (e) => {
-      const r = stage.getBoundingClientRect();
-      const px = (e.clientX - r.left) / r.width - 0.5;
-      const py = (e.clientY - r.top) / r.height - 0.5;
-      tilt.style.transform = `rotateY(${(px * 24).toFixed(1)}deg) rotateX(${(-py * 18).toFixed(1)}deg)`;
-    });
-    stage.addEventListener('mouseleave', () => { tilt.style.transform = 'rotateY(0deg) rotateX(0deg)'; });
+    // 老板留言 #50：预览卡倾斜动画已关闭，保留空函数避免调用点报错
   }
 
   function saveDraftCard() {
@@ -475,8 +475,8 @@ import { closeBase, renderHub, _set_deployPick } from './game.hub.js';
   // Esc / 点击页面外深色背景 → 关闭大页面（制作坊先回库 / 基地 / 出征整备回基地）
   function closeCardPageTop() {
     if (document.getElementById('cdesStage')) closeDesigner();
-    else if (document.getElementById('depMain')) { _set_deployPick(null); renderHub(); }
-    else if (document.getElementById('hubMain')) closeBase();
+    else if (document.getElementById('depMain')) { navigation.resetDeployPick(); navigation.renderHub(); }
+    else if (document.getElementById('hubMain')) navigation.closeBase();
     else closeLibPage();
   }
 
@@ -548,6 +548,6 @@ import { closeBase, renderHub, _set_deployPick } from './game.hub.js';
 
   // ---------- 输入 ----------
 
-export { Sfx, cardHTML, cardPageOpen, closeCardPageTop, openCardDesigner, openCardLibrary };
+export { Sfx, cardHTML, cardPageOpen, closeCardPageTop, configureCardNavigation, openCardDesigner, openCardLibrary };
 const _set_cardPageOpen = (v) => { cardPageOpen = v; };
 export { _set_cardPageOpen };

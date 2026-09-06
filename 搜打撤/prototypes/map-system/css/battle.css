@@ -1,0 +1,214 @@
+/* 职责拆分自 base.css；保持原始级联顺序。 */
+/* ---------------- 战斗：多敌人横排 + 拖拽选目标 ---------------- */
+  .bt-foes { display: flex; flex-wrap: wrap; gap: 10px; align-items: stretch; text-align: left; }
+  .bt-foe { position: relative; flex: 1 1 200px; min-width: 200px; display: flex; gap: 10px; align-items: center;
+    border: 1px solid #3f3f3f; border-radius: 12px; padding: 9px 11px;
+    background: linear-gradient(180deg, #222222, #191919);
+    box-shadow: inset 0 1px 0 rgba(240,240,240,.05); transition: box-shadow .15s, border-color .15s, transform .15s; }
+  /* 拖拽悬停：打出效果预览面板 */
+  .bt-fpreview { position: absolute; left: 50%; top: -16px; transform: translateX(-50%); z-index: 6;
+    min-width: 170px; max-width: 92%; text-align: center; pointer-events: none;
+    background: rgba(14,14,14,.96); border: 1px solid rgba(196,196,196,.75); border-radius: 10px;
+    padding: 8px 12px; box-shadow: 0 8px 22px rgba(0,0,0,.65), 0 0 16px rgba(196,196,196,.28);
+    animation: ovFadeIn .12s ease; }
+  .bt-fpreview b { display: block; color: #d9d9d9; font-size: 13.5px; }
+  .bt-fpreview span { display: block; color: #adadad; font-size: 10.5px; margin-top: 3px; }
+  .bt-fpreview .bt-fpreview-tip { color: #7c7c7c; font-size: 9.5px; letter-spacing: 2px; margin-top: 4px; }
+  .bt-fportrait { width: 64px; min-width: 64px; border-radius: 10px; overflow: hidden;
+    border: 1px solid #565656; box-shadow: inset 0 2px 8px rgba(0,0,0,.55); }
+  .bt-finfo { flex: 1; min-width: 0; }
+  .bt-finfo b { color: #e4e4e4; font-size: 13px; max-width: 100%; white-space: nowrap;
+    overflow: hidden; text-overflow: ellipsis; }   /* 名字单行省略，窄卡不竖排 */
+  .bt-deadmark { color: #959595; font-weight: 800; }
+  .bt-affix { display: inline-block; margin-left: 6px; padding: 1px 8px; border-radius: 999px;
+    font-size: 10.5px; color: #d9d9d9; border: 1px solid rgba(196,196,196,.5); background: rgba(196,196,196,.1); }
+  .bt-foe.dead { opacity: .32; filter: grayscale(.9); }
+  .bt-foe.can-target { border-color: rgba(196,196,196,.65); cursor: pointer;
+    box-shadow: 0 0 14px rgba(196,196,196,.3), inset 0 1px 0 rgba(240,240,240,.05); }
+  .bt-foe.can-target:hover { transform: translateY(-2px); }
+  .bt-foe.drag-over { border-color: #d9d9d9; box-shadow: 0 0 22px rgba(196,196,196,.65);
+    transform: scale(1.03); }
+  .bt-foe.aegis { border-color: rgba(105,105,105,.8);
+    box-shadow: 0 0 16px rgba(105,105,105,.45), inset 0 1px 0 rgba(190,190,190,.08); }
+  .bt-foe.aegis .bt-fportrait { box-shadow: inset 0 2px 8px rgba(0,0,0,.55), 0 0 12px rgba(136,136,136,.5); }
+  .bt-ops-col { display: flex; flex-direction: column; gap: 8px; justify-content: center; min-width: 128px;
+    margin-left: auto; }
+  .bt-ops-col .ov-btn { width: 100%; }
+  /* 手牌：需要拖拽选目标的卡 */
+  .bt-card.need-target { outline: 1.5px dashed rgba(196,196,196,.55); outline-offset: 3px; }
+  .bt-card.targeting { outline: 2px solid #d9d9d9; outline-offset: 3px;
+    filter: drop-shadow(0 0 12px rgba(196,196,196,.55)); }
+  .bt-card .bt-tt { position: absolute; top: -8px; right: -6px; z-index: 1; font-size: 13px;
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,.6)); }
+  /* ============ v0.26 指向施法（炉石式拎起 + 弯曲箭头） ============ */
+  .bt-card[data-aim="1"] { touch-action: none; cursor: grab; }
+  .bt-card[data-aim="1"]:active { cursor: grabbing; }
+  .bt-card.aim-lift { transform: translateY(-18px) scale(1.06); z-index: 8;
+    box-shadow: 0 16px 34px rgba(0,0,0,.6), 0 0 24px rgba(196,196,196,.4);
+    transition: transform .16s cubic-bezier(.3,1.4,.5,1), box-shadow .16s; }
+  #aimArrow { position: absolute; inset: 0; pointer-events: none; z-index: 60; overflow: visible; }
+  .bt-pick { border-color: rgba(196,196,196,.5); }
+
+/* ============ v0.32 杀戮尖塔式战场（battle 弹窗模式：左我方右敌方 + 底部扇形手牌） ============ */
+#overlay .card.battle { width:min(1280px,97%); height:min(880px,95%); padding:0;
+  display:flex; flex-direction:column; overflow:hidden; text-align:left; }
+#overlay .card.battle > h2 { flex:0 0 auto; font-size:15px; letter-spacing:2px; padding:8px 18px; margin:0;
+  background:rgba(10,10,10,.62); border-bottom:1px solid #3a3a3a; }
+#overlay .card.battle #ovBody { flex:1; min-height:0; overflow:hidden; display:flex; }
+
+.battle-stage.sts { flex:1; margin:0; padding:0; min-height:0; display:flex; flex-direction:column;
+  background-size:cover; background-position:center; }
+.battle-stage.sts .battle-stage-shade {
+  background:linear-gradient(180deg,rgba(9,9,9,.32),rgba(9,9,9,.58) 55%,rgba(5,5,5,.9)); }
+
+/* —— 场地：单位分立两侧、站在场地下方 —— */
+.sts-arena { flex:1; position:relative; min-height:170px; }
+.sts-unit { position:absolute; bottom:2%; text-align:center; z-index:2; }
+.sts-me { left:5%; width:200px; }
+.sts-foes { position:absolute; right:4%; bottom:2%; left:44%; display:flex; justify-content:flex-end;
+  align-items:flex-end; gap:4px; z-index:2; }
+/* 重置旧卡片式敌人样式 */
+#overlay .battle-stage.sts .sts-foe { display:block; position:relative; flex:0 1 auto; min-width:0;
+  width:180px; border:0; padding:0; background:none; box-shadow:none; border-radius:0; }
+#overlay .battle-stage.sts .sts-foe.is-boss { width:290px; }
+.sts-me .sts-figure { width:84%; margin:0 auto; }
+.sts-figure { position:relative; line-height:0; filter:drop-shadow(0 16px 20px rgba(0,0,0,.62)); }
+.sts-figure img { width:100%; height:auto; transition:transform .15s; }
+.sts-nameplate { margin:6px auto 0; width:100%; padding:5px 8px 6px; border:1px solid rgba(150,150,150,.35);
+  border-radius:2px; background:linear-gradient(180deg,rgba(12,12,12,.5),rgba(8,8,8,.85)); }
+.sts-nameplate b { color:#ececec; font-size:14px; letter-spacing:1px; }
+.sts-you { display:inline-block; margin-left:6px; padding:0 7px; border:1px solid #8a8a8a; border-radius:2px;
+  color:#d6d6d6; font-size:10.5px; vertical-align:1px; }
+.sts-hp { height:15px; margin-top:4px; }
+.sts-stats { color:#b9b9b9; font-size:11.5px; margin-top:3px; }
+.sts-stats .ic { width:12px; height:12px; vertical-align:-0.16em; }
+.sts-chips { margin-top:3px; line-height:1.8; }
+.sts-chips:empty { display:none; }
+/* 意图气泡（敌头顶） */
+.sts-intent { position:absolute; left:50%; top:-36px; transform:translateX(-50%); white-space:nowrap; z-index:3;
+  padding:3px 12px; border:1px solid #8f8f8f; border-radius:999px; background:rgba(12,12,12,.9);
+  color:#e3e3e3; font-size:12px; box-shadow:0 3px 10px rgba(0,0,0,.55); }
+.sts-intent .ic { width:13px; height:13px; vertical-align:-0.2em; }
+/* 目标/状态高亮（拖拽指向、可选中、免伤、死亡） */
+#overlay .battle-stage.sts .sts-unit.can-target { cursor:pointer; }
+.sts-unit.can-target .sts-figure { filter:drop-shadow(0 0 15px rgba(225,225,225,.7)); }
+.sts-me.can-target .sts-figure { filter:drop-shadow(0 0 14px rgba(120,210,150,.65)); }
+.sts-unit.drag-over .sts-figure { filter:drop-shadow(0 0 26px rgba(245,245,245,.95)); }
+.sts-unit.drag-over .sts-figure img { transform:translateX(8px) scale(1.05); }
+.sts-me.drop-here .sts-figure { filter:drop-shadow(0 0 22px rgba(120,210,150,.9)); }
+#overlay .battle-stage.sts .sts-foe.dead { opacity:.22; filter:grayscale(.95); }
+#overlay .battle-stage.sts .sts-foe.aegis { border:0; box-shadow:none; }
+.sts-foe.aegis .sts-figure { filter:drop-shadow(0 0 18px rgba(160,160,160,.85)); }
+/* 拖拽悬停的伤害预览气泡上移到意图上方 */
+#overlay .battle-stage.sts .bt-fpreview { top:-108px; }
+
+/* —— HUD：能量球 + 牌堆 | 扇形手牌 | 弃牌/墓地 + 操作 —— */
+.sts-hud { flex:0 0 auto; display:flex; align-items:flex-end; gap:14px; padding:6px 16px 8px; z-index:5;
+  background:linear-gradient(180deg,rgba(4,4,4,0),rgba(4,4,4,.74) 34%); }
+.sts-hud-l, .sts-hud-r { display:flex; align-items:flex-end; gap:8px; }
+.sts-hud-l { min-width:118px; }
+.sts-hud-r { min-width:118px; }
+.sts-hud-r .ov-btn { white-space:nowrap; }
+.sts-energy { width:62px; height:62px; border-radius:50%; border:2px solid #9c9c9c;
+  background:radial-gradient(circle at 50% 36%,#3d3d3d,#101010 72%); color:#f0f0f0;
+  display:flex; align-items:center; justify-content:center; gap:2px;
+  box-shadow:0 0 18px rgba(200,200,200,.25), inset 0 -6px 12px rgba(0,0,0,.7); }
+.sts-energy .ic { width:15px; height:15px; }
+.sts-energy b { font-size:24px; font-family:var(--cal); }
+.sts-energy span { font-size:11px; color:#a8a8a8; align-self:flex-end; margin-bottom:12px; }
+.sts-hand { flex:1; display:flex; flex-wrap:nowrap; justify-content:center; align-items:flex-end;
+  min-height:188px; padding:26px 8px 4px; overflow:visible; }
+.sts-hand .bt-card { flex:0 0 auto; transform:rotate(var(--rot,0deg)); transform-origin:50% -260px;
+  transition:transform .14s, box-shadow .14s; }
+.sts-hand .bt-card:hover { transform:rotate(var(--rot,0deg)) translateY(-36px) scale(1.14); z-index:9; }
+.sts-hand .bt-card.off:hover { transform:rotate(var(--rot,0deg)); }
+.sts-hand .bt-card.aim-lift { transform:translateY(-42px) scale(1.2) !important; z-index:20; }
+/* 同名堆叠计数角标 */
+.bt-count { position:absolute; top:-9px; right:-9px; z-index:5; min-width:30px; height:22px; padding:0 6px;
+  border-radius:11px; border:1.5px solid #b9b9b9; background:#1c1c1c; color:#f0f0f0;
+  font-size:13px; font-weight:800; display:flex; align-items:center; justify-content:center;
+  box-shadow:0 2px 6px rgba(0,0,0,.6); pointer-events:none; }
+.sts-note { flex:0 0 auto; margin:0; padding:4px 16px 7px; color:#8f8f8f; font-size:11px;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis; background:rgba(4,4,4,.82);
+  border-top:1px solid #262626; }
+.battle-stage.sts .bt-infuse { margin:0; z-index:6; }
+
+@media (max-width: 900px) {
+  .sts-me { left:2%; width:150px; }
+  #overlay .battle-stage.sts .sts-foe { width:130px; }
+  #overlay .battle-stage.sts .sts-foe.is-boss { width:200px; }
+  .sts-foes { left:38%; }
+}
+/* 右侧敌人意图气泡贴边被裁剪：容器留出呼吸空间，气泡单行不换行 */
+.sts-foes { padding-right:14px; }
+.sts-intent { max-width:150%; }
+/* v0.32.1 修：能量球数字与 /上限 重叠、手牌底部被截断 */
+.sts-energy .ic { position:absolute; top:5px; left:9px; }
+.sts-energy { flex-direction:row; align-items:baseline; padding-top:6px; }
+.sts-energy b { font-size:23px; }
+.sts-energy span { font-size:11px; color:#a8a8a8; margin:0 0 1px 1px; }
+.sts-hand { min-height:216px; padding:34px 8px 4px; }
+.sts-hand .hs-card.sm { font-size:11px; }
+
+/* ============ v0.32.2 战斗特效 + 性能 ============ */
+/* 伤害/受击飘字（挂在 overlay 层，躲过 ovBody 整块重建） */
+.sts-float { position:absolute; z-index:80; transform:translate(-50%,-50%); pointer-events:none;
+  font-family:var(--cal); font-size:30px; font-weight:900; letter-spacing:1px;
+  text-shadow:0 0 6px rgba(0,0,0,.9), 0 2px 4px rgba(0,0,0,.8);
+  animation:stsFloatUp .95s cubic-bezier(.2,.7,.4,1) forwards; }
+.sts-float.dmg { color:#f2c9c9; }
+.sts-float.hurt { color:#ff8f7a; font-size:34px; }
+.sts-float.block { color:#c9c9c9; font-size:22px; }
+@keyframes stsFloatUp {
+  0% { opacity:0; transform:translate(-50%,-30%) scale(.6); }
+  18% { opacity:1; transform:translate(-50%,-55%) scale(1.12); }
+  100% { opacity:0; transform:translate(-50%,-160%) scale(1); }
+}
+/* 单位受击抖动（敌人横抖、自己后仰+红染） */
+.sts-figure.fx-hit { animation:stsShake .42s ease; }
+.sts-figure.fx-hit-self { animation:stsSelfHit .45s ease; }
+@keyframes stsShake {
+  0%,100% { transform:translateX(0); }
+  20% { transform:translateX(-9px); } 40% { transform:translateX(7px); }
+  60% { transform:translateX(-5px); } 80% { transform:translateX(3px); }
+}
+@keyframes stsSelfHit {
+  0%,100% { transform:translateX(0); filter:none; }
+  25% { transform:translateX(7px); filter:brightness(1.6) saturate(1.6) drop-shadow(0 0 14px rgba(255,90,70,.8)); }
+  60% { transform:translateX(3px); filter:brightness(1.15); }
+}
+/* 全屏受击红闪（径向暗角） */
+.sts-hurtflash { position:absolute; inset:0; z-index:70; pointer-events:none;
+  background:radial-gradient(ellipse at 50% 55%, transparent 42%, rgba(168,26,26,.5) 100%);
+  animation:stsHurtFlash .6s ease-out forwards; }
+@keyframes stsHurtFlash { 0% { opacity:0; } 15% { opacity:1; } 100% { opacity:0; } }
+/* 性能：去掉名牌 backdrop-filter（大面积实时模糊是战斗卡顿主因之一），立绘上 GPU 层 */
+.sts-nameplate { backdrop-filter:none; }
+.sts-figure { transform:translateZ(0); }
+
+/* ============ v0.5 表情差分贴纸（零美术情绪反馈） ============ */
+/* 表情贴纸：Q 弹摔落式弹出，盖过数字飘字 */
+.sts-float.stk { font-size:42px; font-family:"Segoe UI Emoji","Noto Color Emoji",sans-serif;
+  font-weight:400; letter-spacing:0; text-shadow:0 3px 6px rgba(0,0,0,.6);
+  animation:stkPop 1s cubic-bezier(.2,.8,.3,1) forwards; }
+.sts-float.stk.stk-late { opacity:0; animation-delay:.16s; }
+@keyframes stkPop {
+  0% { opacity:0; transform:translate(-50%,-50%) scale(.2) rotate(-14deg); }
+  22% { opacity:1; transform:translate(-50%,-60%) scale(1.3) rotate(7deg); }
+  40% { transform:translate(-50%,-56%) scale(.95) rotate(-3deg); }
+  100% { opacity:0; transform:translate(-50%,-170%) scale(1.05) rotate(0deg); }
+}
+/* 治疗反馈：立绘暖光涌动 */
+.sts-figure.fx-warm { animation:fxWarm .9s ease; }
+@keyframes fxWarm {
+  0%,100% { filter:none; }
+  30% { filter:brightness(1.28) saturate(1.3) drop-shadow(0 0 18px rgba(130,235,170,.8)); }
+}
+/* BOSS 登场：竖线阴影自暗处压过场景 */
+.battle-stage.fx-dread .battle-stage-shade { animation:stsDread 2.4s ease forwards; }
+@keyframes stsDread {
+  0% { opacity:0; background:repeating-linear-gradient(90deg,rgba(0,0,0,.6) 0 3px,transparent 3px 9px); }
+  16% { opacity:1; }
+  72% { opacity:.8; }
+  100% { opacity:0; background:repeating-linear-gradient(90deg,rgba(0,0,0,.6) 0 3px,transparent 3px 9px); }
+}

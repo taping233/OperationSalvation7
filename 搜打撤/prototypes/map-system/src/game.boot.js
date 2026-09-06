@@ -3,12 +3,15 @@ const UI = window.SDT.UI;
 const SDT = window.SDT;
 import { TYPE_NAME } from './game.notes.js';
 import { MAP } from './game.core.js';
-import { SLOT_COUNT, buildDerived, cam, canvas, ctx, dpr, exitToTitle, game, hasRun, migrateOldSave, openSettings, quitGame, saveGame, showTitle, startNewGame, _set_dpr, _set_cam } from './game.core.js';
-import { bindRunMixins, openShop, roll } from './game.run.js';
+import { SLOT_COUNT, buildDerived, cam, canvas, configureGameRuntime, ctx, dpr, exitToTitle, game, hasRun, migrateOldSave, openSettings, quitGame, saveGame, showTitle, startNewGame, _set_dpr, _set_cam } from './game.core.js';
+import { bindRunMixins, openClassChoice, openShop, roll } from './game.run.js';
 import { openBaseHub } from './game.hub.js';
 import { bindBagMixins, showBackpack } from './game.bag.js';
 import { bindDevMode, bindNotesMixins, initDevMode, openCellEditor, rebuildNotes, showClearOverlay, showExportOverlay, showImportOverlay } from './game.notes.js';
 import { cardPageOpen, closeCardPageTop, openCardDesigner, openCardLibrary } from './game.cardslib.js';
+import { renderScheduler } from './render-scheduler.js';
+
+configureGameRuntime({ openClassChoice, openBaseHub, rebuildNotes, resize: () => resize() });
   function bindInput() {
     let dragging = false, downPos = null, lastPos = null;
     let hoverFrame = 0, pendingHover = null;
@@ -35,6 +38,7 @@ import { cardPageOpen, closeCardPageTop, openCardDesigner, openCardLibrary } fro
         if (dragging) {
           const dx = e.clientX - lastPos.x, dy = e.clientY - lastPos.y;
           cam.panBy(dx, dy);
+          renderScheduler.invalidate();
           canvas.style.cursor = 'grabbing';
           UI.hideTooltip();
           lastPos = { x: e.clientX, y: e.clientY };
@@ -67,17 +71,20 @@ import { cardPageOpen, closeCardPageTop, openCardDesigner, openCardLibrary } fro
       e.preventDefault();
       const r = canvas.getBoundingClientRect();
       cam.zoomAt(e.clientX - r.left, e.clientY - r.top, e.deltaY < 0 ? 1.12 : 1 / 1.12);
+      renderScheduler.invalidate();
     }, { passive: false });
 
     window.addEventListener('keydown', (e) => {
       const tag = e.target && e.target.tagName;
       if (tag === 'TEXTAREA' || tag === 'INPUT') return;
       if (e.code === 'Space' || e.code === 'Enter') { e.preventDefault(); roll(); }
+      else if (e.key.toLowerCase() === 'q' || e.key.toLowerCase() === 'e') { cam.angle += e.key.toLowerCase() === 'q' ? -.2 : .2; renderScheduler.invalidate(); }
+      else if (e.key.toLowerCase() === 'g') { cam.cx=720; cam.cy=720; cam.zoom=1.1; renderScheduler.invalidate(); }
       else if (e.key === 'b' || e.key === 'B') showBackpack();
       else if (e.key === 'f' || e.key === 'F') {
-        cam.cx = game.pos.x; cam.cy = game.pos.y; cam.clamp();
+        cam.cx = game.pos.x; cam.cy = game.pos.y; cam.clamp(); renderScheduler.invalidate();
       }
-      else if (e.key === 'n' || e.key === 'N') { game.toggles.index = !game.toggles.index; if (UI.el.tglIndex) UI.el.tglIndex.checked = game.toggles.index; }
+      else if (e.key === 'n' || e.key === 'N') { game.toggles.index = !game.toggles.index; if (UI.el.tglIndex) UI.el.tglIndex.checked = game.toggles.index; renderScheduler.invalidate(); }
     });
 
     UI.el.bagBtn.addEventListener('click', () => showBackpack());
@@ -179,12 +186,13 @@ import { cardPageOpen, closeCardPageTop, openCardDesigner, openCardLibrary } fro
     if ((coverTitle && !coverTitle.hidden) || (coverExit && !coverExit.hidden)) return;
     // 全屏不透明页（事件/节点/背包页/房间战斗）盖住画布时同样跳帧，不重绘被遮挡的画布
     const ov = UI.el.overlay;
-    const covered = !ov.hidden && (ov.classList.contains('opaque') || ov.classList.contains('room-view'));
+    const covered = document.hidden || (!ov.hidden && !ov.querySelector('.battle-stage') && (ov.classList.contains('opaque') || ov.classList.contains('room-view')));
     game.time += dt;
     if (ELAPSED_STATES.has(game.state)) game.elapsed += dt;
     // 同步到 body，驱动 CSS 状态样式（提示条显隐 / 掷骰按钮呼吸灯）
     if (document.body.dataset.state !== game.state) document.body.dataset.state = game.state;
-    if (covered) return;
+    const fxActive = SDT.FX && (SDT.FX.floats.length || SDT.FX.pulses.length || SDT.FX.shakes.length);
+    const active = game.battleActive || game.state === 'moving' || game.state === 'rolling' || !!fxActive;
     // 移动时镜头平滑跟随棋子
     if (game.state === 'moving') {
       const k = Math.min(1, dt * 5);
@@ -192,7 +200,10 @@ import { cardPageOpen, closeCardPageTop, openCardDesigner, openCardLibrary } fro
       cam.cy += (game.pos.y - cam.cy) * k;
       cam.clamp();
     }
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    // 模拟按每次 rAF 的真实 dt 更新；绘制可以降频。若只在 draw 帧更新，165 Hz 屏幕上
+    // dt 会被丢掉约 2/3，镜头会变慢并呈现不均匀的追赶感。
+    if (!renderScheduler.shouldDraw(now, { covered, active })) return;
+    
     try { SDT.Renderer.draw(ctx, game); } catch (e) { console.error('渲染异常：', e); }
     UI.refreshTime(game);
   }
@@ -202,18 +213,27 @@ import { cardPageOpen, closeCardPageTop, openCardDesigner, openCardLibrary } fro
     canvas.width = canvas.clientWidth * dpr;
     canvas.height = canvas.clientHeight * dpr;
     if (cam) cam.resize(canvas.clientWidth, canvas.clientHeight);
+    renderScheduler.invalidate();
   }
 
   // ---------- 标题界面按钮绑定 ----------
+  let titleControlsBound = false;
   function bindTitle() {
+    if (titleControlsBound) return;
+    titleControlsBound = true;
+    const title = document.getElementById('title');
     document.getElementById('mStart').addEventListener('click', startNewGame);
     document.getElementById('mSettings').addEventListener('click', openSettings);
-    document.getElementById('mExit').addEventListener('click', quitGame);
+    document.getElementById('btnCardLib').addEventListener('click', openCardLibrary);
+    document.getElementById('btnCardDesigner').addEventListener('click', () => openCardDesigner(null));
     document.getElementById('mBack').addEventListener('click', () => {
       document.getElementById('exitScr').hidden = true;
       showTitle();
     });
-    UI.el.btnHome.addEventListener('click', exitToTitle);
+    // 预加载选档页存档卡背景图，避免首次打开时解码卡顿
+    const slotBg = new Image();
+    slotBg.src = new URL('../assets/slot-bg-knight-fantasy.jpg', import.meta.url).href;
+    document.getElementById('btnHome').addEventListener('click', exitToTitle);
     // 音效/背景乐开关（持久化在 sound.js）
     const btnMute = document.getElementById('btnMute');
     if (btnMute) {
@@ -225,7 +245,12 @@ import { cardPageOpen, closeCardPageTop, openCardDesigner, openCardLibrary } fro
       syncMute();
     }
     window.addEventListener('beforeunload', saveGame);
+    title.dataset.controlsBound = 'true';
   }
+
+  // 模块脚本位于 body 末尾，此时标题 DOM 已存在。首页交互必须先于存档、
+  // 画布和卡牌初始化绑定，否则任一后续启动异常都会留下“能看但不能点”的死首页。
+  bindTitle();
 
 // ---------- 启动 ----------
   window.addEventListener('DOMContentLoaded', () => {
@@ -238,7 +263,9 @@ import { cardPageOpen, closeCardPageTop, openCardDesigner, openCardLibrary } fro
         const el = document.getElementById('gameVersion');
         if (/^\d+\.\d+(\.\d+)?$/.test(manifest.version)) {
           if (el) el.textContent = `v${manifest.version}`;
-          document.title = `搜打撤 · 代号7 v${manifest.version}`;
+          const hex = document.getElementById('akVerHex');
+          if (hex) hex.textContent = `v${manifest.version}`;
+          document.title = `升格会的冬日猜想 v${manifest.version}`;
         }
       })
       .catch(error => console.warn('无法读取游戏版本：', error));
@@ -263,12 +290,15 @@ import { cardPageOpen, closeCardPageTop, openCardDesigner, openCardLibrary } fro
 
     const bw = MAP.cols * MAP.tile, bh = MAP.rows * MAP.tile;
     // 一屏最多看到地图约一半（对角留白），玩家可滚轮缩放 / 拖拽浏览
-    cam.zoom = Math.min(2.4, Math.max(1.0, cam.viewW / (bw * 0.55), cam.viewH / (bh * 0.55)));
+    cam.zoom = 1.1;
     cam.cx = bw / 2; cam.cy = bh / 2;
     cam.clamp();
 
     bindInput();
-    bindTitle();
+    for (const [id,key] of [['sceneRotateL','q'],['sceneRotateR','e'],['sceneFocus','f'],['sceneOverview','g']]) document.getElementById(id)?.addEventListener('click',()=>window.dispatchEvent(new KeyboardEvent('keydown',{key})));
+    const quality=document.getElementById('sceneQuality');
+    if(quality){if(SDT.Renderer.metrics)quality.value=SDT.Renderer.metrics.quality;quality.addEventListener('change',()=>SDT.Renderer.setQuality?.(quality.value));}
+    document.getElementById('sceneFps')?.addEventListener('change',e=>{renderScheduler.activeInterval=1000/Number(e.target.value);renderScheduler.invalidate();});
   SDT.Cards.ensureStarters();    // 补入初始牌（缺失时）
   SDT.Cards.ensureSha();         // 播入初始牌「初始攻击」（只播一次）
   SDT.Cards.ensureTabletop();    // 播入桌游手绘道具卡（只播一次）

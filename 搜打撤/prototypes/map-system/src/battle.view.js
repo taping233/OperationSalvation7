@@ -1,15 +1,99 @@
+import { characterName } from './characters.js';
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const SDT = window.SDT;
 const UI = window.SDT.UI;
 import { esc } from './shared.js';
-import { G, pendingHint, pendingTarget, viewingGrave } from './battle.core.js';
 import { escAttr } from './shared.js';
-import { AFFIX_META, Combat, R, aegisBlocked, busy, dreadShown, floats, cancelInfuse, confirmInfuse, curseChips, discard, discovering, drawPile, effCostOf, endTurn, energy, findCard, flee, foes, grave, hand, infuseOf, infusing, maxEnergy, mode, opts, pdef, pickDiscover, pileTip, play, pstat, refillDrawPile, renderGrave, start, targetSide, toggleInfusePick, turn, unplayableReason, _set_viewingGrave, _set_pendingTarget, _set_pendingHint, _set_dreadShown, _set_floats } from './battle.core.js';
+import { BattleSession, commands, configureBattleRenderer, getSnapshot, viewApi } from './battle.core.js';
 /* battle.view.js —— 战斗渲染：战场 DOM/手牌/指向施法箭头/拖拽预览 */
+  const {
+    AFFIX_META, Combat, R, aegisBlocked, curseChips, effCostOf, findCard,
+    infuseOf, markDreadShown, pileTip, refillDrawPile,
+    takeFloats, targetSide, unplayableReason,
+  } = viewApi;
+  const play = commands.playCard;
+  const cancelInfuse = commands.cancelInfusion;
+  const confirmInfuse = commands.confirmInfusion;
+  const endTurn = commands.endTurn;
+  const flee = commands.flee;
+  const openGrave = commands.openGrave;
+  const cancelPendingTarget = commands.cancelPendingTarget;
+  const pickDiscover = commands.pickDiscover;
+  const setPendingHint = commands.setPendingHint;
+  const lockPendingTarget = commands.lockPendingTarget;
+  const toggleInfusePick = commands.selectInfusion;
+  const closeGrave = commands.closeGrave;
+  const selectDeckCard = commands.selectDeckCard;
+  const confirmDeck = commands.confirmDeck;
+  const cancelDeck = commands.cancelDeck;
+
+  function renderDeckSelection(snapshot) {
+    const { deckSelection, opts } = snapshot;
+    const selected = deckSelection.selected;
+    const need = Math.min(deckSelection.need, deckSelection.cards.length);
+    const cardsHTML = deckSelection.cards.length
+      ? deckSelection.cards.map(entry => `
+          <div class="bt-card${selected.includes(entry.uid) ? ' sel' : ''}" data-act="bossSel" data-uid="${entry.uid}" title="点击 编入/移出 牌库">
+            ${SDT.Cards.cardHTML(entry.card, 'sm')}
+          </div>`).join('')
+      : '<p class="ov-empty">背包里没有可编入的非道具卡牌……</p>';
+    const boss = deckSelection.boss;
+    const affix = boss && boss.affix ? AFFIX_META[boss.affix] : null;
+    const ready = selected.length >= need;
+    UI.showOverlay('[[icon:demon]] BOSS战 · 编组牌库', `
+      <p class="ov-stats">从背包选 <b>${deckSelection.need}</b> 张<b>非道具</b>卡牌，与 <b>${deckSelection.starterCount}</b> 张初始攻击组成牌库 ·
+        开局抽 ${R().battleStartDraw} 张 · 每回合开始抽 ${R().battleTurnDraw} 张 · 每回合固定 ${R().battleEnergy} 费</p>
+      ${affix ? `<p class="ov-note">[[icon:question]] <b>${esc(boss.name)}</b> 词缀【${affix.icon} ${affix.name}】${esc(affix.desc)}</p>` : ''}
+      <p class="ov-note">[[icon:lock]] 固定编入：初始攻击 ×${deckSelection.starterCount}${deckSelection.starterCount < R().starterSha ? `（初始攻击不足 ${R().starterSha} 张——部分进消耗口袋了）` : ''}
+        · [[icon:cross]] 道具 / 资源 / 事件卡与初始攻击不可选入</p>
+      <h3 class="set-h">可选卡牌 <span class="bs-count">已选 ${selected.length}/${deckSelection.need}</span></h3>
+      <div class="bt-hand">${cardsHTML}</div>
+      <div class="ov-btns">
+        <button class="ov-btn ok" data-act="bossGo" ${ready ? '' : 'disabled'}>${ready ? `[[icon:swords]] 开始战斗（牌库 ${selected.length + deckSelection.starterCount} 张）` : `还需选择 ${need - selected.length} 张…`}</button>
+        <button class="ov-btn" data-act="bossCancel">↩ 放弃挑战</button>
+      </div>`, true);
+    UI.act('bossSel', data => selectDeckCard(data.uid));
+    UI.act('bossGo', confirmDeck);
+    UI.act('bossCancel', cancelDeck);
+    UI.refresh(SDT.game);
+  }
+
+  function renderGrave(snapshot) {
+    const cards = snapshot.grave.map(findCard).filter(Boolean);
+    const byType = {};
+    cards.forEach(entry => { byType[entry.card.type] = (byType[entry.card.type] || 0) + 1; });
+    const statLine = Object.keys(byType).length
+      ? Object.entries(byType).sort((a, b) => b[1] - a[1]).map(([type, count]) => `${esc(type)} <b>${count}</b>`).join(' · ')
+      : '（墓地还是空的——注能等效果消耗的牌会进入这里）';
+    const byName = {};
+    cards.forEach(entry => {
+      if (!byName[entry.card.name]) byName[entry.card.name] = { card: entry.card, count: 0 };
+      byName[entry.card.name].count++;
+    });
+    const listHTML = Object.values(byName).map(stack => `
+      <div class="bt-gy-row" title="${escAttr(stack.card.desc || '')}">
+        <span>[[icon:cards]] <b>${esc(stack.card.name)}</b>${stack.count > 1 ? ` ×${stack.count}` : ''}</span>
+        <span class="bt-gy-meta">${esc(stack.card.type)} · ${stack.card.cost}费 · ${esc(stack.card.rarity || '')}</span>
+      </div>`).join('');
+    UI.showOverlay(`${snapshot.opts.isBoss ? '[[icon:demon]] BOSS战' : '[[icon:swords]] 遭遇战'} · 第 ${snapshot.turn} 回合 · [[icon:skull]] 墓地`, `
+      <p class="ov-stats">被消耗的牌共 <b>${cards.length}</b> 张 —— ${statLine}</p>
+      <div class="bt-gy-list">${listHTML}</div>
+      <p class="ov-note">墓地中的牌<b>不会在牌库空后洗回</b>；打出的牌进弃牌堆（会洗回循环）。战胜 BOSS 后可在「整理背包」环节把这些牌放回背包或丢弃。</p>
+      <div class="ov-btns"><button class="ov-btn ok" data-act="btGraveBack">↩ 返回战斗</button></div>`, true);
+    UI.act('btGraveBack', closeGrave);
+    UI.refresh(SDT.game);
+  }
+
   // ---------- 渲染 ----------
-  function render() {
+  function render(snapshot = getSnapshot()) {
+    const {
+      mode, turn, energy, maxEnergy, busy, opts, player, pdef, pstat,
+      foes, hand, drawPile, discard, grave, infusing, discovering,
+      pendingTarget, pendingHint, viewingGrave, dreadShown, deckSelection,
+    } = snapshot;
     if (aim) cancelAim();   // 重渲染时中止进行中的指向（DOM 将重建）
-    if (viewingGrave) { renderGrave(); return; }
+    if (deckSelection) { renderDeckSelection(snapshot); return; }
+    if (viewingGrave) { renderGrave(snapshot); return; }
     if (discovering) {
       const optsHTML = discovering.options.map((c, i) => `
         <div class="bt-card" data-act="btDiscover" data-i="${i}" title="点击置入手牌">
@@ -20,7 +104,7 @@ import { AFFIX_META, Combat, R, aegisBlocked, busy, dreadShown, floats, cancelIn
         <div class="bt-hand">${optsHTML}</div>
         <p class="ov-note">发现的卡是战斗内临时卡，战后消散、不进背包。</p>`, true);
       UI.act('btDiscover', (d) => pickDiscover(d.i));
-      UI.refresh(G);
+      UI.refresh(SDT.game);
       return;
     }
     const cards = hand.map(findCard).filter(Boolean);
@@ -42,7 +126,7 @@ import { AFFIX_META, Combat, R, aegisBlocked, busy, dreadShown, floats, cancelIn
       ? groups.map((g, i) => {
           const uid = g.uids[0];
           const isSelf = infusingNow && g.self;
-          const pickedN = infusingNow ? g.uids.filter(u => infusing.picked.has(u)).length : 0;
+          const pickedN = infusingNow ? g.uids.filter(u => infusing.picked.includes(u)).length : 0;
           const targeted = !infusingNow && pendingTarget && pendingTarget.uid === uid;
           const effCost = effCostOf(g.card);
           const blocked = infusingNow ? null : unplayableReason(g.card);   // 无法使用的卡：虚化禁用
@@ -95,8 +179,8 @@ import { AFFIX_META, Combat, R, aegisBlocked, busy, dreadShown, floats, cancelIn
     const infuseBar = infusingNow ? `
       <div class="bt-infuse">
         [[icon:flask]] <b>注能(${infusing.need})</b>：选择 <b>${infusing.need}</b> 张手牌消耗，才能打出【${esc(infusing.card.name)}】
-        （已选 <b>${infusing.picked.size}/${infusing.need}</b> · 同名堆叠每点一次消耗一张 · 被消耗的牌战后进消耗口袋，可在火堆复原）
-        <button class="mini-btn ok" data-act="btInfuseGo" ${infusing.picked.size !== infusing.need ? 'disabled' : ''}>[[icon:swords]] 发动</button>
+        （已选 <b>${infusing.picked.length}/${infusing.need}</b> · 同名堆叠每点一次消耗一张 · 被消耗的牌战后进消耗口袋，可在火堆复原）
+        <button class="mini-btn ok" data-act="btInfuseGo" ${infusing.picked.length !== infusing.need ? 'disabled' : ''}>[[icon:swords]] 发动</button>
         <button class="mini-btn" data-act="btInfuseCancel">[[icon:cross]] 取消</button>
       </div>` : '';
     const lockSide = pendingTarget ? targetSide(pendingTarget.card) : null;
@@ -109,16 +193,16 @@ import { AFFIX_META, Combat, R, aegisBlocked, busy, dreadShown, floats, cancelIn
         <button class="mini-btn" data-act="btPickCancel">[[icon:cross]] 取消</button>
       </div>` : '';
     // —— 我方单位（左下站立；治疗/净化/护盾类卡牌的拖放目标） ——
-    const selfPct = Math.max(0, G.hp / G.maxHp * 100);
+    const selfPct = Math.max(0, player.hp / player.maxHp * 100);
     const selfLock = pendingTarget && lockSide === 'self';
     const selfHTML = `
       <div class="sts-unit sts-me${selfLock ? ' can-target' : ''}" id="btSelf"
         title="你自己——治疗 / 净化 / 护盾 / 格挡类卡牌拖到这里打出">
-        <div class="sts-figure">${G.myClass && SDT.Art.has(G.myClass) ? SDT.Art.classArt(G.myClass) : SDT.Icons.img('helmet')}</div>
+        <div class="sts-figure">${player.myClass && SDT.Art.has(player.myClass) ? SDT.Art.classArt(player.myClass) : SDT.Icons.img('helmet')}</div>
         <div class="sts-nameplate">
-          <b>${esc(G.myClass || '旅人')}</b><span class="sts-you">你</span>
-          <div class="bt-hpwrap sts-hp"><i style="width:${selfPct.toFixed(1)}%"></i><span>${Math.max(0, G.hp)}/${G.maxHp}</span></div>
-          <div class="sts-stats">[[icon:swords]] ${G.atk}${pdef.shield ? ' · [[icon:shield]] 盾 ' + pdef.shield : ''}${pdef.armor ? ' · [[icon:plate]] 甲 ' + pdef.armor : ''}${pdef.guard ? ' · 格挡中' : ''}</div>
+          <b>${esc(characterName(player.characterId || player.myClass))}</b><span class="sts-you">你</span>
+          <div class="bt-hpwrap sts-hp"><i style="width:${selfPct.toFixed(1)}%"></i><span>${Math.max(0, player.hp)}/${player.maxHp}</span></div>
+          <div class="sts-stats">[[icon:swords]] ${player.atk}${pdef.shield ? ' · [[icon:shield]] 盾 ' + pdef.shield : ''}${pdef.armor ? ' · [[icon:plate]] 甲 ' + pdef.armor : ''}${pdef.guard ? ' · 格挡中' : ''}</div>
           ${curseChips(pstat.status) ? `<div class="sts-chips">${curseChips(pstat.status)}</div>` : ''}
         </div>
       </div>`;
@@ -174,10 +258,10 @@ import { AFFIX_META, Combat, R, aegisBlocked, busy, dreadShown, floats, cancelIn
     });
     UI.act('btEnd', endTurn);
     UI.act('btFlee', flee);
-    UI.act('btGrave', () => { _set_viewingGrave(true); render(); });
+    UI.act('btGrave', openGrave);
     UI.act('btInfuseGo', confirmInfuse);
     UI.act('btInfuseCancel', cancelInfuse);
-    UI.act('btPickCancel', () => { _set_pendingTarget(null); _set_pendingHint(''); render(); });
+    UI.act('btPickCancel', cancelPendingTarget);
     // —— 指向施法（炉石/杀戮尖塔式）：按住指向卡轻微拎起，弯曲箭头跟随指针 ——
     //    指向敌人 = 红色箭头，指向自己（立绘）= 绿色箭头；松手在目标身上即打出。
     //    轻点卡牌 = 仅锁定（提示条引导），与既有交互兼容。
@@ -185,16 +269,15 @@ import { AFFIX_META, Combat, R, aegisBlocked, busy, dreadShown, floats, cancelIn
     body.querySelectorAll('.bt-foe[data-eidx]').forEach(el => {
       el.addEventListener('click', () => {
         // 点击敌人不再确认（必须指向松手），只给纠正提示
-        if (pendingTarget && lockSide === 'enemy') _set_pendingHint('请按住卡牌「拖向」敌人身上松手');
-        else if (pendingTarget && lockSide === 'self') _set_pendingHint('[[icon:heart]] 治疗 / 净化卡要拖到左侧「你」的立绘上');
-        if (pendingTarget) render();
+        if (pendingTarget && lockSide === 'enemy') setPendingHint('请按住卡牌「拖向」敌人身上松手');
+        else if (pendingTarget && lockSide === 'self') setPendingHint('[[icon:heart]] 治疗 / 净化卡要拖到左侧「你」的立绘上');
       });
     });
     const selfEl = body.querySelector('#btSelf');
     if (selfEl) {
       selfEl.addEventListener('click', () => {
         if (pendingTarget && lockSide === 'self') { play(pendingTarget.uid, 'self'); return; }
-        if (pendingTarget) { _set_pendingHint('[[icon:heart]] 这是治疗 / 净化类卡牌——请拖到「你」的立绘上'); render(); }
+        if (pendingTarget) setPendingHint('[[icon:heart]] 这是治疗 / 净化类卡牌——请拖到「你」的立绘上');
       });
     }
     body.querySelectorAll('.bt-card[data-aim="1"]').forEach(el => {
@@ -204,20 +287,19 @@ import { AFFIX_META, Combat, R, aegisBlocked, busy, dreadShown, floats, cancelIn
     if (SDT.Art.cutoutFigures) SDT.Art.cutoutFigures(body);
     // BOSS 登场演出：竖线阴影压过场景 2.4s（每场一次）
     if (opts.isBoss && !dreadShown) {
-      _set_dreadShown(true);
+      markDreadShown();
       const st = body.querySelector('.battle-stage');
       if (st) { st.classList.add('fx-dread'); setTimeout(() => st.classList.remove('fx-dread'), 2500); }
     }
     spawnFloats(body);
-    UI.refresh(G);
+    UI.refresh(SDT.game);
   }
 
   // ---------- 战斗特效（v0.32.2）：伤害/受击飘字 + 受击抖动 + 红闪 ----------
   // 飘字挂在 #overlay 层而不是 ovBody——ovBody 每次渲染整块重建，飘字动画会被腰斩
   function spawnFloats(body) {
-    if (!floats.length) return;
-    const list = floats;
-    _set_floats([]);
+    const list = takeFloats();
+    if (!list.length) return;
     const ov = UI.el.overlay;
     const ovR = ov.getBoundingClientRect();
     list.forEach(f => {
@@ -227,8 +309,15 @@ import { AFFIX_META, Combat, R, aegisBlocked, busy, dreadShown, floats, cancelIn
         : body.querySelector(`.sts-foe[data-eidx="${f.unit}"] .sts-figure`);
       if (!figEl) return;
       // 受击反馈：单位抖动；自己掉血再叠一层全屏红闪
-      figEl.classList.add(isSelf ? 'fx-hit-self' : 'fx-hit');
-      setTimeout(() => figEl.classList.remove(isSelf ? 'fx-hit-self' : 'fx-hit'), 480);
+      const motionHandled = SDT.Motion && SDT.Motion.hit(figEl, isSelf);
+      if (!motionHandled) {
+        figEl.classList.add(isSelf ? 'fx-hit-self' : 'fx-hit');
+        setTimeout(() => figEl.classList.remove(isSelf ? 'fx-hit-self' : 'fx-hit'), 480);
+      }
+      if (SDT.VisualFX) SDT.VisualFX.burstAtElement(figEl, {
+        color: f.warm ? 0x61d69b : (isSelf ? 0xff6659 : 0xffb34d),
+        count: f.warm ? 10 : 14,
+      });
       if (isSelf) hurtFlash(ov);
       if (f.warm) {   // 治疗暖色滤镜（表情反馈·零美术）
         figEl.classList.add('fx-warm');
@@ -327,7 +416,8 @@ import { AFFIX_META, Combat, R, aegisBlocked, busy, dreadShown, floats, cancelIn
       const foeEl = elAt.closest('.bt-foe[data-eidx]');
       if (foeEl) {
         const idx = +foeEl.dataset.eidx;
-        if (!foes[idx].dead) return { kind: 'enemy', idx, el: foeEl };
+        const foe = getSnapshot().foes[idx];
+        if (foe && !foe.dead) return { kind: 'enemy', idx, el: foeEl };
       }
       return null;
     }
@@ -351,6 +441,7 @@ import { AFFIX_META, Combat, R, aegisBlocked, busy, dreadShown, floats, cancelIn
     aimArrowRemove();
   }
   function startAim(e, el) {
+    const { busy, infusing, discovering, energy } = getSnapshot();
     if (busy || infusing || discovering || aim) return;
     const uid = el.dataset.uid;
     const entry = findCard(uid);
@@ -408,7 +499,7 @@ import { AFFIX_META, Combat, R, aegisBlocked, busy, dreadShown, floats, cancelIn
       return;
     }
     // 轻点 = 锁定（提示条引导）；拖了但没拖到目标 = 保持锁定，可再指一次
-    if (wasMoved) { _set_pendingTarget({ uid: a.uid, card: a.card }); _set_pendingHint(''); render(); }
+    if (wasMoved) lockPendingTarget({ uid: a.uid, card: a.card });
   }
   function cancelAim() {
     window.removeEventListener('pointermove', moveAim, true);
@@ -422,8 +513,9 @@ import { AFFIX_META, Combat, R, aegisBlocked, busy, dreadShown, floats, cancelIn
   // ---------- 指向悬停效果预览（松手前暗示打出结果；card = 指向中的卡） ----------
   function showFoePreview(el, idx, card) {
     if (el.querySelector('.bt-fpreview')) return;   // 已显示则不重建（move 连续触发）
-    const foe = foes[idx];
-    const useCard = card || (pendingTarget && pendingTarget.card) || null;
+    const snapshot = getSnapshot();
+    const foe = snapshot.foes[idx];
+    const useCard = card || (snapshot.pendingTarget && snapshot.pendingTarget.card) || null;
     if (!foe || foe.dead || !useCard) return;
     const desc = String(useCard.desc || '');
     const tm = desc.match(/(?:攻击|命中)\s*(\d+)\s*次/) || desc.match(/(\d+)\s*段/);
@@ -438,7 +530,7 @@ import { AFFIX_META, Combat, R, aegisBlocked, busy, dreadShown, floats, cancelIn
       // 预览结算（克隆快照，不改动真实状态）
       const snap = { hp: foe.hp, status: Object.assign({}, foe.status),
         defense: { shield: foe.defense.shield, armor: foe.defense.armor, guard: foe.defense.guard } };
-      const r = Combat.previewDamage({ atk: G.atk, spellPower: G.spellPower || 0 }, snap, amount, type);
+      const r = Combat.previewDamage({ atk: snapshot.player.atk, spellPower: snapshot.player.spellPower }, snap, amount, type);
       if (r.stealthed) {
         main = `[[icon:runner]] <b>${esc(foe.name)}</b> 潜行中——伤害无法命中`;
         sub = '等潜行结束，或先用非伤害卡过渡';
@@ -461,6 +553,8 @@ import { AFFIX_META, Combat, R, aegisBlocked, busy, dreadShown, floats, cancelIn
   }
 
   window.SDT = window.SDT || {};
-  window.SDT.Battle = { start, _test: { refillDrawPile } };
+  window.SDT.Battle = Object.freeze({ ...BattleSession, _test: Object.freeze({ refillDrawPile }) });
+
+configureBattleRenderer(render);
 
 export { render };

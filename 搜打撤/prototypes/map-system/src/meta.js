@@ -1,3 +1,4 @@
+import { characterFor, characterName, migrateCharacterProgress } from './characters.js';
 
   const SDT = window.SDT;
 
@@ -5,8 +6,25 @@
   const xpForNext = (lv) => 50 + (Math.max(1, lv) - 1) * 30;   // 升到 lv+1 所需经验
 
   const B = () => SDT.Base;
+  // 职业熟练度迁移（2026-09-05 职业整合定版）：旧职业的熟练度并入新职业——
+  // 战士/牧师/法师/降临者同名直接沿用；侠客取 刺客/剑客/游侠 中熟练度最高的一份。
+  // 惰性执行：第一次访问新职业数据时并入一次，旧条目保留不清除（回滚安全）。
+  const LEGACY_MERGE = { '侠客': ['刺客', '剑客', '游侠'] };
+  const mergeLegacyClasses = (d) => {
+    Object.keys(LEGACY_MERGE).forEach((nc) => {
+      if (d[nc]) return;
+      const olds = LEGACY_MERGE[nc].map(o => d[o]).filter(Boolean);
+      if (!olds.length) return;
+      const best = olds.reduce((a, b) => ((b.lv * 100000 + b.xp) > (a.lv * 100000 + a.xp) ? b : a));
+      d[nc] = { lv: best.lv || 1, xp: best.xp || 0 };
+      B().save();
+    });
+  };
   const clsData = (cls) => {
-    const d = B().data.classes;
+    const base = migrateCharacterProgress(B().data);
+    const character = characterFor(cls);
+    if (character) return base.characters[character.id];
+    const d = base.classes;
     if (!d[cls]) d[cls] = { lv: 1, xp: 0 };
     return d[cls];
   };
@@ -31,7 +49,7 @@
       d.xp -= xpForNext(d.lv);
       d.lv++; ups++;
       B().save();
-      if (SDT.UI) SDT.UI.log(`[[icon:medal]] <b>${cls}</b> 熟练度提升！现在是 <b>Lv.${d.lv}</b>（出征 ${perkText(d.lv)}）`, 'ok');
+      if (SDT.UI) SDT.UI.log(`[[icon:medal]] <b>${characterName(cls)}</b> 熟练度提升！现在是 <b>Lv.${d.lv}</b>（出征 ${perkText(d.lv)}）`, 'ok');
     }
     B().save();
     return ups;
@@ -65,7 +83,7 @@
         : SDT.Base.safeCap()) >= SDT.MAP.rules.safeMax },
     { id: 'class3', icon: '[[icon:medal]]', name: '崭露头角', desc: '任意职业熟练度达到 3 级',
       reward: { wood: 2 }, done: (_s, d) => d
-        ? Object.values(d.classes || {}).some(c => (c.lv || 1) >= 3)
+        ? Object.values(d.characters || d.classes || {}).some(c => (c.lv || 1) >= 3)
         : classList().some(c => classLv(c) >= 3) },
     // ---- 收藏图鉴成就（v0.23）：在基地仓库[[icon:sparkles]]收藏物品后解锁 ----
     { id: 'collectGold', icon: '[[icon:coin]]', name: '珍品收藏家', desc: '收藏桌游珍宝「金币」',

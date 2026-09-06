@@ -18,7 +18,7 @@ import { fileURLToPath } from 'node:url';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 
-const GAME_PARTS = ['game.core.js', 'game.run.js', 'game.hub.js', 'game.bag.js', 'game.notes.js', 'game.cardslib.js', 'game.boot.js'];
+const GAME_PARTS = ['game.core.js', 'game.session.js', 'game.menu.js', 'game.run.data.js', 'game.run.js', 'game.hub.js', 'game.bag.js', 'game.notes.js', 'game.cardslib.js', 'game.boot.js'];
 const BATTLE_PARTS = ['battle.core.js', 'battle.view.js'];
 const src = (p) => {
   if (p === 'game.js') return GAME_PARTS.map(f => fs.readFileSync(path.join(HERE, 'src', f), 'utf8')).join('\n');
@@ -48,12 +48,16 @@ check('遭遇·策略预告元数据', /strategy:\s*'试探/.test(mapSource) && 
 check('场景·10 张事件 sceneId 覆盖', ['timeskip','demondeal','bandits','mystery','goldmine','goldhammer','relief','airdrop','chestdraw','systemsupply'].every(k => new RegExp(`event-${k}`).test(gameSource)), true);
 check('场景·标准节点与拾取契约', /scene-battle-bg/.test(gameSource) && /scene-extract-bg/.test(gameSource) && /scene-pickup-key/.test(gameSource), true);
 check('场景·落脚进入全屏房间链', /UI\.beginRoom\(\)/.test(gameSource) && /_roomActive/.test(src('ui.js')), true);
-check('音频·指定 MP3 作为循环 BGM', /bgm-black-stream-sea\.mp3/.test(src('sound.js')) && /bgm\.loop\s*=\s*true/.test(src('sound.js')), true);
+check('音频·Howler 指定 MP3 作为循环 BGM', /from 'howler'/.test(src('sound.js')) && /bgm-black-stream-sea\.mp3/.test(src('sound.js')) && /new Howl\(\{[^}]*loop:\s*true/s.test(src('sound.js')), true);
 check('战斗·意图轮转与 DOM 接线', /function intentFor/.test(src('battle.js')) && /foe\.intent = intentFor\(foe, turn\)/.test(src('battle.js')) && /sts-intent/.test(src('battle.js')), true);
 check('战斗·拖牌 Pointer Events 接线保留', /pointerdown/.test(src('battle.js')) && /data-aim/.test(src('battle.js')) && /drag-over/.test(src('battle.js')), true);
 check('BOSS·三类独立意图模式', /general.*军威强化/.test(src('battle.js')) && /orc_boss.*双击/.test(src('battle.js')) && /element_boss.*元素庇幕/.test(src('battle.js')), true);
 check('敌人·全部图鉴具备行为钩子', ['infantry','archer','bandit','cavalry','orc_jav','orc_axe','wolf_rider','fire_el','water_el','grass_el','dragon'].every(k => new RegExp(`${k}[^\n]*behavior:`).test(mapSource)), true);
-check('事件·二选一与三选一分支', /tt6-goldmine[\s\S]*?收下 3 币/.test(gameSource) && /tt6-airdrop[\s\S]*?应急处理/.test(gameSource) && /tt6-chestdraw[\s\S]*?中宝箱/.test(gameSource), true);
+check('事件·二选一与三选一分支', (() => {
+  // v0.52 起事件分支文本真源在 narrative/events.ink（经 scripts/compile-narrative.mjs 编译）
+  const ink = fs.readFileSync(path.join(HERE, '..', '..', 'narrative', 'events.ink'), 'utf8');
+  return /tt6_goldmine[\s\S]*?收下 3 币/.test(ink) && /tt6_airdrop[\s\S]*?应急处理/.test(ink) && /tt6_chestdraw[\s\S]*?密封物资箱/.test(ink);
+})(), true);
 check('兼容·未知事件仍走旧效果', /return null;/.test(gameSource) && /applyEventEffect\(card\)/.test(gameSource), true);
 check('BOSS·战斗/整理阶段锁住背包入口', /if \(game\.battleActive \|\| game\.bossCleanupPending\)/.test(gameSource), true);
 check('BOSS·胜利进入整理背包状态', /showBossPackCleanup\(consumedUids \|\| \[\], settle\)/.test(gameSource), true);

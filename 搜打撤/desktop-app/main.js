@@ -4,9 +4,13 @@ const path = require('path');
 const fs = require('fs');
 const { pathToFileURL } = require('url');
 
+// 2560x1440 / 120 FPS 合成必须使用独显；默认自动选择在本机落到了 Iris Xe。
+// Electron 官方开关会在混合显卡机器上请求高性能 GPU，须在 ready 前设置。
+app.commandLine.appendSwitch('force_high_performance_gpu');
+
 const GAME_DIR = app.isPackaged
   ? path.join(process.resourcesPath, 'game')
-  : path.join(__dirname, '..', 'prototypes', 'map-system');
+  : path.join(__dirname, 'game');
 
 // protocol.handle 会把请求头交给 Undici；User-Agent 必须保持 ByteString。
 // 中文 productName 若进入 User-Agent，会让 Electron 44 的本地资源请求失败。
@@ -61,6 +65,7 @@ function createWindow() {
       contextIsolation: true,
       nodeIntegration: false,
       sandbox: true,
+      backgroundThrottling: false,
     },
   });
 
@@ -101,6 +106,36 @@ if (!gotLock) {
     createWindow();
   });
 }
+
+// ---------- 首页留言（写给 Friday）：追加写入 output/suggestions.json ----------
+// 开发直跑优先写仓库 output 目录（Friday 直接读该文件）；打包版无相对仓库，写 userData。
+ipcMain.handle('suggestions-append', (_event, entry) => {
+  const item = {
+    ts: String(entry?.ts || new Date().toISOString()),
+    target: entry?.target && typeof entry.target === 'object'
+      ? { name: String(entry.target.name || ''), selector: String(entry.target.selector || '') }
+      : null,
+    at: entry?.at && typeof entry.at === 'object' ? { x: +entry.at.x || 0, y: +entry.at.y || 0 } : null,
+    text: String(entry?.text || '').trim().slice(0, 2000),
+  };
+  if (!item.text) return { ok: false };
+  const targets = app.isPackaged
+    ? [path.join(app.getPath('userData'), 'suggestions.json')]
+    : [path.join(__dirname, '..', 'prototypes', 'map-system', 'output', 'suggestions.json'),
+       path.join(app.getPath('userData'), 'suggestions.json')];
+  for (const file of targets) {
+    try {
+      fs.mkdirSync(path.dirname(file), { recursive: true });
+      let data = { suggestions: [] };
+      try { data = JSON.parse(fs.readFileSync(file, 'utf8')); } catch (_) { /* 首次无文件 */ }
+      if (!Array.isArray(data.suggestions)) data.suggestions = [];
+      data.suggestions.push(item);
+      fs.writeFileSync(file, JSON.stringify(data, null, 2) + '\n', 'utf8');
+      return { ok: true };
+    } catch (_) { /* 尝试下一个候选路径 */ }
+  }
+  return { ok: false };
+});
 
 ipcMain.on('app-quit', () => app.quit());
 app.on('window-all-closed', () => app.quit());

@@ -1,0 +1,20 @@
+{
+  "layerIdx": 2,
+  "trackPos": 3,
+  "hp": 11,
+  "maxHp": 30,
+  "coins": 48,
+  "turn": 22,
+  "atk": 8,
+  "mode": "standard",
+  "myClass": "术士",
+  "inventory": [],
+  "ownedCards": [],
+  "cardOrder": [],
+  "usedPocket": [{ "card": { "id": "used-card", "name": "旧治疗", "type": "道具" }, "count": 1 }],
+  "eventLog": [],
+  "discovered": [],
+  "diceHistory": [3],
+  "elapsed": 999,
+  "slot": 2
+}

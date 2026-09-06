@@ -1,4 +1,6 @@
 
+import { Random } from './random.js';
+
   const SDT = window.SDT;
   const UI = SDT.UI;
 
@@ -9,41 +11,19 @@
   let onDone = null;   // 全部开完后的续流回调
 
   const KINDS = () => SDT.MAP.chestKinds;
-  const rndInt = (a, b) => a + Math.floor(Math.random() * (b - a + 1));
-
-  // ---------- 随机卡池（商店随机槽同源：排除衍生与传说特例卡） ----------
-  function buildPool() {
-    return SDT.Cards.all().filter(c =>
-      c.rarity !== '衍生' && SDT.Cards.isRandomObtainable(c));
-  }
-
-  // 按稀有度权重（SHOP_WEIGHTS）抽 1 张，优先避开同宝箱已出的卡
-  function pickCard(pool, weights, totalW, taken) {
-    const avail = taken && taken.size ? pool.filter(c => !taken.has(c.id)) : pool;
-    const use = avail.length ? avail : pool;
-    if (!use.length) return null;
-    for (let tries = 0; tries < 50; tries++) {
-      let roll = Math.random() * totalW;
-      let rarity = null;
-      for (const [r, w] of weights) { roll -= w; if (roll <= 0) { rarity = r; break; } }
-      if (!rarity) rarity = weights[0][0];
-      const sub = use.filter(c => c.rarity === rarity);
-      if (sub.length) return sub[Math.floor(Math.random() * sub.length)];
-    }
-    return use[Math.floor(Math.random() * use.length)];
-  }
+  const rndInt = (a, b) => a + Math.floor(Random.random('loot') * (b - a + 1));
 
   // 掷一个宝箱的完整内容：cards=开出的卡（中宝箱为 3 选 1 候选），coins=内含币
   function rollContents(kind) {
     const K = KINDS()[kind] || KINDS().small;
     const c = { kind, cards: [], coins: 0 };
-    const pool = buildPool();
-    const weights = Object.entries(SDT.Cards.SHOP_WEIGHTS);
-    const totalW = weights.reduce((a, b) => a + b[1], 0);
+    // 随机卡池（2026-09-05 设计者定版爆率）：只开 武术/法术/装备/道具/资源 五类，
+    // 稀有度 古朴:稀有:史诗 = 2.25:1.5:1，资源/道具再 ×0.8；传说/职业/初始不直接生成
+    // （统一走 SDT.Cards.randomDropCard，职业卡只能从职业卡池获取）；同一宝箱内尽量不重复
     const taken = new Set();
     const n = K.pickFrom || K.cards || 0;
     for (let i = 0; i < n; i++) {
-      const card = pickCard(pool, weights, totalW, taken);
+      const card = SDT.Cards.randomDropCard(taken);
       if (card) { taken.add(card.id); c.cards.push(card); }
     }
     if (K.coins) c.coins = rndInt(K.coins[0], K.coins[1]);
@@ -51,11 +31,11 @@
     // 注意：币名要先取好再 find——把随机取名写进 find 回调会对每张库卡重新随机
     const lib = SDT.Cards.all();
     if (K.coinCards && K.coinCards.length) {
-      const cname = K.coinCards[Math.floor(Math.random() * K.coinCards.length)];
+      const cname = K.coinCards[Math.floor(Random.random('loot') * K.coinCards.length)];
       const coin = lib.find(x => x.name === cname);
       if (coin) c.cards.push(coin);
     }
-    if (K.tokenChance && Math.random() < K.tokenChance) {
+    if (K.tokenChance && Random.random('loot') < K.tokenChance) {
       const token = lib.find(x => x.name === '金色令牌');
       if (token) { c.cards.push(token); c.tokenHit = true; }
     }
@@ -68,7 +48,7 @@
     const tables = SDT.MAP.layerChests;
     const li = opts && typeof opts.layer === 'number' ? opts.layer : 0;
     const table = tables[li] || tables[0];
-    const combo = table[Math.floor(Math.random() * table.length)];
+    const combo = table[Math.floor(Random.random('loot') * table.length)];
     const out = [];
     combo.forEach(part => {
       const n = Array.isArray(part.n) ? rndInt(part.n[0], part.n[1]) : (part.n || 0);

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="board.css">
+<style>
+  .hero-zone { position: absolute; left: 56px; top: 130px; width: 760px; }
+  .hero-zone .sup { margin-bottom: 18px; }
+  .hero-zone h1 { font-size: 84px; font-weight: 900; letter-spacing: .06em; line-height: 1.14; }
+  .hero-zone h1 .thin { color: var(--fog); font-weight: 300; }
+  .hero-zone .verline { margin-top: 26px; display: flex; align-items: center; gap: 20px; }
+  .hero-zone .verline .bar { width: 120px; height: 3px; background: var(--crimson); }
+  .concept { margin-top: 40px; padding: 26px 30px; width: 700px; }
+  .concept p { font-size: 17px; line-height: 1.9; color: #C9D4DA; }
+  .concept p b { color: var(--ice); font-weight: 700; }
+
+  .sec { position: absolute; }
+  .sec-title { display: flex; align-items: baseline; gap: 14px; margin-bottom: 22px; }
+  .sec-title .no { font: 800 15px ui-monospace, monospace; color: var(--crimson-hi); letter-spacing: .2em; }
+  .sec-title .zh { font-size: 24px; font-weight: 800; letter-spacing: .22em; }
+  .sec-title .en { font-size: 11px; letter-spacing: .3em; color: var(--fog); text-transform: uppercase; }
+
+  /* 色板 */
+  .palette { right: 56px; top: 130px; width: 1000px; }
+  .swatches { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
+  .sw { height: 128px; position: relative; }
+  .sw .fill { position: absolute; inset: 0 0 30px 0; }
+  .sw .lab { position: absolute; bottom: 0; left: 2px; right: 0; font: 500 12px ui-monospace, monospace; color: var(--fog); letter-spacing: .05em; }
+  .sw .lab b { display: block; color: var(--snow); font-size: 13px; margin-bottom: 2px; }
+  .swrow2 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-top: 18px; }
+  .sw.sm .fill { inset: 0 0 44px 0; }
+
+  /* 字体规格 */
+  .type-spec { right: 56px; top: 470px; width: 1000px; }
+  .type-rows { display: flex; flex-direction: column; gap: 14px; }
+  .trow { display: flex; align-items: baseline; gap: 28px; padding: 12px 20px; background: var(--graphite); border-left: 3px solid var(--ice); }
+  .trow .demo { flex: none; }
+  .trow .note { margin-left: auto; font: 500 12px ui-monospace, monospace; color: var(--fog); letter-spacing: .08em; text-align: right; }
+
+  /* 构成语言 */
+  .lang { left: 56px; top: 620px; width: 760px; }
+  .lang-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .lg-cell { height: 118px; background: var(--graphite); position: relative; overflow: hidden; }
+  .lg-cell .name { position: absolute; left: 14px; bottom: 10px; font: 500 12px ui-monospace, monospace; color: var(--fog); letter-spacing: .14em; z-index: 3; }
+
+  /* 3D 管线 */
+  .pipe { right: 56px; top: 762px; width: 1000px; }
+  .pipe-row { display: flex; gap: 0; align-items: stretch; }
+  .pipe-step { flex: 1; background: var(--graphite); padding: 16px 18px 14px; position: relative; margin-right: 26px; }
+  .pipe-step:last-child { margin-right: 0; }
+  .pipe-step::after { content: "▸"; position: absolute; right: -20px; top: 50%; transform: translateY(-50%); color: var(--crimson-hi); font-size: 18px; }
+  .pipe-step:last-child::after { display: none; }
+  .pipe-step .k { font: 700 17px/1.3 "Noto Sans SC", sans-serif; letter-spacing: .1em; }
+  .pipe-step .v { margin-top: 6px; font-size: 12px; color: var(--fog); line-height: 1.7; }
+  .pipe-step .n { position: absolute; top: 10px; right: 12px; font: 800 13px ui-monospace, monospace; color: rgba(237,242,245,.25); }
+</style>
+</head>
+<body>
+<div class="board dotgrid" style="background-color:#0A0E12;">
+
+  <!-- 背景斜切光带 -->
+  <div style="position:absolute; inset:0; background:
+    linear-gradient(115deg, transparent 62%, rgba(111,184,196,.06) 62.2%, rgba(111,184,196,.06) 78%, transparent 78.2%),
+    linear-gradient(115deg, transparent 79%, rgba(199,56,64,.07) 79.2%, rgba(199,56,64,.07) 92%, transparent 92.2%);"></div>
+  <div class="gridline" style="position:absolute; inset:0; opacity:.5;"></div>
+
+  <!-- 页眉 -->
+  <div class="board-head">
+    <div class="id"><span class="chip">B0</span> DESIGN OVERVIEW</div>
+    <div class="tag-en dim" style="text-align:right;">ASCENSION COUNCIL · WINTER CONJECTURE<br>VISUAL REBUILD PROPOSAL · V1.0</div>
+  </div>
+
+  <!-- 主标区 -->
+  <div class="hero-zone">
+    <div class="sup tag-en ice">FROST TERMINAL · 霜境终端设计语言</div>
+    <h1>升格会的<span class="thin">冬日猜想</span><br>视觉重构</h1>
+    <div class="verline">
+      <div class="bar"></div>
+      <div class="tag-en">FLAT DESIGN BOARD SET · 09 SHEETS</div>
+    </div>
+    <div class="concept cut-panel edge-shell">
+      <p style="margin-bottom:12px;"><b>一句话方向</b>：明日方舟式的高对比终端信息层 × 雪原废都的冬日萧索 —— 黑色斜切面板压在全场插画之上，冷灰冰雪为底，<b>绯红玫瑰</b>作为唯一的危险信号色。</p>
+      <p>五名人设（霜翎 / 白契 / 栗团 / 玄砾 / 灯葵）与职业色原样保留；信息层全面重做为<b>技术感斜切模块 + 发光节点 + 等距 3D 战场</b>。</p>
+    </div>
+  </div>
+
+  <!-- 色板 -->
+  <div class="sec palette">
+    <div class="sec-title"><span class="no">01</span><span class="zh">色彩系统</span><span class="en">Color Tokens</span></div>
+    <div class="swatches">
+      <div class="sw"><div class="fill" style="background:#0A0E12; outline:1px solid rgba(237,242,245,.18);"></div><div class="lab"><b>凹槽黑</b>#0A0E12</div></div>
+      <div class="sw"><div class="fill" style="background:#141B22;"></div><div class="lab"><b>面板石墨</b>#141B22</div></div>
+      <div class="sw"><div class="fill" style="background:#EDF2F5;"></div><div class="lab"><b>雪白</b>#EDF2F5</div></div>
+      <div class="sw"><div class="fill" style="background:#93A3AD;"></div><div class="lab"><b>冷雾灰</b>#93A3AD</div></div>
+      <div class="sw"><div class="fill" style="background:linear-gradient(135deg,#C73840,#8E2430);"></div><div class="lab"><b>绯红·玫瑰</b>#C73840</div></div>
+    </div>
+    <div class="swrow2">
+      <div class="sw sm"><div class="fill" style="background:#ED9B53;"></div><div class="lab"><b>侠客·霜翎</b>#ED9B53</div></div>
+      <div class="sw sm"><div class="fill" style="background:#AD9DDD;"></div><div class="lab"><b>降临者·白契</b>#AD9DDD</div></div>
+      <div class="sw sm"><div class="fill" style="background:#E9BD69;"></div><div class="lab"><b>法师·栗团</b>#E9BD69</div></div>
+      <div class="sw sm"><div class="fill" style="background:#D0805A;"></div><div class="lab"><b>战士·玄砾</b>#D0805A</div></div>
+      <div class="sw sm"><div class="fill" style="background:#81BCB0;"></div><div class="lab"><b>牧师·灯葵</b>#81BCB0</div></div>
+    </div>
+  </div>
+
+  <!-- 字体 -->
+  <div class="sec type-spec">
+    <div class="sec-title"><span class="no">02</span><span class="zh">字体层级</span><span class="en">Type Scale</span></div>
+    <div class="type-rows">
+      <div class="trow"><div class="demo" style="font-size:34px; font-weight:900; letter-spacing:.14em;">远征行动</div><div class="note">Noto Sans SC 900 / 字距 0.14em<br>屏级大标 · 34–84px</div></div>
+      <div class="trow"><div class="demo" style="font-size:20px; font-weight:700; letter-spacing:.28em;">撤离点已开启</div><div class="note">Noto Sans SC 700 / 字距 0.28em<br>模块标题 · 20–26px</div></div>
+      <div class="trow"><div class="demo tag-en">OPERATION · WINTER RECON</div><div class="note">等宽大写 / 字距 0.42em<br>技术标注 · 11–13px</div></div>
+    </div>
+  </div>
+
+  <!-- 构成语言 -->
+  <div class="sec lang">
+    <div class="sec-title"><span class="no">03</span><span class="zh">构成语言</span><span class="en">Formal Language</span></div>
+    <div class="lang-grid">
+      <div class="lg-cell"><div class="cut-panel edge-shell" style="position:absolute; inset:18px 30px 26px 18px;"></div><div class="name">斜切面板 CUT PANEL</div></div>
+      <div class="lg-cell"><div class="bracket" style="position:absolute; inset:26px 44px 30px 26px;"></div><div class="name">取景角标 BRACKET</div></div>
+      <div class="lg-cell"><div class="barcode" style="position:absolute; left:24px; right:24px; top:44px; height:22px;"></div><div class="name">条码纹理 BARCODE</div></div>
+      <div class="lg-cell"><div class="databar ice" style="position:absolute; left:24px; right:24px; top:52px;"><i style="width:62%;"></i></div><div class="databar" style="position:absolute; left:24px; right:24px; top:66px;"><i style="width:34%;"></i></div><div class="name">数据条 DATABAR</div></div>
+    </div>
+  </div>
+
+  <!-- 3D 管线 -->
+  <div class="sec pipe">
+    <div class="sec-title"><span class="no">04</span><span class="zh">程序化 3D 管线（平面图通过后执行）</span><span class="en">Procedural 3D Pipeline</span></div>
+    <div class="pipe-row">
+      <div class="pipe-step"><span class="n">P1</span><div class="k">参数化几何</div><div class="v">雪岩板 / 霜格 / 废墟掩体以 Three.js 参数化生成，棱面低模 + 边缘雪檐</div></div>
+      <div class="pipe-step"><span class="n">P2</span><div class="k">程序化材质</div><div class="v">噪波冻面 / 湿砾石 / 扫雪法线，冷青环境光 + 绯红应急灯</div></div>
+      <div class="pipe-step"><span class="n">P3</span><div class="k">体积与粒子</div><div class="v">雪幕体积光、脚步雪尘、余烬粒子（Pixi 粒子管线复用）</div></div>
+      <div class="pipe-step"><span class="n">P4</span><div class="k">等距演出</div><div class="v">战斗网格等距投影，格子升起/碎裂动画接入现有战斗逻辑接口</div></div>
+    </div>
+  </div>
+
+  <div class="board-foot">
+    <span>FROST TERMINAL V1</span><span class="rule"></span><span>SHEET 01 / 09</span>
+  </div>
+</div>
+</body>
+</html>
