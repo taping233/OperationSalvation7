@@ -297,7 +297,9 @@ import { Random } from './random.js';
       const prevMode = this._lastMode;
       this._lastMode = mode;
       this.el.overlay.hidden = false;
-      if ((!wasOpen || prevMode !== mode) && SDT.Motion) SDT.Motion.overlayIn(card);
+      // page 全屏页自带 CSS 入场动画（.card.page 的 pgIn），WAAPI 再叠一层会与
+      // CSS 动画互相覆盖造成过渡期跳帧——这里只跑 CSS 那套
+      if ((!wasOpen || prevMode !== mode) && SDT.Motion && mode !== 'page') SDT.Motion.overlayIn(card);
       // 只在弹窗真正打开/切换模式时播开窗音效——战斗内反复 render 不刷音效
       if (!wasOpen || prevMode !== mode) {
         SDT.Sound.sfx('open');

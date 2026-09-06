@@ -192,8 +192,8 @@
     color: #f4eede; opacity: .6;
     filter: drop-shadow(0 0 8px rgba(244,238,222,.6));
     animation: birdsDrift 30s linear infinite alternate; }
-  @keyframes silBreathe { from { opacity: .55; filter: drop-shadow(0 0 10px rgba(253,246,232,.5)); }
-    to { opacity: .95; filter: drop-shadow(0 0 20px rgba(253,246,232,.9)) drop-shadow(0 0 52px rgba(190,205,255,.5)); } }
+  /* 呼吸只动 opacity：drop-shadow 参数逐帧变化会迫使全屏 SVG 每帧重光栅（选档页掉帧主因） */
+  @keyframes silBreathe { from { opacity: .55; } to { opacity: .95; } }
   @keyframes birdsDrift { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(9%, -3%, 0); } }
 
   /* 顶部 HUD：左右两组徽章，复刻 AK 布局与配色 */
