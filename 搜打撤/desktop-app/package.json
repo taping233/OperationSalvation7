@@ -9,7 +9,7 @@
     "check:version": "node ../scripts/check-version.cjs",
     "check:runtime": "node check-electron-runtime.cjs",
     "prestart": "npm run build:game && npm run check:runtime && npm run check:version",
-    "start": "set \"ELECTRON_OVERRIDE_DIST_PATH=..\\desktop\\electron\" && electron .",
+    "start": "electron .",
     "predist": "npm run check:runtime && npm run check:version",
     "dist": "npm run build:game && node build-portable.cjs",
     "build:game": "npm run build --prefix .."
@@ -21,7 +21,7 @@
   "build": {
     "appId": "com.taping.codename7",
     "productName": "搜打撤·代号7",
-    "electronDist": "../desktop/electron",
+    "electronDist": "node_modules/electron/dist",
     "files": [
       "main.js",
       "preload.js",

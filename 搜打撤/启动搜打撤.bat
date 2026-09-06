@@ -2,13 +2,13 @@
 rem Codename 7 (SaoDaChe) - local desktop launcher
 setlocal
 set "ROOT=%~dp0"
-set "ELECTRON=%ROOT%desktop\electron\electron.exe"
+set "ELECTRON=%ROOT%desktop-app\node_modules\electron\dist\electron.exe"
 set "APPDIR=%ROOT%desktop-app"
 if not exist "%ELECTRON%" (
   echo [ERROR] Electron runtime not found:
   echo   %ELECTRON%
   echo Install it once with:
-  echo   powershell -ExecutionPolicy Bypass -File "%ROOT%desktop\setup.ps1"
+  echo   cd /d "%APPDIR%" ^&^& node node_modules\electron\install.js
   pause
   exit /b 1
 )

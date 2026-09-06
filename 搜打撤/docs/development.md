@@ -2,7 +2,7 @@
 
 ## 环境与命令
 
-需要 Node.js。首次安装运行 `npm install`；桌面运行时缺失时运行 `powershell -ExecutionPolicy Bypass -File desktop/setup.ps1`。
+需要 Node.js。首次安装运行 `npm install`；桌面运行时缺失时在 `desktop-app` 目录运行 `node node_modules/electron/install.js`。
 
 ```powershell
 npm run dev
@@ -15,7 +15,7 @@ npm run perf
 npm run assets:audit
 ```
 
-桌面开发态不能直接读取 `prototypes/map-system`：原生 `app://` 不解析 `howler` 等裸模块导入。`desktop-app` 的 `prestart` 会先运行 Vite 构建，再从 `desktop-app/game` 加载，避免入口模块失败后首页按钮全部失效。桌面启动和发布统一使用 `desktop/electron` 中的固定版本运行时；`prestart` / `predist` 会先检查文件与版本，不匹配时按提示运行 `desktop/setup.ps1`。
+桌面开发态不能直接读取 `prototypes/map-system`：原生 `app://` 不解析 `howler` 等裸模块导入。`desktop-app` 的 `prestart` 会先运行 Vite 构建，再从 `desktop-app/game` 加载，避免入口模块失败后首页按钮全部失效。桌面启动和发布统一使用 `desktop-app/node_modules/electron` 的运行时；`prestart` / `predist` 会先检查文件与版本。
 
 ## 修改约定
 

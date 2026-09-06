@@ -16,7 +16,6 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "perf": "node scripts/perf-benchmark.cjs",
-    "diagnostics:gpu": "desktop\\electron\\electron.exe scripts\\electron-gpu-info.cjs",
     "assets:audit": "node scripts/asset-audit.cjs",
     "sfx:gen": "node prototypes/map-system/scripts/jsfxr-generate.cjs"
   },
