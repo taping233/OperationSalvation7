@@ -64,3 +64,26 @@ if (existsSync(buildRoot)) {
   console.log('Packaged game: not built (run npm run build first)');
 }
 duplicateSummary(source.files, sourceRoot);
+
+// 资产清单校验（create-game-assets）：新增未登记 / 已删仍登记 / 授权待确认的资产都报出来
+const manifestPath = path.join(sourceRoot, 'asset-manifest.json');
+if (existsSync(manifestPath)) {
+  const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
+  const listed = new Map(manifest.assets.map(a => [a.path.replace(/\\/g, '/'), a]));
+  // 文档类（md/txt/gitkeep）不算资产，不参与清单比对
+  const isDoc = f => /\.(md|txt)$/i.test(f) || f.endsWith('.gitkeep') || f === 'asset-manifest.json';
+  const actual = new Set(source.files.map(item => path.relative(sourceRoot, item.file).replace(/\\/g, '/')).filter(p => !isDoc(p)));
+  const unlisted = [...actual].filter(p => !listed.has(p));
+  const ghost = [...listed.keys()].filter(p => !actual.has(p));
+  const noLicense = [...listed.values()].filter(a => actual.has(a.path) && String(a.license || '').startsWith('未登记'));
+  if (unlisted.length || ghost.length || noLicense.length) {
+    console.log(`Manifest drift: ${unlisted.length} unlisted, ${ghost.length} ghost, ${noLicense.length} license-pending`);
+    unlisted.slice(0, 8).forEach(p => console.log(`  + unlisted: ${p}`));
+    ghost.slice(0, 8).forEach(p => console.log(`  - ghost:    ${p}`));
+    noLicense.slice(0, 8).forEach(a => console.log(`  ? license:  ${a.path}`));
+  } else {
+    console.log(`Manifest: all ${actual.size} assets registered with license`);
+  }
+} else {
+  console.log('Manifest: asset-manifest.json missing');
+}

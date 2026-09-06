@@ -70,7 +70,7 @@
   #title .title-bg { position:absolute; inset:-24% -4% -4%; z-index:0; will-change:transform;
     background-image:
       linear-gradient(180deg, rgba(20,20,20,.34) 30%, rgba(20,20,20,.6)),
-      url('../assets/title-hero-ascension.jpg');
+      url('../assets/title-hero-ascension.webp');
     background-size:cover; background-position:center;
     animation:titleBreath 18s ease-in-out infinite alternate; }
   #title > .title-inner { z-index:1; }

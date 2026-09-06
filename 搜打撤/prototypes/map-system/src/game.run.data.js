@@ -44,7 +44,7 @@ const SCENES = {
     'tt6-chestdraw': ['event-chestdraw', 'scene-event-chestdraw', 'scene-event-chestdraw'], 'tt6-systemsupply': ['event-systemsupply', 'scene-event-systemsupply', 'scene-event-systemsupply'],
   };
   const PRELOAD_SCENES = Object.freeze({
-    battle: new URL('../assets/scenes/battle-normal-anime-v2.png', import.meta.url).href,
+    battle: new URL('../assets/scenes/battle-normal-anime-v2.webp', import.meta.url).href,
     coin: new URL('../assets/scenes/scene-pickup-coin-anime-v2.webp', import.meta.url).href,
     wood: new URL('../assets/scenes/scene-pickup-wood-anime-v2.webp', import.meta.url).href,
     rations: new URL('../assets/scenes/scene-pickup-rations-anime-v2.webp', import.meta.url).href,

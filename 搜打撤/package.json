@@ -17,12 +17,14 @@
     "test:watch": "vitest",
     "perf": "node scripts/perf-benchmark.cjs",
     "diagnostics:gpu": "desktop\\electron\\electron.exe scripts\\electron-gpu-info.cjs",
-    "assets:audit": "node scripts/asset-audit.cjs"
+    "assets:audit": "node scripts/asset-audit.cjs",
+    "sfx:gen": "node prototypes/map-system/scripts/jsfxr-generate.cjs"
   },
   "devDependencies": {
     "acorn": "^8.14.0",
     "acorn-walk": "^8.3.4",
     "jsdom": "^25.0.1",
+    "jsfxr": "^1.4.1",
     "vite": "^6.0.0",
     "vitest": "^3.0.0"
   },

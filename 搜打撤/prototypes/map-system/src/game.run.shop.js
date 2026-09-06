@@ -121,6 +121,7 @@ function createShopController({
       game.coins -= slot.price;
       slot.sold = true;
       game.ownedCards.push({ uid: newUid(), card: { ...slot.card } });
+      SDT.Sound.sfx('gain');
       UI.log(`[[icon:bag]] 购买卡牌【<b>${esc(slot.card.name)}</b>】（- ${slot.price} 币，剩 ${game.coins}）`, 'coin');
       saveGame();
       renderShop();

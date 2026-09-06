@@ -3,6 +3,7 @@ function createGameMenuController(deps) {
   const {
     SDT, UI, game, runtime, SLOT_COUNT, esc, readSlot, loadGame, clearSlot,
     saveGame, syncPlayTime, clearSave, clearAllSlots, getActiveSlot, setActiveSlot,
+    hasRun, RunStorage,
   } = deps;
 
   // ---------- 标题界面 ----------
@@ -358,6 +359,9 @@ function createGameMenuController(deps) {
       UI.clearLog();
       setActiveSlot(slot);
       SDT.Base.use(slot);
+      const bi = SDT.Base.issue(slot);
+      if (bi === 'corrupt') UI.log('[[icon:cross]] 该档位基地数据损坏（原数据已备份），本次以空档案启动', 'warn');
+      else if (bi === 'tooNew') UI.log('[[icon:cross]] 该档位基地数据来自更新版本的游戏，已以空档案启动', 'warn');
       fn();
       UI.log(`[[icon:archive]] 已进入 <b>档位 ${slot}</b>（基地与进度独立保存到该档位）`, 'sys');
     };
@@ -376,8 +380,10 @@ function createGameMenuController(deps) {
       const slot = +d.slot;
       launch(slot, () => {
         // 上一局未结束 → 直接进入未完成对局；否则先进基地
-        if (readSlot(slot)) {
-          if (!loadGame(slot)) { UI.log('对局存档读取失败，先回基地', 'warn'); runtime.openBaseHub('deploy'); }
+        // 有存档键但读不出（损坏/版本过新）→ loadGame 内部会给出具体原因，先回基地
+        if (RunStorage.has(slot)) {
+          if (!loadGame(slot) && !RunStorage.issue(slot)) { UI.log('对局存档读取失败，先回基地', 'warn'); }
+          runtime.openBaseHub('deploy');
         } else runtime.openBaseHub('deploy');
       });
     });
@@ -493,12 +499,15 @@ function createGameMenuController(deps) {
         <label class="chk"><input type="checkbox" id="setHint" ${localStorage.getItem('sdt-hintbar') !== '0' ? 'checked' : ''}> 底部操作提示条 <span class="set-en">HINT BAR</span></label>
         <label class="chk"><input type="checkbox" id="setBanner" ${localStorage.getItem('sdt-banner') !== '0' ? 'checked' : ''}> 环层横幅 <span class="set-en">LAYER BANNER</span></label>
         <label class="chk"><input type="checkbox" id="setDev" ${game.devMode ? 'checked' : ''}> 开发者模式（固定骰子 / 卡牌制作） <span class="set-en">DEVELOPER</span></label>
+        <label class="chk"><input type="checkbox" id="setShake" ${localStorage.getItem('sdt-reduce-shake') === '1' ? '' : 'checked'}> 屏幕震动反馈 <span class="set-en">SCREEN SHAKE</span></label>
         <h3 class="set-h">[[icon:gear]] 音频 <span class="set-en">AUDIO</span></h3>
         <label class="chk"><input type="checkbox" id="setMusic" ${SDT.Sound.musicMuted ? '' : 'checked'}> 背景音乐 <span class="set-en">MUSIC</span></label>
         <label class="chk vol"><span>音乐音量 <span class="set-en">MUSIC VOL</span></span><input type="range" id="setMusicVol" min="0" max="100" value="${Math.round(SDT.Sound.musicVolume * 100)}"><b id="setMusicVolVal">${Math.round(SDT.Sound.musicVolume * 100)}</b></label>
         <label class="chk"><input type="checkbox" id="setSfx" ${SDT.Sound.sfxMuted ? '' : 'checked'}> 音效 <span class="set-en">SOUND FX</span></label>
         <label class="chk vol"><span>音效音量 <span class="set-en">SFX VOL</span></span><input type="range" id="setSfxVol" min="0" max="100" value="${Math.round(SDT.Sound.sfxVolume * 100)}"><b id="setSfxVolVal">${Math.round(SDT.Sound.sfxVolume * 100)}</b></label>
         <p class="hint">侧边栏的 [[icon:gear]] 按钮为全局静音；这里可分别开关音乐与音效、拖动滑条调音量（自动保存）。</p>
+        <h3 class="set-h">[[icon:trophy]] 致谢 <span class="set-en">CREDITS</span></h3>
+        <p class="hint">图标来自 game-icons.net —— Lorc、Delapouite、Carl Olsen、Caro Asercion（CC-BY 3.0，详见 assets/icons/game-icons/LICENSE-CC-BY-3.0.md）；音效来自 Kenney.nl（CC0）。</p>
         <h3 class="set-h">危险区 <span class="set-en">DANGER ZONE</span></h3>
         <div class="btn-row">
           <button class="mini-btn danger" data-act="wipeNotes">清空格子备注</button>
@@ -515,7 +524,7 @@ function createGameMenuController(deps) {
     // 危险操作两步确认：首次点击变为「确认？」，2.6 秒后还原
     const armDanger = (act, armedText) => {
       const btn = document.querySelector(`#ovBody [data-act="${act}"]`);
-      if (!btn || btn.dataset.confirm) return true;
+      if (!btn || btn.dataset.confirm) { SDT.Sound.sfx('confirm'); return true; }
       const normal = btn.textContent;
       btn.dataset.confirm = '1'; btn.textContent = armedText; btn.classList.add('arm');
       setTimeout(() => {
@@ -551,6 +560,10 @@ function createGameMenuController(deps) {
       game.devMode = e.target.checked;
       localStorage.setItem('sdt-dev', e.target.checked ? '1' : '0');
       UI.el.devTools.hidden = !game.devMode;
+    });
+    // 屏幕震动开关（无障碍；顿帧/音效/飘字不受影响，FX.shake 读取该键）
+    document.getElementById('setShake').addEventListener('change', (e) => {
+      localStorage.setItem('sdt-reduce-shake', e.target.checked ? '0' : '1');
     });
     // 音乐 / 音效独立开关（即时生效，随 localStorage 持久化）
     document.getElementById('setMusic').addEventListener('change', (e) => {

@@ -32,3 +32,8 @@ npm run assets:audit
 ## 发布检查
 
 依次执行测试、源码自测、版本一致性检查、Vite 构建和 Electron 冒烟。版本唯一真源为 `prototypes/map-system/version.json`。`npm run dist --prefix desktop-app` 会在唯一临时目录中完成 Electron 封装，成功后再替换 `desktop-app/dist/搜打撤-代号7.exe`，避免旧 `win-unpacked` 文件锁破坏发布。
+
+## 原型纪律（2026-09-06，源自 gamedev skills / prototype-fast）
+
+- 验证性玩法先做**抛弃式 spike**：一个问题一个原型 + 时间盒（机制级 30~90 分钟），灰箱素材、零打磨；验证"是否好玩"后再按工程规范进 `src/`。
+- spike 代码不得直接进入主源码目录；落地时重写命名与结构（原型回答的是问题，不是交付物）。

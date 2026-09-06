@@ -16,7 +16,7 @@ import { BUILD_VERSION, assetUrl } from './asset-url.js';
   const CLASS_NAMES = Object.freeze(Object.fromEntries(Object.entries(CLASS_IDS).map(([name, id]) => [id, name])));
   const MONSTER_IDS = new Set(['infantry','archer','bandit','cavalry','orc_jav','orc_axe','wolf_rider','fire_el','water_el','grass_el','dragon','boss_general','boss_orc','boss_elem']);
   const CARD_FAMILIES = new Set(['hero','event','martial-ranged','martial-melee','healing','spell','equipment-armor','equipment-weapon','equipment-utility','resource-key','resource-valuables','resource-material','consumable','unknown']);
-  // 资源卡专属立绘（assets/cards/resources/<key>.png），按卡名精确匹配；
+  // 资源卡专属立绘（assets/cards/resources/<key>.webp），按卡名精确匹配；
   // 未命中时回退到 resource-key/valuables/material 家族图
   const RESOURCE_ART = Object.freeze({
     '制式口粮': 'ration-std',
@@ -81,13 +81,13 @@ import { BUILD_VERSION, assetUrl } from './asset-url.js';
   // 由 tools/bake-cutouts.js 生成（等比降采样 + 洪泛去纸色背景）；
   // 素材更新后重跑一次脚本即可。运行时零图像处理，预烘缺失时回退原图。
   const cutoutSrcFor = (src) => {
-    // img.src 形如 "assets/portraits/<组>/<名>.png"（image() 会补 assets/ 前缀）
+    // img.src 形如 "assets/portraits/<组>/<名>.webp"（image() 会补 assets/ 前缀）
     const m = /^assets\/portraits\/(classes|enemies)\/([^/]+)$/.exec(String(src || ''));
     return m ? `assets/portraits/cut/${m[1]}/${m[2]}` : null;
   };
   { // 逐张空闲预解码，避免 25 张图片同时解码/上传造成启动长帧
     const groups = { classes: Object.values(CLASS_IDS), enemies: Array.from(MONSTER_IDS) };
-    const queue = Object.keys(groups).flatMap(group => groups[group].map(id => `assets/portraits/cut/${group}/${id}.png`));
+    const queue = Object.keys(groups).flatMap(group => groups[group].map(id => `assets/portraits/cut/${group}/${id}.webp`));
     const decoded = new Map(); // 持有引用，避免刚预解码完就被回收
     const schedule = (task) => {
       if (globalThis.scheduler && typeof globalThis.scheduler.postTask === 'function') {
@@ -111,7 +111,8 @@ import { BUILD_VERSION, assetUrl } from './asset-url.js';
   }
 
 
-const rosterUrl = new URL('../assets/portraits/expedition-roster.png', import.meta.url).href;
+// 走运行时拷贝路径（portraits 在 RUNTIME_ASSET_DIRS），避免 new URL 哈希版与拷贝版双打包
+const rosterUrl = assetUrl('assets/portraits/expedition-roster.webp');
 function characterArt(value, full=false) {
  const c=characterFor(value); if(!c)return null;
  const ranges=[[0,355],[338,672],[655,1010],[991,1397],[1380,1672]];
@@ -125,19 +126,19 @@ function characterArt(value, full=false) {
       if(characterFor(className)) return characterArt(className);
       const id = resolveClass(className);
       if (!id) return fallback('class', className, className || '未知职业');
-      return image(`portraits/classes/${id}.png`, 'art-portrait', CLASS_NAMES[id], `class-${id}`);
+      return image(`portraits/classes/${id}.webp`, 'art-portrait', CLASS_NAMES[id], `class-${id}`);
     },
-    // 角色选择页大幅立绘：全身像 portraits/full/<id>.png（1038×1516 全身立绘烘焙版，688×1012）；
-    // 缺失时回退半身像 portraits/classes/<id>.png
+    // 角色选择页大幅立绘：全身像 portraits/full/<id>.webp（1038×1516 全身立绘烘焙版，688×1012）；
+    // 缺失时回退半身像 portraits/classes/<id>.webp
     classFullArt(className) {
       if(characterFor(className)) return characterArt(className,true);
       const id = resolveClass(className);
-      if (!id) return image('cards/hero.png', 'art-full', className || '未知角色', `class-full-${className || 'unknown'}`);
-      return image(`portraits/full/${id}.png`, 'art-full', CLASS_NAMES[id], `class-full-${id}`);
+      if (!id) return image('cards/hero.webp', 'art-full', className || '未知角色', `class-full-${className || 'unknown'}`);
+      return image(`portraits/full/${id}.webp`, 'art-full', CLASS_NAMES[id], `class-full-${id}`);
     },
     monsterArt(id) {
       if (!MONSTER_IDS.has(id)) return fallback('enemy', id, id || '未知敌人');
-      return image(`portraits/enemies/${id}.png`, 'art-portrait art-hostile', id, `enemy-${id}`);
+      return image(`portraits/enemies/${id}.webp`, 'art-portrait art-hostile', id, `enemy-${id}`);
     },
     has(id) { return Boolean(resolveClass(id)) || MONSTER_IDS.has(id); },
     cardIcon(card) {
@@ -147,7 +148,7 @@ function characterArt(value, full=false) {
         if (family === 'creature') {
           const artId = card && card.art;
           if (artId && MONSTER_IDS.has(artId)) {
-            return image(`portraits/enemies/${artId}.png`, 'art-card-image', card && card.name || artId, `card-foe-${artId}`, 'width:100%;height:100%;object-fit:cover;display:block');
+            return image(`portraits/enemies/${artId}.webp`, 'art-card-image', card && card.name || artId, `card-foe-${artId}`, 'width:100%;height:100%;object-fit:cover;display:block');
           }
           return SDT.Icons.img('paw');
         }
@@ -155,8 +156,8 @@ function characterArt(value, full=false) {
       }
       const resourceKey = family === 'resource-key' || family === 'resource-valuables' || family === 'resource-material'
         ? RESOURCE_ART[String(card && card.name || '')] : '';
-      if (resourceKey) return image(`cards/resources/${resourceKey}.png`, 'art-card-image', card && card.name || resourceKey, `card-${resourceKey}`, 'width:100%;height:100%;object-fit:cover;display:block');
-      // 英雄卡：按职业取专属立绘（assets/cards/hero-<职业id>.png），缺失回退通用 hero.png
+      if (resourceKey) return image(`cards/resources/${resourceKey}.webp`, 'art-card-image', card && card.name || resourceKey, `card-${resourceKey}`, 'width:100%;height:100%;object-fit:cover;display:block');
+      // 英雄卡：按职业取专属立绘（assets/cards/hero-<职业id>.webp），缺失回退通用 hero.webp
       if (family === 'hero') {
         let clsId = resolveClass(card && card.cls);
         // 实例副本可能丢失 cls（旧对局存档/旧版制作坊）：从卡牌库按 id、名称找回职业，
@@ -167,9 +168,9 @@ function characterArt(value, full=false) {
             if (src) clsId = resolveClass(src.cls);
           } catch (e) { /* 卡牌库不可用时静默回退 */ }
         }
-        if (clsId) return image(`cards/hero-${clsId}.png`, 'art-card-image', card && card.name || clsId, `card-hero-${clsId}`, 'width:100%;height:100%;object-fit:cover;display:block');
+        if (clsId) return image(`cards/hero-${clsId}.webp`, 'art-card-image', card && card.name || clsId, `card-hero-${clsId}`, 'width:100%;height:100%;object-fit:cover;display:block');
       }
-      return image(`cards/${family}.png`, 'art-card-image', card && card.name || family, `card-${family}`, 'width:100%;height:100%;object-fit:cover;display:block');
+      return image(`cards/${family}.webp`, 'art-card-image', card && card.name || family, `card-${family}`, 'width:100%;height:100%;object-fit:cover;display:block');
     },
     gateIcon(ready) {
       const state = ready ? 'unlock' : 'lock';
@@ -194,9 +195,9 @@ function characterArt(value, full=false) {
     },
     cardFamily,
     manifest: Object.freeze({
-      classes: Object.freeze(Object.values(CLASS_IDS).map(id => `portraits/classes/${id}.png`)),
-      enemies: Object.freeze(Array.from(MONSTER_IDS, id => `portraits/enemies/${id}.png`)),
-      cards: Object.freeze(Array.from(CARD_FAMILIES, id => `cards/${id}.png`))
+      classes: Object.freeze(Object.values(CLASS_IDS).map(id => `portraits/classes/${id}.webp`)),
+      enemies: Object.freeze(Array.from(MONSTER_IDS, id => `portraits/enemies/${id}.webp`)),
+      cards: Object.freeze(Array.from(CARD_FAMILIES, id => `cards/${id}.webp`))
     }),
     missingKeys
   };

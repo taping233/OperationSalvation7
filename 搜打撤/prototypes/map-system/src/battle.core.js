@@ -274,6 +274,7 @@ import { Random } from './random.js';
   function start(game, enemyDefs, options) {
     G = game;
     G.battleActive = true;   // game.js 用它锁住侧栏/快捷键背包入口
+    if (SDT.Sound) SDT.Sound.setDucked(true);   // 战斗期间 BGM 侧链压低（audio-design ducking）
     opts = Object.assign({ isBoss: false }, options || {});
     mode = opts.isBoss ? 'boss' : 'normal';
     const defs = Array.isArray(enemyDefs) ? enemyDefs : [enemyDefs];
@@ -709,6 +710,7 @@ import { Random } from './random.js';
     delayed = []; noDrawNext = false; spellCost1 = false; viewingGrave = false; dreadShown = false; selectingDeck = false;
     G.state = 'idle';
     G.battleActive = false;
+    if (SDT.Sound) SDT.Sound.setDucked(false);   // 战斗结束恢复 BGM 音量
     opts.foeNames = foes.map(f => f.name);
     SDT.Sound.music('board');   // 战斗结束切回行军氛围
     G.onBattleEnd(opts, playedCopy, win, consumedCopy);

@@ -6,6 +6,7 @@ import { RunStorage, SLOT_COUNT } from './game.storage.js';
 import { GameStore } from './game.store.js';
 import { createGameMenuController } from './game.menu.js';
 import { Random } from './random.js';
+import { checkConnectivity } from './map-graph.js';
 
 const runtime = {
   openClassChoice: () => {},
@@ -96,7 +97,11 @@ function configureGameRuntime(hooks) {
   game.damage = function (n, reason) {
     game.hp -= n;
     const p = fxAt();
-    FX.float(`-${n} 生命`, p.x, p.y, '#ff6b5e', true);
+    // 三档反馈（game-feel）：玩家受伤=large（大飘字+震屏+顿帧+受击音），重伤加重
+    FX.feedback(p.x, p.y, {
+      text: `-${n} 生命`, color: '#ff6b5e', big: true,
+      tier: n >= 8 ? 'large' : 'medium', sfx: 'strike',
+    });
     UI.log(`[[icon:heart]] ${reason ? reason : ''}损失 <b>${n}</b> 点生命（${Math.max(0, game.hp)}/${game.maxHp}）`, 'warn');
     if (game.hp <= 0) doDeath();
     UI.refresh(game);
@@ -151,6 +156,24 @@ function configureGameRuntime(hooks) {
   }
   function usedSlots() { return game.inventory.length + cardStacks(false).length; }
   function safeUsed() { return cardStacks(true).length; }
+  // 卡牌 zone 一致性断言（card-game：一张卡同一时刻只应属于一个 zone）。
+  // dev 模式下在存档前跑：uid 重复 / 卡牌同时带 safe 与 brought 以外矛盾标记即报错。
+  function assertZones() {
+    if (!game.devMode) return;
+    const seen = new Set();
+    game.ownedCards.forEach(o => {
+      if (seen.has(o.uid)) console.error('[zone] uid 重复（卡牌同时存在于两个实例）：', o.uid, o.card && o.card.name);
+      seen.add(o.uid);
+      if (o.safe && o.brought && o.brought !== 1) {
+        console.error('[zone] 卡牌同时标记 safe 与异常 brought：', o.uid, o.card && o.card.name);
+      }
+    });
+    // 消耗口袋与身上卡不共享 uid（usedPocket 存 {card,count} 聚合，无 uid，天然隔离）
+    game.usedPocket.forEach(p => {
+      if (p && p.uid) console.error('[zone] usedPocket 条目不应携带 uid：', p.uid, p.card && p.card.name);
+    });
+  }
+
   game.bagCap = bagCap;
   game.safeCap = safeCap;
   game.usedSlots = usedSlots;
@@ -164,6 +187,7 @@ function configureGameRuntime(hooks) {
     if (!slot && usedSlots() >= bagCap()) {
       const pf = fxAt();
       FX.float('背包已满', pf.x, pf.y, '#ff6b5e');
+      SDT.Sound.sfx('deny');
       UI.log(`[[icon:bag]] 背包已满（${usedSlots()}/${bagCap()} 格，可在基地用木材扩建），无法获得 <b>${tpl.name}</b>`, 'warn');
       return null;
     }
@@ -238,6 +262,12 @@ function configureGameRuntime(hooks) {
       });
     });
 
+    // 连通性校验（procedural-gen）：从 (0层,0号) 出发 flood-fill，不可达结点大声告警
+    {
+      const res = checkConnectivity(game.layerData);
+      if (!res.ok) console.error('[map] 不可达结点：', res.unreachable.join(' · '));
+    }
+
     // ---------- 结点布局（分布式结点地图的几何唯一来源） ----------
     // 逻辑格 (li, idx) → 结点世界像素坐标；渲染 / 命中 / 移动动画全部基于它。
     const layout = MAP.buildNodePositions(game.layerData.map(ld => ld.logical.length));
@@ -292,6 +322,7 @@ function configureGameRuntime(hooks) {
     if (!game.runActive || game.state === 'title' || game.state === 'done' || game.state === 'boot') return;
     if (!activeSlot) return;
     syncPlayTime();
+    assertZones();
     RunStorage.write(activeSlot, {
         seed: Random.seed, rngState: Random.snapshot(),
         layerIdx: game.layerIdx, trackPos: game.trackPos,
@@ -329,9 +360,17 @@ function configureGameRuntime(hooks) {
 
   function loadGame(slot) {
     const s = readSlot(slot);
-    if (!s) return false;
+    if (!s) {
+      const ri = RunStorage.issue(slot);
+      if (ri === 'corrupt') UI.log('[[icon:cross]] 对局存档损坏（原数据已备份），无法读取', 'warn');
+      else if (ri === 'tooNew') UI.log('[[icon:cross]] 对局存档来自更新版本的游戏，无法读取', 'warn');
+      return false;
+    }
     game.seed = Random.restore(s.rngState || s.seed);
     SDT.Base.use(slot);   // 该档位的基地数据（仓库/熟练度/成就/卡背）
+    const bi = SDT.Base.issue(slot);
+    if (bi === 'corrupt') UI.log('[[icon:cross]] 该档位基地数据损坏（原数据已备份），本次以空档案启动', 'warn');
+    else if (bi === 'tooNew') UI.log('[[icon:cross]] 该档位基地数据来自更新版本的游戏，已以空档案启动', 'warn');
     game.runActive = true;
     setLobby(false);      // 直接回到棋盘上的对局：恢复左侧栏
     game.hp = s.hp; game.maxHp = s.maxHp || MAP.rules.playerMaxHp;
@@ -365,6 +404,7 @@ function configureGameRuntime(hooks) {
 
   const menuController = createGameMenuController({
     SDT, UI, game, runtime, SLOT_COUNT, esc, readSlot, loadGame, clearSlot,
+    hasRun, RunStorage,
     saveGame, syncPlayTime, clearSave, clearAllSlots,
     getActiveSlot: () => activeSlot,
     setActiveSlot: value => { activeSlot = value; },

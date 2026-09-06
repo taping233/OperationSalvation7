@@ -125,14 +125,18 @@ import { Random } from './random.js';
     UI.refresh(G);
   }
 
-  // 逐卡揭晓音效：史诗叮鸣、传说号角
+  // 逐卡揭晓音效：史诗叮鸣、传说号角；揭晓卡带过冲 pop（game-feel）
   function scheduleRevealSfx() {
     (cur.cards || []).forEach((c, i) => {
       setTimeout(() => {
-        if (!document.querySelector('.bt-hand')) return;
+        const hand = document.querySelector('.bt-hand');
+        if (!hand) return;
         SDT.Sound.sfx('reveal');
         if (c.rarity === '传说') SDT.Sound.sfx('legend');
         else if (c.rarity === '史诗') SDT.Sound.sfx('ding');
+        const cards = hand.children;
+        const el = cards[i] || cards[cards.length - 1];
+        if (el && SDT.Motion) SDT.Motion.pop(el);
       }, 140 + i * 170);
     });
   }

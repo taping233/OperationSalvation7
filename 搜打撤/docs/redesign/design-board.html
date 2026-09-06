@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>代号柒 · 美术改版设计材料 v2（基于 open-duelyst CC0 素材）</title>
+<style>
+  :root{
+    --bg:#070A0D; --panel:#10161C; --panel2:#151D23; --line:#2C3A45;
+    --txt:#E7EDF0; --sub:#AAB7BD; --dim:#718088;
+    --amber:#E8B04B; --cyan:#62C4B0; --red:#E26D57; --arc:#7AA9D8;
+    --ice:#8FD4E8; /* 来自卡背的冰蓝 */
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--txt);font-family:"Segoe UI","Microsoft YaHei",sans-serif;padding:36px 28px 90px}
+  .mono{font-family:Consolas,monospace}
+  h1{font-size:24px;letter-spacing:5px}
+  h1 small{font-size:12px;color:var(--sub);letter-spacing:2px;font-weight:400;display:block;margin-top:6px}
+  .lead{color:var(--sub);font-size:12.5px;margin:10px 0 34px;line-height:1.7}
+
+  .sec{max-width:1150px;margin:0 auto 60px}
+  .sec>h2{font-size:14px;letter-spacing:4px;color:var(--amber);border-left:3px solid var(--amber);padding-left:12px;margin-bottom:6px}
+  .sec>p.note{color:var(--dim);font-size:12px;margin-bottom:18px;line-height:1.7}
+
+  /* ---- 调研表 ---- */
+  table{width:100%;border-collapse:collapse;font-size:12.5px}
+  th{color:var(--sub);text-align:left;letter-spacing:1px;font-weight:600;border-bottom:1px solid var(--line);padding:8px 10px}
+  td{border-bottom:1px solid #1A232B;padding:9px 10px;color:var(--txt);vertical-align:top;line-height:1.6}
+  td.k{color:var(--cyan);white-space:nowrap}
+  .ok{color:var(--cyan)} .warn{color:var(--amber)}
+
+  /* ---- 屏幕容器 ---- */
+  .screen{position:relative;width:100%;aspect-ratio:16/9;border:1px solid var(--line);border-radius:6px;overflow:hidden;
+    background:#0B1116;box-shadow:0 10px 40px rgba(0,0,0,.5)}
+  .cap{position:absolute;left:10px;top:10px;z-index:9;font-size:10px;letter-spacing:2px;color:var(--bg);
+    background:var(--amber);padding:3px 8px;border-radius:2px;font-weight:700}
+
+  /* ================= 卡面 ================= */
+  .cardrow{display:flex;gap:26px;flex-wrap:wrap}
+  .card{width:196px;aspect-ratio:196/282;position:relative;border-radius:10px;flex:none;
+    background:linear-gradient(165deg,#232E38,#141B22 55%,#0E141A);
+    border:2px solid #4A5A66;
+    box-shadow:0 6px 22px rgba(0,0,0,.6), inset 0 0 0 2px #0B0F13, inset 0 0 18px rgba(143,212,232,.12);}
+  .card::before{content:"";position:absolute;inset:4px;border:1px solid rgba(143,212,232,.35);border-radius:7px;pointer-events:none;z-index:5}
+  .card .art{position:absolute;left:8px;right:8px;top:8px;height:150px;border-radius:6px;overflow:hidden;
+    background:#0A0F14;border:1px solid #384652}
+  .card .art img{width:100%;height:100%;object-fit:cover;object-position:50% 12%;transform:scale(1.15)}
+  .card .art::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(10,15,20,.85));pointer-events:none}
+  .card .name{position:absolute;left:10px;right:10px;top:160px;text-align:center;font-size:14px;font-weight:800;letter-spacing:2px;
+    text-shadow:0 1px 0 #000}
+  .card .type{position:absolute;left:10px;right:10px;top:181px;text-align:center;font-size:9.5px;letter-spacing:2px;color:var(--dim)}
+  .card .desc{position:absolute;left:12px;right:12px;top:200px;bottom:34px;display:flex;align-items:center;justify-content:center;
+    text-align:center;font-size:10px;color:var(--sub);line-height:1.55;
+    background:rgba(9,13,17,.55);border:1px solid #243039;border-radius:5px;padding:6px 8px}
+  .cost{position:absolute;left:-6px;top:-6px;width:30px;height:30px;z-index:6;display:flex;align-items:center;justify-content:center;
+    font-weight:900;font-size:15px;color:#0B0F13;border-radius:50% 50% 50% 4px;
+    background:radial-gradient(circle at 32% 30%,#FFE9B0,#E8B04B 60%,#B47F24);
+    box-shadow:0 2px 6px rgba(0,0,0,.6), inset 0 0 0 2px #0B0F13}
+  .rarity{position:absolute;right:8px;top:186px;width:9px;height:9px;transform:rotate(45deg);z-index:6;
+    background:radial-gradient(circle at 35% 30%,#CFEFFF,#5FA8C8);box-shadow:0 0 8px rgba(143,212,232,.9)}
+  .stat{position:absolute;bottom:-4px;width:30px;height:26px;z-index:6;display:flex;align-items:center;justify-content:center;
+    font-weight:900;font-size:14px;border-radius:6px;box-shadow:0 2px 6px rgba(0,0,0,.6), inset 0 0 0 2px #0B0F13}
+  .atk{left:-4px;background:radial-gradient(circle at 32% 30%,#FFB69B,#E26D57 65%,#A6402C);color:#1B0C08}
+  .hp{right:-4px;background:radial-gradient(circle at 32% 30%,#B8F4E4,#62C4B0 65%,#337E6F);color:#07211B}
+  /* 卡面三系的属性强调 */
+  .card.f1{border-color:#6B7F8E}
+  .card.f2{border-color:#7A4A48;box-shadow:0 6px 22px rgba(0,0,0,.6), inset 0 0 0 2px #0B0F13, inset 0 0 18px rgba(226,109,87,.14)}
+  .card.f2::before{border-color:rgba(226,109,87,.4)}
+  .card.f5{border-color:#4E7A6E;box-shadow:0 6px 22px rgba(0,0,0,.6), inset 0 0 0 2px #0B0F13, inset 0 0 18px rgba(98,196,176,.14)}
+  .card.f5::before{border-color:rgba(98,196,176,.4)}
+
+  /* ---- 卡背 ---- */
+  .backrow{display:flex;gap:30px;align-items:flex-start}
+  .back{width:196px;aspect-ratio:196/282;border-radius:10px;overflow:hidden;flex:none;position:relative;
+    box-shadow:0 6px 22px rgba(0,0,0,.6)}
+  .back img{width:100%;height:100%;object-fit:cover;display:block}
+  .back.ours img{filter:hue-rotate(-32deg) saturate(.72) brightness(.82) contrast(1.06)}
+  .back .seal{position:absolute;left:50%;top:47%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;
+    background:radial-gradient(circle at 32% 28%,#2E3B45,#0B1116 70%);border:2px solid var(--amber);
+    display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:900;color:var(--amber);
+    text-shadow:0 0 12px rgba(232,176,75,.8);box-shadow:0 0 18px rgba(232,176,75,.35), inset 0 0 10px #000}
+  .spec{font-size:12px;color:var(--sub);line-height:1.9}
+  .spec b{color:var(--txt)}
+
+  /* ================= 战斗界面 mockup ================= */
+  .battle{position:absolute;inset:0}
+  .battle .bg{position:absolute;inset:0;background:url(assets/map-bg.png) center 30%/cover;
+    filter:brightness(.34) saturate(.55) hue-rotate(-8deg)}
+  .battle .vig{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 42%,transparent 40%,rgba(4,7,10,.88) 100%)}
+  .battle .scan{position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 3px,rgba(255,255,255,.012) 3px 4px)}
+
+  .eb{position:absolute;top:2.2%;left:50%;transform:translateX(-50%);display:flex;gap:10px;align-items:center;
+    background:linear-gradient(180deg,rgba(16,22,28,.92),rgba(10,15,20,.85));border:1px solid var(--line);border-radius:6px;
+    padding:6px 16px 6px 6px;box-shadow:0 4px 18px rgba(0,0,0,.5)}
+  .eb img{width:52px;height:52px;object-fit:cover;object-position:50% 8%;border-radius:5px;border:1px solid var(--red)}
+  .eb .nm{font-size:13px;font-weight:800;letter-spacing:2px}
+  .eb .tl{font-size:9.5px;color:var(--dim);letter-spacing:1px;margin-top:1px}
+  .eb .hpline{display:flex;gap:3px;margin-top:5px}
+  .eb .hpline i{width:14px;height:6px;background:var(--red);border-radius:1px;box-shadow:0 0 4px rgba(226,109,87,.7)}
+  .eb .hpline i.off{background:#3A2A26;box-shadow:none}
+  .eb .turn{font-size:10px;color:var(--amber);letter-spacing:2px;margin-left:14px;border-left:1px solid var(--line);padding-left:14px}
+
+  .board{position:absolute;left:50%;top:47%;transform:translate(-50%,-50%);display:grid;
+    grid-template-columns:repeat(5,108px);grid-template-rows:repeat(2,96px);gap:7px}
+  .cell{background:rgba(21,29,35,.55);border:1px solid rgba(90,115,132,.45);border-radius:6px;position:relative;
+    box-shadow:inset 0 0 14px rgba(0,0,0,.4)}
+  .cell.hl{border-color:var(--cyan);box-shadow:0 0 12px rgba(98,196,176,.35), inset 0 0 14px rgba(98,196,176,.12)}
+  .unit{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:6px}
+  .unit img{position:absolute;top:-14%;height:108%;filter:drop-shadow(0 6px 6px rgba(0,0,0,.55))}
+  .unit .tag{position:relative;z-index:2;display:flex;gap:5px}
+  .unit .tag b{font-size:10px;width:18px;height:18px;display:flex;align-items:center;justify-content:center;border-radius:4px;
+    box-shadow:0 1px 4px #000, inset 0 0 0 1px #0B0F13;font-weight:900}
+  .unit .tag b.a{background:#E26D57;color:#1B0C08}
+  .unit .tag b.h{background:#62C4B0;color:#07211B}
+  .unit .tag b.sh{background:#7AA9D8;color:#0A1522}
+
+  .hand{position:absolute;left:50%;bottom:-4px;transform:translateX(-50%);display:flex;align-items:flex-end}
+  .hcard{width:120px;aspect-ratio:120/172;border-radius:8px;margin:0 -14px;position:relative;transform-origin:50% 120%;
+    background:linear-gradient(165deg,#232E38,#141B22 60%);border:2px solid #4A5A66;
+    box-shadow:0 4px 16px rgba(0,0,0,.65), inset 0 0 0 2px #0B0F13;transition:transform .15s}
+  .hcard img{width:calc(100% - 10px);height:82px;object-fit:cover;object-position:50% 10%;margin:5px auto 0;display:block;border-radius:5px;border:1px solid #384652}
+  .hcard .nm{font-size:10.5px;text-align:center;font-weight:800;margin-top:4px;letter-spacing:1px}
+  .hcard .ds{font-size:8.5px;color:var(--sub);text-align:center;line-height:1.4;padding:1px 8px}
+  .hcard .cost{width:22px;height:22px;font-size:11.5px;left:-4px;top:-4px}
+  .hcard:nth-child(1){transform:rotate(-8deg) translateY(10px)}
+  .hcard:nth-child(2){transform:rotate(-2.5deg) translateY(0);z-index:2}
+  .hcard:nth-child(3){transform:rotate(3deg) translateY(2px);z-index:3;border-color:var(--cyan);box-shadow:0 0 18px rgba(98,196,176,.3), inset 0 0 0 2px #0B0F13}
+  .hcard:nth-child(4){transform:rotate(9deg) translateY(12px)}
+
+  .log{position:absolute;right:1.6%;top:22%;width:200px;bottom:26%;background:rgba(10,15,20,.82);border:1px solid var(--line);
+    border-radius:6px;padding:10px 12px;font-size:10px;line-height:1.9;color:var(--sub)}
+  .log h4{font-size:9.5px;letter-spacing:3px;color:var(--cyan);border-bottom:1px solid #1F2A33;padding-bottom:6px;margin-bottom:7px}
+  .log em{color:var(--txt);font-style:normal}
+  .log .warn{color:var(--amber)}
+
+  .ap{position:absolute;left:2%;bottom:6%;display:flex;gap:8px;align-items:center}
+  .ap .gem{width:26px;height:26px;border-radius:50%;background:radial-gradient(circle at 32% 28%,#B8F4E4,#62C4B0 65%,#2E7466);
+    box-shadow:0 0 10px rgba(98,196,176,.6), inset 0 0 0 2px #0B0F13}
+  .ap .gem.off{background:radial-gradient(circle at 32% 28%,#2A3A38,#18232B);box-shadow:inset 0 0 0 2px #0B0F13}
+  .ap .lb{font-size:10px;color:var(--sub);letter-spacing:2px;margin-right:4px}
+  .endbtn{position:absolute;right:2%;bottom:6%;padding:12px 26px;font-weight:900;font-size:14px;letter-spacing:3px;color:#0B0F13;
+    background:linear-gradient(180deg,#F0C168,#D99E38);border:2px solid #0B0F13;border-radius:6px;
+    box-shadow:0 4px 0 #0B0F13, 0 6px 18px rgba(232,176,75,.25)}
+  .pb{position:absolute;left:2%;top:8%;display:flex;gap:10px;align-items:center;
+    background:rgba(10,15,20,.8);border:1px solid var(--line);border-radius:6px;padding:5px 14px 5px 5px}
+  .pb img{width:44px;height:44px;object-fit:cover;object-position:50% 8%;border-radius:5px;border:1px solid var(--cyan)}
+  .pb .nm{font-size:12px;font-weight:800;letter-spacing:1px}
+  .pb .st{font-size:10px;color:var(--sub);margin-top:2px}
+  .pb .st b{color:var(--cyan)}
+
+  /* ================= 地图界面 ================= */
+  .map .bg{position:absolute;inset:0;background:url(assets/map-mid.png) center 65%/cover;
+    filter:brightness(.3) saturate(.5) hue-rotate(-15deg) contrast(1.05)}
+  .map .vig{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 45%,transparent 35%,rgba(4,7,10,.9) 100%)}
+  .nodes{position:absolute;inset:0}
+  .nodes svg{position:absolute;inset:0;width:100%;height:100%}
+  .node{position:absolute;width:52px;height:52px;transform:translate(-50%,-50%);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;font-size:20px;
+    background:radial-gradient(circle at 32% 28%,#1E2A33,#0C1218 75%);border:2px solid var(--line);
+    box-shadow:0 4px 14px rgba(0,0,0,.6)}
+  .node.small{width:40px;height:40px;font-size:15px}
+  .node.done{opacity:.45}
+  .node.battle{border-color:var(--red);box-shadow:0 0 14px rgba(226,109,87,.4)}
+  .node.event{border-color:var(--arc)}
+  .node.shop{border-color:var(--amber)}
+  .node.extract{border-color:var(--cyan);box-shadow:0 0 18px rgba(98,196,176,.55)}
+  .node.cur{outline:3px solid rgba(232,176,75,.6);outline-offset:3px}
+  .node .cap2{position:absolute;top:110%;left:50%;transform:translateX(-50%);font-size:9px;letter-spacing:1px;color:var(--sub);white-space:nowrap}
+  .squad{position:absolute;left:1.8%;top:10%;width:190px;background:rgba(10,15,20,.85);border:1px solid var(--line);border-radius:6px;padding:10px 12px}
+  .squad h4{font-size:9.5px;letter-spacing:3px;color:var(--amber);margin-bottom:8px;border-bottom:1px solid #1F2A33;padding-bottom:6px}
+  .mm{display:flex;gap:8px;align-items:center;margin-bottom:8px}
+  .mm img{width:34px;height:34px;object-fit:cover;object-position:50% 8%;border-radius:4px;border:1px solid var(--line)}
+  .mm .nm{font-size:11px;font-weight:700}
+  .mm .bar{height:5px;background:#0B1116;border:1px solid #2C3A45;border-radius:2px;margin-top:4px;overflow:hidden;width:110px}
+  .mm .bar i{display:block;height:100%}
+  .obj{position:absolute;right:1.8%;top:10%;width:190px;background:rgba(10,15,20,.85);border:1px solid var(--line);border-radius:6px;padding:10px 12px;font-size:10.5px;color:var(--sub);line-height:1.9}
+  .obj h4{font-size:9.5px;letter-spacing:3px;color:var(--cyan);margin-bottom:8px;border-bottom:1px solid #1F2A33;padding-bottom:6px}
+  .obj b{color:var(--txt)}
+
+  /* ================= 主菜单 ================= */
+  .title .bg{position:absolute;inset:0;background:linear-gradient(120deg,#0B1116 44%,#0E1820 70%,#12202A)}
+  .title .hero{position:absolute;right:-2%;bottom:-4%;height:112%;opacity:.95;
+    filter:drop-shadow(-18px 10px 30px rgba(0,0,0,.7))}
+  .title .glowline{position:absolute;left:6%;top:0;bottom:0;width:1px;background:linear-gradient(180deg,transparent,var(--cyan) 30%,transparent 85%);opacity:.5}
+  .title .tblock{position:absolute;left:8%;top:26%}
+  .title .cn{font-size:64px;font-weight:900;letter-spacing:16px;text-shadow:0 0 30px rgba(232,176,75,.25)}
+  .title .cn span{color:var(--amber)}
+  .title .sub{font-size:13px;letter-spacing:6px;color:var(--sub);margin-top:10px}
+  .title .ver{position:absolute;left:8%;bottom:7%;font-size:10px;color:var(--dim);letter-spacing:2px}
+  .menu{position:absolute;left:8%;top:56%;display:flex;flex-direction:column;gap:12px;width:250px}
+  .mi{padding:12px 18px;font-size:14px;letter-spacing:4px;font-weight:700;color:var(--txt);
+    background:linear-gradient(90deg,rgba(21,29,35,.9),rgba(21,29,35,.4));border:1px solid var(--line);border-left:3px solid var(--dim);
+    border-radius:3px;cursor:pointer}
+  .mi:hover{border-left-color:var(--amber);background:linear-gradient(90deg,rgba(232,176,75,.14),rgba(21,29,35,.4))}
+  .mi.main{border-left-color:var(--amber);color:var(--amber)}
+  .title .cdnote{position:absolute;right:3%;bottom:6%;font-size:9px;color:var(--dim);text-align:right;line-height:1.8;letter-spacing:.5px}
+
+  /* ================= 角色详情 ================= */
+  .hero-d{position:absolute;inset:0;background:linear-gradient(115deg,#0B1116 30%,#101B23 65%,#15242E)}
+  .hero-d .art{position:absolute;left:4%;bottom:0;height:96%;filter:drop-shadow(0 12px 28px rgba(0,0,0,.7))}
+  .hero-d .panel{position:absolute;right:4%;top:9%;width:46%;bottom:9%;display:flex;flex-direction:column;gap:12px}
+  .pnl{background:rgba(13,19,25,.88);border:1px solid var(--line);border-radius:6px;padding:12px 16px}
+  .pnl h4{font-size:10px;letter-spacing:3px;color:var(--cyan);margin-bottom:8px;border-bottom:1px solid #1F2A33;padding-bottom:5px}
+  .pnl h4.amber{color:var(--amber)}
+  .statgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .sg{background:#0B1116;border:1px solid #22303A;border-radius:4px;padding:8px 6px;text-align:center}
+  .sg b{font-size:16px;color:var(--txt)}
+  .sg i{display:block;font-style:normal;font-size:9px;color:var(--dim);letter-spacing:1px;margin-top:3px}
+  .skill{display:flex;gap:10px;align-items:flex-start;margin-bottom:9px}
+  .skill .ic{width:34px;height:34px;flex:none;border-radius:6px;background:radial-gradient(circle at 32% 28%,#1E2A33,#0C1218);
+    border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:16px}
+  .skill .tx b{font-size:12px}
+  .skill .tx p{font-size:10.5px;color:var(--sub);line-height:1.6;margin-top:2px}
+  .traits{display:flex;gap:8px;flex-wrap:wrap}
+  .traits span{font-size:10px;padding:4px 10px;border:1px solid var(--line);border-radius:3px;color:var(--sub)}
+  .traits span.hot{border-color:var(--amber);color:var(--amber)}
+
+  /* ================= 结算 ================= */
+  .result{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%,#12202A 0%,#0A1015 65%)}
+  .result .banner{position:absolute;left:50%;top:12%;transform:translateX(-50%);text-align:center}
+  .result .banner h3{font-size:40px;letter-spacing:14px;color:var(--cyan);text-shadow:0 0 24px rgba(98,196,176,.5)}
+  .result .banner p{font-size:11px;letter-spacing:4px;color:var(--sub);margin-top:8px}
+  .loot{position:absolute;left:50%;top:38%;transform:translateX(-50%);display:flex;gap:20px}
+  .lcard{width:132px;aspect-ratio:132/190;border-radius:8px;position:relative;overflow:hidden;
+    background:linear-gradient(165deg,#232E38,#141B22 60%);border:2px solid #4A5A66;box-shadow:0 5px 18px rgba(0,0,0,.6)}
+  .lcard .glow{position:absolute;inset:0;background:radial-gradient(circle at 50% 30%,rgba(143,212,232,.18),transparent 60%)}
+  .lcard img{width:100%;height:70%;object-fit:cover;object-position:50% 10%}
+  .lcard .nm{font-size:10.5px;text-align:center;font-weight:800;margin-top:6px;letter-spacing:1px}
+  .lcard .rr{font-size:8.5px;text-align:center;color:var(--amber);letter-spacing:2px;margin-top:2px}
+  .rstats{position:absolute;left:50%;bottom:26%;transform:translateX(-50%);display:flex;gap:38px;font-size:11px;color:var(--sub)}
+  .rstats b{display:block;font-size:20px;color:var(--txt);font-family:Consolas,monospace;text-align:center;margin-bottom:3px}
+  .rstats span{text-align:center;display:block}
+  .rbtns{position:absolute;left:50%;bottom:8%;transform:translateX(-50%);display:flex;gap:14px}
+  .rbtns .b1{padding:11px 30px;font-weight:900;letter-spacing:3px;font-size:13px;color:#0B0F13;background:linear-gradient(180deg,#79D4C2,#4FAE99);border:2px solid #0B0F13;border-radius:6px;box-shadow:0 4px 0 #0B0F13}
+  .rbtns .b2{padding:11px 30px;font-weight:700;letter-spacing:3px;font-size:13px;color:var(--sub);background:#1B252D;border:2px solid #2C3A45;border-radius:6px}
+
+  /* ---- 接入清单 ---- */
+  ol.steps{font-size:12.5px;color:var(--sub);line-height:2;padding-left:22px}
+  ol.steps b{color:var(--txt)}
+  code{background:#0E141A;border:1px solid #22303A;border-radius:3px;padding:1px 6px;font-size:11.5px;color:var(--cyan)}
+</style>
+</head>
+<body>
+
+<h1>代号柒 · 美术改版设计材料 <small style="letter-spacing:2px">DESIGN BOARD v2 · 素材底座：open-duelyst（全库 CC0，可商用免署名）· 2026-09-06</small></h1>
+<p class="lead">与 v1 的本质区别：本次设计基于<b style="color:var(--ice)">真实已开源自带美术的二次元卡牌游戏</b>样张制作 —— 立绘、卡背、地图背景全部是可直接落库的真实资产，不是 CSS 画的占位符。下方每个界面都是按 16:9 实机比例排版的高保真效果图。</p>
+
+<!-- ============ 0 调研结论 ============ -->
+<div class="sec">
+  <h2>① 调研结论 · 可引入的素材源</h2>
+  <p class="note">核心发现：[open-duelyst](https://github.com/open-duelyst/duelyst)（Counterplay 官方开源，3.9k star）将**全部美术资产以 CC0-1.0 放入公共领域**——商业使用、免署名、可修改再分发，是二次元/奇幻卡牌里授权最干净、量最大的库。</p>
+  <table>
+    <tr><th>来源</th><th>内容</th><th>授权</th><th>结论</th></tr>
+    <tr><td class="k">open-duelyst</td><td>6 阵营全套角色立绘（高清带透明通道）、单位精灵、成品卡背、手绘地图背景层、图标、UI 底板</td><td class="ok">CC0</td><td class="ok">✔ 立即引入，本次设计底座</td></tr>
+    <tr><td class="k">SpriteCook free-assets</td><td>动漫角色风格化素材</td><td class="ok">CC0</td><td class="ok">✔ 二期补充卡面立绘</td></tr>
+    <tr><td class="k">Kenney UI / 音效</td><td>UI 图标、按钮、音效包</td><td class="ok">CC0</td><td class="ok">✔ 图标层补充</td></tr>
+    <tr><td class="k">game-icons.net</td><td>4000+ 卡牌向黑白图标（杀戮尖塔同款体系）</td><td class="ok">CC-BY 3.0</td><td class="ok">✔ 需在关于页署名一次</td></tr>
+    <tr><td class="k">itch.io 免费像素包</td><td>像素角色/ Tileset（逐包不同）</td><td class="warn">逐包审</td><td class="warn">△ 只挑 CC0/CC-BY 包</td></tr>
+    <tr><td class="k">pandaCard / EarthCore 等</td><td>国产开源卡牌工程</td><td class="warn">看仓库</td><td class="warn">△ 仅作工程参考，素材不引入</td></tr>
+  </table>
+</div>
+
+<!-- ============ 1 设计系统 ============ -->
+<div class="sec">
+  <h2>② 设计系统 · 终端石墨 × 冰蓝金属</h2>
+  <p class="note">保留我们的灾后终端冷峻基调（石墨面板 / 琥珀行动 / 青色确认），从卡背资产里提取<b style="color:var(--ice)">冰蓝金属 #8FD4E8</b> 作为新的"军械质感"强调色，与 duelylst 立绘的高饱和金/红形成控制内的对比。信息层（日志、数据、斜网格）全部保留。</p>
+  <div style="display:flex;gap:12px;flex-wrap:wrap">
+    <div style="width:118px;border:1px solid var(--line);border-radius:5px;overflow:hidden"><div style="height:52px;background:#070A0D"></div><div style="padding:7px 10px;font-size:10px;color:var(--sub)">凹槽黑 #070A0D</div></div>
+    <div style="width:118px;border:1px solid var(--line);border-radius:5px;overflow:hidden"><div style="height:52px;background:#151D23"></div><div style="padding:7px 10px;font-size:10px;color:var(--sub)">面板石墨 #151D23</div></div>
+    <div style="width:118px;border:1px solid var(--line);border-radius:5px;overflow:hidden"><div style="height:52px;background:#8FD4E8"></div><div style="padding:7px 10px;font-size:10px;color:var(--sub)">冰蓝金属（新）</div></div>
+    <div style="width:118px;border:1px solid var(--line);border-radius:5px;overflow:hidden"><div style="height:52px;background:#E8B04B"></div><div style="padding:7px 10px;font-size:10px;color:var(--sub)">琥珀 · 行动</div></div>
+    <div style="width:118px;border:1px solid var(--line);border-radius:5px;overflow:hidden"><div style="height:52px;background:#62C4B0"></div><div style="padding:7px 10px;font-size:10px;color:var(--sub)">青色 · 确认</div></div>
+    <div style="width:118px;border:1px solid var(--line);border-radius:5px;overflow:hidden"><div style="height:52px;background:#E26D57"></div><div style="padding:7px 10px;font-size:10px;color:var(--sub)">珊瑚 · 危险</div></div>
+  </div>
+</div>
+
+<!-- ============ 2 卡面 ============ -->
+<div class="sec">
+  <h2>③ 卡面设计 · 三系示例</h2>
+  <p class="note">卡框为 CSS 重建（斜切内框 + 冰蓝描边 + 稀有度菱形），立绘直接用 duelylst 阵营将军图裁切。左起：金狮守卫（装备系）/ 红虎忍者（刺杀系）/ 翠雨贤者（奥术系）。费用宝石琥珀、攻珊瑚、血青 —— 沿用现有功能色语义。</p>
+  <div class="cardrow">
+    <div class="card f1">
+      <div class="cost">3</div><div class="rarity"></div>
+      <div class="art"><img src="assets/general-f1.png" alt=""></div>
+      <div class="name">金狮卫士</div><div class="type">职业 · 守卫</div>
+      <div class="desc">部署时获得 4 点护盾。相邻友军受到的伤害由其承担。</div>
+      <div class="stat atk">2</div><div class="stat hp">8</div>
+    </div>
+    <div class="card f2">
+      <div class="cost">4</div><div class="rarity" style="background:radial-gradient(circle at 35% 30%,#FFD2B0,#E2844B);box-shadow:0 0 8px rgba(226,132,75,.9)"></div>
+      <div class="art"><img src="assets/general-f2.png" alt=""></div>
+      <div class="name">赤虎刺客</div><div class="type">职业 · 刺杀</div>
+      <div class="desc">潜行 1 回合。攻击后可再次移动，击杀时返还 1 费。</div>
+      <div class="stat atk">5</div><div class="stat hp">4</div>
+    </div>
+    <div class="card f5">
+      <div class="cost">2</div><div class="rarity" style="background:radial-gradient(circle at 35% 30%,#D8FFF2,#3FA88C);box-shadow:0 0 8px rgba(63,168,140,.9)"></div>
+      <div class="art"><img src="assets/general-f5.png" alt=""></div>
+      <div class="name">封印者·翠雨</div><div class="type">职业 · 封印</div>
+      <div class="desc">封锁一个相邻格 2 回合，进入者受到 3 点奥术伤害。</div>
+      <div class="stat atk">1</div><div class="stat hp">6</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 3 卡背 ============ -->
+<div class="sec">
+  <h2>④ 卡背设计</h2>
+  <p class="note">左：duelyst 原版冰蓝卡背（CC0 原样可用）。右：调色为"代号柒"专属色相后的效果（CSS 滤镜示意，实装用离线调色导出 webp）+ 中央琥珀"7"印。卡背规格 452×634，与现有卡面比例一致。</p>
+  <div class="backrow">
+    <div class="back"><img src="assets/card-back.png" alt="原版卡背"></div>
+    <div class="back ours"><img src="assets/card-back.png" alt="调色卡背"><div class="seal">柒</div></div>
+    <div class="spec">
+      <b>接入方案</b><br>
+      · 原图：<span class="mono">card_back@2x.png 452×634</span> CC0<br>
+      · 调色：hue −32° / 饱和 −28% / 压暗 0.82<br>
+      · 中央替换为琥珀"柒"徽记（复用 brand-mark）<br>
+      · 导出 <span class="mono">card-back-codename7.webp q85</span><br>
+      · 替换 <span class="mono">assets/cards/</span> 卡背引用点<br>
+      · 登记 <span class="mono">asset-manifest.json</span> → <span class="mono">npm run assets:audit</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 4 战斗界面 ============ -->
+<div class="sec">
+  <h2>⑤ 局内战斗界面</h2>
+  <p class="note">地图背景为 duelylst 手绘场景（压暗 0.34 + 降饱和），棋盘改 2×5 冰蓝描边格；角色站在格内带攻/血/盾角标；底部手牌扇形排布，右侧保留我们的终端日志信息层。所有面板仍走石墨+细边框，不引入厚重的中世纪描金。</p>
+  <div class="screen">
+    <div class="cap">BATTLE · 战斗界面</div>
+    <div class="battle">
+      <div class="bg"></div><div class="vig"></div><div class="scan"></div>
+      <div class="eb">
+        <img src="assets/general-f2.png" alt="">
+        <div><div class="nm">赤虎忍者 · 敌方队长</div><div class="tl">ELITE / 第 4 层</div>
+          <div class="hpline"><i></i><i></i><i></i><i></i><i></i><i class="off"></i><i class="off"></i><i class="off"></i></div></div>
+        <div class="turn">敌方回合</div>
+      </div>
+      <div class="pb">
+        <img src="assets/general-f1.png" alt="">
+        <div><div class="nm">金狮卫士</div><div class="st">HP <b>18/24</b> · 盾 <b>4</b></div></div>
+      </div>
+      <div class="board">
+        <div class="cell"><div class="unit"><img src="assets/unit-lioness.png" style="height:78%"><div class="tag"><b class="a">3</b><b class="h">5</b></div></div></div>
+        <div class="cell"></div>
+        <div class="cell"><div class="unit"><img src="assets/general-f1.png" style="height:96%;object-fit:contain"><div class="tag"><b class="a">4</b><b class="h">18</b><b class="sh">4</b></div></div></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell hl"><div class="unit"><img src="assets/general-f2.png" style="height:96%;object-fit:contain"><div class="tag"><b class="a">5</b><b class="h">14</b></div></div></div>
+        <div class="cell"></div>
+        <div class="cell"><div class="unit"><img src="assets/unit-archer.png" style="height:78%"><div class="tag"><b class="a">2</b><b class="h">4</b></div></div></div>
+        <div class="cell"></div>
+      </div>
+      <div class="log">
+        <h4>作战日志</h4>
+        <em>金狮卫士</em> 部署至 C2<br>
+        获得护盾 <span class="warn">+4</span><br>
+        <em>赤虎刺客</em> 发动潜行<br>
+        回合结束，敌方行动…<br>
+        <em>后排弓手</em> 受到 2 点伤害
+      </div>
+      <div class="ap"><span class="lb">行动点</span><span class="gem"></span><span class="gem"></span><span class="gem off"></span><span class="gem off"></span></div>
+      <div class="endbtn">结束回合</div>
+      <div class="hand">
+        <div class="hcard"><div class="cost">2</div><img src="assets/general-f5.png"><div class="nm">封印者·翠雨</div><div class="ds">封锁相邻格 2 回合</div></div>
+        <div class="hcard"><div class="cost">1</div><img src="assets/unit-lioness.png"><div class="nm">狮群幼兽</div><div class="ds">冲锋 · 攻击后返还 1 费</div></div>
+        <div class="hcard"><div class="cost">3</div><img src="assets/general-f1.png"><div class="nm">金狮卫士</div><div class="ds">部署时获得 4 点护盾</div></div>
+        <div class="hcard"><div class="cost">2</div><img src="assets/unit-archer.png"><div class="nm">后排弓手</div><div class="ds">远程：不受反击伤害</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 5 地图界面 ============ -->
+<div class="sec">
+  <h2>⑥ 搜索地图 · 节点推进</h2>
+  <p class="note">沿用杀戮尖塔式节点图，但视觉改为"战术终端标记"：冰蓝路径线 + 琥珀当前位置环。背景仍用 duelylst 场景压暗，事件/商店/撤离节点用功能色描边区分。左侧小队状态、右侧任务目标，维持信息层布局。</p>
+  <div class="screen">
+    <div class="cap">EXPEDITION · 搜索地图</div>
+    <div class="map">
+      <div class="bg"></div><div class="vig"></div>
+      <div class="nodes">
+        <svg viewBox="0 0 1000 562" preserveAspectRatio="none">
+          <path d="M 120 470 C 240 420 260 330 380 310 C 500 290 520 200 640 190 C 760 180 780 120 880 90" fill="none" stroke="rgba(143,212,232,.5)" stroke-width="2.5" stroke-dasharray="1 7" stroke-linecap="round"/>
+        </svg>
+        <div class="node small done" style="left:12%;top:84%">🏁<div class="cap2">出发</div></div>
+        <div class="node small done" style="left:24%;top:70%">⚔<div class="cap2">遭遇战</div></div>
+        <div class="node event" style="left:38%;top:55%">❓<div class="cap2">未知事件</div></div>
+        <div class="node battle cur" style="left:52%;top:44%">⚔<div class="cap2">精英 · 赤虎忍者</div></div>
+        <div class="node shop" style="left:66%;top:32%">◆<div class="cap2">补给商人</div></div>
+        <div class="node small" style="left:78%;top:22%">⚔<div class="cap2">卫戍战</div></div>
+        <div class="node extract" style="left:88%;top:14%">▲<div class="cap2">撤离点</div></div>
+      </div>
+      <div class="squad">
+        <h4>搜索小队</h4>
+        <div class="mm"><img src="assets/general-f1.png"><div><div class="nm">金狮卫士</div><div class="bar"><i style="width:75%;background:var(--cyan)"></i></div></div></div>
+        <div class="mm"><img src="assets/general-f5.png"><div><div class="nm">封印者·翠雨</div><div class="bar"><i style="width:52%;background:var(--cyan)"></i></div></div></div>
+        <div class="mm"><img src="assets/general-f2.png"><div><div class="nm">赤虎刺客</div><div class="bar"><i style="width:18%;background:var(--red)"></i></div></div></div>
+      </div>
+      <div class="obj">
+        <h4>本次任务</h4>
+        <b>目标</b>：回收 3 件遗物并从 ▲ 撤离<br>
+        <b>携带</b>：补给 2 / 钥匙 1<br>
+        <b>层数</b>：4 / 7<br>
+        <b>警告</b>：警报值 68%，接近封锁
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 6 主菜单 ============ -->
+<div class="sec">
+  <h2>⑦ 主菜单 / 标题页</h2>
+  <p class="note">现有冬日壁纸切换器可保留；这是"角色主导"的第二版式：高清立绘右侧压场 + 左侧菜单列。菜单项悬停时琥珀点亮 —— 与现行为一致。</p>
+  <div class="screen">
+    <div class="cap">TITLE · 主菜单</div>
+    <div class="title">
+      <div class="bg"></div>
+      <img class="hero" src="assets/general-f4.png" alt="">
+      <div class="glowline"></div>
+      <div class="tblock"><div class="cn">代号<span>柒</span></div><div class="sub">SEARCH · STRIKE · WITHDRAW</div></div>
+      <div class="menu">
+        <div class="mi main">开始搜索</div>
+        <div class="mi">构筑卡组</div>
+        <div class="mi">队员档案</div>
+        <div class="mi">作战记录</div>
+        <div class="mi">设置</div>
+      </div>
+      <div class="ver mono">VER 0.51.0 · BUILD 2026-09-06</div>
+      <div class="cdnote">立绘素材基于 open-duelyst（CC0）改编<br>原创世界观与文案 © 代号柒项目组</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 7 角色详情 ============ -->
+<div class="sec">
+  <h2>⑧ 队员详情页</h2>
+  <p class="note">立绘左置大图，右侧四段信息面板：属性雷达区改为数值卡、技能带图标位、特质标签、羁绊说明 —— 信息密度和现有页面一致，但用上了真立绘的气场。</p>
+  <div class="screen">
+    <div class="cap">DOSSIER · 队员档案</div>
+    <div class="hero-d">
+      <img class="art" src="assets/general-f5.png" alt="">
+      <div class="panel">
+        <div class="pnl">
+          <h4 class="amber">封印者 · 翠雨 <span style="float:right;color:var(--dim);letter-spacing:1px">LV 12 · 射手座小队</span></h4>
+          <div class="statgrid">
+            <div class="sg"><b>6</b><i>生命</i></div>
+            <div class="sg"><b>1</b><i>攻击</i></div>
+            <div class="sg"><b>3</b><i>射程</i></div>
+            <div class="sg"><b>2</b><i>机动</i></div>
+          </div>
+        </div>
+        <div class="pnl">
+          <h4>技能</h4>
+          <div class="skill"><div class="ic">⛔</div><div class="tx"><b>封锁结界</b><p>封锁一个相邻格 2 回合，进入者受到 3 点奥术伤害并停下。</p></div></div>
+          <div class="skill"><div class="ic">✦</div><div class="tx"><b>符能过载</b><p>消耗全部行动点，每点使结界伤害 +2、持续 +1 回合。</p></div></div>
+        </div>
+        <div class="pnl">
+          <h4>特质</h4>
+          <div class="traits"><span class="hot">结界大师</span><span>奥术亲和</span><span>撤离专家</span><span>搜索 +1</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 8 结算 ============ -->
+<div class="sec">
+  <h2>⑨ 结算 / 撤离成功</h2>
+  <p class="note">撤离成功横幅 + 战利品三连翻卡（用卡背 → 翻开立绘卡的动效位）+ 撤离数据条。翻卡素材直接复用卡背图，完成"搜打撤"闭环的仪式感。</p>
+  <div class="screen">
+    <div class="cap">RESULT · 结算</div>
+    <div class="result">
+      <div class="banner"><h3>撤离成功</h3><p>EXTRACTION COMPLETE · 第 4 层</p></div>
+      <div class="loot">
+        <div class="lcard"><div class="glow"></div><img src="assets/general-f1.png"><div class="nm">金狮徽章</div><div class="rr">SR · 遗物</div></div>
+        <div class="lcard"><div class="glow"></div><img src="assets/general-f5.png"><div class="nm">符能残片</div><div class="rr">R · 材料</div></div>
+        <div class="lcard"><div class="glow"></div><img src="assets/unit-archer.png"><div class="nm">佣兵短弓</div><div class="rr">N · 装备</div></div>
+      </div>
+      <div class="rstats">
+        <div><b>4</b><span>通过层数</span></div>
+        <div><b>6</b><span>战斗胜利</span></div>
+        <div><b>312</b><span>回收价值</span></div>
+        <div><b>2</b><span>队员阵亡</span></div>
+      </div>
+      <div class="rbtns"><button class="b1">再来一次</button><button class="b2">返回基地</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 9 接入路线 ============ -->
+<div class="sec">
+  <h2>⑩ 落地路线（定稿后执行）</h2>
+  <ol class="steps">
+    <li><b>素材批量下载</b>：从 open-duelyst 仓库按需拉取 6 阵营立绘 + 精选单位精灵 + 2~3 张地图背景层，入 <code>_planning/assets-inbox/</code> 筛选。</li>
+    <li><b>风格归一</b>：按②的调色板对素材做统一色温/压暗处理，导出 webp q85；卡背做"柒"徽记版。</li>
+    <li><b>卡面替换</b>：现有 <code>assets/cards/</code> 25 张 webp 逐张对位替换（每批 3~5 张实机验收）。</li>
+    <li><b>界面套皮</b>：按⑤~⑨的布局改 CSS —— 棋盘格、手牌、日志、节点图、结算均为局部改动，不动玩法代码。</li>
+    <li><b>登记审计</b>：全部素材写入 <code>asset-manifest.json</code>（来源=CC0 / SHA-256 / prompt=无），跑 <code>npm run assets:audit</code>。</li>
+    <li><b>构建验收</b>：<code>npm run build</code> → 桌面快捷方式实机过目。</li>
+  </ol>
+</div>
+
+</body>
+</html>

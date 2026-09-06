@@ -12,6 +12,7 @@ import './icons-bitmap.js';
 import './sound.js';
 import './camera.js';
 import './motion.js';
+import './input.js';
 
 
 import './notes.js';

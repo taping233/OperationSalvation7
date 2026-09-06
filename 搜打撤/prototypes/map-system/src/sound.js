@@ -13,6 +13,10 @@ const titleBgm = new Howl({ src: [TITLE_BGM_URL], loop: true, html5: true, prelo
   // 音量 0~1，随 localStorage 持久化；音乐基准 0.45，音效基准 2.5
   let musicVol = 1, sfxVol = 1;
   const BASE_MUSIC = 0.45, BASE_SFX = 2.5;
+  // 滑条 0..1 → 增益走 dB 曲线（等比可闻：低段每格有变化，端点不变 0=静音 / 1=基准）
+  const dbGain = k => Math.pow(10, ((k - 1) * 30) / 20);
+  // 战斗 ducking：战斗期间 BGM 侧链压低（audio-design），结束恢复
+  let ducked = false;
   try {
     muted = localStorage.getItem('sdt-muted') === '1';
     musicOff = localStorage.getItem('sdt-music-off') === '1';
@@ -25,7 +29,7 @@ const titleBgm = new Howl({ src: [TITLE_BGM_URL], loop: true, html5: true, prelo
     if (ctx) { if (ctx.state === 'suspended') ctx.resume().catch(() => {}); return true; }
     try { ctx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { return false; }
     master = ctx.createGain(); master.gain.value = muted ? 0 : 1; master.connect(ctx.destination);
-    sfxGain = ctx.createGain(); sfxGain.gain.value = BASE_SFX * sfxVol; sfxGain.connect(master);
+    sfxGain = ctx.createGain(); sfxGain.gain.value = BASE_SFX * dbGain(sfxVol); sfxGain.connect(master);
     // 点击音专用链路：增益拉响度，压缩器压掉归一化后的尖峰，避免破音
     clickGain = ctx.createGain(); clickGain.gain.value = 1.8;
     clickComp = ctx.createDynamicsCompressor();
@@ -35,6 +39,7 @@ const titleBgm = new Howl({ src: [TITLE_BGM_URL], loop: true, html5: true, prelo
     loadHovers();
     loadSwitches();
     loadBattle();
+    loadJsfx();
     return true;
   }
 
@@ -242,9 +247,9 @@ const titleBgm = new Howl({ src: [TITLE_BGM_URL], loop: true, html5: true, prelo
       // 老板留言 #56：骰子滚动声改为多段随机碰撞嗒声（匹配 640ms 翻滚期，末段落定重音）
       let t = 0;
       while (t < .52) {
-        const step = .035 + Math.random() * .05;
-        noise({ dur: .018 + Math.random() * .022, vol: .022 + Math.random() * .03, delay: t, fHi: 4200, fLo: 1400 });
-        if (Math.random() < .4) tone({ f: 2100 + Math.random() * 1500, type: 'sine', dur: .03, vol: .012, delay: t });
+        const step = .035 + Random.random('audio') * .05;
+        noise({ dur: .018 + Random.random('audio') * .022, vol: .022 + Random.random('audio') * .03, delay: t, fHi: 4200, fLo: 1400 });
+        if (Random.random('audio') < .4) tone({ f: 2100 + Random.random('audio') * 1500, type: 'sine', dur: .03, vol: .012, delay: t });
         t += step;
       }
       noise({ dur: .05, vol: .05, delay: .54, fHi: 2600, fLo: 700 });
@@ -268,6 +273,36 @@ const titleBgm = new Howl({ src: [TITLE_BGM_URL], loop: true, html5: true, prelo
       tone({ f: f * 2, type: 'sine', dur: .2, vol: .018, delay: i * .1 + .02 });
     }),
   };
+  /* ---------- jsfxr 采样（程序化生成 wav，scripts/jsfxr-generate.cjs 可再生成）---------- */
+  const JSFX_URLS = {
+    gain:    assetUrl('assets/sfx/jsfxr/pickup.wav'),
+    confirm: assetUrl('assets/sfx/jsfxr/confirm.wav'),
+    deny:    assetUrl('assets/sfx/jsfxr/error.wav'),
+    levelup: assetUrl('assets/sfx/jsfxr/levelup.wav'),
+    strike:  assetUrl('assets/sfx/jsfxr/hit.wav'),
+  };
+  let jsfxBuffers = null; // null=未加载 {}=加载中/部分就绪
+  function loadJsfx() {
+    if (jsfxBuffers) return;
+    jsfxBuffers = {};
+    Promise.all(Object.entries(JSFX_URLS).map(([key, url]) =>
+      decodeQueued(url).then(buf => { jsfxBuffers[key] = normalizeBuffer(buf); }).catch(() => {})
+    )).catch(() => { /* 缺位时该键无声，不回退合成音（语义不同） */ });
+  }
+  function playJsfx(name) {
+    const buf = jsfxBuffers && jsfxBuffers[name];
+    if (!buf) return false;
+    try {
+      const src = ctx.createBufferSource();
+      src.buffer = buf;
+      const g = ctx.createGain();
+      g.gain.value = 0.6;
+      src.connect(g); g.connect(sfxGain);
+      src.start();
+      return true;
+    } catch (e) { return false; }
+  }
+
   function sfx(name) {
     if (muted || sfxOff) return;
     if (!ensure()) return;
@@ -277,6 +312,8 @@ const titleBgm = new Howl({ src: [TITLE_BGM_URL], loop: true, html5: true, prelo
       try {
         const src = ctx.createBufferSource();
         src.buffer = pool[Math.floor(Random.random('audio') * pool.length)];
+        // SFX 变调随机化（audio-design）：±5% 播放速率，连续打击不机械
+        src.playbackRate.value = 0.95 + Random.random('audio') * 0.1;
         const g = ctx.createGain();
         g.gain.value = BATTLE_GAIN[name] || 0.5;
         src.connect(g); g.connect(sfxGain);
@@ -284,6 +321,8 @@ const titleBgm = new Howl({ src: [TITLE_BGM_URL], loop: true, html5: true, prelo
         return;
       } catch (e) { /* 落入合成回退 */ }
     }
+    // jsfxr 采样（gain/confirm/deny/levelup/strike）：语义独立，不与合成音互为回退
+    if (playJsfx(name)) return;
     const fn = SFX[name];
     if (!fn) return;
     try { fn(); } catch (e) { /* 静默 */ }
@@ -295,7 +334,7 @@ const titleBgm = new Howl({ src: [TITLE_BGM_URL], loop: true, html5: true, prelo
   function syncBgm() {
     const on = musicMode && !muted && !musicOff;
     const cur = activeBgm();
-    const target = BASE_MUSIC * musicVol;
+    const target = BASE_MUSIC * dbGain(musicVol) * (ducked ? 0.45 : 1);
     [bgm, titleBgm].forEach(track => {
       track.mute(!on);
       if ((track !== cur || !on) && track.playing()) {
@@ -331,6 +370,13 @@ const titleBgm = new Howl({ src: [TITLE_BGM_URL], loop: true, html5: true, prelo
     try { localStorage.setItem('sdt-music-off', musicOff ? '1' : '0'); } catch (e) {}
     syncBgm();
   }
+  // 战斗 ducking 开关（battle.core 进出战斗时调用）
+  function setDucked(v) {
+    v = !!v;
+    if (v === ducked) return;
+    ducked = v;
+    syncBgm();
+  }
   // 只关音效（设置页）
   function setSfxMuted(m) {
     sfxOff = !!m;
@@ -340,14 +386,14 @@ const titleBgm = new Howl({ src: [TITLE_BGM_URL], loop: true, html5: true, prelo
   function setMusicVolume(v) {
     musicVol = Math.min(1, Math.max(0, +v || 0));
     try { localStorage.setItem('sdt-music-vol', String(musicVol)); } catch (e) {}
-    const target = BASE_MUSIC * musicVol;
+    const target = BASE_MUSIC * dbGain(musicVol) * (ducked ? 0.45 : 1);
     bgm.volume(target);
     titleBgm.volume(target);
   }
   function setSfxVolume(v) {
     sfxVol = Math.min(1, Math.max(0, +v || 0));
     try { localStorage.setItem('sdt-sfx-vol', String(sfxVol)); } catch (e) {}
-    if (sfxGain) sfxGain.gain.value = BASE_SFX * sfxVol;
+    if (sfxGain) sfxGain.gain.value = BASE_SFX * dbGain(sfxVol);
   }
   // 自动播放策略：首次交互后恢复上下文；若此前已选定 BGM 则立即开声
   function kick() {
@@ -381,7 +427,7 @@ const titleBgm = new Howl({ src: [TITLE_BGM_URL], loop: true, html5: true, prelo
 
   window.SDT = window.SDT || {};
   window.SDT.Sound = {
-    sfx, music, setMuted, setMusicMuted, setSfxMuted, setMusicVolume, setSfxVolume, ensure,
+    sfx, music, setMuted, setMusicMuted, setSfxMuted, setMusicVolume, setSfxVolume, setDucked, ensure,
     get muted() { return muted; },
     get musicMuted() { return musicOff; },
     get sfxMuted() { return sfxOff; },

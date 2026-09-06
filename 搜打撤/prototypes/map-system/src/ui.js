@@ -284,7 +284,15 @@ import { Random } from './random.js';
       this.el.overlay.hidden = false;
       if ((!wasOpen || prevMode !== mode) && SDT.Motion) SDT.Motion.overlayIn(card);
       // 只在弹窗真正打开/切换模式时播开窗音效——战斗内反复 render 不刷音效
-      if (!wasOpen || prevMode !== mode) SDT.Sound.sfx('open');
+      if (!wasOpen || prevMode !== mode) {
+        SDT.Sound.sfx('open');
+        // 焦点导航（game-ui-ux）：打开/换页时把焦点交给首个可交互元素，键盘 Tab/Enter/Esc 可操作
+        requestAnimationFrame(() => {
+          if (this.el.overlay.hidden) return;
+          const focusables = this.el.ovBody.querySelectorAll('button:not([disabled]), input:not([type="range"]), [tabindex]:not([tabindex="-1"])');
+          if (focusables.length) focusables[0].focus({ preventScroll: true });
+        });
+      }
     },
 
     hideOverlay() {

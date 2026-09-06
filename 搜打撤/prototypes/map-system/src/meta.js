@@ -49,6 +49,7 @@ import { characterFor, characterName, migrateCharacterProgress } from './charact
       d.xp -= xpForNext(d.lv);
       d.lv++; ups++;
       B().save();
+      if (SDT.Sound) SDT.Sound.sfx('levelup');
       if (SDT.UI) SDT.UI.log(`[[icon:medal]] <b>${characterName(cls)}</b> 熟练度提升！现在是 <b>Lv.${d.lv}</b>（出征 ${perkText(d.lv)}）`, 'ok');
     }
     B().save();

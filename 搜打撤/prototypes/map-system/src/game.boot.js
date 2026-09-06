@@ -74,17 +74,21 @@ configureGameRuntime({ openClassChoice, openBaseHub, rebuildNotes, resize: () =>
       renderScheduler.invalidate();
     }, { passive: false });
 
+    // 键盘走动作映射层（src/input.js）：玩法读动作，键位是数据（可改键/可接手柄）
     window.addEventListener('keydown', (e) => {
       const tag = e.target && e.target.tagName;
       if (tag === 'TEXTAREA' || tag === 'INPUT') return;
-      if (e.code === 'Space' || e.code === 'Enter') { e.preventDefault(); roll(); }
-      else if (e.key.toLowerCase() === 'q' || e.key.toLowerCase() === 'e') { cam.angle += e.key.toLowerCase() === 'q' ? -.2 : .2; renderScheduler.invalidate(); }
-      else if (e.key.toLowerCase() === 'g') { cam.cx=720; cam.cy=720; cam.zoom=1.1; renderScheduler.invalidate(); }
-      else if (e.key === 'b' || e.key === 'B') showBackpack();
-      else if (e.key === 'f' || e.key === 'F') {
-        cam.cx = game.pos.x; cam.cy = game.pos.y; cam.clamp(); renderScheduler.invalidate();
+      const action = SDT.Input && SDT.Input.actionFor(e);
+      if (!action) return;
+      switch (action) {
+        case 'roll': e.preventDefault(); roll(); break;
+        case 'camRotateL': cam.angle -= .2; renderScheduler.invalidate(); break;
+        case 'camRotateR': cam.angle += .2; renderScheduler.invalidate(); break;
+        case 'camOverview': cam.cx=720; cam.cy=720; cam.zoom=1.1; renderScheduler.invalidate(); break;
+        case 'camFocus': cam.cx = game.pos.x; cam.cy = game.pos.y; cam.clamp(); renderScheduler.invalidate(); break;
+        case 'backpack': showBackpack(); break;
+        case 'nodeNumbers': game.toggles.index = !game.toggles.index; if (UI.el.tglIndex) UI.el.tglIndex.checked = game.toggles.index; renderScheduler.invalidate(); break;
       }
-      else if (e.key === 'n' || e.key === 'N') { game.toggles.index = !game.toggles.index; if (UI.el.tglIndex) UI.el.tglIndex.checked = game.toggles.index; renderScheduler.invalidate(); }
     });
 
     UI.el.bagBtn.addEventListener('click', () => showBackpack());
@@ -187,24 +191,38 @@ configureGameRuntime({ openClassChoice, openBaseHub, rebuildNotes, resize: () =>
     // 全屏不透明页（事件/节点/背包页/房间战斗）盖住画布时同样跳帧，不重绘被遮挡的画布
     const ov = UI.el.overlay;
     const covered = document.hidden || (!ov.hidden && !ov.querySelector('.battle-stage') && (ov.classList.contains('opaque') || ov.classList.contains('room-view')));
-    game.time += dt;
-    if (ELAPSED_STATES.has(game.state)) game.elapsed += dt;
+    const ts = (SDT.FX && SDT.FX.timeScale) || 1;
+    const sdt = dt * ts;   // hit-stop 冻结世界：逻辑时间缩放，rAF 与恢复计时仍走真实时间
+    game.time += sdt;
+    if (ELAPSED_STATES.has(game.state)) game.elapsed += sdt;
     // 同步到 body，驱动 CSS 状态样式（提示条显隐 / 掷骰按钮呼吸灯）
     if (document.body.dataset.state !== game.state) document.body.dataset.state = game.state;
     const fxActive = SDT.FX && (SDT.FX.floats.length || SDT.FX.pulses.length || SDT.FX.shakes.length);
-    const active = game.battleActive || game.state === 'moving' || game.state === 'rolling' || !!fxActive;
-    // 移动时镜头平滑跟随棋子
-    if (game.state === 'moving') {
-      const k = Math.min(1, dt * 5);
-      cam.cx += (game.pos.x - cam.cx) * k;
-      cam.cy += (game.pos.y - cam.cy) * k;
+    // 对局内（含站立 idle：棋盘火光/结点呼吸是持续动画）一律 active 120；标题等未开局画面走 idle 60
+    const active = game.runActive || game.battleActive || game.state === 'moving' || game.state === 'rolling' || !!fxActive;
+    // 镜头帧率无关地平滑追随棋子（指数趋近，勿用每帧固定 0.1 的 lerp）；大距离跳变（读档/新局/切层）直接贴合
+    if (cam && game.pos && (cam.cx !== game.pos.x || cam.cy !== game.pos.y)) {
+      if (Math.abs(game.pos.x - cam.cx) + Math.abs(game.pos.y - cam.cy) > MAP.tile * 4) {
+        cam.cx = game.pos.x; cam.cy = game.pos.y;
+      } else {
+        const k = 1 - Math.exp(-sdt * 10);
+        cam.cx += (game.pos.x - cam.cx) * k;
+        cam.cy += (game.pos.y - cam.cy) * k;
+      }
       cam.clamp();
     }
     // 模拟按每次 rAF 的真实 dt 更新；绘制可以降频。若只在 draw 帧更新，165 Hz 屏幕上
     // dt 会被丢掉约 2/3，镜头会变慢并呈现不均匀的追赶感。
     if (!renderScheduler.shouldDraw(now, { covered, active })) return;
-    
+
+    // 帧时间分桶（performance-optimization：先测量再优化）——EMA 平滑，供 perf 基准/排查读取
+    const t0 = performance.now();
     try { SDT.Renderer.draw(ctx, game); } catch (e) { console.error('渲染异常：', e); }
+    const renderMs = performance.now() - t0;
+    const stats = SDT.__frameStats || (SDT.__frameStats = { updateMs: 0, renderMs: 0, fps: 0 });
+    stats.renderMs = stats.renderMs * 0.9 + renderMs * 0.1;
+    stats.updateMs = stats.updateMs * 0.9 + (dt * 1000 - renderMs > 0 ? dt * 1000 - renderMs : 0) * 0.1;
+    stats.fps = stats.fps * 0.9 + (1 / Math.max(dt, 1e-4)) * 0.1;
     UI.refreshTime(game);
   }
 
@@ -232,7 +250,7 @@ configureGameRuntime({ openClassChoice, openBaseHub, rebuildNotes, resize: () =>
     });
     // 预加载选档页存档卡背景图，避免首次打开时解码卡顿
     const slotBg = new Image();
-    slotBg.src = new URL('../assets/slot-bg-knight-fantasy.jpg', import.meta.url).href;
+    slotBg.src = new URL('../assets/slot-bg-knight-fantasy.webp', import.meta.url).href;
     document.getElementById('btnHome').addEventListener('click', exitToTitle);
     // 音效/背景乐开关（持久化在 sound.js）
     const btnMute = document.getElementById('btnMute');

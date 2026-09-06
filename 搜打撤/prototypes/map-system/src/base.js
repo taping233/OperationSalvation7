@@ -4,6 +4,14 @@ import { Random } from './random.js';
 
   const SLOT_KEY = (i) => 'sdt-base-v2-slot' + i;
   const LEGACY_KEY = 'sdt-base-v1';   // 旧版全局基地（v0.20 及之前），启动时迁移
+  // 坏档备份键：解析失败时原串转存于此（基地是跨局数据，损坏比对局档更严重）
+  const CORRUPT_KEY = (i) => 'sdt-base-' + i + '-corrupt';
+  // 基地 schema 版本：破坏性变更时 +1 并在 BASE_MIGRATIONS 补纯函数迁移
+  const BASE_VERSION = 1;
+  const BASE_MIGRATIONS = {
+    // 0→1：首个显式版本，字段缺省由 mergeDef/adopt 兜底，盖章即可
+  };
+  const issues = {};   // 档位 -> 'corrupt' | 'tooNew'，供 UI 查询
   const rules = () => window.SDT.MAP.rules;
   // 「初始攻击」初始牌：能进消耗口袋（对局中复原用），但永远不入卡牌仓库
   const isSha = (card) => !!card && (card.id === 'builtin-sha' ||
@@ -66,11 +74,37 @@ import { Random } from './random.js';
   }
 
   function parseRaw(i) {
-    try {
-      const s = JSON.parse(localStorage.getItem(SLOT_KEY(i)));
-      return (s && typeof s === 'object') ? s : null;
-    } catch (e) { return null; }
+    let raw = null;
+    try { raw = localStorage.getItem(SLOT_KEY(i)); } catch (e) { return null; }
+    if (raw == null) return null;
+    let s;
+    try { s = JSON.parse(raw); }
+    catch (e) { return _corrupt(i, raw); }
+    if (!s || typeof s !== 'object') return _corrupt(i, raw);
+    const v = +s.version || 0;
+    if (v > BASE_VERSION) {
+      // 存档完好但来自更新的版本：原样保留不碰，拒绝读取
+      issues[i] = 'tooNew';
+      console.warn(`[base] 档位 ${i} 基地版本(${v})新于当前游戏(${BASE_VERSION})，拒绝读取`);
+      return null;
+    }
+    let mv = v;
+    while (mv < BASE_VERSION) {
+      const m = BASE_MIGRATIONS[mv];
+      if (m) s = m(s);
+      mv++;
+      s.version = mv;
+    }
+    return s;
   }
+  // 坏档处理：原串备份到 corrupt 键后返回 null（原键不动，玩家决定是否覆盖重开）
+  function _corrupt(i, raw) {
+    issues[i] = 'corrupt';
+    try { localStorage.setItem(CORRUPT_KEY(i), raw); } catch (e) { /* 存储不可用 */ }
+    console.warn(`[base] 档位 ${i} 基地数据损坏，原串已备份到 ${CORRUPT_KEY(i)}`);
+    return null;
+  }
+  function issue(i) { return issues[i] || null; }
 
   // 启动迁移：旧全局基地 → 每一个已有对局存档的档位（都没有则给档位 1）
   function migrateLegacy(existingSlots) {
@@ -95,7 +129,11 @@ import { Random } from './random.js';
 
   function save() {
     if (!slot) return;   // 未选档不落盘（标题界面的数据只读）
-    try { localStorage.setItem(SLOT_KEY(slot), JSON.stringify(data)); } catch (e) { /* 静默 */ }
+    try {
+      localStorage.setItem(SLOT_KEY(slot), JSON.stringify({ ...data, version: BASE_VERSION }));
+      delete issues[slot];
+      try { localStorage.removeItem(CORRUPT_KEY(slot)); } catch (e) { /* 无关紧要 */ }
+    } catch (e) { /* 静默 */ }
   }
 
   // 重开档位：基地回到初始状态（覆盖开新档 / 空档开新档时调用）
@@ -319,6 +357,7 @@ import { Random } from './random.js';
   window.SDT.Base = {
     SLOT_KEY, LEGACY_KEY,
     migrateLegacy, use, save, reset, peek, wipe, hasSlot,
+    issue, CORRUPT_KEY, BASE_VERSION,
     get slot() { return slot; },
     get data() { return data; },
     bagCap, safeCap, stashCap, stashUsed, stashRoom,

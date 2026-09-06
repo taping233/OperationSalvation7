@@ -39,4 +39,4 @@ function eventNarrative(cardId) {
   return { intro, choices };
 }
 
-export { eventNarrative, parseChoice };
+export { eventNarrative, parseChoice, KNOTS };

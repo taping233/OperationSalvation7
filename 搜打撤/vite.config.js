@@ -107,6 +107,11 @@ export default defineConfig({
       output: {
         entryFileNames: 'assets/js/[name]-[hash].js',
         chunkFileNames: 'assets/js/[name]-[hash].js',
+        // 大依赖各自成 chunk：主入口回到 500kB 以下，且库不升级时哈希稳定利于缓存
+        manualChunks(id) {
+          if (/[\\/]node_modules[\\/](three|pixi\.js|@pixi)[\\/]/.test(id)) return 'vendor-render';
+          if (/[\\/]node_modules[\\/](howler|motion|inkjs|sortablejs)[\\/]/.test(id)) return 'vendor-misc';
+        },
       },
     },
   },
