@@ -98,6 +98,7 @@ import { Random } from './random.js';
       UI.hideOverlay();
       G.state = 'idle';
       cur = null;
+      queue = [];   // 开完即清：isOpen 用 queue.length 判终态，残留会恒 true 锁死背包
       const cb = onDone;
       onDone = null;
       if (cb) cb();
