@@ -1,0 +1,64 @@
+{
+  "rules": {
+    "backpack": {
+      "max": 30,
+      "safeMax": 6,
+      "safeStart": 2,
+      "safeUpgradeRations": 2,
+      "start": 16,
+      "upgradeWood": 2
+    },
+    "bagMax": 30,
+    "bagSize": 16,
+    "bagUpgradeWood": 2,
+    "base": {
+      "stashMax": 49,
+      "stashStart": 25,
+      "stashUpgradeSlots": 3,
+      "stashUpgradeWood": 2
+    },
+    "battle": {
+      "bossDeckSize": 15,
+      "energy": 2,
+      "handMax": 8,
+      "startDraw": 5,
+      "starterAttack": 5,
+      "turnDraw": 1
+    },
+    "battleEnergy": 2,
+    "battleHandMax": 8,
+    "battleStartDraw": 5,
+    "battleTurnDraw": 1,
+    "bossDeckSize": 15,
+    "diceSides": 3,
+    "emergencyExitCost": 10,
+    "fireClassCardChance": 0.3,
+    "fireHeal": 8,
+    "growth": {
+      "playerAtk": 4,
+      "playerMaxHp": 30
+    },
+    "map": {
+      "diceSides": 3,
+      "emergencyExitCost": 10,
+      "fireClassCardChance": 0.3,
+      "fireHeal": 8,
+      "staminaMax": 60,
+      "staminaWarn": 10,
+      "stepMs": 340
+    },
+    "playerAtk": 4,
+    "playerMaxHp": 30,
+    "safeMax": 6,
+    "safeStart": 2,
+    "safeUpgradeRations": 2,
+    "staminaMax": 60,
+    "staminaWarn": 10,
+    "starterSha": 5,
+    "stashMax": 49,
+    "stashStart": 25,
+    "stashUpgradeSlots": 3,
+    "stashUpgradeWood": 2,
+    "stepMs": 340
+  }
+}

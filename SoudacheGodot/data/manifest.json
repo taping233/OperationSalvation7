@@ -1,0 +1,32 @@
+{
+  "encoding": "UTF-8",
+  "files": {
+    "cards": {
+      "count": 243,
+      "path": "cards.json",
+      "sha256": "86ffb29150b1ec286ce7f6806d0e91fc0bfb03a4f9cbfb95300352a2be560a32",
+      "source": "cards.js",
+      "starterCount": 3
+    },
+    "characters": {
+      "count": 5,
+      "path": "characters.json",
+      "sha256": "a915e1e7bf090951d09c9e5a6e4a928b1255d5ae74af04a9a801adaa9ff65869",
+      "source": "characters.js"
+    },
+    "map": {
+      "layers": 3,
+      "path": "map.json",
+      "sha256": "558482a34f1381791681c267f6b2311b4f477404db16fb9c159d10840a7bab26",
+      "source": "mapData.js"
+    },
+    "rules": {
+      "path": "rules.json",
+      "sha256": "c302fe9399225ed0f83b519185ad45f269b0c4b489fa44b18d40efde0c5a9b8e",
+      "source": "rules.js"
+    }
+  },
+  "generatedBy": "SoudacheGodot/tools/export_data.mjs",
+  "schemaVersion": 1,
+  "source": "搜打撤/game/src"
+}

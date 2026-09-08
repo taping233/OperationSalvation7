@@ -24,3 +24,7 @@ output/
 /perf2.json
 /.tmp/
 /tmp/
+/.tools/
+/SoudacheGodot/.godot/
+/SoudacheGodot/**/bin/
+/SoudacheGodot/**/obj/

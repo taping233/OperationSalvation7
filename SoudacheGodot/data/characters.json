@@ -1,0 +1,88 @@
+{
+  "characters": [
+    {
+      "bg": "人物外观与背景设定以五张最终立绘为准。",
+      "color": "#ed9b53",
+      "hair": "#e7edf0",
+      "id": "shuangling",
+      "name": "无",
+      "outfit": "#26333d",
+      "role": "突进 · 斩击",
+      "rulesetId": "侠客",
+      "scale": 1,
+      "skin": "#edc3ac",
+      "tag": "待立绘确认",
+      "task": "待五张立绘完成后补充。",
+      "visualId": "shuangling"
+    },
+    {
+      "bg": "人物外观与背景设定以五张最终立绘为准。",
+      "color": "#ad9ddd",
+      "hair": "#29313d",
+      "id": "baiqi",
+      "name": "常无欲",
+      "outfit": "#e8e5dc",
+      "role": "契印 · 异变",
+      "rulesetId": "降临者",
+      "scale": 1.12,
+      "skin": "#dec0af",
+      "tag": "待立绘确认",
+      "task": "待五张立绘完成后补充。",
+      "visualId": "baiqi"
+    },
+    {
+      "bg": "人物外观与背景设定以五张最终立绘为准。",
+      "color": "#e9bd69",
+      "hair": "#78533b",
+      "id": "lituan",
+      "name": "白塔",
+      "outfit": "#71604a",
+      "role": "元素 · 装置",
+      "rulesetId": "法师",
+      "scale": 0.74,
+      "skin": "#e1b191",
+      "tag": "待立绘确认",
+      "task": "待五张立绘完成后补充。",
+      "visualId": "lituan"
+    },
+    {
+      "bg": "人物外观与背景设定以五张最终立绘为准。",
+      "color": "#d0805a",
+      "hair": "#ecedf0",
+      "id": "xuanli",
+      "name": "玄砾",
+      "outfit": "#303b42",
+      "role": "重击 · 护甲",
+      "rulesetId": "战士",
+      "scale": 1.25,
+      "skin": "#69463d",
+      "tag": "待立绘确认",
+      "task": "待五张立绘完成后补充。",
+      "visualId": "xuanli"
+    },
+    {
+      "bg": "人物外观与背景设定以五张最终立绘为准。",
+      "color": "#81bcb0",
+      "hair": "#285a59",
+      "id": "dengkui",
+      "name": "灯葵",
+      "outfit": "#dedbd0",
+      "role": "修复 · 抑制",
+      "rulesetId": "牧师",
+      "scale": 1,
+      "skin": "#dcb397",
+      "tag": "待立绘确认",
+      "task": "待五张立绘完成后补充。",
+      "visualId": "dengkui"
+    }
+  ],
+  "legacy": {
+    "刺客": "侠客",
+    "剑客": "侠客",
+    "召唤师": "法师",
+    "守卫": "战士",
+    "授印者": "牧师",
+    "术士": "牧师",
+    "游侠": "侠客"
+  }
+}
