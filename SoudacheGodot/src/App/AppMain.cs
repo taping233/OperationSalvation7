@@ -23,15 +23,18 @@ public partial class AppMain : Control
     {
         _screenHost = GetNode<Control>("ScreenHost");
         AttachCore(new CoreGameAdapter());
-        var initialScreen = Array.IndexOf(OS.GetCmdlineUserArgs(), "--smoke-battle") >= 0 ? "battle" : "menu";
+        var args = OS.GetCmdlineUserArgs();
+        var initialScreen = Array.IndexOf(args, "--smoke-battle") >= 0 ? "battle"
+            : Array.IndexOf(args, "--smoke-map") >= 0 ? "map"
+            : Array.IndexOf(args, "--smoke-run") >= 0 ? "run"
+            : "menu";
         ShowScreen(initialScreen);
     }
 
     public void AttachCore(ICoreUiPort coreUiPort)
     {
         _coreUiPort = coreUiPort;
-        if (_activeScreen is BattleScreen battle)
-            battle.BindCore(coreUiPort);
+        BindActiveScreen();
     }
 
     private void ShowScreen(string screenKey)
@@ -61,11 +64,7 @@ public partial class AppMain : Control
         _activeScreen = packed.Instantiate<UiScreen>();
         _activeScreen.NavigateRequested += OnNavigateRequested;
         _screenHost.AddChild(_activeScreen);
-        if (_activeScreen is BattleScreen battleScreen && _coreUiPort != null)
-        {
-            battleScreen.BindCore(_coreUiPort);
-            _coreUiPort.PublishCurrentState();
-        }
+        BindActiveScreen();
     }
 
     private void OnNavigateRequested(string screenKey)
@@ -76,5 +75,27 @@ public partial class AppMain : Control
             return;
         }
         ShowScreen(screenKey);
+    }
+
+    private void BindActiveScreen()
+    {
+        if (_coreUiPort == null || _activeScreen == null)
+            return;
+        switch (_activeScreen)
+        {
+            case BattleScreen battle:
+                battle.BindCore(_coreUiPort);
+                break;
+            case RunScreen run:
+                run.BindCore(_coreUiPort);
+                break;
+            case MapScreen map:
+                map.BindCore(_coreUiPort);
+                break;
+            case MenuScreen menu:
+                menu.BindCore(_coreUiPort);
+                break;
+        }
+        _coreUiPort.PublishCurrentState();
     }
 }

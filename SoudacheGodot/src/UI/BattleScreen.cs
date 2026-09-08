@@ -11,6 +11,10 @@ public partial class BattleScreen : UiScreen
     private Label _turnLabel = null!;
     private Label _energyLabel = null!;
     private Label _statusLabel = null!;
+    private Label _playerStateLabel = null!;
+    private Label _enemyStateLabel = null!;
+    private Button _drawPileButton = null!;
+    private Button _discardPileButton = null!;
     private CardHandLayout _handLayout = null!;
     private int _turn = 1;
     private int _energy = 3;
@@ -60,21 +64,20 @@ public partial class BattleScreen : UiScreen
         arena.SizeFlagsVertical = Control.SizeFlags.ExpandFill;
         ScreenChrome.AddBody(arena, "敌方编组、意图、血量和角色立绘将在 BattleSnapshot 接入后显示。\n当前不执行任何原作规则或数值。");
         var foeRow = ScreenChrome.Row(arena, 16);
-        AddUnitBadge(foeRow, "未知敌影", "意图：—");
-        AddUnitBadge(foeRow, "未知敌影", "意图：—");
-        AddUnitBadge(foeRow, "未知敌影", "意图：—");
+        _playerStateLabel = AddUnitBadge(foeRow, "远征者", "等待 Core");
+        _enemyStateLabel = AddUnitBadge(foeRow, "敌方目标", "意图：攻击");
 
         var combatRow = ScreenChrome.Row(root, 12);
         combatRow.CustomMinimumSize = new Vector2(0, 270);
 
         var piles = ScreenChrome.PanelContent(combatRow, "牌堆", UiTheme.PanelRaised);
         piles.CustomMinimumSize = new Vector2(190, 0);
-        var drawPile = UiTheme.Button("▣\n牌库\n18（占位）", new Vector2(156, 86));
-        drawPile.Pressed += () => _corePort?.RequestPileView("draw");
-        piles.AddChild(drawPile);
-        var discardPile = UiTheme.Button("▤\n弃牌\n4（占位）", new Vector2(156, 86));
-        discardPile.Pressed += () => _corePort?.RequestPileView("discard");
-        piles.AddChild(discardPile);
+        _drawPileButton = UiTheme.Button("▣\n牌库\n—", new Vector2(156, 86));
+        _drawPileButton.Pressed += () => _corePort?.RequestPileView("draw");
+        piles.AddChild(_drawPileButton);
+        _discardPileButton = UiTheme.Button("▤\n弃牌\n—", new Vector2(156, 86));
+        _discardPileButton.Pressed += () => _corePort?.RequestPileView("discard");
+        piles.AddChild(_discardPileButton);
 
         var handPanel = ScreenChrome.PanelContent(combatRow, "手牌 · 点击卡牌预览", UiTheme.PanelSurface);
         handPanel.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
@@ -103,7 +106,7 @@ public partial class BattleScreen : UiScreen
         ScreenChrome.AddBody(footer, "UI 参考：手牌按数量扇形排列，悬停抬升；牌堆显示计数并可打开查看层。规则接口保持外置。");
     }
 
-    private void AddUnitBadge(Control parent, string title, string intent)
+    private Label AddUnitBadge(Control parent, string title, string intent)
     {
         var panel = new PanelContainer();
         panel.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
@@ -112,7 +115,9 @@ public partial class BattleScreen : UiScreen
         var content = ScreenChrome.Column(panel, 6);
         content.AddChild(UiTheme.Label(title, 17, UiTheme.Frost));
         content.AddChild(UiTheme.Label(intent, 14, UiTheme.Danger));
-        content.AddChild(UiTheme.Label("HP — / —   护盾 —", 14, UiTheme.Muted));
+        var state = UiTheme.Label("HP — / —   护盾 —", 14, UiTheme.Muted);
+        content.AddChild(state);
+        return state;
     }
 
     private void EndTurnPlaceholder()
@@ -150,6 +155,14 @@ public partial class BattleScreen : UiScreen
             _turnLabel.Text = $"回合 {_turn}";
         if (_energyLabel != null)
             _energyLabel.Text = $"能量 {snapshot.Energy} / {snapshot.MaxEnergy}";
+        if (_drawPileButton != null)
+            _drawPileButton.Text = $"▣\n牌库\n{snapshot.DrawPileCount}";
+        if (_discardPileButton != null)
+            _discardPileButton.Text = $"▤\n弃牌\n{snapshot.DiscardPileCount}";
+        if (_playerStateLabel != null)
+            _playerStateLabel.Text = $"HP {snapshot.PlayerHp} / {snapshot.PlayerMaxHp}   护盾 {snapshot.PlayerBlock}";
+        if (_enemyStateLabel != null)
+            _enemyStateLabel.Text = $"HP {snapshot.EnemyHp} / {snapshot.EnemyMaxHp}   护盾 {snapshot.EnemyBlock}";
         SetStatus(snapshot.StatusText);
         _handCardIds = snapshot.HandCardIds;
         if (_handLayout != null)

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -19,10 +20,10 @@ public sealed class AtomicJsonSaveService
     public string RootDirectory { get; }
     public int MaxSlots { get; }
 
-    public AtomicJsonSaveService(string rootDirectory, int maxSlots = 10)
+    public AtomicJsonSaveService(string rootDirectory, int maxSlots = SaveSchema.MaxSlots)
     {
         if (string.IsNullOrWhiteSpace(rootDirectory)) throw new ArgumentException("Save directory is required.", nameof(rootDirectory));
-        if (maxSlots <= 0) throw new ArgumentOutOfRangeException(nameof(maxSlots));
+        if (maxSlots <= 0 || maxSlots > SaveSchema.MaxSlots) throw new ArgumentOutOfRangeException(nameof(maxSlots), "The Godot save contract has exactly five slots.");
         RootDirectory = Path.GetFullPath(rootDirectory);
         MaxSlots = maxSlots;
         Directory.CreateDirectory(RootDirectory);
@@ -30,6 +31,10 @@ public sealed class AtomicJsonSaveService
 
     public string GetSlotPath(int slot) => Path.Combine(RootDirectory, $"save_{ValidateSlot(slot)}.json");
     public string GetBackupPath(int slot) => GetSlotPath(slot) + ".bak";
+    public IEnumerable<string> GetAllSlotPaths()
+    {
+        for (var slot = 0; slot < MaxSlots; slot++) yield return GetSlotPath(slot);
+    }
 
     public void Save(int slot, SaveGameDto snapshot)
     {
@@ -92,6 +97,10 @@ public sealed class AtomicJsonSaveService
         {
             return ReadAndValidate(GetBackupPath(slot));
         }
+        catch (DirectoryNotFoundException)
+        {
+            return ReadAndValidate(GetBackupPath(slot));
+        }
         catch (JsonException)
         {
             return ReadAndValidate(GetBackupPath(slot));
@@ -140,11 +149,18 @@ public sealed class AtomicJsonSaveService
     private SaveGameDto ReadAndValidate(string path)
     {
         var json = File.ReadAllText(path, new System.Text.UTF8Encoding(false));
-        var dto = JsonSerializer.Deserialize<SaveGameDto>(json, _jsonOptions)
+        using var document = JsonDocument.Parse(json, new JsonDocumentOptions { AllowTrailingCommas = false, CommentHandling = JsonCommentHandling.Disallow });
+        if (document.RootElement.ValueKind != JsonValueKind.Object) throw new SaveFormatException("Save JSON root must be an object.");
+        var dto = JsonSerializer.Deserialize<SaveGameDto>(document.RootElement.GetRawText(), _jsonOptions)
             ?? throw new SaveFormatException("Save JSON contained no object.");
+        // A missing version is the original v0 shape. Property initializers
+        // cannot distinguish that case, so inspect the raw object first.
+        if (!document.RootElement.TryGetProperty("version", out var versionElement)) dto.Version = 0;
+        else if (versionElement.ValueKind != JsonValueKind.Number || !versionElement.TryGetInt32(out var parsedVersion))
+            throw new SaveFormatException("Save version must be an integer.");
+        else dto.Version = parsedVersion;
         if (dto.Version > SaveSchema.CurrentVersion) throw new SaveVersionException(dto.Version);
-        if (dto.Version < SaveSchema.CurrentVersion)
-            throw new SaveFormatException($"Save version {dto.Version} has no registered migration.");
+        SaveMigrations.Migrate(dto);
         dto.Validate();
         return dto;
     }
@@ -157,6 +173,9 @@ public sealed class AtomicJsonSaveService
 
     private static void FallbackReplace(string temp, string target, string backup)
     {
+        // File.Replace is unavailable on some filesystems (and older Windows
+        // volumes). Copy the last known-good file before replacing the target;
+        // this ordering preserves a recoverable .bak if the process dies.
         File.Copy(target, backup, overwrite: true);
         File.Move(temp, target, overwrite: true);
     }

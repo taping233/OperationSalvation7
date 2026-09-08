@@ -20,6 +20,13 @@ public sealed class CombatantState
     public int MaxHealth { get; }
     public int Health { get; private set; }
     public int Block { get; private set; }
+    public int Armor { get; private set; }
+    public int Attack { get; set; }
+    public int SpellPower { get; set; }
+    public bool Guard { get; private set; }
+    private readonly Dictionary<CombatStatus, int> _statuses = new();
+    private readonly List<(CombatStatus Status, int Amount, int Turns)> _timedStatuses = new();
+    public IReadOnlyDictionary<CombatStatus, int> Statuses => _statuses;
     public bool IsDefeated => Health <= 0;
 
     public CombatantState(StableId id, string name, int maxHealth, bool isEnemy)
@@ -39,6 +46,89 @@ public sealed class CombatantState
         Block = checked(Block + amount);
     }
 
+    public void AddArmor(int amount)
+    {
+        if (amount < 0) throw new ArgumentOutOfRangeException(nameof(amount));
+        Armor = checked(Armor + amount);
+    }
+
+    public void SetGuard(bool enabled) => Guard = enabled;
+
+    public int GetStatus(CombatStatus status) => _statuses.TryGetValue(status, out var value) ? value : 0;
+
+    public int AddStatus(CombatStatus status, int amount = 1, int duration = 0)
+    {
+        if (amount < 0) throw new ArgumentOutOfRangeException(nameof(amount));
+        if (duration < 0) throw new ArgumentOutOfRangeException(nameof(duration));
+        var old = GetStatus(status);
+        var stacked = status is CombatStatus.Bleed or CombatStatus.Poison or CombatStatus.DamageReduction or CombatStatus.AttackUp or CombatStatus.SpellUp;
+        var next = stacked ? checked(old + amount) : Math.Max(old, duration > 0 ? duration : amount);
+        _statuses[status] = next;
+        if (duration > 0 && (status is CombatStatus.DamageReduction or CombatStatus.AttackUp or CombatStatus.SpellUp))
+            _timedStatuses.Add((status, amount, duration));
+        return next;
+    }
+
+    public bool HasStatus(CombatStatus status) => GetStatus(status) > 0;
+
+    public void ClearStatus(CombatStatus status)
+    {
+        _statuses.Remove(status);
+        _timedStatuses.RemoveAll(x => x.Status == status);
+    }
+
+    public int TickPoison()
+    {
+        var stacks = GetStatus(CombatStatus.Poison);
+        if (stacks <= 0 || HasStatus(CombatStatus.Immune)) return 0;
+        Health = Math.Max(0, Health - stacks);
+        return stacks;
+    }
+
+    public IReadOnlyList<CombatStatus> TickDurations()
+    {
+        var expired = new List<CombatStatus>();
+        foreach (var status in new[] { CombatStatus.Freeze, CombatStatus.Silence, CombatStatus.ArmorBreak, CombatStatus.HealingBan, CombatStatus.Stealth, CombatStatus.Immune })
+        {
+            if (!_statuses.TryGetValue(status, out var value) || value <= 0) continue;
+            value--;
+            if (value == 0) { _statuses.Remove(status); expired.Add(status); }
+            else _statuses[status] = value;
+        }
+        for (var i = _timedStatuses.Count - 1; i >= 0; i--)
+        {
+            var timed = _timedStatuses[i];
+            timed.Turns--;
+            if (timed.Turns <= 0)
+            {
+                _statuses[timed.Status] = Math.Max(0, GetStatus(timed.Status) - timed.Amount);
+                if (_statuses[timed.Status] == 0) _statuses.Remove(timed.Status);
+                _timedStatuses.RemoveAt(i);
+                expired.Add(timed.Status);
+            }
+            else _timedStatuses[i] = timed;
+        }
+        return expired;
+    }
+
+    public bool CanAct => !HasStatus(CombatStatus.Freeze);
+    public bool IsStealthed => HasStatus(CombatStatus.Stealth);
+    public bool BreakStealth()
+    {
+        if (!IsStealthed) return false;
+        ClearStatus(CombatStatus.Stealth);
+        return true;
+    }
+
+    public int Purify()
+    {
+        var count = 0;
+        foreach (var status in Enum.GetValues<CombatStatus>())
+            if (HasStatus(status)) { ClearStatus(status); count++; }
+        _timedStatuses.Clear();
+        return count;
+    }
+
     public DamageResult ApplyDamage(int amount)
     {
         if (amount < 0) throw new ArgumentOutOfRangeException(nameof(amount));
@@ -47,6 +137,42 @@ public sealed class CombatantState
         var healthDamage = Math.Min(Health, amount - absorbed);
         Health -= healthDamage;
         return new DamageResult(amount, absorbed, healthDamage, Health, IsDefeated);
+    }
+
+    public DamageResult ApplyDamage(int amount, DamageType type, CombatantState? source)
+    {
+        if (HasStatus(CombatStatus.Immune)) return new DamageResult(amount, 0, 0, Health, IsDefeated, type, true, false);
+        if (IsStealthed) return new DamageResult(amount, 0, 0, Health, IsDefeated, type, false, true);
+        var damage = amount;
+        if (type == DamageType.Attack)
+            damage += (source?.Attack ?? 0) + (source?.GetStatus(CombatStatus.AttackUp) ?? 0);
+        else if (type == DamageType.Spell)
+            damage += (source?.SpellPower ?? 0) + (source?.GetStatus(CombatStatus.SpellUp) ?? 0);
+        if (type == DamageType.Attack) damage += GetStatus(CombatStatus.Bleed);
+        damage = Math.Max(0, damage);
+        var guarded = false;
+        if (Guard && type != DamageType.True && !HasStatus(CombatStatus.ArmorBreak) && damage > 1)
+        {
+            damage = 1;
+            guarded = true;
+        }
+        var reduced = 0;
+        if (type != DamageType.True && HasStatus(CombatStatus.DamageReduction))
+        {
+            reduced = Math.Min(damage, GetStatus(CombatStatus.DamageReduction));
+            damage -= reduced;
+        }
+        var absorbed = 0;
+        if (type != DamageType.True && !HasStatus(CombatStatus.ArmorBreak))
+        {
+            var fromBlock = Math.Min(Block, damage);
+            Block -= fromBlock; damage -= fromBlock; absorbed += fromBlock;
+            var fromArmor = Math.Min(Armor, damage);
+            Armor -= fromArmor; damage -= fromArmor; absorbed += fromArmor;
+        }
+        var healthDamage = Math.Min(Health, Math.Max(0, damage));
+        Health -= healthDamage;
+        return new DamageResult(amount, absorbed, healthDamage, Health, IsDefeated, type, false, false, guarded, reduced);
     }
 
     public int Heal(int amount)
@@ -67,14 +193,28 @@ public readonly struct DamageResult
     public int HealthDamage { get; }
     public int RemainingHealth { get; }
     public bool Defeated { get; }
+    public DamageType Type { get; }
+    public bool Immune { get; }
+    public bool Stealthed { get; }
+    public bool Guarded { get; }
+    public int Reduced { get; }
 
     public DamageResult(int attempted, int blocked, int healthDamage, int remainingHealth, bool defeated)
+        : this(attempted, blocked, healthDamage, remainingHealth, defeated, DamageType.Fixed, false, false, false, 0) { }
+
+    public DamageResult(int attempted, int blocked, int healthDamage, int remainingHealth, bool defeated,
+        DamageType type, bool immune, bool stealthed, bool guarded = false, int reduced = 0)
     {
         Attempted = attempted;
         Blocked = blocked;
         HealthDamage = healthDamage;
         RemainingHealth = remainingHealth;
         Defeated = defeated;
+        Type = type;
+        Immune = immune;
+        Stealthed = stealthed;
+        Guarded = guarded;
+        Reduced = reduced;
     }
 }
 
@@ -87,6 +227,9 @@ public sealed class CombatState
     public StableId PlayerId { get; }
     public CombatPhase Phase { get; private set; } = CombatPhase.Setup;
     public int Turn { get; private set; }
+    public DeterministicRng Rng { get; } = new(0xC0D3_0007UL);
+    public int Energy { get; private set; }
+    public int MaxEnergy { get; private set; }
     public ActionQueue Actions { get; } = new();
     public IReadOnlyList<CombatantState> Combatants => _ordered;
 
@@ -116,6 +259,28 @@ public sealed class CombatState
         GetCombatant(PlayerId).ClearBlock();
     }
 
+    public void SetEnergy(int energy, int maxEnergy)
+    {
+        if (energy < 0 || maxEnergy < 0 || energy > maxEnergy)
+            throw new ArgumentOutOfRangeException(nameof(energy));
+        Energy = energy;
+        MaxEnergy = maxEnergy;
+    }
+
+    public int AddEnergy(int amount)
+    {
+        if (amount < 0) throw new ArgumentOutOfRangeException(nameof(amount));
+        Energy = checked(Energy + amount);
+        return amount;
+    }
+
+    public bool TrySpendEnergy(int amount)
+    {
+        if (amount < 0 || amount > Energy) return false;
+        Energy -= amount;
+        return true;
+    }
+
     public void StartEnemyTurn()
     {
         if (Phase is CombatPhase.Victory or CombatPhase.Defeat)
@@ -140,7 +305,15 @@ public sealed class CombatState
 
     public DamageResult DealDamage(StableId targetId, int amount)
     {
-        var result = GetCombatant(targetId).ApplyDamage(amount);
+        var result = GetCombatant(targetId).ApplyDamage(amount, DamageType.Fixed, null);
+        UpdateOutcome();
+        return result;
+    }
+
+    public DamageResult DealDamage(StableId sourceId, StableId targetId, int amount, DamageType type)
+    {
+        var source = TryGetCombatant(sourceId, out var attacker) ? attacker : null;
+        var result = GetCombatant(targetId).ApplyDamage(amount, type, source);
         UpdateOutcome();
         return result;
     }
@@ -152,7 +325,34 @@ public sealed class CombatState
         return target.Block;
     }
 
-    public int RestoreHealth(StableId targetId, int amount) => GetCombatant(targetId).Heal(amount);
+    public int AddArmor(StableId targetId, int amount)
+    {
+        var target = GetCombatant(targetId);
+        target.AddArmor(amount);
+        return target.Armor;
+    }
+
+    public int AddStatus(StableId targetId, CombatStatus status, int amount = 1, int duration = 0)
+        => GetCombatant(targetId).AddStatus(status, amount, duration);
+
+    public int TickPoison(StableId targetId)
+    {
+        var damage = GetCombatant(targetId).TickPoison();
+        UpdateOutcome();
+        return damage;
+    }
+
+    public IReadOnlyList<CombatStatus> TickDurations(StableId targetId) => GetCombatant(targetId).TickDurations();
+
+    public bool CanAct(StableId targetId) => GetCombatant(targetId).CanAct;
+
+    public bool BreakStealth(StableId targetId) => GetCombatant(targetId).BreakStealth();
+
+    public int RestoreHealth(StableId targetId, int amount)
+    {
+        var target = GetCombatant(targetId);
+        return target.HasStatus(CombatStatus.HealingBan) ? 0 : target.Heal(amount);
+    }
 
     public void UpdateOutcome()
     {

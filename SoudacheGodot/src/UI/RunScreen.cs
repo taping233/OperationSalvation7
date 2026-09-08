@@ -1,10 +1,27 @@
 using Godot;
+using SoudacheGodot.App;
 
 namespace SoudacheGodot.UI;
 
 /// Run preparation placeholder. The Core RunState can later feed this screen through a snapshot.
 public partial class RunScreen : UiScreen
 {
+    private Label _summary = null!;
+    private Label _status = null!;
+    private ICoreUiPort? _core;
+
+    public void BindCore(ICoreUiPort core)
+    {
+        if (_core != null) _core.RunSnapshotChanged -= ApplySnapshot;
+        _core = core;
+        _core.RunSnapshotChanged += ApplySnapshot;
+    }
+
+    public override void _ExitTree()
+    {
+        if (_core != null) _core.RunSnapshotChanged -= ApplySnapshot;
+    }
+
     protected override void Build()
     {
         UiTheme.Backdrop(this, new Color("0B171E"));
@@ -23,18 +40,19 @@ public partial class RunScreen : UiScreen
         var body = ScreenChrome.Row(root, 20);
         var roster = ScreenChrome.PanelContent(body, "选择远征角色", UiTheme.PanelSurface);
         roster.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
-        roster.AddChild(UiTheme.Label("五名核心角色概念将在此接入 Core.CharacterTable。", 16, UiTheme.Muted));
-        foreach (var name in new[] { "霜翎", "白契", "栗团", "玄砾", "灯葵" })
+        roster.AddChild(UiTheme.Label("选择角色会创建新的确定性远征状态。", 16, UiTheme.Muted));
+        foreach (var entry in new[] { ("shuangling", "霜翎"), ("baiqi", "白契"), ("lituan", "栗团"), ("xuanli", "玄砾"), ("dengkui", "灯葵") })
         {
-            var choice = UiTheme.Button(name + "   ·   概念保留", new Vector2(320, 44));
-            choice.Pressed += () => GD.Print($"Placeholder character selected: {name}");
+            var characterId = entry.Item1;
+            var choice = UiTheme.Button(entry.Item2, new Vector2(320, 44));
+            choice.Pressed += () => _core?.RequestStartRun(characterId);
             roster.AddChild(choice);
         }
 
         var brief = ScreenChrome.PanelContent(body, "运行状态", UiTheme.PanelRaised);
         brief.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
-        ScreenChrome.AddBody(brief, "Seed: —   Layer: —   Track: —");
-        ScreenChrome.AddBody(brief, "这里不写入规则或数值；只预留 RunState 快照的显示位。");
+        _summary = ScreenChrome.AddBody(brief, "尚未开始远征");
+        _status = ScreenChrome.AddBody(brief, "请选择角色");
         var map = ScreenChrome.AddNav(brief, this, "查看地图", "map");
         map.GrabFocus();
         ScreenChrome.AddNav(brief, this, "直接打开战斗竖切", "battle");
@@ -42,5 +60,11 @@ public partial class RunScreen : UiScreen
         var footer = ScreenChrome.Row(root, 14);
         ScreenChrome.AddNav(footer, this, "返回主菜单", "menu");
     }
-}
 
+    private void ApplySnapshot(RunUiSnapshot snapshot)
+    {
+        if (_summary == null) return;
+        _summary.Text = $"角色：{snapshot.CharacterDisplayName}  层级：{snapshot.LayerIndex + 1}  位置：{snapshot.TrackPosition + 1}/{snapshot.TrackLength}\n生命：{snapshot.CurrentHp}/{snapshot.MaxHp}  体力：{snapshot.Stamina}/{snapshot.MaxStamina}\n币：{snapshot.Coins}  钥匙：{snapshot.Keys}  木材：{snapshot.Wood}  口粮：{snapshot.Rations}";
+        _status.Text = snapshot.StatusText;
+    }
+}

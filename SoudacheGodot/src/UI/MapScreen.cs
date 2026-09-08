@@ -1,10 +1,27 @@
 using Godot;
+using SoudacheGodot.App;
 
 namespace SoudacheGodot.UI;
 
-/// Map placeholder: a responsive node grid that will consume MapModel snapshots later.
+/// Responsive three-ring run-map view backed by immutable UI snapshots.
 public partial class MapScreen : UiScreen
 {
+    private GridContainer _grid = null!;
+    private Label _status = null!;
+    private ICoreUiPort? _core;
+
+    public void BindCore(ICoreUiPort core)
+    {
+        if (_core != null) _core.RunSnapshotChanged -= ApplySnapshot;
+        _core = core;
+        _core.RunSnapshotChanged += ApplySnapshot;
+    }
+
+    public override void _ExitTree()
+    {
+        if (_core != null) _core.RunSnapshotChanged -= ApplySnapshot;
+    }
+
     protected override void Build()
     {
         UiTheme.Backdrop(this, new Color("0C1A22"));
@@ -18,34 +35,45 @@ public partial class MapScreen : UiScreen
 
         var root = ScreenChrome.Column(margin, 16);
         root.AddChild(UiTheme.Label("远征地图", 32, UiTheme.Frost));
-        root.AddChild(UiTheme.Label("MAP OVERVIEW  /  SNAPSHOT PLACEHOLDER", 14, UiTheme.Accent));
+        root.AddChild(UiTheme.Label("THREE-RING EXPEDITION MAP", 14, UiTheme.Accent));
 
-        var board = ScreenChrome.PanelContent(root, "三环棋盘预览", UiTheme.PanelSurface);
+        var board = ScreenChrome.PanelContent(root, "三环远征棋盘", UiTheme.PanelSurface);
         board.SizeFlagsVertical = Control.SizeFlags.ExpandFill;
-        board.AddChild(UiTheme.Label("节点布局仅用于验证响应式 UI；实际节点由 Core.MapModel 提供。", 15, UiTheme.Muted));
+        _status = UiTheme.Label("等待远征状态", 15, UiTheme.Muted);
+        board.AddChild(_status);
 
-        var grid = new GridContainer { Columns = 8 };
-        grid.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
-        grid.SizeFlagsVertical = Control.SizeFlags.ExpandFill;
-        grid.AddThemeConstantOverride("h_separation", 8);
-        grid.AddThemeConstantOverride("v_separation", 8);
-        board.AddChild(grid);
-
-        var labels = new[] { "营地", "战斗", "事件", "商店", "火堆", "宝箱", "战斗", "出口", "木材", "金币", "战斗", "钥匙", "事件", "祭坛", "战斗", "首领" };
-        for (var i = 0; i < 32; i++)
-        {
-            var label = labels[i % labels.Length];
-            var node = UiTheme.Button($"{i + 1:00}\n{label}", new Vector2(116, 58));
-            node.AddThemeFontSizeOverride("font_size", 14);
-            node.Pressed += () => GD.Print($"Placeholder map node selected: {label}");
-            grid.AddChild(node);
-        }
+        _grid = new GridContainer { Columns = 7 };
+        _grid.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
+        _grid.SizeFlagsVertical = Control.SizeFlags.ExpandFill;
+        _grid.AddThemeConstantOverride("h_separation", 8);
+        _grid.AddThemeConstantOverride("v_separation", 8);
+        board.AddChild(_grid);
 
         var footer = ScreenChrome.Row(root, 14);
-        ScreenChrome.AddNav(footer, this, "进入战斗竖切", "battle");
+        var roll = UiTheme.Button("掷三面骰", new Vector2(180, 48));
+        roll.Pressed += () => _core?.RequestRollDice();
+        footer.AddChild(roll);
+        var resolve = UiTheme.Button("结算当前房间", new Vector2(200, 48));
+        resolve.Pressed += () => _core?.RequestResolveRoom();
+        footer.AddChild(resolve);
+        ScreenChrome.AddNav(footer, this, "进入战斗", "battle");
         ScreenChrome.AddNav(footer, this, "返回远征准备", "run");
         var back = ScreenChrome.AddNav(footer, this, "返回主菜单", "menu");
         back.GrabFocus();
     }
-}
 
+    private void ApplySnapshot(RunUiSnapshot snapshot)
+    {
+        if (_grid == null) return;
+        _status.Text = $"{snapshot.Phase} · {snapshot.CurrentRoom} · {snapshot.StatusText}";
+        foreach (var child in _grid.GetChildren()) child.QueueFree();
+        foreach (var mapNode in snapshot.Nodes)
+        {
+            var marker = mapNode.IsCurrent ? "▶" : mapNode.IsResolved ? "✓" : "";
+            var node = UiTheme.Button($"{marker}{mapNode.Index + 1:00}\n{mapNode.Label}", new Vector2(116, 58));
+            node.Disabled = !mapNode.IsCurrent;
+            node.AddThemeFontSizeOverride("font_size", 14);
+            _grid.AddChild(node);
+        }
+    }
+}

@@ -98,6 +98,43 @@ public sealed class CardDeck
     public CardInstance? FindInHand(StableId instanceId) => FindIn(_hand, instanceId);
     public bool Contains(StableId instanceId) => _zones.ContainsKey(instanceId);
 
+    public int MoveAllFromHand(CardZone destination)
+    {
+        if (destination is CardZone.DrawPile or CardZone.Hand)
+            throw new ArgumentOutOfRangeException(nameof(destination), "Hand cards can only move to discard or exhaust.");
+        var moved = _hand.Count;
+        if (moved == 0) return 0;
+        var copy = _hand.ToArray();
+        foreach (var card in copy) Move(card.InstanceId, destination);
+        return moved;
+    }
+
+    public int MoveFirstFromHand(CardZone destination, int count)
+    {
+        if (count < 0) throw new ArgumentOutOfRangeException(nameof(count));
+        if (destination is CardZone.DrawPile or CardZone.Hand)
+            throw new ArgumentOutOfRangeException(nameof(destination), "Hand cards can only move to discard or exhaust.");
+        var moved = 0;
+        foreach (var card in _hand.ToArray())
+        {
+            if (moved >= count) break;
+            if (Move(card.InstanceId, destination)) moved++;
+        }
+        return moved;
+    }
+
+    public bool IsInHand(StableId instanceId) => FindInHand(instanceId) is not null;
+
+    public void ValidateInvariant()
+    {
+        var seen = new HashSet<StableId>();
+        foreach (var list in new[] { _drawPile, _hand, _discard, _exhaust })
+            foreach (var card in list)
+                if (!seen.Add(card.InstanceId) || !_zones.TryGetValue(card.InstanceId, out _))
+                    throw new InvalidOperationException("Card zones are not unique.");
+        if (seen.Count != _zones.Count) throw new InvalidOperationException("Card zone index is out of sync.");
+    }
+
     /// <summary>Moves a hand card to discard or exhaust after the caller has resolved its effects.</summary>
     public bool TryPlay(StableId instanceId, CardDefinition definition)
     {
