@@ -48,7 +48,7 @@
 
 === tt6_mystery ===
 半塌的实验准备室里，应急补给柜竟还亮着待机灯。柜门封条早已失效，屏幕只剩一行提示：请取用。
-* [翻找补给柜@@effect=mystery_supply@@detail=彩色令牌 + 2 币]
+* [翻找补给柜@@effect=mystery_supply@@detail=员工通行证A + 2 币]
   柜门弹开时滚出两枚旧硬币，压在一张彩虹色的令牌下面。你把两样都收进了口袋。
   -> END
 
@@ -66,6 +66,6 @@
 
 === tt6_systemsupply ===
 废弃控制室的补给终端还剩最后一点电量，配送无人机挂在充电架上，货舱里躺着最后的库存。
-* [对接终端@@effect=systemsupply_restock@@detail=彩色令牌 + 木材 ×1]
-  无人机咯哒一声松开货舱：一段建材和一张彩色令牌一起滑了出来。
+* [对接终端@@effect=systemsupply_restock@@detail=员工通行证A + 木材 ×1]
+  无人机咯哒一声松开货舱：一段建材和一张员工通行证A一起滑了出来。
   -> END

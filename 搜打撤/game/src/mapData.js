@@ -169,7 +169,7 @@ SDT.MAP = {
 
   // ---------- 战斗胜利宝箱掉落（设计者 2026-09-02 定版：战胜怪物 100% 掉宝箱） ----------
   // 四种宝箱规格：cards=直接获得的随机卡张数 / pickFrom=随机 N 张选 1 /
-  // coins=[min,max] 内含随机币；boss 额外掉金币/银币/铜币卡其一，并有 30% 概率掉金色令牌
+  // coins=[min,max] 内含随机币；boss 额外掉金币/银币/铜币卡其一，并有 30% 概率掉员工通行证B
   chestKinds: {
     small:  { name: '小型物资箱', icon: '[[icon:archive]]', cards: 1, coins: [1, 2] },
     medium: { name: '密封物资箱', icon: '[[icon:archive]]', pickFrom: 3, coins: [2, 3] },

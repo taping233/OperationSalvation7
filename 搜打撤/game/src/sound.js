@@ -1,12 +1,12 @@
 import { Howl, Howler } from 'howler';
 import { assetUrl } from './asset-url.js';
 import { Random } from './random.js';
-const BGM_URL = new URL('../assets/bgm-black-stream-sea.mp3', import.meta.url).href;
-// 开屏（标题）专用曲目：《直到大地变成一颗酸橙》
-const TITLE_BGM_URL = new URL('../assets/bgm-sour-orange-earth.mp3', import.meta.url).href;
-// BGM 是 4.6/7.6 MB 的长音频，走 HTML5 流式播放，避免 WebAudio 整段解码阻塞并占用大块内存。
+const BGM_URL = new URL('../assets/bgm-sour-orange-earth.mp3', import.meta.url).href;
+// 开屏（标题）专用曲目：《「离解复合」主界面》
+const TITLE_BGM_URL = new URL('../assets/bgm-liejie-fuhe.mp3', import.meta.url).href;
+// BGM 是 3.7MB 级长音频，走 HTML5 流式播放，避免 WebAudio 整段解码阻塞并占用大块内存。
 const bgm = new Howl({ src: [BGM_URL], loop: true, html5: true, preload: false, volume: 0 });
-// 开屏曲目不预载（3.7MB）：自动播放策略下首次交互前必然无声，改为首次 syncBgm 时按需加载，
+// 开屏曲目不预载（6.3MB）：自动播放策略下首次交互前必然无声，改为首次 syncBgm 时按需加载，
 // 启动带宽让给首屏图与字体；Howler 对 preload:false 的实例会在 play() 时自动 load。
 const titleBgm = new Howl({ src: [TITLE_BGM_URL], loop: true, html5: true, preload: false, volume: 0 });
   let ctx = null, master = null, sfxGain = null, clickGain = null, clickComp = null;

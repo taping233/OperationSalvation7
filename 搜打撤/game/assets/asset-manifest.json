@@ -1,12 +1,18 @@
 {
  "_comment": "资产清单(create-game-assets模板裁剪版): path/ext/bytes/license。assets:audit 校验未登记文件。",
- "generated": "2026-09-06",
- "count": 327,
+ "generated": "2026-09-08",
+ "count": 350,
  "assets": [
   {
    "path": "bgm-black-stream-sea.mp3",
    "ext": "mp3",
    "bytes": 2438907,
+   "license": "项目自有（自制/AI 生成）"
+  },
+  {
+   "path": "bgm-liejie-fuhe.mp3",
+   "ext": "mp3",
+   "bytes": 6559763,
    "license": "项目自有（自制/AI 生成）"
   },
   {
@@ -134,6 +140,132 @@
    "ext": "webp",
    "bytes": 110684,
    "license": "项目自有（自制/AI 生成）"
+  },
+  {
+   "path": "cards/items/builtin-fuyuanyao.webp",
+   "ext": "webp",
+   "bytes": 235552,
+   "license": "项目自有（NovelAI V5 生成）"
+  },
+  {
+   "path": "cards/items/starter-emergency-bandage.webp",
+   "ext": "webp",
+   "bytes": 286910,
+   "license": "项目自有（NovelAI V5 生成）"
+  },
+  {
+   "path": "cards/items/tt-crystal.webp",
+   "ext": "webp",
+   "bytes": 176252,
+   "license": "项目自有（NovelAI V5 生成）"
+  },
+  {
+   "path": "cards/items/tt-jinchuangyao.webp",
+   "ext": "webp",
+   "bytes": 144942,
+   "license": "项目自有（NovelAI V5 生成）"
+  },
+  {
+   "path": "cards/items/tt-medneedle.webp",
+   "ext": "webp",
+   "bytes": 168538,
+   "license": "项目自有（NovelAI V5 生成）"
+  },
+  {
+   "path": "cards/items/tt-token-color.webp",
+   "ext": "webp",
+   "bytes": 270484,
+   "license": "项目自有（NovelAI V5 生成）"
+  },
+  {
+   "path": "cards/items/tt-token-gold.webp",
+   "ext": "webp",
+   "bytes": 273612,
+   "license": "项目自有（NovelAI V5 生成）"
+  },
+  {
+   "path": "cards/items/tt3-blue-potion.webp",
+   "ext": "webp",
+   "bytes": 234686,
+   "license": "项目自有（NovelAI V5 生成）"
+  },
+  {
+   "path": "cards/items/tt3-demon-potion.webp",
+   "ext": "webp",
+   "bytes": 50780,
+   "license": "项目自有（NovelAI V5 生成）"
+  },
+  {
+   "path": "cards/items/tt3-houyi-potion.webp",
+   "ext": "webp",
+   "bytes": 218186,
+   "license": "项目自有（NovelAI V5 生成）"
+  },
+  {
+   "path": "cards/items/tt3-iceheart-potion.webp",
+   "ext": "webp",
+   "bytes": 201668,
+   "license": "项目自有（NovelAI V5 生成）"
+  },
+  {
+   "path": "cards/items/tt3-mind-potion.webp",
+   "ext": "webp",
+   "bytes": 202210,
+   "license": "项目自有（NovelAI V5 生成）"
+  },
+  {
+   "path": "cards/items/tt3-mixed-potion.webp",
+   "ext": "webp",
+   "bytes": 79714,
+   "license": "项目自有（NovelAI V5 生成）"
+  },
+  {
+   "path": "cards/items/tt3-mystery-potion.webp",
+   "ext": "webp",
+   "bytes": 199096,
+   "license": "项目自有（NovelAI V5 生成）"
+  },
+  {
+   "path": "cards/items/tt3-python-potion.webp",
+   "ext": "webp",
+   "bytes": 171216,
+   "license": "项目自有（NovelAI V5 生成）"
+  },
+  {
+   "path": "cards/items/tt3-savior-elixir.webp",
+   "ext": "webp",
+   "bytes": 208988,
+   "license": "项目自有（NovelAI V5 生成）"
+  },
+  {
+   "path": "cards/items/tt3-turnabout-potion.webp",
+   "ext": "webp",
+   "bytes": 125748,
+   "license": "项目自有（NovelAI V5 生成）"
+  },
+  {
+   "path": "cards/items/tt3sp-doom.webp",
+   "ext": "webp",
+   "bytes": 157540,
+   "license": "项目自有（NovelAI V5 生成）"
+  },
+  {
+   "path": "cards/items/tt4-shine-token.webp",
+   "ext": "webp",
+   "bytes": 330132,
+   "license": "项目自有（NovelAI V5 生成）"
+  },
+  {
+   "path": "cards/items/tt4-smoke-bomb.webp",
+   "ext": "webp",
+   "bytes": 259968,
+   "license": "项目自有（NovelAI V5 生成）"
+  },
+  {
+   "path": "cards/items/tt4-woodify.webp",
+   "ext": "webp",
+   "bytes": 174576,
+   "license": "项目自有（NovelAI V5 生成）"
   },
   {
    "path": "cards/martial-melee.webp",
@@ -544,6 +676,18 @@
    "license": "项目自有（自制/AI 生成）"
   },
   {
+   "path": "portraits/avatars/baiqi.webp",
+   "ext": "webp",
+   "bytes": 13808,
+   "license": "项目自有（自制/AI 生成）"
+  },
+  {
+   "path": "portraits/avatars/shuangling.webp",
+   "ext": "webp",
+   "bytes": 13582,
+   "license": "项目自有（自制/AI 生成）"
+  },
+  {
    "path": "portraits/classes/assassin.webp",
    "ext": "webp",
    "bytes": 22352,
@@ -850,18 +994,6 @@
    "license": "项目自有（自制/AI 生成）"
   },
   {
-   "path": "portraits/avatars/baiqi.webp",
-   "ext": "webp",
-   "bytes": 13808,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/avatars/shuangling.webp",
-   "ext": "webp",
-   "bytes": 13582,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
    "path": "portraits/full/assassin.webp",
    "ext": "webp",
    "bytes": 44808,
@@ -872,6 +1004,12 @@
    "ext": "webp",
    "bytes": 513796,
    "license": "项目自有（自制/AI 生成）"
+  },
+  {
+   "path": "portraits/full/baita.webp",
+   "ext": "webp",
+   "bytes": 600084,
+   "license": "项目自有（老板指定立绘）"
   },
   {
    "path": "portraits/full/descend.webp",
@@ -892,12 +1030,6 @@
    "license": "项目自有（自制/AI 生成）"
   },
   {
-   "path": "portraits/full/baita.webp",
-   "ext": "webp",
-   "bytes": 600084,
-   "license": "项目自有（老板指定立绘）"
-  },
-  {
    "path": "portraits/full/priest.webp",
    "ext": "webp",
    "bytes": 43070,
@@ -910,15 +1042,15 @@
    "license": "项目自有（自制/AI 生成）"
   },
   {
-   "path": "portraits/full/shuangling.webp",
-   "ext": "webp",
-   "bytes": 417520,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
    "path": "portraits/full/sealer.webp",
    "ext": "webp",
    "bytes": 49174,
+   "license": "项目自有（自制/AI 生成）"
+  },
+  {
+   "path": "portraits/full/shuangling.webp",
+   "ext": "webp",
+   "bytes": 417520,
    "license": "项目自有（自制/AI 生成）"
   },
   {
@@ -966,8 +1098,14 @@
   {
    "path": "scenes/battle-normal-anime-v2.webp",
    "ext": "webp",
-   "bytes": 167602,
+   "bytes": 101204,
    "license": "项目自有（自制/AI 生成）"
+  },
+  {
+   "path": "scenes/battle-snow-street.png",
+   "ext": "png",
+   "bytes": 1522306,
+   "license": "项目自有（AI 生成）"
   },
   {
    "path": "scenes/event-bandits-anime-v2.webp",
@@ -988,12 +1126,6 @@
    "license": "项目自有（自制/AI 生成）"
   },
   {
-   "path": "scenes/hub-wallpaper.jpg",
-   "ext": "jpg",
-   "bytes": 335926,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
    "path": "scenes/hub-stash.png",
    "ext": "png",
    "bytes": 34892,
@@ -1003,6 +1135,12 @@
    "path": "scenes/hub-upgrade.png",
    "ext": "png",
    "bytes": 47449,
+   "license": "项目自有（自制/AI 生成）"
+  },
+  {
+   "path": "scenes/hub-wallpaper.jpg",
+   "ext": "jpg",
+   "bytes": 335926,
    "license": "项目自有（自制/AI 生成）"
   },
   {

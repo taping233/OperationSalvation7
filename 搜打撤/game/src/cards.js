@@ -62,6 +62,7 @@ import { characterName } from './characters.js';
   const TT8_KEY = 'sdt-cards-tt8-seeded';        // 第八批：英雄卡及衍生牌（每职业 1 英雄，衍生牌围绕英雄效果）
   const TT9_KEY = 'sdt-cards-tt9-seeded';        // 第九批：生物图鉴（全部敌人信息录入，类型「生物」）
   const TT10_KEY = 'sdt-cards-tt10-v2-seeded';   // 第十批：设计者实机定版同步（2026-09-07 双向合并）；v2：清掉合并残留的错误词条（英雄卡 armor:5 等）并重播覆盖一次
+  const ITEM_RENAME_KEY = 'sdt-cards-item-renames-v1'; // 2026-09-08：道具定名 + 金创药/金疮药合并
   // 第十批退役：同设计重复 id（设计者实机已把同名卡定版在旧 id 上，见 TABLETOP10 尾部注释）
   const RETIRE_TT10 = ['tt3-freeze', 'tt3-flame-potion', 'tt3-toxic-potion', 'tt3-bleed-potion'];
   const CC_KEY = 'sdt-cards-cc2-seeded';         // 职业整合迁移（2026-09-05 定版）：11 职业 → 5 职业，逐卡改归属；v2：邪渊主宰·妲莉薇特改归降临者并撤下「九尾焚天·妲」占位卡
@@ -84,6 +85,10 @@ import { characterName } from './characters.js';
     TYPE_ART: { '武术': 'swords', '法术': 'sparkles', '生物': 'paw', '道具': 'flask', '装备': 'shield', '事件': 'question', '英雄卡': 'helmet', '资源': 'wood' },
     // 拥有伤害词条（红色伤害宝石）的类型
     DMG_TYPES: ['武术', '法术'],
+
+    // 无能量消耗的类型（2026-09-08 老板定版）：道具/生物/资源/装备/事件不耗能量，
+    // 在背包与宝箱等界面展示时隐去左上角费用角标（卡牌库中仍显示，见 cardHTML 第 3 参 opts.hideCost）
+    NO_COST_TYPES: ['道具', '生物', '资源', '装备', '事件'],
 
     // 四类伤害体系元数据（设计者 2026-09-01 定版，docs/design.md §3；
     // 2026-09-04 修订：攻击数字允许为负（在攻击力基础上减去 |n|），总伤害最低 0）
@@ -233,44 +238,49 @@ import { characterName } from './characters.js';
     // 商店按稀有度定价（币；设计者 2026-09-04 定版：武术/法术/装备/道具
     // 同稀有度同价：古朴 2 / 稀有 3 / 史诗 4 / 传说 5 / 棱彩（英雄卡）8）
     PRICE: { '初始': 1, '古朴': 2, '稀有': 3, '史诗': 4, '传说': 5, '棱彩': 8 },
-    // 商店随机槽位的稀有度权重
-    SHOP_WEIGHTS: { '初始': 30, '古朴': 30, '稀有': 20, '史诗': 12, '传说': 8 },
+    // 商店随机槽位的稀有度权重（2026-09-08 定版：与宝箱爆率同源，百分比即权重）
+    SHOP_WEIGHTS: { '古朴': 60, '稀有': 28, '史诗': 9, '传说': 3 },
 
-    // 卡牌爆率（设计者 2026-09-06 定版，宝箱掉落等「生成一张卡」场景同源）：
-    //   先按稀有度掷档：稀有 = 古朴 ×1/2，史诗 = 稀有 ×1/2，传说 = 史诗 ×1/3
-    //   （古朴:稀有:史诗:传说 = 4:2:1:1/3，传说进入常规掉落）；
-    //   精英突袭玩法下 稀有/史诗/传说 权重 ×1.2（高稀有度爆率 +20%）；
-    //   同稀有度内 资源 / 道具 的爆率比其他类型低 20%（×0.8）；
-    //   职业 / 初始卡不会直接生成（不在权重表即不出）；
-    //   宝箱只会开出 武术 / 法术 / 装备 / 道具 / 资源 五类。
-    DROP_WEIGHTS: { '古朴': 4, '稀有': 2, '史诗': 1, '传说': 1 / 3 },
-    DROP_DISCOUNT_TYPES: ['道具', '资源'],
+    // 卡牌爆率（设计者 2026-09-08 定版，商店与宝箱掉落同源）：
+    //   先按稀有度掷档：古朴 60% / 稀有 28% / 史诗 9% / 传说 3%；
+    //   精英突袭玩法下 稀有/史诗/传说 权重 ×1.2（高稀有度爆率 +20%，2026-09-06 保留）；
+    //   同稀有度内均分到每张卡牌，道具类比其他类型低 30%（×0.7，2026-09-08 定版）；
+    //   职业 / 初始 / 衍生 / 棱彩卡与生物图鉴不会直接生成（isRandomObtainable 排除）；
+    //   宝箱/商店只会开出 武术 / 法术 / 装备 / 道具 / 资源 五类。
+    DROP_WEIGHTS: { '古朴': 60, '稀有': 28, '史诗': 9, '传说': 3 },
+    DROP_DISCOUNT_TYPES: ['道具'],
+    DROP_ITEM_DISCOUNT: 0.7,
     DROP_TYPES: ['武术', '法术', '装备', '道具', '资源'],
-    // 按爆率随机抽 1 张掉落卡；taken = Set<id>（同一宝箱内尽量不重复，可选）
-    randomDropCard(taken) {
+    // 同稀有度内挑 1 张可随机获取的卡：类型均分，道具 ×0.7（taken = Set<id> 去重，可选）
+    pickOfRarity(rarity, taken) {
       const hasTaken = !!(taken && taken.size);
+      const pool = SDT.Cards.all().filter(c =>
+        c.rarity === rarity && SDT.Cards.DROP_TYPES.includes(c.type) &&
+        SDT.Cards.isRandomObtainable(c) && !(hasTaken && taken.has(c.id)));
+      if (!pool.length) return null;
+      let tw = 0;
+      const weighted = pool.map(c => {
+        const w = SDT.Cards.DROP_DISCOUNT_TYPES.includes(c.type) ? SDT.Cards.DROP_ITEM_DISCOUNT : 1;
+        tw += w; return [c, w];
+      });
+      let roll = Random.random('loot') * tw;
+      for (const [c, w] of weighted) { roll -= w; if (roll <= 0) return c; }
+      return weighted[weighted.length - 1][0];
+    },
+    // 按爆率随机抽 1 张掉落卡（先稀有度掷档，再调 pickOfRarity 档内挑卡）
+    randomDropCard(taken) {
       // 精英突袭：稀有/史诗/传说 权重 ×1.2（高稀有度爆率 +20%，2026-09-06）
       const elite = typeof window !== 'undefined' && window.SDT && window.SDT.game && window.SDT.game.mode === 'elite';
       const entries = Object.entries(SDT.Cards.DROP_WEIGHTS)
         .map(([r, w]) => [r, elite && r !== '古朴' ? w * 1.2 : w]);
       const totalW = entries.reduce((a, b) => a + b[1], 0);
       for (let tries = 0; tries < 50; tries++) {
-        // ① 稀有度先掷档（2.25:1.5:1，不受卡库各稀有度卡牌数量影响）
+        // ① 稀有度先掷档（60:28:9:3，不受卡库各稀有度卡牌数量影响）
         let roll = Random.random('loot') * totalW, rarity = entries[0][0];
         for (const [r, w] of entries) { roll -= w; if (roll <= 0) { rarity = r; break; } }
-        // ② 档内按类型权重挑卡（道具/资源 ×0.8）；该档无可用卡则重掷
-        const pool = SDT.Cards.all().filter(c =>
-          c.rarity === rarity && SDT.Cards.DROP_TYPES.includes(c.type) &&
-          SDT.Cards.isRandomObtainable(c) && !(hasTaken && taken.has(c.id)));
-        if (!pool.length) continue;
-        let tw = 0;
-        const weighted = pool.map(c => {
-          const w = SDT.Cards.DROP_DISCOUNT_TYPES.includes(c.type) ? 0.8 : 1;
-          tw += w; return [c, w];
-        });
-        let roll2 = Random.random('loot') * tw;
-        for (const [c, w] of weighted) { roll2 -= w; if (roll2 <= 0) return c; }
-        return weighted[weighted.length - 1][0];
+        // ② 档内按类型权重挑卡（道具 ×0.7）；该档无可用卡则重掷
+        const c = SDT.Cards.pickOfRarity(rarity, taken);
+        if (c) return c;
       }
       return null;
     },
@@ -323,18 +333,13 @@ import { characterName } from './characters.js';
     // 不进商店随机槽位，也不进「发现 / 随机获取卡牌」效果的卡池；
     // 2026-09-04 增补：职业稀有度卡同此排除——职业卡牌不能被发现或随机获取到，
     // 除非明确表示是从职业卡池中获取（classPool / randomClassCard 直发，不经本判定）；
-    // 后续 M1 实装发现/随机词条时必须经过本判定过滤）
-    // 「无法被随机或发现」判定（设计者 2026-09-01 定版：传说特例卡非常强力，
-    // 不进商店随机槽位，也不进「发现 / 随机获取卡牌」效果的卡池；
-    // 2026-09-04 增补：职业稀有度卡同此排除——职业卡牌不能被发现或随机获取到，
-    // 除非明确表示是从职业卡池中获取（classPool / randomClassCard 直发，不经本判定）；
     // 2026-09-05 增补：英雄卡 / 生物图鉴 / 棱彩稀有度（含元素之门等英雄衍生物）同样排除；
-    // 后续 M1 实装发现/随机词条时必须经过本判定过滤）
+    // 2026-09-08 增补（老板定版）：初始 / 职业 / 衍生 / 棱彩稀有度与生物类别的卡牌
+    // 一律不进一般发现或随机池（除非效果特意说明，如「发现 1 张其它职业的卡牌」
+    // ——那类指定池走 parsePoolNoun / classPool，不经本判定）
     isRandomObtainable(card) {
-      if (card.rarity === '初始') return false;
-      if (card.rarity === '职业') return false;
+      if (['初始', '职业', '衍生', '棱彩'].includes(card.rarity)) return false;
       if (card.type === '英雄卡' || card.type === '生物') return false;
-      if (card.rarity === '棱彩') return false;
       return !card.unrandom;
     },
 
@@ -349,17 +354,11 @@ import { characterName } from './characters.js';
       return SDT.Cards.all().filter(c => c.cls === cls);
     },
     // 随机发放职业卡（开局选职业 / 火堆 / 事件）：只从「职业」稀有度卡中取，
-    // 不含英雄卡与衍生牌——英雄卡只能走 事件拼凑/祭坛弃牌/彩色令牌 三种途径
+    // 不含英雄卡与衍生牌——英雄卡只能走 事件拼凑/祭坛弃牌/员工通行证A 三种途径
     randomClassCard(cls) {
       const base = cls ? this.classPool(cls) : SDT.Cards.all().filter(c => c.cls);
       const pool = base.filter(c => c.rarity === '职业' && !c.hero);
       return pool.length ? pool[Math.floor(Random.random('card') * pool.length)] : null;
-    },
-
-    // 内置卡：金疮药（商店固定栏位，3 币，回复 10 血）
-    POTION: {
-      id: 'builtin-jinchuangyao', name: '金疮药', cost: 1,
-      rarity: '稀有', type: '道具', desc: '回复 10 点生命。',
     },
 
     // 内置卡：复原药水（商店固定栏位，3 币；背包中使用——复原消耗口袋至多 2 张卡牌）
@@ -379,32 +378,32 @@ import { characterName } from './characters.js';
     // 稀有度初始缺失时自动补入的新手卡（可在卡牌库里编辑/删除）
     STARTERS: [
       { name: '新兵操典', cost: 0, rarity: '初始', type: '武术', dmg: 2, dmgType: 'fixed', desc: '造成 2 点伤害。' },
-      { name: '应急绷带', cost: 0, rarity: '初始', type: '道具', dmg: 0, desc: '回复 2 点生命。' },
-      { name: '制式口粮', cost: 0, rarity: '初始', type: '资源', dmg: 0, desc: '获得 1 份口粮。' },
+      { id: 'starter-emergency-bandage', name: '应急绷带', cost: 0, rarity: '初始', type: '道具', dmg: 0, desc: '回复 2 点生命。' },
+      { id: 'starter-ration', name: '制式口粮', cost: 0, rarity: '初始', type: '资源', dmg: 0, desc: '获得 1 份口粮。' },
     ],
 
     // 桌游手绘道具卡（2026-09-01 照片提取，17 张 → 15 种：
     // 银币 ×2、铜币 ×2 为重复/同卡备注，各保留一种设计）。
     // 资源标注重拍照片后：钥匙/口粮/木材系/经济卡包按卡面「资源·N币」标注
     // 改为资源类型（设计者规则：未标注类型的卡牌均为资源）；
-    // 医疗针/金创药/能源水晶/金银铜币/令牌仍为道具（药水与代币可在背包直接使用）。
+    // 急救合剂/金疮药/能源结晶/金银铜币/员工通行证仍为道具（药水与通行证可在背包直接使用）。
     TABLETOP: [
       // —— 第一排 ——
-      { id: 'tt-medneedle',  name: '医疗针',   cost: 1, rarity: '古朴', type: '道具', desc: '回复 16 点生命。', value: 4 },
+      { id: 'tt-medneedle',  name: '急救合剂', cost: 1, rarity: '古朴', type: '道具', desc: '回复 16 点生命。', value: 4 },
       { id: 'tt-copper',     name: '铜币',     cost: 0, rarity: '初始', type: '道具', desc: '高价值，可出售。', value: 3 },
       { id: 'tt-keys-bunch', name: '一串钥匙', cost: 0, rarity: '古朴', type: '资源', desc: '钥匙 ×2。', value: 4 },
       { id: 'tt-rations',    name: '口粮',     cost: 0, rarity: '初始', type: '资源', desc: '升级宠物。', value: 3 },
-      { id: 'tt-token-color', name: '彩色令牌', cost: 2, rarity: '史诗', type: '道具', desc: '觉醒。', value: 8 },
+      { id: 'tt-token-color', name: '员工通行证A', cost: 2, rarity: '史诗', type: '道具', desc: '觉醒。', value: 8 },
       // —— 第二排 ——
       { id: 'tt-gold',       name: '金币',     cost: 0, rarity: '史诗', type: '道具', desc: '贵重货币，可出售。', value: 9 },
       { id: 'tt-econpack',   name: '经济卡包', cost: 2, rarity: '传说', type: '资源', desc: '带入战场时，以 5 张随机卡牌开局。可出售。', value: 10, sellable: true }, // 资源标注重拍：卡面明确「可出售 10币」
       { id: 'tt-silver',     name: '银币',     cost: 0, rarity: '古朴', type: '道具', desc: '可出售。', value: 6 },
       { id: 'tt-key',        name: '钥匙',     cost: 0, rarity: '初始', type: '资源', desc: '解锁神秘宝箱。', value: 2 },
       // —— 第三排 ——
-      { id: 'tt-crystal',    name: '能源水晶', cost: 1, rarity: '古朴', type: '道具', desc: '复活最多 3 张卡牌。', value: 3 },
+      { id: 'tt-crystal',    name: '能源结晶', cost: 1, rarity: '古朴', type: '道具', desc: '复活最多 3 张卡牌。', value: 3 },
       { id: 'tt-key-one',    name: '一把钥匙', cost: 0, rarity: '古朴', type: '资源', desc: '钥匙 ×3。', value: 6 },
-      { id: 'tt-token-gold', name: '金色令牌', cost: 1, rarity: '稀有', type: '道具', desc: '抽取 1 张传说卡。', value: 5 }, // 照片重辨：手写为「传说卡」（[[icon:crystal]]传），非「传统卡」
-      { id: 'tt-jinchuangyao', name: '金创药', cost: 1, rarity: '古朴', type: '道具', desc: '回复 10 点生命。', value: 3 },
+      { id: 'tt-token-gold', name: '员工通行证B', cost: 1, rarity: '稀有', type: '道具', desc: '抽取 1 张传说卡。', value: 5 }, // 照片重辨：手写为「传说卡」（[[icon:crystal]]传），非「传统卡」
+      { id: 'tt-jinchuangyao', name: '金疮药', cost: 1, rarity: '古朴', type: '道具', desc: '回复 10 点生命。', value: 3 },
       { id: 'tt-wood',       name: '木材',     cost: 0, rarity: '初始', type: '资源', desc: '木材 ×1。', value: 2 }, // 资源标注重拍：纯资源卡（无回复效果）；「木化」药水另录于 TABLETOP4
       { id: 'tt-wood-lots',  name: '大量木材', cost: 0, rarity: '古朴', type: '资源', desc: '木材 ×2。', value: 4 },
     ],
@@ -511,7 +510,7 @@ import { characterName } from './characters.js';
       { id: 'tt3-grope',         name: '摸索',     cost: 1, rarity: '古朴', type: '法术', desc: '抽 2 张牌。', value: 3 },
       { id: 'tt3-mixed-potion',  name: '混血药水', cost: 1, rarity: '古朴', type: '道具', desc: '造成 2 点伤害，附加流血。', value: 2 },
       // —— 法术（重辨补录 15 张：此前未入库的同摞卡）——
-      { id: 'tt3sp-mysticsummon', name: '神秘召唤', cost: 4, rarity: '稀有', type: '法术', desc: '获得 1 张金色令牌或彩色令牌，无法将其带入对战。' },
+      { id: 'tt3sp-mysticsummon', name: '神秘召唤', cost: 4, rarity: '稀有', type: '法术', desc: '获得 1 张员工通行证B或员工通行证A，无法将其带入对战。' },
       { id: 'tt3sp-dodge',        name: '闪避',     cost: 2, rarity: '古朴', type: '法术', desc: '应对攻击时：避开 1 段伤害。' },
       { id: 'tt3sp-devour',       name: '吞噬',     cost: 3, rarity: '职业', type: '法术', cls: '牧师', unrandom: true, desc: '消灭 1 名 4 级及以下小怪。', value: 2 }, // 2026-09-05 职业整合：原地转为牧师职业卡
       { id: 'tt3sp-doom',         name: '毁灭',     cost: 3, rarity: '史诗', type: '法术', desc: '消灭 2 名 5 级及以下小怪，不可复原。' },
@@ -534,7 +533,7 @@ import { characterName } from './characters.js';
       { id: 'tt3-master-staff',  name: '大师的神杖', cost: 2, rarity: '稀有', type: '道具', desc: '回合开始时回复 5 点生命。', value: 5 },
       { id: 'tt3-chaos-eye',     name: '混沌之眼', cost: 1, rarity: '传说', type: '装备', desc: '装备：血量上限 +10，牌库上限 5。', value: 5 }, // 传说系列重拍：卡名/效果按本批照片（旧读「混沌眼」「生命上限+10」）
       { id: 'tt3-execute',       name: '斩杀',     cost: 3, rarity: '传说', type: '武术', dmg: 9, dmgType: 'spell', desc: "对 9 血以下角色造成 9′。", value: 5 }, // 传说系列重拍：角标武术、阈值 9 血
-      { id: 'tt3-savior-elixir', name: '救世灵药', cost: 0, rarity: '传说', type: '道具', desc: '回复 99 点生命（相当于回满）。', value: 5 },
+      { id: 'tt3-savior-elixir', name: '斗神酒', cost: 0, rarity: '传说', type: '道具', desc: '回复 99 点生命（相当于回满）。', value: 5 },
       // —— 装备（武器/防具/符印一摞；角标与描述已按第四批高清照片逐张重辨修正，
       //     未在本摞照片中出现的条目（魔纹银剑/深红丝袋/圣杖/玄龟/草甲/逆弓/聚魔之血/深衍日记）保持原样）——
       { id: 'tt3-silver-runesword', name: '魔纹银剑', cost: 2, rarity: '稀有', type: '装备', desc: '装备：攻击 +3。', value: 3 },
@@ -567,24 +566,24 @@ import { characterName } from './characters.js';
     ],
 
     // 桌游手绘卡 · 第四批（2026-09-01 照片提取，15 张）：
-    // 13 张与第一批同设计（金色令牌 ×2、银币 ×2、铜币 ×3 含「高价值」1 张、
-    // 彩色令牌、能源水晶、金创药、医疗针、金币），不再重复入库；高清照片同时
-    // 修正第一批「金色令牌传说卡」识别。播本批新设计 3 张：耀金令牌、烟雾弹，
+    // 13 张与第一批同设计（员工通行证B ×2、银币 ×2、铜币 ×3 含「高价值」1 张、
+    // 员工通行证A、能源结晶、金疮药、急救合剂、金币），不再重复入库；高清照片同时
+    // 修正第一批「员工通行证B传说卡」识别。播本批新设计 3 张：员工通行证C、烟雾弹，
     // 以及「木化」——资源标注重拍照片证实它是独立药水卡（回复 6 血、物品·2币），
     // 此前被误并入「木材」，已在第一批拆分还原。
     // 角标「[[icon:crystal]] 字」多数取卡名/效果用字（彩/木/水/金/传），唯烟雾弹 [[icon:crystal]]稀 与效果
     // 无关，按稀有度「稀有」解读。
     TABLETOP4: [
-      { id: 'tt4-shine-token', name: '耀金令牌', cost: 2, rarity: '史诗', type: '道具', desc: '发现 1 张传说卡。', value: 7 },
+      { id: 'tt4-shine-token', name: '员工通行证C', cost: 2, rarity: '史诗', type: '道具', desc: '发现 1 张传说卡。', value: 7 },
       { id: 'tt4-smoke-bomb',  name: '烟雾弹',   cost: 1, rarity: '稀有', type: '道具', desc: '非 BOSS 战逃跑一次。', value: 3 },
-      { id: 'tt4-woodify',     name: '木化',     cost: 0, rarity: '初始', type: '道具', desc: '回复 6 点生命。', value: 2 },
+      { id: 'tt4-woodify',     name: '能量饮料', cost: 0, rarity: '初始', type: '道具', desc: '回复 6 点生命。', value: 2 },
     ],
 
     // 桌游手绘卡 · 第五批（2026-09-01「传说卡」照片，10 张）：
     // 全批为传说特例卡——非常强力，unrandom: true 锁死随机与发现获取
-    // （含商店随机槽位；「耀金令牌：发现 1 张传说卡」同样发现不到它们）。
+    // （含商店随机槽位；「员工通行证C：发现 1 张传说卡」同样发现不到它们）。
     // 照片中另 8 张为已有卡重拍：斩杀/流光斩/剑落纷霜/雷殛/混沌之眼/不朽神剑
-    // 已在 TABLETOP3 升传说并按照片修订，救世灵药/钻石仅补 unrandom 标记。
+    // 已在 TABLETOP3 升传说并按照片修订，斗神酒/钻石仅补 unrandom 标记。
     TABLETOP5: [
       { id: 'tt5-archstaff',    name: '大法师的权杖', cost: 2, rarity: '传说', type: '装备', desc: '回合开始时，法伤 +1。', value: 5 },
       { id: 'tt5-galaxy-voyage', name: '银河之旅',   cost: 4, rarity: '传说', type: '法术', desc: '本场对战中，你的所有法术均为 1 费。', value: 5 }, // 原文单字「术」，按法术解读
@@ -599,13 +598,13 @@ import { characterName } from './characters.js';
       { id: 'tt6-timeskip',    name: '时空孔隙',   cost: 0, rarity: '衍生', type: '事件', unrandom: true, desc: '前进 6 格。' },
       { id: 'tt6-demondeal',   name: '恶魔交易',   cost: 0, rarity: '衍生', type: '事件', unrandom: true, desc: '-1 血，获得传奇武器。' },
       { id: 'tt6-bandits',     name: '盗匪横行',   cost: 0, rarity: '衍生', type: '事件', battle: true, unrandom: true, desc: '掠夺者 ×5。奖励：密封物资箱 ×2。' },
-      { id: 'tt6-mystery',     name: '神秘补给',   cost: 0, rarity: '衍生', type: '事件', unrandom: true, desc: '获得彩色令牌（特殊单位），+2 币。' },
+      { id: 'tt6-mystery',     name: '神秘补给',   cost: 0, rarity: '衍生', type: '事件', unrandom: true, desc: '获得员工通行证A（特殊单位），+2 币。' },
       { id: 'tt6-goldmine',    name: '金矿',       cost: 0, rarity: '衍生', type: '事件', unrandom: true, desc: '获得 3 币。' },
       { id: 'tt6-goldhammer',  name: '闪金之锤',   cost: 0, rarity: '衍生', type: '事件', battle: true, unrandom: true, desc: '造成 5 点伤害，若斩杀敌人，+2 币。' },
       { id: 'tt6-relief',      name: '爱心救济站', cost: 0, rarity: '衍生', type: '事件', unrandom: true, desc: '回复 6 血。' },
       { id: 'tt6-airdrop',     name: '空中补给',   cost: 0, rarity: '衍生', type: '事件', unrandom: true, desc: '从木材、口粮、绷带、碘酒中抽取一项。' }, // 后两项重辨存疑
       { id: 'tt6-chestdraw',   name: '遗留物资',   cost: 0, rarity: '衍生', type: '事件', unrandom: true, desc: '从遗留物资箱中撬开 1 个。' },
-      { id: 'tt6-systemsupply', name: '系统补给',  cost: 0, rarity: '衍生', type: '事件', unrandom: true, desc: '获得彩色令牌（特殊单位），木材 ×1。' }, // 卡名/描述重辨存疑，与「神秘补给」同系列
+      { id: 'tt6-systemsupply', name: '系统补给',  cost: 0, rarity: '衍生', type: '事件', unrandom: true, desc: '获得员工通行证A（特殊单位），木材 ×1。' }, // 卡名/描述重辨存疑，与「神秘补给」同系列
     ],
 
     // 桌游手绘卡 · 第七批（2026-09-01「职业卡」照片 → 2026-09-05 职业整合定版）：
@@ -681,7 +680,7 @@ import { characterName } from './characters.js';
     // 原授印者英雄「邪渊主宰」2026-09-05 定版更名「邪渊主宰·妲莉薇特」并改归降临者
     //（描述按降临者火焰主题重写，卡面立绘随 cls 自动换为降临者）；
     // 其印记衍生牌（治伤+1 等 4 张）未随迁，保留退役。
-    // 英雄卡本体只能通过 ① 事件拼凑 ② 祭坛弃牌 ③ 彩色令牌 三种途径获得——均不实装为
+    // 英雄卡本体只能通过 ① 事件拼凑 ② 祭坛弃牌 ③ 员工通行证A 三种途径获得——均不实装为
     // 随机获取，故全部 unrandom（获取途径待后续版本实装）。
     // 衍生牌（角标「衍」/「××专属·衍生」）围绕英雄效果展开：rarity 衍生、
     // tokenOf 指向所属英雄；禁咒×4 由牧师英雄「无极梦魇·血苑修罗」洗入牌库，
@@ -744,7 +743,7 @@ import { characterName } from './characters.js';
     // （sdt-cards.json，2026-09 微信接收）双向合并的定版快照，由合并脚本生成：
     //   · 共享 id 卡取设计者精修稿（名字/费用/稀有度/类型/描述/词条/币值），
     //     结构字段（cls/hero/tokenOf）与仓库实现标记（battle/art）保仓库；
-    //   · unrandom 随机锁取两侧并集；图鉴 foe-*、寻宝图、彩色令牌、初始火球、
+    //   · unrandom 随机锁取两侧并集；图鉴 foe-*、寻宝图、员工通行证A、初始火球、
     //     经济卡包、tt6-goldhammer、tt3-* 三张撞名职业卡按仓库定版保留（不在本批）；
     //   · 补种设计者实机有而仓库缺失的卡（流光照影/不朽斩/步兵/两扇门/
     //     灵能召唤/刀剑形态/法力光波）；「初始攻击」名字保持不变（老板 2026-09-07 指定）；
@@ -753,17 +752,17 @@ import { characterName } from './characters.js';
     // 覆盖/补种走 ensureTabletopSync()（TT10_KEY 标记，一次性，按 id 整卡覆盖）。
     TABLETOP10: [
       { id: 'builtin-sha', name: '初始攻击', cost: 1, rarity: '初始', type: '武术', desc: '攻（+0）：造成等同于攻击力的伤害。', dmg: 0, dmgType: 'attack', value: 1 },
-      { id: 'tt-medneedle', name: '医疗针', cost: 0, rarity: '稀有', type: '道具', desc: '回合开始时：回复 6点生命。持续 3 回合。', dmg: 0, heal: 16, value: 4 },
+      { id: 'tt-medneedle', name: '急救合剂', cost: 0, rarity: '稀有', type: '道具', desc: '回合开始时：回复 6点生命。持续 3 回合。', dmg: 0, heal: 16, value: 4 },
       { id: 'tt-copper', name: '铜币', cost: 0, rarity: '古朴', type: '资源', desc: '可出售。', dmg: 0, value: 3, sellable: true },
       { id: 'tt-keys-bunch', name: '一串钥匙', cost: 0, rarity: '稀有', type: '资源', desc: '钥匙 ×2。', dmg: 0, value: 4 },
       { id: 'tt-rations', name: '口粮', cost: 0, rarity: '稀有', type: '资源', desc: '升级宠物。', dmg: 0, value: 3 },
       { id: 'tt-gold', name: '金币', cost: 0, rarity: '史诗', type: '资源', desc: '贵重货币，可出售。', dmg: 0, value: 9, sellable: true },
       { id: 'tt-silver', name: '银币', cost: 0, rarity: '稀有', type: '资源', desc: '可出售。', dmg: 0, value: 6, sellable: true },
       { id: 'tt-key', name: '钥匙', cost: 0, rarity: '古朴', type: '资源', desc: '解锁大门。', dmg: 0, value: 2 },
-      { id: 'tt-crystal', name: '能源水晶', cost: 0, rarity: '史诗', type: '道具', desc: '在背包中才能使用，复原最多 3 张卡牌。', dmg: 0, value: 3 },
+      { id: 'tt-crystal', name: '能源结晶', cost: 0, rarity: '史诗', type: '道具', desc: '在背包中才能使用，复原最多 3 张卡牌。', dmg: 0, value: 3 },
       { id: 'tt-key-one', name: '一把钥匙', cost: 0, rarity: '史诗', type: '资源', desc: '钥匙 ×3。', dmg: 0, value: 6 },
-      { id: 'tt-token-gold', name: '金色令牌', cost: 0, rarity: '史诗', type: '道具', desc: '获取 1 张传说卡。', dmg: 0, value: 4 },
-      { id: 'tt-jinchuangyao', name: '金创药', cost: 0, rarity: '史诗', type: '道具', desc: '回复 20 点生命。', dmg: 0, heal: 20, value: 4 },
+      { id: 'tt-token-gold', name: '员工通行证B', cost: 0, rarity: '史诗', type: '道具', desc: '获取 1 张传说卡。', dmg: 0, value: 4 },
+      { id: 'tt-jinchuangyao', name: '金疮药', cost: 0, rarity: '史诗', type: '道具', desc: '回复 20 点生命。', dmg: 0, heal: 20, value: 4 },
       { id: 'tt-wood', name: '木材', cost: 0, rarity: '古朴', type: '资源', desc: '木材 ×1。', dmg: 0, value: 2 },
       { id: 'tt-wood-lots', name: '大量木材', cost: 0, rarity: '稀有', type: '资源', desc: '木材 ×2。', dmg: 0, value: 4 },
       { id: 'tt2-apollo', name: '阿猫的礼物', cost: 0, rarity: '史诗', type: '装备', desc: '发现或随机获取该牌时，回复1点能量并获取另1张随机卡牌。', dmg: 0, value: 4 },
@@ -812,7 +811,7 @@ import { characterName } from './characters.js';
       { id: 'tt3-holy-shield', cls: '牧师', name: '圣盾', cost: 1, rarity: '职业', type: '法术', desc: '获得 6 点护甲；若你此时护甲为0.本牌变为0费。', dmg: 0, armor: 6, value: 3, unrandom: true },
       { id: 'tt3-iceheart-potion', name: '冰冻药水', cost: 0, rarity: '稀有', type: '道具', desc: '附加冰冻，持续 1 回合。', dmg: 0, value: 3 },
       { id: 'tt3-demon-potion', name: '法力药水', cost: 0, rarity: '稀有', type: '道具', desc: '法伤 +2。持续 1 回合。', dmg: 0, value: 2 },
-      { id: 'tt3-magic-lamp', name: '神灯', cost: 1, rarity: '史诗', type: '法术', desc: '抉择：1° 发现 1 张牌并将其释放；2° 消灭 1 名受伤敌人（非 BOSS）；3° 冰冻 2 名角色，获得5 点护甲。', dmg: 0, armor: 5, value: 4 },
+      { id: 'tt3-magic-lamp', name: '神灯', cost: 1, rarity: '史诗', type: '法术', desc: '抉择：1° 发现 1 张牌并将其释放；2° 消灭 1 名受伤敌人（非 BOSS）；3° 冰冻 2 名角色，获得5 点护甲。', dmg: 0, value: 4 },
       { id: 'tt3-thornfield', name: '棘刺之地', cost: 2, rarity: '稀有', type: '法术', desc: '对所有敌人附加 2 层中毒，并立即触发1次毒伤。', dmg: 0, value: 3 },
       { id: 'tt3-mind-potion', name: '精神药水', cost: 0, rarity: '稀有', type: '道具', desc: '抽 2 张牌。', dmg: 0, draw: 2, value: 3 },
       { id: 'tt3-turnabout-potion', name: '剧毒药水', cost: 0, rarity: '稀有', type: '道具', desc: '对所有敌人附加1层中毒。', dmg: 0, value: 3 },
@@ -822,7 +821,7 @@ import { characterName } from './characters.js';
       { id: 'tt3-mixed-potion', name: '流血药水', cost: 0, rarity: '稀有', type: '道具', desc: '造成 2 点固定伤害，附加流血。', dmg: 0, value: 2 },
       { id: 'tt3sp-dodge', name: '闪避', cost: 1, rarity: '古朴', type: '法术', desc: '本回合避开第1段伤害。', dmg: 0, value: 2 },
       { id: 'tt3sp-devour', cls: '牧师', name: '吞噬', cost: 1, rarity: '职业', type: '法术', desc: '消灭 1 名 攻击力4 点及以下小怪。', dmg: 0, value: 3, unrandom: true },
-      { id: 'tt3sp-doom', name: '毁灭炸弹', cost: 0, rarity: '史诗', type: '道具', desc: '消灭 2 名 攻击力5点及以下小怪', dmg: 0, value: 4 },
+      { id: 'tt3sp-doom', name: 'TNT', cost: 0, rarity: '史诗', type: '道具', desc: '消灭 2 名 攻击力5点及以下小怪', dmg: 0, value: 4 },
       { id: 'tt3sp-silverthorn', name: '镭射', cost: 1, rarity: '古朴', type: '法术', desc: '造成5点法术伤害；注能(1)：伤害+3。', dmg: 5, dmgType: 'spell', infuse: 1, value: 2 },
       { id: 'tt3sp-magicoil', name: '药水魔法', cost: 1, rarity: '稀有', type: '法术', desc: '发现1瓶药水并直接释放', dmg: 0, value: 3 },
       { id: 'tt3sp-shadowbug', name: '影噬', cost: 1, rarity: '稀有', type: '武术', desc: '本回合偷取 1 名敌人的攻击力至1点。', dmg: 0, value: 3 },
@@ -836,7 +835,7 @@ import { characterName } from './characters.js';
       { id: 'tt3-master-staff', name: '大法师之杖', cost: 0, rarity: '传说', type: '装备', desc: '回合开始时法伤 +1。', dmg: 0, value: 5 },
       { id: 'tt3-chaos-eye', name: '混沌之眼', cost: 0, rarity: '传说', type: '装备', desc: '对战开始时：血量上限 +10，牌库上限+5。', dmg: 0, value: 5 },
       { id: 'tt3-execute', name: '斩杀', cost: 1, rarity: '传说', type: '武术', desc: '对 9 血以下角色造成9点真实伤害。', dmg: 9, dmgType: 'true', value: 5 },
-      { id: 'tt3-savior-elixir', name: '救世灵药', cost: 0, rarity: '传说', type: '道具', desc: '回复 99 点生命（相当于回满）。', heal: 99, value: 5, unrandom: true },
+      { id: 'tt3-savior-elixir', name: '斗神酒', cost: 0, rarity: '传说', type: '道具', desc: '回复 99 点生命（相当于回满）。', heal: 99, value: 5, unrandom: true },
       { id: 'tt3-silver-runesword', name: '诅咒之剑', cost: 0, rarity: '史诗', type: '装备', desc: '获得 2 点攻击力；回合开始时，受到2点伤害', dmg: 0, value: 3 },
       { id: 'tt3-azure-sword', name: '百炼青虹剑', cost: 0, rarity: '稀有', type: '装备', desc: '消耗该牌时立即释放一次’杀‘。', dmg: 0, value: 3 },
       { id: 'tt3-deep-seal', name: '深海印记', cost: 0, rarity: '稀有', type: '装备', desc: '诅咒状态下，攻 +2，法伤 +2。', dmg: 0, dmgType: 'attack' },
@@ -859,17 +858,17 @@ import { characterName } from './characters.js';
       { id: 'tt3eq-mistbox', name: '迷之匣', cost: 0, rarity: '古朴', type: '装备', desc: '对战开始时，将 2 张杀替换为随机卡牌。', dmg: 0, value: 2 },
       { id: 'tt3-wood-bundle', name: '一捆木材', cost: 0, rarity: '史诗', type: '资源', desc: '木材 ×3。', dmg: 0, value: 6 },
       { id: 'tt3-ration-double', name: '双份口粮', cost: 0, rarity: '史诗', type: '资源', desc: '口粮 ×2。', dmg: 0, value: 6 },
-      { id: 'tt4-shine-token', name: '耀金令牌', cost: 0, rarity: '史诗', type: '道具', desc: '发现 1 张传说卡。', dmg: 0, value: 4 },
+      { id: 'tt4-shine-token', name: '员工通行证C', cost: 0, rarity: '史诗', type: '道具', desc: '发现 1 张传说卡。', dmg: 0, value: 4 },
       { id: 'tt4-smoke-bomb', name: '烟雾弹', cost: 0, rarity: '稀有', type: '道具', desc: '非 BOSS 战逃跑一次。', dmg: 0, value: 3 },
-      { id: 'tt4-woodify', name: '桃', cost: 0, rarity: '古朴', type: '道具', desc: '回复 6 点生命。', dmg: 0, heal: 6, value: 2 },
+      { id: 'tt4-woodify', name: '能量饮料', cost: 0, rarity: '古朴', type: '道具', desc: '回复 6 点生命。', dmg: 0, heal: 6, value: 2 },
       { id: 'tt5-galaxy-voyage', name: '银河之旅', cost: 2, rarity: '传说', type: '法术', desc: '本场对战中，你的所有招式均为 1 费。', dmg: 0, value: 5 },
       { id: 'tt6-demondeal', name: '恶魔交易', cost: 0, rarity: '衍生', type: '事件', desc: '-5血，获得1个大宝箱。', dmg: 0, unrandom: true },
       { id: 'tt6-bandits', battle: true, name: '盗匪横行', cost: 0, rarity: '衍生', type: '事件', desc: '对战土匪 ×5。奖励：中宝箱 ×2。', dmg: 0, unrandom: true },
-      { id: 'tt6-mystery', name: '神秘补给', cost: 0, rarity: '衍生', type: '事件', desc: '获得彩色令牌碎片，+2 币。', dmg: 0, unrandom: true },
+      { id: 'tt6-mystery', name: '神秘补给', cost: 0, rarity: '衍生', type: '事件', desc: '获得员工通行证A碎片，+2 币。', dmg: 0, unrandom: true },
       { id: 'tt6-goldmine', name: '金矿', cost: 0, rarity: '衍生', type: '事件', desc: '获得 3 币。', dmg: 0, unrandom: true },
-      { id: 'tt6-airdrop', name: '空中补给', cost: 0, rarity: '衍生', type: '事件', desc: '从木材、口粮、桃、随机药水中抽取一项。', dmg: 0, unrandom: true },
+      { id: 'tt6-airdrop', name: '空中补给', cost: 0, rarity: '衍生', type: '事件', desc: '从木材、口粮、能量饮料、随机药水中抽取一项。', dmg: 0, unrandom: true },
       { id: 'tt6-chestdraw', name: '宝箱', cost: 0, rarity: '衍生', type: '事件', desc: '从大，中，小宝箱中抽取 1 个。', dmg: 0, unrandom: true },
-      { id: 'tt6-systemsupply', name: '系统补给', cost: 0, rarity: '衍生', type: '事件', desc: '获得彩色令牌碎片，木材 ×1。', dmg: 0, unrandom: true },
+      { id: 'tt6-systemsupply', name: '系统补给', cost: 0, rarity: '衍生', type: '事件', desc: '获得员工通行证A碎片，木材 ×1。', dmg: 0, unrandom: true },
       { id: 'tt7-throwblade', cls: '侠客', name: '飞刃偷袭', cost: 0, rarity: '职业', type: '武术', desc: '攻（-3），附加流血，抽 1 张牌。', dmg: -3, dmgType: 'attack', draw: 1, value: 3, unrandom: true },
       { id: 'tt7-stealth', cls: '侠客', name: '潜匿', cost: 1, rarity: '职业', type: '武术', desc: '进入潜行状态 1 回合，抽1张牌。', dmg: 0, draw: 1, value: 3, unrandom: true },
       { id: 'tt7-ghostblade', cls: '侠客', name: '鬼魅之刃', cost: 1, rarity: '职业', type: '武术', desc: '攻（+1），破除隐身时伤害 +2，并抽 2 张牌。', dmg: 1, dmgType: 'attack', draw: 2, value: 3, unrandom: true },
@@ -985,9 +984,11 @@ import { characterName } from './characters.js';
     },
 
     // 卡面渲染（em 布局，cls 控制尺寸 sm/lg/xl；game.js / battle.js 共用）
-    cardHTML(c, cls) {
+    // opts.hideCost：隐去左上角费用角标——仅对 NO_COST_TYPES 生效（背包/宝箱等界面传 true，卡牌库不传）
+    cardHTML(c, cls, opts) {
       const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
       const escAttr = (s) => esc(s).replace(/"/g, '&quot;');
+      const hideCost = !!(opts && opts.hideCost) && SDT.Cards.NO_COST_TYPES.includes(c.type);
       const dmg = +(c.dmg || 0);
       const isDmgType = SDT.Cards.DMG_TYPES.includes(c.type);
       // 稀有度展示（2026-09-04 定版）：有效稀有度一律经 rarityOf 推导——
@@ -1026,7 +1027,7 @@ import { characterName } from './characters.js';
         SDT.Icons.img(SDT.Icons.TYPE_ART[c.type] || 'question');
       return `<div class="hs-card tp${ti} ${rvCls}${cls ? ' ' + cls : ''}">
         ${isPrism ? '<i class="rv-beam" aria-hidden="true"></i>' : ''}
-        <div class="hsc-cost">${c.cost}</div>
+        ${hideCost ? '' : `<div class="hsc-cost">${c.cost}</div>`}
         <div class="hsc-art">${artHTML}</div>
         <div class="hsc-name">${esc(c.name || '未命名卡牌')}</div>
         <div class="hsc-type">${esc(c.type || '?')} · ${esc(ro === '职业' ? ((c.cls ? characterName(c.cls) : '人物') + '专属') : ro)}</div>
@@ -1058,6 +1059,18 @@ import { characterName } from './characters.js';
     // 卡牌库为空或缺少初始牌时，补入新手卡
     ensureStarters() {
       const cards = SDT.Cards.all();
+      // 兼容早期没有 id 的默认资源卡：将历史生成的临时 id 收敛到稳定编号，
+      // 使制式口粮的卡面资源不再依赖名称或一次性生成的 id。
+      const legacyRation = cards.find(c => c.name === '制式口粮' && c.type === '资源');
+      if (legacyRation && legacyRation.id !== 'starter-ration' && !cards.some(c => c.id === 'starter-ration')) {
+        legacyRation.id = 'starter-ration';
+        SDT.Cards.saveAll(cards);
+      }
+      const legacyBandage = cards.find(c => c.name === '应急绷带' && c.type === '道具');
+      if (legacyBandage && legacyBandage.id !== 'starter-emergency-bandage' && !cards.some(c => c.id === 'starter-emergency-bandage')) {
+        legacyBandage.id = 'starter-emergency-bandage';
+        SDT.Cards.saveAll(cards);
+      }
       if (!cards.length || !cards.some(c => c.rarity === '初始')) {
         SDT.Cards.STARTERS.forEach(c => SDT.Cards.upsert(c));
       }
@@ -1109,6 +1122,20 @@ import { characterName } from './characters.js';
       } catch (e) { /* 静默跳过 */ }
     },
 
+    // 抉择卡数据修正（一次性，2026-09-08）：神灯的护甲只属于抉择 3°——
+    // 结构化 armor 字段会让任何抉择分支都白送 5 甲，删除字段改由选项文本结算
+    ensureChoiceFixes() {
+      try {
+        if (localStorage.getItem('sdt-mig-choice')) return;
+        const cards = SDT.Cards.all();
+        cards.forEach(c => {
+          if (c.id === 'tt3-magic-lamp' && c.armor) { delete c.armor; }
+        });
+        SDT.Cards.saveAll(cards);
+        localStorage.setItem('sdt-mig-choice', '1');
+      } catch (e) { /* 静默跳过 */ }
+    },
+
     // 第十批同步：设计者实机定版双向合并（TT10_KEY 标记，一次性）。按 id 整卡覆盖 + 缺失补种；
     // 本轮为老板拍板的定版动作，有意覆盖制作坊玩家改动（与 seedBatch 的「尊重玩家」语义不同）；
     // 并移除同设计重复 id（RETIRE，设计者已在旧 id 上定版同名卡）。
@@ -1128,6 +1155,34 @@ import { characterName } from './characters.js';
       } catch (e) { /* 隐私模式等场景静默跳过 */ }
     },
 
+    // 指定道具定名迁移：保留稳定 id 与存档引用，只更新展示名；
+    // 旧内置金疮药并入正式 tt-jinchuangyao，避免仓库里继续存在两个定义。
+    ensureItemRenames() {
+      try {
+        if (localStorage.getItem(ITEM_RENAME_KEY)) return;
+        const names = {
+          'tt-medneedle': '急救合剂',
+          'tt-crystal': '能源结晶',
+          'tt-token-color': '员工通行证A',
+          'tt-token-gold': '员工通行证B',
+          'tt4-shine-token': '员工通行证C',
+          'tt-jinchuangyao': '金疮药',
+          'tt3sp-doom': 'TNT',
+          'tt4-woodify': '能量饮料',
+          'tt3-savior-elixir': '斗神酒',
+        };
+        const cards = SDT.Cards.all();
+        let dirty = false;
+        for (let i = cards.length - 1; i >= 0; i--) {
+          if (cards[i].id === 'builtin-jinchuangyao') { cards.splice(i, 1); dirty = true; continue; }
+          const name = names[cards[i].id];
+          if (name && cards[i].name !== name) { cards[i].name = name; dirty = true; }
+        }
+        if (dirty) SDT.Cards.saveAll(cards);
+        localStorage.setItem(ITEM_RENAME_KEY, '1');
+      } catch (e) { /* 隐私模式等场景静默跳过 */ }
+    },
+
     // 播入桌游手绘卡（第一批资源·道具 + 第二批装备/武术 + 第三批全套 + 第四/五批新设计）
     ensureTabletop() {
       SDT.Cards.seedBatch(SDT.Cards.TABLETOP, TT1_KEY_V6, 'tt');   // v6：老档重播一次，按 id 覆盖（资源类型化、木材/木化拆分、经济卡包可出售）
@@ -1140,9 +1195,11 @@ import { characterName } from './characters.js';
       SDT.Cards.seedBatch(SDT.Cards.TABLETOP8, TT8_KEY, 'tt8');
       SDT.Cards.seedBatch(SDT.Cards.BESTIARY, TT9_KEY);            // 第九批：生物图鉴（全部敌人信息录入，2026-09-04 定版）
       SDT.Cards.ensureTabletopSync();  // 第十批：设计者实机定版同步（按 id 整卡覆盖/补种，只跑一次）
+      SDT.Cards.ensureItemRenames();   // 指定道具定名 + 金创药/金疮药合并（按稳定 id 迁移旧卡库）
       SDT.Cards.ensureClassRarity();   // v2：老档第七批职业卡统一迁移为「职业」稀有度（2026-09-04 定版）
       SDT.Cards.ensureShieldToArmor(); // 护盾→护甲术语迁移（含老存档，2026-09-04 定版）
       SDT.Cards.ensureCardFixes();    // 设计者定版数据修正（爆燃火球删注能，2026-09-05）
+      SDT.Cards.ensureChoiceFixes();  // 抉择卡数据修正（神灯删 armor 字段，2026-09-08）
       SDT.Cards.ensureClassConsolidation(); // 职业整合：11 职业 → 5 职业，逐卡改归属（2026-09-05 定版）
       SDT.Cards.ensureDmgValues();    // 伤害数值回填（描述 N′ → dmg 字段，2026-09-04 新增）
       SDT.Cards.ensureHeroFields();   // 修复早期制作坊保存丢失的 cls/hero（专属立绘依赖）

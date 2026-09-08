@@ -19,9 +19,19 @@
     };
     layerData.forEach((ld, li) => {
       const n = ld.logical.length;
+      // A generated layer is authored only when every logical cell carries a
+      // next array. Partial data must not silently turn into an unrelated ring.
+      const authoredGraph = n > 0 && ld.logical.every(cell => Array.isArray(cell.next));
       for (let i = 0; i < n; i++) {
-        link(key(li, i), key(li, (i + 1) % n));   // 闭环轨道
-        link(key(li, i), key(li, (i - 1 + n) % n));
+        if (authoredGraph) {
+          for (const next of (ld.logical[i].next || [])) {
+            const [toLi, toIdx] = next;
+            link(key(li, i), key(toLi, toIdx));
+          }
+        } else {
+          link(key(li, i), key(li, (i + 1) % n));
+          link(key(li, i), key(li, (i - 1 + n) % n));
+        }
       }
       (ld.doors || []).forEach(d => link(key(li, d.at), key(d.toLayer, d.arriveAt)));
       (ld.altarEntrances || []).forEach(a => link(key(li, a.at), key(-1, 0)));   // 祭坛入口 → 中央
@@ -37,8 +47,10 @@
     const { adj, key } = buildAdjacency(layerData);
     const all = [...adj.keys()];
     if (!all.length) return { ok: true, unreachable: [] };
-    const seen = new Set([key(0, 0)]);
-    const queue = [key(0, 0)];
+    const authored = layerData[0]?.logical?.length > 0 && layerData[0].logical.every(cell => Array.isArray(cell.next));
+    const starts = authored && layerData[0]?.entrances?.length ? layerData[0].entrances : [0];
+    const seen = new Set(starts.map(idx => key(0, idx)));
+    const queue = starts.map(idx => key(0, idx));
     while (queue.length) {
       const cur = queue.shift();
       for (const next of adj.get(cur) || []) {

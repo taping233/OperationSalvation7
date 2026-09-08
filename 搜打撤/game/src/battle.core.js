@@ -4,7 +4,10 @@ import { esc } from './shared.js';
 import { escAttr } from './shared.js';
 import { createEffectExecutor, splitEffectClauses } from './battle.effects.js';
 import { refillDrawPile, shuffleCards } from './battle.deck.js';
+import { removeUid } from './battle.piles.js';
 import { isAreaEffect, targetSideFor, unplayableReasonFor } from './battle.rules.js';
+import { createActionQueue } from './battle.actions.js';
+import { BATTLE_PHASES, beginTargeting, cancelTargeting, createBattleState, transitionBattle } from './battle.state.js';
 import { Random } from './random.js';
 import * as Combat from './combat.js';
 /* battle.core.js —— 战斗逻辑：牌库/出牌结算/词条时点/回合流转（渲染由注入的视图完成） */
@@ -18,6 +21,8 @@ import * as Combat from './combat.js';
   // Combat 已改为 ESM 直接导入；SDT.Cards / SDT.MAP 仍走兼容门面（待后续收敛）
 
   let renderBattle = () => {};
+  const actionQueue = createActionQueue();
+  let battleState = createBattleState();
   function configureBattleRenderer(renderer) {
     renderBattle = typeof renderer === 'function' ? renderer : () => {};
   }
@@ -38,6 +43,10 @@ import * as Combat from './combat.js';
   let infusing = null, discovering = null, discoverQueue = [];
   let handSelecting = null;              // 手牌选卡（2026-09-06 #24/#25）：{n,type,act,thenText}
   const handSelectQueue = [];
+  let choosing = null;                   // 抉择面板（2026-09-08 人工 N 选一）：{cardName, options:[text]}
+  const choiceQueue = [];
+  let stealthStrike = false;             // 「破隐一击伤害翻倍」战斗规则（白梅落影·妄）
+  let nextSpellTwice = 0;                // 「下一张法术施放 N 次」（元素风暴）
   let pendingTarget = null;  // 已锁定待拖拽的出牌 {uid, card}（必须拖到目标身上）
   let pendingHint = '';      // 拖拽提示（拖错目标时给出纠正文案）
   let delayed = [];          // 「回合开始时」延迟效果 [{text, cardName, repeat}]（repeat=装备每回合触发）
@@ -179,7 +188,7 @@ import * as Combat from './combat.js';
       if (!alive().length) break;
       const o = findCard(uid);
       if (!o || o.card.type === '生物' || !re.test(o.card.name || '')) continue;
-      execPlay(uid, o.card, [], alive()[0] || null, true);
+      queueCardExecution(uid, o.card, [], alive()[0] || null, true);
       released++;
       if (drawEach) drawCards(drawEach);
     }
@@ -194,7 +203,7 @@ import * as Combat from './combat.js';
       if (!hand.includes(uid)) continue;
       const o = findCard(uid);
       if (!o || o.card.type !== type) continue;
-      execPlay(uid, o.card, [], alive()[0] || null, true);
+      queueCardExecution(uid, o.card, [], alive()[0] || null, true);
       played++;
     }
     return played;
@@ -221,6 +230,10 @@ import * as Combat from './combat.js';
     restoreConsumed: n => restoreConsumed(n),
     random01: () => Random.random('battle'),
     allCards: () => SDT.Cards.all(),
+    // —— 抉择面板（2026-09-08 人工 N 选一）：选项入队并弹出面板 ——
+    queueChoice: job => { choiceQueue.push(job); processChoice(); },
+    setStealthStrike: v => { stealthStrike = !!v; },
+    setNextSpellTwice: n => { nextSpellTwice = n || 0; },
     shuffleDeck: () => { drawPile = shuffle(drawPile); return drawPile.length; },
     addEnergy: amount => { energy += amount; return energy; },
     addEnergyCap: amount => { maxEnergy += amount; energy += amount; return maxEnergy; },
@@ -349,8 +362,9 @@ import * as Combat from './combat.js';
     return true;
   }
 
-  // 出牌结算（目标：单点卡 = target；群体卡 = 所有存活敌人；infused = 作为注能主卡打出）
-  function resolveCard(card, target, infused) {
+  // 出牌结算（目标：单点卡 = target；群体卡 = 所有存活敌人；infused = 作为注能主卡打出；
+  // fuelCost = 注能牺牲品费用合计，供「N 倍于被注能卡牌价格」类效果折算）
+  function resolveCard(card, target, infused, fuelCost) {
     const desc = String(card.desc || '');
     const parts = splitClauses(desc);
     let did = false;
@@ -368,6 +382,19 @@ import * as Combat from './combat.js';
         const tg = desc.match(/触发\s*(\d+)\s*次/);
         if (tg && !/注能\s*[（(][^）)]*[）)][^。]*?触发/.test(desc)) times = Math.max(1, +tg[1]);
       }
+      // 墓地增伤（雷殛：墓地中每有 1 张法术牌，伤害 +1；普通战斗无墓地不生效）
+      const graveM = desc.match(/墓地中每有\s*1\s*张(武术|法术|装备|道具|资源)牌[^。；]*?伤害\s*\+\s*(\d+)/);
+      if (graveM && mode === 'boss') {
+        const cnt = grave.filter(u => { const o = findCard(u); return o && o.card.type === graveM[1]; }).length;
+        if (cnt > 0) {
+          dmgVal += cnt * +graveM[2];
+          G.log(`[[icon:recycle]] 墓地增伤：墓地中有 ${cnt} 张【${esc(graveM[1])}】牌，伤害 +${cnt * +graveM[2]}`, 'sys');
+        }
+      }
+      // 斩杀阈值（斩杀：对 N 血以下角色才造成伤害）
+      const hpCap = +((desc.match(/对\s*(\d+)\s*血以下/) || [])[1] || 0);
+      // 半血增伤（惩击：对血量一半及以下的敌人伤害 +N%）
+      const halfB = desc.match(/血量一半及以下的敌人伤害增加\s*(\d+)\s*%/);
       if (infused) {
         // 注能加成（设计者记号：注能(N)：改为 6′ / 伤害 +3 / 触发 2 次）
         const icost = desc.match(/注能\s*[（(][^）)]*[）)][：:]?\s*改为\s*(\d+)\s*′/);
@@ -382,7 +409,18 @@ import * as Combat from './combat.js';
       let dealtTotal = 0;
       for (let i = 0; i < times; i++) {
         targets.forEach(foe => {
-          if (!foe.dead) dealtTotal += hitFoe(foe, card, dmgVal, type, times > 1 ? `（第 ${i + 1} 段）` : '');
+          if (!foe.dead) {
+            if (hpCap > 0 && foe.hp > hpCap) {
+              if (i === 0) G.log(`[[icon:cross]] <b>${esc(foe.name)}</b> 血量高于 ${hpCap}：${esc(card.name)} 无效`, 'warn');
+              return;
+            }
+            let foeDmg = dmgVal;
+            if (halfB && foe.maxHp && foe.hp <= foe.maxHp / 2) {
+              foeDmg = Math.floor(foeDmg * (1 + +halfB[1] / 100));
+              if (i === 0) G.log(`[[icon:arrow]] <b>${esc(foe.name)}</b> 血量过半，伤害增加 ${halfB[1]}%（→ ${foeDmg}）`, 'sys');
+            }
+            dealtTotal += hitFoe(foe, card, foeDmg, type, times > 1 ? `（第 ${i + 1} 段）` : '');
+          }
         });
       }
       // 吸血：回复等量生命（嗜血刃/噬血术/血蝠风暴）
@@ -412,7 +450,7 @@ import * as Combat from './combat.js';
       return;
     }
     // —— 立即生效句 ——
-    const res = applyTextEffects(card, parts.immediate.join('，'), target, { structuredHit });
+    const res = applyTextEffects(card, parts.immediate.join('，'), target, { structuredHit, infused, fuelCost });
     did = did || res.did;
     // 结构化词条兜底（描述未写明但制作坊标注了回复/护甲/抽卡字段时）
     if (!res.healed && +(card.heal || 0) > 0) {
@@ -455,6 +493,7 @@ import * as Combat from './combat.js';
     if (SDT.Sound) SDT.Sound.setDucked(true);   // 战斗期间 BGM 侧链压低（audio-design ducking）
     opts = Object.assign({ isBoss: false }, options || {});
     mode = opts.isBoss ? 'boss' : 'normal';
+    battleState = createBattleState({ mode });
     const defs = Array.isArray(enemyDefs) ? enemyDefs : [enemyDefs];
     foes = defs.map(d => {
       const f = {
@@ -485,9 +524,11 @@ import * as Combat from './combat.js';
     pdef = { shield: 0, armor: 0, guard: false };
     pstat = Combat.ensureStatus({ hp: G.hp });
     infusing = null; discovering = null; discoverQueue = []; handSelecting = null; handSelectQueue.length = 0; pendingTarget = null; floats = [];
+    choosing = null; choiceQueue.length = 0; stealthStrike = false; nextSpellTwice = 0;
     delayed = []; noDrawNext = false; spellCost1 = false; meleeCost1 = false;
     shaTransform = null; consumeFireballN = 0; lastDrawnUids = []; lastPlayedType = null;
     viewingGrave = false; dreadShown = false; selectingDeck = false;
+    battleState = transitionBattle(battleState, BATTLE_PHASES.PLAYER);
     G.state = 'modal';
     if (alive().length > 1) G.log(`[[icon:question]] 以一敌多：伤害类卡牌需<b>拖到目标身上</b>打出；群体伤害直接点击生效`, 'sys');
     G.log(`[[icon:cards]] 普通战斗无需抽牌：随身 <b>${hand.length}</b> 张战斗卡直接可打出（道具/资源/事件卡不在手牌中） · 每回合固定 <b>${maxEnergy}</b> 费`, 'sys');
@@ -533,9 +574,12 @@ import * as Combat from './combat.js';
     pdef = { shield: 0, armor: 0, guard: false };
     pstat = Combat.ensureStatus({ hp: G.hp });
     infusing = null; discovering = null; discoverQueue = []; pendingTarget = null; floats = [];
+    handSelecting = null; handSelectQueue.length = 0;
+    choosing = null; choiceQueue.length = 0; stealthStrike = false; nextSpellTwice = 0;
     delayed = []; noDrawNext = false; spellCost1 = false; meleeCost1 = false;
     shaTransform = null; consumeFireballN = 0; lastDrawnUids = []; lastPlayedType = null;
     viewingGrave = false; dreadShown = false; selectingDeck = false;
+    battleState = transitionBattle(battleState, BATTLE_PHASES.PLAYER);
     G.state = 'modal';
     G.log(`[[icon:cards]] 牌库编成：自选 ${sel.size} 张非道具卡 + 初始攻击 ×${shas.length} = <b>${drawPile.length}</b> 张 ·
       开局抽 ${R().battleStartDraw} · 每回合开始抽 ${R().battleTurnDraw} · 每回合固定 <b>${maxEnergy}</b> 费`, 'sys');
@@ -559,7 +603,7 @@ import * as Combat from './combat.js';
   }
 
   function play(uid, side) {
-    if (busy || infusing || discovering || viewingGrave) return;
+    if (busy || infusing || discovering || choosing || viewingGrave) return;
     const entry = findCard(uid);
     if (!entry) return;
     const card = entry.card;
@@ -582,11 +626,11 @@ import * as Combat from './combat.js';
     const need = targetSide(card);
     let target = null;
     if (need === 'enemy') {
-      if (side == null || side === 'self') { pendingTarget = { uid, card }; pendingHint = ''; requestBattleRender(); return; }
+      if (side == null || side === 'self') { pendingTarget = { uid, card }; battleState = beginTargeting(battleState, uid, alive().map(foe => foe.id)); pendingHint = ''; requestBattleRender(); return; }
       target = foes[+side];
-      if (!target || target.dead) { pendingTarget = { uid, card }; pendingHint = ''; requestBattleRender(); return; }
+      if (!target || target.dead) { pendingTarget = { uid, card }; battleState = beginTargeting(battleState, uid, alive().map(foe => foe.id)); pendingHint = ''; requestBattleRender(); return; }
     } else if (need === 'self') {
-      if (side !== 'self') { pendingTarget = { uid, card }; pendingHint = ''; requestBattleRender(); return; }
+      if (side !== 'self') { pendingTarget = { uid, card }; battleState = beginTargeting(battleState, uid, ['self']); pendingHint = ''; requestBattleRender(); return; }
     } else {
       target = alive()[0] || null;
     }
@@ -598,7 +642,7 @@ import * as Combat from './combat.js';
       const tpl = SDT.Cards.all().find(c => c.name === shaTransform);
       if (tpl) playCard = { ...tpl };
     }
-    execPlay(uid, playCard, [], target);
+    queueCardExecution(uid, playCard, [], target);
   }
 
   // v0.32 堆叠手牌：点击的是一叠同名卡的代表性 uid——选中/取消该叠中的一张
@@ -606,6 +650,8 @@ import * as Combat from './combat.js';
     if (!infusing || uid === infusing.uid) return;
     const entry = findCard(uid);
     if (!entry) return;
+    // 「无法用于注能」（不朽斩等）不能被选作注能牺牲品
+    if (/无法用于注能/.test(String(entry.card.desc || ''))) return;
     const groupUids = hand.filter(h => {
       if (h === infusing.uid) return false;
       const o = findCard(h);
@@ -626,7 +672,21 @@ import * as Combat from './combat.js';
     const { uid, card } = infusing;
     const fuel = [...infusing.picked];
     infusing = null;
-    execPlay(uid, card, fuel, alive()[0] || null);
+    queueCardExecution(uid, card, fuel, alive()[0] || null);
+  }
+
+  function queueCardExecution(uid, card, fuelUids, target, freeCost) {
+    battleState = transitionBattle(battleState, BATTLE_PHASES.RESOLVING);
+    busy = true;
+    requestBattleRender();
+    actionQueue.enqueue(() => execPlay(uid, card, fuelUids, target, freeCost)).finally(() => {
+      // 触发效果可能继续入队；队列未空时保持 resolving/busy，避免玩家插入新动作。
+      if (actionQueue.length === 0) {
+        if (battleState.phase === BATTLE_PHASES.RESOLVING) battleState = transitionBattle(battleState, BATTLE_PHASES.PLAYER);
+        busy = false;
+      }
+      requestBattleRender();
+    });
   }
 
   function execPlay(uid, card, fuelUids, target, freeCost) {
@@ -635,7 +695,8 @@ import * as Combat from './combat.js';
     if (!freeCost) energy -= effCost;
     played.push(uid);
     SDT.Sound.sfx('card');
-    hand = hand.filter(h => h !== uid && !fuelUids.includes(h));
+    removeUid(hand, uid);
+    fuelUids.forEach(f => removeUid(hand, f));
     fuelUids.forEach(f => {
       consumed.push(f);
       // v0.25：被消耗的牌进入墓地——墓地不参与洗回，战胜 BOSS 后可在整理背包放回
@@ -660,10 +721,35 @@ import * as Combat from './combat.js';
       }
     });
     if (mode === 'boss') discard.push(uid);
-    resolveCard(card, target, fuelUids.length > 0);
+    const fuelCostSum = fuelUids.reduce((a, f) => {
+      const o = findCard(f);
+      return a + (o ? Math.max(0, +(o.card.cost || 0)) : 0);
+    }, 0);
+    resolveCard(card, target, fuelUids.length > 0, fuelCostSum);
+    // 「若本牌为最后一张手牌，效果触发 N 次」（急行军）：整卡效果再跑一遍
+    if (/最后一张手牌[^。；]*?触发\s*(\d+)?\s*次?/.test(String(card.desc || '')) && hand.length === 0) {
+      G.log(`[[icon:cards]] <b>${esc(card.name)}</b>：本牌是最后一张手牌，效果触发 2 次`, 'sys');
+      resolveCard(card, target, fuelUids.length > 0, fuelCostSum);
+    }
+    // 「下一张法术施放 N 次」（元素风暴，注能打出时注册）：法术效果再跑一遍
+    if (nextSpellTwice > 0 && card.type === '法术') {
+      nextSpellTwice = 0;
+      G.log(`[[icon:sparkles]] <b>元素风暴</b>：这张法术额外施放 1 次`, 'sys');
+      resolveCard(card, target, fuelUids.length > 0, fuelCostSum);
+    }
+    // 「永远被保留在手牌中」（不朽斩）：打出后回到手牌，不进弃牌堆
+    if (/永远被保留在手牌中/.test(String(card.desc || ''))) {
+      const di = discard.lastIndexOf(uid); if (di >= 0) discard.splice(di, 1);
+      const pi = played.lastIndexOf(uid); if (pi >= 0) played.splice(pi, 1);
+      if (hand.length < R().battleHandMax) {
+        hand.push(uid);
+        G.log(`[[icon:anchor]] 【${esc(card.name)}】保留在手牌中（无法用于注能）`, 'sys');
+      }
+    }
     sweepDead();
     lastPlayedType = card.type;   // 供「上一张牌是武术→0费」类条件费用判定
     if (!alive().length) { finish(true); return; }
+    processChoice();
     processDiscoverQueue();
     requestBattleRender();
   }
@@ -705,11 +791,17 @@ import * as Combat from './combat.js';
       G.log(`[[icon:crystal]] ${seg || ''}<b>${esc(foe.name)}</b> 的元素庇幕展开：伤害被完全减免！（破甲可击碎）`, 'warn');
       return 0;
     }
+    // 破隐一击（白梅落影·妄）：自己处于潜行中发动的攻击伤害 ×2
+    const stealthedBefore = Combat.isStealthed(pstat);
+    let amt = amount;
+    if (stealthStrike && stealthedBefore && amount > 0) {
+      amt *= 2;
+      G.log(`[[icon:runner]] <b>破隐一击</b>：从潜行中发动，伤害翻倍（${amount} → ${amt}）`, 'ok');
+    }
     // 法伤加成（含祝福）；「受法伤加成翻倍」（爆燃火球）在此翻倍
     let sp = (G.spellPower || 0) + ((pstat && pstat.status.spellUp) || 0);
     if (card && /受法伤加成翻倍/.test(String(card.desc || ''))) sp *= 2;
     // 「对冰冻角色伤害 +N」（寒冰剑）：目标被冰冻时追加
-    let amt = amount;
     const frzM = card && String(card.desc || '').match(/对冰冻[^。]*?伤害\s*\+\s*(\d+)/);
     if (frzM && (foe.status.freeze || 0) > 0) amt += +frzM[1];
     const r = Combat.dealDamage({ atk: G.atk, spellPower: sp }, foe, amt, type);
@@ -768,7 +860,21 @@ import * as Combat from './combat.js';
     if (!entry) return;
     if (handSelecting.act === 'play') {
       handSelecting = null;
-      execPlay(uid, entry.card, [], alive()[0] || null, true);   // 选卡施放：不扣费
+      queueCardExecution(uid, entry.card, [], alive()[0] || null, true);   // 选卡施放：不扣费
+      return;
+    }
+    if (handSelecting.act === 'copy') {
+      // 深红丝袋：复制选中的手牌（原牌保留，复制件为战斗内临时卡）
+      addTempCard({ ...entry.card });
+      G.log(`[[icon:cards]] 复制了手牌中的【<b>${esc(entry.card.name)}</b>】（置入手牌，原牌保留）`, 'loot');
+      handSelecting.n -= 1;
+      if (handSelecting.n > 0) { requestBattleRender(); return; }
+      const doneJob = handSelecting;
+      handSelecting = null;
+      if (doneJob.thenText) applyTextEffects(entry.card, doneJob.thenText, null);
+      if (!alive().length) { finish(true); return; }
+      processHandSelect();
+      requestBattleRender();
       return;
     }
     hand = hand.filter(h => h !== uid);
@@ -789,6 +895,47 @@ import * as Combat from './combat.js';
     while (cnt < n && consumed.length) { hand.push(consumed.pop()); cnt++; }
     if (cnt) G.log(`[[icon:gem]] 复原 ${cnt} 张消耗卡，回到手牌`, 'ok');
     return cnt;
+  }
+
+  // —— 抉择面板（2026-09-08 人工 N 选一）：复用发现面板的弹层交互 ——
+  function processChoice() {
+    if (choosing || !choiceQueue.length) return;
+    const job = choiceQueue.shift();
+    choosing = { cardName: job.cardName || '？', options: (job.options || []).slice() };
+    requestBattleRender();
+  }
+  function pickChoice(i) {
+    if (!choosing) return;
+    const job = choosing;
+    choosing = null;
+    const text = job.options[+i] || '';
+    G.log(`[[icon:question]] <b>抉择</b>（【${esc(job.cardName)}】）：你选择了「${esc(text)}」`, 'sys');
+    // 选项若指名一张生物/门类卡（如 末日浩劫之门 / 天国之门）：
+    // 把它的「回合开始时」效果注册为每回合重复的持续效果（门是场面物件）
+    const quoted = text.match(/[‘“「]([^\s，。；‘’“”「」]+)[’”」]/);
+    const ref = quoted && SDT.Cards.all().find(c => c.name === quoted[1]);
+    if (ref && ref.type === '生物') {
+      const parts = splitClauses(String(ref.desc || ''));
+      if (parts.turnStart.length) {
+        parts.turnStart.forEach(it => {
+          // 天国之门类「随机获取一项祝福」：把括号里的候选词池拼进注册文本，供回合结算识别
+          let text = it.text;
+          const paren = String(ref.desc || '').match(/（[^）]*从这些中随机[^）]*）/);
+          if (paren && /随机获取一项祝福/.test(text)) text += paren[0];
+          delayed.push({ text, cardName: ref.name, repeat: true });
+        });
+        G.log(`[[icon:hourglass]] <b>${esc(ref.name)}</b> 展开：${esc(parts.turnStart.map(it => it.text).join('；'))}（每回合开始生效）`, 'sys');
+      } else {
+        G.log(`[[icon:question]] 【${esc(ref.name)}】没有可展开的回合开始效果（占位）`, 'dim');
+      }
+    } else {
+      applyTextEffects({ name: job.cardName }, text, alive()[0] || null);
+    }
+    sweepDead();
+    if (!alive().length) { finish(true); return; }
+    processChoice();
+    processDiscoverQueue();
+    requestBattleRender();
   }
   function processDiscoverQueue() {
     if (discovering || !discoverQueue.length) return;
@@ -819,12 +966,12 @@ import * as Combat from './combat.js';
     if (act === 'play' || act === 'potion') {
       const uid = addTempCard(card);
       G.log(`[[icon:question]] 发现：【<b>${esc(card.name)}</b>】并直接施放（战斗内临时卡，战后消散）`, 'loot');
-      execPlay(uid, findCard(uid).card, [], alive()[0] || null, true);
+      queueCardExecution(uid, findCard(uid).card, [], alive()[0] || null, true);
     } else if (act === 'playKeep') {
       // 永恒绽放：施放 1 张，其余两张入手
       const uid = addTempCard(card);
       G.log(`[[icon:question]] 发现：【<b>${esc(card.name)}</b>】并直接施放（战斗内临时卡，战后消散）`, 'loot');
-      execPlay(uid, findCard(uid).card, [], alive()[0] || null, true);
+      queueCardExecution(uid, findCard(uid).card, [], alive()[0] || null, true);
       options.filter(o => o.id !== card.id).forEach(o => {
         addTempCard(o);
         G.log(`[[icon:cards]] 其余的【<b>${esc(o.name)}</b>】置入手牌`, 'loot');
@@ -860,19 +1007,34 @@ import * as Combat from './combat.js';
     G.log(`[[icon:bolt]] <b>${esc(foe.name)}</b> 的攻击附加了 <b>1</b> 层${Combat.CURSE_META[key].name}`, 'warn');
   }
 
+  // 附加 1 层随机诅咒（滋生异变体「攻击并施加诅咒」用；灼烧已入池，2026-09-08）
+  function elCurse(foe) {
+    const keys = ['bleed', 'poison', 'burn'];
+    const key = keys[Math.floor(Random.random('status') * keys.length)];
+    Combat.addCurse(pstat, key, 1);
+    SDT.Sound.sfx('curse');
+    G.log(`[[icon:skull]] <b>${esc(foe.name)}</b> 的攻击附加了 <b>1</b> 层${Combat.CURSE_META[key].name}`, 'warn');
+  }
+
   // ---------- 回合结束 ----------
   function endTurn() {
-    if (busy || infusing || discovering) return;
+    if (busy || infusing || discovering || choosing) return;
     busy = true;
+    battleState = transitionBattle(battleState, BATTLE_PHASES.ENEMY);
     pendingTarget = null;
     pendingHint = '';
-    // —— 玩家回合结束：中毒结算 ——
+    // —— 玩家回合结束：中毒 / 灼烧结算 ——
     const pref = { hp: G.hp, defense: pdef, status: pstat.status };
     const pr = Combat.tickPoison(pref);
+    const br = Combat.tickBurn(pref);
     G.hp = Math.max(0, pref.hp);
     if (pr) {
       floats.push({ unit: 'self', text: '-' + pr.dealt, cls: 'hurt' });
       G.log(`[[icon:skull]] 中毒结算：你受到 <b>${pr.dealt}</b> 点固定伤害（${G.hp}/${G.maxHp}）`, 'warn');
+    }
+    if (br) {
+      floats.push({ unit: 'self', text: '-' + br.dealt, cls: 'hurt' });
+      G.log(`[[icon:fire]] 灼烧结算：你受到 <b>${br.dealt}</b> 点固定伤害（${G.hp}/${G.maxHp}）`, 'warn');
     }
     // 计时状态不在玩家阶段递减——共享回合钟统一在每回合结束（afterEnemies 末尾）递减
     requestBattleRender();
@@ -900,7 +1062,15 @@ import * as Combat from './combat.js';
           if (dealt > 0 && Combat.breakStealth(foe)) {
             G.log(`[[icon:runner]] <b>${esc(foe.name)}</b> 发动了攻击，<b>潜行</b>被破除`, 'dim');
           }
-          if (foe.affix === 'frenzy') frenzyCurse(foe);
+          if (dealt > 0 && foe.affix === 'frenzy') frenzyCurse(foe);
+          // 行为型附加：灼热异变体（攻击并灼烧）/ 滋生异变体（攻击并施加诅咒）
+          if (dealt > 0 && foe.behavior === 'burn') {
+            Combat.addCurse(pstat, 'burn', 2);
+            SDT.Sound.sfx('curse');
+            G.log(`[[icon:fire]] <b>${esc(foe.name)}</b> 的攻击附加了<b>灼烧</b>（2 回合内每回合结束受 1 点固定伤害）`, 'warn');
+          } else if (dealt > 0 && foe.behavior === 'curse') {
+            elCurse(foe);
+          }
         }
       }
       requestBattleRender();
@@ -911,13 +1081,18 @@ import * as Combat from './combat.js';
   }
 
   function afterEnemies() {
-    // —— 敌人回合结束：中毒结算 + 词缀 ——
+    // —— 敌人回合结束：中毒 / 灼烧结算 + 词缀 ——
     foes.forEach(foe => {
       if (foe.dead) return;
       const er = Combat.tickPoison(foe);
       if (er) {
         floats.push({ unit: foes.indexOf(foe), text: '-' + er.dealt, cls: 'dmg' });
         G.log(`[[icon:skull]] 中毒结算：<b>${esc(foe.name)}</b> 受到 <b>${er.dealt}</b> 点固定伤害（${Math.max(0, foe.hp)}/${foe.maxHp}）`, 'sys');
+      }
+      const eb = Combat.tickBurn(foe);
+      if (eb) {
+        floats.push({ unit: foes.indexOf(foe), text: '-' + eb.dealt, cls: 'dmg' });
+        G.log(`[[icon:fire]] 灼烧结算：<b>${esc(foe.name)}</b> 受到 <b>${eb.dealt}</b> 点固定伤害（${Math.max(0, foe.hp)}/${foe.maxHp}）`, 'sys');
       }
       if (foe.hp <= 0 && !foe.dead) { foe.dead = true;
         G.log(`[[icon:skull]] <b>${esc(foe.name)}</b> 毒发倒地！（剩 ${alive().length} 个敌人）`, 'ok');
@@ -973,13 +1148,15 @@ import * as Combat from './combat.js';
   }
 
   function flee() {
-    if (busy || infusing || discovering) return;
+    if (busy || infusing || discovering || choosing) return;
     SDT.Sound.sfx('flee');
     G.log('[[icon:runner]] 你撤出了战斗（打出过的卡照常结算）', 'sys');
     finish(null);
   }
 
   function finish(win) {
+    if (win === true && battleState.phase !== BATTLE_PHASES.VICTORY) battleState = transitionBattle(battleState, BATTLE_PHASES.VICTORY);
+    if (win === false && battleState.phase !== BATTLE_PHASES.DEFEAT) battleState = transitionBattle(battleState, BATTLE_PHASES.DEFEAT);
     SDT.Sound.sfx(win === true ? 'victory' : win === false ? 'defeat' : 'flee');
     const playedCopy = played.slice();
     const consumedCopy = consumed.slice();
@@ -987,6 +1164,8 @@ import * as Combat from './combat.js';
     drawPile = []; hand = []; discard = []; granted = []; grave = [];
     sel = new Set();
     infusing = null; discovering = null; discoverQueue = []; pendingTarget = null; floats = [];
+    handSelecting = null; handSelectQueue.length = 0;
+    choosing = null; choiceQueue.length = 0; stealthStrike = false; nextSpellTwice = 0;
     delayed = []; noDrawNext = false; spellCost1 = false; meleeCost1 = false;
     shaTransform = null; consumeFireballN = 0; lastDrawnUids = []; lastPlayedType = null;
     viewingGrave = false; dreadShown = false; selectingDeck = false;
@@ -1018,7 +1197,8 @@ import * as Combat from './combat.js';
   function snapshotSignature() {
     const sig = [mode, turn, energy, maxEnergy, busy, opts,
       pendingHint, viewingGrave, dreadShown, selectingDeck, selShaN, handSelectQueue.length,
-      spellCost1, meleeCost1, shaTransform, consumeFireballN, lastPlayedType];
+      spellCost1, meleeCost1, shaTransform, consumeFireballN, lastPlayedType,
+      stealthStrike, choiceQueue.length];
     if (G) sig.push(G.hp, G.maxHp, G.atk, G.spellPower || 0, G.myClass || '', G.characterId || '');
     if (pdef) sig.push(pdef.shield, pdef.armor, pdef.guard);
     sig.push(statusSig(pstat && pstat.status), pstat ? pstat.hp : 0);
@@ -1032,6 +1212,7 @@ import * as Combat from './combat.js';
     if (infusing) sig.push(infusing.uid, infusing.need, infusing.card, infusing.picked.size, [...infusing.picked].sort().join(','));
     if (discovering) sig.push(discovering.n, discovering.rarity, discovering.options.length);
     if (handSelecting) sig.push(handSelecting.n, handSelecting.type, handSelecting.act, handSelecting.thenText);
+    if (choosing) sig.push(choosing.cardName, choosing.options.join('|'));
     if (pendingTarget) sig.push(pendingTarget.uid, pendingTarget.card);
     if (selectingDeck) sig.push(sel.size, [...sel].sort().join(','), selPool.length);
     return sig.join('\u0001');
@@ -1061,6 +1242,7 @@ import * as Combat from './combat.js';
       options: Object.freeze(discovering.options.map(freezeObject)),
     }) : null;
     const readonlyHandSelecting = handSelecting ? Object.freeze({ ...handSelecting }) : null;
+    const readonlyChoosing = choosing ? Object.freeze({ ...choosing, options: Object.freeze(choosing.options.slice()) }) : null;
     const deckSelection = selectingDeck ? Object.freeze({
       need: R().bossDeckSize,
       starterCount: selShaN,
@@ -1069,7 +1251,8 @@ import * as Combat from './combat.js';
       boss: readonlyFoes[0] || null,
     }) : null;
     snapCache = Object.freeze({
-      mode, turn, energy, maxEnergy, busy,
+      mode, turn, energy, maxEnergy, busy, phase: battleState.phase,
+      actionQueueLength: actionQueue.length,
       opts: freezeObject(opts),
       player: G ? Object.freeze({ hp: G.hp, maxHp: G.maxHp, atk: G.atk, spellPower: G.spellPower || 0, myClass: G.myClass || null, characterId: G.characterId || null }) : null,
       pdef: playerDefense,
@@ -1082,6 +1265,7 @@ import * as Combat from './combat.js';
       infusing: readonlyInfusing,
       discovering: readonlyDiscovering,
       handSelecting: readonlyHandSelecting,
+      choosing: readonlyChoosing,
       pendingTarget: pendingTarget ? Object.freeze({ ...pendingTarget, card: freezeObject(pendingTarget.card) }) : null,
       pendingHint,
       viewingGrave,
@@ -1092,7 +1276,7 @@ import * as Combat from './combat.js';
   }
 
   function openGrave() { viewingGrave = true; requestBattleRender(); }
-  function cancelPendingTarget() { pendingTarget = null; pendingHint = ''; requestBattleRender(); }
+  function cancelPendingTarget() { pendingTarget = null; battleState = cancelTargeting(battleState); pendingHint = ''; requestBattleRender(); }
   function setPendingHint(value) { pendingHint = String(value || ''); requestBattleRender(); }
   function lockPendingTarget(value) { pendingTarget = value; pendingHint = ''; requestBattleRender(); }
   function markDreadShown() { dreadShown = true; }
@@ -1113,6 +1297,7 @@ import * as Combat from './combat.js';
     cancelDeck: cancelDeckSelection,
     pickDiscover,
     pickHandSelect,
+    pickChoice,
     setPendingHint,
     lockPendingTarget,
   });

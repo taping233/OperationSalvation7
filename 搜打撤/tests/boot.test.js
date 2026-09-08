@@ -113,4 +113,126 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
       expect(angles, `${value} 点没有朝上落定`).toEqual(expected[value]);
     }
   });
+
+  it('运行时按 mapSeed 重建局部几何，并以稳定节点提交移动事务', async () => {
+    const session = await import('../game/src/game.session.js');
+    const run = await import('../game/src/game.run.js');
+    const game = session.game;
+    session.buildDerived('integration-map-seed');
+    expect(game.mapSeed).toBe('integration-map-seed');
+    expect(game.generatorVersion).toBeTruthy();
+    expect(game.layoutVersion).toBeTruthy();
+    expect(game.geometryVersion).toContain('integration-map-seed');
+    expect(game.layerBounds).toHaveLength(5);
+    for (const [li, layer] of game.layerData.entries()) {
+      const positions = game.nodePos[li];
+      for (const [nodeIdx, node] of layer.logical.entries()) {
+        for (const [toLi, toIdx] of node.next) {
+          if (toLi !== li) continue;
+          const a = positions[nodeIdx], b = game.nodePos[toLi][toIdx];
+          expect(Math.hypot(a.x - b.x, a.y - b.y)).toBe(120);
+        }
+      }
+    }
+
+    const li = 0;
+    const start = game.layerData[li].entrances[0];
+    const edge = game.layerData[li].logical[start].next.find(([toLi]) => toLi === li);
+    expect(edge).toBeTruthy();
+    game.layerIdx = li; game.trackPos = start; game.pos = session.cellCenter(li, start);
+    game.state = 'idle'; game.moveTarget = null;
+    localStorage.setItem('sdt-reduce-motion', '1');
+    expect(run.moveTo(edge[0], edge[1])).toBe(true);
+    expect(game.state).not.toBe('moving');
+    expect([game.layerIdx, game.trackPos]).toEqual(edge);
+    expect(game.pos).toEqual(session.cellCenter(edge[0], edge[1]));
+    localStorage.removeItem('sdt-reduce-motion');
+    document.getElementById('overlay')?.setAttribute('hidden', '');
+    game.state = 'title';
+  });
+
+  it('非 reduced-motion 的 fake rAF 移动最终只提交一次', async () => {
+    const session = await import('../game/src/game.session.js');
+    const run = await import('../game/src/game.run.js');
+    const game = session.game;
+    session.buildDerived('async-move-seed');
+    const li = 0;
+    const start = game.layerData[li].entrances[0];
+    const edge = game.layerData[li].logical[start].next.find(([toLi]) => toLi === li);
+    expect(edge).toBeTruthy();
+    game.layerIdx = li; game.trackPos = start; game.pos = session.cellCenter(li, start);
+    game.state = 'idle'; game.moveTarget = null; game.turn = 1;
+    localStorage.removeItem('sdt-reduce-motion');
+
+    const originalRaf = globalThis.requestAnimationFrame;
+    const callbacks = [];
+    globalThis.requestAnimationFrame = (callback) => { callbacks.push(callback); return callbacks.length; };
+    try {
+      expect(run.moveTo(edge[0], edge[1])).toBe(true);
+      expect(game.state).toBe('moving');
+      const tick = callbacks.shift();
+      expect(typeof tick).toBe('function');
+      const now = (typeof performance !== 'undefined' && performance.now ? performance.now() : Date.now()) + 400;
+      tick(now);
+      expect(game.state).not.toBe('moving');
+      expect([game.layerIdx, game.trackPos]).toEqual(edge);
+      expect(game.turn).toBe(2);
+      // 重复调用同一个已完成帧回调不得再次结算。
+      tick(now + 400);
+      expect(game.turn).toBe(2);
+    } finally {
+      globalThis.requestAnimationFrame = originalRaf;
+      localStorage.removeItem('sdt-reduce-motion');
+      document.getElementById('overlay')?.setAttribute('hidden', '');
+      game.state = 'title';
+    }
+  });
+
+  it('第一层 door 确认后进入第二层，终层仍保留 extraction', async () => {
+    const session = await import('../game/src/game.session.js');
+    const run = await import('../game/src/game.run.js');
+    const game = session.game;
+    session.buildDerived('door-transition-seed');
+    const door = game.layerData[0].doors[0];
+    const from = game.layerData[0].logical.findIndex(cell =>
+      cell.next.some(([toLi, toIdx]) => toLi === 0 && toIdx === door.at));
+    expect(from).toBeGreaterThanOrEqual(0);
+    game.layerIdx = 0; game.trackPos = from; game.pos = session.cellCenter(0, from);
+    game.state = 'idle'; game.moveTarget = null;
+    localStorage.setItem('sdt-reduce-motion', '1');
+    expect(run.moveTo(0, door.at)).toBe(true);
+    await new Promise(resolve => setTimeout(resolve, 950));
+    const goDoor = document.querySelector('#ovBody [data-act="goDoor"]');
+    expect(goDoor).not.toBeNull();
+    goDoor.click();
+    expect(game.layerIdx).toBe(door.toLayer);
+    expect(game.trackPos).toBe(door.arriveAt);
+    expect(game.state).toBe('idle');
+    expect(game.layerData[4].logical[game.layerData[4].exit].def.type).toBe('extraction');
+    localStorage.removeItem('sdt-reduce-motion');
+    document.getElementById('overlay')?.setAttribute('hidden', '');
+    game.state = 'title';
+  });
+
+  it('enterLayer 会按当前层全貌适配镜头，而不是只聚焦入口', async () => {
+    const session = await import('../game/src/game.session.js');
+    const game = session.game;
+    const camera = session.cam;
+    session.buildDerived('fit-layer-seed');
+    camera.resize(800, 600);
+    const li = 3;
+    const at = game.layerData[li].entrances[0];
+    session.enterLayer(li, at);
+    expect(game.activeLayerBounds).toEqual(game.layerBounds[li]);
+    expect(camera.fitLayer).toBeTypeOf('function');
+    const pad = 128;
+    for (const p of game.nodePos[li]) {
+      const screen = camera.worldToScreen(p.x, p.y);
+      expect(screen.x).toBeGreaterThanOrEqual(-pad);
+      expect(screen.x).toBeLessThanOrEqual(camera.viewW + pad);
+      expect(screen.y).toBeGreaterThanOrEqual(-pad);
+      expect(screen.y).toBeLessThanOrEqual(camera.viewH + pad);
+    }
+    game.state = 'title';
+  });
 });

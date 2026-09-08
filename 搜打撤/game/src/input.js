@@ -16,7 +16,10 @@ const DEFAULT_BINDINGS = {
   camFocus:     ['f'],
   backpack:     ['b'],
   nodeNumbers:  ['n'],
-};
+  moveConfirm:  ['x'],
+  moveCancel:   ['escape'],
+  movePrev:     ['z'],
+  };
 
 let bindings = loadBindings();
 

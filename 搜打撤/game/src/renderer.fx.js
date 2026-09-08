@@ -112,7 +112,7 @@ const T0 = SDT.MAP.tile;   // 缩放基准单位（特效尺寸用）
       const k = (t - f.t0) / f.dur;
       if (k >= 1) { release('floats', FX.floats[i]); FX.floats[i] = FX.floats[FX.floats.length - 1]; FX.floats.pop(); continue; }
       const ease = 1 - Math.pow(1 - k, 3);
-      ctx.font = `800 ${(f.big ? 26 : 19) / z}px "Cascadia Code","Noto Sans SC Sub","Microsoft YaHei",sans-serif`;
+      ctx.font = `800 ${(f.big ? 26 : 19) / z}px "HarmonyOS Sans SC","HarmonyOS Sans","Noto Sans SC Sub","Microsoft YaHei",sans-serif`;
       ctx.globalAlpha = k > 0.72 ? (1 - k) / 0.28 : 1;
       const y = f.y - T0 * (0.5 + ease * 0.95);
       ctx.lineWidth = 5.5 / z;

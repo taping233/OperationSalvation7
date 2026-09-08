@@ -2,6 +2,7 @@
 import { describe, it, expect, beforeAll } from 'vitest';
 window.SDT = window.SDT || { Icons: { img: () => '' } };
 await import('../game/src/cards.js');
+await import('../game/src/art.js');
 
 let Cards;
 beforeAll(() => { Cards = window.SDT.Cards; });
@@ -37,4 +38,42 @@ describe('卡面角标', () => {
     expect(Cards.cardHTML({ name: '疗愈', cost: 1, rarity: '初始', type: '法术', heal: 3 }).includes('回 3')).toBe(true));
   it('卡面显示护甲词条角标', () =>
     expect(Cards.cardHTML({ name: '铁壁', cost: 1, rarity: '初始', type: '武术', armor: 4 }).includes('甲 4')).toBe(true));
+});
+
+describe('指定道具定名迁移', () => {
+  it('按稳定 id 改名并合并旧内置金疮药', () => {
+    const key = 'sdt-cards-item-renames-v1';
+    const previousCards = Cards.all().map(card => ({ ...card }));
+    const previousMarker = localStorage.getItem(key);
+    try {
+      localStorage.removeItem(key);
+      Cards.saveAll([
+        { id: 'tt-medneedle', name: '医疗针', type: '道具' },
+        { id: 'tt3-savior-elixir', name: '救世灵药', type: '道具' },
+        { id: 'builtin-jinchuangyao', name: '金疮药', type: '道具' },
+        { id: 'tt-jinchuangyao', name: '金创药', type: '道具' },
+      ]);
+      Cards.ensureItemRenames();
+      expect(Cards.all().map(card => [card.id, card.name])).toEqual([
+        ['tt-medneedle', '急救合剂'],
+        ['tt3-savior-elixir', '斗神酒'],
+        ['tt-jinchuangyao', '金疮药'],
+      ]);
+    } finally {
+      Cards.saveAll(previousCards);
+      if (previousMarker == null) localStorage.removeItem(key);
+      else localStorage.setItem(key, previousMarker);
+    }
+  });
+});
+
+describe('道具专属图片映射', () => {
+  beforeAll(() => {
+    window.SDT.Icons = window.SDT.Icons || {};
+    window.SDT.Icons.TYPE_ART = Cards.TYPE_ART;
+  });
+  it('稳定 id 使用对应透明道具素材', () => {
+    const html = window.SDT.Art.cardIcon({ id: 'tt3-savior-elixir', name: '斗神酒', type: '道具' });
+    expect(html).toContain('cards/items/tt3-savior-elixir.webp');
+  });
 });

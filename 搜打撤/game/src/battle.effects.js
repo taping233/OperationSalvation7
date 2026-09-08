@@ -12,12 +12,17 @@ function splitEffectClauses(description) {
       out.onInfused.push(match[1]);
       return;
     }
-    if ((match = text.match(/^抽到时施放[:：]?\s*(.+)$/))) {
+    if ((match = text.match(/^抽到(?:该牌|到该牌)?时施放[:：]?\s*(.+)$/))) {
       out.onDraw.push(match[1]);
       return;
     }
-    if ((match = text.match(/^(每回合开始时|下回合开始时?|下个回合开始时?|回合开始时)[：:，,]?\s*(.+)$/))) {
-      out.turnStart.push({ text: match[2], each: /^每回合开始时/.test(text) });
+    // 「抽到该牌时+动词」衍生牌触发（诛魔剑：抽到即结算，不占手牌）
+    if ((match = text.match(/^抽到该牌时[:：]?\s*(.+)$/))) {
+      out.onDraw.push(match[1]);
+      return;
+    }
+    if ((match = text.match(/^(每回合开始时|每回合开始|下回合开始时|下回合开始|下个回合开始时|下个回合开始|回合开始时|回合开始)[：:，,]?\s*(.+)$/))) {
+      out.turnStart.push({ text: match[2], each: /^每回合开始/.test(text) });
       return;
     }
     if (/^(本局对战内|本场对战|本场战斗)/.test(text)) {
@@ -36,7 +41,7 @@ function splitEffectClauses(description) {
  * 0~5 费、古朴/稀有/史诗/传说、火球系列、火球、箭系列、药水系列、杀、注能卡、
  * 本职业、其它职业、形态、禁咒。 */
 const POOL_NUM_MAP = { '一': 1, '两': 2, '二': 2, '三': 3, '四': 4, '五': 5 };
-const CURSE_DESC_RE = /诅咒|中毒|流血|冰冻|沉默|破甲|禁疗/;
+const CURSE_DESC_RE = /诅咒|中毒|流血|冰冻|沉默|破甲|禁疗|灼烧/;
 const CURSE_CAPABLE = (c) => ['武术', '法术', '装备', '英雄卡'].includes(c.type) &&
   CURSE_DESC_RE.test(String(c.desc || ''));
 
@@ -71,7 +76,7 @@ function parsePoolNoun(raw, myClass) {
     if (key === '杀') preds.push(c => c.id === 'builtin-sha' || c.name === '杀' || c.name === '初始攻击');
     else if (key === '火球') preds.push(series ? (c => String(c.name || '').includes('火球')) : (c => c.name === '火球'));
     else if (key === '箭') preds.push(c => String(c.name || '').includes('箭'));
-    else if (key === '药水') preds.push(c => String(c.name || '').includes('药水') || c.name === '桃');
+    else if (key === '药水') preds.push(c => String(c.name || '').includes('药水') || c.name === '能量饮料');
     else if (key === '禁咒') preds.push(c => String(c.name || '').startsWith('禁咒'));
     else if (key === '形态') preds.push(c => /形态/.test(String(c.name || '')));
   }
@@ -95,6 +100,7 @@ function createEffectExecutor(deps) {
     getPlayerClass, getPlayerCaster, foeIndexOf, releaseHandMatches,
     autoPlayHandType, setShaTransform, setConsumeFireball,
     damagePlayer, addPlayerMaxHp, dumpHand,
+    queueChoice, setStealthStrike, setNextSpellTwice,
   } = deps;
 
   return function applyTextEffects(card, text, target, flags) {
@@ -111,8 +117,47 @@ function createEffectExecutor(deps) {
     const infLead = desc.match(/^注能\s*[（(][^）)]*[）)][：:]?\s*(.+)$/);
     if (infLead) desc = infLead[1];
 
-    // 「（…从这些中随机）」是"随机祝福"的可选项说明，不逐项生效（整句由「随机获取一项祝福」结算）
-    if (/从这些中随机/.test(desc)) return { did: false, drawn: false, healed: false, armored: false };
+    // 「回复 N 倍于被注能卡牌价格的血量」（圣光治愈）：注能打出时按牺牲品费用折算成数值
+    if (flags.fuelCost != null) {
+      const mulM = desc.match(/(\d+)\s*倍于被注能卡牌价格/);
+      if (mulM) {
+        desc = desc.replace(/[^，。]*?\d+\s*倍于被注能卡牌价格的血量/, `回复 ${+mulM[1] * Math.max(0, flags.fuelCost)} 点生命`);
+        log(`[[icon:flask]] 牺牲品费用 ${flags.fuelCost} → 折算回复 ${+mulM[1] * Math.max(0, flags.fuelCost)} 点生命`, 'sys');
+      }
+    }
+
+    // —— 抉择（2026-09-08 人工 N 选一）：弹出选项面板，选中哪项才结算哪项 ——
+    // 句式「抉择：1° X；2° Y…」（神灯，经 clause 合并后序号间为逗号）与
+    // 「抉择：打开‘A’或者‘B’」（神话终章·雷修斯）。必须在其它效果句之前拦截，
+    // 否则选项里的冰冻/消灭等关键词会被立即句处理器抢先自动结算。
+    if (!did && /抉择[:：]/.test(desc) && typeof queueChoice === 'function') {
+      const body = desc.replace(/^.*?抉择[:：]\s*/, '');
+      let options;
+      if (/\d\s*[°º]/.test(body)) {
+        options = body.split(/[,，]?\s*\d\s*[°º]\s*/).map(s => s.trim()).filter(Boolean);
+      } else {
+        options = body.split(/或者/).map(s => s.trim()).filter(Boolean);
+      }
+      if (options.length > 1) {
+        queueChoice({ cardName: card.name, options });
+        log(`[[icon:question]] <b>${esc(card.name)}</b>：抉择（${options.length} 选 1）——请从面板中选择`, 'sys');
+        return { did: true, drawn: false, healed: false, armored: false };
+      }
+    }
+
+    // 「（…从这些中随机）」是"随机祝福"的可选项说明，不逐项生效——
+    // 但「随机获取一项祝福」整句（天国之门）本身就是结算入口，不能跳过
+    if (/从这些中随机/.test(desc) && !/随机获取一项祝福/.test(desc)) {
+      return { did: false, drawn: false, healed: false, armored: false };
+    }
+
+    // —— 灼烧（2026-09-08 独立状态）：不叠加、按回合固定掉血 ——
+    const burnM = desc.match(/(?:附加|施加|攻击并)\s*(?:\d+\s*层?\s*)?灼烧/);
+    if (burnM) {
+      const fm = desc.match(/灼烧(?:状态)?\s*(\d+)\s*回合/);
+      const n = fm ? +fm[1] : (durOv ? +durOv : 2);
+      if (curseTarget) { combat.addCurse(curseTarget, 'burn', n); log(`[[icon:fire]] <b>${esc(curseTarget.name)}</b> 被灼烧（${n} 回合内每回合结束受 1 点固定伤害，不叠加）`, 'sys'); did = true; }
+    }
 
     const bm = desc.match(/(?:附加|施加)\s*(?:(\d+)\s*层?)?\s*流血/);
     if (bm || /附加流血|施加流血/.test(desc)) {
@@ -155,9 +200,14 @@ function createEffectExecutor(deps) {
       log(`[[icon:runner]] <b>祝福·潜行</b>：${n} 回合内无法成为被攻击对象（造成伤害会破除）`, 'ok');
       did = true;
     }
+    // 「攻+N / +N 攻」是攻击伤害记号：卡面 dmg 字段已经结算过（structuredHit）时
+    // 不能再当攻击强化祝福叠一次（剑荡妖邪/青龙偃月斩曾因此双重加攻）；
+    // 「获得 N 点攻击力」句式不受此限制（那是真正的强化，如天启诛魔剑）
     const atkB = !/状态下/.test(desc)
-      ? (desc.match(/攻击\s*\+\s*(\d+)/) || desc.match(/攻\s*\+\s*(\d+)/) ||
-         desc.match(/\+\s*(\d+)\s*攻/) || desc.match(/获得\s*(\d+)\s*点?攻击力?/))
+      ? ((flags.structuredHit
+          ? null
+          : (desc.match(/攻击\s*\+\s*(\d+)/) || desc.match(/攻\s*\+\s*(\d+)/) || desc.match(/\+\s*(\d+)\s*攻/)))
+        || desc.match(/获得\s*(\d+)\s*点?攻击力?/))
       : null;
     if (atkB) {
       combat.addBlessing(pstat, 'atkUp', +atkB[1], durOv ? +durOv : 0);
@@ -270,10 +320,10 @@ function createEffectExecutor(deps) {
       }
       did = true;
     }
-    // —— 附加 N 种随机诅咒（致命射线）——
+    // —— 附加 N 种随机诅咒（致命射线）；灼烧已入诅咒池（2026-09-08）——
     const randC = desc.match(/附加\s*(\d+)\s*种随机诅咒/);
     if (randC && !did) {
-      const keys = ['bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban']
+      const keys = ['bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban', 'burn']
         .sort(() => random01() - 0.5)
         .slice(0, +randC[1]);
       const t = curseTarget;
@@ -282,6 +332,19 @@ function createEffectExecutor(deps) {
         log(`[[icon:skull]] <b>${esc(t.name)}</b> 附加了 ${keys.length} 种随机诅咒`, 'sys');
         did = true;
       }
+    }
+    // —— 每回合对全体敌人各施加一层随机诅咒（末日浩劫之门），优先不重复 ——
+    if (/对所有敌方(?:角色)?各施加(?:一|1)层随机诅咒/.test(desc) && !did) {
+      const keys = ['bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban', 'burn'];
+      let hit = 0;
+      getAlive().slice().forEach(t => {
+        const fresh = keys.filter(k => !((t.status[k] || 0) > 0));
+        const pool = fresh.length ? fresh : keys;
+        const k = pool[Math.floor(random01() * pool.length)];
+        combat.addCurse(t, k, 1);
+        hit++;
+      });
+      if (hit) { log(`[[icon:skull]] <b>末日浩劫之门</b>：对 ${hit} 名敌人各施加 1 层随机诅咒（优先不重复）`, 'sys'); did = true; }
     }
     // —— 变成随机招式卡牌、费用为 0（神秘药水的回合开始效果）——
     const morph = desc.match(/变成\s*(\d+|一)\s*张随机\s*(招式|武术|法术)?\s*卡牌/);
@@ -312,11 +375,11 @@ function createEffectExecutor(deps) {
     }
 
     // —— 诅咒枚举句「（N′）冰冻、流血、中毒」（诅咒光波的注能效果）——
-    const enumC = desc.match(/^(?:(\d+)\s*′\s*)?((?:冰冻|流血|中毒|沉默|破甲|禁疗)(?:[、，]\s*(?:冰冻|流血|中毒|沉默|破甲|禁疗))*)$/);
+    const enumC = desc.match(/^(?:(\d+)\s*′\s*)?((?:冰冻|流血|中毒|沉默|破甲|禁疗|灼烧)(?:[、，]\s*(?:冰冻|流血|中毒|沉默|破甲|禁疗|灼烧))*)$/);
     if (enumC && !did) {
       const t = curseTarget;
       if (t) {
-        const keyMap = { '冰冻': 'freeze', '流血': 'bleed', '中毒': 'poison', '沉默': 'silence', '破甲': 'abreak', '禁疗': 'healban' };
+        const keyMap = { '冰冻': 'freeze', '流血': 'bleed', '中毒': 'poison', '沉默': 'silence', '破甲': 'abreak', '禁疗': 'healban', '灼烧': 'burn' };
         if (enumC[1]) {
           const r = combat.dealDamage(getPlayerCaster ? getPlayerCaster() : {}, t, +enumC[1], combat.TYPES.SPELL);
           if (r.dealt > 0) pushFloat({ unit: foeIndexOf ? foeIndexOf(t) : 0, text: '-' + r.dealt, cls: 'dmg' });
@@ -390,17 +453,22 @@ function createEffectExecutor(deps) {
       } else { heal(+hm[1]); pushFloat({ unit: 'self', text: '💚', cls: 'stk', warm: true }); }
       did = true;
     }
-    // 2026-09-06 #16：战斗内复原消耗卡（从消耗堆拿回手牌）
-    const rstM = desc.match(/复原\s*(?:最多)?\s*(\d+)?\s*张/);
+    // 2026-09-06 #16：战斗内复原消耗卡（从消耗堆拿回手牌）；「复活 N 张卡牌」同义复用
+    const rstM = desc.match(/(?:复原|复活)\s*(?:最多)?\s*(\d+)?\s*张/);
     if (rstM) { const c = restoreConsumed(+(rstM[1] || 1)); if (c) did = true; }
     // 2026-09-06 #24/#25：通用「选择手牌施放 / 消耗手牌」
     if (!did) {
-      const selPlay = desc.match(/选择\s*(\d+|一|两|二|三)\s*张(?:手牌中的)?(武术|法术|装备|牌)[^，。]*?(?:施放|打出)/);
+      const selPlay = desc.match(/选择(?:\s*手牌中)?\s*(\d+|[一两二三四五])\s*张(?:手牌中的?)?\s*(武术|法术|装备|牌)?\s*卡?[^，。；;]*?(?:施放|释放|打出)/);
       if (selPlay) {
         const numMap = { '一': 1, '两': 2, '二': 2, '三': 3 };
         const n = numMap[selPlay[1]] || +selPlay[1] || 1;
         queueHandSelect({ n, type: selPlay[2] === '牌' ? null : selPlay[2], act: 'play' });
-        log(`[[icon:cards]] 从手牌选择 <b>${n}</b> 张${selPlay[2] === '牌' ? '' : selPlay[2]}牌打出`, 'sys');
+        log(`[[icon:cards]] 从手牌选择 <b>${n}</b> 张${selPlay[2] && selPlay[2] !== '牌' ? selPlay[2] : ''}牌打出`, 'sys');
+        did = true;
+      } else if (/选择并复制你的\s*(?:1\s*|一\s*)?张?手牌/.test(desc) && typeof queueHandSelect === 'function') {
+        // 深红丝袋：选择并复制 1 张手牌（复制件置入手牌，原牌保留）
+        queueHandSelect({ n: 1, type: null, act: 'copy' });
+        log(`[[icon:cards]] 从手牌选择 <b>1</b> 张复制（原牌保留）`, 'sys');
         did = true;
       } else {
         const consM = desc.match(/消耗\s*(一张|两|二|三|\d+)\s*张?\s*(?:手牌中的)?(武术|法术|装备|牌|杀)牌?[,，]\s*(.+)$/);
@@ -476,7 +544,7 @@ function createEffectExecutor(deps) {
       log('[[icon:cross]] 已标记：<b>下回合开始无法抽牌</b>', 'sys');
       did = true;
     }
-    // —— 消灭小怪（神灯 2°/毁灭炸弹）：可带「攻击力 N 点及以下」门槛；无门槛时优先残血 ——
+    // —— 消灭小怪（神灯 2°/TNT）：可带「攻击力 N 点及以下」门槛；无门槛时优先残血 ——
     const killM = desc.match(/消灭\s*(\d+)\s*名(?:\s*攻击力\s*(\d+)\s*点?及以下)?/);
     if (killM && !did) {
       const n = +killM[1];
@@ -492,6 +560,55 @@ function createEffectExecutor(deps) {
         log(`[[icon:skull]] <b>${esc(f.name)}</b> 被消灭！`, 'ok');
       });
       if (targets.length) { pushFloat({ unit: 'self', text: '💥', cls: 'stk' }); did = true; }
+    }
+    // —— 注能打出时：「下一张法术施放 N 次」（元素风暴）——
+    const nsM = desc.match(/下一张(?:法术|招式)?施放\s*(\d+)\s*次/);
+    if (nsM && flags.infused && typeof setNextSpellTwice === 'function') {
+      setNextSpellTwice(+nsM[1]);
+      log(`[[icon:sparkles]] <b>元素风暴</b>：下一张法术将施放 ${nsM[1]} 次`, 'ok');
+      did = true;
+    }
+    // —— 扰敌：迫使 2 名敌人相互攻击一次（自动选前两名存活敌人） ——
+    if (/迫使其?相互攻击/.test(desc) && !did) {
+      const ts = getAlive().slice(0, 2);
+      if (ts.length === 2) {
+        const r = combat.dealDamage({ atk: ts[0].atk }, ts[1], 0, combat.TYPES.ATTACK);
+        if (r.dealt > 0) pushFloat({ unit: foeIndexOf ? foeIndexOf(ts[1]) : 0, text: '-' + r.dealt, cls: 'dmg' });
+        log(`[[icon:swords]] <b>扰敌</b>：${esc(ts[0].name)} 被迫攻击 ${esc(ts[1].name)}，造成 ${r.dealt} 点伤害`, 'sys');
+        did = true;
+      }
+    }
+    // —— 攻击全体敌人（无伤害数值，按攻击力结算；诛魔剑抽到时触发等）——
+    if (/攻击全体敌人/.test(desc) && !did) {
+      const caster = getPlayerCaster ? getPlayerCaster() : {};
+      let total = 0;
+      getAlive().slice().forEach(t => {
+        const r = combat.dealDamage(caster, t, 0, combat.TYPES.ATTACK);
+        total += r.dealt;
+        if (r.dealt > 0) pushFloat({ unit: foeIndexOf ? foeIndexOf(t) : 0, text: '-' + r.dealt, cls: 'dmg' });
+      });
+      log(`[[icon:swords]] <b>${esc(card.name)}</b>：攻击全体敌人，共造成 ${total} 点攻击伤害`, 'sys');
+      did = true;
+    }
+    // —— 损失 N 点生命（恶魔之力）——
+    const lossM = desc.match(/损失\s*(\d+)\s*点?(?:生命|血)/);
+    if (lossM && !did && typeof damagePlayer === 'function') {
+      damagePlayer(+lossM[1]);
+      did = true;
+    }
+    // —— 自伤「-N 血」（诅咒武器类回合开始效果）——
+    const negHp = desc.match(/[-－]\s*(\d+)\s*点?血/);
+    if (negHp && !did && typeof damagePlayer === 'function') {
+      damagePlayer(+negHp[1]);
+      did = true;
+    }
+    // —— 回合结束护甲衰减「-N 点」（坚盾）——
+    const armLoss = desc.match(/[-－]\s*(\d+)\s*点?\s*$/);
+    if (armLoss && !did) {
+      const n = +armLoss[1];
+      pdef.armor = Math.max(0, pdef.armor - n);
+      log(`[[icon:plate]] 护甲衰减：-${n} 点（当前 ${pdef.armor}）`, 'warn');
+      did = true;
     }
     // —— 回复至 N 血（沐愈光辉：把血量拉到目标值，不低于现值） ——
     const hpToM = desc.match(/回复\s*至\s*(\d+)\s*血/);
@@ -560,8 +677,8 @@ function createEffectExecutor(deps) {
         }
       }
     }
-    // —— 获得 1 张金色令牌或彩色令牌，无法将其带入对战（战后消散） ——
-    if (/获得\s*1\s*张金色令牌或彩色令牌/.test(desc) && !did) {
+    // —— 获得 1 张员工通行证B或员工通行证A，无法将其带入对战（战后消散） ——
+    if (/获得\s*1\s*张员工通行证B或员工通行证A/.test(desc) && !did) {
       const pool = allCards().filter(c => c.id === 'tt-token-gold' || c.id === 'tt-token-color');
       if (pool.length) {
         const got = pool[Math.floor(random01() * pool.length)];
@@ -649,7 +766,7 @@ function createEffectExecutor(deps) {
       const pred = parsePoolNoun(noun, myClass);
       const n = /等量随机卡牌/.test(desc) ? 2 : n0;   // 魔法锅炉「发现等量随机卡牌」（消耗至多 2 张）
       let act = null;
-      if (/并直接施放/.test(dPool[0])) act = 'play';
+      if (/并直接施放/.test(dPool[0]) || /并将其释放|并直接释放/.test(desc)) act = 'play';
       if (/获取剩下(两|2)张/.test(desc)) act = 'playKeep';
       queueDiscover({ n, pred, act });
       const label = pred ? noun.replace(/的$/, '') : '';
@@ -661,11 +778,17 @@ function createEffectExecutor(deps) {
     const shN = desc.match(/将\s*(?:(\d+|[一二两三四五])\s*张)?\s*([^\s，,。；;、]+?)(?:复制)?(?:洗入|放入|置入)牌库/);
     if (shR || shN) {
       const added = [];
+      // 铁甲阵：洗入随机卡时使其费用均 -1（2026-09-08 老板指定补实装）
+      const cheap = /费用均?\s*[-－]\s*1/.test(desc);
       if (shR) {
         for (let i = 0; i < +shR[1]; i++) {
           const discovered = randomDiscoverCard(null);
-          if (discovered) { addDeckCard(discovered); added.push(discovered.name); }
+          if (discovered) {
+            addDeckCard(cheap ? { ...discovered, cost: Math.max(0, (discovered.cost || 0) - 1) } : discovered);
+            added.push(discovered.name);
+          }
         }
+        if (cheap && added.length) log(`[[icon:bolt]] 洗入的 ${added.length} 张随机卡牌费用均已 -1`, 'sys');
       }
       if (shN) {
         // 去引号；「A与B」「A、B」多卡名拆分；「禁咒」等系列名按前缀整组洗入
@@ -734,6 +857,29 @@ function createEffectExecutor(deps) {
       log(`[[icon:fire]] <b>战斗规则</b>：每消耗 1 张卡牌，自动施放火球`, 'ok');
       did = true;
     }
+    // —— 破隐一击伤害翻倍（白梅落影·妄）：从潜行中发动的攻击伤害 ×2 ——
+    if (/破隐[^。]*?伤害翻倍/.test(desc) && typeof setStealthStrike === 'function') {
+      setStealthStrike(true);
+      log('[[icon:runner]] <b>战斗规则</b>：破隐一击——从潜行中发动的攻击伤害翻倍', 'ok');
+      did = true;
+    }
+    // —— 对方身上每有一层诅咒，释放一次「杀」（流光照影）——
+    if (/每有一层诅咒[^。]*?释放(?:一次)?[‘'“]?杀/.test(desc) && !did && typeof releaseHandMatches === 'function') {
+      const layers = curseTarget
+        ? combat.CURSES.filter(k => combat.CURSE_META[k].stack)
+            .reduce((a, k) => a + (curseTarget.status[k] || 0), 0)
+        : 0;
+      let released = 0;
+      for (let i = 0; i < layers && i < 10; i++) released += releaseHandMatches('杀', 0);
+      log(`[[icon:recycle]] <b>流光照影</b>：目标身负 ${layers} 层诅咒，释放了 ${released} 次「杀」`, 'sys');
+      did = true;
+    }
+    // —— 「若本牌为最后一张手牌，效果触发 N 次」（急行军）：出牌结算（execPlay）
+    //     在手牌打空时把整卡效果再跑一遍，这里只负责把该子句识别为已实装 ——
+    if (/最后一张手牌[^。；]*?触发\s*(?:\d+\s*)?次/.test(desc) && !did) {
+      log('[[icon:cards]] 最后一张手牌条件：手牌已空时整卡效果触发 2 次（出牌结算判定）', 'sys');
+      did = true;
+    }
     // —— 直接释放手牌中的所有「箭/杀/火球」（连弩），每释放 1 张抽 1 张牌 ——
     const relM = desc.match(/直接释放手牌中的所有[‘’“”「」]?(箭|杀|火球)[’’”」]?/);
     if (relM && typeof releaseHandMatches === 'function' && !did) {
@@ -741,6 +887,30 @@ function createEffectExecutor(deps) {
       const released = releaseHandMatches(relM[1], drawEach ? +drawEach : 0);
       if (released) { log(`[[icon:swords]] <b>连弩</b>：释放了手牌中 ${released} 张「${relM[1]}」`, 'ok'); did = true; }
     }
+    // —— 识别补丁（2026-09-08）：以下句式由出牌结算段 / 战斗规则层实装，
+    //     文本执行器只负责标记「已识别」，避免误报「占位」与审计假阳性 ——
+    if (!did) {
+      if (/墓地中每有\s*1\s*张(武术|法术|装备|道具|资源)牌/.test(desc) ||
+          /倍于被注能卡牌价格/.test(desc) ||
+          /永远被保留在手牌中|无法用于注能/.test(desc) ||
+          /下一张(?:法术|招式)?施放\s*\d+\s*次/.test(desc) ||
+          /本牌变为\s*0\s*费/.test(desc) ||
+          /上一张(?:打出的)?牌是武术/.test(desc) ||
+          (flags.structuredHit && (
+            /造成\s*\d+\s*点(?:\s*(?:固定|法术|真实|攻击))?\s*伤害|(\d+)\s*点?法术伤害/.test(desc) ||
+            /注能\s*[（(][^）)]*[）)][：:]?\s*伤害\s*\+\s*\d+/.test(desc) ||
+            (infLead && /^\s*伤害\s*\+\s*\d+\s*$/.test(desc)) ||
+            /对\s*\d+\s*血以下/.test(desc) ||
+            /血量一半及以下的敌人伤害增加/.test(desc) ||
+            /回复等量生命/.test(desc) ||
+            /触发\s*\d+\s*次/.test(desc) ||
+            /额外施放\s*\d+\s*次/.test(desc) ||
+            /受法伤加成翻倍/.test(desc) ||
+            /造成等同于攻击力的伤害/.test(desc)))) {
+        did = true;
+      }
+    }
+
     const em = desc.match(/(?:获得|回复)\s*(\d+)\s*点?能量/);
     if (em) {
       const current = addEnergy(+em[1]);

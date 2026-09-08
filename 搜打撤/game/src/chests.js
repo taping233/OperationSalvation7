@@ -28,8 +28,9 @@ import { Random } from './random.js';
       if (K.coins) c.coins = rndInt(K.coins[0], K.coins[1]);
       return c;
     }
-    // 随机卡池（2026-09-05 设计者定版爆率）：只开 武术/法术/装备/道具/资源 五类，
-    // 稀有度 古朴:稀有:史诗 = 2.25:1.5:1，资源/道具再 ×0.8；传说/职业/初始不直接生成
+    // 随机卡池（2026-09-08 定版爆率）：只开 武术/法术/装备/道具/资源 五类，
+    // 稀有度 古朴:稀有:史诗:传说 = 60:28:9:3，同稀有度内均分、道具 ×0.7；
+    // 初始/职业/衍生/棱彩/生物不直接生成
     // （统一走 SDT.Cards.randomDropCard，职业卡只能从职业卡池获取）；同一宝箱内尽量不重复
     const taken = new Set();
     const n = K.pickFrom || K.cards || 0;
@@ -38,7 +39,7 @@ import { Random } from './random.js';
       if (card) { taken.add(card.id); c.cards.push(card); }
     }
     if (K.coins) c.coins = rndInt(K.coins[0], K.coins[1]);
-    // BOSS宝箱：金币/银币/铜币其一 + 30% 金色令牌（都是卡牌，直接并入 cards）
+    // BOSS宝箱：金币/银币/铜币其一 + 30% 员工通行证B（都是卡牌，直接并入 cards）
     // 注意：币名要先取好再 find——把随机取名写进 find 回调会对每张库卡重新随机
     const lib = SDT.Cards.all();
     if (K.coinCards && K.coinCards.length) {
@@ -47,7 +48,7 @@ import { Random } from './random.js';
       if (coin) c.cards.push(coin);
     }
     if (K.tokenChance && Random.random('loot') < K.tokenChance) {
-      const token = lib.find(x => x.name === '金色令牌');
+      const token = lib.find(x => x.id === 'tt-token-gold');
       if (token) { c.cards.push(token); c.tokenHit = true; }
     }
     return c;
@@ -119,12 +120,12 @@ import { Random } from './random.js';
     const cardsHTML = cur.cards.map((card, i) => `
       <div class="bt-card chest-fly rl-${riOf(card)}${cur.isClass ? ' cls-chest' : ''}" style="animation-delay:${i * 160}ms"
         ${isPick ? `data-act="chestPick" data-i="${i}" title="点击收下这张"` : 'title="收下时放入背包"'}>
-        ${SDT.Cards.cardHTML(card, 'sm')}
+        ${SDT.Cards.cardHTML(card, 'sm', { hideCost: true })}
       </div>`).join('');
     const lootLine = isPick
       ? `从随机 <b>${cur.cards.length}</b> 张卡牌中选择 <b>1</b> 张 · 另含 [[icon:coin]] <b>${cur.coins}</b> 币`
       : `开出 <b>${cur.cards.length}</b> 张卡牌${cur.coins ? ` · [[icon:coin]] <b>${cur.coins}</b> 币` : ''}` +
-        (cur.tokenHit ? ' · <b class="gold">[[icon:sparkles]] 金色令牌！</b>' : '');
+        (cur.tokenHit ? ' · <b class="gold">[[icon:sparkles]] 员工通行证B！</b>' : '');
     const ops = isPick
       ? '<p class="ov-note">点击一张卡牌收下，其余两张散落在风中……</p>'
       // 2026-09-06 留言：全部收下移到右边，左侧加跳过（散落不要了）

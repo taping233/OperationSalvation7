@@ -16,21 +16,47 @@ import { BUILD_VERSION, assetUrl } from './asset-url.js';
   const CLASS_NAMES = Object.freeze(Object.fromEntries(Object.entries(CLASS_IDS).map(([name, id]) => [id, name])));
   const MONSTER_IDS = new Set(['infantry','archer','bandit','cavalry','orc_jav','orc_axe','wolf_rider','fire_el','water_el','grass_el','dragon','boss_general','boss_orc','boss_elem']);
   const CARD_FAMILIES = new Set(['hero','event','martial-ranged','martial-melee','healing','spell','equipment-armor','equipment-weapon','equipment-utility','resource-key','resource-valuables','resource-material','consumable','unknown']);
-  // 资源卡专属立绘（assets/cards/resources/<key>.webp），按卡名精确匹配；
-  // 未命中时回退到 resource-key/valuables/material 家族图
+  // 资源卡专属立绘（assets/cards/resources/<key>.webp），按稳定卡牌 id 绑定；
+  // 卡牌名称允许在制作坊修改，但不能影响原始卡面资源。
   const RESOURCE_ART = Object.freeze({
-    '制式口粮': 'ration-std',
-    '口粮': 'ration',
-    '双份口粮': 'ration-double',
-    '钥匙': 'key',
-    '一串钥匙': 'keys-bunch',
-    '一把钥匙': 'key-one',
-    '木材': 'wood',
-    '大量木材': 'wood-lots',
-    '一捆木材': 'wood-bundle',
-    '石榴石弹珠': 'garnet-marble',
-    '经济卡包': 'econpack',
-    '钻石': 'diamond',
+    'starter-ration': 'ration-std',
+    'tt-keys-bunch': 'keys-bunch',
+    'tt-rations': 'ration',
+    'tt-econpack': 'econpack',
+    'tt-key': 'key',
+    'tt-key-one': 'key-one',
+    'tt-wood': 'wood',
+    'tt-wood-lots': 'wood-lots',
+    'tt-copper': 'coin-copper',
+    'tt-silver': 'coin-silver',
+    'tt-gold': 'coin-gold',
+    'tt3-diamond': 'diamond',
+    'tt3-garnet-marble': 'garnet-marble',
+    'tt3-wood-bundle': 'wood-bundle',
+    'tt3-ration-double': 'ration-double',
+  });
+  const ITEM_ART = Object.freeze({
+    'builtin-fuyuanyao': 'builtin-fuyuanyao',
+    'starter-emergency-bandage': 'starter-emergency-bandage',
+    'tt-crystal': 'tt-crystal',
+    'tt-jinchuangyao': 'tt-jinchuangyao',
+    'tt-medneedle': 'tt-medneedle',
+    'tt-token-color': 'tt-token-color',
+    'tt-token-gold': 'tt-token-gold',
+    'tt3-blue-potion': 'tt3-blue-potion',
+    'tt3-demon-potion': 'tt3-demon-potion',
+    'tt3-houyi-potion': 'tt3-houyi-potion',
+    'tt3-iceheart-potion': 'tt3-iceheart-potion',
+    'tt3-mind-potion': 'tt3-mind-potion',
+    'tt3-mixed-potion': 'tt3-mixed-potion',
+    'tt3-mystery-potion': 'tt3-mystery-potion',
+    'tt3-python-potion': 'tt3-python-potion',
+    'tt3-savior-elixir': 'tt3-savior-elixir',
+    'tt3-turnabout-potion': 'tt3-turnabout-potion',
+    'tt3sp-doom': 'tt3sp-doom',
+    'tt4-shine-token': 'tt4-shine-token',
+    'tt4-smoke-bomb': 'tt4-smoke-bomb',
+    'tt4-woodify': 'tt4-woodify',
   });
   const missingKeys = new Set();
   const esc = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
@@ -80,7 +106,7 @@ import { BUILD_VERSION, assetUrl } from './asset-url.js';
       if (/币|钻石|令牌|水晶|弹珠/.test(name)) return 'resource-valuables';
       return 'resource-material';
     }
-    if (type === '道具') return /药|绷带|医疗|治伤/.test(name) ? 'healing' : 'consumable';
+    if (type === '道具') return /药|绷带|医疗|急救|合剂|治伤/.test(name) ? 'healing' : 'consumable';
     return 'unknown';
   }
   function resolveClass(value) {
@@ -136,6 +162,13 @@ const FIGURE_FULL_ART = Object.freeze({
 const AVATAR_ART = Object.freeze({
   shuangling: 'portraits/avatars/shuangling.webp',
   baiqi: 'portraits/avatars/baiqi.webp',
+  lituan: 'portraits/avatars/lituan.webp',
+});
+// 战斗场景专用全身立绘：与角色选择页/档案立绘分开，保留战斗姿态和朝向。
+const BATTLE_ART = Object.freeze({
+  shuangling: 'portraits/battle/shuangling.webp',
+  baiqi: 'portraits/battle/baiqi.webp',
+  lituan: 'portraits/battle/lituan.webp',
 });
 function characterArt(value, full=false) {
  const c=characterFor(value); if(!c)return null;
@@ -176,6 +209,12 @@ function characterArt(value, full=false) {
       if (c && AVATAR_ART[c.id]) return image(AVATAR_ART[c.id], 'art-avatar', c.name, `avatar-${c.id}`);
       return this.classArt(className);
     },
+    // 战斗场景全身立绘：缺失时回退角色常规立绘，避免旧角色/旧存档出现空位。
+    battleArt(className) {
+      const c = characterFor(className);
+      if (c && BATTLE_ART[c.id]) return image(BATTLE_ART[c.id], 'art-portrait art-battle', c.name, `battle-${c.id}`);
+      return this.classArt(className);
+    },
     monsterArt(id) {
       if (!MONSTER_IDS.has(id)) return fallback('enemy', id, id || '未知敌人');
       return image(`portraits/enemies/${id}.webp`, 'art-portrait art-hostile', id, `enemy-${id}`);
@@ -192,6 +231,7 @@ function characterArt(value, full=false) {
       for (const name of Object.values(CLASS_NAMES)) {
         try { push(this.classFullArt(name)); } catch (_) {}
         try { push(this.classAvatarArt(name)); } catch (_) {}
+        try { push(this.battleArt(name)); } catch (_) {}
       }
       return urls;
     },
@@ -228,6 +268,11 @@ function characterArt(value, full=false) {
       });
     },
     cardIcon(card) {
+      const cardId = String(card && card.id || '');
+      const itemKey = ITEM_ART[cardId] || '';
+      if (itemKey) return image(`cards/items/${itemKey}.webp`, 'art-card-image', card && card.name || itemKey, `card-item-${itemKey}`, 'width:100%;height:100%;object-fit:contain;display:block');
+      const resourceKey = RESOURCE_ART[cardId] || '';
+      if (resourceKey) return image(`cards/resources/${resourceKey}.webp`, 'art-card-image', card && card.name || resourceKey, `card-${resourceKey}`, 'width:100%;height:100%;object-fit:cover;display:block');
       const family = cardFamily(card);
       if (!CARD_FAMILIES.has(family)) {
         // 生物图鉴卡：用敌人战场立绘（art 字段指向 MONSTER_IDS），无映射时回退爪印图标
@@ -240,9 +285,6 @@ function characterArt(value, full=false) {
         }
         return fallback('card', family, card && card.name || '未知卡牌');
       }
-      const resourceKey = family === 'resource-key' || family === 'resource-valuables' || family === 'resource-material'
-        ? RESOURCE_ART[String(card && card.name || '')] : '';
-      if (resourceKey) return image(`cards/resources/${resourceKey}.webp`, 'art-card-image', card && card.name || resourceKey, `card-${resourceKey}`, 'width:100%;height:100%;object-fit:cover;display:block');
       // 英雄卡：按职业取专属立绘（assets/cards/hero-<职业id>.webp），缺失回退通用 hero.webp
       if (family === 'hero') {
         let clsId = resolveClass(card && card.cls);

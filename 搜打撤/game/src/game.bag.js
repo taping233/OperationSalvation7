@@ -27,7 +27,7 @@ import { _set_cardPageOpen } from './game.cardslib.js';
     if (card.type === '事件') { UI.log('[[icon:dice]] 事件卡只能在事件格中触发，无法在背包中使用（背包只记录触发历史）', 'warn'); return; }
     if (card.type !== '道具') { UI.log('只有道具卡可以直接使用', 'warn'); return; }
     const desc = card.desc || '';
-    // 能源水晶：就地复原消耗口袋中最多 3 张卡牌
+    // 能源结晶：就地复原消耗口袋中最多 3 张卡牌
     if (card.id === 'tt-crystal' || /复活最多\s*3\s*张卡牌/.test(desc)) {
       if (!game.usedPocket.length) { UI.log('消耗口袋是空的，无需复原', 'warn'); return; }
       game.ownedCards.splice(i, 1);
@@ -57,7 +57,7 @@ import { _set_cardPageOpen } from './game.cardslib.js';
       showBackpack(true);
       return;
     }
-    // 2026-09-06 #10：金色令牌（抽取 1 张传说卡 → 背包中使用改为直接获得传说卡）
+    // 2026-09-06 #10：员工通行证B（抽取 1 张传说卡 → 背包中使用改为直接获得传说卡）
     if (card.id === 'tt-token-gold' || /抽取\s*1\s*张传说卡/.test(desc)) {
       const pool = SDT.Cards.all().filter(c => c.rarity === '传说' && SDT.Cards.isRandomObtainable(c));
       if (!pool.length) { UI.log('卡牌库中没有可获得的传说卡', 'warn'); return; }
@@ -70,7 +70,7 @@ import { _set_cardPageOpen } from './game.cardslib.js';
       showBackpack(true);
       return;
     }
-    // 2026-09-06 #10：彩色令牌（觉醒）→ 获得本职业英雄卡
+    // 2026-09-06 #10：员工通行证A（觉醒）→ 获得本职业英雄卡
     if (card.id === 'tt-token-color' || /觉醒/.test(desc)) {
       const pool = SDT.Cards.classPool(game.myClass).filter(c => c.type === '英雄卡');
       if (!pool.length) { UI.log('该职业没有可觉醒的英雄卡', 'warn'); return; }
@@ -208,13 +208,13 @@ import { _set_cardPageOpen } from './game.cardslib.js';
     game.state = 'modal';
     UI.showOverlay('[[icon:cards]] 卡牌详情', `
       <div class="bag-card-detail">
-        ${SDT.Cards.cardHTML(o.card, 'lg')}
+        ${SDT.Cards.cardHTML(o.card, 'lg', { hideCost: true })}
         <p class="ov-note">${esc(o.card.name)} · ${esc(o.card.type)} · ${esc(o.card.rarity || '')}${fromSafe ? ' · 位于安全格' : ''}</p>
       </div>
       <div class="ov-btns">
         ${usable ? '<button class="ov-btn ok" data-act="useDetailCard">使用这张道具</button>' : ''}
         ${o.card.id === 'tt-token-gold' && game.ownedCards.filter(x => x.card.id === 'tt-token-gold').length >= 3
-          ? '<button class="ov-btn ok" data-act="craftColorToken">合成彩色令牌（3 金 → 1 彩）</button>' : ''}
+          ? '<button class="ov-btn ok" data-act="craftColorToken">合成员工通行证A（3 张 B → 1 张 A）</button>' : ''}
         ${fromSafe ? '<button class="ov-btn" data-act="detailFromSafe">移回背包</button>' :
           (o.card.id === SDT.Cards.SHA.id ? '' : '<button class="ov-btn" data-act="detailToSafe">移入安全格</button>')}
         ${o.card.id === SDT.Cards.SHA.id ? '' : '<button class="ov-btn danger" data-act="detailDiscard">丢弃 1 张</button>'}
@@ -222,14 +222,14 @@ import { _set_cardPageOpen } from './game.cardslib.js';
       </div>`, true);
     UI.act('useDetailCard', () => useOwnedCard(o.uid));
     UI.act('craftColorToken', () => {
-      // 2026-09-06 #10：3 张金色令牌合成 1 张彩色令牌
+      // 2026-09-06 #10：3 张员工通行证B合成 1 张员工通行证A
       const golds = game.ownedCards.filter(x => x.card.id === 'tt-token-gold').slice(0, 3);
-      if (golds.length < 3) { UI.log('金色令牌不足 3 张，无法合成', 'warn'); return; }
+      if (golds.length < 3) { UI.log('员工通行证B不足 3 张，无法合成', 'warn'); return; }
       const goldIds = new Set(golds.map(g => g.uid));
       game.ownedCards = game.ownedCards.filter(x => !goldIds.has(x.uid));
       const color = SDT.Cards.all().find(c => c.id === 'tt-token-color');
       if (color) game.ownedCards.push({ uid: newUid(), card: { ...color } });
-      UI.log('[[icon:sparkles]] 合成成功：3 张金色令牌 → 1 张<b>彩色令牌</b>', 'loot');
+      UI.log('[[icon:sparkles]] 合成成功：3 张员工通行证B → 1 张<b>员工通行证A</b>', 'loot');
       saveGame();
       backpackOpen = true;
       showBackpack(true);
@@ -293,7 +293,7 @@ import { _set_cardPageOpen } from './game.cardslib.js';
               title="${escAttr(st.card.name)} ×${st.count} · 点击查看详情 · 按住拖动整理">
              <div class="flip-inner">
                <div class="flip-face flip-front" data-act="inspectStack" data-name="${escAttr(st.card.name)}" data-safe="0">
-                 ${SDT.Cards.cardHTML(st.card)}
+                 ${SDT.Cards.cardHTML(st.card, '', { hideCost: true })}
                  <span class="stack-count">×${st.count}${isSha ? ' · [[icon:pen]]' : ''}</span>
                </div>
                <div class="flip-face flip-back">${SDT.Cards.cardBackHTML()}</div>
@@ -311,7 +311,7 @@ import { _set_cardPageOpen } from './game.cardslib.js';
           title="${escAttr(st.card.name)} ×${st.count} · 点击查看详情 · 拖回背包可取出">
           <div class="flip-inner">
             <div class="flip-face flip-front" data-act="inspectStack" data-name="${escAttr(st.card.name)}" data-safe="1">
-              ${SDT.Cards.cardHTML(st.card)}
+              ${SDT.Cards.cardHTML(st.card, '', { hideCost: true })}
               <span class="stack-count">×${st.count} · [[icon:lock]]</span>
             </div>
             <div class="flip-face flip-back">${SDT.Cards.cardBackHTML()}</div>
@@ -332,7 +332,7 @@ import { _set_cardPageOpen } from './game.cardslib.js';
       html: `
         <p class="help-item"><b>背包格</b>物资与卡牌混占格数（同名堆叠只占 1 格）。双击卡牌翻面看卡背；按住拖动整理顺序，拖入下方安全格即存入。</p>
         <p class="help-item"><b>安全格</b>由宠物阿七看守：撤离失败或放弃对局时，只有安全格里的卡牌会被抢运回基地，其余全部丢失。容量在基地「升级」页用口粮升级。</p>
-        <p class="help-item"><b>消耗口袋</b>对小怪用过的卡、注能消耗的卡会进到这里：本局无法再用，容量无限。基地可免费复原；火堆每次休整可复原 2 张；道具「能源水晶」可就地复原 3 张。</p>
+        <p class="help-item"><b>消耗口袋</b>对小怪用过的卡、注能消耗的卡会进到这里：本局无法再用，容量无限。基地可免费复原；火堆每次休整可复原 2 张；道具「能源结晶」可就地复原 3 张。</p>
         <p class="help-item"><b>丢弃</b>把卡牌拖到背包页面外的空地可申请丢弃 1 张——丢弃的牌无法取回，请谨慎操作。</p>`,
       back: () => showBackpack(true),
     });
@@ -450,7 +450,7 @@ import { _set_cardPageOpen } from './game.cardslib.js';
     if (!o || !bagDrag) return;
     const ghost = document.createElement('div');
     ghost.className = 'bag-ghost';
-    ghost.innerHTML = `<div class="bag-ghost-3d">${SDT.Cards.cardHTML(o.card, 'sm')}</div>`;
+    ghost.innerHTML = `<div class="bag-ghost-3d">${SDT.Cards.cardHTML(o.card, 'sm', { hideCost: true })}</div>`;
     document.body.appendChild(ghost);
     bagDrag.ghost = ghost;
     bagDrag.card3d = ghost.querySelector('.bag-ghost-3d');
@@ -547,7 +547,7 @@ import { _set_cardPageOpen } from './game.cardslib.js';
         const fromGrave = graveSet.has(o.uid);
         return `<div class="bt-card${kept ? ' sel' : ''}" data-act="bossPackToggle" data-uid="${escAttr(o.uid)}"
           title="${kept ? '已带走；点击改为丢弃' : '将丢弃；点击改为带走'}${fromGrave ? ' · 本场从墓地回收' : ''}">
-          ${SDT.Cards.cardHTML(o.card, 'sm')}
+          ${SDT.Cards.cardHTML(o.card, 'sm', { hideCost: true })}
           <span class="bt-tt">${fromGrave ? '[[icon:skull]]' : (o.safe ? '[[icon:lock]]' : '[[icon:bag]]')}</span>
         </div>`;
       }).join('') : '<p class="ov-empty">没有可整理的卡牌。</p>';

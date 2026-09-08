@@ -1,7 +1,6 @@
 
-import { circle, drawCover, font, hash2, mixHex, rrect, shade } from './renderer.primitives.js';
+import { circle, font, hash2, mixHex, rrect, shade } from './renderer.primitives.js';
 import { drawFlame, drawIcon, drawBitmapIcon } from './renderer.icons.js';
-import { shakeOffset, drawFX } from './renderer.fx.js';
 const SDT = window.SDT;
   const TAU = Math.PI * 2;
   const T0 = SDT.MAP.tile;   // 缩放基准单位（特效 / 棋子尺寸用）
@@ -23,10 +22,19 @@ const SDT = window.SDT;
   const NO_DASH = [];                    // 还原实线（空点划，常量复用）
   function setDash(c, seg1, seg2) { DASH2[0] = seg1; DASH2[1] = seg2; c.setLineDash(DASH2); }
 
-  // 局内壁纸：静态图版（残骸海岸）。静态图无逐帧解码开销，比视频版更省 GPU
+  // 局内壁纸：静态图版（塔卫二废墟植物走廊）。静态图无逐帧解码开销，比视频版更省 GPU。
   const environmentBackdrop = new Image();
   let backdropCanvas = null;               // 壁纸合成层（尺寸或就绪状态变化时重建）
   const backdropKey = { w: 0, h: 0, ready: false };
+  function drawCover(ctx, image, w, h) {
+    const iw = image.naturalWidth || image.width;
+    const ih = image.naturalHeight || image.height;
+    if (!iw || !ih) return;
+    const scale = Math.max(w / iw, h / ih);
+    const dw = iw * scale, dh = ih * scale;
+    ctx.drawImage(image, (w - dw) * 0.5, (h - dh) * 0.5, dw, dh);
+  }
+
   function ensureBackdrop(cam) {
     const ready = environmentBackdrop.complete && environmentBackdrop.naturalWidth > 0;
     if (backdropCanvas && backdropKey.w === cam.viewW && backdropKey.h === cam.viewH && backdropKey.ready === ready) return backdropCanvas;
@@ -50,11 +58,12 @@ const SDT = window.SDT;
     backdropCanvas = c;
     return c;
   }
+  environmentBackdrop.src = new URL('../assets/scenes/endfield-ruins.jpg', import.meta.url).href;
   environmentBackdrop.addEventListener('load', () => { backdropCanvas = null; SDT.RenderScheduler?.invalidate(); });
-  environmentBackdrop.src = new URL('../assets/board-backdrop-wreck.webp', import.meta.url).href;
 
 
   const isCurLayer = (game, li) => li === game.layerIdx;
+  const isCurrentNode = (game, n) => n.li === game.layerIdx && n.idx === game.trackPos;
   const nodeRadius = (n) => n.li === -1 ? (n.def.type === 'altar' ? ALTAR_R : BOSS_R) : NODE_R;
 
 
@@ -73,14 +82,20 @@ const SDT = window.SDT;
    * ============================================================ */
   let geo = null;
   function nodeGeo(game) {
-    if (geo && geo.src === game.nodes) return geo;
-    const nodes = game.nodes.map(n => ({ ...n, r: nodeRadius(n) }));
+    const geometryVersion = game.geometryVersion ?? game.layoutVersion ?? game.map?.geometryVersion ?? 0;
+    if (geo && geo.src === game.nodes && geo.layerIdx === game.layerIdx && geo.trackPos === game.trackPos &&
+        geo.nodePos === game.nodePos && geo.layerData === game.layerData &&
+        geo.geometryVersion === geometryVersion) return geo;
+    // 当前层始终可见；中央祭坛/BOSS 作为终局锚点保留，便于祭坛引导线落点明确。
+    const visible = game.nodes.filter(n => n.li === game.layerIdx || n.li === -1);
+    const nodes = visible.map(n => ({ ...n, r: nodeRadius(n) }));
+    const byKey = new Map(nodes.map(n => [`${n.li},${n.idx}`, n]));
 
-    // 手绘线：中点垂直偏移（确定性 wobble）的二次曲线
+    // 轻微确定性弯曲，避免分支边重合；端点由调用方按节点半径裁剪。
     const hand = (a, b, seed) => {
       const dx = b.x - a.x, dy = b.y - a.y;
       const len = Math.hypot(dx, dy) || 1;
-      const off = (hash2(seed, 7) - 0.5) * 2 * Math.min(11, len * 0.14);
+      const off = (hash2(seed, 7) - 0.5) * 2 * Math.min(18, len * 0.08);
       const mx = (a.x + b.x) / 2 - dy / len * off;
       const my = (a.y + b.y) / 2 + dx / len * off;
       const p = new Path2D();
@@ -88,11 +103,16 @@ const SDT = window.SDT;
       p.quadraticCurveTo(mx, my, b.x, b.y);
       return p;
     };
-    // 两端各缩进 gap 像素（结点边缘留白）
+    // 两端按实际节点半径裁剪，避免道路穿入图标。
     const trim = (from, to, gap) => {
       const len = Math.hypot(to.x - from.x, to.y - from.y) || 1;
       const t = gap / len;
       return { x: from.x + (to.x - from.x) * t, y: from.y + (to.y - from.y) * t };
+    };
+    const trimNodes = (from, to) => {
+      const a = trim(from, to, (from.r || nodeRadius(from)) + 8);
+      const b = trim(to, from, (to.r || nodeRadius(to)) + 8);
+      return [a, b];
     };
     const arrowAt = (from, to) => {
       const ang = Math.atan2(to.y - from.y, to.x - from.x);
@@ -104,32 +124,47 @@ const SDT = window.SDT;
       return arr;
     };
 
-    // 逐帧性能：同层连线合并为一条 Path2D，每层一次描边（实描 + 点划叠加）
+    // 当前层道路按真实 next 去重；同时保留分组，供可达边/悬停边单独强调。
     const linksByLayer = game.nodePos.map(() => new Path2D());
-    game.nodePos.forEach((arr, li) => {
-      arr.forEach((p, i) => {
-        const q = arr[(i + 1) % arr.length];
-        const p2 = hand(trim(p, q, LINK_GAP), trim(q, p, LINK_GAP), li * 57 + i * 13 + 1);
-        linksByLayer[li].addPath(p2);
+    const legalLinks = new Path2D();
+    const edgeKeys = new Set();
+    const current = game.layerData[game.layerIdx]?.logical[game.trackPos];
+    const currentKey = `${game.layerIdx},${game.trackPos}`;
+    const legalKeys = new Set((current?.next || []).map(([li, idx]) => `${li},${idx}`));
+    game.layerData.forEach((ld, li) => {
+      if (li !== game.layerIdx) return;
+      ld.logical.forEach((cell, i) => {
+        const p = game.nodePos[li][i];
+        for (const [toLi, toIdx] of (cell.next || [])) {
+          const q = game.nodePos[toLi][toIdx];
+          if (!q) continue;
+          const aKey = `${li},${i}`, bKey = `${toLi},${toIdx}`;
+          const edgeKey = [aKey, bKey].sort().join('|');
+          if (edgeKeys.has(edgeKey)) continue;
+          edgeKeys.add(edgeKey);
+          const from = byKey.get(aKey) || { ...p, r: nodeRadius({ li, def: cell.def }) };
+          const to = byKey.get(bKey) || { ...q, r: nodeRadius({ li: toLi, def: game.layerData[toLi]?.logical[toIdx]?.def || {} }) };
+          const [a, b] = trimNodes(from, to);
+          const path = hand(a, b, li * 57 + i * 13 + toLi * 3 + toIdx);
+          const legal = (aKey === currentKey && legalKeys.has(bKey)) ||
+            (bKey === currentKey && legalKeys.has(aKey));
+          if (toLi === li) {
+            linksByLayer[li].addPath(path);
+            if (legal) legalLinks.addPath(path);
+          }
+        }
       });
     });
-    const doorLinks = [];   // 环间门连线（金色 / 出口绿色，带箭头；条数少，逐帧逐条描）
-    game.layerData.forEach((ld, li) => {
-      for (const d of (ld.doors || [])) {
-        if (d.reverse) continue;
-        const p = game.nodePos[li][d.at], q = game.nodePos[d.toLayer][d.arriveAt];
-        const a = trim(p, q, LINK_GAP), b = trim(q, p, LINK_GAP);
-        doorLinks.push({ fromLi: li, toLayer: d.toLayer, exit: !!d.exit,
-          path: hand(a, b, li * 91 + d.at * 7 + 3), arrow: arrowAt(a, b) });
-      }
-    });
+    const doorLinks = [];
+    // 跨层出口不在当前层地图内绘制；玩家点击当前层的出口节点后切换地图。
     // 祭坛引导线（紫，第三环入口 → 中央祭坛）
     const altarNode = nodes.find(n => n.li === -1 && n.def.type === 'altar');
     const altarLinks = [];
-    const ld3 = game.layerData[2];
+    const ld3 = game.layerData.find(ld => (ld.altarEntrances || []).length);
     if (ld3 && altarNode) {
       for (const ae of (ld3.altarEntrances || [])) {
-        const p = game.nodePos[2][ae.at];
+        const altarLi = game.layerData.indexOf(ld3);
+        const p = game.nodePos[altarLi][ae.at];
         altarLinks.push({ path: hand(trim(p, altarNode, LINK_GAP), trim(altarNode, p, LINK_GAP), 700 + ae.at * 11),
           arrow: arrowAt(p, altarNode) });
       }
@@ -143,7 +178,8 @@ const SDT = window.SDT;
       }
       return { minX, maxX, minY, maxY };
     });
-    geo = { src: game.nodes, nodes, linksByLayer, doorLinks, altarLinks, bounds, altarNode };
+    geo = { src: game.nodes, layerIdx: game.layerIdx, trackPos: game.trackPos, nodePos: game.nodePos, layerData: game.layerData,
+      geometryVersion, nodes, legalLinks, legalKeys, linksByLayer, doorLinks, altarLinks, bounds, altarNode };
     return geo;
   }
 
@@ -269,7 +305,9 @@ const SDT = window.SDT;
 
     // 结点：落影 + 深色圆底盘面（层色只留极淡的 tint，呼吸缩放时不露亮边；描边/微光在动态层画）
     for (const n of g.nodes) {
-      const layerColor = n.li >= 0 ? (map.layers[n.li].color || '#6e5133')
+      b.save();
+      b.globalAlpha = 0.24;
+      const layerColor = n.li >= 0 ? (game.layerData[n.li]?.color || '#6e5133')
         : (SDT.MAP.centerColor || '#4a3763');
       // 纸面落影
       b.fillStyle = 'rgba(0,0,0,0.38)';
@@ -283,12 +321,13 @@ const SDT = window.SDT;
       rg.addColorStop(1, shade(base, -0.08));
       circle(b, n.x, n.y, n.r * 1.02);
       b.fillStyle = rg; b.fill();
+      b.restore();
     }
 
     // 入口底光（第一环入口结点）
     const l1 = game.layerData[0];
     b.save();
-    b.globalAlpha = game.layerIdx === 0 ? 1 : 0.30;
+    b.globalAlpha = 0.16;
     l1.entrances.forEach((idx) => {
       const p = game.nodePos[0][idx];
       const glow = b.createRadialGradient(p.x, p.y, 2, p.x, p.y, T * 0.6);
@@ -301,7 +340,7 @@ const SDT = window.SDT;
 
     // 祭坛底光（深入内环时增强）
     if (g.altarNode) {
-      const deep = game.layerIdx === map.layers.length - 1;
+      const deep = game.layerIdx === game.layerData.length - 1;
       const a = deep ? 0.55 : 0.20;
       const glow = b.createRadialGradient(g.altarNode.x, g.altarNode.y, T * 0.2, g.altarNode.x, g.altarNode.y, T * 1.6);
       glow.addColorStop(0, `rgba(154,124,200,${(a * 0.30).toFixed(3)})`);
@@ -335,22 +374,41 @@ const SDT = window.SDT;
     boardCanvas = c;
   }
 
+  // 当前位置底盘单独动态绘制，避免每走一步都重烘焙整张高分辨率棋盘。
+  function drawCurrentNodePlate(ctx, game) {
+    const g = nodeGeo(game);
+    const n = g.nodes.find(node => isCurrentNode(game, node));
+    if (!n) return;
+    const layerColor = game.layerData[n.li]?.color || '#6e5133';
+    const base = mixHex(layerColor, '#141210', 0.62);
+    ctx.save();
+    ctx.shadowColor = 'rgba(255,205,108,0.34)';
+    ctx.shadowBlur = 14 / game.cam.zoom;
+    const rg = ctx.createRadialGradient(n.x - n.r * 0.3, n.y - n.r * 0.4, n.r * 0.18, n.x, n.y, n.r);
+    rg.addColorStop(0, shade(base, 0.12));
+    rg.addColorStop(1, shade(base, -0.05));
+    ctx.fillStyle = rg;
+    circle(ctx, n.x, n.y, n.r * 1.03);
+    ctx.fill();
+    ctx.restore();
+  }
+
   // ---------- 图标层（圆形位图结点：呼吸缩放；当前环明亮，其余虚化） ----------
   function drawIcons(ctx, game) {
-    const u = T0 / 48, t = game.time, z = game.cam.zoom;
+    const u = T0 / 48, t = 0, z = game.cam.zoom;
     const g = nodeGeo(game);
     ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
     for (const n of g.nodes) {
       if (n.def.type === 'fire') continue; // 火堆由 drawFires 统一绘制
-      const cur = isCurLayer(game, n.li);
+      const current = isCurrentNode(game, n);
       const phase = nodePhase(n);
       // 呼吸缩放（各结点错拍）+ 当前环轻微悬浮
-      const R = n.r * (1 + 0.045 * Math.sin(t * 2.1 + phase));
+      const R = n.r;
       ctx.save();
-      ctx.globalAlpha = cur ? 1 : 0.32;
-      if (!drawBitmapIcon(ctx, n.def.type, n.x, n.y + (cur ? Math.sin(t * 2.2 + phase) * 1.6 * u : 0), R, cur, z)) {
-        if (cur) {
-          ctx.translate(0, Math.sin(t * 2.2 + phase) * 1.6 * u);
+      ctx.globalAlpha = current ? 1 : 0.22;
+      if (!drawBitmapIcon(ctx, n.def.type, n.x, n.y, R, current, z)) {
+        if (current) {
+          ctx.translate(0, 0);
           ctx.shadowColor = n.def.type === 'boss' ? 'rgba(255,90,80,0.6)'
             : n.def.type === 'altar' ? 'rgba(154,124,200,0.7)'
             : 'rgba(255,240,200,0.35)';
@@ -362,12 +420,11 @@ const SDT = window.SDT;
       const glow = GLISTEN[n.def.type];
       if (glow) {
         ctx.save();
-        ctx.globalAlpha = (cur ? 0.9 : 0.28) * (0.72 + 0.28 * Math.sin(t * 1.7 + phase));
+        ctx.globalAlpha = current ? 0.9 : 0.18;
         ctx.strokeStyle = glow;
         ctx.lineWidth = 1.5 / z;
-        setDash(ctx, 4 / z, 7 / z);
-        ctx.lineDashOffset = -(t * 10) / z;
-        circle(ctx, n.x, n.y, n.r * 1.26 + Math.sin(t * 1.3 + phase) * 2);
+        ctx.setLineDash(NO_DASH);
+        circle(ctx, n.x, n.y, n.r * 1.26);
         ctx.stroke();
         ctx.setLineDash(NO_DASH);
         ctx.restore();
@@ -384,28 +441,36 @@ const SDT = window.SDT;
     ctx.lineCap = 'round';
     ctx.strokeStyle = COLORS.ringLink;
     for (let li = 0; li < g.linksByLayer.length; li++) {
-      const cur = li === curLi, path = g.linksByLayer[li];
-      ctx.globalAlpha = cur ? 1 : 0.28;
-      ctx.lineWidth = (cur ? 2.5 : 2.0) / z;
+      const path = g.linksByLayer[li];
+      ctx.globalAlpha = li === curLi ? 0.20 : 0.08;
+      ctx.lineWidth = 1.8 / z;
       ctx.stroke(path);
-      ctx.globalAlpha = cur ? 0.55 : 0.14;
-      ctx.lineWidth = 3.2 / z;
+      ctx.globalAlpha = li === curLi ? 0.08 : 0.03;
+      ctx.lineWidth = 2.8 / z;
       setDash(ctx, 1.5 / z, 9 / z);
       ctx.stroke(path);
       ctx.setLineDash(NO_DASH);
     }
-    // 环间门：金色流光（出口绿色）
-    ctx.lineWidth = 1.9 / z;
-    setDash(ctx, 5 / z, 5 / z);
-    ctx.lineDashOffset = -(t * 16) / z;
-    for (const s of g.doorLinks) {
-      const relevant = s.fromLi === curLi || s.toLayer === curLi;
-      ctx.globalAlpha = relevant ? 0.95 : 0.22;
-      const col = s.exit ? 'rgba(110,200,160,0.85)' : 'rgba(225,192,120,0.85)';
-      ctx.strokeStyle = col; ctx.fillStyle = col;
-      ctx.stroke(s.path);
-      ctx.fill(s.arrow);
+    // 当前节点可走道路：柔光底、亮色中层、白金芯线，明确下一步可走方向。
+    if (g.legalLinks) {
+      const pulse = 0.82 + Math.sin((game.time || 0) * 3.2) * 0.12;
+      ctx.globalAlpha = 0.42 * pulse;
+      ctx.strokeStyle = 'rgba(255,190,74,0.78)';
+      ctx.lineWidth = 13 / z;
+      ctx.shadowColor = 'rgba(255,181,55,0.95)';
+      ctx.shadowBlur = 18 / z;
+      ctx.stroke(g.legalLinks);
+      ctx.shadowBlur = 0;
+      ctx.globalAlpha = 0.92 * pulse;
+      ctx.strokeStyle = 'rgba(255,202,91,0.96)';
+      ctx.lineWidth = 5.4 / z;
+      ctx.stroke(g.legalLinks);
+      ctx.globalAlpha = 1;
+      ctx.strokeStyle = 'rgba(255,247,205,0.98)';
+      ctx.lineWidth = 1.7 / z;
+      ctx.stroke(g.legalLinks);
     }
+    // 跨层通过 door modal 处理；当前层画面不连接到隐藏层坐标，避免贯穿地图的斜线。
     // 祭坛引导线：紫色流光
     if (g.altarLinks.length) {
       ctx.strokeStyle = 'rgba(154,124,200,0.85)'; ctx.fillStyle = 'rgba(154,124,200,0.85)';
@@ -419,22 +484,21 @@ const SDT = window.SDT;
   // ---------- 火堆结点（辉光环 + 摇曳火焰） ----------
   function drawFires(ctx, game) {
     const g = nodeGeo(game);
-    const u = T0 / 48, cam = game.cam, t = game.time;
+    const u = T0 / 48, cam = game.cam, t = 0;
     for (const n of g.nodes) {
       if (n.def.type !== 'fire') continue;
-      const cur = isCurLayer(game, n.li);
+      const current = isCurrentNode(game, n);
       const phase = nodePhase(n);
-      const R = n.r * (1 + 0.045 * Math.sin(t * 2.1 + phase));
+      const R = n.r;
       ctx.save();
-      ctx.globalAlpha = cur ? 1 : 0.35;
+      ctx.globalAlpha = current ? 1 : 0.20;
       // 圆形位图火堆（呼吸缩放）+ 橙色微光环绕；无位图回退辉光环 + 简笔火焰
-      if (drawBitmapIcon(ctx, 'fire', n.x, n.y, R, cur, cam.zoom)) {
-        const p = (Math.sin(t * 2.4 + phase) + 1) / 2;
-        ctx.globalAlpha = (cur ? 0.9 : 0.3) * (0.7 + 0.3 * p);
+      if (drawBitmapIcon(ctx, 'fire', n.x, n.y, R, current, cam.zoom)) {
+        const p = 0.5;
+        ctx.globalAlpha = (current ? 0.9 : 0.18) * (0.7 + 0.3 * p);
         ctx.strokeStyle = 'rgba(242,133,74,0.85)';
         ctx.lineWidth = 1.5 / cam.zoom;
-        setDash(ctx, 4 / cam.zoom, 7 / cam.zoom);
-        ctx.lineDashOffset = -(t * 10) / cam.zoom;
+        ctx.setLineDash(NO_DASH);
         circle(ctx, n.x, n.y, n.r * 1.26 + p * 2);
         ctx.stroke();
         ctx.setLineDash(NO_DASH);
@@ -446,7 +510,7 @@ const SDT = window.SDT;
         ctx.lineWidth = 1.8 / cam.zoom;
         circle(ctx, n.x, n.y, n.r + 2);
         ctx.stroke();
-        if (cur) { ctx.shadowColor = 'rgba(242,133,74,0.55)'; ctx.shadowBlur = 12; }
+        if (current) { ctx.shadowColor = 'rgba(242,133,74,0.55)'; ctx.shadowBlur = 12; }
         drawFlame(ctx, n.x, n.y, u, 1.15, t);
       }
       ctx.restore();
@@ -462,20 +526,22 @@ const SDT = window.SDT;
     ctx.fillStyle = 'rgba(255,255,255,0.6)';
     for (const n of g.nodes) {
       if (n.li !== game.layerIdx || n.li < 0) continue;
+      ctx.globalAlpha = isCurrentNode(game, n) ? 0.85 : 0.18;
       ctx.fillText(String(n.idx), n.x, n.y - n.r - 4);
     }
+    ctx.globalAlpha = 1;
   }
 
   // ---------- 入口脉冲圈（底光已烘焙，此处只画脉冲环） ----------
   function drawEntrancePulse(ctx, game) {
     const cam = game.cam;
     const l1 = game.layerData[0];
-    const pulse = (Math.sin(game.time * 2.6) + 1) / 2;
+    const pulse = 0.5;
     ctx.save();
-    ctx.globalAlpha = game.layerIdx === 0 ? 1 : 0.30;
     ctx.strokeStyle = 'rgba(90,162,134,0.85)';
     ctx.lineWidth = 2 / cam.zoom;
     for (const idx of l1.entrances) {
+      ctx.globalAlpha = game.layerIdx === 0 && idx === game.trackPos ? 1 : 0.16;
       const p = game.nodePos[0][idx];
       ctx.beginPath();
       ctx.arc(p.x, p.y, NODE_R + 4 + pulse * 5, 0, TAU);
@@ -489,7 +555,7 @@ const SDT = window.SDT;
     const g = nodeGeo(game);
     if (!g.altarNode) return;
     const cx = g.altarNode.x, cy = g.altarNode.y;
-    const deep = game.layerIdx === game.map.layers.length - 1;
+    const deep = game.layerIdx === game.layerData.length - 1;
     const a = deep ? 0.55 : 0.20, z = game.cam.zoom;
     ctx.save();
     ctx.lineWidth = 1.6 / z;
@@ -526,7 +592,7 @@ const SDT = window.SDT;
   // 移动目标结点：金色四角括号
   function drawMoveTarget(ctx, game) {
     if (game.moveTarget == null || game.state !== 'moving') return;
-    const p = game.nodePos[game.layerIdx][game.moveTarget];
+    const p = game.nodePos[game.moveTarget.li][game.moveTarget.idx];
     if (!p) return;
     const s = T0 * 0.38, L = T0 * 0.16, x = p.x, y = p.y;
     ctx.save();
@@ -557,7 +623,7 @@ const SDT = window.SDT;
     ctx.ellipse(px, groundY + s * 0.14, s * 0.5 * (1 - game.hop * 0.22), s * 0.16, 0, 0, TAU);
     ctx.fill();
     // 呼吸光圈（椭圆，贴地；与浅红标记同色系）
-    const pulse = (Math.sin(game.time * 3.2) + 1) / 2;
+    const pulse = 0.5;
     ctx.strokeStyle = `rgba(255,132,115,${(0.34 - pulse * 0.18).toFixed(3)})`;
     ctx.lineWidth = 2 / z;
     ctx.beginPath();
@@ -614,24 +680,32 @@ const SDT = window.SDT;
     if (!game.nodes || !game.nodes.length) return;   // 结点布局未构建前不绘制
     const cam = game.cam, map = game.map;
     const T = map.tile, W = map.cols * T, H = map.rows * T;
-    const grads = screenGrads(ctx, cam);
-    // 静态壁纸 + 50% 渐变遮罩已烘焙成单张合成层，逐帧一次 drawImage（见 ensureBackdrop）
+    // 局内使用植物废墟壁纸；缓存按视口重建，避免每帧重复缩放 JPEG。
     ctx.drawImage(ensureBackdrop(cam), 0, 0, cam.viewW, cam.viewH);
-
-    const [sx, sy] = shakeOffset(game.time);
+    // 轻量暗色层保留地图、节点和 HUD 的对比度，不遮掉壁纸主体。
+    const bg = ctx.createLinearGradient(0, 0, 0, cam.viewH);
+    bg.addColorStop(0, 'rgba(5,14,18,0.28)');
+    bg.addColorStop(0.55, 'rgba(5,14,18,0.18)');
+    bg.addColorStop(1, 'rgba(2,8,11,0.40)');
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, cam.viewW, cam.viewH);
+    const halo = ctx.createRadialGradient(cam.viewW * 0.5, cam.viewH * 0.46, 0,
+      cam.viewW * 0.5, cam.viewH * 0.46, Math.max(cam.viewW, cam.viewH) * 0.72);
+    halo.addColorStop(0, 'rgba(83,126,137,0.08)');
+    halo.addColorStop(0.62, 'rgba(36,64,74,0.03)');
+    halo.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = halo;
+    ctx.fillRect(0, 0, cam.viewW, cam.viewH);
+    const sx = 0, sy = 0;
     ctx.save();
     ctx.translate(cam.viewW / 2 + sx, cam.viewH / 2 + sy);
     ctx.scale(cam.zoom, cam.zoom);
     ctx.translate(-cam.cx, -cam.cy);
 
-    ensureSky(map);
-    ctx.drawImage(skyCanvas, SKY_SPAN.x0, SKY_SPAN.y0, SKY_SPAN.w, SKY_SPAN.h);
-    drawStars(ctx, game);
-    drawMotes(ctx, game, H);
     ensureBoard(game);
     ctx.drawImage(boardCanvas, -BOARD_PAD, -BOARD_PAD, W + BOARD_PAD * 2, H + BOARD_PAD * 2);
+    drawCurrentNodePlate(ctx, game);
     drawLinks(ctx, game);
-    drawAltarCircle(ctx, game);
     drawFires(ctx, game);
     drawIcons(ctx, game);
     drawIndexes(ctx, game);
@@ -639,13 +713,16 @@ const SDT = window.SDT;
     drawMoveTarget(ctx, game);
     drawHover(ctx, game);
     drawPlayer(ctx, game);
-    drawFX(ctx, game);
 
     ctx.restore();
 
-    // 暗角氛围（偏紫的夜幕）
-    ctx.fillStyle = grads.vig;
+    const vignette = ctx.createRadialGradient(cam.viewW / 2, cam.viewH / 2, Math.min(cam.viewW, cam.viewH) * 0.30,
+      cam.viewW / 2, cam.viewH / 2, Math.max(cam.viewW, cam.viewH) * 0.78);
+    vignette.addColorStop(0, 'rgba(0,0,0,0)');
+    vignette.addColorStop(1, 'rgba(0,0,0,0.36)');
+    ctx.fillStyle = vignette;
     ctx.fillRect(0, 0, cam.viewW, cam.viewH);
+
   }
 
   SDT.Renderer = { draw };

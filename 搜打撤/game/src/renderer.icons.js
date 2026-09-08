@@ -56,7 +56,7 @@ const TAU = Math.PI * 2;
       case 'event': { // 问号气泡
         circle(ctx, cx, cy, 11 * u); fillStroke(ctx, '#2ba58a', '#17705c', 2 * u);
         ctx.fillStyle = '#eafffa';
-        ctx.font = `bold ${15 * u}px "Cascadia Code","Noto Sans SC Sub",sans-serif`;
+        ctx.font = `bold ${15 * u}px "HarmonyOS Sans SC","HarmonyOS Sans","Noto Sans SC Sub",sans-serif`;
         ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
         ctx.fillText('?', cx, cy + 1 * u);
         break;

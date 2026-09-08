@@ -5,6 +5,10 @@ const UI = window.SDT.UI;
 import { esc } from './shared.js';
 import { escAttr } from './shared.js';
 import { BattleSession, commands, configureBattleRenderer, getSnapshot, viewApi } from './battle.core.js';
+import { groupHandCards, handCardLayout, splitHandRows } from './battle.hand.js';
+import { intentSummary, intentViewModel } from './battle.intents.js';
+import { FEEDBACK_DELTA_MS, feedbackClass, feedbackDelay } from './battle.feedback.js';
+import { renderCombatPiles } from './battle.piles.view.js';
 /* battle.view.js —— 战斗渲染：战场 DOM/手牌/指向施法箭头/拖拽预览 */
   const {
     AFFIX_META, Combat, R, aegisBlocked, curseChips, effCostOf, findCard,
@@ -19,6 +23,7 @@ import { BattleSession, commands, configureBattleRenderer, getSnapshot, viewApi 
   const openGrave = commands.openGrave;
   const cancelPendingTarget = commands.cancelPendingTarget;
   const pickDiscover = commands.pickDiscover;
+  const pickChoice = commands.pickChoice;
   const setPendingHint = commands.setPendingHint;
   const lockPendingTarget = commands.lockPendingTarget;
   const toggleInfusePick = commands.selectInfusion;
@@ -97,13 +102,27 @@ import { BattleSession, commands, configureBattleRenderer, getSnapshot, viewApi 
   // ---------- 渲染 ----------
   function render(snapshot = getSnapshot()) {
     const {
-      mode, turn, energy, maxEnergy, busy, opts, player, pdef, pstat,
-      foes, hand, drawPile, discard, grave, infusing, discovering, handSelecting,
+      mode, turn, energy, maxEnergy, busy, phase = 'player', opts, player, pdef, pstat,
+      foes, hand, drawPile, discard, grave, infusing, discovering, handSelecting, choosing,
       pendingTarget, pendingHint, viewingGrave, dreadShown, deckSelection,
     } = snapshot;
     if (aim) cancelAim();   // 重渲染时中止进行中的指向（DOM 将重建）
     if (deckSelection) { renderDeckSelection(snapshot); return; }
     if (viewingGrave) { renderGrave(snapshot); return; }
+    if (choosing) {
+      // 2026-09-08 抉择面板：人工 N 选一（复用发现面板的弹层交互）
+      const choiceHTML = choosing.options.map((text, i) => `
+        <button class="ov-btn choice-opt" data-act="btChoicePick" data-i="${i}">
+          [[icon:question]] ${esc(text)}
+        </button>`).join('');
+      UI.showOverlay(`${opts && opts.isBoss ? '[[icon:demon]] BOSS战' : '[[icon:swords]] 遭遇战'} · 第 ${turn} 回合 · [[icon:question]] 抉择`, `
+        <p class="ov-stats">【${esc(choosing.cardName)}】——从 <b>${choosing.options.length}</b> 个选项中选择 <b>1</b> 项，只有选中的效果会结算</p>
+        <div class="ov-btns choice-list">${choiceHTML}</div>
+        <p class="ov-note">抉择必须做出，无法跳过。</p>`, true);
+      UI.act('btChoicePick', (d) => pickChoice(d.i));
+      UI.refresh(SDT.game);
+      return;
+    }
     if (handSelecting) {
       // 2026-09-06 #24/#25：从手牌选择卡牌施放/消耗的通用弹层
       const pool = hand.map(findCard).filter(o => o && (!handSelecting.type || o.card.type === handSelecting.type));
@@ -135,20 +154,10 @@ import { BattleSession, commands, configureBattleRenderer, getSnapshot, viewApi 
     const infusingNow = !!infusing;
     // —— 同名卡堆叠（v0.32 杀戮尖塔式手牌）：同名同描述的卡只占一个位置，显示 ×N ——
     // 注能中：注能主卡单独一块展示，其同名燃料照常成组（点击组 = 消耗组内一张）
-    const groups = [];
-    const pushGroup = (o) => {
-      const g = groups.find(g => g.card.name === o.card.name && g.card.desc === o.card.desc);
-      if (g) g.uids.push(o.uid); else groups.push({ card: o.card, uids: [o.uid], self: false });
-    };
-    if (infusingNow) {
-      cards.forEach(o => { if (o.uid !== infusing.uid) pushGroup(o); });
-      const infEntry = findCard(infusing.uid);
-      if (infEntry) groups.push({ card: infEntry.card, uids: [infusing.uid], self: true });
-    } else cards.forEach(pushGroup);
+    const groups = groupHandCards(cards, infusingNow ? infusing : null);
     // 2026-09-06 #34：手牌 >8 张分行，只显示当前行，切行按钮切换
     const ROW_MAX = 8;
-    const rows = [];
-    for (let ri = 0; ri < groups.length; ri += ROW_MAX) rows.push(groups.slice(ri, ri + ROW_MAX));
+    const rows = splitHandRows(groups, ROW_MAX);
     if (handRow >= rows.length) handRow = 0;
     const shownGroups = rows.length > 1 ? rows[handRow] : groups;
     const N = shownGroups.length;
@@ -182,9 +191,9 @@ import { BattleSession, commands, configureBattleRenderer, getSnapshot, viewApi 
           const costBadge = effCost !== g.card.cost ? '<span class="bt-cost1" title="宇宙形态：所有卡牌 1 费">[[icon:bolt]]1</span>' : '';
           const cnt = g.uids.length > 1 ? `<span class="bt-count" title="同名卡 ${g.uids.length} 张堆叠为一叠">×${g.uids.length}</span>` : '';
           // 扇形手牌：越靠边旋转越大（transform-origin 在卡片上方远处形成圆弧）
-          const off = i - (N - 1) / 2;
-          const rot = (off * Math.min(5, 44 / N)).toFixed(2);
-          const ml = i === 0 ? '0' : (N > 9 ? '-34px' : N > 6 ? '-14px' : '0');
+          const layout = handCardLayout(i, N);
+          const rot = layout.rotation.toFixed(2);
+          const ml = `${layout.marginLeft}px`;
           return `<div class="bt-card${cls}${side ? ' need-target' : ''}" data-act="btPlay" data-uid="${uid}"
             data-aim="${side ? '1' : ''}" data-side="${side || ''}" style="--rot:${rot}deg;margin-left:${ml}" title="${escAttr(tip)}">
             ${SDT.Cards.cardHTML(g.card, 'sm')}
@@ -198,11 +207,17 @@ import { BattleSession, commands, configureBattleRenderer, getSnapshot, viewApi 
           ? '<p class="ov-empty">手牌打空了……下回合开始会再抽 1 张</p>'
           : '<p class="ov-empty">牌库与弃牌堆都空了——只能结束回合硬抗，或撤退</p>'
         : '<p class="ov-empty">没有能出的卡了……（打出过的卡本场不可再用）</p>';
-    const drawPileHTML = mode === 'boss'
-      ? `<span class="bt-pile" title="牌库：${escAttr(pileTip(drawPile))}"><span class="bt-pilecard">${SDT.Cards.cardBackHTML()}</span><b>${drawPile.length}</b></span>` : '';
-    const pilesHTML = mode === 'boss' ? `
-        <span class="bt-pile" title="弃牌堆：${escAttr(pileTip(discard))}（牌库抽空后自动洗回）"><span class="bt-pilecard down">${SDT.Cards.cardBackHTML()}</span><b>${discard.length}</b></span>
-        <span class="bt-pile clickable" data-act="btGrave" title="墓地：${escAttr(pileTip(grave))}（被消耗的牌 · 不参与洗回 · 点击查看）"><span class="bt-pilecard down">${SDT.Cards.cardBackHTML()}</span>[[icon:skull]] <b>${grave.length}</b></span>` : '';
+    const pileView = renderCombatPiles({
+      mode,
+      drawCount: drawPile,
+      discardCount: discard,
+      graveCount: grave,
+      pileTip,
+      cardBackHTML: SDT.Cards.cardBackHTML(),
+      escAttr,
+    });
+    const drawPileHTML = pileView.draw;
+    const pilesHTML = pileView.rest;
     const tip = mode === 'boss'
       ? `开局抽 ${R().battleStartDraw} · 每回合开始抽 ${R().battleTurnDraw} · 弃牌堆抽空后自动洗回 · 墓地（被消耗的牌）不洗回`
       : '普通战斗无需抽牌 ·「抽 N 张牌」效果改为获得 N 张初始攻击 · 指向卡须拖到目标身上（[[icon:swords]]敌人 · [[icon:heart]]自己）';
@@ -229,7 +244,7 @@ import { BattleSession, commands, configureBattleRenderer, getSnapshot, viewApi 
     const selfHTML = `
       <div class="sts-unit sts-me${selfLock ? ' can-target' : ''}" id="btSelf"
         title="你自己——治疗 / 净化 / 护盾 / 格挡类卡牌拖到这里打出">
-        <div class="sts-figure">${player.myClass && SDT.Art.has(player.myClass) ? SDT.Art.classArt(player.myClass) : SDT.Icons.img('helmet')}</div>
+        <div class="sts-figure">${player.myClass && SDT.Art.has(player.myClass) ? (SDT.Art.battleArt ? SDT.Art.battleArt(player.myClass) : SDT.Art.classArt(player.myClass)) : SDT.Icons.img('helmet')}</div>
         <div class="sts-nameplate">
           <b>${esc(characterName(player.characterId || player.myClass))}</b><span class="sts-you">你</span>
           <div class="bt-hpwrap sts-hp"><i style="width:${selfPct.toFixed(1)}%"></i><span>${Math.max(0, player.hp)}/${player.maxHp}</span></div>
@@ -242,9 +257,10 @@ import { BattleSession, commands, configureBattleRenderer, getSnapshot, viewApi 
       const aff = f.affix && AFFIX_META[f.affix];
       const immune = aegisBlocked(f);
       const chips = curseChips(f.status);   // 只构建一次（原来自条件+输出各调一次）
+      const intents = intentViewModel(f.intent);
       return `<div class="sts-unit sts-foe bt-foe${opts.isBoss || f.affix ? ' is-boss' : ''}${f.dead ? ' dead' : ''}${immune ? ' aegis' : ''}${pendingTarget && lockSide === 'enemy' && !f.dead ? ' can-target' : ''}" data-foe-id="${escAttr(f.id || f.name)}"
           data-eidx="${idx}" title="${aff ? escAttr(aff.name + '：' + aff.desc) : ''}">
-          ${!f.dead && f.intent ? `<div class="sts-intent" title="下一回合预告">${f.intent.icon} ${esc(f.intent.label)}${f.intent.damage ? ` · ${f.intent.damage}` : ''}</div>` : ''}
+          ${!f.dead && intents.length ? `<div class="sts-intent" title="${escAttr(`下一回合预告：${intentSummary(f.intent)}`)}">${intents.map(intent => `${intent.icon} ${esc(intent.label)}${intent.damage == null ? '' : ` · ${intent.damage}`}`).join(' ')}</div>` : ''}
           <div class="sts-figure">${f.id && SDT.Art.has(f.id) ? SDT.Art.monsterArt(f.id) : SDT.Icons.img('slime')}</div>
           <div class="sts-nameplate">
             <b>${esc(f.name)}</b>${f.dead ? ' <span class="bt-deadmark">[[icon:cross]]</span>' : ''}
@@ -259,7 +275,7 @@ import { BattleSession, commands, configureBattleRenderer, getSnapshot, viewApi 
       ? ({ boss_general: 'battle-boss-general', boss_orc: 'battle-boss-orc', boss_elem: 'battle-boss-element' }[foes[0] && foes[0].id] || 'battle-boss-general')
       : 'battle-normal';
     UI.showOverlay(`${opts.isBoss ? '[[icon:demon]] BOSS战' : '[[icon:swords]] 遭遇战'} · 第 ${turn} 回合`, `
-      <div class="battle-stage sts" data-asset-key="${battleAssetKey}">
+      <div class="battle-stage sts phase-${escAttr(phase)}" data-phase="${escAttr(phase)}" data-asset-key="${battleAssetKey}">
       <div class="battle-stage-shade"></div>
       <div class="sts-arena">
         ${selfHTML}
@@ -359,7 +375,7 @@ import { BattleSession, commands, configureBattleRenderer, getSnapshot, viewApi 
       const stk = (f.cls || '').includes('stk');   // 表情贴纸：挂在头顶而非胸前
       const r = figEl.getBoundingClientRect();
       const span = document.createElement('span');
-      span.className = 'sts-float ' + (f.cls || 'dmg');
+      span.className = 'sts-float ' + feedbackClass(f);
       span.textContent = f.text;
       span.style.left = (r.left - ovR.left + r.width / 2) + 'px';
       span.style.top = (r.top - ovR.top + r.height * (stk ? 0.02 : 0.32)) + 'px';
@@ -367,9 +383,7 @@ import { BattleSession, commands, configureBattleRenderer, getSnapshot, viewApi 
       span.addEventListener('animationend', () => span.remove(), { once: true });
       setTimeout(() => span.remove(), 1400);   // 兜底：animationend 偶尔不触发时清掉不可见残骸
       };
-      const uk = f.unit == null ? 'self' : f.unit;
-      perUnit[uk] = (perUnit[uk] || 0);
-      const delay = perUnit[uk]++ * 320;   // 同单位每多一段 +320ms
+      const delay = feedbackDelay(f.unit, perUnit, FEEDBACK_DELTA_MS);   // 同单位每多一段 +320ms
       if (delay) setTimeout(fire, delay); else fire();
     });
   }
@@ -483,8 +497,8 @@ import { BattleSession, commands, configureBattleRenderer, getSnapshot, viewApi 
   }
   function startAim(e, el) {
     const snap = getSnapshot();
-    const { busy, infusing, discovering, energy } = snap;
-    if (busy || infusing || discovering || aim) return;
+    const { busy, infusing, discovering, energy, choosing } = snap;
+    if (busy || infusing || discovering || choosing || aim) return;
     const uid = el.dataset.uid;
     const entry = findCard(uid);
     if (!entry) return;

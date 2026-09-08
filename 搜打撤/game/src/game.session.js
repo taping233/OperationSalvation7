@@ -7,6 +7,8 @@ import { GameStore } from './game.store.js';
 import { createGameMenuController } from './game.menu.js';
 import { Random } from './random.js';
 import { checkConnectivity } from './map-graph.js';
+import { createLayeredMap } from './layeredMap.js';
+import { GENERATOR_VERSION, LAYOUT_VERSION } from './map-generator.js';
 
 const runtime = {
   openClassChoice: () => {},
@@ -20,9 +22,9 @@ function configureGameRuntime(hooks) {
   Object.assign(runtime, hooks || {});
 }
 /* ============================================================
- * 搜打撤 v0.3 —— 游戏主逻辑（三环棋盘）
- * 流程：选入口(外圈四角) → 掷骰顺时针环走 → 落脚触发格子事件
- *   环间门：踩到弹窗（进入下一环 / 返回上一环 / 外圈门可撤离）
+ * 搜打撤 v0.3 —— 游戏主逻辑（五层节点图）
+ * 流程：选入口 → 点击相邻节点移动 → 落脚触发格子事件
+ *   层间门：踩到弹窗（进入下一层 / 返回上一层 / 终层可撤离）
  *   祭坛入口：进入祭坛挑战 BOSS（M1 实装卡牌战斗）
  *   紧急撤离点：花 10 币直接撤离
  * ============================================================ */
@@ -37,7 +39,7 @@ function configureGameRuntime(hooks) {
   const BASE_FIRE_HEAL = MAP.rules.fireHeal;
   const MODES = {
     standard: { id: 'standard', icon: '[[icon:map]]', name: '标准搜打撤',
-      desc: '完整三环棋盘：掷骰环走、搜刮战斗，从外圈门撤离。原版规则的完整体验。',
+      desc: '完整五层节点图：探索、搜刮与战斗，在层间门和终局撤离点做路线选择。',
       enemyMul: 1, coinMul: 1, xpMul: 1, startCoins: 0, healMul: 1, ckpt: '规则无修正' },
     elite: { id: 'elite', icon: '[[icon:fire]]', name: '精英突袭',
       desc: '敌人与 BOSS 属性 ×1.5，战斗掉落金币 ×1.5，人物经验 +50%，高稀有度卡牌爆率 +20%。高风险高回报。',
@@ -215,65 +217,51 @@ function configureGameRuntime(hooks) {
   // ---------- 初始化派生数据 ----------
   // 逻辑格：轨道上可站立的最小单位。相连火堆（上下左右连通）合并为 1 个逻辑格，
   // 掷骰移动时整片火堆只算 1 步，不存在"从一半走到另一半"。
-  function buildDerived() {
-    // 网格环（几何与底色渲染用）
-    game.rings = MAP.layers.map(l => MAP.makeRing(l.inset));
+  const MAP_NODE_SPACING = 120;
+  const MAP_NODE_PADDING = 180;
 
-    // 逻辑环 + 运行时层数据
-    game.layerData = MAP.layers.map((layer, li) => {
-      const gridRing = game.rings[li];
-      const cellsTable = layer.cells || {};
-      const isFire = (idx) => !!(cellsTable[idx] && cellsTable[idx].type === 'fire');
-      const logical = [];
-      const toLogical = new Map(); // 授权用网格环索引 → 逻辑索引
-      for (let i = 0; i < gridRing.length; i++) {
-        if (toLogical.has(i)) continue;
-        const grid = [gridRing[i]];
-        toLogical.set(i, logical.length);
-        const fire = isFire(i);
-        let def = fire ? { type: 'fire', name: '火堆' } : cellsTable[i];
-        if (fire) { // 吞并后续相连火堆格
-          let j = i + 1;
-          while (j < gridRing.length && isFire(j)) {
-            grid.push(gridRing[j]);
-            toLogical.set(j, logical.length);
-            j++;
-          }
-        }
-        logical.push({ grid, fire, oldIdx: i, def });
-      }
-      const conv = (oldIdx) => (toLogical.has(oldIdx) ? toLogical.get(oldIdx) : 0);
+  function clampIndex(value, max, fallback = 0) {
+    const n = Number.isFinite(+value) ? Math.floor(+value) : fallback;
+    return Math.max(0, Math.min(Math.max(0, max - 1), n));
+  }
+
+  function buildDerived(mapSeed = game.mapSeed ?? game.seed ?? Random.seed ?? 0) {
+    game.rings = [];
+    game.mapSeed = mapSeed;
+    game.generatorVersion = GENERATOR_VERSION;
+    game.layoutVersion = LAYOUT_VERSION;
+    game.layerData = createLayeredMap(mapSeed);
+    game.layerData.forEach(ld => { ld.toLogical = new Map(ld.logical.map((_, i) => [i, i])); });
+    const reachable = checkConnectivity(game.layerData);
+    if (!reachable.ok) console.error('[map] 不可达结点：', reachable.unreachable.join(' · '));
+
+    // 每层使用自己的局部网格坐标，不再把五层横向平移后硬挤进一张图。
+    // 生成器保证 x/row 为四向网格；这里仅负责把格心映射为稳定世界坐标。
+    game.nodePos = game.layerData.map(ld => {
+      const grid = ld.gridBounds || {};
+      const minX = Number.isFinite(grid.minX) ? grid.minX : Math.min(...ld.logical.map(c => c.x || 0));
+      const minRow = Number.isFinite(grid.minRow) ? grid.minRow : Math.min(...ld.logical.map(c => c.row || 0));
+      return ld.logical.map(cell => ({
+        x: MAP_NODE_PADDING + ((cell.x || 0) - minX) * MAP_NODE_SPACING,
+        y: MAP_NODE_PADDING + ((cell.row || 0) - minRow) * MAP_NODE_SPACING,
+      }));
+    });
+    game.layerBounds = game.nodePos.map((positions, li) => {
+      const grid = game.layerData[li].gridBounds || {};
+      const minX = Math.min(...positions.map(p => p.x));
+      const maxX = Math.max(...positions.map(p => p.x));
+      const minY = Math.min(...positions.map(p => p.y));
+      const maxY = Math.max(...positions.map(p => p.y));
       return {
-        id: layer.id, name: layer.name, nameEn: layer.nameEn, color: layer.color,
-        entranceNames: layer.entranceNames || [],
-        entrances: (layer.entrances || []).map(conv),
-        doors: (layer.doors || []).map(d => ({ ...d, at: conv(d.at), arriveAt: conv(d.arriveAt) })),
-        altarEntrances: (layer.altarEntrances || []).map(a => ({ ...a, at: conv(a.at) })),
-        logical, toLogical,
+        minX: minX - MAP_NODE_SPACING * 0.5,
+        maxX: maxX + MAP_NODE_SPACING * 0.5,
+        minY: minY - MAP_NODE_SPACING * 0.5,
+        maxY: maxY + MAP_NODE_SPACING * 0.5,
+        gridBounds: grid,
       };
     });
-
-    // 门为双向：在目标层生成对应的返回门（同 pair）
-    game.layerData.forEach((ld, li) => {
-      [...ld.doors].forEach(d => {
-        const dst = game.layerData[d.toLayer];
-        if (!dst.doors.some(x => x.pair === d.pair && x.at === d.arriveAt)) {
-          dst.doors.push({ pair: d.pair, at: d.arriveAt, toLayer: li, arriveAt: d.at, reverse: true });
-        }
-      });
-    });
-
-    // 连通性校验（procedural-gen）：从 (0层,0号) 出发 flood-fill，不可达结点大声告警
-    {
-      const res = checkConnectivity(game.layerData);
-      if (!res.ok) console.error('[map] 不可达结点：', res.unreachable.join(' · '));
-    }
-
-    // ---------- 结点布局（分布式结点地图的几何唯一来源） ----------
-    // 逻辑格 (li, idx) → 结点世界像素坐标；渲染 / 命中 / 移动动画全部基于它。
-    const layout = MAP.buildNodePositions(game.layerData.map(ld => ld.logical.length));
-    game.nodePos = layout.layers;     // [li][idx] → {x, y}
-    game.centerPos = layout.center;   // [祭坛, BOSS×3]，与 MAP.center 顺序一一对应
+    game.geometryVersion = `${String(game.mapSeed)}:${game.generatorVersion}:${game.layoutVersion}`;
+    game.centerPos = [];
     game.nodes = [];                  // 扁平结点表（渲染与最近结点命中用）
     game.cellDefs = new Map();        // 'li,idx' → { def, x, y, li, idx }
     const addNode = (li, idx, def) => {
@@ -291,17 +279,6 @@ function configureGameRuntime(hooks) {
         addNode(li, idx, def);
       });
     });
-    // 外圈出口门格（无其他事件）→ 门/撤 图标
-    (game.layerData[0].doors || []).forEach(d => {
-      const info = game.cellDefs.get('0,' + d.at);
-      if (info && !info.def) {
-        info.def = { type: 'door', exit: !!d.exit, name: '出口 / 环间门' };
-        const node = game.nodes.find(n => n.li === 0 && n.idx === d.at);
-        if (node) node.def = info.def;
-      }
-    });
-    // 中央区：祭坛 + 三 BOSS（li=-1；战斗经由祭坛触发，这里只作渲染/悬浮）
-    MAP.center.forEach((cc, k) => addNode(-1, k, cc));
   }
 
   // ---------- 存档（五档位，互相独立；基地数据也按档位隔离，见 base.js） ----------
@@ -320,12 +297,17 @@ function configureGameRuntime(hooks) {
 
   function saveGame() {
     // v0.21：只有真正开局后（runActive）才写对局存档；在基地/标题界面不产生对局文件
-    if (!game.runActive || game.state === 'title' || game.state === 'done' || game.state === 'boot') return;
+    // 只保存稳定节点；动画中可能仍停在线段中间，退出/刷新后必须回到上一个落点。
+    if (!game.runActive || game.state === 'title' || game.state === 'done' || game.state === 'boot' || game.state === 'moving') return;
     if (!activeSlot) return;
     syncPlayTime();
     assertZones();
     RunStorage.write(activeSlot, {
         seed: Random.seed, rngState: Random.snapshot(),
+        mapSeed: game.mapSeed ?? Random.seed,
+        generatorVersion: game.generatorVersion ?? GENERATOR_VERSION,
+        layoutVersion: game.layoutVersion ?? LAYOUT_VERSION,
+        geometryVersion: game.geometryVersion ?? null,
         layerIdx: game.layerIdx, trackPos: game.trackPos,
         hp: game.hp, maxHp: game.maxHp, coins: game.coins, turn: game.turn,
         atk: game.atk, mode: game.mode, myClass: game.myClass || null, characterId: game.characterId || null,
@@ -369,6 +351,10 @@ function configureGameRuntime(hooks) {
       return false;
     }
     game.seed = Random.restore(s.rngState || s.seed);
+    // 旧档没有 mapSeed 时，以旧 seed 作为确定性地图种子；若连 seed 都没有，
+    // 使用带档位的固定回退值，避免每次读档得到不同地图。
+    const restoredMapSeed = s.mapSeed ?? s.seed ?? `legacy-slot-${slot}`;
+    buildDerived(restoredMapSeed);
     SDT.Base.use(slot);   // 该档位的基地数据（仓库/熟练度/成就/卡背）
     const bi = SDT.Base.issue(slot);
     if (bi === 'corrupt') UI.log('[[icon:cross]] 该档位基地数据损坏（原数据已备份），本次以空档案启动', 'warn');
@@ -398,7 +384,13 @@ function configureGameRuntime(hooks) {
       SDT.Base.save();
     }
     game.elapsedSynced = game.elapsed;
-    enterLayer(s.layerIdx || 0, s.trackPos || 0);
+    const safeLayer = clampIndex(s.layerIdx, game.layerData.length, 0);
+    const layer = game.layerData[safeLayer];
+    const requestedIdx = Number.isFinite(+s.trackPos) ? Math.floor(+s.trackPos) : -1;
+    const safeIdx = layer?.logical?.[requestedIdx]
+      ? requestedIdx
+      : (layer?.entrances?.[0] ?? clampIndex(requestedIdx, layer?.logical?.length || 1, 0));
+    enterLayer(safeLayer, safeIdx);
     SDT.Sound.music('board');
     UI.log(`[[icon:download]] 已读取【档位 ${slot}】存档，直接回到上一局未结束的对局`, 'ok');
     if (!game.myClass) runtime.openClassChoice();   // 上次存档时还没选职业：补上开局选择
@@ -443,6 +435,8 @@ function configureGameRuntime(hooks) {
 
   function newRun(mode, picks) {
     game.seed = Random.reseed();
+    game.mapSeed = game.seed;
+    buildDerived(game.mapSeed);
     game.mode = MODES[mode] ? mode : 'standard';
     applyModeRules();
     game.runActive = true;    // v0.21：从这一刻起才写对局存档
@@ -472,7 +466,7 @@ function configureGameRuntime(hooks) {
     FX.clear();
     UI.clearLog();
     UI.log(`欢迎来到<b>代号7</b>：本次玩法【<b>${modeCfg().name}</b>】——${modeCfg().ckpt}`, 'sys');
-    UI.log('掷骰环走，落脚触发事件；外环闸门可撤离，深处有污染核心与变异首脑', 'sys');
+    UI.log('点击相邻节点前进，落脚触发事件；层间闸门通往更深区域，终层可完成撤离', 'sys');
     grantStarterSha();
     UI.log(`[[icon:cards]] 随身携带初始牌【<b>初始攻击</b>】×${MAP.rules.starterSha}、【<b>火球</b>】×1（固定携带 · 不可入库 / 安全格）`, 'sys');
     applyDeployPicks(picks);    // 出发准备页选择的仓库卡牌
@@ -481,21 +475,31 @@ function configureGameRuntime(hooks) {
       game.coins += reserve;
       UI.log(`[[icon:coin]] 带上基地储备 <b>${reserve}</b> 币（卖出仓库物品所得）`, 'coin');
     }
-    // 随机入口出生
-    const l1 = MAP.layers[0];
-    const k = Math.floor(Random.random('gameplay') * l1.entrances.length);
-    UI.log(`[[icon:dice]] 随机出生在 <b>${l1.entranceNames[k]}</b>`, 'sys');
-    enterLayer(0, l1.entrances[k]);
+    // 五层图从第一层的多个入口之一开始；这是起点选择，不消耗行动力。
+    const l1 = game.layerData[0];
+    const startIdx = l1.entrances[Math.floor(Random.random('gameplay') * l1.entrances.length)] || 0;
+    enterLayer(0, startIdx);
     runtime.openClassChoice();   // 从全部职业中选择 + 1 张随机职业卡（与 5 张初始攻击一起）
   }
 
   function enterLayer(li, atIdx) {
-    game.layerIdx = li;
-    game.trackPos = atIdx;
-    game.pos = cellCenter(li, atIdx);
+    const safeLayer = clampIndex(li, game.layerData?.length || 1, 0);
+    const layer = game.layerData?.[safeLayer];
+    const safeIdx = layer?.logical?.[atIdx]
+      ? atIdx
+      : (layer?.entrances?.[0] ?? clampIndex(atIdx, layer?.logical?.length || 1, 0));
+    game.layerIdx = safeLayer;
+    game.trackPos = safeIdx;
+    game.pos = cellCenter(safeLayer, safeIdx);
+    game.activeLayerBounds = game.layerBounds?.[safeLayer] || null;
     game.hop = 0;
     game.state = 'idle';
-    if (cam) { cam.cx = game.pos.x; cam.cy = game.pos.y; cam.clamp(); }
+    if (cam) {
+      // 每次新局、跨层或读档都以当前层全貌为镜头目标，避免只聚焦入口导致
+      // 主体被裁到右侧、顶部留下大片空白。旧版 Camera 没有 fitLayer 时保留 focus 兜底。
+      const fitted = typeof cam.fitLayer === 'function' && cam.fitLayer(game, 128);
+      if (!fitted) { cam.cx = game.pos.x; cam.cy = game.pos.y; cam.clamp(); }
+    }
     const f = curLayer();
     const eIdx = f.entrances.indexOf(atIdx);
     const eName = eIdx >= 0 ? f.entranceNames[eIdx] : `#${atIdx} 格`;

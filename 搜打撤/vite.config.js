@@ -45,7 +45,7 @@ const GAME_ROOT = path.join(ROOT, 'game');
 const OUT_DIR = process.env.SDT_BUILD_OUT_DIR
   ? path.resolve(ROOT, process.env.SDT_BUILD_OUT_DIR)
   : path.join(ROOT, 'desktop-app', 'game');
-const RUNTIME_ASSET_DIRS = ['cards', 'portraits', 'icons', path.join('ui', 'icons'), 'sfx'];
+const RUNTIME_ASSET_DIRS = ['cards', 'portraits', 'icons', 'scenes', path.join('ui', 'icons'), 'sfx'];
 
 // 构建版本号：取 version.json 的版本 + 当前时间戳，供 assetUrl() 做资产缓存失效
 function buildVersion() {

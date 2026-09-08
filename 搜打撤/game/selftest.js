@@ -48,7 +48,7 @@ check('遭遇·策略预告元数据', /strategy:\s*'试探/.test(mapSource) && 
 check('场景·10 张事件 sceneId 覆盖', ['timeskip','demondeal','bandits','mystery','goldmine','goldhammer','relief','airdrop','chestdraw','systemsupply'].every(k => new RegExp(`event-${k}`).test(gameSource)), true);
 check('场景·标准节点与拾取契约', /scene-battle-bg/.test(gameSource) && /scene-extract-bg/.test(gameSource) && /scene-pickup-key/.test(gameSource), true);
 check('场景·落脚进入全屏房间链', /UI\.beginRoom\(\)/.test(gameSource) && /_roomActive/.test(src('ui.js')), true);
-check('音频·Howler 指定 MP3 作为循环 BGM', /from 'howler'/.test(src('sound.js')) && /bgm-black-stream-sea\.mp3/.test(src('sound.js')) && /new Howl\(\{[^}]*loop:\s*true/s.test(src('sound.js')), true);
+check('音频·Howler 指定 MP3 作为循环 BGM', /from 'howler'/.test(src('sound.js')) && /bgm-sour-orange-earth\.mp3/.test(src('sound.js')) && /new Howl\(\{[^}]*loop:\s*true/s.test(src('sound.js')), true);
 check('战斗·意图轮转与 DOM 接线', /function intentFor/.test(src('battle.js')) && /foe\.intent = intentFor\(foe, turn\)/.test(src('battle.js')) && /sts-intent/.test(src('battle.js')), true);
 check('战斗·拖牌 Pointer Events 接线保留', /pointerdown/.test(src('battle.js')) && /data-aim/.test(src('battle.js')) && /drag-over/.test(src('battle.js')), true);
 check('BOSS·三类独立意图模式', /general.*军威强化/.test(src('battle.js')) && /orc_boss.*双击/.test(src('battle.js')) && /element_boss.*元素庇幕/.test(src('battle.js')), true);

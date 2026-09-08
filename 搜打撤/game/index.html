@@ -4,9 +4,10 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="icon" type="image/png" href="assets/brand-mark-codename7.png" />
-<!-- 首屏关键资源提前预载：标题壁纸是首屏最大图，中文字体决定标题文字渲染；
+<!-- 首屏关键资源提前预载：标题壁纸与字标是首屏核心视觉；
      其余资源（BGM/立绘/卡面）保持按需加载，避免挤占启动带宽 -->
 <link rel="preload" as="image" href="assets/reconstruction/wallpaper-original.webp" />
+<link rel="preload" as="image" href="assets/title-wordmark.png" />
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/cascadia-code-400.woff2" crossorigin />
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/notosans-sc-400.woff2" crossorigin />
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/notosans-sc-700.woff2" crossorigin />
@@ -38,7 +39,11 @@
       </div>
     </section>
 
-    <section class="panel" id="dicePanel">
+    <section class="panel" id="routePanel">
+      <div class="route-title">路线选择</div>
+      <div class="route-help">点击右侧高亮的相邻节点继续前进</div>
+    </section>
+    <section class="panel" id="dicePanel" hidden>
       <div id="diceRow">
         <button id="rollBtn">[[icon:dice]] 掷骰子移动</button>
         <div id="diceFace" class="idle-dice"></div>
@@ -145,8 +150,9 @@
     <div id="title">
       <div class="title-bg" aria-hidden="true"></div>
       <div class="title-inner">
-        <div class="title-heading"><p class="title-kicker">ASCENSION COUNCIL / WINTER CONJECTURE</p>
-        <h1 class="cn-title">升格会的<br><em class="art-cn">冬日猜想</em></h1></div>
+        <div class="title-heading">
+          <img class="title-wordmark" src="assets/title-wordmark.png" alt="升格会的冬日猜想" draggable="false">
+        </div>
         <div class="ak-hud">
           <!-- 顶栏左：退出（最左）+ 静音 -->
           <div class="ak-tl">

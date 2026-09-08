@@ -6,7 +6,7 @@ import { esc } from './shared.js';
 import { FX, MAP, bagCap } from './game.session.js';
 import { tone } from './sound.js';
 import { escAttr } from './shared.js';
-import { cellCenter, clearSave, curLayer, enterLayer, exitToTitle, gainCoins, game, modeCfg, newUid, pick, rndDice, saveGame, scaledEnemy, syncPlayTime, usedSlots, weighted } from './game.session.js';
+import { cellCenter, clearSave, curLayer, enterLayer, exitToTitle, gainCoins, game, modeCfg, newUid, pick, saveGame, scaledEnemy, syncPlayTime, usedSlots, weighted } from './game.session.js';
 import { openBaseHub } from './game.hub.js';
 import { Sfx, cardHTML, _set_cardPageOpen } from './game.cardslib.js';
 import { CLASS_STORY, EVENT_SCENE_META, IMMEDIATE_SCENES, NODE_BG, PICKUP_BG, PRELOAD_SCENES, SCENES, SCENE_META } from './game.run.data.js';
@@ -24,94 +24,75 @@ import { eventNarrative } from './narrative.js';
     setCardPageOpen: _set_cardPageOpen,
     usedSlots,
   });
-  // 掷骰序号：每次 roll 自增。作用：作废旧一掷的 5s 看门狗——连续快掷时，
-  // 旧看门狗醒来会命中新一掷的 rolling 窗口（state==='rolling' 检查挡不住它），
-  // 叠加一次 moveBy 造成两条步进链并发（棋子乱跳 + 落格双重结算 + 双重存档）。
-  let rollSeq = 0;
-  // 步进链序号：moving 看门狗强制贴格后作废在飞的旧 rAF 链——否则页面恢复后
-  // 旧链的 stepIn 看到 trackPos 已到 target 会再跑一次 resolveCell（双重结算）
+  // 直接选择相邻节点，不再掷骰或消耗行动力。
+  // 移动是一个原子事务：开始时只进入 moving，稳定节点/回合/事件结算均在
+  // 动画完成后一次性提交。这样刷新或退出不会把角色保存在线段中间。
   let moveSeq = 0;
-  function roll() {
-    if (game.state !== 'idle') return;
-    game.state = 'rolling';
-    const seq = ++rollSeq;
-    SDT.Sound.sfx('dice');
-    // 体力系统（2026-09-06）：每掷一次骰子 -1，≤10 警告，0 时无法撤离
-    if (game.stamina == null) game.stamina = MAP.rules.staminaMax;
-    game.stamina = Math.max(0, game.stamina - 1);
-    if (game.stamina === 0) UI.log('[[icon:hourglass]] <b>体力耗尽！</b>你已无法撤离——立刻寻找补给或降低消耗', 'warn');
-    else if (game.stamina <= MAP.rules.staminaWarn) UI.log(`[[icon:hourglass]] <b>体力告急</b>：仅剩 ${game.stamina} 点`, 'warn');
-    const fixed = game.devMode && game.nextDice > 0;
-    const n = fixed ? game.nextDice : rndDice();
-    UI.el.diceFace.classList.add('rolling');
-    UI.drawDice(n, true); // force：与上一点数相同也整圈翻滚（2026-09-07 留言：同面也要有动画）
-    setTimeout(() => {
-      UI.el.diceFace.classList.remove('rolling');
-      UI.popNum(UI.el.diceFace);
-      game.dice = n;
-      game.diceHistory.push(n);
-      game.turn++;
-      SDT.Meta.track('action');
-      UI.log(`[[icon:dice]] 掷出 <b>${n}</b> 点${fixed ? '（开发者固定）' : ''}，顺时针移动 ${n} 格`, 'sys');
-      UI.refresh(game);
-      moveBy(n);
-    }, 640);
-    // 防卡死看门狗（2026-09-06 #30）：动画中断导致停留在 rolling 时强制续行
-    // （seq 检查：只认自己这一掷，已被新一掷作废的旧看门狗直接退场）
-    setTimeout(() => {
-      if (game.state === 'rolling' && seq === rollSeq) {
-        UI.el.diceFace.classList.remove('rolling');
-        moveBy(n);
-      }
-    }, 5000);
-  }
+  let activeMove = null;
+  const MOVE_DURATION = 220;
+  const moveUsesReducedMotion = () => {
+    try { return localStorage.getItem('sdt-reduce-motion') === '1' || window.matchMedia?.('(prefers-reduced-motion: reduce)').matches; }
+    catch (_) { return false; }
+  };
+  function moveTo(toLi, toIdx) {
+    if (game.state !== 'idle' || activeMove) return false;
+    const current = curLayer()?.logical[game.trackPos];
+    const allowed = current?.next || [];
+    if (!allowed.some(([li, idx]) => li === toLi && idx === toIdx)) return false;
+    const fromLi = game.layerIdx, fromIdx = game.trackPos;
+    const from = cellCenter(fromLi, fromIdx);
+    const to = cellCenter(toLi, toIdx);
+    if (!from || !to) return false;
 
-  function moveBy(n) {
-    game.state = 'moving';
-    const layer = curLayer();
-    const count = layer.logical.length; // 火堆合并后按逻辑格计数，避免越界
-    const target = (game.trackPos + n) % count;
-    preloadCellScene(layer, target);
-    game.moveTarget = target;
     const seq = ++moveSeq;
-    const stepIn = () => {
-      if (moveSeq !== seq) return;   // 本掷已被看门狗强制收尾，旧链不再续步/结算
-      if (game.trackPos === target) { game.hop = 0; game.moveTarget = null; resolveCell(); return; }
-      const next = (game.trackPos + 1) % count;
-      animateStep(next, () => {
-        game.trackPos = next;
-        game.pos = cellCenter(game.layerIdx, next);
-        stepIn();
-      });
-    };
-    stepIn();
-    // 防卡死看门狗（对齐 #30 rolling 看门狗的先例）：步进链靠 rAF 驱动，页面隐藏/
-    // 动画中断会停在 'moving'，之后所有 idle-only 交互（背包 B 键、掷骰）静默失联。
-    // 超时先作废旧链（moveSeq++）再贴到目标格续行结算，杜绝双重 resolveCell。
-    setTimeout(() => {
-      if (game.state !== 'moving' || game.moveTarget !== target) return;
-      moveSeq++;
-      game.trackPos = target;
-      game.pos = cellCenter(game.layerIdx, target);
+    const startedAt = typeof performance !== 'undefined' && performance.now ? performance.now() : Date.now();
+    let done = false;
+    let watchdog = null;
+    const frame = typeof requestAnimationFrame === 'function'
+      ? requestAnimationFrame
+      : (cb) => setTimeout(() => cb(Date.now()), 16);
+    const finish = () => {
+      if (done || !activeMove || activeMove.seq !== seq) return;
+      done = true;
+      if (watchdog != null) clearTimeout(watchdog);
+      activeMove = null;
+      game.pos = { ...to };
+      game.layerIdx = toLi;
+      game.trackPos = toIdx;
       game.hop = 0;
       game.moveTarget = null;
+      game.turn++;
+      game.activeLayerBounds = game.layerBounds?.[toLi] || null;
+      game.geometryVersion = game.geometryVersion || `${String(game.mapSeed)}:${game.layoutVersion || 0}`;
+      SDT.Meta.track('action');
       resolveCell();
-    }, (n + 2) * (MAP.rules.stepMs || 300) + 3000);
+    };
+    const tick = (now) => {
+      if (done || !activeMove || activeMove.seq !== seq) return;
+      const t = Math.max(0, Math.min(1, ((now || Date.now()) - startedAt) / MOVE_DURATION));
+      const eased = 1 - Math.pow(1 - t, 3);
+      game.pos = { x: from.x + (to.x - from.x) * eased, y: from.y + (to.y - from.y) * eased };
+      game.moveTarget.progress = t;
+      if (t >= 1) finish();
+      else frame(tick);
+    };
+    activeMove = { seq, from: { li: fromLi, idx: fromIdx }, to: { li: toLi, idx: toIdx }, startedAt };
+    game.moveTarget = { li: toLi, idx: toIdx, seq, progress: 0, moving: true };
+    game.state = 'moving';
+    game.pos = { ...from };
+    // rAF 在后台页可能被暂停；看门狗确保事务最终回到稳定节点。
+    watchdog = setTimeout(finish, MOVE_DURATION + 700);
+    if (moveUsesReducedMotion()) finish();
+    else frame(tick);
+    return true;
   }
 
-  function animateStep(idx, done) {
-    const from = { ...game.pos }, to = cellCenter(game.layerIdx, idx);
-    game.hop = 1;
-    const t0 = performance.now(), dur = MAP.rules.stepMs;
-    const tick = (now) => {
-      const p = Math.min(1, (now - t0) / dur);
-      game.pos.x = from.x + (to.x - from.x) * p;
-      game.pos.y = from.y + (to.y - from.y) * p;
-      game.hop = 1 - p;
-      if (p < 1) requestAnimationFrame(tick);
-      else done();
-    };
-    requestAnimationFrame(tick);
+  function cancelLegacyChainMove(reason = '即时事件不再自动跳转') {
+    const steps = Math.max(0, Number(game.chainMove) || 0);
+    if (!steps) return false;
+    game.chainMove = 0;
+    UI.log(`[[icon:road]] ${reason}（原计划前进 ${steps} 格）`, 'sys');
+    return true;
   }
 
   // ---------- 落脚结算 ----------
@@ -242,10 +223,7 @@ import { eventNarrative } from './narrative.js';
   // 场景/即时效果结束后的收尾：事件连锁移动优先，否则回待机并存档
   function finishInstant() {
     if (game.chainMove) {
-      const n = game.chainMove;
-      game.chainMove = 0;
-      moveBy(n);
-      return;
+      cancelLegacyChainMove();
     }
     game.state = 'idle';
     saveGame();
@@ -325,16 +303,14 @@ import { eventNarrative } from './narrative.js';
 
     // 2.5) 事件卡连锁移动（保留兜底：时空孔隙「前进 6 格」）
     if (game.chainMove) {
-      const n = game.chainMove;
-      game.chainMove = 0;
-      moveBy(n);
-      return;
+      cancelLegacyChainMove('即时事件不会盲选第一条邻边');
     }
 
     // 3) 节点类：门 / 祭坛入口 / 紧急撤离 / 商店统一经过短过场。
     if (door) { enterNode('door', () => openDoorModal(door, def)); return; }
+    if (def && def.type === 'door') { finishInstant(); return; }
     if (altarE) { enterNode('altar', () => openAltarEntranceModal(altarE, def)); return; }
-    if (def && def.type === 'emergencyExit') { enterNode('emergencyExit', openEmergencyModal); return; }
+    if (def && (def.type === 'emergencyExit' || def.type === 'extraction')) { enterNode('emergencyExit', openEmergencyModal); return; }
     if (def && def.type === 'shop') { enterNode('shop', openShop); return; }
 
     // 4) 空白安全格（无任何事件）：给完整提示页（2026-09-06 留言）
@@ -699,8 +675,8 @@ import { eventNarrative } from './narrative.js';
         chest_medium: () => { narrate(); openChestsOnCell([{ kind: 'medium' }], '你选择了高风险的密封物资箱'); },
         timeskip_move: settle(() => { narrate(); UI.log('[[icon:crystal]] 时空孔隙把你向前卷了 <b>6</b> 格！', 'sys'); game.chainMove = 6; }),
         relief_heal: settle(() => { narrate(); UI.log('[[icon:heart]] 爱心救济站为你处理了伤口', 'ok'); game.heal(6); }),
-        mystery_supply: settle(() => { narrate(); grantEventCard(SDT.Cards.all().find(c => c.name === '彩色令牌')); gainCoins(2); }),
-        systemsupply_restock: settle(() => { narrate(); grantEventCard(SDT.Cards.all().find(c => c.name === '彩色令牌')); game.addItem(MAP.items.wood, 1); }),
+        mystery_supply: settle(() => { narrate(); grantEventCard(SDT.Cards.all().find(c => c.id === 'tt-token-color')); gainCoins(2); }),
+        systemsupply_restock: settle(() => { narrate(); grantEventCard(SDT.Cards.all().find(c => c.id === 'tt-token-color')); game.addItem(MAP.items.wood, 1); }),
         demondeal_trade: settle(() => {
           narrate();
           game.hp = Math.max(1, game.hp - 1);
@@ -753,7 +729,7 @@ import { eventNarrative } from './narrative.js';
   function openDoorModal(door, cellDef) {
     game.state = 'modal';
     game.discoveredPairs.add(door.pair);
-    const target = MAP.layers[door.toLayer];
+    const target = game.layerData[door.toLayer] || { name: `第${door.toLayer + 1}层` };
     nodeShell({
       tone: 'door', icon: '[[icon:door]]', title: '环间门',
       sub: `这道隔离闸门连通 <b>${target.name}</b>，可自由往返${door.exit ? '；也可选择就此撤离' : ''}`,
@@ -914,18 +890,15 @@ import { eventNarrative } from './narrative.js';
 
   function openEmergencyModal() {
     game.state = 'modal';
-    const can = game.coins >= MAP.rules.emergencyExitCost;
     nodeShell({
-      tone: 'exit', icon: '[[icon:cross]]', title: '紧急撤离点',
-      sub: `花费 <b>${MAP.rules.emergencyExitCost}</b> 币立即撤离（你有 <b class="gold">${game.coins}</b> 币）`,
+      tone: 'exit', icon: '[[icon:cross]]', title: '撤离点',
+      sub: '撤离信标已经接通，是否结束本次远征？',
       body:
-        nodeOpt('payExit', '花币撤离', `支付 ${MAP.rules.emergencyExitCost} 币，立即结算撤离`, can ? 'ok' : '') +
-        nodeOpt('stayHere', '留下', '继续探索本环，撤离点随时还在'),
+        nodeOpt('payExit', '立即撤离', '整理当前战利品并返回基地', 'ok') +
+        nodeOpt('stayHere', '继续深入', '留在地图上，继续选择相邻节点'),
     });
     UI.act('payExit', () => {
-      if (game.coins < MAP.rules.emergencyExitCost) { UI.log('币不够，无法紧急撤离', 'warn'); SDT.Sound.sfx('error'); return; }
-      game.coins -= MAP.rules.emergencyExitCost;
-      UI.log(`支付 ${MAP.rules.emergencyExitCost} 币，启动紧急撤离`, 'sys');
+      UI.log('启动撤离信标，准备返回基地', 'sys');
       UI.hideOverlay();
       doExtract();
     });
@@ -938,15 +911,6 @@ import { eventNarrative } from './narrative.js';
   let extractLeft = null;   // 待整理的卡牌堆 [{card, count}]（撤离整理页暂存）
 
   function doExtract() {
-    // 体力系统（2026-09-06 #29）：体力为 0 时撤离失败
-    if ((game.stamina == null ? MAP.rules.staminaMax : game.stamina) <= 0) {
-      UI.log('[[icon:hourglass]] <b>体力耗尽</b>——你瘫倒在撤离信标旁，撤离失败！', 'warn');
-      SDT.Sound.sfx('error');
-      UI.hideOverlay();
-      game.state = 'idle';
-      UI.refresh(game);
-      return;
-    }
     syncPlayTime();
     game.state = 'done';
     game.runActive = false;
@@ -1097,4 +1061,4 @@ import { eventNarrative } from './narrative.js';
     UI.refresh(game);
   }
 
-export { bindRunMixins, openAltarModal, openClassChoice, openShop, roll, showRunTransition };
+export { bindRunMixins, moveTo, openAltarModal, openClassChoice, openShop, showRunTransition };

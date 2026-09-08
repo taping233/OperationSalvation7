@@ -55,7 +55,7 @@
   #overlay .scene[data-asset-key] { min-height:340px; background-color:#101010; background-size:cover; background-position:center; }
   #overlay .scene[data-asset-key]::before { content:""; position:absolute; inset:0; z-index:0; pointer-events:none; background:linear-gradient(90deg,rgba(9,9,9,.94),rgba(9,9,9,.72) 46%,rgba(9,9,9,.34)); }
   #overlay .scene[data-asset-key] > * { z-index:1; }
-  #overlay .scene[data-asset-key="scene-battle-bg"] { background-image:url('../assets/scenes/battle-normal-anime-v2.png'); }
+  #overlay .scene[data-asset-key="scene-battle-bg"] { background-image:url('../assets/scenes/battle-snow-street.png'); }
   #overlay .scene[data-asset-key="scene-shop-bg"] { background-image:url('../assets/scenes/scene-shop-anime-v2.webp'); }
   #overlay .scene[data-asset-key="scene-event-bg"] { background-image:url('../assets/scenes/scene-altar-anime-v2.webp'); }
   #overlay .scene[data-asset-key="scene-fire-bg"] { background-image:url('../assets/scenes/scene-fire-anime-v2.webp'); }
@@ -100,8 +100,8 @@
   #overlay .node-pg[data-asset-key="scene-event-systemsupply"] { background-image:url('../assets/scenes/scene-pickup-wood-anime-v2.webp'); }
   .battle-stage { position:relative; isolation:isolate; margin:-12px; padding:14px 12px 12px; min-height:520px; overflow:hidden; background-size:cover; background-position:center; }
   .battle-stage-shade { position:absolute; inset:0; z-index:-1; background:linear-gradient(180deg,rgba(9,9,9,.58),rgba(9,9,9,.88) 62%,rgba(9,9,9,.97)); pointer-events:none; }
-  .battle-stage[data-asset-key="battle-normal"] { background-image:url('../assets/scenes/battle-normal-anime-v2.png'); }
-  .battle-stage[data-asset-key="battle-boss-general"] { background-image:url('../assets/scenes/battle-normal-anime-v2.png'); }
+  .battle-stage[data-asset-key="battle-normal"] { background-image:url('../assets/scenes/battle-snow-street.png'); }
+  .battle-stage[data-asset-key="battle-boss-general"] { background-image:url('../assets/scenes/battle-snow-street.png'); }
   .battle-stage[data-asset-key="battle-boss-orc"] { background-image:url('../assets/scenes/event-bandits-anime-v2.webp'); }
   .battle-stage[data-asset-key="battle-boss-element"] { background-image:url('../assets/scenes/scene-altar-anime-v2.webp'); }
 

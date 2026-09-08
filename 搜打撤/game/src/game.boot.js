@@ -4,17 +4,18 @@ const SDT = window.SDT;
 import { TYPE_NAME } from './game.notes.js';
 import { MAP } from './game.session.js';
 import { SLOT_COUNT, buildDerived, cam, canvas, configureGameRuntime, ctx, dpr, exitToTitle, game, hasRun, migrateOldSave, openSettings, quitGame, saveGame, setLobby, showTitle, startNewGame, _set_dpr, _set_cam } from './game.session.js';
-import { bindRunMixins, openClassChoice, openShop, roll, showRunTransition } from './game.run.js';
+import { bindRunMixins, moveTo, openClassChoice, openShop, showRunTransition } from './game.run.js';
 import { PRELOAD_SCENES } from './game.run.data.js';
 import { openBaseHub } from './game.hub.js';
 import { bindBagMixins, showBackpack } from './game.bag.js';
 import { bindDevMode, bindNotesMixins, initDevMode, openCellEditor, rebuildNotes, showClearOverlay, showExportOverlay, showImportOverlay } from './game.notes.js';
 import { cardPageOpen, closeCardPageTop, openCardDesigner, openCardLibrary } from './game.cardslib.js';
 import { renderScheduler } from './render-scheduler.js';
+import { nodeHitRadius } from './camera.js';
 
-configureGameRuntime({ openClassChoice, openBaseHub, rebuildNotes, resize: () => resize(), showRunTransition });
+  configureGameRuntime({ openClassChoice, openBaseHub, rebuildNotes, resize: () => resize(), showRunTransition });
   function bindInput() {
-    let dragging = false, downPos = null, lastPos = null;
+    let dragging = false, downPos = null, lastPos = null, pointerId = null;
     let hoverFrame = 0, pendingHover = null;
 
     const scheduleHover = (e) => {
@@ -28,15 +29,19 @@ configureGameRuntime({ openClassChoice, openBaseHub, rebuildNotes, resize: () =>
       });
     };
 
-    canvas.addEventListener('mousedown', (e) => {
+    canvas.addEventListener('pointerdown', (e) => {
+      if (e.button !== 0 || pointerId != null) return;
+      pointerId = e.pointerId;
+      canvas.setPointerCapture?.(pointerId);
       downPos = lastPos = { x: e.clientX, y: e.clientY };
       dragging = false;
       game.camDragging = false;
+      e.preventDefault();
     });
 
-    window.addEventListener('mousemove', (e) => {
-      if (downPos) {
-        if (!dragging && Math.hypot(e.clientX - downPos.x, e.clientY - downPos.y) > 6) dragging = true;
+    canvas.addEventListener('pointermove', (e) => {
+      if (downPos && e.pointerId === pointerId) {
+        if (!dragging && Math.hypot(e.clientX - downPos.x, e.clientY - downPos.y) > 8) dragging = true;
         game.camDragging = dragging;   // 拖拽中主循环不得抢镜头（留言：地图无法正常拖动）
         if (dragging) {
           const dx = e.clientX - lastPos.x, dy = e.clientY - lastPos.y;
@@ -52,23 +57,43 @@ configureGameRuntime({ openClassChoice, openBaseHub, rebuildNotes, resize: () =>
       scheduleHover(e);
     });
 
-    window.addEventListener('mouseup', (e) => {
-      if (downPos && !dragging && e.button === 0 && game.state === 'idle') {
+    const endPointer = (e, cancelled = false) => {
+      if (e.pointerId !== pointerId) return;
+      if (downPos && !dragging && !cancelled && e.button === 0 && game.state === 'idle') {
         const r = canvas.getBoundingClientRect();
         const inside = e.clientX >= r.left && e.clientX <= r.right &&
                        e.clientY >= r.top && e.clientY <= r.bottom;
         if (inside) {
           const w = cam.screenToWorld(e.clientX - r.left, e.clientY - r.top);
-          const n = pickNode(w.x, w.y);
-          if (n) openCellEditor(n.li, n.idx);
+          const n = pickNode(w.x, w.y, true);
+          if (n) {
+            if (isReachable(n)) {
+              canvas.style.cursor = 'wait';
+              moveTo(n.li, n.idx);
+            }
+            else if (game.devMode) openCellEditor(n.li, n.idx);
+            else showInvalidNode(e, n);
+          }
         }
       }
       downPos = null;
       game.camDragging = false;
-    });
+      canvas.releasePointerCapture?.(pointerId);
+      pointerId = null;
+      if (dragging) scheduleHover(e);
+    };
+    canvas.addEventListener('pointerup', endPointer);
+    canvas.addEventListener('pointercancel', (e) => endPointer(e, true));
 
     canvas.addEventListener('contextmenu', (e) => e.preventDefault());
-    canvas.addEventListener('mouseleave', () => { pendingHover = null; game.hover = null; UI.hideTooltip(); });
+    canvas.addEventListener('pointerleave', () => {
+      if (pointerId == null) {
+        pendingHover = null;
+        game.hover = null;
+        canvas.style.cursor = 'grab';
+        UI.hideTooltip();
+      }
+    });
 
     // 滚轮缩放（以光标为锚点，缩放前后光标指向的世界坐标不变）
     canvas.addEventListener('wheel', (e) => {
@@ -85,11 +110,18 @@ configureGameRuntime({ openClassChoice, openBaseHub, rebuildNotes, resize: () =>
       const action = SDT.Input && SDT.Input.actionFor(e);
       if (!action) return;
       switch (action) {
-        case 'roll': e.preventDefault(); roll(); break;
+        case 'roll': {
+          e.preventDefault();
+          chooseNextTarget(1);
+          break;
+        }
+        case 'movePrev': e.preventDefault(); chooseNextTarget(-1); break;
+        case 'moveConfirm': e.preventDefault(); confirmTarget(); break;
+        case 'moveCancel': e.preventDefault(); clearTarget(); break;
         case 'camRotateL': cam.angle -= .2; renderScheduler.invalidate(); break;
         case 'camRotateR': cam.angle += .2; renderScheduler.invalidate(); break;
-        case 'camOverview': cam.cx=720; cam.cy=720; cam.zoom=1.1; renderScheduler.invalidate(); break;
-        case 'camFocus': cam.cx = game.pos.x; cam.cy = game.pos.y; cam.clamp(); renderScheduler.invalidate(); break;
+        case 'camOverview': cam.fitLayer(game); renderScheduler.invalidate(); break;
+        case 'camFocus': cam.focus(game.pos.x, game.pos.y); renderScheduler.invalidate(); break;
         case 'backpack': showBackpack(); break;
         case 'nodeNumbers': game.toggles.index = !game.toggles.index; if (UI.el.tglIndex) UI.el.tglIndex.checked = game.toggles.index; renderScheduler.invalidate(); break;
       }
@@ -100,7 +132,7 @@ configureGameRuntime({ openClassChoice, openBaseHub, rebuildNotes, resize: () =>
     // 定位按钮：与键盘 F（camFocus）同一动作——镜头立即回到棋子当前位置
     const btnLocate = document.getElementById('btnLocate');
     if (btnLocate) btnLocate.addEventListener('click', () => {
-      cam.cx = game.pos.x; cam.cy = game.pos.y; cam.clamp(); renderScheduler.invalidate();
+      cam.focus(game.pos.x, game.pos.y); renderScheduler.invalidate();
     });
 
     // 右上角资源 HUD：悬停显示项目自带提示框（与地图节点同款）
@@ -117,7 +149,9 @@ configureGameRuntime({ openClassChoice, openBaseHub, rebuildNotes, resize: () =>
       chip.addEventListener('mouseleave', () => UI.hideTooltip());
     });
 
-    UI.el.rollBtn.addEventListener('click', roll);
+    if (UI.el.rollBtn) UI.el.rollBtn.addEventListener('click', () => {
+      chooseNextTarget(1);
+    });
     if (UI.el.tglIndex) UI.el.tglIndex.addEventListener('change', e => { game.toggles.index = e.target.checked; });
     if (UI.el.btnExport) UI.el.btnExport.addEventListener('click', showExportOverlay);
     if (UI.el.btnImport) UI.el.btnImport.addEventListener('click', showImportOverlay);
@@ -135,15 +169,85 @@ configureGameRuntime({ openClassChoice, openBaseHub, rebuildNotes, resize: () =>
     });
   }
 
-  // 结点命中：世界坐标附近最近结点（阈值内才算中）
-  const NODE_HIT_R = 34;
-  function pickNode(wx, wy) {
-    let best = null, bd = 1e9;
-    for (const n of game.nodes) {
-      const d = Math.hypot(n.x - wx, n.y - wy);
-      if (d < bd) { bd = d; best = n; }
+  // 结点命中：以屏幕像素为稳定目标尺寸，并优先当前节点的合法邻居。
+  const MIN_NODE_HIT_PX = 28;
+  const reachableCache = { nodes: null, layerData: null, layerIdx: -1, trackPos: -1, next: null, result: [] };
+  function reachableNodes() {
+    const current = game.layerData[game.layerIdx]?.logical[game.trackPos];
+    const next = current?.next || [];
+    if (reachableCache.nodes === game.nodes && reachableCache.layerData === game.layerData &&
+        reachableCache.layerIdx === game.layerIdx && reachableCache.trackPos === game.trackPos &&
+        reachableCache.next === next) return reachableCache.result;
+    const result = [];
+    for (const [li, idx] of next) {
+      const node = game.nodes.find(n => n.li === li && n.idx === idx);
+      if (node && li === game.layerIdx) result.push(node);
     }
-    return bd <= NODE_HIT_R ? best : null;
+    Object.assign(reachableCache, {
+      nodes: game.nodes, layerData: game.layerData, layerIdx: game.layerIdx,
+      trackPos: game.trackPos, next, result,
+    });
+    return result;
+  }
+
+  function isReachable(n) {
+    return reachableNodes().some(q => q.li === n.li && q.idx === n.idx);
+  }
+
+  function pickNode(wx, wy, preferReachable = false) {
+    const legal = reachableNodes();
+    let best = null, bd = Infinity, bestLegal = false;
+    for (const n of game.nodes) {
+      if (n.li !== game.layerIdx) continue;
+      const d = Math.hypot(n.x - wx, n.y - wy);
+      const radius = nodeHitRadius(cam.zoom, MIN_NODE_HIT_PX);
+      const nLegal = legal.some(q => q.li === n.li && q.idx === n.idx);
+      if (d <= radius && ((preferReachable && nLegal && !bestLegal) || nLegal === bestLegal && d < bd)) {
+        bd = d; best = n; bestLegal = nLegal;
+      }
+    }
+    return best;
+  }
+
+  function clearTarget() {
+    game.moveTarget = null;
+    if (game.hover && !isReachable(game.hover)) game.hover = null;
+    UI.hideTooltip();
+    renderScheduler.invalidate();
+  }
+
+  function showTarget(n) {
+    if (!n) return;
+    game.moveTarget = { li: n.li, idx: n.idx };
+    game.hover = n;
+    const r = canvas.getBoundingClientRect();
+    const p = cam.worldToScreen ? cam.worldToScreen(n.x, n.y) : { x: r.width / 2, y: r.height / 2 };
+    UI.showTooltip(p.x, p.y, `${hoverInfo(n)[0]} · 可前往`, ['按 X 确认，Space/Enter 选择下一个，Z 返回上一个']);
+    renderScheduler.invalidate();
+  }
+
+  function chooseNextTarget(step = 1) {
+    if (game.state !== 'idle') return false;
+    const options = reachableNodes();
+    if (!options.length) { UI.log('当前节点没有可前往的相邻节点', 'warn'); return false; }
+    if (options.length === 1) { clearTarget(); return moveTo(options[0].li, options[0].idx); }
+    const key = game.moveTarget && `${game.moveTarget.li},${game.moveTarget.idx}`;
+    const at = Math.max(0, options.findIndex(n => `${n.li},${n.idx}` === key));
+    showTarget(options[(at + step + options.length) % options.length]);
+    return true;
+  }
+
+  function confirmTarget() {
+    const target = game.moveTarget;
+    if (!target) return chooseNextTarget(1);
+    clearTarget();
+    return moveTo(target.li, target.idx);
+  }
+
+  function showInvalidNode(e, n) {
+    const r = canvas.getBoundingClientRect();
+    UI.showTooltip(e.clientX - r.left, e.clientY - r.top, `${hoverInfo(n)[0]} · 暂不可达`, ['只能前往当前节点相邻的下一节点']);
+    UI.log('该节点不是当前节点的相邻路径，无法直接跳转', 'warn');
   }
 
   function updateHover(e) {
@@ -153,9 +257,10 @@ configureGameRuntime({ openClassChoice, openBaseHub, rebuildNotes, resize: () =>
       UI.hideTooltip();
       return;
     }
-    canvas.style.cursor = 'crosshair';
     const w = cam.screenToWorld(e.clientX - r.left, e.clientY - r.top);
-    const n = pickNode(w.x, w.y);
+    const n = pickNode(w.x, w.y, true);
+    const legal = !!n && game.state === 'idle' && isReachable(n);
+    canvas.style.cursor = legal ? 'pointer' : n ? (game.devMode ? 'cell' : 'not-allowed') : 'grab';
     if (n !== game.hover) SDT.Sound.sfx('hover');   // 悬停结点变化时轻提示一声
     game.hover = n;
     if (!n) { UI.hideTooltip(); return; }
@@ -173,7 +278,7 @@ configureGameRuntime({ openClassChoice, openBaseHub, rebuildNotes, resize: () =>
       const altarE = (loc.layer.altarEntrances || []).find(a => a.at === loc.idx);
       const eIdx = (loc.layer.entrances || []).indexOf(loc.idx);
       if (eIdx >= 0) lines.push(`[[icon:door]] 出生入口：${loc.layer.entranceNames[eIdx]}`);
-      if (door) lines.push(`[[icon:door]] 环间门${door.reverse ? '（返回）' : ''}${door.exit ? ' / 撤离出口' : ''} ⇄ ${MAP.layers[door.toLayer].name}`);
+      if (door) lines.push(`[[icon:door]] 环间门${door.reverse ? '（返回）' : ''}${door.exit ? ' / 撤离出口' : ''} ⇄ ${game.layerData[door.toLayer]?.name || '下一层'}`);
       if (altarE) lines.push('[[icon:crystal]] 污染核心入口');
       if (def && def.type !== 'entrance') lines.push(`事件：${TYPE_NAME[def.type] || def.type}${def.n ? `（+${def.n}币）` : ''}`);
       else if (eIdx < 0 && !door && !altarE) lines.push('普通格');

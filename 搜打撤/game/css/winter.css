@@ -1,7 +1,7 @@
 /* Winter Conjecture — one art direction over the structural feature styles. */
-:root{--font-ui:'Cascadia Code','Noto Sans SC Sub','Microsoft YaHei',sans-serif;--ink:#101e27;--bg:#101e27;--desk1:#1c303c;--desk2:#132630;--panel:#192e39;--panel2:#233d49;--inset:#112530;--line:#3b5663;--line2:#6b828a;--txt:#e8eeea;--sub:#b2c4c9;--dim:#849da7;--amber:#ddb876;--amber-soft:#ecd2a3;--gold:#ddb876;--ok:#9bc5c0;--arcane:#b1a1c4;--cal:var(--font-ui)}
+:root{--font-ui:'HarmonyOS Sans SC','HarmonyOS Sans','Noto Sans SC Sub','Microsoft YaHei',sans-serif;--ink:#101e27;--bg:#101e27;--desk1:#1c303c;--desk2:#132630;--panel:#192e39;--panel2:#233d49;--inset:#112530;--line:#3b5663;--line2:#6b828a;--txt:#e8eeea;--sub:#b2c4c9;--dim:#849da7;--amber:#ddb876;--amber-soft:#ecd2a3;--gold:#ddb876;--ok:#9bc5c0;--arcane:#b1a1c4;--cal:var(--font-ui)}
 button,input,select,textarea{font-family:inherit}button{border-radius:1px;transition:background .16s,border-color .16s,transform .16s;cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid #e2c48d;outline-offset:4px}button:disabled{cursor:default;opacity:.4}button:active:not(:disabled){transform:translateY(1px)}::selection{background:#cfb78266}::-webkit-scrollbar-thumb{background:#5a7580;border-color:#192e39;border-radius:0}
-#title{position:absolute;inset:0;background:#112330;isolation:isolate;display:block;overflow:hidden}#title[hidden]{display:none}#title .title-bg{position:absolute;inset:0;background:url('../assets/reconstruction/wallpaper-original.webp') center/cover;z-index:0}#title::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#0c1d264d,transparent 45%,#0b182bba),linear-gradient(0deg,#0e1c24bf,transparent 55%);z-index:1;pointer-events:none}.title-inner{position:absolute;inset:0;z-index:2;width:auto;padding:0;text-align:left}.title-heading{position:absolute;top:7%;left:4.5%}.title-kicker{font:9px/1.8 'Cascadia Code',monospace;letter-spacing:3px;color:#e8eeea;margin:0 0 12px}.cn-title{font-family:'Songti SC','SimSun',serif;font-size:clamp(40px,5.2vw,85px);font-weight:400;letter-spacing:8px;line-height:1.18;color:#f0f3e9;margin:0;text-shadow:0 3px 20px #182b34}.en-subtitle{font:11px var(--font-ui);letter-spacing:6px;margin-top:18px;color:#b9cbd0}
+#title{position:absolute;inset:0;background:#112330;isolation:isolate;display:block;overflow:hidden}#title[hidden]{display:none}#title .title-bg{position:absolute;inset:0;background:url('../assets/reconstruction/wallpaper-original.webp') center/cover;z-index:0}#title::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#0c1d264d,transparent 45%,#0b182bba),linear-gradient(0deg,#0e1c24bf,transparent 55%);z-index:1;pointer-events:none}.title-inner{position:absolute;inset:0;z-index:2;width:auto;padding:0;text-align:left}.title-heading{position:absolute;top:7%;left:0;width:clamp(430px,43vw,760px);transform:translateX(-8.1%)}.title-wordmark{display:block;width:100%;height:auto;user-select:none;filter:drop-shadow(0 3px 12px #07131bb3)}.title-kicker{font:9px/1.8 'Cascadia Code',monospace;letter-spacing:3px;color:#e8eeea;margin:0 0 12px}.cn-title{font-family:'Songti SC','SimSun',serif;font-size:clamp(40px,5.2vw,85px);font-weight:400;letter-spacing:8px;line-height:1.18;color:#f0f3e9;margin:0;text-shadow:0 3px 20px #182b34}.en-subtitle{font:11px var(--font-ui);letter-spacing:6px;margin-top:18px;color:#b9cbd0}
 /* —— AK 风格主页（明日方舟式排版：深灰黑铬件 + 荧光青绿点缀；壁纸与标题字保持原样） —— */
 .ak-hud{--akb:#222527ee;--akb2:#191c1eee;--akline:#aab2ab59;--akmint:#a9efc3;--akt:#eef1ec;--aksub:#aeb8b0;--akscript:'Segoe Script','Comic Sans MS',cursive;position:absolute;inset:0;z-index:3}.ak-hud button{font-family:inherit}
 .ak-tl{position:absolute;top:16px;left:18px;display:flex;gap:10px;align-items:flex-start}.ak-sq{display:flex;align-items:center;justify-content:center;background:var(--akb);border:1px solid var(--akline);color:var(--akt);cursor:pointer}.ak-sq:hover{border-color:var(--akmint);background:#2c3032f2;color:#fff}.ak-back{width:64px;height:46px}.ak-home,.ak-exit{width:64px;height:58px;position:relative}.ak-home::after,.ak-exit::after{content:'';position:absolute;inset:5px;border:1px solid #a8b0a938;pointer-events:none}#btnTitleMute .ic-sound-off{display:none}#btnTitleMute.muted .ic-sound-on{display:none}#btnTitleMute.muted .ic-sound-off{display:block}
@@ -27,7 +27,7 @@ button,input,select,textarea{font-family:inherit}button{border-radius:1px;transi
 .slot-card{border-color:#63808b;background:linear-gradient(180deg,#0e2430,#0a1a24);border-radius:0;box-shadow:0 12px 30px #05131a66}.slot-card:hover{border-color:#cbdcd8}.slot-card-name{color:#e8eeea}.slot-empty{color:#9cbbc5}.si-line em{color:#8faab3}.cls-grid{gap:10px;grid-template-columns:repeat(5,minmax(0,1fr))}.cls-pick{border:1px solid #66818d;background:#1d3c4a;border-radius:0;box-shadow:none;overflow:hidden}.cls-pick.sel{border-color:#e1c28a;box-shadow:inset 0 -3px #d8b77c}.cls-pick b{font-size:21px;letter-spacing:3px;font-weight:500}.cls-pick-art{box-shadow:none;border-radius:0;max-width:90px}.cls-detail{background:#142d3a!important;border:1px solid #4c6b77;border-radius:0;color:#bfd0d3}.cls-story{line-height:1.9;color:#bacdd2}.cls-detail-name{font-size:34px;letter-spacing:5px;font-weight:400}.cls-detail-tag{color:#d8bd86}.roster-portrait{display:block;aspect-ratio:var(--portrait-ratio);height:100%;max-width:100%;background-repeat:no-repeat}.cls-pick-art .roster-portrait{width:100%;height:100%}.cls-figure .roster-portrait{height:100%;width:auto;margin:auto}.cls-hub-art .roster-portrait{height:84px;width:40px}.xp-bar{background:#102631}.xp-bar i{background:#9bc5c0}
 .pk-row,.dep-row{border-bottom:1px solid #42616d}.settings .set-h{color:#d8c08f;border-bottom:1px solid #45616d}.settings .chk{color:#ceddde}.settings input[type=range]{accent-color:#d7bb87}.settings input[type=checkbox]{accent-color:#9bbdb7}input,textarea,select{background:#102b39;color:#e4eeea;border:1px solid #657f89;border-radius:1px}input::placeholder,textarea::placeholder{color:#829fa9}.bag-slot{background:#17313f;border-color:#4d7180;border-radius:1px}.bag-slot.safe-slot{border-color:#c8b483;background:#333c39}.bag-slot.drop-here{outline:2px solid #d8c28e}.lib-filters,.bag-toolbar{background:#112936;border-color:#54747e}.hs-card,.card-tile{box-shadow:0 4px 12px #07151e70}.hs-card:hover{box-shadow:0 8px 20px #03111f99}.scene-line p{background:#132f3bd9;border:1px solid #728c93;color:#e4ebe6;border-radius:0}.scene-title{font-family:'SimSun',serif;font-weight:400}.scene-ops .ov-btn{min-height:44px}.flow-title{font-family:'SimSun',serif;letter-spacing:.16em}
 body.scene-battle-3d #sidebar,body.scene-battle-3d #layerBanner,body.scene-battle-3d #topBtns,body.scene-battle-3d #resHud{display:none!important}body.scene-battle-3d #overlay,body.scene-battle-3d #overlay .card,body.scene-battle-3d #ovBody,body.scene-battle-3d .battle-stage{background:transparent!important;backdrop-filter:none!important;box-shadow:none!important}body.scene-battle-3d .battle-stage::before,body.scene-battle-3d .battle-stage::after,body.scene-battle-3d .battle-stage-shade{display:none!important}body.scene-battle-3d .sts-figure>*{visibility:hidden}body.scene-battle-3d .sts-figure{height:clamp(140px,29vh,300px);filter:none}body.scene-battle-3d .sts-nameplate{background:#132e3adf!important;border:1px solid #7f99a3!important;padding:8px 15px!important;color:#e5ebe5}body.scene-battle-3d .sts-hud{background:linear-gradient(0deg,#102735 72%,#10273500)!important}body.scene-battle-3d .sts-intent{background:#e0c894;color:#193342;box-shadow:none;border:0}#overlay .card.battle{width:100%;height:100%;max-width:none;max-height:none;border:0;padding:0}body[data-gpu-lost]::after{content:'图形设备暂时中断，请保存后重启游戏';position:fixed;inset:35% 20%;z-index:999;padding:40px;background:#173441;color:#e1c997;text-align:center}
-@media(max-width:1100px){.ak-sq,.ak-quickref{transform:scale(.9);transform-origin:left top}.ak-quickref{left:168px}.ak-banner{right:190px;transform:scale(.92);transform-origin:right top}.ak-user{transform:scale(.85);transform-origin:right top}.ak-circle .c-ring{width:72px;height:72px}.ak-circle .c-cn{font-size:13px}.ak-ach{right:44px;top:132px}.ak-lib{left:5.5%;top:43%}.ak-set{left:10.5%;top:56.5%}.ak-hex{width:64px;height:72px}.ak-invest{left:30%}.ak-sec{right:22%;top:66%}.ak-bp{right:21%}.ak-start .st-cn{font-size:34px;letter-spacing:8px}.ak-start .st-en{font-size:13px}.ak-line1{left:330px}.title-kicker{font-size:8px;letter-spacing:1.8px}#sidebar{gap:15px;padding:12px 18px}.cls-grid{grid-template-columns:repeat(3,minmax(0,1fr))}#layerBanner{padding:8px 15px}#layerBanner .lb-zh{font-size:15px}#layerBanner .lb-en{font-size:8px}.title-quote{font-size:11px}}
+@media(max-width:1100px){.ak-sq,.ak-quickref{transform:scale(.9);transform-origin:left top}.ak-quickref{left:168px}.ak-banner{right:190px;transform:scale(.92);transform-origin:right top}.ak-user{transform:scale(.85);transform-origin:right top}.ak-circle .c-ring{width:72px;height:72px}.ak-circle .c-cn{font-size:13px}.ak-ach{right:44px;top:132px}.ak-lib{left:5.5%;top:43%}.ak-set{left:10.5%;top:56.5%}.ak-hex{width:64px;height:72px}.ak-invest{left:30%}.ak-sec{right:22%;top:66%}.ak-bp{right:21%}.ak-start .st-cn{font-size:34px;letter-spacing:8px}.ak-start .st-en{font-size:13px}.ak-line1{left:330px}.title-heading{width:clamp(360px,48vw,560px)}.title-kicker{font-size:8px;letter-spacing:1.8px}#sidebar{gap:15px;padding:12px 18px}.cls-grid{grid-template-columns:repeat(3,minmax(0,1fr))}#layerBanner{padding:8px 15px}#layerBanner .lb-zh{font-size:15px}#layerBanner .lb-en{font-size:8px}.title-quote{font-size:11px}}
 @media(max-height:740px){.ak-tl{top:10px;left:12px}.ak-quickref{top:10px;left:170px}.ak-banner{top:10px;right:200px;height:50px}.ak-user{top:8px;right:14px}.ak-ach{top:126px}.ak-lib{top:43%}.ak-set{top:57%}.ak-hex{bottom:13%}.ak-invest{bottom:10%}.ak-start{bottom:4%}.ak-start .st-cn{font-size:36px}.cn-title{font-size:clamp(36px,5vw,68px)}.title-heading{top:6%}.title-quote{bottom:6%;font-size:11px}.title-quote small{margin-top:4px}#sidebar{height:88px;min-height:88px;padding:8px 20px}#diceHist{max-height:15px}.cls-story{font-size:12px}.pg-head,.hub-head{padding-bottom:12px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 /* 快速参考弹窗（标题页） */
@@ -215,9 +215,9 @@ body.page-opaque #sidebar{visibility:hidden}
 #overlay .battle-stage .sts-hud{background:linear-gradient(180deg,rgba(4,4,4,0),rgba(4,4,4,.18) 55%)}
 /* 手牌区：宽度约界面一半（白底按 2026-09-07 二批留言撤回） */
 #overlay .battle-stage .sts-hud .bt-hand{flex:1 1 auto;max-width:50%;margin:0 auto;padding:14px 12px 8px}
-/* 玩家立绘再放大：与右侧敌人立绘对齐 */
-.sts-me{width:min(34vw,430px)!important}
-.sts-me .sts-figure{width:100%!important}
+/* 玩家立绘：收回到与敌方同一前景层级，并沿底部安全区站位 */
+.sts-me{left:clamp(4%,6vw,7%)!important;bottom:clamp(3%,2.5vh,5%)!important;width:min(25vw,320px)!important}
+.sts-me .sts-figure{width:92%!important}
 .sts-me .sts-figure img{width:100%;height:auto}
 
 /* —— 留言批次 2026-09-07 二批：标题页图鉴移位 + 选人页切换动画 —— */
@@ -621,3 +621,391 @@ body.page-covered #title *::after{animation-play-state:paused}
 #warmupTip #warmupBar{height:100%;width:0;border-radius:3px;
   background:linear-gradient(90deg,#4f9fcf,#9fd8ff);box-shadow:0 0 8px #9fd8ff66;
   transition:width .18s ease}
+
+/* ===== 卡牌库卡面重绘最终覆盖层（2026-09-08） =====
+   卡牌库使用与其它卡牌一致的结构，统一声明主题层，避免被通用展示规则覆盖。 */
+#overlay.opaque:has(.clib-main){background:#101820!important;backdrop-filter:none!important}
+#overlay .card.page:has(.clib-main){background:#101820!important;border:0!important}
+#overlay .pg:has(.clib-main){background:#101820!important}
+#overlay .lib-cardwrap .hsc-cost,
+#overlay .lib-cardwrap .hsc-val{border-radius:50%!important;clip-path:none!important}
+
+/* ===== 卡牌颜色分层定稿（2026-09-08） =====
+   标题栏与宝石表达稀有度；卡牌主体表达类型。 */
+.hs-card{
+  --rarity-color:#a9adb2;
+  --type-body1:#d07b3b;
+  --type-body2:#71391f;
+  --type-art1:#263f60;
+  border-color:#d58a42!important;
+  background:linear-gradient(160deg,var(--type-body1),var(--type-body2))!important;
+}
+/* 有效稀有度：初始、古朴、稀有、史诗、传说、衍生、职业、棱彩 */
+.hs-card.rv0{--rarity-color:#a9adb2}.hs-card.rv1{--rarity-color:#79a85c}.hs-card.rv2{--rarity-color:#5f9bd3}.hs-card.rv3{--rarity-color:#9a77c2}.hs-card.rv4{--rarity-color:#e5b34f}.hs-card.rv5{--rarity-color:#41bca4}.hs-card.rv6{--rarity-color:#242832}.hs-card.rv7{--rarity-color:#e879b6}.hs-card.rv-prism{--rarity-color:#e879b6}
+/* 类型主体色：武术、法术、生物、道具、装备、事件、英雄卡、资源 */
+.hs-card.tp0{--type-body1:#c65d3e;--type-body2:#63251f;--type-art1:#572e39}
+.hs-card.tp1{--type-body1:#4b92b9;--type-body2:#203d67;--type-art1:#203f70}
+.hs-card.tp2{--type-body1:#9b78bc;--type-body2:#4b2d63;--type-art1:#46346f}
+.hs-card.tp3{--type-body1:#d18b45;--type-body2:#70401f;--type-art1:#5a3e2d}
+.hs-card.tp4{--type-body1:#b78951;--type-body2:#5c3e27;--type-art1:#4d3a2d}
+.hs-card.tp5{--type-body1:#5eae9b;--type-body2:#214f4e;--type-art1:#214f58}
+.hs-card.tp6{--type-body1:#d4a94e;--type-body2:#6b431e;--type-art1:#503b2c}
+.hs-card.tp7{--type-body1:#d0833c;--type-body2:#71391f;--type-art1:#263f60}
+.hs-card .hsc-name{
+  background:linear-gradient(180deg,var(--rarity-color),color-mix(in srgb,var(--rarity-color),#3b2418 28%))!important;
+}
+.hs-card .hsc-gem{
+  background:var(--rarity-color)!important;
+  box-shadow:0 0 .45em var(--rarity-color)!important;
+}
+.hs-card .hsc-art{
+  background:radial-gradient(circle at 50% 45%,var(--type-art1),#111827 76%)!important;
+}
+
+/* ===== 低饱和卡牌主题与白色外框定稿 ===== */
+.hs-card{
+  border-color:#f4f5f2!important;
+  --type-body1:#8d8d87;
+  --type-body2:#454b4d;
+  --type-art1:#4b5960;
+}
+.hs-card .hsc-name{
+  color:#26343b!important;
+  -webkit-text-stroke:.55px #ffffff;
+  text-shadow:0 1px 1px rgba(255,255,255,.38),0 1px 2px rgba(0,0,0,.28);
+}
+.hs-card.tp0{--type-body1:#9b6760;--type-body2:#4f363c;--type-art1:#4f4650}
+.hs-card.tp1{--type-body1:#66869a;--type-body2:#344a60;--type-art1:#3d566b}
+.hs-card.tp2{--type-body1:#8a7898;--type-body2:#493f55;--type-art1:#4d4861}
+.hs-card.tp3{--type-body1:#9a866c;--type-body2:#574b3e;--type-art1:#5a5148}
+.hs-card.tp4{--type-body1:#8d8f72;--type-body2:#4c5042;--type-art1:#50584d}
+.hs-card.tp5{--type-body1:#6f9690;--type-body2:#3b5657;--type-art1:#3f5f62}
+.hs-card.tp6{--type-body1:#8d8a78;--type-body2:#4d4a3f;--type-art1:#555247}
+.hs-card.tp7{--type-body1:#788d94;--type-body2:#3e4d54;--type-art1:#435c66}
+
+/* 牌库高优先级实装：覆盖主题层给 .lib-cardwrap 写死的米棕背景，确保类型色真正落到卡牌主体。 */
+#overlay .lib-cardwrap .hs-card{
+  background:linear-gradient(160deg,var(--type-body1),var(--type-body2))!important;
+  background-color:var(--type-body2)!important;
+}
+#overlay .lib-cardwrap .hs-card .hsc-art{
+  background:radial-gradient(circle at 50% 45%,var(--type-art1),#111827 76%)!important;
+}
+/* 全局 UI 文本统一使用 HarmonyOS Sans；图标与 SVG 不受影响。 */
+body,body *{font-family:'HarmonyOS Sans SC','HarmonyOS Sans','Noto Sans SC Sub','Microsoft YaHei','Segoe UI',sans-serif!important}
+
+/* ===== 参考卡面重构：类型外框 + 稀有度飘带/标签/内圈 ===== */
+.hs-card{
+  --type-frame-hi:#7e8587;
+  --type-frame-lo:#333d42;
+  --rarity-color:#a9adb2;
+  position:relative;
+  padding:.62em .52em .54em!important;
+  border:2px solid var(--type-frame-hi)!important;
+  border-radius:1.05em!important;
+  background:linear-gradient(145deg,var(--type-frame-hi),var(--type-frame-lo) 36%,#20262a 100%)!important;
+  box-shadow:0 .38em 1em rgba(0,0,0,.62),inset 0 0 0 .12em rgba(255,255,255,.16),inset 0 -.9em 1.5em rgba(0,0,0,.28)!important;
+}
+.hs-card::before{
+  content:''!important;
+  position:absolute!important;
+  inset:.2em!important;
+  z-index:0!important;
+  pointer-events:none!important;
+  border:2px solid var(--rarity-color)!important;
+  border-radius:.82em!important;
+  box-shadow:0 0 .45em color-mix(in srgb,var(--rarity-color),transparent 52%),inset 0 0 .3em color-mix(in srgb,var(--rarity-color),transparent 65%)!important;
+}
+/* 类型外框：武术、法术、生物、道具、装备、事件、英雄卡、资源 */
+.hs-card.tp0{--type-frame-hi:#986b68;--type-frame-lo:#44373d}
+.hs-card.tp1{--type-frame-hi:#6c8798;--type-frame-lo:#354753}
+.hs-card.tp2{--type-frame-hi:#89799a;--type-frame-lo:#443d50}
+.hs-card.tp3{--type-frame-hi:#9a866e;--type-frame-lo:#4d493e}
+.hs-card.tp4{--type-frame-hi:#858d76;--type-frame-lo:#414b42}
+.hs-card.tp5{--type-frame-hi:#719691;--type-frame-lo:#354f50}
+.hs-card.tp6{--type-frame-hi:#a2936d;--type-frame-lo:#504a3c}
+.hs-card.tp7{--type-frame-hi:#788b91;--type-frame-lo:#3d4b52}
+/* 标题飘带：稀有度色，保留白色醒目字 */
+.hs-card .hsc-name{
+  order:1!important;
+  width:calc(100% + .78em)!important;
+  margin:.02em -.39em .08em!important;
+  padding:.25em .48em .23em!important;
+  text-align:center!important;
+  color:#fff!important;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--rarity-color),#fff 12%),color-mix(in srgb,var(--rarity-color),#111 20%))!important;
+  border:1px solid color-mix(in srgb,var(--rarity-color),#fff 30%)!important;
+  border-radius:0!important;
+  clip-path:polygon(4% 0,96% 0,100% 50%,96% 100%,4% 100%,0 50%)!important;
+  box-shadow:0 .12em .2em rgba(0,0,0,.38),inset 0 1px 0 rgba(255,255,255,.3)!important;
+}
+/* 插画窗：内圈使用稀有度色，主体画面仍按卡牌类型区分 */
+.hs-card .hsc-art{
+  order:2!important;
+  height:5.25em!important;
+  margin:.08em .06em 0!important;
+  border:2px solid var(--rarity-color)!important;
+  border-radius:.12em!important;
+  background:radial-gradient(circle at 50% 40%,var(--type-art1),#11161a 82%)!important;
+  box-shadow:inset 0 0 0 .12em rgba(0,0,0,.48),inset 0 0 1.1em rgba(0,0,0,.72),0 0 .25em color-mix(in srgb,var(--rarity-color),transparent 55%)!important;
+}
+.hs-card .hsc-art .art-card-image{object-fit:contain!important;padding:.14em!important}
+/* 类型标签：和标题飘带同色，作为稀有度的第二个视觉锚点 */
+.hs-card .hsc-type{
+  order:3!important;
+  margin:.08em auto 0!important;
+  padding:.12em .72em!important;
+  color:#fff!important;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--rarity-color),#fff 6%),color-mix(in srgb,var(--rarity-color),#111 25%))!important;
+  border:1px solid color-mix(in srgb,var(--rarity-color),#fff 35%)!important;
+  border-radius:.14em!important;
+  letter-spacing:.08em!important;
+  box-shadow:0 .1em .16em rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.22)!important;
+}
+/* 中部效果板：参考图的深灰大面板，保留机制词条与三类徽章 */
+.hs-card .hsc-kw{order:4!important}
+.hs-card .hsc-gem{order:5!important;background:var(--rarity-color)!important;box-shadow:0 0 .45em var(--rarity-color)!important}
+.hs-card .hsc-desc{
+  order:6!important;
+  margin:.2em .08em .04em!important;
+  padding:.42em .4em!important;
+  min-height:3.25em!important;
+  color:#eef0ed!important;
+  background:linear-gradient(180deg,#383b3c,#272b2c)!important;
+  border:1px solid rgba(255,255,255,.24)!important;
+  border-radius:.08em!important;
+  box-shadow:inset 0 0 1em rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.08)!important;
+}
+.hs-card .hsc-cost,.hs-card .hsc-val{border-radius:50%!important;clip-path:none!important}
+
+/* 标题飘带统一为古朴棕，稀有度继续由内圈与宝石表达。 */
+.hs-card .hsc-name{
+  background:linear-gradient(180deg,#a77a58,#6e4934 88%)!important;
+  border:1px solid #c19a78!important;
+  box-shadow:0 .16em .25em rgba(0,0,0,.48),inset 0 .1em .12em rgba(255,235,211,.3),inset 0 -.12em .18em rgba(34,20,12,.32)!important;
+}
+
+/* ===== 参考卡面结构重做（不是仅换色） =====
+   结构：厚实类型外框 → 稀有度内圈 → 外伸飘带 → 厚插画框 → 压边类型签 →
+   深色效果内嵌板。所有尺寸继续使用 em，随卡牌尺寸同步缩放。 */
+.hs-card{
+  border:0!important;
+  border-radius:1.18em!important;
+  padding:.78em .68em .7em!important;
+  background:linear-gradient(145deg,var(--type-frame-hi),var(--type-frame-lo) 35%,#242a2d 100%)!important;
+  box-shadow:
+    inset 0 0 0 .16em rgba(255,255,255,.22),
+    inset 0 0 0 .38em rgba(18,23,25,.58),
+    inset 0 -.9em 1.6em rgba(0,0,0,.42),
+    0 .48em 1.1em rgba(0,0,0,.65)!important;
+}
+.hs-card::before{
+  inset:.34em!important;
+  border:.14em solid var(--rarity-color)!important;
+  border-radius:.92em!important;
+  box-shadow:0 0 .5em color-mix(in srgb,var(--rarity-color),transparent 48%),inset 0 0 .35em color-mix(in srgb,var(--rarity-color),transparent 68%)!important;
+}
+.hs-card .hsc-cost{
+  top:-.5em!important;
+  left:-.5em!important;
+  width:2.45em!important;
+  height:2.45em!important;
+  z-index:6!important;
+  border:.13em solid rgba(255,255,255,.62)!important;
+  background:radial-gradient(circle at 34% 28%,#b7b9b8,#777d7e 58%,#3b4143)!important;
+  box-shadow:0 .18em .3em rgba(0,0,0,.55),inset 0 .1em .18em rgba(255,255,255,.4),inset 0 -.15em .22em rgba(0,0,0,.45)!important;
+}
+.hs-card .hsc-name{
+  width:calc(100% + 1.4em)!important;
+  min-height:1.72em!important;
+  margin:-.38em -.7em .12em!important;
+  padding:.28em .62em .25em!important;
+  z-index:3!important;
+  border:0!important;
+  clip-path:polygon(5% 0,95% 0,100% 50%,95% 100%,5% 100%,0 50%)!important;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--rarity-color),#fff 12%),color-mix(in srgb,var(--rarity-color),#111 26%))!important;
+  box-shadow:0 .16em .25em rgba(0,0,0,.48),inset 0 .1em .12em rgba(255,255,255,.32),inset 0 -.12em .18em rgba(0,0,0,.24)!important;
+}
+.hs-card .hsc-art{
+  height:5.7em!important;
+  margin:.08em .02em 0!important;
+  z-index:2!important;
+  border:.22em solid var(--rarity-color)!important;
+  border-radius:.08em!important;
+  background:radial-gradient(circle at 50% 42%,var(--type-art1),#11161a 84%)!important;
+  box-shadow:inset 0 0 0 .12em rgba(12,17,19,.7),inset 0 0 1.2em rgba(0,0,0,.78),0 0 .25em color-mix(in srgb,var(--rarity-color),transparent 45%)!important;
+}
+.hs-card .hsc-art .art-card-image{object-fit:contain!important;padding:.12em!important}
+.hs-card .hsc-type{
+  margin:-.62em auto .08em!important;
+  padding:.17em .82em!important;
+  z-index:5!important;
+  color:#fff!important;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--rarity-color),#fff 8%),color-mix(in srgb,var(--rarity-color),#111 28%))!important;
+  border:.1em solid color-mix(in srgb,var(--rarity-color),#fff 34%)!important;
+  border-radius:.12em!important;
+  box-shadow:0 .16em .22em rgba(0,0,0,.48),inset 0 .08em .1em rgba(255,255,255,.28)!important;
+}
+.hs-card .hsc-kw{margin:.08em 0 0!important;z-index:3!important}
+.hs-card .hsc-gem{
+  position:absolute!important;
+  left:50%!important;
+  bottom:.34em!important;
+  z-index:6!important;
+  margin:0!important;
+  transform:translateX(-50%) rotate(45deg)!important;
+}
+.hs-card .hsc-desc{
+  min-height:3.35em!important;
+  margin:.16em .02em .3em!important;
+  padding:.48em .44em!important;
+  z-index:2!important;
+  border:.08em solid rgba(255,255,255,.3)!important;
+  border-radius:.08em!important;
+  background:linear-gradient(180deg,#3a3d3e,#272b2c 82%)!important;
+  box-shadow:inset 0 0 1.15em rgba(0,0,0,.62),inset 0 .08em .1em rgba(255,255,255,.08)!important;
+}
+.hs-card .hsc-dmg,.hs-card .hsc-val{z-index:7!important}
+
+/* 卡牌标题：使用内嵌粗体白体，字形更直接醒目；保留白色描边效果。 */
+.hs-card .hsc-name{
+  font-family:'HarmonyOS Sans SC','HarmonyOS Sans','Noto Sans SC Sub','Microsoft YaHei',sans-serif!important;
+  font-weight:700!important;
+  color:#ffffff!important;
+  background:#111315!important;
+  letter-spacing:.08em!important;
+  -webkit-font-smoothing:antialiased;
+  -webkit-text-stroke:0!important;
+  text-shadow:0 1px 2px rgba(0,0,0,.42)!important;
+}
+
+/* HUD 头像：灰底大卡面，给新接入的角色头像留出更清晰的识别区域。 */
+#sidebar{height:118px;min-height:118px;padding-top:10px;padding-bottom:10px}
+#sidebar .hero-ava{width:96px;min-width:96px;height:96px;border-color:#c2c2c2;
+  background:linear-gradient(145deg,#9b9b9b,#666);}
+
+/* 2026-09-08：接入无人雪夜街道战斗背景；角色以脚底而非名牌作为地面基线。 */
+#overlay .battle-stage.sts{
+  min-width:0;
+  width:0;
+  flex:1 1 0;
+  background-size:cover;
+  background-position:center center;
+}
+#overlay .card.battle #ovBody > .battle-stage.sts{
+  min-width:0;
+  max-width:100%;
+}
+#overlay .battle-stage.sts .battle-stage-shade{
+  background:linear-gradient(180deg,rgba(9,9,9,.18),rgba(9,9,9,.28) 56%,rgba(5,5,5,.48) 100%);
+}
+#overlay .battle-stage.sts .sts-unit{
+  bottom:clamp(2%,2.2vh,4%)!important;
+}
+#overlay .battle-stage.sts .sts-me{
+  left:clamp(8%,10vw,14%)!important;
+  width:min(20vw,260px)!important;
+}
+#overlay .battle-stage.sts .sts-me .sts-figure{
+  width:100%!important;
+}
+#overlay .battle-stage.sts .sts-foes{
+  left:48%;
+  right:clamp(8%,9vw,12%);
+  bottom:clamp(2%,2.2vh,4%);
+  gap:clamp(10px,1.4vw,22px);
+}
+#overlay .battle-stage.sts .sts-foe{
+  width:clamp(120px,11vw,180px);
+}
+#overlay .battle-stage.sts .sts-foe.is-boss{
+  width:clamp(180px,17vw,260px);
+}
+/* 名牌脱离文档流，避免把人物脚底抬离背景地面。 */
+#overlay .battle-stage.sts .sts-nameplate{
+  position:absolute;
+  top:calc(100% + 6px);
+  left:0;
+  right:0;
+  width:100%;
+  margin:0;
+}
+#overlay .battle-stage.sts .sts-figure{
+  filter:drop-shadow(0 12px 16px rgba(0,0,0,.68));
+}
+@media(max-width:900px){
+  #overlay .battle-stage.sts .sts-me{left:5%!important;width:min(24vw,220px)!important}
+  #overlay .battle-stage.sts .sts-foes{left:41%;right:4%;gap:6px}
+  #overlay .battle-stage.sts .sts-foe{width:clamp(104px,15vw,145px)}
+  #overlay .battle-stage.sts .sts-foe.is-boss{width:clamp(150px,21vw,205px)}
+}
+
+/* 牌库响应式修正：窄屏不能继续把预览栏与六列网格横向硬挤在一起。 */
+@media (max-width:1100px){
+  #overlay .clib-main{flex-direction:column}
+  #overlay .clib-preview{width:100%;min-width:0;height:250px;min-height:250px;border-right:0;border-bottom:1px solid #b7b4aa!important}
+  #overlay .lib-grid{grid-template-columns:repeat(auto-fill,minmax(132px,1fr))!important;gap:18px 12px;padding:18px 16px 24px}
+  #overlay .lib-item{min-width:0}
+}
+@media (max-width:560px){
+  #overlay .clib-preview{height:220px;min-height:220px}
+  #overlay .lib-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;padding-left:10px;padding-right:10px}
+}
+
+/* 兼容性收口：标题飘带使用固定古朴棕渐变，避免 color-mix 无效时退回黑色。 */
+.hs-card .hsc-name{
+  background:#9da3a6!important;
+  background-image:linear-gradient(180deg,#c5c9ca 0%,#969da0 100%)!important;
+  border:1px solid #e2e5e5!important;
+  text-shadow:0 1px 2px rgba(0,0,0,.72)!important;
+}
+/* 标题飘带最终规则：随稀有度变化，使用固定值保证所有浏览器都能显示。 */
+.hs-card.rv0 .hsc-name{background-image:linear-gradient(180deg,#c6cacf,#858d93)!important;border-color:#edf0f1!important}
+.hs-card.rv1 .hsc-name{background-image:linear-gradient(180deg,#93b47e,#557d4d)!important;border-color:#c4dfb4!important}
+.hs-card.rv2 .hsc-name{background-image:linear-gradient(180deg,#83add2,#4f759e)!important;border-color:#c5e0f4!important}
+.hs-card.rv3 .hsc-name{background-image:linear-gradient(180deg,#ad93c9,#735994)!important;border-color:#e0d1f0!important}
+.hs-card.rv4 .hsc-name{background-image:linear-gradient(180deg,#e0b86e,#a67532)!important;border-color:#f5dfaa!important}
+.hs-card.rv5 .hsc-name{background-image:linear-gradient(180deg,#71c0ad,#3b8176)!important;border-color:#c1eee3!important}
+.hs-card.rv6 .hsc-name{background-image:linear-gradient(180deg,#66717d,#29323b)!important;border-color:#aeb8c0!important}
+.hs-card.rv7 .hsc-name,.hs-card.rv-prism .hsc-name{background-image:linear-gradient(180deg,#df91bd,#a75588)!important;border-color:#f3c9e1!important}
+
+/* 外层厚边框统一中性灰；类型色保留在主体与插画区域，稀有度保留在飘带/宝石。 */
+.hs-card{
+  --type-frame-hi:#92989b!important;
+  --type-frame-lo:#424a4e!important;
+  --type-panel1:#454b4d;
+  --type-panel2:#272d2f;
+}
+
+/* 类型色落到卡牌主体面板，避免只存在于容易被插画遮住的边缘。 */
+.hs-card.tp0{--type-panel1:#604846;--type-panel2:#2f292d}
+.hs-card.tp1{--type-panel1:#415b6c;--type-panel2:#263640}
+.hs-card.tp2{--type-panel1:#5c5267;--type-panel2:#332d3b}
+.hs-card.tp3{--type-panel1:#625646;--type-panel2:#37332c}
+.hs-card.tp4{--type-panel1:#59604f;--type-panel2:#30372f}
+.hs-card.tp5{--type-panel1:#456765;--type-panel2:#293f40}
+.hs-card.tp6{--type-panel1:#625c46;--type-panel2:#383529}
+.hs-card.tp7{--type-panel1:#4e5f64;--type-panel2:#2e3c40}
+.hs-card .hsc-desc{
+  background:linear-gradient(180deg,var(--type-panel1),var(--type-panel2) 82%)!important;
+}
+
+/* 插画区域边框统一灰色；稀有度不再作用于插画窗边框。 */
+.hs-card .hsc-art{
+  border-color:#9aa1a4!important;
+  box-shadow:inset 0 0 0 .12em rgba(12,17,19,.7),inset 0 0 1.2em rgba(0,0,0,.78),0 0 .24em rgba(154,161,164,.38)!important;
+}
+
+/* 取消卡牌内部稀有度环，仅保留飘带、类型标签与宝石的稀有度表达。 */
+.hs-card::before{display:none!important}
+
+/* 类型标签改用卡牌类型色，不再跟随稀有度。 */
+.hs-card .hsc-type{background:#596166!important;border-color:#aeb6b9!important}
+.hs-card.tp0 .hsc-type{background:linear-gradient(180deg,#876560,#594548)!important;border-color:#b99a96!important}
+.hs-card.tp1 .hsc-type{background:linear-gradient(180deg,#607f91,#405765)!important;border-color:#a8c4d0!important}
+.hs-card.tp2 .hsc-type{background:linear-gradient(180deg,#817493,#594d67)!important;border-color:#c0b2ca!important}
+.hs-card.tp3 .hsc-type{background:linear-gradient(180deg,#85765e,#5d5545)!important;border-color:#c3b89c!important}
+.hs-card.tp4 .hsc-type{background:linear-gradient(180deg,#727d68,#4b594c)!important;border-color:#b2c0aa!important}
+.hs-card.tp5 .hsc-type{background:linear-gradient(180deg,#608984,#416360)!important;border-color:#a8c8c1!important}
+.hs-card.tp6 .hsc-type{background:linear-gradient(180deg,#888266,#5f5a46)!important;border-color:#c8c19d!important}
+.hs-card.tp7 .hsc-type{background:linear-gradient(180deg,#6d8288,#485a61)!important;border-color:#b0c2c6!important}

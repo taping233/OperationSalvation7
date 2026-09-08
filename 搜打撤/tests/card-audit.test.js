@@ -38,7 +38,7 @@ function makeRunner(myClass) {
   const rec = {};
   const foes = [
     { name: '怪A', atk: 4, hp: 20, maxHp: 20, status: {}, defense: { shield: 0, armor: 0, guard: false }, dead: false },
-    { name: '怪B', atk: 3, hp: 15, maxHp: 15, status: {}, defense: { shield: 0, armor: 0, guard: false }, dead: false },
+    { name: '怪B', atk: 3, hp: 9, maxHp: 15, status: {}, defense: { shield: 0, armor: 0, guard: false }, dead: false },  // 怪B带伤：供「消灭受伤敌人」类句式判定
   ];
   const pstat = { hp: 30, status: {}, defense: { shield: 0, armor: 0, guard: false } };
   const pdef = { shield: 0, armor: 0, guard: false };
@@ -70,6 +70,9 @@ function makeRunner(myClass) {
     shuffleDeck: () => 0,
     addEnergy: n => { rec.energy = (rec.energy || 0) + n; return n; },
     addEnergyCap: n => { rec.energyCap = (rec.energyCap || 0) + n; return n; },
+    queueChoice: j => { rec.choice = rec.choice || []; rec.choice.push(j); },
+    setStealthStrike: v => { rec.stealthStrike = !!v; },
+    setNextSpellTwice: n => { rec.nextTwice = n; },
     getPlayerHp: () => 20,
     getHandSize: () => 4 + ((rec.temp && rec.temp.length) || 0),   // 模拟置入临时卡会增大手牌
     getHandCards: () => [{ uid: 'u0', card: { name: '占位', type: '武术' } }],

@@ -63,15 +63,15 @@
   background:linear-gradient(180deg,rgba(9,9,9,.32),rgba(9,9,9,.58) 55%,rgba(5,5,5,.9)); }
 
 /* —— 场地：单位分立两侧、站在场地下方 —— */
-.sts-arena { flex:1; position:relative; min-height:170px; }
-.sts-unit { position:absolute; bottom:2%; text-align:center; z-index:2; }
-.sts-me { left:5%; width:200px; }
-.sts-foes { position:absolute; right:4%; bottom:2%; left:44%; display:flex; justify-content:flex-end;
-  align-items:flex-end; gap:4px; z-index:2; }
+.sts-arena { flex:1; position:relative; min-height:clamp(220px,42vh,620px); }
+.sts-unit { position:absolute; bottom:clamp(3%,2.5vh,5%); text-align:center; z-index:2; }
+.sts-me { left:clamp(4%,6vw,7%); width:clamp(190px,22vw,320px); }
+.sts-foes { position:absolute; right:clamp(4%,6vw,7%); bottom:clamp(3%,2.5vh,5%); left:42%; display:flex; justify-content:flex-end;
+  align-items:flex-end; gap:clamp(8px,1vw,18px); z-index:2; }
 /* 重置旧卡片式敌人样式 */
 #overlay .battle-stage.sts .sts-foe { display:block; position:relative; flex:0 1 auto; min-width:0;
-  width:180px; border:0; padding:0; background:none; box-shadow:none; border-radius:0; }
-#overlay .battle-stage.sts .sts-foe.is-boss { width:290px; }
+  width:clamp(130px,13vw,210px); border:0; padding:0; background:none; box-shadow:none; border-radius:0; }
+#overlay .battle-stage.sts .sts-foe.is-boss { width:clamp(190px,20vw,290px); }
 .sts-me .sts-figure { width:84%; margin:0 auto; }
 .sts-figure { position:relative; line-height:0; filter:drop-shadow(0 16px 20px rgba(0,0,0,.62)); }
 .sts-figure img { width:100%; height:auto; transition:transform .15s; }
@@ -136,10 +136,10 @@
 .battle-stage.sts .bt-infuse { margin:0; z-index:6; }
 
 @media (max-width: 900px) {
-  .sts-me { left:2%; width:150px; }
-  #overlay .battle-stage.sts .sts-foe { width:130px; }
-  #overlay .battle-stage.sts .sts-foe.is-boss { width:200px; }
-  .sts-foes { left:38%; }
+  .sts-me { left:3%; width:clamp(150px,25vw,220px); }
+  #overlay .battle-stage.sts .sts-foe { width:clamp(108px,17vw,150px); }
+  #overlay .battle-stage.sts .sts-foe.is-boss { width:clamp(160px,23vw,210px); }
+  .sts-foes { left:36%; right:3%; gap:6px; }
 }
 /* 右侧敌人意图气泡贴边被裁剪：容器留出呼吸空间，气泡单行不换行 */
 .sts-foes { padding-right:14px; }
@@ -249,3 +249,11 @@
 .sts-hand .hs-card .hsc-desc span { -webkit-line-clamp: 6; }
 .sts-hand .bt-card { opacity: .93; }
 .sts-hand .bt-card:hover { opacity: 1; }
+.battle-stage[data-phase="resolving"] .bt-card,
+.battle-stage[data-phase="enemy"] .bt-card {
+  pointer-events: none;
+}
+
+.battle-stage[data-phase="targeting"] .bt-card.targeting {
+  filter: brightness(1.12) saturate(1.12);
+}

@@ -3,7 +3,9 @@
   const TYPE_NAME = { attack: '攻击伤害', spell: '法术伤害', fixed: '固定伤害', true: '真实伤害' };
 
   // 诅咒状态表：bleed/poison 为叠层（无上限不衰减），其余为计时（共享回合钟：每回合结束统一递减）
-  const CURSES = ['bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban'];
+  // burn（灼烧）2026-09-08 定版：独立于中毒的计时诅咒——不叠加（重复施加只刷新剩余回合）、
+  // 每回合结束时受到 1 点固定伤害（tickBurn 结算）
+  const CURSES = ['bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban', 'burn'];
   const CURSE_META = {
     bleed:   { name: '流血', icon: '[[icon:blood]]', stack: true,  desc: '每层使受到的攻击伤害 +1' },
     poison:  { name: '中毒', icon: '[[icon:skull]]', stack: true,  desc: '每层在回合结束时受到 1 点固定伤害' },
@@ -11,6 +13,7 @@
     silence: { name: '沉默', icon: '[[icon:cross]]', stack: false, desc: '1 回合技能无法生效（攻击除外）' },
     abreak:  { name: '破甲', icon: '[[icon:tools]]', stack: false, desc: '2 回合内无法减免伤害' },
     healban: { name: '禁疗', icon: '[[icon:heart]]', stack: false, desc: '2 回合内无法回复生命' },
+    burn:    { name: '灼烧', icon: '[[icon:fire]]', stack: false, desc: '每回合结束时受到 1 点固定伤害（不叠加，重复施加刷新持续时间）' },
   };
 
   // 祝福状态表（v0.20）：value=数值型（可叠加，本场战斗）；timed=计时型（共享回合钟递减）；
@@ -197,6 +200,23 @@
     return r;
   }
 
+  // 灼烧结算（2026-09-08 定版）：每回合结束时 1 点固定伤害（独立于中毒；
+  // 不叠加——剩余回合由共享回合钟递减，重复施加取较大值）。免疫伤害可挡下。
+  function tickBurn(target) {
+    ensureStatus(target);
+    const turns = target.status.burn;
+    if (turns <= 0) return null;
+    if ((target.status.immune || 0) > 0) {
+      return { burnTurns: turns, dealt: 0, immune: true, log: ['免疫伤害'] };
+    }
+    const r = { burnTurns: turns, dealt: 1, log: [] };
+    if (target.hp != null) {
+      target.hp -= 1;
+      if (target.hp < 0) { r.overkill = -target.hp; target.hp = 0; }
+    }
+    return r;
+  }
+
   // 计时状态递减：battle.js 在「每回合结束」（共享回合钟，双方各行动一次）调用一次，
   // 返回本次到点解除的键（冰冻/沉默/破甲/禁疗/潜行/免疫伤害）。
   // 持续 n 回合 = 从触发当回合起覆盖 n 个完整回合（规则见文件头计时规则）
@@ -353,6 +373,14 @@
     eq('  中毒层数不衰减', B.status.poison, 3);
     eq('  中毒不吃攻击力', tickPoison({ hp: 30, status: { poison: 2 } }).dealt, 2);
 
+    // 13' 灼烧：独立计时诅咒，每回合 1 点固定伤害，不叠加（2026-09-08 定版）
+    B = { hp: 30 };
+    addCurse(B, 'burn', 2); addCurse(B, 'burn', 3);
+    eq('灼烧不叠加（取较大剩余）', B.status.burn, 3);
+    eq('  灼烧回合末固定 1 点', tickBurn(B).dealt, 1);
+    eq('  灼烧与中毒互不影响', B.status.poison, 0);
+    eq('  免疫挡灼烧', tickBurn({ hp: 30, status: { burn: 2, immune: 1 } }).dealt, 0);
+
     // 14 冰冻：无法行动 + 净化解除
     B = { hp: 30 };
     addCurse(B, 'freeze', 1);
@@ -439,5 +467,5 @@ export { TYPES, TYPE_NAME, dealDamage, previewDamage,
          addBleed, clearBleed,
          CURSES, CURSE_META, addCurse, hasCurse, purify,
          BUFFS, BUFF_META, addBlessing, isStealthed, breakStealth,
-         tickPoison, tickDurations, canAct,
+         tickPoison, tickBurn, tickDurations, canAct,
          parseNotation, ensureStatus, selfTest };

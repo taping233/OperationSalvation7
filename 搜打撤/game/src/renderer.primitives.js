@@ -32,7 +32,7 @@ function mixHex(a, b, ratio) {
 }
 
 function font(camera, size) {
-  return `bold ${size / camera.zoom}px "Cascadia Code","Noto Sans SC Sub","Microsoft YaHei",sans-serif`;
+  return `bold ${size / camera.zoom}px "HarmonyOS Sans SC","HarmonyOS Sans","Noto Sans SC Sub","Microsoft YaHei",sans-serif`;
 }
 
 function circle(ctx, x, y, radius) {

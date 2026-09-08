@@ -16,6 +16,8 @@ function createShopController({
 }) {
   function generateShopStock() {
     const lib = SDT.Cards.all().filter(card => card.rarity !== '衍生' && !card.unrandom);
+    // 稀有度权重与宝箱爆率同源（2026-09-08 定版：古朴60/稀有28/史诗9/传说3），
+    // 档内挑卡走 pickOfRarity（类型均分，道具 ×0.7）
     const weights = SDT.Cards.SHOP_WEIGHTS;
     const total = Object.values(weights).reduce((sum, weight) => sum + weight, 0);
     const pickWeightedRarity = () => {
@@ -24,13 +26,12 @@ function createShopController({
         roll -= weight;
         if (roll <= 0) return rarity;
       }
-      return '初始';
+      return '古朴';
     };
     const pickRandomCard = () => {
       for (let tries = 0; tries < 50; tries++) {
-        const rarity = pickWeightedRarity();
-        const pool = lib.filter(card => card.rarity === rarity && SDT.Cards.isRandomObtainable(card));
-        if (pool.length) return pool[Math.floor(Random.random('shop') * pool.length)];
+        const card = SDT.Cards.pickOfRarity(pickWeightedRarity());
+        if (card) return card;
       }
       return lib.length ? lib[Math.floor(Random.random('shop') * lib.length)] : null;
     };
@@ -43,7 +44,9 @@ function createShopController({
         : { empty: true, label: '卡牌库无货' });
     }
     // 初始牌槽位已移除：杀/火球为初始牌，不上架（2026-09-06）；神秘货箱特殊栏位仍可能刷出
-    slots.push({ card: SDT.Cards.POTION, price: 3, sold: false });
+    const firstAid = lib.find(card => card.id === 'tt-jinchuangyao') ||
+      SDT.Cards.TABLETOP10.find(card => card.id === 'tt-jinchuangyao');
+    slots.push({ card: firstAid, price: 3, sold: false });
     // 初始攻击补充位（2026-09-08 老板定版）：固定栏位，1 币 1 张，每次到站最多补 5 张
     slots.push({ card: { ...SDT.Cards.SHA }, price: 1, sold: false, shaReplenish: 5 });
     const mysteryCard = lib.length ? lib[Math.floor(Random.random('shop') * lib.length)] : null;
