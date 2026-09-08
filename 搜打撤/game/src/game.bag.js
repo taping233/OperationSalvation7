@@ -257,7 +257,12 @@ import { _set_cardPageOpen } from './game.cardslib.js';
       closeBackpack();
       return;
     }
-    if (game.state !== 'idle' && game.state !== 'modal') return;
+    if (game.state !== 'idle' && game.state !== 'modal') {
+      // 不再静默返回：状态卡死（如移动链中断停在 moving）时玩家点击无任何反馈，
+      // 表现为「背包打不开」。给出提示便于定位；moveBy 看门狗会在数秒内自愈回 idle。
+      if (!refreshOnly) UI.log(`[[icon:hourglass]] 当前动作进行中（${game.state}），稍候再打开背包`, 'warn');
+      return;
+    }
     // 拖拽进行中重开背包：清理浮影等残留状态
     if (bagDrag) {
       if (bagDrag.ghost) bagDrag.ghost.remove();

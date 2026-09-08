@@ -304,8 +304,8 @@ function configureGameRuntime(hooks) {
     MAP.center.forEach((cc, k) => addNode(-1, k, cc));
   }
 
-  // ---------- 存档（三档位，互相独立；基地数据也按档位隔离，见 base.js） ----------
-  let activeSlot = null;                // 当前游玩的档位（1..3），标题界面为 null
+  // ---------- 存档（五档位，互相独立；基地数据也按档位隔离，见 base.js） ----------
+  let activeSlot = null;                // 当前游玩的档位（1..5），标题界面为 null
 
   const hasRun = (i) => RunStorage.has(i);                            // 该档有进行中的对局
   const hasSlot = (i) => hasRun(i) || SDT.Base.hasSlot(i);           // 该档位已被创建

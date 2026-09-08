@@ -20,7 +20,7 @@
 ## 功能分工
 
 - `game.store.js`：创建可变会话状态，并通过 `getSnapshot()` 暴露不可变快照。
-- `game.storage.js`：三槽对局存档键、读写和 v1 迁移。
+- `game.storage.js`：五槽对局存档键、读写和 v1 迁移。
 - `game.session.js`：会话派生数据与对局生命周期；`game.menu.js` 负责标题、选档、离开和设置页面。
 - `game.run.data.js`：场景、事件与职业叙事授权数据；`game.run.shop.js`：商店进货、购买和出售；`game.run.js`：移动、格子、事件、祭坛与撤离流程。
 - `game.hub.js` / `game.bag.js`：基地与背包页面。

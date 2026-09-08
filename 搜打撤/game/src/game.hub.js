@@ -51,6 +51,7 @@ let hubTab = 'deploy';
           <span class="hub-res">
             <span class="res-chip">[[icon:wood]] 木材 <b>${B.data.wood}</b></span>
             <span class="res-chip">[[icon:bread]] 口粮 <b>${B.data.rations}</b></span>
+            <span class="res-chip" title="真实钥匙储备 + 仓库钥匙卡（宝藏大门计数）">[[icon:key]] 钥匙 <b>${B.keyCount ? B.keyCount() : 0}</b></span>
             <span class="res-chip" title="卖出仓库物品所得 · 出发时随身带走">[[icon:coin]] 储备 <b>${B.data.coins}</b> 币</span>
           </span>
         </header>
@@ -137,8 +138,9 @@ let hubTab = 'deploy';
       ] },
       stash: { title: '仓库说明', items: [
         ['卡牌仓库', '点击物品可卖出换储备币，或收藏进图鉴（传说卡与桌游珍宝是特殊收藏品，收藏后完成对应成就，收藏期间不可卖出）。出发时自选携带。'],
+        ['材料卡', '仓库里的木材/口粮/钥匙材料卡可直接「使用」折入真实物资；材料是基地的根基，不可卖出换币。'],
         ['消耗口袋', '对战小怪用过的卡会随撤离回到这里，复原后回仓库。'],
-        ['物资', '点击木材/口粮可卖出换储备币（卖出后不可买回）：木材用于背包与仓库扩建，口粮用于安全格升级。储备币会在下次出发时随身带走。'],
+        ['物资', '木材/口粮/钥匙是基地建设材料（木材扩建背包与仓库、口粮升级安全格、钥匙开启宝藏大门），不可卖出换币。储备币会在下次出发时随身带走。'],
       ] },
       upgrade: { title: '升级说明', items: [
         ['背包扩建', '每消耗木材 ×' + R.bagUpgradeWood + ' 扩建 1 格，上限 ' + R.bagMax + ' 格。'],
@@ -263,7 +265,8 @@ let hubTab = 'deploy';
     // 右侧背包格：第 1 格固定「初始攻击」（默认在背包、不可移除），其余按已选卡牌顺序落格；
     // 点击背包卡面 = 放大特写（2026-09-07 留言），移除靠拖回左侧卡牌区
     const pickedNames = Object.keys(deployPick).filter(k => deployPick[k] > 0);
-    let bagCells = `<div class="bag-cell fixed" title="初始攻击 ×${MAP.rules.starterSha} · 默认在背包，固定携带">
+    let bagCells = `<div class="bag-cell fixed" data-act="bagZoom" data-name="${escAttr(SDT.Cards.SHA.name)}"
+      title="初始攻击 ×${MAP.rules.starterSha} · 默认在背包，固定携带 · 点击查看详情">
       ${SDT.Cards.cardHTML(SDT.Cards.SHA, 'sm')}<b class="dep-n on">×${MAP.rules.starterSha}</b></div>`;
     for (let i = 1; i < B.bagCap(); i++) {
       const name = pickedNames[i - 1];
@@ -329,12 +332,16 @@ let hubTab = 'deploy';
     UI.act('pickSub', (d) => subPick(d.name));
     // 背包卡面点击：放大特写；特写里保留「移出背包」兜底，拖回左侧也可移除
     UI.act('bagZoom', (d) => {
-      const n = deployPick[d.name] || 0;
+      const isSha = SDT.Cards.SHA.name === d.name;
+      const n = isSha ? MAP.rules.starterSha : (deployPick[d.name] || 0);
       if (n <= 0) return;
-      const stack = SDT.Cards.SHA.name === d.name ? { card: SDT.Cards.SHA } : B.data.stash.find(s => s.card.name === d.name);
+      const stack = isSha ? { card: SDT.Cards.SHA } : B.data.stash.find(s => s.card.name === d.name);
       if (!stack) return;
       UI.showCardZoom(stack.card, {
-        footer: `<button class="ov-btn" data-act="bagZoomRemove" data-name="${escAttr(d.name)}">移出背包（-1）</button>`,
+        // 初始攻击固定携带：详情只读，不给「移出背包」按钮（2026-09-07 留言：初始攻击也要能点击详情）
+        footer: isSha
+          ? `<span class="dep-n on">×${n} · 初始攻击默认在背包，固定携带不可移除</span>`
+          : `<button class="ov-btn" data-act="bagZoomRemove" data-name="${escAttr(d.name)}">移出背包（-1）</button>`,
       });
       UI.act('bagZoomRemove', (d2) => {
         document.getElementById('cardZoom')?.querySelector('.cz-backdrop')?.click();
@@ -397,11 +404,14 @@ let hubTab = 'deploy';
     const stashRows = B.data.stash.length
       ? B.data.stash.map((s, i) => {
           const marked = B.isCollected(s.card);
-          const price = SDT.Cards.sellPrice(s.card);
+          const mat = B.materialInfo ? B.materialInfo(s.card) : null;
+          const meta = mat
+            ? `可使用 · 每张折入${mat.label} ×${B.materialAmount(s.card)} · 不可卖币`
+            : `${s.card.cost}费 · ${s.card.type}${s.card.cls ? ' · ' + esc(characterName(s.card.cls)) : ''} · 收购 ${SDT.Cards.sellPrice(s.card)} 币/张`;
           return `<div class="pk-row stash-row${marked ? ' collected' : ''}" data-act="stashItem" data-i="${i}"
-              title="点击查看：卖出 / 收藏">
+              title="${mat ? '点击查看：使用（材料不可卖出）' : '点击查看：卖出 / 收藏'}">
             <span>[[icon:cards]] ${marked ? '[[icon:sparkles]]' : ''} <b>${esc(s.card.name)}</b>${s.count > 1 ? ` ×${s.count}` : ''}</span>
-            <span class="dim">${s.card.cost}费 · ${s.card.type}${s.card.cls ? ' · ' + esc(s.card.cls) : ''} · 收购 ${price} 币/张</span>
+            <span class="dim">${meta}</span>
           </div>`;
         }).join('')
       : '<p class="ov-empty" style="margin:2px 0 0">（空——撤离成功后在整理界面把战利品放回这里）</p>';
@@ -421,21 +431,49 @@ let hubTab = 'deploy';
               <button class="mini-btn ok" data-act="restoreCard" data-i="${i}">[[icon:check]] 复原</button></div>`).join('')
             : '<p class="ov-empty" style="margin:2px 0 0">（空——对战小怪用过的卡会随撤离回到这里）</p>'}</div>
           <h3 style="margin-top:14px">[[icon:archive]] 物资</h3>
-          <div class="pk-row stash-row" data-act="rawItem" data-kind="wood" title="点击查看：卖出">
-            <span>[[icon:wood]] <b>木材</b> ×<b>${B.data.wood}</b></span><span class="dim">收购 ${MAP.items.wood.value} 币/个 · 背包扩建用</span>
+          <div class="pk-row stash-row" data-act="rawItem" data-kind="wood" title="基地建设材料 · 不可卖出">
+            <span>[[icon:wood]] <b>木材</b> ×<b>${B.data.wood}</b></span><span class="dim">背包与仓库扩建用 · 不可卖币</span>
           </div>
-          <div class="pk-row stash-row" data-act="rawItem" data-kind="rations" title="点击查看：卖出">
-            <span>[[icon:bread]] <b>口粮</b> ×<b>${B.data.rations}</b></span><span class="dim">收购 ${MAP.items.rations.value} 币/个 · 安全格升级用</span>
+          <div class="pk-row stash-row" data-act="rawItem" data-kind="rations" title="基地建设材料 · 不可卖出">
+            <span>[[icon:bread]] <b>口粮</b> ×<b>${B.data.rations}</b></span><span class="dim">安全格升级用 · 不可卖币</span>
           </div>
         </section>
       </div>`;
   }
 
-  // 仓库物品弹窗：卡面预览 + 卖出 / 收藏
+  // 仓库物品弹窗：卡面预览 + 使用（材料卡） / 卖出 / 收藏
   function openStashItem(i) {
     const B = SDT.Base;
     const s = B.data.stash[i];
     if (!s) { renderHub(); return; }
+    // 材料卡（木材/口粮/钥匙）：只能使用折入真实物资，不可卖出换币（2026-09-08 定版）
+    const mat = B.materialInfo ? B.materialInfo(s.card) : null;
+    if (mat) {
+      const per = B.materialAmount(s.card);
+      game.state = 'modal';
+      _set_cardPageOpen(false);   // 弹窗层级：只能通过按钮返回仓库（Esc 不关闭）
+      UI.showOverlay('[[icon:archive]] 仓库材料', `
+        <div class="stash-pop-card">${SDT.Cards.cardHTML(s.card, 'sm')}</div>
+        <p class="ov-stats">×${s.count} 张 · 每张折入<b class="gold">${mat.label} ×${per}</b></p>
+        <p class="ov-note">[[icon:wood]] 材料可直接使用变成真正的${mat.label}；材料是基地的根基，<b>不可卖出换币</b>。</p>
+        <div class="ov-btns">
+          <button class="ov-btn ok" data-act="matUseOne">[[icon:check]] 使用 1 张</button>
+          <button class="ov-btn ok" data-act="matUseAll" ${s.count < 2 ? 'disabled' : ''}>[[icon:check]] 全部使用（×${s.count}）</button>
+        </div>
+        <div class="ov-btns"><button class="ov-btn" data-act="stashBack">↩ 返回仓库</button></div>`);
+      UI.act('matUseOne', () => {
+        const r = B.useStashMaterial(s.card.name, false);
+        if (r.ok) { Sfx.ding(); UI.log(r.msg, 'loot'); }
+        renderHub();
+      });
+      UI.act('matUseAll', () => {
+        const r = B.useStashMaterial(s.card.name, true);
+        if (r.ok) { Sfx.ding(); UI.log(r.msg, 'loot'); }
+        renderHub();
+      });
+      UI.act('stashBack', () => renderHub());
+      return;
+    }
     const marked = B.isCollected(s.card);
     const price = SDT.Cards.sellPrice(s.card);
     const special = isSpecialCollect(s.card);
@@ -477,7 +515,7 @@ let hubTab = 'deploy';
     UI.act('stashBack', () => renderHub());
   }
 
-  // 基地物资（木材/口粮）卖出弹窗
+  // 基地物资（木材/口粮）：材料不可卖出换币（2026-09-08 定版）——只作展示说明
   function openRawItem(kind) {
     const B = SDT.Base;
     const item = kind === 'wood' ? MAP.items.wood : MAP.items.rations;
@@ -485,23 +523,9 @@ let hubTab = 'deploy';
     game.state = 'modal';
     _set_cardPageOpen(false);   // 弹窗层级：只能通过按钮返回仓库
     UI.showOverlay(`[[icon:archive]] ${item.name}`, `
-      <p class="ov-stats">储备 <b>${have}</b> 个 · 收购价 <b class="gold">${item.value} 币</b>/个</p>
-      <p class="ov-note">${kind === 'wood' ? '木材用于扩建背包与仓库容量' : '口粮用于升级宠物安全格'}——卖出后不可买回，确定吗？</p>
-      <div class="ov-btns">
-        <button class="ov-btn ok" data-act="rawSellOne" ${have < 1 ? 'disabled' : ''}>[[icon:coin]] 卖出 1 个（+${item.value}）</button>
-        <button class="ov-btn" data-act="rawSellAll" ${have < 2 ? 'disabled' : ''}>[[icon:coin]] 全部卖出（+${item.value * have}）</button>
-      </div>
+      <p class="ov-stats">储备 <b>${have}</b> 个</p>
+      <p class="ov-note">${kind === 'wood' ? '木材用于扩建背包与仓库容量' : '口粮用于升级宠物安全格'}——材料是基地建设的根基，<b>不可卖出换币</b>。</p>
       <div class="ov-btns"><button class="ov-btn" data-act="stashBack2">↩ 返回仓库</button></div>`);
-    UI.act('rawSellOne', () => {
-      const r = B.sellRaw(kind, false);
-      if (r.ok) { Sfx.ding(); UI.log(r.msg, 'coin'); }
-      renderHub();
-    });
-    UI.act('rawSellAll', () => {
-      const r = B.sellRaw(kind, true);
-      if (r.ok) { Sfx.ding(); UI.log(r.msg, 'coin'); }
-      renderHub();
-    });
     UI.act('stashBack2', () => renderHub());
   }
 

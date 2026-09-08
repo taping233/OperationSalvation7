@@ -37,6 +37,7 @@ async function click(selector) {
   const hit = await evaluate(`(() => {
     const element = document.querySelector(${JSON.stringify(selector)});
     if (!element) return null;
+    element.scrollIntoView({ block: 'center', inline: 'center' });
     const rect = element.getBoundingClientRect();
     const x = rect.left + rect.width / 2;
     const y = rect.top + rect.height / 2;
@@ -58,7 +59,7 @@ async function click(selector) {
   await command('Input.dispatchMouseEvent', { type: 'mouseReleased', x: hit.x, y: hit.y, button: 'left', clickCount: 1 });
   // UI 关闭动画本身为 150ms；给 Windows/Electron 合成与计时器抖动留出余量，
   // 避免在动画刚结束但 hidden 尚未提交时误报。
-  await new Promise(resolve => setTimeout(resolve, 350));
+  await new Promise(resolve => setTimeout(resolve, 500));
   return hit;
 }
 
@@ -68,7 +69,15 @@ async function expectOverlay(button, closeSelector) {
   if (!opened) throw new Error(`${button} did not open its view`);
   await click(closeSelector);
   const closed = await evaluate(`document.getElementById('overlay').hidden`);
-  if (!closed) throw new Error(`${closeSelector} did not close the view opened by ${button}`);
+  if (!closed) {
+    const diagnostics = await evaluate(`({
+      overlayClass: document.getElementById('overlay').className,
+      hasDesigner: !!document.getElementById('cdesStage'),
+      hasLibrary: !!document.getElementById('libGrid'),
+      bodyClass: document.body.className,
+    })`);
+    throw new Error(`${closeSelector} did not close the view opened by ${button}: ${JSON.stringify(diagnostics)}`);
+  }
   console.log(`${button}: PASS`, hit);
 }
 
@@ -107,9 +116,9 @@ await expectOverlay('#mStart', '[data-act="slotBack"]');
 
 console.log('All non-destructive title controls passed in Electron.');
 if (process.argv.includes('--exit')) {
-  await click('#mExit');
+  await click('#btnTitleExit');
   await new Promise(resolve => setTimeout(resolve, 300));
-  console.log('#mExit: PASS (Electron quit action dispatched)');
+  console.log('#btnTitleExit: PASS (Electron quit action dispatched)');
 } else {
   socket.close();
 }

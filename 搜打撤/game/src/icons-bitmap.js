@@ -15,7 +15,7 @@ import { BUILD_VERSION, assetUrl } from './asset-url.js';
   }
   function safe(name) { if (NAMES.has(name)) return name; reportMissing('icon', name); return 'question'; }
   function url(name) { return assetUrl(`${ROOT}${safe(name)}.png`); }
-  function img(name, cls, alt) { const n=safe(name); return `<img class="ic${cls?' '+esc(cls):''}" src="${url(n)}" alt="${esc(alt||n)}" data-asset-key="icon-${esc(n)}" draggable="false" loading="eager">`; }
+  function img(name, cls, alt) { const n=safe(name); return `<img class="ic${cls?' '+esc(cls):''}" src="${url(n)}" alt="${esc(alt||n)}" data-asset-key="icon-${esc(n)}" draggable="false" loading="eager" decoding="async">`; }
 
   const MAP = Object.create(null);
   const add = (name, codes) => codes.forEach(code => { MAP[String.fromCodePoint(code)] = name; });
@@ -51,10 +51,11 @@ import { BUILD_VERSION, assetUrl } from './asset-url.js';
   }
   function hydrate(root) {
     if(!root||typeof document==='undefined') return;
-    const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null),nodes=[];let node;
-    while((node=walker.nextNode())){EMOJI_RE.lastIndex=0;if(EMOJI_RE.test(node.nodeValue))nodes.push(node);}
+    // 单次遍历同时检出 emoji 与 [[icon:]] 两种 token（旧实现两个 TreeWalker +
+    // nodes.includes O(n²) 去重；战斗/背包整页重建时这段叠在渲染成本上）
     const tokenRe=/\[\[icon:[a-z-]+\]\]/;
-    const tokenWalker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null);while((node=tokenWalker.nextNode()))if(tokenRe.test(node.nodeValue)&&!nodes.includes(node))nodes.push(node);
+    const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null),nodes=[];let node;
+    while((node=walker.nextNode())){EMOJI_RE.lastIndex=0;if(EMOJI_RE.test(node.nodeValue)||tokenRe.test(node.nodeValue))nodes.push(node);}
     nodes.forEach(textNode=>{const span=document.createElement('span');span.innerHTML=rich(textNode.nodeValue);const frag=document.createDocumentFragment();while(span.firstChild)frag.appendChild(span.firstChild);textNode.parentNode.replaceChild(frag,textNode);});
     const scrubAttrs=el=>['title','placeholder','aria-label'].forEach(attr=>{if(el&&el.hasAttribute&&el.hasAttribute(attr)){const before=el.getAttribute(attr),after=before.replace(/\s*\[\[icon:[a-z-]+\]\]\s*/g,' ').trim();if(after!==before)el.setAttribute(attr,after);}});
     scrubAttrs(root);
@@ -69,11 +70,13 @@ import { BUILD_VERSION, assetUrl } from './asset-url.js';
     const dirtyRoots=new Set();
     const flush=()=>{
       hydrateQueued=false;
-      const roots=Array.from(dirtyRoots);
+      // 整页重建时同一批 records 里会出现「先添加、回调执行前已被移除」的节点，
+      // 其 parentElement 为 null 混进 roots 后 parent.contains 会抛 TypeError 中断整批 hydrate
+      const roots=Array.from(dirtyRoots).filter(Boolean);
       dirtyRoots.clear();
       roots.forEach((root,i)=>{
-        if(!root||!root.isConnected) return;
-        if(roots.some((parent,j)=>j!==i&&parent!==root&&parent.contains&&parent.contains(root))) return;
+        if(!root.isConnected) return;
+        if(roots.some((parent,j)=>j!==i&&parent&&parent!==root&&parent.contains&&parent.contains(root))) return;
         hydrate(root);
       });
     };
@@ -81,7 +84,12 @@ import { BUILD_VERSION, assetUrl } from './asset-url.js';
     const observer=new MutationObserver(records=>{
       records.forEach(record=>{
         if(record.type==='attributes') dirtyRoots.add(record.target);
-        else record.addedNodes.forEach(node=>dirtyRoots.add(node.nodeType===Node.ELEMENT_NODE?node:node.parentElement));
+        else record.addedNodes.forEach(node=>{
+          // 已脱离文档的节点（parentElement 为 null）没有可扫描的子树，直接丢弃，
+          // 不能把 null 放进 dirtyRoots（flush 时会炸，见上）
+          const root=node.nodeType===Node.ELEMENT_NODE?node:node.parentElement;
+          if(root) dirtyRoots.add(root);
+        });
       });
       if(hydrateQueued||!dirtyRoots.size)return;
       hydrateQueued=true;
@@ -93,6 +101,17 @@ import { BUILD_VERSION, assetUrl } from './asset-url.js';
     const target=event.target;
     if(target&&target.tagName==='IMG'&&target.dataset&&target.dataset.assetKey) reportMissing('file',target.getAttribute('src'));
   }, true);
-  SDT.Icons={img,url,rich,hydrate,TYPE_ART,DEFS:{},NAMES,missingKeys};
+  // 全量图标预热（2026-09-07 老板指示）：60 枚小 PNG 启动空闲期一次拉进内存，
+  // 之后任何页面首次渲染图标零请求零解码
+  function iconUrls() { const a = []; for (const n of NAMES) a.push(url(n)); return a; }
+  function warmAllIcons() {
+    for (const u of iconUrls()) {
+      const im = new Image();
+      im.decoding = 'async';
+      im.onload = () => { try { im.decode?.()?.catch?.(() => {}); } catch (_) {} };
+      im.src = u;
+    }
+  }
+  SDT.Icons={img,url,rich,hydrate,TYPE_ART,DEFS:{},NAMES,missingKeys,urls:iconUrls,warmAll:warmAllIcons};
 
 export { MAP, ROOT, SDT, esc, missingKeys, reportMissing };

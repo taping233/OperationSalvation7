@@ -21,6 +21,7 @@ import { Random } from './random.js';
   function def() {
     return {
       wood: 0, rations: 0,
+      keys: 0,        // 真实钥匙储备（仓库钥匙材料卡「使用」后折入；宝藏大门计数）
       bagUp: 0, safeUp: 0,
       stashUp: 0,     // 仓库扩建等级（每次 +3 张容量）
       coins: 0,       // 储备币：卖出仓库物品所得，出发时随身带走
@@ -43,7 +44,7 @@ import { Random } from './random.js';
     };
   }
 
-  let slot = null;      // 当前游玩的档位（1..3）；标题界面未选档时为 null
+  let slot = null;      // 当前游玩的档位（1..5）；标题界面未选档时为 null
   let data = def();
 
   // 深合并默认值：老存档缺字段时补齐（不覆盖已有进度）
@@ -73,10 +74,17 @@ import { Random } from './random.js';
     return migrateCharacterProgress(d);
   }
 
+  // peek 指纹缓存（同 game.storage readCache 思路，2026-09-08 性能）：选档页每次打开
+  // peek×5，基地档含全量卡牌/收藏数据，逐槽 JSON.parse 不便宜。raw 串指纹失配自动
+  // 重解析，绕过 write 直写 localStorage（旧代码/另一标签页）也不会读到脏缓存。
+  const peekCache = new Map();
+
   function parseRaw(i) {
     let raw = null;
     try { raw = localStorage.getItem(SLOT_KEY(i)); } catch (e) { return null; }
-    if (raw == null) return null;
+    if (raw == null) { peekCache.delete(i); return null; }
+    const hit = peekCache.get(i);
+    if (hit && hit.raw === raw) return hit.parsed;
     let s;
     try { s = JSON.parse(raw); }
     catch (e) { return _corrupt(i, raw); }
@@ -95,6 +103,7 @@ import { Random } from './random.js';
       mv++;
       s.version = mv;
     }
+    peekCache.set(i, { raw, parsed: s });
     return s;
   }
   // 坏档处理：原串备份到 corrupt 键后返回 null（原键不动，玩家决定是否覆盖重开）
@@ -293,13 +302,50 @@ import { Random } from './random.js';
   }
 
   // ---------- 仓库物品操作：卖出 / 收藏 ----------
-  // 卖出仓库中某卡牌堆的 n 张（[[icon:sparkles]]收藏中的堆受保护，需先取消收藏）。
-  // 返回 { ok, msg, coins } 或 { ok:false, why }
+  // 材料卡判定（设计者 2026-09-08 定版）：资源类型中的 木材/口粮/钥匙 是「材料」——
+  // 可在仓库直接使用折入真实物资，但不可卖出换币；货币类资源卡（金币/银币/钻石等）仍可出售。
+  const MATERIAL_KINDS = [
+    { re: /木材/, kind: 'wood', label: '木材', icon: 'wood' },
+    { re: /口粮/, kind: 'rations', label: '口粮', icon: 'bread' },
+    { re: /钥匙/, kind: 'keys', label: '钥匙', icon: 'key' },
+  ];
+  const materialInfo = (card) => {
+    if (!card || card.type !== '资源') return null;
+    return MATERIAL_KINDS.find(m => m.re.test(card.name || '')) || null;
+  };
+  // 每张卡折入的数量：描述「×N」优先，缺省 1
+  const materialAmount = (card) => {
+    const m = String(card.desc || '').match(/×\s*(\d+)/);
+    return m ? +m[1] : 1;
+  };
+
+  // 使用仓库材料卡：折入真实物资（木材/口粮/钥匙）。all = true 时整堆使用。
+  function useStashMaterial(name, all) {
+    const i = data.stash.findIndex(x => x.card.name === name);
+    if (i < 0) return { ok: false, why: 'empty' };
+    const stack = data.stash[i];
+    const info = materialInfo(stack.card);
+    if (!info) return { ok: false, why: 'notmaterial' };
+    const per = materialAmount(stack.card);
+    const qty = all ? (stack.count || 1) : 1;
+    stack.count -= qty;
+    if (stack.count <= 0) data.stash.splice(i, 1);
+    const total = per * qty;
+    if (info.kind === 'keys') data.keys = (data.keys || 0) + total;
+    else data[info.kind] += total;
+    save();
+    return { ok: true, qty, total, label: info.label,
+      msg: `[[icon:${info.icon}]] 使用【<b>${name}</b>】×${qty}，折入<b>${info.label} ×${total}</b>` };
+  }
+
+  // 卖出仓库中某卡牌堆的 n 张（[[icon:sparkles]]收藏中的堆受保护，需先取消收藏；
+  // 材料卡不可卖出换币）。返回 { ok, msg, coins } 或 { ok:false, why }
   function sellStashCards(name, n) {
     const i = data.stash.findIndex(x => x.card.name === name);
     if (i < 0) return { ok: false, why: 'empty' };
     const stack = data.stash[i];
     if (data.collection[stack.card.id]) return { ok: false, why: 'collected' };
+    if (materialInfo(stack.card)) return { ok: false, why: 'material' };
     const price = window.SDT.Cards.sellPrice(stack.card);
     const qty = Math.min(Math.max(1, n || 1), stack.count || 1);
     stack.count -= qty;
@@ -346,9 +392,9 @@ import { Random } from './random.js';
   }
 
   // ---------- 宝藏大门 ----------
-  // 钥匙计数：仓库里的钥匙类卡牌（「一串钥匙」= 2 把，其余钥匙 = 1 把）
+  // 钥匙计数：真实钥匙储备 + 仓库里的钥匙类卡牌（「一串钥匙」= 2 把，其余钥匙 = 1 把）
   const KEY_NEEDED = 10;
-  const keyCount = () => data.stash.reduce((a, b) => {
+  const keyCount = () => (data.keys || 0) + data.stash.reduce((a, b) => {
     if (!/钥匙/.test(b.card.name || '')) return a;
     return a + (/一串/.test(b.card.name) ? 2 : 1) * (b.count || 0);
   }, 0);
@@ -365,6 +411,7 @@ import { Random } from './random.js';
     upgradeBag, upgradeSafe, upgradeStash,
     deposit, depositCards, restore, takeStashCards,
     sellStashCards, sellRaw, collectToggle, isCollected, takeReserveCoins,
+    useStashMaterial, materialInfo, materialAmount,
     keyCount, KEY_NEEDED,
     isSha,
     isBackUnlocked, unlockBack, setBack, backSel,

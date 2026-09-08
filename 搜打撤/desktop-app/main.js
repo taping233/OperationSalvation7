@@ -3,6 +3,7 @@ const { app, BrowserWindow, Menu, protocol, ipcMain, shell, net } = require('ele
 const path = require('path');
 const fs = require('fs');
 const { pathToFileURL } = require('url');
+const { appendSuggestionDocument, deleteSuggestionDocument, parseSuggestionDocument } = require('./suggestions-store.cjs');
 
 // 2560x1440 / 120 FPS 合成必须使用独显；默认自动选择在本机落到了 Iris Xe。
 // Electron 官方开关会在混合显卡机器上请求高性能 GPU，须在 ready 前设置。
@@ -114,9 +115,48 @@ if (!gotLock) {
 
 // ---------- 首页留言（写给 Friday）：追加写入 output/suggestions.json ----------
 // 开发直跑优先写仓库 output 目录（Friday 直接读该文件）；打包版无相对仓库，写 userData。
+function suggestionFiles() {
+  return app.isPackaged
+    ? [path.join(app.getPath('userData'), 'suggestions.json')]
+    : [path.join(__dirname, '..', 'game', 'output', 'suggestions.json'),
+       path.join(app.getPath('userData'), 'suggestions.json')];
+}
+
+// 读第一个可用的留言文件，保持原有形状（裸数组或 {suggestions:[…]} 都兼容）
+function readSuggestionFile() {
+  for (const file of suggestionFiles()) {
+    try {
+      const data = JSON.parse(fs.readFileSync(file, 'utf8'));
+      const parsed = parseSuggestionDocument(data);
+      if (parsed.list.length || Array.isArray(data) || Array.isArray(data?.suggestions)) {
+        return { file, data, list: parsed.list };
+      }
+    } catch (_) { /* 尝试下一个候选路径 */ }
+  }
+  return { file: null, data: [], list: [] };
+}
+
+ipcMain.handle('suggestions-read', () => ({ ok: true, list: readSuggestionFile().list }));
+
+ipcMain.handle('suggestions-delete', (_event, ts) => {
+  const key = String(ts || '');
+  if (!key) return { ok: false };
+  const { file, data, list } = readSuggestionFile();
+  if (!file) return { ok: false };
+  const next = deleteSuggestionDocument(data, key);
+  if (!next.changed) return { ok: false };
+  try {
+    fs.writeFileSync(file, JSON.stringify(next.value, null, 2) + '\n', 'utf8');
+    return { ok: true };
+  } catch (_) { return { ok: false }; }
+});
+
 ipcMain.handle('suggestions-append', (_event, entry) => {
   const item = {
     ts: String(entry?.ts || new Date().toISOString()),
+    page: entry?.page && typeof entry.page === 'object'
+      ? { id: String(entry.page.id || ''), name: String(entry.page.name || '') }
+      : null,
     target: entry?.target && typeof entry.target === 'object'
       ? { name: String(entry.target.name || ''), selector: String(entry.target.selector || '') }
       : null,
@@ -124,18 +164,13 @@ ipcMain.handle('suggestions-append', (_event, entry) => {
     text: String(entry?.text || '').trim().slice(0, 2000),
   };
   if (!item.text) return { ok: false };
-  const targets = app.isPackaged
-    ? [path.join(app.getPath('userData'), 'suggestions.json')]
-    : [path.join(__dirname, '..', 'game', 'output', 'suggestions.json'),
-       path.join(app.getPath('userData'), 'suggestions.json')];
-  for (const file of targets) {
+  for (const file of suggestionFiles()) {
     try {
       fs.mkdirSync(path.dirname(file), { recursive: true });
       let data = { suggestions: [] };
       try { data = JSON.parse(fs.readFileSync(file, 'utf8')); } catch (_) { /* 首次无文件 */ }
-      if (!Array.isArray(data.suggestions)) data.suggestions = [];
-      data.suggestions.push(item);
-      fs.writeFileSync(file, JSON.stringify(data, null, 2) + '\n', 'utf8');
+      const next = appendSuggestionDocument(data, item);
+      fs.writeFileSync(file, JSON.stringify(next, null, 2) + '\n', 'utf8');
       return { ok: true };
     } catch (_) { /* 尝试下一个候选路径 */ }
   }

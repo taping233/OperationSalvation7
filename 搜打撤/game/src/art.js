@@ -42,8 +42,21 @@ import { BUILD_VERSION, assetUrl } from './asset-url.js';
       console.error(`[SDT.Art] missing asset mapping: ${label}`);
     }
   }
+  // 位图预解码池（用空间换时间）：warm(url) 把文件拉进缓存并提前解码，
+  // 之后 <img> 首次渲染零解码延迟。重复 warm 同一地址直接跳过。
+  const warmedUrls = new Set();
+  function warm(urls) {
+    for (let u of urls) {
+      if (!u || warmedUrls.has(u)) continue;
+      warmedUrls.add(u);
+      const im = new Image();
+      im.decoding = 'async';
+      im.onload = () => { try { im.decode?.()?.catch?.(() => {}); } catch (_) {} };
+      im.src = u;
+    }
+  }
   function image(src, cls, alt, key, style) {
-    return `<img class="${esc(cls)}" src="${assetUrl(ROOT + src)}" alt="${esc(alt)}" data-asset-key="${esc(key)}"${style ? ` style="${esc(style)}"` : ''} draggable="false" loading="eager">`;
+    return `<img class="${esc(cls)}" src="${assetUrl(ROOT + src)}" alt="${esc(alt)}" data-asset-key="${esc(key)}"${style ? ` style="${esc(style)}"` : ''} draggable="false" loading="lazy" decoding="async">`;
   }
   function fallback(kind, key, alt) {
     reportMissing(kind, key);
@@ -117,6 +130,7 @@ const rosterUrl = assetUrl('assets/portraits/expedition-roster.webp');
 const FIGURE_FULL_ART = Object.freeze({
   shuangling: 'portraits/full/shuangling.webp',
   baiqi: 'portraits/full/baiqi.webp',
+  lituan: 'portraits/full/baita.webp',
 });
 // 个别角色配 Q 版战斗头像（portraits/avatars/<角色id>.webp）：局内下边栏人物面板用
 const AVATAR_ART = Object.freeze({
@@ -130,7 +144,7 @@ function characterArt(value, full=false) {
    // 选人页大幅位：主体层铺满 + 同图模糊延伸层填满左侧空区（各图用自身色调向左晕开）
    const back = image(figure, 'art-figure-back', '', `figure-back-${c.id}`);
    const main = image(figure, 'art-figure', c.name, `figure-${c.id}`);
-   return `<span class="art-figure-wrap">${back}${main}</span>`;
+   return `<span class="art-figure-wrap figure-${c.id}">${back}${main}</span>`;
  }
  if (figure) return image(figure, 'art-figure', c.name, `figure-${c.id}`);
  const ranges=[[0,355],[338,672],[655,1010],[991,1397],[1380,1672]];
@@ -140,6 +154,8 @@ function characterArt(value, full=false) {
 }
 
   SDT.Art = {
+    // 提前预载/解码位图（传 <img> 同款最终 URL），翻页/切页前调用可消掉首帧解码卡顿
+    warm,
     classArt(className) {
       if(characterFor(className)) return characterArt(className);
       const id = resolveClass(className);
@@ -165,6 +181,52 @@ function characterArt(value, full=false) {
       return image(`portraits/enemies/${id}.webp`, 'art-portrait art-hostile', id, `enemy-${id}`);
     },
     has(id) { return Boolean(resolveClass(id)) || MONSTER_IDS.has(id); },
+    // 全量卡面美术预热（2026-09-07 老板：能首次离线进内存的就不在用时计算）。
+    // 复用渲染端同款生成器抽取最终 URL（含 ?v= 构建号），与 <img> 实际 src 完全一致，
+    // 保证命中浏览器 HTTP/解码缓存。
+    collectCardAssets(cards) {
+      const urls = [];
+      const push = (html) => { const m = /src="([^"]+)"/.exec(html || ''); if (m) urls.push(m[1]); };
+      if (Array.isArray(cards)) for (const c of cards) { try { push(this.cardIcon(c)); } catch (_) {} }
+      for (const id of MONSTER_IDS) { try { push(this.monsterArt(id)); } catch (_) {} }
+      for (const name of Object.values(CLASS_NAMES)) {
+        try { push(this.classFullArt(name)); } catch (_) {}
+        try { push(this.classAvatarArt(name)); } catch (_) {}
+      }
+      return urls;
+    },
+    // 2026-09-08 老板：预热改启动时强制进行并显示进度。分小批加载+解码（decode 离线），
+    // 每张完成即回调 onProgress(done,total)；已预热过的 URL 直接计入完成。
+    warmBatched(urls, onProgress, batch = 6) {
+      const list = [];
+      const seen = new Set();
+      for (const u of urls || []) {
+        if (u && !seen.has(u) && !warmedUrls.has(u)) { seen.add(u); list.push(u); }
+      }
+      // 进度总数 = 待加载 + 已预热（调用方传去重前全量，done/grand 口径一致）
+      const grand = (urls || []).length;
+      let done = grand - list.length;   // 已预热过的先计入完成
+      if (onProgress && grand) onProgress(done, grand);
+      let i = 0;
+      return new Promise((resolve) => {
+        const next = () => {
+          if (i >= list.length) { resolve(); return; }
+          const slice = list.slice(i, i + batch);
+          i += slice.length;
+          let left = slice.length;
+          const one = () => { done++; if (onProgress) onProgress(done, grand); if (!--left) next(); };
+          for (const u of slice) {
+            warmedUrls.add(u);
+            const im = new Image();
+            im.decoding = 'async';
+            im.onload = () => { try { im.decode?.()?.catch?.(() => {}); } catch (_) {} one(); };
+            im.onerror = one;
+            im.src = u;
+          }
+        };
+        next();
+      });
+    },
     cardIcon(card) {
       const family = cardFamily(card);
       if (!CARD_FAMILIES.has(family)) {

@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { RunStorage } from '../game/src/game.storage.js';
+import { RunStorage, SLOT_COUNT } from '../game/src/game.storage.js';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };
 await import('../game/src/cards.js');
@@ -23,14 +23,18 @@ describe('固定旧档兼容样本', () => {
     expect(localStorage.getItem('sdt-save-v1')).toBeNull();
   });
 
-  it('v2 三槽按槽读取且不会互相覆盖', () => {
+  it('v2 五槽按槽读取且不会互相覆盖', () => {
     const slot2 = fixture('save-v2-slot2-run.json');
+    expect(SLOT_COUNT).toBe(5);
     // write 统一盖章 version（schema 版本契约）
     RunStorage.write(2, slot2);
     RunStorage.write(3, { ...slot2, slot: 3, myClass: '剑仙' });
+    RunStorage.write(5, { ...slot2, slot: 5, myClass: '法师' });
     expect(RunStorage.read(1)).toBeNull();
     expect(RunStorage.read(2)).toEqual({ ...slot2, myClass: '牧师', characterId: 'dengkui', version: RunStorage.SAVE_VERSION });
     expect(RunStorage.read(3).myClass).toBe('剑仙');
+    expect(RunStorage.read(4)).toBeNull();
+    expect(RunStorage.read(5).myClass).toBe('法师');
   });
 
   it('损坏存档：原串备份到 corrupt 键并返回 null', () => {

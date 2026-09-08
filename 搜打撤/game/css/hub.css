@@ -213,12 +213,15 @@
   .cls2-face:hover { transform: translateY(-3px); border-color: #b8cdd4; }
   .cls2-face.sel { border-color: #d8b680; box-shadow: 0 0 18px rgba(216,182,128,.35), inset 0 0 0 1px rgba(216,182,128,.5); }
   .cls2-face.sel b { color: #eed9a8; }
-  /* 独立宽幅立绘（art-figure，霜翎/白契）：主体层 cover 铺满，同图模糊延伸层填满左侧空区 */
+  /* 独立宽幅立绘（art-figure，无/常无欲）：主体层 cover 铺满，同图模糊延伸层填满左侧空区 */
   .cls2-fullart .art-figure-wrap { position: absolute; inset: 0; display: block; }
   .cls2-fullart img.art-figure-back { position: absolute; inset: -60px; width: calc(100% + 120px); height: calc(100% + 120px);
     max-width: none; object-fit: cover; object-position: center bottom; z-index: 0;
     filter: blur(42px) saturate(.92) brightness(.75); }
   .cls2-fullart img.art-figure { position: relative; z-index: 1; width: 100%; height: 100%; max-width: none; object-fit: cover; object-position: center bottom; }
+  /* 白塔第一版无水印立绘定位：上移约 18%，保持原始画面比例 */
+  .cls2-fullart .figure-lituan img.art-figure-back { inset: -18% 0 auto; width: 100%; height: 118%; }
+  .cls2-fullart .figure-lituan img.art-figure { height: 118%; margin-top: -18%; }
   .cls2-face img.art-figure { object-fit: cover; object-position: center 30%; }
   .cls-hub-art img.art-figure, .cls-pick-art img.art-figure, .bt-fportrait img.art-figure { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
   /* 左下返回（局内同款朱红）/ 右下确认大键：与头像条同排贴底 */

@@ -43,6 +43,11 @@ function createGameMenuController(deps) {
       mute.addEventListener('click', () => { SDT.Sound.setMuted(!SDT.Sound.muted); syncMute(); });
       syncMute();
     }
+    // 标题页左上退出键：桌面版走 IPC 退出应用；浏览器版兜底 window.close()
+    document.getElementById('btnTitleExit')?.addEventListener('click', () => {
+      if (window.sdtDesktop?.isDesktop) window.sdtDesktop.quit();
+      else window.close();
+    });
     // 右键游戏任意界面 → 针对该位置打开写给 Friday 的建议（自动附上位置信息）
     // 绑定在 document 上一次全局生效；建议层是独立 DOM，叠加在 overlay 页面之上不破坏原界面。
     if (!titleExtrasBoundGlobal) {
@@ -50,25 +55,56 @@ function createGameMenuController(deps) {
       document.addEventListener('contextmenu', (e) => {
         if (e.target.closest('#sugLayer')) return;   // 建议层内部右键不重开
         e.preventDefault();
-        const target = describeTitleTarget(e.target);
+        const page = describeCurrentPage();
+        const target = describeTitleTarget(e.target, page);
         const at = { x: Math.round(e.clientX / innerWidth * 100), y: Math.round(e.clientY / innerHeight * 100) };
-        openSuggestionBox(target, at);
+        openSuggestionBox(target, at, page);
       });
     }
   }
 
+  // 精确识别当前所在的页面/弹层（留言记录用）：
+  // 全屏页按稳定容器（hubMain/depMain/卡牌库/制作坊/设置/选人），普通弹层用弹层标题，
+  // 都没有再按 game.state 回退。返回 { id: 稳定标识, name: 中文页名 }。
+  function describeCurrentPage() {
+    const overlay = UI.el && UI.el.overlay;
+    if (overlay && !overlay.hidden) {
+      const body = UI.el.ovBody;
+      const hub = body && body.querySelector('#hubMain');
+      if (hub) {
+        const tab = Array.from(hub.classList).find(c => c.startsWith('hub-'));
+        const key = tab ? tab.slice(4) : '';
+        const tabName = { deploy: '出发', stash: '仓库', upgrade: '升级', classes: '人物', ach: '成就' }[key] || key;
+        return { id: 'hub-' + key, name: `基地 · ${tabName || '主页'}` };
+      }
+      if (body && body.querySelector('#depMain')) return { id: 'depMain', name: '出征整备' };
+      if (body && body.querySelector('.sugin-page')) return { id: 'suginbox', name: '留言库' };
+      if (body && body.querySelector('.clib-main')) return { id: 'cardlib', name: '卡牌库' };
+      if (body && body.querySelector('.cdes-main')) return { id: 'cardforge', name: '制作坊' };
+      if (body && body.querySelector('.settings-page')) return { id: 'settings', name: '设置页' };
+      if (body && body.querySelector('.cls2-page')) return { id: 'classselect', name: '选人页' };
+      const title = ((UI.el.ovTitle && UI.el.ovTitle.textContent) || '').trim();
+      if (title) return { id: 'overlay:' + title, name: title };
+      const modeName = { page: '全屏页', battle: '战斗弹层', bag: '背包弹层', bagpage: '背包页', chest: '宝箱浮层', scene: '场景弹层', wide: '宽幅弹层' }[UI._lastMode] || '弹层';
+      return { id: 'mode:' + (UI._lastMode || ''), name: modeName };
+    }
+    const stateName = { boot: '启动', title: '标题页', idle: '对局地图', moving: '对局移动中', rolling: '对局骰子中', modal: '弹层页面', done: '结算页', bossCleanup: 'BOSS 收尾' }[game.state] || game.state;
+    return { id: 'state:' + (game.state || ''), name: stateName };
+  }
+
   // 把右键命中的元素翻译成 Friday 可读的位置描述：
   // 优先取按钮文案/标题提示，画布单独说明，其次区域类名，再带上 DOM 路径。
-  function describeTitleTarget(el) {
-    const stateName = { boot: '启动', title: '标题页', idle: '对局地图', moving: '对局移动中', rolling: '对局骰子中', modal: '弹层页面', done: '结算页' }[game.state] || game.state;
+  // 页面前缀由 describeCurrentPage 提供，精确到具体页面/弹层。
+  function describeTitleTarget(el, page) {
+    const where = page ? page.name : game.state;
     if (el && el.tagName === 'CANVAS') {
-      return { name: `游戏画布（${stateName}界面）`, selector: 'canvas#' + (el.id || 'viewport') };
+      return { name: `游戏画布（${where}）`, selector: 'canvas#' + (el.id || 'viewport') };
     }
     if (!el || el.id === 'title') return { name: `标题页整体`, selector: '#title' };
     const btn = el.closest('button');
     if (btn) {
       const label = btn.getAttribute('title') || btn.textContent.trim().replace(/\s+/g, ' ').slice(0, 20);
-      return { name: `${stateName} · 按钮「${label}」`, selector: btn.id ? `#${btn.id}` : `button.${btn.className}` };
+      return { name: `${where} · 按钮「${label}」`, selector: btn.id ? `#${btn.id}` : `button.${btn.className}` };
     }
     const zone = el.closest('[class]');
     const zoneName = { 'title-heading': '标题标题区', 'ak-hud': '主页 HUD 区', 'title-quote': '底部引言', 'title-bg': '背景图', 'ov-body': '弹层页面内容区', 'sidebar': '左侧边栏' }[zone?.className] || zone?.className;
@@ -78,7 +114,7 @@ function createGameMenuController(deps) {
       path.unshift(cur.tagName.toLowerCase() + (cur.className ? '.' + String(cur.className).split(' ')[0] : '') + (cur.id ? '#' + cur.id : ''));
       cur = cur.parentElement;
     }
-    return { name: `${stateName} · ${zoneName || '未命名区域'}`, selector: path.join(' > ') };
+    return { name: `${where} · ${zoneName || '未命名区域'}`, selector: path.join(' > ') };
   }
 
   // 最近游玩的档位（按对局存档时间；无对局存档的基地档位排后）
@@ -117,11 +153,14 @@ function createGameMenuController(deps) {
 
   // ---------- 首页留言：右键任意位置写给 Friday 的建议 ----------
   // 桌面版经 Electron IPC 写入仓库 output/suggestions.json；浏览器版退回 localStorage。
-  // 每条建议携带 target（右键命中的 UI 位置）与 at（屏幕百分比坐标），Friday 可直接定位要改的地方。
-  async function saveSuggestion(text, target, at) {
-    const entry = { ts: new Date().toISOString(), target: target || null, at: at || null, text };
+  // 每条建议携带 page（所在页面/弹层）、target（右键命中的 UI 位置）与 at（屏幕百分比坐标）。
+  async function saveSuggestion(text, target, at, page) {
+    const entry = { ts: new Date().toISOString(), page: page || null, target: target || null, at: at || null, text };
     if (window.sdtDesktop?.appendSuggestion) {
-      try { return !!(await window.sdtDesktop.appendSuggestion(entry)); } catch (_) { return false; }
+      try {
+        const result = await window.sdtDesktop.appendSuggestion(entry);
+        return result === true || result?.ok === true;
+      } catch (_) { return false; }
     }
     try {
       const list = JSON.parse(localStorage.getItem('sdt-suggestions-v1') || '[]');
@@ -131,7 +170,7 @@ function createGameMenuController(deps) {
     } catch (_) { return false; }
   }
 
-  function openSuggestionBox(target, at) {
+  function openSuggestionBox(target, at, page) {
     const layer = document.getElementById('sugLayer');
     if (!layer || !layer.hidden) return;   // 已打开则忽略
     const prevState = game.state;
@@ -148,7 +187,7 @@ function createGameMenuController(deps) {
     document.getElementById('sugSaveBtn').onclick = async () => {
       const text = ta.value.trim();
       if (!text) return;
-      const ok = await saveSuggestion(text, target, at);
+      const ok = await saveSuggestion(text, target, at, page);
       document.getElementById('sugWhere').innerHTML = ok
         ? '建议已记录，Friday 会看到，谢谢老板！'
         : '写入失败，可稍后再试。';
@@ -156,6 +195,104 @@ function createGameMenuController(deps) {
       setTimeout(close, ok ? 900 : 1500);
     };
     setTimeout(() => ta.focus(), 0);
+  }
+
+  // ---------- 留言库：设置页入口，查看历史留言与完成状态，未完成的可删除 ----------
+  // 桌面版经 Electron IPC 读写 output/suggestions.json；浏览器版读写 localStorage。
+  // done 标记由 Friday 落地每批留言后在 json 里补写；未完成条目显示删除键（两步确认）。
+  async function loadSuggestions() {
+    if (window.sdtDesktop?.readSuggestions) {
+      try {
+        const r = await window.sdtDesktop.readSuggestions();
+        if (r?.ok && Array.isArray(r.list)) return r.list;
+      } catch (_) { /* 落回 localStorage */ }
+    }
+    try { return JSON.parse(localStorage.getItem('sdt-suggestions-v1') || '[]'); } catch (_) { return []; }
+  }
+
+  async function removeSuggestion(ts) {
+    if (window.sdtDesktop?.deleteSuggestion) {
+      try {
+        const result = await window.sdtDesktop.deleteSuggestion(ts);
+        return result === true || result?.ok === true;
+      } catch (_) { return false; }
+    }
+    try {
+      const list = JSON.parse(localStorage.getItem('sdt-suggestions-v1') || '[]').filter((e) => e?.ts !== ts);
+      localStorage.setItem('sdt-suggestions-v1', JSON.stringify(list));
+      return true;
+    } catch (_) { return false; }
+  }
+
+  const fmtSugTime = (iso) => {
+    const d = new Date(iso);
+    if (isNaN(d)) return '';
+    const p = (n) => String(n).padStart(2, '0');
+    return `${p(d.getMonth() + 1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}`;
+  };
+
+  let sugCache = null;   // 留言库打开期间的数据副本，删除后本地同步
+  function sugRowHTML(e, done) {
+    const page = e?.page?.name || (e?.target?.name ? String(e.target.name).split(' · ')[0] : '未知位置');
+    const where = e?.target?.name || '';
+    return `<div class="sugin-row${done ? ' done' : ''}">
+      <div class="sugin-top">
+        <span class="sugin-mark">${done ? '[[icon:check]]' : '[[icon:book]]'}</span>
+        <span class="sugin-time">${fmtSugTime(e?.ts)}</span>
+        <span class="sugin-page-name">${esc(page)}</span>
+        ${done ? '' : `<button class="mini-btn danger sugin-del" data-act="sugDel" data-ts="${esc(e?.ts || '')}">删除</button>`}
+      </div>
+      <div class="sugin-text">${esc(e?.text || '')}</div>
+      ${where ? `<div class="sugin-where">${esc(where)}</div>` : ''}
+    </div>`;
+  }
+
+  function renderSugBox() {
+    const box = document.getElementById('sugBox');
+    if (!box) return;
+    const list = (sugCache || []).slice().reverse();   // 新留言在前
+    const pend = list.filter((e) => !e?.done);
+    const done = list.filter((e) => e?.done);
+    let html = `<p class="hint">共 ${list.length} 条留言 · 待处理 ${pend.length} · 已完成 ${done.length}。已完成的留言是历史档案；未完成的可删除，删除需点两次确认。</p>`;
+    if (pend.length) html += `<h3 class="set-h">待处理 <span class="set-en">PENDING · ${pend.length}</span></h3>` + pend.map((e) => sugRowHTML(e, false)).join('');
+    html += `<h3 class="set-h">已完成 <span class="set-en">DONE · ${done.length}</span></h3>`;
+    html += done.length ? done.map((e) => sugRowHTML(e, true)).join('') : '<p class="ov-empty">还没有已完成的留言。</p>';
+    if (!list.length) html = '<p class="ov-empty">还没有历史留言。在游戏任意界面右键即可写给 Friday。</p>';
+    box.innerHTML = SDT.Icons.rich(html);
+  }
+
+  function openSuggestionInbox() {
+    game.state = 'modal';
+    UI.showOverlay('', `
+      <div class="pg settings-page sugin-page">
+        <header class="pg-head"><h2>[[icon:book]] 留言库</h2><span class="pg-spacer"></span></header>
+        <div class="settings" id="sugBox"><p class="ov-empty">读取中…</p></div>
+        <!-- 2026-09-07 留言：返回键与攻略/成就页统一，改小号沉到右下角 -->
+        <div class="ov-btns ov-btns-corner"><button class="ov-btn back-sm ok" data-act="sugBack">返回 <i class="en">BACK</i></button></div>
+      </div>`, 'page');
+    UI.act('sugBack', () => openSettings());
+    UI.act('sugDel', async (d) => {
+      const ts = d?.ts;
+      // UI.act 只回传 dataset，按钮要按 ts 从 DOM 反查（同 openSettings 的 armDanger 模式）
+      const btn = [...document.querySelectorAll('#ovBody .sugin-del')].find((b) => b.dataset.ts === ts);
+      if (!ts || !btn) return;
+      if (!btn.dataset.confirm) {   // 两步确认：首次点击变「确认删除」，2.6 秒后还原
+        btn.dataset.confirm = '1'; btn.textContent = '确认删除'; btn.classList.add('arm');
+        setTimeout(() => {
+          if (btn.isConnected) { delete btn.dataset.confirm; btn.textContent = '删除'; btn.classList.remove('arm'); }
+        }, 2600);
+        return;
+      }
+      if (await removeSuggestion(ts)) {
+        sugCache = (sugCache || []).filter((e) => e?.ts !== ts);
+        SDT.Sound.sfx('confirm');
+        renderSugBox();
+      } else {
+        btn.textContent = '删除失败';
+        setTimeout(() => { if (btn.isConnected) btn.textContent = '删除'; }, 1500);
+      }
+    });
+    loadSuggestions().then((list) => { sugCache = list; renderSugBox(); });
   }
 
   // 快速参考：对局中的真实按键与操作
@@ -380,19 +517,29 @@ function createGameMenuController(deps) {
     UI.act('enterSlot', (d) => {
       const slot = +d.slot;
       launch(slot, async () => {
-        // 上一局未结束 → 直接进入未完成对局；否则先进基地
-        // 有存档键但读不出（损坏/版本过新）→ loadGame 内部会给出具体原因，先回基地
+        // 上一局未结束 → 直接回到局内（2026-09-07 留言：不进基地换人/重新带卡）；
+        // 有存档键但读不出（损坏/版本过新）→ loadGame 内部会给出具体原因，回基地重整
         const resumed = RunStorage.has(slot);
+        let inRun = false;
         if (resumed) {
-          if (!loadGame(slot) && !RunStorage.issue(slot)) { UI.log('对局存档读取失败，先回基地', 'warn'); }
+          inRun = !!loadGame(slot);
+          if (!inRun) { RunStorage.issue(slot); UI.log('对局存档读取失败，先回基地', 'warn'); }
         }
         // 2026-09-07 留言：进入对局缺少动画——复用启程过渡（大门场景）；
         // 经 runtime 注入（boot 装配），避免 menu→run 直接依赖形成循环
+        if (inRun) {
+          await runtime.showRunTransition({
+            tone: 'door', asset: 'scene-door-bg',
+            eyebrow: 'EXPEDITION RESUMED', title: '继续对局',
+            detail: '远征尚未结束 · 直接回到对局',
+            duration: 900,
+          });
+          return;   // loadGame 已恢复地图与左侧栏：停留局内，不再进基地整备
+        }
         await runtime.showRunTransition({
           tone: 'door', asset: 'scene-door-bg',
-          eyebrow: resumed ? 'EXPEDITION RESUMED' : 'BASE LINKED',
-          title: resumed ? '继续对局' : '进入存档',
-          detail: '远征尚未结束 · 回到基地整备出发',
+          eyebrow: 'BASE LINKED', title: '进入存档',
+          detail: '回到基地整备出发',
           duration: 900,
         });
         runtime.openBaseHub('deploy');
@@ -519,6 +666,8 @@ function createGameMenuController(deps) {
         <p class="hint">侧边栏的 [[icon:gear]] 按钮为全局静音；这里可分别开关音乐与音效、拖动滑条调音量（自动保存）。</p>
         <h3 class="set-h">[[icon:trophy]] 致谢 <span class="set-en">CREDITS</span></h3>
         <p class="hint">图标来自 game-icons.net —— Lorc、Delapouite、Carl Olsen、Caro Asercion（CC-BY 3.0，详见 assets/icons/game-icons/LICENSE-CC-BY-3.0.md）；音效来自 Kenney.nl（CC0）。</p>
+        <h3 class="set-h">[[icon:book]] 留言库 <span class="set-en">SUGGESTION BOX</span></h3>
+        <div class="btn-row"><button class="mini-btn" data-act="openInbox">查看历史留言</button></div>
         <h3 class="set-h">危险区 <span class="set-en">DANGER ZONE</span></h3>
         <div class="btn-row">
           <button class="mini-btn danger" data-act="wipeNotes">清空格子备注</button>
@@ -555,6 +704,7 @@ function createGameMenuController(deps) {
       if (!armDanger('wipeSave', '确认清空全部？')) return;
       clearAllSlots(); UI.log('已清空全部五个档位的存档', 'warn');
     });
+    UI.act('openInbox', openSuggestionInbox);
     UI.act('closeSettings', () => { UI.hideOverlay(); game.state = prev === 'modal' ? 'idle' : prev; });
     // 勾选即时生效并同步侧边栏
     document.getElementById('setIndex').addEventListener('change', (e) => { game.toggles.index = e.target.checked; sync(); });

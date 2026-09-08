@@ -5,6 +5,7 @@ import { TYPE_NAME } from './game.notes.js';
 import { MAP } from './game.session.js';
 import { SLOT_COUNT, buildDerived, cam, canvas, configureGameRuntime, ctx, dpr, exitToTitle, game, hasRun, migrateOldSave, openSettings, quitGame, saveGame, setLobby, showTitle, startNewGame, _set_dpr, _set_cam } from './game.session.js';
 import { bindRunMixins, openClassChoice, openShop, roll, showRunTransition } from './game.run.js';
+import { PRELOAD_SCENES } from './game.run.data.js';
 import { openBaseHub } from './game.hub.js';
 import { bindBagMixins, showBackpack } from './game.bag.js';
 import { bindDevMode, bindNotesMixins, initDevMode, openCellEditor, rebuildNotes, showClearOverlay, showExportOverlay, showImportOverlay } from './game.notes.js';
@@ -197,10 +198,16 @@ configureGameRuntime({ openClassChoice, openBaseHub, rebuildNotes, resize: () =>
     lastT = now;
     // 标题 / 退出界面盖住画布时跳过整帧渲染（省电省 GPU，回来时 dt 已钳制不会跳变）
     if ((coverTitle && !coverTitle.hidden) || (coverExit && !coverExit.hidden)) return;
-    // 全屏不透明页（事件/节点/背包页/房间战斗）盖住画布时同样跳帧，不重绘被遮挡的画布
+    // 全屏不透明页（事件/节点/背包页/房间战斗）盖住画布时同样跳帧，不重绘被遮挡的画布。
+    // 战斗页 room-view 已是完全不透明 #0c0c0c 全屏层（overlays.css），画布根本不可见——
+    // 也并入 covered 停画（旧逻辑给战斗页留 60fps 重绘是 backdrop blur 时代的注释，已过时）。
+    // 宝箱浮层（chest）底下隔着 blur(6px)，冻结与运动在模糊后无感，停画省下整幅重绘。
     const ov = UI.el.overlay;
-    const battleBehind = !ov.hidden && !!ov.querySelector('.battle-stage');
-    const covered = document.hidden || (!ov.hidden && !battleBehind && (ov.classList.contains('opaque') || ov.classList.contains('room-view')));
+    // 战斗页标志由 UI.showOverlay 唯一入口缓存（曾在此每帧 querySelector 全子树扫描）
+    const battleBehind = !ov.hidden && !!UI._hasBattleStage;
+    const covered = document.hidden || (!ov.hidden &&
+      (ov.classList.contains('opaque') || ov.classList.contains('room-view') ||
+       battleBehind || UI._lastMode === 'chest'));
     const ts = (SDT.FX && SDT.FX.timeScale) || 1;
     const sdt = dt * ts;   // hit-stop 冻结世界：逻辑时间缩放，rAF 与恢复计时仍走真实时间
     game.time += sdt;
@@ -354,6 +361,39 @@ configureGameRuntime({ openClassChoice, openBaseHub, rebuildNotes, resize: () =>
     }
     rebuildNotes();
     showTitle();          // 开机进入《代号7》标题界面
+    // 空闲预热基地壁纸（336KB jpg）：老板高频进基地，首次进入时不再付解码卡帧
+    const warmHubWallpaper = () => {
+      const im = new Image();
+      im.decoding = 'async';
+      im.src = new URL('../assets/scenes/hub-wallpaper.jpg', import.meta.url).href;
+    };
+    if ('requestIdleCallback' in window) requestIdleCallback(warmHubWallpaper, { timeout: 4000 });
+    else setTimeout(warmHubWallpaper, 2000);
+    // 全量美术预热（2026-09-08 老板：启动时强制进行，首页显示原因与进度）：
+    // 卡面/敌人立绘/职业立绘 + 图标 + 场景大图（约 7MB 本地文件）分小批拉进内存并
+    // 预解码，进度条走完后牌库/战斗/开箱的 <img> 零首帧请求与解码延迟。
+    // 解码离主线程，批次间隔让出主线程，标题页交互不掉帧。
+    const warmupTip = document.getElementById('warmupTip');
+    const warmupBar = document.getElementById('warmupBar');
+    const warmupNum = document.getElementById('warmupNum');
+    const urls = [
+      ...SDT.Art.collectCardAssets(SDT.Cards.all()),
+      ...Object.values(PRELOAD_SCENES),
+      ...SDT.Icons.urls(),
+    ];
+    if (warmupTip && urls.length) {
+      warmupTip.hidden = false;
+      SDT.Art.warmBatched(urls, (done, total) => {
+        if (warmupNum) warmupNum.textContent = `${done}/${total}`;
+        if (warmupBar) warmupBar.style.width = `${Math.round(done / total * 100)}%`;
+        if (done >= total) setTimeout(() => {
+          warmupTip.classList.add('done');
+          setTimeout(() => { warmupTip.hidden = true; }, 600);
+        }, 350);
+      }).catch(() => {});
+    } else {
+      try { SDT.Art.warmBatched(urls).catch(() => {}); } catch (_) {}
+    }
     requestAnimationFrame(loop);
   });
 

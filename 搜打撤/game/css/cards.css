@@ -22,33 +22,41 @@
   .tp7 { --fc1: #747474; --fc2: #2c2c2c; --art1: #535353; }
   /* 稀有度宝石色：初始/古朴/稀有/史诗/传说/衍生/职业/棱彩
      （2026-09-04/09-05 定版增补：职业 = 黑棱形（职业专属卡稀有度，不进随机池）；
-       棱彩 = 英雄卡及其衍生牌专属，卡面叠加 rv-prism 流转棱彩边框） */
+       棱彩 = 英雄卡及其衍生牌专属，卡面叠加 rv-prism 流转棱彩边框）
+     2026-09-08 老板定版改色：衍生 原金色与传说太相似 → 青绿松石；
+     棱彩 原淡蓝与稀有太相似 → 桃红（宝石色，棱彩光带不变）。 */
   .rv0 { --gem: #9aa0a6; } .rv1 { --gem: #6f9e6a; } .rv2 { --gem: #5a8ec2; }
-  .rv3 { --gem: #9b7fb8; } .rv4 { --gem: #d0883e; } .rv5 { --gem: #c8a24a; }
-  .rv5 { box-shadow: 0 .3em 1em rgba(0,0,0,.55), inset 0 0 0 2px rgba(149,149,149,.6); }
-  .rv6 { --gem: #0b0b0d; } .rv7 { --gem: #cdd8ff; }
+  .rv3 { --gem: #9b7fb8; } .rv4 { --gem: #d0883e; } .rv5 { --gem: #3fae94; }
+  .rv5 { box-shadow: 0 .3em 1em rgba(0,0,0,.55), inset 0 0 0 2px rgba(96,190,168,.55); }
+  .rv6 { --gem: #0b0b0d; } .rv7 { --gem: #e07bb8; }
 
   /* 英雄卡：渐变棱彩（2026-09-04 定版）——棱彩光带沿卡边自动小幅流转；
-     传说英雄为金光变体 rv-gold（金卡闪金光）。::before 留给主题皮肤，这里用 ::after。 */
-  .hs-card.rv-prism { --gem: #cdd8ff; }
-  .hs-card.rv-prism::after { content: ''; position: absolute; inset: 0; z-index: 4; border-radius: inherit;
+     传说英雄为金光变体 rv-gold（金卡闪金光）。
+     2026-09-07 性能重做（老板实测牌库 10fps）：旧实现 ::after 动 background-position，
+     是逐帧重绘属性——每张棱彩卡每帧重画整层渐变 mask，一页 20 张时直接拖垮帧率。
+     改为遮罩环内放一张 4 倍宽渐变层（.rv-beam::before）做 transform 位移，
+     走合成器线程零重绘；观感（渐变配色 / 7s 流速 / 金色 3.2s）与旧版一致。 */
+  .hs-card.rv-prism { --gem: #e07bb8; }
+  .hs-card .rv-beam { position: absolute; inset: 0; z-index: 4; border-radius: inherit;
     padding: 2px; pointer-events: none;
-    background: linear-gradient(115deg, #ff6b6b, #ffd93d, #6bffb8, #6bb8ff, #b36bff, #ff6b6b);
-    background-size: 400% 400%;
-    animation: heroPrism 7s ease-in-out infinite;
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor; mask-composite: exclude; }
+  .hs-card .rv-beam::before { content: ''; position: absolute; top: 0; left: 0;
+    width: 400%; height: 400%;
+    background: linear-gradient(115deg, #ff6b6b, #ffd93d, #6bffb8, #6bb8ff, #b36bff, #ff6b6b);
+    animation: heroPrism 7s ease-in-out infinite; }
+  /* background-position 0%→100%（bg-size 400%）等效于图片左移 3 倍卡宽 = 自身宽度 75% */
   @keyframes heroPrism {
-    0%, 100% { background-position: 0% 50%; filter: hue-rotate(0deg); }
-    50% { background-position: 100% 50%; filter: hue-rotate(24deg); }
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(-75%); }
   }
-  .hs-card.rv-prism.rv-gold::after {
+  .hs-card.rv-gold .rv-beam::before {
     background: linear-gradient(115deg, #8a6a1f, #ffd700, #fff3b0, #e6a817, #8a6a1f);
     animation: heroGold 3.2s ease-in-out infinite; }
   @keyframes heroGold {
-    0%, 100% { background-position: 0% 50%; filter: hue-rotate(0deg) brightness(1); }
-    50% { background-position: 100% 50%; filter: hue-rotate(6deg) brightness(1.3); }
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(-75%); }
   }
 
   .hsc-cost { position: absolute; z-index: 3; top: -.55em; left: -.55em; width: 2.3em; height: 2.6em;
@@ -57,29 +65,30 @@
     clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
     text-shadow: 0 1px 2px rgba(9,9,9,.85);
     filter: drop-shadow(0 2px 3px rgba(0,0,0,.5)) drop-shadow(0 0 .35em rgba(144,144,144,.4)); }
-  .hsc-art { height: 5.1em; margin: .18em .12em 0; border-radius: .55em; flex-shrink: 0;
+  /* 卡面插画窗（2026-09-08 压缩高度：给效果描述腾出 ≥3 行空间） */
+  .hsc-art { height: 4.15em; margin: .18em .12em 0; border-radius: .55em; flex-shrink: 0;
     display: flex; align-items: center; justify-content: center;
     background:
       radial-gradient(ellipse at 50% 30%, rgba(237,237,237,.14), transparent 65%),
       radial-gradient(ellipse at 50% 40%, var(--art1, #3e3e3e), #0c0c0c 88%);
     border: 1px solid rgba(237,237,237,.16);
     box-shadow: inset 0 0 1.2em rgba(0,0,0,.65), inset 0 -1.2em 1.4em rgba(0,0,0,.35); }
-  .hsc-art .ic { width: 3em; height: 3em; vertical-align: 0;
+  .hsc-art .ic { width: 2.6em; height: 2.6em; vertical-align: 0;
     filter: drop-shadow(0 .12em .1em rgba(0,0,0,.55)); }
   /* 卡牌家族位图（art.js cardIcon） */
   .hsc-art .art-card-image { width: 100%; height: 100%; object-fit: cover;
     filter: drop-shadow(0 .14em .12em rgba(0,0,0,.55)) drop-shadow(0 0 .5em rgba(237,237,237,.10)); }
-  .hsc-name { margin: .38em .12em 0; padding: .24em .35em; border-radius: .3em; flex-shrink: 0;
+  .hsc-name { margin: .28em .12em 0; padding: .2em .35em; border-radius: .3em; flex-shrink: 0;
     text-align: center; font-size: .92em; font-weight: 700; color: #dadada;
     background: linear-gradient(180deg, #222222, #111111);
     border-top: 1px solid rgba(161,161,161,.45); border-bottom: 1px solid rgba(161,161,161,.45);
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .hsc-type { margin: .28em 0 0; text-align: center; font-size: .66em; flex-shrink: 0;
-    color: #b9b9b9; letter-spacing: .1em; }
+  .hsc-type { margin: .2em 0 0; text-align: center; font-size: .66em; flex-shrink: 0;
+    color: #b9b9b9; letter-spacing: .1em; white-space: nowrap; overflow: hidden; }
   /* 抽卡 / 注能词条角标（类型行下方小药丸，仅词条 >0 时渲染） */
-  .hsc-kw { display: flex; gap: .25em; justify-content: center; margin: .16em 0 0; flex-shrink: 0; }
-  .hsc-kw span { display: inline-flex; align-items: center; gap: .2em; padding: .06em .42em;
-    border-radius: .9em; font-size: .58em; line-height: 1.5; letter-spacing: .05em; white-space: nowrap;
+  .hsc-kw { display: flex; gap: .25em; justify-content: center; margin: .1em 0 0; flex-shrink: 0; }
+  .hsc-kw span { display: inline-flex; align-items: center; gap: .2em; padding: .05em .42em;
+    border-radius: .9em; font-size: .58em; line-height: 1.45; letter-spacing: .05em; white-space: nowrap;
     color: #ebebeb; background: rgba(12,12,12,.6); border: 1px solid rgba(161,161,161,.4); cursor: help; }
   .hsc-kw .ic { width: .85em; height: .85em; vertical-align: 0; }
   .hsc-kw .kw-draw { color: #d1d1d1; border-color: rgba(154,154,154,.55); }
@@ -87,16 +96,17 @@
   /* 注能变体（注能前后效果不同）：水蓝高亮提醒 */
   .hsc-kw .kw-infuse.alt { color: #a8dcff; border-color: rgba(96,168,220,.85);
     box-shadow: 0 0 .5em rgba(96,168,220,.35); }
-  .hsc-gem { display: block; margin: .22em auto 0; width: .8em; height: .8em; flex-shrink: 0;
+  .hsc-gem { display: block; margin: .14em auto 0; width: .8em; height: .8em; flex-shrink: 0;
     transform: rotate(45deg); background: var(--gem); border: 1px solid rgba(255,255,255,.55);
     box-shadow: 0 0 .5em var(--gem); }
-  /* 效果描述：高对比终端信息条 */
-  .hsc-desc { flex: 1; min-height: 0; margin: .26em .12em .1em; padding: .35em .4em; border-radius: .45em;
-    display: flex; align-items: center; justify-content: center; text-align: center;
+  /* 效果描述：高对比终端信息条（2026-09-08：未放大时保证完整显示 ≥3 行描述——
+     顶部对齐 + 收紧字号行距，长描述不被裁成两行） */
+  .hsc-desc { flex: 1; min-height: 0; margin: .22em .12em .08em; padding: .3em .38em; border-radius: .45em;
+    display: flex; align-items: flex-start; justify-content: center; text-align: center;
     background: linear-gradient(180deg, #dcdcdc, #c9c9c9);
     color: #2e2e2e; border: 1px solid #9c9c9c;
     box-shadow: inset 0 1px 3px rgba(63,63,63,.25);
-    font-size: .72em; line-height: 1.4; overflow: hidden; }
+    font-size: .78em; line-height: 1.3; overflow: hidden; }
   .hsc-desc:empty::before { content: '效果描述（可选）'; color: #848484; }
   /* 伤害词条：左下角红色宝石 */
   .hsc-dmg { position: absolute; z-index: 3; bottom: -.5em; left: -.55em; width: 2.3em; height: 2.6em;
@@ -207,6 +217,14 @@
     transition: transform .16s ease, filter .16s ease; }
   .lib-cardwrap:hover { transform: scale(1.17) rotate(-1.2deg); z-index: 6;
     filter: drop-shadow(0 0 15px var(--gem, #a1a1a1)); }
+  /* 牌库页去动画（2026-09-08 老板拍板：牌库内动画全去，滑动/悬停流畅优先）。
+     实测 hover 缩放 + drop-shadow 滤镜重绘是 5fps 元凶；流光/入场过渡一并停用。
+     cardlib-open 由 renderCardLibrary/closeLibPage 挂卸。 */
+  body.cardlib-open #overlay *,
+  body.cardlib-open #overlay *::before,
+  body.cardlib-open #overlay *::after { animation: none !important; transition: none !important; }
+  body.cardlib-open #overlay .lib-cardwrap:hover { transform: none; filter: none; }
+  body.cardlib-open #overlay .rv-beam { display: none; }
   .lib-actions { display: flex; gap: 6px; }
   .clib-empty { grid-column: 1 / -1; text-align: center; color: #8b8b8b; padding: 70px 0 60px; }
   .clib-empty-icon .ic { width: 52px; height: 52px; opacity: .4; margin-bottom: 12px; }

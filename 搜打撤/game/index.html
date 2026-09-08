@@ -148,8 +148,16 @@
         <div class="title-heading"><p class="title-kicker">ASCENSION COUNCIL / WINTER CONJECTURE</p>
         <h1 class="cn-title">升格会的<br><em class="art-cn">冬日猜想</em></h1></div>
         <div class="ak-hud">
-          <!-- 顶栏左：静音 -->
+          <!-- 顶栏左：退出（最左）+ 静音 -->
           <div class="ak-tl">
+            <button class="ak-sq ak-exit" id="btnTitleExit" title="退出游戏">
+              <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+                <path d="M9 4h9a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 18 20H9"
+                      fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+                <path d="M4 12h10M4 12l4-4M4 12l4 4"
+                      fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
             <button class="ak-sq ak-home" id="btnTitleMute" title="音效 / 背景乐开关">
               <svg class="ic-sound-on" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
                 <path d="M4.5 9.5v5h3l4.5 4V5.5l-4.5 4h-3z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
@@ -217,6 +225,12 @@
           </button>
           <!-- 雪花飘落特效层 -->
           <div class="title-snow" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <!-- 美术预热进度（2026-09-08 老板：首次打开强制预热，显示原因与进度） -->
+          <div id="warmupTip" hidden aria-live="polite">
+            <div class="warmup-head"><span class="warmup-spark" aria-hidden="true">❄</span>美术资源预热中 <b id="warmupNum">0/0</b></div>
+            <div class="warmup-reason">一次性载入卡面 / 场景 —— 牌库 · 战斗 · 开箱全程零卡顿</div>
+            <div class="warmup-track"><div id="warmupBar"></div></div>
+          </div>
           <span class="ak-plus p1" aria-hidden="true">+</span>
           <span class="ak-plus p2" aria-hidden="true">+</span>
           <span class="ak-line1" aria-hidden="true"></span>
@@ -238,6 +252,9 @@
           <button class="ov-btn" id="sugCancelBtn">返回 <i class="en">BACK</i></button>
         </div>
       </div>
+    </div>
+    <div class="log-panel" id="logPanel" aria-label="行动记录">
+      <div id="log"></div>
     </div>
     <div id="exitScr" hidden>
       <div class="title-inner">

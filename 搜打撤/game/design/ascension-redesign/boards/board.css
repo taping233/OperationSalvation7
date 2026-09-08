@@ -18,12 +18,12 @@
   --ice:        #6FB8C4;   /* 冰青：导航/确认 */
   --amber:      #E8B04B;   /* 琥珀：警示/资源 */
 
-  /* 职业五色（人设色锁定） */
-  --cls-xiake:  #ED9B53;   /* 霜翎 · 侠客 */
+  /* 职业五色（仅为职业 UI 识别色；人物人设待五张立绘定稿） */
+  --cls-xiake:  #ED9B53;   /* 无 · 侠客 */
   --cls-zhanshi:#D0805A;   /* 玄砾 · 战士 */
   --cls-mushi:  #81BCB0;   /* 灯葵 · 牧师 */
-  --cls-fashi:  #E9BD69;   /* 栗团 · 法师 */
-  --cls-jianglin:#AD9DDD;  /* 白契 · 降临者 */
+  --cls-fashi:  #E9BD69;   /* 白塔 · 法师 */
+  --cls-jianglin:#AD9DDD;  /* 常无欲 · 降临者 */
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }

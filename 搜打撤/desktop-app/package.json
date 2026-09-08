@@ -25,6 +25,7 @@
     "files": [
       "main.js",
       "preload.js",
+      "suggestions-store.cjs",
       "package.json"
     ],
     "extraResources": [

@@ -200,6 +200,7 @@
   // 计时状态递减：battle.js 在「每回合结束」（共享回合钟，双方各行动一次）调用一次，
   // 返回本次到点解除的键（冰冻/沉默/破甲/禁疗/潜行/免疫伤害）。
   // 持续 n 回合 = 从触发当回合起覆盖 n 个完整回合（规则见文件头计时规则）
+  // 数值型祝福的临时加成（__timedBuffs，见 addBlessing 第 4 参）同期递减，到点从数值中扣除
   function tickDurations(target) {
     if (!target || !target.status) return [];
     const expired = [];
@@ -211,6 +212,17 @@
         if (target.status[k] === 0) expired.push(k);
       }
     });
+    if (target.__timedBuffs && target.__timedBuffs.length) {
+      const keep = [];
+      target.__timedBuffs.forEach(rec => {
+        rec.turns -= 1;
+        if (rec.turns <= 0) {
+          target.status[rec.key] = Math.max(0, (target.status[rec.key] || 0) - rec.amount);
+          expired.push(rec.key);
+        } else keep.push(rec);
+      });
+      target.__timedBuffs = keep.length ? keep : null;
+    }
     return expired;
   }
 
@@ -222,14 +234,22 @@
 
   // —— 祝福（v0.20 设计者定版）——
   // 挂祝福：value 型加数值（可叠加，本场战斗）；timed 型取「剩余较大值」；
-  // flag 型置 1（本局对战常驻）
-  function addBlessing(target, key, n) {
+  // flag 型置 1（本局对战常驻）。第 4 参 turns>0 时 value 型临时加成在 N 回合后自动扣除
+  //（「获得 2 点攻击力，持续 1 回合」类词条；见 tickDurations）。
+  function addBlessing(target, key, n, turns) {
     if (!BUFF_META[key]) return 0;
     n = n == null ? 1 : n;
     ensureStatus(target);
     const m = BUFF_META[key];
-    if (m.value) target.status[key] = Math.max(0, target.status[key] + n);
-    else if (m.timed) target.status[key] = Math.max(target.status[key], n);
+    if (m.value) {
+      target.status[key] = Math.max(0, target.status[key] + n);
+      if (turns > 0) {
+        if (!target.__timedBuffs) target.__timedBuffs = [];
+        const rec = target.__timedBuffs.find(r => r.key === key);
+        if (rec) { rec.amount += n; rec.turns = Math.max(rec.turns, turns); }
+        else target.__timedBuffs.push({ key, amount: n, turns });
+      }
+    } else if (m.timed) target.status[key] = Math.max(target.status[key], n);
     else target.status[key] = 1;
     return target.status[key];
   }

@@ -160,14 +160,27 @@ import { Random } from './random.js';
         <div class="cz-card">${SDT.Cards.cardHTML(card, 'lg')}</div>
         ${opts.footer ? `<div class="cz-foot">${opts.footer}</div>` : ''}
         <span class="cz-hint">点击任意处收回</span>`;
+      let closed = false;
       const close = () => {
+        if (closed) return;
+        closed = true;
         el.classList.add('cz-out');
         setTimeout(() => el.remove(), 260);
       };
+      // 特写挂在 body（overlay 之外），footer 按钮的 data-act 走不到 ovBody 的全局委托；
+      // 且不用 {once:true}：点按钮会白白消费掉监听，之后（含 bagZoomRemove 的模拟 backdrop
+      // 点击）再也关不掉 → 整页卡死（2026-09-07 老板实测）。故监听常驻：非按钮区域总能收回，
+      // footer 按钮（如「移出背包」）在本层直接分发。
       el.addEventListener('click', (e) => {
-        if (e.target.closest('.cz-foot button')) return;   // footer 按钮走自己的 handler
+        if (closed) return;
+        const btn = e.target.closest('.cz-foot [data-act]');
+        if (btn) {
+          const fn = this._acts[btn.dataset.act];
+          if (fn) fn(btn.dataset);
+          return;
+        }
         close();
-      }, { once: true });
+      });
       document.body.appendChild(el);
       SDT.Sound.sfx('hover');
     },
@@ -177,6 +190,13 @@ import { Random } from './random.js';
       if (this._lastIdle === idle) return;
       this._lastIdle = idle;
       this.el.rollBtn.disabled = !idle;
+      // 2026-09-07 老板实测「掷骰按钮文案消失」：存在 state→idle 只经过本函数
+      // （refreshTime 只改 disabled）而不触发 refresh() 文案分支的路径，按钮会卡在
+      // 「…」。idle 翻转的瞬间同步纠正文案，并同步 _lastRollState 防止 refresh 重复重建。
+      if (idle) {
+        this._lastRollState = 'idle';
+        this.el.rollBtn.innerHTML = SDT.Icons.rich('[[icon:dice]] 掷骰子移动');
+      }
     },
 
     refresh(game) {
@@ -331,6 +351,9 @@ import { Random } from './random.js';
       const victoryCard = this.el.ovBody.parentElement;
       if (victoryCard && /搜刮！/.test(title)) { victoryCard.classList.remove('fx-victory'); void victoryCard.offsetWidth; victoryCard.classList.add('fx-victory'); }
       this.el.ovBody.innerHTML = SDT.Icons.rich(bodyHtml);
+      // 主循环每帧读此标志判断“战斗页是否盖在画布上”；battle-stage 只会经这里进
+      // overlay（ovBody 无其他写入点），按内容缓存一次，免去每帧全子树 querySelector
+      this._hasBattleStage = bodyHtml.includes('battle-stage');
       const card = this.el.ovBody.parentElement;
       card.classList.toggle('wide', mode === true || mode === 'wide' || mode === 'chest');
       card.classList.toggle('battle', mode === 'battle');
@@ -356,6 +379,17 @@ import { Random } from './random.js';
       const prevMode = this._lastMode;
       this._lastMode = mode;
       this.el.overlay.hidden = false;
+      // 全屏覆盖型页面（卡牌库/整备整页/战斗房间/宝箱）：被盖住的主页动画一律暂停
+      // （2026-09-07 老板：动画不出现在画面中就暂停，回到页面再恢复）。
+      // 实测卡牌库打开时标题雪花+余烬继续跑，帧率被拖到 10fps。
+      // 半透明弹窗（背包/事件/场景）底下画面可见，不置位。
+      document.body.classList.toggle('page-covered',
+        this.el.overlay.classList.contains('opaque') ||
+        this.el.overlay.classList.contains('room-view') ||
+        mode === 'chest');
+      // 替代 winter.css 的 body:has(#overlay.opaque) 选择器：:has 会在 overlay 子树
+      // 每次重建时放大整页样式失效范围，body 类只触发一次单类切换
+      document.body.classList.toggle('page-opaque', this.el.overlay.classList.contains('opaque'));
       // page 全屏页自带 CSS 入场动画（.card.page 的 pgIn），WAAPI 再叠一层会与
       // CSS 动画互相覆盖造成过渡期跳帧——这里只跑 CSS 那套
       if ((!wasOpen || prevMode !== mode) && SDT.Motion && mode !== 'page') SDT.Motion.overlayIn(card);
@@ -383,6 +417,8 @@ import { Random } from './random.js';
       const instant = this.el.overlay.classList.contains('room-view');
       const finish = () => {
         this._hideTimer = null;
+        document.body.classList.remove('page-covered');
+        document.body.classList.remove('page-opaque');
         card.classList.remove('wide');
         card.classList.remove('battle');
         card.classList.remove('bag-modal');

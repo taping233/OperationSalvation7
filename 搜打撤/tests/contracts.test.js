@@ -37,6 +37,7 @@ describe('规则与接口契约', () => {
       turnStart: [{ text: '抽 1 张牌', each: false }],
       battle: ['本局对战内：攻击 +2'],
       onInfused: ['获得 1 点能量'],
+      onDraw: [],
     });
   });
 
@@ -141,6 +142,7 @@ describe('Electron 启动契约', () => {
     const pkg = JSON.parse(readFileSync(resolve(process.cwd(), 'desktop-app/package.json'), 'utf8'));
     expect(main).toContain("path.join(__dirname, 'game')");
     expect(main).not.toMatch(/prototypes|map-system/);
+    expect(pkg.build.files).toContain('suggestions-store.cjs');
     expect(pkg.scripts.prestart.indexOf('build:game')).toBeLessThan(pkg.scripts.prestart.indexOf('check:version'));
   });
 

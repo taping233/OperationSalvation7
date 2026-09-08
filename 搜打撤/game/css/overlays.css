@@ -287,10 +287,10 @@
   .slot-card-art { position: relative; flex: 1 1 auto; min-height: clamp(90px, 17vh, 156px);
     width: 100%; display: flex; align-items: center; justify-content: center; }
   .slot-card-art .slot-ico { width: clamp(76px, 13vh, 122px); height: clamp(76px, 13vh, 122px);
-    filter: drop-shadow(0 0 8px rgba(224,236,255,.75)) drop-shadow(0 0 28px rgba(160,185,255,.4));
+    filter: drop-shadow(0 0 11px rgba(224,236,255,.9)) drop-shadow(0 0 34px rgba(160,185,255,.5));
     animation: icoBreathe 4.5s ease-in-out infinite alternate; }
-  @keyframes icoBreathe { from { filter: drop-shadow(0 0 5px rgba(224,236,255,.5)) drop-shadow(0 0 18px rgba(160,185,255,.28)); }
-    to { filter: drop-shadow(0 0 11px rgba(224,236,255,.9)) drop-shadow(0 0 34px rgba(160,185,255,.5)); } }
+  /* 呼吸只动 opacity（合成器线程），filter 保持静态——drop-shadow 尺寸逐帧变化会每帧重 blur 整个图标 */
+  @keyframes icoBreathe { from { opacity: .66; } to { opacity: 1; } }
   .slot-page .slot-card:not(.filled) .slot-card-art .slot-ico { opacity: .26; filter: none; animation: none; }
   /* 图标下的四芒星光（有档才有） */
   .slot-card-spark { position: absolute; bottom: 3%; left: 50%; width: 10px; height: 10px;

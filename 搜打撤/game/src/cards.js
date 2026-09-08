@@ -1,6 +1,7 @@
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const SDT = window.SDT;
 import { Random } from './random.js';
+import { characterName } from './characters.js';
 
 /* ============================================================
  * 搜打撤 v0.8 —— 卡牌系统数据（localStorage 持久化）
@@ -43,6 +44,7 @@ import { Random } from './random.js';
  *           不进商店随机槽位与「发现/随机获取」效果卡池，判定见 isRandomObtainable()）
  * ============================================================ */
   const KEY = 'sdt-cards-v1';
+  let _cardsCache = null;   // all() 的内存缓存，见 all() 处注释
   // 桌游道具卡播种记录：每批一个标记，只播一次，之后删改都尊重玩家
   const TT_KEY = 'sdt-cards-tt-seeded';
   const TT2_KEY = 'sdt-cards-tt2-seeded';
@@ -59,6 +61,9 @@ import { Random } from './random.js';
   const TT7_KEY_V2 = 'sdt-cards-tt7-v2-seeded';  // v2：职业稀有度定版——44 张职业卡 rarity 统一改「职业」（只改稀有度，不动玩家改过的名字与描述）
   const TT8_KEY = 'sdt-cards-tt8-seeded';        // 第八批：英雄卡及衍生牌（每职业 1 英雄，衍生牌围绕英雄效果）
   const TT9_KEY = 'sdt-cards-tt9-seeded';        // 第九批：生物图鉴（全部敌人信息录入，类型「生物」）
+  const TT10_KEY = 'sdt-cards-tt10-v2-seeded';   // 第十批：设计者实机定版同步（2026-09-07 双向合并）；v2：清掉合并残留的错误词条（英雄卡 armor:5 等）并重播覆盖一次
+  // 第十批退役：同设计重复 id（设计者实机已把同名卡定版在旧 id 上，见 TABLETOP10 尾部注释）
+  const RETIRE_TT10 = ['tt3-freeze', 'tt3-flame-potion', 'tt3-toxic-potion', 'tt3-bleed-potion'];
   const CC_KEY = 'sdt-cards-cc2-seeded';         // 职业整合迁移（2026-09-05 定版）：11 职业 → 5 职业，逐卡改归属；v2：邪渊主宰·妲莉薇特改归降临者并撤下「九尾焚天·妲」占位卡
 
   // 职业表（2026-09-05 设计者定版职业整合：原 11 职业 → 5 职业，每职业 10-12 张职业卡，
@@ -147,10 +152,16 @@ import { Random } from './random.js';
     },
 
     // 抽卡词条推导（ensureEffectFields 回填用，只读不写）：
-    // 已标注 draw → 原样；描述「抽 N 张牌」→ N（与 battle.js 的描述结算同一线）
+    // 已标注 draw → 原样；描述「抽 N 张牌」→ N（与 battle.js 的描述结算同一线）。
+    // 2026-09-08 词条统一（老板指示）：「抽 N 张」（省略「牌」字）与「抽 N-M 张」区间
+    // （取下限）同样视为抽卡词条；「从牌库中抽取」（检索牌库）与「额外抽」（形态
+    // 每回合效果）不是一次性抽牌，不计入，避免卡面出现误导角标。
     deriveDraw(card) {
       if (+(card.draw || 0) > 0) return +card.draw;
-      const m = String(card.desc || '').match(/抽\s*(\d+)\s*张牌/);
+      const desc = String(card.desc || '')
+        .replace(/从\s*牌库[^。；;]*?抽[取]?\s*\d+\s*张[^。，；;]*/g, ' ')
+        .replace(/额外\s*抽\s*\d+\s*张[^。，；;]*/g, ' ');
+      const m = desc.match(/抽\s*(\d+)\s*[-—~～至]\s*(\d+)\s*张/) || desc.match(/抽(?:取)?\s*(\d+)\s*张/);
       return m ? +m[1] : 0;
     },
 
@@ -729,12 +740,210 @@ import { Random } from './random.js';
         desc: '攻击 8 / 生命 48。BOSS·词缀【元素庇幕】：偶数回合减免所有伤害（破甲可克制）。' },
     ],
 
+    // 桌游手绘卡 · 第十批（2026-09-07 设计者实机定版同步）：与设计者实机卡库导出
+    // （sdt-cards.json，2026-09 微信接收）双向合并的定版快照，由合并脚本生成：
+    //   · 共享 id 卡取设计者精修稿（名字/费用/稀有度/类型/描述/词条/币值），
+    //     结构字段（cls/hero/tokenOf）与仓库实现标记（battle/art）保仓库；
+    //   · unrandom 随机锁取两侧并集；图鉴 foe-*、寻宝图、彩色令牌、初始火球、
+    //     经济卡包、tt6-goldhammer、tt3-* 三张撞名职业卡按仓库定版保留（不在本批）；
+    //   · 补种设计者实机有而仓库缺失的卡（流光照影/不朽斩/步兵/两扇门/
+    //     灵能召唤/刀剑形态/法力光波）；「初始攻击」名字保持不变（老板 2026-09-07 指定）；
+    //   · 同设计改名卡（火焰/冰冻/剧毒/流血药水）定版在设计者旧 id 上，
+    //     仓库 09-06 转录用的 tt3-freeze 等四个重复 id 由 ensureTabletopSync() 移除。
+    // 覆盖/补种走 ensureTabletopSync()（TT10_KEY 标记，一次性，按 id 整卡覆盖）。
+    TABLETOP10: [
+      { id: 'builtin-sha', name: '初始攻击', cost: 1, rarity: '初始', type: '武术', desc: '攻（+0）：造成等同于攻击力的伤害。', dmg: 0, dmgType: 'attack', value: 1 },
+      { id: 'tt-medneedle', name: '医疗针', cost: 0, rarity: '稀有', type: '道具', desc: '回合开始时：回复 6点生命。持续 3 回合。', dmg: 0, heal: 16, value: 4 },
+      { id: 'tt-copper', name: '铜币', cost: 0, rarity: '古朴', type: '资源', desc: '可出售。', dmg: 0, value: 3, sellable: true },
+      { id: 'tt-keys-bunch', name: '一串钥匙', cost: 0, rarity: '稀有', type: '资源', desc: '钥匙 ×2。', dmg: 0, value: 4 },
+      { id: 'tt-rations', name: '口粮', cost: 0, rarity: '稀有', type: '资源', desc: '升级宠物。', dmg: 0, value: 3 },
+      { id: 'tt-gold', name: '金币', cost: 0, rarity: '史诗', type: '资源', desc: '贵重货币，可出售。', dmg: 0, value: 9, sellable: true },
+      { id: 'tt-silver', name: '银币', cost: 0, rarity: '稀有', type: '资源', desc: '可出售。', dmg: 0, value: 6, sellable: true },
+      { id: 'tt-key', name: '钥匙', cost: 0, rarity: '古朴', type: '资源', desc: '解锁大门。', dmg: 0, value: 2 },
+      { id: 'tt-crystal', name: '能源水晶', cost: 0, rarity: '史诗', type: '道具', desc: '在背包中才能使用，复原最多 3 张卡牌。', dmg: 0, value: 3 },
+      { id: 'tt-key-one', name: '一把钥匙', cost: 0, rarity: '史诗', type: '资源', desc: '钥匙 ×3。', dmg: 0, value: 6 },
+      { id: 'tt-token-gold', name: '金色令牌', cost: 0, rarity: '史诗', type: '道具', desc: '获取 1 张传说卡。', dmg: 0, value: 4 },
+      { id: 'tt-jinchuangyao', name: '金创药', cost: 0, rarity: '史诗', type: '道具', desc: '回复 20 点生命。', dmg: 0, heal: 20, value: 4 },
+      { id: 'tt-wood', name: '木材', cost: 0, rarity: '古朴', type: '资源', desc: '木材 ×1。', dmg: 0, value: 2 },
+      { id: 'tt-wood-lots', name: '大量木材', cost: 0, rarity: '稀有', type: '资源', desc: '木材 ×2。', dmg: 0, value: 4 },
+      { id: 'tt2-apollo', name: '阿猫的礼物', cost: 0, rarity: '史诗', type: '装备', desc: '发现或随机获取该牌时，回复1点能量并获取另1张随机卡牌。', dmg: 0, value: 4 },
+      { id: 'tt2-pearlbox', name: '珍珠盒', cost: 0, rarity: '稀有', type: '装备', desc: '内置3*3空间，可以容纳所有类型的资源卡牌。', dmg: 0, value: 3 },
+      { id: 'tt2-wreck', name: '沉船宝盒', cost: 0, rarity: '史诗', type: '装备', desc: '消耗该牌时，获取 2张随机卡牌。', dmg: 0, value: 4 },
+      { id: 'tt2-venomstaff', name: '毒杖', cost: 0, rarity: '史诗', type: '装备', desc: '每当你使用一张法术牌，为1名随机敌人附加中毒', dmg: 0, value: 4 },
+      { id: 'tt2-frostsword', name: '寒冰剑', cost: 0, rarity: '古朴', type: '装备', desc: '对冰冻角色伤害 +2。', dmg: 0, value: 2 },
+      { id: 'tt2-jianghu', name: '江湖救急', cost: 1, rarity: '史诗', type: '武术', desc: '发现 1 张其它职业的卡牌并直接施放。', dmg: 0, value: 4 },
+      { id: 'tt2-swiftarrow', name: '迅疾箭', cost: 1, rarity: '古朴', type: '武术', desc: '攻（-1），抽 1 张牌。', dmg: -1, dmgType: 'attack', draw: 1, value: 2 },
+      { id: 'tt2-block', name: '格挡', cost: 1, rarity: '古朴', type: '武术', desc: '本回合所受伤害降为 1。', dmg: 0, value: 2 },
+      { id: 'tt2-comboarrow', name: '连击箭', cost: 1, rarity: '古朴', type: '武术', desc: '攻（-1）；如果你打出的上一张牌是武术牌，本牌变为0费。', dmg: -1, dmgType: 'attack', value: 2 },
+      { id: 'tt2-piercearrow', name: '破甲箭', cost: 1, rarity: '古朴', type: '武术', desc: '攻（-1），获得 3 点护甲。', dmg: -1, dmgType: 'attack', armor: 3, value: 2 },
+      { id: 'tt2-shoot', name: '射击', cost: 0, rarity: '古朴', type: '武术', desc: '造成 2 点伤害。', dmg: 2, dmgType: 'fixed', value: 2 },
+      { id: 'tt2-turtlearmor', name: '铸甲', cost: 1, rarity: '稀有', type: '武术', desc: '消耗1 张装备牌，+10甲。', dmg: 0, armor: 10, value: 3 },
+      { id: 'tt2-bloodblade', name: '嗜血刃', cost: 2, rarity: '史诗', type: '武术', desc: '攻（+2），回复等量生命。', dmg: 2, dmgType: 'attack', value: 4 },
+      { id: 'tt2-forestarrow', name: '绿化箭', cost: 1, rarity: '古朴', type: '武术', desc: '攻（-1），+3 甲。', dmg: -1, dmgType: 'attack', armor: 3, value: 2 },
+      { id: 'tt3-blood-arrow', name: '血箭', cost: 1, rarity: '古朴', type: '武术', desc: '攻（-1），附加流血。', dmg: -1, dmgType: 'attack', value: 2 },
+      { id: 'tt3-fatal-pierce', name: '致命穿刺', cost: 1, rarity: '古朴', type: '武术', desc: '攻（+1）；若对方处于流血状态，伤害 +2 并附加破甲，持续 1 回合。', dmg: 1, dmgType: 'attack', value: 2 },
+      { id: 'tt3-fly-arrowhawk', name: '飞身劈', cost: 2, rarity: '稀有', type: '武术', desc: '攻（+3），触发的流血伤害翻倍。', dmg: 3, dmgType: 'attack', value: 3 },
+      { id: 'tt3-frost-slash', name: '霜月斩', cost: 2, rarity: '史诗', type: '武术', desc: '攻（+2），附加冰冻与禁疗，持续1回合。', dmg: 2, dmgType: 'attack', value: 4 },
+      { id: 'tt3-noon-duel', name: '正午决战', cost: 1, rarity: '史诗', type: '武术', desc: '下回合开始时，连开四枪！（每枪造成2点固定伤害）。', dmg: 0, value: 3 },
+      { id: 'tt3-armor-rush', name: '破甲急袭', cost: 2, rarity: '稀有', type: '武术', desc: '攻（+4），附加 2 层流血。', dmg: 4, dmgType: 'attack', value: 3 },
+      { id: 'tt3-double-shot', name: '连射', cost: 1, rarity: '稀有', type: '武术', desc: '造成2 点固定伤害，触发 3 次。', dmg: 2, dmgType: 'fixed', value: 2 },
+      { id: 'tt3-bandage', name: '包扎', cost: 1, rarity: '古朴', type: '武术', desc: '+3 血，+3 甲。', dmg: 0, heal: 3, armor: 3 },
+      { id: 'tt3-purify-arrow', name: '净化箭', cost: 1, rarity: '古朴', type: '武术', desc: '攻（-1），净化自身。', dmg: -1, dmgType: 'attack', value: 2 },
+      { id: 'tt3-arrow-rain', name: '箭雨', cost: 1, rarity: '古朴', type: '武术', desc: '攻（-1），目标为敌方全体。', dmg: -1, dmgType: 'attack', value: 2 },
+      { id: 'tt3-wave-slash', name: '破浪斩', cost: 1, rarity: '稀有', type: '武术', desc: '攻（+3），下回合无法抽牌。', dmg: 3, dmgType: 'attack', value: 2 },
+      { id: 'tt3-qi-wave', name: '气功波', cost: 1, rarity: '古朴', type: '武术', desc: '抽 1 张牌，对全体敌人造成等同于其价格的固定伤害。', dmg: 0, draw: 1, value: 2 },
+      { id: 'tt3-hold-fast', name: '坚守', cost: 1, rarity: '古朴', type: '武术', desc: '+5 甲，抽 1 张牌。', dmg: 0, draw: 1, armor: 5, value: 2 },
+      { id: 'tt3-life-arrow', name: '生命箭', cost: 1, rarity: '古朴', type: '武术', desc: '攻（-1），获得 1 张随机卡牌。', dmg: -1, dmgType: 'attack', value: 2 },
+      { id: 'tt3-dig-treasure', name: '挖宝', cost: 1, rarity: '古朴', type: '武术', desc: '从牌库底发现 1 张牌，并获得等同于其价格的护甲。', dmg: 0, value: 2 },
+      { id: 'tt3-reshot', name: '重斩', cost: 1, rarity: '古朴', type: '武术', desc: '攻（+2）。', dmg: 2, dmgType: 'attack', value: 2 },
+      { id: 'tt3-venom-arrow', name: '毒箭', cost: 1, rarity: '古朴', type: '武术', desc: '攻（-1），附加 1层中毒。', dmg: -1, dmgType: 'attack', value: 2 },
+      { id: 'tt3-toxin', name: '毒药', cost: 0, rarity: '古朴', type: '法术', desc: '附加 1 层中毒。抽 1 张牌。', dmg: 0, draw: 1, value: 2 },
+      { id: 'tt3-frostfall', name: '剑荡妖邪', cost: 2, rarity: '传说', type: '武术', desc: '攻+5，选择手牌中 1 张武术卡直接释放。', dmg: 5, dmgType: 'attack', value: 5 },
+      { id: 'tt3wu-shike', name: '割蚀', cost: 1, rarity: '古朴', type: '武术', desc: '降低 1 名敌人 2 攻，持续3回合；附加流血。', dmg: 0, value: 2 },
+      { id: 'tt3-mystery-potion', name: '神秘药水', cost: 0, rarity: '稀有', type: '道具', desc: '回合开始时：变成1张随机招式卡牌，使其费用为0。', dmg: 0, value: 3 },
+      { id: 'tt3-blue-potion', name: '恢复药水', cost: 0, rarity: '稀有', type: '道具', desc: '回复 5 点生命，回复1点能量。', dmg: 0, heal: 5, value: 2 },
+      { id: 'tt3-treasure-hunt', name: '寻宝', cost: 1, rarity: '古朴', type: '法术', desc: '造成4点法术伤害，发现 1 张牌。', dmg: 4, dmgType: 'spell', value: 2 },
+      { id: 'tt3-nature-form', name: '自然形态', cost: 2, rarity: '稀有', type: '法术', desc: '本局战斗中，能量上限 +1。', dmg: 0, value: 3 },
+      { id: 'tt3-python-potion', name: '火焰药水', cost: 0, rarity: '稀有', type: '道具', desc: '对所有敌人造成2点法伤', dmg: 0, value: 3 },
+      { id: 'tt3-chain-lightning', name: '闪电链', cost: 1, rarity: '古朴', type: '法术', desc: '3′，触发 2 次。', dmg: 3, dmgType: 'spell', value: 2 },
+      { id: 'tt3-houyi-potion', name: '狂暴药水', cost: 0, rarity: '稀有', type: '道具', desc: '获得 2 点攻击力。持续 1 回合。', dmg: 0, value: 3 },
+      { id: 'tt3-holy-water', name: '治愈', cost: 1, rarity: '古朴', type: '法术', desc: '回复 4 点生命，净化自身', dmg: 0, heal: 4, value: 2 },
+      { id: 'tt3-skewer', name: '穿刺', cost: 1, rarity: '古朴', type: '武术', desc: '攻（+2），附加破甲，持续 1 回合。', dmg: 2, dmgType: 'attack', value: 3 },
+      { id: 'tt3-holy-shield', cls: '牧师', name: '圣盾', cost: 1, rarity: '职业', type: '法术', desc: '获得 6 点护甲；若你此时护甲为0.本牌变为0费。', dmg: 0, armor: 6, value: 3, unrandom: true },
+      { id: 'tt3-iceheart-potion', name: '冰冻药水', cost: 0, rarity: '稀有', type: '道具', desc: '附加冰冻，持续 1 回合。', dmg: 0, value: 3 },
+      { id: 'tt3-demon-potion', name: '法力药水', cost: 0, rarity: '稀有', type: '道具', desc: '法伤 +2。持续 1 回合。', dmg: 0, value: 2 },
+      { id: 'tt3-magic-lamp', name: '神灯', cost: 1, rarity: '史诗', type: '法术', desc: '抉择：1° 发现 1 张牌并将其释放；2° 消灭 1 名受伤敌人（非 BOSS）；3° 冰冻 2 名角色，获得5 点护甲。', dmg: 0, armor: 5, value: 4 },
+      { id: 'tt3-thornfield', name: '棘刺之地', cost: 2, rarity: '稀有', type: '法术', desc: '对所有敌人附加 2 层中毒，并立即触发1次毒伤。', dmg: 0, value: 3 },
+      { id: 'tt3-mind-potion', name: '精神药水', cost: 0, rarity: '稀有', type: '道具', desc: '抽 2 张牌。', dmg: 0, draw: 2, value: 3 },
+      { id: 'tt3-turnabout-potion', name: '剧毒药水', cost: 0, rarity: '稀有', type: '道具', desc: '对所有敌人附加1层中毒。', dmg: 0, value: 3 },
+      { id: 'tt3-firm-barrier', cls: '法师', name: '坚冰结界', cost: 0, rarity: '职业', type: '法术', desc: '延长 1 名角色的冰冻 1 回合，抽1张牌。', dmg: 0, draw: 1, value: 3, unrandom: true },
+      { id: 'tt3-ice-spike', name: '冰刺', cost: 1, rarity: '古朴', type: '法术', desc: '2′，附加冰冻。', dmg: 2, dmgType: 'spell' },
+      { id: 'tt3-grope', name: '摸索', cost: 1, rarity: '古朴', type: '法术', desc: '抽2-3张牌。', dmg: 0, draw: 2, value: 2 },
+      { id: 'tt3-mixed-potion', name: '流血药水', cost: 0, rarity: '稀有', type: '道具', desc: '造成 2 点固定伤害，附加流血。', dmg: 0, value: 2 },
+      { id: 'tt3sp-dodge', name: '闪避', cost: 1, rarity: '古朴', type: '法术', desc: '本回合避开第1段伤害。', dmg: 0, value: 2 },
+      { id: 'tt3sp-devour', cls: '牧师', name: '吞噬', cost: 1, rarity: '职业', type: '法术', desc: '消灭 1 名 攻击力4 点及以下小怪。', dmg: 0, value: 3, unrandom: true },
+      { id: 'tt3sp-doom', name: '毁灭炸弹', cost: 0, rarity: '史诗', type: '道具', desc: '消灭 2 名 攻击力5点及以下小怪', dmg: 0, value: 4 },
+      { id: 'tt3sp-silverthorn', name: '镭射', cost: 1, rarity: '古朴', type: '法术', desc: '造成5点法术伤害；注能(1)：伤害+3。', dmg: 5, dmgType: 'spell', infuse: 1, value: 2 },
+      { id: 'tt3sp-magicoil', name: '药水魔法', cost: 1, rarity: '稀有', type: '法术', desc: '发现1瓶药水并直接释放', dmg: 0, value: 3 },
+      { id: 'tt3sp-shadowbug', name: '影噬', cost: 1, rarity: '稀有', type: '武术', desc: '本回合偷取 1 名敌人的攻击力至1点。', dmg: 0, value: 3 },
+      { id: 'tt3sp-flowerzhen', name: '花鸩', cost: 1, rarity: '史诗', type: '法术', desc: '使 1 名角色中毒层数翻倍并立即触发1次毒伤。', dmg: 0, value: 4 },
+      { id: 'tt3sp-bloodstorm', name: '血蝠风暴', cost: 2, rarity: '史诗', type: '法术', desc: '3′，目标为全体敌人，回复等量生命；注能(2)：触发 2 次。', dmg: 3, dmgType: 'spell', infuse: 2, value: 3 },
+      { id: 'tt3sp-shadowshot', cls: '降临者', name: '暗影射击', cost: 1, rarity: '职业', type: '法术', desc: '3′，若对手处于诅咒状态，额外施放 1 次。', dmg: 3, dmgType: 'spell', unrandom: true },
+      { id: 'tt3-thunderblast', name: '雷殛', cost: 2, rarity: '传说', type: '法术', desc: '造成7点法术伤害；墓地中每有1 张法术牌，伤害+1。', dmg: 7, dmgType: 'spell', value: 5 },
+      { id: 'tt3-flux-slash', name: '流光斩', cost: 1, rarity: '传说', type: '武术', desc: '攻（-1），附加 2 层流血；将流光照影洗入牌库。', dmg: -1, dmgType: 'attack', value: 5 },
+      { id: 'tt3-immortal-blade', name: '骷髅王剑', cost: 0, rarity: '传说', type: '装备', desc: '对战开始时，你的所有’杀‘化为1张不朽斩。', dmg: 0, value: 5 },
+      { id: 'tt3-diamond', name: '钻石', cost: 0, rarity: '传说', type: '资源', desc: '贵重货币，可出售。', value: 16, unrandom: true },
+      { id: 'tt3-master-staff', name: '大法师之杖', cost: 0, rarity: '传说', type: '装备', desc: '回合开始时法伤 +1。', dmg: 0, value: 5 },
+      { id: 'tt3-chaos-eye', name: '混沌之眼', cost: 0, rarity: '传说', type: '装备', desc: '对战开始时：血量上限 +10，牌库上限+5。', dmg: 0, value: 5 },
+      { id: 'tt3-execute', name: '斩杀', cost: 1, rarity: '传说', type: '武术', desc: '对 9 血以下角色造成9点真实伤害。', dmg: 9, dmgType: 'true', value: 5 },
+      { id: 'tt3-savior-elixir', name: '救世灵药', cost: 0, rarity: '传说', type: '道具', desc: '回复 99 点生命（相当于回满）。', heal: 99, value: 5, unrandom: true },
+      { id: 'tt3-silver-runesword', name: '诅咒之剑', cost: 0, rarity: '史诗', type: '装备', desc: '获得 2 点攻击力；回合开始时，受到2点伤害', dmg: 0, value: 3 },
+      { id: 'tt3-azure-sword', name: '百炼青虹剑', cost: 0, rarity: '稀有', type: '装备', desc: '消耗该牌时立即释放一次’杀‘。', dmg: 0, value: 3 },
+      { id: 'tt3-deep-seal', name: '深海印记', cost: 0, rarity: '稀有', type: '装备', desc: '诅咒状态下，攻 +2，法伤 +2。', dmg: 0, dmgType: 'attack' },
+      { id: 'tt3-fate-wheel', name: '命运钟表', cost: 0, rarity: '史诗', type: '装备', desc: '限定技能：消耗所有手牌，获得 1 个额外回合。', dmg: 0, value: 4 },
+      { id: 'tt3-crimson-pouch', name: '深红丝袋', cost: 0, rarity: '稀有', type: '装备', desc: '限定技能：选择并复制你的 1 张手牌。', dmg: 0, value: 3 },
+      { id: 'tt3-holy-staff', name: '圣杖', cost: 0, rarity: '稀有', type: '装备', desc: '限定技能：净化并回复5血', dmg: 0, heal: 5, value: 3 },
+      { id: 'tt3-staff', name: '法杖', cost: 0, rarity: '古朴', type: '装备', desc: '法伤 +1。', dmg: 0, value: 2 },
+      { id: 'tt3-dark-blade', name: '灭魔之剑', cost: 0, rarity: '稀有', type: '装备', desc: '攻 +2，回合开始 -2 血。', dmg: 0, dmgType: 'attack', value: 3 },
+      { id: 'tt3-wolf-bow', name: '天狼长弓', cost: 0, rarity: '稀有', type: '装备', desc: '回合开始时，获得1张随机的‘箭矢’并将其变为0费。', dmg: 0, value: 3 },
+      { id: 'tt3-sapper-bomb', name: '矿工炸药', cost: 0, rarity: '古朴', type: '装备', desc: '消耗该牌时，造成 4 点固定伤害。', dmg: 0, value: 2 },
+      { id: 'tt3-twinwater-mail', name: '冰甲', cost: 0, rarity: '古朴', type: '装备', desc: '冰冻 1 名敌人后，+3甲。', dmg: 0, armor: 3 },
+      { id: 'tt3-grass-armor', name: '草甲', cost: 0, rarity: '古朴', type: '装备', desc: '装备：装备时获得5点护甲。', dmg: 0, armor: 5, value: 2 },
+      { id: 'tt3-blooddrinker', name: '饮血剑', cost: 0, rarity: '史诗', type: '装备', desc: '本局对战内，每消灭 1 个敌人，+1 点攻击力。', dmg: 0, value: 4 },
+      { id: 'tt3-longsword', name: '长剑', cost: 0, rarity: '古朴', type: '装备', desc: '+1 攻。', dmg: 0, value: 2 },
+      { id: 'tt3-element-seal', name: '元素符印', cost: 0, rarity: '稀有', type: '装备', desc: '本局对战中累计注能3张卡牌后解锁：法伤 +2，抽2张牌。', dmg: 0, draw: 2, value: 3 },
+      { id: 'tt3-light-mail', name: '急速跑鞋', cost: 0, rarity: '稀有', type: '装备', desc: '限定技能：抽3张牌', dmg: 0, draw: 3 },
+      { id: 'tt3-reverse-bow', name: '连弩', cost: 0, rarity: '古朴', type: '装备', desc: '限定技能：直接释放手牌中的所有‘箭’，每释放1张，抽1张牌。', dmg: 0, draw: 1, value: 2 },
+      { id: 'tt3-deep-diary', name: '深海咒印', cost: 0, rarity: '史诗', type: '装备', desc: '自身处于诅咒状态时，获得 2 点攻击力且法伤 +2。', dmg: 0, value: 4 },
+      { id: 'tt3eq-boiler', name: '魔法锅炉', cost: 0, rarity: '古朴', type: '装备', desc: '限定技能：消耗至多 2 张牌，发现等量随机卡牌。', dmg: 0, value: 2 },
+      { id: 'tt3eq-mistbox', name: '迷之匣', cost: 0, rarity: '古朴', type: '装备', desc: '对战开始时，将 2 张杀替换为随机卡牌。', dmg: 0, value: 2 },
+      { id: 'tt3-wood-bundle', name: '一捆木材', cost: 0, rarity: '史诗', type: '资源', desc: '木材 ×3。', dmg: 0, value: 6 },
+      { id: 'tt3-ration-double', name: '双份口粮', cost: 0, rarity: '史诗', type: '资源', desc: '口粮 ×2。', dmg: 0, value: 6 },
+      { id: 'tt4-shine-token', name: '耀金令牌', cost: 0, rarity: '史诗', type: '道具', desc: '发现 1 张传说卡。', dmg: 0, value: 4 },
+      { id: 'tt4-smoke-bomb', name: '烟雾弹', cost: 0, rarity: '稀有', type: '道具', desc: '非 BOSS 战逃跑一次。', dmg: 0, value: 3 },
+      { id: 'tt4-woodify', name: '桃', cost: 0, rarity: '古朴', type: '道具', desc: '回复 6 点生命。', dmg: 0, heal: 6, value: 2 },
+      { id: 'tt5-galaxy-voyage', name: '银河之旅', cost: 2, rarity: '传说', type: '法术', desc: '本场对战中，你的所有招式均为 1 费。', dmg: 0, value: 5 },
+      { id: 'tt6-demondeal', name: '恶魔交易', cost: 0, rarity: '衍生', type: '事件', desc: '-5血，获得1个大宝箱。', dmg: 0, unrandom: true },
+      { id: 'tt6-bandits', battle: true, name: '盗匪横行', cost: 0, rarity: '衍生', type: '事件', desc: '对战土匪 ×5。奖励：中宝箱 ×2。', dmg: 0, unrandom: true },
+      { id: 'tt6-mystery', name: '神秘补给', cost: 0, rarity: '衍生', type: '事件', desc: '获得彩色令牌碎片，+2 币。', dmg: 0, unrandom: true },
+      { id: 'tt6-goldmine', name: '金矿', cost: 0, rarity: '衍生', type: '事件', desc: '获得 3 币。', dmg: 0, unrandom: true },
+      { id: 'tt6-airdrop', name: '空中补给', cost: 0, rarity: '衍生', type: '事件', desc: '从木材、口粮、桃、随机药水中抽取一项。', dmg: 0, unrandom: true },
+      { id: 'tt6-chestdraw', name: '宝箱', cost: 0, rarity: '衍生', type: '事件', desc: '从大，中，小宝箱中抽取 1 个。', dmg: 0, unrandom: true },
+      { id: 'tt6-systemsupply', name: '系统补给', cost: 0, rarity: '衍生', type: '事件', desc: '获得彩色令牌碎片，木材 ×1。', dmg: 0, unrandom: true },
+      { id: 'tt7-throwblade', cls: '侠客', name: '飞刃偷袭', cost: 0, rarity: '职业', type: '武术', desc: '攻（-3），附加流血，抽 1 张牌。', dmg: -3, dmgType: 'attack', draw: 1, value: 3, unrandom: true },
+      { id: 'tt7-stealth', cls: '侠客', name: '潜匿', cost: 1, rarity: '职业', type: '武术', desc: '进入潜行状态 1 回合，抽1张牌。', dmg: 0, draw: 1, value: 3, unrandom: true },
+      { id: 'tt7-ghostblade', cls: '侠客', name: '鬼魅之刃', cost: 1, rarity: '职业', type: '武术', desc: '攻（+1），破除隐身时伤害 +2，并抽 2 张牌。', dmg: 1, dmgType: 'attack', draw: 2, value: 3, unrandom: true },
+      { id: 'tt7-goldencicada', cls: '侠客', name: '金蝉脱壳', cost: 0, rarity: '职业', type: '武术', desc: '消耗所有手牌，抽 3 张。', dmg: 0, value: 3, unrandom: true },
+      { id: 'tt7-thundergrudge', cls: '侠客', name: '快意恩仇', cost: 1, rarity: '职业', type: '武术', desc: '消耗 2 张杀，攻击 3 次。', dmg: 0, value: 3, unrandom: true },
+      { id: 'tt7-sneak', cls: '侠客', name: '偷袭', cost: 0, rarity: '职业', type: '武术', desc: '攻（-1）。', dmg: -1, dmgType: 'attack', value: 3, unrandom: true },
+      { id: 'tt7-swordimmortal', cls: '侠客', name: '剑仙形态', cost: 2, rarity: '职业', type: '武术', desc: '本局对战中，回合开始时额外抽 1 张牌。', dmg: 0, draw: 1, value: 4, unrandom: true },
+      { id: 'tt7-ironphalanx', cls: '战士', name: '铁甲阵', cost: 2, rarity: '职业', type: '武术', desc: '+10 甲，将 5 张随机卡牌洗入牌库，并使其费用均-1。', dmg: 0, armor: 10, value: 3, unrandom: true },
+      { id: 'tt7-bloodpotion', cls: '牧师', name: '噬血术', cost: 1, rarity: '职业', type: '法术', desc: '3′，回复等量生命。', dmg: 3, dmgType: 'spell', value: 3, unrandom: true },
+      { id: 'tt7-bloodpoison', cls: '战士', name: '血毒双镖', cost: 2, rarity: '职业', type: '武术', desc: '选择两个目标（可以重复）：攻（+1），附加流血；攻（+1），附加中毒。', dmg: 1, dmgType: 'attack', value: 3, unrandom: true },
+      { id: 'tt7-provoke', cls: '牧师', name: '扰敌', cost: 1, rarity: '职业', type: '法术', desc: '选择2 名敌人，迫使其相互攻击一次。', dmg: 0, value: 3, unrandom: true },
+      { id: 'tt7-stratagem', cls: '法师', name: '法师锦囊', cost: 1, rarity: '职业', type: '法术', desc: '自带1*3空间，可以置入3张法术牌；打出时选择其中 1 张直接施放。', dmg: 0, value: 3, unrandom: true },
+      { id: 'tt7-bladebloom', cls: '法师', name: '永恒绽放', cost: 2, rarity: '职业', type: '法术', desc: '发现并直接施放 1 张牌，获取剩下两张。', dmg: 0, value: 3, unrandom: true },
+      { id: 'tt7-elementstorm', cls: '法师', name: '元素风暴', cost: 1, rarity: '职业', type: '法术', desc: '注能(1)：下一张法术施放 2 次。', dmg: 0, infuse: 1, value: 3, unrandom: true },
+      { id: 'tt7-holyglow', cls: '牧师', name: '沐愈光辉', cost: 1, rarity: '职业', type: '法术', desc: '将自身血量回复至 12 血。', dmg: 0, value: 3, unrandom: true },
+      { id: 'tt7-holyheal', cls: '牧师', name: '圣光治愈', cost: 1, rarity: '职业', type: '法术', desc: '注能（1）：回复 2 倍于被注能卡牌价格的血量。', dmg: 0, infuse: 1, value: 3, unrandom: true },
+      { id: 'tt7-energize', cls: '法师', name: '聚能', cost: 0, rarity: '职业', type: '法术', desc: '获得1点能量 。', dmg: 0, value: 3, unrandom: true },
+      { id: 'tt7-abysscurse', cls: '降临者', name: '深渊诅咒', cost: 2, rarity: '职业', type: '法术', desc: '7′，附加禁疗；此时对方身上每有 1 种诅咒，抽 1 张牌。', dmg: 7, dmgType: 'spell', draw: 1, value: 3, unrandom: true },
+      { id: 'tt7-smite', cls: '牧师', name: '惩击', cost: 2, rarity: '职业', type: '法术', desc: '10′，对血量一半及以下的敌人伤害增加50%。', dmg: 10, dmgType: 'spell', value: 3, unrandom: true },
+      { id: 'tt7-silence', cls: '牧师', name: '禁言术', cost: 0, rarity: '职业', type: '法术', desc: '沉默 1 名角色 1 回合，抽 1 张牌。', dmg: 0, draw: 1, value: 3, unrandom: true },
+      { id: 'tt7-burnharvest', cls: '降临者', name: '爆燃火球', cost: 1, rarity: '职业', type: '法术', desc: '5′，受法伤加成翻倍；', dmg: 5, dmgType: 'spell', value: 3, unrandom: true },
+      { id: 'tt7-twinfireball', cls: '降临者', name: '三重火球', cost: 1, rarity: '职业', type: '法术', desc: '4′，将2张‘火球’置入手牌。', dmg: 4, dmgType: 'spell', value: 3, unrandom: true },
+      { id: 'tt7-meteorstrong', cls: '降临者', name: '星陨之力', cost: 2, rarity: '职业', type: '法术', desc: '注能(2)：施放 3 次火球术。', dmg: 0, infuse: 2, value: 3, unrandom: true },
+      { id: 'tt7-recruit', cls: '法师', name: '征召', cost: 2, rarity: '职业', type: '法术', desc: '召唤步兵（4-4） ×2为你抵挡伤害并自动战斗。', dmg: 0, value: 3, unrandom: true },
+      { id: 'tt7-frozenight', cls: '法师', name: '冰封千里', cost: 1, rarity: '职业', type: '法术', desc: '冰冻所有敌人，持续 1 回合。', dmg: 0, value: 3, unrandom: true },
+      { id: 'tt7-fullstrike', cls: '战士', name: '全力一击', cost: 2, rarity: '职业', type: '武术', desc: '攻（+5），抽 1 张牌。', dmg: 5, dmgType: 'attack', draw: 1, value: 2, unrandom: true },
+      { id: 'tt7-bulwark', cls: '战士', name: '坚盾', cost: 1, rarity: '职业', type: '武术', desc: '本回合获得 8点护甲，下回合开始时 -4 点。', dmg: 0, armor: 8, value: 3, unrandom: true },
+      { id: 'tt7-meteorrain', cls: '侠客', name: '流星箭雨', cost: 1, rarity: '职业', type: '武术', desc: '攻（-1）；触发 2 次。', dmg: -1, dmgType: 'attack', value: 3, unrandom: true },
+      { id: 'tt7-armup', cls: '战士', name: '武装', cost: 1, rarity: '职业', type: '武术', desc: '从牌库中抽取 2 张装备牌。', dmg: 0, value: 3, unrandom: true },
+      { id: 'tt7-demonbreaker', cls: '战士', name: '破甲重斩', cost: 2, rarity: '职业', type: '武术', desc: '攻5，附加破甲，持续 2 回合。；击杀敌人时 +4 甲。', dmg: 5, dmgType: 'attack', armor: 4, value: 3, unrandom: true },
+      { id: 'tt7-whirlwind', cls: '战士', name: '旋风斩', cost: 1, rarity: '职业', type: '武术', desc: '攻（+1），目标为敌方全体。', dmg: 1, dmgType: 'attack', value: 3, unrandom: true },
+      { id: 'tt7-marchrush', cls: '战士', name: '急行军', cost: 1, rarity: '职业', type: '武术', desc: '抽 2张牌，+2甲；若本牌为最后一张手牌，效果触发2次。', dmg: 0, draw: 2, armor: 2, value: 3, unrandom: true },
+      { id: 'tt8-hero-assassin', cls: '侠客', hero: true, name: '白梅落影·妄', cost: 2, rarity: '稀有', type: '英雄卡', desc: '遁入虚空：净化自身，潜行 2 回合；破隐一击伤害翻倍。', dmg: 0, value: 8, unrandom: true },
+      { id: 'tt8-hero-sword', cls: '侠客', hero: true, name: '无量仙剑·云风', cost: 2, rarity: '稀有', type: '英雄卡', desc: '万剑归宗：抽 5 张牌，直接释放其中武术。', dmg: 0, draw: 5, value: 8, unrandom: true },
+      { id: 'tt8-hero-warlock', cls: '牧师', hero: true, name: '无极梦魇·血苑修罗', cost: 2, rarity: '稀有', type: '英雄卡', desc: '天灾横行：将四张禁咒洗入牌库，然后抽 2 张牌。', dmg: 0, draw: 2, value: 8, unrandom: true },
+      { id: 'tt8-hero-mage', cls: '法师', hero: true, name: '明灯千里·孔明', cost: 2, rarity: '稀有', type: '英雄卡', desc: '万法乾坤：法伤 +1，回合开始时发现 1 张卡牌。', dmg: 0, value: 8, unrandom: true },
+      { id: 'tt8-hero-priest', cls: '牧师', hero: true, name: '浪掷风吟·露娜拉', cost: 2, rarity: '棱彩', type: '英雄卡', desc: '甘霖降世：置入随机卡牌直至手牌达到 6 张；其中每置入1 张法术，回复 3 血。', dmg: 0, heal: 3, value: 8, unrandom: true },
+      { id: 'tt8-hero-sealer', cls: '降临者', hero: true, name: '邪渊主宰·妲莉薇特', cost: 2, rarity: '棱彩', type: '英雄卡', desc: '深渊降焰：法伤 +1，每消耗 1 张卡牌，施放 1 次火球。', dmg: 0, value: 8, unrandom: true },
+      { id: 'tt8-hero-descender', cls: '降临者', hero: true, name: '楔天玄翼·焚殃', cost: 2, rarity: '古朴', type: '英雄卡', desc: '寂灭苍穹：法伤 +1，本局对战中，每消耗 1 张卡牌，施放 1 次‘火球’。', dmg: 0, value: 8, unrandom: true },
+      { id: 'tt8-hero-summoner', cls: '法师', hero: true, name: '神话终章·雷修斯', cost: 2, rarity: '棱彩', type: '英雄卡', desc: '元素潮汐：抉择：打开‘末日浩劫之门’或者‘天国之门’。两回合后，开启未选择的那扇‘门’', dmg: 0, value: 8, unrandom: true },
+      { id: 'tt8-hero-guardian', cls: '战士', hero: true, name: '圣剑誓约·亚瑟', cost: 2, rarity: '古朴', type: '英雄卡', desc: '诛邪圣剑：本局对战中，能量上限 +1，装备上限 +1。', dmg: 0, value: 8, unrandom: true },
+      { id: 'tt8-hero-ranger', cls: '侠客', hero: true, name: '天剑诛魔·云阳', cost: 2, rarity: '古朴', type: '英雄卡', desc: '断念：将天启剑与诛魔剑洗入牌库。', dmg: 0, value: 8, unrandom: true },
+      { id: 'tt8-hero-warrior', cls: '战士', hero: true, name: '龙吟沧海·关云长', cost: 2, rarity: '稀有', type: '英雄卡', desc: '真龙降世：本局对战中，将‘杀’化为‘青龙偃月斩’。', dmg: 0, value: 8, unrandom: true },
+      { id: 'tt8-curse1', cls: '牧师', hero: true, tokenOf: 'tt8-hero-warlock', name: '禁咒I', cost: 0, rarity: '衍生', type: '法术', desc: '抽到时施放：夺取 一名敌人的1 点攻击力。', dmg: 0, value: 8, unrandom: true },
+      { id: 'tt8-curse2', cls: '牧师', hero: true, tokenOf: 'tt8-hero-warlock', name: '禁咒II', cost: 0, rarity: '衍生', type: '法术', desc: '抽到时施放：冰冻一名敌人。', dmg: 0, value: 8, unrandom: true },
+      { id: 'tt8-curse3', cls: '牧师', hero: true, tokenOf: 'tt8-hero-warlock', name: '禁咒III', cost: 0, rarity: '衍生', type: '法术', desc: '抽到时施放：对1名敌人施加中毒，流血。', dmg: 0, value: 8, unrandom: true },
+      { id: 'tt8-curse4', cls: '牧师', hero: true, tokenOf: 'tt8-hero-warlock', name: '禁咒IV', cost: 0, rarity: '衍生', type: '法术', desc: '抽到时施放：沉默1名敌人 1 回合。', dmg: 0, value: 8, unrandom: true },
+      { id: 'tt8-demonslay', cls: '侠客', hero: true, tokenOf: 'tt8-hero-ranger', name: '诛魔剑', cost: 0, rarity: '衍生', type: '装备', desc: '抽到该牌时攻击全体敌人；···以天启诛魔剑覆盖你的所有武器。', dmg: 0, value: 4, unrandom: true },
+      { id: 'tt8-archdemon', cls: '侠客', hero: true, tokenOf: 'tt8-hero-ranger', name: '天启诛魔剑', cost: 0, rarity: '衍生', type: '装备', desc: '获得 1 点攻击力，获得3张重斩。', dmg: 0, value: 8, unrandom: true },
+      { id: 'tt8-heavensword', cls: '侠客', hero: true, tokenOf: 'tt8-hero-ranger', name: '天启剑', cost: 0, rarity: '衍生', type: '装备', desc: '抽到该牌时额外抽 1 张牌；在你抽到天启剑与诛魔剑后……', dmg: 0, draw: 1, value: 4, unrandom: true },
+      { id: 'tt8-dragonblade', cls: '战士', hero: true, tokenOf: 'tt8-hero-warrior', name: '青龙偃月斩', cost: 2, rarity: '衍生', type: '武术', desc: '攻+6，附加破甲与 1 层流血。', dmg: 6, dmgType: 'attack', value: 8, unrandom: true },
+      { id: 'cmtn0pbkmnvc', name: '流光照影', cost: 2, rarity: '衍生', type: '武术', desc: '对方身上每有一层诅咒，释放一次‘杀’', value: 5, unrandom: true }, // 第十批补种（设计者实机卡）
+      { id: 'cmtn1epgt20j', name: '灵能召唤', cost: 1, rarity: '稀有', type: '法术', desc: '发现一张注能卡，使其无需注能', value: 3 }, // 第十批补种（设计者实机卡）
+      { id: 'cmtn233trmeg', name: '不朽斩', cost: 1, rarity: '衍生', type: '武术', desc: '攻（+1），永远被保留在手牌中，无法用于注能', dmg: 1, dmgType: 'attack', value: 5, unrandom: true }, // 第十批补种（设计者实机卡）
+      { id: 'cmtn2jc142dj', name: '刀剑形态', cost: 1, rarity: '稀有', type: '武术', desc: '回合开始时，获得一张随机手牌的复制', value: 3 }, // 第十批补种（设计者实机卡）
+      { id: 'cmtn6ulm4boj', name: '步兵', rarity: '衍生', type: '生物', desc: '攻击力4生命4，优先为主人承受伤害，自动攻击敌人', unrandom: true }, // 第十批补种（设计者实机卡）
+      { id: 'cmtn79743r2n', name: '末日浩劫之门', rarity: '棱彩', type: '生物', desc: '回合开始时对所有敌方角色各施加一层随机诅咒，优先不重复。', unrandom: true }, // 第十批补种（设计者实机卡）
+      { id: 'cmtn7err0a7', name: '天国之门', rarity: '棱彩', type: '生物', desc: '回合开始时随机获取一项祝福，对全体友方施放，优先不重复。（获得潜行，持续 1 回合。获得 1 点攻击力。法伤 +1。减伤 1。获得 5 点护甲。净化。从这些中随机）', armor: 5, unrandom: true }, // 第十批补种（设计者实机卡）
+      { id: 'cmtna0nb1yxt', name: '法力光波', cost: 1, rarity: '古朴', type: '法术', desc: '5点法术伤害', dmg: 5, dmgType: 'spell', value: 2 }, // 第十批补种（设计者实机卡）
+    ],
+
     all() {
-      try { return JSON.parse(localStorage.getItem(KEY)) || []; }
-      catch (e) { return []; }
+      // 内存缓存（2026-09-07 性能）：卡库全量存 localStorage（数百张含全部描述文本），
+      // 每张卡渲染时 rarityOf/sellPrice/isHeroLine 都会调 all() 全量 JSON.parse——
+      // 战斗页一次 render 按「手牌衍生/英雄卡数 ×2-3」放大解析次数。
+      // 写路径只有 saveAll / clearAll，在那两处同步更新/失效保持一致
+      // （调用方均以 filter/重新赋值产生新数组，无原地修改）。
+      if (_cardsCache) return _cardsCache;
+      try { _cardsCache = JSON.parse(localStorage.getItem(KEY)) || []; }
+      catch (e) { _cardsCache = []; }
+      return _cardsCache;
     },
 
-    saveAll(cards) { localStorage.setItem(KEY, JSON.stringify(cards)); },
+    saveAll(cards) { _cardsCache = cards; localStorage.setItem(KEY, JSON.stringify(cards)); },
 
     upsert(card) {
       const cards = SDT.Cards.all();
@@ -747,7 +956,7 @@ import { Random } from './random.js';
 
     remove(id) { SDT.Cards.saveAll(SDT.Cards.all().filter(c => c.id !== id)); },
 
-    clearAll() { localStorage.removeItem(KEY); },
+    clearAll() { _cardsCache = null; localStorage.removeItem(KEY); },
 
     // ---- 卡背图案（v0.21）：默认「行囊粗布」恒解锁，其余由成就领取解锁 ----
     // emblem 印在卡背中央；from 说明解锁途径（基地成就页展示）。
@@ -816,10 +1025,11 @@ import { Random } from './random.js';
       const artHTML = (window.SDT.Art && window.SDT.Art.cardIcon && window.SDT.Art.cardIcon(c)) ||
         SDT.Icons.img(SDT.Icons.TYPE_ART[c.type] || 'question');
       return `<div class="hs-card tp${ti} ${rvCls}${cls ? ' ' + cls : ''}">
+        ${isPrism ? '<i class="rv-beam" aria-hidden="true"></i>' : ''}
         <div class="hsc-cost">${c.cost}</div>
         <div class="hsc-art">${artHTML}</div>
         <div class="hsc-name">${esc(c.name || '未命名卡牌')}</div>
-        <div class="hsc-type">${esc(c.type || '?')} · ${esc(ro === '职业' ? '人物专属' : ro)}</div>
+        <div class="hsc-type">${esc(c.type || '?')} · ${esc(ro === '职业' ? ((c.cls ? characterName(c.cls) : '人物') + '专属') : ro)}</div>
         ${kwHTML}
         <i class="hsc-gem"></i>
         <div class="hsc-desc">${c.desc ? `<span>${esc(c.desc)}</span>` : ''}</div>
@@ -899,6 +1109,25 @@ import { Random } from './random.js';
       } catch (e) { /* 静默跳过 */ }
     },
 
+    // 第十批同步：设计者实机定版双向合并（TT10_KEY 标记，一次性）。按 id 整卡覆盖 + 缺失补种；
+    // 本轮为老板拍板的定版动作，有意覆盖制作坊玩家改动（与 seedBatch 的「尊重玩家」语义不同）；
+    // 并移除同设计重复 id（RETIRE，设计者已在旧 id 上定版同名卡）。
+    ensureTabletopSync() {
+      try {
+        if (localStorage.getItem(TT10_KEY)) return;
+        const cards = SDT.Cards.all();
+        for (let i = cards.length - 1; i >= 0; i--) {
+          if (RETIRE_TT10.includes(cards[i].id)) cards.splice(i, 1);
+        }
+        SDT.Cards.TABLETOP10.forEach(d => {
+          const i = cards.findIndex(c => c.id === d.id);
+          if (i >= 0) cards[i] = { ...d }; else cards.push({ ...d });
+        });
+        SDT.Cards.saveAll(cards);
+        localStorage.setItem(TT10_KEY, '1');
+      } catch (e) { /* 隐私模式等场景静默跳过 */ }
+    },
+
     // 播入桌游手绘卡（第一批资源·道具 + 第二批装备/武术 + 第三批全套 + 第四/五批新设计）
     ensureTabletop() {
       SDT.Cards.seedBatch(SDT.Cards.TABLETOP, TT1_KEY_V6, 'tt');   // v6：老档重播一次，按 id 覆盖（资源类型化、木材/木化拆分、经济卡包可出售）
@@ -910,6 +1139,7 @@ import { Random } from './random.js';
       SDT.Cards.seedBatch(SDT.Cards.TABLETOP7, TT7_KEY, 'tt7');
       SDT.Cards.seedBatch(SDT.Cards.TABLETOP8, TT8_KEY, 'tt8');
       SDT.Cards.seedBatch(SDT.Cards.BESTIARY, TT9_KEY);            // 第九批：生物图鉴（全部敌人信息录入，2026-09-04 定版）
+      SDT.Cards.ensureTabletopSync();  // 第十批：设计者实机定版同步（按 id 整卡覆盖/补种，只跑一次）
       SDT.Cards.ensureClassRarity();   // v2：老档第七批职业卡统一迁移为「职业」稀有度（2026-09-04 定版）
       SDT.Cards.ensureShieldToArmor(); // 护盾→护甲术语迁移（含老存档，2026-09-04 定版）
       SDT.Cards.ensureCardFixes();    // 设计者定版数据修正（爆燃火球删注能，2026-09-05）

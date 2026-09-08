@@ -1,7 +1,7 @@
 {
  "_comment": "资产清单(create-game-assets模板裁剪版): path/ext/bytes/license。assets:audit 校验未登记文件。",
  "generated": "2026-09-06",
- "count": 321,
+ "count": 327,
  "assets": [
   {
    "path": "bgm-black-stream-sea.mp3",
@@ -850,9 +850,27 @@
    "license": "项目自有（自制/AI 生成）"
   },
   {
+   "path": "portraits/avatars/baiqi.webp",
+   "ext": "webp",
+   "bytes": 13808,
+   "license": "项目自有（自制/AI 生成）"
+  },
+  {
+   "path": "portraits/avatars/shuangling.webp",
+   "ext": "webp",
+   "bytes": 13582,
+   "license": "项目自有（自制/AI 生成）"
+  },
+  {
    "path": "portraits/full/assassin.webp",
    "ext": "webp",
    "bytes": 44808,
+   "license": "项目自有（自制/AI 生成）"
+  },
+  {
+   "path": "portraits/full/baiqi.webp",
+   "ext": "webp",
+   "bytes": 513796,
    "license": "项目自有（自制/AI 生成）"
   },
   {
@@ -874,6 +892,12 @@
    "license": "项目自有（自制/AI 生成）"
   },
   {
+   "path": "portraits/full/baita.webp",
+   "ext": "webp",
+   "bytes": 600084,
+   "license": "项目自有（老板指定立绘）"
+  },
+  {
    "path": "portraits/full/priest.webp",
    "ext": "webp",
    "bytes": 43070,
@@ -883,6 +907,12 @@
    "path": "portraits/full/ranger.webp",
    "ext": "webp",
    "bytes": 61080,
+   "license": "项目自有（自制/AI 生成）"
+  },
+  {
+   "path": "portraits/full/shuangling.webp",
+   "ext": "webp",
+   "bytes": 417520,
    "license": "项目自有（自制/AI 生成）"
   },
   {
@@ -955,6 +985,12 @@
    "path": "scenes/hub-classes.png",
    "ext": "png",
    "bytes": 46129,
+   "license": "项目自有（自制/AI 生成）"
+  },
+  {
+   "path": "scenes/hub-wallpaper.jpg",
+   "ext": "jpg",
+   "bytes": 335926,
    "license": "项目自有（自制/AI 生成）"
   },
   {

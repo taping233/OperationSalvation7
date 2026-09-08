@@ -28,6 +28,9 @@ import { eventNarrative } from './narrative.js';
   // 旧看门狗醒来会命中新一掷的 rolling 窗口（state==='rolling' 检查挡不住它），
   // 叠加一次 moveBy 造成两条步进链并发（棋子乱跳 + 落格双重结算 + 双重存档）。
   let rollSeq = 0;
+  // 步进链序号：moving 看门狗强制贴格后作废在飞的旧 rAF 链——否则页面恢复后
+  // 旧链的 stepIn 看到 trackPos 已到 target 会再跑一次 resolveCell（双重结算）
+  let moveSeq = 0;
   function roll() {
     if (game.state !== 'idle') return;
     game.state = 'rolling';
@@ -70,7 +73,9 @@ import { eventNarrative } from './narrative.js';
     const target = (game.trackPos + n) % count;
     preloadCellScene(layer, target);
     game.moveTarget = target;
+    const seq = ++moveSeq;
     const stepIn = () => {
+      if (moveSeq !== seq) return;   // 本掷已被看门狗强制收尾，旧链不再续步/结算
       if (game.trackPos === target) { game.hop = 0; game.moveTarget = null; resolveCell(); return; }
       const next = (game.trackPos + 1) % count;
       animateStep(next, () => {
@@ -80,6 +85,18 @@ import { eventNarrative } from './narrative.js';
       });
     };
     stepIn();
+    // 防卡死看门狗（对齐 #30 rolling 看门狗的先例）：步进链靠 rAF 驱动，页面隐藏/
+    // 动画中断会停在 'moving'，之后所有 idle-only 交互（背包 B 键、掷骰）静默失联。
+    // 超时先作废旧链（moveSeq++）再贴到目标格续行结算，杜绝双重 resolveCell。
+    setTimeout(() => {
+      if (game.state !== 'moving' || game.moveTarget !== target) return;
+      moveSeq++;
+      game.trackPos = target;
+      game.pos = cellCenter(game.layerIdx, target);
+      game.hop = 0;
+      game.moveTarget = null;
+      resolveCell();
+    }, (n + 2) * (MAP.rules.stepMs || 300) + 3000);
   }
 
   function animateStep(idx, done) {
@@ -181,6 +198,9 @@ import { eventNarrative } from './narrative.js';
 
   // 节点与战斗结算之间的短过场：复用现有场景美术，不引入额外资源或阻塞式页面。
   function showRunTransition({ tone = 'battle', asset = 'scene-battle-bg', eyebrow = 'AREA ENTERED', title, detail = '', duration = 900 }) {
+    // 结束时必须恢复状态：战斗/节点流程下游会自行改状态，但「继续对局」路径
+    // 过渡后无人收拾，曾导致 game.state 卡死在 modal、骰子按钮永久禁用
+    const prevState = game.state;
     game.state = 'modal';
     return new Promise(resolve => {
       let done = false;
@@ -190,6 +210,7 @@ import { eventNarrative } from './narrative.js';
         done = true;
         if (timer) clearTimeout(timer);
         UI.hideOverlay();
+        game.state = prevState === 'modal' ? 'idle' : prevState;
         resolve();
       };
       UI.showOverlay('', `
@@ -527,22 +548,28 @@ import { eventNarrative } from './narrative.js';
         </div>`, 'page');
     };
     // 二级页：该角色的卡池全览
+    // 2026-09-07 留言：右上叉号删掉（底部已有「返回选角」）；卡面可点击放大查看具体效果
     const renderPool = () => {
       const pool = SDT.Cards.classPool(sel);
       UI.showOverlay(`[[icon:cards]] ${esc(characterName(sel))} · 角色卡池`, `
         <div class="pg cls-page cls-pool-page">
-          <button class="pg-close" data-act="clsBack" title="返回选角（Esc）">[[icon:cross]]</button>
           <header class="pg-head">
             <h2>[[icon:cards]] ${esc(characterName(sel))} · 角色卡池（${pool.length} 张）</h2>
-            <span class="sub">确认选择「${esc(characterName(sel))}」后，从以下卡池中随机获得 1 张（与 5 张「初始攻击」一起带入背包）</span>
+            <span class="sub">确认选择「${esc(characterName(sel))}」后，从以下卡池中随机获得 1 张（与 5 张「初始攻击」一起带入背包）· 点击卡面可放大查看</span>
           </header>
-          <div class="cls-pool cls-pool-full">${pool.map(c => SDT.Cards.cardHTML(c)).join('')}</div>
+          <div class="cls-pool cls-pool-full">${pool.map((c, i) => `
+            <div class="cls-pool-it" data-act="poolZoom" data-i="${i}" title="点击放大查看">${SDT.Cards.cardHTML(c)}</div>`).join('')}</div>
           <footer class="cls-foot">
             <button class="ov-btn" data-act="clsBack">[[icon:medal]] 返回选角</button>
             <button class="ov-btn ok" data-act="pickClass">确 认 · ${esc(characterName(sel))}</button>
           </footer>
         </div>`, 'page');
     };
+    UI.act('poolZoom', (d) => {
+      const list = sel ? SDT.Cards.classPool(sel) : [];
+      const c = list[Number(d.i)];
+      if (c) UI.showCardZoom(c);
+    });
     UI.act('selClass', (d) => {
       if (d.cls === sel) return;
       sel = d.cls;

@@ -44,6 +44,8 @@ function createShopController({
     }
     // 初始牌槽位已移除：杀/火球为初始牌，不上架（2026-09-06）；神秘货箱特殊栏位仍可能刷出
     slots.push({ card: SDT.Cards.POTION, price: 3, sold: false });
+    // 初始攻击补充位（2026-09-08 老板定版）：固定栏位，1 币 1 张，每次到站最多补 5 张
+    slots.push({ card: { ...SDT.Cards.SHA }, price: 1, sold: false, shaReplenish: 5 });
     const mysteryCard = lib.length ? lib[Math.floor(Random.random('shop') * lib.length)] : null;
     slots.push(mysteryCard
       ? { card: mysteryCard, price: 3, sold: false, mystery: true }
@@ -65,6 +67,12 @@ function createShopController({
       if (slot.empty) return `<div class="shop-slot"><div class="shop-empty">${slot.label || '无货'}</div></div>`;
       if (slot.sold) return '<div class="shop-slot sold"><div class="shop-empty">已售出</div></div>';
       const afford = game.coins >= slot.price;
+      if (slot.shaReplenish != null) {
+        if (slot.shaReplenish <= 0) return '<div class="shop-slot sold"><div class="shop-empty">初始攻击已补满</div></div>';
+        return `<div class="shop-slot">${cardHTML(slot.card)}
+          <button class="mini-btn ok" data-act="buySha" data-i="${index}" ${afford ? '' : 'disabled'}>[[icon:coin]] ${slot.price} 币 · 余 ${slot.shaReplenish}/5</button>
+        </div>`;
+      }
       if (slot.mystery) return `<div class="shop-slot"><div class="shop-empty">[[icon:dice]] 随机卡牌</div>
         <button class="mini-btn ok" data-act="buyCard" data-i="${index}" ${afford ? '' : 'disabled'}>[[icon:coin]] ${slot.price} 币</button>
       </div>`;
@@ -84,7 +92,7 @@ function createShopController({
     UI.registerHelp('shop', {
       title: '商店说明',
       html: `
-        <p class="help-item"><b>进货</b>商队每次靠站随机卸货：6 张随机卡 + 金疮药 + 1 个「神秘货箱」栏位（3 币，买到随机卡牌）。</p>
+        <p class="help-item"><b>进货</b>商队每次靠站随机卸货：6 张随机卡 + 金疮药 + 初始攻击补充（1 币/张，每站最多 5 张）+ 1 个「神秘货箱」栏位（3 币，买到随机卡牌）。</p>
         <p class="help-item"><b>出售</b>默认所有卡牌不可出售；只有带「可出售」备注的卡才能卖给商店，收购价 = 卡面币值。</p>`,
       back: renderShop,
     });
@@ -123,6 +131,22 @@ function createShopController({
       game.ownedCards.push({ uid: newUid(), card: { ...slot.card } });
       SDT.Sound.sfx('gain');
       UI.log(`[[icon:bag]] 购买卡牌【<b>${esc(slot.card.name)}</b>】（- ${slot.price} 币，剩 ${game.coins}）`, 'coin');
+      saveGame();
+      renderShop();
+    });
+    UI.act('buySha', data => {
+      const slot = game.shopStock[+data.i];
+      if (!slot || slot.shaReplenish == null || slot.shaReplenish <= 0) return;
+      if (game.coins < slot.price) {
+        UI.log('币不够，买不起', 'warn');
+        SDT.Sound.sfx('error');
+        return;
+      }
+      game.coins -= slot.price;
+      slot.shaReplenish--;
+      game.ownedCards.push({ uid: newUid(), card: { ...slot.card } });
+      SDT.Sound.sfx('gain');
+      UI.log(`[[icon:bag]] 补充初始攻击 ×1（- ${slot.price} 币，剩 ${game.coins} · 本站还可补 ${slot.shaReplenish} 张）`, 'coin');
       saveGame();
       renderShop();
     });
