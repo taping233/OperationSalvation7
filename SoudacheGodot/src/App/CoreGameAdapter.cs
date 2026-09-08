@@ -833,7 +833,7 @@ public sealed class CoreGameAdapter : ICoreUiPort
     }
 
     private static int CharacterIndex(string id) => id switch { "shuangling" => 0, "baiqi" => 1, "lituan" => 2, "xuanli" => 3, "dengkui" => 4, _ => -1 };
-    private static string CharacterName(string id) => id switch { "shuangling" => "霜翎", "baiqi" => "白契", "lituan" => "栗团", "xuanli" => "玄砾", "dengkui" => "灯葵", _ => "未选择角色" };
+    private static string CharacterName(string id) => id switch { "shuangling" => "无", "baiqi" => "常无欲", "lituan" => "白塔", "xuanli" => "待定角色 IV", "dengkui" => "待定角色 V", _ => "未选择角色" };
     private static string PhaseLabel(RunPhase phase) => phase switch { RunPhase.Ready => "探索", RunPhase.Battle => "战斗", RunPhase.Shop => "商店", RunPhase.Campfire => "营火", RunPhase.Chest => "宝箱", RunPhase.Event => "事件", RunPhase.AwaitingDoor => "门扉", RunPhase.Altar => "祭坛", RunPhase.Victory => "胜利", RunPhase.Defeat => "失败", _ => phase.ToString() };
     private static string RoomLabel(RunRoomType type) => type switch { RunRoomType.Coin => "金币", RunRoomType.Wood => "木材", RunRoomType.Rations => "口粮", RunRoomType.Key => "钥匙", RunRoomType.Battle => "战斗", RunRoomType.Event => "事件", RunRoomType.Shop => "商店", RunRoomType.Campfire => "营火", RunRoomType.Chest => "宝箱", RunRoomType.EmergencyExit => "撤离", RunRoomType.Door => "门", RunRoomType.AltarEntrance => "祭坛入口", _ => "荒径" };
 

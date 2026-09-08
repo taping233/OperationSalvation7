@@ -11,7 +11,7 @@ public partial class BattleScreen : UiScreen
     private Label _energyLabel = null!;
     private Label _statusLabel = null!;
     private Label _playerStateLabel = null!;
-    private VBoxContainer _enemyList = null!;
+    private HBoxContainer _enemyList = null!;
     private Button _drawPileButton = null!;
     private Button _discardPileButton = null!;
     private Button _exhaustPileButton = null!;
@@ -40,39 +40,49 @@ public partial class BattleScreen : UiScreen
 
     protected override void Build()
     {
-        AssetLibrary.Background(this, AssetLibrary.Battle, 0.26f);
-        UiTheme.Backdrop(this, new Color(0.03f, 0.08f, 0.11f, 0.84f));
+        AssetLibrary.Background(this, AssetLibrary.Battle, 0.52f);
+        UiTheme.Backdrop(this, new Color(0.025f, 0.055f, 0.07f, 0.66f));
         var margin = new MarginContainer(); UiTheme.FullRect(margin);
-        margin.AddThemeConstantOverride("margin_left", 34); margin.AddThemeConstantOverride("margin_right", 34); margin.AddThemeConstantOverride("margin_top", 26); margin.AddThemeConstantOverride("margin_bottom", 26); AddChild(margin);
-        var root = ScreenChrome.Column(margin, 12);
-        var header = ScreenChrome.Row(root, 12); header.AddChild(UiTheme.Label("战斗", 30, UiTheme.Frost));
+        margin.AddThemeConstantOverride("margin_left", 22); margin.AddThemeConstantOverride("margin_right", 22); margin.AddThemeConstantOverride("margin_top", 16); margin.AddThemeConstantOverride("margin_bottom", 16); AddChild(margin);
+        var root = ScreenChrome.Column(margin, 8);
+        var header = ScreenChrome.Row(root, 10);
+        header.AddChild(UiTheme.Label("霜原遭遇  ·  HOSTILE CONTACT", 22, UiTheme.Frost));
+        _playerStateLabel = UiTheme.Label("HP 30 / 30   护盾 0", 14, UiTheme.Muted);
+        header.AddChild(_playerStateLabel);
         _turnLabel = UiTheme.Label("回合 1", 18, UiTheme.Accent); _turnLabel.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill; _turnLabel.HorizontalAlignment = HorizontalAlignment.Right; header.AddChild(_turnLabel);
-        var menu = ScreenChrome.AddNav(header, this, "主菜单", "menu"); menu.CustomMinimumSize = new Vector2(150, 44);
+        var menu = ScreenChrome.AddNav(header, this, "主菜单", "menu"); menu.CustomMinimumSize = new Vector2(128, 40);
 
-        var arena = ScreenChrome.PanelContent(root, "霜原遭遇 · 战场", new Color(0.09f, 0.16f, 0.20f, 0.93f)); arena.CustomMinimumSize = new Vector2(0, 220); arena.SizeFlagsVertical = Control.SizeFlags.ExpandFill;
-        AssetLibrary.Thumbnail(arena, "res://assets/scenes/battle-normal.webp", new Vector2(0, 104)).SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
-        var foeRow = ScreenChrome.Row(arena, 16);
-        var playerPanel = new PanelContainer(); playerPanel.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill; playerPanel.AddThemeStyleboxOverride("panel", UiTheme.Box(new Color("203942"), 10, new Color("385C66"), 1)); foeRow.AddChild(playerPanel);
-        var playerContent = ScreenChrome.Column(playerPanel, 6); playerContent.AddChild(UiTheme.Label("远征者", 17, UiTheme.Frost));
-        AssetLibrary.Thumbnail(playerContent, AssetLibrary.CharacterPortrait("shuangling"), new Vector2(84, 72));
-        _playerStateLabel = UiTheme.Label("HP 30 / 30   护盾 0", 14, UiTheme.Muted); playerContent.AddChild(_playerStateLabel);
-        _playerTargetButton = UiTheme.Button("选择自己", new Vector2(150, 36)); _playerTargetButton.Pressed += SelectPlayerTarget; playerContent.AddChild(_playerTargetButton);
-        _enemyList = ScreenChrome.Column(foeRow, 6); _enemyList.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill; _enemyList.AddChild(UiTheme.Label("敌方编组", 17, UiTheme.Frost));
+        // The stage owns the full scene image; units float over it like the reference battle view.
+        var arena = new Control { CustomMinimumSize = new Vector2(0, 300), SizeFlagsVertical = Control.SizeFlags.ExpandFill };
+        root.AddChild(arena);
+        AssetLibrary.Background(arena, AssetLibrary.Battle, 0.30f);
+        UiTheme.Backdrop(arena, new Color(0.02f, 0.06f, 0.08f, 0.40f));
+        var stageMargin = new MarginContainer(); UiTheme.FullRect(stageMargin);
+        stageMargin.AddThemeConstantOverride("margin_left", 24); stageMargin.AddThemeConstantOverride("margin_right", 24); stageMargin.AddThemeConstantOverride("margin_top", 28); stageMargin.AddThemeConstantOverride("margin_bottom", 22); arena.AddChild(stageMargin);
+        UiMotion.Enter(stageMargin, 0.05);
+        var foeRow = ScreenChrome.Row(stageMargin, 36); foeRow.SizeFlagsVertical = Control.SizeFlags.ExpandFill;
+        var playerPanel = new PanelContainer(); playerPanel.CustomMinimumSize = new Vector2(210, 0); playerPanel.AddThemeStyleboxOverride("panel", UiTheme.Box(new Color(0.035f, 0.12f, 0.15f, 0.86f), 4, new Color("6B828A"), 1)); foeRow.AddChild(playerPanel);
+        var playerContent = ScreenChrome.Column(playerPanel, 6); playerContent.AddChild(UiTheme.Label("远征者  ·  YOU", 16, UiTheme.Frost));
+        var playerPortrait = AssetLibrary.Thumbnail(playerContent, "res://assets/brand-mark-codename7.png", new Vector2(150, 152));
+        playerPortrait.ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize;
+        _playerTargetButton = UiTheme.Button("选择自己", new Vector2(150, 38)); _playerTargetButton.Pressed += SelectPlayerTarget; playerContent.AddChild(_playerTargetButton);
+        _enemyList = ScreenChrome.Row(foeRow, 12); _enemyList.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill; _enemyList.Alignment = BoxContainer.AlignmentMode.Center;
 
-        var combatRow = ScreenChrome.Row(root, 12); combatRow.CustomMinimumSize = new Vector2(0, 270);
-        var piles = ScreenChrome.PanelContent(combatRow, "牌堆", UiTheme.PanelRaised); piles.CustomMinimumSize = new Vector2(190, 0);
-        _drawPileButton = UiTheme.Button("▣\n牌库\n0", new Vector2(156, 86)); _drawPileButton.Pressed += () => _corePort?.RequestPileView("draw"); piles.AddChild(_drawPileButton);
-        _discardPileButton = UiTheme.Button("▤\n弃牌\n0", new Vector2(156, 86)); _discardPileButton.Pressed += () => _corePort?.RequestPileView("discard"); piles.AddChild(_discardPileButton);
-        _exhaustPileButton = UiTheme.Button("◇\n消耗\n0", new Vector2(156, 86)); _exhaustPileButton.Pressed += () => _corePort?.RequestPileView("exhaust"); piles.AddChild(_exhaustPileButton);
-        var handPanel = ScreenChrome.PanelContent(combatRow, "手牌", UiTheme.PanelSurface); handPanel.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
-        _handLayout = new CardHandLayout { CustomMinimumSize = new Vector2(0, 220), SizeFlagsHorizontal = Control.SizeFlags.ExpandFill, SizeFlagsVertical = Control.SizeFlags.ExpandFill }; _handLayout.CardSelected += OnCardSelected; handPanel.AddChild(_handLayout);
-        _handLayout.SetCards(new[] { "初始攻击", "守势", "回响", "破阵", "余烬" });
-        var controls = ScreenChrome.PanelContent(combatRow, "行动", UiTheme.PanelRaised); controls.CustomMinimumSize = new Vector2(190, 0);
-        _energyLabel = UiTheme.Label("能量 0 / 0", 22, UiTheme.AkMint); _energyLabel.HorizontalAlignment = HorizontalAlignment.Center; controls.AddChild(_energyLabel);
-        _statusLabel = UiTheme.Label("可以行动", 14, UiTheme.Muted); _statusLabel.HorizontalAlignment = HorizontalAlignment.Center; controls.AddChild(_statusLabel);
-        var endTurn = UiTheme.Button("结束回合", new Vector2(156, 56)); endTurn.Pressed += OnEndTurn; controls.AddChild(endTurn); endTurn.GrabFocus();
-        var backMap = ScreenChrome.AddNav(controls, this, "返回地图", "map"); backMap.CustomMinimumSize = new Vector2(156, 44);
-        var footer = ScreenChrome.Row(root, 8); ScreenChrome.AddBody(footer, "选择手牌查看详情；牌库与弃牌堆可打开查看。");
+        var combatRow = ScreenChrome.Row(root, 8); combatRow.CustomMinimumSize = new Vector2(0, 258);
+        var piles = ScreenChrome.Column(combatRow, 5); piles.CustomMinimumSize = new Vector2(112, 0); piles.AddChild(UiTheme.Label("牌 堆", 12, UiTheme.Muted));
+        _drawPileButton = UiTheme.Button("▣  牌库\n0", new Vector2(110, 62)); _drawPileButton.Pressed += () => _corePort?.RequestPileView("draw"); piles.AddChild(_drawPileButton);
+        _discardPileButton = UiTheme.Button("▤  弃牌\n0", new Vector2(110, 62)); _discardPileButton.Pressed += () => _corePort?.RequestPileView("discard"); piles.AddChild(_discardPileButton);
+        _exhaustPileButton = UiTheme.Button("◇  消耗\n0", new Vector2(110, 62)); _exhaustPileButton.Pressed += () => _corePort?.RequestPileView("exhaust"); piles.AddChild(_exhaustPileButton);
+        var handPanel = new PanelContainer { SizeFlagsHorizontal = Control.SizeFlags.ExpandFill };
+        handPanel.AddThemeStyleboxOverride("panel", UiTheme.Box(new Color(0.025f, 0.07f, 0.09f, 0.76f), 3, new Color("496873"), 1)); combatRow.AddChild(handPanel);
+        _handLayout = new CardHandLayout { CustomMinimumSize = new Vector2(0, 246), SizeFlagsHorizontal = Control.SizeFlags.ExpandFill, SizeFlagsVertical = Control.SizeFlags.ExpandFill }; _handLayout.CardSelected += OnCardSelected; handPanel.AddChild(_handLayout);
+        _handLayout.SetCards(System.Array.Empty<string>());
+        var controls = ScreenChrome.Column(combatRow, 7); controls.CustomMinimumSize = new Vector2(164, 0);
+        _energyLabel = UiTheme.Label("能量 0 / 0", 21, UiTheme.AkMint); _energyLabel.HorizontalAlignment = HorizontalAlignment.Center; controls.AddChild(_energyLabel);
+        _statusLabel = UiTheme.Label("可以行动", 13, UiTheme.Muted); _statusLabel.HorizontalAlignment = HorizontalAlignment.Center; _statusLabel.SizeFlagsVertical = Control.SizeFlags.ExpandFill; controls.AddChild(_statusLabel);
+        var endTurn = UiTheme.Button("结束回合", new Vector2(150, 54)); endTurn.Pressed += OnEndTurn; controls.AddChild(endTurn); endTurn.GrabFocus();
+        var backMap = ScreenChrome.AddNav(controls, this, "返回地图", "map"); backMap.CustomMinimumSize = new Vector2(150, 42);
+        arena.Modulate = new Color(1, 1, 1, 0.0f); arena.CreateTween().TweenProperty(arena, "modulate", Colors.White, 0.55f).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
     }
 
     private void OnEndTurn() => _corePort?.RequestEndTurn();
@@ -82,6 +92,7 @@ public partial class BattleScreen : UiScreen
         if (index < 0 || index >= _handCardIds.Length) return;
         if (_pendingCardIndex < 0)
         {
+            _handLayout.PopCard(index);
             _pendingCardIndex = index; _pendingTargetKind = TargetKind(index); _fuelIndices.Clear();
             _handLayout.SetCardSelected(index, true);
             var required = InfuseCount(index);
@@ -130,18 +141,31 @@ public partial class BattleScreen : UiScreen
         _playerTargetId = string.IsNullOrWhiteSpace(snapshot.PlayerTargetId) ? "player" : snapshot.PlayerTargetId;
         _handCardIds = snapshot.HandCardIds; _handInfuseCounts = snapshot.HandCardInfuseCounts; _handTargetKinds = snapshot.HandCardTargetKinds;
         _pendingCardIndex = -1; _pendingTargetKind = "none"; _fuelIndices.Clear(); _handLayout.SetCards(snapshot.HandCardLabels);
-        foreach (var child in _enemyList.GetChildren()) if (child != _enemyList.GetChild(0)) child.QueueFree();
+        foreach (var child in _enemyList.GetChildren()) child.QueueFree();
         if (snapshot.Enemies.Length == 0)
         {
             _enemyList.AddChild(UiTheme.Label("敌方单位为零", 14, UiTheme.Muted));
         }
         foreach (var enemy in snapshot.Enemies)
         {
-            var target = UiTheme.Button($"{enemy.Name}  HP {enemy.Hp}/{enemy.MaxHp}  护盾 {enemy.Block}  意图 {enemy.Attack}", new Vector2(0, 42));
-            target.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill; target.Disabled = enemy.Defeated;
-            var targetId = enemy.Id; target.Pressed += () => SelectEnemyTarget(targetId); _enemyList.AddChild(target);
+            var unit = new PanelContainer { CustomMinimumSize = new Vector2(154, 0) };
+            unit.AddThemeStyleboxOverride("panel", UiTheme.Box(new Color(0.035f, 0.09f, 0.11f, 0.88f), 4, enemy.Defeated ? new Color("435963") : new Color("8B615C"), 1));
+            var content = ScreenChrome.Column(unit, 4);
+            content.AddChild(UiTheme.Label(enemy.Name, 15, enemy.Defeated ? UiTheme.Muted : UiTheme.Frost));
+            var enemyPortrait = AssetLibrary.Thumbnail(content, "res://assets/portraits/enemy-infantry.webp", new Vector2(130, 126));
+            enemyPortrait.ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize;
+            content.AddChild(UiTheme.Label($"HP {enemy.Hp}/{enemy.MaxHp}   盾 {enemy.Block}", 12, UiTheme.Muted));
+            content.AddChild(UiTheme.Label($"意图  {enemy.Attack}", 12, UiTheme.Accent));
+            var target = UiTheme.Button(enemy.Defeated ? "已击倒" : "选择目标", new Vector2(130, 34));
+            target.Disabled = enemy.Defeated;
+            var targetId = enemy.Id; target.Pressed += () => { UiMotion.Pop(unit); SelectEnemyTarget(targetId); }; content.AddChild(target);
+            _enemyList.AddChild(unit);
         }
-        var portrait = AssetLibrary.CharacterPortrait(snapshot.CharacterId); // character art follows the active Core id
-        if (_playerStateLabel.GetParent() is VBoxContainer content && content.GetChildCount() > 1 && content.GetChild(1) is TextureRect image) image.Texture = GD.Load<Texture2D>(portrait);
+        var portrait = CharacterPortrait(snapshot.CharacterId);
+        if (_playerTargetButton.GetParent() is VBoxContainer playerContent && playerContent.GetChildCount() > 1 && playerContent.GetChild(1) is TextureRect image && portrait != null)
+            image.Texture = GD.Load<Texture2D>(portrait);
     }
+
+    private static string? CharacterPortrait(string characterId)
+        => AssetLibrary.CharacterBattle(characterId);
 }

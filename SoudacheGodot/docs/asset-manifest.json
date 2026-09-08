@@ -6,14 +6,16 @@
   "referenceViewport": "1440x900",
   "assets": [
     { "path": "assets/brand-mark-codename7.png", "source": "搜打撤/game/assets/brand-mark-codename7.png", "use": "application icon and brand mark", "state": "connected" },
+    { "path": "assets/backgrounds/wallpaper-original.webp", "source": "搜打撤/game/assets/reconstruction/wallpaper-original.webp", "use": "title backdrop matching the original homepage", "state": "connected" },
     { "path": "assets/backgrounds/title-hero-ascension.webp", "source": "搜打撤/game/assets/title-hero-ascension.webp", "use": "title backdrop", "state": "connected" },
     { "path": "assets/backgrounds/board-backdrop-wreck.webp", "source": "搜打撤/game/assets/board-backdrop-wreck.webp", "use": "board backdrop", "state": "available" },
-    { "path": "assets/backgrounds/hub-bg-rhine.png", "source": "搜打撤/game/assets/hub-bg-rhine.png", "use": "run preparation backdrop", "state": "connected" },
-    { "path": "assets/portraits/shuangling.png", "source": "搜打撤/game/design/ascension-redesign/assets/char-shuangling.png", "use": "霜翎 roster/character selection", "state": "connected" },
-    { "path": "assets/portraits/baiqi.png", "source": "搜打撤/game/design/ascension-redesign/assets/char-baiqi.png", "use": "白契 roster/character selection", "state": "connected" },
-    { "path": "assets/portraits/lituan.png", "source": "搜打撤/game/design/ascension-redesign/assets/char-lituan.png", "use": "栗团 roster/character selection", "state": "connected" },
-    { "path": "assets/portraits/xuanli.png", "source": "搜打撤/game/design/ascension-redesign/assets/char-xuanli.png", "use": "玄砾 roster/character selection", "state": "connected" },
-    { "path": "assets/portraits/dengkui.png", "source": "搜打撤/game/design/ascension-redesign/assets/char-dengkui.png", "use": "灯葵 roster/character selection", "state": "connected" },
+    { "path": "assets/backgrounds/hub-wallpaper.jpg", "source": "搜打撤/game/assets/scenes/hub-wallpaper.jpg", "use": "original base/run preparation backdrop", "state": "connected" },
+    { "path": "assets/backgrounds/battle-normal-anime-v2.webp", "source": "搜打撤/game/assets/scenes/battle-normal-anime-v2.webp", "use": "original normal battle backdrop", "state": "connected" },
+    { "path": "assets/backgrounds/event-bandits-anime-v2.webp", "source": "搜打撤/game/assets/scenes/event-bandits-anime-v2.webp", "use": "original bandit battle backdrop", "state": "connected" },
+    { "path": "assets/backgrounds/scene-altar-anime-v2.webp", "source": "搜打撤/game/assets/scenes/scene-altar-anime-v2.webp", "use": "original altar battle backdrop", "state": "connected" },
+    { "path": "assets/characters/wu/*", "source": "C:/Users/太平/Downloads/暂存美术/无", "use": "无 archive, HUD and battle presentation", "state": "connected" },
+    { "path": "assets/characters/chang-wu-yu/*", "source": "C:/Users/太平/Downloads/暂存美术/常无欲", "use": "常无欲 archive, HUD and battle presentation", "state": "connected" },
+    { "path": "assets/characters/bai-ta/*", "source": "C:/Users/太平/Downloads/暂存美术/白塔", "use": "白塔 archive and HUD presentation; battle reuses archive pending confirmed battle art", "state": "connected" },
     { "path": "assets/portraits/enemy-infantry.webp", "source": "搜打撤/game/assets/portraits/cut/enemies/infantry.webp", "use": "default encounter portrait", "state": "connected" },
     { "path": "assets/map/map-bg.png", "source": "搜打撤/docs/redesign/assets/map-bg.png", "use": "map base layer", "state": "connected" },
     { "path": "assets/map/map-mid.png", "source": "搜打撤/docs/redesign/assets/map-mid.png", "use": "map mid layer", "state": "connected" },
@@ -42,7 +44,7 @@
     { "path": "assets/audio/sfx/defeat.ogg", "source": "搜打撤/game/assets/sfx/battle/defeat-1.ogg", "use": "defeat cue", "state": "available" }
   ],
   "notes": [
-    "All five roster slots retain existing Core character IDs and use their exact named ascension-redesign portraits.",
-    "Event/shop/chest images are localized and recorded for snapshot-driven room presentation; no CSS artwork is used."
+    "All five roster slots retain their gameplay rules and save IDs; only 无、常无欲、白塔 have confirmed art, while slots IV and V intentionally render empty placeholders.",
+    "Original CSS/motion.js layout and timing values are translated to Godot Control/Tween presentation."
   ]
 }

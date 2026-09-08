@@ -1,9 +1,11 @@
 import { describe, it, expect } from 'vitest';
 import { CHARACTERS, characterFor, migrateCharacterProgress, migrateRunCharacter } from '../game/src/characters.js';
 describe('人物身份与历史存档', () => {
-  it('五人各有唯一身份及规则，历史职业可解析', () => {
+  it('五个可选槽各有唯一身份及规则，历史职业可解析', () => {
     expect(new Set(CHARACTERS.map(c => c.id)).size).toBe(5);
     expect(new Set(CHARACTERS.map(c => c.rulesetId)).size).toBe(5);
+    expect(CHARACTERS.slice(0, 3).map(c => c.name)).toEqual(['无', '常无欲', '白塔']);
+    expect(CHARACTERS.slice(3).every(c => c.visualId === null)).toBe(true);
     expect(characterFor('剑客').id).toBe('shuangling');
   });
   it('保留更高历史进度，幂等且不覆盖新人物进度', () => {

@@ -1,8 +1,8 @@
 {
   "characters": [
     {
-      "bg": "人物外观与背景设定以五张最终立绘为准。",
-      "color": "#ed9b53",
+      "bg": "以当前角色档案和战斗立绘为准。",
+      "color": "#a9d9ef",
       "hair": "#e7edf0",
       "id": "shuangling",
       "name": "无",
@@ -11,12 +11,12 @@
       "rulesetId": "侠客",
       "scale": 1,
       "skin": "#edc3ac",
-      "tag": "待立绘确认",
-      "task": "待五张立绘完成后补充。",
-      "visualId": "shuangling"
+      "tag": "已接入正式美术",
+      "task": "探索升格会遗址。",
+      "visualId": "wu"
     },
     {
-      "bg": "人物外观与背景设定以五张最终立绘为准。",
+      "bg": "以当前角色档案和战斗立绘为准。",
       "color": "#ad9ddd",
       "hair": "#29313d",
       "id": "baiqi",
@@ -26,12 +26,12 @@
       "rulesetId": "降临者",
       "scale": 1.12,
       "skin": "#dec0af",
-      "tag": "待立绘确认",
-      "task": "待五张立绘完成后补充。",
-      "visualId": "baiqi"
+      "tag": "已接入正式美术",
+      "task": "追索冬日猜想。",
+      "visualId": "chang-wu-yu"
     },
     {
-      "bg": "人物外观与背景设定以五张最终立绘为准。",
+      "bg": "以当前角色档案和战斗立绘为准。",
       "color": "#e9bd69",
       "hair": "#78533b",
       "id": "lituan",
@@ -41,39 +41,39 @@
       "rulesetId": "法师",
       "scale": 0.74,
       "skin": "#e1b191",
-      "tag": "待立绘确认",
-      "task": "待五张立绘完成后补充。",
-      "visualId": "lituan"
+      "tag": "已接入正式美术",
+      "task": "记录异常回响。",
+      "visualId": "bai-ta"
     },
     {
-      "bg": "人物外观与背景设定以五张最终立绘为准。",
-      "color": "#d0805a",
-      "hair": "#ecedf0",
+      "bg": "角色资料与美术暂留空。",
+      "color": "#86929a",
+      "hair": "#999999",
       "id": "xuanli",
-      "name": "玄砾",
-      "outfit": "#303b42",
+      "name": "待定角色 IV",
+      "outfit": "#444444",
       "role": "重击 · 护甲",
       "rulesetId": "战士",
-      "scale": 1.25,
-      "skin": "#69463d",
-      "tag": "待立绘确认",
-      "task": "待五张立绘完成后补充。",
-      "visualId": "xuanli"
+      "scale": 1,
+      "skin": "#777777",
+      "tag": "美术待定",
+      "task": "待后续确认。",
+      "visualId": null
     },
     {
-      "bg": "人物外观与背景设定以五张最终立绘为准。",
-      "color": "#81bcb0",
-      "hair": "#285a59",
+      "bg": "角色资料与美术暂留空。",
+      "color": "#799c94",
+      "hair": "#999999",
       "id": "dengkui",
-      "name": "灯葵",
-      "outfit": "#dedbd0",
+      "name": "待定角色 V",
+      "outfit": "#444444",
       "role": "修复 · 抑制",
       "rulesetId": "牧师",
       "scale": 1,
-      "skin": "#dcb397",
-      "tag": "待立绘确认",
-      "task": "待五张立绘完成后补充。",
-      "visualId": "dengkui"
+      "skin": "#777777",
+      "tag": "美术待定",
+      "task": "待后续确认。",
+      "visualId": null
     }
   ],
   "legacy": {
