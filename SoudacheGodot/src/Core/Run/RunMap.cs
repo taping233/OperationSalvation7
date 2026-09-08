@@ -106,9 +106,14 @@ public sealed class RunMap
             }),
             new RunLayer("L2", "中环 · 废墟市街", 20, RunRisk.Medium, l2, new[]
             {
+                new RunDoor("p1", 0, 0, 1, false), new RunDoor("p2", 5, 0, 8, false),
+                new RunDoor("p3", 10, 0, 15, false), new RunDoor("p4", 15, 0, 22, false),
                 new RunDoor("p5", 13, 2, 8, false), new RunDoor("p6", 18, 2, 11, false)
             }),
-            new RunLayer("L3", "内环 · 污染核心区", 12, RunRisk.High, l3, altarEntrances: new[] { 1, 11 })
+            new RunLayer("L3", "内环 · 污染核心区", 12, RunRisk.High, l3, new[]
+            {
+                new RunDoor("p5", 8, 1, 13, false), new RunDoor("p6", 11, 1, 18, false)
+            }, new[] { 1, 11 })
         }, new[]
         {
             ("boss_general", "锈蚀将军", 50, 5), ("boss_orc", "兽群之主", 45, 4), ("boss_elem", "辐射领主", 48, 8)

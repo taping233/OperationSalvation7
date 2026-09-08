@@ -6,9 +6,11 @@ namespace Soudache;
 public sealed class CardInstance
 {
     public StableId InstanceId { get; }
-    public StableId DefinitionId { get; }
+    public StableId DefinitionId { get; private set; }
     public int UpgradeLevel { get; private set; }
     public int? CostOverride { get; private set; }
+    public bool Retain { get; private set; }
+    public bool CanBeInfused { get; private set; } = true;
 
     public CardInstance(StableId instanceId, StableId definitionId, int upgradeLevel = 0, int? costOverride = null)
     {
@@ -39,5 +41,16 @@ public sealed class CardInstance
     {
         if (cost is < 0) throw new ArgumentOutOfRangeException(nameof(cost));
         CostOverride = cost;
+    }
+
+    public void SetRetention(bool retained = true) => Retain = retained;
+    public void SetInfusable(bool infusable) => CanBeInfused = infusable;
+
+    public void Transform(StableId definitionId, int? costOverride = null)
+    {
+        if (!definitionId.IsValid) throw new ArgumentException("A transformed card needs a stable id.", nameof(definitionId));
+        if (costOverride is < 0) throw new ArgumentOutOfRangeException(nameof(costOverride));
+        DefinitionId = definitionId;
+        CostOverride = costOverride;
     }
 }

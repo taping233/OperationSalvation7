@@ -25,7 +25,8 @@ public partial class MenuScreen : UiScreen
 
     protected override void Build()
     {
-        UiTheme.Backdrop(this, UiTheme.Ink);
+        AssetLibrary.Background(this, AssetLibrary.Title, 0.42f);
+        UiTheme.Backdrop(this, new Color(0.04f, 0.09f, 0.12f, 0.66f));
 
         var margin = new MarginContainer();
         UiTheme.FullRect(margin);
@@ -41,18 +42,26 @@ public partial class MenuScreen : UiScreen
         intro.CustomMinimumSize = new Vector2(560, 0);
         intro.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
         intro.AddChild(UiTheme.Label("升格会的的冬日猜想", 38, UiTheme.Frost));
+        var markRow = ScreenChrome.Row(intro, 8);
+        AssetLibrary.Thumbnail(markRow, AssetLibrary.CorePortraits[0], new Vector2(80, 52));
+        markRow.AddChild(UiTheme.Label("ASCENSION COUNCIL", 13, UiTheme.AkMint));
         intro.AddChild(UiTheme.Label("ASCENSION COUNCIL · WINTER REVERIE", 15, UiTheme.Accent));
         intro.AddChild(UiTheme.Label("一场关于远征、选择与归途的桌面冒险。\nGodot 迁移版已接入数据、远征状态与卡牌战斗核心。", 18, UiTheme.Muted));
 
-        var roster = ScreenChrome.PanelContent(intro, "远征名册 · 五名核心角色", UiTheme.PanelSurface);
+        var roster = ScreenChrome.PanelContent(intro, "远征名册 · 五名核心角色", new Color(0.09f, 0.17f, 0.21f, 0.9f));
         ScreenChrome.AddBody(roster, "霜翎   ·   白契   ·   栗团   ·   玄砾   ·   灯葵");
+        var portraits = new HBoxContainer { SizeFlagsHorizontal = Control.SizeFlags.ExpandFill };
+        portraits.AddThemeConstantOverride("separation", 8);
+        roster.AddChild(portraits);
+        foreach (var portrait in AssetLibrary.CorePortraits)
+            AssetLibrary.Thumbnail(portraits, portrait, new Vector2(76, 86));
         ScreenChrome.AddBody(roster, "角色概念与原版玩法保持不变，表现层逐步迁移至 Godot。");
 
         var menuPanel = ScreenChrome.PanelContent(layout, "远征终端", UiTheme.PanelRaised);
         menuPanel.CustomMinimumSize = new Vector2(360, 0);
         var start = ScreenChrome.AddNav(menuPanel, this, "开始远征", "run");
         ScreenChrome.AddNav(menuPanel, this, "继续地图", "map");
-        ScreenChrome.AddNav(menuPanel, this, "战斗演练", "battle");
+        ScreenChrome.AddNav(menuPanel, this, "进入战斗", "battle");
         _saveStatus = UiTheme.Label("五槽存档", 14, UiTheme.Muted);
         menuPanel.AddChild(_saveStatus);
         for (var slot = 0; slot < 5; slot++)

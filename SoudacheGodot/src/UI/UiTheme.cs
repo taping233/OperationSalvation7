@@ -2,7 +2,7 @@ using Godot;
 
 namespace SoudacheGodot.UI;
 
-/// A small local theme factory keeps placeholder screens consistent until the art/theme pass lands.
+/// Shared local theme factory for the Godot presentation layer.
 public static class UiTheme
 {
     public static readonly Color Ink = new("101E27");

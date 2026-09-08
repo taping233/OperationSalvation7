@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Soudache;
 
@@ -9,6 +10,7 @@ public enum CardZone
     Hand,
     Discard,
     Exhaust
+    ,Storage
 }
 
 /// <summary>
@@ -20,16 +22,29 @@ public sealed class CardDeck
     private readonly List<CardInstance> _hand = new();
     private readonly List<CardInstance> _discard = new();
     private readonly List<CardInstance> _exhaust = new();
+    private readonly List<CardInstance> _storage = new();
     private readonly Dictionary<StableId, CardZone> _zones = new();
+    public bool AutoReshuffle { get; set; } = true;
+    public int HandCapacity { get; set; } = 8;
 
     public IReadOnlyList<CardInstance> DrawPile => _drawPile;
     public IReadOnlyList<CardInstance> Hand => _hand;
     public IReadOnlyList<CardInstance> Discard => _discard;
     public IReadOnlyList<CardInstance> Exhaust => _exhaust;
+    public IReadOnlyList<CardInstance> Storage => _storage;
+    public int StorageCapacity { get; private set; }
+    public IEnumerable<CardInstance> AllCards => _drawPile.Concat(_hand).Concat(_discard).Concat(_exhaust).Concat(_storage);
     public int Count => _zones.Count;
 
     public void AddToDrawPile(CardInstance card) => AddNew(card, CardZone.DrawPile);
-    public void AddToHand(CardInstance card) => AddNew(card, CardZone.Hand);
+    public bool AddToHand(CardInstance card)
+    {
+        ArgumentNullException.ThrowIfNull(card);
+        if (HandCapacity < 0) throw new InvalidOperationException("Hand capacity cannot be negative.");
+        if (_hand.Count >= HandCapacity) return false;
+        AddNew(card, CardZone.Hand);
+        return true;
+    }
     public void AddToDiscard(CardInstance card) => AddNew(card, CardZone.Discard);
     public void AddToExhaust(CardInstance card) => AddNew(card, CardZone.Exhaust);
 
@@ -45,7 +60,7 @@ public sealed class CardDeck
     {
         card = null;
         if (!_zones.ContainsKey(instanceId)) return false;
-        card = FindIn(_drawPile, instanceId) ?? FindIn(_hand, instanceId) ?? FindIn(_discard, instanceId) ?? FindIn(_exhaust, instanceId);
+        card = FindIn(_drawPile, instanceId) ?? FindIn(_hand, instanceId) ?? FindIn(_discard, instanceId) ?? FindIn(_exhaust, instanceId) ?? FindIn(_storage, instanceId);
         return card is not null;
     }
 
@@ -56,9 +71,10 @@ public sealed class CardDeck
         var drawn = 0;
         while (drawn < count)
         {
+            if (_hand.Count >= HandCapacity) break;
             if (_drawPile.Count == 0)
             {
-                if (_discard.Count == 0) break;
+                if (_discard.Count == 0 || !AutoReshuffle) break;
                 _drawPile.AddRange(_discard);
                 _discard.Clear();
                 foreach (var reshuffledCard in _drawPile) _zones[reshuffledCard.InstanceId] = CardZone.DrawPile;
@@ -125,10 +141,23 @@ public sealed class CardDeck
 
     public bool IsInHand(StableId instanceId) => FindInHand(instanceId) is not null;
 
+    public void SetStorageCapacity(int capacity)
+    {
+        if (capacity < 0) throw new ArgumentOutOfRangeException(nameof(capacity));
+        if (capacity < _storage.Count) throw new InvalidOperationException("Storage capacity cannot evict cards.");
+        StorageCapacity = capacity;
+    }
+
+    public bool Store(StableId instanceId)
+    {
+        if (StorageCapacity <= _storage.Count || !IsInHand(instanceId)) return false;
+        return Move(instanceId, CardZone.Storage);
+    }
+
     public void ValidateInvariant()
     {
         var seen = new HashSet<StableId>();
-        foreach (var list in new[] { _drawPile, _hand, _discard, _exhaust })
+        foreach (var list in new[] { _drawPile, _hand, _discard, _exhaust, _storage })
             foreach (var card in list)
                 if (!seen.Add(card.InstanceId) || !_zones.TryGetValue(card.InstanceId, out _))
                     throw new InvalidOperationException("Card zones are not unique.");
@@ -164,6 +193,7 @@ public sealed class CardDeck
         CardZone.Hand => _hand,
         CardZone.Discard => _discard,
         CardZone.Exhaust => _exhaust,
+        CardZone.Storage => _storage,
         _ => throw new ArgumentOutOfRangeException(nameof(zone))
     };
 

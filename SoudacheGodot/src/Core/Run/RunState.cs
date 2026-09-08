@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Soudache;
 
-public enum RunPhase { Ready, Battle, Shop, Campfire, Chest, Event, AwaitingDoor, Altar, Victory, Defeat }
+public enum RunPhase { Ready, Battle, Shop, Campfire, Chest, Event, AwaitingDoor, Altar, Settlement, Victory, Defeat }
 
 public sealed class RunResources
 {
@@ -17,10 +17,22 @@ public sealed class RunResources
 public sealed record RunRoll(int Dice, int Layer, int FromPosition, int ToPosition, IReadOnlyList<int> Path);
 public sealed record RunRoomResult(RunRoomType Type, int Layer, int Position, int Amount = 0, string Message = "");
 public sealed record RunEventResult(string Text, int Coins, int Wood, int Rations, bool CreatedChest);
-public sealed record RunChestLoot(string Kind, int Coins, IReadOnlyList<string> Items);
-public sealed record RunShopOffer(string Id, RunRoomType Resource, int Quantity, int Price, bool Sold = false);
+public sealed record RunChestLoot(string Kind, int Coins, IReadOnlyList<string> Items, bool IsClass = false,
+    bool RequiresChoice = false, int SelectedIndex = 0,
+    IReadOnlyList<string>? AcceptedItems = null, IReadOnlyList<string>? DeferredItems = null);
+public sealed record RunShopOffer(string Id, RunRoomType Resource, int Quantity, int Price, bool Sold = false,
+    RunCard? Card = null, bool IsMystery = false);
+public sealed record RunEventChoice(string Id, string Label, string Detail, string Tone = "");
+public sealed record RunChestPreview(string Kind, bool IsBoss, bool IsClass, int CoinMin, int CoinMax,
+    IReadOnlyList<string> Candidates);
+public sealed record RunDoorOption(string Pair, bool CanEnter, bool CanExtract, int TargetLayer, int TargetPosition, string Label);
+public sealed record RunSettlementCard(RunCard Card, int Count, bool Deposited);
+public sealed record RunSettlementSnapshot(RunCardSnapshot Card, bool Deposited);
 public sealed record RunSnapshot(ulong Seed, ulong RngState, int LayerIndex, int TrackPosition,
-    int Turns, int Stamina, int Hp, int Coins, int Keys, int Wood, int Rations, RunPhase Phase);
+    int Turns, int Stamina, int Hp, int Coins, int Keys, int Wood, int Rations, RunPhase Phase,
+    RunBaseSnapshot? Base = null, IReadOnlyList<RunCardSnapshot>? OwnedCards = null,
+    IReadOnlyList<RunCardSnapshot>? UsedPocket = null, IReadOnlyList<RunCardSnapshot>? PendingRewards = null,
+    IReadOnlyList<RunSettlementSnapshot>? SettlementCards = null);
 
 /// <summary>
 /// Pure C# run state machine. It has no Godot/node dependency and deliberately keeps all
@@ -33,18 +45,35 @@ public sealed class RunState
     private static readonly string[] InnerPool = { "fire_el", "water_el", "grass_el" };
     private static readonly string[] LootTable = { "绷带", "零散弹药", "瓶装水", "旧地图" };
     private readonly List<RunEnemy> _encounter = new();
-    private readonly Queue<(string Kind, bool IsBoss)> _pendingChests = new();
+    private readonly Queue<(string Kind, bool IsBoss, bool IsClass)> _pendingChests = new();
     private readonly HashSet<string> _discoveredDoors = new(StringComparer.Ordinal);
     private readonly HashSet<int> _defeatedBosses = new();
+    private readonly List<RunCardStack> _ownedCards = new();
+    private readonly List<RunCardStack> _usedPocket = new();
+    private readonly List<RunCard> _shopCardPool = new();
+    private readonly List<RunCard> _classCardPool = new();
+    private readonly List<RunCard> _lootCardPool = new();
+    private readonly Queue<(string Kind, bool IsBoss)> _eventBattleDrops = new();
+    private readonly List<RunCardStack> _pendingRewards = new();
+    private readonly List<RunCardStack> _recoveryCards = new();
+    private readonly List<RunSettlementCard> _settlementCards = new();
     private RunDoor? _pendingDoor;
     private RunPhase _returnAfterChest = RunPhase.Ready;
     private IReadOnlyList<RunShopOffer> _shop = Array.Empty<RunShopOffer>();
     private RunRisk _encounterRisk;
+    private string? _pendingEventId;
+    private IReadOnlyList<RunEventChoice> _eventChoices = Array.Empty<RunEventChoice>();
+    private RunChestPreview? _chestPreview;
 
     public RunMap Map { get; }
     public DeterministicRng Rng { get; }
     public ulong Seed { get; }
     public RunResources Resources { get; } = new();
+    public RunBaseState Base { get; }
+    public IReadOnlyList<RunCardStack> OwnedCards => _ownedCards;
+    public IReadOnlyList<RunCardStack> UsedPocket => _usedPocket;
+    public int BackpackUsed => _ownedCards.Sum(stack => stack.Count);
+    public int BackpackCapacity => Base.BagCapacity;
     public RunPhase Phase { get; private set; } = RunPhase.Ready;
     public int LayerIndex { get; private set; }
     public int TrackPosition { get; private set; }
@@ -56,12 +85,38 @@ public sealed class RunState
     public IReadOnlyList<RunEnemy> Encounter => _encounter;
     public RunRisk EncounterRisk => _encounterRisk;
     public IReadOnlyList<RunShopOffer> Shop => _shop;
+    public IReadOnlyList<RunEventChoice> EventChoices => _eventChoices;
+    public IReadOnlyList<RunCardStack> PendingRewards => _pendingRewards;
+    public IReadOnlyList<RunCardStack> RecoveryCards => _recoveryCards;
+    public IReadOnlyList<RunSettlementCard> SettlementCards => _settlementCards;
+    public RunChestPreview? ChestPreview => _chestPreview;
+    public RunDoorOption? CurrentDoor => CurrentDoorOption();
+    public bool CanExtract => Phase == RunPhase.AwaitingDoor && Stamina > 0 &&
+        (_pendingDoor?.IsExit == true || (CurrentRoomType == RunRoomType.EmergencyExit && Resources.Coins >= RunRules.EmergencyExitCost));
     public IReadOnlySet<int> DefeatedBosses => _defeatedBosses;
     public bool IsFinished => Phase is RunPhase.Victory or RunPhase.Defeat;
 
-    public RunState(ulong seed, RunMap? map = null)
+    public void ConfigureShopCardPool(IEnumerable<RunCard> cards)
+    {
+        ArgumentNullException.ThrowIfNull(cards);
+        _shopCardPool.Clear(); _shopCardPool.AddRange(cards.Where(x => x is not null));
+    }
+    public void ConfigureClassCardPool(IEnumerable<RunCard> cards)
+    {
+        ArgumentNullException.ThrowIfNull(cards);
+        _classCardPool.Clear(); _classCardPool.AddRange(cards.Where(x => x is not null));
+    }
+    public void ConfigureLootCardPool(IEnumerable<RunCard> cards)
+    {
+        ArgumentNullException.ThrowIfNull(cards);
+        _lootCardPool.Clear(); _lootCardPool.AddRange(cards.Where(x => x is not null));
+    }
+
+    public RunState(ulong seed, RunMap? map = null, RunBaseState? baseState = null)
     {
         Seed = seed;
+        Base = baseState ?? new RunBaseState();
+        Resources.Coins = Base.TakeReserveCoins();
         Map = map ?? RunMap.CreateDefault();
         Rng = new DeterministicRng(seed);
         if (!Map.IsConnected(out var unreachable))
@@ -69,7 +124,9 @@ public sealed class RunState
     }
 
     public RunSnapshot CaptureSnapshot() => new(Seed, Rng.State, LayerIndex, TrackPosition, Turns, Stamina, Hp,
-        Resources.Coins, Resources.Keys, Resources.Wood, Resources.Rations, Phase);
+        Resources.Coins, Resources.Keys, Resources.Wood, Resources.Rations, Phase, Base.CaptureSnapshot(),
+        _ownedCards.Select(ToSnapshot).ToArray(), _usedPocket.Select(ToSnapshot).ToArray(), _pendingRewards.Select(ToSnapshot).ToArray(),
+        _settlementCards.Select(x => new RunSettlementSnapshot(ToSnapshot(new RunCardStack(x.Card, x.Count)), x.Deposited)).ToArray());
 
     public static RunState FromSnapshot(RunSnapshot snapshot, RunMap? map = null)
     {
@@ -83,7 +140,7 @@ public sealed class RunState
     public void Restore(RunSnapshot snapshot)
     {
         ArgumentNullException.ThrowIfNull(snapshot);
-        if (snapshot.Phase != RunPhase.Ready) throw new ArgumentException("只能恢复 Ready 状态的运行快照。", nameof(snapshot));
+        if (snapshot.Phase is not (RunPhase.Ready or RunPhase.Settlement)) throw new ArgumentException("只能恢复 Ready 或 Settlement 状态的运行快照。", nameof(snapshot));
         if (snapshot.LayerIndex < 0 || snapshot.LayerIndex >= Map.Layers.Count)
             throw new ArgumentOutOfRangeException(nameof(snapshot.LayerIndex));
         if (snapshot.TrackPosition < 0 || snapshot.TrackPosition >= Map.Layers[snapshot.LayerIndex].RingSize)
@@ -96,8 +153,24 @@ public sealed class RunState
         LayerIndex = snapshot.LayerIndex; TrackPosition = snapshot.TrackPosition; Turns = snapshot.Turns;
         Stamina = snapshot.Stamina; Hp = snapshot.Hp; Resources.Coins = snapshot.Coins; Resources.Keys = snapshot.Keys;
         Resources.Wood = snapshot.Wood; Resources.Rations = snapshot.Rations; Rng.RestoreState(snapshot.RngState);
-        _pendingDoor = null; _pendingChests.Clear(); _encounter.Clear(); _shop = Array.Empty<RunShopOffer>(); _encounterRisk = default; Phase = RunPhase.Ready;
+        if (snapshot.Base is not null) Base.RestoreSnapshot(snapshot.Base);
+        _ownedCards.Clear(); _usedPocket.Clear();
+        if (snapshot.OwnedCards is not null) _ownedCards.AddRange(snapshot.OwnedCards.Select(FromSnapshot));
+        if (snapshot.UsedPocket is not null) _usedPocket.AddRange(snapshot.UsedPocket.Select(FromSnapshot));
+        _pendingRewards.Clear();
+        if (snapshot.PendingRewards is not null) _pendingRewards.AddRange(snapshot.PendingRewards.Select(FromSnapshot));
+        _settlementCards.Clear();
+        if (snapshot.SettlementCards is not null)
+            _settlementCards.AddRange(snapshot.SettlementCards.Select(x => new RunSettlementCard(FromSnapshot(x.Card).Card, x.Card.Count, x.Deposited)));
+        if (BackpackUsed > BackpackCapacity || _ownedCards.Where(x => x.Safe).Sum(x => x.Count) > Base.SafeCapacity)
+            throw new ArgumentException("背包卡牌超过容量。", nameof(snapshot));
+        _pendingDoor = null; _pendingChests.Clear(); _eventBattleDrops.Clear(); _encounter.Clear(); _shop = Array.Empty<RunShopOffer>(); _eventChoices = Array.Empty<RunEventChoice>(); _pendingEventId = null; _encounterRisk = default; Phase = snapshot.Phase;
     }
+
+    private static RunCardSnapshot ToSnapshot(RunCardStack stack) => new(stack.Card.Id, stack.Card.Name, stack.Card.Type, stack.Card.Rarity,
+        stack.Card.SellPrice, stack.Card.Sellable, stack.Card.IsInitialAttack, stack.Card.MaterialKind, stack.Card.MaterialAmount, stack.Count, stack.Safe);
+    private static RunCardStack FromSnapshot(RunCardSnapshot value) => new(new RunCard(value.Id, value.Name, value.Type, value.Rarity,
+        value.SellPrice, value.Sellable, value.IsInitialAttack, value.MaterialKind, value.MaterialAmount), value.Count, value.Safe);
 
     public RunRoll Roll()
     {
@@ -125,6 +198,93 @@ public sealed class RunState
         return CurrentRoomResult();
     }
 
+    public bool AddCard(RunCard card, int count = 1, bool safe = false)
+    {
+        ArgumentNullException.ThrowIfNull(card);
+        if (count <= 0) throw new ArgumentOutOfRangeException(nameof(count));
+        var existing = _ownedCards.FirstOrDefault(x => x.Card.Name == card.Name && x.Safe == safe);
+        if (BackpackUsed + count > BackpackCapacity) return false;
+        if (safe && _ownedCards.Where(x => x.Safe).Sum(x => x.Count) + count > Base.SafeCapacity) return false;
+        if (existing is null) _ownedCards.Add(new RunCardStack(card, count, safe)); else existing.Count += count;
+        return true;
+    }
+
+    public int TakeCardsFromBase(IEnumerable<(string Name, int Count)> selections)
+    {
+        ArgumentNullException.ThrowIfNull(selections);
+        var taken = 0;
+        foreach (var selection in selections)
+        {
+            var source = Base.Stash.FirstOrDefault(x => x.Card.Name == selection.Name);
+            if (source is null) continue;
+            var room = BackpackCapacity - BackpackUsed;
+            if (room <= 0) break;
+            var count = Base.TakeStashCards(selection.Name, Math.Min(selection.Count, room));
+            if (count == 0) continue;
+            AddCard(source.Card, count);
+            taken += count;
+        }
+        return taken;
+    }
+
+    public bool MoveCardToPocket(string name, int count = 1)
+    {
+        var stack = _ownedCards.FirstOrDefault(x => x.Card.Name == name);
+        if (stack is null || count <= 0 || count > stack.Count) return false;
+        stack.Count -= count; if (stack.Count == 0) _ownedCards.Remove(stack);
+        var pocket = _usedPocket.FirstOrDefault(x => x.Card.Name == name);
+        if (pocket is null) _usedPocket.Add(new RunCardStack(stack.Card, count)); else pocket.Count += count;
+        return true;
+    }
+
+    public bool SetCardSafe(string name, int count = 1)
+    {
+        var source = _ownedCards.FirstOrDefault(x => x.Card.Name == name && !x.Safe);
+        var safeUsed = _ownedCards.Where(x => x.Safe).Sum(x => x.Count);
+        if (source is null || count <= 0 || count > source.Count || safeUsed + count > Base.SafeCapacity) return false;
+        source.Count -= count; if (source.Count == 0) _ownedCards.Remove(source);
+        var target = _ownedCards.FirstOrDefault(x => x.Card.Name == name && x.Safe);
+        if (target is null) _ownedCards.Add(new RunCardStack(source.Card, count, true)); else target.Count += count;
+        return true;
+    }
+
+    public bool UnsetCardSafe(string name, int count = 1)
+    {
+        var source = _ownedCards.FirstOrDefault(x => x.Card.Name == name && x.Safe);
+        if (source is null || count <= 0 || count > source.Count) return false;
+        source.Count -= count; if (source.Count == 0) _ownedCards.Remove(source);
+        var target = _ownedCards.FirstOrDefault(x => x.Card.Name == name && !x.Safe);
+        if (target is null) _ownedCards.Add(new RunCardStack(source.Card, count)); else target.Count += count;
+        return true;
+    }
+
+    public bool ReturnCardToBase(string name, int count = 1)
+    {
+        var source = _ownedCards.FirstOrDefault(x => x.Card.Name == name && !x.Safe);
+        if (source is null || count <= 0 || count > source.Count || !Base.DepositCards(new[] { new RunCardStack(source.Card, count) })) return false;
+        source.Count -= count; if (source.Count == 0) _ownedCards.Remove(source);
+        return true;
+    }
+
+    public bool RestorePocketCard(string name, int count = 1)
+    {
+        if (BackpackUsed + count > BackpackCapacity) return false;
+        var stack = _usedPocket.FirstOrDefault(x => x.Card.Name == name);
+        if (stack is null || count <= 0 || count > stack.Count) return false;
+        stack.Count -= count; if (stack.Count == 0) _usedPocket.Remove(stack);
+        return AddCard(stack.Card, count, false);
+    }
+
+    public (bool Ok, int Quantity, int Coins, string Why) SellOwnedCard(string name, int count = 1)
+    {
+        var stack = _ownedCards.FirstOrDefault(x => x.Card.Name == name);
+        if (stack is null) return (false, 0, 0, "empty");
+        if (!stack.Card.Sellable) return (false, 0, 0, "unsellable");
+        var qty = Math.Min(Math.Max(1, count), stack.Count); stack.Count -= qty; if (stack.Count == 0) _ownedCards.Remove(stack);
+        var coins = qty * Math.Max(1, stack.Card.SellPrice); Resources.Coins += coins;
+        return (true, qty, coins, "");
+    }
+
     private void ResolveRoom()
     {
         var room = Map.Layers[LayerIndex].RoomAt(TrackPosition);
@@ -145,7 +305,7 @@ public sealed class RunState
             case RunRoomType.Campfire:
                 Hp = Math.Min(MaxHp, Hp + RunRules.FireHeal); Phase = RunPhase.Campfire; break;
             case RunRoomType.Chest:
-                _pendingChests.Enqueue(("small", false)); _returnAfterChest = RunPhase.Ready; Phase = RunPhase.Chest; break;
+                _pendingChests.Enqueue(("small", false, false)); _returnAfterChest = RunPhase.Ready; Phase = RunPhase.Chest; break;
             case RunRoomType.EmergencyExit: Phase = RunPhase.AwaitingDoor; break;
             default:
                 if (Map.Layers[LayerIndex].DoorAt(TrackPosition) is not null || Map.Layers[LayerIndex].HasAltarEntrance(TrackPosition))
@@ -172,7 +332,30 @@ public sealed class RunState
         return new RunRoomResult(room.Type, LayerIndex, TrackPosition, room.Amount, Describe(room.Type));
     }
 
-    public void CompleteCampfire() { EnsurePhase(RunPhase.Campfire); Phase = RunPhase.Ready; }
+    public RunRoomType CurrentRoomType => Map.Layers[LayerIndex].RoomAt(TrackPosition).Type;
+
+    private RunDoorOption? CurrentDoorOption()
+    {
+        if (Phase != RunPhase.AwaitingDoor) return null;
+        if (_pendingDoor is not null)
+            return new RunDoorOption(_pendingDoor.Pair, true, _pendingDoor.IsExit && Stamina > 0,
+                _pendingDoor.ToLayer, _pendingDoor.ArriveAt, Map.Layers[_pendingDoor.ToLayer].Name);
+        if (CurrentRoomType == RunRoomType.EmergencyExit)
+            return new RunDoorOption("emergency", false, Stamina > 0 && Resources.Coins >= RunRules.EmergencyExitCost, LayerIndex, TrackPosition, "紧急撤离点");
+        if (Map.Layers[LayerIndex].HasAltarEntrance(TrackPosition))
+            return new RunDoorOption("altar", true, false, -1, 0, "污染核心");
+        return null;
+    }
+
+    public void CompleteCampfire(IEnumerable<string>? restoreCards = null)
+    {
+        EnsurePhase(RunPhase.Campfire);
+        if (restoreCards is not null)
+            foreach (var name in restoreCards.Take(RunRules.CampfireRestorePocket)) RestorePocketCard(name);
+        if (_classCardPool.Count > 0 && Rng.NextDouble() < RunRules.CampfireClassCardChance)
+            AddCard(_classCardPool[Rng.NextInt(_classCardPool.Count)]);
+        Phase = RunPhase.Ready;
+    }
     public void LeaveEventWithoutEffect() { EnsurePhase(RunPhase.Event); Phase = RunPhase.Ready; }
     public RunEventResult ResolveEvent()
     {
@@ -186,9 +369,75 @@ public sealed class RunState
                     ? new("辐射风掠过荒原，什么也没发生", 0, 0, 0, false)
                     : new("找到一只未撬过的保险柜！", Rng.NextInt(4, 7), 0, 0, false);
         Resources.Coins += result.Coins; Resources.Wood += result.Wood; Resources.Rations += result.Rations;
-        if (result.CreatedChest) { _pendingChests.Enqueue(("small", false)); _returnAfterChest = RunPhase.Ready; Phase = RunPhase.Chest; }
+        if (result.CreatedChest) { _pendingChests.Enqueue(("small", false, false)); _returnAfterChest = RunPhase.Ready; Phase = RunPhase.Chest; }
         else Phase = RunPhase.Ready;
         return result;
+    }
+
+    public IReadOnlyList<RunEventChoice> DrawEventChoices()
+    {
+        EnsurePhase(RunPhase.Event);
+        var ids = new[] { "goldmine", "airdrop", "chestdraw", "timeskip", "demondeal", "bandits", "mystery", "goldhammer", "relief", "systemsupply" };
+        _pendingEventId = ids[Rng.NextInt(ids.Length)];
+        _eventChoices = EventChoicesFor(_pendingEventId);
+        return _eventChoices;
+    }
+
+    public RunEventResult ChooseEvent(int choiceIndex)
+    {
+        EnsurePhase(RunPhase.Event);
+        if (_pendingEventId is null) DrawEventChoices();
+        if (choiceIndex < 0 || choiceIndex >= _eventChoices.Count) throw new ArgumentOutOfRangeException(nameof(choiceIndex));
+        var choice = _eventChoices[choiceIndex];
+        _pendingEventId = null; _eventChoices = Array.Empty<RunEventChoice>();
+        return ApplyEventChoice(choice.Id);
+    }
+
+    private static IReadOnlyList<RunEventChoice> EventChoicesFor(string id) => id switch
+    {
+        "goldmine" => new[] { new RunEventChoice("goldmine_safe", "收下 3 币", "稳定收益", "ok"), new RunEventChoice("goldmine_deep", "冒险挖深", "+6 币，但损失 3 血", "danger") },
+        "airdrop" => new[] { new RunEventChoice("airdrop_wood", "木材 ×1", "扩建与仓储路线"), new RunEventChoice("airdrop_rations", "口粮 ×1", "为安全格与续航准备"), new RunEventChoice("airdrop_heal", "应急处理", "回复 3 血", "ok") },
+        "chestdraw" => new[] { new RunEventChoice("chest_small", "撬开小型物资箱", "低风险：1 张卡 + 1~2 币"), new RunEventChoice("chest_medium", "赌一把密封物资箱", "高回报：三选一 + 2~3 币", "ok") },
+        "timeskip" => new[] { new RunEventChoice("timeskip_move", "踏入裂隙", "向前 6 格，落点照常结算", "ok") },
+        "demondeal" => new[] { new RunEventChoice("demondeal_trade", "以血换物", "-1 血，获得一件传说物品", "danger") },
+        "bandits" => new[] { new RunEventChoice("bandits_fight", "应 战", "掠夺者 ×5，战胜后密封物资箱 ×2", "danger") },
+        "mystery" => new[] { new RunEventChoice("mystery_supply", "翻找补给柜", "彩色令牌 + 2 币") },
+        "goldhammer" => new[] { new RunEventChoice("goldhammer_strike", "抡起动力锤", "先造成 5 点伤害，一击制敌再 +2 币", "danger") },
+        "relief" => new[] { new RunEventChoice("relief_heal", "接受处理", "回复 6 血", "ok") },
+        _ => new[] { new RunEventChoice("systemsupply_restock", "对接终端", "彩色令牌 + 木材 ×1") }
+    };
+
+    private RunEventResult ApplyEventChoice(string id)
+    {
+        switch (id)
+        {
+            case "goldmine_safe": Resources.Coins += 3; Phase = RunPhase.Ready; return new("你只取走入口附近的矿石，在第二次震动前退了出来。", 3, 0, 0, false);
+            case "goldmine_deep": Resources.Coins += 6; Hp = Math.Max(1, Hp - 3); Phase = RunPhase.Ready; return new("更深处确实埋着富矿，代价是被碎石划开的伤口。", 6, 0, 0, false);
+            case "airdrop_wood": Resources.Wood++; Phase = RunPhase.Ready; return new("你拆下还能承重的结构件。", 0, 1, 0, false);
+            case "airdrop_rations": Resources.Rations++; Phase = RunPhase.Ready; return new("你留下密封完好的口粮。", 0, 0, 1, false);
+            case "airdrop_heal": Hp = Math.Min(MaxHp, Hp + 3); Phase = RunPhase.Ready; return new("箱内的医疗模块仍能完成一次快速处理。", 0, 0, 0, false);
+            case "chest_small": _pendingChests.Enqueue(("small", false, false)); _returnAfterChest = RunPhase.Ready; Phase = RunPhase.Chest; return new("小箱的锁扣应声弹开。", 0, 0, 0, true);
+            case "chest_medium": _pendingChests.Enqueue(("medium", false, false)); _returnAfterChest = RunPhase.Ready; Phase = RunPhase.Chest; return new("密封箱亮起绿色指示灯。", 0, 0, 0, true);
+            case "timeskip_move": MoveWithoutStamina(6); return new("耳鸣骤起又骤停——你已被裂隙卷向前方。", 0, 0, 0, false);
+            case "demondeal_trade": Hp = Math.Max(1, Hp - 1); AddCard(new RunCard("event-legend", "传说旧物", "装备", "传说", 5, true)); Phase = RunPhase.Ready; return new("指尖被划开的瞬间，一件冰冷的旧物落进了掌心。", 0, 0, 0, false);
+            case "bandits_fight":
+                _encounter.Clear(); for (var i = 0; i < 5; i++) _encounter.Add(CreateEnemy("bandit"));
+                _eventBattleDrops.Enqueue(("medium", false)); _eventBattleDrops.Enqueue(("medium", false)); _encounterRisk = RunRisk.Medium; Phase = RunPhase.Battle; return new("五道剪影从残骸后站起。", 0, 0, 0, false);
+            case "mystery_supply": Resources.Coins += 2; AddCard(new RunCard("event-color-token", "彩色令牌", "资源", "稀有", 2, true)); Phase = RunPhase.Ready; return new("柜门弹开时滚出两枚旧硬币和一张彩色令牌。", 2, 0, 0, false);
+            case "goldhammer_strike":
+                BuildEncounter(); var foe = _encounter[0]; _encounter.Clear(); _encounter.Add(foe with { Hp = foe.Hp - 5 });
+                if (_encounter[0].Hp <= 0) { Resources.Coins += 2; Phase = RunPhase.Ready; return new("闪金之锤一击制敌。", 2, 0, 0, false); }
+                Phase = RunPhase.Battle; return new("闪金之锤重击后，战斗打响！", 0, 0, 0, false);
+            case "relief_heal": Hp = Math.Min(MaxHp, Hp + 6); Phase = RunPhase.Ready; return new("缠好绷带时，你觉得自己又能再走一段了。", 0, 0, 0, false);
+            default: Resources.Wood++; AddCard(new RunCard("event-color-token", "彩色令牌", "资源", "稀有", 2, true)); Phase = RunPhase.Ready; return new("无人机松开货舱，一段建材和一张彩色令牌滑了出来。", 0, 1, 0, false);
+        }
+    }
+
+    private void MoveWithoutStamina(int steps)
+    {
+        var layer = Map.Layers[LayerIndex];
+        TrackPosition = (TrackPosition + steps) % layer.RingSize;
+        ResolveRoom();
     }
 
     private void BuildEncounter()
@@ -228,17 +477,33 @@ public sealed class RunState
         EnsurePhase(RunPhase.Battle);
         if (remainingHp < 0 || remainingHp > MaxHp) throw new ArgumentOutOfRangeException(nameof(remainingHp));
         Hp = remainingHp;
-        if (!won) { Phase = RunPhase.Defeat; return Array.Empty<(string, bool)>(); }
+        if (!won)
+        {
+            foreach (var stack in _ownedCards.Where(x => x.Safe))
+                if (!Base.DepositCards(new[] { new RunCardStack(stack.Card, stack.Count) }, false))
+                    EnqueueRecovery(stack);
+            foreach (var stack in _pendingRewards) EnqueueRecovery(stack);
+            _pendingRewards.Clear();
+            _ownedCards.Clear(); _usedPocket.Clear(); Resources.Coins = 0; Resources.Wood = 0; Resources.Rations = 0; Resources.Keys = 0;
+            Phase = RunPhase.Defeat; return Array.Empty<(string, bool)>();
+        }
         var bossIndex = -1;
         if (_encounter.Count == 1)
             for (var index = 0; index < Map.Bosses.Count; index++)
                 if (Map.Bosses[index].Id == _encounter[0].Id) { bossIndex = index; break; }
         if (bossIndex >= 0) _defeatedBosses.Add(bossIndex);
-        var drops = bossIndex >= 0 ? new[] { ("boss", true) } : RollDrops(LayerIndex);
-        foreach (var drop in drops) _pendingChests.Enqueue(drop);
+        IReadOnlyList<(string Kind, bool IsBoss)> drops = bossIndex >= 0
+            ? new[] { ("boss", true) }
+            : _eventBattleDrops.Count > 0 ? DrainEventDrops() : RollDrops(LayerIndex);
+        foreach (var drop in drops) _pendingChests.Enqueue((drop.Kind, drop.IsBoss, !drop.IsBoss && Rng.NextDouble() < 1.0 / 3.0));
         _returnAfterChest = bossIndex >= 0 ? RunPhase.Altar : RunPhase.Ready;
         Phase = RunPhase.Chest;
         return drops;
+    }
+
+    private IReadOnlyList<(string Kind, bool IsBoss)> DrainEventDrops()
+    {
+        var result = _eventBattleDrops.ToArray(); _eventBattleDrops.Clear(); return result;
     }
 
     private IReadOnlyList<(string, bool)> RollDrops(int layer)
@@ -248,18 +513,64 @@ public sealed class RunState
         return Rng.NextInt(2) == 0 ? new[] { ("large", false), ("small", false) } : new[] { ("large", false), ("medium", false) };
     }
 
-    public RunChestLoot OpenNextChest()
+    public RunChestLoot OpenNextChest() => OpenNextChest(0);
+
+    public RunChestPreview PeekNextChest()
+    {
+        EnsurePhase(RunPhase.Chest);
+        if (_chestPreview is not null) return _chestPreview;
+        if (!_pendingChests.TryPeek(out var chest))
+        {
+            _chestPreview = new RunChestPreview("none", false, false, 0, 0, Array.Empty<string>());
+            return _chestPreview;
+        }
+        var (min, max, count) = chest.Kind switch { "medium" => (2, 3, 3), "large" => (3, 4, 3), "boss" => (0, 0, 5), _ => (1, 2, 1) };
+        var pool = chest.IsClass && _classCardPool.Count > 0 ? _classCardPool : _lootCardPool;
+        var candidates = pool.Count > 0
+            ? Enumerable.Range(0, count).Select(_ => pool[Rng.NextInt(pool.Count)].Name).ToArray()
+            : Enumerable.Range(0, count).Select(_ => LootTable[Rng.NextInt(LootTable.Length)]).ToArray();
+        _chestPreview = new RunChestPreview(chest.Kind, chest.IsBoss, chest.IsClass, min, max, candidates);
+        return _chestPreview;
+    }
+
+    /// <summary>Opens one chest; medium chests expose three candidates and the caller selects one.</summary>
+    public RunChestLoot OpenNextChest(int selectedIndex)
     {
         EnsurePhase(RunPhase.Chest);
         if (_pendingChests.Count == 0) { Phase = _returnAfterChest; return new RunChestLoot("none", 0, Array.Empty<string>()); }
+        var preview = PeekNextChest();
+        if (preview.Candidates.Count == 0 && preview.Kind != "none") throw new InvalidOperationException("宝箱预览为空。");
+        var items = preview.Candidates;
+        var requiresChoice = preview.Kind == "medium";
+        if (requiresChoice && (selectedIndex < 0 || selectedIndex >= items.Count)) throw new ArgumentOutOfRangeException(nameof(selectedIndex));
         var chest = _pendingChests.Dequeue();
-        var (min, max, count) = chest.Kind switch { "medium" => (2, 3, 3), "large" => (3, 4, 3), "boss" => (0, 0, 5), _ => (1, 2, 1) };
-        var coins = chest.IsBoss ? 0 : Rng.NextInt(min, max + 1);
-        var items = Enumerable.Range(0, count).Select(_ => LootTable[Rng.NextInt(LootTable.Length)]).ToArray();
+        var coins = chest.IsBoss ? 0 : Rng.NextInt(preview.CoinMin, preview.CoinMax + 1);
+        var accepted = requiresChoice ? new[] { items[selectedIndex] } : items.ToArray();
+        var deferred = requiresChoice ? items.Where((_, index) => index != selectedIndex).ToArray() : Array.Empty<string>();
+        var pool = chest.IsClass && _classCardPool.Count > 0 ? _classCardPool : _lootCardPool;
+        foreach (var item in accepted)
+        {
+            var card = pool.FirstOrDefault(x => x.Name == item) ?? new RunCard($"loot-{item}", item, "资源", "古朴", 1, false, false, null, 1, RunCardSemantic.Resource);
+            if (!AddCard(card)) EnqueueReward(card);
+        }
         if (chest.IsBoss) Resources.Coins += Rng.NextInt(1, 4);
         Resources.Coins += coins;
+        _chestPreview = null;
         if (_pendingChests.Count == 0) Phase = _returnAfterChest;
-        return new RunChestLoot(chest.Kind, coins, items);
+        return new RunChestLoot(chest.Kind, coins, items, chest.IsClass, requiresChoice, selectedIndex, accepted, deferred);
+    }
+
+    private void EnqueueReward(RunCard card)
+    {
+        var existing = _pendingRewards.FirstOrDefault(x => x.Card.Name == card.Name);
+        if (existing is null) _pendingRewards.Add(new RunCardStack(card)); else existing.Count++;
+    }
+
+    public bool ClaimPendingReward(string name, int count = 1)
+    {
+        var pending = _pendingRewards.FirstOrDefault(x => x.Card.Name == name);
+        if (pending is null || count <= 0 || count > pending.Count || !AddCard(pending.Card, count)) return false;
+        pending.Count -= count; if (pending.Count == 0) _pendingRewards.Remove(pending); return true;
     }
 
     public void EnterDoor() {
@@ -272,7 +583,12 @@ public sealed class RunState
     public void ExtractAtDoor()
     {
         EnsurePhase(RunPhase.AwaitingDoor);
-        if (_pendingDoor is { IsExit: true } || Map.Layers[LayerIndex].RoomAt(TrackPosition).Type == RunRoomType.EmergencyExit) Extract();
+        if (_pendingDoor is { IsExit: true }) Extract();
+        else if (Map.Layers[LayerIndex].RoomAt(TrackPosition).Type == RunRoomType.EmergencyExit)
+        {
+            if (Resources.Coins < RunRules.EmergencyExitCost) throw new InvalidOperationException("金币不足，无法紧急撤离。");
+            Resources.Coins -= RunRules.EmergencyExitCost; Extract();
+        }
         else throw new InvalidOperationException("当前门不是撤离出口。");
     }
     public void EnterAltar() { EnsurePhase(RunPhase.Altar); }
@@ -288,16 +604,32 @@ public sealed class RunState
     private void EnterShop()
     {
         _pendingDoor = Map.Layers[LayerIndex].DoorAt(TrackPosition);
-        _shop = new[] { new RunShopOffer("rations", RunRoomType.Rations, 1, 2), new RunShopOffer("wood", RunRoomType.Wood, 1, 1), new RunShopOffer("key", RunRoomType.Key, 1, 8) };
-        Phase = RunPhase.Shop;
+        var offers = new List<RunShopOffer>
+        {
+            new("rations", RunRoomType.Rations, 1, 2), new("wood", RunRoomType.Wood, 1, 1), new("key", RunRoomType.Key, 1, 8)
+        };
+        var cardCount = Math.Min(6, _shopCardPool.Count);
+        for (var i = 0; i < cardCount; i++)
+        {
+            var card = _shopCardPool[Rng.NextInt(_shopCardPool.Count)];
+            offers.Add(new RunShopOffer($"card-{i}", RunRoomType.Empty, 1, CardPrice(card), false, card));
+        }
+        offers.Add(new RunShopOffer("potion", RunRoomType.Empty, 1, 3, false, new RunCard("builtin-potion", "金疮药", "道具", "初始", 1, false)));
+        offers.Add(new RunShopOffer("sha", RunRoomType.Empty, 1, 1, false, new RunCard("builtin-sha", "初始攻击", "武术", "初始", 1, false, true)));
+        Phase = RunPhase.Shop; _shop = offers;
     }
+
+    private static int CardPrice(RunCard card) => card.Rarity switch { "初始" => 1, "古朴" => 2, "稀有" => 3, "史诗" => 4, "传说" => 5, "棱彩" => 8, _ => 2 };
     public void BuyShopOffer(string id)
     {
         EnsurePhase(RunPhase.Shop);
         var offer = _shop.FirstOrDefault(x => x.Id == id && !x.Sold) ?? throw new InvalidOperationException("商品不存在或已售出。");
         if (Resources.Coins < offer.Price) throw new InvalidOperationException("金币不足。");
+        if (offer.Card is not null && BackpackUsed + offer.Quantity > BackpackCapacity)
+            throw new InvalidOperationException("背包已满。");
         Resources.Coins -= offer.Price;
-        if (offer.Resource == RunRoomType.Rations) Resources.Rations += offer.Quantity;
+        if (offer.Card is not null) AddCard(offer.Card, offer.Quantity);
+        else if (offer.Resource == RunRoomType.Rations) Resources.Rations += offer.Quantity;
         else if (offer.Resource == RunRoomType.Wood) Resources.Wood += offer.Quantity;
         else Resources.Keys += offer.Quantity;
         _shop = _shop.Select(x => x.Id == id ? x with { Sold = true } : x).ToArray();
@@ -312,8 +644,49 @@ public sealed class RunState
     }
     public void Extract()
     {
+        if (Phase == RunPhase.Victory) return;
+        if (Phase == RunPhase.Defeat) throw new InvalidOperationException("对局已失败。");
+        if (Phase == RunPhase.Settlement) return;
         if (Stamina <= 0) { Phase = RunPhase.Defeat; return; }
-        Phase = RunPhase.Victory;
+        Base.AddResources(Resources.Wood, Resources.Rations, Resources.Keys);
+        _settlementCards.Clear();
+        foreach (var stack in _ownedCards)
+            _settlementCards.Add(new RunSettlementCard(stack.Card, stack.Count, Base.DepositCards(new[] { stack }, false)));
+        foreach (var stack in _pendingRewards)
+            _settlementCards.Add(new RunSettlementCard(stack.Card, stack.Count, Base.DepositCards(new[] { stack }, false)));
+        _pendingRewards.Clear();
+        foreach (var stack in _usedPocket) Base.DepositCards(new[] { stack }, true);
+        _ownedCards.Clear(); _usedPocket.Clear();
+        Resources.Wood = 0; Resources.Rations = 0; Resources.Keys = 0;
+        Phase = RunPhase.Settlement;
+    }
+    public bool DepositSettlementCard(int index)
+    {
+        EnsurePhase(RunPhase.Settlement);
+        if (index < 0 || index >= _settlementCards.Count) throw new ArgumentOutOfRangeException(nameof(index));
+        var entry = _settlementCards[index];
+        if (entry.Deposited) return true;
+        if (!Base.DepositCards(new[] { new RunCardStack(entry.Card, entry.Count) }, false)) return false;
+        _settlementCards[index] = entry with { Deposited = true }; return true;
+    }
+    public bool FinalizeSettlement()
+    {
+        EnsurePhase(RunPhase.Settlement);
+        if (_settlementCards.Any(x => !x.Deposited)) return false;
+        _settlementCards.Clear(); Phase = RunPhase.Victory; return true;
+    }
+
+    public bool ClaimRecoveryCard(string name)
+    {
+        var entry = _recoveryCards.FirstOrDefault(x => x.Card.Name == name);
+        if (entry is null || !Base.DepositCards(new[] { entry }, false)) return false;
+        _recoveryCards.Remove(entry); return true;
+    }
+
+    private void EnqueueRecovery(RunCardStack card)
+    {
+        var existing = _recoveryCards.FirstOrDefault(x => x.Card.Name == card.Card.Name);
+        if (existing is null) _recoveryCards.Add(new RunCardStack(card.Card, card.Count, true)); else existing.Count += card.Count;
     }
 
     /// <summary>Test/adapter seam for restoring a saved position before a room resolves.</summary>
@@ -343,4 +716,17 @@ public static class RunRules
     public const int StaminaWarn = 10;
     public const int FireHeal = 8;
     public const int EmergencyExitCost = 10;
+    public const int BagStart = 16;
+    public const int BagMax = 30;
+    public const int BagUpgradeWood = 2;
+    public const int SafeStart = 2;
+    public const int SafeMax = 6;
+    public const int SafeUpgradeRations = 2;
+    public const int StashStart = 25;
+    public const int StashMax = 49;
+    public const int StashUpgradeSlots = 3;
+    public const int StashUpgradeWood = 2;
+    public const int BossDeckSize = 15;
+    public const int CampfireRestorePocket = 2;
+    public const double CampfireClassCardChance = 0.3;
 }

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace SoudacheGodot.UI;
 
-/// Presentation-only hand bar, adapted from the reference hand-position pattern.
-/// Card identity/effects stay outside this control and can later be supplied by Core snapshots.
+/// Presentation hand bar using the reference hand-position pattern.
+/// Card identity/effects stay outside this control and arrive through snapshots.
 public partial class CardHandLayout : Control
 {
     [Signal]
@@ -19,7 +19,7 @@ public partial class CardHandLayout : Control
         LayoutCards();
     }
 
-    public void SetPlaceholderCards(IReadOnlyList<string> cardNames)
+    public void SetCards(IReadOnlyList<string> cardNames)
     {
         foreach (var card in _cards)
             card.QueueFree();
@@ -29,9 +29,12 @@ public partial class CardHandLayout : Control
         for (var i = 0; i < cardNames.Count; i++)
         {
             var cardLabel = cardNames[i];
-            var card = UiTheme.Button($"—\n{cardLabel}\n占位卡", new Vector2(142, 180));
+            var card = UiTheme.Button($"—\n{cardLabel}", new Vector2(142, 180));
+            var art = new[] { "unknown.webp", "spell.webp", "resource-material.webp", "hero.webp", "equipment-weapon.webp" }[i % 5];
+            card.Icon = GD.Load<Texture2D>($"res://assets/cards/{art}");
+            card.ExpandIcon = true;
             card.AddThemeFontSizeOverride("font_size", 15);
-            card.TooltipText = "表现层占位：等待 Core 卡牌快照接入";
+            card.TooltipText = $"卡牌：{cardLabel}";
             var index = i;
             card.Pressed += () =>
             {
@@ -43,6 +46,12 @@ public partial class CardHandLayout : Control
             _cards.Add(card);
         }
         LayoutCards();
+    }
+
+    public void SetCardSelected(int index, bool selected)
+    {
+        if (index < 0 || index >= _cards.Count) return;
+        _cards[index].Modulate = selected ? new Color(1.0f, 0.82f, 0.45f) : Colors.White;
     }
 
     private void LayoutCards()

@@ -17,13 +17,14 @@ public sealed class CombatantState
     public StableId Id { get; }
     public string Name { get; }
     public bool IsEnemy { get; }
-    public int MaxHealth { get; }
+    public int MaxHealth { get; private set; }
     public int Health { get; private set; }
     public int Block { get; private set; }
     public int Armor { get; private set; }
     public int Attack { get; set; }
     public int SpellPower { get; set; }
     public bool Guard { get; private set; }
+    public bool ElementalAegis { get; private set; }
     private readonly Dictionary<CombatStatus, int> _statuses = new();
     private readonly List<(CombatStatus Status, int Amount, int Turns)> _timedStatuses = new();
     public IReadOnlyDictionary<CombatStatus, int> Statuses => _statuses;
@@ -52,7 +53,17 @@ public sealed class CombatantState
         Armor = checked(Armor + amount);
     }
 
+    public void Defeat() => Health = 0;
+
+    public void IncreaseMaxHealth(int amount, bool heal = true)
+    {
+        if (amount < 0) throw new ArgumentOutOfRangeException(nameof(amount));
+        MaxHealth = checked(MaxHealth + amount);
+        if (heal) Health = Math.Min(MaxHealth, Health + amount);
+    }
+
     public void SetGuard(bool enabled) => Guard = enabled;
+    public void SetElementalAegis(bool enabled) => ElementalAegis = enabled;
 
     public int GetStatus(CombatStatus status) => _statuses.TryGetValue(status, out var value) ? value : 0;
 
@@ -123,7 +134,7 @@ public sealed class CombatantState
     public int Purify()
     {
         var count = 0;
-        foreach (var status in Enum.GetValues<CombatStatus>())
+        foreach (var status in new[] { CombatStatus.Bleed, CombatStatus.Poison, CombatStatus.Freeze, CombatStatus.Silence, CombatStatus.ArmorBreak, CombatStatus.HealingBan })
             if (HasStatus(status)) { ClearStatus(status); count++; }
         _timedStatuses.Clear();
         return count;
@@ -141,7 +152,7 @@ public sealed class CombatantState
 
     public DamageResult ApplyDamage(int amount, DamageType type, CombatantState? source)
     {
-        if (HasStatus(CombatStatus.Immune)) return new DamageResult(amount, 0, 0, Health, IsDefeated, type, true, false);
+        if (HasStatus(CombatStatus.Immune) || (ElementalAegis && !HasStatus(CombatStatus.ArmorBreak))) return new DamageResult(amount, 0, 0, Health, IsDefeated, type, true, false);
         if (IsStealthed) return new DamageResult(amount, 0, 0, Health, IsDefeated, type, false, true);
         var damage = amount;
         if (type == DamageType.Attack)
@@ -223,6 +234,12 @@ public sealed class CombatState
 {
     private readonly Dictionary<StableId, CombatantState> _combatants = new();
     private readonly List<CombatantState> _ordered = new();
+    private readonly List<(int Turns, CardEffectAction Action, bool Repeat)> _scheduledEffects = new();
+    private int _generatedId;
+    private readonly List<StableId> _equipped = new();
+    private readonly HashSet<StableId> _countedDefeats = new();
+    private readonly HashSet<StableId> _killAttackSources = new();
+    private readonly HashSet<StableId> _infusionRewardSources = new();
 
     public StableId PlayerId { get; }
     public CombatPhase Phase { get; private set; } = CombatPhase.Setup;
@@ -230,10 +247,46 @@ public sealed class CombatState
     public DeterministicRng Rng { get; } = new(0xC0D3_0007UL);
     public int Energy { get; private set; }
     public int MaxEnergy { get; private set; }
+    public string? LastPlayedCardType { get; private set; }
+    public int ExtraTurns { get; private set; }
+    public int InfusionCount { get; private set; }
+    public int NextSpellRepeat { get; private set; } = 1;
+    public int SpellCastEnergyReward { get; private set; }
+    public int LastDamageBatchHealth { get; private set; }
+    public IReadOnlyList<StableId> EquippedCards => _equipped;
     public ActionQueue Actions { get; } = new();
     public IReadOnlyList<CombatantState> Combatants => _ordered;
 
     public CombatState(StableId playerId) => PlayerId = playerId;
+
+    public int NextGeneratedId() => checked(++_generatedId);
+
+    public void ScheduleEffect(int turns, CardEffectAction action, bool repeat = false)
+    {
+        if (turns < 0) throw new ArgumentOutOfRangeException(nameof(turns));
+        ArgumentNullException.ThrowIfNull(action);
+        _scheduledEffects.Add((turns, action, repeat));
+    }
+
+    /// <summary>Advances delayed card effects by one turn and appends due actions to the FIFO queue.</summary>
+    public int AdvanceTurn()
+    {
+        var due = 0;
+        for (var i = _scheduledEffects.Count - 1; i >= 0; i--)
+        {
+            var scheduled = _scheduledEffects[i];
+            scheduled.Turns--;
+            if (scheduled.Turns <= 0)
+            {
+                Actions.Enqueue(scheduled.Action);
+                if (scheduled.Repeat) _scheduledEffects[i] = (1, scheduled.Action, true);
+                else _scheduledEffects.RemoveAt(i);
+                due++;
+            }
+            else _scheduledEffects[i] = scheduled;
+        }
+        return due;
+    }
 
     public void AddCombatant(CombatantState combatant)
     {
@@ -270,9 +323,49 @@ public sealed class CombatState
     public int AddEnergy(int amount)
     {
         if (amount < 0) throw new ArgumentOutOfRangeException(nameof(amount));
-        Energy = checked(Energy + amount);
+        var gained = Math.Min(amount, Math.Max(0, MaxEnergy - Energy));
+        Energy = checked(Energy + gained);
+        return gained;
+    }
+
+    public void SetLastPlayedCardType(string? type) => LastPlayedCardType = type;
+    public void GrantExtraTurn() => ExtraTurns = checked(ExtraTurns + 1);
+    public void IncreaseEnergyCap(int amount) { if (amount < 0) throw new ArgumentOutOfRangeException(nameof(amount)); MaxEnergy = checked(MaxEnergy + amount); Energy = checked(Energy + amount); }
+    public void Equip(StableId cardId) { if (!_equipped.Contains(cardId)) _equipped.Add(cardId); }
+    public void CoverWeapons(StableId cardId) { _equipped.Clear(); _equipped.Add(cardId); }
+    public void RegisterKillAttackBonus(StableId sourceId) => _killAttackSources.Add(sourceId);
+    public void RegisterInfusionReward(StableId sourceId) => _infusionRewardSources.Add(sourceId);
+    public void RecordInfusion()
+    {
+        InfusionCount = checked(InfusionCount + 1);
+        if (InfusionCount != 3) return;
+        foreach (var sourceId in _infusionRewardSources)
+            if (TryGetCombatant(sourceId, out var source) && source is not null)
+                source.AddStatus(CombatStatus.SpellUp, 2);
+    }
+    public void SetNextSpellRepeat(int count)
+    {
+        if (count < 1) throw new ArgumentOutOfRangeException(nameof(count));
+        NextSpellRepeat = count;
+    }
+    public int ConsumeNextSpellRepeat()
+    {
+        var count = NextSpellRepeat;
+        NextSpellRepeat = 1;
+        return count;
+    }
+    public void RegisterSpellCastEnergy(int amount = 1)
+    {
+        if (amount < 0) throw new ArgumentOutOfRangeException(nameof(amount));
+        SpellCastEnergyReward = checked(SpellCastEnergyReward + amount);
+    }
+    public int RecordSpellCast()
+    {
+        var amount = SpellCastEnergyReward;
+        if (amount > 0) AddEnergy(amount);
         return amount;
     }
+    public void BeginDamageBatch() => LastDamageBatchHealth = 0;
 
     public bool TrySpendEnergy(int amount)
     {
@@ -306,6 +399,7 @@ public sealed class CombatState
     public DamageResult DealDamage(StableId targetId, int amount)
     {
         var result = GetCombatant(targetId).ApplyDamage(amount, DamageType.Fixed, null);
+        LastDamageBatchHealth = checked(LastDamageBatchHealth + result.HealthDamage);
         UpdateOutcome();
         return result;
     }
@@ -314,6 +408,7 @@ public sealed class CombatState
     {
         var source = TryGetCombatant(sourceId, out var attacker) ? attacker : null;
         var result = GetCombatant(targetId).ApplyDamage(amount, type, source);
+        LastDamageBatchHealth = checked(LastDamageBatchHealth + result.HealthDamage);
         UpdateOutcome();
         return result;
     }
@@ -331,6 +426,8 @@ public sealed class CombatState
         target.AddArmor(amount);
         return target.Armor;
     }
+
+    public void SetGuard(StableId targetId, bool enabled = true) => GetCombatant(targetId).SetGuard(enabled);
 
     public int AddStatus(StableId targetId, CombatStatus status, int amount = 1, int duration = 0)
         => GetCombatant(targetId).AddStatus(status, amount, duration);
@@ -356,6 +453,11 @@ public sealed class CombatState
 
     public void UpdateOutcome()
     {
+        foreach (var combatant in _ordered)
+            if (combatant.IsEnemy && combatant.IsDefeated && _countedDefeats.Add(combatant.Id))
+                foreach (var sourceId in _killAttackSources)
+                    if (TryGetCombatant(sourceId, out var source) && source is not null && !source.IsDefeated)
+                        source.Attack = checked(source.Attack + 1);
         var player = GetCombatant(PlayerId);
         if (player.IsDefeated)
         {

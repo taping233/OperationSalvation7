@@ -8,12 +8,13 @@ public interface ICoreUiPort
     event Action<BattleUiSnapshot>? BattleSnapshotChanged;
     event Action<RunUiSnapshot>? RunSnapshotChanged;
     event Action<SaveSlotsUiSnapshot>? SaveSlotsChanged;
-    void RequestPlayCard(string cardId);
+    void RequestPlayCard(string cardId, string? targetId, string[] infusionFuelIds);
     void RequestEndTurn();
     void RequestPileView(string pileKey);
     void RequestStartRun(string characterId);
     void RequestRollDice();
-    void RequestResolveRoom();
+    void RequestRunAction(string actionId);
+    void RequestBaseAction(string actionId);
     void RequestSaveSlot(int slot);
     void RequestLoadSlot(int slot);
     void PublishCurrentState();
@@ -21,6 +22,7 @@ public interface ICoreUiPort
 
 public sealed class BattleUiSnapshot
 {
+    public string CharacterId { get; init; } = "shuangling";
     public int Turn { get; init; }
     public int Energy { get; init; }
     public int MaxEnergy { get; init; }
@@ -33,9 +35,24 @@ public sealed class BattleUiSnapshot
     public int EnemyHp { get; init; }
     public int EnemyMaxHp { get; init; }
     public int EnemyBlock { get; init; }
+    public string PlayerTargetId { get; init; } = "player";
+    public BattleEnemyUiSnapshot[] Enemies { get; init; } = Array.Empty<BattleEnemyUiSnapshot>();
     public string StatusText { get; init; } = "";
     public string[] HandCardLabels { get; init; } = Array.Empty<string>();
     public string[] HandCardIds { get; init; } = Array.Empty<string>();
+    public int[] HandCardInfuseCounts { get; init; } = Array.Empty<int>();
+    public string[] HandCardTargetKinds { get; init; } = Array.Empty<string>();
+}
+
+public sealed class BattleEnemyUiSnapshot
+{
+    public string Id { get; init; } = "";
+    public string Name { get; init; } = "敌方目标";
+    public int Hp { get; init; }
+    public int MaxHp { get; init; }
+    public int Block { get; init; }
+    public int Attack { get; init; }
+    public bool Defeated { get; init; }
 }
 
 public sealed class RunUiSnapshot
@@ -54,10 +71,29 @@ public sealed class RunUiSnapshot
     public int Rations { get; init; }
     public int Stamina { get; init; }
     public int MaxStamina { get; init; }
+    public int BackpackUsed { get; init; }
+    public int BackpackCapacity { get; init; }
+    public int BaseWood { get; init; }
+    public int BaseRations { get; init; }
+    public int BaseKeys { get; init; }
+    public int BaseCoins { get; init; }
+    public int SafeCapacity { get; init; }
+    public int StashUsed { get; init; }
+    public int StashCapacity { get; init; }
     public string Phase { get; init; } = "准备";
     public string CurrentRoom { get; init; } = "营地";
     public string StatusText { get; init; } = "请选择角色开始远征";
+    public string[] InventoryLabels { get; init; } = Array.Empty<string>();
+    public RunActionUiSnapshot[] Actions { get; init; } = Array.Empty<RunActionUiSnapshot>();
     public MapNodeUiSnapshot[] Nodes { get; init; } = Array.Empty<MapNodeUiSnapshot>();
+}
+
+public sealed class RunActionUiSnapshot
+{
+    public string Id { get; init; } = "";
+    public string Label { get; init; } = "继续";
+    public string Detail { get; init; } = "";
+    public bool Enabled { get; init; } = true;
 }
 
 public sealed class MapNodeUiSnapshot
