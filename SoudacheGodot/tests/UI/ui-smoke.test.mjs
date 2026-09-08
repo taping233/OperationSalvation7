@@ -43,5 +43,8 @@ assert.match(read('src/App/CoreUiPort.cs'), /RequestPlayCard\(string cardId, str
 assert.match(read('src/App/CoreUiPort.cs'), /HandCardInfuseCounts/);
 assert.match(read('src/App/CoreUiPort.cs'), /HandCardTargetKinds/);
 assert.match(read('src/App/CoreUiPort.cs'), /PlayerTargetId/);
+const adapter = read('src/App/CoreGameAdapter.cs');
+assert.match(adapter, /Godot\.FileAccess\.Open\("res:\/\/data\/cards\.json"|ReadResourceText\("res:\/\/data\/cards\.json"/);
+assert.doesNotMatch(adapter, /GlobalizePath\("res:\/\/data\/cards\.json"/);
 assert.doesNotMatch(['UiTheme.cs', 'ScreenChrome.cs', 'CardHandLayout.cs', 'ReferenceHandGeometry.cs'].map(name => read(`src/UI/${name}`)).join('\n'), /placeholder|占位|等待 Core|尚未/i);
 console.log(`UI_SMOKE_STATIC_OK assets=${manifest.assets.length} scenes=5 focus=4 stretch=expand`);

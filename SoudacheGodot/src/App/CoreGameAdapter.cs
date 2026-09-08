@@ -37,9 +37,9 @@ public sealed class CoreGameAdapter : ICoreUiPort
 
     public CoreGameAdapter()
     {
-        var cardsPath = ProjectSettings.GlobalizePath("res://data/cards.json");
-        _catalog = CardCatalog.LoadFile(cardsPath);
-        _runCards = LoadRunCards(cardsPath);
+        var cardsJson = ReadResourceText("res://data/cards.json");
+        _catalog = CardCatalog.Load(cardsJson);
+        _runCards = LoadRunCards(cardsJson);
         _base.SeedStarterStash(_runCards.Where(card => card.Semantic == RunCardSemantic.Combat));
         _saves = new AtomicJsonSaveService(ProjectSettings.GlobalizePath("user://saves"));
         CreateCombat(new[] { new RunEnemy("training", "训练靶机", 36, 2) }, 30);
@@ -770,9 +770,17 @@ public sealed class CoreGameAdapter : ICoreUiPort
         return actions.ToArray();
     }
 
-    private static IReadOnlyList<RunCard> LoadRunCards(string path)
+    private static string ReadResourceText(string path)
     {
-        using var document = JsonDocument.Parse(System.IO.File.ReadAllText(path));
+        using var file = Godot.FileAccess.Open(path, Godot.FileAccess.ModeFlags.Read);
+        if (file == null)
+            throw new System.IO.FileNotFoundException($"无法读取 Godot 资源：{path}（{Godot.FileAccess.GetOpenError()}）", path);
+        return file.GetAsText();
+    }
+
+    private static IReadOnlyList<RunCard> LoadRunCards(string json)
+    {
+        using var document = JsonDocument.Parse(json);
         return document.RootElement.GetProperty("cards").EnumerateArray().Select(card =>
         {
             var id = card.GetProperty("id").GetString() ?? "unknown";
