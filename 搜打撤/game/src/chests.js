@@ -1,3 +1,4 @@
+import { sdtDefine } from './sdt-facade.js';
 
 import { Random } from './random.js';
 
@@ -36,7 +37,8 @@ import { Random } from './random.js';
     const taken = new Set();
     const n = K.pickFrom || K.cards || 0;
     for (let i = 0; i < n; i++) {
-      const card = SDT.Cards.randomDropCard(taken);
+      // mode 由流程层读门面后传入（2026-09-11 架构批次 1：cards 数据模块不读全局会话）
+      const card = SDT.Cards.randomDropCard(taken, (SDT.game && SDT.game.mode) || null);
       if (card) { taken.add(card.id); c.cards.push(card); }
     }
     // 宠物蛋（2026-09-09 需求 #2）：固定 0.7% 爆率额外开出（不占随机卡池，unrandom）
@@ -274,7 +276,6 @@ import { Random } from './random.js';
     next();
   }
 
-  window.SDT = window.SDT || {};
   // 挂起/恢复（2026-09-09 留言 #13）：搜刮界面允许打开背包——
   // suspend 作废未播完的搜索演出计时器（防止中途 render 抢走背包浮层），
   // 背包关闭后 resume 重新渲染当前搜刮面板继续开箱
@@ -285,6 +286,6 @@ import { Random } from './random.js';
   function resume() {
     if (cur) render();
   }
-  window.SDT.Chests = { rollDrops, dropText, open, rollContents, isOpen: () => !!(cur || queue.length), suspend, resume };
+  sdtDefine('Chests', { rollDrops, dropText, open, rollContents, isOpen: () => !!(cur || queue.length), suspend, resume });
 
 export { G, SDT, UI, render };

@@ -1,3 +1,4 @@
+import SDT from './sdt-facade.js';
 /* ============================================================
  * input.js —— 动作映射层（input-systems：玩法读动作，不读裸键）
  *
@@ -5,7 +6,7 @@
  * 改键 / 手柄接入 / 提示文案都以这里为唯一挂点。
  * 键位覆写存 localStorage 'sdt-keybinds'（action → key 名，小写）。
  * ============================================================ */
-const SDT = window.SDT = window.SDT || {};
+
 
 // 动作 → 默认键位（e.key 的小写形式；Space 键名为 ' '）
 const DEFAULT_BINDINGS = {

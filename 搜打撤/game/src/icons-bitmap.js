@@ -1,7 +1,8 @@
+import SDT from './sdt-facade.js';
   'use strict';
 import { BUILD_VERSION, assetUrl } from './asset-url.js';
 
-  const SDT = window.SDT = window.SDT || {};
+  
   const ROOT = 'assets/ui/icons/';
   const NAMES = new Set('heart broken coin pouch sword swords bag dice upload download book cards home fire skull gem lantern key lock unlock crystal trash door exit tools pocket broom wood bread trophy paw map notes medal shield plate blood flask scroll save helmet question sparkles bolt recycle check cross arrow play skip hourglass gear pen folder archive mouse flag slime demon runner'.split(' '));
   const esc = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));

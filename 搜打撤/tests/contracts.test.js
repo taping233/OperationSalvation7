@@ -143,6 +143,40 @@ describe('ESM 依赖方向', () => {
   });
 });
 
+describe('架构守护（2026-09-11 批次 1）', () => {
+  const SRC = resolve(process.cwd(), 'game/src');
+  const listSrc = (dir = SRC) =>
+    readdirSync(dir, { withFileTypes: true }).flatMap((e) =>
+      e.isDirectory() && e.name !== 'generated'
+        ? listSrc(join(dir, e.name))
+        : (e.name.endsWith('.js') ? [join(dir, e.name)] : []));
+
+  it('window.SDT 只允许在 sdt-facade.js 初始化', () => {
+    const offenders = listSrc().filter((f) => basename(f) !== 'sdt-facade.js')
+      .filter((f) => /window\.SDT\s*=\s*window\.SDT|window\.SDT\s*=\s*\{\}/.test(readFileSync(f, 'utf8')));
+    expect(offenders.map((f) => `${basename(f)} 仍在初始化 window.SDT`)).toEqual([]);
+  });
+
+  it('核心机制层不访问 DOM', () => {
+    const core = ['battle.core.js', 'battle.effects.js', 'battle.deck.js', 'battle.rules.js',
+      'battle.state.js', 'battle.piles.js', 'game.store.js', 'game.storage.js', 'cards.js',
+      'rules.js', 'meta.js', 'base.js', 'random.js', 'mapData.js', 'map-graph.js',
+      'mech-sentences.js', 'characters.js', 'shared.js', 'asset-url.js', 'sdt-facade.js'];
+    const offenders = [];
+    for (const name of core) {
+      const source = readFileSync(join(SRC, name), 'utf8');
+      const hit = source.match(/\bdocument\b|querySelector|getElementById|innerHTML|\.classList/);
+      if (hit) offenders.push(`${name}: ${hit[0]}`);
+    }
+    expect(offenders).toEqual([]);
+  });
+
+  it('数据模块 cards.js 不生成 HTML（卡面渲染已外迁 cards.view.js）', () => {
+    const source = readFileSync(join(SRC, 'cards.js'), 'utf8');
+    expect(source).not.toMatch(/<div|<span|innerHTML/);
+  });
+});
+
 describe('Electron 启动契约', () => {
   it('桌面开发态只加载 Vite 构建产物，不直接加载含裸模块导入的源码', () => {
     const main = readFileSync(resolve(process.cwd(), 'desktop-app/main.js'), 'utf8');

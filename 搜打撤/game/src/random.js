@@ -1,3 +1,4 @@
+import { sdtDefine } from './sdt-facade.js';
 const UINT32_RANGE = 0x100000000;
 const STEP = 0x6D2B79F5;
 
@@ -74,7 +75,6 @@ const Random = Object.freeze({
   get seed() { return service.seed; },
 });
 
-window.SDT = window.SDT || {};
-window.SDT.Random = Random;
+sdtDefine('Random', Random);
 
 export { Random, SeededRandomService, generateSeed, setRandomService };

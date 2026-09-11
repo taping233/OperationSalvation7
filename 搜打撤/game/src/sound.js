@@ -1,3 +1,4 @@
+import { sdtDefine } from './sdt-facade.js';
 import { Howl, Howler } from 'howler';
 import { assetUrl } from './asset-url.js';
 import { Random } from './random.js';
@@ -439,14 +440,13 @@ const titleBgm = new Howl({ src: [TITLE_BGM_URL], loop: true, html5: true, prelo
     if (e.target && e.target.type === 'checkbox') sfx('switch');
   });
 
-  window.SDT = window.SDT || {};
-  window.SDT.Sound = {
+  sdtDefine('Sound', {
     sfx, music, setMuted, setMusicMuted, setSfxMuted, setMusicVolume, setSfxVolume, setDucked, ensure,
     get muted() { return muted; },
     get musicMuted() { return musicOff; },
     get sfxMuted() { return sfxOff; },
     get musicVolume() { return musicVol; },
     get sfxVolume() { return sfxVol; },
-  };
+  });
 
 export { tone };

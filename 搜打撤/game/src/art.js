@@ -1,9 +1,10 @@
+import SDT from './sdt-facade.js';
 import { characterFor, CHARACTERS } from './characters.js';
 
   'use strict';
 import { BUILD_VERSION, assetUrl } from './asset-url.js';
 
-  const SDT = window.SDT = window.SDT || {};
+  
   const ROOT = 'assets/';
   const FALLBACK = 'ui/icons/question.png';
   const CLASS_IDS = Object.freeze({

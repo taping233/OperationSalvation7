@@ -1,4 +1,5 @@
-const SDT = window.SDT = window.SDT || {};
+import SDT from './sdt-facade.js';
+
 let appPromise = null;
 let dotTexture = null;
 let activeBursts = 0;

@@ -1,3 +1,5 @@
+import { sdtDefine } from './sdt-facade.js';
+
 function createGameState(map) {
   return {
     map,
@@ -47,20 +49,29 @@ class GameStore {
     return Object.freeze({
       ...state,
       toggles: Object.freeze({ ...state.toggles }),
-      rings: Object.freeze(state.rings.slice()),
+      rings: freezeRows(state.rings),
       pos: Object.freeze({ ...state.pos }),
-      ownedCards: Object.freeze(state.ownedCards.slice()),
+      ownedCards: freezeRows(state.ownedCards),
       cardOrder: Object.freeze(state.cardOrder.slice()),
-      usedPocket: Object.freeze(state.usedPocket.slice()),
-      shopStock: Object.freeze(state.shopStock.slice()),
-      diceHistory: Object.freeze(state.diceHistory.slice()),
-      inventory: Object.freeze(state.inventory.slice()),
+      usedPocket: freezeRows(state.usedPocket),
+      shopStock: freezeRows(state.shopStock),
+      diceHistory: freezeRows(state.diceHistory),
+      inventory: freezeRows(state.inventory),
       discoveredPairs: Object.freeze([...state.discoveredPairs]),
     });
   }
 }
 
-window.SDT = window.SDT || {};
-window.SDT.GameStore = GameStore;
+// 快照只读保障（2026-09-11 架构批次 1）：集合元素逐行浅拷贝后冻结——
+// 视图改快照内嵌对象会 TypeError（ESM strict）而不是静默污染 state。
+// map / hover / moveTarget / dice 等节点或第三方对象保持引用：地图节点
+// 的 visited 由渲染层就地标记，不属于快照只读范畴。
+function freezeRows(rows) {
+  return Object.freeze((rows || []).map((row) => {
+    return (row && typeof row === 'object') ? Object.freeze({ ...row }) : row;
+  }));
+}
+
+sdtDefine('GameStore', GameStore);
 
 export { GameStore, createGameState };

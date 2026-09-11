@@ -1323,26 +1323,6 @@ import * as Combat from './combat.js';
     requestBattleRender();
   }
 
-  // 状态角标：祝福（绿）+ 诅咒（红）
-  function statusChips(status) {
-    const buffs = Combat.BUFFS
-      .filter(k => (status[k] || 0) > 0)
-      .map(k => {
-        const m = Combat.BUFF_META[k];
-        const v = m.timed ? ` ${status[k]}回合` : (m.flag ? '' : ` ${status[k]}`);
-        return `<span class="bt-buff b-${k}" title="${escAttr('祝福：' + m.desc)}">${m.icon} ${m.name}${v}</span>`;
-      });
-    const curses = Combat.CURSES
-      .filter(k => (status[k] || 0) > 0)
-      .map(k => {
-        const m = Combat.CURSE_META[k];
-        const txt = m.stack ? `${m.name} ${status[k]}` : `${m.name} ${status[k]}回合`;
-        return `<span class="bt-curse c-${k}" title="${escAttr(m.desc)}">${m.icon} ${txt}</span>`;
-      });
-    return buffs.concat(curses).join(' ');
-  }
-  const curseChips = statusChips;   // 兼容旧调用名
-
   // 敌人免伤判定（异能领主：偶数回合全免伤，破甲克制）
   function aegisBlocked(foe) {
     return foe.affix === 'aegis' && turn % 2 === 0 && (foe.status.abreak || 0) <= 0;
@@ -2363,7 +2343,7 @@ import * as Combat from './combat.js';
   });
 
 const viewApi = Object.freeze({
-  AFFIX_META, Combat, R, aegisBlocked, curseChips, effCostOf, findCard,
+  AFFIX_META, Combat, R, aegisBlocked, effCostOf, findCard,
   infuseOf, markDreadShown, pileTip, refillDrawPile,
   takeFloats, takeCardAnims, targetSide, unplayableReason,
   matchHandSelectKey, handCurseSpecs,

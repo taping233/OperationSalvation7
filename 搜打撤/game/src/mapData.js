@@ -1,4 +1,5 @@
 import { RULES } from './rules.js';
+import { sdtDefine } from './sdt-facade.js';
 
 /* ============================================================
  * 搜打撤 —— 地图静态数据表
@@ -15,12 +16,9 @@ import { RULES } from './rules.js';
  *   entrance(入口) battle(战斗) event(随机) fire(火堆) chest(搜刮点)
  *   shop(补给站) emergencyExit(紧急撤离) door(层间门) extraction(终局撤离)
  * ============================================================ */
-window.SDT = window.SDT || {};
 
-/* ESM 垫片：本模块是首个模块，必须在自己创建命名空间之后才能捕获引用 */
-const SDT = window.SDT;
-
-SDT.MAP = {
+/* ESM 垫片：命名空间由 sdt-facade.js 唯一创建 */
+sdtDefine('MAP', {
   version: '0.3',
   boardId: 'B1',
   boardName: '第七净化区 · 三环荒土',
@@ -163,5 +161,4 @@ SDT.MAP = {
         affix: 'aegis', affixName: '元素庇幕', behavior: 'element_boss', affixDesc: '偶数回合减免所有伤害（破甲可克制）' },
     ],
   },
-
-};
+});

@@ -1,3 +1,4 @@
+import { sdtDefine } from './sdt-facade.js';
 /* 跨模块规则的唯一代码真源。文档规则见 docs/rules.md。 */
 const groups = {
   map: { diceSides: 3, stepMs: 340, emergencyExitCost: 10, fireHeal: 8, fireClassCardChance: 0.3, staminaMax: 60, staminaWarn: 10 },
@@ -38,7 +39,6 @@ const RULES = Object.freeze({
   starterSha: groups.battle.starterAttack,
 });
 
-window.SDT = window.SDT || {};
-window.SDT.RULES = RULES;
+sdtDefine('RULES', RULES);
 
 export { RULES };

@@ -1,3 +1,4 @@
+import { sdtDefine } from './sdt-facade.js';
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const SDT = window.SDT;
   const KEY = 'sdt-cell-notes-v1';
@@ -22,7 +23,6 @@ const SDT = window.SDT;
 
   function clearAll() { localStorage.removeItem(KEY); }
 
-  window.SDT = window.SDT || {};
-  SDT.Notes = { all, get, set, clearAll };
+  sdtDefine('Notes', { all, get, set, clearAll });
 
 export { KEY };

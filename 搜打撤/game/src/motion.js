@@ -1,6 +1,7 @@
+import SDT from './sdt-facade.js';
 import { animate } from 'motion/mini';
 
-const SDT = window.SDT = window.SDT || {};
+
 const reduceMotion = () => window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const canAnimate = element => element && typeof element.animate === 'function' && !reduceMotion();
 

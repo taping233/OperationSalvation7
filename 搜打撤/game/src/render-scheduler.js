@@ -1,3 +1,4 @@
+import { sdtDefine } from './sdt-facade.js';
 class RenderScheduler {
   constructor({ activeFps = 120, idleFps = 60 } = {}) {
     this.activeInterval = 1000 / activeFps;
@@ -37,7 +38,6 @@ class RenderScheduler {
 // 120fps 目标（老板 2026-09-06）：单帧渲染实测 ~1.4ms（预算 8.33ms），余量充足；
 // active 全速 120（掷骰/移动/战斗/棋盘待机动画），idle 60 兜底标题等非对局画面。
 const renderScheduler = new RenderScheduler({ activeFps: 120, idleFps: 60 });
-window.SDT = window.SDT || {};
-window.SDT.RenderScheduler = renderScheduler;
+sdtDefine('RenderScheduler', renderScheduler);
 
 export { RenderScheduler, renderScheduler };

@@ -1,3 +1,4 @@
+import { sdtDefine } from './sdt-facade.js';
 import { migrateCharacterProgress } from './characters.js';
 
 import { Random } from './random.js';
@@ -494,8 +495,7 @@ import { Random } from './random.js';
     return a + (/一串/.test(b.card.name) ? 2 : 1) * (b.count || 0);
   }, 0);
 
-  window.SDT = window.SDT || {};
-  window.SDT.Base = {
+  sdtDefine('Base', {
     SLOT_KEY, LEGACY_KEY,
     migrateLegacy, use, save, reset, peek, wipe, hasSlot,
     issue, CORRUPT_KEY, BASE_VERSION,
@@ -512,6 +512,6 @@ import { Random } from './random.js';
     isBackUnlocked, unlockBack, setBack, backSel,
     // —— 宠物（2026-09-09 需求 #2/#4）——
     PETS, petById, ownedPets, carriedPet, setPet, hatchPet, HATCH_COST, PET_EGG_ID,
-  };
+  });
 
 export { bagCap, hasSlot, safeCap };

@@ -1,3 +1,4 @@
+import { sdtDefine } from './sdt-facade.js';
 import { characterName } from './characters.js';
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const SDT = window.SDT;
@@ -10,9 +11,29 @@ import { groupHandCards, fanLayout } from './battle.hand.js';
 import { intentSummary, intentViewModel } from './battle.intents.js';
 import { FEEDBACK_DELTA_MS, feedbackClass, feedbackDelay } from './battle.feedback.js';
 import { renderCombatPiles } from './battle.piles.view.js';
+
+  // 状态角标：祝福（绿）+ 诅咒（红）——2026-09-11 架构批次 1 自 battle.core 外迁（纯视图函数）
+  function statusChips(status) {
+    const buffs = Combat.BUFFS
+      .filter(k => (status[k] || 0) > 0)
+      .map(k => {
+        const m = Combat.BUFF_META[k];
+        const v = m.timed ? ` ${status[k]}回合` : (m.flag ? '' : ` ${status[k]}`);
+        return `<span class="bt-buff b-${k}" title="${escAttr('祝福：' + m.desc)}">${m.icon} ${m.name}${v}</span>`;
+      });
+    const curses = Combat.CURSES
+      .filter(k => (status[k] || 0) > 0)
+      .map(k => {
+        const m = Combat.CURSE_META[k];
+        const txt = m.stack ? `${m.name} ${status[k]}` : `${m.name} ${status[k]}回合`;
+        return `<span class="bt-curse c-${k}" title="${escAttr(m.desc)}">${m.icon} ${txt}</span>`;
+      });
+    return buffs.concat(curses).join(' ');
+  }
+  const curseChips = statusChips;   // 兼容旧调用名
 /* battle.view.js —— 战斗渲染：战场 DOM/手牌/指向施法箭头/拖拽预览 */
   const {
-    AFFIX_META, Combat, R, aegisBlocked, curseChips, effCostOf, findCard,
+    AFFIX_META, Combat, R, aegisBlocked, effCostOf, findCard,
     infuseOf, markDreadShown, pileTip, refillDrawPile,
     takeFloats, takeCardAnims, targetSide, unplayableReason, matchHandSelectKey,
     handCurseSpecs,
@@ -1100,8 +1121,7 @@ import { renderCombatPiles } from './battle.piles.view.js';
     if (p) p.remove();
   }
 
-  window.SDT = window.SDT || {};
-  window.SDT.Battle = Object.freeze({ ...BattleSession, _test: Object.freeze({ refillDrawPile }) });
+  sdtDefine('Battle', Object.freeze({ ...BattleSession, _test: Object.freeze({ refillDrawPile }) }));
 
 configureBattleRenderer(render);
 
