@@ -200,7 +200,7 @@ public partial class FxLab : Control
 
     private static string[] MakeHand(int count)
     {
-        string[] pool = { "雪国回响", "雾中灯葵", "焚卡", "战术撤离", "升格协议", "白契之约", "霜翎突袭", "栗团横扫", "玄砾壁垒", "灯葵祝祷" };
+        string[] pool = { "雪国回响", "雾中灯葵", "焚卡", "战术撤离", "升格协议", "常无欲之约", "无相突袭", "白塔横扫", "玄砾壁垒", "灯葵祝祷" };
         var hand = new string[count];
         for (var i = 0; i < count; i++) hand[i] = pool[i % pool.Length] + (i >= pool.Length ? "+" : "");
         return hand;

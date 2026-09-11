@@ -6,7 +6,7 @@ namespace SoudacheGodot.UI;
 /// headless UI smoke remains useful while preserving a single provenance list.
 public static class AssetLibrary
 {
-    public const string Title = "res://assets/backgrounds/title-hero-ascension.webp";
+    public const string Title = "res://assets/images/title-wallpaper.webp"; // 网页版 #title .title-bg 同源壁纸
     public const string Board = "res://assets/backgrounds/board-backdrop-wreck.webp";
     public const string Hub = "res://assets/backgrounds/hub-bg-rhine.png";
     public const string MapBack = "res://assets/map/map-bg.png";

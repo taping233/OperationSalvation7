@@ -2,7 +2,7 @@
 
 > 心跳协议：开工先把批次条目改 `claimed` + 时间戳 + 负责人；每完成一个子步骤更新本条目（≤15 分钟一次）；完工改 `verifying` 并附验收证据摘录。
 > 主控：验收 verifying 批次 → 过则 pathspec commit + 标 done；不过写「失败项/修复单」并派修复 agent；claimed 心跳 >45 分钟视为中断可重派；pending 且依赖满足 → 按 HANDOFF §4 波次派工。
-> 最后巡检：2026-09-12 01:55 主控第6轮（批次 2 验收通过已提交、批次 3 已派 wave3-A；6b 三屏重写完成进入录帧验收阶段）
+> 最后巡检：2026-09-12 02:45 主控第9轮（6b 验收通过已提交、6c-战斗动画已派；批次 3 编译迭代中）
 
 ## 批次状态
 
@@ -14,11 +14,11 @@
 | 6a 表现基础库 | done | 2026-09-12 02:20 主控复验 | wave1-B | 主控复验通过：ui-smoke 绿；三张验收帧主控亲审（中文 0 缺字、扇形 3-10 张分段缩放、飘字/受击抖动/呼吸光/按钮双段反馈全部生效）；四屏 perf-smoke 144-161fps 无回退。构建当时点的 6 错全属批次 2 BattleRules 半成品，非本批。原证据： |①字体：网页版 Noto 子集缺 38 字（企养劫…国雪蛋孵驯鸦鹅 + 扉栗翎训靶，宠物/成就文本系子集建成后新增）→ 按风险#2口径换全量 NotoSansSC-VF.ttf（复制自本机 C:\Windows\Fonts，OFL，30890 字形，union 复检 0 缺字），设为默认主题字体（project.godot gui/theme/custom_font），粗体=FontVariation wght 700（ThemeTokens.NotoBold）；Cascadia 子集 ASCII 全覆盖保留做等宽角标；检查结论在 assets/fonts/README.md；fx-lab 录帧目视验证中文换行/省略号/粗体/蛋孵驯鸦猫狗等字全部正常。②主题：src/UI/ThemeTokens.cs（winter.css :root 全色板+组件覆盖色+圆角/阴影/间距/字号/CSS motion，注释标来源选择器）。③STS2 动作库 src/UI/Fx/：Sts2Fx（平滑三通道/推挤/贝塞尔/缓动）、SmoothFollower、CardFlyVfx、FloatingText（伤害/治疗/格挡）、HitShake、BreathingFx（+Glow）、PanelPopIn、ButtonFeedback；组件↔参数来源对照见 src/UI/REFERENCE_SOURCES.md。④手牌：ReferenceHandGeometry 补 scale 分段（≤7×1.0、8×0.95、每张-0.05、0.8 基准 0.85 封底），CardHandLayout 接三通道平滑+hover 瞬时放大/角度归零/0.5s ExpoOut 回落/邻卡推挤/新牌自牌堆滑入；对外 API（CardSelected/SetCards/SetCardSelected）不变。⑤dev 演示场景 scenes/dev/fx-lab.tscn（内置自动 demo 时间线）。验收证据：A) dotnet build 录帧/smoke 时点 0 错 0 警（当前时点全量的 6 错全来自 src/Core/Battle/BattleRules.cs:105 内插三元缺括号=wave2-A 批次2 半成品，B 领地 0 错，wave2-A 修后全量即绿）；B) node tests/UI/ui-smoke.test.mjs → UI_SMOKE_STATIC_OK assets=35 scenes=5 focus=4 stretch=expand；C) --write-movie 3 帧存 _planning/evidence/wave1-ui/01-03*.png；D) 四屏 AppMain smoke：menu/run/map/battle --perf-smoke 全过（avg_fps 144-161，0 SCRIPT ERROR，路由不回退）。B 线改动：project.godot、src/UI/{ThemeTokens.cs、CardHandLayout.cs、ReferenceHandGeometry.cs、REFERENCE_SOURCES.md、Fx/**}、scenes/dev/fx-lab.tscn、assets/fonts/** |
 | 7a 音频管线 | done | 2026-09-12 01:50 主控复验 | wave1-C | 主控复验通过（资产 diff -rq 一致仅 .import 元数据差异、主工程 build 绿、三测试 26/108/777 绿、清单在）。原证据：①资产=网页版 49 wav/ogg+2 BGM mp3 逐字节一致（diff -rq 通过；任务口径 53 实为 51，见清单 §0）；②`dotnet build SoudacheGodot.sln` 0 警告 0 错误（6a 心跳提到的 GameAudio.cs:430 ThresholdDb→已改 Godot 4.7 的 Threshold、GameAudioSettings.cs:80 Math→已补 using System，B 线阻塞已解除）；③三测试项目全绿：CORE_SMOKE_OK checks=26 / RUN_SMOKE_OK checks=777 / COMBAT_TESTS_OK checks=108（从仓库外层跑，Path.Combine("SoudacheGodot",...) 基准）；④清单 _planning/audio-inventory.md：30 音效键全覆盖+触发点对照表（sound.js 调用点逐条 文件：行）+音量键语义（sdt-muted/music-off/sfx-off/music-vol/sfx-vol→user://audio.cfg，dbGain(k)=10^((k-1)×30/20)，BASE_MUSIC 0.45/BASE_SFX 2.5，ducking×0.45）。改动文件：assets/sfx/**（49 资产+3 license/README）、assets/bgm-*.mp3、src/App/GameAudio.cs（重写）、src/App/GameAudioSettings.cs（新）、src/App/GameAudioSfxSynth.cs（新）、_planning/audio-inventory.md（新）、本板 |
 | 2 战斗对齐 | done | 2026-09-12 01:55 主控复验 | wave2-A | 主控复验通过：实测审计行「245 张（163/6/23/3/50）硬失败 0」、哨兵 221 条全覆盖、Combat 451 / Run 777 / Core 26 / Narrative 160、validate OK、全量 build 0 错。原自证：①全卡实打审计 245 张零硬失败（A 手牌 163 / B BOSS专 6 / C 道具 23 / D 开战被动 3 / E 排除 50；零效果软警告 3：铸甲/剑荡妖邪/快意恩仇——手选消耗类，与网页版 soft 警告口径一致）；②哨兵零报错：全卡库战斗类型 221 条子句 100% 被注册表覆盖（日志「哨兵覆盖度：221 条子句全部被注册表覆盖（0 未识别）」），负向测试注入「对敌人造成 3 点诡异伤害」显式抛 UnknownClauseException（带卡 id+子句文本），ELSEWHERE 27 条与网页版 effect-elsewhere-frozen.json 逐条一致；③8 单卡回归全绿（追斩/诅咒之刃/二刀流/熔岩爆破+二次爆炸/法力奔涌/迷之匣/连续射击/英雄卡+直接释放家族）+ BOSS 编组开战装备勾选 3 用例；④tests/Combat 全绿 COMBAT_TESTS_OK checks=451（老骨架 108+哨兵 98+审计 245）；⑤RUN_SMOKE_OK 777 / CORE_SMOKE_OK 26 / NARRATIVE_TESTS_OK 160 不回退；⑥validate_data OK；⑦主工程 build：我方领地（src/Core+src/App）0 错 0 警（全量 build 剩余错误全部在 src/UI/MenuScreen.cs+MapScreen.cs=B 线 6b 半成品，与本批无关）。新增：文本效果执行器 EffectSteps（有序步骤表 100 步对齐 effect-steps.js 顺序即语义）+EffectVerbs（动词注册表 70+ELSEWHERE 27+留白 1+哨兵 StrictMode）+BattleEngine（同步化移植 battle.core：随从位/法师锦囊容器/注能 resolveInfusedFuel/发现·抉择·手选三面板/BOSS 编组 15 选+开战装备勾选+BattleUiSnapshot.SfxRequests 音效信号[7a→A]）+CardLib（cards.json 加载+ensure 回填+isRandomObtainable/sellPrice）+CombatModel（四类伤害/七诅咒/祝福）+BattleRules；碎片 2 合 1 落入 run 状态（RunState.Fragments+SaveGameDto.Fragments+TokenCraft 3B→A、A+2碎片→彩色令牌）；rider：tests/Combat 直读路径统一三 cwd 兼容（FindCardsJson/FindManifest+CardLib.CandidatePaths）。改动文件：src/Core/Battle/*（7 新）、src/Core/Run/{RunState,TokenCraft}、src/Core/Save/SaveDtos、src/App/{CoreUiPort,CoreGameAdapter}、tests/Combat/{CombatTests,BattleHarness,BattleSentinelTests,BattleRegressionTests,BattleAuditTests,csproj}、本板 |
-| 3 四层地图 | pending | — | — | 依赖 2 |
+| 3 四层地图 | claimed | 2026-09-12 03:10 wave3-A | wave3-A | 生成器（MapGenerator+MapModel 新增）/四层模型（RunMap 重写）/跑图流程（RunState：移动事务/落脚一次性/层间门/祭坛弃3·碎片兑换/紧急撤离献祭/BOSS 门）/存档快照（SaveDtos+CoreGameAdapter）/2000-seed harness（RunSmokeTests 重写）代码全部就位，正在编译迭代 |
 | 4b 商店/宝箱/碎片 | pending | — | — | 依赖 1 |
 | 4c 事件整合 | pending | — | — | 依赖 4a+2 |
 | 5 宠物+收藏室 | pending | — | — | 依赖 4b |
-| 6b 屏幕对齐 | claimed | 2026-09-12 01:40 wave2-B | wave2-B | 真源通读完成（game.menu/hub/ui/index.html + winter/base/overlays/hub.css）；资产已复制（wallpaper/wordmark/slot-bg/hub-wallpaper + 5 个选档 SVG 图标）；Menu/Run/Map 三屏重写完成、dotnet build 0 错 0 警、ui-smoke 绿；perf-smoke 与录帧验证中 |
+| 6b 屏幕对齐 | done | 2026-09-12 02:45 主控复验 | wave2-B | 主控复验通过：ui-smoke 绿、全量 build 0 错、旧角色名 grep 0 命中、音效钩子 12 处；六帧主控亲审（标题/选档/设置/留言库/基地出发/对局框架）布局交互对齐 winter 主题，五角色名走 characters.json。打磨遗留（不阻塞，归 6c/6b' 清）：①设置页左上 title 层静音幽灵件穿透 ②对局空态体力显示「-/0」。原自证：第一梯队完成（menu 含信箱 / run / map 屏幕框架；hub 五页签留 6b'）。perf-smoke menu=156.7 / run=155.3 / map=154.3 fps；evidence 6 帧；对照表见交付报告；改动 src/UI/** + assets/images/**（新 27 文件） |
 | 6c 战斗动画+地图渲染 | pending | — | — | 依赖 6a |
 | 7b 设置+性能 | pending | — | — | 依赖 7a |
 | 8 发布链+总验收 | pending | — | — | 依赖全部 |
@@ -30,6 +30,10 @@
 - [7a→B] UI 层接线提示：checkbox/开关切换应播 PlaySfx("switch")，弹窗开/关播 PlaySfx("open")/PlaySfx("close")（对照清单 §1.5）；click/hover 已由 GameAudio.BindButtons 全局委托覆盖。
 - [7a] 无需总线布局文件：Music/SFX/Click 总线全部经 AudioServer 代码配置（含 click 压缩器链），project.godot 未动。
 - [1→B] 角色显示名已接 data/characters.json（数据=无/常无欲/白塔/玄砾/灯葵，rulesetId=侠客/降临者/法师/战士/牧师）；RunUiSnapshot.CharacterDisplayName 已随数据。UI 自绘花名册（src/UI/MenuScreen.cs:52、RunScreen.cs:48）仍硬编码旧名（霜翎/白契/栗团…），请 6b 屏幕对齐时改读快照或 characters.json，避免两套名字。
+
+- [6b→A] 存档槽删除/覆盖：选档页的「覆盖重开/删除」mini-btn 未实现（ICoreUiPort 无 RequestClearSlot(int slot)），对照网页 game.menu.js delSlot/overwriteSlot；当前空档=进 run 选角开新档、有档=RequestLoadSlot。
+- [6b→A] 设置页危险区动作：清空格子备注/清空卡牌库/清空全部存档（两步确认 UI 已就位，缺 Core 清理 API）；环层横幅/结点编号等开关已持久化 user://ui-settings.cfg 但功能面随 6c/7b 落地。
+- [6b→A] 对局 HUD 快照字段：骰子历史 diceHistory（近 8 次 chips）、攻击力 Atk（resHud 暂显 —）、环层名（现按 LayerIndex 硬映射 外环/中环/内环，四层化后应读数据）、宝藏大门 KEY_NEEDED=10（现取网页缺省常量）。
 
 ## 失败项/修复单
 
