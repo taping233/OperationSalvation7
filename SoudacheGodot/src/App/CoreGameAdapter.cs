@@ -46,7 +46,10 @@ public sealed class CoreGameAdapter : ICoreUiPort
     public event Action<RunUiSnapshot>? RunSnapshotChanged;
     public event Action<SaveSlotsUiSnapshot>? SaveSlotsChanged;
 
-    public CoreGameAdapter()
+    public CoreGameAdapter() : this("user://saves") { }
+
+    /// <summary>存档根目录可注入（--smoke-7b 用独立目录跑退出落盘链路，不碰真实档位）。</summary>
+    public CoreGameAdapter(string savesRoot)
     {
         var cardsJson = ReadResourceText("res://data/cards.json");
         _data = GameData.Load(cardsJson,
@@ -62,7 +65,10 @@ public sealed class CoreGameAdapter : ICoreUiPort
         _catalog = CardCatalog.Load(cardsJson);
         _runCards = LoadRunCards(cardsJson);
         _base.SeedStarterStash(_runCards.Where(card => card.Semantic == RunCardSemantic.Combat));
-        _saves = new AtomicJsonSaveService(ProjectSettings.GlobalizePath("user://saves"));
+        _saves = new AtomicJsonSaveService(
+            savesRoot.StartsWith("user://", StringComparison.Ordinal)
+                ? ProjectSettings.GlobalizePath(savesRoot)
+                : savesRoot);
         CreateCombat(new[] { new RunEnemy("training", "训练靶机", 36, 2) }, 30);
     }
 
@@ -422,12 +428,53 @@ public sealed class CoreGameAdapter : ICoreUiPort
         PublishCurrentState();
     }
 
+    /// <summary>是否有进行中的远征（退出落盘判定，对照网页 saveGame 的 runActive 守卫）。</summary>
+    public bool HasActiveRun => _run is { IsFinished: false };
+
+    /// <summary>当前游玩档位（0 基；对照网页 session.activeSlot，由读档/手动存档绑定）。</summary>
+    public int? ActiveSaveSlot => _activeSaveSlot;
+    private int? _activeSaveSlot;
+
     public void RequestSaveSlot(int slot)
+    {
+        // 批次 4c 口径：稳定落点才可手动保存（事件/战斗进行中拒绝），与网页日常 saveGame 调用点一致
+        if (_run is { Phase: not (RunPhase.Ready or RunPhase.Settlement) })
+        {
+            _saveStatus = "请先完成当前房间结算，再保存远征。";
+            PublishSaveSlots();
+            return;
+        }
+        SaveSnapshotToSlot(slot, forced: false);
+    }
+
+    /// <summary>
+    /// 退出前落盘（批次 7b；对齐网页 beforeunload=game.boot.js:442 与 quitGame=game.menu.js saveGame 后退）：
+    /// 有在局且已绑定档位则**强制**写档（绕过 RequestSaveSlot 的稳定落点守卫——网页关窗时
+    /// state!=='moving' 即写，战斗局面一并入档 game.session.js:368-371）；无局/无槽位则跳过不产生档案
+    /// （对照网页 `if (!game.runActive…) return; if (!activeSlot) return;`）。
+    /// </summary>
+    public void RequestSaveActiveSlot()
+    {
+        if (_activeSaveSlot is not int slot)
+        {
+            _saveStatus = "退出未落盘：本次会话未绑定存档档位";
+            PublishSaveSlots();
+            return;
+        }
+        if (!HasActiveRun)
+        {
+            _saveStatus = "退出未落盘：没有进行中的远征";
+            PublishSaveSlots();
+            return;
+        }
+        SaveSnapshotToSlot(slot, forced: true);
+    }
+
+    private void SaveSnapshotToSlot(int slot, bool forced)
     {
         try
         {
-            if (_run is { Phase: not (RunPhase.Ready or RunPhase.Settlement) })
-                throw new InvalidOperationException("请先完成当前房间结算，再保存远征。");
+            _activeSaveSlot = slot;
             var run = _run?.CaptureSnapshot();
             var player = _combat.GetCombatant(_playerId);
             _saves.Save(slot, new SaveGameDto
@@ -462,7 +509,7 @@ public sealed class CoreGameAdapter : ICoreUiPort
                 Deck = CardDeckDto.FromRuntime(_deck),
                 Combat = CombatStateDto.FromRuntime(_combat)
             });
-            _saveStatus = $"已保存到档位 {slot + 1}";
+            _saveStatus = (forced ? "退出已强制落盘" : "已保存") + $"到档位 {slot + 1}";
         }
         catch (Exception error)
         {
@@ -481,6 +528,7 @@ public sealed class CoreGameAdapter : ICoreUiPort
                 PublishSaveSlots();
                 return;
             }
+            _activeSaveSlot = slot; // 续档即绑定游玩档位（对照网页 setActiveSlot）
             _runCharacterId = snapshot.CharacterId ?? "";
             _base = FromDto(snapshot.Base);
             var savedPhase = snapshot.Flags.TryGetValue("runPhase", out var phaseText) && Enum.TryParse<RunPhase>(phaseText, out var parsedPhase)
@@ -532,6 +580,7 @@ public sealed class CoreGameAdapter : ICoreUiPort
         try
         {
             var existed = _saves.ClearSlot(slot);
+            if (_activeSaveSlot == slot) _activeSaveSlot = null; // 删除/覆盖重开当前游玩档后解除绑定
             _saveStatus = existed ? $"已删除档位 {slot + 1} 的存档（含基地数据）" : $"档位 {slot + 1} 本就是空档";
         }
         catch (Exception error)

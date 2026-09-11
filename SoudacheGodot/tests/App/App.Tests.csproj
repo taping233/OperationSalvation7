@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- 批次 7b：只编译 SettingsStore 纯 C# 核心（不编译带 Godot 依赖的 AppMain/GameAudio/GodotSettingsStorage） -->
+    <Compile Include="..\..\src\App\Settings\SettingsStore.cs" />
+    <Compile Include="SettingsStoreTests.cs" />
+  </ItemGroup>
+</Project>

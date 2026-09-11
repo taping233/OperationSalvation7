@@ -19,6 +19,11 @@ public interface ICoreUiPort
     void RequestLoadSlot(int slot);
     /// <summary>清空存档槽（接口需求 [6b→A]：选档页「覆盖重开/删除」用；对照网页 game.menu.js clearSlot）。</summary>
     void RequestClearSlot(int slot);
+    /// <summary>
+    /// 退出前落盘（批次 7b，AppMain 在 WM_CLOSE_REQUEST/设置页退出时调）：
+    /// 有在局且已绑定档位则强制写档（绕过稳定落点守卫，对齐网页 beforeunload），否则跳过。
+    /// </summary>
+    void RequestSaveActiveSlot();
     void PublishCurrentState();
 }
 
