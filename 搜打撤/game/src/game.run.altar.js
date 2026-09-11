@@ -1,0 +1,670 @@
+/* ============================================================
+ * game.run.altar.js —— 祭坛/层间门/BOSS 门/火堆/职业选择/撤离整理（架构批次 4）
+ *
+ * 由 game.run.js 拆出。层位中间（L1）：依赖 game.run.scenes.js，反向不被其依赖；
+ * FLOW（game.run.flow.js）依赖本文件。
+ * ============================================================ */
+import { CHARACTERS, characterFor, characterName } from './characters.js';
+import { esc, escAttr } from './shared.js';
+import { MAP, cellCenter, clearSave, curLayer, enterLayer, exitToTitle, game, newUid, saveGame, scaledEnemy, syncPlayTime } from './game.session.js';
+import { tone } from './sound.js';
+import { openBaseHub } from './game.hub.js';
+import { Sfx, _set_cardPageOpen, cardHTML } from './game.cardslib.js';
+import { Random } from './random.js';
+import { FIRE_RESTORABLE, finishInstant, grantEventCard, nodeOpt, nodeShell, openPocketRestore, openShop, preloadAllNodeShellBgs, showRunTransition } from './game.run.scenes.js';
+/* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
+const SDT = window.SDT;
+const UI = window.SDT.UI;
+
+export function openFireRest() {
+  game.heal(MAP.rules.fireHeal);
+  UI.log(`[[icon:fire]] <b>进入火堆</b>：自动回复 <b>${MAP.rules.fireHeal}</b> 点生命（体力不恢复，谨慎消耗）`, 'ok');
+  // 2026-09-06 留言：火堆界面的音效删掉（原 levelup 提示音）
+  if (Random.random('card') < MAP.rules.fireClassCardChance) {
+    UI.log('[[icon:wood]] 营火余烬里翻出了一张先行者掉落的职业卡！', 'loot');
+    grantEventCard(SDT.Cards.randomClassCard());
+  }
+  game.state = 'modal';
+  openPocketRestore(2, () => {
+    game.state = 'idle';
+    saveGame();
+    UI.refresh(game);
+  });
+}
+
+// 消耗口袋复原选牌（picks = 最多复原张数；done = 结束回调）
+// 2026-09-09 老板实测：原文字行在整屏场景壳上看不清、也不显示卡面——改为真卡面网格，点卡即复原
+// 需求 #12：消耗的装备不能在火堆复原（与道具一样）——列表里直接滤掉，不可选
+export function openClassChoice() {
+  preloadAllNodeShellBgs();   // 选角这几秒正好把整页事件背景图预载完（webp 大图打开才请求会黑屏数秒）
+  const picks = CHARACTERS.map(c => c.rulesetId).filter(cl => SDT.Cards.classPool(cl).length);
+  if (!picks.length) return;
+  game.state = 'modal';
+  let sel = null;
+  let view = 'select'; // 'select' 主选角页 | 'pool' 二级卡池页
+  const poolCount = cl => SDT.Cards.classPool(cl).length;
+  // 主选角页（2026-09-06 留言重做，排版参考杀戮尖塔 2 选人界面）：
+  // 选中角色大幅立绘居右撑满，左侧信息面板（名字/来历/熟练度/故事/任务），
+  // 底部全角色头像条，左下角红色返回键、右下角大确认键；卡池收进二级页
+  const render = () => {
+    if (view === 'pool') return renderPool();
+    const story = sel ? characterFor(sel) : null;
+    const lv = sel ? SDT.Meta.classLv(sel) : 0;
+    const roster = picks.map(cl => ({ cl, c: characterFor(cl) }));
+    UI.showOverlay('', `
+      <div class="pg cls2-page">
+        <div class="cls2-stage">
+          ${sel ? `<div class="cls2-fullart">${SDT.Art.classFullArt(sel)}</div>` : ''}
+          <aside class="cls2-panel${sel ? '' : ' cls2-none'}">
+            ${sel && story ? `
+              <h2 class="cls2-name">${esc(story.name)}</h2>
+              <div class="cls2-tag">${esc(story.tag)}</div>
+              <div class="cls2-lv">[[icon:medal]] ${esc(sel)} · 熟练度 Lv.${lv} · ${SDT.Meta.perkText(lv)}</div>
+              <p class="cls2-story">${esc(story.bg)}</p>
+              <h3>出发任务</h3>
+              <p class="cls2-story">${esc(story.task)}</p>
+              <button class="ov-btn cls2-pool-btn" data-act="clsPool">[[icon:cards]] 查看角色卡池（${poolCount(sel)} 张）</button>`
+            : '<p class="cls2-hint">[[icon:medal]]<br>从下方选择一名角色</p>'}
+          </aside>
+        </div>
+        <div class="cls2-strip">${roster.map(({ cl, c }) => `
+          <button class="cls2-face${cl === sel ? ' sel' : ''}" data-act="selClass" data-cls="${escAttr(cl)}" title="${escAttr(c.name)} · ${escAttr(c.tag)}">
+            ${SDT.Art.classArt(cl)}<b>${esc(c.name)}</b>
+          </button>`).join('')}</div>
+        <button class="cls2-back" data-act="cls2Quit" title="返回标题界面"><svg class="svg-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.5 5.5 4 12l6.5 6.5M4.6 12H20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="cls2-confirm" data-act="pickClass" ${sel ? '' : 'disabled'} title="${sel ? `确认 · ${escAttr(characterName(sel))}` : '请先选择角色'}"><svg class="svg-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12.5 10 18 19.5 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>`, 'page');
+  };
+  // 二级页：该角色的卡池全览
+  // 2026-09-09 留言重做：骨架对齐卡牌库——浅色展示区 + 左侧悬停大图预览 + 翻页制
+  // （一页 10 张大卡，5 列 × 2 行），替换原深蓝 flex 长页滚动。
+  // 右上叉号保持删除（底部已有「返回选角」）；卡面点击仍可放大查看
+  let poolPage = 0;
+  const POOL_PAGE_SIZE = 10;
+  const poolPreviewHTML = (c) => {
+    if (!c) return '<div class="pv-empty">[[icon:cards]]</div><p class="pv-hint">把鼠标悬停在右侧卡牌上<br>这里会显示大图预览</p>';
+    const dmgTxt = SDT.Cards.DMG_TYPES.includes(c.type) ? `<br>伤害词条：<b class="dmg-num">${c.dmg || 0}</b>` : '';
+    return `${SDT.Cards.cardHTML(c, 'lg')}<p class="pv-hint">${esc(c.type)} · ${esc(SDT.Cards.rarityOf(c))}${dmgTxt}<br>点击卡面可放大查看</p>`;
+  };
+  const poolGridHTML = () => {
+    const pool = SDT.Cards.classPool(sel);
+    const totalPages = Math.max(1, Math.ceil(pool.length / POOL_PAGE_SIZE));
+    if (poolPage >= totalPages) poolPage = totalPages - 1;
+    const cards = pool.slice(poolPage * POOL_PAGE_SIZE, (poolPage + 1) * POOL_PAGE_SIZE);
+    // 分页条跨满网格一行（grid-column:1/-1），与卡牌库同款
+    const pager = totalPages > 1 ? `
+      <div class="lib-pager">
+        <button class="hs-btn sm" data-act="poolPrev"${poolPage <= 0 ? ' disabled' : ''}>‹ 上一页</button>
+        <span class="lib-pageinfo">第 ${poolPage + 1} / ${totalPages} 页 · 共 ${pool.length} 张</span>
+        <button class="hs-btn sm" data-act="poolNext"${poolPage >= totalPages - 1 ? ' disabled' : ''}>下一页 ›</button>
+      </div>` : '';
+    return `<div class="lib-grid cls-pool-grid" id="poolGrid">${cards.map((c, i) => `
+      <div class="lib-item"><div class="lib-cardwrap" data-act="poolZoom" data-i="${poolPage * POOL_PAGE_SIZE + i}" title="点击放大查看">${SDT.Cards.cardHTML(c)}</div></div>`).join('')}${pager}</div>`;
+  };
+  // 预解码下一页插画（翻页零解码等待，同卡牌库 warmNextLibPage）
+  const warmNextPoolPage = () => {
+    const warm = window.SDT?.Art?.warm;
+    if (!warm) return;
+    const pool = SDT.Cards.classPool(sel);
+    const urls = [];
+    for (const c of pool.slice((poolPage + 1) * POOL_PAGE_SIZE, (poolPage + 2) * POOL_PAGE_SIZE)) {
+      const m = /src="([^"]+)"/.exec((window.SDT.Art.cardIcon && SDT.Art.cardIcon(c)) || '');
+      if (m) urls.push(m[1]);
+    }
+    warm(urls);
+  };
+  // 翻页/重进只重绘卡格区（整页 showOverlay 会重置预览栏）
+  const renderPoolGrid = () => {
+    const grid = document.getElementById('poolGrid');
+    if (grid) grid.outerHTML = poolGridHTML();
+    warmNextPoolPage();
+  };
+  const renderPool = () => {
+    poolPage = 0;
+    const pool = SDT.Cards.classPool(sel);
+    UI.showOverlay('', `
+      <div class="pg cls-pool-page">
+        <header class="pg-head">
+          <h2>[[icon:cards]] ${esc(characterName(sel))} · 角色卡池（${pool.length} 张）</h2>
+          <span class="sub">确认选择「${esc(characterName(sel))}」后，从以下卡池随机获得角色卡（与 5 张「初始攻击」一起带入背包）· 悬停卡面左侧预览大图</span>
+        </header>
+        <div class="clib-main">
+          <aside class="clib-preview" id="poolPreview">${poolPreviewHTML(null)}</aside>
+          ${poolGridHTML()}
+        </div>
+        <footer class="cls-foot">
+          <button class="ov-btn" data-act="clsBack">[[icon:medal]] 返回选角</button>
+          <button class="ov-btn ok" data-act="pickClass">确 认 · ${esc(characterName(sel))}</button>
+        </footer>
+      </div>`, 'page');
+    warmNextPoolPage();
+  };
+  // 悬停大图预览（炉石式，同卡牌库）：mouseover 因子元素冒泡重复触发，90ms 去抖
+  let poolPreviewTimer = null;
+  UI._hoverHandler = (e) => {
+    const w = e.target.closest ? e.target.closest('#poolGrid [data-act="poolZoom"]') : null;
+    if (!w) return;   // 移出卡面：保留当前预览不动
+    const i = Number(w.dataset.i);
+    if (poolPreviewTimer) clearTimeout(poolPreviewTimer);
+    poolPreviewTimer = setTimeout(() => {
+      poolPreviewTimer = null;
+      const c = (SDT.Cards.classPool(sel) || [])[i];
+      const pv = document.getElementById('poolPreview');
+      if (c && pv) { pv.innerHTML = poolPreviewHTML(c); Sfx.tick(); }
+    }, 90);
+  };
+  UI.act('poolZoom', (d) => {
+    const list = sel ? SDT.Cards.classPool(sel) : [];
+    const c = list[Number(d.i)];
+    if (c) UI.showCardZoom(c);
+  });
+  UI.act('poolPrev', () => { if (poolPage > 0) { poolPage--; renderPoolGrid(); } });
+  UI.act('poolNext', () => {
+    const totalPages = Math.ceil((SDT.Cards.classPool(sel).length) / POOL_PAGE_SIZE);
+    if (poolPage < totalPages - 1) { poolPage++; renderPoolGrid(); }
+  });
+  UI.act('selClass', (d) => {
+    if (d.cls === sel) return;
+    sel = d.cls;
+    Sfx.tick();
+    render();
+  });
+  UI.act('clsPool', () => {
+    if (!sel) return;
+    view = 'pool';
+    Sfx.tick();
+    render();
+  });
+  UI.act('clsBack', () => {
+    view = 'select';
+    Sfx.tick();
+    render();
+  });
+  UI.act('cls2Quit', () => {   // 左下角返回键：放弃选角回标题（弹层淡出后 exitToTitle 的弹窗守卫才放行）
+    UI.hideOverlay();
+    setTimeout(() => exitToTitle(), 240);
+  });
+  UI.act('pickClass', () => {
+    if (!sel) return;
+    const cl = sel;
+    game.myClass = cl;
+    game.characterId = characterFor(cl).id;
+    game.classCard = null;
+    const card = SDT.Cards.randomClassCard(cl);
+    // 2026-09-06：开局获得 2 张本职业卡牌（原 1 张），尽量不重复
+    let card2 = SDT.Cards.randomClassCard(cl);
+    for (let i = 0; i < 8 && card2 && card && card2.id === card.id; i++) card2 = SDT.Cards.randomClassCard(cl);
+    UI.hideOverlay();
+    UI.log(`[[icon:medal]] 本局角色：<b>${esc(characterName(cl))}</b>`, 'ok');
+    // 熟练度加成：每级（Lv.1 起）生命上限 +1（2026-09-09 需求 #5），立即生效
+    const lv = SDT.Meta.classLv(cl);
+    if (lv > 1) {
+      const bonus = (lv - 1) * 1;
+      game.maxHp += bonus; game.hp += bonus;
+      UI.log(`[[icon:medal]] ${esc(characterName(cl))} 熟练度 <b>Lv.${lv}</b>：生命上限 +${bonus}（${game.maxHp}）`, 'ok');
+    }
+    if (card) {
+      game.classCard = { ...card };
+      game.ownedCards.push({ uid: newUid(), card: game.classCard, brought: 1 });
+      UI.log(`[[icon:archive]] 获得角色卡【<b>${esc(card.name)}</b>】（${esc(characterName(cl))}）`, 'loot');
+      if (card2 && card2.id !== card.id) {
+        game.ownedCards.push({ uid: newUid(), card: { ...card2 }, brought: 1 });
+        UI.log(`[[icon:archive]] 获得角色卡【<b>${esc(card2.name)}</b>】（${esc(characterName(cl))}）·第 2 张职业卡已入包`, 'loot');
+      }
+    }
+    // 2026-09-07 留言：选人进局要有过渡动画——复用节点过场（大门场景 + 角色名揭晓）；
+    // 启程文案按人物区分（对应各自 tag 的语气）
+    const START_LINES = {
+      shuangling: '刀锋出鞘，踏雪先行',
+      baiqi: '契约既成，答案待启',
+      lituan: '口袋里的星图，亮了',
+      xuanli: '最后一道防线，就位',
+      dengkui: '灯已点亮，照归途',
+    };
+    const startLine = START_LINES[characterFor(cl).id] || '整备完毕，探索开始';
+    showRunTransition({
+      tone: 'door', asset: 'scene-door-bg', eyebrow: 'EXPEDITION START',
+      title: characterName(cl), detail: startLine, duration: 1600,
+    }).then(() => {
+      game.state = 'idle';
+      saveGame();
+      UI.refresh(game);
+    });
+  });
+  render();
+}
+
+export function openDoorModal(door, cellDef) {
+  game.state = 'modal';
+  game.discoveredPairs.add(door.pair);
+  const target = game.layerData[door.toLayer] || { name: `第${door.toLayer + 1}层` };
+  // 2026-09-09 需求 #13：只能在第三层（紧急撤离点）与第四层（终局撤离点）撤离——
+  // 环间门不再提供撤离选项，只能向深处走
+  nodeShell({
+    tone: 'door', icon: '[[icon:door]]', title: '环间门',
+    sub: `这道隔离闸门连通 <b>${target.name}</b>——闸门只向深处放行，不能停留`,
+    body:
+      nodeOpt('goDoor', `${door.reverse ? '返回' : '进入'}${target.name}`, '穿过闸门，前往另一环', 'ok') +
+      (cellDef && cellDef.type === 'shop' ? nodeOpt('doorShop', '逛商队', '闸门旁的拾荒商队还在营业') : ''),
+  });
+  UI.act('goDoor', () => {
+    UI.hideOverlay();
+    UI.log(`穿过隔离闸门 → <b>${target.name}</b>`, 'sys');
+    enterLayer(door.toLayer, door.arriveAt);
+  });
+  UI.act('doorShop', () => openShop());
+  UI.refresh(game);
+}
+
+// ---------- 第四层终局：祭坛格（弃3激活选奖励）→ 首脑格 → 终局撤离点 ----------
+// 祭坛：弃掉背包 3 张牌激活后二选一奖励；集齐 2 枚彩色令牌碎片可不走弃牌直接换英雄卡。
+// 激活（或兑换）成功才算触发过本格；离开未激活可再来。首脑格必须先激活祭坛。
+export function openAltarRitual(def) {
+  game.state = 'modal';
+  const frags = game.fragments || 0;
+  // 碎片不足时不再隐藏选项，改为禁用态并说明原因（2026-09-10 撤离测试：玩家不知道选项为何消失）
+  const fragOpt = frags >= 2
+    ? nodeOpt('altarFragHero', `献上 2 枚彩色令牌碎片（不弃牌）`, `获得 1 张本职业随机英雄卡（现有碎片 ${frags}）`, 'ok')
+    : nodeOpt('altarFragLocked', '献上 2 枚彩色令牌碎片（不弃牌）', `碎片不足（现有 ${frags}/2）——集齐 2 枚后可在任意祭坛直接兑换英雄卡`, '', 'disabled title="彩色令牌碎片不足，无法兑换"');
+  nodeShell({
+    tone: 'altar', icon: '[[icon:crystal]]', title: '污染祭坛',
+    sub: '弃掉背包中 3 张卡牌激活祭坛，任选一项奖励' +
+      (frags >= 2 ? '；也可以不弃牌，直接献上 2 枚彩色令牌碎片换取英雄卡' : ''),
+    body:
+      nodeOpt('altarOn3', '弃 3 张 · 激活祭坛', '激活后二选一：① 复原 3 张消耗卡 + 回复 10 血；② 随机获取 1 张传说卡和 1 张装备卡', 'ok') +
+      fragOpt +
+      nodeOpt('altarItemRestore', '献祭道具 · 复原卡牌', '献祭 1 张道具卡，从消耗口袋复原 2 张卡牌（不影响其他献祭功能，可重复使用）') +
+      nodeOpt('altarLeave', '离开', '祭坛保持沉睡——回到当前格子，稍后再来'),
+  });
+  const markActivated = () => {
+    game.altarActivated = true;
+    game.visited = game.visited || {};
+    game.visited[game.layerIdx + ',' + game.trackPos] = 1;   // 激活成功才消耗本格
+  };
+  // 献祭道具复原（2026-09-10 需求）：1 张道具卡 → 从消耗口袋复原 2 张；
+  // 独立于弃 3 张激活/碎片兑换——不消耗本格、不影响其他献祭功能，可重复使用
+  UI.act('altarItemRestore', () => {
+    if (!game.ownedCards.some(o => o.card.type === '道具')) { UI.log('[[icon:bag]] 背包里没有道具卡可供献祭', 'warn'); return; }
+    const restorableN = game.usedPocket.filter(p => FIRE_RESTORABLE(p.card)).length;
+    if (!game.usedPocket.length || !restorableN) { UI.log('[[icon:bag]] 消耗口袋里没有可复原的卡牌——先去战斗吧', 'warn'); return; }
+    openBagSacrifice(1, (chosen) => {
+      UI.log(`[[icon:crystal]] 献上道具【<b>${esc(chosen[0].card.name)}</b>】——从消耗口袋复原卡牌`, 'loot');
+      saveGame();
+      openPocketRestore(Math.min(2, restorableN), () => { saveGame(); openAltarRitual(def); });
+    }, () => openAltarRitual(def), '道具');
+  });
+  UI.act('altarOn3', () => {
+    if (game.ownedCards.length < 3) { UI.log('[[icon:bag]] 背包卡牌不足 3 张，无法激活祭坛', 'warn'); return; }
+    openBagSacrifice(3, (chosen) => {
+      markActivated();
+      UI.log(`[[icon:crystal]] 献上 ${chosen.map(o => `【${esc(o.card.name)}】`).join('')}——<b>祭坛苏醒了</b>，请选择一项奖励`, 'loot');
+      saveGame();
+      openAltarReward();
+    }, () => openAltarRitual(def));
+  });
+  UI.act('altarFragHero', () => {
+    // 2026-09-10 留言 #30：职业缺失/英雄池为空时此前只写一条侧边日志就 return——
+    // 玩家点了按钮界面毫无变化，看起来像「碎片无法激活」。改为弹窗明示，碎片原样保留。
+    const pool = game.myClass ? SDT.Cards.classPool(game.myClass).filter(c => c.type === '能力卡') : [];
+    if (!pool.length) {
+      nodeShell({
+        tone: 'altar', icon: '[[icon:crystal]]', title: '碎片兑换 · 暂不可用',
+        sub: `${game.myClass ? '【' + esc(game.myClass) + '】职业目前没有可兑换的英雄卡' : '还没有选定职业'}——彩色令牌碎片已原样保留（现有 ${(game.fragments || 0)} 枚）`,
+        body: nodeOpt('altarFragBack', '返回祭坛', '换个方式激活，或留着碎片以后再兑'),
+      });
+      UI.act('altarFragBack', () => openAltarRitual(def));
+      UI.refresh(game);
+      return;
+    }
+    const card = pool[Math.floor(Random.random('loot') * pool.length)];
+    // 先发牌、后扣碎片：背包满时发卡会被拒收（现场播报），不能白扣 2 枚碎片
+    if (!grantEventCard(card)) return;
+    game.fragments = (game.fragments || 0) - 2;
+    markActivated();
+    UI.log(`[[icon:gem]] 献上 2 枚彩色令牌碎片（剩 ${game.fragments}）——获得本职业英雄卡【<b>${esc(card.name)}</b>】；<b>祭坛苏醒了</b>`, 'loot');
+    saveGame();
+    finishInstant();
+  });
+  UI.act('altarLeave', () => { UI.hideOverlay(); game.state = 'idle'; saveGame(); UI.refresh(game); });
+  UI.refresh(game);
+}
+
+// 激活后的奖励二选一（弃 3 张已支付）
+function openAltarReward() {
+  game.state = 'modal';
+  // 2026-09-10 留言 #33：消耗口袋没有可复原卡牌（或全是不可复原的道具/装备）时，
+  // 选项①要如实标注——否则选了它只会看到空列表，感觉「无法复原」
+  const restorableN = game.usedPocket.filter(p => FIRE_RESTORABLE(p.card)).length;
+  const restoreOpt = restorableN
+    ? nodeOpt('altarRewardRestore', '① 复原 3 张消耗卡 + 回复 10 血', `从消耗口袋挑选卡牌复原回背包（现有 ${restorableN} 张可复原${restorableN < 3 ? '，不足 3 张时全复原' : ''}），并回复 10 点生命`, 'ok')
+    : nodeOpt('altarRewardRestoreOff', '① 复原 3 张消耗卡 + 回复 10 血', '消耗口袋里没有可复原的卡牌（道具/装备类消耗不可复原）——此项不可选', '', 'disabled title="消耗口袋里没有可复原的卡牌，请选奖励②"');
+  nodeShell({
+    tone: 'altar', icon: '[[icon:crystal]]', title: '祭坛回赠 · 二选一',
+    sub: '祭坛已苏醒——选择你要的奖励',
+    body:
+      restoreOpt +
+      nodeOpt('altarRewardLoot', '② 传说卡 + 装备卡', '随机获取 1 张传说卡和 1 张装备卡'),
+  });
+  UI.act('altarRewardRestore', async () => {
+    const before = game.hp;
+    game.heal(10);
+    UI.log(`[[icon:heart]] 祭坛回赠：回复 <b>${Math.max(0, game.hp - before)}</b> 点生命（${game.hp}/${game.maxHp}）`, 'heal');
+    UI.hideOverlay();
+    openPocketRestore(3, () => { saveGame(); finishInstant(); });
+  });
+  UI.act('altarRewardLoot', () => {
+    const legend = SDT.Cards.all().filter(c => c.rarity === '传说' && SDT.Cards.isRandomObtainable(c));
+    const equips = SDT.Cards.all().filter(c => c.type === '装备' && SDT.Cards.isRandomObtainable(c));
+    if (legend.length) grantEventCard(legend[Math.floor(Random.random('loot') * legend.length)]);
+    if (equips.length) grantEventCard(equips[Math.floor(Random.random('loot') * equips.length)]);
+    UI.log('[[icon:crystal]] 祭坛回赠：随机获得 1 张<b>传说卡</b>和 1 张<b>装备卡</b>（见背包）', 'loot');
+    saveGame();
+    finishInstant();
+  });
+  UI.refresh(game);
+}
+
+// 首脑格：必须先激活祭坛；三首脑任选其一挑战，胜利后终局撤离点放行
+function openBossGate(def) {
+  game.state = 'modal';
+  if (!game.altarActivated) {
+    nodeShell({
+      tone: 'altar', icon: '[[icon:skull]]', title: '首脑巢穴 · 封印中',
+      sub: '三位首脑被污染祭坛的辐射护盾庇护——先激活祭坛（弃 3 张卡牌），再来挑战',
+      body: nodeOpt('bossBounce', '退回', '回到上一格，先去激活祭坛', 'ok'),
+    });
+    UI.act('bossBounce', () => {
+      UI.hideOverlay();
+      game.trackPos = Math.max(0, game.trackPos - 1);
+      game.pos = cellCenter(game.layerIdx, game.trackPos);
+      game.state = 'idle';
+      saveGame();
+      UI.refresh(game);
+    });
+    UI.refresh(game);
+    return;
+  }
+  // 2026-09-09 玩法定版：三首脑（5-50 / 4-45 / 8-48）随机一个坐镇，进入本格即告知，
+  // 让玩家在编组牌库前就知道要面对谁（编组界面也会再次显示首脑与词缀）。
+  const bossIdx = Math.floor(Random.random('boss') * MAP.altar.bosses.length);
+  const b = MAP.altar.bosses[bossIdx];
+  const aff = b.affix ? MAP.altar.bosses[bossIdx].affixDesc : '';
+  nodeShell({
+    tone: 'altar', icon: '[[icon:demon]]', title: '首脑巢穴 · 决战',
+    sub: `本层首脑：<b>${esc(b.name)}（${b.atk}-${b.hp}）</b>${aff ? ` · 词缀【${esc(b.affixName)}】${esc(aff)}` : ''}——胜利后终局撤离点放行`,
+    body:
+      nodeOpt('fightBoss', '编组牌库，迎战首脑', '从背包选 15 张招式/装备/能力卡，附加 5 张初始攻击（混沌之眼可多带 5 张）', 'ok') +
+      nodeOpt('bossLeave', '暂不挑战', '留在当前格子（本格不消耗，可再来）'),
+  });
+  UI.act('fightBoss', () => {
+    UI.hideOverlay();
+    SDT.Battle.start(game, scaledEnemy(b), { isBoss: true, name: b.name });
+  });
+  UI.act('bossLeave', () => { UI.hideOverlay(); game.state = 'idle'; saveGame(); UI.refresh(game); });
+  UI.refresh(game);
+}
+
+// 背包献祭选卡器（2026-09-06 #26）：从背包选 n 张卡，确认后消耗并回调
+// onCancel：取消时的回流（缺省回祭坛面板）
+function openBagSacrifice(n, done, onCancel, filterType) {
+  game.state = 'modal';
+  const sel = new Set();
+  const back = onCancel || (() => openAltarRitual(curLayer()?.logical?.[game.trackPos]?.def));
+  const eligible = filterType ? game.ownedCards.filter(o => o.card.type === filterType) : game.ownedCards;
+  const render = () => {
+    // 2026-09-10 留言 #31/#32：原文字行看不清也看不到卡面——改为真卡面网格（口径同火堆复原），
+    // 点卡选中/取消，选中卡挂黄铜图钉角标
+    const rows = eligible.map(o => `
+      <div class="bt-card sac-card${sel.has(o.uid) ? ' sel' : ''}" data-act="sacPick" data-uid="${escAttr(o.uid)}"
+        title="${escAttr(`${o.card.name}${o.card.cost != null ? ` · ${o.card.cost} 费` : ''}——${o.card.desc || '点击选中/取消'}`)}">
+        ${SDT.Cards.cardHTML(o.card, 'sm')}
+        ${o.card.cost != null ? `<span class="bt-sac-cost">${o.card.cost} 费</span>` : ''}
+      </div>`).join('');
+    UI.showOverlay('[[icon:crystal]] 选择要献祭的卡牌', `
+      <p class="ov-note">选择 <b>${n}</b> 张${filterType ? `<b>${escAttr(filterType)}</b>卡` : '卡牌'}献祭（已选 <b>${sel.size}</b>）</p>
+      <div class="bt-hand sac-hand">${rows || '<p class="ov-empty">背包里没有符合条件的卡牌</p>'}</div>
+      <div class="scene-ops">
+        <button class="ov-btn ok" data-act="sacConfirm" ${sel.size !== n ? 'disabled' : ''}>[[icon:crystal]] 确认献祭</button>
+        <button class="ov-btn" data-act="sacCancel">[[icon:exit]] 取消</button>
+      </div>`);
+  };
+  UI.act('sacPick', (d) => {
+    const o = eligible.find(x => x.uid === d.uid);
+    if (!o) return;
+    if (sel.has(o.uid)) sel.delete(o.uid);
+    else if (sel.size < n) sel.add(o.uid);
+    Sfx.tick();
+    render();
+  });
+  UI.act('sacCancel', () => { UI.hideOverlay(); back(); });
+  UI.act('sacConfirm', () => {
+    const chosen = eligible.filter(o => sel.has(o.uid));
+    game.ownedCards = game.ownedCards.filter(o => !sel.has(o.uid));
+    UI.hideOverlay();
+    done(chosen);
+  });
+  render();
+}
+
+// 撤离点弹窗（四层定版：只能在第三层紧急撤离、第四层击败首脑后终局撤离）
+//   第三层紧急撤离点：献祭 3 张卡牌后撤离；
+//   第四层终局撤离点：击败首脑后无条件撤离（未击败则锁定）。
+function openEmergencyModal() {
+  game.state = 'modal';
+  const def = curLayer()?.logical?.[game.trackPos]?.def;
+  const isEmergency = def && def.type === 'emergencyExit';
+  if (isEmergency) {
+    // 第三层 · 紧急撤离点（旧档在第 1/2/4 层生成的撤离点一律停用）
+    if (game.layerIdx !== 2) {
+      nodeShell({
+        tone: 'exit', icon: '[[icon:lock]]', title: '停用的撤离点',
+        sub: '撤离信标没有响应——只有第三层的紧急撤离点仍在工作',
+        body: nodeOpt('stayHere', '继续深入', '留在地图上，继续选择相邻节点'),
+      });
+      UI.act('stayHere', () => { UI.hideOverlay(); game.state = 'idle'; UI.refresh(game); });
+      UI.refresh(game);
+      return;
+    }
+    const sacN = Math.min(3, game.ownedCards.length);
+    nodeShell({
+      tone: 'exit', icon: '[[icon:cross]]', title: '紧急撤离点',
+      sub: '紧急信标过载——撤离前必须献祭 3 张卡牌作为代价',
+      body:
+        nodeOpt('payExit', `紧急撤离（献祭 ${sacN} 张卡牌）`, '从背包选择 3 张卡牌献祭，带着剩余战利品返回基地', 'ok') +
+        nodeOpt('stayHere', '继续深入', '留在地图上，继续选择相邻节点'),
+    });
+    UI.act('payExit', () => {
+      if (game.ownedCards.length < 3) {
+        UI.log('[[icon:cross]] 背包卡牌不足 3 张，无法支付紧急撤离的代价', 'warn');
+        SDT.Sound.sfx('error');
+        return;
+      }
+      UI.hideOverlay();
+      openBagSacrifice(3, () => {
+        UI.log('[[icon:crystal]] 献祭了 3 张卡牌——紧急信标充能完毕', 'sys');
+        doExtract();
+      }, () => openEmergencyModal());
+    });
+    UI.act('stayHere', () => { UI.hideOverlay(); game.state = 'idle'; UI.refresh(game); });
+    UI.refresh(game);
+    return;
+  }
+  // 第四层 · 终局撤离点：击败首脑后无条件撤离
+  if (game.bossKilled) {
+    nodeShell({
+      tone: 'exit', icon: '[[icon:exit]]', title: '终局撤离点',
+      sub: '污染核心的首脑已被击破——撤离信标无条件放行',
+      body:
+        nodeOpt('payExit', '立即撤离', '带着全部战利品返回基地', 'ok') +
+        nodeOpt('stayHere', '继续深入', '留在地图上，继续选择相邻节点'),
+    });
+  } else {
+    nodeShell({
+      tone: 'exit', icon: '[[icon:lock]]', title: '终局撤离点',
+      sub: '撤离信标被污染核心压制——击败第四层的首脑后才能撤离',
+      body: nodeOpt('stayHere', '继续深入', '留在地图上，继续选择相邻节点'),
+    });
+  }
+  UI.act('payExit', () => {
+    UI.log('启动撤离信标，准备返回基地', 'sys');
+    UI.hideOverlay();
+    doExtract();
+  });
+  UI.act('stayHere', () => { UI.hideOverlay(); game.state = 'idle'; UI.refresh(game); });
+  UI.refresh(game);
+}
+
+// 撤离成功 → 「整理入库」交互：把背包中的物品放回仓库（不入库的会丢失）。
+// 「初始攻击」为初始牌不可入库；木材/口粮自动入库；消耗口袋自动回收。
+let extractLeft = null;   // 待整理的卡牌堆 [{card, count}]（撤离整理页暂存）
+
+function doExtract() {
+  syncPlayTime();
+  game.state = 'done';
+  game.runActive = false;
+  clearSave();
+  SDT.Sound.sfx('victory');
+  SDT.Sound.music('title');
+  const B = SDT.Base;
+  // 木材/口粮自动入库（纯资源，没有丢弃的意义）；消耗口袋自动回收（复原后回仓库）
+  B.deposit(game.inventory);
+  B.depositCards(game.usedPocket, true);
+  SDT.Meta.track('extract', { coins: game.coins, actions: game.turn - 1, cls: game.myClass });
+  // 卡牌堆交给整理界面，由玩家决定入不入库
+  const byName = new Map();
+  game.ownedCards.forEach(o => {
+    if (B.isSha(o.card)) return;              // 「初始攻击」不可入库
+    const s = byName.get(o.card.name);
+    if (s) s.count++;
+    else byName.set(o.card.name, { card: { ...o.card }, count: 1 });
+  });
+  extractLeft = [...byName.values()];
+  renderExtractStash();
+}
+
+function renderExtractStash() {
+  const B = SDT.Base;
+  const woodN = game.inventory.filter(i => i.name === '木材').reduce((a, b) => a + b.count, 0);
+  const ratN = game.inventory.filter(i => i.name === '口粮').reduce((a, b) => a + b.count, 0);
+  const shaN = game.ownedCards.filter(o => B.isSha(o.card)).length;
+  const otherN = game.inventory.filter(i => i.name !== '木材' && i.name !== '口粮')
+    .reduce((a, b) => a + b.count, 0);
+  const room = B.stashRoom();
+  const rows = extractLeft.map((s, i) => {
+    const fits = s.count <= Math.max(0, room);
+    return `<div class="pk-row dep-row">
+      <span class="dep-name">[[icon:cards]] <b>${esc(s.card.name)}</b>${s.count > 1 ? ` ×${s.count}` : ''}
+        <span class="dim">· 收购 ${SDT.Cards.sellPrice(s.card)} 币/张</span></span>
+      <span class="dep-stepper">
+        <button class="mini-btn ok" data-act="exStash" data-i="${i}" ${fits ? '' : 'disabled'}
+          title="${fits ? '放入仓库' : '仓库容量不足'}">[[icon:archive]] 入库</button>
+      </span>
+    </div>`;
+  }).join('');
+  const shaRow = shaN
+    ? `<div class="pk-row dep-row locked"><span>[[icon:cards]] [[icon:lock]] <b>初始攻击</b> ×${shaN}
+        <span class="dim">· 初始牌不可入库（每局自动携带 ${MAP.rules.starterSha} 张）</span></span>
+        <span class="dim">遗落</span></div>`
+    : '';
+  const totalLeft = extractLeft.reduce((a, b) => a + b.count, 0);
+  game.state = 'done';
+  _set_cardPageOpen(false);   // 整理页必须点「完成整理」结束（防止 Esc 绕过丢失提醒）
+  UI.registerHelp('extract', {
+    title: '整理入库说明',
+    html: `
+      <p class="help-item"><b>背包卡牌</b>点击「入库」放回仓库；仓库容量不足时无法入库，未入库的卡牌将在撤离中丢失。</p>
+      <p class="help-item"><b>自动入库</b>木材/口粮自动入库（纯资源没有丢弃的意义）；消耗口袋自动回收（基地/火堆可复原）；「初始攻击」不可入库（每局自动携带）。</p>
+      <p class="help-item"><b>仓库容量</b>可在基地「升级」页用 [[icon:wood]] 木材×${MAP.rules.stashUpgradeWood} 扩建 +${MAP.rules.stashUpgradeSlots} 张；仓库里的卡牌下次出发时可以携带。</p>`,
+    back: () => renderExtractStash(),
+  });
+  UI.showOverlay('', `
+    <div class="pg hub" id="exMain">
+      <header class="hub-head">
+        <h2>[[icon:exit]] 撤离成功 · 整理入库</h2>
+        ${UI.helpBtn('extract')}
+        <span class="sub">把背包中的物品放回仓库——未入库的卡牌将在撤离中丢失</span>
+        <span class="pg-spacer"></span>
+        <span class="hub-res">
+          <span class="res-chip">[[icon:archive]] 仓库容量 <b class="${room <= 0 ? 'fulled' : ''}">${B.stashUsed()}/${B.stashCap()}</b> 张</span>
+          <span class="res-chip">[[icon:coin]] 随身币不带回（<b>${game.coins}</b> 币留在局中）</span>
+        </span>
+      </header>
+      <div class="dep-body">
+        <section class="hub-card">
+          <h3>[[icon:bag]] 背包卡牌</h3>
+          <div class="dep-list">${rows || '<p class="ov-empty" style="margin:6px 0 0">背包里没有可入库的卡牌。</p>'}${shaRow}</div>
+        </section>
+        <section class="hub-card">
+          <h3>[[icon:archive]] 自动入库</h3>
+          <div class="pk-row"><span>[[icon:wood]] 木材 ×<b>${woodN}</b></span><span class="dim">已入库（扩建背包/仓库用）</span></div>
+          <div class="pk-row"><span>[[icon:bread]] 口粮 ×<b>${ratN}</b></span><span class="dim">已入库（升级安全格用）</span></div>
+          ${otherN ? `<div class="pk-row"><span>[[icon:bag]] 其余物资 ×<b>${otherN}</b></span><span class="dim">未能带出 · 价值已计入本局得分</span></div>` : ''}
+          <div class="pk-row"><span>[[icon:pocket]] 消耗口袋</span><span class="dim">已自动回收（基地可复原）</span></div>
+          ${extractLeft.length ? `<button class="ov-btn ok" data-act="exAll" ${room > 0 && totalLeft <= room ? '' : 'disabled'}
+            style="width:100%">[[icon:archive]] 全部入库（${Math.min(totalLeft, room)}/${totalLeft} 张可入）</button>` : ''}
+          <div class="dep-foot" style="margin-top:10px">
+            <button id="btnDeploy" data-act="exFinish">[[icon:check]] 完成整理${extractLeft.length ? `（${totalLeft} 张将丢失）` : ''}</button>
+          </div>
+        </section>
+      </div>
+    </div>`, 'page');
+  UI.act('exStash', (d) => {
+    const s = extractLeft[+d.i];
+    if (!s) return;
+    const r = B.stashRoom();
+    if (r <= 0) return;
+    const take = Math.min(s.count, r);
+    B.depositCards([{ card: s.card, count: take }]);
+    SDT.Meta.track('stash', { count: take });
+    Sfx.ding();
+    UI.log(`[[icon:archive]] 【<b>${esc(s.card.name)}</b>】×${take} 已放入仓库`, 'loot');
+    s.count -= take;
+    if (s.count <= 0) extractLeft.splice(+d.i, 1);
+    renderExtractStash();
+  });
+  UI.act('exAll', () => {
+    let n = 0;
+    const room = B.stashRoom();
+    let left = room;
+    for (const s of extractLeft.slice()) {
+      if (left <= 0) break;
+      const take = Math.min(s.count, left);
+      B.depositCards([{ card: s.card, count: take }]);
+      SDT.Meta.track('stash', { count: take });
+      s.count -= take;
+      left -= take;
+      n += take;
+      if (s.count <= 0) extractLeft.splice(extractLeft.indexOf(s), 1);
+    }
+    if (n) { Sfx.ding(); UI.log(`[[icon:archive]] 共 <b>${n}</b> 张卡牌已放入仓库`, 'loot'); }
+    renderExtractStash();
+  });
+  UI.act('exFinish', () => showExtractDone());
+}
+
+// 整理完成 → 撤离结算（回基地 / 再出发）
+function showExtractDone() {
+  const B = SDT.Base;
+  extractLeft = null;
+  const woodN = game.inventory.filter(i => i.name === '木材').reduce((a, b) => a + b.count, 0);
+  const ratN = game.inventory.filter(i => i.name === '口粮').reduce((a, b) => a + b.count, 0);
+  const total = game.inventory.reduce((a, b) => a + b.value * (b.count || 1), 0);
+  const s = Math.floor(game.elapsed);
+  const timeStr = String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0');
+  UI.log(`<b>[[icon:exit]] 撤离成功！</b>共 ${game.turn - 1} 次行动；运回基地：木材×${woodN}、口粮×${ratN}，仓库现有 ${B.stashUsed()}/${B.stashCap()} 张`, 'ok');
+  nodeShell({
+    tone: 'exit', icon: '[[icon:exit]]', title: '撤离成功',
+    sub: `用时 <b>${timeStr}</b> · 行动 <b>${game.turn - 1}</b> 次 · 剩余生命 <b style="color:#7fdd9c">${game.hp}/${game.maxHp}</b> ·
+      本局携带 <b class="gold">${game.coins} 币</b>（留在局中） · 物资价值 <b class="gold">¥${total.toLocaleString()}</b>`,
+    body: `
+      <p class="ov-note">[[icon:home]] 已运回基地：[[icon:wood]] 木材 ×${woodN} · [[icon:bread]] 口粮 ×${ratN} · [[icon:archive]] 仓库 <b>${B.stashUsed()}/${B.stashCap()}</b> 张 ·
+        [[icon:sparkles]] 图鉴 <b>${Object.keys(B.data.collection).length}</b></p>
+      <p class="ov-note">下次出发时可以从仓库选择卡牌携带；储备币 <b>${B.data.coins}</b> 币将作为开局币随身带走。</p>`,
+    foot: `
+      <button class="ov-btn" data-act="goBase">[[icon:home]] 回基地</button>
+      <button class="ov-btn ok" data-act="again">[[icon:runner]] 再出发</button>`,
+  });
+  UI.act('goBase', () => { UI.hideOverlay(); openBaseHub('deploy'); });
+  UI.act('again', () => { UI.hideOverlay(); openBaseHub('deploy'); });
+  UI.refresh(game);
+}

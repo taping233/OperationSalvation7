@@ -18,7 +18,8 @@ import { fileURLToPath } from 'node:url';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 
-const GAME_PARTS = ['game.session.js', 'game.menu.js', 'game.run.data.js', 'game.run.js', 'game.hub.js', 'game.bag.js', 'game.notes.js', 'game.cardslib.js', 'game.boot.js'];
+// game.run.* 为架构批次 4 拆出的局内流程模块（scenes→altar→flow），与壳合并扫描
+const GAME_PARTS = ['game.session.js', 'game.menu.js', 'game.run.data.js', 'game.run.js', 'game.run.scenes.js', 'game.run.altar.js', 'game.run.flow.js', 'game.hub.js', 'game.bag.js', 'game.notes.js', 'game.cardslib.js', 'game.boot.js'];
 const BATTLE_PARTS = ['battle.core.js', 'battle.view.js'];
 const src = (p) => {
   if (p === 'game.js') return GAME_PARTS.map(f => fs.readFileSync(path.join(HERE, 'src', f), 'utf8')).join('\n');
