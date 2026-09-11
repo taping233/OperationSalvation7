@@ -1,3 +1,5 @@
+import { matchElsewhere, noteUnknownEffect } from './effect-verbs.js';
+
 /**
  * 将卡牌自然语言拆成稳定的结算时点。这里只解析文本，不读写战斗状态。
  * @param {string} description
@@ -1180,39 +1182,12 @@ function createEffectExecutor(deps) {
       did = true;
     }
 
-    // —— 识别补丁（2026-09-08）：以下句式由出牌结算段 / 战斗规则层实装，
-    //     文本执行器只负责标记「已识别」，避免误报「占位」与审计假阳性 ——
-    if (!did) {
-      if (/墓地中每有\s*1\s*张(武术|法术|装备|道具|资源)牌/.test(desc) ||
-          /倍于被注能卡牌价格/.test(desc) ||
-          /永远被保留在手牌中|无法用于注能/.test(desc) ||
-          /下一张(?:法术|招式)?施放\s*\d+\s*次/.test(desc) ||
-          /本牌变为\s*0\s*费/.test(desc) ||
-          /上一张(?:打出的)?牌是武术/.test(desc) ||
-          /流血伤害翻倍/.test(desc) ||                       // 飞身劈：hitFoe 对流血目标加倍
-          /若对方[^。]*流血/.test(desc) ||                   // 致命穿刺：条件加成在 resolveCard 结算
-          /消耗该牌时/.test(desc) ||                         // 消耗触发句：注能牺牲/手选消耗时点结算（Q2）
-          /发现或随机获取该牌时/.test(desc) ||               // 阿猫的礼物：获取时点被动已实装（战斗 fireCatGift / 地图 grantEventCard），打出时不结算
-          /对冰冻[^。]*?伤害\s*\+\s*\d+/.test(desc) ||       // 寒冰剑：hitFoe 对冰冻目标追加
-          /每消灭\s*1\s*个敌人/.test(desc) ||                // 饮血剑：击杀钩子（applyKillRewards）
-          /选择其中\s*(?:1|一)\s*张直接施放/.test(desc) ||   // 法师锦囊后半句：pouch 流程已整体接手
-          /两回合后[^。]*未选择/.test(desc) ||               // 花开两面：pickChoice 调度第二扇门
-          /在你抽到[^。]*后……/.test(desc) ||                // 天启剑尾句：设计者原文留白
-          /在手牌中时[^。]*?变为/.test(desc) ||              // 不变应万变：applyImitate（打出武术后变形）
-          /复原最多(两|2)张/.test(desc) ||                   // 复原药水：背包使用（game.bag）
-          (flags.structuredHit && (
-            /造成\s*\d+\s*点(?:\s*(?:固定|法术|真实|攻击))?\s*伤害|(\d+)\s*点?法术伤害/.test(desc) ||
-            /注能\s*[（(][^）)]*[）)][：:]?\s*伤害\s*\+\s*\d+/.test(desc) ||
-            (infLead && /^\s*伤害\s*\+\s*\d+\s*$/.test(desc)) ||
-            /对\s*\d+\s*血以下/.test(desc) ||
-            /血量一半及以下的敌人伤害增加/.test(desc) ||
-            /回复等量生命/.test(desc) ||
-            /触发\s*\d+\s*次/.test(desc) ||
-            /额外施放\s*\d+\s*次/.test(desc) ||
-            /受法伤加成翻倍/.test(desc) ||
-            /造成等同于攻击力的伤害/.test(desc)))) {
-        did = true;
-      }
+    // —— 识别补丁（2026-09-08，批次 3 起改为查注册表）——
+    // 以下句式由出牌结算段 / 战斗规则层 / 背包实装（见 effect-verbs.js 的 ELSEWHERE），
+    // 文本执行器只标记「已识别」，避免误报「占位」与审计假阳性；句式清单已从本函数
+    // 迁到注册表，加新句式改表不改这里。
+    if (!did && matchElsewhere(desc, { structuredHit: !!flags.structuredHit, infusedLead: !!infLead }).length) {
+      did = true;
     }
 
     const em = desc.match(/(?:获得|回复)\s*(\d+)\s*点?能量/);
@@ -1227,7 +1202,11 @@ function createEffectExecutor(deps) {
       log(`[[icon:bolt]] 本场战斗能量上限 +${cm[1]}（每回合 ${currentMax} 费）`, 'sys');
       did = true;
     }
-    return { did, drawn, healed, armored };
+    // —— 未识别子句哨兵（批次 3）：牌面像有效果、却既没结算也没被任何层认领 ——
+    // 记为「牌面写了效果但打出去没反应」，供实机试玩与自定义卡排查（同句只记一次）。
+    const result = { did, drawn, healed, armored };
+    if (!did && !drawn && !healed && !armored) noteUnknownEffect(card, desc);
+    return result;
   };
 }
 

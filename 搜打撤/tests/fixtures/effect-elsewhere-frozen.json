@@ -1,0 +1,113 @@
+{
+  "provenance": "HEAD 版 game/src/battle.effects.js「识别补丁」白名单（批次 3 前的执行器识别面）",
+  "entries": [
+    {
+      "gate": "",
+      "source": "墓地中每有\\s*1\\s*张(武术|法术|装备|道具|资源)牌"
+    },
+    {
+      "gate": "",
+      "source": "倍于被注能卡牌价格"
+    },
+    {
+      "gate": "",
+      "source": "永远被保留在手牌中|无法用于注能"
+    },
+    {
+      "gate": "",
+      "source": "下一张(?:法术|招式)?施放\\s*\\d+\\s*次"
+    },
+    {
+      "gate": "",
+      "source": "本牌变为\\s*0\\s*费"
+    },
+    {
+      "gate": "",
+      "source": "上一张(?:打出的)?牌是武术"
+    },
+    {
+      "gate": "",
+      "source": "流血伤害翻倍"
+    },
+    {
+      "gate": "",
+      "source": "若对方[^。]*流血"
+    },
+    {
+      "gate": "",
+      "source": "消耗该牌时"
+    },
+    {
+      "gate": "",
+      "source": "发现或随机获取该牌时"
+    },
+    {
+      "gate": "",
+      "source": "对冰冻[^。]*?伤害\\s*\\+\\s*\\d+"
+    },
+    {
+      "gate": "",
+      "source": "每消灭\\s*1\\s*个敌人"
+    },
+    {
+      "gate": "",
+      "source": "选择其中\\s*(?:1|一)\\s*张直接施放"
+    },
+    {
+      "gate": "",
+      "source": "两回合后[^。]*未选择"
+    },
+    {
+      "gate": "",
+      "source": "在你抽到[^。]*后……"
+    },
+    {
+      "gate": "",
+      "source": "在手牌中时[^。]*?变为"
+    },
+    {
+      "gate": "",
+      "source": "复原最多(两|2)张"
+    },
+    {
+      "gate": "structuredHit",
+      "source": "造成\\s*\\d+\\s*点(?:\\s*(?:固定|法术|真实|攻击))?\\s*伤害|(\\d+)\\s*点?法术伤害"
+    },
+    {
+      "gate": "structuredHit",
+      "source": "注能\\s*[（(][^）)]*[）)][：:]?\\s*伤害\\s*\\+\\s*\\d+"
+    },
+    {
+      "gate": "structuredHit+infusedLead",
+      "source": "^\\s*伤害\\s*\\+\\s*\\d+\\s*$"
+    },
+    {
+      "gate": "structuredHit",
+      "source": "对\\s*\\d+\\s*血以下"
+    },
+    {
+      "gate": "structuredHit",
+      "source": "血量一半及以下的敌人伤害增加"
+    },
+    {
+      "gate": "structuredHit",
+      "source": "回复等量生命"
+    },
+    {
+      "gate": "structuredHit",
+      "source": "触发\\s*\\d+\\s*次"
+    },
+    {
+      "gate": "structuredHit",
+      "source": "额外施放\\s*\\d+\\s*次"
+    },
+    {
+      "gate": "structuredHit",
+      "source": "受法伤加成翻倍"
+    },
+    {
+      "gate": "structuredHit",
+      "source": "造成等同于攻击力的伤害"
+    }
+  ]
+}

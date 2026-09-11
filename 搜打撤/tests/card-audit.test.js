@@ -6,6 +6,9 @@
    （如「造成 2 点伤害」有 dmg 字段）属正常假阳性，以未识别总数趋势为准。 */
 import { describe, it, expect, beforeAll } from 'vitest';
 window.SDT = window.SDT || { Icons: { img: () => '' } };
+// 静态 import 会先于本文件顶层代码执行，此时 sdt-facade 可能已建好 window.SDT（无 Icons）——
+// 所以必须补齐而不是直接赋值。
+window.SDT.Icons = window.SDT.Icons || { img: () => '' };
 window.SDT.Icons.TYPE_ART = {};
 await import('../game/src/cards.js');
 import { createEffectExecutor, splitEffectClauses, parsePoolNoun } from '../game/src/battle.effects.js';
