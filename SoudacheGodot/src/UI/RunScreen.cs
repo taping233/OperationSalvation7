@@ -3,6 +3,7 @@ using SoudacheGodot.App;
 using SoudacheGodot.UI.Fx;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace SoudacheGodot.UI;
@@ -13,7 +14,10 @@ namespace SoudacheGodot.UI;
 /// → hub-page 内容区（页签切换播 hubPageIn .3s cubic-bezier(.22,.61,.36,1) translateY 12px）。
 /// 出发页 = hubDeployHTML 对应物（选角 + 出征预报 + 出发 + 宝藏大门条，批次 6b 已验收布局）；
 /// 仓库/升级/人物三页按 RunBase 快照实数据（StashUsed/StashCapacity、InventoryLabels、upgrade:* 动作）；
-/// 成就·收藏室页为页签框架空态（数据消费待批次 5 快照，需求清单见 PROGRESS 接口需求 [6b'→A]）。
+/// 成就·收藏室页 = 职业收藏室（批次 6b'' 消费 RunUiSnapshot.Collection：66 张收藏池网格 +
+/// 五里程碑领奖 collclaim:{id} + 熟练度转化条）+ 卡背图鉴/成就陈列空态（状态数据未透出，[6b'→A]）；
+/// 宠物内容 = 仓库页宠物栏 + 升级页宠物升级行（批次 6b'' 消费 RunUiSnapshot.BasePets，
+/// 动作 pet:hatch / pet:sel:{id} / pet:up:{id}，对照 game.hub.js hubPetsHTML/hubUpgradeHTML）。
 /// 录帧/smoke 参数：--ui-hub-tab=deploy|stash|upgrade|classes|ach 直开对应页签。
 /// </summary>
 public partial class RunScreen : UiScreen
@@ -61,6 +65,20 @@ public partial class RunScreen : UiScreen
     private Button _upgradeBagButton = null!;
     private Button _upgradeStashButton = null!;
 
+    // —— 宠物/收藏室动态件（批次 6b''；仓库页宠物栏 + 升级页宠物升级行，ach 页整体重建） ——
+    private Label _petTipLine = null!;        // 「N / 6 只 · 携带 1 只出战」（hubPetsHTML set-tip）
+    private VBoxContainer _petListHost = null!;
+    private Button _petHatchButton = null!;   // pet:hatch（Enabled=快照 Actions 同名项）
+    private Label _petEggHint = null!;
+    private Label _petUpTipLine = null!;      // 「口粮 2-3-4-5 · 保护格 N 格」
+    private VBoxContainer _petUpHost = null!;
+
+    /// <summary>
+    /// 收藏集合（网页 B.isCollected 全量口径）。[6b'→A]：RunUiSnapshot 未透出 isCollected 卡 id 集合，
+    /// 本批以空集消费——收藏池全部 ？ 槽（置灰空态），✦ 点亮代码就位、集合快照到位即生效。
+    /// </summary>
+    private static readonly HashSet<string> CollectedIds = new();
+
     private static readonly Regex StackRegex = new(@"^(?<name>.+?)\s*×(?<n>\d+)$", RegexOptions.Compiled);
     private readonly CodexCatalog _catalog = CodexCatalog.Default;
 
@@ -101,13 +119,36 @@ public partial class RunScreen : UiScreen
         _pageHost.SizeFlagsVertical = Control.SizeFlags.ExpandFill;
         column.AddChild(_pageHost);
 
-        // 录帧/smoke 直开指定页签（--ui-hub-tab=stash 等）
+        // 录帧/smoke 直开指定页签（--ui-hub-tab=stash 等）；取证滚动偏移（--ui-hub-scroll=<px>，
+        // 同 6c-map --map-demo 取证时间线模式：布局稳定后滚到指定位，--write-movie 帧取后段）
         var args = OS.GetCmdlineUserArgs();
         foreach (var arg in args)
+        {
             if (arg.StartsWith("--ui-hub-tab=", StringComparison.Ordinal))
                 _activeTab = arg.Substring("--ui-hub-tab=".Length);
+            else if (arg.StartsWith("--ui-hub-scroll=", StringComparison.Ordinal)
+                && int.TryParse(arg.AsSpan("--ui-hub-scroll=".Length), out var px))
+                _demoScrollPx = px;
+        }
 
         SelectTab(_activeTab, animate: false);
+    }
+
+    private int _demoScrollPx = -1;   // 取证滚动偏移（<0 = 不滚动）；消费一次后复位
+    private int _demoScrollDelay = 10;
+
+    public override void _Process(double delta)
+    {
+        if (_demoScrollPx < 0) return;
+        if (_demoScrollDelay > 0)
+        {
+            _demoScrollDelay--; // 等快照晚到重建与布局稳定（首帧发布会在 ach/classes 页整体重建）
+            return;
+        }
+        var scroll = _pageHost.GetChildren().OfType<ScrollContainer>().FirstOrDefault();
+        if (scroll != null)
+            scroll.ScrollVertical = _demoScrollPx; // ScrollContainer 自行裁剪到 max
+        _demoScrollPx = -1;
     }
 
     // hub-head：← 返回 + 资源 chips（res-chip 深色版；网页 game.hub.js:48-58）
@@ -473,7 +514,28 @@ public partial class RunScreen : UiScreen
         materials.AddChild(MaterialRow("icon-bread", "口粮", "宠物升级用 · 不可卖币", () => _snapshot?.BaseRations ?? 0));
         materials.AddChild(MaterialRow("icon-key", "钥匙", "口袋复原与宝藏大门钥匙", () => _snapshot?.BaseKeys ?? 0));
 
+        // —— 宠物栏（game.hub.js hubPetsHTML：批次 6b'' 消费 BasePets；孵化=pet:hatch，携带=pet:sel:{id}） ——
+        var petCard = WinterUi.HubCard(parent, "宠物", "res://assets/images/ui/icon-paw.png");
+        _petTipLine = WinterUi.Label("", 12, new Color("7a5c22"));
+        petCard.AddChild(_petTipLine);
+        petCard.AddChild(WinterUi.Label("初始宠物「汪汪狗」自动获得；其余只能用宠物蛋（宝箱 0.7% 掉落）+ 50 币在仓库孵化。宠物在「升级」页用口粮升级，携带不同宠物保护格数量不同。",
+            11, new Color("6b685b"), true));
+        _petListHost = new VBoxContainer();
+        _petListHost.AddThemeConstantOverride("separation", 6);
+        petCard.AddChild(_petListHost);
+        var hatchRow = new HBoxContainer();
+        hatchRow.AddThemeConstantOverride("separation", 10);
+        petCard.AddChild(hatchRow);
+        _petHatchButton = WinterUi.OvButton("孵化宠物（-1 蛋 -50 币）", "ok", new Vector2(0, 40));
+        _petHatchButton.Pressed += () => _core?.RequestBaseAction("pet:hatch");
+        hatchRow.AddChild(_petHatchButton);
+        _petEggHint = WinterUi.Label("", 11, new Color("6b685b"), true);
+        _petEggHint.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
+        _petEggHint.SizeFlagsVertical = Control.SizeFlags.ShrinkCenter;
+        hatchRow.AddChild(_petEggHint);
+
         RefreshStashPage();
+        RefreshPetSection();
     }
 
     private Control MaterialRow(string icon, string caption, string note, System.Func<int> value)
@@ -583,13 +645,18 @@ public partial class RunScreen : UiScreen
         _upgradeStashButton.Pressed += () => _core?.RequestBaseAction("upgrade:stash");
         stashCard.AddChild(_upgradeStashButton);
 
-        // —— 宠物升级卡（批次 5 数据接入前的说明态） ——
+        // —— 宠物升级卡（game.hub.js hubUpgradeHTML 宠物段：批次 6b'' 消费 BasePets；升级=pet:up:{id}） ——
         var petCard = WinterUi.HubCard(parent, "宠物升级", "res://assets/images/ui/icon-bread.svg");
-        petCard.AddChild(WinterUi.Label("每只宠物独立升级（口粮消耗递增 2-3-4-5，上限 Lv.5），Lv.1 起每级 +1 保护格；携带不同宠物，保护格数量不同。",
-            11.5f, new Color("6b685b"), true));
-        petCard.AddChild(WinterUi.Label("（孵化宠物后，可升级的宠物会在这里列出——仓库页宠物蛋 + 50 币孵化）", 11.5f, new Color("8a8677")));
+        _petUpTipLine = WinterUi.Label("", 12, new Color("7a5c22"));
+        petCard.AddChild(_petUpTipLine);
+        petCard.AddChild(WinterUi.Label("每只宠物的升级进度相互独立（Lv.1 起每级 +1 保护格）；携带不同宠物，保护格数量不同——小企鹅咕嘎可到 4-8 格。在仓库页切换携带的宠物。",
+            11, new Color("6b685b"), true));
+        _petUpHost = new VBoxContainer();
+        _petUpHost.AddThemeConstantOverride("separation", 6);
+        petCard.AddChild(_petUpHost);
 
         RefreshUpgradePage();
+        RefreshPetUpgradeSection();
     }
 
     private void RefreshUpgradePage()
@@ -678,19 +745,313 @@ public partial class RunScreen : UiScreen
     }
 
     // ------------------------------------------------------------------
-    // 成就·收藏室页（页签框架空态；数据消费待批次 5 快照，[6b'→A] 清单见 PROGRESS）
+    // 成就·收藏室页（game.hub.js hubAchHTML/collRoomHTML：批次 6b'' 消费 RunUiSnapshot.Collection）：
+    // 职业收藏室 = 收藏池 66 张网格（五职业 ×（职业稀有度 ∪ 能力卡），✦=已收藏）+ 五里程碑领奖
+    // （collclaim:{id} 走 RequestBaseAction）+ 熟练度转化条（职业卡 +10 / 能力卡 +50）；
+    // 卡背图鉴/成就陈列的解锁·领取状态集合未透出快照 → 空态置灰（接口需求 [6b'→A] 8，归 A 线补）。
     // ------------------------------------------------------------------
 
     private void BuildAchPage(VBoxContainer parent)
     {
-        var card = WinterUi.HubCard(parent, "成就与职业收藏室", "res://assets/images/ui/icon-lib.svg");
-        card.AddChild(WinterUi.Label("卡背图鉴、成就陈列与职业收藏室（收藏职业卡 +10 / 能力卡 +50 熟练度经验，5/15/30/45/全收集里程碑奖励）将陈列在此。",
-            12, new Color("6b685b"), true));
-        var empty = WinterUi.Label("收藏档案为空——收藏第一批职业卡后，这里会开始点亮。", 13, new Color("8a8677"));
-        empty.SizeFlagsHorizontal = Control.SizeFlags.ShrinkCenter;
-        card.AddChild(empty);
-        var note = WinterUi.Label("成就进度与收藏陈列的数据链路随收藏室系统一并接入。", 11.5f, new Color("8a8677"), true);
-        card.AddChild(note);
+        var collection = _snapshot?.Collection;
+        var pool = CollectPool();
+        var progress = collection?.Progress ?? 0;
+        var total = collection?.Total ?? pool.Count;
+
+        // —— 职业收藏室（collRoomHTML） ——
+        var card = WinterUi.HubCard(parent, "职业收藏室", "res://assets/images/ui/icon-lib.svg");
+        var tipRow = new HBoxContainer();
+        tipRow.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
+        card.AddChild(tipRow);
+        var tipSpacer = new Control { SizeFlagsHorizontal = Control.SizeFlags.ExpandFill };
+        tipRow.AddChild(tipSpacer);
+        tipRow.AddChild(WinterUi.Label($"收藏进度 {progress} / {total}", 12, new Color("7a5c22")));
+        card.AddChild(WinterUi.Label(
+            "收藏的职业卡与能力卡会陈列在这里（收藏只做记录并转化为对应人物的经验，卡牌保留在仓库），每收藏一张职业卡为对应人物 +10 点经验、能力卡 +50 点（同一张只计一次）。收藏不同的职业卡与能力卡推进进度，阶段目标各有一次奖励。",
+            11, new Color("6b685b"), true));
+        var overall = CapacityBar(card, new Color("b8934c"));
+        if (total > 0) overall.Value = Math.Clamp((double)progress / total, 0, 1);
+
+        // 五里程碑（coll-ms：达成→领取按钮；已领→✓ 已领取；未达→进度 N/need）
+        var msList = new VBoxContainer();
+        msList.AddThemeConstantOverride("separation", 6);
+        card.AddChild(msList);
+        foreach (var ms in collection?.Milestones ?? System.Array.Empty<CollectionMilestoneUiSnapshot>())
+        {
+            var reached = ms.Reached && !ms.Claimed;
+            var row = new PanelContainer();
+            row.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
+            row.AddThemeStyleboxOverride("panel", WinterUi.Box(
+                reached ? new Color("f3ead6") : new Color("f7f5ef"), 8,
+                reached ? new Color("b8934c", 0.6f) : new Color("c9c5b8"), 1));
+            if (ms.Claimed) row.Modulate = new Color(1, 1, 1, 0.72f); // .coll-ms.done opacity .72
+            var margin = new MarginContainer();
+            margin.AddThemeConstantOverride("margin_left", 12);
+            margin.AddThemeConstantOverride("margin_right", 12);
+            margin.AddThemeConstantOverride("margin_top", 7);
+            margin.AddThemeConstantOverride("margin_bottom", 7);
+            row.AddChild(margin);
+            var line = new HBoxContainer();
+            line.AddThemeConstantOverride("separation", 10);
+            margin.AddChild(line);
+            line.AddChild(WinterUi.Label($"收藏 {ms.Need} 张", 12.5f, new Color("3c3a33")));
+            var reward = WinterUi.Label(ms.Reward, 11.5f, new Color("6b685b"));
+            reward.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
+            line.AddChild(reward);
+            if (ms.Claimed)
+                line.AddChild(WinterUi.Label("✓ 已领取", 11.5f, new Color("3f8f5f")));
+            else if (ms.Reached)
+            {
+                var claim = WinterUi.MiniButton("领取", "ok");
+                var msId = ms.Id;
+                claim.Pressed += () => _core?.RequestBaseAction($"collclaim:{msId}");
+                line.AddChild(claim);
+            }
+            else
+                line.AddChild(WinterUi.Label($"{progress} / {ms.Need}", 11.5f, new Color("8a8677")));
+            msList.AddChild(row);
+        }
+
+        // 熟练度转化条（+10/+50 语义；Collection.Classes 实数据，meta.js classSummary 口径）
+        card.AddChild(WinterUi.Label("熟练度转化 · 收藏职业卡 +10 / 能力卡 +50 经验（同一张只计一次）",
+            11.5f, new Color("8a8677"), true));
+        var classGrid = new GridContainer { Columns = 5 };
+        classGrid.AddThemeConstantOverride("h_separation", 12);
+        classGrid.AddThemeConstantOverride("v_separation", 8);
+        classGrid.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
+        card.AddChild(classGrid);
+        foreach (var cls in collection?.Classes ?? System.Array.Empty<ClassProgressUiSnapshot>())
+            classGrid.AddChild(ClassXpCell(cls));
+
+        // 收藏池分组陈列（66 张，组序=Collection.Classes=五职业；槽位 ✦=已收藏 / ？=未收藏置灰）
+        var classOrder = (collection?.Classes.Select(c => c.Cls) ?? Enumerable.Empty<string>()).ToList();
+        if (classOrder.Count == 0)
+            classOrder = pool.Select(c => c.Cls).Distinct().ToList();
+        foreach (var cls in classOrder)
+        {
+            var cards = pool.Where(c => c.Cls == cls).ToList();
+            if (cards.Count == 0) continue;
+            var gotN = cards.Count(c => CollectedIds.Contains(c.Id));
+            var head = new HBoxContainer();
+            head.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
+            head.AddThemeConstantOverride("separation", 10);
+            card.AddChild(head);
+            head.AddChild(WinterUi.Heading(ClassName(cls), 13.5f, new Color("3c3a33"), 2f));
+            head.AddChild(WinterUi.Label($"{gotN} / {cards.Count} 张 · 收藏职业卡 +10 经验 · 能力卡 +50 经验",
+                11, new Color("8a8677")));
+            var grid = new GridContainer { Columns = 13 };
+            grid.AddThemeConstantOverride("h_separation", 8);
+            grid.AddThemeConstantOverride("v_separation", 8);
+            grid.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
+            card.AddChild(grid);
+            foreach (var cardDef in cards)
+                grid.AddChild(CollectedIds.Contains(cardDef.Id) ? CollectedSlot(cardDef) : EmptySlot());
+        }
+
+        // —— 卡背图鉴 / 成就陈列：解锁·领取状态未透出，空态置灰（接口需求 [6b'→A] 8） ——
+        var backsCard = WinterUi.HubCard(parent, "卡背图鉴", "res://assets/images/ui/icon-book.svg");
+        backsCard.AddChild(WinterUi.Label(
+            "卡背随成就领取解锁（默认卡背恒可用）——解锁与装备状态的数据链路接入后在此陈列。",
+            11.5f, new Color("8a8677"), true));
+        var achCard = WinterUi.HubCard(parent, "成就", "res://assets/images/ui/icon-medal.svg");
+        achCard.AddChild(WinterUi.Label(
+            "成就陈列（达成条件 / 木材口粮 / 卡背奖励 / 领取）待解锁与领取状态的快照字段透出后接入。",
+            11.5f, new Color("8a8677"), true));
+    }
+
+    /// <summary>收藏池（meta.js isCollectible/collectPool）：cls∈五职业 且（稀有度=职业 ∪ 类型=能力卡）。</summary>
+    private List<CodexCatalog.CodexCard> CollectPool()
+    {
+        var classes = new HashSet<string>();
+        foreach (var cls in _snapshot?.Collection?.Classes ?? System.Array.Empty<ClassProgressUiSnapshot>())
+            classes.Add(cls.Cls);
+        return _catalog.Cards
+            .Where(c => c.Cls.Length > 0 && (classes.Count == 0 || classes.Contains(c.Cls))
+                && (c.Rarity == "职业" || c.Type == "能力卡"))
+            .ToList();
+    }
+
+    /// <summary>职业名（rulesetId=五职业名 → characters.json 人物名，同 coll-group-head characterName）。</summary>
+    private static string ClassName(string cls)
+    {
+        foreach (var entry in CharacterRoster.Entries)
+            if (entry.RulesetId == cls)
+                return entry.Name;
+        return cls;
+    }
+
+    /// <summary>熟练度转化单元：人物名 + Lv + xp 条 + 经验文案（hubClassesHTML xp-bar 同构）。</summary>
+    private Control ClassXpCell(ClassProgressUiSnapshot cls)
+    {
+        var cell = new VBoxContainer();
+        cell.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
+        cell.AddThemeConstantOverride("separation", 3);
+        var head = new HBoxContainer();
+        head.AddThemeConstantOverride("separation", 6);
+        cell.AddChild(head);
+        head.AddChild(WinterUi.Label(ClassName(cls.Cls), 12, new Color("3c3a33")));
+        head.AddChild(WinterUi.Label(cls.Maxed ? $"Lv.{cls.Lv} · MAX" : $"Lv.{cls.Lv}", 11, new Color("e0a458")));
+        var bar = CapacityBar(cell, new Color("6a6a6a"));
+        bar.Value = cls.Maxed ? 1 : cls.XpForNext > 0 ? Math.Clamp((double)cls.Xp / cls.XpForNext, 0, 1) : 0;
+        cell.AddChild(WinterUi.Label(cls.Maxed ? "已满级" : $"经验 {cls.Xp} / {cls.XpForNext}", 10, new Color("8a8677")));
+        return cell;
+    }
+
+    /// <summary>.coll-slot.on：小卡面 + 右上 ✦（收藏态点亮；集合快照到位后生效）。</summary>
+    private Control CollectedSlot(CodexCatalog.CodexCard card)
+    {
+        var cell = new Control { CustomMinimumSize = new Vector2(90, 126) };
+        var face = CardFace.Create(_catalog, card, CardFace.FaceMode.Lib, 9);
+        face.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect);
+        cell.AddChild(face);
+        var mark = WinterUi.Label("✦", 13, new Color("b8934c"));
+        mark.Position = new Vector2(3, 2);
+        cell.AddChild(mark);
+        cell.TooltipText = $"{card.Name} · 已收藏";
+        return cell;
+    }
+
+    /// <summary>.coll-slot.off：82×114 "？" 斜纹暗格的浅色等价（90×126 虚位）。</summary>
+    private Control EmptySlot()
+    {
+        var slot = new PanelContainer { CustomMinimumSize = new Vector2(90, 126) };
+        slot.AddThemeStyleboxOverride("panel", WinterUi.Box(new Color("e6e2d7"), 9, new Color("c9c5b8"), 1));
+        var center = new CenterContainer();
+        center.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect);
+        center.MouseFilter = Control.MouseFilterEnum.Ignore;
+        slot.AddChild(center);
+        center.AddChild(WinterUi.Label("？", 22, new Color("b5b0a3")));
+        slot.TooltipText = "未收藏 · 收藏职业卡/能力卡后点亮";
+        return slot;
+    }
+
+    // ------------------------------------------------------------------
+    // 宠物（game.hub.js hubPetsHTML / hubUpgradeHTML：批次 6b'' 消费 RunUiSnapshot.BasePets）
+    // ------------------------------------------------------------------
+
+    /// <summary>仓库页宠物栏刷新：N/6 tip + 六行（未孵化锁定态 / 携带中琥珀态 / 携带按钮）+ 孵化按钮。</summary>
+    private void RefreshPetSection()
+    {
+        var snapshot = _snapshot;
+        if (_petListHost == null || !IsInstanceValid(_petListHost) || snapshot == null) return;
+        var pets = snapshot.BasePets;
+        _petTipLine.Text = $"{pets.Count(p => p.Owned)} / {pets.Length} 只 · 携带 1 只出战";
+        foreach (var child in _petListHost.GetChildren()) child.QueueFree();
+        foreach (var pet in pets)
+            _petListHost.AddChild(PetRow(pet));
+        var hatchEnabled = IsActionEnabled(snapshot, "pet:hatch");
+        _petHatchButton.Disabled = !hatchEnabled;
+        _petEggHint.Text = hatchEnabled
+            ? "仓库里有宠物蛋——点击孵化，随机获得 1 只未拥有的宠物！"
+            : $"孵化需要宠物蛋 ×1 + 50 币（当前储备 {snapshot.BaseCoins} 币；蛋由宝箱 0.7% 掉落）";
+    }
+
+    /// <summary>.pk-row.pet-row（浅色版）：未孵化=锁定灰、携带中=琥珀 on 态、已拥有未携带=携带按钮。</summary>
+    private Control PetRow(PetUiSnapshot pet)
+    {
+        var row = new PanelContainer();
+        row.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
+        var carried = pet.Owned && pet.Carried;
+        row.AddThemeStyleboxOverride("panel", WinterUi.Box(
+            carried ? new Color("ffca5b", 0.1f) : new Color("f7f5ef"), 8,
+            carried ? new Color("ffca5b", 0.55f) : new Color("c9c5b8"), 1));
+        if (!pet.Owned) row.Modulate = new Color(1, 1, 1, 0.55f); // .pet-row.locked opacity .55
+        var margin = new MarginContainer();
+        margin.AddThemeConstantOverride("margin_left", 10);
+        margin.AddThemeConstantOverride("margin_right", 10);
+        margin.AddThemeConstantOverride("margin_top", 6);
+        margin.AddThemeConstantOverride("margin_bottom", 6);
+        row.AddChild(margin);
+        var column = new VBoxContainer();
+        column.AddThemeConstantOverride("separation", 2);
+        margin.AddChild(column);
+        var line = new HBoxContainer();
+        line.AddThemeConstantOverride("separation", 8);
+        column.AddChild(line);
+        line.AddChild(WinterUi.Icon("res://assets/images/ui/icon-paw.png", 15));
+        if (pet.Owned)
+        {
+            line.AddChild(WinterUi.Label(pet.Name, 13, new Color("3c3a33")));
+            line.AddChild(WinterUi.Label($"Lv.{pet.Level}", 11.5f, new Color("8a8677")));
+            var spacer = new Control { SizeFlagsHorizontal = Control.SizeFlags.ExpandFill };
+            line.AddChild(spacer);
+            if (pet.Carried)
+                line.AddChild(WinterUi.Label("✓ 携带中", 12, new Color("3f8f5f")));
+            else
+            {
+                var carry = WinterUi.MiniButton("携带", "ok");
+                carry.Disabled = !pet.CanCarry;
+                var id = pet.Id;
+                carry.Pressed += () => _core?.RequestBaseAction($"pet:sel:{id}");
+                line.AddChild(carry);
+            }
+            column.AddChild(WinterUi.Label(pet.Desc.Replace("携带效果：", ""), 11, new Color("8a8677")));
+        }
+        else
+        {
+            line.AddChild(WinterUi.Label("？？？ · 未孵化", 13, new Color("3c3a33")));
+            var spacer = new Control { SizeFlagsHorizontal = Control.SizeFlags.ExpandFill };
+            line.AddChild(spacer);
+            line.AddChild(WinterUi.Label("宠物蛋 + 50 币孵化", 11.5f, new Color("8a8677")));
+        }
+        return row;
+    }
+
+    /// <summary>升级页宠物升级行刷新：六行 Lv/口粮升级按钮（未孵化锁定行 → 引导去仓库页）。</summary>
+    private void RefreshPetUpgradeSection()
+    {
+        var snapshot = _snapshot;
+        if (_petUpHost == null || !IsInstanceValid(_petUpHost) || snapshot == null) return;
+        _petUpTipLine.Text = $"口粮 2-3-4-5 · 携带中的宠物决定保护格 {snapshot.SafeCapacity} 格";
+        foreach (var child in _petUpHost.GetChildren()) child.QueueFree();
+        foreach (var pet in snapshot.BasePets)
+        {
+            var row = new PanelContainer();
+            row.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
+            var carried = pet.Owned && pet.Carried;
+            row.AddThemeStyleboxOverride("panel", WinterUi.Box(
+                carried ? new Color("ffca5b", 0.1f) : new Color("f7f5ef"), 8,
+                carried ? new Color("ffca5b", 0.55f) : new Color("c9c5b8"), 1));
+            if (!pet.Owned) row.Modulate = new Color(1, 1, 1, 0.55f);
+            var margin = new MarginContainer();
+            margin.AddThemeConstantOverride("margin_left", 10);
+            margin.AddThemeConstantOverride("margin_right", 10);
+            margin.AddThemeConstantOverride("margin_top", 6);
+            margin.AddThemeConstantOverride("margin_bottom", 6);
+            row.AddChild(margin);
+            var line = new HBoxContainer();
+            line.AddThemeConstantOverride("separation", 8);
+            margin.AddChild(line);
+            line.AddChild(WinterUi.Icon("res://assets/images/ui/icon-paw.png", 15));
+            if (pet.Owned)
+            {
+                line.AddChild(WinterUi.Label(pet.Name, 13, new Color("3c3a33")));
+                if (carried)
+                    line.AddChild(WinterUi.Label("✓ 携带中", 12, new Color("3f8f5f")));
+                var desc = WinterUi.Label(pet.Desc.Replace("携带效果：", ""), 11, new Color("8a8677"));
+                desc.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
+                desc.SizeFlagsVertical = Control.SizeFlags.ShrinkCenter;
+                desc.ClipText = true;
+                line.AddChild(desc);
+                var maxed = pet.Level >= 5; // pets.json levelMax=5（网页 PET_LEVEL_MAX）
+                line.AddChild(WinterUi.Label(maxed ? $"Lv.{pet.Level} · MAX" : $"Lv.{pet.Level} → {pet.Level + 1}",
+                    11.5f, new Color("8a8677")));
+                var up = WinterUi.MiniButton(maxed ? "已满级" : $"口粮 ×{pet.UpgradeCost} 升级", "ok");
+                up.Disabled = !pet.CanUpgrade;
+                up.TooltipText = maxed ? "已满级" : $"消耗口粮 ×{pet.UpgradeCost} 升级";
+                var id = pet.Id;
+                up.Pressed += () => _core?.RequestBaseAction($"pet:up:{id}");
+                line.AddChild(up);
+            }
+            else
+            {
+                line.AddChild(WinterUi.Label("？？？ · 未孵化（宠物蛋 + 50 币，仓库页）", 13, new Color("3c3a33")));
+                var spacer = new Control { SizeFlagsHorizontal = Control.SizeFlags.ExpandFill };
+                line.AddChild(spacer);
+                line.AddChild(WinterUi.Label("Lv.? / 5", 11.5f, new Color("8a8677")));
+            }
+            _petUpHost.AddChild(row);
+        }
     }
 
     private static ProgressBar CapacityBar(Control parent, Color fillColor)
@@ -754,8 +1115,12 @@ public partial class RunScreen : UiScreen
         // 各页动态件按需刷新（页签惰性构建，null 即未构建）
         RefreshStashPage();
         RefreshUpgradePage();
+        RefreshPetSection();
+        RefreshPetUpgradeSection();
         if (_activeTab == "classes")
             SelectTab("classes", animate: false); // 熟练度实数据（批次 5 Collection）晚于首帧到达，重建人物页
+        if (_activeTab == "ach")
+            SelectTab("ach", animate: false); // 收藏室进度/里程碑/收藏池与宠物态到达后重建（同 classes 口径）
     }
 
     private void RefreshForecast()
