@@ -193,8 +193,12 @@ public sealed class PetUiSnapshot
     public string Id { get; init; } = "";
     public string Name { get; init; } = "";
     public string Desc { get; init; } = "";
+    /// <summary>宠物图标名（pets.json icon：paw/runner/coin/tools/fire/crystal；网页 SDT.Art 图标名，批次 8 只读透出）。</summary>
+    public string Icon { get; init; } = "paw";
     public bool Owned { get; init; }
     public int Level { get; init; } = 1;
+    /// <summary>等级上限（pets.json levelMax=5，网页 PET_LEVEL_MAX；批次 8 只读透出，替代 UI 常量）。</summary>
+    public int LevelMax { get; init; } = 5;
     public bool Carried { get; init; }
     /// <summary>升到下一级所需口粮（满级时无意义）；upCosts 递增 2-3-4-5。</summary>
     public int UpgradeCost { get; init; }

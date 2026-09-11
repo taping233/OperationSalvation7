@@ -6,15 +6,67 @@
   （不再依赖基座 .godot/ 是否新鲜；ogg/mp3 无 raw 直载能力，必须走导入产物，wav/png/ttf 同管线无害）
 - [6c→C] 已回收：旧版在此处给 assets/sfx/battle/*.ogg 添加 assets/sfx/ 扁平别名 raw 条目以绕开
   GameAudio 基准路径缺 battle/ 段的缺口——C 线批次 7a-fix 已修基准路径并改为导入产物装载，别名段移除
-用法：python rebuild_pck3.py <base_exe> <out_exe>
+- [批次 8] project.binary（Godot 4.7 ECFG 格式）补丁：application/config/name 与 application/config/version
+  与 export_presets.cfg 对齐（基座烙的是 0.51.0+「的的」旧名；dotnet/project/assembly_name 不动——
+  data_SoudacheGodot_windows_x86_64 目录查找只依赖 assembly_name，改中文名不影响 .NET 装配装载）。幂等。
+用法：python rebuild_pck3.py <base_exe> <out_exe> [pe_override]
+  [批次 8] pe_override（可选）= rcedit 盖章后的 PE 文件。**实测结论：此路不通**——rcedit 只保留
+  PE section 表覆盖的字节、会截掉 overlay 里的新 pck；即便用「盖章 PE + 追加新 pck」重组合，
+  盖章 PE 的 exe 启动仍报「Couldn't load project data」（疑 rcedit 重写资源树丢失嵌入 pck 标记）。
+  同名对照实验：原 PE+补丁 pck、原 PE+无补丁 pck 均正常，盖章 PE±补丁均失败。
+  exe 文件图标因此保持 Godot 默认（file icon），窗口/任务栏图标走 pck 内 brand-mark png 正常；
+  真正的 exe 图标盖章留给未来在装有编辑器的机器上跑一次正式 export（export_presets.cfg 已配 app.ico）。
 """
 import struct, hashlib, os, glob, sys, re
 
 PROJ = r'D:/素材/代号柒/SoudacheGodot'
 BASE = sys.argv[1] if len(sys.argv) > 1 else (PROJ + r'/build/windows/升格会的的冬日猜想.exe.old')
 OUT = sys.argv[2] if len(sys.argv) > 2 else (BASE + '.new')
+PE_OVERRIDE = sys.argv[3] if len(sys.argv) > 3 else ''
 ALIGN = 4
 SEP = chr(92)
+
+# 批次 8：运行时项目名/版本（与 export_presets.cfg / project.godot 保持一致；旧值见 patch 函数）
+PROJECT_NAME = '升格会的冬日猜想'
+PROJECT_VERSION = '0.53.3'
+
+
+def patch_project_binary(blob):
+    """ECFG 格式：'ECFG' magic + u32 条目数 + 逐条目 [u32 klen][key][u32 vlen][value]。
+    value = [u32 type][payload]；type 4=String([u32 len][bytes][pad4])。只重写 name/version 两条。"""
+    if blob[:4] != b'ECFG':
+        print('project.binary: not ECFG magic, skip patch')
+        return blob
+    count = struct.unpack_from('<I', blob, 4)[0]
+    cur = 8
+    entries = []
+    for _ in range(count):
+        klen = struct.unpack_from('<I', blob, cur)[0]; cur += 4
+        key = blob[cur:cur + klen].decode('utf-8'); cur += klen
+        vlen = struct.unpack_from('<I', blob, cur)[0]; cur += 4
+        entries.append((key, blob[cur:cur + vlen])); cur += vlen
+    assert cur == len(blob), 'ECFG parse overrun: %d != %d' % (cur, len(blob))
+
+    def str_value(s):
+        raw = s.encode('utf-8')
+        pad = (4 - len(raw) % 4) % 4
+        return struct.pack('<II', 4, len(raw)) + raw + b'\0' * pad
+
+    overrides = {'application/config/name': PROJECT_NAME, 'application/config/version': PROJECT_VERSION}
+    out = [b'ECFG', struct.pack('<I', count)]
+    changed = []
+    for key, val in entries:
+        if key in overrides:
+            new = str_value(overrides[key])
+            if new != val:
+                changed.append('%s -> %s' % (key, overrides[key]))
+            val = new
+        out.append(struct.pack('<I', len(key.encode('utf-8'))) + key.encode('utf-8'))
+        out.append(struct.pack('<I', len(val)) + val)
+    if changed:
+        print('project.binary patch:', '; '.join(changed))
+    return b''.join(out)
+
 
 data = open(BASE, 'rb').read()
 n = len(data)
@@ -41,6 +93,8 @@ files = {}
 for path, blob in old_entries.items():
     if path.startswith(KEEP_OLD_PREFIX):
         files[path] = blob
+if 'project.binary' in files:
+    files['project.binary'] = patch_project_binary(files['project.binary'])  # 批次 8：名/版本对齐
 # data/assets/scenes 以磁盘为唯一权威（基座里的旧资产条目——尤其历史实验性别名/导入产物——一律不保留）
 for path in [p for p in old_entries if p.startswith(('data/', 'assets/', 'scenes/'))]:
     old_entries.pop(path, None)
@@ -127,6 +181,11 @@ header = b'GDPC' + struct.pack('<IIIIIQ', 4, vmaj, vmin, vpat, flags, HEADER) + 
 header += b'\0' * (HEADER - len(header))
 
 new_pck = header + data_section + directory
-new_exe = data[:pck_start] + new_pck + struct.pack('<Q', len(new_pck)) + b'GDPC'
+file_image = data[:pck_start]
+if PE_OVERRIDE:
+    with open(PE_OVERRIDE, 'rb') as f:
+        file_image = f.read()  # rcedit 盖章 PE（含旧 pck section 陈旧字节，运行时被 footer 定位的新 pck 覆盖）
+    print('pe override image:', len(file_image), 'bytes from', PE_OVERRIDE)
+new_exe = file_image + new_pck + struct.pack('<Q', len(new_pck)) + b'GDPC'
 open(OUT, 'wb').write(new_exe)
 print('new pck size:', len(new_pck), 'files:', len(names), '-> ', OUT)

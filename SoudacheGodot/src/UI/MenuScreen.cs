@@ -16,6 +16,7 @@ public partial class MenuScreen : UiScreen
     private ICoreUiPort? _core;
     private GameAudio? _audio;
     private SaveSlotsUiSnapshot? _slots;
+    private RunUiSnapshot? _lastRun; // 图鉴收藏态（CollectedIds）数据源；BindCore 起跟随快照（批次 8）
 
     private Control _pages = null!;
     private Control _sugLayer = null!;
@@ -31,7 +32,11 @@ public partial class MenuScreen : UiScreen
 
     public override void _ExitTree()
     {
-        if (_core != null) _core.SaveSlotsChanged -= ApplySaveSlots;
+        if (_core != null)
+        {
+            _core.SaveSlotsChanged -= ApplySaveSlots;
+            _core.RunSnapshotChanged -= CacheRunSnapshot;
+        }
     }
 
     public override void _Ready()
@@ -46,22 +51,35 @@ public partial class MenuScreen : UiScreen
         else if (System.Array.IndexOf(args, "--ui-inbox") >= 0)
             OpenInbox();
         else if (System.Array.IndexOf(args, "--ui-codex") >= 0)
-            OpenCodex();
+            _pendingSmokePage = "codex"; // BindCore 后再打开（图鉴 ✦ 需先收到快照 CollectedIds）
         else if (System.Array.IndexOf(args, "--ui-workshop") >= 0)
             _pendingSmokePage = "workshop"; // BindCore 后再打开（制作坊需 ICoreUiPort）
     }
 
     public void BindCore(ICoreUiPort core)
     {
-        if (_core != null) _core.SaveSlotsChanged -= ApplySaveSlots;
+        if (_core != null)
+        {
+            _core.SaveSlotsChanged -= ApplySaveSlots;
+            _core.RunSnapshotChanged -= CacheRunSnapshot;
+        }
         _core = core;
         _core.SaveSlotsChanged += ApplySaveSlots;
+        _core.RunSnapshotChanged += CacheRunSnapshot; // 缓存最新快照：图鉴 ✦ 收藏态（批次 8 CollectedIds）
         if (_pendingSmokePage == "workshop")
         {
             _pendingSmokePage = null;
             OpenWorkshop();
         }
+        else if (_pendingSmokePage == "codex")
+        {
+            _pendingSmokePage = null;
+            // CallDeferred：等 AttachCore 的 PublishCurrentState 先发完快照（_lastRun 到位再注入 CollectedIds）
+            CallDeferred(MethodName.OpenCodex);
+        }
     }
+
+    private void CacheRunSnapshot(RunUiSnapshot snapshot) => _lastRun = snapshot;
 
     protected override void Build()
     {
@@ -835,7 +853,10 @@ public partial class MenuScreen : UiScreen
     /// <summary>收藏图鉴：全卡库浏览（245 张，类型/稀有度/搜索筛选 + 24 张翻页 + 悬停大图预览）。</summary>
     private void OpenCodex()
     {
-        OpenPage("codex", () => new CodexPage().Build(_audio));
+        var page = new CodexPage();
+        // 收藏态 ✦（批次 8）：注入快照 CollectedIds（base.js isCollected 全量口径；未绑定/未发布=空集兼容态）
+        page.CollectedIds = new HashSet<string>(_lastRun?.CollectedIds ?? System.Array.Empty<string>());
+        OpenPage("codex", () => page.Build(_audio));
     }
 
     /// <summary>制作坊：碎片合成制作界面（TokenCraft/craft 语义，消费 RunUiSnapshot + RequestRunAction）。</summary>

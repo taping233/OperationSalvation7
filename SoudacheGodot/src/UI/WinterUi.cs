@@ -1,5 +1,6 @@
 using Godot;
 using SoudacheGodot.App;
+using System;
 
 namespace SoudacheGodot.UI;
 
@@ -286,9 +287,22 @@ public static class WinterUi
 
     public static TextureRect Icon(string path, int size)
     {
+        // 导出模板无 raw png 的 ResourceLoader（批次 8 实测 icon-paw.png 自 6b'' 起哑火）：
+        // GD.Load 失败时经 pck 挂载的 FileAccess 读字节，Image.LoadPngFromBuffer 现场解码。
+        var texture = GD.Load<Texture2D>(path);
+        if (texture == null && path.EndsWith(".png", StringComparison.OrdinalIgnoreCase) && FileAccess.FileExists(path))
+        {
+            using var file = FileAccess.Open(path, FileAccess.ModeFlags.Read);
+            if (file != null)
+            {
+                var image = new Image();
+                if (image.LoadPngFromBuffer(file.GetBuffer((long)file.GetLength())) == Error.Ok)
+                    texture = ImageTexture.CreateFromImage(image);
+            }
+        }
         return new TextureRect
         {
-            Texture = GD.Load<Texture2D>(path),
+            Texture = texture,
             CustomMinimumSize = new Vector2(size, size),
             ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize,
             StretchMode = TextureRect.StretchModeEnum.KeepAspectCentered

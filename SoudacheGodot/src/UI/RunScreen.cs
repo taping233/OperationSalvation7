@@ -18,6 +18,8 @@ namespace SoudacheGodot.UI;
 /// 五里程碑领奖 collclaim:{id} + 熟练度转化条）+ 卡背图鉴/成就陈列空态（状态数据未透出，[6b'→A]）；
 /// 宠物内容 = 仓库页宠物栏 + 升级页宠物升级行（批次 6b'' 消费 RunUiSnapshot.BasePets，
 /// 动作 pet:hatch / pet:sel:{id} / pet:up:{id}，对照 game.hub.js hubPetsHTML/hubUpgradeHTML）。
+/// 批次 8 接线：CollectedIds 快照点亮收藏池/仓库 ✦；仓库页卖卡（stash:sell/sellall）与
+/// 口袋复原（pocket:restore）按钮文案对齐 bag.js；出征预报 chip 补攻击/宠物实值（对齐 hubDeployHTML）。
 /// 录帧/smoke 参数：--ui-hub-tab=deploy|stash|upgrade|classes|ach 直开对应页签。
 /// </summary>
 public partial class RunScreen : UiScreen
@@ -52,7 +54,7 @@ public partial class RunScreen : UiScreen
     // —— 仓库/升级页动态件（页签惰性构建；仓库页与升级页各自持引用，互不覆盖） ——
     private sealed record HeadChips(Label Wood, Label Rations, Label Keys, Label Coins);
     private HeadChips _headChips = null!;
-    private sealed record ForecastChips(Label Hp, Label Coins, Label Backpack, Label Safe, Label Stash, Label Pet);
+    private sealed record ForecastChips(Label Hp, Label Atk, Label Coins, Label Dice, Label Backpack, Label Pet, Label Safe, Label Stash);
     private ForecastChips _forecastChips = null!;
     private Label _stashNoteLine = null!;
     private Label _stashPageCapLine = null!;
@@ -62,6 +64,7 @@ public partial class RunScreen : UiScreen
     private ProgressBar _upgradeStashBar = null!;
     private ProgressBar _upgradeBagBar = null!;
     private VBoxContainer _stashListHost = null!;
+    private VBoxContainer _pocketListHost = null!; // 批次 8：消耗口袋明细行 host（pocket:restore 动作）
     private Button _upgradeBagButton = null!;
     private Button _upgradeStashButton = null!;
 
@@ -74,12 +77,11 @@ public partial class RunScreen : UiScreen
     private VBoxContainer _petUpHost = null!;
 
     /// <summary>
-    /// 收藏集合（网页 B.isCollected 全量口径）。[6b'→A]：RunUiSnapshot 未透出 isCollected 卡 id 集合，
-    /// 本批以空集消费——收藏池全部 ？ 槽（置灰空态），✦ 点亮代码就位、集合快照到位即生效。
+    /// 收藏集合（网页 B.isCollected 全量口径）。批次 8：消费 RunUiSnapshot.CollectedIds（8-prep 已落地），
+    /// 随快照刷新——收藏池 ✦ 点亮 / ？槽置灰、仓库行 ✦ 同步生效。
     /// </summary>
-    private static readonly HashSet<string> CollectedIds = new();
+    private readonly HashSet<string> CollectedIds = new();
 
-    private static readonly Regex StackRegex = new(@"^(?<name>.+?)\s*×(?<n>\d+)$", RegexOptions.Compiled);
     private readonly CodexCatalog _catalog = CodexCatalog.Default;
 
     public void BindCore(ICoreUiPort core)
@@ -319,13 +321,16 @@ public partial class RunScreen : UiScreen
         chips.AddThemeConstantOverride("h_separation", 8);
         chips.AddThemeConstantOverride("v_separation", 8);
         rightCard.AddChild(chips);
+        // chip 集与顺序对齐网页 hubDeployHTML deploy-forecast：生命/攻击/开局币/骰子/背包/宠物/保护格/仓库
         _forecastChips = new ForecastChips(
-            ForecastChip(chips, "icon-hp", "生命"),
-            ForecastChip(chips, "icon-coin", "开局币"),
-            ForecastChip(chips, "icon-bag", "背包"),
-            ForecastChip(chips, "icon-shield", "保护格"),
-            ForecastChip(chips, "icon-key", "仓库"),
-            ForecastChip(chips, "icon-dice", "骰子"));
+            ForecastChip(chips, "res://assets/images/ui/icon-hp.svg", "生命"),
+            ForecastChip(chips, "res://assets/images/ui/icon-swords.svg", "攻击"),
+            ForecastChip(chips, "res://assets/images/ui/icon-coin.svg", "开局币"),
+            ForecastChip(chips, "res://assets/images/ui/icon-dice.svg", "骰子"),
+            ForecastChip(chips, "res://assets/images/ui/icon-bag.svg", "背包"),
+            ForecastChip(chips, "res://assets/images/ui/icon-paw.png", "宠物"),
+            ForecastChip(chips, "res://assets/images/ui/icon-shield.png", "保护格"),
+            ForecastChip(chips, "res://assets/images/ui/icon-key.svg", "仓库"));
         _forecast = WinterUi.Label("选择人物后出发，空降外圈入口。", 12, new Color("6b685b"), true);
         rightCard.AddChild(_forecast);
 
@@ -361,7 +366,7 @@ public partial class RunScreen : UiScreen
 
     private Label ForecastChip(GridContainer host, string icon, string caption)
     {
-        var chip = WinterUi.Chip($"res://assets/images/ui/{icon}.svg", caption, "—", light: true);
+        var chip = WinterUi.Chip(icon, caption, "—", light: true);
         host.AddChild(chip);
         var labels = chip.FindChildren("*", "Label", true, false);
         return labels.Count > 0 ? (Label)labels[labels.Count - 1] : new Label();
@@ -505,14 +510,16 @@ public partial class RunScreen : UiScreen
         var pocketCard = WinterUi.HubCard(right, "消耗口袋", "res://assets/images/ui/icon-bag.svg");
         pocketCard.AddChild(WinterUi.Label("对战消耗的卡牌有 1/3 概率随撤离回到这里；用钥匙按稀有度复原：古朴 1 / 稀有 2 / 史诗 3 / 传说 4。下一次出发后口袋清空。",
             11, new Color("6b685b"), true));
-        pocketCard.AddChild(WinterUi.Label("（空——口袋里的牌会在这里列出）", 11.5f, new Color("8a8677")));
+        _pocketListHost = new VBoxContainer(); // 批次 8：BasePocket 明细行 + pocket:restore:{name} 复原按钮
+        _pocketListHost.AddThemeConstantOverride("separation", 6);
+        pocketCard.AddChild(_pocketListHost);
         var materialsCard = WinterUi.HubCard(right, "物资", "res://assets/images/ui/icon-wood.svg");
         var materials = new VBoxContainer();
         materials.AddThemeConstantOverride("separation", 6);
         materialsCard.AddChild(materials);
         materials.AddChild(MaterialRow("icon-wood", "木材", "背包与仓库扩建用 · 不可卖币", () => _snapshot?.BaseWood ?? 0));
         materials.AddChild(MaterialRow("icon-bread", "口粮", "宠物升级用 · 不可卖币", () => _snapshot?.BaseRations ?? 0));
-        materials.AddChild(MaterialRow("icon-key", "钥匙", "口袋复原与宝藏大门钥匙", () => _snapshot?.BaseKeys ?? 0));
+        materials.AddChild(MaterialRow("icon-key", "钥匙", "口袋复原与宝藏大门钥匙", () => _snapshot?.BaseKeyCount ?? 0));
 
         // —— 宠物栏（game.hub.js hubPetsHTML：批次 6b'' 消费 BasePets；孵化=pet:hatch，携带=pet:sel:{id}） ——
         var petCard = WinterUi.HubCard(parent, "宠物", "res://assets/images/ui/icon-paw.png");
@@ -535,8 +542,11 @@ public partial class RunScreen : UiScreen
         hatchRow.AddChild(_petEggHint);
 
         RefreshStashPage();
+        RefreshPocketSection();
         RefreshPetSection();
     }
+
+    private readonly List<(Label Badge, Func<int> Source)> _materialBadges = new(); // 批次 8：随快照刷新（原静态求值恒 ×0）
 
     private Control MaterialRow(string icon, string caption, string note, System.Func<int> value)
     {
@@ -557,50 +567,115 @@ public partial class RunScreen : UiScreen
         var badge = WinterUi.Label($"× {value()}", 13, new Color("7a5c22"));
         badge.CustomMinimumSize = new Vector2(46, 0);
         line.AddChild(badge);
+        _materialBadges.Add((badge, value)); // 快照到达/变化时 RefreshStashPage 统一刷新
         line.AddChild(WinterUi.Label(note, 11, new Color("8a8677")));
         return row;
     }
 
-    /// <summary>仓库列表（InventoryLabels 栈「名 ×N」→ 卡库反查 meta：费用 · 类型 · 收购价；收藏态 ✦ 标记位=[6b'→A]）。</summary>
+    /// <summary>
+    /// 仓库列表（批次 8：消费 BaseStash 明细行——meta「N费·类型·收购X币/张」+ 收藏态 ✦ +
+    /// 卖出按钮 stash:sell:{name}/stash:sellall:{name}，文案对齐 bag.js openStashItem）。
+    /// </summary>
     private void RefreshStashPage()
     {
         var snapshot = _snapshot;
         if (_stashListHost == null || !IsInstanceValid(_stashListHost) || snapshot == null) return;
+        _materialBadges.RemoveAll(pair => !IsInstanceValid(pair.Badge)); // 页签重建后旧徽章已释放
+        foreach (var (badge, source) in _materialBadges) badge.Text = $"× {source()}"; // 物资行实值（批次 8 修静态求值）
         if (_stashPageCapLine != null && IsInstanceValid(_stashPageCapLine))
             _stashPageCapLine.Text = $"仓库容量 {snapshot.StashUsed} / {snapshot.StashCapacity} 张";
         if (_stashPageBar != null && IsInstanceValid(_stashPageBar) && snapshot.StashCapacity > 0)
             _stashPageBar.Value = (double)snapshot.StashUsed / snapshot.StashCapacity;
         foreach (var child in _stashListHost.GetChildren()) child.QueueFree();
-        if (snapshot.InventoryLabels.Length == 0)
+        var rows = snapshot.BaseStash;
+        if (rows.Length == 0)
         {
             _stashListHost.AddChild(WinterUi.Label("（空——撤离成功后在整理界面把战利品放回这里）", 11.5f, new Color("8a8677")));
         }
         else
         {
-            foreach (var label in snapshot.InventoryLabels)
+            foreach (var row in rows)
             {
-                var match = StackRegex.Match(label);
-                var name = match.Success ? match.Groups["name"].Value : label;
-                var count = match.Success && int.TryParse(match.Groups["n"].Value, out var parsed) ? parsed : 1;
-                var card = _catalog.ByName(name);
-                var meta = card != null
-                    ? $"{card.Cost}费 · {card.Type} · 收购 {_catalog.SellPrice(card)} 币/张"
-                    : "基地物资";
                 var rowLine = new HBoxContainer();
                 rowLine.AddThemeConstantOverride("separation", 8);
                 _stashListHost.AddChild(rowLine);
-                var collectedMark = WinterUi.Label("✦", 12, new Color("b8934c")); // 收藏态标记位（[6b'→A] 收藏集合就绪后按卡点亮）
-                collectedMark.Visible = false;
+                var collectedMark = WinterUi.Label("✦", 12, new Color("b8934c")); // 收藏态 ✦（批次 8 消费 BaseStash.Collected）
+                collectedMark.Visible = row.Collected;
+                collectedMark.TooltipText = "已收藏 · 图鉴记录";
                 rowLine.AddChild(collectedMark);
-                rowLine.AddChild(WinterUi.Label($"{name} ×{count}", 13, new Color("3c3a33")));
+                rowLine.AddChild(WinterUi.Label($"{row.Name} ×{row.Count}", 13, new Color("3c3a33")));
                 var spacer = new Control { SizeFlagsHorizontal = Control.SizeFlags.ExpandFill };
                 rowLine.AddChild(spacer);
-                rowLine.AddChild(WinterUi.Label(meta, 11, new Color("8a8677")));
+                var meta = row.MaterialKind != null
+                    ? "材料 · 可使用 · 不可卖币" // bag.js 材料卡分支：只可折入真实物资，不可卖币
+                    : $"{row.Cost}费 · {row.Type} · 收购 {row.SellPrice} 币/张";
+                var metaLabel = WinterUi.Label(meta, 11, new Color("8a8677"));
+                metaLabel.SizeFlagsVertical = Control.SizeFlags.ShrinkCenter;
+                rowLine.AddChild(metaLabel);
+                // 卖出按钮（bag.js:624/627 文案）：收藏中受保护禁卖、材料/不可出售卡禁卖、整堆需 ≥2 张
+                var sellable = row.Sellable && row.MaterialKind == null && !row.Collected;
+                var sellOne = WinterUi.MiniButton($"卖出 1 张（+{row.SellPrice}）", "ok");
+                sellOne.Disabled = !sellable;
+                sellOne.TooltipText = sellable ? "卖出换储备币" : row.Collected ? "收藏中受保护：取消收藏后才能卖出" : "不可卖出";
+                var name = row.Name;
+                sellOne.Pressed += () => _core?.RequestBaseAction($"stash:sell:{name}");
+                rowLine.AddChild(sellOne);
+                var sellAll = WinterUi.MiniButton($"全部卖出（+{row.SellPrice * row.Count} 币）", "ok");
+                sellAll.Disabled = !sellable || row.Count < 2;
+                sellAll.TooltipText = sellAll.Disabled ? (row.Count < 2 && sellable ? "只有 1 张，无需整堆卖出" : "不可卖出") : "整堆卖出换储备币";
+                sellAll.Pressed += () => _core?.RequestBaseAction($"stash:sellall:{name}");
+                rowLine.AddChild(sellAll);
             }
         }
-        _stashNoteLine.Text = snapshot.InventoryLabels.Length > 0
-            ? "卖出 / 收藏操作将随收藏室系统开放后在此页提供。"
+        _stashNoteLine.Text = rows.Length > 0
+            ? "点击卖出换储备币，或收藏进图鉴（收藏职业卡 +10、能力卡 +50 对应人物熟练度经验；收藏中的卡受保护，取消收藏后才能卖出）。"
             : "仓库里的卡牌可卖出换储备币，或收藏进图鉴。";
+    }
+
+    /// <summary>
+    /// 消耗口袋明细行刷新（批次 8：消费 BasePocket + pocket:restore:{name}）。
+    /// 行=名 ×N · 稀有度 · 复原需钥匙 ×N +「复原 ×N」按钮（文案对齐 bag.js restoreCard：钥匙不足 Disabled；
+    /// afford 口径=裸钥匙 BaseKeys，与 Core RestorePocketWithKeys 判定一致，8-prep 注）。
+    /// </summary>
+    private void RefreshPocketSection()
+    {
+        var snapshot = _snapshot;
+        if (_pocketListHost == null || !IsInstanceValid(_pocketListHost) || snapshot == null) return;
+        foreach (var child in _pocketListHost.GetChildren()) child.QueueFree();
+        if (snapshot.BasePocket.Length == 0)
+        {
+            _pocketListHost.AddChild(WinterUi.Label("（空——口袋里的牌会在这里列出）", 11.5f, new Color("8a8677")));
+            return;
+        }
+        foreach (var row in snapshot.BasePocket)
+        {
+            var rowPanel = new PanelContainer();
+            rowPanel.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
+            rowPanel.AddThemeStyleboxOverride("panel", WinterUi.Box(new Color("f7f5ef"), 1, new Color("c9c5b8"), 1));
+            var margin = new MarginContainer();
+            margin.AddThemeConstantOverride("margin_left", 10);
+            margin.AddThemeConstantOverride("margin_right", 10);
+            margin.AddThemeConstantOverride("margin_top", 6);
+            margin.AddThemeConstantOverride("margin_bottom", 6);
+            rowPanel.AddChild(margin);
+            var line = new HBoxContainer();
+            line.AddThemeConstantOverride("separation", 8);
+            margin.AddChild(line);
+            line.AddChild(WinterUi.Label($"{row.Name} ×{row.Count}", 13, new Color("3c3a33")));
+            var spacer = new Control { SizeFlagsHorizontal = Control.SizeFlags.ExpandFill };
+            line.AddChild(spacer);
+            var meta = WinterUi.Label($"{row.Rarity} · 复原需钥匙 ×{row.PocketKeyCost}", 11, new Color("8a8677"));
+            meta.SizeFlagsVertical = Control.SizeFlags.ShrinkCenter;
+            line.AddChild(meta);
+            var afford = snapshot.BaseKeys >= row.PocketKeyCost;
+            var restore = WinterUi.MiniButton($"复原 ×{row.PocketKeyCost}", "ok");
+            restore.Disabled = !afford;
+            restore.TooltipText = afford ? "消耗钥匙复原到卡牌仓库" : "钥匙不足";
+            var name = row.Name;
+            restore.Pressed += () => _core?.RequestBaseAction($"pocket:restore:{name}");
+            line.AddChild(restore);
+            _pocketListHost.AddChild(rowPanel);
+        }
     }
     // ------------------------------------------------------------------
     // 升级页（hubUpgradeHTML：背包扩建 + 仓库扩建 + 宠物升级）
@@ -708,10 +783,11 @@ public partial class RunScreen : UiScreen
             progressByCls[progress.Cls] = progress;
         foreach (var entry in CharacterRoster.Entries)
         {
-            var has = progressByCls.TryGetValue(entry.RulesetId, out var progress);
-            var lv = has ? progress.Lv : 1;
-            var maxed = has && progress.Maxed;
-            var ratio = has && progress.XpForNext > 0 ? (double)progress.Xp / progress.XpForNext : 0;
+            // 批次 8：改写为可空安全形式（原 has?progress.Lv 三处 CS8602 警告，6b'' 遗留）
+            var progress = progressByCls.TryGetValue(entry.RulesetId, out var found) ? found : null;
+            var lv = progress?.Lv ?? 1;
+            var maxed = progress?.Maxed == true;
+            var ratio = progress is { XpForNext: > 0 } ? (double)progress.Xp / progress.XpForNext : 0;
             var row = new HBoxContainer();
             row.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
             row.AddThemeConstantOverride("separation", 12);
@@ -1033,7 +1109,7 @@ public partial class RunScreen : UiScreen
                 desc.SizeFlagsVertical = Control.SizeFlags.ShrinkCenter;
                 desc.ClipText = true;
                 line.AddChild(desc);
-                var maxed = pet.Level >= 5; // pets.json levelMax=5（网页 PET_LEVEL_MAX）
+                var maxed = pet.Level >= pet.LevelMax; // pets.json levelMax=5（批次 8 随快照透出，替代 UI 常量）
                 line.AddChild(WinterUi.Label(maxed ? $"Lv.{pet.Level} · MAX" : $"Lv.{pet.Level} → {pet.Level + 1}",
                     11.5f, new Color("8a8677")));
                 var up = WinterUi.MiniButton(maxed ? "已满级" : $"口粮 ×{pet.UpgradeCost} 升级", "ok");
@@ -1048,7 +1124,7 @@ public partial class RunScreen : UiScreen
                 line.AddChild(WinterUi.Label("？？？ · 未孵化（宠物蛋 + 50 币，仓库页）", 13, new Color("3c3a33")));
                 var spacer = new Control { SizeFlagsHorizontal = Control.SizeFlags.ExpandFill };
                 line.AddChild(spacer);
-                line.AddChild(WinterUi.Label("Lv.? / 5", 11.5f, new Color("8a8677")));
+                line.AddChild(WinterUi.Label($"Lv.? / {pet.LevelMax}", 11.5f, new Color("8a8677")));
             }
             _petUpHost.AddChild(row);
         }
@@ -1091,6 +1167,8 @@ public partial class RunScreen : UiScreen
     private void ApplySnapshot(RunUiSnapshot snapshot)
     {
         _snapshot = snapshot;
+        CollectedIds.Clear();
+        foreach (var id in snapshot.CollectedIds) CollectedIds.Add(id); // 批次 8：图鉴/收藏室 ✦ 数据源
         _headChips.Wood.Text = $"{snapshot.BaseWood}";
         _headChips.Rations.Text = $"{snapshot.BaseRations}";
         _headChips.Keys.Text = $"{snapshot.BaseKeys}";
@@ -1114,6 +1192,7 @@ public partial class RunScreen : UiScreen
 
         // 各页动态件按需刷新（页签惰性构建，null 即未构建）
         RefreshStashPage();
+        RefreshPocketSection();
         RefreshUpgradePage();
         RefreshPetSection();
         RefreshPetUpgradeSection();
@@ -1127,15 +1206,21 @@ public partial class RunScreen : UiScreen
     {
         var snapshot = _snapshot;
         if (snapshot == null) return;
+        var hasRun = snapshot.CharacterId.Length > 0 && snapshot.Nodes.Length > 0;
         _forecastChips.Hp.Text = snapshot.MaxHp > 0 ? $"{snapshot.CurrentHp}/{snapshot.MaxHp}" : "30";
+        _forecastChips.Atk.Text = $"{snapshot.Atk}"; // rules.json playerAtk（快照默认值 4，无局路径同值）
         _forecastChips.Coins.Text = $"{snapshot.BaseCoins}";
-        _forecastChips.Backpack.Text = $"{snapshot.BackpackCapacity} 格";
+        _forecastChips.Dice.Text = "6 面";
+        // 背包实值：对局中=随身背包容量，局外=基地背包（8-prep BaseBagCapacity）
+        _forecastChips.Backpack.Text = $"{(hasRun ? snapshot.BackpackCapacity : snapshot.BaseBagCapacity)} 格";
+        // 宠物/保护格实值（批次 8）：携带宠物名=BasePets.Carried 派生、保护格=SafeCapacity（随携带宠物等级）
+        var carried = System.Array.Find(snapshot.BasePets, pet => pet.Carried);
+        _forecastChips.Pet.Text = carried?.Name ?? "无";
+        _forecastChips.Pet.TooltipText = carried?.Desc ?? "未携带宠物";
         _forecastChips.Safe.Text = $"{snapshot.SafeCapacity} 格";
         _forecastChips.Stash.Text = $"{snapshot.StashUsed}/{snapshot.StashCapacity} 张";
-        _forecastChips.Pet.Text = "6 面";
         var rosterId = _selectedCharacter.Length > 0 ? _selectedCharacter : snapshot.CharacterId;
         var name = rosterId.Length > 0 ? CharacterRoster.DisplayName(rosterId) : "未选择";
-        var hasRun = snapshot.CharacterId.Length > 0 && snapshot.Nodes.Length > 0;
         _forecast.Text = hasRun
             ? $"远征进行中 · {name} · 第 {snapshot.LayerIndex + 1} 层 {snapshot.TrackPosition + 1}/{Math.Max(1, snapshot.TrackLength)}——点「出 发」回到对局。"
             : $"{name} · 出发后随机空降到外圈入口；储备币将随身带走。";

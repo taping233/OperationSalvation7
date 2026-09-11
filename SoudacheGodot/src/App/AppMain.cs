@@ -61,6 +61,13 @@ public partial class AppMain : Control
             : Array.IndexOf(args, "--smoke-map") >= 0 ? "map"
             : Array.IndexOf(args, "--smoke-run") >= 0 ? "run"
             : "menu";
+        // 批次 8 取证：--boot-load-slot=N 启动即读档位 N（基地仓库/收藏/宠物证据帧的数据源；
+        // 对照网页「选档续局」语义，仅装配状态，无任何游戏内操作）
+        foreach (var arg in args)
+            if (arg.StartsWith("--boot-load-slot=", StringComparison.Ordinal)
+                && int.TryParse(arg.AsSpan("--boot-load-slot=".Length), out var bootSlot)
+                && bootSlot >= 0)
+                _coreUiPort?.RequestLoadSlot(bootSlot);
         ShowScreen(initialScreen);
         // 铁律③：先收集清单，之后 _Process 分帧加载（batch=4/帧，主线程让出节奏对齐网页 warmBatched）
         _warmup.Collect();

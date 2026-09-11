@@ -20,15 +20,22 @@ public static class FloatingText
     public static Label Spawn(Node parent, string text, Vector2 at, FloatKind kind)
     {
         var label = new Label { Text = text };
-        label.AddThemeFontSizeOverride("font_size", 26);
-        label.AddThemeColorOverride("font_color", kind switch
+        // 字体属性走 LabelSettings 副本（每 label 独立实例，7b 铁律②合规：不用 theme_override tween，
+        // 颜色渐变 tween 子属性 label_settings:font_color，不影响其它 label 与主题解析）
+        var settings = new LabelSettings
         {
-            FloatKind.Damage => ThemeTokens.ResAtk,
-            FloatKind.Heal => ThemeTokens.Ok,
-            _ => Colors.White,
-        });
-        label.AddThemeColorOverride("font_outline_color", new Color(0, 0, 0, 0.85f));
-        label.AddThemeConstantOverride("outline_size", 6);
+            Font = label.GetThemeFont("font"),
+            FontSize = 26,
+            FontColor = kind switch
+            {
+                FloatKind.Damage => ThemeTokens.ResAtk,
+                FloatKind.Heal => ThemeTokens.Ok,
+                _ => Colors.White,
+            },
+            OutlineColor = new Color(0, 0, 0, 0.85f),
+            OutlineSize = 6,
+        };
+        label.LabelSettings = settings;
         label.CustomMinimumSize = new Vector2(90, 34);
         label.HorizontalAlignment = HorizontalAlignment.Center;
         label.MouseFilter = Control.MouseFilterEnum.Ignore;
@@ -54,7 +61,7 @@ public static class FloatingText
                 tween.Parallel().TweenProperty(label, "scale", Vector2.One, 1.2).SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.Out);
                 label.Scale = Vector2.One * 2.5f;
                 tween.Parallel().TweenProperty(label, "modulate", new Color(1, 1, 1, 0), 2.0).SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.In);
-                tween.Parallel().TweenProperty(label, "theme_override_colors/font_color", Cream, 0.5).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
+                tween.Parallel().TweenProperty(settings, "font_color", Cream, 0.5).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
                 break;
             }
             case FloatKind.Heal:
@@ -68,7 +75,7 @@ public static class FloatingText
             {
                 tween.Parallel().TweenProperty(label, "position:y", label.Position.Y - 250f, 2.0).SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.Out);
                 tween.Parallel().TweenProperty(label, "scale", Vector2.One * 0.6f, 2.0);
-                tween.Parallel().TweenProperty(label, "theme_override_colors/font_color", BlockBlue, 2.0);
+                tween.Parallel().TweenProperty(settings, "font_color", BlockBlue, 2.0);
                 break;
             }
         }
