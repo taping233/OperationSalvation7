@@ -9,10 +9,13 @@ namespace SoudacheGodot.App;
 
 /// Composition root joining exported Soudache content, pure C# run/combat state,
 /// five-slot saves, and Godot presentation without putting rules in Control nodes.
+// ported from src/characters.js（角色名/职业表）+ src/mapData.js（祭坛 BOSS affix）：
+// 角色与首领元数据读 data/characters.json 与 data/map.json，不在代码里写死。
 public sealed class CoreGameAdapter : ICoreUiPort
 {
     private const ulong DefaultSeed = 0xC0D3_0007UL;
     private readonly StableId _playerId = "player.expedition";
+    private readonly GameData _data;
     private readonly CardCatalog _catalog;
     private readonly IReadOnlyList<RunCard> _runCards;
     private readonly AtomicJsonSaveService _saves;
@@ -38,6 +41,11 @@ public sealed class CoreGameAdapter : ICoreUiPort
     public CoreGameAdapter()
     {
         var cardsJson = ReadResourceText("res://data/cards.json");
+        _data = GameData.Load(cardsJson,
+            ReadResourceText("res://data/characters.json"),
+            ReadResourceText("res://data/map.json"),
+            ReadResourceText("res://data/rules.json"));
+        GameRuntime.Load(_data);
         _catalog = CardCatalog.Load(cardsJson);
         _runCards = LoadRunCards(cardsJson);
         _base.SeedStarterStash(_runCards.Where(card => card.Semantic == RunCardSemantic.Combat));
@@ -628,12 +636,19 @@ public sealed class CoreGameAdapter : ICoreUiPort
         }
     }
 
-    private static EnemyAffix EnemyAffixFor(StableId enemyId)
+    private EnemyAffix EnemyAffixFor(StableId enemyId)
     {
+        // map.json altar.bosses.affix：grow/frenzy/aegis → 战斗词缀枚举
         var id = enemyId.Value;
-        if (id.Contains("boss_general", StringComparison.Ordinal)) return EnemyAffix.Grow;
-        if (id.Contains("boss_orc", StringComparison.Ordinal)) return EnemyAffix.Frenzy;
-        if (id.Contains("boss_elem", StringComparison.Ordinal)) return EnemyAffix.ElementalAegis;
+        foreach (var boss in _data.Bosses)
+            if (id.Contains(boss.Id, StringComparison.Ordinal))
+                return boss.Affix switch
+                {
+                    "grow" => EnemyAffix.Grow,
+                    "frenzy" => EnemyAffix.Frenzy,
+                    "aegis" => EnemyAffix.ElementalAegis,
+                    _ => EnemyAffix.None
+                };
         return EnemyAffix.None;
     }
 
@@ -794,7 +809,7 @@ public sealed class CoreGameAdapter : ICoreUiPort
         }).ToArray();
     }
 
-    private static string CharacterClass(string id) => id switch { "shuangling" => "侠客", "baiqi" => "降临者", "lituan" => "法师", "xuanli" => "战士", "dengkui" => "牧师", _ => string.Empty };
+    private string CharacterClass(string id) => _data.Character(id)?.Class ?? string.Empty;
 
     private static List<JsonElement> SerializeSnapshots(IReadOnlyList<RunCardSnapshot>? snapshots)
         => snapshots?.Select(snapshot => JsonSerializer.SerializeToElement(snapshot)).ToList() ?? new List<JsonElement>();
@@ -832,8 +847,8 @@ public sealed class CoreGameAdapter : ICoreUiPort
         return "none";
     }
 
-    private static int CharacterIndex(string id) => id switch { "shuangling" => 0, "baiqi" => 1, "lituan" => 2, "xuanli" => 3, "dengkui" => 4, _ => -1 };
-    private static string CharacterName(string id) => id switch { "shuangling" => "霜翎", "baiqi" => "白契", "lituan" => "栗团", "xuanli" => "玄砾", "dengkui" => "灯葵", _ => "未选择角色" };
+    private int CharacterIndex(string id) => _data.Character(id)?.Index ?? -1;
+    private string CharacterName(string id) => _data.Character(id)?.Name ?? "未选择角色";
     private static string PhaseLabel(RunPhase phase) => phase switch { RunPhase.Ready => "探索", RunPhase.Battle => "战斗", RunPhase.Shop => "商店", RunPhase.Campfire => "营火", RunPhase.Chest => "宝箱", RunPhase.Event => "事件", RunPhase.AwaitingDoor => "门扉", RunPhase.Altar => "祭坛", RunPhase.Victory => "胜利", RunPhase.Defeat => "失败", _ => phase.ToString() };
     private static string RoomLabel(RunRoomType type) => type switch { RunRoomType.Coin => "金币", RunRoomType.Wood => "木材", RunRoomType.Rations => "口粮", RunRoomType.Key => "钥匙", RunRoomType.Battle => "战斗", RunRoomType.Event => "事件", RunRoomType.Shop => "商店", RunRoomType.Campfire => "营火", RunRoomType.Chest => "宝箱", RunRoomType.EmergencyExit => "撤离", RunRoomType.Door => "门", RunRoomType.AltarEntrance => "祭坛入口", _ => "荒径" };
 

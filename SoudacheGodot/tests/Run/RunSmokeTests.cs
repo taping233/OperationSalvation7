@@ -1,5 +1,7 @@
 using System;
+using System.IO;
 using System.Linq;
+using System.Text.Json;
 using Soudache;
 
 internal static class RunSmokeTests
@@ -10,6 +12,7 @@ internal static class RunSmokeTests
     public static int Main()
     {
         MapUsesTheOriginalThreeRingsAndIsReachable();
+        RuntimeTablesMatchDataFiles();
         DiceMovementIsDeterministicAndConsumesStamina();
         RoomSettlementAndDoorProgressionWork();
         BattleDropsAreSettledAndFailureIsTerminal();
@@ -33,6 +36,166 @@ internal static class RunSmokeTests
         Check(map.Layers[0].Doors.Count == 4 && map.Layers[1].Doors.Count == 6 && map.Layers[2].Doors.Count == 2, "door count changed");
         Check(map.Layers[2].RoomAt(10).Type == RunRoomType.EmergencyExit, "emergency exit missing");
         Check(map.IsConnected(out var unreachable) && unreachable.Count == 0, "map is disconnected");
+    }
+
+    /// <summary>批次 1 数据接线断言：运行时读到的每张表与 data/*.json 原文逐项一致。</summary>
+    private static void RuntimeTablesMatchDataFiles()
+    {
+        var dataDir = GameData.FindDataDirectory();
+        var data = GameRuntime.Data;
+        using var mapDoc = JsonDocument.Parse(File.ReadAllText(Path.Combine(dataDir, "map.json")));
+        var map = mapDoc.RootElement.GetProperty("map");
+        using var rulesDoc = JsonDocument.Parse(File.ReadAllText(Path.Combine(dataDir, "rules.json")));
+        var rules = rulesDoc.RootElement.GetProperty("rules");
+        using var charsDoc = JsonDocument.Parse(File.ReadAllText(Path.Combine(dataDir, "characters.json")));
+        var characters = charsDoc.RootElement.GetProperty("characters");
+        using var cardsDoc = JsonDocument.Parse(File.ReadAllText(Path.Combine(dataDir, "cards.json")));
+
+        // 怪物图鉴（map.json.monsters）逐项一致。
+        var monsterCount = 0;
+        foreach (var node in map.GetProperty("monsters").EnumerateObject())
+        {
+            monsterCount++;
+            var monster = data.RequireMonster(node.Name);
+            Check(monster.Name == node.Value.GetProperty("name").GetString()
+                && monster.Hp == node.Value.GetProperty("hp").GetInt32()
+                && monster.Attack == node.Value.GetProperty("atk").GetInt32()
+                && monster.Elite == (node.Value.TryGetProperty("elite", out var eliteFlag) && eliteFlag.ValueKind == JsonValueKind.True),
+                $"monster {node.Name} runtime/data mismatch");
+        }
+        Check(data.Monsters.Count == monsterCount, "monster table size mismatch");
+
+        // 遭遇表（encounters）逐层一致。
+        var encounterNodes = map.GetProperty("encounters");
+        Check(data.Encounters.Count == encounterNodes.GetArrayLength(), "encounter table size mismatch");
+        for (var i = 0; i < data.Encounters.Count; i++)
+        {
+            var row = encounterNodes[i];
+            var ids = row.GetProperty("entries").EnumerateArray().Select(e => e.GetProperty("id").GetString() ?? "").ToArray();
+            var table = data.Encounters[i];
+            Check(table.Entries.Count == ids.Length && table.Entries.Select(en => en.MonsterId).SequenceEqual(ids),
+                $"encounter row {i} entry ids mismatch");
+            for (var j = 0; j < ids.Length; j++)
+            {
+                var size = row.GetProperty("entries")[j].GetProperty("size");
+                var sizeMax = (int)size.GetArrayLength() - 1;
+                Check(table.Entries[j].Min == size[0].GetInt32() && table.Entries[j].Max == size[sizeMax].GetInt32(),
+                    $"encounter row {i} entry {ids[j]} size mismatch");
+            }
+            var elite = row.TryGetProperty("elite", out var eliteNode) ? eliteNode : (JsonElement?)null;
+            Check(Math.Abs(table.EliteChance - (elite is null ? 0 : elite.Value.GetProperty("chance").GetDouble())) < 1e-9,
+                $"encounter row {i} elite chance mismatch");
+        }
+
+        // 祭坛 BOSS 表与 RunMap 注入一致。
+        var bossNodes = map.GetProperty("altar").GetProperty("bosses");
+        Check(data.Bosses.Count == bossNodes.GetArrayLength(), "boss table size mismatch");
+        for (var i = 0; i < data.Bosses.Count; i++)
+        {
+            var node = bossNodes[i];
+            var boss = data.Bosses[i];
+            Check(boss.Id == node.GetProperty("id").GetString() && boss.Name == node.GetProperty("name").GetString()
+                && boss.Hp == node.GetProperty("hp").GetInt32() && boss.Attack == node.GetProperty("atk").GetInt32()
+                && boss.Affix == node.GetProperty("affix").GetString(), $"boss {i} runtime/data mismatch");
+        }
+        var runtimeMap = RunMap.CreateDefault();
+        Check(runtimeMap.Bosses.Select(b => (b.Id, b.Name, b.Hp, b.Attack)).SequenceEqual(
+            data.Bosses.Select(b => (b.Id, b.Name, b.Hp, b.Attack))), "RunMap bosses not sourced from map.json");
+
+        // 箱型（chestKinds）：small(1,1,1)/medium(1,2,3)/large(2,3,3)/boss(0,0,5) 由数据决定。
+        foreach (var node in map.GetProperty("chestKinds").EnumerateObject())
+        {
+            var kind = data.RequireChestKind(node.Name);
+            var coins = node.Value.TryGetProperty("coins", out var coinsNode) && coinsNode.ValueKind == JsonValueKind.Array
+                ? coinsNode.EnumerateArray().Select(c => c.GetInt32()).ToArray() : Array.Empty<int>();
+            var candidates = node.Value.TryGetProperty("pickFrom", out var pickFrom) ? pickFrom.GetInt32()
+                : node.Value.GetProperty("cards").GetInt32();
+            Check(kind.CoinMin == (coins.Length > 0 ? coins[0] : 0) && kind.CoinMax == (coins.Length > 0 ? coins[^1] : 0)
+                && kind.Candidates == candidates, $"chest kind {node.Name} runtime/data mismatch");
+        }
+
+        // 宝箱物品表（chestTable）与分层掉落（layerChests）。
+        var chestTable = map.GetProperty("chestTable").EnumerateArray().Select(item => item.GetProperty("name").GetString() ?? "").ToArray();
+        Check(data.ChestTable.SequenceEqual(chestTable), "chest table mismatch");
+        var layerNodes = map.GetProperty("layerChests");
+        Check(data.LayerChests.Count == layerNodes.GetArrayLength(), "layerChests size mismatch");
+        for (var i = 0; i < data.LayerChests.Count; i++)
+        {
+            var node = layerNodes[i];
+            var layer = data.LayerChests[i];
+            if (node.TryGetProperty("fixed", out var fixedNode))
+                Check(layer.FixedCounts.Select(f => f.Kind).SequenceEqual(fixedNode.EnumerateArray().Select(f => f.GetProperty("k").GetString() ?? "")),
+                    $"layerChests[{i}] fixed mismatch");
+            else
+                Check(layer.Types.Select(t => t.Kind).SequenceEqual(node.GetProperty("types").EnumerateArray().Select(t => t.GetProperty("k").GetString() ?? "")),
+                    $"layerChests[{i}] types mismatch");
+        }
+
+        // 随机事件表（randomEvents）。
+        var eventNodes = map.GetProperty("randomEvents");
+        Check(data.RandomEvents.Count == eventNodes.GetArrayLength(), "randomEvents size mismatch");
+        for (var i = 0; i < data.RandomEvents.Count; i++)
+        {
+            var node = eventNodes[i];
+            var ev = data.RandomEvents[i];
+            Check(ev.Text == node.GetProperty("text").GetString() && ev.Weight == node.GetProperty("w").GetInt32()
+                && ev.CreatesChest == (node.TryGetProperty("item", out var item) && item.GetString() == "chest"),
+                $"randomEvent {i} runtime/data mismatch");
+        }
+
+        // 角色表（characters.json）：名字/职业/序号来自数据。
+        Check(data.Characters.Count == characters.GetArrayLength(), "character table size mismatch");
+        for (var i = 0; i < data.Characters.Count; i++)
+        {
+            var node = characters[i];
+            var character = data.Characters[i];
+            Check(character.Id == node.GetProperty("id").GetString() && character.Name == node.GetProperty("name").GetString()
+                && character.Class == node.GetProperty("rulesetId").GetString() && character.Index == i,
+                $"character {i} runtime/data mismatch");
+        }
+
+        // 规则数值（rules.json → RunRules 注入）。
+        Check(RunRules.DiceSides == rules.GetProperty("diceSides").GetInt32(), "rule diceSides not injected");
+        Check(RunRules.PlayerMaxHp == rules.GetProperty("playerMaxHp").GetInt32(), "rule playerMaxHp not injected");
+        Check(RunRules.StaminaMax == rules.GetProperty("staminaMax").GetInt32(), "rule staminaMax not injected");
+        Check(RunRules.StaminaWarn == rules.GetProperty("staminaWarn").GetInt32(), "rule staminaWarn not injected");
+        Check(RunRules.FireHeal == rules.GetProperty("fireHeal").GetInt32(), "rule fireHeal not injected");
+        Check(RunRules.EmergencyExitCost == rules.GetProperty("emergencyExitCost").GetInt32(), "rule emergencyExitCost not injected");
+        Check(RunRules.BagStart == rules.GetProperty("bagSize").GetInt32(), "rule bagSize not injected");
+        Check(RunRules.BagMax == rules.GetProperty("bagMax").GetInt32(), "rule bagMax not injected");
+        Check(RunRules.BagUpgradeWood == rules.GetProperty("bagUpgradeWood").GetInt32(), "rule bagUpgradeWood not injected");
+        Check(RunRules.SafeStart == rules.GetProperty("safeStart").GetInt32(), "rule safeStart not injected");
+        Check(RunRules.SafeMax == rules.GetProperty("safeMax").GetInt32(), "rule safeMax not injected");
+        Check(RunRules.SafeUpgradeRations == rules.GetProperty("safeUpgradeRations").GetInt32(), "rule safeUpgradeRations not injected");
+        Check(RunRules.StashStart == rules.GetProperty("stashStart").GetInt32(), "rule stashStart not injected");
+        Check(RunRules.StashMax == rules.GetProperty("stashMax").GetInt32(), "rule stashMax not injected");
+        Check(RunRules.StashUpgradeSlots == rules.GetProperty("stashUpgradeSlots").GetInt32(), "rule stashUpgradeSlots not injected");
+        Check(RunRules.StashUpgradeWood == rules.GetProperty("stashUpgradeWood").GetInt32(), "rule stashUpgradeWood not injected");
+        Check(RunRules.BossDeckSize == rules.GetProperty("bossDeckSize").GetInt32(), "rule bossDeckSize not injected");
+        Check(Math.Abs(RunRules.CampfireClassCardChance - rules.GetProperty("fireClassCardChance").GetDouble()) < 1e-9,
+            "rule fireClassCardChance not injected");
+
+        // 商店定价（cards.json price 表），兜底 2 与网页版 `PRICE[rarity] || 2` 一致。
+        foreach (var node in cardsDoc.RootElement.GetProperty("price").EnumerateObject())
+            Check(data.CardPrice(node.Name) == node.Value.GetInt32(), $"price {node.Name} runtime/data mismatch");
+        Check(data.CardPrice("未定稀有度") == 2, "unknown rarity price fallback should be 2");
+
+        // 行为抽查：外环遭遇只含该层表内的怪物且数量落在数据 size 区间。
+        var entryIds = data.Encounters[0].Entries.Select(en => en.MonsterId).ToHashSet();
+        var minCount = data.Encounters[0].Entries.Min(en => en.Min);
+        var maxCount = data.Encounters[0].Entries.Max(en => en.Max);
+        for (var seed = 1; seed <= 200; seed++)
+        {
+            var run = new RunState((ulong)seed);
+            run.DebugSetPosition(0, 5);
+            run.ResolveCurrentRoom();
+            Check(run.Phase == RunPhase.Battle && run.Encounter.Count >= minCount && run.Encounter.Count <= maxCount,
+                $"seed {seed} encounter count {run.Encounter.Count} outside data range [{minCount},{maxCount}]");
+            Check(run.Encounter.All(enemy => entryIds.Contains(enemy.Id)), $"seed {seed} enemy outside outer encounter table");
+            run.CompleteBattle(true);
+            while (run.Phase == RunPhase.Chest) run.OpenNextChest();
+            Check(run.Phase == RunPhase.Ready, $"seed {seed} battle/chest flow did not settle");
+        }
     }
 
     private static void DiceMovementIsDeterministicAndConsumesStamina()
@@ -62,7 +225,8 @@ internal static class RunSmokeTests
     private static void BattleDropsAreSettledAndFailureIsTerminal()
     {
         var run = new RunState(4); run.DebugSetPosition(0, 5); run.ResolveCurrentRoom();
-        Check(run.Phase == RunPhase.Battle && run.Encounter.Count is >= 2 and <= 4, "battle encounter invalid");
+        // data/map.json 外环遭遇表 entries 的 size 均为 [2,3]（网页版 per-entry 语义）。
+        Check(run.Phase == RunPhase.Battle && run.Encounter.Count is >= 2 and <= 3, "battle encounter invalid");
         run.CompleteBattle(true); Check(run.Phase == RunPhase.Chest, "battle should open a chest settlement");
         run.OpenNextChest(); while (run.Phase == RunPhase.Chest) run.OpenNextChest();
         Check(run.Phase == RunPhase.Ready, "chest queue did not settle");

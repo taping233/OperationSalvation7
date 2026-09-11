@@ -4,6 +4,10 @@ using System.Linq;
 
 namespace Soudache;
 
+// ported from src/game.run.scenes.js (buildEncounter) + src/chests.js (rollDrops/rollContents)
+// + src/game.run.flow.js (randomEvents) + src/cards.js (PRICE)。遭遇表、怪物图鉴、
+// 宝箱掉落、随机事件与商店定价均读 data/map.json 与 data/cards.json，不在代码里写死数值。
+
 public enum RunPhase { Ready, Battle, Shop, Campfire, Chest, Event, AwaitingDoor, Altar, Settlement, Victory, Defeat }
 
 public sealed class RunResources
@@ -40,10 +44,7 @@ public sealed record RunSnapshot(ulong Seed, ulong RngState, int LayerIndex, int
 /// </summary>
 public sealed class RunState
 {
-    private static readonly string[] OuterPool = { "infantry", "archer", "bandit", "cavalry" };
-    private static readonly string[] MiddlePool = { "orc_jav", "orc_axe", "wolf_rider" };
-    private static readonly string[] InnerPool = { "fire_el", "water_el", "grass_el" };
-    private static readonly string[] LootTable = { "绷带", "零散弹药", "瓶装水", "旧地图" };
+    private readonly GameData _data;
     private readonly List<RunEnemy> _encounter = new();
     private readonly Queue<(string Kind, bool IsBoss, bool IsClass)> _pendingChests = new();
     private readonly HashSet<string> _discoveredDoors = new(StringComparer.Ordinal);
@@ -112,9 +113,10 @@ public sealed class RunState
         _lootCardPool.Clear(); _lootCardPool.AddRange(cards.Where(x => x is not null));
     }
 
-    public RunState(ulong seed, RunMap? map = null, RunBaseState? baseState = null)
+    public RunState(ulong seed, RunMap? map = null, RunBaseState? baseState = null, GameData? data = null)
     {
         Seed = seed;
+        _data = data ?? GameRuntime.Data;
         Base = baseState ?? new RunBaseState();
         Resources.Coins = Base.TakeReserveCoins();
         Map = map ?? RunMap.CreateDefault();
@@ -360,14 +362,18 @@ public sealed class RunState
     public RunEventResult ResolveEvent()
     {
         EnsurePhase(RunPhase.Event);
-        var roll = Rng.NextInt(0, 8);
-        RunEventResult result = roll < 3
-            ? new("在瓦砾堆里捡到几枚旧世界硬币", Rng.NextInt(1, 4), 0, 0, false)
-            : roll < 5
-                ? new("翻到一批先行者遗留的物资", 0, 0, 0, true)
-                : roll < 7
-                    ? new("辐射风掠过荒原，什么也没发生", 0, 0, 0, false)
-                    : new("找到一只未撬过的保险柜！", Rng.NextInt(4, 7), 0, 0, false);
+        // 网页版 runEventDeck 旧表路径：按权重抽 randomEvents 一条；coins 区间掷币，
+        // item=chest 转为开宝箱，其余无事发生。
+        var total = _data.RandomEvents.Sum(ev => ev.Weight);
+        var roll = Rng.NextInt(total);
+        var picked = _data.RandomEvents[0];
+        foreach (var ev in _data.RandomEvents)
+        {
+            roll -= ev.Weight;
+            if (roll < 0) { picked = ev; break; }
+        }
+        var coins = picked.HasCoins && !picked.CreatesChest ? Rng.NextInt(picked.CoinMin, picked.CoinMax + 1) : 0;
+        RunEventResult result = new(picked.Text, coins, 0, 0, picked.CreatesChest);
         Resources.Coins += result.Coins; Resources.Wood += result.Wood; Resources.Rations += result.Rations;
         if (result.CreatedChest) { _pendingChests.Enqueue(("small", false, false)); _returnAfterChest = RunPhase.Ready; Phase = RunPhase.Chest; }
         else Phase = RunPhase.Ready;
@@ -443,31 +449,27 @@ public sealed class RunState
     private void BuildEncounter()
     {
         _encounter.Clear();
-        var layer = LayerIndex;
-        _encounterRisk = layer switch { 0 => RunRisk.Low, 1 => RunRisk.Medium, _ => RunRisk.High };
-        var pool = layer switch { 0 => OuterPool, 1 => MiddlePool, _ => InnerPool };
-        var min = layer == 0 ? 2 : layer == 1 ? 2 : 1;
-        var max = layer == 0 ? 4 : layer == 1 ? 3 : 3;
-        if (layer == 2 && Rng.NextDouble() < 0.25)
+        // 网页版 buildEncounter：先掷精英（按表 chance/pool/size），否则抽一个 entry 并按其
+        // size 区间等概率取数量，逐只从 monsters 图鉴取模板。
+        var table = _data.Encounters[Math.Min(LayerIndex, _data.Encounters.Count - 1)];
+        if (table.EliteChance > 0 && Rng.NextDouble() < table.EliteChance)
         {
             _encounterRisk = RunRisk.Elite;
-            _encounter.Add(new RunEnemy("dragon", "巨兽「荒渊」", 40, 7, true));
+            var eliteId = table.ElitePool[Rng.NextInt(table.ElitePool.Count)];
+            _encounter.Add(CreateEnemy(eliteId));
             return;
         }
-        var count = Rng.NextInt(min, max + 1);
-        for (var i = 0; i < count; i++) _encounter.Add(CreateEnemy(pool[Rng.NextInt(pool.Length)]));
-        if (layer == 0 && _encounter.Any(x => x.Id == "bandit"))
-            while (_encounter.Count < 3) _encounter.Add(CreateEnemy(pool[Rng.NextInt(pool.Length)]));
+        _encounterRisk = table.Risk;
+        var entry = table.Entries[Rng.NextInt(table.Entries.Count)];
+        var count = Rng.NextInt(entry.Min, entry.Max + 1);
+        for (var i = 0; i < count; i++) _encounter.Add(CreateEnemy(entry.MonsterId));
     }
 
-    private static RunEnemy CreateEnemy(string id) => id switch
+    private RunEnemy CreateEnemy(string id)
     {
-        "infantry" => new(id, "荒民打手", 4, 4), "archer" => new(id, "废土猎手", 3, 5),
-        "bandit" => new(id, "掠夺者", 3, 3), "cavalry" => new(id, "机车掠袭者", 6, 5),
-        "orc_jav" => new(id, "畸变投掷者", 4, 6), "orc_axe" => new(id, "畸变屠夫", 7, 4),
-        "wolf_rider" => new(id, "畸变狼骑兵", 6, 7), "fire_el" => new(id, "灼热异变体", 7, 10),
-        "water_el" => new(id, "腐蚀异变体", 10, 7), _ => new(id, "滋生异变体", 12, 5)
-    };
+        var monster = _data.RequireMonster(id);
+        return new RunEnemy(id, monster.Name, monster.Hp, monster.Attack, monster.Elite);
+    }
 
     public IReadOnlyList<(string Kind, bool IsBoss)> CompleteBattle(bool won)
         => CompleteBattle(won, Hp);
@@ -508,9 +510,29 @@ public sealed class RunState
 
     private IReadOnlyList<(string, bool)> RollDrops(int layer)
     {
-        if (layer == 0) return Enumerable.Range(0, Rng.NextInt(1, 3)).Select(_ => ("small", false)).ToArray();
-        if (layer == 1) return Rng.NextInt(2) == 0 ? new[] { ("medium", false), ("medium", false) } : new[] { ("large", false) };
-        return Rng.NextInt(2) == 0 ? new[] { ("large", false), ("small", false) } : new[] { ("large", false), ("medium", false) };
+        // 网页版 chests.rollDrops：按层取 layerChests 表；fixed 直接给，否则加权抽箱数
+        // 与箱型（MAP.rollCount 同源的加权抽取）。
+        var spec = _data.LayerChests[Math.Min(layer, _data.LayerChests.Count - 1)];
+        if (spec.FixedCounts.Count > 0)
+            return spec.FixedCounts.SelectMany(fixedDrop => Enumerable.Repeat((fixedDrop.Kind, false), fixedDrop.Weight)).ToArray();
+        var chests = Weighted(spec.Counts.Select(count => (count.Count, count.Weight)));
+        var result = new List<(string, bool)>(chests);
+        for (var i = 0; i < chests; i++) result.Add((Weighted(spec.Types.Select(t => (t.Kind, t.Weight))), false));
+        return result;
+    }
+
+    private T Weighted<T>(IEnumerable<(T Value, int Weight)> items)
+    {
+        var list = items as IList<(T Value, int Weight)> ?? items.ToArray();
+        var total = 0;
+        foreach (var item in list) total += item.Weight;
+        var roll = Rng.NextInt(total);
+        foreach (var item in list)
+        {
+            roll -= item.Weight;
+            if (roll < 0) return item.Value;
+        }
+        return list[list.Count - 1].Value;
     }
 
     public RunChestLoot OpenNextChest() => OpenNextChest(0);
@@ -524,11 +546,12 @@ public sealed class RunState
             _chestPreview = new RunChestPreview("none", false, false, 0, 0, Array.Empty<string>());
             return _chestPreview;
         }
-        var (min, max, count) = chest.Kind switch { "medium" => (2, 3, 3), "large" => (3, 4, 3), "boss" => (0, 0, 5), _ => (1, 2, 1) };
+        var kind = _data.RequireChestKind(chest.Kind);
+        var (min, max, count) = (kind.CoinMin, kind.CoinMax, kind.Candidates);
         var pool = chest.IsClass && _classCardPool.Count > 0 ? _classCardPool : _lootCardPool;
         var candidates = pool.Count > 0
             ? Enumerable.Range(0, count).Select(_ => pool[Rng.NextInt(pool.Count)].Name).ToArray()
-            : Enumerable.Range(0, count).Select(_ => LootTable[Rng.NextInt(LootTable.Length)]).ToArray();
+            : Enumerable.Range(0, count).Select(_ => _data.ChestTable[Rng.NextInt(_data.ChestTable.Count)]).ToArray();
         _chestPreview = new RunChestPreview(chest.Kind, chest.IsBoss, chest.IsClass, min, max, candidates);
         return _chestPreview;
     }
@@ -619,7 +642,7 @@ public sealed class RunState
         Phase = RunPhase.Shop; _shop = offers;
     }
 
-    private static int CardPrice(RunCard card) => card.Rarity switch { "初始" => 1, "古朴" => 2, "稀有" => 3, "史诗" => 4, "传说" => 5, "棱彩" => 8, _ => 2 };
+    private int CardPrice(RunCard card) => _data.CardPrice(card.Rarity);
     public void BuyShopOffer(string id)
     {
         EnsurePhase(RunPhase.Shop);
@@ -708,25 +731,52 @@ public sealed class RunState
     private void EnsurePhase(RunPhase expected) { if (Phase != expected) throw new InvalidOperationException($"当前状态为 {Phase}，需要 {expected}。"); }
 }
 
+// ported from src/rules.js：数值口径以 data/rules.json 为真源，进程启动时由
+// GameRuntime.Load 注入；属性默认值仅作未加载数据前的兜底。
 public static class RunRules
 {
-    public const int DiceSides = 3;
-    public const int PlayerMaxHp = 30;
-    public const int StaminaMax = 60;
-    public const int StaminaWarn = 10;
-    public const int FireHeal = 8;
-    public const int EmergencyExitCost = 10;
-    public const int BagStart = 16;
-    public const int BagMax = 30;
-    public const int BagUpgradeWood = 2;
-    public const int SafeStart = 2;
-    public const int SafeMax = 6;
-    public const int SafeUpgradeRations = 2;
-    public const int StashStart = 25;
-    public const int StashMax = 49;
-    public const int StashUpgradeSlots = 3;
-    public const int StashUpgradeWood = 2;
-    public const int BossDeckSize = 15;
+    public static int DiceSides { get; private set; } = 3;
+    public static int PlayerMaxHp { get; private set; } = 30;
+    public static int StaminaMax { get; private set; } = 60;
+    public static int StaminaWarn { get; private set; } = 10;
+    public static int FireHeal { get; private set; } = 8;
+    public static int EmergencyExitCost { get; private set; } = 10;
+    public static int BagStart { get; private set; } = 16;
+    public static int BagMax { get; private set; } = 30;
+    public static int BagUpgradeWood { get; private set; } = 2;
+    public static int SafeStart { get; private set; } = 2;
+    public static int SafeMax { get; private set; } = 6;
+    public static int SafeUpgradeRations { get; private set; } = 2;
+    public static int StashStart { get; private set; } = 25;
+    public static int StashMax { get; private set; } = 49;
+    public static int StashUpgradeSlots { get; private set; } = 3;
+    public static int StashUpgradeWood { get; private set; } = 2;
+    public static int BossDeckSize { get; private set; } = 15;
+    public static double CampfireClassCardChance { get; private set; } = 0.3;
+
+    /// <summary>rules.json 中没有对应字段的骨架局部常量。</summary>
     public const int CampfireRestorePocket = 2;
-    public const double CampfireClassCardChance = 0.3;
+
+    public static void Apply(GameRulesData rules)
+    {
+        ArgumentNullException.ThrowIfNull(rules);
+        DiceSides = rules.DiceSides;
+        PlayerMaxHp = rules.PlayerMaxHp;
+        StaminaMax = rules.StaminaMax;
+        StaminaWarn = rules.StaminaWarn;
+        FireHeal = rules.FireHeal;
+        EmergencyExitCost = rules.EmergencyExitCost;
+        BagStart = rules.BagStart;
+        BagMax = rules.BagMax;
+        BagUpgradeWood = rules.BagUpgradeWood;
+        SafeStart = rules.SafeStart;
+        SafeMax = rules.SafeMax;
+        SafeUpgradeRations = rules.SafeUpgradeRations;
+        StashStart = rules.StashStart;
+        StashMax = rules.StashMax;
+        StashUpgradeSlots = rules.StashUpgradeSlots;
+        StashUpgradeWood = rules.StashUpgradeWood;
+        BossDeckSize = rules.BossDeckSize;
+        CampfireClassCardChance = rules.FireClassCardChance;
+    }
 }

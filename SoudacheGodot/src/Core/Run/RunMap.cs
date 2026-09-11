@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace Soudache;
 
+// ported from src/mapData.js：祭坛 BOSS 表读 data/map.json altar.bosses；
+// 三环拓扑（28/20/12 环、门与祭坛入口）按口径保留骨架现状，四层地图归批次 3。
+
 public enum RunRoomType
 {
     Empty, Coin, Wood, Rations, Key, Battle, Event, Shop, Campfire, Chest,
@@ -114,10 +117,9 @@ public sealed class RunMap
             {
                 new RunDoor("p5", 8, 1, 13, false), new RunDoor("p6", 11, 1, 18, false)
             }, new[] { 1, 11 })
-        }, new[]
-        {
-            ("boss_general", "锈蚀将军", 50, 5), ("boss_orc", "兽群之主", 45, 4), ("boss_elem", "辐射领主", 48, 8)
-        });
+        }, GameRuntime.Data.Bosses
+            .Select(boss => (boss.Id, boss.Name, boss.Hp, boss.Attack))
+            .ToArray());
     }
 
     public Dictionary<string, HashSet<string>> BuildAdjacency()
