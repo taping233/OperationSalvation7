@@ -9,16 +9,17 @@
     "narrative:compile": "node scripts/compile-narrative.mjs",
     "predev": "npm run narrative:compile",
     "dev": "vite",
-    "prebuild": "npm run narrative:compile",
+    "prebuild": "npm run narrative:compile && node scripts/validate-data.mjs",
     "build": "vite build",
     "preview": "vite preview",
-    "pretest": "npm run narrative:compile",
+    "pretest": "npm run narrative:compile && node scripts/validate-data.mjs",
     "test": "vitest run",
     "test:watch": "vitest",
     "perf": "node scripts/perf-benchmark.cjs",
     "assets:audit": "node scripts/asset-audit.cjs",
     "sfx:gen": "node game/scripts/jsfxr-generate.cjs",
-    "cards:sync": "node scripts/sync-cards-from-live.mjs"
+    "cards:sync": "node scripts/sync-cards-from-live.mjs",
+    "validate:data": "node scripts/validate-data.mjs"
   },
   "devDependencies": {
     "acorn": "^8.14.0",

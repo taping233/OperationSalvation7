@@ -40,19 +40,29 @@ for (const f of fs.readdirSync(path.join(HERE, 'src')).filter(f => f.endsWith('.
 }
 
 // 2: 源码契约正则抽查（game.js 依赖完整 DOM，命令行只验接线与契约）
+// 批次2（2026-09-11）：数据表已外置到 game/data/*.json，数据类契约改从 JSON 读取
 const gameSource = src('game.js');
 const mapSource = src('mapData.js');
-check('关卡·三环风险梯度已声明', /risk:\s*'低'/.test(mapSource) && /risk:\s*'中'/.test(mapSource) && /risk:\s*'高'/.test(mapSource), true);
-check('关卡·巨兽精英概率已声明（第3层3% / 第4层10%）', /chance:\s*0\.03/.test(mapSource) && /chance:\s*0\.10/.test(mapSource), true);
-check('遭遇·策略预告元数据', /strategy:\s*'试探/.test(mapSource) && /strategy:\s*'核心区/.test(mapSource), true);
-check('场景·10 张事件 sceneId 覆盖', ['timeskip','demondeal','bandits','mystery','goldmine','goldhammer','relief','airdrop','chestdraw','systemsupply'].every(k => new RegExp(`event-${k}`).test(gameSource)), true);
+const DATA_DIR = path.join(HERE, 'data');
+const readJson = (f) => JSON.parse(fs.readFileSync(path.join(DATA_DIR, f), 'utf8'));
+const mapJson = readJson('map.json');
+const scenesJson = readJson('scenes.json');
+const mapRisks = new Set(mapJson.encounters.map(e => e.risk));
+check('关卡·三环风险梯度已声明', mapRisks.has('低') && mapRisks.has('中') && mapRisks.has('高'), true);
+const eliteChances = mapJson.encounters.filter(e => e.elite).map(e => e.elite.chance);
+check('关卡·巨兽精英概率已声明（第3层3% / 第4层10%）', eliteChances.includes(0.03) && eliteChances.includes(0.10), true);
+const mapStrategies = mapJson.encounters.map(e => e.strategy || '');
+check('遭遇·策略预告元数据', mapStrategies.some(s => s.startsWith('试探')) && mapStrategies.some(s => s.startsWith('核心区')), true);
+const eventSceneIds = JSON.stringify(scenesJson.eventSceneMeta);
+check('场景·10 张事件 sceneId 覆盖', ['timeskip','demondeal','bandits','mystery','goldmine','goldhammer','relief','airdrop','chestdraw','systemsupply'].every(k => eventSceneIds.includes(`event-${k}`)), true);
 check('场景·标准节点与拾取契约', /scene-battle-bg/.test(gameSource) && /scene-extract-bg/.test(gameSource) && /scene-pickup-key/.test(gameSource), true);
 check('场景·落脚进入全屏房间链', /UI\.beginRoom\(\)/.test(gameSource) && /_roomActive/.test(src('ui.js')), true);
 check('音频·Howler 指定 MP3 作为循环 BGM', /from 'howler'/.test(src('sound.js')) && /bgm-sour-orange-earth\.mp3/.test(src('sound.js')) && /new Howl\(\{[^}]*loop:\s*true/s.test(src('sound.js')), true);
 check('战斗·意图轮转与 DOM 接线', /function intentFor/.test(src('battle.js')) && /foe\.intent = intentFor\(foe, turn\)/.test(src('battle.js')) && /sts-intent/.test(src('battle.js')), true);
 check('战斗·拖牌 Pointer Events 接线保留', /pointerdown/.test(src('battle.js')) && /data-aim/.test(src('battle.js')) && /drag-over/.test(src('battle.js')), true);
 check('BOSS·三类独立意图模式', /general.*军威强化/.test(src('battle.js')) && /orc_boss.*双击/.test(src('battle.js')) && /element_boss.*元素庇幕/.test(src('battle.js')), true);
-check('敌人·全部图鉴具备行为钩子', ['infantry','archer','bandit','cavalry','orc_jav','orc_axe','wolf_rider','fire_el','water_el','grass_el','dragon'].every(k => new RegExp(`${k}[^\n]*behavior:`).test(mapSource)), true);
+check('敌人·全部图鉴具备行为钩子', Object.values(mapJson.monsters).length > 0
+  && Object.values(mapJson.monsters).every(m => !!m.behavior), true);
 check('事件·二选一与三选一分支', (() => {
   // v0.52 起事件分支文本真源在 narrative/events.ink（经 scripts/compile-narrative.mjs 编译）
   const ink = fs.readFileSync(path.join(HERE, '..', 'narrative', 'events.ink'), 'utf8');

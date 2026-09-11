@@ -1,3 +1,4 @@
+import { DATA } from './data-loader.js';
 import { characterFor, characterName, migrateCharacterProgress } from './characters.js';
 import { Random } from './random.js';
 
@@ -61,52 +62,35 @@ import { Random } from './random.js';
   // ---------- 成就定义 ----------
   // done(stats) 依据基地统计判定；reward 为领取后的基地物资；
   // back 为领取后解锁的卡背（id 对应 Cards.CARD_BACKS，v0.21）。
-  const ACHIEVEMENTS = [
-    { id: 'firstExtract', icon: '[[icon:exit]]', name: '初出茅庐', desc: '首次撤离成功',
-      reward: { wood: 2 }, done: (s) => s.extracts >= 1 },
-    { id: 'extract3', icon: '[[icon:bag]]', name: '老练搜刮者', desc: '累计撤离成功 3 次',
-      reward: { rations: 2 }, done: (s) => s.extracts >= 3 },
-    { id: 'kill10', icon: '[[icon:swords]]', name: '猎手', desc: '累计击败 10 个敌人',
-      reward: { wood: 2 }, back: 'wolf', done: (s) => s.kills >= 10 },
-    { id: 'firstBoss', icon: '[[icon:skull]]', name: '破壁者', desc: '首次击败污染核心的变异首脑',
-      reward: { wood: 3 }, back: 'boss', done: (s) => s.bossKills.length >= 1 },
-    { id: 'allBoss', icon: '[[icon:crystal]]', name: '净化征服者', desc: '击败全部 3 只变异首脑',
-      reward: { rations: 3 }, back: 'altar', done: (s) => s.bossKills.length >= 3 },
-    { id: 'rich30', icon: '[[icon:coin]]', name: '小有积蓄', desc: '单局撤离时携带 ≥ 30 币',
-      reward: { rations: 2 }, back: 'coin', done: (s) => s.bestRunCoins >= 30 },
-    { id: 'stash20', icon: '[[icon:archive]]', name: '仓廪充实', desc: '累计运回 20 张卡牌入库',
-      reward: { rations: 2 }, back: 'vault', done: (s) => s.stashTotal >= 20 },
-    { id: 'bagMax', icon: '[[icon:bag]]', name: '能工巧匠', desc: '背包扩建至满级（30 格）',
-      reward: { rations: 3 }, done: (_s, d) => (d
-        ? SDT.MAP.rules.bagSize + (d.bagUp || 0)
-        : SDT.Base.bagCap()) >= SDT.MAP.rules.bagMax },
-    { id: 'safeMax', icon: '[[icon:paw]]', name: '最忠实的伙伴', desc: '宠物安全格升满（6 格）',
-      reward: { wood: 3 }, back: 'pet', done: (_s, d) => (d
-        ? SDT.MAP.rules.safeStart + (d.safeUp || 0)
-        : SDT.Base.safeCap()) >= SDT.MAP.rules.safeMax },
-    { id: 'class3', icon: '[[icon:medal]]', name: '崭露头角', desc: '任意职业熟练度达到 3 级',
-      reward: { wood: 2 }, done: (_s, d) => d
-        ? Object.values(d.characters || d.classes || {}).some(c => (c.lv || 1) >= 3)
-        : classList().some(c => classLv(c) >= 3) },
-    // ---- 收藏图鉴成就（v0.23）：在基地仓库[[icon:sparkles]]收藏物品后解锁 ----
-    { id: 'collectGold', icon: '[[icon:coin]]', name: '珍品收藏家', desc: '收藏桌游珍宝「金币」',
-      reward: { wood: 2 }, done: (_s, d) => !!(((d || B().data).collection || {})['tt-gold']) },
-    { id: 'collectLegend', icon: '[[icon:medal]]', name: '传说典藏', desc: '收藏任意一张传说卡牌',
-      reward: { rations: 2 }, done: (_s, d) => Object.values((d || B().data).collection || {})
-        .some(c => c.rarity === '传说') },
-    { id: 'collect5', icon: '[[icon:home]]', name: '博物学家', desc: '收藏 5 张不同的卡牌',
-      reward: { rations: 3 }, done: (_s, d) => Object.keys((d || B().data).collection || {}).length >= 5 },
-    // ---- 宠物成就（2026-09-09 需求 #2：孵化/升级/集齐宠物）----
-    // 宠物数据在 d.pets（初始宠物「汪汪狗」自动获得，不计入孵化数）
-    { id: 'petHatch1', icon: '[[icon:paw]]', name: '驯养新手', desc: '首次孵化出一只宠物',
-      reward: { rations: 2 }, done: (_s, d) => petHatchedN(d) >= 1 },
-    { id: 'petHatch3', icon: '[[icon:crystal]]', name: '孵蛋专家', desc: '累计孵化 3 只宠物',
-      reward: { wood: 2 }, done: (_s, d) => petHatchedN(d) >= 3 },
-    { id: 'petMax', icon: '[[icon:medal]]', name: '心有灵犀', desc: '任意宠物升到满级（Lv.5）',
-      reward: { wood: 3 }, done: (_s, d) => Object.values((d || B().data).pets || {}).some(p => (p.lv || 1) >= 5) },
-    { id: 'petAll', icon: '[[icon:home]]', name: '宠物满堂', desc: '集齐全部 6 只宠物',
-      reward: { rations: 4 }, done: (_s, d) => Object.keys((d || B().data).pets || {}).length >= (SDT.Base.PETS || []).length },
-  ];
+  // 成就展示/奖励数据外置 game/data/achievements.json（2026-09-11 架构批次 2）；
+  // done 判定函数无法进 JSON，按 id 关联留在此处。
+  const ACH_DONE = {
+    firstExtract: (s) => s.extracts >= 1,
+    extract3: (s) => s.extracts >= 3,
+    kill10: (s) => s.kills >= 10,
+    firstBoss: (s) => s.bossKills.length >= 1,
+    allBoss: (s) => s.bossKills.length >= 3,
+    rich30: (s) => s.bestRunCoins >= 30,
+    stash20: (s) => s.stashTotal >= 20,
+    bagMax: (_s, d) => (d
+      ? SDT.MAP.rules.bagSize + (d.bagUp || 0)
+      : SDT.Base.bagCap()) >= SDT.MAP.rules.bagMax,
+    safeMax: (_s, d) => (d
+      ? SDT.MAP.rules.safeStart + (d.safeUp || 0)
+      : SDT.Base.safeCap()) >= SDT.MAP.rules.safeMax,
+    class3: (_s, d) => d
+      ? Object.values(d.characters || d.classes || {}).some(c => (c.lv || 1) >= 3)
+      : classList().some(c => classLv(c) >= 3),
+    collectGold: (_s, d) => !!(((d || B().data).collection || {})['tt-gold']),
+    collectLegend: (_s, d) => Object.values((d || B().data).collection || {})
+      .some(c => c.rarity === '传说'),
+    collect5: (_s, d) => Object.keys((d || B().data).collection || {}).length >= 5,
+    petHatch1: (_s, d) => petHatchedN(d) >= 1,
+    petHatch3: (_s, d) => petHatchedN(d) >= 3,
+    petMax: (_s, d) => Object.values((d || B().data).pets || {}).some(p => (p.lv || 1) >= 5),
+    petAll: (_s, d) => Object.keys((d || B().data).pets || {}).length >= (SDT.Base.PETS || []).length,
+  };
+  const ACHIEVEMENTS = DATA.achievements.achievements.map(a => ({ ...a, done: ACH_DONE[a.id] }));
   // 孵化计数 = 已拥有宠物数 - 初始宠物（汪汪狗自动获得，不算孵化）
   const petHatchedN = (d) => Math.max(0, Object.keys((d || B().data).pets || {}).length - 1);
 
@@ -127,13 +111,8 @@ import { Random } from './random.js';
   };
 
   // 一次性收藏里程碑：need 为收藏张数，'all' = 全收集
-  const COLL_MILESTONES = [
-    { id: 'm5',   need: 5,    reward: { wood: 3 } },
-    { id: 'm15',  need: 15,   reward: { rations: 5 } },
-    { id: 'm30',  need: 30,   reward: { keys: 10 } },
-    { id: 'm45',  need: 45,   reward: { legend: 2 } },
-    { id: 'mAll', need: 'all', reward: { egg: 1 } },
-  ];
+  // 里程碑数据外置 achievements.json 的 collectionMilestones 字段（同上批次 2）
+  const COLL_MILESTONES = DATA.achievements.collectionMilestones;
   const collMsById = (id) => COLL_MILESTONES.find(m => m.id === id);
   const collMsNeed = (m) => (m.need === 'all' ? collTotal() : m.need);
   const collMsReached = (m, d) => collProgress(d) >= collMsNeed(m);

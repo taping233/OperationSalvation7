@@ -1,0 +1,14 @@
+{
+  "eggId": "pet-egg",
+  "hatchCost": 50,
+  "levelMax": 5,
+  "upCosts": [2, 3, 4, 5],
+  "list": [
+    { "id": "dog", "name": "汪汪狗", "icon": "paw", "desc": "携带效果：生命上限 +5", "effect": { "maxHp": 5 } },
+    { "id": "falcon", "name": "猎鹰宝宝", "icon": "runner", "desc": "携带效果：获得的宝箱为职业宝箱的概率提高至 35%", "effect": { "classChest": 0.35 } },
+    { "id": "cat", "name": "招财猫", "icon": "coin", "desc": "携带效果：商店中第一格的卡牌变为免费", "effect": { "shopFree": true } },
+    { "id": "robot", "name": "变形机器人", "icon": "tools", "desc": "携带效果：起始背包中增加 2 张「杀」", "effect": { "extraSha": 2 } },
+    { "id": "fire", "name": "火焰精灵", "icon": "fire", "desc": "携带效果：起始背包中的 5 张「杀」化为 5 张「火球」", "effect": { "shaToFireball": true } },
+    { "id": "penguin", "name": "小企鹅咕嘎", "icon": "crystal", "desc": "携带效果：保护格 +2（2-6 格 → 4-8 格）", "effect": { "safeBonus": 2 } }
+  ]
+}

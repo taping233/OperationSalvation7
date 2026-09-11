@@ -2,6 +2,7 @@ import { sdtDefine } from './sdt-facade.js';
 import { migrateCharacterProgress } from './characters.js';
 
 import { Random } from './random.js';
+import { DATA } from './data-loader.js';
 
   const SLOT_KEY = (i) => 'sdt-base-v2-slot' + i;
   const LEGACY_KEY = 'sdt-base-v1';   // 旧版全局基地（v0.20 及之前），启动时迁移
@@ -25,18 +26,12 @@ import { Random } from './random.js';
   // ---------- 宠物（2026-09-09 需求 #2/#4/#14）----------
   // 初始宠物汪汪狗进入基地自动获得；其余只能用宠物蛋 + 50 币在仓库孵化（随机、不重复）。
   // effect 字段在「携带」该宠物时生效（见 game.session newRun / chests / shop / safeCap）。
-  const PET_EGG_ID = 'pet-egg';
-  const HATCH_COST = 50;               // 孵化消耗的储备币
-  const PET_LEVEL_MAX = 5;
-  const PET_UP_COSTS = [2, 3, 4, 5];   // 升到 Lv.2/3/4/5 各需的口粮（递增）
-  const PETS = [
-    { id: 'dog', name: '汪汪狗', icon: 'paw', desc: '携带效果：生命上限 +5', effect: { maxHp: 5 } },
-    { id: 'falcon', name: '猎鹰宝宝', icon: 'runner', desc: '携带效果：获得的宝箱为职业宝箱的概率提高至 35%', effect: { classChest: 0.35 } },
-    { id: 'cat', name: '招财猫', icon: 'coin', desc: '携带效果：商店中第一格的卡牌变为免费', effect: { shopFree: true } },
-    { id: 'robot', name: '变形机器人', icon: 'tools', desc: '携带效果：起始背包中增加 2 张「杀」', effect: { extraSha: 2 } },
-    { id: 'fire', name: '火焰精灵', icon: 'fire', desc: '携带效果：起始背包中的 5 张「杀」化为 5 张「火球」', effect: { shaToFireball: true } },
-    { id: 'penguin', name: '小企鹅咕嘎', icon: 'crystal', desc: '携带效果：保护格 +2（2-6 格 → 4-8 格）', effect: { safeBonus: 2 } },
-  ];
+  // 数据外置 game/data/pets.json（2026-09-11 架构批次 2：中央数据源）。
+  const PET_EGG_ID = DATA.pets.eggId;
+  const HATCH_COST = DATA.pets.hatchCost;          // 孵化消耗的储备币
+  const PET_LEVEL_MAX = DATA.pets.levelMax;
+  const PET_UP_COSTS = DATA.pets.upCosts;          // 升到 Lv.2/3/4/5 各需的口粮（递增）
+  const PETS = DATA.pets.list;
   const petById = (id) => PETS.find(p => p.id === id) || null;
   const petLevel = (id) => Math.max(1, Math.min(PET_LEVEL_MAX, (data.pets[id] && data.pets[id].lv) || 1));
   const ownedPets = () => Object.keys(data.pets || {});
