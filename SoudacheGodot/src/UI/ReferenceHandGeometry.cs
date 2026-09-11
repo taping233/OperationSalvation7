@@ -2,10 +2,15 @@ using Godot;
 
 namespace SoudacheGodot.UI;
 
-/// Directly adapted from sts2-reverse HandPosHelper's 1-10 card position table.
+/// <summary>Directly adapted from sts2-reverse HandPosHelper's 1-10 card position table.
 /// Only presentation geometry is reused; card identity and gameplay remain Soudache-owned.
+/// Scale segments per wave1 6a spec (sts2-reference §1 NCardHolder.smallScale=0.8 base):
+/// ≤7 张 → ×1.0、8 张 → ×0.95、9 张 → ×0.90、10 张 → ×0.85（每多一张 -0.05，0.85 封底）。</summary>
 internal static class ReferenceHandGeometry
 {
+    /// <summary>手内基准缩放（sts2-reference §1 NCardHolder.smallScale=0.8）。</summary>
+    public const float BaseHandScale = 0.8f;
+
     private static readonly Vector2[][] Positions =
     {
         new[] { new Vector2(0, -50) },
@@ -22,4 +27,8 @@ internal static class ReferenceHandGeometry
 
     public static Vector2 GetPosition(int handSize, int index) => Positions[handSize - 1][index];
     public static bool Supports(int handSize) => handSize is >= 1 and <= 10;
+
+    /// <summary>拥挤手牌缩放分段系数：≤7 张 1.0，之后每张 -0.05，最低 0.85。</summary>
+    public static float GetScaleFactor(int handSize)
+        => handSize <= 7 ? 1f : Mathf.Max(0.85f, 1f - (handSize - 7) * 0.05f);
 }

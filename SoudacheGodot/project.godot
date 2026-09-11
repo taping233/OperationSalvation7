@@ -31,6 +31,7 @@ project/assembly_name="SoudacheGodot"
 
 [gui]
 
+theme/custom_font="res://assets/fonts/NotoSansSC-VF.ttf"
 theme/default_font_multichannel_signed_distance_field=true
 
 [rendering]
