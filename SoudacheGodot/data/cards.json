@@ -12,42 +12,26 @@
       "value": 1
     },
     {
-      "cls": "降临者",
-      "cost": 1,
-      "desc": "3′；注能(小)：改为 6′。",
-      "dmg": 3,
-      "dmgType": "spell",
-      "id": "cc-chargefb",
-      "infuse": 1,
-      "name": "充能火球",
-      "rarity": "职业",
-      "type": "法术",
-      "unrandom": true,
+      "cost": 2,
+      "desc": "攻（+0），本回合每打出一张其他武术，费用-1。",
+      "dmg": 0,
+      "dmgType": "attack",
+      "id": "cc-chase-slash",
+      "name": "追斩",
+      "rarity": "稀有",
+      "type": "武术",
       "value": 2
     },
     {
-      "cls": "降临者",
-      "cost": 1,
-      "desc": "回合开始时获得 1 点能量。",
-      "id": "cc-darkform",
-      "name": "黑暗形态",
-      "rarity": "职业",
-      "type": "法术",
-      "unrandom": true,
+      "cost": 2,
+      "desc": "攻（+3），附加手牌中的招式所具有的全部诅咒效果。",
+      "dmg": 3,
+      "dmgType": "attack",
+      "id": "cc-cursed-blade",
+      "name": "诅咒之刃",
+      "rarity": "稀有",
+      "type": "武术",
       "value": 3
-    },
-    {
-      "cls": "降临者",
-      "cost": 3,
-      "desc": "4′，附加 2 种随机诅咒。",
-      "dmg": 4,
-      "dmgType": "spell",
-      "id": "cc-deathray",
-      "name": "致命射线",
-      "rarity": "职业",
-      "type": "法术",
-      "unrandom": true,
-      "value": 4
     },
     {
       "cls": "牧师",
@@ -63,75 +47,47 @@
       "value": 3
     },
     {
-      "cls": "降临者",
-      "cost": 2,
-      "desc": "随机获取 2 张能施加诅咒的卡牌。",
-      "id": "cc-doom",
-      "name": "厄运",
-      "rarity": "职业",
-      "type": "法术",
-      "unrandom": true,
-      "value": 3
-    },
-    {
-      "cls": "降临者",
-      "cost": 2,
-      "desc": "对全体敌人造成 3 点伤害，本回合法伤 +1。",
+      "cost": 1,
+      "desc": "对所有敌人造成 3 点法术伤害。",
       "dmg": 3,
       "dmgType": "spell",
-      "id": "cc-flameform",
-      "name": "火焰形态",
-      "rarity": "职业",
+      "id": "cc-double-boom",
+      "name": "二次爆炸",
+      "rarity": "衍生",
+      "sellable": false,
       "type": "法术",
-      "unrandom": true,
-      "value": 3
+      "value": 0
     },
     {
-      "cls": "牧师",
-      "cost": 2,
-      "desc": "每回合结束回复 2 点生命。",
-      "heal": 2,
-      "id": "cc-holysrc",
-      "name": "圣光之源",
-      "rarity": "职业",
-      "type": "法术",
-      "unrandom": true,
-      "value": 3
-    },
-    {
-      "cls": "侠客",
-      "cost": 2,
-      "desc": "发现 1 张其它职业的卡牌并施放。",
-      "id": "cc-jianghu",
-      "name": "江湖救急",
-      "rarity": "职业",
-      "type": "武术",
-      "unrandom": true,
-      "value": 3
-    },
-    {
-      "cls": "法师",
       "cost": 1,
-      "desc": "获得 2 点能量，抽 1 张牌。",
-      "draw": 1,
-      "id": "cc-manasupply",
-      "name": "法力补给",
-      "rarity": "职业",
-      "type": "法术",
-      "unrandom": true,
-      "value": 3
+      "desc": "发现一张武术卡并额外获得1张复制。",
+      "id": "cc-dual-wield",
+      "name": "二刀流",
+      "rarity": "稀有",
+      "type": "武术",
+      "value": 2
     },
     {
-      "cls": "牧师",
       "cost": 2,
-      "desc": "每回合结束回复 3 点生命。",
-      "heal": 3,
-      "id": "cc-petal",
-      "name": "花瓣法阵",
-      "rarity": "职业",
+      "desc": "造成9点法术伤害，获得1张「二次爆炸」。",
+      "dmg": 9,
+      "dmgType": "spell",
+      "id": "cc-lava-blast",
+      "name": "熔岩爆破",
+      "rarity": "稀有",
       "type": "法术",
-      "unrandom": true,
       "value": 4
+    },
+    {
+      "cost": 2,
+      "desc": "对随机敌人释放4个随机法术（这些随机法术默认已注能）。",
+      "dmg": 0,
+      "id": "cc-mana-surge",
+      "name": "法力奔涌",
+      "rarity": "传说",
+      "sellable": false,
+      "type": "法术",
+      "value": 5
     },
     {
       "cls": "战士",
@@ -146,38 +102,15 @@
       "value": 3
     },
     {
-      "cls": "降临者",
-      "cost": 3,
-      "desc": "对全体敌人每人释放 1 次火球。",
-      "id": "cc-stormfb",
-      "name": "风暴火球",
-      "rarity": "职业",
-      "type": "法术",
-      "unrandom": true,
-      "value": 4
-    },
-    {
-      "cls": "法师",
-      "cost": 2,
-      "desc": "发现并直接施放 1 张牌，再抽 2 张牌。",
-      "draw": 2,
-      "id": "cc-thousand",
-      "name": "千变万化",
-      "rarity": "职业",
-      "type": "法术",
-      "unrandom": true,
-      "value": 4
-    },
-    {
-      "cls": "侠客",
       "cost": 1,
-      "desc": "发现 1 张装备牌。",
-      "id": "cc-treasure",
-      "name": "盗宝",
-      "rarity": "职业",
+      "desc": "本回合每打出一张其他招式，造成2点固定伤害（触发次数＝本回合已打出的招式数）。",
+      "dmg": 2,
+      "dmgType": "fixed",
+      "id": "cc-rapid-fire",
+      "name": "连续射击",
+      "rarity": "史诗",
       "type": "武术",
-      "unrandom": true,
-      "value": 2
+      "value": 3
     },
     {
       "armor": 4,
@@ -192,8 +125,19 @@
       "value": 3
     },
     {
+      "cost": 0,
+      "desc": "获取本职业的能力卡",
+      "dmg": 0,
+      "id": "cmtmvq6ss84l",
+      "name": "彩色令牌",
+      "rarity": "衍生",
+      "sellable": false,
+      "type": "道具",
+      "value": 8
+    },
+    {
       "cost": 2,
-      "desc": "对方身上每有一层诅咒，释放一次‘杀’",
+      "desc": "对方身上每有一层诅咒，释放一次‘初始攻击’",
       "id": "cmtn0pbkmnvc",
       "name": "流光照影",
       "rarity": "衍生",
@@ -203,11 +147,126 @@
     },
     {
       "cost": 1,
+      "desc": "造成5点固定伤害，若击杀敌人，+2币。",
+      "dmg": 5,
+      "dmgType": "fixed",
+      "id": "cmtn0xt0zr7",
+      "name": "闪金之锤",
+      "rarity": "衍生",
+      "sellable": false,
+      "type": "武术",
+      "value": 3
+    },
+    {
+      "cost": 2,
+      "desc": "发现一张传说或能力卡。",
+      "dmg": 0,
+      "id": "cmtn125e1nk0",
+      "name": "神秘召唤",
+      "rarity": "史诗",
+      "sellable": false,
+      "type": "法术",
+      "value": 4
+    },
+    {
+      "cost": 1,
       "desc": "发现一张注能卡，使其无需注能",
       "id": "cmtn1epgt20j",
       "name": "灵能召唤",
       "rarity": "稀有",
       "type": "法术",
+      "value": 3
+    },
+    {
+      "cls": "降临者",
+      "cost": 0,
+      "desc": "随机获取1张能施加诅咒的招式",
+      "dmg": 0,
+      "id": "cmtn1gfhczzj",
+      "name": "厄运",
+      "rarity": "职业",
+      "sellable": false,
+      "type": "法术",
+      "unrandom": true,
+      "value": 2
+    },
+    {
+      "cls": "侠客",
+      "cost": 1,
+      "desc": "发现一张装备卡",
+      "dmg": 0,
+      "id": "cmtn1i64j7y7",
+      "name": "盗宝",
+      "rarity": "职业",
+      "sellable": false,
+      "type": "武术",
+      "unrandom": true,
+      "value": 3
+    },
+    {
+      "cls": "降临者",
+      "cost": 1,
+      "desc": "4‘，回合开始时，本牌伤害+1",
+      "dmg": 4,
+      "dmgType": "spell",
+      "id": "cmtn1lbhbqi4",
+      "name": "充能火球",
+      "rarity": "职业",
+      "sellable": false,
+      "type": "法术",
+      "unrandom": true,
+      "value": 3
+    },
+    {
+      "cls": "降临者",
+      "cost": 1,
+      "desc": "本局对战中，法伤+1",
+      "dmg": 0,
+      "id": "cmtn1ntxzoc4",
+      "name": "火焰形态",
+      "rarity": "职业",
+      "sellable": false,
+      "type": "法术",
+      "unrandom": true,
+      "value": 2
+    },
+    {
+      "cls": "法师",
+      "cost": 2,
+      "desc": "发现一种形态并释放",
+      "dmg": 0,
+      "id": "cmtn1p9vb5au",
+      "name": "千变万化",
+      "rarity": "职业",
+      "sellable": false,
+      "type": "法术",
+      "unrandom": true,
+      "value": 3
+    },
+    {
+      "cls": "降临者",
+      "cost": 1,
+      "desc": "本局对战中，每当你发现卡牌时，增加1个可选项",
+      "dmg": 0,
+      "id": "cmtn1r10xnl1",
+      "name": "黑暗形态",
+      "rarity": "职业",
+      "sellable": false,
+      "type": "法术",
+      "unrandom": true,
+      "value": 2
+    },
+    {
+      "cls": "侠客",
+      "cost": 0,
+      "desc": "获取3张临时卡牌，回合开始时将其消耗。",
+      "dmg": 0,
+      "id": "cmtn1wnhhym",
+      "name": "江湖救急",
+      "rarity": "职业",
+      "sellable": false,
+      "type": "武术",
+      "unrandom": true,
       "value": 3
     },
     {
@@ -223,6 +282,17 @@
       "value": 5
     },
     {
+      "cost": 0,
+      "desc": "随机获取3张卡牌",
+      "dmg": 0,
+      "id": "cmtn28jv33wx",
+      "name": "搜索大宝箱",
+      "rarity": "衍生",
+      "sellable": false,
+      "type": "法术",
+      "value": 3
+    },
+    {
       "cost": 1,
       "desc": "回合开始时，获得一张随机手牌的复制",
       "id": "cmtn2jc142dj",
@@ -232,29 +302,61 @@
       "value": 3
     },
     {
+      "cost": 0,
+      "desc": "在背包中才能使用，复原最多两张卡牌",
+      "dmg": 0,
+      "id": "cmtn6bge52qt",
+      "name": "复原药水",
+      "rarity": "稀有",
+      "sellable": false,
+      "type": "道具",
+      "value": 3
+    },
+    {
+      "cost": 0,
       "desc": "攻击力4生命4，优先为主人承受伤害，自动攻击敌人",
       "id": "cmtn6ulm4boj",
       "name": "步兵",
       "rarity": "衍生",
+      "sellable": false,
       "type": "生物",
-      "unrandom": true
+      "unrandom": true,
+      "value": 0
     },
     {
+      "cost": 0,
       "desc": "回合开始时对所有敌方角色各施加一层随机诅咒，优先不重复。",
+      "dmg": 0,
       "id": "cmtn79743r2n",
       "name": "末日浩劫之门",
       "rarity": "棱彩",
+      "sellable": false,
       "type": "生物",
-      "unrandom": true
+      "unrandom": true,
+      "value": 0
     },
     {
       "armor": 5,
+      "cost": 0,
       "desc": "回合开始时随机获取一项祝福，对全体友方施放，优先不重复。（获得潜行，持续 1 回合。获得 1 点攻击力。法伤 +1。减伤 1。获得 5 点护甲。净化。从这些中随机）",
+      "dmg": 0,
       "id": "cmtn7err0a7",
       "name": "天国之门",
       "rarity": "棱彩",
+      "sellable": false,
       "type": "生物",
-      "unrandom": true
+      "value": 0
+    },
+    {
+      "cost": 0,
+      "desc": "获得彩色令牌碎片；复原1张卡牌",
+      "dmg": 0,
+      "id": "cmtn7qttxqo4",
+      "name": "修鞋铺",
+      "rarity": "衍生",
+      "sellable": false,
+      "type": "事件",
+      "value": 0
     },
     {
       "cost": 1,
@@ -270,9 +372,9 @@
     {
       "art": "archer",
       "cost": 0,
-      "desc": "攻击 5 / 生命 3。远程攻击。",
+      "desc": "攻击 5 / 生命 3。联邦·第1层。远程攻击。",
       "id": "foe-archer",
-      "name": "废土猎手",
+      "name": "联邦射手",
       "rarity": "衍生",
       "type": "生物",
       "unrandom": true
@@ -280,9 +382,9 @@
     {
       "art": "bandit",
       "cost": 0,
-      "desc": "攻击 3 / 生命 3。普通近战，成群出现（盗匪横行 ×5）。",
+      "desc": "攻击 3 / 生命 3。反抗·第1层。普通近战，成群出现（盗匪横行 ×5）。",
       "id": "foe-bandit",
-      "name": "掠夺者",
+      "name": "反抗组织拾荒者",
       "rarity": "衍生",
       "type": "生物",
       "unrandom": true
@@ -290,9 +392,9 @@
     {
       "art": "boss_elem",
       "cost": 0,
-      "desc": "攻击 8 / 生命 48。BOSS·词缀【元素庇幕】：偶数回合减免所有伤害（破甲可克制）。",
+      "desc": "攻击 8 / 生命 48。BOSS·能力者。词缀【元素庇幕】：偶数回合减免所有伤害（破甲可克制）。",
       "id": "foe-boss_elem",
-      "name": "辐射领主",
+      "name": "异能领主",
       "rarity": "衍生",
       "type": "生物",
       "unrandom": true
@@ -300,9 +402,9 @@
     {
       "art": "boss_general",
       "cost": 0,
-      "desc": "攻击 5 / 生命 50。BOSS·词缀【军威】：每个回合结束时攻击力 +2。",
+      "desc": "攻击 5 / 生命 50。BOSS·联邦。词缀【军威】：每个回合结束时攻击力 +2。",
       "id": "foe-boss_general",
-      "name": "锈蚀将军",
+      "name": "肃清总督",
       "rarity": "衍生",
       "type": "生物",
       "unrandom": true
@@ -310,9 +412,9 @@
     {
       "art": "boss_orc",
       "cost": 0,
-      "desc": "攻击 4 / 生命 45。BOSS·词缀【狂乱】：每回合攻击两次，每次附加 1 层流血或中毒。",
+      "desc": "攻击 4 / 生命 45。BOSS·变异。词缀【狂乱】：每回合攻击两次，每次附加 1 层流血或中毒。",
       "id": "foe-boss_orc",
-      "name": "兽群之主",
+      "name": "变异巢母",
       "rarity": "衍生",
       "type": "生物",
       "unrandom": true
@@ -320,9 +422,9 @@
     {
       "art": "cavalry",
       "cost": 0,
-      "desc": "攻击 5 / 生命 6。蓄力攻击：隔回合强化一击。",
+      "desc": "攻击 5 / 生命 6。联邦·第2层。蓄力攻击：隔回合强化一击。",
       "id": "foe-cavalry",
-      "name": "机车掠袭者",
+      "name": "联邦机动兵",
       "rarity": "衍生",
       "type": "生物",
       "unrandom": true
@@ -330,7 +432,7 @@
     {
       "art": "dragon",
       "cost": 0,
-      "desc": "攻击 7 / 生命 40。精英强敌：重击/特殊；第一回合蓄力不会攻击。",
+      "desc": "攻击 7 / 生命 40。变异·第5层精英。重击/特殊；第一回合蓄力不会攻击。",
       "id": "foe-dragon",
       "name": "巨兽「荒渊」",
       "rarity": "衍生",
@@ -338,31 +440,75 @@
       "unrandom": true
     },
     {
-      "art": "fire_el",
+      "art": "esper_candle",
       "cost": 0,
-      "desc": "攻击 10 / 生命 7。攻击并灼烧。",
-      "id": "foe-fire_el",
-      "name": "灼热异变体",
+      "desc": "攻击 9 / 生命 6。反抗能力者·第4层。掌心烈焰：攻击并灼烧。",
+      "id": "foe-esper_candle",
+      "name": "烛火",
       "rarity": "衍生",
       "type": "生物",
       "unrandom": true
+    },
+    {
+      "art": "esper_crow",
+      "cost": 0,
+      "desc": "攻击 8 / 生命 5。联邦能力者·第4层。碎晶齐射：远程多段攻击。",
+      "id": "foe-esper_crow",
+      "name": "白鸦",
+      "rarity": "衍生",
+      "type": "生物",
+      "unrandom": true
+    },
+    {
+      "art": "esper_echo",
+      "cost": 0,
+      "desc": "攻击 9 / 生命 7。反抗能力者·第5层。声波叠伤：远程多段攻击。",
+      "id": "foe-esper_echo",
+      "name": "回声",
+      "rarity": "衍生",
+      "type": "生物",
+      "unrandom": true
+    },
+    {
+      "art": "esper_silence",
+      "cost": 0,
+      "desc": "攻击 7 / 生命 9。联邦能力者·第5层。声场压制：攻击并施加诅咒。",
+      "id": "foe-esper_silence",
+      "name": "静默",
+      "rarity": "衍生",
+      "type": "生物",
+      "unrandom": true
+    },
+    {
+      "art": "fire_el",
+      "cost": 0,
+      "desc": "攻击 10 / 生命 7。变异·第4层。攻击并灼烧。",
+      "dmg": 0,
+      "id": "foe-fire_el",
+      "name": "灼热异变体",
+      "rarity": "衍生",
+      "sellable": false,
+      "type": "生物",
+      "value": 0
     },
     {
       "art": "grass_el",
       "cost": 0,
-      "desc": "攻击 5 / 生命 12。攻击并施加诅咒。",
+      "desc": "攻击 5 / 生命 12。变异·第5层。攻击并施加诅咒。",
+      "dmg": 0,
       "id": "foe-grass_el",
       "name": "滋生异变体",
       "rarity": "衍生",
+      "sellable": false,
       "type": "生物",
-      "unrandom": true
+      "value": 0
     },
     {
       "art": "infantry",
       "cost": 0,
-      "desc": "攻击 4 / 生命 4。普通近战，行动无特殊之处。",
+      "desc": "攻击 4 / 生命 4。联邦·第1层。普通近战，行动无特殊之处。",
       "id": "foe-infantry",
-      "name": "荒民打手",
+      "name": "联邦巡防兵",
       "rarity": "衍生",
       "type": "生物",
       "unrandom": true
@@ -370,19 +516,21 @@
     {
       "art": "orc_axe",
       "cost": 0,
-      "desc": "攻击 4 / 生命 7。防御/反击型，隔回合蓄势。",
+      "desc": "攻击 4 / 生命 7。变异·第3层。防御/反击型，隔回合蓄势。",
+      "dmg": 0,
       "id": "foe-orc_axe",
-      "name": "畸变屠夫",
+      "name": "甲壳变异体",
       "rarity": "衍生",
+      "sellable": false,
       "type": "生物",
-      "unrandom": true
+      "value": 0
     },
     {
       "art": "orc_jav",
       "cost": 0,
-      "desc": "攻击 6 / 生命 4。远程投掷。",
+      "desc": "攻击 6 / 生命 4。反抗·第2层。远程投掷。",
       "id": "foe-orc_jav",
-      "name": "畸变投掷者",
+      "name": "反抗组织掷弹兵",
       "rarity": "衍生",
       "type": "生物",
       "unrandom": true
@@ -390,22 +538,50 @@
     {
       "art": "water_el",
       "cost": 0,
-      "desc": "攻击 7 / 生命 10。防御/反击型，隔回合蓄势。",
+      "desc": "攻击 7 / 生命 10。变异·第4层。防御/反击型，隔回合蓄势。",
+      "dmg": 0,
       "id": "foe-water_el",
       "name": "腐蚀异变体",
       "rarity": "衍生",
+      "sellable": false,
       "type": "生物",
-      "unrandom": true
+      "value": 0
     },
     {
       "art": "wolf_rider",
       "cost": 0,
-      "desc": "攻击 7 / 生命 6。蓄力攻击：隔回合强化一击。",
+      "desc": "攻击 7 / 生命 6。变异·第3层。蓄力攻击：隔回合强化一击。",
+      "dmg": 0,
       "id": "foe-wolf_rider",
-      "name": "畸变狼骑兵",
+      "name": "变异雪狼",
       "rarity": "衍生",
+      "sellable": false,
       "type": "生物",
-      "unrandom": true
+      "value": 0
+    },
+    {
+      "cost": 0,
+      "desc": "可以孵化宠物。",
+      "dmg": 0,
+      "id": "pet-egg",
+      "name": "宠物蛋",
+      "rarity": "传说",
+      "sellable": false,
+      "type": "资源",
+      "unrandom": true,
+      "value": 5
+    },
+    {
+      "cost": 0,
+      "desc": "回复12 点生命。",
+      "dmg": 0,
+      "heal": 12,
+      "id": "starter-emergency-bandage",
+      "name": "应急绷带",
+      "rarity": "稀有",
+      "sellable": false,
+      "type": "道具",
+      "value": 0
     },
     {
       "cost": 0,
@@ -420,21 +596,23 @@
     },
     {
       "cost": 0,
-      "desc": "在背包中才能使用，复原最多 3 张卡牌。",
+      "desc": "在背包中才能使用，可以复原最多 3 张卡牌。",
       "dmg": 0,
       "id": "tt-crystal",
-      "name": "能源水晶",
+      "name": "能源结晶",
       "rarity": "史诗",
+      "sellable": false,
       "type": "道具",
       "value": 3
     },
     {
-      "cost": 2,
-      "desc": "带入战场时，以 5 张随机卡牌开局。可出售。",
+      "cost": 0,
+      "desc": "只能在仓库界面点击使用，获得5张随机卡牌",
+      "dmg": 0,
       "id": "tt-econpack",
       "name": "经济卡包",
-      "rarity": "传说",
-      "sellable": true,
+      "rarity": "史诗",
+      "sellable": false,
       "type": "资源",
       "value": 10
     },
@@ -455,7 +633,7 @@
       "dmg": 0,
       "heal": 20,
       "id": "tt-jinchuangyao",
-      "name": "金创药",
+      "name": "金疮药",
       "rarity": "史诗",
       "type": "道具",
       "value": 4
@@ -465,8 +643,9 @@
       "desc": "解锁大门。",
       "dmg": 0,
       "id": "tt-key",
-      "name": "钥匙",
+      "name": "一把钥匙",
       "rarity": "古朴",
+      "sellable": false,
       "type": "资源",
       "value": 2
     },
@@ -475,8 +654,9 @@
       "desc": "钥匙 ×3。",
       "dmg": 0,
       "id": "tt-key-one",
-      "name": "一把钥匙",
+      "name": "三把钥匙",
       "rarity": "史诗",
+      "sellable": false,
       "type": "资源",
       "value": 6
     },
@@ -485,8 +665,9 @@
       "desc": "钥匙 ×2。",
       "dmg": 0,
       "id": "tt-keys-bunch",
-      "name": "一串钥匙",
+      "name": "两把钥匙",
       "rarity": "稀有",
+      "sellable": false,
       "type": "资源",
       "value": 4
     },
@@ -496,10 +677,22 @@
       "dmg": 0,
       "heal": 16,
       "id": "tt-medneedle",
-      "name": "医疗针",
+      "name": "急救合剂",
       "rarity": "稀有",
       "type": "道具",
       "value": 4
+    },
+    {
+      "cost": 0,
+      "desc": "回复 6 点生命。",
+      "dmg": 0,
+      "heal": 6,
+      "id": "tt-peach",
+      "name": "桃",
+      "rarity": "古朴",
+      "sellable": false,
+      "type": "道具",
+      "value": 2
     },
     {
       "cost": 0,
@@ -523,20 +716,22 @@
       "value": 6
     },
     {
-      "cost": 2,
-      "desc": "觉醒。",
+      "cost": 0,
+      "desc": "集齐两枚碎片，合成真正的彩色令牌：获取一张能力卡。",
+      "dmg": 0,
       "id": "tt-token-color",
-      "name": "彩色令牌",
+      "name": "员工通行证A",
       "rarity": "史诗",
+      "sellable": false,
       "type": "道具",
-      "value": 8
+      "value": 4
     },
     {
       "cost": 0,
       "desc": "获取 1 张传说卡。",
       "dmg": 0,
       "id": "tt-token-gold",
-      "name": "金色令牌",
+      "name": "员工通行证B",
       "rarity": "史诗",
       "type": "道具",
       "value": 4
@@ -626,14 +821,6 @@
       "value": 2
     },
     {
-      "cost": 2,
-      "desc": "攻击，附加中毒。",
-      "id": "tt2-greenarrow",
-      "name": "青箭",
-      "rarity": "古朴",
-      "type": "武术"
-    },
-    {
       "cost": 1,
       "desc": "发现 1 张其它职业的卡牌并直接施放。",
       "dmg": 0,
@@ -666,14 +853,6 @@
       "value": 2
     },
     {
-      "cost": 3,
-      "desc": "贮藏至多 3 张牌。",
-      "id": "tt2-pouch",
-      "name": "神秘口袋",
-      "rarity": "稀有",
-      "type": "装备"
-    },
-    {
       "cost": 0,
       "desc": "造成 2 点伤害。",
       "dmg": 2,
@@ -697,13 +876,16 @@
       "value": 2
     },
     {
-      "cost": 4,
-      "desc": "限定：将 2 张军用保险柜的物资置入牌库，抽 1 张牌。",
+      "cost": 0,
+      "desc": "限定技能：将 1张‘搜索大宝箱’洗入牌库，抽1张牌。",
+      "dmg": 0,
       "draw": 1,
       "id": "tt2-treasuremap",
       "name": "寻宝图",
       "rarity": "古朴",
-      "type": "装备"
+      "sellable": false,
+      "type": "装备",
+      "value": 2
     },
     {
       "armor": 10,
@@ -738,16 +920,6 @@
     },
     {
       "cost": 2,
-      "desc": "抽 2 张牌。",
-      "draw": 2,
-      "id": "tt3-arcane-wisdom",
-      "name": "奥术智慧",
-      "rarity": "古朴",
-      "type": "法术",
-      "value": 2
-    },
-    {
-      "cost": 2,
       "desc": "攻（+4），附加 2 层流血。",
       "dmg": 4,
       "dmgType": "attack",
@@ -770,7 +942,7 @@
     },
     {
       "cost": 0,
-      "desc": "消耗该牌时立即释放一次’杀‘。",
+      "desc": "消耗该牌时立即释放一次’初始攻击‘。",
       "dmg": 0,
       "id": "tt3-azure-sword",
       "name": "百炼青虹剑",
@@ -799,17 +971,6 @@
       "rarity": "古朴",
       "type": "武术",
       "value": 2
-    },
-    {
-      "cost": 3,
-      "desc": "造成 3 点伤害，回复等量生命。",
-      "dmg": 3,
-      "dmgType": "spell",
-      "id": "tt3-blood-feast",
-      "name": "血膳宴",
-      "rarity": "稀有",
-      "type": "法术",
-      "value": 4
     },
     {
       "cost": 0,
@@ -852,14 +1013,6 @@
       "rarity": "传说",
       "type": "装备",
       "value": 5
-    },
-    {
-      "cost": 2,
-      "desc": "混合：重复施放一种混合药水。",
-      "id": "tt3-copy-potion",
-      "name": "复制药水",
-      "rarity": "古朴",
-      "type": "法术"
     },
     {
       "cost": 0,
@@ -977,14 +1130,6 @@
       "value": 2
     },
     {
-      "cost": 2,
-      "desc": "混合：随机获取 2 张卡牌。",
-      "id": "tt3-fate-potion",
-      "name": "命运药水",
-      "rarity": "古朴",
-      "type": "法术"
-    },
-    {
       "cost": 0,
       "desc": "限定技能：消耗所有手牌，获得 1 个额外回合。",
       "dmg": 0,
@@ -995,15 +1140,17 @@
       "value": 4
     },
     {
-      "cost": 2,
-      "desc": "造成 4 点伤害（4′）。",
+      "cost": 1,
+      "desc": "造成 4 点法术伤害。",
       "dmg": 4,
       "dmgType": "spell",
       "id": "tt3-fireball",
       "name": "火球",
-      "rarity": "古朴",
+      "rarity": "初始",
+      "sellable": false,
       "type": "法术",
-      "unrandom": true
+      "unrandom": true,
+      "value": 1
     },
     {
       "cls": "法师",
@@ -1019,24 +1166,17 @@
       "value": 3
     },
     {
+      "cls": "降临者",
       "cost": 2,
-      "desc": "抽 2 张牌。",
-      "draw": 2,
-      "id": "tt3-fish-out",
-      "name": "摸底",
-      "rarity": "古朴",
-      "type": "法术",
-      "value": 2
-    },
-    {
-      "cost": 3,
-      "desc": "对全体敌人造成 3 点伤害。",
-      "dmg": 3,
+      "desc": "对全体敌人每人释放1次火球。",
+      "dmg": 4,
       "dmgType": "spell",
       "id": "tt3-flame-storm",
-      "name": "火焰风暴",
-      "rarity": "稀有",
+      "name": "风暴火球",
+      "rarity": "职业",
+      "sellable": false,
       "type": "法术",
+      "unrandom": true,
       "value": 3
     },
     {
@@ -1084,22 +1224,15 @@
       "value": 5
     },
     {
-      "cost": 2,
-      "desc": "布下幻阵，治疗所有队友。",
-      "id": "tt3-galaxy-mirage",
-      "name": "银河幻境",
-      "rarity": "史诗",
-      "type": "法术",
-      "value": 5
-    },
-    {
       "cost": 0,
       "desc": "漂亮的小玩意，可出售。",
+      "dmg": 0,
       "id": "tt3-garnet-marble",
-      "name": "石榴石弹珠",
+      "name": "石榴弹珠",
       "rarity": "古朴",
+      "sellable": true,
       "type": "资源",
-      "value": 3
+      "value": 4
     },
     {
       "armor": 5,
@@ -1122,15 +1255,6 @@
       "rarity": "古朴",
       "type": "法术",
       "value": 2
-    },
-    {
-      "cost": 2,
-      "desc": "回复：回复 5 血。",
-      "heal": 5,
-      "id": "tt3-heal-potion",
-      "name": "治疗药水",
-      "rarity": "古朴",
-      "type": "法术"
     },
     {
       "armor": 5,
@@ -1181,17 +1305,6 @@
     },
     {
       "cost": 0,
-      "desc": "攻 1 点，不受反击。",
-      "dmg": 1,
-      "dmgType": "attack",
-      "id": "tt3-hop-strike",
-      "name": "跳击",
-      "rarity": "古朴",
-      "type": "武术",
-      "value": 2
-    },
-    {
-      "cost": 0,
       "desc": "获得 2 点攻击力。持续 1 回合。",
       "dmg": 0,
       "id": "tt3-houyi-potion",
@@ -1199,17 +1312,6 @@
       "rarity": "稀有",
       "type": "道具",
       "value": 3
-    },
-    {
-      "cost": 2,
-      "desc": "造成 1 点伤害，附加冰冻。",
-      "dmg": 1,
-      "dmgType": "spell",
-      "id": "tt3-ice-arrow",
-      "name": "寒冰箭",
-      "rarity": "古朴",
-      "type": "法术",
-      "value": 2
     },
     {
       "cost": 1,
@@ -1233,7 +1335,7 @@
     },
     {
       "cost": 0,
-      "desc": "对战开始时，你的所有’杀‘化为1张不朽斩。",
+      "desc": "对战开始时，你的所有’初始攻击‘化为1张不朽斩。",
       "dmg": 0,
       "id": "tt3-immortal-blade",
       "name": "骷髅王剑",
@@ -1282,15 +1384,6 @@
       "rarity": "史诗",
       "type": "法术",
       "value": 4
-    },
-    {
-      "cost": 2,
-      "desc": "装备：施法时获得能量。",
-      "id": "tt3-mana-blood",
-      "name": "聚魔之血",
-      "rarity": "稀有",
-      "type": "装备",
-      "value": 3
     },
     {
       "cost": 0,
@@ -1354,46 +1447,33 @@
       "value": 3
     },
     {
+      "cls": "降临者",
       "cost": 2,
-      "desc": "造成 4 点伤害。",
-      "dmg": 4,
+      "desc": "造成8点法术伤害，对其附加3种随机诅咒",
+      "dmg": 8,
       "dmgType": "spell",
       "id": "tt3-nuke-ray",
-      "name": "核爆射线",
-      "rarity": "史诗",
+      "name": "致命射线",
+      "rarity": "职业",
+      "sellable": false,
       "type": "法术",
-      "value": 4
+      "unrandom": true,
+      "value": 3
     },
     {
-      "cost": 2,
-      "desc": "每回合结束回复 2 点生命。",
+      "cls": "牧师",
+      "cost": 1,
+      "desc": "回合开始时额外抽1张牌并回复 3 点生命，持续 3 回合。",
+      "dmg": 0,
+      "draw": 1,
       "heal": 2,
       "id": "tt3-petal",
-      "name": "花瓣",
-      "rarity": "稀有",
+      "name": "花瓣法阵",
+      "rarity": "职业",
+      "sellable": false,
       "type": "法术",
-      "value": 4
-    },
-    {
-      "cost": 1,
-      "desc": "攻 2 点；目标下回合无法行动。",
-      "dmg": 2,
-      "dmgType": "attack",
-      "id": "tt3-pindown",
-      "name": "制敌",
-      "rarity": "古朴",
-      "type": "武术",
-      "value": 2
-    },
-    {
-      "armor": 3,
-      "cost": 1,
-      "desc": "获得 3 点护甲。",
-      "id": "tt3-plate",
-      "name": "铠甲",
-      "rarity": "初始",
-      "type": "武术",
-      "value": 2
+      "unrandom": true,
+      "value": 3
     },
     {
       "cost": 1,
@@ -1449,15 +1529,6 @@
       "value": 2
     },
     {
-      "cost": 3,
-      "desc": "复活 1 张卡牌。",
-      "id": "tt3-resurrect",
-      "name": "复活",
-      "rarity": "稀有",
-      "type": "法术",
-      "value": 2
-    },
-    {
       "cost": 0,
       "desc": "限定技能：直接释放手牌中的所有‘箭’，每释放1张，抽1张牌。",
       "dmg": 0,
@@ -1480,23 +1551,15 @@
     },
     {
       "cost": 0,
-      "desc": "回复 99 点生命（相当于回满）。",
+      "desc": "回复 99 点生命。",
+      "dmg": 0,
       "heal": 99,
       "id": "tt3-savior-elixir",
-      "name": "救世灵药",
+      "name": "斗神酒",
       "rarity": "传说",
+      "sellable": false,
       "type": "道具",
-      "unrandom": true,
       "value": 5
-    },
-    {
-      "cost": 3,
-      "desc": "召唤 1 个影分身参战。",
-      "id": "tt3-shadow-clone",
-      "name": "影分身",
-      "rarity": "稀有",
-      "type": "法术",
-      "value": 3
     },
     {
       "cost": 0,
@@ -1518,17 +1581,6 @@
       "rarity": "古朴",
       "type": "武术",
       "value": 3
-    },
-    {
-      "cost": 5,
-      "desc": "造成 5 点伤害。",
-      "dmg": 5,
-      "dmgType": "spell",
-      "id": "tt3-snipe",
-      "name": "狙击",
-      "rarity": "史诗",
-      "type": "法术",
-      "value": 2
     },
     {
       "cost": 0,
@@ -1594,16 +1646,6 @@
       "value": 3
     },
     {
-      "cost": 1,
-      "desc": "装备：消耗能量，指定 2 张牌并抽 1 张。",
-      "draw": 1,
-      "id": "tt3-turtle",
-      "name": "玄龟",
-      "rarity": "古朴",
-      "type": "装备",
-      "value": 3
-    },
-    {
       "armor": 3,
       "cost": 0,
       "desc": "冰冻 1 名敌人后，+3甲。",
@@ -1633,15 +1675,6 @@
       "name": "破浪斩",
       "rarity": "稀有",
       "type": "武术",
-      "value": 2
-    },
-    {
-      "cost": 1,
-      "desc": "装备：攻击 +1。",
-      "id": "tt3-windchaser",
-      "name": "追风剑",
-      "rarity": "古朴",
-      "type": "装备",
       "value": 2
     },
     {
@@ -1676,11 +1709,12 @@
     },
     {
       "cost": 0,
-      "desc": "对战开始时，将 2 张杀替换为随机卡牌。",
+      "desc": "限定技能：发现两张随机招式，交换其费用。",
       "dmg": 0,
       "id": "tt3eq-mistbox",
       "name": "迷之匣",
       "rarity": "古朴",
+      "sellable": false,
       "type": "装备",
       "value": 2
     },
@@ -1695,16 +1729,6 @@
       "rarity": "史诗",
       "type": "法术",
       "value": 3
-    },
-    {
-      "cost": 3,
-      "desc": "注能(1)：1′ 冰冻、流血、中毒。",
-      "dmgType": "spell",
-      "id": "tt3sp-cursewave",
-      "infuse": 1,
-      "name": "诅咒光波",
-      "rarity": "稀有",
-      "type": "法术"
     },
     {
       "cls": "牧师",
@@ -1733,8 +1757,9 @@
       "desc": "消灭 2 名 攻击力5点及以下小怪",
       "dmg": 0,
       "id": "tt3sp-doom",
-      "name": "毁灭炸弹",
+      "name": "TNT",
       "rarity": "史诗",
+      "sellable": false,
       "type": "道具",
       "value": 4
     },
@@ -1757,41 +1782,6 @@
       "rarity": "稀有",
       "type": "法术",
       "value": 3
-    },
-    {
-      "cost": 4,
-      "desc": "获得 1 张金色令牌或彩色令牌，无法将其带入对战。",
-      "id": "tt3sp-mysticsummon",
-      "name": "神秘召唤",
-      "rarity": "稀有",
-      "type": "法术"
-    },
-    {
-      "cost": 2,
-      "desc": "对敌方全体附加中毒，立即触发一次毒伤。",
-      "id": "tt3sp-poisonfog",
-      "name": "毒雾",
-      "rarity": "稀有",
-      "type": "法术"
-    },
-    {
-      "cost": 2,
-      "desc": "混合：2′，附加狂血。",
-      "dmg": 2,
-      "dmgType": "spell",
-      "id": "tt3sp-rageoil",
-      "name": "狂血药水",
-      "rarity": "古朴",
-      "type": "法术"
-    },
-    {
-      "cost": 2,
-      "desc": "抽 2 张牌。",
-      "draw": 2,
-      "id": "tt3sp-search",
-      "name": "搜索",
-      "rarity": "古朴",
-      "type": "法术"
     },
     {
       "cost": 1,
@@ -1842,7 +1832,7 @@
       "desc": "发现 1 张传说卡。",
       "dmg": 0,
       "id": "tt4-shine-token",
-      "name": "耀金令牌",
+      "name": "员工通行证C",
       "rarity": "史诗",
       "type": "道具",
       "value": 4
@@ -1863,19 +1853,10 @@
       "dmg": 0,
       "heal": 6,
       "id": "tt4-woodify",
-      "name": "桃",
+      "name": "能量饮料",
       "rarity": "古朴",
       "type": "道具",
       "value": 2
-    },
-    {
-      "cost": 2,
-      "desc": "回合开始时，法伤 +1。",
-      "id": "tt5-archstaff",
-      "name": "大法师的权杖",
-      "rarity": "传说",
-      "type": "装备",
-      "value": 5
     },
     {
       "cost": 2,
@@ -1900,7 +1881,7 @@
     {
       "battle": true,
       "cost": 0,
-      "desc": "对战土匪 ×5。奖励：中宝箱 ×2。",
+      "desc": "反抗组织拾荒者 ×3~5（随层数增加）。奖励：密封物资箱 ×2。",
       "dmg": 0,
       "id": "tt6-bandits",
       "name": "盗匪横行",
@@ -1929,15 +1910,15 @@
       "unrandom": true
     },
     {
-      "battle": true,
       "cost": 0,
-      "desc": "造成 5 点伤害，若斩杀敌人，+2 币。",
-      "dmgType": "fixed",
+      "desc": "获得卡牌‘闪金之锤’。",
+      "dmg": 0,
       "id": "tt6-goldhammer",
-      "name": "闪金之锤",
+      "name": "矮人的帮助",
       "rarity": "衍生",
+      "sellable": false,
       "type": "事件",
-      "unrandom": true
+      "value": 0
     },
     {
       "cost": 0,
@@ -1980,15 +1961,6 @@
       "unrandom": true
     },
     {
-      "cost": 0,
-      "desc": "前进 6 格。",
-      "id": "tt6-timeskip",
-      "name": "时空孔隙",
-      "rarity": "衍生",
-      "type": "事件",
-      "unrandom": true
-    },
-    {
       "cls": "降临者",
       "cost": 2,
       "desc": "7′，附加禁疗；此时对方身上每有 1 种诅咒，抽 1 张牌。",
@@ -2014,6 +1986,19 @@
       "rarity": "职业",
       "type": "法术",
       "unrandom": true,
+      "value": 3
+    },
+    {
+      "cls": "法师",
+      "cost": 0,
+      "desc": "消耗该牌时抽 3 张牌。",
+      "dmg": 0,
+      "draw": 3,
+      "id": "tt7-arcanescroll",
+      "name": "奥术残卷",
+      "rarity": "职业",
+      "sellable": false,
+      "type": "装备",
       "value": 3
     },
     {
@@ -2093,6 +2078,18 @@
       "value": 3
     },
     {
+      "cls": "降临者",
+      "cost": 0,
+      "desc": "免疫 1 次致命伤害，并在该回合内处于无敌状态。",
+      "dmg": 0,
+      "id": "tt7-darkfort",
+      "name": "黑暗吊坠",
+      "rarity": "职业",
+      "sellable": false,
+      "type": "装备",
+      "value": 3
+    },
+    {
       "armor": 4,
       "cls": "战士",
       "cost": 2,
@@ -2103,6 +2100,20 @@
       "name": "破甲重斩",
       "rarity": "职业",
       "type": "武术",
+      "unrandom": true,
+      "value": 3
+    },
+    {
+      "cls": "牧师",
+      "cost": 0,
+      "desc": "受到3点伤害，抽 3 张牌。",
+      "dmg": 0,
+      "draw": 3,
+      "id": "tt7-drunksong",
+      "name": "恶魔之力",
+      "rarity": "职业",
+      "sellable": false,
+      "type": "法术",
       "unrandom": true,
       "value": 3
     },
@@ -2210,6 +2221,32 @@
       "value": 3
     },
     {
+      "cost": 1,
+      "desc": "在手牌中时，本牌变为打出的上一张武术牌的1费复制。",
+      "dmg": 0,
+      "id": "tt7-imitate",
+      "name": "不变应万变",
+      "rarity": "职业",
+      "sellable": false,
+      "type": "武术",
+      "value": 3
+    },
+    {
+      "armor": 12,
+      "cls": "战士",
+      "cost": 2,
+      "desc": "+12 甲，抽 2 张牌。",
+      "dmg": 0,
+      "draw": 2,
+      "id": "tt7-ironcharge",
+      "name": "厉兵秣马",
+      "rarity": "职业",
+      "sellable": false,
+      "type": "武术",
+      "unrandom": true,
+      "value": 3
+    },
+    {
       "armor": 10,
       "cls": "战士",
       "cost": 2,
@@ -2220,6 +2257,18 @@
       "rarity": "职业",
       "type": "武术",
       "unrandom": true,
+      "value": 3
+    },
+    {
+      "cost": 2,
+      "desc": "抽 5 张牌。",
+      "dmg": 0,
+      "draw": 5,
+      "id": "tt7-livingwater",
+      "name": "圣光之源",
+      "rarity": "职业",
+      "sellable": false,
+      "type": "法术",
       "value": 3
     },
     {
@@ -2234,6 +2283,18 @@
       "rarity": "职业",
       "type": "武术",
       "unrandom": true,
+      "value": 3
+    },
+    {
+      "cls": "法师",
+      "cost": 1,
+      "desc": "抽牌，直到有 4 张手牌。",
+      "dmg": 0,
+      "id": "tt7-maxsupply",
+      "name": "法力补给",
+      "rarity": "职业",
+      "sellable": false,
+      "type": "法术",
       "value": 3
     },
     {
@@ -2260,6 +2321,17 @@
       "rarity": "职业",
       "type": "法术",
       "unrandom": true,
+      "value": 3
+    },
+    {
+      "cost": 0,
+      "desc": "限定技能：选择 1 张卡牌，下回合将其变为 0 费。",
+      "dmg": 0,
+      "id": "tt7-naturestaff",
+      "name": "自然法杖",
+      "rarity": "职业",
+      "sellable": false,
+      "type": "装备",
       "value": 3
     },
     {
@@ -2364,6 +2436,18 @@
       "value": 4
     },
     {
+      "cost": 0,
+      "desc": "对战开始时，额外抽 2 张牌。",
+      "dmg": 0,
+      "draw": 2,
+      "id": "tt7-talisman",
+      "name": "灵符",
+      "rarity": "职业",
+      "sellable": false,
+      "type": "装备",
+      "value": 3
+    },
+    {
       "cls": "侠客",
       "cost": 0,
       "desc": "攻（-3），附加流血，抽 1 张牌。",
@@ -2380,7 +2464,7 @@
     {
       "cls": "侠客",
       "cost": 1,
-      "desc": "消耗 2 张杀，攻击 3 次。",
+      "desc": "消耗 2 张初始攻击，攻击 3 次。",
       "dmg": 0,
       "id": "tt7-thundergrudge",
       "name": "快意恩仇",
@@ -2486,6 +2570,19 @@
       "value": 8
     },
     {
+      "cost": 0,
+      "desc": "免疫诅咒。",
+      "dmg": 0,
+      "id": "tt8-curseimmune",
+      "name": "封印肢体1",
+      "rarity": "棱彩",
+      "sellable": false,
+      "tokenOf": "tt8-hero-sealer",
+      "type": "生物",
+      "unrandom": true,
+      "value": 8
+    },
+    {
       "cls": "侠客",
       "cost": 0,
       "desc": "抽到该牌时攻击全体敌人；···以天启诛魔剑覆盖你的所有武器。",
@@ -2515,6 +2612,32 @@
       "value": 8
     },
     {
+      "cost": 0,
+      "desc": "能量上限 +1。",
+      "dmg": 0,
+      "id": "tt8-energycap",
+      "name": "封印肢体2",
+      "rarity": "棱彩",
+      "sellable": false,
+      "tokenOf": "tt8-hero-sealer",
+      "type": "生物",
+      "unrandom": true,
+      "value": 8
+    },
+    {
+      "cost": 0,
+      "desc": "法伤 +1。",
+      "dmg": 0,
+      "id": "tt8-healplus",
+      "name": "封印肢体4",
+      "rarity": "棱彩",
+      "sellable": false,
+      "tokenOf": "tt8-hero-sealer",
+      "type": "生物",
+      "unrandom": true,
+      "value": 8
+    },
+    {
       "cls": "侠客",
       "cost": 0,
       "desc": "抽到该牌时额外抽 1 张牌；在你抽到天启剑与诛魔剑后……",
@@ -2538,7 +2661,7 @@
       "id": "tt8-hero-assassin",
       "name": "白梅落影·妄",
       "rarity": "稀有",
-      "type": "英雄卡",
+      "type": "能力卡",
       "unrandom": true,
       "value": 8
     },
@@ -2551,7 +2674,7 @@
       "id": "tt8-hero-descender",
       "name": "楔天玄翼·焚殃",
       "rarity": "古朴",
-      "type": "英雄卡",
+      "type": "能力卡",
       "unrandom": true,
       "value": 8
     },
@@ -2564,7 +2687,7 @@
       "id": "tt8-hero-guardian",
       "name": "圣剑誓约·亚瑟",
       "rarity": "古朴",
-      "type": "英雄卡",
+      "type": "能力卡",
       "unrandom": true,
       "value": 8
     },
@@ -2575,9 +2698,10 @@
       "dmg": 0,
       "hero": true,
       "id": "tt8-hero-mage",
-      "name": "明灯千里·孔明",
+      "name": "博览者的狂语",
       "rarity": "稀有",
-      "type": "英雄卡",
+      "sellable": false,
+      "type": "能力卡",
       "unrandom": true,
       "value": 8
     },
@@ -2591,7 +2715,7 @@
       "id": "tt8-hero-priest",
       "name": "浪掷风吟·露娜拉",
       "rarity": "棱彩",
-      "type": "英雄卡",
+      "type": "能力卡",
       "unrandom": true,
       "value": 8
     },
@@ -2604,7 +2728,7 @@
       "id": "tt8-hero-ranger",
       "name": "天剑诛魔·云阳",
       "rarity": "古朴",
-      "type": "英雄卡",
+      "type": "能力卡",
       "unrandom": true,
       "value": 8
     },
@@ -2617,7 +2741,7 @@
       "id": "tt8-hero-sealer",
       "name": "邪渊主宰·妲莉薇特",
       "rarity": "棱彩",
-      "type": "英雄卡",
+      "type": "能力卡",
       "unrandom": true,
       "value": 8
     },
@@ -2628,9 +2752,10 @@
       "dmg": 0,
       "hero": true,
       "id": "tt8-hero-summoner",
-      "name": "神话终章·雷修斯",
+      "name": "花开两面",
       "rarity": "棱彩",
-      "type": "英雄卡",
+      "sellable": false,
+      "type": "能力卡",
       "unrandom": true,
       "value": 8
     },
@@ -2644,7 +2769,7 @@
       "id": "tt8-hero-sword",
       "name": "无量仙剑·云风",
       "rarity": "稀有",
-      "type": "英雄卡",
+      "type": "能力卡",
       "unrandom": true,
       "value": 8
     },
@@ -2658,20 +2783,33 @@
       "id": "tt8-hero-warlock",
       "name": "无极梦魇·血苑修罗",
       "rarity": "稀有",
-      "type": "英雄卡",
+      "type": "能力卡",
       "unrandom": true,
       "value": 8
     },
     {
       "cls": "战士",
       "cost": 2,
-      "desc": "真龙降世：本局对战中，将‘杀’化为‘青龙偃月斩’。",
+      "desc": "真龙降世：本局对战中，将‘初始攻击’化为‘青龙偃月斩’。",
       "dmg": 0,
       "hero": true,
       "id": "tt8-hero-warrior",
       "name": "龙吟沧海·关云长",
       "rarity": "稀有",
-      "type": "英雄卡",
+      "type": "能力卡",
+      "unrandom": true,
+      "value": 8
+    },
+    {
+      "cost": 0,
+      "desc": "无需注能。",
+      "dmg": 0,
+      "id": "tt8-nofocus",
+      "name": "封印肢体3",
+      "rarity": "棱彩",
+      "sellable": false,
+      "tokenOf": "tt8-hero-sealer",
+      "type": "生物",
       "unrandom": true,
       "value": 8
     }
@@ -2690,8 +2828,7 @@
     "true"
   ],
   "dropDiscountTypes": [
-    "道具",
-    "资源"
+    "道具"
   ],
   "dropTypes": [
     "武术",
@@ -2701,10 +2838,10 @@
     "资源"
   ],
   "dropWeights": {
-    "传说": 0.3333333333333333,
-    "古朴": 4,
-    "史诗": 1,
-    "稀有": 2
+    "传说": 3,
+    "古朴": 60,
+    "史诗": 9,
+    "稀有": 28
   },
   "price": {
     "传说": 5,
@@ -2726,11 +2863,10 @@
   ],
   "schemaVersion": 1,
   "shopWeights": {
-    "传说": 8,
-    "初始": 30,
-    "古朴": 30,
-    "史诗": 12,
-    "稀有": 20
+    "传说": 3,
+    "古朴": 60,
+    "史诗": 9,
+    "稀有": 28
   },
   "starterCards": [
     {
@@ -2738,7 +2874,7 @@
       "desc": "造成 2 点伤害。",
       "dmg": 2,
       "dmgType": "fixed",
-      "id": "starter-recruit-drill",
+      "id": "c0i00",
       "name": "新兵操典",
       "rarity": "初始",
       "type": "武术"
@@ -2756,7 +2892,7 @@
       "cost": 0,
       "desc": "获得 1 份口粮。",
       "dmg": 0,
-      "id": "starter-ration-kit",
+      "id": "starter-ration",
       "name": "制式口粮",
       "rarity": "初始",
       "type": "资源"
@@ -2769,7 +2905,7 @@
     "道具",
     "装备",
     "事件",
-    "英雄卡",
+    "能力卡",
     "资源"
   ]
 }

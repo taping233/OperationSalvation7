@@ -32,8 +32,13 @@ internal static class CombatTests
         var path = Path.Combine("SoudacheGodot", "data", "cards.json");
         if (!File.Exists(path)) return; // Keep the test runnable from its bin directory too.
         var catalog = CardCatalog.LoadFile(path);
-        Check(catalog.Count == 243, "exported catalog card count");
-        Check(catalog.All.Count(card => card.Layer == CardLayer.Combat) == 217, "combat layer coverage is 217 cards");
+        Check(catalog.Count == 245, "exported catalog card count");
+        Check(catalog.All.Count(card => card.Layer == CardLayer.Combat) == 218, "combat layer coverage is 218 cards");
+        // 跟随网页版 2026-09-09 实机定版（cards.js RETIRE_TT11 / cards-sync.json retire）：
+        // 以下卡牌已从干净环境的卡库退役，不得再出现在导出目录
+        // （其语义断言随之移除：注能触发 3 状态 / 贮藏 3 槽 / 混合复制 / 施法回能）。
+        foreach (var retired in new[] { "tt3sp-cursewave", "tt2-pouch", "tt3-copy-potion", "tt3-mana-blood" })
+            Check(!catalog.TryGet((StableId)retired, out _), $"retired card back in catalog: {retired}");
         Check(catalog.GetRequired("builtin-sha").DmgType == DamageType.Attack, "exported damage type");
         Check(catalog.GetRequired("tt7-frozenight").Effects.Count > 0, "exported status effects");
         Check(catalog.GetRequired("tt3-execute").Effects.Any(e => e.Kind == CardEffectKind.Damage && e.Condition?.Kind == EffectConditionKind.TargetHealthAtMost), "execute health condition");
@@ -41,7 +46,6 @@ internal static class CombatTests
         Check(catalog.GetRequired("tt3-fatal-pierce").Effects.Any(e => e.Kind == CardEffectKind.Damage && e.Condition is null), "conditional bonus does not disable base hit");
         Check(catalog.GetRequired("tt3-master-staff").Effects.Any(e => e.Kind == CardEffectKind.Delayed), "turn-start effect is delayed");
         Check(catalog.GetRequired("tt8-curse2").OnDrawEffects.Any(e => e.Status == CombatStatus.Freeze), "draw trigger status effect");
-        Check(catalog.GetRequired("tt3sp-cursewave").OnInfusedEffects.Count >= 3, "infused trigger status effects");
     }
 
     private static CombatState NewCombat(out CardDeck deck, out CardCatalog catalog)
@@ -286,19 +290,16 @@ internal static class CombatTests
         var deck = new CardDeck(); var interpreter = new CardEffectInterpreter();
         var attack = catalog.All.First(x => x.Layer == CardLayer.Combat && x.Type == CardType.Attack && x.Damage > 0);
 
-        deck.AddToHand(new CardInstance("cc-doom-1", "cc-doom"));
-        var before = deck.Hand.Count; ResolveSpecial(catalog, world, deck, interpreter, "cc-doom");
-        Check(deck.Hand.Count > before, "cc-doom discovers curse cards");
+        deck.AddToHand(new CardInstance("doom-1", "cmtn1gfhczzj"));
+        var before = deck.Hand.Count; ResolveSpecial(catalog, world, deck, interpreter, "cmtn1gfhczzj");
+        Check(deck.Hand.Count > before, "cmtn1gfhczzj discovers curse cards");
         var apolloEnergy = world.Energy; ResolveSpecial(catalog, world, deck, interpreter, "tt2-apollo"); Check(world.Energy == apolloEnergy + 1, "tt2-apollo trigger restores energy");
-        ResolveSpecial(catalog, world, deck, interpreter, "tt2-pouch"); Check(deck.StorageCapacity == 3, "tt2-pouch opens three storage slots");
         var equipment = catalog.All.First(x => x.Type == CardType.Equipment); deck.AddToHand(new CardInstance("equip-fuel", equipment.Id));
         var armorBefore = world.GetCombatant("p").Armor; ResolveSpecial(catalog, world, deck, interpreter, "tt2-turtlearmor"); Check(world.GetCombatant("p").Armor > armorBefore, "tt2-turtlearmor consumes equipment for armor");
         ResolveSpecial(catalog, world, deck, interpreter, "tt3-blooddrinker"); var attackBefore = world.GetCombatant("p").Attack; world.DealDamage("p", "e1", 100, DamageType.True); Check(world.GetCombatant("p").Attack == attackBefore + 1, "tt3-blooddrinker observes kill");
-        var mixed = catalog.All.First(x => x.Description.Contains("混合", StringComparison.Ordinal) && x.Effects.Any(e => e.Kind == CardEffectKind.Damage)); deck.AddToHand(new CardInstance("mixed-1", mixed.Id)); var hpBefore = world.GetCombatant("e2").Health; var copied = ResolveSpecial(catalog, world, deck, interpreter, "tt3-copy-potion", selected: new[] { (StableId)"mixed-1" }, targets: new[] { (StableId)"e2" }); Check(copied.Applied && (world.GetCombatant("e2").Health < hpBefore || world.LastDamageBatchHealth > 0), $"tt3-copy-potion replays selected mixed potion {mixed.Id.Value} hp={world.GetCombatant("e2").Health}/{hpBefore} effects={mixed.Effects.Count}");
         deck.AddToDrawPile(new CardInstance("bottom-1", attack.Id)); var deckBefore = deck.Hand.Count; ResolveSpecial(catalog, world, deck, interpreter, "tt3-dig-treasure"); Check(deck.Hand.Count == deckBefore + 1 && world.GetCombatant("p").Armor > armorBefore, "tt3-dig-treasure takes bottom card and prices armor");
         ResolveSpecial(catalog, world, deck, interpreter, "tt3-element-seal"); world.RecordInfusion(); world.RecordInfusion(); world.RecordInfusion(); Check(world.GetCombatant("p").GetStatus(CombatStatus.SpellUp) >= 2, "tt3-element-seal unlocks after three infusions");
-        deck.AddToHand(new CardInstance("release-1", attack.Id)); hpBefore = world.GetCombatant("e2").Health; ResolveSpecial(catalog, world, deck, interpreter, "tt3-frostfall", selected: new[] { (StableId)"release-1" }, targets: new[] { (StableId)"e2" }); Check(!deck.IsInHand("release-1") && world.GetCombatant("e2").Health < hpBefore, "tt3-frostfall releases selected attack");
-        var energyBefore = world.Energy; ResolveSpecial(catalog, world, deck, interpreter, "tt3-mana-blood"); world.RecordSpellCast(); Check(world.Energy >= energyBefore, "tt3-mana-blood registers spell energy");
+        deck.AddToHand(new CardInstance("release-1", attack.Id)); var hpBefore = world.GetCombatant("e2").Health; ResolveSpecial(catalog, world, deck, interpreter, "tt3-frostfall", selected: new[] { (StableId)"release-1" }, targets: new[] { (StableId)"e2" }); Check(!deck.IsInHand("release-1") && world.GetCombatant("e2").Health < hpBefore, "tt3-frostfall releases selected attack");
         var mystery = new CardInstance("mystery-1", "tt3-mystery-potion"); deck.AddToDiscard(mystery); ResolveSpecial(catalog, world, deck, interpreter, "tt3-mystery-potion", instance: mystery.InstanceId); world.AdvanceTurn(); world.ResolveActions(); Check(mystery.CostOverride == 0, "tt3-mystery-potion transforms at turn start");
         var killAttack = catalog.All.First(x => x.Layer == CardLayer.Combat && x.Type == CardType.Attack && x.DisplayName.Contains("杀", StringComparison.Ordinal));
         deck.AddToDrawPile(new CardInstance("mist-1", killAttack.Id)); deck.AddToDrawPile(new CardInstance("mist-2", killAttack.Id)); ResolveSpecial(catalog, world, deck, interpreter, "tt3eq-mistbox"); Check(deck.DrawPile.Count(c => c.DefinitionId != killAttack.Id) >= 1, "tt3eq-mistbox replaces kill cards");

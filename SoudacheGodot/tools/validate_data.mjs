@@ -11,13 +11,12 @@ const GODOT_DIR = path.resolve(TOOL_DIR, '..');
 const ROOT_DIR = path.resolve(GODOT_DIR, '..');
 const DATA_DIR = path.join(GODOT_DIR, 'data');
 const SOURCE_DIR = path.join(ROOT_DIR, '搜打撤', 'game', 'src');
+// 2026-09-11 架构批次 2 后的实际口径（干净环境 C.all()）：
+// 245 张卡；「英雄卡」已定版更名「能力卡」；TT11 退役与 cards-sync 定版覆盖均已生效。
 const EXPECTED = {
-  cards: 243,
+  cards: 245,
   characters: 5,
-  layers: 3,
-  ringLengths: [28, 20, 12],
-  eventEntryCounts: [20, 20, 12],
-  cardTypes: { '武术': 61, '法术': 74, '生物': 17, '资源': 14, '道具': 19, '装备': 37, '事件': 10, '英雄卡': 11 },
+  cardTypes: { '武术': 64, '法术': 61, '生物': 25, '资源': 15, '道具': 23, '装备': 36, '事件': 10, '能力卡': 11 },
 };
 
 const errors = [];
@@ -53,14 +52,27 @@ function validateManifest(manifest) {
     const filePath = path.join(DATA_DIR, info.path || '');
     check(fs.existsSync(filePath), `manifest ${key} points to missing file: ${info.path}`);
     if (fs.existsSync(filePath) && info.sha256) check(hash(path.join(SOURCE_DIR, info.source)) === info.sha256, `source hash drift for ${info.source}; rerun export_data.mjs`);
+    // 依赖的网页版文件（game/data/*.json 与垫片宿主）同样做哈希漂移检查。
+    for (const dep of info.deps || []) {
+      const depPath = path.join(ROOT_DIR, dep.path);
+      check(fs.existsSync(depPath), `manifest ${key} dep is missing: ${dep.path}`);
+      if (fs.existsSync(depPath) && dep.sha256) check(hash(depPath) === dep.sha256, `dep hash drift for ${dep.path}; rerun export_data.mjs`);
+    }
   }
+}
+
+function stableJson(value) {
+  if (Array.isArray(value)) return value.map(stableJson);
+  if (!value || typeof value !== 'object') return value;
+  return JSON.stringify(Object.fromEntries(Object.keys(value).sort().map(key => [key, JSON.parse(stableJson(value[key]))])));
 }
 
 function validateCards(cardsData, charactersData) {
   const cards = cardsData.cards || [];
   const ids = uniqueIds(cards, 'cards');
+  // STARTERS 自 09-11 定版起携带源 id，可能就是主卡库里的同一张牌
+  // （网页版 ensureStarters 只是确保存在）；因此只要求起始卡之间不重 id。
   const starterIds = uniqueIds(cardsData.starterCards || [], 'starter cards');
-  for (const id of starterIds) check(!ids.has(id), `starter card id collides with card id: ${id}`);
   check((cardsData.starterCards || []).length === 3, `starter card count ${cardsData.starterCards?.length} != expected 3`);
   check(cards.length === EXPECTED.cards, `card count ${cards.length} != expected ${EXPECTED.cards}`);
   const classes = new Set(cardsData.classes || []);
@@ -69,6 +81,7 @@ function validateCards(cardsData, charactersData) {
   check(classes.size === 5, `card class table should have 5 classes, got ${classes.size}`);
   check(types.size === 8, `card type table should have 8 types, got ${types.size}`);
   check(rarities.size === 8, `card rarity table should have 8 rarities, got ${rarities.size}`);
+  check(types.has('能力卡') && !types.has('英雄卡'), 'type table must use the renamed 能力卡 (no legacy 英雄卡)');
   for (const card of cards) {
     check(types.has(card.type), `card ${card.id} has unknown type ${card.type}`);
     check(rarities.has(card.rarity), `card ${card.id} has unknown rarity ${card.rarity}`);
@@ -87,7 +100,7 @@ function validateCards(cardsData, charactersData) {
     out[card.type] = (out[card.type] || 0) + 1;
     return out;
   }, {});
-  check(JSON.stringify(actualTypes) === JSON.stringify(EXPECTED.cardTypes), `card type counts changed: ${JSON.stringify(actualTypes)}`);
+  check(stableJson(actualTypes) === stableJson(EXPECTED.cardTypes), `card type counts changed: ${JSON.stringify(actualTypes)}`);
   check((charactersData.characters || []).length === EXPECTED.characters, `character count ${charactersData.characters?.length} != expected ${EXPECTED.characters}`);
 }
 
@@ -106,30 +119,25 @@ function validateRules(rulesData) {
 
 function validateMap(mapData, rulesData) {
   const map = mapData.map || {};
+  // 09-10 四层定版后地图几何由 map-generator.js 运行期按种子生成，mapData.js
+  // 只承载静态表；三环拓扑暂由 C# RunMap 承载（见 tests/Run），故本文件不再
+  // 含 rings/layers，只校验静态表自身的完整性与引用。
   check(map.version === '0.3', `map version expected 0.3, got ${map.version}`);
   check(map.boardId === 'B1', `map boardId expected B1, got ${map.boardId}`);
   check(map.cols === 30 && map.rows === 30 && map.tile === 48, 'map dimensions must remain 30x30 tiles at 48px');
-  check(JSON.stringify(mapData.logicalCounts) === JSON.stringify(EXPECTED.ringLengths), `ring topology changed: ${JSON.stringify(mapData.logicalCounts)}`);
-  check(JSON.stringify((mapData.rings || []).map(ring => ring.length)) === JSON.stringify(EXPECTED.ringLengths), 'ring coordinate counts do not match topology');
-  check((map.layers || []).length === EXPECTED.layers, `map layer count ${map.layers?.length} != expected ${EXPECTED.layers}`);
-  check(JSON.stringify((map.layers || []).map(layer => Object.keys(layer.cells || {}).length)) === JSON.stringify(EXPECTED.eventEntryCounts), 'map event entry counts changed');
 
   const monsterIds = uniqueIds(Object.values(map.monsters || {}), 'map monsters');
   const chestIds = new Set(Object.keys(map.chestKinds || {}));
   const bossIds = uniqueIds(map.altar?.bosses || [], 'altar bosses');
   for (const encounter of map.encounters || []) {
-    for (const id of encounter.pool || []) check(monsterIds.has(id), `encounter references missing monster ${id}`);
+    for (const entry of encounter.entries || []) check(monsterIds.has(entry.id), `encounter references missing monster ${entry.id}`);
     for (const id of encounter.elite?.pool || []) check(monsterIds.has(id), `elite encounter references missing monster ${id}`);
   }
   for (const event of map.eventEnemies || []) check(monsterIds.has(event.id), `event enemy references missing monster ${event.id}`);
+  for (const enemy of map.enemyPool || []) check(monsterIds.has(enemy.id), `enemy pool references missing monster ${enemy.id}`);
   for (const event of map.randomEvents || []) if (event.item) check(event.item === 'chest' || event.item in map.items, `random event references missing item ${event.item}`);
-  for (const layer of map.layers || []) {
-    for (const door of layer.doors || []) check(Number.isInteger(door.toLayer) && door.toLayer >= 1 && door.toLayer < map.layers.length, `door ${door.pair} has invalid toLayer ${door.toLayer}`);
-    for (const cell of Object.values(layer.cells || {})) check(typeof cell.type === 'string', `layer ${layer.id} has cell without type`);
-  }
-  for (const options of map.layerChests || []) for (const group of options) for (const drop of group) check(chestIds.has(drop.k), `layer chest references missing chest kind ${drop.k}`);
+  for (const layer of map.layerChests || []) for (const weighted of layer.types || []) check(chestIds.has(weighted.k), `layer chest references missing chest kind ${weighted.k}`);
   check(bossIds.size === 3, `altar boss count ${bossIds.size} != 3`);
-  check((map.center || []).filter(cell => cell.type === 'boss').length === 3, 'center must contain 3 boss cells');
   check(map.rules?.diceSides === rulesData.rules?.diceSides, 'map rules do not match rules.json');
 }
 
@@ -148,7 +156,7 @@ function main() {
     process.exitCode = 1;
     return;
   }
-  console.log(`[validate-data] OK: ${cards.cards.length} cards, ${characters.characters.length} characters, ${map.map.layers.length} layers; ids/references/rules verified`);
+  console.log(`[validate-data] OK: ${cards.cards.length} cards, ${characters.characters.length} characters, map static tables v${map.map.version}; ids/references/rules verified`);
 }
 
 main();

@@ -672,7 +672,7 @@ public sealed class CoreGameAdapter : ICoreUiPort
         var className = CharacterClass(_runCharacterId);
         var combatCards = _runCards.Where(card => card.Semantic == RunCardSemantic.Combat).ToArray();
         run.ConfigureShopCardPool(combatCards.Where(card => card.Rarity != "传说"));
-        run.ConfigureClassCardPool(combatCards.Where(card => card.Type != "英雄卡" && _catalog.TryGet(card.Id, out var definition) && definition?.ClassName == className));
+        run.ConfigureClassCardPool(combatCards.Where(card => card.Type != "能力卡" && _catalog.TryGet(card.Id, out var definition) && definition?.ClassName == className));
         run.ConfigureLootCardPool(_runCards.Where(card => card.Semantic is RunCardSemantic.Combat or RunCardSemantic.Item or RunCardSemantic.Equipment));
     }
 

@@ -238,13 +238,14 @@ public sealed class CardCatalog
         "装备" => CardType.Equipment,
         "资源" => CardType.Resource,
         "事件" => CardType.Event,
-        "英雄卡" => CardType.Power,
+        "能力卡" => CardType.Power,
         _ => CardType.Skill
     };
 
     private static string? SpecialFor(string id) => id switch
     {
         "cmtn1epgt20j" => "discover.infusion-free",
+        "cmtn1gfhczzj" => "discover.curse-cards",
         "cmtn233trmeg" => "retain.uninfusable",
         "cc-doom" => "discover.curse-cards",
         "tt2-comboarrow" => "previous.attack-zero",

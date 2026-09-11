@@ -2,31 +2,52 @@
   "encoding": "UTF-8",
   "files": {
     "cards": {
-      "count": 243,
+      "count": 245,
+      "deps": [
+        {
+          "path": "搜打撤/game/src/data-loader.js",
+          "sha256": "f0f3ad51a87609a7e9a10f9daa08d0ae29c79c4d81c1e8ae9d5f78e6495c1416"
+        },
+        {
+          "path": "搜打撤/game/data/cards-sync.json",
+          "sha256": "750a7f240d8e0b32dfd1c92f4eb7db6c062143973272934efb94dea7a5457029"
+        }
+      ],
       "path": "cards.json",
-      "sha256": "86ffb29150b1ec286ce7f6806d0e91fc0bfb03a4f9cbfb95300352a2be560a32",
+      "sha256": "00b41484a5d14d750a78c16b3455ef7853e2e6b571250743d26fa4c574dc3e42",
       "source": "cards.js",
       "starterCount": 3
     },
     "characters": {
       "count": 5,
       "path": "characters.json",
-      "sha256": "a915e1e7bf090951d09c9e5a6e4a928b1255d5ae74af04a9a801adaa9ff65869",
+      "sha256": "b2ebdb3484c630c7cce0f575fda8227fb6d957cf668e93b01531d7f4292975a6",
       "source": "characters.js"
     },
     "map": {
-      "layers": 3,
+      "deps": [
+        {
+          "path": "搜打撤/game/data/map.json",
+          "sha256": "cc3a3e0346ac6701e0728d941de15394f2ce83f9bb76f80b582b331a31f695de"
+        }
+      ],
       "path": "map.json",
-      "sha256": "558482a34f1381791681c267f6b2311b4f477404db16fb9c159d10840a7bab26",
+      "sha256": "2232b5c3b8f441334abe4a355cb7c9923db776586b987f6ba345c04195bf603e",
       "source": "mapData.js"
     },
     "rules": {
+      "deps": [
+        {
+          "path": "搜打撤/game/src/sdt-facade.js",
+          "sha256": "2976a3f01e0bfaa515d86511b7b06e2be90f55d10f62ad51cfe017a72974dd90"
+        }
+      ],
       "path": "rules.json",
-      "sha256": "c302fe9399225ed0f83b519185ad45f269b0c4b489fa44b18d40efde0c5a9b8e",
+      "sha256": "e83b1113343a43f40e43c2e4296e318d1ac32c7a774675d9eed9d77c04a600e6",
       "source": "rules.js"
     }
   },
   "generatedBy": "SoudacheGodot/tools/export_data.mjs",
   "schemaVersion": 1,
-  "source": "搜打撤/game/src"
+  "source": "搜打撤/game/src + 搜打撤/game/data"
 }
