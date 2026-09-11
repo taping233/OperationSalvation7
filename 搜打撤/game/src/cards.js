@@ -261,8 +261,9 @@ import { characterName } from './characters.js';
     DROP_WEIGHTS: { '古朴': 60, '稀有': 28, '史诗': 9, '传说': 3 },
     DROP_DISCOUNT_TYPES: ['道具'],
     DROP_ITEM_DISCOUNT: 0.7,
+    DROP_EQUIP_DISCOUNT: 0.8,   // 装备爆率下调 20%（2026-09-09 需求 #12）
     DROP_TYPES: ['武术', '法术', '装备', '道具', '资源'],
-    // 同稀有度内挑 1 张可随机获取的卡：类型均分，道具 ×0.7（taken = Set<id> 去重，可选）
+    // 同稀有度内挑 1 张可随机获取的卡：类型均分，道具 ×0.7、装备 ×0.8（taken = Set<id> 去重，可选）
     pickOfRarity(rarity, taken) {
       const hasTaken = !!(taken && taken.size);
       const pool = SDT.Cards.all().filter(c =>
@@ -271,7 +272,8 @@ import { characterName } from './characters.js';
       if (!pool.length) return null;
       let tw = 0;
       const weighted = pool.map(c => {
-        const w = SDT.Cards.DROP_DISCOUNT_TYPES.includes(c.type) ? SDT.Cards.DROP_ITEM_DISCOUNT : 1;
+        const w = SDT.Cards.DROP_DISCOUNT_TYPES.includes(c.type) ? SDT.Cards.DROP_ITEM_DISCOUNT
+          : c.type === '装备' ? (SDT.Cards.DROP_EQUIP_DISCOUNT || 0.8) : 1;
         tw += w; return [c, w];
       });
       let roll = Random.random('loot') * tw;
@@ -608,7 +610,7 @@ import { characterName } from './characters.js';
     TABLETOP6: [
       { id: 'tt6-timeskip',    name: '时空孔隙',   cost: 0, rarity: '衍生', type: '事件', unrandom: true, desc: '前进 6 格。' },
       { id: 'tt6-demondeal',   name: '恶魔交易',   cost: 0, rarity: '衍生', type: '事件', unrandom: true, desc: '-1 血，获得传奇武器。' },
-      { id: 'tt6-bandits',     name: '盗匪横行',   cost: 0, rarity: '衍生', type: '事件', battle: true, unrandom: true, desc: '反抗组织拾荒者 ×5。奖励：密封物资箱 ×2。' },
+      { id: 'tt6-bandits',     name: '盗匪横行',   cost: 0, rarity: '衍生', type: '事件', battle: true, unrandom: true, desc: '反抗组织拾荒者 ×3~5（随层数增加）。奖励：密封物资箱 ×2。' },
       { id: 'tt6-mystery',     name: '神秘补给',   cost: 0, rarity: '衍生', type: '事件', unrandom: true, desc: '获得员工通行证A（特殊单位），+2 币。' },
       { id: 'tt6-goldmine',    name: '金矿',       cost: 0, rarity: '衍生', type: '事件', unrandom: true, desc: '获得 3 币。' },
       { id: 'tt6-goldhammer',  name: '闪金之锤',   cost: 0, rarity: '衍生', type: '事件', battle: true, unrandom: true, desc: '造成 5 点伤害，若斩杀敌人，+2 币。' },
@@ -887,7 +889,7 @@ import { characterName } from './characters.js';
       { id: 'tt4-woodify', name: '能量饮料', cost: 0, rarity: '古朴', type: '道具', desc: '回复 6 点生命。', dmg: 0, heal: 6, value: 2 },
       { id: 'tt5-galaxy-voyage', name: '银河之旅', cost: 2, rarity: '传说', type: '法术', desc: '本场对战中，你的所有招式均为 1 费。', dmg: 0, value: 5 },
       { id: 'tt6-demondeal', name: '恶魔交易', cost: 0, rarity: '衍生', type: '事件', desc: '-5血，获得1个大宝箱。', dmg: 0, unrandom: true },
-      { id: 'tt6-bandits', battle: true, name: '盗匪横行', cost: 0, rarity: '衍生', type: '事件', desc: '反抗组织拾荒者 ×5。奖励：密封物资箱 ×2。', dmg: 0, unrandom: true },
+      { id: 'tt6-bandits', battle: true, name: '盗匪横行', cost: 0, rarity: '衍生', type: '事件', desc: '反抗组织拾荒者 ×3~5（随层数增加）。奖励：密封物资箱 ×2。', dmg: 0, unrandom: true },
       { id: 'tt6-mystery', name: '神秘补给', cost: 0, rarity: '衍生', type: '事件', desc: '获得员工通行证A碎片，+2 币。', dmg: 0, unrandom: true },
       { id: 'tt6-goldmine', name: '金矿', cost: 0, rarity: '衍生', type: '事件', desc: '获得 3 币。', dmg: 0, unrandom: true },
       { id: 'tt6-airdrop', name: '空中补给', cost: 0, rarity: '衍生', type: '事件', desc: '从木材、口粮、能量饮料、随机药水中抽取一项。', dmg: 0, unrandom: true },
@@ -997,7 +999,7 @@ import { characterName } from './characters.js';
       { id: "tt-econpack", name: "经济卡包", cost: 0, rarity: "史诗", type: "资源", dmg: 0, desc: "只能在仓库界面点击使用，获得5张随机卡牌", value: 10, sellable: false },
       { id: "tt2-treasuremap", name: "寻宝图", cost: 0, rarity: "古朴", type: "装备", dmg: 0, draw: 1, desc: "限定技能：将 1张‘搜索大宝箱’洗入牌库，抽1张牌。", value: 2, sellable: false },
       { id: "tt3-flame-storm", cls: "降临者", name: "风暴火球", cost: 2, rarity: "职业", type: "法术", dmg: 4, dmgType: "spell", desc: "对全体敌人每人释放1次火球。", value: 3, sellable: false, unrandom: true },
-      { id: "tt3-fireball", name: "火球", cost: 1, rarity: "初始", type: "法术", dmg: 4, dmgType: "spell", desc: "造成 4 点法术伤害。", value: 1, sellable: false },
+      { id: "tt3-fireball", name: "火球", cost: 1, rarity: "初始", type: "法术", dmg: 4, dmgType: "spell", desc: "造成 4 点法术伤害。", value: 1, sellable: false, unrandom: true }, // 初始牌（2026-09-06）：每局固定携带 1 张；unrandom 双保险——不进发现/随机/商店池（2026-09-10 留言 #19）
       { id: "tt3-nuke-ray", cls: "降临者", name: "致命射线", cost: 2, rarity: "职业", type: "法术", dmg: 8, dmgType: "spell", desc: "造成8点法术伤害，对其附加3种随机诅咒", value: 3, sellable: false, unrandom: true },
       { id: "tt3-petal", cls: "牧师", name: "花瓣法阵", cost: 1, rarity: "职业", type: "法术", dmg: 0, draw: 1, heal: 2, desc: "回合开始时额外抽1张牌并回复 3 点生命，持续 3 回合。", value: 3, sellable: false, unrandom: true },
       { id: "tt6-goldhammer", name: "矮人的帮助", cost: 0, rarity: "衍生", type: "事件", dmg: 0, desc: "获得卡牌‘闪金之锤’。", value: 0, sellable: false },
@@ -1075,10 +1077,14 @@ import { characterName } from './characters.js';
 
     // 卡面渲染（em 布局，cls 控制尺寸 sm/lg/xl；game.js / battle.js 共用）
     // opts.hideCost：隐去左上角费用角标——仅对 NO_COST_TYPES 生效（背包/宝箱等界面传 true，卡牌库不传）
+    // opts.costOverride：{ v } 战斗内实际费用（2026-09-09 需求 #16）——降低 = 绿字，提高 = 红字
     cardHTML(c, cls, opts) {
       const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
       const escAttr = (s) => esc(s).replace(/"/g, '&quot;');
       const hideCost = !!(opts && opts.hideCost) && SDT.Cards.NO_COST_TYPES.includes(c.type);
+      const costBase = (opts && opts.costOverride && opts.costOverride.base != null) ? +opts.costOverride.base : (c.cost || 0);
+      const costMod = (opts && opts.costOverride && +opts.costOverride.v !== costBase)
+        ? { v: +opts.costOverride.v, base: costBase, down: +opts.costOverride.v < costBase } : null;
       const dmg = +(c.dmg || 0);
       const isDmgType = SDT.Cards.DMG_TYPES.includes(c.type);
       // 稀有度展示（2026-09-04 定版）：有效稀有度一律经 rarityOf 推导——
@@ -1093,7 +1099,12 @@ import { characterName } from './characters.js';
         : 'rv' + Math.max(0, SDT.Cards.RARITIES.indexOf(ro));
       const ti = Math.max(0, SDT.Cards.TYPES.indexOf(c.type));
       const showDmg = isDmgType && (dmg > 0 || (dmg < 0 && c.dmgType === 'attack'));
-      const mark = showDmg ? SDT.Cards.dmgMark(c.dmgType, dmg) : null;
+      let mark = showDmg ? SDT.Cards.dmgMark(c.dmgType, dmg) : null;
+      // 战斗内法伤加成同步（2026-09-09 需求）：卡面描述的数值随加成实时增加，
+      // 数字略微放大以示区别——由 battle.view 传入 dmgOverride = { bonus }
+      const dmgOverride = opts && opts.dmgOverride;
+      const dmgUp = !!(showDmg && dmgOverride && +(dmgOverride.bonus || 0) > 0);
+      if (dmgUp) mark = { ...mark, text: SDT.Cards.DMG_TYPE_META[c.dmgType].fmt(dmg + dmgOverride.bonus) };
       const ghostDmg = !showDmg && isDmgType && c._preview;
       // 桌游道具卡的币值角标（右下角金色硬币）
       const val = +(c.value || 0);
@@ -1117,14 +1128,18 @@ import { characterName } from './characters.js';
         SDT.Icons.img(SDT.Icons.TYPE_ART[c.type] || 'question');
       return `<div class="hs-card tp${ti} ${rvCls}${cls ? ' ' + cls : ''}">
         ${isPrism ? '<i class="rv-beam" aria-hidden="true"></i>' : ''}
-        ${hideCost ? '' : `<div class="hsc-cost">${c.cost}</div>`}
+        ${hideCost ? '' : costMod
+          ? `<div class="hsc-cost cost-mod ${costMod.down ? 'mod-down' : 'mod-up'}" title="费用变化：按 ${costMod.v} 费打出（原 ${costMod.base} 费）">${costMod.v}</div>`
+          : `<div class="hsc-cost">${c.cost}</div>`}
         <div class="hsc-art">${artHTML}</div>
         <div class="hsc-name"><span>${esc(c.name || '未命名卡牌')}</span></div>
         <div class="hsc-type">${esc(c.type || '?')} · ${esc(ro === '职业' ? ((c.cls ? characterName(c.cls) : '人物') + '专属') : ro)}</div>
         ${kwHTML}
         <i class="hsc-gem"></i>
         <div class="hsc-desc">${c.desc ? `<span>${esc(c.desc)}</span>` : ''}</div>
-        ${showDmg ? `<div class="hsc-dmg" title="${escAttr(mark.tip)}">${mark.icon}<b>${mark.text}</b></div>` : ''}
+        ${showDmg ? `<div class="hsc-dmg${dmgUp ? ' dmg-up' : ''}" title="${escAttr(dmgUp
+          ? `${mark.tip}（含法伤加成 +${dmgOverride.bonus}）`
+          : mark.tip)}">${mark.icon}<b>${mark.text}</b></div>` : ''}
         ${ghostDmg ? `<div class="hsc-dmg ghost">${SDT.Icons.img('swords')}<b>0</b></div>` : ''}
         ${showVal ? `<div class="hsc-val" title="币值 ${val}${SDT.Cards.isSellable(c) ? ' · 可出售' : ' · 不可出售'}"><i>[[icon:coin]]</i><b>${val}</b></div>` : ''}
       </div>`;
@@ -1315,6 +1330,52 @@ import { characterName } from './characters.js';
     // 实机定版覆盖批次：网页版卡牌库修改同步进源码（老板 2026-09-09 拍板的机制）。
     // 沿用 TABLETOP10/11 模式：按 id 整卡覆盖 + 缺失补种 + RETIRE 退役；KEY 变更让旧环境重播。
     CARDS_SYNC: [
+      // —— 2026-09-10 需求批次（v10）：二刀流 ——
+      // 1 费稀有武术：发现一张武术卡并额外获得 1 张复制（本体+复制共 2 张置入手牌）。
+      // 「dup」动作实现在 battle.effects.js act 识别段 + battle.core.js pickDiscover 分支
+      {"cost":1,"desc":"发现一张武术卡并额外获得1张复制。","id":"cc-dual-wield","name":"二刀流","rarity":"稀有","type":"武术","value":2},
+      // —— 2026-09-10 需求批次（v9）：迷之匣改版 + 桃 ——
+      // 迷之匣（装备）效果改为限定技能：发现两张随机招式（=武术+法术），交换其费用。
+      // 旧「对战开始时替换初始攻击」被动随描述移除自动失效；技能结算见 battle.effects.js
+      // 的「发现两张随机招式」句式段 + battle.core.js queueSwapCostDiscover/swapCardCosts
+      {"cost":0,"desc":"限定技能：发现两张随机招式，交换其费用。","dmg":0,"id":"tt3eq-mistbox","name":"迷之匣","rarity":"古朴","sellable":false,"type":"装备","value":2},
+      // 桃（需求 2026-09-10）：商店固定栏位 2 币回 6 血，替代原金疮药（3 币回 10 血）
+      {"cost":0,"desc":"回复 6 点生命。","dmg":0,"heal":6,"id":"tt-peach","name":"桃","rarity":"古朴","sellable":false,"type":"道具","value":2},
+      // —— 2026-09-10 需求批次（v8）：熔岩爆破 + 二次爆炸 ——
+      // 2 费稀有法术：9 点法术伤害，战后消散的衍生 token「二次爆炸」置入手牌
+      // （「获得1张具名卡」走效果引擎既有的指名卡句式，battle.effects.js gn 段）
+      {"cost":2,"desc":"造成9点法术伤害，获得1张「二次爆炸」。","dmg":9,"dmgType":"spell","id":"cc-lava-blast","name":"熔岩爆破","rarity":"稀有","type":"法术","value":4},
+      // 1 费衍生法术（token）：对所有敌人 3 点法术伤害；衍生稀有度不进任何随机/发现池
+      {"cost":1,"desc":"对所有敌人造成 3 点法术伤害。","dmg":3,"dmgType":"spell","id":"cc-double-boom","name":"二次爆炸","rarity":"衍生","sellable":false,"type":"法术","value":0},
+      // —— 2026-09-10 需求批次（v7）：诅咒之刃 ——
+      // 2 费稀有武术：攻（+3），并附加手牌中所有招式（武术+法术，设计者定版）具有的
+      // 全部诅咒效果（流血/中毒/灼烧/冰冻/沉默/破甲/禁疗，句式扫描见 battle.core.js
+      // CURSE_SCAN；手牌变化后卡面实时显示，实现在 battle.view.js 手牌渲染的 curseChip）
+      {"cost":2,"desc":"攻（+3），附加手牌中的招式所具有的全部诅咒效果。","dmg":3,"dmgType":"attack","id":"cc-cursed-blade","name":"诅咒之刃","rarity":"稀有","type":"武术","value":3},
+      // —— 2026-09-10 需求批次（v6）：追斩 ——
+      // 2 费稀有武术：攻（+0）＝等同攻击力的伤害；本回合每打出一张其他武术，费用-1
+      // （最低 0 费）。动态费用实现在 battle.core.js effCostOf，计数器与连续射击共用
+      // playedMartialThisTurn（回合开始清零，本牌打出后才计入，故折扣不含自身）
+      {"cost":2,"desc":"攻（+0），本回合每打出一张其他武术，费用-1。","dmg":0,"dmgType":"attack","id":"cc-chase-slash","name":"追斩","rarity":"稀有","type":"武术","value":2},
+      // —— 2026-09-10 需求批次（v5）：法力奔涌 ——
+      // 2 费传说法术：对随机敌人释放 4 个随机法术，随机法术默认已注能（infused=true 结算，
+      // 「注能(N)：…」加成句生效且无需消耗手牌燃料）。结算实现在 battle.core.js
+      // resolveCard 的 surge 句式段 + castRandomSpells（池子走 isRandomObtainable，排除自身防递归）
+      {"cost":2,"desc":"对随机敌人释放4个随机法术（这些随机法术默认已注能）。","dmg":0,"id":"cc-mana-surge","name":"法力奔涌","rarity":"传说","sellable":false,"type":"法术","value":5},
+      // —— 2026-09-10 需求批次（v4）：连续射击 ——
+      // 1 费史诗武术：本回合每打出一张其他招式，造成 2 点固定伤害。
+      // 招式＝武术+法术（设计者 2026-09-10 定版）；打出本牌时按本回合已打出的招式数触发
+      // （结算实现在 battle.core.js resolveCard 的连击倍率段，计数器 playedMovesThisTurn
+      // 每回合开始清零；追斩的「其他武术」折扣则用只数武术的 playedMartialThisTurn）
+      {"cost":1,"desc":"本回合每打出一张其他招式，造成2点固定伤害（触发次数＝本回合已打出的招式数）。","dmg":2,"dmgType":"fixed","id":"cc-rapid-fire","name":"连续射击","rarity":"史诗","type":"武术","value":3},
+      // —— 2026-09-09 需求批次（v3）——
+      // 宠物蛋（需求 #2）：传说资源，币值 5，描述「可以孵化宠物」；unrandom 锁死随机池，
+      // 固定以 0.7% 爆率从宝箱掉落（见 chests.js rollContents）
+      {"cost":0,"desc":"可以孵化宠物。","dmg":0,"id":"pet-egg","name":"宠物蛋","rarity":"传说","sellable":false,"type":"资源","unrandom":true,"value":5},
+      // 需求 #19：恶魔之力改为灯葵（牧师）专属、厉兵秣马改为玄砾（战士）专属——
+      // 给实机版旧卡补 cls 归属（同 tt7-darkfort 黑暗吊坠的定版手法）
+      {"cls":"牧师","cost":0,"desc":"受到3点伤害，抽 3 张牌。","dmg":0,"draw":3,"id":"tt7-drunksong","name":"恶魔之力","rarity":"职业","sellable":false,"type":"法术","unrandom":true,"value":3},
+      {"cls":"战士","cost":2,"desc":"+12 甲，抽 2 张牌。","dmg":0,"draw":2,"id":"tt7-ironcharge","name":"厉兵秣马","rarity":"职业","sellable":false,"type":"武术","unrandom":true,"value":3},
       {"cost":0,"desc":"回合开始时对所有敌方角色各施加一层随机诅咒，优先不重复。","dmg":0,"id":"cmtn79743r2n","name":"末日浩劫之门","rarity":"棱彩","sellable":false,"type":"生物","unrandom":true,"value":0},
       {"armor":5,"cost":0,"desc":"回合开始时随机获取一项祝福，对全体友方施放，优先不重复。（获得潜行，持续 1 回合。获得 1 点攻击力。法伤 +1。减伤 1。获得 5 点护甲。净化。从这些中随机）","dmg":0,"id":"cmtn7err0a7","name":"天国之门","rarity":"棱彩","sellable":false,"type":"生物","value":0},
       {"cost":0,"desc":"在背包中才能使用，可以复原最多 3 张卡牌。","dmg":0,"id":"tt-crystal","name":"能源结晶","rarity":"史诗","sellable":false,"type":"道具","value":3},
@@ -1336,7 +1397,7 @@ import { characterName } from './characters.js';
     ],
     ensureCardsSyncLive() {
       try {
-        if (localStorage.getItem("sdt-cards-sync-v2-seeded")) return;
+        if (localStorage.getItem("sdt-cards-sync-v10-seeded")) return;
         const cards = SDT.Cards.all();
         for (let i = cards.length - 1; i >= 0; i--) {
           if (this.RETIRE_CARDS_SYNC.includes(cards[i].id)) cards.splice(i, 1);
@@ -1346,7 +1407,7 @@ import { characterName } from './characters.js';
           if (i >= 0) cards[i] = { ...d }; else cards.push({ ...d });
         });
         SDT.Cards.saveAll(cards);
-        localStorage.setItem("sdt-cards-sync-v2-seeded", '1');   // v2：花开两面补回 cls/hero/unrandom（实机同步曾丢失实现字段）
+        localStorage.setItem("sdt-cards-sync-v10-seeded", '1');   // v10：二刀流；v9：迷之匣改限定技能 + 桃；v8：熔岩爆破+二次爆炸；v7：诅咒之刃；v6：追斩；v5：法力奔涌；v4：连续射击
       } catch (e) { /* 隐私模式等场景静默跳过 */ }
     },
     // ===== [sync-cards-from-live:end] =====

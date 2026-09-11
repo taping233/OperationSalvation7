@@ -64,8 +64,15 @@ import { nodeHitRadius } from './camera.js';
         const inside = e.clientX >= r.left && e.clientX <= r.right &&
                        e.clientY >= r.top && e.clientY <= r.bottom;
         if (inside) {
-          const w = cam.screenToWorld(e.clientX - r.left, e.clientY - r.top);
-          const n = pickNode(w.x, w.y, true);
+          // 点击意图形成于 pointerdown 那一刻；自动镜头回中/移动会在 down→up 之间平移相机，
+          // 按 up 位置反推世界坐标会点偏到别的节点或落空——节点内容不触发、变成"僵尸节点"。
+          // 所以先按 down 时刻的世界坐标取节点，落空再用 up 位置兜底。
+          const wDown = cam.screenToWorld(downPos.x - r.left, downPos.y - r.top);
+          let n = pickNode(wDown.x, wDown.y, true);
+          if (!n) {
+            const wUp = cam.screenToWorld(e.clientX - r.left, e.clientY - r.top);
+            n = pickNode(wUp.x, wUp.y, true);
+          }
           if (n) {
             if (isReachable(n)) {
               canvas.style.cursor = 'wait';

@@ -267,6 +267,12 @@
   .evt-opt.ok b { color: #d9d9d9; }
   .evt-opt.danger:hover { border-color: #b98a8a; box-shadow: 0 0 22px rgba(185,138,138,.25), 0 8px 20px rgba(0,0,0,.45); }
   .evt-opt.danger:hover b { color: #e8c8c8; }
+  /* 禁用态选项（如祭坛碎片不足）：可见但明确不可点，不再直接隐藏（2026-09-10 撤离测试反馈） */
+  .evt-opt:disabled, .evt-opt:disabled:hover, #overlay .node-pg .evt-opt:disabled:hover {
+    opacity: .45; filter: grayscale(.6); cursor: default; transform: none;
+    border-color: #3d3d3d; background: linear-gradient(180deg, rgba(46,46,46,.92), rgba(30,30,30,.92));
+    box-shadow: none; }
+  .evt-opt:disabled b { color: #9a9a9a; }
   /* 窄窗口：立绘收进上方，选项条保持整宽 */
   @media (max-width: 900px) {
     .evt-sts-main { flex-direction: column; gap: 18px; overflow-y: auto; }
@@ -521,7 +527,7 @@
 
   #overlay .scene[data-asset-key="scene-battle-bg"] { background-image:url('../assets/scenes/battle-ruins-night-anime-v3.webp'); }
   #overlay .scene[data-asset-key="scene-shop-bg"] { background-image:url('../assets/scenes/scene-shop-anime-v2.webp'); }
-  #overlay .scene[data-asset-key="scene-event-bg"] { background-image:url('../assets/scenes/scene-altar-anime-v2.webp'); }
+  #overlay .scene[data-asset-key="scene-event-bg"] { background-image:url('../assets/scenes/event-tt6-mystery.webp'); }
   #overlay .scene[data-asset-key="scene-fire-bg"] { background-image:url('../assets/scenes/scene-fire-anime-v2.webp'); }
   #overlay .scene[data-asset-key="scene-chest-bg"] { background-image:url('../assets/scenes/scene-chest-anime-v2.webp'); }
   #overlay .scene[data-asset-key="scene-door-bg"] { background-image:url('../assets/scenes/scene-door-anime-v2.webp'); }
@@ -531,7 +537,7 @@
   #overlay .scene[data-asset-key="scene-pickup-wood"] { background-image:url('../assets/scenes/scene-pickup-wood-anime-v2.webp'); }
   #overlay .scene[data-asset-key="scene-pickup-rations"] { background-image:url('../assets/scenes/scene-pickup-rations-anime-v2.webp'); }
   #overlay .scene[data-asset-key="scene-pickup-key"] { background-image:url('../assets/scenes/scene-pickup-key-anime-v2.webp'); }
-  #overlay .scene[data-asset-key="scene-event-timeskip"] { background-image:url('../assets/scenes/scene-altar-anime-v2.webp'); }
+  #overlay .scene[data-asset-key="scene-event-timeskip"] { background-image:url('../assets/scenes/event-tt6-mystery.webp'); }
   #overlay .scene[data-asset-key="scene-event-demondeal"] { background-image:url('../assets/scenes/event-tt6-demondeal.webp'); }
   #overlay .scene[data-asset-key="scene-event-bandits"] { background-image:url('../assets/scenes/event-bandits-anime-v2.webp'); }
   #overlay .scene[data-asset-key="scene-event-mystery"] { background-image:url('../assets/scenes/event-tt6-mystery.webp'); }
@@ -547,12 +553,12 @@
   #overlay .node-pg[data-asset-key="scene-fire-bg"] { background-image:url('../assets/scenes/scene-fire-anime-v2.webp'); }
   #overlay .node-pg[data-asset-key="scene-extract-bg"] { background-image:url('../assets/scenes/scene-extract-anime-v2.webp'); }
   #overlay .node-pg[data-asset-key="scene-shop-bg"] { background-image:url('../assets/scenes/scene-shop-anime-v2.webp'); }
-  #overlay .node-pg[data-asset-key="scene-event-bg"] { background-image:url('../assets/scenes/scene-altar-anime-v2.webp'); }
+  #overlay .node-pg[data-asset-key="scene-event-bg"] { background-image:url('../assets/scenes/event-tt6-mystery.webp'); }
   #overlay .node-pg[data-asset-key="scene-pickup-coin"] { background-image:url('../assets/scenes/scene-pickup-coin-anime-v2.webp'); }
   #overlay .node-pg[data-asset-key="scene-pickup-wood"] { background-image:url('../assets/scenes/scene-pickup-wood-anime-v2.webp'); }
   #overlay .node-pg[data-asset-key="scene-pickup-rations"] { background-image:url('../assets/scenes/scene-pickup-rations-anime-v2.webp'); }
   #overlay .node-pg[data-asset-key="scene-pickup-key"] { background-image:url('../assets/scenes/scene-pickup-key-anime-v2.webp'); }
-  #overlay .node-pg[data-asset-key="scene-event-timeskip"] { background-image:url('../assets/scenes/scene-altar-anime-v2.webp'); }
+  #overlay .node-pg[data-asset-key="scene-event-timeskip"] { background-image:url('../assets/scenes/event-tt6-mystery.webp'); }
   #overlay .node-pg[data-asset-key="scene-event-demondeal"] { background-image:url('../assets/scenes/event-tt6-demondeal.webp'); }
   #overlay .node-pg[data-asset-key="scene-event-bandits"] { background-image:url('../assets/scenes/event-bandits-anime-v2.webp'); }
   #overlay .node-pg[data-asset-key="scene-event-mystery"] { background-image:url('../assets/scenes/event-tt6-mystery.webp'); }
@@ -562,6 +568,12 @@
   #overlay .node-pg[data-asset-key="scene-event-airdrop"] { background-image:url('../assets/scenes/event-tt6-airdrop.webp'); }
   #overlay .node-pg[data-asset-key="scene-event-chestdraw"] { background-image:url('../assets/scenes/event-tt6-chestdraw.webp'); }
   #overlay .node-pg[data-asset-key="scene-event-systemsupply"] { background-image:url('../assets/scenes/event-tt6-systemsupply.webp'); }
+
+  /* 2026-09-10 留言 #18：没有专属图的事件改为 3 张事件场景轮换（a=补给柜 / b=空投 / c=救济台），
+     每次 triggerEventCard 随机取一键（scene-event-custom-a/b/c），不再与祭坛共用一张图 */
+  #overlay .scene[data-asset-key="scene-event-custom-a"], #overlay .node-pg[data-asset-key="scene-event-custom-a"] { background-image:url('../assets/scenes/event-tt6-mystery.webp'); }
+  #overlay .scene[data-asset-key="scene-event-custom-b"], #overlay .node-pg[data-asset-key="scene-event-custom-b"] { background-image:url('../assets/scenes/event-tt6-airdrop.webp'); }
+  #overlay .scene[data-asset-key="scene-event-custom-c"], #overlay .node-pg[data-asset-key="scene-event-custom-c"] { background-image:url('../assets/scenes/event-tt6-relief.webp'); }
 
   .battle-stage { background-size:cover; background-position:center; }
   .battle-stage[data-asset-key="battle-normal"] { background-image:url('../assets/scenes/battle-ruins-night-anime-v3.webp'); }

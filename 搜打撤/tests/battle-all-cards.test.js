@@ -168,7 +168,8 @@ async function auditOne(card) {
       BattleSession.start(game, [foeDef()], { isBoss: false, name: '审计' });
       // 被动本身不进手牌；但它可能发放临时卡（如灵符抽牌在普通战转为获得初始攻击）
       if (snap().hand.includes(game.ownedCards[0].uid)) record(card, 'D-被动', '开战被动装备不应进手牌');
-      else if (!game.logs.some(l => l.includes('开战被动'))) record(card, 'D-被动', '开战时未见「开战被动」生效记录');
+      // 2026-09-10 定版：对战开始时的装备只在 BOSS 战生效——普通战斗不触发即正确，触发了反而是错
+      else if (game.logs.some(l => l.includes('开战被动'))) record(card, 'D-被动', '普通战斗不应触发展开战被动（现仅 BOSS 战生效）');
     } catch (e) { record(card, 'D-被动', '崩溃:' + e.message); }
     endBattle(game);
     return;

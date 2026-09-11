@@ -81,25 +81,46 @@ SDT.MAP = {
     esper_echo:    { id: 'esper_echo',    name: '回声',     atk: 9,  hp: 7,  behavior: 'volley' },
     dragon:     { id: 'dragon',     name: '巨兽「荒渊」',   atk: 7,  hp: 40, elite: true, behavior: 'dragon' },
   },
-  // 各层遭遇表（键 = layerIdx 0-4，对应五层）：battle 格随机抽一种遭遇（1-4 只）；elite 为稀有强敌遭遇
-  // 2026-09-09 五层定版（设计者口径，敌人 = 攻-血）：
-  //   第1层 外围荒地 2-4 只：联邦巡防兵4-4 / 联邦射手5-3 / 反抗组织拾荒者3-3（含拾荒者时 ≥3 只）
-  //   第2层 风雪哨线 2-3 只：联邦巡防兵4-4 / 联邦机动兵5-6 / 反抗组织掷弹兵6-4
-  //   第3层 冻土遗迹 2-3 只：联邦机动兵5-6 / 变异雪狼7-6 / 甲壳变异体4-7
-  //   第4层 高危战区 1-3 只：灼热异变体10-7 / 腐蚀异变体7-10 / 白鸦8-5 / 烛火9-6
-  //   第5层 污染核心 1-3 只：滋生异变体5-12 / 静默7-9 / 回声9-7；巨兽「荒渊」7-40 固定单体（25% 概率遭遇）
+  // 各层遭遇表（键 = layerIdx 0-3，对应四层；2026-09-10 玩法定版，敌人 = 攻-血）：
+  //   每种敌人的数量区间一律落在 1~3 只之间（如 1-3 / 2-3 / 1-2），且区间内每个数量等概率生成；
+  //   第 1 层 外围荒地：3-3 拾荒者成群 2-3 只；4-4 巡防兵 2-3 只；5-3 射手 2-3 只
+  //   第 2 层 风雪哨线：4-4 巡防兵 2-3 只；5-3 射手 2-3 只；5-6 机动兵 2-3 只
+  //   第 3 层 冻土遗迹：7-6 雪狼 1-3 只；4-7 甲壳 2-3 只；6-4 掷弹兵 2-3 只；7-40 巨兽仅 3% 概率刷出
+  //   第 4 层 污染核心：7-10 腐蚀 / 10-7 灼热 / 5-12 滋生各 1-2 只；7-40 巨兽仅 10% 概率刷出
+  // 巨兽（精英）奖励：2 个大宝箱 + 30% 概率额外 1 张传说卡（见 chests.rollDrops / 战后结算）
+  // 敌人取自卡牌库同攻血生物（foe-* 图鉴）；不含「步兵」。
+  // rollCount：区间 [min,max] 内等概率取整数（2026-09-10 定版——1-3 出 1/2/3 各 1/3，2-3 出 2/3 各 1/2）
+  rollCount(size, rand) {
+    const [min, max] = size;
+    return min + Math.floor(rand() * (max - min + 1));
+  },
   encounters: [
-    { pool: ['infantry', 'archer', 'bandit'], size: [2, 4], risk: '低',
-      strategy: '试探：联邦巡防与反抗拾荒的零星交火，单体攻击为主，适合熟悉手牌与攒资源；遇拾荒者必成群（≥3）' },
-    { pool: ['infantry', 'cavalry', 'orc_jav'], size: [2, 3], risk: '中',
-      strategy: '对峙：正规部队上哨线，机动兵蓄力冲锋、掷弹兵远程压制，优先打断蓄力' },
-    { pool: ['cavalry', 'wolf_rider', 'orc_axe'], size: [2, 3], risk: '中高',
-      strategy: '异变：冻土下的变异体混入巡逻队，雪狼高攻冲锋、甲壳厚血防守，注意攻防节奏' },
-    { pool: ['fire_el', 'water_el', 'esper_crow', 'esper_candle'], size: [1, 3], risk: '高',
-      strategy: '能力者：元素异变体与双阵营能力者同场，灼烧与腐蚀持续消耗，白鸦的碎晶齐射优先处理' },
-    { pool: ['grass_el', 'esper_silence', 'esper_echo'], size: [1, 3], risk: '极高',
-      strategy: '核心区：滋生体厚血缠斗，静默封住技能、回声的声波叠伤，随时准备撤退',
-      elite: { pool: ['dragon'], size: [1, 1], chance: 0.25, strategy: '精英预警：巨兽「荒渊」固定单体，撤退仍可保住已结算的战利品' } },
+    { entries: [
+        { id: 'bandit',   size: [2, 3] },
+        { id: 'infantry', size: [2, 3] },
+        { id: 'archer',   size: [2, 3] },
+      ], risk: '低',
+      strategy: '试探：联邦巡防与反抗拾荒的零星交火，单体攻击为主，适合熟悉手牌与攒资源；拾荒者成群出没（2-3 只）' },
+    { entries: [
+        { id: 'infantry', size: [2, 3] },
+        { id: 'archer',   size: [2, 3] },
+        { id: 'cavalry',  size: [2, 3] },
+      ], risk: '中',
+      strategy: '对峙：正规部队上哨线，机动兵蓄力冲锋、射手远程压制，优先打断蓄力' },
+    { entries: [
+        { id: 'wolf_rider', size: [1, 3] },
+        { id: 'orc_axe',    size: [2, 3] },
+        { id: 'orc_jav',    size: [2, 3] },
+      ], risk: '高',
+      strategy: '异变：冻土下的变异体混入巡逻队，雪狼高攻冲锋、甲壳厚血防守，注意攻防节奏',
+      elite: { pool: ['dragon'], size: [1, 1], chance: 0.03, strategy: '精英预警：巨兽「荒渊」固定单体——奖励 2 个大宝箱，30% 概率额外掉 1 张传说卡' } },
+    { entries: [
+        { id: 'water_el', size: [1, 2] },
+        { id: 'fire_el',  size: [1, 2] },
+        { id: 'grass_el', size: [1, 2] },
+      ], risk: '极高',
+      strategy: '核心区：腐蚀与灼烧持续消耗、滋生体厚血缠斗，随时准备战术取舍；巨兽「荒渊」偶尔出没',
+      elite: { pool: ['dragon'], size: [1, 1], chance: 0.10, strategy: '精英预警：巨兽「荒渊」固定单体——奖励 2 个大宝箱，30% 概率额外掉 1 张传说卡' } },
   ],
   enemyPool: [   // 兼容旧引用（事件战等）：统一指向新表
     { id: 'bandit', name: '反抗组织拾荒者', hp: 3, atk: 3 },
@@ -108,24 +129,25 @@ SDT.MAP = {
   // ---------- 战斗胜利宝箱掉落（设计者 2026-09-02 定版：战胜怪物 100% 掉宝箱） ----------
   // 四种宝箱规格：cards=直接获得的随机卡张数 / pickFrom=随机 N 张选 1 /
   // coins=[min,max] 内含随机币；boss 额外掉金币/银币/铜币卡其一，并有 30% 概率掉员工通行证B
+  // 币掉落定版（2026-09-09）：小宝箱 1 币、中宝箱 1-2 币、大宝箱 2-3 币
   chestKinds: {
-    small:  { name: '小型物资箱', icon: '[[icon:archive]]', cards: 1, coins: [1, 2] },
-    medium: { name: '密封物资箱', icon: '[[icon:archive]]', pickFrom: 3, coins: [2, 3] },
-    large:  { name: '军用保险柜', icon: '[[icon:tools]]', cards: 3, coins: [3, 4] },
+    small:  { name: '小型物资箱', icon: '[[icon:archive]]', cards: 1, coins: [1, 1] },
+    medium: { name: '密封物资箱', icon: '[[icon:archive]]', pickFrom: 3, coins: [1, 2] },
+    large:  { name: '军用保险柜', icon: '[[icon:tools]]', cards: 3, coins: [2, 3] },
     boss:   { name: '首脑保险柜', icon: '[[icon:medal]]', cards: 5, coins: null,
               coinCards: ['金币', '银币', '铜币'], tokenChance: 0.3 },
   },
-  // 层掉落表（键 = layerIdx 0~4，对应五层）：击败该层敌人掉什么，多组组合时等概率随机一组。
-  // n 写成 [min,max] 表示随机数量，写成数字表示固定数量。
+  // 层掉落表（键 = layerIdx 0~3，对应四层，2026-09-09 玩法定版）：
+  //   types = 宝箱种类权重（小/中/大）；count = 宝箱个数权重；fixed = 固定组合（第四层）
+  //   第 1 层：70% 小宝箱（随机 1 张）/ 30% 中宝箱（3 选 1），1 个；
+  //   第 2 层：40% 小 / 40% 中 / 20% 大，1 个；
+  //   第 3 层：70% 中 / 30% 大；个数 70% ×1 / 30% ×2；
+  //   第 4 层：胜利固定 1 大 + 1 中。
   layerChests: [
-    [[{ k: 'small', n: [1, 2] }]],                                                                    // 第 1 层：小型物资箱 1-2 个
-    [[{ k: 'medium', n: 2 }], [{ k: 'large', n: 1 }]],                                                // 第 2 层：密封箱×2 或 军用保险柜×1
-    [[{ k: 'large', n: 1 }, { k: 'small', n: 1 }],                                                    // 第 3 层：大+小 或 大+中
-     [{ k: 'large', n: 1 }, { k: 'medium', n: 1 }]],
-    [[{ k: 'large', n: 2 }],                                                                          // 第 4 层：大×2 或 大+中+小
-     [{ k: 'large', n: 1 }, { k: 'medium', n: 1 }, { k: 'small', n: 1 }]],
-    [[{ k: 'large', n: 2 }, { k: 'small', n: 1 }],                                                    // 第 5 层：大×2+小 或 大+中×2
-     [{ k: 'large', n: 1 }, { k: 'medium', n: 2 }]],
+    { types: [ { k: 'small', w: 7 }, { k: 'medium', w: 3 } ], count: [ { n: 1, w: 1 } ] },
+    { types: [ { k: 'small', w: 4 }, { k: 'medium', w: 4 }, { k: 'large', w: 2 } ], count: [ { n: 1, w: 1 } ] },
+    { types: [ { k: 'medium', w: 7 }, { k: 'large', w: 3 } ], count: [ { n: 1, w: 7 }, { n: 2, w: 3 } ] },
+    { fixed: [ { k: 'large', n: 1 }, { k: 'medium', n: 1 } ] },
   ],
 
   // ---------- 中央祭坛区 ----------

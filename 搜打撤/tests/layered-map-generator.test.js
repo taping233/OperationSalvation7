@@ -3,7 +3,7 @@ import { createLayeredMap } from '../game/src/layeredMap.js';
 import { generateLayeredMap, validateGeneratedMap } from '../game/src/map-generator.js';
 import { checkConnectivity } from '../game/src/map-graph.js';
 
-describe('五层种子化地图生成器', () => {
+describe('四层种子化地图生成器', () => {
   it('同 seed 生成完全一致的拓扑与坐标', () => {
     expect(generateLayeredMap('forest-42')).toEqual(generateLayeredMap('forest-42'));
   });
@@ -19,27 +19,66 @@ describe('五层种子化地图生成器', () => {
 
   it('批量生成100个 seed，全部通过质量校验并保持规模', () => {
     const map = generateLayeredMap(20260908);
-    expect(map.layers).toHaveLength(5);
-    expect(map.generatorVersion).toBe(2);
-    expect(map.layoutVersion).toBe(2);
+    expect(map.layers).toHaveLength(4);
+    expect(map.generatorVersion).toBe(3);
+    expect(map.layoutVersion).toBe(5);   // v5：2026-09-10 定版——物资格保底 1 / 宝箱格 ≤4、敌人格 ≤4
     expect(validateGeneratedMap(map.layers).ok).toBe(true);
     expect(checkConnectivity(createLayeredMap(20260908)).ok).toBe(true);
     for (let seed = 0; seed < 100; seed++) {
       const batch = generateLayeredMap(`batch-${seed}`);
-      expect(batch.layers.map(layer => layer.nodes.length)).toEqual([13, 15, 17, 15, 13]);
+      expect(batch.layers.map(layer => layer.nodes.length)).toEqual([13, 15, 17, 15]);
       expect(validateGeneratedMap(batch.layers).ok).toBe(true);
       expect(batch.layers.every(layer => layer.gridBounds && layer.gridBounds.maxX > layer.gridBounds.minX)).toBe(true);
     }
   });
 
+  it('格子数量定版（2026-09-10）：每层物资格 1~4 个、野生敌人格 ≤4（200 种子）', () => {
+    for (let seed = 0; seed < 200; seed++) {
+      const map = generateLayeredMap(`quota-${seed}`);
+      map.layers.forEach((layer, li) => {
+        const chests = layer.nodes.filter(n => n.type === 'chest').length;
+        const battles = layer.nodes.filter(n => n.type === 'battle').length;
+        expect(chests, `seed=${seed} 第${li + 1}层物资格数量异常`).toBeGreaterThanOrEqual(1);
+        expect(chests, `seed=${seed} 第${li + 1}层宝箱格超过 4`).toBeLessThanOrEqual(4);
+        expect(battles, `seed=${seed} 第${li + 1}层敌人格超过 4`).toBeLessThanOrEqual(4);
+      });
+    }
+  });
+
   it('层间门双向连接且终层有撤离点', () => {
     const map = createLayeredMap(7);
-    expect(map.slice(0, 4).every(layer => layer.doors.length === 1)).toBe(true);
-    expect(map[4].nodes.some(node => node.type === 'extraction')).toBe(true);
-    for (let li = 0; li < 4; li++) {
+    expect(map.slice(0, 3).every(layer => layer.doors.length === 1)).toBe(true);
+    expect(map[3].nodes.some(node => node.type === 'extraction')).toBe(true);
+    for (let li = 0; li < 3; li++) {
       const door = map[li].doors[0];
       expect(map[li].logical[door.at].next).toContainEqual([door.toLayer, door.arriveAt]);
       expect(map[door.toLayer].logical[door.arriveAt].next).toContainEqual([li, door.at]);
+    }
+  });
+
+  it('第四层「祭坛 → 首脑」终局组合：各恰好 1 格且祭坛在首脑之前（2026-09-09 玩法定版）', () => {
+    for (let seed = 0; seed < 60; seed++) {
+      const map = generateLayeredMap(`finale-${seed}`);
+      const l4 = map.layers[3];
+      const altars = l4.nodes.filter(n => n.type === 'altar');
+      const bosses = l4.nodes.filter(n => n.type === 'boss');
+      expect(altars, `seed=${seed} 祭坛格数量异常`).toHaveLength(1);
+      expect(bosses, `seed=${seed} 首脑格数量异常`).toHaveLength(1);
+      // 祭坛在首脑之前：按纵深 (x, row) 排序祭坛严格先于首脑（同层两格可能同 x 不同 row）
+      const depth = (n) => n.x * 100 + (n.row + 3);
+      expect(depth(altars[0]), `seed=${seed} 祭坛未在首脑之前`).toBeLessThan(depth(bosses[0]));
+      expect(validateGeneratedMap(map.layers).ok).toBe(true);
+    }
+  });
+
+  it('紧急撤离点只出现在第三层（2026-09-09 撤离定版）', () => {
+    for (let seed = 0; seed < 40; seed++) {
+      const map = generateLayeredMap(`exit-${seed}`);
+      map.layers.forEach((layer, li) => {
+        const exits = layer.nodes.filter(n => n.type === 'emergencyExit');
+        if (li === 2) expect(exits.length, `seed=${seed} 第三层缺紧急撤离点`).toBeGreaterThanOrEqual(1);
+        else expect(exits.length, `seed=${seed} 第${li + 1}层不应有紧急撤离点`).toBe(0);
+      });
     }
   });
 

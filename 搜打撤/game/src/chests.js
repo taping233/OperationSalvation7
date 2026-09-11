@@ -39,6 +39,11 @@ import { Random } from './random.js';
       const card = SDT.Cards.randomDropCard(taken);
       if (card) { taken.add(card.id); c.cards.push(card); }
     }
+    // 宠物蛋（2026-09-09 需求 #2）：固定 0.7% 爆率额外开出（不占随机卡池，unrandom）
+    if (Random.random('loot') < 0.007) {
+      const egg = (SDT.Cards.all() || []).find(x => x.id === 'pet-egg');
+      if (egg) { c.cards.push(egg); c.eggHit = true; }
+    }
     // —— 宝箱保底（2026-09-09 试玩反馈；设计者定版权重 60:28:9:3 不动）——
     // 中宝箱（3 选 1）整包全古朴的概率约 21.6%，体验很差：保底至少 1 张「稀有」+；
     // 大宝箱 / 首脑宝箱保底至少 1 张「史诗」+。未达标就重掷最后一张（目标档内挑卡，
@@ -71,21 +76,41 @@ import { Random } from './random.js';
   }
 
   // ---------- 掉落掷骰：opts = { isBoss, layer } → 宝箱实例 [{kind}] ----------
+  // 职业宝箱概率（需求 #3/#4）：基础 25%；携带宠物「猎鹰宝宝」时提高至 35%
+  const classChestChance = () => {
+    const B = window.SDT.Base;
+    const pet = B && B.carriedPet && B.carriedPet();
+    return (pet && pet.effect && pet.effect.classChest) || 0.25;
+  };
   function rollDrops(opts) {
     if (opts && opts.isBoss) return [{ kind: 'boss' }];
-    const tables = SDT.MAP.layerChests;
+    // 巨兽「荒渊」（第 3/4 层精英，2026-09-09 玩法定版）：固定奖励 2 个大宝箱
+    // （30% 概率额外 1 张传说卡在战后结算 game.bag.js settle 里判发）
+    const names = (opts && opts.foeNames) || [];
+    if (names.some(n => String(n).includes('巨兽'))) return [{ kind: 'large' }, { kind: 'large' }];
+    const specs = SDT.MAP.layerChests;
     const li = opts && typeof opts.layer === 'number' ? opts.layer : 0;
-    const table = tables[li] || tables[0];
-    const combo = table[Math.floor(Random.random('loot') * table.length)];
+    const spec = specs[li] || specs[0];
     const out = [];
-    combo.forEach(part => {
-      const n = Array.isArray(part.n) ? rndInt(part.n[0], part.n[1]) : (part.n || 0);
-      for (let i = 0; i < n; i++) {
-        // 职业宝箱（2026-09-06）：黑箱，出现概率为普通宝箱的 1/3，只掉落职业卡牌
-        const isClass = Random.random('loot') < 1 / 3;
-        out.push({ kind: part.k, isClass });
-      }
-    });
+    const weighted = (list, pick) => {
+      const total = list.reduce((s, e) => s + e.w, 0);
+      let roll = Random.random('loot') * total;
+      for (const e of list) { roll -= e.w; if (roll <= 0) return pick(e); }
+      return pick(list[list.length - 1]);
+    };
+    if (spec.fixed) {
+      spec.fixed.forEach(part => {
+        for (let i = 0; i < (part.n || 0); i++) out.push({ kind: part.k, isClass: false });
+      });
+      return out;
+    }
+    const chests = weighted(spec.count, e => e.n);
+    for (let i = 0; i < chests; i++) {
+      const kind = weighted(spec.types, e => e.k);
+      // 职业宝箱（2026-09-06）：黑箱，只掉落职业卡牌；2026-09-09 降到 25%，猎鹰宝宝 35%
+      const isClass = Random.random('loot') < classChestChance();
+      out.push({ kind, isClass });
+    }
     if (out.some(c => c.isClass)) UI.log('[[icon:archive]] 出现黑色<b>职业宝箱</b>——只掉落职业卡牌！', 'loot');
     return out;
   }
@@ -169,7 +194,8 @@ import { Random } from './random.js';
     const lootLine = isPick
       ? `从随机 <b>${cur.cards.length}</b> 张卡牌中选择 <b>1</b> 张 · 另含 [[icon:coin]] <b>${cur.coins}</b> 币`
       : `开出 <b>${cur.cards.length}</b> 张卡牌${cur.coins ? ` · [[icon:coin]] <b>${cur.coins}</b> 币` : ''}` +
-        (cur.tokenHit ? ' · <b class="gold">[[icon:sparkles]] 员工通行证B！</b>' : '');
+        (cur.tokenHit ? ' · <b class="gold">[[icon:sparkles]] 员工通行证B！</b>' : '') +
+        (cur.eggHit ? ' · <b class="gold">[[icon:paw]] 宠物蛋！</b>' : '');
     // 容量预检（2026-09-09 老板定向）：全部收下放不下时先提示清理背包——
     // 同名并入不占格；逐张模拟占格（基础格任意卡 / 珍珠盒扩格仅资源卡），算出放不下的张数
     const rest = cur.cards.filter((c, i) => !taken.has(i));
@@ -184,7 +210,7 @@ import { Random } from './random.js';
       });
     }
     const warnLine = cant > 0
-      ? `<p class="chest-warn">[[icon:bag]] 背包已满（${G.usedSlots()}/${G.bagCap()} 格，珍珠盒扩格只收资源卡）——只能再收 <b>${canTake}</b> 张：可单点卡牌拾取，或全部收下（放不下的 <b>${cant}</b> 张将散落）</p>`
+      ? `<p class="chest-warn">[[icon:bag]] 背包已满（${G.usedSlots()}/${G.bagCap()} 格，珍珠盒扩格只收资源卡）——只能再收 <b>${canTake}</b> 张：可单点卡牌拾取，或按 B 打开背包把卡牌拖入安全格/存入珍珠盒腾出格子，或全部收下（放不下的 <b>${cant}</b> 张将散落）</p>`
       : '';
     const ops = isPick
       ? '<p class="ov-note">点击一张卡牌收下，其余两张散落在风中……</p>'
@@ -249,6 +275,16 @@ import { Random } from './random.js';
   }
 
   window.SDT = window.SDT || {};
-  window.SDT.Chests = { rollDrops, dropText, open, rollContents, isOpen: () => !!(cur || queue.length) };
+  // 挂起/恢复（2026-09-09 留言 #13）：搜刮界面允许打开背包——
+  // suspend 作废未播完的搜索演出计时器（防止中途 render 抢走背包浮层），
+  // 背包关闭后 resume 重新渲染当前搜刮面板继续开箱
+  function suspend() {
+    searchSeq++;
+    return !!(cur || queue.length);
+  }
+  function resume() {
+    if (cur) render();
+  }
+  window.SDT.Chests = { rollDrops, dropText, open, rollContents, isOpen: () => !!(cur || queue.length), suspend, resume };
 
 export { G, SDT, UI, render };

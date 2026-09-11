@@ -56,8 +56,11 @@ const SCENES = {
     door: new URL('../assets/scenes/scene-door-anime-v2.webp', import.meta.url).href,
     altar: new URL('../assets/scenes/scene-altar-anime-v2.webp', import.meta.url).href,
     // 事件/宝箱整页（nodeShell）背景：与 css/scenes.css 里 scene-event-bg / scene-chest-bg 同图，
-    // 不预载的话打开页面时 CSS background-image 才发请求，大图期间整页近乎黑屏
-    event: new URL('../assets/scenes/scene-altar-anime-v2.webp', import.meta.url).href,
+    // 不预载的话打开页面时 CSS background-image 才发请求，大图期间整页近乎黑屏。
+    // 2026-09-10 留言 #18：事件通用底图换为独立事件场景图（不再与祭坛共用）；轮换图 a/b/c 在此一并预载
+    event: new URL('../assets/scenes/event-tt6-mystery.webp', import.meta.url).href,
+    eventB: new URL('../assets/scenes/event-tt6-airdrop.webp', import.meta.url).href,
+    eventC: new URL('../assets/scenes/event-tt6-relief.webp', import.meta.url).href,
     chest: new URL('../assets/scenes/scene-chest-anime-v2.webp', import.meta.url).href,
   });
   const IMMEDIATE_SCENES = new Set(['battle', 'coin', 'wood', 'rations', 'key', 'fire']);

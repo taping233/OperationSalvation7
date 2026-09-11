@@ -16,6 +16,9 @@
   .bag-slot .slot-ops .mini-btn { padding: 1px 6px; font-size: 10px; }
   .card-slot, .safe-slot { background: #1e1e1e; }
   .bag-grid.safe-grid .bag-slot.empty.safe-empty { border-color: #555555; background: rgba(126,126,126,.08); }
+  /* 2026-09-10 留言 #26：珍珠盒扩格（只收资源卡）与普通空格视觉区分 */
+  .bag-grid .bag-slot.empty.pearl-empty { border-style: dashed; border-color: #b9a86e;
+    background: radial-gradient(circle at 50% 42%, rgba(220,196,138,.16), rgba(20,20,20,0) 72%); }
   .pk-list { display: flex; flex-direction: column; gap: 4px; max-height: 22vh; overflow-y: auto; }
   .pk-row { display: flex; justify-content: space-between; align-items: center; gap: 8px;
     padding: 4px 8px; border: 1px solid #343434; border-radius: 8px; background: #191919;
@@ -134,6 +137,22 @@
     border-radius: 999px; font-size: 11px; font-weight: 800; color: #ffffff; cursor: help;
     background: linear-gradient(180deg, #7d7d7d, #3d3d3d);
     border: 1.5px solid #272727; box-shadow: 0 2px 5px rgba(0,0,0,.5), 0 0 8px rgba(120,120,120,.5); }
+  /* 需求 #16：费用变动——降低 = 绿字，提高 = 红字（角标与卡面左上角费用同色） */
+  .bt-cost1.cost-mod.mod-down { background: linear-gradient(180deg, #3f9d5f, #1d5c35); border-color: #143c23;
+    box-shadow: 0 2px 5px rgba(0,0,0,.5), 0 0 8px rgba(90,220,140,.55); }
+  .bt-cost1.cost-mod.mod-up   { background: linear-gradient(180deg, #c7513f, #7c2418); border-color: #551710;
+    box-shadow: 0 2px 5px rgba(0,0,0,.5), 0 0 8px rgba(255,110,80,.55); }
+  .hsc-cost.cost-mod { color: #ffffff; }
+  .hsc-cost.cost-mod.mod-down { background: #2f7d4c !important; box-shadow: 0 0 8px rgba(90,220,140,.65); }
+  .hsc-cost.cost-mod.mod-up   { background: #a03d2d !important; box-shadow: 0 0 8px rgba(255,110,80,.65); }
+  /* 需求 #15：手牌上的「注能」角标——点击进入注能流程（直接点卡则不注能打出） */
+  .bt-infchip { position: absolute; z-index: 5; right: -6px; bottom: -6px; display: inline-flex; align-items: center; gap: 3px;
+    padding: 3px 8px; border-radius: 999px; font-size: 10.5px; font-weight: 800; color: #ffe9a8;
+    background: linear-gradient(180deg, rgba(64,52,110,.96), rgba(34,26,64,.96));
+    border: 1.5px solid rgba(190,160,255,.75); box-shadow: 0 2px 6px rgba(0,0,0,.5);
+    cursor: pointer; transition: transform .12s, box-shadow .12s; }
+  .bt-infchip:hover { transform: translateY(-1px) scale(1.05); box-shadow: 0 3px 10px rgba(120,80,255,.55); }
+  .bt-infchip img { width: 11px; height: 11px; }
 
   /* ---------------- 标题界面 / 退出 ---------------- */
   #title, #exitScr { position: absolute; inset: 0; z-index: 15; display: flex; align-items: center;

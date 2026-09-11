@@ -123,7 +123,7 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     expect(game.generatorVersion).toBeTruthy();
     expect(game.layoutVersion).toBeTruthy();
     expect(game.geometryVersion).toContain('integration-map-seed');
-    expect(game.layerBounds).toHaveLength(5);
+    expect(game.layerBounds).toHaveLength(4);
     for (const [li, layer] of game.layerData.entries()) {
       const positions = game.nodePos[li];
       for (const [nodeIdx, node] of layer.logical.entries()) {
@@ -208,7 +208,7 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     expect(game.layerIdx).toBe(door.toLayer);
     expect(game.trackPos).toBe(door.arriveAt);
     expect(game.state).toBe('idle');
-    expect(game.layerData[4].logical[game.layerData[4].exit].def.type).toBe('extraction');
+    expect(game.layerData[3].logical[game.layerData[3].exit].def.type).toBe('extraction');
     localStorage.removeItem('sdt-reduce-motion');
     document.getElementById('overlay')?.setAttribute('hidden', '');
     game.state = 'title';

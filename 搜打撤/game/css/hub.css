@@ -157,6 +157,32 @@
   .cls-stat-row { display: flex; gap: 8px; margin-top: 4px; }
   .cls-detail { margin-top: 12px; padding-top: 12px; border-top: 1px dashed #343434; }
 
+  /* ---------------- 职业收藏室（2026-09-09） ---------------- */
+  .coll-room .base-bar { margin: 2px 0 12px; }
+  .coll-ms-list { display: flex; flex-direction: column; gap: 6px; margin: 0 0 6px; }
+  .coll-ms { display: flex; align-items: center; gap: 10px; padding: 8px 12px; text-align: left;
+    border: 1px solid #343434; border-radius: 10px; background: #1d1d1d; font-size: 12px; }
+  .coll-ms b { color: #dadada; letter-spacing: 1px; white-space: nowrap; }
+  .coll-ms .rw { flex: 1; color: #bebebe; font-size: 11.5px; }
+  .coll-ms .got { font-size: 11.5px; white-space: nowrap; }
+  .coll-ms .dim { margin-left: auto; font-size: 11.5px; white-space: nowrap; }
+  .coll-ms.reach { border-color: rgba(196,196,196,.5); background: linear-gradient(180deg, #232323, #1c1c1c); }
+  .coll-ms.done { opacity: .72; }
+  .coll-group { margin-top: 14px; }
+  .coll-group-head { display: flex; align-items: baseline; gap: 10px; margin: 0 0 7px; }
+  .coll-group-head b { font-size: 13.5px; color: #e4e4e4; letter-spacing: 2px; font-family: var(--serif); }
+  .coll-group-head .dim { font-size: 11px; }
+  .coll-cards { display: flex; flex-wrap: wrap; gap: 8px; align-items: flex-start; }
+  /* 卡面按比例缩排：hs-card 为 10em × 14em，8px 字号 ≈ 80px 宽卡格 */
+  .coll-cards .hs-card { font-size: 8px; }
+  .coll-slot.on { padding: 0; line-height: 0; border: 1px solid rgba(196,196,196,.4); border-radius: 9px;
+    background: #161616; cursor: zoom-in; transition: all .14s; }
+  .coll-slot.on:hover { border-color: #a1a1a1; transform: translateY(-2px); }
+  .coll-slot.off { width: 82px; height: 114px; display: flex; align-items: center; justify-content: center;
+    border: 1px dashed #3a3a3a; border-radius: 9px;
+    background: repeating-linear-gradient(45deg, #191919, #191919 6px, #141414 6px, #141414 12px); }
+  .coll-slot.off span { font-size: 22px; color: #4a4a4a; font-family: var(--serif); }
+
   /* ---------------- 位图立绘（art.js 输出） ---------------- */
   .art { line-height: 0; }
   .art img { display: block; width: 100%; height: auto; }
@@ -239,3 +265,24 @@
     box-shadow: 0 4px 16px rgba(0,0,0,.55), 0 0 22px var(--sc-glow, rgba(171,171,171,.3));
     animation: sceneArtIn .5s cubic-bezier(.22,1,.36,1); }
   .scene-foes .scene-foe-art:nth-child(2) { width: 96px; }
+
+/* ---------------- 宠物系统（2026-09-09 需求 #2/#4）---------------- */
+/* 仓库 / 升级页的宠物行 */
+.hub .pk-row.pet-row { flex-wrap: wrap; align-items: center; gap: 4px 10px;
+  padding: 6px 8px; border-radius: 8px; border: 1px solid transparent; }
+.hub .pk-row.pet-row.on { border-color: rgba(255,202,91,.55); background: rgba(255,202,91,.08); }
+.hub .pk-row.pet-row.locked { opacity: .55; }
+.hub .pk-row.pet-row .pet-desc { flex-basis: 100%; font-size: 11.5px; opacity: .8; }
+.hub .pk-row.pet-row .pet-ops { display: inline-flex; align-items: center; gap: 8px; margin-left: auto; }
+.hub .pk-row.pet-row .got { color: #7fdd9c; font-size: 12px; }
+/* 出征整备页的宠物携带条 */
+.pet-strip { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 0 10px; }
+.pet-strip-label { font-size: 12.5px; color: var(--amber-soft, #e0a458); font-weight: 700; }
+.pet-chip { display: inline-flex; align-items: center; gap: 5px; padding: 5px 11px; border-radius: 999px;
+  font-size: 12px; font-weight: 700; color: #efe6d2; background: rgba(52,44,34,.75);
+  border: 1.5px solid rgba(214,181,110,.4); cursor: pointer; transition: all .15s; }
+.pet-chip:hover { border-color: rgba(255,202,91,.8); transform: translateY(-1px); }
+.pet-chip.on { background: linear-gradient(180deg, rgba(120,86,28,.9), rgba(72,50,16,.9));
+  border-color: rgba(255,202,91,.9); box-shadow: 0 0 10px rgba(255,202,91,.35); }
+.pet-chip .pet-chip-lv { font-size: 10.5px; opacity: .75; font-weight: 600; }
+.pet-chip img { width: 13px; height: 13px; }

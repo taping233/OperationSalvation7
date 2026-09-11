@@ -1,10 +1,10 @@
-/* Seeded five-layer map generator. Emits plain data for session and renderer. */
-const TARGETS = [13, 15, 17, 15, 13];
-const WIDTHS = [7, 8, 9, 8, 7];
+/* Seeded four-layer map generator. Emits plain data for session and renderer. */
+const TARGETS = [13, 15, 17, 15];
+const WIDTHS = [7, 8, 9, 8];
 const ROW_MIN = -3;
 const ROW_MAX = 3;
-const GENERATOR_VERSION = 2;
-const LAYOUT_VERSION = 2;
+const GENERATOR_VERSION = 3;
+const LAYOUT_VERSION = 5;   // v5：2026-09-10 玩法定版——每层物资格（搜刮点）保底 1 格、上限 4 格；野生敌人格上限 4 格不变（旧对局读档后按新版本重生成地图）
 const MAX_ATTEMPTS = 8;
 
 function hashSeed(value) { const text = String(value); let hash = 2166136261;
@@ -39,14 +39,24 @@ function makeLayer(li, target, width, random) {
   const types = { 战斗: 'battle', 事件: 'event', 火堆: 'fire', 搜刮点: 'chest', 补给站: 'shop', 精英战: 'battle' };
   // 名字必须忠实于节点类型（2026-09-09 老板：节点名与实际内容匹配）——
   // 此前 name 按 idx % names.length 机械循环，出现「1层·火堆」实为战斗的误导性命名
-  const NAME_BY_TYPE = { battle: '战斗', event: '事件', fire: '火堆', chest: '搜刮点', shop: '补给站', emergencyExit: '紧急撤离点' };
+  const NAME_BY_TYPE = { battle: '战斗', event: '事件', fire: '火堆', chest: '搜刮点', shop: '补给站', emergencyExit: '紧急撤离点', altar: '祭坛', boss: '首脑' };
   const nodes = coords.map((c, idx) => ({ id: `L${li + 1}_N${idx + 1}`, li, idx, x: c.x, row: c.row,
     type: types[pick(random, names)], name: '', next: [], extraction: false }));
   for (let a = 0; a < nodes.length; a++) for (let b = a + 1; b < nodes.length; b++) if (adjacent(nodes[a], nodes[b])) addEdge(nodes[a], nodes[b]);
   const entry = nodes.findIndex(n => n.x === 0);
   const exit = nodes.reduce((best, n, idx) => n.x > nodes[best].x ? idx : best, 0);
   nodes[entry].type = 'entrance'; nodes[entry].name = li === 0 ? '外围入口' : `第${li + 1}层入口`;
-  nodes[exit].type = li === 4 ? 'extraction' : 'door'; nodes[exit].name = li === 4 ? '终局撤离点' : `通往第${li + 2}层`;
+  nodes[exit].type = li === 3 ? 'extraction' : 'door'; nodes[exit].name = li === 3 ? '终局撤离点' : `通往第${li + 2}层`;
+  // —— 数量与位置定版（2026-09-10 玩法定版）——
+  //   野生敌人格 ≤4、露天宝箱格（物资格）≤4（超出降级为事件格，后续战斗下限仍会补回 3 场）；
+  //   火堆/补给站不生成在入口附近（x < 2 的先降级，保底逻辑在 x ≥ 2 的深处补回）。
+  { let battles = 0, chests = 0;
+    nodes.forEach(n => {
+      if (n.type === 'battle') { battles++; if (battles > 4) n.type = 'event'; }
+      else if (n.type === 'chest') { chests++; if (chests > 4) n.type = 'event'; }
+      else if ((n.type === 'fire' || n.type === 'shop') && n.x < 2) n.type = 'event';
+    });
+  }
   // 2026-09-09 老板 #13：每层最多 1 个火堆 / 1 个补给站——随机布点会叠出双火堆、两三家补给站，
   // 收益重叠还拖节奏；多出来的降级为战斗（后续的三连战/战斗下限规则会再平衡）。
   for (const type of ['fire', 'shop']) {
@@ -86,16 +96,26 @@ function makeLayer(li, target, width, random) {
   for (const type of ['fire', 'shop']) {
     if (nodes.some(n => n.type === type)) continue;
     // 落点优先级：不贴功能房的格子 > 离功能房最远的格子；同类内优先吃事件格。
-    let pool = nodes.filter(n => isConvertible(n) && !nodes.some(m => m !== n && KEY_ROOMS.has(m.type) && isAdj(n, m)))
+    // 火堆/补给站远离入口：只在 x ≥ 2 的格子里补（2026-09-09 玩法定版）。
+    let pool = nodes.filter(n => isConvertible(n) && n.x >= 2 && !nodes.some(m => m !== n && KEY_ROOMS.has(m.type) && isAdj(n, m)))
       .sort(byKind);
-    if (!pool.length) pool = nodes.filter(n => isConvertible(n, true))
+    if (!pool.length) pool = nodes.filter(n => isConvertible(n, true) && n.x >= 2)
       .sort((a, b) => distToKey(b) - distToKey(a) || byKind(a, b));
     if (pool.length) { pool[0].type = type; placed.push(pool[0]); }
   }
-  // —— 紧急撤离点保底（2026-09-09 老板 #17：走到第三层找不到撤离点，只能硬着头皮往深处走）——
-  // 除终局层外每层保证 1 个：站上去就能随时带着背包结算撤离。落点取向同火堆/补给站，
-  // 优先吃事件格，其次战斗格（战斗不足 3 场时留给后续的战斗下限补位）。
-  if (li < 4) {
+  // —— 物资格保底（2026-09-10 玩法定版：每层至少 1 个搜刮点/宝箱格）——
+  // 均匀随机可能整层没有搜刮点；缺就补在普通格上（优先吃事件格，战斗不足 3 场时不动战斗格）。
+  // 搜刮点不参与火堆/补给站的间距约束，也允许与功能房相邻。
+  if (!nodes.some(n => n.type === 'chest')) {
+    const evPool = nodes.filter(n => n.type === 'event' && !placed.includes(n));
+    const btPool = battleCount() > 3 ? nodes.filter(n => n.type === 'battle') : [];
+    const pool = (evPool.length ? evPool : btPool).sort(byKind);
+    if (pool.length) pool[0].type = 'chest';
+  }
+  // —— 紧急撤离点（2026-09-09 需求 #13：只能在第三层和第五层撤离）——
+  // 紧急撤离点只放在第三层（li===2，献祭 3 张卡牌撤离）；第五层走终局撤离点（败 BOSS 后放行）。
+  // 落点取向同火堆/补给站，优先吃事件格，其次战斗格（战斗不足 3 场时留给战斗下限补位）。
+  if (li === 2) {
     const evPool = nodes.filter(n => n.type === 'event');
     const btPool = battleCount() > 3 ? nodes.filter(n => n.type === 'battle') : [];
     const pool = (evPool.length ? evPool : btPool).sort(byKind);
@@ -124,12 +144,33 @@ function makeLayer(li, target, width, random) {
     if (!cand) break;
     cand.type = 'battle';
   }
+  // —— 野生敌人格上限（2026-09-09 玩法定版：每层 ≤4）——
+  // 战斗下限补足后再裁一次：超过 4 场的战斗格降级为事件格（battle-min 不会超过 3 场，
+  // 这里主要防功能房间距/撤离点规则把多余战斗格留在场上一并收敛）。
+  { let battles = 0;
+    nodes.forEach(n => { if (n.type === 'battle') { battles++; if (battles > 4) n.type = 'event'; } });
+  }
+  // —— 第四层终局三连：祭坛（弃3激活选奖励）→ 首脑 → 终局撤离点（2026-09-09 玩法定版）——
+  // 从候选格按纵深 (x,row) 排序取最深处为首脑格、其前一格为祭坛格；
+  // 候选池只吃事件/搜刮格（不动保底火堆/补给站/战斗数）。
+  let altarEntrances = [];
+  if (li === 3) {
+    const cand = () => nodes.filter(n => n.type === 'event' || n.type === 'chest');
+    const byDepth = (a, b) => (a.x - b.x) || (a.row - b.row);
+    const sorted = cand().sort(byDepth);
+    const boss = sorted[sorted.length - 1];
+    const altar = sorted[sorted.length - 2];
+    if (boss && altar) {
+      boss.type = 'boss';
+      altar.type = 'altar';
+    }
+  }
   nodes.forEach((n) => { if (!n.name) n.name = `${li + 1}层·${NAME_BY_TYPE[n.type] || '据点'}`; });
-  return { nodes, entry, exit, gridBounds: { minX: 0, maxX: width - 1, minRow: ROW_MIN, maxRow: ROW_MAX } };
+  return { nodes, entry, exit, altarEntrances, gridBounds: { minX: 0, maxX: width - 1, minRow: ROW_MIN, maxRow: ROW_MAX } };
 }
 
 function quality(layers) {
-  const issues = []; if (layers.length !== 5) issues.push('必须生成五层');
+  const issues = []; if (layers.length !== 4) issues.push('必须生成四层');
   layers.forEach((layer, li) => {
     const expected = TARGETS[li]; if (layer.nodes.length !== expected) issues.push(`层 ${li + 1} 节点数异常`);
     if (layer.entry === layer.exit) issues.push(`层 ${li + 1} 入口出口相同`);
@@ -143,16 +184,23 @@ function quality(layers) {
     if (layer.nodes.filter(n => n.next.filter(([toLi]) => toLi === li).length >= 3).length < 2) issues.push(`层 ${li + 1} 分叉不足`);
     if (edges / 2 - layer.nodes.length + 1 < 1) issues.push(`层 ${li + 1} 没有回环`);
     if (!layer.gridBounds || layer.gridBounds.maxX <= layer.gridBounds.minX || layer.gridBounds.maxRow <= layer.gridBounds.minRow) issues.push(`层 ${li + 1} 缺少有效 bounds`);
+    if (li === 3 && layer.nodes.filter(n => n.type === 'altar').length !== 1) issues.push(`层 4 缺少祭坛格`);
+    if (li === 3 && layer.nodes.filter(n => n.type === 'boss').length !== 1) issues.push(`层 4 缺少首脑格`);
+    if (layer.nodes.filter(n => n.type === 'battle').length > 4) issues.push(`层 ${li + 1} 战斗格超过 4`);
+    if (layer.nodes.filter(n => n.type === 'chest').length > 4) issues.push(`层 ${li + 1} 宝箱格（物资格）超过 4`);
+    if (layer.nodes.filter(n => n.type === 'chest').length < 1) issues.push(`层 ${li + 1} 缺少物资格（宝箱格）`);
+    if (layer.nodes.some(n => (n.type === 'fire' || n.type === 'shop') && n.x < 2)) issues.push(`层 ${li + 1} 火堆/补给站贴着入口`);
   });
   for (let li = 0; li < layers.length - 1; li++) { const door = layers[li].doors?.[0]; const next = layers[li + 1];
     if (!door || door.toLayer !== li + 1 || !layers[li].nodes[door.at]?.next.some(([l, i]) => l === li + 1 && i === door.arriveAt) || !next.nodes[door.arriveAt]?.next.some(([l, i]) => l === li && i === door.at)) issues.push(`层间门 ${li} 非法`); }
   return { ok: issues.length === 0, issues };
 }
 function build(seed) { const layers = TARGETS.map((target, li) => makeLayer(li, target, WIDTHS[li], rng(`${seed}:layer:${li}`)));
-  // exit: 特殊层（最外层的环间门）可免费撤离——老板 2026-09-09 #5：其它层只能继续深入
-  for (let li = 0; li < 4; li++) { const from = layers[li].nodes[layers[li].exit]; const to = layers[li + 1].nodes[layers[li + 1].entry];
-    addEdge(from, to); layers[li].doors = [{ pair: `p${li + 1}`, at: from.idx, toLayer: li + 1, arriveAt: to.idx, exit: li === 0 }]; }
-  layers[4].doors = []; return layers; }
+  // 撤离只发生在第三层（紧急撤离点）与第四层（击败首脑后的终局撤离点）——
+  // 环间门不再挂 exit 免费撤离标记，一律只向深处通行
+  for (let li = 0; li < 3; li++) { const from = layers[li].nodes[layers[li].exit]; const to = layers[li + 1].nodes[layers[li + 1].entry];
+    addEdge(from, to); layers[li].doors = [{ pair: `p${li + 1}`, at: from.idx, toLayer: li + 1, arriveAt: to.idx, exit: false }]; }
+  layers[3].doors = []; return layers; }
 export function generateLayeredMap(seed = 0) { let lastIssues = [];
   for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) { const layers = build(`${seed}:attempt:${attempt}`); const result = quality(layers); if (result.ok)
     return { seed, generatorVersion: GENERATOR_VERSION, layoutVersion: LAYOUT_VERSION, layers }; lastIssues = result.issues; }

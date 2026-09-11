@@ -356,19 +356,20 @@ import { Random } from './random.js';
       // overlay（ovBody 无其他写入点），按内容缓存一次，免去每帧全子树 querySelector
       this._hasBattleStage = bodyHtml.includes('battle-stage');
       const card = this.el.ovBody.parentElement;
-      card.classList.toggle('wide', mode === true || mode === 'wide' || mode === 'chest');
+      card.classList.toggle('wide', mode === true || mode === 'wide' || mode === 'chest' || mode === 'discover');
       card.classList.toggle('chest', mode === 'chest');   // 战利品/开箱浮层专属类（2026-09-09 重做放大）
+      card.classList.toggle('discover', mode === 'discover');   // 发现浮层（2026-09-09 留言 #12：虚化背景而非纯黑）
       card.classList.toggle('battle', mode === 'battle');
       card.classList.toggle('bag-modal', mode === 'bag');
       card.classList.toggle('bag-page', mode === 'bagpage');
       card.classList.toggle('page', mode === 'page');
       card.classList.toggle('scene', mode === 'scene');
       // 宝箱浮层悬在原画面上：即使处于房间结算流也不吃全屏 room 样式
-      card.classList.toggle('room', this._roomActive && mode !== 'page' && mode !== 'bag' && mode !== 'bagpage' && mode !== 'chest');
+      card.classList.toggle('room', this._roomActive && mode !== 'page' && mode !== 'bag' && mode !== 'bagpage' && mode !== 'chest' && mode !== 'discover');
       // 战斗弹窗也按房间页处理：主循环据此冻结棋盘渲染/暂停壁纸解码，
       // 并关掉 #overlay 的大面积 backdrop blur（非房间路径开战时的卡顿源）
-      // 宝箱浮层例外：不吃 room-view，保留暗纱+blur 衬托悬浮面板
-      this.el.overlay.classList.toggle('room-view', mode === 'battle' || (this._roomActive && mode !== 'chest'));
+      // 宝箱/发现浮层例外：不吃 room-view，保留暗纱+blur 衬托悬浮面板
+      this.el.overlay.classList.toggle('room-view', mode === 'battle' || (this._roomActive && mode !== 'chest' && mode !== 'discover'));
       this.el.overlay.classList.toggle('bag-full', mode === 'bagpage');
       this.el.overlay.classList.toggle('opaque', mode === 'page' || mode === 'bagpage');
       // 已打开状态下且弹窗模式变化（场景→战斗→结算等）时重播滑入动画；

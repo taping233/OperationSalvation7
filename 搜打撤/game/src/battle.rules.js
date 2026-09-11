@@ -36,6 +36,8 @@ function hasEnemyEffect(card) {
 // 其余招式（纯增益、召唤、摸牌、资源类）拖到敌我中间即可打出
 function targetSideFor(card, damageTypes) {
   const desc = String(card.desc || '');
+  // 需求 #18（2026-09-09）：装备装配要指向自己——拖到左侧「你」的立绘上穿戴
+  if (card.type === '装备') return 'self';
   const isMove = damageTypes.includes(card.type);
   if (isMove ? hasEnemyEffect(card) : (card.dmgType === 'attack' || isAreaEffect(card))) return 'enemy';
   if (+(card.heal || 0) > 0 || +(card.armor || 0) > 0 || SELF_TARGET_PATTERN.test(desc)) return 'self';

@@ -63,7 +63,12 @@ import * as Combat from './combat.js';
   let consumeFireballN = 0;  // 「每消耗 1 张卡牌施放 N 次火球」（深渊降焰，降临者英雄）
   let lastDrawnUids = [];    // 最近一次抽牌进手的 uid（万剑归宗「直接释放其中武术」用）
   let lastPlayedType = null; // 上一张打出的卡牌类型（连击箭「上一张是武术→0费」）
-  let selPool = [], selShaN = 0, sel = new Set(), lastDeckSel = [], selectingDeck = false;
+  let playedMartialThisTurn = 0; // 本回合已打出的武术数（追斩「每打出一张其他武术→费用-1」，回合开始清零）
+  let playedMovesThisTurn = 0;   // 本回合已打出的招式数＝武术+法术（连续射击「每打出一张其他招式→2点固定伤害」，回合开始清零）
+  let selPool = [], selShaN = 0, sel = new Set(), lastDeckSel = [], selectingDeck = false, selDeckMax = 15;
+  // 「对战开始时」装备（2026-09-10 留言 #35）：不再持有即全体自动生效——
+  // 编组界面单列一区由玩家勾选（默认不选），只有勾选的开战装备才在 BOSS 战开始时装配。
+  let selEquipPool = [], selEquips = new Set(), lastEquipSel = [];
   // —— 2026-09-09 机制审计补实装（Q1-Q8 老板定向批次）——
   let allies = [];               // 随从位（征召）：优先替玩家承伤、每回合自动攻击
   let growthNames = new Set();   // 「回合开始时本牌伤害+N」卡名（充能火球）
@@ -78,6 +83,8 @@ import * as Combat from './combat.js';
   let cardOverrides = new Map(); // 不变应万变：uid → 战斗内替身卡（不污染背包原卡）
   let pendingItem = null;        // 药水栏：待点选敌人的道具 {uid, card}（瞬态选择，不入存档）
   let equipped = [];             // 已穿戴装备（2026-09-09 老板 #9）：{uid, card, used}，used = 限定技能是否已用
+  let freeCast = new Set();      // 需求 #17：「直接释放」的临时卡 uid（打出免费用，仍需选目标）
+  let slamPending = false;       // 需求 #9：背包砸击点选目标中（2 费 · 4 点固定伤害 · 不消耗卡牌）
 
   const R = () => SDT.MAP.rules;
   const alive = () => foes.filter(f => !f.dead);
@@ -158,6 +165,9 @@ import * as Combat from './combat.js';
     granted.push({ uid, card: { ...tpl } });
     hand.push(uid);
     cardAnims.push({ kind: 'draw', uid, name: tpl.name || '' });
+    // 置入手牌视同「抽到」（2026-09-11 英雄卡审计）：万剑归宗普通战分支走
+    // grantStarterAttack→addTempCard，此前不进 lastDrawnUids，「直接释放其中武术」永远放 0 张
+    lastDrawnUids.push(uid);
     return uid;
   }
   // 创造一张牌直接插入牌库（「将 x 洗入牌库」用；不进手牌，战后随临时卡消散）
@@ -165,6 +175,7 @@ import * as Combat from './combat.js';
     const uid = 'btd' + Date.now().toString(36) + (tmpSeq++);
     granted.push({ uid, card: { ...tpl } });
     drawPile.push(uid);
+    cardAnims.push({ kind: 'shuffle', name: tpl.name || '' });   // 洗入牌动画事件（2026-09-11 需求）
     return uid;
   }
   function grantSha(n) {
@@ -256,6 +267,8 @@ import * as Combat from './combat.js';
     allCards: () => SDT.Cards.all(),
     // —— 抉择面板（2026-09-08 人工 N 选一）：选项入队并弹出面板 ——
     queueChoice: job => { choiceQueue.push(job); processChoice(); },
+    // —— 装备嵌入句「回合开始 -N 血」（灭魔之剑）注册为每回合开始的延迟段（留言 #10）——
+    registerTurnStartText: (text, cardName) => { delayed.push({ text, cardName, repeat: true }); },
     setStealthStrike: v => { stealthStrike = !!v; },
     setNextSpellTwice: n => { nextSpellTwice = n || 0; },
     shuffleDeck: () => { drawPile = shuffle(drawPile); return drawPile.length; },
@@ -271,7 +284,8 @@ import * as Combat from './combat.js';
     getPlayerClass: () => G.myClass || null,
     getPlayerCaster: () => ({
       atk: G.atk,
-      spellPower: (G.spellPower || 0) + ((pstat && pstat.status.spellUp) || 0),
+      // spellUp 不预加：status 里带着，combat.dealDamage 只加一次（2026-09-09 修复双重计数）
+      spellPower: G.spellPower || 0,
       status: pstat ? pstat.status : undefined,
     }),
     foeIndexOf: t => foes.indexOf(t),
@@ -315,7 +329,7 @@ import * as Combat from './combat.js';
       return o ? SDT.Cards.sellPrice(o.card) : 0;
     },
     dealAoeFixed: n => {
-      getAlive().slice().forEach(t => {
+      alive().slice().forEach(t => {   // 本模块函数名是 alive（此前误写 getAlive，气功波价格伤害一触发即崩）
         const r = Combat.dealDamage({ atk: G.atk }, t, n, Combat.TYPES.FIXED);
         if (r.dealt > 0) floats.push({ unit: foeIdx(t), text: '-' + r.dealt, cls: 'dmg' });
       });
@@ -329,6 +343,8 @@ import * as Combat from './combat.js';
     registerGrowthCard: card => { if (card && card.name) growthNames.add(card.name); },
     unlockSeal: name => tryUnlockSeal(name),
     randomAcquired: card => fireCatGift(card),
+    handCurseSpecs,
+    queueSwapCostDiscover,
   });
 
   const findCard = (uid) => {
@@ -349,12 +365,76 @@ import * as Combat from './combat.js';
     if (meleeCost1 && card.type === '武术') return 1;
     const d = String(card.desc || '');
     if (/上一张牌是武术/.test(d) && lastPlayedType === '武术') return 0;
+    // 追斩（2026-09-10 需求）：「本回合每打出一张其他武术，费用-1」——按本回合已打出
+    // 的武术数折价（招式=武术+法术，但追斩按描述只数武术），最低 0 费
+    if (/本回合每打出一张其他武术/.test(d)) return Math.max(0, (+card.cost || 0) - playedMartialThisTurn);
     if (/护甲为\s*0[.。，,]?\s*本牌变为\s*0\s*费/.test(d) && pdef && (pdef.armor || 0) === 0) return 0;
     return card.cost;
   };
 
   // 群体伤害判定（设计者：群体伤害不用选目标）
   const isAOE = isAreaEffect;
+
+  // ---------- 诅咒之刃（2026-09-10 需求）：收集手牌招式的诅咒 ----------
+  // 招式＝武术+法术（设计者定版）。逐条扫描描述里的诅咒句式（与效果引擎的
+  // 附加/施加句式同口径），层缺省按 1、破甲/禁疗按引擎缺省 2 回合。
+  const CURSE_SCAN = [
+    { key: 'bleed',   re: /(?:附加|施加)\s*(?:(\d+)\s*层?)?\s*流血/, def: 1 },
+    { key: 'poison',  re: /(?:附加|施加)\s*(?:(\d+)\s*层)?\s*中毒/, def: 1 },
+    { key: 'burn',    re: /(?:附加|施加|攻击并)\s*(?:\d+\s*层?\s*)?灼烧/, def: 1 },
+    { key: 'freeze',  re: /附加冰冻|冰冻所有|冰冻\s*(?:\d+|[一两二三四五])?\s*名|冻结/, def: 1 },
+    { key: 'silence', re: /沉默/, def: 1 },
+    { key: 'abreak',  re: /破甲/, def: 2 },
+    { key: 'healban', re: /禁疗/, def: 2 },
+  ];
+  function curseSpecsOfDesc(desc) {
+    desc = String(desc || '');
+    const out = [];
+    CURSE_SCAN.forEach(({ key, re, def }) => {
+      const m = desc.match(re);
+      if (m) out.push({ key, n: Math.max(1, +(m[1] || def) || def) });
+    });
+    return out;
+  }
+  // 合并当前手牌所有招式的诅咒：可叠加诅咒（流血/中毒）层数累加，其余同 key 取最高
+  function handCurseSpecs() {
+    const merged = new Map();
+    hand.forEach(u => {
+      const o = findCard(u);
+      const c = o && o.card;
+      if (!c || !['武术', '法术'].includes(c.type)) return;
+      curseSpecsOfDesc(c.desc).forEach(s => {
+        const stack = Combat.CURSE_META[s.key] && Combat.CURSE_META[s.key].stack;
+        merged.set(s.key, stack ? (merged.get(s.key) || 0) + s.n : Math.max(merged.get(s.key) || 0, s.n));
+      });
+    });
+    return [...merged.entries()].map(([key, n]) => ({ key, n }));
+  }
+
+  // 迷之匣「限定技能：发现两张随机招式，交换其费用」（2026-09-10 需求）：
+  // 排队两次「三选一」发现（招式＝武术+法术，随机池同口径），两张都置入手牌后
+  // 由 swapCardCosts 互换费用。pair 数组被两次发现任务共享，作为累计载体。
+  function queueSwapCostDiscover() {
+    const pool = SDT.Cards.all().filter(c => ['武术', '法术'].includes(c.type) && SDT.Cards.isRandomObtainable(c));
+    if (pool.length < 2) {
+      G.log('[[icon:cross]] <b>迷之匣</b>：卡牌库中没有足够的随机招式可供发现', 'warn');
+      return;
+    }
+    const pair = [];
+    const pred = c => ['武术', '法术'].includes(c.type);
+    discoverQueue.push({ n: 1, pred, act: 'swapCost', swapPair: pair });
+    discoverQueue.push({ n: 1, pred, act: 'swapCost', swapPair: pair });
+    G.log('[[icon:question]] <b>迷之匣</b>：发现两张随机招式——它们打出前会交换费用', 'sys');
+  }
+  function swapCardCosts(uidA, uidB) {
+    const a = findCard(uidA), b = findCard(uidB);
+    if (!a || !b) return;
+    const costA = Math.max(0, +(b.card.cost || 0));
+    const costB = Math.max(0, +(a.card.cost || 0));
+    cardOverrides.set(uidA, { ...a.card, cost: costA });
+    cardOverrides.set(uidB, { ...b.card, cost: costB });
+    G.log(`[[icon:sparkles]] <b>交换费用</b>：【${esc(a.card.name)}】费用变为 <b>${costA}</b>，【${esc(b.card.name)}】费用变为 <b>${costB}</b>`, 'sys');
+  }
 
   // ---------- 生效时刻 / 持续时间 / 生效条件（设计者 2026-09-02 定版） ----------
   // 卡牌描述按句切分（。；；换行），每句归入一种生效方式：
@@ -473,6 +553,16 @@ import * as Combat from './combat.js';
         const tg = desc.match(/触发\s*(\d+)\s*次/);
         if (tg && !/注能\s*[（(][^）)]*[）)][^。]*?触发/.test(desc)) times = Math.max(1, +tg[1]);
       }
+      // 连续射击（2026-09-10 需求）：「本回合每打出一张其他招式，造成2点固定伤害」——
+      // 招式＝武术+法术（设计者 2026-09-10 定版）。打出本牌时按本回合已打出的招式数 n
+      // 触发 n 次；n=0 时不造成伤害。计数器在结算后自增（execPlay），所以读到的不含本牌；
+      // 注能牺牲品不算「打出」，万剑归宗等免费释放的招式会计入。
+      if (/本回合每打出一张其他招式/.test(desc)) {
+        times = playedMovesThisTurn;
+        G.log(times > 0
+          ? `[[icon:swords]] <b>${esc(card.name)}</b>：本回合已打出 ${times} 张招式，固定伤害触发 ${times} 次`
+          : `[[icon:cross]] <b>${esc(card.name)}</b>：本回合还没有打出其他招式，不造成伤害`, times > 0 ? 'sys' : 'dim');
+      }
       // 墓地增伤（雷殛：墓地中每有 1 张法术牌，伤害 +1；普通战斗无墓地不生效）
       const graveM = desc.match(/墓地中每有\s*1\s*张(武术|法术|装备|道具|资源)牌[^。；]*?伤害\s*\+\s*(\d+)/);
       if (graveM && mode === 'boss') {
@@ -546,6 +636,13 @@ import * as Combat from './combat.js';
       G.log(`[[icon:cross]] <b>${esc(card.name)}</b> 的技能效果被沉默封印（只剩攻击生效，持续 ${pstat.status.silence} 回合）`, 'warn');
       return;
     }
+    // 法力奔涌（2026-09-10 需求 #37/#38）：「对随机敌人释放4个随机法术（这些随机法术默认已注能）」。
+    // 识别加名称/ID 兜底——旧档背包里的快照克隆可能带着旧措辞描述，正则失配曾导致整卡无效果。
+    const surgeM = desc.match(/对随机敌人释放\s*(\d+|四)\s*个随机法术/);
+    if (surgeM || card.id === 'cc-mana-surge' || /法力奔涌/.test(String(card.name || ''))) {
+      castRandomSpells(surgeM ? (surgeM[1] === '四' ? 4 : Math.max(1, +surgeM[1])) : 4, card.id);
+      did = true;
+    }
     // —— 立即生效句（逐句结算：句与句不再用「，」拼接——拼接曾污染花开两面的抉择选项，
     //     也让 A 句未识别时吞掉 B 句的独立结算机会）——
     // 例外：神灯类「抉择：1° …；2° …」的编号续句（^\d° 开头）必须并回抉择主句，
@@ -596,6 +693,30 @@ import * as Combat from './combat.js';
     if (!did && !skillOnly) G.log(`[[icon:play]] <b>${esc(card.name)}</b>：该效果在 M1 后续实装（占位）`, 'dim');
   }
 
+  // 法力奔涌的随机法术释放（2026-09-10 需求）：
+  // 池子与「发现/随机获取」同口径（isRandomObtainable：排除 初始/职业/衍生/棱彩与 unrandom），
+  // 并排除本牌自身，避免「释放随机法术」抽到自己无限递归。
+  // 每发对随机存活敌人以 infused=true 直接结算——随机法术的「注能(N)：…」加成句照常生效，
+  // 且无需消耗手牌燃料（＝"默认已注能"）。
+  function castRandomSpells(n, sourceId) {
+    const pool = SDT.Cards.all().filter(c =>
+      c.type === '法术' && c.id !== sourceId && SDT.Cards.isRandomObtainable(c));
+    if (!pool.length) {
+      G.log('[[icon:cross]] <b>法力奔涌</b>：卡牌库中没有可释放的随机法术', 'warn');
+      return;
+    }
+    for (let i = 0; i < n; i++) {
+      sweepDead();
+      const targets = alive();
+      if (!targets.length) break;   // 敌人全灭则停止余下的释放
+      const spell = pool[Math.floor(Random.random('battle') * pool.length)];
+      const t = targets[Math.floor(Random.random('battle') * targets.length)];
+      G.log(`[[icon:sparkles]] <b>法力奔涌</b>（第 ${i + 1}/${n} 发）：对 <b>${esc(t.name)}</b> 释放随机法术【<b>${esc(spell.name)}</b>】（默认已注能）`, 'loot');
+      resolveCard(spell, t, true, 0, null);
+    }
+    sweepDead();
+  }
+
   // ---------- 已穿戴装备（2026-09-09 老板 #9）----------
   // 打出装备卡即视为穿戴：角色信息区列出装备与说明；带「限定技能：」的装备额外提供一个
   // 可点击技能（每场一次），技能文本交真实执行器结算（各装备句式早已实装）。
@@ -608,7 +729,42 @@ import * as Combat from './combat.js';
     if (!card || card.type !== '装备') return;
     if (equipped.some(e => e.uid === uid)) return;
     equipped.push({ uid, card, used: false });
-    G.log(`[[icon:tools]] 穿戴【<b>${esc(card.name)}</b>】${equipSkillText(card) ? '——限定技能已就绪' : ''}`, 'ok');
+    G.log(`[[icon:tools]] 装配【<b>${esc(card.name)}</b>】（${equipped.filter(e => !e.passive).length}/${equipCap()} 件）${equipSkillText(card) ? '——限定技能已就绪' : ''}`, 'ok');
+    syncCurseCondEquips();   // 条件装备（深海印记类）穿上时即按当前诅咒状态核算
+  }
+  // 需求 #18（2026-09-09）：装备最多同时装配 2 件；圣剑誓约·亚瑟「装备上限 +1」生效
+  function equipCap() {
+    let bonus = 0;
+    (G.ownedCards || []).forEach(o => {
+      const m = o.card && String(o.card.desc || '').match(/装备上限\s*\+\s*(\d+)/);
+      if (m) bonus += +m[1];
+    });
+    return 2 + bonus;
+  }
+
+  // ---------- 条件装备「诅咒状态下，攻 +N，法伤 +M」（深海印记/深海咒印）----------
+  // 2026-09-09 留言 #2：按一次性结算时「未诅咒时穿=永不生效、诅咒后穿=永久增益」都与卡面
+  // 「诅咒状态下」语义不符。改为穿戴期间动态核算：身负诅咒 → 加成生效，解除 → 自动扣除。
+  const CURSE_COND_EQUIP = /诅咒状态[下时]/;
+  function syncCurseCondEquips() {
+    if (!equipped || !equipped.length) return;
+    const cursed = Combat.hasCurse(pstat);
+    equipped.forEach(e => {
+      const desc = String(e.card && e.card.desc || '');
+      if (e.card.type !== '装备' || !CURSE_COND_EQUIP.test(desc) || equipSkillText(e.card)) return;
+      const atkM = desc.match(/攻\s*\+\s*(\d+)/) || desc.match(/攻击\s*\+\s*(\d+)/);
+      const spM = desc.match(/法伤\s*\+\s*(\d+)/);
+      const want = cursed ? { atk: atkM ? +atkM[1] : 0, sp: spM ? +spM[1] : 0 } : { atk: 0, sp: 0 };
+      const had = e._condApplied || { atk: 0, sp: 0 };
+      const dAtk = want.atk - had.atk, dSp = want.sp - had.sp;
+      if (!dAtk && !dSp) return;
+      if (dAtk) Combat.addBlessing(pstat, 'atkUp', dAtk);
+      if (dSp) Combat.addBlessing(pstat, 'spellUp', dSp);
+      e._condApplied = want;
+      G.log(want.atk || want.sp
+        ? `[[icon:crystal]] <b>${esc(e.card.name)}</b>：身负诅咒，条件加成生效（攻 +${want.atk}${want.sp ? `，法伤 +${want.sp}` : ''}）`
+        : `[[icon:cross]] <b>${esc(e.card.name)}</b>：诅咒解除，条件加成收回`, want.atk || want.sp ? 'ok' : 'dim');
+    });
   }
   function useEquipSkill(uid) {
     if (busy || infusing || discovering || choosing || handSelecting) return;
@@ -627,28 +783,34 @@ import * as Combat from './combat.js';
     requestBattleRender();
   }
   // ---------- 开战被动（2026-09-09 老板定向 Q1）：描述带「对战开始时」的装备卡，持有即自动生效 ----------
+  // 2026-09-10 留言 #35 定版改为「勾选生效」：编组时玩家勾选哪些开战装备，战斗开始才装配哪些。
   const isBattleStartEquip = (card) => !!card && card.type === '装备' && /对战开始时/.test(String(card.desc || ''));
   function applyBattleStartPassives() {
-    const equips = (G.ownedCards || []).filter(o => o.card && isBattleStartEquip(o.card)).map(o => o.card);
-    // 开战被动同样算「已穿戴」——角色信息区一并列出（老板 #9）
-    (G.ownedCards || []).forEach(o => {
-      if (o.card && isBattleStartEquip(o.card) && !equipped.some(e => e.uid === o.uid)) {
-        equipped.push({ uid: o.uid, card: o.card, used: false });
-      }
+    // 对战开始时的装备只能在 BOSS 战中使用（2026-09-10 需求）：普通战斗不再自动生效
+    if (mode !== 'boss') return;
+    const chosen = (G.ownedCards || []).filter(o => o.card && isBattleStartEquip(o.card) && selEquips.has(o.uid));
+    // 开战被动同样算「已穿戴」——角色信息区一并列出（老板 #9）；
+    // passive=true：不占用 #18 的 2 件装配上限（勾选即生效，未经打出装配）
+    chosen.forEach(o => {
+      if (!equipped.some(e => e.uid === o.uid)) equipped.push({ uid: o.uid, card: o.card, used: false, passive: true });
     });
-    if (!equips.length) return;
-    G.log(`[[icon:bolt]] 开战被动：${equips.map(c => esc(c.name)).join('、')} 自动生效`, 'ok');
-    equips.forEach(card => {
-      const parts = splitClauses(String(card.desc || ''));
+    if (!chosen.length) return;
+    G.log(`[[icon:bolt]] 开战被动：${chosen.map(o => esc(o.card.name)).join('、')} 自动生效`, 'ok');
+    chosen.forEach(o => {
+      const parts = splitClauses(String(o.card.desc || ''));
       const text = parts.immediate.join('，');
-      if (text) applyTextEffects(card, text, alive()[0] || null, {});
+      if (text) applyTextEffects(o.card, text, alive()[0] || null, {});
     });
   }
-  // 混沌之眼「牌库上限 +N」：BOSS 编组可带张数加成（按持有计算）
-  function deckCapBonus() {
-    const e = (G.ownedCards || []).find(o => o.card && isBattleStartEquip(o.card) && o.card.name === '混沌之眼');
-    const m = e ? String(e.card.desc).match(/牌库上限\s*\+\s*(\d+)/) : null;
-    return m ? +m[1] : 0;
+  // 混沌之眼「牌库上限 +N」：BOSS 编组可带张数加成（2026-09-10 #35 起按「编组勾选」计算）
+  function deckCapBonus(uids) {
+    let bonus = 0;
+    (G.ownedCards || []).forEach(o => {
+      if (!o.card || !isBattleStartEquip(o.card) || !(uids || selEquips).has(o.uid)) return;
+      const m = String(o.card.desc).match(/牌库上限\s*\+\s*(\d+)/);
+      if (m) bonus += +m[1];
+    });
+    return bonus;
   }
   // 迷之匣「对战开始时，将 2 张杀替换为随机卡牌」
   function replaceShaInDeck(n) {
@@ -747,7 +909,7 @@ import * as Combat from './combat.js';
           if (!t) break;
           const r = Combat.dealDamage({
             atk: G.atk,
-            spellPower: (G.spellPower || 0) + ((pstat && pstat.status.spellUp) || 0),
+            spellPower: G.spellPower || 0,   // spellUp 由 status 传入只算一次（2026-09-09 修复双重计数）
             status: pstat.status,
           }, t, 4, Combat.TYPES.SPELL);
           if (r.dealt > 0) floats.push({ unit: foeIdx(t), text: '-' + r.dealt, cls: 'dmg' });
@@ -849,17 +1011,25 @@ import * as Combat from './combat.js';
     infuseFuels = 0; sealUnlocked = false; extraTurn = false; deathSave = 0;
     killAtkUp = 0; poisonOnSpell = false; zeroFeeUntil = new Map(); cardOverrides = new Map();
     pendingItem = null;
+    freeCast = new Set();
+    slamPending = false;
     equipped = [];
+    playedMartialThisTurn = 0;   // 追斩计数跨战不残留
+    playedMovesThisTurn = 0;     // 连续射击计数跨战不残留
   }
 
   // ---------- BOSS战：编组牌库 ----------
+  // 2026-09-09 玩法定版：必选 15 张（招式/装备/能力卡）起步；勾选混沌之眼开战装备可多选 5 张（上限 20）。
   function prepareDeckSelection() {
-    const need = R().bossDeckSize + deckCapBonus();   // 混沌之眼「牌库上限+5」（Q1 开战被动按持有生效）
+    selEquipPool = (G.ownedCards || []).filter(o => o.card && isBattleStartEquip(o.card));
+    // 上次勾选的记忆优先；第一次进编组界面默认全不勾——带不带开战装备由玩家自己决定（留言 #35）
+    selEquips = new Set(lastEquipSel.filter(uid => selEquipPool.some(entry => entry.uid === uid)));
+    selDeckMax = R().bossDeckSize + deckCapBonus();   // 混沌之眼「牌库上限+5」（勾选后才计入）
     selPool = G.ownedCards.filter(o => !['道具', '资源', '事件', '生物'].includes(o.card.type) && o.card.name !== '初始攻击' && !isBattleStartEquip(o.card));
     const shas = G.ownedCards.filter(o => o.card.name === '初始攻击');
     selShaN = Math.min(shas.length, R().starterSha);
     sel = new Set(lastDeckSel.filter(uid => selPool.some(entry => entry.uid === uid)));
-    const cap = Math.min(need, selPool.length);
+    const cap = Math.min(selDeckMax, selPool.length);
     while (sel.size > cap) sel.delete(sel.values().next().value);
     selectingDeck = true;
     requestBattleRender();
@@ -867,7 +1037,18 @@ import * as Combat from './combat.js';
 
   function toggleDeckCard(uid) {
     if (!selectingDeck || !selPool.some(entry => entry.uid === uid)) return;
+    if (!sel.has(uid) && sel.size >= selDeckMax) return;   // 混沌之眼上限之外不可再编入
     if (sel.has(uid)) sel.delete(uid); else sel.add(uid);
+    requestBattleRender();
+  }
+
+  // 勾选/取消「对战开始时」开战装备（留言 #35）：勾选混沌之眼会即时抬高牌库上限，取消则回落并裁掉超编的牌
+  function toggleDeckEquip(uid) {
+    if (!selectingDeck || !selEquipPool.some(entry => entry.uid === uid)) return;
+    if (selEquips.has(uid)) selEquips.delete(uid); else selEquips.add(uid);
+    selDeckMax = R().bossDeckSize + deckCapBonus();
+    const cap = Math.min(selDeckMax, selPool.length);
+    while (sel.size > cap) sel.delete(sel.values().next().value);
     requestBattleRender();
   }
 
@@ -878,10 +1059,12 @@ import * as Combat from './combat.js';
   }
 
   function beginBoss() {
-    const need = Math.min(R().bossDeckSize + deckCapBonus(), selPool.length);
-    if (sel.size < need) return;
+    // 2026-09-10 留言 #34：背包可编卡牌不足 15 张时按实际可编数放行（视图侧同口径），
+    // 否则「开始战斗」按钮永远灰着、点击也无任何反应
+    if (sel.size < Math.min(R().bossDeckSize, selPool.length)) return;
     const shas = G.ownedCards.filter(o => o.card.name === '初始攻击').slice(0, R().starterSha).map(o => o.uid);
     lastDeckSel = [...sel];
+    lastEquipSel = [...selEquips];
     selectingDeck = false;
     drawPile = shuffle([...sel].concat(shas));
     hand = []; discard = []; granted = []; played = []; consumed = []; grave = [];
@@ -934,20 +1117,21 @@ import * as Combat from './combat.js';
     if (why) { G.log(`[[icon:cross]] 【${esc(card.name)}】无法打出：${why}`, 'warn'); return; }
     const effCost = effCostOf(card, uid);
     if (effCost > energy) { G.log(`[[icon:bolt]] 能量不足：【${esc(card.name)}】需要 ${effCost} 点能量`, 'warn'); return; }
-    const infN = infuseOf(card);
-    if (infN > 0) {
-      const others = hand.filter(h => h !== uid);
-      if (others.length < infN) {
-        G.log(`[[icon:flask]] 手牌不足：【${esc(card.name)}】注能(${infN}) 需要消耗 ${infN} 张手牌，当前只有 ${others.length} 张可选`, 'warn');
+    // 需求 #15（2026-09-09）：注能卡可以直接打出（弱效果）——注能流程改由卡面上的
+    // 「注能」角标触发（beginInfuse：选 N 张手牌消耗后强化打出）
+    // 需求 #18：装备最多同时装配 2 件（圣剑誓约·亚瑟「装备上限 +1」生效），超编拒打
+    if (card.type === '装备') {
+      const cap = equipCap();
+      const worn = equipped.filter(e => !e.passive).length;
+      if (worn >= cap) {
+        G.log(`[[icon:tools]] 最多同时装配 <b>${cap}</b> 件装备（已装配 ${worn} 件）——本场无法再穿戴`, 'warn');
         return;
       }
-      infusing = { uid, card, need: infN, picked: new Set() };
-      requestBattleRender();
-      return;
     }
     // 目标校验：指向性卡必须拖到对应目标（点卡只是锁定提示，不会打出）
     const need = targetSide(card);
     let target = null;
+    const isFree = freeCast.has(uid);
     if (need === 'enemy') {
       if (side == null || side === 'self') { pendingTarget = { uid, card }; battleState = beginTargeting(battleState, uid, alive().map(foe => foe.id)); pendingHint = ''; requestBattleRender(); return; }
       target = foes[+side];
@@ -959,13 +1143,28 @@ import * as Combat from './combat.js';
     }
     pendingTarget = null;
     pendingHint = '';
+    freeCast.delete(uid);
     // 「杀化为X」战斗规则：打出的初始攻击以目标卡形态结算（uid 沿用，弃牌簿记不变）
     let playCard = card;
     if (shaTransform && (card.name === '初始攻击' || card.name === '杀')) {
       const tpl = SDT.Cards.all().find(c => c.name === shaTransform);
       if (tpl) playCard = { ...tpl };
     }
-    queueCardExecution(uid, playCard, [], target);
+    queueCardExecution(uid, playCard, [], target, isFree);
+  }
+
+  // 需求 #17（2026-09-09）：「直接释放」的卡免费打出（freeCost），但仍要选目标——
+  // 多个敌人存活时先进入指向流程（拖到敌人身上 / 点选），单敌自动指向
+  function freeCastTarget(uid, card) {
+    const need = targetSide(card);
+    if (need === 'enemy' && alive().length > 1) {
+      pendingTarget = { uid, card };
+      battleState = beginTargeting(battleState, uid, alive().map(foe => foe.id));
+      pendingHint = `直接释放：把【${card.name}】拖到一名敌人身上（不消耗费用）`;
+      requestBattleRender();
+      return false;   // 目标未定，暂不执行
+    }
+    return true;   // 单敌 / 自身 / 无目标：直接执行
   }
 
   // v0.32 堆叠手牌：点击的是一叠同名卡的代表性 uid——选中/取消该叠中的一张
@@ -990,6 +1189,25 @@ import * as Combat from './combat.js';
     requestBattleRender();
   }
   function cancelInfuse() { infusing = null; requestBattleRender(); }
+  // 需求 #15：注能入口——卡面上的「注能」角标触发（打出本体不再强制注能）
+  function beginInfuse(uid) {
+    if (busy || infusing || discovering || choosing || viewingGrave) return;
+    if (!hand.includes(uid)) return;
+    const entry = findCard(uid);
+    if (!entry) return;
+    const card = entry.card;
+    const infN = infuseOf(card);
+    if (infN <= 0) return;
+    const effCost = effCostOf(card, uid);
+    if (effCost > energy) { G.log(`[[icon:bolt]] 能量不足：【${esc(card.name)}】注能打出需要 ${effCost} 点能量`, 'warn'); return; }
+    const others = hand.filter(h => h !== uid);
+    if (others.length < infN) {
+      G.log(`[[icon:flask]] 手牌不足：【${esc(card.name)}】注能(${infN}) 需要消耗 ${infN} 张手牌，当前只有 ${others.length} 张可选`, 'warn');
+      return;
+    }
+    infusing = { uid, card, need: infN, picked: new Set() };
+    requestBattleRender();
+  }
   function confirmInfuse() {
     if (!infusing || infusing.picked.size !== infusing.need) return;
     const { uid, card } = infusing;
@@ -1046,7 +1264,7 @@ import * as Combat from './combat.js';
           if (!t) break;
           const r = Combat.dealDamage({
             atk: G.atk,
-            spellPower: (G.spellPower || 0) + ((pstat && pstat.status.spellUp) || 0),
+            spellPower: G.spellPower || 0,   // spellUp 由 status 传入只算一次（2026-09-09 修复双重计数）
             status: pstat.status,
           }, t, 4, Combat.TYPES.SPELL);
           if (r.dealt > 0) floats.push({ unit: foeIdx(t), text: '-' + r.dealt, cls: 'dmg' });
@@ -1095,6 +1313,10 @@ import * as Combat from './combat.js';
     }
     sweepDead();
     lastPlayedType = card.type;   // 供「上一张牌是武术→0费」类条件费用判定
+    // 打出侧计数（结算后自增——「其他招式/其他武术」不含正在打出的本牌）：
+    // 招式＝武术+法术（设计者 2026-09-10 定版）连续射击；追斩只数武术
+    if (card.type === '武术' || card.type === '法术') playedMovesThisTurn++;
+    if (card.type === '武术') playedMartialThisTurn++;
     if (!alive().length) { finish(true); return; }
     processChoice();
     processDiscoverQueue();
@@ -1145,9 +1367,14 @@ import * as Combat from './combat.js';
       amt *= 2;
       G.log(`[[icon:runner]] <b>破隐一击</b>：从潜行中发动，伤害翻倍（${amount} → ${amt}）`, 'ok');
     }
-    // 法伤加成（含祝福）；「受法伤加成翻倍」（爆燃火球）在此翻倍
+    // 法伤加成（含祝福）；「受法伤加成翻倍」（爆燃火球）在此翻倍。
+    // 2026-09-09 修复：spellUp 不再预加进 spellPower——dealDamage 会从 status 再加一次，
+    // 此前法术强化被双重计数；现在 bonus 一次性算清并置空 status.spellUp，卡面显示口径一致
     let sp = (G.spellPower || 0) + ((pstat && pstat.status.spellUp) || 0);
     if (card && /受法伤加成翻倍/.test(String(card.desc || ''))) sp *= 2;
+    const statusForHit = (pstat && pstat.status)
+      ? Object.assign({}, pstat.status, { spellUp: 0 })
+      : { spellUp: 0 };
     // 「对冰冻角色伤害 +N」（寒冰剑）：目标被冰冻时追加
     const frzM = card && String(card.desc || '').match(/对冰冻[^。]*?伤害\s*\+\s*(\d+)/);
     if (frzM && (foe.status.freeze || 0) > 0) amt += +frzM[1];
@@ -1156,8 +1383,9 @@ import * as Combat from './combat.js';
       amt += foe.status.bleed;
       G.log(`[[icon:blood]] <b>流血伤害翻倍</b>：流血加成 ${foe.status.bleed} → ${foe.status.bleed * 2}`, 'sys');
     }
-    // 攻击强化祝福（atkUp）经 status 传入结算（此前 hitFoe 未带 status，攻击 blessings 未生效）
-    const r = Combat.dealDamage({ atk: G.atk, spellPower: sp, status: pstat.status }, foe, amt, type);
+    // 攻击强化祝福（atkUp）经 status 传入结算（此前 hitFoe 未带 status，攻击 blessings 未生效）；
+    // spellUp 已并入 sp，传 statusForHit 防止二次叠加
+    const r = Combat.dealDamage({ atk: G.atk, spellPower: sp, status: statusForHit }, foe, amt, type);
     if (r.stealthed) {
       SDT.Sound.sfx('parry');
       floats.push({ unit: foeIdx(foe), text: '未命中', cls: 'block' });
@@ -1185,13 +1413,17 @@ import * as Combat from './combat.js';
     // 2026-09-08：限制卡池（pred）优先——限定池只排除 生物/事件/衍生，
     // 职业/棱彩/传说特例卡按池子规则可被指定获取；无 pred 走通用随机池
     // （isRandomObtainable：排除 初始/职业/能力卡/生物/棱彩/unrandom）。
-    // 兼容旧签名（rarity/otherCls 由 processDiscoverQueue 换算成 pred 后传入）。
+    // 2026-09-09 留言 #7：对局（战斗）内的发现/随机获取一律不出现资源卡——
+    // 资源（木材/钱币/钥匙类）只在地图侧宝箱、商店、事件产出。
+    // 2026-09-10 撤离测试：BOSS 战道具不可打出（"道具卡只能在普通战斗中使用"），
+    // 发现池却在 BOSS 战掉道具卡，入手即死牌（刀剑形态还会复制它）——BOSS 战发现池排除道具。
+    const bossBan = mode === 'boss' ? (t => t === '道具') : null;
     let pool;
     if (pred) {
-      pool = SDT.Cards.all().filter(c => c.rarity !== '衍生' && !['生物', '事件'].includes(c.type) && pred(c));
+      pool = SDT.Cards.all().filter(c => c.rarity !== '衍生' && !['生物', '事件', '资源'].includes(c.type) && !(bossBan && bossBan(c.type)) && pred(c));
     } else {
       pool = SDT.Cards.all().filter(c =>
-        c.rarity !== '衍生' && SDT.Cards.isRandomObtainable(c) &&
+        c.rarity !== '衍生' && c.type !== '资源' && !(bossBan && bossBan(c.type)) && SDT.Cards.isRandomObtainable(c) &&
         (!rarity || c.rarity === rarity) &&
         (!otherCls || (c.cls && c.cls !== G.myClass)) ||
         (otherCls && c.rarity === '职业' && c.cls && c.cls !== G.myClass));
@@ -1378,6 +1610,33 @@ import * as Combat from './combat.js';
     sweepDead();
     requestBattleRender();
   }
+  // —— 背包砸击（需求 #9，2026-09-09）：战斗界面的免费动作按钮——
+  // 不消耗卡牌，2 费造成 4 点固定伤害；点击按钮后点选一名敌人结算
+  function bagSlam() {
+    if (busy || infusing || discovering || choosing || handSelecting || viewingGrave || selectingDeck) return;
+    if (slamPending) { cancelSlam(); return; }
+    if (energy < 2) { G.log('[[icon:bolt]] 能量不足：背包砸击需要 2 点能量', 'warn'); return; }
+    if (!alive().length) { G.log('[[icon:cross]] 场上没有敌人可以砸击', 'warn'); return; }
+    slamPending = true;
+    G.log('[[icon:bag]] <b>背包砸击</b>：点击一名敌人砸下（2 费 · 4 点固定伤害 · 不消耗卡牌）', 'sys');
+    requestBattleRender();
+  }
+  function cancelSlam() { slamPending = false; requestBattleRender(); }
+  function resolveSlam(side) {
+    slamPending = false;
+    if (energy < 2) { G.log('[[icon:bolt]] 能量不足：背包砸击需要 2 点能量', 'warn'); requestBattleRender(); return; }
+    const t = (side != null && foes[+side] && !foes[+side].dead) ? foes[+side] : alive()[0];
+    if (!t) return;
+    energy -= 2;
+    SDT.Sound.sfx('strike');
+    const r = Combat.dealDamage({ atk: G.atk }, t, 4, Combat.TYPES.FIXED);
+    if (r.dealt > 0) floats.push({ unit: foes.indexOf(t), text: '-' + r.dealt, cls: 'dmg' });
+    G.log(`[[icon:bag]] <b>背包砸击</b>砸向 ${esc(t.name)}：造成 <b>${r.dealt}</b> 点固定伤害（-2 能量）`, 'sys');
+    sweepDead();
+    if (!alive().length) { finish(true); return; }
+    requestBattleRender();
+  }
+
   // 药水栏点击：敌方指向道具在多敌时进入点选模式，其余直接生效
   function usePotion(uid) {
     const entry = battleBagItems().find(o => o.uid === uid);
@@ -1471,13 +1730,20 @@ import * as Combat from './combat.js';
       : job.otherCls ? (c => c.rarity === '职业' && c.cls && c.cls !== G.myClass)
       : null;
     const pred = job.pred || legacyPred;
-    for (let i = 0; i < 3; i++) {
-      const c = randomDiscoverCard(pred, job.rarity, !job.pred && !job.rarity ? job.otherCls : null);
+    // 2026-09-09 留言 #9：三张候选不得重复——抽到已选中的就重抽，
+    // 池子不足三张时有多少展示多少（原实现撞重直接跳过，经常只剩一两张可选）
+    for (let i = 0; i < 3 && options.length < 3; i++) {
+      let c = randomDiscoverCard(pred, job.rarity, !job.pred && !job.rarity ? job.otherCls : null);
+      let guard = 0;
+      while (c && taken.has(c.id) && guard++ < 40) {
+        c = randomDiscoverCard(pred, job.rarity, !job.pred && !job.rarity ? job.otherCls : null);
+      }
       if (c && !taken.has(c.id)) { taken.add(c.id); options.push(c); }
     }
     if (!options.length) { G.log('（没有符合条件的卡牌可发现）', 'dim'); return; }
     discovering = { options, n: job.n, rarity: job.rarity, pred: job.pred, act: job.act || null,
-      priceArmor: !!job.priceArmor, pouchUid: job.pouchUid || null, consumeTempAtTurn: !!job.consumeTempAtTurn, tempUids: job.tempUids || [] };
+      priceArmor: !!job.priceArmor, pouchUid: job.pouchUid || null, consumeTempAtTurn: !!job.consumeTempAtTurn, tempUids: job.tempUids || [],
+      swapPair: job.swapPair || null };
     requestBattleRender();
   }
 
@@ -1485,13 +1751,15 @@ import * as Combat from './combat.js';
     if (!discovering) return;
     const card = discovering.options[+i];
     if (!card) return;
-    const { n, rarity, pred, act, options, priceArmor, pouchUid, consumeTempAtTurn, tempUids } = discovering;
+    const { n, rarity, pred, act, options, priceArmor, pouchUid, consumeTempAtTurn, tempUids, swapPair } = discovering;
     discovering = null;
     if (act !== 'pouch') fireCatGift(card);   // 阿猫的礼物：从发现面板选中即触发（锦囊内旧牌不重触发）
-    // 「直接施放 / 直接释放」类发现：置入手牌后立刻免费打出
+    // 「直接施放 / 直接释放」类发现：选中即免费打出（2026-09-11 实机老板反馈修复：
+    // 此前多敌场景会先置入手牌等玩家再拖选目标——与卡面「并直接释放」矛盾，且拖拽流程
+    // 极易断裂成「卡躺在手牌像没释放」。现一律立即结算：默认首个存活敌人，群体卡自动覆盖全体）
     if (act === 'play' || act === 'potion') {
       const uid = addTempCard(card);
-      G.log(`[[icon:question]] 发现：【<b>${esc(card.name)}</b>】并直接施放（战斗内临时卡，战后消散）`, 'loot');
+      G.log(`[[icon:question]] 发现：【<b>${esc(card.name)}</b>】并直接施放（免费用 · 战斗内临时卡，战后消散）`, 'loot');
       queueCardExecution(uid, findCard(uid).card, [], alive()[0] || null, true);
     } else if (act === 'playKeep') {
       // 永恒绽放：施放 1 张，其余两张入手
@@ -1512,6 +1780,11 @@ import * as Combat from './combat.js';
       const uid = addTempCard(card);
       G.log(`[[icon:question]] <b>法师锦囊</b>：施放其中的【<b>${esc(card.name)}</b>】（锦囊余 ${pouchEntry && Array.isArray(pouchEntry.card._pouch) ? pouchEntry.card._pouch.length : 0} 张）`, 'loot');
       queueCardExecution(uid, findCard(uid).card, [], alive()[0] || null, true);
+    } else if (act === 'dup') {
+      // 二刀流（2026-09-10 需求）：「发现一张武术卡并额外获得1张复制」——本体+复制共 2 张入手
+      addTempCard(card);
+      addTempCard(card);
+      G.log(`[[icon:question]] 发现：【<b>${esc(card.name)}</b>】并额外获得 1 张复制（×2 置入手牌 · 战斗内临时卡，战后消散）`, 'loot');
     } else {
       const uid = addTempCard(card);
       G.log(`[[icon:question]] 发现：【<b>${esc(card.name)}</b>】置入手牌（战斗内临时卡，战后消散）`, 'loot');
@@ -1523,10 +1796,18 @@ import * as Combat from './combat.js';
       }
       // 江湖救急：置入的临时卡在回合开始时消耗（C9）
       if (consumeTempAtTurn) tempUids.push(uid);
+      // 迷之匣：发现的招式记入待换费对（两张到齐后交换费用）
+      if (swapPair) swapPair.push(uid);
     }
     sweepDead();
     if (!alive().length) { finish(true); return; }
-    if (n > 1) discoverQueue.unshift({ n: n - 1, rarity, pred, act, priceArmor, pouchUid, consumeTempAtTurn, tempUids });
+    if (n > 1) discoverQueue.unshift({ n: n - 1, rarity, pred, act, priceArmor, pouchUid, consumeTempAtTurn, tempUids, swapPair });
+    else if (consumeTempAtTurn && tempUids.length) {
+      delayed.push({ special: 'consumeTemps', uids: [...tempUids], cardName: '江湖救急' });
+      G.log(`[[icon:hourglass]] <b>江湖救急</b>：置入的 ${tempUids.length} 张临时卡将在下个回合开始时消耗`, 'sys');
+    } else if (swapPair && swapPair.length >= 2) {
+      swapCardCosts(swapPair[0], swapPair[1]);   // 迷之匣：两张发现完毕，交换费用
+    }
     else if (consumeTempAtTurn && tempUids.length) {
       delayed.push({ special: 'consumeTemps', uids: [...tempUids], cardName: '江湖救急' });
       G.log(`[[icon:hourglass]] <b>江湖救急</b>：置入的 ${tempUids.length} 张临时卡将在下个回合开始时消耗`, 'sys');
@@ -1575,6 +1856,7 @@ import * as Combat from './combat.js';
   function endTurn() {
     if (busy || infusing || discovering || choosing) return;
     pendingItem = null;   // 结束回合同时取消药水栏点选
+    slamPending = false;
     busy = true;
     // —— 额外回合（命运钟表 C7）：跳过敌方阶段，直接刷新为你的下一个回合 ——
     if (extraTurn) {
@@ -1712,9 +1994,19 @@ import * as Combat from './combat.js';
     // 持续 1 回合 = 本回合结束前生效；持续 n 回合 = 从触发当回合起覆盖 n 个完整回合
     tickDurationsLog(pstat.status, '你');
     foes.forEach(foe => { if (!foe.dead) tickDurationsLog(foe.status, foe.name); });
+    // 偷取攻击到期：与 1 回合攻强化同期还原（2026-09-09 留言 #1/#2）
+    foes.forEach(foe => {
+      if (!foe.dead || !foe._stealRestore) return;
+      foe.atk = (foe.atk || 0) + foe._stealRestore;
+      G.log(`[[icon:arrow]] <b>${esc(foe.name)}</b> 被偷取的攻击力归还（恢复至 ${foe.atk}）`, 'dim');
+      delete foe._stealRestore;
+    });
+    syncCurseCondEquips();   // 条件装备（深海印记类）随诅咒状态变化重新核算
     turn++;
     foes.forEach(foe => { if (!foe.dead) foe.intent = intentFor(foe, turn); });
     energy = maxEnergy;
+    playedMartialThisTurn = 0;   // 追斩/连续射击：本回合打出计数随新回合清零
+    playedMovesThisTurn = 0;
     accrueGrowth();   // 充能火球等「回合开始时本牌伤害+1」按 uid 成长
     // —— 新回合开始：玩家形态祝福 ——
     if ((pstat.status.natureForm || 0) > 0) {
@@ -1758,6 +2050,16 @@ import * as Combat from './combat.js';
     SDT.Sound.sfx('flee');
     G.log('[[icon:runner]] 你撤出了战斗（打出过的卡照常结算）', 'sys');
     finish(null);
+  }
+
+  // 主动撤离（2026-09-09 玩法定版）：战斗中的「撤退」一律视为本局失败——
+  // 仅烟雾弹的逃跑（fleeBattle → flee）豁免。走战败结算（安全格抢运、对局结束）。
+  function surrender() {
+    if (busy || infusing || discovering || choosing || handSelecting) return;
+    G.surrenderedRun = true;
+    SDT.Sound.sfx('flee');
+    G.log('[[icon:cross]] 你选择了撤离——<b>本局视为失败</b>，安全格中的卡牌将被抢运回基地', 'warn');
+    finish(false);
   }
 
   // ---------- 战斗快照持久化（战斗中退出/关窗后，读档续打同一局面） ----------
@@ -1904,7 +2206,7 @@ import * as Combat from './combat.js';
     const sig = [mode, turn, energy, maxEnergy, busy, opts,
       pendingHint, viewingGrave, viewingBag, dreadShown, selectingDeck, selShaN, handSelectQueue.length,
       spellCost1, meleeCost1, shaTransform, consumeFireballN, lastPlayedType,
-      stealthStrike, choiceQueue.length];
+      stealthStrike, choiceQueue.length, slamPending, freeCast.size];
     if (G) sig.push(G.hp, G.maxHp, G.atk, G.spellPower || 0, G.myClass || '', G.characterId || '');
     if (pdef) sig.push(pdef.shield, pdef.armor, pdef.guard);
     sig.push(statusSig(pstat && pstat.status), pstat ? pstat.hp : 0);
@@ -1931,7 +2233,8 @@ import * as Combat from './combat.js';
     if (pendingTarget) sig.push(pendingTarget.uid, pendingTarget.card);
     // 已穿戴装备（老板 #9）：穿戴/技能已用状态变化都要重渲染
     sig.push('eq' + equipped.map(e => e.uid + (e.used ? '1' : '0')).join(','));
-    if (selectingDeck) sig.push(sel.size, [...sel].sort().join(','), selPool.length);
+    if (selectingDeck) sig.push(sel.size, [...sel].sort().join(','), selPool.length,
+      'eq' + [...selEquips].sort().join(','), selDeckMax);   // 开战装备勾选与牌库上限也进签名（2026-09-10 #35）
     return sig.join('\u0001');
   }
 
@@ -1961,10 +2264,14 @@ import * as Combat from './combat.js';
     const readonlyHandSelecting = handSelecting ? Object.freeze({ ...handSelecting }) : null;
     const readonlyChoosing = choosing ? Object.freeze({ ...choosing, options: Object.freeze(choosing.options.slice()) }) : null;
     const deckSelection = selectingDeck ? Object.freeze({
-      need: R().bossDeckSize,
+      need: R().bossDeckSize,          // 起步必选 15 张
+      max: selDeckMax,                 // 混沌之眼 +5 后的可选上限
       starterCount: selShaN,
       selected: Object.freeze([...sel]),
       cards: Object.freeze(selPool.map(entry => Object.freeze({ uid: entry.uid, card: freezeObject(entry.card) }))),
+      // 「对战开始时」开战装备（2026-09-10 留言 #35）：单列一区由玩家勾选，默认不选
+      equips: Object.freeze(selEquipPool.map(entry => Object.freeze({ uid: entry.uid, card: freezeObject(entry.card) }))),
+      equipsSelected: Object.freeze([...selEquips]),
       boss: readonlyFoes[0] || null,
     }) : null;
     snapCache = Object.freeze({
@@ -2000,6 +2307,7 @@ import * as Combat from './combat.js';
         return acc;
       }, []).map(freezeObject)) : null,
       pendingItem: pendingItem ? Object.freeze({ ...pendingItem, card: freezeObject(pendingItem.card) }) : null,
+      slamPending,
       // 已穿戴装备（老板 #9）：名称 + 说明 + 限定技能文本（skill 非空即显示技能按钮）
       equipped: Object.freeze(equipped.map(e => Object.freeze({
         uid: e.uid, name: e.card.name, desc: String(e.card.desc || ''),
@@ -2011,8 +2319,10 @@ import * as Combat from './combat.js';
 
   function openGrave() { viewingGrave = true; requestBattleRender(); }
   function cancelPendingTarget() {
+    if (pendingTarget && freeCast.has(pendingTarget.uid)) freeCast.delete(pendingTarget.uid);   // 取消后留在手牌按原费打出
     pendingTarget = null;
     pendingItem = null;   // 药水栏点选一并取消
+    slamPending = false;
     battleState = cancelTargeting(battleState); pendingHint = ''; requestBattleRender();
   }
   function setPendingHint(value) { pendingHint = String(value || ''); requestBattleRender(); }
@@ -2028,6 +2338,7 @@ import * as Combat from './combat.js';
     cancelInfusion: cancelInfuse,
     endTurn,
     flee,
+    surrender,
     openGrave,
     cancelPendingTarget,
     closeGrave,
@@ -2035,8 +2346,12 @@ import * as Combat from './combat.js';
     closeBag,
     useItem,
     usePotion,
+    bagSlam,
+    resolveSlam,
+    beginInfusion: beginInfuse,
     useEquipSkill,
     selectDeckCard: toggleDeckCard,
+    selectDeckEquip: toggleDeckEquip,
     confirmDeck: beginBoss,
     cancelDeck: cancelDeckSelection,
     pickDiscover,
@@ -2051,7 +2366,7 @@ const viewApi = Object.freeze({
   AFFIX_META, Combat, R, aegisBlocked, curseChips, effCostOf, findCard,
   infuseOf, markDreadShown, pileTip, refillDrawPile,
   takeFloats, takeCardAnims, targetSide, unplayableReason,
-  matchHandSelectKey,
+  matchHandSelectKey, handCurseSpecs,
 });
 const BattleSession = Object.freeze({ start, getSnapshot, commands, serialize, restore });
 

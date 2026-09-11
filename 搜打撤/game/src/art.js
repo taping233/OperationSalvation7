@@ -206,6 +206,7 @@ import { BUILD_VERSION, assetUrl } from './asset-url.js';
     const next = () => {
       const src = queue.shift();
       if (!src) return;
+      if (typeof Image === 'undefined') return;   // 非浏览器环境（单测等）直接放弃预解码，避免定时器报错
       const im = new Image();
       im.decoding = 'async';
       decoded.set(src, im);

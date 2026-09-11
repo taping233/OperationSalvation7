@@ -1,0 +1,94 @@
+
+> codename7-soudache@0.51.0 predist
+> npm run check:runtime && npm run check:version
+
+
+> codename7-soudache@0.51.0 check:runtime
+> node check-electron-runtime.cjs
+
+Electron 运行时一致：44.1.0
+
+> codename7-soudache@0.51.0 check:version
+> node ../scripts/check-version.cjs
+
+版本一致：0.51.0
+
+> codename7-soudache@0.51.0 dist
+> npm run build:game && node build-portable.cjs
+
+
+> codename7-soudache@0.51.0 build:game
+> npm run build --prefix ..
+
+
+> codename7-soudache-game@0.51.0 prebuild
+> npm run narrative:compile
+
+
+> codename7-soudache-game@0.51.0 narrative:compile
+> node scripts/compile-narrative.mjs
+
+Compiled narrative: narrative\events.ink -> game\src\generated\narrative-events.js
+
+> codename7-soudache-game@0.51.0 build
+> vite build
+
+[36mvite v6.4.3 [32mbuilding for production...[36m[39m
+[assets] cleared generated directory: D:\素材\代号柒\搜打撤\desktop-app\game
+[assets] cleared generated directory: D:\素材\代号柒\搜打撤\desktop-app\game
+transforming...
+[32m✓[39m 333 modules transformed.
+rendering chunks...
+computing gzip size...
+[2m../desktop-app/game/[22m[32massets/brand-mark-codename7-CMovaXBA.png            [39m[1m[2m    5.16 kB[22m[1m[22m
+[2m../desktop-app/game/[22m[32massets/fx-slash-Dv0fKTeT.webp                       [39m[1m[2m    7.58 kB[22m[1m[22m
+[2m../desktop-app/game/[22m[32massets/fx-block-DyO3QSbz.webp                       [39m[1m[2m   14.02 kB[22m[1m[22m
+[2m../desktop-app/game/[22m[32mindex.html                                          [39m[1m[2m   16.88 kB[22m[1m[22m[2m │ gzip:   4.87 kB[22m
+[2m../desktop-app/game/[22m[32massets/cascadia-code-400-4hOIIkUE.woff2             [39m[1m[2m   17.48 kB[22m[1m[22m
+[2m../desktop-app/game/[22m[32massets/cascadia-code-700-xJGW3N9l.woff2             [39m[1m[2m   18.02 kB[22m[1m[22m
+[2m../desktop-app/game/[22m[32massets/energy-orb-dxrStDA7.webp                     [39m[1m[2m   30.70 kB[22m[1m[22m
+[2m../desktop-app/game/[22m[32massets/battle-normal-anime-v2-RcGHQOqi.webp         [39m[1m[2m  101.20 kB[22m[1m[22m
+[2m../desktop-app/game/[22m[32massets/scene-chest-anime-v2-Dh-b343i.webp           [39m[1m[2m  102.94 kB[22m[1m[22m
+[2m../desktop-app/game/[22m[32massets/scene-pickup-wood-anime-v2-BUKEvBdX.webp     [39m[1m[2m  109.56 kB[22m[1m[22m
+[2m../desktop-app/game/[22m[32massets/scene-shop-anime-v2-lSdZWLvQ.webp            [39m[1m[2m  127.47 kB[22m[1m[22m
+[2m../desktop-app/game/[22m[32massets/scene-pickup-rations-anime-v2-CUE9R0uJ.webp  [39m[1m[2m  127.54 kB[22m[1m[22m
+[2m../desktop-app/game/[22m[32massets/scene-pickup-key-anime-v2-BTUnErS9.webp      [39m[1m[2m  137.14 kB[22m[1m[22m
+[2m../desktop-app/game/[22m[32massets/scene-fire-anime-v2-BbwgFMSd.webp            [39m[1m[2m  142.57 kB[22m[1m[22m
+[2m../desktop-app/game/[22m[32massets/scene-door-anime-v2-CXhLO4Xp.webp            [39m[1m[2m  142.69 kB[22m[1m[22m
+[2m../desktop-app/game/[22m[32massets/scene-pickup-coin-anime-v2-BA4XLClo.webp     [39m[1m[2m  147.81 kB[22m[1m[22m
+[2m../desktop-app/game/[22m[32massets/scene-altar-anime-v2-aYTL66UO.webp           [39m[1m[2m  152.45 kB[22m[1m[22m
+[2m../desktop-app/game/[22m[32massets/scene-extract-anime-v2-Csa8abj1.webp         [39m[1m[2m  156.08 kB[22m[1m[22m
+[2m../desktop-app/game/[22m[32massets/event-bandits-anime-v2-Hhpy5nx_.webp         [39m[1m[2m  207.00 kB[22m[1m[22m
+[2m../desktop-app/game/[22m[32massets/notosans-sc-400-Ph3maJeN.woff2               [39m[1m[2m  251.59 kB[22m[1m[22m
+[2m../desktop-app/game/[22m[32massets/notosans-sc-700-B_-MUWwg.woff2               [39m[1m[2m  257.78 kB[22m[1m[22m
+[2m../desktop-app/game/[22m[32massets/hub-wallpaper-2Qyl3lkh.jpg                   [39m[1m[2m  335.93 kB[22m[1m[22m
+[2m../desktop-app/game/[22m[32massets/slot-bg-knight-fantasy-CDI2HVgW.webp         [39m[1m[2m  490.05 kB[22m[1m[22m
+[2m../desktop-app/game/[22m[32massets/endfield-ruins-CJr9RXMg.jpg                  [39m[1m[2m  520.80 kB[22m[1m[22m
+[2m../desktop-app/game/[22m[32massets/wallpaper-original-C4G3L_oG.webp             [39m[1m[2m1,003.89 kB[22m[1m[22m
+[2m../desktop-app/game/[22m[32massets/battle-snow-street-1ehh3yZ8.png              [39m[1m[2m1,522.31 kB[22m[1m[22m
+[2m../desktop-app/game/[22m[32massets/title-wordmark-BkFOXJKL.png                  [39m[1m[2m1,964.40 kB[22m[1m[22m
+[2m../desktop-app/game/[22m[32massets/bgm-sour-orange-earth-CQKtPoZo.mp3           [39m[1m[2m3,745.04 kB[22m[1m[22m
+[2m../desktop-app/game/[22m[32massets/bgm-liejie-fuhe-DE63K9b8.mp3                 [39m[1m[2m6,559.76 kB[22m[1m[22m
+[2m../desktop-app/game/[22m[35massets/index-BrmuijRA.css                           [39m[1m[2m  191.69 kB[22m[1m[22m[2m │ gzip:  41.86 kB[22m
+[2m../desktop-app/game/[22m[36massets/js/vendor-misc-CdNCAjgb.js                   [39m[1m[2m  172.55 kB[22m[1m[22m[2m │ gzip:  44.31 kB[22m
+[2m../desktop-app/game/[22m[36massets/js/index-C8G11jE4.js                         [39m[1m[2m  474.26 kB[22m[1m[22m[2m │ gzip: 157.40 kB[22m
+[32m✓ built in 4.79s[39m
+  • electron-builder  version=26.15.3 os=10.0.26200
+  • loaded configuration  file=package.json ("build" field)
+  • executing @electron/rebuild  electronVersion=44.1.0 arch=x64 buildFromSource=false workspaceRoot=D:\素材\代号柒\搜打撤\desktop-app projectDir=./ appDir=./
+  • installing native dependencies  arch=x64
+  • completed installing native dependencies
+  • packaging       platform=win32 arch=x64 electron=44.1.0 appOutDir=D:\c7-build-wGGeUm\win-unpacked
+  • using custom unpacked Electron distribution  electronDist=node_modules\electron\dist
+  • copying unpacked Electron  source=D:\素材\代号柒\搜打撤\desktop-app\node_modules\electron\dist destination=D:\c7-build-wGGeUm\win-unpacked
+  • searching for node modules  pm=npm searchDir=D:\素材\代号柒\搜打撤\desktop-app
+  • searching for node modules  pm=traversal searchDir=D:\素材\代号柒\搜打撤\desktop-app
+  • using manual traversal of node_modules to build dependency tree
+  • no node modules returned while searching directories  searchDirectories=[""]
+  • updating asar integrity executable resource  executablePath=D:\c7-build-wGGeUm\win-unpacked\搜打撤·代号7.exe
+  • signing with signtool.exe  path=D:\c7-build-wGGeUm\win-unpacked\搜打撤·代号7.exe
+  • building        target=portable file=D:\c7-build-wGGeUm\搜打撤-代号7.exe archs=x64
+  • signing with signtool.exe  path=D:\c7-build-wGGeUm\win-unpacked\resources\elevate.exe
+  • signing with signtool.exe  path=D:\c7-build-wGGeUm\搜打撤-代号7.exe
+Portable release: D:\素材\代号柒\搜打撤\desktop-app\dist\搜打撤-代号7.exe
+sha256: 1f93288353f040a482ab3a64fb988c656ded939a25150ea6f33e99b06ce603cd

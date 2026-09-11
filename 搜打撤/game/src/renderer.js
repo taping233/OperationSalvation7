@@ -352,12 +352,15 @@ const SDT = window.SDT;
       b.restore();
     }
 
-    // 入口底光（第一环入口结点）
-    const l1 = game.layerData[0];
+    // 入口底光（当前层入口结点——2026-09-10 留言 #21：此前固定取第 1 层，
+    // 各层世界坐标重叠，导致第 2~4 层画面上凭空烘出第 1 层入口的光斑，
+    // 看起来像生成了不可抵达的节点图像）
+    const l1 = game.layerData[game.layerIdx] || game.layerData[0];
+    const layerPos = game.nodePos[game.layerIdx] || game.nodePos[0];
     b.save();
     b.globalAlpha = 0.16;
     l1.entrances.forEach((idx) => {
-      const p = game.nodePos[0][idx];
+      const p = layerPos[idx];
       const glow = b.createRadialGradient(p.x, p.y, 2, p.x, p.y, T * 0.6);
       glow.addColorStop(0, 'rgba(90,162,134,0.25)');
       glow.addColorStop(1, 'rgba(90,162,134,0)');
@@ -431,6 +434,8 @@ const SDT = window.SDT;
       const current = isCurrentNode(game, n);
       // 2026-09-09 老板：当前节点连通（可走）的相邻节点也高亮，与走过节点区分
       const legal = g.legalKeys.has(n.li + ',' + n.idx);
+      // 走过的格子标绿（2026-09-09 玩法定版：任何格子只能触发一次）
+      const walked = !!(game.visited && game.visited[n.li + ',' + n.idx]);
       const phase = nodePhase(n);
       // 呼吸缩放（各结点错拍）+ 当前环轻微悬浮
       const R = n.r;
@@ -457,6 +462,21 @@ const SDT = window.SDT;
         circle(ctx, n.x, n.y, n.r * 1.26);
         ctx.stroke();
         ctx.setLineDash(NO_DASH);
+        ctx.restore();
+      }
+      // 走过的格子：外圈描绿（火堆在 drawFires 里同样处理）
+      if (walked) {
+        ctx.save();
+        ctx.globalAlpha = current ? 0.95 : 0.6;
+        ctx.strokeStyle = '#52d273';
+        ctx.lineWidth = 2.2 / z;
+        ctx.setLineDash(NO_DASH);
+        circle(ctx, n.x, n.y, n.r * 1.16);
+        ctx.stroke();
+        ctx.setLineDash(NO_DASH);
+        ctx.fillStyle = 'rgba(82, 210, 115, 0.16)';
+        circle(ctx, n.x, n.y, n.r * 1.16);
+        ctx.fill();
         ctx.restore();
       }
       ctx.restore();
@@ -519,15 +539,15 @@ const SDT = window.SDT;
       if (n.def.type !== 'fire') continue;
       const current = isCurrentNode(game, n);
       // 走过的火堆 = 熄灭（2026-09-09 老板：重置为空白节点）——只画暗灰烬烬环，不再画火苗；
-      // 还站在火堆上时保持燃烧状态（本格休息ing）
+      // 还站在火堆上时保持燃烧状态（本格休息ing）；外圈描绿与其它走过的格子一致
       if (!current && game.visited && game.visited[n.li + ',' + n.idx]) {
         ctx.save();
         ctx.globalAlpha = 0.22;
-        ctx.strokeStyle = 'rgba(150,150,150,0.8)';
+        ctx.strokeStyle = 'rgba(82, 210, 115, 0.9)';
         ctx.lineWidth = 1.4 / cam.zoom;
         circle(ctx, n.x, n.y, n.r + 2);
         ctx.stroke();
-        ctx.fillStyle = 'rgba(120,120,120,0.28)';
+        ctx.fillStyle = 'rgba(82, 210, 115, 0.18)';
         circle(ctx, n.x, n.y, n.r * 0.34);
         ctx.fill();
         ctx.restore();
@@ -580,14 +600,16 @@ const SDT = window.SDT;
   // ---------- 入口脉冲圈（底光已烘焙，此处只画脉冲环） ----------
   function drawEntrancePulse(ctx, game) {
     const cam = game.cam;
-    const l1 = game.layerData[0];
+    // 只画当前层的入口（2026-09-10 留言 #21：固定取第 1 层会在其他层画出幽灵脉冲环）
+    const l1 = game.layerData[game.layerIdx] || game.layerData[0];
+    const layerPos = game.nodePos[game.layerIdx] || game.nodePos[0];
     const pulse = 0.5;
     ctx.save();
     ctx.strokeStyle = 'rgba(90,162,134,0.85)';
     ctx.lineWidth = 2 / cam.zoom;
     for (const idx of l1.entrances) {
-      ctx.globalAlpha = game.layerIdx === 0 && idx === game.trackPos ? 1 : 0.16;
-      const p = game.nodePos[0][idx];
+      ctx.globalAlpha = idx === game.trackPos ? 1 : 0.16;
+      const p = layerPos[idx];
       ctx.beginPath();
       ctx.arc(p.x, p.y, NODE_R + 4 + pulse * 5, 0, TAU);
       ctx.stroke();

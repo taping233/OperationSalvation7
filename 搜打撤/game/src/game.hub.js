@@ -25,7 +25,7 @@ let hubTab = 'deploy';
     const B = SDT.Base;
     const M = SDT.Meta;
     _set_cardPageOpen(true);      // Hub 页面：Esc / 点击背景可关闭
-    const pending = M.pendingAch().length;
+    const pending = M.pendingAch().length + M.pendingColl().length;
     // 页签切换时才播放入场动画（页内操作重渲染不闪）
     const tabChanged = renderHub._lastTab !== hubTab;
     renderHub._lastTab = hubTab;
@@ -35,7 +35,7 @@ let hubTab = 'deploy';
       { id: 'stash', icon: 'home', name: '仓库' },
       { id: 'upgrade', icon: 'tools', name: '升级' },
       { id: 'classes', icon: 'medal', name: '人物' },
-      { id: 'ach', icon: 'trophy', name: '成就' },
+      { id: 'ach', icon: 'trophy', name: '成就·收藏室' },
     ];
     const body = hubTab === 'deploy' ? hubDeployHTML()
       : hubTab === 'stash' ? hubStashHTML()
@@ -85,11 +85,20 @@ let hubTab = 'deploy';
       SDT.Meta.checkUnlocks();
       renderHub();
     });
-    UI.act('upSafe', () => {
-      if (!B.upgradeSafe()) return;
+    UI.act('upSafe', () => { renderHub(); });   // 保险升级已改为宠物升级（见 upgrade 页每只宠物的按钮）
+    UI.act('upPet', (d) => {
+      const pet = SDT.Base.petById(d.id);
+      if (!SDT.Base.upgradePet(d.id)) return;
       Sfx.ding();
-      UI.log(`[[icon:paw]] 阿七升级：安全格 <b>${B.safeCap()}</b> 格（- [[icon:bread]]×${MAP.rules.safeUpgradeRations}）`, 'ok');
+      UI.log(`[[icon:paw]] <b>「${esc(pet.name)}」</b>升级到 <b>Lv.${SDT.Base.petLevel(d.id)}</b>：保护格 <b>${B.safeCap()}</b> 格`, 'ok');
       SDT.Meta.checkUnlocks();
+      renderHub();
+    });
+    UI.act('selPet', (d) => {
+      if (!SDT.Base.setPet(d.id)) return;
+      const pet = SDT.Base.petById(d.id);
+      Sfx.ding();
+      UI.log(`[[icon:paw]] 已携带宠物<b>「${esc(pet.name)}」</b>：${esc(pet.desc)} · 保护格 <b>${SDT.Base.safeCap()}</b> 格`, 'ok');
       renderHub();
     });
     UI.act('upStash', () => {
@@ -101,10 +110,12 @@ let hubTab = 'deploy';
     UI.act('stashItem', (d) => openStashItem(+d.i));
     UI.act('rawItem', (d) => openRawItem(d.kind));
     UI.act('restoreCard', (d) => {
+      const stack = B.data.pocket[+d.i];
       const r = B.restore(+d.i);
-      if (r === true) { Sfx.ding(); UI.log('[[icon:check]] 卡牌已复原，回到卡牌仓库', 'ok'); }
+      if (r === true) { Sfx.ding(); UI.log(`[[icon:key]] 消耗 <b>${B.pocketKeyCost(stack)}</b> 把钥匙，卡牌已复原，回到卡牌仓库`, 'ok'); }
       else if (r === 'sha') UI.log('[[icon:cards]] 初始牌「初始攻击」无需入库——每局自动携带，已直接消耗', 'dim');
       else if (r === 'full') UI.log(`[[icon:archive]] 仓库容量不足（${B.stashUsed()}/${B.stashCap()} 张），先卖出或升级仓库`, 'warn');
+      else if (r && r.why === 'nokey') UI.log(`[[icon:key]] 钥匙不足：复原这堆卡牌需要 <b>${r.cost}</b> 把钥匙（现有 ${B.keyCount ? B.keyCount() : 0}）——可在仓库把钥匙材料卡「使用」折入储备`, 'warn');
       if (r) renderHub();
     });
     UI.act('claimAch', (d) => {
@@ -125,6 +136,15 @@ let hubTab = 'deploy';
       UI.log(`[[icon:cards]] 已装备卡背【<b>${bd ? bd.name : d.id}</b>】——背包翻面与牌库堆即刻生效`, 'ok');
       renderHub();
     });
+    UI.act('claimColl', (d) => {
+      const r = M.claimColl(d.id);
+      if (r.ok) { Sfx.ding(); renderHub(); }
+      else if (r && r.why === 'full') UI.log(`[[icon:archive]] ${r.msg}`, 'warn');
+    });
+    UI.act('collZoom', (d) => {
+      const card = M.collectPool().find(c => c.id === d.id);
+      if (card) UI.showCardZoom(card);
+    });
     UI.act('closeBase', closeBase);
   }
 
@@ -138,22 +158,24 @@ let hubTab = 'deploy';
         ['宝藏大门', '在棋盘的钥匙格收集钥匙，集齐 ' + (SDT.Base.KEY_NEEDED || 10) + ' 把可开启特殊关卡（关卡制作中）。'],
       ] },
       stash: { title: '仓库说明', items: [
-        ['卡牌仓库', '点击物品可卖出换储备币，或收藏进图鉴（传说卡与桌游珍宝是特殊收藏品，收藏后完成对应成就，收藏期间不可卖出）。出发时自选携带。'],
-        ['材料卡', '仓库里的木材/口粮/钥匙材料卡可直接「使用」折入真实物资；材料是基地的根基，不可卖出换币。'],
-        ['消耗口袋', '对战小怪用过的卡会随撤离回到这里，复原后回仓库。'],
-        ['物资', '木材/口粮/钥匙是基地建设材料（木材扩建背包与仓库、口粮升级安全格、钥匙开启宝藏大门），不可卖出换币。储备币会在下次出发时随身带走。'],
+        ['卡牌仓库', '点击物品可卖出换储备币，或收藏进图鉴（收藏职业卡 +10、能力卡 +50 对应人物熟练度经验，同一张只计一次；收藏只做记录与转化经验，卡牌保留在仓库；收藏进度可在「成就·收藏室」领一次性奖励。传说卡与桌游珍宝是特殊收藏品，收藏期间不可卖出）。出发时自选携带（职业卡带出后无法带入）。'],
+        ['材料卡 / 宠物蛋', '木材/口粮/钥匙材料卡可直接「使用」折入真实物资；宠物蛋 + 50 币可孵化随机宠物（宝箱 0.7% 掉落）。'],
+        ['消耗口袋', '战斗中消耗的卡牌有 1/3 概率随撤离回到这里（职业卡与初始牌除外）；用钥匙按稀有度复原：古朴1 / 稀有2 / 史诗3 / 传说4。下一次出发后口袋清空。'],
+        ['宠物', '初始宠物「汪汪狗」自动获得，携带 1 只出战（出发页可切换）；其余用宠物蛋孵化。宠物在「升级」页用口粮升级（2-3-4-5）。'],
+        ['物资', '木材/口粮/钥匙是基地建设材料（木材扩建背包与仓库、口粮升级宠物、钥匙复原口袋与开启宝藏大门），不可卖出换币。储备币会在下次出发时随身带走。'],
       ] },
       upgrade: { title: '升级说明', items: [
         ['背包扩建', '每消耗木材 ×' + R.bagUpgradeWood + ' 扩建 1 格，上限 ' + R.bagMax + ' 格。'],
         ['仓库扩建', '每消耗木材 ×' + R.stashUpgradeWood + ' 扩建 ' + R.stashUpgradeSlots + ' 张容量，上限 ' + R.stashMax + ' 张。'],
-        ['宠物小屋', '宠物「阿七」看守着背包的安全格——撤离失败时，它会把安全格里的卡牌抢运回基地。每消耗口粮 ×' + R.safeUpgradeRations + ' 升级 1 格，上限 ' + R.safeMax + ' 格。'],
+        ['宠物升级', '每只宠物独立升级，口粮消耗递增 2-3-4-5，上限 Lv.5；Lv.1 起每级 +1 保护格。携带不同宠物保护格数量不同（小企鹅咕嘎 4-8 格）。'],
       ] },
       classes: { title: '人物说明', items: [
         ['熟练度', '每局出发时从全部角色中自由选择 1 个；击败敌人、撤离成功都会累积所选角色的熟练度经验，升级获得常驻加成（下一局出征生效）。'],
       ] },
-      ach: { title: '成就与卡背', items: [
+      ach: { title: '成就与职业收藏室', items: [
         ['卡背图鉴', '牌库堆 / 背包翻面使用的卡背；领取对应成就奖励解锁，点击即可装备。'],
         ['成就', '达成条件后自动解锁（页内显示奖励内容），回基地点击「领取」获得物资与卡背奖励。'],
+        ['职业收藏室', '仓库中收藏的职业卡与能力卡会陈列在此：收藏只做记录并转化为人物熟练度经验（职业卡 +10、能力卡 +50，同一张只计一次），卡牌保留在仓库。收藏不同的职业卡与能力卡推进进度，5 / 15 / 30 / 45 / 全收集各有一次奖励，达成后点击「领取」。'],
       ] },
     };
     const t = T[tab];
@@ -172,6 +194,7 @@ let hubTab = 'deploy';
     const m = MODES[curMode];
     const keys = B.keyCount ? B.keyCount() : 0;
     const gateReady = keys >= (B.KEY_NEEDED || 10);
+    const pet = B.carriedPet ? B.carriedPet() : null;
     return `
       <div class="deploy-grid">
         <section class="hub-card">
@@ -187,12 +210,13 @@ let hubTab = 'deploy';
         <section class="hub-card">
           <h3>[[icon:notes]] 出征预报</h3>
           <div class="deploy-forecast" style="margin:0 0 4px">
-            <span class="fc-chip">[[icon:heart]] 生命 <b>${MAP.rules.playerMaxHp}</b></span>
+            <span class="fc-chip">[[icon:heart]] 生命 <b>${MAP.rules.playerMaxHp + (pet && pet.effect.maxHp || 0)}</b></span>
             <span class="fc-chip">[[icon:swords]] 攻击 <b>${MAP.rules.playerAtk}</b></span>
             <span class="fc-chip">[[icon:coin]] 开局币 <b>${(m.startCoins || 0) + B.data.coins}</b></span>
             <span class="fc-chip">[[icon:dice]] 骰子 <b>${MAP.rules.diceSides} 面</b></span>
             <span class="fc-chip">[[icon:bag]] 背包 <b>${B.bagCap()} 格</b></span>
-            <span class="fc-chip">[[icon:lock]] 安全格 <b>${B.safeCap()} 格</b></span>
+            <span class="fc-chip" title="${pet ? escAttr(pet.desc) : '未携带宠物'}">[[icon:paw]] 宠物 <b>${pet ? esc(pet.name) : '无'}</b></span>
+            <span class="fc-chip">[[icon:lock]] 保护格 <b>${B.safeCap()} 格</b></span>
             <span class="fc-chip">[[icon:archive]] 仓库 <b>${B.stashUsed()}/${B.stashCap()} 张</b></span>
           </div>
           <div class="deploy-foot">
@@ -234,8 +258,9 @@ let hubTab = 'deploy';
       return '<p class="ov-empty" style="margin:6px 0 0">仓库里还没有卡牌——撤离成功后在整理界面把战利品放回仓库，下次出征就能带上了。</p>';
     }
     // 2026-09-07 留言：不再自动塞进背包，全部由玩家从左往右拖；
-    // 卡面上的「仓 ×N」实时显示剩余可带数量，拖一张少一张
-    return B.data.stash.map(s => {
+    // 卡面上的「仓 ×N」实时显示剩余可带数量，拖一张少一张。
+    // 需求 #6：职业卡带出后无法带入——不显示在可带列表里
+    return B.data.stash.filter(s => s.card.rarity !== '职业').map(s => {
       const n = deployPick[s.card.name] || 0;
       const left = Math.max(0, s.count - n);
       return `<div class="dep-card${n > 0 ? ' picked' : ''}${left <= 0 ? ' drained' : ''}" draggable="true"
@@ -245,7 +270,10 @@ let hubTab = 'deploy';
         <span class="dep-own">仓 ×${left}</span>
         ${n > 0 ? `<b class="dep-n" title="已选带入 ${n} 张">${n}</b>` : ''}
       </div>`;
-    }).join('');
+    }).join('') +
+      (B.data.stash.some(s => s.card.rarity === '职业')
+        ? '<p class="ov-empty" style="margin:4px 0 0">（职业卡带出后无法带入对局——留在仓库收藏或出售）</p>'
+        : '');
   }
 
   function renderDepartPrep() {
@@ -278,6 +306,14 @@ let hubTab = 'deploy';
             ${SDT.Cards.cardHTML(stack.card, 'sm')}<b class="dep-n on">${deployPick[name]}</b></div>`
         : '<div class="bag-cell empty" aria-hidden="true"></div>';
     }
+    // —— 宠物携带选择（需求 #4：出发界面增加选择宠物携带的功能）——
+    const petStrip = B.PETS.filter(p => B.ownedPets().includes(p.id)).map(p => {
+      const on = B.carriedPet() && B.carriedPet().id === p.id;
+      return `<button class="pet-chip${on ? ' on' : ''}" data-act="depPet" data-id="${p.id}"
+          title="${escAttr(p.desc)}（点击携带出战）">
+        [[icon:${p.icon}]] <b>${esc(p.name)}</b><span class="pet-chip-lv">Lv.${B.petLevel(p.id)}</span>
+      </button>`;
+    }).join('');
     UI.showOverlay('', `
       <div class="pg hub" id="depMain">
         <!-- 2026-09-07 留言：右上「返回基地」叉号删掉，返回走左下「← 返回」按钮 -->
@@ -298,6 +334,7 @@ let hubTab = 'deploy';
           </section>
           <section class="hub-card">
             <h3>[[icon:bag]] 背包预览 <span class="set-tip">拖入卡牌即可携带</span></h3>
+            ${petStrip ? `<div class="pet-strip"><span class="pet-strip-label">[[icon:paw]] 携带宠物</span>${petStrip}</div>` : ''}
             <div class="bag-grid${full ? ' full' : ''}" id="depBag">${bagCells}</div>
             ${deployHint ? `<p class="hint warn-hint">${deployHint}</p>` : ''}
             <div class="dep-foot">
@@ -311,6 +348,11 @@ let hubTab = 'deploy';
       const B2 = SDT.Base;
       const stack = B2.data.stash.find(x => x.card.name === name);
       if (!stack) return;
+      if (stack.card.rarity === '职业') {
+        deployHint = '[[icon:cross]] 职业卡带出后无法带入对局——留在仓库收藏或出售。';
+        renderDepartPrep();
+        return;
+      }
       const cur = deployPick[name] || 0;
       if (cur >= stack.count) return;
       if (cur === 0 && deploySlotsUsed() >= B2.bagCap()) {
@@ -331,6 +373,14 @@ let hubTab = 'deploy';
     };
     UI.act('pickAdd', (d) => addPick(d.name));
     UI.act('pickSub', (d) => subPick(d.name));
+    // 需求 #4：出发时携带的宠物（即时保存，出发后生效）
+    UI.act('depPet', (d) => {
+      if (!SDT.Base.setPet(d.id)) return;
+      Sfx.tick();
+      const pet = SDT.Base.petById(d.id);
+      UI.log(`[[icon:paw]] 本局携带宠物<b>「${esc(pet.name)}」</b>：${esc(pet.desc)}`, 'ok');
+      renderDepartPrep();
+    });
     // 背包卡面点击：放大特写；特写里保留「移出背包」兜底，拖回左侧也可移除
     UI.act('bagZoom', (d) => {
       const isSha = SDT.Cards.SHA.name === d.name;
@@ -402,6 +452,7 @@ let hubTab = 'deploy';
     const used = B.stashUsed(), cap = B.stashCap();
     const pkN = B.data.pocket.reduce((a, b) => a + b.count, 0);
     const collN = Object.keys(B.data.collection).length;
+    const keys = B.keyCount ? B.keyCount() : 0;
     const stashRows = B.data.stash.length
       ? B.data.stash.map((s, i) => {
           const marked = B.isCollected(s.card);
@@ -416,6 +467,17 @@ let hubTab = 'deploy';
           </div>`;
         }).join('')
       : '<p class="ov-empty" style="margin:2px 0 0">（空——撤离成功后在整理界面把战利品放回这里）</p>';
+    // 消耗口袋：按稀有度用钥匙复原（需求 #1/#11：古朴1/稀有2/史诗3/传说4）
+    const pocketRows = B.data.pocket.length
+      ? B.data.pocket.map((p, i) => {
+          const cost = B.pocketKeyCost(p);
+          const afford = keys >= cost;
+          return `<div class="pk-row"><span>[[icon:cards]] <b>${esc(p.card.name)}</b>${p.count > 1 ? ` ×${p.count}` : ''}
+              <span class="dim">· ${esc(p.card.rarity || '?')}</span></span>
+            <button class="mini-btn ok" data-act="restoreCard" data-i="${i}" ${afford ? '' : 'disabled'}
+              title="${afford ? '消耗钥匙复原到卡牌仓库' : '钥匙不足'}">[[icon:key]] 复原 ×${cost}</button></div>`;
+        }).join('')
+      : '<p class="ov-empty" style="margin:2px 0 0">（空——对战消耗的卡牌有 1/3 概率随撤离回到这里）</p>';
     return `
       <div class="hub-two">
         <section class="hub-card">
@@ -426,27 +488,87 @@ let hubTab = 'deploy';
         </section>
         <section class="hub-card">
           <h3>[[icon:pocket]] 消耗口袋 <span class="set-tip">共 ${pkN} 张</span></h3>
-          <div class="stash-list">${B.data.pocket.length
-            ? B.data.pocket.map((p, i) => `
-              <div class="pk-row"><span>[[icon:cards]] <b>${esc(p.card.name)}</b>${p.count > 1 ? ` ×${p.count}` : ''}</span>
-              <button class="mini-btn ok" data-act="restoreCard" data-i="${i}">[[icon:check]] 复原</button></div>`).join('')
-            : '<p class="ov-empty" style="margin:2px 0 0">（空——对战小怪用过的卡会随撤离回到这里）</p>'}</div>
+          <p class="ov-note" style="margin:0 0 6px">[[icon:key]] 用钥匙复原（古朴1 / 稀有2 / 史诗3 / 传说4）· <b>下一次出发后口袋清空</b></p>
+          <div class="stash-list">${pocketRows}</div>
           <h3 style="margin-top:14px">[[icon:archive]] 物资</h3>
           <div class="pk-row stash-row" data-act="rawItem" data-kind="wood" title="基地建设材料 · 不可卖出">
             <span>[[icon:wood]] <b>木材</b> ×<b>${B.data.wood}</b></span><span class="dim">背包与仓库扩建用 · 不可卖币</span>
           </div>
           <div class="pk-row stash-row" data-act="rawItem" data-kind="rations" title="基地建设材料 · 不可卖出">
-            <span>[[icon:bread]] <b>口粮</b> ×<b>${B.data.rations}</b></span><span class="dim">安全格升级用 · 不可卖币</span>
+            <span>[[icon:bread]] <b>口粮</b> ×<b>${B.data.rations}</b></span><span class="dim">宠物升级用 · 不可卖币</span>
           </div>
         </section>
-      </div>`;
+      </div>
+      ${hubPetsHTML()}`;
   }
 
-  // 仓库物品弹窗：卡面预览 + 使用（材料卡） / 卖出 / 收藏
+  // —— 宠物栏（需求 #4：仓库界面增加宠物系统；孵化走宠物蛋弹窗）——
+  function hubPetsHTML() {
+    const B = SDT.Base;
+    const owned = B.ownedPets();
+    const sel = B.carriedPet();
+    const rows = B.PETS.map(p => {
+      const have = owned.includes(p.id);
+      const lv = B.petLevel(p.id);
+      const on = sel && sel.id === p.id;
+      if (!have) {
+        return `<div class="pk-row pet-row locked">
+          <span>[[icon:paw]] <b>？？？</b><span class="dim">· 未孵化</span></span>
+          <span class="dim">[[icon:crystal]] 宠物蛋 + 50 币孵化</span>
+        </div>`;
+      }
+      return `<div class="pk-row pet-row${on ? ' on' : ''}">
+        <span>[[icon:${p.icon}]] <b>${esc(p.name)}</b> <span class="dim">Lv.${lv}</span></span>
+        <span class="pet-ops">
+          ${on ? '<span class="got">[[icon:check]] 携带中</span>'
+            : `<button class="mini-btn ok" data-act="selPet" data-id="${p.id}" title="携带这只宠物出战">携带</button>`}
+        </span>
+        <span class="dim pet-desc">${esc(p.desc.replace(/^携带效果：/, ''))}</span>
+      </div>`;
+    }).join('');
+    const hasEgg = B.data.stash.some(s => s.card.id === B.PET_EGG_ID);
+    return `
+      <section class="hub-card" style="margin-top:14px">
+        <h3>[[icon:paw]] 宠物 <span class="set-tip">${owned.length} / ${B.PETS.length} 只 · 携带 1 只出战</span></h3>
+        <p class="ov-note" style="margin:0 0 6px">初始宠物「汪汪狗」自动获得；其余只能用<b>宠物蛋</b>（宝箱 0.7% 掉落）+ 50 币在仓库孵化。宠物在「升级」页用口粮升级，携带不同宠物保护格数量不同。</p>
+        <div class="stash-list">${rows}</div>
+        ${hasEgg ? '<p class="hint ok-hint">[[icon:crystal]] 仓库里有宠物蛋——点击它进行孵化！</p>' : ''}
+      </section>`;
+  }
+
+  // 仓库物品弹窗：卡面预览 + 使用（材料卡 / 宠物蛋） / 卖出 / 收藏
   function openStashItem(i) {
     const B = SDT.Base;
     const s = B.data.stash[i];
     if (!s) { renderHub(); return; }
+    // 宠物蛋（需求 #2）：仓库中点击孵化——消耗 1 张宠物蛋 + 50 币，随机孵出未拥有的宠物
+    if (s.card.id === B.PET_EGG_ID) {
+      const unowned = B.PETS.filter(p => !B.ownedPets().includes(p.id));
+      const poor = B.data.coins < B.HATCH_COST;
+      game.state = 'modal';
+      _set_cardPageOpen(false);
+      UI.showOverlay('[[icon:crystal]] 宠物蛋', `
+        <div class="stash-pop-card">${SDT.Cards.cardHTML(s.card, 'sm')}</div>
+        <p class="ov-stats">×${s.count} 张 · 孵化消耗：宠物蛋 ×1 + <b class="gold">50 币</b>（储备 ${B.data.coins}）</p>
+        <p class="ov-note">[[icon:paw]] 孵化将随机获得 1 只<b>未拥有</b>的宠物${unowned.length ? `（还差 ${unowned.length} 只集齐）` : ''}。${unowned.length ? '' : '已集齐全部宠物，蛋可以留着收藏。'}</p>
+        <div class="ov-btns">
+          <button class="ov-btn ok" data-act="hatchEgg" ${!unowned.length || poor ? 'disabled' : ''}>[[icon:paw]] 孵化（-1 蛋 -50 币）</button>
+        </div>
+        <div class="ov-btns"><button class="ov-btn" data-act="stashBack">↩ 返回仓库</button></div>`);
+      UI.act('hatchEgg', () => {
+        const r = B.hatchPet();
+        if (r.ok) {
+          Sfx.ding();
+          UI.log(`[[icon:paw]] 孵化成功！获得宠物<b>「${esc(r.pet.name)}」</b>——${esc(r.pet.desc)}（可在仓库页携带 / 升级页升级）`, 'loot');
+          SDT.Meta.checkUnlocks();
+        } else if (r.why === 'poor') UI.log('[[icon:coin]] 储备币不足 50，无法孵化（卖出仓库卡牌攒币）', 'warn');
+        else if (r.why === 'all') UI.log('[[icon:paw]] 已经集齐全部宠物了', 'dim');
+        else UI.log('[[icon:crystal]] 仓库里没有宠物蛋了', 'warn');
+        renderHub();
+      });
+      UI.act('stashBack', () => renderHub());
+      return;
+    }
     // 材料卡（木材/口粮/钥匙）：只能使用折入真实物资，不可卖出换币（2026-09-08 定版）
     const mat = B.materialInfo ? B.materialInfo(s.card) : null;
     if (mat) {
@@ -478,6 +600,10 @@ let hubTab = 'deploy';
     const marked = B.isCollected(s.card);
     const price = SDT.Cards.sellPrice(s.card);
     const special = isSpecialCollect(s.card);
+    // 职业收藏室（2026-09-10 留言 #39 定版）：收藏职业卡 / 能力卡计入收藏室并转化为熟练度经验，
+    // 卡牌保留在仓库（此前整堆删除，玩家感受等同卖出）。同一张卡只有首次收藏计入经验（Meta.collXp）。
+    const convertType = !!s.card.cls && (s.card.rarity === '职业' || s.card.type === '能力卡');
+    const convertible = convertType && !marked;
     game.state = 'modal';
     _set_cardPageOpen(false);   // 弹窗层级：只能通过按钮返回仓库（Esc 不关闭）
     UI.showOverlay(marked ? '[[icon:sparkles]] 已收藏' : '[[icon:archive]] 仓库物品', `
@@ -485,14 +611,20 @@ let hubTab = 'deploy';
       <p class="ov-stats">×${s.count} 张 · 收购价 <b class="gold">${price} 币</b>/张
         ${s.count > 1 ? `（全部卖出 +${price * s.count} 币）` : ''}</p>
       ${special ? '<p class="ov-note">[[icon:sparkles]] <b>特殊收藏品</b>——收藏后可完成对应成就，且收藏期间不可卖出。</p>' : ''}
-      ${marked ? '<p class="ov-note">[[icon:sparkles]] 收藏中的物品受保护：取消收藏后才能卖出（图鉴记录会保留）。</p>' : ''}
+      ${marked && !convertType ? '<p class="ov-note">[[icon:sparkles]] 收藏中的物品受保护：取消收藏后才能卖出（图鉴记录会保留）。</p>' : ''}
+      ${convertible ? `<p class="ov-note">[[icon:medal]] <b>职业收藏室</b>：收藏后计入收藏室陈列，并转化为对应人物的熟练度经验（同一张卡只有首次收藏计入进度）——<b>卡牌保留在仓库</b>。</p>` : ''}
+      ${marked && convertType ? '<p class="ov-note">[[icon:medal]] 该卡已收藏入职业收藏室（经验已结算）——卡牌保留在仓库，可正常卖出或继续存放。</p>' : ''}
       <div class="ov-btns">
         ${s.card.id === 'tt-econpack' ? `<button class="ov-btn ok" data-act="econpackUse">[[icon:cards]] 使用（获得 5 张随机卡牌）</button>` : ''}
-        <button class="ov-btn${marked ? '' : ' ok'}" data-act="collToggle">${marked ? '[[icon:sparkles]] 取消收藏' : '[[icon:sparkles]] 收藏'}</button>
+        ${convertible
+          ? `<button class="ov-btn ok" data-act="collToggle">[[icon:medal]] 收藏（转化经验 · 卡牌保留）</button>`
+          : marked && convertType
+            ? ''
+            : `<button class="ov-btn${marked ? '' : ' ok'}" data-act="collToggle">${marked ? '[[icon:sparkles]] 取消收藏' : '[[icon:sparkles]] 收藏'}</button>`}
         <button class="ov-btn${marked ? ' ok' : ''}" data-act="sellOne" ${marked ? 'disabled' : ''}>[[icon:coin]] 卖出 1 张（+${price}）</button>
       </div>
       <div class="ov-btns">
-        <button class="ov-btn" data-act="sellAll" ${marked || s.count < 2 ? 'disabled' : ''}>[[icon:coin]] 全部卖出（+${price * s.count}）</button>
+        <button class="ov-btn" data-act="sellAll" ${marked || s.count < 2 ? 'disabled' : ''}>[[icon:coin]] 全部卖出（+${price * s.count} 币）</button>
         <button class="ov-btn" data-act="stashBack">↩ 返回仓库</button>
       </div>`);
     UI.act('econpackUse', () => {
@@ -516,11 +648,16 @@ let hubTab = 'deploy';
     });
     UI.act('collToggle', () => {
       const now = B.collectToggle(s.card);
-      SDT.Meta.checkUnlocks();
       Sfx.ding();
+      // 经验结算必须最先：checkUnlocks → syncCollXp 会把已收藏的职业卡回填为
+      // 「已结算」，若先于 onCollect 执行，首次收藏的 +10 就被吃掉了
+      SDT.Meta.onCollect(s.card, now);
+      // 2026-09-10 留言 #39 定版：收藏只记录 + 转化经验，卡牌保留在仓库——
+      // 此前整堆从仓库删除（玩家感受等同卖出）。重复收藏入口已被收藏记录挡住，经验不重复发放。
       UI.log(now
-        ? `[[icon:sparkles]] 已收藏【<b>${esc(s.card.name)}</b>】进入图鉴${isSpecialCollect(s.card) ? '（特殊收藏品）' : ''}`
+        ? `[[icon:sparkles]] 已收藏【<b>${esc(s.card.name)}</b>】入职业收藏室，转化为人物熟练度经验（卡牌保留在仓库）${isSpecialCollect(s.card) ? '（特殊收藏品）' : ''}`
         : `[[icon:sparkles]] 已取消收藏【<b>${esc(s.card.name)}</b>】`, now ? 'loot' : 'dim');
+      SDT.Meta.checkUnlocks();
       renderHub();
     });
     UI.act('sellOne', () => {
@@ -550,10 +687,33 @@ let hubTab = 'deploy';
     UI.act('stashBack2', () => renderHub());
   }
 
-  // —— 升级页：背包扩建 + 仓库扩建 + 宠物安全格 ——
+  // —— 升级页：背包扩建 + 仓库扩建 + 宠物升级（保险升级改为宠物升级，需求 #2/#14）——
   function hubUpgradeHTML() {
     const B = SDT.Base;
     const R = MAP.rules;
+    const owned = B.ownedPets();
+    const sel = B.carriedPet();
+    // 宠物升级：每只宠物独立进度，口粮递增 2-3-4-5，上限 Lv.5；
+    // 携带中的宠物决定保护格数量（小企鹅咕嘎 +2：4-8 格）
+    const petRows = B.PETS.map(p => {
+      const have = owned.includes(p.id);
+      if (!have) {
+        return `<div class="pk-row pet-row locked"><span>[[icon:paw]] <b>？？？</b><span class="dim">· 未孵化（宠物蛋 + 50 币，仓库页）</span></span><span class="dim">Lv.? / ${B.PET_LEVEL_MAX}</span></div>`;
+      }
+      const lv = B.petLevel(p.id);
+      const maxed = lv >= B.PET_LEVEL_MAX;
+      const cost = B.petUpCost(p.id);
+      const on = sel && sel.id === p.id;
+      return `<div class="pk-row pet-row${on ? ' on' : ''}">
+        <span>[[icon:${p.icon}]] <b>${esc(p.name)}</b>${on ? ' <span class="got">[[icon:check]] 携带中</span>' : ''}
+          <span class="dim pet-desc">${esc(p.desc.replace(/^携带效果：/, ''))}</span></span>
+        <span class="pet-ops">
+          <span class="dim">Lv.${lv}${maxed ? ' · MAX' : ` → ${lv + 1}`}</span>
+          <button class="mini-btn ok" data-act="upPet" data-id="${p.id}" ${maxed || B.data.rations < cost ? 'disabled' : ''}
+            title="${maxed ? '已满级' : `消耗口粮 ×${cost} 升级`}">${maxed ? '已满级' : `[[icon:bread]] ×${cost} 升级`}</button>
+        </span>
+      </div>`;
+    }).join('');
     return `
       <div class="hub-two">
         <section class="hub-card">
@@ -570,16 +730,12 @@ let hubTab = 'deploy';
           <button class="ov-btn ok" data-act="upStash" ${B.canUpgradeStash() ? '' : 'disabled'}>[[icon:wood]] ×${R.stashUpgradeWood} 扩建 +${R.stashUpgradeSlots} 张</button>
           ${B.stashCap() >= R.stashMax ? '<p class="hint ok-hint">[[icon:check]] 已达上限</p>' : ''}
         </section>
-        <section class="hub-card">
-          <h3>[[icon:paw]] 宠物小屋</h3>
-          <div class="pet-row"><span class="pet-ava">[[icon:paw]]</span>
-            <div>宠物<b>「阿七」</b>看守着背包的安全格</div></div>
-          <div class="base-line">安全格 <b>${B.safeCap()}</b> / ${R.safeMax} 格</div>
-          <div class="base-bar green"><i style="width:${(B.safeCap() / R.safeMax * 100).toFixed(1)}%"></i></div>
-          <button class="ov-btn ok" data-act="upSafe" ${B.canUpgradeSafe() ? '' : 'disabled'}>[[icon:bread]] ×${R.safeUpgradeRations} 升级 +1 安全格</button>
-          ${B.safeCap() >= R.safeMax ? '<p class="hint ok-hint">[[icon:check]] 已达上限</p>' : ''}
-        </section>
-      </div>`;
+      </div>
+      <section class="hub-card" style="margin-top:14px">
+        <h3>[[icon:paw]] 宠物升级 <span class="set-tip">口粮 ${B.PET_UP_COSTS.join('-')} · 携带中的宠物决定保护格 <b>${B.safeCap()}</b> 格</span></h3>
+        <p class="ov-note" style="margin:0 0 6px">每只宠物的升级进度相互独立（Lv.1 起每级 +1 保护格）；携带不同宠物，保护格数量不同——小企鹅咕嘎可到 4-8 格。在仓库页切换携带的宠物。</p>
+        <div class="stash-list">${petRows}</div>
+      </section>`;
   }
 
   // —— 人物页：各人物熟练度等级 ——
@@ -601,7 +757,50 @@ let hubTab = 'deploy';
       </section>`;
   }
 
-  // —— 成就页 ——（v0.21：顶部新增卡背图鉴，卡背由成就领取解锁）
+  // —— 职业收藏室（2026-09-09：成就系统 → 成就与职业收藏室系统）——
+  // 仓库中收藏的职业卡与能力卡陈列于此；进度只计不同的职业卡 + 能力卡，
+  // 达成 5/15/30/45/全收集里程碑可各领一次奖励（见 meta.js COLL_MILESTONES）。
+  function collRoomHTML() {
+    const M = SDT.Meta, B = SDT.Base;
+    const total = M.collTotal();
+    const prog = M.collProgress();
+    const pct = total ? Math.min(100, prog / total * 100) : 0;
+    const msRows = M.COLL_MILESTONES.map(m => {
+      const need = M.collMsNeed(m);
+      const reached = M.collMsReached(m);
+      const claimed = M.isCollClaimed(m.id);
+      return `<div class="coll-ms${claimed ? ' done' : reached ? ' reach' : ''}">
+        <b>收藏 ${need} 张</b>
+        <span class="rw">${M.collRewardText(m)}</span>
+        ${claimed ? '<span class="got">[[icon:check]] 已领取</span>'
+          : reached ? `<button class="mini-btn ok" data-act="claimColl" data-id="${m.id}">领取</button>`
+          : `<span class="dim">${prog} / ${need}</span>`}
+      </div>`;
+    }).join('');
+    const groups = SDT.Cards.CLASSES.map(cls => {
+      const pool = M.collectPool().filter(c => c.cls === cls);
+      const gotN = pool.filter(c => B.isCollected(c)).length;
+      const slots = pool.map(c => B.isCollected(c)
+        ? `<button class="coll-slot on" data-act="collZoom" data-id="${escAttr(c.id)}"
+             title="${escAttr(c.name)} · 已收藏 · 点击查看">${SDT.Cards.cardHTML(c, 'sm')}</button>`
+        : '<div class="coll-slot off" title="尚未收藏"><span>？</span></div>').join('');
+      return `<div class="coll-group">
+        <div class="coll-group-head"><b>${esc(characterName(cls))}</b>
+          <span class="dim">${gotN} / ${pool.length} 张 · 收藏职业卡 +10 经验 · 能力卡 +50 经验</span></div>
+        <div class="coll-cards">${slots}</div>
+      </div>`;
+    }).join('');
+    return `
+      <section class="hub-card coll-room">
+        <h3>[[icon:sparkles]] 职业收藏室 <span class="set-tip">收藏进度 ${prog} / ${total}</span></h3>
+        <p class="ov-note" style="margin:0 0 8px">收藏的职业卡与能力卡会陈列在这里（收藏只做记录并转化为对应人物的经验，卡牌保留在仓库），每收藏一张职业卡为对应人物 <b>+10</b> 点经验、能力卡 <b>+50</b> 点（同一张只计一次）。收藏<b>不同</b>的职业卡与能力卡推进进度，阶段目标各有一次奖励。</p>
+        <div class="base-bar"><i style="width:${pct.toFixed(1)}%"></i></div>
+        <div class="coll-ms-list">${msRows}</div>
+        ${groups}
+      </section>`;
+  }
+
+  // —— 成就页 ——（2026-09-09：升级为「成就与职业收藏室」——卡背图鉴 + 成就 + 职业收藏室）
   function hubAchHTML() {
     const M = SDT.Meta, B = SDT.Base;
     const doneN = M.ACHIEVEMENTS.filter(a => M.isUnlocked(a)).length;
@@ -644,7 +843,8 @@ let hubTab = 'deploy';
       <section class="hub-card">
         <h3>[[icon:trophy]] 成就 <span class="set-tip">${doneN} / ${M.ACHIEVEMENTS.length} 已解锁</span></h3>
         <div class="ach-list">${rows}</div>
-      </section>`;
+      </section>
+      ${collRoomHTML()}`;
   }
 
   function closeBase() {

@@ -43,8 +43,8 @@ for (const f of fs.readdirSync(path.join(HERE, 'src')).filter(f => f.endsWith('.
 const gameSource = src('game.js');
 const mapSource = src('mapData.js');
 check('关卡·三环风险梯度已声明', /risk:\s*'低'/.test(mapSource) && /risk:\s*'中'/.test(mapSource) && /risk:\s*'高'/.test(mapSource), true);
-check('关卡·内层精英概率保持 25%', /chance:\s*0\.25/.test(mapSource), true);
-check('遭遇·策略预告元数据', /strategy:\s*'试探/.test(mapSource) && /strategy:\s*'压迫/.test(mapSource), true);
+check('关卡·巨兽精英概率已声明（第3层3% / 第4层10%）', /chance:\s*0\.03/.test(mapSource) && /chance:\s*0\.10/.test(mapSource), true);
+check('遭遇·策略预告元数据', /strategy:\s*'试探/.test(mapSource) && /strategy:\s*'核心区/.test(mapSource), true);
 check('场景·10 张事件 sceneId 覆盖', ['timeskip','demondeal','bandits','mystery','goldmine','goldhammer','relief','airdrop','chestdraw','systemsupply'].every(k => new RegExp(`event-${k}`).test(gameSource)), true);
 check('场景·标准节点与拾取契约', /scene-battle-bg/.test(gameSource) && /scene-extract-bg/.test(gameSource) && /scene-pickup-key/.test(gameSource), true);
 check('场景·落脚进入全屏房间链', /UI\.beginRoom\(\)/.test(gameSource) && /_roomActive/.test(src('ui.js')), true);

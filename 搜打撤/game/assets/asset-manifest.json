@@ -1,2107 +1,1921 @@
 {
- "_comment": "资产清单(create-game-assets模板裁剪版): path/ext/bytes/license。assets:audit 校验未登记文件。",
- "generated": "2026-09-08",
- "count": 350,
- "assets": [
-  {
-   "path": "bgm-black-stream-sea.mp3",
-   "ext": "mp3",
-   "bytes": 2438907,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "bgm-liejie-fuhe.mp3",
-   "ext": "mp3",
-   "bytes": 6559763,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "bgm-sour-orange-earth.mp3",
-   "ext": "mp3",
-   "bytes": 3745036,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "board-backdrop-wreck.webp",
-   "ext": "webp",
-   "bytes": 51414,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "brand-mark-codename7.png",
-   "ext": "png",
-   "bytes": 5155,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "cards/consumable.webp",
-   "ext": "webp",
-   "bytes": 71896,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "cards/equipment-armor.webp",
-   "ext": "webp",
-   "bytes": 126550,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "cards/equipment-utility.webp",
-   "ext": "webp",
-   "bytes": 151334,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "cards/equipment-weapon.webp",
-   "ext": "webp",
-   "bytes": 79688,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "cards/event.webp",
-   "ext": "webp",
-   "bytes": 598448,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "cards/healing.webp",
-   "ext": "webp",
-   "bytes": 205232,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "cards/hero-assassin.webp",
-   "ext": "webp",
-   "bytes": 13950,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "cards/hero-descend.webp",
-   "ext": "webp",
-   "bytes": 19698,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "cards/hero-guard.webp",
-   "ext": "webp",
-   "bytes": 14898,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "cards/hero-mage.webp",
-   "ext": "webp",
-   "bytes": 34380,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "cards/hero-priest.webp",
-   "ext": "webp",
-   "bytes": 15952,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "cards/hero-ranger.webp",
-   "ext": "webp",
-   "bytes": 17224,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "cards/hero-sealer.webp",
-   "ext": "webp",
-   "bytes": 18948,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "cards/hero-summoner.webp",
-   "ext": "webp",
-   "bytes": 26026,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "cards/hero-sword.webp",
-   "ext": "webp",
-   "bytes": 19762,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "cards/hero-warlock.webp",
-   "ext": "webp",
-   "bytes": 20590,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "cards/hero-warrior.webp",
-   "ext": "webp",
-   "bytes": 31386,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "cards/hero.webp",
-   "ext": "webp",
-   "bytes": 110684,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "cards/items/builtin-fuyuanyao.webp",
-   "ext": "webp",
-   "bytes": 235552,
-   "license": "项目自有（NovelAI V5 生成）"
-  },
-  {
-   "path": "cards/items/starter-emergency-bandage.webp",
-   "ext": "webp",
-   "bytes": 286910,
-   "license": "项目自有（NovelAI V5 生成）"
-  },
-  {
-   "path": "cards/items/tt-crystal.webp",
-   "ext": "webp",
-   "bytes": 176252,
-   "license": "项目自有（NovelAI V5 生成）"
-  },
-  {
-   "path": "cards/items/tt-jinchuangyao.webp",
-   "ext": "webp",
-   "bytes": 144942,
-   "license": "项目自有（NovelAI V5 生成）"
-  },
-  {
-   "path": "cards/items/tt-medneedle.webp",
-   "ext": "webp",
-   "bytes": 168538,
-   "license": "项目自有（NovelAI V5 生成）"
-  },
-  {
-   "path": "cards/items/tt-token-color.webp",
-   "ext": "webp",
-   "bytes": 270484,
-   "license": "项目自有（NovelAI V5 生成）"
-  },
-  {
-   "path": "cards/items/tt-token-gold.webp",
-   "ext": "webp",
-   "bytes": 273612,
-   "license": "项目自有（NovelAI V5 生成）"
-  },
-  {
-   "path": "cards/items/tt3-blue-potion.webp",
-   "ext": "webp",
-   "bytes": 234686,
-   "license": "项目自有（NovelAI V5 生成）"
-  },
-  {
-   "path": "cards/items/tt3-demon-potion.webp",
-   "ext": "webp",
-   "bytes": 50780,
-   "license": "项目自有（NovelAI V5 生成）"
-  },
-  {
-   "path": "cards/items/tt3-houyi-potion.webp",
-   "ext": "webp",
-   "bytes": 218186,
-   "license": "项目自有（NovelAI V5 生成）"
-  },
-  {
-   "path": "cards/items/tt3-iceheart-potion.webp",
-   "ext": "webp",
-   "bytes": 201668,
-   "license": "项目自有（NovelAI V5 生成）"
-  },
-  {
-   "path": "cards/items/tt3-mind-potion.webp",
-   "ext": "webp",
-   "bytes": 202210,
-   "license": "项目自有（NovelAI V5 生成）"
-  },
-  {
-   "path": "cards/items/tt3-mixed-potion.webp",
-   "ext": "webp",
-   "bytes": 79714,
-   "license": "项目自有（NovelAI V5 生成）"
-  },
-  {
-   "path": "cards/items/tt3-mystery-potion.webp",
-   "ext": "webp",
-   "bytes": 199096,
-   "license": "项目自有（NovelAI V5 生成）"
-  },
-  {
-   "path": "cards/items/tt3-python-potion.webp",
-   "ext": "webp",
-   "bytes": 171216,
-   "license": "项目自有（NovelAI V5 生成）"
-  },
-  {
-   "path": "cards/items/tt3-savior-elixir.webp",
-   "ext": "webp",
-   "bytes": 208988,
-   "license": "项目自有（NovelAI V5 生成）"
-  },
-  {
-   "path": "cards/items/tt3-turnabout-potion.webp",
-   "ext": "webp",
-   "bytes": 125748,
-   "license": "项目自有（NovelAI V5 生成）"
-  },
-  {
-   "path": "cards/items/tt3sp-doom.webp",
-   "ext": "webp",
-   "bytes": 157540,
-   "license": "项目自有（NovelAI V5 生成）"
-  },
-  {
-   "path": "cards/items/tt4-shine-token.webp",
-   "ext": "webp",
-   "bytes": 330132,
-   "license": "项目自有（NovelAI V5 生成）"
-  },
-  {
-   "path": "cards/items/tt4-smoke-bomb.webp",
-   "ext": "webp",
-   "bytes": 259968,
-   "license": "项目自有（NovelAI V5 生成）"
-  },
-  {
-   "path": "cards/items/tt4-woodify.webp",
-   "ext": "webp",
-   "bytes": 174576,
-   "license": "项目自有（NovelAI V5 生成）"
-  },
-  {
-   "path": "cards/martial-melee.webp",
-   "ext": "webp",
-   "bytes": 140740,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "cards/martial-ranged.webp",
-   "ext": "webp",
-   "bytes": 159794,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "cards/resource-key.webp",
-   "ext": "webp",
-   "bytes": 146638,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "cards/resource-material.webp",
-   "ext": "webp",
-   "bytes": 165706,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "cards/resource-valuables.webp",
-   "ext": "webp",
-   "bytes": 219530,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "cards/resources/diamond.webp",
-   "ext": "webp",
-   "bytes": 19524,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "cards/resources/econpack.webp",
-   "ext": "webp",
-   "bytes": 16994,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "cards/resources/garnet-marble.webp",
-   "ext": "webp",
-   "bytes": 34910,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "cards/resources/key-one.webp",
-   "ext": "webp",
-   "bytes": 28746,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "cards/resources/key.webp",
-   "ext": "webp",
-   "bytes": 21208,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "cards/resources/keys-bunch.webp",
-   "ext": "webp",
-   "bytes": 19072,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "cards/resources/ration-double.webp",
-   "ext": "webp",
-   "bytes": 15910,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "cards/resources/ration-std.webp",
-   "ext": "webp",
-   "bytes": 20786,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "cards/resources/ration.webp",
-   "ext": "webp",
-   "bytes": 16694,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "cards/resources/wood-bundle.webp",
-   "ext": "webp",
-   "bytes": 35230,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "cards/resources/wood-lots.webp",
-   "ext": "webp",
-   "bytes": 35048,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "cards/resources/wood.webp",
-   "ext": "webp",
-   "bytes": 28500,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "cards/spell.webp",
-   "ext": "webp",
-   "bytes": 218492,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "cards/unknown.webp",
-   "ext": "webp",
-   "bytes": 211244,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "fonts/cascadia-code-400.woff2",
-   "ext": "woff2",
-   "bytes": 17480,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "fonts/cascadia-code-700.woff2",
-   "ext": "woff2",
-   "bytes": 18024,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "fonts/notosans-sc-400.woff2",
-   "ext": "woff2",
-   "bytes": 251588,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "fonts/notosans-sc-700.woff2",
-   "ext": "woff2",
-   "bytes": 257784,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "hub-bg-rhine.png",
-   "ext": "png",
-   "bytes": 66947,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "icon-council.png",
-   "ext": "png",
-   "bytes": 1427010,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "icons/altar.svg",
-   "ext": "svg",
-   "bytes": 55967,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "icons/battle.svg",
-   "ext": "svg",
-   "bytes": 40119,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "icons/boss.svg",
-   "ext": "svg",
-   "bytes": 53059,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "icons/chest.svg",
-   "ext": "svg",
-   "bytes": 71756,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "icons/door.svg",
-   "ext": "svg",
-   "bytes": 66769,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "icons/entrance.svg",
-   "ext": "svg",
-   "bytes": 43086,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "icons/event.svg",
-   "ext": "svg",
-   "bytes": 36019,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "icons/extract.svg",
-   "ext": "svg",
-   "bytes": 41361,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "icons/fire.svg",
-   "ext": "svg",
-   "bytes": 54368,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "icons/game-icons/badges-crown.svg",
-   "ext": "svg",
-   "bytes": 234,
-   "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
-  },
-  {
-   "path": "icons/game-icons/badges-heart.svg",
-   "ext": "svg",
-   "bytes": 313,
-   "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
-  },
-  {
-   "path": "icons/game-icons/badges-skull.svg",
-   "ext": "svg",
-   "bytes": 505,
-   "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
-  },
-  {
-   "path": "icons/game-icons/carl-olsen-crossbow.svg",
-   "ext": "svg",
-   "bytes": 1742,
-   "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
-  },
-  {
-   "path": "icons/game-icons/caro-asercion-round-potion.svg",
-   "ext": "svg",
-   "bytes": 962,
-   "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
-  },
-  {
-   "path": "icons/game-icons/delapouite-boss-key.svg",
-   "ext": "svg",
-   "bytes": 1957,
-   "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
-  },
-  {
-   "path": "icons/game-icons/delapouite-chest.svg",
-   "ext": "svg",
-   "bytes": 733,
-   "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
-  },
-  {
-   "path": "icons/game-icons/delapouite-coins.svg",
-   "ext": "svg",
-   "bytes": 6810,
-   "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
-  },
-  {
-   "path": "icons/game-icons/lorc-angel-wings.svg",
-   "ext": "svg",
-   "bytes": 2262,
-   "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
-  },
-  {
-   "path": "icons/game-icons/lorc-archery-target.svg",
-   "ext": "svg",
-   "bytes": 1258,
-   "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
-  },
-  {
-   "path": "icons/game-icons/lorc-battle-axe.svg",
-   "ext": "svg",
-   "bytes": 1279,
-   "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
-  },
-  {
-   "path": "icons/game-icons/lorc-bleeding-heart.svg",
-   "ext": "svg",
-   "bytes": 1642,
-   "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
-  },
-  {
-   "path": "icons/game-icons/lorc-book-aura.svg",
-   "ext": "svg",
-   "bytes": 1247,
-   "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
-  },
-  {
-   "path": "icons/game-icons/lorc-bordered-shield.svg",
-   "ext": "svg",
-   "bytes": 1612,
-   "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
-  },
-  {
-   "path": "icons/game-icons/lorc-bowie-knife.svg",
-   "ext": "svg",
-   "bytes": 722,
-   "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
-  },
-  {
-   "path": "icons/game-icons/lorc-bright-explosion.svg",
-   "ext": "svg",
-   "bytes": 2786,
-   "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
-  },
-  {
-   "path": "icons/game-icons/lorc-broadsword.svg",
-   "ext": "svg",
-   "bytes": 1314,
-   "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
-  },
-  {
-   "path": "icons/game-icons/lorc-broken-shield.svg",
-   "ext": "svg",
-   "bytes": 1272,
-   "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
-  },
-  {
-   "path": "icons/game-icons/lorc-broken-skull.svg",
-   "ext": "svg",
-   "bytes": 2431,
-   "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
-  },
-  {
-   "path": "icons/game-icons/lorc-bubbling-flask.svg",
-   "ext": "svg",
-   "bytes": 2803,
-   "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
-  },
-  {
-   "path": "icons/game-icons/lorc-crossed-swords.svg",
-   "ext": "svg",
-   "bytes": 1254,
-   "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
-  },
-  {
-   "path": "icons/game-icons/lorc-crystal-ball.svg",
-   "ext": "svg",
-   "bytes": 1351,
-   "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
-  },
-  {
-   "path": "icons/game-icons/lorc-energy-breath.svg",
-   "ext": "svg",
-   "bytes": 2140,
-   "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
-  },
-  {
-   "path": "icons/game-icons/lorc-gem-necklace.svg",
-   "ext": "svg",
-   "bytes": 2666,
-   "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
-  },
-  {
-   "path": "icons/game-icons/lorc-heavy-arrow.svg",
-   "ext": "svg",
-   "bytes": 1380,
-   "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
-  },
-  {
-   "path": "icons/game-icons/lorc-hourglass.svg",
-   "ext": "svg",
-   "bytes": 639,
-   "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
-  },
-  {
-   "path": "icons/game-icons/lorc-key.svg",
-   "ext": "svg",
-   "bytes": 1475,
-   "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
-  },
-  {
-   "path": "icons/game-icons/lorc-lightning-arc.svg",
-   "ext": "svg",
-   "bytes": 1725,
-   "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
-  },
-  {
-   "path": "icons/game-icons/lorc-scroll-unfurled.svg",
-   "ext": "svg",
-   "bytes": 1967,
-   "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
-  },
-  {
-   "path": "icons/game-icons/lorc-thunder-blade.svg",
-   "ext": "svg",
-   "bytes": 1567,
-   "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
-  },
-  {
-   "path": "icons/game-icons/lorc-treasure-map.svg",
-   "ext": "svg",
-   "bytes": 2145,
-   "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
-  },
-  {
-   "path": "icons/key.svg",
-   "ext": "svg",
-   "bytes": 38380,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "icons/player.svg",
-   "ext": "svg",
-   "bytes": 64900,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "icons/shop.svg",
-   "ext": "svg",
-   "bytes": 88221,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/avatars/baiqi.webp",
-   "ext": "webp",
-   "bytes": 13808,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/avatars/shuangling.webp",
-   "ext": "webp",
-   "bytes": 13582,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/classes/assassin.webp",
-   "ext": "webp",
-   "bytes": 22352,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/classes/descend.webp",
-   "ext": "webp",
-   "bytes": 28978,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/classes/guard.webp",
-   "ext": "webp",
-   "bytes": 25532,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/classes/mage.webp",
-   "ext": "webp",
-   "bytes": 24118,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/classes/priest.webp",
-   "ext": "webp",
-   "bytes": 30672,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/classes/ranger.webp",
-   "ext": "webp",
-   "bytes": 32782,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/classes/sealer.webp",
-   "ext": "webp",
-   "bytes": 27992,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/classes/summoner.webp",
-   "ext": "webp",
-   "bytes": 34470,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/classes/sword.webp",
-   "ext": "webp",
-   "bytes": 31624,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/classes/warlock.webp",
-   "ext": "webp",
-   "bytes": 27984,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/classes/warrior.webp",
-   "ext": "webp",
-   "bytes": 27758,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/cut/classes/assassin.webp",
-   "ext": "webp",
-   "bytes": 22008,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/cut/classes/descend.webp",
-   "ext": "webp",
-   "bytes": 27520,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/cut/classes/guard.webp",
-   "ext": "webp",
-   "bytes": 25382,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/cut/classes/mage.webp",
-   "ext": "webp",
-   "bytes": 22262,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/cut/classes/priest.webp",
-   "ext": "webp",
-   "bytes": 30018,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/cut/classes/ranger.webp",
-   "ext": "webp",
-   "bytes": 32304,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/cut/classes/sealer.webp",
-   "ext": "webp",
-   "bytes": 28246,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/cut/classes/summoner.webp",
-   "ext": "webp",
-   "bytes": 34328,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/cut/classes/sword.webp",
-   "ext": "webp",
-   "bytes": 31810,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/cut/classes/warlock.webp",
-   "ext": "webp",
-   "bytes": 27744,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/cut/classes/warrior.webp",
-   "ext": "webp",
-   "bytes": 26688,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/cut/enemies/archer.webp",
-   "ext": "webp",
-   "bytes": 33982,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/cut/enemies/bandit.webp",
-   "ext": "webp",
-   "bytes": 30448,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/cut/enemies/boss_elem.webp",
-   "ext": "webp",
-   "bytes": 66148,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/cut/enemies/boss_general.webp",
-   "ext": "webp",
-   "bytes": 47258,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/cut/enemies/boss_orc.webp",
-   "ext": "webp",
-   "bytes": 54440,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/cut/enemies/cavalry.webp",
-   "ext": "webp",
-   "bytes": 35460,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/cut/enemies/dragon.webp",
-   "ext": "webp",
-   "bytes": 68010,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/cut/enemies/fire_el.webp",
-   "ext": "webp",
-   "bytes": 47338,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/cut/enemies/grass_el.webp",
-   "ext": "webp",
-   "bytes": 45044,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/cut/enemies/infantry.webp",
-   "ext": "webp",
-   "bytes": 39606,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/cut/enemies/orc_axe.webp",
-   "ext": "webp",
-   "bytes": 52656,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/cut/enemies/orc_jav.webp",
-   "ext": "webp",
-   "bytes": 38764,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/cut/enemies/water_el.webp",
-   "ext": "webp",
-   "bytes": 41898,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/cut/enemies/wolf_rider.webp",
-   "ext": "webp",
-   "bytes": 50730,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/enemies/archer.webp",
-   "ext": "webp",
-   "bytes": 120006,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/enemies/bandit.webp",
-   "ext": "webp",
-   "bytes": 92180,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/enemies/boss_elem.webp",
-   "ext": "webp",
-   "bytes": 189482,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/enemies/boss_general.webp",
-   "ext": "webp",
-   "bytes": 126748,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/enemies/boss_orc.webp",
-   "ext": "webp",
-   "bytes": 148150,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/enemies/cavalry.webp",
-   "ext": "webp",
-   "bytes": 91954,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/enemies/dragon.webp",
-   "ext": "webp",
-   "bytes": 197890,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/enemies/fire_el.webp",
-   "ext": "webp",
-   "bytes": 118450,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/enemies/grass_el.webp",
-   "ext": "webp",
-   "bytes": 131168,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/enemies/infantry.webp",
-   "ext": "webp",
-   "bytes": 127536,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/enemies/orc_axe.webp",
-   "ext": "webp",
-   "bytes": 178348,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/enemies/orc_jav.webp",
-   "ext": "webp",
-   "bytes": 109100,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/enemies/water_el.webp",
-   "ext": "webp",
-   "bytes": 125880,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/enemies/wolf_rider.webp",
-   "ext": "webp",
-   "bytes": 149776,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/expedition-roster.webp",
-   "ext": "webp",
-   "bytes": 357942,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/full/assassin.webp",
-   "ext": "webp",
-   "bytes": 44808,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/full/baiqi.webp",
-   "ext": "webp",
-   "bytes": 513796,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/full/baita.webp",
-   "ext": "webp",
-   "bytes": 600084,
-   "license": "项目自有（老板指定立绘）"
-  },
-  {
-   "path": "portraits/full/descend.webp",
-   "ext": "webp",
-   "bytes": 60658,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/full/guard.webp",
-   "ext": "webp",
-   "bytes": 46178,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/full/mage.webp",
-   "ext": "webp",
-   "bytes": 58266,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/full/priest.webp",
-   "ext": "webp",
-   "bytes": 43070,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/full/ranger.webp",
-   "ext": "webp",
-   "bytes": 61080,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/full/sealer.webp",
-   "ext": "webp",
-   "bytes": 49174,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/full/shuangling.webp",
-   "ext": "webp",
-   "bytes": 417520,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/full/summoner.webp",
-   "ext": "webp",
-   "bytes": 51398,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/full/sword.webp",
-   "ext": "webp",
-   "bytes": 52084,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/full/warlock.webp",
-   "ext": "webp",
-   "bytes": 47018,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "portraits/full/warrior.webp",
-   "ext": "webp",
-   "bytes": 60434,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "reconstruction/slot-wallpaper.jpg",
-   "ext": "jpg",
-   "bytes": 593208,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "reconstruction/wallpaper-original.webp",
-   "ext": "webp",
-   "bytes": 1138740,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "reconstruction/wallpaper-preview.jpg",
-   "ext": "jpg",
-   "bytes": 184366,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "scenes/battle-normal-anime-v2.webp",
-   "ext": "webp",
-   "bytes": 101204,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "scenes/battle-snow-street.png",
-   "ext": "png",
-   "bytes": 1522306,
-   "license": "项目自有（AI 生成）"
-  },
-  {
-   "path": "scenes/event-bandits-anime-v2.webp",
-   "ext": "webp",
-   "bytes": 206998,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "scenes/hub-ach.png",
-   "ext": "png",
-   "bytes": 27810,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "scenes/hub-classes.png",
-   "ext": "png",
-   "bytes": 46129,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "scenes/hub-stash.png",
-   "ext": "png",
-   "bytes": 34892,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "scenes/hub-upgrade.png",
-   "ext": "png",
-   "bytes": 47449,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "scenes/hub-wallpaper.jpg",
-   "ext": "jpg",
-   "bytes": 335926,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "scenes/scene-altar-anime-v2.webp",
-   "ext": "webp",
-   "bytes": 152448,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "scenes/scene-chest-anime-v2.webp",
-   "ext": "webp",
-   "bytes": 102936,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "scenes/scene-deploy-anime.png",
-   "ext": "png",
-   "bytes": 41662,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "scenes/scene-door-anime-v2.webp",
-   "ext": "webp",
-   "bytes": 142694,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "scenes/scene-extract-anime-v2.webp",
-   "ext": "webp",
-   "bytes": 156082,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "scenes/scene-fire-anime-v2.webp",
-   "ext": "webp",
-   "bytes": 142568,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "scenes/scene-pickup-coin-anime-v2.webp",
-   "ext": "webp",
-   "bytes": 147814,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "scenes/scene-pickup-key-anime-v2.webp",
-   "ext": "webp",
-   "bytes": 137136,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "scenes/scene-pickup-rations-anime-v2.webp",
-   "ext": "webp",
-   "bytes": 127542,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "scenes/scene-pickup-wood-anime-v2.webp",
-   "ext": "webp",
-   "bytes": 109560,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "scenes/scene-shop-anime-v2.webp",
-   "ext": "webp",
-   "bytes": 127466,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "sfx/battle/chestburst-1.ogg",
-   "ext": "ogg",
-   "bytes": 10208,
-   "license": "CC0 (Kenney.nl)"
-  },
-  {
-   "path": "sfx/battle/chestburst-2.ogg",
-   "ext": "ogg",
-   "bytes": 13615,
-   "license": "CC0 (Kenney.nl)"
-  },
-  {
-   "path": "sfx/battle/chestburst-3.ogg",
-   "ext": "ogg",
-   "bytes": 10032,
-   "license": "CC0 (Kenney.nl)"
-  },
-  {
-   "path": "sfx/battle/chestshake-1.ogg",
-   "ext": "ogg",
-   "bytes": 10492,
-   "license": "CC0 (Kenney.nl)"
-  },
-  {
-   "path": "sfx/battle/chestshake-2.ogg",
-   "ext": "ogg",
-   "bytes": 10028,
-   "license": "CC0 (Kenney.nl)"
-  },
-  {
-   "path": "sfx/battle/curse-1.ogg",
-   "ext": "ogg",
-   "bytes": 6526,
-   "license": "CC0 (Kenney.nl)"
-  },
-  {
-   "path": "sfx/battle/curse-2.ogg",
-   "ext": "ogg",
-   "bytes": 6544,
-   "license": "CC0 (Kenney.nl)"
-  },
-  {
-   "path": "sfx/battle/defeat-1.ogg",
-   "ext": "ogg",
-   "bytes": 16579,
-   "license": "CC0 (Kenney.nl)"
-  },
-  {
-   "path": "sfx/battle/heal-1.ogg",
-   "ext": "ogg",
-   "bytes": 16508,
-   "license": "CC0 (Kenney.nl)"
-  },
-  {
-   "path": "sfx/battle/heal-2.ogg",
-   "ext": "ogg",
-   "bytes": 11787,
-   "license": "CC0 (Kenney.nl)"
-  },
-  {
-   "path": "sfx/battle/heal-3.ogg",
-   "ext": "ogg",
-   "bytes": 12432,
-   "license": "CC0 (Kenney.nl)"
-  },
-  {
-   "path": "sfx/battle/hit-1.ogg",
-   "ext": "ogg",
-   "bytes": 8800,
-   "license": "CC0 (Kenney.nl)"
-  },
-  {
-   "path": "sfx/battle/hit-2.ogg",
-   "ext": "ogg",
-   "bytes": 10399,
-   "license": "CC0 (Kenney.nl)"
-  },
-  {
-   "path": "sfx/battle/hit-3.ogg",
-   "ext": "ogg",
-   "bytes": 11617,
-   "license": "CC0 (Kenney.nl)"
-  },
-  {
-   "path": "sfx/battle/hit-4.ogg",
-   "ext": "ogg",
-   "bytes": 10861,
-   "license": "CC0 (Kenney.nl)"
-  },
-  {
-   "path": "sfx/battle/hurt-1.ogg",
-   "ext": "ogg",
-   "bytes": 6570,
-   "license": "CC0 (Kenney.nl)"
-  },
-  {
-   "path": "sfx/battle/hurt-2.ogg",
-   "ext": "ogg",
-   "bytes": 6689,
-   "license": "CC0 (Kenney.nl)"
-  },
-  {
-   "path": "sfx/battle/legend-1.ogg",
-   "ext": "ogg",
-   "bytes": 15477,
-   "license": "CC0 (Kenney.nl)"
-  },
-  {
-   "path": "sfx/battle/legend-2.ogg",
-   "ext": "ogg",
-   "bytes": 8666,
-   "license": "CC0 (Kenney.nl)"
-  },
-  {
-   "path": "sfx/battle/legend-3.ogg",
-   "ext": "ogg",
-   "bytes": 19626,
-   "license": "CC0 (Kenney.nl)"
-  },
-  {
-   "path": "sfx/battle/parry-1.ogg",
-   "ext": "ogg",
-   "bytes": 6110,
-   "license": "CC0 (Kenney.nl)"
-  },
-  {
-   "path": "sfx/battle/parry-2.ogg",
-   "ext": "ogg",
-   "bytes": 5634,
-   "license": "CC0 (Kenney.nl)"
-  },
-  {
-   "path": "sfx/battle/reveal-1.ogg",
-   "ext": "ogg",
-   "bytes": 18248,
-   "license": "CC0 (Kenney.nl)"
-  },
-  {
-   "path": "sfx/battle/reveal-2.ogg",
-   "ext": "ogg",
-   "bytes": 12393,
-   "license": "CC0 (Kenney.nl)"
-  },
-  {
-   "path": "sfx/battle/reveal-3.ogg",
-   "ext": "ogg",
-   "bytes": 9077,
-   "license": "CC0 (Kenney.nl)"
-  },
-  {
-   "path": "sfx/battle/victory-1.ogg",
-   "ext": "ogg",
-   "bytes": 10201,
-   "license": "CC0 (Kenney.nl)"
-  },
-  {
-   "path": "sfx/battle/victory-2.ogg",
-   "ext": "ogg",
-   "bytes": 10291,
-   "license": "CC0 (Kenney.nl)"
-  },
-  {
-   "path": "sfx/click1.wav",
-   "ext": "wav",
-   "bytes": 18254,
-   "license": "CC0 (Kenney.nl)"
-  },
-  {
-   "path": "sfx/click2.wav",
-   "ext": "wav",
-   "bytes": 10062,
-   "license": "CC0 (Kenney.nl)"
-  },
-  {
-   "path": "sfx/click3.wav",
-   "ext": "wav",
-   "bytes": 15694,
-   "license": "CC0 (Kenney.nl)"
-  },
-  {
-   "path": "sfx/click4.wav",
-   "ext": "wav",
-   "bytes": 6734,
-   "license": "CC0 (Kenney.nl)"
-  },
-  {
-   "path": "sfx/click5.wav",
-   "ext": "wav",
-   "bytes": 6222,
-   "license": "CC0 (Kenney.nl)"
-  },
-  {
-   "path": "sfx/jsfxr/confirm.wav",
-   "ext": "wav",
-   "bytes": 3646,
-   "license": "Generated (jsfxr, 无版权限制)"
-  },
-  {
-   "path": "sfx/jsfxr/error.wav",
-   "ext": "wav",
-   "bytes": 9686,
-   "license": "Generated (jsfxr, 无版权限制)"
-  },
-  {
-   "path": "sfx/jsfxr/hit.wav",
-   "ext": "wav",
-   "bytes": 12545,
-   "license": "Generated (jsfxr, 无版权限制)"
-  },
-  {
-   "path": "sfx/jsfxr/levelup.wav",
-   "ext": "wav",
-   "bytes": 17046,
-   "license": "Generated (jsfxr, 无版权限制)"
-  },
-  {
-   "path": "sfx/jsfxr/pickup.wav",
-   "ext": "wav",
-   "bytes": 7296,
-   "license": "Generated (jsfxr, 无版权限制)"
-  },
-  {
-   "path": "sfx/rollover1.wav",
-   "ext": "wav",
-   "bytes": 41806,
-   "license": "CC0 (Kenney.nl)"
-  },
-  {
-   "path": "sfx/rollover2.wav",
-   "ext": "wav",
-   "bytes": 11086,
-   "license": "CC0 (Kenney.nl)"
-  },
-  {
-   "path": "sfx/rollover3.wav",
-   "ext": "wav",
-   "bytes": 15182,
-   "license": "CC0 (Kenney.nl)"
-  },
-  {
-   "path": "sfx/rollover4.wav",
-   "ext": "wav",
-   "bytes": 21838,
-   "license": "CC0 (Kenney.nl)"
-  },
-  {
-   "path": "sfx/rollover5.wav",
-   "ext": "wav",
-   "bytes": 22862,
-   "license": "CC0 (Kenney.nl)"
-  },
-  {
-   "path": "sfx/rollover6.wav",
-   "ext": "wav",
-   "bytes": 31054,
-   "license": "CC0 (Kenney.nl)"
-  },
-  {
-   "path": "sfx/switch1.wav",
-   "ext": "wav",
-   "bytes": 57166,
-   "license": "CC0 (Kenney.nl)"
-  },
-  {
-   "path": "sfx/switch2.wav",
-   "ext": "wav",
-   "bytes": 56142,
-   "license": "CC0 (Kenney.nl)"
-  },
-  {
-   "path": "sfx/switch3.wav",
-   "ext": "wav",
-   "bytes": 64846,
-   "license": "CC0 (Kenney.nl)"
-  },
-  {
-   "path": "sfx/switch4.wav",
-   "ext": "wav",
-   "bytes": 76110,
-   "license": "CC0 (Kenney.nl)"
-  },
-  {
-   "path": "sfx/switch5.wav",
-   "ext": "wav",
-   "bytes": 55630,
-   "license": "CC0 (Kenney.nl)"
-  },
-  {
-   "path": "sfx/switch6.wav",
-   "ext": "wav",
-   "bytes": 64334,
-   "license": "CC0 (Kenney.nl)"
-  },
-  {
-   "path": "slot-bg-knight-fantasy.webp",
-   "ext": "webp",
-   "bytes": 490052,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "title-hero-ascension-cartoon-1080p-winter-graded.webp",
-   "ext": "webp",
-   "bytes": 202528,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "title-hero-ascension.webp",
-   "ext": "webp",
-   "bytes": 1563724,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "title-wallpaper-02-whitehair-man-1080p-winter-graded.webp",
-   "ext": "webp",
-   "bytes": 97880,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "title-wallpaper-03-capped-youth-1080p-winter-graded.webp",
-   "ext": "webp",
-   "bytes": 102762,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "title-wallpaper-04-whitehair-woman-1080p-winter-graded.webp",
-   "ext": "webp",
-   "bytes": 124494,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "title-wallpaper-05-white-suit-man-1080p-winter-graded.webp",
-   "ext": "webp",
-   "bytes": 128124,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "title-wallpaper-ruin-girl-1080p.webp",
-   "ext": "webp",
-   "bytes": 366492,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "title-winter-conjecture.png",
-   "ext": "png",
-   "bytes": 1342662,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "title-winter-reverie.webp",
-   "ext": "webp",
-   "bytes": 516542,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/archive.png",
-   "ext": "png",
-   "bytes": 508,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/arrow.png",
-   "ext": "png",
-   "bytes": 430,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/bag.png",
-   "ext": "png",
-   "bytes": 526,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/blood.png",
-   "ext": "png",
-   "bytes": 808,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/bolt.png",
-   "ext": "png",
-   "bytes": 688,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/book.png",
-   "ext": "png",
-   "bytes": 523,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/bread.png",
-   "ext": "png",
-   "bytes": 696,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/broken.png",
-   "ext": "png",
-   "bytes": 811,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/broom.png",
-   "ext": "png",
-   "bytes": 678,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/cards.png",
-   "ext": "png",
-   "bytes": 523,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/check.png",
-   "ext": "png",
-   "bytes": 563,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/coin.png",
-   "ext": "png",
-   "bytes": 826,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/cross.png",
-   "ext": "png",
-   "bytes": 645,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/crystal.png",
-   "ext": "png",
-   "bytes": 1029,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/demon.png",
-   "ext": "png",
-   "bytes": 1173,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/dice.png",
-   "ext": "png",
-   "bytes": 554,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/door.png",
-   "ext": "png",
-   "bytes": 538,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/download.png",
-   "ext": "png",
-   "bytes": 521,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/exit.png",
-   "ext": "png",
-   "bytes": 430,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/fire.png",
-   "ext": "png",
-   "bytes": 922,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/flag.png",
-   "ext": "png",
-   "bytes": 576,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/flask.png",
-   "ext": "png",
-   "bytes": 756,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/folder.png",
-   "ext": "png",
-   "bytes": 508,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/gear.png",
-   "ext": "png",
-   "bytes": 1006,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/gem.png",
-   "ext": "png",
-   "bytes": 1029,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/heart.png",
-   "ext": "png",
-   "bytes": 602,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/helmet.png",
-   "ext": "png",
-   "bytes": 802,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/home.png",
-   "ext": "png",
-   "bytes": 538,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/hourglass.png",
-   "ext": "png",
-   "bytes": 768,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/key.png",
-   "ext": "png",
-   "bytes": 733,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/lantern.png",
-   "ext": "png",
-   "bytes": 664,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/lock.png",
-   "ext": "png",
-   "bytes": 586,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/map.png",
-   "ext": "png",
-   "bytes": 794,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/medal.png",
-   "ext": "png",
-   "bytes": 869,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/mouse.png",
-   "ext": "png",
-   "bytes": 768,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/notes.png",
-   "ext": "png",
-   "bytes": 523,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/paw.png",
-   "ext": "png",
-   "bytes": 900,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/pen.png",
-   "ext": "png",
-   "bytes": 678,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/plate.png",
-   "ext": "png",
-   "bytes": 802,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/play.png",
-   "ext": "png",
-   "bytes": 508,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/pocket.png",
-   "ext": "png",
-   "bytes": 526,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/pouch.png",
-   "ext": "png",
-   "bytes": 526,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/question.png",
-   "ext": "png",
-   "bytes": 632,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/recycle.png",
-   "ext": "png",
-   "bytes": 1006,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/runner.png",
-   "ext": "png",
-   "bytes": 724,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/save.png",
-   "ext": "png",
-   "bytes": 523,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/scroll.png",
-   "ext": "png",
-   "bytes": 523,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/shield.png",
-   "ext": "png",
-   "bytes": 802,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/skip.png",
-   "ext": "png",
-   "bytes": 508,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/skull.png",
-   "ext": "png",
-   "bytes": 878,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/slime.png",
-   "ext": "png",
-   "bytes": 745,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/sparkles.png",
-   "ext": "png",
-   "bytes": 664,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/sword.png",
-   "ext": "png",
-   "bytes": 563,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/swords.png",
-   "ext": "png",
-   "bytes": 882,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/tools.png",
-   "ext": "png",
-   "bytes": 678,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/trash.png",
-   "ext": "png",
-   "bytes": 508,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/trophy.png",
-   "ext": "png",
-   "bytes": 976,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/unlock.png",
-   "ext": "png",
-   "bytes": 542,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/upload.png",
-   "ext": "png",
-   "bytes": 430,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "ui/icons/wood.png",
-   "ext": "png",
-   "bytes": 416,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "winter-ui-source/black-longsword.png",
-   "ext": "png",
-   "bytes": 1563566,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "winter-ui-source/snowflakes.png",
-   "ext": "png",
-   "bytes": 1276130,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "winter-ui-source/squirrel-branch.png",
-   "ext": "png",
-   "bytes": 1207590,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "winter-ui-source/winter-hotpot.png",
-   "ext": "png",
-   "bytes": 2514139,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "winter-ui-source/winter-rose.png",
-   "ext": "png",
-   "bytes": 1129310,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "winter-ui/black-longsword.svg",
-   "ext": "svg",
-   "bytes": 442365,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "winter-ui/menu-emblems/card-designer-rose.svg",
-   "ext": "svg",
-   "bytes": 79303,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "winter-ui/menu-emblems/card-designer-snow-card.png",
-   "ext": "png",
-   "bytes": 80878,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "winter-ui/menu-emblems/card-library-squirrel.svg",
-   "ext": "svg",
-   "bytes": 83540,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "winter-ui/menu-emblems/encyclopedia-book.png",
-   "ext": "png",
-   "bytes": 96651,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "winter-ui/menu-emblems/exit-black-sword.svg",
-   "ext": "svg",
-   "bytes": 87831,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "winter-ui/menu-emblems/exit-retreat.png",
-   "ext": "png",
-   "bytes": 67211,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "winter-ui/menu-emblems/prebattle-readied-hands.png",
-   "ext": "png",
-   "bytes": 103381,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "winter-ui/menu-emblems/prebattle-snow.svg",
-   "ext": "svg",
-   "bytes": 78219,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "winter-ui/menu-emblems/source/card-designer-rose.png",
-   "ext": "png",
-   "bytes": 1874702,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "winter-ui/menu-emblems/source/card-library-squirrel.png",
-   "ext": "png",
-   "bytes": 1970484,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "winter-ui/menu-emblems/source/exit-black-sword.png",
-   "ext": "png",
-   "bytes": 2006210,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "winter-ui/menu-emblems/source/prebattle-snow.png",
-   "ext": "png",
-   "bytes": 1813966,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "winter-ui/menu-emblems/source/start-hotpot.png",
-   "ext": "png",
-   "bytes": 2215892,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "winter-ui/menu-emblems/start-conjecture.png",
-   "ext": "png",
-   "bytes": 117267,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "winter-ui/menu-emblems/start-hotpot.svg",
-   "ext": "svg",
-   "bytes": 90087,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "winter-ui/raster/black-longsword.webp",
-   "ext": "webp",
-   "bytes": 28796,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "winter-ui/raster/snowflakes.webp",
-   "ext": "webp",
-   "bytes": 51630,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "winter-ui/raster/squirrel-branch.webp",
-   "ext": "webp",
-   "bytes": 53932,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "winter-ui/raster/winter-hotpot.webp",
-   "ext": "webp",
-   "bytes": 81406,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "winter-ui/raster/winter-rose.webp",
-   "ext": "webp",
-   "bytes": 34532,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "winter-ui/snowflakes.svg",
-   "ext": "svg",
-   "bytes": 912026,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "winter-ui/squirrel-branch.svg",
-   "ext": "svg",
-   "bytes": 676315,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "winter-ui/winter-hotpot.svg",
-   "ext": "svg",
-   "bytes": 1022188,
-   "license": "项目自有（自制/AI 生成）"
-  },
-  {
-   "path": "winter-ui/winter-rose.svg",
-   "ext": "svg",
-   "bytes": 702671,
-   "license": "项目自有（自制/AI 生成）"
-  }
- ]
+  "_comment": "资产清单(create-game-assets模板裁剪版): path/ext/bytes/license。assets:audit 校验未登记文件。",
+  "generated": "2026-09-08",
+  "count": 319,
+  "assets": [
+    {
+      "path": "bgm-liejie-fuhe.mp3",
+      "ext": "mp3",
+      "bytes": 6559763,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "bgm-sour-orange-earth.mp3",
+      "ext": "mp3",
+      "bytes": 3745036,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "board-backdrop-wreck.webp",
+      "ext": "webp",
+      "bytes": 51414,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "brand-mark-codename7.png",
+      "ext": "png",
+      "bytes": 5155,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "cards/consumable.webp",
+      "ext": "webp",
+      "bytes": 71896,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "cards/equipment-armor.webp",
+      "ext": "webp",
+      "bytes": 126550,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "cards/equipment-utility.webp",
+      "ext": "webp",
+      "bytes": 151334,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "cards/equipment-weapon.webp",
+      "ext": "webp",
+      "bytes": 79688,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "cards/event.webp",
+      "ext": "webp",
+      "bytes": 598448,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "cards/healing.webp",
+      "ext": "webp",
+      "bytes": 205232,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "cards/hero-assassin.webp",
+      "ext": "webp",
+      "bytes": 13950,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "cards/hero-descend.webp",
+      "ext": "webp",
+      "bytes": 19698,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "cards/hero-guard.webp",
+      "ext": "webp",
+      "bytes": 14898,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "cards/hero-mage.webp",
+      "ext": "webp",
+      "bytes": 34380,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "cards/hero-priest.webp",
+      "ext": "webp",
+      "bytes": 15952,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "cards/hero-ranger.webp",
+      "ext": "webp",
+      "bytes": 17224,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "cards/hero-sealer.webp",
+      "ext": "webp",
+      "bytes": 18948,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "cards/hero-summoner.webp",
+      "ext": "webp",
+      "bytes": 26026,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "cards/hero-sword.webp",
+      "ext": "webp",
+      "bytes": 19762,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "cards/hero-warlock.webp",
+      "ext": "webp",
+      "bytes": 20590,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "cards/hero-warrior.webp",
+      "ext": "webp",
+      "bytes": 31386,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "cards/hero.webp",
+      "ext": "webp",
+      "bytes": 110684,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "cards/items/builtin-fuyuanyao.webp",
+      "ext": "webp",
+      "bytes": 235552,
+      "license": "项目自有（NovelAI V5 生成）"
+    },
+    {
+      "path": "cards/items/starter-emergency-bandage.webp",
+      "ext": "webp",
+      "bytes": 286910,
+      "license": "项目自有（NovelAI V5 生成）"
+    },
+    {
+      "path": "cards/items/tt-crystal.webp",
+      "ext": "webp",
+      "bytes": 176252,
+      "license": "项目自有（NovelAI V5 生成）"
+    },
+    {
+      "path": "cards/items/tt-jinchuangyao.webp",
+      "ext": "webp",
+      "bytes": 144942,
+      "license": "项目自有（NovelAI V5 生成）"
+    },
+    {
+      "path": "cards/items/tt-medneedle.webp",
+      "ext": "webp",
+      "bytes": 168538,
+      "license": "项目自有（NovelAI V5 生成）"
+    },
+    {
+      "path": "cards/items/tt-token-color.webp",
+      "ext": "webp",
+      "bytes": 270484,
+      "license": "项目自有（NovelAI V5 生成）"
+    },
+    {
+      "path": "cards/items/tt-token-gold.webp",
+      "ext": "webp",
+      "bytes": 273612,
+      "license": "项目自有（NovelAI V5 生成）"
+    },
+    {
+      "path": "cards/items/tt3-blue-potion.webp",
+      "ext": "webp",
+      "bytes": 234686,
+      "license": "项目自有（NovelAI V5 生成）"
+    },
+    {
+      "path": "cards/items/tt3-demon-potion.webp",
+      "ext": "webp",
+      "bytes": 50780,
+      "license": "项目自有（NovelAI V5 生成）"
+    },
+    {
+      "path": "cards/items/tt3-houyi-potion.webp",
+      "ext": "webp",
+      "bytes": 218186,
+      "license": "项目自有（NovelAI V5 生成）"
+    },
+    {
+      "path": "cards/items/tt3-iceheart-potion.webp",
+      "ext": "webp",
+      "bytes": 201668,
+      "license": "项目自有（NovelAI V5 生成）"
+    },
+    {
+      "path": "cards/items/tt3-mind-potion.webp",
+      "ext": "webp",
+      "bytes": 202210,
+      "license": "项目自有（NovelAI V5 生成）"
+    },
+    {
+      "path": "cards/items/tt3-mixed-potion.webp",
+      "ext": "webp",
+      "bytes": 79714,
+      "license": "项目自有（NovelAI V5 生成）"
+    },
+    {
+      "path": "cards/items/tt3-mystery-potion.webp",
+      "ext": "webp",
+      "bytes": 199096,
+      "license": "项目自有（NovelAI V5 生成）"
+    },
+    {
+      "path": "cards/items/tt3-python-potion.webp",
+      "ext": "webp",
+      "bytes": 171216,
+      "license": "项目自有（NovelAI V5 生成）"
+    },
+    {
+      "path": "cards/items/tt3-savior-elixir.webp",
+      "ext": "webp",
+      "bytes": 208988,
+      "license": "项目自有（NovelAI V5 生成）"
+    },
+    {
+      "path": "cards/items/tt3-turnabout-potion.webp",
+      "ext": "webp",
+      "bytes": 125748,
+      "license": "项目自有（NovelAI V5 生成）"
+    },
+    {
+      "path": "cards/items/tt3sp-doom.webp",
+      "ext": "webp",
+      "bytes": 157540,
+      "license": "项目自有（NovelAI V5 生成）"
+    },
+    {
+      "path": "cards/items/tt4-shine-token.webp",
+      "ext": "webp",
+      "bytes": 330132,
+      "license": "项目自有（NovelAI V5 生成）"
+    },
+    {
+      "path": "cards/items/tt4-smoke-bomb.webp",
+      "ext": "webp",
+      "bytes": 259968,
+      "license": "项目自有（NovelAI V5 生成）"
+    },
+    {
+      "path": "cards/items/tt4-woodify.webp",
+      "ext": "webp",
+      "bytes": 174576,
+      "license": "项目自有（NovelAI V5 生成）"
+    },
+    {
+      "path": "cards/martial-melee.webp",
+      "ext": "webp",
+      "bytes": 140740,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "cards/martial-ranged.webp",
+      "ext": "webp",
+      "bytes": 159794,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "cards/resource-key.webp",
+      "ext": "webp",
+      "bytes": 146638,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "cards/resource-material.webp",
+      "ext": "webp",
+      "bytes": 165706,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "cards/resource-valuables.webp",
+      "ext": "webp",
+      "bytes": 219530,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "cards/resources/diamond.webp",
+      "ext": "webp",
+      "bytes": 19524,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "cards/resources/econpack.webp",
+      "ext": "webp",
+      "bytes": 16994,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "cards/resources/garnet-marble.webp",
+      "ext": "webp",
+      "bytes": 34910,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "cards/resources/key-one.webp",
+      "ext": "webp",
+      "bytes": 28746,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "cards/resources/key.webp",
+      "ext": "webp",
+      "bytes": 21208,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "cards/resources/keys-bunch.webp",
+      "ext": "webp",
+      "bytes": 19072,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "cards/resources/ration-double.webp",
+      "ext": "webp",
+      "bytes": 15910,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "cards/resources/ration-std.webp",
+      "ext": "webp",
+      "bytes": 20786,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "cards/resources/ration.webp",
+      "ext": "webp",
+      "bytes": 16694,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "cards/resources/wood-bundle.webp",
+      "ext": "webp",
+      "bytes": 35230,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "cards/resources/wood-lots.webp",
+      "ext": "webp",
+      "bytes": 35048,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "cards/resources/wood.webp",
+      "ext": "webp",
+      "bytes": 28500,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "cards/spell.webp",
+      "ext": "webp",
+      "bytes": 218492,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "cards/unknown.webp",
+      "ext": "webp",
+      "bytes": 211244,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "fonts/cascadia-code-400.woff2",
+      "ext": "woff2",
+      "bytes": 17480,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "fonts/cascadia-code-700.woff2",
+      "ext": "woff2",
+      "bytes": 18024,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "fonts/notosans-sc-400.woff2",
+      "ext": "woff2",
+      "bytes": 251588,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "fonts/notosans-sc-700.woff2",
+      "ext": "woff2",
+      "bytes": 257784,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "hub-bg-rhine.png",
+      "ext": "png",
+      "bytes": 66947,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "icon-council.png",
+      "ext": "png",
+      "bytes": 1427010,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "icons/altar.svg",
+      "ext": "svg",
+      "bytes": 55967,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "icons/battle.svg",
+      "ext": "svg",
+      "bytes": 40119,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "icons/boss.svg",
+      "ext": "svg",
+      "bytes": 53059,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "icons/chest.svg",
+      "ext": "svg",
+      "bytes": 71756,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "icons/door.svg",
+      "ext": "svg",
+      "bytes": 66769,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "icons/entrance.svg",
+      "ext": "svg",
+      "bytes": 43086,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "icons/event.svg",
+      "ext": "svg",
+      "bytes": 36019,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "icons/extract.svg",
+      "ext": "svg",
+      "bytes": 41361,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "icons/fire.svg",
+      "ext": "svg",
+      "bytes": 54368,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "icons/game-icons/badges-crown.svg",
+      "ext": "svg",
+      "bytes": 234,
+      "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
+    },
+    {
+      "path": "icons/game-icons/badges-heart.svg",
+      "ext": "svg",
+      "bytes": 313,
+      "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
+    },
+    {
+      "path": "icons/game-icons/badges-skull.svg",
+      "ext": "svg",
+      "bytes": 505,
+      "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
+    },
+    {
+      "path": "icons/game-icons/carl-olsen-crossbow.svg",
+      "ext": "svg",
+      "bytes": 1742,
+      "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
+    },
+    {
+      "path": "icons/game-icons/caro-asercion-round-potion.svg",
+      "ext": "svg",
+      "bytes": 962,
+      "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
+    },
+    {
+      "path": "icons/game-icons/delapouite-boss-key.svg",
+      "ext": "svg",
+      "bytes": 1957,
+      "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
+    },
+    {
+      "path": "icons/game-icons/delapouite-chest.svg",
+      "ext": "svg",
+      "bytes": 733,
+      "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
+    },
+    {
+      "path": "icons/game-icons/delapouite-coins.svg",
+      "ext": "svg",
+      "bytes": 6810,
+      "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
+    },
+    {
+      "path": "icons/game-icons/lorc-angel-wings.svg",
+      "ext": "svg",
+      "bytes": 2262,
+      "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
+    },
+    {
+      "path": "icons/game-icons/lorc-archery-target.svg",
+      "ext": "svg",
+      "bytes": 1258,
+      "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
+    },
+    {
+      "path": "icons/game-icons/lorc-battle-axe.svg",
+      "ext": "svg",
+      "bytes": 1279,
+      "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
+    },
+    {
+      "path": "icons/game-icons/lorc-bleeding-heart.svg",
+      "ext": "svg",
+      "bytes": 1642,
+      "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
+    },
+    {
+      "path": "icons/game-icons/lorc-book-aura.svg",
+      "ext": "svg",
+      "bytes": 1247,
+      "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
+    },
+    {
+      "path": "icons/game-icons/lorc-bordered-shield.svg",
+      "ext": "svg",
+      "bytes": 1612,
+      "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
+    },
+    {
+      "path": "icons/game-icons/lorc-bowie-knife.svg",
+      "ext": "svg",
+      "bytes": 722,
+      "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
+    },
+    {
+      "path": "icons/game-icons/lorc-bright-explosion.svg",
+      "ext": "svg",
+      "bytes": 2786,
+      "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
+    },
+    {
+      "path": "icons/game-icons/lorc-broadsword.svg",
+      "ext": "svg",
+      "bytes": 1314,
+      "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
+    },
+    {
+      "path": "icons/game-icons/lorc-broken-shield.svg",
+      "ext": "svg",
+      "bytes": 1272,
+      "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
+    },
+    {
+      "path": "icons/game-icons/lorc-broken-skull.svg",
+      "ext": "svg",
+      "bytes": 2431,
+      "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
+    },
+    {
+      "path": "icons/game-icons/lorc-bubbling-flask.svg",
+      "ext": "svg",
+      "bytes": 2803,
+      "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
+    },
+    {
+      "path": "icons/game-icons/lorc-crossed-swords.svg",
+      "ext": "svg",
+      "bytes": 1254,
+      "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
+    },
+    {
+      "path": "icons/game-icons/lorc-crystal-ball.svg",
+      "ext": "svg",
+      "bytes": 1351,
+      "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
+    },
+    {
+      "path": "icons/game-icons/lorc-energy-breath.svg",
+      "ext": "svg",
+      "bytes": 2140,
+      "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
+    },
+    {
+      "path": "icons/game-icons/lorc-gem-necklace.svg",
+      "ext": "svg",
+      "bytes": 2666,
+      "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
+    },
+    {
+      "path": "icons/game-icons/lorc-heavy-arrow.svg",
+      "ext": "svg",
+      "bytes": 1380,
+      "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
+    },
+    {
+      "path": "icons/game-icons/lorc-hourglass.svg",
+      "ext": "svg",
+      "bytes": 639,
+      "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
+    },
+    {
+      "path": "icons/game-icons/lorc-key.svg",
+      "ext": "svg",
+      "bytes": 1475,
+      "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
+    },
+    {
+      "path": "icons/game-icons/lorc-lightning-arc.svg",
+      "ext": "svg",
+      "bytes": 1725,
+      "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
+    },
+    {
+      "path": "icons/game-icons/lorc-scroll-unfurled.svg",
+      "ext": "svg",
+      "bytes": 1967,
+      "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
+    },
+    {
+      "path": "icons/game-icons/lorc-thunder-blade.svg",
+      "ext": "svg",
+      "bytes": 1567,
+      "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
+    },
+    {
+      "path": "icons/game-icons/lorc-treasure-map.svg",
+      "ext": "svg",
+      "bytes": 2145,
+      "license": "CC-BY-3.0 (game-icons.net - Lorc/Delapouite/Carl Olsen/Caro Asercion)"
+    },
+    {
+      "path": "icons/key.svg",
+      "ext": "svg",
+      "bytes": 38380,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "icons/player.svg",
+      "ext": "svg",
+      "bytes": 64900,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "icons/shop.svg",
+      "ext": "svg",
+      "bytes": 88221,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/avatars/baiqi.webp",
+      "ext": "webp",
+      "bytes": 13808,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/avatars/shuangling.webp",
+      "ext": "webp",
+      "bytes": 13582,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/classes/assassin.webp",
+      "ext": "webp",
+      "bytes": 22352,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/classes/descend.webp",
+      "ext": "webp",
+      "bytes": 28978,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/classes/guard.webp",
+      "ext": "webp",
+      "bytes": 25532,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/classes/mage.webp",
+      "ext": "webp",
+      "bytes": 24118,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/classes/priest.webp",
+      "ext": "webp",
+      "bytes": 30672,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/classes/ranger.webp",
+      "ext": "webp",
+      "bytes": 32782,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/classes/sealer.webp",
+      "ext": "webp",
+      "bytes": 27992,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/classes/summoner.webp",
+      "ext": "webp",
+      "bytes": 34470,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/classes/sword.webp",
+      "ext": "webp",
+      "bytes": 31624,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/classes/warlock.webp",
+      "ext": "webp",
+      "bytes": 27984,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/classes/warrior.webp",
+      "ext": "webp",
+      "bytes": 27758,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/cut/classes/assassin.webp",
+      "ext": "webp",
+      "bytes": 22008,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/cut/classes/descend.webp",
+      "ext": "webp",
+      "bytes": 27520,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/cut/classes/guard.webp",
+      "ext": "webp",
+      "bytes": 25382,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/cut/classes/mage.webp",
+      "ext": "webp",
+      "bytes": 22262,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/cut/classes/priest.webp",
+      "ext": "webp",
+      "bytes": 30018,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/cut/classes/ranger.webp",
+      "ext": "webp",
+      "bytes": 32304,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/cut/classes/sealer.webp",
+      "ext": "webp",
+      "bytes": 28246,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/cut/classes/summoner.webp",
+      "ext": "webp",
+      "bytes": 34328,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/cut/classes/sword.webp",
+      "ext": "webp",
+      "bytes": 31810,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/cut/classes/warlock.webp",
+      "ext": "webp",
+      "bytes": 27744,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/cut/classes/warrior.webp",
+      "ext": "webp",
+      "bytes": 26688,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/cut/enemies/archer.webp",
+      "ext": "webp",
+      "bytes": 33982,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/cut/enemies/bandit.webp",
+      "ext": "webp",
+      "bytes": 30448,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/cut/enemies/boss_elem.webp",
+      "ext": "webp",
+      "bytes": 66148,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/cut/enemies/boss_general.webp",
+      "ext": "webp",
+      "bytes": 47258,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/cut/enemies/boss_orc.webp",
+      "ext": "webp",
+      "bytes": 54440,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/cut/enemies/cavalry.webp",
+      "ext": "webp",
+      "bytes": 35460,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/cut/enemies/dragon.webp",
+      "ext": "webp",
+      "bytes": 68010,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/cut/enemies/fire_el.webp",
+      "ext": "webp",
+      "bytes": 47338,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/cut/enemies/grass_el.webp",
+      "ext": "webp",
+      "bytes": 45044,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/cut/enemies/infantry.webp",
+      "ext": "webp",
+      "bytes": 39606,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/cut/enemies/orc_axe.webp",
+      "ext": "webp",
+      "bytes": 52656,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/cut/enemies/orc_jav.webp",
+      "ext": "webp",
+      "bytes": 38764,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/cut/enemies/water_el.webp",
+      "ext": "webp",
+      "bytes": 41898,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/cut/enemies/wolf_rider.webp",
+      "ext": "webp",
+      "bytes": 50730,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/enemies/archer.webp",
+      "ext": "webp",
+      "bytes": 120006,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/enemies/bandit.webp",
+      "ext": "webp",
+      "bytes": 92180,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/enemies/boss_elem.webp",
+      "ext": "webp",
+      "bytes": 189482,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/enemies/boss_general.webp",
+      "ext": "webp",
+      "bytes": 126748,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/enemies/boss_orc.webp",
+      "ext": "webp",
+      "bytes": 148150,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/enemies/cavalry.webp",
+      "ext": "webp",
+      "bytes": 91954,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/enemies/dragon.webp",
+      "ext": "webp",
+      "bytes": 197890,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/enemies/fire_el.webp",
+      "ext": "webp",
+      "bytes": 118450,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/enemies/grass_el.webp",
+      "ext": "webp",
+      "bytes": 131168,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/enemies/infantry.webp",
+      "ext": "webp",
+      "bytes": 127536,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/enemies/orc_axe.webp",
+      "ext": "webp",
+      "bytes": 178348,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/enemies/orc_jav.webp",
+      "ext": "webp",
+      "bytes": 109100,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/enemies/water_el.webp",
+      "ext": "webp",
+      "bytes": 125880,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/enemies/wolf_rider.webp",
+      "ext": "webp",
+      "bytes": 149776,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/expedition-roster.webp",
+      "ext": "webp",
+      "bytes": 357942,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/full/assassin.webp",
+      "ext": "webp",
+      "bytes": 44808,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/full/baiqi.webp",
+      "ext": "webp",
+      "bytes": 513796,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/full/baita.webp",
+      "ext": "webp",
+      "bytes": 600084,
+      "license": "项目自有（老板指定立绘）"
+    },
+    {
+      "path": "portraits/full/descend.webp",
+      "ext": "webp",
+      "bytes": 60658,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/full/guard.webp",
+      "ext": "webp",
+      "bytes": 46178,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/full/mage.webp",
+      "ext": "webp",
+      "bytes": 58266,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/full/priest.webp",
+      "ext": "webp",
+      "bytes": 43070,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/full/ranger.webp",
+      "ext": "webp",
+      "bytes": 61080,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/full/sealer.webp",
+      "ext": "webp",
+      "bytes": 49174,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/full/shuangling.webp",
+      "ext": "webp",
+      "bytes": 417520,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/full/summoner.webp",
+      "ext": "webp",
+      "bytes": 51398,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/full/sword.webp",
+      "ext": "webp",
+      "bytes": 52084,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/full/warlock.webp",
+      "ext": "webp",
+      "bytes": 47018,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/full/warrior.webp",
+      "ext": "webp",
+      "bytes": 60434,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "reconstruction/slot-wallpaper.jpg",
+      "ext": "jpg",
+      "bytes": 593208,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "reconstruction/wallpaper-original.webp",
+      "ext": "webp",
+      "bytes": 1138740,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "reconstruction/wallpaper-preview.jpg",
+      "ext": "jpg",
+      "bytes": 184366,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "scenes/battle-normal-anime-v2.webp",
+      "ext": "webp",
+      "bytes": 101204,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "scenes/battle-snow-street.png",
+      "ext": "png",
+      "bytes": 1522306,
+      "license": "项目自有（AI 生成）"
+    },
+    {
+      "path": "scenes/event-bandits-anime-v2.webp",
+      "ext": "webp",
+      "bytes": 206998,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "scenes/hub-ach.png",
+      "ext": "png",
+      "bytes": 27810,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "scenes/hub-classes.png",
+      "ext": "png",
+      "bytes": 46129,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "scenes/hub-stash.png",
+      "ext": "png",
+      "bytes": 34892,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "scenes/hub-upgrade.png",
+      "ext": "png",
+      "bytes": 47449,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "scenes/hub-wallpaper.jpg",
+      "ext": "jpg",
+      "bytes": 335926,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "scenes/scene-altar-anime-v2.webp",
+      "ext": "webp",
+      "bytes": 152448,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "scenes/scene-chest-anime-v2.webp",
+      "ext": "webp",
+      "bytes": 102936,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "scenes/scene-deploy-anime.png",
+      "ext": "png",
+      "bytes": 41662,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "scenes/scene-door-anime-v2.webp",
+      "ext": "webp",
+      "bytes": 142694,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "scenes/scene-extract-anime-v2.webp",
+      "ext": "webp",
+      "bytes": 156082,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "scenes/scene-fire-anime-v2.webp",
+      "ext": "webp",
+      "bytes": 142568,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "scenes/scene-pickup-coin-anime-v2.webp",
+      "ext": "webp",
+      "bytes": 147814,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "scenes/scene-pickup-key-anime-v2.webp",
+      "ext": "webp",
+      "bytes": 137136,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "scenes/scene-pickup-rations-anime-v2.webp",
+      "ext": "webp",
+      "bytes": 127542,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "scenes/scene-pickup-wood-anime-v2.webp",
+      "ext": "webp",
+      "bytes": 109560,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "scenes/scene-shop-anime-v2.webp",
+      "ext": "webp",
+      "bytes": 127466,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "sfx/battle/chestburst-1.ogg",
+      "ext": "ogg",
+      "bytes": 10208,
+      "license": "CC0 (Kenney.nl)"
+    },
+    {
+      "path": "sfx/battle/chestburst-2.ogg",
+      "ext": "ogg",
+      "bytes": 13615,
+      "license": "CC0 (Kenney.nl)"
+    },
+    {
+      "path": "sfx/battle/chestburst-3.ogg",
+      "ext": "ogg",
+      "bytes": 10032,
+      "license": "CC0 (Kenney.nl)"
+    },
+    {
+      "path": "sfx/battle/chestshake-1.ogg",
+      "ext": "ogg",
+      "bytes": 10492,
+      "license": "CC0 (Kenney.nl)"
+    },
+    {
+      "path": "sfx/battle/chestshake-2.ogg",
+      "ext": "ogg",
+      "bytes": 10028,
+      "license": "CC0 (Kenney.nl)"
+    },
+    {
+      "path": "sfx/battle/curse-1.ogg",
+      "ext": "ogg",
+      "bytes": 6526,
+      "license": "CC0 (Kenney.nl)"
+    },
+    {
+      "path": "sfx/battle/curse-2.ogg",
+      "ext": "ogg",
+      "bytes": 6544,
+      "license": "CC0 (Kenney.nl)"
+    },
+    {
+      "path": "sfx/battle/defeat-1.ogg",
+      "ext": "ogg",
+      "bytes": 16579,
+      "license": "CC0 (Kenney.nl)"
+    },
+    {
+      "path": "sfx/battle/heal-1.ogg",
+      "ext": "ogg",
+      "bytes": 16508,
+      "license": "CC0 (Kenney.nl)"
+    },
+    {
+      "path": "sfx/battle/heal-2.ogg",
+      "ext": "ogg",
+      "bytes": 11787,
+      "license": "CC0 (Kenney.nl)"
+    },
+    {
+      "path": "sfx/battle/heal-3.ogg",
+      "ext": "ogg",
+      "bytes": 12432,
+      "license": "CC0 (Kenney.nl)"
+    },
+    {
+      "path": "sfx/battle/hit-1.ogg",
+      "ext": "ogg",
+      "bytes": 8800,
+      "license": "CC0 (Kenney.nl)"
+    },
+    {
+      "path": "sfx/battle/hit-2.ogg",
+      "ext": "ogg",
+      "bytes": 10399,
+      "license": "CC0 (Kenney.nl)"
+    },
+    {
+      "path": "sfx/battle/hit-3.ogg",
+      "ext": "ogg",
+      "bytes": 11617,
+      "license": "CC0 (Kenney.nl)"
+    },
+    {
+      "path": "sfx/battle/hit-4.ogg",
+      "ext": "ogg",
+      "bytes": 10861,
+      "license": "CC0 (Kenney.nl)"
+    },
+    {
+      "path": "sfx/battle/hurt-1.ogg",
+      "ext": "ogg",
+      "bytes": 6570,
+      "license": "CC0 (Kenney.nl)"
+    },
+    {
+      "path": "sfx/battle/hurt-2.ogg",
+      "ext": "ogg",
+      "bytes": 6689,
+      "license": "CC0 (Kenney.nl)"
+    },
+    {
+      "path": "sfx/battle/legend-1.ogg",
+      "ext": "ogg",
+      "bytes": 15477,
+      "license": "CC0 (Kenney.nl)"
+    },
+    {
+      "path": "sfx/battle/legend-2.ogg",
+      "ext": "ogg",
+      "bytes": 8666,
+      "license": "CC0 (Kenney.nl)"
+    },
+    {
+      "path": "sfx/battle/legend-3.ogg",
+      "ext": "ogg",
+      "bytes": 19626,
+      "license": "CC0 (Kenney.nl)"
+    },
+    {
+      "path": "sfx/battle/parry-1.ogg",
+      "ext": "ogg",
+      "bytes": 6110,
+      "license": "CC0 (Kenney.nl)"
+    },
+    {
+      "path": "sfx/battle/parry-2.ogg",
+      "ext": "ogg",
+      "bytes": 5634,
+      "license": "CC0 (Kenney.nl)"
+    },
+    {
+      "path": "sfx/battle/reveal-1.ogg",
+      "ext": "ogg",
+      "bytes": 18248,
+      "license": "CC0 (Kenney.nl)"
+    },
+    {
+      "path": "sfx/battle/reveal-2.ogg",
+      "ext": "ogg",
+      "bytes": 12393,
+      "license": "CC0 (Kenney.nl)"
+    },
+    {
+      "path": "sfx/battle/reveal-3.ogg",
+      "ext": "ogg",
+      "bytes": 9077,
+      "license": "CC0 (Kenney.nl)"
+    },
+    {
+      "path": "sfx/battle/victory-1.ogg",
+      "ext": "ogg",
+      "bytes": 10201,
+      "license": "CC0 (Kenney.nl)"
+    },
+    {
+      "path": "sfx/battle/victory-2.ogg",
+      "ext": "ogg",
+      "bytes": 10291,
+      "license": "CC0 (Kenney.nl)"
+    },
+    {
+      "path": "sfx/click1.wav",
+      "ext": "wav",
+      "bytes": 18254,
+      "license": "CC0 (Kenney.nl)"
+    },
+    {
+      "path": "sfx/click2.wav",
+      "ext": "wav",
+      "bytes": 10062,
+      "license": "CC0 (Kenney.nl)"
+    },
+    {
+      "path": "sfx/click3.wav",
+      "ext": "wav",
+      "bytes": 15694,
+      "license": "CC0 (Kenney.nl)"
+    },
+    {
+      "path": "sfx/click4.wav",
+      "ext": "wav",
+      "bytes": 6734,
+      "license": "CC0 (Kenney.nl)"
+    },
+    {
+      "path": "sfx/click5.wav",
+      "ext": "wav",
+      "bytes": 6222,
+      "license": "CC0 (Kenney.nl)"
+    },
+    {
+      "path": "sfx/jsfxr/confirm.wav",
+      "ext": "wav",
+      "bytes": 3646,
+      "license": "Generated (jsfxr, 无版权限制)"
+    },
+    {
+      "path": "sfx/jsfxr/error.wav",
+      "ext": "wav",
+      "bytes": 9686,
+      "license": "Generated (jsfxr, 无版权限制)"
+    },
+    {
+      "path": "sfx/jsfxr/hit.wav",
+      "ext": "wav",
+      "bytes": 12545,
+      "license": "Generated (jsfxr, 无版权限制)"
+    },
+    {
+      "path": "sfx/jsfxr/levelup.wav",
+      "ext": "wav",
+      "bytes": 17046,
+      "license": "Generated (jsfxr, 无版权限制)"
+    },
+    {
+      "path": "sfx/jsfxr/pickup.wav",
+      "ext": "wav",
+      "bytes": 7296,
+      "license": "Generated (jsfxr, 无版权限制)"
+    },
+    {
+      "path": "sfx/rollover1.wav",
+      "ext": "wav",
+      "bytes": 41806,
+      "license": "CC0 (Kenney.nl)"
+    },
+    {
+      "path": "sfx/rollover2.wav",
+      "ext": "wav",
+      "bytes": 11086,
+      "license": "CC0 (Kenney.nl)"
+    },
+    {
+      "path": "sfx/rollover3.wav",
+      "ext": "wav",
+      "bytes": 15182,
+      "license": "CC0 (Kenney.nl)"
+    },
+    {
+      "path": "sfx/rollover4.wav",
+      "ext": "wav",
+      "bytes": 21838,
+      "license": "CC0 (Kenney.nl)"
+    },
+    {
+      "path": "sfx/rollover5.wav",
+      "ext": "wav",
+      "bytes": 22862,
+      "license": "CC0 (Kenney.nl)"
+    },
+    {
+      "path": "sfx/rollover6.wav",
+      "ext": "wav",
+      "bytes": 31054,
+      "license": "CC0 (Kenney.nl)"
+    },
+    {
+      "path": "sfx/switch1.wav",
+      "ext": "wav",
+      "bytes": 57166,
+      "license": "CC0 (Kenney.nl)"
+    },
+    {
+      "path": "sfx/switch2.wav",
+      "ext": "wav",
+      "bytes": 56142,
+      "license": "CC0 (Kenney.nl)"
+    },
+    {
+      "path": "sfx/switch3.wav",
+      "ext": "wav",
+      "bytes": 64846,
+      "license": "CC0 (Kenney.nl)"
+    },
+    {
+      "path": "sfx/switch4.wav",
+      "ext": "wav",
+      "bytes": 76110,
+      "license": "CC0 (Kenney.nl)"
+    },
+    {
+      "path": "sfx/switch5.wav",
+      "ext": "wav",
+      "bytes": 55630,
+      "license": "CC0 (Kenney.nl)"
+    },
+    {
+      "path": "sfx/switch6.wav",
+      "ext": "wav",
+      "bytes": 64334,
+      "license": "CC0 (Kenney.nl)"
+    },
+    {
+      "path": "slot-bg-knight-fantasy.webp",
+      "ext": "webp",
+      "bytes": 490052,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "title-hero-ascension-cartoon-1080p-winter-graded.webp",
+      "ext": "webp",
+      "bytes": 202528,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "title-hero-ascension.webp",
+      "ext": "webp",
+      "bytes": 1563724,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "title-wallpaper-02-whitehair-man-1080p-winter-graded.webp",
+      "ext": "webp",
+      "bytes": 97880,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "title-wallpaper-03-capped-youth-1080p-winter-graded.webp",
+      "ext": "webp",
+      "bytes": 102762,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "title-wallpaper-04-whitehair-woman-1080p-winter-graded.webp",
+      "ext": "webp",
+      "bytes": 124494,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "title-wallpaper-05-white-suit-man-1080p-winter-graded.webp",
+      "ext": "webp",
+      "bytes": 128124,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "title-wallpaper-ruin-girl-1080p.webp",
+      "ext": "webp",
+      "bytes": 366492,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "title-winter-conjecture.png",
+      "ext": "png",
+      "bytes": 1342662,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "title-winter-reverie.webp",
+      "ext": "webp",
+      "bytes": 516542,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/archive.png",
+      "ext": "png",
+      "bytes": 508,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/arrow.png",
+      "ext": "png",
+      "bytes": 430,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/bag.png",
+      "ext": "png",
+      "bytes": 526,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/blood.png",
+      "ext": "png",
+      "bytes": 808,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/bolt.png",
+      "ext": "png",
+      "bytes": 688,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/book.png",
+      "ext": "png",
+      "bytes": 523,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/bread.png",
+      "ext": "png",
+      "bytes": 696,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/broken.png",
+      "ext": "png",
+      "bytes": 811,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/broom.png",
+      "ext": "png",
+      "bytes": 678,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/cards.png",
+      "ext": "png",
+      "bytes": 523,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/check.png",
+      "ext": "png",
+      "bytes": 563,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/coin.png",
+      "ext": "png",
+      "bytes": 826,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/cross.png",
+      "ext": "png",
+      "bytes": 645,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/crystal.png",
+      "ext": "png",
+      "bytes": 1029,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/demon.png",
+      "ext": "png",
+      "bytes": 1173,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/dice.png",
+      "ext": "png",
+      "bytes": 554,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/door.png",
+      "ext": "png",
+      "bytes": 538,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/download.png",
+      "ext": "png",
+      "bytes": 521,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/exit.png",
+      "ext": "png",
+      "bytes": 430,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/fire.png",
+      "ext": "png",
+      "bytes": 922,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/flag.png",
+      "ext": "png",
+      "bytes": 576,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/flask.png",
+      "ext": "png",
+      "bytes": 756,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/folder.png",
+      "ext": "png",
+      "bytes": 508,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/gear.png",
+      "ext": "png",
+      "bytes": 1006,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/gem.png",
+      "ext": "png",
+      "bytes": 1029,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/heart.png",
+      "ext": "png",
+      "bytes": 602,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/helmet.png",
+      "ext": "png",
+      "bytes": 802,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/home.png",
+      "ext": "png",
+      "bytes": 538,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/hourglass.png",
+      "ext": "png",
+      "bytes": 768,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/key.png",
+      "ext": "png",
+      "bytes": 733,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/lantern.png",
+      "ext": "png",
+      "bytes": 664,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/lock.png",
+      "ext": "png",
+      "bytes": 586,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/map.png",
+      "ext": "png",
+      "bytes": 794,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/medal.png",
+      "ext": "png",
+      "bytes": 869,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/mouse.png",
+      "ext": "png",
+      "bytes": 768,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/notes.png",
+      "ext": "png",
+      "bytes": 523,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/paw.png",
+      "ext": "png",
+      "bytes": 900,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/pen.png",
+      "ext": "png",
+      "bytes": 678,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/plate.png",
+      "ext": "png",
+      "bytes": 802,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/play.png",
+      "ext": "png",
+      "bytes": 508,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/pocket.png",
+      "ext": "png",
+      "bytes": 526,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/pouch.png",
+      "ext": "png",
+      "bytes": 526,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/question.png",
+      "ext": "png",
+      "bytes": 632,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/recycle.png",
+      "ext": "png",
+      "bytes": 1006,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/runner.png",
+      "ext": "png",
+      "bytes": 724,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/save.png",
+      "ext": "png",
+      "bytes": 523,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/scroll.png",
+      "ext": "png",
+      "bytes": 523,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/shield.png",
+      "ext": "png",
+      "bytes": 802,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/skip.png",
+      "ext": "png",
+      "bytes": 508,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/skull.png",
+      "ext": "png",
+      "bytes": 878,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/slime.png",
+      "ext": "png",
+      "bytes": 745,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/sparkles.png",
+      "ext": "png",
+      "bytes": 664,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/sword.png",
+      "ext": "png",
+      "bytes": 563,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/swords.png",
+      "ext": "png",
+      "bytes": 882,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/tools.png",
+      "ext": "png",
+      "bytes": 678,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/trash.png",
+      "ext": "png",
+      "bytes": 508,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/trophy.png",
+      "ext": "png",
+      "bytes": 976,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/unlock.png",
+      "ext": "png",
+      "bytes": 542,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/upload.png",
+      "ext": "png",
+      "bytes": 430,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/icons/wood.png",
+      "ext": "png",
+      "bytes": 416,
+      "license": "项目自有（自制/AI 生成）"
+    }
+  ]
 }

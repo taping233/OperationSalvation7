@@ -7,10 +7,40 @@ import { Random } from './random.js';
   // 坏档备份键：解析失败时原串转存于此（基地是跨局数据，损坏比对局档更严重）
   const CORRUPT_KEY = (i) => 'sdt-base-' + i + '-corrupt';
   // 基地 schema 版本：破坏性变更时 +1 并在 BASE_MIGRATIONS 补纯函数迁移
-  const BASE_VERSION = 1;
+  const BASE_VERSION = 2;
   const BASE_MIGRATIONS = {
     // 0→1：首个显式版本，字段缺省由 mergeDef/adopt 兜底，盖章即可
+    // 1→2：保险升级改为宠物升级（2026-09-09 需求#2）——旧 safeUp 折算成初始宠物汪汪狗的等级
+    1: (s) => {
+      s.pets = (s.pets && typeof s.pets === 'object') ? s.pets : {};
+      if (!Object.keys(s.pets).length) {
+        s.pets.dog = { lv: Math.max(1, Math.min(5, 1 + (s.safeUp || 0))), ts: Date.now() };
+      }
+      if (!s.petSel || !s.pets[s.petSel]) s.petSel = Object.keys(s.pets)[0] || 'dog';
+      return s;
+    },
   };
+
+  // ---------- 宠物（2026-09-09 需求 #2/#4/#14）----------
+  // 初始宠物汪汪狗进入基地自动获得；其余只能用宠物蛋 + 50 币在仓库孵化（随机、不重复）。
+  // effect 字段在「携带」该宠物时生效（见 game.session newRun / chests / shop / safeCap）。
+  const PET_EGG_ID = 'pet-egg';
+  const HATCH_COST = 50;               // 孵化消耗的储备币
+  const PET_LEVEL_MAX = 5;
+  const PET_UP_COSTS = [2, 3, 4, 5];   // 升到 Lv.2/3/4/5 各需的口粮（递增）
+  const PETS = [
+    { id: 'dog', name: '汪汪狗', icon: 'paw', desc: '携带效果：生命上限 +5', effect: { maxHp: 5 } },
+    { id: 'falcon', name: '猎鹰宝宝', icon: 'runner', desc: '携带效果：获得的宝箱为职业宝箱的概率提高至 35%', effect: { classChest: 0.35 } },
+    { id: 'cat', name: '招财猫', icon: 'coin', desc: '携带效果：商店中第一格的卡牌变为免费', effect: { shopFree: true } },
+    { id: 'robot', name: '变形机器人', icon: 'tools', desc: '携带效果：起始背包中增加 2 张「杀」', effect: { extraSha: 2 } },
+    { id: 'fire', name: '火焰精灵', icon: 'fire', desc: '携带效果：起始背包中的 5 张「杀」化为 5 张「火球」', effect: { shaToFireball: true } },
+    { id: 'penguin', name: '小企鹅咕嘎', icon: 'crystal', desc: '携带效果：保护格 +2（2-6 格 → 4-8 格）', effect: { safeBonus: 2 } },
+  ];
+  const petById = (id) => PETS.find(p => p.id === id) || null;
+  const petLevel = (id) => Math.max(1, Math.min(PET_LEVEL_MAX, (data.pets[id] && data.pets[id].lv) || 1));
+  const ownedPets = () => Object.keys(data.pets || {});
+  // 当前携带的宠物（出发后各效果按此生效）；没有宠物时返回 null
+  const carriedPet = () => petById(data.petSel) || null;
   const issues = {};   // 档位 -> 'corrupt' | 'tooNew'，供 UI 查询
   const rules = () => window.SDT.MAP.rules;
   // 「初始攻击」初始牌：能进消耗口袋（对局中复原用），但永远不入卡牌仓库
@@ -26,7 +56,9 @@ import { Random } from './random.js';
       stashUp: 0,     // 仓库扩建等级（每次 +3 张容量）
       coins: 0,       // 储备币：卖出仓库物品所得，出发时随身带走
       stash: [],      // 卡牌仓库 [{card, count}]——出发时自选携带；「初始攻击」不可入库
-      pocket: [],     // 基地消耗口袋 [{card, count}]，复原后才回仓库
+      pocket: [],     // 基地消耗口袋 [{card, count}]，用钥匙复原后才回仓库
+      pets: {},       // 已拥有宠物 [宠物id] => { lv, ts }（宠物蛋孵化；初始宠物汪汪狗自动获得）
+      petSel: null,   // 当前携带的宠物 id（出发携带效果 / 保护格数量随之变化）
       collection: {}, // 收藏图鉴 [卡牌id] => { name, rarity, ts }（[[icon:sparkles]]收藏中的物品）
       // ---- 局外成长（v0.9 职业熟练度与成就） ----
       selMode: 'standard',    // 上次出发的玩法（standard / elite / casual）
@@ -38,6 +70,9 @@ import { Random } from './random.js';
         bestRunCoins: 0, stashTotal: 0,
       },
       achClaimed: {},         // [成就id] => true（已领奖）
+      // ---- 职业收藏室（2026-09-09）：收藏里程碑领奖记录 + 收藏经验结算标记 ----
+      collClaimed: {},        // [收藏里程碑id] => true（每个一次性奖励只能领一次）
+      collXp: {},             // [卡牌id] => true（收藏经验已结算，取消重藏不重复发放）
       // ---- 卡背（v0.21）：backs 解锁表 + backSel 当前装备；默认卡背恒解锁 ----
       backs: { classic: true },
       backSel: 'classic',
@@ -65,6 +100,8 @@ import { Random } from './random.js';
       stash: Array.isArray(raw.stash) ? raw.stash : [],
       pocket: Array.isArray(raw.pocket) ? raw.pocket : [],
       collection: (raw.collection && typeof raw.collection === 'object') ? raw.collection : {},
+      collClaimed: (raw.collClaimed && typeof raw.collClaimed === 'object') ? raw.collClaimed : {},
+      collXp: (raw.collXp && typeof raw.collXp === 'object') ? raw.collXp : {},
     });
     mergeDef(d, def());
     if (!Array.isArray(d.stats.bossKills)) d.stats.bossKills = [];
@@ -133,7 +170,15 @@ import { Random } from './random.js';
     slot = s;
     const raw = parseRaw(s);
     data = raw ? adopt(raw) : def();
+    ensureStarterPet();
     return data;
+  }
+
+  // 初始宠物「汪汪狗」进入基地自动获得（需求 #4）；老档迁移也走这里兜底
+  function ensureStarterPet() {
+    if (!data.pets || typeof data.pets !== 'object') data.pets = {};
+    if (!data.pets.dog) data.pets.dog = { lv: 1, ts: Date.now() };
+    if (!data.petSel || !data.pets[data.petSel]) data.petSel = 'dog';
   }
 
   function save() {
@@ -150,6 +195,7 @@ import { Random } from './random.js';
   function reset(s) {
     slot = s;
     data = def();
+    ensureStarterPet();
     seedStarterStash();
     save();
   }
@@ -212,7 +258,14 @@ import { Random } from './random.js';
 
   // ---------- 容量与升级 ----------
   const bagCap = () => Math.min(rules().bagMax, rules().bagSize + data.bagUp);
-  const safeCap = () => Math.min(rules().safeMax, rules().safeStart + data.safeUp);
+  // 安全（保护）格容量：由「携带宠物」的等级决定（2026-09-09 需求 #2/#4）——
+  // Lv.N 提供 safeStart+N-1 格（上限 6），小企鹅咕嘎额外 +2（范围 4-8）
+  const safeCap = () => {
+    const pet = carriedPet();
+    const lv = pet ? petLevel(pet.id) : 1;
+    const bonus = (pet && pet.effect && pet.effect.safeBonus) || 0;
+    return Math.min(rules().safeMax, rules().safeStart + lv - 1) + bonus;
+  };
   // 卡牌仓库容量：按张计（每张卡占 1 格容量），同名堆叠不省容量
   const stashCap = () => Math.min(rules().stashMax,
     rules().stashStart + data.stashUp * rules().stashUpgradeSlots);
@@ -220,8 +273,10 @@ import { Random } from './random.js';
   const stashRoom = () => Math.max(0, stashCap() - stashUsed());
   const canUpgradeBag = () => data.bagUp < rules().bagMax - rules().bagSize &&
     data.wood >= rules().bagUpgradeWood;
-  const canUpgradeSafe = () => data.safeUp < rules().safeMax - rules().safeStart &&
-    data.rations >= rules().safeUpgradeRations;
+  // 保险升级改为宠物升级（需求 #2/#14）：每个宠物单独升级，口粮递增 2-3-4-5，上限 Lv.5
+  const petUpCost = (id) => PET_UP_COSTS[Math.min(petLevel(id), PET_LEVEL_MAX) - 1];
+  const canUpgradePet = (id) => !!data.pets[id] && petLevel(id) < PET_LEVEL_MAX &&
+    data.rations >= petUpCost(id);
   const canUpgradeStash = () => stashCap() < rules().stashMax &&
     data.wood >= rules().stashUpgradeWood;
 
@@ -233,10 +288,10 @@ import { Random } from './random.js';
     return true;
   }
 
-  function upgradeSafe() {
-    if (!canUpgradeSafe()) return false;
-    data.rations -= rules().safeUpgradeRations;
-    data.safeUp++;
+  function upgradePet(id) {
+    if (!canUpgradePet(id)) return false;
+    data.rations -= petUpCost(id);
+    data.pets[id].lv = petLevel(id) + 1;
     save();
     return true;
   }
@@ -259,12 +314,13 @@ import { Random } from './random.js';
     save();
   }
 
-  // 卡牌入库（同名堆叠）。toPocket = true 时进基地消耗口袋（仍待复原）。
-  // 「初始攻击」不会进入卡牌仓库（初始牌每局自动携带；容量由交互层用 stashRoom() 把关）。
+  // 卡牌入库（同名堆叠）。toPocket = true 时进基地消耗口袋（待钥匙复原）。
+  // 「初始攻击」不进卡牌仓库；需求 #6：职业卡与初始牌不进消耗口袋（撤离回收时直接消散）。
   function depositCards(cards, toPocket) {
     const list = toPocket ? data.pocket : data.stash;
     (cards || []).forEach(c => {
-      if (!toPocket && isSha(c.card)) return;
+      if (isSha(c.card)) return;
+      if (toPocket && c.card.rarity === '职业') return;
       const stack = list.find(x => x.card.name === c.card.name);
       if (stack) stack.count += c.count || 1;
       else list.push({ card: { ...c.card }, count: c.count || 1 });
@@ -272,8 +328,18 @@ import { Random } from './random.js';
     save();
   }
 
-  // 复原：消耗口袋 → 卡牌仓库。
-  // 返回 true=成功；'sha'=初始牌无需入库（已销毁，每局自动重带）；'full'=仓库容量不足；false=无效序号
+  // ---------- 消耗口袋复原（需求 #1/#11）：在仓库中使用钥匙，按稀有度计价 ----------
+  // 古朴 1 / 稀有 2 / 史诗 3 / 传说 4；整堆复原 = 单张价 × 张数。钥匙不足则无法复原。
+  const POCKET_KEY_COST = { '古朴': 1, '稀有': 2, '史诗': 3, '传说': 4 };
+  const pocketKeyCost = (stack) => {
+    if (!stack) return 0;
+    const per = POCKET_KEY_COST[stack.card.rarity] || 1;
+    return per * (stack.count || 1);
+  };
+
+  // 复原：消耗口袋 → 卡牌仓库（消耗数量不等的钥匙）。
+  // 返回 true=成功；'sha'=初始牌无需入库（已销毁，每局自动重带）；
+  // 'full'=仓库容量不足；'nokey'=钥匙不足（cost 里带所需数量）；false=无效序号
   function restore(i) {
     const stack = data.pocket[i];
     if (!stack) return false;
@@ -282,11 +348,40 @@ import { Random } from './random.js';
       save();
       return 'sha';
     }
+    const cost = pocketKeyCost(stack);
+    if ((data.keys || 0) < cost) return { why: 'nokey', cost };
     const room = stashRoom();
     if (room < (stack.count || 1)) return 'full';
     data.pocket.splice(i, 1);
+    data.keys -= cost;
     depositCards([stack]);
     return true;
+  }
+
+  // ---------- 宠物操作（需求 #2/#4）----------
+  // 携带宠物：出发携带效果与保护格数量随之切换
+  function setPet(id) {
+    if (!data.pets[id]) return false;
+    data.petSel = id;
+    save();
+    return true;
+  }
+  // 孵化：仓库中的 1 张宠物蛋 + 50 币 → 随机获得 1 只未拥有的宠物
+  function hatchPet() {
+    const i = data.stash.findIndex(x => x.card.id === PET_EGG_ID);
+    if (i < 0) return { ok: false, why: 'noegg' };
+    if ((data.coins || 0) < HATCH_COST) return { ok: false, why: 'poor' };
+    const unowned = PETS.filter(p => !data.pets[p.id]);
+    if (!unowned.length) return { ok: false, why: 'all' };
+    const pet = unowned[Math.floor(Random.random('pet') * unowned.length)];
+    const stack = data.stash[i];
+    stack.count -= 1;
+    if (stack.count <= 0) data.stash.splice(i, 1);
+    data.coins -= HATCH_COST;
+    data.pets[pet.id] = { lv: 1, ts: Date.now() };
+    if (!data.petSel) data.petSel = pet.id;
+    save();
+    return { ok: true, pet };
   }
 
   // 按名从仓库取出 n 张（出发准备页选择携带时用）；返回实际取出的张数
@@ -407,14 +502,16 @@ import { Random } from './random.js';
     get slot() { return slot; },
     get data() { return data; },
     bagCap, safeCap, stashCap, stashUsed, stashRoom,
-    canUpgradeBag, canUpgradeSafe, canUpgradeStash,
-    upgradeBag, upgradeSafe, upgradeStash,
-    deposit, depositCards, restore, takeStashCards,
+    canUpgradeBag, canUpgradePet, canUpgradeStash, upgradeBag, upgradePet, upgradeStash,
+    petUpCost, petLevel, PET_LEVEL_MAX, PET_UP_COSTS,
+    deposit, depositCards, restore, pocketKeyCost, takeStashCards,
     sellStashCards, sellRaw, collectToggle, isCollected, takeReserveCoins,
     useStashMaterial, materialInfo, materialAmount,
     keyCount, KEY_NEEDED,
     isSha,
     isBackUnlocked, unlockBack, setBack, backSel,
+    // —— 宠物（2026-09-09 需求 #2/#4）——
+    PETS, petById, ownedPets, carriedPet, setPet, hatchPet, HATCH_COST, PET_EGG_ID,
   };
 
 export { bagCap, hasSlot, safeCap };

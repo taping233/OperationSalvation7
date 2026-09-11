@@ -22,7 +22,7 @@ function configureGameRuntime(hooks) {
   Object.assign(runtime, hooks || {});
 }
 /* ============================================================
- * 搜打撤 v0.3 —— 游戏主逻辑（五层节点图）
+ * 搜打撤 v0.4 —— 游戏主逻辑（四层节点图）
  * 流程：选入口 → 点击相邻节点移动 → 落脚触发格子事件
  *   层间门：踩到弹窗（进入下一层 / 返回上一层 / 终层可撤离）
  *   祭坛入口：进入祭坛挑战 BOSS（M1 实装卡牌战斗）
@@ -39,7 +39,7 @@ function configureGameRuntime(hooks) {
   const BASE_FIRE_HEAL = MAP.rules.fireHeal;
   const MODES = {
     standard: { id: 'standard', icon: '[[icon:map]]', name: '标准搜打撤',
-      desc: '完整五层节点图：探索、搜刮与战斗，在层间门和终局撤离点做路线选择。',
+      desc: '完整四层节点图：探索、搜刮与战斗，第四层经祭坛决战首脑后终局撤离。',
       enemyMul: 1, coinMul: 1, xpMul: 1, startCoins: 0, healMul: 1, ckpt: '规则无修正' },
     elite: { id: 'elite', icon: '[[icon:fire]]', name: '精英突袭',
       desc: '敌人与 BOSS 属性 ×1.5，战斗掉落金币 ×1.5，人物经验 +50%，高稀有度卡牌爆率 +20%。高风险高回报。',
@@ -119,15 +119,19 @@ function configureGameRuntime(hooks) {
     SDT.Sound.music('title');
     SDT.Meta.track('death', { cls: game.myClass });
     const lost = game.inventory.reduce((a, b) => a + b.value * b.count, 0);
-    // 安全格里的卡牌由宠物抢运回基地，其余（物资/未保护卡牌/口袋卡）全部丢失
+    const why = game.surrenderedRun ? '你选择了撤离' : '你倒下了';   // 主动撤离=判负（2026-09-09 玩法定版）
+    game.surrenderedRun = false;
+    // 安全格里的卡牌由宠物抢运回基地，其余（物资/未保护卡牌/口袋卡）全部丢失；
+    // 2026-09-10 留言 #29：存入珍珠盒的资源卡跟随珍珠盒——盒子在安全格里就一并抢运
+    const boxSafe = game.ownedCards.some(o => o.safe && o.card && o.card.id === PEARL_BOX_ID);
     const saved = cardStacks(true);
-    SDT.Base.depositCards(game.ownedCards.filter(o => o.safe).map(o => ({ card: o.card, count: 1 })));
+    SDT.Base.depositCards(game.ownedCards.filter(o => o.safe || (o.stored && boxSafe)).map(o => ({ card: o.card, count: 1 })));
     const savedN = saved.reduce((a, b) => a + b.count, 0);
     UI.log(savedN
-      ? `<b>[[icon:skull]] 你倒下了……</b>[[icon:lock]] 宠物抢运回安全格中的 <b>${savedN}</b> 张卡牌，其余全部丢失`
-      : '<b>[[icon:skull]] 你倒下了……</b>安全格里没有卡牌，全部战利品丢失', 'warn');
+      ? `<b>[[icon:skull]] ${why}……</b>[[icon:lock]] 宠物抢运回安全格中的 <b>${savedN}</b> 张卡牌，其余全部丢失`
+      : `<b>[[icon:skull]] ${why}……</b>安全格里没有卡牌，全部战利品丢失`, 'warn');
     UI.showOverlay('[[icon:skull]] 撤离失败', `
-      <p class="ov-stats">生命归零，价值 <b class="gold">¥${lost.toLocaleString()}</b> 的物资与未保护的卡牌全部掉落</p>
+      <p class="ov-stats">${why === '你倒下了' ? '生命归零' : '战斗中撤离视为失败'}，价值 <b class="gold">¥${lost.toLocaleString()}</b> 的物资与未保护的卡牌全部掉落</p>
       ${saved.length ? `<p class="ov-note">[[icon:lock]] 安全格保护了 <b>${savedN}</b> 张卡牌并运回基地：` +
         saved.map(s => `${esc(s.card.name)}${s.count > 1 ? ' ×' + s.count : ''}`).join('、') + '</p>'
         : '<p class="ov-note">提示：把卡牌存入背包的<b>安全格</b>（容量在基地用口粮升级），撤离失败时才能保住它们。</p>'}
@@ -156,17 +160,40 @@ function configureGameRuntime(hooks) {
     return card.type === '资源' && used < bagCap();
   };
   const safeCap = () => SDT.Base.safeCap();
+  // ---------- 背包叠放上限（2026-09-09 需求 #7）----------
+  // 同名卡牌最多 3 张占 1 格（「初始攻击」与「火球」可叠 5 张），第 4 张起另占一格。
+  const stackCapOf = (card) => {
+    const n = card && card.name;
+    if (n === '初始攻击' || n === '火球') return 5;
+    return 3;
+  };
   function cardStacks(safe) {
+    // 先按卡名聚合，再按叠放上限切分成多格（同名可能占多格，#7）
+    // 2026-09-10 留言 #29：存入珍珠盒的资源卡（o.stored）不占背包格——从堆叠统计里排除，
+    // 背包格渲染与容量口径（usedSlots/canAcceptCard）随之自动生效
     const map = new Map();
     game.ownedCards.forEach(o => {
+      if (o.stored) return;
       if (!!o.safe !== !!safe) return;
       const key = o.card.name;
-      if (!map.has(key)) map.set(key, { card: o.card, count: 0, uids: [] });
-      const s = map.get(key);
-      s.count++;
-      s.uids.push(o.uid);
+      if (!map.has(key)) map.set(key, { card: o.card, uids: [] });
+      map.get(key).uids.push(o.uid);
     });
-    return [...map.values()];
+    const out = [];
+    map.forEach(({ card, uids }) => {
+      const cap = stackCapOf(card);
+      for (let i = 0; i < uids.length; i += cap) {
+        out.push({ card, count: Math.min(cap, uids.length - i), uids: uids.slice(i, i + cap) });
+      }
+    });
+    return out;
+  }
+  // 背包能否再收这张卡：同名堆未满 → 并入不占新格；堆已满 → 需要一个空格
+  function canReceiveCard(card) {
+    if (!card) return false;
+    const owned = game.ownedCards.filter(o => o.card.name === card.name).length;
+    if (owned < stackCapOf(card)) return true;
+    return canAcceptCard(card);
   }
   function usedSlots() { return game.inventory.length + cardStacks(false).length; }
   function safeUsed() { return cardStacks(true).length; }
@@ -190,6 +217,8 @@ function configureGameRuntime(hooks) {
 
   game.bagCap = bagCap;
   game.canAcceptCard = canAcceptCard;   // 珍珠盒扩格的资源限制（Q5）
+  game.canReceiveCard = canReceiveCard; // 叠放上限感知的收卡判定（#7）
+  game.stackCapOf = stackCapOf;
   game.safeCap = safeCap;
   game.usedSlots = usedSlots;
   game.safeUsed = safeUsed;
@@ -247,7 +276,7 @@ function configureGameRuntime(hooks) {
     const reachable = checkConnectivity(game.layerData);
     if (!reachable.ok) console.error('[map] 不可达结点：', reachable.unreachable.join(' · '));
 
-    // 每层使用自己的局部网格坐标，不再把五层横向平移后硬挤进一张图。
+    // 每层使用自己的局部网格坐标，不再把四层横向平移后硬挤进一张图。
     // 生成器保证 x/row 为四向网格；这里仅负责把格心映射为稳定世界坐标。
     game.nodePos = game.layerData.map(ld => {
       const grid = ld.gridBounds || {};
@@ -331,6 +360,8 @@ function configureGameRuntime(hooks) {
         seen: game.seen || {},
         fragments: game.fragments || 0,
         discovered: [...game.discoveredPairs],
+        bossKilled: !!game.bossKilled,
+        altarActivated: !!game.altarActivated,   // 第四层祭坛是否已激活（首脑格准入条件）
         diceHistory: game.diceHistory, elapsed: game.elapsed,
         stamina: game.stamina == null ? MAP.rules.staminaMax : game.stamina,
         slot: activeSlot, savedAt: Date.now(),
@@ -359,6 +390,25 @@ function configureGameRuntime(hooks) {
   }
   function clearSave() { if (activeSlot) RunStorage.remove(activeSlot); }
   function clearAllSlots() { for (let i = 1; i <= SLOT_COUNT; i++) clearSlot(i); }
+
+  // 按现行卡库刷新背包/仓库里的卡牌快照克隆（2026-09-10 留言 #22/#37）。
+  // 卡面数值与描述以卡库为准；下划线开头的运行时字段（法师锦囊 _pouch 等）是局内状态，原样保留。
+  function refreshCardClones(cards) {
+    if (!Array.isArray(cards) || !SDT.Cards || typeof SDT.Cards.all !== 'function') return 0;
+    const libById = new Map(SDT.Cards.all().map(c => [c.id, c]));
+    let n = 0;
+    cards.forEach(card => {
+      if (!card || !card.id) return;
+      const lib = libById.get(card.id);
+      if (!lib) return;
+      const keep = {};
+      Object.keys(card).forEach(k => { if (k.startsWith('_')) keep[k] = card[k]; });
+      const fresh = { ...lib, ...keep };
+      // 字段级比较：有实际变化才替换并计数，避免无谓的存档抖动
+      if (JSON.stringify(fresh) !== JSON.stringify(card)) { Object.keys(card).forEach(k => delete card[k]); Object.assign(card, fresh); n++; }
+    });
+    return n;
+  }
 
   function loadGame(slot) {
     const s = readSlot(slot);
@@ -396,11 +446,19 @@ function configureGameRuntime(hooks) {
     }
     game.cardOrder = Array.isArray(s.cardOrder) ? s.cardOrder : [];
     game.usedPocket = Array.isArray(s.usedPocket) ? s.usedPocket : [];
+    // 背包/仓库/消耗口袋卡牌快照刷新（2026-09-10 留言 #22/#37）：发牌时存的是卡库快照克隆且
+    // 从不随版本更新——旧档里「血蝠风暴」还卡着旧费用 4（每回合 2 费永远注能不了）、「法力奔涌」
+    // 带着旧措辞描述（识别正则失配整卡无效）。读档时按 id 用现行卡库刷新克隆。
+    refreshCardClones(game.ownedCards.map(o => o.card)
+      .concat(game.usedPocket.map(p => p.card))
+      .concat((SDT.Base.data.stash || []).concat(SDT.Base.data.pocket || []).map(st => st.card).filter(Boolean)));
     game.eventLog = Array.isArray(s.eventLog) ? s.eventLog : [];
     // 迷雾与防重刷（旧档无字段 → {}，走【全部可见/可重复】的兼容路径）
     game.visited = (s.visited && typeof s.visited === 'object') ? s.visited : {};
     game.seen = (s.seen && typeof s.seen === 'object') ? s.seen : {};
     game.fragments = +s.fragments || 0;   // 彩色令牌碎片（旧档无字段 → 0）
+    game.bossKilled = !!s.bossKilled;     // 本局是否已击败首脑（终局撤离条件）
+    game.altarActivated = !!s.altarActivated;   // 第四层祭坛是否已激活（首脑格准入条件，旧档无字段 → false）
     game.pendingEventLoot = null;
     game.discoveredPairs = new Set(s.discovered || []);
     game.diceHistory = s.diceHistory || [];
@@ -445,25 +503,52 @@ function configureGameRuntime(hooks) {
   const newUid = () => 'o' + Date.now().toString(36) +
     Math.floor(Random.random('identity') * 46656).toString(36) + Math.floor(Random.random('identity') * 1296).toString(36);
 
-  // 每局开始：固定携带 5 张初始牌「初始攻击」（同名堆叠，只占 1 格背包）+ 1 张「火球」
+  // 每局开始：固定携带 5 张初始牌「初始攻击」（同名堆叠）+ 1 张「火球」
   // brought=1：开局带入的卡（放弃对局时无条件丢失，v0.21 规则）
+  // 2026-09-09 需求 #4 宠物加成：变形机器人 +2 张杀；火焰精灵把 5 张杀化为 5 张火球
   function grantStarterSha() {
+    const pet = SDT.Base.carriedPet ? SDT.Base.carriedPet() : null;
+    const effect = (pet && pet.effect) || {};
+    const shaN = MAP.rules.starterSha + (effect.extraSha || 0);
     const sha = SDT.Cards.all().find(c => c.id === SDT.Cards.SHA.id) || SDT.Cards.SHA;
-    for (let i = 0; i < MAP.rules.starterSha; i++) {
-      game.ownedCards.push({ uid: newUid(), card: { ...sha }, brought: 1 });
+    const fireball = SDT.Cards.all().find(c => c.id === 'tt3-fireball');
+    if (effect.shaToFireball && fireball) {
+      for (let i = 0; i < shaN; i++) {
+        game.ownedCards.push({ uid: newUid(), card: { ...fireball }, brought: 1 });
+      }
+      UI.log(`[[icon:fire]] <b>火焰精灵</b>：起始背包中的 ${shaN} 张【初始攻击】化为 <b>${shaN} 张【火球】</b>`, 'ok');
+    } else {
+      for (let i = 0; i < shaN; i++) {
+        game.ownedCards.push({ uid: newUid(), card: { ...sha }, brought: 1 });
+      }
+      if (effect.extraSha) UI.log(`[[icon:tools]] <b>变形机器人</b>：起始背包额外增加 <b>2 张【初始攻击】</b>（共 ${shaN} 张）`, 'ok');
     }
     // 火球为初始牌（2026-09-06）：每局固定携带 1 张，不随机掉落/发现/上架
-    const fb = SDT.Cards.all().find(c => c.id === 'tt3-fireball');
-    if (fb) game.ownedCards.push({ uid: newUid(), card: { ...fb }, brought: 1 });
+    if (fireball && !effect.shaToFireball) {
+      game.ownedCards.push({ uid: newUid(), card: { ...fireball }, brought: 1 });
+    }
   }
 
   // 把出发准备页选择的仓库卡牌带入背包（picks: 卡名 => 张数）
+  // 2026-09-09 修复需求 #8：此前只把卡从仓库移除、从未放进对局背包——带入的卡凭空消失
+  // 需求 #6：职业卡不能带入（带出后留在仓库，只能收藏/出售）
   function applyDeployPicks(picks) {
     const B = SDT.Base;
     let loaded = 0;
     Object.keys(picks || {}).forEach(name => {
       const n = Math.max(0, Math.floor(+picks[name] || 0));
-      if (n > 0) loaded += B.takeStashCards(name, n);
+      if (n <= 0) return;
+      const stack = B.data.stash.find(x => x.card.name === name);
+      if (!stack) return;
+      if (stack.card.rarity === '职业') {
+        UI.log(`[[icon:cross]] 职业卡【${esc(name)}】无法带入对局（带出后留在仓库）`, 'warn');
+        return;
+      }
+      const taken = B.takeStashCards(name, n);
+      for (let i = 0; i < taken; i++) {
+        game.ownedCards.push({ uid: newUid(), card: { ...stack.card }, brought: 1 });
+      }
+      loaded += taken;
     });
     if (loaded) UI.log(`[[icon:archive]] 从基地仓库携带 <b>${loaded}</b> 张卡牌出征`, 'loot');
   }
@@ -498,6 +583,9 @@ function configureGameRuntime(hooks) {
     game.elapsed = 0;
     game.elapsedSynced = 0;
     game.altarFrom = null;
+    game.altarActivated = false;   // 第四层祭坛未激活——首脑格封印中
+    game.surrenderedRun = false;   // 本局是否因主动撤离判负（区分战败/撤离失败文案）
+    game.bossKilled = false;   // 第四层击败首脑后才能终局撤离
     game.visited = {};   // 已结算过的一次性格（防回头路重刷战斗/宝箱/事件）
     game.seen = {};      // 战争迷雾：走过的节点 + 当前相邻节点可见，其余隐藏
     SDT.Sound.music('board');   // 出发：切入行军氛围
@@ -508,12 +596,27 @@ function configureGameRuntime(hooks) {
     grantStarterSha();
     UI.log(`[[icon:cards]] 随身携带初始牌【<b>初始攻击</b>】×${MAP.rules.starterSha}、【<b>火球</b>】×1（固定携带 · 不可入库 / 安全格）`, 'sys');
     applyDeployPicks(picks);    // 出发准备页选择的仓库卡牌
+    // 需求 #1：下一次出发后，基地消耗口袋清空（未复原的卡牌随之消散）
+    if (SDT.Base.data.pocket.length) {
+      UI.log(`[[icon:pocket]] 出发整理：基地消耗口袋已清空（${SDT.Base.data.pocket.reduce((a, b) => a + b.count, 0)} 张未复原的卡牌消散了）`, 'dim');
+      SDT.Base.data.pocket = [];
+      SDT.Base.save();
+    }
+    // 需求 #4：携带宠物「汪汪狗」的生命上限 +5
+    const pet = SDT.Base.carriedPet ? SDT.Base.carriedPet() : null;
+    if (pet && pet.effect && pet.effect.maxHp) {
+      game.maxHp += pet.effect.maxHp;
+      game.hp += pet.effect.maxHp;
+      UI.log(`[[icon:paw]] 携带宠物<b>「${esc(pet.name)}」</b>：生命上限 +${pet.effect.maxHp}（${game.maxHp}）`, 'ok');
+    } else if (pet) {
+      UI.log(`[[icon:paw]] 携带宠物<b>「${esc(pet.name)}」</b>：${esc(pet.desc.replace(/^携带效果：/, ''))}`, 'ok');
+    }
     const reserve = SDT.Base.takeReserveCoins();
     if (reserve) {
       game.coins += reserve;
       UI.log(`[[icon:coin]] 带上基地储备 <b>${reserve}</b> 币（卖出仓库物品所得）`, 'coin');
     }
-    // 五层图从第一层的多个入口之一开始；这是起点选择，不消耗行动力。
+    // 四层图从第一层的多个入口之一开始；这是起点选择，不消耗行动力。
     const l1 = game.layerData[0];
     const startIdx = l1.entrances[Math.floor(Random.random('gameplay') * l1.entrances.length)] || 0;
     enterLayer(0, startIdx);

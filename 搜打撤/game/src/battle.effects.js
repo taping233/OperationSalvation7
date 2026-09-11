@@ -84,7 +84,7 @@ function parsePoolNoun(raw, myClass) {
     if (key === '杀') preds.push(c => c.id === 'builtin-sha' || c.name === '杀' || c.name === '初始攻击');
     else if (key === '火球') preds.push(series ? (c => String(c.name || '').includes('火球')) : (c => c.name === '火球'));
     else if (key === '箭') preds.push(c => String(c.name || '').includes('箭'));
-    else if (key === '药水') preds.push(c => String(c.name || '').includes('药水') || c.name === '能量饮料');
+    else if (key === '药水') preds.push(c => c.type === '道具' && String(c.name || '').includes('药水'));   // 药水池定版（2026-09-09）：所有带「药水」名字的道具——法术「药水魔法」不在池内
     else if (key === '禁咒') preds.push(c => String(c.name || '').startsWith('禁咒'));
     else if (key === '形态') preds.push(c => /形态/.test(String(c.name || '')));
   }
@@ -109,9 +109,10 @@ function createEffectExecutor(deps) {
     autoPlayHandType, setShaTransform, setConsumeFireball,
     damagePlayer, addPlayerMaxHp, dumpHand,
     queueChoice, setStealthStrike, setNextSpellTwice,
+    registerTurnStartText,
     getInfuseFuels, getPriceOfLastDrawn, dealAoeFixed, replaceShaInDeck,
     summonAlly, setExtraTurn, setDeathSave, queuePouchCast,
-    registerGrowthCard, unlockSeal, randomAcquired,
+    registerGrowthCard, unlockSeal, randomAcquired, handCurseSpecs, queueSwapCostDiscover,
   } = deps;
 
   return function applyTextEffects(card, text, target, flags) {
@@ -156,13 +157,31 @@ function createEffectExecutor(deps) {
     }
 
     // —— 「诅咒状态下 / 自身处于诅咒状态时」条件加成（深海印记/深海咒印）：
-    //     自身身负诅咒才继续结算，否则本句为已实装的条件空过 ——
+    //     装备类改为穿戴期动态核算（battle.core syncCurseCondEquips：身负诅咒生效、
+    //     解除自动收回，2026-09-09 留言 #2）；其余卡保持「未诅咒时空过」——
     if (/诅咒状态[下时]/.test(desc) && !/对手|对方/.test(desc)) {
       const met = typeof combat.hasCurse === 'function' && combat.hasCurse(pstat);
+      if (card.type === '装备') {
+        log(met
+          ? `[[icon:crystal]] <b>${esc(card.name)}</b>：当前身负诅咒，条件加成已生效`
+          : `[[icon:cross]] ${esc(card.name)}：自身未处于诅咒状态，穿戴期间身负诅咒时自动生效`, met ? 'ok' : 'dim');
+        return { did: true, drawn: false, healed: false, armored: false };
+      }
       if (!met) {
         log(`[[icon:cross]] ${esc(card.name)}：自身未处于诅咒状态，条件加成不生效`, 'dim');
         return { did: true, drawn: false, healed: false, armored: false };
       }
+    }
+
+    // —— 装备嵌入句「回合开始 -N 血」（灭魔之剑，2026-09-09 留言 #10）：
+    //     从本句剥出并注册为每回合开始的延迟段——否则它与「攻 +2」同句，
+    //     攻强化先置 did 后自伤被跳过，回合开始掉血从未生效 ——
+    const turnNeg = desc.match(/回合开始[时：:，,]?\s*[-－]\s*(\d+)\s*点?血/);
+    if (turnNeg && typeof registerTurnStartText === 'function') {
+      registerTurnStartText(`-${turnNeg[1]} 血`, card.name);
+      desc = desc.replace(/[,，]?\s*回合开始[时：:，,]?\s*[-－]\s*\d+\s*点?血/, '');
+      log(`[[icon:hourglass]] <b>${esc(card.name)}</b>：每个回合开始失去 ${turnNeg[1]} 点生命`, 'sys');
+      did = true;
     }
 
     // —— 抉择（2026-09-08 人工 N 选一）：弹出选项面板，选中哪项才结算哪项 ——
@@ -224,6 +243,30 @@ function createEffectExecutor(deps) {
           : `[[icon:skull]] <b>${esc(targets[0].name)}</b> 附加 ${n} 层中毒（每层回合末 1 点固定伤害）`, 'sys');
         did = true;
       }
+    }
+    // 迷之匣（2026-09-10 需求）：限定技能「发现两张随机招式，交换其费用」——
+    // 招式＝武术+法术；两张都置入手牌后自动交换费用（battle.core swapCardCosts）
+    if (typeof queueSwapCostDiscover === 'function' && /发现两张随机招式/.test(desc)) {
+      queueSwapCostDiscover();
+      did = true;
+    }
+    // 诅咒之刃（2026-09-10 需求）：「附加手牌中的招式所具有的全部诅咒效果」——
+    // 招式＝武术+法术（设计者定版）：收集当前手牌全部招式的诅咒，一并附加给目标；
+    // 卡面实时显示由 battle.view 用同一段 handCurseSpecs 数据渲染
+    if (typeof handCurseSpecs === 'function' && /附加手牌中的招式所具有的全部诅咒/.test(desc)) {
+      const specs = handCurseSpecs();
+      const ct = (target && !target.dead) ? target : (getAlive()[0] || null);
+      if (specs.length && ct) {
+        const names = specs.map(s => {
+          const meta = combat.CURSE_META[s.key];
+          combat.addCurse(ct, s.key, s.n);
+          return `${meta ? meta.name : s.key}${meta && meta.stack ? '×' + s.n : ''}`;
+        }).join('、');
+        log(`[[icon:skull]] <b>${esc(card.name)}</b>：附加手牌招式的诅咒 → <b>${esc(ct.name)}</b>：${names}`, 'sys');
+      } else {
+        log(`[[icon:cross]] <b>${esc(card.name)}</b>：手牌中没有带诅咒的招式`, 'dim');
+      }
+      did = true;
     }
     if (!/免疫冰冻|对冰冻/.test(desc) && /附加冰冻|冰冻\s*所有|冰冻\s*(?:\d+|[一两二三四五])\s*名|冻结/.test(desc)) {
       const fm = desc.match(/(?:冻结|冰冻)状态\s*(\d+)\s*回合/);
@@ -381,12 +424,16 @@ function createEffectExecutor(deps) {
         did = true;
       }
     }
-    // —— 偷取攻击至 1 点（影噬：目标攻击力压到 1，本场战斗有效）——
+    // —— 偷取攻击至 1 点（影噬）：目标攻击力压到 1，差值加给自身攻强化，
+    //     双向都只持续 1 回合（2026-09-09 留言 #1/#2：偷取要加自己的攻击力、只持续 1 回合）——
     if (/偷取[^。]*?攻击/.test(desc) && !did) {
       const t = curseTarget;
       if (t && !t.dead && (t.atk || 0) > 1) {
+        const stolen = t.atk - 1;
         t.atk = 1;
-        log(`[[icon:arrow]] <b>偷取攻击</b>：<b>${esc(t.name)}</b> 的攻击力被压到 1（本场战斗）`, 'sys');
+        t._stealRestore = (t._stealRestore || 0) + stolen;
+        combat.addBlessing(pstat, 'atkUp', stolen, 1);
+        log(`[[icon:arrow]] <b>偷取攻击</b>：<b>${esc(t.name)}</b> 的攻击力被压到 1，你获得攻击力 +${stolen}（各自 1 回合后还原）`, 'sys');
         did = true;
       }
     }
@@ -435,7 +482,7 @@ function createEffectExecutor(deps) {
       const pool = allCards().filter(c => c.type === want && c.rarity !== '衍生' && !['生物', '事件'].includes(c.type));
       const c = pool.length ? pool[Math.floor(random01() * pool.length)] : null;
       if (c) {
-        addTempCard({ ...c, cost: 0 });
+        addTempCard({ ...c, cost: 0, _baseCost: c.cost || 0 });   // _baseCost：费用角标显示绿色「降费」（需求 #16）
         log(`[[icon:flask]] 神秘变化：变成【<b>${esc(c.name)}</b>】（招式，费用已降为 0）`, 'loot');
       } else log('[[icon:flask]] 卡牌库是空的，什么也没有变成', 'dim');
       did = true;
@@ -450,7 +497,7 @@ function createEffectExecutor(deps) {
           : String(c.name || '').includes(key)));
       const c = pool.length ? pool[Math.floor(random01() * pool.length)] : null;
       if (c) {
-        addTempCard({ ...c, cost: 0 });
+        addTempCard({ ...c, cost: 0, _baseCost: c.cost || 0 });   // _baseCost：费用角标显示绿色「降费」（需求 #16）
         log(`[[icon:cards]] 获得【<b>${esc(c.name)}</b>】，其费用已变为 0`, 'loot');
       } else log(`[[icon:question]] 找不到随机的「${esc(key)}」（占位）`, 'warn');
       did = true;
@@ -559,8 +606,16 @@ function createEffectExecutor(deps) {
           const n = numMap[consM[1]] || +consM[1] || 1;
           queueHandSelect({ n, type: consM[2] === '牌' ? null : consM[2], act: 'consume', thenText: consM[3], target: curseTarget, srcCard: card });
           // 尾段效果（+10甲 等）在消耗完成后经 thenText 结算——立即段提前收口，
-          // 防止同一句被 am/hm 等处理器再吃一遍（铸甲曾因此双倍护甲）
-          return { did: true, drawn: false, healed: false, armored: false };
+          // 防止同一句被 am/hm 等处理器再吃一遍（铸甲曾因此双倍护甲）。
+          // 2026-09-10 留言 #25：尾段已有的回复/护甲/抽卡要如实回报，否则
+          // battle.core 的结构化兜底（card.armor 等）会再发一次——「+10 甲」实际加了 20。
+          const tail = consM[3];
+          return {
+            did: true,
+            drawn: /抽\s*(?:\d+|[一二两三四])\s*张/.test(tail),
+            healed: /回复|\+\s*\d+\s*血/.test(tail),
+            armored: /护甲|\+\s*\d+\s*甲/.test(tail),
+          };
         }
       }
     }
@@ -605,7 +660,10 @@ function createEffectExecutor(deps) {
     // 「对方每有 1 种诅咒，抽 N 张牌」（深渊诅咒）：按目标诅咒种类数放大抽牌量
     const perCurseDraw = desc.match(/每有\s*1\s*种诅咒[^。]*?抽\s*(\d+)\s*张牌/);
     const dm = desc.match(/抽\s*(\d+)\s*[-—~～至]\s*(\d+)\s*张牌/) || desc.match(/抽\s*(\d+)\s*张牌/);
-    if ((dm || perCurseDraw) && !turnExtraDraw && !perReleaseDraw && !/该牌时/.test(desc)) {
+    // 「洗入牌库，然后抽 N 张牌」语序（无极梦魇）：抽牌由洗入处理器在洗混后结算——
+    // 若在此先抽，「然后抽」抽到的是洗入前的旧牌，顺序与卡面相反（2026-09-11 英雄卡审计）
+    if ((dm || perCurseDraw) && !turnExtraDraw && !perReleaseDraw && !/该牌时/.test(desc)
+      && !/洗入牌库[^。]*然后抽/.test(desc)) {
       let n = perCurseDraw ? +perCurseDraw[1] : +dm[1];
       if (perCurseDraw && curseTarget) {
         const kinds = combat.CURSES.filter(k => (curseTarget.status[k] || 0) > 0).length;
@@ -857,8 +915,12 @@ function createEffectExecutor(deps) {
       const pred = parsePoolNoun(noun, myClass);
       const n = /等量随机卡牌/.test(desc) ? 2 : n0;   // 魔法锅炉「发现等量随机卡牌」（消耗至多 2 张）
       let act = null;
-      if (/并直接施放/.test(dPool[0]) || /并将其释放|并直接释放|并释放/.test(desc)) act = 'play';
+      // 需求 #17（2026-09-09）：「并直接施放 / 并施放 / 并释放」都算直接释放——此前只测「释放」，
+      // 江湖救急「发现 1 张其它职业的卡牌并直接施放」发现的卡只置入手牌不打出
+      if (/并直接施放/.test(dPool[0]) || /并将其释放|并(?:直接)?(?:施放|释放)/.test(desc)) act = 'play';
       if (/获取剩下(两|2)张/.test(desc)) act = 'playKeep';
+      // 二刀流（2026-09-10 需求）：「并额外获得1张复制」→ 发现的卡连本体共 2 张置入手牌
+      if (/并额外获得\s*1\s*张复制/.test(desc)) act = 'dup';
       // 挖宝：「并获得等同于其价格的护甲」→ 选中卡后按售价折算护甲（pickDiscover 结算）
       // 江湖救急：「回合开始时将其消耗」→ 置入的临时卡记录 uid，下回合开始统一消耗
       queueDiscover({ n, pred, act,
@@ -911,6 +973,18 @@ function createEffectExecutor(deps) {
         added.forEach(name => { counts[name] = (counts[name] || 0) + 1; });
         log(`[[icon:recycle]] <b>${esc(card.name)}</b>：将 ${Object.keys(counts).map(name => `【${esc(name)}】×${counts[name]}`).join('、')} 洗入牌库` +
           `（牌库 ${deckSize} 张，已洗混）`, 'sys');
+        // 洗混后结算「然后抽 N 张牌」（无极梦魇：四张禁咒洗入牌库，然后抽 2 张）
+        const afterDraw = desc.match(/洗入牌库[^。]*然后抽\s*(\d+|[一二两三四五])\s*张牌/);
+        if (afterDraw) {
+          const n2 = POOL_NUM_MAP[afterDraw[1]] != null ? POOL_NUM_MAP[afterDraw[1]] : +afterDraw[1];
+          if (getMode() === 'boss') {
+            const got = drawCards(n2);
+            log(`[[icon:cards]] <b>${esc(card.name)}</b>：洗入后抽了 ${got} 张牌`, 'sys');
+          } else {
+            grantStarterAttack(n2);
+            log(`[[icon:cards]] <b>${esc(card.name)}</b>：洗入后获得 ${n2} 张【初始攻击】（普通战斗抽牌效果改为获得初始攻击）`, 'sys');
+          }
+        }
         did = true;
       }
     }
@@ -953,6 +1027,14 @@ function createEffectExecutor(deps) {
     if (cfN && typeof setConsumeFireball === 'function') {
       setConsumeFireball(cfN[1] ? +cfN[1] : 1);
       log(`[[icon:fire]] <b>战斗规则</b>：每消耗 1 张卡牌，自动施放火球`, 'ok');
+      did = true;
+    }
+    // —— 句内嵌的「回合开始时发现 N 张卡牌」（万法乾坤）：分句器把整句留在即时段，
+    // 此前被法伤句吃掉后回合开始段从未注册——在此拆出并注册为每回合开始的延迟段
+    const tsDisc = desc.match(/回合开始时[^。]*?(发现[^。]*?（?\s*(?:\d+|[一两二三四五])?\s*张[^。]*?)$/);
+    if (tsDisc && typeof registerTurnStartText === 'function') {
+      registerTurnStartText(tsDisc[1], String(card.name || ''));
+      log(`[[icon:hourglass]] <b>回合开始时</b>：【${esc(card.name)}】${esc(tsDisc[1])}（下个回合开始起每回合生效）`, 'sys');
       did = true;
     }
     // —— 破隐一击伤害翻倍（白梅落影·妄）：从潜行中发动的攻击伤害 ×2 ——

@@ -37,16 +37,19 @@ function createShopController({
     };
 
     const slots = [];
+    // 招财猫（需求 #4，2026-09-09）：携带时商店第一格的卡牌免费
+    const catFree = !!(SDT.Base.carriedPet && SDT.Base.carriedPet()?.effect?.shopFree);
     for (let i = 0; i < 6; i++) {
       const card = pickRandomCard();
       slots.push(card
-        ? { card, price: SDT.Cards.PRICE[card.rarity] || 2, sold: false }
+        ? { card, price: (catFree && i === 0) ? 0 : (SDT.Cards.PRICE[card.rarity] || 2), sold: false, free: catFree && i === 0 }
         : { empty: true, label: '卡牌库无货' });
     }
     // 初始牌槽位已移除：杀/火球为初始牌，不上架（2026-09-06）；神秘货箱特殊栏位仍可能刷出
-    const firstAid = lib.find(card => card.id === 'tt-jinchuangyao') ||
-      SDT.Cards.TABLETOP10.find(card => card.id === 'tt-jinchuangyao');
-    slots.push({ card: firstAid, price: 3, sold: false });
+    // 桃（2026-09-10 需求）：固定栏位 2 币回 6 血，替代原金疮药（3 币回 10 血）
+    const peach = lib.find(card => card.id === 'tt-peach') ||
+      SDT.Cards.CARDS_SYNC.find(card => card.id === 'tt-peach');
+    slots.push({ card: peach, price: 2, sold: false });
     // 初始攻击补充位（2026-09-08 老板定版）：固定栏位，1 币 1 张，每次到站最多补 5 张
     slots.push({ card: { ...SDT.Cards.SHA }, price: 1, sold: false, shaReplenish: 5 });
     const mysteryCard = lib.length ? lib[Math.floor(Random.random('shop') * lib.length)] : null;
@@ -68,7 +71,12 @@ function createShopController({
   // 货位渲染：卡面 + 下方价签（对齐参考图：价格挂在卡牌正下方）
   function slotHTML(slot, index) {
     if (slot.empty) return `<div class="shop-slot"><div class="shop-empty">${slot.label || '无货'}</div></div>`;
-    if (slot.sold) return '<div class="shop-slot sold"><div class="shop-empty">已售出</div></div>';
+    if (slot.sold) {
+      // 神秘货箱开出后亮出卡面（2026-09-09 留言 #6：买完随机卡要马上告诉玩家是什么）
+      if (slot.mystery && slot.card) return `<div class="shop-slot">${cardHTML(slot.card)}
+        <span class="shop-slotnote">[[icon:dice]] 神秘货箱开出</span></div>`;
+      return '<div class="shop-slot sold"><div class="shop-empty">已售出</div></div>';
+    }
     const afford = game.coins >= slot.price;
     if (slot.shaReplenish != null) {
       if (slot.shaReplenish <= 0) return '<div class="shop-slot sold"><div class="shop-empty">初始攻击已补满</div></div>';
@@ -81,7 +89,7 @@ function createShopController({
       <button class="shop-price" data-act="buyCard" data-i="${index}" ${afford ? '' : 'disabled'}>[[icon:coin]] ${slot.price}</button>
     </div>`;
     return `<div class="shop-slot">${cardHTML(slot.card)}
-      <button class="shop-price" data-act="buyCard" data-i="${index}" ${afford ? '' : 'disabled'}>[[icon:coin]] ${slot.price}</button>
+      <button class="shop-price" data-act="buyCard" data-i="${index}" ${afford ? '' : 'disabled'}>${slot.free ? '[[icon:paw]] 免费（招财猫）' : `[[icon:coin]] ${slot.price}`}</button>
     </div>`;
   }
 
@@ -91,7 +99,7 @@ function createShopController({
     UI.registerHelp('shop', {
       title: '商店说明',
       html: `
-        <p class="help-item"><b>进货</b>商队每次靠站随机卸货：6 张随机卡 + 金疮药 + 初始攻击补充（1 币/张，每站最多 5 张）+ 1 个「神秘货箱」栏位（3 币，买到随机卡牌）。</p>
+        <p class="help-item"><b>进货</b>商队每次靠站随机卸货：6 张随机卡 + 桃（2 币，回 6 血） + 初始攻击补充（1 币/张，每站最多 5 张）+ 1 个「神秘货箱」栏位（3 币，买到随机卡牌）。</p>
         <p class="help-item"><b>卖牌处</b>货板右下角的鎏金圆牌：点进收购台挑卡卖掉。默认所有卡牌不可出售；只有带「可出售」备注的卡才能卖，收购价 = 卡面币值。</p>`,
       back: renderShop,
     });
@@ -121,25 +129,22 @@ function createShopController({
     UI.refresh(game);
   }
 
-  // 卖牌处二级界面：收购台（全部持有卡，可卖的亮着，其余置灰说明）
+  // 卖牌处二级界面：收购台（2026-09-10 留言 #23：只列出可以卖的牌，不再把不可卖的也铺出来置灰）
   function renderSellPage() {
-    const total = game.ownedCards.length;
-    const sellableCount = game.ownedCards.filter(owned => SDT.Cards.isSellable(owned.card)).length;
-    const rows = game.ownedCards.map(owned => {
-      const sellable = SDT.Cards.isSellable(owned.card);
-      return `<div class="bag-card sell-item${sellable ? '' : ' no'}">
+    const sellableOwned = game.ownedCards.filter(owned => SDT.Cards.isSellable(owned.card) && !owned.stored);   // 珍珠盒中存放的资源卡不在此列出（2026-09-10 #29）
+    const total = sellableOwned.length;
+    const rows = sellableOwned.map(owned => `
+      <div class="bag-card sell-item">
         ${cardHTML(owned.card, 'sm')}
-        ${sellable
-          ? `<button class="mini-btn ok" data-act="sellCard" data-uid="${owned.uid}">卖出 +${SDT.Cards.sellPrice(owned.card)} 币</button>`
-          : '<span class="sell-no">不可出售</span>'}
-      </div>`;
-    }).join('');
+        <button class="mini-btn ok" data-act="sellCard" data-uid="${owned.uid}">卖出 +${SDT.Cards.sellPrice(owned.card)} 币</button>
+      </div>`).join('');
+    const ownedAll = game.ownedCards.length;
     const grid = total
       ? `<div class="shop-sell">${rows}</div>`
-      : '<p class="shop-sell-empty">背包里还没有卡牌。</p>';
+      : '<p class="shop-sell-empty">背包里没有可以卖的卡牌——只有带「可出售」备注的卡（货币卡等）商店才收。</p>';
     UI.registerHelp('shopSell', {
       title: '卖牌处说明',
-      html: `<p class="help-item"><b>收购规则</b>默认所有卡牌不可出售；只有带「可出售」备注的卡才能卖给商店，收购价 = 卡面币值。</p>`,
+      html: `<p class="help-item"><b>收购规则</b>这里只显示可以卖的牌；默认卡牌不可出售，只有带「可出售」备注的卡（货币/宝石类等）才能卖给商店，收购价 = 卡面币值。</p>`,
       back: renderSellPage,
     });
     UI.showOverlay('', `
@@ -150,7 +155,7 @@ function createShopController({
           <span class="hub-res"><span class="res-chip">[[icon:coin]] <b class="gold">${game.coins}</b> 币</span></span>
         </header>
         <div class="shop-board sell-board">
-          <p class="sell-tip">持有 ${total} 张 · 可卖 ${sellableCount} 张——置灰的卡没打「可出售」备注，商店不收</p>
+          <p class="sell-tip">持有 ${ownedAll} 张 · 可卖 ${total} 张——其余卡没打「可出售」备注，商店不收（不在此显示）</p>
           ${grid}
         </div>
         <button class="shop-back" data-act="backShop">[[icon:arrow]] 返回商店</button>
@@ -168,8 +173,10 @@ function createShopController({
         SDT.Sound.sfx('error');
         return;
       }
-      if (!game.ownedCards.some(owned => owned.card.name === slot.card.name) && !game.canAcceptCard(slot.card)) {
-        UI.log(`[[icon:bag]] 背包已满（${usedSlots()}/${bagCap()} 格${slot.card.type !== '资源' ? '，珍珠盒扩格只收资源卡' : ''}），买不下这张卡`, 'warn');
+      if (game.canReceiveCard
+        ? !game.canReceiveCard(slot.card)
+        : (!game.ownedCards.some(owned => owned.card.name === slot.card.name) && !game.canAcceptCard(slot.card))) {
+        UI.log(`[[icon:bag]] 背包已满（${usedSlots()}/${bagCap()} 格，同名卡最多叠 3 张——初始攻击/火球 5 张），买不下这张卡`, 'warn');
         SDT.Sound.sfx('error');
         return;
       }

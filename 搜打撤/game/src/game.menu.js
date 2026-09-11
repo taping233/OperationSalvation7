@@ -74,7 +74,7 @@ function createGameMenuController(deps) {
       if (hub) {
         const tab = Array.from(hub.classList).find(c => c.startsWith('hub-'));
         const key = tab ? tab.slice(4) : '';
-        const tabName = { deploy: '出发', stash: '仓库', upgrade: '升级', classes: '人物', ach: '成就' }[key] || key;
+        const tabName = { deploy: '出发', stash: '仓库', upgrade: '升级', classes: '人物', ach: '成就·收藏室' }[key] || key;
         return { id: 'hub-' + key, name: `基地 · ${tabName || '主页'}` };
       }
       if (body && body.querySelector('#depMain')) return { id: 'depMain', name: '出征整备' };
@@ -481,7 +481,7 @@ function createGameMenuController(deps) {
           <i class="bokeh"></i><i class="bokeh"></i><i class="bokeh"></i><i class="bokeh"></i>
           ${SLOT_BG_SILHOUETTES}
         </div>
-        <!-- 2026-09-07 留言：右上叉号改为「返回」键沉到右下角，页面主体整体上移让返回键显眼 -->
+        <!-- 返回键沉到左下角常驻（2026-09-10 留言 #17：顶部在矮窗口下会被裁掉看不见；页面主体恢复顶部留白整体下移） -->
         <button class="pg-back" data-act="slotBack">返回 <i class="en">BACK</i></button>
         <span class="slot-page-help">${UI.helpBtn('slots')}</span>
         <header class="slot-page-head">

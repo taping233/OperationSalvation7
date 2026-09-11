@@ -184,6 +184,11 @@ body.page-opaque #sidebar{visibility:hidden}
 .sac-list{display:flex;flex-direction:column;gap:6px;max-height:52vh;overflow:auto;margin:10px 0}
 .sac-row{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;border:1px solid #42616d;background:#112936;color:#dfe9e6;border-radius:2px;cursor:pointer;text-align:left}
 .sac-row.sac-sel{border-color:#c8b483;background:#333c39}
+/* 2026-09-10 留言 #31/#32：献祭选卡改真卡面网格——卡名/费用印在卡面上（深色字、可读），不再用浅底白字行 */
+.sac-hand{max-height:52vh}
+.sac-card{width:10em}
+.sac-card .bt-sac-cost{position:absolute;left:4px;bottom:3px;z-index:5;padding:1px 7px;border-radius:9px;
+  border:1px solid #b9b28e;background:#141414ee;color:#efe9d2;font-size:12px;font-weight:700}
 
 /* ===== 2026-09-06 留言批次二 ===== */
 /* 继续旅程：加大 + 内联 SVG 箭头 */
@@ -255,14 +260,15 @@ body.page-opaque #sidebar{visibility:hidden}
 .pg-close .ic{transition:transform .45s cubic-bezier(.34,1.3,.5,1)}
 .pg-close:hover .ic{transform:rotate(180deg)}
 
-/* —— 选档页：「返回 BACK」键放左上角（2026-09-07 留言：返回放到左上角去） —— */
-.pg.slot-page .pg-back{position:absolute;z-index:5;left:22px;top:20px;display:inline-flex;align-items:center;gap:8px;
+/* —— 选档页：「返回 BACK」键（2026-09-10 留言 #17：返回键不见了、页面该下移——
+   从左上角钉死改为沉到左下角常驻，窗口偏矮/顶部被任务栏遮挡时也不再被裁掉；
+   页面主体恢复顶部留白整体下移，不再顶着屏幕上沿） —— */
+.pg.slot-page .pg-back{position:absolute;z-index:5;left:22px;bottom:22px;display:inline-flex;align-items:center;gap:8px;
   padding:12px 26px;font-size:14px;letter-spacing:3px;color:#e3eeea;cursor:pointer;border-radius:8px;
   background:linear-gradient(160deg,#244653,#1a3441);border:1px solid #77919b;
   box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 2px 10px rgba(0,0,0,.4);transition:all .15s}
 .pg.slot-page .pg-back:hover{background:linear-gradient(160deg,#325a69,#22404e);border-color:#cadcd9;transform:translateY(-1px)}
 .pg.slot-page .pg-back .en{font:10px 'Cascadia Code';letter-spacing:2px;opacity:.7}
-.pg.slot-page .slot-page-head{padding-top:0;margin-top:-6px}
 .pg.slot-page .slot-deck{padding-bottom:34px}
 
 /* —— 基地主页：四面留白 + 壁纸（老板指定图，assets/scenes/hub-wallpaper.webp） —— */
@@ -411,6 +417,13 @@ body.page-opaque #sidebar{visibility:hidden}
 #overlay .hub-card .stash-pop-card{color:#4a473e}
 #overlay .hub-card .rw{color:#6b685b}
 #overlay .hub-card .got{color:#3f6e46}
+/* 职业收藏室（浅色主题适配） */
+#overlay .hub-card .coll-ms{background:#f7f5ef;border-color:#c9c5b8}
+#overlay .hub-card .coll-ms.reach{background:#fff;border-color:#b8934c}
+#overlay .hub-card .coll-ms b,#overlay .hub-card .coll-group-head b{color:#3c3a33}
+#overlay .hub-card .coll-slot.on{background:#f7f5ef;border-color:#b7b4aa}
+#overlay .hub-card .coll-slot.off{border-color:#b7b4aa;background:repeating-linear-gradient(45deg,#eceae2,#eceae2 6px,#e4e1d7 6px,#e4e1d7 12px)}
+#overlay .hub-card .coll-slot.off span{color:#a8a496}
 
 /* —— 出征整备页（depMain）：沿用基地主页壁纸 —— */
 #depMain{padding:22px 30px 26px;background:
@@ -447,6 +460,16 @@ body.page-opaque #sidebar{visibility:hidden}
   display:flex;align-items:center;justify-content:center;pointer-events:none}
 .bag-cell.fixed .dep-n{background:#b8934c;color:#2c230f;border-color:#f0e2c0}
 .dep-cards .ov-empty{grid-column:1/-1;margin:6px 0}
+
+/* —— 留言 2026-09-10：背包格一多，「← 返回 / 确认出发」被挤出全屏页——
+      .card.page 是 overflow:hidden，页面没有滚动条，按钮直接消失。
+      两栏卡片改为撑满剩余高度：左侧卡池、右侧背包格内部滚动，底部按钮永远钉在可视区内 —— */
+#depMain .dep-body,#exMain .dep-body{flex:1;min-height:0;align-items:stretch}
+#depMain .dep-body .hub-card,#exMain .dep-body .hub-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+#depMain .dep-body .hub-card>h3,#exMain .dep-body .hub-card>h3{flex-shrink:0}
+#depMain .dep-cards,#exMain .dep-list{flex:1 1 auto;min-height:0;max-height:none;align-content:start}
+#depMain .bag-grid{flex:1 1 auto;min-height:120px;overflow-y:auto;align-content:start}
+#depMain .pet-strip,#depMain .dep-foot,#exMain .dep-foot{flex-shrink:0}
 
 /* ═══════════ 留言批次 2026-09-07 五批（20:18-20:47 Edge 5199 共 13 条） ═══════════ */
 
