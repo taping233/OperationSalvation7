@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 """以「当前世代导出」的 exe 为基座重建嵌入 pck（结构 1:1 镜像基座）：
-- 基座 pck 结构 = 原始资源直装（raw ogg/png/ttf/文本 tscn）+ project.binary + src 脚本桩 + .godot 缓存
-- project.binary / src/ 桩 / .godot/ 沿用基座字节；data/** assets/** scenes/** 用磁盘当前原始内容覆盖/新增
-- 不做任何导入产物替换（Godot 4.7 运行时原生加载 raw 资源，基座已验证）
+- 基座 pck 结构 = 导入管线布局（.import 元数据 + .godot/imported/ 编译产物）+ project.binary + src 脚本桩 + .godot 缓存
+- project.binary / src/ 桩 / .godot/ 沿用基座字节；data/** assets/** scenes/** 用磁盘当前内容覆盖/新增
+- assets/** 的 .import 元数据随磁盘直装，并解析 [remap] path= 把 .godot/imported/ 编译产物一并从磁盘直装
+  （不再依赖基座 .godot/ 是否新鲜；ogg/mp3 无 raw 直载能力，必须走导入产物，wav/png/ttf 同管线无害）
+- [6c→C] 已回收：旧版在此处给 assets/sfx/battle/*.ogg 添加 assets/sfx/ 扁平别名 raw 条目以绕开
+  GameAudio 基准路径缺 battle/ 段的缺口——C 线批次 7a-fix 已修基准路径并改为导入产物装载，别名段移除
 用法：python rebuild_pck3.py <base_exe> <out_exe>
 """
-import struct, hashlib, os, glob, sys
+import struct, hashlib, os, glob, sys, re
 
 PROJ = r'D:/素材/代号柒/SoudacheGodot'
 BASE = sys.argv[1] if len(sys.argv) > 1 else (PROJ + r'/build/windows/升格会的的冬日猜想.exe.old')
@@ -63,15 +66,33 @@ for rel in disk_paths:
     files[rel] = blob
 print('disk files:', len(disk_paths), 'added', added, 'replaced', replaced)
 
-# GameAudio（C 领地）战斗音效基准路径缺 'battle/' 段：以别名路径补原始 ogg（[6c→C] 已登记，C 线修基准路径后可移除）
-aliases = 0
-for rel in list(files.keys()):
-    if rel.startswith('assets/sfx/battle/') and not rel.endswith('.import'):
-        alias = 'assets/sfx/' + rel[len('assets/sfx/battle/'):]
-        if alias not in files:
-            files[alias] = files[rel]
-            aliases += 1
-print('sfx aliases added:', aliases)
+# assets/** 的 .import 元数据已在磁盘直装列表里；再解析其 [remap] path=，把 .godot/imported/
+# 编译产物一并从磁盘直装（ogg/mp3 等无 raw 加载器的资源靠它才能在导出环境 Load 出真流）。
+products = 0
+missing_products = []
+for rel in disk_paths:
+    if not rel.startswith('assets/') or not rel.endswith('.import'):
+        continue
+    with open(os.path.join(PROJ, rel), 'r', encoding='utf-8') as f:
+        m = re.search(r'^path="([^"]+)"', f.read(), re.M)
+    if not m:
+        missing_products.append(rel + ' (no [remap] path)')
+        continue
+    product = m.group(1)
+    if not product.startswith('res://'):
+        missing_products.append(rel + ' (non-res path: ' + product + ')')
+        continue
+    prod_rel = product[len('res://'):].replace('/', os.sep)
+    prod_path = os.path.join(PROJ, prod_rel)
+    if not os.path.isfile(prod_path):
+        missing_products.append(rel + ' -> ' + product + ' (not on disk)')
+        continue
+    with open(prod_path, 'rb') as f:
+        files[prod_rel.replace(os.sep, '/')] = f.read()
+    products += 1
+print('imported products installed:', products)
+for m_ in missing_products:
+    print('  product not installed:', m_)
 
 assert 'project.binary' in files and 'scenes/main.tscn' in files
 

@@ -147,3 +147,11 @@
 ## 6. 首次导入注意
 
 复制的 wav/ogg/mp3 尚无 `.import`（Godot 编辑器首次打开项目时自动生成；dotnet build 不依赖）。旧骨架资产 `assets/audio/**` 本批未动（不在 7a 领地），GameAudio 已改用新路径，后续可由资产所有方清理。
+
+## 7. 导出环境根修记录（批次 7a-fix，wave4-C，2026-09-12）
+
+针对 6c 登记的两条 [6c→C]，在导出模板 exe（release template + 嵌入 pck）管线取证后根修：
+
+1. **战斗音效基准路径补 `battle/` 段（GameAudio.cs）**：6c 曾以嵌入 pck 别名条目（`assets/sfx/<name>.ogg` → battle 内容）临时补运行时，但别名是 raw ogg、没有 `.import` 边车，运行时 `ResourceFormatImporter` 找不到元数据直接报 `No loader found`，27 个战斗 ogg 全部落进 jsfxr/合成回退（基线日志实证：27 条 No loader found + 27 条 sample missing，wav 0 失败）。根修=LoadPools 的 battle 池文件名全部改带 `battle/` 前缀（与 jsfxr/ 的相对路径写法一致），`LoadSingle` 基准 `res://assets/sfx/` 不变；pck 重建工具（`_planning/evidence/6c-battle/rebuild-embedded-pck.py`）的别名段已由本批移除回收（工具头注释同步）。
+2. **ogg 走 `.import` 产物而非 raw 直载**：核实结论——本导出环境对 `.ogg`/`.mp3` 没有 raw 加载器（wav/png/ttf/tscn 有），`AudioStreamOggVorbis` 必须按官方导出姿势装载：pck 内含 `<file>.ogg.import` 元数据（`[remap] path="res://.godot/imported/<file>-<md5>.oggvorbisstr"`）+ 对应编译产物，`GD.Load` 经 importer 重映射取回真流。落点=rebuild-embedded-pck.py 直装导入产物：解析 assets/** 全部 `.import` 的 remap path，把 `.godot/imported/` 编译产物（oggvorbisstr/mp3str/ctex/fontdata/sample）从磁盘一并装入 pck（132 个，不再依赖基座 `.godot/` 是否新鲜）；不转 wav、不做运行时转码。rider：BGM 两首 mp3 同管线获得真流（此前 `AudioStreamMP3` 直载 raw mp3 在导出环境同样会 No loader found，仅因懒加载+无手势未在 6c 日志显形）。
+   - 证据：GameAudio 新增启动审计行 `AUDIO_POOLS battle_keys=11/11 battle_streams=27/27 ogg=27 jsfx=5/5 ui=3/3 bgm_title=AudioStreamMP3 bgm_battle=AudioStreamMP3`（ogg=27 即 27 条 AudioStreamOggVorbis 真流计数），battle/menu 两屏 smoke 均 0 条 `No loader found`/`sample missing`/`fell back to synth`/`SCRIPT ERROR`；另加 PlaySynth 守卫——battle 增益键若跌进合成回退会打 PushWarning（正常合成键如 card/coin/dice 不受影响）。

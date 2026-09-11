@@ -238,6 +238,10 @@ public sealed partial class GameAudio : Node
 
     private void PlaySynth(string name)
     {
+        // Battle sample keys have pools in every healthy load (web sfx() is pool-first);
+        // reaching synth for one means the ogg pool failed to load — make it loud.
+        if (BattleGain.ContainsKey(name))
+            GD.PushWarning($"GameAudio: battle key '{name}' fell back to synth (ogg pool empty)");
         AudioStreamWav? clip;
         if (name == "dice")
         {
@@ -343,17 +347,20 @@ public sealed partial class GameAudio : Node
         _uiPools["click"] = LoadPool(new[] { "click1.wav", "click2.wav", "click3.wav", "click4.wav", "click5.wav" }, normalize: true);
         _uiPools["hover"] = LoadPool(new[] { "rollover1.wav", "rollover2.wav", "rollover3.wav", "rollover4.wav", "rollover5.wav", "rollover6.wav" }, normalize: true);
         _uiPools["switch"] = LoadPool(new[] { "switch1.wav", "switch2.wav", "switch3.wav", "switch4.wav", "switch5.wav", "switch6.wav" }, normalize: true);
-        _battlePools["hit"] = LoadPool(new[] { "hit-1.ogg", "hit-2.ogg", "hit-3.ogg", "hit-4.ogg" }, normalize: false);
-        _battlePools["hurt"] = LoadPool(new[] { "hurt-1.ogg", "hurt-2.ogg" }, normalize: false);
-        _battlePools["parry"] = LoadPool(new[] { "parry-1.ogg", "parry-2.ogg" }, normalize: false);
-        _battlePools["curse"] = LoadPool(new[] { "curse-1.ogg", "curse-2.ogg" }, normalize: false);
-        _battlePools["heal"] = LoadPool(new[] { "heal-1.ogg", "heal-2.ogg", "heal-3.ogg" }, normalize: false);
-        _battlePools["chestShake"] = LoadPool(new[] { "chestshake-1.ogg", "chestshake-2.ogg" }, normalize: false);
-        _battlePools["chestBurst"] = LoadPool(new[] { "chestburst-1.ogg", "chestburst-2.ogg", "chestburst-3.ogg" }, normalize: false);
-        _battlePools["reveal"] = LoadPool(new[] { "reveal-1.ogg", "reveal-2.ogg", "reveal-3.ogg" }, normalize: false);
-        _battlePools["legend"] = LoadPool(new[] { "legend-1.ogg", "legend-2.ogg", "legend-3.ogg" }, normalize: false);
-        _battlePools["victory"] = LoadPool(new[] { "victory-1.ogg", "victory-2.ogg" }, normalize: false);
-        _battlePools["defeat"] = LoadPool(new[] { "defeat-1.ogg" }, normalize: false);
+        // [6c→C root fix] battle samples live in assets/sfx/battle/ — resolve them at their real
+        // res:// paths (importer metadata + .oggvorbisstr products) instead of the flat alias
+        // paths the 6c pck patch used (raw alias without a .import sidecar → "No loader found").
+        _battlePools["hit"] = LoadPool(new[] { "battle/hit-1.ogg", "battle/hit-2.ogg", "battle/hit-3.ogg", "battle/hit-4.ogg" }, normalize: false);
+        _battlePools["hurt"] = LoadPool(new[] { "battle/hurt-1.ogg", "battle/hurt-2.ogg" }, normalize: false);
+        _battlePools["parry"] = LoadPool(new[] { "battle/parry-1.ogg", "battle/parry-2.ogg" }, normalize: false);
+        _battlePools["curse"] = LoadPool(new[] { "battle/curse-1.ogg", "battle/curse-2.ogg" }, normalize: false);
+        _battlePools["heal"] = LoadPool(new[] { "battle/heal-1.ogg", "battle/heal-2.ogg", "battle/heal-3.ogg" }, normalize: false);
+        _battlePools["chestShake"] = LoadPool(new[] { "battle/chestshake-1.ogg", "battle/chestshake-2.ogg" }, normalize: false);
+        _battlePools["chestBurst"] = LoadPool(new[] { "battle/chestburst-1.ogg", "battle/chestburst-2.ogg", "battle/chestburst-3.ogg" }, normalize: false);
+        _battlePools["reveal"] = LoadPool(new[] { "battle/reveal-1.ogg", "battle/reveal-2.ogg", "battle/reveal-3.ogg" }, normalize: false);
+        _battlePools["legend"] = LoadPool(new[] { "battle/legend-1.ogg", "battle/legend-2.ogg", "battle/legend-3.ogg" }, normalize: false);
+        _battlePools["victory"] = LoadPool(new[] { "battle/victory-1.ogg", "battle/victory-2.ogg" }, normalize: false);
+        _battlePools["defeat"] = LoadPool(new[] { "battle/defeat-1.ogg" }, normalize: false);
         // jsfxr semantic keys (sound.js:280-286): gain/confirm/deny/levelup/strike
         foreach (var (key, file) in new[]
                  {
@@ -365,7 +372,32 @@ public sealed partial class GameAudio : Node
             var stream = LoadSingle(file, normalize: true);
             if (stream != null) _jsfx[key] = stream;
         }
+        AuditPools();
     }
+
+    // [6c→C] Startup audit: proves the battle pools resolved from real ogg streams (importer
+    // path), not the synth fallback. Export-environment smoke asserts on this line.
+    private void AuditPools()
+    {
+        var battleStreams = 0;
+        var oggStreams = 0;
+        foreach (var pool in _battlePools.Values)
+            foreach (var stream in pool)
+            {
+                battleStreams++;
+                if (stream is AudioStreamOggVorbis) oggStreams++;
+            }
+        // BGM preflight: resolves the importer remap eagerly so export packages fail loudly
+        // here instead of silently at first Music() (web keeps preload:false; playback stays lazy).
+        var title = GD.Load<AudioStream>(TitleMusicPath);
+        var battle = GD.Load<AudioStream>(BattleMusicPath);
+        GD.Print($"AUDIO_POOLS battle_keys={_battlePools.Count}/11 battle_streams={battleStreams}/27 " +
+                 $"ogg={oggStreams} jsfx={_jsfx.Count}/5 ui={_uiPools.Count}/3 " +
+                 $"bgm_title={DescribeStream(title)} bgm_battle={DescribeStream(battle)}");
+    }
+
+    private static string DescribeStream(AudioStream? stream) =>
+        stream == null ? "MISSING" : stream.GetType().Name;
 
     private AudioStream[] LoadPool(string[] files, bool normalize)
     {
