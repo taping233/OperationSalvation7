@@ -3,6 +3,7 @@ const SDT = window.SDT;
 import { Random } from './random.js';
 import { characterName } from './characters.js';
 import { cardHTML, cardBackHTML } from './cards.view.js';
+import { DATA } from './data-loader.js';
 
 /* ============================================================
  * 搜打撤 v0.8 —— 卡牌系统数据（localStorage 持久化）
@@ -1249,78 +1250,16 @@ import { cardHTML, cardBackHTML } from './cards.view.js';
       } catch (e) { /* 隐私模式等场景静默跳过 */ }
     },
 
-// ===== [sync-cards-from-live:begin] v1（脚本生成，勿手改；重跑 scripts/sync-cards-from-live.mjs 整块替换）
-    // 实机定版覆盖批次：网页版卡牌库修改同步进源码（老板 2026-09-09 拍板的机制）。
+// ===== 实机定版覆盖批次（数据真源：game/data/cards-sync.json）=====
+    // 网页版卡牌库的修改同步进定版数据（老板 2026-09-09 拍板的机制）——
+    // 数据由 scripts/sync-cards-from-live.mjs 生成写入 JSON，本文件只负责播种。
     // 沿用 TABLETOP10/11 模式：按 id 整卡覆盖 + 缺失补种 + RETIRE 退役；KEY 变更让旧环境重播。
-    CARDS_SYNC: [
-      // —— 2026-09-10 需求批次（v10）：二刀流 ——
-      // 1 费稀有武术：发现一张武术卡并额外获得 1 张复制（本体+复制共 2 张置入手牌）。
-      // 「dup」动作实现在 battle.effects.js act 识别段 + battle.core.js pickDiscover 分支
-      {"cost":1,"desc":"发现一张武术卡并额外获得1张复制。","id":"cc-dual-wield","name":"二刀流","rarity":"稀有","type":"武术","value":2},
-      // —— 2026-09-10 需求批次（v9）：迷之匣改版 + 桃 ——
-      // 迷之匣（装备）效果改为限定技能：发现两张随机招式（=武术+法术），交换其费用。
-      // 旧「对战开始时替换初始攻击」被动随描述移除自动失效；技能结算见 battle.effects.js
-      // 的「发现两张随机招式」句式段 + battle.core.js queueSwapCostDiscover/swapCardCosts
-      {"cost":0,"desc":"限定技能：发现两张随机招式，交换其费用。","dmg":0,"id":"tt3eq-mistbox","name":"迷之匣","rarity":"古朴","sellable":false,"type":"装备","value":2},
-      // 桃（需求 2026-09-10）：商店固定栏位 2 币回 6 血，替代原金疮药（3 币回 10 血）
-      {"cost":0,"desc":"回复 6 点生命。","dmg":0,"heal":6,"id":"tt-peach","name":"桃","rarity":"古朴","sellable":false,"type":"道具","value":2},
-      // —— 2026-09-10 需求批次（v8）：熔岩爆破 + 二次爆炸 ——
-      // 2 费稀有法术：9 点法术伤害，战后消散的衍生 token「二次爆炸」置入手牌
-      // （「获得1张具名卡」走效果引擎既有的指名卡句式，battle.effects.js gn 段）
-      {"cost":2,"desc":"造成9点法术伤害，获得1张「二次爆炸」。","dmg":9,"dmgType":"spell","id":"cc-lava-blast","name":"熔岩爆破","rarity":"稀有","type":"法术","value":4},
-      // 1 费衍生法术（token）：对所有敌人 3 点法术伤害；衍生稀有度不进任何随机/发现池
-      {"cost":1,"desc":"对所有敌人造成 3 点法术伤害。","dmg":3,"dmgType":"spell","id":"cc-double-boom","name":"二次爆炸","rarity":"衍生","sellable":false,"type":"法术","value":0},
-      // —— 2026-09-10 需求批次（v7）：诅咒之刃 ——
-      // 2 费稀有武术：攻（+3），并附加手牌中所有招式（武术+法术，设计者定版）具有的
-      // 全部诅咒效果（流血/中毒/灼烧/冰冻/沉默/破甲/禁疗，句式扫描见 battle.core.js
-      // CURSE_SCAN；手牌变化后卡面实时显示，实现在 battle.view.js 手牌渲染的 curseChip）
-      {"cost":2,"desc":"攻（+3），附加手牌中的招式所具有的全部诅咒效果。","dmg":3,"dmgType":"attack","id":"cc-cursed-blade","name":"诅咒之刃","rarity":"稀有","type":"武术","value":3},
-      // —— 2026-09-10 需求批次（v6）：追斩 ——
-      // 2 费稀有武术：攻（+0）＝等同攻击力的伤害；本回合每打出一张其他武术，费用-1
-      // （最低 0 费）。动态费用实现在 battle.core.js effCostOf，计数器与连续射击共用
-      // playedMartialThisTurn（回合开始清零，本牌打出后才计入，故折扣不含自身）
-      {"cost":2,"desc":"攻（+0），本回合每打出一张其他武术，费用-1。","dmg":0,"dmgType":"attack","id":"cc-chase-slash","name":"追斩","rarity":"稀有","type":"武术","value":2},
-      // —— 2026-09-10 需求批次（v5）：法力奔涌 ——
-      // 2 费传说法术：对随机敌人释放 4 个随机法术，随机法术默认已注能（infused=true 结算，
-      // 「注能(N)：…」加成句生效且无需消耗手牌燃料）。结算实现在 battle.core.js
-      // resolveCard 的 surge 句式段 + castRandomSpells（池子走 isRandomObtainable，排除自身防递归）
-      {"cost":2,"desc":"对随机敌人释放4个随机法术（这些随机法术默认已注能）。","dmg":0,"id":"cc-mana-surge","name":"法力奔涌","rarity":"传说","sellable":false,"type":"法术","value":5},
-      // —— 2026-09-10 需求批次（v4）：连续射击 ——
-      // 1 费史诗武术：本回合每打出一张其他招式，造成 2 点固定伤害。
-      // 招式＝武术+法术（设计者 2026-09-10 定版）；打出本牌时按本回合已打出的招式数触发
-      // （结算实现在 battle.core.js resolveCard 的连击倍率段，计数器 playedMovesThisTurn
-      // 每回合开始清零；追斩的「其他武术」折扣则用只数武术的 playedMartialThisTurn）
-      {"cost":1,"desc":"本回合每打出一张其他招式，造成2点固定伤害（触发次数＝本回合已打出的招式数）。","dmg":2,"dmgType":"fixed","id":"cc-rapid-fire","name":"连续射击","rarity":"史诗","type":"武术","value":3},
-      // —— 2026-09-09 需求批次（v3）——
-      // 宠物蛋（需求 #2）：传说资源，币值 5，描述「可以孵化宠物」；unrandom 锁死随机池，
-      // 固定以 0.7% 爆率从宝箱掉落（见 chests.js rollContents）
-      {"cost":0,"desc":"可以孵化宠物。","dmg":0,"id":"pet-egg","name":"宠物蛋","rarity":"传说","sellable":false,"type":"资源","unrandom":true,"value":5},
-      // 需求 #19：恶魔之力改为灯葵（牧师）专属、厉兵秣马改为玄砾（战士）专属——
-      // 给实机版旧卡补 cls 归属（同 tt7-darkfort 黑暗吊坠的定版手法）
-      {"cls":"牧师","cost":0,"desc":"受到3点伤害，抽 3 张牌。","dmg":0,"draw":3,"id":"tt7-drunksong","name":"恶魔之力","rarity":"职业","sellable":false,"type":"法术","unrandom":true,"value":3},
-      {"cls":"战士","cost":2,"desc":"+12 甲，抽 2 张牌。","dmg":0,"draw":2,"id":"tt7-ironcharge","name":"厉兵秣马","rarity":"职业","sellable":false,"type":"武术","unrandom":true,"value":3},
-      {"cost":0,"desc":"回合开始时对所有敌方角色各施加一层随机诅咒，优先不重复。","dmg":0,"id":"cmtn79743r2n","name":"末日浩劫之门","rarity":"棱彩","sellable":false,"type":"生物","unrandom":true,"value":0},
-      {"armor":5,"cost":0,"desc":"回合开始时随机获取一项祝福，对全体友方施放，优先不重复。（获得潜行，持续 1 回合。获得 1 点攻击力。法伤 +1。减伤 1。获得 5 点护甲。净化。从这些中随机）","dmg":0,"id":"cmtn7err0a7","name":"天国之门","rarity":"棱彩","sellable":false,"type":"生物","value":0},
-      {"cost":0,"desc":"在背包中才能使用，可以复原最多 3 张卡牌。","dmg":0,"id":"tt-crystal","name":"能源结晶","rarity":"史诗","sellable":false,"type":"道具","value":3},
-      {"cost":0,"desc":"解锁大门。","dmg":0,"id":"tt-key","name":"一把钥匙","rarity":"古朴","sellable":false,"type":"资源","value":2},
-      {"cost":0,"desc":"钥匙 ×3。","dmg":0,"id":"tt-key-one","name":"三把钥匙","rarity":"史诗","sellable":false,"type":"资源","value":6},
-      {"cost":0,"desc":"钥匙 ×2。","dmg":0,"id":"tt-keys-bunch","name":"两把钥匙","rarity":"稀有","sellable":false,"type":"资源","value":4},
-      {"cost":0,"desc":"漂亮的小玩意，可出售。","dmg":0,"id":"tt3-garnet-marble","name":"石榴弹珠","rarity":"古朴","sellable":true,"type":"资源","value":4},
-      {"cost":0,"desc":"回复 99 点生命。","dmg":0,"heal":99,"id":"tt3-savior-elixir","name":"斗神酒","rarity":"传说","sellable":false,"type":"道具","value":5},
-      {"cost":0,"desc":"消灭 2 名 攻击力5点及以下小怪","dmg":0,"id":"tt3sp-doom","name":"TNT","rarity":"史诗","sellable":false,"type":"道具","value":4},
-      {"cost":0,"desc":"从木材、口粮、桃、随机药水中抽取一项。","dmg":0,"id":"tt6-airdrop","name":"空中补给","rarity":"衍生","type":"事件","unrandom":true},
-      {"cost":0,"desc":"获得彩色令牌碎片，+2 币。","dmg":0,"id":"tt6-mystery","name":"神秘补给","rarity":"衍生","type":"事件","unrandom":true},
-      {"cost":0,"desc":"获得彩色令牌碎片，木材 ×1。","dmg":0,"id":"tt6-systemsupply","name":"系统补给","rarity":"衍生","type":"事件","unrandom":true},
-      {"cls":"法师","cost":2,"desc":"万法乾坤：法伤 +1，回合开始时发现 1 张卡牌。","dmg":0,"hero":true,"id":"tt8-hero-mage","name":"博览者的狂语","rarity":"稀有","sellable":false,"type":"能力卡","unrandom":true,"value":8},
-      {"cls":"法师","cost":2,"desc":"元素潮汐：抉择：打开‘末日浩劫之门’或者‘天国之门’。两回合后，开启未选择的那扇‘门’","dmg":0,"hero":true,"id":"tt8-hero-summoner","name":"花开两面","rarity":"棱彩","sellable":false,"type":"能力卡","unrandom":true,"value":8},
-      {"cost":0,"desc":"攻击力4生命4，优先为主人承受伤害，自动攻击敌人","id":"cmtn6ulm4boj","name":"步兵","rarity":"衍生","sellable":false,"type":"生物","unrandom":true,"value":0},
-    ],
-    RETIRE_CARDS_SYNC: [
-      "tt6-timeskip",
-    ],
+    CARDS_SYNC: DATA.cardsSync.cards,
+    RETIRE_CARDS_SYNC: DATA.cardsSync.retire,
     ensureCardsSyncLive() {
       try {
-        if (localStorage.getItem("sdt-cards-sync-v10-seeded")) return;
+        const seedKey = `sdt-cards-sync-v${DATA.cardsSync.version}-seeded`;
+        if (localStorage.getItem(seedKey)) return;
         const cards = SDT.Cards.all();
         for (let i = cards.length - 1; i >= 0; i--) {
           if (this.RETIRE_CARDS_SYNC.includes(cards[i].id)) cards.splice(i, 1);
@@ -1330,10 +1269,9 @@ import { cardHTML, cardBackHTML } from './cards.view.js';
           if (i >= 0) cards[i] = { ...d }; else cards.push({ ...d });
         });
         SDT.Cards.saveAll(cards);
-        localStorage.setItem("sdt-cards-sync-v10-seeded", '1');   // v10：二刀流；v9：迷之匣改限定技能 + 桃；v8：熔岩爆破+二次爆炸；v7：诅咒之刃；v6：追斩；v5：法力奔涌；v4：连续射击
+        localStorage.setItem(seedKey, '1');
       } catch (e) { /* 隐私模式等场景静默跳过 */ }
     },
-    // ===== [sync-cards-from-live:end] =====
     // 指定道具定名迁移：保留稳定 id 与存档引用，只更新展示名；
     // 旧内置金疮药并入正式 tt-jinchuangyao，避免仓库里继续存在两个定义。
     ensureItemRenames() {
@@ -1387,7 +1325,7 @@ import { cardHTML, cardBackHTML } from './cards.view.js';
       SDT.Cards.ensureAbilityCards();  // 能力卡补种：老档卡库缺失的 11 张能力卡本体自动补入（2026-09-09）
       SDT.Cards.ensureTabletopSync11();
       SDT.Cards.ensureFoeRename();     // 敌人图鉴改名同步（新世界观命名 + 五层分布，含老存档，2026-09-09 定版）
-      SDT.Cards.ensureCardsSyncLive(); // 实机卡库同步（scripts/sync-cards-from-live.mjs 生成，只跑一次） // 第十一批：与设计者实机卡库导出完全对齐（补 26/退 39/覆盖 25，只跑一次，2026-09-09）
+      SDT.Cards.ensureCardsSyncLive(); // 实机卡库同步（数据见 game/data/cards-sync.json，只跑一次）
     },
 
     // 职业稀有度迁移（设计者 2026-09-04 定版）：老档里第七批职业卡（tt7- 前缀）

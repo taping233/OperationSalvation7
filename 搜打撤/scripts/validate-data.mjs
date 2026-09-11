@@ -34,6 +34,7 @@ const achievements = read('achievements.json');
 const art = read('art-mapping.json');
 const scenes = read('scenes.json');
 const map = read('map.json');
+const cardsSync = read('cards-sync.json');
 
 const dupCheck = (list, label) => {
   const seen = new Set();
@@ -101,9 +102,21 @@ if (map) {
   }
 }
 
+if (cardsSync) {
+  // 实机卡库同步批次（scripts/sync-cards-from-live.mjs 生成）：id 唯一 + 必填字段 + 退役 id 形态
+  dupCheck(cardsSync.cards || [], 'cards-sync.cards');
+  if (!Number.isInteger(cardsSync.version) || cardsSync.version < 1) errors.push('cards-sync: version 应为正整数');
+  for (const c of cardsSync.cards || []) {
+    if (!c.name || !('cost' in c) || !c.type) errors.push(`cards-sync[${c.id}]: 缺 name/cost/type`);
+  }
+  for (const id of cardsSync.retire || []) {
+    if (typeof id !== 'string' || !id) errors.push(`cards-sync.retire: 非法 id ${JSON.stringify(id)}`);
+  }
+}
+
 if (errors.length) {
   console.error(`[validate-data] ${errors.length} 个问题：`);
   for (const e of errors) console.error('  ✗ ' + e);
   process.exit(1);
 }
-console.log(`[validate-data] 全部通过（pets ${pets?.list?.length || 0} / 成就 ${achievements?.achievements?.length || 0} / 怪物 ${Object.keys(map?.monsters || {}).length} / 场景 ${Object.keys(scenes?.scenes || {}).length}）`);
+console.log(`[validate-data] 全部通过（pets ${pets?.list?.length || 0} / 成就 ${achievements?.achievements?.length || 0} / 怪物 ${Object.keys(map?.monsters || {}).length} / 场景 ${Object.keys(scenes?.scenes || {}).length} / 同步卡 ${cardsSync?.cards?.length || 0}）`);

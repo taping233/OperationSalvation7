@@ -175,6 +175,21 @@ describe('架构守护（2026-09-11 批次 1）', () => {
     const source = readFileSync(join(SRC, 'cards.js'), 'utf8');
     expect(source).not.toMatch(/<div|<span|innerHTML/);
   });
+
+  it('实机卡库批次数据外置到 game/data/cards-sync.json（批次 6）', () => {
+    const source = readFileSync(join(SRC, 'cards.js'), 'utf8');
+    // 源码不再内嵌实机同步卡数据，只从中央数据源取
+    expect(source).not.toContain('[sync-cards-from-live:begin]');
+    expect(source).toContain('CARDS_SYNC: DATA.cardsSync.cards');
+    const doc = JSON.parse(readFileSync(resolve(process.cwd(), 'game/data/cards-sync.json'), 'utf8'));
+    expect(doc.version).toBeGreaterThanOrEqual(1);
+    expect(doc.cards.length).toBeGreaterThan(0);
+    expect(doc.cards.every(c => c.id && c.name)).toBe(true);
+    // 同步脚本只写数据、不改源码
+    const script = readFileSync(resolve(process.cwd(), 'scripts/sync-cards-from-live.mjs'), 'utf8');
+    expect(script).toContain('cards-sync.json');
+    expect(script).not.toMatch(/writeFileSync\(CARDS_JS/);
+  });
 });
 
 describe('Electron 启动契约', () => {
