@@ -67,6 +67,15 @@ public sealed class RunState
     private RunRisk _encounterRisk;
     private string? _pendingEventId;
     private IReadOnlyList<RunEventChoice> _eventChoices = Array.Empty<RunEventChoice>();
+    // —— 批次 4c：ink 事件叙事接入跑图流程（ported from game.run.flow.js runEventDeck/triggerEventCard）——
+    // 事件内容唯一来源 = data/narrative-events.ink.json（选项文本+@@effect@@ 元数据）；
+    // 卡库无事件卡时退回 map.json randomEvents 旧表（网页 runEventDeck 的兜底路径）。
+    private InkEventCatalog? _eventNarrative;
+    private InkEventSession? _eventSession;
+    private readonly List<RunCard> _eventCardPool = new();
+    private string? _pendingEventTitle;
+    private bool _eventRestorePending;
+    private bool _eventSuspended;
     private RunChestPreview? _chestPreview;
     private IReadOnlyList<RunCard>? _chestCards;
     private bool _chestSuspended;
@@ -97,6 +106,20 @@ public sealed class RunState
     public RunRisk EncounterRisk => _encounterRisk;
     public IReadOnlyList<RunShopOffer> Shop => _shop;
     public IReadOnlyList<RunEventChoice> EventChoices => _eventChoices;
+    /// <summary>当前事件面板抽中的事件卡 id（tt6-* / cmtn7qttxqo4 等；未抽时 null）。</summary>
+    public string? PendingEventId => _pendingEventId;
+    /// <summary>事件卡名（事件页标题；网页 nodeShell title=card.name）。</summary>
+    public string PendingEventTitle => _pendingEventTitle ?? "";
+    /// <summary>ink 开场叙事（网页 narrative.intro；无结点的事件卡为空串）。</summary>
+    public string EventIntro => _eventSession?.Intro ?? "";
+    /// <summary>修鞋铺复原子流程待处理（网页 openPocketRestore(1) 面板开启中）。</summary>
+    public bool EventRestorePending => _eventRestorePending;
+    /// <summary>消耗口袋中可复原的卡名（道具/装备不可复原，FIRE_RESTORABLE 口径）。</summary>
+    public IReadOnlyList<string> EventRestorableCards => _usedPocket
+        .Where(stack => stack.Card.Semantic is not (RunCardSemantic.Item or RunCardSemantic.Equipment))
+        .Select(stack => stack.Card.Name).ToArray();
+    /// <summary>事件面板当前是否挂起（背包借事件面板期间；镜像开箱 SuspendChests）。</summary>
+    public bool EventSuspended => _eventSuspended;
     public IReadOnlyList<RunCardStack> PendingRewards => _pendingRewards;
     public IReadOnlyList<RunCardStack> RecoveryCards => _recoveryCards;
     public IReadOnlyList<RunSettlementCard> SettlementCards => _settlementCards;
@@ -195,6 +218,14 @@ public sealed class RunState
         ArgumentNullException.ThrowIfNull(cards);
         _lootCardPool.Clear(); _lootCardPool.AddRange(cards.Where(x => x is not null));
     }
+    public void ConfigureEventCardPool(IEnumerable<RunCard> cards)
+    {
+        ArgumentNullException.ThrowIfNull(cards);
+        // 事件卡池 = 卡牌库中类型「事件」的卡（网页 runEventDeck：deck = Cards.all().filter(type==='事件')）
+        _eventCardPool.Clear(); _eventCardPool.AddRange(cards.Where(x => x is not null));
+    }
+    /// <summary>覆盖默认 ink 叙事源（默认读 GameData.NarrativeStoryJson，即 data/narrative-events.ink.json）。</summary>
+    public void ConfigureEventNarrative(InkEventCatalog? catalog) => _eventNarrative = catalog;
 
     public RunState(ulong seed, RunMap? map = null, RunBaseState? baseState = null, GameData? data = null)
     {
@@ -207,6 +238,7 @@ public sealed class RunState
         LayerIndex = 0;
         TrackPosition = Map.Layers[0].Entry;
         Rng = new DeterministicRng(seed);
+        _eventNarrative = _data.NarrativeStoryJson is null ? null : new InkEventCatalog(_data.NarrativeStoryJson);
         if (!Map.IsConnected(out var unreachable))
             throw new ArgumentException($"Run map contains unreachable nodes: {string.Join(",", unreachable)}", nameof(map));
     }
@@ -265,6 +297,8 @@ public sealed class RunState
             throw new ArgumentException("背包卡牌超过容量。", nameof(snapshot));
         _pendingDoor = null; _pendingChests.Clear(); _eventBattleDrops.Clear(); _encounter.Clear(); _shop = Array.Empty<RunShopOffer>(); _eventChoices = Array.Empty<RunEventChoice>(); _pendingEventId = null; _encounterRisk = default; Phase = snapshot.Phase;
         _chestPreview = null; _chestCards = null; _chestSuspended = false;
+        // 事件进行中不入档（网页只在稳定落点 saveGame）——恢复时事件面板相关暂存一并清空
+        _eventSession = null; _pendingEventTitle = null; _eventRestorePending = false; _eventSuspended = false;
         _altarRewardPending = false;
     }
 
@@ -484,7 +518,15 @@ public sealed class RunState
             AddCard(_classCardPool[Rng.NextInt(_classCardPool.Count)]);
         Phase = RunPhase.Ready;
     }
-    public void LeaveEventWithoutEffect() { EnsurePhase(RunPhase.Event); Phase = RunPhase.Ready; }
+    /// <summary>结束当前事件面板回稳定落点（无结点事件的「继 续」按钮 / 修鞋铺「继续旅程」；只有 Ready/Settlement 可存档）。</summary>
+    public void LeaveEventWithoutEffect()
+    {
+        EnsurePhase(RunPhase.Event);
+        _pendingEventId = null; _pendingEventTitle = null; _eventSession = null;
+        _eventChoices = Array.Empty<RunEventChoice>();
+        _eventRestorePending = false; _eventSuspended = false;
+        Phase = RunPhase.Ready;
+    }
     public RunEventResult ResolveEvent()
     {
         EnsurePhase(RunPhase.Event);
@@ -506,78 +548,200 @@ public sealed class RunState
         return result;
     }
 
+    // ---------- 批次 4c：事件叙事接入（ported from game.run.flow.js runEventDeck/triggerEventCard/eventChoiceSpec）----------
+    // 事件格落脚 → 按网页口径抽一张事件卡（卡库事件类型卡均匀抽；库空退回 randomEvents 旧表）→
+    // InkEventCatalog 新建 Story 打开对应结点（对齐 narrative.js 每事件独立 session）→
+    // intro 正文 + 选项（文本+@@effect@@ 元数据）经 EventUiSnapshot 进快照 → 玩家选项 → effect 字符串落地。
+
+    /// <summary>无 ink 结点的事件卡单按钮选项 id（网页 evtNext「继 续」）。</summary>
+    public const string EventContinueChoiceId = "continue";
+    /// <summary>修鞋铺（2026-09-09 审计补实装；4b 移交本批）：彩色令牌碎片 ×1 + 复原 1 张卡牌。</summary>
+    public const string ShoeShopCardId = "cmtn7qttxqo4";
+
     public IReadOnlyList<RunEventChoice> DrawEventChoices()
     {
         EnsurePhase(RunPhase.Event);
-        var ids = new[] { "goldmine", "airdrop", "chestdraw", "timeskip", "demondeal", "bandits", "mystery", "goldhammer", "relief", "systemsupply" };
-        _pendingEventId = ids[Rng.NextInt(ids.Length)];
-        _eventChoices = EventChoicesFor(_pendingEventId);
+        if (_pendingEventId is not null) return _eventChoices;
+        if (_eventCardPool.Count > 0)
+        {
+            // 网页 pick(deck)：卡库事件卡均匀抽取
+            OpenEventCard(_eventCardPool[Rng.NextInt(_eventCardPool.Count)]);
+        }
+        else
+        {
+            ResolveEvent();   // 卡库无事件卡：map.json randomEvents 旧表兜底（网页 runEventDeck 同款回退）
+        }
         return _eventChoices;
+    }
+
+    /// <summary>测试 seam：直接指定本次抽中的事件卡并打开叙事（对齐 DebugSetEncounter 先例，不消耗 RNG）。</summary>
+    public void DebugSetEventCard(string cardId)
+    {
+        EnsurePhase(RunPhase.Event);
+        var card = _eventCardPool.FirstOrDefault(item => item.Id == cardId)
+            ?? new RunCard(cardId, cardId, "事件", "衍生", 1);
+        OpenEventCard(card);
+    }
+
+    private void OpenEventCard(RunCard card)
+    {
+        _pendingEventId = card.Id;
+        _pendingEventTitle = card.Name;
+        // 每个事件新建 Story（网页 eventNarrative 语义：状态独立，事件间互不串线）
+        _eventSession = _eventNarrative?.OpenEvent(card.Id);
+        _eventChoices = _eventSession is not null
+            ? _eventSession.Choices.Select(choice => new RunEventChoice(choice.Effect, choice.Label, choice.Detail, choice.Tone)).ToArray()
+            : new[] { new RunEventChoice(EventContinueChoiceId, "继 续", "", "") };
     }
 
     public RunEventResult ChooseEvent(int choiceIndex)
     {
         EnsurePhase(RunPhase.Event);
+        if (_eventSuspended) throw new InvalidOperationException("事件面板已挂起——请先恢复事件面板再操作。");
         if (_pendingEventId is null) DrawEventChoices();
         if (choiceIndex < 0 || choiceIndex >= _eventChoices.Count) throw new ArgumentOutOfRangeException(nameof(choiceIndex));
         var choice = _eventChoices[choiceIndex];
-        _pendingEventId = null; _eventChoices = Array.Empty<RunEventChoice>();
-        return ApplyEventChoice(choice.Id);
+        var cardId = _pendingEventId!;
+        // 网页 narrate()：choice.choose() 的后果文本（ink 结点推进；无结点事件为空）
+        var narration = _eventSession?.Choose(choiceIndex) ?? string.Empty;
+        _pendingEventId = null; _pendingEventTitle = null; _eventSession = null;
+        _eventChoices = Array.Empty<RunEventChoice>();
+        return ApplyEventChoice(cardId, choice.Id, narration);
     }
 
-    private static IReadOnlyList<RunEventChoice> EventChoicesFor(string id) => id switch
+    /// <summary>事件发卡（网页 grantEventCard→game.addItem 语义）：同名并入；背包满转待收取队列（骨架既有口径）。</summary>
+    private void GrantEventCard(RunCard? card)
     {
-        "goldmine" => new[] { new RunEventChoice("goldmine_safe", "收下 3 币", "稳定收益", "ok"), new RunEventChoice("goldmine_deep", "冒险挖深", "+6 币，但损失 3 血", "danger") },
-        "airdrop" => new[] { new RunEventChoice("airdrop_wood", "木材 ×1", "扩建与仓储路线"), new RunEventChoice("airdrop_rations", "口粮 ×1", "为安全格与续航准备"), new RunEventChoice("airdrop_heal", "应急处理", "回复 3 血", "ok") },
-        "chestdraw" => new[] { new RunEventChoice("chest_small", "撬开小型物资箱", "低风险：1 张卡 + 1~2 币"), new RunEventChoice("chest_medium", "赌一把密封物资箱", "高回报：三选一 + 2~3 币", "ok") },
-        "timeskip" => new[] { new RunEventChoice("timeskip_move", "踏入裂隙", "向前 6 格，落点照常结算", "ok") },
-        "demondeal" => new[] { new RunEventChoice("demondeal_trade", "以血换物", "-1 血，获得一件传说物品", "danger") },
-        "bandits" => new[] { new RunEventChoice("bandits_fight", "应 战", "掠夺者 ×5，战胜后密封物资箱 ×2", "danger") },
-        "mystery" => new[] { new RunEventChoice("mystery_supply", "翻找补给柜", "彩色令牌 + 2 币") },
-        "goldhammer" => new[] { new RunEventChoice("goldhammer_strike", "抡起动力锤", "先造成 5 点伤害，一击制敌再 +2 币", "danger") },
-        "relief" => new[] { new RunEventChoice("relief_heal", "接受处理", "回复 6 血", "ok") },
-        _ => new[] { new RunEventChoice("systemsupply_restock", "对接终端", "彩色令牌 + 木材 ×1") }
-    };
+        if (card is null) return;
+        if (!AddCard(card)) EnqueueReward(card);
+    }
 
-    private RunEventResult ApplyEventChoice(string id)
+    /// <summary>
+    /// effect 字符串落地表（对照网页 eventChoiceSpec effects 映射 + v2 定版）：
+    /// 10 个 ink 结点的全部 @@effect@@ + 无结点事件的 continue。
+    /// 语义分歧注记：mystery_supply/systemsupply_restock 按网页 v2 实跑口径落碎片（批次 4b 已冻结），
+    /// ink effects 映射里的「直发员工通行证A」是死路径；timeskip_move 的链式移动已随 v0.53 停用（批次 3 口径）。
+    /// </summary>
+    private RunEventResult ApplyEventChoice(string cardId, string effect, string narration)
     {
-        switch (id)
+        RunEventResult Result(int coins = 0, bool createdChest = false, string? extra = null)
         {
-            case "goldmine_safe": Resources.Coins += 3; Phase = RunPhase.Ready; return new("你只取走入口附近的矿石，在第二次震动前退了出来。", 3, 0, 0, false);
-            case "goldmine_deep": Resources.Coins += 6; Hp = Math.Max(1, Hp - 3); Phase = RunPhase.Ready; return new("更深处确实埋着富矿，代价是被碎石划开的伤口。", 6, 0, 0, false);
-            case "airdrop_wood": Resources.Wood++; Phase = RunPhase.Ready; return new("你拆下还能承重的结构件。", 0, 1, 0, false);
-            case "airdrop_rations": Resources.Rations++; Phase = RunPhase.Ready; return new("你留下密封完好的口粮。", 0, 0, 1, false);
-            case "airdrop_heal": Hp = Math.Min(MaxHp, Hp + 3); Phase = RunPhase.Ready; return new("箱内的医疗模块仍能完成一次快速处理。", 0, 0, 0, false);
-            case "chest_small": _pendingChests.Enqueue(("small", false, false)); _returnAfterChest = RunPhase.Ready; Phase = RunPhase.Chest; return new("小箱的锁扣应声弹开。", 0, 0, 0, true);
-            case "chest_medium": _pendingChests.Enqueue(("medium", false, false)); _returnAfterChest = RunPhase.Ready; Phase = RunPhase.Chest; return new("密封箱亮起绿色指示灯。", 0, 0, 0, true);
+            var text = narration.Length == 0 ? extra ?? "" : extra is null ? narration : narration + "\n" + extra;
+            return new RunEventResult(text, coins, 0, 0, createdChest);
+        }
+        switch (effect)
+        {
+            case "goldmine_safe":
+                Resources.Coins += 3; Phase = RunPhase.Ready; return Result(3);
+            case "goldmine_deep":
+                Resources.Coins += 6; Hp = Math.Max(1, Hp - 3); Phase = RunPhase.Ready; return Result(6);
+            case "airdrop_wood":
+                // 需求 #10：物资一律以卡牌入包（网页 grantEventCard(tt-wood)，不落裸资源）
+                GrantEventCard(FindPoolCard("tt-wood") ?? new RunCard("tt-wood", "木材", "资源", "古朴", 2));
+                Phase = RunPhase.Ready; return Result();
+            case "airdrop_rations":
+                GrantEventCard(FindPoolCard("tt-rations") ?? new RunCard("tt-rations", "口粮", "资源", "古朴", 2));
+                Phase = RunPhase.Ready; return Result();
+            case "airdrop_heal":
+                Hp = Math.Min(MaxHp, Hp + 3); Phase = RunPhase.Ready; return Result();
+            case "chest_small":
+                _pendingChests.Enqueue(("small", false, false)); _returnAfterChest = RunPhase.Ready; Phase = RunPhase.Chest;
+                return Result(createdChest: true);
+            case "chest_medium":
+                _pendingChests.Enqueue(("medium", false, false)); _returnAfterChest = RunPhase.Ready; Phase = RunPhase.Chest;
+                return Result(createdChest: true);
             case "timeskip_move":
-                // 网页版已停用事件连锁移动（cancelLegacyChainMove：即时事件不会盲选第一条邻边）
-                Phase = RunPhase.Ready; return new("时空孔隙在你面前塌缩了——什么也没有发生。", 0, 0, 0, false);
-            case "demondeal_trade": Hp = Math.Max(1, Hp - 1); AddCard(new RunCard("event-legend", "传说旧物", "装备", "传说", 5, true)); Phase = RunPhase.Ready; return new("指尖被划开的瞬间，一件冰冷的旧物落进了掌心。", 0, 0, 0, false);
+                // 事件连锁移动已停用（cancelLegacyChainMove：即时事件不会盲选第一条邻边）——只留叙事
+                Phase = RunPhase.Ready; return Result();
+            case "demondeal_trade":
+                Hp = Math.Max(1, Hp - 1);
+                // 网页：传说 && 类型∈{装备,武术,法术} 的卡池均匀抽一件（Random.random('card')）
+                var legends = _lootCardPool.Where(card => card.Rarity == "传说" && card.Type is "装备" or "武术" or "法术").ToList();
+                GrantEventCard(legends.Count > 0 ? legends[Rng.NextInt(legends.Count)] : null);
+                Phase = RunPhase.Ready; return Result();
             case "bandits_fight":
-                // 网页版 2026-09-11 实机定版：数量随层数缩放（第 1 层 3 只 → 第 3 层起 5 只）
+            {
+                // 2026-09-11 实机定版：数量随层数缩放（第 1 层 3 只 → 第 3 层起 5 只）
                 _encounter.Clear();
                 var gangN = Math.Min(5, 3 + LayerIndex);
                 for (var i = 0; i < gangN; i++) _encounter.Add(CreateEnemy("bandit"));
-                _eventBattleDrops.Enqueue(("medium", false)); _eventBattleDrops.Enqueue(("medium", false)); _encounterRisk = RunRisk.Medium; Phase = RunPhase.Battle; return new("五道剪影从残骸后站起。", 0, 0, 0, false);
+                _eventBattleDrops.Enqueue(("medium", false));
+                _eventBattleDrops.Enqueue(("medium", false));
+                _encounterRisk = RunRisk.Medium; Phase = RunPhase.Battle;
+                return Result(extra: $"{_encounter[0].Name}一伙（×{gangN}）拦住了去路！");
+            }
             case "mystery_supply":
-                // 网页 2026-09-09 事件 v2（tt6-mystery 接收补给）：彩色令牌碎片 ×1 + 2 币（不再直发彩色令牌卡）
-                GrantFragments(1); Resources.Coins += 2; Phase = RunPhase.Ready;
-                return new("补给舱完好——你收下了里面的晶体与两枚旧硬币。", 2, 0, 0, false);
+                // 网页 v2（tt6-mystery 接收补给）：彩色令牌碎片 ×1 + 2 币（不再直发彩色令牌卡，批次 4b 口径）
+                GrantFragments(1); Resources.Coins += 2; Phase = RunPhase.Ready; return Result(2);
             case "goldhammer_strike":
-                BuildEncounter(); var foe = _encounter[0]; _encounter.Clear(); _encounter.Add(foe with { Hp = foe.Hp - 5 });
-                if (_encounter[0].Hp <= 0) { Resources.Coins += 2; Phase = RunPhase.Ready; return new("闪金之锤一击制敌。", 2, 0, 0, false); }
-                Phase = RunPhase.Battle; return new("闪金之锤重击后，战斗打响！", 0, 0, 0, false);
-            case "relief_heal": Hp = Math.Min(MaxHp, Hp + 6); Phase = RunPhase.Ready; return new("缠好绷带时，你觉得自己又能再走一段了。", 0, 0, 0, false);
-            default:
-                // 网页 2026-09-09 事件 v2（tt6-systemsupply 接收补给）：彩色令牌碎片 ×1 + 木材卡 ×1
-                // （需求 #10：物资一律以卡牌入包；背包满时入待收取队列）
+            {
+                // 网页：按本层 encounters.pool 均匀抽一只（不掷精英），先扣 5 血；一击制敌 +2 币
+                var table = _data.Encounters[Math.Min(LayerIndex, _data.Encounters.Count - 1)];
+                var foe = CreateEnemy(table.Entries[Rng.NextInt(table.Entries.Count)].MonsterId);
+                foe = foe with { Hp = foe.Hp - 5 };
+                if (foe.Hp <= 0)
+                {
+                    Resources.Coins += 2; Phase = RunPhase.Ready;
+                    return Result(2, extra: $"闪金之锤一击制敌（{foe.Name}）！+2 币");
+                }
+                _encounter.Clear(); _encounter.Add(foe); _encounterRisk = RunRisk.Low; Phase = RunPhase.Battle;
+                return Result(extra: $"闪金之锤重击 {foe.Name}（-5 血），战斗打响！");
+            }
+            case "relief_heal":
+                Hp = Math.Min(MaxHp, Hp + 6); Phase = RunPhase.Ready; return Result();
+            case "systemsupply_restock":
+                // 网页 v2（tt6-systemsupply 接收补给）：彩色令牌碎片 ×1 + 木材卡 ×1（批次 4b 口径）
                 GrantFragments(1);
-                var wood = FindPoolCard("tt-wood") ?? new RunCard("tt-wood", "木材", "资源", "古朴", 2);
-                if (!AddCard(wood)) EnqueueReward(wood);
-                Phase = RunPhase.Ready;
-                return new("无人机松开货舱：一枚晶体和一段建材滑了出来。", 0, 0, 0, false);
+                GrantEventCard(FindPoolCard("tt-wood") ?? new RunCard("tt-wood", "木材", "资源", "古朴", 2));
+                Phase = RunPhase.Ready; return Result();
+            case EventContinueChoiceId:
+                if (cardId == ShoeShopCardId)
+                {
+                    // 修鞋铺（网页 applyEventEffect）：碎片 ×1 + openPocketRestore(1) 复原 1 张消耗卡；
+                    // 口袋无可复原卡牌时直接结束（网页空面板+继续旅程的等价收敛）
+                    GrantFragments(1);
+                    if (EventRestorableCards.Count > 0)
+                    {
+                        _eventRestorePending = true;   // 停在 Event 阶段等玩家挑卡（event:restore:名 / event:continue）
+                        return Result(extra: $"修鞋铺送了你一枚彩色令牌碎片（{Fragments}/2）");
+                    }
+                    Phase = RunPhase.Ready;
+                    return Result(extra: $"修鞋铺送了你一枚彩色令牌碎片（{Fragments}/2）");
+                }
+                // 网页 default：「该事件的效果将在后续版本实装」——无事发生回 Ready
+                Phase = RunPhase.Ready; return Result();
+            default:
+                Phase = RunPhase.Ready; return Result();
         }
+    }
+
+    /// <summary>修鞋铺复原子流程：从消耗口袋复原 1 张回背包（网页 restoreOne；背包满/无此卡拒绝）。</summary>
+    public bool RestoreEventPocketCard(string name)
+    {
+        if (Phase != RunPhase.Event || !_eventRestorePending) return false;
+        if (!RestorePocketCard(name)) return false;
+        _eventRestorePending = false;
+        Phase = RunPhase.Ready;
+        return true;
+    }
+
+    /// <summary>挂起事件面板（镜像 SuspendChests：面板借给背包等浮层期间选项保持不变）。返回是否确有进行中的事件。</summary>
+    public bool SuspendEvent()
+    {
+        if (Phase != RunPhase.Event || _pendingEventId is null) return false;
+        _eventSuspended = true;
+        return true;
+    }
+
+    /// <summary>恢复事件面板（重新渲染当前 intro 与选项）。</summary>
+    public void ResumeEvent() => _eventSuspended = false;
+
+    /// <summary>测试 seam：直接设置玩家生命（heal/掉血类 effect 落地断言的前置条件；对齐 DebugSetEncounter 先例）。</summary>
+    public void DebugSetHp(int hp)
+    {
+        if (hp < 1 || hp > MaxHp) throw new ArgumentOutOfRangeException(nameof(hp));
+        if (Phase is not (RunPhase.Ready or RunPhase.Event)) throw new InvalidOperationException("只能在待行动或事件状态设置生命。");
+        Hp = hp;
     }
 
     private void BuildEncounter()

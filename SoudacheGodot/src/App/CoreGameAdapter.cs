@@ -46,7 +46,9 @@ public sealed class CoreGameAdapter : ICoreUiPort
         _data = GameData.Load(cardsJson,
             ReadResourceText("res://data/characters.json"),
             ReadResourceText("res://data/map.json"),
-            ReadResourceText("res://data/rules.json"));
+            ReadResourceText("res://data/rules.json"),
+            // 批次 4c：事件叙事唯一来源 = data/narrative-events.ink.json（批次 4a 编译产物）
+            ReadResourceText("res://data/narrative-events.ink.json"));
         GameRuntime.Load(_data);
         _catalog = CardCatalog.Load(cardsJson);
         _runCards = LoadRunCards(cardsJson);
@@ -135,9 +137,25 @@ public sealed class CoreGameAdapter : ICoreUiPort
                     break;
                 case "event":
                 {
-                    var result = _run.ChooseEvent(int.Parse(argument));
-                    _runStatus = result.Text;
-                    PrepareCurrentRoom();
+                    // 批次 4c：event:{index}=ink 选项落地；event:continue=无结点事件「继 续」/修鞋铺「继续旅程」；
+                    // event:restore:{卡名}=修鞋铺从消耗口袋复原 1 张（网页 openPocketRestore restoreOne）
+                    if (argument == "continue")
+                    {
+                        _run.LeaveEventWithoutEffect();
+                        _runStatus = "事件结束";
+                    }
+                    else if (argument.StartsWith("restore:", StringComparison.Ordinal))
+                    {
+                        _runStatus = _run.RestoreEventPocketCard(argument["restore:".Length..])
+                            ? "卡牌已复原，回到背包"
+                            : "消耗口袋中没有可复原的这张卡，或背包已满";
+                    }
+                    else
+                    {
+                        var result = _run.ChooseEvent(int.Parse(argument));
+                        _runStatus = result.Text.Length > 0 ? result.Text : "事件结束";
+                        PrepareCurrentRoom();
+                    }
                     break;
                 }
                 case "chest":
@@ -603,8 +621,31 @@ public sealed class CoreGameAdapter : ICoreUiPort
             StatusText = _runStatus,
             InventoryLabels = _run.OwnedCards.Select(stack => $"{stack.Card.Name} ×{stack.Count}" + (stack.Safe ? "（安全）" : "")).ToArray(),
             Actions = BuildRunActions(_run),
-            Nodes = nodes
+            Nodes = nodes,
+            Event = BuildEventSnapshot(_run)
         });
+    }
+
+    /// <summary>事件页快照（批次 4c）：事件格已抽卡时携带 intro+选项（文本+@@effect@@ 元数据）；修鞋铺附复原列表。</summary>
+    private EventUiSnapshot? BuildEventSnapshot(RunState run)
+    {
+        if (run.Phase != RunPhase.Event || run.PendingEventId is null) return null;
+        return new EventUiSnapshot
+        {
+            EventId = run.PendingEventId,
+            Title = run.PendingEventTitle,
+            Intro = run.EventIntro,
+            Choices = run.EventChoices.Select(choice => new EventChoiceUiSnapshot
+            {
+                Label = choice.Label,
+                Detail = choice.Detail,
+                Tone = choice.Tone,
+                Effect = choice.Id
+            }).ToArray(),
+            RestorePending = run.EventRestorePending,
+            RestorableCards = run.EventRestorableCards.ToArray(),
+            Suspended = run.EventSuspended
+        };
     }
 
     private void PublishBattle()
@@ -792,6 +833,8 @@ public sealed class CoreGameAdapter : ICoreUiPort
         run.ConfigureShopCardPool(_runCards.Where(card => card.Rarity != "衍生" && !card.Unrandom));
         run.ConfigureClassCardPool(combatCards.Where(card => card.Type != "能力卡" && _catalog.TryGet(card.Id, out var definition) && definition?.ClassName == className));
         run.ConfigureLootCardPool(_runCards.Where(card => card.Semantic is RunCardSemantic.Combat or RunCardSemantic.Item or RunCardSemantic.Equipment or RunCardSemantic.Resource));
+        // 事件卡池 = 卡牌库中类型「事件」的卡（网页 runEventDeck 的 deck；10 个 tt6 + 修鞋铺）
+        run.ConfigureEventCardPool(_runCards.Where(card => card.Type == "事件"));
     }
 
     private static IReadOnlyList<(string Name, int Count)> BuildInitialLoadout(RunBaseState state, int capacity)
@@ -866,7 +909,15 @@ public sealed class CoreGameAdapter : ICoreUiPort
                 else actions.Add(new RunActionUiSnapshot { Id = "battle", Label = "进入战斗", Detail = $"敌人 {run.Encounter.Count} 名" });
                 break;
             case RunPhase.Event:
-                actions.AddRange(run.EventChoices.Select((choice, index) => new RunActionUiSnapshot { Id = $"event:{index}", Label = choice.Label, Detail = choice.Detail }));
+                // 事件页（批次 4c）：ink 选项 event:{index}；修鞋铺复原子流程改列口袋卡 event:restore:{名}+继续
+                if (run.EventRestorePending)
+                {
+                    foreach (var name in run.EventRestorableCards)
+                        actions.Add(new RunActionUiSnapshot { Id = $"event:restore:{name}", Label = $"复原：{name}", Detail = "修鞋铺 · 从消耗口袋复原 1 张回背包" });
+                    actions.Add(new RunActionUiSnapshot { Id = "event:continue", Label = "继 续", Detail = "完成事件（消耗口袋没有可复原的卡牌时）" });
+                }
+                else
+                    actions.AddRange(run.EventChoices.Select((choice, index) => new RunActionUiSnapshot { Id = $"event:{index}", Label = choice.Label, Detail = choice.Detail }));
                 break;
             case RunPhase.Chest:
             {

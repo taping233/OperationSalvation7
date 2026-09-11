@@ -31,6 +31,9 @@ internal static class RunSmokeTests
         ChestKindsDropsPityEggAndClassChestMatchWeb();
         ChestQueueSuspendsAndResumes();
         FragmentSourcesAndCraftSemanticsMatchWeb();
+        InkEventChoicesLandTheirEffects();
+        ShoeShopAndKnotlessEventsLandSafely();
+        EventPanelSuspendsResumesAndStaysUnsaveable();
         TwoThousandSeedAcceptanceHarness();
         Console.WriteLine($"RUN_SMOKE_OK checks={_checks}");
         return 0;
@@ -485,11 +488,13 @@ internal static class RunSmokeTests
         Check(run.Resources.Coins == 8 && run.OwnedCards.Any(x => x.Card.Id == "tt-peach"), "peach purchase failed");
         run.LeaveShop(); Check(run.Phase == RunPhase.Ready, "leaving shop should settle to ready");
         // 事件格 + 事件战（拾荒者数量随层数缩放：第 1 层 3 只，第 3 层起 5 只）。
-        // 事件种类由 RNG 抽取——扫 seed 直到抽中 bandits（反抗组织拾荒者）。
+        // 事件种类由事件卡池 RNG 抽取（批次 4c：卡库事件卡 = 10 个 tt6 + 修鞋铺）——扫 seed 直到抽中 bandits。
+        var eventDeck = LoadRunCardUniverse().Where(card => card.Type == "事件").ToList();
         RunState? banditRun = null;
         for (var seed = 1; seed <= 300 && banditRun is null; seed++)
         {
             var probe = new RunState((ulong)seed);
+            probe.ConfigureEventCardPool(eventDeck);
             probe.DebugSetPosition(0, FindNode(probe.Map, 0, RunRoomType.Event));
             probe.ResolveCurrentRoom();
             var probeChoices = probe.DrawEventChoices();
@@ -503,21 +508,16 @@ internal static class RunSmokeTests
             banditRun = probe;
         }
         Check(banditRun is not null, "bandits event should appear within 300 seeds");
-        // 时空孔隙：事件连锁移动已停用（cancelLegacyChainMove）——扫 seed 抽中 timeskip 验证不移动
-        var foundTimeskip = false;
-        for (var seed = 1; seed <= 300 && !foundTimeskip; seed++)
-        {
-            var probe = new RunState((ulong)seed);
-            probe.DebugSetPosition(0, FindNode(probe.Map, 0, RunRoomType.Event));
-            probe.ResolveCurrentRoom();
-            var probeChoices = probe.DrawEventChoices();
-            if (probeChoices[0].Id != "timeskip_move") continue;
-            probe.ChooseEvent(0);
-            while (probe.Phase == RunPhase.Chest) probe.OpenNextChest();
-            Check(probe.Phase == RunPhase.Ready && probe.Turns == 0, "timeskip must not chain-move (链式移动已停用)");
-            foundTimeskip = true;
-        }
-        Check(foundTimeskip, "timeskip event should appear within 300 seeds");
+        // 时空孔隙（tt6-timeskip）：卡已被 cards-sync retire——事件格永不抽中（网页 runEventDeck 只抽在役事件卡）；
+        // 其 ink 结点仍保留（批次 4a 口径），用 seam 验证选项落地：事件连锁移动已停用，原地不动回 Ready。
+        var timeskipRun = new RunState(9);
+        timeskipRun.ConfigureEventCardPool(eventDeck);
+        timeskipRun.DebugSetPosition(0, FindNode(timeskipRun.Map, 0, RunRoomType.Event));
+        timeskipRun.ResolveCurrentRoom();
+        timeskipRun.DebugSetEventCard("tt6-timeskip");
+        Check(timeskipRun.EventChoices[0].Id == "timeskip_move", "timeskip: ink 结点选项可达");
+        timeskipRun.ChooseEvent(0);
+        Check(timeskipRun.Phase == RunPhase.Ready && timeskipRun.Turns == 0, "timeskip must not chain-move (链式移动已停用)");
         // 火堆（每层恰好 1）：回 8 血（接在事件战掉血的局上验证）
         var healed = banditRun!;
         healed.DebugSetPosition(0, FindNode(healed.Map, 0, RunRoomType.Campfire)); healed.ResolveCurrentRoom();
@@ -675,9 +675,16 @@ internal static class RunSmokeTests
               new RunCard("e", "事件", "事件").Semantic == RunCardSemantic.Event &&
               new RunCard("m", "地图", "地图").Semantic == RunCardSemantic.Map, "RunCard semantic categories drifted");
         var run = new RunState(123); run.AddCard(new RunCard("class", "职业卡", "武术", "职业")); run.ConfigureClassCardPool(new[] { new RunCard("class2", "职业卡2", "武术", "职业") });
+        run.ConfigureEventCardPool(LoadRunCardUniverse().Where(card => card.Type == "事件"));
         run.DebugSetPosition(0, FindNode(run.Map, 0, RunRoomType.Event)); run.ResolveCurrentRoom(); Check(run.Phase == RunPhase.Event, "event room did not open choices");
-        var choices = run.DrawEventChoices(); Check(choices.Count > 0 && choices.All(x => !string.IsNullOrWhiteSpace(x.Id)), "event choice list missing");
-        run.ChooseEvent(0); while (run.Phase == RunPhase.Chest) run.OpenNextChest();
+        var choices = run.DrawEventChoices();
+        Check(choices.Count > 0 && choices.All(x => !string.IsNullOrWhiteSpace(x.Id)), "event choice list missing");
+        Check(run.PendingEventId is not null && run.PendingEventTitle.Length > 0, "event panel must expose the drawn event card (id+title)");
+        Check(run.EventIntro.Length > 0 || (choices.Count == 1 && choices[0].Id == RunState.EventContinueChoiceId),
+            "knot events carry an ink intro; knot-less cards fall back to the single 继续 choice");
+        run.ChooseEvent(0);
+        if (run.EventRestorePending) run.LeaveEventWithoutEffect();   // 修鞋铺：复原面板用「继续旅程」收敛
+        while (run.Phase == RunPhase.Chest) run.OpenNextChest();
         Check(run.Phase is RunPhase.Ready or RunPhase.Battle, "event choice did not settle");
         // 时空孔隙：事件连锁移动已停用（网页版 cancelLegacyChainMove）——不移动、回 Ready（扫描见 ShopEventFire 组）
         Check(true, "timeskip covered in ShopEventFireAndEmergencyExtractionWork");
@@ -1146,12 +1153,14 @@ internal static class RunSmokeTests
     private static void FragmentSourcesAndCraftSemanticsMatchWeb()
     {
         var universe = LoadRunCardUniverse();
+        var eventDeck = universe.Where(card => card.Type == "事件").ToList();
 
-        // —— 来源①神秘补给（tt6-mystery 接收补给）：碎片 ×1 + 2 币（不再直发彩色令牌卡）——
+        // —— 来源①神秘补给（tt6-mystery，ink 结点选项「翻找补给柜」）：碎片 ×1 + 2 币（网页 v2 口径，批次 4b 冻结）——
         RunState? mystery = null;
         for (var seed = 1; seed <= 300 && mystery is null; seed++)
         {
             var probe = new RunState((ulong)seed);
+            probe.ConfigureEventCardPool(eventDeck);
             probe.DebugSetPosition(0, FindNode(probe.Map, 0, RunRoomType.Event));
             probe.ResolveCurrentRoom();
             var choices = probe.DrawEventChoices();
@@ -1167,12 +1176,13 @@ internal static class RunSmokeTests
         }
         Check(mystery is not null, "mystery event should appear within 300 seeds");
 
-        // —— 来源②系统补给（tt6-systemsupply）：碎片 ×1 + 木材卡 ×1（物资以卡牌入包）——
+        // —— 来源②系统补给（tt6-systemsupply，ink 结点选项「对接终端」）：碎片 ×1 + 木材卡 ×1（物资以卡牌入包）——
         RunState? supply = null;
         for (var seed = 1; seed <= 300 && supply is null; seed++)
         {
             var probe = new RunState((ulong)seed);
             probe.ConfigureLootCardPool(universe);
+            probe.ConfigureEventCardPool(eventDeck);
             probe.DebugSetPosition(0, FindNode(probe.Map, 0, RunRoomType.Event));
             probe.ResolveCurrentRoom();
             var choices = probe.DrawEventChoices();
@@ -1223,6 +1233,258 @@ internal static class RunSmokeTests
     }
 
     // ---------- 批次 4b 结束 ----------
+
+    // ---------- 批次 4c：ink 事件整合进跑图流程（真源 narrative.js + game.run.flow.js + events.ink）----------
+
+    /// <summary>事件探针：落位第 1 层事件格、配置全量卡池/事件卡池、压低生命便于 heal/掉血断言。
+    /// 生成器只保底火堆/补给站/搜刮点/战斗，不保证事件格——向后扫描种子直到第 1 层出现事件格。</summary>
+    private static RunState EventProbe(ulong seed, IReadOnlyList<RunCard> universe, IReadOnlyList<RunCard> eventDeck)
+    {
+        var run = new RunState(seed);
+        while (!run.Map.Layers[0].Nodes.Any(node => node.Type == RunRoomType.Event)) { seed++; run = new RunState(seed); }
+        run.ConfigureLootCardPool(universe);
+        run.ConfigureEventCardPool(eventDeck);
+        run.DebugSetPosition(0, FindNode(run.Map, 0, RunRoomType.Event));
+        run.ResolveCurrentRoom();
+        run.DebugSetHp(10);
+        return run;
+    }
+
+    private static IReadOnlyList<RunCard> EventDeck() => LoadRunCardUniverse().Where(card => card.Type == "事件").ToList();
+
+    /// <summary>
+    /// 验收①：10 结点×全选项——每个 ink 选项的 @@effect@@ 落地 RunState 后状态断言
+    /// （口径对齐 tests/Narrative 全分支 + 网页 narrative-coverage.test.js：每结点每选项都要走到）。
+    /// 修鞋铺 cmtn7qttxqo4（无 ink 结点，4b 移交）与未知 cardId 兜底在 ShoeShopAndKnotlessEventsLandSafely。
+    /// </summary>
+    private static void InkEventChoicesLandTheirEffects()
+    {
+        var universe = LoadRunCardUniverse();
+        var eventDeck = EventDeck();
+        // 网页卡库事实（cards-sync retire）：tt6-timeskip「时空孔隙」已退役，事件格永不抽中；
+        // 在役事件卡 = 9 个 tt6 结点 + 修鞋铺。timeskip 的 ink 结点仍按批次 4a 全分支口径走查（见循环后）。
+        Check(eventDeck.Count == 10, "event deck must mirror the live web library (9 tt6 + 修鞋铺；timeskip 已 retire)");
+        Check(eventDeck.Count(card => InkEventCatalog.Knots.ContainsKey(card.Id)) == 9,
+            "9 个在役 tt6 事件卡对应 ink 结点");
+        Check(!eventDeck.Any(card => card.Id == "tt6-timeskip"), "retired timeskip card must not be drawn");
+        var catalog = new InkEventCatalog(GameRuntime.Data.NarrativeStoryJson!);
+        var totalChoices = 0;
+
+        foreach (var card in eventDeck)
+        {
+            var session = catalog.OpenEvent(card.Id);
+            var choiceCount = session?.Choices.Count ?? 1;
+            for (var choiceIndex = 0; choiceIndex < choiceCount; choiceIndex++)
+            {
+                totalChoices++;
+                var run = EventProbe((ulong)(7000 + totalChoices * 13), universe, eventDeck);
+                run.DebugSetEventCard(card.Id);
+                Check(run.PendingEventId == card.Id, $"{card.Id}: DebugSetEventCard must open the named event");
+                Check(run.PendingEventTitle == card.Name, $"{card.Id}: panel title must be the card name (网页 nodeShell title=card.name)");
+                Check(run.EventIntro == (session?.Intro ?? ""), $"{card.Id}: EventIntro must surface the ink knot intro");
+                if (session is not null)
+                {
+                    Check(run.EventChoices.Count == session.Choices.Count, $"{card.Id}: choice count must match the ink knot");
+                    Check(run.EventChoices.All(choice => choice.Id.Length > 0 && !choice.Label.Contains("@@", StringComparison.Ordinal)),
+                        $"{card.Id}: every choice carries an effect key and never leaks @@ metadata");
+                }
+                var effect = run.EventChoices[choiceIndex].Id;
+                var hpBefore = run.Hp;
+                var coinsBefore = run.Resources.Coins;
+                var fragsBefore = run.Fragments;
+                var result = run.ChooseEvent(choiceIndex);
+                Check(result.Text.Length > 0 || effect == RunState.EventContinueChoiceId,
+                    $"{card.Id} 选项[{choiceIndex}]({effect}): ink 结点推进应有后果文本（narrate() 口径）");
+                switch (effect)
+                {
+                    case "goldmine_safe":
+                        Check(run.Phase == RunPhase.Ready && run.Resources.Coins == coinsBefore + 3, "goldmine_safe: +3 币回 Ready");
+                        break;
+                    case "goldmine_deep":
+                        Check(run.Phase == RunPhase.Ready && run.Resources.Coins == coinsBefore + 6 && run.Hp == Math.Max(1, hpBefore - 3),
+                            "goldmine_deep: +6 币 -3 血（不低于 1）");
+                        break;
+                    case "airdrop_wood":
+                        Check(run.Phase == RunPhase.Ready && run.Resources.Wood == 0
+                            && (run.OwnedCards.Any(x => x.Card.Id == "tt-wood") || run.PendingRewards.Any(x => x.Card.Id == "tt-wood")),
+                            "airdrop_wood: 木材卡入包（网页 grantEventCard→addItem，不落裸资源）");
+                        break;
+                    case "airdrop_rations":
+                        Check(run.Phase == RunPhase.Ready && run.Resources.Rations == 0
+                            && (run.OwnedCards.Any(x => x.Card.Id == "tt-rations") || run.PendingRewards.Any(x => x.Card.Id == "tt-rations")),
+                            "airdrop_rations: 口粮卡入包（不落裸资源）");
+                        break;
+                    case "airdrop_heal":
+                        Check(run.Phase == RunPhase.Ready && run.Hp == Math.Min(run.MaxHp, hpBefore + 3), "airdrop_heal: +3 血");
+                        break;
+                    case "chest_small":
+                    {
+                        var small = run.PeekNextChest();
+                        Check(run.Phase == RunPhase.Chest && small.Kind == "small" && !small.RequiresChoice,
+                            "chest_small: 进入开箱队列（小宝箱随机 1 张）");
+                        run.OpenNextChest();
+                        Check(run.Phase == RunPhase.Ready, "chest_small: 开完回 Ready");
+                        break;
+                    }
+                    case "chest_medium":
+                    {
+                        var medium = run.PeekNextChest();
+                        Check(run.Phase == RunPhase.Chest && medium.Kind == "medium" && medium.RequiresChoice,
+                            "chest_medium: 三选一密封物资箱");
+                        run.OpenNextChest(0);
+                        Check(run.Phase == RunPhase.Ready, "chest_medium: 选完回 Ready");
+                        break;
+                    }
+                    case "timeskip_move":
+                        Check(run.Phase == RunPhase.Ready && run.TrackPosition == run.Map.Layers[0].Nodes.First(n => n.Type == RunRoomType.Event).Idx,
+                            "timeskip_move: 链式移动已停用（原地不动回 Ready）");
+                        break;
+                    case "demondeal_trade":
+                        Check(run.Phase == RunPhase.Ready && run.Hp == Math.Max(1, hpBefore - 1), "demondeal_trade: -1 血（不低于 1）");
+                        Check(run.OwnedCards.Any(x => x.Card.Rarity == "传说" && x.Card.Type is "装备" or "武术" or "法术")
+                            || run.PendingRewards.Any(x => x.Card.Rarity == "传说" && x.Card.Type is "装备" or "武术" or "法术"),
+                            "demondeal_trade: 传说（装备/武术/法术）物品入包");
+                        break;
+                    case "bandits_fight":
+                    {
+                        Check(run.Phase == RunPhase.Battle && run.Encounter.Count == Math.Min(5, 3 + run.LayerIndex)
+                            && run.Encounter.All(enemy => enemy.Id == "bandit"),
+                            "bandits_fight: 拾荒者一伙数量随层缩放（第 1 层 3 → 第 3 层起 5）");
+                        var drops = run.CompleteBattle(true);
+                        Check(drops.Count >= 2 && drops[0] is ("medium", false, false) && drops[1] is ("medium", false, false),
+                            "bandits_fight: 战胜后先发密封物资箱 ×2（再叠常规掉落）");
+                        while (run.Phase == RunPhase.Chest) run.OpenNextChest();
+                        Check(run.Phase == RunPhase.Ready, "bandits_fight: 战利品结算回 Ready");
+                        break;
+                    }
+                    case "mystery_supply":
+                        Check(run.Phase == RunPhase.Ready && run.Fragments == fragsBefore + 1 && run.Resources.Coins == coinsBefore + 2,
+                            "mystery_supply: 碎片 ×1 + 2 币（网页 v2 实跑口径，批次 4b 冻结）");
+                        Check(run.OwnedCards.All(x => x.Card.Id != TokenCraft.TokenColorId),
+                            "mystery_supply: 不直发员工通行证A 卡（v2 改碎片）");
+                        break;
+                    case "goldhammer_strike":
+                        if (run.Phase == RunPhase.Ready)
+                            Check(run.Resources.Coins == coinsBefore + 2, "goldhammer_strike: 一击制敌 +2 币");
+                        else
+                        {
+                            Check(run.Phase == RunPhase.Battle && run.Encounter.Count == 1 && run.Encounter[0].Hp > 0,
+                                "goldhammer_strike: 重击 -5 血后开战");
+                            run.CompleteBattle(true);
+                            while (run.Phase == RunPhase.Chest) run.OpenNextChest();
+                            Check(run.Phase == RunPhase.Ready, "goldhammer_strike: 战斗结算回 Ready");
+                        }
+                        break;
+                    case "relief_heal":
+                        Check(run.Phase == RunPhase.Ready && run.Hp == Math.Min(run.MaxHp, hpBefore + 6), "relief_heal: +6 血");
+                        break;
+                    case "systemsupply_restock":
+                        Check(run.Phase == RunPhase.Ready && run.Fragments == fragsBefore + 1
+                            && (run.OwnedCards.Any(x => x.Card.Id == "tt-wood") || run.PendingRewards.Any(x => x.Card.Id == "tt-wood")),
+                            "systemsupply_restock: 碎片 ×1 + 木材卡入包（v2 口径）");
+                        break;
+                    case RunState.EventContinueChoiceId when card.Id == RunState.ShoeShopCardId:
+                        Check(run.Fragments == fragsBefore + 1, "修鞋铺: 继续 → 碎片 ×1（复原交互见下一组）");
+                        if (run.EventRestorePending) run.LeaveEventWithoutEffect();
+                        break;
+                    default:
+                        Check(run.Phase == RunPhase.Ready, $"{card.Id}/{effect}: 无效果选项安静落地回 Ready");
+                        break;
+                }
+            }
+        }
+        // 在役卡池的全部选项一个不漏：9 结点的 13 个 ink 选项 + 修鞋铺单按钮（timeskip 结点在其后补走查）
+        Check(totalChoices == 14, $"event deck must walk every choice exactly once (13 ink + 修鞋铺), got {totalChoices}");
+
+        // —— 时空孔隙（tt6-timeskip，cards-sync 已 retire、事件格永不触发）：ink 结点仍在，
+        //    用测试 seam 走查其唯一选项的落地 = 链式移动停用 → 原地不动回 Ready ——
+        var timeskip = EventProbe(9300, universe, eventDeck);
+        timeskip.DebugSetEventCard("tt6-timeskip");
+        Check(timeskip.EventIntro.Length > 0 && timeskip.EventChoices[0].Id == "timeskip_move",
+            "timeskip: ink 结点 intro/选项仍完整可走（批次 4a 全分支口径）");
+        var timeskipPos = timeskip.TrackPosition;
+        timeskip.ChooseEvent(0);
+        Check(timeskip.Phase == RunPhase.Ready && timeskip.TrackPosition == timeskipPos,
+            "timeskip_move: 链式移动已停用（cancelLegacyChainMove）→ 原地不动回 Ready");
+        Console.WriteLine($"[4c] 事件落地矩阵：{eventDeck.Count} 张在役事件卡 + retire 的 timeskip 结点，全部 {totalChoices + 1} 个选项逐一断言");
+    }
+
+    /// <summary>修鞋铺 cmtn7qttxqo4（4b 移交）：碎片 ×1 + openPocketRestore(1) 复原 1 张消耗卡；空口袋直接收敛；未知 cardId 兜底。</summary>
+    private static void ShoeShopAndKnotlessEventsLandSafely()
+    {
+        var universe = LoadRunCardUniverse();
+        var eventDeck = EventDeck();
+        // —— 修鞋铺：碎片 ×1 + 复原面板（网页 applyEventEffect + openPocketRestore(1)）——
+        var run = EventProbe(9101, universe, eventDeck);
+        run.AddCard(new RunCard("shoe-fodder", "复原源卡"));
+        run.MoveCardToPocket("复原源卡");   // → 消耗口袋
+        run.DebugSetEventCard(RunState.ShoeShopCardId);
+        Check(run.PendingEventTitle == "修鞋铺", "修鞋铺: 面板标题为卡名");
+        Check(run.EventIntro.Length == 0 && run.EventChoices.Count == 1 && run.EventChoices[0].Id == RunState.EventContinueChoiceId,
+            "修鞋铺无 ink 结点 → intro 为空 + 单按钮「继 续」（网页 evtNext 路径）");
+        var frags = run.Fragments;
+        run.ChooseEvent(0);
+        Check(run.Fragments == frags + 1 && run.Phase == RunPhase.Event && run.EventRestorePending,
+            "修鞋铺: 碎片 ×1 并停留在复原面板（openPocketRestore 口径）");
+        Check(run.EventRestorableCards.Contains("复原源卡"), "复原列表来自消耗口袋（道具/装备除外）");
+        Check(!run.RestoreEventPocketCard("口袋里没有的卡"), "复原不存在的卡必须拒绝");
+        Check(run.RestoreEventPocketCard("复原源卡") && run.Phase == RunPhase.Ready
+            && run.OwnedCards.Any(x => x.Card.Name == "复原源卡"),
+            "复原 1 张回背包并结束事件（restoreOne→finish 口径）");
+
+        // —— 修鞋铺空消耗口袋：碎片照发、直接收敛到 Ready（网页空面板+继续旅程等价）——
+        var empty = EventProbe(9102, universe, eventDeck);
+        empty.DebugSetEventCard(RunState.ShoeShopCardId);
+        empty.ChooseEvent(0);
+        Check(empty.Fragments == 1 && empty.Phase == RunPhase.Ready && !empty.EventRestorePending,
+            "修鞋铺空口袋: 碎片照发并直接结束");
+
+        // —— 未知 cardId（无 ink 结点的自定义事件卡，narrative.js KNOTS 未收录）→ null 兜底 + 无事发生 ——
+        var unknown = EventProbe(9103, universe, eventDeck);
+        unknown.DebugSetEventCard("legacy-custom-event");
+        Check(unknown.PendingEventId == "legacy-custom-event" && unknown.PendingEventTitle == "legacy-custom-event"
+            && unknown.EventIntro.Length == 0,
+            "未知 cardId 走 null 兜底（运行时侧：单按钮面板，无叙事正文）");
+        var coinsBefore = unknown.Resources.Coins;
+        unknown.ChooseEvent(0);
+        Check(unknown.Phase == RunPhase.Ready && unknown.Fragments == 0 && unknown.Resources.Coins == coinsBefore,
+            "未知事件「继 续」无事发生回 Ready（网页 default：效果后续版本实装）");
+        Console.WriteLine("[4c] 修鞋铺复原/空口袋收敛 + 未知 cardId 兜底 断言通过");
+    }
+
+    /// <summary>验收③：事件面板挂起/恢复（镜像开箱 suspend/resume）+ 事件进行中不可入档（网页只在稳定落点写档）。</summary>
+    private static void EventPanelSuspendsResumesAndStaysUnsaveable()
+    {
+        var universe = LoadRunCardUniverse();
+        var eventDeck = EventDeck();
+        var run = EventProbe(9201, universe, eventDeck);
+        run.DebugSetEventCard("tt6-goldmine");
+        var labels = run.EventChoices.Select(choice => choice.Label).ToArray();
+        Check(run.SuspendEvent(), "挂起事件面板必须返回 true");
+        Check(run.EventSuspended, "挂起状态可查询");
+        try { run.ChooseEvent(0); throw new InvalidOperationException("suspended event accepted a choice"); }
+        catch (InvalidOperationException error) { Check(error.Message.Contains("挂起", StringComparison.Ordinal), "挂起中选项必须被拒绝"); }
+        run.ResumeEvent();
+        Check(!run.EventSuspended && run.EventChoices.Select(choice => choice.Label).SequenceEqual(labels),
+            "恢复后 intro/选项保持不变（同预览继续）");
+        run.ChooseEvent(0);
+        Check(run.Phase == RunPhase.Ready && !run.SuspendEvent(), "事件结算后挂起返回 false");
+        run.ResumeEvent();   // 非挂起状态恢复是无操作
+        Check(!run.EventSuspended, "非事件阶段 resume 无操作");
+        // 事件进行中状态不入档（对齐网页口径：只在稳定落点 saveGame）——Event 阶段快照拒恢复
+        var mid = EventProbe(9202, universe, eventDeck);
+        mid.DebugSetEventCard("tt6-goldmine");
+        var snapshot = mid.CaptureSnapshot();
+        try { RunState.FromSnapshot(snapshot); throw new InvalidOperationException("event-phase snapshot was accepted"); }
+        catch (ArgumentException) { Check(true, "事件进行中标记不可存档（Restore 拒绝非 Ready/Settlement）"); }
+        // 稳定落点后再存档恢复正常：结束面板 → Ready 快照可恢复，且事件面板状态被清空
+        mid.LeaveEventWithoutEffect();
+        var restored = RunState.FromSnapshot(mid.CaptureSnapshot());
+        Check(restored.Phase == RunPhase.Ready && restored.PendingEventId is null && !restored.EventRestorePending,
+            "恢复后的稳定落点不携带事件面板暂存");
+        Console.WriteLine("[4c] 事件面板挂起/恢复 + 事件进行中不可入档 断言通过");
+    }
+
 
     // ---------- 验收①：2000 seed 复验 harness ----------
 
@@ -1354,7 +1616,15 @@ internal static class RunSmokeTests
         {
             switch (run.Phase)
             {
-                case RunPhase.Event: run.ResolveEvent(); break;
+                case RunPhase.Event:
+                    // 批次 4c：事件面板=事件卡池均匀抽（池空时 DrawEventChoices 内部落 map.json randomEvents 旧表）
+                    if (run.PendingEventId is null) run.DrawEventChoices();
+                    if (run.Phase == RunPhase.Event && run.PendingEventId is not null)
+                    {
+                        if (run.EventRestorePending) run.LeaveEventWithoutEffect();   // 修鞋铺复原面板：直接「继续旅程」
+                        else run.ChooseEvent(0);
+                    }
+                    break;
                 case RunPhase.Chest: run.OpenNextChest(); break;
                 case RunPhase.Campfire: run.CompleteCampfire(); break;
                 case RunPhase.Shop: run.LeaveShop(); break;

@@ -417,7 +417,7 @@ public sealed class BattleEngine
             var repeat = card.Type == "装备" || it.Each || formLike;
             int? left = null;
             if (!repeat && dur > 0) { repeat = true; left = dur; }
-            _delayed.Add(new DelayedItem { Text = it.Text, CardName = card.Name, Repeat = repeat, Left = left });
+            _delayed.Add(new DelayedItem { Text = it.Text, CardName = card.Name ?? "", Repeat = repeat, Left = left });
             Log($"[[icon:hourglass]] <b>回合开始时</b>：【{card.Name}】{it.Text}（下个回合开始{(repeat ? (left is not null ? $"起共 {left} 次" : "起每回合") : "")}生效）", "sys");
         }
     }

@@ -103,6 +103,43 @@ public sealed class RunUiSnapshot
     public string[] InventoryLabels { get; init; } = Array.Empty<string>();
     public RunActionUiSnapshot[] Actions { get; init; } = Array.Empty<RunActionUiSnapshot>();
     public MapNodeUiSnapshot[] Nodes { get; init; } = Array.Empty<MapNodeUiSnapshot>();
+    /// <summary>事件面板快照（批次 4c）：仅 Phase=事件 且已抽卡时非空；UI 据此渲染事件页（intro+选项+effect 元数据）。</summary>
+    public EventUiSnapshot? Event { get; init; }
+}
+
+/// <summary>
+/// 事件页快照（批次 4c，对照网页 nodeShell(tone:'event') 事件面板）：
+/// intro 正文与选项全部来自 data/narrative-events.ink.json（InkEventCatalog 打开的结点），
+/// Effect 为选项隐藏的 @@effect=@@ 元数据（落地映射在 RunState.ApplyEventChoice），
+/// UI 只消费快照、不解析 ink。无 ink 结点的事件卡（修鞋铺等）只有单个「继 续」选项。
+/// </summary>
+public sealed class EventUiSnapshot
+{
+    /// <summary>事件卡 id（tt6-goldmine / cmtn7qttxqo4 等）。</summary>
+    public string EventId { get; init; } = "";
+    /// <summary>事件卡名（事件页标题，网页 nodeShell title=card.name）。</summary>
+    public string Title { get; init; } = "";
+    /// <summary>开场叙事（网页 narrative.intro；无结点事件为空串）。</summary>
+    public string Intro { get; init; } = "";
+    public EventChoiceUiSnapshot[] Choices { get; init; } = Array.Empty<EventChoiceUiSnapshot>();
+    /// <summary>修鞋铺复原子流程进行中（展示消耗口袋复原列表）。</summary>
+    public bool RestorePending { get; init; }
+    /// <summary>消耗口袋中可复原的卡名（道具/装备除外，网页 FIRE_RESTORABLE 口径）。</summary>
+    public string[] RestorableCards { get; init; } = Array.Empty<string>();
+    /// <summary>事件面板是否挂起（镜像开箱挂起；挂起中拒绝选项操作）。</summary>
+    public bool Suspended { get; init; }
+}
+
+public sealed class EventChoiceUiSnapshot
+{
+    /// <summary>玩家可见选项文本（@@ 元数据不泄漏，ChoiceMetadataParser 保证）。</summary>
+    public string Label { get; init; } = "";
+    /// <summary>选项说明行（@@detail=@@）。</summary>
+    public string Detail { get; init; } = "";
+    /// <summary>色调标记（@@tone=@@：ok/danger 等，UI 配色用）。</summary>
+    public string Tone { get; init; } = "";
+    /// <summary>落地效果键（@@effect=@@：goldmine_safe/bandits_fight/continue 等）。</summary>
+    public string Effect { get; init; } = "";
 }
 
 public sealed class RunActionUiSnapshot

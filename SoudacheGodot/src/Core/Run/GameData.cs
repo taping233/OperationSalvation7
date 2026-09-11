@@ -65,6 +65,8 @@ public sealed class GameData
     public IReadOnlyList<string> CardDropTypes { get; }
     public IReadOnlyList<string> CardDropDiscountTypes { get; }
     public IReadOnlyList<string> CardRarities { get; }
+    /// <summary>data/narrative-events.ink.json 原文（批次 4a 编译产物）；null 时事件格走 map.json randomEvents 旧表兜底。</summary>
+    public string? NarrativeStoryJson { get; }
 
     public GameData(IReadOnlyDictionary<string, RunMonsterData> monsters,
         IReadOnlyList<RunEncounterTableData> encounters, IReadOnlyList<RunBossData> bosses,
@@ -73,7 +75,7 @@ public sealed class GameData
         IReadOnlyList<CharacterData> characters, GameRulesData rules, IReadOnlyDictionary<string, int> cardPrices,
         IReadOnlyDictionary<string, int> cardShopWeights, IReadOnlyDictionary<string, int> cardDropWeights,
         IReadOnlyList<string> cardDropTypes, IReadOnlyList<string> cardDropDiscountTypes,
-        IReadOnlyList<string> cardRarities)
+        IReadOnlyList<string> cardRarities, string? narrativeStoryJson = null)
     {
         Monsters = monsters ?? throw new ArgumentNullException(nameof(monsters));
         Encounters = encounters ?? throw new ArgumentNullException(nameof(encounters));
@@ -90,6 +92,7 @@ public sealed class GameData
         CardDropTypes = cardDropTypes ?? throw new ArgumentNullException(nameof(cardDropTypes));
         CardDropDiscountTypes = cardDropDiscountTypes ?? throw new ArgumentNullException(nameof(cardDropDiscountTypes));
         CardRarities = cardRarities ?? throw new ArgumentNullException(nameof(cardRarities));
+        NarrativeStoryJson = narrativeStoryJson;
     }
 
     public RunMonsterData RequireMonster(string id) => Monsters.TryGetValue(id, out var monster)
@@ -106,7 +109,8 @@ public sealed class GameData
 
     public CharacterData? Character(string id) => Characters.FirstOrDefault(character => character.Id == id);
 
-    public static GameData Load(string cardsJson, string charactersJson, string mapJson, string rulesJson)
+    public static GameData Load(string cardsJson, string charactersJson, string mapJson, string rulesJson,
+        string? narrativeJson = null)
     {
         using var cards = JsonDocument.Parse(cardsJson);
         using var characters = JsonDocument.Parse(charactersJson);
@@ -129,17 +133,22 @@ public sealed class GameData
             ParseStringIntTable(cards.RootElement, "dropWeights"),
             ParseStringList(cards.RootElement, "dropTypes"),
             ParseStringList(cards.RootElement, "dropDiscountTypes"),
-            ParseStringList(cards.RootElement, "rarities"));
+            ParseStringList(cards.RootElement, "rarities"),
+            narrativeJson);
     }
 
     public static GameData LoadFromDirectory(string directory)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(directory);
+        // narrative-events.ink.json（批次 4a 编译产物）缺省可缺——缺了事件格退回 map.json randomEvents 旧表。
+        var narrativePath = Path.Combine(directory, "narrative-events.ink.json");
+        var narrativeJson = File.Exists(narrativePath) ? File.ReadAllText(narrativePath) : null;
         return Load(
             File.ReadAllText(Path.Combine(directory, "cards.json")),
             File.ReadAllText(Path.Combine(directory, "characters.json")),
             File.ReadAllText(Path.Combine(directory, "map.json")),
-            File.ReadAllText(Path.Combine(directory, "rules.json")));
+            File.ReadAllText(Path.Combine(directory, "rules.json")),
+            narrativeJson);
     }
 
     /// <summary>Locates the exported data/ directory by walking up from the binary and cwd.</summary>
