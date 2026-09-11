@@ -6,3 +6,6 @@ desktop/_fps_probe_tmp.cjs
 game/tools/_fps_probe_tmp.*
 output/
 .playwright-cli/
+.tmp/
+_backups/
+desktop-app/dist-log.txt
