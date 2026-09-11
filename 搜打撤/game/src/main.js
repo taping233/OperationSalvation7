@@ -3,6 +3,8 @@
  *
  * 按原 index.html 的 <script> 顺序导入全部模块，保持初始化顺序。
  * 模块间依赖由各文件顶部的 import 显式声明（见 scripts/esm-convert.mjs）。
+ * 下面的导入顺序即启动顺序，须与 boot-order.js 的 BOOT_ORDER 一致
+ * （tests/contracts.test.js 有守护断言，勿随意调换）。
  * ============================================================ */
 import './random.js';
 import './rules.js';
@@ -14,7 +16,7 @@ import './camera.js';
 import './motion.js';
 import './input.js';
 
-
+import './event-bus.js';   // 模块间事件总线（批次 5）：须早于战斗/背包的订阅方
 import './notes.js';
 import './cards.js';
 import './combat.js';

@@ -10,6 +10,7 @@ import { createActionQueue } from './battle.actions.js';
 import { BATTLE_PHASES, beginTargeting, cancelTargeting, createBattleState, transitionBattle } from './battle.state.js';
 import { Random } from './random.js';
 import * as Combat from './combat.js';
+import { emit as busEmit } from './event-bus.js';
 /* battle.core.js —— 战斗逻辑：牌库/出牌结算/词条时点/回合流转（渲染由注入的视图完成） */
 /* ============================================================
  * 搜打撤 v0.24 —— M1 两类战斗（多敌人 + 拖拽选目标 + BOSS 词缀 + 词条时点体系）
@@ -2162,7 +2163,11 @@ import * as Combat from './combat.js';
     if (SDT.Sound) SDT.Sound.setDucked(false);   // 战斗结束恢复 BGM 音量
     opts.foeNames = foes.map(f => f.name);
     SDT.Sound.music('board');   // 战斗结束切回行军氛围
-    G.onBattleEnd(opts, playedCopy, win, consumedCopy);
+    // 战斗结束广播（2026-09-11 批次 5）：订阅方各自响应（背包结算/基地/统计），
+    // 战斗核心不再直接依赖 game.onBattleEnd 的实现；无人订阅时回退旧回调（审计 harness 兼容）
+    if (!busEmit('battle:end', opts, playedCopy, win, consumedCopy) && typeof G.onBattleEnd === 'function') {
+      G.onBattleEnd(opts, playedCopy, win, consumedCopy);
+    }
   }
 
   // ---------- 墓地查看（BOSS 战专属：普通战斗没有牌库/墓地概念） ----------

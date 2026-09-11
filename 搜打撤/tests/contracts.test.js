@@ -1,11 +1,12 @@
 import { describe, expect, it } from 'vitest';
-import { readFileSync, readdirSync } from 'node:fs';
+import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { basename, join, resolve } from 'node:path';
 import { RULES } from '../game/src/rules.js';
 import '../game/src/mapData.js';
 import { createEffectExecutor, splitEffectClauses } from '../game/src/battle.effects.js';
 import { RunStorage } from '../game/src/game.storage.js';
 import { GameStore } from '../game/src/game.store.js';
+import { BOOT_ORDER } from '../game/src/boot-order.js';
 
 describe('规则与接口契约', () => {
   it('关键玩法数值保持冻结且与现行规则一致', () => {
@@ -216,5 +217,16 @@ describe('Electron 启动契约', () => {
     const launch = launcher.indexOf('start "" "%ELECTRON%" "%APPDIR%"');
     expect(prestart).toBeGreaterThan(0);
     expect(launch).toBeGreaterThan(prestart);
+  });
+
+  it('main.js 副作用导入顺序与 boot-order.js 的 BOOT_ORDER 逐项一致（批次 5）', () => {
+    const source = readFileSync(resolve(process.cwd(), 'game/src/main.js'), 'utf8');
+    // 只取顶格的副作用导入；被注释掉的模块（如 scene/runtime.js）不计入
+    const imported = [...source.matchAll(/^\s*import\s+'\.\/([\w.-]+)\.js';/gm)].map(m => m[1]);
+    expect(imported.length).toBeGreaterThan(0);
+    expect(imported).toEqual(BOOT_ORDER);
+    for (const id of BOOT_ORDER) {
+      expect(existsSync(resolve(process.cwd(), `game/src/${id}.js`)), `BOOT_ORDER 中的 ${id}.js 不存在`).toBe(true);
+    }
   });
 });

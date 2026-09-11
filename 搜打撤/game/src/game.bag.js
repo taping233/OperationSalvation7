@@ -6,6 +6,7 @@ import { MAP, bagCap, safeCap } from './game.session.js';
 import { escAttr } from './shared.js';
 import { cardStacks, doDeath, game, newUid, safeUsed, saveGame, usedSlots } from './game.session.js';
 import { Random } from './random.js';
+import { on as busOn } from './event-bus.js';
 import { showRunTransition } from './game.run.js';
 import { _set_cardPageOpen } from './game.cardslib.js';
 
@@ -755,7 +756,7 @@ import { _set_cardPageOpen } from './game.cardslib.js';
   // 胜利 100% 掉宝箱（按所在环层 / BOSS 固定 BOSS宝箱），开完宝箱再续流。
   // ESM：循环导入下本模块体可能先于 game.session 执行，顶层读 game 会 TDZ，延迟到 boot 统一绑定
   function bindBagMixins() {
-  game.onBattleEnd = async function (opts, playedUids, win, consumedUids) {
+  const onBattleEnd = async function (opts, playedUids, win, consumedUids) {
     UI.hideOverlay();
     if (win === false) { game.bossCleanupPending = false; doDeath(); return; }
     // 需求 #1/#6（2026-09-09）：战斗中消耗的卡牌战后 1/3 概率进入消耗口袋；
@@ -874,6 +875,9 @@ import { _set_cardPageOpen } from './game.cardslib.js';
     }
     afterRewards();
   };
+  // 战斗结束改经总线广播订阅（批次 5）；G.onBattleEnd 保留为无订阅方时的回退路径
+  busOn('battle:end', onBattleEnd);
+  game.onBattleEnd = onBattleEnd;
   }
 
 export { bindBagMixins, showBackpack };
