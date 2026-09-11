@@ -61,3 +61,35 @@
 | 击杀灰化塌缩（UpdateEnemyVisuals Defeated 分支） | battle.css fx-die 关键帧 | 1s 灰化+轻旋 6°，意图隐藏 |
 | `PlayableGlow` 可打出高亮 | sts2-reference §5 稀有度视觉③（可打高亮 shader width 参数体系） | 显示 width→0.075/0.5s CubicOut；点击闪光 0.1s→0.15 再 0.35s CubicOut 回 0.075；可打色 (0,0.957,0.988,0.98)；不可打卡=battle.css `.off` 压暗+下沉 12px+缩 0.97 |
 | 音频接线（ApplySnapshot SfxRequests 消费 + SetDucked） | sound.js 逐键清单（audio-inventory §3）+ setDucked(0.45) | BattleUiSnapshot.SfxRequests 逐键 GameAudio.PlaySfx；进战斗 SetDucked(true)、离场 false；BGM 切曲由 AppMain.SetContext 既有链路 |
+
+## wave4 批次 6c-map 对局地图画布组件 ↔ renderer.js 参数对照（2026-09-12）
+
+> 真源=网页版 `搜打撤/game/src/renderer.js`（画布主绘制）、`renderer.icons.js`（结点位图）、
+> `renderer.primitives.js`（hash2/shade）、`game.session.js`（nodePos 布局/renderMiniMap/MINI_TYPE_COLOR）、
+> `camera.js`（fitBounds/nodeHitRadius）、`game.run.flow.js`（moveTo 220ms）、`game.boot.js`（悬停/点击命中）、
+> `layeredMap.js`（层色）、`data/map.json`（tile=48）。实现=`src/UI/MapBoardCanvas.cs` + `src/UI/MiniMapCanvas.cs`（Godot `_draw()` 重写，全部屏幕空间恒定像素宽=网页 `n/cam.zoom` 口径）。
+
+| 画布元素（6c-map） | renderer.js 参数来源（文件:函数/常量） | 关键参数 |
+|---|---|---|
+| 结点世界坐标 | game.session.js buildDerived（MAP_NODE_SPACING/PADDING） | x=180+(cell.x-minX)×120，y=180+(row-minRow)×120 |
+| 结点半径 | renderer.js NODE_R/BOSS_R/ALTAR_R/nodeRadius | 26 / 30 / 32；altar=32、boss=30、其余 26 |
+| 镜头适配 | camera.js fitBounds + enterLayer fitLayer(game,128) | zoom=clamp(min(vw/w,vh/h),0.4,2.5)，焦点=包围盒中心，pad=128 |
+| 命中半径 | camera.js nodeHitRadius + game.boot.js pickNode | max(34, 28/zoom) 世界像素；可走才可点（moveTo 二次校验） |
+| 壁纸背景 | renderer.js LAYER_BACKDROPS/ensureBackdrop/drawCover | li2→layer3-knight.webp@veil0.62、li3→layer4-priestess-light.webp@0.8、li4→layer5-priestess-dark.webp@0.5、其余 endfield-ruins.jpg@0.5；cover 铺图 + #0B0E12 底 |
+| 背景叠层 | renderer.js draw()：bg 三段渐变 + 中央 halo + 尾帧 vignette | rgba(5,14,18,.28)→.18@0.55→rgba(2,8,11,.40)；halo rgba(83,126,137,.08)@0→(36,64,74,.03)@0.62→0（半径 0.72×max(w,h)，中心 0.5w,0.46h）；vignette 黑 0.36（近似比例） |
+| 环内连线 | renderer.js hand()/trim()/drawLinks | 二次贝塞尔确定性弯曲 off=(hash2(seed,7)−0.5)×2×min(18,len×0.08)、seed=li×57+i×13+toLi×3+toIdx；端点裁剪 r+8；实描 rgba(226,202,150,.66)×α0.20@1.8px + 点划 α0.08@2.8px dash(1.5,9) |
+| 可走道路三描 | renderer.js drawLinks legalLinks | pulse=0.82+sin(3.2t)×0.12；底 rgba(255,190,74,.78)×0.42pulse@13px、中 rgba(255,202,91,.96)×0.92pulse@5.4px、芯 rgba(255,247,205,.98)@1.7px |
+| 结点盘面 | renderer.js ensureBoard（落影+径向渐变盘） | 落影 ellipse(x+2.5,y+4, r×1.02, r×0.62) 黑 0.38；盘面=mixHex(layerColor,#141210,0.82) 中心 shade+0.05→边缘 −0.08，渐变中心偏移(−0.3r,−0.4r)，1.02r 圆形裁剪（逐像素烘焙）；层色=layeredMap.js LAYER_COLORS [#78b9d6,#9fcf8d,#d8ae68,#b77ad8] |
+| 结点位图图标 | renderer.icons.js BITMAP_SRC/bakedIconFor/drawBitmapIcon | #1d1c1a 圆底 + 0.97R 圆裁位图（0.91R 起 1.82R 宽）256px 烘焙；物资（coin/wood/rations）→event 图、emergencyExit/extraction→extract.svg；描环 当前 rgba(235,205,140,.5)@1.6 / 可走 rgba(255,214,110,.85)@2.4 / 其余 rgba(180,160,120,.25)@1.6；结点整体 alpha current 1 / legal 0.95 / 其余 0.55 |
+| 微光环绕 | renderer.js GLISTEN | altar rgba(154,124,200,.9) / boss rgba(255,110,90,.85) / door rgba(225,192,120,.85) / emergencyExit·entrance rgba(82,210,115,.85)；环 1.26r@1.5px，current α0.9 / 0.18 |
+| 已走绿环 | renderer.js drawIcons walked 分支（fire 熄灭在 drawFires） | 1.16r 描 #52d273@2.2px（α0.95/0.6）+ 填充 rgba(82,210,115,.16)；数据源=IsResolved（待 [6c-map→A] 填充） |
+| 结点编号 | renderer.js drawIndexes | 当前层 0 起编号，9px 白 0.6，y−r−4，current α0.85 / 0.18 |
+| 入口脉冲圈 | renderer.js drawEntrancePulse | (26+4+2.5)r@2px rgba(90,162,134,.85)，current α1 / 0.16（pulse 定值 0.5 同网页） |
+| 祭坛旋转法阵 | renderer.js drawAltarCircle | 双层虚线 T0×1.05 / T0×0.72（T0=48），dash(7,9)，offset ∓14t/+10t，α 深 0.55 / 浅 0.20（深=最深 li≥3） |
+| 选中态金色箭头（09-09 定版） | renderer.js drawTargetArrow/drawNodeArrow | 悬停/锁定的可达节点上方 bounce=sin(4.2t)×3；y=n.y−r−14−bounce；三角(−9,−10)(9,−10)(0,2)+杆 rect(−2.5,−20,5,11)，fill rgba(245,197,66,.95)+暗金重影（shadowBlur 近似）；仅 reachable 集合内显示 |
+| 悬停圈 | renderer.js drawHover | (r+4)r 填充 rgba(240,210,140,.10)+描边 .7@1.5px；悬停变化 sfx('hover')（game.boot.js updateHover） |
+| 移动目标四角括号 | renderer.js drawMoveTarget + game.run.flow.js moveTo | s=T0×0.38、L=T0×0.16、rgba(245,197,66,.9)@2px；棋子 220ms 三次缓出 eased=1−(1−t)³ |
+| 当前棋子标记 | renderer.js drawPlayer | 标记 T0×0.66×(1+0.05) 填 rgba(255,120,105,.16)/描 rgba(255,132,115,.95)@3.2px；呼吸椭圆 0.68s@2px α0.25；涟漪 1.325r@2px α0.35；地影 0.5s×0.16s 黑 0.42；名牌「你」10px #f2e2b8 胶囊 rgba(22,15,6,.85)/边 rgba(216,180,106,.55)（pulse 定值 0.5 同网页） |
+| 迷你地图 #miniMap | game.session.js renderMiniMap + MINI_TYPE_COLOR | 包围盒适配 pad=min(W,H)×16%、nodeR=max(5,min(W,H)×0.055)；连线 rgba(214,181,110,.4)@2px（ni>i 去重）；可走亮边 rgba(255,202,91,.95)@nodeR×0.42；圆点类型色（battle #ff6b5e / fire #f2854a / chest·key·coin #f5c542 / event #41d0a8 / shop·entrance·extraction #52d273 / altar #b77ad8 / boss #ff5a50…），α cur/legal 1 : 0.62，r cur nodeR : 0.72nodeR，legal 亮环 nodeR×0.3、当前金圈 #ffd166@nodeR×0.36；事件驱动重绘（不逐帧） |
+| HUD 数据接线 | RunUiSnapshot（批次 4b 字段） | layerBanner zh=LayerName、en=Layer N·层名（消旧三环硬编码）；diceHist=DiceHistory 近 8 条 9px chips；resHud atk=Atk（rules.json playerAtk）；体力空态=MaxStamina≤0 时显 60/60（网页 index.html 缺省） |
+| 战争迷雾（未做，登记 [6c-map→A]） | renderer.js nodeGeo seen 过滤 + markSeen | seen 为空时网页恒全可见——本实现=该兼容态；需适配器在快照补 SeenNodes/Visited 后启用雾与已走样式 |

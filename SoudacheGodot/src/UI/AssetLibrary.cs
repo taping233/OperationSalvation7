@@ -37,17 +37,22 @@ public static class AssetLibrary
         return image;
     }
 
+    // 结点图标路径（6c-map：对照网页 renderer.icons.js BITMAP_SRC——优先 NAI 位图 png，
+    // 物资拾获（币/木材/口粮）合并用随机事件图标，紧急撤离/终局撤离合并用 extract.svg）
     public static string MapIcon(string type) => type.ToLowerInvariant() switch
     {
-        "battle" or "combat" => "res://assets/icons/battle.svg",
+        "battle" or "combat" => "res://assets/icons/battle.png",
         "boss" => "res://assets/icons/boss.svg",
-        "chest" => "res://assets/icons/chest.svg",
-        "event" => "res://assets/icons/event.svg",
+        "chest" => "res://assets/icons/chest.png",
+        "event" => "res://assets/icons/event.png",
+        "coin" or "wood" or "rations" => "res://assets/icons/event.png",
         "door" => "res://assets/icons/door.svg",
-        "campfire" => "res://assets/icons/fire.svg",
+        "campfire" or "fire" => "res://assets/icons/fire.png",
         "altar" or "altarentrance" => "res://assets/icons/altar.svg",
-        "shop" => "res://assets/icons/shop.svg",
+        "shop" => "res://assets/icons/shop.png",
         "entrance" => "res://assets/icons/entrance.svg",
+        "emergencyexit" or "extraction" => "res://assets/icons/extract.svg",
+        "key" => "res://assets/icons/key.svg",
         _ => "res://assets/icons/entrance.svg"
     };
 
