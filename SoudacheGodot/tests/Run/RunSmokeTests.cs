@@ -1155,7 +1155,7 @@ internal static class RunSmokeTests
         var universe = LoadRunCardUniverse();
         var eventDeck = universe.Where(card => card.Type == "事件").ToList();
 
-        // —— 来源①神秘补给（tt6-mystery，ink 结点选项「翻找补给柜」）：碎片 ×1 + 2 币（网页 v2 口径，批次 4b 冻结）——
+        // —— 来源①神秘补给（tt6-mystery，v2 覆盖选项「接收补给」）：碎片 ×1 + 2 币（网页 v2 实跑口径，批次 4b 冻结）——
         RunState? mystery = null;
         for (var seed = 1; seed <= 300 && mystery is null; seed++)
         {
@@ -1164,7 +1164,7 @@ internal static class RunSmokeTests
             probe.DebugSetPosition(0, FindNode(probe.Map, 0, RunRoomType.Event));
             probe.ResolveCurrentRoom();
             var choices = probe.DrawEventChoices();
-            if (choices[0].Id != "mystery_supply") continue;
+            if (choices[0].Id != EventV2Overlay.MysteryReceive) continue;
             var coinsBefore = probe.Resources.Coins;
             probe.ChooseEvent(0);
             Check(probe.Fragments == 1 && probe.Resources.Coins == coinsBefore + 2,
@@ -1176,7 +1176,7 @@ internal static class RunSmokeTests
         }
         Check(mystery is not null, "mystery event should appear within 300 seeds");
 
-        // —— 来源②系统补给（tt6-systemsupply，ink 结点选项「对接终端」）：碎片 ×1 + 木材卡 ×1（物资以卡牌入包）——
+        // —— 来源②系统补给（tt6-systemsupply，v2 覆盖选项「接收补给」）：碎片 ×1 + 木材卡 ×1（物资以卡牌入包）——
         RunState? supply = null;
         for (var seed = 1; seed <= 300 && supply is null; seed++)
         {
@@ -1186,7 +1186,7 @@ internal static class RunSmokeTests
             probe.DebugSetPosition(0, FindNode(probe.Map, 0, RunRoomType.Event));
             probe.ResolveCurrentRoom();
             var choices = probe.DrawEventChoices();
-            if (choices[0].Id != "systemsupply_restock") continue;
+            if (choices[0].Id != EventV2Overlay.SystemSupplyReceive) continue;
             probe.ChooseEvent(0);
             Check(probe.Fragments == 1, "system supply must grant 1 fragment");
             Check(probe.OwnedCards.Any(x => x.Card.Id == "tt-wood") || probe.PendingRewards.Any(x => x.Card.Id == "tt-wood"),
@@ -1253,8 +1253,9 @@ internal static class RunSmokeTests
     private static IReadOnlyList<RunCard> EventDeck() => LoadRunCardUniverse().Where(card => card.Type == "事件").ToList();
 
     /// <summary>
-    /// 验收①：10 结点×全选项——每个 ink 选项的 @@effect@@ 落地 RunState 后状态断言
-    /// （口径对齐 tests/Narrative 全分支 + 网页 narrative-coverage.test.js：每结点每选项都要走到）。
+    /// 验收①：10 张事件卡×全选项落地矩阵——6 张 v2 覆盖事件（EventV2Overlay，真源 game.run.flow.js:277-318
+    /// 的 V2 表）逐选项断言「选项文案/色调/落地」=网页实跑口径；非覆盖事件维持 ink 纯净链断言
+    /// （intro/选项数/@@effect@@ 落地）。ink 结点本身的 v1 旧文案走查兜底在 tests/Narrative（4a 口径）。
     /// 修鞋铺 cmtn7qttxqo4（无 ink 结点，4b 移交）与未知 cardId 兜底在 ShoeShopAndKnotlessEventsLandSafely。
     /// </summary>
     private static void InkEventChoicesLandTheirEffects()
@@ -1266,14 +1267,17 @@ internal static class RunSmokeTests
         Check(eventDeck.Count == 10, "event deck must mirror the live web library (9 tt6 + 修鞋铺；timeskip 已 retire)");
         Check(eventDeck.Count(card => InkEventCatalog.Knots.ContainsKey(card.Id)) == 9,
             "9 个在役 tt6 事件卡对应 ink 结点");
+        Check(eventDeck.Count(card => EventV2Overlay.IsCovered(card.Id)) == 6,
+            "v2 覆盖层恰覆盖 6 张事件卡（flow.js V2 表：mystery/systemsupply/demondeal/airdrop/chestdraw/goldhammer）");
         Check(!eventDeck.Any(card => card.Id == "tt6-timeskip"), "retired timeskip card must not be drawn");
         var catalog = new InkEventCatalog(GameRuntime.Data.NarrativeStoryJson!);
         var totalChoices = 0;
 
         foreach (var card in eventDeck)
         {
+            var covered = EventV2Overlay.IsCovered(card.Id);
             var session = catalog.OpenEvent(card.Id);
-            var choiceCount = session?.Choices.Count ?? 1;
+            var choiceCount = covered ? EventV2Overlay.ChoiceCount(card.Id) : session?.Choices.Count ?? 1;
             for (var choiceIndex = 0; choiceIndex < choiceCount; choiceIndex++)
             {
                 totalChoices++;
@@ -1281,8 +1285,16 @@ internal static class RunSmokeTests
                 run.DebugSetEventCard(card.Id);
                 Check(run.PendingEventId == card.Id, $"{card.Id}: DebugSetEventCard must open the named event");
                 Check(run.PendingEventTitle == card.Name, $"{card.Id}: panel title must be the card name (网页 nodeShell title=card.name)");
-                Check(run.EventIntro == (session?.Intro ?? ""), $"{card.Id}: EventIntro must surface the ink knot intro");
-                if (session is not null)
+                // intro 一律来自 ink 结点（v2 覆盖事件网页也展示 ink intro，flow.js:249）
+                Check(run.EventIntro == (session?.Intro ?? ""), $"{card.Id}: EventIntro must surface the ink knot intro (v2 覆盖事件同款)");
+                if (covered)
+                {
+                    // v2 覆盖：只暴露 V2 表选项；ink 的 v2 前旧文案选项（「以血换物」「抡起动力锤」等）不得泄漏
+                    Check(run.EventChoices.All(choice => choice.Id.StartsWith("v2_", StringComparison.Ordinal)),
+                        $"{card.Id}: v2 覆盖事件只暴露 V2 表选项（ink v2 前旧文案不泄漏）");
+                    CheckV2ChoiceTexts(card.Id, run.EventChoices);
+                }
+                else if (session is not null)
                 {
                     Check(run.EventChoices.Count == session.Choices.Count, $"{card.Id}: choice count must match the ink knot");
                     Check(run.EventChoices.All(choice => choice.Id.Length > 0 && !choice.Label.Contains("@@", StringComparison.Ordinal)),
@@ -1293,10 +1305,85 @@ internal static class RunSmokeTests
                 var coinsBefore = run.Resources.Coins;
                 var fragsBefore = run.Fragments;
                 var result = run.ChooseEvent(choiceIndex);
-                Check(result.Text.Length > 0 || effect == RunState.EventContinueChoiceId,
-                    $"{card.Id} 选项[{choiceIndex}]({effect}): ink 结点推进应有后果文本（narrate() 口径）");
+                if (!covered)
+                    Check(result.Text.Length > 0 || effect == RunState.EventContinueChoiceId,
+                        $"{card.Id} 选项[{choiceIndex}]({effect}): ink 结点推进应有后果文本（narrate() 口径；v2 覆盖事件 run() 直调无后果文本）");
                 switch (effect)
                 {
+                    // —— 批次 4c-fix：v2 覆盖层落地（对照 flow.js V2 表 run() 闭包，逐项）——
+                    case EventV2Overlay.MysteryReceive:   // flow.js:279
+                        Check(run.Phase == RunPhase.Ready && run.Fragments == fragsBefore + 1 && run.Resources.Coins == coinsBefore + 2,
+                            "tt6-mystery 接收补给: 碎片 ×1 + 2 币（flow.js:279）");
+                        Check(run.OwnedCards.All(x => x.Card.Id != TokenCraft.TokenColorId),
+                            "tt6-mystery: 不直发彩色令牌卡（v2 落碎片）");
+                        Check(result.Text.Contains("获得彩色令牌碎片"), "tt6-mystery: 落地文案含碎片提示（网页 gainFragment log）");
+                        break;
+                    case EventV2Overlay.SystemSupplyReceive:   // flow.js:282-285
+                        Check(run.Phase == RunPhase.Ready && run.Fragments == fragsBefore + 1
+                            && (run.OwnedCards.Any(x => x.Card.Id == "tt-wood") || run.PendingRewards.Any(x => x.Card.Id == "tt-wood")),
+                            "tt6-systemsupply 接收补给: 碎片 ×1 + 木材卡 ×1（flow.js:282-285）");
+                        break;
+                    case EventV2Overlay.DemonAccept:   // flow.js:289-293
+                    {
+                        Check(run.Phase == RunPhase.Chest && run.Hp == Math.Max(1, hpBefore - 5),
+                            "tt6-demondeal 成交: -5 血（不低于 1）并进入开箱（flow.js:289-290）");
+                        Check(result.Text.Contains("军用保险柜"), "tt6-demondeal 成交: 落地文案=「恶魔收走了 5 点生命力…」（flow.js:291）");
+                        var large = run.PeekNextChest();
+                        Check(large.Kind == "large", "tt6-demondeal 成交: 大宝箱（恶魔的报酬，flow.js:292）");
+                        run.OpenNextChest();
+                        while (run.Phase == RunPhase.Chest) run.OpenNextChest();
+                        Check(run.Phase == RunPhase.Ready, "tt6-demondeal 成交: 开完回 Ready");
+                        break;
+                    }
+                    case EventV2Overlay.DemonRefuse:   // flow.js:294
+                        Check(run.Phase == RunPhase.Ready && run.Hp == hpBefore && result.Text == "你顶住了诱惑，继续赶路",
+                            "tt6-demondeal 拒绝: 无事发生（flow.js:294）");
+                        break;
+                    case EventV2Overlay.AirdropWood:   // flow.js:302
+                        Check(run.Phase == RunPhase.Ready
+                            && (run.OwnedCards.Any(x => x.Card.Id == "tt-wood") || run.PendingRewards.Any(x => x.Card.Id == "tt-wood")),
+                            "tt6-airdrop 木材: 木材卡 ×1 入包（flow.js:302）");
+                        break;
+                    case EventV2Overlay.AirdropRations:   // flow.js:303
+                        Check(run.Phase == RunPhase.Ready
+                            && (run.OwnedCards.Any(x => x.Card.Id == "tt-rations") || run.PendingRewards.Any(x => x.Card.Id == "tt-rations")),
+                            "tt6-airdrop 口粮: 口粮卡 ×1 入包（flow.js:303）");
+                        break;
+                    case EventV2Overlay.AirdropPeach:   // flow.js:304
+                        Check(run.Phase == RunPhase.Ready && run.Hp == Math.Min(run.MaxHp, hpBefore + 6) && result.Text.Contains("一颗鲜桃"),
+                            "tt6-airdrop 桃: 回复 6 血（flow.js:304）");
+                        break;
+                    case EventV2Overlay.AirdropPotion:   // flow.js:297+305
+                    {
+                        var potionIds = universe.Where(c => c.Type == "道具" && LootTables.IsRandomObtainable(c, GameRuntime.Data)
+                            && (c.Name.Contains("药水", StringComparison.Ordinal) || c.Name == "能量饮料")).Select(c => c.Id).ToHashSet();
+                        var granted = run.OwnedCards.Select(x => x.Card).Concat(run.PendingRewards.Select(x => x.Card))
+                            .Any(c => potionIds.Contains(c.Id));
+                        Check(run.Phase == RunPhase.Ready && granted,
+                            "tt6-airdrop 随机药水: 从药水池（道具+isRandomObtainable+药水/能量饮料）发 1 张（flow.js:297,305）");
+                        break;
+                    }
+                    case EventV2Overlay.ChestDrawOpen:   // flow.js:309-313
+                    {
+                        Check(run.Phase == RunPhase.Chest, "tt6-chestdraw 开箱: 进入开箱队列");
+                        var preview = run.PeekNextChest();
+                        Check(preview.Kind is "large" or "medium" or "small",
+                            "tt6-chestdraw 开箱: 箱型=大/中/小均匀抽 1（flow.js:310-311）");
+                        run.OpenNextChest();
+                        while (run.Phase == RunPhase.Chest) run.OpenNextChest();
+                        Check(run.Phase == RunPhase.Ready, "tt6-chestdraw 开箱: 结算回 Ready");
+                        break;
+                    }
+                    case EventV2Overlay.GoldhammerTake:   // flow.js:316
+                        Check(run.Phase == RunPhase.Ready
+                            && (run.OwnedCards.Any(x => x.Card.Id == EventV2Overlay.GoldhammerCardId)
+                                || run.PendingRewards.Any(x => x.Card.Id == EventV2Overlay.GoldhammerCardId)),
+                            "tt6-goldhammer 收下: 直发卡牌「闪金之锤」（非锤击敌人，flow.js:316）");
+                        break;
+                    // —— ink 纯净链（非覆盖结点，回归兜底）——
+                    // （被 v2 覆盖的 ink 旧效果键 chest_*/airdrop_*/demondeal_trade/goldhammer_strike
+                    //   /mystery_supply/systemsupply_restock 在在役卡池已不可达，断言移除；
+                    //   ink 结点级走查兜底保留在 tests/Narrative）——
                     case "goldmine_safe":
                         Check(run.Phase == RunPhase.Ready && run.Resources.Coins == coinsBefore + 3, "goldmine_safe: +3 币回 Ready");
                         break;
@@ -1304,46 +1391,9 @@ internal static class RunSmokeTests
                         Check(run.Phase == RunPhase.Ready && run.Resources.Coins == coinsBefore + 6 && run.Hp == Math.Max(1, hpBefore - 3),
                             "goldmine_deep: +6 币 -3 血（不低于 1）");
                         break;
-                    case "airdrop_wood":
-                        Check(run.Phase == RunPhase.Ready && run.Resources.Wood == 0
-                            && (run.OwnedCards.Any(x => x.Card.Id == "tt-wood") || run.PendingRewards.Any(x => x.Card.Id == "tt-wood")),
-                            "airdrop_wood: 木材卡入包（网页 grantEventCard→addItem，不落裸资源）");
-                        break;
-                    case "airdrop_rations":
-                        Check(run.Phase == RunPhase.Ready && run.Resources.Rations == 0
-                            && (run.OwnedCards.Any(x => x.Card.Id == "tt-rations") || run.PendingRewards.Any(x => x.Card.Id == "tt-rations")),
-                            "airdrop_rations: 口粮卡入包（不落裸资源）");
-                        break;
-                    case "airdrop_heal":
-                        Check(run.Phase == RunPhase.Ready && run.Hp == Math.Min(run.MaxHp, hpBefore + 3), "airdrop_heal: +3 血");
-                        break;
-                    case "chest_small":
-                    {
-                        var small = run.PeekNextChest();
-                        Check(run.Phase == RunPhase.Chest && small.Kind == "small" && !small.RequiresChoice,
-                            "chest_small: 进入开箱队列（小宝箱随机 1 张）");
-                        run.OpenNextChest();
-                        Check(run.Phase == RunPhase.Ready, "chest_small: 开完回 Ready");
-                        break;
-                    }
-                    case "chest_medium":
-                    {
-                        var medium = run.PeekNextChest();
-                        Check(run.Phase == RunPhase.Chest && medium.Kind == "medium" && medium.RequiresChoice,
-                            "chest_medium: 三选一密封物资箱");
-                        run.OpenNextChest(0);
-                        Check(run.Phase == RunPhase.Ready, "chest_medium: 选完回 Ready");
-                        break;
-                    }
                     case "timeskip_move":
                         Check(run.Phase == RunPhase.Ready && run.TrackPosition == run.Map.Layers[0].Nodes.First(n => n.Type == RunRoomType.Event).Idx,
                             "timeskip_move: 链式移动已停用（原地不动回 Ready）");
-                        break;
-                    case "demondeal_trade":
-                        Check(run.Phase == RunPhase.Ready && run.Hp == Math.Max(1, hpBefore - 1), "demondeal_trade: -1 血（不低于 1）");
-                        Check(run.OwnedCards.Any(x => x.Card.Rarity == "传说" && x.Card.Type is "装备" or "武术" or "法术")
-                            || run.PendingRewards.Any(x => x.Card.Rarity == "传说" && x.Card.Type is "装备" or "武术" or "法术"),
-                            "demondeal_trade: 传说（装备/武术/法术）物品入包");
                         break;
                     case "bandits_fight":
                     {
@@ -1357,31 +1407,8 @@ internal static class RunSmokeTests
                         Check(run.Phase == RunPhase.Ready, "bandits_fight: 战利品结算回 Ready");
                         break;
                     }
-                    case "mystery_supply":
-                        Check(run.Phase == RunPhase.Ready && run.Fragments == fragsBefore + 1 && run.Resources.Coins == coinsBefore + 2,
-                            "mystery_supply: 碎片 ×1 + 2 币（网页 v2 实跑口径，批次 4b 冻结）");
-                        Check(run.OwnedCards.All(x => x.Card.Id != TokenCraft.TokenColorId),
-                            "mystery_supply: 不直发员工通行证A 卡（v2 改碎片）");
-                        break;
-                    case "goldhammer_strike":
-                        if (run.Phase == RunPhase.Ready)
-                            Check(run.Resources.Coins == coinsBefore + 2, "goldhammer_strike: 一击制敌 +2 币");
-                        else
-                        {
-                            Check(run.Phase == RunPhase.Battle && run.Encounter.Count == 1 && run.Encounter[0].Hp > 0,
-                                "goldhammer_strike: 重击 -5 血后开战");
-                            run.CompleteBattle(true);
-                            while (run.Phase == RunPhase.Chest) run.OpenNextChest();
-                            Check(run.Phase == RunPhase.Ready, "goldhammer_strike: 战斗结算回 Ready");
-                        }
-                        break;
                     case "relief_heal":
                         Check(run.Phase == RunPhase.Ready && run.Hp == Math.Min(run.MaxHp, hpBefore + 6), "relief_heal: +6 血");
-                        break;
-                    case "systemsupply_restock":
-                        Check(run.Phase == RunPhase.Ready && run.Fragments == fragsBefore + 1
-                            && (run.OwnedCards.Any(x => x.Card.Id == "tt-wood") || run.PendingRewards.Any(x => x.Card.Id == "tt-wood")),
-                            "systemsupply_restock: 碎片 ×1 + 木材卡入包（v2 口径）");
                         break;
                     case RunState.EventContinueChoiceId when card.Id == RunState.ShoeShopCardId:
                         Check(run.Fragments == fragsBefore + 1, "修鞋铺: 继续 → 碎片 ×1（复原交互见下一组）");
@@ -1393,8 +1420,9 @@ internal static class RunSmokeTests
                 }
             }
         }
-        // 在役卡池的全部选项一个不漏：9 结点的 13 个 ink 选项 + 修鞋铺单按钮（timeskip 结点在其后补走查）
-        Check(totalChoices == 14, $"event deck must walk every choice exactly once (13 ink + 修鞋铺), got {totalChoices}");
+        // 在役卡池全部选项一个不漏：v2 覆盖 10 选项（mystery 1+systemsupply 1+demondeal 2+airdrop 4
+        // +chestdraw 1+goldhammer 1）+ ink 纯净链 4 选项（goldmine 2+bandits 1+relief 1）+ 修鞋铺 1
+        Check(totalChoices == 15, $"event deck must walk every choice exactly once (v2 覆盖 10 + ink 4 + 修鞋铺 1), got {totalChoices}");
 
         // —— 时空孔隙（tt6-timeskip，cards-sync 已 retire、事件格永不触发）：ink 结点仍在，
         //    用测试 seam 走查其唯一选项的落地 = 链式移动停用 → 原地不动回 Ready ——
@@ -1406,7 +1434,47 @@ internal static class RunSmokeTests
         timeskip.ChooseEvent(0);
         Check(timeskip.Phase == RunPhase.Ready && timeskip.TrackPosition == timeskipPos,
             "timeskip_move: 链式移动已停用（cancelLegacyChainMove）→ 原地不动回 Ready");
-        Console.WriteLine($"[4c] 事件落地矩阵：{eventDeck.Count} 张在役事件卡 + retire 的 timeskip 结点，全部 {totalChoices + 1} 个选项逐一断言");
+        Console.WriteLine($"[4c-fix] 事件落地矩阵：{eventDeck.Count} 张在役事件卡（v2 覆盖 6 张 10 选项 + ink 纯净链 4 选项 + 修鞋铺 1）+ retire 的 timeskip 结点，全部 {totalChoices + 1} 个选项逐一断言");
+    }
+
+    /// <summary>v2 覆盖事件的选项文案/色调逐项对照真源 flow.js V2 表（tt6-airdrop 药水 detail 为运行时模板）。</summary>
+    private static void CheckV2ChoiceTexts(string cardId, IReadOnlyList<RunEventChoice> choices)
+    {
+        switch (cardId)
+        {
+            case "tt6-mystery":
+                Check(choices.Count == 1 && choices[0] is { Label: "接收补给", Detail: "获得彩色令牌碎片，+2 币", Tone: "ok" },
+                    "tt6-mystery: 选项=「接收补给｜获得彩色令牌碎片，+2 币｜ok」（flow.js:279）");
+                break;
+            case "tt6-systemsupply":
+                Check(choices.Count == 1 && choices[0] is { Label: "接收补给", Detail: "获得彩色令牌碎片，木材卡 ×1", Tone: "ok" },
+                    "tt6-systemsupply: 选项=「接收补给｜获得彩色令牌碎片，木材卡 ×1｜ok」（flow.js:282）");
+                break;
+            case "tt6-demondeal":
+                Check(choices.Count == 2
+                    && choices[0] is { Label: "成交", Detail: "-5 血，获得 1 个大宝箱", Tone: "danger" }
+                    && choices[1] is { Label: "拒绝", Detail: "无事发生", Tone: "" },
+                    "tt6-demondeal: 成交(danger)｜拒绝 文案对照 flow.js:289-294");
+                break;
+            case "tt6-airdrop":
+                Check(choices.Count == 4
+                    && choices[0] is { Label: "木材", Detail: "木材卡 ×1", Tone: "" }
+                    && choices[1] is { Label: "口粮", Detail: "口粮卡 ×1", Tone: "" }
+                    && choices[2] is { Label: "桃", Detail: "回复 6 血", Tone: "ok" }
+                    && choices[3].Label == "随机药水" && choices[3].Tone == "ok"
+                    && (choices[3].Detail == "（补给已耗尽）"
+                        || (choices[3].Detail.StartsWith("获得【", StringComparison.Ordinal) && choices[3].Detail.EndsWith("】", StringComparison.Ordinal))),
+                    "tt6-airdrop: 木材/口粮/桃/随机药水 文案对照 flow.js:302-305（药水 detail 运行时抽定卡名）");
+                break;
+            case "tt6-chestdraw":
+                Check(choices.Count == 1 && choices[0] is { Label: "开箱", Detail: "从大、中、小宝箱中随机抽取 1 个", Tone: "ok" },
+                    "tt6-chestdraw: 选项=「开箱｜从大、中、小宝箱中随机抽取 1 个｜ok」（flow.js:310）");
+                break;
+            case "tt6-goldhammer":
+                Check(choices.Count == 1 && choices[0] is { Label: "收下", Detail: "获得卡牌「闪金之锤」", Tone: "ok" },
+                    "tt6-goldhammer: 选项=「收下｜获得卡牌「闪金之锤」｜ok」（flow.js:316）");
+                break;
+        }
     }
 
     /// <summary>修鞋铺 cmtn7qttxqo4（4b 移交）：碎片 ×1 + openPocketRestore(1) 复原 1 张消耗卡；空口袋直接收敛；未知 cardId 兜底。</summary>

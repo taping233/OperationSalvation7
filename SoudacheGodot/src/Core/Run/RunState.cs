@@ -76,6 +76,8 @@ public sealed class RunState
     private string? _pendingEventTitle;
     private bool _eventRestorePending;
     private bool _eventSuspended;
+    // 批次 4c-fix：tt6-airdrop 开面板时即抽定的药水（网页 V2 表在选项构建时掷定，detail 同步展示卡名）
+    private RunCard? _v2AirdropPotion;
     private RunChestPreview? _chestPreview;
     private IReadOnlyList<RunCard>? _chestCards;
     private bool _chestSuspended;
@@ -299,6 +301,7 @@ public sealed class RunState
         _chestPreview = null; _chestCards = null; _chestSuspended = false;
         // 事件进行中不入档（网页只在稳定落点 saveGame）——恢复时事件面板相关暂存一并清空
         _eventSession = null; _pendingEventTitle = null; _eventRestorePending = false; _eventSuspended = false;
+        _v2AirdropPotion = null;
         _altarRewardPending = false;
     }
 
@@ -525,6 +528,7 @@ public sealed class RunState
         _pendingEventId = null; _pendingEventTitle = null; _eventSession = null;
         _eventChoices = Array.Empty<RunEventChoice>();
         _eventRestorePending = false; _eventSuspended = false;
+        _v2AirdropPotion = null;
         Phase = RunPhase.Ready;
     }
     public RunEventResult ResolveEvent()
@@ -587,11 +591,29 @@ public sealed class RunState
     {
         _pendingEventId = card.Id;
         _pendingEventTitle = card.Name;
+        _v2AirdropPotion = null;
         // 每个事件新建 Story（网页 eventNarrative 语义：状态独立，事件间互不串线）
         _eventSession = _eventNarrative?.OpenEvent(card.Id);
-        _eventChoices = _eventSession is not null
-            ? _eventSession.Choices.Select(choice => new RunEventChoice(choice.Effect, choice.Label, choice.Detail, choice.Tone)).ToArray()
-            : new[] { new RunEventChoice(EventContinueChoiceId, "继 续", "", "") };
+        // 批次 4c-fix：事件 v2 覆盖层（真源 game.run.flow.js:275-318 V2 表）。6 张 v2 定版事件卡的
+        // 选项文案+效果按 EventV2Overlay 覆盖（ink 里是 v2 前旧文案），intro 仍用 ink（网页同款）；
+        // tt6-airdrop 的药水在开面板时掷定（网页 V2 表在选项构建时抽定，detail 同步展示卡名）。
+        if (card.Id == EventV2Overlay.AirdropCardId) _v2AirdropPotion = RollAirdropPotion();
+        var v2Choices = EventV2Overlay.BuildChoices(card.Id, _v2AirdropPotion?.Name);
+        _eventChoices = v2Choices
+            ?? (_eventSession is not null
+                ? _eventSession.Choices.Select(choice => new RunEventChoice(choice.Effect, choice.Label, choice.Detail, choice.Tone)).ToArray()
+                : new[] { new RunEventChoice(EventContinueChoiceId, "继 续", "", "") });
+    }
+
+    /// <summary>
+    /// tt6-airdrop「随机药水」池（网页 flow.js:297）：卡库 type=道具 && isRandomObtainable
+    /// &&（名字含「药水」或=能量饮料），均匀抽 1；池空返回 null（detail 显「补给已耗尽」）。
+    /// </summary>
+    private RunCard? RollAirdropPotion()
+    {
+        var pool = _lootCardPool.Where(card => card.Type == "道具" && LootTables.IsRandomObtainable(card, _data)
+            && (card.Name.Contains("药水", StringComparison.Ordinal) || card.Name == EventV2Overlay.PotionFallbackName)).ToList();
+        return pool.Count > 0 ? pool[Rng.NextInt(pool.Count)] : null;
     }
 
     public RunEventResult ChooseEvent(int choiceIndex)
@@ -602,8 +624,9 @@ public sealed class RunState
         if (choiceIndex < 0 || choiceIndex >= _eventChoices.Count) throw new ArgumentOutOfRangeException(nameof(choiceIndex));
         var choice = _eventChoices[choiceIndex];
         var cardId = _pendingEventId!;
-        // 网页 narrate()：choice.choose() 的后果文本（ink 结点推进；无结点事件为空）
-        var narration = _eventSession?.Choose(choiceIndex) ?? string.Empty;
+        // 网页 narrate()：choice.choose() 的后果文本（ink 结点推进；无结点事件为空）。
+        // 批次 4c-fix：v2 覆盖事件的 run() 直调、不推进 ink（flow.js:252-258）——无后果文本。
+        var narration = EventV2Overlay.IsCovered(cardId) ? string.Empty : _eventSession?.Choose(choiceIndex) ?? string.Empty;
         _pendingEventId = null; _pendingEventTitle = null; _eventSession = null;
         _eventChoices = Array.Empty<RunEventChoice>();
         return ApplyEventChoice(cardId, choice.Id, narration);
@@ -618,9 +641,11 @@ public sealed class RunState
 
     /// <summary>
     /// effect 字符串落地表（对照网页 eventChoiceSpec effects 映射 + v2 定版）：
-    /// 10 个 ink 结点的全部 @@effect@@ + 无结点事件的 continue。
-    /// 语义分歧注记：mystery_supply/systemsupply_restock 按网页 v2 实跑口径落碎片（批次 4b 已冻结），
-    /// ink effects 映射里的「直发员工通行证A」是死路径；timeskip_move 的链式移动已随 v0.53 停用（批次 3 口径）。
+    /// 10 个 ink 结点的全部 @@effect@@ + 无结点事件的 continue + v2 覆盖层（v2_*，批次 4c-fix）。
+    /// 语义分歧注记：mystery_supply/systemsupply_restock 按网页 v2 实跑口径落碎片（批次 4b 已冻结，
+    /// 4c-fix 起与 V2 覆盖分支同口径、互为兜底）；timeskip_move 的链式移动已随 v0.53 停用（批次 3 口径）。
+    /// ink 结点里被 V2 覆盖的旧效果键（demondeal_trade/goldhammer_strike/chest_*/airdrop_* 等）
+    /// 保留作 ink 纯净链兜底——网页 effects 映射同样保留这些死路径。
     /// </summary>
     private RunEventResult ApplyEventChoice(string cardId, string effect, string narration)
     {
@@ -628,6 +653,53 @@ public sealed class RunState
         {
             var text = narration.Length == 0 ? extra ?? "" : extra is null ? narration : narration + "\n" + extra;
             return new RunEventResult(text, coins, 0, 0, createdChest);
+        }
+        string FragmentLine() => string.Format(EventV2Overlay.FragmentGainTemplate, Fragments);
+        // —— 批次 4c-fix：事件 v2 覆盖层落地（真源 game.run.flow.js:277-318 V2 表的 run() 闭包；
+        //    选项文案/色调/后果文案见 EventV2Overlay 表；v2 分支无 ink 后果文本，extra 即网页 UI.log 文案）——
+        switch (effect)
+        {
+            case EventV2Overlay.MysteryReceive:   // flow.js:279 碎片 ×1 + 2 币
+                GrantFragments(1); Resources.Coins += 2; Phase = RunPhase.Ready;
+                return Result(2, extra: FragmentLine());
+            case EventV2Overlay.SystemSupplyReceive:   // flow.js:282-285 碎片 ×1 + 木材卡 ×1
+                GrantFragments(1);
+                GrantEventCard(FindPoolCard("tt-wood") ?? new RunCard("tt-wood", "木材", "资源", "古朴", 2));
+                Phase = RunPhase.Ready;
+                return Result(extra: FragmentLine());
+            case EventV2Overlay.DemonAccept:   // flow.js:289-293 -5 血（不低于 1）+ 大宝箱「恶魔的报酬」
+                Hp = Math.Max(1, Hp - 5);
+                _pendingChests.Enqueue(("large", false, false)); _returnAfterChest = RunPhase.Ready; Phase = RunPhase.Chest;
+                return Result(createdChest: true, extra: EventV2Overlay.DemonAcceptLog);
+            case EventV2Overlay.DemonRefuse:   // flow.js:294 无事发生
+                Phase = RunPhase.Ready;
+                return Result(extra: EventV2Overlay.DemonRefuseLog);
+            case EventV2Overlay.AirdropWood:   // flow.js:302 木材卡 ×1（物资以卡牌入包）
+                GrantEventCard(FindPoolCard("tt-wood") ?? new RunCard("tt-wood", "木材", "资源", "古朴", 2));
+                Phase = RunPhase.Ready; return Result();
+            case EventV2Overlay.AirdropRations:   // flow.js:303 口粮卡 ×1
+                GrantEventCard(FindPoolCard("tt-rations") ?? new RunCard("tt-rations", "口粮", "资源", "古朴", 2));
+                Phase = RunPhase.Ready; return Result();
+            case EventV2Overlay.AirdropPeach:   // flow.js:304 回复 6 血
+                Hp = Math.Min(MaxHp, Hp + 6); Phase = RunPhase.Ready;
+                return Result(extra: EventV2Overlay.AirdropPeachLog);
+            case EventV2Overlay.AirdropPotion:   // flow.js:305 发放开面板时抽定的药水；池空无事发生
+            {
+                var potion = _v2AirdropPotion; _v2AirdropPotion = null;
+                GrantEventCard(potion);
+                Phase = RunPhase.Ready; return Result();
+            }
+            case EventV2Overlay.ChestDrawOpen:   // flow.js:309-313 大/中/小均匀抽 1 箱（「你撬开了一个未知的箱子」）
+            {
+                var kinds = new[] { "large", "medium", "small" };
+                _pendingChests.Enqueue((kinds[Rng.NextInt(kinds.Length)], false, false));
+                _returnAfterChest = RunPhase.Ready; Phase = RunPhase.Chest;
+                return Result(createdChest: true, extra: EventV2Overlay.ChestDrawLog);
+            }
+            case EventV2Overlay.GoldhammerTake:   // flow.js:316 直发卡牌「闪金之锤」（cmtn0xt0zr7）
+                GrantEventCard(FindPoolCard(EventV2Overlay.GoldhammerCardId)
+                    ?? new RunCard(EventV2Overlay.GoldhammerCardId, EventV2Overlay.GoldhammerCardName, "武术", "衍生"));
+                Phase = RunPhase.Ready; return Result();
         }
         switch (effect)
         {
@@ -671,7 +743,8 @@ public sealed class RunState
                 return Result(extra: $"{_encounter[0].Name}一伙（×{gangN}）拦住了去路！");
             }
             case "mystery_supply":
-                // 网页 v2（tt6-mystery 接收补给）：彩色令牌碎片 ×1 + 2 币（不再直发彩色令牌卡，批次 4b 口径）
+                // ink 纯净链兜底（v2 覆盖后 tt6-mystery 走 v2_mystery_receive，落地同口径）：
+                // 网页 v2 = 碎片 ×1 + 2 币（不再直发彩色令牌卡，批次 4b 口径）
                 GrantFragments(1); Resources.Coins += 2; Phase = RunPhase.Ready; return Result(2);
             case "goldhammer_strike":
             {
@@ -690,7 +763,8 @@ public sealed class RunState
             case "relief_heal":
                 Hp = Math.Min(MaxHp, Hp + 6); Phase = RunPhase.Ready; return Result();
             case "systemsupply_restock":
-                // 网页 v2（tt6-systemsupply 接收补给）：彩色令牌碎片 ×1 + 木材卡 ×1（批次 4b 口径）
+                // ink 纯净链兜底（v2 覆盖后 tt6-systemsupply 走 v2_systemsupply_receive，落地同口径）：
+                // 网页 v2 = 碎片 ×1 + 木材卡 ×1（批次 4b 口径）
                 GrantFragments(1);
                 GrantEventCard(FindPoolCard("tt-wood") ?? new RunCard("tt-wood", "木材", "资源", "古朴", 2));
                 Phase = RunPhase.Ready; return Result();
