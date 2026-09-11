@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Soudache;
+using SoudacheGodot.App;
 
 internal static class CoreSmokeTests
 {
@@ -22,6 +24,7 @@ internal static class CoreSmokeTests
         SaveRoundTripsAndFallsBackToBackup();
         ClearSlotRemovesSaveAndBackup();
         BattleSfxTrackerProducesSoundJsKeys();
+        CoreUiSnapshotsAssembleInterfaceFields();
         Console.WriteLine($"CORE_SMOKE_OK checks={_checks}");
         return 0;
     }
@@ -131,6 +134,52 @@ internal static class CoreSmokeTests
         Check(drained.SequenceEqual(new[] { "card", "hit", "card", "hurt", "card", "heal", "hurt", "victory", "defeat" }),
             "drain must return every requested key in order");
         Check(sfx.Drain().Count == 0, "drain must clear the pending queue");
+    }
+
+    // 批次 8-prep 接口 [6b'→A]：RunUiSnapshot 明细行的纯组装逻辑（CoreUiSnapshots，adapter 双路径共用）。
+    // 逐项断言 TokenCounts / BaseStash / BasePocket / CollectedIds 的字段映射与口径。
+    private static void CoreUiSnapshotsAssembleInterfaceFields()
+    {
+        // TokenCounts：只收令牌三卡、同 id 计数、非令牌与缺卡不出键
+        var stacks = new[]
+        {
+            new RunCardStack(new RunCard("tt-token-gold", "员工通行证B", "资源", "传说"), 2),
+            new RunCardStack(new RunCard("builtin-sha", "初始攻击", "武术", "初始", 0, false, true), 5),
+            new RunCardStack(new RunCard("cmtmvq6ss84l", "彩色令牌", "道具", "传说"), 1)
+        };
+        var tokens = CoreUiSnapshots.TokenCounts(stacks);
+        Check(tokens.Count == 2 && tokens["tt-token-gold"] == 2 && tokens["cmtmvq6ss84l"] == 1,
+            "token counts must track only the three pass/token ids");
+        Check(CoreUiSnapshots.TokenCounts(Array.Empty<RunCardStack>()).Count == 0, "empty stacks must yield no token keys");
+        Check(CoreUiSnapshots.TokenCardIds.SequenceEqual(new[] { "tt-token-gold", "tt-token-color", "cmtmvq6ss84l" }),
+            "token id list drifted from cards.json ids");
+
+        // StashRows：字段映射（cost 由回调注入、卖价下限 1、收藏态/材料/cls 透传、保持仓库栈顺序）
+        var collected = new HashSet<string>(StringComparer.Ordinal) { "r1" };
+        var stash = new[]
+        {
+            new RunCardStack(new RunCard("r1", "已藏卡", "装备", "稀有", 3, true) { Cls = "侠客" }, 2),
+            new RunCardStack(new RunCard("m1", "木材", "资源", "古朴") { MaterialKind = "wood" }, 4)
+        };
+        var rows = CoreUiSnapshots.StashRows(stash, collected, id => id == "r1" ? 2 : 0);
+        Check(rows.Length == 2 && rows[0].CardId == "r1" && rows[0].Count == 2 && rows[0].Cost == 2, "stash row must map id/count/cost");
+        Check(rows[0].SellPrice == 3 && rows[0].Sellable && rows[0].Collected && rows[0].Cls == "侠客", "stash row must map sell state and collection mark");
+        Check(rows[1].Cost == 0 && rows[1].MaterialKind == "wood" && !rows[1].Collected, "stash row must keep material kind and zero cost");
+        Check(CoreUiSnapshots.StashRows(new[] { new RunCardStack(new RunCard("z", "无价卡", "装备", "古朴", 0, true)) }, collected, _ => 9)[0].SellPrice == 1,
+            "sell price must clamp to at least 1");
+
+        // PocketRows：pocketKeyCost=稀有度价×张数（与 RunBaseState.PocketKeyCost 同源）
+        var pocket = CoreUiSnapshots.PocketRows(new[]
+        {
+            new RunCardStack(new RunCard("p1", "传说残页", "装备", "传说"), 2),
+            new RunCardStack(new RunCard("p2", "初始攻击", "武术", "初始", 0, false, true), 1)
+        });
+        Check(pocket[0].PocketKeyCost == 8 && pocket[1].PocketKeyCost == 1, "pocket rows must carry the rarity-priced restore cost");
+
+        // CollectedIds：全量集合 → 稳定排序（图鉴 isCollected 注入口）
+        var ids = CoreUiSnapshots.CollectedIds(new HashSet<string>(StringComparer.Ordinal) { "tt-gold", "aaa", "zzz" });
+        Check(ids.SequenceEqual(new[] { "aaa", "tt-gold", "zzz" }), "collected ids must be ordinal-sorted for stable snapshots");
+        Console.WriteLine("[8-prep] 快照组装（TokenCounts/BaseStash/BasePocket/CollectedIds）断言通过");
     }
 
     // 批次 4b rider：存档槽动作 RequestClearSlot 的服务端语义（删除存档含 .bak 备份，

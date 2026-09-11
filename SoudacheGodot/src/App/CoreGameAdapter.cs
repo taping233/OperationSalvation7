@@ -72,8 +72,10 @@ public sealed class CoreGameAdapter : ICoreUiPort
         CreateCombat(new[] { new RunEnemy("training", "训练靶机", 36, 2) }, 30);
     }
 
-    public void RequestStartRun(string characterId)
+    public void RequestStartRun(string characterId, int slot = -1)
     {
+        // 接口需求 [7b→B]：开局即绑定游玩档位（对照网页 launch(slot)），纯新档关窗也能走退出落盘链路
+        if (slot >= 0) _activeSaveSlot = slot;
         _runCharacterId = characterId;
         _run = new RunState(DefaultSeed + (ulong)Math.Max(0, CharacterIndex(characterId)), baseState: _base);
         ConfigureRunCardPools(_run);
@@ -301,6 +303,43 @@ public sealed class CoreGameAdapter : ICoreUiPort
                     {
                         var id = actionId["pet:sel:".Length..];
                         _runStatus = target.SetPet(id) ? $"已携带 {PetName(id)} 出战" : "还没有这只宠物";
+                    }
+                    // —— 批次 8-prep 接口 [6b'→A]：仓库页卖出/复原动作（对照网页 openStashItem sellOne/sellAll 与 restoreCard）——
+                    else if (actionId.StartsWith("stash:sell:", StringComparison.Ordinal))
+                    {
+                        var name = actionId["stash:sell:".Length..];
+                        var (ok, qty, coins, why) = target.SellCards(name, 1);
+                        _runStatus = ok ? $"已卖出 {name} ×{qty}，+{coins} 币"
+                            : why switch
+                            {
+                                "collected" => $"【{name}】收藏中受保护——取消收藏后才能卖出",
+                                "material" => "材料是基地的根基，不可卖出换币",
+                                "unsellable" => $"【{name}】不可出售",
+                                _ => $"仓库里没有【{name}】"
+                            };
+                    }
+                    else if (actionId.StartsWith("stash:sellall:", StringComparison.Ordinal))
+                    {
+                        var name = actionId["stash:sellall:".Length..];
+                        var (ok, qty, coins, why) = target.SellCards(name, int.MaxValue);
+                        _runStatus = ok ? $"已全部卖出 {name} ×{qty}，+{coins} 币"
+                            : why switch
+                            {
+                                "collected" => $"【{name}】收藏中受保护——取消收藏后才能卖出",
+                                "material" => "材料是基地的根基，不可卖出换币",
+                                "unsellable" => $"【{name}】不可出售",
+                                _ => $"仓库里没有【{name}】"
+                            };
+                    }
+                    else if (actionId.StartsWith("pocket:restore:", StringComparison.Ordinal))
+                    {
+                        var name = actionId["pocket:restore:".Length..];
+                        var restore = target.RestorePocketWithKeys(name);
+                        _runStatus = restore.Ok && restore.Why == "" ? $"消耗 {restore.Cost} 把钥匙，【{name}】已复原，回到卡牌仓库"
+                            : restore.Why == "sha" ? "初始牌「初始攻击」无需入库——每局自动携带，已直接消耗"
+                            : restore.Why == "full" ? "仓库容量不足，先卖出或扩建仓库"
+                            : restore.Why == "nokey" ? $"钥匙不足：复原这堆卡牌需要 {restore.Cost} 把钥匙——可在仓库把钥匙材料卡「使用」折入储备"
+                            : $"消耗口袋中没有【{name}】";
                     }
                     else if (actionId.StartsWith("collect:", StringComparison.Ordinal))
                     {
@@ -720,7 +759,18 @@ public sealed class CoreGameAdapter : ICoreUiPort
                 InventoryLabels = _base.Stash.Select(stack => $"{stack.Card.Name} ×{stack.Count}").ToArray(),
                 Actions = BuildBaseActions(_base),
                 BasePets = basePets,
-                Collection = collection
+                Collection = collection,
+                // —— 批次 8-prep 接口 [6b'→A]：无局（基地）路径。令牌口径=基地仓库栈 ——
+                Fragments = 0,
+                TokenCounts = CoreUiSnapshots.TokenCounts(_base.Stash),
+                BaseStash = CoreUiSnapshots.StashRows(_base.Stash, _base.Collection, CostOfCard),
+                BasePocket = CoreUiSnapshots.PocketRows(_base.Pocket),
+                BaseKeyCount = _base.KeyCount,
+                BaseBagCapacity = _base.BagCapacity,
+                BaseBagMax = RunRules.BagMax,
+                BaseSafeMax = RunRules.SafeMax,
+                BaseStashMax = RunRules.StashMax,
+                CollectedIds = CoreUiSnapshots.CollectedIds(_base.Collection)
             });
             return;
         }
@@ -773,9 +823,23 @@ public sealed class CoreGameAdapter : ICoreUiPort
             Nodes = nodes,
             Event = BuildEventSnapshot(_run),
             BasePets = basePets,
-            Collection = collection
+            Collection = collection,
+            // —— 批次 8-prep 接口 [6b'→A]：有局路径。令牌口径=随身背包栈（对局内合成消耗背包）——
+            Fragments = _run.Fragments,
+            TokenCounts = CoreUiSnapshots.TokenCounts(_run.OwnedCards),
+            BaseStash = CoreUiSnapshots.StashRows(_run.Base.Stash, _run.Base.Collection, CostOfCard),
+            BasePocket = CoreUiSnapshots.PocketRows(_run.Base.Pocket),
+            BaseKeyCount = _run.Base.KeyCount,
+            BaseBagCapacity = _run.Base.BagCapacity,
+            BaseBagMax = RunRules.BagMax,
+            BaseSafeMax = RunRules.SafeMax,
+            BaseStashMax = RunRules.StashMax,
+            CollectedIds = CoreUiSnapshots.CollectedIds(_run.Base.Collection)
         });
     }
+
+    /// <summary>卡牌费用查询（仓库明细行 meta「N费·类型」用；目录缺失=0）。</summary>
+    private int CostOfCard(string cardId) => _catalog.TryGet(new StableId(cardId), out var definition) && definition is not null ? definition.Cost : 0;
 
     /// <summary>宠物页快照（批次 5）：pets.json 全表 + 基地档拥有/等级/携带/升级状态。</summary>
     private PetUiSnapshot[] BuildPetSnapshot(RunBaseState state)

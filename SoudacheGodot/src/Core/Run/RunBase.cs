@@ -254,11 +254,38 @@ public sealed class RunBaseState
         DepositResource(materialKind, total);
         return new(true, qty, total, materialKind, "");
     }
-    public bool RestorePocket(string name, int count = 1)
+    // ---------- 消耗口袋复原（批次 8-prep 接口 [6b'→A]，ported from base.js:329-355 pocketKeyCost/restore）----------
+    // 在仓库中使用钥匙按稀有度计价复原：古朴 1 / 稀有 2 / 史诗 3 / 传说 4；整堆复原 = 单张价 × 张数。
+
+    /// <summary>base.js pocketKeyCost：整堆复原钥匙价 = 稀有度单价（古朴1/稀有2/史诗3/传说4，缺省 1）× 张数。</summary>
+    public static int PocketKeyCost(RunCardStack stack)
     {
-        var stack = Pocket.FirstOrDefault(x => x.Card.Name == name); if (stack is null || count <= 0 || count > stack.Count || StashRoom < count) return false;
-        stack.Count -= count; if (stack.Count == 0) Pocket.Remove(stack);
-        return DepositCards(new[] { new RunCardStack(stack.Card, count, false) });
+        ArgumentNullException.ThrowIfNull(stack);
+        var per = stack.Card.Rarity switch { "古朴" => 1, "稀有" => 2, "史诗" => 3, "传说" => 4, _ => 1 };
+        return per * stack.Count;
+    }
+
+    /// <summary>base.js restore(i) 的结果：Ok=成功入仓；Why 取 ""（成功）/"sha"/"full"/"nokey"/"empty"，Cost=本次消耗（nokey 时=所需）钥匙数。</summary>
+    public readonly record struct PocketRestoreResult(bool Ok, string Why, int Cost);
+
+    /// <summary>
+    /// base.js restore(i)：消耗口袋整堆复原回卡牌仓库。
+    /// 「初始攻击」直接销毁不入仓（每局自动重带，why="sha"）；裸钥匙不足 why="nokey"
+    /// （网页 Core 判定用 data.keys 裸钥匙而非 keyCount 折算——hub UI 的按钮置灰用折算值属网页自身不一致，移植按 Core 行为）；
+    /// 仓库容量不足 why="full"。
+    /// </summary>
+    public PocketRestoreResult RestorePocketWithKeys(string name)
+    {
+        var stack = Pocket.FirstOrDefault(x => x.Card.Name == name);
+        if (stack is null) return new(false, "empty", 0);
+        if (stack.Card.IsInitialAttack) { Pocket.Remove(stack); return new(true, "sha", 0); }
+        var cost = PocketKeyCost(stack);
+        if (Keys < cost) return new(false, "nokey", cost);
+        if (StashRoom < stack.Count) return new(false, "full", 0);
+        Keys -= cost;
+        Pocket.Remove(stack);
+        return DepositCards(new[] { new RunCardStack(stack.Card, stack.Count, false) })
+            ? new PocketRestoreResult(true, "", cost) : new(false, "full", cost);
     }
     public (bool Ok, int Quantity, int Coins, string Why) SellCards(string name, int count)
     {

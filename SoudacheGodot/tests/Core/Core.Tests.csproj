@@ -7,6 +7,9 @@
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
   </PropertyGroup>
   <ItemGroup>
+    <!-- 批次 8-prep：CoreUiPort/CoreUiSnapshots 均为纯 C# 快照契约与组装（无 Godot 依赖），可在此直接断言 -->
+    <Compile Include="..\..\src\App\CoreUiPort.cs" />
+    <Compile Include="..\..\src\App\CoreUiSnapshots.cs" />
     <Compile Include="..\..\src\Core\**\*.cs" />
     <Compile Include="CoreSmokeTests.cs" />
   </ItemGroup>

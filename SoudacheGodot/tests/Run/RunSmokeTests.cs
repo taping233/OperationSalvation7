@@ -36,6 +36,7 @@ internal static class RunSmokeTests
         InkEventChoicesLandTheirEffects();
         ShoeShopAndKnotlessEventsLandSafely();
         EventPanelSuspendsResumesAndStaysUnsaveable();
+        BaseStashPocketRestoreAndKeyCountMatchWeb();
         TwoThousandSeedAcceptanceHarness();
         Console.WriteLine($"RUN_SMOKE_OK checks={_checks}");
         return 0;
@@ -1924,6 +1925,67 @@ internal static class RunSmokeTests
 
 
     // ---------- 验收①：2000 seed 复验 harness ----------
+
+    // ---------- 批次 8-prep 接口 [6b'→A]：仓库页/口袋页快照的 Core 数据语义 ----------
+
+    /// <summary>
+    /// 口袋复原钥匙价与扣钥匙复原（base.js:329-355 pocketKeyCost/restore）、keyCount 折算
+    /// （BaseKeyCount 数据源：裸钥匙+仓库钥匙卡「一串」×2 其余×1）、卖出收藏保护、容量上限联动。
+    /// </summary>
+    private static void BaseStashPocketRestoreAndKeyCountMatchWeb()
+    {
+        // pocketKeyCost 稀有度单价映射：古朴1/稀有2/史诗3/传说4，表外（职业/棱彩等）缺省 1，×张数
+        Check(RunBaseState.PocketKeyCost(new RunCardStack(new RunCard("a", "甲", "装备", "古朴"), 1)) == 1, "pocket key cost: common must be 1");
+        Check(RunBaseState.PocketKeyCost(new RunCardStack(new RunCard("b", "乙", "装备", "稀有"), 1)) == 2, "pocket key cost: rare must be 2");
+        Check(RunBaseState.PocketKeyCost(new RunCardStack(new RunCard("c", "丙", "装备", "史诗"), 2)) == 6, "pocket key cost: epic must be 3 per card");
+        Check(RunBaseState.PocketKeyCost(new RunCardStack(new RunCard("d", "丁", "装备", "传说"), 2)) == 8, "pocket key cost: legend must be 4 per card");
+        Check(RunBaseState.PocketKeyCost(new RunCardStack(new RunCard("e", "戊", "武术", "职业"), 3)) == 3, "pocket key cost: unknown rarity falls back to 1");
+
+        // 复原成功：整堆按稀有度扣裸钥匙 → 入仓库（堆数量保持）
+        var okBase = new RunBaseState();
+        okBase.AddResources(keys: 5);
+        Check(okBase.DepositCards(new[] { new RunCardStack(new RunCard("rare1", "稀有残页", "装备", "稀有", 2, true), 2) }, toPocket: true), "pocket deposit failed");
+        var restored = okBase.RestorePocketWithKeys("稀有残页");
+        Check(restored is { Ok: true, Why: "", Cost: 4 }, "restore must cost rarity price × count");
+        Check(okBase.Keys == 1, "restore must spend raw keys");
+        Check(okBase.Pocket.Count == 0 && okBase.Stash.Any(x => x.Card.Name == "稀有残页" && x.Count == 2), "restored stack must land in the stash");
+
+        // nokey：网页 restore 判定用 data.keys 裸钥匙（非 keyCount 折算）——仓库放着钥匙卡折算够也拒
+        var poorBase = new RunBaseState();
+        poorBase.AddResources(keys: 1);
+        Check(poorBase.DepositCards(new[] { new RunCardStack(new RunCard("keycard", "钥匙", "资源"), 3) }), "key card deposit failed");
+        Check(poorBase.KeyCount == 4 && poorBase.KeyCount >= 4, "keyCount must fold raw keys + key cards");
+        Check(poorBase.DepositCards(new[] { new RunCardStack(new RunCard("epic1", "史诗残页", "装备", "史诗", 3, true), 1) }, toPocket: true), "pocket deposit failed");
+        var denied = poorBase.RestorePocketWithKeys("史诗残页");
+        Check(denied is { Ok: false, Why: "nokey", Cost: 3 } && poorBase.Keys == 1, "restore must gate on RAW keys, not the folded keyCount");
+        Check(poorBase.Pocket.Any(x => x.Card.Name == "史诗残页"), "denied restore must keep the pocket stack");
+
+        // sha：初始攻击直接销毁不入仓（每局自动重带）；full/empty 分支
+        var shaBase = new RunBaseState();
+        Check(shaBase.DepositCards(new[] { new RunCardStack(new RunCard("builtin-sha", "初始攻击", "武术", "初始", 0, false, true), 1) }, toPocket: true), "sha pocket deposit failed");
+        var sha = shaBase.RestorePocketWithKeys("初始攻击");
+        Check(sha is { Ok: true, Why: "sha", Cost: 0 } && shaBase.Pocket.Count == 0 && shaBase.Stash.Count == 0, "initial attack must be consumed without deposit");
+        var fullBase = new RunBaseState();
+        fullBase.AddResources(keys: 10);
+        for (var i = 0; i < 25; i++) fullBase.DepositCards(new[] { new RunCardStack(new RunCard($"f{i}", $"塞满{i}"), 1) });
+        fullBase.DepositCards(new[] { new RunCardStack(new RunCard("full1", "复原卡", "装备", "古朴", 1, true), 1) }, toPocket: true);
+        Check(fullBase.RestorePocketWithKeys("复原卡") is { Ok: false, Why: "full" }, "restore must respect stash room");
+        Check(new RunBaseState().RestorePocketWithKeys("不存在") is { Ok: false, Why: "empty" }, "restore of an absent stack must report empty");
+
+        // 卖出收藏保护（stash:sell 的 Core 语义）：收藏中拒卖，取消后可卖
+        var sellBase = new RunBaseState();
+        var loot = new RunCard("loot1", "收藏残页", "装备", "稀有", 4, true);
+        sellBase.DepositCards(new[] { new RunCardStack(loot, 1) });
+        sellBase.Collection.Add(loot.Id);
+        Check(sellBase.SellCards("收藏残页", 1) is { Ok: false, Why: "collected" }, "collected stash cards must be sell-protected");
+        sellBase.Collection.Remove(loot.Id);
+        Check(sellBase.SellCards("收藏残页", 1) is { Ok: true, Coins: 4 }, "uncollected stash cards must sell");
+
+        // 容量上限（快照 BaseBagMax/BaseSafeMax/BaseStashMax 数据源）：来自 rules 且 ≥ 当前容量
+        Check(RunRules.BagMax >= new RunBaseState().BagCapacity && RunRules.SafeMax >= new RunBaseState().SafeCapacity && RunRules.StashMax >= new RunBaseState().StashCapacity,
+            "capacity caps must dominate current capacities");
+        Console.WriteLine("[8-prep] 口袋复原（稀有度钥匙价/扣裸钥匙/sha/full/nokey）+ keyCount 折算 + 卖出收藏保护 + 容量上限 断言通过");
+    }
 
     private static void TwoThousandSeedAcceptanceHarness()
     {

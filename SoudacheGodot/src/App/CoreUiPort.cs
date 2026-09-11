@@ -1,17 +1,22 @@
 using System;
+using System.Collections.Generic;
 
 namespace SoudacheGodot.App;
 
 /// Adapter seam for the future Soudache Core. UI consumes snapshots, never Core rules or card models.
 public interface ICoreUiPort
 {
-    event Action<BattleUiSnapshot>? BattleSnapshotChanged;
+    public event Action<BattleUiSnapshot>? BattleSnapshotChanged;
     event Action<RunUiSnapshot>? RunSnapshotChanged;
     event Action<SaveSlotsUiSnapshot>? SaveSlotsChanged;
     void RequestPlayCard(string cardId, string? targetId, string[] infusionFuelIds);
     void RequestEndTurn();
     void RequestPileView(string pileKey);
-    void RequestStartRun(string characterId);
+    /// <summary>
+    /// 开始新远征。slot = 选档卡槽号（0 基；对照网页 launch(slot)，开局即绑定游玩档位——
+    /// 接口需求 [7b→B]：补齐「开新档绑定槽位」信号，纯新档关窗也能强制落盘）。负数 = 不绑定。
+    /// </summary>
+    void RequestStartRun(string characterId, int slot = -1);
     void RequestRollDice();
     void RequestRunAction(string actionId);
     void RequestBaseAction(string actionId);
@@ -119,6 +124,67 @@ public sealed class RunUiSnapshot
     public PetUiSnapshot[] BasePets { get; init; } = Array.Empty<PetUiSnapshot>();
     /// <summary>职业收藏室快照（批次 5）：进度/里程碑/熟练度（6b' 成就·收藏室页消费）。</summary>
     public CollectionUiSnapshot? Collection { get; init; }
+
+    // —— 接口需求 [6b'→A] 批次 8-prep：制作坊/仓库页/图鉴/升级页快照缺口 ——
+
+    /// <summary>彩色令牌碎片计数（game.fragments；对局内累积，制作坊「彩色令牌碎片 N/2」材料行实值；无局=0）。</summary>
+    public int Fragments { get; init; }
+    /// <summary>
+    /// 通行证/令牌栈计数（键=卡 id：tt-token-gold 员工通行证B / tt-token-color 员工通行证A / cmtmvq6ss84l 彩色令牌）。
+    /// 口径随上下文（与 6b' 制作坊过渡口径一致）：无局=基地仓库栈，有局=随身背包栈；缺该卡时无键。
+    /// </summary>
+    public IReadOnlyDictionary<string, int> TokenCounts { get; init; } = ReadOnlyEmptyDict();
+    /// <summary>基地卡牌仓库明细行（仓库页 stash 行：meta「N费·类型·职业·收购X币/张」+ 收藏态标记）。</summary>
+    public StashItemUiSnapshot[] BaseStash { get; init; } = Array.Empty<StashItemUiSnapshot>();
+    /// <summary>基地消耗口袋明细行（仓库页 pocket 行：按稀有度用钥匙复原，pocketKeyCost=整堆所需钥匙）。</summary>
+    public PocketItemUiSnapshot[] BasePocket { get; init; } = Array.Empty<PocketItemUiSnapshot>();
+    /// <summary>折算钥匙（base.js keyCount = 裸钥匙 + 仓库钥匙卡折算「一串」×2 其余×1；宝藏大门条与物资行的钥匙显示口径）。裸钥匙仍看 BaseKeys。</summary>
+    public int BaseKeyCount { get; init; }
+    /// <summary>基地背包当前容量（升级页容量条分子；网页 hubUpgradeHTML 的 B.bagCap()）。</summary>
+    public int BaseBagCapacity { get; init; }
+    /// <summary>基地背包容量上限（升级页容量条分母；RunRules.BagMax）。</summary>
+    public int BaseBagMax { get; init; }
+    /// <summary>基地安全格上限（分母；当前值=SafeCapacity 随携带宠物变化）。</summary>
+    public int BaseSafeMax { get; init; }
+    /// <summary>仓库容量上限（升级页容量条分母；当前值=StashCapacity、已用=StashUsed）。</summary>
+    public int BaseStashMax { get; init; }
+    /// <summary>图鉴收藏态全集（base.js isCollected=data.collection 全量口径，含收藏池外的特殊收藏品/传说卡；排序输出保证稳定）。图鉴点亮与仓库行 ✦ 标记的信号源。</summary>
+    public string[] CollectedIds { get; init; } = Array.Empty<string>();
+
+    private static IReadOnlyDictionary<string, int> ReadOnlyEmptyDict() => new Dictionary<string, int>();
+}
+
+/// <summary>基地仓库明细行（批次 8-prep [6b'→A]；对应网页 hubStashHTML 的 stash-row）。</summary>
+public sealed class StashItemUiSnapshot
+{
+    public string CardId { get; init; } = "";
+    public string Name { get; init; } = "";
+    public int Count { get; init; }
+    /// <summary>出牌费用（cards.json cost；道具/资源等无费用卡=0）。</summary>
+    public int Cost { get; init; }
+    public string Type { get; init; } = "";
+    public string Rarity { get; init; } = "";
+    /// <summary>收藏归属职业（无归属=null）。</summary>
+    public string? Cls { get; init; }
+    /// <summary>收购价（币/张）。</summary>
+    public int SellPrice { get; init; }
+    /// <summary>可售判定（cards.json sellable 四级口径；材料卡另有 material 拒卖语义）。</summary>
+    public bool Sellable { get; init; }
+    /// <summary>已收藏（图鉴 ✦/sparkles 标记；收藏期间卖出被拒）。</summary>
+    public bool Collected { get; init; }
+    /// <summary>材料种类（wood/rations/keys；null=非材料卡。材料卡 meta=「可使用·每张折入」且不可卖币）。</summary>
+    public string? MaterialKind { get; init; }
+}
+
+/// <summary>基地消耗口袋明细行（批次 8-prep [6b'→A]；对应网页 hubStashHTML 的 pocket 行）。</summary>
+public sealed class PocketItemUiSnapshot
+{
+    public string CardId { get; init; } = "";
+    public string Name { get; init; } = "";
+    public int Count { get; init; }
+    public string Rarity { get; init; } = "";
+    /// <summary>整堆复原钥匙价（base.js pocketKeyCost=稀有度价 古朴1/稀有2/史诗3/传说4 ×张数；动作为 pocket:restore:{名}）。</summary>
+    public int PocketKeyCost { get; init; }
 }
 
 /// <summary>宠物页条目（批次 5；数据源 data/pets.json + 基地档 pets/petSel）。</summary>
