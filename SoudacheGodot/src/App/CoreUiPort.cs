@@ -45,6 +45,11 @@ public sealed class BattleUiSnapshot
     public int[] HandCardInfuseCounts { get; init; } = Array.Empty<int>();
     public string[] HandCardTargetKinds { get; init; } = Array.Empty<string>();
     /// <summary>
+    /// 每张手牌的稀有度（批次 5 rider [6c→A]：6c 稀有卡光晕粒子的着色信号，与 HandCardIds/Labels 同序）。
+    /// 取自 cards.json rarity 表；目录缺失时退化为空串。
+    /// </summary>
+    public string[] HandCardRarities { get; init; } = Array.Empty<string>();
+    /// <summary>
     /// 战斗音效信号（接口需求 [7a→A]，对照 _planning/audio-inventory.md §3）。
     /// 引擎在结算时产生 sound.js 同名键（parry/curse/strike/card/flee/hit/hurt/heal/victory/defeat…），
     /// UI 侧逐个 GameAudio.PlaySfx(key) 后清空；hit/hurt/heal 可继续沿用现有 HP 变化推断，二者并存。
@@ -105,6 +110,60 @@ public sealed class RunUiSnapshot
     public MapNodeUiSnapshot[] Nodes { get; init; } = Array.Empty<MapNodeUiSnapshot>();
     /// <summary>事件面板快照（批次 4c）：仅 Phase=事件 且已抽卡时非空；UI 据此渲染事件页（intro+选项+effect 元数据）。</summary>
     public EventUiSnapshot? Event { get; init; }
+    /// <summary>宠物页快照（批次 5）：全部宠物定义 + 拥有/等级/携带/升级费用（6b' hub 宠物页消费）。</summary>
+    public PetUiSnapshot[] BasePets { get; init; } = Array.Empty<PetUiSnapshot>();
+    /// <summary>职业收藏室快照（批次 5）：进度/里程碑/熟练度（6b' 成就·收藏室页消费）。</summary>
+    public CollectionUiSnapshot? Collection { get; init; }
+}
+
+/// <summary>宠物页条目（批次 5；数据源 data/pets.json + 基地档 pets/petSel）。</summary>
+public sealed class PetUiSnapshot
+{
+    public string Id { get; init; } = "";
+    public string Name { get; init; } = "";
+    public string Desc { get; init; } = "";
+    public bool Owned { get; init; }
+    public int Level { get; init; } = 1;
+    public bool Carried { get; init; }
+    /// <summary>升到下一级所需口粮（满级时无意义）；upCosts 递增 2-3-4-5。</summary>
+    public int UpgradeCost { get; init; }
+    /// <summary>可升级（已拥有、未满级、口粮足够）。</summary>
+    public bool CanUpgrade { get; init; }
+    /// <summary>已拥有且未携带（可切换携带）。</summary>
+    public bool CanCarry { get; init; }
+}
+
+/// <summary>职业收藏室快照（批次 5；meta.js collProgress/pendingColl/classSummary 的 UI 视图）。</summary>
+public sealed class CollectionUiSnapshot
+{
+    /// <summary>收藏进度 =「不同」的职业卡 + 能力卡张数。</summary>
+    public int Progress { get; init; }
+    /// <summary>收藏池总数（职业卡+能力卡，入池=有 cls 且归属五职业）。</summary>
+    public int Total { get; init; }
+    public CollectionMilestoneUiSnapshot[] Milestones { get; init; } = Array.Empty<CollectionMilestoneUiSnapshot>();
+    /// <summary>职业熟练度（收藏转化 +10/+50 的去处；meta.js classSummary）。</summary>
+    public ClassProgressUiSnapshot[] Classes { get; init; } = Array.Empty<ClassProgressUiSnapshot>();
+}
+
+public sealed class CollectionMilestoneUiSnapshot
+{
+    public string Id { get; init; } = "";
+    /// <summary>达成所需收藏张数（need='all' 时=Total）。</summary>
+    public int Need { get; init; }
+    public bool Reached { get; init; }
+    public bool Claimed { get; init; }
+    /// <summary>奖励文案（木材/口粮/钥匙/传说卡/宠物蛋）。</summary>
+    public string Reward { get; init; } = "";
+}
+
+public sealed class ClassProgressUiSnapshot
+{
+    public string Cls { get; init; } = "";
+    public int Lv { get; init; } = 1;
+    public int Xp { get; init; }
+    /// <summary>升到下一级所需经验（meta.js xpForNext；满级时无意义）。</summary>
+    public int XpForNext { get; init; }
+    public bool Maxed { get; init; }
 }
 
 /// <summary>

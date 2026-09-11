@@ -122,18 +122,38 @@ public sealed class BaseStateDto
     public Dictionary<string, bool> AchClaimed { get; set; } = new(StringComparer.Ordinal);
     public Dictionary<string, bool> Backs { get; set; } = new(StringComparer.Ordinal) { ["classic"] = true };
     public string BackSel { get; set; } = "classic";
+    // —— 批次 5：宠物 + 收藏室（可选字段，旧 v3 档缺省即默认值，无需迁移；ensureStarterPet 兜底补狗）——
+    /// <summary>已拥有宠物 [宠物id] => { lv, ts }（base.js data.pets）。</summary>
+    public Dictionary<string, PetStateDto> Pets { get; set; } = new(StringComparer.Ordinal);
+    /// <summary>当前携带的宠物 id（base.js data.petSel）。</summary>
+    public string? PetSel { get; set; }
+    /// <summary>收藏里程碑领奖记录（meta.js collClaimed）。</summary>
+    public Dictionary<string, bool> CollClaimed { get; set; } = new(StringComparer.Ordinal);
+    /// <summary>收藏经验已结算标记（meta.js collXp）。</summary>
+    public Dictionary<string, bool> CollXp { get; set; } = new(StringComparer.Ordinal);
 
     public void Validate()
     {
         if (Wood < 0 || Rations < 0 || Keys < 0 || BagUp < 0 || SafeUp < 0 || StashUp < 0 || Coins < 0) throw new SaveFormatException("Base resources and upgrades cannot be negative.");
         if (SelMode is not ("standard" or "elite" or "casual")) throw new SaveFormatException($"Unknown base mode '{SelMode}'.");
         if (Stash is null || Pocket is null || Collection is null || Classes is null || Stats is null || AchClaimed is null || Backs is null) throw new SaveFormatException("Base save contains a missing collection.");
+        if (Pets is null || CollClaimed is null || CollXp is null) throw new SaveFormatException("Base save contains a missing collection.");
         if (!Backs.ContainsKey("classic") || !Backs["classic"]) throw new SaveFormatException("The classic card back must remain unlocked.");
         foreach (var stack in Stash) { if (stack is null) throw new SaveFormatException("Base stash contains a null stack."); stack.Validate(); }
         foreach (var stack in Pocket) { if (stack is null) throw new SaveFormatException("Base pocket contains a null stack."); stack.Validate(); }
         foreach (var progress in Classes.Values) { if (progress is null) throw new SaveFormatException("Base classes contains a null entry."); progress.Validate(); }
+        foreach (var pet in Pets.Values) { if (pet is null) throw new SaveFormatException("Base pets contains a null entry."); pet.Validate(); }
+        if (PetSel is not null && !Pets.ContainsKey(PetSel)) throw new SaveFormatException("Base petSel must reference an owned pet.");
         Stats.Validate();
     }
+}
+
+/// <summary>已拥有宠物的存档态（base.js data.pets[id] = { lv, ts }）。</summary>
+public sealed class PetStateDto
+{
+    public int Lv { get; set; } = 1;
+    public long Ts { get; set; }
+    public void Validate() { if (Lv < 1 || Lv > 99) throw new SaveFormatException("Pet level is outside 1..99."); }
 }
 
 public sealed class CardStackDto

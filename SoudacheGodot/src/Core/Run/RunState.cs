@@ -39,7 +39,7 @@ public sealed record RunSnapshot(ulong Seed, ulong RngState, int LayerIndex, int
     RunBaseSnapshot? Base = null, IReadOnlyList<RunCardSnapshot>? OwnedCards = null,
     IReadOnlyList<RunCardSnapshot>? UsedPocket = null, IReadOnlyList<RunCardSnapshot>? PendingRewards = null,
     IReadOnlyList<RunSettlementSnapshot>? SettlementCards = null, int Fragments = 0,
-    bool AltarActivated = false, bool BossKilled = false, IReadOnlyList<string>? VisitedNodes = null);
+    bool AltarActivated = false, bool BossKilled = false, IReadOnlyList<string>? VisitedNodes = null, int MaxHp = 0);
 
 /// <summary>
 /// Pure C# run state machine. It has no Godot/node dependency and deliberately keeps all
@@ -103,7 +103,8 @@ public sealed class RunState
     public int Stamina { get; private set; } = RunRules.StaminaMax;
     public int MaxStamina => RunRules.StaminaMax;
     public int Hp { get; private set; } = RunRules.PlayerMaxHp;
-    public int MaxHp => RunRules.PlayerMaxHp;
+    /// <summary>生命上限（批次 5 宠物加成：携带汪汪狗 newRun 时 +effect.maxHp，网页 game.session.js:605-613）。</summary>
+    public int MaxHp { get; private set; } = RunRules.PlayerMaxHp;
     public IReadOnlyList<RunEnemy> Encounter => _encounter;
     public RunRisk EncounterRisk => _encounterRisk;
     public IReadOnlyList<RunShopOffer> Shop => _shop;
@@ -235,6 +236,9 @@ public sealed class RunState
         _data = data ?? GameRuntime.Data;
         Base = baseState ?? new RunBaseState();
         Resources.Coins = Base.TakeReserveCoins();
+        // 批次 5 宠物携带效果（网页 newRun 语义）：汪汪狗 maxHp 加成在开局一次性生效，hp=满血
+        MaxHp = RunRules.PlayerMaxHp + Base.CarriedPetEffect().MaxHp;
+        Hp = MaxHp;
         Map = map ?? RunMap.Generate(seed);
         // 四层图开局站在第 1 层入口（网页版 newRun：entrances[0]，不结算本格、不耗行动）
         LayerIndex = 0;
@@ -245,11 +249,18 @@ public sealed class RunState
             throw new ArgumentException($"Run map contains unreachable nodes: {string.Join(",", unreachable)}", nameof(map));
     }
 
+    /// <summary>职业宝箱概率（chests.js classChestChance：基础 0.25；携带猎鹰宝宝提高至 effect.classChest=0.35）。</summary>
+    private double ClassChestChance()
+    {
+        var effect = Base.CarriedPetEffect();
+        return effect.ClassChest > 0 ? effect.ClassChest : LootTables.ClassChestChance;
+    }
+
     public RunSnapshot CaptureSnapshot() => new(Seed, Rng.State, LayerIndex, TrackPosition, Turns, Stamina, Hp,
         Resources.Coins, Resources.Keys, Resources.Wood, Resources.Rations, Phase, Base.CaptureSnapshot(),
         _ownedCards.Select(ToSnapshot).ToArray(), _usedPocket.Select(ToSnapshot).ToArray(), _pendingRewards.Select(ToSnapshot).ToArray(),
         _settlementCards.Select(x => new RunSettlementSnapshot(ToSnapshot(new RunCardStack(x.Card, x.Count)), x.Deposited)).ToArray(),
-        Fragments, AltarActivated, BossKilled, _visited.ToArray());
+        Fragments, AltarActivated, BossKilled, _visited.ToArray(), MaxHp);
 
     public static RunState FromSnapshot(RunSnapshot snapshot, RunMap? map = null)
     {
@@ -360,6 +371,28 @@ public sealed class RunState
         if (safe && _ownedCards.Where(x => x.Safe).Sum(x => x.Count) + count > Base.SafeCapacity) return false;
         if (existing is null) _ownedCards.Add(new RunCardStack(card, count, safe)); else existing.Count += count;
         return true;
+    }
+
+    /// <summary>
+    /// 开局初始牌（批次 5 移植 game.session.js:506-530 grantStarterSha）：
+    /// 初始攻击 = starterSha + 宠物 extraSha；携带火焰精灵时化为等量火球（且不再单独带火球 ×1）。
+    /// 返回 (初始牌总数, 是否已转化为火球)——出发准备页的仓库携带容量预留按此计算。
+    /// </summary>
+    public (int StarterCount, bool FireballConverted) GrantStarterCards(IReadOnlyList<RunCard> catalog)
+    {
+        ArgumentNullException.ThrowIfNull(catalog);
+        var effect = Base.CarriedPetEffect();
+        var shaN = RunRules.StarterSha + effect.ExtraSha;
+        var sha = catalog.FirstOrDefault(card => card.Id == "builtin-sha");
+        var fireball = catalog.FirstOrDefault(card => card.Id == "tt3-fireball");
+        if (effect.ShaToFireball && fireball is not null)
+        {
+            if (!AddCard(fireball, shaN)) throw new InvalidOperationException("背包无法装入初始火球。");
+            return (shaN, true);
+        }
+        if (sha is not null && !AddCard(sha, shaN)) throw new InvalidOperationException($"背包无法装入 {shaN} 张初始攻击。");
+        if (fireball is not null && !AddCard(fireball, 1)) throw new InvalidOperationException("背包无法装入初始火球。");
+        return (shaN + (fireball is not null ? 1 : 0), false);
     }
 
     public int TakeCardsFromBase(IEnumerable<(string Name, int Count)> selections)
@@ -927,7 +960,7 @@ public sealed class RunState
         // ported from chests.js rollDrops：BOSS 固定首脑保险柜（CompleteBattle 分支）；
         // 巨兽「荒渊」（第 3/4 层精英）固定奖励 2 个大宝箱（30% 额外传说卡归战后结算，见网页 settle）；
         // 其余按层取 layerChests 表——fixed 直接给，否则加权抽箱数与箱型，
-        // 每箱 25% 为职业宝箱（黑箱，只掉职业卡牌；猎鹰宝宝 35% 归批次 5 宠物）。
+        // 每箱 classChestChance 为职业宝箱（黑箱，只掉职业卡牌；猎鹰宝宝提高至 35%，批次 5）。
         if (_encounter.Any(enemy => enemy.Name.Contains("巨兽", StringComparison.Ordinal)))
             return new[] { ("large", false, false), ("large", false, false) };
         var spec = _data.LayerChests[Math.Min(layer, _data.LayerChests.Count - 1)];
@@ -940,7 +973,7 @@ public sealed class RunState
         for (var i = 0; i < chests; i++)
         {
             var kind = Weighted(spec.Types.Select(t => (t.Kind, t.Weight)));
-            result.Add((kind, false, Rng.NextDouble() < LootTables.ClassChestChance));
+            result.Add((kind, false, Rng.NextDouble() < ClassChestChance()));
         }
         return result;
     }
@@ -1289,15 +1322,21 @@ public sealed class RunState
         // 6 张随机卡（稀有度按 cards.json shopWeights 掷档，档内类型均分/道具×0.7/装备×0.8）
         // + 桃固定栏位（2 币，回 6 血，2026-09-10 替代金疮药）+ 初始攻击补充（1 币/张，
         // 本站最多 5 张，2026-09-08 定版）+ 1 个「神秘货箱」栏位（3 币，买到随机卡牌）。
-        // 招财猫首格免费是宠物效果（批次 5）；网页商店不卖木材/口粮/钥匙裸资源（旧骨架栏位移除）。
+        // 招财猫首格免费已落地（catFree，首格随机卡 0 币）；网页商店不卖木材/口粮/钥匙裸资源（旧骨架栏位移除）。
         // 四层图上商店格与层间门不共存（门是独立节点），离店即回待机。
+        // 招财猫首格免费（批次 5 宠物效果，网页 game.run.shop.js:39-46）：catFree 时第 1 格随机卡 0 币。
+        var catFree = Base.CarriedPetEffect().ShopFree;
         var offers = new List<RunShopOffer>();
         for (var i = 0; i < 6; i++)
         {
             var card = PickRandomShopCard();
-            offers.Add(card is null
-                ? new RunShopOffer($"card-{i}", RunRoomType.Empty, 1, 0, Sold: true)
-                : new RunShopOffer($"card-{i}", RunRoomType.Empty, 1, _data.CardPrice(card.Rarity), Card: card));
+            if (card is null)
+            {
+                offers.Add(new RunShopOffer($"card-{i}", RunRoomType.Empty, 1, 0, Sold: true));
+                continue;
+            }
+            var price = catFree && i == 0 ? 0 : _data.CardPrice(card.Rarity);
+            offers.Add(new RunShopOffer($"card-{i}", RunRoomType.Empty, 1, price, Card: card));
         }
         var peach = FindPoolCard("tt-peach") ?? new RunCard("tt-peach", "桃", "道具", "古朴", 2);
         offers.Add(new RunShopOffer("peach", RunRoomType.Empty, 1, 2, Card: peach));
@@ -1452,6 +1491,8 @@ public static class RunRules
     public static int PlayerAtk { get; private set; } = 4;
     /// <summary>宝藏大门钥匙需求（网页 base.js KEY_NEEDED=10，已入 rules.json）。</summary>
     public static int KeyNeeded { get; private set; } = 10;
+    /// <summary>每局固定携带的初始攻击张数（网页 rules.js groups.battle.starterAttack；宠物 extraSha 在此基础上累加）。</summary>
+    public static int StarterSha { get; private set; } = 5;
 
     /// <summary>rules.json 中没有对应字段的骨架局部常量。</summary>
     public const int CampfireRestorePocket = 2;
@@ -1493,5 +1534,6 @@ public static class RunRules
         CampfireClassCardChance = rules.FireClassCardChance;
         if (rules.PlayerAtk > 0) PlayerAtk = rules.PlayerAtk;
         if (rules.KeyNeeded > 0) KeyNeeded = rules.KeyNeeded;
+        if (rules.StarterSha > 0) StarterSha = rules.StarterSha;
     }
 }

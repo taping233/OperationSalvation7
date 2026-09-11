@@ -31,6 +31,8 @@ internal static class RunSmokeTests
         ChestKindsDropsPityEggAndClassChestMatchWeb();
         ChestQueueSuspendsAndResumes();
         FragmentSourcesAndCraftSemanticsMatchWeb();
+        PetLifecycleEggHatchUpgradeCarryMatchesData();
+        CollectionRoomConversionAndMilestonesMatchData();
         InkEventChoicesLandTheirEffects();
         ShoeShopAndKnotlessEventsLandSafely();
         EventPanelSuspendsResumesAndStaysUnsaveable();
@@ -345,9 +347,67 @@ internal static class RunSmokeTests
             };
             Check(actual.SequenceEqual(expected), $"{field} runtime/data mismatch");
         }
-        // rules.json playerAtk / keyNeeded（网页 game.atk=4 / base.js KEY_NEEDED=10）。
+        // rules.json playerAtk / keyNeeded / starterSha（网页 game.atk=4 / base.js KEY_NEEDED=10 / groups.battle.starterAttack=5）。
         Check(RunRules.PlayerAtk == rules.GetProperty("playerAtk").GetInt32(), "rule playerAtk not injected");
         Check(RunRules.KeyNeeded == rules.GetProperty("keyNeeded").GetInt32(), "rule keyNeeded not injected");
+        Check(RunRules.StarterSha == rules.GetProperty("starterSha").GetInt32(), "rule starterSha not injected");
+
+        // 批次 5：pets.json / achievements.json 进运行时，逐项一致。
+        using var petsDoc = JsonDocument.Parse(File.ReadAllText(Path.Combine(dataDir, "pets.json")));
+        var petsRoot = petsDoc.RootElement;
+        Check(data.Pets.EggId == petsRoot.GetProperty("eggId").GetString(), "pets eggId runtime/data mismatch");
+        Check(data.Pets.HatchCost == petsRoot.GetProperty("hatchCost").GetInt32(), "pets hatchCost runtime/data mismatch");
+        Check(data.Pets.LevelMax == petsRoot.GetProperty("levelMax").GetInt32(), "pets levelMax runtime/data mismatch");
+        Check(data.Pets.UpCosts.SequenceEqual(petsRoot.GetProperty("upCosts").EnumerateArray().Select(n => n.GetInt32())),
+            "pets upCosts runtime/data mismatch");
+        var petNodes = petsRoot.GetProperty("list");
+        Check(data.Pets.List.Count == petNodes.GetArrayLength(), "pets list size mismatch");
+        for (var i = 0; i < data.Pets.List.Count; i++)
+        {
+            var node = petNodes[i];
+            var pet = data.Pets.List[i];
+            var effect = node.GetProperty("effect");
+            Check(pet.Id == node.GetProperty("id").GetString() && pet.Name == node.GetProperty("name").GetString()
+                && pet.Effect.MaxHp == (effect.TryGetProperty("maxHp", out var maxHp) ? maxHp.GetInt32() : 0)
+                && Math.Abs(pet.Effect.ClassChest - (effect.TryGetProperty("classChest", out var cc) ? cc.GetDouble() : 0)) < 1e-9
+                && pet.Effect.ShopFree == (effect.TryGetProperty("shopFree", out var sf) && sf.ValueKind == JsonValueKind.True)
+                && pet.Effect.ExtraSha == (effect.TryGetProperty("extraSha", out var es) ? es.GetInt32() : 0)
+                && pet.Effect.ShaToFireball == (effect.TryGetProperty("shaToFireball", out var stf) && stf.ValueKind == JsonValueKind.True)
+                && pet.Effect.SafeBonus == (effect.TryGetProperty("safeBonus", out var sb) ? sb.GetInt32() : 0),
+                $"pet {pet.Id} runtime/data mismatch");
+        }
+        using var achDoc = JsonDocument.Parse(File.ReadAllText(Path.Combine(dataDir, "achievements.json")));
+        var achievementsRoot = achDoc.RootElement;
+        var achievementNodes = achievementsRoot.GetProperty("achievements");
+        Check(data.Achievements.Achievements.Count == achievementNodes.GetArrayLength(), "achievements size mismatch");
+        for (var i = 0; i < data.Achievements.Achievements.Count; i++)
+        {
+            var node = achievementNodes[i];
+            var ach = data.Achievements.Achievements[i];
+            Check(ach.Id == node.GetProperty("id").GetString() && ach.Name == node.GetProperty("name").GetString()
+                && ach.Desc == node.GetProperty("desc").GetString(), $"achievement {i} runtime/data mismatch");
+        }
+        var milestoneNodes = achievementsRoot.GetProperty("collectionMilestones");
+        Check(data.Achievements.CollectionMilestones.Count == milestoneNodes.GetArrayLength(), "collectionMilestones size mismatch");
+        for (var i = 0; i < data.Achievements.CollectionMilestones.Count; i++)
+        {
+            var node = milestoneNodes[i];
+            var ms = data.Achievements.CollectionMilestones[i];
+            var expectedNeed = node.GetProperty("need");
+            Check(ms.Id == node.GetProperty("id").GetString()
+                && ms.Need == (expectedNeed.ValueKind == JsonValueKind.String ? expectedNeed.GetString() : expectedNeed.GetRawText()),
+                $"milestone {i} need runtime/data mismatch");
+            var reward = node.GetProperty("reward");
+            Check(ms.Reward.Wood == (reward.TryGetProperty("wood", out var rw) ? rw.GetInt32() : 0)
+                && ms.Reward.Rations == (reward.TryGetProperty("rations", out var rr) ? rr.GetInt32() : 0)
+                && ms.Reward.Keys == (reward.TryGetProperty("keys", out var rk) ? rk.GetInt32() : 0)
+                && ms.Reward.Legend == (reward.TryGetProperty("legend", out var rl) ? rl.GetInt32() : 0)
+                && ms.Reward.Egg == (reward.TryGetProperty("egg", out var re) ? re.GetInt32() : 0),
+                $"milestone {ms.Id} reward runtime/data mismatch");
+        }
+        // cards.json classes = 在册五职业（meta.js classList 的数据来源）。
+        Check(data.CardClasses.SequenceEqual(cardsDoc.RootElement.GetProperty("classes").EnumerateArray().Select(n => n.GetString() ?? "")),
+            "card classes runtime/data mismatch");
 
         // 行为抽查：外层战斗格遭遇只含该层表内的怪物且数量落在数据 size 区间。
         var entryIds = data.Encounters[0].Entries.Select(en => en.MonsterId).ToHashSet();
@@ -638,11 +698,13 @@ internal static class RunSmokeTests
     private static void BaseBackpackAndStashRulesMatchOriginal()
     {
         var baseState = new RunBaseState();
+        // 批次 5：安全格容量随携带宠物（初始汪汪狗 Lv.1 → safeStart+0=2；网页 base.js safeCap）
         Check(baseState.BagCapacity == 16 && baseState.SafeCapacity == 2 && baseState.StashCapacity == 25, "base defaults changed");
+        Check(baseState.PetSel == "dog" && baseState.Pets.ContainsKey("dog"), "starter pet must be the auto-granted dog");
         baseState.AddResources(wood: 4, rations: 2, coins: 5);
         Check(baseState.UpgradeBag() && baseState.BagCapacity == 17, "bag upgrade rule incorrect");
         Check(baseState.UpgradeStash() && baseState.StashCapacity == 28, "stash upgrade rule incorrect");
-        Check(baseState.UpgradeSafe() && baseState.SafeCapacity == 3, "safe upgrade rule incorrect");
+        // 批次 5：保险升级已由宠物升级取代（base.js BASE_MIGRATIONS 1→2），UpgradeSafe 不复存在
         var card = new RunCard("sellable", "旧枪", "装备", "稀有", 3, true);
         Check(baseState.DepositCards(new[] { new RunCardStack(card, 2) }), "stash deposit failed");
         var sold = baseState.SellCards("旧枪", 1); Check(sold.Ok && sold.Coins == 3 && baseState.Coins == 8, "stash sell rule incorrect");
@@ -738,6 +800,7 @@ internal static class RunSmokeTests
             Turn = snap.Turns,
             Stamina = snap.Stamina,
             Hp = snap.Hp,
+            MaxHp = snap.MaxHp,
             Coins = snap.Coins,
             Keys = snap.Keys,
             Wood = snap.Wood,
@@ -754,7 +817,7 @@ internal static class RunSmokeTests
         Check(roundTrip is not null, "save json round trip failed");
         roundTrip!.Validate();
         Check(roundTrip.RngState == snap.RngState && roundTrip.Seed == seed, "save must carry the run rng snapshot");
-        Check(roundTrip.VisitedNodes.SequenceEqual(snap.VisitedNodes), "save must carry visited nodes");
+        Check(roundTrip.VisitedNodes.SequenceEqual(snap.VisitedNodes!), "save must carry visited nodes");
         // 读档续跑：从 DTO 恢复新 RunState，与不间断的原局继续同一动作序列，结果逐项一致
         var resumed = RunState.FromSnapshot(new RunSnapshot(roundTrip.Seed, roundTrip.RngState, roundTrip.LayerIdx,
             roundTrip.TrackPos, roundTrip.Turn, roundTrip.Stamina, roundTrip.Hp, roundTrip.Coins,
@@ -845,7 +908,8 @@ internal static class RunSmokeTests
             else if (desc.Contains("不可出售", StringComparison.Ordinal)) sellable = false;
             else sellable = desc.Contains("可出售", StringComparison.Ordinal);
             var unrandom = card.TryGetProperty("unrandom", out var unrandomNode) && unrandomNode.ValueKind == JsonValueKind.True;
-            list.Add(new RunCard(id, name, type, rarity, Math.Max(1, value), sellable) { Unrandom = unrandom });
+            var cls = card.TryGetProperty("cls", out var clsNode) ? clsNode.GetString() : null;
+            list.Add(new RunCard(id, name, type, rarity, Math.Max(1, value), sellable) { Unrandom = unrandom, Cls = cls });
         }
         return list;
     }
@@ -1149,6 +1213,311 @@ internal static class RunSmokeTests
         }
         Check(walker.DiceHistory.Count == 8, "dice history must keep at most 8 entries");
     }
+
+    // ---------- 批次 5：宠物系统（真源 base.js:26-39/255-393 + pets.json + game.session/chests/shop 携带效果） ----------
+
+    private static void PetLifecycleEggHatchUpgradeCarryMatchesData()
+    {
+        var spec = GameRuntime.Data.Pets;
+        // 数值逐项 == pets.json（孵化 50 币、上限 Lv.5、升级 2/3/4/5 口粮、6 只）
+        Check(spec.EggId == "pet-egg" && spec.HatchCost == 50 && spec.LevelMax == 5, "pet spec scalars drifted from pets.json");
+        Check(spec.UpCosts.SequenceEqual(new[] { 2, 3, 4, 5 }), "pet upCosts must be 2/3/4/5");
+        Check(spec.List.Select(pet => pet.Id).SequenceEqual(new[] { "dog", "falcon", "cat", "robot", "fire", "penguin" }),
+            "pet list must be the six data pets");
+        Check(spec.List.Single(pet => pet.Id == "dog").Effect.MaxHp == 5
+            && Math.Abs(spec.List.Single(pet => pet.Id == "falcon").Effect.ClassChest - 0.35) < 1e-9
+            && spec.List.Single(pet => pet.Id == "cat").Effect.ShopFree
+            && spec.List.Single(pet => pet.Id == "robot").Effect.ExtraSha == 2
+            && spec.List.Single(pet => pet.Id == "fire").Effect.ShaToFireball
+            && spec.List.Single(pet => pet.Id == "penguin").Effect.SafeBonus == 2,
+            "pet effects drifted from pets.json");
+
+        // 初始宠物：汪汪狗进入基地自动获得且默认携带（base.js ensureStarterPet），不计入孵化数
+        var b = new RunBaseState();
+        Check(b.PetSel == "dog" && b.Pets["dog"].Lv == 1 && b.HatchedCount() == 0, "starter dog must be auto-granted and carried");
+        Check(b.CarriedPet()!.Id == "dog" && b.CarriedPetEffect().MaxHp == 5, "carried pet effect lookup failed");
+        Check(!b.SetPet("cat"), "carrying an unowned pet must be rejected");
+
+        // 孵化：无蛋→noegg；蛋+50 币→随机未拥有宠物；币不足→poor；集齐→all（base.js hatchPet）
+        var egg = new RunCard("pet-egg", "宠物蛋", "道具", "稀有", 2);
+        Check(b.HatchPet().Why == "noegg", "hatch without an egg must report noegg");
+        Check(b.DepositCards(new[] { new RunCardStack(egg, 2) }), "setup: eggs into stash");
+        b.AddResources(coins: 30);
+        Check(b.HatchPet().Why == "poor" && b.Stash.Single(x => x.Card.Id == "pet-egg").Count == 2, "hatch without coins must be refused and consume nothing");
+        b.AddResources(coins: 50);            // 累计 80 币
+        var hatch = b.HatchPet(_ => 4);   // 未拥有池按 data 顺序排除 dog → 下标 4 = penguin
+        Check(hatch.Ok && hatch.Pet!.Id == "penguin", "hatch picker must select within the unowned pool");
+        Check(b.Coins == 80 - spec.HatchCost && b.Stash.Single(x => x.Card.Id == "pet-egg").Count == 1, "hatch must consume 1 egg + 50 coins");
+        Check(b.Pets["penguin"].Lv == 1 && b.HatchedCount() == 1, "hatched pet enters the base at Lv.1");
+        Check(b.PetSel == "dog", "hatch must not switch the carried pet when one is already carried");
+
+        // 升级：口粮 2/3/4/5 递增，上限 Lv.5（base.js petUpCost/upgradePet）
+        b.AddResources(rations: 14);
+        int[] expectCosts = { 2, 3, 4, 5 };
+        for (var lv = 1; lv <= 4; lv++)
+        {
+            var rationsBefore = b.Rations;
+            Check(b.CanUpgradePet("penguin") && b.PetUpgradeCost("penguin") == expectCosts[lv - 1], $"penguin upgrade cost at Lv.{lv} must be {expectCosts[lv - 1]}");
+            Check(b.UpgradePet("penguin") && b.PetLevel("penguin") == lv + 1 && b.Rations == rationsBefore - expectCosts[lv - 1],
+                $"penguin upgrade Lv.{lv}→{lv + 1} must consume rations per data");
+        }
+        Check(b.PetLevel("penguin") == 5 && !b.CanUpgradePet("penguin"), "pet must cap at Lv.5");
+        Check(b.PetUpgradeCost("penguin") == 0, "maxed pet upgrade cost must clamp to 0（网页 undefined 的显式化）");
+        Check(!b.UpgradePet("dog") && b.PetLevel("dog") == 1, "upgrade without rations must be refused and not change level");
+
+        // 携带切换与等级制安全格（base.js safeCap：min(safeMax, safeStart+lv-1)+safeBonus）
+        Check(b.SetPet("penguin") && b.PetSel == "penguin", "carrying the hatched penguin must work");
+        Check(b.SafeCapacity == RunRules.SafeMax + 2, "penguin Lv.5 safe capacity must be safeMax+2 (=8)");
+        b.Pets["penguin"] = b.Pets["penguin"] with { Lv = 1 };
+        Check(b.SafeCapacity == RunRules.SafeStart + 2, "penguin Lv.1 safe capacity must be safeStart+2 (=4)");
+        Check(b.SetPet("dog") && b.SafeCapacity == RunRules.SafeStart, "dog capacity follows its level without a bonus");
+
+        // 对局内携带效果①：汪汪狗生命上限 +5（newRun 时 hp=满血）
+        // （测试 seam：孵化语义已在上面验证，其余宠物直接登记所有权后切换携带）
+        foreach (var id in new[] { "falcon", "cat", "robot", "fire" }) b.Pets[id] = new PetSave(1, 0);
+        var dogRun = new RunState(501, null, b);
+        Check(dogRun.MaxHp == RunRules.PlayerMaxHp + 5 && dogRun.Hp == dogRun.MaxHp, "dog carry must raise max HP at new run");
+        // ②猎鹰宝宝：职业宝箱概率 0.25 → 0.35（统计口径，多 seed 对照）
+        b.SetPet("dog");
+        var plainRate = ClassChestRate(b);
+        b.SetPet("falcon");
+        var falconRate = ClassChestRate(b);
+        Check(falconRate > plainRate && Math.Abs(falconRate - 0.35) < 0.08 && Math.Abs(plainRate - 0.25) < 0.08,
+            $"falcon must raise the class-chest rate toward 0.35 (plain={plainRate:F2}, falcon={falconRate:F2})");
+        // ③招财猫：商店第一格免费（catFree：第 1 格随机卡 0 币，其余照价）
+        b.SetPet("cat");
+        var shopRun = new RunState(502, null, b);
+        shopRun.ConfigureShopCardPool(LoadRunCardUniverse());
+        shopRun.DebugSetPosition(0, FindNode(shopRun.Map, 0, RunRoomType.Shop));
+        shopRun.ResolveCurrentRoom();
+        Check(shopRun.Phase == RunPhase.Shop && shopRun.Shop.Count == 9, "cat run: shop must still have 9 slots");
+        Check(shopRun.Shop[0].Price == 0 && !shopRun.Shop[0].Sold && shopRun.Shop[0].Card is not null,
+            "cat carry must make the first shop slot free");
+        Check(shopRun.Shop.Where(x => x.Id != "card-0" && !x.Sold).Any(x => x.Price > 0),
+            "cat carry must leave the other slots priced");
+        shopRun.Resources.Coins = 0;
+        shopRun.BuyShopOffer("card-0");
+        Check(shopRun.Shop[0].Sold && shopRun.OwnedCards.Any(x => x.Card.Id == shopRun.Shop[0].Card!.Id),
+            "buying the free slot must work with 0 coins");
+        // ④⑤变形机器人/火焰精灵：开局初始牌（grantStarterSha 语义，落在 RunState.GrantStarterCards）
+        var catalog = LoadRunCardUniverse();
+        b.SetPet("robot");
+        var robotRun = new RunState(503, null, b);
+        var robotStarters = robotRun.GrantStarterCards(catalog);
+        Check(robotStarters.StarterCount == RunRules.StarterSha + 2 + 1 && !robotStarters.FireballConverted,
+            "robot must add +2 starter attacks (7 杀 + 1 火球 = 8 张初始牌)");
+        Check(robotRun.OwnedCards.First(x => x.Card.Id == "builtin-sha").Count == RunRules.StarterSha + 2
+            && robotRun.OwnedCards.Any(x => x.Card.Id == "tt3-fireball" && x.Count == 1),
+            "robot loadout = 7 杀 + 1 火球");
+        b.SetPet("fire");
+        var fireRun = new RunState(504, null, b);
+        var fireStarters = fireRun.GrantStarterCards(catalog);
+        Check(fireStarters.FireballConverted && fireStarters.StarterCount == RunRules.StarterSha,
+            "fire pet must convert the starters to fireballs");
+        Check(fireRun.OwnedCards.First(x => x.Card.Id == "tt3-fireball").Count == RunRules.StarterSha
+            && fireRun.OwnedCards.All(x => x.Card.Id != "builtin-sha"),
+            "fire loadout = 5 火球、不再携带初始攻击/单独火球");
+        b.SetPet("dog");
+        var plainStarters = new RunState(505, null, b);
+        var plainLoadout = plainStarters.GrantStarterCards(catalog);
+        Check(!plainLoadout.FireballConverted && plainLoadout.StarterCount == RunRules.StarterSha + 1,
+            "dog loadout = 5 杀 + 1 火球");
+
+        // 蛋链路：宝箱 0.7% 掉蛋 → 撤离结算入仓库 → 孵化消费（批次 4b 掉落物在本批闭环）
+        var eggCatalog = LoadRunCardUniverse();
+        var eggFound = 0;
+        for (var seed = 700; seed < 5200 && eggFound == 0; seed++)
+        {
+            var probe = new RunState((ulong)seed, null, new RunBaseState());
+            probe.ConfigureLootCardPool(eggCatalog);
+            BattleChestToPreview(probe, 0);
+            var preview = probe.PeekNextChest();
+            if (!preview.EggHit) continue;
+            // 中宝箱是 4 选 1（蛋并入 cards 数组）——选中蛋所在的候选位
+            var eggIndex = -1;
+            for (var index = 0; index < preview.Candidates.Count; index++)
+                if (preview.Candidates[index] == "宠物蛋") { eggIndex = index; break; }
+            while (probe.Phase == RunPhase.Chest) probe.OpenNextChest(eggIndex > 0 ? eggIndex : 0);
+            Check(probe.OwnedCards.Any(x => x.Card.Id == "pet-egg") || probe.PendingRewards.Any(x => x.Card.Id == "pet-egg"),
+                "egg chest hit must put the egg into the backpack (或待收取队列)");
+            probe.Extract();
+            Check(probe.SettlementCards.Any(x => x.Card.Id == "pet-egg"), "extract must settle the egg into the base stash");
+            for (var index = 0; index < probe.SettlementCards.Count; index++) probe.DepositSettlementCard(index);
+            Check(probe.Base.Stash.Any(x => x.Card.Id == "pet-egg"), "egg must land in the base stash after settlement");
+            probe.Base.AddResources(coins: spec.HatchCost);
+            Check(probe.Base.HatchPet().Ok, "the settled egg must be consumable by hatch");
+            eggFound++;
+        }
+        Check(eggFound > 0, "0.7% egg drop should appear within 4500 battle seeds");
+        Console.WriteLine($"[批次5] 宠物全流程：蛋掉落→孵化（1 蛋+50 币）→升级（口粮 2/3/4/5→Lv.5）→携带（6 只效果逐项对齐 data） 断言通过");
+    }
+
+    /// <summary>统计职业宝箱占比（多 seed 战斗掉落；对照 chests.js classChestChance；携带状态由调用方先行 SetPet）。</summary>
+    private static double ClassChestRate(RunBaseState carriedState)
+    {
+        var total = 0;
+        var classChests = 0;
+        for (var seed = 600; seed < 1400; seed++)
+        {
+            var probe = new RunState((ulong)seed, null, carriedState);
+            probe.ConfigureClassCardPool(new[] { new RunCard("cls-probe", "职业探针", "武术", "职业") });
+            BattleChestToPreview(probe, 0);
+            var loot = probe.OpenNextChest();
+            if (loot.Kind == "none") continue;
+            total++;
+            if (loot.IsClass) classChests++;
+        }
+        return total == 0 ? 0 : (double)classChests / total;
+    }
+
+    // ---------- 批次 5：职业收藏室（真源 meta.js:97-212 + achievements.json collectionMilestones） ----------
+
+    private static void CollectionRoomConversionAndMilestonesMatchData()
+    {
+        var data = GameRuntime.Data;
+        var catalog = LoadRunCardUniverse();
+        var pool = CollectionRoom.Pool(catalog, data.CardClasses);
+
+        // 收藏池：有 cls 且归属五职业的 职业卡+能力卡；衍生/无 cls/其他职业不入池（meta.js isCollectible）
+        Check(pool.All(card => card.Cls is not null && data.CardClasses.Contains(card.Cls)
+                && (card.Rarity == "职业" || card.Type == "能力卡")),
+            "collection pool must only contain classed 职业/能力卡");
+        Check(catalog.Count(card => card.Cls is not null && data.CardClasses.Contains(card.Cls)
+                && (card.Rarity == "职业" || card.Type == "能力卡")) == pool.Count,
+            "collection pool must not duplicate cards");
+        Check(pool.Count >= 45, "collection pool must cover the m45 milestone (data pool=66)");
+        // 里程碑触发条件 == achievements.json：5/15/30/45/全收集
+        var milestones = data.Achievements.CollectionMilestones;
+        Check(milestones.Select(ms => ms.Id).SequenceEqual(new[] { "m5", "m15", "m30", "m45", "mAll" }),
+            "milestone ids drifted from achievements.json");
+        Check(milestones.Select(ms => CollectionRoom.MilestoneNeed(ms, pool.Count)).SequenceEqual(new[] { 5, 15, 30, 45, pool.Count }),
+            "milestone needs must be 5/15/30/45/all");
+        Check(milestones[0].Reward.Wood == 3 && milestones[1].Reward.Rations == 5 && milestones[2].Reward.Keys == 10
+            && milestones[3].Reward.Legend == 2 && milestones[4].Reward.Egg == 1,
+            "milestone rewards drifted from achievements.json");
+
+        // 收藏转化：职业卡 +10 / 能力卡 +50，同一张只结算一次；取消重藏不重复发放（meta.js onCollect）
+        var b = new RunBaseState();
+        var classCard = pool.First(card => card.Rarity == "职业");
+        var abilityCard = pool.First(card => card.Type == "能力卡");
+        var stranger = new RunCard("not-collectible", "野生卡", "武术", "稀有", 2) { Cls = null };
+        Check(CollectionRoom.OnCollect(b, stranger, CollectionRoom.Toggle(b, stranger), data.CardClasses).Converted == false,
+            "uncatalogued cards must not convert xp");
+        var first = CollectionRoom.Toggle(b, classCard);
+        var xp1 = CollectionRoom.OnCollect(b, classCard, first, data.CardClasses);
+        Check(xp1.Converted && xp1.Amount == MetaRules.CollectXpClassCard && xp1.Cls == classCard.Cls && xp1.Ups == 0,
+            "class-card collection must convert +10 xp to its class");
+        Check(b.Classes[classCard.Cls!].Xp == MetaRules.CollectXpClassCard && b.Classes[classCard.Cls!].Lv == 1,
+            "class xp must land in the base class table");
+        CollectionRoom.Toggle(b, classCard);   // 取消收藏
+        CollectionRoom.Toggle(b, classCard);   // 再收藏
+        var xp2 = CollectionRoom.OnCollect(b, classCard, true, data.CardClasses);
+        Check(xp2.Converted == false && b.Classes[classCard.Cls!].Xp == MetaRules.CollectXpClassCard,
+            "re-collection must not pay the xp twice (collXp 落档)");
+        Check(CollectionRoom.Progress(b, pool) == 1, "collection progress must count distinct collected cards");
+        var xp3 = CollectionRoom.OnCollect(b, abilityCard, CollectionRoom.Toggle(b, abilityCard), data.CardClasses);
+        Check(xp3.Converted && xp3.Amount == MetaRules.CollectXpAbilityCard, "ability-card collection must convert +50 xp");
+
+        // 升级链：xpForNext(lv)=50+(lv-1)*40、Lv.10 封顶（meta.js LEVEL_MAX/xpForNext）
+        Check(MetaRules.XpForNext(1) == 50 && MetaRules.XpForNext(2) == 90 && MetaRules.XpForNext(10) == 410,
+            "xp curve drifted from meta.js");
+        var xpState = new RunBaseState();
+        CollectionRoom.AddClassXp(xpState, abilityCard.Cls!, 350);   // 350 = 跨 lv1→4（50+90+130+80 剩余）
+        var leveled = xpState.Classes[abilityCard.Cls!];
+        Check(leveled.Lv == 4 && leveled.Xp == 80, "xp must chain level-ups across the curve (350 → Lv.4 + 80)");
+        CollectionRoom.AddClassXp(xpState, abilityCard.Cls!, 10000);
+        Check(xpState.Classes[abilityCard.Cls!].Lv == MetaRules.ClassLevelMax, "class level must cap at 10");
+        Check(CollectionRoom.AddClassXp(xpState, abilityCard.Cls!, 100) == 0, "xp must not accrue past the level cap");
+
+        // 里程碑领奖：条件=进度≥need；奖励入库（传说卡随机不重复/宠物蛋卡），仓库满则整批缓发（meta.js claimColl）
+        var collector = new RunBaseState();
+        foreach (var card in pool.Take(5)) CollectionRoom.OnCollect(collector, card, CollectionRoom.Toggle(collector, card), data.CardClasses);
+        Check(CollectionRoom.MilestoneReached(milestones[0], collector, pool), "m5 must be reached at 5 collected");
+        Check(!CollectionRoom.MilestoneReached(milestones[1], collector, pool), "m15 must stay locked below 15");
+        var claim5 = CollectionRoom.Claim(collector, milestones[0], catalog, data.Pets, data, () => 0.0);
+        Check(claim5.Ok && collector.CollClaimed.Contains("m5") && collector.Wood == 3, "m5 claim must pay 3 wood once");
+        Check(CollectionRoom.Claim(collector, milestones[0], catalog, data.Pets, data, () => 0.0).Why == "claimed",
+            "m5 must be claimable only once");
+        Check(CollectionRoom.Claim(collector, milestones[1], catalog, data.Pets, data, () => 0.0).Why == "locked",
+            "locked milestones must refuse to claim");
+
+        // m45：2 张传说卡（同池去重）+ 已达成；mAll：宠物蛋入仓
+        foreach (var card in pool.Skip(5).Take(40)) CollectionRoom.OnCollect(collector, card, CollectionRoom.Toggle(collector, card), data.CardClasses);
+        Check(CollectionRoom.Progress(collector, pool) == 45, "setup: 45 collected");
+        var legendCountBefore = collector.Stash.Where(x => x.Card.Rarity == "传说").Sum(x => x.Count);
+        var claim45 = CollectionRoom.Claim(collector, milestones[3], catalog, data.Pets, data, () => 0.0);
+        Check(claim45.Ok, "m45 claim must succeed at 45 collected");
+        var legendGained = collector.Stash.Where(x => x.Card.Rarity == "传说").ToList();
+        Check(legendGained.Sum(x => x.Count) == legendCountBefore + 2, "m45 must deposit 2 legend cards");
+        Check(legendGained.Select(x => x.Card.Id).Distinct().Count() == legendGained.Count, "m45 legends must be distinct");
+        foreach (var card in pool.Skip(45)) CollectionRoom.OnCollect(collector, card, CollectionRoom.Toggle(collector, card), data.CardClasses);
+        Check(CollectionRoom.Progress(collector, pool) == pool.Count && CollectionRoom.PendingMilestones(milestones, collector, pool).Select(ms => ms.Id).Contains("mAll"),
+            "mAll must become pending at full collection");
+        var claimAll = CollectionRoom.Claim(collector, milestones[4], catalog, data.Pets, data, () => 0.0);
+        Check(claimAll.Ok && collector.Stash.Any(x => x.Card.Id == data.Pets.EggId), "mAll must deposit a pet-egg card");
+        Check(CollectionRoom.Claim(collector, milestones[4], catalog, data.Pets, data, () => 0.0).Why == "claimed",
+            "mAll must be claimable only once");
+
+        // 仓库容量不足：整批缓发（不扣里程碑、不发物资）
+        var packed = new RunBaseState();
+        while (packed.StashRoom > 0) packed.DepositCards(new[] { new RunCardStack(new RunCard($"filler-{packed.StashUsed}", $"塞满{packed.StashUsed}")) });
+        foreach (var card in pool.Take(45)) CollectionRoom.OnCollect(packed, card, CollectionRoom.Toggle(packed, card), data.CardClasses);
+        var fullClaim = CollectionRoom.Claim(packed, milestones[3], catalog, data.Pets, data, () => 0.0);
+        Check(fullClaim.Why == "full" && !packed.CollClaimed.Contains("m45") && packed.Rations == 0,
+            "a full stash must defer the whole milestone reward");
+
+        // 基地档持久化：收藏/收藏经验/里程碑 + 宠物全量随 RunBaseSnapshot/SaveGameDto JSON 往返
+        var snapshot = collector.CaptureSnapshot();
+        var restored = new RunBaseState();
+        restored.RestoreSnapshot(snapshot);
+        Check(restored.Collection.SetEquals(collector.Collection) && restored.CollXp.SetEquals(collector.CollXp)
+            && restored.CollClaimed.SetEquals(collector.CollClaimed) && restored.PetSel == collector.PetSel
+            && restored.Pets.Count == collector.Pets.Count && restored.Classes.Count == collector.Classes.Count,
+            "pets/collection base state must round-trip through the snapshot");
+        Check(restored.Stash.Sum(x => x.Count) == collector.Stash.Sum(x => x.Count), "snapshot stash must round-trip");
+        var dto = new SaveGameDto { Base = ToDtoForTest(snapshot) };
+        var json = JsonSerializer.Serialize(dto);
+        var roundTrip = JsonSerializer.Deserialize<SaveGameDto>(json)!;
+        roundTrip.Validate();
+        Check(roundTrip.Base!.Pets.ContainsKey("dog") && roundTrip.Base.PetSel == collector.PetSel
+            && roundTrip.Base.CollClaimed.ContainsKey("mAll") && roundTrip.Base.CollXp.Count == collector.CollXp.Count,
+            "pets/collection must survive the save JSON round trip");
+        var rehydrated = new RunBaseState();
+        rehydrated.RestoreSnapshot(new RunBaseSnapshot(roundTrip.Base.Wood, roundTrip.Base.Rations, roundTrip.Base.Keys,
+            roundTrip.Base.Coins, roundTrip.Base.BagUp, roundTrip.Base.SafeUp, roundTrip.Base.StashUp,
+            roundTrip.Base.Stash.Select(s => s.Card.Deserialize<RunCardSnapshot>()! with { Count = s.Count }).ToArray(),
+            roundTrip.Base.Pocket.Select(s => s.Card.Deserialize<RunCardSnapshot>()! with { Count = s.Count }).ToArray(),
+            new HashSet<string>(roundTrip.Base.Collection.Keys, StringComparer.Ordinal),
+            roundTrip.Base.Pets.Select(pair => new PetSnapshot(pair.Key, pair.Value.Lv, pair.Value.Ts)).ToArray(),
+            roundTrip.Base.PetSel,
+            new HashSet<string>(roundTrip.Base.CollClaimed.Keys, StringComparer.Ordinal),
+            new HashSet<string>(roundTrip.Base.CollXp.Keys, StringComparer.Ordinal),
+            new Dictionary<string, ClassProgress>(roundTrip.Base.Classes.Select(pair => KeyValuePair.Create(pair.Key,
+                new ClassProgress(pair.Value.Lv, pair.Value.Xp))), StringComparer.Ordinal)));
+        Check(rehydrated.Pets.Count == collector.Pets.Count && rehydrated.Collection.Count == collector.Collection.Count
+            && rehydrated.CollClaimed.Count == collector.CollClaimed.Count,
+            "pet/collection state must rehydrate from the save DTO");
+        // 存档校验：petSel 必须指向已拥有宠物
+        var badDto = new SaveGameDto { Base = new BaseStateDto { PetSel = "ghost" } };
+        try { badDto.Validate(); throw new InvalidOperationException("petSel must reference an owned pet"); }
+        catch (SaveFormatException) { _checks++; }
+        Console.WriteLine("[批次5] 收藏室：收藏池==data（职业+能力卡）、转化 +10/+50 一次结算、五里程碑触发/领奖/缓发==achievements.json 断言通过");
+    }
+
+    /// <summary>测试专用：RunBaseSnapshot → BaseStateDto（与 adapter ToDto 同构；测试工程不引用 App 层）。</summary>
+    private static BaseStateDto ToDtoForTest(RunBaseSnapshot snapshot) => new()
+    {
+        Wood = snapshot.Wood, Rations = snapshot.Rations, Keys = snapshot.Keys, Coins = snapshot.Coins,
+        BagUp = snapshot.BagUpgrade, SafeUp = snapshot.SafeUpgrade, StashUp = snapshot.StashUpgrade,
+        Stash = snapshot.Stash.Select(s => new CardStackDto { Card = JsonSerializer.SerializeToElement(s), Count = s.Count }).ToList(),
+        Pocket = snapshot.Pocket.Select(s => new CardStackDto { Card = JsonSerializer.SerializeToElement(s), Count = s.Count }).ToList(),
+        Collection = snapshot.Collection.ToDictionary(name => name, name => new CollectionEntryDto { Name = name }, StringComparer.Ordinal),
+        Pets = (snapshot.Pets ?? Array.Empty<PetSnapshot>()).ToDictionary(pet => pet.Id,
+            pet => new PetStateDto { Lv = pet.Lv, Ts = pet.Ts }, StringComparer.Ordinal),
+        PetSel = snapshot.PetSel,
+        CollClaimed = (snapshot.CollClaimed ?? (IReadOnlySet<string>)new HashSet<string>()).ToDictionary(id => id, _ => true, StringComparer.Ordinal),
+        CollXp = (snapshot.CollXp ?? (IReadOnlySet<string>)new HashSet<string>()).ToDictionary(id => id, _ => true, StringComparer.Ordinal)
+    };
 
     private static void FragmentSourcesAndCraftSemanticsMatchWeb()
     {

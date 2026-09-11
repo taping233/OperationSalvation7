@@ -1,0 +1,200 @@
+{
+  "achievements": [
+    {
+      "desc": "首次撤离成功",
+      "icon": "[[icon:exit]]",
+      "id": "firstExtract",
+      "name": "初出茅庐",
+      "reward": {
+        "wood": 2
+      }
+    },
+    {
+      "desc": "累计撤离成功 3 次",
+      "icon": "[[icon:bag]]",
+      "id": "extract3",
+      "name": "老练搜刮者",
+      "reward": {
+        "rations": 2
+      }
+    },
+    {
+      "back": "wolf",
+      "desc": "累计击败 10 个敌人",
+      "icon": "[[icon:swords]]",
+      "id": "kill10",
+      "name": "猎手",
+      "reward": {
+        "wood": 2
+      }
+    },
+    {
+      "back": "boss",
+      "desc": "首次击败污染核心的变异首脑",
+      "icon": "[[icon:skull]]",
+      "id": "firstBoss",
+      "name": "破壁者",
+      "reward": {
+        "wood": 3
+      }
+    },
+    {
+      "back": "altar",
+      "desc": "击败全部 3 只变异首脑",
+      "icon": "[[icon:crystal]]",
+      "id": "allBoss",
+      "name": "净化征服者",
+      "reward": {
+        "rations": 3
+      }
+    },
+    {
+      "back": "coin",
+      "desc": "单局撤离时携带 ≥ 30 币",
+      "icon": "[[icon:coin]]",
+      "id": "rich30",
+      "name": "小有积蓄",
+      "reward": {
+        "rations": 2
+      }
+    },
+    {
+      "back": "vault",
+      "desc": "累计运回 20 张卡牌入库",
+      "icon": "[[icon:archive]]",
+      "id": "stash20",
+      "name": "仓廪充实",
+      "reward": {
+        "rations": 2
+      }
+    },
+    {
+      "desc": "背包扩建至满级（30 格）",
+      "icon": "[[icon:bag]]",
+      "id": "bagMax",
+      "name": "能工巧匠",
+      "reward": {
+        "rations": 3
+      }
+    },
+    {
+      "back": "pet",
+      "desc": "宠物安全格升满（6 格）",
+      "icon": "[[icon:paw]]",
+      "id": "safeMax",
+      "name": "最忠实的伙伴",
+      "reward": {
+        "wood": 3
+      }
+    },
+    {
+      "desc": "任意职业熟练度达到 3 级",
+      "icon": "[[icon:medal]]",
+      "id": "class3",
+      "name": "崭露头角",
+      "reward": {
+        "wood": 2
+      }
+    },
+    {
+      "desc": "收藏桌游珍宝「金币」",
+      "icon": "[[icon:coin]]",
+      "id": "collectGold",
+      "name": "珍品收藏家",
+      "reward": {
+        "wood": 2
+      }
+    },
+    {
+      "desc": "收藏任意一张传说卡牌",
+      "icon": "[[icon:medal]]",
+      "id": "collectLegend",
+      "name": "传说典藏",
+      "reward": {
+        "rations": 2
+      }
+    },
+    {
+      "desc": "收藏 5 张不同的卡牌",
+      "icon": "[[icon:home]]",
+      "id": "collect5",
+      "name": "博物学家",
+      "reward": {
+        "rations": 3
+      }
+    },
+    {
+      "desc": "首次孵化出一只宠物",
+      "icon": "[[icon:paw]]",
+      "id": "petHatch1",
+      "name": "驯养新手",
+      "reward": {
+        "rations": 2
+      }
+    },
+    {
+      "desc": "累计孵化 3 只宠物",
+      "icon": "[[icon:crystal]]",
+      "id": "petHatch3",
+      "name": "孵蛋专家",
+      "reward": {
+        "wood": 2
+      }
+    },
+    {
+      "desc": "任意宠物升到满级（Lv.5）",
+      "icon": "[[icon:medal]]",
+      "id": "petMax",
+      "name": "心有灵犀",
+      "reward": {
+        "wood": 3
+      }
+    },
+    {
+      "desc": "集齐全部 6 只宠物",
+      "icon": "[[icon:home]]",
+      "id": "petAll",
+      "name": "宠物满堂",
+      "reward": {
+        "rations": 4
+      }
+    }
+  ],
+  "collectionMilestones": [
+    {
+      "id": "m5",
+      "need": 5,
+      "reward": {
+        "wood": 3
+      }
+    },
+    {
+      "id": "m15",
+      "need": 15,
+      "reward": {
+        "rations": 5
+      }
+    },
+    {
+      "id": "m30",
+      "need": 30,
+      "reward": {
+        "keys": 10
+      }
+    },
+    {
+      "id": "m45",
+      "need": 45,
+      "reward": {
+        "legend": 2
+      }
+    },
+    {
+      "id": "mAll",
+      "need": "all",
+      "reward": {
+        "egg": 1
+      }
+    }
+  ]
+}

@@ -21,6 +21,7 @@ internal static class CoreSmokeTests
         CombatResolvesDamageBlockAndHeal();
         SaveRoundTripsAndFallsBackToBackup();
         ClearSlotRemovesSaveAndBackup();
+        BattleSfxTrackerProducesSoundJsKeys();
         Console.WriteLine($"CORE_SMOKE_OK checks={_checks}");
         return 0;
     }
@@ -101,6 +102,35 @@ internal static class CoreSmokeTests
         public string ActionId { get; }
         public MarkerAction(string id, List<string> order) { ActionId = id; _order = order; }
         public void Execute(ActionContext context) => _order.Add(ActionId);
+    }
+
+    // 批次 5 rider [6c→A]：战斗音效信号生产器（PublishBattle 透传 SfxRequests 的核心语义）。
+    // 触发点对照 _planning/audio-inventory.md §3：execPlay→card、hitFoe→hit、玩家受伤→hurt、
+    // 恢复→heal、finish(true/false)→victory/defeat。
+    private static void BattleSfxTrackerProducesSoundJsKeys()
+    {
+        var sfx = new BattleSfxTracker();
+        Check(sfx.Drain().Count == 0, "a fresh tracker must have no pending sfx");
+        sfx.OnCardResolved(enemiesHpBefore: 30, enemiesHpAfter: 22, playerHpBefore: 30, playerHpAfter: 30);
+        Check(sfx.Pending.SequenceEqual(new[] { "card", "hit" }), "card play with enemy damage must request card+hit");
+        sfx.OnCardResolved(22, 22, 30, 25);
+        Check(sfx.Pending.SequenceEqual(new[] { "card", "hit", "card", "hurt" }), "player damage during play must append hurt");
+        sfx.OnCardResolved(22, 25, 25, 28);
+        Check(sfx.Pending.Last() == "heal", "player healing during play must request heal");
+        sfx.OnEnemyTurnResolved(28, 20);
+        Check(sfx.Pending.Last() == "hurt", "enemy turn damage must request hurt");
+        sfx.OnEnemyTurnResolved(20, 20);
+        Check(sfx.Pending.Last() == "hurt", "unchanged HP must not append a key");
+        sfx.Push("");
+        sfx.Push(null!);
+        Check(sfx.Pending.Count == 7, "blank keys must be rejected");
+        sfx.OnCombatEnded(victory: true);
+        sfx.OnCombatEnded(victory: false);
+        Check(sfx.Pending[^2] == "victory" && sfx.Pending[^1] == "defeat", "combat end must request victory/defeat");
+        var drained = sfx.Drain();
+        Check(drained.SequenceEqual(new[] { "card", "hit", "card", "hurt", "card", "heal", "hurt", "victory", "defeat" }),
+            "drain must return every requested key in order");
+        Check(sfx.Drain().Count == 0, "drain must clear the pending queue");
     }
 
     // 批次 4b rider：存档槽动作 RequestClearSlot 的服务端语义（删除存档含 .bak 备份，

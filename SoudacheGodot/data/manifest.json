@@ -1,6 +1,15 @@
 {
   "encoding": "UTF-8",
   "files": {
+    "achievements": {
+      "deps": [
+        {
+          "path": "搜打撤/game/data/achievements.json",
+          "sha256": "067374794aef3f0391fd3c17a05dff8cf3ff8487052fefe4342dac2e1d15336b"
+        }
+      ],
+      "path": "achievements.json"
+    },
     "cards": {
       "count": 245,
       "deps": [
@@ -34,6 +43,15 @@
       "path": "map.json",
       "sha256": "2232b5c3b8f441334abe4a355cb7c9923db776586b987f6ba345c04195bf603e",
       "source": "mapData.js"
+    },
+    "pets": {
+      "deps": [
+        {
+          "path": "搜打撤/game/data/pets.json",
+          "sha256": "89f8c2ffe48f83fe09b200cb28e4e1b7d71e68d0cce6c5f972c4d34bb785f5de"
+        }
+      ],
+      "path": "pets.json"
     },
     "rules": {
       "deps": [

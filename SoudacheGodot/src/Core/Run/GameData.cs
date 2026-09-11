@@ -39,12 +39,33 @@ public sealed record RunRandomEventData(string Text, int Weight, int CoinMin, in
 
 public sealed record CharacterData(string Id, string Name, string Class, int Index);
 
+/// <summary>成就奖励（achievements.json reward：wood/rations/keys/legend/egg/back）。</summary>
+public sealed record MilestoneRewardData(int Wood = 0, int Rations = 0, int Keys = 0, int Legend = 0, int Egg = 0, string? Back = null);
+
+/// <summary>成就条目（achievements.json achievements；done 判定函数在网页 meta.js，Godot 侧按需实装）。</summary>
+public sealed record AchievementData(string Id, string Name, string Desc, MilestoneRewardData Reward);
+
+/// <summary>收藏里程碑（achievements.json collectionMilestones；need 为张数或 "all"=全收集）。</summary>
+public sealed record CollectionMilestoneData(string Id, string Need, MilestoneRewardData Reward)
+{
+    /// <summary>need 为数值时的整数视图（"all" 时无意义，CollectionRoom.MilestoneNeed 已分流）。</summary>
+    public int NeedInt => int.TryParse(Need, out var parsed) ? parsed : int.MaxValue;
+}
+
+/// <summary>成就表（meta.js ACHIEVEMENTS + COLL_MILESTONES 的数据来源）。</summary>
+public sealed record AchievementTable(IReadOnlyList<AchievementData> Achievements,
+    IReadOnlyList<CollectionMilestoneData> CollectionMilestones)
+{
+    public static readonly AchievementTable Empty =
+        new(Array.Empty<AchievementData>(), Array.Empty<CollectionMilestoneData>());
+}
+
 public sealed record GameRulesData(int DiceSides, int PlayerMaxHp, int StaminaMax, int StaminaWarn,
     int FireHeal, double FireClassCardChance, int EmergencyExitCost,
     int BagStart, int BagMax, int BagUpgradeWood,
     int SafeStart, int SafeMax, int SafeUpgradeRations,
     int StashStart, int StashMax, int StashUpgradeSlots, int StashUpgradeWood,
-    int BossDeckSize, int PlayerAtk, int KeyNeeded);
+    int BossDeckSize, int PlayerAtk, int KeyNeeded, int StarterSha);
 
 /// <summary>Aggregated runtime tables loaded from data/cards.json, characters.json, map.json, rules.json.</summary>
 public sealed class GameData
@@ -67,6 +88,11 @@ public sealed class GameData
     public IReadOnlyList<string> CardRarities { get; }
     /// <summary>data/narrative-events.ink.json 原文（批次 4a 编译产物）；null 时事件格走 map.json randomEvents 旧表兜底。</summary>
     public string? NarrativeStoryJson { get; }
+    // —— 批次 5：宠物表 + 成就/收藏里程碑表 + 职业清单（cards.json classes）——
+    public PetTableSpec Pets { get; }
+    public AchievementTable Achievements { get; }
+    /// <summary>在册五职业（cards.json classes；meta.js classList 的数据来源）。</summary>
+    public IReadOnlyList<string> CardClasses { get; }
 
     public GameData(IReadOnlyDictionary<string, RunMonsterData> monsters,
         IReadOnlyList<RunEncounterTableData> encounters, IReadOnlyList<RunBossData> bosses,
@@ -75,7 +101,8 @@ public sealed class GameData
         IReadOnlyList<CharacterData> characters, GameRulesData rules, IReadOnlyDictionary<string, int> cardPrices,
         IReadOnlyDictionary<string, int> cardShopWeights, IReadOnlyDictionary<string, int> cardDropWeights,
         IReadOnlyList<string> cardDropTypes, IReadOnlyList<string> cardDropDiscountTypes,
-        IReadOnlyList<string> cardRarities, string? narrativeStoryJson = null)
+        IReadOnlyList<string> cardRarities, string? narrativeStoryJson = null,
+        PetTableSpec? pets = null, AchievementTable? achievements = null, IReadOnlyList<string>? cardClasses = null)
     {
         Monsters = monsters ?? throw new ArgumentNullException(nameof(monsters));
         Encounters = encounters ?? throw new ArgumentNullException(nameof(encounters));
@@ -93,6 +120,9 @@ public sealed class GameData
         CardDropDiscountTypes = cardDropDiscountTypes ?? throw new ArgumentNullException(nameof(cardDropDiscountTypes));
         CardRarities = cardRarities ?? throw new ArgumentNullException(nameof(cardRarities));
         NarrativeStoryJson = narrativeStoryJson;
+        Pets = pets ?? PetTableSpec.Empty;
+        Achievements = achievements ?? AchievementTable.Empty;
+        CardClasses = cardClasses ?? Array.Empty<string>();
     }
 
     public RunMonsterData RequireMonster(string id) => Monsters.TryGetValue(id, out var monster)
@@ -110,7 +140,7 @@ public sealed class GameData
     public CharacterData? Character(string id) => Characters.FirstOrDefault(character => character.Id == id);
 
     public static GameData Load(string cardsJson, string charactersJson, string mapJson, string rulesJson,
-        string? narrativeJson = null)
+        string? narrativeJson = null, string? petsJson = null, string? achievementsJson = null)
     {
         using var cards = JsonDocument.Parse(cardsJson);
         using var characters = JsonDocument.Parse(charactersJson);
@@ -134,7 +164,10 @@ public sealed class GameData
             ParseStringList(cards.RootElement, "dropTypes"),
             ParseStringList(cards.RootElement, "dropDiscountTypes"),
             ParseStringList(cards.RootElement, "rarities"),
-            narrativeJson);
+            narrativeJson,
+            petsJson is null ? null : ParsePets(petsJson),
+            achievementsJson is null ? null : ParseAchievements(achievementsJson),
+            ParseStringList(cards.RootElement, "classes"));
     }
 
     public static GameData LoadFromDirectory(string directory)
@@ -143,12 +176,17 @@ public sealed class GameData
         // narrative-events.ink.json（批次 4a 编译产物）缺省可缺——缺了事件格退回 map.json randomEvents 旧表。
         var narrativePath = Path.Combine(directory, "narrative-events.ink.json");
         var narrativeJson = File.Exists(narrativePath) ? File.ReadAllText(narrativePath) : null;
+        // 批次 5：pets.json / achievements.json 同为可选缺省（缺了宠物/收藏系统退化为空表）。
+        var petsPath = Path.Combine(directory, "pets.json");
+        var petsJson = File.Exists(petsPath) ? File.ReadAllText(petsPath) : null;
+        var achievementsPath = Path.Combine(directory, "achievements.json");
+        var achievementsJson = File.Exists(achievementsPath) ? File.ReadAllText(achievementsPath) : null;
         return Load(
             File.ReadAllText(Path.Combine(directory, "cards.json")),
             File.ReadAllText(Path.Combine(directory, "characters.json")),
             File.ReadAllText(Path.Combine(directory, "map.json")),
             File.ReadAllText(Path.Combine(directory, "rules.json")),
-            narrativeJson);
+            narrativeJson, petsJson, achievementsJson);
     }
 
     /// <summary>Locates the exported data/ directory by walking up from the binary and cwd.</summary>
@@ -327,7 +365,68 @@ public sealed class GameData
             ReadInt(rules, "stashStart"), ReadInt(rules, "stashMax"), ReadInt(rules, "stashUpgradeSlots"),
             ReadInt(rules, "stashUpgradeWood"), ReadInt(rules, "bossDeckSize"),
             // playerAtk=对局攻击力（网页 game.atk）；keyNeeded=宝藏大门钥匙需求（网页 base.js KEY_NEEDED）
-            ReadInt(rules, "playerAtk"), ReadInt(rules, "keyNeeded"));
+            // starterSha=初始攻击张数（网页 rules.js groups.battle.starterAttack；宠物 extraSha 在此基础上累加）
+            ReadInt(rules, "playerAtk"), ReadInt(rules, "keyNeeded"), ReadInt(rules, "starterSha"));
+    }
+
+    // ---------- 批次 5：pets.json / achievements.json ----------
+
+    private static PetTableSpec ParsePets(string petsJson)
+    {
+        using var document = JsonDocument.Parse(petsJson);
+        var root = document.RootElement;
+        var upCosts = root.TryGetProperty("upCosts", out var upNode) && upNode.ValueKind == JsonValueKind.Array
+            ? upNode.EnumerateArray().Select(node => node.GetInt32()).ToArray()
+            : Array.Empty<int>();
+        var list = new List<PetDef>();
+        if (root.TryGetProperty("list", out var listNode) && listNode.ValueKind == JsonValueKind.Array)
+            foreach (var pet in listNode.EnumerateArray())
+            {
+                var hasEffect = pet.TryGetProperty("effect", out var effectNode) && effectNode.ValueKind == JsonValueKind.Object;
+                list.Add(new PetDef(
+                    ReadString(pet, "id") ?? "",
+                    ReadString(pet, "name") ?? "",
+                    ReadString(pet, "icon") ?? "",
+                    ReadString(pet, "desc") ?? "",
+                    new PetEffect(
+                        hasEffect ? ReadInt(effectNode, "maxHp") : 0,
+                        hasEffect ? ReadDouble(effectNode, "classChest") : 0,
+                        hasEffect && ReadBool(effectNode, "shopFree"),
+                        hasEffect ? ReadInt(effectNode, "extraSha") : 0,
+                        hasEffect && ReadBool(effectNode, "shaToFireball"),
+                        hasEffect ? ReadInt(effectNode, "safeBonus") : 0)));
+            }
+        return new PetTableSpec(ReadString(root, "eggId") ?? "pet-egg",
+            ReadInt(root, "hatchCost"), ReadInt(root, "levelMax"), upCosts, list);
+    }
+
+    private static AchievementTable ParseAchievements(string achievementsJson)
+    {
+        using var document = JsonDocument.Parse(achievementsJson);
+        var root = document.RootElement;
+        var achievements = new List<AchievementData>();
+        if (root.TryGetProperty("achievements", out var listNode) && listNode.ValueKind == JsonValueKind.Array)
+            foreach (var item in listNode.EnumerateArray())
+                achievements.Add(new AchievementData(ReadString(item, "id") ?? "", ReadString(item, "name") ?? "",
+                    ReadString(item, "desc") ?? "", ParseReward(item)));
+        var milestones = new List<CollectionMilestoneData>();
+        if (root.TryGetProperty("collectionMilestones", out var msNode) && msNode.ValueKind == JsonValueKind.Array)
+            foreach (var item in msNode.EnumerateArray())
+            {
+                // need 在 JSON 里是数字或字符串 "all"——统一转成字符串承载（CollectionRoom.MilestoneNeed 分流）。
+                var need = item.TryGetProperty("need", out var needNode)
+                    ? needNode.ValueKind == JsonValueKind.String ? needNode.GetString() ?? "0" : needNode.GetRawText()
+                    : "0";
+                milestones.Add(new CollectionMilestoneData(ReadString(item, "id") ?? "", need, ParseReward(item)));
+            }
+        return new AchievementTable(achievements, milestones);
+    }
+
+    private static MilestoneRewardData ParseReward(JsonElement item)
+    {
+        if (!item.TryGetProperty("reward", out var reward) || reward.ValueKind != JsonValueKind.Object) return new();
+        return new MilestoneRewardData(ReadInt(reward, "wood"), ReadInt(reward, "rations"), ReadInt(reward, "keys"),
+            ReadInt(reward, "legend"), ReadInt(reward, "egg"), ReadString(reward, "back"));
     }
 
     private static IReadOnlyDictionary<string, int> ParseCardPrices(JsonElement cardsRoot)

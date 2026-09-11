@@ -160,10 +160,12 @@ function exportCharacters() {
 function exportRules() {
   const source = readSource('rules');
   const sandbox = evaluate(source, 'globalThis.__rules = RULES;', 'rules.js');
-  const rules = sandbox.__rules;
+  // 2026-09-12 上游 rules.js 改为 Object.freeze + 分组结构：导出前深拷贝解冻
+  //（canonical 会平铺排序，Godot 侧 ParseRules 只读已知扁平字段，新增字段无害）。
+  const rules = JSON.parse(JSON.stringify(sandbox.__rules));
   // 2026-09-12 批次 4b：网页 KEY_NEEDED=10 是 base.js 的局部 const（rules.js 未承载），
   // 按「数值进数据」口径补进导出契约，hub 宝藏大门与对局 HUD 由此读取，不再硬编码。
-  rules.keyNeeded = 10;
+  if (rules.keyNeeded === undefined) rules.keyNeeded = 10;
   return { rules, _hash: sourceHash(source) };
 }
 
@@ -236,6 +238,20 @@ function exportMap(rules) {
   };
 }
 
+/**
+ * 2026-09-12 批次 5（宠物 + 收藏室）：宠物表与成就/收藏里程碑表同为网页侧
+ * game/data/*.json 中央数据（base.js 经 DATA.pets、meta.js 经 DATA.achievements
+ * 消费），无 JS 派生逻辑，逐字导出即可。字段对照：
+ *   pets.json        → base.js:30-34（PET_EGG_ID/HATCH_COST/PET_LEVEL_MAX/PET_UP_COSTS/PETS）
+ *   achievements.json → meta.js:93/115（ACHIEVEMENTS / COLL_MILESTONES）
+ */
+function exportGameDataJson(fileName, guard) {
+  const raw = fs.readFileSync(assertSafeSource(path.join(GAME_DATA_DIR, fileName)), 'utf8');
+  const value = JSON.parse(raw);
+  guard(value);
+  return value;
+}
+
 function main() {
   fs.mkdirSync(OUTPUT_DIR, { recursive: true });
   const loader = loadDataContext();
@@ -243,6 +259,27 @@ function main() {
   const rules = exportRules();
   const cards = exportCards(loader.data);
   const map = exportMap(rules.rules);
+  // 批次 5：宠物 + 成就/收藏里程碑（逐字导出 + 最小结构守卫）
+  const pets = exportGameDataJson('pets.json', value => {
+    if (!value || typeof value !== 'object') fail('pets.json is not an object');
+    if (typeof value.eggId !== 'string' || !value.eggId) fail('pets.json missing eggId');
+    if (!Array.isArray(value.upCosts) || value.upCosts.length !== value.levelMax - 1)
+      fail('pets.json upCosts must have levelMax-1 entries');
+    if (!Array.isArray(value.list) || value.list.length === 0) fail('pets.json list is empty');
+    for (const pet of value.list)
+      if (!pet?.id || !pet?.name || !pet?.effect) fail(`pets.json entry missing id/name/effect: ${pet?.id}`);
+  });
+  const achievements = exportGameDataJson('achievements.json', value => {
+    if (!value || typeof value !== 'object') fail('achievements.json is not an object');
+    if (!Array.isArray(value.achievements) || value.achievements.length === 0)
+      fail('achievements.json achievements is empty');
+    if (!Array.isArray(value.collectionMilestones) || value.collectionMilestones.length === 0)
+      fail('achievements.json collectionMilestones is empty');
+    for (const item of value.achievements)
+      if (!item?.id || !item?.name || !item?.reward) fail(`achievements.json entry missing id/name/reward: ${item?.id}`);
+    for (const item of value.collectionMilestones)
+      if (!item?.id || !('need' in item) || !item?.reward) fail(`collectionMilestones entry missing id/need/reward: ${item?.id}`);
+  });
 
   const manifest = {
     schemaVersion: 1,
@@ -258,6 +295,8 @@ function main() {
       characters: { path: 'characters.json', source: 'characters.js', sha256: chars._hash, count: chars.characters.length },
       rules: { path: 'rules.json', source: 'rules.js', sha256: rules._hash, deps: [depHash('搜打撤/game/src/sdt-facade.js')] },
       map: { path: 'map.json', source: 'mapData.js', sha256: map._hash, deps: [depHash('搜打撤/game/data/map.json')] },
+      pets: { path: 'pets.json', deps: [depHash('搜打撤/game/data/pets.json')] },
+      achievements: { path: 'achievements.json', deps: [depHash('搜打撤/game/data/achievements.json')] },
     },
   };
   delete cards._hash;
@@ -269,8 +308,10 @@ function main() {
   writeJson('characters.json', chars);
   writeJson('rules.json', rules);
   writeJson('map.json', map);
+  writeJson('pets.json', pets);
+  writeJson('achievements.json', achievements);
   writeJson('manifest.json', manifest);
-  console.log(`[export-data] wrote ${cards.cards.length} cards, ${chars.characters.length} characters, map static tables v${map.map.version}`);
+  console.log(`[export-data] wrote ${cards.cards.length} cards, ${chars.characters.length} characters, map static tables v${map.map.version}, ${pets.list.length} pets, ${achievements.achievements.length} achievements`);
 }
 
 main();

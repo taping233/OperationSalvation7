@@ -35,6 +35,12 @@ public sealed class CoreGameAdapter : ICoreUiPort
     private int _lastRoll;
     // 祭坛弃 3 激活：UI 逐张勾选的暂存（按卡名去重，跨名累计 3 张实例）
     private readonly List<string> _altarSacrificePicks = new();
+    // 批次 5 rider [6c→A]：战斗音效信号生产器（PublishBattle 透传进 SfxRequests）
+    private readonly BattleSfxTracker _battleSfx = new();
+    // 批次 5：孵化/领奖等基地侧随机（网页 Random 流的确定性替身；孵化结果本身随机即可）
+    private readonly DeterministicRng _baseRng = new(0x50E7_0001UL);
+    // 卡牌稀有度表（rider [6c→A]：HandCardRarities 光晕信号的数据源）
+    private IReadOnlyDictionary<string, string> _rarityById = new Dictionary<string, string>();
 
     public event Action<BattleUiSnapshot>? BattleSnapshotChanged;
     public event Action<RunUiSnapshot>? RunSnapshotChanged;
@@ -48,7 +54,10 @@ public sealed class CoreGameAdapter : ICoreUiPort
             ReadResourceText("res://data/map.json"),
             ReadResourceText("res://data/rules.json"),
             // 批次 4c：事件叙事唯一来源 = data/narrative-events.ink.json（批次 4a 编译产物）
-            ReadResourceText("res://data/narrative-events.ink.json"));
+            ReadResourceText("res://data/narrative-events.ink.json"),
+            // 批次 5：宠物表 + 成就/收藏里程碑表
+            ReadResourceText("res://data/pets.json"),
+            ReadResourceText("res://data/achievements.json"));
         GameRuntime.Load(_data);
         _catalog = CardCatalog.Load(cardsJson);
         _runCards = LoadRunCards(cardsJson);
@@ -62,11 +71,12 @@ public sealed class CoreGameAdapter : ICoreUiPort
         _runCharacterId = characterId;
         _run = new RunState(DefaultSeed + (ulong)Math.Max(0, CharacterIndex(characterId)), baseState: _base);
         ConfigureRunCardPools(_run);
-        _run.TakeCardsFromBase(BuildInitialLoadout(_base, Math.Max(0, _run.BackpackCapacity - 5)));
-        if (_runCards.FirstOrDefault(card => card.Id == "builtin-sha") is { } starterAttack)
-            if (!_run.AddCard(starterAttack, 5)) throw new InvalidOperationException("背包无法装入 5 张初始攻击。");
+        // 批次 5：初始牌按携带宠物生效（RunState.GrantStarterCards，网页 grantStarterSha）——
+        // 先发初始牌（网页 newRun 顺序），仓库携带预留 = 初始牌总数，避免开局爆容量。
+        var starters = _run.GrantStarterCards(_runCards);
+        _run.TakeCardsFromBase(BuildInitialLoadout(_base, Math.Max(0, _run.BackpackCapacity - starters.StarterCount)));
         _lastRoll = 0;
-        _runStatus = $"{CharacterName(characterId)} 已进入外环";
+        _runStatus = $"{CharacterName(characterId)} 已进入外环" + (starters.FireballConverted ? "；火焰精灵：初始攻击化为了火球" : "");
         CreateCombat(new[] { new RunEnemy("training", "训练靶机", 36, 2) }, _run.Hp);
         PublishCurrentState();
     }
@@ -250,16 +260,88 @@ public sealed class CoreGameAdapter : ICoreUiPort
     public void RequestBaseAction(string actionId)
     {
         var target = _run?.Base ?? _base;
-        var upgraded = actionId switch
+        try
         {
-            "upgrade:bag" => target.UpgradeBag(),
-            "upgrade:safe" => target.UpgradeSafe(),
-            "upgrade:stash" => target.UpgradeStash(),
-            _ => false
-        };
-        _runStatus = upgraded ? "基地设施升级完成" : "资源不足或设施已满级";
+            switch (actionId)
+            {
+                case "upgrade:bag":
+                case "upgrade:stash":
+                {
+                    var upgraded = actionId == "upgrade:bag" ? target.UpgradeBag() : target.UpgradeStash();
+                    _runStatus = upgraded ? "基地设施升级完成" : "资源不足或设施已满级";
+                    break;
+                }
+                // —— 批次 5：宠物 + 收藏室（6b' hub 页动作；对应网页 game.hub.js）——
+                case "pet:hatch":
+                {
+                    var result = target.HatchPet(count => (int)(_baseRng.NextDouble() * count));
+                    _runStatus = result.Ok ? $"孵化成功：{result.Pet!.Name} 加入了基地！（1 张宠物蛋 + {_data.Pets.HatchCost} 储备币）"
+                        : result.Why switch
+                        {
+                            "noegg" => "仓库里没有宠物蛋",
+                            "poor" => $"储备币不足——孵化需要 {_data.Pets.HatchCost} 币",
+                            _ => "已集齐全部宠物，蛋可以留着收藏"
+                        };
+                    break;
+                }
+                default:
+                    if (actionId.StartsWith("pet:up:", StringComparison.Ordinal))
+                    {
+                        var id = actionId["pet:up:".Length..];
+                        var petName = PetName(id);
+                        _runStatus = target.UpgradePet(id) ? $"{petName} 升到了 Lv.{target.PetLevel(id)}！" : "口粮不足或该宠物已满级";
+                    }
+                    else if (actionId.StartsWith("pet:sel:", StringComparison.Ordinal))
+                    {
+                        var id = actionId["pet:sel:".Length..];
+                        _runStatus = target.SetPet(id) ? $"已携带 {PetName(id)} 出战" : "还没有这只宠物";
+                    }
+                    else if (actionId.StartsWith("collect:", StringComparison.Ordinal))
+                    {
+                        var cardId = actionId["collect:".Length..];
+                        var card = _runCards.FirstOrDefault(item => item.Id == cardId);
+                        if (card is null) _runStatus = "卡牌库中没有这张卡";
+                        else
+                        {
+                            var now = CollectionRoom.Toggle(target, card);
+                            var xp = CollectionRoom.OnCollect(target, card, now, _data.CardClasses);
+                            _runStatus = now
+                                ? xp.Converted
+                                    ? $"已收藏【{card.Name}】入职业收藏室，{xp.Cls} 获得 {xp.Amount} 点经验" + (xp.Ups > 0 ? $"（升级了 {xp.Ups} 级！）" : "")
+                                    : $"已收藏【{card.Name}】"
+                                : $"已取消收藏【{card.Name}】";
+                        }
+                    }
+                    else if (actionId.StartsWith("collclaim:", StringComparison.Ordinal))
+                    {
+                        var msId = actionId["collclaim:".Length..];
+                        var milestone = _data.Achievements.CollectionMilestones.FirstOrDefault(item => item.Id == msId);
+                        if (milestone is null) _runStatus = "没有这个收藏里程碑";
+                        else
+                        {
+                            var claim = CollectionRoom.Claim(target, milestone, _runCards, _data.Pets, _data,
+                                () => _baseRng.NextDouble());
+                            _runStatus = claim.Ok ? claim.Message
+                                : claim.Why == "full" ? "仓库容量不足——先卖出或扩建卡牌仓库再来领取"
+                                : claim.Why == "claimed" ? "该里程碑奖励已领取"
+                                : "收藏进度尚未达成";
+                        }
+                    }
+                    else
+                    {
+                        _runStatus = "未知基地操作。";
+                    }
+                    break;
+            }
+        }
+        catch (Exception error)
+        {
+            _runStatus = error.Message;
+        }
         PublishCurrentState();
     }
+
+    private string PetName(string id) => _data.Pets.List.FirstOrDefault(pet => pet.Id == id)?.Name ?? id;
 
     public void RequestPlayCard(string cardId, string? targetId, string[] infusionFuelIds)
     {
@@ -270,6 +352,8 @@ public sealed class CoreGameAdapter : ICoreUiPort
             return;
         }
         CardPlayResult result;
+        var enemiesHpBefore = EnemyHpTotal();
+        var playerHpBefore = _combat.GetCombatant(_playerId).Health;
         try
         {
             var targets = string.IsNullOrWhiteSpace(targetId) ? Array.Empty<StableId>() : new[] { new StableId(targetId) };
@@ -290,6 +374,8 @@ public sealed class CoreGameAdapter : ICoreUiPort
         _cardPlay.ResolveQueuedEffects();
         SyncNormalConsumedCards();
         _battleStatus = enemy == null ? "卡牌已结算" : $"卡牌已结算；{enemy.Name} 剩余 {enemy.Health} 点生命";
+        // rider [6c→A]：可观测状态变化 → sound.js 同名音效键（card/hit/hurt/heal）
+        _battleSfx.OnCardResolved(enemiesHpBefore, EnemyHpTotal(), playerHpBefore, _combat.GetCombatant(_playerId).Health);
         HandleCombatOutcome();
         PublishCurrentState();
     }
@@ -303,6 +389,7 @@ public sealed class CoreGameAdapter : ICoreUiPort
             return;
         }
         if (_bossCombat) _deck.DiscardHand();
+        var playerHpBefore = _combat.GetCombatant(_playerId).Health;
         _combat.StartEnemyTurn();
         foreach (var enemy in _combat.Combatants.Where(unit => unit.IsEnemy && !unit.IsDefeated))
         {
@@ -321,6 +408,8 @@ public sealed class CoreGameAdapter : ICoreUiPort
             if (_bossCombat) _deck.Draw(Math.Min(1, Math.Max(0, 8 - _deck.Hand.Count)), _combat.Rng);
             _battleStatus = _bossCombat ? "敌方回合已结算；抽取 1 张牌" : "敌方回合已结算；未使用的随身卡仍可打出";
         }
+        // rider [6c→A]：敌方回合的玩家受伤/回复 → hurt/heal 音效键
+        _battleSfx.OnEnemyTurnResolved(playerHpBefore, _combat.GetCombatant(_playerId).Health);
         HandleCombatOutcome();
         PublishCurrentState();
     }
@@ -348,7 +437,7 @@ public sealed class CoreGameAdapter : ICoreUiPort
                 LayerIdx = run?.LayerIndex ?? 0,
                 TrackPos = run?.TrackPosition ?? 0,
                 Hp = run?.Hp ?? player.Health,
-                MaxHp = RunRules.PlayerMaxHp,
+                MaxHp = run?.MaxHp ?? RunRules.PlayerMaxHp,
                 Coins = run?.Coins ?? 0,
                 Keys = run?.Keys ?? 0,
                 Wood = run?.Wood ?? 0,
@@ -482,7 +571,9 @@ public sealed class CoreGameAdapter : ICoreUiPort
     private CombatState CreateCombatState(IEnumerable<RunEnemy> enemies, int playerHp)
     {
         var combat = new CombatState(_playerId);
-        var player = new CombatantState(_playerId, CharacterName(_runCharacterId), RunRules.PlayerMaxHp, false) { Attack = RunRules.PlayerAtk };
+        // 批次 5：对局生命上限随携带宠物（汪汪狗 +maxHp；网页 newRun 的 game.maxHp 同源）
+        var playerMaxHp = _run?.MaxHp ?? RunRules.PlayerMaxHp;
+        var player = new CombatantState(_playerId, CharacterName(_runCharacterId), playerMaxHp, false) { Attack = RunRules.PlayerAtk };
         if (playerHp < player.MaxHealth) player.ApplyDamage(player.MaxHealth - Math.Max(0, playerHp));
         combat.AddCombatant(player);
         var index = 0;
@@ -540,6 +631,7 @@ public sealed class CoreGameAdapter : ICoreUiPort
         if (_combat.Phase == CombatPhase.Victory)
         {
             _battleStatus = "战斗胜利";
+            _battleSfx.OnCombatEnded(victory: true);
             if (_run?.Phase == RunPhase.Battle)
             {
                 _run.CompleteBattle(true, _combat.GetCombatant(_playerId).Health);
@@ -551,13 +643,19 @@ public sealed class CoreGameAdapter : ICoreUiPort
         else if (_combat.Phase == CombatPhase.Defeat)
         {
             _battleStatus = "战斗失败";
+            _battleSfx.OnCombatEnded(victory: false);
             if (_run?.Phase == RunPhase.Battle) _run.CompleteBattle(false, 0);
             _runStatus = "远征失败";
         }
     }
 
+    private int EnemyHpTotal() => _combat.Combatants.Where(unit => unit.IsEnemy).Sum(unit => unit.Health);
+
     private void PublishRun()
     {
+        var baseState = _run?.Base ?? _base;
+        var basePets = BuildPetSnapshot(baseState);
+        var collection = BuildCollectionSnapshot(baseState);
         if (_run == null)
         {
             RunSnapshotChanged?.Invoke(new RunUiSnapshot
@@ -571,7 +669,9 @@ public sealed class CoreGameAdapter : ICoreUiPort
                 StashUsed = _base.StashUsed,
                 StashCapacity = _base.StashCapacity,
                 InventoryLabels = _base.Stash.Select(stack => $"{stack.Card.Name} ×{stack.Count}").ToArray(),
-                Actions = BuildBaseActions(_base)
+                Actions = BuildBaseActions(_base),
+                BasePets = basePets,
+                Collection = collection
             });
             return;
         }
@@ -622,8 +722,73 @@ public sealed class CoreGameAdapter : ICoreUiPort
             InventoryLabels = _run.OwnedCards.Select(stack => $"{stack.Card.Name} ×{stack.Count}" + (stack.Safe ? "（安全）" : "")).ToArray(),
             Actions = BuildRunActions(_run),
             Nodes = nodes,
-            Event = BuildEventSnapshot(_run)
+            Event = BuildEventSnapshot(_run),
+            BasePets = basePets,
+            Collection = collection
         });
+    }
+
+    /// <summary>宠物页快照（批次 5）：pets.json 全表 + 基地档拥有/等级/携带/升级状态。</summary>
+    private PetUiSnapshot[] BuildPetSnapshot(RunBaseState state)
+    {
+        var spec = _data.Pets;
+        return spec.List.Select(pet =>
+        {
+            var owned = state.Pets.ContainsKey(pet.Id);
+            var level = state.PetLevel(pet.Id);
+            return new PetUiSnapshot
+            {
+                Id = pet.Id,
+                Name = pet.Name,
+                Desc = pet.Desc,
+                Owned = owned,
+                Level = level,
+                Carried = owned && state.PetSel == pet.Id,
+                UpgradeCost = PetSystem.UpgradeCost(spec, level),
+                CanUpgrade = state.CanUpgradePet(pet.Id),
+                CanCarry = owned && state.PetSel != pet.Id
+            };
+        }).ToArray();
+    }
+
+    /// <summary>职业收藏室快照（批次 5）：进度/里程碑/熟练度（meta.js 收藏室数据）。</summary>
+    private CollectionUiSnapshot BuildCollectionSnapshot(RunBaseState state)
+    {
+        var pool = CollectionRoom.Pool(_runCards, _data.CardClasses);
+        var progress = CollectionRoom.Progress(state, pool);
+        var milestones = _data.Achievements.CollectionMilestones.Select(ms => new CollectionMilestoneUiSnapshot
+        {
+            Id = ms.Id,
+            Need = CollectionRoom.MilestoneNeed(ms, pool.Count),
+            Reached = progress >= CollectionRoom.MilestoneNeed(ms, pool.Count),
+            Claimed = state.CollClaimed.Contains(ms.Id),
+            Reward = RewardText(ms.Reward)
+        }).ToArray();
+        var classes = _data.CardClasses.Select(cls =>
+        {
+            var entry = state.Classes.TryGetValue(cls, out var found) ? found : ClassProgress.Fresh;
+            return new ClassProgressUiSnapshot
+            {
+                Cls = cls,
+                Lv = entry.Lv,
+                Xp = entry.Xp,
+                XpForNext = MetaRules.XpForNext(entry.Lv),
+                Maxed = entry.Lv >= MetaRules.ClassLevelMax
+            };
+        }).ToArray();
+        return new CollectionUiSnapshot { Progress = progress, Total = pool.Count, Milestones = milestones, Classes = classes };
+    }
+
+    /// <summary>里程碑奖励文案（meta.js collRewardText 的同构实现）。</summary>
+    private static string RewardText(MilestoneRewardData reward)
+    {
+        var parts = new List<string>();
+        if (reward.Wood > 0) parts.Add($"木材 ×{reward.Wood}");
+        if (reward.Rations > 0) parts.Add($"口粮 ×{reward.Rations}");
+        if (reward.Keys > 0) parts.Add($"钥匙 ×{reward.Keys}");
+        if (reward.Legend > 0) parts.Add($"传说卡 ×{reward.Legend}");
+        if (reward.Egg > 0) parts.Add($"宠物蛋 ×{reward.Egg}");
+        return string.Join(" · ", parts);
     }
 
     /// <summary>事件页快照（批次 4c）：事件格已抽卡时携带 intro+选项（文本+@@effect@@ 元数据）；修鞋铺附复原列表。</summary>
@@ -683,11 +848,15 @@ public sealed class CoreGameAdapter : ICoreUiPort
             HandCardIds = _deck.Hand.Select(card => card.InstanceId.Value).ToArray(),
             HandCardInfuseCounts = _deck.Hand.Select(card => _catalog.GetRequired(card.DefinitionId).InfuseCount).ToArray(),
             HandCardTargetKinds = _deck.Hand.Select(card => TargetKind(_catalog.GetRequired(card.DefinitionId))).ToArray(),
+            // rider [6c→A]：稀有度信号（与手牌同序；6c 稀有卡光晕粒子着色用）
+            HandCardRarities = _deck.Hand.Select(card => _rarityById.TryGetValue(card.DefinitionId.Value, out var rarity) ? rarity : "").ToArray(),
             HandCardLabels = _deck.Hand.Select(card =>
             {
                 var definition = _catalog.GetRequired(card.DefinitionId);
                 return $"{definition.DisplayName}  [{card.EffectiveCost(definition)}]";
-            }).ToArray()
+            }).ToArray(),
+            // rider [6c→A]：透传待播音效键并清空（UI 逐键 PlaySfx）
+            SfxRequests = _battleSfx.Drain().ToArray()
         });
     }
 
@@ -851,12 +1020,37 @@ public sealed class CoreGameAdapter : ICoreUiPort
         return selections;
     }
 
-    private static RunActionUiSnapshot[] BuildBaseActions(RunBaseState state) => new[]
+    private RunActionUiSnapshot[] BuildBaseActions(RunBaseState state)
     {
-        new RunActionUiSnapshot { Id = "upgrade:bag", Label = "扩充背包", Detail = $"2 木材 · {state.BagCapacity}/{RunRules.BagMax}", Enabled = state.Wood >= RunRules.BagUpgradeWood && state.BagCapacity < RunRules.BagMax },
-        new RunActionUiSnapshot { Id = "upgrade:safe", Label = "扩充安全袋", Detail = $"2 口粮 · {state.SafeCapacity}/{RunRules.SafeMax}", Enabled = state.Rations >= RunRules.SafeUpgradeRations && state.SafeCapacity < RunRules.SafeMax },
-        new RunActionUiSnapshot { Id = "upgrade:stash", Label = "扩充仓库", Detail = $"2 木材 · {state.StashCapacity}/{RunRules.StashMax}", Enabled = state.Wood >= RunRules.StashUpgradeWood && state.StashCapacity < RunRules.StashMax }
-    };
+        // 批次 5：网页基地「升级」页 = 背包升级 + 宠物升级（保险升级已移除，base.js BASE_MIGRATIONS 1→2）。
+        // 安全格容量随携带宠物等级与 safeBonus（RunBaseState.SafeCapacity），不再走口粮升级。
+        var actions = new List<RunActionUiSnapshot>
+        {
+            new() { Id = "upgrade:bag", Label = "扩充背包", Detail = $"2 木材 · {state.BagCapacity}/{RunRules.BagMax}", Enabled = state.Wood >= RunRules.BagUpgradeWood && state.BagCapacity < RunRules.BagMax },
+            new() { Id = "upgrade:stash", Label = "扩充仓库", Detail = $"2 木材 · {state.StashCapacity}/{RunRules.StashMax}", Enabled = state.Wood >= RunRules.StashUpgradeWood && state.StashCapacity < RunRules.StashMax },
+            new() { Id = "pet:hatch", Label = "孵化宠物", Detail = $"1 张宠物蛋 + {_data.Pets.HatchCost} 币（随机、不重复）", Enabled = state.Stash.Any(x => x.Card.Id == _data.Pets.EggId) && state.Coins >= _data.Pets.HatchCost && state.Pets.Count < _data.Pets.List.Count }
+        };
+        foreach (var pet in _data.Pets.List)
+        {
+            if (!state.Pets.ContainsKey(pet.Id)) continue;
+            var level = state.PetLevel(pet.Id);
+            actions.Add(new RunActionUiSnapshot
+            {
+                Id = $"pet:up:{pet.Id}",
+                Label = $"升级宠物：{pet.Name}",
+                Detail = $"Lv.{level} · {PetSystem.UpgradeCost(_data.Pets, level)} 口粮 → Lv.{level + 1}",
+                Enabled = state.CanUpgradePet(pet.Id)
+            });
+            actions.Add(new RunActionUiSnapshot
+            {
+                Id = $"pet:sel:{pet.Id}",
+                Label = state.PetSel == pet.Id ? $"已携带：{pet.Name}" : $"携带：{pet.Name}",
+                Detail = pet.Desc,
+                Enabled = state.PetSel != pet.Id
+            });
+        }
+        return actions.ToArray();
+    }
 
     private RunActionUiSnapshot[] BuildRunActions(RunState run)
     {
@@ -1012,6 +1206,7 @@ public sealed class CoreGameAdapter : ICoreUiPort
             var name = card.TryGetProperty("name", out var nameNode) ? nameNode.GetString() ?? id : id;
             var type = card.TryGetProperty("type", out var typeNode) ? typeNode.GetString() ?? "武术" : "武术";
             var rarity = card.TryGetProperty("rarity", out var rarityNode) ? rarityNode.GetString() ?? "古朴" : "古朴";
+            var cls = card.TryGetProperty("cls", out var clsNode) ? clsNode.GetString() : null;
             var desc = card.TryGetProperty("desc", out var descNode) && descNode.ValueKind == JsonValueKind.String ? descNode.GetString() ?? "" : "";
             var value = card.TryGetProperty("value", out var valueNode) && valueNode.TryGetInt32(out var parsed) ? parsed : 0;
             var unrandom = card.TryGetProperty("unrandom", out var unrandomNode) && unrandomNode.ValueKind == JsonValueKind.True;
@@ -1025,7 +1220,7 @@ public sealed class CoreGameAdapter : ICoreUiPort
             else if (desc.Contains("不可出售", StringComparison.Ordinal)) sellable = false;
             else sellable = desc.Contains("可出售", StringComparison.Ordinal);
             string? material = type == "资源" ? (name.Contains("木", StringComparison.Ordinal) ? "wood" : name.Contains("口粮", StringComparison.Ordinal) ? "rations" : name.Contains("钥匙", StringComparison.Ordinal) ? "keys" : null) : null;
-            result.Add(new RunCard(id, name, type, rarity, value, sellable, id == "builtin-sha", material) { Unrandom = unrandom });
+            result.Add(new RunCard(id, name, type, rarity, value, sellable, id == "builtin-sha", material) { Unrandom = unrandom, Cls = cls });
         }
         // 第二遍：无币值卡按 rarityOf 半价回填（cards.js sellPrice 的兜底公式）
         string RarityOf(string id)
@@ -1044,6 +1239,7 @@ public sealed class CoreGameAdapter : ICoreUiPort
             if (card.SellPrice > 0) continue;
             result[index] = card with { SellPrice = Math.Max(1, _data.CardPrice(RarityOf(card.Id)) / 2) };
         }
+        _rarityById = rarityById;   // rider [6c→A]：PublishBattle 的 HandCardRarities 信号源
         return result;
     }
 
@@ -1060,7 +1256,13 @@ public sealed class CoreGameAdapter : ICoreUiPort
         Wood = snapshot.Wood, Rations = snapshot.Rations, Keys = snapshot.Keys, Coins = snapshot.Coins,
         BagUp = snapshot.BagUpgrade, SafeUp = snapshot.SafeUpgrade, StashUp = snapshot.StashUpgrade,
         Stash = snapshot.Stash.Select(ToStackDto).ToList(), Pocket = snapshot.Pocket.Select(ToStackDto).ToList(),
-        Collection = snapshot.Collection.ToDictionary(name => name, name => new CollectionEntryDto { Name = name }, StringComparer.Ordinal)
+        Collection = snapshot.Collection.ToDictionary(name => name, name => new CollectionEntryDto { Name = name }, StringComparer.Ordinal),
+        // 批次 5：宠物 + 收藏室（对齐网页基地档 pets/petSel/collClaimed/collXp）
+        Pets = (snapshot.Pets ?? Array.Empty<PetSnapshot>()).ToDictionary(pet => pet.Id,
+            pet => new PetStateDto { Lv = pet.Lv, Ts = pet.Ts }, StringComparer.Ordinal),
+        PetSel = snapshot.PetSel,
+        CollClaimed = (snapshot.CollClaimed ?? (IReadOnlySet<string>)new HashSet<string>()).ToDictionary(id => id, _ => true, StringComparer.Ordinal),
+        CollXp = (snapshot.CollXp ?? (IReadOnlySet<string>)new HashSet<string>()).ToDictionary(id => id, _ => true, StringComparer.Ordinal)
     };
 
     private static CardStackDto ToStackDto(RunCardSnapshot snapshot) => new() { Card = JsonSerializer.SerializeToElement(snapshot), Count = snapshot.Count };
@@ -1074,7 +1276,12 @@ public sealed class CoreGameAdapter : ICoreUiPort
             return value with { Count = stack.Count };
         }
         state.RestoreSnapshot(new RunBaseSnapshot(dto.Wood, dto.Rations, dto.Keys, dto.Coins, dto.BagUp, dto.SafeUp, dto.StashUp,
-            dto.Stash.Select(ReadStack).ToArray(), dto.Pocket.Select(ReadStack).ToArray(), new HashSet<string>(dto.Collection.Keys, StringComparer.Ordinal)));
+            dto.Stash.Select(ReadStack).ToArray(), dto.Pocket.Select(ReadStack).ToArray(), new HashSet<string>(dto.Collection.Keys, StringComparer.Ordinal),
+            dto.Pets.Select(pair => new PetSnapshot(pair.Key, pair.Value.Lv, pair.Value.Ts)).ToArray(), dto.PetSel,
+            new HashSet<string>(dto.CollClaimed.Where(pair => pair.Value).Select(pair => pair.Key), StringComparer.Ordinal),
+            new HashSet<string>(dto.CollXp.Where(pair => pair.Value).Select(pair => pair.Key), StringComparer.Ordinal),
+            new Dictionary<string, ClassProgress>(dto.Classes.Select(pair => KeyValuePair.Create(pair.Key,
+                new ClassProgress(Math.Max(1, pair.Value.Lv), Math.Max(0, pair.Value.Xp)))), StringComparer.Ordinal)));
         return state;
     }
 

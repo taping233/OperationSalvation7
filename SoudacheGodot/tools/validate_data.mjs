@@ -141,22 +141,81 @@ function validateMap(mapData, rulesData) {
   check(map.rules?.diceSides === rulesData.rules?.diceSides, 'map rules do not match rules.json');
 }
 
+// 2026-09-12 批次 5（宠物 + 收藏室）：真源 = base.js:30-34 + meta.js:93/115
+// 消费的 game/data/pets.json 与 achievements.json（逐字导出），守卫最小定版数值。
+const EXPECTED_PETS = {
+  eggId: 'pet-egg', hatchCost: 50, levelMax: 5, upCosts: [2, 3, 4, 5],
+  ids: ['dog', 'falcon', 'cat', 'robot', 'fire', 'penguin'],
+};
+
+function validatePets(petsData, cardsData) {
+  check(petsData.eggId === EXPECTED_PETS.eggId, `pets eggId expected ${EXPECTED_PETS.eggId}, got ${petsData.eggId}`);
+  check(petsData.hatchCost === EXPECTED_PETS.hatchCost, `pets hatchCost expected ${EXPECTED_PETS.hatchCost}, got ${petsData.hatchCost}`);
+  check(petsData.levelMax === EXPECTED_PETS.levelMax, `pets levelMax expected ${EXPECTED_PETS.levelMax}, got ${petsData.levelMax}`);
+  check(stableJson(petsData.upCosts || []).join(',') === EXPECTED_PETS.upCosts.join(','), `pets upCosts expected ${JSON.stringify(EXPECTED_PETS.upCosts)}, got ${JSON.stringify(petsData.upCosts)}`);
+  const petIds = uniqueIds(petsData.list || [], 'pets');
+  check([...petIds].sort().join(',') === [...EXPECTED_PETS.ids].sort().join(','), `pet ids expected ${EXPECTED_PETS.ids.join(',')}, got ${[...petIds].join(',')}`);
+  const eggId = petsData.eggId;
+  check((cardsData.cards || []).some(card => card.id === eggId), `pets eggId ${eggId} must exist in the card table`);
+  for (const pet of petsData.list || []) {
+    check(pet.effect && typeof pet.effect === 'object', `pet ${pet.id} missing effect object`);
+    const keys = Object.keys(pet.effect || {});
+    check(keys.every(key => ['maxHp', 'classChest', 'shopFree', 'extraSha', 'shaToFireball', 'safeBonus'].includes(key)),
+      `pet ${pet.id} has unknown effect keys: ${keys.join(',')}`);
+  }
+}
+
+const EXPECTED_MILESTONES = {
+  m5: { need: 5, reward: { wood: 3 } },
+  m15: { need: 15, reward: { rations: 5 } },
+  m30: { need: 30, reward: { keys: 10 } },
+  m45: { need: 45, reward: { legend: 2 } },
+  mAll: { need: 'all', reward: { egg: 1 } },
+};
+
+function validateAchievements(achievementsData, petsData) {
+  const achievements = achievementsData.achievements || [];
+  check(achievements.length === 17, `achievement count ${achievements.length} != expected 17`);
+  for (const item of achievements) {
+    check(typeof item.reward === 'object' && item.reward !== null, `achievement ${item.id} missing reward`);
+    const keys = Object.keys(item.reward);
+    check(keys.every(key => ['wood', 'rations', 'back'].includes(key)),
+      `achievement ${item.id} has unknown reward keys: ${keys.join(',')}`);
+  }
+  const milestones = achievementsData.collectionMilestones || [];
+  check(milestones.length === 5, `collectionMilestones count ${milestones.length} != expected 5`);
+  for (const milestone of milestones) {
+    const expected = EXPECTED_MILESTONES[milestone.id];
+    check(expected, `unexpected collection milestone ${milestone.id}`);
+    if (!expected) continue;
+    check(milestone.need === expected.need, `milestone ${milestone.id} need expected ${expected.need}, got ${milestone.need}`);
+    check(stableJson(milestone.reward) === stableJson(expected.reward),
+      `milestone ${milestone.id} reward expected ${JSON.stringify(expected.reward)}, got ${JSON.stringify(milestone.reward)}`);
+  }
+  const eggReward = milestones.find(milestone => milestone.id === 'mAll');
+  check(eggReward?.reward?.egg === 1 && petsData.eggId === 'pet-egg', 'mAll egg reward must hatch from pet-egg');
+}
+
 function main() {
   const manifest = load('manifest.json');
   const cards = load('cards.json');
   const characters = load('characters.json');
   const rules = load('rules.json');
   const map = load('map.json');
+  const pets = load('pets.json');
+  const achievements = load('achievements.json');
   validateManifest(manifest);
   validateCards(cards, characters);
   validateRules(rules);
   validateMap(map, rules);
+  validatePets(pets, cards);
+  validateAchievements(achievements, pets);
   if (errors.length) {
     for (const message of errors) console.error(`[validate-data] FAIL: ${message}`);
     process.exitCode = 1;
     return;
   }
-  console.log(`[validate-data] OK: ${cards.cards.length} cards, ${characters.characters.length} characters, map static tables v${map.map.version}; ids/references/rules verified`);
+  console.log(`[validate-data] OK: ${cards.cards.length} cards, ${characters.characters.length} characters, map static tables v${map.map.version}, ${pets.list?.length ?? 0} pets, ${achievements.achievements?.length ?? 0} achievements; ids/references/rules verified`);
 }
 
 main();

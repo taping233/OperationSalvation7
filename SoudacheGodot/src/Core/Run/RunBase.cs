@@ -10,7 +10,7 @@ public enum RunCardSemantic { Combat, Resource, Event, Map, Equipment, Item }
 public sealed record RunCard(string Id, string Name, string Type = "武术", string Rarity = "古朴",
     int SellPrice = 1, bool Sellable = false, bool IsInitialAttack = false,
     string? MaterialKind = null, int MaterialAmount = 1, RunCardSemantic? Category = null,
-    bool Unrandom = false)
+    bool Unrandom = false, string? Cls = null)
 {
     public RunCardSemantic Semantic => Category ?? Type switch
     {
@@ -38,10 +38,13 @@ public sealed class RunCardStack
 
 public sealed record RunCardSnapshot(string Id, string Name, string Type, string Rarity, int SellPrice,
     bool Sellable, bool IsInitialAttack, string? MaterialKind, int MaterialAmount, int Count, bool Safe,
-    RunCardSemantic? Category = null);
+    RunCardSemantic? Category = null, string? Cls = null);
+public sealed record PetSnapshot(string Id, int Lv, long Ts);
 public sealed record RunBaseSnapshot(int Wood, int Rations, int Keys, int Coins, int BagUpgrade, int SafeUpgrade,
     int StashUpgrade, IReadOnlyList<RunCardSnapshot> Stash, IReadOnlyList<RunCardSnapshot> Pocket,
-    IReadOnlySet<string> Collection);
+    IReadOnlySet<string> Collection, IReadOnlyList<PetSnapshot>? Pets = null, string? PetSel = null,
+    IReadOnlySet<string>? CollClaimed = null, IReadOnlySet<string>? CollXp = null,
+    IReadOnlyDictionary<string, ClassProgress>? Classes = null);
 public sealed record RunMaterialUseResult(bool Ok, int Quantity, int Total, string Kind, string Why);
 
 /// <summary>Pure representation of the per-slot base from base.js.</summary>
@@ -57,12 +60,40 @@ public sealed class RunBaseState
     public List<RunCardStack> Stash { get; } = new();
     public List<RunCardStack> Pocket { get; } = new();
     public HashSet<string> Collection { get; } = new(StringComparer.Ordinal);
+    // —— 批次 5：宠物 + 收藏室 + 职业熟练度（base.js def() 的 pets/petSel/collClaimed/collXp/classes）——
+    /// <summary>已拥有宠物 [宠物id] => { lv, ts }（宠物蛋孵化；初始宠物汪汪狗自动获得）。</summary>
+    public Dictionary<string, PetSave> Pets { get; } = new(StringComparer.Ordinal);
+    /// <summary>当前携带的宠物 id（出发携带效果 / 安全格数量随之变化）；无宠物时 null。</summary>
+    public string? PetSel { get; private set; }
+    /// <summary>收藏里程碑领奖记录（meta.js collClaimed，每个一次性奖励只能领一次）。</summary>
+    public HashSet<string> CollClaimed { get; } = new(StringComparer.Ordinal);
+    /// <summary>收藏经验已结算标记（meta.js collXp：取消重藏不重复发放）。</summary>
+    public HashSet<string> CollXp { get; } = new(StringComparer.Ordinal);
+    /// <summary>职业熟练度 [职业名] => { lv, xp }（收藏转化 +10/+50 的去处）。</summary>
+    public Dictionary<string, ClassProgress> Classes { get; } = new(StringComparer.Ordinal);
     public int BagCapacity => Math.Min(RunRules.BagMax, RunRules.BagStart + BagUpgrade);
-    public int SafeCapacity => Math.Min(RunRules.SafeMax, RunRules.SafeStart + SafeUpgrade);
+    /// <summary>安全格容量（批次 5 起随携带宠物）：Lv.N 提供 safeStart+N-1 格（上限 safeMax），safeBonus 额外累加。</summary>
+    public int SafeCapacity => PetSystem.SafeCapacity(PetSpec, PetSel,
+        Pets.TryGetValue(PetSel ?? "", out var carried) ? carried.Lv : 0);
     public int StashCapacity => Math.Min(RunRules.StashMax, RunRules.StashStart + StashUpgrade * RunRules.StashUpgradeSlots);
     public int StashUsed => Stash.Sum(x => x.Count);
     public int StashRoom => Math.Max(0, StashCapacity - StashUsed);
     public int KeyCount => Keys + Stash.Where(x => MaterialKind(x.Card) == "keys").Sum(x => (x.Card.Name.Contains("一串", StringComparison.Ordinal) ? 2 : 1) * x.Count);
+
+    /// <summary>宠物表（pets.json）；经 GameRuntime 注入进程级数据（与 RunState 同一约定）。</summary>
+    private static PetTableSpec PetSpec => GameRuntime.Data.Pets;
+
+    public RunBaseState() => EnsureStarterPet();
+
+    /// <summary>
+    /// 初始宠物「汪汪狗」进入基地自动获得（base.js:173-178 ensureStarterPet，需求 #4）；
+    /// 老档/快照恢复也走这里兜底（dog 缺失补领，petSel 失效回退到 dog）。
+    /// </summary>
+    public void EnsureStarterPet()
+    {
+        if (!Pets.ContainsKey("dog")) Pets["dog"] = new PetSave(1, DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
+        if (PetSel is null || !Pets.ContainsKey(PetSel)) PetSel = "dog";
+    }
 
     public int SeedStarterStash(IEnumerable<RunCard> cards, int count = 5)
     {
@@ -78,7 +109,10 @@ public sealed class RunBaseState
     }
 
     public RunBaseSnapshot CaptureSnapshot() => new(Wood, Rations, Keys, Coins, BagUpgrade, SafeUpgrade, StashUpgrade,
-        Stash.Select(ToSnapshot).ToArray(), Pocket.Select(ToSnapshot).ToArray(), new HashSet<string>(Collection, StringComparer.Ordinal));
+        Stash.Select(ToSnapshot).ToArray(), Pocket.Select(ToSnapshot).ToArray(), new HashSet<string>(Collection, StringComparer.Ordinal),
+        Pets.Select(pair => new PetSnapshot(pair.Key, pair.Value.Lv, pair.Value.Ts)).ToArray(), PetSel,
+        new HashSet<string>(CollClaimed, StringComparer.Ordinal), new HashSet<string>(CollXp, StringComparer.Ordinal),
+        new Dictionary<string, ClassProgress>(Classes, StringComparer.Ordinal));
 
     public void RestoreSnapshot(RunBaseSnapshot snapshot)
     {
@@ -88,18 +122,30 @@ public sealed class RunBaseState
         if (snapshot.Stash.Any(x => x.Count <= 0) || snapshot.Pocket.Any(x => x.Count <= 0)) throw new ArgumentException("基地卡堆数量必须为正。", nameof(snapshot));
         Wood = snapshot.Wood; Rations = snapshot.Rations; Keys = snapshot.Keys; Coins = snapshot.Coins;
         BagUpgrade = snapshot.BagUpgrade; SafeUpgrade = snapshot.SafeUpgrade; StashUpgrade = snapshot.StashUpgrade;
-        Stash.Clear(); Pocket.Clear(); Collection.Clear();
+        Stash.Clear(); Pocket.Clear(); Collection.Clear(); Pets.Clear(); CollClaimed.Clear(); CollXp.Clear(); Classes.Clear();
         Stash.AddRange(snapshot.Stash.Select(FromSnapshot)); Pocket.AddRange(snapshot.Pocket.Select(FromSnapshot));
         foreach (var id in snapshot.Collection) Collection.Add(id);
+        // 批次 5：宠物/收藏室/熟练度（可选字段，旧快照缺省即空）。
+        if (snapshot.Pets is not null)
+            foreach (var pet in snapshot.Pets)
+                Pets[pet.Id] = new PetSave(Math.Max(1, pet.Lv), pet.Ts);
+        PetSel = snapshot.PetSel is not null && Pets.ContainsKey(snapshot.PetSel) ? snapshot.PetSel : null;
+        if (snapshot.CollClaimed is not null) foreach (var id in snapshot.CollClaimed) CollClaimed.Add(id);
+        if (snapshot.CollXp is not null) foreach (var id in snapshot.CollXp) CollXp.Add(id);
+        if (snapshot.Classes is not null)
+            foreach (var pair in snapshot.Classes)
+                Classes[pair.Key] = new(Math.Max(1, pair.Value.Lv), Math.Max(0, pair.Value.Xp));
+        // base.js ensureStarterPet：每次进入档位兜底（狗必在、petSel 有效）
+        EnsureStarterPet();
         if (BagUpgrade > RunRules.BagMax - RunRules.BagStart || SafeUpgrade > RunRules.SafeMax - RunRules.SafeStart || StashUpgrade > (RunRules.StashMax - RunRules.StashStart) / RunRules.StashUpgradeSlots)
             throw new ArgumentOutOfRangeException(nameof(snapshot), "基地升级超过规则上限。");
         if (StashUsed > StashCapacity) throw new ArgumentException("仓库容量不足以容纳快照卡牌。", nameof(snapshot));
     }
 
     private static RunCardSnapshot ToSnapshot(RunCardStack stack) => new(stack.Card.Id, stack.Card.Name, stack.Card.Type, stack.Card.Rarity,
-        stack.Card.SellPrice, stack.Card.Sellable, stack.Card.IsInitialAttack, stack.Card.MaterialKind, stack.Card.MaterialAmount, stack.Count, stack.Safe, stack.Card.Category);
+        stack.Card.SellPrice, stack.Card.Sellable, stack.Card.IsInitialAttack, stack.Card.MaterialKind, stack.Card.MaterialAmount, stack.Count, stack.Safe, stack.Card.Category, stack.Card.Cls);
     private static RunCardStack FromSnapshot(RunCardSnapshot value) => new(new RunCard(value.Id, value.Name, value.Type, value.Rarity,
-        value.SellPrice, value.Sellable, value.IsInitialAttack, value.MaterialKind, value.MaterialAmount, value.Category), value.Count, value.Safe);
+        value.SellPrice, value.Sellable, value.IsInitialAttack, value.MaterialKind, value.MaterialAmount, value.Category, Cls: value.Cls), value.Count, value.Safe);
 
     public void AddResources(int wood = 0, int rations = 0, int keys = 0, int coins = 0)
     {
@@ -107,10 +153,68 @@ public sealed class RunBaseState
     }
     public int TakeReserveCoins() { var value = Coins; Coins = 0; return value; }
     public bool UpgradeBag() => Wood >= RunRules.BagUpgradeWood && BagCapacity < RunRules.BagMax && SpendWood(RunRules.BagUpgradeWood, () => BagUpgrade++);
-    public bool UpgradeSafe() => Rations >= RunRules.SafeUpgradeRations && SafeCapacity < RunRules.SafeMax && SpendRations(RunRules.SafeUpgradeRations, () => SafeUpgrade++);
     public bool UpgradeStash() => Wood >= RunRules.StashUpgradeWood && StashCapacity < RunRules.StashMax && SpendWood(RunRules.StashUpgradeWood, () => StashUpgrade++);
     private bool SpendWood(int n, Action apply) { Wood -= n; apply(); return true; }
-    private bool SpendRations(int n, Action apply) { Rations -= n; apply(); return true; }
+
+    // ---------- 宠物操作（批次 5，ported from base.js:272-293/357-381）----------
+
+    /// <summary>宠物等级（1..levelMax 夹取；未拥有视为 1）。</summary>
+    public int PetLevel(string id) => Pets.TryGetValue(id, out var pet) ? PetSystem.Level(PetSpec, pet.Lv) : 1;
+
+    /// <summary>当前携带的宠物定义（base.js carriedPet；没有宠物时 null）。</summary>
+    public PetDef? CarriedPet() => PetSystem.Def(PetSpec, PetSel);
+
+    /// <summary>当前携带宠物的效果（无宠物时全零效果）。</summary>
+    public PetEffect CarriedPetEffect() => CarriedPet()?.Effect ?? new PetEffect();
+
+    /// <summary>携带宠物（base.js setPet：只能携带已拥有的；切换后携带效果与安全格随之变化）。</summary>
+    public bool SetPet(string id)
+    {
+        if (!Pets.ContainsKey(id)) return false;
+        PetSel = id;
+        return true;
+    }
+
+    /// <summary>升级到下一级所需口粮（base.js petUpCost：upCosts[level-1]，递增 2-3-4-5）。</summary>
+    public int PetUpgradeCost(string id) => PetSystem.UpgradeCost(PetSpec, PetLevel(id));
+
+    /// <summary>base.js canUpgradePet：已拥有、未满级、口粮足够。</summary>
+    public bool CanUpgradePet(string id) => Pets.ContainsKey(id) && PetLevel(id) < PetSpec.LevelMax && Rations >= PetUpgradeCost(id);
+
+    /// <summary>base.js upgradePet：保险升级已改为宠物升级——口粮递增 2-3-4-5，上限 Lv.5。</summary>
+    public bool UpgradePet(string id)
+    {
+        if (!CanUpgradePet(id)) return false;
+        Rations -= PetUpgradeCost(id);
+        var current = Pets[id];
+        Pets[id] = current with { Lv = PetLevel(id) + 1 };
+        return true;
+    }
+
+    /// <summary>
+    /// base.js hatchPet：仓库中的 1 张宠物蛋 + hatchCost 储备币 → 随机获得 1 只未拥有的宠物。
+    /// picker(unownedCount) 返回选中的下标（网页 Random('pet') 流；缺省取首个，测试可注入）。
+    /// </summary>
+    public HatchResult HatchPet(Func<int, int>? picker = null)
+    {
+        var spec = PetSpec;
+        var eggStack = Stash.FirstOrDefault(x => x.Card.Id == spec.EggId);
+        if (eggStack is null) return HatchResult.NoEgg;
+        if (Coins < spec.HatchCost) return HatchResult.Poor;
+        var unowned = spec.List.Where(pet => !Pets.ContainsKey(pet.Id)).ToArray();
+        if (unowned.Length == 0) return HatchResult.AllOwned;
+        var index = Math.Clamp(picker?.Invoke(unowned.Length) ?? 0, 0, unowned.Length - 1);
+        var pet = unowned[index];
+        eggStack.Count -= 1;
+        if (eggStack.Count <= 0) Stash.Remove(eggStack);
+        Coins -= spec.HatchCost;
+        Pets[pet.Id] = new PetSave(1, DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
+        PetSel ??= pet.Id;
+        return new(true, "", pet);
+    }
+
+    /// <summary>孵化计数（meta.js petHatchedN）：已拥有宠物数 − 初始宠物（汪汪狗自动获得，不算孵化）。</summary>
+    public int HatchedCount() => Math.Max(0, Pets.Count - 1);
 
     public bool DepositResource(string kind, int amount)
     {
