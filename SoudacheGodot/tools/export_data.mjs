@@ -160,7 +160,11 @@ function exportCharacters() {
 function exportRules() {
   const source = readSource('rules');
   const sandbox = evaluate(source, 'globalThis.__rules = RULES;', 'rules.js');
-  return { rules: sandbox.__rules, _hash: sourceHash(source) };
+  const rules = sandbox.__rules;
+  // 2026-09-12 批次 4b：网页 KEY_NEEDED=10 是 base.js 的局部 const（rules.js 未承载），
+  // 按「数值进数据」口径补进导出契约，hub 宝藏大门与对局 HUD 由此读取，不再硬编码。
+  rules.keyNeeded = 10;
+  return { rules, _hash: sourceHash(source) };
 }
 
 function exportCards(data) {

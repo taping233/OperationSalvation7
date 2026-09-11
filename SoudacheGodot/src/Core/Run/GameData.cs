@@ -21,8 +21,11 @@ public sealed record RunEncounterTableData(RunRisk Risk, IReadOnlyList<RunEncoun
 
 public sealed record RunBossData(string Id, string Name, int Hp, int Attack, string Affix);
 
-/// <summary>Chest contents spec: coin range and candidate count (pickFrom or cards).</summary>
-public sealed record RunChestKindData(string Kind, int CoinMin, int CoinMax, int Candidates);
+/// <summary>Chest contents spec: coin range, candidate count (pickFrom or cards; PickFrom marks the
+/// 3-choose-1 medium spec), boss coin-card names (金币/银币/铜币) and the boss token (员工通行证B)
+/// chance. Ported from chests.js KINDS().</summary>
+public sealed record RunChestKindData(string Kind, int CoinMin, int CoinMax, int Candidates, int PickFrom,
+    IReadOnlyList<string> CoinCards, double TokenChance);
 
 public sealed record RunChestKindWeightData(string Kind, int Weight);
 
@@ -41,7 +44,7 @@ public sealed record GameRulesData(int DiceSides, int PlayerMaxHp, int StaminaMa
     int BagStart, int BagMax, int BagUpgradeWood,
     int SafeStart, int SafeMax, int SafeUpgradeRations,
     int StashStart, int StashMax, int StashUpgradeSlots, int StashUpgradeWood,
-    int BossDeckSize);
+    int BossDeckSize, int PlayerAtk, int KeyNeeded);
 
 /// <summary>Aggregated runtime tables loaded from data/cards.json, characters.json, map.json, rules.json.</summary>
 public sealed class GameData
@@ -56,12 +59,21 @@ public sealed class GameData
     public IReadOnlyList<CharacterData> Characters { get; }
     public GameRulesData Rules { get; }
     public IReadOnlyDictionary<string, int> CardPrices { get; }
+    // —— cards.json 顶层掉落/商店表（cards.js SHOP_WEIGHTS / DROP_* / RARITIES 的导出契约）——
+    public IReadOnlyDictionary<string, int> CardShopWeights { get; }
+    public IReadOnlyDictionary<string, int> CardDropWeights { get; }
+    public IReadOnlyList<string> CardDropTypes { get; }
+    public IReadOnlyList<string> CardDropDiscountTypes { get; }
+    public IReadOnlyList<string> CardRarities { get; }
 
     public GameData(IReadOnlyDictionary<string, RunMonsterData> monsters,
         IReadOnlyList<RunEncounterTableData> encounters, IReadOnlyList<RunBossData> bosses,
         IReadOnlyDictionary<string, RunChestKindData> chestKinds, IReadOnlyList<string> chestTable,
         IReadOnlyList<RunChestLayerData> layerChests, IReadOnlyList<RunRandomEventData> randomEvents,
-        IReadOnlyList<CharacterData> characters, GameRulesData rules, IReadOnlyDictionary<string, int> cardPrices)
+        IReadOnlyList<CharacterData> characters, GameRulesData rules, IReadOnlyDictionary<string, int> cardPrices,
+        IReadOnlyDictionary<string, int> cardShopWeights, IReadOnlyDictionary<string, int> cardDropWeights,
+        IReadOnlyList<string> cardDropTypes, IReadOnlyList<string> cardDropDiscountTypes,
+        IReadOnlyList<string> cardRarities)
     {
         Monsters = monsters ?? throw new ArgumentNullException(nameof(monsters));
         Encounters = encounters ?? throw new ArgumentNullException(nameof(encounters));
@@ -73,6 +85,11 @@ public sealed class GameData
         Characters = characters ?? throw new ArgumentNullException(nameof(characters));
         Rules = rules ?? throw new ArgumentNullException(nameof(rules));
         CardPrices = cardPrices ?? throw new ArgumentNullException(nameof(cardPrices));
+        CardShopWeights = cardShopWeights ?? throw new ArgumentNullException(nameof(cardShopWeights));
+        CardDropWeights = cardDropWeights ?? throw new ArgumentNullException(nameof(cardDropWeights));
+        CardDropTypes = cardDropTypes ?? throw new ArgumentNullException(nameof(cardDropTypes));
+        CardDropDiscountTypes = cardDropDiscountTypes ?? throw new ArgumentNullException(nameof(cardDropDiscountTypes));
+        CardRarities = cardRarities ?? throw new ArgumentNullException(nameof(cardRarities));
     }
 
     public RunMonsterData RequireMonster(string id) => Monsters.TryGetValue(id, out var monster)
@@ -107,7 +124,12 @@ public sealed class GameData
             ParseRandomEvents(mapRoot),
             ParseCharacters(characters.RootElement),
             ParseRules(rules.RootElement),
-            ParseCardPrices(cards.RootElement));
+            ParseCardPrices(cards.RootElement),
+            ParseStringIntTable(cards.RootElement, "shopWeights"),
+            ParseStringIntTable(cards.RootElement, "dropWeights"),
+            ParseStringList(cards.RootElement, "dropTypes"),
+            ParseStringList(cards.RootElement, "dropDiscountTypes"),
+            ParseStringList(cards.RootElement, "rarities"));
     }
 
     public static GameData LoadFromDirectory(string directory)
@@ -218,8 +240,16 @@ public sealed class GameData
                 ? coinsNode.EnumerateArray().Select(node => node.GetInt32()).ToArray()
                 : Array.Empty<int>();
             var candidates = ReadInt(kind, "pickFrom") != 0 ? ReadInt(kind, "pickFrom") : ReadInt(kind, "cards");
+            var pickFrom = ReadInt(kind, "pickFrom");
+            // boss 箱专属：coinCards（金币/银币/铜币按名取卡并入）与 tokenChance（员工通行证B 概率）
+            var coinCards = kind.TryGetProperty("coinCards", out var coinCardsNode) && coinCardsNode.ValueKind == JsonValueKind.Array
+                ? coinCardsNode.EnumerateArray().Select(node => node.GetString() ?? "").Where(name => name.Length > 0).ToArray()
+                : Array.Empty<string>();
+            var tokenChance = kind.TryGetProperty("tokenChance", out var tokenNode) && tokenNode.ValueKind == JsonValueKind.Number
+                ? tokenNode.GetDouble() : 0.0;
             result[property.Name] = new RunChestKindData(property.Name,
-                coins.Length > 0 ? coins[0] : 0, coins.Length > 0 ? coins[^1] : 0, candidates);
+                coins.Length > 0 ? coins[0] : 0, coins.Length > 0 ? coins[^1] : 0, candidates, pickFrom,
+                coinCards, tokenChance);
         }
         return result;
     }
@@ -286,16 +316,27 @@ public sealed class GameData
             ReadInt(rules, "bagSize"), ReadInt(rules, "bagMax"), ReadInt(rules, "bagUpgradeWood"),
             ReadInt(rules, "safeStart"), ReadInt(rules, "safeMax"), ReadInt(rules, "safeUpgradeRations"),
             ReadInt(rules, "stashStart"), ReadInt(rules, "stashMax"), ReadInt(rules, "stashUpgradeSlots"),
-            ReadInt(rules, "stashUpgradeWood"), ReadInt(rules, "bossDeckSize"));
+            ReadInt(rules, "stashUpgradeWood"), ReadInt(rules, "bossDeckSize"),
+            // playerAtk=对局攻击力（网页 game.atk）；keyNeeded=宝藏大门钥匙需求（网页 base.js KEY_NEEDED）
+            ReadInt(rules, "playerAtk"), ReadInt(rules, "keyNeeded"));
     }
 
     private static IReadOnlyDictionary<string, int> ParseCardPrices(JsonElement cardsRoot)
+        => ParseStringIntTable(cardsRoot, "price");
+
+    private static IReadOnlyDictionary<string, int> ParseStringIntTable(JsonElement root, string field)
     {
         var result = new Dictionary<string, int>(StringComparer.Ordinal);
-        if (cardsRoot.TryGetProperty("price", out var price) && price.ValueKind == JsonValueKind.Object)
-            foreach (var property in price.EnumerateObject())
+        if (root.TryGetProperty(field, out var table) && table.ValueKind == JsonValueKind.Object)
+            foreach (var property in table.EnumerateObject())
                 result[property.Name] = property.Value.GetInt32();
         return result;
+    }
+
+    private static IReadOnlyList<string> ParseStringList(JsonElement root, string field)
+    {
+        if (!root.TryGetProperty(field, out var list) || list.ValueKind != JsonValueKind.Array) return Array.Empty<string>();
+        return list.EnumerateArray().Select(node => node.GetString() ?? "").Where(name => name.Length > 0).ToArray();
     }
 
     private static JsonElement Require(JsonElement element, string key) => element.TryGetProperty(key, out var value)

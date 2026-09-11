@@ -23,12 +23,14 @@ public sealed record RunRoomResult(RunRoomType Type, int Layer, int Position, in
 public sealed record RunEventResult(string Text, int Coins, int Wood, int Rations, bool CreatedChest);
 public sealed record RunChestLoot(string Kind, int Coins, IReadOnlyList<string> Items, bool IsClass = false,
     bool RequiresChoice = false, int SelectedIndex = 0,
-    IReadOnlyList<string>? AcceptedItems = null, IReadOnlyList<string>? DeferredItems = null);
+    IReadOnlyList<string>? AcceptedItems = null, IReadOnlyList<string>? DeferredItems = null,
+    bool EggHit = false, bool TokenHit = false, string? PityTier = null);
 public sealed record RunShopOffer(string Id, RunRoomType Resource, int Quantity, int Price, bool Sold = false,
-    RunCard? Card = null, bool IsMystery = false);
+    RunCard? Card = null, bool IsMystery = false, int? ShaReplenish = null);
 public sealed record RunEventChoice(string Id, string Label, string Detail, string Tone = "");
-public sealed record RunChestPreview(string Kind, bool IsBoss, bool IsClass, int CoinMin, int CoinMax,
-    IReadOnlyList<string> Candidates);
+/// <summary>开箱内容预览（chests.js rollContents 的移植快照）：candidates 为卡名（中宝箱 3 选 1）。</summary>
+public sealed record RunChestPreview(string Kind, bool IsBoss, bool IsClass, bool RequiresChoice,
+    IReadOnlyList<string> Candidates, int Coins, bool EggHit = false, bool TokenHit = false, string? PityTier = null);
 public sealed record RunDoorOption(string Pair, bool CanEnter, bool CanExtract, int TargetLayer, int TargetPosition, string Label);
 public sealed record RunSettlementCard(RunCard Card, int Count, bool Deposited);
 public sealed record RunSettlementSnapshot(RunCardSnapshot Card, bool Deposited);
@@ -58,6 +60,7 @@ public sealed class RunState
     private readonly List<RunCardStack> _pendingRewards = new();
     private readonly List<RunCardStack> _recoveryCards = new();
     private readonly List<RunSettlementCard> _settlementCards = new();
+    private readonly List<int> _diceHistory = new();
     private RunDoor? _pendingDoor;
     private RunPhase _returnAfterChest = RunPhase.Ready;
     private IReadOnlyList<RunShopOffer> _shop = Array.Empty<RunShopOffer>();
@@ -65,6 +68,8 @@ public sealed class RunState
     private string? _pendingEventId;
     private IReadOnlyList<RunEventChoice> _eventChoices = Array.Empty<RunEventChoice>();
     private RunChestPreview? _chestPreview;
+    private IReadOnlyList<RunCard>? _chestCards;
+    private bool _chestSuspended;
     // —— 四层跑图（网页版 game.session/game.run.flow 语义）——
     // visited：一次性内容防重刷（战斗/宝箱/火堆/商店/事件/祭坛/首脑只触发一次；
     // 门/紧急撤离/终局撤离是通路可重复）。键为 "li,idx"。
@@ -114,8 +119,12 @@ public sealed class RunState
     public bool PendingAltarReward => _altarRewardPending;
     /// <summary>已结算过的一次性格（"li,idx"，防回头路重刷）。</summary>
     public IReadOnlyCollection<string> VisitedNodes => _visited;
+    /// <summary>近 8 次掷/移动记录（网页 ui.js diceHistory.slice(-8) 的 chips 口径；掷骰已停用，记录移动落点序号）。</summary>
+    public IReadOnlyList<int> DiceHistory => _diceHistory;
 
     // —— 彩色令牌碎片（网页版 game.fragments，Q6 隐藏计数器）：集齐 2 枚可随员工通行证A合成彩色令牌 ——
+    // 网页来源（game.run.flow.js eventChoiceSpec V2 / applyEventEffect）：神秘补给事件、系统补给事件、
+    // 修鞋铺事件卡（cmtn7qttxqo4，归 4c ink 事件）；敌人不掉碎片；无上限（可积攒多枚）。
     public int Fragments { get; private set; }
 
     public void GrantFragments(int amount)
@@ -130,6 +139,45 @@ public sealed class RunState
         if (Fragments < amount) return false;
         Fragments -= amount;
         return true;
+    }
+
+    // ---------- 碎片合成入口（ported from game.bag.js craftColorToken / craftColorTokenByFragments）----------
+    // 3 张员工通行证B → 1 张员工通行证A；员工通行证A + 2 枚碎片 → 1 张彩色令牌。
+    // 网页合成入口在背包卡牌特写里，直接 ownedCards.push（无容量检查）——保持同语义。
+
+    /// <summary>3 张员工通行证B（tt-token-gold）合成 1 张员工通行证A（tt-token-color）。</summary>
+    public TokenCraft.CraftResult CraftTokenAFromB()
+    {
+        var gold = _ownedCards.FirstOrDefault(stack => stack.Card.Id == TokenCraft.TokenGoldId);
+        if (gold is null || gold.Count < 3) return new(false, "员工通行证B不足 3 张，无法合成", null);
+        gold.Count -= 3;
+        if (gold.Count == 0) _ownedCards.Remove(gold);
+        var tokenA = FindPoolCard(TokenCraft.TokenColorId)
+            ?? new RunCard(TokenCraft.TokenColorId, "员工通行证A", "道具", "史诗", 4);
+        ForceAddCard(tokenA);
+        return new(true, "合成成功：3 张员工通行证B → 1 张员工通行证A", TokenCraft.TokenColorId);
+    }
+
+    /// <summary>员工通行证A + 2 枚彩色令牌碎片合成 1 张彩色令牌（cmtmvq6ss84l，2026-09-09 Q6 定版）。</summary>
+    public TokenCraft.CraftResult CraftColorTokenByFragments()
+    {
+        if (Fragments < 2) return new(false, "彩色令牌碎片不足 2 枚，无法合成", null);
+        var tokenA = _ownedCards.FirstOrDefault(stack => stack.Card.Id == TokenCraft.TokenColorId);
+        if (tokenA is null) return new(false, "缺少员工通行证A，无法合成彩色令牌", null);
+        if (!TryConsumeFragments(2)) return new(false, "彩色令牌碎片不足 2 枚，无法合成", null);
+        tokenA.Count--;
+        if (tokenA.Count == 0) _ownedCards.Remove(tokenA);
+        var color = FindPoolCard(TokenCraft.ColorTokenId)
+            ?? new RunCard(TokenCraft.ColorTokenId, "彩色令牌", "道具", "衍生", 8);
+        ForceAddCard(color);
+        return new(true, "合成成功：员工通行证A + 2 枚碎片 → 1 张彩色令牌（使用后获取本职业能力卡）", TokenCraft.ColorTokenId);
+    }
+
+    /// <summary>合成入包：同名并入、不受背包容量限制（网页 craft 直 push 的语义）。</summary>
+    private void ForceAddCard(RunCard card)
+    {
+        var existing = _ownedCards.FirstOrDefault(stack => stack.Card.Name == card.Name);
+        if (existing is null) _ownedCards.Add(new RunCardStack(card)); else existing.Count++;
     }
 
     public void ConfigureShopCardPool(IEnumerable<RunCard> cards)
@@ -216,6 +264,7 @@ public sealed class RunState
         if (BackpackUsed > BackpackCapacity || _ownedCards.Where(x => x.Safe).Sum(x => x.Count) > Base.SafeCapacity)
             throw new ArgumentException("背包卡牌超过容量。", nameof(snapshot));
         _pendingDoor = null; _pendingChests.Clear(); _eventBattleDrops.Clear(); _encounter.Clear(); _shop = Array.Empty<RunShopOffer>(); _eventChoices = Array.Empty<RunEventChoice>(); _pendingEventId = null; _encounterRisk = default; Phase = snapshot.Phase;
+        _chestPreview = null; _chestCards = null; _chestSuspended = false;
         _altarRewardPending = false;
     }
 
@@ -247,6 +296,10 @@ public sealed class RunState
         var from = TrackPosition;
         TrackPosition = toIdx;
         Turns++;
+        // diceHistory：网页版存每次掷骰点数、UI 取 slice(-8) 展示 chips；v0.53 掷骰停用后
+        // 记录移动落点（节点序号 1 起），保留最近 8 条。
+        _diceHistory.Add(toIdx + 1);
+        if (_diceHistory.Count > 8) _diceHistory.RemoveAt(0);
         ResolveRoom();
         return new RunMove(LayerIndex, from, TrackPosition);
     }
@@ -507,13 +560,23 @@ public sealed class RunState
                 var gangN = Math.Min(5, 3 + LayerIndex);
                 for (var i = 0; i < gangN; i++) _encounter.Add(CreateEnemy("bandit"));
                 _eventBattleDrops.Enqueue(("medium", false)); _eventBattleDrops.Enqueue(("medium", false)); _encounterRisk = RunRisk.Medium; Phase = RunPhase.Battle; return new("五道剪影从残骸后站起。", 0, 0, 0, false);
-            case "mystery_supply": Resources.Coins += 2; AddCard(new RunCard("event-color-token", "彩色令牌", "资源", "稀有", 2, true)); Phase = RunPhase.Ready; return new("柜门弹开时滚出两枚旧硬币和一张彩色令牌。", 2, 0, 0, false);
+            case "mystery_supply":
+                // 网页 2026-09-09 事件 v2（tt6-mystery 接收补给）：彩色令牌碎片 ×1 + 2 币（不再直发彩色令牌卡）
+                GrantFragments(1); Resources.Coins += 2; Phase = RunPhase.Ready;
+                return new("补给舱完好——你收下了里面的晶体与两枚旧硬币。", 2, 0, 0, false);
             case "goldhammer_strike":
                 BuildEncounter(); var foe = _encounter[0]; _encounter.Clear(); _encounter.Add(foe with { Hp = foe.Hp - 5 });
                 if (_encounter[0].Hp <= 0) { Resources.Coins += 2; Phase = RunPhase.Ready; return new("闪金之锤一击制敌。", 2, 0, 0, false); }
                 Phase = RunPhase.Battle; return new("闪金之锤重击后，战斗打响！", 0, 0, 0, false);
             case "relief_heal": Hp = Math.Min(MaxHp, Hp + 6); Phase = RunPhase.Ready; return new("缠好绷带时，你觉得自己又能再走一段了。", 0, 0, 0, false);
-            default: Resources.Wood++; AddCard(new RunCard("event-color-token", "彩色令牌", "资源", "稀有", 2, true)); Phase = RunPhase.Ready; return new("无人机松开货舱，一段建材和一张彩色令牌滑了出来。", 0, 1, 0, false);
+            default:
+                // 网页 2026-09-09 事件 v2（tt6-systemsupply 接收补给）：彩色令牌碎片 ×1 + 木材卡 ×1
+                // （需求 #10：物资一律以卡牌入包；背包满时入待收取队列）
+                GrantFragments(1);
+                var wood = FindPoolCard("tt-wood") ?? new RunCard("tt-wood", "木材", "资源", "古朴", 2);
+                if (!AddCard(wood)) EnqueueReward(wood);
+                Phase = RunPhase.Ready;
+                return new("无人机松开货舱：一枚晶体和一段建材滑了出来。", 0, 0, 0, false);
         }
     }
 
@@ -542,10 +605,30 @@ public sealed class RunState
         return new RunEnemy(id, monster.Name, monster.Hp, monster.Attack, monster.Elite);
     }
 
-    public IReadOnlyList<(string Kind, bool IsBoss)> CompleteBattle(bool won)
+    /// <summary>测试/适配 seam：注入遭遇（战斗结算的「巨兽 2 大箱」判定依赖遭遇名单）。</summary>
+    public void DebugSetEncounter(IEnumerable<RunEnemy> enemies)
+    {
+        ArgumentNullException.ThrowIfNull(enemies);
+        if (Phase is not (RunPhase.Ready or RunPhase.Battle)) throw new InvalidOperationException("只能在待行动或战斗状态注入遭遇。");
+        _encounter.Clear(); _encounter.AddRange(enemies);
+    }
+
+    /// <summary>按 id 在已配置卡池中找卡（宠物蛋/桃/令牌类固定 id 的入口）。</summary>
+    private RunCard? FindPoolCard(string id) =>
+        _lootCardPool.FirstOrDefault(card => card.Id == id)
+        ?? _shopCardPool.FirstOrDefault(card => card.Id == id)
+        ?? _classCardPool.FirstOrDefault(card => card.Id == id);
+
+    /// <summary>按卡名在已配置卡池中找卡（BOSS 箱的 金币/银币/铜币 按名取卡）。</summary>
+    private RunCard? FindPoolCardByName(string name) =>
+        _lootCardPool.FirstOrDefault(card => card.Name == name)
+        ?? _shopCardPool.FirstOrDefault(card => card.Name == name)
+        ?? _classCardPool.FirstOrDefault(card => card.Name == name);
+
+    public IReadOnlyList<(string Kind, bool IsBoss, bool IsClass)> CompleteBattle(bool won)
         => CompleteBattle(won, Hp);
 
-    public IReadOnlyList<(string Kind, bool IsBoss)> CompleteBattle(bool won, int remainingHp)
+    public IReadOnlyList<(string Kind, bool IsBoss, bool IsClass)> CompleteBattle(bool won, int remainingHp)
     {
         EnsurePhase(RunPhase.Battle);
         if (remainingHp < 0 || remainingHp > MaxHp) throw new ArgumentOutOfRangeException(nameof(remainingHp));
@@ -558,7 +641,7 @@ public sealed class RunState
             foreach (var stack in _pendingRewards) EnqueueRecovery(stack);
             _pendingRewards.Clear();
             _ownedCards.Clear(); _usedPocket.Clear(); Resources.Coins = 0; Resources.Wood = 0; Resources.Rations = 0; Resources.Keys = 0;
-            Phase = RunPhase.Defeat; return Array.Empty<(string, bool)>();
+            Phase = RunPhase.Defeat; return Array.Empty<(string, bool, bool)>();
         }
         var bossIndex = -1;
         if (_encounter.Count == 1)
@@ -570,31 +653,57 @@ public sealed class RunState
             BossKilled = true;                       // 终局撤离点放行（网页版 game.bossKilled）
             _visited.Add($"{LayerIndex},{TrackPosition}");   // 击败首脑后才消耗本格
         }
-        IReadOnlyList<(string Kind, bool IsBoss)> drops = bossIndex >= 0
-            ? new[] { ("boss", true) }
-            : _eventBattleDrops.Count > 0 ? DrainEventDrops() : RollDrops(LayerIndex);
-        foreach (var drop in drops) _pendingChests.Enqueue((drop.Kind, drop.IsBoss, !drop.IsBoss && Rng.NextDouble() < 1.0 / 3.0));
+        IReadOnlyList<(string Kind, bool IsBoss, bool IsClass)> drops;
+        if (bossIndex >= 0)
+        {
+            drops = new[] { ("boss", true, false) };
+        }
+        else
+        {
+            // 网页 onBattleEnd：eventChests.concat(rollDrops(opts))——事件奖励宝箱与
+            // 常规分层掉落叠加发放（巨兽 2 大箱也走 rollDrops 的 foeNames 判定）。
+            var combined = new List<(string Kind, bool IsBoss, bool IsClass)>();
+            while (_eventBattleDrops.Count > 0)
+            {
+                var drop = _eventBattleDrops.Dequeue();
+                combined.Add((drop.Kind, drop.IsBoss, false));
+            }
+            combined.AddRange(RollDrops(LayerIndex));
+            drops = combined;
+        }
+        foreach (var drop in drops) _pendingChests.Enqueue(drop);
         // 战利品结算后回待机：祭坛→首脑→终局撤离点是图上三个相邻节点，走格子衔接
         _returnAfterChest = RunPhase.Ready;
         Phase = RunPhase.Chest;
         return drops;
     }
 
-    private IReadOnlyList<(string Kind, bool IsBoss)> DrainEventDrops()
+    private IReadOnlyList<(string Kind, bool IsBoss, bool IsClass)> DrainEventDrops()
     {
-        var result = _eventBattleDrops.ToArray(); _eventBattleDrops.Clear(); return result;
+        var result = _eventBattleDrops.Select(drop => (drop.Kind, drop.IsBoss, false)).ToArray();
+        _eventBattleDrops.Clear(); return result;
     }
 
-    private IReadOnlyList<(string, bool)> RollDrops(int layer)
+    private IReadOnlyList<(string Kind, bool IsBoss, bool IsClass)> RollDrops(int layer)
     {
-        // 网页版 chests.rollDrops：按层取 layerChests 表；fixed 直接给，否则加权抽箱数
-        // 与箱型（MAP.rollCount 同源的加权抽取）。
+        // ported from chests.js rollDrops：BOSS 固定首脑保险柜（CompleteBattle 分支）；
+        // 巨兽「荒渊」（第 3/4 层精英）固定奖励 2 个大宝箱（30% 额外传说卡归战后结算，见网页 settle）；
+        // 其余按层取 layerChests 表——fixed 直接给，否则加权抽箱数与箱型，
+        // 每箱 25% 为职业宝箱（黑箱，只掉职业卡牌；猎鹰宝宝 35% 归批次 5 宠物）。
+        if (_encounter.Any(enemy => enemy.Name.Contains("巨兽", StringComparison.Ordinal)))
+            return new[] { ("large", false, false), ("large", false, false) };
         var spec = _data.LayerChests[Math.Min(layer, _data.LayerChests.Count - 1)];
         if (spec.FixedCounts.Count > 0)
-            return spec.FixedCounts.SelectMany(fixedDrop => Enumerable.Repeat((fixedDrop.Kind, false), fixedDrop.Weight)).ToArray();
+            return spec.FixedCounts
+                .SelectMany(fixedDrop => Enumerable.Repeat((fixedDrop.Kind, false, false), fixedDrop.Weight))
+                .ToArray();
         var chests = Weighted(spec.Counts.Select(count => (count.Count, count.Weight)));
-        var result = new List<(string, bool)>(chests);
-        for (var i = 0; i < chests; i++) result.Add((Weighted(spec.Types.Select(t => (t.Kind, t.Weight))), false));
+        var result = new List<(string, bool, bool)>(chests);
+        for (var i = 0; i < chests; i++)
+        {
+            var kind = Weighted(spec.Types.Select(t => (t.Kind, t.Weight)));
+            result.Add((kind, false, Rng.NextDouble() < LootTables.ClassChestChance));
+        }
         return result;
     }
 
@@ -620,45 +729,143 @@ public sealed class RunState
         if (_chestPreview is not null) return _chestPreview;
         if (!_pendingChests.TryPeek(out var chest))
         {
-            _chestPreview = new RunChestPreview("none", false, false, 0, 0, Array.Empty<string>());
+            _chestPreview = new RunChestPreview("none", false, false, false, Array.Empty<string>(), 0);
             return _chestPreview;
         }
-        var kind = _data.RequireChestKind(chest.Kind);
-        var (min, max, count) = (kind.CoinMin, kind.CoinMax, kind.Candidates);
-        var pool = chest.IsClass && _classCardPool.Count > 0 ? _classCardPool : _lootCardPool;
-        var candidates = pool.Count > 0
-            ? Enumerable.Range(0, count).Select(_ => pool[Rng.NextInt(pool.Count)].Name).ToArray()
-            : Enumerable.Range(0, count).Select(_ => _data.ChestTable[Rng.NextInt(_data.ChestTable.Count)]).ToArray();
-        _chestPreview = new RunChestPreview(chest.Kind, chest.IsBoss, chest.IsClass, min, max, candidates);
-        return _chestPreview;
+        // 网页 chests.next()：开箱瞬间 rollContents 一次性掷完整个箱子的内容，挂起/恢复不重掷
+        RollContents(chest);
+        return _chestPreview!;
     }
 
-    /// <summary>Opens one chest; medium chests expose three candidates and the caller selects one.</summary>
+    // ported from chests.js rollContents：掷一个宝箱的完整内容（cards=开出的卡，coins=内含币）。
+    private void RollContents((string Kind, bool IsBoss, bool IsClass) chest)
+    {
+        var kind = _data.RequireChestKind(chest.Kind);
+        var cards = new List<RunCard>();
+        var taken = new HashSet<string>(StringComparer.Ordinal);
+        string? pity = null;
+        var eggHit = false;
+        var tokenHit = false;
+        var coins = 0;
+        if (chest.IsClass && chest.Kind != "boss")
+        {
+            // 职业宝箱（黑箱）：只掉落本职业的职业卡牌（2026-09-06）；不参与保底/宠物蛋/通行证
+            var pool = _classCardPool.Where(card => card.Rarity == "职业").ToList();
+            for (var i = 0; i < kind.Candidates && pool.Count > 0; i++)
+                cards.Add(pool[Rng.NextInt(pool.Count)]);
+            if (kind.CoinMax > 0) coins = Rng.NextInt(kind.CoinMin, kind.CoinMax + 1);
+            PublishChestPreview(chest, cards, coins, eggHit, tokenHit, pity);
+            return;
+        }
+        // 随机卡池（2026-09-08 定版爆率）：只开 武术/法术/装备/道具/资源 五类，
+        // 稀有度 古朴:稀有:史诗:传说 = 60:28:9:3，同稀有度内均分、道具 ×0.7、装备 ×0.8；
+        // 同一宝箱内尽量不重复（taken 去重）。卡池未配置时退回 chestTable 名单（骨架测试兜底，
+        // 网页版卡库恒非空无此路径）。
+        for (var i = 0; i < kind.Candidates; i++)
+        {
+            RunCard? card = _lootCardPool.Count > 0
+                ? LootTables.RandomDropCard(_lootCardPool, _data, Rng, taken)
+                : null;
+            if (card is null && _data.ChestTable.Count > 0)
+            {
+                var name = _data.ChestTable[Rng.NextInt(_data.ChestTable.Count)];
+                card = new RunCard($"loot-{name}", name, "资源", "古朴", 1, false, false, null, 1, RunCardSemantic.Resource);
+            }
+            if (card is not null) { taken.Add(card.Id); cards.Add(card); }
+        }
+        // 宠物蛋（2026-09-09 需求 #2）：固定 0.7% 爆率额外开出（不占随机卡池，unrandom）；
+        // 蛋的孵化系统归批次 5，这里只落物品。
+        if (Rng.NextDouble() < LootTables.PetEggChance)
+        {
+            var egg = FindPoolCard(LootTables.PetEggId);
+            if (egg is not null) { cards.Add(egg); eggHit = true; }
+        }
+        // —— 宝箱保底（2026-09-09；设计者定版权重 60:28:9:3 不动）——
+        // 中宝箱（3 选 1，pickFrom）保底至少 1 张「稀有」+；大宝箱/首脑宝箱保底至少 1 张「史诗」+。
+        // 未达标重掷最后一张（目标档内挑卡，该档暂无可用卡则逐档上探；全部失败保持原结果）。
+        var rarities = _data.CardRarities.ToList();
+        int RiOf(string rarity) => Math.Max(0, rarities.IndexOf(rarity));
+        var needRi = kind.PickFrom > 0 ? rarities.IndexOf("稀有")
+            : chest.Kind is "large" or "boss" ? rarities.IndexOf("史诗") : -1;
+        if (needRi > 0 && cards.Count > 0 && !cards.Any(card => RiOf(card.Rarity) >= needRi))
+        {
+            // 网页字面顺序：[目标档, 传说, 史诗, 稀有] 过滤后逐档上探
+            var tiers = new[] { rarities[needRi], "传说", "史诗", "稀有" }.Where(rarity => RiOf(rarity) >= needRi);
+            foreach (var tier in tiers)
+            {
+                var up = LootTables.PickOfRarity(tier, _lootCardPool, _data, Rng, taken);
+                if (up is null) continue;
+                cards[^1] = up;
+                taken.Add(up.Id);
+                pity = tier;
+                break;
+            }
+        }
+        if (kind.CoinMax > 0) coins = Rng.NextInt(kind.CoinMin, kind.CoinMax + 1);
+        // BOSS宝箱：金币/银币/铜币按名取一张 + tokenChance 概率的员工通行证B（都是卡牌并入 cards）。
+        // 币名先取好再找卡——随机取名不能写进查找回调（网页 chests.js 注释同款坑）。
+        if (kind.CoinCards.Count > 0)
+        {
+            var coinName = kind.CoinCards[Rng.NextInt(kind.CoinCards.Count)];
+            var coin = FindPoolCardByName(coinName);
+            if (coin is not null) cards.Add(coin);
+        }
+        if (kind.TokenChance > 0 && Rng.NextDouble() < kind.TokenChance)
+        {
+            var token = FindPoolCard(TokenCraft.TokenGoldId);
+            if (token is not null) { cards.Add(token); tokenHit = true; }
+        }
+        PublishChestPreview(chest, cards, coins, eggHit, tokenHit, pity);
+    }
+
+    private void PublishChestPreview((string Kind, bool IsBoss, bool IsClass) chest, List<RunCard> cards,
+        int coins, bool eggHit, bool tokenHit, string? pity)
+    {
+        var requiresChoice = _data.RequireChestKind(chest.Kind).PickFrom > 0;
+        _chestCards = cards;
+        _chestPreview = new RunChestPreview(chest.Kind, chest.IsBoss, chest.IsClass, requiresChoice,
+            cards.Select(card => card.Name).ToArray(), coins, eggHit, tokenHit, pity);
+    }
+
+    /// <summary>Opens one chest; pickFrom chests (medium) expose candidates and the caller selects one.</summary>
     public RunChestLoot OpenNextChest(int selectedIndex)
     {
         EnsurePhase(RunPhase.Chest);
+        if (_chestSuspended) throw new InvalidOperationException("搜刮流程已挂起——请先关闭背包（resume）再开箱。");
         if (_pendingChests.Count == 0) { Phase = _returnAfterChest; return new RunChestLoot("none", 0, Array.Empty<string>()); }
         var preview = PeekNextChest();
-        if (preview.Candidates.Count == 0 && preview.Kind != "none") throw new InvalidOperationException("宝箱预览为空。");
-        var items = preview.Candidates;
-        var requiresChoice = preview.Kind == "medium";
-        if (requiresChoice && (selectedIndex < 0 || selectedIndex >= items.Count)) throw new ArgumentOutOfRangeException(nameof(selectedIndex));
         var chest = _pendingChests.Dequeue();
-        var coins = chest.IsBoss ? 0 : Rng.NextInt(preview.CoinMin, preview.CoinMax + 1);
-        var accepted = requiresChoice ? new[] { items[selectedIndex] } : items.ToArray();
+        var cards = _chestCards ?? Array.Empty<RunCard>();
+        var items = preview.Candidates;
+        var requiresChoice = preview.RequiresChoice && cards.Count > 0;
+        if (requiresChoice && (selectedIndex < 0 || selectedIndex >= cards.Count)) throw new ArgumentOutOfRangeException(nameof(selectedIndex));
+        var acceptedCards = requiresChoice ? new[] { cards[selectedIndex] } : cards;
+        var accepted = requiresChoice ? new[] { items[selectedIndex] } : items;
         var deferred = requiresChoice ? items.Where((_, index) => index != selectedIndex).ToArray() : Array.Empty<string>();
-        var pool = chest.IsClass && _classCardPool.Count > 0 ? _classCardPool : _lootCardPool;
-        foreach (var item in accepted)
-        {
-            var card = pool.FirstOrDefault(x => x.Name == item) ?? new RunCard($"loot-{item}", item, "资源", "古朴", 1, false, false, null, 1, RunCardSemantic.Resource);
+        foreach (var card in acceptedCards)
             if (!AddCard(card)) EnqueueReward(card);
-        }
-        if (chest.IsBoss) Resources.Coins += Rng.NextInt(1, 4);
-        Resources.Coins += coins;
+        Resources.Coins += preview.Coins;
         _chestPreview = null;
+        _chestCards = null;
         if (_pendingChests.Count == 0) Phase = _returnAfterChest;
-        return new RunChestLoot(chest.Kind, coins, items, chest.IsClass, requiresChoice, selectedIndex, accepted, deferred);
+        return new RunChestLoot(chest.Kind, preview.Coins, items, chest.IsClass, requiresChoice, selectedIndex,
+            accepted, deferred, preview.EggHit, preview.TokenHit, preview.PityTier);
     }
+
+    /// <summary>挂起开箱（ported from chests.js suspend：搜刮界面允许打开背包整理，
+    /// 作废未播完的搜索演出；队列与已掷内容保持不动）。返回是否确有进行中的开箱流程。</summary>
+    public bool SuspendChests()
+    {
+        if (Phase != RunPhase.Chest || _pendingChests.Count == 0) return false;
+        _chestSuspended = true;
+        return true;
+    }
+
+    /// <summary>恢复开箱（ported from chests.resume：重新渲染当前搜刮面板继续开）。</summary>
+    public void ResumeChests() => _chestSuspended = false;
+
+    /// <summary>开箱流程当前是否挂起（背包借开箱面板期间）。</summary>
+    public bool ChestsSuspended => _chestSuspended;
 
     private void EnqueueReward(RunCard card)
     {
@@ -840,20 +1047,47 @@ public sealed class RunState
 
     private void EnterShop()
     {
-        // 四层图上商店格与层间门不共存（门是独立节点），离店即回待机
-        var offers = new List<RunShopOffer>
+        // ported from game.run.shop.js generateShopStock：商队每次靠站随机卸货——
+        // 6 张随机卡（稀有度按 cards.json shopWeights 掷档，档内类型均分/道具×0.7/装备×0.8）
+        // + 桃固定栏位（2 币，回 6 血，2026-09-10 替代金疮药）+ 初始攻击补充（1 币/张，
+        // 本站最多 5 张，2026-09-08 定版）+ 1 个「神秘货箱」栏位（3 币，买到随机卡牌）。
+        // 招财猫首格免费是宠物效果（批次 5）；网页商店不卖木材/口粮/钥匙裸资源（旧骨架栏位移除）。
+        // 四层图上商店格与层间门不共存（门是独立节点），离店即回待机。
+        var offers = new List<RunShopOffer>();
+        for (var i = 0; i < 6; i++)
         {
-            new("rations", RunRoomType.Rations, 1, 2), new("wood", RunRoomType.Wood, 1, 1), new("key", RunRoomType.Key, 1, 8)
-        };
-        var cardCount = Math.Min(6, _shopCardPool.Count);
-        for (var i = 0; i < cardCount; i++)
-        {
-            var card = _shopCardPool[Rng.NextInt(_shopCardPool.Count)];
-            offers.Add(new RunShopOffer($"card-{i}", RunRoomType.Empty, 1, CardPrice(card), false, card));
+            var card = PickRandomShopCard();
+            offers.Add(card is null
+                ? new RunShopOffer($"card-{i}", RunRoomType.Empty, 1, 0, Sold: true)
+                : new RunShopOffer($"card-{i}", RunRoomType.Empty, 1, _data.CardPrice(card.Rarity), Card: card));
         }
-        offers.Add(new RunShopOffer("potion", RunRoomType.Empty, 1, 3, false, new RunCard("builtin-potion", "金疮药", "道具", "初始", 1, false)));
-        offers.Add(new RunShopOffer("sha", RunRoomType.Empty, 1, 1, false, new RunCard("builtin-sha", "初始攻击", "武术", "初始", 1, false, true)));
+        var peach = FindPoolCard("tt-peach") ?? new RunCard("tt-peach", "桃", "道具", "古朴", 2);
+        offers.Add(new RunShopOffer("peach", RunRoomType.Empty, 1, 2, Card: peach));
+        offers.Add(new RunShopOffer("sha", RunRoomType.Empty, 1, 1, Card: InitialAttackCard, ShaReplenish: 5));
+        var mystery = PickRandomShopCard();
+        offers.Add(mystery is null
+            ? new RunShopOffer("mystery", RunRoomType.Empty, 1, 0, Sold: true)
+            : new RunShopOffer("mystery", RunRoomType.Empty, 1, 3, Card: mystery, IsMystery: true));
         Phase = RunPhase.Shop; _shop = offers;
+    }
+
+    private static RunCard InitialAttackCard { get; } = new("builtin-sha", "初始攻击", "武术", "初始", 1, false, true);
+
+    /// <summary>网页 lib 均匀抽（rarity!=='衍生' && !unrandom）：50 次掷档挑卡失败后的兜底，
+    /// 也是神秘货箱的直接取卡方式（网页 mysteryCard = lib[floor(Random*len)]）。</summary>
+    private RunCard? PickRandomShopCard()
+    {
+        if (_shopCardPool.Count == 0) return null;
+        if (_data.CardShopWeights.Count > 0)
+        {
+            for (var tries = 0; tries < 50; tries++)
+            {
+                var rarity = Weighted(_data.CardShopWeights.Select(kv => (kv.Key, kv.Value)));
+                var card = LootTables.PickOfRarity(rarity, _shopCardPool, _data, Rng);
+                if (card is not null) return card;
+            }
+        }
+        return _shopCardPool[Rng.NextInt(_shopCardPool.Count)];
     }
 
     private int CardPrice(RunCard card) => _data.CardPrice(card.Rarity);
@@ -861,6 +1095,7 @@ public sealed class RunState
     {
         EnsurePhase(RunPhase.Shop);
         var offer = _shop.FirstOrDefault(x => x.Id == id && !x.Sold) ?? throw new InvalidOperationException("商品不存在或已售出。");
+        if (offer.ShaReplenish is <= 0) throw new InvalidOperationException("初始攻击已补满。");
         if (Resources.Coins < offer.Price) throw new InvalidOperationException("金币不足。");
         if (offer.Card is not null && BackpackUsed + offer.Quantity > BackpackCapacity)
             throw new InvalidOperationException("背包已满。");
@@ -869,7 +1104,15 @@ public sealed class RunState
         else if (offer.Resource == RunRoomType.Rations) Resources.Rations += offer.Quantity;
         else if (offer.Resource == RunRoomType.Wood) Resources.Wood += offer.Quantity;
         else Resources.Keys += offer.Quantity;
-        _shop = _shop.Select(x => x.Id == id ? x with { Sold = true } : x).ToArray();
+        if (offer.ShaReplenish is { } remaining)
+        {
+            // 初始攻击补充位：本站最多 5 张（网页 slot.shaReplenish--），补满即收摊
+            _shop = _shop.Select(x => x.Id == id ? x with { ShaReplenish = remaining - 1, Sold = remaining - 1 <= 0 } : x).ToArray();
+        }
+        else
+        {
+            _shop = _shop.Select(x => x.Id == id ? x with { Sold = true } : x).ToArray();
+        }
     }
     public void LeaveShop() { EnsurePhase(RunPhase.Shop); Phase = RunPhase.Ready; }
 
@@ -967,6 +1210,10 @@ public static class RunRules
     public static int StashUpgradeWood { get; private set; } = 2;
     public static int BossDeckSize { get; private set; } = 15;
     public static double CampfireClassCardChance { get; private set; } = 0.3;
+    /// <summary>对局攻击力（网页 game.atk = rules.playerAtk；本局恒定，战斗伤害 = 卡面值 + 攻击力）。</summary>
+    public static int PlayerAtk { get; private set; } = 4;
+    /// <summary>宝藏大门钥匙需求（网页 base.js KEY_NEEDED=10，已入 rules.json）。</summary>
+    public static int KeyNeeded { get; private set; } = 10;
 
     /// <summary>rules.json 中没有对应字段的骨架局部常量。</summary>
     public const int CampfireRestorePocket = 2;
@@ -1006,5 +1253,7 @@ public static class RunRules
         StashUpgradeWood = rules.StashUpgradeWood;
         BossDeckSize = rules.BossDeckSize;
         CampfireClassCardChance = rules.FireClassCardChance;
+        if (rules.PlayerAtk > 0) PlayerAtk = rules.PlayerAtk;
+        if (rules.KeyNeeded > 0) KeyNeeded = rules.KeyNeeded;
     }
 }

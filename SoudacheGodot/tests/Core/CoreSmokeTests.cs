@@ -20,6 +20,7 @@ internal static class CoreSmokeTests
         QueueIsFifo();
         CombatResolvesDamageBlockAndHeal();
         SaveRoundTripsAndFallsBackToBackup();
+        ClearSlotRemovesSaveAndBackup();
         Console.WriteLine($"CORE_SMOKE_OK checks={_checks}");
         return 0;
     }
@@ -100,5 +101,31 @@ internal static class CoreSmokeTests
         public string ActionId { get; }
         public MarkerAction(string id, List<string> order) { ActionId = id; _order = order; }
         public void Execute(ActionContext context) => _order.Add(ActionId);
+    }
+
+    // 批次 4b rider：存档槽动作 RequestClearSlot 的服务端语义（删除存档含 .bak 备份，
+    // 对照网页 game.menu.js delSlot/overwriteSlot 共用的 clearSlot；槽号越界抛错）。
+    private static void ClearSlotRemovesSaveAndBackup()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "soudache-core-clear-" + Guid.NewGuid().ToString("N"));
+        try
+        {
+            var service = new AtomicJsonSaveService(root, maxSlots: 2);
+            service.Save(0, new SaveGameDto { RngState = 7UL });
+            Check(service.HasSave(0), "slot should hold a save before ClearSlot");
+            File.WriteAllText(service.GetBackupPath(0), "{}");
+            var slotPath = service.GetSlotPath(0);
+            var backupPath = service.GetBackupPath(0);
+            Check(service.ClearSlot(0), "ClearSlot must report an existing save");
+            Check(!File.Exists(slotPath) && !File.Exists(backupPath), "ClearSlot must delete the save and its backup");
+            Check(!service.HasSave(0), "slot must be empty after ClearSlot");
+            Check(!service.ClearSlot(0), "ClearSlot on an empty slot reports false");
+            try { service.ClearSlot(2); throw new InvalidOperationException("out-of-range slot was accepted"); }
+            catch (ArgumentOutOfRangeException) { _checks++; }
+        }
+        finally
+        {
+            if (Directory.Exists(root)) Directory.Delete(root, recursive: true);
+        }
     }
 }

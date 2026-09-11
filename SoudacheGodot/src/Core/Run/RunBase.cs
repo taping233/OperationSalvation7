@@ -9,7 +9,8 @@ public enum RunCardSemantic { Combat, Resource, Event, Map, Equipment, Item }
 /// <summary>Card metadata needed by run/base systems; the card engine can adapt its own definitions to this type.</summary>
 public sealed record RunCard(string Id, string Name, string Type = "武术", string Rarity = "古朴",
     int SellPrice = 1, bool Sellable = false, bool IsInitialAttack = false,
-    string? MaterialKind = null, int MaterialAmount = 1, RunCardSemantic? Category = null)
+    string? MaterialKind = null, int MaterialAmount = 1, RunCardSemantic? Category = null,
+    bool Unrandom = false)
 {
     public RunCardSemantic Semantic => Category ?? Type switch
     {

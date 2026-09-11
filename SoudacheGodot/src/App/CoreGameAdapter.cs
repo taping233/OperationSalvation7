@@ -154,6 +154,12 @@ public sealed class CoreGameAdapter : ICoreUiPort
                     if (argument == "leave") { _run.LeaveShop(); _runStatus = "离开商店"; }
                     else { _run.BuyShopOffer(argument); _runStatus = "购买完成"; }
                     break;
+                case "craft":
+                    // 碎片/令牌合成入口（game.bag.js craftColorToken 家族的 Core 语义）
+                    if (argument == "tokenA") _runStatus = _run.CraftTokenAFromB() is { Ok: true } okA ? okA.Message : "员工通行证B不足 3 张，无法合成";
+                    else if (argument == "colortoken") _runStatus = _run.CraftColorTokenByFragments() is { Ok: true } okC ? okC.Message : "碎片或员工通行证A不足，无法合成彩色令牌";
+                    else throw new InvalidOperationException("未知合成操作。");
+                    break;
                 case "campfire":
                     _run.CompleteCampfire(argument.Length == 0 ? null : new[] { argument });
                     _runStatus = $"营火休整完成，生命 {_run.Hp}/{_run.MaxHp}";
@@ -409,6 +415,25 @@ public sealed class CoreGameAdapter : ICoreUiPort
         }
     }
 
+    /// <summary>
+    /// 清空存档槽（接口需求 [6b→A]，对照网页 game.menu.js delSlot/overwriteSlot 共用的 clearSlot）：
+    /// 选档页「删除」直接清档；「覆盖重开」先 RequestClearSlot 再 RequestStartRun。
+    /// 槽号越界抛错（含校验），成功后刷新档位列表。
+    /// </summary>
+    public void RequestClearSlot(int slot)
+    {
+        try
+        {
+            var existed = _saves.ClearSlot(slot);
+            _saveStatus = existed ? $"已删除档位 {slot + 1} 的存档（含基地数据）" : $"档位 {slot + 1} 本就是空档";
+        }
+        catch (Exception error)
+        {
+            _saveStatus = $"删除失败：{error.Message}";
+        }
+        PublishSaveSlots();
+    }
+
     public void PublishCurrentState()
     {
         PublishRun();
@@ -439,7 +464,7 @@ public sealed class CoreGameAdapter : ICoreUiPort
     private CombatState CreateCombatState(IEnumerable<RunEnemy> enemies, int playerHp)
     {
         var combat = new CombatState(_playerId);
-        var player = new CombatantState(_playerId, CharacterName(_runCharacterId), RunRules.PlayerMaxHp, false) { Attack = 4 };
+        var player = new CombatantState(_playerId, CharacterName(_runCharacterId), RunRules.PlayerMaxHp, false) { Attack = RunRules.PlayerAtk };
         if (playerHp < player.MaxHealth) player.ApplyDamage(player.MaxHealth - Math.Max(0, playerHp));
         combat.AddCombatant(player);
         var index = 0;
@@ -549,6 +574,11 @@ public sealed class CoreGameAdapter : ICoreUiPort
             CharacterDisplayName = CharacterName(_runCharacterId),
             LayerIndex = _run.LayerIndex,
             TrackPosition = _run.TrackPosition,
+            // 接口需求 [6b→A]：环层名/骰子历史/攻击力/宝藏大门钥匙需求（对局 HUD）
+            LayerName = layer.Name,
+            DiceHistory = _run.DiceHistory.ToArray(),
+            Atk = RunRules.PlayerAtk,
+            KeyNeeded = RunRules.KeyNeeded,
             CurrentHp = _run.Phase == RunPhase.Battle ? _combat.GetCombatant(_playerId).Health : _run.Hp,
             MaxHp = _run.MaxHp,
             TrackLength = layer.NodeCount,
@@ -756,9 +786,12 @@ public sealed class CoreGameAdapter : ICoreUiPort
     {
         var className = CharacterClass(_runCharacterId);
         var combatCards = _runCards.Where(card => card.Semantic == RunCardSemantic.Combat).ToArray();
-        run.ConfigureShopCardPool(combatCards.Where(card => card.Rarity != "传说"));
+        // 商店池 = 网页 generateShopStock 的 lib：滤 衍生 稀有度与 unrandom（weight 掷档/pickOfRarity
+        // 在 RunState 侧再做 isRandomObtainable 过滤）；掉落池 = DROP_TYPES 五类（武术/法术/装备/道具/资源，
+        // 含 unrandom 卡——宠物蛋/钻石不进随机挑选，但宝箱按 id 直取时需要找到卡对象）。
+        run.ConfigureShopCardPool(_runCards.Where(card => card.Rarity != "衍生" && !card.Unrandom));
         run.ConfigureClassCardPool(combatCards.Where(card => card.Type != "能力卡" && _catalog.TryGet(card.Id, out var definition) && definition?.ClassName == className));
-        run.ConfigureLootCardPool(_runCards.Where(card => card.Semantic is RunCardSemantic.Combat or RunCardSemantic.Item or RunCardSemantic.Equipment));
+        run.ConfigureLootCardPool(_runCards.Where(card => card.Semantic is RunCardSemantic.Combat or RunCardSemantic.Item or RunCardSemantic.Equipment or RunCardSemantic.Resource));
     }
 
     private static IReadOnlyList<(string Name, int Count)> BuildInitialLoadout(RunBaseState state, int capacity)
@@ -848,8 +881,15 @@ public sealed class CoreGameAdapter : ICoreUiPort
             case RunPhase.Shop:
                 actions.AddRange(run.Shop.Select(offer => new RunActionUiSnapshot
                 {
-                    Id = $"shop:{offer.Id}", Label = offer.Sold ? "已售出" : offer.Card?.Name ?? RoomLabel(offer.Resource),
-                    Detail = $"{offer.Price} 金币", Enabled = !offer.Sold && run.Resources.Coins >= offer.Price
+                    Id = $"shop:{offer.Id}",
+                    Label = offer.Sold
+                        ? (offer.ShaReplenish is { } spent && spent <= 0 ? "初始攻击已补满" : "已售出")
+                        : offer.Card?.Name ?? "无货",
+                    Detail = !offer.Sold && offer.ShaReplenish is { } left
+                        ? $"{offer.Price} 币 · 初始攻击 · 本站余 {Math.Max(0, left)}/5"
+                        : !offer.Sold && offer.IsMystery ? $"{offer.Price} 币 · 神秘货箱：开出随机卡牌"
+                        : $"{offer.Price} 币",
+                    Enabled = !offer.Sold && run.Resources.Coins >= offer.Price
                 }));
                 actions.Add(new RunActionUiSnapshot { Id = "shop:leave", Label = "离开商店" });
                 break;
@@ -902,20 +942,58 @@ public sealed class CoreGameAdapter : ICoreUiPort
         return file.GetAsText();
     }
 
-    private static IReadOnlyList<RunCard> LoadRunCards(string json)
+    private IReadOnlyList<RunCard> LoadRunCards(string json)
     {
+        // ported from cards.js isSellable / sellPrice / rarityOf + data-loader 契约：
+        //   isSellable：sellable 字段优先（true/false 原样）；无字段时描述「不可出售」→否
+        //   （优先于「可出售」），「可出售」→是，其余一律不可出售。
+        //   sellPrice：币值 value 优先；无币值按稀有度半价（至少 1），能力卡系（hero/tokenOf 链）
+        //   展示稀有度按「棱彩」（rarityOf）。
         using var document = JsonDocument.Parse(json);
-        return document.RootElement.GetProperty("cards").EnumerateArray().Select(card =>
+        var nodes = document.RootElement.GetProperty("cards").EnumerateArray().ToList();
+        var result = new List<RunCard>(nodes.Count);
+        var rarityById = new Dictionary<string, string>(StringComparer.Ordinal);
+        var tokenOfById = new Dictionary<string, string>(StringComparer.Ordinal);
+        var heroIds = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var card in nodes)
         {
             var id = card.GetProperty("id").GetString() ?? "unknown";
             var name = card.TryGetProperty("name", out var nameNode) ? nameNode.GetString() ?? id : id;
             var type = card.TryGetProperty("type", out var typeNode) ? typeNode.GetString() ?? "武术" : "武术";
             var rarity = card.TryGetProperty("rarity", out var rarityNode) ? rarityNode.GetString() ?? "古朴" : "古朴";
-            var sellable = card.TryGetProperty("sellable", out var sellableNode) && sellableNode.ValueKind == JsonValueKind.True;
-            var value = card.TryGetProperty("value", out var valueNode) && valueNode.TryGetInt32(out var parsed) ? parsed : 1;
+            var desc = card.TryGetProperty("desc", out var descNode) && descNode.ValueKind == JsonValueKind.String ? descNode.GetString() ?? "" : "";
+            var value = card.TryGetProperty("value", out var valueNode) && valueNode.TryGetInt32(out var parsed) ? parsed : 0;
+            var unrandom = card.TryGetProperty("unrandom", out var unrandomNode) && unrandomNode.ValueKind == JsonValueKind.True;
+            rarityById[id] = rarity;
+            if (card.TryGetProperty("tokenOf", out var tokenNode) && tokenNode.ValueKind == JsonValueKind.String)
+                tokenOfById[id] = tokenNode.GetString() ?? "";
+            if (card.TryGetProperty("hero", out var heroNode) && heroNode.ValueKind == JsonValueKind.True) heroIds.Add(id);
+            bool sellable;
+            if (card.TryGetProperty("sellable", out var sellableNode) && sellableNode.ValueKind is JsonValueKind.True or JsonValueKind.False)
+                sellable = sellableNode.ValueKind == JsonValueKind.True;
+            else if (desc.Contains("不可出售", StringComparison.Ordinal)) sellable = false;
+            else sellable = desc.Contains("可出售", StringComparison.Ordinal);
             string? material = type == "资源" ? (name.Contains("木", StringComparison.Ordinal) ? "wood" : name.Contains("口粮", StringComparison.Ordinal) ? "rations" : name.Contains("钥匙", StringComparison.Ordinal) ? "keys" : null) : null;
-            return new RunCard(id, name, type, rarity, Math.Max(1, value), sellable, id == "builtin-sha", material);
-        }).ToArray();
+            result.Add(new RunCard(id, name, type, rarity, value, sellable, id == "builtin-sha", material) { Unrandom = unrandom });
+        }
+        // 第二遍：无币值卡按 rarityOf 半价回填（cards.js sellPrice 的兜底公式）
+        string RarityOf(string id)
+        {
+            for (var depth = 0; depth < 8 && rarityById.ContainsKey(id); depth++)
+            {
+                if (heroIds.Contains(id)) return "棱彩";
+                if (tokenOfById.TryGetValue(id, out var source) && rarityById.ContainsKey(source)) { id = source; continue; }
+                return rarityById[id];
+            }
+            return "古朴";
+        }
+        for (var index = 0; index < result.Count; index++)
+        {
+            var card = result[index];
+            if (card.SellPrice > 0) continue;
+            result[index] = card with { SellPrice = Math.Max(1, _data.CardPrice(RarityOf(card.Id)) / 2) };
+        }
+        return result;
     }
 
     private string CharacterClass(string id) => _data.Character(id)?.Class ?? string.Empty;

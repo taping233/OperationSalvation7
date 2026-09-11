@@ -17,6 +17,8 @@ public interface ICoreUiPort
     void RequestBaseAction(string actionId);
     void RequestSaveSlot(int slot);
     void RequestLoadSlot(int slot);
+    /// <summary>清空存档槽（接口需求 [6b→A]：选档页「覆盖重开/删除」用；对照网页 game.menu.js clearSlot）。</summary>
+    void RequestClearSlot(int slot);
     void PublishCurrentState();
 }
 
@@ -89,6 +91,15 @@ public sealed class RunUiSnapshot
     public string Phase { get; init; } = "准备";
     public string CurrentRoom { get; init; } = "营地";
     public string StatusText { get; init; } = "请选择角色开始远征";
+    // —— 接口需求 [6b→A] 对局 HUD 快照字段（批次 4b）——
+    /// <summary>当前环层显示名（批次 3 LayeredMap/LayerNames：第 N 层 · 层名）。</summary>
+    public string LayerName { get; init; } = "";
+    /// <summary>近 8 次掷/移动记录（网页 ui.js diceHistory.slice(-8) 的 chips；掷骰停用后记录移动落点序号）。</summary>
+    public int[] DiceHistory { get; init; } = Array.Empty<int>();
+    /// <summary>当前攻击力（rules.json playerAtk，网页 game.atk；战斗伤害 = 卡面值 + 攻击力）。</summary>
+    public int Atk { get; init; } = 4;
+    /// <summary>宝藏大门钥匙需求（rules.json keyNeeded，网页 base.js KEY_NEEDED；替代 UI 硬编码 10）。</summary>
+    public int KeyNeeded { get; init; } = 10;
     public string[] InventoryLabels { get; init; } = Array.Empty<string>();
     public RunActionUiSnapshot[] Actions { get; init; } = Array.Empty<RunActionUiSnapshot>();
     public MapNodeUiSnapshot[] Nodes { get; init; } = Array.Empty<MapNodeUiSnapshot>();

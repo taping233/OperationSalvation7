@@ -122,4 +122,5 @@ PROGRESS.md 条目：`批次 | 状态(pending/claimed/verifying/done/failed) | �
 - 批次 6a：网页版 Noto 子集（1692 字形）缺 38 字（国/蛋/雪/马/驯/猫/狗等宠物成就期新增字）→ 换本机 OFL 全量 NotoSansSC-VF.ttf（30890 字形 0 缺字）设默认主题字体，粗体=FontVariation wght 700；结论与样本口径在 assets/fonts/README.md。后续新增中文文本无须再担心子集缺字。
 - 批次 2：网页版异步结算队列移植为**同步化引擎**（终态与 drain() 后快照一致，动画信号走快照 SfxRequests）；两个移植真 bug=临时卡 uid 计数器未自增撞号、天启剑「抽到时额外抽」递归加深度 16 护栏防栈溢出；RNG 用骨架 DeterministicRng（口径 §0.1 只保内部确定性），mana-surge 类「可观测变化」断言按同等意图放宽（RNG 组合不同时任意结算日志均算可观测）；碎片 2 合 1 落 RunState.Fragments+SaveGameDto.Fragments。
 - 批次 3：**唯一记录在案的网页版行为偏离**——map-generator.js 兜底池可把火堆/补给站贴着功能房补（seed 1412 L0，`isConvertible` 缺邻接过滤、quality 不校验），移植版 `EnforceFacilityGuarantees` 尾部追加相邻降级收敛，保证「功能房互不相邻」恒成立（修网页自身 bug，终验时老板裁断）；网页 v0.53 已实停用掷骰（按钮=选相邻节点）与事件连锁移动，体力为遗留显示字段移动不消耗、层间门一律不提供撤离——均已按行为对齐；2000-seed harness 使 Run 套件基线变为 RUN_SMOKE_OK checks≈1.45M。
+- 批次 4b：**待老板终验裁断项 #2——背包容量口径**：骨架=逐实例计数（旧冻结测试），网页=同名堆叠占 1 格（上限 3、初始攻击/火球 5）；牵动背包/撤离/仓库整链，未擅改。网页坑四条：神秘货箱兜底 lib 过滤很宽（按真源移植）；中箱开出蛋时变「4 张选 1」（网页原语义）；KEY_NEEDED 实为 base.js 局部常量未进 rules.js（已补进导出契约）；DROP_EQUIP_DISCOUNT=0.8 网页硬编码（按祭坛常量先例落 LootTables）。另：tests/*/csproj 视角 BattleEngine.cs:420 有 CS8601 警告（sln 全量构建不出现，留 4c 顺手修）。
 - （后续批次在此追加）

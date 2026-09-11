@@ -130,6 +130,20 @@ public sealed class AtomicJsonSaveService
 
     public bool HasSave(int slot) => File.Exists(GetSlotPath(slot)) || File.Exists(GetBackupPath(slot));
 
+    /// <summary>
+    /// 清空存档槽（含 .bak 备份；对照网页 game.menu.js clearSlot——「删除」与「覆盖重开」共用）。
+    /// 返回是否确实存在过存档；槽号越界由 ValidateSlot 抛出。
+    /// </summary>
+    public bool ClearSlot(int slot)
+    {
+        var path = GetSlotPath(slot);
+        var backup = GetBackupPath(slot);
+        var existed = File.Exists(path) || File.Exists(backup);
+        if (File.Exists(path)) File.Delete(path);
+        if (File.Exists(backup)) File.Delete(backup);
+        return existed;
+    }
+
     private bool TryBackup(int slot, out SaveGameDto? snapshot, out bool usedBackup)
     {
         snapshot = null;

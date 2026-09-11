@@ -109,7 +109,7 @@ function validateRules(rulesData) {
   const expected = {
     diceSides: 3, stepMs: 340, emergencyExitCost: 10, fireHeal: 8,
     fireClassCardChance: 0.3, staminaMax: 60, staminaWarn: 10,
-    playerMaxHp: 30, playerAtk: 4, bagSize: 16, bagMax: 30,
+    playerMaxHp: 30, playerAtk: 4, keyNeeded: 10, bagSize: 16, bagMax: 30,
     safeStart: 2, safeMax: 6, stashStart: 25, stashMax: 49,
     battleEnergy: 2, battleStartDraw: 5, battleTurnDraw: 1,
     battleHandMax: 8, bossDeckSize: 15, starterSha: 5,

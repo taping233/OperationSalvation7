@@ -27,6 +27,10 @@ internal static class RunSmokeTests
         SaveRestoreRoundTripContinuesIdentically();
         ChestRewardsAndSettlementNeverSilentlyDropCards();
         DoorAndChestReadOnlyStateIsInspectable();
+        ShopStockWeightsBuyAndSellMatchWeb();
+        ChestKindsDropsPityEggAndClassChestMatchWeb();
+        ChestQueueSuspendsAndResumes();
+        FragmentSourcesAndCraftSemanticsMatchWeb();
         TwoThousandSeedAcceptanceHarness();
         Console.WriteLine($"RUN_SMOKE_OK checks={_checks}");
         return 0;
@@ -240,8 +244,14 @@ internal static class RunSmokeTests
                 ? coinsNode.EnumerateArray().Select(c => c.GetInt32()).ToArray() : Array.Empty<int>();
             var candidates = node.Value.TryGetProperty("pickFrom", out var pickFrom) ? pickFrom.GetInt32()
                 : node.Value.GetProperty("cards").GetInt32();
+            var pickFromValue = node.Value.TryGetProperty("pickFrom", out var pickFromNode) ? pickFromNode.GetInt32() : 0;
+            var coinCards = node.Value.TryGetProperty("coinCards", out var coinCardsNode) && coinCardsNode.ValueKind == JsonValueKind.Array
+                ? coinCardsNode.EnumerateArray().Select(c => c.GetString() ?? "").ToArray() : Array.Empty<string>();
+            var tokenChance = node.Value.TryGetProperty("tokenChance", out var tokenNode) ? tokenNode.GetDouble() : 0.0;
             Check(kind.CoinMin == (coins.Length > 0 ? coins[0] : 0) && kind.CoinMax == (coins.Length > 0 ? coins[^1] : 0)
-                && kind.Candidates == candidates, $"chest kind {node.Name} runtime/data mismatch");
+                && kind.Candidates == candidates && kind.PickFrom == pickFromValue
+                && kind.CoinCards.SequenceEqual(coinCards)
+                && Math.Abs(kind.TokenChance - tokenChance) < 1e-9, $"chest kind {node.Name} runtime/data mismatch");
         }
 
         // 宝箱物品表（chestTable）与分层掉落（layerChests）。
@@ -309,6 +319,32 @@ internal static class RunSmokeTests
         foreach (var node in cardsDoc.RootElement.GetProperty("price").EnumerateObject())
             Check(data.CardPrice(node.Name) == node.Value.GetInt32(), $"price {node.Name} runtime/data mismatch");
         Check(data.CardPrice("未定稀有度") == 2, "unknown rarity price fallback should be 2");
+
+        // 批次 4b：cards.json 顶层 shopWeights/dropWeights/dropTypes/dropDiscountTypes/rarities 逐项一致。
+        var shopWeights = cardsDoc.RootElement.GetProperty("shopWeights");
+        Check(data.CardShopWeights.Count == shopWeights.EnumerateObject().Count(), "shopWeights size mismatch");
+        foreach (var node in shopWeights.EnumerateObject())
+            Check(data.CardShopWeights.TryGetValue(node.Name, out var weight) && weight == node.Value.GetInt32(),
+                $"shopWeights {node.Name} runtime/data mismatch");
+        var dropWeights = cardsDoc.RootElement.GetProperty("dropWeights");
+        Check(data.CardDropWeights.Count == dropWeights.EnumerateObject().Count(), "dropWeights size mismatch");
+        foreach (var node in dropWeights.EnumerateObject())
+            Check(data.CardDropWeights.TryGetValue(node.Name, out var dropWeight) && dropWeight == node.Value.GetInt32(),
+                $"dropWeights {node.Name} runtime/data mismatch");
+        foreach (var field in new[] { "dropTypes", "dropDiscountTypes", "rarities" })
+        {
+            var expected = cardsDoc.RootElement.GetProperty(field).EnumerateArray().Select(n => n.GetString() ?? "").ToArray();
+            var actual = field switch
+            {
+                "dropTypes" => data.CardDropTypes,
+                "dropDiscountTypes" => data.CardDropDiscountTypes,
+                _ => data.CardRarities
+            };
+            Check(actual.SequenceEqual(expected), $"{field} runtime/data mismatch");
+        }
+        // rules.json playerAtk / keyNeeded（网页 game.atk=4 / base.js KEY_NEEDED=10）。
+        Check(RunRules.PlayerAtk == rules.GetProperty("playerAtk").GetInt32(), "rule playerAtk not injected");
+        Check(RunRules.KeyNeeded == rules.GetProperty("keyNeeded").GetInt32(), "rule keyNeeded not injected");
 
         // 行为抽查：外层战斗格遭遇只含该层表内的怪物且数量落在数据 size 区间。
         var entryIds = data.Encounters[0].Entries.Select(en => en.MonsterId).ToHashSet();
@@ -435,10 +471,18 @@ internal static class RunSmokeTests
     private static void ShopEventFireAndEmergencyExtractionWork()
     {
         var run = new RunState(9);
-        // 补给站（每层恰好 1）
+        // 补给站（每层恰好 1）：网页商店只卖卡牌（6 随机 + 桃 + 初始攻击 + 神秘货箱），不卖裸资源
+        run.ConfigureShopCardPool(LoadRunCardUniverse());
         run.DebugSetPosition(0, FindNode(run.Map, 0, RunRoomType.Shop)); run.ResolveCurrentRoom();
-        Check(run.Phase == RunPhase.Shop && run.Shop.Count >= 3, "shop room missing offers");
-        run.Resources.Coins = 10; run.BuyShopOffer("rations"); Check(run.Resources.Rations == 1, "shop resource purchase failed");
+        Check(run.Phase == RunPhase.Shop && run.Shop.Count == 9, "shop stock should be 6 random + peach + sha + mystery");
+        Check(run.Shop.Any(offer => offer.Id == "peach" && offer.Price == 2 && offer.Card?.Id == "tt-peach"),
+            "peach fixed slot missing (2 币 tt-peach)");
+        Check(run.Shop.Any(offer => offer.Id == "sha" && offer.Price == 1 && offer.ShaReplenish == 5),
+            "sha replenish slot missing (1 币 ×5/站)");
+        Check(run.Shop.Any(offer => offer.Id == "mystery" && offer.Price == 3 && offer.IsMystery),
+            "mystery crate slot missing (3 币)");
+        run.Resources.Coins = 10; run.BuyShopOffer("peach");
+        Check(run.Resources.Coins == 8 && run.OwnedCards.Any(x => x.Card.Id == "tt-peach"), "peach purchase failed");
         run.LeaveShop(); Check(run.Phase == RunPhase.Ready, "leaving shop should settle to ready");
         // 事件格 + 事件战（拾荒者数量随层数缩放：第 1 层 3 只，第 3 层起 5 只）。
         // 事件种类由 RNG 抽取——扫 seed 直到抽中 bandits（反抗组织拾荒者）。
@@ -772,6 +816,413 @@ internal static class RunSmokeTests
         var preview = run.PeekNextChest(); Check(preview.Kind is "small" or "medium" or "large" && preview.Candidates.Count > 0, "chest preview missing");
         Check(run.PeekNextChest() == preview, "chest preview was not stable");
     }
+
+    // ---------- 批次 4b：商店/宝箱/碎片（真源 game.run.shop.js / chests.js / game.bag.js） ----------
+
+    private static IReadOnlyList<RunCard> LoadRunCardUniverse()
+    {
+        var path = Path.Combine(GameData.FindDataDirectory(), "cards.json");
+        using var document = JsonDocument.Parse(File.ReadAllText(path));
+        var list = new List<RunCard>();
+        foreach (var card in document.RootElement.GetProperty("cards").EnumerateArray())
+        {
+            var id = card.GetProperty("id").GetString() ?? "unknown";
+            var name = card.TryGetProperty("name", out var nameNode) ? nameNode.GetString() ?? id : id;
+            var type = card.TryGetProperty("type", out var typeNode) ? typeNode.GetString() ?? "武术" : "武术";
+            var rarity = card.TryGetProperty("rarity", out var rarityNode) ? rarityNode.GetString() ?? "古朴" : "古朴";
+            var desc = card.TryGetProperty("desc", out var descNode) && descNode.ValueKind == JsonValueKind.String ? descNode.GetString() ?? "" : "";
+            var value = card.TryGetProperty("value", out var valueNode) && valueNode.TryGetInt32(out var parsed) ? parsed : 0;
+            bool sellable;
+            if (card.TryGetProperty("sellable", out var sellableNode) && sellableNode.ValueKind is JsonValueKind.True or JsonValueKind.False)
+                sellable = sellableNode.ValueKind == JsonValueKind.True;
+            else if (desc.Contains("不可出售", StringComparison.Ordinal)) sellable = false;
+            else sellable = desc.Contains("可出售", StringComparison.Ordinal);
+            var unrandom = card.TryGetProperty("unrandom", out var unrandomNode) && unrandomNode.ValueKind == JsonValueKind.True;
+            list.Add(new RunCard(id, name, type, rarity, Math.Max(1, value), sellable) { Unrandom = unrandom });
+        }
+        return list;
+    }
+
+    private static void BattleChestToPreview(RunState run, int layer)
+    {
+        run.DebugSetPosition(layer, FindNode(run.Map, layer, RunRoomType.Battle));
+        run.ResolveCurrentRoom();
+        run.DebugSetEncounter(new[] { new RunEnemy("probe", "探针怪", 10, 1) });
+        run.CompleteBattle(true);
+    }
+
+    private static void ShopStockWeightsBuyAndSellMatchWeb()
+    {
+        var data = GameRuntime.Data;
+        var universe = LoadRunCardUniverse();
+        var rarityById = universe.ToDictionary(card => card.Id, card => card.Rarity, StringComparer.Ordinal);
+
+        // —— 进货：6 随机槽价格==cards.json price 表、稀有度分布≈shopWeights（60:28:9:3）——
+        var run = new RunState(31);
+        run.ConfigureShopCardPool(universe);
+        run.ConfigureLootCardPool(universe);
+        var histogram = new Dictionary<string, int>(StringComparer.Ordinal);
+        var mysterySeen = 0;
+        for (var seed = 1; seed <= 600; seed++)
+        {
+            var probe = new RunState((ulong)seed);
+            probe.ConfigureShopCardPool(universe);
+            probe.ConfigureLootCardPool(universe);
+            probe.DebugSetPosition(0, FindNode(probe.Map, 0, RunRoomType.Shop));
+            probe.ResolveCurrentRoom();
+            Check(probe.Phase == RunPhase.Shop && probe.Shop.Count == 9, $"seed {seed}: shop stock shape broken");
+            foreach (var offer in probe.Shop)
+            {
+                if (offer.Card is null) { Check(offer.Sold, $"seed {seed}: empty slot must be unsellable"); continue; }
+                if (offer.IsMystery) { Check(offer.Price == 3, "mystery crate must cost 3"); mysterySeen++; continue; }
+                Check(data.CardPrice(offer.Card.Rarity) == offer.Price,
+                    $"seed {seed}: slot price {offer.Price} != PRICE[{offer.Card.Rarity}]");
+                if (offer.Id.StartsWith("card-", StringComparison.Ordinal))
+                {
+                    Check(rarityById.TryGetValue(offer.Card.Id, out var rarity) && rarity == offer.Card.Rarity,
+                        "shop card metadata drifted from cards.json");
+                    histogram[offer.Card.Rarity] = histogram.GetValueOrDefault(offer.Card.Rarity) + 1;
+                }
+            }
+        }
+        Check(mysterySeen == 600, "mystery crate must appear exactly once per visit");
+        var slots = histogram.Values.Sum();
+        Check(slots == 3600, $"expected 3600 weighted slots, got {slots}");
+        foreach (var (rarity, weight) in data.CardShopWeights)
+        {
+            var share = histogram.GetValueOrDefault(rarity) / (double)slots;
+            var expected = weight / (double)data.CardShopWeights.Values.Sum();
+            Check(Math.Abs(share - expected) < 0.05,
+                $"shop rarity share {rarity}={share:F3} drifted from shopWeights {expected:F3}");
+        }
+        Check(histogram.Keys.All(rarity => data.CardShopWeights.ContainsKey(rarity)),
+            "weighted slots must only roll shopWeights rarities (初始/职业/衍生/棱彩 excluded)");
+
+        // —— 买卖限制：币不足/已售/补货上限/神秘货箱开出/仅可出售卡能卖 ——
+        var shop = new RunState(77);
+        shop.ConfigureShopCardPool(universe);
+        shop.ConfigureLootCardPool(universe);
+        shop.DebugSetPosition(0, FindNode(shop.Map, 0, RunRoomType.Shop));
+        shop.ResolveCurrentRoom();
+        shop.Resources.Coins = 0;
+        try { shop.BuyShopOffer("card-0"); throw new InvalidOperationException("poor buyer was accepted"); }
+        catch (InvalidOperationException error) { Check(error.Message.Contains("金币不足", StringComparison.Ordinal), "wrong poor-buyer error"); _checks++; }
+        shop.Resources.Coins = 100;
+        var first = shop.Shop.First(offer => offer.Id == "card-0" && offer.Card is not null);
+        shop.BuyShopOffer("card-0");
+        Check(shop.Resources.Coins == 100 - first.Price && shop.OwnedCards.Any(x => x.Card.Id == first.Card!.Id),
+            "buying a card must charge PRICE and add the card");
+        Check(shop.Shop.First(offer => offer.Id == "card-0").Sold, "bought slot must be marked sold");
+        try { shop.BuyShopOffer("card-0"); throw new InvalidOperationException("sold slot was sold twice"); }
+        catch (InvalidOperationException) { _checks++; }
+        var coinsBeforeSha = shop.Resources.Coins;
+        for (var i = 0; i < 5; i++) shop.BuyShopOffer("sha");
+        Check(shop.OwnedCards.First(x => x.Card.Id == "builtin-sha").Count == 5
+            && shop.Resources.Coins == coinsBeforeSha - 5,
+            "sha replenish must sell exactly 5 copies at 1 coin each per visit");
+        var shaSlot = shop.Shop.First(offer => offer.Id == "sha");
+        Check(shaSlot.Sold && shaSlot.ShaReplenish == 0, "sha slot must close (已补满) after 5 replenishes");
+        try { shop.BuyShopOffer("sha"); throw new InvalidOperationException("sixth sha accepted"); }
+        catch (InvalidOperationException) { _checks++; }
+        shop.BuyShopOffer("mystery");
+        Check(shop.Shop.First(offer => offer.Id == "mystery").Sold, "mystery slot must close after purchase");
+        shop.Resources.Coins = 0;
+        shop.SellOwnedCard(first.Card!.Name);
+        Check(shop.Resources.Coins == 0, "unsellable shop card must not convert to coins (默认不可出售)");
+        shop.Resources.Coins = 50;
+        var sellGold = shop.SellOwnedCard("金币");
+        Check(!sellGold.Ok || sellGold.Coins == 9 * sellGold.Quantity, "currency cards sell at face value 9");
+        Check(!shop.SellOwnedCard("木材").Ok, "材料卡（木材）禁止卖币（sellable=false）");
+        Check(!shop.SellOwnedCard("口粮").Ok && !shop.SellOwnedCard("一把钥匙").Ok, "口粮/钥匙材料卡禁止卖币");
+        var diamond = universe.First(card => card.Id == "tt3-diamond");
+        Check(diamond.Sellable && diamond.SellPrice == 16, "钻石 desc「可出售」→ sellable（isSellable 描述回退）");
+
+        // —— 基地侧出售：材料折入物资不可卖币，货币类资源卡仍可出售（base.js materialInfo 口径）——
+        var baseState = new RunBaseState();
+        Check(!baseState.SellCards("木材", 1).Ok || baseState.SellCards("木材", 1).Why != "",
+            "wood card needs a stack before selling");
+        baseState.DepositCards(new[] { new RunCardStack(universe.First(card => card.Id == "tt-wood")) });
+        var woodSell = baseState.SellCards("木材", 1);
+        Check(!woodSell.Ok && woodSell.Why == "material", "base sale must refuse material cards (材料类卡禁止卖币)");
+        baseState.DepositCards(new[] { new RunCardStack(universe.First(card => card.Id == "tt-gold")) });
+        var goldSell = baseState.SellCards("金币", 1);
+        Check(goldSell.Ok && goldSell.Coins == 9, "currency resource cards remain sellable at face value");
+    }
+
+    private static void ChestKindsDropsPityEggAndClassChestMatchWeb()
+    {
+        var data = GameRuntime.Data;
+        var universe = LoadRunCardUniverse();
+        var rarityById = universe.GroupBy(card => card.Name, StringComparer.Ordinal)
+            .ToDictionary(group => group.Key, group => group.First().Rarity, StringComparer.Ordinal);
+
+        // —— 四箱型内容形状：small 1 卡 / medium 3 选 1 / large 3 卡 / boss 5 卡+币卡；币区间逐项 ——
+        var classPool = universe.Where(card => card.Rarity == "职业").Take(6).ToList();
+        long eggHits = 0, bossTokens = 0, bossTotal = 0, classChests = 0, chestTotal = 0;
+        for (var seed = 1; seed <= 1200; seed++)
+        {
+            var run = new RunState((ulong)seed);
+            run.ConfigureLootCardPool(universe);
+            run.ConfigureClassCardPool(classPool);
+            var layer = (seed - 1) % 4;
+            BattleChestToPreview(run, layer);
+            chestTotal++;
+            while (run.Phase == RunPhase.Chest)
+            {
+                var preview = run.PeekNextChest();
+                var kind = data.RequireChestKind(preview.Kind);
+                // 宠物蛋是「额外开出」并入同一 cards 数组（网页 chests.js 原语义）：
+                // 中箱可能 4 张里选 1，蛋不占随机卡池配额
+                Check(preview.Candidates.Count == kind.Candidates + (preview.EggHit ? 1 : 0),
+                    $"{preview.Kind} must roll Candidates={kind.Candidates}(+egg), got {preview.Candidates.Count}");
+                Check(preview.Coins == 0 || (preview.Coins >= kind.CoinMin && preview.Coins <= kind.CoinMax),
+                    $"{preview.Kind} coins {preview.Coins} outside data range [{kind.CoinMin},{kind.CoinMax}]");
+                if (preview.IsClass)
+                {
+                    classChests++;
+                    // 职业宝箱（黑箱）：只掉职业稀有度卡，不参与蛋/通行证/保底；
+                    // 中箱规格的职业箱仍是 3 选 1（网页 isPick 只看 K.pickFrom）
+                    Check(preview.Candidates.All(name => classPool.Any(card => card.Name == name)),
+                        "class chest must only drop 职业 rarity class cards");
+                    Check(!preview.EggHit && !preview.TokenHit, "class chest has no egg/token rolls");
+                }
+                if (preview.Kind == "boss")
+                {
+                    bossTotal++;
+                    Check(preview.Candidates.Any(name => data.RequireChestKind("boss").CoinCards.Contains(name)),
+                        "boss chest must include one of 金币/银币/铜币");
+                    if (preview.TokenHit) bossTokens++;
+                }
+                if (preview.EggHit)
+                {
+                    eggHits++;
+                    Check(preview.Candidates.Contains("宠物蛋"), "egg roll must surface the 宠物蛋 card");
+                }
+                run.OpenNextChest();
+            }
+            Check(run.Phase == RunPhase.Ready, $"seed {seed}: chest flow must settle");
+        }
+        Check(eggHits > 0 && eggHits / (double)chestTotal < 0.02,
+            $"pet egg rate {eggHits}/{chestTotal} must be ~0.7% (0 < rate < 2%)");
+        var classShare = classChests / (double)chestTotal;
+        Check(Math.Abs(classShare - LootTables.ClassChestChance) < 0.05,
+            $"class chest share {classShare:F3} drifted from 0.25");
+
+        // —— 首脑保险柜：击败首脑掉 boss 箱（5 卡 + 金币/银币/铜币 其一 + 30% 员工通行证B）——
+        var boss = data.Bosses[0];
+        for (var seed = 1; seed <= 400; seed++)
+        {
+            var run = new RunState((ulong)seed);
+            run.ConfigureLootCardPool(universe);
+            run.ConfigureClassCardPool(classPool);
+            run.DebugSetPosition(3, FindNode(run.Map, 3, RunRoomType.Battle));
+            run.ResolveCurrentRoom();
+            run.DebugSetEncounter(new[] { new RunEnemy(boss.Id, boss.Name, boss.Hp, boss.Attack, true) });
+            var drops = run.CompleteBattle(true);
+            Check(drops.Count == 1 && drops[0] is ("boss", true, false), "boss kill must drop exactly the boss chest");
+            bossTotal++;
+            while (run.Phase == RunPhase.Chest)
+            {
+                var preview = run.PeekNextChest();
+                Check(preview.Kind == "boss" && preview.IsBoss, "boss chest preview must be the boss kind");
+                var kindSpec = data.RequireChestKind("boss");
+                Check(preview.Candidates.Count == kindSpec.Candidates + 1 + (preview.TokenHit ? 1 : 0) + (preview.EggHit ? 1 : 0),
+                    "boss chest must roll 5 cards + 1 coin card (+token/+egg)");
+                Check(preview.Candidates.Any(name => data.RequireChestKind("boss").CoinCards.Contains(name)),
+                    "boss chest must include one of 金币/银币/铜币");
+                Check(preview.Coins == 0, "boss chest carries coin cards, no raw coins");
+                if (preview.TokenHit) bossTokens++;
+                if (preview.EggHit) eggHits++;
+                run.OpenNextChest();
+            }
+        }
+        Check(bossTokens > 0 && bossTokens / (double)bossTotal is > 0.15 and < 0.45,
+            $"boss tokenChance 0.3 drifted: {bossTokens}/{bossTotal}");
+
+        // —— 巨兽「荒渊」：固定 2 个大宝箱 ——
+        var beast = new RunState(99);
+        beast.ConfigureLootCardPool(universe);
+        beast.DebugSetPosition(0, FindNode(beast.Map, 0, RunRoomType.Battle));
+        beast.ResolveCurrentRoom();
+        beast.DebugSetEncounter(new[] { new RunEnemy("huangyuan", "巨兽·荒渊", 10, 1, true) });
+        var beastDrops = beast.CompleteBattle(true);
+        Check(beastDrops.Count == 2 && beastDrops.All(drop => drop.Kind == "large" && !drop.IsBoss && !drop.IsClass),
+            "巨兽 encounter must drop exactly 2 large chests");
+        while (beast.Phase == RunPhase.Chest) beast.OpenNextChest();
+
+        // —— 分层掉落表（layerChests）：L3 fixed=[large,medium]；加权层箱数/箱型分布 ——
+        var fixedRun = new RunState(555);
+        fixedRun.ConfigureLootCardPool(universe);
+        fixedRun.DebugSetPosition(3, FindNode(fixedRun.Map, 3, RunRoomType.Battle));
+        fixedRun.ResolveCurrentRoom();
+        fixedRun.DebugSetEncounter(new[] { new RunEnemy("probe", "探针怪", 10, 1) });
+        var fixedDrops = fixedRun.CompleteBattle(true);
+        Check(fixedDrops.Select(drop => drop.Kind).SequenceEqual(new[] { "large", "medium" }),
+            "layer 4 fixed drops must be [large, medium] (layerChests[3].fixed)");
+        var countHistogram = new Dictionary<int, int>();
+        var typeHistogram = new Dictionary<string, int>(StringComparer.Ordinal);
+        for (var seed = 1; seed <= 400; seed++)
+        {
+            var run = new RunState((ulong)seed);
+            run.ConfigureLootCardPool(universe);
+            run.DebugSetPosition(2, FindNode(run.Map, 2, RunRoomType.Battle));
+            run.ResolveCurrentRoom();
+            run.DebugSetEncounter(new[] { new RunEnemy("probe", "探针怪", 10, 1) });
+            var drops = run.CompleteBattle(true);
+            countHistogram[drops.Count] = countHistogram.GetValueOrDefault(drops.Count) + 1;
+            foreach (var drop in drops) typeHistogram[drop.Kind] = typeHistogram.GetValueOrDefault(drop.Kind) + 1;
+            while (run.Phase == RunPhase.Chest) run.OpenNextChest();
+        }
+        var oneChest = countHistogram.GetValueOrDefault(1);
+        var twoChests = countHistogram.GetValueOrDefault(2);
+        Check(oneChest > 0 && twoChests > 0 && Math.Abs(oneChest / 400.0 - 0.7) < 0.08,
+            $"layer 3 chest count weights 7:3 drifted (1箱 {oneChest}/400)");
+        Check(typeHistogram.Keys.All(kind => kind is "medium" or "large"), "layer 3 types must be medium/large only");
+        var largeShare = typeHistogram.GetValueOrDefault("large") / (double)typeHistogram.Values.Sum();
+        Check(Math.Abs(largeShare - 0.3) < 0.08, $"layer 3 type weights 7:3 drifted (large {largeShare:F3})");
+
+        // —— 保底：中宝箱至少 1 张「稀有」+；大宝箱/首脑至少 1 张「史诗」+（池内含对应档）——
+        var pityPool = universe.Where(card => card.Rarity is "古朴" or "稀有" or "史诗").ToList();
+        var pityRarities = data.CardRarities.ToList();
+        var pityClassPool = universe.Where(card => card.Rarity == "职业").Take(6).ToList();
+        for (var seed = 1; seed <= 300; seed++)
+        {
+            var run = new RunState((ulong)seed);
+            run.ConfigureLootCardPool(pityPool);
+            run.ConfigureClassCardPool(pityClassPool);
+            var layer = seed % 2 == 0 ? 1 : 3;   // L1 会出 large；L3 fixed large+medium
+            BattleChestToPreview(run, layer);
+            while (run.Phase == RunPhase.Chest)
+            {
+                var preview = run.PeekNextChest();
+                var need = preview.RequiresChoice || preview.Kind == "large" ? (preview.RequiresChoice ? "稀有" : "史诗") : null;
+                if (need is not null && !preview.IsClass)   // 职业箱不参与保底（网页独立分支）
+                {
+                    var needRi = pityRarities.IndexOf(need);
+                    Check(preview.Candidates.Any(name => rarityById.TryGetValue(name, out var rarity) && Math.Max(0, pityRarities.IndexOf(rarity)) >= needRi),
+                        $"{preview.Kind} chest broke the pity floor (need {need}+): [{string.Join(",", preview.Candidates)}]");
+                }
+                run.OpenNextChest();
+            }
+        }
+    }
+
+    private static void ChestQueueSuspendsAndResumes()
+    {
+        var universe = LoadRunCardUniverse();
+        var run = new RunState(99);
+        run.ConfigureLootCardPool(universe);
+        // 巨兽遭遇固定掉 2 个大宝箱 → 两个箱的队列
+        run.DebugSetPosition(0, FindNode(run.Map, 0, RunRoomType.Battle));
+        run.ResolveCurrentRoom();
+        run.DebugSetEncounter(new[] { new RunEnemy("huangyuan", "巨兽·荒渊", 10, 1, true) });
+        run.CompleteBattle(true);
+        Check(run.Phase == RunPhase.Chest, "beast loot should open the chest queue");
+        Check(run.SuspendChests(), "suspend must report an open chest flow");
+        var suspended = run.PeekNextChest();
+        Check(run.SuspendChests() && run.PeekNextChest() == suspended, "suspend must keep queue and rolled content stable");
+        try { run.OpenNextChest(); throw new InvalidOperationException("suspended chest was opened"); }
+        catch (InvalidOperationException error) { Check(error.Message.Contains("挂起", StringComparison.Ordinal), "wrong suspend error"); _checks++; }
+        run.ResumeChests();
+        Check(!run.ChestsSuspended && run.PeekNextChest() == suspended, "resume must re-expose the same rolled chest");
+        run.OpenNextChest();
+        Check(run.Phase == RunPhase.Chest, "queue must still hold the second chest after the first");
+        run.OpenNextChest();
+        Check(run.Phase == RunPhase.Ready, "queue must settle to ready after the last chest");
+        Check(!run.SuspendChests(), "suspend outside a chest flow must return false");
+        run.ResumeChests();   // 非挂起状态恢复是无操作
+        Check(true, "resume without suspend is a no-op");
+
+        // diceHistory：近 8 次掷/移动记录（slice(-8) 口径，超出丢弃最旧）
+        var walker = new RunState(4242);
+        for (var i = 0; i < 10; i++)
+        {
+            walker.MoveTo(walker.ReachableNodes()[0]);
+            SettleToReady(walker);
+        }
+        Check(walker.DiceHistory.Count == 8, "dice history must keep at most 8 entries");
+    }
+
+    private static void FragmentSourcesAndCraftSemanticsMatchWeb()
+    {
+        var universe = LoadRunCardUniverse();
+
+        // —— 来源①神秘补给（tt6-mystery 接收补给）：碎片 ×1 + 2 币（不再直发彩色令牌卡）——
+        RunState? mystery = null;
+        for (var seed = 1; seed <= 300 && mystery is null; seed++)
+        {
+            var probe = new RunState((ulong)seed);
+            probe.DebugSetPosition(0, FindNode(probe.Map, 0, RunRoomType.Event));
+            probe.ResolveCurrentRoom();
+            var choices = probe.DrawEventChoices();
+            if (choices[0].Id != "mystery_supply") continue;
+            var coinsBefore = probe.Resources.Coins;
+            probe.ChooseEvent(0);
+            Check(probe.Fragments == 1 && probe.Resources.Coins == coinsBefore + 2,
+                "mystery supply must grant 1 fragment + 2 coins");
+            Check(probe.OwnedCards.All(x => x.Card.Id != "event-color-token"),
+                "mystery supply must NOT grant a color token card (网页 v2 事件口径)");
+            SettleToReady(probe);
+            mystery = probe;
+        }
+        Check(mystery is not null, "mystery event should appear within 300 seeds");
+
+        // —— 来源②系统补给（tt6-systemsupply）：碎片 ×1 + 木材卡 ×1（物资以卡牌入包）——
+        RunState? supply = null;
+        for (var seed = 1; seed <= 300 && supply is null; seed++)
+        {
+            var probe = new RunState((ulong)seed);
+            probe.ConfigureLootCardPool(universe);
+            probe.DebugSetPosition(0, FindNode(probe.Map, 0, RunRoomType.Event));
+            probe.ResolveCurrentRoom();
+            var choices = probe.DrawEventChoices();
+            if (choices[0].Id != "systemsupply_restock") continue;
+            probe.ChooseEvent(0);
+            Check(probe.Fragments == 1, "system supply must grant 1 fragment");
+            Check(probe.OwnedCards.Any(x => x.Card.Id == "tt-wood") || probe.PendingRewards.Any(x => x.Card.Id == "tt-wood"),
+                "system supply must grant the wood card (物资以卡牌入包)");
+            SettleToReady(probe);
+            supply = probe;
+        }
+        Check(supply is not null, "system supply event should appear within 300 seeds");
+
+        // —— 敌人不掉碎片；碎片无上限（网页 game.fragments 只增不减，祭坛兑换/合成才消耗）——
+        var plain = new RunState(7);
+        plain.ConfigureLootCardPool(universe);
+        plain.DebugSetPosition(0, FindNode(plain.Map, 0, RunRoomType.Battle));
+        plain.ResolveCurrentRoom();
+        plain.DebugSetEncounter(new[] { new RunEnemy("probe", "探针怪", 10, 1) });
+        plain.CompleteBattle(true);
+        while (plain.Phase == RunPhase.Chest) plain.OpenNextChest();
+        Check(plain.Fragments == 0, "enemies must not grant fragments");
+        plain.GrantFragments(7);
+        Check(plain.Fragments == 7, "fragments accumulate without a cap");
+
+        // —— 合成入口：3 张通行证B → 1 张通行证A；A + 2 碎片 → 彩色令牌（game.bag.js 语义）——
+        var craft = new RunState(8);
+        craft.ConfigureLootCardPool(universe);
+        var gold = universe.First(card => card.Id == TokenCraft.TokenGoldId);
+        var tokenA = universe.First(card => card.Id == TokenCraft.TokenColorId);
+        Check(craft.CraftTokenAFromB().Ok == false, "craft without gold tokens must fail");
+        craft.AddCard(gold, 2);
+        Check(!craft.CraftTokenAFromB().Ok, "craft with 2 gold tokens must fail");
+        craft.AddCard(gold, 1);
+        Check(craft.OwnedCards.First(x => x.Card.Id == TokenCraft.TokenGoldId).Count == 3, "setup: 3 gold tokens");
+        var craftA = craft.CraftTokenAFromB();
+        Check(craftA.Ok && craftA.CraftedCardId == TokenCraft.TokenColorId, "3 gold tokens must craft token A");
+        Check(!craft.OwnedCards.Any(x => x.Card.Id == TokenCraft.TokenGoldId), "gold tokens must be consumed");
+        Check(craft.OwnedCards.Any(x => x.Card.Id == TokenCraft.TokenColorId), "token A enters the backpack");
+        Check(!craft.CraftColorTokenByFragments().Ok, "color token craft without fragments must fail");
+        craft.GrantFragments(1);
+        Check(!craft.CraftColorTokenByFragments().Ok, "color token craft with 1 fragment must fail");
+        craft.GrantFragments(1);
+        var colorCraft = craft.CraftColorTokenByFragments();
+        Check(colorCraft.Ok && colorCraft.CraftedCardId == TokenCraft.ColorTokenId, "A + 2 fragments must craft the color token");
+        Check(craft.Fragments == 0 && !craft.OwnedCards.Any(x => x.Card.Id == TokenCraft.TokenColorId), "A + fragments consumed");
+        Check(craft.OwnedCards.Any(x => x.Card.Id == TokenCraft.ColorTokenId), "color token enters the backpack");
+    }
+
+    // ---------- 批次 4b 结束 ----------
 
     // ---------- 验收①：2000 seed 复验 harness ----------
 

@@ -38,6 +38,7 @@
       "playerAtk": 4,
       "playerMaxHp": 30
     },
+    "keyNeeded": 10,
     "map": {
       "diceSides": 3,
       "emergencyExitCost": 10,
