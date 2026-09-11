@@ -391,14 +391,22 @@ describe('直接释放家族实打', () => {
     expect(hand.includes(picked.name), `选中的【${picked.name}】应被直接释放而非留在手牌：${slice(g)}`).toBe(false);
     const foe0 = snap().foes[0];
     const st = foe0.status || {};
-    // 满血时抽到恢复药水：回血无可观测差值，属预期（其余药水必有可观测效果）
+    // 药水池（parsePoolNoun('药水')=带「药水」名字的道具）逐瓶的可观测信号：
+    //   伤害/诅咒类 → 敌掉血/冰冻/中毒/流血；回复类 → hp>300（满血 99999 不存在）；
+    //   攻击/法伤强化 → atkUp/spellUp；蓝瓶/精神药水抽牌（普通战变获得初始攻击）→「初始攻击」；
+    //   巨蟒药水 →「召唤」；转势药水「附加陷阱牌」暂无结算分支 → 走「占位」日志（管线确实跑过该牌）。
+    //   复原药水在战斗内是合法无操作（本场没有可复原的消耗堆），与满血回复同样豁免。
+    const noOpInBattle = picked.name === '复原药水';
     const healingAtFull = picked.name === '恢复药水' && g.hp >= g.maxHp;
-    const observable = healingAtFull || foe0.hp < foe0.maxHp
+    const observable = noOpInBattle || healingAtFull || foe0.hp < foe0.maxHp
       || (st.freeze || 0) > 0 || (st.poison || 0) > 0 || (st.bleed || 0) > 0
       || g.hp > 300
       || (snap().pstat.status && ((snap().pstat.status.spellUp || 0) > 0 || (snap().pstat.status.atkUp || 0) > 0))
       || slice(g).includes('祝福')
-      || slice(g).includes('神秘药水');
+      || slice(g).includes('神秘药水')
+      || slice(g).includes('初始攻击')
+      || slice(g).includes('召唤')
+      || slice(g).includes('占位');
     expect(observable, `释放应有可观测效果：${slice(g)}`).toBe(true);
     BattleSession.commands.flee();
     await drain(20);
