@@ -51,7 +51,7 @@ import { game } from './game.session.js';
       const eIdx = (ld.entrances || []).indexOf(idx);
       info.push(`${ld.name} · 轨道编号 <b>${idx}</b>`);
       if (eIdx >= 0) info.push(`[[icon:door]] 出生入口：${ld.entranceNames[eIdx]}`);
-      if (door) info.push(`[[icon:door]] 环间门${door.exit ? '（撤离出口）' : ''} ⇄ ${MAP.layers[door.toLayer].name}`);
+      if (door) info.push(`[[icon:door]] 环间门${door.exit ? '（撤离出口）' : ''} ⇄ ${game.layerData[door.toLayer]?.name || '下一层'}`);
       if (altarE) info.push('[[icon:crystal]] 污染核心入口');
       info.push(`事件配置：${lc.def ? TYPE_NAME[lc.def.type] + (lc.def.n ? ` +${lc.def.n}币` : '') : '无'}`);
     } else {

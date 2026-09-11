@@ -17,7 +17,8 @@
     "test:watch": "vitest",
     "perf": "node scripts/perf-benchmark.cjs",
     "assets:audit": "node scripts/asset-audit.cjs",
-    "sfx:gen": "node game/scripts/jsfxr-generate.cjs"
+    "sfx:gen": "node game/scripts/jsfxr-generate.cjs",
+    "cards:sync": "node scripts/sync-cards-from-live.mjs"
   },
   "devDependencies": {
     "acorn": "^8.14.0",

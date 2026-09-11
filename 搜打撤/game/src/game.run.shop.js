@@ -65,38 +65,34 @@ function createShopController({
     renderShop();
   }
 
-  function renderShop() {
-    const slots = game.shopStock.map((slot, index) => {
-      if (slot.empty) return `<div class="shop-slot"><div class="shop-empty">${slot.label || '无货'}</div></div>`;
-      if (slot.sold) return '<div class="shop-slot sold"><div class="shop-empty">已售出</div></div>';
-      const afford = game.coins >= slot.price;
-      if (slot.shaReplenish != null) {
-        if (slot.shaReplenish <= 0) return '<div class="shop-slot sold"><div class="shop-empty">初始攻击已补满</div></div>';
-        return `<div class="shop-slot">${cardHTML(slot.card)}
-          <button class="mini-btn ok" data-act="buySha" data-i="${index}" ${afford ? '' : 'disabled'}>[[icon:coin]] ${slot.price} 币 · 余 ${slot.shaReplenish}/5</button>
-        </div>`;
-      }
-      if (slot.mystery) return `<div class="shop-slot"><div class="shop-empty">[[icon:dice]] 随机卡牌</div>
-        <button class="mini-btn ok" data-act="buyCard" data-i="${index}" ${afford ? '' : 'disabled'}>[[icon:coin]] ${slot.price} 币</button>
-      </div>`;
+  // 货位渲染：卡面 + 下方价签（对齐参考图：价格挂在卡牌正下方）
+  function slotHTML(slot, index) {
+    if (slot.empty) return `<div class="shop-slot"><div class="shop-empty">${slot.label || '无货'}</div></div>`;
+    if (slot.sold) return '<div class="shop-slot sold"><div class="shop-empty">已售出</div></div>';
+    const afford = game.coins >= slot.price;
+    if (slot.shaReplenish != null) {
+      if (slot.shaReplenish <= 0) return '<div class="shop-slot sold"><div class="shop-empty">初始攻击已补满</div></div>';
       return `<div class="shop-slot">${cardHTML(slot.card)}
-        <button class="mini-btn ok" data-act="buyCard" data-i="${index}" ${afford ? '' : 'disabled'}>[[icon:coin]] ${slot.price} 币</button>
+        <button class="shop-price" data-act="buySha" data-i="${index}" ${afford ? '' : 'disabled'}>[[icon:coin]] ${slot.price}</button>
+        <span class="shop-slotnote">初始攻击 · 本站余 ${slot.shaReplenish}/5</span>
       </div>`;
-    }).join('');
-    const sellables = game.ownedCards.filter(owned => SDT.Cards.isSellable(owned.card));
-    const sellItems = sellables.length
-      ? sellables.map(owned => `
-          <div class="bag-card">
-            ${cardHTML(owned.card, 'sm')}
-            <button class="mini-btn ok" data-act="sellCard" data-uid="${owned.uid}">出售 ＋${SDT.Cards.sellPrice(owned.card)} 币</button>
-          </div>`).join('')
-      : '<p class="shop-sell-empty">没有可出售的卡牌——只有带「可出售」备注的卡才能卖给商店（默认不可出售）。</p>';
+    }
+    if (slot.mystery) return `<div class="shop-slot"><div class="shop-empty">[[icon:dice]] 随机卡牌</div>
+      <button class="shop-price" data-act="buyCard" data-i="${index}" ${afford ? '' : 'disabled'}>[[icon:coin]] ${slot.price}</button>
+    </div>`;
+    return `<div class="shop-slot">${cardHTML(slot.card)}
+      <button class="shop-price" data-act="buyCard" data-i="${index}" ${afford ? '' : 'disabled'}>[[icon:coin]] ${slot.price}</button>
+    </div>`;
+  }
 
+  function renderShop() {
+    const slots = game.shopStock.map(slotHTML).join('');
+    const sellableCount = game.ownedCards.filter(owned => SDT.Cards.isSellable(owned.card)).length;
     UI.registerHelp('shop', {
       title: '商店说明',
       html: `
         <p class="help-item"><b>进货</b>商队每次靠站随机卸货：6 张随机卡 + 金疮药 + 初始攻击补充（1 币/张，每站最多 5 张）+ 1 个「神秘货箱」栏位（3 币，买到随机卡牌）。</p>
-        <p class="help-item"><b>出售</b>默认所有卡牌不可出售；只有带「可出售」备注的卡才能卖给商店，收购价 = 卡面币值。</p>`,
+        <p class="help-item"><b>卖牌处</b>货板右下角的鎏金圆牌：点进收购台挑卡卖掉。默认所有卡牌不可出售；只有带「可出售」备注的卡才能卖，收购价 = 卡面币值。</p>`,
       back: renderShop,
     });
     UI.showOverlay('', `
@@ -104,18 +100,66 @@ function createShopController({
         <header class="pg-head">
           <h2>[[icon:bag]] 拾荒商队 ${UI.helpBtn('shop')}</h2>
           <span class="pg-spacer"></span>
+          <span class="hub-res">
+            <span class="res-chip" title="背包中卡牌张数（含同名堆叠）——方便对照货板决定买不买">[[icon:cards]] <b>${game.ownedCards.length}</b> 张卡牌</span>
+            <span class="res-chip">[[icon:coin]] <b class="gold">${game.coins}</b> 币</span>
+          </span>
+        </header>
+        <div class="shop-board">
+          <div class="shop-board-grid">
+            ${slots}
+            <button class="shop-sellpost" data-act="openSell" title="打开收购台，挑卡卖掉">
+              <span class="sellpost-coin">[[icon:cards]]</span>
+              <span class="sellpost-name">卖牌处</span>
+              <span class="sellpost-hint">${sellableCount ? `可卖 ${sellableCount} 张` : '暂无可卖卡牌'}</span>
+            </button>
+          </div>
+        </div>
+        <button class="shop-back" data-act="closeShop">[[icon:arrow]] 离开商店</button>
+      </div>`, 'page');
+    registerShopActs();
+    UI.refresh(game);
+  }
+
+  // 卖牌处二级界面：收购台（全部持有卡，可卖的亮着，其余置灰说明）
+  function renderSellPage() {
+    const total = game.ownedCards.length;
+    const sellableCount = game.ownedCards.filter(owned => SDT.Cards.isSellable(owned.card)).length;
+    const rows = game.ownedCards.map(owned => {
+      const sellable = SDT.Cards.isSellable(owned.card);
+      return `<div class="bag-card sell-item${sellable ? '' : ' no'}">
+        ${cardHTML(owned.card, 'sm')}
+        ${sellable
+          ? `<button class="mini-btn ok" data-act="sellCard" data-uid="${owned.uid}">卖出 +${SDT.Cards.sellPrice(owned.card)} 币</button>`
+          : '<span class="sell-no">不可出售</span>'}
+      </div>`;
+    }).join('');
+    const grid = total
+      ? `<div class="shop-sell">${rows}</div>`
+      : '<p class="shop-sell-empty">背包里还没有卡牌。</p>';
+    UI.registerHelp('shopSell', {
+      title: '卖牌处说明',
+      html: `<p class="help-item"><b>收购规则</b>默认所有卡牌不可出售；只有带「可出售」备注的卡才能卖给商店，收购价 = 卡面币值。</p>`,
+      back: renderSellPage,
+    });
+    UI.showOverlay('', `
+      <div class="pg shop-pg node-pg sc-shop" data-asset-key="scene-shop-bg">
+        <header class="pg-head">
+          <h2>[[icon:cards]] 卖牌处 ${UI.helpBtn('shopSell')}</h2>
+          <span class="pg-spacer"></span>
           <span class="hub-res"><span class="res-chip">[[icon:coin]] <b class="gold">${game.coins}</b> 币</span></span>
         </header>
-        <div class="shop-grid">
-          ${slots}
-          <aside class="shop-side">
-            <div class="shop-coinbox">[[icon:coin]] 持有 <b class="gold">${game.coins}</b> 币</div>
-            <button class="ov-btn" data-act="closeShop">[[icon:exit]] 离开商店</button>
-          </aside>
+        <div class="shop-board sell-board">
+          <p class="sell-tip">持有 ${total} 张 · 可卖 ${sellableCount} 张——置灰的卡没打「可出售」备注，商店不收</p>
+          ${grid}
         </div>
-        <h3 class="set-h">出售卡牌</h3>
-        <div class="shop-sell">${sellItems}</div>
+        <button class="shop-back" data-act="backShop">[[icon:arrow]] 返回商店</button>
       </div>`, 'page');
+    registerShopActs();
+    UI.refresh(game);
+  }
+
+  function registerShopActs() {
     UI.act('buyCard', data => {
       const slot = game.shopStock[+data.i];
       if (!slot || slot.sold || slot.empty) return;
@@ -124,8 +168,8 @@ function createShopController({
         SDT.Sound.sfx('error');
         return;
       }
-      if (!game.ownedCards.some(owned => owned.card.name === slot.card.name) && usedSlots() >= bagCap()) {
-        UI.log(`[[icon:bag]] 背包已满（${usedSlots()}/${bagCap()} 格），买不下这张卡`, 'warn');
+      if (!game.ownedCards.some(owned => owned.card.name === slot.card.name) && !game.canAcceptCard(slot.card)) {
+        UI.log(`[[icon:bag]] 背包已满（${usedSlots()}/${bagCap()} 格${slot.card.type !== '资源' ? '，珍珠盒扩格只收资源卡' : ''}），买不下这张卡`, 'warn');
         SDT.Sound.sfx('error');
         return;
       }
@@ -166,8 +210,10 @@ function createShopController({
       game.coins += price;
       UI.log(`[[icon:coin]] 出售卡牌【<b>${esc(owned.card.name)}</b>】（+ ${price} 币，现有 ${game.coins}）`, 'coin');
       saveGame();
-      renderShop();
+      renderSellPage();
     });
+    UI.act('openSell', renderSellPage);
+    UI.act('backShop', renderShop);
     UI.act('closeShop', () => {
       UI.hideOverlay();
       game.state = 'idle';
@@ -175,7 +221,6 @@ function createShopController({
       // 2026-09-06 #20：商队逛完回到节点选择界面（环间门 / 祭坛入口）
       if (cb) cb(); else UI.refresh(game);
     });
-    UI.refresh(game);
   }
 
   return { generateShopStock, openShop };

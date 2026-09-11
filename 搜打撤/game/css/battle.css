@@ -36,6 +36,9 @@
   .bt-ops-col .ov-btn { width: 100%; }
   /* 手牌：需要拖拽选目标的卡 */
   .bt-card.need-target { outline: 1.5px dashed rgba(196,196,196,.55); outline-offset: 3px; }
+  /* 无对敌效果的招式（2026-09-09 老板 #7）：不用指敌人，拖到敌我中间空地即可——金色细边示意 */
+  .bt-card.free-drop { outline: 1.5px solid rgba(217,192,122,.5); outline-offset: 3px; }
+  .battle-stage.drop-any { box-shadow: inset 0 0 0 2px rgba(217,192,122,.55), inset 0 0 60px rgba(217,192,122,.16); }
   .bt-card.targeting { outline: 2px solid #d9d9d9; outline-offset: 3px;
     filter: drop-shadow(0 0 12px rgba(196,196,196,.55)); }
   .bt-card .bt-tt { position: absolute; top: -8px; right: -6px; z-index: 1; font-size: 13px;
@@ -68,6 +71,34 @@
 .sts-me { left:clamp(4%,6vw,7%); width:clamp(190px,22vw,320px); }
 .sts-foes { position:absolute; right:clamp(4%,6vw,7%); bottom:clamp(3%,2.5vh,5%); left:42%; display:flex; justify-content:flex-end;
   align-items:flex-end; gap:clamp(8px,1vw,18px); z-index:2; }
+/* —— 随从位（Q4 老板定向：征召步兵等，替玩家承伤 + 自动攻击）—— */
+.sts-allies { position:absolute; left:clamp(16%,22vw,30%); bottom:clamp(3%,2.5vh,5%); display:flex;
+  align-items:flex-end; gap:clamp(8px,1vw,14px); z-index:2; }
+.sts-ally { position:static; width:clamp(96px,11vw,150px); opacity:.96; }
+.sts-ally .sts-figure { width:clamp(40px,6vw,64px); margin:0 auto; filter:saturate(.85) brightness(1.12) drop-shadow(0 0 8px rgba(120,220,160,.35)); }
+.sts-ally .sts-nameplate { font-size:clamp(10px,1.2vw,13px); }
+.sts-ally.dead { opacity:.35; filter:grayscale(1); }
+/* —— 药水栏（2026-09-12 老板定向：战斗界面上方常驻，点击使用 / 拖到敌人身上）—— */
+.bt-potions { position:absolute; top:clamp(6px,1.2vh,14px); left:50%; transform:translateX(-50%);
+  display:flex; align-items:center; gap:clamp(6px,.8vw,12px); flex-wrap:wrap; justify-content:center;
+  max-width:94%; z-index:6; pointer-events:none; }
+.bt-potions-label { font-size:clamp(11px,1.2vw,13px); opacity:.72; color:#e8dcc0; letter-spacing:2px; }
+.bt-potion { pointer-events:auto; display:inline-flex; align-items:center; gap:5px;
+  padding:clamp(3px,.5vh,6px) clamp(8px,1vw,14px); border:1px solid rgba(214,186,120,.5); border-radius:999px;
+  background:linear-gradient(180deg,rgba(34,29,19,.88),rgba(15,13,8,.94)); color:#f2e8cd;
+  font-size:clamp(12px,1.3vw,14px); cursor:pointer; user-select:none; white-space:nowrap;
+  box-shadow:0 2px 8px rgba(0,0,0,.5); transition:border-color .12s, box-shadow .12s, transform .12s; }
+.bt-potion img, .bt-potion svg { width:15px; height:15px; }
+.bt-potion .bt-potion-n { color:#ffd876; font-weight:700; }
+.bt-potion:hover { border-color:#ecd28a; box-shadow:0 0 12px rgba(236,210,138,.4); transform:translateY(-1px); }
+.bt-potion.need-target { border-style:dashed; }
+.bt-potion.need-target::after { content:'↳敌'; font-size:11px; color:#ff9d8a; margin-left:2px; }
+.bt-potion.aim-lift { transform:translateY(-3px) scale(1.05); z-index:7; }
+/* 不可使用的道具（2026-09-09 老板 #10）：虚化、不响应点击，悬停给原因 */
+.bt-potion.off { pointer-events:none; cursor:default; filter:grayscale(.85) brightness(.55); opacity:.75;
+  border-color:rgba(140,140,140,.4); }
+.bt-potions-empty { pointer-events:none; font-size:clamp(11px,1.1vw,13px); color:#9d9d9d; opacity:.7;
+  padding:4px 10px; border:1px dashed rgba(150,150,150,.35); border-radius:999px; }
 /* 重置旧卡片式敌人样式 */
 #overlay .battle-stage.sts .sts-foe { display:block; position:relative; flex:0 1 auto; min-width:0;
   width:clamp(130px,13vw,210px); border:0; padding:0; background:none; box-shadow:none; border-radius:0; }
@@ -85,6 +116,16 @@
 .sts-stats .ic { width:12px; height:12px; vertical-align:-0.16em; }
 .sts-chips { margin-top:3px; line-height:1.8; }
 .sts-chips:empty { display:none; }
+/* 已穿戴装备（2026-09-09 老板 #9）：名牌下方一排小药丸；带限定技能的可点击 */
+.sts-equips { margin-top:4px; display:flex; flex-wrap:wrap; gap:4px; }
+.sts-equip { display:inline-flex; align-items:center; gap:3px; padding:1px 7px; border-radius:999px;
+  font-size:11px; line-height:1.5; color:#e6dcc2; background:rgba(20,18,12,.7);
+  border:1px solid rgba(196,170,110,.45); }
+.sts-equip .ic { width:11px; height:11px; }
+.sts-equip.has-skill { cursor:pointer; border-color:rgba(236,210,138,.85); color:#ffeec2;
+  box-shadow:0 0 8px rgba(236,210,138,.3); }
+.sts-equip.has-skill:hover { background:rgba(58,48,22,.85); transform:translateY(-1px); }
+.sts-equip.has-skill.used { cursor:default; filter:grayscale(.8) brightness(.7); box-shadow:none; }
 /* 意图气泡（敌头顶） */
 .sts-intent { position:absolute; left:50%; top:-36px; transform:translateX(-50%); white-space:nowrap; z-index:3;
   padding:3px 12px; border:1px solid #8f8f8f; border-radius:999px; background:rgba(12,12,12,.9);
@@ -108,23 +149,48 @@
 .sts-hud { flex:0 0 auto; display:flex; align-items:flex-end; gap:14px; padding:6px 16px 8px; z-index:5;
   background:linear-gradient(180deg,rgba(4,4,4,0),rgba(4,4,4,.48) 34%); }
 .sts-hud-l, .sts-hud-r { display:flex; align-items:flex-end; gap:8px; }
-.sts-hud-l { min-width:118px; }
+.sts-hud-l { min-width:150px; }   /* 能量球已移到底部手牌左侧（09-09 老板 #2），此处只放抽牌堆 */
+/* 费用标识（能量球）移到手牌左侧（2026-09-09 老板 #2）：占位不遮牌，球底与手牌底沿齐平 */
+.sts-hud .sts-energy-wrap { flex:0 0 auto; align-self:flex-end; pointer-events:auto;
+  margin:0 6px clamp(8px,2.4vh,30px) clamp(10px,2.2vw,44px); }
 .sts-hud-r { min-width:118px; }
 .sts-hud-r .ov-btn { white-space:nowrap; }
-.sts-energy { width:62px; height:62px; border-radius:50%; border:2px solid #9c9c9c;
-  background:radial-gradient(circle at 50% 36%,#3d3d3d,#101010 72%); color:#f0f0f0;
+.sts-energy { width:88px; height:88px; border-radius:50%; border:2px solid rgba(255,255,255,.35); position:relative;
+  background:url('../assets/battle/energy-orb.webp') center/94% no-repeat,
+    radial-gradient(circle at 50% 68%, rgba(46,34,18,.6), rgba(8,8,8,.78) 74%);
+  color:#f0f0f0;
   display:flex; align-items:center; justify-content:center; gap:2px;
-  box-shadow:0 0 18px rgba(200,200,200,.25), inset 0 -6px 12px rgba(0,0,0,.7); }
-.sts-energy .ic { width:15px; height:15px; }
-.sts-energy b { font-size:24px; font-family:var(--cal); }
-.sts-energy span { font-size:11px; color:#a8a8a8; align-self:flex-end; margin-bottom:12px; }
-.sts-hand { flex:1; display:flex; flex-wrap:nowrap; justify-content:center; align-items:flex-end;
+  box-shadow:0 0 26px rgba(235,200,140,.32), inset 0 -8px 14px rgba(0,0,0,.75), inset 0 5px 9px rgba(255,255,255,.14); }
+.sts-energy::before { content:''; position:absolute; inset:5px; border-radius:50%; pointer-events:none;
+  border:1px solid rgba(255,255,255,.14); }
+.sts-energy b { text-shadow:0 1px 3px rgba(0,0,0,.92), 0 0 8px rgba(0,0,0,.7); }
+.sts-energy .ic { width:20px; height:20px; }
+.sts-energy b { font-size:30px; font-family:var(--cal); }
+.sts-energy span { font-size:13px; color:#a8a8a8; align-self:flex-end; margin-bottom:16px; }
+.sts-hand { flex:1; position:relative; display:flex; flex-wrap:nowrap; justify-content:center; align-items:flex-end;
   min-height:188px; padding:26px 8px 4px; overflow:visible; }
-.sts-hand .bt-card { flex:0 0 auto; transform:rotate(var(--rot,0deg)); transform-origin:50% -260px;
-  transition:transform .14s, box-shadow .14s; }
-.sts-hand .bt-card:hover { transform:rotate(var(--rot,0deg)) translateY(-36px) scale(1.14); z-index:9; }
-.sts-hand .bt-card.off:hover { transform:rotate(var(--rot,0deg)); }
-.sts-hand .bt-card.aim-lift { transform:translateY(-42px) scale(1.2) !important; z-index:20; }
+/* —— 扇形手牌（2026-09-09 重做）：槽位定位圆弧位（--fx/--fy/--frot/--fs 由 battle.hand.js 扇形数学给出），
+   hover/瞄准/放大等状态变换叠在内层 .bt-card 上，与槽位 transform 互不打架 —— */
+/* 槽位沉底（09-09 晚老板：露出到卡名标签即可——名字条完整可见，卡面主体沉底；
+   最大下沉弧 -24px 由基线兜住），
+   悬停/瞄准/双击放大时才整张升起 */
+.bt-slot { position:absolute; left:50%; bottom:-115px; width:10em; font-size:16px;
+  transform:translate(calc(-50% + var(--fx,0px)), var(--fy,0px)) rotate(var(--frot,0deg)) scale(var(--fs,1)); }
+.bt-slot:hover { z-index:9; }
+.bt-slot:has(.aim-lift) { z-index:20; }
+.bt-slot:has(.zoomed) { z-index:30; }
+.sts-hand .bt-card { transition:transform .16s cubic-bezier(.3,1.3,.5,1), box-shadow .16s, filter .2s; }
+.sts-hand .bt-card.off { transform:translateY(12px) scale(.97); filter:brightness(.55) saturate(.7); }
+.sts-hand .bt-slot:hover .bt-card:not(.off):not(.aim-lift):not(.zoomed) { transform:translateY(-160px) scale(1.13); }
+.sts-hand .bt-slot:hover .bt-card.off { transform:translateY(12px) scale(.97); }
+.sts-hand .bt-card.aim-lift { transform:translateY(-160px) scale(1.18) !important; }
+/* 悬停白闪（STS2 式：亮一下再退去）；不可用牌不闪 */
+.sts-hand .bt-slot:hover .bt-card:not(.off) { animation:cardHoverFlash .45s ease; }
+@keyframes cardHoverFlash {
+  0% { filter:brightness(1); }
+  25% { filter:brightness(1.5) saturate(1.18); }
+  100% { filter:brightness(1); }
+}
 /* 同名堆叠计数角标 */
 .bt-count { position:absolute; top:-9px; right:-9px; z-index:5; min-width:30px; height:22px; padding:0 6px;
   border-radius:11px; border:1.5px solid #b9b9b9; background:#1c1c1c; color:#f0f0f0;
@@ -145,10 +211,10 @@
 .sts-foes { padding-right:14px; }
 .sts-intent { max-width:150%; }
 /* v0.32.1 修：能量球数字与 /上限 重叠、手牌底部被截断 */
-.sts-energy .ic { position:absolute; top:5px; left:9px; }
-.sts-energy { flex-direction:row; align-items:baseline; padding-top:6px; }
-.sts-energy b { font-size:23px; }
-.sts-energy span { font-size:11px; color:#a8a8a8; margin:0 0 1px 1px; }
+.sts-energy .ic { position:absolute; top:8px; left:14px; }
+.sts-energy { flex-direction:row; align-items:baseline; padding-top:12px; }
+.sts-energy b { font-size:30px; }
+.sts-energy span { font-size:13px; color:#a8a8a8; margin:0 0 1px 1px; }
 .sts-hand { min-height:216px; padding:34px 8px 4px; }
 .sts-hand .hs-card.sm { font-size:11px; }
 
@@ -171,7 +237,8 @@
 .sts-figure.fx-hit-self { animation:stsSelfHit .45s ease; }
 @keyframes stsShake {
   0%,100% { transform:translateX(0); }
-  20% { transform:translateX(-9px); } 40% { transform:translateX(7px); }
+  20% { transform:translateX(-9px); filter:brightness(1.9) saturate(1.25); }
+  40% { transform:translateX(7px); filter:brightness(1.45); }
   60% { transform:translateX(-5px); } 80% { transform:translateX(3px); }
 }
 @keyframes stsSelfHit {
@@ -231,24 +298,22 @@
   45% { transform: scale(1.03); box-shadow: 0 0 60px rgba(245,197,66,.45); }
   100% { transform: scale(1); box-shadow: 0 14px 40px rgba(0,0,0,.5); }
 }
-/* #14 悬停桥：卡牌下缘保持命中区，防止反复升降抖动 */
-.sts-hand .bt-card::after { content: ''; position: absolute; left: -6px; right: -6px; bottom: -30px; height: 30px; }
-/* #34 切行按钮 */
-.bt-row-switch { align-self: flex-end; margin: 0 12px 4px 0; }
+/* #14 悬停桥：卡牌下缘保持命中区，防止反复升降抖动（挂槽位上，命中区跟随扇形位） */
+.sts-hand .bt-slot::after { content: ''; position: absolute; left: -6px; right: -6px; bottom: -30px; height: 30px; }
 /* #35 卡牌描述最多 3 行；战斗内手牌小一号字尽量少遮挡 */
 .hsc-desc span { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 .sts-hand .hs-card .hsc-desc { font-size: 10.5px; line-height: 1.35; }
 .sts-hand .hs-card .hsc-desc span { -webkit-line-clamp: 4; }
 /* #12 双击放大 */
-.sts-hand .bt-card.zoomed { transform: translateY(-70px) scale(1.55) !important; z-index: 30; }
+.sts-hand .bt-card.zoomed { transform: translateY(-170px) scale(1.5) !important; z-index: 30; }
 
 /* ============ 2026-09-06 留言批次：手牌加大 + 描述完整露出 + 微透明 ============ */
-.sts-hand { min-height: 256px; }
-.sts-hand .hs-card.sm { font-size: 14px; }
+.sts-hand { min-height: 300px; padding-top: 48px; }
+.sts-hand .hs-card.sm { font-size: 16px; }
 .sts-hand .hs-card .hsc-desc { font-size: 12px; line-height: 1.38; }
 .sts-hand .hs-card .hsc-desc span { -webkit-line-clamp: 6; }
 .sts-hand .bt-card { opacity: .93; }
-.sts-hand .bt-card:hover { opacity: 1; }
+.sts-hand .bt-slot:hover .bt-card { opacity: 1; }
 .battle-stage[data-phase="resolving"] .bt-card,
 .battle-stage[data-phase="enemy"] .bt-card {
   pointer-events: none;
@@ -257,3 +322,29 @@
 .battle-stage[data-phase="targeting"] .bt-card.targeting {
   filter: brightness(1.12) saturate(1.12);
 }
+
+/* ============ 2026-09-09 牌局动画（扇形手牌配套） ============ */
+/* 敌人回合：手牌区整体下沉退场（声明式，重建渲染后仍保持隐藏） */
+.battle-stage[data-phase="enemy"] .sts-hand { transform:translateY(72%); opacity:.08; pointer-events:none; }
+/* 离场克隆体：挂在 overlay 常驻层沿弧线飞向目标/弃牌堆 */
+.sts-cardfly { position:absolute; z-index:75; pointer-events:none; }
+.sts-cardfly .hs-card { font-size:16px; }   /* 与手牌内卡面同尺寸（脱离 .sts-hand 上下文后需补回） */
+.sts-cardfly .bt-card { width:100%; height:100%; }
+/* 命中特效贴图（NAI 生成，黑底 + screen 混合当发光层）：伤害=斩击，格挡/免伤=护盾碎裂 */
+.sts-impact { position:absolute; z-index:78; width:150px; height:150px; margin:-75px 0 0 -75px;
+  pointer-events:none; mix-blend-mode:screen; background:center/contain no-repeat;
+  animation:stsImpact .34s cubic-bezier(.2,.8,.4,1) forwards; }
+.sts-impact.fx-slash { background-image:url('../assets/battle/fx-slash.webp'); }
+.sts-impact.fx-block { background-image:url('../assets/battle/fx-block.webp'); }
+@keyframes stsImpact {
+  0% { opacity:0; transform:scale(.5) rotate(var(--imp-rot,0deg)); }
+  25% { opacity:1; }
+  100% { opacity:0; transform:scale(1.35) rotate(var(--imp-rot,0deg)); }
+}
+/* 手牌描述默认不上屏（09-09 老板：不点击不出现）；悬停 / 双击放大 / 选中等参与态才露出 */
+.sts-hand .hsc-desc { opacity:0; transition:opacity .16s; }
+.sts-hand .bt-slot:hover .hsc-desc,
+.sts-hand .bt-card.zoomed .hsc-desc,
+.sts-hand .bt-card.targeting .hsc-desc,
+.sts-hand .bt-card.sel .hsc-desc,
+.sts-hand .bt-card.infuse-self .hsc-desc { opacity:1; }

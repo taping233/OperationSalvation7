@@ -42,4 +42,21 @@ describe('五层种子化地图生成器', () => {
       expect(map[door.toLayer].logical[door.arriveAt].next).toContainEqual([li, door.at]);
     }
   });
+
+  it('保底房间：每层至少 1 火堆 1 补给站，功能房不与同类相邻（2026-09-09 试玩反馈）', () => {
+    const isAdj = (a, b) => Math.abs(a.x - b.x) + Math.abs(a.row - b.row) === 1;
+    for (let seed = 0; seed < 60; seed++) {
+      const map = generateLayeredMap(`pity-${seed}`);
+      for (const layer of map.layers) {
+        expect(layer.nodes.some(n => n.type === 'fire'), `seed=${seed} 缺火堆`).toBe(true);
+        expect(layer.nodes.some(n => n.type === 'shop'), `seed=${seed} 缺补给站`).toBe(true);
+        for (let a = 0; a < layer.nodes.length; a++) {
+          for (let b = a + 1; b < layer.nodes.length; b++) {
+            const same = layer.nodes[a].type === layer.nodes[b].type && (layer.nodes[a].type === 'fire' || layer.nodes[a].type === 'shop');
+            expect(same && isAdj(layer.nodes[a], layer.nodes[b]), `seed=${seed} 同类功能房扎堆 @${a},${b}`).toBe(false);
+          }
+        }
+      }
+    }
+  });
 });

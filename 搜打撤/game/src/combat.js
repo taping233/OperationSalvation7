@@ -159,7 +159,9 @@
   // 挂诅咒：bleed/poison 按层叠加（n 可为负做减层）；计时类取「剩余较大值」不叠加
   function addCurse(target, key, n) {
     if (!CURSE_META[key]) return 0;
-    n = n == null ? 1 : n;
+    // 层数/回合数兜底：调用方偶发传入 NaN/负值（如无层数的「附加流血」）时按 1 处理，
+    // 否则状态会被写成 NaN——角标不显示、后续伤害结算全线变 NaN
+    n = Number.isFinite(+n) && +n > 0 ? Math.floor(+n) : 1;
     ensureStatus(target);
     if (CURSE_META[key].stack) {
       target.status[key] = Math.max(0, target.status[key] + n);

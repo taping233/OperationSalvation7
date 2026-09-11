@@ -10,8 +10,8 @@
   .hs-card.sm { font-size: 12px; }
   .hs-card.lg  { font-size: 24px; }
   .hs-card.xl  { font-size: 30px; }
-  /* 类型边框色：武术/法术/道具/装备/事件/英雄卡/资源 */
-  /* 类型边框色：武术/法术/生物/道具/装备/事件/英雄卡/资源
+  /* 类型边框色：武术/法术/道具/装备/事件/能力卡/资源 */
+  /* 类型边框色：武术/法术/生物/道具/装备/事件/能力卡/资源
      （2026-09-04 定版：新增「生物」敌人图鉴类型，插入索引 2，其后类型顺移一位） */
   .tp0 { --fc1: #5b5b5b; --fc2: #232323; --art1: #404040; }
   .tp1 { --fc1: #5f5f5f; --fc2: #292929; --art1: #474747; }
@@ -23,21 +23,30 @@
   .tp7 { --fc1: #747474; --fc2: #2c2c2c; --art1: #535353; }
   /* 稀有度宝石色：初始/古朴/稀有/史诗/传说/衍生/职业/棱彩
      （2026-09-04/09-05 定版增补：职业 = 黑棱形（职业专属卡稀有度，不进随机池）；
-       棱彩 = 英雄卡及其衍生牌专属，卡面叠加 rv-prism 流转棱彩边框）
+       棱彩 = 能力卡及其衍生牌专属，卡面叠加 rv-prism 流转棱彩边框）
      2026-09-08 老板定版改色：衍生 原金色与传说太相似 → 青绿松石；
-     棱彩 原淡蓝与稀有太相似 → 桃红（宝石色，棱彩光带不变）。 */
+     棱彩 原淡蓝与稀有太相似 → 桃红（宝石色，棱彩光带不变）。
+     2026-09-08 二次定版：棱彩代表色 = 彩色——宝石走彩虹渐变，--gem 仅留单色兜底。
+     2026-09-09 三次定版：彩色换老板指定全息幻彩色板（白心 + 粉/奶油黄/薄荷/淡蓝/薰衣草环绕），
+     --gem 兜底锚色取幻彩中调薰衣草。 */
   .rv0 { --gem: #9aa0a6; } .rv1 { --gem: #6f9e6a; } .rv2 { --gem: #5a8ec2; }
   .rv3 { --gem: #9b7fb8; } .rv4 { --gem: #d0883e; } .rv5 { --gem: #3fae94; }
   .rv5 { box-shadow: 0 .3em 1em rgba(0,0,0,.55), inset 0 0 0 2px rgba(96,190,168,.55); }
-  .rv6 { --gem: #0b0b0d; } .rv7 { --gem: #e07bb8; }
+  .rv6 { --gem: #0b0b0d; } .rv7 { --gem: #cbb2f0; }
 
-  /* 英雄卡：渐变棱彩（2026-09-04 定版）——棱彩光带沿卡边自动小幅流转；
+  /* 能力卡：渐变棱彩（2026-09-04 定版）——棱彩光带沿卡边自动小幅流转；
      传说英雄为金光变体 rv-gold（金卡闪金光）。
      2026-09-07 性能重做（老板实测牌库 10fps）：旧实现 ::after 动 background-position，
      是逐帧重绘属性——每张棱彩卡每帧重画整层渐变 mask，一页 20 张时直接拖垮帧率。
      改为遮罩环内放一张 4 倍宽渐变层（.rv-beam::before）做 transform 位移，
      走合成器线程零重绘；观感（渐变配色 / 7s 流速 / 金色 3.2s）与旧版一致。 */
-  .hs-card.rv-prism { --gem: #e07bb8; }
+  .hs-card.rv-prism { --gem: #b36bff; }
+  /* 棱彩代表色 = 全息幻彩（2026-09-09 老板指定参考图）：白心 + 环绕粉彩光谱，辉光白光。 */
+  .hs-card.rv7 .hsc-gem, .hs-card.rv-prism .hsc-gem {
+    background:
+      radial-gradient(circle at 50% 42%, #ffffff 0 20%, rgba(255,255,255,0) 62%),
+      conic-gradient(from 210deg, #ffd6ec, #fff0c2, #c6f6de, #c3d8ff, #e2d0ff, #f5c9ec, #ffd6ec);
+    box-shadow: 0 0 .5em rgba(255,255,255,.65); }
   .hs-card .rv-beam { position: absolute; inset: 0; z-index: 4; border-radius: inherit;
     padding: 2px; pointer-events: none;
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);

@@ -42,6 +42,7 @@ const SCENES = {
     'tt6-goldmine': ['event-goldmine', 'scene-event-goldmine', 'scene-event-goldmine'], 'tt6-goldhammer': ['event-goldhammer', 'scene-event-goldhammer', 'scene-event-goldhammer'],
     'tt6-relief': ['event-relief', 'scene-event-relief', 'scene-event-relief'], 'tt6-airdrop': ['event-airdrop', 'scene-event-airdrop', 'scene-event-airdrop'],
     'tt6-chestdraw': ['event-chestdraw', 'scene-event-chestdraw', 'scene-event-chestdraw'], 'tt6-systemsupply': ['event-systemsupply', 'scene-event-systemsupply', 'scene-event-systemsupply'],
+    'cmtn7qttxqo4': ['event-cobbler', 'scene-event-cobbler', 'scene-event-cobbler'],   // 修鞋铺（实机自定义事件卡，2026-09-09 补专属场景图）
   };
   const PRELOAD_SCENES = Object.freeze({
     battle: new URL('../assets/scenes/battle-normal-anime-v2.webp', import.meta.url).href,
@@ -54,6 +55,10 @@ const SCENES = {
     emergencyExit: new URL('../assets/scenes/scene-extract-anime-v2.webp', import.meta.url).href,
     door: new URL('../assets/scenes/scene-door-anime-v2.webp', import.meta.url).href,
     altar: new URL('../assets/scenes/scene-altar-anime-v2.webp', import.meta.url).href,
+    // 事件/宝箱整页（nodeShell）背景：与 css/scenes.css 里 scene-event-bg / scene-chest-bg 同图，
+    // 不预载的话打开页面时 CSS background-image 才发请求，大图期间整页近乎黑屏
+    event: new URL('../assets/scenes/scene-altar-anime-v2.webp', import.meta.url).href,
+    chest: new URL('../assets/scenes/scene-chest-anime-v2.webp', import.meta.url).href,
   });
   const IMMEDIATE_SCENES = new Set(['battle', 'coin', 'wood', 'rations', 'key', 'fire']);
 

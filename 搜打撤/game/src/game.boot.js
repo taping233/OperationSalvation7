@@ -4,7 +4,7 @@ const SDT = window.SDT;
 import { TYPE_NAME } from './game.notes.js';
 import { MAP } from './game.session.js';
 import { SLOT_COUNT, buildDerived, cam, canvas, configureGameRuntime, ctx, dpr, exitToTitle, game, hasRun, migrateOldSave, openSettings, quitGame, saveGame, setLobby, showTitle, startNewGame, _set_dpr, _set_cam } from './game.session.js';
-import { bindRunMixins, moveTo, openClassChoice, openShop, showRunTransition } from './game.run.js';
+import { bindRunMixins, devForceBattle, moveTo, openClassChoice, openShop, showRunTransition } from './game.run.js';
 import { PRELOAD_SCENES } from './game.run.data.js';
 import { openBaseHub } from './game.hub.js';
 import { bindBagMixins, showBackpack } from './game.bag.js';
@@ -117,7 +117,18 @@ import { nodeHitRadius } from './camera.js';
         }
         case 'movePrev': e.preventDefault(); chooseNextTarget(-1); break;
         case 'moveConfirm': e.preventDefault(); confirmTarget(); break;
-        case 'moveCancel': e.preventDefault(); clearTarget(); break;
+        case 'moveCancel':
+          e.preventDefault();
+          // 卡牌特写浮层挂在 body（overlay 之外）：Esc 先收回特写，
+          // 否则会把底下的背包/整备页一起关掉、特写残留在画面上
+          {
+            const zoom = document.getElementById('cardZoom');
+            if (zoom) { zoom.querySelector('.cz-backdrop')?.click(); break; }
+          }
+          // 浮层打开时 Esc 优先关浮层（战斗页内部不受影响），否则清移动目标
+          if (!UI.el.overlay.hidden && UI.closeTopOverlayByEsc()) break;
+          clearTarget();
+          break;
         case 'camRotateL': cam.angle -= .2; renderScheduler.invalidate(); break;
         case 'camRotateR': cam.angle += .2; renderScheduler.invalidate(); break;
         case 'camOverview': cam.fitLayer(game); renderScheduler.invalidate(); break;
@@ -128,6 +139,17 @@ import { nodeHitRadius } from './camera.js';
     });
 
     UI.el.bagBtn.addEventListener('click', () => showBackpack());
+
+    // 行动日志收起开关：日志面板盖住左下地图节点，收起后只留标题条（状态持久化）
+    const logPanel = document.getElementById('logPanel');
+    const logToggle = document.getElementById('logToggle');
+    if (logPanel && logToggle) {
+      if (localStorage.getItem('sdt-log-collapsed') === '1') logPanel.classList.add('collapsed');
+      logToggle.addEventListener('click', () => {
+        const collapsed = logPanel.classList.toggle('collapsed');
+        localStorage.setItem('sdt-log-collapsed', collapsed ? '1' : '0');
+      });
+    }
 
     // 定位按钮：与键盘 F（camFocus）同一动作——镜头立即回到棋子当前位置
     const btnLocate = document.getElementById('btnLocate');
@@ -158,6 +180,9 @@ import { nodeHitRadius } from './camera.js';
     if (UI.el.btnClear) UI.el.btnClear.addEventListener('click', showClearOverlay);
     initDevMode();
     bindDevMode();
+    // 开发者一键进战斗（devTools 面板，仅 devMode 可见）
+    if (UI.el.devBattle) UI.el.devBattle.addEventListener('click', () => devForceBattle(false));
+    if (UI.el.devBoss) UI.el.devBoss.addEventListener('click', () => devForceBattle(true));
 
     // 卡牌大页面：Esc 关闭 / 点击深色背景关闭
     // （用 click 而非 mousedown 关背景，保证关闭前 mouseup 仍处于 modal 态，不会误触格子编辑）
@@ -196,9 +221,12 @@ import { nodeHitRadius } from './camera.js';
 
   function pickNode(wx, wy, preferReachable = false) {
     const legal = reachableNodes();
+    const fogOn = game.seen && Object.keys(game.seen).length > 0;
     let best = null, bd = Infinity, bestLegal = false;
     for (const n of game.nodes) {
       if (n.li !== game.layerIdx) continue;
+      // 迷雾外的节点不可选中：不可点击、无 tooltip（2026-09-09 老板：只见走过的和相邻的）
+      if (fogOn && !game.seen[n.li + ',' + n.idx]) continue;
       const d = Math.hypot(n.x - wx, n.y - wy);
       const radius = nodeHitRadius(cam.zoom, MIN_NODE_HIT_PX);
       const nLegal = legal.some(q => q.li === n.li && q.idx === n.idx);
@@ -360,13 +388,19 @@ import { nodeHitRadius } from './camera.js';
   }
 
   function resize() {
-    _set_dpr(window.devicePixelRatio || 1);
-    canvas.width = canvas.clientWidth * dpr;
-    canvas.height = canvas.clientHeight * dpr;
+    const cw = canvas.clientWidth, ch = canvas.clientHeight;
+    if (!cw || !ch) return;
+    const dprNow = window.devicePixelRatio || 1;
+    // 尺寸与 dpr 都没变就不重设：ResizeObserver 在 canvas.width 赋值后也会触发，防止空转/递归
+    if (cam && cam.viewW === cw && cam.viewH === ch &&
+        canvas.width === Math.round(cw * dprNow) && canvas.height === Math.round(ch * dprNow)) return;
+    _set_dpr(dprNow);
+    canvas.width = cw * dpr;
+    canvas.height = ch * dpr;
     // 后备存储是物理像素，而 Renderer.draw 全程用 CSS 坐标；不缩放的话
     // dpr>1 的屏幕（如 150% 缩放的 Edge）只画到左上 1/dpr 区域，其余是未初始化显存（绿噪点）。
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    if (cam) cam.resize(canvas.clientWidth, canvas.clientHeight);
+    if (cam) cam.resize(cw, ch);
     renderScheduler.invalidate();
   }
 
@@ -399,6 +433,9 @@ import { nodeHitRadius } from './camera.js';
       syncMute();
     }
     window.addEventListener('beforeunload', saveGame);
+    // 战斗内周期性落盘（2026-09-09 试玩反馈：战斗中刷新丢整场进度）——battle.core 在
+    // 动作队列清空/回合开始时调用，把战斗快照写进对局存档（读档由 Battle.restore 续打）
+    game.persistSave = saveGame;
     title.dataset.controlsBound = 'true';
   }
 
@@ -436,6 +473,12 @@ import { nodeHitRadius } from './camera.js';
     coverTitle = document.getElementById('title');
     coverExit = document.getElementById('exitScr');
     resize();
+    // 进入对局后底部栏/日志面板会挤压 canvas（窗口尺寸不变），window resize 感知不到；
+    // 用 ResizeObserver 盯住 canvas 实际尺寸，配合上面的无变化短路防止递归
+    if (typeof ResizeObserver !== 'undefined') {
+      new ResizeObserver(() => resize()).observe(canvas);
+    }
+    window.addEventListener('resize', resize);
     _set_cam(new SDT.Camera(MAP, canvas.clientWidth || 800, canvas.clientHeight || 600));
     game.cam = cam;
 
@@ -466,11 +509,11 @@ import { nodeHitRadius } from './camera.js';
     }
     rebuildNotes();
     showTitle();          // 开机进入《代号7》标题界面
-    // 空闲预热基地壁纸（336KB jpg）：老板高频进基地，首次进入时不再付解码卡帧
+    // 空闲预热基地壁纸（376KB webp）：老板高频进基地，首次进入时不再付解码卡帧
     const warmHubWallpaper = () => {
       const im = new Image();
       im.decoding = 'async';
-      im.src = new URL('../assets/scenes/hub-wallpaper.jpg', import.meta.url).href;
+      im.src = new URL('../assets/scenes/hub-wallpaper.webp', import.meta.url).href;
     };
     if ('requestIdleCallback' in window) requestIdleCallback(warmHubWallpaper, { timeout: 4000 });
     else setTimeout(warmHubWallpaper, 2000);

@@ -38,6 +38,13 @@ describe('规则与接口契约', () => {
       battle: ['本局对战内：攻击 +2'],
       onInfused: ['获得 1 点能量'],
       onDraw: [],
+      skill: [],
+    });
+  });
+
+  it('限定技能句独立成桶（装备打出只穿戴，技能由按钮发动）', () => {
+    expect(splitEffectClauses('限定技能：抽3张牌')).toEqual({
+      immediate: [], turnStart: [], battle: [], onInfused: [], onDraw: [], skill: ['抽3张牌'],
     });
   });
 

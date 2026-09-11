@@ -21,7 +21,8 @@ describe('inkjs event narrative bridge', () => {
   });
 
   it('covers every tt6 event with an ink knot whose choices all carry effects', () => {
-    const ids = Object.keys(EVENT_SCENE_META);
+    // EVENT_SCENE_META 还挂着实机自定义事件卡（如修鞋铺），它们的叙事走卡面 desc，不属 ink 潜文本
+    const ids = Object.keys(EVENT_SCENE_META).filter(id => id.startsWith('tt6-'));
     expect(ids).toHaveLength(10);
     for (const id of ids) {
       const narrative = eventNarrative(id);

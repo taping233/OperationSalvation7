@@ -7,6 +7,7 @@ import { MAP } from './game.session.js';
 import { escAttr } from './shared.js';
 import { MODES, game, newRun, setLobby, showTitle } from './game.session.js';
 import { Sfx, configureCardNavigation, _set_cardPageOpen } from './game.cardslib.js';
+import { Random } from './random.js';
 
 // 基地当前页签（原为隐式全局，ESM 严格模式下必须显式声明）
 let hubTab = 'deploy';
@@ -486,6 +487,7 @@ let hubTab = 'deploy';
       ${special ? '<p class="ov-note">[[icon:sparkles]] <b>特殊收藏品</b>——收藏后可完成对应成就，且收藏期间不可卖出。</p>' : ''}
       ${marked ? '<p class="ov-note">[[icon:sparkles]] 收藏中的物品受保护：取消收藏后才能卖出（图鉴记录会保留）。</p>' : ''}
       <div class="ov-btns">
+        ${s.card.id === 'tt-econpack' ? `<button class="ov-btn ok" data-act="econpackUse">[[icon:cards]] 使用（获得 5 张随机卡牌）</button>` : ''}
         <button class="ov-btn${marked ? '' : ' ok'}" data-act="collToggle">${marked ? '[[icon:sparkles]] 取消收藏' : '[[icon:sparkles]] 收藏'}</button>
         <button class="ov-btn${marked ? ' ok' : ''}" data-act="sellOne" ${marked ? 'disabled' : ''}>[[icon:coin]] 卖出 1 张（+${price}）</button>
       </div>
@@ -493,6 +495,25 @@ let hubTab = 'deploy';
         <button class="ov-btn" data-act="sellAll" ${marked || s.count < 2 ? 'disabled' : ''}>[[icon:coin]] 全部卖出（+${price * s.count}）</button>
         <button class="ov-btn" data-act="stashBack">↩ 返回仓库</button>
       </div>`);
+    UI.act('econpackUse', () => {
+      // 经济卡包（2026-09-09 审计补实装）：仓库界面点击使用，获得 5 张随机卡牌
+      if (s.card.id !== 'tt-econpack') return;
+      const pool = SDT.Cards.all().filter(c => SDT.Cards.isRandomObtainable(c));
+      let got = 0;
+      for (let k = 0; k < 5; k++) {
+        const c = pool.length ? pool[Math.floor(Random.random('loot') * pool.length)] : null;
+        if (c && game.grantCard(c)) got++;
+      }
+      if (got > 0) {
+        const si = B.data.stash.indexOf(s);
+        if (si >= 0) { s.count--; if (s.count <= 0) B.data.stash.splice(si, 1); }
+        B.save();
+        UI.log(`[[icon:cards]] <b>经济卡包</b>：拆开获得 ${got} 张随机卡牌（入背包）`, 'loot');
+      } else {
+        UI.log('[[icon:bag]] 背包已满，经济卡包没有拆开', 'warn');
+      }
+      renderHub();
+    });
     UI.act('collToggle', () => {
       const now = B.collectToggle(s.card);
       SDT.Meta.checkUnlocks();

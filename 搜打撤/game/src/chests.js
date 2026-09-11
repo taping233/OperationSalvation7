@@ -9,6 +9,7 @@ import { Random } from './random.js';
   let cur = null;      // 当前宝箱 {kind, cards, coins}
   let idx = 0;         // 已开到第几个
   let onDone = null;   // 全部开完后的续流回调
+  let searchSeq = 0;   // 搜索演出代次：过期定时器不得再渲染（连开多箱/提前结束时防串台）
 
   const KINDS = () => SDT.MAP.chestKinds;
   const rndInt = (a, b) => a + Math.floor(Random.random('loot') * (b - a + 1));
@@ -37,6 +38,21 @@ import { Random } from './random.js';
     for (let i = 0; i < n; i++) {
       const card = SDT.Cards.randomDropCard(taken);
       if (card) { taken.add(card.id); c.cards.push(card); }
+    }
+    // —— 宝箱保底（2026-09-09 试玩反馈；设计者定版权重 60:28:9:3 不动）——
+    // 中宝箱（3 选 1）整包全古朴的概率约 21.6%，体验很差：保底至少 1 张「稀有」+；
+    // 大宝箱 / 首脑宝箱保底至少 1 张「史诗」+。未达标就重掷最后一张（目标档内挑卡，
+    // 该档暂无可用卡则逐档上探；全部失败则保持原结果）。职业宝箱走上面独立分支，不参与。
+    const riOfCard = (card) => Math.max(0, SDT.Cards.RARITIES.indexOf(card.rarity));
+    const needRi = K.pickFrom ? SDT.Cards.RARITIES.indexOf('稀有')
+      : (kind === 'large' || kind === 'boss') ? SDT.Cards.RARITIES.indexOf('史诗') : -1;
+    if (needRi > 0 && c.cards.length && !c.cards.some(x => riOfCard(x) >= needRi)) {
+      const tiers = [SDT.Cards.RARITIES[needRi], '传说', '史诗', '稀有']
+        .filter(r => riOfCard({ rarity: r }) >= needRi);
+      for (const tier of tiers) {
+        const up = SDT.Cards.pickOfRarity(tier, taken);
+        if (up) { c.cards[c.cards.length - 1] = up; taken.add(up.id); c.pity = tier; break; }
+      }
     }
     if (K.coins) c.coins = rndInt(K.coins[0], K.coins[1]);
     // BOSS宝箱：金币/银币/铜币其一 + 30% 员工通行证B（都是卡牌，直接并入 cards）
@@ -95,6 +111,7 @@ import { Random } from './random.js';
 
   function next() {
     if (idx >= queue.length) {
+      searchSeq++;              // 作废未播完的搜索演出，避免收尾后又被旧定时器拉回浮层
       UI.hideOverlay();
       G.state = 'idle';
       cur = null;
@@ -107,8 +124,29 @@ import { Random } from './random.js';
     cur = rollContents(queue[idx].kind, queue[idx].isClass);
     cur.isClass = !!queue[idx].isClass;
     idx++;
-    render();
-    scheduleRevealSfx();
+    renderSearch();
+  }
+
+  // 搜索物资演出（2026-09-09 老板 #3）：搜刮点/宝箱先演一段「翻检」，
+  // 约 0.78s 后才揭晓开出的卡牌，收获不再凭空蹦出来
+  const SEARCH_MS = 780;
+  function renderSearch() {
+    const K = KINDS()[cur.kind];
+    const tok = ++searchSeq;
+    UI.showOverlay(`[[icon:archive]] 搜刮！${cur.isClass ? '职业·' : ''}${K.name} · 第 ${idx} / ${queue.length}`, `
+      <p class="evt-sts-desc">${cur.isClass ? '黑色职业宝箱：只掉落<b>职业卡牌</b>' : '你俯身翻检箱子——灰尘、锈迹，还有别的东西。'}</p>
+      <div class="pick-search">
+        <span class="ps-lantern">[[icon:lantern]]</span>
+        <span class="ps-ground"><i></i></span>
+        <p class="ps-tip">正在搜索物资…</p>
+      </div>`, 'chest');
+    SDT.Sound.sfx('pick');
+    UI.refresh(G);
+    setTimeout(() => {
+      if (tok !== searchSeq || !cur) return;   // 已开下一个/已收尾 → 不再揭晓
+      render();
+      scheduleRevealSfx();
+    }, SEARCH_MS);
   }
 
   // ---------- 开箱浮层：悬在当前画面上的紧凑面板（杀戮尖塔「搜刮!」式） ----------
@@ -118,25 +156,57 @@ import { Random } from './random.js';
   function render() {
     const K = KINDS()[cur.kind];
     const isPick = !!K.pickFrom;   // 中宝箱：3 选 1
-    const cardsHTML = cur.cards.map((card, i) => `
-      <div class="bt-card chest-fly rl-${riOf(card)}${cur.isClass ? ' cls-chest' : ''}" style="animation-delay:${i * 160}ms"
-        ${isPick ? `data-act="chestPick" data-i="${i}" title="点击收下这张"` : 'title="收下时放入背包"'}>
-        ${SDT.Cards.cardHTML(card, 'sm', { hideCost: true })}
-      </div>`).join('');
+    const taken = cur.taken || (cur.taken = new Set());
+    const cardsHTML = cur.cards.map((card, i) => {
+      const got = taken.has(i);
+      const act = isPick ? `data-act="chestPick" data-i="${i}" title="点击收下这张"`
+        : got ? '' : `data-act="chestTake1" data-i="${i}" title="点击拾取进背包"`;
+      return `<div class="bt-card chest-fly rl-${riOf(card)}${cur.isClass ? ' cls-chest' : ''}${got ? ' got' : ''}" style="animation-delay:${i * 160}ms"
+        ${act}>
+        ${SDT.Cards.cardHTML(card)}${got ? '<span class="chest-got-mark">已收</span>' : ''}
+      </div>`;
+    }).join('');
     const lootLine = isPick
       ? `从随机 <b>${cur.cards.length}</b> 张卡牌中选择 <b>1</b> 张 · 另含 [[icon:coin]] <b>${cur.coins}</b> 币`
       : `开出 <b>${cur.cards.length}</b> 张卡牌${cur.coins ? ` · [[icon:coin]] <b>${cur.coins}</b> 币` : ''}` +
         (cur.tokenHit ? ' · <b class="gold">[[icon:sparkles]] 员工通行证B！</b>' : '');
+    // 容量预检（2026-09-09 老板定向）：全部收下放不下时先提示清理背包——
+    // 同名并入不占格；逐张模拟占格（基础格任意卡 / 珍珠盒扩格仅资源卡），算出放不下的张数
+    const rest = cur.cards.filter((c, i) => !taken.has(i));
+    let cant = 0, canTake = 0;
+    if (!isPick) {
+      const baseCap = SDT.Base.bagCap(), totalCap = G.bagCap();
+      let simUsed = G.usedSlots();
+      rest.forEach(c => {
+        if (G.ownedCards.some(o => o.card.name === c.name)) { canTake++; return; }   // 同名并入
+        if (simUsed < baseCap || (c.type === '资源' && simUsed < totalCap)) { simUsed++; canTake++; }
+        else cant++;
+      });
+    }
+    const warnLine = cant > 0
+      ? `<p class="chest-warn">[[icon:bag]] 背包已满（${G.usedSlots()}/${G.bagCap()} 格，珍珠盒扩格只收资源卡）——只能再收 <b>${canTake}</b> 张：可单点卡牌拾取，或全部收下（放不下的 <b>${cant}</b> 张将散落）</p>`
+      : '';
     const ops = isPick
       ? '<p class="ov-note">点击一张卡牌收下，其余两张散落在风中……</p>'
       // 2026-09-06 留言：全部收下移到右边，左侧加跳过（散落不要了）
-      : `<div class="scene-ops chest-ops"><button class="ov-btn" data-act="chestSkip">跳过</button><button class="ov-btn ok" data-act="chestTake">[[icon:archive]] 全部收下${cur.coins ? `（含 ${cur.coins} 币）` : ''}</button></div>`;
+      // 2026-09-09 老板定向：满包预检提示 + 单卡拾取（放不下的卡强收时散落，不再静默）
+      : `<div class="scene-ops chest-ops"><button class="ov-btn" data-act="chestSkip">跳过</button><button class="ov-btn ok${cant > 0 ? ' warn' : ''}" data-act="chestTake">[[icon:archive]] 全部收下${cant > 0 ? `（${cant} 张放不下）` : cur.coins ? `（含 ${cur.coins} 币）` : ''}</button></div>`;
     UI.showOverlay(`[[icon:archive]] 搜刮！${cur.isClass ? '职业·' : ''}${K.name} · 第 ${idx} / ${queue.length}`, `
       ${cur.isClass ? '<p class="evt-sts-desc cls-chest-note">黑色职业宝箱：只掉落<b>职业卡牌</b></p>' : ''}
       <p class="evt-sts-desc">${lootLine}</p>
-      ${cur.cards.length ? `<div class="bt-hand">${cardsHTML}</div>` : '<p class="ov-empty">（卡牌库是空的，什么也没开出）</p>'}
+      ${warnLine}
+      ${cur.cards.length ? `<div class="bt-hand${taken.size ? ' no-anim' : ''}" data-n="${cur.cards.length}">${cardsHTML}</div>` : '<p class="ov-empty">（卡牌库是空的，什么也没开出）</p>'}
       ${ops}`, 'chest');
     UI.act('chestTake', takeAll);
+    UI.act('chestTake1', (d) => {
+      const card = cur.cards[+d.i];
+      if (!card || cur.taken.has(+d.i)) return;
+      if (G.grantCard(card)) {   // grantEventCard：同名并入 / 容量判定 / 传说特效都在里面
+        cur.taken.add(+d.i);
+        render();
+      }
+      // 收不下（背包满）时 grantCard 内部已 warn 日志，卡保持可点不动
+    });
     UI.act('chestSkip', () => {
       if (cur.coins) G.gainCoins(cur.coins);   // 币是无主物，跳过也收；卡牌散落
       UI.log('（你留下开出的卡牌，转身走了……）', 'dim');
@@ -168,7 +238,11 @@ import { Random } from './random.js';
   }
 
   function takeAll() {
-    cur.cards.forEach(card => G.grantCard(card));
+    const taken = cur.taken;
+    cur.cards.forEach((card, i) => {
+      if (taken && taken.has(i)) return;   // 已单卡拾取过的不重复入包
+      G.grantCard(card);
+    });
     if (cur.coins) G.gainCoins(cur.coins);
     if (!cur.cards.length && !cur.coins) UI.log('（空的——早被别的拾荒者搬空了……）', 'dim');
     next();

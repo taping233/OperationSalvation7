@@ -75,7 +75,7 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
     const q = libFilter.q.trim().toLowerCase();
     _libFilteredCache = libCards.filter(c =>
       (libFilter.tab === '全部' || c.type === libFilter.tab) &&
-      // 稀有度按有效稀有度筛选（2026-09-04 定版：棱彩已实装进卡牌库——英雄卡与其衍生牌 rarityOf 推导为「棱彩」，可经下拉筛选）
+      // 稀有度按有效稀有度筛选（2026-09-04 定版：棱彩已实装进卡牌库——能力卡与其衍生牌 rarityOf 推导为「棱彩」，可经下拉筛选）
       (libFilter.rar === '全部' || SDT.Cards.rarityOf(c) === libFilter.rar) &&
       (!q || (c.name || '').toLowerCase().includes(q) || (c.desc || '').toLowerCase().includes(q))
     ).sort((a, b) => (a.cost - b.cost) ||
@@ -103,7 +103,9 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
     if (!all.length) {
       const filtered = libCards.length > 0 &&
         (libFilter.tab !== '全部' || libFilter.rar !== '全部' || libFilter.q.trim() !== '');
-      return `<div class="clib-empty"><div class="clib-empty-icon">[[icon:archive]]</div>
+      // 空状态也带 id="libGrid"：renderLibGrid 局部重绘靠它定位卡格区，
+      // 缺了它空状态一出现 #libGrid 就消失，之后再改筛选条件不再重绘
+      return `<div class="clib-empty" id="libGrid"><div class="clib-empty-icon">[[icon:archive]]</div>
         <p>${libCards.length ? '没有符合筛选条件的卡牌' : '收藏还是空的，点右上角「＋ 制作新卡」开始设计'}</p>
         ${filtered ? '<button class="hs-btn sm" data-act="libClearFilter" style="margin-top:10px">清除筛选条件</button>' : ''}</div>`;
     }
@@ -303,7 +305,7 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
       // 出售资格：默认不可出售；编辑旧卡时按 isSellable 回显（含「可出售」备注推导）
       sellable: card ? SDT.Cards.isSellable(card) : false,
       // 身份字段原样保留：制作坊表单不编辑它们，但保存时必须带回，
-      // 否则 upsert 整卡替换会丢 cls/hero（英雄卡专属立绘与 heroOf 依赖）
+      // 否则 upsert 整卡替换会丢 cls/hero（能力卡专属立绘与 heroOf 依赖）
       cls: card ? (card.cls || '') : '',
       hero: card ? !!card.hero : false,
       tokenOf: card ? (card.tokenOf || undefined) : undefined,

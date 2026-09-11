@@ -89,6 +89,17 @@ function makeRunner(myClass) {
     damagePlayer: n => { rec.selfDmg = (rec.selfDmg || 0) + n; },
     addPlayerMaxHp: n => { rec.maxHpUp = (rec.maxHpUp || 0) + n; },
     dumpHand: () => { rec.dumped = (rec.dumped || 0) + 1; return 3; },
+    // —— 2026-09-09 机制审计补实装端口（真实接线在 battle.core）——
+    getInfuseFuels: () => 0,
+    getPriceOfLastDrawn: () => 0,
+    dealAoeFixed: () => {},
+    replaceShaInDeck: () => 0,
+    summonAlly: () => { rec.summon = (rec.summon || 0) + 1; },
+    setExtraTurn: () => { rec.extraTurn = true; },
+    setDeathSave: n => { rec.deathSave = n; },
+    queuePouchCast: () => { rec.pouch = true; },
+    registerGrowthCard: () => { rec.growth = true; },
+    unlockSeal: () => { rec.seal = true; },
   });
   return { applyTextEffects, rec, foes, pstat, pdef };
 }
@@ -105,7 +116,7 @@ function auditCard(card, myClass) {
   const structuredHit = isDmgType && ((+card.dmg || 0) > 0 || card.dmgType === 'attack');
   const unrecognized = [];
   const run = (text) => {
-    try { return applyTextEffects(card, text, foes[0], { structuredHit }).did; }
+    try { return applyTextEffects(card, text, foes[0], { structuredHit, uid: 'audit' }).did; }
     catch (e) { unrecognized.push(`[崩溃:${e.message}] ${text}`); return true; }
   };
   parts.immediate.forEach(cl => { if (!run(cl) && !isFlavor(cl)) unrecognized.push(cl); });
@@ -118,7 +129,7 @@ function auditCard(card, myClass) {
   return { card, structuredHit, unrecognized };
 }
 
-const BATTLE_TYPES = ['武术', '法术', '装备', '道具', '英雄卡'];
+const BATTLE_TYPES = ['武术', '法术', '装备', '道具', '能力卡'];
 
 describe('全卡库描述实装审计', () => {
   let bad = [];
@@ -163,7 +174,7 @@ describe('限制卡池识别验证（老板 2026-09-08 清单）', () => {
   const count = (noun) => C.all().filter(c => c.rarity !== '衍生' && !['生物', '事件'].includes(c.type) && (parsePoolNoun(noun, myClass) || (() => false))(c)).length;
   const cases = [
     ['能施加诅咒的招式', 1], ['能施加诅咒的卡牌', 1], ['招式', 1], ['武术', 1], ['法术', 1],
-    ['装备', 1], ['0费招式', 1], ['1费', 1], ['2费', 1], ['古朴', 1], ['英雄卡', 1],
+    ['装备', 1], ['0费招式', 1], ['1费', 1], ['2费', 1], ['古朴', 1], ['能力卡', 1],
     ['火球系列', 1], ['箭系列', 1], ['本职业', 1], ['其它职业', 1], ['形态', 1],
     ['药水系列', 1], ['杀', 1], ['火球', 1], ['注能', 1], ['传说', 1],
   ];

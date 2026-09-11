@@ -40,6 +40,25 @@ import { _set_cardPageOpen } from './game.cardslib.js';
       showBackpack(true);
       return;
     }
+    // 复原药水（2026-09-09 审计补实装）：背包中使用，复原消耗口袋至多 2 张
+    if (card.name === '复原药水' || /复原.{0,4}(两|2).{0,3}张卡牌/.test(desc)) {
+      if (!game.usedPocket.length) { UI.log('消耗口袋是空的，无需复原', 'warn'); return; }
+      const restoreOne = () => {
+        const p = game.usedPocket[0];
+        if (!p) return;
+        if (usedSlots() >= bagCap()) { UI.log(`[[icon:bag]] 背包已满（${usedSlots()}/${bagCap()}），无法复原`, 'warn'); return; }
+        p.count--;
+        if (p.count <= 0) game.usedPocket.shift();
+        game.ownedCards.push({ uid: newUid(), card: { ...p.card } });
+      };
+      game.ownedCards.splice(i, 1);
+      restoreOne();
+      restoreOne();
+      UI.log(`[[icon:gem]] 使用【<b>${esc(card.name)}</b>】：复原了消耗口袋中的至多 <b>2</b> 张卡牌`, 'ok');
+      saveGame();
+      showBackpack(true);
+      return;
+    }
     // 资源卡：口粮 / 木材（直接转化为背包物资，可用于基地升级）
     const rm = desc.match(/获得\s*(\d+)\s*份?\s*口粮/) || desc.match(/口粮\s*[×x]\s*(\d+)/);
     const wm = desc.match(/木材\s*[×x]\s*(\d+)/);
@@ -70,14 +89,14 @@ import { _set_cardPageOpen } from './game.cardslib.js';
       showBackpack(true);
       return;
     }
-    // 2026-09-06 #10：员工通行证A（觉醒）→ 获得本职业英雄卡
+    // 2026-09-06 #10：员工通行证A（觉醒）→ 获得本职业能力卡
     if (card.id === 'tt-token-color' || /觉醒/.test(desc)) {
-      const pool = SDT.Cards.classPool(game.myClass).filter(c => c.type === '英雄卡');
-      if (!pool.length) { UI.log('该职业没有可觉醒的英雄卡', 'warn'); return; }
+      const pool = SDT.Cards.classPool(game.myClass).filter(c => c.type === '能力卡');
+      if (!pool.length) { UI.log('该职业没有可觉醒的能力卡', 'warn'); return; }
       game.ownedCards.splice(i, 1);
       const got = pool[Math.floor(Random.random('loot') * pool.length)];
       game.ownedCards.push({ uid: newUid(), card: { ...got } });
-      UI.log(`[[icon:sparkles]] 使用【<b>${esc(card.name)}</b>】觉醒：获得本职业英雄卡【<b>${esc(got.name)}</b>】`, 'loot');
+      UI.log(`[[icon:sparkles]] 使用【<b>${esc(card.name)}</b>】觉醒：获得本职业能力卡【<b>${esc(got.name)}</b>】`, 'loot');
       saveGame();
       showBackpack(true);
       return;
@@ -95,7 +114,18 @@ import { _set_cardPageOpen } from './game.cardslib.js';
       } else {
         const pool = SDT.Cards.all().filter(c => SDT.Cards.isRandomObtainable(c));
         const got = pool.length ? pool[Math.floor(Random.random('loot') * pool.length)] : null;
-        if (got) game.ownedCards.push({ uid: newUid(), card: { ...got } });
+        if (got) {
+          game.ownedCards.push({ uid: newUid(), card: { ...got } });
+          // 阿猫的礼物（2026-09-12 实装）：随机获取该牌时附赠另 1 张随机卡牌
+          if (got.id === 'tt2-apollo') {
+            const pool2 = SDT.Cards.all().filter(c => SDT.Cards.isRandomObtainable(c) && c.id !== 'tt2-apollo');
+            if (pool2.length) {
+              const got2 = pool2[Math.floor(Random.random('loot') * pool2.length)];
+              game.ownedCards.push({ uid: newUid(), card: { ...got2 } });
+              UI.log(`[[icon:bolt]] <b>阿猫的礼物</b>：随机获取触发，附赠【<b>${esc(got2.name)}</b>】`, 'loot');
+            }
+          }
+        }
         UI.log(`[[icon:flask]] 神秘药水：随机获得【<b>${esc(got ? got.name : '???')}</b>】`, 'loot');
       }
       saveGame();
@@ -204,24 +234,28 @@ import { _set_cardPageOpen } from './game.cardslib.js';
     const o = game.ownedCards.find(x => !!x.safe === !!fromSafe && x.card.name === name);
     if (!o) { showBackpack(true); return; }
     const usable = !fromSafe && o.card.type === '道具';
-    backpackOpen = false;
-    game.state = 'modal';
-    UI.showOverlay('[[icon:cards]] 卡牌详情', `
-      <div class="bag-card-detail">
-        ${SDT.Cards.cardHTML(o.card, 'lg', { hideCost: true })}
-        <p class="ov-note">${esc(o.card.name)} · ${esc(o.card.type)} · ${esc(o.card.rarity || '')}${fromSafe ? ' · 位于安全格' : ''}</p>
-      </div>
-      <div class="ov-btns">
-        ${usable ? '<button class="ov-btn ok" data-act="useDetailCard">使用这张道具</button>' : ''}
-        ${o.card.id === 'tt-token-gold' && game.ownedCards.filter(x => x.card.id === 'tt-token-gold').length >= 3
-          ? '<button class="ov-btn ok" data-act="craftColorToken">合成员工通行证A（3 张 B → 1 张 A）</button>' : ''}
-        ${fromSafe ? '<button class="ov-btn" data-act="detailFromSafe">移回背包</button>' :
-          (o.card.id === SDT.Cards.SHA.id ? '' : '<button class="ov-btn" data-act="detailToSafe">移入安全格</button>')}
-        ${o.card.id === SDT.Cards.SHA.id ? '' : '<button class="ov-btn danger" data-act="detailDiscard">丢弃 1 张</button>'}
-        <button class="ov-btn" data-act="detailBack">返回背包</button>
-      </div>`, true);
-    UI.act('useDetailCard', () => useOwnedCard(o.uid));
+    // 2026-09-09 老板：点牌查看改成出发整备同款放大特写——背包页保持不动，
+    // 不再切 overlay 弹窗（那会拆掉 opaque 背包页，露出局内战斗背景）
+    const isSha = o.card.id === SDT.Cards.SHA.id;
+    UI.showCardZoom(o.card, {
+      footer: `
+        <p class="ov-note">${esc(o.card.name)} · ${esc(o.card.type)} · ${esc(o.card.rarity || '')}${fromSafe ? ' · 位于安全格' : ''}${o.card.id === 'tt-token-color' ? ` · 彩色令牌碎片 <b>${game.fragments || 0}/2</b>` : ''}</p>
+        <div class="ov-btns">
+          ${usable ? '<button class="ov-btn ok" data-act="useDetailCard">使用这张道具</button>' : ''}
+          ${o.card.id === 'tt-token-gold' && game.ownedCards.filter(x => x.card.id === 'tt-token-gold').length >= 3
+            ? '<button class="ov-btn ok" data-act="craftColorToken">合成员工通行证A（3 张 B → 1 张 A）</button>' : ''}
+          ${o.card.id === 'tt-token-color' && (game.fragments || 0) >= 2
+            ? '<button class="ov-btn ok" data-act="craftColorTokenByFragments">合成彩色令牌（2 碎片 + 1 通行证A）</button>' : ''}
+          ${fromSafe ? '<button class="ov-btn" data-act="detailFromSafe">移回背包</button>' :
+            (isSha ? '' : '<button class="ov-btn" data-act="detailToSafe">移入安全格</button>')}
+          ${isSha ? '' : '<button class="ov-btn danger" data-act="detailDiscard">丢弃 1 张</button>'}
+        </div>`,
+    });
+    // 特写挂在 body（overlay 之外）：动作执行前先模拟点背景收回，回到背包页
+    const closeZoom = () => document.getElementById('cardZoom')?.querySelector('.cz-backdrop')?.click();
+    UI.act('useDetailCard', () => { closeZoom(); useOwnedCard(o.uid); });
     UI.act('craftColorToken', () => {
+      closeZoom();
       // 2026-09-06 #10：3 张员工通行证B合成 1 张员工通行证A
       const golds = game.ownedCards.filter(x => x.card.id === 'tt-token-gold').slice(0, 3);
       if (golds.length < 3) { UI.log('员工通行证B不足 3 张，无法合成', 'warn'); return; }
@@ -231,23 +265,50 @@ import { _set_cardPageOpen } from './game.cardslib.js';
       if (color) game.ownedCards.push({ uid: newUid(), card: { ...color } });
       UI.log('[[icon:sparkles]] 合成成功：3 张员工通行证B → 1 张<b>员工通行证A</b>', 'loot');
       saveGame();
-      backpackOpen = true;
       showBackpack(true);
     });
-    UI.act('detailFromSafe', () => moveStackSafe(name, false));
-    UI.act('detailToSafe', () => moveStackSafe(name, true));
-    UI.act('detailDiscard', () => showDiscardConfirm(name, fromSafe));
-    UI.act('detailBack', () => showBackpack(true));
+    UI.act('craftColorTokenByFragments', () => {
+      closeZoom();
+      // 2026-09-09 Q6 老板定向：隐藏计数器碎片——集齐 2 枚碎片 + 员工通行证A → 合成彩色令牌
+      if ((game.fragments || 0) < 2) { UI.log('彩色令牌碎片不足 2 枚，无法合成', 'warn'); return; }
+      game.ownedCards.splice(game.ownedCards.indexOf(o), 1);
+      game.fragments -= 2;
+      const token = SDT.Cards.all().find(c => c.id === 'cmtmvq6ss84l');
+      if (token) game.ownedCards.push({ uid: newUid(), card: { ...token } });
+      UI.log('[[icon:sparkles]] 合成成功：员工通行证A + 2 枚碎片 → 1 张<b>彩色令牌</b>（使用后获取本职业能力卡）', 'loot');
+      saveGame();
+      showBackpack(true);
+    });
+    UI.act('detailFromSafe', () => { closeZoom(); moveStackSafe(name, false); });
+    UI.act('detailToSafe', () => { closeZoom(); moveStackSafe(name, true); });
+    UI.act('detailDiscard', () => { closeZoom(); showDiscardConfirm(name, fromSafe); });
   }
 
   function showBackpack(refreshOnly) {
+    // 卡牌特写浮层挂在 body（overlay 之外）：此时按 B / 点背包按钮 = 先收回特写，
+    // 不动背包——否则背包关闭后特写残留在局内画面上
+    if (!refreshOnly) {
+      const zoom = document.getElementById('cardZoom');
+      if (zoom) { zoom.querySelector('.cz-backdrop')?.click(); return; }
+    }
     if (!game.runActive) return;   // v0.21：只有对局中才有背包（基地/标题界面不响应 B）
+    // 选人页开着（myClass 为空）时背包会覆盖选人页，关闭时把状态还原成 idle——
+    // 选角就此被跳过，能不选人物直接走进战斗格。直接禁掉（2026-09-09 老板实测）
+    if (!game.myClass) {
+      UI.log('[[icon:medal]] 先选择本局角色，再整理背包', 'warn');
+      return;
+    }
     // 2026-09-06 #22：开箱流程进行中打开背包会吞掉后续奖励——直接拦截
     if (SDT.Chests && SDT.Chests.isOpen && SDT.Chests.isOpen()) {
       UI.log('[[icon:lock]] 开箱进行中，先把宝箱开完再打开背包', 'warn');
       return;
     }
     if (game.battleActive || game.bossCleanupPending) {
+      // 2026-09-09 老板：战斗中也能开背包用道具——转给战斗背包（again 按 B = 关闭）
+      if (game.battleActive && !game.bossCleanupPending && SDT.Battle && SDT.Battle.commands && SDT.Battle.commands.openBag) {
+        SDT.Battle.commands.openBag();
+        return;
+      }
       UI.log(game.battleActive
         ? '[[icon:lock]] 战斗中无法打开背包；请使用手牌完成战斗或撤退'
         : '[[icon:bag]] 请先完成 BOSS 战后的「整理背包」', 'warn');
@@ -319,12 +380,15 @@ import { _set_cardPageOpen } from './game.cardslib.js';
         </div>`;
       } else safeCells += '<div class="bag-slot empty safe-empty"></div>';
     }
-    // 消耗口袋：容量无限，未复原不能再用
+    // 消耗口袋：容量无限，未复原不能再用（2026-09-09 老板 #6：文字行改真卡面，背包里看得见口袋里是哪张牌）
     const pkN = game.usedPocket.reduce((a, b) => a + b.count, 0);
     const pocketHTML = game.usedPocket.length
       ? game.usedPocket.map(p => `
-          <div class="pk-row"><span>[[icon:cards]] <b>${esc(p.card.name)}</b>${p.count > 1 ? ` ×${p.count}` : ''}</span>
-          <span class="dim">${p.card.cost}费 · 无法使用</span></div>`).join('')
+          <div class="pk-card" title="${escAttr(p.card.name)}${p.count > 1 ? ` ×${p.count}` : ''} · ${p.card.cost}费 · 本局无法使用（基地/火堆可复原）">
+            ${SDT.Cards.cardHTML(p.card, 'sm')}
+            ${p.count > 1 ? `<span class="bt-count">×${p.count}</span>` : ''}
+            <span class="pk-tag">无法使用</span>
+          </div>`).join('')
       : '<p class="ov-empty" style="margin:2px 0 0">（空——对小怪使用过的卡牌会进入这里）</p>';
     // 说明文字统一收进 ? 帮助弹层
     UI.registerHelp('bag', {
@@ -345,6 +409,7 @@ import { _set_cardPageOpen } from './game.cardslib.js';
             <span class="fc-chip">总值 <b>¥${total.toLocaleString()}</b></span>
             <span class="fc-chip">[[icon:lock]] 安全格 <b>${safeStacks.length}/${sCap}</b></span>
             <span class="fc-chip">[[icon:pocket]] 消耗口袋 <b>${pkN}</b> 张</span>
+            ${(game.fragments || 0) > 0 ? `<span class="fc-chip" title="集齐 2 枚，可随员工通行证A合成彩色令牌">[[icon:gem]] 彩色令牌碎片 <b>${game.fragments}/2</b></span>` : ''}
           </div>
         </div>
         <button class="bag-close" data-act="closeBag" title="关闭背包（B）" aria-label="关闭背包">
@@ -363,7 +428,7 @@ import { _set_cardPageOpen } from './game.cardslib.js';
         <aside class="bag-side">
           <div class="bag-side-card">
             <h3 class="set-h">[[icon:pocket]] 消耗口袋 <span class="set-tip">${pkN} 张</span></h3>
-            <div class="pk-list">${pocketHTML}</div>
+            <div class="pk-list pk-cards">${pocketHTML}</div>
           </div>
         </aside>
       </div></div>`, 'bagpage');

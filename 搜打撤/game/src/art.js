@@ -14,7 +14,7 @@ import { BUILD_VERSION, assetUrl } from './asset-url.js';
     '召唤师':'summoner','守卫':'guard','游侠':'ranger'
   });
   const CLASS_NAMES = Object.freeze(Object.fromEntries(Object.entries(CLASS_IDS).map(([name, id]) => [id, name])));
-  const MONSTER_IDS = new Set(['infantry','archer','bandit','cavalry','orc_jav','orc_axe','wolf_rider','fire_el','water_el','grass_el','dragon','boss_general','boss_orc','boss_elem']);
+  const MONSTER_IDS = new Set(['infantry','archer','bandit','cavalry','orc_jav','orc_axe','wolf_rider','fire_el','water_el','grass_el','dragon','esper_crow','esper_candle','esper_silence','esper_echo','boss_general','boss_orc','boss_elem']);
   const CARD_FAMILIES = new Set(['hero','event','martial-ranged','martial-melee','healing','spell','equipment-armor','equipment-weapon','equipment-utility','resource-key','resource-valuables','resource-material','consumable','unknown']);
   // 资源卡专属立绘（assets/cards/resources/<key>.webp），按稳定卡牌 id 绑定；
   // 卡牌名称允许在制作坊修改，但不能影响原始卡面资源。
@@ -35,6 +35,73 @@ import { BUILD_VERSION, assetUrl } from './asset-url.js';
     'tt3-wood-bundle': 'wood-bundle',
     'tt3-ration-double': 'ration-double',
   });
+  // 能力卡专属卡面（按稳定卡 id 绑定，优先于职业共用卡面；卡名可在制作坊修改，不影响映射）
+  const HERO_CARD_ART = Object.freeze({
+    'tt8-hero-summoner': 'hero-summoner', // 花开两面（法师）：与博览者的狂语同职业，需独立卡面
+    'tt8-hero-assassin': 'wu-void',        // 遁入虚空（侠客·无）：卡名走实机同步，映射按 id 绑定
+    'tt8-hero-sword': 'wu-myriadswords',   // 万剑归宗（侠客·无）
+    'tt8-hero-ranger': 'wu-heavensword',   // 天剑诛魔（侠客·无）
+  });
+  // 职业专属法术卡面（2026-09-09 配图批次）：按稳定卡 id 绑定 assets/cards/spell-<id>.webp；
+  // 命中即用专属插画（法师=白塔 / 降临者=常无欲出镜），未命中的法术仍走通用 spell/healing 家族图。
+  // 降临者 6 张 id 按实机制作坊重做后的新 id 绑定（2026-09-09 老板实机定版）
+  // 2026-09-09 晚：非角色专属的通用法术 24 张也全部配图实装（老板指令"全部实装"），
+  // 至此卡牌库所有 type=法术 卡均有专属卡面，通用 spell.webp/healing.webp 仅作兜底
+  const SPELL_CARD_ART = new Set([
+    'cc-manasupply', 'cc-thousand', 'tt3-firm-barrier', 'tt7-arcanebolt',
+    'tt7-bladebloom', 'tt7-elementstorm', 'tt7-energize', 'tt7-frozenight', 'tt7-recruit',
+    'tt7-stratagem', 'tt3sp-shadowshot', 'tt7-abysscurse', 'tt7-burnharvest', 'tt7-meteorstrong',
+    'tt7-twinfireball', 'tt3-flame-storm', 'tt3-nuke-ray',
+    'cmtn1gfhczzj', 'cmtn1lbhbqi4', 'cmtn1ntxzoc4', 'cmtn1r10xnl1',
+    'cmtn125e1nk0', 'cmtn1epgt20j', 'cmtn28jv33wx', 'cmtna0nb1yxt',
+    'tt3-chain-lightning', 'tt3-fireball', 'tt3-grope', 'tt3-holy-water', 'tt3-ice-spike',
+    'tt3-magic-lamp', 'tt3-nature-form', 'tt3-thornfield', 'tt3-thunderblast', 'tt3-toxin',
+    'tt3-treasure-hunt', 'tt3sp-bloodstorm', 'tt3sp-dodge', 'tt3sp-flowerzhen', 'tt3sp-magicoil',
+    'tt3sp-silverthorn', 'tt5-galaxy-voyage', 'tt7-drunksong', 'tt7-livingwater', 'tt7-maxsupply',
+    'cmtn1p9vb5au', // 千变万化实机定版 id（cc-thousand 已退役，图同一张，2026-09-09）
+    'tt8-curse1', 'tt8-curse2', 'tt8-curse3', 'tt8-curse4', // 禁咒 I-IV（牧师·修罗衍生牌，2026-09-09 同 seed 白塔念咒仅换背景色）
+  ]);
+  // 武术专属卡面（2026-09-09 批次）：按卡 id 绑定 assets/cards/martial-<id>.webp，侠客「无」出镜
+  const MARTIAL_CARD_ART = new Set([
+    'builtin-sha', // 初始攻击（全职业初始牌，2026-09-09 老板指定补卡面）
+    'tt7-throwblade', 'tt7-goldencicada', 'tt7-sneak', 'tt7-ghostblade', 'tt7-thundergrudge',
+    'tt7-meteorrain', 'tt7-stealth', 'tt7-swordimmortal', 'cmtn1i64j7y7', 'cmtn1wnhhym',
+    // 通用武术补图批次（2026-09-09 晚，招式效果意象无人物；玄砾/灯葵未实装，其专属 10 张不做）
+    'tt2-jianghu', 'tt2-swiftarrow', 'tt2-block', 'tt2-comboarrow', 'tt2-piercearrow', 'tt2-shoot',
+    'tt2-turtlearmor', 'tt2-bloodblade', 'tt2-forestarrow',
+    'tt3-blood-arrow', 'tt3-fatal-pierce', 'tt3-fly-arrowhawk', 'tt3-frost-slash', 'tt3-noon-duel',
+    'tt3-armor-rush', 'tt3-double-shot', 'tt3-bandage', 'tt3-purify-arrow', 'tt3-arrow-rain',
+    'tt3-wave-slash', 'tt3-qi-wave', 'tt3-hold-fast', 'tt3-life-arrow', 'tt3-dig-treasure',
+    'tt3-reshot', 'tt3-venom-arrow', 'tt3-frostfall', 'tt3wu-shike', 'tt3-skewer',
+    'tt3sp-shadowbug', 'tt3-flux-slash', 'tt3-execute',
+    'cmtn0pbkmnvc', 'cmtn233trmeg', 'cmtn2jc142dj', 'cmtn0xt0zr7',
+    'tt7-ironcharge', 'tt7-imitate', // 退役同名卡（图鉴展示用，招式意象通用版）
+  ]);
+  // 生物专属卡面（2026-09-09 补图批次）：按卡 id 绑定 assets/cards/creature-<id>.webp，
+  // 覆盖无敌人立绘的图鉴生物（foe-* 14 张已有 portraits/enemies 立绘，不走此映射）
+  const CREATURE_CARD_ART = new Set([
+    'cmtn6ulm4boj', 'cmtn79743r2n', 'cmtn7err0a7',
+    'tt8-healplus', 'tt8-energycap', 'tt8-nofocus', 'tt8-curseimmune',
+  ]);
+  // 事件专属卡面（2026-09-09 补图批次）：按卡 id 绑定 assets/scenes/event-<id>.webp 全屏场景大图
+  // （2026-09-09 老板定向：事件图画成全屏大图，触发时整屏显示，牌库 cover 裁切显示同一张）；
+  // 盗匪横行用既有 event-bandits-anime-v2.webp（更早批次专属图），不重生成
+  const EVENT_CARD_ART = {
+    'tt6-demondeal': 'event-tt6-demondeal', 'tt6-bandits': 'event-bandits-anime-v2',
+    'tt6-mystery': 'event-tt6-mystery', 'tt6-goldmine': 'event-tt6-goldmine', 'tt6-goldhammer': 'event-tt6-goldhammer',
+    'tt6-relief': 'event-tt6-relief', 'tt6-airdrop': 'event-tt6-airdrop', 'tt6-chestdraw': 'event-tt6-chestdraw',
+    'tt6-systemsupply': 'event-tt6-systemsupply', 'cmtn7qttxqo4': 'event-cmtn7qttxqo4',
+  };
+  // 装备专属卡面（2026-09-09 批次）：按卡 id 绑定 assets/cards/equip-<id>.webp，物件特写
+  const EQUIP_CARD_ART = new Set([
+    'tt2-apollo', 'tt2-pearlbox', 'tt2-wreck', 'tt2-treasuremap', 'tt2-venomstaff', 'tt2-frostsword',
+    'tt3-immortal-blade', 'tt3-master-staff', 'tt3-chaos-eye', 'tt3-silver-runesword', 'tt3-azure-sword',
+    'tt3-deep-seal', 'tt3-fate-wheel', 'tt3-crimson-pouch', 'tt3-holy-staff', 'tt3-staff', 'tt3-dark-blade',
+    'tt3-wolf-bow', 'tt3-sapper-bomb', 'tt3-twinwater-mail', 'tt3-grass-armor', 'tt3-blooddrinker',
+    'tt3-longsword', 'tt3-element-seal', 'tt3-light-mail', 'tt3-reverse-bow', 'tt3-deep-diary',
+    'tt3eq-boiler', 'tt3eq-mistbox', 'tt8-demonslay', 'tt8-archdemon', 'tt8-heavensword',
+    'tt7-naturestaff', 'tt7-darkfort', 'tt7-arcanescroll', 'tt7-talisman',
+  ]);
   const ITEM_ART = Object.freeze({
     'builtin-fuyuanyao': 'builtin-fuyuanyao',
     'starter-emergency-bandage': 'starter-emergency-bandage',
@@ -57,6 +124,8 @@ import { BUILD_VERSION, assetUrl } from './asset-url.js';
     'tt4-shine-token': 'tt4-shine-token',
     'tt4-smoke-bomb': 'tt4-smoke-bomb',
     'tt4-woodify': 'tt4-woodify',
+    'cmtmvq6ss84l': 'cmtmvq6ss84l',       // 彩色令牌（2026-09-09 补图批次）
+    'cmtn6bge52qt': 'builtin-fuyuanyao',  // 复原药水实机同卡：复用内置复原药水物件图
   });
   const missingKeys = new Set();
   const esc = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
@@ -91,7 +160,7 @@ import { BUILD_VERSION, assetUrl } from './asset-url.js';
   function cardFamily(card) {
     const name = String(card && card.name || '');
     const type = String(card && card.type || '');
-    if (type === '英雄卡') return 'hero';
+    if (type === '能力卡') return 'hero';
     if (type === '生物') return 'creature';   // 敌人图鉴卡：按 art 字段取战场立绘
     if (type === '事件') return 'event';
     if (type === '武术') return /箭|射|弓/.test(name) ? 'martial-ranged' : 'martial-melee';
@@ -269,6 +338,27 @@ function characterArt(value, full=false) {
     },
     cardIcon(card) {
       const cardId = String(card && card.id || '');
+      // 职业专属法术卡面（spell-<id>.webp，2026-09-09 配图批次）：优先于一切通用家族图，cover 填满
+      if (SPELL_CARD_ART.has(cardId)) {
+        return image(`cards/spell-${cardId}.webp`, 'art-card-image art-hero-fit', card && card.name || cardId, `card-spell-${cardId}`, 'width:100%;height:100%;object-fit:cover;display:block');
+      }
+      // 武术专属卡面（martial-<id>.webp，2026-09-09 批次）：侠客「无」出镜，cover 填满
+      if (MARTIAL_CARD_ART.has(cardId)) {
+        return image(`cards/martial-${cardId}.webp`, 'art-card-image art-hero-fit', card && card.name || cardId, `card-martial-${cardId}`, 'width:100%;height:100%;object-fit:cover;display:block');
+      }
+      // 装备专属卡面（equip-<id>.webp，2026-09-09 批次）：物件特写，cover 填满
+      if (EQUIP_CARD_ART.has(cardId)) {
+        return image(`cards/equip-${cardId}.webp`, 'art-card-image art-hero-fit', card && card.name || cardId, `card-equip-${cardId}`, 'width:100%;height:100%;object-fit:cover;display:block');
+      }
+      // 生物专属卡面（creature-<id>.webp，2026-09-09 补图批次）：无敌人立绘的图鉴生物，cover 填满
+      if (CREATURE_CARD_ART.has(cardId)) {
+        return image(`cards/creature-${cardId}.webp`, 'art-card-image art-hero-fit', card && card.name || cardId, `card-creature-${cardId}`, 'width:100%;height:100%;object-fit:cover;display:block');
+      }
+      // 事件专属卡面（event-<id>.webp，2026-09-09 补图批次）：全屏场景大图（assets/scenes/），cover 填满
+      const eventArt = EVENT_CARD_ART[cardId];
+      if (eventArt) {
+        return image(`scenes/${eventArt}.webp`, 'art-card-image art-hero-fit', card && card.name || cardId, `card-event-${cardId}`, 'width:100%;height:100%;object-fit:cover;display:block');
+      }
       const itemKey = ITEM_ART[cardId] || '';
       if (itemKey) return image(`cards/items/${itemKey}.webp`, 'art-card-image', card && card.name || itemKey, `card-item-${itemKey}`, 'width:100%;height:100%;object-fit:contain;display:block');
       const resourceKey = RESOURCE_ART[cardId] || '';
@@ -285,18 +375,21 @@ function characterArt(value, full=false) {
         }
         return fallback('card', family, card && card.name || '未知卡牌');
       }
-      // 英雄卡：按职业取专属立绘（assets/cards/hero-<职业id>.webp），缺失回退通用 hero.webp
+      // 能力卡：优先按稳定卡 id 取专属卡面；其次按职业取专属立绘（assets/cards/hero-<职业id>.webp），缺失回退通用 hero.webp
+      // art-hero-fit：卡面插画一律 cover 填满插画区（2026-09-09 老板要求装满；方图居中构图，裁切只裁背景色块）
       if (family === 'hero') {
+        const heroArtKey = HERO_CARD_ART[cardId];
+        if (heroArtKey) return image(`cards/${heroArtKey}.webp`, 'art-card-image art-hero-fit', card && card.name || heroArtKey, `card-${heroArtKey}`, 'width:100%;height:100%;object-fit:cover;display:block');
         let clsId = resolveClass(card && card.cls);
         // 实例副本可能丢失 cls（旧对局存档/旧版制作坊）：从卡牌库按 id、名称找回职业，
-        // 保证每张英雄卡始终使用各自专属的卡面（而非黄黑通用剪影）
+        // 保证每张能力卡始终使用各自专属的卡面（而非黄黑通用剪影）
         if (!clsId && window.SDT && SDT.Cards && SDT.Cards.all) {
           try {
             const src = SDT.Cards.all().find(c => c.id === card.id || c.name === card.name);
             if (src) clsId = resolveClass(src.cls);
           } catch (e) { /* 卡牌库不可用时静默回退 */ }
         }
-        if (clsId) return image(`cards/hero-${clsId}.webp`, 'art-card-image', card && card.name || clsId, `card-hero-${clsId}`, 'width:100%;height:100%;object-fit:cover;display:block');
+        if (clsId) return image(`cards/hero-${clsId}.webp`, 'art-card-image art-hero-fit', card && card.name || clsId, `card-hero-${clsId}`, 'width:100%;height:100%;object-fit:cover;display:block');
       }
       return image(`cards/${family}.webp`, 'art-card-image', card && card.name || family, `card-${family}`, 'width:100%;height:100%;object-fit:cover;display:block');
     },

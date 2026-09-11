@@ -68,7 +68,7 @@ function configureGameRuntime(hooks) {
   let cam, dpr = 1;
 
   // ---------- 工具 ----------
-  // curLayer 返回运行时层数据（layerData，含逻辑格），MAP.layers 仅作授权数据
+  // curLayer 返回运行时层数据（layerData，由生成器按种子产出，含逻辑格/门/入口）
   const curLayer = () => game.layerData[game.layerIdx];
   // 结点地图：pos 与结点坐标一律为世界像素（几何唯一来源见 buildDerived 的 nodePos）
   const cellCenter = (li, idx) => ({ ...game.nodePos[li][idx] });
@@ -143,7 +143,18 @@ function configureGameRuntime(hooks) {
   // ---------- 背包容量（基地扩建后生效）----------
   // 物资与卡牌混占背包格：同名物资/同名卡牌各堆叠 1 格；
   // 安全格独立计容（基地用口粮升级），消耗口袋不占格（无限容量）。
-  const bagCap = () => SDT.Base.bagCap();
+  // 珍珠盒（Q5 老板定向）：每持有 1 个额外扩容 9 格，扩出来的格子只能放资源卡。
+  const PEARL_BOX_ID = 'tt2-pearlbox';
+  const PEARL_BOX_SLOTS = 9;
+  const pearlBonus = () => (game.ownedCards || []).filter(o => o.card && o.card.id === PEARL_BOX_ID).length * PEARL_BOX_SLOTS;
+  const bagCap = () => SDT.Base.bagCap() + pearlBonus();
+  // 背包能否再收一张卡：基础格内任意类型；珍珠盒扩出来的格子仅资源卡（卡面「容纳所有类型的资源卡牌」）
+  const canAcceptCard = (card) => {
+    if (!card) return false;
+    const used = usedSlots();
+    if (used < SDT.Base.bagCap()) return true;
+    return card.type === '资源' && used < bagCap();
+  };
   const safeCap = () => SDT.Base.safeCap();
   function cardStacks(safe) {
     const map = new Map();
@@ -178,6 +189,7 @@ function configureGameRuntime(hooks) {
   }
 
   game.bagCap = bagCap;
+  game.canAcceptCard = canAcceptCard;   // 珍珠盒扩格的资源限制（Q5）
   game.safeCap = safeCap;
   game.usedSlots = usedSlots;
   game.safeUsed = safeUsed;
@@ -315,10 +327,16 @@ function configureGameRuntime(hooks) {
         cardOrder: game.cardOrder || [],
         usedPocket: game.usedPocket,
         eventLog: game.eventLog || [],
+        visited: game.visited || {},
+        seen: game.seen || {},
+        fragments: game.fragments || 0,
         discovered: [...game.discoveredPairs],
         diceHistory: game.diceHistory, elapsed: game.elapsed,
         stamina: game.stamina == null ? MAP.rules.staminaMax : game.stamina,
         slot: activeSlot, savedAt: Date.now(),
+        // 战斗中退出/关窗（beforeunload）：把战斗局面一并写入，读档后续打而非重开
+        battle: (game.battleActive && SDT.Battle && typeof SDT.Battle.serialize === 'function')
+          ? SDT.Battle.serialize() : null,
       });
   }
 
@@ -370,9 +388,19 @@ function configureGameRuntime(hooks) {
     applyModeRules();
     game.inventory = Array.isArray(s.inventory) ? s.inventory : [];
     game.ownedCards = Array.isArray(s.ownedCards) ? s.ownedCards : [];
+    // 能力卡术语迁移（原「英雄卡」类型，2026-09-08 定版）：存档内整卡副本与基地仓库/口袋同步更名
+    {
+      const copies = game.ownedCards.map(o => o.card)
+        .concat((SDT.Base.data.stash || []).concat(SDT.Base.data.pocket || []).map(st => st.card));
+      if (SDT.Cards.applyAbilityRename(copies)) SDT.Base.save();
+    }
     game.cardOrder = Array.isArray(s.cardOrder) ? s.cardOrder : [];
     game.usedPocket = Array.isArray(s.usedPocket) ? s.usedPocket : [];
     game.eventLog = Array.isArray(s.eventLog) ? s.eventLog : [];
+    // 迷雾与防重刷（旧档无字段 → {}，走【全部可见/可重复】的兼容路径）
+    game.visited = (s.visited && typeof s.visited === 'object') ? s.visited : {};
+    game.seen = (s.seen && typeof s.seen === 'object') ? s.seen : {};
+    game.fragments = +s.fragments || 0;   // 彩色令牌碎片（旧档无字段 → 0）
     game.pendingEventLoot = null;
     game.discoveredPairs = new Set(s.discovered || []);
     game.diceHistory = s.diceHistory || [];
@@ -394,6 +422,13 @@ function configureGameRuntime(hooks) {
     SDT.Sound.music('board');
     UI.log(`[[icon:download]] 已读取【档位 ${slot}】存档，直接回到上一局未结束的对局`, 'ok');
     if (!game.myClass) runtime.openClassChoice();   // 上次存档时还没选职业：补上开局选择
+    else if (s.battle && SDT.Battle && typeof SDT.Battle.restore === 'function') {
+      if (SDT.Battle.restore(game, s.battle)) {
+        // 读档恢复的战斗没经过 resolveCell：本格按已触发处理，撤退/胜利后不重复触发
+        if (game.visited) game.visited[game.layerIdx + ',' + game.trackPos] = 1;
+        saveGame();   // 恢复后立刻回写，防二次退出丢进度
+      }
+    }
     return true;
   }
 
@@ -447,6 +482,7 @@ function configureGameRuntime(hooks) {
     game.cardOrder = [];
     game.usedPocket = [];
     game.eventLog = [];
+    game.fragments = 0;   // 彩色令牌碎片（Q6 隐藏计数器）
     game.pendingEventLoot = null;
     game.myClass = null;
     game.characterId = null;
@@ -462,6 +498,8 @@ function configureGameRuntime(hooks) {
     game.elapsed = 0;
     game.elapsedSynced = 0;
     game.altarFrom = null;
+    game.visited = {};   // 已结算过的一次性格（防回头路重刷战斗/宝箱/事件）
+    game.seen = {};      // 战争迷雾：走过的节点 + 当前相邻节点可见，其余隐藏
     SDT.Sound.music('board');   // 出发：切入行军氛围
     FX.clear();
     UI.clearLog();
@@ -482,6 +520,99 @@ function configureGameRuntime(hooks) {
     runtime.openClassChoice();   // 从全部职业中选择 + 1 张随机职业卡（与 5 张初始攻击一起）
   }
 
+  // 战争迷雾可见集：到达节点 = 该节点 + 其相邻节点变为可见（走过的路径天然保留在 seen 里）
+  function markSeen(li, idx) {
+    if (!game.seen) game.seen = {};
+    const ld = game.layerData?.[li];
+    const cur = ld?.logical?.[idx];
+    if (!cur) return;
+    game.seen[li + ',' + idx] = 1;
+    for (const [nl, ni] of (cur.next || [])) {
+      if (nl === li) game.seen[nl + ',' + ni] = 1;
+    }
+    renderMiniMap();   // 底栏简图只在解锁新区域时重绘，平时保持原样（2026-09-09 老板定向）
+  }
+
+  // 底栏迷你地图：只画迷雾内（走过的 + 相邻可走）的节点与连线，当前节点金圈、
+  // 可走相邻亮环。事件驱动重绘（markSeen / 换层时调用），不逐帧重绘。
+  const MINI_TYPE_COLOR = {
+    battle: '#ff6b5e', fire: '#f2854a', chest: '#f5c542', event: '#41d0a8',
+    shop: '#52d273', key: '#f5c542', coin: '#f5c542', wood: '#c8956a',
+    rations: '#7fdd9c', door: '#c9b28a', entrance: '#52d273',
+    extraction: '#52d273', emergencyExit: '#52d273', altar: '#b77ad8', boss: '#ff5a50',
+  };
+  function renderMiniMap() {
+    const cv = document.getElementById('miniMap');
+    if (!cv) return;
+    const ctx = cv.getContext('2d');
+    // 内部分辨率跟随 CSS 显示尺寸（dpr 缩放），内部/显示比例一致才不会拉伸变形
+    const rect = cv.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+    const W = Math.max(1, Math.round(rect.width * dpr));
+    const H = Math.max(1, Math.round(rect.height * dpr));
+    if (cv.width !== W || cv.height !== H) { cv.width = W; cv.height = H; }
+    ctx.clearRect(0, 0, W, H);
+    const li = game.layerIdx;
+    const ld = game.layerData?.[li];
+    const pts = game.nodePos?.[li];
+    if (!ld || !pts) return;
+    const seen = game.seen || {};
+    const seenAt = (i) => seen[li + ',' + i] === 1;
+    // 本层包围盒 → 画布内留边适配（保持纵横比）；pad 按短边比例留白更从容
+    const minX = Math.min(...pts.map(p => p.x)), maxX = Math.max(...pts.map(p => p.x));
+    const minY = Math.min(...pts.map(p => p.y)), maxY = Math.max(...pts.map(p => p.y));
+    const spanX = Math.max(1, maxX - minX), spanY = Math.max(1, maxY - minY);
+    const pad = Math.min(W, H) * 0.16;
+    const s = Math.min((W - pad * 2) / spanX, (H - pad * 2) / spanY);
+    const ox = (W - spanX * s) / 2, oy = (H - spanY * s) / 2;
+    const px = (i) => ox + (pts[i].x - minX) * s;
+    const py = (i) => oy + (pts[i].y - minY) * s;
+    const nodeR = Math.max(5, Math.min(W, H) * 0.055);   // 圆点尺寸随画布自适应
+    // 当前节点的相邻（可走）集合
+    const curCell = ld.logical[game.trackPos];
+    const legal = new Set((curCell?.next || []).filter(([nl]) => nl === li).map(([, ni]) => ni));
+    // 连线：两端都已解锁的边
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = 'rgba(214,181,110,0.4)';
+    ld.logical.forEach((cell, i) => {
+      if (!seenAt(i)) return;
+      for (const [nl, ni] of (cell.next || [])) {
+        if (nl !== li || ni <= i || !seenAt(ni)) continue;
+        ctx.beginPath();
+        ctx.moveTo(px(i), py(i));
+        ctx.lineTo(px(ni), py(ni));
+        ctx.stroke();
+      }
+    });
+    // 当前节点 → 可走相邻的亮边
+    ctx.strokeStyle = 'rgba(255,202,91,0.95)';
+    ctx.lineWidth = nodeR * 0.42;
+    for (const ni of legal) {
+      if (!seenAt(ni)) continue;
+      ctx.beginPath();
+      ctx.moveTo(px(game.trackPos), py(game.trackPos));
+      ctx.lineTo(px(ni), py(ni));
+      ctx.stroke();
+    }
+    // 节点圆点：当前金圈最大、可走次之、走过的半透明
+    ld.logical.forEach((cell, i) => {
+      if (!seenAt(i)) return;
+      const col = MINI_TYPE_COLOR[cell.def?.type] || '#d8b46a';
+      const isCur = i === game.trackPos;
+      const isLegal = legal.has(i);
+      ctx.globalAlpha = isCur || isLegal ? 1 : 0.62;
+      ctx.beginPath();
+      ctx.arc(px(i), py(i), isCur ? nodeR : nodeR * 0.72, 0, Math.PI * 2);
+      ctx.fillStyle = col;
+      ctx.fill();
+      if (isLegal && !isCur) { ctx.strokeStyle = 'rgba(255,214,110,0.95)'; ctx.lineWidth = nodeR * 0.3; ctx.stroke(); }
+      if (isCur) { ctx.strokeStyle = '#ffd166'; ctx.lineWidth = nodeR * 0.36; ctx.stroke(); }
+      ctx.globalAlpha = 1;
+    });
+  }
+  // 窗口尺寸变化后按新容器尺寸重绘一次（仍是事件驱动，不逐帧）
+  window.addEventListener('resize', () => { if (game.runActive) renderMiniMap(); });
+
   function enterLayer(li, atIdx) {
     const safeLayer = clampIndex(li, game.layerData?.length || 1, 0);
     const layer = game.layerData?.[safeLayer];
@@ -491,6 +622,7 @@ function configureGameRuntime(hooks) {
     game.layerIdx = safeLayer;
     game.trackPos = safeIdx;
     game.pos = cellCenter(safeLayer, safeIdx);
+    markSeen(safeLayer, safeIdx);
     game.activeLayerBounds = game.layerBounds?.[safeLayer] || null;
     game.hop = 0;
     game.state = 'idle';
@@ -508,7 +640,7 @@ function configureGameRuntime(hooks) {
     UI.refresh(game);
   }
 
-export { FX, MAP, MODES, SLOT_COUNT, bagCap, buildDerived, cam, canvas, cardStacks, cellCenter, clearSave, configureGameRuntime, ctx, curLayer, doDeath, dpr, safeCap, enterLayer, exitToTitle, gainCoins, game, hasRun, migrateOldSave, modeCfg, newRun, newUid, openSettings, pick, quitGame, rndDice, safeUsed, saveGame, scaledEnemy, setLobby, showTitle, startNewGame, syncPlayTime, usedSlots, weighted };
+export { FX, MAP, MODES, SLOT_COUNT, bagCap, buildDerived, cam, canAcceptCard, canvas, cardStacks, cellCenter, clearSave, configureGameRuntime, ctx, curLayer, doDeath, dpr, markSeen, safeCap, enterLayer, exitToTitle, gainCoins, game, hasRun, migrateOldSave, modeCfg, newRun, newUid, openSettings, pick, quitGame, rndDice, safeUsed, saveGame, scaledEnemy, setLobby, showTitle, startNewGame, syncPlayTime, usedSlots, weighted };
 const _set_dpr = (v) => { dpr = v; };
 export { _set_dpr };
 const _set_cam = (v) => { cam = v; };

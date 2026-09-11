@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { createActionQueue } from '../game/src/battle.actions.js';
 import { createAnimationController } from '../game/src/battle.animation.js';
-import { groupHandCards, handCardLayout, splitHandRows } from '../game/src/battle.hand.js';
+import { groupHandCards, fanLayout } from '../game/src/battle.hand.js';
 import { assertUniqueZones, moveUid, zoneForUid } from '../game/src/battle.piles.js';
 import { intentSummary, intentViewModel } from '../game/src/battle.intents.js';
 import { actionFeedback, feedbackClass, feedbackDelay } from '../game/src/battle.feedback.js';
@@ -44,9 +44,14 @@ describe('battle architecture foundation', () => {
       { uid: 'c', card: { name: '盾', desc: '获得护甲' } },
     ];
     expect(groupHandCards(entries).map(group => group.uids)).toEqual([['a', 'b'], ['c']]);
-    expect(splitHandRows(groupHandCards(entries), 1)).toHaveLength(2);
-    expect(handCardLayout(0, 3)).toMatchObject({ marginLeft: 0 });
-    expect(handCardLayout(2, 3).rotation).toBeGreaterThan(0);
+    // 扇形布局：左右对称、边缘外张、中心牌最高；超员整体缩小不换行
+    expect(fanLayout(0, 3).x).toBeLessThan(0);
+    expect(fanLayout(2, 3).x).toBeGreaterThan(0);
+    expect(fanLayout(2, 3).rot).toBeGreaterThan(0);
+    expect(fanLayout(1, 3).y).toBeLessThan(fanLayout(0, 3).y);
+    expect(fanLayout(0, 3).x).toBe(-fanLayout(2, 3).x);
+    expect(fanLayout(0, 12).scale).toBeLessThan(fanLayout(0, 5).scale);
+    expect(fanLayout(0, 16).scale).toBeLessThan(fanLayout(0, 12).scale);
   });
 
   it('moves card UIDs through zones without duplicates', () => {

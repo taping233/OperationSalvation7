@@ -22,10 +22,29 @@ const SDT = window.SDT;
   const NO_DASH = [];                    // 还原实线（空点划，常量复用）
   function setDash(c, seg1, seg2) { DASH2[0] = seg1; DASH2[1] = seg2; c.setLineDash(DASH2); }
 
-  // 局内壁纸：静态图版（塔卫二废墟植物走廊）。静态图无逐帧解码开销，比视频版更省 GPU。
+  // 局内壁纸：L1/L2 共用静态图版（塔卫二废墟植物走廊）；L3/L4/L5 用分层专属壁纸
+  // （2026-09-09 老板提供，浅色/高饱和图配更深遮罩保证结点可读）。全部首启即预载。
   const environmentBackdrop = new Image();
-  let backdropCanvas = null;               // 壁纸合成层（尺寸或就绪状态变化时重建）
-  const backdropKey = { w: 0, h: 0, ready: false };
+  const LAYER_BACKDROPS = {
+    2: { src: new URL('../assets/scenes/layer3-knight.webp', import.meta.url).href, veil: 0.62 },   // 冻土遗迹 · 红骑士
+    3: { src: new URL('../assets/scenes/layer4-priestess-light.webp', import.meta.url).href, veil: 0.8 },  // 高危战区 · 白（浅底必须压暗）
+    4: { src: new URL('../assets/scenes/layer5-priestess-dark.webp', import.meta.url).href, veil: 0.5 },   // 污染核心 · 黑
+  };
+  const layerBackdrops = {};
+  for (const [li, conf] of Object.entries(LAYER_BACKDROPS)) {
+    // 首启即预载（老板定向）：进层时图已解码完毕，切换壁纸无空窗
+    const img = layerBackdrops[li] = new Image();
+    img.decoding = 'async';
+    img.onload = () => { backdropCanvas = null; SDT.RenderScheduler?.invalidate(); };
+    img.src = conf.src;
+  }
+  function backdropFor(li) {
+    const conf = LAYER_BACKDROPS[li];
+    if (!conf) return { img: environmentBackdrop, veil: 0.5 };
+    return { img: layerBackdrops[li], veil: conf.veil };
+  }
+  let backdropCanvas = null;               // 壁纸合成层（尺寸/层或就绪状态变化时重建）
+  const backdropKey = { w: 0, h: 0, ready: false, li: -1 };
   function drawCover(ctx, image, w, h) {
     const iw = image.naturalWidth || image.width;
     const ih = image.naturalHeight || image.height;
@@ -35,21 +54,23 @@ const SDT = window.SDT;
     ctx.drawImage(image, (w - dw) * 0.5, (h - dh) * 0.5, dw, dh);
   }
 
-  function ensureBackdrop(cam) {
-    const ready = environmentBackdrop.complete && environmentBackdrop.naturalWidth > 0;
-    if (backdropCanvas && backdropKey.w === cam.viewW && backdropKey.h === cam.viewH && backdropKey.ready === ready) return backdropCanvas;
-    backdropKey.w = cam.viewW; backdropKey.h = cam.viewH; backdropKey.ready = ready;
+  function ensureBackdrop(cam, li) {
+    const { img, veil } = backdropFor(li);
+    const ready = img.complete && img.naturalWidth > 0;
+    if (backdropCanvas && backdropKey.w === cam.viewW && backdropKey.h === cam.viewH &&
+        backdropKey.ready === ready && backdropKey.li === li) return backdropCanvas;
+    backdropKey.w = cam.viewW; backdropKey.h = cam.viewH; backdropKey.ready = ready; backdropKey.li = li;
     const c = document.createElement('canvas');
     c.width = Math.max(1, Math.round(cam.viewW * (window.devicePixelRatio || 1)));
     c.height = Math.max(1, Math.round(cam.viewH * (window.devicePixelRatio || 1)));
     // alpha:false：不透明烘焙层走更省显存带宽的合成路径，也规避透明纹理混合异常
     const b = c.getContext('2d', { alpha: false });
     b.scale(c.width / cam.viewW, c.height / cam.viewH);
-    // 壁纸未就绪时回退纯色；就绪后整层铺底，bg 渐变降为 50% 遮罩保证结点可读
+    // 壁纸未就绪时回退纯色；就绪后整层铺底，bg 渐变按层强度遮罩保证结点可读
     b.fillStyle = '#0B0E12';
     b.fillRect(0, 0, cam.viewW, cam.viewH);
-    if (ready) drawCover(b, environmentBackdrop, cam.viewW, cam.viewH);
-    b.globalAlpha = 0.5;
+    if (ready) drawCover(b, img, cam.viewW, cam.viewH);
+    b.globalAlpha = veil;
     const bg = b.createLinearGradient(0, 0, 0, cam.viewH);
     bg.addColorStop(0, COLORS.bgTop);
     bg.addColorStop(1, COLORS.bgBottom);
@@ -87,7 +108,12 @@ const SDT = window.SDT;
         geo.nodePos === game.nodePos && geo.layerData === game.layerData &&
         geo.geometryVersion === geometryVersion) return geo;
     // 当前层始终可见；中央祭坛/BOSS 作为终局锚点保留，便于祭坛引导线落点明确。
-    const visible = game.nodes.filter(n => n.li === game.layerIdx || n.li === -1);
+    // 战争迷雾（2026-09-09 老板）：只显示走过的节点（game.seen）与相邻可走节点；
+    // seen 为空（旧档/基地）时保持全可见兼容。
+    const seenMap = game.seen || null;
+    const fogOn = !!(seenMap && Object.keys(seenMap).length);
+    const seenOnLayer = (li, idx) => !fogOn || (li === game.layerIdx && seenMap[li + ',' + idx] === 1);
+    const visible = game.nodes.filter(n => n.li === -1 || (n.li === game.layerIdx && seenOnLayer(n.li, n.idx)));
     const nodes = visible.map(n => ({ ...n, r: nodeRadius(n) }));
     const byKey = new Map(nodes.map(n => [`${n.li},${n.idx}`, n]));
 
@@ -138,6 +164,8 @@ const SDT = window.SDT;
         for (const [toLi, toIdx] of (cell.next || [])) {
           const q = game.nodePos[toLi][toIdx];
           if (!q) continue;
+          // 迷雾：两端都走过的边才绘制（fog 关闭时 seenOnLayer 恒真）
+          if (!seenOnLayer(li, i) || !seenOnLayer(toLi, toIdx)) continue;
           const aKey = `${li},${i}`, bKey = `${toLi},${toIdx}`;
           const edgeKey = [aKey, bKey].sort().join('|');
           if (edgeKeys.has(edgeKey)) continue;
@@ -393,7 +421,7 @@ const SDT = window.SDT;
     ctx.restore();
   }
 
-  // ---------- 图标层（圆形位图结点：呼吸缩放；当前环明亮，其余虚化） ----------
+  // ---------- 图标层（圆形位图结点：呼吸缩放；当前环明亮，可走相邻环高亮，走过的中亮，其余隐藏/虚化） ----------
   function drawIcons(ctx, game) {
     const u = T0 / 48, t = 0, z = game.cam.zoom;
     const g = nodeGeo(game);
@@ -401,12 +429,14 @@ const SDT = window.SDT;
     for (const n of g.nodes) {
       if (n.def.type === 'fire') continue; // 火堆由 drawFires 统一绘制
       const current = isCurrentNode(game, n);
+      // 2026-09-09 老板：当前节点连通（可走）的相邻节点也高亮，与走过节点区分
+      const legal = g.legalKeys.has(n.li + ',' + n.idx);
       const phase = nodePhase(n);
       // 呼吸缩放（各结点错拍）+ 当前环轻微悬浮
       const R = n.r;
       ctx.save();
-      ctx.globalAlpha = current ? 1 : 0.22;
-      if (!drawBitmapIcon(ctx, n.def.type, n.x, n.y, R, current, z)) {
+      ctx.globalAlpha = current ? 1 : legal ? 0.95 : 0.55;
+      if (!drawBitmapIcon(ctx, n.def.type, n.x, n.y, R, current, z, legal)) {
         if (current) {
           ctx.translate(0, 0);
           ctx.shadowColor = n.def.type === 'boss' ? 'rgba(255,90,80,0.6)'
@@ -488,6 +518,21 @@ const SDT = window.SDT;
     for (const n of g.nodes) {
       if (n.def.type !== 'fire') continue;
       const current = isCurrentNode(game, n);
+      // 走过的火堆 = 熄灭（2026-09-09 老板：重置为空白节点）——只画暗灰烬烬环，不再画火苗；
+      // 还站在火堆上时保持燃烧状态（本格休息ing）
+      if (!current && game.visited && game.visited[n.li + ',' + n.idx]) {
+        ctx.save();
+        ctx.globalAlpha = 0.22;
+        ctx.strokeStyle = 'rgba(150,150,150,0.8)';
+        ctx.lineWidth = 1.4 / cam.zoom;
+        circle(ctx, n.x, n.y, n.r + 2);
+        ctx.stroke();
+        ctx.fillStyle = 'rgba(120,120,120,0.28)';
+        circle(ctx, n.x, n.y, n.r * 0.34);
+        ctx.fill();
+        ctx.restore();
+        continue;
+      }
       const phase = nodePhase(n);
       const R = n.r;
       ctx.save();
@@ -589,6 +634,48 @@ const SDT = window.SDT;
     ctx.restore();
   }
 
+  // 选中态箭头（2026-09-09 试玩反馈）：悬停/锁定的可达节点上方画一个上下浮动的
+// 金色下行箭头——「下一个就走这里」。方向感比亮环更直白（老板定向补指示）。
+  function reachableSet(game) {
+    const logical = game.layerData[game.layerIdx] && game.layerData[game.layerIdx].logical[game.trackPos];
+    return new Set((logical && logical.next || []).map(([li, idx]) => li + ',' + idx));
+  }
+  function drawNodeArrow(ctx, game, p) {
+    const z = game.cam.zoom;
+    const bounce = Math.sin((game.time || 0) * 4.2) * 3;
+    const y = p.y - nodeRadius(p) - 14 - bounce;
+    ctx.save();
+    ctx.translate(p.x, y);
+    ctx.scale(1 / z, 1 / z);
+    ctx.fillStyle = 'rgba(245,197,66,0.95)';
+    ctx.shadowColor = 'rgba(216,180,106,0.7)';
+    ctx.shadowBlur = 6;
+    ctx.beginPath();
+    ctx.moveTo(-9, -10);
+    ctx.lineTo(9, -10);
+    ctx.lineTo(0, 2);
+    ctx.closePath();
+    ctx.fill();
+    ctx.fillRect(-2.5, -20, 5, 11);
+    ctx.restore();
+  }
+  function drawTargetArrow(ctx, game) {
+    if (game.state !== 'idle') return;
+    const key = reachableSet(game);
+    const targets = [];
+    if (game.hover) {
+      const n = game.hover;
+      if (key.has(n.li + ',' + n.idx)) targets.push(n);
+    }
+    if (game.moveTarget && game.nodePos[game.moveTarget.li]) {
+      const p = game.nodePos[game.moveTarget.li][game.moveTarget.idx];
+      if (p && !targets.some(n => n.li === game.moveTarget.li && n.idx === game.moveTarget.idx)) {
+        targets.push({ li: game.moveTarget.li, idx: game.moveTarget.idx, x: p.x, y: p.y });
+      }
+    }
+    for (const t of targets) drawNodeArrow(ctx, game, t);
+  }
+
   // 移动目标结点：金色四角括号
   function drawMoveTarget(ctx, game) {
     if (game.moveTarget == null || game.state !== 'moving') return;
@@ -680,8 +767,8 @@ const SDT = window.SDT;
     if (!game.nodes || !game.nodes.length) return;   // 结点布局未构建前不绘制
     const cam = game.cam, map = game.map;
     const T = map.tile, W = map.cols * T, H = map.rows * T;
-    // 局内使用植物废墟壁纸；缓存按视口重建，避免每帧重复缩放 JPEG。
-    ctx.drawImage(ensureBackdrop(cam), 0, 0, cam.viewW, cam.viewH);
+    // 局内按层使用壁纸（L1/L2 废墟 / L3 红骑士 / L4 白机械 / L5 黑机械）；缓存按视口+层重建
+    ctx.drawImage(ensureBackdrop(cam, game.layerIdx), 0, 0, cam.viewW, cam.viewH);
     // 轻量暗色层保留地图、节点和 HUD 的对比度，不遮掉壁纸主体。
     const bg = ctx.createLinearGradient(0, 0, 0, cam.viewH);
     bg.addColorStop(0, 'rgba(5,14,18,0.28)');
@@ -712,6 +799,7 @@ const SDT = window.SDT;
     drawEntrancePulse(ctx, game);
     drawMoveTarget(ctx, game);
     drawHover(ctx, game);
+    drawTargetArrow(ctx, game);
     drawPlayer(ctx, game);
 
     ctx.restore();

@@ -497,6 +497,8 @@ function createGameMenuController(deps) {
       UI.clearLog();
       setActiveSlot(slot);
       SDT.Base.use(slot);
+      // 能力卡术语迁移（原「英雄卡」类型，2026-09-08 定版）：基地仓库/口袋副本同步更名
+      if (SDT.Cards.applyAbilityRename((SDT.Base.data.stash || []).concat(SDT.Base.data.pocket || []).map(st => st.card))) SDT.Base.save();
       const bi = SDT.Base.issue(slot);
       if (bi === 'corrupt') UI.log('[[icon:cross]] 该档位基地数据损坏（原数据已备份），本次以空档案启动', 'warn');
       else if (bi === 'tooNew') UI.log('[[icon:cross]] 该档位基地数据来自更新版本的游戏，已以空档案启动', 'warn');
@@ -522,19 +524,18 @@ function createGameMenuController(deps) {
         const resumed = RunStorage.has(slot);
         let inRun = false;
         if (resumed) {
-          inRun = !!loadGame(slot);
-          if (!inRun) { RunStorage.issue(slot); UI.log('对局存档读取失败，先回基地', 'warn'); }
-        }
-        // 2026-09-07 留言：进入对局缺少动画——复用启程过渡（大门场景）；
-        // 经 runtime 注入（boot 装配），避免 menu→run 直接依赖形成循环
-        if (inRun) {
+          // 2026-09-09：先播转场再读档。战斗中断档在 loadGame 里由 Battle.restore
+          // 直接置为战斗 modal 态并渲染战斗界面；若在其后播转场，转场结束会把
+          // state 拉回 idle——战斗界面永远出不来，且 battleActive 锁死移动（实测死锁）。
           await runtime.showRunTransition({
             tone: 'door', asset: 'scene-door-bg',
             eyebrow: 'EXPEDITION RESUMED', title: '继续对局',
             detail: '远征尚未结束 · 直接回到对局',
             duration: 900,
           });
-          return;   // loadGame 已恢复地图与左侧栏：停留局内，不再进基地整备
+          inRun = !!loadGame(slot);
+          if (!inRun) { RunStorage.issue(slot); UI.log('对局存档读取失败，先回基地', 'warn'); }
+          else return;   // loadGame 已恢复地图/战斗界面：停留局内，不再进基地整备
         }
         await runtime.showRunTransition({
           tone: 'door', asset: 'scene-door-bg',

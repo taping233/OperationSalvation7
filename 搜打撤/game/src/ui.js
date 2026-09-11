@@ -24,6 +24,7 @@ import { Random } from './random.js';
         tglIndex: $('tglIndex'),
         btnExport: $('btnExport'), btnImport: $('btnImport'), btnClear: $('btnClear'),
         devTools: $('devTools'), devDice: $('devDice'),
+        devBattle: $('devBattle'), devBoss: $('devBoss'),
         btnCardDesigner: $('btnCardDesigner'), btnCardLib: $('btnCardLib'),
         viewport: $('viewport'),
         layerZh: $('layerBannerZh'), layerEn: $('layerBannerEn'),
@@ -356,6 +357,7 @@ import { Random } from './random.js';
       this._hasBattleStage = bodyHtml.includes('battle-stage');
       const card = this.el.ovBody.parentElement;
       card.classList.toggle('wide', mode === true || mode === 'wide' || mode === 'chest');
+      card.classList.toggle('chest', mode === 'chest');   // 战利品/开箱浮层专属类（2026-09-09 重做放大）
       card.classList.toggle('battle', mode === 'battle');
       card.classList.toggle('bag-modal', mode === 'bag');
       card.classList.toggle('bag-page', mode === 'bagpage');
@@ -437,6 +439,28 @@ import { Random } from './random.js';
       // 等淡出动画播完再真正隐藏并还原布局类，避免淡出期间跳版；
       // 期间 hidden 仍为 false，输入拦截逻辑不受影响
       this._hideTimer = setTimeout(finish, 210);
+    },
+
+    // Esc 关闭当前浮层（2026-09-09 老板：浮层要能按 Esc 关）。
+    // 返回 true 表示已处理。战斗页与结算类页面（没有取消按钮可代点）一律不关，
+    // 避免把必须做出选择的流程（撤离失败 / 宝箱强选 / BOSS 编组）跳过。
+    closeTopOverlayByEsc() {
+      if (this.el.overlay.hidden) return false;
+      const mode = this._lastMode;
+      if (mode === 'battle') return false;   // 战斗中 Esc 只清瞄准，不退战斗
+      // 优先模拟页面上的「取消语义」按钮：宝箱「跳过」、环间门「留下」、商店「离开」等。
+      // 图标关闭钮（背包 × / 卡池 ×）文本为空，按 data-act 与 aria-label/title 兜底匹配
+      const cancelBtn = [...this.el.ovBody.querySelectorAll('button')]
+        .find(b => !b.disabled && b.offsetParent && (
+          /跳过|留下|返回|取消|关闭|离开/.test(b.textContent || '') ||
+          /^(closeBag|closeCardPage|closeDesigner|pg-close)$/.test(b.dataset.act || '') ||
+          /关闭|返回/.test(b.getAttribute('aria-label') || '') || /关闭|返回/.test(b.getAttribute('title') || '')));
+      if (cancelBtn) { cancelBtn.click(); return true; }
+      // 场景演出页（点击任意处继续）：走 sceneNext 通道
+      if (this.el.ovBody.querySelector('[data-act="sceneNext"]')) { this.act('sceneNext'); return true; }
+      // 背包这类只有信息没有按钮的浮层：直接关
+      if (mode === 'bag' || mode === 'bagpage') { this.hideOverlay(); return true; }
+      return false;
     },
   };
 

@@ -34,6 +34,7 @@
     </section>
 
     <section class="panel" id="statsPanel">
+      <canvas id="miniMap" width="560" height="112" aria-label="已探明区域简图"></canvas>
       <div class="stat stat-duo"><label>行动 · 价值</label>
         <b><span id="statTurn">0</span><em class="duo-sep">/</em><span id="statValue" class="gold">¥0</span></b>
       </div>
@@ -41,7 +42,7 @@
 
     <section class="panel" id="routePanel">
       <div class="route-title">路线选择</div>
-      <div class="route-help">点击右侧高亮的相邻节点继续前进</div>
+      <div class="route-help">点击金色亮环的相邻节点继续前进（方向不一定在右侧）</div>
     </section>
     <section class="panel" id="dicePanel" hidden>
       <div id="diceRow">
@@ -61,6 +62,10 @@
           <option value="5">固定 5 点</option>
           <option value="6">固定 6 点</option>
         </select>
+        <div class="dev-battle-row">
+          <button id="devBattle" type="button">强制遭遇战</button>
+          <button id="devBoss" type="button">强制BOSS战</button>
+        </div>
       </div>
     </section>
 
@@ -260,6 +265,7 @@
       </div>
     </div>
     <div class="log-panel" id="logPanel" aria-label="行动记录">
+      <button class="log-toggle" id="logToggle" title="收起 / 展开行动记录">行动记录</button>
       <div id="log"></div>
     </div>
     <div id="exitScr" hidden>

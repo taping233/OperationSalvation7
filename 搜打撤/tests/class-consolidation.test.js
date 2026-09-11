@@ -8,14 +8,16 @@ describe('职业整合数据迁移冒烟', () => {
   beforeAll(() => { localStorage.removeItem('sdt-cards-v1'); Cards.ensureTabletop(); });
   it('职业表 = 5 职业', () =>
     expect(Cards.CLASSES).toEqual(['侠客', '战士', '牧师', '法师', '降临者']));
-  it('每职业 10-12 张职业卡（不含英雄/衍生）', () => {
+  it('每职业 9-12 张职业卡（不含英雄/衍生）', () => {
+    // 2026-09-09 与设计者实机导出对齐后：法师 9 张（仓库收编版「法力补给」cc-manasupply
+    // 退役，设计者稿 tt7-maxsupply 无 cls 不进职业池），其余职业 10-11 张
     for (const cls of Cards.CLASSES) {
       const n = Cards.classPool(cls).filter(c => c.rarity === '职业' && !c.hero).length;
-      expect(n, cls).toBeGreaterThanOrEqual(10);
+      expect(n, cls).toBeGreaterThanOrEqual(9);
       expect(n, cls).toBeLessThanOrEqual(12);
     }
   });
-  it('每职业至少 1 张英雄卡，rarityOf 推导棱彩', () => {
+  it('每职业至少 1 张能力卡，rarityOf 推导棱彩', () => {
     for (const cls of Cards.CLASSES) {
       const heroes = Cards.classPool(cls).filter(c => c.hero);
       expect(heroes.length, cls).toBeGreaterThan(0);
@@ -29,8 +31,8 @@ describe('职业整合数据迁移冒烟', () => {
       { id: 'tt7-throwblade', name: '飞刃偷袭', cls: '刺客', rarity: '初始', type: '武术' },
       { id: 'tt7-thundergrudge', name: '疾雷恩仇', cls: '剑客', rarity: '古朴', type: '武术' },
       { id: 'tt7-ironphalanx', name: '铁甲阵', cls: '剑客', rarity: '稀有', type: '武术' },
-      { id: 'tt8-hero-sword', name: '无量仙剑·云风', cls: '剑客', type: '英雄卡', rarity: '稀有' },
-      { id: 'tt8-hero-summoner', name: '神话终章·维新', cls: '召唤师', type: '英雄卡', rarity: '稀有' },
+      { id: 'tt8-hero-sword', name: '无量仙剑·云风', cls: '剑客', type: '能力卡', rarity: '稀有' },
+      { id: 'tt8-hero-summoner', name: '神话终章·维新', cls: '召唤师', type: '能力卡', rarity: '稀有' },
     ];
     localStorage.setItem('sdt-cards-v1', JSON.stringify(old.map(c => ({ ...c, desc: '' }))));
     // 真实旧档路径：清掉全部批次补种标记后再跑一次 ensureTabletop（老档重播补种）

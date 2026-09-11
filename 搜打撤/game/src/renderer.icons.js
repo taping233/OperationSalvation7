@@ -181,7 +181,8 @@ const TAU = Math.PI * 2;
     }
   }
 
-  /* ============ 结点 SVG 图标（assets/icons，惰性加载；未就绪回退简笔画） ============
+  /* ============ 结点位图图标（assets/icons/*.png，惰性加载；未就绪回退简笔画） ============
+   * 2026-09-09 老板定向：节点图标换成 NAI 生成的游戏画风透明位图（白底抠图 256px PNG）。
    * 物资拾获（币/木材/口粮）合并用随机事件图标；环间门与出口门合并用同一张门。 */
   const BITMAP_SRC = {
     battle: 'battle', event: 'event', coin: 'event', wood: 'event', rations: 'event',
@@ -197,7 +198,12 @@ const TAU = Math.PI * 2;
     if (!e) {
       e = bitmapCache[name] = { img: new Image(), ok: false };
       e.img.onload = () => { e.ok = true; };
-      e.img.src = assetUrl('assets/icons/' + name + '.svg');
+      // 2026-09-09：优先 NAI 重绘的画风透明位图（battle/event/fire/shop/chest 已出），
+      // 未重绘的类型回退旧 SVG 简笔图标
+      e.img.onerror = () => {
+        if (e.img.src.endsWith('.png')) e.img.src = assetUrl('assets/icons/' + name + '.svg');
+      };
+      e.img.src = assetUrl('assets/icons/' + name + '.png');
     }
     return e.ok ? e.img : null;
   }
@@ -228,12 +234,15 @@ const TAU = Math.PI * 2;
     e = bakedCache[type] = c;
     return e;
   }
-  function drawBitmapIcon(ctx, type, cx, cy, R, cur, z) {
+  function drawBitmapIcon(ctx, type, cx, cy, R, cur, z, legal) {
     const baked = bakedIconFor(type);
     if (!baked) return false;
     ctx.drawImage(baked, cx - R, cy - R, R * 2, R * 2);
-    ctx.strokeStyle = cur ? 'rgba(235,205,140,0.5)' : 'rgba(180,160,120,0.22)';
-    ctx.lineWidth = 1.6 / z;
+    // 当前节点金环最亮；可走相邻节点（legal）亮金环提示可去；走过的暗描边
+    ctx.strokeStyle = cur ? 'rgba(235,205,140,0.5)'
+      : legal ? 'rgba(255,214,110,0.85)'
+      : 'rgba(180,160,120,0.25)';
+    ctx.lineWidth = legal && !cur ? 2.4 / z : 1.6 / z;
     circle(ctx, cx, cy, R);
     ctx.stroke();
     return true;
