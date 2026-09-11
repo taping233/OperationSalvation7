@@ -17,6 +17,9 @@ public partial class SmoothFollower : Node
     public Vector2 TargetScale { get; set; } = Vector2.One;
     public float TargetRotationDeg { get; set; }
 
+    /// <summary>挂起三通道（批次 6c 拖拽：宿主直接定位卡片，_Process 让位）。</summary>
+    public bool Suspended { get; set; }
+
     public static SmoothFollower Attach(Control owner)
     {
         var follower = new SmoothFollower { Name = "SmoothFollower" };
@@ -55,7 +58,7 @@ public partial class SmoothFollower : Node
 
     public override void _Process(double delta)
     {
-        if (_owner == null) return;
+        if (_owner == null || Suspended) return;
         _owner.Position = Sts2Fx.Smooth(_owner.Position, TargetPosition, delta, Sts2Fx.RatePosition, Sts2Fx.SnapPositionPx);
         if (!_scaleTweenActive)
             _owner.Scale = Sts2Fx.Smooth(_owner.Scale, TargetScale, delta, Sts2Fx.RateScale, Sts2Fx.SnapScale);

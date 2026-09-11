@@ -19,6 +19,7 @@ public partial class MenuScreen : UiScreen
 
     private Control _pages = null!;
     private Control _sugLayer = null!;
+    private Control? _titleGhosts; // 标题层幽灵件（退出/静音/快速参考）——子页面覆盖时整层隐藏
     private SnowLayer _snow = null!;
     private string? _currentPage;
     private Label _archiveNo = null!;
@@ -101,10 +102,14 @@ public partial class MenuScreen : UiScreen
 
     private void BuildHud()
     {
+        // —— 标题层幽灵件容器（批次 6c rider：子页面覆盖时整层隐藏，避免静音/退出穿透页头） ——
+        _titleGhosts = new Control { MouseFilter = Control.MouseFilterEnum.Ignore };
+        _titleGhosts.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect);
+        AddChild(_titleGhosts);
         // —— 左上：退出 + 静音（ak-tl，透明幽灵件） ——
         var topLeft = new HBoxContainer { Position = new Vector2(18, 16) };
         topLeft.AddThemeConstantOverride("separation", 10);
-        AddChild(topLeft);
+        _titleGhosts.AddChild(topLeft);
         var exit = WinterUi.GhostButton("", new Vector2(58, 58),
             GD.Load<Texture2D>("res://assets/images/ui/icon-exit.svg"));
         exit.Pressed += () => Navigate("quit");
@@ -127,7 +132,7 @@ public partial class MenuScreen : UiScreen
         quickref.Position = new Vector2(186, 16);
         quickref.SizeFlagsHorizontal = Control.SizeFlags.ShrinkBegin;
         quickref.Pressed += OpenQuickReference;
-        AddChild(quickref);
+        _titleGhosts.AddChild(quickref);
 
         // —— 制作坊横幅（ak-banner：渐变底 + 图标 + 中文/英文/箭头） ——
         var banner = new Button { FocusMode = Control.FocusModeEnum.All };
@@ -400,6 +405,7 @@ public partial class MenuScreen : UiScreen
     {
         ClosePage(silent: true);
         _currentPage = key;
+        if (_titleGhosts != null) _titleGhosts.Visible = false; // rider：页面覆盖时标题幽灵件不穿透页头
         var page = builder();
         page.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect);
         _pages.AddChild(page);
@@ -416,6 +422,7 @@ public partial class MenuScreen : UiScreen
         foreach (var child in _pages.GetChildren())
             if (child is Control page)
                 page.QueueFree();
+        if (_titleGhosts != null) _titleGhosts.Visible = true;
         _snow.SetRunning(true);
         if (!silent) _audio?.PlaySfx("close");
     }

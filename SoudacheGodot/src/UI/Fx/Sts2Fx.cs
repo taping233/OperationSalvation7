@@ -38,6 +38,19 @@ public static class Sts2Fx
     public const double ButtonPopS = 0.05;
     public const double ButtonSettleS = 0.5;
 
+    // 能量球差速旋转（sts2-reference §3 NEnergyCounter：每层 delta*30*(层号+1)，能量 0 降速 5）
+    public const float RingRatePerLayer = 30f;
+    public const float EmptyRingRatePerLayer = 5f;
+
+    // 手牌回合进出（sts2-reference §1 NPlayerHand：敌方回合 0.2s CubicOut 下沉 100px+变灰；恢复 0.38s）
+    public const double HandSinkSeconds = 0.2;
+    public const float HandSinkPx = 100f;
+    public const double HandRestoreSeconds = 0.38;
+
+    // 结束回合按钮隐藏/出现（sts2-reference §5 NEndTurnButton：+250px 0.5s ExpoOut / BackOut）
+    public const double EndTurnHideSeconds = 0.5;
+    public const float EndTurnHidePx = 250f;
+
     /// <summary>STS2 式逐帧指数平滑：lerp(current, target, delta*rate)，带吸附阈。与参照一致为帧率相关实现。</summary>
     public static float Smooth(float current, float target, double delta, float rate, float snap)
     {
