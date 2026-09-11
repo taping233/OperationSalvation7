@@ -36,7 +36,7 @@ public sealed record RunSnapshot(ulong Seed, ulong RngState, int LayerIndex, int
     int Turns, int Stamina, int Hp, int Coins, int Keys, int Wood, int Rations, RunPhase Phase,
     RunBaseSnapshot? Base = null, IReadOnlyList<RunCardSnapshot>? OwnedCards = null,
     IReadOnlyList<RunCardSnapshot>? UsedPocket = null, IReadOnlyList<RunCardSnapshot>? PendingRewards = null,
-    IReadOnlyList<RunSettlementSnapshot>? SettlementCards = null);
+    IReadOnlyList<RunSettlementSnapshot>? SettlementCards = null, int Fragments = 0);
 
 /// <summary>
 /// Pure C# run state machine. It has no Godot/node dependency and deliberately keeps all
@@ -97,6 +97,23 @@ public sealed class RunState
     public IReadOnlySet<int> DefeatedBosses => _defeatedBosses;
     public bool IsFinished => Phase is RunPhase.Victory or RunPhase.Defeat;
 
+    // —— 彩色令牌碎片（网页版 game.fragments，Q6 隐藏计数器）：集齐 2 枚可随员工通行证A合成彩色令牌 ——
+    public int Fragments { get; private set; }
+
+    public void GrantFragments(int amount)
+    {
+        if (amount < 0) throw new ArgumentOutOfRangeException(nameof(amount));
+        Fragments = checked(Fragments + amount);
+    }
+
+    public bool TryConsumeFragments(int amount)
+    {
+        if (amount < 0) throw new ArgumentOutOfRangeException(nameof(amount));
+        if (Fragments < amount) return false;
+        Fragments -= amount;
+        return true;
+    }
+
     public void ConfigureShopCardPool(IEnumerable<RunCard> cards)
     {
         ArgumentNullException.ThrowIfNull(cards);
@@ -128,7 +145,8 @@ public sealed class RunState
     public RunSnapshot CaptureSnapshot() => new(Seed, Rng.State, LayerIndex, TrackPosition, Turns, Stamina, Hp,
         Resources.Coins, Resources.Keys, Resources.Wood, Resources.Rations, Phase, Base.CaptureSnapshot(),
         _ownedCards.Select(ToSnapshot).ToArray(), _usedPocket.Select(ToSnapshot).ToArray(), _pendingRewards.Select(ToSnapshot).ToArray(),
-        _settlementCards.Select(x => new RunSettlementSnapshot(ToSnapshot(new RunCardStack(x.Card, x.Count)), x.Deposited)).ToArray());
+        _settlementCards.Select(x => new RunSettlementSnapshot(ToSnapshot(new RunCardStack(x.Card, x.Count)), x.Deposited)).ToArray(),
+        Fragments);
 
     public static RunState FromSnapshot(RunSnapshot snapshot, RunMap? map = null)
     {
@@ -155,6 +173,7 @@ public sealed class RunState
         LayerIndex = snapshot.LayerIndex; TrackPosition = snapshot.TrackPosition; Turns = snapshot.Turns;
         Stamina = snapshot.Stamina; Hp = snapshot.Hp; Resources.Coins = snapshot.Coins; Resources.Keys = snapshot.Keys;
         Resources.Wood = snapshot.Wood; Resources.Rations = snapshot.Rations; Rng.RestoreState(snapshot.RngState);
+        Fragments = Math.Max(0, snapshot.Fragments);
         if (snapshot.Base is not null) Base.RestoreSnapshot(snapshot.Base);
         _ownedCards.Clear(); _usedPocket.Clear();
         if (snapshot.OwnedCards is not null) _ownedCards.AddRange(snapshot.OwnedCards.Select(FromSnapshot));

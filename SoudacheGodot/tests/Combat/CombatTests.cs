@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Soudache;
+using Soudache.Battle;
 
 internal static class CombatTests
 {
@@ -23,14 +24,52 @@ internal static class CombatTests
         FifoAndZones();
         SpecialCardContracts();
         EveryFormerUnsupportedCardHasCoreContract();
+        // —— 批次 2（战斗引擎对齐 v0.53.3）新增测试组 ——
+        var only = Environment.GetEnvironmentVariable("COMBAT_ONLY");
+        if (only is null or "sentinel") _checks += BattleSentinelTests.Run();
+        if (only is null or "chase") { Console.WriteLine("== ChaseSlash =="); BattleRegressionTests.ChaseSlash(); }
+        if (only is null or "cursed") { Console.WriteLine("== CursedBlade =="); BattleRegressionTests.CursedBlade(); }
+        if (only is null or "dual") { Console.WriteLine("== DualWield =="); BattleRegressionTests.DualWield(); }
+        if (only is null or "lava") { Console.WriteLine("== LavaBlast =="); BattleRegressionTests.LavaBlast(); }
+        if (only is null or "surge") { Console.WriteLine("== ManaSurge =="); BattleRegressionTests.ManaSurge(); }
+        if (only is null or "mist") { Console.WriteLine("== Mistbox =="); BattleRegressionTests.Mistbox(); }
+        if (only is null or "rapid") { Console.WriteLine("== RapidFire =="); BattleRegressionTests.RapidFire(); }
+        if (only is null or "hero") { Console.WriteLine("== HeroCards =="); BattleRegressionTests.HeroCards(); }
+        if (only is null or "boss") { Console.WriteLine("== BossEquipSelect =="); BattleRegressionTests.BossEquipSelect(); }
+        if (only is null or "audit")
+        {
+            Console.WriteLine("== AllCardsAudit ==");
+            var audited = BattleAuditTests.Run();
+            _checks += audited;
+        }
         Console.WriteLine($"COMBAT_TESTS_OK checks={_checks}");
         return 0;
     }
 
+    /// <summary>rider（批次 2）：直读 data/cards.json 的路径统一为三 cwd 兼容写法
+    /// （仓库根 / SoudacheGodot 根 / 测试 bin 上溯），与 NarrativeTests.LoadStoryJson 同口径。</summary>
+    private static string? FindCardsJson()
+        => CardLib.CandidatePaths("cards.json").FirstOrDefault(File.Exists);
+
+    /// <summary>tests/Combat 内直读文件的统一三 cwd 探测（rider 口径）。</summary>
+    private static string? FindManifest(string fileName)
+    {
+        foreach (var path in new[]
+        {
+            Path.Combine("SoudacheGodot", "tests", "Combat", fileName),
+            Path.Combine("tests", "Combat", fileName),
+            Path.Combine(AppContext.BaseDirectory, "..", "..", "..", fileName),
+        })
+        {
+            if (File.Exists(path)) return path;
+        }
+        return null;
+    }
+
     private static void ExportedCatalogLoads()
     {
-        var path = Path.Combine("SoudacheGodot", "data", "cards.json");
-        if (!File.Exists(path)) return; // Keep the test runnable from its bin directory too.
+        var path = FindCardsJson();
+        if (path is null) return; // Keep the test runnable from its bin directory too.
         var catalog = CardCatalog.LoadFile(path);
         Check(catalog.Count == 245, "exported catalog card count");
         Check(catalog.All.Count(card => card.Layer == CardLayer.Combat) == 218, "combat layer coverage is 218 cards");
@@ -220,8 +259,8 @@ internal static class CombatTests
 
     private static void SpecialCardContracts()
     {
-        var path = Path.Combine("SoudacheGodot", "data", "cards.json");
-        if (!File.Exists(path)) return;
+        var path = FindCardsJson();
+        if (path is null) return;
         var catalog = CardCatalog.LoadFile(path);
         var combat = new CombatState("p");
         combat.AddCombatant(new CombatantState("p", "Player", 40, false));
@@ -261,9 +300,9 @@ internal static class CombatTests
         var rejected = engine.TryPlay(infusionCard.InstanceId, infusionFuel: new[] { fuel.InstanceId });
         Check(!rejected.Accepted && deck.IsInHand(fuel.InstanceId) && deck.IsInHand(infusionCard.InstanceId), "uninfusable card cannot be fuel");
 
-        var unsupportedPath = Path.Combine("SoudacheGodot", "tests", "Combat", "unsupported-card-ids.txt");
-        Check(File.Exists(unsupportedPath), "unsupported card manifest exists");
-        var unsupported = File.ReadAllLines(unsupportedPath).Select(line => line.Trim()).Where(line => line.Length > 0).ToArray();
+        var unsupportedPath = FindManifest("unsupported-card-ids.txt");
+        Check(unsupportedPath is not null, "unsupported card manifest exists");
+        var unsupported = File.ReadAllLines(unsupportedPath!).Select(line => line.Trim()).Where(line => line.Length > 0).ToArray();
         Check(unsupported.Distinct(StringComparer.Ordinal).Count() == unsupported.Length, "unsupported manifest has unique ids");
         Check(unsupported.All(id => catalog.TryGet(id, out var definition) && definition is not null && definition.Layer == CardLayer.Combat), "unsupported manifest contains combat ids only");
         Check(unsupported.Length == 0, "all combat cards are executable in Core");
@@ -280,7 +319,9 @@ internal static class CombatTests
 
     private static void EveryFormerUnsupportedCardHasCoreContract()
     {
-        var catalog = CardCatalog.LoadFile(Path.Combine("SoudacheGodot", "data", "cards.json"));
+        var cardsPath = FindCardsJson();
+        if (cardsPath is null) return;
+        var catalog = CardCatalog.LoadFile(cardsPath);
         var world = new CombatState("p");
         world.AddCombatant(new CombatantState("p", "Player", 100, false) { Attack = 2, SpellPower = 2 });
         world.AddCombatant(new CombatantState("e1", "Enemy 1", 50, true) { Attack = 3 });

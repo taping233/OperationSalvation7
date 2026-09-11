@@ -68,6 +68,8 @@ public sealed class SaveGameDto
     public List<JsonElement> DiceHistory { get; set; } = new();
     public double Elapsed { get; set; }
     public int Stamina { get; set; } = 60;
+    /// <summary>彩色令牌碎片计数（网页版 game.fragments；旧档缺字段 → 0）。</summary>
+    public int Fragments { get; set; }
     public CardDeckDto Deck { get; set; } = new();
     public CombatStateDto? Combat { get; set; }
     public Dictionary<string, string> Flags { get; set; } = new(StringComparer.Ordinal);

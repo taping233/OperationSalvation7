@@ -10,5 +10,9 @@
     <Compile Include="..\..\src\Core\**\*.cs" />
     <Compile Remove="..\..\src\Core\Run\**\*.cs" />
     <Compile Include="CombatTests.cs" />
+    <Compile Include="BattleHarness.cs" />
+    <Compile Include="BattleSentinelTests.cs" />
+    <Compile Include="BattleRegressionTests.cs" />
+    <Compile Include="BattleAuditTests.cs" />
   </ItemGroup>
 </Project>

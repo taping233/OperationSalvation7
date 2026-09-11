@@ -309,6 +309,7 @@ public sealed class CoreGameAdapter : ICoreUiPort
                 Wood = run?.Wood ?? 0,
                 Rations = run?.Rations ?? 0,
                 Stamina = run?.Stamina ?? RunRules.StaminaMax,
+                Fragments = run?.Fragments ?? 0,
                 Turn = run?.Turns ?? _combat.Turn,
                 CharacterId = string.IsNullOrEmpty(_runCharacterId) ? null : _runCharacterId,
                 RunActive = _run != null && !_run.IsFinished,
@@ -356,7 +357,8 @@ public sealed class CoreGameAdapter : ICoreUiPort
                     snapshot.Keys, snapshot.Wood, snapshot.Rations,
                     savedPhase == RunPhase.Settlement ? RunPhase.Settlement : RunPhase.Ready,
                     _base.CaptureSnapshot(), DeserializeSnapshots(snapshot.OwnedCards),
-                    DeserializeSnapshots(snapshot.UsedPocket), DeserializeSnapshots(snapshot.Inventory), settlement))
+                    DeserializeSnapshots(snapshot.UsedPocket), DeserializeSnapshots(snapshot.Inventory), settlement,
+                    Math.Max(0, snapshot.Fragments)))
                 : null;
             if (_run != null)
             {

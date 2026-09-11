@@ -42,6 +42,12 @@ public sealed class BattleUiSnapshot
     public string[] HandCardIds { get; init; } = Array.Empty<string>();
     public int[] HandCardInfuseCounts { get; init; } = Array.Empty<int>();
     public string[] HandCardTargetKinds { get; init; } = Array.Empty<string>();
+    /// <summary>
+    /// 战斗音效信号（接口需求 [7a→A]，对照 _planning/audio-inventory.md §3）。
+    /// 引擎在结算时产生 sound.js 同名键（parry/curse/strike/card/flee/hit/hurt/heal/victory/defeat…），
+    /// UI 侧逐个 GameAudio.PlaySfx(key) 后清空；hit/hurt/heal 可继续沿用现有 HP 变化推断，二者并存。
+    /// </summary>
+    public string[] SfxRequests { get; init; } = Array.Empty<string>();
 }
 
 public sealed class BattleEnemyUiSnapshot
