@@ -33,6 +33,8 @@ public sealed class CoreGameAdapter : ICoreUiPort
     private string _battleStatus = "战斗核心已就绪";
     private string _saveStatus = "五槽存档已就绪";
     private int _lastRoll;
+    // 祭坛弃 3 激活：UI 逐张勾选的暂存（按卡名去重，跨名累计 3 张实例）
+    private readonly List<string> _altarSacrificePicks = new();
 
     public event Action<BattleUiSnapshot>? BattleSnapshotChanged;
     public event Action<RunUiSnapshot>? RunSnapshotChanged;
@@ -83,9 +85,14 @@ public sealed class CoreGameAdapter : ICoreUiPort
         }
         try
         {
-            var roll = _run.Roll();
-            _lastRoll = roll.Dice;
-            _runStatus = $"掷出 {roll.Dice}，移动至第 {roll.Layer + 1} 层 {roll.ToPosition + 1} 号节点";
+            // 四层节点图没有掷骰：网页版「掷骰子移动」按钮实际是选择相邻节点前进
+            // （game.boot.js chooseNextTarget）。骨架先取第一个相邻节点，6c 地图渲染
+            // 接入点选移动（move:idx）后由 UI 直选。
+            var neighbors = _run.ReachableNodes();
+            if (neighbors.Count == 0) throw new InvalidOperationException("当前节点没有可前往的相邻节点。");
+            var move = _run.MoveTo(neighbors[0]);
+            _lastRoll = 0;
+            _runStatus = $"移动至第 {move.Layer + 1} 层节点 {move.ToPosition + 1}";
             PrepareCurrentRoom();
         }
         catch (Exception error)
@@ -115,6 +122,14 @@ public sealed class CoreGameAdapter : ICoreUiPort
                 case "roll":
                     RequestRollDice();
                     return;
+                case "move":
+                {
+                    // 四层图移动：前往相邻节点（网页版 moveTo 原子事务，落点即结算）
+                    var move = _run.MoveTo(int.Parse(argument));
+                    _runStatus = $"移动至第 {move.Layer + 1} 层节点 {move.ToPosition + 1}";
+                    PrepareCurrentRoom();
+                    break;
+                }
                 case "battle":
                     _runStatus = "请切换到战斗页继续";
                     break;
@@ -146,20 +161,26 @@ public sealed class CoreGameAdapter : ICoreUiPort
                 case "door":
                     if (argument == "enter") _run.EnterDoor();
                     else if (argument == "stay") _run.StayAtDoor();
-                    else if (argument == "extract") _run.ExtractAtDoor();
-                    _runStatus = argument == "extract" ? "已抵达撤离结算" : "门扉选择已确认";
+                    else if (argument == "extract")
+                    {
+                        // 紧急撤离=献祭 3 张背包卡牌；终局撤离=击败首脑后无条件放行
+                        _run.ExtractAtDoor(_run.CurrentRoomType == RunRoomType.EmergencyExit ? _run.DefaultEmergencySacrifice() : null);
+                        _runStatus = "已抵达撤离结算";
+                    }
+                    else _runStatus = "门扉选择已确认";
                     break;
                 case "altar":
-                    if (argument == "leave") { _run.LeaveAltar(); _runStatus = "离开污染核心"; }
-                    else if (argument == "extract") { _run.Extract(); _runStatus = "已抵达撤离结算"; }
-                    else
-                    {
-                        var available = _run.OwnedCards.Where(stack => stack.Card.Semantic is RunCardSemantic.Combat or RunCardSemantic.Equipment && !stack.Card.IsInitialAttack).Sum(stack => stack.Count);
-                        if (available < 15) throw new InvalidOperationException($"挑战首领需要 15 张非道具牌，当前只有 {available} 张。");
-                        _run.ChallengeBoss(int.Parse(argument));
-                        PrepareBossDeckSelection();
-                    }
+                    HandleAltarAction(argument);
                     break;
+                case "boss":
+                {
+                    // 首脑格挑战（须先激活祭坛；网页版 openBossGate）
+                    var available = _run.OwnedCards.Where(stack => stack.Card.Semantic is RunCardSemantic.Combat or RunCardSemantic.Equipment && !stack.Card.IsInitialAttack).Sum(stack => stack.Count);
+                    if (available < 15) throw new InvalidOperationException($"挑战首领需要 15 张非道具牌，当前只有 {available} 张。");
+                    _run.ChallengeBoss(int.Parse(argument));
+                    if (_run.Phase == RunPhase.Battle) PrepareBossDeckSelection();
+                    break;
+                }
                 case "bossdeck":
                     if (argument == "confirm") ConfirmBossDeck();
                     else ToggleBossDeckCard(int.Parse(argument));
@@ -310,6 +331,9 @@ public sealed class CoreGameAdapter : ICoreUiPort
                 Rations = run?.Rations ?? 0,
                 Stamina = run?.Stamina ?? RunRules.StaminaMax,
                 Fragments = run?.Fragments ?? 0,
+                AltarActivated = run?.AltarActivated ?? false,
+                BossKilled = run?.BossKilled ?? false,
+                VisitedNodes = run?.VisitedNodes?.ToList() ?? new List<string>(),
                 Turn = run?.Turns ?? _combat.Turn,
                 CharacterId = string.IsNullOrEmpty(_runCharacterId) ? null : _runCharacterId,
                 RunActive = _run != null && !_run.IsFinished,
@@ -358,7 +382,8 @@ public sealed class CoreGameAdapter : ICoreUiPort
                     savedPhase == RunPhase.Settlement ? RunPhase.Settlement : RunPhase.Ready,
                     _base.CaptureSnapshot(), DeserializeSnapshots(snapshot.OwnedCards),
                     DeserializeSnapshots(snapshot.UsedPocket), DeserializeSnapshots(snapshot.Inventory), settlement,
-                    Math.Max(0, snapshot.Fragments)))
+                    Math.Max(0, snapshot.Fragments), snapshot.AltarActivated, snapshot.BossKilled,
+                    snapshot.VisitedNodes))
                 : null;
             if (_run != null)
             {
@@ -508,18 +533,15 @@ public sealed class CoreGameAdapter : ICoreUiPort
             return;
         }
         var layer = _run.Map.Layers[_run.LayerIndex];
-        var nodes = Enumerable.Range(0, layer.RingSize).Select(index =>
+        var nodes = layer.Nodes.Select(node => new MapNodeUiSnapshot
         {
-            var room = layer.RoomAt(index);
-            if (layer.DoorAt(index) != null) room = new RunRoom(RunRoomType.Door);
-            if (layer.HasAltarEntrance(index)) room = new RunRoom(RunRoomType.AltarEntrance);
-            return new MapNodeUiSnapshot
-            {
-                Index = index,
-                Type = room.Type.ToString().ToLowerInvariant(),
-                Label = RoomLabel(room.Type),
-                IsCurrent = index == _run.TrackPosition
-            };
+            Index = node.Idx,
+            Type = NodeUiType(node.Type),
+            Label = node.Name,
+            IsCurrent = node.Idx == _run.TrackPosition,
+            X = node.X,
+            Row = node.Row,
+            Neighbors = layer.NeighborsOf(node.Idx).ToArray()
         }).ToArray();
         RunSnapshotChanged?.Invoke(new RunUiSnapshot
         {
@@ -529,7 +551,7 @@ public sealed class CoreGameAdapter : ICoreUiPort
             TrackPosition = _run.TrackPosition,
             CurrentHp = _run.Phase == RunPhase.Battle ? _combat.GetCombatant(_playerId).Health : _run.Hp,
             MaxHp = _run.MaxHp,
-            TrackLength = layer.RingSize,
+            TrackLength = layer.NodeCount,
             LastRoll = _lastRoll,
             Coins = _run.Resources.Coins,
             Keys = _run.Resources.Keys,
@@ -628,6 +650,52 @@ public sealed class CoreGameAdapter : ICoreUiPort
         else if (_run.Phase == RunPhase.Chest && _run.ChestPreview == null) _run.PeekNextChest();
     }
 
+    /// <summary>
+    /// 祭坛动作（ported from game.run.altar.js openAltarRitual/openAltarReward）：
+    /// pick/activate=弃 3 激活；reward:0|1=二选一奖励；frag=2 碎片兑换；
+    /// itemrestore=献祭道具复原；leave=离开（未激活可再来）。
+    /// </summary>
+    private void HandleAltarAction(string argument)
+    {
+        if (argument == "leave") { _run!.LeaveAltar(); _altarSacrificePicks.Clear(); _runStatus = "离开祭坛——它保持沉睡"; return; }
+        if (argument.StartsWith("pick:", StringComparison.Ordinal))
+        {
+            var name = argument["pick:".Length..];
+            if (_altarSacrificePicks.Contains(name)) _altarSacrificePicks.Remove(name);
+            else if (_altarSacrificePicks.Count < RunRules.AltarDiscardCards) _altarSacrificePicks.Add(name);
+            _runStatus = $"已选 {_altarSacrificePicks.Count}/{RunRules.AltarDiscardCards} 张献祭卡";
+            return;
+        }
+        if (argument == "activate")
+        {
+            _run!.ActivateAltarByDiscard(_altarSacrificePicks);
+            _altarSacrificePicks.Clear();
+            _runStatus = "祭坛苏醒了——请选择一项奖励";
+            return;
+        }
+        if (argument.StartsWith("reward:", StringComparison.Ordinal))
+        {
+            _run!.ChooseAltarReward(int.Parse(argument["reward:".Length..]));
+            _runStatus = "祭坛回赠已领取";
+            return;
+        }
+        if (argument == "frag")
+        {
+            _runStatus = _run!.ActivateAltarByFragments()
+                ? "献上 2 枚彩色令牌碎片——获得职业卡，祭坛苏醒了"
+                : "碎片兑换暂不可用（职业卡池为空或背包已满）——碎片已原样保留";
+            return;
+        }
+        if (argument.StartsWith("itemrestore:", StringComparison.Ordinal))
+        {
+            _runStatus = _run!.SacrificeItemAtAltar(argument["itemrestore:".Length..])
+                ? "献上道具——从消耗口袋复原了卡牌"
+                : "背包里没有这张道具卡可供献祭";
+            return;
+        }
+        throw new InvalidOperationException("未知祭坛操作。");
+    }
+
     private void SyncNormalConsumedCards()
     {
         if (_bossCombat || _run == null) return;
@@ -720,7 +788,25 @@ public sealed class CoreGameAdapter : ICoreUiPort
         switch (run.Phase)
         {
             case RunPhase.Ready:
-                actions.Add(new RunActionUiSnapshot { Id = "roll", Label = "掷骰前进", Detail = "消耗 1 点体力" });
+            {
+                var mapLayer = run.Map.Layers[run.LayerIndex];
+                foreach (var neighbor in mapLayer.NeighborsOf(run.TrackPosition))
+                    actions.Add(new RunActionUiSnapshot { Id = $"move:{neighbor}", Label = $"前往：{mapLayer.NameAt(neighbor)}", Detail = $"{neighbor + 1} 号节点 · {RoomLabel(mapLayer.TypeAt(neighbor))}" });
+                actions.Add(new RunActionUiSnapshot { Id = "roll", Label = "前往相邻节点", Detail = "直选移动：默认取第一个相邻节点" });
+                if (mapLayer.TypeAt(run.TrackPosition) == RunRoomType.Boss)
+                {
+                    // 首脑格（网页版 openBossGate）：未激活祭坛时封印，激活后可挑战
+                    if (!run.AltarActivated)
+                        actions.Add(new RunActionUiSnapshot { Id = "boss:sealed", Label = "首脑巢穴 · 封印中", Detail = Soudache.RunState.AltarLockedMessage, Enabled = false });
+                    else
+                        actions.AddRange(run.Map.Bosses.Select((boss, index) => new RunActionUiSnapshot
+                        {
+                            Id = $"boss:{index}",
+                            Label = run.BossKilled ? $"{boss.Name}（已击败）" : $"挑战 {boss.Name}",
+                            Detail = $"{boss.Attack}-{boss.Hp} · 胜利后终局撤离点放行",
+                            Enabled = !run.BossKilled
+                        }));
+                }
                 if (run.Resources.Rations > 0 && run.Stamina < run.MaxStamina)
                     actions.Add(new RunActionUiSnapshot { Id = "ration", Label = "使用口粮", Detail = "恢复 3 点体力" });
                 actions.AddRange(run.OwnedCards.Where(stack => !stack.Safe).Select(stack => new RunActionUiSnapshot { Id = $"safeadd:{stack.Card.Name}", Label = $"放入安全袋：{stack.Card.Name}", Detail = $"×{stack.Count}", Enabled = run.OwnedCards.Where(x => x.Safe).Sum(x => x.Count) < run.Base.SafeCapacity }));
@@ -731,6 +817,7 @@ public sealed class CoreGameAdapter : ICoreUiPort
                     actions.AddRange(run.OwnedCards.Where(stack => !stack.Safe && !stack.Card.IsInitialAttack).Select(stack => new RunActionUiSnapshot { Id = $"unload:{stack.Card.Name}", Label = $"放回仓库：{stack.Card.Name}", Detail = $"×{stack.Count}", Enabled = run.Base.StashRoom > 0 }));
                 }
                 break;
+            }
             case RunPhase.Battle:
                 if (_bossDeckPool.Count > 0)
                 {
@@ -772,10 +859,30 @@ public sealed class CoreGameAdapter : ICoreUiPort
                 actions.Add(new RunActionUiSnapshot { Id = "door:stay", Label = "留在本层" });
                 break;
             case RunPhase.Altar:
-                actions.AddRange(run.Map.Bosses.Select((boss, index) => new RunActionUiSnapshot { Id = $"altar:{index}", Label = run.DefeatedBosses.Contains(index) ? $"{boss.Name}（已击败）" : $"挑战 {boss.Name}", Enabled = !run.DefeatedBosses.Contains(index) }));
-                actions.Add(new RunActionUiSnapshot { Id = "altar:leave", Label = "返回环带" });
-                if (run.DefeatedBosses.Count == run.Map.Bosses.Count) actions.Add(new RunActionUiSnapshot { Id = "altar:extract", Label = "完成远征" });
+            {
+                // 祭坛仪式（网页版 openAltarRitual/openAltarReward）
+                if (run.PendingAltarReward)
+                {
+                    actions.Add(new RunActionUiSnapshot { Id = "altar:reward:0", Label = "① 复原 3 张消耗卡 + 回复 10 血", Detail = "从消耗口袋复原卡牌回背包，并回复 10 点生命", Enabled = run.UsedPocket.Any(x => x.Card.Semantic is not (RunCardSemantic.Item or RunCardSemantic.Equipment)) });
+                    actions.Add(new RunActionUiSnapshot { Id = "altar:reward:1", Label = "② 传说卡 + 装备卡", Detail = "随机获取 1 张传说卡和 1 张装备卡" });
+                }
+                else if (!run.AltarActivated)
+                {
+                    foreach (var stack in run.OwnedCards)
+                        actions.Add(new RunActionUiSnapshot
+                        {
+                            Id = $"altar:pick:{stack.Card.Name}",
+                            Label = $"{(_altarSacrificePicks.Contains(stack.Card.Name) ? "✓ " : "")}献祭：{stack.Card.Name}",
+                            Detail = $"×{stack.Count} · 弃 {RunRules.AltarDiscardCards} 张激活祭坛"
+                        });
+                    actions.Add(new RunActionUiSnapshot { Id = "altar:activate", Label = "弃 3 张 · 激活祭坛", Detail = "激活后二选一：① 复原 3 张消耗卡 + 回复 10 血；② 随机传说卡 + 装备卡", Enabled = _altarSacrificePicks.Count == RunRules.AltarDiscardCards });
+                    actions.Add(new RunActionUiSnapshot { Id = "altar:frag", Label = "献上 2 枚彩色令牌碎片（不弃牌）", Detail = $"现有碎片 {run.Fragments}/2 · 获得本职业随机卡并激活", Enabled = run.Fragments >= RunRules.AltarFragmentCost });
+                    foreach (var stack in run.OwnedCards.Where(x => x.Card.Semantic == RunCardSemantic.Item))
+                        actions.Add(new RunActionUiSnapshot { Id = $"altar:itemrestore:{stack.Card.Name}", Label = $"献祭道具：{stack.Card.Name}", Detail = "献祭 1 张道具卡，从消耗口袋复原 2 张（可重复）" });
+                }
+                actions.Add(new RunActionUiSnapshot { Id = "altar:leave", Label = run.AltarActivated ? "离开祭坛" : "离开", Detail = run.AltarActivated ? "" : "祭坛保持沉睡——稍后再来" });
                 break;
+            }
             case RunPhase.Settlement:
                 actions.AddRange(run.SettlementCards.Select((entry, index) => new RunActionUiSnapshot { Id = $"settle:{index}", Label = entry.Deposited ? $"{entry.Card.Name}（已入库）" : $"存入 {entry.Card.Name} ×{entry.Count}", Enabled = !entry.Deposited }));
                 actions.AddRange(BuildBaseActions(run.Base));
@@ -852,12 +959,16 @@ public sealed class CoreGameAdapter : ICoreUiPort
     private int CharacterIndex(string id) => _data.Character(id)?.Index ?? -1;
     private string CharacterName(string id) => _data.Character(id)?.Name ?? "未选择角色";
     private static string PhaseLabel(RunPhase phase) => phase switch { RunPhase.Ready => "探索", RunPhase.Battle => "战斗", RunPhase.Shop => "商店", RunPhase.Campfire => "营火", RunPhase.Chest => "宝箱", RunPhase.Event => "事件", RunPhase.AwaitingDoor => "门扉", RunPhase.Altar => "祭坛", RunPhase.Victory => "胜利", RunPhase.Defeat => "失败", _ => phase.ToString() };
-    private static string RoomLabel(RunRoomType type) => type switch { RunRoomType.Coin => "金币", RunRoomType.Wood => "木材", RunRoomType.Rations => "口粮", RunRoomType.Key => "钥匙", RunRoomType.Battle => "战斗", RunRoomType.Event => "事件", RunRoomType.Shop => "商店", RunRoomType.Campfire => "营火", RunRoomType.Chest => "宝箱", RunRoomType.EmergencyExit => "撤离", RunRoomType.Door => "门", RunRoomType.AltarEntrance => "祭坛入口", _ => "荒径" };
+    private static string RoomLabel(RunRoomType type) => type switch { RunRoomType.Entrance => "入口", RunRoomType.Battle => "战斗", RunRoomType.Event => "事件", RunRoomType.Shop => "补给站", RunRoomType.Campfire => "火堆", RunRoomType.Chest => "搜刮点", RunRoomType.EmergencyExit => "紧急撤离", RunRoomType.Door => "层间门", RunRoomType.Altar => "祭坛", RunRoomType.Boss => "首脑", RunRoomType.Extraction => "终局撤离", RunRoomType.Coin => "金币", RunRoomType.Wood => "木材", RunRoomType.Rations => "口粮", RunRoomType.Key => "钥匙", _ => "荒径" };
 
-    private static string CurrentRunRoomLabel(RunLayer layer, int position)
+    /// <summary>节点类型字符串（对齐网页版 map-generator 的 def.type，供 6c 地图渲染着色）。</summary>
+    private static string NodeUiType(RunRoomType type) => type switch
     {
-        if (layer.HasAltarEntrance(position)) return RoomLabel(RunRoomType.AltarEntrance);
-        if (layer.DoorAt(position) != null) return RoomLabel(RunRoomType.Door);
-        return RoomLabel(layer.RoomAt(position).Type);
-    }
+        RunRoomType.Entrance => "entrance", RunRoomType.Battle => "battle", RunRoomType.Event => "event",
+        RunRoomType.Shop => "shop", RunRoomType.Campfire => "fire", RunRoomType.Chest => "chest",
+        RunRoomType.EmergencyExit => "emergencyExit", RunRoomType.Door => "door", RunRoomType.Altar => "altar",
+        RunRoomType.Boss => "boss", RunRoomType.Extraction => "extraction", _ => "unknown"
+    };
+
+    private static string CurrentRunRoomLabel(RunLayer layer, int position) => RoomLabel(layer.TypeAt(position));
 }

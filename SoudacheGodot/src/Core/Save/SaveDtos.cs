@@ -70,6 +70,13 @@ public sealed class SaveGameDto
     public int Stamina { get; set; } = 60;
     /// <summary>彩色令牌碎片计数（网页版 game.fragments；旧档缺字段 → 0）。</summary>
     public int Fragments { get; set; }
+    // —— 批次 3 四层跑图（可选字段，旧 v3 档缺省即默认值，无需迁移）——
+    /// <summary>第四层污染祭坛是否已激活（首脑格准入条件；网页版 altarActivated）。</summary>
+    public bool AltarActivated { get; set; }
+    /// <summary>本局是否已击败首脑（终局撤离放行；网页版 bossKilled）。</summary>
+    public bool BossKilled { get; set; }
+    /// <summary>已结算过的一次性格键（"li,idx"；网页版 visited）。</summary>
+    public List<string> VisitedNodes { get; set; } = new();
     public CardDeckDto Deck { get; set; } = new();
     public CombatStateDto? Combat { get; set; }
     public Dictionary<string, string> Flags { get; set; } = new(StringComparer.Ordinal);
@@ -85,6 +92,7 @@ public sealed class SaveGameDto
         ValidateList(Inventory, "inventory"); ValidateList(OwnedCards, "ownedCards"); ValidateList(UsedPocket, "usedPocket");
         if (CardOrder is null || EventLog is null || Discovered is null || DiceHistory is null || Flags is null || RngStreams is null) throw new SaveFormatException("Save contains a missing collection.");
         if (CardOrder.Count > 10000 || EventLog.Count > 10000 || Discovered.Count > 10000 || DiceHistory.Count > 10000) throw new SaveFormatException("Save collection is unreasonably large.");
+        if (VisitedNodes is null || VisitedNodes.Count > 10000) throw new SaveFormatException("Save visited-node list is missing or unreasonably large.");
         Deck?.Validate(); Combat?.Validate(); Base?.Validate();
     }
 

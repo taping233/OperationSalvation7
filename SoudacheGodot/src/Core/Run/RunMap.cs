@@ -4,12 +4,14 @@ using System.Linq;
 
 namespace Soudache;
 
-// ported from src/mapData.js：祭坛 BOSS 表读 data/map.json altar.bosses；
-// 三环拓扑（28/20/12 环、门与祭坛入口）按口径保留骨架现状，四层地图归批次 3。
+// ported from src/map-generator.js（消费生成结果）+ src/layeredMap.js（层命名）
+// + src/map-graph.js（连通性检查）+ src/mapData.js（祭坛 BOSS 表读 data/map.json altar.bosses）。
+// 四层节点图：层内为四向网格图（生成器保证连通/回环/分叉），层间只靠 door 单向深入。
+// 三环旧拓扑（28/20/12）已随批次 3 移除——地图一律由 MapGenerator 按种子产出。
 
 public enum RunRoomType
 {
-    Empty, Coin, Wood, Rations, Key, Battle, Event, Shop, Campfire, Chest,
+    Entrance, Empty, Coin, Wood, Rations, Key, Battle, Event, Shop, Campfire, Chest,
     EmergencyExit, Door, AltarEntrance, Altar, Boss, Extraction
 }
 
@@ -21,137 +23,109 @@ public sealed record RunDoor(string Pair, int At, int ToLayer, int ArriveAt, boo
 
 public sealed record RunEnemy(string Id, string Name, int Hp, int Attack, bool Elite = false);
 
+/// <summary>一层节点图：节点表 + 入口/出口下标 + 网格边界 + 层间门（只向深处）。</summary>
 public sealed class RunLayer
 {
-    private readonly Dictionary<int, RunRoom> _rooms;
-
     public string Id { get; }
     public string Name { get; }
-    public int RingSize { get; }
-    public RunRisk Risk { get; }
-    public IReadOnlyDictionary<int, RunRoom> Rooms => _rooms;
+    public int Index { get; }
+    public IReadOnlyList<MapNode> Nodes { get; }
+    public int NodeCount => Nodes.Count;
+    public int Entry { get; }
+    public int Exit { get; }
+    public MapGridBounds GridBounds { get; }
     public IReadOnlyList<RunDoor> Doors { get; }
-    public IReadOnlySet<int> AltarEntrances { get; }
 
-    public RunLayer(string id, string name, int ringSize, RunRisk risk,
-        IDictionary<int, RunRoom>? rooms = null, IEnumerable<RunDoor>? doors = null,
-        IEnumerable<int>? altarEntrances = null)
+    internal RunLayer(int index, GeneratedLayer generated)
     {
-        Id = id;
-        Name = name;
-        RingSize = ringSize;
-        Risk = risk;
-        _rooms = rooms is null ? new Dictionary<int, RunRoom>() : new Dictionary<int, RunRoom>(rooms);
-        Doors = (doors ?? Array.Empty<RunDoor>()).ToArray();
-        AltarEntrances = new HashSet<int>(altarEntrances ?? Array.Empty<int>());
-        foreach (var room in _rooms.Keys)
-            if (room < 0 || room >= ringSize) throw new ArgumentOutOfRangeException(nameof(rooms));
-        foreach (var door in Doors)
-            if (door.At < 0 || door.At >= ringSize) throw new ArgumentOutOfRangeException(nameof(doors));
+        Index = index;
+        Id = $"layer-{index + 1}";
+        Name = LayerNames.For(index);
+        Nodes = generated.Nodes;
+        Entry = generated.Entry;
+        Exit = generated.Exit;
+        GridBounds = generated.GridBounds;
+        Doors = generated.Doors;
     }
 
-    public RunRoom RoomAt(int index) => _rooms.TryGetValue(index, out var room) ? room : new RunRoom(RunRoomType.Empty);
-    public RunDoor? DoorAt(int index) => Doors.FirstOrDefault(door => door.At == index);
-    public bool HasAltarEntrance(int index) => AltarEntrances.Contains(index);
+    public RunRoomType TypeAt(int idx) => Nodes[idx].Type;
+    public string NameAt(int idx) => Nodes[idx].Name;
+    public RunDoor? DoorAt(int idx) => Doors.FirstOrDefault(door => door.At == idx);
+
+    /// <summary>同层相邻节点（next 中 toLayer==本层），即玩家可直选的移动目标。</summary>
+    public IReadOnlyList<int> NeighborsOf(int idx) =>
+        Nodes[idx].Next.Where(edge => edge.ToLayer == Index).Select(edge => edge.ToIdx).ToArray();
 }
 
-/// <summary>Immutable topology and encounter tables copied from map.json/mapData.js.</summary>
+/// <summary>四层拓扑 + BOSS 表。由种子经 MapGenerator 产出（同 seed 同地图）。</summary>
 public sealed class RunMap
 {
-    public static readonly int[] RingSizes = { 28, 20, 12 };
+    public ulong Seed { get; }
+    public int GeneratorVersion { get; }
+    public int LayoutVersion { get; }
     public IReadOnlyList<RunLayer> Layers { get; }
     public IReadOnlyList<(string Id, string Name, int Hp, int Attack)> Bosses { get; }
 
-    public RunMap(IEnumerable<RunLayer> layers,
+    private readonly LayeredMap _generated;
+
+    public RunMap(LayeredMap generated,
         IEnumerable<(string Id, string Name, int Hp, int Attack)>? bosses = null)
     {
-        Layers = layers.ToArray();
-        if (Layers.Count != 3 || !Layers.Select(x => x.RingSize).SequenceEqual(RingSizes))
-            throw new ArgumentException("Run maps must contain rings sized 28/20/12.", nameof(layers));
+        _generated = generated;
+        Seed = generated.Seed;
+        GeneratorVersion = generated.GeneratorVersion;
+        LayoutVersion = generated.LayoutVersion;
+        Layers = generated.Layers.Select((layer, index) => new RunLayer(index, layer)).ToArray();
         Bosses = (bosses ?? Array.Empty<(string, string, int, int)>()).ToArray();
     }
 
-    public static RunMap CreateDefault()
-    {
-        var l1 = new Dictionary<int, RunRoom>
-        {
-            [2] = new(RunRoomType.Coin, 2), [3] = new(RunRoomType.Shop), [4] = new(RunRoomType.Event),
-            [5] = new(RunRoomType.Battle), [6] = new(RunRoomType.Wood), [9] = new(RunRoomType.Coin, 2),
-            [10] = new(RunRoomType.Battle), [11] = new(RunRoomType.Event), [12] = new(RunRoomType.Battle),
-            [13] = new(RunRoomType.Battle), [16] = new(RunRoomType.Battle), [17] = new(RunRoomType.Chest),
-            [18] = new(RunRoomType.Event), [19] = new(RunRoomType.Coin, 2), [20] = new(RunRoomType.Battle),
-            [23] = new(RunRoomType.Campfire), [24] = new(RunRoomType.Campfire), [25] = new(RunRoomType.Event),
-            [26] = new(RunRoomType.Battle), [27] = new(RunRoomType.Wood)
-        };
-        var l2 = new Dictionary<int, RunRoom>
-        {
-            [0] = new(RunRoomType.Coin, 2), [1] = new(RunRoomType.Campfire), [2] = new(RunRoomType.Campfire),
-            [3] = new(RunRoomType.Battle), [4] = new(RunRoomType.Event), [5] = new(RunRoomType.Coin, 2),
-            [6] = new(RunRoomType.Battle), [7] = new(RunRoomType.Rations), [8] = new(RunRoomType.Battle),
-            [9] = new(RunRoomType.Coin, 4), [10] = new(RunRoomType.Coin, 2), [11] = new(RunRoomType.Battle),
-            [12] = new(RunRoomType.Key), [13] = new(RunRoomType.Shop), [14] = new(RunRoomType.Battle),
-            [15] = new(RunRoomType.Coin, 2), [16] = new(RunRoomType.Battle), [17] = new(RunRoomType.Coin, 3),
-            [18] = new(RunRoomType.Shop), [19] = new(RunRoomType.Event)
-        };
-        var l3 = new Dictionary<int, RunRoom>
-        {
-            [0] = new(RunRoomType.Battle), [1] = new(RunRoomType.Coin, 4), [2] = new(RunRoomType.Wood, 2),
-            [3] = new(RunRoomType.Battle), [4] = new(RunRoomType.Campfire), [5] = new(RunRoomType.Campfire),
-            [6] = new(RunRoomType.Battle), [7] = new(RunRoomType.Event), [8] = new(RunRoomType.Shop),
-            [9] = new(RunRoomType.Battle), [10] = new(RunRoomType.EmergencyExit), [11] = new(RunRoomType.Shop)
-        };
-        return new RunMap(new[]
-        {
-            new RunLayer("L1", "外环 · 荒地边缘", 28, RunRisk.Low, l1, new[]
-            {
-                new RunDoor("p1", 1, 1, 0, true), new RunDoor("p2", 8, 1, 5, true),
-                new RunDoor("p3", 15, 1, 10, true), new RunDoor("p4", 22, 1, 15, true)
-            }),
-            new RunLayer("L2", "中环 · 废墟市街", 20, RunRisk.Medium, l2, new[]
-            {
-                new RunDoor("p1", 0, 0, 1, false), new RunDoor("p2", 5, 0, 8, false),
-                new RunDoor("p3", 10, 0, 15, false), new RunDoor("p4", 15, 0, 22, false),
-                new RunDoor("p5", 13, 2, 8, false), new RunDoor("p6", 18, 2, 11, false)
-            }),
-            new RunLayer("L3", "内环 · 污染核心区", 12, RunRisk.High, l3, new[]
-            {
-                new RunDoor("p5", 8, 1, 13, false), new RunDoor("p6", 11, 1, 18, false)
-            }, new[] { 1, 11 })
-        }, GameRuntime.Data.Bosses
-            .Select(boss => (boss.Id, boss.Name, boss.Hp, boss.Attack))
-            .ToArray());
-    }
+    public static RunMap Generate(ulong seed) => new(MapGenerator.Generate(seed), GameRuntime.Data.Bosses
+        .Select(boss => (boss.Id, boss.Name, boss.Hp, boss.Attack))
+        .ToArray());
+
+    // ---------- 连通性检查（ported from src/map-graph.js）----------
+    // 邻接表：层内 next 双向边 + 门转移边 + 祭坛入口→中央（v5 生成器不再产出祭坛入口，保留口径）。
 
     public Dictionary<string, HashSet<string>> BuildAdjacency()
     {
         var result = new Dictionary<string, HashSet<string>>(StringComparer.Ordinal);
         void Link(string a, string b)
         {
-            if (!result.TryGetValue(a, out var aa)) result[a] = aa = new HashSet<string>();
-            if (!result.TryGetValue(b, out var bb)) result[b] = bb = new HashSet<string>();
+            if (!result.TryGetValue(a, out var aa)) result[a] = aa = new HashSet<string>(StringComparer.Ordinal);
+            if (!result.TryGetValue(b, out var bb)) result[b] = bb = new HashSet<string>(StringComparer.Ordinal);
             aa.Add(b); bb.Add(a);
         }
-        for (var layer = 0; layer < Layers.Count; layer++)
+        var generated = _generated;
+        for (var li = 0; li < Layers.Count; li++)
         {
-            for (var i = 0; i < Layers[layer].RingSize; i++)
-                Link($"{layer},{i}", $"{layer},{(i + 1) % Layers[layer].RingSize}");
-            foreach (var door in Layers[layer].Doors)
-                Link($"{layer},{door.At}", $"{door.ToLayer},{door.ArriveAt}");
-            foreach (var altar in Layers[layer].AltarEntrances)
-                Link($"{layer},{altar}", "altar,0");
+            var nodes = generated.Layers[li].Nodes;
+            for (var i = 0; i < nodes.Count; i++)
+                foreach (var edge in nodes[i].Next)
+                    Link($"{li},{i}", $"{edge.ToLayer},{edge.ToIdx}");
+            foreach (var door in Layers[li].Doors)
+                Link($"{li},{door.At}", $"{door.ToLayer},{door.ArriveAt}");
         }
         return result;
     }
 
-    public bool IsConnected(out IReadOnlyList<string> unreachable)
+    /// <summary>从第 1 层入口出发 flood-fill（map-graph.checkConnectivity）。返回不可达 'li,idx' 列表。</summary>
+    public bool CheckConnectivity(out IReadOnlyList<string> unreachable)
     {
         var graph = BuildAdjacency();
-        var seen = new HashSet<string>(StringComparer.Ordinal) { "0,0" };
-        var queue = new Queue<string>(); queue.Enqueue("0,0");
+        if (graph.Count == 0) { unreachable = Array.Empty<string>(); return true; }
+        var starts = new List<string> { $"0,{Layers[0].Entry}" };
+        var seen = new HashSet<string>(starts, StringComparer.Ordinal);
+        var queue = new Queue<string>(starts);
         while (queue.Count > 0)
-            foreach (var next in graph[queue.Dequeue()])
+        {
+            if (!graph.TryGetValue(queue.Dequeue(), out var neighbors)) continue;
+            foreach (var next in neighbors)
                 if (seen.Add(next)) queue.Enqueue(next);
-        unreachable = graph.Keys.Where(x => !seen.Contains(x) && !x.StartsWith("altar,", StringComparison.Ordinal)).OrderBy(x => x).ToArray();
+        }
+        unreachable = graph.Keys.Where(k => !seen.Contains(k) && !k.StartsWith("altar,", StringComparison.Ordinal))
+            .OrderBy(k => k, StringComparer.Ordinal).ToArray();
         return unreachable.Count == 0;
     }
+
+    public bool IsConnected(out IReadOnlyList<string> unreachable) => CheckConnectivity(out unreachable);
 }

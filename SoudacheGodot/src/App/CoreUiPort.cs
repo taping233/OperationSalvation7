@@ -109,6 +109,10 @@ public sealed class MapNodeUiSnapshot
     public string Label { get; init; } = "未知";
     public bool IsCurrent { get; init; }
     public bool IsResolved { get; init; }
+    // 四层节点图几何（批次 6c 地图渲染用）：网格坐标与同层相邻节点
+    public int X { get; init; }
+    public int Row { get; init; }
+    public int[] Neighbors { get; init; } = Array.Empty<int>();
 }
 
 public sealed class SaveSlotsUiSnapshot

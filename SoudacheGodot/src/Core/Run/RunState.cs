@@ -18,7 +18,7 @@ public sealed class RunResources
     public int Rations { get; internal set; }
 }
 
-public sealed record RunRoll(int Dice, int Layer, int FromPosition, int ToPosition, IReadOnlyList<int> Path);
+public sealed record RunMove(int Layer, int FromPosition, int ToPosition);
 public sealed record RunRoomResult(RunRoomType Type, int Layer, int Position, int Amount = 0, string Message = "");
 public sealed record RunEventResult(string Text, int Coins, int Wood, int Rations, bool CreatedChest);
 public sealed record RunChestLoot(string Kind, int Coins, IReadOnlyList<string> Items, bool IsClass = false,
@@ -36,7 +36,8 @@ public sealed record RunSnapshot(ulong Seed, ulong RngState, int LayerIndex, int
     int Turns, int Stamina, int Hp, int Coins, int Keys, int Wood, int Rations, RunPhase Phase,
     RunBaseSnapshot? Base = null, IReadOnlyList<RunCardSnapshot>? OwnedCards = null,
     IReadOnlyList<RunCardSnapshot>? UsedPocket = null, IReadOnlyList<RunCardSnapshot>? PendingRewards = null,
-    IReadOnlyList<RunSettlementSnapshot>? SettlementCards = null, int Fragments = 0);
+    IReadOnlyList<RunSettlementSnapshot>? SettlementCards = null, int Fragments = 0,
+    bool AltarActivated = false, bool BossKilled = false, IReadOnlyList<string>? VisitedNodes = null);
 
 /// <summary>
 /// Pure C# run state machine. It has no Godot/node dependency and deliberately keeps all
@@ -47,7 +48,6 @@ public sealed class RunState
     private readonly GameData _data;
     private readonly List<RunEnemy> _encounter = new();
     private readonly Queue<(string Kind, bool IsBoss, bool IsClass)> _pendingChests = new();
-    private readonly HashSet<string> _discoveredDoors = new(StringComparer.Ordinal);
     private readonly HashSet<int> _defeatedBosses = new();
     private readonly List<RunCardStack> _ownedCards = new();
     private readonly List<RunCardStack> _usedPocket = new();
@@ -65,6 +65,11 @@ public sealed class RunState
     private string? _pendingEventId;
     private IReadOnlyList<RunEventChoice> _eventChoices = Array.Empty<RunEventChoice>();
     private RunChestPreview? _chestPreview;
+    // —— 四层跑图（网页版 game.session/game.run.flow 语义）——
+    // visited：一次性内容防重刷（战斗/宝箱/火堆/商店/事件/祭坛/首脑只触发一次；
+    // 门/紧急撤离/终局撤离是通路可重复）。键为 "li,idx"。
+    private readonly HashSet<string> _visited = new(StringComparer.Ordinal);
+    private bool _altarRewardPending;
 
     public RunMap Map { get; }
     public DeterministicRng Rng { get; }
@@ -92,10 +97,23 @@ public sealed class RunState
     public IReadOnlyList<RunSettlementCard> SettlementCards => _settlementCards;
     public RunChestPreview? ChestPreview => _chestPreview;
     public RunDoorOption? CurrentDoor => CurrentDoorOption();
-    public bool CanExtract => Phase == RunPhase.AwaitingDoor && Stamina > 0 &&
-        (_pendingDoor?.IsExit == true || (CurrentRoomType == RunRoomType.EmergencyExit && Resources.Coins >= RunRules.EmergencyExitCost));
+    /// <summary>撤离点放行：终局撤离点需先击败首脑；紧急撤离点需背包 ≥3 张可献祭卡牌。</summary>
+    public bool CanExtract => Phase == RunPhase.AwaitingDoor &&
+        (CurrentRoomType == RunRoomType.Extraction
+            ? BossKilled
+            : CurrentRoomType == RunRoomType.EmergencyExit && BackpackUsed >= RunRules.EmergencySacrificeCards);
     public IReadOnlySet<int> DefeatedBosses => _defeatedBosses;
     public bool IsFinished => Phase is RunPhase.Victory or RunPhase.Defeat;
+
+    // —— 四层跑图状态（存档随 RunSnapshot 持久化）——
+    /// <summary>第四层污染祭坛是否已激活（首脑格准入条件；网页版 game.altarActivated）。</summary>
+    public bool AltarActivated { get; private set; }
+    /// <summary>本局是否已击败首脑（终局撤离点放行条件；网页版 game.bossKilled）。</summary>
+    public bool BossKilled { get; private set; }
+    /// <summary>弃 3 激活祭坛后、二选一奖励未领取（不可存档，只存在于 Altar 阶段）。</summary>
+    public bool PendingAltarReward => _altarRewardPending;
+    /// <summary>已结算过的一次性格（"li,idx"，防回头路重刷）。</summary>
+    public IReadOnlyCollection<string> VisitedNodes => _visited;
 
     // —— 彩色令牌碎片（网页版 game.fragments，Q6 隐藏计数器）：集齐 2 枚可随员工通行证A合成彩色令牌 ——
     public int Fragments { get; private set; }
@@ -136,7 +154,10 @@ public sealed class RunState
         _data = data ?? GameRuntime.Data;
         Base = baseState ?? new RunBaseState();
         Resources.Coins = Base.TakeReserveCoins();
-        Map = map ?? RunMap.CreateDefault();
+        Map = map ?? RunMap.Generate(seed);
+        // 四层图开局站在第 1 层入口（网页版 newRun：entrances[0]，不结算本格、不耗行动）
+        LayerIndex = 0;
+        TrackPosition = Map.Layers[0].Entry;
         Rng = new DeterministicRng(seed);
         if (!Map.IsConnected(out var unreachable))
             throw new ArgumentException($"Run map contains unreachable nodes: {string.Join(",", unreachable)}", nameof(map));
@@ -146,7 +167,7 @@ public sealed class RunState
         Resources.Coins, Resources.Keys, Resources.Wood, Resources.Rations, Phase, Base.CaptureSnapshot(),
         _ownedCards.Select(ToSnapshot).ToArray(), _usedPocket.Select(ToSnapshot).ToArray(), _pendingRewards.Select(ToSnapshot).ToArray(),
         _settlementCards.Select(x => new RunSettlementSnapshot(ToSnapshot(new RunCardStack(x.Card, x.Count)), x.Deposited)).ToArray(),
-        Fragments);
+        Fragments, AltarActivated, BossKilled, _visited.ToArray());
 
     public static RunState FromSnapshot(RunSnapshot snapshot, RunMap? map = null)
     {
@@ -163,7 +184,7 @@ public sealed class RunState
         if (snapshot.Phase is not (RunPhase.Ready or RunPhase.Settlement)) throw new ArgumentException("只能恢复 Ready 或 Settlement 状态的运行快照。", nameof(snapshot));
         if (snapshot.LayerIndex < 0 || snapshot.LayerIndex >= Map.Layers.Count)
             throw new ArgumentOutOfRangeException(nameof(snapshot.LayerIndex));
-        if (snapshot.TrackPosition < 0 || snapshot.TrackPosition >= Map.Layers[snapshot.LayerIndex].RingSize)
+        if (snapshot.TrackPosition < 0 || snapshot.TrackPosition >= Map.Layers[snapshot.LayerIndex].NodeCount)
             throw new ArgumentOutOfRangeException(nameof(snapshot.TrackPosition));
         if (snapshot.Turns < 0 || snapshot.Stamina < 0 || snapshot.Stamina > MaxStamina)
             throw new ArgumentOutOfRangeException(nameof(snapshot));
@@ -174,6 +195,15 @@ public sealed class RunState
         Stamina = snapshot.Stamina; Hp = snapshot.Hp; Resources.Coins = snapshot.Coins; Resources.Keys = snapshot.Keys;
         Resources.Wood = snapshot.Wood; Resources.Rations = snapshot.Rations; Rng.RestoreState(snapshot.RngState);
         Fragments = Math.Max(0, snapshot.Fragments);
+        AltarActivated = snapshot.AltarActivated;
+        BossKilled = snapshot.BossKilled;
+        _visited.Clear();
+        if (snapshot.VisitedNodes is not null)
+            foreach (var key in snapshot.VisitedNodes)
+            {
+                if (key.Length > 32 || !IsVisitedKeyValid(key)) throw new ArgumentException($"非法的已访节点键 '{key}'。", nameof(snapshot));
+                _visited.Add(key);
+            }
         if (snapshot.Base is not null) Base.RestoreSnapshot(snapshot.Base);
         _ownedCards.Clear(); _usedPocket.Clear();
         if (snapshot.OwnedCards is not null) _ownedCards.AddRange(snapshot.OwnedCards.Select(FromSnapshot));
@@ -186,6 +216,15 @@ public sealed class RunState
         if (BackpackUsed > BackpackCapacity || _ownedCards.Where(x => x.Safe).Sum(x => x.Count) > Base.SafeCapacity)
             throw new ArgumentException("背包卡牌超过容量。", nameof(snapshot));
         _pendingDoor = null; _pendingChests.Clear(); _eventBattleDrops.Clear(); _encounter.Clear(); _shop = Array.Empty<RunShopOffer>(); _eventChoices = Array.Empty<RunEventChoice>(); _pendingEventId = null; _encounterRisk = default; Phase = snapshot.Phase;
+        _altarRewardPending = false;
+    }
+
+    private bool IsVisitedKeyValid(string key)
+    {
+        var parts = key.Split(',');
+        if (parts.Length != 2) return false;
+        if (!int.TryParse(parts[0], out var li) || !int.TryParse(parts[1], out var idx)) return false;
+        return li >= 0 && li < Map.Layers.Count && idx >= 0 && idx < Map.Layers[li].NodeCount;
     }
 
     private static RunCardSnapshot ToSnapshot(RunCardStack stack) => new(stack.Card.Id, stack.Card.Name, stack.Card.Type, stack.Card.Rarity,
@@ -193,24 +232,27 @@ public sealed class RunState
     private static RunCardStack FromSnapshot(RunCardSnapshot value) => new(new RunCard(value.Id, value.Name, value.Type, value.Rarity,
         value.SellPrice, value.Sellable, value.IsInitialAttack, value.MaterialKind, value.MaterialAmount), value.Count, value.Safe);
 
-    public RunRoll Roll()
+    /// <summary>
+    /// 移动事务（ported from game.run.flow.js moveTo）：只能从稳定落点（Ready）出发、
+    /// 只能前往当前节点相邻的下一节点；位置/回合/事件结算在本次调用内一次性提交。
+    /// 掷骰已被网页版移除——「掷骰子移动」按钮实际是选择相邻节点前进（chooseNextTarget）。
+    /// </summary>
+    public RunMove MoveTo(int toIdx)
     {
         EnsurePhase(RunPhase.Ready);
-        if (Stamina <= 0) { Phase = RunPhase.Defeat; throw new InvalidOperationException("体力耗尽，行动失败。"); }
         var layer = Map.Layers[LayerIndex];
+        if (toIdx < 0 || toIdx >= layer.NodeCount) throw new ArgumentOutOfRangeException(nameof(toIdx));
+        if (!layer.NeighborsOf(TrackPosition).Contains(toIdx))
+            throw new InvalidOperationException("该节点不是当前节点的相邻路径，无法直接跳转。");
         var from = TrackPosition;
-        var dice = Rng.NextInt(1, RunRules.DiceSides + 1);
-        Stamina--;
+        TrackPosition = toIdx;
         Turns++;
-        var path = new List<int>(dice);
-        for (var i = 0; i < dice; i++)
-        {
-            TrackPosition = (TrackPosition + 1) % layer.RingSize;
-            path.Add(TrackPosition);
-        }
         ResolveRoom();
-        return new RunRoll(dice, LayerIndex, from, TrackPosition, path);
+        return new RunMove(LayerIndex, from, TrackPosition);
     }
+
+    /// <summary>当前节点的相邻可移动目标（同层）。</summary>
+    public IReadOnlyList<int> ReachableNodes() => Map.Layers[LayerIndex].NeighborsOf(TrackPosition);
 
     public RunRoomResult ResolveCurrentRoom()
     {
@@ -308,63 +350,75 @@ public sealed class RunState
 
     private void ResolveRoom()
     {
-        var room = Map.Layers[LayerIndex].RoomAt(TrackPosition);
-        switch (room.Type)
+        // ported from game.run.flow.js resolveCell：落脚结算 + 一次性内容防重刷。
+        // 战斗/宝箱/拾取/事件/火堆/商店结算过一次就标记；回头路再次踏入不重触发。
+        // 仍可通行/使用的格：门/紧急撤离/终局撤离（通路）。
+        // 祭坛格：踩上不锁定，激活（或碎片兑换）成功后才算触发过；
+        // 首脑格：编组/战斗前也不锁定——放弃可再来，只有击败首脑后才消耗本格。
+        var layer = Map.Layers[LayerIndex];
+        var idx = TrackPosition;
+        var type = layer.TypeAt(idx);
+        var door = layer.DoorAt(idx);
+        var key = $"{LayerIndex},{idx}";
+        var repeatable = door is not null || type is RunRoomType.Door or RunRoomType.EmergencyExit or RunRoomType.Extraction;
+        if (_visited.Contains(key) && !repeatable)
         {
-            case RunRoomType.Coin:
-                Resources.Coins += Math.Max(1, room.Amount - 1);
-                FinishInstantOrDoor();
-                break;
-            case RunRoomType.Wood: Resources.Wood += room.Amount; FinishInstantOrDoor(); break;
-            case RunRoomType.Rations: Resources.Rations += room.Amount; FinishInstantOrDoor(); break;
-            case RunRoomType.Key: Resources.Keys++; FinishInstantOrDoor(); break;
+            // 「这里已经来过了——能拿的都拿走了，什么也没有。」
+            Phase = RunPhase.Ready;
+            return;
+        }
+        var ritualPending = type is RunRoomType.Altar or RunRoomType.Boss;
+        if (!ritualPending) _visited.Add(key);
+        switch (type)
+        {
             case RunRoomType.Battle:
                 BuildEncounter(); Phase = RunPhase.Battle; break;
-            case RunRoomType.Event: Phase = RunPhase.Event; break;
+            case RunRoomType.Event:
+                Phase = RunPhase.Event; break;
             case RunRoomType.Shop:
                 EnterShop(); break;
             case RunRoomType.Campfire:
                 Hp = Math.Min(MaxHp, Hp + RunRules.FireHeal); Phase = RunPhase.Campfire; break;
             case RunRoomType.Chest:
-                _pendingChests.Enqueue(("small", false, false)); _returnAfterChest = RunPhase.Ready; Phase = RunPhase.Chest; break;
-            case RunRoomType.EmergencyExit: Phase = RunPhase.AwaitingDoor; break;
+                // 物资格（网页版 runInstant case 'chest'）：70% 小宝箱（随机 1 张）/ 30% 中宝箱（3 选 1）
+                _pendingChests.Enqueue((Rng.NextDouble() < 0.7 ? "small" : "medium", false, false));
+                _returnAfterChest = RunPhase.Ready; Phase = RunPhase.Chest; break;
+            case RunRoomType.Door:
+                // 层间门只向深处放行（网页版 openDoorModal：没有撤离选项）
+                _pendingDoor = door; Phase = RunPhase.AwaitingDoor; break;
+            case RunRoomType.EmergencyExit:
+                Phase = RunPhase.AwaitingDoor; break;
+            case RunRoomType.Extraction:
+                // 终局撤离点：击败首脑后无条件放行，否则封印（可再通行）
+                Phase = BossKilled ? RunPhase.AwaitingDoor : RunPhase.Ready; break;
+            case RunRoomType.Altar:
+                Phase = RunPhase.Altar; break;
+            case RunRoomType.Boss:
+                // 首脑格不锁定：未激活祭坛时挑战会被拒绝（封印）；激活后由 ChallengeBoss 进入战斗
+                Phase = RunPhase.Ready; break;
             default:
-                if (Map.Layers[LayerIndex].DoorAt(TrackPosition) is not null || Map.Layers[LayerIndex].HasAltarEntrance(TrackPosition))
-                    FinishInstantOrDoor();
-                else Phase = RunPhase.Ready;
-                break;
+                Phase = RunPhase.Ready; break;
         }
-    }
-
-    private void FinishInstantOrDoor()
-    {
-        _pendingDoor = Map.Layers[LayerIndex].DoorAt(TrackPosition);
-        if (_pendingDoor is not null || Map.Layers[LayerIndex].HasAltarEntrance(TrackPosition))
-        {
-            if (_pendingDoor is not null) _discoveredDoors.Add(_pendingDoor.Pair);
-            Phase = RunPhase.AwaitingDoor;
-        }
-        else Phase = RunPhase.Ready;
     }
 
     private RunRoomResult CurrentRoomResult()
     {
-        var room = Map.Layers[LayerIndex].RoomAt(TrackPosition);
-        return new RunRoomResult(room.Type, LayerIndex, TrackPosition, room.Amount, Describe(room.Type));
+        var type = Map.Layers[LayerIndex].TypeAt(TrackPosition);
+        return new RunRoomResult(type, LayerIndex, TrackPosition, 0, Describe(type));
     }
 
-    public RunRoomType CurrentRoomType => Map.Layers[LayerIndex].RoomAt(TrackPosition).Type;
+    public RunRoomType CurrentRoomType => Map.Layers[LayerIndex].TypeAt(TrackPosition);
 
     private RunDoorOption? CurrentDoorOption()
     {
         if (Phase != RunPhase.AwaitingDoor) return null;
         if (_pendingDoor is not null)
-            return new RunDoorOption(_pendingDoor.Pair, true, _pendingDoor.IsExit && Stamina > 0,
+            return new RunDoorOption(_pendingDoor.Pair, true, false,
                 _pendingDoor.ToLayer, _pendingDoor.ArriveAt, Map.Layers[_pendingDoor.ToLayer].Name);
         if (CurrentRoomType == RunRoomType.EmergencyExit)
-            return new RunDoorOption("emergency", false, Stamina > 0 && Resources.Coins >= RunRules.EmergencyExitCost, LayerIndex, TrackPosition, "紧急撤离点");
-        if (Map.Layers[LayerIndex].HasAltarEntrance(TrackPosition))
-            return new RunDoorOption("altar", true, false, -1, 0, "污染核心");
+            return new RunDoorOption("emergency", false, BackpackUsed >= RunRules.EmergencySacrificeCards, LayerIndex, TrackPosition, "紧急撤离点");
+        if (CurrentRoomType == RunRoomType.Extraction && BossKilled)
+            return new RunDoorOption("extraction", false, true, LayerIndex, TrackPosition, "终局撤离点");
         return null;
     }
 
@@ -443,10 +497,15 @@ public sealed class RunState
             case "airdrop_heal": Hp = Math.Min(MaxHp, Hp + 3); Phase = RunPhase.Ready; return new("箱内的医疗模块仍能完成一次快速处理。", 0, 0, 0, false);
             case "chest_small": _pendingChests.Enqueue(("small", false, false)); _returnAfterChest = RunPhase.Ready; Phase = RunPhase.Chest; return new("小箱的锁扣应声弹开。", 0, 0, 0, true);
             case "chest_medium": _pendingChests.Enqueue(("medium", false, false)); _returnAfterChest = RunPhase.Ready; Phase = RunPhase.Chest; return new("密封箱亮起绿色指示灯。", 0, 0, 0, true);
-            case "timeskip_move": MoveWithoutStamina(6); return new("耳鸣骤起又骤停——你已被裂隙卷向前方。", 0, 0, 0, false);
+            case "timeskip_move":
+                // 网页版已停用事件连锁移动（cancelLegacyChainMove：即时事件不会盲选第一条邻边）
+                Phase = RunPhase.Ready; return new("时空孔隙在你面前塌缩了——什么也没有发生。", 0, 0, 0, false);
             case "demondeal_trade": Hp = Math.Max(1, Hp - 1); AddCard(new RunCard("event-legend", "传说旧物", "装备", "传说", 5, true)); Phase = RunPhase.Ready; return new("指尖被划开的瞬间，一件冰冷的旧物落进了掌心。", 0, 0, 0, false);
             case "bandits_fight":
-                _encounter.Clear(); for (var i = 0; i < 5; i++) _encounter.Add(CreateEnemy("bandit"));
+                // 网页版 2026-09-11 实机定版：数量随层数缩放（第 1 层 3 只 → 第 3 层起 5 只）
+                _encounter.Clear();
+                var gangN = Math.Min(5, 3 + LayerIndex);
+                for (var i = 0; i < gangN; i++) _encounter.Add(CreateEnemy("bandit"));
                 _eventBattleDrops.Enqueue(("medium", false)); _eventBattleDrops.Enqueue(("medium", false)); _encounterRisk = RunRisk.Medium; Phase = RunPhase.Battle; return new("五道剪影从残骸后站起。", 0, 0, 0, false);
             case "mystery_supply": Resources.Coins += 2; AddCard(new RunCard("event-color-token", "彩色令牌", "资源", "稀有", 2, true)); Phase = RunPhase.Ready; return new("柜门弹开时滚出两枚旧硬币和一张彩色令牌。", 2, 0, 0, false);
             case "goldhammer_strike":
@@ -456,13 +515,6 @@ public sealed class RunState
             case "relief_heal": Hp = Math.Min(MaxHp, Hp + 6); Phase = RunPhase.Ready; return new("缠好绷带时，你觉得自己又能再走一段了。", 0, 0, 0, false);
             default: Resources.Wood++; AddCard(new RunCard("event-color-token", "彩色令牌", "资源", "稀有", 2, true)); Phase = RunPhase.Ready; return new("无人机松开货舱，一段建材和一张彩色令牌滑了出来。", 0, 1, 0, false);
         }
-    }
-
-    private void MoveWithoutStamina(int steps)
-    {
-        var layer = Map.Layers[LayerIndex];
-        TrackPosition = (TrackPosition + steps) % layer.RingSize;
-        ResolveRoom();
     }
 
     private void BuildEncounter()
@@ -512,12 +564,18 @@ public sealed class RunState
         if (_encounter.Count == 1)
             for (var index = 0; index < Map.Bosses.Count; index++)
                 if (Map.Bosses[index].Id == _encounter[0].Id) { bossIndex = index; break; }
-        if (bossIndex >= 0) _defeatedBosses.Add(bossIndex);
+        if (bossIndex >= 0)
+        {
+            _defeatedBosses.Add(bossIndex);
+            BossKilled = true;                       // 终局撤离点放行（网页版 game.bossKilled）
+            _visited.Add($"{LayerIndex},{TrackPosition}");   // 击败首脑后才消耗本格
+        }
         IReadOnlyList<(string Kind, bool IsBoss)> drops = bossIndex >= 0
             ? new[] { ("boss", true) }
             : _eventBattleDrops.Count > 0 ? DrainEventDrops() : RollDrops(LayerIndex);
         foreach (var drop in drops) _pendingChests.Enqueue((drop.Kind, drop.IsBoss, !drop.IsBoss && Rng.NextDouble() < 1.0 / 3.0));
-        _returnAfterChest = bossIndex >= 0 ? RunPhase.Altar : RunPhase.Ready;
+        // 战利品结算后回待机：祭坛→首脑→终局撤离点是图上三个相邻节点，走格子衔接
+        _returnAfterChest = RunPhase.Ready;
         Phase = RunPhase.Chest;
         return drops;
     }
@@ -617,35 +675,172 @@ public sealed class RunState
 
     public void EnterDoor() {
         EnsurePhase(RunPhase.AwaitingDoor);
-        if (_pendingDoor is not null) { LayerIndex = _pendingDoor.ToLayer; TrackPosition = _pendingDoor.ArriveAt; _pendingDoor = null; Phase = RunPhase.Ready; return; }
-        if (Map.Layers[LayerIndex].HasAltarEntrance(TrackPosition)) { Phase = RunPhase.Altar; return; }
-        throw new InvalidOperationException("当前房间没有可进入的门。");
+        if (_pendingDoor is null) throw new InvalidOperationException("当前节点没有层间门。");
+        LayerIndex = _pendingDoor.ToLayer; TrackPosition = _pendingDoor.ArriveAt; _pendingDoor = null; Phase = RunPhase.Ready;
     }
     public void StayAtDoor() { EnsurePhase(RunPhase.AwaitingDoor); _pendingDoor = null; Phase = RunPhase.Ready; }
-    public void ExtractAtDoor()
+
+    /// <summary>紧急撤离的献祭代价（网页版 openEmergencyModal：撤离前必须献祭 3 张背包卡牌）。</summary>
+    public IReadOnlyList<string> DefaultEmergencySacrifice()
+    {
+        var names = new List<string>();
+        var left = RunRules.EmergencySacrificeCards;
+        foreach (var stack in _ownedCards)
+        {
+            var take = Math.Min(stack.Count, left);
+            for (var i = 0; i < take; i++) names.Add(stack.Card.Name);
+            left -= take;
+            if (left == 0) break;
+        }
+        if (left > 0) throw new InvalidOperationException($"背包卡牌不足 {RunRules.EmergencySacrificeCards} 张，无法支付紧急撤离的代价。");
+        return names;
+    }
+
+    public void ExtractAtDoor() => ExtractAtDoor(null);
+
+    /// <summary>
+    /// 撤离（ported from game.run.altar.js openEmergencyModal）：
+    /// 第三层紧急撤离点——献祭 EmergencySacrificeCards 张背包卡牌后撤离；
+    /// 第四层终局撤离点——击败首脑后无条件放行（未击败则锁定）。
+    /// </summary>
+    public void ExtractAtDoor(IReadOnlyList<string>? sacrificeCardNames)
     {
         EnsurePhase(RunPhase.AwaitingDoor);
-        if (_pendingDoor is { IsExit: true }) Extract();
-        else if (Map.Layers[LayerIndex].RoomAt(TrackPosition).Type == RunRoomType.EmergencyExit)
+        var type = CurrentRoomType;
+        if (type == RunRoomType.EmergencyExit)
         {
-            if (Resources.Coins < RunRules.EmergencyExitCost) throw new InvalidOperationException("金币不足，无法紧急撤离。");
-            Resources.Coins -= RunRules.EmergencyExitCost; Extract();
+            var sacrifice = sacrificeCardNames ?? DefaultEmergencySacrifice();
+            if (sacrifice.Count != RunRules.EmergencySacrificeCards)
+                throw new InvalidOperationException($"紧急撤离需要献祭 {RunRules.EmergencySacrificeCards} 张背包卡牌。");
+            foreach (var name in sacrifice) RemoveOneInstance(name);
+            Extract();
+            return;
         }
-        else throw new InvalidOperationException("当前门不是撤离出口。");
+        if (type == RunRoomType.Extraction)
+        {
+            if (!BossKilled) throw new InvalidOperationException("撤离信标被污染核心压制——击败第四层的首脑后才能撤离。");
+            Extract();
+            return;
+        }
+        throw new InvalidOperationException("当前节点不是撤离点。");
     }
+
+    private void RemoveOneInstance(string cardName)
+    {
+        var stack = _ownedCards.FirstOrDefault(x => x.Card.Name == cardName)
+            ?? throw new InvalidOperationException($"背包中没有卡牌【{cardName}】。");
+        stack.Count--;
+        if (stack.Count == 0) _ownedCards.Remove(stack);
+    }
+
     public void EnterAltar() { EnsurePhase(RunPhase.Altar); }
     public void LeaveAltar() { EnsurePhase(RunPhase.Altar); Phase = RunPhase.Ready; }
-    public void ChallengeBoss(int index)
+
+    // ---------- 第四层终局：祭坛（弃 3 激活选奖励 / 2 碎片兑换）→ 首脑 → 终局撤离点 ----------
+    // ported from game.run.altar.js openAltarRitual/openAltarReward/openBossGate：
+    // 激活（或兑换）成功才算触发过本格；离开未激活可再来。首脑格必须先激活祭坛。
+
+    public const string AltarLockedMessage = "首脑被污染祭坛的辐射护盾庇护——先激活祭坛，再来挑战。";
+
+    /// <summary>弃 3 张背包卡牌激活祭坛（之后需 ChooseAltarReward 二选一）。</summary>
+    public void ActivateAltarByDiscard(IReadOnlyList<string> cardNames)
     {
         EnsurePhase(RunPhase.Altar);
+        if (AltarActivated) throw new InvalidOperationException("祭坛已经苏醒。");
+        if (cardNames is null || cardNames.Count != RunRules.AltarDiscardCards)
+            throw new InvalidOperationException($"需要弃掉 {RunRules.AltarDiscardCards} 张背包卡牌才能激活祭坛。");
+        foreach (var name in cardNames) RemoveOneInstance(name);
+        MarkAltarActivated();
+    }
+
+    /// <summary>献 2 枚彩色令牌碎片兑换本职业随机卡并激活祭坛（不弃牌）。
+    /// 职业卡池为空或背包已满时碎片原样保留并返回 false（网页版口径：先发牌后扣碎片）。</summary>
+    public bool ActivateAltarByFragments()
+    {
+        EnsurePhase(RunPhase.Altar);
+        if (AltarActivated) throw new InvalidOperationException("祭坛已经苏醒。");
+        if (Fragments < RunRules.AltarFragmentCost)
+            throw new InvalidOperationException($"彩色令牌碎片不足（现有 {Fragments}，需要 {RunRules.AltarFragmentCost} 枚）。");
+        if (_classCardPool.Count == 0) return false;
+        var card = _classCardPool[Rng.NextInt(_classCardPool.Count)];
+        if (!AddCard(card)) return false;
+        if (!TryConsumeFragments(RunRules.AltarFragmentCost)) return false;
+        MarkAltarActivated();
+        _altarRewardPending = false;   // 碎片兑换直接结算，没有二选一奖励
+        Phase = RunPhase.Ready;
+        return true;
+    }
+
+    /// <summary>激活后的奖励二选一：① 复原 3 张消耗卡 + 回复 10 血；② 随机传说卡 + 装备卡。</summary>
+    public void ChooseAltarReward(int index)
+    {
+        EnsurePhase(RunPhase.Altar);
+        if (!_altarRewardPending) throw new InvalidOperationException("祭坛尚未被激活。");
+        if (index is not (0 or 1)) throw new ArgumentOutOfRangeException(nameof(index));
+        _altarRewardPending = false;
+        if (index == 0)
+        {
+            Hp = Math.Min(MaxHp, Hp + RunRules.AltarRewardHeal);
+            RestoreFromPocket(RunRules.AltarRewardRestoreCards);
+        }
+        else
+        {
+            var legends = _lootCardPool.Where(c => c.Rarity == "传说").ToList();
+            var equips = _lootCardPool.Where(c => c.Semantic == RunCardSemantic.Equipment).ToList();
+            if (legends.Count > 0) AddCard(legends[Rng.NextInt(legends.Count)]);
+            if (equips.Count > 0) AddCard(equips[Rng.NextInt(equips.Count)]);
+        }
+        Phase = RunPhase.Ready;
+    }
+
+    /// <summary>献祭 1 张道具卡，从消耗口袋复原 2 张（不消耗祭坛、不影响其他献祭功能，可重复）。</summary>
+    public bool SacrificeItemAtAltar(string itemName)
+    {
+        EnsurePhase(RunPhase.Altar);
+        var stack = _ownedCards.FirstOrDefault(x => x.Card.Name == itemName && x.Card.Semantic == RunCardSemantic.Item);
+        if (stack is null) return false;
+        RemoveOneInstance(itemName);
+        RestoreFromPocket(RunRules.AltarItemRestoreCards);
+        return true;
+    }
+
+    private void MarkAltarActivated()
+    {
+        AltarActivated = true;
+        _visited.Add($"{LayerIndex},{TrackPosition}");   // 激活成功才消耗本格
+        _altarRewardPending = true;
+    }
+
+    /// <summary>从消耗口袋复原至多 maxCount 张（道具/装备类消耗不可复原；背包满即停，网页版口径）。</summary>
+    private void RestoreFromPocket(int maxCount)
+    {
+        for (var restored = 0; restored < maxCount;)
+        {
+            var next = _usedPocket.FirstOrDefault(x => x.Card.Semantic is not (RunCardSemantic.Item or RunCardSemantic.Equipment));
+            if (next is null) break;
+            if (!RestorePocketCard(next.Card.Name, 1)) break;
+            restored++;
+        }
+    }
+
+    /// <summary>挑战首脑（网页版 openBossGate：必须先激活祭坛；本格不锁定，击败后才消耗）。</summary>
+    public void ChallengeBoss(int index)
+    {
+        EnsurePhase(RunPhase.Ready);
+        if (Map.Layers[LayerIndex].TypeAt(TrackPosition) != RunRoomType.Boss)
+            throw new InvalidOperationException("只有首脑格可以挑战首脑。");
+        if (!AltarActivated) throw new InvalidOperationException(AltarLockedMessage);
+        if (BossKilled) throw new InvalidOperationException("首脑已被击败。");
         if (index < 0 || index >= Map.Bosses.Count) throw new ArgumentOutOfRangeException(nameof(index));
-        if (_defeatedBosses.Contains(index)) throw new InvalidOperationException("该首领已被击败。");
-        var b = Map.Bosses[index]; _encounter.Clear(); _encounter.Add(new RunEnemy(b.Id, b.Name, b.Hp, b.Attack, true)); Phase = RunPhase.Battle;
+        var b = Map.Bosses[index];
+        _encounter.Clear(); _encounter.Add(new RunEnemy(b.Id, b.Name, b.Hp, b.Attack, true));
+        _encounterRisk = RunRisk.Elite;
+        Phase = RunPhase.Battle;
     }
 
     private void EnterShop()
     {
-        _pendingDoor = Map.Layers[LayerIndex].DoorAt(TrackPosition);
+        // 四层图上商店格与层间门不共存（门是独立节点），离店即回待机
         var offers = new List<RunShopOffer>
         {
             new("rations", RunRoomType.Rations, 1, 2), new("wood", RunRoomType.Wood, 1, 1), new("key", RunRoomType.Key, 1, 8)
@@ -676,7 +871,7 @@ public sealed class RunState
         else Resources.Keys += offer.Quantity;
         _shop = _shop.Select(x => x.Id == id ? x with { Sold = true } : x).ToArray();
     }
-    public void LeaveShop() { EnsurePhase(RunPhase.Shop); Phase = _pendingDoor is not null ? RunPhase.AwaitingDoor : RunPhase.Ready; }
+    public void LeaveShop() { EnsurePhase(RunPhase.Shop); Phase = RunPhase.Ready; }
 
     public void ConsumeRation(int amount = 1)
     {
@@ -735,17 +930,17 @@ public sealed class RunState
     public void DebugSetPosition(int layer, int position)
     {
         if (layer < 0 || layer >= Map.Layers.Count) throw new ArgumentOutOfRangeException(nameof(layer));
-        if (position < 0 || position >= Map.Layers[layer].RingSize) throw new ArgumentOutOfRangeException(nameof(position));
+        if (position < 0 || position >= Map.Layers[layer].NodeCount) throw new ArgumentOutOfRangeException(nameof(position));
         if (Phase is not RunPhase.Ready) throw new InvalidOperationException("只能在待行动状态设置位置。");
         LayerIndex = layer; TrackPosition = position; _pendingDoor = null;
     }
 
     private static string Describe(RunRoomType type) => type switch
     {
-        RunRoomType.Coin => "拾取金币", RunRoomType.Wood => "拾取木材", RunRoomType.Rations => "拾取口粮",
-        RunRoomType.Key => "拾取神秘钥匙", RunRoomType.Battle => "遭遇战斗", RunRoomType.Event => "触发随机事件",
-        RunRoomType.Shop => "进入商店", RunRoomType.Campfire => "营火休整", RunRoomType.Chest => "发现宝箱",
-        RunRoomType.EmergencyExit => "抵达紧急撤离点", _ => "安全节点"
+        RunRoomType.Entrance => "入口营地", RunRoomType.Battle => "遭遇战斗", RunRoomType.Event => "触发随机事件",
+        RunRoomType.Shop => "进入补给站", RunRoomType.Campfire => "火堆休整", RunRoomType.Chest => "搜刮物资",
+        RunRoomType.EmergencyExit => "抵达紧急撤离点", RunRoomType.Door => "层间门", RunRoomType.Altar => "污染祭坛",
+        RunRoomType.Boss => "首脑巢穴", RunRoomType.Extraction => "终局撤离点", _ => "安全节点"
     };
     private void EnsurePhase(RunPhase expected) { if (Phase != expected) throw new InvalidOperationException($"当前状态为 {Phase}，需要 {expected}。"); }
 }
@@ -775,6 +970,20 @@ public static class RunRules
 
     /// <summary>rules.json 中没有对应字段的骨架局部常量。</summary>
     public const int CampfireRestorePocket = 2;
+
+    // —— 四层跑图定版常量（网页版 game.run.altar.js / flow 硬编码，未进 rules.json）——
+    /// <summary>紧急撤离点：撤离前必须献祭 3 张背包卡牌（openEmergencyModal）。</summary>
+    public const int EmergencySacrificeCards = 3;
+    /// <summary>祭坛：弃 3 张背包卡牌激活（openAltarRitual）。</summary>
+    public const int AltarDiscardCards = 3;
+    /// <summary>祭坛：2 枚彩色令牌碎片可不弃牌直接兑换（openAltarRitual）。</summary>
+    public const int AltarFragmentCost = 2;
+    /// <summary>祭坛奖励①：回复 10 血（openAltarReward）。</summary>
+    public const int AltarRewardHeal = 10;
+    /// <summary>祭坛奖励①：从消耗口袋复原 3 张（openAltarReward）。</summary>
+    public const int AltarRewardRestoreCards = 3;
+    /// <summary>献祭道具复原：1 张道具卡 → 消耗口袋复原 2 张（altarItemRestore）。</summary>
+    public const int AltarItemRestoreCards = 2;
 
     public static void Apply(GameRulesData rules)
     {
