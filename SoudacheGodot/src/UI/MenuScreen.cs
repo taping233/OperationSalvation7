@@ -22,18 +22,12 @@ public partial class MenuScreen : UiScreen
     private Control? _titleGhosts; // 标题层幽灵件（退出/静音/快速参考）——子页面覆盖时整层隐藏
     private SnowLayer _snow = null!;
     private string? _currentPage;
+    private string? _pendingSmokePage; // smoke 直开制作坊需等 BindCore（AppMain 在 _Ready 后才注入 ICoreUiPort）
     private Label _archiveNo = null!;
     private Label _archivePlaytime = null!;
     private Label _archiveExtracts = null!;
     private TextureButton? _muteButton;
     private HBoxContainer _slotDeck = null!;
-
-    public void BindCore(ICoreUiPort core)
-    {
-        if (_core != null) _core.SaveSlotsChanged -= ApplySaveSlots;
-        _core = core;
-        _core.SaveSlotsChanged += ApplySaveSlots;
-    }
 
     public override void _ExitTree()
     {
@@ -43,7 +37,7 @@ public partial class MenuScreen : UiScreen
     public override void _Ready()
     {
         base._Ready();
-        // 录帧/smoke 直开子页面：--ui-slots / --ui-settings / --ui-inbox
+        // 录帧/smoke 直开子页面：--ui-slots / --ui-settings / --ui-inbox / --ui-codex / --ui-workshop
         var args = OS.GetCmdlineUserArgs();
         if (System.Array.IndexOf(args, "--ui-slots") >= 0)
             OpenPage("slots", BuildSlotPage);
@@ -51,6 +45,22 @@ public partial class MenuScreen : UiScreen
             OpenPage("settings", BuildSettingsPage);
         else if (System.Array.IndexOf(args, "--ui-inbox") >= 0)
             OpenInbox();
+        else if (System.Array.IndexOf(args, "--ui-codex") >= 0)
+            OpenCodex();
+        else if (System.Array.IndexOf(args, "--ui-workshop") >= 0)
+            _pendingSmokePage = "workshop"; // BindCore 后再打开（制作坊需 ICoreUiPort）
+    }
+
+    public void BindCore(ICoreUiPort core)
+    {
+        if (_core != null) _core.SaveSlotsChanged -= ApplySaveSlots;
+        _core = core;
+        _core.SaveSlotsChanged += ApplySaveSlots;
+        if (_pendingSmokePage == "workshop")
+        {
+            _pendingSmokePage = null;
+            OpenWorkshop();
+        }
     }
 
     protected override void Build()
@@ -168,6 +178,9 @@ public partial class MenuScreen : UiScreen
         bannerTexts.AddChild(WinterUi.Label("Workshop", 11, new Color("9fb3a6")));
         bannerTexts.AddChild(WinterUi.Label("›", 22, new Color("cfd6cd")));
         bannerRow.AddChild(bannerTexts);
+        // 入口接线（对齐网页 boot.js:423 btnCardDesigner → openCardDesigner(null)）：
+        // Godot 制作坊 = 碎片合成制作界面（任务 6b' 口径 2）
+        banner.Pressed += OpenWorkshop;
         AddChild(banner);
 
         // —— 右上档案信息（ak-user） ——
@@ -201,7 +214,7 @@ public partial class MenuScreen : UiScreen
         AddChild(AkCircle("res://assets/images/ui/icon-medal.svg", "成就", "Achievement",
             new Vector2(64, 158), true, true, OpenTitleAchievements));
         AddChild(AkCircle("res://assets/images/ui/icon-lib.svg", "收藏图鉴", "Collection",
-            new Vector2(101, 513), false, false, null));
+            new Vector2(101, 513), false, false, OpenCodex));
         AddChild(AkCircle("res://assets/images/ui/icon-gear.svg", "设置", "Settings",
             new Vector2(180, 684), false, false, () => OpenPage("settings", BuildSettingsPage)));
 
@@ -813,6 +826,24 @@ public partial class MenuScreen : UiScreen
             button.Text = normalText;
             _audio?.PlaySfx("confirm");
         };
+    }
+
+    // ------------------------------------------------------------------
+    // 卡牌图鉴（game.cardslib.js openCardLibrary）与制作坊（boot.js btnCardDesigner 入口）
+    // ------------------------------------------------------------------
+
+    /// <summary>收藏图鉴：全卡库浏览（245 张，类型/稀有度/搜索筛选 + 24 张翻页 + 悬停大图预览）。</summary>
+    private void OpenCodex()
+    {
+        OpenPage("codex", () => new CodexPage().Build(_audio));
+    }
+
+    /// <summary>制作坊：碎片合成制作界面（TokenCraft/craft 语义，消费 RunUiSnapshot + RequestRunAction）。</summary>
+    private void OpenWorkshop()
+    {
+        var page = new WorkshopPage();
+        page.BindCore(_core ?? throw new System.InvalidOperationException("制作坊需要先绑定 ICoreUiPort"));
+        OpenPage("workshop", () => page.Build(_audio));
     }
 
     // ------------------------------------------------------------------
