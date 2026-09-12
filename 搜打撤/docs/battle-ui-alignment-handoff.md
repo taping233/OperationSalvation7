@@ -17,8 +17,8 @@
 |---|---|---|
 | A | 手牌区常驻化 | ✅ 已提交 `2743071`；**批次B 修复了它的隐藏坑**（见下方令牌机制），槽位差分自此才真正跨渲染生效 |
 | B | 单位区常驻化：玩家/敌人立绘、意图、血条、状态图标常驻节点 + 局部更新 | ✅ 已提交 `ccfdce6`，实机验证通过（结束回合-敌方阶段-出牌-墓地挂起返回，玩家/敌人/手牌槽位全链路同一 DOM 节点零报错） |
-| C | 交互收敛：click/drag/指向统一 interaction 状态机，`pendingTarget` 多语义收敛，取消幂等 | ⬅️ 下一批，从这里继续 |
-| D | Pixi 材质层 + 序列帧播放器（单位区接入；程序化位移走合成器，遵守性能三铁律） | 待做（依赖 B；帧图到位即接） |
+| C | 交互收敛：click/drag/指向统一 interaction 状态机，`pendingTarget` 多语义收敛，取消幂等 | ✅ 已提交 `edef44d`，实机验证通过（取消幂等三连调/砸击槽 begin-cancel-resolve 取消不扣费/click 管线出牌/targeting 挂起 endTurn 回归全过零报错） |
+| D | Pixi 材质层 + 序列帧播放器（单位区接入；程序化位移走合成器，遵守性能三铁律） | ⬅️ 下一批，从这里继续（依赖 B；帧图到位即接） |
 | E | 帧图批量抠图接入（part1 提示词包已交付；part2 等老板帧图） | 半成品 |
 | F | 出牌队列演出（卡牌飞行/队列结算/回合过渡）+ 总回归 | 待做 |
 
@@ -34,6 +34,9 @@
 - 扇形数学：`game/src/battle.hand.js` `fanLayout`（1~10 张标定表，handMax=8 契合 STS2 1-10 表）
 - 机制审计（P0/P1/P2 与验收标准）：`docs/sts2-combat-mechanism-audit.md`
 - 批次 C 拟动区域：`startAim/moveAim/endAim/cancelAim`（battle.view.js 指向施法段）与 battle.core 的 `pendingTarget/pendingItem/slamPending` 多语义收敛；批次 B 已把敌人点选 click 收进常驻槽位（点击时读实时快照），C 可沿用该模式
+- **统一交互槽（批次C）**：battle.core.js 三散落变量收敛为单一 `interaction = { kind:'card'|'item'|'slam', uid, card, hint }`——同刻至多一个交互；入场走 `beginCardTargeting`（卡牌指向，单槽顶替旧交互）/直接赋 item、slam 槽；出场只有 resolve*（结算后清槽）与 `cancelInteraction()`（幂等，无交互时 no-op；freeCast 卡取消后按原费留在手牌）。快照对视图仍派生 `pendingTarget/pendingItem/slamPending` 三个兼容字段（getSnapshot 内 `pTgt/pItem` 派生），视图读法不变、勿删
+- **endTurn 阶段雷（批次C 修复，勿回退）**：targeting 阶段挂着直接 endTurn 会抛 `targeting→enemy 非法迁移`——endTurn 开头硬清 interaction + `cancelTargeting`（不走 cancelInteraction，freeCast 簿记保留＝「直接释放」卡跨回合仍免费）
+- **统一交互 API（批次C，commands 新增）**：`beginCardInteraction/resolveCardInteraction`（=play，click 与 drag 共用）、`cancelCardInteraction`、`beginItemInteraction/resolveItemInteraction`、`beginSlamInteraction/resolveSlamInteraction`、`cancelInteraction`；视图 endAim 拖空取消已改无条件走幂等 cancel
 - 单位区 CSS：`.sts-hp i { transition: width .3s ease; }`（battle.css，批次B 加）——首帧填充由 JS 禁用过渡，勿删
 
 ## 验证口径（每批必做）
