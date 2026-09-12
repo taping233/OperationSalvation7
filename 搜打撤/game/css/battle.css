@@ -112,6 +112,8 @@
 .sts-you { display:inline-block; margin-left:6px; padding:0 7px; border:1px solid #8a8a8a; border-radius:2px;
   color:#d6d6d6; font-size:10.5px; vertical-align:1px; }
 .sts-hp { height:15px; margin-top:4px; }
+/* 批次B 单位区常驻化：血条变化走宽度过渡（STS2 式平滑掉血）；首次填充由 JS 禁用过渡 */
+.sts-hp i { transition: width .3s ease; }
 .sts-stats { color:#b9b9b9; font-size:11.5px; margin-top:3px; }
 .sts-stats .ic { width:12px; height:12px; vertical-align:-0.16em; }
 .sts-chips { margin-top:3px; line-height:1.8; }

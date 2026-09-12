@@ -20,8 +20,10 @@ const ALLOWED_TRANSITIONS = Object.freeze({
   [BATTLE_PHASES.DEFEAT]: new Set(),
 });
 
+let battleSeq = 0;
 function createBattleState(seed = {}) {
   return {
+    token: ++battleSeq,   // 战斗实例令牌：视图层常驻节点（手牌/单位区）跨渲染复用与换场重置的依据
     phase: BATTLE_PHASES.START,
     round: 1,
     energy: 0,

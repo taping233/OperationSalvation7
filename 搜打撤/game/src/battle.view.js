@@ -339,71 +339,6 @@ import { renderCombatPiles } from './battle.piles.view.js';
             </div>`).join('')
           : '<span class="bt-potions-empty">背包里没有道具</span>'}
       </div>` : '';
-    // —— 我方单位（左下站立；治疗/净化/护盾类卡牌的拖放目标） ——
-    // 2026-09-09 老板：轻点锁定+「已选卡牌」提示条+取消按钮退役，出牌只认拖拽指向（松手没目标自动回手牌）
-    const selfPct = Math.max(0, player.hp / player.maxHp * 100);
-    const selfChips = curseChips(pstat.status);   // 只构建一次（原来自条件+输出各调一次）
-    // 攻击力/法伤含加成显示（2026-09-09 留言 #2：人物图标下要能看到攻/法伤的变化）
-    const selfAtkBuff = pstat.status.atkUp || 0, selfSpBuff = pstat.status.spellUp || 0;
-    const selfAtkShow = (player.atk || 0) + selfAtkBuff;
-    const selfAtkTag = selfAtkBuff ? `<span title="含攻击强化 +${selfAtkBuff}">（含+${selfAtkBuff}）</span>` : '';
-    const selfSpShow = (player.spellPower || 0) + selfSpBuff;
-    const selfSpTag = selfSpShow > 0
-      ? ` · [[icon:crystal]] 法伤 ${selfSpShow}${selfSpBuff ? `<span title="含法术强化 +${selfSpBuff}">（含+${selfSpBuff}）</span>` : ''}` : '';
-    // 已穿戴装备（2026-09-09 老板 #9）：名称 + 说明 tooltip；带限定技能的可点击发动
-    const equipChips = (snapshot.equipped || []).map(e => e.skill
-      ? `<button class="sts-equip has-skill${e.used ? ' used' : ''}" data-act="btEquipSkill" data-uid="${escAttr(e.uid)}"
-          title="${escAttr(`【${e.name}】${e.desc}${e.used ? '（限定技能本场已用过）' : '——点击发动限定技能'}`)}">[[icon:tools]] ${esc(e.name)}${e.used ? '' : ' [[icon:bolt]]'}</button>`
-      : `<span class="sts-equip" title="${escAttr(`【${e.name}】${e.desc}`)}">[[icon:tools]] ${esc(e.name)}</span>`).join('');
-    const selfHTML = `
-      <div class="sts-unit sts-me" id="btSelf"
-        title="你自己——治疗 / 净化 / 护盾 / 格挡类卡牌拖到这里打出">
-        <div class="sts-figure">${player.myClass && SDT.Art.has(player.myClass) ? (SDT.Art.battleArt ? SDT.Art.battleArt(player.myClass) : SDT.Art.classArt(player.myClass)) : SDT.Icons.img('helmet')}</div>
-        <div class="sts-nameplate">
-          <b>${esc(characterName(player.characterId || player.myClass))}</b><span class="sts-you">你</span>
-          <div class="bt-hpwrap sts-hp"><i style="width:${selfPct.toFixed(1)}%"></i><span>${Math.max(0, player.hp)}/${player.maxHp}</span></div>
-          <div class="sts-stats">[[icon:swords]] ${selfAtkShow}${selfAtkTag}${selfSpTag}${pdef.shield ? ' · [[icon:shield]] 盾 ' + pdef.shield : ''}${pdef.armor ? ' · [[icon:plate]] 甲 ' + pdef.armor : ''}${pdef.guard ? ' · 格挡中' : ''}</div>
-          ${selfChips ? `<div class="sts-chips">${selfChips}</div>` : ''}
-          ${equipChips ? `<div class="sts-equips" title="已穿戴装备——鼠标悬停看说明，带 [[icon:bolt]] 的可点击发动限定技能">${equipChips}</div>` : ''}
-        </div>
-      </div>`;
-    // —— 随从位（Q4 老板定向：征召步兵等——替你承伤、每回合自动攻击） ——
-    const allies = snapshot.allies || [];
-    const alliesHTML = allies.length ? `
-      <div class="sts-allies">${allies.map((a, i) => `
-        <div class="sts-unit sts-ally${a.dead ? ' dead' : ''}" data-ally-i="${i}" title="${escAttr('你的随从：优先替你承受伤害，每回合自动攻击敌人')}">
-          <div class="sts-figure">${SDT.Icons.img('runner')}</div>
-          <div class="sts-nameplate">
-            <b>${esc(a.name)}</b>
-            <div class="bt-hpwrap sts-hp"><i style="width:${Math.max(0, a.hp / a.maxHp * 100).toFixed(1)}%"></i><span>${Math.max(0, a.hp)}/${a.maxHp}</span></div>
-            <div class="sts-stats">[[icon:swords]] ${a.atk}</div>
-          </div>
-        </div>`).join('')}</div>` : '';
-    // —— 敌方单位（右下站立横排；意图气泡在头顶；词缀角标；免伤高亮） ——
-    const foesHTML = foes.map((f, idx) => {
-      const aff = f.affix && AFFIX_META[f.affix];
-      const immune = aegisBlocked(f);
-      const chips = curseChips(f.status);   // 只构建一次（原来自条件+输出各调一次）
-      // 冰冻敌人显示专用意图图标（2026-09-09 玩法定版）：冰冻中无法行动，
-      // 用冰晶图标替换原攻击/蓄力预告，解冻后恢复正常意图显示
-      const frozen = !f.dead && f.status && (f.status.freeze || 0) > 0;
-      const intents = frozen
-        ? [{ icon: '[[icon:crystal]]', label: '冰冻·无法行动', damage: null, kind: 'frozen' }]
-        : intentViewModel(f.intent);
-      const intentTip = frozen ? '冰冻中——本回合无法行动' : `下一回合预告：${intentSummary(f.intent)}`;
-      return `<div class="sts-unit sts-foe bt-foe${opts.isBoss || f.affix ? ' is-boss' : ''}${f.dead ? ' dead' : ''}${immune ? ' aegis' : ''}${(pendingItem || slamPending) && !f.dead ? ' can-target' : ''}" data-foe-id="${escAttr(f.id || f.name)}"
-          data-eidx="${idx}" title="${aff ? escAttr(aff.name + '：' + aff.desc) : ''}">
-          ${!f.dead && intents.length ? `<div class="sts-intent" title="${escAttr(intentTip)}">${intents.map(intent => `${intent.icon} ${esc(intent.label)}${intent.damage == null ? '' : ` · ${intent.damage}`}`).join(' ')}</div>` : ''}
-          <div class="sts-figure">${f.id && SDT.Art.has(f.id) ? SDT.Art.monsterArt(f.id) : SDT.Icons.img('slime')}</div>
-          <div class="sts-nameplate">
-            <b>${esc(f.name)}</b>${f.dead ? ' <span class="bt-deadmark">[[icon:cross]]</span>' : ''}
-            ${aff ? `<span class="bt-affix" title="${escAttr(aff.desc)}">${aff.icon} ${aff.name}</span>` : ''}
-            <div class="bt-hpwrap sts-hp"><i style="width:${Math.max(0, f.hp / f.maxHp * 100).toFixed(1)}%"></i><span>${Math.max(0, f.hp)}/${f.maxHp}</span></div>
-            <div class="sts-stats">[[icon:swords]] ${f.atk}${f.affix === 'frenzy' ? ' ×2' : ''}${immune ? ' · [[icon:crystal]] 庇幕免伤中' : ''}</div>
-            ${chips ? `<div class="sts-chips">${chips}</div>` : ''}
-          </div>
-        </div>`;
-    }).join('');
     const battleAssetKey = opts.isBoss
       ? ({ boss_general: 'battle-boss-general', boss_orc: 'battle-boss-orc', boss_elem: 'battle-boss-element' }[foes[0] && foes[0].id] || 'battle-boss-general')
       : 'battle-normal';
@@ -426,9 +361,9 @@ import { renderCombatPiles } from './battle.piles.view.js';
         </div>
       </div>
       <div class="sts-arena">
-        ${selfHTML}
-        ${alliesHTML}
-        <div class="sts-foes">${foesHTML}</div>
+        <div data-unit-mount="self"></div>
+        <div class="sts-allies" data-unit-mount="allies"></div>
+        <div class="sts-foes" data-unit-mount="foes"></div>
       </div>
       ${infuseBar}
       ${itemBar}
@@ -476,25 +411,18 @@ import { renderCombatPiles } from './battle.piles.view.js';
     // —— 指向施法（炉石/杀戮尖塔式）：按住指向卡轻微拎起，弯曲箭头跟随指针 ——
     //    指向敌人 = 红色箭头，指向自己（立绘）= 绿色箭头；松手在目标身上即打出，
     //    松手没目标自动取消回手牌（轻点锁定流程已退役）。
-    body.querySelectorAll('.bt-foe[data-eidx]').forEach(el => {
-      el.addEventListener('click', () => {
-        // 背包砸击点选（需求 #9）：待砸时点敌人直接结算
-        if (slamPending) {
-          if (!el.classList.contains('dead')) resolveSlam(el.dataset.eidx);
-          return;
-        }
-        // 药水栏点选：待使用道具时点敌人直接结算
-        if (pendingItem) {
-          if (!el.classList.contains('dead')) useItemCmd(pendingItem.uid, el.dataset.eidx);
-        }
-      });
-    });
+    // 敌人点选（砸击/药水点选）已改在单位常驻层创建槽位时绑一次（见 mountUnitLayer），
+    // 不再随渲染重复挂——点击时读 getSnapshot() 实时态，避免闭包过期
     // 指向拖拽的 pointerdown 已在常驻槽位创建时绑定（见 updateHand），不再随渲染重复挂
     // 人物去纸色背景，像模型一样站在场景里（art.js 内按图缓存，二次渲染零成本）
     if (SDT.Art.cutoutFigures) SDT.Art.cutoutFigures(body);
     // 手牌常驻层挂载 + 差分更新（批次A）：出牌动画事件只取一次，常驻层与克隆飞行共用
     const animEvents = takeCardAnims();
-    mountHandLayer(body, tip);
+    // 单位区常驻层挂载 + 差分更新（批次B）：玩家/随从/敌人节点跨渲染复用（须在手牌层之前，
+    // 复用其 handSuspended 判定「战斗中弹层挂起 vs 战斗已收尾」）
+    const unitMounts = mountUnitLayer(body, snapshot.battleToken);
+    if (unitMounts) updateUnits(unitMounts, snapshot, { isBoss: opts.isBoss, pendingItem, slamPending });
+    mountHandLayer(body, tip, snapshot.battleToken);
     const handAnim = updateHand(snapshot, prevView, pageGroups, animEvents, { spellBonus, mode });
     // 牌局动画：离场克隆飞行 / 手牌区随回合显隐 / 能量与牌堆脉冲
     const anim = animateBattleTransition(prevView, body, animEvents, handAnim.flightMs);
@@ -536,6 +464,7 @@ import { renderCombatPiles } from './battle.piles.view.js';
   let handLayer = null;
   const handSlots = new Map();   // key -> { slot, card, sig, rect, isNew }
   let handSuspended = false;     // 墓地/背包/发现等战斗中弹层接管期间 = true（手牌被摘下但战斗未结束）
+  let battleToken = null;        // 战斗实例令牌（snapshot.battleToken）：换场重置常驻层的唯一依据
 
   function handSlotKey(g) {
     return (g.self ? 'self|' : '') + g.card.name + '|' + (g.card.desc || '');
@@ -616,16 +545,18 @@ import { renderCombatPiles } from './battle.piles.view.js';
     return { g, uid, side, cls, tip, inner };
   }
   // 挂载：把手牌常驻层接回刚重建的舞台（占位节点 → 常驻节点）。
-  // 脱离文档且不是战斗中弹层挂起 = 上一场战斗已收尾：清掉旧槽位再开新局。
-  function mountHandLayer(body, tip) {
+  // 战斗实例令牌变了 = 上一场战斗已收尾/新战斗开打：清掉旧槽位再开新局。
+  // （不能用 isConnected 判定——showOverlay 整块重建 ovBody，常驻层每次挂载前都脱离文档）
+  function mountHandLayer(body, tip, token) {
     const mount = body.querySelector('.sts-hud .sts-hand');
     if (!mount) return null;
     if (!handLayer) handLayer = document.createElement('div');
     handLayer.className = 'bt-hand sts-hand';
-    if (!handLayer.isConnected && !handSuspended) {
+    if (token !== battleToken) {
       handSlots.forEach(rec => rec.slot.remove());
       handSlots.clear();
     }
+    battleToken = token;
     handSuspended = false;
     handLayer.title = tip;   // 等价旧模板 title="${escAttr(tip)}"（DOM 属性自动转义）
     mount.replaceWith(handLayer);
@@ -740,6 +671,231 @@ import { renderCombatPiles } from './battle.piles.view.js';
       setTimeout(() => rec.slot.remove(), 240);
     });
     return { flightMs };
+  }
+
+  // ---------- 单位区常驻层（架构批次B：玩家/随从/敌人节点不随整屏重渲染重建） ----------
+  // 模式照抄手牌常驻层：ovBody 每次渲染整块重建，单位节点由本模块持有、showOverlay
+  // 之后 replaceWith/appendChild 挂回新舞台。立绘、血条、意图、状态角标都是常驻节点
+  // 内的局部差分更新（按序列化签名 diff，内容没变不重写 innerHTML，图片不重载），
+  // 受击抖动/死亡演出（CSS fx-die）/血条宽度过渡因此只播一次、不被重渲染腰斩。
+  let selfUnit = null, selfParts = null, selfSig = null;
+  const allySlots = new Map();   // key -> { slot, parts, sig }
+  const foeSlots = new Map();    // key -> { slot, parts, sig }
+
+  function mountUnitLayer(body, token) {
+    const selfMount = body.querySelector('[data-unit-mount="self"]');
+    const alliesMount = body.querySelector('[data-unit-mount="allies"]');
+    const foesMount = body.querySelector('[data-unit-mount="foes"]');
+    if (!selfMount || !alliesMount || !foesMount) return null;
+    // 战斗实例令牌变了 = 上一场战斗已收尾：清掉旧槽位再开新局（口径同手牌层；
+    // 不能用 isConnected 判定——ovBody 每次渲染整块重建，挂载前常驻节点必然脱离文档）
+    if (selfUnit && token !== battleToken) {
+      allySlots.forEach(rec => rec.slot.remove());
+      foeSlots.forEach(rec => rec.slot.remove());
+      allySlots.clear(); foeSlots.clear();
+      selfUnit = null; selfParts = null; selfSig = null;
+    }
+    battleToken = token;
+    if (!selfUnit) {
+      selfUnit = document.createElement('div');
+      selfUnit.className = 'sts-unit sts-me';
+      selfUnit.id = 'btSelf';
+      selfUnit.title = '你自己——治疗 / 净化 / 护盾 / 格挡类卡牌拖到这里打出';
+      selfParts = makeUnitSkeleton(selfUnit, { equips: true });
+      selfSig = {};
+    }
+    selfMount.replaceWith(selfUnit);
+    return { alliesMount, foesMount };
+  }
+  // 单位节点固定骨架：意图(敌) + 立绘 + 名牌(名号/血条/属性/状态角标/装备)，各段按签名差分
+  function makeUnitSkeleton(slot, opts = {}) {
+    const parts = {};
+    if (opts.intent) {
+      parts.intent = document.createElement('div');
+      parts.intent.className = 'sts-intent';
+      parts.intent.style.display = 'none';
+      slot.appendChild(parts.intent);
+    }
+    parts.fig = document.createElement('div');
+    parts.fig.className = 'sts-figure';
+    slot.appendChild(parts.fig);
+    const np = document.createElement('div');
+    np.className = 'sts-nameplate';
+    parts.head = document.createElement('div');
+    parts.hp = document.createElement('div');
+    parts.hp.className = 'bt-hpwrap sts-hp';
+    parts.hpBar = document.createElement('i');
+    parts.hpTxt = document.createElement('span');
+    parts.hp.appendChild(parts.hpBar);
+    parts.hp.appendChild(parts.hpTxt);
+    parts.stats = document.createElement('div');
+    parts.stats.className = 'sts-stats';
+    parts.chips = document.createElement('div');
+    parts.chips.className = 'sts-chips';
+    np.appendChild(parts.head); np.appendChild(parts.hp); np.appendChild(parts.stats); np.appendChild(parts.chips);
+    if (opts.equips) {
+      parts.equips = document.createElement('div');
+      parts.equips.className = 'sts-equips';
+      parts.equips.style.display = 'none';
+      np.appendChild(parts.equips);
+    }
+    slot.appendChild(np);
+    return parts;
+  }
+  // 差分工具：html 变了才重写 innerHTML
+  function setSection(el, sig, key, html) {
+    if (sig[key] === html) return;
+    sig[key] = html;
+    el.innerHTML = html;
+  }
+  // 血条局部更新：宽度过渡只在常驻节点上生效（重建结构下每次都是瞬时跳变）
+  function setUnitHP(parts, sig, hp, maxHp, instant) {
+    const pct = Math.max(0, hp / maxHp * 100).toFixed(1) + '%';
+    const txt = Math.max(0, hp) + '/' + maxHp;
+    if (sig.hpPct !== pct) {
+      sig.hpPct = pct;
+      if (instant) {   // 新节点首次填充：禁用过渡，避免从空/满状态滑到位
+        parts.hpBar.style.transition = 'none';
+        parts.hpBar.style.width = pct;
+        void parts.hpBar.offsetWidth;
+        parts.hpBar.style.transition = '';
+      } else parts.hpBar.style.width = pct;
+    }
+    if (sig.hpTxt !== txt) { sig.hpTxt = txt; parts.hpTxt.textContent = txt; }
+  }
+  function updateUnits(mounts, snapshot, ctx) {
+    updateSelfUnit(snapshot);
+    updateAllies(mounts.alliesMount, snapshot.allies || []);
+    updateFoes(mounts.foesMount, snapshot.foes || [], ctx);
+  }
+  function updateSelfUnit(snapshot) {
+    const { player, pdef, pstat, equipped } = snapshot;
+    const sig = selfSig;
+    setSection(selfParts.fig, sig, 'fig',
+      player.myClass && SDT.Art.has(player.myClass) ? (SDT.Art.battleArt ? SDT.Art.battleArt(player.myClass) : SDT.Art.classArt(player.myClass)) : SDT.Icons.img('helmet'));
+    setSection(selfParts.head, sig, 'head',
+      `<b>${esc(characterName(player.characterId || player.myClass))}</b><span class="sts-you">你</span>`);
+    setUnitHP(selfParts, sig, player.hp, player.maxHp, !sig.init);
+    // 攻击力/法伤含加成显示（2026-09-09 留言 #2：人物图标下要能看到攻/法伤的变化）
+    const atkBuff = pstat.status.atkUp || 0, spBuff = pstat.status.spellUp || 0;
+    const atkShow = (player.atk || 0) + atkBuff;
+    const atkTag = atkBuff ? `<span title="含攻击强化 +${atkBuff}">（含+${atkBuff}）</span>` : '';
+    const spShow = (player.spellPower || 0) + spBuff;
+    const spTag = spShow > 0
+      ? ` · [[icon:crystal]] 法伤 ${spShow}${spBuff ? `<span title="含法术强化 +${spBuff}">（含+${spBuff}）</span>` : ''}` : '';
+    setSection(selfParts.stats, sig, 'stats',
+      `[[icon:swords]] ${atkShow}${atkTag}${spTag}${pdef.shield ? ' · [[icon:shield]] 盾 ' + pdef.shield : ''}${pdef.armor ? ' · [[icon:plate]] 甲 ' + pdef.armor : ''}${pdef.guard ? ' · 格挡中' : ''}`);
+    setSection(selfParts.chips, sig, 'chips', curseChips(pstat.status));
+    // 已穿戴装备（2026-09-09 老板 #9）：名称 + 说明 tooltip；带限定技能的可点击发动
+    const equipsHTML = (equipped || []).map(e => e.skill
+      ? `<button class="sts-equip has-skill${e.used ? ' used' : ''}" data-act="btEquipSkill" data-uid="${escAttr(e.uid)}"
+          title="${escAttr(`【${e.name}】${e.desc}${e.used ? '（限定技能本场已用过）' : '——点击发动限定技能'}`)}">[[icon:tools]] ${esc(e.name)}${e.used ? '' : ' [[icon:bolt]]'}</button>`
+      : `<span class="sts-equip" title="${escAttr(`【${e.name}】${e.desc}`)}">[[icon:tools]] ${esc(e.name)}</span>`).join('');
+    setSection(selfParts.equips, sig, 'equips', equipsHTML);
+    selfParts.equips.style.display = equipsHTML ? '' : 'none';
+    sig.init = true;
+  }
+  // 随从位（Q4 老板定向：征召步兵等——替你承伤、每回合自动攻击）
+  function updateAllies(mount, allies) {
+    mount.style.display = allies.length ? '' : 'none';
+    const ordered = [];
+    const seen = {};
+    allies.forEach((a, i) => {
+      const base = a.name || ('ally' + i);
+      seen[base] = (seen[base] || 0) + 1;
+      const key = base + '#' + seen[base];
+      let rec = allySlots.get(key);
+      if (!rec) {   // 断连的旧槽位直接复用（末尾 appendChild 挂回），弹层返回后仍是同一节点
+        const slot = document.createElement('div');
+        slot.className = 'sts-unit sts-ally';
+        slot.title = '你的随从：优先替你承受伤害，每回合自动攻击敌人';
+        rec = { slot, parts: makeUnitSkeleton(slot), sig: {}, key };
+        allySlots.set(key, rec);
+      }
+      rec.slot.classList.toggle('dead', !!a.dead);
+      rec.slot.dataset.allyI = i;
+      setSection(rec.parts.fig, rec.sig, 'fig', SDT.Icons.img('runner'));
+      setSection(rec.parts.head, rec.sig, 'head', `<b>${esc(a.name)}</b>`);
+      setUnitHP(rec.parts, rec.sig, a.hp, a.maxHp, !rec.sig.init);
+      setSection(rec.parts.stats, rec.sig, 'stats', `[[icon:swords]] ${a.atk}`);
+      setSection(rec.parts.chips, rec.sig, 'chips', '');
+      rec.sig.init = true;
+      ordered.push(rec);
+    });
+    // 移除消失的随从 + 按数组序重排（appendChild 已连接节点只是搬移，不重建）
+    const kept = new Set(ordered.map(r => r.key));
+    allySlots.forEach((rec, key) => {
+      if (!kept.has(key)) { rec.slot.remove(); allySlots.delete(key); }
+    });
+    ordered.forEach(rec => mount.appendChild(rec.slot));
+  }
+  // 敌方单位（右下站立横排；意图气泡在头顶；词缀角标；免伤高亮）
+  function updateFoes(mount, foes, ctx) {
+    const ordered = [];
+    const seen = {};
+    foes.forEach((f, idx) => {
+      const base = f.id || f.name || ('foe' + idx);
+      seen[base] = (seen[base] || 0) + 1;
+      const key = base + '#' + seen[base];
+      let rec = foeSlots.get(key);
+      if (!rec) {   // 断连的旧槽位直接复用（末尾 appendChild 挂回），弹层返回后仍是同一节点
+        const slot = document.createElement('div');
+        slot.className = 'sts-unit sts-foe bt-foe';
+        rec = { slot, parts: makeUnitSkeleton(slot, { intent: true }), sig: {}, key };
+        // 常驻节点只绑一次点击：砸击/药水点选（需求 #9 / 药水栏）——点击时读实时快照防闭包过期
+        slot.addEventListener('click', () => {
+          const snap = getSnapshot();
+          if (snap.slamPending) {
+            if (!slot.classList.contains('dead')) resolveSlam(slot.dataset.eidx);
+            return;
+          }
+          if (snap.pendingItem && !slot.classList.contains('dead')) useItemCmd(snap.pendingItem.uid, slot.dataset.eidx);
+        });
+        foeSlots.set(key, rec);
+      }
+      const slot = rec.slot, parts = rec.parts, sig = rec.sig;
+      const aff = f.affix && AFFIX_META[f.affix];
+      const immune = aegisBlocked(f);
+      slot.classList.toggle('is-boss', !!(ctx.isBoss || f.affix));
+      slot.classList.toggle('dead', !!f.dead);
+      slot.classList.toggle('aegis', !!immune);
+      slot.classList.toggle('can-target', !!(ctx.pendingItem || ctx.slamPending) && !f.dead);
+      slot.dataset.foeId = f.id || f.name;
+      slot.dataset.eidx = idx;
+      slot.title = aff ? aff.name + '：' + aff.desc : '';
+      // 残留的指向预览气泡清掉（常驻节点上它不会随重建消失）
+      const fp = slot.querySelector('.bt-fpreview');
+      if (fp) fp.remove();
+      // 冰冻敌人显示专用意图图标（2026-09-09 玩法定版）：冰冻中无法行动，
+      // 用冰晶图标替换原攻击/蓄力预告，解冻后恢复正常意图显示
+      const frozen = !f.dead && f.status && (f.status.freeze || 0) > 0;
+      const intents = frozen
+        ? [{ icon: '[[icon:crystal]]', label: '冰冻·无法行动', damage: null, kind: 'frozen' }]
+        : intentViewModel(f.intent);
+      const intentTip = frozen ? '冰冻中——本回合无法行动' : `下一回合预告：${intentSummary(f.intent)}`;
+      if (!f.dead && intents.length) {
+        setSection(parts.intent, sig, 'intent',
+          intents.map(intent => `${intent.icon} ${esc(intent.label)}${intent.damage == null ? '' : ` · ${intent.damage}`}`).join(' '));
+        if (sig.intentTip !== intentTip) { sig.intentTip = intentTip; parts.intent.title = intentTip; }
+        parts.intent.style.display = '';
+      } else parts.intent.style.display = 'none';
+      setSection(parts.fig, sig, 'fig', f.id && SDT.Art.has(f.id) ? SDT.Art.monsterArt(f.id) : SDT.Icons.img('slime'));
+      setSection(parts.head, sig, 'head',
+        `<b>${esc(f.name)}</b>${f.dead ? ' <span class="bt-deadmark">[[icon:cross]]</span>' : ''}` +
+        (aff ? `<span class="bt-affix" title="${escAttr(aff.desc)}">${aff.icon} ${aff.name}</span>` : ''));
+      setUnitHP(parts, sig, f.hp, f.maxHp, !sig.init);
+      setSection(parts.stats, sig, 'stats',
+        `[[icon:swords]] ${f.atk}${f.affix === 'frenzy' ? ' ×2' : ''}${immune ? ' · [[icon:crystal]] 庇幕免伤中' : ''}`);
+      setSection(parts.chips, sig, 'chips', curseChips(f.status));
+      sig.init = true;
+      ordered.push(rec);
+    });
+    // 移除消失的敌人 + 按数组序重排
+    const kept = new Set(ordered.map(r => r.key));
+    foeSlots.forEach((rec, key) => {
+      if (!kept.has(key)) { rec.slot.remove(); foeSlots.delete(key); }
+    });
+    ordered.forEach(rec => mount.appendChild(rec.slot));
   }
 
   // ---------- 战斗特效（v0.32.2）：伤害/受击飘字 + 受击抖动 + 红闪 ----------

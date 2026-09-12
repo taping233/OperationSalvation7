@@ -2188,7 +2188,7 @@ import { emit as busEmit } from './event-bus.js';
   const STATUS_SIG_KEYS = [...Combat.CURSES, ...Combat.BUFFS];   // status 全部数值键（bleed/poison 已含在 CURSES）
   const statusSig = (st) => st ? STATUS_SIG_KEYS.map(k => k + ':' + (st[k] || 0)).join(',') : '';
   function snapshotSignature() {
-    const sig = [mode, turn, energy, maxEnergy, busy, opts,
+    const sig = [battleState.token, mode, turn, energy, maxEnergy, busy, opts,
       pendingHint, viewingGrave, viewingBag, dreadShown, selectingDeck, selShaN, handSelectQueue.length,
       spellCost1, meleeCost1, shaTransform, consumeFireballN, lastPlayedType,
       stealthStrike, choiceQueue.length, slamPending, freeCast.size];
@@ -2260,6 +2260,7 @@ import { emit as busEmit } from './event-bus.js';
       boss: readonlyFoes[0] || null,
     }) : null;
     snapCache = Object.freeze({
+      battleToken: battleState.token,   // 战斗实例令牌：视图层常驻节点换场重置依据
       mode, turn, energy, maxEnergy, busy, phase: battleState.phase,
       actionQueueLength: actionQueue.length,
       opts: freezeObject(opts),
