@@ -15,9 +15,9 @@
 
 | 批次 | 内容 | 状态 |
 |---|---|---|
-| A | 手牌区常驻化 | ✅ 已提交 `2743071`，实机验证通过（出牌→发现链→敌方阶段沉升，手牌层同一 DOM 节点零报错） |
-| B | 单位区常驻化：玩家/敌人立绘、意图、血条、状态图标常驻节点 + 局部更新 | ⬅️ 下一批，从这里继续 |
-| C | 交互收敛：click/drag/指向统一 interaction 状态机，`pendingTarget` 多语义收敛，取消幂等 | 待做（依赖 A） |
+| A | 手牌区常驻化 | ✅ 已提交 `2743071`；**批次B 修复了它的隐藏坑**（见下方令牌机制），槽位差分自此才真正跨渲染生效 |
+| B | 单位区常驻化：玩家/敌人立绘、意图、血条、状态图标常驻节点 + 局部更新 | ✅ 已提交 `ccfdce6`，实机验证通过（结束回合-敌方阶段-出牌-墓地挂起返回，玩家/敌人/手牌槽位全链路同一 DOM 节点零报错） |
+| C | 交互收敛：click/drag/指向统一 interaction 状态机，`pendingTarget` 多语义收敛，取消幂等 | ⬅️ 下一批，从这里继续 |
 | D | Pixi 材质层 + 序列帧播放器（单位区接入；程序化位移走合成器，遵守性能三铁律） | 待做（依赖 B；帧图到位即接） |
 | E | 帧图批量抠图接入（part1 提示词包已交付；part2 等老板帧图） | 半成品 |
 | F | 出牌队列演出（卡牌飞行/队列结算/回合过渡）+ 总回归 | 待做 |
@@ -26,12 +26,15 @@
 
 - `game/src/battle.view.js`：
   - 常驻层机制 = `handLayer` / `handSlots` / `handSuspended`（搜索「手牌常驻层」注释块）
-  - `mountHandLayer(body, tip)`：showOverlay 后 replaceWith 挂回；战斗中弹层挂起（handSuspended=true，在 6 个早退分支里设置；deckSelection 分支=false 允许重置）
+  - `mountHandLayer(body, tip, token)`：showOverlay 后 replaceWith 挂回；**重置判定=战斗令牌变更（见下），勿改回 isConnected**
   - `updateHand(snapshot, prev, pageGroups, events, extra)`：差分更新 + 目标值补间 + 新牌飞入；`handGroupState(g, ctx)` 单叠状态计算；内容按 `st.inner` 字符串签名 diff
+  - **单位区常驻层（批次B）**：`mountUnitLayer(body, token)` / `updateUnits → updateSelfUnit / updateAllies / updateFoes`；`makeUnitSkeleton` 固定骨架（意图+立绘+名牌四段），各段按签名 diff；`setUnitHP` 血条局部更新（首次填充禁过渡）；敌人点选 click 在槽位创建时绑一次，点击时读 `getSnapshot()` 实时态防闭包过期；常驻节点上每次渲染清残留 `.bt-fpreview`
+  - **换场重置令牌（批次B，修批次A隐藏坑）**：`battle.state.js createBattleState` 发自增 `token` → `battle.core.js` 快照带 `battleToken`（snapshotSignature 也含它）→ view 层 `battleToken` 变量比对。不能用 `isConnected` 判定换场——showOverlay 整块重建 ovBody，常驻节点每次挂载前必然脱离文档，按它判定会每帧误重置（批次A因此槽位差分实际失效）
   - `animateBattleTransition(prev, body, events, extraFlightMs)`：只剩克隆飞行/能量与牌堆脉冲/阶段沉升；`takeCardAnims()` 在 render 里取一次共享
 - 扇形数学：`game/src/battle.hand.js` `fanLayout`（1~10 张标定表，handMax=8 契合 STS2 1-10 表）
 - 机制审计（P0/P1/P2 与验收标准）：`docs/sts2-combat-mechanism-audit.md`
-- 批次 B 拟动区域：render() 里 `selfHTML / alliesHTML / foesHTML`（battle-stage 内 .sts-arena），模式照抄 A：单位节点常驻、hp/意图/chips 签名 diff、受击/死亡动画挂在常驻节点上（现在 spawnFloats 里的 figEl 查询可复用）
+- 批次 C 拟动区域：`startAim/moveAim/endAim/cancelAim`（battle.view.js 指向施法段）与 battle.core 的 `pendingTarget/pendingItem/slamPending` 多语义收敛；批次 B 已把敌人点选 click 收进常驻槽位（点击时读实时快照），C 可沿用该模式
+- 单位区 CSS：`.sts-hp i { transition: width .3s ease; }`（battle.css，批次B 加）——首帧填充由 JS 禁用过渡，勿删
 
 ## 验证口径（每批必做）
 
