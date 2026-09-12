@@ -1307,10 +1307,10 @@ import { renderCombatPiles } from './battle.piles.view.js';
       return;
     }
     // 拖了但没拖到目标 = 取消：卡牌沿弹性过渡自动落回手牌（2026-09-09 老板：
-    // 松手没指向目标就回手牌，不再停在锁定态）。此前轻点锁定过的才需要清目标+提示条
-    // （会触发一次重渲染）；直接拖空的常见路径不动 DOM，落回动画保持完整。
+    // 松手没指向目标就回手牌，不再停在锁定态）。cancelInteraction 幂等（批次C）：
+    // 无进行中交互（普通卡拖空）时是 no-op，不动 DOM，落回动画保持完整。
     // 轻点（位移<6px）仍走 click → play() 的锁定流程
-    if (a.snap && a.snap.pendingTarget) cancelPendingTarget();
+    cancelPendingTarget();
   }
   function cancelAim() {
     window.removeEventListener('pointermove', moveAim, true);

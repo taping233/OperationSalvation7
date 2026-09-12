@@ -48,7 +48,15 @@ import { emit as busEmit } from './event-bus.js';
   const choiceQueue = [];
   let stealthStrike = false;             // 「破隐一击伤害翻倍」战斗规则（白梅落影·妄）
   let nextSpellTwice = 0;                // 「下一张法术施放 N 次」（元素风暴）
-  let pendingTarget = null;  // 已锁定待拖拽的出牌 {uid, card}（必须拖到目标身上）
+  // —— 批次C：统一交互槽（审计 P1「删除 pendingTarget 的多重语义」）——
+  // 「等待目标」的三种语义收敛为一个槽：kind 'card'=指向性卡牌 / 'item'=药水点选 / 'slam'=背包砸击。
+  // 同一时刻至多一个进行中交互；入场只走 begin*（新交互自动顶替旧交互）；出场只有两条路：
+  // resolve*（带目标结算后清槽）与 cancelInteraction（幂等，任何时机可调，无交互时 no-op）。
+  // 快照对视图仍派生 pendingTarget / pendingItem / slamPending 三个兼容字段，视图读法不变。
+  let interaction = null;        // { kind:'card'|'item'|'slam', uid, card, hint }
+  const interactionOf = (kind) => (interaction && interaction.kind === kind ? interaction : null);
+  const pendingTargetOf = () => { const i = interactionOf('card'); return i ? { uid: i.uid, card: i.card } : null; };
+  const pendingItemOf = () => { const i = interactionOf('item'); return i ? { uid: i.uid, card: i.card } : null; };
   let pendingHint = '';      // 拖拽提示（拖错目标时给出纠正文案）
   let delayed = [];          // 「回合开始时」延迟效果 [{text, cardName, repeat}]（repeat=装备每回合触发）
   let noDrawNext = false;    // 「下回合无法抽牌」标记（下个回合开始消耗掉）
@@ -82,10 +90,8 @@ import { emit as busEmit } from './event-bus.js';
   let poisonOnSpell = false;     // 毒杖：每打出 1 张法术 → 随机敌附加中毒
   let zeroFeeUntil = new Map();  // 自然法杖：uid → 0 费生效到的回合数（含）
   let cardOverrides = new Map(); // 不变应万变：uid → 战斗内替身卡（不污染背包原卡）
-  let pendingItem = null;        // 药水栏：待点选敌人的道具 {uid, card}（瞬态选择，不入存档）
   let equipped = [];             // 已穿戴装备（2026-09-09 老板 #9）：{uid, card, used}，used = 限定技能是否已用
   let freeCast = new Set();      // 需求 #17：「直接释放」的临时卡 uid（打出免费用，仍需选目标）
-  let slamPending = false;       // 需求 #9：背包砸击点选目标中（2 费 · 4 点固定伤害 · 不消耗卡牌）
 
   const R = () => SDT.MAP.rules;
   const alive = () => foes.filter(f => !f.dead);
@@ -972,7 +978,7 @@ import { emit as busEmit } from './event-bus.js';
       Combat.ensureStatus(f);
       return f;
     });
-    pendingTarget = null;
+    interaction = null;
     SDT.Sound.music('battle');   // 切入战斗氛围
     G.state = 'modal';
     const names = foes.map(f => `${f.name}(${f.atk}-${f.hp})`).join('、');
@@ -991,7 +997,7 @@ import { emit as busEmit } from './event-bus.js';
     turn = 1; busy = false;
     pdef = { shield: 0, armor: 0, guard: false };
     pstat = Combat.ensureStatus({ hp: G.hp });
-    infusing = null; discovering = null; discoverQueue = []; handSelecting = null; handSelectQueue.length = 0; pendingTarget = null; floats = []; cardAnims = [];
+    infusing = null; discovering = null; discoverQueue = []; handSelecting = null; handSelectQueue.length = 0; interaction = null; floats = []; cardAnims = [];
     choosing = null; choiceQueue.length = 0; stealthStrike = false; nextSpellTwice = 0;
     delayed = []; noDrawNext = false; spellCost1 = false; meleeCost1 = false;
     shaTransform = null; consumeFireballN = 0; lastDrawnUids = []; lastPlayedType = null;
@@ -1011,9 +1017,8 @@ import { emit as busEmit } from './event-bus.js';
     allies = []; growthNames = new Set(); growth = {};
     infuseFuels = 0; sealUnlocked = false; extraTurn = false; deathSave = 0;
     killAtkUp = 0; poisonOnSpell = false; zeroFeeUntil = new Map(); cardOverrides = new Map();
-    pendingItem = null;
+    interaction = null;
     freeCast = new Set();
-    slamPending = false;
     equipped = [];
     playedMartialThisTurn = 0;   // 追斩计数跨战不残留
     playedMovesThisTurn = 0;     // 连续射击计数跨战不残留
@@ -1074,7 +1079,7 @@ import { emit as busEmit } from './event-bus.js';
     turn = 1; busy = false;
     pdef = { shield: 0, armor: 0, guard: false };
     pstat = Combat.ensureStatus({ hp: G.hp });
-    infusing = null; discovering = null; discoverQueue = []; pendingTarget = null; floats = []; cardAnims = [];
+    infusing = null; discovering = null; discoverQueue = []; interaction = null; floats = []; cardAnims = [];
     handSelecting = null; handSelectQueue.length = 0;
     choosing = null; choiceQueue.length = 0; stealthStrike = false; nextSpellTwice = 0;
     delayed = []; noDrawNext = false; spellCost1 = false; meleeCost1 = false;
@@ -1109,7 +1114,7 @@ import { emit as busEmit } from './event-bus.js';
   }
 
   function play(uid, side) {
-    pendingItem = null;   // 打出手牌时取消药水栏点选
+    if (interactionOf('item')) interaction = null;   // 打出手牌时取消药水点选（单槽幂等清 item）
     if (busy || infusing || discovering || choosing || viewingGrave) return;
     const entry = findCard(uid);
     if (!entry) return;
@@ -1134,15 +1139,15 @@ import { emit as busEmit } from './event-bus.js';
     let target = null;
     const isFree = freeCast.has(uid);
     if (need === 'enemy') {
-      if (side == null || side === 'self') { pendingTarget = { uid, card }; battleState = beginTargeting(battleState, uid, alive().map(foe => foe.id)); pendingHint = ''; requestBattleRender(); return; }
+      if (side == null || side === 'self') { beginCardTargeting(uid, card, alive().map(foe => foe.id)); return; }
       target = foes[+side];
-      if (!target || target.dead) { pendingTarget = { uid, card }; battleState = beginTargeting(battleState, uid, alive().map(foe => foe.id)); pendingHint = ''; requestBattleRender(); return; }
+      if (!target || target.dead) { beginCardTargeting(uid, card, alive().map(foe => foe.id)); return; }
     } else if (need === 'self') {
-      if (side !== 'self') { pendingTarget = { uid, card }; battleState = beginTargeting(battleState, uid, ['self']); pendingHint = ''; requestBattleRender(); return; }
+      if (side !== 'self') { beginCardTargeting(uid, card, ['self']); return; }
     } else {
       target = alive()[0] || null;
     }
-    pendingTarget = null;
+    if (interactionOf('card')) interaction = null;   // 交互正常结算：清卡牌槽（不 cancelTargeting，RESOLVING 迁移接管阶段）
     pendingHint = '';
     freeCast.delete(uid);
     // 「杀化为X」战斗规则：打出的初始攻击以目标卡形态结算（uid 沿用，弃牌簿记不变）
@@ -1159,10 +1164,7 @@ import { emit as busEmit } from './event-bus.js';
   function freeCastTarget(uid, card) {
     const need = targetSide(card);
     if (need === 'enemy' && alive().length > 1) {
-      pendingTarget = { uid, card };
-      battleState = beginTargeting(battleState, uid, alive().map(foe => foe.id));
-      pendingHint = `直接释放：把【${card.name}】拖到一名敌人身上（不消耗费用）`;
-      requestBattleRender();
+      beginCardTargeting(uid, card, alive().map(foe => foe.id), `直接释放：把【${card.name}】拖到一名敌人身上（不消耗费用）`);
       return false;   // 目标未定，暂不执行
     }
     return true;   // 单敌 / 自身 / 无目标：直接执行
@@ -1577,7 +1579,7 @@ import { emit as busEmit } from './event-bus.js';
       const n = alive().length;
       if (!n) { G.log('[[icon:cross]] 场上没有敌人可以使用', 'warn'); return; }
       if (n > 1) {
-        pendingItem = { uid: entry.uid, card };
+        interaction = { kind: 'item', uid: entry.uid, card, hint: '' };
         G.log(`[[icon:flask]] <b>${esc(card.name)}</b>：点击一名敌人使用（或把它拖到敌人身上）`, 'sys');
         requestBattleRender();
         return;
@@ -1595,16 +1597,16 @@ import { emit as busEmit } from './event-bus.js';
   // 不消耗卡牌，2 费造成 4 点固定伤害；点击按钮后点选一名敌人结算
   function bagSlam() {
     if (busy || infusing || discovering || choosing || handSelecting || viewingGrave || selectingDeck) return;
-    if (slamPending) { cancelSlam(); return; }
+    if (interactionOf('slam')) { cancelSlam(); return; }
     if (energy < 2) { G.log('[[icon:bolt]] 能量不足：背包砸击需要 2 点能量', 'warn'); return; }
     if (!alive().length) { G.log('[[icon:cross]] 场上没有敌人可以砸击', 'warn'); return; }
-    slamPending = true;
+    interaction = { kind: 'slam', uid: null, card: null, hint: '' };
     G.log('[[icon:bag]] <b>背包砸击</b>：点击一名敌人砸下（2 费 · 4 点固定伤害 · 不消耗卡牌）', 'sys');
     requestBattleRender();
   }
-  function cancelSlam() { slamPending = false; requestBattleRender(); }
+  function cancelSlam() { cancelInteraction(); }
   function resolveSlam(side) {
-    slamPending = false;
+    if (interactionOf('slam')) interaction = null;
     if (energy < 2) { G.log('[[icon:bolt]] 能量不足：背包砸击需要 2 点能量', 'warn'); requestBattleRender(); return; }
     const t = (side != null && foes[+side] && !foes[+side].dead) ? foes[+side] : alive()[0];
     if (!t) return;
@@ -1626,7 +1628,7 @@ import { emit as busEmit } from './event-bus.js';
       const n = alive().length;
       if (!n) { G.log('[[icon:cross]] 场上没有敌人可以使用', 'warn'); return; }
       if (n > 1) {
-        pendingItem = { uid: entry.uid, card: entry.card };
+        interaction = { kind: 'item', uid: entry.uid, card: entry.card, hint: '' };
         G.log(`[[icon:flask]] <b>${esc(entry.card.name)}</b>：点击一名敌人使用（或把它拖到敌人身上）`, 'sys');
         requestBattleRender();
         return;
@@ -1836,8 +1838,14 @@ import { emit as busEmit } from './event-bus.js';
   // ---------- 回合结束 ----------
   function endTurn() {
     if (busy || infusing || discovering || choosing) return;
-    pendingItem = null;   // 结束回合同时取消药水栏点选
-    slamPending = false;
+    if (interaction && interaction.kind !== 'card') interaction = null;   // 结束回合取消药水点选/砸击（卡牌指向在转入敌方阶段时清）
+    // 批次C：指向性卡牌的 targeting 阶段若还挂着（直接释放未选目标 / 拖到死目标），
+    // 必须先清掉——否则 targeting→enemy 是非法迁移，endTurn 直接抛错卡死。
+    // 这里硬清槽位、不走 cancelInteraction：freeCast 簿记保留（「直接释放」卡跨回合仍免费）
+    if (battleState.phase === BATTLE_PHASES.TARGETING) {
+      interaction = null; pendingHint = '';
+      battleState = cancelTargeting(battleState);
+    }
     busy = true;
     // —— 额外回合（命运钟表 C7）：跳过敌方阶段，直接刷新为你的下一个回合 ——
     if (extraTurn) {
@@ -1860,7 +1868,7 @@ import { emit as busEmit } from './event-bus.js';
       return;
     }
     battleState = transitionBattle(battleState, BATTLE_PHASES.ENEMY);
-    pendingTarget = null;
+    interaction = null;
     pendingHint = '';
     // —— 玩家回合结束：中毒 / 灼烧结算 ——
     const pref = { hp: G.hp, defense: pdef, status: pstat.status };
@@ -2122,7 +2130,7 @@ import { emit as busEmit } from './event-bus.js';
     cardOverrides = new Map(data.cardOverrides || []);
     infusing = null; discovering = null; discoverQueue.length = 0;
     handSelecting = null; handSelectQueue.length = 0; choosing = null; choiceQueue.length = 0;
-    pendingTarget = null; pendingHint = ''; floats = []; cardAnims = [];
+    interaction = null; pendingHint = ''; floats = []; cardAnims = [];
     viewingGrave = false; selectingDeck = false; viewingBag = false;
     sel = new Set(); selPool = []; selShaN = 0;
     busy = false;
@@ -2151,7 +2159,7 @@ import { emit as busEmit } from './event-bus.js';
     drawPile = []; hand = []; discard = []; granted = []; grave = [];
     floats = []; cardAnims = [];
     sel = new Set();
-    infusing = null; discovering = null; discoverQueue = []; pendingTarget = null; floats = []; cardAnims = [];
+    infusing = null; discovering = null; discoverQueue = []; interaction = null; floats = []; cardAnims = [];
     handSelecting = null; handSelectQueue.length = 0;
     choosing = null; choiceQueue.length = 0; stealthStrike = false; nextSpellTwice = 0;
     delayed = []; noDrawNext = false; spellCost1 = false; meleeCost1 = false;
@@ -2191,7 +2199,7 @@ import { emit as busEmit } from './event-bus.js';
     const sig = [battleState.token, mode, turn, energy, maxEnergy, busy, opts,
       pendingHint, viewingGrave, viewingBag, dreadShown, selectingDeck, selShaN, handSelectQueue.length,
       spellCost1, meleeCost1, shaTransform, consumeFireballN, lastPlayedType,
-      stealthStrike, choiceQueue.length, slamPending, freeCast.size];
+      stealthStrike, choiceQueue.length, !!interactionOf('slam'), freeCast.size];
     if (G) sig.push(G.hp, G.maxHp, G.atk, G.spellPower || 0, G.myClass || '', G.characterId || '');
     if (pdef) sig.push(pdef.shield, pdef.armor, pdef.guard);
     sig.push(statusSig(pstat && pstat.status), pstat ? pstat.hp : 0);
@@ -2209,13 +2217,15 @@ import { emit as busEmit } from './event-bus.js';
     if (G && !selectingDeck) {
       const groups = new Map();
       battleBagItems().forEach(o => groups.set(o.card.name, (groups.get(o.card.name) || 0) + 1));
-      sig.push([...groups].map(([n, c]) => n + 'x' + c).join('|'), pendingItem ? pendingItem.uid : '', 'en' + alive().length);
+      const pItem = pendingItemOf();
+      sig.push([...groups].map(([n, c]) => n + 'x' + c).join('|'), pItem ? pItem.uid : '', 'en' + alive().length);
     }
     if (infusing) sig.push(infusing.uid, infusing.need, infusing.card, infusing.picked.size, [...infusing.picked].sort().join(','));
     if (discovering) sig.push(discovering.n, discovering.rarity, discovering.options.length);
     if (handSelecting) sig.push(handSelecting.n, handSelecting.type, handSelecting.act, handSelecting.thenText);
     if (choosing) sig.push(choosing.cardName, choosing.options.join('|'));
-    if (pendingTarget) sig.push(pendingTarget.uid, pendingTarget.card);
+    const pTgt = pendingTargetOf();
+    if (pTgt) sig.push(pTgt.uid, pTgt.card);
     // 已穿戴装备（老板 #9）：穿戴/技能已用状态变化都要重渲染
     sig.push('eq' + equipped.map(e => e.uid + (e.used ? '1' : '0')).join(','));
     if (selectingDeck) sig.push(sel.size, [...sel].sort().join(','), selPool.length,
@@ -2227,6 +2237,8 @@ import { emit as busEmit } from './event-bus.js';
     const sig = snapshotSignature();
     if (snapCache && sig === snapSig) return snapCache;
     snapSig = sig;
+    const pTgt = pendingTargetOf();
+    const pItem = pendingItemOf();
     const freezeObject = value => value ? Object.freeze({ ...value }) : value;
     const statusOf = value => value ? Object.freeze({ ...value.status }) : null;
     const playerStatus = pstat ? Object.freeze({ ...pstat, status: statusOf(pstat) }) : null;
@@ -2277,7 +2289,7 @@ import { emit as busEmit } from './event-bus.js';
       discovering: readonlyDiscovering,
       handSelecting: readonlyHandSelecting,
       choosing: readonlyChoosing,
-      pendingTarget: pendingTarget ? Object.freeze({ ...pendingTarget, card: freezeObject(pendingTarget.card) }) : null,
+      pendingTarget: pTgt ? Object.freeze({ ...pTgt, card: freezeObject(pTgt.card) }) : null,
       pendingHint,
       viewingGrave,
       viewingBag,
@@ -2292,8 +2304,8 @@ import { emit as busEmit } from './event-bus.js';
         }
         return acc;
       }, []).map(freezeObject)) : null,
-      pendingItem: pendingItem ? Object.freeze({ ...pendingItem, card: freezeObject(pendingItem.card) }) : null,
-      slamPending,
+      pendingItem: pItem ? Object.freeze({ ...pItem, card: freezeObject(pItem.card) }) : null,
+      slamPending: !!interactionOf('slam'),
       // 已穿戴装备（老板 #9）：名称 + 说明 + 限定技能文本（skill 非空即显示技能按钮）
       equipped: Object.freeze(equipped.map(e => Object.freeze({
         uid: e.uid, name: e.card.name, desc: String(e.card.desc || ''),
@@ -2304,15 +2316,27 @@ import { emit as busEmit } from './event-bus.js';
   }
 
   function openGrave() { viewingGrave = true; requestBattleRender(); }
-  function cancelPendingTarget() {
-    if (pendingTarget && freeCast.has(pendingTarget.uid)) freeCast.delete(pendingTarget.uid);   // 取消后留在手牌按原费打出
-    pendingTarget = null;
-    pendingItem = null;   // 药水栏点选一并取消
-    slamPending = false;
-    battleState = cancelTargeting(battleState); pendingHint = ''; requestBattleRender();
+  // 统一幂等取消（批次C）：一次调用清掉整个交互槽，无交互时 no-op。
+  // 直接释放/freeCast 的卡取消后留在手牌按原费打出（原 cancelPendingTarget 语义）。
+  function cancelInteraction() {
+    if (!interaction && battleState.phase !== BATTLE_PHASES.TARGETING) return;
+    const i = interaction;
+    interaction = null;
+    if (i && i.kind === 'card' && freeCast.has(i.uid)) freeCast.delete(i.uid);
+    pendingHint = '';
+    battleState = cancelTargeting(battleState);
+    requestBattleRender();
+  }
+  function cancelPendingTarget() { cancelInteraction(); }
+  // 统一交互入场（批次C）：指向性卡牌进入「等待目标」，单槽顶替旧交互
+  function beginCardTargeting(uid, card, targetIds, hint) {
+    interaction = { kind: 'card', uid, card, hint: hint || '' };
+    battleState = beginTargeting(battleState, uid, targetIds);
+    pendingHint = hint || '';
+    requestBattleRender();
   }
   function setPendingHint(value) { pendingHint = String(value || ''); requestBattleRender(); }
-  function lockPendingTarget(value) { pendingTarget = value; pendingHint = ''; requestBattleRender(); }
+  function lockPendingTarget(value) { interaction = value ? { kind: 'card', uid: value.uid, card: value.card, hint: '' } : null; pendingHint = ''; requestBattleRender(); }
   function markDreadShown() { dreadShown = true; }
   function takeFloats() { const list = floats; floats = []; return list; }
   function takeCardAnims() { const list = cardAnims; cardAnims = []; return list; }
@@ -2346,6 +2370,16 @@ import { emit as busEmit } from './event-bus.js';
     pickChoice,
     setPendingHint,
     lockPendingTarget,
+    // —— 批次C：统一交互 API（审计 P1：click/drag/controller 共用一条管线）——
+    // begin=验证并进入等待目标（无需目标则直接结算）；resolve=带目标结算；cancel=幂等取消
+    beginCardInteraction: play,
+    resolveCardInteraction: play,
+    cancelCardInteraction: cancelPendingTarget,
+    beginItemInteraction: usePotion,
+    resolveItemInteraction: useItem,
+    beginSlamInteraction: bagSlam,
+    resolveSlamInteraction: resolveSlam,
+    cancelInteraction,
   });
 
 const viewApi = Object.freeze({
