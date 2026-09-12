@@ -644,12 +644,14 @@ function configureGameRuntime(hooks) {
     rations: '#7fdd9c', door: '#c9b28a', entrance: '#52d273',
     extraction: '#52d273', emergencyExit: '#52d273', altar: '#b77ad8', boss: '#ff5a50',
   };
-  function renderMiniMap() {
+  export function renderMiniMap() {
     const cv = document.getElementById('miniMap');
     if (!cv) return;
     const ctx = cv.getContext('2d');
     // 内部分辨率跟随 CSS 显示尺寸（dpr 缩放），内部/显示比例一致才不会拉伸变形
     const rect = cv.getBoundingClientRect();
+    // A 1px backing canvas created while the sidebar is hidden becomes a stretched gold block.
+    if (rect.width < 2 || rect.height < 2) return;
     const dpr = window.devicePixelRatio || 1;
     const W = Math.max(1, Math.round(rect.width * dpr));
     const H = Math.max(1, Math.round(rect.height * dpr));
@@ -658,12 +660,14 @@ function configureGameRuntime(hooks) {
     const li = game.layerIdx;
     const ld = game.layerData?.[li];
     const pts = game.nodePos?.[li];
-    if (!ld || !pts) return;
+    if (!ld || !pts?.length) return;
     const seen = game.seen || {};
     const seenAt = (i) => seen[li + ',' + i] === 1;
-    // 本层包围盒 → 画布内留边适配（保持纵横比）；pad 按短边比例留白更从容
-    const minX = Math.min(...pts.map(p => p.x)), maxX = Math.max(...pts.map(p => p.x));
-    const minY = Math.min(...pts.map(p => p.y)), maxY = Math.max(...pts.map(p => p.y));
+    // 只框定已揭开的地图，未知远端不应把当前路线挤成角落里的几个像素。
+    const revealed = pts.filter((_, i) => seenAt(i) || i === game.trackPos);
+    if (!revealed.length) return;
+    const minX = Math.min(...revealed.map(p => p.x)), maxX = Math.max(...revealed.map(p => p.x));
+    const minY = Math.min(...revealed.map(p => p.y)), maxY = Math.max(...revealed.map(p => p.y));
     const spanX = Math.max(1, maxX - minX), spanY = Math.max(1, maxY - minY);
     const pad = Math.min(W, H) * 0.16;
     const s = Math.min((W - pad * 2) / spanX, (H - pad * 2) / spanY);
@@ -730,9 +734,8 @@ function configureGameRuntime(hooks) {
     game.hop = 0;
     game.state = 'idle';
     if (cam) {
-      // 每次新局、跨层或读档都以当前层全貌为镜头目标，避免只聚焦入口导致
-      // 主体被裁到右侧、顶部留下大片空白。旧版 Camera 没有 fitLayer 时保留 focus 兜底。
-      const fitted = typeof cam.fitLayer === 'function' && cam.fitLayer(game, 128);
+      // Focus on the currently available choices; unexplored map bounds no longer shrink them.
+      const fitted = cam.frameExploration?.(game);
       if (!fitted) { cam.cx = game.pos.x; cam.cy = game.pos.y; cam.clamp(); }
     }
     const f = curLayer();
@@ -746,5 +749,6 @@ function configureGameRuntime(hooks) {
 export { FX, MAP, MODES, SLOT_COUNT, bagCap, buildDerived, cam, canAcceptCard, canvas, cardStacks, cellCenter, clearSave, configureGameRuntime, ctx, curLayer, doDeath, dpr, markSeen, safeCap, enterLayer, exitToTitle, gainCoins, game, hasRun, migrateOldSave, modeCfg, newRun, newUid, openSettings, pick, quitGame, rndDice, safeUsed, saveGame, scaledEnemy, setLobby, showTitle, startNewGame, syncPlayTime, usedSlots, weighted };
 const _set_dpr = (v) => { dpr = v; };
 export { _set_dpr };
+export const getActiveSlot = () => activeSlot;
 const _set_cam = (v) => { cam = v; };
 export { _set_cam };

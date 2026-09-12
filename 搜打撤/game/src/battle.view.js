@@ -11,6 +11,7 @@ import { groupHandCards, fanLayout } from './battle.hand.js';
 import { intentSummary, intentViewModel } from './battle.intents.js';
 import { FEEDBACK_DELTA_MS, feedbackClass, feedbackDelay } from './battle.feedback.js';
 import { renderCombatPiles } from './battle.piles.view.js';
+import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFrames } from './battle.frames.js';
 
   // 状态角标：祝福（绿）+ 诅咒（红）——2026-09-11 架构批次 1 自 battle.core 外迁（纯视图函数）
   function statusChips(status) {
@@ -210,8 +211,27 @@ import { renderCombatPiles } from './battle.piles.view.js';
   // 旧手牌位——点中候选卡的瞬间记下它的屏幕矩形，让新卡从「被选中的那张卡」飞回手牌
   let discoverSrcRect = null;
 
+  function combatStateCopy(snapshot) {
+    const { phase = 'player', energy = 0, hand = [], infusing, choosing, handSelecting,
+      pendingTarget, pendingItem, slamPending, busy } = snapshot;
+    if (busy || phase === 'enemy') return { label: '敌方行动', detail: '敌人正在行动，准备迎接下一轮攻势。', tone: 'foe' };
+    if (infusing) return { label: '注能中', detail: '选择手牌作为燃料，或点“取消注能”返回。', tone: 'focus' };
+    if (choosing || handSelecting) return { label: '选择中', detail: '完成当前选择后才能继续行动。', tone: 'focus' };
+    if (pendingTarget || pendingItem || slamPending) return { label: '选择目标', detail: '点击右侧敌人确认目标，或再次点击当前动作取消。', tone: 'focus' };
+    // Resolve UID entries exactly as the hand renderer does, including per-card cost overrides.
+    const handCards = hand.map(entry => entry && typeof entry === 'object' ? entry : findCard(entry)).filter(Boolean);
+    const playable = handCards.some(entry => {
+      if (unplayableReason(entry.card)) return false;
+      return effCostOf(entry.card, entry.uid) <= energy;
+    });
+    if (playable) return { label: '你的行动', detail: '点选手牌后点击目标 · 支持拖拽 · 1–9 选牌 · Esc 取消', tone: 'self' };
+    if (energy > 0) return { label: '你的行动', detail: '当前没有可用卡牌，可以检查手牌或结束回合。', tone: 'warn' };
+    return { label: '你的行动', detail: '能量已耗尽，结束回合让敌人行动。', tone: 'warn' };
+  }
+
   function render(snapshot = getSnapshot()) {
     const prevView = captureBattleView();   // 重建前的手牌/牌堆位：供飞行与归位动画取样
+    if (snapshot.phase !== 'player' || snapshot.busy) clickSelectedUid = null;
     const {
       mode, turn, energy, maxEnergy, busy, phase = 'player', opts, player, pdef, pstat,
       foes, hand, drawPile, discard, grave, infusing, discovering, handSelecting, choosing,
@@ -219,6 +239,10 @@ import { renderCombatPiles } from './battle.piles.view.js';
       potionBar, pendingItem, slamPending,
     } = snapshot;
     if (aim) cancelAim();   // 重渲染时中止进行中的指向（DOM 将重建）
+    // 战斗中弹层接管（墓地/背包/抉择/选牌/发现）：序列帧层挂在 overlay 直下不随 ovBody
+    // 销毁，不藏会浮在弹层之上（09-12 实机：背包弹层上残留玩家序列帧立绘）——
+    // 卸下 sprite 恢复静态立绘，关闭弹层走主渲染 attach 自动恢复
+    if (viewingGrave || viewingBag || choosing || handSelecting || discovering) hideUnitFrames();
     if (deckSelection) { handSuspended = false; renderDeckSelection(snapshot); return; }   // 战前编组：允许下次挂载时重置手牌层
     if (viewingGrave) { handSuspended = true; renderGrave(snapshot); return; }
     if (viewingBag) { handSuspended = true; renderBattleBag(snapshot); return; }
@@ -301,7 +325,7 @@ import { renderCombatPiles } from './battle.piles.view.js';
     const pilesHTML = pileView.rest;
     const tip = mode === 'boss'
       ? `开局抽 ${R().battleStartDraw} · 每回合开始抽 ${R().battleTurnDraw} · 弃牌堆抽空后自动洗回 · 墓地（被消耗的牌）不洗回`
-      : '普通战斗无需抽牌 ·「抽 N 张牌」效果改为获得 N 张初始攻击 · 指向卡须拖到目标身上（[[icon:swords]]敌人 · [[icon:heart]]自己）；无对敌效果的招式拖到敌我中间空地即可';
+      : '普通战斗无需抽牌 ·「抽 N 张牌」效果改为获得 N 张初始攻击 · 指向卡可点击选中后再点目标，也可直接拖拽（[[icon:swords]]敌人 · [[icon:heart]]自己）；无对敌效果的招式点击即可打出';
     const infuseBar = infusingNow ? `
       <div class="bt-infuse">
         [[icon:flask]] <b>注能(${infusing.need})</b>：选择 <b>${infusing.need}</b> 张手牌消耗，才能打出【${esc(infusing.card.name)}】
@@ -342,25 +366,25 @@ import { renderCombatPiles } from './battle.piles.view.js';
     const battleAssetKey = opts.isBoss
       ? ({ boss_general: 'battle-boss-general', boss_orc: 'battle-boss-orc', boss_elem: 'battle-boss-element' }[foes[0] && foes[0].id] || 'battle-boss-general')
       : 'battle-normal';
+    const combatState = combatStateCopy(snapshot);
     UI.showOverlay(`${opts.isBoss ? '[[icon:demon]] BOSS战' : '[[icon:swords]] 遭遇战'} · 第 ${turn} 回合`, `
-      <div class="battle-stage sts phase-${escAttr(phase)}" data-phase="${escAttr(phase)}" data-asset-key="${battleAssetKey}">
+      <div class="battle-stage sts phase-${escAttr(phase)}" data-phase="${escAttr(phase)}" data-asset-key="${battleAssetKey}" data-boss="${opts.isBoss ? '1' : '0'}">
       <div class="battle-stage-shade"></div>
       ${potionsHTML}
       <div class="sts-topbar">
+        <div class="sts-encounter">
+          <span class="sts-encounter-kicker">${opts.isBoss ? '冬核深处 · 首脑遭遇' : '冬境街区 · 遭遇'}</span>
+          <b>第 ${turn} 回合</b><span class="sts-phase-dot ${escAttr(combatState.tone)}"></span><span>${esc(combatState.label)}</span>
+        </div>
         <div class="sts-hud-l">
           ${drawPileHTML}
         </div>
         <div class="sts-hud-r">
           ${pilesHTML}
-          <button class="ov-btn ghost${slamPending ? ' ok' : ''}" data-act="btSlam" ${busy || infusingNow || energy < 2 ? 'disabled' : ''}
-            title="背包砸击：不消耗卡牌，2 费造成 4 点固定伤害（点击后再点一名敌人）">[[icon:bag]] 砸击 2</button>
-          ${mode === 'boss' ? '' : `<button class="ov-btn ghost" data-act="btBag" ${busy || infusingNow ? 'disabled' : ''}>[[icon:bag]] 背包</button>
-          <button class="ov-btn ghost" data-act="btFlee" ${busy || infusingNow ? 'disabled' : ''}
-            title="撤离将视为本局失败（安全格中的卡牌会抢运回基地，其余丢失）">[[icon:runner]] 撤离（判负）</button>`}
-          <button class="ov-btn ${busy || infusingNow ? '' : 'ok'}" data-act="btEnd" ${busy || infusingNow ? 'disabled' : ''}>[[icon:skip]] 结束回合</button>
         </div>
       </div>
       <div class="sts-arena">
+        <div class="sts-arena-caption" aria-live="polite"><b>${esc(combatState.label)}</b><span>${esc(combatState.detail)}</span></div>
         <div data-unit-mount="self"></div>
         <div class="sts-allies" data-unit-mount="allies"></div>
         <div class="sts-foes" data-unit-mount="foes"></div>
@@ -375,17 +399,28 @@ import { renderCombatPiles } from './battle.piles.view.js';
         ${handPages > 1 ? `<button class="bt-hand-page" data-act="btHandPage"
           title="手牌分栏：每栏最多 ${HAND_PAGE_SIZE} 叠，放不下的进第二栏——点击切换第一栏/第二栏">[[icon:cards]] 第 ${handPage + 1}/${handPages} 栏</button>` : ''}
         <div class="bt-hand sts-hand"></div>
+        <div class="sts-tactics" aria-label="战术操作">
+          <div class="sts-tactics-secondary">
+            <button class="ov-btn ghost${slamPending ? ' ok' : ''}" data-act="btSlam" ${busy || infusingNow || energy < 2 ? 'disabled' : ''}
+              title="背包砸击：不消耗卡牌，2 费造成 4 点固定伤害（点击后再点一名敌人）">[[icon:bag]] 砸击 2</button>
+            ${mode === 'boss' ? '' : `<button class="ov-btn ghost" data-act="btBag" ${busy || infusingNow ? 'disabled' : ''}>[[icon:bag]] 背包</button>
+            <button class="ov-btn ghost" data-act="btFlee" ${busy || infusingNow ? 'disabled' : ''}
+              title="撤离将视为本局失败（安全格中的卡牌会抢运回基地，其余丢失）">[[icon:runner]] 撤离（判负）</button>`}
+          </div>
+          <button class="ov-btn ${busy || infusingNow ? '' : 'ok'} sts-end-turn" data-act="btEnd" ${busy || infusingNow ? 'disabled' : ''}>[[icon:skip]] 结束回合</button>
+        </div>
       </div>`, 'battle');
+    const caption = document.querySelector('.sts-arena-caption span');
+    if (caption) caption.dataset.battleDetail = combatState.detail;
     // 手牌分栏切换（2026-09-10 留言 #27）
     UI.act('btHandPage', () => { handPage = (handPage + 1) % handPages; render(); });
     // sts-note 底部说明行已删（留言 2026-09-06：把下面的文字都去掉）
     UI.act('btPlay', (d) => {
       if (Date.now() - aimPlayedAt < 300) return;   // 指向松手刚打出，忽略残留 click
       if (infusingNow) return toggleInfusePick(d.uid);
-      const el = document.querySelector(`.sts-hand .bt-card[data-uid="${CSS.escape(d.uid)}"]`);
-      // 指向性卡只认拖拽指向：轻点不锁定（2026-09-09 老板），松手没目标自动回手牌；
-      // side 'any'（无对敌效果）轻点即打出（2026-09-09 老板 #7）
-      if (el && el.dataset.aim && el.dataset.side !== 'any') return;
+      const el = [...document.querySelectorAll('.sts-hand .bt-card')].find(x => x.dataset.uid === d.uid);
+      // 指向性卡支持点击选中，再点击目标；无目标卡保持点击即出牌。
+      if (el && el.dataset.aim && el.dataset.side !== 'any') return selectCardByClick(d.uid);
       play(d.uid);
     });
     UI.act('btEnd', endTurn);
@@ -415,13 +450,14 @@ import { renderCombatPiles } from './battle.piles.view.js';
     // 不再随渲染重复挂——点击时读 getSnapshot() 实时态，避免闭包过期
     // 指向拖拽的 pointerdown 已在常驻槽位创建时绑定（见 updateHand），不再随渲染重复挂
     // 人物去纸色背景，像模型一样站在场景里（art.js 内按图缓存，二次渲染零成本）
-    if (SDT.Art.cutoutFigures) SDT.Art.cutoutFigures(body);
     // 手牌常驻层挂载 + 差分更新（批次A）：出牌动画事件只取一次，常驻层与克隆飞行共用
     const animEvents = takeCardAnims();
     // 单位区常驻层挂载 + 差分更新（批次B）：玩家/随从/敌人节点跨渲染复用（须在手牌层之前，
     // 复用其 handSuspended 判定「战斗中弹层挂起 vs 战斗已收尾」）
     const unitMounts = mountUnitLayer(body, snapshot.battleToken);
     if (unitMounts) updateUnits(unitMounts, snapshot, { isBoss: opts.isBoss, pendingItem, slamPending });
+    if (SDT.Art.cutoutFigures) SDT.Art.cutoutFigures(body);
+    attachUnitFrames(body);   // 批次D：玩家立绘切序列帧（无帧集/降动效自动跳过）
     mountHandLayer(body, tip, snapshot.battleToken);
     const handAnim = updateHand(snapshot, prevView, pageGroups, animEvents, { spellBonus, mode });
     // 牌局动画：离场克隆飞行 / 手牌区随回合显隐 / 能量与牌堆脉冲
@@ -500,11 +536,11 @@ import { renderCombatPiles } from './battle.piles.view.js';
       : blocked
         ? `[[icon:cross]] 无法打出：${blocked}`
         : side === 'enemy'
-        ? `费用 ${effCost}${costTip} · 拖到敌人身上打出`
+        ? `费用 ${effCost}${costTip} · 点击选中后点敌人，也可拖到敌人身上打出`
         : side === 'self'
-          ? `费用 ${effCost}${costTip} · 拖到左侧「你」的立绘上（治疗 / 净化 / 护盾）`
+          ? `费用 ${effCost}${costTip} · 点击选中后点自己，也可拖到左侧人物（治疗 / 净化 / 护盾）`
           : side === 'any'
-            ? `费用 ${effCost}${costTip} · 拖到敌我中间的空地即可打出（没有对敌效果，无需指定目标）`
+            ? `费用 ${effCost}${costTip} · 点击直接打出，也可拖到战场空地（无需指定目标）`
             : `费用 ${effCost}${costTip} · 点击出牌` +
               (infuseOf(g.card) > 0 ? ` · 点卡面「注能」角标可消耗 ${infuseOf(g.card)} 张手牌强化效果（不点则直接打出弱效果）` : '');
     const badge = side === 'enemy' ? '<span class="bt-tt">[[icon:swords]]</span>'
@@ -600,13 +636,16 @@ import { renderCombatPiles } from './battle.piles.view.js';
       const zoomed = rec.card.classList.contains('zoomed');   // 双击放大态跨渲染保留
       rec.card.className = 'bt-card' + st.cls
         + (st.side === 'enemy' || st.side === 'self' ? ' need-target' : '')
-        + (st.side === 'any' ? ' free-drop' : '');
+        + (st.side === 'any' ? ' free-drop' : '')
+        + (clickSelectedUid === st.uid ? ' click-selected' : '');
       if (zoomed) rec.card.classList.add('zoomed');
       rec.card.dataset.uid = st.uid;
+      rec.card.dataset.handIndex = String((i % HAND_PAGE_SIZE) + 1);
       rec.card.dataset.act = 'btPlay';
       rec.card.dataset.aim = st.side ? '1' : '';
       rec.card.dataset.side = st.side || '';
       rec.card.setAttribute('title', st.tip);
+      rec.card.setAttribute('aria-pressed', clickSelectedUid === st.uid ? 'true' : 'false');
       if (rec.sig !== st.inner) { rec.card.innerHTML = st.inner; rec.sig = st.inner; }
       ordered.push(rec);
     });
@@ -701,6 +740,11 @@ import { renderCombatPiles } from './battle.piles.view.js';
       selfUnit.className = 'sts-unit sts-me';
       selfUnit.id = 'btSelf';
       selfUnit.title = '你自己——治疗 / 净化 / 护盾 / 格挡类卡牌拖到这里打出';
+      selfUnit.addEventListener('click', () => {
+        const snap = getSnapshot();
+        if (snap.pendingItem || snap.slamPending) return;
+        clickSelectedTarget('self');
+      });
       selfParts = makeUnitSkeleton(selfUnit, { equips: true });
       selfSig = {};
     }
@@ -849,8 +893,18 @@ import { renderCombatPiles } from './battle.piles.view.js';
             if (!slot.classList.contains('dead')) resolveSlam(slot.dataset.eidx);
             return;
           }
-          if (snap.pendingItem && !slot.classList.contains('dead')) useItemCmd(snap.pendingItem.uid, slot.dataset.eidx);
+          if (snap.pendingItem) {
+            if (!slot.classList.contains('dead')) useItemCmd(snap.pendingItem.uid, slot.dataset.eidx);
+            return;
+          }
+          if (!slot.classList.contains('dead')) clickSelectedTarget('enemy', +slot.dataset.eidx);
         });
+        slot.addEventListener('mouseenter', () => {
+          if (clickSelectedUid == null || slot.classList.contains('dead')) return;
+          const entry = findCard(clickSelectedUid);
+          if (entry && targetSide(entry.card) === 'enemy') showFoePreview(slot, +slot.dataset.eidx, entry.card, getSnapshot());
+        });
+        slot.addEventListener('mouseleave', () => clearFoePreview(slot));
         foeSlots.set(key, rec);
       }
       const slot = rec.slot, parts = rec.parts, sig = rec.sig;
@@ -914,27 +968,31 @@ import { renderCombatPiles } from './battle.piles.view.js';
         ? body.querySelector('#btSelf .sts-figure')
         : body.querySelector(`.sts-foe[data-eidx="${f.unit}"] .sts-figure`);
       if (!figEl) return;
+      const reduced = !!SDT.Motion?.reduceMotion();
+      const stk = (f.cls || '').includes('stk');
+      const damage = !f.warm && !stk && !(f.cls || '').includes('block');
+      // Healing and expression stickers must never trigger damage shake or a red hurt flash.
+      if (damage && !reduced) playUnitFrames(isSelf ? 'hurt' : 'atk');
       // 受击反馈：单位抖动；自己掉血再叠一层全屏红闪
-      const motionHandled = SDT.Motion && SDT.Motion.hit(figEl, isSelf);
-      if (!motionHandled) {
+      const motionHandled = damage && !reduced && SDT.Motion && SDT.Motion.hit(figEl, isSelf);
+      if (damage && !reduced && !motionHandled) {
         figEl.classList.add(isSelf ? 'fx-hit-self' : 'fx-hit');
         setTimeout(() => figEl.classList.remove(isSelf ? 'fx-hit-self' : 'fx-hit'), 480);
       }
-      if (SDT.VisualFX) SDT.VisualFX.burstAtElement(figEl, {
+      if (!reduced && !stk && SDT.VisualFX) SDT.VisualFX.burstAtElement(figEl, {
         color: f.warm ? 0x61d69b : (isSelf ? 0xff6659 : 0xffb34d),
         count: f.warm ? 10 : 14,
       });
-      if (isSelf) hurtFlash(ov);
+      if (isSelf && damage && !reduced) hurtFlash(ov);
       if (f.warm) {   // 治疗暖色滤镜（表情反馈·零美术）
         figEl.classList.add('fx-warm');
         setTimeout(() => figEl.classList.remove('fx-warm'), 950);
       }
-      const stk = (f.cls || '').includes('stk');   // 表情贴纸：挂在头顶而非胸前
       const r = figEl.getBoundingClientRect();
       // 命中特效贴图：格挡/免伤=护盾碎裂，治疗不出，其余伤害=斩击（黑底图走 screen 混合）
       const impactCls = (f.cls || '').includes('block') ? 'fx-block'
         : (f.warm || stk) ? null : 'fx-slash';
-      if (impactCls) {
+      if (impactCls && !reduced) {
         const imp = document.createElement('div');
         imp.className = 'sts-impact ' + impactCls;
         imp.style.left = (r.left - ovR.left + r.width / 2) + 'px';
@@ -1024,6 +1082,16 @@ import { renderCombatPiles } from './battle.piles.view.js';
     }
     return { x: rect.left + rect.width / 2, y: rect.top - 80, scale: 0.5, dur: 460, fade: 0, burn: true };
   }
+  // 回合过渡横幅（批次F，STS2 Enemy Turn 式）：细带横穿战场中带，文字滑入-停留-滑出
+  function showTurnBanner(text, side) {
+    const ov = UI.el.overlay;
+    if (!ov) return;
+    const el = document.createElement('div');
+    el.className = `bt-turnbanner ${side === 'foe' ? 'foe' : 'self'}`;
+    el.innerHTML = `<b>${esc(text)}</b>`;
+    ov.appendChild(el);
+    setTimeout(() => el.remove(), 1450);
+  }
   // WAAPI 防冻保护：遮挡/后台 webview 里文档时间线可能被冻结（currentTime 恒 0），
   // 动画会永远停在第一帧（例如把手牌钉在敌方阶段的 0.08 透明度）——起跑失败就取消，
   // 让声明式 CSS 的两端状态兜底。健康环境下 currentTime 正常推进，永不触发。
@@ -1031,28 +1099,44 @@ import { renderCombatPiles } from './battle.piles.view.js';
     if (!el.animate) return null;
     const anim = el.animate(keyframes, options);
     const delay = (options && options.delay) || 0;
+    // 兜底窗口须覆盖正常播完的时间（duration 可能 > 300，如回合升回 380ms），
+    // 否则正常播放中的动画会被当成「没按时启动」误杀（09-12 实机）
+    const dur = (options && options.duration) || 0;
     setTimeout(() => {
       if (anim.playState === 'running' && (anim.currentTime == null || anim.currentTime < delay + 30)) {
         try { anim.cancel(); } catch (e) { /* 已被移除的元素上取消会抛，忽略 */ }
       }
-    }, delay + 300);
+    }, delay + Math.max(300, dur + 200));
     return anim;
+  }
+  // 手牌区沉/升动画追踪（09-12 实机 bug：下沉动画 fill:forwards 在常驻节点上永续保持，
+  // 升回动画无 fill、播完效果消失，沉下终态随即复活＝「你的回合」手牌升上来又沉回去）。
+  // 同刻至多一对动画：创建新动画前先 cancel 旧的；升回也用 forwards 保持终态（=CSS 默认位）。
+  let handPhaseAnims = [];
+  function cancelHandPhaseAnims() {
+    handPhaseAnims.forEach(a => { try { a.cancel(); } catch (e) { /* 已结束动画 cancel 不抛 */ } });
+    handPhaseAnims = [];
   }
   function animateBattleTransition(prev, body, events = [], extraFlightMs = 0) {
     let flightMs = extraFlightMs;
     const handEl = body.querySelector('.sts-hand');
     const stage = body.querySelector('.battle-stage');
     // —— 手牌区随回合显隐：玩家→敌人 下沉退场；敌人→玩家 升回 ——
+    //    批次F：过渡同时放回合横幅（STS2 Enemy Turn 式）
     if (handEl && stage && prev && prev.phase != null && handEl.animate) {
       const ph = stage.dataset.phase;
       if (ph === 'enemy' && prev.phase !== 'enemy') {
-        animateSafe(handEl,
+        cancelHandPhaseAnims();
+        handPhaseAnims.push(animateSafe(handEl,
           [{ transform: 'translateY(0)', opacity: 1 }, { transform: 'translateY(72%)', opacity: 0.08 }],
-          { duration: 300, easing: 'ease-in', fill: 'forwards' });
+          { duration: 300, easing: 'ease-in', fill: 'forwards' }));
+        showTurnBanner('敌方回合', 'foe');
       } else if (ph && ph !== 'enemy' && prev.phase === 'enemy') {
-        animateSafe(handEl,
+        cancelHandPhaseAnims();
+        handPhaseAnims.push(animateSafe(handEl,
           [{ transform: 'translateY(72%)', opacity: 0.08 }, { transform: 'translateY(0)', opacity: 1 }],
-          { duration: 380, easing: 'cubic-bezier(.2,.8,.3,1)' });
+          { duration: 380, easing: 'cubic-bezier(.2,.8,.3,1)', fill: 'forwards' }));
+        showTurnBanner('你的回合', 'self');
       }
     }
     // —— 能量变化脉冲（花费/回复都闪一下）——
@@ -1105,9 +1189,15 @@ import { renderCombatPiles } from './battle.piles.view.js';
         });
       }
     }
-    // —— 离场：克隆体沿上弓弧线飞向去处（原卡节点由手牌常驻层差分移除，飞行由克隆体接管） ——
-    events.forEach(ev => {
-      if (!played.has(ev.uid)) return;
+    // —— 出牌队列演出（批次F，STS2 NCardPlayQueue）：同一渲染帧打出多张时，克隆体先飞到
+    //    手牌区上方的队列位横排站定（按结算次序错开入场），停顿一拍再依次飞向去处——
+    //    单张仍直飞（保留原上弓弧线手感）。原卡节点由手牌常驻层差分移除，飞行由克隆体接管 ——
+    const playedEvs = events.filter(ev => played.has(ev.uid));
+    const queueIdx = new Map();
+    playedEvs.forEach(ev => { if (ev.kind === 'play') queueIdx.set(ev.uid, queueIdx.size); });
+    const queueN = queueIdx.size;
+    playedEvs.forEach(ev => {
+      if (ev.kind === 'play' && ev.type === '法术') playUnitFrames('cast');   // 批次D：施法动作
       const old = prev && (prev.cards[ev.uid] || Object.values(prev.cards).find(c => c.name === ev.name));
       if (!old) return;
       const sink = exitSinkFor(ev, old.rect, body, ovR);
@@ -1116,8 +1206,34 @@ import { renderCombatPiles } from './battle.piles.view.js';
       clone.style.cssText = `left:${old.rect.left}px;top:${old.rect.top}px;width:${old.rect.width}px;height:${old.rect.height}px`;
       clone.innerHTML = old.html;
       ov.appendChild(clone);
-      const dx = sink.x - (old.rect.left + old.rect.width / 2);
-      const dy = sink.y - (old.rect.top + old.rect.height / 2);
+      const cx0 = old.rect.left + old.rect.width / 2, cy0 = old.rect.top + old.rect.height / 2;
+      const q = queueIdx.get(ev.uid);
+      if (queueN > 1 && q != null) {
+        // 两段式：队列位 = 手牌上方中央横排（卡宽+18px 间距）；入场 300ms 错开 150ms/张，
+        // 站定 260ms 后继续飞去处——观感上卡牌按次序「过一遍」而非同时爆开
+        const qw = Math.min(120, old.rect.width);
+        const step = qw + 18;
+        const qx = ovR.width / 2 + (q - (queueN - 1) / 2) * step - cx0;
+        const qy = ovR.height * 0.58 - cy0;
+        const enter = 300, gap = 150, hold = 260;
+        clone.animate([
+          { transform: 'translate(0,0) scale(1)', opacity: 1 },
+          { transform: `translate(${qx}px,${qy}px) scale(0.88)`, opacity: 1 },
+        ], { duration: enter, delay: q * gap, easing: 'cubic-bezier(.2,.8,.3,1)', fill: 'both' });
+        const dx2 = sink.x - (ovR.width / 2 + (q - (queueN - 1) / 2) * step);
+        const dy2 = sink.y - ovR.height * 0.58;
+        const t2 = enter + q * gap + hold;
+        const fly2 = clone.animate([
+          { transform: `translate(${qx}px,${qy}px) scale(0.88)`, opacity: 1 },
+          { transform: `translate(${qx + dx2}px,${qy + dy2}px) scale(${sink.scale})`, opacity: sink.fade },
+        ], { duration: sink.dur, delay: t2, easing: 'cubic-bezier(.45,.05,.55,.95)', fill: 'forwards' });
+        fly2.onfinish = () => clone.remove();
+        setTimeout(() => clone.remove(), t2 + sink.dur + 300);   // 兜底清理
+        flightMs = Math.max(flightMs, t2 + sink.dur);
+        return;
+      }
+      const dx = sink.x - cx0;
+      const dy = sink.y - cy0;
       const bow = -Math.min(130, Math.hypot(dx, dy) * 0.28);   // 弓背朝上
       const fly = clone.animate([
         { transform: 'translate(0px,0px) scale(1)', opacity: 1 },
@@ -1137,6 +1253,7 @@ import { renderCombatPiles } from './battle.piles.view.js';
   const AIM_COLOR = { enemy: '#e0523c', self: '#4ecf8e', any: '#d9c07a' };
   let aim = null;            // {uid, card, side, el, ax, ay, sx, sy, moved, hover}
   let aimPlayedAt = 0;       // 指向松手刚打出成功的时间戳（抑制随后误触发的 click 锁定）
+  let clickSelectedUid = null; // 点击选中的指向卡；拖拽路径仍由 aim 独立处理
 
   function aimCanvasEnsure() {
     let canvas = document.getElementById('aimArrow');
@@ -1238,6 +1355,68 @@ import { renderCombatPiles } from './battle.piles.view.js';
     }
     aimArrowRemove();
   }
+  function cancelClickSelection() {
+    if (clickSelectedUid == null) return false;
+    clickSelectedUid = null;
+    document.querySelectorAll('.sts-hand .bt-card.click-selected').forEach(el => {
+      el.classList.remove('click-selected');
+      el.setAttribute('aria-pressed', 'false');
+    });
+    updateClickSelectionUI();
+    return true;
+  }
+  function updateClickSelectionUI() {
+    const cap = document.querySelector('.sts-arena-caption span');
+    if (!cap) return;
+    const entry = clickSelectedUid == null ? null : findCard(clickSelectedUid);
+    cap.textContent = entry ? `已选【${entry.card.name}】——点击${targetSide(entry.card) === 'self' ? '你' : '敌人'}确认，Esc 取消` : cap.dataset.battleDetail || '';
+  }
+  function selectCardByClick(uid) {
+    const snap = getSnapshot();
+    if (!snap || snap.busy || snap.infusing || snap.discovering || snap.choosing) return;
+    const entry = findCard(uid);
+    if (!entry) return;
+    const why = unplayableReason(entry.card);
+    if (why || effCostOf(entry.card, uid) > snap.energy) { play(uid); return; }
+    const side = targetSide(entry.card);
+    if (!side) { play(uid); return; }
+    if (clickSelectedUid === uid) { cancelClickSelection(); return; }
+    clickSelectedUid = uid;
+    document.querySelectorAll('.sts-hand .bt-card.click-selected').forEach(el => el.classList.remove('click-selected'));
+    const el = [...document.querySelectorAll('.sts-hand .bt-card')].find(x => x.dataset.uid === uid);
+    if (el) { el.classList.add('click-selected'); el.setAttribute('aria-pressed', 'true'); }
+    updateClickSelectionUI();
+  }
+  function clickSelectedTarget(side, idx) {
+    if (clickSelectedUid == null) return false;
+    const uid = clickSelectedUid;
+    const entry = findCard(uid);
+    if (!entry) { cancelClickSelection(); return false; }
+    const need = targetSide(entry.card);
+    if (need !== side && !(need == null && side === 'any')) {
+      UI.log(`[[icon:cross]] 【${esc(entry.card.name)}】不能对这个目标使用`, 'warn');
+      return true;
+    }
+    clickSelectedUid = null;
+    play(uid, side === 'enemy' ? idx : side === 'self' ? 'self' : undefined);
+    return true;
+  }
+  document.addEventListener('keydown', (e) => {
+    if (!handLayer || e.defaultPrevented || e.key === 'Escape') {
+      if (e.key === 'Escape' && clickSelectedUid != null) {
+        e.preventDefault(); e.stopPropagation();
+        cancelClickSelection();
+      }
+      return;
+    }
+    if (e.target && /INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) return;
+    if (!/^[1-9]$/.test(e.key)) return;
+    const el = handLayer.querySelector(`.bt-card[data-hand-index="${e.key}"]`);
+    if (!el || el.classList.contains('off')) { if (el) play(el.dataset.uid); return; }
+    e.preventDefault();
+    selectCardByClick(el.dataset.uid);
+  });
+
   function startAim(e, el, kind) {
     const snap = getSnapshot();
     const { busy, infusing, discovering, energy, choosing } = snap;
@@ -1246,7 +1425,7 @@ import { renderCombatPiles } from './battle.piles.view.js';
     const entry = findCard(uid);
     if (!entry) return;
     const side = kind === 'potion' ? 'enemy' : (targetSide(entry.card) || 'any');   // null = 无目标招式：拖到中间空地即可
-    if (kind !== 'potion' && effCostOf(entry.card) > energy) return;   // 能量不足：不进入指向（点击会有提示）；药水不耗能量
+    if (kind !== 'potion' && effCostOf(entry.card, uid) > energy) return;   // 能量不足：不进入指向（点击会有提示）；药水不耗能量
     const vr = UI.el.overlay.getBoundingClientRect();
     const r = el.getBoundingClientRect();
     aim = {

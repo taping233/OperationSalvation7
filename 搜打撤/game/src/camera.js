@@ -7,6 +7,7 @@
     this.cx = map.cols * map.tile / 2; // 视野中心（世界坐标）
     this.cy = map.rows * map.tile / 2;
     this.zoom = 1;
+    this.frameMode = 'routes';
   }
 
   Camera.prototype.resize = function (w, h) {
@@ -28,12 +29,14 @@
   };
 
   Camera.prototype.panBy = function (dx, dy) { // 屏幕像素位移
+    this.frameMode = 'manual';
     this.cx -= dx / this.zoom;
     this.cy -= dy / this.zoom;
     this.clamp();
   };
 
   Camera.prototype.zoomAt = function (sx, sy, factor) { // 以屏幕点 (sx,sy) 为锚缩放
+    this.frameMode = 'manual';
     const before = this.screenToWorld(sx, sy);
     this.zoom = Math.min(2.5, Math.max(0.4, this.zoom * factor));
     const after = this.screenToWorld(sx, sy);
@@ -44,12 +47,11 @@
 
   Camera.prototype.clamp = function () {
     const m = 160; // 允许超出地图边缘的空白余量（世界像素，按 zoom 换算到屏幕）
-    const halfW = this.viewW / 2 / this.zoom;
-    const halfH = this.viewH / 2 / this.zoom;
     const mapW = this.map.cols * this.map.tile;
     const mapH = this.map.rows * this.map.tile;
-    this.cx = halfW * 2 >= mapW + m * 2 ? mapW / 2 : Math.min(mapW + m - halfW, Math.max(-m + halfW, this.cx));
-    this.cy = halfH * 2 >= mapH + m * 2 ? mapH / 2 : Math.min(mapH + m - halfH, Math.max(-m + halfH, this.cy));
+    // Edge routes must be able to sit at the centre of the screen as well.
+    this.cx = Math.min(mapW + m, Math.max(-m, this.cx));
+    this.cy = Math.min(mapH + m, Math.max(-m, this.cy));
   };
 
   Camera.prototype.focus = function (x, y) {
@@ -79,6 +81,28 @@
       minY = Math.min(minY, p.y); maxY = Math.max(maxY, p.y);
     }
     return this.fitBounds({ minX, minY, maxX, maxY }, padding);
+  };
+
+  Camera.prototype.frameExploration = function (game, overview = false) {
+    const li = game?.layerIdx;
+    const points = game?.nodePos?.[li];
+    const current = game?.layerData?.[li]?.logical?.[game.trackPos];
+    if (!points?.length || !current) return false;
+    const indices = new Set([game.trackPos]);
+    for (const [nl, idx] of current.next || []) if (nl === li) indices.add(idx);
+    if (overview) points.forEach((p, idx) => { if (game.seen?.[`${li},${idx}`] === 1) indices.add(idx); });
+    const visible = [...indices].map(idx => points[idx]).filter(Boolean);
+    if (!visible.length) return false;
+    const minX = Math.min(...visible.map(p => p.x)), maxX = Math.max(...visible.map(p => p.x));
+    const minY = Math.min(...visible.map(p => p.y)), maxY = Math.max(...visible.map(p => p.y));
+    // The camera frames the decision in front of the player, without revealing fogged nodes.
+    this.zoom = Math.min(1.55, Math.max(.4, Math.min(
+      this.viewW / (maxX - minX + 360),
+      Math.max(180, this.viewH - 130) / (maxY - minY + 230))));
+    this.cx = (minX + maxX) / 2;
+    this.cy = (minY + maxY) / 2 - 30 / this.zoom;
+    this.frameMode = overview ? 'overview' : 'routes';
+    return true;
   };
 
   // 世界空间命中半径：覆盖节点圆盘，同时保证低缩放下至少有稳定的屏幕目标尺寸。

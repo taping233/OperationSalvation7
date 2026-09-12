@@ -1,0 +1,24 @@
+/* One card material across the archive, preparation, rewards and zoom view. */
+.hs-card, #overlay .lib-cardwrap .hs-card {
+  background:#112635!important; border:1px solid color-mix(in srgb,var(--rarity-color,var(--gem)) 65%,#314550)!important;
+  border-radius:3px!important; padding:.34em!important;
+  box-shadow:0 .4em 1em #030b1260!important; color:#e7edf0;
+}
+.hs-card .hsc-name, #overlay .hs-card .hsc-name, #cardZoom .hs-card .hsc-name {
+  background:none!important; border:0!important; border-radius:0!important;
+  color:#e9efe9!important; text-shadow:none!important; text-align:left;
+  font-weight:650; letter-spacing:.03em; padding:.38em .25em .38em 2.15em;
+}
+.hs-card .hsc-art { border:0!important; border-radius:1px!important; background:#0a1825!important; box-shadow:none!important; overflow:hidden; }
+.hs-card .hsc-art img, #overlay .lib-cardwrap .hsc-art .art-card-image { object-fit:cover!important; filter:none!important; background:none!important; }
+.hs-card .hsc-art img[src*="expedition-starters"], .hs-card .hsc-art img[src*="wu-"] { object-position:50% 28%; }
+.hs-card .hsc-cost { top:.22em!important; left:.22em!important; width:1.85em!important; height:1.85em!important; border:1px solid #a3c6d0!important; border-radius:2px!important; background:#1d4557!important; box-shadow:none!important; filter:none!important; text-shadow:none!important; color:#f3fbff!important; }
+.hs-card .hsc-type { color:#a9c1c7!important; background:transparent!important; border:0!important; font-size:.64em; letter-spacing:.06em; }
+.hs-card .hsc-desc { background:#091a27!important; color:#d2dfe1!important; border:0!important; border-top:1px solid #a9bec622!important; border-radius:0!important; box-shadow:none!important; text-align:left; justify-content:flex-start; padding:.5em; line-height:1.5; }
+.hs-card .hsc-gem { width:.45em; height:.45em; margin:.2em auto; box-shadow:none!important; border:0; }
+.hs-card .hsc-val { background:#665132!important; border-color:#c8af72!important; color:#fff0c2!important; box-shadow:none!important; filter:none!important; text-shadow:none!important; }
+.hs-card .hsc-dmg { background:#783e40!important; color:#ffe8df!important; filter:none!important; }
+.hs-card .hsc-kw span { background:#173444; border-color:#7b9ba54d; color:#b9d8de; border-radius:2px; }
+.hs-card .rv-beam { opacity:.55; }
+#cardZoom .hs-card .hsc-desc { font-size:.78em; }
+@media(prefers-reduced-motion:reduce) { .hs-card .rv-beam::before { animation:none!important; } }

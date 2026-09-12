@@ -1,14 +1,15 @@
 
 import { circle, font, hash2, mixHex, rrect, shade } from './renderer.primitives.js';
-import { drawFlame, drawIcon, drawBitmapIcon } from './renderer.icons.js';
+import { drawTacticalIcon } from './renderer.icons.js';
+import { NODE_INFO } from './expedition.view.js';
 const SDT = window.SDT;
   const TAU = Math.PI * 2;
   const T0 = SDT.MAP.tile;   // 缩放基准单位（特效 / 棋子尺寸用）
 
-  const NODE_R = 26;         // 普通结点半径（世界像素）
-  const BOSS_R = 30;         // BOSS 结点半径
-  const ALTAR_R = 32;        // 祭坛结点半径
-  const LINK_GAP = 34;       // 连线两端距结点边缘的留白
+  const NODE_R = 22;         // 普通战术结点半径（世界像素）
+  const BOSS_R = 24;         // BOSS 结点半径
+  const ALTAR_R = 24;        // 祭坛结点半径
+  const LINK_GAP = 24;       // 连线两端距结点边缘的留白
 
   const COLORS = {
     bgTop: '#17252b',
@@ -24,11 +25,11 @@ const SDT = window.SDT;
 
   // 局内壁纸：L1/L2 共用静态图版（塔卫二废墟植物走廊）；L3/L4/L5 用分层专属壁纸
   // （2026-09-09 老板提供，浅色/高饱和图配更深遮罩保证结点可读）。全部首启即预载。
-  const environmentBackdrop = new Image();
   const LAYER_BACKDROPS = {
-    2: { src: new URL('../assets/scenes/layer3-knight.webp', import.meta.url).href, veil: 0.62 },   // 冻土遗迹 · 红骑士
-    3: { src: new URL('../assets/scenes/layer4-priestess-light.webp', import.meta.url).href, veil: 0.8 },  // 高危战区 · 白（浅底必须压暗）
-    4: { src: new URL('../assets/scenes/layer5-priestess-dark.webp', import.meta.url).href, veil: 0.5 },   // 污染核心 · 黑
+    0: { src: new URL('../assets/scenes/winter-expedition/outskirts.webp', import.meta.url).href, veil: .32 },
+    1: { src: new URL('../assets/scenes/winter-expedition/greenhouse.webp', import.meta.url).href, veil: .42 },
+    2: { src: new URL('../assets/scenes/winter-expedition/sanctuary.webp', import.meta.url).href, veil: .42 },
+    3: { src: new URL('../assets/scenes/winter-expedition/core.webp', import.meta.url).href, veil: .4 },
   };
   const layerBackdrops = {};
   for (const [li, conf] of Object.entries(LAYER_BACKDROPS)) {
@@ -40,7 +41,7 @@ const SDT = window.SDT;
   }
   function backdropFor(li) {
     const conf = LAYER_BACKDROPS[li];
-    if (!conf) return { img: environmentBackdrop, veil: 0.5 };
+    if (!conf) return { img: layerBackdrops[0], veil: .32 };
     return { img: layerBackdrops[li], veil: conf.veil };
   }
   let backdropCanvas = null;               // 壁纸合成层（尺寸/层或就绪状态变化时重建）
@@ -79,24 +80,12 @@ const SDT = window.SDT;
     backdropCanvas = c;
     return c;
   }
-  environmentBackdrop.src = new URL('../assets/scenes/endfield-ruins.jpg', import.meta.url).href;
-  environmentBackdrop.addEventListener('load', () => { backdropCanvas = null; SDT.RenderScheduler?.invalidate(); });
 
 
-  const isCurLayer = (game, li) => li === game.layerIdx;
   const isCurrentNode = (game, n) => n.li === game.layerIdx && n.idx === game.trackPos;
   const nodeRadius = (n) => n.li === -1 ? (n.def.type === 'altar' ? ALTAR_R : BOSS_R) : NODE_R;
 
 
-  // 重要结点的微光环绕色
-  const GLISTEN = {
-    altar: 'rgba(154,124,200,0.9)', boss: 'rgba(255,110,90,0.85)',
-    door: 'rgba(225,192,120,0.85)', emergencyExit: 'rgba(82,210,115,0.85)',
-    entrance: 'rgba(82,210,115,0.85)',
-  };
-
-  // 呼吸相位（确定性，结点各自错拍）
-  const nodePhase = (n) => hash2(n.li * 31 + n.idx, 9) * TAU;
 
   /* ============================================================
    * 结点几何缓存（连线 Path2D 确定性生成，同输入必得同一条线）
@@ -211,207 +200,14 @@ const SDT = window.SDT;
     return geo;
   }
 
-  /* ============================================================
-   * 静态烘焙缓存（模块级，按失效键惰性重建）
-   * ============================================================ */
-  let skyCanvas = null;                 // 冷色环境层（低分辨率，一次烘焙）
-  const SKY_SPAN = { x0: 0, y0: 0, w: 0, h: 0 };
-  let stars = null, motes = null;       // 扫描点 / 微尘粒子（预计算）
-  let boardCanvas = null;               // 结点静态层
-  const BOARD_PAD = T0 * 1.5;           // 画布外扩（容纳投影 / 底光溢出）
-  const boardKey = { layerIdx: -1, notes: null, bs: 0 };
-  let gradCache = null;                 // { w, h, bg, vig } 屏幕空间渐变
-
-  const bakeScale = () => Math.min(4, Math.max(2, (window.devicePixelRatio || 1) * 2));
-
-  // ---------- 烘焙：冷峻环境信息层（雾化底光） ----------
-  function ensureSky(map) {
-    if (skyCanvas) return;
-    const T = map.tile, W = map.cols * T, H = map.rows * T;
-    const SIZE = 512, span = 2.6;
-    const c = document.createElement('canvas');
-    c.width = SIZE; c.height = SIZE;
-    const b = c.getContext('2d');
-    SKY_SPAN.x0 = -0.8 * W; SKY_SPAN.y0 = -0.8 * H;
-    SKY_SPAN.w = W * span; SKY_SPAN.h = H * span;
-    b.scale(SIZE / SKY_SPAN.w, SIZE / SKY_SPAN.h);
-    b.translate(-SKY_SPAN.x0, -SKY_SPAN.y0);
-    // 远景尘雾固定在世界坐标，使用冷灰与冷青层次。
-    const blobs = [
-      [W * 0.18, H * 0.06, Math.max(W, H) * 0.46, '92,185,188', 0.065],
-      [W * 0.95, H * 0.45, Math.max(W, H) * 0.40, '81,111,128', 0.08],
-      [W * 0.38, H * 1.02, Math.max(W, H) * 0.44, '73,111,139', 0.045],
-      [W * 0.85, H * 1.35, Math.max(W, H) * 0.36, '92,185,188', 0.04],
-    ];
-    for (const [x, y, r, rgb, a] of blobs) {
-      const g = b.createRadialGradient(x, y, 0, x, y, r);
-      g.addColorStop(0, `rgba(${rgb},${a})`);
-      g.addColorStop(1, `rgba(${rgb},0)`);
-      b.fillStyle = g;
-      b.fillRect(x - r, y - r, r * 2, r * 2);
-    }
-    // 中央底光（冷青扫描晕）
-    const g = b.createRadialGradient(W / 2, H / 2, T * 2, W / 2, H / 2, W * 0.95);
-    g.addColorStop(0, 'rgba(92,185,188,0.10)');
-    g.addColorStop(1, 'rgba(92,185,188,0)');
-    b.fillStyle = g;
-    b.fillRect(SKY_SPAN.x0, SKY_SPAN.y0, SKY_SPAN.w, SKY_SPAN.h);
-    skyCanvas = c;
-    // 扫描点 / 微尘粒子表（确定性散布，逐帧只做 sin 与填充）
-    stars = [];
-    for (let i = 0; i < 230; i++) {
-      stars.push({
-        x: (hash2(i, 101) - 0.5) * W * span,
-        y: (hash2(i, 211) - 0.5) * H * span,
-        r: 0.7 + hash2(i, 401) * 1.5,
-        spd: 0.4 + hash2(i, 307) * 0.9,
-        ph: i * 1.3,
-        gold: hash2(i, 503) > 0.82,
-      });
-    }
-    motes = [];
-    for (let i = 0; i < 34; i++) {
-      const hx = hash2(i, 7), hy = hash2(i, 13);
-      motes.push({ x: hx * W, y0: hy * H, spd: 4 + hy * 5, r: 1 + hx * 1.2, ph: i * 1.7, gold: i % 5 === 0 });
-    }
-  }
-
-  function drawStars(ctx, game) {
-    const t = game.time;
-    ctx.fillStyle = 'rgb(232,212,176)';
-    for (const s of stars) {
-      if (s.gold) continue;
-      ctx.globalAlpha = 0.55 * (0.35 + 0.65 * Math.abs(Math.sin(t * s.spd + s.ph)));
-      ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, TAU); ctx.fill();
-    }
-    ctx.fillStyle = 'rgb(248,214,132)';
-    for (const s of stars) {
-      if (!s.gold) continue;
-      ctx.globalAlpha = 0.7 * (0.35 + 0.65 * Math.abs(Math.sin(t * s.spd + s.ph)));
-      ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, TAU); ctx.fill();
-    }
-    ctx.globalAlpha = 1;
-  }
-
-  function drawMotes(ctx, game, H) {
-    const t = game.time;
-    // 分色两趟批绘（同 drawStars）：fillStyle 只设两次，不再逐粒重设
-    ctx.fillStyle = 'rgb(214,182,130)';
-    for (const m of motes) {
-      if (m.gold) continue;
-      ctx.globalAlpha = Math.max(0, 0.05 + 0.05 * Math.sin(t * 1.4 + m.ph));
-      ctx.beginPath(); ctx.arc(m.x, (m.y0 + t * m.spd) % H, m.r, 0, TAU); ctx.fill();
-    }
-    ctx.fillStyle = 'rgb(245,205,120)';
-    for (const m of motes) {
-      if (!m.gold) continue;
-      ctx.globalAlpha = Math.max(0, 0.05 + 0.05 * Math.sin(t * 1.4 + m.ph));
-      ctx.beginPath(); ctx.arc(m.x, (m.y0 + t * m.spd) % H, m.r, 0, TAU); ctx.fill();
-    }
-    ctx.globalAlpha = 1;
-  }
-
-  // ---------- 烘焙：结点静态层（纸面落影 / 盘面 / 双圈描边 / 底光 / 备注标记） ----------
-  // 失效条件：换层、备注重建、烘焙倍率变化
-  function ensureBoard(game) {
-    if (!game.nodes || !game.nodes.length) return;
-    const bs = bakeScale();
-    if (boardCanvas && boardKey.layerIdx === game.layerIdx &&
-        boardKey.notes === game.noteMap && boardKey.bs === bs) return;
-    boardKey.layerIdx = game.layerIdx;
-    boardKey.notes = game.noteMap;
-    boardKey.bs = bs;
-
-    const map = game.map, T = map.tile;
-    const c = document.createElement('canvas');
-    c.width = Math.ceil((map.cols * T + BOARD_PAD * 2) * bs);
-    c.height = Math.ceil((map.rows * T + BOARD_PAD * 2) * bs);
-    const b = c.getContext('2d');
-    b.scale(bs, bs);
-    b.translate(BOARD_PAD, BOARD_PAD);
-    const g = nodeGeo(game);
-
-    // 结点：落影 + 深色圆底盘面（层色只留极淡的 tint，呼吸缩放时不露亮边；描边/微光在动态层画）
-    for (const n of g.nodes) {
-      b.save();
-      b.globalAlpha = 0.24;
-      const layerColor = n.li >= 0 ? (game.layerData[n.li]?.color || '#6e5133')
-        : (SDT.MAP.centerColor || '#4a3763');
-      // 纸面落影
-      b.fillStyle = 'rgba(0,0,0,0.38)';
-      b.beginPath();
-      b.ellipse(n.x + 2.5, n.y + 4, n.r * 1.02, n.r * 0.62, 0, 0, TAU);
-      b.fill();
-      // 盘面：层色微 tint 的深色径向渐变
-      const base = mixHex(layerColor, '#141210', 0.82);
-      const rg = b.createRadialGradient(n.x - n.r * 0.3, n.y - n.r * 0.4, n.r * 0.2, n.x, n.y, n.r);
-      rg.addColorStop(0, shade(base, 0.05));
-      rg.addColorStop(1, shade(base, -0.08));
-      circle(b, n.x, n.y, n.r * 1.02);
-      b.fillStyle = rg; b.fill();
-      b.restore();
-    }
-
-    // 入口底光（当前层入口结点——2026-09-10 留言 #21：此前固定取第 1 层，
-    // 各层世界坐标重叠，导致第 2~4 层画面上凭空烘出第 1 层入口的光斑，
-    // 看起来像生成了不可抵达的节点图像）
-    const l1 = game.layerData[game.layerIdx] || game.layerData[0];
-    const layerPos = game.nodePos[game.layerIdx] || game.nodePos[0];
-    b.save();
-    b.globalAlpha = 0.16;
-    l1.entrances.forEach((idx) => {
-      const p = layerPos[idx];
-      const glow = b.createRadialGradient(p.x, p.y, 2, p.x, p.y, T * 0.6);
-      glow.addColorStop(0, 'rgba(90,162,134,0.25)');
-      glow.addColorStop(1, 'rgba(90,162,134,0)');
-      b.fillStyle = glow;
-      b.fillRect(p.x - T * 0.65, p.y - T * 0.65, T * 1.3, T * 1.3);
-    });
-    b.restore();
-
-    // 祭坛底光（深入内环时增强）
-    if (g.altarNode) {
-      const deep = game.layerIdx === game.layerData.length - 1;
-      const a = deep ? 0.55 : 0.20;
-      const glow = b.createRadialGradient(g.altarNode.x, g.altarNode.y, T * 0.2, g.altarNode.x, g.altarNode.y, T * 1.6);
-      glow.addColorStop(0, `rgba(154,124,200,${(a * 0.30).toFixed(3)})`);
-      glow.addColorStop(1, 'rgba(154,124,200,0)');
-      b.fillStyle = glow;
-      b.fillRect(g.altarNode.x - T * 1.7, g.altarNode.y - T * 1.7, T * 3.4, T * 3.4);
-    }
-
-    // 备注标记：结点右上角琥珀圆点（非当前环淡显）
-    if (game.noteMap && game.noteMap.size) {
-      b.save();
-      for (const key of game.noteMap.keys()) {
-        const bar = key.indexOf('|');
-        if (key.slice(0, bar) !== map.boardId) continue;
-        const coord = key.slice(bar + 1);
-        const comma = coord.indexOf(',');
-        if (comma < 0) continue;
-        const li = +coord.slice(0, comma), idx = +coord.slice(comma + 1);
-        const n = g.nodes.find(q => q.li === li && q.idx === idx);
-        if (!n) continue;
-        b.globalAlpha = !isCurLayer(game, n.li) ? 0.30 : 1;
-        b.shadowColor = 'rgba(240,168,50,0.6)';
-        b.shadowBlur = 4 * bs;
-        b.fillStyle = '#f0a832';
-        circle(b, n.x + n.r * 0.78, n.y - n.r * 0.82, 3.2);
-        b.fill();
-      }
-      b.restore();
-    }
-
-    boardCanvas = c;
-  }
-
+  // 地图底盘与备注点随可见结点动态绘制，避免为整张迷雾地图创建高分辨率画布。
   // 当前位置底盘单独动态绘制，避免每走一步都重烘焙整张高分辨率棋盘。
   function drawCurrentNodePlate(ctx, game) {
     const g = nodeGeo(game);
     const n = g.nodes.find(node => isCurrentNode(game, node));
     if (!n) return;
     const layerColor = game.layerData[n.li]?.color || '#6e5133';
-    const base = mixHex(layerColor, '#141210', 0.62);
+    const base = mixHex(layerColor, '#07131d', 0.72);
     ctx.save();
     ctx.shadowColor = 'rgba(255,205,108,0.34)';
     ctx.shadowBlur = 14 / game.cam.zoom;
@@ -419,68 +215,80 @@ const SDT = window.SDT;
     rg.addColorStop(0, shade(base, 0.12));
     rg.addColorStop(1, shade(base, -0.05));
     ctx.fillStyle = rg;
-    circle(ctx, n.x, n.y, n.r * 1.03);
-    ctx.fill();
+    ctx.translate(n.x, n.y); ctx.rotate(Math.PI / 4);
+    ctx.fillRect(-n.r * .8, -n.r * .8, n.r * 1.6, n.r * 1.6);
     ctx.restore();
   }
 
   // ---------- 图标层（圆形位图结点：呼吸缩放；当前环明亮，可走相邻环高亮，走过的中亮，其余隐藏/虚化） ----------
   function drawIcons(ctx, game) {
-    const u = T0 / 48, t = 0, z = game.cam.zoom;
-    const g = nodeGeo(game);
-    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    const z = game.cam.zoom, g = nodeGeo(game);
     for (const n of g.nodes) {
-      if (n.def.type === 'fire') continue; // 火堆由 drawFires 统一绘制
       const current = isCurrentNode(game, n);
-      // 2026-09-09 老板：当前节点连通（可走）的相邻节点也高亮，与走过节点区分
-      const legal = g.legalKeys.has(n.li + ',' + n.idx);
-      // 走过的格子标绿（2026-09-09 玩法定版：任何格子只能触发一次）
-      const walked = !!(game.visited && game.visited[n.li + ',' + n.idx]);
-      const phase = nodePhase(n);
-      // 呼吸缩放（各结点错拍）+ 当前环轻微悬浮
-      const R = n.r;
+      const legal = g.legalKeys.has(`${n.li},${n.idx}`);
+      const walked = !!game.visited?.[`${n.li},${n.idx}`];
+      const reduced = typeof document !== 'undefined' && document.body?.classList.contains('reduce-motion');
+      const pulse = current && !reduced ? 1 + Math.sin((game.time || 0) * 3.4) * .06 : 1;
       ctx.save();
-      ctx.globalAlpha = current ? 1 : legal ? 0.95 : 0.55;
-      if (!drawBitmapIcon(ctx, n.def.type, n.x, n.y, R, current, z, legal)) {
-        if (current) {
-          ctx.translate(0, 0);
-          ctx.shadowColor = n.def.type === 'boss' ? 'rgba(255,90,80,0.6)'
-            : n.def.type === 'altar' ? 'rgba(154,124,200,0.7)'
-            : 'rgba(255,240,200,0.35)';
-          ctx.shadowBlur = 6;
-        }
-        drawIcon(ctx, n.def, n.x, n.y, u, t);
+      ctx.globalAlpha = current || legal ? 1 : .38;
+      const colors = { battle:'#e98278', coin:'#e0c57d', wood:'#e0c57d', rations:'#e0c57d', chest:'#e0c57d', key:'#e0c57d', fire:'#76c6ad', emergencyExit:'#76c6ad', extraction:'#76c6ad', event:'#82b8d0', shop:'#82b8d0', altar:'#a995d4', boss:'#e98278', entrance:'#76c6ad' };
+      const color = current ? '#f3dfad' : colors[n.def.type] || '#82b8d0';
+      ctx.translate(n.x, n.y); ctx.rotate(Math.PI / 4); ctx.scale(pulse, pulse);
+      ctx.fillStyle = '#0a1b27'; ctx.fillRect(-n.r * .78, -n.r * .78, n.r * 1.56, n.r * 1.56);
+      ctx.strokeStyle = current ? '#f1d99c' : legal ? color : '#55717d'; ctx.lineWidth = (current ? 2.2 : legal ? 1.7 : 1) / z;
+      ctx.strokeRect(-n.r * .78, -n.r * .78, n.r * 1.56, n.r * 1.56);
+      ctx.rotate(-Math.PI / 4); ctx.scale(1 / pulse, 1 / pulse); ctx.translate(-n.x, -n.y);
+      drawTacticalIcon(ctx, n.def.type, n.x, n.y, Math.max(.8, n.r / 12), color);
+      if (walked && !current) {
+        ctx.fillStyle = '#8ec5b4';
+        circle(ctx, n.x + n.r * .75, n.y - n.r * .75, 5 / z); ctx.fill();
       }
-      // 重要结点：微光环绕（旋转虚线光环 + 呼吸明暗）
-      const glow = GLISTEN[n.def.type];
-      if (glow) {
-        ctx.save();
-        ctx.globalAlpha = current ? 0.9 : 0.18;
-        ctx.strokeStyle = glow;
-        ctx.lineWidth = 1.5 / z;
-        ctx.setLineDash(NO_DASH);
-        circle(ctx, n.x, n.y, n.r * 1.26);
-        ctx.stroke();
-        ctx.setLineDash(NO_DASH);
-        ctx.restore();
-      }
-      // 走过的格子：外圈描绿（火堆在 drawFires 里同样处理）
-      if (walked) {
-        ctx.save();
-        ctx.globalAlpha = current ? 0.95 : 0.6;
-        ctx.strokeStyle = '#52d273';
-        ctx.lineWidth = 2.2 / z;
-        ctx.setLineDash(NO_DASH);
-        circle(ctx, n.x, n.y, n.r * 1.16);
-        ctx.stroke();
-        ctx.setLineDash(NO_DASH);
-        ctx.fillStyle = 'rgba(82, 210, 115, 0.16)';
-        circle(ctx, n.x, n.y, n.r * 1.16);
-        ctx.fill();
-        ctx.restore();
+      const noteKey = game.map?.boardId + '|' + n.li + ',' + n.idx;
+      if (game.noteMap?.has(noteKey)) {
+        ctx.fillStyle = '#f0a832';
+        ctx.shadowColor = 'rgba(240,168,50,0.6)';
+        ctx.shadowBlur = 4 / z;
+        circle(ctx, n.x + n.r * .78, n.y - n.r * .82, 3.2 / z); ctx.fill();
+        ctx.shadowBlur = 0;
       }
       ctx.restore();
     }
+  }
+
+  // Labels stay a readable screen size at any zoom. Only known, nearby nodes are named.
+  function drawNodeLabels(ctx, game) {
+    const g = nodeGeo(game), z = game.cam.zoom;
+    const occupied = [];
+    const ordered = [...g.nodes].sort((a, b) =>
+      Number(isCurrentNode(game, b)) * 2 + Number(g.legalKeys.has(`${b.li},${b.idx}`)) -
+      Number(isCurrentNode(game, a)) * 2 - Number(g.legalKeys.has(`${a.li},${a.idx}`)));
+    ctx.save(); ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    for (const n of ordered) {
+      const current = isCurrentNode(game, n), legal = g.legalKeys.has(`${n.li},${n.idx}`);
+      if (!current && !legal && z < .65) continue;
+      const p = game.cam.worldToScreen(n.x, n.y);
+      if (p.x < 20 || p.x > game.cam.viewW - 20 || p.y < 60 || p.y > game.cam.viewH - 55) continue;
+      const door = game.layerData[n.li]?.doors?.some(d => d.at === n.idx);
+      const name = NODE_INFO[door ? 'door' : n.def.type]?.[0] || '安全节点';
+      const walked = !!game.visited?.[`${n.li},${n.idx}`];
+      const label = `${current ? '当前位置 · ' : ''}${name}`;
+      ctx.font = `600 12px "Noto Sans SC Sub",sans-serif`;
+      const w = ctx.measureText(label).width + 24;
+      const x = p.x - w / 2, y = p.y + n.r * z + 14;
+      if (occupied.some(r => x < r.x + r.w && x + w > r.x && y < r.y + 42 && y + 42 > r.y)) continue;
+      occupied.push({x,y,w});
+      ctx.fillStyle = current ? '#dfc28d' : '#0a1923e8';
+      rrect(ctx, x, y, w, 27, 3); ctx.fill();
+      ctx.strokeStyle = current ? '#f5e2bc' : legal ? '#a49374' : '#45616e';
+      ctx.lineWidth = 1; ctx.stroke();
+      ctx.fillStyle = current ? '#122633' : '#e6eef1'; ctx.fillText(label, p.x, y + 13.5);
+      if (!current && legal) {
+        ctx.font = `10px "Noto Sans SC Sub",sans-serif`;
+        ctx.fillStyle = '#d3dfdf';
+        ctx.fillText(walked ? '已探索' : '可前往', p.x, y + 40);
+      }
+    }
+    ctx.restore();
   }
 
   // ---------- 手绘连线（环内线按层合并批描：实描+点划叠加；门/祭坛线流光虚线逐帧） ----------
@@ -503,21 +311,21 @@ const SDT = window.SDT;
     }
     // 当前节点可走道路：柔光底、亮色中层、白金芯线，明确下一步可走方向。
     if (g.legalLinks) {
-      const pulse = 0.82 + Math.sin((game.time || 0) * 3.2) * 0.12;
+      const pulse = 1;
       ctx.globalAlpha = 0.42 * pulse;
-      ctx.strokeStyle = 'rgba(255,190,74,0.78)';
-      ctx.lineWidth = 13 / z;
-      ctx.shadowColor = 'rgba(255,181,55,0.95)';
-      ctx.shadowBlur = 18 / z;
+      ctx.strokeStyle = 'rgba(223,194,141,0.4)';
+      ctx.lineWidth = 7 / z;
+      ctx.shadowColor = 'rgba(223,194,141,0.4)';
+      ctx.shadowBlur = 7 / z;
       ctx.stroke(g.legalLinks);
       ctx.shadowBlur = 0;
       ctx.globalAlpha = 0.92 * pulse;
-      ctx.strokeStyle = 'rgba(255,202,91,0.96)';
-      ctx.lineWidth = 5.4 / z;
+      ctx.strokeStyle = 'rgba(223,194,141,0.85)';
+      ctx.lineWidth = 2.4 / z;
       ctx.stroke(g.legalLinks);
       ctx.globalAlpha = 1;
-      ctx.strokeStyle = 'rgba(255,247,205,0.98)';
-      ctx.lineWidth = 1.7 / z;
+      ctx.strokeStyle = 'rgba(244,230,199,0.7)';
+      ctx.lineWidth = .8 / z;
       ctx.stroke(g.legalLinks);
     }
     // 跨层通过 door modal 处理；当前层画面不连接到隐藏层坐标，避免贯穿地图的斜线。
@@ -532,56 +340,6 @@ const SDT = window.SDT;
   }
 
   // ---------- 火堆结点（辉光环 + 摇曳火焰） ----------
-  function drawFires(ctx, game) {
-    const g = nodeGeo(game);
-    const u = T0 / 48, cam = game.cam, t = 0;
-    for (const n of g.nodes) {
-      if (n.def.type !== 'fire') continue;
-      const current = isCurrentNode(game, n);
-      // 走过的火堆 = 熄灭（2026-09-09 老板：重置为空白节点）——只画暗灰烬烬环，不再画火苗；
-      // 还站在火堆上时保持燃烧状态（本格休息ing）；外圈描绿与其它走过的格子一致
-      if (!current && game.visited && game.visited[n.li + ',' + n.idx]) {
-        ctx.save();
-        ctx.globalAlpha = 0.22;
-        ctx.strokeStyle = 'rgba(82, 210, 115, 0.9)';
-        ctx.lineWidth = 1.4 / cam.zoom;
-        circle(ctx, n.x, n.y, n.r + 2);
-        ctx.stroke();
-        ctx.fillStyle = 'rgba(82, 210, 115, 0.18)';
-        circle(ctx, n.x, n.y, n.r * 0.34);
-        ctx.fill();
-        ctx.restore();
-        continue;
-      }
-      const phase = nodePhase(n);
-      const R = n.r;
-      ctx.save();
-      ctx.globalAlpha = current ? 1 : 0.20;
-      // 圆形位图火堆（呼吸缩放）+ 橙色微光环绕；无位图回退辉光环 + 简笔火焰
-      if (drawBitmapIcon(ctx, 'fire', n.x, n.y, R, current, cam.zoom)) {
-        const p = 0.5;
-        ctx.globalAlpha = (current ? 0.9 : 0.18) * (0.7 + 0.3 * p);
-        ctx.strokeStyle = 'rgba(242,133,74,0.85)';
-        ctx.lineWidth = 1.5 / cam.zoom;
-        ctx.setLineDash(NO_DASH);
-        circle(ctx, n.x, n.y, n.r * 1.26 + p * 2);
-        ctx.stroke();
-        ctx.setLineDash(NO_DASH);
-      } else {
-        ctx.fillStyle = 'rgba(242,133,74,0.14)';
-        circle(ctx, n.x, n.y, n.r + 2);
-        ctx.fill();
-        ctx.strokeStyle = 'rgba(242,133,74,0.75)';
-        ctx.lineWidth = 1.8 / cam.zoom;
-        circle(ctx, n.x, n.y, n.r + 2);
-        ctx.stroke();
-        if (current) { ctx.shadowColor = 'rgba(242,133,74,0.55)'; ctx.shadowBlur = 12; }
-        drawFlame(ctx, n.x, n.y, u, 1.15, t);
-      }
-      ctx.restore();
-    }
-  }
-
   // ---------- 编号（当前环结点，顶部长小字） ----------
   function drawIndexes(ctx, game) {
     if (!game.toggles.index) return;
@@ -664,7 +422,7 @@ const SDT = window.SDT;
   }
   function drawNodeArrow(ctx, game, p) {
     const z = game.cam.zoom;
-    const bounce = Math.sin((game.time || 0) * 4.2) * 3;
+    const bounce = 0;
     const y = p.y - nodeRadius(p) - 14 - bounce;
     ctx.save();
     ctx.translate(p.x, y);
@@ -717,78 +475,24 @@ const SDT = window.SDT;
     ctx.restore();
   }
 
-  // 名牌文本宽度缓存（字体串只随 zoom 变；避免逐帧 measureText 分配 TextMetrics）
-  const nameplate = { key: '', w: 0 };
-
   function drawPlayer(ctx, game) {
-    const cam = game.cam, z = cam.zoom;
-    const px = game.pos.x;
-    const groundY = game.pos.y;               // 俯视图：玩家标记与所在结点中心对齐（留言：红圈不居中）
-    const s = T0 * 0.40;                       // 棋子尺寸
+    const z = game.cam.zoom;
+    const p = game.pos;
     ctx.save();
-    // 地影（跳起时收窄）
-    ctx.fillStyle = 'rgba(0,0,0,0.42)';
-    ctx.beginPath();
-    ctx.ellipse(px, groundY + s * 0.14, s * 0.5 * (1 - game.hop * 0.22), s * 0.16, 0, 0, TAU);
-    ctx.fill();
-    // 呼吸光圈（椭圆，贴地；与浅红标记同色系）
-    const pulse = 0.5;
-    ctx.strokeStyle = `rgba(255,132,115,${(0.34 - pulse * 0.18).toFixed(3)})`;
-    ctx.lineWidth = 2 / z;
-    ctx.beginPath();
-    ctx.ellipse(px, groundY + s * 0.14, s * (0.68 + pulse * 0.1), s * (0.23 + pulse * 0.03), 0, 0, TAU);
-    ctx.stroke();
-    // —— 当前位置：浅红色圆圈标记（贴地，呼吸缩放，取消头像图） ——
-    const markR = T0 * 0.66 * (1 + pulse * 0.10);
-    ctx.fillStyle = 'rgba(255,120,105,0.16)';
-    circle(ctx, px, groundY, markR);
-    ctx.fill();
-    ctx.strokeStyle = 'rgba(255,132,115,0.95)';
-    ctx.lineWidth = 3.2 / z;
-    circle(ctx, px, groundY, markR);
-    ctx.stroke();
-    // 外扩涟漪：一圈淡出
-    ctx.strokeStyle = `rgba(255,132,115,${(0.55 - pulse * 0.4).toFixed(3)})`;
-    ctx.lineWidth = 2 / z;
-    circle(ctx, px, groundY, markR * (1.15 + pulse * 0.35));
-    ctx.stroke();
-    // 名牌胶囊（钉在定位针上方）
-    const label = '你';
-    ctx.font = font(cam, 10);
-    if (nameplate.key !== ctx.font) { nameplate.key = ctx.font; nameplate.w = ctx.measureText(label).width; }
-    const tw = nameplate.w;
-    const lw2 = tw + 12 / z, lh = 15 / z, lx = px, ly = groundY - markR - 16 / z;
-    ctx.fillStyle = 'rgba(22,15,6,0.85)';
-    rrect(ctx, lx - lw2 / 2, ly - lh / 2, lw2, lh, lh / 2);
-    ctx.fill();
-    ctx.strokeStyle = 'rgba(216,180,106,0.55)';
-    ctx.lineWidth = 1 / z;
-    ctx.stroke();
-    ctx.fillStyle = '#f2e2b8';
-    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-    ctx.fillText(label, lx, ly + 0.5 / z);
+    ctx.strokeStyle = '#eee0bb'; ctx.lineWidth = 2 / z;
+    const r = NODE_R + 12 / z;
+    // Four compass marks identify the current position without masking its encounter icon.
+    for (let i = 0; i < 4; i++) {
+      const a = i * Math.PI / 2;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, r, a - .14, a + .14); ctx.stroke();
+    }
     ctx.restore();
-  }
-
-
-  // ---------- 屏幕空间渐变（背景 / 暗角，仅在窗口尺寸变化时重建；数值比较避免逐帧拼 key 字符串） ----------
-  function screenGrads(ctx, cam) {
-    if (gradCache && gradCache.w === cam.viewW && gradCache.h === cam.viewH) return gradCache;
-    const bg = ctx.createLinearGradient(0, 0, 0, cam.viewH);
-    bg.addColorStop(0, COLORS.bgTop);
-    bg.addColorStop(1, COLORS.bgBottom);
-    const r = Math.hypot(cam.viewW, cam.viewH) / 2;
-    const vig = ctx.createRadialGradient(cam.viewW / 2, cam.viewH / 2, r * 0.55, cam.viewW / 2, cam.viewH / 2, r * 1.05);
-    vig.addColorStop(0, 'rgba(0,0,0,0)');
-    vig.addColorStop(1, 'rgba(12,6,2,0.55)');
-    gradCache = { w: cam.viewW, h: cam.viewH, bg, vig };
-    return gradCache;
   }
 
   function draw(ctx, game) {
     if (!game.nodes || !game.nodes.length) return;   // 结点布局未构建前不绘制
-    const cam = game.cam, map = game.map;
-    const T = map.tile, W = map.cols * T, H = map.rows * T;
+    const cam = game.cam;
     // 局内按层使用壁纸（L1/L2 废墟 / L3 红骑士 / L4 白机械 / L5 黑机械）；缓存按视口+层重建
     ctx.drawImage(ensureBackdrop(cam, game.layerIdx), 0, 0, cam.viewW, cam.viewH);
     // 轻量暗色层保留地图、节点和 HUD 的对比度，不遮掉壁纸主体。
@@ -811,11 +515,8 @@ const SDT = window.SDT;
     ctx.scale(cam.zoom, cam.zoom);
     ctx.translate(-cam.cx, -cam.cy);
 
-    ensureBoard(game);
-    ctx.drawImage(boardCanvas, -BOARD_PAD, -BOARD_PAD, W + BOARD_PAD * 2, H + BOARD_PAD * 2);
     drawCurrentNodePlate(ctx, game);
     drawLinks(ctx, game);
-    drawFires(ctx, game);
     drawIcons(ctx, game);
     drawIndexes(ctx, game);
     drawEntrancePulse(ctx, game);
@@ -825,6 +526,8 @@ const SDT = window.SDT;
     drawPlayer(ctx, game);
 
     ctx.restore();
+
+    drawNodeLabels(ctx, game);
 
     const vignette = ctx.createRadialGradient(cam.viewW / 2, cam.viewH / 2, Math.min(cam.viewW, cam.viewH) * 0.30,
       cam.viewW / 2, cam.viewH / 2, Math.max(cam.viewW, cam.viewH) * 0.78);

@@ -1,0 +1,132 @@
+/* 冬境战斗舞台：只负责层级、可读性和反馈，不接触战斗规则。 */
+#overlay .card.battle > h2 { position:relative; z-index:20; min-height:34px; color:#f0eadc; background:rgba(8,12,18,.86); border-color:rgba(196,215,226,.2); }
+#overlay .battle-stage.sts {
+  isolation:isolate; color:#eee9df; background-color:#101923;
+  background-image:linear-gradient(180deg,rgba(7,14,23,.1),rgba(7,11,17,.35)),url('../assets/scenes/winter-expedition/battle-street.webp');
+  background-position:center; background-size:cover;
+}
+#overlay .battle-stage.sts[data-boss="1"] { background-image:linear-gradient(180deg,rgba(17,11,24,.08),rgba(7,7,13,.48)),url('../assets/scenes/winter-expedition/battle-core.webp'); }
+#overlay .battle-stage.sts::after { content:''; position:absolute; inset:0; z-index:-1; pointer-events:none; opacity:.22; background:radial-gradient(circle at 50% 42%,rgba(183,216,230,.18),transparent 42%),linear-gradient(90deg,rgba(30,58,72,.16),transparent 45%,rgba(78,38,55,.2)); }
+#overlay .battle-stage.sts .battle-stage-shade { z-index:0; background:linear-gradient(180deg,rgba(5,10,16,.58),rgba(7,13,19,.08) 28%,rgba(5,8,13,.18) 62%,rgba(4,7,11,.88)); }
+#overlay .battle-stage.sts > *:not(.battle-stage-shade) { position:relative; z-index:1; }
+
+#overlay .battle-stage.sts .sts-topbar { flex:0 0 auto; min-height:48px; display:flex; align-items:center; gap:12px; padding:7px clamp(12px,2vw,28px); background:rgba(8,13,20,.76); border-bottom:1px solid rgba(200,220,228,.18); box-shadow:0 4px 18px rgba(0,0,0,.24); }
+.sts-encounter { display:flex; align-items:baseline; gap:9px; min-width:clamp(180px,25vw,310px); letter-spacing:.5px; }
+.sts-encounter-kicker { color:#b9cfda; font-size:10px; letter-spacing:2px; text-transform:uppercase; }
+.sts-encounter b { color:#fff2cf; font-size:14px; }
+.sts-encounter > span:last-child { color:#d7d2c8; font-size:12px; }
+.sts-phase-dot { width:7px; height:7px; flex:0 0 7px; border-radius:50%; background:#a8d8b4; box-shadow:0 0 9px currentColor; }
+.sts-phase-dot.foe { color:#df8e83; background:#df8e83; }
+.sts-phase-dot.focus { color:#e5c887; background:#e5c887; }
+.sts-phase-dot.warn { color:#e4a172; background:#e4a172; }
+#overlay .battle-stage.sts .sts-hud-l { margin-left:auto; }
+#overlay .battle-stage.sts .sts-hud-r { gap:6px; }
+#overlay .battle-stage.sts .sts-hud-r .ov-btn { min-height:31px; padding:5px 9px; border-color:rgba(203,215,218,.3); background:rgba(12,18,24,.72); font-size:11px; }
+#overlay .battle-stage.sts .sts-hud-r [data-act="btEnd"] { border-color:rgba(227,199,126,.72); color:#ffe5a4; box-shadow:0 0 12px rgba(227,199,126,.12); }
+#overlay .battle-stage.sts .sts-hud-r [data-act="btFlee"] { color:#d7958c; border-color:rgba(190,105,99,.34); font-size:10px; }
+
+.sts-arena { min-height:clamp(270px,45vh,610px); }
+.sts-arena-caption { position:absolute; top:clamp(12px,2vh,24px); left:50%; transform:translateX(-50%); z-index:4; display:flex; align-items:center; gap:10px; max-width:min(90%,620px); padding:7px 14px; border:1px solid rgba(204,220,220,.22); border-radius:999px; background:rgba(8,14,20,.64); box-shadow:0 5px 18px rgba(0,0,0,.18); pointer-events:none; }
+.sts-arena-caption b { color:#f2dfb1; font-size:12px; white-space:nowrap; }
+.sts-arena-caption span { color:#bac5c7; font-size:11px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+#overlay .battle-stage.sts .sts-me, #overlay .battle-stage.sts .sts-foes, #overlay .battle-stage.sts .sts-allies { bottom:clamp(5%,3vh,9%); }
+#overlay .battle-stage.sts .sts-foes { gap:clamp(10px,1.4vw,24px); }
+#overlay .battle-stage.sts .sts-foe:not(.dead) .sts-nameplate { border-color:rgba(218,167,151,.42); background:linear-gradient(180deg,rgba(30,16,21,.7),rgba(8,10,14,.9)); }
+#overlay .battle-stage.sts .sts-intent { top:-42px; color:#ffe8bf; border-color:rgba(231,193,117,.62); background:rgba(20,15,16,.9); box-shadow:0 0 16px rgba(196,133,86,.16); }
+#overlay .battle-stage.sts .sts-hp i { background:linear-gradient(90deg,#d26c68,#f0b276); }
+
+#overlay .battle-stage.sts .sts-hud { min-height:clamp(174px,24vh,230px); padding:6px clamp(10px,2vw,28px) 10px; gap:clamp(8px,1.3vw,18px); background:linear-gradient(180deg,rgba(3,8,13,.02),rgba(3,7,12,.8) 32%,rgba(3,6,10,.94)); border-top:1px solid rgba(205,222,226,.16); }
+#overlay .battle-stage.sts .sts-hand { min-height:180px; padding-top:28px; }
+#overlay .battle-stage.sts .sts-energy-wrap { margin-left:0; margin-right:clamp(4px,1vw,16px); }
+#overlay .battle-stage.sts .sts-energy { border-color:rgba(214,197,145,.68); box-shadow:0 0 24px rgba(192,161,94,.3),inset 0 -8px 14px rgba(0,0,0,.75); }
+#overlay .battle-stage.sts .bt-hand-page { border-color:rgba(190,208,216,.45); background:rgba(16,27,35,.9); }
+
+@media (max-width:900px) {
+  #overlay .battle-stage.sts .sts-topbar { flex-wrap:wrap; padding:6px 10px; }
+  .sts-encounter { min-width:100%; order:0; }
+  #overlay .battle-stage.sts .sts-hud-l { margin-left:0; }
+  #overlay .battle-stage.sts .sts-hud-r { margin-left:auto; }
+  .sts-arena-caption { top:10px; }
+}
+@media (max-height:760px) and (min-width:901px) {
+  #overlay .battle-stage.sts .sts-topbar { min-height:42px; padding-block:4px; }
+  .sts-arena { min-height:clamp(220px,40vh,430px); }
+  #overlay .battle-stage.sts .sts-hud { min-height:155px; }
+  #overlay .battle-stage.sts .sts-hand { min-height:155px; }
+}
+@media (prefers-reduced-motion:reduce) {
+  #overlay .battle-stage.sts *, #overlay .battle-stage.sts *::before, #overlay .battle-stage.sts *::after { animation-duration:.001ms!important; animation-iteration-count:1!important; transition-duration:.001ms!important; }
+}
+@media (max-width:560px) {
+  .sts-encounter-kicker, .sts-encounter > span:last-child { display:none; }
+  .sts-arena-caption { max-width:94%; }
+  .sts-arena-caption span { max-width:44vw; }
+  #overlay .battle-stage.sts .sts-hud-r .ov-btn { padding-inline:6px; }
+  #overlay .battle-stage.sts .sts-hud-r [data-act="btFlee"] { width:28px; overflow:hidden; text-indent:-999px; position:relative; }
+  #overlay .battle-stage.sts .sts-hud-r [data-act="btFlee"]::after { content:'×'; position:absolute; inset:0; text-indent:0; display:grid; place-items:center; }
+}
+
+/* winter.css contains legacy calibration rules with !important. These are the
+   final battle-stage contract and intentionally win because this sheet is last. */
+#overlay .battle-stage.sts { position:relative!important; display:flex!important; flex-direction:column!important; min-height:0!important; height:100%!important; }
+#overlay .battle-stage.sts .sts-arena { flex:1 1 auto!important; min-height:0!important; height:auto!important; overflow:visible!important; }
+#overlay .battle-stage.sts .sts-unit { bottom:clamp(3%,2.5vh,6%)!important; }
+#overlay .battle-stage.sts .sts-me { bottom:60px!important; }
+#overlay .battle-stage.sts .sts-foes { bottom:60px!important; }
+#overlay .battle-stage.sts .sts-allies { bottom:60px!important; }
+#overlay .battle-stage.sts .sts-nameplate { position:static!important; transform:none!important; }
+#overlay .battle-stage.sts .sts-hud { flex:0 0 240px!important; min-height:240px!important; height:240px!important; overflow:visible!important; }
+#overlay .battle-stage.sts .sts-hand { display:block!important; flex:1 1 auto!important; width:100%!important; max-width:none!important; min-width:0!important; min-height:220px!important; height:220px!important; overflow:visible!important; }
+#overlay .battle-stage.sts .sts-hand .bt-slot { bottom:18px!important; }
+#overlay .battle-stage.sts .sts-hand .bt-slot .bt-card { min-width:0; }
+@media (max-height:760px) and (min-width:901px) {
+  #overlay .battle-stage.sts .sts-hud { flex-basis:220px!important; min-height:220px!important; height:220px!important; }
+  #overlay .battle-stage.sts .sts-hand { min-height:200px!important; height:200px!important; }
+}
+@media (max-width:900px) {
+  #overlay .battle-stage.sts .sts-hud { flex-basis:230px!important; min-height:230px!important; height:230px!important; }
+}
+@media (max-width:560px) {
+  #overlay .battle-stage.sts .sts-hud { flex-basis:205px!important; min-height:205px!important; height:205px!important; }
+  #overlay .battle-stage.sts .sts-hand { min-height:175px!important; height:175px!important; }
+  #overlay .battle-stage.sts .sts-hand .bt-slot { bottom:18px!important; }
+}
+
+/* 主舞台布局：顶栏信息、中央对峙、底部战术台三段职责明确。 */
+#overlay .battle-stage.sts .sts-topbar { min-height:54px; }
+#overlay .battle-stage.sts .sts-topbar .sts-hud-r:empty { display:none; }
+#overlay .battle-stage.sts .sts-arena { min-height:clamp(250px,calc(100vh - 355px),600px); overflow:hidden; }
+#overlay .battle-stage.sts .sts-arena::before { content:'我方'; position:absolute; left:clamp(4%,6vw,7%); bottom:calc(clamp(5%,3vh,9%) + 188px); color:rgba(199,220,218,.58); font-size:10px; letter-spacing:2px; }
+#overlay .battle-stage.sts .sts-arena::after { content:'敌方意图'; position:absolute; right:clamp(5%,7vw,9%); bottom:calc(clamp(5%,3vh,9%) + 188px); color:rgba(231,192,145,.7); font-size:10px; letter-spacing:2px; }
+#overlay .battle-stage.sts .sts-arena-caption { top:18px; }
+#overlay .battle-stage.sts .sts-me .sts-figure img, #overlay .battle-stage.sts .sts-foe .sts-figure img, #overlay .battle-stage.sts .sts-ally .sts-figure img { background:transparent!important; mix-blend-mode:normal; }
+#overlay .battle-stage.sts .sts-figure { background:transparent!important; }
+#overlay .battle-stage.sts .sts-me, #overlay .battle-stage.sts .sts-foes, #overlay .battle-stage.sts .sts-allies { bottom:clamp(5%,3vh,9%); }
+#overlay .battle-stage.sts .sts-hud { display:grid; grid-template-columns:auto minmax(0,1fr) auto; align-items:end; min-height:clamp(168px,23vh,220px); }
+#overlay .battle-stage.sts .sts-energy-wrap { grid-column:1; grid-row:1; }
+#overlay .battle-stage.sts .sts-hand { grid-column:2; grid-row:1; min-width:0; width:auto; }
+#overlay .battle-stage.sts .bt-hand-page { grid-column:2; grid-row:1; justify-self:start; z-index:8; margin-left:4px; }
+.sts-tactics { grid-column:3; grid-row:1; display:flex; flex-direction:column; align-items:stretch; justify-content:flex-end; gap:9px; min-width:148px; padding:0 0 8px 8px; }
+.sts-tactics-secondary { display:flex; flex-wrap:wrap; justify-content:flex-end; gap:5px; }
+.sts-tactics-secondary .ov-btn { padding:5px 7px!important; font-size:10px!important; }
+#overlay .battle-stage.sts .sts-end-turn { width:100%; min-height:42px; border-color:rgba(232,201,127,.85); color:#fff0bd; background:linear-gradient(135deg,rgba(103,81,37,.94),rgba(51,42,26,.96)); font-size:14px; letter-spacing:1px; box-shadow:0 5px 16px rgba(0,0,0,.28); }
+#overlay .battle-stage.sts .sts-end-turn:disabled { opacity:.5; }
+@media (max-width:900px) {
+  #overlay .battle-stage.sts .sts-hud { grid-template-columns:auto minmax(0,1fr); }
+  .sts-tactics { grid-column:1 / -1; grid-row:2; flex-direction:row; align-items:center; padding:0; min-width:0; }
+  .sts-tactics-secondary { justify-content:flex-start; }
+  #overlay .battle-stage.sts .sts-end-turn { width:auto; margin-left:auto; padding-inline:20px; }
+}
+@media (max-width:560px) {
+  #overlay .battle-stage.sts .sts-hud { grid-template-columns:58px minmax(0,1fr); padding-inline:6px; }
+  #overlay .battle-stage.sts .sts-energy { width:56px; height:56px; }
+  #overlay .battle-stage.sts .sts-energy b { font-size:22px; }
+  #overlay .battle-stage.sts .sts-energy .ic { display:none; }
+  #overlay .battle-stage.sts .sts-hand { min-height:142px; }
+  .sts-tactics { gap:5px; }
+  .sts-tactics-secondary .ov-btn { padding:5px!important; font-size:10px!important; }
+  #overlay .battle-stage.sts .sts-end-turn { min-height:36px; padding-inline:10px; font-size:12px; }
+}
+
+#overlay .sts-hand .bt-card.click-selected { outline:2px solid #efcd89; outline-offset:3px; box-shadow:0 0 20px #e9c47a55; }
+#overlay .sts-hand .bt-card.click-selected::after { content:'选择目标 · Esc 取消'; position:absolute; bottom:4px; left:4px; right:4px; padding:4px 0; color:#112735; background:#dfc28d; font-size:10px; text-align:center; pointer-events:none; }

@@ -31,11 +31,12 @@ window.Audio = class FakeAudio {
 // WebAudio（sound.js 惰性创建，兜底防未定义）
 window.AudioContext = window.AudioContext || class FakeAudioContext {
   constructor() { this.currentTime = 0; this.destination = {}; this.sampleRate = 44100; }
-  createGain() { return { connect: () => {}, gain: { value: 0, setValueAtTime: () => {}, linearRampToValueAtTime: () => {} } }; }
-  createDynamicsCompressor() { return { connect: () => {}, threshold: {}, ratio: {} }; }
+  createGain() { return { connect: () => {}, disconnect: () => {}, gain: { value: 0, setValueAtTime: () => {}, linearRampToValueAtTime: () => {}, cancelScheduledValues: () => {}, setTargetAtTime: () => {} } }; }
+  createDynamicsCompressor() { return { connect: () => {}, disconnect: () => {}, threshold: {}, knee: {}, ratio: {}, attack: {}, release: {} }; }
   createBuffer() { return { numberOfChannels: 1, getChannelData: () => new Float32Array(8) }; }
-  createBufferSource() { return { connect: () => {}, start: () => {}, stop: () => {} }; }
-  createOscillator() { return { connect: () => {}, start: () => {}, stop: () => {}, frequency: { value: 0, setValueAtTime: () => {} } }; }
+  createBufferSource() { return { connect: () => {}, disconnect: () => {}, start: () => {}, stop: () => {}, buffer: null, loop: false }; }
+  createBiquadFilter() { return { connect: () => {}, disconnect: () => {}, type: '', frequency: { value: 0 }, Q: { value: 0 } }; }
+  createOscillator() { return { connect: () => {}, disconnect: () => {}, start: () => {}, stop: () => {}, frequency: { value: 0, setValueAtTime: () => {} } }; }
   decodeAudioData() { return Promise.resolve(this.createBuffer()); }
   resume() { return Promise.resolve(); }
   close() { return Promise.resolve(); }
@@ -69,6 +70,40 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     const title = document.getElementById('title');
     expect(title).not.toBeNull();
     expect(title.hidden).toBe(false);
+  });
+
+  it('卡牌档案馆可打开、筛选、清空与排序', () => {
+    const originalSfx = window.SDT.Sound.sfx;
+    window.SDT.Sound.sfx = () => {};
+    document.getElementById('btnCardLib').click();
+    const page = document.querySelector('.card-library-page');
+    expect(page).not.toBeNull();
+    expect(document.getElementById('libResultCount')).not.toBeNull();
+    const search = document.getElementById('cardSearch');
+    search.value = '不存在的卡牌';
+    search.dispatchEvent(new Event('input', { bubbles: true }));
+    expect(document.querySelector('.clib-empty')).not.toBeNull();
+    document.querySelector('[data-act="libClearFilter"]').click();
+    expect(document.querySelector('.lib-grid')).not.toBeNull();
+    const sort = document.getElementById('libSort');
+    sort.value = 'name';
+    sort.dispatchEvent(new Event('input', { bubbles: true }));
+    expect(sort.value).toBe('name');
+    window.SDT.Sound.sfx = originalSfx;
+  });
+
+  it('卡牌档案馆卡面点击进入详情，Esc 关闭档案馆', async () => {
+    const originalSfx = window.SDT.Sound.sfx;
+    window.SDT.Sound.sfx = () => {};
+    const card = document.querySelector('#libGrid .lib-cardwrap');
+    expect(card).not.toBeNull();
+    card.click();
+    expect(document.getElementById('cardZoom')).not.toBeNull();
+    document.querySelector('#cardZoom .cz-backdrop').click();
+    document.querySelector('.card-library-page .pg-close').click();
+    await new Promise(r => setTimeout(r, 230));
+    expect(document.getElementById('overlay').hidden).toBe(true);
+    window.SDT.Sound.sfx = originalSfx;
   });
   it('开始游戏 / 设置 / 退出按钮已绑定监听（可点击响应）', () => {
     // getEventListeners 不可用，用行为代理：点击 mSettings 应弹出设置 overlay（不再 hidden）
@@ -214,7 +249,7 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     game.state = 'title';
   });
 
-  it('enterLayer 会按当前层全貌适配镜头，而不是只聚焦入口', async () => {
+  it('enterLayer 将入口与可走分支一起构图，隐藏节点不占据画面', async () => {
     const session = await import('../game/src/game.session.js');
     const game = session.game;
     const camera = session.cam;
@@ -224,15 +259,58 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     const at = game.layerData[li].entrances[0];
     session.enterLayer(li, at);
     expect(game.activeLayerBounds).toEqual(game.layerBounds[li]);
-    expect(camera.fitLayer).toBeTypeOf('function');
-    const pad = 128;
-    for (const p of game.nodePos[li]) {
+    expect(camera.frameExploration).toBeTypeOf('function');
+    const pad = 70;
+    const indices = [at, ...game.layerData[li].logical[at].next.filter(([nl]) => nl === li).map(([, idx]) => idx)];
+    for (const idx of indices) {
+      const p = game.nodePos[li][idx];
       const screen = camera.worldToScreen(p.x, p.y);
-      expect(screen.x).toBeGreaterThanOrEqual(-pad);
-      expect(screen.x).toBeLessThanOrEqual(camera.viewW + pad);
-      expect(screen.y).toBeGreaterThanOrEqual(-pad);
-      expect(screen.y).toBeLessThanOrEqual(camera.viewH + pad);
+      expect(screen.x).toBeGreaterThanOrEqual(pad);
+      expect(screen.x).toBeLessThanOrEqual(camera.viewW - pad);
+      expect(screen.y).toBeGreaterThanOrEqual(pad);
+      expect(screen.y).toBeLessThanOrEqual(camera.viewH - pad);
     }
+    game.state = 'title';
+  });
+
+  it('战斗指向卡支持点击选中、Esc取消与目标结算', async () => {
+    const C = window.SDT.Cards;
+    const sha = C.all().find(c => c.id === 'builtin-sha');
+    const game = {
+      ownedCards: [{ uid: 'boot-click-sha', card: sha }], hp: 30, maxHp: 30, atk: 5, spellPower: 0, coins: 0,
+      myClass: '侠客', characterId: null, state: 'idle', battleActive: false,
+      log() {}, heal(n) { this.hp = Math.min(this.maxHp, this.hp + n); }, addItem() {},
+      onBattleEnd() {},
+    };
+    const foe = { id: 'infantry', name: '点击测试靶', hp: 40, maxHp: 40, atk: 1 };
+    const oldAnimate = Element.prototype.animate;
+    Element.prototype.animate = function () { return { onfinish: null, cancel() {} }; };
+    window.SDT.Battle.start(game, [foe], { isBoss: false, name: '点击测试' });
+    await new Promise(resolve => setTimeout(resolve, 20));
+    const card = document.querySelector('.sts-hand .bt-card.need-target');
+    const enemy = document.querySelector('.sts-foe[data-eidx="0"]');
+    expect(card).not.toBeNull(); expect(enemy).not.toBeNull();
+    const hotkey = new KeyboardEvent('keydown', { key: card.dataset.handIndex, bubbles: true, cancelable: true });
+    document.dispatchEvent(hotkey);
+    expect(card.classList.contains('click-selected')).toBe(true);
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true }));
+    card.click();
+    expect(card.classList.contains('click-selected')).toBe(true);
+    expect(card.getAttribute('aria-pressed')).toBe('true');
+    const esc = new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true });
+    document.dispatchEvent(esc);
+    expect(esc.defaultPrevented).toBe(true);
+    expect(card.classList.contains('click-selected')).toBe(false);
+    expect(card.getAttribute('aria-pressed')).toBe('false');
+    card.click();
+    const before = window.SDT.Battle.getSnapshot().foes[0].hp;
+    enemy.click();
+    await new Promise(resolve => setTimeout(resolve, 40));
+    expect(window.SDT.Battle.getSnapshot().foes[0].hp).toBeLessThan(before);
+    expect(window.SDT.Battle.getSnapshot().foes[0].hp).toBeLessThan(40);
+    if (game.battleActive) window.SDT.Battle.commands.flee();
+    Element.prototype.animate = oldAnimate;
+    document.getElementById('overlay')?.setAttribute('hidden', '');
     game.state = 'title';
   });
 });

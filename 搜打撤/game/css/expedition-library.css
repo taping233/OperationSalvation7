@@ -1,0 +1,71 @@
+/* Archive view: large cards, stable filter rail, no white surfaces. */
+#overlay .card-library-page { background:#081722; color:#e6eef1; min-height:100%; overflow:auto; }
+#overlay .card-library-page .library-head { display:grid; grid-template-columns:minmax(0,1fr) auto auto; grid-template-areas:'title count close' 'tools tools tools'; gap:10px 18px; align-items:center; padding:22px 28px; background:#081722; border-bottom:1px solid rgba(223,194,141,.24); }
+#overlay .card-library-page .library-title { grid-area:title; }
+#overlay .card-library-page .clib-count { grid-area:count; }
+#overlay .card-library-page .library-head > .pg-close { grid-area:close; position:static; }
+#overlay .card-library-page .library-tools { grid-area:tools; display:flex; align-items:center; gap:10px; }
+#overlay .card-library-page .library-tools .clib-search { flex:1; min-width:180px; }
+#overlay .library-title h2 { margin:3px 0 4px; color:#e6eef1; letter-spacing:.14em; }
+#overlay .library-title p { margin:0; color:#9fb5bb; font-size:12px; }
+#overlay .library-kicker { color:#dfc28d; font:700 10px ui-monospace,monospace; letter-spacing:.18em; }
+#overlay .card-library-page .clib-search, #overlay .card-library-page .pg-select { background:#102735; color:#e6eef1; border:1px solid rgba(182,211,214,.24); border-radius:2px; min-height:36px; padding:0 10px; }
+#overlay .clib-main { display:grid; grid-template-columns:190px minmax(0,1fr); gap:22px; align-items:start; padding:24px 28px 40px; }
+#overlay .library-sidebar { position:sticky; top:0; display:flex; flex-direction:column; gap:12px; min-width:0; }
+#overlay .library-filter-head { display:flex; align-items:center; justify-content:space-between; color:#dfc28d; letter-spacing:.1em; border-bottom:1px solid rgba(223,194,141,.2); padding-bottom:10px; }
+#overlay .library-select { width:100%; }
+#overlay .library-sidebar .clib-tabs { display:flex; flex-direction:column; gap:4px; max-height:44vh; overflow:auto; }
+#overlay .library-sidebar .type-tab { display:grid; grid-template-columns:24px 1fr auto; align-items:center; gap:8px; width:100%; padding:9px 10px; text-align:left; border:1px solid transparent; border-radius:2px; background:transparent; color:#9fb5bb; cursor:pointer; }
+#overlay .library-sidebar .type-tab:hover { background:#102735; color:#e6eef1; }
+#overlay .library-sidebar .type-tab.on { color:#e6eef1; border-color:#dfc28d; background:rgba(223,194,141,.12); box-shadow:inset 3px 0 #dfc28d; }
+#overlay .library-sidebar .type-tab i { display:flex; align-items:center; justify-content:center; }
+#overlay .library-sidebar .type-tab em { color:#dfc28d; font:700 11px ui-monospace,monospace; font-style:normal; }
+#overlay .library-preview { min-height:90px; padding:12px 0 0; text-align:center; color:#9fb5bb; }
+#overlay .library-preview.has-preview { min-height:280px; }
+#overlay .library-preview.has-preview .hs-card { font-size:12px; }
+#overlay .library-preview .hs-card { font-size:10px; max-width:100%; }
+#overlay .lib-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:18px; align-items:start; }
+#overlay .lib-item { display:flex; flex-direction:column; gap:8px; min-width:0; }
+#overlay .lib-cardwrap { display:flex; justify-content:center; padding:8px; background:rgba(16,39,53,.55); border:1px solid rgba(182,211,214,.14); border-radius:3px; cursor:zoom-in; }
+#overlay .lib-cardwrap:hover { border-color:#dfc28d; background:#143342; }
+#overlay .lib-cardwrap .hs-card { font-size:11px; }
+#overlay .lib-actions { display:flex; gap:6px; justify-content:center; }
+#overlay .clib-empty { grid-column:1/-1; min-height:300px; display:grid; place-content:center; justify-items:center; color:#9fb5bb; border:1px dashed rgba(182,211,214,.2); background:rgba(16,39,53,.35); }
+#overlay .clib-empty-icon { color:#dfc28d; font-size:32px; margin-bottom:10px; }
+#overlay .lib-pager { grid-column:1/-1; display:flex; justify-content:center; align-items:center; gap:14px; padding-top:8px; color:#9fb5bb; }
+@media (max-width:900px) { #overlay .card-library-page .library-head { grid-template-columns:minmax(0,1fr) auto auto; } #overlay .clib-main { grid-template-columns:150px minmax(0,1fr); padding:18px; } #overlay .lib-grid { grid-template-columns:repeat(auto-fill,minmax(128px,1fr)); gap:12px; } }
+@media (max-width:620px) { #overlay .card-library-page .library-head { grid-template-columns:1fr auto; grid-template-areas:'title close' 'count count' 'tools tools'; } #overlay .card-library-page .library-tools { flex-wrap:wrap; } #overlay .card-library-page .library-head .clib-search { flex-basis:100%; } #overlay .clib-main { grid-template-columns:1fr; } #overlay .library-sidebar { position:static; } #overlay .library-sidebar .clib-tabs { flex-direction:row; overflow-x:auto; max-height:none; } #overlay .library-sidebar .type-tab { min-width:100px; } #overlay .library-preview { display:none; } }
+
+/* Override the former compact paper catalogue, within the archive only. */
+#overlay .card-library-page .library-title h2 { display:block!important; margin:7px 0; font:27px/1.35 'SimSun',serif; color:#edf0e9; letter-spacing:4px; }
+#overlay .card-library-page .clib-main { background:#081722!important; overflow:hidden; align-items:stretch; padding:22px 28px; }
+#overlay .card-library-page .library-head { flex-shrink:0; }
+#overlay .card-library-page .library-sidebar { overflow:auto; position:static; padding-right:12px; scrollbar-width:thin; scrollbar-color:#365666 #081722; }
+#overlay .card-library-page .clib-tabs { background:none; padding:0; border:0; flex-shrink:0; max-height:none; }
+#overlay .card-library-page .lib-grid { grid-template-columns:repeat(auto-fill,minmax(178px,1fr))!important; gap:22px 18px!important; padding:6px 6px 22px!important; align-content:start; scrollbar-color:#365666 #081722; scrollbar-width:thin; }
+#overlay .card-library-page .lib-item { border:0; padding:0; contain-intrinsic-size:auto 305px; }
+#overlay .card-library-page .lib-cardwrap { padding:0; border:0; background:none; width:100%; }
+#overlay .card-library-page .lib-cardwrap .hs-card { aspect-ratio:10/14!important; height:auto!important; min-height:260px; max-width:215px; width:100%!important; font-size:11px; }
+#overlay .card-library-page .hs-card.lib .hsc-art { height:auto!important; min-height:120px!important; flex:1!important; max-height:165px; }
+#overlay .card-library-page .hs-card.lib .hsc-type { display:block!important; font-size:10px; }
+#overlay .card-library-page .hs-card.lib .hsc-desc { display:block!important; flex:0 0 64px; min-height:64px; padding:8px; font-size:11px; line-height:1.5; overflow:hidden; }
+#overlay .card-library-page .hs-card.lib .hsc-kw { display:flex; }
+#overlay .card-library-page .lib-actions { width:100%; justify-content:flex-end; opacity:.85; }
+#overlay .card-library-page .hs-btn { background:#142d3c; border:1px solid #819aa340; border-radius:2px; color:#bfd0d5; box-shadow:none; }
+#overlay .card-library-page .hs-btn.gold { background:#dfc28d; color:#102733; }
+#overlay .card-library-page .hs-btn.danger { color:#ce9992; background:transparent; }
+#overlay .card-library-page .lib-pager { border-color:#aabcc333; }
+#overlay .card-library-page .lib-pageinfo { color:#b4c7ce; }
+@media(max-width:900px) {
+  #overlay .card-library-page .lib-grid { grid-template-columns:repeat(auto-fill,minmax(170px,1fr))!important; gap:18px 14px!important; }
+  #overlay .card-library-page .clib-main { padding:16px; }
+  #overlay .card-library-page .library-preview { display:none; }
+}
+@media(max-width:620px) {
+  #overlay .card-library-page { overflow:auto; }
+  #overlay .card-library-page .clib-main { display:flex; flex-direction:column; overflow:visible; }
+  #overlay .card-library-page .library-sidebar { flex:0 0 auto; overflow:visible; padding:0; }
+  #overlay .card-library-page .library-sidebar .clib-tabs { display:flex; flex-direction:row; flex-wrap:nowrap; overflow:auto; }
+  #overlay .card-library-page .lib-grid { grid-template-columns:repeat(2,minmax(0,1fr))!important; overflow:visible; }
+  #overlay .card-library-page .lib-cardwrap .hs-card { min-height:240px; }
+}

@@ -2,6 +2,8 @@ import { sdtDefine } from './sdt-facade.js';
 import { Howl, Howler } from 'howler';
 import { assetUrl } from './asset-url.js';
 import { Random } from './random.js';
+import { shouldPlaySfx } from './sound.policy.js';
+import { WinterSoundscape } from './sound.scape.js';
 const BGM_URL = new URL('../assets/bgm-sour-orange-earth.mp3', import.meta.url).href;
 // 开屏（标题）专用曲目：《「离解复合」主界面》
 const TITLE_BGM_URL = new URL('../assets/bgm-liejie-fuhe.mp3', import.meta.url).href;
@@ -10,14 +12,14 @@ const bgm = new Howl({ src: [BGM_URL], loop: true, html5: true, preload: false, 
 // 开屏曲目不预载（6.3MB）：自动播放策略下首次交互前必然无声，改为首次 syncBgm 时按需加载，
 // 启动带宽让给首屏图与字体；Howler 对 preload:false 的实例会在 play() 时自动 load。
 const titleBgm = new Howl({ src: [TITLE_BGM_URL], loop: true, html5: true, preload: false, volume: 0 });
-  let ctx = null, master = null, sfxGain = null, clickGain = null, clickComp = null;
+  let ctx = null, master = null, masterComp = null, sfxGain = null, clickGain = null, clickComp = null, scape = null;
   // 三级开关：muted 全局静音（侧边栏 [[icon:gear]]）· musicOff 只关音乐 · sfxOff 只关音效（设置页）
   let muted = false, musicOff = false, sfxOff = false;
   // 音量 0~1，随 localStorage 持久化；音乐基准 0.45，音效基准 2.5
-  let musicVol = 1, sfxVol = 1;
+  let musicVol = 1, sfxVol = 1, musicSource = 'scape';
   const BASE_MUSIC = 0.45, BASE_SFX = 2.5;
   // 滑条 0..1 → 增益走 dB 曲线（等比可闻：低段每格有变化，端点不变 0=静音 / 1=基准）
-  const dbGain = k => Math.pow(10, ((k - 1) * 30) / 20);
+  const dbGain = k => Number(k) <= 0 ? 0 : Math.pow(10, ((Math.min(1, Number(k)) - 1) * 30) / 20);
   // 战斗 ducking：战斗期间 BGM 侧链压低（audio-design），结束恢复
   let ducked = false;
   try {
@@ -26,18 +28,25 @@ const titleBgm = new Howl({ src: [TITLE_BGM_URL], loop: true, html5: true, prelo
     sfxOff = localStorage.getItem('sdt-sfx-off') === '1';
     const mv = parseFloat(localStorage.getItem('sdt-music-vol')); if (mv >= 0 && mv <= 1) musicVol = mv;
     const sv = parseFloat(localStorage.getItem('sdt-sfx-vol')); if (sv >= 0 && sv <= 1) sfxVol = sv;
+    const source = localStorage.getItem('sdt-music-source'); if (source === 'original' || source === 'scape') musicSource = source;
   } catch (e) {}
 
   function ensure() {
     if (ctx) { if (ctx.state === 'suspended') ctx.resume().catch(() => {}); return true; }
     try { ctx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { return false; }
-    master = ctx.createGain(); master.gain.value = muted ? 0 : 1; master.connect(ctx.destination);
+    master = ctx.createGain(); master.gain.value = muted ? 0 : 1;
+    // 所有合成音共享一个软限幅器，给卡牌连击/骰子多段碰撞保留峰值余量。
+    masterComp = ctx.createDynamicsCompressor();
+    masterComp.threshold.value = -6; masterComp.knee.value = 8;
+    masterComp.ratio.value = 12; masterComp.attack.value = 0.003; masterComp.release.value = 0.18;
+    master.connect(masterComp); masterComp.connect(ctx.destination);
     sfxGain = ctx.createGain(); sfxGain.gain.value = BASE_SFX * dbGain(sfxVol); sfxGain.connect(master);
     // 点击音专用链路：增益拉响度，压缩器压掉归一化后的尖峰，避免破音
     clickGain = ctx.createGain(); clickGain.gain.value = 1.8;
     clickComp = ctx.createDynamicsCompressor();
     clickComp.threshold.value = -14; clickComp.ratio.value = 4;
     clickGain.connect(clickComp); clickComp.connect(sfxGain);
+    scape = new WinterSoundscape(ctx, master);
     loadClicks();
     loadHovers();
     loadSwitches();
@@ -306,8 +315,11 @@ const titleBgm = new Howl({ src: [TITLE_BGM_URL], loop: true, html5: true, prelo
     } catch (e) { return false; }
   }
 
+  const lastSfxAt = new Map();
   function sfx(name) {
     if (muted || sfxOff) return;
+    const stamp = typeof performance !== 'undefined' && performance.now ? performance.now() : Date.now();
+    if (!shouldPlaySfx(name, stamp, lastSfxAt)) return;
     if (!ensure()) return;
     // 战斗/开箱采样优先（随机选一），未就绪或缺位时回退合成音
     const pool = battleBuffers && battleBuffers[name];
@@ -338,19 +350,26 @@ const titleBgm = new Howl({ src: [TITLE_BGM_URL], loop: true, html5: true, prelo
   let userGestured = false;
   function activeBgm() { return musicMode === 'title' ? titleBgm : bgm; }
   function syncBgm() {
-    const on = musicMode && !muted && !musicOff && userGestured;
+    const visible = typeof document === 'undefined' || !document.hidden;
+    const on = !!(musicMode && !muted && !musicOff && userGestured && visible);
+    const originalOn = on && musicSource === 'original';
+    if (scape) {
+      scape.setVolume(BASE_MUSIC * dbGain(musicVol) * 0.32 * (ducked ? 0.45 : 1));
+      scape.setMode(on && musicSource === 'scape' ? (['title', 'base'].includes(musicMode) ? 'title' : musicMode === 'battle' ? 'battle' : 'board') : null);
+      scape.setMuted(!on || musicSource !== 'scape');
+    }
     const cur = activeBgm();
     const target = BASE_MUSIC * dbGain(musicVol) * (ducked ? 0.45 : 1);
     [bgm, titleBgm].forEach(track => {
-      track.mute(!on);
-      if ((track !== cur || !on) && track.playing()) {
+      track.mute(!originalOn || track !== cur);
+      if ((!originalOn || track !== cur) && track.playing()) {
         track.fade(track.volume(), 0, 280);
         setTimeout(() => {
-          if (track !== activeBgm() || !musicMode || muted || musicOff) track.pause();
+          if (track !== activeBgm() || !musicMode || muted || musicOff || document.hidden || musicSource !== 'original') track.pause();
         }, 300);
       }
     });
-    if (!on) return;
+    if (!originalOn) return;
     cur.mute(false);
     // preload:false 的 Howl 在 play() 时只挂起等待、不会自动加载，必须先显式 load()。
     // 走到这里必然已过首次交互门控（userGestured），是曲目的预期加载时机。
@@ -379,6 +398,11 @@ const titleBgm = new Howl({ src: [TITLE_BGM_URL], loop: true, html5: true, prelo
     try { localStorage.setItem('sdt-music-off', musicOff ? '1' : '0'); } catch (e) {}
     syncBgm();
   }
+  function setMusicSource(source) {
+    musicSource = source === 'original' ? 'original' : 'scape';
+    try { localStorage.setItem('sdt-music-source', musicSource); } catch (e) {}
+    syncBgm();
+  }
   // 战斗 ducking 开关（battle.core 进出战斗时调用）
   function setDucked(v) {
     v = !!v;
@@ -398,6 +422,7 @@ const titleBgm = new Howl({ src: [TITLE_BGM_URL], loop: true, html5: true, prelo
     const target = BASE_MUSIC * dbGain(musicVol) * (ducked ? 0.45 : 1);
     bgm.volume(target);
     titleBgm.volume(target);
+    if (scape) scape.setVolume(target * 0.32);
   }
   function setSfxVolume(v) {
     sfxVol = Math.min(1, Math.max(0, +v || 0));
@@ -410,7 +435,12 @@ const titleBgm = new Howl({ src: [TITLE_BGM_URL], loop: true, html5: true, prelo
     // 已解锁且 BGM 正常播放、WebAudio 也未挂起时，后续每次按键/点击直接跳过——
     // 否则每个输入都重走 syncBgm（Howler mute/volume 写入），还会打断进行中的音量淡入淡出。
     // ctx 挂起（浏览器音频策略）时不得早退，否则跳过 resume 会让音效一直哑着。
-    if (userGestured && musicMode && activeBgm().playing()
+    // 声景由持续 WebAudio 节点驱动，没有 Howl 的 playing() 状态可供判断；
+    // 只要上下文仍在运行，后续 pointer 不必重复 sync，避免反复重排淡入曲线。
+    const audioAlreadyRunning = musicSource === 'scape'
+      ? !!scape
+      : activeBgm().playing();
+    if (userGestured && musicMode && audioAlreadyRunning
       && (!Howler.ctx || Howler.ctx.state === 'running')) return;
     userGestured = true;
     if (Howler.ctx && Howler.ctx.state === 'suspended') Howler.ctx.resume().catch(() => {});
@@ -418,6 +448,7 @@ const titleBgm = new Howl({ src: [TITLE_BGM_URL], loop: true, html5: true, prelo
   }
   document.addEventListener('pointerdown', kick);
   document.addEventListener('keydown', kick);
+  document.addEventListener('visibilitychange', syncBgm);
 
   // 全局事件委托：任何 <button> 被点击都播放点击音（替代各处手动绑定，避免重复）
   document.addEventListener('pointerdown', (e) => {
@@ -441,12 +472,13 @@ const titleBgm = new Howl({ src: [TITLE_BGM_URL], loop: true, html5: true, prelo
   });
 
   sdtDefine('Sound', {
-    sfx, music, setMuted, setMusicMuted, setSfxMuted, setMusicVolume, setSfxVolume, setDucked, ensure,
+    sfx, music, setMuted, setMusicMuted, setMusicSource, setSfxMuted, setMusicVolume, setSfxVolume, setDucked, ensure,
     get muted() { return muted; },
     get musicMuted() { return musicOff; },
     get sfxMuted() { return sfxOff; },
     get musicVolume() { return musicVol; },
     get sfxVolume() { return sfxVol; },
+    get musicSource() { return musicSource; },
   });
 
 export { tone };

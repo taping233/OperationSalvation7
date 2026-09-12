@@ -1,5 +1,6 @@
 import { characterName } from './characters.js';
 import { Random } from './random.js';
+import { renderExpeditionPanel } from './expedition.view.js';
   const SDT = window.SDT;
   const $ = (id) => document.getElementById(id);
 
@@ -201,6 +202,7 @@ import { Random } from './random.js';
     },
 
     refresh(game) {
+      renderExpeditionPanel($('routePanel'), game, name => SDT.Icons.img(name));
       // 格子结算链回到 idle，才真正退出房间页；战斗→宝箱等中间切页不会闪回地图。
       if (game.state === 'idle' && this._roomActive) this.endRoom();
       const layer = game.curLayer ? game.curLayer() : null;

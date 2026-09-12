@@ -1,0 +1,74 @@
+/* Shared out-of-run surfaces: deep navy archive, generous spacing, readable capacity. */
+#overlay .hub, #overlay .bag-view, #overlay .cardlib-page, #overlay .settings-page { background:#081722; color:#e6eef1; min-height:100%; }
+#overlay .hub-head, #overlay .bag-head, #overlay .cardlib-head, #overlay .pg-head { background:rgba(8,23,34,.96); border-bottom:1px solid rgba(223,194,141,.24); padding:18px 24px; }
+#overlay .hub-head h2, #overlay .bag-head h2, #overlay .pg-head h2 { color:#e6eef1; letter-spacing:.16em; }
+#overlay .hub-slot-label { color:#dfc28d; font:700 11px ui-monospace,monospace; letter-spacing:.12em; }
+#overlay .hub-body { display:grid; grid-template-columns:150px minmax(0,1fr); flex:1; min-height:0; }
+#overlay .hub-tabs { display:flex; flex-direction:column; gap:4px; padding:18px 10px; border-right:1px solid rgba(223,194,141,.18); border-bottom:0; }
+#overlay .hub-tab { flex:0 0 auto; flex-direction:row; justify-content:flex-start; gap:10px; min-height:44px; padding:9px 12px; border:0; border-left:3px solid transparent; border-radius:0; background:transparent; color:#9db0b8; }
+#overlay .hub-tab .tab-ico { width:26px; height:26px; border:0; background:transparent; box-shadow:none; }
+#overlay .hub-tab.on { color:#e6eef1; background:rgba(223,194,141,.1); border-left-color:#dfc28d; box-shadow:none; }
+#overlay .hub-tab.on .tab-ico { border:0; box-shadow:none; }
+#overlay .hub-page { min-width:0; overflow:auto; padding:24px clamp(18px,3vw,42px) 40px; }
+#overlay .hub-page .hub-card, #overlay .hub-page .bag-side-card, #overlay .hub-page .base-bar { background:rgba(13,34,47,.78); border:1px solid rgba(182,211,214,.15); border-radius:2px; box-shadow:none; }
+#overlay .hub-page .mode-card, #overlay .hub-page .cls-card { background:#102735; border-color:rgba(182,211,214,.2); border-radius:2px; }
+#overlay .hub-page .mode-card.on, #overlay .hub-page .cls-card.on { background:#183b48; border-color:#dfc28d; box-shadow:inset 3px 0 #dfc28d; }
+#overlay .hub-page .mode-card .mode-info b, #overlay .hub-page .mode-card .mode-info span, #overlay .hub-page .cls-info { color:#e6eef1; }
+#overlay .bag-layout { min-height:0; }
+#overlay .bag-main, #overlay .bag-side { background:rgba(13,34,47,.62); border:1px solid rgba(182,211,214,.14); padding:18px; }
+#overlay .bag-side { background:#0b1f2c; }
+#overlay .bag-slot.empty, #overlay .safe-empty { background:rgba(230,238,241,.025); border-color:rgba(182,211,214,.13); }
+#overlay .bag-head .fc-chip, #overlay .bag-view .fc-chip { background:#102735; color:#b7cbd0; border-color:rgba(223,194,141,.25); border-radius:2px; }
+#overlay .bag-view .set-h, #overlay .hub-page .set-h { color:#dfc28d; border-color:rgba(223,194,141,.22); }
+#overlay .stash-row, #overlay .ach-row, #overlay .coll-ms { background:#102735; border-color:rgba(182,211,214,.16); border-radius:2px; }
+#overlay .stash-row:hover, #overlay .ach-row:hover { background:#183b48; border-color:#dfc28d; }
+#overlay .stash-list, #overlay .stash-grid, #overlay .dep-list, #overlay .coll-room { scrollbar-color:#496977 #081722; }
+#overlay .ov-btn, #overlay .mini-btn { border-radius:2px; }
+#overlay .ov-btn.ok, #overlay .mini-btn.ok { background:#dfc28d; color:#0b202c; }
+#overlay .ov-btn.danger, #overlay .mini-btn.danger { background:#6f3539; border-color:#a96868; color:#ffe4df; }
+#overlay .hub-back, #overlay .bag-close, #overlay .pg-back { color:#b7cbd0; }
+@media (max-width:760px) { #overlay .hub-body { grid-template-columns:1fr; } #overlay .hub-tabs { flex-direction:row; overflow-x:auto; border-right:0; border-bottom:1px solid rgba(223,194,141,.18); padding:8px; } #overlay .hub-tab { min-width:110px; justify-content:center; border-left:0; border-bottom:3px solid transparent; } #overlay .hub-tab.on { border-left:0; border-bottom-color:#dfc28d; } #overlay .deploy-grid, #overlay .hub-two, #overlay .dep-body { grid-template-columns:1fr; } }
+@media (max-height:760px) { #overlay .hub-head, #overlay .bag-head, #overlay .pg-head { padding:12px 18px; } #overlay .hub-page { padding-top:14px; padding-bottom:28px; } }
+
+/* 出征整备页：覆盖 winter.css 的浅纸卡片与旧按钮，保证 720px 高度仍能完成确认。 */
+#overlay #depMain { min-height:0; height:100%; box-sizing:border-box; padding:16px 22px 18px; background:
+  linear-gradient(180deg,rgba(6,17,27,.92),rgba(5,14,23,.98)),
+  url('../assets/scenes/winter-expedition/outskirts.webp') center/cover no-repeat; }
+#overlay #depMain .hub-head { flex-shrink:0; padding:12px 16px; border:1px solid rgba(223,194,141,.24); border-radius:2px; background:rgba(8,23,34,.94); }
+#overlay #depMain .hub-head h2 { display:block; color:#e6eef1; font-size:clamp(18px,2vw,24px); }
+#overlay #depMain .dep-body { display:grid; grid-template-columns:minmax(0,1.15fr) minmax(360px,.85fr); gap:16px; flex:1; min-height:0; overflow:hidden; align-items:stretch; }
+#overlay #depMain .dep-body > .hub-card { display:flex; flex-direction:column; min-height:0; overflow:hidden; padding:14px; border:1px solid rgba(182,211,214,.18); border-radius:2px; background:rgba(13,34,47,.94); color:#e6eef1; box-shadow:0 14px 34px rgba(0,0,0,.2); }
+#overlay #depMain .dep-body > .hub-card > h3 { flex-shrink:0; margin:0 0 10px; padding-bottom:10px; border-bottom:1px solid rgba(223,194,141,.2); color:#e6eef1; }
+#overlay #depMain .dep-cards { flex:1 1 auto; min-height:0; max-height:none; overflow-y:auto; padding:4px 3px 8px; scrollbar-color:#496977 #081722; }
+#overlay #depMain .bag-grid { flex:1 1 auto; min-height:120px; overflow-y:auto; padding:9px; border-color:rgba(223,194,141,.38); border-radius:2px; scrollbar-color:#496977 #081722; }
+#overlay #depMain .dep-foot { flex-shrink:0; margin-top:12px; padding-top:12px; border-top:1px solid rgba(223,194,141,.2); }
+#overlay #depMain .dep-foot #btnDeploy { min-height:42px; padding:11px 18px; border:1px solid #dfc28d; border-radius:2px; background:linear-gradient(135deg,#dfc28d,#ad8950); color:#0b202c; box-shadow:0 6px 18px rgba(0,0,0,.24); font-weight:800; letter-spacing:.22em; }
+#overlay #depMain .dep-foot #btnDeploy:hover { background:linear-gradient(135deg,#f0d89d,#c19a5d); }
+#overlay #depMain .dep-back { border-radius:2px; }
+
+/* 基地其他页签：局部压过 winter.css 的浅纸文字，保持深海军蓝信息层级。 */
+#overlay .hub-page .hub-card { color:#e6eef1; background:rgba(13,34,47,.84); border-color:rgba(182,211,214,.16); }
+#overlay .hub-page .hub-card > h3, #overlay .hub-page .hub-card .base-line,
+#overlay .hub-page .hub-card .pk-row, #overlay .hub-page .hub-card .ov-note,
+#overlay .hub-page .hub-card .ov-empty, #overlay .hub-page .hub-card .dim,
+#overlay .hub-page .hub-card .ach-info span, #overlay .hub-page .hub-card .ach-info b,
+#overlay .hub-page .hub-card .pet-row div, #overlay .hub-page .hub-card .si-line,
+#overlay .hub-page .hub-card .back-card b { color:#c7d8dc; }
+#overlay .hub-page .hub-card .base-line b, #overlay .hub-page .hub-card .pk-row b,
+#overlay .hub-page .hub-card .ach-info b { color:#f0d38e; }
+#overlay .hub-page .hub-card .pk-row, #overlay .hub-page .hub-card .stash-row,
+#overlay .hub-page .hub-card .ach-row, #overlay .hub-page .hub-card .coll-ms { background:#102735; border-color:rgba(182,211,214,.16); }
+#overlay .hub-page .hub-card .stash-row:hover, #overlay .hub-page .hub-card .ach-row:hover,
+#overlay .hub-page .hub-card .coll-ms.reach { background:#183b48; border-color:#dfc28d; }
+
+@media (max-width:900px) {
+  #overlay #depMain { overflow:auto; }
+  #overlay #depMain .dep-body { grid-template-columns:1fr; overflow:auto; }
+  #overlay #depMain .dep-body > .hub-card { min-height:360px; }
+}
+@media (max-height:760px) and (min-width:901px) {
+  #overlay #depMain { padding-top:10px; padding-bottom:12px; }
+  #overlay #depMain .hub-head { padding-top:8px; padding-bottom:8px; }
+  #overlay #depMain .dep-body { gap:12px; }
+  #overlay #depMain .dep-body > .hub-card { padding:11px; }
+}

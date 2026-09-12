@@ -52,6 +52,7 @@ export function moveTo(toLi, toIdx) {
     game.layerIdx = toLi;
     game.trackPos = toIdx;
     markSeen(toLi, toIdx);
+    if (game.cam?.frameMode === 'routes') game.cam.frameExploration(game);
     game.hop = 0;
     game.moveTarget = null;
     game.turn++;
@@ -72,6 +73,7 @@ export function moveTo(toLi, toIdx) {
   activeMove = { seq, from: { li: fromLi, idx: fromIdx }, to: { li: toLi, idx: toIdx }, startedAt };
   game.moveTarget = { li: toLi, idx: toIdx, seq, progress: 0, moving: true };
   game.state = 'moving';
+  UI.refresh(game);
   game.pos = { ...from };
   // rAF 在后台页可能被暂停；看门狗确保事务最终回到稳定节点。
   watchdog = setTimeout(finish, MOVE_DURATION + 700);
@@ -96,7 +98,7 @@ function resolveCell() {
   const repeatable = !def || door || altarE ||
     ['emergencyExit', 'extraction'].includes(def.type);
   if (game.visited[vKey] && !repeatable) {
-    UI.log('[[icon:road]] 这里已经来过了——能拿的都拿走了，什么也没有。', 'sys');
+    UI.log('[[icon:map]] 这里已经来过了——能拿的都拿走了，什么也没有。', 'sys');
     game.state = 'idle';
     saveGame();
     UI.refresh(game);

@@ -181,13 +181,39 @@ const TAU = Math.PI * 2;
     }
   }
 
+  // 战术地图线性符号：小尺寸下保持清晰，不加载位图也不依赖圆形底板。
+  function drawTacticalIcon(ctx, type, cx, cy, u, color) {
+    const c = color || '#d7e6e8';
+    ctx.save(); ctx.strokeStyle = c; ctx.fillStyle = c; ctx.lineWidth = Math.max(1.4, 1.9 * u); ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    const s = 8 * u;
+    switch (type) {
+      case 'battle':
+        ctx.beginPath(); ctx.moveTo(cx-s,cy-s); ctx.lineTo(cx+s,cy+s); ctx.moveTo(cx+s,cy-s); ctx.lineTo(cx-s,cy+s); ctx.stroke(); break;
+      case 'coin': case 'wood': case 'rations': case 'chest': case 'key':
+        ctx.beginPath(); ctx.moveTo(cx,cy-s-2*u); ctx.lineTo(cx+s+2*u,cy); ctx.lineTo(cx,cy+s+2*u); ctx.lineTo(cx-s-2*u,cy); ctx.closePath(); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(cx-3*u,cy); ctx.lineTo(cx+3*u,cy); ctx.stroke(); break;
+      case 'fire': case 'emergencyExit': case 'extraction': case 'entrance':
+        ctx.beginPath(); ctx.moveTo(cx,cy-s-2*u); ctx.lineTo(cx+s,cy+s); ctx.lineTo(cx-s,cy+s); ctx.closePath(); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(cx,cy+s); ctx.lineTo(cx,cy-s/2); ctx.stroke(); break;
+      case 'shop':
+        ctx.strokeRect(cx-s,cy-2*u,s*2,10*u); ctx.beginPath(); ctx.moveTo(cx-s-2*u,cy-2*u); ctx.lineTo(cx+s+2*u,cy-2*u); ctx.moveTo(cx,cy-2*u); ctx.lineTo(cx,cy+8*u); ctx.stroke(); break;
+      case 'altar': case 'event':
+        ctx.beginPath(); ctx.arc(cx,cy,7*u,0,TAU); ctx.stroke(); ctx.beginPath(); ctx.moveTo(cx,cy-4*u); ctx.lineTo(cx,cy+4*u); ctx.moveTo(cx-3*u,cy+1*u); ctx.lineTo(cx+3*u,cy+1*u); ctx.stroke(); break;
+      case 'boss':
+        ctx.beginPath(); ctx.moveTo(cx,cy-s); ctx.lineTo(cx+s,cy); ctx.lineTo(cx,cy+s); ctx.lineTo(cx-s,cy); ctx.closePath(); ctx.stroke(); ctx.fillRect(cx-1.3*u,cy-1.3*u,2.6*u,2.6*u); break;
+      default:
+        ctx.beginPath(); ctx.arc(cx,cy,6*u,0,TAU); ctx.stroke();
+    }
+    ctx.restore();
+  }
+
   /* ============ 结点位图图标（assets/icons/*.png，惰性加载；未就绪回退简笔画） ============
    * 2026-09-09 老板定向：节点图标换成 NAI 生成的游戏画风透明位图（白底抠图 256px PNG）。
    * 物资拾获（币/木材/口粮）合并用随机事件图标；环间门与出口门合并用同一张门。 */
   const BITMAP_SRC = {
     battle: 'battle', event: 'event', coin: 'event', wood: 'event', rations: 'event',
     shop: 'shop', fire: 'fire', chest: 'chest', key: 'key',
-    emergencyExit: 'extract', door: 'door', altar: 'altar', boss: 'boss',
+    emergencyExit: 'extract', extraction: 'extract', door: 'door', altar: 'altar', boss: 'boss',
     entrance: 'entrance', player: 'player',
   };
   const bitmapCache = {};
@@ -223,7 +249,7 @@ const TAU = Math.PI * 2;
     const c = document.createElement('canvas');
     c.width = c.height = S;
     const g = c.getContext('2d');
-    g.fillStyle = '#1d1c1a';
+    g.fillStyle = '#10232d';
     circle(g, R, R, R - 1 / (S / 2));   // 半径缩半像素，避免画布边缘裁掉抗锯齿带
     g.fill();
     g.save();
@@ -240,12 +266,12 @@ const TAU = Math.PI * 2;
     ctx.drawImage(baked, cx - R, cy - R, R * 2, R * 2);
     // 当前节点金环最亮；可走相邻节点（legal）亮金环提示可去；走过的暗描边
     ctx.strokeStyle = cur ? 'rgba(235,205,140,0.5)'
-      : legal ? 'rgba(255,214,110,0.85)'
-      : 'rgba(180,160,120,0.25)';
+      : legal ? 'rgba(223,194,141,0.85)'
+      : 'rgba(149,175,187,0.25)';
     ctx.lineWidth = legal && !cur ? 2.4 / z : 1.6 / z;
     circle(ctx, cx, cy, R);
     ctx.stroke();
     return true;
   }
 
-export { drawFlame, drawIcon, drawBitmapIcon };
+export { drawFlame, drawIcon, drawBitmapIcon, drawTacticalIcon };

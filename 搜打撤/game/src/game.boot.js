@@ -12,6 +12,7 @@ import { bindDevMode, bindNotesMixins, initDevMode, openCellEditor, rebuildNotes
 import { cardPageOpen, closeCardPageTop, openCardDesigner, openCardLibrary } from './game.cardslib.js';
 import { renderScheduler } from './render-scheduler.js';
 import { nodeHitRadius } from './camera.js';
+import { renderMiniMap } from './game.session.js';
 
   configureGameRuntime({ openClassChoice, openBaseHub, rebuildNotes, resize: () => resize(), showRunTransition });
   function bindInput() {
@@ -113,7 +114,9 @@ import { nodeHitRadius } from './camera.js';
     // 键盘走动作映射层（src/input.js）：玩法读动作，键位是数据（可改键/可接手柄）
     window.addEventListener('keydown', (e) => {
       const tag = e.target && e.target.tagName;
-      if (tag === 'TEXTAREA' || tag === 'INPUT') return;
+      if (tag === 'TEXTAREA' || tag === 'INPUT' || tag === 'SELECT' || e.target?.isContentEditable) return;
+      // Native buttons own Space/Enter. Do not let map shortcuts swallow keyboard activation.
+      if ((e.key === ' ' || e.key === 'Enter') && e.target?.closest('button,[role="button"]')) return;
       const action = SDT.Input && SDT.Input.actionFor(e);
       if (!action) return;
       switch (action) {
@@ -138,14 +141,25 @@ import { nodeHitRadius } from './camera.js';
           break;
         case 'camRotateL': cam.angle -= .2; renderScheduler.invalidate(); break;
         case 'camRotateR': cam.angle += .2; renderScheduler.invalidate(); break;
-        case 'camOverview': cam.fitLayer(game); renderScheduler.invalidate(); break;
-        case 'camFocus': cam.focus(game.pos.x, game.pos.y); renderScheduler.invalidate(); break;
+        case 'camOverview': cam.frameExploration(game, true); renderScheduler.invalidate(); break;
+        case 'camFocus': cam.frameExploration(game); renderScheduler.invalidate(); break;
         case 'backpack': showBackpack(); break;
         case 'nodeNumbers': game.toggles.index = !game.toggles.index; if (UI.el.tglIndex) UI.el.tglIndex.checked = game.toggles.index; renderScheduler.invalidate(); break;
       }
     });
 
     UI.el.bagBtn.addEventListener('click', () => showBackpack());
+    document.getElementById('routePanel')?.addEventListener('click', e => {
+      const button = e.target.closest('button[data-route-index]');
+      if (!button || button.disabled || game.state !== 'idle') return;
+      clearTarget();
+      moveTo(Number(button.dataset.routeLayer), Number(button.dataset.routeIndex));
+    });
+    // The sidebar is hidden during character selection; draw once it has a real size.
+    if (typeof ResizeObserver !== 'undefined') {
+      const mini = document.getElementById('miniMap');
+      if (mini) new ResizeObserver(() => { if (game.runActive) renderMiniMap(); }).observe(mini);
+    }
 
     // 行动日志收起开关：日志面板盖住左下地图节点，收起后只留标题条（状态持久化）
     const logPanel = document.getElementById('logPanel');
@@ -161,7 +175,10 @@ import { nodeHitRadius } from './camera.js';
     // 定位按钮：与键盘 F（camFocus）同一动作——镜头立即回到棋子当前位置
     const btnLocate = document.getElementById('btnLocate');
     if (btnLocate) btnLocate.addEventListener('click', () => {
-      cam.focus(game.pos.x, game.pos.y); renderScheduler.invalidate();
+      cam.frameExploration(game); renderScheduler.invalidate();
+    });
+    document.getElementById('btnMapOverview')?.addEventListener('click', () => {
+      cam.frameExploration(game, true); renderScheduler.invalidate();
     });
 
     // 右上角资源 HUD：悬停显示项目自带提示框（与地图节点同款）
@@ -248,6 +265,7 @@ import { nodeHitRadius } from './camera.js';
     game.moveTarget = null;
     if (game.hover && !isReachable(game.hover)) game.hover = null;
     UI.hideTooltip();
+    UI.refresh(game);
     renderScheduler.invalidate();
   }
 
@@ -255,6 +273,7 @@ import { nodeHitRadius } from './camera.js';
     if (!n) return;
     game.moveTarget = { li: n.li, idx: n.idx };
     game.hover = n;
+    UI.refresh(game);
     const r = canvas.getBoundingClientRect();
     const p = cam.worldToScreen ? cam.worldToScreen(n.x, n.y) : { x: r.width / 2, y: r.height / 2 };
     UI.showTooltip(p.x, p.y, `${hoverInfo(n)[0]} · 可前往`, ['按 X 确认，Space/Enter 选择下一个，Z 返回上一个']);
@@ -368,7 +387,7 @@ import { nodeHitRadius } from './camera.js';
     // 镜头平滑追随仅在棋子移动中生效（指数趋近，帧率无关；大距离跳变直接贴合）。
     // 站立/拖拽时镜头完全归玩家：早先每帧无差别追随会把玩家拖拽的镜头拉回去，
     // 拖动观感失效（老板留言：地图无法正常拖动）。
-    const followCam = game.state === 'moving' && !game.camDragging;
+    const followCam = game.state === 'moving' && !game.camDragging && cam.frameMode === 'manual';
     if (followCam && cam && game.pos && (cam.cx !== game.pos.x || cam.cy !== game.pos.y)) {
       if (Math.abs(game.pos.x - cam.cx) + Math.abs(game.pos.y - cam.cy) > MAP.tile * 4) {
         cam.cx = game.pos.x; cam.cy = game.pos.y;
@@ -407,7 +426,10 @@ import { nodeHitRadius } from './camera.js';
     // 后备存储是物理像素，而 Renderer.draw 全程用 CSS 坐标；不缩放的话
     // dpr>1 的屏幕（如 150% 缩放的 Edge）只画到左上 1/dpr 区域，其余是未初始化显存（绿噪点）。
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    if (cam) cam.resize(cw, ch);
+    if (cam) {
+      cam.resize(cw, ch);
+      if (game.runActive && cam.frameMode !== 'manual') cam.frameExploration(game, cam.frameMode === 'overview');
+    }
     renderScheduler.invalidate();
   }
 

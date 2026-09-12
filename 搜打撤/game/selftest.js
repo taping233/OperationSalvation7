@@ -60,7 +60,8 @@ check('场景·标准节点与拾取契约', /scene-battle-bg/.test(gameSource) 
 check('场景·落脚进入全屏房间链', /UI\.beginRoom\(\)/.test(gameSource) && /_roomActive/.test(src('ui.js')), true);
 check('音频·Howler 指定 MP3 作为循环 BGM', /from 'howler'/.test(src('sound.js')) && /bgm-sour-orange-earth\.mp3/.test(src('sound.js')) && /new Howl\(\{[^}]*loop:\s*true/s.test(src('sound.js')), true);
 check('战斗·意图轮转与 DOM 接线', /function intentFor/.test(src('battle.js')) && /foe\.intent = intentFor\(foe, turn\)/.test(src('battle.js')) && /sts-intent/.test(src('battle.js')), true);
-check('战斗·拖牌 Pointer Events 接线保留', /pointerdown/.test(src('battle.js')) && /data-aim/.test(src('battle.js')) && /drag-over/.test(src('battle.js')), true);
+// 拖牌指向已从静态 data-aim 属性迁移为渲染后写入 dataset.aim；守护真实接线而非旧实现细节。
+check('战斗·拖牌 Pointer Events 接线保留', /pointerdown/.test(src('battle.js')) && /dataset\.aim/.test(src('battle.js')) && /drag-over/.test(src('battle.js')), true);
 check('BOSS·三类独立意图模式', /general.*军威强化/.test(src('battle.js')) && /orc_boss.*双击/.test(src('battle.js')) && /element_boss.*元素庇幕/.test(src('battle.js')), true);
 check('敌人·全部图鉴具备行为钩子', Object.values(mapJson.monsters).length > 0
   && Object.values(mapJson.monsters).every(m => !!m.behavior), true);

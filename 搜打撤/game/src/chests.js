@@ -218,13 +218,14 @@ import { Random } from './random.js';
       ? '<p class="ov-note">点击一张卡牌收下，其余两张散落在风中……</p>'
       // 2026-09-06 留言：全部收下移到右边，左侧加跳过（散落不要了）
       // 2026-09-09 老板定向：满包预检提示 + 单卡拾取（放不下的卡强收时散落，不再静默）
-      : `<div class="scene-ops chest-ops"><button class="ov-btn" data-act="chestSkip">跳过</button><button class="ov-btn ok${cant > 0 ? ' warn' : ''}" data-act="chestTake">[[icon:archive]] 全部收下${cant > 0 ? `（${cant} 张放不下）` : cur.coins ? `（含 ${cur.coins} 币）` : ''}</button></div>`;
+      : `<div class="scene-ops chest-ops"><button class="ov-btn" data-act="chestSkip">${cur.coins ? '只收金币并离开' : '放弃卡牌并离开'}</button><button class="ov-btn ok${cant > 0 ? ' warn' : ''}" data-act="chestTake">[[icon:archive]] 全部收下${cant > 0 ? `（${cant} 张放不下）` : cur.coins ? `（含 ${cur.coins} 币）` : ''}</button></div>`;
     UI.showOverlay(`[[icon:archive]] 搜刮！${cur.isClass ? '职业·' : ''}${K.name} · 第 ${idx} / ${queue.length}`, `
+      <div class="loot-manifest"><div><span>FIELD SUPPLY / ${String(idx).padStart(2, '0')}</span><b>${isPick ? '选一件，继续前行。' : '发现补给，整理收获。'}</b></div><div class="loot-capacity"><small>背包占用</small><b>${G.usedSlots()} <em>/ ${G.bagCap()}</em></b></div></div>
       ${cur.isClass ? '<p class="evt-sts-desc cls-chest-note">黑色职业宝箱：只掉落<b>职业卡牌</b></p>' : ''}
       <p class="evt-sts-desc">${lootLine}</p>
       ${warnLine}
       ${cur.cards.length ? `<div class="bt-hand${taken.size ? ' no-anim' : ''}" data-n="${cur.cards.length}">${cardsHTML}</div>` : '<p class="ov-empty">（卡牌库是空的，什么也没开出）</p>'}
-      ${ops}`, 'chest');
+      <div class="loot-footer-note">${isPick ? '点击一张卡牌收下。' : '点击卡牌可逐张收取。'}离开后，未收取卡牌将散落。</div>${ops}`, 'chest');
     UI.act('chestTake', takeAll);
     UI.act('chestTake1', (d) => {
       const card = cur.cards[+d.i];

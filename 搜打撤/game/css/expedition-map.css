@@ -1,0 +1,35 @@
+/* 战术远征图：底图保留冬境氛围，路线与几何结点负责可读性。 */
+#game { background:#07131d; }
+#expeditionChapter { position: absolute; left: 28px; top: 107px; z-index: 3; width: 180px; pointer-events: none; color: #aebfc7; }
+.chapter-kicker { font: 9px 'Cascadia Code',monospace; letter-spacing: 2px; color: #82b8d0; margin-bottom: 16px; }
+#expeditionChapter ol { list-style: none; margin: 0; padding: 0; border-left: 1px solid #a4bec444; }
+#expeditionChapter li { display: flex; align-items: center; gap: 12px; padding: 8px 0 8px 14px; font-size: 11px; letter-spacing: 2px; border-left: 2px solid transparent; margin-left: -1px; color: #90a6af; }
+#expeditionChapter li span { font: 9px 'Cascadia Code',monospace; letter-spacing: 0; opacity: .7; }
+#expeditionChapter li.current { border-color: #e0c57d; color: #f0dfb1; background: linear-gradient(90deg,#d4ba7f22,transparent); }
+#expeditionChapter li.passed { color: #93bcb1; }
+#expeditionChapter > small { display: block; font-size: 9px; margin-top: 20px; color: #9bafb5; letter-spacing: .5px; }
+#layerBanner { top: 22px; border: 0; background: transparent; padding: 7px 20px; }
+#layerBanner .lb-zh { font: 19px 'SimSun',serif; letter-spacing: 6px; color: #edf0e9; text-shadow:0 2px 14px #061019; }
+#layerBanner .lb-en { font-size: 8px; letter-spacing: 3px; }
+#btnMapOverview { position: absolute; right: 22px; bottom: 20px; z-index: 5; background: #0b1d29e8; border: 1px solid #82b8d066; border-radius:2px; padding: 10px 14px; color: #d2dfe1; font-size: 11px; cursor: pointer; box-shadow:0 8px 22px #02091066; }
+#btnMapOverview span { display: inline-block; margin-left: 14px; color: #dfc28d; font: 10px monospace; }
+#topBtns #btnLocate { position: fixed; bottom: 162px; right: 157px; width: 36px; height: 36px; background: #0d202cdb; border: 1px solid #8ba1a866; }
+#topBtns #btnHome.exit-btn { background: #203543; box-shadow: none; color: #c6d4d9; border: 1px solid #7b959944; }
+#logPanel { background: #0a1822e8; border: 1px solid #8ba1a82e; max-width: min(340px,30vw); border-radius:2px; }
+body.lobby #expeditionChapter, body.lobby #btnMapOverview, body.page-opaque #expeditionChapter, body.page-opaque #btnMapOverview { display: none; }
+@media(max-width: 850px) {
+  #expeditionChapter { left: 16px; top: 116px; width: 150px; }
+  #expeditionChapter li { padding-block: 5px; font-size: 10px; letter-spacing: 1px; }
+  #expeditionChapter > small { display: none; }
+  #topBtns #btnLocate { bottom: 210px; }
+  #logPanel { max-width: 260px; }
+}
+@media(max-width: 560px) {
+  #expeditionChapter { top: 117px; width: calc(100% - 32px); }
+  .chapter-kicker { display: none; }
+  #expeditionChapter ol { display: flex; border: 0; }
+  #expeditionChapter li { padding: 8px; border-left: 0; border-bottom: 2px solid transparent; font-size: 9px; gap: 4px; }
+  #expeditionChapter li span { display: none; }
+  #layerBanner { top: 78px; }
+}
+@media(max-height: 700px) and (min-width: 851px) { #topBtns #btnLocate { bottom: 142px; } }

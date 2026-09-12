@@ -35,7 +35,7 @@ export function cancelLegacyChainMove(reason = '即时事件不再自动跳转')
   const steps = Math.max(0, Number(game.chainMove) || 0);
   if (!steps) return false;
   game.chainMove = 0;
-  UI.log(`[[icon:road]] ${reason}（原计划前进 ${steps} 格）`, 'sys');
+  UI.log(`[[icon:map]] ${reason}（原计划前进 ${steps} 格）`, 'sys');
   return true;
 }
 
@@ -85,11 +85,12 @@ export function nodeShell(o) {
   UI.showOverlay('', `
     <div class="pg node-pg sc-${o.tone}"${bg ? ` data-asset-key="${escAttr(bg)}"` : ''}>
       <div class="node-panel">
+        <div class="node-kicker">FIELD ENCOUNTER <span>${String(game.layerIdx + 1).padStart(2, '0')} / 04</span></div>
         <header class="pg-head">
           <h2>${o.icon} ${o.title}</h2>
           ${o.sub ? `<span class="sub">${o.sub}</span>` : ''}
         </header>
-        <div class="node-main">${o.body}</div>
+        <div class="node-main"><div class="node-summary">${o.body}</div></div>
         ${o.foot ? `<footer class="node-foot">${o.foot}</footer>` : ''}
       </div>
     </div>`, 'page');

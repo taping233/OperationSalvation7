@@ -1,0 +1,88 @@
+/* 战术补给站：在 winter/scenes 之后加载，局部覆盖旧浅纸商店 */
+#overlay .shop-pg.sc-shop {
+  --shop-ink: #e6eef1;
+  --shop-muted: #91a7ae;
+  --shop-gold: #dfc28d;
+  --shop-line: rgba(223,194,141,.24);
+  color: var(--shop-ink) !important;
+  background: linear-gradient(145deg, rgba(7,20,30,.98), rgba(5,13,21,.97)) !important;
+  border: 1px solid var(--shop-line) !important;
+  box-shadow: 0 28px 90px rgba(0,0,0,.55), inset 0 1px rgba(255,255,255,.04) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  min-height: min(760px, calc(100vh - 40px));
+  overflow: auto !important;
+}
+#overlay .shop-pg .pg-head {
+  align-items: flex-start !important;
+  gap: 28px !important;
+  padding: 28px 32px 22px !important;
+  border-bottom: 1px solid var(--shop-line) !important;
+}
+#overlay .shop-heading { flex: 1; min-width: 0; }
+#overlay .shop-kicker {
+  display: block; color: var(--shop-gold); font: 700 10px/1.2 "Cascadia Code",monospace;
+  letter-spacing: .18em; opacity: .82; margin-bottom: 8px;
+}
+#overlay .shop-heading h2 { margin: 0 !important; color: #f3f6f4 !important; letter-spacing: .03em; }
+#overlay .shop-heading p { margin: 8px 0 0; color: var(--shop-muted); font-size: 13px; }
+#overlay .shop-resources { display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+#overlay .shop-resource {
+  min-width: 92px; padding: 9px 12px; border: 1px solid rgba(180,210,214,.18);
+  background: rgba(10,31,42,.78); display: grid; grid-template-columns: 1fr auto; column-gap: 9px;
+}
+#overlay .shop-resource small { grid-column: 1/-1; color: var(--shop-muted); font-size: 10px; }
+#overlay .shop-resource b { color: #f4f7f5; font: 700 19px/1.15 "Cascadia Code",monospace; }
+#overlay .shop-resource em { color: var(--shop-gold); font-style: normal; align-self: end; font-size: 11px; }
+#overlay .shop-resource.coin b { color: var(--shop-gold); }
+#overlay .shop-toolbar {
+  display:flex; justify-content:space-between; align-items:center; gap:18px; padding: 15px 32px 10px;
+}
+#overlay .shop-toolbar b { display:block; font-size: 15px; color:#f2f5f2; }
+#overlay .shop-toolbar span:not(.shop-live) { color:var(--shop-muted); font-size:12px; }
+#overlay .shop-live { color:var(--shop-gold); font-size:12px; text-align:right; }
+#overlay .shop-board { padding: 0 32px 24px !important; background: transparent !important; flex:1; }
+#overlay .shop-board-grid {
+  display:grid !important; grid-template-columns: repeat(3,minmax(0,1fr)) !important; gap: 14px !important;
+}
+#overlay .shop-slot {
+  min-height: 238px; padding: 12px; background: rgba(11,34,45,.86) !important;
+  border:1px solid rgba(155,192,198,.16) !important; display:flex; flex-direction:column;
+  justify-content:space-between; align-items:stretch; transition: border-color .18s, transform .18s;
+}
+#overlay .shop-slot:has(.shop-price:not(:disabled)):hover { border-color:var(--shop-gold) !important; transform:translateY(-2px); }
+#overlay .shop-slot .bt-card, #overlay .shop-slot .card { min-height: 176px; }
+#overlay .shop-price {
+  width:100%; min-height:36px; border:1px solid rgba(223,194,141,.52) !important;
+  background:rgba(20,49,59,.96) !important; color:var(--shop-gold) !important; font-weight:700;
+}
+#overlay .shop-price:disabled { color:#71848a !important; border-color:rgba(120,145,150,.2) !important; background:rgba(9,23,30,.8) !important; }
+#overlay .shop-slotnote { color:var(--shop-muted); font-size:11px; margin-top:8px; text-align:center; }
+#overlay .shop-empty { min-height:210px; display:grid; place-items:center; color:#728990; border:1px dashed rgba(145,170,176,.2); }
+#overlay .shop-slot.sold { opacity:.62; filter:saturate(.55); }
+#overlay .shop-sellpost {
+  min-height:238px; border:1px solid rgba(223,194,141,.55) !important; background:linear-gradient(160deg,rgba(43,49,44,.9),rgba(15,29,34,.95)) !important;
+  color:#f3eee2 !important; display:grid; place-content:center; gap:8px; text-align:center; cursor:pointer;
+}
+#overlay .sellpost-coin { font-size:28px; color:var(--shop-gold); }
+#overlay .sellpost-name { font-weight:700; font-size:18px; }
+#overlay .sellpost-hint { color:#a9b7b6; font-size:12px; }
+#overlay .shop-back {
+  position:sticky; bottom:0; align-self:flex-start; margin:0 32px 24px; z-index:2;
+  border:1px solid rgba(223,194,141,.42) !important; background:#0d2835 !important; color:#f1eadb !important;
+}
+#overlay .sell-tip, #overlay .shop-sell-empty { color:var(--shop-muted) !important; }
+#overlay .shop-sell { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+#overlay .shop-sell .sell-item { background:rgba(11,34,45,.86) !important; border:1px solid rgba(155,192,198,.16); padding:12px; }
+@media (max-width: 820px) {
+  #overlay .shop-pg .pg-head { flex-direction:column; padding:22px 20px 18px !important; }
+  #overlay .shop-resources { justify-content:flex-start; }
+  #overlay .shop-toolbar, #overlay .shop-board { padding-left:20px !important; padding-right:20px !important; }
+  #overlay .shop-board-grid, #overlay .shop-sell { grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
+  #overlay .shop-back { margin-left:20px; }
+}
+@media (max-width: 520px) {
+  #overlay .shop-board-grid, #overlay .shop-sell { grid-template-columns:1fr !important; }
+  #overlay .shop-toolbar { align-items:flex-start; flex-direction:column; }
+  #overlay .shop-live { text-align:left; }
+}

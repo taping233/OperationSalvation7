@@ -4,6 +4,7 @@ const UI = window.SDT.UI;
 import { esc } from './shared.js';
 import { escAttr } from './shared.js';
 import { game } from './game.session.js';
+import { characterName } from './characters.js';
 
 const navigation = {
   closeBase: () => {},
@@ -24,7 +25,7 @@ function configureCardNavigation(hooks) {
   let cardPagePrevState = null;  // 打开库/制作坊前的游戏状态（从标题界面打开时关回 'title'）
   let lastSavedId = null;        // 刚保存的卡，库中高亮
   let libCards = [];             // 库页面缓存（悬停预览用）
-  let libFilter = { tab: '全部', rar: '全部', q: '' };
+  let libFilter = { tab: '全部', rar: '全部', cls: '全部', q: '', sort: 'cost' };
   let draft = null;              // 制作坊草稿
 
 
@@ -70,15 +71,16 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
   // 翻页/重绘不再重复全量 sort。renderCardLibrary 重新取 libCards 时失效。
   let _libFilteredCache = null, _libFilteredKey = '';
   function libFiltered() {
-    const key = `${libFilter.tab}|${libFilter.rar}|${libFilter.q}|${libCards.length}`;
+    const key = `${libFilter.tab}|${libFilter.rar}|${libFilter.cls}|${libFilter.q}|${libFilter.sort}|${libCards.length}`;
     if (_libFilteredCache && key === _libFilteredKey) return _libFilteredCache;
     const q = libFilter.q.trim().toLowerCase();
     _libFilteredCache = libCards.filter(c =>
       (libFilter.tab === '全部' || c.type === libFilter.tab) &&
       // 稀有度按有效稀有度筛选（2026-09-04 定版：棱彩已实装进卡牌库——能力卡与其衍生牌 rarityOf 推导为「棱彩」，可经下拉筛选）
       (libFilter.rar === '全部' || SDT.Cards.rarityOf(c) === libFilter.rar) &&
+      (libFilter.cls === '全部' || (libFilter.cls === '通用' ? !c.cls : c.cls === libFilter.cls)) &&
       (!q || (c.name || '').toLowerCase().includes(q) || (c.desc || '').toLowerCase().includes(q))
-    ).sort((a, b) => (a.cost - b.cost) ||
+    ).sort((a, b) => (libFilter.sort === 'name' ? String(a.name).localeCompare(b.name, 'zh') : (a.cost - b.cost)) ||
       (RARITIES.indexOf(SDT.Cards.rarityOf(b)) - RARITIES.indexOf(SDT.Cards.rarityOf(a))) ||
       String(a.name).localeCompare(b.name, 'zh'));
     _libFilteredKey = key;
@@ -95,14 +97,14 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
     const kw = [drawN ? `抽卡 ${drawN}` : '', infN ? `注能(${infN})` : '',
       healN ? `回复 ${healN}` : '', armorN ? `护甲 ${armorN}` : ''].filter(Boolean).join(' · ');
     const kwTxt = kw ? `<br>效果词条：<b>${kw}</b>` : '';
-    return `${cardHTML(c, 'lg')}<p class="pv-hint">${esc(c.type)} · ${esc(SDT.Cards.rarityOf(c))}${dmgTxt}${kwTxt}<br>点击卡牌进入制作坊编辑</p>`;
+    return `${cardHTML(c, 'lg')}<p class="pv-hint">${esc(c.type)} · ${esc(SDT.Cards.rarityOf(c))}${dmgTxt}${kwTxt}<br>点击卡面欣赏详情 · 编辑按钮进入制作坊</p>`;
   }
 
   function libGridHTML() {
     const all = libFiltered();
     if (!all.length) {
       const filtered = libCards.length > 0 &&
-        (libFilter.tab !== '全部' || libFilter.rar !== '全部' || libFilter.q.trim() !== '');
+        (libFilter.tab !== '全部' || libFilter.rar !== '全部' || libFilter.cls !== '全部' || libFilter.q.trim() !== '');
       // 空状态也带 id="libGrid"：renderLibGrid 局部重绘靠它定位卡格区，
       // 缺了它空状态一出现 #libGrid 就消失，之后再改筛选条件不再重绘
       return `<div class="clib-empty" id="libGrid"><div class="clib-empty-icon">[[icon:archive]]</div>
@@ -121,7 +123,7 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
       </div>` : '';
     return `<div class="lib-grid" id="libGrid">${cards.map(c => `
       <div class="lib-item${c.id === lastSavedId ? ' saved' : ''}">
-        <div class="lib-cardwrap" data-act="editCard" data-card="${c.id}" title="点击编辑 · 悬停查看完整卡面与描述">${cardHTML(c, 'lib')}</div>
+        <div class="lib-cardwrap" data-act="libInspect" data-card="${c.id}" title="点击欣赏卡面 · 悬停查看完整卡面与描述">${cardHTML(c, 'lib')}</div>
         <div class="lib-actions">
           <button class="hs-btn sm" data-act="editCard" data-id="${c.id}">编辑</button>
           <button class="hs-btn sm danger" data-act="delCard" data-id="${c.id}">删除</button>
@@ -131,6 +133,8 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
 
   // 翻页/筛选后只重绘卡格区（整页 showOverlay 会重置搜索焦点），并预解码下一页插画
   function renderLibGrid() {
+    const resultCount = document.getElementById('libResultCount');
+    if (resultCount) resultCount.textContent = libFiltered().length;
     const grid = document.getElementById('libGrid');
     if (grid) {
       grid.outerHTML = libGridHTML();
@@ -168,24 +172,15 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
         <i>${SDT.Icons.img(t === '全部' ? 'archive' : (SDT.Cards.TYPE_ART[t] || 'question'))}</i>${t}<em>${t === '全部' ? libCards.length : (counts[t] || 0)}</em>
       </button>`).join('');
     UI.showOverlay('', `
-      <div class="pg">
-        <button class="pg-close" data-act="closeCardPage" title="关闭（Esc）">[[icon:cross]]</button>
-        <header class="pg-head">
-          <h2>[[icon:book]] 卡牌收藏</h2>
-          <input id="cardSearch" class="clib-search" placeholder="搜索名称 / 效果…" value="${escAttr(libFilter.q)}">
-          <select id="libRar" class="pg-select" title="按稀有度筛选">
-            <option value="全部">全部稀有度</option>
-            ${RARITIES.map(r => `<option value="${r}"${libFilter.rar === r ? ' selected' : ''}>${r}</option>`).join('')}
-          </select>
-          <span class="pg-spacer"></span>
-          <span class="clib-count">共 <b>${libCards.length}</b> 张</span>
-          <button class="hs-btn gold" data-act="newCard">＋ 制作新卡</button>
-          <button class="hs-btn" data-act="exportCards">[[icon:upload]] 导出</button>
-          <button class="hs-btn" data-act="importCards">[[icon:download]] 导入</button>
+      <div class="pg card-library-page">
+        <header class="pg-head library-head">
+          <div class="library-title"><span class="library-kicker">WINTER EXPEDITION ARCHIVE</span><h2>[[icon:book]] 卡牌档案馆</h2><p>收藏、检索与编辑你的全部卡牌。</p></div>
+          <span class="clib-count">全部 <b>${libCards.length}</b> · 当前 <b id="libResultCount">${libFiltered().length}</b> 张</span>
+          <button class="pg-close" data-act="closeCardPage" title="关闭（Esc）">[[icon:cross]]</button>
+          <div class="library-tools"><input id="cardSearch" class="clib-search" placeholder="搜索名称 / 效果…" value="${escAttr(libFilter.q)}"><select id="libSort" class="pg-select" title="排序"><option value="cost"${libFilter.sort === 'cost' ? ' selected' : ''}>按费用排序</option><option value="name"${libFilter.sort === 'name' ? ' selected' : ''}>按名称排序</option></select><button class="hs-btn gold" data-act="newCard">＋ 制作新卡</button><button class="hs-btn" data-act="exportCards">[[icon:upload]] 导出</button><button class="hs-btn" data-act="importCards">[[icon:download]] 导入</button></div>
         </header>
-        <div class="clib-tabs">${tabs}</div>
         <div class="clib-main">
-          <aside class="clib-preview" id="libPreview">${libPreviewHTML(null)}</aside>
+          <aside class="library-sidebar"><div class="library-filter-head"><b>筛选档案</b><button class="hs-btn sm" data-act="libClearFilter">清空</button></div><div class="clib-tabs">${tabs}</div><select id="libRar" class="pg-select library-select" title="按稀有度筛选"><option value="全部">全部稀有度</option>${RARITIES.map(r => `<option value="${r}"${libFilter.rar === r ? ' selected' : ''}>${r}</option>`).join('')}</select><select id="libCls" class="pg-select library-select" title="按职业筛选"><option value="全部职业">全部职业</option><option value="通用"${libFilter.cls === '通用' ? ' selected' : ''}>通用</option>${[...new Set(libCards.map(c => c.cls).filter(Boolean))].sort().map(c => `<option value="${escAttr(c)}"${libFilter.cls === c ? ' selected' : ''}>${esc(characterName(c))}</option>`).join('')}</select><div class="library-preview" id="libPreview" aria-live="polite"></div></aside>
           ${libGridHTML()}
         </div>
       </div>`, 'page');
@@ -196,12 +191,16 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
     UI.act('closeCardPage', closeLibPage);
     UI.act('newCard', () => openCardDesigner(null));
     UI.act('libTab', (d) => { libFilter.tab = d.t; libPage = 0; renderCardLibrary(); });
-    UI.act('libClearFilter', () => { libFilter = { tab: '全部', rar: '全部', q: '' }; libPage = 0; renderCardLibrary(); });
+    UI.act('libClearFilter', () => { libFilter = { tab: '全部', rar: '全部', cls: '全部', q: '', sort: 'cost' }; libPage = 0; renderCardLibrary(); });
     UI.act('libPrev', () => { if (libPage > 0) { libPage--; renderLibGrid(); } });
     UI.act('libNext', () => { if (libPage < Math.ceil(libFiltered().length / LIB_PAGE_SIZE) - 1) { libPage++; renderLibGrid(); } });
     UI.act('editCard', (d) => {
       const card = SDT.Cards.all().find(c => c.id === (d.card || d.id));
       if (card) openCardDesigner(card);
+    });
+    UI.act('libInspect', (d) => {
+      const card = libCards.find(c => c.id === d.card);
+      if (card) UI.showCardZoom(card);
     });
     UI.act('delCard', (d) => {
       const btn = document.querySelector(`#libGrid [data-act="delCard"][data-id="${d.id}"]`);
@@ -225,6 +224,8 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
     UI._inputHandler = (e) => {
       if (e.target.id === 'cardSearch') { libFilter.q = e.target.value; }
       else if (e.target.id === 'libRar') { libFilter.rar = e.target.value; }
+      else if (e.target.id === 'libCls') { libFilter.cls = e.target.value; }
+      else if (e.target.id === 'libSort') { libFilter.sort = e.target.value; }
       else return;
       libPage = 0;
       renderLibGrid();
@@ -259,7 +260,7 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
         previewTimer = null;
         const card = libCards.find(c => c.id === id);
         const pv = document.getElementById('libPreview');
-        if (card && pv) { pv.innerHTML = libPreviewHTML(card); Sfx.tick(); }
+        if (card && pv) { pv.innerHTML = libPreviewHTML(card); pv.classList.add('has-preview'); Sfx.tick(); }
       }, 90);
     };
     UI.refresh(game);

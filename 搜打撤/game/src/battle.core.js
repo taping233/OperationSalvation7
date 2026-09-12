@@ -1243,7 +1243,7 @@ import { emit as busEmit } from './event-bus.js';
     SDT.Sound.sfx('card');
     removeUid(hand, uid);
     cardAnims.push({
-      kind: 'play', uid, name: card.name,
+      kind: 'play', uid, name: card.name, type: card.type,
       side: targetSideFor(card, SDT.Cards.DMG_TYPES),
       target: target && !target.dead ? foes.indexOf(target) : null,
     });

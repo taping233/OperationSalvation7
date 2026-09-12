@@ -1,4 +1,15 @@
 {
+  "cardArtOverrides": {
+    "tt8-hero-assassin": "cards/expedition-starters/wu-void.webp",
+    "tt8-hero-sword": "cards/expedition-starters/wu-myriadswords.webp",
+    "tt8-hero-ranger": "cards/expedition-starters/wu-heavensword.webp",
+    "builtin-sha": "cards/expedition-starters/basic-attack.webp",
+    "tt3-fireball": "cards/expedition-starters/fireball.webp",
+    "tt3-skewer": "cards/expedition-starters/pierce.webp",
+    "tt3-staff": "cards/expedition-starters/staff.webp",
+    "tt-wood": "cards/expedition-starters/wood.webp",
+    "tt-rations": "cards/expedition-starters/rations.webp"
+  },
   "classIds": {
     "侠客": "sword",
     "战士": "warrior",
@@ -57,7 +68,8 @@
     "tt3-diamond": "diamond",
     "tt3-garnet-marble": "garnet-marble",
     "tt3-wood-bundle": "wood-bundle",
-    "tt3-ration-double": "ration-double"
+    "tt3-ration-double": "ration-double",
+    "pet-egg": "pet-egg"
   },
   "heroCardArt": {
     "tt8-hero-summoner": "hero-summoner",
@@ -115,7 +127,10 @@
     "tt8-curse1",
     "tt8-curse2",
     "tt8-curse3",
-    "tt8-curse4"
+    "tt8-curse4",
+    "cc-lava-blast",
+    "cc-double-boom",
+    "cc-mana-surge"
   ],
   "martialCardArt": [
     "builtin-sha",
@@ -166,7 +181,12 @@
     "cmtn2jc142dj",
     "cmtn0xt0zr7",
     "tt7-ironcharge",
-    "tt7-imitate"
+    "tt7-imitate",
+    "tt8-dragonblade",
+    "cc-dual-wield",
+    "cc-cursed-blade",
+    "cc-chase-slash",
+    "cc-rapid-fire"
   ],
   "creatureCardArt": [
     "cmtn6ulm4boj",
@@ -250,6 +270,7 @@
     "tt4-smoke-bomb": "tt4-smoke-bomb",
     "tt4-woodify": "tt4-woodify",
     "cmtmvq6ss84l": "cmtmvq6ss84l",
-    "cmtn6bge52qt": "builtin-fuyuanyao"
+    "cmtn6bge52qt": "builtin-fuyuanyao",
+    "tt-peach": "tt-peach"
   }
 }

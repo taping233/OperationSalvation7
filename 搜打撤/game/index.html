@@ -7,7 +7,6 @@
 <!-- 首屏关键资源提前预载：标题壁纸与字标是首屏核心视觉；
      其余资源（BGM/立绘/卡面）保持按需加载，避免挤占启动带宽 -->
 <link rel="preload" as="image" href="assets/reconstruction/wallpaper-original.webp" />
-<link rel="preload" as="image" href="assets/title-wordmark.png" />
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/cascadia-code-400.woff2" crossorigin />
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/notosans-sc-400.woff2" crossorigin />
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/notosans-sc-700.woff2" crossorigin />
@@ -19,6 +18,16 @@
 <link rel="stylesheet" href="css/battle.css" />
 <link rel="stylesheet" href="css/scenes.css" />
 <link rel="stylesheet" href="css/winter.css" />
+<link rel="stylesheet" href="css/expedition.css" />
+<link rel="stylesheet" href="css/expedition-map.css" />
+<link rel="stylesheet" href="css/expedition-hub.css" />
+<link rel="stylesheet" href="css/expedition-inventory.css" />
+<link rel="stylesheet" href="css/expedition-rewards.css" />
+<link rel="stylesheet" href="css/expedition-battle.css" />
+<link rel="stylesheet" href="css/expedition-library.css" />
+<link rel="stylesheet" href="css/expedition-cards.css" />
+<link rel="stylesheet" href="css/expedition-roster.css" />
+<link rel="stylesheet" href="css/expedition-shop.css" />
 </head>
 <body>
 <div id="app">
@@ -41,8 +50,9 @@
     </section>
 
     <section class="panel" id="routePanel">
-      <div class="route-title">路线选择</div>
-      <div class="route-help">点击金色亮环的相邻节点继续前进（方向不一定在右侧）</div>
+      <div class="route-heading"><div class="route-title">下一步</div><span class="route-objective"></span></div>
+      <div class="route-options" role="group" aria-label="可前往的相邻节点"></div>
+      <div class="route-help">点击路线或地图亮环前进 <span>Space 选择 · X 确认 · B 背包</span></div>
     </section>
     <section class="panel" id="dicePanel" hidden>
       <div id="diceRow">
@@ -77,6 +87,8 @@
       <div class="lb-zh" id="layerBannerZh">—</div>
       <div class="lb-en" id="layerBannerEn"></div>
     </div>
+    <nav id="expeditionChapter" aria-label="远征章节"></nav>
+    <button id="btnMapOverview" title="查看已探明区域（G）">已知区域 <span>G</span></button>
     <div id="resHud">
       <span class="chip-mini res-gold" title="持有金币" data-tip="持有金币">
         <svg class="res-ic" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
@@ -145,7 +157,7 @@
           </svg>
         </div>
         <div class="hp-hud-body">
-          <span class="hp-hud-label">目标生命值</span>
+          <span class="hp-hud-label">当前生命</span>
           <b id="hpText">30/30</b>
           <div id="hpBarWrap"><div id="hpBar"></div></div>
         </div>
@@ -155,9 +167,8 @@
     <div id="title">
       <div class="title-bg" aria-hidden="true"></div>
       <div class="title-inner">
-        <div class="title-heading">
-          <img class="title-wordmark" src="assets/title-wordmark.png" alt="升格会的冬日猜想" draggable="false">
-        </div>
+        <div class="title-heading"><div class="title-kicker">THE ASCENSION SOCIETY</div><h1 class="winter-wordmark"><small>升格会的</small>冬日猜想</h1><div class="winter-edition">A WINTER CONJECTURE <span>VOL. 07</span></div></div>
+        <div class="title-expedition-copy"><span>WINTER EXPEDITION / 07</span><p>深入未知，带着故事归来。</p><small>节点探索 · 卡牌战斗 · 战利品撤离</small></div>
         <div class="ak-hud">
           <!-- 顶栏左：退出（最左）+ 静音 -->
           <div class="ak-tl">
@@ -232,14 +243,14 @@
               <span class="st-cn">开始探索</span>
               <svg class="st-orn flip" viewBox="0 0 44 24" width="44" height="24" aria-hidden="true"><path d="M2 12h12M30 12h12M22 3l7 9-7 9-7-9z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="22" cy="12" r="2.2" fill="currentColor"/></svg>
             </span>
-            <span class="st-en">ExPlorAtioN</span>
+            <span class="st-en">EXPEDITION / 进入远征档案</span>
           </button>
           <!-- 雪花飘落特效层 -->
           <div class="title-snow" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
           <!-- 美术预热进度（2026-09-08 老板：首次打开强制预热，显示原因与进度） -->
           <div id="warmupTip" hidden aria-live="polite">
             <div class="warmup-head"><span class="warmup-spark" aria-hidden="true">❄</span>美术资源预热中 <b id="warmupNum">0/0</b></div>
-            <div class="warmup-reason">一次性载入卡面 / 场景 —— 牌库 · 战斗 · 开箱全程零卡顿</div>
+            <div class="warmup-reason">正在准备卡面与场景，减少首次进入时的等待</div>
             <div class="warmup-track"><div id="warmupBar"></div></div>
           </div>
           <span class="ak-plus p1" aria-hidden="true">+</span>

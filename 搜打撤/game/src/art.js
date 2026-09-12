@@ -125,18 +125,24 @@ const FIGURE_FULL_ART = Object.freeze({
   shuangling: 'portraits/full/shuangling.webp',
   baiqi: 'portraits/full/baiqi.webp',
   lituan: 'portraits/full/baita.webp',
+  xuanli: 'portraits/full/xuanli.webp',
+  dengkui: 'portraits/full/dengkui.webp',
 });
 // 个别角色配 Q 版战斗头像（portraits/avatars/<角色id>.webp）：局内下边栏人物面板用
 const AVATAR_ART = Object.freeze({
   shuangling: 'portraits/avatars/shuangling.webp',
   baiqi: 'portraits/avatars/baiqi.webp',
   lituan: 'portraits/avatars/lituan.webp',
+  xuanli: 'portraits/avatars/xuanli.webp',
+  dengkui: 'portraits/avatars/dengkui.webp',
 });
 // 战斗场景专用全身立绘：与角色选择页/档案立绘分开，保留战斗姿态和朝向。
 const BATTLE_ART = Object.freeze({
   shuangling: 'portraits/battle/shuangling.webp',
   baiqi: 'portraits/battle/baiqi.webp',
   lituan: 'portraits/battle/lituan.webp',
+  xuanli: 'portraits/battle/xuanli.webp',
+  dengkui: 'portraits/battle/dengkui.webp',
 });
 function characterArt(value, full=false) {
  const c=characterFor(value); if(!c)return null;
@@ -235,6 +241,8 @@ function characterArt(value, full=false) {
     },
     cardIcon(card) {
       const cardId = String(card && card.id || '');
+      const illustration = DATA.art.cardArtOverrides?.[cardId];
+      if (illustration) return image(illustration, 'art-card-image art-hero-fit', card?.name || cardId, `card-${cardId}`, 'width:100%;height:100%;object-fit:cover;display:block');
       // 职业专属法术卡面（spell-<id>.webp，2026-09-09 配图批次）：优先于一切通用家族图，cover 填满
       if (SPELL_CARD_ART.has(cardId)) {
         return image(`cards/spell-${cardId}.webp`, 'art-card-image art-hero-fit', card && card.name || cardId, `card-spell-${cardId}`, 'width:100%;height:100%;object-fit:cover;display:block');

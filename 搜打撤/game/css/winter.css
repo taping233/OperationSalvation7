@@ -1287,3 +1287,13 @@ body,body *{font-family:'HarmonyOS Sans SC','HarmonyOS Sans','Noto Sans SC Sub',
 }
 /* 牌库虚拟滚动占位高度按新卡高重估（卡变矮：紧凑卡 ~11px 字号 → 卡身 ~70px + 边距） */
 .lib-item{contain-intrinsic-size:auto 122px}
+
+/* v3.2 逐卡构图修正（2026-09-12 老板批准）：主体偏离 1.32 裁切窗的卡面用 object-position 拉回，
+   不换图；data-asset-key 由 art.js 写在 img 上，选择器与卡面文件一一对应。 */
+img[data-asset-key="card-equip-tt3-light-mail"]{object-position:80% 50%!important}
+img[data-asset-key="card-equip-tt3-holy-staff"]{object-position:50% 25%!important}
+img[data-asset-key="card-equip-tt2-venomstaff"]{object-position:50% 22%!important}
+img[data-asset-key="card-martial-tt3-skewer"]{object-position:65% 60%!important}
+img[data-asset-key="card-martial-cmtn1i64j7y7"]{object-position:50% 35%!important}
+img[data-asset-key="card-martial-cmtn1wnhhym"]{object-position:50% 60%!important}
+img[data-asset-key="card-wu-myriadswords"]{object-position:50% 40%!important}

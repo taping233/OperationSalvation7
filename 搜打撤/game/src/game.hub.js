@@ -5,7 +5,7 @@ const UI = window.SDT.UI;
 import { esc } from './shared.js';
 import { MAP } from './game.session.js';
 import { escAttr } from './shared.js';
-import { MODES, game, newRun, setLobby, showTitle } from './game.session.js';
+import { MODES, game, getActiveSlot, newRun, setLobby, showTitle } from './game.session.js';
 import { Sfx, configureCardNavigation, _set_cardPageOpen } from './game.cardslib.js';
 import { Random } from './random.js';
 
@@ -45,8 +45,9 @@ let hubTab = 'deploy';
     registerHubHelp(hubTab);
     UI.showOverlay('', `
       <div class="pg hub hub-${hubTab}" id="hubMain">
-        <header class="hub-head hub-head-min">
-          <button class="hub-back" data-act="closeBase" title="返回主菜单（Esc）">← 返回</button>
+       <header class="hub-head hub-head-min">
+          <h2>远征基地</h2><span class="hub-slot-label">档位 0${getActiveSlot() || '—'}</span>
+         <button class="hub-back" data-act="closeBase" title="返回主菜单（Esc）">← 返回</button>
           ${UI.helpBtn('hub-' + hubTab)}
           <span class="pg-spacer"></span>
           <span class="hub-res">
@@ -196,33 +197,42 @@ let hubTab = 'deploy';
     const gateReady = keys >= (B.KEY_NEEDED || 10);
     const pet = B.carriedPet ? B.carriedPet() : null;
     return `
-      <div class="deploy-grid">
-        <section class="hub-card">
-          <h3>[[icon:swords]] 选择玩法</h3>
-          <div class="mode-list">${Object.values(MODES).map(md => `
-            <button class="mode-card${md.id === curMode ? ' on' : ''}" data-act="selMode" data-mode="${md.id}">
-              <span class="mode-ico">${md.icon}</span>
-              <span class="mode-info"><b>${md.name}</b><span>${md.desc}</span></span>
-              <span class="mode-ckpt">${md.ckpt}</span>
-            </button>`).join('')}
+      <div class="deploy-brief">
+        <section class="deploy-mission">
+          <div class="deploy-mission-shade"></div>
+          <div class="deploy-mission-copy">
+            <span class="eyebrow">WINTER EXPEDITION / OUTSKIRTS</span>
+            <h3>[[icon:flag]] 外圈远征简报</h3>
+            <p class="deploy-mission-lead">从边缘街区切入，搜集资源、识别风险，并把能带回来的东西带回基地。</p>
+            <div class="deploy-mission-target"><span>本局目标</span><b>${esc(m.name)}</b><small>${esc(m.ckpt)}</small></div>
+            <button id="btnDeploy" class="deploy-primary" data-act="deploy">[[icon:exit]] 出发整备 <span>→</span></button>
+          </div>
+          <div class="deploy-mode-dock">
+            <span class="dock-label">选择行动模式</span>
+            <div class="mode-list">${Object.values(MODES).map(md => `
+              <button class="mode-card${md.id === curMode ? ' on' : ''}" data-act="selMode" data-mode="${md.id}" aria-pressed="${md.id === curMode ? 'true' : 'false'}">
+                <span class="mode-ico">${md.icon}</span>
+                <span class="mode-info"><b>${md.name}</b><span>${md.desc}</span></span>
+                <span class="mode-ckpt">${md.ckpt}</span>
+              </button>`).join('')}
+            </div>
           </div>
         </section>
-        <section class="hub-card">
-          <h3>[[icon:notes]] 出征预报</h3>
-          <div class="deploy-forecast" style="margin:0 0 4px">
-            <span class="fc-chip">[[icon:heart]] 生命 <b>${MAP.rules.playerMaxHp + (pet && pet.effect.maxHp || 0)}</b></span>
-            <span class="fc-chip">[[icon:swords]] 攻击 <b>${MAP.rules.playerAtk}</b></span>
-            <span class="fc-chip">[[icon:coin]] 开局币 <b>${(m.startCoins || 0) + B.data.coins}</b></span>
-            <span class="fc-chip">[[icon:dice]] 骰子 <b>${MAP.rules.diceSides} 面</b></span>
-            <span class="fc-chip">[[icon:bag]] 背包 <b>${B.bagCap()} 格</b></span>
-            <span class="fc-chip" title="${pet ? escAttr(pet.desc) : '未携带宠物'}">[[icon:paw]] 宠物 <b>${pet ? esc(pet.name) : '无'}</b></span>
-            <span class="fc-chip">[[icon:lock]] 保护格 <b>${B.safeCap()} 格</b></span>
-            <span class="fc-chip">[[icon:archive]] 仓库 <b>${B.stashUsed()}/${B.stashCap()} 张</b></span>
+        <aside class="deploy-readiness-panel">
+          <div class="readiness-head"><span class="eyebrow">MISSION BRIEF</span><b>出发前准备</b><span class="brief-status">可整备</span></div>
+          <div class="brief-mode"><span>当前模式</span><b>${esc(m.name)}</b><small>${esc(m.desc)}</small></div>
+          <div class="readiness-list">
+            <div class="readiness-item ready"><i>01</i><span>基础参考（角色出发后选择）</span><b>${MAP.rules.playerMaxHp + (pet?.effect?.maxHp || 0)} 生命 · ${MAP.rules.playerAtk} 攻击</b></div>
+            <div class="readiness-item"><i>02</i><span>携带容量</span><b>${B.bagCap()} 格背包 · 仓库 ${B.stashUsed()}/${B.stashCap()}</b></div>
+            <div class="readiness-item"><i>03</i><span>保护与回收</span><b>${B.safeCap()} 格可用</b></div>
+            <div class="readiness-item"><i>04</i><span>随身储备</span><b>${(m.startCoins || 0) + B.data.coins} 币 · ${B.data.rations} 口粮</b></div>
           </div>
-          <div class="deploy-foot">
-            <button id="btnDeploy" data-act="deploy">出 发</button>
+          <div class="brief-pet">
+            <span class="brief-pet-icon">[[icon:paw]]</span><span><small>随队宠物</small><b>${pet ? esc(pet.name) : '未携带'}</b></span>
+            <em>${pet ? esc(pet.desc) : '可在整备页选择已拥有的宠物'}</em>
           </div>
-        </section>
+          <p class="deploy-tip">[[icon:map]] 进入整备后，可从仓库拖入本局携带卡牌；只有装入背包的卡牌才能在远征中使用。</p>
+        </aside>
       </div>
       <section class="hub-card gate-strip${gateReady ? ' gate-ready' : ' gate-locked'}" data-act="gateInfo"
         title="${gateReady ? '钥匙已集齐——宝藏大门虚位以待' : '集齐 10 把钥匙开启宝藏大门（特殊关卡）'}">

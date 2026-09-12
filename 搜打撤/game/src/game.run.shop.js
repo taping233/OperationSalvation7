@@ -2,6 +2,7 @@ import { Random } from './random.js';
 import { esc } from './shared.js';
 
 let shopOnClose = null;
+let shopNotice = '';
 
 function createShopController({
   UI,
@@ -64,6 +65,7 @@ function createShopController({
     game.state = 'modal';
     setCardPageOpen(false);
     game.shopStock = generateShopStock();
+    shopNotice = '';
     shopOnClose = onClose || null;
     renderShop();
   }
@@ -106,14 +108,11 @@ function createShopController({
     UI.showOverlay('', `
       <div class="pg shop-pg node-pg sc-shop" data-asset-key="scene-shop-bg">
         <header class="pg-head">
-          <h2>[[icon:bag]] 拾荒商队 ${UI.helpBtn('shop')}</h2>
-          <span class="pg-spacer"></span>
-          <span class="hub-res">
-            <span class="res-chip" title="背包中卡牌张数（含同名堆叠）——方便对照货板决定买不买">[[icon:cards]] <b>${game.ownedCards.length}</b> 张卡牌</span>
-            <span class="res-chip">[[icon:coin]] <b class="gold">${game.coins}</b> 币</span>
-          </span>
+          <div class="shop-heading"><span class="shop-kicker">TACTICAL SUPPLY // 07</span><h2>[[icon:bag]] 冬境战术补给站 ${UI.helpBtn('shop')}</h2><p>挑选能带出下一段路线的装备，买完即锁定库存。</p></div>
+          <div class="shop-resources" aria-label="远征资源"><span class="shop-resource"><small>持有卡牌</small><b>${game.ownedCards.length}</b><em>张</em></span><span class="shop-resource coin"><small>当前金币</small><b>${game.coins}</b><em>币</em></span><span class="shop-resource"><small>背包容量</small><b>${usedSlots()}/${bagCap()}</b><em>格</em></span></div>
         </header>
-        <div class="shop-board">
+          <div class="shop-toolbar"><div><b>补给清单</b><span>六个随机货位 · 桃 · 初始攻击补充 · 神秘货箱</span></div><span class="shop-live" aria-live="polite">${shopNotice || '选择一件补给查看价格'}</span></div>
+        <div class="shop-board" aria-label="商店商品">
           <div class="shop-board-grid">
             ${slots}
             <button class="shop-sellpost" data-act="openSell" title="打开收购台，挑卡卖掉">
@@ -123,7 +122,7 @@ function createShopController({
             </button>
           </div>
         </div>
-        <button class="shop-back" data-act="closeShop">[[icon:arrow]] 离开商店</button>
+        <button class="shop-back" data-act="closeShop">[[icon:arrow]] 离开补给站</button>
       </div>`, 'page');
     registerShopActs();
     UI.refresh(game);
@@ -150,9 +149,8 @@ function createShopController({
     UI.showOverlay('', `
       <div class="pg shop-pg node-pg sc-shop" data-asset-key="scene-shop-bg">
         <header class="pg-head">
-          <h2>[[icon:cards]] 卖牌处 ${UI.helpBtn('shopSell')}</h2>
-          <span class="pg-spacer"></span>
-          <span class="hub-res"><span class="res-chip">[[icon:coin]] <b class="gold">${game.coins}</b> 币</span></span>
+          <div class="shop-heading"><span class="shop-kicker">ACQUISITION DESK // 08</span><h2>[[icon:cards]] 收购台 ${UI.helpBtn('shopSell')}</h2><p>只收带有“可出售”备注的卡牌，其他卡不会出现在这里。</p></div>
+          <div class="shop-resources"><span class="shop-resource coin"><small>当前金币</small><b>${game.coins}</b><em>币</em></span><span class="shop-resource"><small>可出售</small><b>${total}</b><em>张</em></span></div>
         </header>
         <div class="shop-board sell-board">
           <p class="sell-tip">持有 ${ownedAll} 张 · 可卖 ${total} 张——其余卡没打「可出售」备注，商店不收（不在此显示）</p>
@@ -183,6 +181,7 @@ function createShopController({
       game.coins -= slot.price;
       slot.sold = true;
       game.ownedCards.push({ uid: newUid(), card: { ...slot.card } });
+      shopNotice = `已购入「${slot.card.name}」 · 剩余 ${game.coins} 币`;
       SDT.Sound.sfx('gain');
       UI.log(`[[icon:bag]] 购买卡牌【<b>${esc(slot.card.name)}</b>】（- ${slot.price} 币，剩 ${game.coins}）`, 'coin');
       saveGame();
@@ -199,6 +198,7 @@ function createShopController({
       game.coins -= slot.price;
       slot.shaReplenish--;
       game.ownedCards.push({ uid: newUid(), card: { ...slot.card } });
+      shopNotice = `已补充初始攻击 ×1 · 剩余 ${game.coins} 币`;
       SDT.Sound.sfx('gain');
       UI.log(`[[icon:bag]] 补充初始攻击 ×1（- ${slot.price} 币，剩 ${game.coins} · 本站还可补 ${slot.shaReplenish} 张）`, 'coin');
       saveGame();
@@ -215,6 +215,7 @@ function createShopController({
       const price = SDT.Cards.sellPrice(owned.card);
       game.ownedCards.splice(index, 1);
       game.coins += price;
+      shopNotice = `已出售「${owned.card.name}」 · 当前 ${game.coins} 币`;
       UI.log(`[[icon:coin]] 出售卡牌【<b>${esc(owned.card.name)}</b>】（+ ${price} 币，现有 ${game.coins}）`, 'coin');
       saveGame();
       renderSellPage();

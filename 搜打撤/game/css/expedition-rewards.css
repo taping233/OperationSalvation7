@@ -1,0 +1,66 @@
+/* Node rooms and extraction reports: one calm, legible result language. */
+#overlay .node-pg, #overlay .result-pg { background-color:#081722; color:#e6eef1; }
+#overlay .node-panel { background:rgba(8,23,34,.96); border:1px solid rgba(223,194,141,.26); box-shadow:0 24px 80px rgba(0,0,0,.4); }
+#overlay .node-panel .pg-head { padding:24px 28px 18px; border-bottom:1px solid rgba(223,194,141,.22); }
+#overlay .node-panel .pg-head h2 { color:#e6eef1; letter-spacing:.12em; }
+#overlay .node-panel .pg-head .sub { color:#a8bbc1; line-height:1.6; }
+#overlay .node-main { padding:24px 28px; }
+#overlay .node-summary { max-width:760px; width:100%; margin:0 auto; display:flex; flex-direction:column; gap:14px; }
+#overlay .node-summary .blank-safe-gain, #overlay .node-summary .bt-hand { background:rgba(16,39,53,.68); border:1px solid rgba(182,211,214,.15); padding:18px; }
+#overlay .node-summary .gain-big { color:#dfc28d; letter-spacing:.12em; }
+#overlay .node-foot { padding:0 28px 24px; border-top:1px solid rgba(182,211,214,.12); }
+#overlay .node-foot .ov-btn.ok { background:#dfc28d; color:#0b202c; border-color:#dfc28d; min-width:150px; }
+#overlay .result-pg { overflow:auto; }
+#overlay .result-pg .hub-head { background:rgba(8,23,34,.98); border-color:rgba(223,194,141,.24); }
+#overlay .result-pg .hub-head h2 { color:#e6eef1; letter-spacing:.1em; }
+#overlay .result-summary { display:grid; gap:5px; margin:22px auto 0; max-width:980px; padding:18px 20px; border-left:3px solid #dfc28d; background:rgba(16,39,53,.7); }
+#overlay .result-kicker { color:#dfc28d; font:700 10px ui-monospace,monospace; letter-spacing:.18em; }
+#overlay .result-summary b { color:#e6eef1; font-size:17px; }
+#overlay .result-summary span:last-child { color:#9fb5bb; font-size:12px; }
+#overlay .result-columns { max-width:980px; margin:16px auto 0; }
+#overlay .result-pg .hub-card { background:#0d2634; border:1px solid rgba(182,211,214,.16); border-radius:2px; box-shadow:none; }
+#overlay .result-pg .hub-card h3 { color:#dfc28d; letter-spacing:.1em; }
+#overlay .result-line { padding:12px; border:1px solid rgba(182,211,214,.12); background:rgba(8,23,34,.55); }
+#overlay .result-pg .dep-foot { position:sticky; bottom:0; padding-top:12px; background:linear-gradient(180deg,transparent,#0d2634 35%); }
+#overlay .result-pg #btnDeploy { background:#dfc28d; color:#0b202c; border-color:#dfc28d; }
+@media (max-width:760px) { #overlay .node-panel .pg-head, #overlay .node-main, #overlay .node-foot { padding-left:16px; padding-right:16px; } #overlay .result-summary { margin-left:16px; margin-right:16px; } #overlay .result-columns { margin-left:16px; margin-right:16px; } }
+
+#overlay .node-pg[data-asset-key] { background-size:cover; background-repeat:no-repeat; background-position:35% center; }
+#overlay .node-pg::before { background:linear-gradient(90deg,#07172520 10%,#07172545 48%,#071725e6 75%),linear-gradient(0deg,#071725ae,transparent 75%); }
+#overlay .node-panel { width: min(560px,46%); padding:clamp(24px,7vh,64px) clamp(20px,3vw,46px) 28px; border:0; border-left:1px solid #b7c8c322; background:#081722ec; gap:20px; }
+.node-kicker { color:#dfc28d; font:9px 'Cascadia Code',monospace; letter-spacing:2px; display:flex; justify-content:space-between; }
+#overlay .card.page .node-pg:not(.shop-pg) .pg-head { align-items:flex-start; text-align:left; gap:20px; }
+#overlay .card.page .node-pg:not(.shop-pg) .pg-head h2 { font:32px/1.4 'SimSun',serif; letter-spacing:4px; text-shadow:none; }
+#overlay .card.page .node-pg:not(.shop-pg) .pg-head .sub { color:#b7c7cd; font-size:13px; letter-spacing:.5px; text-shadow:none; }
+#overlay .node-main { padding:12px 0; justify-content:center; }
+#overlay .node-pg .evt-opt { width:100%; min-height:72px; padding:16px 20px; align-items:flex-start; text-align:left; border-radius:2px; border:1px solid #8aa4ae44; background:#132a38b0; box-shadow:none; }
+#overlay .node-pg .evt-opt b { color:#ebeee6; text-shadow:none; font-size:16px; }
+#overlay .node-pg .evt-opt span { color:#a9bdc5; text-shadow:none; font-size:12px; }
+#overlay .node-pg .evt-opt:hover { background:#22414d; border-color:#dfc28d; }
+#overlay .node-pg .evt-opt:disabled { opacity:.4; }
+#overlay .node-foot { padding:14px 0 0; }
+#overlay .card.chest { width:min(1000px,92vw); max-height:90vh; padding:24px 32px; border:1px solid #9dada252; background:radial-gradient(ellipse at 50% 20%,#24404b,#0d202c 75%); box-shadow:0 32px 100px #0009; }
+#overlay .card.chest > h2 { font-size:13px; letter-spacing:2px; border-bottom:1px solid #d8c08e35; padding-bottom:16px; }
+.loot-manifest { display:flex; justify-content:space-between; align-items:center; gap:20px; margin:18px 0 10px; }
+.loot-manifest > div:first-child { display:grid; gap:8px; }
+.loot-manifest span { color:#dfc28d; font:9px 'Cascadia Code',monospace; letter-spacing:2px; }
+.loot-manifest > div:first-child > b { font:25px/1.6 'SimSun',serif; letter-spacing:2px; color:#edf0e9; }
+.loot-capacity { display:grid; gap:5px; text-align:right; }
+.loot-capacity small { color:#a2bac3; font-size:10px; }
+.loot-capacity b { color:#dfc28d; font:24px 'Cascadia Code',monospace; }
+.loot-capacity em { font:12px 'Cascadia Code',monospace; color:#90aab7; }
+#overlay .card.chest .bt-hand { min-height:240px; padding:24px 8px; background:linear-gradient(180deg,#09182440,#09182400); }
+#overlay .card.chest .evt-sts-desc { color:#b8cbd0; text-align:left; font-size:12px; margin:8px 0; }
+.loot-footer-note { font-size:11px; color:#8da7b4; margin:12px 0; text-align:center; }
+#overlay .card.chest .chest-ops { display:grid; grid-template-columns:1fr 1.5fr; gap:12px; padding-top:12px; border-top:1px solid #adbec633; }
+#overlay .card.chest .chest-ops .ov-btn { min-height:44px; font-size:12px; }
+@media(max-width:760px) {
+  #overlay .node-panel { width:62%; padding:24px 20px; }
+  #overlay .card.chest { padding:18px; }
+  .loot-manifest > div:first-child > b { font-size:20px; }
+}
+@media(max-width:560px) {
+  #overlay .node-panel { width:100%; background:#081722d9; padding:30px 22px; }
+  #overlay .node-pg .evt-opt { min-height:60px; }
+  .loot-manifest > div:first-child > b { font-size:17px; }
+}

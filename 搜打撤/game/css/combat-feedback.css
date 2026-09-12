@@ -1,0 +1,12 @@
+/* 战斗反馈分级：由 battle.feedback.js 给飘字挂上 fx-* 类。 */
+.sts-float.fx-impact { filter: drop-shadow(0 0 5px rgba(255,179,77,.18)); }
+.sts-float.fx-finisher {
+  text-shadow: 0 0 10px rgba(255,174,71,.52), 0 2px 5px rgba(0,0,0,.9);
+  animation-duration: 1.08s;
+}
+.sts-float.fx-finisher.critical { letter-spacing: 2px; }
+.sts-float.fx-routine { animation-duration: .78s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sts-float.fx-impact, .sts-float.fx-finisher, .sts-float.fx-routine { animation: none; }
+}

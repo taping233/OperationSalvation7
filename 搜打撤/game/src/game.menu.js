@@ -295,22 +295,21 @@ function createGameMenuController(deps) {
     loadSuggestions().then((list) => { sugCache = list; renderSugBox(); });
   }
 
-  // 快速参考：对局中的真实按键与操作
+  // 远征手册：只描述当前 Vite 版真实输入与流程
   function openTitleGuide() {
     game.state = 'modal';
-    UI.showOverlay('[[icon:question]] 快速参考', `
-      <div class="guide-list">
-        <div class="guide-row"><b>空格 / 回车</b><span>掷骰子移动</span></div>
-        <div class="guide-row"><b>Q / E</b><span>旋转地图视角</span></div>
-        <div class="guide-row"><b>G</b><span>全景总览</span></div>
-        <div class="guide-row"><b>F</b><span>定位角色</span></div>
-        <div class="guide-row"><b>B</b><span>打开 / 关闭背包</span></div>
-        <div class="guide-row"><b>N</b><span>结点编号开关</span></div>
-        <div class="guide-row"><b>Esc</b><span>关闭卡牌库 / 制作坊页面</span></div>
-        <div class="guide-row"><b>鼠标拖拽</b><span>平移地图</span></div>
-        <div class="guide-row"><b>滚轮</b><span>缩放地图</span></div>
+    UI.showOverlay('[[icon:question]] 远征手册', `
+      <div class="expedition-manual">
+        <p class="manual-lead">从基地整备，沿相邻节点深入，打完战斗后把带回来的东西安全撤离。</p>
+        <div class="manual-grid">
+          <section class="manual-step"><span class="manual-index">01</span><div><h3>整备</h3><p>在基地选择玩法、挑选背包卡牌与宠物。初始攻击固定占用 1 格；仓库卡只有放入背包才会带进远征。</p></div></section>
+          <section class="manual-step"><span class="manual-index">02</span><div><h3>探索</h3><p>直接点击当前节点相邻的下一节点。多条路线时 <b>Space / Enter</b> 切换，单条路线时直接前进；<b>Z</b> 回到上条路线，<b>X</b> 确认前往。</p></div></section>
+          <section class="manual-step"><span class="manual-index">03</span><div><h3>战斗</h3><p>手牌按住拖向敌人或自己使用指向卡；没有目标的招式拖到敌我之间空地即可。留意费用与敌方意图，回合结束后敌人会行动。</p></div></section>
+          <section class="manual-step"><span class="manual-index">04</span><div><h3>撤离</h3><p>抵达撤离节点并完成结算；安全格中的卡牌会由宠物运回基地，撤离失败时也会抢运安全格卡牌。倒下或放弃会丢失其他本局物资。</p></div></section>
+        </div>
+        <div class="manual-controls"><span class="manual-control-key">Space / Enter</span><span>切换路线</span><span class="manual-control-key">Z</span><span>上条路线</span><span class="manual-control-key">X</span><span>确认节点</span><span class="manual-control-key">B</span><span>背包</span><span class="manual-control-key">G / F</span><span>全景 / 定位</span><span class="manual-control-key">Esc</span><span>关闭页面</span></div>
+        <p class="manual-note">鼠标拖拽平移地图，滚轮缩放。地图只开放当前节点的相邻可通行路线；已探索节点的奖励不会重复刷新。</p>
       </div>
-      <!-- 2026-09-07 留言：底部说明句与返回键删除/移位——说明句去掉，返回键沉到右下角 -->
       <div class="ov-btns ov-btns-corner"><button class="ov-btn back-sm" data-act="guideBack">返回 <i class="en">BACK</i></button></div>`, true);
     UI.act('guideBack', () => { UI.hideOverlay(); game.state = 'title'; });
   }
@@ -451,7 +450,7 @@ function createGameMenuController(deps) {
       const exists = !!run || !!baseData;
       const cta = !exists ? '开新档 <i class="en">NEW GAME</i>'
         : run ? '继续对局 <i class="en">CONTINUE</i>' : '进入存档 <i class="en">ENTER</i>';
-      cards.push(`<div class="slot-card slot-art-${i}${exists ? ' filled' : ''}" data-act="${exists ? 'enterSlot' : 'newSlot'}" data-slot="${i}">
+     cards.push(`<article class="slot-card slot-art-${i}${exists ? ' filled' : ''}">
         <i class="slot-card-bg" aria-hidden="true"></i>
         <i class="slot-card-light" aria-hidden="true"></i>
         <i class="slot-card-flakes" aria-hidden="true">${'<i></i>'.repeat(7)}</i>
@@ -460,12 +459,12 @@ function createGameMenuController(deps) {
         <span class="slot-card-sub">SLOT 0${i}</span>
         <i class="slot-card-rule"></i>
         <span class="slot-card-desc">${slotInfoHTML(baseData, run)}</span>
-        <span class="slot-card-cta">${cta}</span>
+       <button class="slot-card-cta" data-act="${exists ? 'enterSlot' : 'newSlot'}" data-slot="${i}" aria-label="${exists ? '进入档位 0' + i : '在档位 0' + i + ' 开始新游戏'}">${cta}</button>
         ${exists ? `<span class="slot-card-ops">
           <button class="mini-btn" data-act="overwriteSlot" data-slot="${i}">覆盖重开</button>
           <button class="mini-btn danger" data-act="delSlot" data-slot="${i}">删除</button>
         </span>` : ''}
-      </div>`);
+     </article>`);
     }
     UI.registerHelp('slots', {
       title: '存档说明',
@@ -657,10 +656,12 @@ function createGameMenuController(deps) {
         <label class="chk"><input type="checkbox" id="setIndex" ${game.toggles.index ? 'checked' : ''}> 结点编号 <span class="set-en">NODE NUMBERS</span></label>
         <label class="chk"><input type="checkbox" id="setHint" ${localStorage.getItem('sdt-hintbar') !== '0' ? 'checked' : ''}> 底部操作提示条 <span class="set-en">HINT BAR</span></label>
         <label class="chk"><input type="checkbox" id="setBanner" ${localStorage.getItem('sdt-banner') !== '0' ? 'checked' : ''}> 环层横幅 <span class="set-en">LAYER BANNER</span></label>
-        <label class="chk"><input type="checkbox" id="setDev" ${game.devMode ? 'checked' : ''}> 开发者模式（固定骰子 / 卡牌制作） <span class="set-en">DEVELOPER</span></label>
+        <label class="chk"><input type="checkbox" id="setDev" ${game.devMode ? 'checked' : ''}> 开发者模式（测试工具 / 卡牌制作） <span class="set-en">DEVELOPER</span></label>
         <label class="chk"><input type="checkbox" id="setShake" ${localStorage.getItem('sdt-reduce-shake') === '1' ? '' : 'checked'}> 屏幕震动反馈 <span class="set-en">SCREEN SHAKE</span></label>
+        <label class="chk"><input type="checkbox" id="setReduceMotion" ${localStorage.getItem('sdt-reduce-motion') === '1' ? 'checked' : ''}> 减少动态效果 <span class="set-en">REDUCE MOTION</span></label>
         <h3 class="set-h">[[icon:gear]] 音频 <span class="set-en">AUDIO</span></h3>
         <label class="chk"><input type="checkbox" id="setMusic" ${SDT.Sound.musicMuted ? '' : 'checked'}> 背景音乐 <span class="set-en">MUSIC</span></label>
+        <label class="chk"><span>音乐来源 <span class="set-en">MUSIC SOURCE</span></span><select id="setMusicSource"><option value="scape" ${SDT.Sound.musicSource === 'scape' ? 'selected' : ''}>冬境声景</option><option value="original" ${SDT.Sound.musicSource === 'original' ? 'selected' : ''}>原有曲目</option></select></label>
         <label class="chk vol"><span>音乐音量 <span class="set-en">MUSIC VOL</span></span><input type="range" id="setMusicVol" min="0" max="100" value="${Math.round(SDT.Sound.musicVolume * 100)}"><b id="setMusicVolVal">${Math.round(SDT.Sound.musicVolume * 100)}</b></label>
         <label class="chk"><input type="checkbox" id="setSfx" ${SDT.Sound.sfxMuted ? '' : 'checked'}> 音效 <span class="set-en">SOUND FX</span></label>
         <label class="chk vol"><span>音效音量 <span class="set-en">SFX VOL</span></span><input type="range" id="setSfxVol" min="0" max="100" value="${Math.round(SDT.Sound.sfxVolume * 100)}"><b id="setSfxVolVal">${Math.round(SDT.Sound.sfxVolume * 100)}</b></label>
@@ -727,11 +728,16 @@ function createGameMenuController(deps) {
     document.getElementById('setShake').addEventListener('change', (e) => {
       localStorage.setItem('sdt-reduce-shake', e.target.checked ? '0' : '1');
     });
+    document.getElementById('setReduceMotion').addEventListener('change', (e) => {
+      localStorage.setItem('sdt-reduce-motion', e.target.checked ? '1' : '0');
+      document.body.classList.toggle('reduce-motion', e.target.checked);
+    });
     // 音乐 / 音效独立开关（即时生效，随 localStorage 持久化）
     document.getElementById('setMusic').addEventListener('change', (e) => {
       SDT.Sound.setMusicMuted(!e.target.checked);
       if (!e.target.checked) SDT.Sound.sfx('ding');
     });
+    document.getElementById('setMusicSource').addEventListener('change', (e) => SDT.Sound.setMusicSource(e.target.value));
     document.getElementById('setSfx').addEventListener('change', (e) => {
       SDT.Sound.setSfxMuted(!e.target.checked);
       SDT.Sound.sfx('ding');   // 开启时给一声反馈（关闭时无感）

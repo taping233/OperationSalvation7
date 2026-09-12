@@ -348,6 +348,21 @@
 .sts-cardfly { position:absolute; z-index:75; pointer-events:none; }
 .sts-cardfly .hs-card { font-size:16px; }   /* 与手牌内卡面同尺寸（脱离 .sts-hand 上下文后需补回） */
 .sts-cardfly .bt-card { width:100%; height:100%; }
+/* 回合过渡横幅（批次F，STS2 Enemy Turn 式）：细带横穿战场中带，文字滑入-停留-滑出 */
+.bt-turnbanner { position:absolute; left:0; right:0; top:31%; display:flex; justify-content:center;
+  pointer-events:none; z-index:65; }
+.bt-turnbanner b { font-weight:700; font-size:26px; letter-spacing:.4em; text-indent:.4em;
+  color:#f0e6c8; padding:12px 58px; white-space:nowrap;
+  background:linear-gradient(90deg,transparent,rgba(8,10,14,.78) 22% 78%,transparent);
+  border-top:1px solid rgba(240,230,200,.35); border-bottom:1px solid rgba(240,230,200,.35);
+  animation:btTurnKf 1.25s cubic-bezier(.3,.7,.4,1) forwards; }
+.bt-turnbanner.foe b { color:#e0907c; border-color:rgba(224,144,124,.4); }
+@keyframes btTurnKf {
+  0% { opacity:0; transform:translateX(90px); }
+  20% { opacity:1; transform:none; }
+  75% { opacity:1; transform:none; }
+  100% { opacity:0; transform:translateX(-90px); }
+}
 /* 命中特效贴图（NAI 生成，黑底 + screen 混合当发光层）：伤害=斩击，格挡/免伤=护盾碎裂 */
 .sts-impact { position:absolute; z-index:78; width:150px; height:150px; margin:-75px 0 0 -75px;
   pointer-events:none; mix-blend-mode:screen; background:center/contain no-repeat;
