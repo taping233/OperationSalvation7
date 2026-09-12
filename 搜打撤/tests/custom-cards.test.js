@@ -28,7 +28,6 @@ const NEW_CARDS = [
   { id: 'cc-cursed-blade', name: '诅咒之刃', cost: 2, rarity: '稀有', type: '武术', dmgType: 'attack' },
   { id: 'cc-lava-blast',  name: '熔岩爆破', cost: 2, rarity: '稀有', type: '法术', dmgType: 'spell' },
   { id: 'cc-double-boom', name: '二次爆炸', cost: 1, rarity: '衍生', type: '法术', dmgType: 'spell' },
-  { id: 'tt-peach',       name: '桃',       cost: 0, rarity: '古朴', type: '道具', heal: 6 },
 ];
 
 describe('卡牌库完整性（2026-09-10 批次 v4–v10）', () => {

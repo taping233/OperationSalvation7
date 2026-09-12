@@ -47,10 +47,11 @@ function createShopController({
         : { empty: true, label: '卡牌库无货' });
     }
     // 初始牌槽位已移除：杀/火球为初始牌，不上架（2026-09-06）；神秘货箱特殊栏位仍可能刷出
-    // 桃（2026-09-10 需求）：固定栏位 2 币回 6 血，替代原金疮药（3 币回 10 血）
-    const peach = lib.find(card => card.id === 'tt-peach') ||
-      SDT.Cards.CARDS_SYNC.find(card => card.id === 'tt-peach');
-    slots.push({ card: peach, price: 2, sold: false });
+    // 固定栏位（2026-09-10 需求）：2 币回 6 血，替代原金疮药（3 币回 10 血）；
+    // 2026-09-12 老板拍板：桃与能量饮料完全重复，删桃，栏位改用能量饮料（同为 0 费回 6 血、币值 2）
+    const healSlot = lib.find(card => card.id === 'tt4-woodify') ||
+      SDT.Cards.all().find(card => card.id === 'tt4-woodify');
+    slots.push({ card: healSlot, price: 2, sold: false });
     // 初始攻击补充位（2026-09-08 老板定版）：固定栏位，1 币 1 张，每次到站最多补 5 张
     slots.push({ card: { ...SDT.Cards.SHA }, price: 1, sold: false, shaReplenish: 5 });
     const mysteryCard = lib.length ? lib[Math.floor(Random.random('shop') * lib.length)] : null;
@@ -101,7 +102,7 @@ function createShopController({
     UI.registerHelp('shop', {
       title: '商店说明',
       html: `
-        <p class="help-item"><b>进货</b>商队每次靠站随机卸货：6 张随机卡 + 桃（2 币，回 6 血） + 初始攻击补充（1 币/张，每站最多 5 张）+ 1 个「神秘货箱」栏位（3 币，买到随机卡牌）。</p>
+        <p class="help-item"><b>进货</b>商队每次靠站随机卸货：6 张随机卡 + 能量饮料（2 币，回 6 血） + 初始攻击补充（1 币/张，每站最多 5 张）+ 1 个「神秘货箱」栏位（3 币，买到随机卡牌）。</p>
         <p class="help-item"><b>卖牌处</b>货板右下角的鎏金圆牌：点进收购台挑卡卖掉。默认所有卡牌不可出售；只有带「可出售」备注的卡才能卖，收购价 = 卡面币值。</p>`,
       back: renderShop,
     });
@@ -111,7 +112,7 @@ function createShopController({
           <div class="shop-heading"><span class="shop-kicker">TACTICAL SUPPLY // 07</span><h2>[[icon:bag]] 冬境战术补给站 ${UI.helpBtn('shop')}</h2><p>挑选能带出下一段路线的装备，买完即锁定库存。</p></div>
           <div class="shop-resources" aria-label="远征资源"><span class="shop-resource"><small>持有卡牌</small><b>${game.ownedCards.length}</b><em>张</em></span><span class="shop-resource coin"><small>当前金币</small><b>${game.coins}</b><em>币</em></span><span class="shop-resource"><small>背包容量</small><b>${usedSlots()}/${bagCap()}</b><em>格</em></span></div>
         </header>
-          <div class="shop-toolbar"><div><b>补给清单</b><span>六个随机货位 · 桃 · 初始攻击补充 · 神秘货箱</span></div><span class="shop-live" aria-live="polite">${shopNotice || '选择一件补给查看价格'}</span></div>
+          <div class="shop-toolbar"><div><b>补给清单</b><span>六个随机货位 · 能量饮料 · 初始攻击补充 · 神秘货箱</span></div><span class="shop-live" aria-live="polite">${shopNotice || '选择一件补给查看价格'}</span></div>
         <div class="shop-board" aria-label="商店商品">
           <div class="shop-board-grid">
             ${slots}

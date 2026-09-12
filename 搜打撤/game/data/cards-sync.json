@@ -1,5 +1,5 @@
 {
-  "version": 10,
+  "version": 11,
   "note": "实机卡库定版覆盖批次数据（同步自网页版实机卡库）。由 scripts/sync-cards-from-live.mjs 生成，勿手改；重跑该脚本整块替换。",
   "changelog": [
     "2026-09-10 需求批次（v10）：二刀流",
@@ -9,7 +9,8 @@
     "2026-09-10 需求批次（v6）：追斩",
     "2026-09-10 需求批次（v5）：法力奔涌",
     "2026-09-10 需求批次（v4）：连续射击",
-    "2026-09-09 需求批次（v3）"
+    "2026-09-09 需求批次（v3）",
+    "2026-09-12：删除桃（与能量饮料重复，老板拍板），空投/商店改能量饮料口径；版本 11 重播清旧档残卡"
   ],
   "cards": [
     {
@@ -30,18 +31,6 @@
       "rarity": "古朴",
       "sellable": false,
       "type": "装备",
-      "value": 2
-    },
-    {
-      "cost": 0,
-      "desc": "回复 6 点生命。",
-      "dmg": 0,
-      "heal": 6,
-      "id": "tt-peach",
-      "name": "桃",
-      "rarity": "古朴",
-      "sellable": false,
-      "type": "道具",
       "value": 2
     },
     {
@@ -255,16 +244,6 @@
     },
     {
       "cost": 0,
-      "desc": "从木材、口粮、桃、随机药水中抽取一项。",
-      "dmg": 0,
-      "id": "tt6-airdrop",
-      "name": "空中补给",
-      "rarity": "衍生",
-      "type": "事件",
-      "unrandom": true
-    },
-    {
-      "cost": 0,
       "desc": "获得彩色令牌碎片，+2 币。",
       "dmg": 0,
       "id": "tt6-mystery",
@@ -321,9 +300,20 @@
       "type": "生物",
       "unrandom": true,
       "value": 0
+    },
+    {
+      "cost": 0,
+      "desc": "从木材、口粮、能量饮料、随机药水中抽取一项。",
+      "dmg": 0,
+      "id": "tt6-airdrop",
+      "name": "空中补给",
+      "rarity": "衍生",
+      "type": "事件",
+      "unrandom": true
     }
   ],
   "retire": [
+    "tt-peach",
     "tt6-timeskip"
   ]
 }
