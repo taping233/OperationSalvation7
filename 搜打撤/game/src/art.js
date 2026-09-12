@@ -91,8 +91,8 @@ import { DATA } from './data-loader.js';
     const m = /^assets\/portraits\/(classes|enemies)\/([^/]+)$/.exec(String(src || ''));
     return m ? `assets/portraits/cut/${m[1]}/${m[2]}` : null;
   };
-  { // 逐张空闲预解码，避免 25 张图片同时解码/上传造成启动长帧
-    const groups = { classes: Object.values(CLASS_IDS), enemies: Array.from(MONSTER_IDS) };
+  { // 逐张空闲预解码，避免 18 张图片同时解码/上传造成启动长帧
+    const groups = { enemies: Array.from(MONSTER_IDS) };
     const queue = Object.keys(groups).flatMap(group => groups[group].map(id => `assets/portraits/cut/${group}/${id}.webp`));
     const decoded = new Map(); // 持有引用，避免刚预解码完就被回收
     const schedule = (task) => {
@@ -159,17 +159,15 @@ function characterArt(value, full=false) {
     warm,
     classArt(className) {
       if(characterFor(className)) return characterArt(className);
-      const id = resolveClass(className);
-      if (!id) return fallback('class', className, className || '未知职业');
-      return image(`portraits/classes/${id}.webp`, 'art-portrait', CLASS_NAMES[id], `class-${id}`);
+      // 旧 11 职业立绘已随「以立绘为基准」清理下线，无法解析的历史职业一律走占位图
+      return fallback('class', className, className || '未知职业');
     },
-    // 角色选择页大幅立绘：全身像 portraits/full/<id>.webp（1038×1516 全身立绘烘焙版，688×1012）；
-    // 缺失时回退半身像 portraits/classes/<id>.webp
+    // 角色选择页大幅立绘：全身像 portraits/full/<角色id>.webp，由 characterArt 供给
     classFullArt(className) {
       if(characterFor(className)) return characterArt(className,true);
       const id = resolveClass(className);
       if (!id) return image('cards/hero.webp', 'art-full', className || '未知角色', `class-full-${className || 'unknown'}`);
-      return image(`portraits/full/${id}.webp`, 'art-full', CLASS_NAMES[id], `class-full-${id}`);
+      return image('cards/hero.webp', 'art-full', CLASS_NAMES[id], `class-full-${id}`);
     },
     // Q 版战斗头像：局内下边栏人物面板；未配置 Q 版的角色回退常规立绘
     classAvatarArt(className) {
@@ -315,7 +313,6 @@ function characterArt(value, full=false) {
     },
     cardFamily,
     manifest: Object.freeze({
-      classes: Object.freeze(Object.values(CLASS_IDS).map(id => `portraits/classes/${id}.webp`)),
       enemies: Object.freeze(Array.from(MONSTER_IDS, id => `portraits/enemies/${id}.webp`)),
       cards: Object.freeze(Array.from(CARD_FAMILIES, id => `cards/${id}.webp`))
     }),

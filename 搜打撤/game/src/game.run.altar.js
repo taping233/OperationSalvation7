@@ -44,7 +44,7 @@ export function openClassChoice() {
   let view = 'select'; // 'select' 主选角页 | 'pool' 二级卡池页
   const poolCount = cl => SDT.Cards.classPool(cl).length;
   // 主选角页（2026-09-06 留言重做，排版参考杀戮尖塔 2 选人界面）：
-  // 选中角色大幅立绘居右撑满，左侧信息面板（名字/来历/熟练度/故事/任务），
+  // 选中角色大幅立绘居右撑满，左侧信息面板（名字/职业/熟练度），
   // 底部全角色头像条，左下角红色返回键、右下角大确认键；卡池收进二级页
   const render = () => {
     if (view === 'pool') return renderPool();
@@ -58,17 +58,13 @@ export function openClassChoice() {
           <aside class="cls2-panel${sel ? '' : ' cls2-none'}">
             ${sel && story ? `
               <h2 class="cls2-name">${esc(story.name)}</h2>
-              <div class="cls2-tag">${esc(story.tag)}</div>
               <div class="cls2-lv">[[icon:medal]] ${esc(sel)} · 熟练度 Lv.${lv} · ${SDT.Meta.perkText(lv)}</div>
-              <p class="cls2-story">${esc(story.bg)}</p>
-              <h3>出发任务</h3>
-              <p class="cls2-story">${esc(story.task)}</p>
               <button class="ov-btn cls2-pool-btn" data-act="clsPool">[[icon:cards]] 查看角色卡池（${poolCount(sel)} 张）</button>`
             : '<p class="cls2-hint">[[icon:medal]]<br>从下方选择一名角色</p>'}
           </aside>
         </div>
         <div class="cls2-strip">${roster.map(({ cl, c }) => `
-          <button class="cls2-face${cl === sel ? ' sel' : ''}" data-act="selClass" data-cls="${escAttr(cl)}" title="${escAttr(c.name)} · ${escAttr(c.tag)}">
+          <button class="cls2-face${cl === sel ? ' sel' : ''}" data-act="selClass" data-cls="${escAttr(cl)}" title="${escAttr(c.name)}">
             ${SDT.Art.classArt(cl)}<b>${esc(c.name)}</b>
           </button>`).join('')}</div>
         <button class="cls2-back" data-act="cls2Quit" title="返回标题界面"><svg class="svg-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.5 5.5 4 12l6.5 6.5M4.6 12H20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>

@@ -1,7 +1,7 @@
 {
   "_comment": "资产清单(create-game-assets模板裁剪版): path/ext/bytes/license。assets:audit 校验未登记文件。",
   "generated": "2026-09-08",
-  "count": 319,
+  "count": 261,
   "assets": [
     {
       "path": "bgm-liejie-fuhe.mp3",
@@ -13,12 +13,6 @@
       "path": "bgm-sour-orange-earth.mp3",
       "ext": "mp3",
       "bytes": 3745036,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "board-backdrop-wreck.webp",
-      "ext": "webp",
-      "bytes": 51414,
       "license": "项目自有（自制/AI 生成）"
     },
     {
@@ -64,21 +58,9 @@
       "license": "项目自有（自制/AI 生成）"
     },
     {
-      "path": "cards/hero-assassin.webp",
-      "ext": "webp",
-      "bytes": 13950,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
       "path": "cards/hero-descend.webp",
       "ext": "webp",
       "bytes": 19698,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "cards/hero-guard.webp",
-      "ext": "webp",
-      "bytes": 14898,
       "license": "项目自有（自制/AI 生成）"
     },
     {
@@ -94,18 +76,6 @@
       "license": "项目自有（自制/AI 生成）"
     },
     {
-      "path": "cards/hero-ranger.webp",
-      "ext": "webp",
-      "bytes": 17224,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "cards/hero-sealer.webp",
-      "ext": "webp",
-      "bytes": 18948,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
       "path": "cards/hero-summoner.webp",
       "ext": "webp",
       "bytes": 26026,
@@ -115,12 +85,6 @@
       "path": "cards/hero-sword.webp",
       "ext": "webp",
       "bytes": 19762,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "cards/hero-warlock.webp",
-      "ext": "webp",
-      "bytes": 20590,
       "license": "项目自有（自制/AI 生成）"
     },
     {
@@ -400,18 +364,6 @@
       "license": "项目自有（自制/AI 生成）"
     },
     {
-      "path": "hub-bg-rhine.png",
-      "ext": "png",
-      "bytes": 66947,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "icon-council.png",
-      "ext": "png",
-      "bytes": 1427010,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
       "path": "icons/altar.svg",
       "ext": "svg",
       "bytes": 55967,
@@ -682,138 +634,6 @@
       "license": "项目自有（自制/AI 生成）"
     },
     {
-      "path": "portraits/classes/assassin.webp",
-      "ext": "webp",
-      "bytes": 22352,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "portraits/classes/descend.webp",
-      "ext": "webp",
-      "bytes": 28978,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "portraits/classes/guard.webp",
-      "ext": "webp",
-      "bytes": 25532,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "portraits/classes/mage.webp",
-      "ext": "webp",
-      "bytes": 24118,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "portraits/classes/priest.webp",
-      "ext": "webp",
-      "bytes": 30672,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "portraits/classes/ranger.webp",
-      "ext": "webp",
-      "bytes": 32782,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "portraits/classes/sealer.webp",
-      "ext": "webp",
-      "bytes": 27992,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "portraits/classes/summoner.webp",
-      "ext": "webp",
-      "bytes": 34470,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "portraits/classes/sword.webp",
-      "ext": "webp",
-      "bytes": 31624,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "portraits/classes/warlock.webp",
-      "ext": "webp",
-      "bytes": 27984,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "portraits/classes/warrior.webp",
-      "ext": "webp",
-      "bytes": 27758,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "portraits/cut/classes/assassin.webp",
-      "ext": "webp",
-      "bytes": 22008,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "portraits/cut/classes/descend.webp",
-      "ext": "webp",
-      "bytes": 27520,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "portraits/cut/classes/guard.webp",
-      "ext": "webp",
-      "bytes": 25382,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "portraits/cut/classes/mage.webp",
-      "ext": "webp",
-      "bytes": 22262,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "portraits/cut/classes/priest.webp",
-      "ext": "webp",
-      "bytes": 30018,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "portraits/cut/classes/ranger.webp",
-      "ext": "webp",
-      "bytes": 32304,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "portraits/cut/classes/sealer.webp",
-      "ext": "webp",
-      "bytes": 28246,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "portraits/cut/classes/summoner.webp",
-      "ext": "webp",
-      "bytes": 34328,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "portraits/cut/classes/sword.webp",
-      "ext": "webp",
-      "bytes": 31810,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "portraits/cut/classes/warlock.webp",
-      "ext": "webp",
-      "bytes": 27744,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "portraits/cut/classes/warrior.webp",
-      "ext": "webp",
-      "bytes": 26688,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
       "path": "portraits/cut/enemies/archer.webp",
       "ext": "webp",
       "bytes": 33982,
@@ -988,12 +808,6 @@
       "license": "项目自有（自制/AI 生成）"
     },
     {
-      "path": "portraits/full/assassin.webp",
-      "ext": "webp",
-      "bytes": 44808,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
       "path": "portraits/full/baiqi.webp",
       "ext": "webp",
       "bytes": 513796,
@@ -1006,75 +820,9 @@
       "license": "项目自有（老板指定立绘）"
     },
     {
-      "path": "portraits/full/descend.webp",
-      "ext": "webp",
-      "bytes": 60658,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "portraits/full/guard.webp",
-      "ext": "webp",
-      "bytes": 46178,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "portraits/full/mage.webp",
-      "ext": "webp",
-      "bytes": 58266,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "portraits/full/priest.webp",
-      "ext": "webp",
-      "bytes": 43070,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "portraits/full/ranger.webp",
-      "ext": "webp",
-      "bytes": 61080,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "portraits/full/sealer.webp",
-      "ext": "webp",
-      "bytes": 49174,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
       "path": "portraits/full/shuangling.webp",
       "ext": "webp",
       "bytes": 417520,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "portraits/full/summoner.webp",
-      "ext": "webp",
-      "bytes": 51398,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "portraits/full/sword.webp",
-      "ext": "webp",
-      "bytes": 52084,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "portraits/full/warlock.webp",
-      "ext": "webp",
-      "bytes": 47018,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "portraits/full/warrior.webp",
-      "ext": "webp",
-      "bytes": 60434,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "reconstruction/slot-wallpaper.jpg",
-      "ext": "jpg",
-      "bytes": 593208,
       "license": "项目自有（自制/AI 生成）"
     },
     {
@@ -1084,51 +832,15 @@
       "license": "项目自有（自制/AI 生成）"
     },
     {
-      "path": "reconstruction/wallpaper-preview.jpg",
-      "ext": "jpg",
-      "bytes": 184366,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
       "path": "scenes/battle-normal-anime-v2.webp",
       "ext": "webp",
       "bytes": 101204,
       "license": "项目自有（自制/AI 生成）"
     },
     {
-      "path": "scenes/battle-snow-street.png",
-      "ext": "png",
-      "bytes": 1522306,
-      "license": "项目自有（AI 生成）"
-    },
-    {
       "path": "scenes/event-bandits-anime-v2.webp",
       "ext": "webp",
       "bytes": 206998,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "scenes/hub-ach.png",
-      "ext": "png",
-      "bytes": 27810,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "scenes/hub-classes.png",
-      "ext": "png",
-      "bytes": 46129,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "scenes/hub-stash.png",
-      "ext": "png",
-      "bytes": 34892,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "scenes/hub-upgrade.png",
-      "ext": "png",
-      "bytes": 47449,
       "license": "项目自有（自制/AI 生成）"
     },
     {
@@ -1147,12 +859,6 @@
       "path": "scenes/scene-chest-anime-v2.webp",
       "ext": "webp",
       "bytes": 102936,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "scenes/scene-deploy-anime.png",
-      "ext": "png",
-      "bytes": 41662,
       "license": "项目自有（自制/AI 生成）"
     },
     {
@@ -1501,60 +1207,6 @@
       "path": "slot-bg-knight-fantasy.webp",
       "ext": "webp",
       "bytes": 490052,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "title-hero-ascension-cartoon-1080p-winter-graded.webp",
-      "ext": "webp",
-      "bytes": 202528,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "title-hero-ascension.webp",
-      "ext": "webp",
-      "bytes": 1563724,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "title-wallpaper-02-whitehair-man-1080p-winter-graded.webp",
-      "ext": "webp",
-      "bytes": 97880,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "title-wallpaper-03-capped-youth-1080p-winter-graded.webp",
-      "ext": "webp",
-      "bytes": 102762,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "title-wallpaper-04-whitehair-woman-1080p-winter-graded.webp",
-      "ext": "webp",
-      "bytes": 124494,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "title-wallpaper-05-white-suit-man-1080p-winter-graded.webp",
-      "ext": "webp",
-      "bytes": 128124,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "title-wallpaper-ruin-girl-1080p.webp",
-      "ext": "webp",
-      "bytes": 366492,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "title-winter-conjecture.png",
-      "ext": "png",
-      "bytes": 1342662,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "title-winter-reverie.webp",
-      "ext": "webp",
-      "bytes": 516542,
       "license": "项目自有（自制/AI 生成）"
     },
     {

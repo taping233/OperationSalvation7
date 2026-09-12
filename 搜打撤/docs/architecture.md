@@ -34,6 +34,6 @@
 - `pixi-effects.js`：按需加载 PixiJS（v7 + @pixi/particle-emitter 粒子发射），只承载战斗命中特效层，避免增加首屏执行成本。
 - `narrative.js`：使用 inkjs 读取预编译剧情；全部 10 个 tt6 事件（选项、文案与效果标注）定义在 `narrative/events.ink`，构建、测试和开发启动前由 `scripts/compile-narrative.mjs` 生成运行时代码；效果结算通过 `game.run.js` 的效果端口表执行。
 
-样式按级联顺序拆为 `base.css`、`cards.css`、`overlays.css`、`hub.css`、`battle.css`、`scenes.css`，主题覆盖仍由 `theme-classical.css`、`title-soft.css` 和 `ui-soft.css` 承担。
+样式按级联顺序拆为 `base.css`、`cards.css`、`overlays.css`、`hub.css`、`battle.css`、`scenes.css`、`winter.css`，七张全部由 index.html 引入。
 
 模块之间不得直接修改另一模块的私有变量；需要跨模块行为时应暴露命名命令、只读快照或一次性配置接口。
