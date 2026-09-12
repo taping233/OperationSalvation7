@@ -219,10 +219,11 @@ import { renderCombatPiles } from './battle.piles.view.js';
       potionBar, pendingItem, slamPending,
     } = snapshot;
     if (aim) cancelAim();   // 重渲染时中止进行中的指向（DOM 将重建）
-    if (deckSelection) { renderDeckSelection(snapshot); return; }
-    if (viewingGrave) { renderGrave(snapshot); return; }
-    if (viewingBag) { renderBattleBag(snapshot); return; }
+    if (deckSelection) { handSuspended = false; renderDeckSelection(snapshot); return; }   // 战前编组：允许下次挂载时重置手牌层
+    if (viewingGrave) { handSuspended = true; renderGrave(snapshot); return; }
+    if (viewingBag) { handSuspended = true; renderBattleBag(snapshot); return; }
     if (choosing) {
+      handSuspended = true;   // 抉择/选牌/发现都是战斗中弹层：手牌层摘下挂起，回来继续用
       // 2026-09-08 抉择面板：人工 N 选一（复用发现面板的弹层交互）
       const choiceHTML = choosing.options.map((text, i) => `
         <button class="ov-btn choice-opt" data-act="btChoicePick" data-i="${i}">
@@ -237,6 +238,7 @@ import { renderCombatPiles } from './battle.piles.view.js';
       return;
     }
     if (handSelecting) {
+      handSuspended = true;
       // 2026-09-06 #24/#25：从手牌选择卡牌施放/消耗的通用弹层
       const pool = hand.map(findCard).filter(o => o && matchHandSelectKey(o.card, handSelecting.type));
       const optsHTML = pool.map(o => `
@@ -253,6 +255,7 @@ import { renderCombatPiles } from './battle.piles.view.js';
       return;
     }
     if (discovering) {
+      handSuspended = true;
       const optsHTML = discovering.options.map((c, i) => `
         <div class="bt-card" data-act="btDiscover" data-i="${i}" title="点击置入手牌">
           ${SDT.Cards.cardHTML(c, 'sm')}
@@ -283,89 +286,8 @@ import { renderCombatPiles } from './battle.piles.view.js';
     if (handPage >= handPages) handPage = handPages - 1;
     if (handPage < 0) handPage = 0;
     const pageGroups = groups.slice(handPage * HAND_PAGE_SIZE, handPage * HAND_PAGE_SIZE + HAND_PAGE_SIZE);
-    const handHTML = N
-      ? pageGroups.map((g, i) => {
-          const uid = g.uids[0];
-          const isSelf = infusingNow && g.self;
-          const pickedN = infusingNow ? g.uids.filter(u => infusing.picked.includes(u)).length : 0;
-          const targeted = !infusingNow && pendingTarget && pendingTarget.uid === uid;
-          const effCost = effCostOf(g.card, uid);
-          const blocked = infusingNow ? null : unplayableReason(g.card);   // 无法使用的卡：虚化禁用
-          const rawSide = (!infusingNow && !blocked) ? targetSide(g.card) : null;
-          // 2026-09-09 老板 #7：招式若无对敌方施加的效果，拖到敌我中间空地即可打出（side 'any'）
-          const side = rawSide || (blocked || infusingNow ? null : 'any');
-          let cls = '';
-          if (infusingNow) cls = isSelf ? ' infuse-self' : (pickedN ? ' sel' : '');
-          else if (blocked) cls = ' off';
-          else if (targeted) cls = ' targeting';
-          else if ((effCost > energy || busy)) cls = ' off';
-          const costTip = effCost !== g.card.cost
-            ? (effCost === 0 ? `（[[icon:bolt]] 当前按 0 费打出）` : `（[[icon:sparkles]] 费用变化：按 ${effCost} 费打出）`)
-            : '';
-          const tip = infusingNow
-            ? (isSelf ? '正在注能的卡牌' : `点击选择消耗（注能）${g.uids.length > 1 ? `· 本叠还有 ${g.uids.length} 张` : ''}`)
-            : blocked
-              ? `[[icon:cross]] 无法打出：${blocked}`
-              : side === 'enemy'
-              ? `费用 ${effCost}${costTip} · 拖到敌人身上打出`
-              : side === 'self'
-                ? `费用 ${effCost}${costTip} · 拖到左侧「你」的立绘上（治疗 / 净化 / 护盾）`
-                : side === 'any'
-                  ? `费用 ${effCost}${costTip} · 拖到敌我中间的空地即可打出（没有对敌效果，无需指定目标）`
-                  : `费用 ${effCost}${costTip} · 点击出牌` +
-                    (infuseOf(g.card) > 0 ? ` · 点卡面「注能」角标可消耗 ${infuseOf(g.card)} 张手牌强化效果（不点则直接打出弱效果）` : '');
-          const badge = side === 'enemy' ? '<span class="bt-tt">[[icon:swords]]</span>'
-            : side === 'self' ? '<span class="bt-tt">[[icon:heart]]</span>'
-              : side === 'any' ? '<span class="bt-tt">[[icon:sparkles]]</span>' : '';
-          // 需求 #16：费用变动显示在卡牌左上角费用处——降低 = 绿字，提高 = 红字
-          // （天狼长弓等「变为0费」的临时卡带 _baseCost：按原费用对比显示绿色 0）
-          const baseCost = (g.card._baseCost != null) ? g.card._baseCost : g.card.cost;
-          const costDiff = effCost !== baseCost;
-          const costBadge = costDiff ? `<span class="bt-cost1 cost-mod ${effCost < baseCost ? 'mod-down' : 'mod-up'}" title="费用变化：按 ${effCost} 费打出（原 ${baseCost} 费）">[[icon:bolt]]${effCost}</span>` : '';
-          // 需求 #15：注能卡可直接打出，也可点「注能」角标进入注能流程（强化效果）
-          const infN = infuseOf(g.card);
-          const infChip = (!infusingNow && !blocked && infN > 0)
-            ? `<button class="bt-infchip" data-act="btInfuseStart" data-uid="${uid}"
-                title="注能(${infN})：选择 ${infN} 张手牌消耗，强化本牌效果（直接打出则用弱效果）">[[icon:crystal]] 注能${infN}</button>`
-            : '';
-          const cnt = g.uids.length > 1 ? `<span class="bt-count" title="同名卡 ${g.uids.length} 张堆叠为一叠">×${g.uids.length}</span>` : '';
-          // 诅咒之刃（2026-09-10 需求）：卡面实时显示手牌招式（武术+法术）提供的全部诅咒
-          const curseChip = (g.card.id === 'cc-cursed-blade' && typeof handCurseSpecs === 'function')
-            ? (() => {
-                const specs = handCurseSpecs();
-                if (!specs.length) {
-                  return `<div class="bt-cursechips empty" title="手牌中的招式当前没有可附加的诅咒"><span class="bt-cursechip-i none">无诅咒</span></div>`;
-                }
-                const items = specs.map(s => {
-                  const meta = Combat.CURSE_META[s.key] || { name: s.key, icon: '', stack: false, desc: '' };
-                  return `<span class="bt-cursechip-i" title="${escAttr(meta.desc)}">${meta.icon}${meta.name}${meta.stack ? '×' + s.n : ''}</span>`;
-                }).join('');
-                return `<div class="bt-cursechips" title="手牌招式提供的诅咒（实时）">${items}</div>`;
-              })()
-            : '';
-          // 扇形手牌：槽位挂圆弧位（--fx/--fy/--frot/--fs），hover/瞄准/放大等状态变换叠在内层卡上
-          const L = fanLayout(i, pageGroups.length);
-          return `<div class="bt-slot" style="--fx:${L.x}px;--fy:${L.y}px;--frot:${L.rot}deg;--fs:${L.scale}">
-            <div class="bt-card${cls}${side === 'enemy' || side === 'self' ? ' need-target' : ''}${side === 'any' ? ' free-drop' : ''}" data-act="btPlay" data-uid="${uid}"
-              data-aim="${side ? '1' : ''}" data-side="${side || ''}" title="${escAttr(tip)}">
-              ${SDT.Cards.cardHTML(g.card, 'sm', {
-                ...(costDiff ? { costOverride: { v: effCost, base: baseCost } } : {}),
-                ...(spellBonus > 0 && g.card.dmgType === 'spell' && +(g.card.dmg || 0) > 0
-                  ? { dmgOverride: { bonus: spellBonus } } : {}),
-              })}
-              ${cnt}
-              ${badge}
-              ${costBadge}
-              ${infChip}
-              ${curseChip}
-            </div>
-          </div>`;
-        }).join('')
-      : mode === 'boss'
-        ? (drawPile.length + discard.length)
-          ? '<p class="ov-empty">手牌打空了……下回合开始会再抽 1 张</p>'
-          : '<p class="ov-empty">牌库与弃牌堆都空了——只能结束回合硬抗，或撤退</p>'
-        : '<p class="ov-empty">没有能出的卡了……（打出过的卡本场不可再用）</p>';
+    // 手牌 DOM 由常驻层差分维护（见 mountHandLayer / updateHand）：这里只算分组与目标扇形位，
+    // 不再拼整段手牌 HTML（批次A 架构对齐：手牌区不随整屏重渲染重建）
     const pileView = renderCombatPiles({
       mode,
       drawCount: drawPile,
@@ -517,7 +439,7 @@ import { renderCombatPiles } from './battle.piles.view.js';
         </div>
         ${handPages > 1 ? `<button class="bt-hand-page" data-act="btHandPage"
           title="手牌分栏：每栏最多 ${HAND_PAGE_SIZE} 叠，放不下的进第二栏——点击切换第一栏/第二栏">[[icon:cards]] 第 ${handPage + 1}/${handPages} 栏</button>` : ''}
-        <div class="bt-hand sts-hand" title="${escAttr(tip)}">${handHTML}</div>
+        <div class="bt-hand sts-hand"></div>
       </div>`, 'battle');
     // 手牌分栏切换（2026-09-10 留言 #27）
     UI.act('btHandPage', () => { handPage = (handPage + 1) % handPages; render(); });
@@ -567,22 +489,15 @@ import { renderCombatPiles } from './battle.piles.view.js';
         }
       });
     });
-    body.querySelectorAll('.bt-card[data-aim="1"]').forEach(el => {
-      el.addEventListener('pointerdown', (e) => {
-        // 2026-09-10 留言 #20：双击放大的卡面是同一 DOM 元素——放大态下按住拖动会误触发
-        // 指向出牌流程，改为放大态只允许「再点一下还原」，不做拖拽指向
-        if (el.classList.contains('zoomed')) return;
-        if (e.button === 0) startAim(e, el);
-      });
-    });
-    // 注能角标（需求 #15）：阻断卡面的指向 pointerdown（否则 setPointerCapture 会吞掉角标点击）
-    body.querySelectorAll('.bt-infchip').forEach(el => {
-      el.addEventListener('pointerdown', (e) => e.stopPropagation());
-    });
+    // 指向拖拽的 pointerdown 已在常驻槽位创建时绑定（见 updateHand），不再随渲染重复挂
     // 人物去纸色背景，像模型一样站在场景里（art.js 内按图缓存，二次渲染零成本）
     if (SDT.Art.cutoutFigures) SDT.Art.cutoutFigures(body);
-    // 牌局动画：离场飞行 / 新牌飞入 / 幸存者归位 / 手牌区显隐 / 能量脉冲
-    const anim = animateBattleTransition(prevView, body);
+    // 手牌常驻层挂载 + 差分更新（批次A）：出牌动画事件只取一次，常驻层与克隆飞行共用
+    const animEvents = takeCardAnims();
+    mountHandLayer(body, tip);
+    const handAnim = updateHand(snapshot, prevView, pageGroups, animEvents, { spellBonus, mode });
+    // 牌局动画：离场克隆飞行 / 手牌区随回合显隐 / 能量与牌堆脉冲
+    const anim = animateBattleTransition(prevView, body, animEvents, handAnim.flightMs);
     // BOSS 登场演出：竖线阴影压过场景 2.4s（每场一次）+ 开始动画（暗幕+立绘+名号亮相，约 1.5s）
     if (opts.isBoss && !dreadShown) {
       markDreadShown();
@@ -609,6 +524,222 @@ import { renderCombatPiles } from './battle.piles.view.js';
     }
     spawnFloats(body, anim.flightMs ? Math.min(340, anim.flightMs * 0.8) : 0);
     UI.refresh(SDT.game);
+  }
+
+  // ---------- 手牌常驻层（架构批次A：手牌区不随整屏重渲染重建） ----------
+  // ovBody 每次渲染整块重建，但 .sts-hand 由本模块持有、跨渲染复用（showOverlay 之后
+  // replaceWith 挂回新舞台）。每叠同名卡一个常驻槽位节点：
+  //   - 扇形位 = CSS 变量目标值（--fx/--fy/--frot/--fs），位置变化用可取消 WAAPI 补间，
+  //     对齐 STS2 NHandCardHolder「SetTargetPosition + 可取消动画 + 误差吸附」结构；
+  //   - hover / 指向拎起 / 双击放大只碰类名，不触发重建；
+  //   - 卡面内容按序列化签名 diff，内容没变不重写 innerHTML（图片不重载、悬停态不闪）。
+  let handLayer = null;
+  const handSlots = new Map();   // key -> { slot, card, sig, rect, isNew }
+  let handSuspended = false;     // 墓地/背包/发现等战斗中弹层接管期间 = true（手牌被摘下但战斗未结束）
+
+  function handSlotKey(g) {
+    return (g.self ? 'self|' : '') + g.card.name + '|' + (g.card.desc || '');
+  }
+  function setSlotVars(slot, L) {
+    slot.style.setProperty('--fx', L.x + 'px');
+    slot.style.setProperty('--fy', L.y + 'px');
+    slot.style.setProperty('--frot', L.rot + 'deg');
+    slot.style.setProperty('--fs', L.scale);
+  }
+  // 单叠手牌的即时视图状态：side/类名/提示语/卡面内容一次算全（原 render 内联计算外提）
+  function handGroupState(g, ctx) {
+    const { infusingNow, infusing, pendingTarget, energy, busy, spellBonus } = ctx;
+    const uid = g.uids[0];
+    const isSelf = infusingNow && g.self;
+    const pickedN = infusingNow ? g.uids.filter(u => infusing.picked.includes(u)).length : 0;
+    const targeted = !infusingNow && pendingTarget && pendingTarget.uid === uid;
+    const effCost = effCostOf(g.card, uid);
+    const blocked = infusingNow ? null : unplayableReason(g.card);   // 无法使用的卡：虚化禁用
+    const rawSide = (!infusingNow && !blocked) ? targetSide(g.card) : null;
+    // 2026-09-09 老板 #7：招式若无对敌方施加的效果，拖到敌我中间空地即可打出（side 'any'）
+    const side = rawSide || (blocked || infusingNow ? null : 'any');
+    let cls = '';
+    if (infusingNow) cls = isSelf ? ' infuse-self' : (pickedN ? ' sel' : '');
+    else if (blocked) cls = ' off';
+    else if (targeted) cls = ' targeting';
+    else if ((effCost > energy || busy)) cls = ' off';
+    const costTip = effCost !== g.card.cost
+      ? (effCost === 0 ? `（[[icon:bolt]] 当前按 0 费打出）` : `（[[icon:sparkles]] 费用变化：按 ${effCost} 费打出）`)
+      : '';
+    const tip = infusingNow
+      ? (isSelf ? '正在注能的卡牌' : `点击选择消耗（注能）${g.uids.length > 1 ? `· 本叠还有 ${g.uids.length} 张` : ''}`)
+      : blocked
+        ? `[[icon:cross]] 无法打出：${blocked}`
+        : side === 'enemy'
+        ? `费用 ${effCost}${costTip} · 拖到敌人身上打出`
+        : side === 'self'
+          ? `费用 ${effCost}${costTip} · 拖到左侧「你」的立绘上（治疗 / 净化 / 护盾）`
+          : side === 'any'
+            ? `费用 ${effCost}${costTip} · 拖到敌我中间的空地即可打出（没有对敌效果，无需指定目标）`
+            : `费用 ${effCost}${costTip} · 点击出牌` +
+              (infuseOf(g.card) > 0 ? ` · 点卡面「注能」角标可消耗 ${infuseOf(g.card)} 张手牌强化效果（不点则直接打出弱效果）` : '');
+    const badge = side === 'enemy' ? '<span class="bt-tt">[[icon:swords]]</span>'
+      : side === 'self' ? '<span class="bt-tt">[[icon:heart]]</span>'
+        : side === 'any' ? '<span class="bt-tt">[[icon:sparkles]]</span>' : '';
+    // 需求 #16：费用变动显示在卡牌左上角费用处——降低 = 绿字，提高 = 红字
+    // （天狼长弓等「变为0费」的临时卡带 _baseCost：按原费用对比显示绿色 0）
+    const baseCost = (g.card._baseCost != null) ? g.card._baseCost : g.card.cost;
+    const costDiff = effCost !== baseCost;
+    const costBadge = costDiff ? `<span class="bt-cost1 cost-mod ${effCost < baseCost ? 'mod-down' : 'mod-up'}" title="费用变化：按 ${effCost} 费打出（原 ${baseCost} 费）">[[icon:bolt]]${effCost}</span>` : '';
+    // 需求 #15：注能卡可直接打出，也可点「注能」角标进入注能流程（强化效果）
+    const infN = infuseOf(g.card);
+    const infChip = (!infusingNow && !blocked && infN > 0)
+      ? `<button class="bt-infchip" data-act="btInfuseStart" data-uid="${uid}"
+          title="注能(${infN})：选择 ${infN} 张手牌消耗，强化本牌效果（直接打出则用弱效果）">[[icon:crystal]] 注能${infN}</button>`
+      : '';
+    const cnt = g.uids.length > 1 ? `<span class="bt-count" title="同名卡 ${g.uids.length} 张堆叠为一叠">×${g.uids.length}</span>` : '';
+    // 诅咒之刃（2026-09-10 需求）：卡面实时显示手牌招式（武术+法术）提供的全部诅咒
+    const curseChip = (g.card.id === 'cc-cursed-blade' && typeof handCurseSpecs === 'function')
+      ? (() => {
+          const specs = handCurseSpecs();
+          if (!specs.length) {
+            return `<div class="bt-cursechips empty" title="手牌中的招式当前没有可附加的诅咒"><span class="bt-cursechip-i none">无诅咒</span></div>`;
+          }
+          const items = specs.map(s => {
+            const meta = Combat.CURSE_META[s.key] || { name: s.key, icon: '', stack: false, desc: '' };
+            return `<span class="bt-cursechip-i" title="${escAttr(meta.desc)}">${meta.icon}${meta.name}${meta.stack ? '×' + s.n : ''}</span>`;
+          }).join('');
+          return `<div class="bt-cursechips" title="手牌招式提供的诅咒（实时）">${items}</div>`;
+        })()
+      : '';
+    const inner = SDT.Cards.cardHTML(g.card, 'sm', {
+        ...(costDiff ? { costOverride: { v: effCost, base: baseCost } } : {}),
+        ...(spellBonus > 0 && g.card.dmgType === 'spell' && +(g.card.dmg || 0) > 0
+          ? { dmgOverride: { bonus: spellBonus } } : {}),
+      })
+      + cnt + badge + costBadge + infChip + curseChip;
+    return { g, uid, side, cls, tip, inner };
+  }
+  // 挂载：把手牌常驻层接回刚重建的舞台（占位节点 → 常驻节点）。
+  // 脱离文档且不是战斗中弹层挂起 = 上一场战斗已收尾：清掉旧槽位再开新局。
+  function mountHandLayer(body, tip) {
+    const mount = body.querySelector('.sts-hud .sts-hand');
+    if (!mount) return null;
+    if (!handLayer) handLayer = document.createElement('div');
+    handLayer.className = 'bt-hand sts-hand';
+    if (!handLayer.isConnected && !handSuspended) {
+      handSlots.forEach(rec => rec.slot.remove());
+      handSlots.clear();
+    }
+    handSuspended = false;
+    handLayer.title = tip;   // 等价旧模板 title="${escAttr(tip)}"（DOM 属性自动转义）
+    mount.replaceWith(handLayer);
+    return handLayer;
+  }
+  // 差分更新：新建/保留/移除槽位 + 目标扇形位补间 + 新牌飞入。返回动画时长供飘字延迟取用。
+  function updateHand(snapshot, prev, pageGroups, events, extra) {
+    if (!handLayer) return { flightMs: 0 };
+    const evs = events || [];
+    const drawn = new Set(), played = new Set();
+    evs.forEach(ev => { if (ev.kind === 'draw') drawn.add(ev.uid); else if (ev.kind !== 'shuffle') played.add(ev.uid); });
+    drawn.forEach(u => played.delete(u));   // 打出又回手（不朽斩）：同帧两事件抵消不演
+    const ctx = {
+      infusingNow: !!snapshot.infusing, infusing: snapshot.infusing,
+      pendingTarget: snapshot.pendingTarget, energy: snapshot.energy, busy: snapshot.busy,
+      spellBonus: (extra && extra.spellBonus) || 0,
+    };
+    // 旧槽位现矩形一次量完：目标值更新引发的位移以此为准做补间
+    handSlots.forEach(rec => { rec.rect = rec.slot.isConnected ? rec.slot.getBoundingClientRect() : null; });
+    // —— 第一遍：算状态 / 更新目标值与内容 / 建缺失槽位 ——
+    const ordered = [];
+    pageGroups.forEach((g, i) => {
+      const key = handSlotKey(g);
+      const st = handGroupState(g, ctx);
+      const L = fanLayout(i, pageGroups.length);
+      let rec = handSlots.get(key);
+      if (!(rec && rec.slot.isConnected)) {
+        rec = { slot: document.createElement('div'), card: document.createElement('div'), sig: '', rect: null, isNew: true };
+        rec.slot.className = 'bt-slot';
+        rec.card.addEventListener('pointerdown', (e) => {
+          // 放大态只允许「再点一下还原」，不做拖拽指向（2026-09-10 留言 #20）；
+          // 注能角标是按钮，点击走 ovBody 委托，不进指向（需求 #15）
+          if (rec.card.classList.contains('zoomed')) return;
+          if (e.target.closest && e.target.closest('.bt-infchip')) return;
+          if (e.button === 0 && rec.card.dataset.aim === '1') startAim(e, rec.card);
+        });
+        rec.slot.appendChild(rec.card);
+        handSlots.set(key, rec);
+      }
+      setSlotVars(rec.slot, L);
+      const zoomed = rec.card.classList.contains('zoomed');   // 双击放大态跨渲染保留
+      rec.card.className = 'bt-card' + st.cls
+        + (st.side === 'enemy' || st.side === 'self' ? ' need-target' : '')
+        + (st.side === 'any' ? ' free-drop' : '');
+      if (zoomed) rec.card.classList.add('zoomed');
+      rec.card.dataset.uid = st.uid;
+      rec.card.dataset.act = 'btPlay';
+      rec.card.dataset.aim = st.side ? '1' : '';
+      rec.card.dataset.side = st.side || '';
+      rec.card.setAttribute('title', st.tip);
+      if (rec.sig !== st.inner) { rec.card.innerHTML = st.inner; rec.sig = st.inner; }
+      ordered.push(rec);
+    });
+    // —— 顺序校正（DOM 序 = 扇形叠放序）：失序才搬节点 ——
+    const current = [...handLayer.querySelectorAll('.bt-slot')];
+    if (current.length !== ordered.length || current.some((el, i) => el !== ordered[i].slot)) {
+      ordered.forEach(rec => handLayer.appendChild(rec.slot));
+    }
+    // —— 空手牌提示（原模板 N=0 分支的等价物） ——
+    const emptyHint = handLayer.querySelector('.ov-empty');
+    if (!ordered.length) {
+      const msg = extra.mode === 'boss'
+        ? ((snapshot.drawPile.length + snapshot.discard.length) ? '手牌打空了……下回合开始会再抽 1 张' : '牌库与弃牌堆都空了——只能结束回合硬抗，或撤退')
+        : '没有能出的卡了……（打出过的卡本场不可再用）';
+      const hint = emptyHint || handLayer.appendChild(Object.assign(document.createElement('p'), { className: 'ov-empty' }));
+      if (hint.dataset.k !== msg) { hint.dataset.k = msg; hint.textContent = msg; }
+    } else if (emptyHint) emptyHint.remove();
+    // —— 第二遍：量新矩形，幸存者归位补间 + 新牌错峰飞入 ——
+    const ov = UI.el.overlay;
+    const ovR = ov.getBoundingClientRect();
+    let flightMs = 0;
+    let drawIdx = 0;
+    ordered.forEach(rec => {
+      const r = rec.slot.getBoundingClientRect();
+      if (rec.isNew) {
+        rec.isNew = false;
+        if (drawn.has(rec.card.dataset.uid)) {
+          const src = (prev && prev.drawPile) || discoverSrcRect
+            || { left: ovR.width - 150, top: ovR.height - 110, width: 56, height: 80 };
+          discoverSrcRect = null;
+          const dx = src.left + src.width / 2 - (r.left + r.width / 2);
+          const dy = src.top + src.height / 2 - (r.top + r.height / 2);
+          animateSafe(rec.slot, [
+            { transform: `translate(${dx}px,${dy}px) rotate(9deg) scale(.72)`, opacity: 0 },
+            { transform: `translate(${dx * 0.18}px,${dy * 0.18}px) rotate(3deg) scale(1.04)`, opacity: 1, offset: 0.72 },
+            { transform: 'translate(0px,0px) rotate(0deg) scale(1)', opacity: 1 },
+          ], { duration: 900, delay: drawIdx++ * 300, easing: 'cubic-bezier(.2,.8,.3,1)', fill: 'backwards', composite: 'add' });
+          flightMs = Math.max(flightMs, 900 + drawIdx * 300);
+        }
+      } else if (rec.rect) {
+        const dx = rec.rect.left + rec.rect.width / 2 - (r.left + r.width / 2);
+        const dy = rec.rect.top + rec.rect.height / 2 - (r.top + r.height / 2);
+        if (Math.hypot(dx, dy) >= 2) {
+          animateSafe(rec.slot, [
+            { transform: `translate(${dx}px,${dy}px)` },
+            { transform: 'translate(0px,0px)' },
+          ], { duration: 210, easing: 'cubic-bezier(.22,.9,.3,1)', composite: 'add' });
+        }
+      }
+      rec.rect = r;
+    });
+    // —— 移除：本轮不在手牌里的槽位离场（打出/弃置交给克隆飞行，其余下沉淡出） ——
+    const keptKeys = new Set(pageGroups.map(handSlotKey));
+    handSlots.forEach((rec, key) => {
+      if (keptKeys.has(key)) return;
+      handSlots.delete(key);
+      if (played.has(rec.card.dataset.uid) || !rec.slot.isConnected) { rec.slot.remove(); return; }
+      animateSafe(rec.slot, [
+        { transform: 'translate(0px,0px)', opacity: 1 },
+        { transform: 'translateY(46px)', opacity: 0 },
+      ], { duration: 200, easing: 'ease-in', fill: 'forwards' });
+      setTimeout(() => rec.slot.remove(), 240);
+    });
+    return { flightMs };
   }
 
   // ---------- 战斗特效（v0.32.2）：伤害/受击飘字 + 受击抖动 + 红闪 ----------
@@ -751,9 +882,8 @@ import { renderCombatPiles } from './battle.piles.view.js';
     }, delay + 300);
     return anim;
   }
-  function animateBattleTransition(prev, body) {
-    const events = takeCardAnims();
-    let flightMs = 0;
+  function animateBattleTransition(prev, body, events = [], extraFlightMs = 0) {
+    let flightMs = extraFlightMs;
     const handEl = body.querySelector('.sts-hand');
     const stage = body.querySelector('.battle-stage');
     // —— 手牌区随回合显隐：玩家→敌人 下沉退场；敌人→玩家 升回 ——
@@ -819,12 +949,7 @@ import { renderCombatPiles } from './battle.piles.view.js';
         });
       }
     }
-    const slotOf = new Map();
-    body.querySelectorAll('.sts-hand .bt-slot').forEach(slot => {
-      const card = slot.querySelector('.bt-card[data-uid]');
-      if (card) slotOf.set(card.dataset.uid, slot);
-    });
-    // —— 离场：克隆体沿上弓弧线飞向去处 ——
+    // —— 离场：克隆体沿上弓弧线飞向去处（原卡节点由手牌常驻层差分移除，飞行由克隆体接管） ——
     events.forEach(ev => {
       if (!played.has(ev.uid)) return;
       const old = prev && (prev.cards[ev.uid] || Object.values(prev.cards).find(c => c.name === ev.name));
@@ -847,41 +972,8 @@ import { renderCombatPiles } from './battle.piles.view.js';
       setTimeout(() => clone.remove(), sink.dur + 300);   // 兜底清理
       flightMs = Math.max(flightMs, sink.dur);
     });
-    // —— 入场：新牌从牌堆（普通战斗从画面右下、发现选卡从被点中的候选卡）错峰飞入扇形位 ——
-    let drawIdx = 0;
-    events.forEach(ev => {
-      if (!drawn.has(ev.uid)) return;
-      const slot = slotOf.get(ev.uid);
-      if (!slot || !slot.animate) return;
-      const src = (prev && prev.drawPile) || discoverSrcRect
-        || { left: ovR.width - 150, top: ovR.height - 110, width: 56, height: 80 };
-      discoverSrcRect = null;
-      const r = slot.getBoundingClientRect();
-      const dx = src.left + src.width / 2 - (r.left + r.width / 2);
-      const dy = src.top + src.height / 2 - (r.top + r.height / 2);
-      animateSafe(slot, [
-        { transform: `translate(${dx}px,${dy}px) rotate(9deg) scale(.72)`, opacity: 0 },
-        { transform: `translate(${dx * 0.18}px,${dy * 0.18}px) rotate(3deg) scale(1.04)`, opacity: 1, offset: 0.72 },
-        { transform: 'translate(0px,0px) rotate(0deg) scale(1)', opacity: 1 },
-      ], { duration: 900, delay: drawIdx++ * 300, easing: 'cubic-bezier(.2,.8,.3,1)', fill: 'backwards', composite: 'add' });
-      flightMs = Math.max(flightMs, 900 + drawIdx * 300);
-    });
-    // —— 幸存者归位：打出/抽牌后其余牌滑到新扇形位 ——
-    if (prev) {
-      slotOf.forEach((slot, uid) => {
-        if (drawn.has(uid) || played.has(uid) || !slot.animate) return;
-        const old = prev.cards[uid];
-        if (!old) return;
-        const r = slot.getBoundingClientRect();
-        const dx = old.rect.left + old.rect.width / 2 - (r.left + r.width / 2);
-        const dy = old.rect.top + old.rect.height / 2 - (r.top + r.height / 2);
-        if (Math.hypot(dx, dy) < 2) return;
-        animateSafe(slot, [
-          { transform: `translate(${dx}px,${dy}px)` },
-          { transform: 'translate(0px,0px)' },
-        ], { duration: 210, easing: 'cubic-bezier(.22,.9,.3,1)', composite: 'add' });
-      });
-    }
+    // 新牌飞入 / 幸存者归位已改在手牌常驻层的差分更新里做（updateHand）——
+    // 常驻节点不销毁，位移直接从旧目标值补间到新目标值，不再依赖重建前取样。
     return { flightMs };
   }
 
