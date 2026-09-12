@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>卡牌设计定调 v3 —— 参考杀戮尖塔（代号柒）</title>
+<style>
+:root{
+  --bg:#0c1218; --panel:#121b24; --ink:#cfd8dd; --dim:#7d929c; --gold:#d7bb87;
+  --line:#223240;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:15px/1.8 "Microsoft YaHei",sans-serif;padding:48px 56px 120px}
+h1{font:400 34px/1.4 "SimSun",serif;letter-spacing:8px;color:#e8eeea;margin-bottom:6px}
+h1 small{display:block;font:400 14px/2 "Microsoft YaHei";letter-spacing:3px;color:var(--dim)}
+h2{font:400 22px "SimSun",serif;letter-spacing:5px;color:var(--gold);margin:64px 0 8px;border-bottom:1px solid var(--line);padding-bottom:10px}
+h2 .no{color:#54707d;margin-right:12px}
+h3{font-size:16px;color:#b8cdc4;margin:26px 0 8px;letter-spacing:2px}
+p.lead{color:#a8bcc5;max-width:960px}
+.note{color:var(--dim);font-size:13px}
+.dim-table{border-collapse:collapse;margin:14px 0;font-size:13.5px}
+.dim-table th,.dim-table td{border:1px solid var(--line);padding:7px 14px;text-align:left}
+.dim-table th{color:var(--gold);font-weight:400;background:#15212c;white-space:nowrap}
+.sw{display:inline-block;width:14px;height:14px;border-radius:2px;vertical-align:-2px;margin-right:6px;border:1px solid #0006}
+
+/* ============ 新卡框体（定调主件） ============ */
+.card{
+  position:relative;width:220px;aspect-ratio:300/422;flex:none;
+  border-radius:9px;
+  background:
+    linear-gradient(160deg,#2a2f36,#171b21 55%,#20252c);
+  box-shadow:0 10px 26px #000a, 0 2px 5px #0009;
+  filter:drop-shadow(0 0 0 transparent);
+}
+/* 职业色金属外框：双层渐变描边 */
+.card::before{
+  content:'';position:absolute;inset:0;border-radius:9px;padding:7px;
+  background:linear-gradient(165deg,var(--fc1),var(--fc2) 38%,var(--fc3) 62%,var(--fc1));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;
+  box-shadow:0 0 0 1.5px #000000cc;
+}
+.card .inner{position:absolute;inset:7px;border-radius:4px;overflow:visible;
+  background:linear-gradient(175deg,#22262c,#14171c)}
+/* 插画窗 */
+.card .artwin{
+  position:absolute;left:8px;right:8px;top:26px;height:47%;
+  border-radius:3px;overflow:hidden;
+  border:2px solid var(--fc3);
+  outline:1px solid #000000aa;
+  box-shadow:inset 0 0 22px #00000090;
+  background:#0a0d10;
+}
+.card .artwin img{width:100%;height:100%;object-fit:cover;object-position:var(--ax,50%) var(--ay,42%);display:block}
+.card .artwin::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,#0006 0%,#0000 26%)}
+/* 卡名横幅：突出卡外的丝带，底色=稀有度 */
+.card .banner{
+  position:absolute;left:-9px;right:-9px;top:7px;height:31px;z-index:3;
+  background:linear-gradient(180deg,var(--rc1),var(--rc2));
+  border:1px solid #000000d9;border-radius:4px;
+  box-shadow:0 3px 8px #000a, inset 0 1px 0 #ffffff2b, inset 0 -2px 5px #00000059;
+  display:flex;align-items:center;justify-content:center;
+}
+.card .banner::before,.card .banner::after{
+  content:'';position:absolute;top:5px;bottom:5px;width:1px;background:#00000055}
+.card .banner::before{left:5px}.card .banner::after{right:5px}
+.card .banner b{
+  font:600 13.5px/1 "Microsoft YaHei";letter-spacing:2px;color:#f4efe2;
+  text-shadow:0 1px 2px #000c, 0 0 6px #0008;white-space:nowrap;overflow:hidden;max-width:96%}
+/* 费用球：浮出左上角 */
+.card .orb{
+  position:absolute;left:-13px;top:-13px;width:38px;height:38px;z-index:4;border-radius:50%;
+  background:radial-gradient(circle at 34% 30%,#7fd6f2,#2a7ea6 52%,#123a52 88%);
+  border:2px solid #0b141b;
+  box-shadow:0 3px 8px #000b, inset 0 0 7px #ffffff59;
+  display:flex;align-items:center;justify-content:center;
+}
+.card .orb span{font:700 19px/1 Georgia,serif;color:#fff;text-shadow:0 1px 2px #000d,0 0 4px #9adfff}
+/* 类型铭牌：横跨插画窗下缘 */
+.card .plaque{
+  position:absolute;left:50%;top:calc(26px + 47% - 11px);transform:translateX(-50%);z-index:3;
+  padding:2px 16px;border-radius:2px;white-space:nowrap;
+  background:linear-gradient(180deg,#3a4048,#20242a);
+  border:1px solid var(--fc3);outline:1px solid #0009;
+  font-size:10.5px;letter-spacing:4px;color:#dfe6ea;text-shadow:0 1px 1px #000;
+}
+/* 描述区 */
+.card .desc{
+  position:absolute;left:12px;right:12px;top:calc(26px + 47% + 15px);bottom:12px;
+  border-radius:3px;padding:9px 10px 8px;
+  background:linear-gradient(180deg,#10151bd9,#0c1015ee);
+  border:1px solid #00000088;
+  outline:1px solid #ffffff0f;
+  text-align:center;display:flex;flex-direction:column;justify-content:center;
+}
+.card .desc p{font-size:11.8px;line-height:1.75;color:#c6d2d8}
+.card .desc b{color:var(--gold);font-weight:600}
+.card .desc i{font-style:normal;color:#8fd4e8}
+.card .desc .num{font:600 14px Georgia;color:#f0d9a0}
+/* 攻/防小徽（左下角，类型语义色） */
+.card .stat{
+  position:absolute;left:-7px;bottom:-7px;z-index:4;width:30px;height:30px;border-radius:50% 50% 50% 4px;
+  background:radial-gradient(circle at 35% 30%,#e08a7a,#8f3d2e 60%,#4c1d15);
+  border:2px solid #1a0e0a;box-shadow:0 2px 6px #000a,inset 0 0 6px #fff3;
+  display:flex;align-items:center;justify-content:center;
+  font:700 14px Georgia;color:#ffe9d9;text-shadow:0 1px 1px #000}
+.card.blue{--fc1:#5e86b8;--fc2:#2c4a6e;--fc3:#7799bd}
+.card.green{--fc1:#5f9c6e;--fc2:#2c5439;--fc3:#7fb98d}
+.card.red{--fc1:#b56a5a;--fc2:#6e2c22;--fc3:#c98a77}
+.card.gold{--fc1:#c2a05e;--fc2:#6e5522;--fc3:#d9bc80}
+.card.purple{--fc1:#8d6ab8;--fc2:#462c6e;--fc3:#a988cc}
+.card.gray{--fc1:#7c8790;--fc2:#3a4249;--fc3:#98a4ad}
+/* 稀有度横幅配色 */
+.card .r-basic{--rc1:#5c646c;--rc2:#3c434a}
+.card .r-bronze{--rc1:#8a6a44;--rc2:#5a4326}
+.card .r-silver{--rc1:#7e8b98;--rc2:#4d5862}
+.card .r-rare{--rc1:#3f6f9e;--rc2:#27486a}
+.card .r-epic{--rc1:#8a4a9e;--rc2:#552a63}
+.card .r-legend{--rc1:#c2851a;--rc2:#7a4f08}
+.card .r-derived{--rc1:#5a4a6e;--rc2:#372c45}
+
+/* ============ 版面杂项 ============ */
+.row{display:flex;gap:34px;flex-wrap:wrap;align-items:flex-start;margin:20px 0}
+.specbox{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:18px 22px;max-width:420px}
+.specbox li{margin-left:20px;color:#b6c8d1;margin-bottom:4px}
+.pill{display:inline-block;padding:1px 10px;border-radius:3px;font-size:12px;letter-spacing:2px;border:1px solid #ffffff22;margin-right:6px}
+/* 旧卡（现状近似还原，供对比） */
+.oldcard{position:relative;width:300px;aspect-ratio:2.3;flex:none;background:linear-gradient(160deg,#2e343b,#1a1e23);
+  border:2px solid #4c5a63;border-radius:6px;box-shadow:0 8px 20px #000a;overflow:hidden}
+.oldcard img{width:100%;height:100%;object-fit:cover;display:block}
+.oldcard .ol{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;
+  background:linear-gradient(180deg,#0000 55%,#101318e8 78%)}
+.oldcard .ol b{padding:2px 12px;font-size:13px;color:#e8e2d0;letter-spacing:2px}
+.oldcard .ol span{padding:0 12px 8px;font-size:11px;color:#9fb3bd}
+.oldlib{position:relative;width:132px;aspect-ratio:0.78;background:#14171c;border:2px solid #4c5a63;border-radius:6px;overflow:hidden;box-shadow:0 6px 16px #000a}
+.oldlib img{width:100%;height:100%;object-fit:cover;display:block}
+.oldlib b{position:absolute;left:0;right:0;bottom:0;background:#101318e0;color:#e8e2d0;font-size:10px;padding:2px 6px;letter-spacing:1px;white-space:nowrap;overflow:hidden}
+/* 手牌扇形示意 */
+.fanwrap{background:radial-gradient(120% 100% at 50% 0%,#16222d,#0c1218);border:1px solid var(--line);border-radius:6px;padding:38px 20px 30px;overflow:hidden}
+.fan{display:flex;justify-content:center}
+.fan .card{width:150px;margin:0 -22px}
+.fan .card:nth-child(1){transform:rotate(-9deg) translateY(26px)}
+.fan .card:nth-child(2){transform:rotate(-4.5deg) translateY(6px)}
+.fan .card:nth-child(4){transform:rotate(4.5deg) translateY(6px)}
+.fan .card:nth-child(5){transform:rotate(9deg) translateY(26px)}
+.fan .card:hover{transform:translateY(-34px) scale(1.16);z-index:9}
+.vs{align-self:center;text-align:center;color:var(--gold);font:400 20px "SimSun";letter-spacing:3px;padding:0 4px}
+.tag{font-size:12px;color:var(--dim);letter-spacing:1px;margin-top:8px}
+.sec{display:flex;gap:14px;flex-wrap:wrap;margin:16px 0}
+.kv{background:var(--panel);border:1px solid var(--line);border-radius:5px;padding:10px 16px;min-width:210px}
+.kv b{color:var(--gold);font-weight:400;letter-spacing:2px;display:block;margin-bottom:2px;font-size:13px}
+.kv span{font-size:12.5px;color:#a8bcc5}
+</style>
+</head>
+<body>
+
+<h1>卡牌设计定调 v3<small>代号柒 · 参考杀戮尖塔2官方制式 · 2026-09-12 · 素材均为现有实装卡面实图</small></h1>
+<p class="lead">杀戮尖塔2官方卡牌 <b>300×422 竖版</b>（从 <code>scenes/cards/card.tscn</code> 逆向量测：插画窗 250×190 占上半、标题横幅 327×83 突出卡外、费用球 64px 浮于左上角外、类型铭牌横跨插画下缘、描述区 243×136 占下部 46%）。
+本稿把这套骨架映射到代号柒：<b>框色=职业、横幅色=稀有度、费用球浮角、插画窗内衬、深底描述区</b>。全部用现有卡面实图渲染。</p>
+
+<h2><span class="no">壹</span>定调五支柱</h2>
+<div class="sec">
+  <div class="kv"><b>一 · 统一竖版 0.71</b><span>废弃 2.3 扁横卡；手牌/商店/牌库/悬停全场景一套竖卡比例，插画永远完整（彻底消灭"战斗卡只露 43% 画面/人物切头"问题）</span></div>
+  <div class="kv"><b>二 · 框色即职业</b><span>战士红 / 侠客绿 / 法师蓝 / 牧师金 / 降临者紫 / 无职业中性灰——抽到手牌 0.5 秒可辨来源</span></div>
+  <div class="kv"><b>三 · 横幅色即稀有度</b><span>卡名丝带底色承载稀有度（灰/铜/银/蓝/紫/金），横幅比"框角小宝石"信息量更大且省一个部件</span></div>
+  <div class="kv"><b>四 · 费用球浮出左上角</b><span>不占卡内空间，蓝晶球+白字，压角构图是 STS 最强识别符号</span></div>
+  <div class="kv"><b>五 · 描述区深底金字</b><span>插画与文字物理分层；数字加大一号（Georgia）、关键字金色、伤害/冰冻等术语用冰蓝</span></div>
+</div>
+
+<h2><span class="no">贰</span>新卡全型（真卡数据 × 现有卡面）</h2>
+<p class="note">每张卡：卡名丝带=稀有度色，外框=职业色，费用球、类型铭牌、描述区按官方制式等比缩放（220px 宽演示）。</p>
+<div class="row">
+
+  <!-- 火球：法师/古朴 -->
+  <div class="card blue">
+    <div class="artwin"><img src="../../game/assets/cards/spell-tt3-fireball.webp" alt=""></div>
+    <div class="banner r-bronze"><b>火球</b></div>
+    <div class="orb"><span>2</span></div>
+    <div class="plaque">法术</div>
+    <div class="desc"><p>造成 <span class="num">4</span> 点伤害<i>（4′）</i>。</p></div>
+  </div>
+
+  <!-- 霜月斩：侠客/稀有 -->
+  <div class="card green">
+    <div class="artwin"><img src="../../game/assets/cards/martial-tt3-frost-slash.webp" alt=""></div>
+    <div class="banner r-rare"><b>霜月斩</b></div>
+    <div class="orb"><span>4</span></div>
+    <div class="plaque">武术</div>
+    <div class="desc"><p>攻<span class="num">⁺2</span>，附加<b>冰冻</b>，冻结状态 <span class="num">2</span> 回合。</p></div>
+  </div>
+
+  <!-- 流星箭雨：侠客/职业 -->
+  <div class="card green">
+    <div class="artwin"><img src="../../game/assets/cards/martial-tt7-meteorrain.webp" alt="" style="--ay:36%"></div>
+    <div class="banner r-silver"><b>流星箭雨</b></div>
+    <div class="orb"><span>2</span></div>
+    <div class="plaque">武术</div>
+    <div class="desc"><p>攻<span class="num">1</span>，<b>2</b> 段伤害。</p></div>
+  </div>
+
+  <!-- 江湖救急：无职业/稀有 -->
+  <div class="card gray">
+    <div class="artwin"><img src="../../game/assets/cards/martial-tt2-jianghu.webp" alt="" style="--ay:40%"></div>
+    <div class="banner r-rare"><b>江湖救急</b></div>
+    <div class="orb"><span>4</span></div>
+    <div class="plaque">武术</div>
+    <div class="desc"><p><b>发现</b> 1 张其它职业的卡牌并施放。</p></div>
+  </div>
+
+  <!-- 寒冰剑：装备/古朴（武器类左下攻徽） -->
+  <div class="card gray">
+    <div class="artwin"><img src="../../game/assets/cards/equip-tt2-frostsword.webp" alt="" style="--ay:38%"></div>
+    <div class="banner r-bronze"><b>寒冰剑</b></div>
+    <div class="orb"><span>2</span></div>
+    <div class="plaque">装备</div>
+    <div class="desc"><p>对<b>冰冻</b>角色伤害 <span class="num">+2</span>。</p></div>
+    <div class="stat">2</div>
+  </div>
+
+  <!-- 不朽神剑：装备/传说 -->
+  <div class="card gray">
+    <div class="artwin"><img src="../../game/assets/cards/equip-tt3-immortal-blade.webp" alt="" style="--ay:36%"></div>
+    <div class="banner r-legend"><b>不朽神剑</b></div>
+    <div class="orb"><span>2</span></div>
+    <div class="plaque">装备</div>
+    <div class="desc"><p>对战开始时，你的攻击化为 <b>1</b> 张<i>不朽斩</i>。</p></div>
+    <div class="stat">2</div>
+  </div>
+
+  <!-- 无量仙剑：能力卡/侠客 -->
+  <div class="card green">
+    <div class="artwin"><img src="../../game/assets/cards/wu-myriadswords.webp" alt=""></div>
+    <div class="banner r-rare"><b>无量仙剑·云风</b></div>
+    <div class="orb"><span>0</span></div>
+    <div class="plaque">能力卡</div>
+    <div class="desc"><p><b>万剑归宗</b>：抽 <span class="num">5</span> 张牌，充能 <span class="num">+1</span>。</p></div>
+  </div>
+
+  <!-- 血苑修罗：能力卡/牧师（现回退徽章图，示意待补） -->
+  <div class="card gold">
+    <div class="artwin"><img src="../../game/assets/cards/hero-warlock.webp" alt=""></div>
+    <div class="banner r-rare"><b>无极梦魇·血苑修罗</b></div>
+    <div class="orb"><span>0</span></div>
+    <div class="plaque">能力卡</div>
+    <div class="desc"><p><b>无定横行</b>：将四张<i>禁咒</i>洗入牌库，然后抽 <span class="num">2</span> 张牌。</p></div>
+  </div>
+
+</div>
+<p class="note">※ 血苑修罗用的是现状回退图（512 徽章风+豆包水印）——放进新框里正是"必须补专属卡面"的对比证据；新框下卡面占插画窗而非全卡，徽章图的违和感已被框体约束收敛，但正解仍是按既定动漫系补图。</p>
+
+<h2><span class="no">叁</span>新旧对比（同一张卡）</h2>
+<div class="row">
+  <div>
+    <div class="oldcard"><img src="../../game/assets/cards/spell-tt3-fireball.webp" alt="">
+      <div class="ol"><b>火球</b><span>造成 4 点伤害（4′）</span></div>
+    </div>
+    <p class="tag">现状 · 战斗卡 2.3 扁横：图被裁成横条、费用/稀有度/职业无载体</p>
+  </div>
+  <div class="vs">→</div>
+  <div>
+    <div class="card blue" style="width:180px">
+      <div class="artwin"><img src="../../game/assets/cards/spell-tt3-fireball.webp" alt=""></div>
+      <div class="banner r-bronze"><b>火球</b></div>
+      <div class="orb"><span>2</span></div>
+      <div class="plaque">法术</div>
+      <div class="desc"><p>造成 <span class="num">4</span> 点伤害<i>（4′）</i>。</p></div>
+    </div>
+    <p class="tag">新 · 0.71 竖卡：插画完整 + 四要素各归其位</p>
+  </div>
+  <div>
+    <div class="oldlib"><img src="../../game/assets/cards/spell-tt3-fireball.webp" alt=""><b>火球</b></div>
+    <p class="tag">现状 · 牌库小卡 0.78：一条名条压图</p>
+  </div>
+</div>
+
+<h2><span class="no">肆</span>战斗手牌：扇形竖卡（杀戮尖塔式）</h2>
+<p class="lead">手牌区从"横排扁卡"改为<b>底部扇形竖卡</b>：牌多时自然叠层（负 margin），悬停整卡上浮放大选中（下例把鼠标放到任意一张上）。这是本方案里唯一的结构性改动。</p>
+<div class="fanwrap"><div class="fan">
+  <div class="card green"><div class="artwin"><img src="../../game/assets/cards/martial-tt3-frost-slash.webp" alt=""></div><div class="banner r-rare"><b>霜月斩</b></div><div class="orb"><span>4</span></div><div class="plaque">武术</div><div class="desc"><p>攻<span class="num">⁺2</span>，附加<b>冰冻</b>。</p></div></div>
+  <div class="card blue"><div class="artwin"><img src="../../game/assets/cards/spell-tt3-fireball.webp" alt=""></div><div class="banner r-bronze"><b>火球</b></div><div class="orb"><span>2</span></div><div class="plaque">法术</div><div class="desc"><p>造成 <span class="num">4</span> 点伤害。</p></div></div>
+  <div class="card green" style="transform:translateY(-14px);z-index:5"><div class="artwin"><img src="../../game/assets/cards/wu-myriadswords.webp" alt=""></div><div class="banner r-rare"><b>无量仙剑·云风</b></div><div class="orb"><span>0</span></div><div class="plaque">能力卡</div><div class="desc"><p>抽 <span class="num">5</span> 张牌，充能 <span class="num">+1</span>。</p></div></div>
+  <div class="card gray"><div class="artwin"><img src="../../game/assets/cards/equip-tt2-frostsword.webp" alt="" style="--ay:38%"></div><div class="banner r-bronze"><b>寒冰剑</b></div><div class="orb"><span>2</span></div><div class="plaque">装备</div><div class="desc"><p>对<b>冰冻</b>角色伤害 <span class="num">+2</span>。</p></div><div class="stat">2</div></div>
+  <div class="card gray"><div class="artwin"><img src="../../game/assets/cards/martial-tt2-jianghu.webp" alt="" style="--ay:40%"></div><div class="banner r-rare"><b>江湖救急</b></div><div class="orb"><span>4</span></div><div class="plaque">武术</div><div class="desc"><p><b>发现</b> 1 张其它职业的牌并施放。</p></div></div>
+</div></div>
+
+<h2><span class="no">伍</span>配色系统</h2>
+<h3>框色 = 职业</h3>
+<table class="dim-table">
+<tr><th>职业</th><th>框色</th><th>取值（fc1 渐变亮部 / fc2 暗部）</th></tr>
+<tr><td>战士</td><td><span class="sw" style="background:#b56a5a"></span>赤铁红</td><td>#b56a5a → #6e2c22</td></tr>
+<tr><td>侠客</td><td><span class="sw" style="background:#5f9c6e"></span>青锋绿</td><td>#5f9c6e → #2c5439</td></tr>
+<tr><td>法师</td><td><span class="sw" style="background:#5e86b8"></span>秘法蓝</td><td>#5e86b8 → #2c4a6e</td></tr>
+<tr><td>牧师</td><td><span class="sw" style="background:#c2a05e"></span>圣辉金</td><td>#c2a05e → #6e5522</td></tr>
+<tr><td>降临者</td><td><span class="sw" style="background:#8d6ab8"></span>虚空紫</td><td>#8d6ab8 → #462c6e</td></tr>
+<tr><td>无职业 / 衍生</td><td><span class="sw" style="background:#7c8790"></span>中性灰</td><td>#7c8790 → #3a4249</td></tr>
+</table>
+<h3>横幅色 = 稀有度</h3>
+<table class="dim-table">
+<tr><th>稀有度</th><th>横幅色</th><th>备注</th></tr>
+<tr><td>初始</td><td><span class="sw" style="background:#4c545b"></span>石灰</td><td></td></tr>
+<tr><td>古朴</td><td><span class="sw" style="background:#6f5433"></span>铜褐</td><td>占池最大（127 张），刻意压暗不抢戏</td></tr>
+<tr><td>职业</td><td><span class="sw" style="background:#65727e"></span>钢银</td><td></td></tr>
+<tr><td>稀有</td><td><span class="sw" style="background:#33587c"></span>钴蓝</td><td></td></tr>
+<tr><td>史诗</td><td><span class="sw" style="background:#6f3a80"></span>紫晶</td><td></td></tr>
+<tr><td>传说</td><td><span class="sw" style="background:#9c6a12"></span>鎏金</td><td>横幅可附加微光动效（合成器 opacity）</td></tr>
+<tr><td>衍生 / 诅咒</td><td><span class="sw" style="background:#493c59"></span>暗紫</td><td></td></tr>
+<tr><td>棱彩</td><td><span class="sw" style="background:linear-gradient(90deg,#c86a6a,#c8b06a,#6ac88a,#6a9ac8,#a86ac8)"></span>棱镜渐变</td><td></td></tr>
+</table>
+
+<h2><span class="no">陆</span>官方制式对照与实施映射</h2>
+<table class="dim-table">
+<tr><th>STS2 官方（card.tscn 量测）</th><th>数值</th><th>本方案映射</th></tr>
+<tr><td>卡体</td><td>300×422</td><td>aspect-ratio 300/422，CSS 变量控制三档宽度（手牌 150 / 标准 220 / 悬停 ×1.25）</td></tr>
+<tr><td>插画窗 Portrait</td><td>250×190 @ y −168..22</td><td>.artwin：宽 83%，高 47%，顶距 6%——<b>卡面图重裁为以 0.79 横带为主体的构图</b>（一次出图两种安全区：竖卡横带 + 方图）</td></tr>
+<tr><td>横幅 TitleBanner</td><td>327×83（左右各凸 27px）</td><td>.banner 左右各凸 4%</td></tr>
+<tr><td>费用球 EnergyIcon</td><td>64×64，球心凸出左上角</td><td>.orb 38px 浮角，能量不足时红罩（官方 UnplayableEnergyIcon 同思路）</td></tr>
+<tr><td>类型铭牌 TypePlaque</td><td>61×37 九宫格胶囊</td><td>.plaque 横跨插画下缘</td></tr>
+<tr><td>描述区 Description</td><td>243×136 @ 下部</td><td>.desc 内嵌面板；关键字金 / 术语冰蓝 / 数字 Georgia 大一号</td></tr>
+</table>
+
+<h3>实施切分（保速度，两步走）</h3>
+<div class="sec">
+  <div class="kv"><b>第一步 · 换皮（1 批次）</b><span>cards.view.js 卡 DOM 换新结构 + winter.css 新增卡框样式块；牌库/商店/悬停/制作坊全部走新竖卡。2.3 扁横布局暂保留给战斗手牌（先让玩家看到卡变好看）</span></div>
+  <div class="kv"><b>第二步 · 手牌扇形（1 批次）</b><span>battle.hand.js 手牌布局改扇形负 margin + 悬停上浮；性能守三铁律（transform/opacity 合成器动画）</span></div>
+  <div class="kv"><b>配套 · 卡面重裁</b><span>现有 896 方图在 0.79 插画窗下只裁上下 ~21%，比现状 2.3 裁 57% 好得多，可直接上线；后续按上轮审计清单逐批补图/重构图</span></div>
+  <div class="kv"><b>风险点</b><span>战斗手牌点击判定/飘字锚点跟随卡片变换；旧存档实例卡无 cls 时回退中性灰框（art.js 已有找回逻辑可复用）</span></div>
+</div>
+
+<p class="note" style="margin-top:40px">参考来源：杀戮尖塔2官方资源逆向（.tmp/sts2-reverse：scenes/cards/card.tscn、materials/cards/frames、packed/card_template）· 上轮卡面审计证据（.tmp/card-audit/）· 本稿卡面均引用 ../../game/assets/ 现役实图。</p>
+
+</body>
+</html>

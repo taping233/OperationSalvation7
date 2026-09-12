@@ -56,8 +56,21 @@ export function cardHTML(c, cls, opts) {
   // 桌游道具卡的币值角标（右下角金色硬币）
   const val = +(c.value || 0);
   const showVal = val > 0;
-  // 效果词条角标（类型行下方的小药丸；数据字段见文件头 draw / infuse / heal / armor）
-  const drawN = +(c.draw || 0), infN = +(c.infuse || 0);
+// 框色=职业（2026-09-12 v3 卡面定调）：战士赤铁/侠客青锋/法师秘法/牧师圣辉/降临者虚空，
+// 无职业卡不带 cf-* 落到默认青灰；颜色变量见 winter.css 末尾 v3 卡框块。
+const CF_SLUGS = { '战士': 'cf0', '侠客': 'cf1', '法师': 'cf2', '牧师': 'cf3', '降临者': 'cf4' };
+// 描述富文本（v3 定调）：数字 Georgia 加大·金、术语冰蓝、句首「XX：」式关键字金。
+// 顺序固定：先转义 → 关键字 → 术语 → 数字（正则均不含数字，不会互相污染标签）。
+const DESC_TERMS = ['冰冻', '冻结', '中毒', '燃烧', '灼烧', '流血', '护甲', '法伤', '生命', '伤害', '诅咒', '净化', '沉默', '充能', '注能', '发现', '限定', '消耗', '装备', '牌库', '回合', '弃牌', '抽牌', '能量'];
+function descRich(desc) {
+  let s = esc(desc);
+  s = s.replace(/^([^<>：\n]{1,10})：/, '<b class="d-kw">$1：</b>');
+  s = s.replace(new RegExp('(' + DESC_TERMS.join('|') + ')', 'g'), '<i class="d-term">$1</i>');
+  s = s.replace(/([⁺⁻+\-]?[0-9]+(?:\.[0-9]+)?)/g, '<b class="d-num">$1</b>');
+  return s;
+}
+// 效果词条角标（类型行下方的小药丸；数据字段见文件头 draw / infuse / heal / armor）
+const drawN = +(c.draw || 0), infN = +(c.infuse || 0);
   const healN = +(c.heal || 0), armN = +(c.armor || 0);
   const kwArr = [];
   if (drawN > 0) kwArr.push(`<span class="kw-draw" title="抽卡 ${drawN}：BOSS 战从牌库抽 ${drawN} 张 · 普通战斗改为获得 ${drawN} 张初始攻击">${SDT.Icons.img('cards')}抽 ${drawN}</span>`);
@@ -73,7 +86,7 @@ export function cardHTML(c, cls, opts) {
   // 卡面插画按卡牌语义映射到统一位图家族。
   const artHTML = (window.SDT.Art && window.SDT.Art.cardIcon && window.SDT.Art.cardIcon(c)) ||
     SDT.Icons.img(SDT.Icons.TYPE_ART[c.type] || 'question');
-  return `<div class="hs-card tp${ti} ${rvCls}${cls ? ' ' + cls : ''}">
+  return `<div class="hs-card tp${ti} ${rvCls}${CF_SLUGS[c.cls] ? ' ' + CF_SLUGS[c.cls] : ''}${cls ? ' ' + cls : ''}">
     ${isPrism ? '<i class="rv-beam" aria-hidden="true"></i>' : ''}
     ${hideCost ? '' : costMod
       ? `<div class="hsc-cost cost-mod ${costMod.down ? 'mod-down' : 'mod-up'}" title="费用变化：按 ${costMod.v} 费打出（原 ${costMod.base} 费）">${costMod.v}</div>`
@@ -83,7 +96,7 @@ export function cardHTML(c, cls, opts) {
     <div class="hsc-type">${esc(c.type || '?')} · ${esc(ro === '职业' ? ((c.cls ? characterName(c.cls) : '人物') + '专属') : ro)}</div>
     ${kwHTML}
     <i class="hsc-gem"></i>
-    <div class="hsc-desc">${c.desc ? `<span>${esc(c.desc)}</span>` : ''}</div>
+    <div class="hsc-desc">${c.desc ? `<span>${descRich(c.desc)}</span>` : ''}</div>
     ${showDmg ? `<div class="hsc-dmg${dmgUp ? ' dmg-up' : ''}" title="${escAttr(dmgUp
       ? `${mark.tip}（含法伤加成 +${dmgOverride.bonus}）`
       : mark.tip)}">${mark.icon}<b>${mark.text}</b></div>` : ''}

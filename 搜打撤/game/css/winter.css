@@ -1265,3 +1265,25 @@ body,body *{font-family:'HarmonyOS Sans SC','HarmonyOS Sans','Noto Sans SC Sub',
 .hs-card .hsc-desc .d-num{font-family:Georgia,'Times New Roman',serif!important;font-size:1.22em!important;font-weight:600!important;color:#ecc985!important;line-height:1!important}
 .hs-card .hsc-desc .d-kw{color:#d8b878!important;font-weight:700!important;font-style:normal!important}
 .hs-card .hsc-desc .d-term{color:#8fd0e8!important;font-style:normal!important}
+
+/* ============================================================
+   v3.1 卡面插画比例统一（2026-09-12 老板改口拍板：全场景统一横版，
+   对齐杀戮尖塔2官方口径——card_portraits 875 张实测 384×291 = 1.32 横）
+   三比例（战斗/商店 ~1.5 横、牌库 flex 撑满 ~0.8、紧凑卡 5.8em）
+   收敛为一条：.hsc-art 一律 aspect-ratio 384/291，高度随宽推导。
+   卡体高度改随内容（10/14 固定框不再写死，文字区随内容伸缩）。
+   覆盖：战斗手牌/商店/开箱奖励/牌库网格/悬停预览/背包/图鉴/制作坊/hub
+   —— 全部走 .hs-card 同一结构，em 随卡缩放。
+   ============================================================ */
+.hs-card{height:auto!important}
+#overlay .lib-cardwrap .hs-card{aspect-ratio:auto!important;height:auto!important}
+.hs-card .hsc-art,
+#overlay .lib-cardwrap .hsc-art,
+.hs-card.lib .hsc-art{
+  height:auto!important;
+  min-height:0!important;
+  flex:0 0 auto!important;
+  aspect-ratio:384/291!important;
+}
+/* 牌库虚拟滚动占位高度按新卡高重估（卡变矮：紧凑卡 ~11px 字号 → 卡身 ~70px + 边距） */
+.lib-item{contain-intrinsic-size:auto 122px}

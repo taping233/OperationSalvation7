@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>卡牌设计定调 v5 —— 暗色立体 × 杀戮尖塔骨架（代号柒）</title>
+<style>
+:root{
+  --bg:#0e1217; --panel:#161c23; --ink:#c9d3da; --dim:#7c8a94; --gold:#d8b878;
+  --line:#232c35;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:15px/1.8 "Microsoft YaHei",sans-serif;padding:48px 56px 120px}
+h1{font:600 32px/1.4 "Microsoft YaHei";letter-spacing:6px;color:#e6ecf0;margin-bottom:6px}
+h1 small{display:block;font:400 14px/2 "Microsoft YaHei";letter-spacing:3px;color:var(--dim)}
+h2{font:600 21px "Microsoft YaHei";letter-spacing:4px;color:#e6ecf0;margin:64px 0 8px;border-bottom:1px solid var(--line);padding-bottom:10px}
+h2 .no{color:#54626d;margin-right:12px}
+h3{font-size:15.5px;color:#a7b4bd;margin:26px 0 8px;letter-spacing:2px}
+p.lead{color:#96a4ad;max-width:980px}
+b{color:#e6ecf0}
+.note{color:var(--dim);font-size:13px}
+.dim-table{border-collapse:collapse;margin:14px 0;font-size:13.5px}
+.dim-table th,.dim-table td{border:1px solid var(--line);padding:7px 14px;text-align:left}
+.dim-table th{color:var(--gold);font-weight:400;background:#141a21;white-space:nowrap}
+.sw{display:inline-block;width:14px;height:14px;border-radius:3px;vertical-align:-2px;margin-right:6px;box-shadow:inset 0 1px 0 #fff5, inset 0 -1px 2px #0009}
+
+/* ============================================================
+   v5 卡框：暗色立体
+   统一光照语言（顶部光源）：
+   [凸] 横幅/费用球/铭牌/攻徽 —— 高光顶边 + 下投影 + 渐变体积
+   [凹] 插画窗/描述区   —— 内阴影下沉 + 底缘反光
+   卡体：深色渐变基底 + 职业色金属包边 + 全卡顶部柔光
+   ============================================================ */
+.card{
+  position:relative;width:220px;aspect-ratio:300/422;flex:none;
+  border-radius:12px;
+  background:linear-gradient(168deg,#3d4653,#272d38 44%,#1c212b 90%);
+  box-shadow:
+    0 0 0 1px #05070acc,
+    0 2px 3px #000000b3,
+    0 20px 34px -12px #000000e0;
+}
+/* 职业色金属包边（细，2.5px 渐变环） */
+.card::before{
+  content:'';position:absolute;inset:0;border-radius:12px;padding:2.5px;
+  background:linear-gradient(172deg,var(--fc-hi),var(--fc) 38%,var(--fc-dk) 72%,var(--fc));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;
+}
+/* 全卡顶部柔光（统一光源） */
+.card::after{
+  content:'';position:absolute;inset:2.5px;border-radius:10px;pointer-events:none;
+  background:linear-gradient(176deg,#ffffff1f 0%,#ffffff08 16%,#0000 42%);
+}
+/* [凹] 插画窗：下沉 */
+.card .artwin{
+  position:absolute;left:10px;right:10px;top:37px;height:46%;
+  border-radius:7px;overflow:hidden;background:#0d1116;
+  box-shadow:
+    inset 0 0 0 1px #000000cc,
+    inset 0 3px 7px #000000d9,
+    0 1px 0 #ffffff1c;
+}
+.card .artwin img{width:100%;height:100%;object-fit:cover;object-position:var(--ax,50%) var(--ay,42%);display:block}
+/* [凸] 卡名横幅：倒角铭牌（无燕尾），稀有度色 */
+.card .banner{
+  position:absolute;left:14px;right:14px;top:8px;height:31px;z-index:3;
+  background:linear-gradient(180deg,var(--rc-hi) 0%,var(--rc) 50%,var(--rc-dk) 100%);
+  clip-path:polygon(9px 0,calc(100% - 9px) 0,100% 9px,100% calc(100% - 9px),calc(100% - 9px) 100%,9px 100%,0 calc(100% - 9px),0 9px);
+  filter:drop-shadow(0 2px 2px #000000cc) drop-shadow(0 1px 0 #00000080);
+  display:flex;align-items:center;justify-content:center;
+}
+.card .banner::before{ /* 顶缘高光 */
+  content:'';position:absolute;left:10px;right:10px;top:1px;height:1px;background:#ffffff66;
+}
+.card .banner::after{ /* 底缘暗边 */
+  content:'';position:absolute;left:10px;right:10px;bottom:1px;height:1.5px;background:#00000073;
+}
+.card .banner b{
+  font:600 13.5px/1 "Microsoft YaHei";letter-spacing:3px;color:#f4f1e8;
+  text-shadow:0 -1px 0 #000000a6, 0 1px 0 #ffffff38;
+  white-space:nowrap;overflow:hidden;max-width:94%}
+/* [凸] 费用球：立体晶球 + 金属环 */
+.card .orb{
+  position:absolute;left:-12px;top:-12px;width:40px;height:40px;z-index:4;border-radius:50%;
+  background:radial-gradient(circle at 33% 26%,#f4fcff 0%,#b8e3f6 26%,#57a4cc 58%,#2a6188 82%,#17384f 100%);
+  box-shadow:
+    inset 0 -4px 6px #00000073,
+    inset 0 2px 2px #ffffffb3,
+    0 0 0 2px #06090d,
+    0 0 0 3.5px var(--fc),
+    0 3px 5px #000000cc;
+  display:flex;align-items:center;justify-content:center;
+}
+.card .orb span{
+  font:700 19px/1 Georgia,serif;color:#173a50;
+  text-shadow:0 1px 0 #ffffffc9;
+}
+/* [凸] 类型铭牌：小金属牌 */
+.card .plaque{
+  position:absolute;left:50%;top:calc(37px + 46% - 11px);transform:translateX(-50%);z-index:3;
+  padding:3px 16px;border-radius:4px;white-space:nowrap;
+  background:linear-gradient(180deg,#4b5361,#2b323d 85%);
+  box-shadow:0 2px 3px #000000b3, inset 0 1px 0 #ffffff33, inset 0 -1px 0 #00000080;
+  font-size:10px;letter-spacing:4px;color:#dfe5ea;font-weight:600;
+  text-shadow:0 -1px 0 #000000a6;text-indent:4px;
+}
+/* [凹] 描述区：下沉面板 */
+.card .desc{
+  position:absolute;left:10px;right:10px;top:calc(37px + 46% + 12px);bottom:10px;
+  border-radius:7px;padding:9px 12px 8px;
+  background:linear-gradient(180deg,#171c24,#1c222b);
+  box-shadow:
+    inset 0 0 0 1px #000000a6,
+    inset 0 3px 8px #000000a6,
+    0 1px 0 #ffffff14;
+  text-align:center;display:flex;flex-direction:column;justify-content:center;gap:3px;
+}
+.card .desc p{font-size:11.6px;line-height:1.72;color:#c2ccd4}
+.card .desc b{color:var(--fc-hi);font-weight:600}
+.card .desc i{font-style:normal;color:#8fd0e8}
+.card .desc .num{font:600 13.5px Georgia;color:#ecc985;text-shadow:0 -1px 0 #00000073}
+/* [凸] 武器攻徽：立体红玉 */
+.card .stat{
+  position:absolute;left:-7px;bottom:-7px;z-index:4;width:30px;height:30px;border-radius:50%;
+  background:radial-gradient(circle at 34% 27%,#ffcdb8 0%,#f08a68 30%,#c14e35 64%,#7e2a18 95%);
+  box-shadow:
+    inset 0 -3px 5px #00000073,
+    inset 0 2px 2px #ffffffa6,
+    0 0 0 2px #06090d,
+    0 0 0 3.5px var(--fc),
+    0 3px 5px #000000cc;
+  display:flex;align-items:center;justify-content:center;
+  font:700 14px Georgia;color:#fff2e4;text-shadow:0 -1px 0 #000000a6}
+/* 职业色（环/关键字/球环共用色源，三档亮度） */
+.card.blue  {--fc:#5d84b1;--fc-hi:#9dc0e2;--fc-dk:#33506f}
+.card.green {--fc:#5c9a70;--fc-hi:#a3cdb0;--fc-dk:#31573f}
+.card.red   {--fc:#bd6a53;--fc-hi:#e8ab93;--fc-dk:#6d3826}
+.card.gold  {--fc:#bb914a;--fc-hi:#e6c98e;--fc-dk:#6b5124}
+.card.purple{--fc:#8a68b8;--fc-hi:#c1a7e0;--fc-dk:#4a3768}
+.card.gray  {--fc:#7f8a94;--fc-hi:#bcc5cc;--fc-dk:#485159}
+/* 稀有度横幅色（三档亮度，哑光釉面） */
+.card .r-basic  {--rc:#78828c;--rc-hi:#9aa4ad;--rc-dk:#4d565f}
+.card .r-bronze {--rc:#9a7648;--rc-hi:#c9a271;--rc-dk:#5e4526}
+.card .r-silver {--rc:#7f8d9b;--rc-hi:#adbac5;--rc-dk:#4e5a66}
+.card .r-rare   {--rc:#4f7aa6;--rc-hi:#87aed2;--rc-dk:#2c4a67}
+.card .r-epic   {--rc:#7d5496;--rc-hi:#b18ad0;--rc-dk:#483059}
+.card .r-legend {--rc:#a8761f;--rc-hi:#daa94e;--rc-dk:#5e3f0e}
+.card .r-derived{--rc:#5e5170;--rc-hi:#8d7fa3;--rc-dk:#362d43}
+.card .r-prism  {--rc:#9a7648;--rc-hi:#c9a271;--rc-dk:#5e4526}
+
+/* ============ 版面杂项 ============ */
+.row{display:flex;gap:36px;flex-wrap:wrap;align-items:flex-start;margin:22px 0}
+.sec{display:flex;gap:14px;flex-wrap:wrap;margin:16px 0}
+.kv{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px 18px;min-width:235px}
+.kv b{color:#e6ecf0;font-weight:600;letter-spacing:2px;display:block;margin-bottom:2px;font-size:13px}
+.kv span{font-size:12.5px;color:#8d9ba5}
+/* 凹凸对照小图 */
+.depth{display:flex;gap:22px;align-items:center;margin:14px 0}
+.depth .demo{padding:14px 20px;border-radius:8px;font-size:13px;letter-spacing:2px}
+/* 手牌扇形示意 */
+.fanwrap{background:radial-gradient(120% 110% at 50% 0%,#1b232d,#0d1116);border:1px solid var(--line);border-radius:10px;padding:46px 20px 36px;overflow:hidden}
+.fan{display:flex;justify-content:center}
+.fan .card{width:152px;margin:0 -20px;transition:transform .18s ease}
+.fan .card:nth-child(1){transform:rotate(-9deg) translateY(26px)}
+.fan .card:nth-child(2){transform:rotate(-4.5deg) translateY(6px)}
+.fan .card:nth-child(4){transform:rotate(4.5deg) translateY(6px)}
+.fan .card:nth-child(5){transform:rotate(9deg) translateY(26px)}
+.fan .card:hover{transform:translateY(-36px) scale(1.17);z-index:9}
+.tag{font-size:12px;color:var(--dim);letter-spacing:1px;margin-top:8px}
+/* 旧卡对比 */
+.oldcard{position:relative;width:300px;aspect-ratio:2.3;flex:none;background:linear-gradient(160deg,#2e343b,#1a1e23);
+  border:2px solid #4c5a63;border-radius:6px;box-shadow:0 8px 20px #000a;overflow:hidden}
+.oldcard img{width:100%;height:100%;object-fit:cover;display:block}
+.oldcard .ol{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;
+  background:linear-gradient(180deg,#0000 55%,#101318e8 78%)}
+.oldcard .ol b{padding:2px 12px;font-size:13px;color:#e8e2d0;letter-spacing:2px}
+.oldcard .ol span{padding:0 12px 8px;font-size:11px;color:#9fb3bd}
+</style>
+</head>
+<body>
+
+<h1>卡牌设计定调 v5<small>代号柒 · 暗色立体 × 杀戮尖塔骨架 · 2026-09-12 · 素材均为现有实装卡面实图</small></h1>
+<p class="lead">方向修正版：暗色打底；整套卡面只有两种深度——<b>凸起件</b>（横幅 / 费用球 / 铭牌 / 攻徽）与<b>凹陷件</b>（插画窗 / 描述区），共享同一顶部光源。STS2 骨架优点全部保留（0.71 竖版、费用球浮角、横幅、铭牌、稀有度色系、职业色包边），横幅从"丝带"改成<b>倒角铭牌</b>。</p>
+
+<h2><span class="no">壹</span>立体感语言：一凸一凹，整卡统一</h2>
+<div class="depth">
+  <div class="demo" style="background:linear-gradient(180deg,#4b5361,#2b323d);box-shadow:0 3px 5px #000c, inset 0 1px 0 #ffffff40, inset 0 -1px 0 #0009;color:#e8edf1">凸 · 铭牌横幅</div>
+  <div class="demo" style="background:linear-gradient(180deg,#171c24,#1c222b);box-shadow:inset 0 3px 8px #000a6, inset 0 0 0 1px #000a, 0 1px 0 #ffffff14;color:#c2ccd4">凹 · 描述面板</div>
+  <div class="demo" style="border-radius:50%;width:44px;height:44px;background:radial-gradient(circle at 33% 26%,#f4fcff,#b8e3f6 26%,#57a4cc 58%,#2a6188 82%,#17384f);box-shadow:inset 0 -4px 6px #0007, inset 0 2px 2px #fff9, 0 3px 5px #000c"></div>
+  <div class="note">凸起件 = 亮顶边 + 暗底边 + 下投影 + 纵向渐变；凹陷件 = 内阴影 + 暗描边 + 底缘 1px 反光。所有部件共用，光源永远在正上方。</div>
+</div>
+<div class="sec">
+  <div class="kv"><b>凸 · 横幅=倒角铭牌</b><span>45° 倒角八边形、釉面三段渐变、刻印文字（letterpress 双向阴影）——替代难看的燕尾丝带</span></div>
+  <div class="kv"><b>凸 · 费用球=晶球</b><span>球体高光+底部反光+金属环（环色=职业色，与包边呼应），压左上角</span></div>
+  <div class="kv"><b>凹 · 插画窗</b><span>四周内阴影把插画"压"进卡里，底部 1px 反光勾出窗沿</span></div>
+  <div class="kv"><b>凹 · 描述面板</b><span>下沉面板承托文字，关键字用职业色亮档，数字 Georgia 凸字感</span></div>
+</div>
+
+<h2><span class="no">贰</span>新卡全型（真卡数据 × 现有卡面）</h2>
+<div class="row">
+
+  <div class="card blue">
+    <div class="artwin"><img src="../../game/assets/cards/spell-tt3-fireball.webp" alt=""></div>
+    <div class="banner r-bronze"><b>火球</b></div>
+    <div class="orb"><span>2</span></div>
+    <div class="plaque">法术</div>
+    <div class="desc"><p>造成 <span class="num">4</span> 点伤害<i>（4′）</i>。</p></div>
+  </div>
+
+  <div class="card green">
+    <div class="artwin"><img src="../../game/assets/cards/martial-tt3-frost-slash.webp" alt=""></div>
+    <div class="banner r-rare"><b>霜月斩</b></div>
+    <div class="orb"><span>4</span></div>
+    <div class="plaque">武术</div>
+    <div class="desc"><p>攻<span class="num">⁺2</span>，附加<b>冰冻</b>，冻结 <span class="num">2</span> 回合。</p></div>
+  </div>
+
+  <div class="card green">
+    <div class="artwin"><img src="../../game/assets/cards/martial-tt7-meteorrain.webp" alt="" style="--ay:36%"></div>
+    <div class="banner r-silver"><b>流星箭雨</b></div>
+    <div class="orb"><span>2</span></div>
+    <div class="plaque">武术</div>
+    <div class="desc"><p>攻<span class="num">1</span>，<b>2</b> 段伤害。</p></div>
+  </div>
+
+  <div class="card gray">
+    <div class="artwin"><img src="../../game/assets/cards/martial-tt2-jianghu.webp" alt="" style="--ay:40%"></div>
+    <div class="banner r-rare"><b>江湖救急</b></div>
+    <div class="orb"><span>4</span></div>
+    <div class="plaque">武术</div>
+    <div class="desc"><p><b>发现</b> 1 张其它职业的卡牌并施放。</p></div>
+  </div>
+
+  <div class="card gray">
+    <div class="artwin"><img src="../../game/assets/cards/equip-tt2-frostsword.webp" alt="" style="--ay:38%"></div>
+    <div class="banner r-bronze"><b>寒冰剑</b></div>
+    <div class="orb"><span>2</span></div>
+    <div class="plaque">装备</div>
+    <div class="desc"><p>对<b>冰冻</b>角色伤害 <span class="num">+2</span>。</p></div>
+    <div class="stat">2</div>
+  </div>
+
+  <div class="card gray">
+    <div class="artwin"><img src="../../game/assets/cards/equip-tt3-immortal-blade.webp" alt="" style="--ay:36%"></div>
+    <div class="banner r-legend"><b>不朽神剑</b></div>
+    <div class="orb"><span>2</span></div>
+    <div class="plaque">装备</div>
+    <div class="desc"><p>对战开始时，你的攻击化为 <b>1</b> 张<i>不朽斩</i>。</p></div>
+    <div class="stat">2</div>
+  </div>
+
+  <div class="card green">
+    <div class="artwin"><img src="../../game/assets/cards/wu-myriadswords.webp" alt=""></div>
+    <div class="banner r-rare"><b>无量仙剑·云风</b></div>
+    <div class="orb"><span>0</span></div>
+    <div class="plaque">能力卡</div>
+    <div class="desc"><p><b>万剑归宗</b>：抽 <span class="num">5</span> 张牌，充能 <span class="num">+1</span>。</p></div>
+  </div>
+
+  <div class="card purple">
+    <div class="artwin"><img src="../../game/assets/cards/hero-warlock.webp" alt=""></div>
+    <div class="banner r-rare"><b>无极梦魇·血苑修罗</b></div>
+    <div class="orb"><span>0</span></div>
+    <div class="plaque">能力卡</div>
+    <div class="desc"><p><b>无定横行</b>：将四张<i>禁咒</i>洗入牌库，然后抽 <span class="num">2</span> 张牌。</p></div>
+  </div>
+
+</div>
+<p class="note">※ 血苑修罗仍用现状回退图（512 徽章风）做"待补图"对照；插画窗下沉+暗底后，亮背景插画（寒冰剑）与暗背景插画（不朽神剑）都被窗框统一收拢。</p>
+
+<h2><span class="no">叁</span>新旧对比（同一张卡）</h2>
+<div class="row">
+  <div>
+    <div class="oldcard"><img src="../../game/assets/cards/spell-tt3-fireball.webp" alt="">
+      <div class="ol"><b>火球</b><span>造成 4 点伤害（4′）</span></div>
+    </div>
+    <p class="tag">现状 · 2.3 扁横：图被裁成横条，费用/稀有度/职业无载体</p>
+  </div>
+  <div>
+    <div class="card blue" style="width:190px">
+      <div class="artwin"><img src="../../game/assets/cards/spell-tt3-fireball.webp" alt=""></div>
+      <div class="banner r-bronze"><b>火球</b></div>
+      <div class="orb"><span>2</span></div>
+      <div class="plaque">法术</div>
+      <div class="desc"><p>造成 <span class="num">4</span> 点伤害<i>（4′）</i>。</p></div>
+    </div>
+    <p class="tag">新 · 暗色立体竖卡：四要素各归其位、有体积</p>
+  </div>
+</div>
+
+<h2><span class="no">肆</span>战斗手牌：扇形竖卡</h2>
+<div class="fanwrap"><div class="fan">
+  <div class="card green"><div class="artwin"><img src="../../game/assets/cards/martial-tt3-frost-slash.webp" alt=""></div><div class="banner r-rare"><b>霜月斩</b></div><div class="orb"><span>4</span></div><div class="plaque">武术</div><div class="desc"><p>攻<span class="num">⁺2</span>，附加<b>冰冻</b>。</p></div></div>
+  <div class="card blue"><div class="artwin"><img src="../../game/assets/cards/spell-tt3-fireball.webp" alt=""></div><div class="banner r-bronze"><b>火球</b></div><div class="orb"><span>2</span></div><div class="plaque">法术</div><div class="desc"><p>造成 <span class="num">4</span> 点伤害。</p></div></div>
+  <div class="card green" style="transform:translateY(-14px);z-index:5"><div class="artwin"><img src="../../game/assets/cards/wu-myriadswords.webp" alt=""></div><div class="banner r-rare"><b>无量仙剑·云风</b></div><div class="orb"><span>0</span></div><div class="plaque">能力卡</div><div class="desc"><p>抽 <span class="num">5</span> 张牌，充能 <span class="num">+1</span>。</p></div></div>
+  <div class="card gray"><div class="artwin"><img src="../../game/assets/cards/equip-tt2-frostsword.webp" alt="" style="--ay:38%"></div><div class="banner r-bronze"><b>寒冰剑</b></div><div class="orb"><span>2</span></div><div class="plaque">装备</div><div class="desc"><p>对<b>冰冻</b>角色伤害 <span class="num">+2</span>。</p></div><div class="stat">2</div></div>
+  <div class="card gray"><div class="artwin"><img src="../../game/assets/cards/martial-tt2-jianghu.webp" alt="" style="--ay:40%"></div><div class="banner r-rare"><b>江湖救急</b></div><div class="orb"><span>4</span></div><div class="plaque">武术</div><div class="desc"><p><b>发现</b> 1 张其它职业的牌并施放。</p></div></div>
+</div></div>
+<p class="note">悬停任一张看上浮选中。倒角铭牌左右不过分突出，叠层时仍然可读。</p>
+
+<h2><span class="no">伍</span>配色系统</h2>
+<h3>职业色（金属包边 + 费用球环 + 描述关键字共用）</h3>
+<table class="dim-table">
+<tr><th>职业</th><th>主色</th><th>亮 / 主 / 暗（渐变三档）</th></tr>
+<tr><td>战士</td><td><span class="sw" style="background:#bd6a53"></span>赤铁</td><td>#e8ab93 / #bd6a53 / #6d3826</td></tr>
+<tr><td>侠客</td><td><span class="sw" style="background:#5c9a70"></span>青竹</td><td>#a3cdb0 / #5c9a70 / #31573f</td></tr>
+<tr><td>法师</td><td><span class="sw" style="background:#5d84b1"></span>霁青</td><td>#9dc0e2 / #5d84b1 / #33506f</td></tr>
+<tr><td>牧师</td><td><span class="sw" style="background:#bb914a"></span>鎏金</td><td>#e6c98e / #bb914a / #6b5124</td></tr>
+<tr><td>降临者</td><td><span class="sw" style="background:#8a68b8"></span>藤紫</td><td>#c1a7e0 / #8a68b8 / #4a3768</td></tr>
+<tr><td>无职业 / 衍生</td><td><span class="sw" style="background:#7f8a94"></span>青灰</td><td>#bcc5cc / #7f8a94 / #485159</td></tr>
+</table>
+<h3>稀有度横幅色（釉面三段渐变，白字均达标对比度）</h3>
+<table class="dim-table">
+<tr><th>稀有度</th><th>横幅</th><th>亮 / 主 / 暗</th></tr>
+<tr><td>初始</td><td><span class="sw" style="background:#78828c"></span>石灰</td><td>#9aa4ad / #78828c / #4d565f</td></tr>
+<tr><td>古朴</td><td><span class="sw" style="background:#9a7648"></span>陶铜</td><td>#c9a271 / #9a7648 / #5e4526</td></tr>
+<tr><td>职业</td><td><span class="sw" style="background:#7f8d9b"></span>钢青</td><td>#adbac5 / #7f8d9b / #4e5a66</td></tr>
+<tr><td>稀有</td><td><span class="sw" style="background:#4f7aa6"></span>黛蓝</td><td>#87aed2 / #4f7aa6 / #2c4a67</td></tr>
+<tr><td>史诗</td><td><span class="sw" style="background:#7d5496"></span>紫晶</td><td>#b18ad0 / #7d5496 / #483059</td></tr>
+<tr><td>传说</td><td><span class="sw" style="background:#a8761f"></span>鎏金</td><td>#daa94e / #a8761f / #5e3f0e</td></tr>
+<tr><td>衍生 / 诅咒</td><td><span class="sw" style="background:#5e5170"></span>暗藤紫</td><td>#8d7fa3 / #5e5170 / #362d43</td></tr>
+<tr><td>棱彩</td><td><span class="sw" style="background:linear-gradient(90deg,#c86a6a,#c8b06a,#6ac88a,#6a9ac8,#a86ac8)"></span>棱镜</td><td>横幅底换棱镜渐变，倒角与高光不变</td></tr>
+</table>
+
+<h2><span class="no">陆</span>制式与实施</h2>
+<table class="dim-table">
+<tr><th>STS2 官方量测（card.tscn）</th><th>本方案映射</th></tr>
+<tr><td>卡体 300×422</td><td>aspect-ratio 300/422；手牌 152 / 标准 220 / 悬停 ×1.17</td></tr>
+<tr><td>插画窗 250×190</td><td>.artwin 宽 91%、高 46%、下沉式、7px 圆角</td></tr>
+<tr><td>横幅 327×83 突出卡外</td><td>.banner 倒角铭牌 31px 高、顶缘高光+底缘暗边+下投影、刻印文字</td></tr>
+<tr><td>费用球 64×64 浮角</td><td>.orb 立体晶球 40px + 职业色金属环；能量不足换红晶</td></tr>
+<tr><td>类型铭牌 61×37</td><td>.plaque 金属小牌、横跨插画下缘</td></tr>
+<tr><td>描述区 243×136</td><td>.desc 下沉面板；关键字=职业色亮档、数字 Georgia、暗底金字</td></tr>
+</table>
+<div class="sec">
+  <div class="kv"><b>第一步 · 换皮（1 批次）</b><span>cards.view.js 卡 DOM 换新结构 + winter.css 卡框样式块；牌库/商店/悬停/制作坊全走新竖卡</span></div>
+  <div class="kv"><b>第二步 · 手牌扇形（1 批次）</b><span>battle.hand.js 扇形负 margin + 悬停上浮；动画只走 transform/opacity 合成器</span></div>
+  <div class="kv"><b>工程注意</b><span>金属包边用 mask 合成（零图片）；横幅倒角用 clip-path+drop-shadow；批量实施时若滤镜层开销大，可把整卡框体导出为一张 webp 九宫切图——实施时按性能三铁律取舍</span></div>
+  <div class="kv"><b>风险点</b><span>飘字/点击判定锚点跟随卡片变换；旧存档无 cls 回退青灰包边（art.js 找回逻辑可复用）</span></div>
+</div>
+
+<p class="note" style="margin-top:40px">参考来源：STS2 逆向（scenes/cards/card.tscn、materials/cards/frames）· 卡面资产审计（.tmp/card-audit/）· v3/v4 定调稿存档于同目录。本稿卡面均引用 ../../game/assets/ 现役实图。</p>
+
+</body>
+</html>
