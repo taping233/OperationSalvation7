@@ -389,8 +389,12 @@ function openAltarReward() {
     game.altarRewardPending = false;   // 领取即消耗：奖励只能选一次
     const legend = SDT.Cards.all().filter(c => c.rarity === '传说' && SDT.Cards.isRandomObtainable(c));
     const equips = SDT.Cards.all().filter(c => c.type === '装备' && SDT.Cards.isRandomObtainable(c));
-    if (legend.length) grantEventCard(legend[Math.floor(Random.random('loot') * legend.length)]);
-    if (equips.length) grantEventCard(equips[Math.floor(Random.random('loot') * equips.length)]);
+    const legendPick = legend.length ? legend[Math.floor(Random.random('loot') * legend.length)] : null;
+    if (legendPick) grantEventCard(legendPick);
+    // 同一奖励内不得重复（2026-09-13 老板口径）：传说装备卡（不朽神剑/混沌之眼等）同时
+    // 属于两个池，两池各自随机时会把同一张牌发两次；装备池里排掉已发的那张再抽
+    const restEquips = equips.filter(c => !legendPick || (c.id !== legendPick.id && c.name !== legendPick.name));
+    if (restEquips.length) grantEventCard(restEquips[Math.floor(Random.random('loot') * restEquips.length)]);
     UI.log('[[icon:crystal]] 祭坛回赠：随机获得 1 张<b>传说卡</b>和 1 张<b>装备卡</b>（见背包）', 'loot');
     saveGame();
     finishInstant();

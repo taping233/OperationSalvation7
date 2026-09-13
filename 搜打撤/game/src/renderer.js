@@ -10,7 +10,9 @@ const SDT = window.SDT;
   const BOSS_R = 24;         // BOSS 结点半径
   const ALTAR_R = 24;        // 祭坛结点半径
   const LINK_GAP = 24;       // 连线两端距结点边缘的留白
-  const SPENT_TYPES = new Set(['battle', 'shop', 'chest', 'event']); // 走过即空的节点：图标换空白事件圆圈
+  // 走过即空的节点（2026-09-13 老板留言：走过的格子一律换空白节点图标）。
+  // 通路与地标是例外，永远保留原图标：层间闸门 / 紧急撤离 / 终局撤离 / 入口。
+  const PERSISTENT_TYPES = new Set(['door', 'emergencyExit', 'extraction', 'entrance']);
 
   const COLORS = {
     bgTop: '#17252b',
@@ -78,9 +80,33 @@ const SDT = window.SDT;
     bg.addColorStop(1, COLORS.bgBottom);
     b.fillStyle = bg;
     b.fillRect(0, 0, cam.viewW, cam.viewH);
+    // 以下两层原在 draw() 里每帧重建渐变并全屏填充（2026-09-13 性能巡检）：
+    // 它们只随视口尺寸变化，与壁纸层一起烘焙进本缓存画布，视觉逐像素一致。
+    b.globalAlpha = 1;
+    // 暗色纱层：保留地图、节点和 HUD 的对比度，不遮掉壁纸主体
+    const shade = b.createLinearGradient(0, 0, 0, cam.viewH);
+    shade.addColorStop(0, 'rgba(5,14,18,0.28)');
+    shade.addColorStop(0.55, 'rgba(5,14,18,0.18)');
+    shade.addColorStop(1, 'rgba(2,8,11,0.40)');
+    b.fillStyle = shade;
+    b.fillRect(0, 0, cam.viewW, cam.viewH);
+    // 中央光晕：给壁纸中心一点冷色透气感
+    const halo = b.createRadialGradient(cam.viewW * 0.5, cam.viewH * 0.46, 0,
+      cam.viewW * 0.5, cam.viewH * 0.46, Math.max(cam.viewW, cam.viewH) * 0.72);
+    halo.addColorStop(0, 'rgba(83,126,137,0.08)');
+    halo.addColorStop(0.62, 'rgba(36,64,74,0.03)');
+    halo.addColorStop(1, 'rgba(0,0,0,0)');
+    b.fillStyle = halo;
+    b.fillRect(0, 0, cam.viewW, cam.viewH);
     backdropCanvas = c;
     return c;
   }
+
+  // 暗角渐变按视口尺寸缓存（原每帧 createRadialGradient，对象只随尺寸变化）
+  let vignetteKey = '';
+  let vignetteGrad = null;
+  // 节点标签宽度缓存（measureText 结果，字体固定时只取决于文本内容）
+  const labelWidthCache = new Map();
 
 
   const isCurrentNode = (game, n) => n.li === game.layerIdx && n.idx === game.trackPos;
@@ -222,20 +248,21 @@ const SDT = window.SDT;
   }
 
   // ---------- 图标层（圆形位图结点：呼吸缩放；当前环明亮，可走相邻环高亮，走过的中亮，其余隐藏/虚化） ----------
+  // 节点配色表提升到模块级：原来在循环体内每节点每帧重建 14 键对象（纯常数）
+  const NODE_TYPE_COLORS = { battle:'#e98278', coin:'#e0c57d', wood:'#e0c57d', rations:'#e0c57d', chest:'#e0c57d', key:'#e0c57d', fire:'#76c6ad', emergencyExit:'#76c6ad', extraction:'#76c6ad', event:'#82b8d0', shop:'#82b8d0', altar:'#a995d4', boss:'#e98278', entrance:'#76c6ad' };
   function drawIcons(ctx, game) {
     const z = game.cam.zoom, g = nodeGeo(game);
+    const reduced = typeof document !== 'undefined' && document.body?.classList.contains('reduce-motion');
     for (const n of g.nodes) {
       const current = isCurrentNode(game, n);
       const legal = g.legalKeys.has(`${n.li},${n.idx}`);
       const walked = !!game.visited?.[`${n.li},${n.idx}`];
-      const reduced = typeof document !== 'undefined' && document.body?.classList.contains('reduce-motion');
       const pulse = current && !reduced ? 1 + Math.sin((game.time || 0) * 3.4) * .06 : 1;
       ctx.save();
       ctx.globalAlpha = current || legal ? 1 : .38;
-      const colors = { battle:'#e98278', coin:'#e0c57d', wood:'#e0c57d', rations:'#e0c57d', chest:'#e0c57d', key:'#e0c57d', fire:'#76c6ad', emergencyExit:'#76c6ad', extraction:'#76c6ad', event:'#82b8d0', shop:'#82b8d0', altar:'#a995d4', boss:'#e98278', entrance:'#76c6ad' };
-      const color = current ? '#f3dfad' : colors[n.def.type] || '#82b8d0';
-      // 消耗过的节点（2026-09-13 留言）：战斗/商店/宝箱/事件走过即空，图标换成空白事件圆圈
-      const spent = walked && !current && SPENT_TYPES.has(n.def.type);
+      const color = current ? '#f3dfad' : NODE_TYPE_COLORS[n.def.type] || '#82b8d0';
+      // 消耗过的节点（2026-09-13 留言）：踩过一次的格子内容已取走，图标换成空白节点图标
+      const spent = walked && !current && !PERSISTENT_TYPES.has(n.def.type);
       ctx.translate(n.x, n.y); ctx.rotate(Math.PI / 4); ctx.scale(pulse, pulse);
       ctx.fillStyle = '#0a1b27'; ctx.fillRect(-n.r * .78, -n.r * .78, n.r * 1.56, n.r * 1.56);
       ctx.strokeStyle = current ? '#f1d99c' : legal ? color : '#55717d'; ctx.lineWidth = (current ? 2.2 : legal ? 1.7 : 1) / z;
@@ -266,6 +293,8 @@ const SDT = window.SDT;
       Number(isCurrentNode(game, b)) * 2 + Number(g.legalKeys.has(`${b.li},${b.idx}`)) -
       Number(isCurrentNode(game, a)) * 2 - Number(g.legalKeys.has(`${a.li},${a.idx}`)));
     ctx.save(); ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    // 字体固定 12px：宽度只取决于文本，按标签串缓存测量结果（省每帧 measureText）
+    ctx.font = `600 12px "Noto Sans SC Sub",sans-serif`;
     for (const n of ordered) {
       const current = isCurrentNode(game, n), legal = g.legalKeys.has(`${n.li},${n.idx}`);
       if (!current && !legal && z < .65) continue;
@@ -275,8 +304,8 @@ const SDT = window.SDT;
       const name = NODE_INFO[door ? 'door' : n.def.type]?.[0] || '安全节点';
       const walked = !!game.visited?.[`${n.li},${n.idx}`];
       const label = `${current ? '当前位置 · ' : ''}${name}`;
-      ctx.font = `600 12px "Noto Sans SC Sub",sans-serif`;
-      const w = ctx.measureText(label).width + 24;
+      let w = labelWidthCache.get(label);
+      if (w === undefined) { w = ctx.measureText(label).width + 24; labelWidthCache.set(label, w); }
       const x = p.x - w / 2, y = p.y + n.r * z + 14;
       if (occupied.some(r => x < r.x + r.w && x + w > r.x && y < r.y + 42 && y + 42 > r.y)) continue;
       occupied.push({x,y,w});
@@ -491,22 +520,9 @@ const SDT = window.SDT;
   function draw(ctx, game) {
     if (!game.nodes || !game.nodes.length) return;   // 结点布局未构建前不绘制
     const cam = game.cam;
-    // 局内按层使用壁纸（L1/L2 废墟 / L3 红骑士 / L4 白机械 / L5 黑机械）；缓存按视口+层重建
+    // 局内按层使用壁纸（L1/L2 废墟 / L3 红骑士 / L4 白机械 / L5 黑机械）；缓存按视口+层重建，
+    // 暗色纱层与中央光晕已一并烘焙进该缓存画布（省每帧 2 次渐变构建+全屏填充）。
     ctx.drawImage(ensureBackdrop(cam, game.layerIdx), 0, 0, cam.viewW, cam.viewH);
-    // 轻量暗色层保留地图、节点和 HUD 的对比度，不遮掉壁纸主体。
-    const bg = ctx.createLinearGradient(0, 0, 0, cam.viewH);
-    bg.addColorStop(0, 'rgba(5,14,18,0.28)');
-    bg.addColorStop(0.55, 'rgba(5,14,18,0.18)');
-    bg.addColorStop(1, 'rgba(2,8,11,0.40)');
-    ctx.fillStyle = bg;
-    ctx.fillRect(0, 0, cam.viewW, cam.viewH);
-    const halo = ctx.createRadialGradient(cam.viewW * 0.5, cam.viewH * 0.46, 0,
-      cam.viewW * 0.5, cam.viewH * 0.46, Math.max(cam.viewW, cam.viewH) * 0.72);
-    halo.addColorStop(0, 'rgba(83,126,137,0.08)');
-    halo.addColorStop(0.62, 'rgba(36,64,74,0.03)');
-    halo.addColorStop(1, 'rgba(0,0,0,0)');
-    ctx.fillStyle = halo;
-    ctx.fillRect(0, 0, cam.viewW, cam.viewH);
     const sx = 0, sy = 0;
     ctx.save();
     ctx.translate(cam.viewW / 2 + sx, cam.viewH / 2 + sy);
@@ -527,11 +543,16 @@ const SDT = window.SDT;
 
     drawNodeLabels(ctx, game);
 
-    const vignette = ctx.createRadialGradient(cam.viewW / 2, cam.viewH / 2, Math.min(cam.viewW, cam.viewH) * 0.30,
-      cam.viewW / 2, cam.viewH / 2, Math.max(cam.viewW, cam.viewH) * 0.78);
-    vignette.addColorStop(0, 'rgba(0,0,0,0)');
-    vignette.addColorStop(1, 'rgba(0,0,0,0.36)');
-    ctx.fillStyle = vignette;
+    // 暗角：渐变对象按视口尺寸缓存（视觉不变，省每帧渐变构建）
+    const vk = cam.viewW + 'x' + cam.viewH;
+    if (vignetteKey !== vk || !vignetteGrad) {
+      vignetteKey = vk;
+      vignetteGrad = ctx.createRadialGradient(cam.viewW / 2, cam.viewH / 2, Math.min(cam.viewW, cam.viewH) * 0.30,
+        cam.viewW / 2, cam.viewH / 2, Math.max(cam.viewW, cam.viewH) * 0.78);
+      vignetteGrad.addColorStop(0, 'rgba(0,0,0,0)');
+      vignetteGrad.addColorStop(1, 'rgba(0,0,0,0.36)');
+    }
+    ctx.fillStyle = vignetteGrad;
     ctx.fillRect(0, 0, cam.viewW, cam.viewH);
 
   }

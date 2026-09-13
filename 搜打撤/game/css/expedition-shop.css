@@ -5,18 +5,31 @@
   --shop-gold: #dfc28d;
   --shop-line: rgba(223,194,141,.24);
   color: var(--shop-ink) !important;
-  background: linear-gradient(145deg, rgba(7,20,30,.98), rgba(5,13,21,.97)) !important;
+  /* 2026-09-13 老板给图：补给站室内照铺满整页背景，上面压一层深色遮罩保住卡面与文字可读性 */
+  background-color: #061019 !important;
+  background-image:
+    linear-gradient(180deg, rgba(5,14,22,.58) 0%, rgba(4,10,17,.82) 100%),
+    url('../assets/scenes/winter-expedition/supply-room.webp') !important;
+  background-position: center, center !important;
+  background-size: 100% 100%, cover !important;
+  background-repeat: no-repeat, no-repeat !important;
   border: 1px solid var(--shop-line) !important;
   box-shadow: 0 28px 90px rgba(0,0,0,.55), inset 0 1px rgba(255,255,255,.04) !important;
   display: flex !important;
   flex-direction: column !important;
+  /* scenes.css 的 justify-content:center 在内容高于视口时会把顶部推入不可回滚区
+     （页头整条被吃掉）。safe center = 装得下居中、装不下退回顶端，滚动即可看全。 */
+  justify-content: flex-start !important;
+  justify-content: safe center !important;
+  padding: 8px clamp(20px, 4vw, 64px) !important;
+  gap: 8px !important;
   min-height: min(760px, calc(100vh - 40px));
   overflow: auto !important;
 }
 #overlay .shop-pg .pg-head {
   align-items: flex-start !important;
   gap: 28px !important;
-  padding: 28px 32px 22px !important;
+  padding: 10px 32px 10px !important;
   border-bottom: 1px solid var(--shop-line) !important;
 }
 #overlay .shop-heading { flex: 1; min-width: 0; }
@@ -25,8 +38,20 @@
   letter-spacing: .18em; opacity: .82; margin-bottom: 8px;
 }
 #overlay .shop-heading h2 { margin: 0 !important; color: #f3f6f4 !important; letter-spacing: .03em; }
+/* cards.css 的 #overlay .card.page h2{display:none}（本意是藏卡片自带标题）连货板标题一起吃掉，
+   scenes.css 只给 :not(.shop-pg) 的节点页恢复显示 —— 补给站/收购台的 h2 因此一直是隐形的，
+   页头只剩英文 kicker。这里按同族选择器补回。 */
+#overlay .card.page .shop-pg .pg-head h2 { display: block; }
 #overlay .shop-heading p { margin: 8px 0 0; color: var(--shop-muted); font-size: 13px; }
 #overlay .shop-resources { display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+/* 全屏页盖住了顶栏的背包按钮，商店里没有入口——页头补一个明确的「背包」钮 */
+#overlay .shop-bag-btn {
+  align-self: flex-start; flex: 0 0 auto; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;
+  padding: 10px 16px; border: 1px solid rgba(223,194,141,.5) !important; background: rgba(10,31,42,.85) !important;
+  color: #f1eadb !important; font: 700 13px var(--font-ui); letter-spacing: .06em; cursor: pointer;
+}
+#overlay .shop-bag-btn .ic { width: 16px; height: 16px; }
+#overlay .shop-bag-btn:hover { border-color: var(--shop-gold) !important; background: rgba(16,44,58,.9) !important; }
 #overlay .shop-resource {
   min-width: 92px; padding: 9px 12px; border: 1px solid rgba(180,210,214,.18);
   background: rgba(10,31,42,.78); display: grid; grid-template-columns: 1fr auto; column-gap: 9px;
@@ -36,53 +61,103 @@
 #overlay .shop-resource em { color: var(--shop-gold); font-style: normal; align-self: end; font-size: 11px; }
 #overlay .shop-resource.coin b { color: var(--shop-gold); }
 #overlay .shop-toolbar {
-  display:flex; justify-content:space-between; align-items:center; gap:18px; padding: 15px 32px 10px;
+  display:flex; justify-content:space-between; align-items:center; gap:18px; padding: 5px 32px 4px;
 }
 #overlay .shop-toolbar b { display:block; font-size: 15px; color:#f2f5f2; }
 #overlay .shop-toolbar span:not(.shop-live) { color:var(--shop-muted); font-size:12px; }
 #overlay .shop-live { color:var(--shop-gold); font-size:12px; text-align:right; }
-#overlay .shop-board { padding: 0 32px 24px !important; background: transparent !important; flex:1; }
+/* scenes.css 的 margin:0 auto 让货板按内容宽度居中，左边线与页头错开 265px：
+   清零边距 → 货板撑满页宽，与页头左右两端对齐，列宽也随之跟着窗口走 */
+#overlay .shop-board { margin: 0 !important; padding: 10px 32px 8px !important; background: transparent !important; flex:1; }
+/* 十个格子（九个货位 + 卖牌处）排 5×2：五列等宽，不再出现两种卡宽/空格子。
+   scenes.css 六栏时代给 .shop-sellpost 钉了 grid-column:6，会凭空生成 4/5/6 三条隐式列，
+   货板因此裂成「3 窄 + 3 宽」并把卖牌处挤到单独一行——此处按当前列数改回自然流。 */
 #overlay .shop-board-grid {
-  display:grid !important; grid-template-columns: repeat(3,minmax(0,1fr)) !important; gap: 14px !important;
+  display:grid !important; grid-template-columns: repeat(5,minmax(0,1fr)) !important; gap: 10px !important;
+  /* scenes.css 的 align-items:start 让同排货位各按内容自撑高度，价签跟着参差（实测同排高低差 20px）：
+     改成 stretch 让整排等高，价签再靠 .shop-price 的 margin-top:auto 统一贴底 */
+  align-items: stretch !important;
 }
 #overlay .shop-slot {
-  min-height: 238px; padding: 12px; background: rgba(11,34,45,.86) !important;
+  min-height: 0; padding: 8px 8px 7px; background: rgba(11,34,45,.86) !important;
   border:1px solid rgba(155,192,198,.16) !important; display:flex; flex-direction:column;
   justify-content:space-between; align-items:stretch; transition: border-color .18s, transform .18s;
 }
 #overlay .shop-slot:has(.shop-price:not(:disabled)):hover { border-color:var(--shop-gold) !important; transform:translateY(-2px); }
-#overlay .shop-slot .bt-card, #overlay .shop-slot .card { min-height: 176px; }
+#overlay .shop-slot .bt-card, #overlay .shop-slot .card { min-height: 0; }
+/* 卡宽上限压到 176：五列铺满后卡面仍随列宽长高，两行会顶破全屏高度（老板 2560×1440@150%
+   → CSS 视口 1707×960，原样溢出 28px）。此处与 winter.css 同选择器，靠加载顺序覆盖其 190。 */
+/* 货板撑满页宽后列宽变宽，卡面放宽到 winter.css 的原值 190，货位不再显得空 */
+#overlay .sc-shop .shop-slot .hs-card { width:100%; max-width: 190px; }
+/* winter.css 用 (1,2,0) 选择器把货位压成 justify-content:flex-start：同排等高后价签要贴底对齐 */
+#overlay .sc-shop .shop-slot { justify-content: space-between !important; }
+#overlay .sc-shop .shop-slot .shop-price { margin-top: auto !important; }
 #overlay .shop-price {
   width:100%; min-height:36px; border:1px solid rgba(223,194,141,.52) !important;
   background:rgba(20,49,59,.96) !important; color:var(--shop-gold) !important; font-weight:700;
 }
 #overlay .shop-price:disabled { color:#71848a !important; border-color:rgba(120,145,150,.2) !important; background:rgba(9,23,30,.8) !important; }
-#overlay .shop-slotnote { color:var(--shop-muted); font-size:11px; margin-top:8px; text-align:center; }
-#overlay .shop-empty { min-height:210px; display:grid; place-items:center; color:#728990; border:1px dashed rgba(145,170,176,.2); }
-#overlay .shop-slot.sold { opacity:.62; filter:saturate(.55); }
+/* 价签收紧（winter.css 的 .sc-shop 版本靠加载顺序覆盖）：两行货位各省 4px */
+#overlay .sc-shop .shop-price { padding: 4px 12px; margin-top: 0; min-height: 0; }
+#overlay .shop-slotnote { color:var(--shop-muted); font-size:11px; margin-top:4px; text-align:center; }
+/* 空格子（神秘货箱/已售出）原来吃 cards.css 写死的 140×196，比真卡（190 宽）小一圈一小截；
+   改成与卡面同宽、同量级高度；顺带把 12px 小字提到 6:1 以上对比度 */
+#overlay .shop-empty {
+  width:100% !important; max-width:190px; height:auto !important; min-height:212px; flex:0 0 auto !important;
+  display:grid; place-items:center; color:#93a9b0; border:1px dashed rgba(145,170,176,.28);
+}
+/* 已售出/补满原来压到 62% 透明，叠上文字色只剩约 2.7:1（低于小字 4.5:1 底线），根本看不清 */
+#overlay .shop-slot.sold { opacity:.82; filter:saturate(.72); }
+#overlay .shop-slot.sold .shop-empty { color:#a8bcc2 !important; }
+/* 买不起时整板灰（winter.css 的 55% 透明 + 去饱和）：与「已售出」几乎同观感，收轻一档 */
+#overlay .sc-shop .shop-slot.buy[data-short] { opacity:.82; filter:saturate(.72); }
 #overlay .shop-sellpost {
-  min-height:238px; border:0 !important; background:linear-gradient(160deg,rgba(43,49,44,.9),rgba(15,29,34,.95)) !important;
+  grid-column: auto !important; margin-top: 0 !important; min-height:0;
+  border:0 !important; background:linear-gradient(160deg,rgba(43,49,44,.9),rgba(15,29,34,.95)) !important;
   color:#f3eee2 !important; display:grid; place-content:center; gap:8px; text-align:center; cursor:pointer;
 }
-#overlay .sellpost-coin { font-size:28px; color:var(--shop-gold); }
+/* 卖牌处的黄色边框：scenes.css 给 .sellpost-coin 钉了一圈 3px 深金描边（实测 2.67px solid #8f6a17）。
+   老板两轮点名的「线条边框 / 黄色边框」就是这圈线——之前只去了按钮本体的 border，圆盘这圈一直在。 */
+#overlay .sellpost-coin { font-size:28px; color:var(--shop-gold); border: 0 !important; }
 #overlay .sellpost-name { font-weight:700; font-size:18px; }
 #overlay .sellpost-hint { color:#a9b7b6; font-size:12px; }
 #overlay .shop-back {
-  position:sticky; bottom:0; align-self:flex-start; margin:0 32px 24px; z-index:2;
+  position:sticky; bottom:0; align-self:flex-start; margin:0 32px 8px; z-index:2;
   border:1px solid rgba(223,194,141,.42) !important; background:#0d2835 !important; color:#f1eadb !important;
 }
 #overlay .sell-tip, #overlay .shop-sell-empty { color:var(--shop-muted) !important; }
+/* 收购台无可卖卡时货板跟着 flex:1 撑满整屏，空框一大块；改成随内容收高 */
+#overlay .sell-board { flex: 0 0 auto !important; }
 #overlay .shop-sell { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
 #overlay .shop-sell .sell-item { background:rgba(11,34,45,.86) !important; border:1px solid rgba(155,192,198,.16); padding:12px; }
-@media (max-width: 820px) {
-  #overlay .shop-pg .pg-head { flex-direction:column; padding:22px 20px 18px !important; }
+@media (max-width: 1180px) {
+  #overlay .shop-board-grid { grid-template-columns:repeat(4,minmax(0,1fr)) !important; }
+}
+@media (max-width: 900px) {
+  #overlay .shop-pg .pg-head { flex-direction:column; padding:18px 20px 14px !important; }
   #overlay .shop-resources { justify-content:flex-start; }
   #overlay .shop-toolbar, #overlay .shop-board { padding-left:20px !important; padding-right:20px !important; }
-  #overlay .shop-board-grid, #overlay .shop-sell { grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
+  #overlay .shop-board-grid { grid-template-columns:repeat(3,minmax(0,1fr)) !important; }
+  #overlay .shop-sell { grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
   #overlay .shop-back { margin-left:20px; }
 }
-@media (max-width: 520px) {
-  #overlay .shop-board-grid, #overlay .shop-sell { grid-template-columns:1fr !important; }
+@media (max-width: 620px) {
+  #overlay .shop-board-grid, #overlay .shop-sell { grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
   #overlay .shop-toolbar { align-items:flex-start; flex-direction:column; }
   #overlay .shop-live { text-align:left; }
+}
+/* 矮窗口（Windows 显示缩放 125%/150% 会把全屏 CSS 视口压到 768~900 高）：
+   货板两行必须一起收，否则第二行和「离开补给站」掉到折线以下。 */
+@media (max-height: 900px) {
+  #overlay .sc-shop .shop-slot .hs-card { max-width: 148px; }
+  #overlay .shop-pg .pg-head { padding: 8px 32px 8px !important; }
+  #overlay .shop-toolbar { padding: 4px 32px 4px; }
+  #overlay .shop-toolbar span:not(.shop-live) { display: none; }
+}
+@media (max-height: 780px) {
+  #overlay .sc-shop .shop-slot .hs-card { max-width: 128px; }
+  #overlay .shop-pg.sc-shop { gap: 6px !important; }
+  #overlay .shop-board { padding: 6px 32px 6px !important; }
+  #overlay .shop-toolbar { padding: 2px 32px 2px; }
+  #overlay .shop-toolbar b { font-size: 13px; }
 }

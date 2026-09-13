@@ -9,10 +9,10 @@
  * 并对外维持原有导出面（game.boot.js / game.bag.js / 测试照旧 import）。
  * ============================================================ */
 import { esc } from './shared.js';
-import { MAP, game, scaledEnemy } from './game.session.js';
-import { buildEncounter, grantEventCard, openShop, showRunTransition } from './game.run.scenes.js';
-import { openAltarRitual, openClassChoice } from './game.run.altar.js';
-import { moveTo } from './game.run.flow.js';
+import { MAP, game, newRun, scaledEnemy } from './game.session.js';
+import { buildEncounter, grantEventCard, openChestsOnCell, openShop, showRunTransition } from './game.run.scenes.js';
+import { openAltarRitual, openClassChoice, openFireRest } from './game.run.altar.js';
+import { moveTo, runEventDeck } from './game.run.flow.js';
 
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const SDT = window.SDT;
@@ -52,4 +52,41 @@ function devForceBattle(isBoss) {
   }
 }
 
-export { bindRunMixins, moveTo, openAltarRitual, openClassChoice, openShop, showRunTransition, devForceBattle };
+// —— 开发者工具：首页节点测试面板一键跳节点（2026-09-13 老板任务）——
+// 面板 DOM 在 index.html（#titleDev，仅开发者模式可见），点击绑定在 game.boot.js。
+// 从标题页进节点需要一局在跑：没有对局时先起一局「测试局」——
+// 不占档位（activeSlot 为空 → saveGame 直接返回），所以不会写坏任何真实存档。
+const DEV_NODE_LABEL = {
+  battle: '遭遇战', boss: 'BOSS 战', shop: '商店', 'chest-small': '小宝箱', 'chest-medium': '中宝箱',
+  'chest-large': '大宝箱', event: '事件', fire: '火堆', altar: '祭坛',
+};
+
+function devEnsureRun() {
+  if (game.battleActive) { UI.log('[[icon:lock]] 战斗进行中——先打完或退出战斗再跳节点', 'warn'); return false; }
+  if (game.runActive) return true;
+  document.getElementById('title').hidden = true;   // 与「开始探索」同口径：进棋盘前收起标题页
+  newRun('standard');
+  UI.log('[[icon:tools]] 开发者：已开一局<b>测试局</b>（不占档位、不写存档）', 'sys');
+  return true;
+}
+
+function devJumpNode(kind) {
+  const label = DEV_NODE_LABEL[kind];
+  if (!label) { UI.log(`[[icon:question]] 未知节点类型：${esc(kind)}`, 'warn'); return; }
+  if (!devEnsureRun()) return;
+  if (!UI.el.overlay.hidden) UI.hideOverlay();   // 已有节点页/BOSS 门等着：先收干净再进新节点
+  game.state = 'idle';
+  UI.beginRoom();   // 与真实落脚一致：节点页铺满整屏房间
+  UI.log(`[[icon:tools]] 开发者：跳转节点【<b>${label}</b>】`, 'sys');
+  switch (kind) {
+    case 'battle': devForceBattle(false); break;
+    case 'boss': devForceBattle(true); break;
+    case 'shop': openShop(); break;
+    case 'event': runEventDeck(); break;
+    case 'fire': openFireRest(); break;
+    case 'altar': openAltarRitual(); break;   // def 参数仅供重进递归用，直接进不需要格子定义
+    default: openChestsOnCell([{ kind: kind.replace('chest-', '') }], `开发者测试：${label}`); break;
+  }
+}
+
+export { bindRunMixins, moveTo, openAltarRitual, openClassChoice, openShop, showRunTransition, devForceBattle, devJumpNode };

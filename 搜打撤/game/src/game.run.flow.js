@@ -213,7 +213,8 @@ function runInstant(def, after) {
 
 // ---------- 事件卡（第六批桌游事件：只能经事件格触发，背包记录触发历史） ----------
 // 事件卡池 = 卡牌库中类型「事件」的卡；卡牌库无事件卡时退回旧随机事件表。
-function runEventDeck() {
+// 导出供开发者节点测试面板（game.run.js devJumpNode）直接进事件页，玩法口径与事件格一致。
+export function runEventDeck() {
   const deck = SDT.Cards.all().filter(c => c.type === '事件');
   if (!deck.length) {
     const ev = weighted(MAP.randomEvents);

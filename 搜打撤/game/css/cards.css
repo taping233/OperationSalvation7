@@ -231,11 +231,15 @@
     filter: drop-shadow(0 0 15px var(--gem, #a1a1a1)); }
   /* 牌库页去动画（2026-09-08 老板拍板：牌库内动画全去，滑动/悬停流畅优先）。
      实测 hover 缩放 + drop-shadow 滤镜重绘是 5fps 元凶；流光/入场过渡一并停用。
-     cardlib-open 由 renderCardLibrary/closeLibPage 挂卸。 */
+     cardlib-open 由 renderCardLibrary/closeLibPage 挂卸。
+     2026-09-13 留言（多加一些动画和彩蛋）：禁令保留（它是滑动流畅的护栏），
+     卡面 hover 抬升只留 transform（合成器线程），drop-shadow 滤镜重绘继续拦；
+     库内新增动画一律在 expedition-library.css 里按更高优先级豁免单开。 */
   body.cardlib-open #overlay *,
   body.cardlib-open #overlay *::before,
   body.cardlib-open #overlay *::after { animation: none !important; transition: none !important; }
-  body.cardlib-open #overlay .lib-cardwrap:hover { transform: none; filter: none; }
+  body.cardlib-open #overlay .lib-cardwrap { transition: transform .16s ease !important; }
+  body.cardlib-open #overlay .lib-cardwrap:hover { filter: none; }
   body.cardlib-open #overlay .rv-beam { display: none; }
   /* 豁免：卡牌库整页卡片的打开缩放入场（2026-09-12 留言）不受上面的动画禁令影响 */
   @keyframes libCardIn { from { opacity: 0; transform: scale(.86) translateY(14px); } }

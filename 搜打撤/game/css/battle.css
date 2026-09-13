@@ -82,23 +82,27 @@
 .bt-potions { position:absolute; top:clamp(6px,1.2vh,14px); left:50%; transform:translateX(-50%);
   display:flex; align-items:center; gap:clamp(6px,.8vw,12px); flex-wrap:wrap; justify-content:center;
   max-width:94%; z-index:6; pointer-events:none; }
-.bt-potions-label { font-size:clamp(11px,1.2vw,13px); opacity:.72; color:#e8dcc0; letter-spacing:2px; }
+/* 2026-09-13 老板留言：道具栏改黑字——明亮战斗背景上米金字不显眼，浅暖纸白底 + 近黑字 */
+.bt-potions-label { font-size:clamp(11px,1.2vw,13px); color:#1c1a16; letter-spacing:2px; padding:3px 10px;
+  border-radius:999px; background:rgba(250,247,238,.72); border:1px solid rgba(122,107,84,.3);
+  text-shadow:0 1px 0 rgba(255,255,255,.55); }
 .bt-potion { pointer-events:auto; display:inline-flex; align-items:center; gap:5px;
-  padding:clamp(3px,.5vh,6px) clamp(8px,1vw,14px); border:1px solid rgba(214,186,120,.5); border-radius:999px;
-  background:linear-gradient(180deg,rgba(34,29,19,.88),rgba(15,13,8,.94)); color:#f2e8cd;
+  padding:clamp(3px,.5vh,6px) clamp(8px,1vw,14px); border:1px solid rgba(122,107,84,.4); border-radius:999px;
+  background:rgba(250,247,238,.9); color:#1c1a16;
   font-size:clamp(12px,1.3vw,14px); cursor:pointer; user-select:none; white-space:nowrap;
-  box-shadow:0 2px 8px rgba(0,0,0,.5); transition:border-color .12s, box-shadow .12s, transform .12s; }
+  box-shadow:0 2px 8px rgba(40,32,20,.3); transition:border-color .12s, box-shadow .12s, transform .12s; }
 .bt-potion img, .bt-potion svg { width:15px; height:15px; }
-.bt-potion .bt-potion-n { color:#ffd876; font-weight:700; }
-.bt-potion:hover { border-color:#ecd28a; box-shadow:0 0 12px rgba(236,210,138,.4); transform:translateY(-1px); }
+.bt-potion .bt-potion-n { color:#1c1a16; font-weight:700; }
+.bt-potion:hover { border-color:rgba(58,49,30,.82); box-shadow:0 0 12px rgba(40,32,20,.35); transform:translateY(-1px); }
 .bt-potion.need-target { border-style:dashed; }
 .bt-potion.need-target::after { content:'↳敌'; font-size:11px; color:#ff9d8a; margin-left:2px; }
 .bt-potion.aim-lift { transform:translateY(-3px) scale(1.05); z-index:7; }
 /* 不可使用的道具（2026-09-09 老板 #10）：虚化、不响应点击，悬停给原因 */
 .bt-potion.off { pointer-events:none; cursor:default; filter:grayscale(.85) brightness(.55); opacity:.75;
   border-color:rgba(140,140,140,.4); }
-.bt-potions-empty { pointer-events:none; font-size:clamp(11px,1.1vw,13px); color:#9d9d9d; opacity:.7;
-  padding:4px 10px; border:1px dashed rgba(150,150,150,.35); border-radius:999px; }
+.bt-potions-empty { pointer-events:none; font-size:clamp(11px,1.1vw,13px); color:#1c1a16;
+  padding:4px 10px; border:1px dashed rgba(122,107,84,.5); border-radius:999px;
+  background:rgba(250,247,238,.85); }
 /* 重置旧卡片式敌人样式 */
 #overlay .battle-stage.sts .sts-foe { display:block; position:relative; flex:0 1 auto; min-width:0;
   width:clamp(130px,13vw,210px); border:0; padding:0; background:none; box-shadow:none; border-radius:0; }
@@ -193,7 +197,8 @@
   transform:translate(calc(-50% + var(--fx,0px)), var(--fy,0px)) rotate(var(--frot,0deg)) scale(var(--fs,1)); }
 .bt-slot:hover { z-index:9; }
 .bt-slot:has(.aim-lift) { z-index:20; }
-.sts-hand .bt-card { transition:transform .16s cubic-bezier(.3,1.3,.5,1), box-shadow .16s, filter .2s; }
+/* 2026-09-13 老板口令：弹出动画要慢、带物理弹性——0.5s 过冲弹簧曲线（transform 合成器通道） */
+.sts-hand .bt-card { transition:transform .5s cubic-bezier(.3,1.4,.45,1); }
 .sts-hand .bt-card.off { transform:translateY(8px) scale(.97); filter:brightness(.55) saturate(.7); }
 .sts-hand .bt-slot:hover .bt-card:not(.off):not(.aim-lift) { transform:translateY(-24px) scale(1.04); }
 .sts-hand .bt-slot:hover .bt-card.off { transform:translateY(8px) scale(.97); }

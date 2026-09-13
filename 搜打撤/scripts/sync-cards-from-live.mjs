@@ -124,7 +124,7 @@ function buildDoc(upserts, changed, retire, version, prev, sourceLib) {
     .map(normalize);
   const stamp = new Date().toISOString().slice(0, 10);
   const changelog = [
-    `${stamp} 实机卡库同步（v${version}）：覆盖 ${changed.length} / 新增 ${upserts.length} / 退役 ${retire.length}${carried.length ? ` / 保留历史实机卡 ${carried.length}` : ''}`,
+    `${stamp} 实机卡库同步（v${version}）：覆盖 ${changed.length} / 新增 ${upserts.length} / 退役名单 ${retire.length}${carried.length ? ` / 保留历史实机卡 ${carried.length}` : ''}`,
     ...(prev.changelog || []),
   ];
   return {
@@ -144,27 +144,35 @@ function main() {
     console.error('用法: node scripts/sync-cards-from-live.mjs --input <实机卡库.json> [--check]');
     process.exit(1);
   }
+  const prev = readSyncDoc();
   const sourceLib = sourceCardLibrary();
   const liveLib = readLiveLibrary(input);
-  const { upserts, changed, retire, noId } = diff(sourceLib, liveLib);
+  const { upserts, changed, retire: retireDiff, noId } = diff(sourceLib, liveLib);
+  // 退役名单单调累积（2026-09-13）：diff 只算得出「源码有效卡库定义过、实机没有」的卡，
+  // 而覆盖批次里的纯实机卡（源码不定义，如 cards.js 已整卡退役的 tt7-drunksong）退役后
+  // diff 再也算不出来，整份重写就会把退役条目丢掉——tt-peach/tt6-timeskip 已因此丢过一次
+  // （见 changelog v14）。口径：本轮 diff ∪ 历史退役；实机仍在的 id 解除退役（老板在实机
+  // 重建同 id 时走覆盖批次，不再被清掉）。
+  const liveIds = new Set(liveLib.filter(c => c.id).map(c => c.id));
+  const retire = [...new Set([...retireDiff, ...(prev.retire || [])])].filter(id => !liveIds.has(id));
+  const retireChanged = JSON.stringify(retire) !== JSON.stringify(prev.retire || []);
   console.log(`[sync-cards] 源码有效卡库 ${sourceLib.length} 张；实机 ${liveLib.length} 张`);
-  console.log(`[sync-cards] 新增 ${upserts.length} / 覆盖 ${changed.length} / 退役 ${retire.length}${noId.length ? ` / 无id跳过 ${noId.length}` : ''}`);
+  console.log(`[sync-cards] 新增 ${upserts.length} / 覆盖 ${changed.length} / 本轮退役 ${retireDiff.length} / 退役名单累计 ${retire.length}${noId.length ? ` / 无id跳过 ${noId.length}` : ''}`);
   for (const c of changed) console.log(`  ~ 覆盖 ${c.id} ${c.name || ''}`);
   for (const c of upserts) console.log(`  + 新增 ${c.id} ${c.name || ''}`);
-  for (const id of retire) console.log(`  - 退役 ${id}`);
+  for (const id of retireDiff) console.log(`  - 本轮退役 ${id}`);
   for (const c of noId) console.log(`  ? 无id跳过: ${c.name || JSON.stringify(c).slice(0, 40)}`);
 
   if (checkOnly) { console.log('[sync-cards] --check 模式，未改写文件'); return; }
-  if (!upserts.length && !changed.length && !retire.length) {
+  if (!upserts.length && !changed.length && !retireChanged) {
     console.log('[sync-cards] 无差异，cards-sync.json 无需更新');
     return;
   }
 
-  const prev = readSyncDoc();
   const version = (Number(prev.version) || 0) + 1;
   const doc = buildDoc(upserts, changed, retire, version, prev, sourceLib);
   fs.writeFileSync(SYNC_JSON, JSON.stringify(doc, null, 2) + '\n', 'utf8');
-  console.log(`[sync-cards] game/data/cards-sync.json 已更新（sync v${version}，覆盖批次 ${changed.length + upserts.length} 张 + 退役 ${retire.length} 张）`);
+  console.log(`[sync-cards] game/data/cards-sync.json 已更新（sync v${version}，覆盖批次 ${changed.length + upserts.length} 张 + 退役名单 ${retire.length} 张）`);
 }
 
 main();

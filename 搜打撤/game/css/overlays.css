@@ -526,3 +526,52 @@
   .cls-chest-note b { color: #e8d9a8; }
   .bt-card.cls-chest .hs-card { border-color: #15151b; box-shadow: 0 .34em 1em rgba(0,0,0,.65), inset 0 0 0 1px #2c2c36;
     background: linear-gradient(165deg, #2a2a33 0%, #12121a 55%, #1d1d26 100%); }
+
+  /* ============ 撤离失败页（2026-09-13 留言：UI 重做 + 背景透明） ============
+     原来整屏铺 room-view 的 #0c0c0c 深灰渐变（战场与画布全被盖死），现在改成
+     「战败战报」：背景只留一层可透视的暗纱，战果收进居中玻璃面板。
+     模式标记由 UI.showOverlay(..., 'doom') 打在 #overlay 上（ui.js）。 */
+  #overlay.room-view.fx-doom { background: rgba(6,8,12,.5); backdrop-filter: blur(3px) saturate(.72);
+    animation: ovFadeIn .22s ease; }
+  #overlay.room-view.fx-doom .card.room { background: none; border: 0; box-shadow: none;
+    padding: clamp(16px,3vh,30px) clamp(18px,4vw,44px); overflow: hidden; justify-content: center; }
+  #overlay.room-view.fx-doom .card.room::before { display: none; }
+  #overlay.room-view.fx-doom .card.room > h2 { flex: 0 0 auto; margin: 0 0 4px;
+    font-size: clamp(26px,3.4vw,44px); font-weight: 800; letter-spacing: .26em; color: #f2cbc0;
+    text-shadow: 0 0 30px rgba(200,80,60,.6), 0 2px 8px rgba(0,0,0,.8); }
+  #overlay.room-view.fx-doom .card.room > h2 .ic { width: .82em; height: .82em; }
+  #overlay.room-view.fx-doom #ovBody { width: 100%; display: flex; justify-content: center; }
+
+  .doom-panel { width: min(720px, 94%); padding: 24px 26px 20px; text-align: center;
+    background: linear-gradient(180deg, rgba(30,19,21,.82), rgba(11,9,11,.9));
+    border: 1px solid rgba(200,80,60,.42); border-radius: 16px;
+    box-shadow: 0 30px 80px rgba(0,0,0,.72), inset 0 0 0 1px rgba(255,255,255,.05),
+      inset 0 1px 0 rgba(255,180,150,.14);
+    animation: doomIn .5s cubic-bezier(.22,1,.36,1); }
+  @keyframes doomIn { from { opacity: 0; transform: translateY(28px) scale(.96); } }
+  .doom-sub { margin: 0 0 18px; color: #d9b6ae; font-size: 13.5px; letter-spacing: .14em; }
+  .doom-stats { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; margin-bottom: 16px; }
+  .doom-stat { padding: 10px 8px 11px; border-radius: 10px; background: rgba(255,255,255,.045);
+    border: 1px solid rgba(255,255,255,.08);
+    animation: doomStatIn .5s cubic-bezier(.22,1,.36,1) backwards;
+    animation-delay: calc(var(--i, 0) * 110ms + 140ms); }
+  @keyframes doomStatIn { from { opacity: 0; transform: translateY(16px); } }
+  .ds-k { display: block; color: #8e878d; font-size: 11.5px; letter-spacing: .14em; margin-bottom: 6px; }
+  .ds-v { font: 800 21px/1.1 ui-monospace, monospace; color: #eae5df; }
+  .ds-v.bad { color: #ff8f74; } .ds-v.good { color: #86dfbf; }
+  .doom-loot { margin-bottom: 16px; }
+  .doom-loot-h { margin: 0 0 10px; color: #dfc28d; font-size: 12.5px; letter-spacing: .12em; }
+  .doom-cards { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px; }
+  .doom-card { display: inline-flex;
+    animation: doomCardIn .5s cubic-bezier(.22,1,.36,1) backwards;
+    animation-delay: calc(var(--i, 0) * 70ms + 260ms); }
+  @keyframes doomCardIn { from { opacity: 0; transform: translateY(20px) rotate(-3deg); } }
+  .doom-cards .hs-card { font-size: 9.5px; }
+  .doom-more { color: #9b9691; font-size: 12px; }
+  #overlay .doom-panel .ov-note { color: #9b9691; font-size: 12.5px; margin: 0 0 16px; line-height: 1.7; }
+  #overlay .doom-panel .ov-note b { color: #e0dad4; }
+  .doom-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 18px; }
+  #overlay .doom-btns .ov-btn { padding: 13px 18px; font-size: 14px; }
+  #overlay .doom-btns .ov-btn.ok { border-color: rgba(255,138,92,.55);
+    background: linear-gradient(180deg, #5c2f26, #2a1512); color: #ffd9cc; }
+  #overlay .doom-btns .ov-btn.ok:hover { box-shadow: 0 0 16px rgba(255,138,92,.35); }

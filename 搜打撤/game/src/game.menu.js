@@ -19,15 +19,16 @@ function createGameMenuController(deps) {
     game.runActive = false;
     setActiveSlot(null);
     setLobby(true);
-    document.getElementById('title').hidden = false;
-    document.getElementById('exitScr').hidden = true;
+    UI.showScreen(document.getElementById('title'));
+    // 告别屏若还亮着（网页版退出→返回）交叉淡出；本就隐藏时立即返回
+    UI.hideScreen(document.getElementById('exitScr'));
     bindTitleExtras();
     renderTitleStats();
     SDT.Sound.music('title');
     UI.refresh(game);
   }
 
-  function hideTitle() { document.getElementById('title').hidden = true; }
+  function hideTitle() { UI.hideScreen(document.getElementById('title')); }
 
   // ---------- AK 风格主页：标题页附加按钮与真实数据 ----------
   let titleExtrasBound = false;
@@ -191,7 +192,7 @@ function createGameMenuController(deps) {
     const ta = document.getElementById('sugText');
     ta.value = '';
     layer.hidden = false;
-    const close = () => { layer.hidden = true; game.state = prevState; };
+    const close = () => { UI.hideScreen(layer, () => { game.state = prevState; }); };
     document.getElementById('sugCancelBtn').onclick = close;
     document.getElementById('sugSaveBtn').onclick = async () => {
       const text = ta.value.trim();
@@ -656,8 +657,8 @@ function createGameMenuController(deps) {
       window.sdtDesktop.quit(); // 桌面版：存档已保留，真正退出程序
       return;
     }
-    document.getElementById('title').hidden = true;
-    document.getElementById('exitScr').hidden = false;
+    UI.hideScreen(document.getElementById('title'));
+    UI.showScreen(document.getElementById('exitScr'));
     // 网页版无法真正关闭程序：显示告别屏即可（存档已保留，可重新进入继续）
   }
 
@@ -699,7 +700,7 @@ function createGameMenuController(deps) {
       </div><!-- /.pg -->`, 'page');
     const sync = () => {
       if (UI.el.tglIndex) UI.el.tglIndex.checked = game.toggles.index;
-      UI.el.devTools.hidden = !game.devMode;
+      runtime.syncDevVisibility();
     };
     // 危险操作两步确认：首次点击变为「确认？」，2.6 秒后还原
     const armDanger = (act, armedText) => {
@@ -740,7 +741,7 @@ function createGameMenuController(deps) {
     document.getElementById('setDev').addEventListener('change', (e) => {
       game.devMode = e.target.checked;
       localStorage.setItem('sdt-dev', e.target.checked ? '1' : '0');
-      UI.el.devTools.hidden = !game.devMode;
+      runtime.syncDevVisibility();
     });
     // 屏幕震动开关（无障碍；顿帧/音效/飘字不受影响，FX.shake 读取该键）
     document.getElementById('setShake').addEventListener('change', (e) => {

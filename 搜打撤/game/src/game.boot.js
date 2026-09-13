@@ -4,17 +4,17 @@ const SDT = window.SDT;
 import { TYPE_NAME } from './game.notes.js';
 import { MAP } from './game.session.js';
 import { SLOT_COUNT, buildDerived, cam, canvas, configureGameRuntime, ctx, dpr, exitToTitle, game, hasRun, migrateOldSave, openSettings, quitGame, saveGame, setLobby, showTitle, startNewGame, _set_dpr, _set_cam } from './game.session.js';
-import { bindRunMixins, devForceBattle, moveTo, openClassChoice, openShop, showRunTransition } from './game.run.js';
+import { bindRunMixins, devForceBattle, devJumpNode, moveTo, openClassChoice, openShop, showRunTransition } from './game.run.js';
 import { PRELOAD_SCENES } from './game.run.data.js';
 import { openBaseHub } from './game.hub.js';
 import { bindBagMixins, showBackpack } from './game.bag.js';
-import { bindDevMode, bindNotesMixins, initDevMode, openCellEditor, rebuildNotes, showClearOverlay, showExportOverlay, showImportOverlay } from './game.notes.js';
+import { bindDevMode, bindNotesMixins, initDevMode, openCellEditor, rebuildNotes, showClearOverlay, showExportOverlay, showImportOverlay, syncDevVisibility } from './game.notes.js';
 import { cardPageOpen, closeCardPageTop, openCardDesigner, openCardLibrary } from './game.cardslib.js';
 import { renderScheduler } from './render-scheduler.js';
 import { nodeHitRadius } from './camera.js';
 import { renderMiniMap } from './game.session.js';
 
-  configureGameRuntime({ openClassChoice, openBaseHub, rebuildNotes, resize: () => resize(), showRunTransition });
+  configureGameRuntime({ openClassChoice, openBaseHub, rebuildNotes, resize: () => resize(), showRunTransition, syncDevVisibility });
   function bindInput() {
     let dragging = false, downPos = null, lastPos = null, pointerId = null;
     let hoverFrame = 0, pendingHover = null;
@@ -207,6 +207,11 @@ import { renderMiniMap } from './game.session.js';
     // 开发者一键进战斗（devTools 面板，仅 devMode 可见）
     if (UI.el.devBattle) UI.el.devBattle.addEventListener('click', () => devForceBattle(false));
     if (UI.el.devBoss) UI.el.devBoss.addEventListener('click', () => devForceBattle(true));
+    // 开发者节点测试面板（标题页 #titleDev，仅 devMode 可见）：一键跳到商店/事件/BOSS 等各类节点
+    if (UI.el.titleDev) UI.el.titleDev.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-dev-node]');
+      if (btn) devJumpNode(btn.dataset.devNode);
+    });
 
     // 卡牌大页面：Esc 关闭 / 点击深色背景关闭
     // （用 click 而非 mousedown 关背景，保证关闭前 mouseup 仍处于 modal 态，不会误触格子编辑）
@@ -444,7 +449,7 @@ import { renderMiniMap } from './game.session.js';
     document.getElementById('btnCardLib').addEventListener('click', openCardLibrary);
     document.getElementById('btnCardDesigner').addEventListener('click', () => openCardDesigner(null));
     document.getElementById('mBack').addEventListener('click', () => {
-      document.getElementById('exitScr').hidden = true;
+      // 告别屏淡出 + 标题页淡入都由 showTitle 内部的屏幕过渡处理（交叉淡切）
       showTitle();
     });
     // 预加载选档页存档卡背景图，避免首次打开时解码卡顿
@@ -546,18 +551,50 @@ import { renderMiniMap } from './game.session.js';
     };
     if ('requestIdleCallback' in window) requestIdleCallback(warmHubWallpaper, { timeout: 4000 });
     else setTimeout(warmHubWallpaper, 2000);
-    // 全量美术预热（2026-09-08 老板：启动时强制进行，首页显示原因与进度）：
-    // 卡面/敌人立绘/职业立绘 + 图标 + 场景大图（约 7MB 本地文件）分小批拉进内存并
-    // 预解码，进度条走完后牌库/战斗/开箱的 <img> 零首帧请求与解码延迟。
-    // 解码离主线程，批次间隔让出主线程，标题页交互不掉帧。
+    // 全量美术预热（2026-09-08 老板：启动时强制进行，首页显示原因与进度；
+    // 2026-09-13 老板：扩大到全部美术资源，立绘/序列帧/场景/卡面/图标全覆盖）：
+    // 节点+战斗场景图 → 敌人/角色立绘 → 清单全量（序列帧/剪裁图等，vite 构建期扫描
+    // 生成 art-manifest.js）→ 卡面 → 图标，分小批拉进内存并预解码，进度条走完后
+    // 牌库/战斗/开箱的 <img> 零首帧请求与解码延迟。解码离主线程，批次间隔让出
+    // 主线程，标题页交互不掉帧。
     const warmupTip = document.getElementById('warmupTip');
     const warmupBar = document.getElementById('warmupBar');
     const warmupNum = document.getElementById('warmupNum');
     const urls = [
-      ...SDT.Art.collectCardAssets(SDT.Cards.all()),
       ...Object.values(PRELOAD_SCENES),
+      ...SDT.Art.collectCardAssets(SDT.Cards.all()),
+      ...SDT.Art.collectManifestAssets(),
       ...SDT.Icons.urls(),
     ];
+    // CSS 背景图补热（战斗背景/事件/宝箱/远征等全场大图，走 Vite 哈希管线）：
+    // CSSOM 里只有相对路径，需按所在样式表 href 解析成绝对 URL。主清单热完后的
+    // 空闲期再跑，不和上面的优先队列抢带宽。
+    const warmCssBackdropArt = () => {
+      const found = new Set();
+      const walkRules = (rules, base) => {
+        for (const rule of rules || []) {
+          if (rule.cssRules) walkRules(rule.cssRules, base);
+          const text = rule.cssText || '';
+          if (!text.includes('url(')) continue;
+          const re = /url\((['"]?)([^'")]+)\1\)/gi;
+          let m;
+          while ((m = re.exec(text))) {
+            const raw = m[2];
+            if (!raw || raw.startsWith('data:')) continue;
+            if (!/\.(webp|png|jpe?g|gif|svg)([?#]|$)/i.test(raw)) continue;
+            try { found.add(new URL(raw, base).href); } catch (_) { /* 相对路径解析失败就跳过 */ }
+          }
+        }
+      };
+      for (const sheet of Array.from(document.styleSheets)) {
+        try { walkRules(sheet.cssRules, sheet.href || location.href); } catch (_) { /* 读不了规则的样式表跳过 */ }
+      }
+      if (found.size) { try { SDT.Art.warm(Array.from(found)); } catch (_) {} }
+    };
+    const scheduleCssWarm = () => {
+      if ('requestIdleCallback' in window) requestIdleCallback(warmCssBackdropArt, { timeout: 8000 });
+      else setTimeout(warmCssBackdropArt, 4000);
+    };
     if (warmupTip && urls.length) {
       warmupTip.hidden = false;
       SDT.Art.warmBatched(urls, (done, total) => {
@@ -567,9 +604,9 @@ import { renderMiniMap } from './game.session.js';
           warmupTip.classList.add('done');
           setTimeout(() => { warmupTip.hidden = true; }, 600);
         }, 350);
-      }).catch(() => {});
+      }).then(scheduleCssWarm).catch(scheduleCssWarm);
     } else {
-      try { SDT.Art.warmBatched(urls).catch(() => {}); } catch (_) {}
+      try { SDT.Art.warmBatched(urls).then(scheduleCssWarm).catch(scheduleCssWarm); } catch (_) { scheduleCssWarm(); }
     }
     requestAnimationFrame(loop);
   });

@@ -4,6 +4,7 @@ import { showBackpack, setBagReturnHook } from './game.bag.js';
 
 let shopOnClose = null;
 let shopNotice = '';
+let shopPage = 'main';   // 'main' | 'sell'：从背包返回时回到离开前的那一页
 
 function createShopController({
   UI,
@@ -85,17 +86,21 @@ function createShopController({
     // 2026-09-12 留言：直接点击卡牌即可购买（价格挂卡面右上角标），不再点下面的金币钮
     const priceTag = `<span class="shop-price${afford ? '' : ' short'}">${slot.free ? '[[icon:paw]] 免费' : `[[icon:coin]] ${slot.price}`}</span>`;
     const shortAttr = afford ? '' : ' data-short="1"';
+    // 2026-09-13：货位是 div，Tab 走不到、读屏也读不出价格——补 button 语义（Enter/Space 由 bindShopKeys 触发）
+    const buyAttrs = (act, label) => `class="shop-slot buy" data-act="${act}" data-i="${index}"${shortAttr} role="button" tabindex="0" aria-label="${esc(label)}" title="${afford ? '点击购买' : '币不够'}"`;
     if (slot.shaReplenish != null) {
       if (slot.shaReplenish <= 0) return '<div class="shop-slot sold"><div class="shop-empty">初始攻击已补满</div></div>';
-      return `<div class="shop-slot buy" data-act="buySha" data-i="${index}"${shortAttr} title="${afford ? '点击购买' : '币不够'}">${cardHTML(slot.card)}${priceTag}
-        <span class="shop-slotnote">初始攻击 · 本站余 ${slot.shaReplenish}/5</span>
+      // 本站剩余张数并进价签：原来单独挂一行备注，把该格撑高 48px，同排价格签因此低 20px
+      return `<div ${buyAttrs('buySha', `补充初始攻击，${slot.price} 币，本站余 ${slot.shaReplenish} 张`)}>${cardHTML(slot.card)}
+        <span class="shop-price${afford ? '' : ' short'}">[[icon:coin]] ${slot.price} · 余 ${slot.shaReplenish}</span>
       </div>`;
     }
-    if (slot.mystery) return `<div class="shop-slot buy" data-act="buyCard" data-i="${index}"${shortAttr} title="${afford ? '点击购买' : '币不够'}"><div class="shop-empty">[[icon:dice]] 随机卡牌</div>${priceTag}</div>`;
-    return `<div class="shop-slot buy" data-act="buyCard" data-i="${index}"${shortAttr} title="${afford ? '点击购买' : '币不够'}">${cardHTML(slot.card)}${priceTag}</div>`;
+    if (slot.mystery) return `<div ${buyAttrs('buyCard', `购买神秘货箱，开出随机卡牌，${slot.price} 币`)}><div class="shop-empty">[[icon:dice]] 随机卡牌</div>${priceTag}</div>`;
+    return `<div ${buyAttrs('buyCard', `购买「${slot.card.name}」，${slot.price} 币`)}>${cardHTML(slot.card)}${priceTag}</div>`;
   }
 
   function renderShop() {
+    shopPage = 'main';
     const slots = game.shopStock.map(slotHTML).join('');
     const sellableCount = game.ownedCards.filter(owned => SDT.Cards.isSellable(owned.card)).length;
     UI.registerHelp('shop', {
@@ -109,9 +114,10 @@ function createShopController({
       <div class="pg shop-pg node-pg sc-shop" data-asset-key="scene-shop-bg">
         <header class="pg-head">
           <div class="shop-heading"><span class="shop-kicker">TACTICAL SUPPLY // 07</span><h2>[[icon:bag]] 冬境战术补给站 ${UI.helpBtn('shop')}</h2></div>
+          <button class="shop-bag-btn" data-act="shopOpenBag" title="打开背包整理卡牌">[[icon:bag]] 背包</button>
           <div class="shop-resources" data-act="shopOpenBag" title="点击打开背包" aria-label="远征资源（点击打开背包）"><span class="shop-resource"><small>持有卡牌</small><b id="resCards">${game.ownedCards.length}</b><em>张</em></span><span class="shop-resource coin"><small>当前金币</small><b id="resCoins">${game.coins}</b><em>币</em></span><span class="shop-resource"><small>背包容量</small><b id="resCap">${usedSlots()}/${bagCap()}</b><em>格</em></span></div>
         </header>
-          <div class="shop-toolbar"><div><b>补给清单</b><span>六个随机货位 · 能量饮料 · 初始攻击补充 · 神秘货箱</span></div><span class="shop-live" id="shopLive" aria-live="polite">${shopNotice || '选择一件补给查看价格'}</span></div>
+          <div class="shop-toolbar"><div><b>补给清单</b><span>六个随机货位 · 能量饮料 · 初始攻击补充 · 神秘货箱</span></div><span class="shop-live" id="shopLive" aria-live="polite">${shopNotice || '点击货位即可直接购买（价签＝价格）'}</span></div>
         <div class="shop-board" aria-label="商店商品">
           <div class="shop-board-grid">
             ${slots}
@@ -130,6 +136,7 @@ function createShopController({
 
   // 卖牌处二级界面：收购台（2026-09-10 留言 #23：只列出可以卖的牌，不再把不可卖的也铺出来置灰）
   function renderSellPage() {
+    shopPage = 'sell';
     const sellableOwned = game.ownedCards.filter(owned => SDT.Cards.isSellable(owned.card) && !owned.stored);   // 珍珠盒中存放的资源卡不在此列出（2026-09-10 #29）
     const total = sellableOwned.length;
     const rows = sellableOwned.map(owned => `
@@ -140,7 +147,7 @@ function createShopController({
     const ownedAll = game.ownedCards.length;
     const grid = total
       ? `<div class="shop-sell">${rows}</div>`
-      : '<p class="shop-sell-empty">背包里没有可以卖的卡牌——只有带「可出售」备注的卡（货币卡等）商店才收。</p>';
+      : `<p class="shop-sell-empty">背包里没有可以卖的卡牌（持有 ${ownedAll} 张）——只有带「可出售」备注的卡（货币卡等）商店才收。</p>`;
     UI.registerHelp('shopSell', {
       title: '卖牌处说明',
       html: `<p class="help-item"><b>收购规则</b>这里只显示可以卖的牌；默认卡牌不可出售，只有带「可出售」备注的卡（货币/宝石类等）才能卖给商店，收购价 = 卡面币值。</p>`,
@@ -150,10 +157,11 @@ function createShopController({
       <div class="pg shop-pg node-pg sc-shop" data-asset-key="scene-shop-bg">
         <header class="pg-head">
           <div class="shop-heading"><span class="shop-kicker">ACQUISITION DESK // 08</span><h2>[[icon:cards]] 收购台 ${UI.helpBtn('shopSell')}</h2><p>只收带有“可出售”备注的卡牌，其他卡不会出现在这里。</p></div>
+          <button class="shop-bag-btn" data-act="shopOpenBag" title="打开背包整理卡牌">[[icon:bag]] 背包</button>
           <div class="shop-resources"><span class="shop-resource coin"><small>当前金币</small><b>${game.coins}</b><em>币</em></span><span class="shop-resource"><small>可出售</small><b>${total}</b><em>张</em></span></div>
         </header>
         <div class="shop-board sell-board">
-          <p class="sell-tip">持有 ${ownedAll} 张 · 可卖 ${total} 张——其余卡没打「可出售」备注，商店不收（不在此显示）</p>
+          ${total ? `<p class="sell-tip">持有 ${ownedAll} 张 · 可卖 ${total} 张——其余卡没打「可出售」备注，商店不收（不在此显示）</p>` : ''}
           ${grid}
         </div>
         <button class="shop-back" data-act="backShop">[[icon:arrow]] 返回商店</button>
@@ -175,10 +183,26 @@ function createShopController({
       if (node) node.textContent = val;
     }
   }
+  // 货位是 div：补了 button 语义后键盘也要能买（Enter/Space），整页只绑一次
+  let shopKeysBound = false;
+  function bindShopKeys() {
+    if (shopKeysBound || !UI.el || !UI.el.ovBody) return;
+    shopKeysBound = true;
+    UI.el.ovBody.addEventListener('keydown', e => {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      const el = e.target.closest && e.target.closest('.shop-slot.buy[data-act], .shop-sellpost[data-act], .shop-bag-btn[data-act]');
+      if (!el) return;
+      e.preventDefault();
+      el.click();
+    });
+  }
   function registerShopActs() {
+    bindShopKeys();
     UI.act('shopOpenBag', () => {
       // 关闭背包后回到商店当前页（主商店/收购台），不再踢回地图
-      setBagReturnHook(() => { game.state = 'modal'; renderShop(); });
+      setBagReturnHook(() => { game.state = 'modal'; (shopPage === 'sell' ? renderSellPage : renderShop)(); });
+      // 战斗背包接口 SDT.Battle.commands.openBag 只在战斗内可用，非战斗态直接调会抛
+      // TypeError（实测：reading 'isBoss'）；showBackpack 是它的通用外壳，战斗中会自己转过去。
       showBackpack(true);
     });
     UI.act('buyCard', data => {

@@ -1726,6 +1726,7 @@ import { emit as busEmit } from './event-bus.js';
     const job = discoverQueue.shift();
     const options = [];
     const taken = new Set();
+    const names = new Set();   // 同名不同版（如「流血药水」道具/道具两张）算重复（2026-09-13 老板口径）
     // 旧任务格式兼容：rarity / otherCls 换算成谓词
     const legacyPred = job.rarity ? (c => c.rarity === job.rarity)
       : job.otherCls ? (c => c.rarity === '职业' && c.cls && c.cls !== G.myClass)
@@ -1733,13 +1734,15 @@ import { emit as busEmit } from './event-bus.js';
     const pred = job.pred || legacyPred;
     // 2026-09-09 留言 #9：三张候选不得重复——抽到已选中的就重抽，
     // 池子不足三张时有多少展示多少（原实现撞重直接跳过，经常只剩一两张可选）
+    // 2026-09-13 老板口径：同一个选择面板内不许重复——同名不同版也一并重抽
+    const clash = (c) => !!c && (taken.has(c.id) || names.has(c.name));
     for (let i = 0; i < 3 && options.length < 3; i++) {
       let c = randomDiscoverCard(pred, job.rarity, !job.pred && !job.rarity ? job.otherCls : null);
       let guard = 0;
-      while (c && taken.has(c.id) && guard++ < 40) {
+      while (clash(c) && guard++ < 40) {
         c = randomDiscoverCard(pred, job.rarity, !job.pred && !job.rarity ? job.otherCls : null);
       }
-      if (c && !taken.has(c.id)) { taken.add(c.id); options.push(c); }
+      if (c && !clash(c)) { taken.add(c.id); names.add(c.name); options.push(c); }
     }
     if (!options.length) { G.log('（没有符合条件的卡牌可发现）', 'dim'); return; }
     discovering = { options, n: job.n, rarity: job.rarity, pred: job.pred, act: job.act || null,

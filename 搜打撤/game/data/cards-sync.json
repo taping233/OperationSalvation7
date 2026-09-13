@@ -1,7 +1,8 @@
 {
-  "version": 17,
+  "version": 18,
   "note": "实机卡库定版覆盖批次数据（同步自网页版实机卡库）。由 scripts/sync-cards-from-live.mjs 生成，勿手改；重跑该脚本整份重写。",
   "changelog": [
+    "2026-09-13 删除恶魔之力 tt7-drunksong（同名双版收口只留 cc-demon，老板拍板）：从覆盖批次移入退役名单，版本 18 重播清旧档残卡；退役名单改为单调累积（脚本不再整份重写丢掉历史退役）",
     "2026-09-13 实机卡库同步（v17）：覆盖 18 / 新增 9 / 退役 1",
     "2026-09-12 实机卡库同步（v16）：覆盖 4 / 新增 0 / 退役 0",
     "2026-09-12 充能火山(tt8-hero-descender)补 cls=降临者（常无欲专属）",
@@ -252,20 +253,6 @@
       "unrandom": true
     },
     {
-      "cls": "牧师",
-      "cost": 0,
-      "desc": "受到3点伤害，抽 3 张牌。",
-      "dmg": 0,
-      "draw": 3,
-      "id": "tt7-drunksong",
-      "name": "恶魔之力",
-      "rarity": "职业",
-      "sellable": false,
-      "type": "法术",
-      "unrandom": true,
-      "value": 3
-    },
-    {
       "armor": 12,
       "cls": "战士",
       "cost": 2,
@@ -336,6 +323,7 @@
     }
   ],
   "retire": [
-    "tt6-timeskip"
+    "tt6-timeskip",
+    "tt7-drunksong"
   ]
 }

@@ -1375,11 +1375,15 @@ img[data-asset-key="card-wu-myriadswords"]{object-position:50% 40%!important}
 #overlay .battle-stage.sts .sts-nameplate .bt-hpwrap span{
   font-size:10.5px;color:#eaffea;text-shadow:0 1px 2px #000;line-height:9px;
 }
-/* #4+#6 站位终版（2026-09-13 留言：人和怪踩进街道近处地板；卡牌区下移后留在其上方） */
+/* #4+#6 站位终版（2026-09-13 留言：人和怪踩进街道近处地板；卡牌区下移后留在其上方）
+   2026-09-13 老板留言复检：脚底（立绘底，名牌之上）从 78.8% 上移到 ~70% = .sts-arena 底/
+   .sts-hud 顶分界线（720 视口实测 arena 底 500px）。
+   2026-09-13 二次口令：地板再升到点击位 ~67%（-8.5vh → -5vh，实测脚底 70.6% → ~67%）。
+   名牌（static、约 57px 高）允许垂入其下方。用 vh 保持不同窗口高度下比例。 */
 body #overlay .battle-stage.sts .sts-unit,
 body #overlay .battle-stage.sts .sts-foes,
 body #overlay .battle-stage.sts .sts-allies,
-body #overlay .battle-stage.sts .sts-me{bottom:-124px!important}
+body #overlay .battle-stage.sts .sts-me{bottom:-5vh!important}
 /* #7 怪物死亡不残留虚影和假血条：死亡单位整体移出画面 */
 #overlay .battle-stage.sts .sts-foe.dead,
 #overlay .battle-stage.sts .sts-unit.dead{display:none!important}
@@ -1430,9 +1434,13 @@ body #overlay .battle-stage.sts .sts-me{bottom:-124px!important}
 /* #3 手牌下移 + 底部黑边去除 */
 #overlay .card.battle{background:transparent!important;border:0;box-shadow:none}
 #overlay .card.battle #ovBody{margin:0}
-/* 留言（同批追加）：卡面常态只露出一半（沉入约一半卡高），hover 浮出完整卡面 */
-body #overlay .battle-stage.sts .sts-hand .bt-slot{bottom:-76px!important}
-body #overlay .battle-stage.sts .sts-hand .bt-slot:hover .bt-card:not(.off):not(.aim-lift){transform:translateY(-96px) scale(1.04)!important}
+/* 留言（同批追加）：卡面常态只露出一半（沉入约一半卡高），hover 浮出完整卡面
+   2026-09-13 留言：卡牌稍微上移（-76px → -58px），黑底同步压缩见 expedition-battle.css */
+/* 2026-09-13 老板口令：地板抬高后卡牌不再沉底，完全露出（14px 抵消 .sts-hand margin-bottom:-14px，卡底贴屏底） */
+body #overlay .battle-stage.sts .sts-hand .bt-slot{bottom:14px!important}
+/* 2026-09-13 老板口令：卡面上升到屏幕三分之二线。悬停时卡面展开长高 ~66px（槽底锚定向上长）。
+   卡牌改完全露出后静置卡顶 ~76%，展开+小幅位移即可到 2/3 线（-12px，实测微调） */
+body #overlay .battle-stage.sts .sts-hand .bt-slot:hover .bt-card:not(.off):not(.aim-lift){transform:translateY(-12px) scale(1.04)!important}
 #overlay .battle-stage.sts .sts-hand{padding-bottom:0;margin-bottom:-14px}
 
 /* ===== 2026-09-13 留言批次十一（夜城色调统一 + 伤害/掉血动画增强）===== */
@@ -1452,3 +1460,33 @@ body #overlay .battle-stage.sts .sts-hand .bt-slot:hover .bt-card:not(.off):not(
 /* 夜城色调：战斗文字统一暖金/月白，与夜城背景同调 */
 #overlay .battle-stage.sts{color:#eee9df}
 #overlay .battle-stage.sts .sts-topbar .sts-encounter b{color:#ffe9b8}
+
+/* ===== 2026-09-13 屏幕级进出过渡（所有界面进出都有过渡动画；boss 留言 #52 延伸） =====
+   覆盖范围：标题页/告别屏/留言信箱的出入场、HUD 侧栏进对局淡入、环层横幅换层演出、
+   预热提示条入场。overlay 弹层与房间页沿用既有 pgIn/pgOut/cardSwap/瞬隐口径不变。 */
+@keyframes scrIn { from { opacity: 0; transform: translateY(12px) scale(.996); } }
+@keyframes scrFadeOut { to { opacity: 0; } }
+/* 标题页/告别屏：display:none→显示时自动重播入场；JS 加 .scr-out 走淡出，动画结束才置 hidden */
+#title, #exitScr { animation: scrIn .34s cubic-bezier(.22,1,.36,1) both; }
+#title.scr-out, #exitScr.scr-out, #sugLayer.scr-out { animation: scrFadeOut .22s ease-in forwards; }
+/* 留言信箱入场已有 ovFadeIn（overlays.css），这里只接管退场 */
+/* 预热提示条入场（淡出走既有 .done transition） */
+@keyframes warmupIn { from { opacity: 0; transform: translateY(8px); } }
+#warmupTip { animation: warmupIn .4s ease both; }
+/* 环层横幅换层演出：ui.js 换层时重播（保留 translateX(-50%) 居中，禁改） */
+@keyframes lbSwap { from { opacity: 0; transform: translateX(-50%) translateY(-10px); } }
+#layerBanner.lb-swap { animation: lbSwap .45s cubic-bezier(.22,1,.36,1); }
+/* HUD 组进对局淡入：lobby 移除/全屏页关闭后 display 恢复时自动重播一次 */
+@keyframes hudIn { from { opacity: 0; transform: translateY(10px); } }
+@keyframes hudInBanner { from { opacity: 0; transform: translateX(-50%) translateY(10px); } }
+body:not(.lobby) #sidebar, body:not(.lobby) #topBtns, body:not(.lobby) #resHud { animation: hudIn .32s cubic-bezier(.22,1,.36,1) both; }
+body:not(.lobby) #layerBanner { animation: hudInBanner .4s cubic-bezier(.22,1,.36,1) both; }
+/* 减少动态效果：以上过渡全部豁免（设置开关 + 系统偏好双通道） */
+body.reduce-motion #title, body.reduce-motion #exitScr, body.reduce-motion #sugLayer.scr-out,
+body.reduce-motion #warmupTip, body.reduce-motion #layerBanner.lb-swap,
+body.reduce-motion #sidebar, body.reduce-motion #topBtns, body.reduce-motion #resHud,
+body.reduce-motion #layerBanner { animation: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  #title, #exitScr, #sugLayer.scr-out, #warmupTip, #layerBanner.lb-swap,
+  #sidebar, #topBtns, #resHud, #layerBanner { animation: none !important; }
+}

@@ -53,7 +53,14 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body { height: 100%; background: var(--ink); color: var(--txt); overflow: hidden;
     font-family: var(--font-ui);
-    -webkit-font-smoothing: antialiased; }
+    -webkit-font-smoothing: antialiased;
+    /* 界面文字不可选中：避免玩到一半把 HUD / 卡面说明刷蓝，也堵掉框选后 Ctrl+C 复制 */
+    user-select: none; }
+  /* 图片不可拖拽：卡面、立绘、图标都无法拖出窗口另存（等价于 draggable="false"，
+     与 art.js / icons-bitmap.js 生成的图片属性保持一致） */
+  img { -webkit-user-drag: none; }
+  /* 输入与可编辑区保留正常文本选择：留言、卡牌制作、导入导出的 JSON 仍要能选中复制 */
+  input, textarea, [contenteditable="true"] { user-select: text; }
   ::selection { background: rgba(171,171,171,.30); }
   ::-webkit-scrollbar { width: 9px; height: 9px; }
   ::-webkit-scrollbar-track { background: transparent; }

@@ -65,6 +65,26 @@
 #title .ak-sec b { padding: 2px 6px; color: var(--exp-gold); border: 0; background: none; font-size: 15px; }
 #title .ak-bp, #title .ak-plus, #title .ak-line1 { display: none; }
 #title .title-quote { bottom: 3.5%; left: 5.4%; color: #a5b8c47a; font-size: 9px; letter-spacing: 2px; border: 0; padding: 0; }
+
+/* 开发者节点测试面板（标题页左侧、快速参考下方；仅开发者模式可见，显隐见 notes.syncDevVisibility）。
+   位置避开右列菜单轴与底部「开始探索」，窄窗口下依旧落在左侧空白区。 */
+#title .title-dev {
+  position: absolute; left: 28px; top: 96px; z-index: 5; width: 306px;
+  padding: 12px 12px 10px; border: 1px solid #dfc28d55; border-radius: 2px;
+  background: #08161fe0; color: var(--exp-text); font: 12px var(--font-ui);
+}
+#title .title-dev[hidden] { display: none; }
+.title-dev .td-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+.title-dev .td-head span:first-child { color: var(--exp-gold); font-size: 12px; letter-spacing: 2px; }
+.title-dev .td-en { font: 9px 'Cascadia Code', monospace; letter-spacing: 1px; color: var(--exp-muted); }
+.title-dev .td-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+.title-dev .td-grid button {
+  padding: 7px 4px; border: 1px solid #597180a8; border-radius: 2px;
+  background: #142633c9; color: var(--exp-text); font: 12px var(--font-ui); letter-spacing: 1px;
+  cursor: pointer; transition: background .16s, border-color .16s;
+}
+.title-dev .td-grid button:hover { background: #25414f; border-color: var(--exp-gold); }
+.title-dev .td-tip { margin: 8px 0 0; font-size: 10px; letter-spacing: 1px; color: var(--exp-muted); }
 body.lobby #logPanel, body.page-opaque #logPanel { display: none; }
 
 /* Compact expedition dashboard, with actual legal routes as the primary action. */

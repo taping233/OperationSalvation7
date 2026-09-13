@@ -15,17 +15,39 @@ import { Random } from './random.js';
   const KINDS = () => SDT.MAP.chestKinds;
   const rndInt = (a, b) => a + Math.floor(Random.random('loot') * (b - a + 1));
 
+  // 同一面板去重（2026-09-13 老板口径：同一个选择面板内不许重复）：
+  // 除同 id 外，卡名相同的不同版本（如「冰冻药水」有法术/道具两张）在面板里
+  // 看起来也是同一张牌，一并算重复。ids 同时喂给 cards.js 随机池排除
+  // （pickOfRarity / randomDropCard 的 taken 按 id 判重）。
+  function panelSeen() {
+    const ids = new Set(), names = new Set();
+    return {
+      ids,
+      dup: (card) => !card || ids.has(card.id) || names.has(card.name),
+      add: (card) => { ids.add(card.id); names.add(card.name); },
+    };
+  }
+
   // 掷一个宝箱的完整内容：cards=开出的卡（中宝箱为 3 选 1 候选），coins=内含币
   function rollContents(kind, isClass) {
     const K = KINDS()[kind] || KINDS().small;
     const c = { kind, cards: [], coins: 0, isClass: !!isClass };
+    const seen = panelSeen();
     // 职业宝箱：只掉落本职业的职业卡牌（2026-09-06）
     if (isClass && kind !== 'boss') {
       const pool = (G && G.myClass ? SDT.Cards.classPool(G.myClass) : []).filter(x => x.rarity === '职业');
       const n0 = K.pickFrom || K.cards || 0;
-      for (let i = 0; i < n0; i++) {
-        if (!pool.length) break;
-        c.cards.push(pool[Math.floor(Random.random('loot') * pool.length)]);
+      // 职业卡池很浅（每个职业只有 4 张）：三选一不去重时撞出重复牌的概率高达 62.5%。
+      // 挑不满就少给几张（池子里有多少给多少），不拿重复牌凑数。
+      for (let i = 0; i < Math.min(n0, pool.length); i++) {
+        let pick = null;
+        for (let guard = 0; guard < 40; guard++) {
+          const card = pool[Math.floor(Random.random('loot') * pool.length)];
+          if (!seen.dup(card)) { pick = card; break; }
+        }
+        if (!pick) break;
+        seen.add(pick);
+        c.cards.push(pick);
       }
       if (K.coins) c.coins = rndInt(K.coins[0], K.coins[1]);
       return c;
@@ -33,18 +55,26 @@ import { Random } from './random.js';
     // 随机卡池（2026-09-08 定版爆率）：只开 武术/法术/装备/道具/资源 五类，
     // 稀有度 古朴:稀有:史诗:传说 = 60:28:9:3，同稀有度内均分、道具 ×0.7；
     // 初始/职业/衍生/棱彩/生物不直接生成
-    // （统一走 SDT.Cards.randomDropCard，职业卡只能从职业卡池获取）；同一宝箱内尽量不重复
-    const taken = new Set();
+    // （统一走 SDT.Cards.randomDropCard，职业卡只能从职业卡池获取）；同一宝箱内不重复
     const n = K.pickFrom || K.cards || 0;
     for (let i = 0; i < n; i++) {
-      // mode 由流程层读门面后传入（2026-09-11 架构批次 1：cards 数据模块不读全局会话）
-      const card = SDT.Cards.randomDropCard(taken, (SDT.game && SDT.game.mode) || null);
-      if (card) { taken.add(card.id); c.cards.push(card); }
+      let card = null;
+      for (let guard = 0; guard < 40 && !card; guard++) {
+        // mode 由流程层读门面后传入（2026-09-11 架构批次 1：cards 数据模块不读全局会话）
+        const got = SDT.Cards.randomDropCard(seen.ids, (SDT.game && SDT.game.mode) || null);
+        if (!got) break;
+        // 只撞卡名（不同版本的同一张牌）时，记下 id 再抽一张，别停下
+        if (seen.dup(got)) { seen.ids.add(got.id); continue; }
+        card = got;
+      }
+      if (!card) break;
+      seen.add(card);
+      c.cards.push(card);
     }
     // 宠物蛋（2026-09-09 需求 #2）：固定 0.7% 爆率额外开出（不占随机卡池，unrandom）
     if (Random.random('loot') < 0.007) {
       const egg = (SDT.Cards.all() || []).find(x => x.id === 'pet-egg');
-      if (egg) { c.cards.push(egg); c.eggHit = true; }
+      if (egg && !seen.dup(egg)) { seen.add(egg); c.cards.push(egg); c.eggHit = true; }
     }
     // —— 宝箱保底（2026-09-09 试玩反馈；设计者定版权重 60:28:9:3 不动）——
     // 中宝箱（3 选 1）整包全古朴的概率约 21.6%，体验很差：保底至少 1 张「稀有」+；
@@ -57,22 +87,29 @@ import { Random } from './random.js';
       const tiers = [SDT.Cards.RARITIES[needRi], '传说', '史诗', '稀有']
         .filter(r => riOfCard({ rarity: r }) >= needRi);
       for (const tier of tiers) {
-        const up = SDT.Cards.pickOfRarity(tier, taken);
-        if (up) { c.cards[c.cards.length - 1] = up; taken.add(up.id); c.pity = tier; break; }
+        let up = null;
+        for (let guard = 0; guard < 20 && !up; guard++) {
+          const cand = SDT.Cards.pickOfRarity(tier, seen.ids);
+          if (!cand) break;
+          if (seen.dup(cand)) { seen.ids.add(cand.id); continue; }   // 只撞卡名（不同版本）→ 记下再挑一张
+          up = cand;
+        }
+        if (up) { c.cards[c.cards.length - 1] = up; seen.add(up); c.pity = tier; break; }
       }
     }
     if (K.coins) c.coins = rndInt(K.coins[0], K.coins[1]);
     // BOSS宝箱：金币/银币/铜币其一 + 30% 员工通行证B（都是卡牌，直接并入 cards）
     // 注意：币名要先取好再 find——把随机取名写进 find 回调会对每张库卡重新随机
+    // 追加卡也要查重：员工通行证B 本身可被随机开出，原实现会「随机 1 张 + 30% 再发 1 张」同名牌双份
     const lib = SDT.Cards.all();
     if (K.coinCards && K.coinCards.length) {
       const cname = K.coinCards[Math.floor(Random.random('loot') * K.coinCards.length)];
       const coin = lib.find(x => x.name === cname);
-      if (coin) c.cards.push(coin);
+      if (coin && !seen.dup(coin)) { seen.add(coin); c.cards.push(coin); }
     }
     if (K.tokenChance && Random.random('loot') < K.tokenChance) {
       const token = lib.find(x => x.id === 'tt-token-gold');
-      if (token) { c.cards.push(token); c.tokenHit = true; }
+      if (token && !seen.dup(token)) { seen.add(token); c.cards.push(token); c.tokenHit = true; }
     }
     return c;
   }

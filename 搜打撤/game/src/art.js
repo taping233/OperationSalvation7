@@ -4,6 +4,7 @@ import { characterFor, CHARACTERS } from './characters.js';
   'use strict';
 import { BUILD_VERSION, assetUrl } from './asset-url.js';
 import { DATA } from './data-loader.js';
+import ART_MANIFEST from './generated/art-manifest.js';
 
   
   const ROOT = 'assets/';
@@ -38,6 +39,14 @@ import { DATA } from './data-loader.js';
   // 位图预解码池（用空间换时间）：warm(url) 把文件拉进缓存并提前解码，
   // 之后 <img> 首次渲染零解码延迟。重复 warm 同一地址直接跳过。
   const warmedUrls = new Set();
+  // 持有已预热 Image 的引用：不持有时浏览器可能把刚解码完的位图回收，
+  // 首次渲染又要重解码。池子上限兜底，超出按 FIFO 淘汰最早一批。
+  const warmPool = [];
+  const WARM_POOL_CAP = 800;
+  function retainWarmed(im) {
+    warmPool.push(im);
+    if (warmPool.length > WARM_POOL_CAP) warmPool.shift();
+  }
   function warm(urls) {
     for (let u of urls) {
       if (!u || warmedUrls.has(u)) continue;
@@ -46,6 +55,7 @@ import { DATA } from './data-loader.js';
       im.decoding = 'async';
       im.onload = () => { try { im.decode?.()?.catch?.(() => {}); } catch (_) {} };
       im.src = u;
+      retainWarmed(im);
     }
   }
   function image(src, cls, alt, key, style) {
@@ -198,14 +208,27 @@ function characterArt(value, full=false) {
     collectCardAssets(cards) {
       const urls = [];
       const push = (html) => { const m = /src="([^"]+)"/.exec(html || ''); if (m) urls.push(m[1]); };
-      if (Array.isArray(cards)) for (const c of cards) { try { push(this.cardIcon(c)); } catch (_) {} }
+      // 立绘优先（2026-09-13 老板：立绘加载卡顿）——战斗首屏的敌人/角色立绘排在卡面前面
       for (const id of MONSTER_IDS) { try { push(this.monsterArt(id)); } catch (_) {} }
       for (const name of Object.values(CLASS_NAMES)) {
         try { push(this.classFullArt(name)); } catch (_) {}
         try { push(this.classAvatarArt(name)); } catch (_) {}
         try { push(this.battleArt(name)); } catch (_) {}
       }
+      if (Array.isArray(cards)) for (const c of cards) { try { push(this.cardIcon(c)); } catch (_) {} }
       return urls;
+    },
+    // 全量清单补热（art-manifest.js 由 vite.config 构建期扫描 RUNTIME 资产目录生成）：
+    // 覆盖序列帧（portraits/frames）、战场剪裁图（portraits/cut）等运行时零散引用的图。
+    // URL 一律走 assetUrl 与 <img>/Pixi Assets 同键（含 ?v= 构建号），预热即命中缓存；
+    // 与 collectCardAssets 的重合项由 warmBatched 内部去重。顺序按战斗相关度排。
+    collectManifestAssets() {
+      const rank = (p) => {
+        const groups = ['portraits', 'scenes', 'cards', 'icons', 'ui/'];
+        const i = groups.findIndex(g => p === g || p.startsWith(g));
+        return i < 0 ? groups.length : i;
+      };
+      return [...ART_MANIFEST].sort((a, b) => rank(a) - rank(b)).map(p => assetUrl(`assets/${p}`));
     },
     // 2026-09-08 老板：预热改启动时强制进行并显示进度。分小批加载+解码（decode 离线），
     // 每张完成即回调 onProgress(done,total)；已预热过的 URL 直接计入完成。
@@ -234,6 +257,7 @@ function characterArt(value, full=false) {
             im.onload = () => { try { im.decode?.()?.catch?.(() => {}); } catch (_) {} one(); };
             im.onerror = one;
             im.src = u;
+            retainWarmed(im);
           }
         };
         next();

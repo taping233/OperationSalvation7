@@ -26,6 +26,7 @@ import { renderExpeditionPanel } from './expedition.view.js';
         btnExport: $('btnExport'), btnImport: $('btnImport'), btnClear: $('btnClear'),
         devTools: $('devTools'), devDice: $('devDice'),
         devBattle: $('devBattle'), devBoss: $('devBoss'),
+        titleDev: $('titleDev'),
         btnCardDesigner: $('btnCardDesigner'), btnCardLib: $('btnCardLib'),
         viewport: $('viewport'),
         layerZh: $('layerBannerZh'), layerEn: $('layerBannerEn'),
@@ -279,6 +280,13 @@ import { renderExpeditionPanel } from './expedition.view.js';
         this._lastBannerLayer = layer;
         this.el.layerZh.textContent = layer ? layer.name : '—';
         this.el.layerEn.textContent = layer && layer.nameEn ? layer.nameEn : '';
+        // 换层演出：横幅重播一次滑入（一次性动画走合成器；reduce-motion 由 CSS 豁免）
+        const banner = this.el.layerZh.closest('#layerBanner');
+        if (banner) {
+          banner.classList.remove('lb-swap');
+          void banner.offsetWidth;
+          banner.classList.add('lb-swap');
+        }
       }
       const turn = game.turn - 1;
       if (this._lastTurn !== turn) {
@@ -411,6 +419,43 @@ import { renderExpeditionPanel } from './expedition.view.js';
       if (card) card.classList.remove('room');
     },
 
+    // ---------- 顶层屏幕进出（标题页/告别屏/留言信箱这类 hidden 直切元素） ----------
+    // boss 留言 #52（所有界面退出都有过渡动画）延伸到屏幕级：入场动画由 CSS 在
+    // display:none→显示时自动重播，这里只负责退场类与隐藏时机；reduce-motion 瞬时完成。
+    showScreen(el) {
+      if (!el) return;
+      el._scrToken = (el._scrToken || 0) + 1;   // 作废进行中的隐藏计时
+      el._scrHiding = false;
+      el.classList.remove('scr-out');
+      el.style.pointerEvents = '';
+      el.hidden = false;
+    },
+
+    hideScreen(el, after) {
+      if (!el) return;
+      if (el.hidden) { if (after) after(); return; }
+      if (el._scrHiding) return;   // 淡出中防重入
+      el._scrHiding = true;
+      el._scrToken = (el._scrToken || 0) + 1;
+      const token = el._scrToken;
+      if (SDT.Motion && SDT.Motion.reduceMotion()) {
+        el._scrHiding = false;
+        el.hidden = true;
+        if (after) after();
+        return;
+      }
+      el.classList.add('scr-out');
+      el.style.pointerEvents = 'none';   // 淡出窗口内拦截点击，防连点重入
+      setTimeout(() => {
+        el.style.pointerEvents = '';
+        el._scrHiding = false;
+        if (el._scrToken !== token) return;   // 期间被 showScreen 重新拉起
+        el.classList.remove('scr-out');
+        el.hidden = true;
+        if (after) after();
+      }, 240);
+    },
+
     showOverlay(title, bodyHtml, mode) {
       // 失败/清空类标题用红色语义
       if (this._hideTimer) { clearTimeout(this._hideTimer); this._hideTimer = null; }
@@ -444,6 +489,9 @@ import { renderExpeditionPanel } from './expedition.view.js';
       this.el.overlay.classList.toggle('room-view', mode === 'battle' || (this._roomActive && mode !== 'chest' && mode !== 'discover'));
       this.el.overlay.classList.toggle('bag-full', mode === 'bagpage');
       this.el.overlay.classList.toggle('opaque', mode === 'page' || mode === 'bagpage');
+      // 撤离失败页（2026-09-13 留言：UI 重做 + 背景透明）：标记在 overlay 上，
+      // 让该页脱离 room-view 的整屏不透明底，改走半透明暗纱 + 玻璃面板
+      this.el.overlay.classList.toggle('fx-doom', mode === 'doom');
       // 已打开状态下且弹窗模式变化（场景→战斗→结算等）时重播滑入动画；
       // 战斗内反复 render（同模式）不重播，避免每出一张卡就闪一次
       // 2026-09-12 留言 #33：page 页之间的返回/前进导航也重播入场动画（battle/bag 等高频重绘模式除外）
@@ -489,7 +537,9 @@ import { renderExpeditionPanel } from './expedition.view.js';
       this._hoverHandler = null;
       SDT.Sound.sfx('close');
       const card = this.el.ovBody.parentElement;
-      // 不透明整屏页淡出：boss 留言 #52 要求所有界面退出都有过渡动画（200ms 淡出+下移）
+      // 不透明整屏页淡出：boss 留言 #52 要求所有界面退出都有过渡动画（200ms 淡出+下移）；
+      // room-view（战斗/房间页）例外保持瞬隐——留言 #33 实测整屏淡出每帧全屏重合成是
+      // 「继续」卡顿来源，性能口径优先（overlays.css 有同步注释）
       const instant = this.el.overlay.classList.contains('room-view');
       const finish = () => {
         this._hideTimer = null;
@@ -506,6 +556,7 @@ import { renderExpeditionPanel } from './expedition.view.js';
         this.el.overlay.classList.remove('closing');
         this.el.overlay.classList.remove('opaque');
         this.el.overlay.classList.remove('bag-full');
+        this.el.overlay.classList.remove('fx-doom');
         this.el.overlay.hidden = true;
       };
       if (instant) { finish(); return; }

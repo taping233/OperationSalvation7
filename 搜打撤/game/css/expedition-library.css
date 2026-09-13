@@ -62,6 +62,91 @@
   #overlay .card-library-page .clib-main { padding:16px; }
   #overlay .card-library-page .library-preview { display:none; }
 }
+/* ============ 档案馆动画与彩蛋（2026-09-13 留言）============
+   留言：「给卡牌库多加一些动画和彩蛋，不要全部用一个主色调，适当使用第二和第三个色调」。
+   主色仍是档案金 #dfc28d；第二色=青玉 #5fc9c0（筛选导航/输入焦点），
+   第三色=紫晶 #c79bff（空态/危险操作/全息彩蛋）。
+   本段全部规则都带 body.cardlib-open 前缀 + !important：cards.css 的牌库去动画禁令是
+   (1,1,2) 的 !important，只有更高优先级才能逐条豁免；豁免原则沿用 09-08 定调——
+   只放 transform/opacity（合成器线程），filter/drop-shadow 类重绘仍然全禁。 */
+body.cardlib-open #overlay .card-library-page { --lib-c1:#dfc28d; --lib-c2:#5fc9c0; --lib-c3:#c79bff; }
+
+/* 第二色调：当前页签、命中数、筛选栏分隔、输入焦点、按钮悬停 */
+body.cardlib-open #overlay .card-library-page .type-tab.on {
+  border-color:var(--lib-c2)!important; background:rgba(95,201,192,.13)!important;
+  box-shadow:inset 3px 0 var(--lib-c2)!important; }
+body.cardlib-open #overlay .card-library-page .type-tab.on em { color:var(--lib-c2)!important; }
+body.cardlib-open #overlay .card-library-page .type-tab:not(.on):hover { background:rgba(95,201,192,.09)!important; color:#dff1f0!important; }
+body.cardlib-open #overlay .card-library-page .library-filter-head { border-bottom-color:rgba(95,201,192,.32)!important; }
+body.cardlib-open #overlay .card-library-page .clib-count b:last-of-type { color:var(--lib-c2)!important; }
+body.cardlib-open #overlay .card-library-page .clib-search:focus,
+body.cardlib-open #overlay .card-library-page .pg-select:focus {
+  border-color:var(--lib-c2)!important; box-shadow:0 0 0 2px rgba(95,201,192,.20)!important; outline:none!important; }
+body.cardlib-open #overlay .card-library-page .hs-btn:hover { border-color:var(--lib-c2)!important; transform:translateY(-1px)!important; }
+body.cardlib-open #overlay .card-library-page .hs-btn.gold:hover { box-shadow:0 0 14px rgba(223,194,141,.42)!important; transform:translateY(-1px)!important; }
+
+/* 第三色调：空态图标、危险操作悬停、关闭按钮悬停 */
+body.cardlib-open #overlay .card-library-page .clib-empty-icon { color:var(--lib-c3)!important; }
+body.cardlib-open #overlay .card-library-page .hs-btn.danger:hover { color:var(--lib-c3)!important; border-color:rgba(199,155,255,.62)!important; }
+body.cardlib-open #overlay .card-library-page .pg-close:hover { color:var(--lib-c3)!important; }
+
+/* 控件过渡复位（被去动画禁令一并停用，这里按元素逐个开回来，仍只跑颜色/位移） */
+body.cardlib-open #overlay .card-library-page .hs-btn,
+body.cardlib-open #overlay .card-library-page .type-tab,
+body.cardlib-open #overlay .card-library-page .pg-close,
+body.cardlib-open #overlay .card-library-page .clib-search,
+body.cardlib-open #overlay .card-library-page .pg-select {
+  transition:background-color .16s ease, border-color .16s ease, color .16s ease,
+    box-shadow .16s ease, transform .12s ease!important; }
+
+/* 入场：卡格错峰上浮。只放前 24 格（首屏 5 列约 5 行），越界卡不跑动画 */
+@keyframes libItemIn { from { opacity:0; transform:translateY(14px) scale(.97); } }
+body.cardlib-open #overlay .card-library-page .lib-item:nth-child(-n+24) {
+  animation:libItemIn .38s cubic-bezier(.22,1,.36,1) backwards!important;
+  animation-delay:calc(var(--i,0) * 26ms)!important; }
+/* 每次重绘（换筛选/搜索）卡格整体淡入，给「列表换了」一个即时反馈 */
+@keyframes libGridIn { from { opacity:0; } }
+body.cardlib-open #overlay .card-library-page .lib-grid { animation:libGridIn .2s ease!important; }
+
+/* 命中数脉冲：只在数字真的变化时由 renderLibGrid 挂 .bump */
+@keyframes libCountBump { 0% { transform:scale(1); } 34% { transform:scale(1.55); color:var(--lib-c2); } 100% { transform:scale(1); } }
+body.cardlib-open #overlay .card-library-page .clib-count b.bump {
+  display:inline-block; animation:libCountBump .44s cubic-bezier(.22,1.4,.36,1)!important; }
+
+/* 卡面悬停光泽：只动 opacity（伪元素斜向扫光），不做滤镜重绘 */
+body.cardlib-open #overlay .card-library-page .lib-cardwrap { position:relative; }
+body.cardlib-open #overlay .card-library-page .lib-cardwrap::after {
+  content:''; position:absolute; inset:0; pointer-events:none; opacity:0; border-radius:inherit;
+  background:linear-gradient(120deg, transparent 33%, rgba(223,194,141,.17) 46%, rgba(95,201,192,.19) 56%, transparent 68%);
+  transition:opacity .18s ease!important; }
+body.cardlib-open #overlay .card-library-page .lib-cardwrap:hover::after { opacity:1; }
+
+/* 彩蛋 1：连点「卡牌档案馆」标题三次 → 首屏卡面波浪翻牌（libWaveEgg 挂 .lib-wave，1800ms 后摘） */
+@keyframes libWaveFlip {
+  0% { transform:rotateY(0) translateY(0); }
+  38% { transform:rotateY(-26deg) translateY(-11px); }
+  100% { transform:rotateY(0) translateY(0); } }
+body.cardlib-open #overlay .lib-grid.lib-wave { perspective:1000px; }
+body.cardlib-open #overlay .lib-grid.lib-wave .lib-item:nth-child(-n+24) .hs-card {
+  animation:libWaveFlip .8s cubic-bezier(.3,1.2,.4,1)!important;
+  animation-delay:calc(var(--i,0) * 34ms)!important; transform-origin:left center; }
+
+/* 彩蛋 2：稀有度筛到「棱彩」→ 首屏卡面依次过一道幻彩扫光（libHoloEgg 挂 .lib-holo，2300ms 后摘） */
+@keyframes libHoloSweep {
+  0% { opacity:0; transform:translateX(-130%) skewX(-18deg); }
+  16% { opacity:.92; }
+  100% { opacity:0; transform:translateX(150%) skewX(-18deg); } }
+body.cardlib-open #overlay .lib-grid.lib-holo .lib-cardwrap { overflow:hidden; }
+body.cardlib-open #overlay .lib-grid.lib-holo .lib-item:nth-child(-n+24) .lib-cardwrap::before {
+  content:''; position:absolute; top:-12%; bottom:-12%; left:0; width:40%; pointer-events:none; opacity:0;
+  background:linear-gradient(105deg, transparent, rgba(199,155,255,.58), rgba(95,201,192,.52), transparent);
+  animation:libHoloSweep .95s ease-in-out!important;
+  animation-delay:calc(var(--i,0) * 40ms)!important; }
+
+/* 空态图标：常驻缓浮（空页面上唯一在动的东西，克制） */
+@keyframes libFloat { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-7px); } }
+body.cardlib-open #overlay .card-library-page .clib-empty-icon { animation:libFloat 3.2s ease-in-out infinite!important; }
+
 @media(max-width:620px) {
   #overlay .card-library-page { overflow:auto; }
   #overlay .card-library-page .clib-main { display:flex; flex-direction:column; overflow:visible; }
@@ -72,4 +157,212 @@
   #overlay .card-library-page .lib-item:nth-child(5n) { border-right:1px solid rgba(182,211,214,.2); }
   #overlay .card-library-page .lib-item:nth-child(2n) { border-right:0; }
   #overlay .card-library-page .lib-cardwrap .hs-card { min-height:240px; }
+}
+
+/* ============ 画廊版重设计（2026-09-13 留言：卡牌库要更高级）============
+   诊断：旧版像后台管理表格——1px 网格线、灰底按钮挂在每张卡下面、深蓝底饱和度硬。
+   改法：换成「私人档案展廊」——取消网格线与灰按钮，卡面各自悬浮在大留白上，
+   用细金线、字距和明暗层次做秩序感；操作按钮收进卡底的操作抽屉，悬停才出现。
+   三色调口径不变：金=主体，青玉=交互反馈，紫晶=空态/危险。
+   全部规则沿用 body.cardlib-open 前缀 + !important 压过牌库去动画禁令。 */
+body.cardlib-open #overlay .card-library-page {
+  --lib-bg:#070c12; --lib-line:rgba(223,194,141,.13); --lib-line2:rgba(255,255,255,.07);
+  --lib-txt:#e9eff2; --lib-dim:#78878f; --lib-dim2:#5d6a71;
+  background:
+    radial-gradient(130% 72% at 50% -12%, rgba(223,194,141,.075), transparent 60%),
+    radial-gradient(96% 66% at 102% 100%, rgba(95,201,192,.10), transparent 62%),
+    radial-gradient(78% 58% at -8% 92%, rgba(199,155,255,.075), transparent 60%),
+    var(--lib-bg)!important;
+  color:var(--lib-txt)!important; }
+
+/* ---- 展头：海报式排版，标题吃字距，计数当展品编号 ---- */
+body.cardlib-open #overlay .card-library-page .library-head {
+  grid-template-columns:minmax(0,1fr) auto auto!important;
+  grid-template-areas:'title count close' 'tools tools tools'!important;
+  gap:16px 26px!important; padding:30px 46px 22px!important;
+  background:transparent!important; border-bottom:1px solid var(--lib-line)!important; align-items:end!important; }
+body.cardlib-open #overlay .card-library-page .library-kicker {
+  color:var(--lib-c1)!important; font:700 9.5px ui-monospace,monospace!important;
+  letter-spacing:.4em!important; opacity:.9; }
+body.cardlib-open #overlay .card-library-page .library-kicker::before {
+  content:''; display:inline-block; width:26px; height:1px; margin-right:10px;
+  background:var(--lib-c1); vertical-align:middle; opacity:.7; }
+body.cardlib-open #overlay .card-library-page .library-title h2 {
+  display:block!important; margin:12px 0 8px!important;
+  font:600 30px/1.3 'SimSun',serif!important; color:#f2f7f9!important;
+  letter-spacing:11px!important; text-shadow:0 3px 30px rgba(0,0,0,.7)!important; }
+body.cardlib-open #overlay .card-library-page .library-title h2 .ic {
+  width:.74em!important; height:.74em!important; opacity:.85; vertical-align:-.06em; }
+body.cardlib-open #overlay .card-library-page .library-title p {
+  color:var(--lib-dim)!important; font-size:11.5px!important; letter-spacing:.1em!important; }
+body.cardlib-open #overlay .card-library-page .clib-count {
+  color:var(--lib-dim2)!important; font-size:10.5px!important; letter-spacing:.2em!important; white-space:nowrap; }
+body.cardlib-open #overlay .card-library-page .clib-count b {
+  color:var(--lib-txt)!important; font:700 16px ui-monospace,monospace!important; letter-spacing:0!important; }
+/* 藏品总数=白，当前命中数=青玉：筛选结果一眼分辨（第二色调的常驻落点） */
+body.cardlib-open #overlay .card-library-page .clib-count b:last-of-type { color:var(--lib-c2)!important; }
+body.cardlib-open #overlay .card-library-page .clib-count b.bump { color:var(--lib-c2)!important; }
+body.cardlib-open #overlay .card-library-page .library-head > .pg-close {
+  width:34px!important; height:34px!important; border:1px solid var(--lib-line2)!important;
+  border-radius:50%!important; background:transparent!important; color:var(--lib-dim)!important;
+  box-shadow:none!important;
+  display:grid!important; place-items:center!important; font-size:14px!important; }
+body.cardlib-open #overlay .card-library-page .library-head > .pg-close:hover {
+  color:var(--lib-c2)!important; border-color:rgba(95,201,192,.5)!important; background:rgba(95,201,192,.08)!important;
+  box-shadow:none!important; transform:none!important; }
+
+/* ---- 工具条：无填充线框，聚焦时青玉点亮 ---- */
+/* ---- 工具条：不透明深底 + 青玉焦点。
+   底色必须不透明：Chrome 的原生下拉弹层底跟着 select 走，透明底会把弹层渲染成
+   白底浅字（老板 09-13 留言：稀有度/职业那儿白底白字看不清）；option 再单独写死底色，
+   免得被页面级 background:transparent 归一化规则清掉。color-scheme:dark 让弹层与
+   滚动条一起走深色，双保险。 ---- */
+body.cardlib-open #overlay .card-library-page .clib-search,
+body.cardlib-open #overlay .card-library-page .pg-select {
+  background:#0d1922!important; color:#eaf2f5!important;
+  border:1px solid rgba(255,255,255,.10)!important; border-radius:9px!important;
+  min-height:38px!important; letter-spacing:.05em!important;
+  color-scheme:dark!important; }
+body.cardlib-open #overlay .card-library-page .pg-select option {
+  background:#0d1922!important; color:#eaf2f5!important; }
+body.cardlib-open #overlay .card-library-page .clib-search::placeholder { color:var(--lib-dim2)!important; }
+body.cardlib-open #overlay .card-library-page .clib-search:focus,
+body.cardlib-open #overlay .card-library-page .pg-select:focus {
+  border-color:rgba(95,201,192,.6)!important; background:#0f2129!important;
+  box-shadow:0 0 0 3px rgba(95,201,192,.14)!important; }
+/* 稀有度=青玉 / 职业=紫晶：两个筛选下拉各带一条左侧色条，第二三色调常驻可见 */
+body.cardlib-open #overlay .card-library-page #libRar { border-left:2px solid rgba(95,201,192,.62)!important; }
+body.cardlib-open #overlay .card-library-page #libCls { border-left:2px solid rgba(199,155,255,.62)!important; }
+body.cardlib-open #overlay .card-library-page .hs-btn {
+  background:transparent!important; border:1px solid var(--lib-line2)!important; color:#cbd6db!important;
+  border-radius:9px!important; font-size:12px!important; letter-spacing:.1em!important; }
+body.cardlib-open #overlay .card-library-page .hs-btn.gold {
+  background:linear-gradient(180deg,#e8cd9d,#c7a56c)!important; color:#161e25!important;
+  border-color:transparent!important; font-weight:700!important;
+  box-shadow:0 6px 22px rgba(223,194,141,.20), inset 0 1px 0 rgba(255,255,255,.55)!important; }
+body.cardlib-open #overlay .card-library-page .hs-btn.danger { color:#9aa8ae!important; }
+
+/* ---- 主体：侧栏去盒子，选中项改金色竖线指示 ---- */
+body.cardlib-open #overlay .card-library-page .clib-main {
+  background:transparent!important; grid-template-columns:172px minmax(0,1fr)!important;
+  gap:38px!important; padding:28px 46px 52px!important; }
+body.cardlib-open #overlay .card-library-page .library-sidebar { padding-right:4px!important; }
+body.cardlib-open #overlay .card-library-page .library-filter-head {
+  border-bottom:1px solid rgba(95,201,192,.3)!important; padding:0 0 7px!important;
+  color:#86cfc7!important; letter-spacing:.3em!important; font-size:10px!important; }
+body.cardlib-open #overlay .card-library-page .library-filter-head .hs-btn {
+  border:0!important; color:var(--lib-dim2)!important; letter-spacing:.14em!important; padding:2px 0!important; }
+body.cardlib-open #overlay .card-library-page .library-filter-head .hs-btn:hover { color:var(--lib-c2)!important; }
+body.cardlib-open #overlay .card-library-page .library-sidebar .type-tab {
+  position:relative!important; grid-template-columns:17px 1fr auto!important;
+  padding:8px 2px!important; border:0!important; background:transparent!important;
+  color:var(--lib-dim)!important; letter-spacing:.08em!important; box-shadow:none!important; }
+body.cardlib-open #overlay .card-library-page .library-sidebar .type-tab::before {
+  content:''; position:absolute; left:-9px; top:50%; width:2px; height:0; transform:translateY(-50%);
+  background:var(--lib-c1);
+  transition:height .22s cubic-bezier(.22,1,.36,1), background-color .22s ease!important; }
+body.cardlib-open #overlay .card-library-page .library-sidebar .type-tab:hover {
+  background:transparent!important; color:#dce7eb!important; }
+body.cardlib-open #overlay .card-library-page .library-sidebar .type-tab:hover::before { height:13px!important; background:var(--lib-c1)!important; }
+/* 选中态=青玉（筛选系统专属色）：档案主体走金，筛选导航走青玉，两个色调常驻同屏可辨 */
+body.cardlib-open #overlay .card-library-page .library-sidebar .type-tab.on {
+  border:0!important; background:transparent!important; box-shadow:none!important; color:#fff!important; }
+body.cardlib-open #overlay .card-library-page .library-sidebar .type-tab.on::before { height:22px!important; background:var(--lib-c2)!important; }
+body.cardlib-open #overlay .card-library-page .library-sidebar .type-tab i { opacity:.55; }
+body.cardlib-open #overlay .card-library-page .library-sidebar .type-tab em {
+  color:var(--lib-dim2)!important; font:600 10.5px ui-monospace,monospace!important; font-style:normal!important; }
+body.cardlib-open #overlay .card-library-page .library-sidebar .type-tab.on em { color:var(--lib-c2)!important; }
+/* 展柜（悬停大图预览）：钉在侧栏底部常驻可见。
+   旧版它跟着侧栏一起滚，侧栏视口放不下 280px 的卡就悬在框外被裁掉，
+   还顺带在网格左沿留一条滚动条轨道线——现在侧栏本身不滚，改由页签区内部滚。 */
+body.cardlib-open #overlay .card-library-page .library-sidebar {
+  display:flex!important; flex-direction:column!important; gap:14px!important;
+  /* 高度对齐网格：顶栏 206 + 主体上下留白 28/52，侧栏底边才不会垂到视口外面 */
+  max-height:calc(100vh - 286px)!important; overflow:visible!important; padding-right:4px!important; }
+body.cardlib-open #overlay .card-library-page .library-sidebar .clib-tabs {
+  flex:0 1 auto!important; min-height:0!important; overflow-y:auto!important; overflow-x:hidden!important; }
+body.cardlib-open #overlay .card-library-page .library-preview {
+  flex:0 0 auto!important; margin:auto 0 4px!important; padding:14px 0 0!important;
+  border-top:1px solid rgba(95,201,192,.3)!important; }
+body.cardlib-open #overlay .card-library-page .library-preview .pv-empty { color:rgba(199,155,255,.55)!important; }
+body.cardlib-open #overlay .card-library-page .library-preview .pv-hint b { color:var(--lib-c2)!important; }
+/* 展柜高度随卡面实际尺寸走（旧版写死 min-height:280px 才把侧栏撑破） */
+body.cardlib-open #overlay .card-library-page .library-preview.has-preview { min-height:0!important; }
+body.cardlib-open #overlay .card-library-page .library-preview .hs-card {
+  max-width:122px!important; margin:0 auto!important; box-shadow:0 16px 30px rgba(0,0,0,.62)!important; }
+body.cardlib-open #overlay .card-library-page .library-preview .pv-hint {
+  margin:9px 0 0!important; font-size:10px!important; line-height:1.6!important;
+  letter-spacing:.05em!important; min-height:0!important; }
+
+/* ---- 展廊网格：取消网格线，卡面各自悬浮，六列固定（老板 09-12 口径）---- */
+body.cardlib-open #overlay .card-library-page .lib-grid {
+  grid-template-columns:repeat(6,minmax(0,1fr))!important;
+  gap:48px 26px!important; padding:2px 2px 44px!important; align-content:start; }
+/* 卡格底部预留 38px 展签位：抽屉走常规流（不是绝对定位浮层）才稳定可点，
+   空间常驻所以悬停弹出时不推挤整行；卡面与展签之间留 10px，让卡面四角的
+   费用/伤害/币值浮球（负偏移浮出卡缘 ~8px）有落脚处，不被展签压住。
+   padding 10px 是必需的裁剪余量：lib-item 带 content-visibility:auto（滚动性能），
+   自带 paint 裁剪，卡格无内边距时浮球一出卡缘就被切（老板 09-13 留言：费用和价格被裁切）。 */
+body.cardlib-open #overlay .card-library-page .lib-item {
+  border:0!important; padding:12px 12px 0!important; gap:0!important; position:relative!important;
+  contain-intrinsic-size:auto 300px!important;
+  transition:transform .26s cubic-bezier(.22,1,.36,1)!important; }
+/* 抬升做在卡格上（不是卡面）：操作抽屉是它的兄弟节点，这样抽屉跟着卡面一起动，不会错位。
+   悬停时临时关掉 content-visibility（=关掉它自带的 paint 裁剪），让 46px 的悬停辉光
+   不被卡格边界硬切；一次只放开一格，滚动性能不受影响。 */
+body.cardlib-open #overlay .card-library-page .lib-item:hover {
+  transform:translateY(-9px)!important; z-index:5; content-visibility:visible!important; }
+body.cardlib-open #overlay .card-library-page .lib-cardwrap {
+  width:100%!important; padding:0!important; background:transparent!important; border:0!important;
+  border-radius:9px!important;
+  transition:box-shadow .26s cubic-bezier(.22,1,.36,1)!important; }
+body.cardlib-open #overlay .card-library-page .lib-item:hover .lib-cardwrap {
+  box-shadow:0 26px 46px rgba(0,0,0,.62), 0 0 0 1px rgba(223,194,141,.45), 0 0 30px rgba(223,194,141,.12)!important; }
+/* 关掉 cards.css 里给旧版留的通用悬停放大：缩放会让操作抽屉与卡面错位，抬升改由卡格承担 */
+body.cardlib-open #overlay .card-library-page .lib-cardwrap:hover { transform:none!important; }
+body.cardlib-open #overlay .card-library-page .lib-item.saved .hs-card {
+  box-shadow:0 0 0 1px rgba(223,194,141,.5), 0 .42em 1.1em rgba(223,194,141,.18), 0 .42em .95em rgba(0,0,0,.62)!important; }
+
+/* 操作抽屉：卡面正下方的展签，默认透明，悬停/键盘聚焦时点亮 */
+body.cardlib-open #overlay .card-library-page .lib-actions {
+  position:static!important; width:100%!important; align-self:stretch!important;
+  height:38px!important; flex:0 0 38px!important; margin-top:12px!important;
+  display:grid!important; grid-template-columns:1fr 1fr!important; gap:0!important;
+  opacity:0; transform:translateY(-6px); pointer-events:none; border-radius:0 0 9px 9px;
+  background:linear-gradient(180deg, #2a3742, #151d24);
+  border-top:1px solid rgba(223,194,141,.55);
+  box-shadow:0 16px 30px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.09);
+  transition:opacity .18s ease, transform .26s cubic-bezier(.22,1,.36,1)!important; }
+body.cardlib-open #overlay .card-library-page .lib-item:hover .lib-actions,
+body.cardlib-open #overlay .card-library-page .lib-item:focus-within .lib-actions {
+  opacity:1!important; transform:translateY(0)!important; pointer-events:auto!important; }
+body.cardlib-open #overlay .card-library-page .lib-actions .hs-btn {
+  border:0!important; border-radius:0!important; background:transparent!important;
+  color:#dde6ea!important; font:600 12px/1 'SimSun',serif!important; letter-spacing:.2em!important;
+  padding:0!important; display:grid!important; place-items:center!important;
+  text-shadow:0 1px 4px rgba(0,0,0,.8)!important; }
+body.cardlib-open #overlay .card-library-page .lib-actions .hs-btn + .hs-btn {
+  border-left:1px solid var(--lib-line2)!important; }
+body.cardlib-open #overlay .card-library-page .lib-actions .hs-btn:hover {
+  background:rgba(223,194,141,.16)!important; color:#fff!important; transform:none!important; }
+body.cardlib-open #overlay .card-library-page .lib-actions .hs-btn.danger { color:#b3a6d9!important; }
+body.cardlib-open #overlay .card-library-page .lib-actions .hs-btn.danger:hover {
+  background:rgba(199,155,255,.2)!important; color:#e2d5ff!important; border-color:var(--lib-line2)!important; }
+
+/* ---- 空态与响应式收尾 ---- */
+body.cardlib-open #overlay .card-library-page .clib-empty {
+  border:1px dashed var(--lib-line)!important; background:rgba(255,255,255,.012)!important;
+  color:var(--lib-dim)!important; letter-spacing:.1em!important; }
+@media(max-width:1280px) {
+  body.cardlib-open #overlay .card-library-page .lib-grid { grid-template-columns:repeat(5,minmax(0,1fr))!important; }
+  body.cardlib-open #overlay .card-library-page .clib-main,
+  body.cardlib-open #overlay .card-library-page .library-head { padding-left:30px!important; padding-right:30px!important; }
+}
+@media(max-width:900px) {
+  body.cardlib-open #overlay .card-library-page .lib-grid { grid-template-columns:repeat(4,minmax(0,1fr))!important; gap:26px 18px!important; }
+  body.cardlib-open #overlay .card-library-page .clib-main { grid-template-columns:150px minmax(0,1fr)!important; gap:24px!important; }
+}
+@media(max-width:620px) {
+  body.cardlib-open #overlay .card-library-page .lib-grid { grid-template-columns:repeat(2,minmax(0,1fr))!important; }
+  body.cardlib-open #overlay .card-library-page .clib-main { padding:18px!important; }
 }

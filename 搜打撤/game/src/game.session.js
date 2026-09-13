@@ -16,6 +16,7 @@ const runtime = {
   rebuildNotes: () => {},
   resize: () => {},
   showRunTransition: async () => {},
+  syncDevVisibility: () => {},
 };
 
 function configureGameRuntime(hooks) {
@@ -131,14 +132,26 @@ function configureGameRuntime(hooks) {
       ? `<b>[[icon:skull]] ${why}……</b>[[icon:lock]] 宠物抢运回安全格中的 <b>${savedN}</b> 张卡牌，其余全部丢失`
       : `<b>[[icon:skull]] ${why}……</b>安全格里没有卡牌，全部战利品丢失`, 'warn');
     UI.showOverlay('[[icon:skull]] 撤离失败', `
-      <p class="ov-stats">${why === '你倒下了' ? '生命归零' : '战斗中撤离视为失败'}，价值 <b class="gold">¥${lost.toLocaleString()}</b> 的物资与未保护的卡牌全部掉落</p>
-      ${saved.length ? `<p class="ov-note">[[icon:lock]] 安全格保护了 <b>${savedN}</b> 张卡牌并运回基地：` +
-        saved.map(s => `${esc(s.card.name)}${s.count > 1 ? ' ×' + s.count : ''}`).join('、') + '</p>'
-        : '<p class="ov-note">提示：把卡牌存入背包的<b>安全格</b>（容量在基地用口粮升级），撤离失败时才能保住它们。</p>'}
-      <div class="ov-btns">
-        <button class="ov-btn" data-act="goBase">[[icon:home]] 回基地</button>
-        <button class="ov-btn ok" data-act="again">再出发</button>
-      </div>`);
+      <div class="doom-panel">
+        <p class="doom-sub">${why === '你倒下了' ? '生命归零 · 远征到此为止' : '战斗中撤离 · 视为失败'}</p>
+        <div class="doom-stats">
+          <div class="doom-stat" style="--i:0"><span class="ds-k">损失物资</span><b class="ds-v bad">¥${lost.toLocaleString()}</b></div>
+          <div class="doom-stat" style="--i:1"><span class="ds-k">抢运回基地</span><b class="ds-v good">${savedN} 张</b></div>
+          <div class="doom-stat" style="--i:2"><span class="ds-k">安全格占用</span><b class="ds-v">${safeUsed()}/${safeCap()}</b></div>
+        </div>
+        ${saved.length
+          ? `<div class="doom-loot">
+              <p class="doom-loot-h">[[icon:lock]] 宠物阿七抢运回基地</p>
+              <div class="doom-cards">${saved.slice(0, 6).map((s, i) =>
+                `<span class="doom-card" style="--i:${i}">${SDT.Cards.cardHTML(s.card, 'sm')}</span>`).join('')}
+                ${saved.length > 6 ? `<span class="doom-more">还有 ${saved.length - 6} 张</span>` : ''}</div>
+            </div>`
+          : '<p class="ov-note">安全格里没有卡牌——把卡存进背包安全格（基地用口粮升级），倒下时才抢得回来。</p>'}
+        <div class="doom-btns">
+          <button class="ov-btn" data-act="goBase">[[icon:home]] 回基地</button>
+          <button class="ov-btn ok" data-act="again">[[icon:skull]] 再出发</button>
+        </div>
+      </div>`, 'doom');
     UI.act('goBase', () => { UI.hideOverlay(); runtime.openBaseHub('deploy'); });
     UI.act('again', () => { UI.hideOverlay(); runtime.openBaseHub('deploy'); });
     UI.refresh(game);

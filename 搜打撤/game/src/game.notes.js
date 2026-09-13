@@ -199,9 +199,15 @@ import { game } from './game.session.js';
   }
 
   // ---------- 开发者模式 ----------
+  // 开发者面板统一显隐：侧边栏骰子工具 + 标题页节点测试面板（两处共用，勿各自设 hidden）
+  function syncDevVisibility() {
+    UI.el.devTools.hidden = !game.devMode;
+    if (UI.el.titleDev) UI.el.titleDev.hidden = !game.devMode;
+  }
+
   function initDevMode() {
     game.devMode = localStorage.getItem('sdt-dev') === '1';
-    UI.el.devTools.hidden = !game.devMode;
+    syncDevVisibility();
     const savedDice = parseInt(localStorage.getItem('sdt-dev-dice') || '0', 10);
     const dMax = SDT.MAP.rules.diceSides;
     game.nextDice = savedDice >= 1 && savedDice <= dMax ? savedDice : 0;
@@ -218,4 +224,4 @@ import { game } from './game.session.js';
     });
   }
 
-export { TYPE_NAME, bindDevMode, bindNotesMixins, initDevMode, openCellEditor, rebuildNotes, showClearOverlay, showExportOverlay, showImportOverlay };
+export { TYPE_NAME, bindDevMode, bindNotesMixins, initDevMode, openCellEditor, rebuildNotes, showClearOverlay, showExportOverlay, showImportOverlay, syncDevVisibility };

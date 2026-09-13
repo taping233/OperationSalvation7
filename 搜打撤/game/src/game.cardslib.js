@@ -86,7 +86,7 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
   }
 
   function libPreviewHTML(c) {
-    if (!c) return '<div class="pv-empty">[[icon:cards]]</div><p class="pv-hint">把鼠标悬停在右侧卡牌上<br>这里会显示大图预览</p>';
+    if (!c) return '<div class="pv-empty">[[icon:cards]]</div><p class="pv-hint">悬停卡牌<br>展柜里会出现这张卡</p>';
     const dmgTxt = DMG_TYPES.includes(c.type) ? `<br>伤害词条：<b class="dmg-num">${c.dmg || 0}</b>${c.dmgType ? ' · ' + (SDT.Cards.DMG_TYPE_META[c.dmgType] || {}).name : ''}` : '';
     const drawN = +(c.draw || 0) || SDT.Cards.deriveDraw(c);
     const infN = +(c.infuse || 0) || SDT.Cards.deriveInfuse(c);
@@ -95,7 +95,7 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
     const kw = [drawN ? `抽卡 ${drawN}` : '', infN ? `注能(${infN})` : '',
       healN ? `回复 ${healN}` : '', armorN ? `护甲 ${armorN}` : ''].filter(Boolean).join(' · ');
     const kwTxt = kw ? `<br>效果词条：<b>${kw}</b>` : '';
-    return `${cardHTML(c, 'lg')}<p class="pv-hint">${esc(c.type)} · ${esc(SDT.Cards.rarityOf(c))}${dmgTxt}${kwTxt}<br>点击卡面欣赏详情 · 编辑按钮进入制作坊</p>`;
+    return `${cardHTML(c, 'lg')}<p class="pv-hint">点击卡面欣赏详情<br>${esc(c.type)} · ${esc(SDT.Cards.rarityOf(c))}${dmgTxt}${kwTxt}</p>`;
   }
 
   function libGridHTML() {
@@ -109,8 +109,8 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
         <p>${libCards.length ? '没有符合筛选条件的卡牌' : '收藏还是空的，点右上角「＋ 制作新卡」开始设计'}</p>
         ${filtered ? '<button class="hs-btn sm" data-act="libClearFilter" style="margin-top:10px">清除筛选条件</button>' : ''}</div>`;
     }
-    return `<div class="lib-grid" id="libGrid">${all.map(c => `
-      <div class="lib-item${c.id === lastSavedId ? ' saved' : ''}">
+    return `<div class="lib-grid" id="libGrid">${all.map((c, i) => `
+      <div class="lib-item${c.id === lastSavedId ? ' saved' : ''}" data-i="${i}" style="--i:${i}">
         <div class="lib-cardwrap" data-act="libInspect" data-card="${c.id}" title="点击欣赏卡面 · 悬停查看完整卡面与描述">${cardHTML(c, 'lib')}</div>
         <div class="lib-actions">
           <button class="hs-btn sm" data-act="editCard" data-id="${c.id}">编辑</button>
@@ -121,14 +121,45 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
 
   // 筛选后只重绘卡格区（整页 showOverlay 会重置搜索焦点）
   function renderLibGrid() {
+    const n = libFiltered().length;
     const resultCount = document.getElementById('libResultCount');
-    if (resultCount) resultCount.textContent = libFiltered().length;
+    if (resultCount) {
+      // 数量真的变了才播脉冲（重绘时数字没变就别闪）
+      const changed = resultCount.textContent !== String(n);
+      resultCount.textContent = n;
+      if (changed) {
+        resultCount.classList.remove('bump');
+        void resultCount.offsetWidth;
+        resultCount.classList.add('bump');
+      }
+    }
     const grid = document.getElementById('libGrid');
     if (grid) {
       grid.outerHTML = libGridHTML();
       const el = document.getElementById('libGrid');
       if (el) el.scrollTop = 0;
     }
+  }
+
+  // ======== 卡牌库彩蛋（2026-09-13 留言：多加一些动画和彩蛋） ========
+  let libTitleClicks = 0, libTitleTimer = null;
+  // 彩蛋 1：连点「卡牌档案馆」标题三次 → 全库卡面波浪翻牌（只翻首屏 24 张，避免百张 3D 变换掉帧）
+  // 1800ms = 末位卡延迟 23*34ms + 单张 .8s，动画跑完再摘类
+  function libWaveEgg() {
+    const grid = document.getElementById('libGrid');
+    if (!grid || grid.classList.contains('lib-wave')) return;
+    grid.classList.add('lib-wave');
+    SDT.Sound.sfx('legend');
+    UI.log('[[icon:book]] 档案馆抖了抖袖子：「愿你翻开的每一张，都是命运偏心的那一张。」', 'ok');
+    setTimeout(() => grid.classList.remove('lib-wave'), 1800);
+  }
+  // 彩蛋 2：稀有度筛到「棱彩」→ 全息卡面依次过一道幻彩扫光（2300ms 同上口径）
+  function libHoloEgg() {
+    const grid = document.getElementById('libGrid');
+    if (!grid || grid.classList.contains('lib-holo')) return;
+    grid.classList.add('lib-holo');
+    SDT.Sound.sfx('reveal');
+    setTimeout(() => grid.classList.remove('lib-holo'), 2300);
   }
 
   function renderCardLibrary() {
@@ -194,14 +225,28 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
     });
     UI.act('exportCards', () => showCardsExportOverlay());
     UI.act('importCards', () => showCardsImportOverlay());
+    // 彩蛋 1 的触发点：标题连点三次（1.6s 内）
+    const titleEl = document.querySelector('.card-library-page .library-title');
+    if (titleEl) titleEl.addEventListener('click', () => {
+      libTitleClicks++;
+      if (libTitleTimer) clearTimeout(libTitleTimer);
+      libTitleTimer = setTimeout(() => { libTitleClicks = 0; }, 1600);
+      if (libTitleClicks >= 3) {
+        libTitleClicks = 0;
+        clearTimeout(libTitleTimer);
+        libWaveEgg();
+      }
+    });
     // 搜索 / 稀有度筛选：只重绘卡格，保持输入焦点
     UI._inputHandler = (e) => {
+      let prism = false;   // 彩蛋 2 的触发条件：筛到「棱彩」
       if (e.target.id === 'cardSearch') { libFilter.q = e.target.value; }
-      else if (e.target.id === 'libRar') { libFilter.rar = e.target.value; }
+      else if (e.target.id === 'libRar') { libFilter.rar = e.target.value; prism = e.target.value === '棱彩'; }
       else if (e.target.id === 'libCls') { libFilter.cls = e.target.value; }
       else if (e.target.id === 'libSort') { libFilter.sort = e.target.value; }
       else return;
       renderLibGrid();
+      if (prism) libHoloEgg();
     };
     // 悬停大图预览（炉石式）。mouseover 会因子元素冒泡重复触发：
     // 记住上一张预览的卡，扫过同一张卡时不再整页重建预览 DOM / 重复播悬停音；
