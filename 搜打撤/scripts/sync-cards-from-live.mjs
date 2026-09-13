@@ -111,13 +111,20 @@ function diff(sourceLib, liveLib) {
   return { upserts, changed, retire, noId };
 }
 
-function buildDoc(upserts, changed, retire, version, prev) {
-  const cards = [...changed, ...upserts]
+function buildDoc(upserts, changed, retire, version, prev, sourceLib) {
+  // 2026-09-12 事故修复：整份重写曾丢弃历史批次里"源码不定义的纯实机卡"
+  // （cc-chase-slash 等 7 张网页版自建卡差点永久丢失）。本轮 diff 之外的旧条目，
+  // 只要源码有效卡库不存在且不在本轮退役名单，必须原样保留。
+  const newIds = new Set([...changed, ...upserts].map(c => c.id));
+  const srcIds = new Set(sourceLib.filter(c => c.id).map(c => c.id));
+  const carried = (prev.cards || []).filter(c =>
+    c.id && !newIds.has(c.id) && !srcIds.has(c.id) && !retire.includes(c.id));
+  const cards = [...changed, ...upserts, ...carried]
     .sort((a, b) => String(a.id) < String(b.id) ? -1 : 1)
     .map(normalize);
   const stamp = new Date().toISOString().slice(0, 10);
   const changelog = [
-    `${stamp} 实机卡库同步（v${version}）：覆盖 ${changed.length} / 新增 ${upserts.length} / 退役 ${retire.length}`,
+    `${stamp} 实机卡库同步（v${version}）：覆盖 ${changed.length} / 新增 ${upserts.length} / 退役 ${retire.length}${carried.length ? ` / 保留历史实机卡 ${carried.length}` : ''}`,
     ...(prev.changelog || []),
   ];
   return {
@@ -155,7 +162,7 @@ function main() {
 
   const prev = readSyncDoc();
   const version = (Number(prev.version) || 0) + 1;
-  const doc = buildDoc(upserts, changed, retire, version, prev);
+  const doc = buildDoc(upserts, changed, retire, version, prev, sourceLib);
   fs.writeFileSync(SYNC_JSON, JSON.stringify(doc, null, 2) + '\n', 'utf8');
   console.log(`[sync-cards] game/data/cards-sync.json 已更新（sync v${version}，覆盖批次 ${changed.length + upserts.length} 张 + 退役 ${retire.length} 张）`);
 }

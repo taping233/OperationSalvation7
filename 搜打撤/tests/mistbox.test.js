@@ -86,7 +86,7 @@ describe('迷之匣（tt3eq-mistbox 改版）', () => {
     // 手牌中应有两张发现的招式（非迷之匣）
     const newCards = snap().hand
       .map(u => viewApi.findCard(u))
-      .filter(o => o && o.card.id !== 'tt3eq-mistbox');
+      .filter(o => o && o.card.id !== 'tt3eq-mistbox' && o.card.name !== '背包砸击');
     expect(newCards.length, JSON.stringify({logs: g.logs, hand: snap().hand})).toBe(2);
     newCards.forEach(o => expect(['武术', '法术']).toContain(o.card.type));
 

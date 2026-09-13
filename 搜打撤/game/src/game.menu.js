@@ -52,6 +52,15 @@ function createGameMenuController(deps) {
     // 绑定在 document 上一次全局生效；建议层是独立 DOM，叠加在 overlay 页面之上不破坏原界面。
     if (!titleExtrasBoundGlobal) {
       titleExtrasBoundGlobal = true;
+      // 圆形入口（收藏图鉴/设置/成就）点击脉冲：:active 按压只在按住时可见，快click也要有可感知反馈
+      document.getElementById('title')?.addEventListener('click', (e) => {
+        const face = e.target.closest?.('.ak-circle');
+        const ring = face?.querySelector('.c-ring');
+        if (!ring) return;
+        ring.classList.remove('ak-click');
+        void ring.offsetWidth;
+        ring.classList.add('ak-click');
+      });
       document.addEventListener('contextmenu', (e) => {
         if (e.target.closest('#sugLayer')) return;   // 建议层内部右键不重开
         e.preventDefault();
@@ -350,54 +359,63 @@ function createGameMenuController(deps) {
 
   // ---------- 选档页专用：五个档位的 AK 风格发光 SVG 图标（白体渐变 + 光影） ----------
   const SLOT_ICONS = [
-    // 指挥：菱形外框 + 圆点 + 上行箭头
+    // 档位1 · 无（侠客）：交叉双刃 + 中心菱形
     `<svg class="ic slot-ico" viewBox="0 0 120 120" aria-hidden="true">
-      <defs><linearGradient id="slotG1" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="#ffffff"/><stop offset=".55" stop-color="#e9f2f0"/><stop offset="1" stop-color="#b9cdc9"/>
+      <defs><linearGradient id="slotG1" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#b9cdc9"/>
       </linearGradient></defs>
-      <path d="M60 10 L110 60 L60 110 L10 60 Z" fill="none" stroke="url(#slotG1)" stroke-width="9" stroke-linejoin="round"/>
-      <circle cx="60" cy="44" r="11" fill="url(#slotG1)"/>
-      <path d="M38 92 L60 66 L82 92" fill="none" stroke="url(#slotG1)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+      <g stroke="url(#slotG1)" stroke-width="8" stroke-linecap="round">
+        <path d="M30 20 L88 90"/><path d="M90 20 L32 90"/>
+      </g>
+      <g stroke="url(#slotG1)" stroke-width="7" stroke-linecap="round">
+        <path d="M44 62 L60 76"/><path d="M76 62 L60 76"/>
+      </g>
+      <circle cx="60" cy="104" r="6" fill="url(#slotG1)"/>
+      <path d="M60 40 l7 12 -7 12 -7 -12 Z" fill="url(#slotG1)"/>
     </svg>`,
-    // 特勤：城垛塔楼（明暗两面表现体积）
+    // 档位2 · 常无欲（降临者）：弯檐巫帽 + 坠落的四芒星
     `<svg class="ic slot-ico" viewBox="0 0 120 120" aria-hidden="true">
       <defs><linearGradient id="slotG2" x1="0" y1="0" x2="1" y2="1">
         <stop offset="0" stop-color="#ffffff"/><stop offset=".5" stop-color="#e6efed"/><stop offset="1" stop-color="#b3c8c4"/>
       </linearGradient></defs>
-      <path fill="url(#slotG2)" d="M38 14 h12 v10 h6 v-10 h8 v10 h6 v-10 h12 v22 h-8 v42 h8 l8 14 v8 H28 v-8 l8-14 h8 V36 h-8 Z"/>
-      <path fill="rgba(120,150,146,.35)" d="M64 36 h6 v42 h-6 Z"/>
+      <path fill="url(#slotG2)" d="M14 82 q46 16 92 0 l-7 -10 q-39 11 -78 0 Z"/>
+      <path fill="url(#slotG2)" d="M38 74 Q52 40 74 16 Q70 44 86 72 Q62 80 38 74 Z"/>
+      <path fill="url(#slotG2)" d="M92 30 l3.5 8 8 3.5 -8 3.5 -3.5 8 -3.5 -8 -8 -3.5 8 -3.5 Z"/>
     </svg>`,
-    // 后勤：三枚叠置三角 + 中心菱形亮点
+    // 档位3 · 白塔（法师）：垛口高塔 + 拱窗 + 旗帜
     `<svg class="ic slot-ico" viewBox="0 0 120 120" aria-hidden="true">
       <defs><linearGradient id="slotG3" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#bccfcb"/>
       </linearGradient></defs>
-      <g fill="none" stroke="url(#slotG3)" stroke-width="7" stroke-linejoin="round">
-        <path d="M60 12 L88 60 H32 Z"/><path d="M36 56 L60 98 H12 Z"/><path d="M84 56 L108 98 H60 Z"/>
-      </g>
-      <g fill="url(#slotG3)">
-        <path d="M60 31 l6 6 -6 6 -6 -6 Z"/><path d="M36 72 l6 6 -6 6 -6 -6 Z"/><path d="M84 72 l6 6 -6 6 -6 -6 Z"/>
-      </g>
+      <path fill="url(#slotG3)" d="M44 104 V50 h32 v54 Z"/>
+      <path fill="url(#slotG3)" d="M40 50 v-12 h8 v8 h7 v-8 h10 v8 h7 v-8 h8 v12 Z"/>
+      <path fill="rgba(16,36,49,.6)" d="M54 104 v-16 a6 8 0 0 1 12 0 v16 Z"/>
+      <path d="M76 44 V16" stroke="url(#slotG3)" stroke-width="5" stroke-linecap="round"/>
+      <path fill="url(#slotG3)" d="M76 16 l16 5 -16 6 Z"/>
     </svg>`,
-    // 矛头：准星 + 四角括标
+    // 档位4 · 黑像（战士）：巨剑 + 一杯热咖啡
     `<svg class="ic slot-ico" viewBox="0 0 120 120" aria-hidden="true">
       <defs><linearGradient id="slotG4" x1="0" y1="0" x2="1" y2="1">
         <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#b9cdc9"/>
       </linearGradient></defs>
-      <circle cx="60" cy="60" r="24" fill="none" stroke="url(#slotG4)" stroke-width="7"/>
-      <circle cx="60" cy="60" r="8" fill="url(#slotG4)"/>
-      <path d="M20 38 V20 H38 M82 20 H100 V38 M100 82 V100 H82 M38 100 H20 V82"
-        fill="none" stroke="url(#slotG4)" stroke-width="8" stroke-linecap="square"/>
+      <path fill="url(#slotG4)" d="M56 10 l7 13 v52 h-14 v-52 Z"/>
+      <path fill="url(#slotG4)" d="M40 75 h40 v7 h-40 Z"/>
+      <path fill="url(#slotG4)" d="M52 82 h16 v10 h-16 Z"/>
+      <path fill="url(#slotG4)" d="M74 90 h22 v7 a11 11 0 0 1 -22 0 Z"/>
+      <path d="M96 92 a6 6 0 1 1 -1 11" fill="none" stroke="url(#slotG4)" stroke-width="4"/>
+      <g fill="none" stroke="url(#slotG4)" stroke-width="3.4" stroke-linecap="round">
+        <path d="M81 84 q3 -4 0 -8"/><path d="M90 84 q3 -4 0 -8"/>
+      </g>
     </svg>`,
-    // 突击：三道斜斩 + 战旗
+    // 档位5 · 星月（牧师）：新月抱星 + 提灯
     `<svg class="ic slot-ico" viewBox="0 0 120 120" aria-hidden="true">
       <defs><linearGradient id="slotG5" x1="0" y1="0" x2="1" y2="1">
         <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#b6cbc7"/>
       </linearGradient></defs>
-      <path d="M58 22 h32 l-9 12 9 12 H58 Z" fill="url(#slotG5)"/>
-      <g stroke="url(#slotG5)" stroke-width="9" stroke-linecap="round">
-        <path d="M30 102 L58 22"/><path d="M48 102 L72 34"/><path d="M66 102 L86 46"/>
-      </g>
+      <path fill="url(#slotG5)" d="M72 12 A40 40 0 1 0 106 66 A32 32 0 1 1 72 12 Z"/>
+      <path fill="url(#slotG5)" d="M88 26 l4 9 9 4 -9 4 -4 9 -4 -9 -9 -4 9 -4 Z"/>
+      <path d="M40 76 v10" stroke="url(#slotG5)" stroke-width="4" stroke-linecap="round"/>
+      <path fill="url(#slotG5)" d="M40 86 l8 11 -8 11 -8 -11 Z"/>
     </svg>`,
   ];
 
@@ -529,7 +547,7 @@ function createGameMenuController(deps) {
           await runtime.showRunTransition({
             tone: 'door', asset: 'scene-door-bg',
             eyebrow: 'EXPEDITION RESUMED', title: '继续对局',
-            detail: '远征尚未结束 · 直接回到对局',
+            detail: '欢迎回到战场',
             duration: 900,
           });
           inRun = !!loadGame(slot);

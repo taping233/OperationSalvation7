@@ -100,7 +100,7 @@ body.page-opaque #sidebar{visibility:hidden}
 #overlay .card.page{animation:pgIn .38s cubic-bezier(.22,1,.36,1) both;will-change:transform,opacity}
 #overlay.closing .card.page{animation:pgOut .2s ease-in both}
 @keyframes pgIn{from{opacity:0;transform:translateY(18px) scale(.988)}to{opacity:1;transform:none}}
-@keyframes pgOut{from{opacity:1}to{opacity:0;transform:translateY(10px) scale(.992)}}
+@keyframes pgOut{from{opacity:1}to{opacity:0;transform:translateY(16px) scale(.96)}}
 /* #47 卡牌库滚动/开卡掉帧优化：合成层提示 + 砍重阴影 */
 .clib-grid{contain:layout paint;will-change:scroll-position}
 .clib-grid .hs-card{box-shadow:0 2px 6px #07151e60;transition:transform .18s ease,box-shadow .18s ease}
@@ -294,7 +294,7 @@ body.page-opaque #sidebar{visibility:hidden}
 .pg.settings-page .hint{color:#8fa5ad;font-size:12px;line-height:1.9;margin:10px 2px}
 .pg.settings-page .btn-row{gap:12px;margin-top:10px}
 .pg.settings-page .btn-row .mini-btn{padding:11px 0;font-size:13px}
-.pg.settings-page .ov-btns{justify-content:flex-end;margin-top:22px}
+.pg.settings-page .ov-btns{grid-template-columns:minmax(0,1fr);justify-content:center;justify-items:center;margin-top:22px}
 
 /* —— 制作坊：四周留空（内容不再贴边） —— */
 .pg.cdes{padding:20px 34px 26px}
@@ -348,16 +348,19 @@ body.page-opaque #sidebar{visibility:hidden}
 @keyframes rtIn{from{opacity:0}to{opacity:1}}
 @keyframes rtOut{from{opacity:1}to{opacity:0}}
 
-/* —— 传说卡获得特写（全屏金光揭晓） —— */
-#legendGet{position:fixed;inset:0;z-index:400;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+/* —— 传说卡获得特写（全屏金光揭晓）；#cardGet 为通用卡牌获得奖励演出（2026-09-13，
+   同壳复用：事件/祭坛发卡不再静默进背包，见 UI.showCardReward） —— */
+#legendGet,#cardGet{position:fixed;inset:0;z-index:400;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
   background:rgba(4,8,12,.86);cursor:pointer;animation:rtIn .3s ease-out both}
-#legendGet.lg-out{animation:rtOut .4s ease-in both}
-#legendGet .lg-beam{position:absolute;left:50%;top:-12%;width:34vmin;height:130%;transform:translateX(-50%) rotate(6deg);
+#legendGet.lg-out,#cardGet.lg-out{animation:rtOut .4s ease-in both}
+#legendGet .lg-beam,#cardGet .lg-beam{position:absolute;left:50%;top:-12%;width:34vmin;height:130%;transform:translateX(-50%) rotate(6deg);
   background:linear-gradient(180deg,rgba(240,200,120,.28),rgba(240,200,120,.05) 62%,transparent);filter:blur(8px);pointer-events:none}
-#legendGet .lg-kicker{font:11px 'Cascadia Code';letter-spacing:8px;color:#e5c793;text-shadow:0 0 18px rgba(216,182,128,.6)}
-#legendGet .lg-card{position:relative;z-index:1;animation:legendPop .5s cubic-bezier(.2,1.4,.4,1) .1s both}
-#legendGet .lg-name{font-size:20px;letter-spacing:6px;color:#f3e3c3;z-index:1}
-#legendGet .lg-hint{font-size:11px;letter-spacing:3px;color:#8da6af;z-index:1}
+/* 非传说的获得演出：光柱降为中性冷光，不抢传说戏 */
+#cardGet .lg-beam-plain{background:linear-gradient(180deg,rgba(140,180,200,.2),rgba(140,180,200,.04) 62%,transparent)}
+#legendGet .lg-kicker,#cardGet .lg-kicker{font:11px 'Cascadia Code';letter-spacing:8px;color:#e5c793;text-shadow:0 0 18px rgba(216,182,128,.6)}
+#legendGet .lg-card,#cardGet .lg-card{position:relative;z-index:1;animation:legendPop .5s cubic-bezier(.2,1.4,.4,1) .1s both}
+#legendGet .lg-name,#cardGet .lg-name{font-size:20px;letter-spacing:6px;color:#f3e3c3;z-index:1}
+#legendGet .lg-hint,#cardGet .lg-hint{font-size:11px;letter-spacing:3px;color:#8da6af;z-index:1}
 @keyframes legendPop{from{opacity:0;transform:translateY(46px) scale(.7) rotate(-4deg)}to{opacity:1;transform:none}}
 
 /* ═══════════ 留言批次 2026-09-07 四批（19:58-20:05 Edge 5199 共 11 条） ═══════════ */
@@ -377,10 +380,10 @@ body.page-opaque #sidebar{visibility:hidden}
 /* —— 设置页：背景多加透明度，透出标题页壁纸 —— */
 #overlay.opaque:has(.pg.settings-page){background:rgba(8,20,29,.62);backdrop-filter:blur(3px)}
 #overlay .card.page:has(.pg.settings-page){background:linear-gradient(160deg,rgba(27,54,69,.38),rgba(16,36,49,.5))}
-.pg.settings-page{background:linear-gradient(160deg,rgba(27,54,69,.32),rgba(16,36,49,.45))}
+#overlay .pg.settings-page{background:linear-gradient(160deg,rgba(27,54,69,.16),rgba(16,36,49,.24))}
 
 /* —— 选档页：返回键已挪左上（上面的 left/top 生效），旧的触底覆盖删除 —— */
-.pg.slot-page .slot-deck{padding-bottom:16px}
+.pg.slot-page .slot-deck{padding-bottom:clamp(56px,9vh,96px)}
 
 /* —— 基地页：hub-card 框改浅色背景（与卡牌库浅色展示区同系），文字随之深色化 —— */
 #overlay .hub-card,#overlay .hub-card.gate-strip{background:linear-gradient(168deg,#ece9e2,#dcd8ce);border-color:#b7b4aa}
@@ -534,8 +537,10 @@ body:has(#overlay.opaque:not([hidden])) #sidebar{display:none!important}
 
 /* —— 卡牌放大特写（背包卡面点击）：背景虚化压暗 + 缩放弹出/收回 —— */
 #cardZoom{position:fixed;inset:0;z-index:400;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;cursor:pointer}
-#cardZoom .cz-backdrop{position:absolute;inset:0;background:rgba(6,10,14,.66);backdrop-filter:blur(9px);animation:czFade .2s ease both}
+#cardZoom .cz-backdrop{position:absolute;inset:0;background:rgba(6,10,14,.66);backdrop-filter:blur(9px);animation:czFade .34s ease both}
 #cardZoom .cz-card{position:relative;z-index:1;animation:czIn .24s cubic-bezier(.2,1.3,.4,1) both}
+/* FLIP 入场（2026-09-12 留言）：从来源卡位置/尺寸放大到居中，禁 czIn 改走 transform+opacity 过渡 */
+#cardZoom .cz-card.cz-flip{animation:none;transition:transform .38s cubic-bezier(.22,.61,.36,1),opacity .3s ease}
 #cardZoom .cz-card .hs-card{font-size:34px;box-shadow:0 24px 80px rgba(0,0,0,.7),0 0 40px rgba(216,182,128,.25)}
 #cardZoom .cz-foot{position:relative;z-index:1;animation:czIn .24s .05s cubic-bezier(.2,1.3,.4,1) both}
 #cardZoom .cz-hint{position:relative;z-index:1;font-size:11px;letter-spacing:3px;color:#c9d4d8;animation:czFade .3s .1s ease both}
@@ -1096,7 +1101,8 @@ body,body *{font-family:'HarmonyOS Sans SC','HarmonyOS Sans','Noto Sans SC Sub',
 #overlay .battle-stage.sts .sts-hud,
 #overlay .battle-stage.sts .sts-hud .bt-hand{pointer-events:none}
 #overlay .battle-stage.sts .sts-hud .bt-slot,
-#overlay .battle-stage.sts .sts-hud .bt-slot::after{pointer-events:auto}
+#overlay .battle-stage.sts .sts-hud .bt-slot::after,
+#overlay .battle-stage.sts .sts-hud .sts-tactics .ov-btn{pointer-events:auto}
 
 /* ═══════════ 2026-09-09 战利品/开箱浮层重做（老板：界面放大+卡牌放大+按钮修复） ═══════════ */
 /* wide 类此前从未有过样式定义，开箱浮层一直走 430px 默认小卡 */
@@ -1141,35 +1147,6 @@ body,body *{font-family:'HarmonyOS Sans SC','HarmonyOS Sans','Noto Sans SC Sub',
    框色=职业（金属渐变包边）· 卡名丝带=稀有度 · 费用蓝晶球浮角 ·
    类型铭牌压插画下缘 · 深底描述面板。全部 em 随卡缩放，战斗/牌库/商店共用。
    ============================================================ */
-/* 职业框色三档：cf1 金属亮部 / cf2 暗部 / cf3 描边亮线 */
-.hs-card{--cf1:#7c8790;--cf2:#3a4249;--cf3:#98a4ad}
-.hs-card.cf0{--cf1:#b56a5a;--cf2:#6e2c22;--cf3:#c98a77}
-.hs-card.cf1{--cf1:#5f9c6e;--cf2:#2c5439;--cf3:#7fb98d}
-.hs-card.cf2{--cf1:#5e86b8;--cf2:#2c4a6e;--cf3:#7799bd}
-.hs-card.cf3{--cf1:#c2a05e;--cf2:#6e5522;--cf3:#d9bc80}
-.hs-card.cf4{--cf1:#8d6ab8;--cf2:#462c6e;--cf3:#a988cc}
-/* 稀有度丝带色（rv0 初始 rv1 古朴 rv2 稀有 rv3 史诗 rv4 传说 rv5 衍生 rv6 职业 rv7 棱彩） */
-.hs-card{--rb1:#5c646c;--rb2:#3c434a}
-.hs-card.rv1{--rb1:#8a6a44;--rb2:#5a4326}
-.hs-card.rv2{--rb1:#3f6f9e;--rb2:#27486a}
-.hs-card.rv3{--rb1:#8a4a9e;--rb2:#552a63}
-.hs-card.rv4{--rb1:#c2851a;--rb2:#7a4f08}
-.hs-card.rv5{--rb1:#5a4a6e;--rb2:#372c45}
-.hs-card.rv6{--rb1:#7e8b98;--rb2:#4d5862}
-.hs-card.rv7{--rb1:#b86a95;--rb2:#6e3f5c}
-.hs-card.rv-prism{--rb1:#b86a95;--rb2:#6e3f5c}
-/* 卡体：深色内芯 + 职业色金属包边（::before 作内芯，包边厚度=卡 padding） */
-.hs-card{
-  border:0!important;
-  border-radius:.72em!important;
-  padding:.9em .58em .62em!important;
-  background:linear-gradient(165deg,var(--cf1) 0%,var(--cf2) 34%,var(--cf1) 62%,var(--cf2) 100%)!important;
-  box-shadow:
-    0 0 0 1px #000000cc,
-    inset 0 0 0 .09em rgba(255,255,255,.22),
-    inset 0 -.85em 1.3em rgba(0,0,0,.32),
-    0 .42em .95em rgba(0,0,0,.62)!important;
-}
 .hs-card::before{
   content:''!important;
   position:absolute!important;
@@ -1180,28 +1157,6 @@ body,body *{font-family:'HarmonyOS Sans SC','HarmonyOS Sans','Noto Sans SC Sub',
   border-radius:.46em!important;
   background:linear-gradient(176deg,#2e343c 0%,#1b2027 58%,#232932 100%)!important;
   box-shadow:inset 0 0 0 1px rgba(255,255,255,.06),inset 0 .25em .6em rgba(0,0,0,.5)!important;
-}
-/* 卡名丝带：稀有度色，左右微凸出卡缘 */
-.hs-card .hsc-name{
-  order:1!important;
-  width:calc(100% + 1.3em)!important;
-  min-height:1.8em!important;
-  margin:-.52em -.65em .16em!important;
-  padding:.28em .56em .26em!important;
-  z-index:4!important;
-  display:flex!important;align-items:center!important;justify-content:center!important;
-  border:0!important;
-  border-radius:.3em!important;
-  clip-path:none!important;
-  color:#f4efe2!important;
-  font-weight:700!important;
-  letter-spacing:.13em!important;
-  background:linear-gradient(180deg,var(--rb1) 0%,var(--rb2) 100%)!important;
-  box-shadow:0 .16em .28em rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.3),inset 0 -.12em .2em rgba(0,0,0,.32)!important;
-  text-shadow:0 1px 2px rgba(0,0,0,.75)!important;
-}
-.hs-card.rv7 .hsc-name,.hs-card.rv-prism .hsc-name{
-  background:linear-gradient(120deg,#c86a6a 0%,#c8b06a 26%,#6ac88a 52%,#6a9ac8 76%,#a86ac8 100%)!important;
 }
 /* 插画窗：职业色描边 + 深色下沉 */
 .hs-card .hsc-art{
@@ -1297,3 +1252,203 @@ img[data-asset-key="card-martial-tt3-skewer"]{object-position:65% 60%!important}
 img[data-asset-key="card-martial-cmtn1i64j7y7"]{object-position:50% 35%!important}
 img[data-asset-key="card-martial-cmtn1wnhhym"]{object-position:50% 60%!important}
 img[data-asset-key="card-wu-myriadswords"]{object-position:50% 40%!important}
+
+/* ===== 标题页选项按钮动画（2026-09-12 留言 #3：刚进入/点击时加一点动画） =====
+   showTitle 以 hidden 属性切页，display:none→可见会让下列入场动画每次回标题页自动重播；
+   位移与按压缩放走 translate/scale 独立属性而非 transform，窄窗媒体查询里的 transform:scale(...) 不被覆盖。 */
+@keyframes akBtnInDown{from{opacity:0;translate:0 -14px}to{opacity:1;translate:0 0}}
+@keyframes akBtnInUp{from{opacity:0;translate:0 12px}to{opacity:1;translate:0 0}}
+.ak-tl .ak-sq{animation:akBtnInDown .5s cubic-bezier(.22,1,.36,1) both;animation-delay:.05s}
+.ak-quickref{animation:akBtnInDown .5s cubic-bezier(.22,1,.36,1) both;animation-delay:.14s}
+.ak-banner{animation:akBtnInDown .5s cubic-bezier(.22,1,.36,1) both;animation-delay:.2s}
+.ak-circle{animation:akBtnInUp .55s cubic-bezier(.22,1,.36,1) both}
+.ak-circle.ak-lib{animation-delay:.3s}
+.ak-circle.ak-set{animation-delay:.38s}
+.ak-circle.ak-ach{animation-delay:.34s}
+.ak-start{animation:akBtnInUp .6s cubic-bezier(.22,1,.36,1) both;animation-delay:.44s}
+.ak-sq,.ak-quickref,.ak-banner,.ak-start{transition:scale .12s ease}
+.ak-sq:active,.ak-quickref:active,.ak-banner:active{scale:.95}
+.ak-start:active{scale:.97}
+.ak-circle .c-ring{transition:border-color .18s,box-shadow .18s,color .18s,scale .12s ease}
+.ak-circle:active .c-ring{scale:.93}
+
+/* ===== 远征手册 UI（2026-09-12 留言 #4：原为零样式裸排版，按冬夜深青+鎏金基调设计） ===== */
+.expedition-manual{max-width:1000px;margin:0 auto;padding:10px 6px 0}
+.manual-lead{margin:2px 0 22px;text-align:center;color:#c9d8d3;font-size:14.5px;letter-spacing:2px}
+.manual-lead::before,.manual-lead::after{content:'──';color:#d4b58266;margin:0 14px;letter-spacing:0;vertical-align:2px}
+.manual-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.manual-step{position:relative;display:flex;gap:18px;align-items:flex-start;padding:18px 20px 16px;background:linear-gradient(150deg,#1d3b49,#152d39);border:1px solid #486674;box-shadow:inset 3px 0 0 #d4b582;transition:border-color .18s,translate .18s}
+.manual-step:hover{border-color:#d4b582;translate:0 -2px}
+.manual-index{font:700 30px/1 Consolas,monospace;color:#d4b582;text-shadow:0 0 14px #d4b58240}
+.manual-step h3{margin:0 0 9px;font-size:19px;font-weight:400;letter-spacing:5px;color:#e8eeea}
+.manual-step h3::after{content:'';display:block;width:34px;height:1px;margin-top:8px;background:linear-gradient(90deg,#d4b582,transparent)}
+.manual-step p{margin:0;font-size:13.5px;line-height:1.95;color:#b6c9ce}
+.manual-step p b{color:#e5d4ae;font-weight:600}
+.manual-controls{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px 16px;margin:20px 0 14px;padding:14px 18px;background:#10283380;border:1px dashed #4c6a76}
+.manual-control-key{display:inline-block;padding:3px 10px;background:#0d2029;border:1px solid #607c86;border-bottom-width:2px;border-radius:4px;color:#d7c69e;font:12px/1.6 Consolas,monospace;letter-spacing:1px;white-space:nowrap}
+.manual-controls>span:not(.manual-control-key){color:#9db4bd;font-size:13px}
+.manual-note{margin:0;text-align:center;color:#8ba3ab;font-size:12.5px;letter-spacing:.5px}
+
+/* ===== 选人卡池页脚一行化（2026-09-12 留言 #9/#10：分页条原挂网格末尾，网格溢出浅色区
+   压出深色底“黑边”，下半截还被页脚盖住导致下一页点不了；现翻页与返回选角/确认同排进页脚） ===== */
+#overlay .pg.cls-pool-page .clib-main{display:flex;align-items:stretch;gap:22px;padding:24px 28px 20px}
+.pg.cls-pool-page .lib-grid.cls-pool-grid{flex:1;min-width:0;min-height:0;height:auto}
+.pg.cls-pool-page .cls-foot{align-items:center;padding-top:14px}
+.pg.cls-pool-page .cls-foot .lib-pager{grid-column:auto;border-top:0;padding:0;gap:12px}
+.pg.cls-pool-page .cls-foot .lib-pager .hs-btn{background:#24424f;border:1px solid #607c86;color:#e3eeea}
+.pg.cls-pool-page .cls-foot .lib-pager .hs-btn:disabled{opacity:.4}
+.pg.cls-pool-page .cls-foot .lib-pageinfo{color:#b6c9ce}
+.pool-foot-sep{width:1px;height:26px;background:#607c8666}
+
+/* ===== 选人页立绘对齐（2026-09-12 留言 #6/#7）：黑像头部压顶、星月整体偏左，
+   以「无」的头部屏上位置为基准微调；只动 cls2-fullart 大图，头像条/档案位不受影响 ===== */
+.cls2-fullart .figure-xuanli img.art-figure{translate:0 20%;object-position:40% bottom}
+.cls2-fullart .figure-dengkui img.art-figure{object-position:14% bottom}
+
+/* ===== 2026-09-12 晚留言批次 ===== */
+/* 卡牌库卡面再大一点：收窄卡片内边距（侧栏/页边距在 expedition-library.css 同步收窄） */
+#overlay .card-library-page .lib-item{padding:10px 6px}
+/* 标题页左上退出/静音两键：hover 绿边对齐快速参考（原 border:none 只剩微光） */
+#btnTitleExit,#btnTitleMute{border:1px solid transparent}
+#btnTitleExit:hover,#btnTitleMute:hover{border-color:var(--akmint)}
+/* 收藏图鉴等圆钮点击脉冲（game.menu.js 点击时挂 .ak-click） */
+@keyframes akRingPulse{0%{scale:1}35%{scale:.88}100%{scale:1}}
+.ak-circle .c-ring.ak-click{animation:akRingPulse .32s ease-out}
+
+/* 黑像顶部白填（2026-09-12 留言：立绘下移后顶部露出的模糊背景层改白，取其画布顶边色 #fefefe 防接缝） */
+.cls2-fullart .figure-xuanli img.art-figure-back{display:none}
+.cls2-fullart .art-figure-wrap.figure-xuanli{background:#fefefe}
+/* 星月头像钮对应大图右移：人物落到头像框中部（大图窗口/头像窗口几何不同，分别标定） */
+#overlay .cls2-face img[data-asset-key="figure-dengkui"]{object-position:32% 30%}
+
+/* 黑像头像钮下移（2026-09-12 留言）：与大图同款下移 20%，钮底改白与画布衔接 */
+#overlay .cls2-face:has(img[data-asset-key="figure-xuanli"]){background:#fefefe}
+#overlay .cls2-face img[data-asset-key="figure-xuanli"]{translate:0 20%}
+
+/* ===== 2026-09-12 晚第二批：商店重做 + 背包重做 ===== */
+/* —— 商店：点卡即买、价格居中、鎏金价签（2026-09-13 留言：去格子线条边框；价格移到卡面下方居中，不再被费用角标遮挡） —— */
+#overlay .sc-shop .shop-board-grid{gap:20px}
+#overlay .sc-shop .shop-slot{position:relative;border:0!important;background:linear-gradient(165deg,rgba(16,40,52,.92),rgba(10,26,36,.95))!important;border-radius:2px;padding:12px 10px 10px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:8px}
+#overlay .sc-shop .shop-slot.buy{cursor:pointer;transition:translate .16s ease,box-shadow .16s ease}
+#overlay .sc-shop .shop-slot.buy:hover{translate:0 -3px;box-shadow:0 12px 28px #05131a80}
+#overlay .sc-shop .shop-slot.buy[data-short]{opacity:.55;filter:saturate(.55)}
+#overlay .sc-shop .shop-slot.buy[data-short]:hover{translate:none;box-shadow:none}
+#overlay .sc-shop .shop-slot .hs-card{width:100%;max-width:190px}
+#overlay .sc-shop .shop-price{position:static!important;width:auto!important;min-height:0!important;border:0!important;z-index:2;display:inline-flex;align-items:center;gap:4px;padding:5px 14px;margin-top:2px;background:linear-gradient(135deg,#e8cf98,#bd965b)!important;color:#152e3b!important;font:700 13px var(--font-ui);border-radius:999px;box-shadow:0 4px 12px #05131a70}
+#overlay .sc-shop .shop-price.short{background:#3d5666!important;color:#b9c9cf!important}
+#overlay .sc-shop .shop-resources{cursor:pointer;transition:border-color .15s,color .15s}
+#overlay .sc-shop .shop-resources:hover{border-color:#d4b582}
+#overlay .sc-shop .shop-resources:hover .shop-resource b{color:#eed9a8}
+/* —— 背包：大卡面、清晰分区、点击放大 —— */
+#overlay .bag-view .bag-grid{grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:14px}
+#overlay .bag-view .bag-slot{padding:0;overflow:hidden}
+#overlay .bag-view .bag-slot.empty{aspect-ratio:10/14;background:rgba(230,238,241,.02);border:1px dashed rgba(182,211,214,.14)}
+#overlay .bag-view .bag-slot.filled.card-slot{border:1px solid rgba(182,211,214,.2)}
+#overlay .bag-view .bag-slot.filled.card-slot:hover{border-color:#d4b582}
+#overlay .bag-view .bag-slot .flip-face.flip-front{padding:0}
+#overlay .bag-view .bag-slot .flip-face.flip-front .hs-card{width:100%}
+#overlay .bag-view .bag-slot:not(.card-slot):not(.safe-slot).filled{aspect-ratio:10/14;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:8px;background:linear-gradient(165deg,rgba(23,49,63,.9),rgba(13,30,41,.95))}
+#overlay .bag-view .bag-slot:not(.card-slot):not(.safe-slot).filled b{font-size:13.5px;letter-spacing:1px;text-align:center}
+#overlay .bag-view .bag-slot:not(.card-slot):not(.safe-slot).filled span{font-size:12px;color:#b3c9ce}
+#overlay .bag-view .set-h{color:#d8bd86;border-bottom:1px solid rgba(216,189,134,.25);padding-bottom:6px}
+#overlay .bag-view .bag-side-card{border:1px solid rgba(182,211,214,.16);border-radius:2px;background:rgba(13,30,41,.5);padding:12px}
+
+/* 关闭态强制退场动画：压过各页面的 :has 入场规则（2026-09-12 留言 #33，设置页等 :has(1,4,0) 会压过 pgOut） */
+#overlay.closing .card.page{animation:pgOut .2s ease-in both!important}
+
+/* ===== 2026-09-13 留言批次九（遭遇战 UI 8 条）===== */
+/* #3 sts-arena 顶部状态文字条去掉 */
+#overlay .battle-stage.sts .sts-arena-caption{display:none!important}
+/* #5 血条不要黑色边框包裹：去边框/内阴影，槽底改浅透 */
+#overlay .battle-stage.sts .sts-nameplate .bt-hpwrap{border:0;box-shadow:none;background:rgba(255,255,255,.16)}
+/* 2026-09-13 复检：血条改细扁绿色长条（杀戮尖塔式） */
+#overlay .battle-stage.sts .sts-nameplate .bt-hpwrap{
+  height:9px!important;margin-top:5px;border-radius:3px!important;
+  background:rgba(0,0,0,.45)!important;
+}
+#overlay .battle-stage.sts .sts-nameplate .bt-hpwrap i.sts-hp-main{
+  background:linear-gradient(180deg,#7ed37e,#3f9e46)!important;
+}
+#overlay .battle-stage.sts .sts-nameplate .bt-hpwrap i.sts-hp-ghost{
+  background:linear-gradient(180deg,#c9ecc9,#8fce8f)!important;
+}
+#overlay .battle-stage.sts .sts-nameplate .bt-hpwrap span{
+  font-size:10.5px;color:#eaffea;text-shadow:0 1px 2px #000;line-height:9px;
+}
+/* #4+#6 站位终版（2026-09-13 留言：人和怪踩进街道近处地板；卡牌区下移后留在其上方） */
+body #overlay .battle-stage.sts .sts-unit,
+body #overlay .battle-stage.sts .sts-foes,
+body #overlay .battle-stage.sts .sts-allies,
+body #overlay .battle-stage.sts .sts-me{bottom:-124px!important}
+/* #7 怪物死亡不残留虚影和假血条：死亡单位整体移出画面 */
+#overlay .battle-stage.sts .sts-foe.dead,
+#overlay .battle-stage.sts .sts-unit.dead{display:none!important}
+/* #8 发现弹层透明化：去掉卡底实色与边框，半透暗纱衬卡面 */
+#overlay .card.discover{background:rgba(8,13,19,.42)!important;border:0;box-shadow:none;backdrop-filter:none}
+#overlay .card.discover #ovBody{background:transparent}
+#overlay .card.discover .ov-stats,#overlay .card.discover .ov-note{color:#dfe7ea;text-shadow:0 1px 6px #000}
+
+/* #11 战斗背包 = 主页背包同款大卡网格（2026-09-13 留言：直接调用主页背包的逻辑/样式） */
+#overlay .card.battle-bag{background:rgba(10,16,22,.92)}
+#overlay .card.battle-bag .battle-bag-grid{grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:10px}
+#overlay .card.battle-bag .battle-bag-slot{position:relative;aspect-ratio:auto;border:1.5px solid rgba(182,211,214,.22);border-radius:6px;background:rgba(13,30,41,.5);padding:4px;cursor:pointer;transition:border-color .12s, transform .12s}
+#overlay .card.battle-bag .battle-bag-slot:hover{border-color:#d6ba7e;transform:translateY(-2px)}
+#overlay .card.battle-bag .battle-bag-slot.off{opacity:.45;filter:grayscale(.8);cursor:default}
+#overlay .card.battle-bag .battle-bag-slot .hs-card{width:100%}
+#overlay .card.battle-bag .bt-count{position:absolute;top:4px;right:6px;z-index:3;color:#ffd876;font-weight:700;font-size:12px;text-shadow:0 1px 3px #000}
+
+/* ===== 2026-09-13 留言复检追加 ===== */
+/* 血条黑框彻底去除：名牌容器（黑底+灰边）与内槽全部透明化，名字加深色描边保可读 */
+#overlay .battle-stage.sts .sts-nameplate{
+  border:0!important; background:transparent!important; box-shadow:none!important;
+  backdrop-filter:none!important; padding:0 2px!important;
+}
+#overlay .battle-stage.sts .sts-foe:not(.dead) .sts-nameplate{
+  border:0!important; background:transparent!important; box-shadow:none!important;
+}
+#overlay .battle-stage.sts .sts-nameplate b{color:#fff;text-shadow:0 1px 4px #000,0 0 2px #000}
+#overlay .battle-stage.sts .sts-nameplate .sts-stats,
+#overlay .battle-stage.sts .sts-nameplate .sts-chips{color:#e8e8e8;text-shadow:0 1px 3px #000}
+#overlay .battle-stage.sts .sts-you{border-color:rgba(255,255,255,.75);color:#fff;text-shadow:0 1px 3px #000}
+/* 「第 N 回合」条贴到页面最顶端：absolute 定位（expedition 后加载的 flex 流规则压不住） */
+#overlay .battle-stage.sts .sts-topbar{
+  position:absolute!important;
+  top:0!important; left:0!important; right:0!important;
+  border-radius:0!important;
+}
+/* 空标题 h2 不再占 34px 流内高度 */
+#overlay .card.battle > h2:empty{display:none!important}
+
+/* ===== 2026-09-13 留言批次十（战斗界面微调 3 条，IAB 02:39-02:40）===== */
+/* #1 回合条融入背景：去蓝底/边框/阴影，文字描边直接压在背景图上 */
+#overlay .battle-stage.sts .sts-topbar{
+  background:transparent!important; border-bottom:0!important; box-shadow:none!important;
+}
+#overlay .battle-stage.sts .sts-topbar .sts-encounter-kicker,
+#overlay .battle-stage.sts .sts-topbar .sts-encounter > span:last-child{color:#dfe7ee;text-shadow:0 1px 4px #000,0 0 2px #000}
+#overlay .battle-stage.sts .sts-topbar .sts-encounter b{color:#ffe9b8;text-shadow:0 1px 4px #000,0 0 2px #000}
+/* #3 手牌下移 + 底部黑边去除 */
+#overlay .card.battle{background:transparent!important;border:0;box-shadow:none}
+#overlay .card.battle #ovBody{margin:0}
+/* 留言（同批追加）：卡面常态只露出一半（沉入约一半卡高），hover 浮出完整卡面 */
+body #overlay .battle-stage.sts .sts-hand .bt-slot{bottom:-76px!important}
+body #overlay .battle-stage.sts .sts-hand .bt-slot:hover .bt-card:not(.off):not(.aim-lift){transform:translateY(-96px) scale(1.04)!important}
+#overlay .battle-stage.sts .sts-hand{padding-bottom:0;margin-bottom:-14px}
+
+/* ===== 2026-09-13 留言批次十一（夜城色调统一 + 伤害/掉血动画增强）===== */
+/* 伤害数字：更大更醒目，普通=白红、终结/暴击=金 */
+#overlay .battle-stage.sts .sts-float.dmg{
+  color:#fff0f0;font-size:30px;font-weight:800;
+  text-shadow:0 0 8px rgba(200,40,30,.85),0 2px 3px #000,-1.5px 0 0 #6e1815,1.5px 0 0 #6e1815,0 -1.5px 0 #6e1815;
+}
+#overlay .battle-stage.sts .sts-float.hurt{font-size:42px;color:#ffb3a0}
+#overlay .battle-stage.sts .sts-float.finisher{
+  font-size:46px;color:#ffd76a;
+  text-shadow:0 0 12px rgba(255,170,60,.9),0 2px 4px #000,-2px 0 0 #7a4a10,2px 0 0 #7a4a10;
+}
+/* 掉血时血条槽体红闪一下（幽灵黄尾已有，补槽体瞬红强化感知） */
+#overlay .battle-stage.sts .bt-hpwrap{transition:box-shadow .3s}
+#overlay .battle-stage.sts .bt-hpwrap.hp-dropping{box-shadow:0 0 14px rgba(255,80,50,.95)!important;transition:none}
+/* 夜城色调：战斗文字统一暖金/月白，与夜城背景同调 */
+#overlay .battle-stage.sts{color:#eee9df}
+#overlay .battle-stage.sts .sts-topbar .sts-encounter b{color:#ffe9b8}

@@ -37,7 +37,12 @@ function createActionQueue() {
     return idle();
   }
 
-  return Object.freeze({ enqueue, idle, get length() { return pending.length; }, get running() { return running; } });
+  // 终局清队：只丢弃尚未开始执行的回调（length 是只读 getter，外部不能直接置 0）
+  function clear() {
+    pending.length = 0;
+  }
+
+  return Object.freeze({ enqueue, idle, clear, get length() { return pending.length; }, get running() { return running; } });
 }
 
 export { createActionQueue };

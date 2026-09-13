@@ -90,7 +90,7 @@ const drawN = +(c.draw || 0), infN = +(c.infuse || 0);
     ${isPrism ? '<i class="rv-beam" aria-hidden="true"></i>' : ''}
     ${hideCost ? '' : costMod
       ? `<div class="hsc-cost cost-mod ${costMod.down ? 'mod-down' : 'mod-up'}" title="费用变化：按 ${costMod.v} 费打出（原 ${costMod.base} 费）">${costMod.v}</div>`
-      : `<div class="hsc-cost">${c.cost}</div>`}
+      : (c.cost != null ? `<div class="hsc-cost">${c.cost}</div>` : '')}
     <div class="hsc-art">${artHTML}</div>
     <div class="hsc-name"><span>${esc(c.name || '未命名卡牌')}</span></div>
     <div class="hsc-type">${esc(c.type || '?')} · ${esc(ro === '职业' ? ((c.cls ? characterName(c.cls) : '人物') + '专属') : ro)}</div>

@@ -150,8 +150,47 @@ import { renderExpeditionPanel } from './expedition.view.js';
       setTimeout(() => { if (el.isConnected) close(); }, 2800);
     },
 
+    // 卡牌获得奖励演出（2026-09-13 老板：事件发卡要有奖励动画，不能静默进背包）：
+    // 与传说特写同壳（#cardGet 复用 #legendGet 的样式与动画），传说卡保留金色光柱与
+    // legend 音效，其余卡为中性演出 + gain 音效。多张连发走队列逐张播放。
+    _cardGetQueue: [],
+    _cardGetShowing: false,
+    showCardReward(card) {
+      if (!card) return;
+      this._cardGetQueue.push(card);
+      if (this._cardGetShowing) return;
+      this._cardGetShowing = true;
+      const showNext = () => {
+        const next = this._cardGetQueue.shift();
+        if (!next) { this._cardGetShowing = false; return; }
+        const legendary = next.rarity === '传说';
+        const el = document.createElement('div');
+        el.id = 'cardGet';
+        el.innerHTML = `<div class="lg-beam${legendary ? '' : ' lg-beam-plain'}" aria-hidden="true"></div>
+          <span class="lg-kicker">${legendary ? 'LEGENDARY · 传说' : 'REWARD · 获得卡牌'}</span>
+          <div class="lg-card">${SDT.Cards.cardHTML(next, 'lg')}</div>
+          <b class="lg-name">${next.name}</b>
+          <span class="lg-hint">点击任意处继续</span>`;
+        let closed = false;
+        const close = () => {
+          if (closed || !el.isConnected) return;
+          closed = true;
+          el.classList.add('lg-out');
+          setTimeout(() => el.remove(), 420);
+          setTimeout(showNext, 100);
+        };
+        el.addEventListener('click', close, { once: true });
+        document.body.appendChild(el);
+        SDT.Sound.sfx(legendary ? 'legend' : 'gain');
+        setTimeout(close, legendary ? 2800 : 2200);
+      };
+      showNext();
+    },
+
     // 卡牌放大特写（2026-09-07 留言：背包卡面点击放大查看）：
-    // 背景虚化压暗，卡牌 lg 大面居中弹出（缩放动画），点击任意处缩回；opts.footer 可挂额外按钮。
+    // 背景虚化压暗，卡牌 lg 大面居中弹出，点击任意处缩回；opts.footer 可挂额外按钮。
+    // 2026-09-12 留言：opts.from 传来源卡元素（或 rect）时走 FLIP——从来源卡的位置与
+    // 尺寸放大到居中位，替代统一的中央淡入；未传 from 的调用点维持原 czIn 动画。
     showCardZoom(card, opts = {}) {
       if (!card) return;
       const old = document.getElementById('cardZoom');
@@ -166,6 +205,14 @@ import { renderExpeditionPanel } from './expedition.view.js';
       const close = () => {
         if (closed) return;
         closed = true;
+        // cz-flip 的 animation:none 会一并压掉 czOut，收回前摘掉它恢复出场动画
+        // （inline transform/opacity 一并清掉，防中途收回残留）
+        const cardEl = el.querySelector('.cz-card');
+        if (cardEl) {
+          cardEl.classList.remove('cz-flip');
+          cardEl.style.transform = '';
+          cardEl.style.opacity = '';
+        }
         el.classList.add('cz-out');
         setTimeout(() => el.remove(), 260);
       };
@@ -184,6 +231,27 @@ import { renderExpeditionPanel } from './expedition.view.js';
         close();
       });
       document.body.appendChild(el);
+      const fromR = opts.from && (opts.from.getBoundingClientRect ? opts.from.getBoundingClientRect() : opts.from);
+      if (fromR && fromR.width > 0) {
+        const cardEl = el.querySelector('.cz-card');
+        const toR = cardEl.getBoundingClientRect();
+        if (toR.width > 0) {
+          // FLIP：先摆到来源卡位置与等比尺寸（中心对齐），下一帧过渡到居中位。
+          // 起步带低透明度 + 缓和曲线（.22,.61）：观感是"卡从原位浮现长大"，
+          // 快曲线会让卡像从屏幕外冲进来（2026-09-12 老板复验反馈）。
+          const s = fromR.width / toR.width;
+          const dx = (fromR.left + fromR.width / 2) - (toR.left + toR.width / 2);
+          const dy = (fromR.top + fromR.height / 2) - (toR.top + toR.height / 2);
+          cardEl.style.transform = `translate(${dx}px, ${dy}px) scale(${s})`;
+          cardEl.style.opacity = '0.25';
+          cardEl.classList.add('cz-flip');
+          // 强制 reflow 落定初态再清空即触发过渡——不能用双 rAF：后台窗口 rAF
+          // 停转会永远冻在起点（2026-09-12 实测），reflow 同步触发无此依赖。
+          void cardEl.offsetWidth;
+          cardEl.style.transform = '';
+          cardEl.style.opacity = '';
+        }
+      }
       SDT.Sound.sfx('hover');
     },
     refreshTime(game) {
@@ -354,6 +422,8 @@ import { renderExpeditionPanel } from './expedition.view.js';
       const victoryCard = this.el.ovBody.parentElement;
       if (victoryCard && /搜刮！/.test(title)) { victoryCard.classList.remove('fx-victory'); void victoryCard.offsetWidth; victoryCard.classList.add('fx-victory'); }
       this.el.ovBody.innerHTML = SDT.Icons.rich(bodyHtml);
+      // 广播当前弹层模式：战斗序列帧层据此做白名单（只有 battle 模式可见，2026-09-13 留言）
+      document.dispatchEvent(new CustomEvent('sdt-overlay-mode', { detail: mode }));
       // 主循环每帧读此标志判断“战斗页是否盖在画布上”；battle-stage 只会经这里进
       // overlay（ovBody 无其他写入点），按内容缓存一次，免去每帧全子树 querySelector
       this._hasBattleStage = bodyHtml.includes('battle-stage');
@@ -376,7 +446,8 @@ import { renderExpeditionPanel } from './expedition.view.js';
       this.el.overlay.classList.toggle('opaque', mode === 'page' || mode === 'bagpage');
       // 已打开状态下且弹窗模式变化（场景→战斗→结算等）时重播滑入动画；
       // 战斗内反复 render（同模式）不重播，避免每出一张卡就闪一次
-      if (wasOpen && this._lastMode !== mode) {
+      // 2026-09-12 留言 #33：page 页之间的返回/前进导航也重播入场动画（battle/bag 等高频重绘模式除外）
+      if (wasOpen && (this._lastMode !== mode || mode === 'page')) {
         card.classList.remove('swap');
         void card.offsetWidth;
         card.classList.add('swap');

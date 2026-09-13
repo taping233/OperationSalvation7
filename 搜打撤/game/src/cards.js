@@ -48,12 +48,8 @@ import { DATA } from './data-loader.js';
   const KEY = 'sdt-cards-v1';
   let _cardsCache = null;   // all() 的内存缓存，见 all() 处注释
   // 桌游道具卡播种记录：每批一个标记，只播一次，之后删改都尊重玩家
-  const TT_KEY = 'sdt-cards-tt-seeded';
-  const TT2_KEY = 'sdt-cards-tt2-seeded';
-  const TT3_KEY = 'sdt-cards-tt3-seeded';
   // 第二/三批按高清照片重辨修订后换用新版本标记：老浏览器重播一次，按 id 覆盖旧识别
   const TT2_KEY_V3 = 'sdt-cards-tt2-v3-seeded';  // v3：第五批照片精修武术描述
-  const TT3_KEY_V4 = 'sdt-cards-tt3-v4-seeded';  // v4：第五批照片修正武术摞费用与描述
   const TT1_KEY_V6 = 'sdt-cards-tt1-v6-seeded';  // v6：资源标注重拍照片——第一批改为资源类型、木材/木化拆分、经济卡包可出售
   const TT4_KEY_V2 = 'sdt-cards-tt4-v2-seeded';  // v2：第四批补入「木化」（与「木材」是两张卡）
   const TT3_KEY_V5 = 'sdt-cards-tt3-v5-seeded';  // v5：传说卡系列照片——8 张已有卡升传说/重辨修订并锁定随机获取
@@ -64,7 +60,7 @@ import { DATA } from './data-loader.js';
   const TT8_KEY = 'sdt-cards-tt8-seeded';        // 第八批：能力卡及衍生牌（原类型「英雄卡」，2026-09-08 定版更名「能力卡」；每职业 1 英雄，衍生牌围绕英雄效果）
   const TT9_KEY = 'sdt-cards-tt9-seeded';        // 第九批：生物图鉴（全部敌人信息录入，类型「生物」）
   const TT10_KEY = 'sdt-cards-tt10-v2-seeded';   // 第十批：设计者实机定版同步（2026-09-07 双向合并）；v2：清掉合并残留的错误词条（能力卡 armor:5 等）并重播覆盖一次
-  const TT11_KEY = 'sdt-cards-tt11-v2-seeded';   // 第十一批：与设计者实机卡库导出完全对齐（2026-09-09 老板拍板，见 TABLETOP11 注释）；v2：法力补给补 cls=法师（白塔专属），换 key 重播让旧档拿到
+  const TT11_KEY = 'sdt-cards-tt11-v5-seeded';   // 第十一批：与设计者实机卡库导出完全对齐（2026-09-09 老板拍板，见 TABLETOP11 注释）；v2：法力补给补 cls=法师（白塔专属）；v3：不变应万变补 cls=侠客（无专属，老板 2026-09-12 拍板）；v4：恶魔之力补 cls=牧师（星月专属，老板 2026-09-13 拍板）；v5：恶魔之力 tt7-drunksong 整卡退役（老板 2026-09-13 改拍板删除，同名双版收口只留 cc-demon）——均换 key 重播让旧档拿到
   const ITEM_RENAME_KEY = 'sdt-cards-item-renames-v1'; // 2026-09-08：道具定名 + 金创药/金疮药合并
   // 第十批退役：同设计重复 id（设计者实机已把同名卡定版在旧 id 上，见 TABLETOP10 尾部注释）
   const RETIRE_TT10 = ['tt3-freeze', 'tt3-flame-potion', 'tt3-toxic-potion', 'tt3-bleed-potion'];
@@ -77,7 +73,8 @@ import { DATA } from './data-loader.js';
     'tt3sp-mysticsummon', 'tt3sp-poisonfog', 'tt3sp-search', 'tt3sp-rageoil', 'tt3sp-cursewave',
     'tt3-galaxy-mirage', 'tt3-turtle', 'tt3-mana-blood', 'tt5-archstaff',
     'cc-treasure', 'cc-petal', 'cc-holysrc', 'cc-manasupply', 'cc-thousand', 'cc-doom', 'cc-darkform',
-    'cc-chargefb', 'cc-flameform', 'cc-deathray', 'cc-stormfb', 'cc-jianghu'];
+    'cc-chargefb', 'cc-flameform', 'cc-deathray', 'cc-stormfb', 'cc-jianghu',
+    'tt7-drunksong']; // 2026-09-13 老板拍板删除：恶魔之力同名双版收口只留 cc-demon
   const CC_KEY = 'sdt-cards-cc3-seeded';         // 职业整合迁移（2026-09-05 定版）：11 职业 → 5 职业，逐卡改归属；v2：邪渊主宰·妲莉薇特改归降临者并撤下「九尾焚天·妲」占位卡；v3：奥术残卷归法师、黑暗吊坠归降临者（2026-09-09 老板拍板收编）
 
   // 职业表（2026-09-05 设计者定版职业整合：原 11 职业 → 5 职业，每职业 10-12 张职业卡，
@@ -377,12 +374,6 @@ import { DATA } from './data-loader.js';
       return pool.length ? pool[Math.floor(Random.random('card') * pool.length)] : null;
     },
 
-    // 内置卡：复原药水（商店固定栏位，3 币；背包中使用——复原消耗口袋至多 2 张卡牌）
-    RESTORE: {
-      id: 'builtin-fuyuanyao', name: '复原药水', cost: 1,
-      rarity: '稀有', type: '道具', desc: '复原至多 2 张消耗卡牌（背包中使用）。',
-    },
-
     // 内置初始牌「初始攻击」：每局开始固定携带 5 张（同名堆叠只占 1 格背包）。
     // 1 费 · 攻（+0）＝ 伤害等同于攻击力（combat.js：攻击伤害 = 卡面值 + 攻击力）
     SHA: {
@@ -406,14 +397,14 @@ import { DATA } from './data-loader.js';
     TABLETOP: [
       // —— 第一排 ——
       { id: 'tt-medneedle',  name: '急救合剂', cost: 1, rarity: '古朴', type: '道具', desc: '回复 16 点生命。', value: 4 },
-      { id: 'tt-copper',     name: '铜币',     cost: 0, rarity: '初始', type: '道具', desc: '高价值，可出售。', value: 3 },
+      { id: 'tt-copper',     name: '铜币',     cost: 0, rarity: '初始', type: '道具', desc: '高价值，可出售。', value: 3, unrandom: true }, // 2026-09-13 老板拍板：经济牌退出商店/发现池，堵买低卖高套利
       { id: 'tt-keys-bunch', name: '一串钥匙', cost: 0, rarity: '古朴', type: '资源', desc: '钥匙 ×2。', value: 4 },
       { id: 'tt-rations',    name: '口粮',     cost: 0, rarity: '初始', type: '资源', desc: '升级宠物。', value: 3 },
       { id: 'tt-token-color', name: '员工通行证A', cost: 2, rarity: '史诗', type: '道具', desc: '觉醒。', value: 8 },
       // —— 第二排 ——
-      { id: 'tt-gold',       name: '金币',     cost: 0, rarity: '史诗', type: '道具', desc: '贵重货币，可出售。', value: 9 },
-      { id: 'tt-econpack',   name: '经济卡包', cost: 2, rarity: '传说', type: '资源', desc: '带入战场时，以 5 张随机卡牌开局。可出售。', value: 10, sellable: true }, // 资源标注重拍：卡面明确「可出售 10币」
-      { id: 'tt-silver',     name: '银币',     cost: 0, rarity: '古朴', type: '道具', desc: '可出售。', value: 6 },
+      { id: 'tt-gold',       name: '金币',     cost: 0, rarity: '史诗', type: '道具', desc: '贵重货币，可出售。', value: 9, unrandom: true },
+      { id: 'tt-econpack',   name: '经济卡包', cost: 2, rarity: '传说', type: '资源', desc: '带入战场时，以 5 张随机卡牌开局。可出售。', value: 10, sellable: true, unrandom: true }, // 资源标注重拍：卡面明确「可出售 10币」
+      { id: 'tt-silver',     name: '银币',     cost: 0, rarity: '古朴', type: '道具', desc: '可出售。', value: 6, unrandom: true },
       { id: 'tt-key',        name: '钥匙',     cost: 0, rarity: '初始', type: '资源', desc: '解锁神秘宝箱。', value: 2 },
       // —— 第三排 ——
       { id: 'tt-crystal',    name: '能源结晶', cost: 1, rarity: '古朴', type: '道具', desc: '复活最多 3 张卡牌。', value: 3 },
@@ -545,7 +536,7 @@ import { DATA } from './data-loader.js';
       { id: 'tt3-flux-slash',    name: '流光斩',   cost: 2, rarity: '传说', type: '武术', dmg: 1, dmgType: 'attack', desc: '攻1，附加 2 层流血；将流光斩复制放入牌库。', value: 5 }, // 传说系列重拍：改武术、攻1、复制入牌库（原文「流光照影放入牌库」重辨存疑）
       { id: 'tt3-galaxy-mirage', name: '银河幻境', cost: 2, rarity: '史诗', type: '法术', desc: '布下幻阵，治疗所有队友。', value: 5 },
       { id: 'tt3-immortal-blade', name: '不朽神剑', cost: 2, rarity: '传说', type: '装备', desc: '对战开始时，你的攻击化为 1 张不朽斩。', value: 5 }, // 传说系列重拍：效果按本批照片重写
-      { id: 'tt3-diamond',       name: '钻石',     cost: 0, rarity: '传说', type: '资源', desc: '贵重货币，可出售。', value: 16 },
+      { id: 'tt3-diamond',       name: '钻石',     cost: 0, rarity: '传说', type: '资源', desc: '贵重货币，可出售。', value: 16, unrandom: true },
       { id: 'tt3-master-staff',  name: '大师的神杖', cost: 2, rarity: '稀有', type: '道具', desc: '回合开始时回复 5 点生命。', value: 5 },
       { id: 'tt3-chaos-eye',     name: '混沌之眼', cost: 1, rarity: '传说', type: '装备', desc: '装备：血量上限 +10，牌库上限 5。', value: 5 }, // 传说系列重拍：卡名/效果按本批照片（旧读「混沌眼」「生命上限+10」）
       { id: 'tt3-execute',       name: '斩杀',     cost: 3, rarity: '传说', type: '武术', dmg: 9, dmgType: 'spell', desc: "对 9 血以下角色造成 9′。", value: 5 }, // 传说系列重拍：角标武术、阈值 9 血
@@ -576,7 +567,7 @@ import { DATA } from './data-loader.js';
       { id: 'tt3eq-boiler',     name: '魔法锅炉', cost: 3, rarity: '古朴', type: '装备', desc: '限定：消耗至多 2 张牌，发现等量随机卡牌。' },
       { id: 'tt3eq-mistbox',    name: '迷之匣',   cost: 2, rarity: '古朴', type: '装备', desc: '对战开始时，将 2 张攻替换为随机卡牌。' },
       // —— 资源（散卡 3 张）——
-      { id: 'tt3-garnet-marble', name: '石榴石弹珠', cost: 0, rarity: '古朴', type: '资源', desc: '漂亮的小玩意，可出售。', value: 3 },
+      { id: 'tt3-garnet-marble', name: '石榴石弹珠', cost: 0, rarity: '古朴', type: '资源', desc: '漂亮的小玩意，可出售。', value: 4, unrandom: true }, // 2026-09-13 老板拍板：卖价 3→4，并退出商店/发现池
       { id: 'tt3-wood-bundle',  name: '一捆木材', cost: 0, rarity: '稀有', type: '资源', desc: '木材 ×3。', value: 6 },
       { id: 'tt3-ration-double', name: '双份口粮', cost: 0, rarity: '稀有', type: '资源', desc: '口粮 ×2。', value: 6 },
     ],
@@ -641,7 +632,7 @@ import { DATA } from './data-loader.js';
       { id: 'tt7-meteorrain',  name: '流星箭雨',   cost: 2, rarity: '职业', type: '武术', cls: '侠客', unrandom: true, dmg: 1, dmgType: 'attack', desc: '攻1，2 段伤害。', value: 3 },
       { id: 'tt7-stealth',     name: '潜匿',       cost: 1, rarity: '职业', type: '武术', cls: '侠客', unrandom: true, desc: '进入潜行状态 1 回合。', value: 4 },
       { id: 'tt7-swordimmortal', name: '剑仙形态', cost: 3, rarity: '职业', type: '武术', cls: '侠客', unrandom: true, desc: '对决中，每回合额外抽 1 张。', value: 4 }, // 定版更名（原剑仙附身）
-      // —— 战士（← 战士 + 守卫；能力卡：龙吟沧海·关云长 / 圣剑誓约·亚瑟）——
+      // —— 战士（← 战士 + 守卫；能力卡：青龙化身 / 圣剑化身，2026-09-13 老板拍板定名，原 龙吟沧海·关云长 / 圣剑誓约·亚瑟）——
       { id: 'cc-unmoved',      name: '不变应万变', cost: 2, rarity: '职业', type: '武术', cls: '战士', unrandom: true, desc: '本回合所受伤害降为 1，获得 4 点护甲。', value: 3 },
       { id: 'tt7-marchrush',   name: '急行军',     cost: 2, rarity: '职业', type: '武术', cls: '战士', unrandom: true, desc: '抽 2 张牌，+4 甲；压制：抽 1 张牌。', value: 3 }, // 定版更名（原急行奔驰）
       { id: 'tt7-bulwark',     name: '坚盾',       cost: 1, rarity: '职业', type: '武术', cls: '战士', unrandom: true, desc: '本回合获得 8 点护甲，回合结束 -4 点。', value: 2 },
@@ -652,7 +643,7 @@ import { DATA } from './data-loader.js';
       { id: 'tt7-fullstrike',  name: '全力一击',   cost: 3, rarity: '职业', type: '武术', cls: '战士', unrandom: true, dmg: 5, dmgType: 'attack', desc: '攻5，抽 1 张牌。', value: 2 },
       { id: 'tt7-ironphalanx', name: '铁甲阵',     cost: 2, rarity: '职业', type: '武术', cls: '战士', unrandom: true, desc: '+10 甲，洗入 5 张随机卡牌。', value: 4 },
       { id: 'tt7-bloodpoison', name: '血毒双镖',   cost: 2, rarity: '职业', type: '武术', cls: '战士', unrandom: true, dmg: 1, dmgType: 'attack', desc: '攻1，附加流血；攻1，附加中毒。', value: 2 },
-      // —— 牧师（← 牧师 + 授印者 + 术士；能力卡：浪掷风吟·露娜拉 / 无极梦魇·血苑修罗）——
+      // —— 牧师（← 牧师 + 授印者 + 术士；能力卡：浪掷风吟 / 禁术解放，2026-09-13 老板拍板实机定名）——
       // 另有 吞噬（tt3sp-devour）/ 圣盾（tt3-holy-shield）自第三批原地转职为本职业卡
       { id: 'tt7-silence',     name: '禁言术',     cost: 0, rarity: '职业', type: '法术', cls: '牧师', unrandom: true, desc: '沉默 1 名角色 1 回合，抽 1 张牌。', value: 2 },
       { id: 'cc-demon',        name: '恶魔之力',   cost: 1, rarity: '职业', type: '法术', cls: '牧师', unrandom: true, dmg: 4, dmgType: 'spell', desc: "4′，损失 2 点生命。", value: 3 },
@@ -663,7 +654,7 @@ import { DATA } from './data-loader.js';
       { id: 'tt7-bloodpotion', name: '噬血术',     cost: 2, rarity: '职业', type: '法术', cls: '牧师', unrandom: true, dmg: 3, dmgType: 'spell', desc: "混合：3′，吸血。", value: 3 }, // 定版更名（原噬血药水）
       { id: 'tt7-smite',       name: '惩击',       cost: 2, rarity: '职业', type: '法术', cls: '牧师', unrandom: true, dmg: 4, dmgType: 'spell', desc: "4′，对血量以下的敌人不能增益。", value: 2 },
       { id: 'cc-holysrc',      name: '圣光之源',   cost: 2, rarity: '职业', type: '法术', cls: '牧师', unrandom: true, desc: '每回合结束回复 2 点生命。', value: 3 },
-      // —— 法师（← 法师 + 召唤师；能力卡：明灯千里·孔明 / 神话终章·雷修斯）——
+      // —— 法师（← 法师 + 召唤师；能力卡：博览者的狂语 / 花开两面，2026-09-13 老板拍板实机定名）——
       // 另有 坚冰结界（tt3-firm-barrier）自第三批原地转职为本职业卡
       { id: 'tt7-arcanebolt',  name: '奥术弹',     cost: 0, rarity: '职业', type: '法术', cls: '法师', unrandom: true, dmg: 1, dmgType: 'spell', desc: "1′，抽 1 张牌。", value: 3 },
       { id: 'tt7-energize',    name: '聚能',       cost: 0, rarity: '职业', type: '法术', cls: '法师', unrandom: true, desc: '能量 +1。', value: 2 },
@@ -691,15 +682,15 @@ import { DATA } from './data-loader.js';
     // 桌游手绘卡 · 第八批（2026-09-01「英雄卡」照片 → 2026-09-05 职业整合定版；类型 2026-09-08 定版更名「能力卡」）：
     // 能力卡 = 各职业的觉醒形态（角标「职业·觉醒」），type 能力卡、cls 绑定职业、hero: true；
     // 2026-09-05 职业整合后每职业 1-3 张能力卡：
-    //   侠客：妄 / 云阳 / 云风 · 战士：关云长 / 亚瑟 · 牧师：露娜拉 / 修罗（原术士英雄定版更名）
-    //   法师：孔明 / 雷修斯（原召唤师英雄定版更名）· 降临者：邪渊主宰·妲莉薇特 / 楔
-    // 原授印者英雄「邪渊主宰」2026-09-05 定版更名「邪渊主宰·妲莉薇特」并改归降临者
+    //   侠客：妄 / 云阳 / 云风 · 战士：青龙化身 / 圣剑化身 · 牧师：浪掷风吟 / 禁术解放（2026-09-13 实机定名）
+    //   法师：博览者的狂语 / 花开两面（原召唤师英雄定版更名）· 降临者：邪渊主宰 / 充能火山
+    // 原授印者英雄「邪渊主宰」2026-09-05 改归降临者；2026-09-13 实机定名定回「邪渊主宰」
     //（描述按降临者火焰主题重写，卡面立绘随 cls 自动换为降临者）；
     // 其印记衍生牌（治伤+1 等 4 张）未随迁，保留退役。
     // 能力卡本体只能通过 ① 事件拼凑 ② 祭坛弃牌 ③ 员工通行证A 三种途径获得——均不实装为
     // 随机获取，故全部 unrandom（获取途径待后续版本实装）。
     // 衍生牌（角标「衍」/「××专属·衍生」）围绕英雄效果展开：rarity 衍生、
-    // tokenOf 指向所属英雄；禁咒×4 由牧师英雄「无极梦魇·血苑修罗」洗入牌库，
+    // tokenOf 指向所属英雄；禁咒×4 由牧师英雄「禁术解放」洗入牌库，
     // 诛魔剑系由侠客英雄「天剑诛魔·云阳」洗入牌库，青龙偃月斩为战士英雄武器。
     // 角标 [[icon:crystal]][[icon:crystal]]/[[icon:crystal]] 照录为稀有/古朴；「5[[icon:coin]]/8[[icon:coin]]」为币值（右下盾形数字同值）。
     TABLETOP8: [
@@ -707,15 +698,15 @@ import { DATA } from './data-loader.js';
       { id: 'tt8-hero-assassin',   name: '白梅落影·妄',       cost: 0, rarity: '稀有', type: '能力卡', cls: '侠客', hero: true, unrandom: true, desc: '潜入夺宝：净化陷阱，潜行 2 回合；破隐一连击开弹幕。', value: 5 }, // 关键词与尾句重辨存疑
       { id: 'tt8-hero-sword',      name: '无量仙剑·云风',     cost: 0, rarity: '稀有', type: '能力卡', cls: '侠客', hero: true, unrandom: true, desc: '万剑归宗：抽 5 张牌，充能 +1。', value: 5 }, // 尾句重辨存疑
       { id: 'tt8-hero-ranger',     name: '天剑诛魔·云阳',     cost: 0, rarity: '古朴', type: '能力卡', cls: '侠客', hero: true, unrandom: true, desc: '寂断念：将天启剑与 5 件魔剑洗入牌库。', value: 5 }, // 关键词重辨存疑
-      { id: 'tt8-hero-warrior',    name: '龙吟沧海·关云长',   cost: 0, rarity: '稀有', type: '能力卡', cls: '战士', hero: true, unrandom: true, desc: '真龙降世：攻 +2 的青龙偃月斩。', value: 8 },
-      { id: 'tt8-hero-guardian',   name: '圣剑誓约·亚瑟',     cost: 0, rarity: '古朴', type: '能力卡', cls: '战士', hero: true, unrandom: true, desc: '诛邪圣剑：本局对战，能量上限 +1，起始牌 +1。', value: 8 },
-      { id: 'tt8-hero-priest',     name: '浪掷风吟·露娜拉',   cost: 0, rarity: '稀有', type: '能力卡', cls: '牧师', hero: true, unrandom: true, desc: '甘霖降世：置入随机卡牌直至 6 张；每 1 次施法回复 3 血。', value: 5 },
-      { id: 'tt8-hero-warlock',    name: '无极梦魇·血苑修罗', cost: 0, rarity: '稀有', type: '能力卡', cls: '牧师', hero: true, unrandom: true, desc: '无定横行：将四张禁咒洗入牌库，然后抽 2 张牌。', value: 5 }, // 定版更名（原无极魔怨·血欲断念）；关键词重辨存疑
-      { id: 'tt8-hero-mage',       name: '明灯千里·孔明',     cost: 0, rarity: '稀有', type: '能力卡', cls: '法师', hero: true, unrandom: true, desc: '万法乾坤：法伤 +1，回合结束时抽 1 张牌。', value: 5 },
-      { id: 'tt8-hero-summoner',   name: '神话终章·雷修斯',   cost: 0, rarity: '稀有', type: '能力卡', cls: '法师', hero: true, unrandom: true, desc: '元素潮汐：打开神界之门。', value: 5 }, // 定版更名（原神话终章·维新）；卡名/关键词重辨存疑
-      { id: 'tt8-hero-sealer',     name: '邪渊主宰·妲莉薇特', cost: 0, rarity: '稀有', type: '能力卡', cls: '降临者', hero: true, unrandom: true, desc: '深渊降焰：法伤 +1，每消耗 1 张卡牌，施放 1 次火球。', value: 5 }, // 定版更名并改归降临者（原授印者英雄「邪渊主宰」）；效果沿用「每消耗 1 张牌施放火球」结算
-      { id: 'tt8-hero-descender',  name: '楔天玄翼·焚殃',     cost: 0, rarity: '古朴', type: '能力卡', cls: '降临者', hero: true, unrandom: true, dmg: 4, dmgType: 'spell', desc: "寂灭苍穹：法伤 +1，每消耗 1 张牌，施放 1 次火球术(4′)。", value: 5 }, // 卡名重辨存疑
-      // —— 衍生牌 · 牧师专属（无极梦魇·血苑修罗洗入牌库的禁咒）——
+      { id: 'tt8-hero-warrior',    name: '青龙化身',   cost: 0, rarity: '稀有', type: '能力卡', cls: '战士', hero: true, unrandom: true, desc: '真龙降世：攻 +2 的青龙偃月斩。', value: 8 },
+      { id: 'tt8-hero-guardian',   name: '圣剑化身',     cost: 0, rarity: '古朴', type: '能力卡', cls: '战士', hero: true, unrandom: true, desc: '诛邪圣剑：本局对战中，能量上限 +1，装备上限 +1。', value: 8 },
+      { id: 'tt8-hero-priest',     name: '浪掷风吟',   cost: 0, rarity: '稀有', type: '能力卡', cls: '牧师', hero: true, unrandom: true, desc: '甘霖降世：置入随机卡牌直至 6 张；每 1 次施法回复 3 血。', value: 5 },
+      { id: 'tt8-hero-warlock',    name: '禁术解放', cost: 0, rarity: '稀有', type: '能力卡', cls: '牧师', hero: true, unrandom: true, desc: '无定横行：将四张禁咒洗入牌库，然后抽 2 张牌。', value: 5 }, // 定名 2026-09-13 老板拍板实机名（原 无极梦魇·血苑修罗）
+      { id: 'tt8-hero-mage',       name: '博览者的狂语',     cost: 0, rarity: '稀有', type: '能力卡', cls: '法师', hero: true, unrandom: true, desc: '万法乾坤：法伤 +1，回合结束时抽 1 张牌。', value: 5 },
+      { id: 'tt8-hero-summoner',   name: '花开两面',   cost: 0, rarity: '稀有', type: '能力卡', cls: '法师', hero: true, unrandom: true, desc: '元素潮汐：打开神界之门。', value: 5 }, // 定名 2026-09-13 老板拍板实机名（原 神话终章·雷修斯）
+      { id: 'tt8-hero-sealer',     name: '邪渊主宰', cost: 0, rarity: '稀有', type: '能力卡', cls: '降临者', hero: true, unrandom: true, desc: '深渊降焰：法伤 +1，每消耗 1 张卡牌，施放 1 次火球。', value: 5 }, // 定版更名并改归降临者（原授印者英雄「邪渊主宰」）；效果沿用「每消耗 1 张牌施放火球」结算
+      { id: 'tt8-hero-descender',  name: '充能火山',     cost: 0, rarity: '古朴', type: '能力卡', cls: '降临者', hero: true, unrandom: true, dmg: 4, dmgType: 'spell', desc: "寂灭苍穹：法伤 +1，每消耗 1 张牌，施放 1 次火球术(4′)。", value: 5 }, // 卡名重辨存疑
+      // —— 衍生牌 · 牧师专属（禁术解放洗入牌库的禁咒）——
       { id: 'tt8-curse1', name: '禁咒I',   cost: 0, rarity: '衍生', type: '法术', cls: '牧师', tokenOf: 'tt8-hero-warlock', unrandom: true, desc: '抽到时施放：夺取 1 点攻击力。', value: 5 },
       { id: 'tt8-curse2', name: '禁咒II',  cost: 0, rarity: '衍生', type: '法术', cls: '牧师', tokenOf: 'tt8-hero-warlock', unrandom: true, desc: '抽到时施放：冰冻。', value: 5 },
       { id: 'tt8-curse3', name: '禁咒III', cost: 0, rarity: '衍生', type: '法术', cls: '牧师', tokenOf: 'tt8-hero-warlock', unrandom: true, desc: '抽到时施放：中毒，流血。', value: 5 },
@@ -724,7 +715,7 @@ import { DATA } from './data-loader.js';
       { id: 'tt8-demonslay',  name: '诛魔剑',     cost: 0, rarity: '衍生', type: '装备', cls: '侠客', tokenOf: 'tt8-hero-ranger', unrandom: true, desc: '抽到时攻击全体敌人；以天启诛魔剑覆盖你的所有武器。', value: 4 },
       { id: 'tt8-archdemon',  name: '天启诛魔剑', cost: 0, rarity: '衍生', type: '装备', cls: '侠客', tokenOf: 'tt8-hero-ranger', unrandom: true, desc: '攻 +1，手中所有武器牌视为重衍。', value: 5 }, // 尾句重辨存疑
       { id: 'tt8-heavensword', name: '天启剑',    cost: 0, rarity: '衍生', type: '装备', cls: '侠客', tokenOf: 'tt8-hero-ranger', unrandom: true, desc: '抽到时额外抽 1 张牌；在你抽到天启剑与 5 件魔剑后……', value: 4 },
-      // —— 衍生牌 · 战士（关云长的佩刀）——
+      // —— 衍生牌 · 战士（青龙化身的佩刀）——
       { id: 'tt8-dragonblade', name: '青龙偃月斩', cost: 0, rarity: '衍生', type: '武术', cls: '战士', tokenOf: 'tt8-hero-warrior', unrandom: true, dmg: 6, dmgType: 'attack', desc: '攻6，破甲，流血。', value: 8 },
     ],
 
@@ -782,11 +773,11 @@ import { DATA } from './data-loader.js';
     TABLETOP10: [
       { id: 'builtin-sha', name: '初始攻击', cost: 1, rarity: '初始', type: '武术', desc: '攻（+0）：造成等同于攻击力的伤害。', dmg: 0, dmgType: 'attack', value: 1 },
       { id: 'tt-medneedle', name: '急救合剂', cost: 0, rarity: '稀有', type: '道具', desc: '回合开始时：回复 6点生命。持续 3 回合。', dmg: 0, heal: 16, value: 4 },
-      { id: 'tt-copper', name: '铜币', cost: 0, rarity: '古朴', type: '资源', desc: '可出售。', dmg: 0, value: 3, sellable: true },
+      { id: 'tt-copper', name: '铜币', cost: 0, rarity: '古朴', type: '资源', desc: '可出售。', dmg: 0, value: 3, sellable: true, unrandom: true },
       { id: 'tt-keys-bunch', name: '一串钥匙', cost: 0, rarity: '稀有', type: '资源', desc: '钥匙 ×2。', dmg: 0, value: 4 },
       { id: 'tt-rations', name: '口粮', cost: 0, rarity: '稀有', type: '资源', desc: '升级宠物。', dmg: 0, value: 3 },
-      { id: 'tt-gold', name: '金币', cost: 0, rarity: '史诗', type: '资源', desc: '贵重货币，可出售。', dmg: 0, value: 9, sellable: true },
-      { id: 'tt-silver', name: '银币', cost: 0, rarity: '稀有', type: '资源', desc: '可出售。', dmg: 0, value: 6, sellable: true },
+      { id: 'tt-gold', name: '金币', cost: 0, rarity: '史诗', type: '资源', desc: '贵重货币，可出售。', dmg: 0, value: 9, sellable: true, unrandom: true },
+      { id: 'tt-silver', name: '银币', cost: 0, rarity: '稀有', type: '资源', desc: '可出售。', dmg: 0, value: 6, sellable: true, unrandom: true },
       { id: 'tt-key', name: '钥匙', cost: 0, rarity: '古朴', type: '资源', desc: '解锁大门。', dmg: 0, value: 2 },
       { id: 'tt-crystal', name: '能源结晶', cost: 0, rarity: '史诗', type: '道具', desc: '在背包中才能使用，复原最多 3 张卡牌。', dmg: 0, value: 3 },
       { id: 'tt-key-one', name: '一把钥匙', cost: 0, rarity: '史诗', type: '资源', desc: '钥匙 ×3。', dmg: 0, value: 6 },
@@ -932,15 +923,15 @@ import { DATA } from './data-loader.js';
       { id: 'tt7-marchrush', cls: '战士', name: '急行军', cost: 1, rarity: '职业', type: '武术', desc: '抽 2张牌，+2甲；若本牌为最后一张手牌，效果触发2次。', dmg: 0, draw: 2, armor: 2, value: 3, unrandom: true },
       { id: 'tt8-hero-assassin', cls: '侠客', hero: true, name: '白梅落影·妄', cost: 2, rarity: '稀有', type: '能力卡', desc: '遁入虚空：净化自身，潜行 2 回合；破隐一击伤害翻倍。', dmg: 0, value: 8, unrandom: true },
       { id: 'tt8-hero-sword', cls: '侠客', hero: true, name: '无量仙剑·云风', cost: 2, rarity: '稀有', type: '能力卡', desc: '万剑归宗：抽 5 张牌，直接释放其中武术。', dmg: 0, draw: 5, value: 8, unrandom: true },
-      { id: 'tt8-hero-warlock', cls: '牧师', hero: true, name: '无极梦魇·血苑修罗', cost: 2, rarity: '稀有', type: '能力卡', desc: '天灾横行：将四张禁咒洗入牌库，然后抽 2 张牌。', dmg: 0, draw: 2, value: 8, unrandom: true },
-      { id: 'tt8-hero-mage', cls: '法师', hero: true, name: '明灯千里·孔明', cost: 2, rarity: '稀有', type: '能力卡', desc: '万法乾坤：法伤 +1，回合开始时发现 1 张卡牌。', dmg: 0, value: 8, unrandom: true },
-      { id: 'tt8-hero-priest', cls: '牧师', hero: true, name: '浪掷风吟·露娜拉', cost: 2, rarity: '棱彩', type: '能力卡', desc: '甘霖降世：置入随机卡牌直至手牌达到 6 张；其中每置入1 张法术，回复 3 血。', dmg: 0, heal: 3, value: 8, unrandom: true },
-      { id: 'tt8-hero-sealer', cls: '降临者', hero: true, name: '邪渊主宰·妲莉薇特', cost: 2, rarity: '棱彩', type: '能力卡', desc: '深渊降焰：法伤 +1，每消耗 1 张卡牌，施放 1 次火球。', dmg: 0, value: 8, unrandom: true },
-      { id: 'tt8-hero-descender', cls: '降临者', hero: true, name: '楔天玄翼·焚殃', cost: 2, rarity: '古朴', type: '能力卡', desc: '寂灭苍穹：法伤 +1，本局对战中，每消耗 1 张卡牌，施放 1 次‘火球’。', dmg: 0, value: 8, unrandom: true },
-      { id: 'tt8-hero-summoner', cls: '法师', hero: true, name: '神话终章·雷修斯', cost: 2, rarity: '棱彩', type: '能力卡', desc: '元素潮汐：抉择：打开‘末日浩劫之门’或者‘天国之门’。两回合后，开启未选择的那扇‘门’', dmg: 0, value: 8, unrandom: true },
-      { id: 'tt8-hero-guardian', cls: '战士', hero: true, name: '圣剑誓约·亚瑟', cost: 2, rarity: '古朴', type: '能力卡', desc: '诛邪圣剑：本局对战中，能量上限 +1，装备上限 +1。', dmg: 0, value: 8, unrandom: true },
+      { id: 'tt8-hero-warlock', cls: '牧师', hero: true, name: '禁术解放', cost: 2, rarity: '稀有', type: '能力卡', desc: '天灾横行：将四张禁咒洗入牌库，然后抽 2 张牌。', dmg: 0, draw: 2, value: 8, unrandom: true },
+      { id: 'tt8-hero-mage', cls: '法师', hero: true, name: '博览者的狂语', cost: 2, rarity: '稀有', type: '能力卡', desc: '万法乾坤：法伤 +1，回合开始时发现 1 张卡牌。', dmg: 0, value: 8, unrandom: true },
+      { id: 'tt8-hero-priest', cls: '牧师', hero: true, name: '浪掷风吟', cost: 2, rarity: '棱彩', type: '能力卡', desc: '甘霖降世：置入随机卡牌直至手牌达到 6 张；其中每置入1 张法术，回复 3 血。', dmg: 0, heal: 3, value: 8, unrandom: true },
+      { id: 'tt8-hero-sealer', cls: '降临者', hero: true, name: '邪渊主宰', cost: 2, rarity: '棱彩', type: '能力卡', desc: '深渊降焰：法伤 +1，每消耗 1 张卡牌，施放 1 次火球。', dmg: 0, value: 8, unrandom: true },
+      { id: 'tt8-hero-descender', cls: '降临者', hero: true, name: '充能火山', cost: 2, rarity: '古朴', type: '能力卡', desc: '寂灭苍穹：法伤 +1，本局对战中，每消耗 1 张卡牌，施放 1 次‘火球’。', dmg: 0, value: 8, unrandom: true },
+      { id: 'tt8-hero-summoner', cls: '法师', hero: true, name: '花开两面', cost: 2, rarity: '棱彩', type: '能力卡', desc: '元素潮汐：抉择：打开‘末日浩劫之门’或者‘天国之门’。两回合后，开启未选择的那扇‘门’', dmg: 0, value: 8, unrandom: true },
+      { id: 'tt8-hero-guardian', cls: '战士', hero: true, name: '圣剑化身', cost: 2, rarity: '古朴', type: '能力卡', desc: '诛邪圣剑：本局对战中，能量上限 +1，装备上限 +1。', dmg: 0, value: 8, unrandom: true },
       { id: 'tt8-hero-ranger', cls: '侠客', hero: true, name: '天剑诛魔·云阳', cost: 2, rarity: '古朴', type: '能力卡', desc: '断念：将天启剑与诛魔剑洗入牌库。', dmg: 0, value: 8, unrandom: true },
-      { id: 'tt8-hero-warrior', cls: '战士', hero: true, name: '龙吟沧海·关云长', cost: 2, rarity: '稀有', type: '能力卡', desc: '真龙降世：本局对战中，将‘初始攻击’化为‘青龙偃月斩’。', dmg: 0, value: 8, unrandom: true },
+      { id: 'tt8-hero-warrior', cls: '战士', hero: true, name: '青龙化身', cost: 2, rarity: '稀有', type: '能力卡', desc: '真龙降世：本局对战中，将‘初始攻击’化为‘青龙偃月斩’。', dmg: 0, value: 8, unrandom: true },
       { id: 'tt8-curse1', cls: '牧师', hero: true, tokenOf: 'tt8-hero-warlock', name: '禁咒I', cost: 0, rarity: '衍生', type: '法术', desc: '抽到时施放：夺取 一名敌人的1 点攻击力。', dmg: 0, value: 8, unrandom: true },
       { id: 'tt8-curse2', cls: '牧师', hero: true, tokenOf: 'tt8-hero-warlock', name: '禁咒II', cost: 0, rarity: '衍生', type: '法术', desc: '抽到时施放：冰冻一名敌人。', dmg: 0, value: 8, unrandom: true },
       { id: 'tt8-curse3', cls: '牧师', hero: true, tokenOf: 'tt8-hero-warlock', name: '禁咒III', cost: 0, rarity: '衍生', type: '法术', desc: '抽到时施放：对1名敌人施加中毒，流血。', dmg: 0, value: 8, unrandom: true },
@@ -961,16 +952,17 @@ import { DATA } from './data-loader.js';
     // 桌游手绘卡 · 第十一批（2026-09-09 与设计者实机卡库导出完全对齐，老板拍板）：
     // 以微信接收的设计者导出（搜打撤·代号7_卡牌库_233张.json，裸数组旧格式）为准：
     //   · 补入设计者实机有而仓库缺失的 26 张（tt7 旧职业卡 9 / 封印肢体 4 /
-    //     制作坊自建 cmtn* 13）；恶魔之力·厉兵秣马·不变应万变新旧两版并存，
-    //     与设计者实机一致（旧版 tt7-* 无 cls，不进职业池；例外：法力补给
-    //     tt7-maxsupply 仓库侧补 cls=法师——白塔专属，卡面「人物专属」写不清归属）；
+    //     制作坊自建 cmtn* 13）；厉兵秣马·不变应万变新旧两版并存，与设计者实机一致
+    //     （旧版 tt7-* 无 cls，不进职业池；例外：法力补给 tt7-maxsupply 仓库侧补
+    //     cls=法师——白塔专属，卡面「人物专属」写不清归属）；
+    //   · 恶魔之力 tt7-drunksong 整卡退役（2026-09-13 老板拍板删除：同名双版收口只留
+    //     cc-demon；入 RETIRE_TT11 + key 升 v5 重播清老档）；
     //   · 25 张共享 id 卡整卡取设计者稿（寻宝图/员工通行证A/经济卡包/初始火球/
     //     tt6-goldhammer/风暴火球/致命射线/花瓣 回退设计者版），其中：
     //     能力卡 type 保持定版「能力卡」、敌人图鉴保仓库 art 贴图键、
     //     desc「英雄卡」字样改「能力卡」（2026-09-08 术语定版）；
     // 覆盖/补种/退役走 ensureTabletopSync11()（TT11_KEY 标记，一次性）。
     TABLETOP11: [
-      { id: "tt7-drunksong", name: "恶魔之力", cost: 0, rarity: "职业", type: "法术", dmg: 0, draw: 3, desc: "受到3点伤害，抽 3 张牌。", value: 3, sellable: false },
       { id: "tt7-livingwater", name: "圣光之源", cost: 2, rarity: "职业", type: "法术", dmg: 0, draw: 5, desc: "抽 5 张牌。", value: 3, sellable: false },
       { id: "tt7-naturestaff", name: "自然法杖", cost: 0, rarity: "职业", type: "装备", dmg: 0, desc: "限定技能：选择 1 张卡牌，下回合将其变为 0 费。", value: 3, sellable: false },
       { id: "tt7-darkfort", cls: "降临者", name: "黑暗吊坠", cost: 0, rarity: "职业", type: "装备", dmg: 0, desc: "免疫 1 次致命伤害，并在该回合内处于无敌状态。", value: 3, sellable: false }, // cls 为定版归属（老板 2026-09-09 拍板常无欲专属）
@@ -978,7 +970,7 @@ import { DATA } from './data-loader.js';
       { id: "tt7-talisman", name: "灵符", cost: 0, rarity: "职业", type: "装备", dmg: 0, draw: 2, desc: "对战开始时，额外抽 2 张牌。", value: 3, sellable: false },
       { id: "tt7-ironcharge", name: "厉兵秣马", cost: 2, rarity: "职业", type: "武术", dmg: 0, draw: 2, armor: 12, desc: "+12 甲，抽 2 张牌。", value: 3, sellable: false },
       { id: "tt7-maxsupply", cls: "法师", name: "法力补给", cost: 1, rarity: "职业", type: "法术", dmg: 0, desc: "抽牌，直到有 4 张手牌。", value: 3, sellable: false }, // cls 为仓库侧定版（老板 2026-09-09 拍板白塔专属），设计者实机稿无 cls
-      { id: "tt7-imitate", name: "不变应万变", cost: 1, rarity: "职业", type: "武术", dmg: 0, desc: "在手牌中时，本牌变为打出的上一张武术牌的1费复制。", value: 3, sellable: false },
+      { id: "tt7-imitate", cls: "侠客", name: "不变应万变", cost: 1, rarity: "职业", type: "武术", dmg: 0, desc: "在手牌中时，本牌变为打出的上一张武术牌的1费复制。", value: 3, sellable: false }, // cls 为定版归属（老板 2026-09-12 拍板无专属）
       { id: "tt8-healplus", tokenOf: "tt8-hero-sealer", name: "封印肢体4", cost: 0, rarity: "棱彩", type: "生物", dmg: 0, desc: "法伤 +1。", value: 8, sellable: false, unrandom: true },
       { id: "tt8-energycap", tokenOf: "tt8-hero-sealer", name: "封印肢体2", cost: 0, rarity: "棱彩", type: "生物", dmg: 0, desc: "能量上限 +1。", value: 8, sellable: false, unrandom: true },
       { id: "tt8-nofocus", tokenOf: "tt8-hero-sealer", name: "封印肢体3", cost: 0, rarity: "棱彩", type: "生物", dmg: 0, desc: "无需注能。", value: 8, sellable: false, unrandom: true },
@@ -999,7 +991,7 @@ import { DATA } from './data-loader.js';
       // —— 以下 25 张共享 id 卡取设计者稿（整卡覆盖） ——
       { id: "starter-emergency-bandage", name: "应急绷带", cost: 0, rarity: "稀有", type: "道具", dmg: 0, heal: 12, desc: "回复12 点生命。", value: 0, sellable: false },
       { id: "tt-token-color", name: "员工通行证A", cost: 0, rarity: "史诗", type: "道具", dmg: 0, desc: "集齐两枚碎片，合成真正的彩色令牌：获取一张能力卡。", value: 4, sellable: false },
-      { id: "tt-econpack", name: "经济卡包", cost: 0, rarity: "史诗", type: "资源", dmg: 0, desc: "只能在仓库界面点击使用，获得5张随机卡牌", value: 10, sellable: false },
+      { id: "tt-econpack", name: "经济卡包", cost: 0, rarity: "史诗", type: "资源", dmg: 0, desc: "只能在仓库界面点击使用，获得5张随机卡牌", value: 10, sellable: false, unrandom: true },
       { id: "tt2-treasuremap", name: "寻宝图", cost: 0, rarity: "古朴", type: "装备", dmg: 0, draw: 1, desc: "限定技能：将 1张‘搜索大宝箱’洗入牌库，抽1张牌。", value: 2, sellable: false },
       { id: "tt3-flame-storm", cls: "降临者", name: "风暴火球", cost: 2, rarity: "职业", type: "法术", dmg: 4, dmgType: "spell", desc: "对全体敌人每人释放1次火球。", value: 3, sellable: false, unrandom: true },
       { id: "tt3-fireball", name: "火球", cost: 1, rarity: "初始", type: "法术", dmg: 4, dmgType: "spell", desc: "造成 4 点法术伤害。", value: 1, sellable: false, unrandom: true }, // 初始牌（2026-09-06）：每局固定携带 1 张；unrandom 双保险——不进发现/随机/商店池（2026-09-10 留言 #19）
@@ -1008,15 +1000,15 @@ import { DATA } from './data-loader.js';
       { id: "tt6-goldhammer", name: "矮人的帮助", cost: 0, rarity: "衍生", type: "事件", dmg: 0, desc: "获得卡牌‘闪金之锤’。", value: 0, sellable: false },
       { id: "tt8-hero-assassin", cls: "侠客", hero: true, name: "白梅落影·妄", cost: 2, rarity: "稀有", type: "能力卡", dmg: 0, desc: "遁入虚空：净化自身，潜行 2 回合；破隐一击伤害翻倍。", value: 8, unrandom: true },
       { id: "tt8-hero-sword", cls: "侠客", hero: true, name: "无量仙剑·云风", cost: 2, rarity: "稀有", type: "能力卡", dmg: 0, draw: 5, desc: "万剑归宗：抽 5 张牌，直接释放其中武术。", value: 8, unrandom: true },
-      { id: "tt8-hero-warlock", cls: "牧师", hero: true, name: "无极梦魇·血苑修罗", cost: 2, rarity: "稀有", type: "能力卡", dmg: 0, draw: 2, desc: "天灾横行：将四张禁咒洗入牌库，然后抽 2 张牌。", value: 8, unrandom: true },
-      { id: "tt8-hero-mage", cls: "法师", hero: true, name: "明灯千里·孔明", cost: 2, rarity: "稀有", type: "能力卡", dmg: 0, desc: "万法乾坤：法伤 +1，回合开始时发现 1 张卡牌。", value: 8, unrandom: true },
-      { id: "tt8-hero-priest", cls: "牧师", hero: true, name: "浪掷风吟·露娜拉", cost: 2, rarity: "棱彩", type: "能力卡", dmg: 0, heal: 3, desc: "甘霖降世：置入随机卡牌直至手牌达到 6 张；其中每置入1 张法术，回复 3 血。", value: 8, unrandom: true },
-      { id: "tt8-hero-sealer", cls: "降临者", hero: true, name: "邪渊主宰·妲莉薇特", cost: 2, rarity: "棱彩", type: "能力卡", dmg: 0, desc: "深渊降焰：法伤 +1，每消耗 1 张卡牌，施放 1 次火球。", value: 8, unrandom: true },
-      { id: "tt8-hero-descender", cls: "降临者", hero: true, name: "楔天玄翼·焚殃", cost: 2, rarity: "古朴", type: "能力卡", dmg: 0, desc: "寂灭苍穹：法伤 +1，本局对战中，每消耗 1 张卡牌，施放 1 次‘火球’。", value: 8, unrandom: true },
-      { id: "tt8-hero-summoner", cls: "法师", hero: true, name: "神话终章·雷修斯", cost: 2, rarity: "棱彩", type: "能力卡", dmg: 0, desc: "元素潮汐：抉择：打开‘末日浩劫之门’或者‘天国之门’。两回合后，开启未选择的那扇‘门’", value: 8, unrandom: true },
-      { id: "tt8-hero-guardian", cls: "战士", hero: true, name: "圣剑誓约·亚瑟", cost: 2, rarity: "古朴", type: "能力卡", dmg: 0, desc: "诛邪圣剑：本局对战中，能量上限 +1，装备上限 +1。", value: 8, unrandom: true },
+      { id: "tt8-hero-warlock", cls: "牧师", hero: true, name: "禁术解放", cost: 2, rarity: "稀有", type: "能力卡", dmg: 0, draw: 2, desc: "天灾横行：将四张禁咒洗入牌库，然后抽 2 张牌。", value: 8, unrandom: true },
+      { id: "tt8-hero-mage", cls: "法师", hero: true, name: "博览者的狂语", cost: 2, rarity: "稀有", type: "能力卡", dmg: 0, desc: "万法乾坤：法伤 +1，回合开始时发现 1 张卡牌。", value: 8, unrandom: true },
+      { id: "tt8-hero-priest", cls: "牧师", hero: true, name: "浪掷风吟", cost: 2, rarity: "棱彩", type: "能力卡", dmg: 0, heal: 3, desc: "甘霖降世：置入随机卡牌直至手牌达到 6 张；其中每置入1 张法术，回复 3 血。", value: 8, unrandom: true },
+      { id: "tt8-hero-sealer", cls: "降临者", hero: true, name: "邪渊主宰", cost: 2, rarity: "棱彩", type: "能力卡", dmg: 0, desc: "深渊降焰：法伤 +1，每消耗 1 张卡牌，施放 1 次火球。", value: 8, unrandom: true },
+      { id: "tt8-hero-descender", cls: "降临者", hero: true, name: "充能火山", cost: 2, rarity: "古朴", type: "能力卡", dmg: 0, desc: "寂灭苍穹：法伤 +1，本局对战中，每消耗 1 张卡牌，施放 1 次‘火球’。", value: 8, unrandom: true },
+      { id: "tt8-hero-summoner", cls: "法师", hero: true, name: "花开两面", cost: 2, rarity: "棱彩", type: "能力卡", dmg: 0, desc: "元素潮汐：抉择：打开‘末日浩劫之门’或者‘天国之门’。两回合后，开启未选择的那扇‘门’", value: 8, unrandom: true },
+      { id: "tt8-hero-guardian", cls: "战士", hero: true, name: "圣剑化身", cost: 2, rarity: "古朴", type: "能力卡", dmg: 0, desc: "诛邪圣剑：本局对战中，能量上限 +1，装备上限 +1。", value: 8, unrandom: true },
       { id: "tt8-hero-ranger", cls: "侠客", hero: true, name: "天剑诛魔·云阳", cost: 2, rarity: "古朴", type: "能力卡", dmg: 0, desc: "断念：将天启剑与诛魔剑洗入牌库。", value: 8, unrandom: true },
-      { id: "tt8-hero-warrior", cls: "战士", hero: true, name: "龙吟沧海·关云长", cost: 2, rarity: "稀有", type: "能力卡", dmg: 0, desc: "真龙降世：本局对战中，将‘初始攻击’化为‘青龙偃月斩’。", value: 8, unrandom: true },
+      { id: "tt8-hero-warrior", cls: "战士", hero: true, name: "青龙化身", cost: 2, rarity: "稀有", type: "能力卡", dmg: 0, desc: "真龙降世：本局对战中，将‘初始攻击’化为‘青龙偃月斩’。", value: 8, unrandom: true },
       // 敌人图鉴 5 张（与 BESTIARY 同 id）：2026-09-09 老板定版新世界观命名，名字与描述随 BESTIARY 同步
       { id: "foe-orc_axe", name: "甲壳变异体", cost: 0, rarity: "衍生", type: "生物", dmg: 0, desc: "攻击 4 / 生命 7。变异·第3层。防御/反击型，隔回合蓄势。", value: 0, sellable: false, art: "orc_axe" },
       { id: "foe-wolf_rider", name: "变异雪狼", cost: 0, rarity: "衍生", type: "生物", dmg: 0, desc: "攻击 7 / 生命 6。变异·第3层。蓄力攻击：隔回合强化一击。", value: 0, sellable: false, art: "wolf_rider" },
@@ -1231,8 +1223,9 @@ import { DATA } from './data-loader.js';
     //   · 39 张仓库独有卡退役（RETIRE_TT11；「新兵操典」种子不带 id，按名字清理）；
     //   · 25 张共享 id 卡整卡取设计者稿（能力卡 type「能力卡」与敌人图鉴 art
     //     为仓库实现标记，不回退，见 TABLETOP11 注释）。
-    // 有意结果：恶魔之力/厉兵秣马/不变应万变 新旧两版并存（设计者实机如此，
+    // 有意结果：厉兵秣马/不变应万变 新旧两版并存（设计者实机如此，
     // 旧版 tt7-* 无 cls 不进职业池，法力补给除外——cls=法师 为仓库定版）；
+    // 恶魔之力 tt7-drunksong 已整卡退役（2026-09-13 老板拍板删除，同名双版只留 cc-demon）。
     // 初始牌只剩初始攻击与应急绷带（设计者稿）。
     ensureTabletopSync11() {
       try {
@@ -1385,14 +1378,14 @@ import { DATA } from './data-loader.js';
           // 侠客：妄（原刺客）/ 云风（原剑客）/ 云阳（原游侠）
           'tt8-hero-assassin': '侠客', 'tt8-hero-sword': '侠客', 'tt8-hero-ranger': '侠客',
           'tt8-demonslay': '侠客', 'tt8-archdemon': '侠客', 'tt8-heavensword': '侠客', // 云阳专属衍生剑随迁
-          // 战士：关云长（原战士）/ 亚瑟（原守卫）
+          // 战士：青龙化身（原战士）/ 圣剑化身（原守卫）
           'tt8-hero-warrior': '战士', 'tt8-hero-guardian': '战士', 'tt8-dragonblade': '战士',
-          // 牧师：露娜拉（原牧师）/ 修罗（原术士）；禁咒×4 随修罗迁入
+          // 牧师：浪掷风吟（原牧师）/ 禁术解放（原术士）；禁咒×4 随禁术解放迁入
           'tt8-hero-priest': '牧师', 'tt8-hero-warlock': '牧师',
           'tt8-curse1': '牧师', 'tt8-curse2': '牧师', 'tt8-curse3': '牧师', 'tt8-curse4': '牧师',
-          // 法师：孔明（原法师）/ 雷修斯（原召唤师）
+          // 法师：博览者的狂语（原法师）/ 花开两面（原召唤师）
           'tt8-hero-mage': '法师', 'tt8-hero-summoner': '法师',
-          // 降临者：邪渊主宰·妲莉薇特（原授印者英雄定版更名改归）/ 楔（原降临者）
+          // 降临者：邪渊主宰（原授印者英雄定版更名改归）/ 充能火山（原降临者）
           'tt8-hero-descender': '降临者', 'tt8-hero-sealer': '降临者',
         };
         // ① id → 定版更名（与设计者实机卡库的最新命名对齐）
@@ -1400,7 +1393,7 @@ import { DATA } from './data-loader.js';
           'tt7-thundergrudge': '快意恩仇', 'tt7-swordimmortal': '剑仙形态', 'tt7-bloodpotion': '噬血术',
           'tt7-marchrush': '急行军', 'tt7-stratagem': '法师锦囊', 'tt7-bladebloom': '永恒绽放',
           'tt7-burnharvest': '爆燃火球', 'tt7-twinfireball': '三重火球', 'tt7-meteorstrong': '星陨之力',
-          'tt8-hero-warlock': '无极梦魇·血苑修罗', 'tt8-hero-summoner': '神话终章·雷修斯', 'tt8-hero-warrior': '龙吟沧海·关云长',
+          'tt8-hero-warlock': '禁术解放', 'tt8-hero-summoner': '花开两面', 'tt8-hero-warrior': '青龙化身',
           'tt8-hero-sealer': '邪渊主宰·妲莉薇特',
         };
         // ①" 定版重写描述（设计者 2026-09-05 定版：妲莉薇特信息按降临者火焰主题重写）

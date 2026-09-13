@@ -157,7 +157,9 @@ async function auditOne(card) {
     const game = makeGame([card]);
     try {
       BattleSession.start(game, [foeDef()], { isBoss: false, name: '审计' });
-      if (snap().hand.length !== 0) record(card, 'E-排除', `不应进手牌却进了（hand=${snap().hand.length}）`);
+      // 背包砸击初始牌（2026-09-13 留言）合法常驻手牌，不计入排除类违规
+      const nonSlam = snap().hand.filter(u => { const o = viewApi.findCard(u); return o && o.card.name !== '背包砸击'; });
+      if (nonSlam.length !== 0) record(card, 'E-排除', `不应进手牌却进了（hand=${nonSlam.length}）`);
     } catch (e) { record(card, 'E-排除', '崩溃:' + e.message); }
     endBattle(game);
     return;

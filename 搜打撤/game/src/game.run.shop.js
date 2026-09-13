@@ -1,5 +1,6 @@
 import { Random } from './random.js';
 import { esc } from './shared.js';
+import { showBackpack, setBagReturnHook } from './game.bag.js';
 
 let shopOnClose = null;
 let shopNotice = '';
@@ -81,19 +82,17 @@ function createShopController({
       return '<div class="shop-slot sold"><div class="shop-empty">已售出</div></div>';
     }
     const afford = game.coins >= slot.price;
+    // 2026-09-12 留言：直接点击卡牌即可购买（价格挂卡面右上角标），不再点下面的金币钮
+    const priceTag = `<span class="shop-price${afford ? '' : ' short'}">${slot.free ? '[[icon:paw]] 免费' : `[[icon:coin]] ${slot.price}`}</span>`;
+    const shortAttr = afford ? '' : ' data-short="1"';
     if (slot.shaReplenish != null) {
       if (slot.shaReplenish <= 0) return '<div class="shop-slot sold"><div class="shop-empty">初始攻击已补满</div></div>';
-      return `<div class="shop-slot">${cardHTML(slot.card)}
-        <button class="shop-price" data-act="buySha" data-i="${index}" ${afford ? '' : 'disabled'}>[[icon:coin]] ${slot.price}</button>
+      return `<div class="shop-slot buy" data-act="buySha" data-i="${index}"${shortAttr} title="${afford ? '点击购买' : '币不够'}">${cardHTML(slot.card)}${priceTag}
         <span class="shop-slotnote">初始攻击 · 本站余 ${slot.shaReplenish}/5</span>
       </div>`;
     }
-    if (slot.mystery) return `<div class="shop-slot"><div class="shop-empty">[[icon:dice]] 随机卡牌</div>
-      <button class="shop-price" data-act="buyCard" data-i="${index}" ${afford ? '' : 'disabled'}>[[icon:coin]] ${slot.price}</button>
-    </div>`;
-    return `<div class="shop-slot">${cardHTML(slot.card)}
-      <button class="shop-price" data-act="buyCard" data-i="${index}" ${afford ? '' : 'disabled'}>${slot.free ? '[[icon:paw]] 免费（招财猫）' : `[[icon:coin]] ${slot.price}`}</button>
-    </div>`;
+    if (slot.mystery) return `<div class="shop-slot buy" data-act="buyCard" data-i="${index}"${shortAttr} title="${afford ? '点击购买' : '币不够'}"><div class="shop-empty">[[icon:dice]] 随机卡牌</div>${priceTag}</div>`;
+    return `<div class="shop-slot buy" data-act="buyCard" data-i="${index}"${shortAttr} title="${afford ? '点击购买' : '币不够'}">${cardHTML(slot.card)}${priceTag}</div>`;
   }
 
   function renderShop() {
@@ -109,10 +108,10 @@ function createShopController({
     UI.showOverlay('', `
       <div class="pg shop-pg node-pg sc-shop" data-asset-key="scene-shop-bg">
         <header class="pg-head">
-          <div class="shop-heading"><span class="shop-kicker">TACTICAL SUPPLY // 07</span><h2>[[icon:bag]] 冬境战术补给站 ${UI.helpBtn('shop')}</h2><p>挑选能带出下一段路线的装备，买完即锁定库存。</p></div>
-          <div class="shop-resources" aria-label="远征资源"><span class="shop-resource"><small>持有卡牌</small><b>${game.ownedCards.length}</b><em>张</em></span><span class="shop-resource coin"><small>当前金币</small><b>${game.coins}</b><em>币</em></span><span class="shop-resource"><small>背包容量</small><b>${usedSlots()}/${bagCap()}</b><em>格</em></span></div>
+          <div class="shop-heading"><span class="shop-kicker">TACTICAL SUPPLY // 07</span><h2>[[icon:bag]] 冬境战术补给站 ${UI.helpBtn('shop')}</h2></div>
+          <div class="shop-resources" data-act="shopOpenBag" title="点击打开背包" aria-label="远征资源（点击打开背包）"><span class="shop-resource"><small>持有卡牌</small><b id="resCards">${game.ownedCards.length}</b><em>张</em></span><span class="shop-resource coin"><small>当前金币</small><b id="resCoins">${game.coins}</b><em>币</em></span><span class="shop-resource"><small>背包容量</small><b id="resCap">${usedSlots()}/${bagCap()}</b><em>格</em></span></div>
         </header>
-          <div class="shop-toolbar"><div><b>补给清单</b><span>六个随机货位 · 能量饮料 · 初始攻击补充 · 神秘货箱</span></div><span class="shop-live" aria-live="polite">${shopNotice || '选择一件补给查看价格'}</span></div>
+          <div class="shop-toolbar"><div><b>补给清单</b><span>六个随机货位 · 能量饮料 · 初始攻击补充 · 神秘货箱</span></div><span class="shop-live" id="shopLive" aria-live="polite">${shopNotice || '选择一件补给查看价格'}</span></div>
         <div class="shop-board" aria-label="商店商品">
           <div class="shop-board-grid">
             ${slots}
@@ -163,7 +162,25 @@ function createShopController({
     UI.refresh(game);
   }
 
+  // 购买后只重绘该货位 + 顶栏数字（配合留言 #33：整页入场动画只在页面切换时重播）
+  function refreshShopSlot(index) {
+    const slots = document.querySelectorAll('.shop-board-grid .shop-slot');
+    const el = slots[index];
+    if (el) el.outerHTML = slotHTML(game.shopStock[index], index);
+    const live = document.getElementById('shopLive');
+    if (live) live.textContent = shopNotice || '';
+    const pairs = [['resCards', game.ownedCards.length], ['resCoins', game.coins], ['resCap', `${usedSlots()}/${bagCap()}`]];
+    for (const [id, val] of pairs) {
+      const node = document.getElementById(id);
+      if (node) node.textContent = val;
+    }
+  }
   function registerShopActs() {
+    UI.act('shopOpenBag', () => {
+      // 关闭背包后回到商店当前页（主商店/收购台），不再踢回地图
+      setBagReturnHook(() => { game.state = 'modal'; renderShop(); });
+      showBackpack(true);
+    });
     UI.act('buyCard', data => {
       const slot = game.shopStock[+data.i];
       if (!slot || slot.sold || slot.empty) return;
@@ -186,13 +203,22 @@ function createShopController({
       SDT.Sound.sfx('gain');
       UI.log(`[[icon:bag]] 购买卡牌【<b>${esc(slot.card.name)}</b>】（- ${slot.price} 币，剩 ${game.coins}）`, 'coin');
       saveGame();
-      renderShop();
+      refreshShopSlot(+data.i);
     });
     UI.act('buySha', data => {
       const slot = game.shopStock[+data.i];
       if (!slot || slot.shaReplenish == null || slot.shaReplenish <= 0) return;
       if (game.coins < slot.price) {
         UI.log('币不够，买不起', 'warn');
+        SDT.Sound.sfx('error');
+        return;
+      }
+      // 需求（2026-09-13 老板）：背包满时不能再获得卡牌——补充初始攻击与买卡同口径
+      //（叠放上限内并入不占格；堆满或新格需要空位，「初始攻击」叠放上限 5 张）
+      if (game.canReceiveCard
+        ? !game.canReceiveCard(slot.card)
+        : (!game.ownedCards.some(owned => owned.card.name === slot.card.name) && !game.canAcceptCard(slot.card))) {
+        UI.log(`[[icon:bag]] 背包已满（${usedSlots()}/${bagCap()} 格，初始攻击最多叠 5 张），补充不了`, 'warn');
         SDT.Sound.sfx('error');
         return;
       }
@@ -203,7 +229,7 @@ function createShopController({
       SDT.Sound.sfx('gain');
       UI.log(`[[icon:bag]] 补充初始攻击 ×1（- ${slot.price} 币，剩 ${game.coins} · 本站还可补 ${slot.shaReplenish} 张）`, 'coin');
       saveGame();
-      renderShop();
+      refreshShopSlot(+data.i);
     });
     UI.act('sellCard', data => {
       const index = game.ownedCards.findIndex(owned => owned.uid === data.uid);

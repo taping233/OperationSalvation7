@@ -298,5 +298,8 @@ document.addEventListener('visibilitychange', () => {
 // #overlay 直下、不随 ovBody 重建销毁，战斗收尾切走后若无人 hide 就一直浮在非战斗场景上。
 // battle:end 由战斗核心 finish() 广播（victory/defeat/flee 全走这里），同步卸载。
 busOn('battle:end', () => hide());
+// 2026-09-13 留言（白名单）：人物序列帧只允许出现在 battle 模式的弹层里——
+// 奖励/搜刮/背包/卡牌库等任何其他模式渲染时一律卸下，新增界面默认不在白名单。
+document.addEventListener('sdt-overlay-mode', (e) => { if (e.detail !== 'battle') hide(); });
 
 export { attach, play, hide, isLiveBattleFigure };

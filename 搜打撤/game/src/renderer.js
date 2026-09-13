@@ -10,6 +10,7 @@ const SDT = window.SDT;
   const BOSS_R = 24;         // BOSS 结点半径
   const ALTAR_R = 24;        // 祭坛结点半径
   const LINK_GAP = 24;       // 连线两端距结点边缘的留白
+  const SPENT_TYPES = new Set(['battle', 'shop', 'chest', 'event']); // 走过即空的节点：图标换空白事件圆圈
 
   const COLORS = {
     bgTop: '#17252b',
@@ -233,12 +234,14 @@ const SDT = window.SDT;
       ctx.globalAlpha = current || legal ? 1 : .38;
       const colors = { battle:'#e98278', coin:'#e0c57d', wood:'#e0c57d', rations:'#e0c57d', chest:'#e0c57d', key:'#e0c57d', fire:'#76c6ad', emergencyExit:'#76c6ad', extraction:'#76c6ad', event:'#82b8d0', shop:'#82b8d0', altar:'#a995d4', boss:'#e98278', entrance:'#76c6ad' };
       const color = current ? '#f3dfad' : colors[n.def.type] || '#82b8d0';
+      // 消耗过的节点（2026-09-13 留言）：战斗/商店/宝箱/事件走过即空，图标换成空白事件圆圈
+      const spent = walked && !current && SPENT_TYPES.has(n.def.type);
       ctx.translate(n.x, n.y); ctx.rotate(Math.PI / 4); ctx.scale(pulse, pulse);
       ctx.fillStyle = '#0a1b27'; ctx.fillRect(-n.r * .78, -n.r * .78, n.r * 1.56, n.r * 1.56);
       ctx.strokeStyle = current ? '#f1d99c' : legal ? color : '#55717d'; ctx.lineWidth = (current ? 2.2 : legal ? 1.7 : 1) / z;
       ctx.strokeRect(-n.r * .78, -n.r * .78, n.r * 1.56, n.r * 1.56);
       ctx.rotate(-Math.PI / 4); ctx.scale(1 / pulse, 1 / pulse); ctx.translate(-n.x, -n.y);
-      drawTacticalIcon(ctx, n.def.type, n.x, n.y, Math.max(.8, n.r / 12), color);
+      drawTacticalIcon(ctx, spent ? 'blank' : n.def.type, n.x, n.y, Math.max(.8, n.r / 12), spent ? '#7d95a0' : color);
       if (walked && !current) {
         ctx.fillStyle = '#8ec5b4';
         circle(ctx, n.x + n.r * .75, n.y - n.r * .75, 5 / z); ctx.fill();
@@ -282,11 +285,6 @@ const SDT = window.SDT;
       ctx.strokeStyle = current ? '#f5e2bc' : legal ? '#a49374' : '#45616e';
       ctx.lineWidth = 1; ctx.stroke();
       ctx.fillStyle = current ? '#122633' : '#e6eef1'; ctx.fillText(label, p.x, y + 13.5);
-      if (!current && legal) {
-        ctx.font = `10px "Noto Sans SC Sub",sans-serif`;
-        ctx.fillStyle = '#d3dfdf';
-        ctx.fillText(walked ? '已探索' : '可前往', p.x, y + 40);
-      }
     }
     ctx.restore();
   }

@@ -23,6 +23,14 @@
  * ============================================================ */
 import { matchElsewhere, noteUnknownEffect } from './effect-verbs.js';
 
+/* 「箭」战斗令牌模板（2026-09-13 实装）：卡库中不存在任何名为「箭」的牌，导致
+ * 天狼长弓（回合开始获得随机箭矢）与连弩（直接释放手牌中所有「箭」）两张卡自实装以来
+ * 从未真正生效。这里给战斗层一块虚拟令牌：只作为临时卡进手牌，不进卡库
+ * （id 不入 Cards.all()，不影响卡库与设计者档的对齐断言）、不可掉落/发现/上架。
+ * 数值口径随「初始攻击」家族：0 费、造成等同攻击力的伤害；调数值改这一处即可。 */
+const ARROW_TOKEN = { id: 'token-arrow', name: '箭', cost: 0, rarity: '衍生', type: '武术',
+  desc: '造成等同于攻击力的伤害。', dmg: 0, unrandom: true };
+
 /* ---------- 限制卡池解析（老板 2026-09-08 定版池子清单） ----------
  * 「发现 / 随机获取 / 获得 N 张 ____卡/牌」句式中的名词短语 → 卡池谓词。
  * 返回 null = 未识别出限定（走通用随机池，isRandomObtainable 过滤）。 */
@@ -93,7 +101,7 @@ export function createEffectSteps(deps) {
     getPlayerHp, getHandSize, getHandCards, burstPoison, deckDraw, fleeBattle,
     getPlayerClass, getPlayerCaster, foeIndexOf, releaseHandMatches,
     autoPlayHandType, setShaTransform, setConsumeFireball,
-    damagePlayer, addPlayerMaxHp, dumpHand,
+    damagePlayer, addPlayerMaxHp, dumpHand, sweepDead,
     queueChoice, setStealthStrike, setNextSpellTwice,
     registerTurnStartText,
     getInfuseFuels, getPriceOfLastDrawn, dealAoeFixed, replaceShaInDeck,
@@ -106,6 +114,8 @@ export function createEffectSteps(deps) {
   const hitFoe = (ctx, t, n, type, caster = {}) => {
     const r = combat.dealDamage(caster, t, n, type);
     if (r.dealt > 0) pushFloat({ unit: foeIndexOf ? foeIndexOf(t) : 0, text: '-' + r.dealt, cls: 'dmg' });
+    // 文本步骤路径不经过 battle.core 的 hitFoe，0 血死亡判定补在这里（2026-09-13 实测：快意恩仇打至 0 血敌人不倒）
+    if (t && !t.dead && t.hp <= 0 && typeof sweepDead === 'function') sweepDead();
     return r;
   };
 
@@ -546,7 +556,8 @@ export function createEffectSteps(deps) {
           (key === '杀' ? (c.id === 'builtin-sha' || c.name === '杀' || c.name === '初始攻击')
             : key === '招式' ? c.type === '武术'
             : String(c.name || '').includes(key)));
-        const c = pool.length ? pool[Math.floor(random01() * pool.length)] : null;
+        // 2026-09-13：卡库没有「箭」——回落到战斗令牌模板（天狼长弓的箭矢来源）
+        const c = pool.length ? pool[Math.floor(random01() * pool.length)] : (key === '箭' ? ARROW_TOKEN : null);
         if (c) {
           addTempCard({ ...c, cost: 0, _baseCost: c.cost || 0 });
           log(`[[icon:cards]] 获得【<b>${esc(c.name)}</b>】，其费用已变为 0`, 'loot');
@@ -907,7 +918,7 @@ export function createEffectSteps(deps) {
       },
     },
     {
-      id: 'hand.fillRandom', gate: 'fresh', label: '置入随机卡牌直至手牌达到 N 张（露娜拉）',
+      id: 'hand.fillRandom', gate: 'fresh', label: '置入随机卡牌直至手牌达到 N 张（浪掷风吟）',
       when: (ctx) => ctx.desc.match(/置入随机卡牌直至手牌达到\s*(\d+)\s*张/),
       run: (ctx, m) => {
         const want = +m[1];
@@ -1175,7 +1186,7 @@ export function createEffectSteps(deps) {
 
     /* ============ 战斗规则登记段 ============ */
     {
-      id: 'rule.shaTransform', gate: 'always', label: '「杀」化为另一张卡（不朽神剑/龙吟沧海）',
+      id: 'rule.shaTransform', gate: 'always', label: '「杀」化为另一张卡（不朽神剑/青龙化身）',
       when: (ctx) => ctx.desc.match(/[‘’“”「」]?(?:杀|初始攻击)[‘’“”「」]?\s*化为\s*[‘’“”「」]?(?:(\d+)\s*张)?([^\s，。；;、‘’“”「」]{1,8})/),
       run: (ctx, m) => {
         if (typeof setShaTransform !== 'function') return;

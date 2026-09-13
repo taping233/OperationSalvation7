@@ -283,9 +283,11 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
       onBattleEnd() {},
     };
     const foe = { id: 'infantry', name: '点击测试靶', hp: 40, maxHp: 40, atk: 1 };
+    const foe2 = { id: 'infantry', name: '第二目标', hp: 20, maxHp: 20, atk: 1 };
+    // 两个敌人：唯一敌人时 STS2 口径会免选直接打出，这里必须双敌才能测「选中→取消→结算」流
     const oldAnimate = Element.prototype.animate;
     Element.prototype.animate = function () { return { onfinish: null, cancel() {} }; };
-    window.SDT.Battle.start(game, [foe], { isBoss: false, name: '点击测试' });
+    window.SDT.Battle.start(game, [foe, foe2], { isBoss: false, name: '点击测试' });
     await new Promise(resolve => setTimeout(resolve, 20));
     const card = document.querySelector('.sts-hand .bt-card.need-target');
     const enemy = document.querySelector('.sts-foe[data-eidx="0"]');
@@ -307,6 +309,33 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     enemy.click();
     await new Promise(resolve => setTimeout(resolve, 40));
     expect(window.SDT.Battle.getSnapshot().foes[0].hp).toBeLessThan(before);
+    expect(window.SDT.Battle.getSnapshot().foes[0].hp).toBeLessThan(40);
+    if (game.battleActive) window.SDT.Battle.commands.flee();
+    Element.prototype.animate = oldAnimate;
+    document.getElementById('overlay')?.setAttribute('hidden', '');
+    game.state = 'title';
+  });
+
+  it('唯一敌人时指向卡点击直接打出（STS2 TryWebClickPlay 口径）', async () => {
+    const C = window.SDT.Cards;
+    const sha = C.all().find(c => c.id === 'builtin-sha');
+    const game = {
+      ownedCards: [{ uid: 'boot-single-sha', card: sha }], hp: 30, maxHp: 30, atk: 5, spellPower: 0, coins: 0,
+      myClass: '侠客', characterId: null, state: 'idle', battleActive: false,
+      log() {}, heal(n) { this.hp = Math.min(this.maxHp, this.hp + n); }, addItem() {},
+      onBattleEnd() {},
+    };
+    const foe = { id: 'infantry', name: '唯一靶', hp: 40, maxHp: 40, atk: 1 };
+    const oldAnimate = Element.prototype.animate;
+    Element.prototype.animate = function () { return { onfinish: null, cancel() {} }; };
+    window.SDT.Battle.start(game, [foe], { isBoss: false, name: '单敌测试' });
+    await new Promise(resolve => setTimeout(resolve, 20));
+    const card = document.querySelector('.sts-hand .bt-card.need-target');
+    expect(card).not.toBeNull();
+    card.click();
+    // 单敌：不进入选中态，直接结算伤害
+    expect(card.classList.contains('click-selected')).toBe(false);
+    await new Promise(resolve => setTimeout(resolve, 40));
     expect(window.SDT.Battle.getSnapshot().foes[0].hp).toBeLessThan(40);
     if (game.battleActive) window.SDT.Battle.commands.flee();
     Element.prototype.animate = oldAnimate;

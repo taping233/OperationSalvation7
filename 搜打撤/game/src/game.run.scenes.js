@@ -281,7 +281,8 @@ export function openChestsOnCell(chests, text) {
 
 // 即时效果（经场景演出后结算）；after = 效果完成后的续流回调
 // 拾取类在场景里用大字标明结算（v0.22：明确告诉玩家发生了什么）
-export function grantEventCard(tpl) {
+// opts.silent：跳过获得演出（宝箱/基地等调用方自带卡牌展示界面，2026-09-13）
+export function grantEventCard(tpl, opts = {}) {
   if (!tpl) return false;
   const canReceive = game.canReceiveCard
     ? game.canReceiveCard(tpl)
@@ -295,8 +296,9 @@ export function grantEventCard(tpl) {
   }
   game.ownedCards.push({ uid: newUid(), card: { ...tpl } });
   UI.log(`[[icon:archive]] 获得卡牌【<b>${esc(tpl.name)}</b>】`, 'loot');
-  // 2026-09-07 留言：传说获得要有提示界面——特写揭晓，不再只默默进背包
-  if (tpl.rarity === '传说') UI.showLegendGet(tpl);
+  // 2026-09-13 老板：发卡要有奖励动画，不能静默进背包——统一走获得演出
+  //（传说卡保留金色光柱 + legend 音效，普通卡中性演出；多张连发自动排队逐张播）
+  if (!opts.silent) UI.showCardReward(tpl);
   // 阿猫的礼物（2026-09-12 实装）：「发现或随机获取该牌时，回复1点能量并获取另1张随机卡牌」
   // 地图侧没有能量概念，只结算附赠卡；战斗内触发走 battle.core fireCatGift（含能量）
   if (tpl.id === 'tt2-apollo') {

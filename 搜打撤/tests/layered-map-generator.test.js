@@ -21,12 +21,12 @@ describe('四层种子化地图生成器', () => {
     const map = generateLayeredMap(20260908);
     expect(map.layers).toHaveLength(4);
     expect(map.generatorVersion).toBe(3);
-    expect(map.layoutVersion).toBe(5);   // v5：2026-09-10 定版——物资格保底 1 / 宝箱格 ≤4、敌人格 ≤4
+    expect(map.layoutVersion).toBe(7);   // v7：2026-09-13 老板——L1 恒定七格
     expect(validateGeneratedMap(map.layers).ok).toBe(true);
     expect(checkConnectivity(createLayeredMap(20260908)).ok).toBe(true);
     for (let seed = 0; seed < 100; seed++) {
       const batch = generateLayeredMap(`batch-${seed}`);
-      expect(batch.layers.map(layer => layer.nodes.length)).toEqual([13, 15, 17, 15]);
+      expect(batch.layers.map(layer => layer.nodes.length)).toEqual([7, 15, 17, 15]);
       expect(validateGeneratedMap(batch.layers).ok).toBe(true);
       expect(batch.layers.every(layer => layer.gridBounds && layer.gridBounds.maxX > layer.gridBounds.minX)).toBe(true);
     }
@@ -38,9 +38,12 @@ describe('四层种子化地图生成器', () => {
       map.layers.forEach((layer, li) => {
         const chests = layer.nodes.filter(n => n.type === 'chest').length;
         const battles = layer.nodes.filter(n => n.type === 'battle').length;
+        const events = layer.nodes.filter(n => n.type === 'event').length;
         expect(chests, `seed=${seed} 第${li + 1}层物资格数量异常`).toBeGreaterThanOrEqual(1);
         expect(chests, `seed=${seed} 第${li + 1}层宝箱格超过 4`).toBeLessThanOrEqual(4);
         expect(battles, `seed=${seed} 第${li + 1}层敌人格超过 4`).toBeLessThanOrEqual(4);
+        // 2026-09-13：每层事件格 ≤3（第 3 层受战斗/搜刮上限约束结构性最少 4 个，放宽到 ≤4）
+        expect(events, `seed=${seed} 第${li + 1}层事件格超过 ${li === 2 ? 4 : 3}`).toBeLessThanOrEqual(li === 2 ? 4 : 3);
       });
     }
   });

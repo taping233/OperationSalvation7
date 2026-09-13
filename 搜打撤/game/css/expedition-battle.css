@@ -1,11 +1,12 @@
 /* 冬境战斗舞台：只负责层级、可读性和反馈，不接触战斗规则。 */
 #overlay .card.battle > h2 { position:relative; z-index:20; min-height:34px; color:#f0eadc; background:rgba(8,12,18,.86); border-color:rgba(196,215,226,.2); }
 #overlay .battle-stage.sts {
-  isolation:isolate; color:#eee9df; background-color:#101923;
-  background-image:linear-gradient(180deg,rgba(7,14,23,.1),rgba(7,11,17,.35)),url('../assets/scenes/winter-expedition/battle-street.webp');
+  isolation:isolate; color:#eee9df; background-color:#1a120c;
+  /* 2026-09-13 留言批次十一：分层合成背景——近景地板层叠在远景酒馆墙层下部，二次元暖调 */
+  background-image:linear-gradient(180deg,rgba(30,20,8,.05),rgba(16,10,5,.16)),url('../assets/scenes/battle-street-amber-anime-v1.webp');
   background-position:center; background-size:cover;
 }
-#overlay .battle-stage.sts[data-boss="1"] { background-image:linear-gradient(180deg,rgba(17,11,24,.08),rgba(7,7,13,.48)),url('../assets/scenes/winter-expedition/battle-core.webp'); }
+#overlay .battle-stage.sts[data-boss="1"] { background-image:linear-gradient(180deg,rgba(30,14,8,.1),rgba(12,6,4,.2)),url('../assets/scenes/battle-street-amber-anime-v1.webp'); }
 #overlay .battle-stage.sts::after { content:''; position:absolute; inset:0; z-index:-1; pointer-events:none; opacity:.22; background:radial-gradient(circle at 50% 42%,rgba(183,216,230,.18),transparent 42%),linear-gradient(90deg,rgba(30,58,72,.16),transparent 45%,rgba(78,38,55,.2)); }
 #overlay .battle-stage.sts .battle-stage-shade { z-index:0; background:linear-gradient(180deg,rgba(5,10,16,.58),rgba(7,13,19,.08) 28%,rgba(5,8,13,.18) 62%,rgba(4,7,11,.88)); }
 #overlay .battle-stage.sts > *:not(.battle-stage-shade) { position:relative; z-index:1; }

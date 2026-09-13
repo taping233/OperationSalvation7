@@ -38,26 +38,27 @@
 
 /* Override the former compact paper catalogue, within the archive only. */
 #overlay .card-library-page .library-title h2 { display:block!important; margin:7px 0; font:27px/1.35 'SimSun',serif; color:#edf0e9; letter-spacing:4px; }
-#overlay .card-library-page .clib-main { background:#081722!important; overflow:hidden; align-items:stretch; padding:22px 28px; }
+#overlay .card-library-page .clib-main { background:#081722!important; overflow:hidden; align-items:stretch; padding:20px 20px 36px; grid-template-columns:160px minmax(0,1fr); }
 #overlay .card-library-page .library-head { flex-shrink:0; }
 #overlay .card-library-page .library-sidebar { overflow:auto; position:static; padding-right:12px; scrollbar-width:thin; scrollbar-color:#365666 #081722; }
 #overlay .card-library-page .clib-tabs { background:none; padding:0; border:0; flex-shrink:0; max-height:none; }
-#overlay .card-library-page .lib-grid { grid-template-columns:repeat(auto-fill,minmax(178px,1fr))!important; gap:22px 18px!important; padding:6px 6px 22px!important; align-content:start; scrollbar-color:#365666 #081722; scrollbar-width:thin; }
-#overlay .card-library-page .lib-item { border:0; padding:0; contain-intrinsic-size:auto 305px; }
+#overlay .card-library-page .lib-grid { grid-template-columns:repeat(5,minmax(0,1fr))!important; gap:0!important; padding:6px 6px 22px!important; align-content:start; scrollbar-color:#365666 #081722; scrollbar-width:thin; }
+#overlay .card-library-page .lib-item { border:0; border-right:1px solid rgba(182,211,214,.2); border-bottom:1px solid rgba(182,211,214,.2); padding:22px 12px; contain-intrinsic-size:auto 344px; }
+#overlay .card-library-page .lib-item:nth-child(5n) { border-right:0; }
 #overlay .card-library-page .lib-cardwrap { padding:0; border:0; background:none; width:100%; }
 #overlay .card-library-page .lib-cardwrap .hs-card { aspect-ratio:10/14!important; height:auto!important; min-height:260px; max-width:215px; width:100%!important; font-size:11px; }
 #overlay .card-library-page .hs-card.lib .hsc-art { height:auto!important; min-height:120px!important; flex:1!important; max-height:165px; }
 #overlay .card-library-page .hs-card.lib .hsc-type { display:block!important; font-size:10px; }
-#overlay .card-library-page .hs-card.lib .hsc-desc { display:block!important; flex:0 0 64px; min-height:64px; padding:8px; font-size:11px; line-height:1.5; overflow:hidden; }
+#overlay .card-library-page .hs-card.lib .hsc-desc { display:block!important; flex:0 0 64px; min-height:64px; padding:8px; font-size:13px; line-height:1.5; overflow:hidden; }
 #overlay .card-library-page .hs-card.lib .hsc-kw { display:flex; }
-#overlay .card-library-page .lib-actions { width:100%; justify-content:flex-end; opacity:.85; }
+#overlay .card-library-page .lib-actions { width:100%; justify-content:center; opacity:.85; }
 #overlay .card-library-page .hs-btn { background:#142d3c; border:1px solid #819aa340; border-radius:2px; color:#bfd0d5; box-shadow:none; }
 #overlay .card-library-page .hs-btn.gold { background:#dfc28d; color:#102733; }
 #overlay .card-library-page .hs-btn.danger { color:#ce9992; background:transparent; }
 #overlay .card-library-page .lib-pager { border-color:#aabcc333; }
 #overlay .card-library-page .lib-pageinfo { color:#b4c7ce; }
 @media(max-width:900px) {
-  #overlay .card-library-page .lib-grid { grid-template-columns:repeat(auto-fill,minmax(170px,1fr))!important; gap:18px 14px!important; }
+  #overlay .card-library-page .lib-grid { grid-template-columns:repeat(5,minmax(0,1fr))!important; gap:0!important; }
   #overlay .card-library-page .clib-main { padding:16px; }
   #overlay .card-library-page .library-preview { display:none; }
 }
@@ -67,5 +68,8 @@
   #overlay .card-library-page .library-sidebar { flex:0 0 auto; overflow:visible; padding:0; }
   #overlay .card-library-page .library-sidebar .clib-tabs { display:flex; flex-direction:row; flex-wrap:nowrap; overflow:auto; }
   #overlay .card-library-page .lib-grid { grid-template-columns:repeat(2,minmax(0,1fr))!important; overflow:visible; }
+  #overlay .card-library-page .lib-item { border-right:1px solid rgba(182,211,214,.2); }
+  #overlay .card-library-page .lib-item:nth-child(5n) { border-right:1px solid rgba(182,211,214,.2); }
+  #overlay .card-library-page .lib-item:nth-child(2n) { border-right:0; }
   #overlay .card-library-page .lib-cardwrap .hs-card { min-height:240px; }
 }

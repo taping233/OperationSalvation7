@@ -190,9 +190,9 @@ describe('英雄卡实打 · 侠客', () => {
 });
 
 describe('英雄卡实打 · 战士', () => {
-  it('圣剑誓约·亚瑟：能量上限 +1、装备上限 +1', async () => {
+  it('圣剑化身：能量上限 +1、装备上限 +1', async () => {
     const g = makeGame([hero('tt8-hero-guardian')]);
-    BattleSession.start(g, [foe()], { name: '亚瑟' });
+    BattleSession.start(g, [foe()], { name: '圣剑化身' });
     await drain();
     mark(g);
     BattleSession.commands.playCard(uidOf(g, hero('tt8-hero-guardian')), null);
@@ -221,9 +221,9 @@ describe('英雄卡实打 · 战士', () => {
     await drain(20);
   });
 
-  it('龙吟沧海·关云长：初始攻击化为青龙偃月斩并被直接释放', async () => {
+  it('青龙化身：初始攻击化为青龙偃月斩并被直接释放', async () => {
     const g = makeGame([hero('tt8-hero-warrior'), hero('tt8-hero-sword')]);
-    BattleSession.start(g, [foe()], { name: '关云长' });
+    BattleSession.start(g, [foe()], { name: '青龙化身' });
     await drain();
     mark(g);
     BattleSession.commands.playCard(uidOf(g, hero('tt8-hero-warrior')), null);
@@ -240,7 +240,7 @@ describe('英雄卡实打 · 战士', () => {
 });
 
 describe('英雄卡实打 · 牧师', () => {
-  it('无极梦魇·血苑修罗（BOSS战）：四张禁咒洗入牌库，洗混后「然后抽 2 张」', async () => {
+  it('禁术解放（BOSS战）：四张禁咒洗入牌库，洗混后「然后抽 2 张」', async () => {
     const m = martialDmg(3);
     const g = await startBoss([hero('tt8-hero-warlock'), m, m]);
     mark(g);
@@ -262,7 +262,7 @@ describe('英雄卡实打 · 牧师', () => {
     await drain(20);
   });
 
-  it('浪掷风吟·露娜拉：置入随机卡牌直至手牌6张，每置入1张法术回复3血', async () => {
+  it('浪掷风吟：置入随机卡牌直至手牌6张，每置入1张法术回复3血', async () => {
     const g = makeGame([hero('tt8-hero-priest')], { hp: 100 });
     BattleSession.start(g, [foe()], { name: '露娜拉' });
     await drain();

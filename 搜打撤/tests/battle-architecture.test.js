@@ -44,14 +44,21 @@ describe('battle architecture foundation', () => {
       { uid: 'c', card: { name: '盾', desc: '获得护甲' } },
     ];
     expect(groupHandCards(entries).map(group => group.uids)).toEqual([['a', 'b'], ['c']]);
-    // 扇形布局：左右对称、边缘外张、中心牌最高；超员整体缩小不换行
+    // 平行布局（2026-09-13 留言：不再扇形）：左右对称、无旋转、同高；
+    // 超员收紧密度（间距递减）+ >14 张自动分两行
     expect(fanLayout(0, 3).x).toBeLessThan(0);
     expect(fanLayout(2, 3).x).toBeGreaterThan(0);
-    expect(fanLayout(2, 3).rot).toBeGreaterThan(0);
-    expect(fanLayout(1, 3).y).toBeLessThan(fanLayout(0, 3).y);
+    expect(fanLayout(2, 3).rot).toBe(0);   // 平行：无旋转
+    expect(fanLayout(1, 3).y).toBe(fanLayout(0, 3).y);   // 同一水平线
     expect(fanLayout(0, 3).x).toBe(-fanLayout(2, 3).x);
-    expect(fanLayout(0, 12).scale).toBeLessThan(fanLayout(0, 5).scale);
-    expect(fanLayout(0, 16).scale).toBeLessThan(fanLayout(0, 12).scale);
+    expect(fanLayout(0, 3).scale).toBe(1);   // 不再整排缩放
+    // 重叠度递增：单张间距（12 张口径）小于 5 张口径
+    const spread5 = fanLayout(1, 5).x - fanLayout(0, 5).x;
+    const spread12 = fanLayout(1, 12).x - fanLayout(0, 12).x;
+    expect(spread12).toBeLessThan(spread5);
+    // 两行：15 张时第二行在上方（y < 0）
+    expect(fanLayout(14, 15).y).toBeLessThan(0);
+    expect(fanLayout(0, 15).y).toBe(0);
   });
 
   it('moves card UIDs through zones without duplicates', () => {

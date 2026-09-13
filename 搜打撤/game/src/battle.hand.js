@@ -39,33 +39,30 @@ const FAN10 = [
   [[-600, 37], [-445, -2], [-300, -29], [-150, -45], [0, -50], [150, -45], [300, -29], [445, -2], [600, 37]],
   [[-610, 38], [-472, 5], [-340, -21], [-200, -41], [-64, -50], [64, -50], [200, -41], [340, -21], [472, 5], [610, 38]],
 ];
-// 张数 → 整排缩放：≤7 张原大，8 张起每多 1 张缩 0.05，>12 张继续缩到 0.5 下限
+// 张数 → 整排缩放：≤9 张原大，10 张起每多 1 张缩 0.04，>14 张继续缩到 0.6 下限
 function rowScale(n) {
-  if (n <= 7) return 1;
-  if (n <= 12) return +(1 - (n - 7) * 0.05).toFixed(2);
-  return Math.max(0.5, +(0.75 - (n - 12) * 0.04).toFixed(2));
+  if (n <= 9) return 1;   // 2026-09-12 紧凑手牌：重叠观感轻，起缩点 7→9
+  if (n <= 14) return +(1 - (n - 9) * 0.04).toFixed(2);
+  return Math.max(0.6, +(0.8 - (n - 14) * 0.03).toFixed(2));
 }
 
+/* —— 平行手牌（2026-09-13 留言：不再扇形，平行排布 + 卡面 1/3 沉底 + 安全区内不遮能量/按键）——
+   间距随张数收紧（重叠度增加）；超过 14 张自动分两行（第二行叠在第一行上方）。
+   返回值结构不变（x/y/rot/scale），视图的 CSS 变量补间链零改动。 */
 function fanLayout(index, count) {
   const n = Math.max(1, count | 0);
   const i = Math.min(n - 1, Math.max(0, index | 0));
-  const u = n > 1 ? i / (n - 1) - 0.5 : 0;   // -0.5（最左）..0.5（最右）
-  const scale = rowScale(n);
-  const compress = n <= 10 ? 1 : Math.pow(10 / n, 0.7);   // 超员：收紧横向间距加重叠
-  let x, y;
-  if (n <= 10) {
-    [x, y] = FAN10[n - 1][i];
-  } else {
-    x = 610 * (2 * u) * compress;
-    y = -50 + 88 * (2 * u) * (2 * u) * compress;
-  }
-  const rot = Math.max(-MAX_ROT, Math.min(MAX_ROT, n * 2 * u * (n <= 10 ? 1 : 0.9)));
-  return {
-    x: +(x * UNIT * SPREAD).toFixed(1),
-    y: +(y * UNIT).toFixed(1),
-    rot: +rot.toFixed(2),
-    scale,
-  };
+  // 分行：>14 张切两行，行内张数对半（第二行叠在上方，y 上移一个沉底补偿量）
+  const rows = n > 14 ? 2 : 1;
+  const perRow = rows === 1 ? n : Math.ceil(n / 2);
+  const row = rows === 1 ? 0 : (i < perRow ? 0 : 1);
+  const idxInRow = row === 0 ? i : i - perRow;
+  const cntInRow = row === 0 ? perRow : n - perRow;
+  // 行内间距：张数越多间距越小（重叠度增加）
+  const step = cntInRow <= 5 ? 128 : cntInRow <= 8 ? 104 : cntInRow <= 11 ? 84 : 70;
+  const x = (idxInRow - (cntInRow - 1) / 2) * step;
+  const y = row === 1 ? -150 : 0;   // 第二行抬高（与第一行错开且不遮能量/按键）
+  return { x: +x.toFixed(1), y, rot: 0, scale: 1 };
 }
 
 export { groupHandCards, fanLayout };

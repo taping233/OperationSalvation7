@@ -1,7 +1,13 @@
 {
-  "version": 11,
-  "note": "实机卡库定版覆盖批次数据（同步自网页版实机卡库）。由 scripts/sync-cards-from-live.mjs 生成，勿手改；重跑该脚本整块替换。",
+  "version": 17,
+  "note": "实机卡库定版覆盖批次数据（同步自网页版实机卡库）。由 scripts/sync-cards-from-live.mjs 生成，勿手改；重跑该脚本整份重写。",
   "changelog": [
+    "2026-09-13 实机卡库同步（v17）：覆盖 18 / 新增 9 / 退役 1",
+    "2026-09-12 实机卡库同步（v16）：覆盖 4 / 新增 0 / 退役 0",
+    "2026-09-12 充能火山(tt8-hero-descender)补 cls=降临者（常无欲专属）",
+    "2026-09-12 修复 v13 丢失的退役名单（tt-peach/tt6-timeskip 找回）；tt7-imitate=侠客（无专属）；邪渊主宰/充能火山改名入版",
+    "2026-09-12 修复 sync v12 整份重写丢失的历史覆盖批次：找回 26 张纯实机卡（cc-dual-wield, tt3eq-mistbox, cc-lava-blast, cc-double-boom, cc-cursed-blade, cc-chase-slash, cc-mana-surge, cc-rapid-fire, pet-egg, tt7-drunksong, tt7-ironcharge, cmtn79743r2n, cmtn7err0a7, tt-crystal, tt-key, tt-key-one, tt-keys-bunch, tt3-garnet-marble, tt3-savior-elixir, tt3sp-doom, tt6-mystery, tt6-systemsupply, tt8-hero-mage, tt8-hero-summoner, cmtn6ulm4boj, tt6-airdrop）+ tt7-imitate 补 cls=侠客（无专属）+ 邪渊主宰/充能火山改名同步",
+    "2026-09-12 实机卡库同步（v12）：覆盖 3 / 新增 0 / 退役 0",
     "2026-09-10 需求批次（v10）：二刀流",
     "2026-09-10 需求批次（v9）：迷之匣改版 + 桃",
     "2026-09-10 需求批次（v8）：熔岩爆破 + 二次爆炸",
@@ -14,35 +20,26 @@
   ],
   "cards": [
     {
-      "cost": 1,
-      "desc": "发现一张武术卡并额外获得1张复制。",
-      "id": "cc-dual-wield",
-      "name": "二刀流",
+      "cost": 2,
+      "desc": "攻（+0），本回合每打出一张其他武术，费用-1。",
+      "dmg": 0,
+      "dmgType": "attack",
+      "id": "cc-chase-slash",
+      "name": "追斩",
       "rarity": "稀有",
       "type": "武术",
       "value": 2
     },
     {
-      "cost": 0,
-      "desc": "限定技能：发现两张随机招式，交换其费用。",
-      "dmg": 0,
-      "id": "tt3eq-mistbox",
-      "name": "迷之匣",
-      "rarity": "古朴",
-      "sellable": false,
-      "type": "装备",
-      "value": 2
-    },
-    {
       "cost": 2,
-      "desc": "造成9点法术伤害，获得1张「二次爆炸」。",
-      "dmg": 9,
-      "dmgType": "spell",
-      "id": "cc-lava-blast",
-      "name": "熔岩爆破",
+      "desc": "攻（+3），附加手牌中的招式所具有的全部诅咒效果。",
+      "dmg": 3,
+      "dmgType": "attack",
+      "id": "cc-cursed-blade",
+      "name": "诅咒之刃",
       "rarity": "稀有",
-      "type": "法术",
-      "value": 4
+      "type": "武术",
+      "value": 3
     },
     {
       "cost": 1,
@@ -57,26 +54,24 @@
       "value": 0
     },
     {
-      "cost": 2,
-      "desc": "攻（+3），附加手牌中的招式所具有的全部诅咒效果。",
-      "dmg": 3,
-      "dmgType": "attack",
-      "id": "cc-cursed-blade",
-      "name": "诅咒之刃",
-      "rarity": "稀有",
-      "type": "武术",
-      "value": 3
-    },
-    {
-      "cost": 2,
-      "desc": "攻（+0），本回合每打出一张其他武术，费用-1。",
-      "dmg": 0,
-      "dmgType": "attack",
-      "id": "cc-chase-slash",
-      "name": "追斩",
+      "cost": 1,
+      "desc": "发现一张武术卡并额外获得1张复制。",
+      "id": "cc-dual-wield",
+      "name": "二刀流",
       "rarity": "稀有",
       "type": "武术",
       "value": 2
+    },
+    {
+      "cost": 2,
+      "desc": "造成9点法术伤害，获得1张「二次爆炸」。",
+      "dmg": 9,
+      "dmgType": "spell",
+      "id": "cc-lava-blast",
+      "name": "熔岩爆破",
+      "rarity": "稀有",
+      "type": "法术",
+      "value": 4
     },
     {
       "cost": 2,
@@ -102,43 +97,14 @@
     },
     {
       "cost": 0,
-      "desc": "可以孵化宠物。",
-      "dmg": 0,
-      "id": "pet-egg",
-      "name": "宠物蛋",
-      "rarity": "传说",
+      "desc": "攻击力4生命4，优先为主人承受伤害，自动攻击敌人",
+      "id": "cmtn6ulm4boj",
+      "name": "步兵",
+      "rarity": "衍生",
       "sellable": false,
-      "type": "资源",
+      "type": "生物",
       "unrandom": true,
-      "value": 5
-    },
-    {
-      "cls": "牧师",
-      "cost": 0,
-      "desc": "受到3点伤害，抽 3 张牌。",
-      "dmg": 0,
-      "draw": 3,
-      "id": "tt7-drunksong",
-      "name": "恶魔之力",
-      "rarity": "职业",
-      "sellable": false,
-      "type": "法术",
-      "unrandom": true,
-      "value": 3
-    },
-    {
-      "cls": "战士",
-      "cost": 2,
-      "desc": "+12 甲，抽 2 张牌。",
-      "dmg": 0,
-      "draw": 2,
-      "id": "tt7-ironcharge",
-      "name": "厉兵秣马",
-      "rarity": "职业",
-      "sellable": false,
-      "type": "武术",
-      "unrandom": true,
-      "value": 3
+      "value": 0
     },
     {
       "cost": 0,
@@ -163,6 +129,18 @@
       "sellable": false,
       "type": "生物",
       "value": 0
+    },
+    {
+      "cost": 0,
+      "desc": "可以孵化宠物。",
+      "dmg": 0,
+      "id": "pet-egg",
+      "name": "宠物蛋",
+      "rarity": "传说",
+      "sellable": false,
+      "type": "资源",
+      "unrandom": true,
+      "value": 5
     },
     {
       "cost": 0,
@@ -233,6 +211,17 @@
     },
     {
       "cost": 0,
+      "desc": "限定技能：发现两张随机招式，交换其费用。",
+      "dmg": 0,
+      "id": "tt3eq-mistbox",
+      "name": "迷之匣",
+      "rarity": "古朴",
+      "sellable": false,
+      "type": "装备",
+      "value": 2
+    },
+    {
+      "cost": 0,
       "desc": "消灭 2 名 攻击力5点及以下小怪",
       "dmg": 0,
       "id": "tt3sp-doom",
@@ -263,6 +252,47 @@
       "unrandom": true
     },
     {
+      "cls": "牧师",
+      "cost": 0,
+      "desc": "受到3点伤害，抽 3 张牌。",
+      "dmg": 0,
+      "draw": 3,
+      "id": "tt7-drunksong",
+      "name": "恶魔之力",
+      "rarity": "职业",
+      "sellable": false,
+      "type": "法术",
+      "unrandom": true,
+      "value": 3
+    },
+    {
+      "armor": 12,
+      "cls": "战士",
+      "cost": 2,
+      "desc": "+12 甲，抽 2 张牌。",
+      "dmg": 0,
+      "draw": 2,
+      "id": "tt7-ironcharge",
+      "name": "厉兵秣马",
+      "rarity": "职业",
+      "sellable": false,
+      "type": "武术",
+      "unrandom": true,
+      "value": 3
+    },
+    {
+      "cls": "降临者",
+      "cost": 2,
+      "desc": "寂灭苍穹：法伤 +1，本局对战中，每消耗 1 张卡牌，施放 1 次‘火球’。",
+      "dmg": 0,
+      "id": "tt8-hero-descender",
+      "name": "充能火山",
+      "rarity": "古朴",
+      "sellable": false,
+      "type": "能力卡",
+      "value": 8
+    },
+    {
       "cls": "法师",
       "cost": 2,
       "desc": "万法乾坤：法伤 +1，回合开始时发现 1 张卡牌。",
@@ -271,6 +301,20 @@
       "id": "tt8-hero-mage",
       "name": "博览者的狂语",
       "rarity": "稀有",
+      "sellable": false,
+      "type": "能力卡",
+      "unrandom": true,
+      "value": 8
+    },
+    {
+      "cls": "降临者",
+      "cost": 2,
+      "desc": "深渊降焰：法伤 +1，每消耗 1 张卡牌，施放 1 次火球。",
+      "dmg": 0,
+      "hero": true,
+      "id": "tt8-hero-sealer",
+      "name": "邪渊主宰",
+      "rarity": "棱彩",
       "sellable": false,
       "type": "能力卡",
       "unrandom": true,
@@ -289,31 +333,9 @@
       "type": "能力卡",
       "unrandom": true,
       "value": 8
-    },
-    {
-      "cost": 0,
-      "desc": "攻击力4生命4，优先为主人承受伤害，自动攻击敌人",
-      "id": "cmtn6ulm4boj",
-      "name": "步兵",
-      "rarity": "衍生",
-      "sellable": false,
-      "type": "生物",
-      "unrandom": true,
-      "value": 0
-    },
-    {
-      "cost": 0,
-      "desc": "从木材、口粮、能量饮料、随机药水中抽取一项。",
-      "dmg": 0,
-      "id": "tt6-airdrop",
-      "name": "空中补给",
-      "rarity": "衍生",
-      "type": "事件",
-      "unrandom": true
     }
   ],
   "retire": [
-    "tt-peach",
     "tt6-timeskip"
   ]
 }

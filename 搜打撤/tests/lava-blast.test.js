@@ -12,7 +12,7 @@ window.SDT.MAP = {
   items: { rations: { name: '口粮' }, wood: { name: '木材' } },
 };
 await import('../game/src/cards.js');
-const { BattleSession } = await import('../game/src/battle.core.js');
+const { BattleSession, viewApi } = await import('../game/src/battle.core.js');
 
 const C = window.SDT.Cards;
 
@@ -109,7 +109,8 @@ describe('熔岩爆破 + 二次爆炸', () => {
     expect(snap().hand.length).toBeGreaterThan(0);
 
     // 打出置入的二次爆炸（AOE）：全体 3+法伤2 = 5
-    const uid2 = snap().hand[0];                    // 熔岩爆破已离手，手牌只剩二次爆炸
+    // （手牌里另有背包砸击初始牌常驻（2026-09-13 留言），按名字定位二次爆炸）
+    const uid2 = snap().hand.find(u => { const o = viewApi.findCard(u); return o && o.card.name === '二次爆炸'; });
     BattleSession.commands.playCard(uid2, 0);
     await drain();
     expect(snap().foes[0].hp).toBe(hpA - 16);       // 11 + 5

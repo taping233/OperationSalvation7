@@ -362,6 +362,8 @@ function configureGameRuntime(hooks) {
         discovered: [...game.discoveredPairs],
         bossKilled: !!game.bossKilled,
         altarActivated: !!game.altarActivated,   // 第四层祭坛是否已激活（首脑格准入条件）
+        altarRewardPending: !!game.altarRewardPending,   // 祭坛奖励待领取（回赠面板可重进，只能领一次）
+        bossPlan: (game.bossPlan == null ? null : game.bossPlan),   // 本层首脑预案（进层 roll 一次存全层，2026-09-13 老板拍板）
         diceHistory: game.diceHistory, elapsed: game.elapsed,
         stamina: game.stamina == null ? MAP.rules.staminaMax : game.stamina,
         slot: activeSlot, savedAt: Date.now(),
@@ -459,6 +461,8 @@ function configureGameRuntime(hooks) {
     game.fragments = +s.fragments || 0;   // 彩色令牌碎片（旧档无字段 → 0）
     game.bossKilled = !!s.bossKilled;     // 本局是否已击败首脑（终局撤离条件）
     game.altarActivated = !!s.altarActivated;   // 第四层祭坛是否已激活（首脑格准入条件，旧档无字段 → false）
+    game.altarRewardPending = !!s.altarRewardPending;   // 祭坛奖励待领取（旧档无字段 → false）
+    game.bossPlan = (s.bossPlan == null ? null : +s.bossPlan);   // 本层首脑预案（旧档无字段 → null，进 boss 格时现 roll）
     game.pendingEventLoot = null;
     game.discoveredPairs = new Set(s.discovered || []);
     game.diceHistory = s.diceHistory || [];
@@ -584,6 +588,8 @@ function configureGameRuntime(hooks) {
     game.elapsedSynced = 0;
     game.altarFrom = null;
     game.altarActivated = false;   // 第四层祭坛未激活——首脑格封印中
+    game.altarRewardPending = false;   // 祭坛奖励待领取（激活后置位，领取消耗）
+    game.bossPlan = null;   // 本层首脑预案（进层时重 roll，见 enterLayer）
     game.surrenderedRun = false;   // 本局是否因主动撤离判负（区分战败/撤离失败文案）
     game.bossKilled = false;   // 第四层击败首脑后才能终局撤离
     game.visited = {};   // 已结算过的一次性格（防回头路重刷战斗/宝箱/事件）
@@ -732,6 +738,7 @@ function configureGameRuntime(hooks) {
     markSeen(safeLayer, safeIdx);
     game.activeLayerBounds = game.layerBounds?.[safeLayer] || null;
     game.hop = 0;
+    game.bossPlan = null;   // 每层 roll 一次首脑预案：层内重进 boss 格不再换人（2026-09-13 老板拍板）
     game.state = 'idle';
     if (cam) {
       // Focus on the currently available choices; unexplored map bounds no longer shrink them.

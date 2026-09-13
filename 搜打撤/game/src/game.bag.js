@@ -28,16 +28,21 @@ import { _set_cardPageOpen } from './game.cardslib.js';
     if (card.type === '事件') { UI.log('[[icon:dice]] 事件卡只能在事件格中触发，无法在背包中使用（背包只记录触发历史）', 'warn'); return; }
     if (card.type !== '道具') { UI.log('只有道具卡可以直接使用', 'warn'); return; }
     const desc = card.desc || '';
-    // 能源结晶：就地复原消耗口袋中最多 3 张卡牌
+    // 能源结晶：就地复原消耗口袋中最多 3 张卡牌（2026-09-13 需求：背包满时不能复原出超容量的卡）
     if (card.id === 'tt-crystal' || /复活最多\s*3\s*张卡牌/.test(desc)) {
       if (!game.usedPocket.length) { UI.log('消耗口袋是空的，无需复原', 'warn'); return; }
       game.ownedCards.splice(i, 1);
       let cnt = 0;
-      game.usedPocket.splice(0, 3).forEach(p => {
-        for (let k = 0; k < p.count; k++) game.ownedCards.push({ uid: newUid(), card: { ...p.card } });
-        cnt += p.count;
-      });
-      UI.log(`[[icon:gem]] 使用【<b>${esc(card.name)}</b>】：复原了消耗口袋中的 <b>${cnt}</b> 张卡牌`, 'ok');
+      while (game.usedPocket.length && cnt < 3 && usedSlots() < bagCap()) {
+        const p = game.usedPocket[0];
+        game.ownedCards.push({ uid: newUid(), card: { ...p.card } });
+        p.count--;
+        if (p.count <= 0) game.usedPocket.shift();
+        cnt++;
+      }
+      const leftN = game.usedPocket.reduce((a, b) => a + b.count, 0);
+      UI.log(`[[icon:gem]] 使用【<b>${esc(card.name)}</b>】：复原了消耗口袋中的 <b>${cnt}</b> 张卡牌` +
+        (leftN && usedSlots() >= bagCap() ? `（背包已满，剩 ${leftN} 张留在口袋）` : ''), 'ok');
       showBackpack(true);
       return;
     }
@@ -127,21 +132,25 @@ import { _set_cardPageOpen } from './game.cardslib.js';
         game.coins += 3;
         UI.log('[[icon:flask]] 神秘药水：获得 <b>3</b> 币', 'coin');
       } else {
+        const canTake = (c) => (game.canReceiveCard ? game.canReceiveCard(c) : game.canAcceptCard(c));
         const pool = SDT.Cards.all().filter(c => SDT.Cards.isRandomObtainable(c));
         const got = pool.length ? pool[Math.floor(Random.random('loot') * pool.length)] : null;
-        if (got) {
+        const took = !!got && canTake(got);
+        if (took) {
           game.ownedCards.push({ uid: newUid(), card: { ...got } });
           // 阿猫的礼物（2026-09-12 实装）：随机获取该牌时附赠另 1 张随机卡牌
           if (got.id === 'tt2-apollo') {
             const pool2 = SDT.Cards.all().filter(c => SDT.Cards.isRandomObtainable(c) && c.id !== 'tt2-apollo');
-            if (pool2.length) {
-              const got2 = pool2[Math.floor(Random.random('loot') * pool2.length)];
+            const got2 = pool2.length ? pool2[Math.floor(Random.random('loot') * pool2.length)] : null;
+            if (got2 && canTake(got2)) {
               game.ownedCards.push({ uid: newUid(), card: { ...got2 } });
               UI.log(`[[icon:bolt]] <b>阿猫的礼物</b>：随机获取触发，附赠【<b>${esc(got2.name)}</b>】`, 'loot');
+            } else if (got2) {
+              UI.log(`[[icon:bolt]] <b>阿猫的礼物</b>：背包已满，附赠的【${esc(got2.name)}】没能放进背包`, 'warn');
             }
           }
         }
-        UI.log(`[[icon:flask]] 神秘药水：随机获得【<b>${esc(got ? got.name : '???')}</b>】`, 'loot');
+        UI.log(`[[icon:flask]] 神秘药水：${took ? `随机获得【<b>${esc(got.name)}</b>】` : got ? `背包已满，【${esc(got.name)}】没能放进背包` : '没有可获得卡牌'}`, took ? 'loot' : 'warn');
       }
       saveGame();
       showBackpack(true);
@@ -220,6 +229,13 @@ import { _set_cardPageOpen } from './game.cardslib.js';
       game.state = 'modal';
       if (SDT.Chests && SDT.Chests.resume) SDT.Chests.resume();
       UI.refresh(game);
+      return;
+    }
+    // 从其他页面（商店等）打开的背包：关闭后调用返回钩子回到原页面（2026-09-12 留言 #31）
+    if (bagReturnHook) {
+      const hook = bagReturnHook;
+      bagReturnHook = null;
+      hook();
       return;
     }
     game.state = 'idle';
@@ -381,6 +397,32 @@ import { _set_cardPageOpen } from './game.cardslib.js';
     render();
   }
 
+  // —— 需求（2026-09-13 老板）：背包按稀有度 / 按种类一键排序 ——
+  // 排序直接重写 cardOrder（与拖拽排序共用同一持久化通道），背包 + 安全格的所有堆一起参与
+  const RARITY_RANK = { '传说': 5, '史诗': 4, '稀有': 3, '古朴': 2, '初始': 1 };
+  function rarityRank(card) {
+    const r = card && (SDT.Cards.rarityOf ? SDT.Cards.rarityOf(card) : card.rarity);
+    return RARITY_RANK[r] || 0;
+  }
+  function typeRank(card) {
+    const i = (SDT.Cards.TYPES || []).indexOf(card && card.type);
+    return i < 0 ? 99 : i;
+  }
+  function sortBagBy(kind) {
+    syncCardOrder();
+    const all = cardStacks(false).concat(cardStacks(true));
+    all.sort((a, b) => {
+      const first = kind === 'rarity' ? rarityRank(b.card) - rarityRank(a.card) : typeRank(a.card) - typeRank(b.card);
+      if (first) return first;
+      const second = kind === 'rarity' ? typeRank(a.card) - typeRank(b.card) : rarityRank(b.card) - rarityRank(a.card);
+      if (second) return second;
+      return String(a.card.name).localeCompare(String(b.card.name), 'zh');
+    });
+    game.cardOrder = all.map(s => s.card.name);
+    saveGame();
+    showBackpack(true);
+  }
+
   function showBackpack(refreshOnly) {
     // 卡牌特写浮层挂在 body（overlay 之外）：此时按 B / 点背包按钮 = 先收回特写，
     // 不动背包——否则背包关闭后特写残留在局内画面上
@@ -521,7 +563,12 @@ import { _set_cardPageOpen } from './game.cardslib.js';
       </header>
       <div class="bag-layout">
         <div class="bag-main">
-          <h3 class="set-h">[[icon:bag]] 背包格</h3>
+          <h3 class="set-h">[[icon:bag]] 背包格
+            <span class="bag-sort">
+              <button class="mini-btn" data-act="bagSortRarity" title="按稀有度从高到低排序（同稀有度按种类）">按稀有度</button>
+              <button class="mini-btn" data-act="bagSortType" title="按种类排序（同种类按稀有度）">按种类</button>
+            </span>
+          </h3>
           <div class="bag-grid">${cells}</div>
           <h3 class="set-h">[[icon:lock]] 安全格</h3>
           <div class="bag-grid safe-grid">${safeCells}</div>
@@ -533,13 +580,20 @@ import { _set_cardPageOpen } from './game.cardslib.js';
           </div>
         </aside>
       </div></div>`, 'bagpage');
-    UI.act('inspectStack', (d) => showBagCardDetail(d.name, d.safe === '1'));
+    // 2026-09-12 留言 #27：看卡不方便 → 点击直接放大卡面特写（替代原文字详情页）
+    UI.act('inspectStack', (d) => {
+      const st = cardStacks(d.safe === '1').find(s => s.card.name === d.name);
+      if (st) UI.showCardZoom(st.card, { footer: d.safe === '1' ? '[[icon:lock]] 安全格 · 拖回背包可取出' : '按住拖动整理顺序 · 双击翻看卡背' });
+    });
+    UI.act('bagSortRarity', () => sortBagBy('rarity'));
+    UI.act('bagSortType', () => sortBagBy('type'));
     UI.act('closeBag', closeBackpack);
     bindBagDrag();   // v0.21：3D 拖拽排序 / 双击翻卡背
   }
 
   let backpackOpen = false;   // 背包弹窗开关（必须声明：showBackpack 打开路径会读取它）
   let bagOverChest = false;   // 背包是否从搜刮界面打开（关闭时回搜刮面板，2026-09-09 留言 #13）
+  let bagReturnHook = null;   // 从商店等页面打开背包时的关闭返回钩子（2026-09-12 留言 #31）
 
   // ---------- 背包拖拽（v0.21）：3D 立体手感 · 堆排序 · 拖入/拖出安全格 ----------
   let bagDrag = null;   // {name, fromSafe, cell, ghost, card3d, sx, sy, lx, ly, vx, vy, moved}
@@ -880,4 +934,5 @@ import { _set_cardPageOpen } from './game.cardslib.js';
   game.onBattleEnd = onBattleEnd;
   }
 
-export { bindBagMixins, showBackpack };
+function setBagReturnHook(fn) { bagReturnHook = typeof fn === 'function' ? fn : null; }
+export { bindBagMixins, showBackpack, setBagReturnHook };

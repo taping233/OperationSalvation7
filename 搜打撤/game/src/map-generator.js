@@ -1,10 +1,12 @@
 /* Seeded four-layer map generator. Emits plain data for session and renderer. */
-const TARGETS = [13, 15, 17, 15];
-const WIDTHS = [7, 8, 9, 8];
+const TARGETS = [7, 15, 17, 15];   // L1=7：2026-09-13 老板——首层流程改短，恒定七格
+const WIDTHS = [4, 8, 9, 8];   // L1 宽 4：与 TARGETS[0]=7 保持 spine 配套（2×(width-1)+1=7），坐标数才不会溢出目标格数
 const ROW_MIN = -3;
 const ROW_MAX = 3;
 const GENERATOR_VERSION = 3;
-const LAYOUT_VERSION = 5;   // v5：2026-09-10 玩法定版——每层物资格（搜刮点）保底 1 格、上限 4 格；野生敌人格上限 4 格不变（旧对局读档后按新版本重生成地图）
+const LAYOUT_VERSION = 7;   // v7：2026-09-13 老板——L1 恒定七格（TARGETS[0] 13→7、宽度 7→5）；旧对局读档后按新版本重生成地图
+                            // v6：2026-09-13 老板——每层事件格 ≤3（第 3 层 17 格受战斗≤4+搜刮≤4 的
+                            // 既有定版约束，结构性最少 4 个，放宽到 ≤4）
 const MAX_ATTEMPTS = 8;
 
 function hashSeed(value) { const text = String(value); let hash = 2166136261;
@@ -51,10 +53,11 @@ function makeLayer(li, target, width, random) {
   //   野生敌人格 ≤4、露天宝箱格（物资格）≤4（超出降级为事件格，后续战斗下限仍会补回 3 场）；
   //   火堆/补给站不生成在入口附近（x < 2 的先降级，保底逻辑在 x ≥ 2 的深处补回）。
   { let battles = 0, chests = 0;
+    const minFacilityX = width <= 4 ? 1 : 2;   // L1 七格（宽 4）：设施远离入口的约束放宽到 x≥1，否则保底放不下
     nodes.forEach(n => {
       if (n.type === 'battle') { battles++; if (battles > 4) n.type = 'event'; }
       else if (n.type === 'chest') { chests++; if (chests > 4) n.type = 'event'; }
-      else if ((n.type === 'fire' || n.type === 'shop') && n.x < 2) n.type = 'event';
+      else if ((n.type === 'fire' || n.type === 'shop') && n.x < minFacilityX) n.type = 'event';
     });
   }
   // 2026-09-09 老板 #13：每层最多 1 个火堆 / 1 个补给站——随机布点会叠出双火堆、两三家补给站，
@@ -86,21 +89,33 @@ function makeLayer(li, target, width, random) {
   const placed = [];
   // 保底落点不挤占战斗格：软下限 2 场（战斗格仅在事件格用尽时才可动用）、硬下限 1 场（最后一格绝不转职业）
   const battleCount = () => nodes.filter(n => n.type === 'battle').length;
+  // chest 数量有富余（>1）时允许保底商店征用——L1 七格密度高，三重约束（x≥1/不贴功能房/设施不可转）
+  // 会把商店可选格挤空（2026-09-13 pity-3 实测缺商店）；单 chest 保底始终保留。
+  const spareChest = () => nodes.filter(n => n.type === 'chest').length > 1;
   const isConvertible = (n, hard) => {
-    if (SPECIAL.has(n.type) || FACILITY.has(n.type) || placed.includes(n)) return false;
+    if (SPECIAL.has(n.type) || placed.includes(n)) return false;
+    if (n.type !== 'chest' && FACILITY.has(n.type)) return false;
+    if (n.type === 'chest' && !spareChest()) return false;
     if (n.type === 'battle' && battleCount() <= (hard ? 1 : 2)) return false;
     return true;
   };
   const distToKey = (n) => Math.min(...nodes.filter(m => KEY_ROOMS.has(m.type)).map(m => Math.abs(n.x - m.x) + Math.abs(n.row - m.row)), Infinity);
   const byKind = (a, b) => (a.type === 'event' ? 0 : 1) - (b.type === 'event' ? 0 : 1) || a.idx - b.idx;
+  const minFacilityX = width <= 4 ? 1 : 2;   // 与入口降级约束同步：L1 七格放宽到 x≥1
   for (const type of ['fire', 'shop']) {
     if (nodes.some(n => n.type === type)) continue;
     // 落点优先级：不贴功能房的格子 > 离功能房最远的格子；同类内优先吃事件格。
-    // 火堆/补给站远离入口：只在 x ≥ 2 的格子里补（2026-09-09 玩法定版）。
-    let pool = nodes.filter(n => isConvertible(n) && n.x >= 2 && !nodes.some(m => m !== n && KEY_ROOMS.has(m.type) && isAdj(n, m)))
+    // 火堆/补给站远离入口：L1 短图放宽到 x≥1，其余层维持 x≥2（2026-09-09 玩法定版）。
+    let pool = nodes.filter(n => isConvertible(n) && n.x >= minFacilityX && !nodes.some(m => m !== n && KEY_ROOMS.has(m.type) && isAdj(n, m)))
       .sort(byKind);
-    if (!pool.length) pool = nodes.filter(n => isConvertible(n, true) && n.x >= 2)
+    if (!pool.length) pool = nodes.filter(n => isConvertible(n, true) && n.x >= minFacilityX)
       .sort((a, b) => distToKey(b) - distToKey(a) || byKind(a, b));
+    if (!pool.length) {
+      // L1 七格极端 case（2026-09-13 pity-10 实测）：唯一战斗格被战斗硬下限锁死、chest 单格不可转，
+      // 商店/火堆保底会落空——此时优先保功能房，征用战斗格；战斗数量由后置下限 guard 从事件格补回。
+      pool = nodes.filter(n => n.type === 'battle' && n.x >= minFacilityX)
+        .sort((a, b) => distToKey(b) - distToKey(a) || byKind(a, b));
+    }
     if (pool.length) { pool[0].type = type; placed.push(pool[0]); }
   }
   // —— 物资格保底（2026-09-10 玩法定版：每层至少 1 个搜刮点/宝箱格）——
@@ -135,8 +150,11 @@ function makeLayer(li, target, width, random) {
   // 没有战斗就没有掉落与经验。不足 3 场时把事件格补成战斗——只挑「自身至多邻接 1 个
   // 战斗格、且这些邻居也没别的战斗邻居」的格子，保证既不制造三连战（上限不被下限打穿）。
   for (let guard = 0; guard < 16 && nodes.filter(n => n.type === 'battle').length < 3; guard++) {
+    // L1 七格下事件格可能被功能房吃光（2026-09-13 1000 seed 实测 0.4% 零战斗层）：
+    // event 优先，event 用尽时征用多余宝箱格（单 chest 保底始终保留）
+    const spareChestLeft = nodes.filter(n => n.type === 'chest').length > 1;
     const cand = nodes.find(n => {
-      if (n.type !== 'event') return false;
+      if (n.type !== 'event' && !(spareChestLeft && n.type === 'chest')) return false;
       const bn = nodes.filter(m => m !== n && m.type === 'battle' && isAdj(n, m));
       if (bn.length > 1) return false;
       return bn.every(m => nodes.filter(q => q !== m && q !== n && q.type === 'battle' && isAdj(m, q)).length === 0);
@@ -149,6 +167,26 @@ function makeLayer(li, target, width, random) {
   // 这里主要防功能房间距/撤离点规则把多余战斗格留在场上一并收敛）。
   { let battles = 0;
     nodes.forEach(n => { if (n.type === 'battle') { battles++; if (battles > 4) n.type = 'event'; } });
+  }
+  // —— 事件格上限（2026-09-13 老板：每层最多 3 个事件）——
+  // 事件格是各降级规则的兜底，数量此前无上限。超出时优先转战斗格（须沿用连续战斗上限的
+  // 同款约束：自身至多邻接 1 个战斗格、且这些邻居没有别的战斗邻居，不制造三连战），
+  // 战斗已满 4 或找不到合法落点时转搜刮点（≤4），都满则保留事件格。
+  // 第 3 层（li===2）17 格 = 入口/大门/紧急撤离 3 + 火堆/补给站 2 + 战斗≤4 + 搜刮≤4，
+  // 结构性最少 4 个事件格，放宽到 ≤4（老板拍板）。
+  const EVENT_CAP = li === 2 ? 4 : 3;
+  { let events = 0;
+    nodes.forEach(n => {
+      if (n.type !== 'event') return;
+      events++;
+      if (events <= EVENT_CAP) return;
+      // 与「战斗数量下限」同款约束：转成战斗格不得制造三连战
+      const bn = nodes.filter(m => m.type === 'battle' && isAdj(n, m));
+      const battleOk = battleCount() < 4 && bn.length <= 1 &&
+        bn.every(m => nodes.filter(q => q !== m && q !== n && q.type === 'battle' && isAdj(m, q)).length === 0);
+      if (battleOk) n.type = 'battle';
+      else if (nodes.filter(m => m.type === 'chest').length < 4) n.type = 'chest';
+    });
   }
   // —— 第四层终局三连：祭坛（弃3激活选奖励）→ 首脑 → 终局撤离点（2026-09-09 玩法定版）——
   // 从候选格按纵深 (x,row) 排序取最深处为首脑格、其前一格为祭坛格；
@@ -181,15 +219,17 @@ function quality(layers) {
     const seen = new Set([layer.entry]); const queue = [layer.entry]; while (queue.length) { const idx = queue.shift();
       for (const [toLi, toIdx] of layer.nodes[idx].next) if (toLi === li && !seen.has(toIdx)) { seen.add(toIdx); queue.push(toIdx); } }
     if (seen.size !== layer.nodes.length) issues.push(`层 ${li + 1} 存在孤岛`);
-    if (layer.nodes.filter(n => n.next.filter(([toLi]) => toLi === li).length >= 3).length < 2) issues.push(`层 ${li + 1} 分叉不足`);
-    if (edges / 2 - layer.nodes.length + 1 < 1) issues.push(`层 ${li + 1} 没有回环`);
+    // L1 七格（2026-09-13 老板）：流程短，图小天然分叉/回环少——豁免「分叉不足/没有回环」两项结构检查
+    if (layer.nodes.filter(n => n.next.filter(([toLi]) => toLi === li).length >= 3).length < (li === 0 ? 0 : 2)) issues.push(`层 ${li + 1} 分叉不足`);
+    if (li !== 0 && edges / 2 - layer.nodes.length + 1 < 1) issues.push(`层 ${li + 1} 没有回环`);
     if (!layer.gridBounds || layer.gridBounds.maxX <= layer.gridBounds.minX || layer.gridBounds.maxRow <= layer.gridBounds.minRow) issues.push(`层 ${li + 1} 缺少有效 bounds`);
     if (li === 3 && layer.nodes.filter(n => n.type === 'altar').length !== 1) issues.push(`层 4 缺少祭坛格`);
     if (li === 3 && layer.nodes.filter(n => n.type === 'boss').length !== 1) issues.push(`层 4 缺少首脑格`);
     if (layer.nodes.filter(n => n.type === 'battle').length > 4) issues.push(`层 ${li + 1} 战斗格超过 4`);
     if (layer.nodes.filter(n => n.type === 'chest').length > 4) issues.push(`层 ${li + 1} 宝箱格（物资格）超过 4`);
     if (layer.nodes.filter(n => n.type === 'chest').length < 1) issues.push(`层 ${li + 1} 缺少物资格（宝箱格）`);
-    if (layer.nodes.some(n => (n.type === 'fire' || n.type === 'shop') && n.x < 2)) issues.push(`层 ${li + 1} 火堆/补给站贴着入口`);
+    if (layer.nodes.filter(n => n.type === 'event').length > (li === 2 ? 4 : 3)) issues.push(`层 ${li + 1} 事件格超过 ${li === 2 ? 4 : 3}`);
+    if (layer.nodes.some(n => (n.type === 'fire' || n.type === 'shop') && n.x < (layer.gridBounds.maxX + 1 <= 4 ? 1 : 2))) issues.push(`层 ${li + 1} 火堆/补给站贴着入口`);
   });
   for (let li = 0; li < layers.length - 1; li++) { const door = layers[li].doors?.[0]; const next = layers[li + 1];
     if (!door || door.toLayer !== li + 1 || !layers[li].nodes[door.at]?.next.some(([l, i]) => l === li + 1 && i === door.arriveAt) || !next.nodes[door.arriveAt]?.next.some(([l, i]) => l === li && i === door.at)) issues.push(`层间门 ${li} 非法`); }

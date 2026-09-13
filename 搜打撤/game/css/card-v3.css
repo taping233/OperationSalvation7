@@ -1,0 +1,189 @@
+/* ============================================================
+   card-v3.css —— 卡牌 v3 定调（2026-09-12 老板拍板 card-design-v3.html）
+   框色=职业（金属渐变包边）· 卡名丝带=稀有度 · 费用蓝晶球浮角 ·
+   类型铭牌压插画下缘 · 深底描述面板（数字 Georgia 金 / 术语冰蓝）。
+   必须排在 expedition-cards.css 之后加载（index.html 顺序即语义）。
+   ============================================================ */
+/* ============================================================
+   v3 卡牌定调（2026-09-12 老板拍板，docs/redesign/card-design-v3.html）：
+   框色=职业（金属渐变包边）· 卡名丝带=稀有度 · 费用蓝晶球浮角 ·
+   类型铭牌压插画下缘 · 深底描述面板。全部 em 随卡缩放，战斗/牌库/商店共用。
+   ============================================================ */
+/* 职业框色三档：cf1 金属亮部 / cf2 暗部 / cf3 描边亮线 */
+.hs-card{--cf1:#7c8790;--cf2:#3a4249;--cf3:#98a4ad}
+.hs-card.cf0{--cf1:#b56a5a;--cf2:#6e2c22;--cf3:#c98a77}
+.hs-card.cf1{--cf1:#5f9c6e;--cf2:#2c5439;--cf3:#7fb98d}
+.hs-card.cf2{--cf1:#5e86b8;--cf2:#2c4a6e;--cf3:#7799bd}
+.hs-card.cf3{--cf1:#c2a05e;--cf2:#6e5522;--cf3:#d9bc80}
+.hs-card.cf4{--cf1:#8d6ab8;--cf2:#462c6e;--cf3:#a988cc}
+/* 稀有度丝带色（rv0 初始 rv1 古朴 rv2 稀有 rv3 史诗 rv4 传说 rv5 衍生 rv6 职业 rv7 棱彩） */
+.hs-card{--rb1:#5c646c;--rb2:#3c434a}
+.hs-card.rv1{--rb1:#8a6a44;--rb2:#5a4326}
+.hs-card.rv2{--rb1:#3f6f9e;--rb2:#27486a}
+.hs-card.rv3{--rb1:#8a4a9e;--rb2:#552a63}
+.hs-card.rv4{--rb1:#c2851a;--rb2:#7a4f08}
+.hs-card.rv5{--rb1:#5a4a6e;--rb2:#372c45}
+.hs-card.rv6{--rb1:#7e8b98;--rb2:#4d5862}
+.hs-card.rv7{--rb1:#b86a95;--rb2:#6e3f5c}
+.hs-card.rv-prism{--rb1:#b86a95;--rb2:#6e3f5c}
+/* 卡体：深色内芯 + 职业色金属包边（::before 作内芯，包边厚度=卡 padding） */
+.hs-card,#overlay .lib-cardwrap .hs-card,#cardZoom .hs-card{
+  border:0!important;
+  border-radius:.72em!important;
+  padding:.9em .58em .62em!important;
+  background:linear-gradient(165deg,var(--cf1) 0%,var(--cf2) 34%,var(--cf1) 62%,var(--cf2) 100%)!important;
+  box-shadow:
+    0 0 0 1px #000000cc,
+    inset 0 0 0 .09em rgba(255,255,255,.22),
+    inset 0 -.85em 1.3em rgba(0,0,0,.32),
+    0 .42em .95em rgba(0,0,0,.62)!important;
+}
+.hs-card::before{
+  content:''!important;
+  position:absolute!important;
+  inset:.26em!important;
+  z-index:0!important;
+  pointer-events:none!important;
+  border:.09em solid rgba(0,0,0,.55)!important;
+  border-radius:.46em!important;
+  background:linear-gradient(176deg,#2e343c 0%,#1b2027 58%,#232932 100%)!important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.06),inset 0 .25em .6em rgba(0,0,0,.5)!important;
+}
+/* 卡名丝带：稀有度色，左右微凸出卡缘 */
+.hs-card .hsc-name,#overlay .hs-card .hsc-name,#cardZoom .hs-card .hsc-name{
+  order:1!important;
+  width:calc(100% + 1.3em)!important;
+  min-height:1.8em!important;
+  margin:-.52em -.65em .16em!important;
+  padding:.28em .56em .26em!important;
+  z-index:4!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  border:0!important;
+  border-radius:.3em!important;
+  clip-path:none!important;
+  color:#f4efe2!important;
+  font-weight:700!important;
+  letter-spacing:.13em!important;
+  background:linear-gradient(180deg,var(--rb1) 0%,var(--rb2) 100%)!important;
+  box-shadow:0 .16em .28em rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.3),inset 0 -.12em .2em rgba(0,0,0,.32)!important;
+  text-shadow:0 1px 2px rgba(0,0,0,.75)!important;
+}
+/* 棱彩丝带+字（2026-09-12 老板指定参考图：棱彩徽记光带）：丝带=白底粉彩光带
+   （黄/粉/紫/淡蓝分段流动，取色自参考图），字=黑色。
+   此规则压住 winter.css 的旧幻彩丝带底图；span 压住其 background-clip 红渐变字。 */
+.hs-card.rv7 .hsc-name,.hs-card.rv-prism .hsc-name,
+#overlay .hs-card.rv7 .hsc-name,#overlay .hs-card.rv-prism .hsc-name,
+#cardZoom .hs-card.rv7 .hsc-name,#cardZoom .hs-card.rv-prism .hsc-name{
+  background:linear-gradient(105deg,#f7f2f3 0%,#f2d98e 10%,#f7f2f3 22%,#f0bfe4 36%,#cbaaf0 50%,#f7f2f3 62%,#aed0f0 74%,#f2d98e 86%,#f7f2f3 100%)!important;
+}
+.hs-card.rv7 .hsc-name span,.hs-card.rv-prism .hsc-name span{
+  background:none!important;color:#000!important;-webkit-text-stroke:0!important;
+}
+/* 插画窗：职业色描边 + 深色下沉 */
+.hs-card .hsc-art{
+  border:.16em solid var(--cf3)!important;
+  border-radius:.42em!important;
+  background:radial-gradient(circle at 50% 42%,var(--type-art1),#0d1116 84%)!important;
+  box-shadow:inset 0 0 0 .1em rgba(0,0,0,.55),inset 0 0 1em rgba(0,0,0,.62),0 1px 0 rgba(255,255,255,.14)!important;
+}
+/* 类型铭牌：金属小牌压插画下缘，职业色描边 */
+.hs-card .hsc-type{
+  margin:-.62em auto .12em!important;
+  padding:.16em .84em!important;
+  z-index:5!important;
+  color:#dfe5ea!important;
+  background:linear-gradient(180deg,#4b5361 0%,#2b323d 85%)!important;
+  border:.09em solid var(--cf3)!important;
+  border-radius:.24em!important;
+  letter-spacing:.16em!important;
+  box-shadow:0 .16em .22em rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.24)!important;
+}
+/* 描述面板：深底，护住文字可读性 */
+.hs-card .hsc-desc{
+  color:#c9d3da!important;
+  background:linear-gradient(180deg,#141a21 0%,#0e1319 100%)!important;
+  border:1px solid rgba(0,0,0,.75)!important;
+  border-radius:.32em!important;
+  box-shadow:inset 0 .18em .5em rgba(0,0,0,.6),0 1px 0 rgba(255,255,255,.1)!important;
+}
+/* 费用蓝晶球：浮出左上角，白环+深色外圈 */
+.hs-card .hsc-cost{
+  top:-.55em!important;left:-.55em!important;width:2.4em!important;height:2.4em!important;
+  color:#ffffff!important;font-weight:800!important;
+  border:.13em solid rgba(255,255,255,.85)!important;
+  background:radial-gradient(circle at 34% 28%,#f4fcff 0%,#b8e3f6 30%,#57a4cc 62%,#2a6188 86%,#17384f 100%)!important;
+  box-shadow:0 0 0 .16em #0b141b,0 .16em .3em rgba(0,0,0,.6),inset 0 -.18em .3em rgba(0,0,0,.45),inset 0 .12em .2em rgba(255,255,255,.6)!important;
+  text-shadow:0 1px 1px rgba(10,30,45,.8)!important;
+}
+/* 费用变化（战斗内降费绿/升费红）保持语义色，仅换晶球质感 */
+.hs-card .hsc-cost.cost-mod.mod-down{
+  background:radial-gradient(circle at 34% 28%,#d8f5e0 0%,#6fcf8f 45%,#1d5c35 100%)!important;
+}
+.hs-card .hsc-cost.cost-mod.mod-up{
+  background:radial-gradient(circle at 34% 28%,#ffd9cf 0%,#e07a5f 45%,#7c2418 100%)!important;
+}
+/* 伤害红玉（左下角）与币值金币（右下角）：与费用球同一晶体质感 */
+.hs-card .hsc-dmg{
+  width:2.3em!important;height:2.3em!important;bottom:-.5em!important;left:-.55em!important;
+  border-radius:50%!important;clip-path:none!important;
+  border:.13em solid rgba(255,255,255,.85)!important;
+  background:radial-gradient(circle at 34% 28%,#ffcdb8 0%,#f08a68 30%,#c14e35 62%,#7e2a18 100%)!important;
+  box-shadow:0 0 0 .16em #0b141b,0 .16em .3em rgba(0,0,0,.6),inset 0 -.18em .3em rgba(0,0,0,.4),inset 0 .1em .2em rgba(255,255,255,.45)!important;
+  justify-content:center!important;padding-bottom:0!important;
+}
+.hs-card .hsc-val{
+  background:radial-gradient(circle at 34% 28%,#ffe9b8 0%,#e2b25f 45%,#9a6b1f 100%)!important;
+  box-shadow:0 0 0 .16em #0b141b,0 .16em .3em rgba(0,0,0,.6),inset 0 -.18em .3em rgba(0,0,0,.35),inset 0 .1em .2em rgba(255,255,255,.5)!important;
+}
+/* 稀有度宝石在 v3 里由丝带承担，取消底部钻石 */
+.hs-card .hsc-gem{display:none!important}
+/* 描述富文本（v3）：数字 Georgia 加大·金 / 术语冰蓝 / 句首关键字金 */
+.hs-card .hsc-desc .d-num{font-family:Georgia,'Times New Roman',serif!important;font-size:1.22em!important;font-weight:600!important;color:#ecc985!important;line-height:1!important}
+.hs-card .hsc-desc .d-kw{color:#d8b878!important;font-weight:700!important;font-style:normal!important}
+.hs-card .hsc-desc .d-term{color:#8fd0e8!important;font-style:normal!important}
+
+/* ============================================================
+   v3.1 卡面插画比例统一（2026-09-12 老板改口拍板：全场景统一横版，
+   对齐杀戮尖塔2官方口径——card_portraits 875 张实测 384×291 = 1.32 横）
+   三比例（战斗/商店 ~1.5 横、牌库 flex 撑满 ~0.8、紧凑卡 5.8em）
+   收敛为一条：.hsc-art 一律 aspect-ratio 384/291，高度随宽推导。
+   卡体高度改随内容（10/14 固定框不再写死，文字区随内容伸缩）。
+   覆盖：战斗手牌/商店/开箱奖励/牌库网格/悬停预览/背包/图鉴/制作坊/hub
+   —— 全部走 .hs-card 同一结构，em 随卡缩放。
+   ============================================================ */
+.hs-card{height:auto!important}
+#overlay .lib-cardwrap .hs-card{aspect-ratio:auto!important;height:auto!important}
+.hs-card .hsc-art,
+#overlay .lib-cardwrap .hsc-art,
+.hs-card.lib .hsc-art{
+  height:auto!important;
+  min-height:0!important;
+  flex:0 0 auto!important;
+  aspect-ratio:384/291!important;
+}
+/* 牌库虚拟滚动占位高度按新卡高重估（卡变矮：紧凑卡 ~11px 字号 → 卡身 ~70px + 边距） */
+.lib-item{contain-intrinsic-size:auto 122px}
+/* v3.3 悬浮球裁剪修复：费用/币值/伤害球负偏移浮出卡缘（~0.55em+外环 ≈8px），
+   .lib-item 的 content-visibility:auto（滚动性能）自带 paint 裁剪，
+   图鉴页 lib-item padding:0 → 球一出卡即被切。padding 留 10px 裁剪余量 +
+   负 margin 抵消：卡片视觉位置/网格占位/占位高度估算全不变。
+   2026-09-12 留言：格线布局（expedition-library.css）下分割线画在 border box，
+   负 margin 会把上一行底线压进下一行卡牌——抵消 hack 取消，
+   裁剪余量改由格线 padding（22px 上下 / 12px 左右）承担，余量反而更大。 */
+#overlay .card-library-page .lib-item{margin:0}
+
+/* v3.2 逐卡构图修正（2026-09-12 老板批准）：主体偏离 1.32 裁切窗的卡面用 object-position 拉回，
+   不换图；data-asset-key 由 art.js 写在 img 上，选择器与卡面文件一一对应。 */
+img[data-asset-key="card-equip-tt3-light-mail"]{object-position:80% 50%!important}
+img[data-asset-key="card-equip-tt3-holy-staff"]{object-position:50% 25%!important}
+img[data-asset-key="card-equip-tt2-venomstaff"]{object-position:50% 22%!important}
+img[data-asset-key="card-martial-tt3-skewer"]{object-position:65% 60%!important}
+img[data-asset-key="card-martial-cmtn1i64j7y7"]{object-position:50% 35%!important}
+img[data-asset-key="card-martial-cmtn1wnhhym"]{object-position:50% 60%!important}
+img[data-asset-key="card-wu-myriadswords"]{object-position:50% 40%!important}
+/* —— 自原 expedition-cards.css 保留的非皮肤条目（2026-09-12 删历史皮时并入）—— */
+.hs-card .hsc-art img[src*="expedition-starters"],.hs-card .hsc-art img[src*="wu-"]{object-position:50% 28%}
+.hs-card .hsc-kw span{background:#173444;border-color:#7b9ba54d;color:#b9d8de;border-radius:.2em}
+.hs-card .rv-beam{opacity:.55}
+#cardZoom .hs-card .hsc-desc{font-size:.78em}
+@media(prefers-reduced-motion:reduce){.hs-card .rv-beam::before{animation:none!important}}

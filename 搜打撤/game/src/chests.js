@@ -230,7 +230,7 @@ import { Random } from './random.js';
     UI.act('chestTake1', (d) => {
       const card = cur.cards[+d.i];
       if (!card || cur.taken.has(+d.i)) return;
-      if (G.grantCard(card)) {   // grantEventCard：同名并入 / 容量判定 / 传说特效都在里面
+      if (G.grantCard(card, { silent: true })) {   // grantEventCard：同名并入 / 容量判定都在里面（搜刮页自带揭晓，不再叠加获得演出）
         cur.taken.add(+d.i);
         render();
       }
@@ -243,7 +243,7 @@ import { Random } from './random.js';
     });
     UI.act('chestPick', (d) => {
       const card = cur.cards[+d.i];
-      if (card) G.grantCard(card);
+      if (card) G.grantCard(card, { silent: true });   // 三选一页自带揭晓
       if (cur.coins) G.gainCoins(cur.coins);
       next();
     });
@@ -270,7 +270,7 @@ import { Random } from './random.js';
     const taken = cur.taken;
     cur.cards.forEach((card, i) => {
       if (taken && taken.has(i)) return;   // 已单卡拾取过的不重复入包
-      G.grantCard(card);
+      G.grantCard(card, { silent: true });   // 搜刮页自带揭晓，不叠加获得演出
     });
     if (cur.coins) G.gainCoins(cur.coins);
     if (!cur.cards.length && !cur.coins) UI.log('（空的——早被别的拾荒者搬空了……）', 'dim');

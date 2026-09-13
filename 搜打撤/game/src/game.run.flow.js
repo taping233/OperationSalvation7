@@ -10,8 +10,8 @@ import { _set_cardPageOpen } from './game.cardslib.js';
 import { EVENT_SCENE_META } from './game.run.data.js';
 import { Random } from './random.js';
 import { eventNarrative } from './narrative.js';
-import { buildEncounter, cancelLegacyChainMove, enterNode, finishInstant, grantEventCard, nodeShell, openBattleCell, openBlankSafePage, openChestsOnCell, openPickupPage, openShop } from './game.run.scenes.js';
-import { openDoorModal, openFireRest } from './game.run.altar.js';
+import { buildEncounter, cancelLegacyChainMove, enterNode, finishInstant, grantEventCard, nodeShell, openBattleCell, openBlankSafePage, openChestsOnCell, openPickupPage, openPocketRestore, openShop } from './game.run.scenes.js';
+import { openDoorModal, openFireRest, openAltarRitual, openBossGate, openEmergencyModal } from './game.run.altar.js';
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const SDT = window.SDT;
 const UI = window.SDT.UI;
@@ -91,12 +91,14 @@ function resolveCell() {
 
   // 一次性内容防重刷（2026-09-09 玩法定版：任何格子只能触发一次）：
   // 战斗/宝箱/拾取/事件/火堆/商店/祭坛/首脑结算过一次就标记，回头路再次踏入只提示不重触发。
-  // 仍可通行/使用的格：门/紧急撤离/终局撤离（通路）、空白格。
+  // 仍可通行/使用的格：门/紧急撤离/终局撤离（通路）、空白格；
+  // 祭坛已激活但奖励未领取时可重进（只开回赠面板领奖，见 openAltarRitual）。
   // 走过的格子会在地图上标绿（renderer 按 visited 绘制）。
   game.visited = game.visited || {};
   const vKey = game.layerIdx + ',' + idx;
   const repeatable = !def || door || altarE ||
-    ['emergencyExit', 'extraction'].includes(def.type);
+    ['emergencyExit', 'extraction'].includes(def.type) ||
+    (def.type === 'altar' && game.altarActivated && game.altarRewardPending);
   if (game.visited[vKey] && !repeatable) {
     UI.log('[[icon:map]] 这里已经来过了——能拿的都拿走了，什么也没有。', 'sys');
     game.state = 'idle';
@@ -200,7 +202,9 @@ function runInstant(def, after) {
       openFireRest();   // 火堆：回 10 血 + 消耗口袋复原 2 张 + 30% 额外职业卡
       break;
     case 'event': {
-      runEventDeck(); done();   // 事件：直接进事件页（选项在右侧）
+      // 事件页开着时不得回 idle：同步 done() 会把 modal 覆盖成 idle，玩家此时可移动、
+      // 后到的事件页会顶掉前者（2026-09-13 实测奖励丢失）。收尾由事件页关闭点兜底。
+      runEventDeck();
       break;
     }
     default: done(); break;
@@ -251,17 +255,22 @@ function triggerEventCard(card) {
     sub: esc((narrative && narrative.intro) || card.desc || '神秘事件发生了……'),
     body: optHTML,
   });
+  let evtSettled = false;   // 防连点：事件选项二次触发会重复发奖（2026-09-13 实测连点3次入包2张）
   UI.act('evtChoice', (d) => {
-    if (!choices) return;
+    if (!choices || evtSettled) return;
     const choice = choices[+d.i];
     if (!choice) return;
+    evtSettled = true;
     UI.hideOverlay();
     choice.run();
+    if (game.state !== 'modal') finishInstant();   // 选项未自开新页时兜底收尾（幂等）
   });
   UI.act('evtNext', () => {
-    if (choices) return;
+    if (choices || evtSettled) return;
+    evtSettled = true;
     UI.hideOverlay();
     applyEventEffect(card);
+    if (game.state !== 'modal') finishInstant();   // 同上（旧事件 default 分支此前漏收尾）
   });
   UI.refresh(game);
 }

@@ -1,4 +1,5 @@
 /* ============================================================
+
  * game.run.altar.js —— 祭坛/层间门/BOSS 门/火堆/职业选择/撤离整理（架构批次 4）
  *
  * 由 game.run.js 拆出。层位中间（L1）：依赖 game.run.scenes.js，反向不被其依赖；
@@ -9,6 +10,16 @@ import { esc, escAttr } from './shared.js';
 import { MAP, cellCenter, clearSave, curLayer, enterLayer, exitToTitle, game, newUid, saveGame, scaledEnemy, syncPlayTime } from './game.session.js';
 import { tone } from './sound.js';
 import { openBaseHub } from './game.hub.js';
+
+// 选人页机制简介（2026-09-12 留言：按各职业卡池真实机制写，键 = characters.js 的 id）
+const CLASS_STORY = {
+  shuangling: '擅长物理攻击，可以潜行，精通流血与连击。',
+  baiqi: '以法术伤害为核心，精通用火球与诅咒压制敌人。',
+  lituan: '精通奥术法术，擅长发现新法术与召唤帮手。',
+  xuanli: '正面硬扛的战士，擅长叠护甲与施加流血。',
+  dengkui: '擅长治疗与圣盾，用圣光法术守护自己。',
+};
+
 import { Sfx, _set_cardPageOpen, cardHTML } from './game.cardslib.js';
 import { Random } from './random.js';
 import { FIRE_RESTORABLE, finishInstant, grantEventCard, nodeOpt, nodeShell, openPocketRestore, openShop, preloadAllNodeShellBgs, showRunTransition } from './game.run.scenes.js';
@@ -63,9 +74,9 @@ export function openClassChoice() {
             ${story ? `
               <h2 class="cls2-name">${esc(story.name)}</h2>
               <div class="cls2-role-tag">${esc(story.rulesetId)} · ${sel ? '当前选择' : '预览'}</div>
-              <div class="cls2-lv">[[icon:medal]] 熟练度 Lv.${lv} · ${SDT.Meta.perkText(displaySel)}</div>
+              <div class="cls2-lv">[[icon:medal]] 熟练度 Lv.${lv} · ${SDT.Meta.perkText(lv)}</div>
               <div class="cls2-ability"><span>专属卡池</span><b>${poolCount(displaySel)} 张角色卡</b></div>
-              <p class="cls2-story">${sel ? '确认后以此人物进入远征，熟练度加成与职业卡将在确认时生效。' : '先查看人物能力与立绘；点击下方头像选择，确认按钮才会提交本局职业。'}</p>
+              <p class="cls2-story">${sel ? (esc(CLASS_STORY[characterFor(displaySel)?.id] || '确认后以此人物进入远征，熟练度加成与职业卡将在确认时生效。')) : '先查看人物能力与立绘；点击下方头像选择，确认按钮才会提交本局职业。'}</p>
               <button class="ov-btn cls2-pool-btn" data-act="clsPool" ${sel ? '' : 'disabled'}>[[icon:cards]] 查看角色卡池（${poolCount(displaySel)} 张）</button>`
             : '<p class="cls2-hint">[[icon:medal]]<br>从下方选择一名角色</p>'}
           </aside>
@@ -75,7 +86,7 @@ export function openClassChoice() {
             ${SDT.Art.classArt(cl)}<b>${esc(c.name)}</b>
           </button>`).join('')}</div>
         <button class="cls2-back" data-act="cls2Quit" title="返回标题界面"><svg class="svg-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.5 5.5 4 12l6.5 6.5M4.6 12H20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <button class="cls2-confirm" data-act="pickClass" ${sel ? '' : 'disabled'} title="${sel ? `确认 · ${escAttr(characterName(sel))}` : '请先选择角色'}" aria-label="${sel ? `以${escAttr(characterName(sel))}出发` : '请先选择角色'}"><span>${sel ? `以${esc(characterName(sel))}出发` : '选择角色后出发'}</span><svg class="svg-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12.5 10 18 19.5 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="cls2-confirm" data-act="pickClass" ${sel ? '' : 'disabled'} title="${sel ? '出发' : '请先选择角色'}" aria-label="${sel ? '出发' : '请先选择角色'}"><span>${sel ? '出发' : '选择角色后出发'}</span><svg class="svg-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12.5 10 18 19.5 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       </div>`, 'page');
   };
   // 二级页：该角色的卡池全览
@@ -84,6 +95,17 @@ export function openClassChoice() {
   // 右上叉号保持删除（底部已有「返回选角」）；卡面点击仍可放大查看
   let poolPage = 0;
   const POOL_PAGE_SIZE = 10;
+  // 分页条（2026-09-12 留言 #9/#10：原挂网格末尾会溢出浅色区压进深色底，且被页脚盖住点不了；
+  // 现由页脚承载，与「返回选角/确认」同排，renderPoolGrid 翻页时同步刷新）
+  const poolPagerHTML = () => {
+    const pool = SDT.Cards.classPool(sel);
+    const totalPages = Math.max(1, Math.ceil(pool.length / POOL_PAGE_SIZE));
+    if (totalPages <= 1) return '';
+    return `
+      <button class="hs-btn sm" data-act="poolPrev"${poolPage <= 0 ? ' disabled' : ''}>‹ 上一页</button>
+      <span class="lib-pageinfo">第 ${poolPage + 1} / ${totalPages} 页 · 共 ${pool.length} 张</span>
+      <button class="hs-btn sm" data-act="poolNext"${poolPage >= totalPages - 1 ? ' disabled' : ''}>下一页 ›</button>`;
+  };
   const poolPreviewHTML = (c) => {
     if (!c) return '<div class="pv-empty">[[icon:cards]]</div><p class="pv-hint">把鼠标悬停在右侧卡牌上<br>这里会显示大图预览</p>';
     const dmgTxt = SDT.Cards.DMG_TYPES.includes(c.type) ? `<br>伤害词条：<b class="dmg-num">${c.dmg || 0}</b>` : '';
@@ -94,15 +116,8 @@ export function openClassChoice() {
     const totalPages = Math.max(1, Math.ceil(pool.length / POOL_PAGE_SIZE));
     if (poolPage >= totalPages) poolPage = totalPages - 1;
     const cards = pool.slice(poolPage * POOL_PAGE_SIZE, (poolPage + 1) * POOL_PAGE_SIZE);
-    // 分页条跨满网格一行（grid-column:1/-1），与卡牌库同款
-    const pager = totalPages > 1 ? `
-      <div class="lib-pager">
-        <button class="hs-btn sm" data-act="poolPrev"${poolPage <= 0 ? ' disabled' : ''}>‹ 上一页</button>
-        <span class="lib-pageinfo">第 ${poolPage + 1} / ${totalPages} 页 · 共 ${pool.length} 张</span>
-        <button class="hs-btn sm" data-act="poolNext"${poolPage >= totalPages - 1 ? ' disabled' : ''}>下一页 ›</button>
-      </div>` : '';
     return `<div class="lib-grid cls-pool-grid" id="poolGrid">${cards.map((c, i) => `
-      <div class="lib-item"><div class="lib-cardwrap" data-act="poolZoom" data-i="${poolPage * POOL_PAGE_SIZE + i}" title="点击放大查看">${SDT.Cards.cardHTML(c)}</div></div>`).join('')}${pager}</div>`;
+      <div class="lib-item"><div class="lib-cardwrap" data-act="poolZoom" data-i="${poolPage * POOL_PAGE_SIZE + i}" title="点击放大查看">${SDT.Cards.cardHTML(c)}</div></div>`).join('')}</div>`;
   };
   // 预解码下一页插画（翻页零解码等待，同卡牌库 warmNextLibPage）
   const warmNextPoolPage = () => {
@@ -116,10 +131,12 @@ export function openClassChoice() {
     }
     warm(urls);
   };
-  // 翻页/重进只重绘卡格区（整页 showOverlay 会重置预览栏）
+  // 翻页/重进只重绘卡格区与页脚分页状态（整页 showOverlay 会重置预览栏）
   const renderPoolGrid = () => {
     const grid = document.getElementById('poolGrid');
     if (grid) grid.outerHTML = poolGridHTML();
+    const pagerEl = document.getElementById('poolPager');
+    if (pagerEl) pagerEl.innerHTML = poolPagerHTML();
     warmNextPoolPage();
   };
   const renderPool = () => {
@@ -135,9 +152,10 @@ export function openClassChoice() {
           <aside class="clib-preview" id="poolPreview">${poolPreviewHTML(null)}</aside>
           ${poolGridHTML()}
         </div>
-        <footer class="cls-foot">
+        <footer class="cls-foot cls-foot-pool">
+          ${poolPagerHTML() ? `<div class="lib-pager pool-pager" id="poolPager">${poolPagerHTML()}</div><span class="pool-foot-sep" aria-hidden="true"></span>` : ''}
           <button class="ov-btn" data-act="clsBack">[[icon:medal]] 返回选角</button>
-          <button class="ov-btn ok" data-act="pickClass">确 认 · ${esc(characterName(sel))}</button>
+          <button class="ov-btn ok" data-act="pickClass">出发</button>
         </footer>
       </div>`, 'page');
     warmNextPoolPage();
@@ -264,6 +282,14 @@ export function openDoorModal(door, cellDef) {
 // 激活（或兑换）成功才算触发过本格；离开未激活可再来。首脑格必须先激活祭坛。
 export function openAltarRitual(def) {
   game.state = 'modal';
+  // 需求（2026-09-13 老板）：祭坛的选项和奖励只能选一次——激活后不再重复展示弃3/碎片等
+  // 激活选项：奖励未领取时重进直接进回赠面板；奖励已领取则本格视为完全消耗
+  if (game.altarActivated && game.altarRewardPending) { openAltarReward(); return; }
+  if (game.altarActivated) {
+    UI.log('[[icon:crystal]] 这座祭坛的仪式已经完成，没有什么可做的了', 'sys');
+    finishInstant();
+    return;
+  }
   const frags = game.fragments || 0;
   // 碎片不足时不再隐藏选项，改为禁用态并说明原因（2026-09-10 撤离测试：玩家不知道选项为何消失）
   const fragOpt = frags >= 2
@@ -332,9 +358,11 @@ export function openAltarRitual(def) {
   UI.refresh(game);
 }
 
-// 激活后的奖励二选一（弃 3 张已支付）
+// 激活后的奖励二选一（弃 3 张已支付）。奖励只能领取一次：进入即置待领标记，
+// 领取消耗标记；离开保留标记——回到本格可直接再进本面板（见 openAltarRitual / resolveCell）
 function openAltarReward() {
   game.state = 'modal';
+  game.altarRewardPending = true;
   // 2026-09-10 留言 #33：消耗口袋没有可复原卡牌（或全是不可复原的道具/装备）时，
   // 选项①要如实标注——否则选了它只会看到空列表，感觉「无法复原」
   const restorableN = game.usedPocket.filter(p => FIRE_RESTORABLE(p.card)).length;
@@ -343,12 +371,14 @@ function openAltarReward() {
     : nodeOpt('altarRewardRestoreOff', '① 复原 3 张消耗卡 + 回复 10 血', '消耗口袋里没有可复原的卡牌（道具/装备类消耗不可复原）——此项不可选', '', 'disabled title="消耗口袋里没有可复原的卡牌，请选奖励②"');
   nodeShell({
     tone: 'altar', icon: '[[icon:crystal]]', title: '祭坛回赠 · 二选一',
-    sub: '祭坛已苏醒——选择你要的奖励',
+    sub: '祭坛已苏醒——选择你要的奖励（只能选一次；离开后回到本格可再选）',
     body:
       restoreOpt +
-      nodeOpt('altarRewardLoot', '② 传说卡 + 装备卡', '随机获取 1 张传说卡和 1 张装备卡'),
+      nodeOpt('altarRewardLoot', '② 传说卡 + 装备卡', '随机获取 1 张传说卡和 1 张装备卡') +
+      nodeOpt('altarRewardLeave', '离开 · 稍后再选', '祭坛保持苏醒——奖励保留，回到本格可再选（奖励只能领取一次）'),
   });
   UI.act('altarRewardRestore', async () => {
+    game.altarRewardPending = false;   // 领取即消耗：奖励只能选一次
     const before = game.hp;
     game.heal(10);
     UI.log(`[[icon:heart]] 祭坛回赠：回复 <b>${Math.max(0, game.hp - before)}</b> 点生命（${game.hp}/${game.maxHp}）`, 'heal');
@@ -356,6 +386,7 @@ function openAltarReward() {
     openPocketRestore(3, () => { saveGame(); finishInstant(); });
   });
   UI.act('altarRewardLoot', () => {
+    game.altarRewardPending = false;   // 领取即消耗：奖励只能选一次
     const legend = SDT.Cards.all().filter(c => c.rarity === '传说' && SDT.Cards.isRandomObtainable(c));
     const equips = SDT.Cards.all().filter(c => c.type === '装备' && SDT.Cards.isRandomObtainable(c));
     if (legend.length) grantEventCard(legend[Math.floor(Random.random('loot') * legend.length)]);
@@ -364,11 +395,12 @@ function openAltarReward() {
     saveGame();
     finishInstant();
   });
+  UI.act('altarRewardLeave', () => { UI.hideOverlay(); finishInstant(); });
   UI.refresh(game);
 }
 
 // 首脑格：必须先激活祭坛；三首脑任选其一挑战，胜利后终局撤离点放行
-function openBossGate(def) {
+export function openBossGate(def) {
   game.state = 'modal';
   if (!game.altarActivated) {
     nodeShell({
@@ -389,7 +421,12 @@ function openBossGate(def) {
   }
   // 2026-09-09 玩法定版：三首脑（5-50 / 4-45 / 8-48）随机一个坐镇，进入本格即告知，
   // 让玩家在编组牌库前就知道要面对谁（编组界面也会再次显示首脑与词缀）。
-  const bossIdx = Math.floor(Random.random('boss') * MAP.altar.bosses.length);
+  // 2026-09-13 老板拍板：首脑每层 roll 一次存全层（game.bossPlan，进层重置/读档恢复）——
+  // 层内重进 boss 格不再换人，面板/编组/实战三处口径恒一致。
+  if (game.bossPlan == null) {
+    game.bossPlan = Math.floor(Random.random('boss') * MAP.altar.bosses.length);
+  }
+  const bossIdx = game.bossPlan % MAP.altar.bosses.length;
   const b = MAP.altar.bosses[bossIdx];
   const aff = b.affix ? MAP.altar.bosses[bossIdx].affixDesc : '';
   nodeShell({
@@ -457,7 +494,7 @@ export function emergencyExitPaymentState(cardCount) {
   return { required: 3, available, canPay: available >= 3 };
 }
 
-function openEmergencyModal() {
+export function openEmergencyModal() {
   game.state = 'modal';
   const def = curLayer()?.logical?.[game.trackPos]?.def;
   const isEmergency = def && def.type === 'emergencyExit';

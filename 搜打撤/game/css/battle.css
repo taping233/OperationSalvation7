@@ -43,12 +43,12 @@
     filter: drop-shadow(0 0 12px rgba(196,196,196,.55)); }
   .bt-card .bt-tt { position: absolute; top: -8px; right: -6px; z-index: 1; font-size: 13px;
     filter: drop-shadow(0 1px 2px rgba(0,0,0,.6)); }
-  /* ============ v0.26 指向施法（炉石式拎起 + 弯曲箭头） ============ */
+  /* ============ v0.26 指向施法 ============ */
+  /* 2026-09-12 STS2 跟手拖拽：卡牌位移由 JS rAF 内联驱动，CSS 只管影子/层级/取消态 */
   .bt-card[data-aim="1"] { touch-action: none; cursor: grab; }
   .bt-card[data-aim="1"]:active { cursor: grabbing; }
-  .bt-card.aim-lift { transform: translateY(-18px) scale(1.06); z-index: 8;
-    box-shadow: 0 16px 34px rgba(0,0,0,.6), 0 0 24px rgba(196,196,196,.4);
-    transition: transform .16s cubic-bezier(.3,1.4,.5,1), box-shadow .16s; }
+  .bt-card.aim-lift { z-index: 25;
+    box-shadow: 0 16px 34px rgba(0,0,0,.6), 0 0 24px rgba(196,196,196,.4); }
   #aimArrow { position: absolute; inset: 0; pointer-events: none; z-index: 60; overflow: visible; }
   .bt-pick { border-color: rgba(196,196,196,.5); }
 
@@ -114,6 +114,13 @@
 .sts-hp { height:15px; margin-top:4px; }
 /* 批次B 单位区常驻化：血条变化走宽度过渡（STS2 式平滑掉血）；首次填充由 JS 禁用过渡 */
 .sts-hp i { transition: width .3s ease; }
+/* STS2 NHealthBar 三段式：主条快速，幽灵条延迟收缩——掉血时黄色拖尾慢慢追平主条 */
+.bt-hpwrap i.sts-hp-main { position: relative; }
+.bt-hpwrap i.sts-hp-ghost { position: absolute; left: 0; top: 0; height: 100%; width: 0;
+  background: linear-gradient(90deg, #e6c26a, #f4e3a2);
+  transition: width .55s cubic-bezier(.22, 1, .36, 1) .4s; }
+#overlay .battle-stage.sts .sts-hp i.sts-hp-ghost {
+  background: linear-gradient(90deg, #e6c26a, #f4e3a2); }   /* 压过 expedition 的红色 i 覆盖 */
 .sts-stats { color:#b9b9b9; font-size:11.5px; margin-top:3px; }
 .sts-stats .ic { width:12px; height:12px; vertical-align:-0.16em; }
 .sts-chips { margin-top:3px; line-height:1.8; }
@@ -179,20 +186,17 @@
   pointer-events:auto; white-space:nowrap; z-index:6; }
 .bt-hand-page:hover { filter:brightness(1.2); }
 /* —— 扇形手牌（2026-09-09 重做）：槽位定位圆弧位（--fx/--fy/--frot/--fs 由 battle.hand.js 扇形数学给出），
-   hover/瞄准/放大等状态变换叠在内层 .bt-card 上，与槽位 transform 互不打架 —— */
-/* 槽位沉底（09-09 晚老板：露出到卡名标签即可——名字条完整可见，卡面主体沉底；
-   最大下沉弧 -24px 由基线兜住），
-   悬停/瞄准/双击放大时才整张升起 */
-.bt-slot { position:absolute; left:50%; bottom:-115px; width:10em; font-size:16px;
+   hover/瞄准/展开等状态变换叠在内层 .bt-card 上，与槽位 transform 互不打架 —— */
+/* 2026-09-12 紧凑手牌：卡高随内容自动缩短（文字区 display:none）。二次定向：整体更沉——
+   槽位沉入底缘，弧线边缘的正向下沉已在 fanLayout 压平（×0.35），名字条全程可见 */
+.bt-slot { position:absolute; left:50%; bottom:-24px; width:10em; font-size:16px;
   transform:translate(calc(-50% + var(--fx,0px)), var(--fy,0px)) rotate(var(--frot,0deg)) scale(var(--fs,1)); }
 .bt-slot:hover { z-index:9; }
 .bt-slot:has(.aim-lift) { z-index:20; }
-.bt-slot:has(.zoomed) { z-index:30; }
 .sts-hand .bt-card { transition:transform .16s cubic-bezier(.3,1.3,.5,1), box-shadow .16s, filter .2s; }
-.sts-hand .bt-card.off { transform:translateY(12px) scale(.97); filter:brightness(.55) saturate(.7); }
-.sts-hand .bt-slot:hover .bt-card:not(.off):not(.aim-lift):not(.zoomed) { transform:translateY(-160px) scale(1.13); }
-.sts-hand .bt-slot:hover .bt-card.off { transform:translateY(12px) scale(.97); }
-.sts-hand .bt-card.aim-lift { transform:translateY(-160px) scale(1.18) !important; }
+.sts-hand .bt-card.off { transform:translateY(8px) scale(.97); filter:brightness(.55) saturate(.7); }
+.sts-hand .bt-slot:hover .bt-card:not(.off):not(.aim-lift) { transform:translateY(-24px) scale(1.04); }
+.sts-hand .bt-slot:hover .bt-card.off { transform:translateY(8px) scale(.97); }
 /* 悬停白闪（STS2 式：亮一下再退去）；不可用牌不闪 */
 .sts-hand .bt-slot:hover .bt-card:not(.off) { animation:cardHoverFlash .45s ease; }
 @keyframes cardHoverFlash {
@@ -242,6 +246,7 @@
   font-family:var(--cal); font-size:30px; font-weight:900; letter-spacing:1px;
   text-shadow:0 0 6px rgba(0,0,0,.9), 0 2px 4px rgba(0,0,0,.8);
   animation:stsFloatUp .95s cubic-bezier(.2,.7,.4,1) forwards; }
+.sts-float.phys { animation:none; }   /* 伤害数字走 JS 抛体（physicsFloat），抑制 CSS 上飘 */
 .sts-float.dmg { color:#f2c9c9; }
 .sts-float.hurt { color:#ff8f7a; font-size:34px; }
 .sts-float.block { color:#c9c9c9; font-size:22px; }
@@ -269,6 +274,17 @@
   background:radial-gradient(ellipse at 50% 55%, transparent 42%, rgba(168,26,26,.5) 100%);
   animation:stsHurtFlash .6s ease-out forwards; }
 @keyframes stsHurtFlash { 0% { opacity:0; } 15% { opacity:1; } 100% { opacity:0; } }
+/* 全屏治疗绿闪（2026-09-13 老板：回复血量时闪绿光，口径同受击红闪） */
+.sts-healflash { position:absolute; inset:0; z-index:70; pointer-events:none;
+  background:radial-gradient(ellipse at 50% 55%, transparent 42%, rgba(97,214,155,.5) 100%);
+  animation:stsHealFlash .6s ease-out forwards; }
+@keyframes stsHealFlash { 0% { opacity:0; } 15% { opacity:1; } 100% { opacity:0; } }
+/* 攻击抖屏（2026-09-13 老板：自己攻击或造成伤害时轻微抖屏）——战斗内容层小幅位移，不叠层 */
+.sts-screenshake { animation:stsScreenShake .24s linear both; }
+@keyframes stsScreenShake {
+  0% { transform:translate(0,0); } 25% { transform:translate(3px,-2px); }
+  50% { transform:translate(-3px,2px); } 75% { transform:translate(2px,1px); }
+  100% { transform:translate(0,0); } }
 /* 性能：去掉名牌 backdrop-filter（大面积实时模糊是战斗卡顿主因之一），立绘上 GPU 层 */
 .sts-nameplate { backdrop-filter:none; }
 .sts-figure { transform:translateZ(0); }
@@ -322,11 +338,27 @@
 .hsc-desc span { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 .sts-hand .hs-card .hsc-desc { font-size: 10.5px; line-height: 1.35; }
 .sts-hand .hs-card .hsc-desc span { -webkit-line-clamp: 4; }
-/* #12 双击放大 */
-.sts-hand .bt-card.zoomed { transform: translateY(-170px) scale(1.5) !important; z-index: 30; }
+
+/* ============ 2026-09-12 紧凑手牌（老板定向）：常态只露牌面+名字，悬停弹出完整描述 ============ */
+/* 同一 DOM 双态：compact 隐藏文字区块（卡高随内容自动缩短），悬停由 CSS 显示回来。
+   作用域挂在 .bt-card.compact 上而非 .sts-hand 内——出牌飞行的克隆体继承 class，观感一致 */
+.bt-card.compact .hsc-desc,
+.bt-card.compact .hsc-type,
+.bt-card.compact .hsc-kw,
+.bt-card.compact .hsc-val { display: none; }
+/* 悬停弹出（二次定向：触摸弹出描述，点击保持出牌）：整卡向上生长为完整卡面 */
+.sts-hand .bt-slot:hover .bt-card.compact:not(.off) .hsc-desc,
+.sts-hand .bt-slot:hover .bt-card.compact:not(.off) .hsc-type,
+.sts-hand .bt-slot:hover .bt-card.compact:not(.off) .hsc-kw,
+.sts-hand .bt-slot:hover .bt-card.compact:not(.off) .hsc-val { display: block; animation: handDescIn .16s ease; }
+@keyframes handDescIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+/* 注能选择中的牌（sel）与注能主卡（infuse-self）虽是紧凑态，也要读到描述 */
+.bt-card.compact.sel .hsc-desc,
+.bt-card.compact.infuse-self .hsc-desc { display: block; }
 
 /* ============ 2026-09-06 留言批次：手牌加大 + 描述完整露出 + 微透明 ============ */
-.sts-hand { min-height: 300px; padding-top: 48px; }
+/* 2026-09-12 紧凑手牌再调：卡体变矮，手牌区收窄给战场让空间 */
+.sts-hand { min-height: 224px; padding-top: 40px; }
 .sts-hand .hs-card.sm { font-size: 16px; }
 .sts-hand .hs-card .hsc-desc { font-size: 12px; line-height: 1.38; }
 .sts-hand .hs-card .hsc-desc span { -webkit-line-clamp: 6; }
@@ -374,13 +406,8 @@
   25% { opacity:1; }
   100% { opacity:0; transform:scale(1.35) rotate(var(--imp-rot,0deg)); }
 }
-/* 手牌描述默认不上屏（09-09 老板：不点击不出现）；悬停 / 双击放大 / 选中等参与态才露出 */
-.sts-hand .hsc-desc { opacity:0; transition:opacity .16s; }
-.sts-hand .bt-slot:hover .hsc-desc,
-.sts-hand .bt-card.zoomed .hsc-desc,
-.sts-hand .bt-card.targeting .hsc-desc,
-.sts-hand .bt-card.sel .hsc-desc,
-.sts-hand .bt-card.infuse-self .hsc-desc { opacity:1; }
+/* 手牌描述显隐已由紧凑/展开双态接管（2026-09-12）：compact display:none、expanded 全显，
+   旧「不点击不上屏」opacity 方案退役 */
 
 /* ===== 2026-09-11 动画批次：BOSS 战开始 / 牌库图标 / 抽牌 / 洗入牌（各约 1.5s） ===== */
 /* BOSS 战开始动画：暗幕 + 立绘 + 名号亮相（打出后 1.6s 自动淡出移除） */

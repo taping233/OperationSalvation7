@@ -288,6 +288,7 @@ import { emit as busEmit } from './event-bus.js';
     burstPoison: t => Combat.tickPoison(t),
     deckDraw,
     fleeBattle: () => flee(),
+    sweepDead,
     getPlayerClass: () => G.myClass || null,
     getPlayerCaster: () => ({
       atk: G.atk,
@@ -739,7 +740,7 @@ import { emit as busEmit } from './event-bus.js';
     G.log(`[[icon:tools]] 装配【<b>${esc(card.name)}</b>】（${equipped.filter(e => !e.passive).length}/${equipCap()} 件）${equipSkillText(card) ? '——限定技能已就绪' : ''}`, 'ok');
     syncCurseCondEquips();   // 条件装备（深海印记类）穿上时即按当前诅咒状态核算
   }
-  // 需求 #18（2026-09-09）：装备最多同时装配 2 件；圣剑誓约·亚瑟「装备上限 +1」生效
+  // 需求 #18（2026-09-09）：装备最多同时装配 2 件；圣剑化身「装备上限 +1」生效
   function equipCap() {
     let bonus = 0;
     (G.ownedCards || []).forEach(o => {
@@ -1007,6 +1008,7 @@ import { emit as busEmit } from './event-bus.js';
     battleState = transitionBattle(battleState, BATTLE_PHASES.PLAYER);
     G.state = 'modal';
     applyBattleStartPassives();
+    grantSlamToken();
     if (alive().length > 1) G.log(`[[icon:question]] 以一敌多：伤害与群体卡都<b>拖到任意敌人身上</b>打出（群体自动命中全体）`, 'sys');
     G.log(`[[icon:cards]] 普通战斗无需抽牌：随身 <b>${hand.length}</b> 张战斗卡直接可打出（道具/资源/事件卡不在手牌中） · 每回合固定 <b>${maxEnergy}</b> 费`, 'sys');
     requestBattleRender();
@@ -1093,6 +1095,7 @@ import { emit as busEmit } from './event-bus.js';
       开局抽 ${R().battleStartDraw} · 每回合开始抽 ${R().battleTurnDraw} · 每回合固定 <b>${maxEnergy}</b> 费`, 'sys');
     drawCards(R().battleStartDraw);
     applyBattleStartPassives();   // Q1：迷之匣替换/灵符抽牌/骷髅王剑/混沌之眼（持有即生效）
+    grantSlamToken();
     requestBattleRender();
   }
 
@@ -1125,7 +1128,7 @@ import { emit as busEmit } from './event-bus.js';
     if (effCost > energy) { G.log(`[[icon:bolt]] 能量不足：【${esc(card.name)}】需要 ${effCost} 点能量`, 'warn'); return; }
     // 需求 #15（2026-09-09）：注能卡可以直接打出（弱效果）——注能流程改由卡面上的
     // 「注能」角标触发（beginInfuse：选 N 张手牌消耗后强化打出）
-    // 需求 #18：装备最多同时装配 2 件（圣剑誓约·亚瑟「装备上限 +1」生效），超编拒打
+    // 需求 #18：装备最多同时装配 2 件（圣剑化身「装备上限 +1」生效），超编拒打
     if (card.type === '装备') {
       const cap = equipCap();
       const worn = equipped.filter(e => !e.passive).length;
@@ -1236,6 +1239,13 @@ import { emit as busEmit } from './event-bus.js';
   }
 
   function execPlay(uid, card, fuelUids, target, freeCost) {
+    // 背包砸击（2026-09-13 留言）：不走常规打出流程——不进 played/弃牌堆，结算后回手
+    if (card._slamToken) {
+      resolveSlam(target ? foes.indexOf(target) : null);
+      if (!hand.includes(uid)) hand.push(uid);
+      requestBattleRender();
+      return;
+    }
     const effCost = effCostOf(card, uid);
     if (effCost !== card.cost) G.log(`[[icon:sparkles]] <b>费用变化</b>：【${esc(card.name)}】按 <b>${effCost}</b> 费打出（原 ${card.cost} 费）`, 'sys');
     if (!freeCost) energy -= effCost;
@@ -1311,7 +1321,7 @@ import { emit as busEmit } from './event-bus.js';
       if (hand.length < R().battleHandMax) {
         hand.push(uid);
         cardAnims.push({ kind: 'draw', uid, name: card.name });
-        G.log(`[[icon:anchor]] 【${esc(card.name)}】保留在手牌中（无法用于注能）`, 'sys');
+        G.log(`[[icon:cards]] 【${esc(card.name)}】保留在手牌中（无法用于注能）`, 'sys');
       }
     }
     sweepDead();
@@ -1399,14 +1409,16 @@ import { emit as busEmit } from './event-bus.js';
     // 2026-09-09 留言 #7：对局（战斗）内的发现/随机获取一律不出现资源卡——
     // 资源（木材/钱币/钥匙类）只在地图侧宝箱、商店、事件产出。
     // 2026-09-10 撤离测试：BOSS 战道具不可打出（"道具卡只能在普通战斗中使用"），
-    // 发现池却在 BOSS 战掉道具卡，入手即死牌（刀剑形态还会复制它）——BOSS 战发现池排除道具。
-    const bossBan = mode === 'boss' ? (t => t === '道具') : null;
+    // 发现池却在 BOSS 战掉道具卡，入手即死牌（刀剑形态还会复制它）。
+    // 2026-09-13 留言：通用随机发现池不出现道具（战斗内道具入口只剩药水栏/背包）。
+    // pred 指定池（药水魔法「发现药水」/迷之匣「发现招式」等）不受此限——专属发现按卡面效果走。
+    const typeBan = (t => t === '道具');
     let pool;
     if (pred) {
-      pool = SDT.Cards.all().filter(c => c.rarity !== '衍生' && !['生物', '事件', '资源'].includes(c.type) && !(bossBan && bossBan(c.type)) && pred(c));
+      pool = SDT.Cards.all().filter(c => c.rarity !== '衍生' && !['生物', '事件', '资源'].includes(c.type) && pred(c));
     } else {
       pool = SDT.Cards.all().filter(c =>
-        c.rarity !== '衍生' && c.type !== '资源' && !(bossBan && bossBan(c.type)) && SDT.Cards.isRandomObtainable(c) &&
+        c.rarity !== '衍生' && c.type !== '资源' && !typeBan(c.type) && SDT.Cards.isRandomObtainable(c) &&
         (!rarity || c.rarity === rarity) &&
         (!otherCls || (c.cls && c.cls !== G.myClass)) ||
         (otherCls && c.rarity === '职业' && c.cls && c.cls !== G.myClass));
@@ -1593,8 +1605,14 @@ import { emit as busEmit } from './event-bus.js';
     sweepDead();
     requestBattleRender();
   }
-  // —— 背包砸击（需求 #9，2026-09-09）：战斗界面的免费动作按钮——
-  // 不消耗卡牌，2 费造成 4 点固定伤害；点击按钮后点选一名敌人结算
+  // —— 背包砸击（2026-09-13 留言：按钮删除，改为每场战斗自动置入的一张初始牌）——
+  // 2 费 · 4 点固定伤害 · 永远被保留在手牌中（打出后回手，不进弃牌堆）
+  const SLAM_TOKEN = { name: '背包砸击', cost: 2, type: '武术', dmg: 4, dmgType: 'fixed',
+    desc: '造成 4 点固定伤害。永远被保留在手牌中。', value: 0, sellable: false, unrandom: true, _slamToken: true };
+  function grantSlamToken() {
+    addTempCard({ ...SLAM_TOKEN });
+    G.log('[[icon:bag]] <b>背包砸击</b>已置入手牌：2 费 · 4 点固定伤害 · 不消耗（拖到敌人身上打出）', 'sys');
+  }
   function bagSlam() {
     if (busy || infusing || discovering || choosing || handSelecting || viewingGrave || selectingDeck) return;
     if (interactionOf('slam')) { cancelSlam(); return; }
@@ -2152,6 +2170,7 @@ import { emit as busEmit } from './event-bus.js';
   function finish(win) {
     if (win === true && battleState.phase !== BATTLE_PHASES.VICTORY) battleState = transitionBattle(battleState, BATTLE_PHASES.VICTORY);
     if (win === false && battleState.phase !== BATTLE_PHASES.DEFEAT) battleState = transitionBattle(battleState, BATTLE_PHASES.DEFEAT);
+    actionQueue.clear();      // 终局后残留的动作回调再跑会触发 victory->enemy 非法迁移（2026-09-13 实测 UNCAUGHT）
     SDT.Sound.sfx(win === true ? 'victory' : win === false ? 'defeat' : 'flee');
     const playedCopy = played.slice();
     const consumedCopy = consumed.slice();

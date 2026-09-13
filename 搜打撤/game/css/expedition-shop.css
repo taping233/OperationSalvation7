@@ -61,7 +61,7 @@
 #overlay .shop-empty { min-height:210px; display:grid; place-items:center; color:#728990; border:1px dashed rgba(145,170,176,.2); }
 #overlay .shop-slot.sold { opacity:.62; filter:saturate(.55); }
 #overlay .shop-sellpost {
-  min-height:238px; border:1px solid rgba(223,194,141,.55) !important; background:linear-gradient(160deg,rgba(43,49,44,.9),rgba(15,29,34,.95)) !important;
+  min-height:238px; border:0 !important; background:linear-gradient(160deg,rgba(43,49,44,.9),rgba(15,29,34,.95)) !important;
   color:#f3eee2 !important; display:grid; place-content:center; gap:8px; text-align:center; cursor:pointer;
 }
 #overlay .sellpost-coin { font-size:28px; color:var(--shop-gold); }

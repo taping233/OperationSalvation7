@@ -62,14 +62,7 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
   const skipHandSelect = commands.skipHandSelect;
   const usePotion = commands.usePotion;
   const useEquipSkill = commands.useEquipSkill;
-  // 双击放大（2026-09-06 #12）：事件委托，双击手牌卡放大/还原
-  document.addEventListener('dblclick', (e) => {
-    const el = e.target && e.target.closest && e.target.closest('.sts-hand .bt-card');
-    if (!el) return;
-    const was = el.classList.contains('zoomed');
-    document.querySelectorAll('.sts-hand .bt-card.zoomed').forEach(x => x.classList.remove('zoomed'));
-    if (!was) el.classList.add('zoomed');
-  });
+  // 双击放大已退役（2026-09-12 老板定向：紧凑手牌 + 单击展开完整卡面取代）
   const confirmDeck = commands.confirmDeck;
   const cancelDeck = commands.cancelDeck;
 
@@ -153,7 +146,7 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
     const stacks = Object.values(byName);
     const cardsHTML = stacks.length
       ? stacks.map(st => `
-          <div class="bt-card" data-act="btUseItem" data-uid="${st.uids[0]}"
+          <div class="bt-card bag-slot filled battle-bag-slot" data-act="btUseItem" data-uid="${st.uids[0]}"
             title="${escAttr(st.card.desc || st.card.name)}——点击使用">
             ${SDT.Cards.cardHTML(st.card, 'sm')}
             ${st.uids.length > 1 ? `<span class="bt-count" title="同名道具 ${st.uids.length} 件">×${st.uids.length}</span>` : ''}
@@ -173,7 +166,7 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
     const safeHTML = safeStacks.length
       ? safeStacks.map(st => {
           const fits = st.uids.length <= room;
-          return `<div class="bt-card${fits ? '' : ' off'}" data-act="btSafeMove" data-name="${escAttr(st.card.name)}"
+          return `<div class="bt-card bag-slot filled battle-bag-slot${fits ? '' : ' off'}" data-act="btSafeMove" data-name="${escAttr(st.card.name)}"
             title="${escAttr(`将「${st.card.name}」×${st.uids.length} 整组存入安全格（撤离失败时安全运回）${fits ? '' : '——安全格空位不足'}`)}">
             ${SDT.Cards.cardHTML(st.card, 'sm')}
             ${st.uids.length > 1 ? `<span class="bt-count">×${st.uids.length}</span>` : ''}
@@ -183,10 +176,11 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
       : '<p class="ov-empty">背包里没有可存入的卡牌。</p>';
     UI.showOverlay(`${snapshot.opts.isBoss ? '[[icon:demon]] BOSS战' : '[[icon:swords]] 遭遇战'} · 第 ${snapshot.turn} 回合 · [[icon:bag]] 战斗背包`, `
       <p class="ov-stats">点击道具卡直接使用——回复类 / 能源结晶 / 神秘药水 / 口粮木材战斗内生效，其余道具战后回地图再使</p>
-      <div class="bt-hand">${cardsHTML}</div>
+      <div class="bag-grid battle-bag-grid">${cardsHTML}</div>
       <p class="ov-stats">[[icon:lock]] 安全格 <b>${used}/${cap}</b>（空位 ${room}）——点击卡牌把整组存入，撤离失败时只有安全格里的卡牌会抢运回基地</p>
-      <div class="bt-hand">${safeHTML}</div>
+      <div class="bag-grid battle-bag-grid">${safeHTML}</div>
       <div class="ov-btns"><button class="ov-btn ok" data-act="btBagBack">↩ 返回战斗（B）</button></div>`, true);
+    (() => { const card = document.querySelector('#overlay .card'); if (card) card.classList.add('battle-bag'); })();
     UI.act('btUseItem', (d) => useItemCmd(d.uid));
     UI.act('btSafeMove', (d) => {
       const g = SDT.game;
@@ -205,8 +199,11 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
 
   // ---------- 渲染 ----------
   // 手牌分栏（2026-09-10 留言 #27）：一栏最多 12 叠，放不下的进第二栏，用按钮切换
+  // 2026-09-12 紧凑手牌：卡变窄后一栏放宽到 16 叠（分栏按钮大概率不再出现）
   let handPage = 0;
-  const HAND_PAGE_SIZE = 12;
+  const HAND_PAGE_SIZE = 16;
+  // 紧凑手牌（2026-09-12 老板二次定向）：常态只露牌面+名字，**悬停**弹出完整描述，
+  // 点击保持直接出牌/选目标——弹出纯 CSS :hover 驱动，不走 JS 状态
   // 发现选卡的飞入起点（2026-09-10 留言 #36）：发现浮层会整块替换战斗视图，抽卡动画取样不到
   // 旧手牌位——点中候选卡的瞬间记下它的屏幕矩形，让新卡从「被选中的那张卡」飞回手牌
   let discoverSrcRect = null;
@@ -339,12 +336,6 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
         [[icon:flask]] 已选【<b>${esc(pendingItem.card.name)}</b>】——<b>点击一名敌人</b>使用（或直接拖到敌人身上）
         <button class="mini-btn" data-act="btPickCancel">[[icon:cross]] 取消</button>
       </div>` : '';
-    // 背包砸击点选提示条（需求 #9：2 费 · 4 点固定伤害 · 不消耗卡牌）
-    const slamBar = slamPending ? `
-      <div class="bt-infuse bt-pick">
-        [[icon:bag]] <b>背包砸击</b>——<b>点击一名敌人</b>砸下（2 费 · 4 点固定伤害）
-        <button class="mini-btn" data-act="btSlamCancel">[[icon:cross]] 取消</button>
-      </div>` : '';
     // —— 道具栏（2026-09-12 老板定向）：战斗界面上方常驻，点击使用 / 拖到敌人身上 ——
     // 2026-09-09 玩法定版：BOSS 战没有道具栏（背包里的道具无法使用）
     const potions = potionBar || [];
@@ -367,7 +358,8 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
       ? ({ boss_general: 'battle-boss-general', boss_orc: 'battle-boss-orc', boss_elem: 'battle-boss-element' }[foes[0] && foes[0].id] || 'battle-boss-general')
       : 'battle-normal';
     const combatState = combatStateCopy(snapshot);
-    UI.showOverlay(`${opts.isBoss ? '[[icon:demon]] BOSS战' : '[[icon:swords]] 遭遇战'} · 第 ${turn} 回合`, `
+    // 战斗标题文字去掉（2026-09-13 留言）
+    UI.showOverlay('', `
       <div class="battle-stage sts phase-${escAttr(phase)}" data-phase="${escAttr(phase)}" data-asset-key="${battleAssetKey}" data-boss="${opts.isBoss ? '1' : '0'}">
       <div class="battle-stage-shade"></div>
       ${potionsHTML}
@@ -391,7 +383,6 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
       </div>
       ${infuseBar}
       ${itemBar}
-      ${slamBar}
       <div class="sts-hud">
         <div class="sts-energy-wrap">
           <div class="sts-energy" title="能量：每回合固定 ${maxEnergy} 费">[[icon:bolt]] <b>${energy}</b><span>/${maxEnergy}</span></div>
@@ -401,11 +392,11 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
         <div class="bt-hand sts-hand"></div>
         <div class="sts-tactics" aria-label="战术操作">
           <div class="sts-tactics-secondary">
-            <button class="ov-btn ghost${slamPending ? ' ok' : ''}" data-act="btSlam" ${busy || infusingNow || energy < 2 ? 'disabled' : ''}
-              title="背包砸击：不消耗卡牌，2 费造成 4 点固定伤害（点击后再点一名敌人）">[[icon:bag]] 砸击 2</button>
-            ${mode === 'boss' ? '' : `<button class="ov-btn ghost" data-act="btBag" ${busy || infusingNow ? 'disabled' : ''}>[[icon:bag]] 背包</button>
-            <button class="ov-btn ghost" data-act="btFlee" ${busy || infusingNow ? 'disabled' : ''}
-              title="撤离将视为本局失败（安全格中的卡牌会抢运回基地，其余丢失）">[[icon:runner]] 撤离（判负）</button>`}
+            <button class="ov-btn ghost" data-act="btBag" ${busy || infusingNow || mode === 'boss' ? 'disabled' : ''}
+              ${mode === 'boss' ? 'title="BOSS 战为牌库制：道具与资源不参战，背包不可打开"' : 'title="打开战斗背包（B）"'}>[[icon:bag]] 背包</button>
+            <button class="ov-btn ghost" data-act="btFlee" ${busy || infusingNow || mode === 'boss' ? 'disabled' : ''}
+              ${mode === 'boss' ? 'title="BOSS 战不可撤离——击败首脑或战败即终局"' : 'title="撤离将视为本局失败（安全格中的卡牌会抢运回基地，其余丢失）"'}>[[icon:runner]] 撤离（判负）</button>
+            <button class="ov-btn ghost" data-act="btSettings" title="战斗设置（音频 / 震动）">[[icon:gear]] 设置</button>
           </div>
           <button class="ov-btn ${busy || infusingNow ? '' : 'ok'} sts-end-turn" data-act="btEnd" ${busy || infusingNow ? 'disabled' : ''}>[[icon:skip]] 结束回合</button>
         </div>
@@ -424,11 +415,26 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
       play(d.uid);
     });
     UI.act('btEnd', endTurn);
+    // 战斗设置（2026-09-13 留言：战斗界面保留设置键）——轻量浮层，不动 game.state，
+    // 关闭直接重渲染战斗（openSettings 全功能版会清 overlay 导致战斗界面丢失）
+    UI.act('btSettings', () => {
+      UI.showOverlay('[[icon:gear]] 战斗设置', `
+        <div class="bt-settings">
+          <label class="chk"><input type="checkbox" id="btSetMusic" ${SDT.Sound.musicMuted ? '' : 'checked'}> 背景音乐</label>
+          <label class="chk"><input type="checkbox" id="btSetSfx" ${SDT.Sound.sfxMuted ? '' : 'checked'}> 音效</label>
+          <label class="chk"><input type="checkbox" id="btSetShake" ${localStorage.getItem('sdt-reduce-shake') === '1' ? '' : 'checked'}> 屏幕震动反馈</label>
+          <p class="ov-note">完整设置可在基地 / 标题页打开。关闭后回到战斗。</p>
+          <div class="ov-btns"><button class="ov-btn ok" data-act="btSettingsBack">[[icon:cross]] 返回战斗</button></div>
+        </div>`, true);
+      const syncMusic = (on) => { SDT.Sound.musicMuted = !on; if (SDT.Sound.setDucked) SDT.Sound.setDucked(); };
+      document.getElementById('btSetMusic').addEventListener('change', (e) => syncMusic(e.target.checked));
+      document.getElementById('btSetSfx').addEventListener('change', (e) => { SDT.Sound.sfxMuted = !e.target.checked; });
+      document.getElementById('btSetShake').addEventListener('change', (e) => { localStorage.setItem('sdt-reduce-shake', e.target.checked ? '0' : '1'); });
+      UI.act('btSettingsBack', () => render());
+    });
     UI.act('btFlee', surrender);   // 玩法定版：主动撤离=本局失败（烟雾弹走 fleeBattle 豁免）
     UI.act('btGrave', openGrave);
     UI.act('btBag', openBagCmd);
-    UI.act('btSlam', bagSlam);          // 需求 #9：背包砸击
-    UI.act('btSlamCancel', () => bagSlam());   // 再点一次 = 取消
     UI.act('btInfuseStart', (d) => beginInfuse(d.uid));   // 需求 #15：卡面注能角标
     UI.act('btInfuseGo', confirmInfuse);
     UI.act('btInfuseCancel', cancelInfuse);
@@ -536,12 +542,12 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
       : blocked
         ? `[[icon:cross]] 无法打出：${blocked}`
         : side === 'enemy'
-        ? `费用 ${effCost}${costTip} · 点击选中后点敌人，也可拖到敌人身上打出`
+        ? `费用 ${effCost}${costTip} · 点击选中后点敌人，也可拖到敌人身上打出（悬停看完整描述）`
         : side === 'self'
-          ? `费用 ${effCost}${costTip} · 点击选中后点自己，也可拖到左侧人物（治疗 / 净化 / 护盾）`
+          ? `费用 ${effCost}${costTip} · 点击选中后点自己，也可拖到左侧人物（悬停看完整描述）`
           : side === 'any'
-            ? `费用 ${effCost}${costTip} · 点击直接打出，也可拖到战场空地（无需指定目标）`
-            : `费用 ${effCost}${costTip} · 点击出牌` +
+            ? `费用 ${effCost}${costTip} · 点击直接打出，也可拖到战场空地（悬停看完整描述）`
+            : `费用 ${effCost}${costTip} · 点击出牌（悬停看完整描述）` +
               (infuseOf(g.card) > 0 ? ` · 点卡面「注能」角标可消耗 ${infuseOf(g.card)} 张手牌强化效果（不点则直接打出弱效果）` : '');
     const badge = side === 'enemy' ? '<span class="bt-tt">[[icon:swords]]</span>'
       : side === 'self' ? '<span class="bt-tt">[[icon:heart]]</span>'
@@ -623,9 +629,7 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
         rec = { slot: document.createElement('div'), card: document.createElement('div'), sig: '', rect: null, isNew: true };
         rec.slot.className = 'bt-slot';
         rec.card.addEventListener('pointerdown', (e) => {
-          // 放大态只允许「再点一下还原」，不做拖拽指向（2026-09-10 留言 #20）；
           // 注能角标是按钮，点击走 ovBody 委托，不进指向（需求 #15）
-          if (rec.card.classList.contains('zoomed')) return;
           if (e.target.closest && e.target.closest('.bt-infchip')) return;
           if (e.button === 0 && rec.card.dataset.aim === '1') startAim(e, rec.card);
         });
@@ -633,12 +637,11 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
         handSlots.set(key, rec);
       }
       setSlotVars(rec.slot, L);
-      const zoomed = rec.card.classList.contains('zoomed');   // 双击放大态跨渲染保留
-      rec.card.className = 'bt-card' + st.cls
+      // 紧凑态恒挂（只露牌面+名字）；悬停弹出完整描述由 CSS :hover 驱动
+      rec.card.className = 'bt-card compact' + st.cls
         + (st.side === 'enemy' || st.side === 'self' ? ' need-target' : '')
         + (st.side === 'any' ? ' free-drop' : '')
         + (clickSelectedUid === st.uid ? ' click-selected' : '');
-      if (zoomed) rec.card.classList.add('zoomed');
       rec.card.dataset.uid = st.uid;
       rec.card.dataset.handIndex = String((i % HAND_PAGE_SIZE) + 1);
       rec.card.dataset.act = 'btPlay';
@@ -768,8 +771,12 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
     parts.head = document.createElement('div');
     parts.hp = document.createElement('div');
     parts.hp.className = 'bt-hpwrap sts-hp';
+    parts.hpGhost = document.createElement('i');   // STS2 式幽灵条：掉血时延迟收缩的黄尾
+    parts.hpGhost.className = 'sts-hp-ghost';
     parts.hpBar = document.createElement('i');
+    parts.hpBar.className = 'sts-hp-main';
     parts.hpTxt = document.createElement('span');
+    parts.hp.appendChild(parts.hpGhost);
     parts.hp.appendChild(parts.hpBar);
     parts.hp.appendChild(parts.hpTxt);
     parts.stats = document.createElement('div');
@@ -792,18 +799,24 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
     sig[key] = html;
     el.innerHTML = html;
   }
-  // 血条局部更新：宽度过渡只在常驻节点上生效（重建结构下每次都是瞬时跳变）
+  // 血条局部更新：主条快速过渡；幽灵条走自身延迟过渡形成掉血拖尾（STS2 NHealthBar 口径）。
+  // 首次填充禁用两条的过渡，避免从空/满状态滑到位
   function setUnitHP(parts, sig, hp, maxHp, instant) {
     const pct = Math.max(0, hp / maxHp * 100).toFixed(1) + '%';
     const txt = Math.max(0, hp) + '/' + maxHp;
     if (sig.hpPct !== pct) {
       sig.hpPct = pct;
-      if (instant) {   // 新节点首次填充：禁用过渡，避免从空/满状态滑到位
-        parts.hpBar.style.transition = 'none';
+      if (instant) {
+        for (const bar of [parts.hpBar, parts.hpGhost]) {
+          bar.style.transition = 'none';
+          bar.style.width = pct;
+          void bar.offsetWidth;
+          bar.style.transition = '';
+        }
+      } else {
         parts.hpBar.style.width = pct;
-        void parts.hpBar.offsetWidth;
-        parts.hpBar.style.transition = '';
-      } else parts.hpBar.style.width = pct;
+        parts.hpGhost.style.width = pct;
+      }
     }
     if (sig.hpTxt !== txt) { sig.hpTxt = txt; parts.hpTxt.textContent = txt; }
   }
@@ -955,6 +968,36 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
   // ---------- 战斗特效（v0.32.2）：伤害/受击飘字 + 受击抖动 + 红闪 ----------
   // 飘字挂在 #overlay 层而不是 ovBody——ovBody 每次渲染整块重建，飘字动画会被腰斩
   // baseDelay：等出牌飞行落点后再结算（杀戮尖塔式：牌到手伤害才跳）
+  // —— STS2 打击感两件套（2026-09-12 对齐） ——
+  // AnimShake：x(t)=10·sin(4t)·sin(t/2)，t:0→2π、Cubic-Out 时间映射（快速颤动带衰减包络）
+  function stsShake(figEl, power = 1) {
+    if (!figEl || !figEl.animate) return;
+    const T = Math.PI * 2, N = 32, kf = [];
+    for (let i = 0; i <= N; i++) {
+      const u = i / N;
+      const t = T * (1 - Math.pow(1 - u, 3));
+      kf.push({ transform: `translateX(${(10 * power * Math.sin(4 * t) * Math.sin(0.5 * t)).toFixed(2)}px)`, offset: u });
+    }
+    figEl.animate(kf, { duration: 1000, easing: 'linear' });
+  }
+  // NDamageNumVfx：伤害数字抛体——随机初速上抛 + 重力下坠 + 后半程淡出（WAAPI 预采样）。
+  // 随机全部走种子随机服务（random.test 禁 Math.random），'fx' 流不进对局存档口径
+  function physicsFloat(span) {
+    const vx = Random.random('fx') * 180 - 90;
+    const vy = -(500 + Random.random('fx') * 160);
+    const g = 960;
+    const dur = 1000 + Random.random('fx') * 180;
+    const N = 20, kf = [];
+    for (let i = 0; i <= N; i++) {
+      const u = i / N, t = (u * dur) / 1000;
+      kf.push({
+        transform: `translate(-50%,-50%) translate(${(vx * t).toFixed(1)}px,${(vy * t + 0.5 * g * t * t).toFixed(1)}px)`,
+        opacity: u < 0.45 ? 1 : Math.max(0, 1 - (u - 0.45) / 0.55),
+        offset: u,
+      });
+    }
+    span.animate(kf, { duration: dur, easing: 'linear', fill: 'forwards' });
+  }
   function spawnFloats(body, baseDelay = 0) {
     const list = takeFloats();
     if (!list.length) return;
@@ -970,31 +1013,35 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
       if (!figEl) return;
       const reduced = !!SDT.Motion?.reduceMotion();
       const stk = (f.cls || '').includes('stk');
-      const damage = !f.warm && !stk && !(f.cls || '').includes('block');
-      // Healing and expression stickers must never trigger damage shake or a red hurt flash.
-      if (damage && !reduced) playUnitFrames(isSelf ? 'hurt' : 'atk');
-      // 受击反馈：单位抖动；自己掉血再叠一层全屏红闪
-      const motionHandled = damage && !reduced && SDT.Motion && SDT.Motion.hit(figEl, isSelf);
-      if (damage && !reduced && !motionHandled) {
-        figEl.classList.add(isSelf ? 'fx-hit-self' : 'fx-hit');
-        setTimeout(() => figEl.classList.remove(isSelf ? 'fx-hit-self' : 'fx-hit'), 480);
-      }
+      const isBlock = (f.cls || '').includes('block');
+      const damage = !f.warm && !stk && !isBlock;
+      const amt = parseInt(String(f.text).replace(/[^\d-]/g, ''), 10) || 0;
+      const heavy = damage && amt >= 10;   // 重击：≥10 点——更大命中贴图 + 更猛抖动 + 更多粒子
+      // STS2 口径：hurt 骨骼/序列帧动画与抖动互斥——帧播上了就不抖；敌人静图走正弦衰减抖动
+      const framesPlayed = damage && !reduced && playUnitFrames(isSelf ? 'hurt' : 'atk');
+      if (damage && !reduced && !framesPlayed) stsShake(figEl, heavy ? 1.55 : 1);
       if (!reduced && !stk && SDT.VisualFX) SDT.VisualFX.burstAtElement(figEl, {
         color: f.warm ? 0x61d69b : (isSelf ? 0xff6659 : 0xffb34d),
-        count: f.warm ? 10 : 14,
+        count: f.warm ? 10 : (heavy ? 22 : 14),
       });
       if (isSelf && damage && !reduced) hurtFlash(ov);
+      // 2026-09-13 老板：治疗闪绿光；自己攻击或造成伤害时轻微抖屏（受击红闪已有）
+      if (isSelf && f.warm && !reduced) healFlash(ov);
+      if (damage && !isSelf && !reduced) screenShake(body);
       if (f.warm) {   // 治疗暖色滤镜（表情反馈·零美术）
         figEl.classList.add('fx-warm');
         setTimeout(() => figEl.classList.remove('fx-warm'), 950);
       }
       const r = figEl.getBoundingClientRect();
       // 命中特效贴图：格挡/免伤=护盾碎裂，治疗不出，其余伤害=斩击（黑底图走 screen 混合）
-      const impactCls = (f.cls || '').includes('block') ? 'fx-block'
+      const impactCls = isBlock ? 'fx-block'
         : (f.warm || stk) ? null : 'fx-slash';
       if (impactCls && !reduced) {
         const imp = document.createElement('div');
         imp.className = 'sts-impact ' + impactCls;
+        const sz = heavy ? 210 : 150, half = sz / 2;
+        imp.style.width = imp.style.height = sz + 'px';
+        imp.style.margin = `${-half}px 0 0 ${-half}px`;
         imp.style.left = (r.left - ovR.left + r.width / 2) + 'px';
         imp.style.top = (r.top - ovR.top + r.height * 0.4) + 'px';
         imp.style.setProperty('--imp-rot', Math.floor(Random.random('fx') * 360) + 'deg');
@@ -1005,11 +1052,18 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
       const span = document.createElement('span');
       span.className = 'sts-float ' + feedbackClass(f);
       span.textContent = f.text;
-      span.style.left = (r.left - ovR.left + r.width / 2) + 'px';
-      span.style.top = (r.top - ovR.top + r.height * (stk ? 0.02 : 0.32)) + 'px';
+      // STS2：伤害数字落点随机抖动（±10, ±5），与同伴不重影
+      span.style.left = (r.left - ovR.left + r.width / 2 + (Random.random('fx') * 20 - 10)) + 'px';
+      span.style.top = (r.top - ovR.top + r.height * (stk ? 0.02 : 0.32) + (Random.random('fx') * 10 - 5)) + 'px';
       ov.appendChild(span);
-      span.addEventListener('animationend', () => span.remove(), { once: true });
-      setTimeout(() => span.remove(), 1400);   // 兜底：animationend 偶尔不触发时清掉不可见残骸
+      if (damage && !reduced && span.animate) {
+        span.classList.add('phys');   // 抑制 CSS 上飘动画，走抛体
+        physicsFloat(span);
+        setTimeout(() => span.remove(), 1400);
+      } else {
+        span.addEventListener('animationend', () => span.remove(), { once: true });
+        setTimeout(() => span.remove(), 1400);   // 兜底：animationend 偶尔不触发时清掉不可见残骸
+      }
       };
       const delay = baseDelay + feedbackDelay(f.unit, perUnit, FEEDBACK_DELTA_MS);   // 同单位每多一段 +320ms
       if (delay) setTimeout(fire, delay); else fire();
@@ -1023,6 +1077,23 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
     ov.appendChild(div);
     div.addEventListener('animationend', () => div.remove(), { once: true });
     setTimeout(() => div.remove(), 1000);   // 兜底清理
+  }
+  // 全屏治疗绿闪（2026-09-13 老板：回复血量时闪绿光）——口径同 hurtFlash
+  function healFlash(ov) {
+    if (ov.querySelector('.sts-healflash')) return;   // 连续治疗不叠层
+    const div = document.createElement('div');
+    div.className = 'sts-healflash';
+    ov.appendChild(div);
+    div.addEventListener('animationend', () => div.remove(), { once: true });
+    setTimeout(() => div.remove(), 1000);   // 兜底清理
+  }
+  // 轻微抖屏（2026-09-13 老板：自己攻击或造成伤害时）——战斗内容层小幅位移 240ms，抖动中不叠层
+  function screenShake(body) {
+    if (!body || body.classList.contains('sts-screenshake')) return;
+    body.classList.add('sts-screenshake');
+    const clear = () => body.classList.remove('sts-screenshake');
+    body.addEventListener('animationend', clear, { once: true });
+    setTimeout(clear, 400);   // 兜底：animationend 偶发不触发时也能复位
   }
 
   // ---------- 牌局动画（2026-09-09）：离场克隆飞行 / 新牌飞入 / 幸存者归位 / 手牌区显隐 ----------
@@ -1249,8 +1320,19 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
     return { flightMs };
   }
 
-  // ---------- 指向施法：拎起 + 弯曲箭头 ----------
+  // ---------- 指向施法（STS2 NMouseCardPlay 状态机同款） ----------
+  // 拖拽=卡跟手；上拖过「出牌线」（视口75%，按抓取点校正）后：
+  //   指向卡 → CenterCard 停靠视口底部中央缩 0.75，箭头自卡指向指针（松手有目标=打出，
+  //            无目标=转「点击确认」：箭头保持，点目标打出、点空回手）；
+  //   未指向卡 → 继续跟手+战场指示（松手即打出）。
+  // 底部 5% 取消区（离开过一次再进入=取消）；右键/Esc 取消。
   const AIM_COLOR = { enemy: '#e0523c', self: '#4ecf8e', any: '#d9c07a' };
+  function playZoneY(grabY) {
+    const line = window.innerHeight * 0.75;
+    // 反编译口径：线下抓取=max(75%线, 抓取Y-100)（最多上拖100px）；线上抓取=再上拖50px
+    return grabY > line ? Math.max(line, grabY - 100) : Math.min(line, grabY - 50);
+  }
+  function cancelZoneY() { return window.innerHeight * 0.95; }
   let aim = null;            // {uid, card, side, el, ax, ay, sx, sy, moved, hover}
   let aimPlayedAt = 0;       // 指向松手刚打出成功的时间戳（抑制随后误触发的 click 锁定）
   let clickSelectedUid = null; // 点击选中的指向卡；拖拽路径仍由 aim 独立处理
@@ -1380,6 +1462,12 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
     if (why || effCostOf(entry.card, uid) > snap.energy) { play(uid); return; }
     const side = targetSide(entry.card);
     if (!side) { play(uid); return; }
+    // STS2 TryWebClickPlay：指向敌人的卡在唯一敌人时免选目标，直接打出
+    //（尸体占位不算活敌——目标下标取 aliveIdx 而非字面量 0）
+    if (side === 'enemy') {
+      const aliveIdx = snap.foes.findIndex(f => !f.dead);
+      if (aliveIdx >= 0 && snap.foes.filter(f => !f.dead).length === 1) { play(uid, aliveIdx); return; }
+    }
     if (clickSelectedUid === uid) { cancelClickSelection(); return; }
     clickSelectedUid = uid;
     document.querySelectorAll('.sts-hand .bt-card.click-selected').forEach(el => el.classList.remove('click-selected'));
@@ -1403,9 +1491,12 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
   }
   document.addEventListener('keydown', (e) => {
     if (!handLayer || e.defaultPrevented || e.key === 'Escape') {
-      if (e.key === 'Escape' && clickSelectedUid != null) {
-        e.preventDefault(); e.stopPropagation();
-        cancelClickSelection();
+      if (e.key === 'Escape') {
+        if (aim) cancelAim();   // STS2：Esc 也是取消指向的快捷键
+        if (clickSelectedUid != null) {
+          e.preventDefault(); e.stopPropagation();
+          cancelClickSelection();
+        }
       }
       return;
     }
@@ -1426,6 +1517,7 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
     if (!entry) return;
     const side = kind === 'potion' ? 'enemy' : (targetSide(entry.card) || 'any');   // null = 无目标招式：拖到中间空地即可
     if (kind !== 'potion' && effCostOf(entry.card, uid) > energy) return;   // 能量不足：不进入指向（点击会有提示）；药水不耗能量
+    const isCard = kind !== 'potion';
     const vr = UI.el.overlay.getBoundingClientRect();
     const r = el.getBoundingClientRect();
     aim = {
@@ -1433,6 +1525,15 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
       ax: r.left + r.width / 2 - vr.left, ay: r.top - vr.top + 6,
       sx: e.clientX, sy: e.clientY, moved: false, hover: null,
       snap, vr,   // 指向期间的快照/overlay rect 缓存：期间战斗状态不会变（重渲染会 cancelAim），pointermove 高频路径直接复用
+      // STS2 状态机：drag（卡跟手）→ 过出牌线 → target（指向卡停靠+箭头）/ multi（未指向卡+指示）
+      // → clickTarget（瞄准松手无目标，转点击确认）
+      follow: isCard, mode: 'drag',
+      restCenter: { cx: r.left + r.width / 2, cy: r.top + r.height / 2, h: r.height },
+      stage: el.closest('.battle-stage'),
+      playY: isCard ? playZoneY(e.clientY) : -1,
+      hasLeftCancel: false,   // STS2 _hasLeftCardCancelZoneOnce
+      dock: null, dockAnchor: null,
+      cur: { x: 0, y: 0 }, tgt: { x: 0, y: 0 }, lastT: 0, raf: 0,
     };
     el.classList.add('aim-lift');
     SDT.Sound.sfx('hover');
@@ -1440,64 +1541,166 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
     window.addEventListener('pointermove', moveAim, true);
     window.addEventListener('pointerup', endAim, true);
     window.addEventListener('pointercancel', cancelAim, true);
+    window.addEventListener('pointerdown', aimRightCancel, true);
+    document.addEventListener('contextmenu', aimCtxSuppress, true);
+    if (isCard) aim.raf = requestAnimationFrame(aimFollowStep);
+  }
+  // STS2 CenterCard：指向卡进瞄准态=停靠视口底部中央、缩 0.75，箭头自卡画向指针
+  function enterDock(a) {
+    const dockCx = window.innerWidth / 2;
+    const dockCy = window.innerHeight - (a.restCenter.h * 0.75) / 2;
+    a.dock = { x: dockCx - a.restCenter.cx, y: dockCy - a.restCenter.cy };
+    a.dockAnchor = { x: dockCx - a.vr.left, y: dockCy - a.vr.top };
+    aimClearHover();
+  }
+  // 右键取消指向（STS2：鼠标右键 CancelPlayCard）；拖拽期间压制右键菜单
+  function aimRightCancel(e) {
+    if (!aim || e.button !== 2) return;
+    e.preventDefault();
+    cancelAim();
+  }
+  function aimCtxSuppress(e) { if (aim) e.preventDefault(); }
+  // LerpToMouse：卡牌每帧向目标位收敛（指数趋近，STS2 Position.Lerp(dt*7) 等效）；
+  // 瞄准态目标位=底部中央停靠位，其余=指针。
+  // rAF 被遮挡挂起时（IAB 后台/页面覆盖）由 moveAim 事件驱动兜底，双通道等效 STS2 _Process+输入
+  function applyAimTransform(dt) {
+    if (!aim || !aim.follow) return;
+    const docked = aim.mode === 'target' || aim.mode === 'clickTarget';
+    const tgt = docked ? aim.dock : aim.tgt;
+    const k = 1 - Math.exp(-dt * 0.016);
+    aim.cur.x += (tgt.x - aim.cur.x) * k;
+    aim.cur.y += (tgt.y - aim.cur.y) * k;
+    aim.el.style.transform = `translate(${aim.cur.x.toFixed(1)}px,${aim.cur.y.toFixed(1)}px) scale(${docked ? 0.75 : 1.07})`;
+  }
+  function aimFollowStep(now) {
+    if (!aim || !aim.follow) return;
+    const dt = Math.min(48, now - (aim.lastT || now));
+    aim.lastT = now;
+    applyAimTransform(dt);
+    aim.raf = requestAnimationFrame(aimFollowStep);
+  }
+  function stopAimFollow(a) {
+    if (a && a.raf) cancelAnimationFrame(a.raf);
+    if (a && a.follow && a.el) a.el.style.transform = '';
+    if (a && a.stage) a.stage.classList.remove('drop-any');
   }
   function moveAim(e) {
     if (!aim) return;
     if (!aim.moved && Math.hypot(e.clientX - aim.sx, e.clientY - aim.sy) < 6) return;
     aim.moved = true;
     const vr = aim.vr;   // 指向期间 overlay 尺寸不变（重渲染会 cancelAim），缓存省去每次 move 的布局读取
-    const hit = aimHoverAt(e.clientX, e.clientY, aim.side, aim.snap);
+    if (e.clientY <= cancelZoneY()) aim.hasLeftCancel = true;   // STS2 _hasLeftCardCancelZoneOnce
+    aim.tgt.x = e.clientX - aim.sx;
+    aim.tgt.y = e.clientY - aim.sy;
+
+    if (aim.follow) {
+      // —— 状态机：drag →（过出牌线）→ target（指向卡）/ multi（未指向卡） ——
+      if (aim.mode === 'drag' && e.clientY < aim.playY) {
+        if (aim.side === 'enemy' || aim.side === 'self') {
+          aim.mode = 'target';
+          enterDock(aim);
+        } else {
+          aim.mode = 'multi';   // 未指向卡：战场亮环示意可落牌
+          if (aim.stage) aim.stage.classList.add('drop-any');
+        }
+      } else if (aim.mode === 'multi' && e.clientY >= aim.playY) {
+        aim.mode = 'drag';
+        if (aim.stage) aim.stage.classList.remove('drop-any');
+      }
+      // 底部取消区：瞄准/指示态拖入即取消（STS2 exitEarly = IsCardInCancelZone）
+      if (aim.mode !== 'drag' && aim.hasLeftCancel && e.clientY > cancelZoneY()) { cancelAim(); return; }
+    }
+
+    // 悬停检测：瞄准态（含药水全程）高亮目标；drag 态 STS2 无悬停反馈
+    const targeting = !aim.follow || aim.mode === 'target' || aim.mode === 'clickTarget';
+    const hit = targeting ? aimHoverAt(e.clientX, e.clientY, aim.side, aim.snap) : null;
     if (aim.hover && (!hit || hit.el !== aim.hover.el)) aimClearHover();
-    let tx = e.clientX - vr.left, ty = e.clientY - vr.top;
-    if (hit && hit.kind === 'any') {
-      // 无目标招式：箭头跟指针走，落点就是松手处（不吸附到元素中心）
-      hit.el.classList.add('drop-any');
-      aim.hover = hit;
-    } else if (hit) {
-      const hr = hit.el.getBoundingClientRect();
-      tx = hr.left + hr.width / 2 - vr.left;
-      ty = hr.top + hr.height / 2 - vr.top;
+    if (hit) {
       if (hit.kind === 'enemy') { hit.el.classList.add('drag-over'); showFoePreview(hit.el, hit.idx, aim.card, aim.snap); }
       else hit.el.classList.add('drop-here');
       aim.hover = hit;
     }
-    aimArrowUpdate(aim.ax, aim.ay, tx, ty, AIM_COLOR[hit ? hit.kind : aim.side], vr);
+
+    // 箭头：药水自拎起位画向指针；指向卡瞄准态自停靠位画向指针（STS2 NTargetingArrow）
+    if (!aim.follow || aim.mode === 'target' || aim.mode === 'clickTarget') {
+      const from = aim.follow ? aim.dockAnchor : { x: aim.ax, y: aim.ay };
+      let tx = e.clientX - vr.left, ty = e.clientY - vr.top;
+      if (hit) {
+        const hr = hit.el.getBoundingClientRect();
+        tx = hr.left + hr.width / 2 - vr.left;
+        ty = hr.top + hr.height / 2 - vr.top;
+      }
+      aimArrowUpdate(from.x, from.y, tx, ty, AIM_COLOR[hit ? hit.kind : aim.side], vr);
+    }
+    applyAimTransform(16);   // rAF 挂起兜底：跟随随指针事件同步推进
   }
-  function endAim(e) {
+  // 拆监听+恢复卡牌+清箭头/指示（打出与取消共用）
+  function finishAim(a) {
     window.removeEventListener('pointermove', moveAim, true);
     window.removeEventListener('pointerup', endAim, true);
     window.removeEventListener('pointercancel', cancelAim, true);
+    window.removeEventListener('pointerdown', aimRightCancel, true);
+    document.removeEventListener('contextmenu', aimCtxSuppress, true);
+    stopAimFollow(a);
+    aimCleanup(a);
+  }
+  function endAim(e) {
     const a = aim;
     aim = null;
     if (!a) return;
     const wasMoved = a.moved;
     a.moved = false;
-    const hit = wasMoved ? aimHoverAt(e.clientX, e.clientY, a.side, a.snap) : null;
-    aimCleanup(a);
-    if (wasMoved && hit) {
-      aimPlayedAt = Date.now();
-      if (a.kind === 'potion') {
-        if (hit.kind === 'enemy') useItemCmd(a.uid, hit.idx);   // 药水拖到敌人身上：直接使用
-        return;
-      }
-      if (hit.kind === 'enemy') play(a.uid, hit.idx);
-      else if (hit.kind === 'self') play(a.uid, 'self');
-      else play(a.uid);   // kind 'any'：无目标招式，直接打出
+    const inCancel = a.follow && a.hasLeftCancel && e.clientY > cancelZoneY();
+
+    // —— 药水（非跟手，原口径）：松手有敌=使用，否则取消 ——
+    if (!a.follow) {
+      const hit = wasMoved ? aimHoverAt(e.clientX, e.clientY, a.side, a.snap) : null;
+      finishAim(a);
+      if (wasMoved && hit && hit.kind === 'enemy') { aimPlayedAt = Date.now(); useItemCmd(a.uid, hit.idx); return; }
+      cancelPendingTarget();
       return;
     }
-    // 拖了但没拖到目标 = 取消：卡牌沿弹性过渡自动落回手牌（2026-09-09 老板：
-    // 松手没指向目标就回手牌，不再停在锁定态）。cancelInteraction 幂等（批次C）：
-    // 无进行中交互（普通卡拖空）时是 no-op，不动 DOM，落回动画保持完整。
-    // 轻点（位移<6px）仍走 click → play() 的锁定流程
+
+    // —— STS2 状态机松手语义 ——
+    if (a.mode === 'target') {
+      const hit = wasMoved ? aimHoverAt(e.clientX, e.clientY, a.side, a.snap) : null;
+      if (hit) {   // 松手在目标上=打出
+        finishAim(a);
+        aimPlayedAt = Date.now();
+        play(a.uid, hit.kind === 'enemy' ? hit.idx : 'self');
+        return;
+      }
+      if (inCancel) { finishAim(a); cancelPendingTarget(); return; }
+      // 松手无目标：箭头保持，转「点击确认」（STS2 ReleaseMouseToTarget→ClickMouseToTarget）
+      a.mode = 'clickTarget';
+      aim = a;
+      return;
+    }
+    if (a.mode === 'clickTarget') {
+      // 确认点击：点到目标=打出，点空=取消回手（STS2 FinishTargeting(null)→TryPlayCard(null)）
+      const hit = aimHoverAt(e.clientX, e.clientY, a.side, a.snap);
+      finishAim(a);
+      if (hit) { aimPlayedAt = Date.now(); play(a.uid, hit.kind === 'enemy' ? hit.idx : 'self'); return; }
+      cancelPendingTarget();
+      return;
+    }
+    finishAim(a);
+    if (a.mode === 'multi') {   // 未指向卡指示态：松手即打出；底部取消区=取消
+      if (inCancel) { cancelPendingTarget(); return; }
+      aimPlayedAt = Date.now();
+      play(a.uid);
+      return;
+    }
+    // drag（未过线松手）：卡回手牌。cancelInteraction 幂等（批次C）：
+    // 无进行中交互（普通卡拖空）时是 no-op，落回动画保持完整。
+    // 轻点（位移<6px）走 click → play() 的锁定流程
     cancelPendingTarget();
   }
   function cancelAim() {
-    window.removeEventListener('pointermove', moveAim, true);
-    window.removeEventListener('pointerup', endAim, true);
-    window.removeEventListener('pointercancel', cancelAim, true);
     const a = aim;
     aim = null;
-    aimCleanup(a);
+    if (!a) return;
+    finishAim(a);
   }
 
   // ---------- 指向悬停效果预览（松手前暗示打出结果；card = 指向中的卡） ----------

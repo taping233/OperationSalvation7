@@ -116,7 +116,7 @@ import { renderMiniMap } from './game.session.js';
       const tag = e.target && e.target.tagName;
       if (tag === 'TEXTAREA' || tag === 'INPUT' || tag === 'SELECT' || e.target?.isContentEditable) return;
       // Native buttons own Space/Enter. Do not let map shortcuts swallow keyboard activation.
-      if ((e.key === ' ' || e.key === 'Enter') && e.target?.closest('button,[role="button"]')) return;
+      if ((e.key === ' ' || e.key === 'Enter') && e.target?.closest?.('button,[role="button"]')) return;
       const action = SDT.Input && SDT.Input.actionFor(e);
       if (!action) return;
       switch (action) {

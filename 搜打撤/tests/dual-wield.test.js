@@ -73,11 +73,11 @@ describe('二刀流（cc-dual-wield）', () => {
     BattleSession.commands.playCard(g.ownedCards[0].uid, undefined);   // 无对敌效果：直接打出
     const end = await drain(500);
 
-    // 手牌应为 2 张发现的武术（同名，×2 堆叠展示）
-    expect(snap().hand.length).toBe(2);
-    const cards = snap().hand.map(u => viewApi.findCard(u)).filter(Boolean);
-    expect(cards[0].card.name).toBe(cards[1].card.name);   // 复制=同名
-    expect(cards[0].card.type).toBe('武术');
+    // 手牌应为 2 张发现的武术（同名，×2 堆叠展示）；另有背包砸击初始牌常驻（2026-09-13 留言）
+    const nonSlam = snap().hand.map(u => viewApi.findCard(u)).filter(o => o && o.card.name !== '背包砸击');
+    expect(nonSlam.length).toBe(2);
+    expect(nonSlam[0].card.name).toBe(nonSlam[1].card.name);   // 复制=同名
+    expect(nonSlam[0].card.type).toBe('武术');
     expect(g.logs.some(l => l.includes('并额外获得 1 张复制'))).toBe(true);
     // 发现的是候选项之一（三选一面板第一项），且为武术
     expect(g.logs.some(l => l.includes('发现 1 张【武术】卡牌'))).toBe(true);

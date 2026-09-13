@@ -453,7 +453,10 @@
   #overlay.closing { pointer-events: none; animation: ovFadeOut .15s ease forwards; }
   @keyframes ovFadeOut { to { opacity: 0; } }
   /* 不透明整屏页（事件/节点/背包页/房间）关闭时直接消失：整屏淡出 = 每帧全屏重合成，是「继续」卡顿的来源 */
-  #overlay.opaque.closing, #overlay.room-view.closing { animation: none; opacity: 0; }
+  /* room-view（战斗场景）关闭仍走游戏节奏瞬隐；opaque 全屏页恢复淡出（2026-09-12 留言 #33：
+     原来这行把 opaque 一并 animation:none+opacity:0，父层瞬隐导致所有页面返回键看起来没有动画） */
+  #overlay.room-view.closing { animation: none; opacity: 0; }
+  #overlay.opaque.closing { animation: ovFadeOut .2s ease forwards; }
   /* 已打开状态下内容切换（场景→战斗→结算）：轻量上滑淡入，不重播整体缩放 */
   #overlay .card.swap { animation: cardSwap .28s cubic-bezier(.22,1,.36,1); }
   @keyframes cardSwap { from { opacity: 0; transform: translateY(16px); } }

@@ -19,6 +19,9 @@
 #overlay .bag-side { background:#0b1f2c; }
 #overlay .bag-slot.empty, #overlay .safe-empty { background:rgba(230,238,241,.025); border-color:rgba(182,211,214,.13); }
 #overlay .bag-head .fc-chip, #overlay .bag-view .fc-chip { background:#102735; color:#b7cbd0; border-color:rgba(223,194,141,.25); border-radius:2px; }
+/* 背包格标题右侧的排序按钮（2026-09-13：按稀有度/按种类） */
+.bag-sort { float: right; display: inline-flex; gap: 6px; }
+.bag-sort .mini-btn { font-size: 11px; padding: 2px 8px; letter-spacing: 1px; }
 #overlay .bag-view .set-h, #overlay .hub-page .set-h { color:#dfc28d; border-color:rgba(223,194,141,.22); }
 #overlay .stash-row, #overlay .ach-row, #overlay .coll-ms { background:#102735; border-color:rgba(182,211,214,.16); border-radius:2px; }
 #overlay .stash-row:hover, #overlay .ach-row:hover { background:#183b48; border-color:#dfc28d; }

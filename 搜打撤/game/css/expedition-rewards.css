@@ -39,7 +39,7 @@
 #overlay .node-pg .evt-opt:hover { background:#22414d; border-color:#dfc28d; }
 #overlay .node-pg .evt-opt:disabled { opacity:.4; }
 #overlay .node-foot { padding:14px 0 0; }
-#overlay .card.chest { width:min(1000px,92vw); max-height:90vh; padding:24px 32px; border:1px solid #9dada252; background:radial-gradient(ellipse at 50% 20%,#24404b,#0d202c 75%); box-shadow:0 32px 100px #0009; }
+#overlay .card.chest { width:min(1000px,92vw); max-height:min(90vh,100%); padding:24px 32px; border:1px solid #9dada252; background:radial-gradient(ellipse at 50% 20%,#24404b,#0d202c 75%); box-shadow:0 32px 100px #0009; }
 #overlay .card.chest > h2 { font-size:13px; letter-spacing:2px; border-bottom:1px solid #d8c08e35; padding-bottom:16px; }
 .loot-manifest { display:flex; justify-content:space-between; align-items:center; gap:20px; margin:18px 0 10px; }
 .loot-manifest > div:first-child { display:grid; gap:8px; }

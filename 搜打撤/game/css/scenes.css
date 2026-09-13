@@ -576,8 +576,8 @@
   #overlay .scene[data-asset-key="scene-event-custom-c"], #overlay .node-pg[data-asset-key="scene-event-custom-c"] { background-image:url('../assets/scenes/event-tt6-relief.webp'); }
 
   .battle-stage { background-size:cover; background-position:center; }
-  .battle-stage[data-asset-key="battle-normal"] { background-image:url('../assets/scenes/battle-ruins-night-anime-v3.webp'); }
-  .battle-stage[data-asset-key="battle-boss-general"] { background-image:url('../assets/scenes/battle-ruins-night-anime-v3.webp'); }
+  .battle-stage[data-asset-key="battle-normal"] { background-image:url('../assets/scenes/battle-street-amber-anime-v1.webp'); }
+  .battle-stage[data-asset-key="battle-boss-general"] { background-image:url('../assets/scenes/battle-street-amber-anime-v1.webp'); }
   .battle-stage[data-asset-key="battle-boss-orc"] { background-image:url('../assets/scenes/event-bandits-anime-v2.webp'); }
   .battle-stage[data-asset-key="battle-boss-element"] { background-image:url('../assets/scenes/scene-altar-anime-v2.webp'); }
 

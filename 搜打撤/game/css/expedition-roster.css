@@ -15,7 +15,7 @@
 #overlay .cls2-story { max-width:390px; color:#c8d8dc; font-size:13px; line-height:1.9; }
 #overlay .cls2-pool-btn { margin-top:18px; border-radius:2px; }
 #overlay .cls2-pool-btn:disabled { opacity:.5; cursor:not-allowed; }
-#overlay .cls2-strip { bottom:12px; justify-content:flex-end; gap:10px; padding:10px clamp(150px,15vw,230px) 10px clamp(230px,44vw,600px); }
+#overlay .cls2-strip { bottom:12px; justify-content:center; gap:10px; padding:10px clamp(150px,15vw,230px); }
 #overlay .cls2-face { width:clamp(70px,6.4vw,100px); height:clamp(92px,8.2vw,124px); border-radius:2px; border-color:rgba(119,174,188,.52); background:#0d2633; }
 #overlay .cls2-face b { padding:18px 0 6px; color:#e2edf0; letter-spacing:.18em; }
 #overlay .cls2-face.sel { border-color:#e2c88e; box-shadow:0 0 20px rgba(226,200,142,.3),inset 0 0 0 1px rgba(226,200,142,.55); }
@@ -28,7 +28,7 @@
 @media (max-width:1100px) {
   #overlay .cls2-panel { width:48%; padding-left:28px; padding-right:28px; }
   #overlay .cls2-fullart { width:72%; }
-  #overlay .cls2-strip { padding-left:220px; padding-right:165px; gap:7px; }
+  #overlay .cls2-strip { padding-left:165px; padding-right:165px; gap:7px; }
   #overlay .cls2-face { width:68px; height:92px; }
 }
 @media (max-width:900px) {
@@ -36,7 +36,7 @@
   #overlay .cls2-fullart { width:82%; opacity:.78; }
   #overlay .cls2-name { font-size:36px !important; }
   #overlay .cls2-story { font-size:12px; line-height:1.7; }
-  #overlay .cls2-strip { justify-content:flex-start; left:8px; right:150px; padding:6px 0; gap:5px; }
+  #overlay .cls2-strip { justify-content:center; left:0; right:150px; padding:6px 0; gap:5px; }
   #overlay .cls2-face { width:58px; height:78px; }
   #overlay .cls2-face b { font-size:10px; letter-spacing:.08em; }
   #overlay .cls2-confirm { right:12px; bottom:18px; width:132px; height:50px; padding:0 9px; gap:5px; }

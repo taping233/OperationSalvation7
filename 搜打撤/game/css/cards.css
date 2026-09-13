@@ -237,6 +237,9 @@
   body.cardlib-open #overlay *::after { animation: none !important; transition: none !important; }
   body.cardlib-open #overlay .lib-cardwrap:hover { transform: none; filter: none; }
   body.cardlib-open #overlay .rv-beam { display: none; }
+  /* 豁免：卡牌库整页卡片的打开缩放入场（2026-09-12 留言）不受上面的动画禁令影响 */
+  @keyframes libCardIn { from { opacity: 0; transform: scale(.86) translateY(14px); } }
+  body.cardlib-open #overlay .card.page:has(.card-library-page) { animation: libCardIn .32s cubic-bezier(.22,1.2,.36,1) !important; }
   .lib-actions { display: flex; gap: 6px; }
   .lib-item { min-width: 0; }
   .lib-actions .hs-btn { padding: 5px 9px; font-size: 11px; }

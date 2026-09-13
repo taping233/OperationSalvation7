@@ -644,7 +644,7 @@ let hubTab = 'deploy';
       let got = 0;
       for (let k = 0; k < 5; k++) {
         const c = pool.length ? pool[Math.floor(Random.random('loot') * pool.length)] : null;
-        if (c && game.grantCard(c)) got++;
+        if (c && game.grantCard(c, { silent: true })) got++;   // 基地仓库页自带反馈，不叠加获得演出
       }
       if (got > 0) {
         const si = B.data.stash.indexOf(s);
