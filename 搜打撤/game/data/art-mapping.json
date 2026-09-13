@@ -75,7 +75,10 @@
     "tt8-hero-summoner": "hero-summoner",
     "tt8-hero-assassin": "wu-void",
     "tt8-hero-sword": "wu-myriadswords",
-    "tt8-hero-ranger": "wu-heavensword"
+    "tt8-hero-ranger": "wu-heavensword",
+    "tt8-hero-descender": "hero-volcano",
+    "tt8-hero-guardian": "hero-sacredsword",
+    "tt8-hero-warlock": "hero-forbidden"
   },
   "spellCardArt": [
     "cc-manasupply",
@@ -120,7 +123,6 @@
     "tt3sp-magicoil",
     "tt3sp-silverthorn",
     "tt5-galaxy-voyage",
-    "tt7-drunksong",
     "tt7-livingwater",
     "tt7-maxsupply",
     "cmtn1p9vb5au",
@@ -130,7 +132,17 @@
     "tt8-curse4",
     "cc-lava-blast",
     "cc-double-boom",
-    "cc-mana-surge"
+    "cc-mana-surge",
+    "tt3-holy-shield",
+    "tt3-petal",
+    "tt3sp-devour",
+    "tt7-silence",
+    "cc-demon",
+    "tt7-holyglow",
+    "tt7-holyheal",
+    "tt7-provoke",
+    "tt7-bloodpotion",
+    "tt7-smite"
   ],
   "martialCardArt": [
     "builtin-sha",
@@ -186,7 +198,17 @@
     "cc-dual-wield",
     "cc-cursed-blade",
     "cc-chase-slash",
-    "cc-rapid-fire"
+    "cc-rapid-fire",
+    "cc-unmoved",
+    "tt7-marchrush",
+    "tt7-bulwark",
+    "tt7-armup",
+    "tt7-whirlwind",
+    "cc-prep",
+    "tt7-demonbreaker",
+    "tt7-fullstrike",
+    "tt7-ironphalanx",
+    "tt7-bloodpoison"
   ],
   "creatureCardArt": [
     "cmtn6ulm4boj",
