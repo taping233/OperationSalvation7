@@ -1,8 +1,12 @@
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoudacheGodot", "SoudacheGodot.csproj", "{A6957B21-67F1-4D02-9290-018E150A9C77}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{77A1F97A-2F60-4844-9BFF-04620BFF440B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Tests", "tests\App\App.Tests.csproj", "{B7425964-0A52-47DB-81ED-4FF72FEAED3B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,5 +21,14 @@ Global
 		{A6957B21-67F1-4D02-9290-018E150A9C77}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
 		{A6957B21-67F1-4D02-9290-018E150A9C77}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
 		{A6957B21-67F1-4D02-9290-018E150A9C77}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+		{B7425964-0A52-47DB-81ED-4FF72FEAED3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7425964-0A52-47DB-81ED-4FF72FEAED3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7425964-0A52-47DB-81ED-4FF72FEAED3B}.ExportDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7425964-0A52-47DB-81ED-4FF72FEAED3B}.ExportDebug|Any CPU.Build.0 = Debug|Any CPU
+		{B7425964-0A52-47DB-81ED-4FF72FEAED3B}.ExportRelease|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7425964-0A52-47DB-81ED-4FF72FEAED3B}.ExportRelease|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B7425964-0A52-47DB-81ED-4FF72FEAED3B} = {77A1F97A-2F60-4844-9BFF-04620BFF440B}
 	EndGlobalSection
 EndGlobal

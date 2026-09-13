@@ -123,6 +123,15 @@ public partial class AppMain : Control
         GetTree().Quit();
     }
 
+    public override void _Input(InputEvent @event)
+    {
+        if (@event is InputEventMouseButton mb)
+            GD.PrintErr($"[dbg-input] btn={mb.ButtonIndex} pressed={mb.Pressed} pos={mb.Position} global={mb.GlobalPosition}");
+        else if (@event is InputEventMouseMotion mm && (int)mm.Position.Y % 100 == 0)
+            GD.PrintErr($"[dbg-input] move pos={mm.Position}");
+        base._Input(@event);
+    }
+
     public override void _Process(double delta)
     {
         _warmup.WarmStep();

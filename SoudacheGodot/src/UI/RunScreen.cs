@@ -86,6 +86,7 @@ public partial class RunScreen : UiScreen
 
     public void BindCore(ICoreUiPort core)
     {
+        GD.PrintErr($"[dbg] RunScreen.BindCore called, has_snapshot={_snapshot != null}");
         if (_core != null) _core.RunSnapshotChanged -= ApplySnapshot;
         _core = core;
         _core.RunSnapshotChanged += ApplySnapshot;
@@ -134,6 +135,14 @@ public partial class RunScreen : UiScreen
         }
 
         SelectTab(_activeTab, animate: false);
+        GetTree().CreateTimer(1.5).Timeout += () =>
+        {
+            GD.PrintErr($"[dbg-rect] viewport={GetViewport().GetVisibleRect().Size} content_scale={GetViewport().GetFinalTransform()}");
+            GD.PrintErr($"[dbg-rect] deployBtn global={_deployButton.GlobalPosition} size={_deployButton.Size}");
+            for (var i = 0; i < _classRows.Count && i < 3; i++)
+                if (IsInstanceValid(_classRows[i]))
+                    GD.PrintErr($"[dbg-rect] row{i} global={_classRows[i].GlobalPosition} size={_classRows[i].Size}");
+        };
     }
 
     private int _demoScrollPx = -1;   // 取证滚动偏移（<0 = 不滚动）；消费一次后复位
@@ -426,6 +435,7 @@ public partial class RunScreen : UiScreen
         button.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect);
         button.Pressed += () =>
         {
+            GD.PrintErr($"[dbg] row click {entry.Id}");
             _audio?.PlaySfx("switch"); // 选择语义开关音（接口需求 [7a→B]）
             SelectCharacter(entry.Id);
         };
@@ -1154,6 +1164,7 @@ public partial class RunScreen : UiScreen
 
     private void OnDeployPressed()
     {
+        GD.PrintErr($"[dbg] OnDeployPressed sel={_selectedCharacter} core={_core != null} snapChar={_snapshot?.CharacterId} nodes={_snapshot?.Nodes.Length}");
         var snapshot = _snapshot;
         if (snapshot != null && snapshot.CharacterId.Length > 0 && snapshot.Nodes.Length > 0)
         {

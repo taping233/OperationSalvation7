@@ -94,7 +94,9 @@ public partial class MenuScreen : UiScreen
         BuildHud();
         BuildFooter();
 
-        _pages = new Control { MouseFilter = Control.MouseFilterEnum.Stop };
+        // 空页时 Ignore：标题层按钮（开始探索/收藏图鉴/设置/成就/静音）在 _pages 之前入树，
+        // 若恒为 Stop 会盖住全部标题点击（终验发现的阻断 bug）；开页时由 OpenPage 置 Stop 防点穿。
+        _pages = new Control { MouseFilter = Control.MouseFilterEnum.Ignore };
         _pages.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect);
         AddChild(_pages);
 
@@ -439,6 +441,7 @@ public partial class MenuScreen : UiScreen
         if (_titleGhosts != null) _titleGhosts.Visible = false; // rider：页面覆盖时标题幽灵件不穿透页头
         var page = builder();
         page.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect);
+        _pages.MouseFilter = Control.MouseFilterEnum.Stop; // 页面激活：拦截页外空隙点击
         _pages.AddChild(page);
         PageTransition.PageIn(page);
         _audio?.PlaySfx("open");
@@ -453,6 +456,7 @@ public partial class MenuScreen : UiScreen
         foreach (var child in _pages.GetChildren())
             if (child is Control page)
                 page.QueueFree();
+        _pages.MouseFilter = Control.MouseFilterEnum.Ignore; // 回标题层：放行标题按钮点击
         if (_titleGhosts != null) _titleGhosts.Visible = true;
         _snow.SetRunning(true);
         if (!silent) _audio?.PlaySfx("close");
