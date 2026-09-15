@@ -1,6 +1,10 @@
 import { Random } from './random.js';
 import { esc } from './shared.js';
-import { showBackpack, setBagReturnHook } from './game.bag.js';
+
+let openBackpack;
+export function configureShopRuntime({ openBag }) {
+  openBackpack = openBag;
+}
 
 let shopOnClose = null;
 let shopNotice = '';
@@ -200,10 +204,9 @@ function createShopController({
     bindShopKeys();
     UI.act('shopOpenBag', () => {
       // 关闭背包后回到商店当前页（主商店/收购台），不再踢回地图
-      setBagReturnHook(() => { game.state = 'modal'; (shopPage === 'sell' ? renderSellPage : renderShop)(); });
+      openBackpack(() => { game.state = 'modal'; (shopPage === 'sell' ? renderSellPage : renderShop)(); });
       // 战斗背包接口 SDT.Battle.commands.openBag 只在战斗内可用，非战斗态直接调会抛
       // TypeError（实测：reading 'isBoss'）；showBackpack 是它的通用外壳，战斗中会自己转过去。
-      showBackpack(true);
     });
     UI.act('buyCard', data => {
       const slot = game.shopStock[+data.i];

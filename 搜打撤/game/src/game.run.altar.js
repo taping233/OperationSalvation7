@@ -470,7 +470,7 @@ function openBagSacrifice(n, done, onCancel, filterType) {
       <div class="scene-ops">
         <button class="ov-btn ok" data-act="sacConfirm" ${sel.size !== n ? 'disabled' : ''}>[[icon:crystal]] 确认献祭</button>
         <button class="ov-btn" data-act="sacCancel">[[icon:exit]] 取消</button>
-      </div>`);
+      </div>`, 'discover');
   };
   UI.act('sacPick', (d) => {
     const o = eligible.find(x => x.uid === d.uid);

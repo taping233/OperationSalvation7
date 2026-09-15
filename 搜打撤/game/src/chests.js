@@ -252,7 +252,7 @@ import { Random } from './random.js';
       ? `<p class="chest-warn">[[icon:bag]] 背包已满（${G.usedSlots()}/${G.bagCap()} 格，珍珠盒扩格只收资源卡）——只能再收 <b>${canTake}</b> 张：可单点卡牌拾取，或按 B 打开背包把卡牌拖入安全格/存入珍珠盒腾出格子，或全部收下（放不下的 <b>${cant}</b> 张将散落）</p>`
       : '';
     const ops = isPick
-      ? '<p class="ov-note">点击一张卡牌收下，其余两张散落在风中……</p>'
+      ? ''   // 2026-09-15 老板：说明文字收敛——页脚一句已覆盖，不再重复提示
       // 2026-09-06 留言：全部收下移到右边，左侧加跳过（散落不要了）
       // 2026-09-09 老板定向：满包预检提示 + 单卡拾取（放不下的卡强收时散落，不再静默）
       : `<div class="scene-ops chest-ops"><button class="ov-btn" data-act="chestSkip">${cur.coins ? '只收金币并离开' : '放弃卡牌并离开'}</button><button class="ov-btn ok${cant > 0 ? ' warn' : ''}" data-act="chestTake">[[icon:archive]] 全部收下${cant > 0 ? `（${cant} 张放不下）` : cur.coins ? `（含 ${cur.coins} 币）` : ''}</button></div>`;
@@ -262,7 +262,7 @@ import { Random } from './random.js';
       <p class="evt-sts-desc">${lootLine}</p>
       ${warnLine}
       ${cur.cards.length ? `<div class="bt-hand${taken.size ? ' no-anim' : ''}" data-n="${cur.cards.length}">${cardsHTML}</div>` : '<p class="ov-empty">（卡牌库是空的，什么也没开出）</p>'}
-      <div class="loot-footer-note">${isPick ? '点击一张卡牌收下。' : '点击卡牌可逐张收取。'}离开后，未收取卡牌将散落。</div>${ops}`, 'chest');
+      <div class="loot-footer-note">${isPick ? '点击一张收下' : '点击卡牌可逐张收取'} · 未收取的卡牌将散落</div>${ops}`, 'chest');
     UI.act('chestTake', takeAll);
     UI.act('chestTake1', (d) => {
       const card = cur.cards[+d.i];

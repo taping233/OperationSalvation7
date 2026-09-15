@@ -162,6 +162,7 @@ import { _set_cardPageOpen } from './game.cardslib.js';
     game.ownedCards.splice(i, 1);
     UI.log(`使用道具卡【<b>${esc(card.name)}</b>】`, 'sys');
     game.heal(heal);
+    saveGame();
     showBackpack(true); // 刷新背包
   }
 
@@ -580,10 +581,22 @@ import { _set_cardPageOpen } from './game.cardslib.js';
           </div>
         </aside>
       </div></div>`, 'bagpage');
-    // 2026-09-12 留言 #27：看卡不方便 → 点击直接放大卡面特写（替代原文字详情页）
+    // 2026-09-12 留言 #27：看卡不方便 → 点击直接放大卡面特写（替代原文字详情页）。
+    // 2026-09-15 修复：#27 改版把带「使用这张道具」按钮的 showBagCardDetail 整个挂空了，
+    // 背包里的道具（回血药等）从此没有任何使用入口——在特写 footer 把「使用」补回来
     UI.act('inspectStack', (d) => {
       const st = cardStacks(d.safe === '1').find(s => s.card.name === d.name);
-      if (st) UI.showCardZoom(st.card, { footer: d.safe === '1' ? '[[icon:lock]] 安全格 · 拖回背包可取出' : '按住拖动整理顺序 · 双击翻看卡背' });
+      if (!st) return;
+      const usable = d.safe !== '1' && st.card.type === '道具';
+      UI.showCardZoom(st.card, {
+        footer: `
+          ${usable ? '<div class="ov-btns"><button class="ov-btn ok" data-act="useDetailCard">使用这张道具</button></div>' : ''}
+          <p class="ov-note">${d.safe === '1' ? '[[icon:lock]] 安全格 · 拖回背包可取出' : '按住拖动整理顺序 · 双击翻看卡背'}</p>`,
+      });
+      if (usable) UI.act('useDetailCard', () => {
+        document.getElementById('cardZoom')?.querySelector('.cz-backdrop')?.click();
+        useOwnedCard(st.uids[0]);
+      });
     });
     UI.act('bagSortRarity', () => sortBagBy('rarity'));
     UI.act('bagSortType', () => sortBagBy('type'));

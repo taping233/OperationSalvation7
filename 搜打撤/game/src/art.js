@@ -5,6 +5,7 @@ import { characterFor, CHARACTERS } from './characters.js';
 import { BUILD_VERSION, assetUrl } from './asset-url.js';
 import { DATA } from './data-loader.js';
 import ART_MANIFEST from './generated/art-manifest.js';
+import THUMB_MANIFEST from './generated/thumb-manifest.js';
 
   
   const ROOT = 'assets/';
@@ -41,8 +42,12 @@ import ART_MANIFEST from './generated/art-manifest.js';
   const warmedUrls = new Set();
   // 持有已预热 Image 的引用：不持有时浏览器可能把刚解码完的位图回收，
   // 首次渲染又要重解码。池子上限兜底，超出按 FIFO 淘汰最早一批。
+  // 2026-09-13 卡牌库卡顿排查：原上限 800 大于全量清单（496 张），等于把整份美术的
+  // 解码位图全部钉死在内存里（实测渲染进程工作集 612MB→775MB，卡面一族解码后就要 918MB），
+  // 浏览器解码缓存被挤到反复驱逐，滚动到新卡就得重新解码——这正是库页掉帧的主因。
+  // 上限压到 128：预热仍把文件拉进 HTTP/磁盘缓存，但不再要求全部常驻解码位图。
   const warmPool = [];
-  const WARM_POOL_CAP = 800;
+  const WARM_POOL_CAP = 128;
   function retainWarmed(im) {
     warmPool.push(im);
     if (warmPool.length > WARM_POOL_CAP) warmPool.shift();
@@ -58,8 +63,15 @@ import ART_MANIFEST from './generated/art-manifest.js';
       retainWarmed(im);
     }
   }
-  function image(src, cls, alt, key, style) {
-    return `<img class="${esc(cls)}" src="${assetUrl(ROOT + src)}" alt="${esc(alt)}" data-asset-key="${esc(key)}"${style ? ` style="${esc(style)}"` : ''} draggable="false" loading="lazy" decoding="async">`;
+  // 卡面缩略图（assets/thumbs/**，离线烘焙见 game/tools/bake-card-thumbs.cjs）：
+  // 卡牌库网格的插画区被 CSS 钉死在 ≤215×165 CSS px，原图 896~1792 宽等于 4~17 倍过采样，
+  // 解码时间与解码位图内存都白花（245 张卡面 = 918MB）。低倍率场景改取同相对路径的
+  // 448 宽缩略图；放大看卡面（#cardZoom）、战斗与立绘仍走原图。
+  // 清单里没有的图直接回退原图，保证新素材不改 art.js 也不会 404。
+  const THUMBS = new Set(THUMB_MANIFEST);
+  function image(src, cls, alt, key, style, low) {
+    const rel = (low && THUMBS.has(src)) ? `thumbs/${src}` : src;
+    return `<img class="${esc(cls)}" src="${assetUrl(ROOT + rel)}" alt="${esc(alt)}" data-asset-key="${esc(key)}"${style ? ` style="${esc(style)}"` : ''} draggable="false" loading="lazy" decoding="async">`;
   }
   function fallback(kind, key, alt) {
     reportMissing(kind, key);
@@ -173,6 +185,19 @@ function characterArt(value, full=false) {
   SDT.Art = {
     // 提前预载/解码位图（传 <img> 同款最终 URL），翻页/切页前调用可消掉首帧解码卡顿
     warm,
+    // 就地预解码某块 DOM 里已渲染的 <img>（卡牌库开页后补热用）：
+    // 启动的全量预热清单补的是原图，库里显示的是 assets/thumbs/ 缩略图，不补这一步
+    // 首轮滚动就要现场解码——实测首轮滚动 32~35fps → 44~45fps，长帧减半。
+    // decode() 在解码线程上跑，不占主线程；lazy 的视口外图先改 eager 才会真的开始加载，
+    // 否则 decode() 永远挂着。图已解码时 decode() 立即兑现，重复调用无副作用。
+    decodeIn(root) {
+      const scope = root || document;
+      if (!scope || !scope.querySelectorAll) return;
+      scope.querySelectorAll('img[src]').forEach(im => {
+        im.loading = 'eager';
+        try { im.decode?.()?.catch?.(() => {}); } catch (_) {}
+      });
+    },
     classArt(className) {
       if(characterFor(className)) return characterArt(className);
       // 旧 11 职业立绘已随「以立绘为基准」清理下线，无法解析的历史职业一律走占位图
@@ -263,42 +288,45 @@ function characterArt(value, full=false) {
         next();
       });
     },
-    cardIcon(card) {
+    // opts.low：低倍率场景（卡牌库网格 / 悬停预览）取缩略图；缺省 = 原图（战斗、放大看卡面等）
+    cardIcon(card, opts) {
+      const low = !!(opts && opts.low);
+      const art = (src, cls, alt, key, style) => image(src, cls, alt, key, style, low);
       const cardId = String(card && card.id || '');
       const illustration = DATA.art.cardArtOverrides?.[cardId];
-      if (illustration) return image(illustration, 'art-card-image art-hero-fit', card?.name || cardId, `card-${cardId}`, 'width:100%;height:100%;object-fit:cover;display:block');
+      if (illustration) return art(illustration, 'art-card-image art-hero-fit', card?.name || cardId, `card-${cardId}`, 'width:100%;height:100%;object-fit:cover;display:block');
       // 职业专属法术卡面（spell-<id>.webp，2026-09-09 配图批次）：优先于一切通用家族图，cover 填满
       if (SPELL_CARD_ART.has(cardId)) {
-        return image(`cards/spell-${cardId}.webp`, 'art-card-image art-hero-fit', card && card.name || cardId, `card-spell-${cardId}`, 'width:100%;height:100%;object-fit:cover;display:block');
+        return art(`cards/spell-${cardId}.webp`, 'art-card-image art-hero-fit', card && card.name || cardId, `card-spell-${cardId}`, 'width:100%;height:100%;object-fit:cover;display:block');
       }
       // 武术专属卡面（martial-<id>.webp，2026-09-09 批次）：侠客「无」出镜，cover 填满
       if (MARTIAL_CARD_ART.has(cardId)) {
-        return image(`cards/martial-${cardId}.webp`, 'art-card-image art-hero-fit', card && card.name || cardId, `card-martial-${cardId}`, 'width:100%;height:100%;object-fit:cover;display:block');
+        return art(`cards/martial-${cardId}.webp`, 'art-card-image art-hero-fit', card && card.name || cardId, `card-martial-${cardId}`, 'width:100%;height:100%;object-fit:cover;display:block');
       }
       // 装备专属卡面（equip-<id>.webp，2026-09-09 批次）：物件特写，cover 填满
       if (EQUIP_CARD_ART.has(cardId)) {
-        return image(`cards/equip-${cardId}.webp`, 'art-card-image art-hero-fit', card && card.name || cardId, `card-equip-${cardId}`, 'width:100%;height:100%;object-fit:cover;display:block');
+        return art(`cards/equip-${cardId}.webp`, 'art-card-image art-hero-fit', card && card.name || cardId, `card-equip-${cardId}`, 'width:100%;height:100%;object-fit:cover;display:block');
       }
       // 生物专属卡面（creature-<id>.webp，2026-09-09 补图批次）：无敌人立绘的图鉴生物，cover 填满
       if (CREATURE_CARD_ART.has(cardId)) {
-        return image(`cards/creature-${cardId}.webp`, 'art-card-image art-hero-fit', card && card.name || cardId, `card-creature-${cardId}`, 'width:100%;height:100%;object-fit:cover;display:block');
+        return art(`cards/creature-${cardId}.webp`, 'art-card-image art-hero-fit', card && card.name || cardId, `card-creature-${cardId}`, 'width:100%;height:100%;object-fit:cover;display:block');
       }
       // 事件专属卡面（event-<id>.webp，2026-09-09 补图批次）：全屏场景大图（assets/scenes/），cover 填满
       const eventArt = EVENT_CARD_ART[cardId];
       if (eventArt) {
-        return image(`scenes/${eventArt}.webp`, 'art-card-image art-hero-fit', card && card.name || cardId, `card-event-${cardId}`, 'width:100%;height:100%;object-fit:cover;display:block');
+        return art(`scenes/${eventArt}.webp`, 'art-card-image art-hero-fit', card && card.name || cardId, `card-event-${cardId}`, 'width:100%;height:100%;object-fit:cover;display:block');
       }
       const itemKey = ITEM_ART[cardId] || '';
-      if (itemKey) return image(`cards/items/${itemKey}.webp`, 'art-card-image', card && card.name || itemKey, `card-item-${itemKey}`, 'width:100%;height:100%;object-fit:contain;display:block');
+      if (itemKey) return art(`cards/items/${itemKey}.webp`, 'art-card-image', card && card.name || itemKey, `card-item-${itemKey}`, 'width:100%;height:100%;object-fit:contain;display:block');
       const resourceKey = RESOURCE_ART[cardId] || '';
-      if (resourceKey) return image(`cards/resources/${resourceKey}.webp`, 'art-card-image', card && card.name || resourceKey, `card-${resourceKey}`, 'width:100%;height:100%;object-fit:cover;display:block');
+      if (resourceKey) return art(`cards/resources/${resourceKey}.webp`, 'art-card-image', card && card.name || resourceKey, `card-${resourceKey}`, 'width:100%;height:100%;object-fit:cover;display:block');
       const family = cardFamily(card);
       if (!CARD_FAMILIES.has(family)) {
         // 生物图鉴卡：用敌人战场立绘（art 字段指向 MONSTER_IDS），无映射时回退爪印图标
         if (family === 'creature') {
           const artId = card && card.art;
           if (artId && MONSTER_IDS.has(artId)) {
-            return image(`portraits/enemies/${artId}.webp`, 'art-card-image', card && card.name || artId, `card-foe-${artId}`, 'width:100%;height:100%;object-fit:cover;display:block');
+            return art(`portraits/enemies/${artId}.webp`, 'art-card-image', card && card.name || artId, `card-foe-${artId}`, 'width:100%;height:100%;object-fit:cover;display:block');
           }
           return SDT.Icons.img('paw');
         }
@@ -308,7 +336,7 @@ function characterArt(value, full=false) {
       // art-hero-fit：卡面插画一律 cover 填满插画区（2026-09-09 老板要求装满；方图居中构图，裁切只裁背景色块）
       if (family === 'hero') {
         const heroArtKey = HERO_CARD_ART[cardId];
-        if (heroArtKey) return image(`cards/${heroArtKey}.webp`, 'art-card-image art-hero-fit', card && card.name || heroArtKey, `card-${heroArtKey}`, 'width:100%;height:100%;object-fit:cover;display:block');
+        if (heroArtKey) return art(`cards/${heroArtKey}.webp`, 'art-card-image art-hero-fit', card && card.name || heroArtKey, `card-${heroArtKey}`, 'width:100%;height:100%;object-fit:cover;display:block');
         let clsId = resolveClass(card && card.cls);
         // 实例副本可能丢失 cls（旧对局存档/旧版制作坊）：从卡牌库按 id、名称找回职业，
         // 保证每张能力卡始终使用各自专属的卡面（而非黄黑通用剪影）
@@ -318,9 +346,9 @@ function characterArt(value, full=false) {
             if (src) clsId = resolveClass(src.cls);
           } catch (e) { /* 卡牌库不可用时静默回退 */ }
         }
-        if (clsId) return image(`cards/hero-${clsId}.webp`, 'art-card-image art-hero-fit', card && card.name || clsId, `card-hero-${clsId}`, 'width:100%;height:100%;object-fit:cover;display:block');
+        if (clsId) return art(`cards/hero-${clsId}.webp`, 'art-card-image art-hero-fit', card && card.name || clsId, `card-hero-${clsId}`, 'width:100%;height:100%;object-fit:cover;display:block');
       }
-      return image(`cards/${family}.webp`, 'art-card-image', card && card.name || family, `card-${family}`, 'width:100%;height:100%;object-fit:cover;display:block');
+      return art(`cards/${family}.webp`, 'art-card-image', card && card.name || family, `card-${family}`, 'width:100%;height:100%;object-fit:cover;display:block');
     },
     gateIcon(ready) {
       const state = ready ? 'unlock' : 'lock';

@@ -34,12 +34,18 @@ function hasEnemyEffect(card) {
 // null    = 无指向效果（抽牌/发现/能量/召唤…）→ 直接点击打出，也可拖到战场空地
 // 2026-09-09 老板 #7：武术/法术不再一律要求指向敌人——只有 hasEnemyEffect 的招式才指向敌人，
 // 其余招式（纯增益、召唤、摸牌、资源类）拖到敌我中间即可打出
+// 2026-09-15 老板定向：群体指向牌（无单体伤害）没有目标可言——拖到战场空白处即可打出，
+// 点卡也直接打出；带伤害的群体牌（箭雨/旋风斩）仍指向敌人，保留伤害预览
+function isPureAreaEffect(card) {
+  return isAreaEffect(card) && !(+(card.dmg || 0) > 0) && card.dmgType !== 'attack';
+}
+
 function targetSideFor(card, damageTypes) {
   const desc = String(card.desc || '');
   // 需求 #18（2026-09-09）：装备装配要指向自己——拖到左侧「你」的立绘上穿戴
   if (card.type === '装备') return 'self';
   const isMove = damageTypes.includes(card.type);
-  if (isMove ? hasEnemyEffect(card) : (card.dmgType === 'attack' || isAreaEffect(card))) return 'enemy';
+  if (!isPureAreaEffect(card) && (isMove ? hasEnemyEffect(card) : (card.dmgType === 'attack' || isAreaEffect(card)))) return 'enemy';
   if (+(card.heal || 0) > 0 || +(card.armor || 0) > 0 || SELF_TARGET_PATTERN.test(desc)) return 'self';
   return null;
 }

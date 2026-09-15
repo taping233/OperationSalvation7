@@ -489,6 +489,9 @@ import { renderExpeditionPanel } from './expedition.view.js';
       this.el.overlay.classList.toggle('room-view', mode === 'battle' || (this._roomActive && mode !== 'chest' && mode !== 'discover'));
       this.el.overlay.classList.toggle('bag-full', mode === 'bagpage');
       this.el.overlay.classList.toggle('opaque', mode === 'page' || mode === 'bagpage');
+      // 发现/选卡浮层（discover/chest，2026-09-15）：背景一律半透明暗纱 + 全屏虚化，
+      // 不再吃 room-view 的整屏不透明灰（样式见 winter.css「发现/选卡浮层统一重做」块）
+      this.el.overlay.classList.toggle('pick-veil', mode === 'discover' || mode === 'chest');
       // 撤离失败页（2026-09-13 留言：UI 重做 + 背景透明）：标记在 overlay 上，
       // 让该页脱离 room-view 的整屏不透明底，改走半透明暗纱 + 玻璃面板
       this.el.overlay.classList.toggle('fx-doom', mode === 'doom');

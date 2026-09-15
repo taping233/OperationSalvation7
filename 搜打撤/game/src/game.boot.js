@@ -7,7 +7,8 @@ import { SLOT_COUNT, buildDerived, cam, canvas, configureGameRuntime, ctx, dpr, 
 import { bindRunMixins, devForceBattle, devJumpNode, moveTo, openClassChoice, openShop, showRunTransition } from './game.run.js';
 import { PRELOAD_SCENES } from './game.run.data.js';
 import { openBaseHub } from './game.hub.js';
-import { bindBagMixins, showBackpack } from './game.bag.js';
+import { bindBagMixins, showBackpack, setBagReturnHook } from './game.bag.js';
+import { configureShopRuntime } from './game.run.shop.js';
 import { bindDevMode, bindNotesMixins, initDevMode, openCellEditor, rebuildNotes, showClearOverlay, showExportOverlay, showImportOverlay, syncDevVisibility } from './game.notes.js';
 import { cardPageOpen, closeCardPageTop, openCardDesigner, openCardLibrary } from './game.cardslib.js';
 import { renderScheduler } from './render-scheduler.js';
@@ -15,6 +16,10 @@ import { nodeHitRadius } from './camera.js';
 import { renderMiniMap } from './game.session.js';
 
   configureGameRuntime({ openClassChoice, openBaseHub, rebuildNotes, resize: () => resize(), showRunTransition, syncDevVisibility });
+  configureShopRuntime({ openBag: (onReturn) => {
+    setBagReturnHook(onReturn);
+    showBackpack(true);
+  } });
   function bindInput() {
     let dragging = false, downPos = null, lastPos = null, pointerId = null;
     let hoverFrame = 0, pendingHover = null;

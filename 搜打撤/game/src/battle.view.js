@@ -251,9 +251,8 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
           [[icon:question]] ${esc(text)}
         </button>`).join('');
       UI.showOverlay(`${opts && opts.isBoss ? '[[icon:demon]] BOSS战' : '[[icon:swords]] 遭遇战'} · 第 ${turn} 回合 · [[icon:question]] 抉择`, `
-        <p class="ov-stats">【${esc(choosing.cardName)}】——从 <b>${choosing.options.length}</b> 个选项中选择 <b>1</b> 项，只有选中的效果会结算</p>
-        <div class="ov-btns choice-list">${choiceHTML}</div>
-        <p class="ov-note">抉择必须做出，无法跳过。</p>`, true);
+        <p class="ov-stats">【${esc(choosing.cardName)}】——从 <b>${choosing.options.length}</b> 个选项中选择 <b>1</b> 项，只有选中项结算</p>
+        <div class="ov-btns choice-list">${choiceHTML}</div>`, 'discover');
       UI.act('btChoicePick', (d) => pickChoice(d.i));
       UI.refresh(SDT.game);
       return;
@@ -269,7 +268,7 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
       UI.showOverlay(`${opts.isBoss ? '[[icon:demon]] BOSS战' : '[[icon:swords]] 遭遇战'} · 第 ${turn} 回合 · [[icon:cards]] 选择手牌`, `
         <p class="ov-stats">从手牌中选择 <b>${handSelecting.n}</b> 张${handSelecting.type ? `<b>${handSelecting.type}</b>` : '卡牌'}${handSelecting.act === 'play' ? '打出（不扣费）' : '消耗'}</p>
         <div class="bt-hand">${optsHTML || '<p class="ov-empty">手牌中没有符合条件的卡牌</p>'}</div>
-        <p class="ov-note"><button class="ov-btn ghost" data-act="btPickHandSkip">跳过该效果</button></p>`, true);
+        <p class="ov-note"><button class="ov-btn ghost" data-act="btPickHandSkip">跳过该效果</button></p>`, 'discover');
       UI.act('btPickHand', (d) => pickHandSelect(d.uid));
       UI.act('btPickHandSkip', () => skipHandSelect());
       UI.refresh(SDT.game);
@@ -278,13 +277,12 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
     if (discovering) {
       handSuspended = true;
       const optsHTML = discovering.options.map((c, i) => `
-        <div class="bt-card" data-act="btDiscover" data-i="${i}" title="点击置入手牌">
+        <div class="bt-card" data-act="btDiscover" data-i="${i}" title="${escAttr(`${c.name}${c.desc ? '：' + c.desc : ''}——点击置入手牌`)}">
           ${SDT.Cards.cardHTML(c, 'sm')}
         </div>`).join('');
       UI.showOverlay(`${opts.isBoss ? '[[icon:demon]] BOSS战' : '[[icon:swords]] 遭遇战'} · 第 ${turn} 回合 · [[icon:question]] 发现`, `
-        <p class="ov-stats">从随机 <b>${discovering.options.length}</b> 张卡牌中选择 <b>1</b> 张置入手牌</p>
-        <div class="bt-hand">${optsHTML}</div>
-        <p class="ov-note">发现的卡是战斗内临时卡，战后消散、不进背包。</p>`, 'discover');
+        <p class="ov-stats">选 <b>1</b> 张置入手牌 · 战后消散</p>
+        <div class="bt-hand">${optsHTML}</div>`, 'discover');
       UI.act('btDiscover', (d) => {
         const el = document.querySelector(`.bt-card[data-act="btDiscover"][data-i="${d.i}"]`);
         if (el) { const r = el.getBoundingClientRect(); discoverSrcRect = { left: r.left, top: r.top, width: r.width, height: r.height }; }
@@ -1671,7 +1669,21 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
         return;
       }
       if (inCancel) { finishAim(a); cancelPendingTarget(); return; }
-      // 松手无目标：箭头保持，转「点击确认」（STS2 ReleaseMouseToTarget→ClickMouseToTarget）
+      // 2026-09-15 老板定向：无歧义目标（self 卡 / 唯一活敌）拖到空白处松手=直接打出；
+      // 多活敌仍转「点击确认」（STS2 ReleaseMouseToTarget→ClickMouseToTarget），避免打错目标
+      if (a.side === 'self') {
+        finishAim(a);
+        aimPlayedAt = Date.now();
+        play(a.uid, 'self');
+        return;
+      }
+      if (a.side === 'enemy' && a.snap.foes.filter(f => !f.dead).length === 1) {
+        finishAim(a);
+        aimPlayedAt = Date.now();
+        play(a.uid, a.snap.foes.findIndex(f => !f.dead));
+        return;
+      }
+      // 多活敌：松手无目标=箭头保持，转「点击确认」
       a.mode = 'clickTarget';
       aim = a;
       return;

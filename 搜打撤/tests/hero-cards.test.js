@@ -145,12 +145,15 @@ describe('英雄卡实打 · 侠客', () => {
     BattleSession.start(g, [foe()], { name: '云风' });
     await drain();
     mark(g);
+    const energyBefore = snap().energy;
     BattleSession.commands.playCard(uidOf(g, hero('tt8-hero-sword')), null);
     await drain();
     expect(seen(g, '获得 5 张【初始攻击】'), slice(g)).toBe(true);
     expect(seen(g, '直接释放了其中 5 张武术'), slice(g)).toBe(true);
     const dealt = snap().foes[0].maxHp - snap().foes[0].hp;   // 初始攻击 5 张 × 攻5
     expect(dealt).toBe(25);
+    expect(snap().energy).toBe(energyBefore - hero('tt8-hero-sword').cost);
+    expect(seen(g, '背包砸击</b>砸向'), slice(g)).toBe(false);
     BattleSession.commands.flee();
     await drain(20);
   });

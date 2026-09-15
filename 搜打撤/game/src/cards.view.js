@@ -84,7 +84,8 @@ const drawN = +(c.draw || 0), infN = +(c.infuse || 0);
   if (armN > 0) kwArr.push(`<span class="kw-armor" title="获得 ${armN} 点护甲">${SDT.Icons.img('plate')}甲 ${armN}</span>`);
   const kwHTML = kwArr.length ? `<div class="hsc-kw">${kwArr.join('')}</div>` : '';
   // 卡面插画按卡牌语义映射到统一位图家族。
-  const artHTML = (window.SDT.Art && window.SDT.Art.cardIcon && window.SDT.Art.cardIcon(c)) ||
+  // opts.low：低倍率场景（卡牌库网格/悬停预览）取 448 宽缩略图，见 art.js cardIcon。
+  const artHTML = (window.SDT.Art && window.SDT.Art.cardIcon && window.SDT.Art.cardIcon(c, opts)) ||
     SDT.Icons.img(SDT.Icons.TYPE_ART[c.type] || 'question');
   return `<div class="hs-card tp${ti} ${rvCls}${CF_SLUGS[c.cls] ? ' ' + CF_SLUGS[c.cls] : ''}${cls ? ' ' + cls : ''}">
     ${isPrism ? '<i class="rv-beam" aria-hidden="true"></i>' : ''}

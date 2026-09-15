@@ -186,6 +186,8 @@ import { emit as busEmit } from './event-bus.js';
     return uid;
   }
   function grantSha(n) {
+    // 普通战的抽牌替代也必须开始新的一批，不能把开场砸击或上次获得的牌算入「其中」。
+    lastDrawnUids = [];
     const lib = (typeof SDT.Cards.all === 'function' ? SDT.Cards.all() : []);
     // 「杀化为X」战斗规则生效时，发放的初始攻击同样以目标卡形态出现
     const base = (shaTransform && lib.find(c => c.name === shaTransform)) ||

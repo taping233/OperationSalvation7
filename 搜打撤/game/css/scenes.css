@@ -257,8 +257,8 @@
   .evt-opt:nth-child(1) { animation-delay: .12s; }
   .evt-opt:nth-child(2) { animation-delay: .22s; }
   .evt-opt:nth-child(3) { animation-delay: .32s; }
-  .evt-opt b { font-size: 16.5px; color: #e6e6e6; letter-spacing: 2px; font-family: var(--serif); }
-  .evt-opt span { font-size: 12.5px; color: #9a9a9a; line-height: 1.6; }
+  .evt-opt b { font-size: 16px; color: #e6e6e6; letter-spacing: 2px; font-family: var(--serif); }
+  .evt-opt span { font-size: 12px; color: #9a9a9a; line-height: 1.6; }
   .evt-opt:hover { border-color: #c2c2c2; transform: translateX(6px);
     background: linear-gradient(180deg, rgba(58,58,58,.96), rgba(38,38,38,.96));
     box-shadow: 0 0 22px rgba(194,194,194,.22), 0 8px 20px rgba(0,0,0,.45); }
@@ -270,7 +270,7 @@
   /* 禁用态选项（如祭坛碎片不足）：可见但明确不可点，不再直接隐藏（2026-09-10 撤离测试反馈） */
   .evt-opt:disabled, .evt-opt:disabled:hover, #overlay .node-pg .evt-opt:disabled:hover {
     opacity: .45; filter: grayscale(.6); cursor: default; transform: none;
-    border-color: #3d3d3d; background: linear-gradient(180deg, rgba(46,46,46,.92), rgba(30,30,30,.92));
+    border-color: #8aa4ae44; background: #132a38b0;
     box-shadow: none; }
   .evt-opt:disabled b { color: #9a9a9a; }
   /* 窄窗口：立绘收进上方，选项条保持整宽 */
@@ -301,16 +301,17 @@
   .node-panel { position: absolute; top: 0; right: 0; bottom: 0; width: min(520px, 48%);
     display: flex; flex-direction: column; gap: 18px; padding: 8vh 44px 30px 8px;
     background: none; border: 0; box-shadow: none; }
+  /* 2026-09-15 老板令：事件页排版统一为左对齐体系（与 expedition-rewards 生效值一致，本段为同源基准） */
   #overlay .card.page .node-pg:not(.shop-pg) .pg-head,
-  .pg.node-pg:not(.shop-pg) .pg-head { display: flex; flex-direction: column; align-items: center; gap: 12px;
-    padding: 0; border: 0; background: none; text-align: center; flex-shrink: 0; }
-  #overlay .card.page .node-pg:not(.shop-pg) .pg-head h2 { display: block; font-size: 30px; font-weight: 700;
-    letter-spacing: 8px; color: #f5f5f5; text-shadow: 0 2px 16px rgba(0,0,0,.95), 0 0 40px rgba(0,0,0,.7); }
+  .pg.node-pg:not(.shop-pg) .pg-head { display: flex; flex-direction: column; align-items: flex-start; gap: 20px;
+    padding: 0; border: 0; background: none; text-align: left; flex-shrink: 0; }
+  #overlay .card.page .node-pg:not(.shop-pg) .pg-head h2 { display: block; font-size: 32px; font-weight: 400;
+    letter-spacing: 4px; color: #e8eeea; font-family: 'SimSun', serif; text-shadow: none; }
   #overlay .card.page .node-pg:not(.shop-pg) .pg-head .sub { padding: 0; border: 0; white-space: normal;
-    overflow: visible; text-overflow: clip; font-size: 13.5px; line-height: 1.9; color: #d6d6d6;
-    letter-spacing: 1px; text-shadow: 0 1px 8px rgba(0,0,0,.95), 0 0 22px rgba(0,0,0,.6); }
+    overflow: visible; text-overflow: clip; font-size: 13px; line-height: 1.6; color: #b7c7cd;
+    letter-spacing: .5px; text-shadow: none; }
   .node-main { flex: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column;
-    justify-content: center; gap: 16px; padding: 24px 2px 2px; text-align: center; }
+    justify-content: center; gap: 16px; padding: 12px 0; text-align: left; }
   /* 拾取页大字收益 */
   .node-pg .gain-big { margin: 0; font-size: 26px; font-weight: 700; letter-spacing: 3px;
     color: #f5e6b8; text-shadow: 0 2px 12px rgba(0,0,0,.95), 0 0 30px rgba(0,0,0,.55);
@@ -336,13 +337,14 @@
   @keyframes psFill { to { width: 100%; } }
   @keyframes psBlink { 0%, 100% { opacity: .5; } 50% { opacity: 1; } }
   /* 选项条：深色半透明圆角条 + 细亮描边，文字居中（杀戮尖塔式） */
-  #overlay .node-pg .evt-opt { align-items: center; text-align: center; gap: 6px;
-    padding: 15px 26px; border-radius: 12px; border: 1px solid rgba(255,255,255,.4);
-    background: rgba(14,14,14,.55); box-shadow: 0 6px 18px rgba(0,0,0,.45);
+  /* 选项条：深色半透明圆角条 + 细亮描边（2026-09-15 与 expedition-rewards 生效值对齐，单源化） */
+  #overlay .node-pg .evt-opt { align-items: flex-start; text-align: left; gap: 6px;
+    padding: 16px 20px; border-radius: 2px; border: 1px solid #8aa4ae44;
+    background: #132a38b0; box-shadow: none;
     backdrop-filter: none; -webkit-backdrop-filter: none; }
-  #overlay .node-pg .evt-opt b { text-shadow: 0 1px 8px rgba(0,0,0,.95); }
-  #overlay .node-pg .evt-opt span { color: #c3c3c3; text-shadow: 0 1px 6px rgba(0,0,0,.95); }
-  #overlay .node-pg .evt-opt:hover { background: rgba(42,42,42,.66); border-color: #f0f0f0; }
+  #overlay .node-pg .evt-opt b { text-shadow: none; }
+  #overlay .node-pg .evt-opt span { color: #a9bdc5; text-shadow: none; }
+  #overlay .node-pg .evt-opt:hover { background: #22414d; border-color: #dfc28d; }
   /* 过渡动画：整页淡入，标题/选项依次上浮入场（关闭走 overlay 淡出） */
   .node-pg { animation: nodeFadeIn .32s ease-out backwards; }
   @keyframes nodeFadeIn { from { opacity: 0; } }
@@ -354,7 +356,7 @@
   .node-foot { flex-shrink: 0; display: flex; gap: 12px; justify-content: center; padding-top: 14px; }
   /* 火堆/祭坛的消耗口袋复原（2026-09-09 重做）：真卡面网格点卡即复原，替代原文字行
      （原 pk-row 文字是面板主题色，落在整屏场景壳的暗背景上不可读） */
-  .node-pg .fire-restore-hand { flex: 0 0 auto; width: 100%; padding: 4px 0 0; }
+  .node-pg .fire-restore-hand { flex: 0 0 auto; width: 100%; padding: 4px 0 0; justify-content: flex-start; }
   .node-pg .fire-restore-card { cursor: pointer; transition: transform .14s, box-shadow .14s, filter .14s; }
   .node-pg .fire-restore-card:hover { transform: translateY(-6px) scale(1.04); }
   .node-pg .fire-restore-card.off { filter: brightness(.55) saturate(.7); cursor: default; }

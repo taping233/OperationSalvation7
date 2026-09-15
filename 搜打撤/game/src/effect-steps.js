@@ -287,7 +287,13 @@ export function createEffectSteps(deps) {
         // 2026-09-06 #13：desc 带「冰冻 N 名」时对前 N 个存活目标生效；2026-09-12：支持中文量词
         const multiM = ctx.desc.match(/(?:冰冻|冻结)\s*(\d+|[一两二三四五])\s*名/);
         const multiN = multiM ? num(multiM[1]) : 0;
-        if (multiN > 1) {
+        // 2026-09-15：「冰冻所有敌人」类群体句 → 全体结算（与 curse.poison 同口径；此前无此分支只冻单体）
+        const aoeP = /所有敌人|敌方全体|全体敌人|目标为全体/.test(ctx.desc);
+        if (aoeP) {
+          const targets = getAlive().filter(t => t && !t.dead);
+          targets.forEach(t => combat.addCurse(t, 'freeze', n));
+          if (targets.length) { log(`[[icon:crystal]] 全体敌人被冰冻 ${n} 回合（无法行动）`, 'sys'); ctx.did = true; }
+        } else if (multiN > 1) {
           const targets = getAlive().slice(0, multiN);
           targets.forEach(t => combat.addCurse(t, 'freeze', n));
           if (targets.length) { log(`[[icon:crystal]] ${targets.map(t => esc(t.name)).join('、')} 被冰冻 ${n} 回合（无法行动）`, 'sys'); ctx.did = true; }

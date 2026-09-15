@@ -1339,17 +1339,31 @@ img[data-asset-key="card-wu-myriadswords"]{object-position:50% 40%!important}
 #overlay .sc-shop .shop-resources{cursor:pointer;transition:border-color .15s,color .15s}
 #overlay .sc-shop .shop-resources:hover{border-color:#d4b582}
 #overlay .sc-shop .shop-resources:hover .shop-resource b{color:#eed9a8}
-/* —— 背包：大卡面、清晰分区、点击放大 —— */
-#overlay .bag-view .bag-grid{grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:14px}
-#overlay .bag-view .bag-slot{padding:0;overflow:hidden}
+/* —— 背包 v2（2026-09-15 重设计）：格子即卡框 · cqw 等比满格 · 角标归位 ——
+   病根：旧版卡面 width:100% + height:14em（font-size 钉死 clamp 8.5-10.5px），与格子
+   10:14 比例脱钩 → 卡面被拉宽变形 + 上下露底黑边；费用/币值角标悬出卡框 .48em，
+   被格子 overflow:hidden 裁掉；数量角标钉在右下与币值打架。
+   方案：格子设 inline-size 容器，卡面 font-size=(格宽-2×角标带)/10 —— 10em×14em
+   恰好铺满 10:14 格，任意列宽严格等比；flip-face 留 4.5cqw 角标带（略大于角标
+   悬出的 .48em≈4.37cqw），费用/币值完整可见；数量角标移到右上。 */
+#overlay .bag-view .bag-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;padding:12px;border:1px solid rgba(182,211,214,.1);border-radius:4px;background:rgba(230,238,241,.015)}
+#overlay .bag-view .bag-grid.safe-grid{border-color:rgba(216,189,134,.18)}
+#overlay .bag-view .bag-grid.safe-grid .bag-slot.empty.safe-empty{border-color:rgba(216,189,134,.2);background:rgba(216,189,134,.03)}
+#overlay .bag-view .bag-slot{container-type:inline-size;aspect-ratio:10/14;padding:0;overflow:visible;border-radius:6px}
 #overlay .bag-view .bag-slot.empty{aspect-ratio:10/14;background:rgba(230,238,241,.02);border:1px dashed rgba(182,211,214,.14)}
-#overlay .bag-view .bag-slot.filled.card-slot{border:1px solid rgba(182,211,214,.2)}
+#overlay .bag-view .bag-slot.filled.card-slot{border:1px solid rgba(182,211,214,.2);background:#0d2029}
 #overlay .bag-view .bag-slot.filled.card-slot:hover{border-color:#d4b582}
-#overlay .bag-view .bag-slot .flip-face.flip-front{padding:0}
-#overlay .bag-view .bag-slot .flip-face.flip-front .hs-card{width:100%}
-#overlay .bag-view .bag-slot:not(.card-slot):not(.safe-slot).filled{aspect-ratio:10/14;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:8px;background:linear-gradient(165deg,rgba(23,49,63,.9),rgba(13,30,41,.95))}
-#overlay .bag-view .bag-slot:not(.card-slot):not(.safe-slot).filled b{font-size:13.5px;letter-spacing:1px;text-align:center}
-#overlay .bag-view .bag-slot:not(.card-slot):not(.safe-slot).filled span{font-size:12px;color:#b3c9ce}
+#overlay .bag-view .bag-slot .flip-face{padding:4.5cqw}
+#overlay .bag-view .bag-slot .flip-face.flip-front .hs-card{width:100%;height:100%;max-width:none;max-height:none;font-size:calc((100cqw - 9cqw)/10);box-shadow:none}
+/* 数量角标：右上角归位（左上=费用、右下=币值/伤害，四角各居其位），随格子等比缩放 */
+#overlay .bag-view .bag-slot .stack-count{top:.5em;right:.5em;bottom:auto;left:auto;font-size:max(10px,calc(9.1cqw*.78));padding:.1em .5em;background:rgba(7,19,26,.85);border:1px solid rgba(216,189,134,.45);color:#f4d78c;border-radius:999px}
+/* 物资格：与卡格同一 font 基准的等比排版（名/价竖排居中，稀有角标左上）
+   注意：cqw 在容器元素自身上会回退 viewport，字号必须写在子元素上 */
+#overlay .bag-view .bag-slot:not(.card-slot):not(.safe-slot).filled{aspect-ratio:10/14;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:14px 8px;background:linear-gradient(165deg,rgba(23,49,63,.92),rgba(13,30,41,.96))}
+#overlay .bag-view .bag-slot:not(.card-slot):not(.safe-slot).filled b{font-size:calc((100cqw - 9cqw)*.13);letter-spacing:.14em;text-align:center;line-height:1.35}
+#overlay .bag-view .bag-slot:not(.card-slot):not(.safe-slot).filled span{font-size:calc((100cqw - 9cqw)*.102);color:#e8d5a6}
+#overlay .bag-view .bag-slot.filled .tier{top:.55em;left:.55em;transform:scale(1.25);transform-origin:top left;font-size:10px}
+#overlay .bag-view .bag-head{background:linear-gradient(180deg,rgba(16,36,49,.98) 72%,transparent)}
 #overlay .bag-view .set-h{color:#d8bd86;border-bottom:1px solid rgba(216,189,134,.25);padding-bottom:6px}
 #overlay .bag-view .bag-side-card{border:1px solid rgba(182,211,214,.16);border-radius:2px;background:rgba(13,30,41,.5);padding:12px}
 
@@ -1387,19 +1401,20 @@ body #overlay .battle-stage.sts .sts-me{bottom:-5vh!important}
 /* #7 怪物死亡不残留虚影和假血条：死亡单位整体移出画面 */
 #overlay .battle-stage.sts .sts-foe.dead,
 #overlay .battle-stage.sts .sts-unit.dead{display:none!important}
-/* #8 发现弹层透明化：去掉卡底实色与边框，半透暗纱衬卡面 */
-#overlay .card.discover{background:rgba(8,13,19,.42)!important;border:0;box-shadow:none;backdrop-filter:none}
+/* #8 发现弹层透明化（2026-09-15 重做：无框透明面板改为磨砂玻璃，
+   样式统一收口到文件末尾「发现/选卡浮层统一重做」块） */
 #overlay .card.discover #ovBody{background:transparent}
 #overlay .card.discover .ov-stats,#overlay .card.discover .ov-note{color:#dfe7ea;text-shadow:0 1px 6px #000}
 
-/* #11 战斗背包 = 主页背包同款大卡网格（2026-09-13 留言：直接调用主页背包的逻辑/样式） */
+/* #11 战斗背包 = 主页背包同款大卡网格（2026-09-13 留言：直接调用主页背包的逻辑/样式）
+   2026-09-15 同步背包 v2：格子容器化 + 卡面 cqw 等比满格（修黑边/变形，费用角标可见） */
 #overlay .card.battle-bag{background:rgba(10,16,22,.92)}
-#overlay .card.battle-bag .battle-bag-grid{grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:10px}
-#overlay .card.battle-bag .battle-bag-slot{position:relative;aspect-ratio:auto;border:1.5px solid rgba(182,211,214,.22);border-radius:6px;background:rgba(13,30,41,.5);padding:4px;cursor:pointer;transition:border-color .12s, transform .12s}
+#overlay .card.battle-bag .battle-bag-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+#overlay .card.battle-bag .battle-bag-slot{position:relative;container-type:inline-size;aspect-ratio:10/14;border:1.5px solid rgba(182,211,214,.22);border-radius:6px;background:#0d2029;cursor:pointer;transition:border-color .12s, transform .12s}
 #overlay .card.battle-bag .battle-bag-slot:hover{border-color:#d6ba7e;transform:translateY(-2px)}
 #overlay .card.battle-bag .battle-bag-slot.off{opacity:.45;filter:grayscale(.8);cursor:default}
-#overlay .card.battle-bag .battle-bag-slot .hs-card{width:100%}
-#overlay .card.battle-bag .bt-count{position:absolute;top:4px;right:6px;z-index:3;color:#ffd876;font-weight:700;font-size:12px;text-shadow:0 1px 3px #000}
+#overlay .card.battle-bag .battle-bag-slot .hs-card{margin:4.5cqw;width:calc(100% - 9cqw);height:calc(100% - 9cqw);font-size:calc((100cqw - 9cqw)/10);box-shadow:none}
+#overlay .card.battle-bag .bt-count{position:absolute;top:.5em;right:.5em;z-index:3;color:#ffd876;font-weight:700;font-size:max(10px,calc(9.1cqw*.78));text-shadow:0 1px 3px #000;background:rgba(7,19,26,.85);border:1px solid rgba(216,189,134,.45);border-radius:999px;padding:.1em .5em}
 
 /* ===== 2026-09-13 留言复检追加 ===== */
 /* 血条黑框彻底去除：名牌容器（黑底+灰边）与内槽全部透明化，名字加深色描边保可读 */
@@ -1490,3 +1505,61 @@ body.reduce-motion #layerBanner { animation: none !important; }
   #title, #exitScr, #sugLayer.scr-out, #warmupTip, #layerBanner.lb-swap,
   #sidebar, #topBtns, #resHud, #layerBanner { animation: none !important; }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   2026-09-15 发现/选卡浮层统一重做（老板四点：卡距太近 / 卡太小 /
+   说明文字太多 / 背景应是透明虚化遮罩）
+   覆盖：战斗发现 · 战斗选牌/抉择 · 宝箱搜刮 · 祭坛献祭（后三者统一走
+   discover 模式）。层级说明：本文件在 expedition-rewards.css 之前加载，
+   压不赢处一律加 !important。
+   ═══════════════════════════════════════════════════════════════ */
+/* —— 遮罩：半透明暗纱 + 全屏虚化（透出底下战场/棋盘）—— */
+#overlay.pick-veil{background:rgba(4,8,13,.46);backdrop-filter:blur(7px) saturate(.85)}
+/* —— 面板：磨砂玻璃（轻描边 + 大圆角 + 深色半透）—— */
+#overlay .card.discover{
+  background:linear-gradient(180deg,rgba(16,24,32,.74),rgba(6,10,15,.84))!important;
+  border:1px solid rgba(206,222,234,.16)!important;border-radius:20px;
+  box-shadow:0 34px 110px rgba(0,0,0,.62),inset 0 1px 0 rgba(255,255,255,.08)!important;
+  backdrop-filter:blur(16px) saturate(1.08);
+  padding:26px 34px 24px;
+}
+#overlay .card.chest{
+  background:linear-gradient(180deg,rgba(16,24,32,.76),rgba(6,10,15,.86))!important;
+  border:1px solid rgba(206,222,234,.16)!important;border-radius:20px;
+  box-shadow:0 34px 110px rgba(0,0,0,.62),inset 0 1px 0 rgba(255,255,255,.08)!important;
+  backdrop-filter:blur(16px) saturate(1.08);
+}
+#overlay .card.chest .bt-hand{background:none!important;border-top:0}
+/* —— 大卡 + 宽间距 —— */
+#overlay .card.discover .bt-hand{gap:26px;padding:20px 6px 12px;border-top:0;max-height:58vh}
+#overlay .card.discover .bt-hand .hs-card{font-size:18px}
+#overlay .card.discover .bt-hand.sac-hand{gap:16px;padding:14px 4px 8px}
+#overlay .card.discover .bt-hand.sac-hand .hs-card{font-size:14px}
+#overlay .card.chest .bt-hand{gap:28px}
+/* —— 说明文字收敛：卡面只留 名/费/画/词条角标/伤害·币值，描述与类型铭牌悬停浮出 —— */
+#overlay .card.discover .bt-card .hsc-desc,
+#overlay .card.discover .bt-card .hsc-type,
+#overlay .card.chest .bt-card .hsc-desc,
+#overlay .card.chest .bt-card .hsc-type{display:none}
+#overlay .card.discover .bt-card:hover .hsc-desc,
+#overlay .card.chest .bt-card:hover .hsc-desc{
+  display:block;position:absolute;left:5%;right:5%;bottom:3.5%;z-index:9;
+  margin:0;padding:.4em .48em;text-align:left;font-size:.56em;line-height:1.5;
+  color:#d5dfe6!important;background:linear-gradient(180deg,rgba(9,15,21,.95),rgba(5,9,13,.97))!important;
+  border:1px solid rgba(160,190,212,.4);border-radius:.32em;
+  box-shadow:0 .18em .7em rgba(0,0,0,.65);
+}
+#overlay .card.discover .bt-card:hover .hsc-desc span,
+#overlay .card.chest .bt-card:hover .hsc-desc span{display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden}
+
+/* ═══ 2026-09-15 老板复检奖励界面（Friday）：卡距拉宽 · 卡高统一 · 面板真透明 ═══
+   上面 09-15 重做块落地后老板实测仍不满意：28px 卡距依旧显挤、词条行有无把卡身
+   拉得参差（height:auto 只该服务于牌库/图鉴流）、.76/.86 的玻璃近乎实心板。
+   纯追加级联覆盖，不改上面块的任何行。 */
+#overlay .card.chest{
+  background:linear-gradient(180deg,rgba(14,24,33,.40),rgba(5,9,14,.55))!important;
+}
+/* 奖励行卡距：三选一给足呼吸感（实测 5/6 卡多行排布 48px 也放得下） */
+#overlay .card.chest .bt-hand{gap:48px}
+/* 奖励行内卡高统一钉回 10:14 固定框：顶底两条线对齐，大小完全一致 */
+#overlay .card.chest .bt-hand .hs-card{height:14em!important}

@@ -52,7 +52,7 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
   }
 
   // 卡面渲染（已迁至 SDT.Cards.cardHTML，卡牌库/商店/背包/战斗共用）
-  const cardHTML = (c, cls) => SDT.Cards.cardHTML(c, cls);
+  const cardHTML = (c, cls, opts) => SDT.Cards.cardHTML(c, cls, opts);
 
   // ======== 卡牌收藏页（卡牌库） ========
   // 全量一页展示（2026-09-12 老板指示：固定每行六个，不分页）：卡面 img 自带
@@ -85,6 +85,12 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
     return _libFilteredCache;
   }
 
+  // 卡面小图开关（2026-09-13 老板反馈「卡牌库很卡」）：库页网格与悬停预览里的插画区
+  // 最大只到 215×165 CSS px，原图 896 宽等于 4 倍以上过采样，245 张全量解码要 918MB，
+  // 滚动时解码缓存反复驱逐重解码。改取 448 宽缩略图（assets/thumbs，见 art.js cardIcon）。
+  // 放大看卡面（libInspect → showCardZoom）不传 low，仍是原图。
+  const LIB_ART = { low: true };
+
   function libPreviewHTML(c) {
     if (!c) return '<div class="pv-empty">[[icon:cards]]</div><p class="pv-hint">悬停卡牌<br>展柜里会出现这张卡</p>';
     const dmgTxt = DMG_TYPES.includes(c.type) ? `<br>伤害词条：<b class="dmg-num">${c.dmg || 0}</b>${c.dmgType ? ' · ' + (SDT.Cards.DMG_TYPE_META[c.dmgType] || {}).name : ''}` : '';
@@ -95,7 +101,7 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
     const kw = [drawN ? `抽卡 ${drawN}` : '', infN ? `注能(${infN})` : '',
       healN ? `回复 ${healN}` : '', armorN ? `护甲 ${armorN}` : ''].filter(Boolean).join(' · ');
     const kwTxt = kw ? `<br>效果词条：<b>${kw}</b>` : '';
-    return `${cardHTML(c, 'lg')}<p class="pv-hint">点击卡面欣赏详情<br>${esc(c.type)} · ${esc(SDT.Cards.rarityOf(c))}${dmgTxt}${kwTxt}</p>`;
+    return `${cardHTML(c, 'lg', LIB_ART)}<p class="pv-hint">点击卡面欣赏详情<br>${esc(c.type)} · ${esc(SDT.Cards.rarityOf(c))}${dmgTxt}${kwTxt}</p>`;
   }
 
   function libGridHTML() {
@@ -111,7 +117,7 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
     }
     return `<div class="lib-grid" id="libGrid">${all.map((c, i) => `
       <div class="lib-item${c.id === lastSavedId ? ' saved' : ''}" data-i="${i}" style="--i:${i}">
-        <div class="lib-cardwrap" data-act="libInspect" data-card="${c.id}" title="点击欣赏卡面 · 悬停查看完整卡面与描述">${cardHTML(c, 'lib')}</div>
+        <div class="lib-cardwrap" data-act="libInspect" data-card="${c.id}" title="点击欣赏卡面 · 悬停查看完整卡面与描述">${cardHTML(c, 'lib', LIB_ART)}</div>
         <div class="lib-actions">
           <button class="hs-btn sm" data-act="editCard" data-id="${c.id}">编辑</button>
           <button class="hs-btn sm danger" data-act="delCard" data-id="${c.id}">删除</button>
@@ -119,7 +125,29 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
       </div>`).join('')}</div>`;
   }
 
-  // 筛选后只重绘卡格区（整页 showOverlay 会重置搜索焦点）
+  // 滚动静默窗（滚动期间禁 hover 预览，见 renderCardLibrary 的 mouseover 段）：
+  // renderLibGrid 会整块换掉 #libGrid 节点，监听器必须跟着新节点重绑，否则第一次
+  // 改筛选条件后滚动静默就永久失效，滚动中重新出现 hover 预览重建风暴。
+  let libScrollTimer = null;
+  function bindLibGridScroll() {
+    const grid = document.getElementById('libGrid');
+    if (!grid) return;
+    grid.addEventListener('scroll', () => {
+      grid.classList.add('scrolling');
+      if (libScrollTimer) clearTimeout(libScrollTimer);
+      libScrollTimer = setTimeout(() => grid.classList.remove('scrolling'), 160);
+    }, { passive: true });
+  }
+
+  // 卡面缩略图预解码：启动时的全量预热清单补的是 assets/ 原图，库页显示的是
+  // assets/thumbs/ 缩略图，不补这一步首轮滚动就得边滚边解码（实测首轮滚动
+  // 32~35fps → 44~45fps，>50ms 长帧减半）。解码在解码线程，不占主线程。
+  function warmLibArt() {
+    const page = document.querySelector('.card-library-page');
+    if (page && SDT.Art && SDT.Art.decodeIn) SDT.Art.decodeIn(page);
+  }
+
+  // 筛选后只重绘卡格区（整页 showOverlay 会重置搜索焦点、重挂全部事件）
   function renderLibGrid() {
     const n = libFiltered().length;
     const resultCount = document.getElementById('libResultCount');
@@ -138,7 +166,18 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
       grid.outerHTML = libGridHTML();
       const el = document.getElementById('libGrid');
       if (el) el.scrollTop = 0;
+      bindLibGridScroll();
     }
+    warmLibArt();
+  }
+
+  // 侧栏筛选控件同步到当前 libFilter（局部重绘时不重建侧栏，得手动回写控件状态）
+  function syncLibFilterUI() {
+    const q = document.getElementById('cardSearch'); if (q) q.value = libFilter.q;
+    const rar = document.getElementById('libRar'); if (rar) rar.value = libFilter.rar;
+    const cls = document.getElementById('libCls'); if (cls) cls.value = libFilter.cls;
+    const sort = document.getElementById('libSort'); if (sort) sort.value = libFilter.sort;
+    document.querySelectorAll('.clib-tabs .type-tab').forEach(b => b.classList.toggle('on', b.dataset.t === libFilter.tab));
   }
 
   // ======== 卡牌库彩蛋（2026-09-13 留言：多加一些动画和彩蛋） ========
@@ -192,13 +231,16 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
         </div>
       </div>`, 'page');
     lastSavedId = null;
+    warmLibArt();
     // 注意：lastPreviewId 在下方悬停处理段声明（函数内 let），此处不可提前赋值——
     // 昨晚"悬停去重"改动曾在此赋值触发 TDZ ReferenceError，导致后续全部 UI.act
     // 注册被跳过，卡牌库整页按钮（含右上关闭钮）无响应（老板留言：退出点不动）。
     UI.act('closeCardPage', closeLibPage);
     UI.act('newCard', () => openCardDesigner(null));
-    UI.act('libTab', (d) => { libFilter.tab = d.t; renderCardLibrary(); });
-    UI.act('libClearFilter', () => { libFilter = { tab: '全部', rar: '全部', cls: '全部', q: '', sort: 'cost' }; renderCardLibrary(); });
+    // 切页签/清筛选只重绘卡格区：整页 renderCardLibrary() 会重建 245 张卡面的 HTML
+    // （实测主线程阻塞 ~100ms）并重挂全部事件，而这两处改动只影响卡格与页签高亮
+    UI.act('libTab', (d) => { libFilter.tab = d.t; syncLibFilterUI(); renderLibGrid(); });
+    UI.act('libClearFilter', () => { libFilter = { tab: '全部', rar: '全部', cls: '全部', q: '', sort: 'cost' }; syncLibFilterUI(); renderLibGrid(); });
     UI.act('editCard', (d) => {
       const card = SDT.Cards.all().find(c => c.id === (d.card || d.id));
       if (card) openCardDesigner(card);
@@ -257,17 +299,12 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
     // 给网格挂 .scrolling 类，滚动静默 160ms 后恢复。
     let lastPreviewId = null;
     let previewTimer = null;
-    let scrollTimer = null;
-    const grid = document.getElementById('libGrid');
-    if (grid) {
-      grid.addEventListener('scroll', () => {
-        grid.classList.add('scrolling');
-        if (scrollTimer) clearTimeout(scrollTimer);
-        scrollTimer = setTimeout(() => grid.classList.remove('scrolling'), 160);
-      }, { passive: true });
-    }
+    bindLibGridScroll();
     UI._hoverHandler = (e) => {
-      if (grid && grid.classList.contains('scrolling')) return;
+      // 取活的 #libGrid：改筛选会整块换掉节点，闭包里捕获的旧节点永远是「没在滚」，
+      // 滚动静默窗会失效（旧写法遗留）
+      const liveGrid = document.getElementById('libGrid');
+      if (liveGrid && liveGrid.classList.contains('scrolling')) return;
       const w = e.target.closest ? e.target.closest('[data-card]') : null;
       const id = w ? w.dataset.card : null;
       if (id === lastPreviewId) return;

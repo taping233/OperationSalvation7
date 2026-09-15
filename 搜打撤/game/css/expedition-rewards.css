@@ -1,13 +1,16 @@
 /* Node rooms and extraction reports: one calm, legible result language. */
 #overlay .node-pg, #overlay .result-pg { background-color:#081722; color:#e6eef1; }
-#overlay .node-panel { background:rgba(8,23,34,.96); border:1px solid rgba(223,194,141,.26); box-shadow:0 24px 80px rgba(0,0,0,.4); }
-#overlay .node-panel .pg-head { padding:24px 28px 18px; border-bottom:1px solid rgba(223,194,141,.22); }
+#overlay .node-panel { background:rgba(8,23,34,.55); border:1px solid rgba(223,194,141,.26); box-shadow:0 24px 80px rgba(0,0,0,.4); }
+/* 2026-09-15 老板令：事件页排版统一——标题左缘与选项条对齐（原 padding 左右 28px 造成标题比选项缩进一截） */
+#overlay .node-panel .pg-head { padding:24px 0 18px; border-bottom:1px solid rgba(223,194,141,.22); }
 #overlay .node-panel .pg-head h2 { color:#e6eef1; letter-spacing:.12em; }
 #overlay .node-panel .pg-head .sub { color:#a8bbc1; line-height:1.6; }
 #overlay .node-main { padding:24px 28px; }
 #overlay .node-summary { max-width:760px; width:100%; margin:0 auto; display:flex; flex-direction:column; gap:14px; }
 #overlay .node-summary .blank-safe-gain, #overlay .node-summary .bt-hand { background:rgba(16,39,53,.68); border:1px solid rgba(182,211,214,.15); padding:18px; }
 #overlay .node-summary .gain-big { color:#dfc28d; letter-spacing:.12em; }
+/* 事件页内金色强调（撤离结算 sub 的币数等）与面板金点缀同色（overlays 的 .gold 灰色在本壳不统一） */
+#overlay .node-pg .gold { color:#dfc28d; }
 #overlay .node-foot { padding:0 28px 24px; border-top:1px solid rgba(182,211,214,.12); }
 #overlay .node-foot .ov-btn.ok { background:#dfc28d; color:#0b202c; border-color:#dfc28d; min-width:150px; }
 #overlay .result-pg { overflow:auto; }
@@ -26,8 +29,9 @@
 @media (max-width:760px) { #overlay .node-panel .pg-head, #overlay .node-main, #overlay .node-foot { padding-left:16px; padding-right:16px; } #overlay .result-summary { margin-left:16px; margin-right:16px; } #overlay .result-columns { margin-left:16px; margin-right:16px; } }
 
 #overlay .node-pg[data-asset-key] { background-size:cover; background-repeat:no-repeat; background-position:35% center; }
-#overlay .node-pg::before { background:linear-gradient(90deg,#07172520 10%,#07172545 48%,#071725e6 75%),linear-gradient(0deg,#071725ae,transparent 75%); }
-#overlay .node-panel { width: min(560px,46%); padding:clamp(24px,7vh,64px) clamp(20px,3vw,46px) 28px; border:0; border-left:1px solid #b7c8c322; background:#081722ec; gap:20px; }
+#overlay .node-pg::before { background:linear-gradient(90deg,#07172520 10%,#07172545 48%,#07172580 75%),linear-gradient(0deg,#071725ae,transparent 75%); }
+/* 2026-09-15 老板令：右侧选择面板统一为半透明遮罩，透出事件背景（此前 #081722ec 近乎不透明盖死背景图） */
+#overlay .node-panel { width: min(560px,46%); padding:clamp(24px,7vh,64px) clamp(20px,3vw,46px) 28px; border:0; border-left:1px solid #b7c8c322; background:#0817228c; gap:20px; }
 .node-kicker { color:#dfc28d; font:9px 'Cascadia Code',monospace; letter-spacing:2px; display:flex; justify-content:space-between; }
 #overlay .card.page .node-pg:not(.shop-pg) .pg-head { align-items:flex-start; text-align:left; gap:20px; }
 #overlay .card.page .node-pg:not(.shop-pg) .pg-head h2 { font:32px/1.4 'SimSun',serif; letter-spacing:4px; text-shadow:none; }
@@ -60,7 +64,7 @@
   .loot-manifest > div:first-child > b { font-size:20px; }
 }
 @media(max-width:560px) {
-  #overlay .node-panel { width:100%; background:#081722d9; padding:30px 22px; }
+  #overlay .node-panel { width:100%; background:#081722bf; padding:30px 22px; }
   #overlay .node-pg .evt-opt { min-height:60px; }
   .loot-manifest > div:first-child > b { font-size:17px; }
 }
