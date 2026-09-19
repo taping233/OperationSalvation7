@@ -240,6 +240,9 @@ import { Random } from './random.js';
     // 同名并入不占格；逐张模拟占格（基础格任意卡 / 珍珠盒扩格仅资源卡），算出放不下的张数
     const rest = cur.cards.filter((c, i) => !taken.has(i));
     let cant = 0, canTake = 0;
+    // 三选一（2026-09-19 审计 P2-8）：满包时逐张预检——全部收不下则给警示与「只收金币离开」，
+    // 点选被拒时留在面板（旧实现照常 next()，选中的卡被静默吞掉）
+    const pickNoFit = isPick && !rest.some(c => (G.canReceiveCard ? G.canReceiveCard(c) : true));
     if (!isPick) {
       const baseCap = SDT.Base.bagCap(), totalCap = G.bagCap();
       let simUsed = G.usedSlots();
@@ -249,11 +252,15 @@ import { Random } from './random.js';
         else cant++;
       });
     }
-    const warnLine = cant > 0
+    const warnLine = pickNoFit
+      ? `<p class="chest-warn">[[icon:bag]] 背包已满（${G.usedSlots()}/${G.bagCap()} 格）——选中的卡收不下：按 B 打开背包腾出格子再选，或只收${cur.coins ? `${cur.coins} 币` : '卡牌散落'}离开</p>`
+      : cant > 0
       ? `<p class="chest-warn">[[icon:bag]] 背包已满（${G.usedSlots()}/${G.bagCap()} 格，珍珠盒扩格只收资源卡）——只能再收 <b>${canTake}</b> 张：可单点卡牌拾取，或按 B 打开背包把卡牌拖入安全格/存入珍珠盒腾出格子，或全部收下（放不下的 <b>${cant}</b> 张将散落）</p>`
       : '';
     const ops = isPick
-      ? ''   // 2026-09-15 老板：说明文字收敛——页脚一句已覆盖，不再重复提示
+      ? (pickNoFit
+        ? `<div class="scene-ops chest-ops"><button class="ov-btn" data-act="chestSkip">${cur.coins ? '只收金币并离开' : '放弃卡牌并离开'}</button></div>`
+        : '')   // 2026-09-15 老板：说明文字收敛——页脚一句已覆盖，不再重复提示
       // 2026-09-06 留言：全部收下移到右边，左侧加跳过（散落不要了）
       // 2026-09-09 老板定向：满包预检提示 + 单卡拾取（放不下的卡强收时散落，不再静默）
       : `<div class="scene-ops chest-ops"><button class="ov-btn" data-act="chestSkip">${cur.coins ? '只收金币并离开' : '放弃卡牌并离开'}</button><button class="ov-btn ok${cant > 0 ? ' warn' : ''}" data-act="chestTake">[[icon:archive]] 全部收下${cant > 0 ? `（${cant} 张放不下）` : cur.coins ? `（含 ${cur.coins} 币）` : ''}</button></div>`;
@@ -281,7 +288,10 @@ import { Random } from './random.js';
     });
     UI.act('chestPick', (d) => {
       const card = cur.cards[+d.i];
-      if (card) G.grantCard(card, { silent: true });   // 三选一页自带揭晓
+      if (!card) return;
+      // 放不下时留在面板（grantCard 内部已播报「背包已满」）：玩家可腾格重选或走「只收金币离开」，
+      // 不得照常 next()——否则三选一被静默吞卡（2026-09-19 审计 P2-8）
+      if (!G.grantCard(card, { silent: true })) return;
       if (cur.coins) G.gainCoins(cur.coins);
       next();
     });

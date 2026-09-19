@@ -75,9 +75,17 @@ import { Random } from './random.js';
     bagMax: (_s, d) => (d
       ? SDT.MAP.rules.bagSize + (d.bagUp || 0)
       : SDT.Base.bagCap()) >= SDT.MAP.rules.bagMax,
-    safeMax: (_s, d) => (d
-      ? SDT.MAP.rules.safeStart + (d.safeUp || 0)
-      : SDT.Base.safeCap()) >= SDT.MAP.rules.safeMax,
+    // v2 基地：保护格由「携带宠物等级」驱动（safeUp 已废除）——旧公式 safeStart+safeUp
+    // 恒为 safeStart，成就永久死锁（2026-09-19 审计 P2-10）。此处按数据自算，peek 档与当前档通用。
+    safeMax: (_s, d) => {
+      const R = SDT.MAP.rules;
+      const src = d || B().data;
+      const rec = src.petSel ? (src.pets || {})[src.petSel] : null;
+      const petDef = rec && (SDT.Base.PETS || []).find(p => p.id === src.petSel);
+      const lv = rec ? Math.max(1, Math.min(SDT.Base.PET_LEVEL_MAX || 5, rec.lv || 1)) : 1;
+      const bonus = (petDef && petDef.effect && petDef.effect.safeBonus) || 0;
+      return Math.min(R.safeMax, R.safeStart + lv - 1) + bonus >= R.safeMax;
+    },
     class3: (_s, d) => d
       ? Object.values(d.characters || d.classes || {}).some(c => (c.lv || 1) >= 3)
       : classList().some(c => classLv(c) >= 3),

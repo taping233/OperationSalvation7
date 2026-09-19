@@ -242,17 +242,27 @@ function startNestBattle(def) {
 // 龙巢战斗结算（总线订阅；一图战后流程在 bag 侧对龙巢战斗让位）。
 // 胜利：回满血 → 发奖励 → 推进并回龙巢地图；失败/撤退：回满血留在原格可再次挑战。
 function nestBattleEnd(opts, played, win, consumed) {
-  if (!game.nestActive || !nestBattleCtx) return;
+  if (!game.nestActive) return;
   const ctx = nestBattleCtx;
   nestBattleCtx = null;
-  game.ownedCards = ctx.savedOwned;
-  MAP.rules.battleEnergy = ctx.savedRules.e;
-  MAP.rules.battleStartDraw = ctx.savedRules.s;
-  MAP.rules.battleTurnDraw = ctx.savedRules.t;
+  if (ctx) {
+    game.ownedCards = ctx.savedOwned;
+    MAP.rules.battleEnergy = ctx.savedRules.e;
+    MAP.rules.battleStartDraw = ctx.savedRules.s;
+    MAP.rules.battleTurnDraw = ctx.savedRules.t;
+  } else {
+    // 读档续战（2026-09-19 审计 P2-11）：开战时的内存上下文已随刷新丢失——此前这里直接
+    // return，打赢读档续上的战斗不发奖、不推进（进度回退）。随身牌按牌盒重建（开战时
+    // 本就是牌盒克隆），规则回龙巢制式，结算照常执行。
+    game.ownedCards = (game.cardBox || []).map(c => ({ uid: nuid(), card: { ...c }, safe: false }));
+    MAP.rules.battleEnergy = 2; MAP.rules.battleStartDraw = 5; MAP.rules.battleTurnDraw = 1;
+  }
   game.hp = game.maxHp;   // 每次对战后回满血（胜利与重试同口径）
   if (win === true) {
-    if (!ctx.isBossCell) grantNestRewards(ctx.def.reward);
-    else nestBossRewards();
+    // 战场格 = 当前停留格（advance 才会前移），ctx 缺失时同样成立
+    const battleCell = cell();
+    if (battleCell.type === 'boss') nestBossRewards();
+    else if (battleCell.type === 'battle') grantNestRewards((NEST_BATTLES[battleCell.battle] || {}).reward);
     advance();
   } else {
     UI.log('[[icon:heart]] 巢穴的疗息雾气让队伍恢复力气——整队再战', 'sys');
