@@ -250,15 +250,19 @@
   .evt-sts-art img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .evt-sts-opts { flex: 0 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 14px; }
   .evt-opt { display: flex; flex-direction: column; align-items: flex-start; gap: 5px; text-align: left;
-    padding: 15px 22px; border-radius: 12px; border: 1.5px solid #3d3d3d; color: inherit;
+    position: relative; padding: 15px 40px 15px 22px; border-radius: 12px; border: 1.5px solid #5f5f5f; color: inherit;
     background: linear-gradient(180deg, rgba(46,46,46,.92), rgba(30,30,30,.92));
     cursor: pointer; transition: all .16s; font-family: inherit;
     animation: sceneItemIn .45s cubic-bezier(.22,1,.36,1) backwards; }
+  /* 右侧常驻方向箭头：静止态就能看出「这是可点选项」（09-20 P1-2） */
+  .evt-opt::after { content: '▸'; position: absolute; right: 15px; top: 50%;
+    transform: translateY(-50%); font-size: 15px; color: #8f8f8f; transition: all .16s; }
   .evt-opt:nth-child(1) { animation-delay: .12s; }
   .evt-opt:nth-child(2) { animation-delay: .22s; }
   .evt-opt:nth-child(3) { animation-delay: .32s; }
   .evt-opt b { font-size: 16px; color: #e6e6e6; letter-spacing: 2px; font-family: var(--serif); }
   .evt-opt span { font-size: 12px; color: #9a9a9a; line-height: 1.6; }
+  .evt-opt:hover::after { color: #ffffff; transform: translateY(-50%) translateX(3px); }
   .evt-opt:hover { border-color: #c2c2c2; transform: translateX(6px);
     background: linear-gradient(180deg, rgba(58,58,58,.96), rgba(38,38,38,.96));
     box-shadow: 0 0 22px rgba(194,194,194,.22), 0 8px 20px rgba(0,0,0,.45); }

@@ -372,7 +372,7 @@ export function openDoorModal(door, cellDef) {
 }
 
 // ---------- 第四层终局：祭坛格（弃3激活选奖励）→ 首脑格 → 终局撤离点 ----------
-// 祭坛：弃掉背包 3 张牌激活后二选一奖励；集齐 2 枚彩色令牌碎片可不走弃牌直接换能力卡。
+// 祭坛：弃掉背包 3 张牌激活后二选一奖励；集齐 2 枚员工通行证A碎片可不走弃牌直接换能力卡。
 // 激活（或兑换）成功才算触发过本格；离开未激活可再来。首脑格必须先激活祭坛。
 export function openAltarRitual(def) {
   game.state = 'modal';
@@ -387,18 +387,20 @@ export function openAltarRitual(def) {
   const frags = game.fragments || 0;
   // 碎片不足时不再隐藏选项，改为禁用态并说明原因（2026-09-10 撤离测试：玩家不知道选项为何消失）
   const fragOpt = frags >= 2
-    ? nodeOpt('altarFragHero', `献上 2 枚彩色令牌碎片（不弃牌）`, `获得 1 张本职业随机能力卡（现有碎片 ${frags}）`, 'ok')
-    : nodeOpt('altarFragLocked', '献上 2 枚彩色令牌碎片（不弃牌）', `碎片不足（现有 ${frags}/2）——集齐 2 枚后可在任意祭坛直接兑换能力卡`, '', 'disabled title="彩色令牌碎片不足，无法兑换"');
+    ? nodeOpt('altarFragHero', `献上 2 枚员工通行证A碎片（不弃牌）`, `获得 1 张本职业随机能力卡（现有碎片 ${frags}）`, 'ok')
+    : nodeOpt('altarFragLocked', '献上 2 枚员工通行证A碎片（不弃牌）', `碎片不足（现有 ${frags}/2）——集齐 2 枚后可在任意祭坛直接兑换能力卡`, '', 'disabled title="员工通行证A碎片不足，无法兑换"');
   nodeShell({
     tone: 'altar', icon: '[[icon:crystal]]', title: '污染祭坛',
     sub: '弃掉背包中 3 张卡牌激活祭坛，任选一项奖励' +
-      (frags >= 2 ? '；也可以不弃牌，直接献上 2 枚彩色令牌碎片换取能力卡' : ''),
+      (frags >= 2 ? '；也可以不弃牌，直接献上 2 枚员工通行证A碎片换取能力卡' : ''),
     body:
       nodeOpt('altarOn3', '弃 3 张 · 激活祭坛', '激活后二选一：① 复原 3 张消耗卡 + 回复 10 血；② 随机获取 1 张传说卡和 1 张装备卡', 'ok') +
       fragOpt +
       (game.altarItemSacrificed
         ? nodeOpt('altarItemUsed', '献祭道具 · 已用过', '这座祭坛的道具献祭已受理过一次，不再 repeat——换其他方式激活，或直接离开', '', 'disabled title="道具献祭每座祭坛限一次"')
-        : nodeOpt('altarItemRestore', '献祭道具 · 复原卡牌', '献祭 1 张道具卡，从消耗口袋复原 2 张卡牌（每座祭坛限一次）')) +
+        : game.ownedCards.some(o => o.card.type === '道具')
+          ? nodeOpt('altarItemRestore', '献祭道具 · 复原卡牌', '献祭 1 张道具卡，从消耗口袋复原 2 张卡牌（每座祭坛限一次）')
+          : nodeOpt('altarItemNoItem', '献祭道具 · 复原卡牌', '背包里没有道具卡——先弄到一张道具卡，再回来献祭复原', '', 'disabled title="背包里没有道具卡"')) +
       nodeOpt('altarLeave', '离开', '祭坛保持沉睡——回到当前格子，稍后再来'),
   });
   const markActivated = () => {
@@ -436,7 +438,7 @@ export function openAltarRitual(def) {
     if (!pool.length) {
       nodeShell({
         tone: 'altar', icon: '[[icon:crystal]]', title: '碎片兑换 · 暂不可用',
-        sub: `${game.myClass ? '【' + esc(game.myClass) + '】职业目前没有可兑换的能力卡' : '还没有选定职业'}——彩色令牌碎片已原样保留（现有 ${(game.fragments || 0)} 枚）`,
+        sub: `${game.myClass ? '【' + esc(game.myClass) + '】职业目前没有可兑换的能力卡' : '还没有选定职业'}——员工通行证A碎片已原样保留（现有 ${(game.fragments || 0)} 枚）`,
         body: nodeOpt('altarFragBack', '返回祭坛', '换个方式激活，或留着碎片以后再兑'),
       });
       UI.act('altarFragBack', () => openAltarRitual(def));
@@ -448,7 +450,7 @@ export function openAltarRitual(def) {
     if (!grantEventCard(card)) return;
     game.fragments = (game.fragments || 0) - 2;
     markActivated();
-    UI.log(`[[icon:gem]] 献上 2 枚彩色令牌碎片（剩 ${game.fragments}）——获得本职业能力卡【<b>${esc(card.name)}</b>】；<b>祭坛苏醒了</b>`, 'loot');
+    UI.log(`[[icon:gem]] 献上 2 枚员工通行证A碎片（剩 ${game.fragments}）——获得本职业能力卡【<b>${esc(card.name)}</b>】；<b>祭坛苏醒了</b>`, 'loot');
     saveGame();
     finishInstant();
   });
@@ -855,7 +857,7 @@ function showExtractDone() {
   nodeShell({
     tone: 'exit', icon: '[[icon:exit]]', title: '撤离成功',
     sub: `用时 <b>${timeStr}</b> · 行动 <b>${game.turn - 1}</b> 次 · 剩余生命 <b style="color:#7fdd9c">${game.hp}/${game.maxHp}</b> ·
-      本局携带 <b class="gold">${game.coins} 币</b>（留在局中） · 物资价值 <b class="gold">¥${total.toLocaleString()}</b>`,
+      本局携带 <b class="gold">${game.coins} 币</b>（留在局中） · 物资价值 <b class="gold">${total.toLocaleString()}</b>`,
     body: `
       <p class="result-line"><span class="ov-note">[[icon:home]] 已运回基地：[[icon:wood]] 木材 ×${woodN} · [[icon:bread]] 口粮 ×${ratN} · [[icon:archive]] 仓库 <b>${B.stashUsed()}/${B.stashCap()}</b> 张 ·
         [[icon:sparkles]] 图鉴 <b>${Object.keys(B.data.collection).length}</b></span></p>

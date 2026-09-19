@@ -99,6 +99,9 @@ export function reenterCell() {
   return true;
 }
 
+// 即时效果类（币/木材/宝箱/口粮/钥匙/火堆/事件）：拾取或场景演出后再继续
+const INSTANT_TYPES = ['coin', 'wood', 'chest', 'rations', 'key', 'fire', 'event', 'resource'];
+
 function resolveCell() {
   const layer = curLayer(), idx = game.trackPos;
   const lc = layer.logical[idx];
@@ -106,15 +109,29 @@ function resolveCell() {
   const door = (layer.doors || []).find(d => d.at === idx);
   const altarE = (layer.altarEntrances || []).find(a => a.at === idx);
 
-  // 一次性内容防重刷（2026-09-19 留言 #24 改口径）：「没离开前可以反复进入」——
-  // 踩格时不再写入 visited（旧的"落格即锁"作废），改为**离开本格**（移向下一格）时
-  // 在 moveTo 里补写（此时本格在地图上转为"已消耗"样式）。站在格上点脚下格可经
-  // reenterCell() 反复重开本格内容（商店重逛/战斗再打/事件再看）。
-  // visited 不再拦截 resolveCell：地图是前向 DAG，离开的格子不会再次踏入；
-  // 读档恢复/旧存档遗留的 visited 标记只影响地图"已消耗"渲染，不锁玩法。
+  // 一次性内容防重刷（2026-09-19 留言 #24 + 当日 bug 修复）：踩格不写 visited，
+  // 站在格上点脚下格可经 reenterCell() 反复重开本格内容（商店重逛/战斗再打/事件再看）；
+  // 离开本格时由 moveTo 补写 visited（地图转"已消耗"样式）。注意地图边是双向的
+  //（map-generator addEdge 双向登记），走回头路是合法移动——可消耗格（战斗/物资/
+  // 火堆/事件/商店）一旦离开（visited）再踏入就不再触发，防止返回旧格反复回血/
+  // 刷物资/刷战斗。进度型节点自管"可再来"语义，不受 visited 拦截：门（可再开）、
+  // 祭坛（未激活可再来，激活/领奖由 altarActivated 自判）、撤离点（面板自管）。
   game.visited = game.visited || {};
   const vKey = game.layerIdx + ',' + idx;
-  // 首脑格：编组/战斗前不锁定——放弃编组可再来；击败首脑由战斗收尾写 visited（bag.js）
+  const consumed = !!game.visited[vKey];
+  if (consumed && !door && def && (def.type === 'battle' || def.type === 'shop' || INSTANT_TYPES.includes(def.type))) {
+    UI.log('[[icon:exit]] 该节点已被消耗——离开过的节点不会重复触发', 'dim');
+    finishInstant();
+    return;
+  }
+  // 首脑格：编组/战斗前不锁定——放弃编组可再来；击败首脑由战斗收尾写 visited（bag.js）。
+  // 击败后的巢穴不可再战（重打首脑会反复领传说保底），按 bossKilled 拦截而非 visited
+  //（离开未击败的首脑格也会被 moveTo 写 visited，不能据此锁格）。
+  if (def && def.type === 'boss' && game.bossKilled) {
+    UI.log('[[icon:skull]] 首脑已被击破，巢穴已经空了', 'dim');
+    finishInstant();
+    return;
+  }
 
   // 杀戮尖塔式房间切换：从落脚开始到本格全部结算完成，地图始终由全屏房间页取代。
   UI.beginRoom();
@@ -126,8 +143,7 @@ function resolveCell() {
     return;
   }
 
-  // 2) 即时效果类（币/木材/宝箱/口粮/钥匙/火堆/事件）：拾取或场景演出后再继续
-  const INSTANT_TYPES = ['coin', 'wood', 'chest', 'rations', 'key', 'fire', 'event', 'resource'];
+  // 2) 即时效果类：拾取或场景演出后再继续
   if (def && INSTANT_TYPES.includes(def.type)) {
     runInstant(def, () => {
       // 即时效果完成 → 本格若兼为节点（如带商店的门、祭坛入口）继续节点演出
@@ -491,16 +507,16 @@ function eventChoiceSpec(card, narrative = null) {
   const settle = (run) => () => { run(); game.state = 'idle'; saveGame(); UI.refresh(game); };
   const gainFragment = () => {
     game.fragments = (game.fragments || 0) + 1;
-    UI.log(`[[icon:crystal]] 获得彩色令牌碎片（${game.fragments}/2，集齐 2 枚可随员工通行证A合成彩色令牌）`, 'loot');
+    UI.log(`[[icon:crystal]] 获得员工通行证A碎片（${game.fragments}/2，集齐 2 枚可随员工通行证A合成员工通行证A）`, 'loot');
   };
   // —— 2026-09-09 事件 v2（Q6/C13 老板定向）：描述已按设计者新版对齐的七个事件，
   //     直接走自定义选项（旧 ink 叙事仍作 intro 展示，效果按新卡面结算）——
   const V2 = {
     'tt6-mystery': () => [
-      { label: '接收补给', detail: '获得彩色令牌碎片，+2 币', tone: 'ok', run: settle(() => { gainFragment(); gainCoins(2); }) },
+      { label: '接收补给', detail: '获得员工通行证A碎片，+2 币', tone: 'ok', run: settle(() => { gainFragment(); gainCoins(2); }) },
     ],
     'tt6-systemsupply': () => [
-      { label: '接收补给', detail: '获得彩色令牌碎片，木材卡 ×1', tone: 'ok', run: settle(() => {
+      { label: '接收补给', detail: '获得员工通行证A碎片，木材卡 ×1', tone: 'ok', run: settle(() => {
         gainFragment();
         const card = SDT.Cards.all().find(c => c.id === 'tt-wood');   // 需求 #10：物资一律以卡牌入包
         if (card) grantEventCard(card);
@@ -647,9 +663,9 @@ function eventChoiceSpec(card, narrative = null) {
 // 事件效果结算（旧版单按钮路径：仅剩自定义/未迁移事件卡会走到这里，tt6 十事件已全部走 ink）
 function applyEventEffect(card) {
   switch (card.id) {
-    case 'cmtn7qttxqo4':   // 修鞋铺（2026-09-09 审计补实装）：获得彩色令牌碎片；复原 1 张卡牌
+    case 'cmtn7qttxqo4':   // 修鞋铺（2026-09-09 审计补实装）：获得员工通行证A碎片；复原 1 张卡牌
       game.fragments = (game.fragments || 0) + 1;
-      UI.log(`[[icon:crystal]] 修鞋铺送了你一枚彩色令牌碎片（${game.fragments}/2）`, 'loot');
+      UI.log(`[[icon:crystal]] 修鞋铺送了你一枚员工通行证A碎片（${game.fragments}/2）`, 'loot');
       // 2026-09-19 留言 #21：在事件本界面内复原，不再跳成「营火休整」页
       openPocketRestore(1, () => {
         game.state = 'idle';

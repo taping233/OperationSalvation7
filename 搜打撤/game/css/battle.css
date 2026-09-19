@@ -505,3 +505,12 @@
 .sts-float.stk.stk-cheer { font-size:19px; font-family:var(--cal); font-weight:800;
   letter-spacing:2px; color:var(--fx-dmg-crit);
   text-shadow:0 0 8px rgba(0,0,0,.85), 0 2px 4px rgba(0,0,0,.8); }
+
+/* 战斗设置浮层（btSettings）：此前零样式裸排，对齐设置弹窗的行卡片观感 */
+.bt-settings { min-width: 300px; display: flex; flex-direction: column; gap: 10px; }
+.bt-settings .chk { display: flex; align-items: center; gap: 10px; padding: 10px 14px;
+  background: rgba(20,46,60,.55); border: 1px solid rgba(120,160,175,.28); border-radius: 8px;
+  font-size: 14px; color: #d8e4e6; cursor: pointer; transition: background .15s; }
+.bt-settings .chk:hover { background: rgba(20,46,60,.8); }
+.bt-settings .chk input { width: 15px; height: 15px; accent-color: #9bbdb7; flex: none; }
+.bt-settings .ov-note { font-size: 12px; color: #8fa5ad; margin: 0; line-height: 1.6; }

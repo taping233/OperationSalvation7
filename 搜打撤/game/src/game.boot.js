@@ -571,7 +571,26 @@ import { renderMiniMap } from './game.session.js';
   });
 
 // ---------- 启动 ----------
+  // 全界面禁用原生悬停提示（老板 2026-09-19 定版）：初始清一遍 + 观察后续 DOM 变更持续摘除。
+  // 代码里大量 title 承载提示文案，逐处删除易漏且新增代码会回潮，统一在启动层兜底摘除；
+  // 读 title 的逻辑（菜单快捷键标签、Esc 找关闭钮）均有 textContent / aria-label 兜底，不受影响。
+  function stripNativeTitles(root) {
+    if (!root || !root.querySelectorAll) return;
+    root.querySelectorAll('[title]').forEach(el => el.removeAttribute('title'));
+    if (root.nodeType === 1 && root.hasAttribute('title')) root.removeAttribute('title');
+  }
   window.addEventListener('DOMContentLoaded', () => {
+    stripNativeTitles(document);
+    const titleObserver = new MutationObserver((muts) => {
+      for (const m of muts) {
+        if (m.type === 'attributes') {
+          if (m.target && m.target.getAttribute && m.target.getAttribute('title') != null) m.target.removeAttribute('title');
+        } else if (m.type === 'childList') {
+          m.addedNodes.forEach(n => { if (n.nodeType === 1) stripNativeTitles(n); });
+        }
+      }
+    });
+    titleObserver.observe(document.documentElement, { subtree: true, childList: true, attributes: true, attributeFilter: ['title'] });
     fetch('version.json', { cache: 'no-store' })
       .then(response => {
         if (!response.ok) throw new Error(`HTTP ${response.status}`);

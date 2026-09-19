@@ -267,7 +267,7 @@ let hubCollectionView = 'backs';
           </div>
           <div class="brief-pet">
             <span class="brief-pet-icon">[[icon:paw]]</span><span><small>随队宠物</small><b>${pet ? esc(pet.name) : '未携带'}</b></span>
-            <em>${pet ? esc(pet.desc) : '可在整备页选择已拥有的宠物'}</em>
+            <em>${pet ? esc(pet.desc) : '可在仓库页选择携带的宠物'}</em>
           </div>
           <p class="deploy-tip">[[icon:map]] 进入整备后，可从仓库拖入本局携带卡牌；只有装入背包的卡牌才能在远征中使用。</p>
         </aside>
@@ -543,9 +543,11 @@ let hubCollectionView = 'backs';
       const label = g.material
         ? `[[icon:${g.material === 'wood' ? 'wood' : 'bread'}]] <b>${esc(g.name)}</b><span class="dim"> · 基地物资 · ${escAttr(g.tip)}</span>`
         : (() => { const card = hubShopGoodsCard(g); return card ? `[[icon:cards]] <b>${esc(card.name)}</b><span class="dim"> · ${esc(card.type)} · ${escAttr(g.tip)}</span>` : ''; })();
-      return `<div class="pk-row stash-row" title="${escAttr(g.tip)}">
-          <span>${label}</span>
-        <button class="mini-btn ok" data-act="shopBuy" data-i="${i}" ${afford ? '' : 'disabled'} title="${escAttr(why)}">[[icon:coin]] ${g.price} 币</button>
+      // 09-20 P1-6：买不起整行降饱和（poor 类）+ 原因写在行内（title 已被全局摘除不可依赖）；
+      // 价签换描边胶囊（shop-price-tag），不再是大色块压描述
+      return `<div class="pk-row stash-row${afford ? '' : ' poor'}" title="${escAttr(g.tip)}">
+          <span>${label}${afford ? '' : `<span class="dim poor-why"> · ${escAttr(why)}</span>`}</span>
+        <button class="mini-btn ok shop-price-tag" data-act="shopBuy" data-i="${i}" ${afford ? '' : 'disabled'} title="${escAttr(why)}">[[icon:coin]] ${g.price} 币</button>
       </div>`;
     }).join('');
     return `
@@ -890,11 +892,12 @@ let hubCollectionView = 'backs';
     const sel = B.carriedPet();
     // 宠物升级：每只宠物独立进度，口粮递增 2-3-4-5，上限 Lv.5；
     // 携带中的宠物决定保护格数量（小企鹅咕嘎 +2：4-8 格）
+    // 09-20 P1-8：未孵化的不再逐只铺「？？？」占位行（与仓库页重复且无操作），
+    // 收成一行摘要 + 去仓库按钮；已孵化的正常列出升级入口。
+    const lockedN = B.PETS.length - owned.length;
     const petRows = B.PETS.map(p => {
       const have = owned.includes(p.id);
-      if (!have) {
-        return `<div class="pk-row pet-row locked"><span>[[icon:paw]] <b>？？？</b><span class="dim">· 未孵化（宠物蛋 + 50 币，仓库页）</span></span><span class="dim">Lv.? / ${B.PET_LEVEL_MAX}</span></div>`;
-      }
+      if (!have) return '';
       const lv = B.petLevel(p.id);
       const maxed = lv >= B.PET_LEVEL_MAX;
       const cost = B.petUpCost(p.id);
@@ -929,6 +932,7 @@ let hubCollectionView = 'backs';
       <section class="hub-card" style="margin-top:14px">
         <h3>[[icon:paw]] 宠物升级 <span class="set-tip">口粮 ${B.PET_UP_COSTS.join('-')} · 携带中的宠物决定保护格 <b>${B.safeCap()}</b> 格</span></h3>
         <p class="ov-note" style="margin:0 0 6px">每只宠物的升级进度相互独立（Lv.1 起每级 +1 保护格）；携带不同宠物，保护格数量不同——小企鹅咕嘎可到 4-8 格。在仓库页切换携带的宠物。</p>
+        ${lockedN > 0 ? `<div class="pk-row pet-row locked"><span>[[icon:paw]] <b>？？？</b><span class="dim">· 未孵化 ×${lockedN}——宠物蛋 + 50 币在仓库页孵化</span></span><button class="mini-btn ok" data-act="hubTab" data-tab="stash">去仓库孵化</button></div>` : ''}
         <div class="stash-list">${petRows}</div>
       </section>`;
   }

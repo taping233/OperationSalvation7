@@ -151,3 +151,11 @@
   .class-command-stats,.collection-command-stats { flex-wrap:wrap; }
 }
 @media (prefers-reduced-motion:reduce) { .class-dossier-art img { transition:none; } }
+
+/* 基地商店（09-20 P1-6）：价签描边瘦身不再压描述；买不起整行降饱和 + 原因行内可见 */
+#overlay .pk-row.stash-row .shop-price-tag { padding: 3px 10px; font-size: 12.5px;
+  background: transparent; border: 1px solid #c9ad7a88; color: #dfc28d; }
+#overlay .pk-row.stash-row .shop-price-tag:hover:not(:disabled) { background: rgba(223,194,141,.14); }
+#overlay .pk-row.stash-row.poor { opacity: .62; filter: grayscale(.65); }
+#overlay .pk-row.stash-row.poor .shop-price-tag { border-color: #7a858c66; color: #93a3ab; }
+#overlay .pk-row.stash-row .poor-why { margin-left: 6px; color: #c98b7e; }

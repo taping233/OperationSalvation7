@@ -583,3 +583,16 @@
   #overlay .doom-btns .ov-btn.ok { border-color: rgba(255,138,92,.55);
     background: linear-gradient(180deg, #5c2f26, #2a1512); color: #ffd9cc; }
   #overlay .doom-btns .ov-btn.ok:hover { box-shadow: 0 0 16px rgba(255,138,92,.35); }
+
+/* 面板右上角 × 关闭钮（09-20 P1-1）：走 Esc 同链，必选流程自动隐藏 */
+#overlay .card { position: relative; }
+#overlay .card .ov-x { position: absolute; top: 10px; right: 12px; z-index: 5;
+  width: 30px; height: 30px; border-radius: 50%;
+  border: 1px solid rgba(160,185,195,.4); background: rgba(14,32,42,.6);
+  color: #b9ccd3; font-size: 17px; line-height: 1; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .15s; }
+#overlay .card .ov-x:hover { background: rgba(46,74,88,.9); color: #fff; border-color: rgba(200,220,228,.7); }
+#overlay .card .ov-x:active { transform: scale(.92); }
+/* hidden 属性会被上面的 display:flex 覆盖（作者样式>UA默认），显式补回隐藏态 */
+#overlay .card .ov-x[hidden] { display: none; }

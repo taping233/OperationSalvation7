@@ -156,8 +156,9 @@ function createGameMenuController(deps) {
     const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
     const latest = pickLatestSlot();
     const base = latest?.base || null, run = latest?.run || null;
+    const latestTotal = Math.max(base?.stats?.playSeconds || 0, run?.elapsed || 0);
     set('akSlotNo', latest ? `0${latest.slot}` : '--');
-    set('akPlaytime', latest ? `游玩 ${fmtPlayTime(Math.max(base?.stats?.playSeconds || 0, run?.elapsed || 0))}` : '暂无档案');
+    set('akPlaytime', latest ? (latestTotal > 0 ? `游玩 ${fmtPlayTime(latestTotal)}` : '暂无游玩记录') : '暂无档案');
     const tag = document.getElementById('akLastTag');
     if (tag) {
       if (run?.savedAt) {
@@ -469,14 +470,19 @@ function createGameMenuController(deps) {
       </g>
     </svg>`;
 
-  // 档位只保留累计游玩时间与已解锁成就，避免把基地/对局细节挤在一起。
+  // 档位卡信息：进行中对局的进度（层/人物）+ 累计游玩时间 + 已解锁成就。
+  // 进度行是 5 张「继续对局」卡之间唯一的区分依据（09-19 二轮走查 B7）。
   function slotInfoHTML(baseData, run) {
     if (!baseData && !run) return '<span class="slot-empty">EMPTY SLOT · 空档位</span>';
     const total = Math.max(baseData?.stats?.playSeconds || 0, run?.elapsed || 0);
     const names = baseData
       ? SDT.Meta.ACHIEVEMENTS.filter(a => SDT.Meta.isUnlocked(a, baseData)).map(a => a.name)
       : [];
-    return `<div class="si-line"><em>PLAYTIME</em>游玩时间 <b class="num">${fmtPlayTime(total)}</b></div>` +
+    const prog = run
+      ? `<div class="si-line"><em>EXPEDITION</em>${run.nestActive ? '龙巢远征进行中' : `第 ${(run.layerIdx ?? 0) + 1} 层 · ${esc(run.myClass || '未选人物')}`}</div>`
+      : '';
+    return prog +
+      `<div class="si-line"><em>PLAYTIME</em>游玩时间 <b class="num">${total > 0 ? fmtPlayTime(total) : '暂无记录'}</b></div>` +
       `<div class="si-line"><em>ACHIEVEMENTS</em>已解锁成就 <b class="num">${names.length}</b>` +
       `<span class="si-sub">${names.length ? esc(names.join('、')) : '暂无'}</span></div>`;
   }

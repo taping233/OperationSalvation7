@@ -550,6 +550,8 @@ body:has(#overlay.opaque:not([hidden])) #sidebar{display:none!important}
 #cardZoom .cz-hint{position:relative;z-index:1;font-size:11px;letter-spacing:3px;color:#c9d4d8;animation:czFade .3s .1s ease both}
 #cardZoom.cz-out .cz-backdrop{animation:czFadeOut .24s ease both}
 #cardZoom.cz-out .cz-card,#cardZoom.cz-out .cz-foot{animation:czOut .24s ease both}
+/* 背签/提示不在 czOut 名单时会以不透明度 1 滞留到 remove（老板 09-19 实测），随退场同步淡出 */
+#cardZoom.cz-out .cz-note,#cardZoom.cz-out .cz-hint{animation:czFadeOut .24s ease both}
 @keyframes czIn{from{opacity:0;transform:scale(.55)}to{opacity:1;transform:none}}
 @keyframes czOut{from{opacity:1;transform:none}to{opacity:0;transform:scale(.6)}}
 @keyframes czFade{from{opacity:0}to{opacity:1}}

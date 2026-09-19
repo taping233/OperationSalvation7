@@ -50,9 +50,6 @@ function requestClassChoice(options) {
     elite: { id: 'elite', icon: '[[icon:fire]]', name: '精英突袭',
       desc: '敌人与 BOSS 属性 ×1.5，战斗掉落金币 ×1.5，人物经验 +50%，高稀有度卡牌爆率 +20%。高风险高回报。',
       enemyMul: 1.5, coinMul: 1.5, xpMul: 1.5, startCoins: 0, healMul: 1, ckpt: '敌人 ×1.5 · 经验 +50% · 高稀有掉落 +20%' },
-    casual: { id: 'casual', icon: '[[icon:home]]', name: '悠闲行军',
-      desc: '开局携带 10 币，火堆与治疗效果 ×2，人物经验 -20%。适合练级与囤积基地物资。',
-      enemyMul: 1, coinMul: 1, xpMul: 0.8, startCoins: 10, healMul: 2, ckpt: '开局 +10 币 · 治疗 ×2' },
   };
   const modeCfg = () => MODES[game.mode] || MODES.standard;
   // 按当前模式缩放敌人属性（战斗格 / 事件战 / BOSS 通用）
@@ -138,7 +135,7 @@ function requestClassChoice(options) {
       <div class="doom-panel">
         <p class="doom-sub">${why === '你倒下了' ? '生命归零 · 远征到此为止' : '战斗中撤离 · 视为失败'}</p>
         <div class="doom-stats">
-          <div class="doom-stat" style="--i:0"><span class="ds-k">损失物资</span><b class="ds-v bad">¥${lost.toLocaleString()}</b></div>
+          <div class="doom-stat" style="--i:0"><span class="ds-k">损失物资</span><b class="ds-v bad">${lost.toLocaleString()}</b></div>
           <div class="doom-stat" style="--i:1"><span class="ds-k">抢运回基地</span><b class="ds-v good">${savedN} 张</b></div>
           <div class="doom-stat" style="--i:2"><span class="ds-k">安全格占用</span><b class="ds-v">${safeUsed()}/${safeCap()}</b></div>
         </div>
@@ -254,7 +251,7 @@ function requestClassChoice(options) {
       game.inventory.push(slot);
     }
     slot.count += n;
-    UI.log(`获得 <b>${tpl.name}${slot.count > 1 ? ` ×${slot.count}` : ''}</b>（¥${(tpl.value || 0) * slot.count}）`, 'loot');
+    UI.log(`获得 <b>${tpl.name}${slot.count > 1 ? ` ×${slot.count}` : ''}</b>（价值 ${(tpl.value || 0) * slot.count}）`, 'loot');
     UI.refresh(game);
     return slot;
   };
@@ -493,7 +490,7 @@ function requestClassChoice(options) {
     // 迷雾与防重刷（旧档无字段 → {}，走【全部可见/可重复】的兼容路径）
     game.visited = (s.visited && typeof s.visited === 'object') ? s.visited : {};
     game.seen = (s.seen && typeof s.seen === 'object') ? s.seen : {};
-    game.fragments = +s.fragments || 0;   // 彩色令牌碎片（旧档无字段 → 0）
+    game.fragments = +s.fragments || 0;   // 员工通行证A碎片（旧档无字段 → 0）
     game.bossKilled = !!s.bossKilled;     // 本局是否已击败首脑（终局撤离条件）
     game.altarActivated = !!s.altarActivated;   // 第四层祭坛是否已激活（首脑格准入条件，旧档无字段 → false）
     game.altarRewardPending = !!s.altarRewardPending;   // 祭坛奖励待领取（旧档无字段 → false）
@@ -621,7 +618,7 @@ function requestClassChoice(options) {
     game.cardOrder = [];
     game.usedPocket = [];
     game.eventLog = [];
-    game.fragments = 0;   // 彩色令牌碎片（Q6 隐藏计数器）
+    game.fragments = 0;   // 员工通行证A碎片（Q6 隐藏计数器）
     game.altarItemSacrificed = false;   // 祭坛道具献祭一次性锁（每局重置）
     game.pendingEventLoot = null;
     game.myClass = null;

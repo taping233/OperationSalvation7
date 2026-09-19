@@ -22,7 +22,7 @@ import { renderExpeditionPanel } from './expedition.view.js';
         bagBtnFloat: $('bagBtnFloat'), bagCountFloat: $('bagCountFloat'),
         log: $('log'),
         logPanel: $('logPanel'),
-        overlay: $('overlay'), ovTitle: $('ovTitle'), ovBody: $('ovBody'),
+        overlay: $('overlay'), ovTitle: $('ovTitle'), ovBody: $('ovBody'), ovCloseX: $('ovCloseX'),
         tooltip: $('tooltip'),
         tglIndex: $('tglIndex'),
         btnExport: $('btnExport'), btnImport: $('btnImport'), btnClear: $('btnClear'),
@@ -38,6 +38,13 @@ import { renderExpeditionPanel } from './expedition.view.js';
         if (!btn) return;
         const fn = this._acts[btn.dataset.act] || this._baseActs[btn.dataset.act];
         if (fn) fn(btn.dataset);
+      });
+      // 面板右上角 × 与遮罩点击（09-20 老板 P1-1）：都走 closeTopOverlayByEsc 同一条链，
+      // 必选流程（事件必选/BOSS 编组/战斗页）探测不到取消语义时按钮自动隐藏、遮罩点击无效。
+      this.el.ovCloseX?.addEventListener('click', () => this.closeTopOverlayByEsc());
+      this.el.overlay.addEventListener('click', (e) => {
+        if (e.target !== this.el.overlay) return;
+        if (this._canCancelOverlay()) this.closeTopOverlayByEsc();
       });
       // 帮助弹层（? 按钮）：所有页面共用的基础动作，页面可注册自己的帮助主题
       this._baseActs.openHelp = (d) => this.showHelp(d.page);
@@ -330,7 +337,7 @@ import { renderExpeditionPanel } from './expedition.view.js';
       }
       const valTotal = game.inventory.reduce((a, b) => a + b.value * (b.count || 1), 0);
       if (this._lastValue !== valTotal) {
-        this.el.statValue.textContent = '¥' + valTotal.toLocaleString();
+        this.el.statValue.textContent = valTotal.toLocaleString();
         if (this._lastValue != null) this.popNum(this.el.statValue);
         this._lastValue = valTotal;
       }
@@ -522,6 +529,8 @@ import { renderExpeditionPanel } from './expedition.view.js';
       const prevMode = this._lastMode;
       this._lastMode = mode;
       this.el.overlay.hidden = false;
+      // 右上角 × 显隐：只有能被取消类入口安全关闭的浮层才显示（必选流程/战斗页自动隐藏）
+      if (this.el.ovCloseX) this.el.ovCloseX.hidden = !this._canCancelOverlay();
       this._isolateOverlayBackground();
       // 全屏覆盖型页面（卡牌库/整备整页/战斗房间/宝箱）：被盖住的主页动画一律暂停
       // （2026-09-07 老板：动画不出现在画面中就暂停，回到页面再恢复）。
@@ -638,17 +647,31 @@ import { renderExpeditionPanel } from './expedition.view.js';
       if (mode === 'battle') return false;   // 战斗中 Esc 只清瞄准，不退战斗
       // 优先模拟页面上的「取消语义」按钮：宝箱「跳过」、环间门「留下」、商店「离开」等。
       // 图标关闭钮（背包 × / 卡池 ×）文本为空，按 data-act 与 aria-label/title 兜底匹配
-      const cancelBtn = [...this.el.ovBody.querySelectorAll('button')]
-        .find(b => !b.disabled && !b.closest('[hidden], [aria-hidden="true"]') && (
-          /跳过|留下|返回|取消|关闭|离开/.test(b.textContent || '') ||
-          /^(closeBag|closeCardPage|closeDesigner|pg-close)$/.test(b.dataset.act || '') ||
-          /关闭|返回/.test(b.getAttribute('aria-label') || '') || /关闭|返回/.test(b.getAttribute('title') || '')));
+      const cancelBtn = this._findCancelBtn();
       if (cancelBtn) { cancelBtn.click(); return true; }
       // 场景演出页（点击任意处继续）：走 sceneNext 通道
       if (this.el.ovBody.querySelector('[data-act="sceneNext"]')) { this.act('sceneNext'); return true; }
       // 背包这类只有信息没有按钮的浮层：直接关
       if (mode === 'bag' || mode === 'bagpage') { this.hideOverlay(); return true; }
       return false;
+    },
+
+    // 面板内「取消语义」按钮探测（Esc / 右上角 × / 遮罩点击共用）
+    _findCancelBtn() {
+      return [...this.el.ovBody.querySelectorAll('button')]
+        .find(b => !b.disabled && !b.closest('[hidden], [aria-hidden="true"]') && (
+          /跳过|留下|返回|取消|关闭|离开/.test(b.textContent || '') ||
+          /^(closeBag|closeCardPage|closeDesigner|pg-close)$/.test(b.dataset.act || '') ||
+          /关闭|返回/.test(b.getAttribute('aria-label') || '') || /关闭|返回/.test(b.getAttribute('title') || '')));
+    },
+
+    // 当前浮层是否可通过取消类入口关闭（决定右上角 × 的显隐）
+    _canCancelOverlay() {
+      if (this.el.overlay.hidden || this._lastMode === 'battle') return false;
+      if (this._findCancelBtn()) return true;
+      if (this.el.ovBody.querySelector('[data-act="sceneNext"]')) return false;   // 点击任意处继续，无需 ×
+      const m = this._lastMode;
+      return m === 'bag' || m === 'bagpage';
     },
 
     _overlayFocusable() {

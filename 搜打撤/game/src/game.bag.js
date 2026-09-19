@@ -282,13 +282,13 @@ import { _set_cardPageOpen } from './game.cardslib.js';
     const isSha = o.card.id === SDT.Cards.SHA.id;
     UI.showCardZoom(o.card, {
       footer: `
-        <p class="ov-note">${esc(o.card.name)} · ${esc(o.card.type)} · ${esc(o.card.rarity || '')}${fromSafe ? ' · 位于安全格' : ''}${o.card.id === 'tt-token-color' ? ` · 彩色令牌碎片 <b>${game.fragments || 0}/2</b>` : ''}</p>
+        <p class="ov-note">${esc(o.card.name)} · ${esc(o.card.type)} · ${esc(o.card.rarity || '')}${fromSafe ? ' · 位于安全格' : ''}${o.card.id === 'tt-token-color' ? ` · 员工通行证A碎片 <b>${game.fragments || 0}/2</b>` : ''}</p>
         <div class="ov-btns">
           ${usable ? '<button class="ov-btn ok" data-act="useDetailCard">使用这张道具</button>' : ''}
           ${o.card.id === 'tt-token-gold' && game.ownedCards.filter(x => x.card.id === 'tt-token-gold').length >= 3
             ? '<button class="ov-btn ok" data-act="craftColorToken">合成员工通行证A（3 张 B → 1 张 A）</button>' : ''}
           ${o.card.id === 'tt-token-color' && (game.fragments || 0) >= 2
-            ? '<button class="ov-btn ok" data-act="craftColorTokenByFragments">合成彩色令牌（2 碎片 + 1 通行证A）</button>' : ''}
+            ? '<button class="ov-btn ok" data-act="craftColorTokenByFragments">合成员工通行证A（2 碎片 + 1 通行证A）</button>' : ''}
           ${o.card.id === 'tt2-pearlbox' ? '<button class="ov-btn ok" data-act="pearlStore">[[icon:gem]] 存入 / 取出资源卡</button>' : ''}
           ${o.card.id === 'tt7-stratagem' ? '<button class="ov-btn ok" data-act="pouchStore">[[icon:cards]] 打开锦囊（存放法术 ×3）</button>' : ''}
           ${fromSafe ? '<button class="ov-btn" data-act="detailFromSafe">移回背包</button>' :
@@ -315,13 +315,13 @@ import { _set_cardPageOpen } from './game.cardslib.js';
     });
     UI.act('craftColorTokenByFragments', () => {
       closeZoom();
-      // 2026-09-09 Q6 老板定向：隐藏计数器碎片——集齐 2 枚碎片 + 员工通行证A → 合成彩色令牌
-      if ((game.fragments || 0) < 2) { UI.log('彩色令牌碎片不足 2 枚，无法合成', 'warn'); return; }
+      // 2026-09-09 Q6 老板定向：隐藏计数器碎片——集齐 2 枚碎片 + 员工通行证A → 合成员工通行证A
+      if ((game.fragments || 0) < 2) { UI.log('员工通行证A碎片不足 2 枚，无法合成', 'warn'); return; }
       game.ownedCards.splice(game.ownedCards.indexOf(o), 1);
       game.fragments -= 2;
       const token = SDT.Cards.all().find(c => c.id === 'cmtmvq6ss84l');
       if (token) game.ownedCards.push({ uid: newUid(), card: { ...token } });
-      UI.log('[[icon:sparkles]] 合成成功：员工通行证A + 2 枚碎片 → 1 张<b>彩色令牌</b>（使用后获取本职业能力卡）', 'loot');
+      UI.log('[[icon:sparkles]] 合成成功：员工通行证A + 2 枚碎片 → 1 张<b>员工通行证A</b>（使用后获取本职业能力卡）', 'loot');
       saveGame();
       showBackpack(true);
     });
@@ -551,7 +551,7 @@ import { _set_cardPageOpen } from './game.cardslib.js';
         const it = supplies[i];
         cells += `<div class="bag-slot filled tier-bd-${it.tier}" title="${it.name}">
              <b>${it.name}${it.count > 1 ? ` ×${it.count}` : ''}</b>
-             <span>¥${it.value * it.count}</span>
+             <span>价值 ${it.value * it.count}</span>
              <i class="tier tier-${it.tier}">${it.tier}</i>
            </div>`;
       } else if (i - supplies.length < stacks.length) {
@@ -616,10 +616,10 @@ import { _set_cardPageOpen } from './game.cardslib.js';
           <h2>[[icon:bag]] 背包 ${UI.helpBtn('bag')}</h2>
           <div class="bag-chips">
             <span class="fc-chip">格数 <b>${usedSlots()}/${cap}</b></span>
-            <span class="fc-chip">总值 <b>¥${total.toLocaleString()}</b></span>
+            <span class="fc-chip">总值 <b>${total.toLocaleString()}</b></span>
             <span class="fc-chip">[[icon:lock]] 安全格 <b>${safeStacks.length}/${sCap}</b></span>
             <span class="fc-chip">[[icon:pocket]] 消耗口袋 <b>${pkN}</b> 张</span>
-            ${(game.fragments || 0) > 0 ? `<span class="fc-chip" title="集齐 2 枚，可随员工通行证A合成彩色令牌">[[icon:gem]] 彩色令牌碎片 <b>${game.fragments}/2</b></span>` : ''}
+            ${(game.fragments || 0) > 0 ? `<span class="fc-chip" title="集齐 2 枚，可随员工通行证A合成员工通行证A">[[icon:gem]] 员工通行证A碎片 <b>${game.fragments}/2</b></span>` : ''}
           </div>
         </div>
         <button class="bag-close" data-act="closeBag" title="关闭背包（B）" aria-label="关闭背包">

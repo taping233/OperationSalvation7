@@ -373,8 +373,9 @@ const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!car
       </div>` : '';
     // —— 道具栏（2026-09-12 老板定向）：战斗界面上方常驻，点击使用 / 拖到敌人身上 ——
     // 2026-09-09 玩法定版：BOSS 战没有道具栏（背包里的道具无法使用）
+    // 09-20 P1-7：空道具时整栏隐藏——顶部不再常驻「背包里没有道具」占位
     const potions = potionBar || [];
-    const showItemBar = mode !== 'boss';
+    const showItemBar = mode !== 'boss' && potions.length > 0;
     const potionsHTML = showItemBar ? `
       <div class="bt-potions">
         <span class="bt-potions-label">[[icon:flask]] 道具</span>
