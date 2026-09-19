@@ -32,6 +32,14 @@
 - 共同参照首页壁纸与本页定稿立绘及三张定稿人物卡；**不要每张卡随机改变脸、眼色和发型**。
 - 早期错误眼色的 `cards/wu-*.webp` 旧图已被映射绕开，切勿改回旧图。
 
+## 2026-09-19 painterly 全身立绘定稿（老板逐项反馈修订）
+
+- 依据：`roster-fix-20260919-170117/shuangling-170117.png`（seed 1769771149），已实装 `portraits/full/shuangling.webp`。
+- **发型修订（0919 老板反馈）**：马尾收紧=**光滑束紧的高马尾**（`sleek smooth hair, tight neat high ponytail`），头发平贴不蓬松（禁 fluffy/voluminous/messy hair）——原「大波浪」口径按此收紧执行。
+- **墨镜修订（0919 老板反馈）**：**哑光黑镜片、不反光无眩光**（`matte black`；UC 排 reflective sunglasses / lens flare / glasses reflection）。
+- 演出：全身站姿叉腰，**黑色长剑斜背背后**（剑柄露肩上）+ 主句归属；裙摆 `high-low` 前短后长且**后摆止于小腿**（有效钉法=`the skirt in back stops at the shins`，`high-low skirt` tag 有拖地先验禁用）。
+- 画风：painterly 统一画风模块（`official_painterly_style.py`）。
+
 ## 性格与背景（待老板提供）
 
 - 性格：立绘神态可参考「嚣张、自信」，完整定稿文字待老板提供。
