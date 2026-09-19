@@ -23,7 +23,7 @@ export function expeditionRoutes(game) {
   const layer = game.layerData?.[li];
   const current = layer?.logical?.[game.trackPos];
   const unique = new Set();
-  return (current?.next || []).flatMap(([nl, idx]) => {
+  const routes = (current?.next || []).flatMap(([nl, idx]) => {
     const cell = layer?.logical?.[idx];
     if (nl !== li || !cell || unique.has(idx)) return [];
     unique.add(idx);
@@ -32,9 +32,21 @@ export function expeditionRoutes(game) {
     const [name, hint, icon, tone] = NODE_INFO[type] || ['安全节点', '继续探明周围的路线', 'map', 'quiet'];
     const cleared = !!game.visited?.[`${li},${idx}`] &&
       !door && !['entrance', 'emergencyExit', 'extraction', 'altar', 'boss'].includes(type);
-    return [{ li, idx, name, icon, tone: cleared ? 'quiet' : tone,
+    return [{ li, idx, baseName: name, name, icon, tone: cleared ? 'quiet' : tone,
       hint: cleared ? '已探索 · 可通行，物资不再刷新' : door?.reverse ? '返回上一片区域' : hint,
       cleared, selected: game.moveTarget?.li === li && game.moveTarget?.idx === idx }];
+  });
+  // 同一屏可能有多条同类型路线（例如两个相邻遭遇战）。只显示“遭遇战”会让
+  // 视觉和读屏用户无法确认自己选的是哪个节点；为重复名称补稳定的路线序号，
+  // 同时保留 idx 作为唯一动作键，确保展示名称与实际节点一一对应。
+  const sameNameCount = new Map();
+  routes.forEach(route => sameNameCount.set(route.baseName, (sameNameCount.get(route.baseName) || 0) + 1));
+  const sameNameSeen = new Map();
+  return routes.map(route => {
+    const count = sameNameCount.get(route.baseName) || 0;
+    const ordinal = (sameNameSeen.set(route.baseName, (sameNameSeen.get(route.baseName) || 0) + 1).get(route.baseName));
+    const label = count > 1 ? `${route.baseName} · 路线${ordinal}` : route.baseName;
+    return { ...route, name: label, ariaLabel: `${label}（节点 ${route.idx + 1}）` };
   });
 }
 
@@ -69,7 +81,7 @@ export function renderExpeditionPanel(panel, game, iconHTML) {
   title.textContent = disabled ? '行动进行中' : `下一步 · ${routes.length} 条路线`;
   note.textContent = objective.text;
   note.dataset.tone = objective.tone;
-  options.innerHTML = routes.map(r => `<button type="button" class="route-option${r.selected ? ' selected' : ''}" data-route-index="${r.idx}" data-route-layer="${r.li}" data-tone="${r.tone}" ${disabled ? 'disabled' : ''}>
+  options.innerHTML = routes.map(r => `<button type="button" class="route-option${r.selected ? ' selected' : ''}" data-route-index="${r.idx}" data-route-layer="${r.li}" data-tone="${r.tone}" aria-label="${r.ariaLabel || `${r.name}（节点 ${r.idx + 1}）`}" ${disabled ? 'disabled' : ''}>
     <span class="route-icon" aria-hidden="true">${iconHTML(r.icon)}</span>
     <span class="route-copy"><b>${r.name}${r.cleared ? ' · 已探索' : ''}</b><small>${r.hint}</small></span>
     <span class="route-arrow" aria-hidden="true">↗</span>

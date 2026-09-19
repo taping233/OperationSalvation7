@@ -36,6 +36,20 @@ describe('expedition view route projection', () => {
     expect(expeditionObjective(makeGame({ layerIdx: 2, layerData: [{}, {}, layer] })).text).toContain('献祭 3 张');
     expect(expeditionObjective(makeGame({ layerIdx: 3, layerData: [{}, {}, {}, layer], bossKilled: true })).text).toContain('终局撤离点');
   });
+
+  it('同名相邻路线获得稳定的可视与无障碍区分，并保留节点索引', () => {
+    const g = makeGame({
+      layerData: [{ logical: [
+        { def: { type: 'entrance' }, next: [[0, 1], [0, 2]] },
+        { def: { type: 'battle' }, next: [] },
+        { def: { type: 'battle' }, next: [] },
+      ], doors: [] }],
+    });
+    const routes = expeditionRoutes(g);
+    expect(routes.map(r => r.name)).toEqual(['遭遇战 · 路线1', '遭遇战 · 路线2']);
+    expect(routes.map(r => r.ariaLabel)).toEqual(['遭遇战 · 路线1（节点 2）', '遭遇战 · 路线2（节点 3）']);
+    expect(routes.map(r => r.idx)).toEqual([1, 2]);
+  });
 });
 
 describe('expedition view DOM rendering', () => {
@@ -63,5 +77,21 @@ describe('expedition view DOM rendering', () => {
     const changed = makeGame({ moveTarget: { li: 0, idx: 2 } });
     renderExpeditionPanel(panel, changed, icon => icon);
     expect(document.activeElement?.dataset.routeIndex).toBe('1');
+  });
+
+  it('同名路线按钮的 aria-label 与 data-route-index 一一对应', () => {
+    const g = makeGame({
+      layerData: [{ logical: [
+        { def: { type: 'entrance' }, next: [[0, 1], [0, 2]] },
+        { def: { type: 'battle' }, next: [] },
+        { def: { type: 'battle' }, next: [] },
+      ], doors: [] }],
+    });
+    renderExpeditionPanel(panel, g, icon => icon);
+    const buttons = [...panel.querySelectorAll('.route-option')];
+    expect(buttons.map(b => b.dataset.routeIndex)).toEqual(['1', '2']);
+    expect(buttons.map(b => b.getAttribute('aria-label'))).toEqual([
+      '遭遇战 · 路线1（节点 2）', '遭遇战 · 路线2（节点 3）',
+    ]);
   });
 });

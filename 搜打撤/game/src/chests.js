@@ -1,6 +1,7 @@
 import { sdtDefine } from './sdt-facade.js';
 
 import { Random } from './random.js';
+import { escAttr } from './shared.js';
 
   const SDT = window.SDT;
   const UI = SDT.UI;
@@ -238,10 +239,12 @@ import { Random } from './random.js';
       const got = taken.has(i);
       const act = isPick ? `data-act="chestPick" data-i="${i}" title="点击收下这张"`
         : got ? '' : `data-act="chestTake1" data-i="${i}" title="点击拾取进背包"`;
-      return `<div class="bt-card chest-fly rl-${riOf(card)}${cur.isClass ? ' cls-chest' : ''}${got ? ' got' : ''}" style="animation-delay:${i * 160}ms"
+      const tag = act ? 'button' : 'div';
+      const buttonAttrs = act ? ` type="button" aria-label="${escAttr(`${got ? '已收取' : '收取卡牌'}：${card.name || '未命名卡牌'}`)}"` : '';
+      return `<${tag}${buttonAttrs} class="bt-card chest-fly rl-${riOf(card)}${cur.isClass ? ' cls-chest' : ''}${got ? ' got' : ''}" style="animation-delay:${i * 160}ms"
         ${act}>
         ${SDT.Cards.cardHTML(card)}${got ? '<span class="chest-got-mark">已收</span>' : ''}
-      </div>`;
+      </${tag}>`;
     }).join('');
     const lootLine = isPick
       ? `从随机 <b>${cur.cards.length}</b> 张卡牌中选择 <b>1</b> 张 · 另含 [[icon:coin]] <b>${cur.coins}</b> 币`

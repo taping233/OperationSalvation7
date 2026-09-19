@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="css/battle.css" />
 <link rel="stylesheet" href="css/scenes.css" />
 <link rel="stylesheet" href="css/winter.css" />
+<link rel="stylesheet" href="css/ui-scale.css" />
 </head>
 <body>
 <div id="app">
@@ -274,7 +275,7 @@
         <button class="menu-btn" id="mBack">重 新 进 入</button>
       </div>
     </div>
-    <div id="overlay" hidden>
+    <div id="overlay" role="dialog" aria-modal="true" aria-labelledby="ovTitle" tabindex="-1" hidden>
       <div class="card">
         <h2 id="ovTitle"></h2>
         <div id="ovBody"></div>

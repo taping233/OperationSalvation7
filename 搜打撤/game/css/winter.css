@@ -1133,6 +1133,8 @@ body,body *{font-family:'HarmonyOS Sans SC','HarmonyOS Sans','Noto Sans SC Sub',
 
 /* —— 开箱：单卡拾取 + 满包预检提示（2026-09-09 老板定向） —— */
 #overlay .card.chest .bt-card{cursor:pointer;position:relative}
+#overlay .card.chest button.bt-card{appearance:none;border:0;padding:0;background:transparent;color:inherit;font:inherit}
+#overlay .card.chest button.bt-card:focus-visible{outline:3px solid #efcd89;outline-offset:6px;border-radius:10px}
 #overlay .card.chest .bt-card.got{cursor:default;opacity:.38;filter:grayscale(.7)}
 #overlay .card.chest .bt-card.got:hover{transform:none}
 .chest-got-mark{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-12deg);z-index:3;
@@ -1553,6 +1555,11 @@ body.reduce-motion #layerBanner { animation: none !important; }
   border:1px solid rgba(206,222,234,.22);border-radius:16px;
   box-shadow:0 30px 80px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.06);
   animation:glassIn .3s cubic-bezier(.22,1,.36,1)}
+#overlay.fx-glass .glass-panel .ov-note{color:#dbe6e8;font-size:14px;line-height:1.8;text-shadow:0 1px 2px #05090c}
+#overlay.fx-glass .glass-panel .ov-note b{color:#fff1d0}
+#overlay.fx-glass .glass-panel .ov-btn{min-height:44px;color:#eef5f2;border-color:rgba(215,230,233,.5);background:rgba(27,50,61,.94)}
+#overlay.fx-glass .glass-panel .ov-btn.danger{color:#ffe1db;background:#783f3a;border-color:#d29a8e}
+#overlay.fx-glass .glass-panel .ov-btn:focus-visible{outline:2px solid #ffe1a8;outline-offset:3px}
 @keyframes glassIn{from{opacity:0;transform:translateY(20px) scale(.97)}}
 /* #29 卡牌特写备注区：lg 卡面下方固定一块备注描述（有备注亮色，无备注灰提示） */
 #cardZoom .cz-note{margin:12px auto 0;width:min(560px,86%);display:flex;gap:10px;align-items:flex-start;text-align:left;

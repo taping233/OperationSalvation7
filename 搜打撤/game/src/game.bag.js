@@ -268,7 +268,7 @@ import { _set_cardPageOpen } from './game.cardslib.js';
           <button class="ov-btn danger" data-act="confirmDragDiscard">确认丢弃</button>
           <button class="ov-btn" data-act="cancelDragDiscard">取消，放回背包</button>
         </div>
-      </div>`, 'glass');
+      </div>`, 'glass', { initialFocus: '[data-act="cancelDragDiscard"]' });
     UI.act('confirmDragDiscard', () => { discardOwnedCard(name, fromSafe); showBackpack(true); });
     UI.act('cancelDragDiscard', () => showBackpack(true));
   }

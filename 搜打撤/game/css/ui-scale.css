@@ -1,0 +1,64 @@
+/*
+ * 小窗可读性护栏
+ *
+ * ui-scale.js 只在 fit scale 低于 0.85 时挂 data-ui-scale-floor。此处仅抬高
+ * 关键正文与操作件；装饰性英文、角标和卡面内部排版继续走原设计，避免粗暴放大
+ * 破坏 1920×1080 的层级。47px CSS 控件在 0.85 zoom 后约 40px 物理命中区。
+ */
+html[data-ui-scale-floor] {
+  --ui-read-size: 16.5px;
+  --ui-hit-size: 47px;
+}
+
+/* 正文/提示：16.5px CSS × 0.85 = 14px 物理字号。 */
+html[data-ui-scale-floor] body,
+html[data-ui-scale-floor] #routePanel .route-copy b,
+html[data-ui-scale-floor] #routePanel .route-copy small,
+html[data-ui-scale-floor] #routePanel .route-help,
+html[data-ui-scale-floor] #routePanel .route-objective,
+html[data-ui-scale-floor] .scene-line p,
+html[data-ui-scale-floor] .scene-hint,
+html[data-ui-scale-floor] .flow-detail,
+html[data-ui-scale-floor] .flow-hint,
+html[data-ui-scale-floor] .guide-row span,
+html[data-ui-scale-floor] .manual-note,
+html[data-ui-scale-floor] .evt-opt span,
+html[data-ui-scale-floor] .cls-story,
+html[data-ui-scale-floor] .deploy-mission-lead,
+html[data-ui-scale-floor] .deploy-tip,
+html[data-ui-scale-floor] .readiness-item,
+html[data-ui-scale-floor] .brief-mode small,
+html[data-ui-scale-floor] .bag-drop-note,
+html[data-ui-scale-floor] .sug-tip,
+html[data-ui-scale-floor] #overlay .ov-note,
+html[data-ui-scale-floor] #overlay .ov-stats,
+html[data-ui-scale-floor] #overlay .ov-empty {
+  font-size: max(var(--ui-read-size), 1em);
+}
+
+/* 关键动作：避免缩放后按钮只剩 20~30px 高；战斗右上角 ghost 辅助键保留紧凑布局。 */
+html[data-ui-scale-floor] .route-option,
+html[data-ui-scale-floor] .evt-opt,
+html[data-ui-scale-floor] #overlay .ov-btn:not(.ghost),
+html[data-ui-scale-floor] #overlay .mini-btn,
+html[data-ui-scale-floor] #overlay .hub-tab,
+html[data-ui-scale-floor] #overlay .step-btn,
+html[data-ui-scale-floor] #overlay .pg-close,
+html[data-ui-scale-floor] #btnDeploy,
+html[data-ui-scale-floor] .deploy-primary,
+html[data-ui-scale-floor] #bagBtnFloat,
+html[data-ui-scale-floor] #topBtns button {
+  min-height: var(--ui-hit-size);
+}
+
+html[data-ui-scale-floor] #topBtns button,
+html[data-ui-scale-floor] #bagBtnFloat {
+  min-width: var(--ui-hit-size);
+}
+
+html[data-ui-scale-floor] #routePanel .route-title,
+html[data-ui-scale-floor] .ak-quickref,
+html[data-ui-scale-floor] .scene-ops .ov-btn,
+html[data-ui-scale-floor] .fire-done-btn {
+  font-size: max(var(--ui-read-size), 1em);
+}

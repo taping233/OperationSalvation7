@@ -624,7 +624,7 @@ function createGameMenuController(deps) {
         <button class="ov-btn ok" data-act="leaveSave">[[icon:save]] 保存并回主菜单</button>
         <button class="ov-btn danger" data-act="leaveAbandon">[[icon:flag]] 放弃对局</button>
         <button class="ov-btn" data-act="leaveCancel">↩ 继续对局</button>
-      </div>`);
+      </div>`, undefined, { initialFocus: '[data-act="leaveCancel"]' });
     UI.act('leaveSave', () => { UI.hideOverlay(); game.state = 'idle'; saveGame(); showTitle(); });
     UI.act('leaveCancel', () => { UI.hideOverlay(); game.state = 'idle'; UI.refresh(game); });
     UI.act('leaveAbandon', () => {

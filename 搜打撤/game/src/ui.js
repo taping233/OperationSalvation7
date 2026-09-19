@@ -10,6 +10,8 @@ import { renderExpeditionPanel } from './expedition.view.js';
     _baseActs: {},   // 全局基础动作（页面同名动作优先）
     _roomActive: false, // 地图格子的整段结算都保持为全屏房间页
     helpTopics: {},  // pageId -> { title, html, back }（? 帮助弹层主题，页面渲染时注册）
+    _overlayReturnFocus: null,
+    _overlayInerted: [],
 
     init() {
       this.el = {
@@ -47,6 +49,22 @@ import { renderExpeditionPanel } from './expedition.view.js';
       this.el.ovBody.addEventListener('mouseover', (e) => {
         if (this._hoverHandler) this._hoverHandler(e);
       });
+      // Overlay 是真正的模态对话框：Tab 不能穿透到背后的地图，Esc 仍遵循
+      // closeTopOverlayByEsc 的战斗/必选流程规则。用捕获阶段保证输入框里的 Esc
+      // 也能工作，而不会和游戏快捷键互相抢事件。
+      this.el.overlay.addEventListener('keydown', (e) => {
+        if (this.el.overlay.hidden) return;
+        if (e.key === 'Tab') {
+          this._trapOverlayFocus(e);
+          return;
+        }
+        if (e.key === 'Escape') {
+          if (this.closeTopOverlayByEsc()) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+        }
+      }, true);
       // 彩蛋（2026-09-07 留言）：连按两下以上头像，左右抖动一下
       let avaTaps = 0, avaTapTimer = null;
       this.el.heroAva.addEventListener('click', () => {
@@ -382,11 +400,18 @@ import { renderExpeditionPanel } from './expedition.view.js';
       }, 240);
     },
 
-    showOverlay(title, bodyHtml, mode) {
+    showOverlay(title, bodyHtml, mode, options = {}) {
       // 失败/清空类标题用红色语义
       if (this._hideTimer) { clearTimeout(this._hideTimer); this._hideTimer = null; }
       const wasOpen = !this.el.overlay.hidden;
+      if (!wasOpen) {
+        const active = document.activeElement;
+        this._overlayReturnFocus = active && active !== document.body ? active : null;
+      }
       this.el.overlay.classList.remove('closing');
+      this.el.overlay.setAttribute('role', 'dialog');
+      this.el.overlay.setAttribute('aria-modal', 'true');
+      this.el.overlay.setAttribute('aria-labelledby', 'ovTitle');
       this.el.ovTitle.classList.toggle('bad', /失败|清空|删除|倒下/.test(title));
       this.el.ovTitle.innerHTML = SDT.Icons.rich(title);
       // 2026-09-06 #17：战利品结算页 = 战斗胜利动画（1.4s 强调入场）
@@ -435,6 +460,7 @@ import { renderExpeditionPanel } from './expedition.view.js';
       const prevMode = this._lastMode;
       this._lastMode = mode;
       this.el.overlay.hidden = false;
+      this._isolateOverlayBackground();
       // 全屏覆盖型页面（卡牌库/整备整页/战斗房间/宝箱）：被盖住的主页动画一律暂停
       // （2026-09-07 老板：动画不出现在画面中就暂停，回到页面再恢复）。
       // 实测卡牌库打开时标题雪花+余烬继续跑，帧率被拖到 10fps。
@@ -453,11 +479,13 @@ import { renderExpeditionPanel } from './expedition.view.js';
       // 只在弹窗真正打开/切换模式时播开窗音效——战斗内反复 render 不刷音效
       if (!wasOpen || prevMode !== mode) {
         SDT.Sound.sfx('open');
-        // 焦点导航（game-ui-ux）：打开/换页时把焦点交给首个可交互元素，键盘 Tab/Enter/Esc 可操作
+        // 焦点导航（game-ui-ux）：显式首焦点优先；否则优先安全的取消/返回
+        // 语义，避免确认页默认把不可逆动作放在 Enter 的第一击上。
         requestAnimationFrame(() => {
           if (this.el.overlay.hidden) return;
-          const focusables = this.el.ovBody.querySelectorAll('button:not([disabled]), input:not([type="range"]), [tabindex]:not([tabindex="-1"])');
-          if (focusables.length) focusables[0].focus({ preventScroll: true });
+          const target = this._resolveOverlayInitialFocus(options.initialFocus);
+          if (target) target.focus({ preventScroll: true });
+          else this.el.overlay.focus({ preventScroll: true });
         });
       }
       // U1（2026-09-19 交互走查）：整页节点/场景壳的背景大图首次打开才发请求，
@@ -518,6 +546,12 @@ import { renderExpeditionPanel } from './expedition.view.js';
         this.el.overlay.classList.remove('fx-doom');
         this.el.overlay.classList.remove('fx-glass');
         this.el.overlay.hidden = true;
+        this._restoreOverlayBackground();
+        const returnFocus = this._overlayReturnFocus;
+        this._overlayReturnFocus = null;
+        if (returnFocus && returnFocus.isConnected && !returnFocus.closest('[inert]') && !returnFocus.hidden) {
+          returnFocus.focus({ preventScroll: true });
+        }
       };
       if (instant) { finish(); return; }
       this.el.overlay.classList.add('closing');
@@ -536,7 +570,7 @@ import { renderExpeditionPanel } from './expedition.view.js';
       // 优先模拟页面上的「取消语义」按钮：宝箱「跳过」、环间门「留下」、商店「离开」等。
       // 图标关闭钮（背包 × / 卡池 ×）文本为空，按 data-act 与 aria-label/title 兜底匹配
       const cancelBtn = [...this.el.ovBody.querySelectorAll('button')]
-        .find(b => !b.disabled && b.offsetParent && (
+        .find(b => !b.disabled && !b.closest('[hidden], [aria-hidden="true"]') && (
           /跳过|留下|返回|取消|关闭|离开/.test(b.textContent || '') ||
           /^(closeBag|closeCardPage|closeDesigner|pg-close)$/.test(b.dataset.act || '') ||
           /关闭|返回/.test(b.getAttribute('aria-label') || '') || /关闭|返回/.test(b.getAttribute('title') || '')));
@@ -546,6 +580,70 @@ import { renderExpeditionPanel } from './expedition.view.js';
       // 背包这类只有信息没有按钮的浮层：直接关
       if (mode === 'bag' || mode === 'bagpage') { this.hideOverlay(); return true; }
       return false;
+    },
+
+    _overlayFocusable() {
+      const root = this.el.ovBody || this.el.overlay;
+      return [...root.querySelectorAll(
+        'a[href], area[href], button:not([disabled]), input:not([disabled]):not([type="hidden"]), ' +
+        'select:not([disabled]), textarea:not([disabled]), [contenteditable="true"], ' +
+        '[tabindex]:not([tabindex="-1"])'
+      )].filter((el) => !el.closest('[hidden], [aria-hidden="true"]'));
+    },
+
+    _resolveOverlayInitialFocus(initialFocus) {
+      const root = this.el.ovBody || this.el.overlay;
+      let target = null;
+      if (initialFocus && initialFocus.nodeType === 1 && root.contains(initialFocus)) target = initialFocus;
+      if (!target && typeof initialFocus === 'string') {
+        try { target = root.querySelector(initialFocus); } catch (_) { target = null; }
+      }
+      // HTML 中的 data-initial-focus 是调用方无需接触 DOM 引用的安全显式入口。
+      if (!target) target = root.querySelector('[data-initial-focus]');
+      if (target && !target.matches('button, input, select, textarea, a[href], [tabindex], [contenteditable="true"]')) target = null;
+      if (target && (target.disabled || target.closest('[hidden], [aria-hidden="true"]'))) target = null;
+      const focusables = this._overlayFocusable();
+      if (!target) {
+        // 取消/保留/返回优先；同一规则覆盖「确认丢弃」「放弃对局」等危险弹窗。
+        target = focusables.find((el) => {
+          const text = `${el.textContent || ''} ${el.getAttribute('aria-label') || ''} ${el.title || ''} ${el.dataset.act || ''}`;
+          return /取消|返回|关闭|继续|放回|保留|不删除|不清空|留下/.test(text);
+        });
+      }
+      return target || focusables[0] || null;
+    },
+
+    _trapOverlayFocus(e) {
+      const focusables = this._overlayFocusable();
+      if (!focusables.length) {
+        e.preventDefault();
+        this.el.overlay.focus({ preventScroll: true });
+        return;
+      }
+      const active = document.activeElement;
+      const index = focusables.indexOf(active);
+      if (e.shiftKey) {
+        if (index <= 0) { e.preventDefault(); focusables[focusables.length - 1].focus({ preventScroll: true }); }
+      } else if (index < 0 || index === focusables.length - 1) {
+        e.preventDefault(); focusables[0].focus({ preventScroll: true });
+      }
+    },
+
+    _isolateOverlayBackground() {
+      if (this._overlayInerted.length) return;
+      let node = this.el.overlay;
+      while (node && node.parentElement) {
+        for (const sibling of node.parentElement.children) {
+          if (sibling === node || sibling.hasAttribute('inert')) continue;
+          sibling.setAttribute('inert', '');
+          this._overlayInerted.push(sibling);
+        }
+        node = node.parentElement;
+      }
+    },
+
+    _restoreOverlayBackground() {
+      for (const el of this._overlayInerted.splice(0)) el.removeAttribute('inert');
     },
   };
 

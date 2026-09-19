@@ -112,16 +112,17 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
       // 空状态也带 id="libGrid"：renderLibGrid 局部重绘靠它定位卡格区，
       // 缺了它空状态一出现 #libGrid 就消失，之后再改筛选条件不再重绘
       return `<div class="clib-empty" id="libGrid"><div class="clib-empty-icon">[[icon:archive]]</div>
-        <p>${libCards.length ? '没有符合筛选条件的卡牌' : '收藏还是空的，点右上角「＋ 制作新卡」开始设计'}</p>
+        <p>${libCards.length ? '没有符合筛选条件的卡牌' : (game.devMode ? '收藏还是空的，点右上角「＋ 制作新卡」开始设计' : '当前没有可展示的卡牌')}</p>
         ${filtered ? '<button class="hs-btn sm" data-act="libClearFilter" style="margin-top:10px">清除筛选条件</button>' : ''}</div>`;
     }
+    const editable = !!game.devMode;
     return `<div class="lib-grid" id="libGrid">${all.map((c, i) => `
       <div class="lib-item${c.id === lastSavedId ? ' saved' : ''}" data-i="${i}" style="--i:${i}">
-        <div class="lib-cardwrap" data-act="libInspect" data-card="${c.id}" title="点击欣赏卡面 · 悬停查看完整卡面与描述">${cardHTML(c, 'lib', LIB_ART)}</div>
-        <div class="lib-actions">
+        <button type="button" class="lib-cardwrap" data-act="libInspect" data-card="${c.id}" aria-label="查看卡牌：${escAttr(c.name || '未命名卡牌')}" title="点击欣赏卡面 · 悬停查看完整卡面与描述">${cardHTML(c, 'lib', LIB_ART)}</button>
+        ${editable ? `<div class="lib-actions">
           <button class="hs-btn sm" data-act="editCard" data-id="${c.id}">编辑</button>
           <button class="hs-btn sm danger" data-act="delCard" data-id="${c.id}">删除</button>
-        </div>
+        </div>` : ''}
       </div>`).join('')}</div>`;
   }
 
@@ -218,13 +219,16 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
       `<button class="type-tab${libFilter.tab === t ? ' on' : ''}" data-act="libTab" data-t="${t}">
         <i>${SDT.Icons.img(t === '全部' ? 'archive' : (SDT.Cards.TYPE_ART[t] || 'question'))}</i>${t}<em>${t === '全部' ? libCards.length : (counts[t] || 0)}</em>
       </button>`).join('');
+    const editorTools = game.devMode
+      ? '<button class="hs-btn gold" data-act="newCard">＋ 制作新卡</button><button class="hs-btn" data-act="exportCards">[[icon:upload]] 导出</button><button class="hs-btn" data-act="importCards">[[icon:download]] 导入</button>'
+      : '';
     UI.showOverlay('', `
       <div class="pg card-library-page">
         <header class="pg-head library-head">
-          <div class="library-title"><span class="library-kicker">WINTER EXPEDITION ARCHIVE</span><h2>[[icon:book]] 卡牌档案馆</h2><p>收藏、检索与编辑你的全部卡牌。</p></div>
+          <div class="library-title"><span class="library-kicker">WINTER EXPEDITION ARCHIVE</span><h2>[[icon:book]] 卡牌档案馆</h2><p>收藏、检索与${game.devMode ? '编辑' : '欣赏'}你的全部卡牌。</p></div>
           <span class="clib-count">全部 <b>${libCards.length}</b> · 当前 <b id="libResultCount">${libFiltered().length}</b> 张</span>
           <button class="pg-close" data-act="closeCardPage" title="关闭（Esc）">[[icon:cross]]</button>
-          <div class="library-tools"><input id="cardSearch" class="clib-search" placeholder="搜索名称 / 效果…" value="${escAttr(libFilter.q)}"><select id="libSort" class="pg-select" title="排序"><option value="cost"${libFilter.sort === 'cost' ? ' selected' : ''}>按费用排序</option><option value="name"${libFilter.sort === 'name' ? ' selected' : ''}>按名称排序</option></select><button class="hs-btn gold" data-act="newCard">＋ 制作新卡</button><button class="hs-btn" data-act="exportCards">[[icon:upload]] 导出</button><button class="hs-btn" data-act="importCards">[[icon:download]] 导入</button></div>
+          <div class="library-tools"><input id="cardSearch" class="clib-search" placeholder="搜索名称 / 效果…" value="${escAttr(libFilter.q)}"><select id="libSort" class="pg-select" title="排序"><option value="cost"${libFilter.sort === 'cost' ? ' selected' : ''}>按费用排序</option><option value="name"${libFilter.sort === 'name' ? ' selected' : ''}>按名称排序</option></select>${editorTools}</div>
         </header>
         <div class="clib-main">
           <aside class="library-sidebar"><div class="library-filter-head"><b>筛选档案</b><button class="hs-btn sm" data-act="libClearFilter">清空</button></div><div class="clib-tabs">${tabs}</div><select id="libRar" class="pg-select library-select" title="按稀有度筛选"><option value="全部">全部稀有度</option>${RARITIES.map(r => `<option value="${r}"${libFilter.rar === r ? ' selected' : ''}>${r}</option>`).join('')}</select><select id="libCls" class="pg-select library-select" title="按职业筛选"><option value="全部职业">全部</option>   <!-- 2026-09-16 留言：显示文案改「全部」（值保持兼容旧存档筛选状态） --><option value="通用"${libFilter.cls === '通用' ? ' selected' : ''}>通用</option>${[...new Set(libCards.map(c => c.cls).filter(Boolean))].sort().map(c => `<option value="${escAttr(c)}"${libFilter.cls === c ? ' selected' : ''}>${esc(characterName(c))}</option>`).join('')}</select><div class="library-preview" id="libPreview" aria-live="polite"></div></aside>

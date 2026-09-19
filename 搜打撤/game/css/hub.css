@@ -101,9 +101,12 @@
   .stash-grid { display: flex; flex-direction: column; gap: 5px; max-height: 34vh; overflow-y: auto; }
   .stash-list { display: flex; flex-direction: column; gap: 5px; max-height: 38vh; overflow-y: auto; }
   /* 可点击的仓库物品行（卖出 / 收藏） */
-  .stash-row { cursor: pointer; transition: all .13s; }
+  .stash-row { cursor: pointer; transition: all .13s; width: 100%; color: inherit; font: inherit; text-align: left; }
   .stash-row:hover { border-color: #a1a1a1; background: #232323; transform: translateY(-1px); }
   .stash-row.collected { border-color: rgba(196,196,196,.5); background: linear-gradient(180deg, #232323, #1c1c1c); }
+  .stash-row:focus-visible, .dep-card[role="button"]:focus-visible, .bag-cell[role="button"]:focus-visible {
+    outline: 2px solid #e2c48d; outline-offset: 3px;
+  }
   /* 出征整备 / 撤离整理页 */
   .dep-body { display: grid; grid-template-columns: 1.3fr 1fr; gap: 16px; align-items: start; }
   .dep-list { display: flex; flex-direction: column; gap: 5px; max-height: 52vh; overflow-y: auto; }

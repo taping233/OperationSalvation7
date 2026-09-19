@@ -22,6 +22,10 @@ const runtime = {
 function configureGameRuntime(hooks) {
   Object.assign(runtime, hooks || {});
 }
+// 供基地出发整备在确认带入卡牌后打开选角页；通过运行时注入保持 session 不反向依赖 run 模块。
+function requestClassChoice(options) {
+  return runtime.openClassChoice(options);
+}
 /* ============================================================
  * 搜打撤 v0.4 —— 游戏主逻辑（四层节点图）
  * 流程：选入口 → 点击相邻节点移动 → 落脚触发格子事件
@@ -597,7 +601,7 @@ function configureGameRuntime(hooks) {
     if (loaded) UI.log(`[[icon:archive]] 从基地仓库携带 <b>${loaded}</b> 张卡牌出征`, 'loot');
   }
 
-  function newRun(mode, picks) {
+  function newRun(mode, picks, options = {}) {
     game.seed = Random.reseed();
     game.mapSeed = game.seed;
     buildDerived(game.mapSeed);
@@ -662,7 +666,7 @@ function configureGameRuntime(hooks) {
     const l1 = game.layerData[0];
     const startIdx = l1.entrances[Math.floor(Random.random('gameplay') * l1.entrances.length)] || 0;
     enterLayer(0, startIdx);
-    runtime.openClassChoice();   // 从全部职业中选择 + 1 张随机职业卡（与 5 张初始攻击一起）
+    if (!options.skipClassChoice) runtime.openClassChoice();   // 从全部职业中选择 + 1 张随机职业卡（与 5 张初始攻击一起）
   }
 
   // 战争迷雾可见集：到达节点 = 该节点 + 其相邻节点变为可见（走过的路径天然保留在 seen 里）
@@ -789,7 +793,7 @@ function configureGameRuntime(hooks) {
     UI.refresh(game);
   }
 
-export { FX, MAP, MODES, SLOT_COUNT, bagCap, buildDerived, cam, canAcceptCard, canvas, cardStacks, cellCenter, clearSave, configureGameRuntime, ctx, curLayer, doDeath, dpr, markSeen, safeCap, enterLayer, exitToTitle, gainCoins, game, hasRun, migrateOldSave, modeCfg, newRun, newUid, openLeaveMenu, openSettings, openTitleGuide, pick, quitGame, safeUsed, saveGame, scaledEnemy, setLobby, showTitle, startNewGame, syncPlayTime, usedSlots, weighted };
+export { FX, MAP, MODES, SLOT_COUNT, bagCap, buildDerived, cam, canAcceptCard, canvas, cardStacks, cellCenter, clearSave, configureGameRuntime, ctx, curLayer, doDeath, dpr, markSeen, requestClassChoice, safeCap, enterLayer, exitToTitle, gainCoins, game, hasRun, migrateOldSave, modeCfg, newRun, newUid, openLeaveMenu, openSettings, openTitleGuide, pick, quitGame, safeUsed, saveGame, scaledEnemy, setLobby, showTitle, startNewGame, syncPlayTime, usedSlots, weighted };
 const _set_dpr = (v) => { dpr = v; };
 export { _set_dpr };
 export const getActiveSlot = () => activeSlot;

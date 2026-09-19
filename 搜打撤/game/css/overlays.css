@@ -434,6 +434,8 @@
   #overlay { position: absolute; inset: 0; z-index: 20; display: flex; align-items: center;
     justify-content: center; background: rgba(8,8,8,.75); backdrop-filter: blur(5px);
     animation: ovFadeIn .16s ease; }
+  #overlay:focus { outline: 2px solid #e1c98d; outline-offset: -4px; }
+  #overlay :focus-visible { outline: 2px solid #f0d3a0; outline-offset: 3px; }
   #overlay[hidden] { display: none; }  /* display:flex 会盖过 hidden 的 UA 默认值，必须显式声明 */
   /* 地图格子房间页：覆盖整个游戏窗口，场景、战斗与结算在同一全屏层连续切换。 */
   #overlay.room-view { position: fixed; inset: 0; z-index: 100; padding: 0;

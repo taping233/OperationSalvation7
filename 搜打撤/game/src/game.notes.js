@@ -178,7 +178,7 @@ import { game } from './game.session.js';
       <div class="ov-btns">
         <button class="ov-btn ok" data-act="doClear">确认清空</button>
         <button class="ov-btn" data-act="closeTools">取消</button>
-      </div>`);
+      </div>`, undefined, { initialFocus: '[data-act="closeTools"]' });
     UI.act('doClear', () => {
       SDT.Notes.clearAll();
       rebuildNotes();

@@ -46,16 +46,18 @@ export function openFireRest() {
 // 消耗口袋复原选牌（picks = 最多复原张数；done = 结束回调）
 // 2026-09-09 老板实测：原文字行在整屏场景壳上看不清、也不显示卡面——改为真卡面网格，点卡即复原
 // 需求 #12：消耗的装备不能在火堆复原（与道具一样）——列表里直接滤掉，不可选
-export function openClassChoice() {
+export function openClassChoice(options = {}) {
+  const onCancel = typeof options.onCancel === 'function' ? options.onCancel : null;
+  const beforeConfirm = typeof options.beforeConfirm === 'function' ? options.beforeConfirm : null;
   preloadAllNodeShellBgs();   // 选角这几秒正好把整页事件背景图预载完（webp 大图打开才请求会黑屏数秒）
   if (SDT.Art && SDT.Art.warmClassRoster) SDT.Art.warmClassRoster();   // 头像条/大立绘五张 4K 图预热，防露底色（2026-09-19 走查 B8）
   const picks = CHARACTERS.map(c => c.rulesetId).filter(cl => SDT.Cards.classPool(cl).length);
   if (!picks.length) return;
   game.state = 'modal';
-  // 只把合法的已有角色作为初始选择；新局没有职业时保留 sel=null，
-  // 但用第一名角色做非提交预览，避免选角页进入时出现空黑舞台。
+  // 只把合法的已有角色作为初始选择；没有旧选择时同步选中第一名角色，
+  // 避免舞台已经显示角色但提交值仍为空（预览与实际状态分离的误导）。
   const previous = characterFor(game.characterId || game.myClass);
-  let sel = previous && picks.includes(previous.rulesetId) ? previous.rulesetId : null;
+  let sel = previous && picks.includes(previous.rulesetId) ? previous.rulesetId : picks[0];
   let view = 'select'; // 'select' 主选角页 | 'pool' 二级卡池页
   const poolCount = cl => SDT.Cards.classPool(cl).length;
   // 主选角页（2026-09-06 留言重做，排版参考杀戮尖塔 2 选人界面）：
@@ -76,7 +78,7 @@ export function openClassChoice() {
       <div class="pg cls2-page">
         <div class="cls2-stage">
           ${displaySel ? `<div class="cls2-fullart">${SDT.Art.classFullArt(displaySel)}</div>` : ''}
-          <aside class="cls2-panel${sel ? '' : ' cls2-preview'}" style="--cls-color:${story ? story.color : '#69aec2'}" data-wm="${escAttr(story ? story.id : '')}">
+          <aside class="cls2-panel" style="--cls-color:${story ? story.color : '#69aec2'}" data-wm="${escAttr(story ? story.id : '')}">
             ${story ? `
               <div class="cls2-eyebrow">WINTER EXPEDITION · CLASS SELECT</div>
               <h2 class="cls2-name">${esc(story.name)}</h2>
@@ -99,7 +101,7 @@ export function openClassChoice() {
                 <div><dt>专属卡池</dt><dd>${poolCount(displaySel)}<i>张</i></dd></div>
                 <div><dt>熟练加成</dt><dd>+${lv - 1}<i>生命</i></dd></div>
               </dl>
-              <p class="cls2-story">${sel ? (esc(CLASS_STORY[characterFor(displaySel)?.id] || '确认后以此人物进入远征，熟练度加成与职业卡将在确认时生效。')) : '先查看人物能力与立绘；点击下方头像选择，确认按钮才会提交本局职业。'}</p>
+              <p class="cls2-story">${esc(CLASS_STORY[characterFor(displaySel)?.id] || '确认后以此人物进入远征，熟练度加成与职业卡将在确认时生效。')}</p>
               ${(SDT.Art.listSkins ? SDT.Art.listSkins(displaySel) : []).length ? `
                 <div class="cls2-skins-wrap">
                   <div class="cls2-sub">皮肤 <i>SKINS</i></div>
@@ -117,7 +119,7 @@ export function openClassChoice() {
           <button class="cls2-face${cl === sel ? ' sel' : ''}" data-act="selClass" data-cls="${escAttr(cl)}" title="${escAttr(c.name)}" aria-pressed="${cl === sel ? 'true' : 'false'}">
             ${SDT.Art.classArt(cl, true)}<b>${esc(c.name)}</b>
           </button>`).join('')}</div>
-        <button class="cls2-back" data-act="cls2Quit" title="返回标题界面"><svg class="svg-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.5 5.5 4 12l6.5 6.5M4.6 12H20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="cls2-back" data-act="cls2Quit" title="${onCancel ? '返回出发整备' : '返回标题界面'}"><svg class="svg-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.5 5.5 4 12l6.5 6.5M4.6 12H20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <button class="cls2-confirm" data-act="pickClass" ${sel ? '' : 'disabled'} title="${sel ? '出发' : '请先选择角色'}" aria-label="${sel ? '出发' : '请先选择角色'}"><span>${sel ? '出发' : '选择角色后出发'}</span><svg class="svg-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12.5 10 18 19.5 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       </div>`, 'page');
   };
@@ -248,13 +250,15 @@ export function openClassChoice() {
       .forEach(b => b.classList.toggle('sel', b.dataset.skin === d.skin));
     Sfx.tick();
   });
-  UI.act('cls2Quit', () => {   // 左下角返回键：放弃选角回标题（弹层淡出后 exitToTitle 的弹窗守卫才放行）
+  UI.act('cls2Quit', () => {   // 出发整备进来的选角页回整备；独立进入时仍回标题
+    if (onCancel) { onCancel(); return; }
     UI.hideOverlay();
     setTimeout(() => exitToTitle(), 240);
   });
   UI.act('pickClass', () => {
     if (!sel) return;
     const cl = sel;
+    if (beforeConfirm) beforeConfirm();
     game.myClass = cl;
     game.characterId = characterFor(cl).id;
     game.classCard = null;

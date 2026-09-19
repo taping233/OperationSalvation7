@@ -5,7 +5,7 @@ const UI = window.SDT.UI;
 import { esc } from './shared.js';
 import { MAP } from './game.session.js';
 import { escAttr } from './shared.js';
-import { MODES, game, getActiveSlot, newRun, setLobby, showTitle } from './game.session.js';
+import { MODES, game, getActiveSlot, newRun, requestClassChoice, setLobby, showTitle } from './game.session.js';
 import { Sfx, configureCardNavigation, _set_cardPageOpen } from './game.cardslib.js';
 import { Random } from './random.js';
 
@@ -305,8 +305,9 @@ let hubTab = 'deploy';
     return B.data.stash.filter(s => s.card.rarity !== '职业').map(s => {
       const n = deployPick[s.card.name] || 0;
       const left = Math.max(0, s.count - n);
-      return `<div class="dep-card${n > 0 ? ' picked' : ''}${left <= 0 ? ' drained' : ''}" draggable="true"
+      return `<div class="dep-card${n > 0 ? ' picked' : ''}${left <= 0 ? ' drained' : ''}" draggable="true" role="button" tabindex="0" aria-pressed="${n > 0 ? 'true' : 'false'}"
           data-act="pickAdd" data-name="${escAttr(s.card.name)}"
+          aria-label="带入${escAttr(s.card.name)}，还可带 ${left} 张"
           title="${escAttr(s.card.name)} · 点击或拖到右侧背包带入（还可带 ${left}）">
         ${SDT.Cards.cardHTML(s.card, 'sm')}
         <span class="dep-own">仓 ×${left}</span>
@@ -336,15 +337,15 @@ let hubTab = 'deploy';
     // 右侧背包格：第 1 格固定「初始攻击」（默认在背包、不可移除），其余按已选卡牌顺序落格；
     // 点击背包卡面 = 放大特写（2026-09-07 留言），移除靠拖回左侧卡牌区
     const pickedNames = Object.keys(deployPick).filter(k => deployPick[k] > 0);
-    let bagCells = `<div class="bag-cell fixed" data-act="bagZoom" data-name="${escAttr(SDT.Cards.SHA.name)}"
-      title="初始攻击 ×${MAP.rules.starterSha} · 默认在背包，固定携带 · 点击查看详情">
+    let bagCells = `<div class="bag-cell fixed" role="button" tabindex="0" data-act="bagZoom" data-name="${escAttr(SDT.Cards.SHA.name)}"
+      aria-label="初始攻击 ×${MAP.rules.starterSha}，固定携带，点击查看详情" title="初始攻击 ×${MAP.rules.starterSha} · 默认在背包，固定携带 · 点击查看详情">
       ${SDT.Cards.cardHTML(SDT.Cards.SHA, 'sm')}<b class="dep-n on">×${MAP.rules.starterSha}</b></div>`;
     for (let i = 1; i < B.bagCap(); i++) {
       const name = pickedNames[i - 1];
       const stack = name ? B.data.stash.find(s => s.card.name === name) : null;
       bagCells += stack
-        ? `<div class="bag-cell filled" draggable="true" data-act="bagZoom" data-name="${escAttr(name)}"
-             title="${escAttr(name)} ×${deployPick[name]} · 点击查看大卡，拖回左侧移除">
+         ? `<div class="bag-cell filled" draggable="true" role="button" tabindex="0" data-act="bagZoom" data-name="${escAttr(name)}"
+             aria-label="${escAttr(name)} ×${deployPick[name]}，点击查看，拖回左侧移除" title="${escAttr(name)} ×${deployPick[name]} · 点击查看大卡，拖回左侧移除">
             ${SDT.Cards.cardHTML(stack.card, 'sm')}<b class="dep-n on">${deployPick[name]}</b></div>`
         : '<div class="bag-cell empty" aria-hidden="true"></div>';
     }
@@ -453,6 +454,14 @@ let hubTab = 'deploy';
     const pool = document.getElementById('depPool');
     const bag = document.getElementById('depBag');
     if (pool && bag) {
+      const activateOnKey = (e) => {
+        const target = e.target.closest?.('[role="button"][data-act]');
+        if (!target || (e.key !== 'Enter' && e.key !== ' ')) return;
+        e.preventDefault();
+        target.click();
+      };
+      pool.addEventListener('keydown', activateOnKey);
+      bag.addEventListener('keydown', activateOnKey);
       [pool, bag].forEach(el => el.addEventListener('dragstart', (e) => {
         const card = e.target.closest && e.target.closest('[data-name][draggable]');
         if (!card) return;
@@ -475,11 +484,17 @@ let hubTab = 'deploy';
       });
     }
     UI.act('confirmDeploy', () => {
-      const picks = deployPick;
-      deployPick = null;
-      UI.hideOverlay();
-      _set_cardPageOpen(false);
-      newRun(B.data.selMode, picks);
+      // 先选角色，确认角色后才真正创建新局；取消选角可以无损回到整备页，
+      // deployPick 仍保留在内存中，因此不会丢失刚才的带入配置。
+      const picks = { ...(deployPick || {}) };
+      const mode = B.data.selMode;
+      requestClassChoice({
+        onCancel: () => renderDepartPrep(),
+        beforeConfirm: () => {
+          deployPick = null;
+          newRun(mode, picks, { skipClassChoice: true });
+        },
+      });
     });
     UI.act('depBack', () => { deployPick = null; renderHub(); });
     deployJustOpened = false;   // 首帧渲染完成，后续页内操作不再播动画
@@ -556,11 +571,11 @@ let hubTab = 'deploy';
           const meta = mat
             ? `可使用 · 每张折入${mat.label} ×${B.materialAmount(s.card)} · 不可卖币`
             : `${s.card.cost}费 · ${s.card.type}${s.card.cls ? ' · ' + esc(characterName(s.card.cls)) : ''} · 收购 ${SDT.Cards.sellPrice(s.card)} 币/张`;
-          return `<div class="pk-row stash-row${marked ? ' collected' : ''}" data-act="stashItem" data-i="${i}"
-              title="${mat ? '点击查看：使用（材料不可卖出）' : '点击查看：卖出 / 收藏'}">
+          return `<button type="button" class="pk-row stash-row${marked ? ' collected' : ''}" data-act="stashItem" data-i="${i}"
+              aria-label="${escAttr(s.card.name)}，${mat ? '使用材料' : '卖出或收藏'}" title="${mat ? '点击查看：使用（材料不可卖出）' : '点击查看：卖出 / 收藏'}">
             <span>[[icon:cards]] ${marked ? '[[icon:sparkles]]' : ''} <b>${esc(s.card.name)}</b>${s.count > 1 ? ` ×${s.count}` : ''}</span>
             <span class="dim">${meta}</span>
-          </div>`;
+          </button>`;
         }).join('')
       : '<p class="ov-empty" style="margin:2px 0 0">（空——撤离成功后在整理界面把战利品放回这里）</p>';
     // 消耗口袋：按稀有度用钥匙复原（需求 #1/#11：古朴1/稀有2/史诗3/传说4）
@@ -587,12 +602,12 @@ let hubTab = 'deploy';
           <p class="ov-note" style="margin:0 0 6px">[[icon:key]] 用钥匙复原（古朴1 / 稀有2 / 史诗3 / 传说4）· <b>下一次出发后口袋清空</b></p>
           <div class="stash-list">${pocketRows}</div>
           <h3 style="margin-top:14px">[[icon:archive]] 物资</h3>
-          <div class="pk-row stash-row" data-act="rawItem" data-kind="wood" title="基地建设材料 · 不可卖出">
+          <button type="button" class="pk-row stash-row" data-act="rawItem" data-kind="wood" aria-label="木材，基地建设材料，不可卖出" title="基地建设材料 · 不可卖出">
             <span>[[icon:wood]] <b>木材</b> ×<b>${B.data.wood}</b></span><span class="dim">背包与仓库扩建用 · 不可卖币</span>
-          </div>
-          <div class="pk-row stash-row" data-act="rawItem" data-kind="rations" title="基地建设材料 · 不可卖出">
+          </button>
+          <button type="button" class="pk-row stash-row" data-act="rawItem" data-kind="rations" aria-label="口粮，基地建设材料，不可卖出" title="基地建设材料 · 不可卖出">
             <span>[[icon:bread]] <b>口粮</b> ×<b>${B.data.rations}</b></span><span class="dim">宠物升级用 · 不可卖币</span>
-          </div>
+          </button>
         </section>
       </div>
       ${hubPetsHTML()}`;
@@ -680,15 +695,30 @@ let hubTab = 'deploy';
           <button class="ov-btn ok" data-act="matUseAll" ${s.count < 2 ? 'disabled' : ''}>[[icon:check]] 全部使用（×${s.count}）</button>
         </div>
         <div class="ov-btns"><button class="ov-btn" data-act="stashBack">↩ 返回仓库</button></div>`);
-      UI.act('matUseOne', () => {
+      const useOne = () => {
         const r = B.useStashMaterial(s.card.name, false);
         if (r.ok) { Sfx.ding(); UI.log(r.msg, 'loot'); }
         renderHub();
-      });
-      UI.act('matUseAll', () => {
+      };
+      const useAll = () => {
         const r = B.useStashMaterial(s.card.name, true);
         if (r.ok) { Sfx.ding(); UI.log(r.msg, 'loot'); }
         renderHub();
+      };
+      const confirmMaterial = (message, run) => {
+        UI.showOverlay('[[icon:question]] 确认使用', `<p class="ov-note">${message}</p><div class="ov-btns">
+          <button class="ov-btn" data-act="matConfirmCancel">保留，返回仓库</button>
+          <button class="ov-btn danger" data-act="matConfirmOk">确认使用</button>
+        </div>`, 'glass', { initialFocus: '[data-act="matConfirmCancel"]' });
+        UI.act('matConfirmCancel', () => openStashItem(i));
+        UI.act('matConfirmOk', run);
+      };
+      UI.act('matUseOne', () => {
+        if (s.count === 1) { confirmMaterial(`这是仓库里的最后一张${mat.label}卡，使用后卡牌将消失。`, useOne); return; }
+        useOne();
+      });
+      UI.act('matUseAll', () => {
+        confirmMaterial(`使用全部 ${s.count} 张${mat.label}卡，卡牌将从仓库移除并折入基地物资。`, useAll);
       });
       UI.act('stashBack', () => renderHub());
       return;
@@ -696,6 +726,16 @@ let hubTab = 'deploy';
     const marked = B.isCollected(s.card);
     const price = SDT.Cards.sellPrice(s.card);
     const special = isSpecialCollect(s.card);
+    const confirmStashAction = (message, run) => {
+      UI.showOverlay('[[icon:question]] 确认操作', `
+        <p class="ov-note">${message}</p>
+        <div class="ov-btns">
+          <button class="ov-btn" data-act="stashConfirmCancel">保留，返回仓库</button>
+          <button class="ov-btn danger" data-act="stashConfirmOk">确认操作</button>
+        </div>`, 'glass', { initialFocus: '[data-act="stashConfirmCancel"]' });
+      UI.act('stashConfirmCancel', () => openStashItem(i));
+      UI.act('stashConfirmOk', () => run());
+    };
     // 职业收藏室（2026-09-16 Item 15 定版）：收藏即用掉（从仓库移除），每次收藏都转化熟练度经验；
     // 收藏进度（data.collection）只在首次登记。旧「同一张只计一次/卡牌保留」口径作废。
     const convertType = !!s.card.cls && (s.card.rarity === '职业' || s.card.type === '能力卡');
@@ -720,7 +760,7 @@ let hubTab = 'deploy';
         <button class="ov-btn" data-act="sellAll" ${marked || s.count < 2 ? 'disabled' : ''}>[[icon:coin]] 全部卖出（+${price * s.count} 币）</button>
         <button class="ov-btn" data-act="stashBack">↩ 返回仓库</button>
       </div>`);
-    UI.act('econpackUse', () => {
+    const useEconPack = () => {
       // 经济卡包（2026-09-09 审计补实装）：仓库界面点击使用，获得 5 张随机卡牌。
       // 只在基地仓库可用（局内不可用是定版）；局外没有对局，拆包所得必须入卡牌仓库——
       // 塞进对局背包（game.ownedCards）会在下次开局被清空，卡就白丢了（2026-09-19 审计 P1-4）
@@ -738,10 +778,14 @@ let hubTab = 'deploy';
       B.save();
       UI.log(`[[icon:cards]] <b>经济卡包</b>：拆开获得 5 张随机卡牌（入卡牌仓库）`, 'loot');
       renderHub();
+    };
+    UI.act('econpackUse', () => {
+      if (s.card.id !== 'tt-econpack') return;
+      if (s.count === 1) { confirmStashAction('这是仓库里的最后一个经济卡包，拆开后卡包将消失。', useEconPack); return; }
+      useEconPack();
     });
-    UI.act('collCollectOne', () => {
+    const collectOne = () => {
       // 2026-09-16 定版（Item 15）：职业卡/能力卡收藏即用掉——重复收藏重复获得经验，进度只记首次
-      if (!convertType) return;
       const first = !B.isCollected(s.card);
       if (first) B.collectToggle(s.card);   // 仅首次登记收藏进度
       SDT.Meta.onCollect(s.card, true);     // 每次收藏都结算经验
@@ -752,8 +796,12 @@ let hubTab = 'deploy';
       Sfx.ding();
       UI.log(`[[icon:medal]] 已收藏【<b>${esc(s.card.name)}</b>】并转化为人物经验（卡牌用掉，不再占格${first ? '，收藏进度 +1' : ''}）`, 'loot');
       renderHub();
+    };
+    UI.act('collCollectOne', () => {
+      if (!convertType) return;
+      confirmStashAction(`收藏【${esc(s.card.name)}】会消耗 1 张卡并转化为人物熟练度经验。`, collectOne);
     });
-    UI.act('collCollectAll', () => {
+    const collectAll = () => {
       if (!convertType) return;
       const n = s.count;
       for (let k = 0; k < n; k++) {
@@ -768,6 +816,10 @@ let hubTab = 'deploy';
       Sfx.ding();
       UI.log(`[[icon:medal]] 已收藏【<b>${esc(s.card.name)}</b>】×${n}，全部转化为人物经验（卡牌用掉）`, 'loot');
       renderHub();
+    };
+    UI.act('collCollectAll', () => {
+      if (!convertType) return;
+      confirmStashAction(`收藏【${esc(s.card.name)}】×${s.count} 会消耗整堆卡牌，并转化为人物熟练度经验。`, collectAll);
     });
     UI.act('collToggle', () => {
       const now = B.collectToggle(s.card);
@@ -783,15 +835,29 @@ let hubTab = 'deploy';
       SDT.Meta.checkUnlocks();
       renderHub();
     });
-    UI.act('sellOne', () => {
+    const sellOne = () => {
       const r = B.sellStashCards(s.card.name, 1);
       if (r.ok) { Sfx.ding(); UI.log(r.msg, 'coin'); }
       renderHub();
+    };
+    UI.act('sellOne', () => {
+      if (price >= 5 || s.count === 1) {
+        confirmStashAction(`卖出【${esc(s.card.name)}】将获得 ${price} 币${s.count === 1 ? '，这也是仓库里的最后一张' : ''}。`, sellOne);
+        return;
+      }
+      sellOne();
     });
-    UI.act('sellAll', () => {
+    const sellAll = () => {
       const r = B.sellStashCards(s.card.name, s.count);
       if (r.ok) { Sfx.ding(); UI.log(r.msg, 'coin'); }
       renderHub();
+    };
+    UI.act('sellAll', () => {
+      if (price >= 5 || s.count === 1) {
+        confirmStashAction(`卖出【${esc(s.card.name)}】整堆（×${s.count}）将获得 ${price * s.count} 币，操作不可撤回。`, sellAll);
+        return;
+      }
+      sellAll();
     });
     UI.act('stashBack', () => renderHub());
   }

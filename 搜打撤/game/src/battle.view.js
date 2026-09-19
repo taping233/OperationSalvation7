@@ -715,6 +715,11 @@ import { assetUrl } from './asset-url.js';
           UI.showTooltip(e.clientX, e.clientY, rec.__name || '', [rec.__tip]);
         });
         rec.card.addEventListener('mouseleave', () => UI.hideTooltip());
+        rec.card.addEventListener('keydown', (e) => {
+          if ((e.key !== 'Enter' && e.key !== ' ') || e.target.closest('.bt-infchip')) return;
+          e.preventDefault();
+          selectCardByClick(rec.card.dataset.uid);
+        });
         rec.slot.appendChild(rec.card);
         handSlots.set(key, rec);
       }
@@ -729,9 +734,13 @@ import { assetUrl } from './asset-url.js';
       rec.card.dataset.act = 'btPlay';
       rec.card.dataset.aim = st.side ? '1' : '';
       rec.card.dataset.side = st.side || '';
-      // U8：操作指引走 #tooltip（见槽位创建处的 mouseenter），原生 title 不再挂
       rec.__tip = st.tip;
       rec.__name = `${g.card.name} · ${effCostOf(g.card, st.uid)} 费`;
+      rec.card.setAttribute('role', 'button');
+      rec.card.tabIndex = 0;
+      rec.card.setAttribute('aria-label', `${rec.__name}。${st.tip || '按回车或空格选择这张牌'}`);
+      rec.card.setAttribute('aria-disabled', st.cls.includes('off') ? 'true' : 'false');
+      // U8：操作指引走 #tooltip（见槽位创建处的 mouseenter），原生 title 不再挂
       rec.card.removeAttribute('title');
       rec.card.setAttribute('aria-pressed', clickSelectedUid === st.uid ? 'true' : 'false');
       if (rec.sig !== st.inner) { rec.card.innerHTML = st.inner; rec.sig = st.inner; }

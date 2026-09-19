@@ -315,8 +315,12 @@ body.cardlib-open #overlay .card-library-page .lib-item:hover {
   transform:translateY(-9px)!important; z-index:5; content-visibility:visible!important; }
 body.cardlib-open #overlay .card-library-page .lib-cardwrap {
   width:100%!important; padding:0!important; background:transparent!important; border:0!important;
+  color:inherit!important; font:inherit!important; text-align:inherit!important; cursor:pointer!important;
   border-radius:9px!important;
   transition:box-shadow .26s cubic-bezier(.22,1,.36,1)!important; }
+body.cardlib-open #overlay .card-library-page .lib-cardwrap:focus-visible {
+  outline:3px solid #efcd89!important; outline-offset:5px!important;
+  box-shadow:0 0 0 7px rgba(239,205,137,.2)!important; }
 body.cardlib-open #overlay .card-library-page .lib-item:hover .lib-cardwrap {
   box-shadow:0 26px 46px rgba(0,0,0,.62), 0 0 0 1px rgba(223,194,141,.45), 0 0 30px rgba(223,194,141,.12)!important; }
 /* 关掉 cards.css 里给旧版留的通用悬停放大：缩放会让操作抽屉与卡面错位，抬升改由卡格承担 */
