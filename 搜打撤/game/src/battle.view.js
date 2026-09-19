@@ -45,10 +45,13 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
   const beginInfuse = commands.beginInfusion;   // 需求 #15：卡面「注能」角标入口
   const bagSlam = commands.bagSlam;             // 需求 #9：背包砸击
   const resolveSlam = commands.resolveSlam;
+  const resolveDart = commands.resolveDart;   // 血毒双镖二段点选（2026-09-16 留言）
   const endTurn = commands.endTurn;
   const flee = commands.flee;
   const surrender = commands.surrender;   // 玩法定版：主动撤离视为本局失败
   const openGrave = commands.openGrave;
+  const openDeckView = commands.openDeckView;
+  const closeDeckView = commands.closeDeckView;
   const closeBagCmd = commands.closeBag;
   const openBagCmd = commands.openBag;
   const useItemCmd = commands.useItem;
@@ -201,7 +204,7 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
   // 手牌分栏（2026-09-10 留言 #27）：一栏最多 12 叠，放不下的进第二栏，用按钮切换
   // 2026-09-12 紧凑手牌：卡变窄后一栏放宽到 16 叠（分栏按钮大概率不再出现）
   let handPage = 0;
-  const HAND_PAGE_SIZE = 16;
+  const HAND_PAGE_SIZE = 9;   // 2026-09-16 老板：每栏最多 9 张
   // 紧凑手牌（2026-09-12 老板二次定向）：常态只露牌面+名字，**悬停**弹出完整描述，
   // 点击保持直接出牌/选目标——弹出纯 CSS :hover 驱动，不走 JS 状态
   // 发现选卡的飞入起点（2026-09-10 留言 #36）：发现浮层会整块替换战斗视图，抽卡动画取样不到
@@ -210,11 +213,11 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
 
   function combatStateCopy(snapshot) {
     const { phase = 'player', energy = 0, hand = [], infusing, choosing, handSelecting,
-      pendingTarget, pendingItem, slamPending, busy } = snapshot;
+      pendingTarget, pendingItem, slamPending, dartPending, busy } = snapshot;
     if (busy || phase === 'enemy') return { label: '敌方行动', detail: '敌人正在行动，准备迎接下一轮攻势。', tone: 'foe' };
     if (infusing) return { label: '注能中', detail: '选择手牌作为燃料，或点“取消注能”返回。', tone: 'focus' };
     if (choosing || handSelecting) return { label: '选择中', detail: '完成当前选择后才能继续行动。', tone: 'focus' };
-    if (pendingTarget || pendingItem || slamPending) return { label: '选择目标', detail: '点击右侧敌人确认目标，或再次点击当前动作取消。', tone: 'focus' };
+    if (pendingTarget || pendingItem || slamPending || dartPending) return { label: '选择目标', detail: '点击右侧敌人确认目标，或再次点击当前动作取消。', tone: 'focus' };
     // Resolve UID entries exactly as the hand renderer does, including per-card cost overrides.
     const handCards = hand.map(entry => entry && typeof entry === 'object' ? entry : findCard(entry)).filter(Boolean);
     const playable = handCards.some(entry => {
@@ -226,6 +229,29 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
     return { label: '你的行动', detail: '能量已耗尽，结束回合让敌人行动。', tone: 'warn' };
   }
 
+  // 对战开始时效果卡牌浮现 2 秒（2026-09-16 老板：含对战开始时效果的卡牌在对战开始时在中心浮现卡牌外观然后消失）
+  let battleStartFlashDone = false;
+  function showBattleStartEquipFlash(equippedList) {
+    if (battleStartFlashDone || !equippedList || !equippedList.length) return;
+    battleStartFlashDone = true;
+    const cards = equippedList.filter(e => e.card && /对战开始时/.test(String(e.card.desc || '')));
+    if (!cards.length) return;
+    const container = document.createElement('div');
+    container.className = 'bt-start-equip-flash';
+    container.innerHTML = cards.map(e => {
+      const wrap = document.createElement('div');
+      wrap.className = 'bt-start-equip-card';
+      wrap.innerHTML = SDT.Cards.cardHTML(e.card, 'sm');
+      const label = document.createElement('span');
+      label.className = 'bt-start-equip-label';
+      label.textContent = e.card.name;
+      wrap.appendChild(label);
+      return wrap.outerHTML;
+    }).join('');
+    document.body.appendChild(container);
+    setTimeout(() => { container.classList.add('fade-out'); }, 2000);
+    setTimeout(() => { container.remove(); battleStartFlashDone = false; }, 2600);
+  }
   function render(snapshot = getSnapshot()) {
     const prevView = captureBattleView();   // 重建前的手牌/牌堆位：供飞行与归位动画取样
     if (snapshot.phase !== 'player' || snapshot.busy) clickSelectedUid = null;
@@ -233,7 +259,7 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
       mode, turn, energy, maxEnergy, busy, phase = 'player', opts, player, pdef, pstat,
       foes, hand, drawPile, discard, grave, infusing, discovering, handSelecting, choosing,
       pendingTarget, pendingHint, viewingGrave, viewingBag, dreadShown, deckSelection,
-      potionBar, pendingItem, slamPending,
+      potionBar, pendingItem, slamPending, dartPending, viewingDeck,
     } = snapshot;
     if (aim) cancelAim();   // 重渲染时中止进行中的指向（DOM 将重建）
     // 战斗中弹层接管（墓地/背包/抉择/选牌/发现）：序列帧层挂在 overlay 直下不随 ovBody
@@ -242,6 +268,7 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
     if (viewingGrave || viewingBag || choosing || handSelecting || discovering) hideUnitFrames();
     if (deckSelection) { handSuspended = false; renderDeckSelection(snapshot); return; }   // 战前编组：允许下次挂载时重置手牌层
     if (viewingGrave) { handSuspended = true; renderGrave(snapshot); return; }
+    if (viewingDeck) { handSuspended = true; renderDeckPileView(snapshot); return; }
     if (viewingBag) { handSuspended = true; renderBattleBag(snapshot); return; }
     if (choosing) {
       handSuspended = true;   // 抉择/选牌/发现都是战斗中弹层：手牌层摘下挂起，回来继续用
@@ -279,6 +306,7 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
       const optsHTML = discovering.options.map((c, i) => `
         <div class="bt-card" data-act="btDiscover" data-i="${i}" title="${escAttr(`${c.name}${c.desc ? '：' + c.desc : ''}——点击置入手牌`)}">
           ${SDT.Cards.cardHTML(c, 'sm')}
+          <p class="ov-note" style="max-width:190px;margin:4px auto 0">${esc(c.desc || '')}</p>
         </div>`).join('');
       UI.showOverlay(`${opts.isBoss ? '[[icon:demon]] BOSS战' : '[[icon:swords]] 遭遇战'} · 第 ${turn} 回合 · [[icon:question]] 发现`, `
         <p class="ov-stats">选 <b>1</b> 张置入手牌 · 战后消散</p>
@@ -387,6 +415,9 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
         </div>
         ${handPages > 1 ? `<button class="bt-hand-page" data-act="btHandPage"
           title="手牌分栏：每栏最多 ${HAND_PAGE_SIZE} 叠，放不下的进第二栏——点击切换第一栏/第二栏">[[icon:cards]] 第 ${handPage + 1}/${handPages} 栏</button>` : ''}
+        <button class="bt-slam-btn${slamPending ? ' active' : ''}" data-act="btSlam"
+          ${busy || infusingNow || (energy < 2 && !slamPending) ? 'disabled' : ''}
+          title="背包砸击：2 费 · 4 点固定伤害 · 点击后选择一名敌人，再点一次取消">[[icon:bag]] 砸击</button>
         <div class="bt-hand sts-hand"></div>
         <div class="sts-tactics" aria-label="战术操作">
           <div class="sts-tactics-secondary">
@@ -432,7 +463,10 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
     });
     UI.act('btFlee', surrender);   // 玩法定版：主动撤离=本局失败（烟雾弹走 fleeBattle 豁免）
     UI.act('btGrave', openGrave);
+    UI.act('btDeck', openDeckView);
+    UI.act('btDeckBack', closeDeckView);
     UI.act('btBag', openBagCmd);
+    UI.act('btSlam', bagSlam);   // 背包砸击按钮（2026-09-16 老板：改回按钮形态，置于手牌左侧）
     UI.act('btInfuseStart', (d) => beginInfuse(d.uid));   // 需求 #15：卡面注能角标
     UI.act('btInfuseGo', confirmInfuse);
     UI.act('btInfuseCancel', cancelInfuse);
@@ -447,6 +481,14 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
     body.querySelectorAll('.bt-potion[data-potion-aim="1"]').forEach(el => {
       el.addEventListener('pointerdown', (e) => { if (e.button === 0) startAim(e, el, 'potion'); });
     });
+    // 药水栏点击直接使用兜底（2026-09-16 留言 #11：普通战药水栏点不动）
+    body.querySelectorAll('.bt-potion:not([data-potion-aim="1"]):not(.off)').forEach(el => {
+      el.addEventListener('pointerdown', (e) => {
+        if (e.button !== 0) return;
+        const uid = el.dataset.uid;
+        if (uid) usePotion(uid);
+      });
+    });
     // —— 指向施法（炉石/杀戮尖塔式）：按住指向卡轻微拎起，弯曲箭头跟随指针 ——
     //    指向敌人 = 红色箭头，指向自己（立绘）= 绿色箭头；松手在目标身上即打出，
     //    松手没目标自动取消回手牌（轻点锁定流程已退役）。
@@ -459,10 +501,11 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
     // 单位区常驻层挂载 + 差分更新（批次B）：玩家/随从/敌人节点跨渲染复用（须在手牌层之前，
     // 复用其 handSuspended 判定「战斗中弹层挂起 vs 战斗已收尾」）
     const unitMounts = mountUnitLayer(body, snapshot.battleToken);
-    if (unitMounts) updateUnits(unitMounts, snapshot, { isBoss: opts.isBoss, pendingItem, slamPending });
+    if (unitMounts) updateUnits(unitMounts, snapshot, { isBoss: opts.isBoss, pendingItem, slamPending, dartPending });
     if (SDT.Art.cutoutFigures) SDT.Art.cutoutFigures(body);
     attachUnitFrames(body);   // 批次D：玩家立绘切序列帧（无帧集/降动效自动跳过）
     mountHandLayer(body, tip, snapshot.battleToken);
+    showBattleStartEquipFlash(snapshot.equipped);
     const handAnim = updateHand(snapshot, prevView, pageGroups, animEvents, { spellBonus, mode });
     // 牌局动画：离场克隆飞行 / 手牌区随回合显隐 / 能量与牌堆脉冲
     const anim = animateBattleTransition(prevView, body, animEvents, handAnim.flightMs);
@@ -607,7 +650,7 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
     if (!handLayer) return { flightMs: 0 };
     const evs = events || [];
     const drawn = new Set(), played = new Set();
-    evs.forEach(ev => { if (ev.kind === 'draw') drawn.add(ev.uid); else if (ev.kind !== 'shuffle') played.add(ev.uid); });
+    evs.forEach(ev => { if (ev.kind === 'draw') drawn.add(ev.uid); else if (ev.kind !== 'shuffle' && ev.kind !== 'surge') played.add(ev.uid); });
     drawn.forEach(u => played.delete(u));   // 打出又回手（不朽斩）：同帧两事件抵消不演
     const ctx = {
       infusingNow: !!snapshot.infusing, infusing: snapshot.infusing,
@@ -844,7 +887,7 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
     // 已穿戴装备（2026-09-09 老板 #9）：名称 + 说明 tooltip；带限定技能的可点击发动
     const equipsHTML = (equipped || []).map(e => e.skill
       ? `<button class="sts-equip has-skill${e.used ? ' used' : ''}" data-act="btEquipSkill" data-uid="${escAttr(e.uid)}"
-          title="${escAttr(`【${e.name}】${e.desc}${e.used ? '（限定技能本场已用过）' : '——点击发动限定技能'}`)}">[[icon:tools]] ${esc(e.name)}${e.used ? '' : ' [[icon:bolt]]'}</button>`
+          title="${escAttr(`【${e.name}】${e.desc}${e.used ? '（主动技能本场已用过）' : '——点击发动主动技能'}`)}">[[icon:tools]] ${esc(e.name)}${e.used ? '' : ' [[icon:bolt]]'}</button>`
       : `<span class="sts-equip" title="${escAttr(`【${e.name}】${e.desc}`)}">[[icon:tools]] ${esc(e.name)}</span>`).join('');
     setSection(selfParts.equips, sig, 'equips', equipsHTML);
     selfParts.equips.style.display = equipsHTML ? '' : 'none';
@@ -871,8 +914,13 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
       rec.slot.dataset.allyI = i;
       setSection(rec.parts.fig, rec.sig, 'fig', SDT.Icons.img('runner'));
       setSection(rec.parts.head, rec.sig, 'head', `<b>${esc(a.name)}</b>`);
-      setUnitHP(rec.parts, rec.sig, a.hp, a.maxHp, !rec.sig.init);
-      setSection(rec.parts.stats, rec.sig, 'stats', `[[icon:swords]] ${a.atk}`);
+      // 无攻血场面物件（封印肢体，同天国之门口径）：不显示血条与攻击力
+      if (a.statless) {
+        setSection(rec.parts.stats, rec.sig, 'stats', '');
+      } else {
+        setUnitHP(rec.parts, rec.sig, a.hp, a.maxHp, !rec.sig.init);
+        setSection(rec.parts.stats, rec.sig, 'stats', `[[icon:swords]] ${a.atk}`);
+      }
       setSection(rec.parts.chips, rec.sig, 'chips', '');
       rec.sig.init = true;
       ordered.push(rec);
@@ -900,6 +948,10 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
         // 常驻节点只绑一次点击：砸击/药水点选（需求 #9 / 药水栏）——点击时读实时快照防闭包过期
         slot.addEventListener('click', () => {
           const snap = getSnapshot();
+          if (snap.dartPending) {
+            if (!slot.classList.contains('dead')) resolveDart(slot.dataset.eidx);
+            return;
+          }
           if (snap.slamPending) {
             if (!slot.classList.contains('dead')) resolveSlam(slot.dataset.eidx);
             return;
@@ -924,7 +976,7 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
       slot.classList.toggle('is-boss', !!(ctx.isBoss || f.affix));
       slot.classList.toggle('dead', !!f.dead);
       slot.classList.toggle('aegis', !!immune);
-      slot.classList.toggle('can-target', !!(ctx.pendingItem || ctx.slamPending) && !f.dead);
+      slot.classList.toggle('can-target', !!(ctx.pendingItem || ctx.slamPending || ctx.dartPending) && !f.dead);   // dartPending：血毒双镖二段点选也高亮（2026-09-17 留言）
       slot.dataset.foeId = f.id || f.name;
       slot.dataset.eidx = idx;
       slot.title = aff ? aff.name + '：' + aff.desc : '';
@@ -1224,9 +1276,11 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
     const ovR = ov.getBoundingClientRect();
     const played = new Set(), drawn = new Set();
     const shuffles = [];   // 洗入牌动画事件（addDeckCard：「将 X 洗入牌库」）
+    const surges = [];     // 法力奔涌逐发演出事件（castRandomSpells 慢动作）
     events.forEach(ev => {
       if (ev.kind === 'draw') drawn.add(ev.uid);
       else if (ev.kind === 'shuffle') shuffles.push(ev);
+      else if (ev.kind === 'surge') surges.push(ev);
       else played.add(ev.uid);
     });
     drawn.forEach(u => played.delete(u));   // 打出又回手（不朽斩）：同帧两事件抵消不演
@@ -1257,6 +1311,40 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
           flightMs = Math.max(flightMs, 1200 + i * 250);
         });
       }
+    }
+    // —— 法力奔涌慢动作（2026-09-16 留言「应当慢动作打出4张卡牌」）：每发一张横幅报目 +
+    //    法术卡面在手牌区上方站定一拍，再飞向目标敌人；逐发错峰（发间隔 850ms），
+    //    看清每一发打的是什么招式 ——
+    if (surges.length) {
+      const STEP = 850, FLY = 640;
+      surges.forEach(ev => {
+        const delay = 180 + ((ev.i || 1) - 1) * STEP;
+        const wave = document.createElement('div');
+        wave.className = 'surge-wave';
+        wave.innerHTML = `<b>法力奔涌 · 第 ${ev.i || 1}/${ev.n || surges.length} 发</b><span>【${esc(ev.name || '?')}】→ ${esc(ev.targetName || '')}</span>`;
+        wave.style.animationDelay = `${delay}ms`;
+        ov.appendChild(wave);
+        setTimeout(() => wave.remove(), delay + STEP + 200);
+        const clone = document.createElement('div');
+        clone.className = 'sts-cardfly surge-fly';
+        const sx = ovR.width / 2 - 66, sy = ovR.height * 0.6;
+        clone.style.cssText = `left:${sx}px;top:${sy}px;width:132px;height:180px`;
+        clone.innerHTML = SDT.Cards.cardHTML ? SDT.Cards.cardHTML(ev.card || { name: ev.name }, 'sm') : esc(ev.name || '');
+        ov.appendChild(clone);
+        const foeEl = (ev.target != null && ev.target >= 0) ? body.querySelector(`.sts-foe[data-eidx="${ev.target}"]`) : null;
+        const fr = foeEl ? foeEl.getBoundingClientRect() : null;
+        const dx = fr ? (fr.left + fr.width / 2) - (sx + 66) : 0;
+        const dy = fr ? (fr.top + fr.height / 2) - (sy + 90) : -ovR.height * 0.32;
+        const anim = clone.animate([
+          { transform: 'translate(0,14px) scale(.7)', opacity: 0 },
+          { transform: 'translate(0,0) scale(1)', opacity: 1, offset: 0.16 },
+          { transform: 'translate(0,0) scale(1)', opacity: 1, offset: 0.62 },
+          { transform: `translate(${dx}px,${dy}px) scale(.32)`, opacity: 0 },
+        ], { duration: FLY, delay, easing: 'cubic-bezier(.3,.7,.4,1)', fill: 'both' });
+        anim.onfinish = () => clone.remove();
+        setTimeout(() => clone.remove(), delay + FLY + 300);
+        flightMs = Math.max(flightMs, delay + FLY);
+      });
     }
     // —— 出牌队列演出（批次F，STS2 NCardPlayQueue）：同一渲染帧打出多张时，克隆体先飞到
     //    手牌区上方的队列位横排站定（按结算次序错开入场），停顿一拍再依次飞向去处——

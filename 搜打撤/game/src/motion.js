@@ -51,7 +51,11 @@ function overlayIn(element) {
 function hit(element, self = false) {
   if (!canAnimate(element)) return false;
   const previous = activeHits.get(element);
-  if (previous && typeof previous.stop === 'function') previous.stop();
+  if (previous && typeof previous.stop === 'function') {
+    // 2026-09-18 实测：元素已离开渲染树时 motion 的 stop() 内部 commitStyles 会抛
+    // InvalidStateError（Target element is not rendered），异常沿调用链打断战斗渲染——吞掉
+    try { previous.stop(); } catch (_) { /* 元素已卸载，动画随节点销毁 */ }
+  }
   const x = self ? [0, -7, 6, -4, 2, 0] : [0, 9, -7, 5, -2, 0];
   // 位移之外加极轻的旋转和纵向压缩，命中方向更清楚；幅度短暂且回到原位。
   const rotate = self ? [0, -1.2, 0.9, -0.5, 0.2, 0] : [0, 1.4, -1, 0.6, -0.2, 0];

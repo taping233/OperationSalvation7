@@ -204,8 +204,8 @@ function configureGameRuntime(hooks) {
   // 背包能否再收这张卡：同名堆未满 → 并入不占新格；堆已满 → 需要一个空格
   function canReceiveCard(card) {
     if (!card) return false;
-    const owned = game.ownedCards.filter(o => o.card.name === card.name).length;
-    if (owned < stackCapOf(card)) return true;
+    const owned = game.ownedCards.filter(o => !o.safe && !o.stored && o.card.name === card.name).length;
+    if (owned > 0 && owned % stackCapOf(card) !== 0) return true;
     return canAcceptCard(card);
   }
   function usedSlots() { return game.inventory.length + cardStacks(false).length; }
@@ -352,7 +352,7 @@ function configureGameRuntime(hooks) {
   function saveGame() {
     // v0.21：只有真正开局后（runActive）才写对局存档；在基地/标题界面不产生对局文件
     // 只保存稳定节点；动画中可能仍停在线段中间，退出/刷新后必须回到上一个落点。
-    if (!game.runActive || game.state === 'title' || game.state === 'done' || game.state === 'boot' || game.state === 'moving') return;
+    if ((!game.runActive && !game.nestActive) || game.state === 'title' || game.state === 'done' || game.state === 'boot' || game.state === 'moving') return;
     if (!activeSlot) return;
     syncPlayTime();
     assertZones();
@@ -383,6 +383,15 @@ function configureGameRuntime(hooks) {
         // 战斗中退出/关窗（beforeunload）：把战斗局面一并写入，读档后续打而非重开
         battle: (game.battleActive && SDT.Battle && typeof SDT.Battle.serialize === 'function')
           ? SDT.Battle.serialize() : null,
+        // 龙巢进行中状态（2026-09-18 断点续战）
+        nestActive: !!game.nestActive,
+        nestPos: game.nestPos == null ? 0 : game.nestPos,
+        cardBox: game.cardBox || [],
+        nestRunes: game.nestRunes || [],
+        nestEquipped: game.nestEquipped || [],
+        nestBossName: game.nestBossName || null,
+        nestTargetedBox: game.nestTargetedBox || 0,
+        pendingRunePick: game.pendingRunePick || null,
       });
   }
 
@@ -493,6 +502,24 @@ function configureGameRuntime(hooks) {
     const safeIdx = layer?.logical?.[requestedIdx]
       ? requestedIdx
       : (layer?.entrances?.[0] ?? clampIndex(requestedIdx, layer?.logical?.length || 1, 0));
+    if (s.nestActive) {
+      // 龙巢进行中存档：恢复牌盒/符文/进度并直接回到巢穴地图（2026-09-18 断点续战）
+      game.nestActive = true;
+      game.nestPos = s.nestPos || 0;
+      game.cardBox = s.cardBox || [];
+      game.nestRunes = s.nestRunes || [];
+      game.nestEquipped = s.nestEquipped || [];
+      game.nestBossName = s.nestBossName || '？？？';
+      game.nestTargetedBox = s.nestTargetedBox || 0;
+      game.pendingRunePick = s.pendingRunePick || null;
+      game.nestBoss = null;   // 巢主在开战时重新降临（boss 定义不序列化）
+      UI.log(`[[icon:download]] 已读取【档位 ${slot}】存档——龙巢远征继续`, 'ok');
+      window.SDT.Nest.renderNestMap();
+      if (s.battle && SDT.Battle && typeof SDT.Battle.restore === 'function') {
+        if (SDT.Battle.restore(game, s.battle)) saveGame();
+      }
+      return true;
+    }
     enterLayer(safeLayer, safeIdx);
     SDT.Sound.music('board');
     UI.log(`[[icon:download]] 已读取【档位 ${slot}】存档，直接回到上一局未结束的对局`, 'ok');
@@ -540,10 +567,7 @@ function configureGameRuntime(hooks) {
       }
       if (effect.extraSha) UI.log(`[[icon:tools]] <b>变形机器人</b>：起始背包额外增加 <b>2 张【初始攻击】</b>（共 ${shaN} 张）`, 'ok');
     }
-    // 火球为初始牌（2026-09-06）：每局固定携带 1 张，不随机掉落/发现/上架
-    if (fireball && !effect.shaToFireball) {
-      game.ownedCards.push({ uid: newUid(), card: { ...fireball }, brought: 1 });
-    }
+    // 2026-09-16 留言：初始不发火球（火球改为衍生稀有度）
   }
 
   // 把出发准备页选择的仓库卡牌带入背包（picks: 卡名 => 张数）
@@ -577,6 +601,7 @@ function configureGameRuntime(hooks) {
     game.mode = MODES[mode] ? mode : 'standard';
     applyModeRules();
     game.runActive = true;    // v0.21：从这一刻起才写对局存档
+    game.battleActive = false;   // 新开局必须与旧战斗会话切割（防旧战斗快照混入新档——2026-09-18 实测）
     setLobby(false);          // 进入棋盘：恢复左侧栏
     game.inventory = [];
     game.ownedCards = [];
@@ -613,7 +638,7 @@ function configureGameRuntime(hooks) {
     UI.log(`欢迎来到<b>代号7</b>：本次玩法【<b>${modeCfg().name}</b>】——${modeCfg().ckpt}`, 'sys');
     UI.log('点击相邻节点前进，落脚触发事件；层间闸门通往更深区域，终层可完成撤离', 'sys');
     grantStarterSha();
-    UI.log(`[[icon:cards]] 随身携带初始牌【<b>初始攻击</b>】×${MAP.rules.starterSha}、【<b>火球</b>】×1（固定携带 · 不可入库 / 安全格）`, 'sys');
+    UI.log(`[[icon:cards]] 随身携带初始牌【<b>初始攻击</b>】×${MAP.rules.starterSha}（不可入库 / 安全格）`, 'sys');   // 2026-09-16 留言「初始不给火球」：欢迎语去掉火球（已不再发放）
     applyDeployPicks(picks);    // 出发准备页选择的仓库卡牌
     // 需求 #1：下一次出发后，基地消耗口袋清空（未复原的卡牌随之消散）
     if (SDT.Base.data.pocket.length) {
@@ -630,11 +655,8 @@ function configureGameRuntime(hooks) {
     } else if (pet) {
       UI.log(`[[icon:paw]] 携带宠物<b>「${esc(pet.name)}」</b>：${esc(pet.desc.replace(/^携带效果：/, ''))}`, 'ok');
     }
-    const reserve = SDT.Base.takeReserveCoins();
-    if (reserve) {
-      game.coins += reserve;
-      UI.log(`[[icon:coin]] 带上基地储备 <b>${reserve}</b> 币（卖出仓库物品所得）`, 'coin');
-    }
+    // Item 18（2026-09-16 老板定版）：储备币不进局——留在基地用于孵蛋与基地建设，
+    // 局内币与基地储备币彻底分开（原「出发时全部随身带走」口径作废）
     // 四层图从第一层的多个入口之一开始；这是起点选择，不消耗行动力。
     const l1 = game.layerData[0];
     const startIdx = l1.entrances[Math.floor(Random.random('gameplay') * l1.entrances.length)] || 0;

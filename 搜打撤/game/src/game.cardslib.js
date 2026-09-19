@@ -206,7 +206,8 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
     // 牌库页去动画开关（2026-09-08 老板拍板）：期间禁全部动画/过渡/流光/hover 特效，
     // CSS 侧规则见 cards.css 的 body.cardlib-open 段
     document.body.classList.add('cardlib-open');
-    libCards = SDT.Cards.all();
+    // 员工通行证A是碎片合成材料（特殊收藏品），不进卡牌库（2026-09-16 留言「在卡牌库中删除员工通行证a」）
+    libCards = SDT.Cards.all().filter(c => c.id !== 'tt-token-color');
     // 库内容刷新即失效筛选缓存：防止卡牌增删/改卡后命中旧缓存
     // （旧缓存键只含 libCards.length，同张数的内容变化会读到陈旧列表）
     _libFilteredCache = null;
@@ -226,7 +227,7 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
           <div class="library-tools"><input id="cardSearch" class="clib-search" placeholder="搜索名称 / 效果…" value="${escAttr(libFilter.q)}"><select id="libSort" class="pg-select" title="排序"><option value="cost"${libFilter.sort === 'cost' ? ' selected' : ''}>按费用排序</option><option value="name"${libFilter.sort === 'name' ? ' selected' : ''}>按名称排序</option></select><button class="hs-btn gold" data-act="newCard">＋ 制作新卡</button><button class="hs-btn" data-act="exportCards">[[icon:upload]] 导出</button><button class="hs-btn" data-act="importCards">[[icon:download]] 导入</button></div>
         </header>
         <div class="clib-main">
-          <aside class="library-sidebar"><div class="library-filter-head"><b>筛选档案</b><button class="hs-btn sm" data-act="libClearFilter">清空</button></div><div class="clib-tabs">${tabs}</div><select id="libRar" class="pg-select library-select" title="按稀有度筛选"><option value="全部">全部稀有度</option>${RARITIES.map(r => `<option value="${r}"${libFilter.rar === r ? ' selected' : ''}>${r}</option>`).join('')}</select><select id="libCls" class="pg-select library-select" title="按职业筛选"><option value="全部职业">全部职业</option><option value="通用"${libFilter.cls === '通用' ? ' selected' : ''}>通用</option>${[...new Set(libCards.map(c => c.cls).filter(Boolean))].sort().map(c => `<option value="${escAttr(c)}"${libFilter.cls === c ? ' selected' : ''}>${esc(characterName(c))}</option>`).join('')}</select><div class="library-preview" id="libPreview" aria-live="polite"></div></aside>
+          <aside class="library-sidebar"><div class="library-filter-head"><b>筛选档案</b><button class="hs-btn sm" data-act="libClearFilter">清空</button></div><div class="clib-tabs">${tabs}</div><select id="libRar" class="pg-select library-select" title="按稀有度筛选"><option value="全部">全部稀有度</option>${RARITIES.map(r => `<option value="${r}"${libFilter.rar === r ? ' selected' : ''}>${r}</option>`).join('')}</select><select id="libCls" class="pg-select library-select" title="按职业筛选"><option value="全部职业">全部</option>   <!-- 2026-09-16 留言：显示文案改「全部」（值保持兼容旧存档筛选状态） --><option value="通用"${libFilter.cls === '通用' ? ' selected' : ''}>通用</option>${[...new Set(libCards.map(c => c.cls).filter(Boolean))].sort().map(c => `<option value="${escAttr(c)}"${libFilter.cls === c ? ' selected' : ''}>${esc(characterName(c))}</option>`).join('')}</select><div class="library-preview" id="libPreview" aria-live="polite"></div></aside>
           ${libGridHTML()}
         </div>
       </div>`, 'page');

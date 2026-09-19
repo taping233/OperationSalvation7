@@ -55,11 +55,13 @@ export function parsePoolNoun(raw, myClass) {
     s = s.replace(/^能施加诅咒的?/, '');
     preds.push(CURSE_CAPABLE);
   }
-  if (/^(其它|其他)职业/.test(s)) { s = ''; preds.push(c => !!c.cls && !!myClass && c.cls !== myClass); }
+  if (/^(其它|其他)职业/.test(s)) { s = ''; preds.push(c => !!c.cls && !!myClass && c.cls !== myClass && c.type !== '能力卡'); }   // 江湖救急只发现其它职业的招式与装备（2026-09-16 留言）
   else if (/^本职业/.test(s)) { s = ''; preds.push(c => !!c.cls && c.cls === myClass); }
   if (/^招式/.test(s)) { s = s.replace(/^招式/, ''); preds.push(c => c.type === '武术'); }
-  // 复合池「传说或能力」（神秘召唤）：指定稀有度 或 能力卡类型
-  const om = s.match(/^(传说|史诗|稀有|古朴)或能力$/);
+  // 复合池「传说或能力」（神秘召唤）：指定稀有度 或 能力卡类型。
+  // 「发现一张传说或能力卡」的名词会被上层后缀匹配吃掉「能力卡」只剩「传说或」，
+  // 因此结尾的「能力/或」都要兼容（2026-09-16 留言「神秘召唤卡池错误」修复）
+  const om = s.match(/^(传说|史诗|稀有|古朴)(?:或能力卡|或能力|或)?$/);
   if (om) { s = ''; preds.push(c => c.rarity === om[1] || c.type === '能力卡'); }
   const typeKey = ['武术', '法术', '装备', '能力卡', '道具'].find(t => s === t);
   if (typeKey) { s = ''; preds.push(c => c.type === typeKey); }
@@ -105,6 +107,7 @@ export function createEffectSteps(deps) {
     queueChoice, setStealthStrike, setNextSpellTwice,
     registerTurnStartText,
     getInfuseFuels, getPriceOfLastDrawn, dealAoeFixed, replaceShaInDeck,
+    armorMul,
     summonAlly, setExtraTurn, setDeathSave, queuePouchCast,
     registerGrowthCard, unlockSeal, randomAcquired, handCurseSpecs, queueSwapCostDiscover,
   } = deps;
@@ -423,8 +426,10 @@ export function createEffectSteps(deps) {
     {
       id: 'dmg.direct', gate: 'always', label: '造成 N 点固定/法术/真实/攻击伤害（结构化已结算时跳过）',
       // 卡面伤害词条已结算过时跳过，防双倍；「消耗该牌时」前缀句只在消耗触发点结算。
+      // 「连开 N 枪」延迟段由 dmg.fourShots 专责结算（2026-09-16 修 09-13 留言「正午决战有bug」：
+      // 此前本步骤抢先吃掉「每枪造成2点固定伤害」，四枪只打出一枪 2 点）。
       // 位置在诅咒处理之后：流血药水类「造成 N 点伤害，附加流血」需要伤害与诅咒都结算
-      when: (ctx) => (!ctx.flags.structuredHit && !/该牌时/.test(ctx.desc))
+      when: (ctx) => (!ctx.flags.structuredHit && !/该牌时/.test(ctx.desc) && !/连开\s*[一二三四五六七八九十\d]+\s*枪/.test(ctx.desc))
         ? ((sp => sp ? [null, sp[1], '法术'] : null)(ctx.desc.match(/造成\s*(\d+)\s*点法(?:术)?伤/))
           || ctx.desc.match(/造成\s*(\d+)\s*点(?:\s*(固定|法术|真实|攻击))?\s*伤害/))
         : null,
@@ -488,6 +493,9 @@ export function createEffectSteps(deps) {
           const stolen = t.atk - 1;
           t.atk = 1;
           t._stealRestore = (t._stealRestore || 0) + stolen;
+          t._stealRestoreTurn = ctx.turn;
+          t._stealRestoreTurn = ctx.turn;
+          t._stealRestoreTurn = ctx.turn;
           combat.addBlessing(ctx.pstat, 'atkUp', stolen, 1);
           log(`[[icon:arrow]] <b>偷取攻击</b>：<b>${esc(t.name)}</b> 的攻击力被压到 1，你获得攻击力 +${stolen}（各自 1 回合后还原）`, 'sys');
           ctx.did = true;
@@ -729,7 +737,12 @@ export function createEffectSteps(deps) {
     {
       id: 'def.armor', gate: 'always', label: '获得 N 点护甲 / +N 甲',
       when: (ctx) => ctx.desc.match(/获得\s*(\d+)\s*点?\s*护甲/) || ctx.desc.match(/\+\s*(\d+)\s*甲/),
-      run: (ctx, m) => { ctx.armored = true; ctx.pdef.armor += +m[1]; log(`[[icon:plate]] 获得 ${m[1]} 点护甲`, 'sys'); ctx.did = true; },
+      run: (ctx, m) => {
+        const mul = (typeof armorMul === 'function') ? armorMul() : 1;   // 防御符文：获得护甲翻倍
+        const n = Math.round(+m[1] * mul);
+        ctx.armored = true; ctx.pdef.armor += n;
+        log(`[[icon:plate]] 获得 ${n} 点护甲${mul > 1 ? '（防御符文翻倍）' : ''}`, 'sys'); ctx.did = true;
+      },
     },
     {
       id: 'def.shield', gate: 'always', label: '获得 N 点护盾',
@@ -822,8 +835,8 @@ export function createEffectSteps(deps) {
       },
     },
     {
-      id: 'cast.nextSpellTimes', gate: 'fresh', label: '注能打出时「下一张法术施放 N 次」（元素风暴）',
-      when: (ctx) => (ctx.flags.infused ? ctx.desc.match(/下一张(?:法术|招式)?施放\s*(\d+)\s*次/) : null),
+      id: 'cast.nextSpellTimes', gate: 'fresh', label: '「下一张法术施放 N 次」（元素风暴，2026-09-16 老板：删注能，直接打出即注册）',
+      when: (ctx) => ctx.desc.match(/下一张(?:法术|招式)?施放\s*(\d+)\s*次/),
       run: (ctx, m) => {
         if (typeof setNextSpellTwice !== 'function') return;
         setNextSpellTwice(+m[1]);
@@ -921,6 +934,21 @@ export function createEffectSteps(deps) {
           log(`[[icon:skull]] <b>${esc(ctx.curseTarget.name)}</b> 中毒翻倍至 ${ctx.curseTarget.status.poison} 层并立即触发 ${burst.dealt} 点毒伤`, 'sys');
           ctx.did = true;
         }
+      },
+    },
+    {
+      id: 'curse.poisonBurstN', gate: 'fresh', label: '立即触发 N 次目标全部毒伤（毒爆）',
+      when: (ctx) => ctx.desc.match(/立即触发\s*(\d+)\s*次[^。]*?毒伤/),
+      run: (ctx, m) => {
+        if (!ctx.curseTarget) return;
+        const times = Math.max(1, +m[1]);
+        let total = 0;
+        for (let i = 0; i < times; i++) {
+          const burst = burstPoison(ctx.curseTarget) || { dealt: 0 };   // 中毒层数不衰减，每次引爆都吃满全部层数
+          total += burst.dealt;
+        }
+        log(`[[icon:skull]] <b>${esc(ctx.curseTarget.name)}</b> 毒伤引爆 ${times} 次，共 <b>${total}</b> 点固定伤害（${ctx.curseTarget.status.poison || 0} 层中毒保留）`, 'sys');
+        ctx.did = true;
       },
     },
     {

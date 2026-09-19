@@ -1,7 +1,15 @@
 {
-  "version": 18,
+  "version": 26,
   "note": "实机卡库定版覆盖批次数据（同步自网页版实机卡库）。由 scripts/sync-cards-from-live.mjs 生成，勿手改；重跑该脚本整份重写。",
   "changelog": [
+    "2026-09-18 澄清批次（v26）：江湖救急回归本意「随机直接给3张临时卡牌」（撤销 v25 的「发现3张」措辞与面板流；回合开始消耗不变）",
+    "2026-09-18 留言落实批次（v25）：旋风斩 1→2 费；江湖救急「获取3张」改「发现3张」临时卡（发现面板逐张挑选，回合开始消耗）",
+    "2026-09-17 留言落实批次（v24）：火球稀有度改衍生（补 v23 缺失条目）；自然法杖/灵符稀有度改稀有；装备描述「限定技能」改「主动技能」（迷之匣同步）；删除灭魔之剑（tt3-dark-blade 整卡退役）",
+    "2026-09-16 实机反馈批次（v23）：火球改衍生稀有度且开局不再携带；删除桃（tt-peach 整卡退役）；修复 物资格路由/搜刮点只出资源卡/影蚀攻击还原/盗匪宝箱2个/江湖救急排除能力卡/整理界面全部带走+智能一键",
+    "2026-09-16 修正批次（v22）：深渊主宰·妲莉薇特改为 2 费可打出（旧日再临走打出结算：抽到6张/免疫诅咒/能量上限+1/法伤+1/可注能与必须注能招式均视为已注能/召唤4名无攻血封印肢体）；治愈回复 4→5 点生命；元素风暴删注能直接打出",
+    "2026-09-16 定版重做（v21）：邪渊主宰(tt8-hero-sealer)→受缚之残影——深海封印：开局洗入本牌+封印肢体1-4，5 张封印单卡无效果且无法打出，手牌集齐后破封化为深渊主宰·妲莉薇特（旧日再临）；封印肢体1-4 改为无效果封印单卡；新增 tt8-abyss-sovereign 深渊主宰·妲莉薇特（棱彩能力卡，化形形态）",
+    "2026-09-16 需求批次（v20）：破釜沉舟（2费稀有武术，末手触发2次；末手判定修正——背包砸击常驻令牌不计入手牌）+ 毒爆（2费史诗法术，毒伤引爆2次）",
+    "2026-09-16 需求批次（v19）：余烬爆裂（2费稀有法术，击杀再施放）+ 腐化之种（1费史诗法术，中毒死亡转移）；两句式均已实装战斗结算（battle.core 击杀连锁 + poisonLegacy 转移）",
     "2026-09-13 删除恶魔之力 tt7-drunksong（同名双版收口只留 cc-demon，老板拍板）：从覆盖批次移入退役名单，版本 18 重播清旧档残卡；退役名单改为单调累积（脚本不再整份重写丢掉历史退役）",
     "2026-09-13 实机卡库同步（v17）：覆盖 18 / 新增 9 / 退役 1",
     "2026-09-12 实机卡库同步（v16）：覆盖 4 / 新增 0 / 退役 0",
@@ -65,6 +73,28 @@
     },
     {
       "cost": 2,
+      "desc": "对全体敌人造成 2 点法术伤害；若击杀敌人，再施放一次。",
+      "dmg": 2,
+      "dmgType": "spell",
+      "id": "cc-ember-burst",
+      "name": "余烬爆裂",
+      "rarity": "稀有",
+      "type": "法术",
+      "value": 3
+    },
+    {
+      "cost": 2,
+      "desc": "攻（+3）；若本牌为最后一张手牌，效果触发 2 次。",
+      "dmg": 3,
+      "dmgType": "attack",
+      "id": "cc-last-stand",
+      "name": "破釜沉舟",
+      "rarity": "稀有",
+      "type": "武术",
+      "value": 3
+    },
+    {
+      "cost": 2,
       "desc": "造成9点法术伤害，获得1张「二次爆炸」。",
       "dmg": 9,
       "dmgType": "spell",
@@ -86,6 +116,15 @@
       "value": 5
     },
     {
+      "cost": 2,
+      "desc": "立即触发 2 次目标全部毒伤。",
+      "id": "cc-poison-burst",
+      "name": "毒爆",
+      "rarity": "史诗",
+      "type": "法术",
+      "value": 4
+    },
+    {
       "cost": 1,
       "desc": "本回合每打出一张其他招式，造成2点固定伤害（触发次数＝本回合已打出的招式数）。",
       "dmg": 2,
@@ -95,6 +134,15 @@
       "rarity": "史诗",
       "type": "武术",
       "value": 3
+    },
+    {
+      "cost": 1,
+      "desc": "对 1 名敌人附加 2 层中毒；其死亡时，将中毒层数转移给另一名敌人。",
+      "id": "cc-rot-seed",
+      "name": "腐化之种",
+      "rarity": "史诗",
+      "type": "法术",
+      "value": 4
     },
     {
       "cost": 0,
@@ -199,6 +247,17 @@
       "value": 4
     },
     {
+      "cost": 1,
+      "desc": "回复 5 点生命，净化自身",
+      "dmg": 0,
+      "heal": 5,
+      "id": "tt3-holy-water",
+      "name": "治愈",
+      "rarity": "古朴",
+      "type": "法术",
+      "value": 2
+    },
+    {
       "cost": 0,
       "desc": "回复 99 点生命。",
       "dmg": 0,
@@ -212,7 +271,7 @@
     },
     {
       "cost": 0,
-      "desc": "限定技能：发现两张随机招式，交换其费用。",
+      "desc": "主动技能：发现两张随机招式，交换其费用。",
       "dmg": 0,
       "id": "tt3eq-mistbox",
       "name": "迷之匣",
@@ -253,6 +312,18 @@
       "unrandom": true
     },
     {
+      "cls": "法师",
+      "cost": 1,
+      "desc": "下一张法术施放 2 次。",
+      "dmg": 0,
+      "id": "tt7-elementstorm",
+      "name": "元素风暴",
+      "rarity": "职业",
+      "type": "法术",
+      "value": 3,
+      "unrandom": true
+    },
+    {
       "armor": 12,
       "cls": "战士",
       "cost": 2,
@@ -270,8 +341,57 @@
     {
       "cls": "降临者",
       "cost": 2,
+      "desc": "旧日再临：抽牌直到有 6 张手牌；免疫诅咒，能量上限 +1，法伤 +1，所有可注能与必须注能的招式均视为已注能；召唤 4 名封印肢体。",
+      "hero": true,
+      "id": "tt8-abyss-sovereign",
+      "name": "深渊主宰·妲莉薇特",
+      "rarity": "棱彩",
+      "sellable": false,
+      "type": "能力卡",
+      "unrandom": true,
+      "value": 8
+    },
+    {
+      "cost": 0,
+      "desc": "受缚之残影的封印肢体。入手时无效果，无法打出；集齐 5 张封印之牌后破除封印。",
+      "id": "tt8-curseimmune",
+      "name": "封印肢体1",
+      "rarity": "棱彩",
+      "sellable": false,
+      "tokenOf": "tt8-hero-sealer",
+      "type": "生物",
+      "unrandom": true,
+      "value": 8
+    },
+    {
+      "cost": 0,
+      "desc": "受缚之残影的封印肢体。入手时无效果，无法打出；集齐 5 张封印之牌后破除封印。",
+      "id": "tt8-energycap",
+      "name": "封印肢体2",
+      "rarity": "棱彩",
+      "sellable": false,
+      "tokenOf": "tt8-hero-sealer",
+      "type": "生物",
+      "unrandom": true,
+      "value": 8
+    },
+    {
+      "cost": 0,
+      "desc": "受缚之残影的封印肢体。入手时无效果，无法打出；集齐 5 张封印之牌后破除封印。",
+      "id": "tt8-healplus",
+      "name": "封印肢体4",
+      "rarity": "棱彩",
+      "sellable": false,
+      "tokenOf": "tt8-hero-sealer",
+      "type": "生物",
+      "unrandom": true,
+      "value": 8
+    },
+    {
+      "cls": "降临者",
+      "cost": 2,
       "desc": "寂灭苍穹：法伤 +1，本局对战中，每消耗 1 张卡牌，施放 1 次‘火球’。",
-      "dmg": 0,
+      "hero": true,
       "id": "tt8-hero-descender",
       "name": "充能火山",
       "rarity": "古朴",
@@ -296,11 +416,10 @@
     {
       "cls": "降临者",
       "cost": 2,
-      "desc": "深渊降焰：法伤 +1，每消耗 1 张卡牌，施放 1 次火球。",
-      "dmg": 0,
+      "desc": "深海封印：对战开始时，将本牌与四张「封印肢体」洗入牌库；手牌中集齐这 5 张封印之牌后破除封印，化为深渊主宰·妲莉薇特。无法打出。",
       "hero": true,
       "id": "tt8-hero-sealer",
-      "name": "邪渊主宰",
+      "name": "受缚之残影",
       "rarity": "棱彩",
       "sellable": false,
       "type": "能力卡",
@@ -320,10 +439,87 @@
       "type": "能力卡",
       "unrandom": true,
       "value": 8
+    },
+    {
+      "cost": 0,
+      "desc": "受缚之残影的封印肢体。入手时无效果，无法打出；集齐 5 张封印之牌后破除封印。",
+      "id": "tt8-nofocus",
+      "name": "封印肢体3",
+      "rarity": "棱彩",
+      "sellable": false,
+      "tokenOf": "tt8-hero-sealer",
+      "type": "生物",
+      "unrandom": true,
+      "value": 8
+    },
+    {
+      "cost": 1,
+      "desc": "造成 4 点法术伤害。",
+      "dmg": 4,
+      "dmgType": "spell",
+      "id": "tt3-fireball",
+      "name": "火球",
+      "rarity": "衍生",
+      "sellable": false,
+      "type": "法术",
+      "unrandom": true,
+      "value": 1
+    },
+    {
+      "cost": 0,
+      "desc": "主动技能：选择 1 张卡牌，下回合将其变为 0 费。",
+      "dmg": 0,
+      "id": "tt7-naturestaff",
+      "name": "自然法杖",
+      "rarity": "稀有",
+      "sellable": false,
+      "type": "装备",
+      "value": 3
+    },
+    {
+      "cost": 0,
+      "desc": "对战开始时，额外抽 2 张牌。",
+      "dmg": 0,
+      "draw": 2,
+      "id": "tt7-talisman",
+      "name": "灵符",
+      "rarity": "稀有",
+      "sellable": false,
+      "type": "装备",
+      "value": 3
+    },
+    {
+      "cls": "战士",
+      "cost": 2,
+      "desc": "攻（+1），目标为敌方全体。",
+      "dmg": 1,
+      "dmgType": "attack",
+      "id": "tt7-whirlwind",
+      "name": "旋风斩",
+      "rarity": "职业",
+      "sellable": false,
+      "type": "武术",
+      "unrandom": true,
+      "value": 3
+    },
+    {
+      "cls": "侠客",
+      "cost": 0,
+      "desc": "随机获得3张临时卡牌，回合开始时将其消耗。",
+      "dmg": 0,
+      "id": "cmtn1wnhhym",
+      "name": "江湖救急",
+      "rarity": "职业",
+      "sellable": false,
+      "type": "武术",
+      "unrandom": true,
+      "value": 3
     }
   ],
   "retire": [
     "tt6-timeskip",
-    "tt7-drunksong"
+    "tt7-drunksong",
+    "tt-peach",
+    "tt3-dark-blade"
   ]
 }

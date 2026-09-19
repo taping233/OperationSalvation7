@@ -15,6 +15,20 @@ const { BattleSession } = await import('../game/src/battle.core.js');
 
 const C = window.SDT.Cards;
 
+it('偷取的攻击力在一个回合结束后归还活着的敌人', async () => {
+  const g = makeGame([{ id: 'steal-test', name: '影噬', cost: 0, type: '武术', desc: '本回合偷取1名敌人的攻击力至1点。' }]);
+  BattleSession.start(g, [{ ...foeDef(), atk: 7 }], { isBoss: false });
+  await drain();
+  BattleSession.commands.playCard(g.ownedCards[0].uid, 0);
+  await drain();
+  expect(snap().foes[0].atk).toBe(1);
+  BattleSession.commands.endTurn();
+  await drain();
+  expect(snap().foes[0].atk).toBe(7);
+  BattleSession.commands.flee();
+  await drain(20);
+});
+
 beforeAll(() => {
   C.ensureSha();
   C.ensureStarters();

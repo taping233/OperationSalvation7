@@ -18,7 +18,7 @@ window.SDT = window.SDT || { Icons: { img: () => '' } };
 window.SDT.Icons.TYPE_ART = {};
 window.SDT.Sound = { music() {}, sfx() {}, setDucked() {} };
 window.SDT.MAP = {
-  rules: { battleEnergy: 99, battleHandMax: 99, bossDeckSize: 1, starterSha: 0, battleStartDraw: 5, battleTurnDraw: 0, diceSides: 6 },
+  rules: { battleEnergy: 99, battleHandMax: 99, bossDeckSize: 10, starterSha: 0, battleStartDraw: 5, battleTurnDraw: 3, diceSides: 6 },
   items: { rations: { name: '口粮' }, wood: { name: '木材' } },
 };
 await import('../game/src/cards.js');
@@ -104,12 +104,24 @@ describe('直接释放 / 直接施放类卡牌专项审计', () => {
   it('能力卡·无量仙剑·云风：抽5张后自动直接释放其中的武术（免费）', async () => {
     const hero = card('tt8-hero-sword');
     if (!/直接释放其中/.test(hero.desc || '')) { console.log('（运行时版本无直接释放词条，跳过）'); return; }
-    const fillers = Array.from({ length: 9 }, () => card('tt2-jianghu'));
+    // 普通战无法使用能力卡（2026-09-16 规则）→ 走 BOSS 编组流程实打。
+    // 2026-09-18：填充足的武术牌——原 9 张时英雄卡能否进开局手牌、以及打牌时牌库余量
+    // 都靠洗牌运气，卡池变化（v25）会让「直接释放了其中」时有时无；厚牌库让断言确定。
+    const fillers = Array.from({ length: 29 }, () => card('tt2-jianghu'));
     const g = makeGame([hero, ...fillers], '侠客');
-    BattleSession.start(g, [foeDef()], { isBoss: false, name: '直释审计' });
+    BattleSession.start(g, [foeDef()], { isBoss: true, name: '直释审计' });
+    await drain();
+    expect(snap().deckSelection, 'BOSS 战应先进入编组').toBeTruthy();
+    while (snap().deckSelection && snap().deckSelection.selected.length < Math.min(snap().deckSelection.need, snap().deckSelection.cards.length)) {
+      const next = snap().deckSelection.cards.find(c => !snap().deckSelection.selected.includes(c.uid));
+      if (!next) break;
+      BattleSession.commands.selectDeckCard(next.uid);
+    }
+    BattleSession.commands.confirmDeck();
     await drain();
     const uid = g.ownedCards[0].uid;
-    expect(snap().hand.includes(uid)).toBe(true);   // 能力卡应正常进手牌
+    for (let t = 0; t < 8 && !snap().hand.includes(uid); t++) { BattleSession.commands.endTurn(); await drain(); }
+    expect(snap().hand.includes(uid)).toBe(true);   // 能力卡在 BOSS 战正常进手牌（回合抽牌必到手）
     await playIt(g, uid, hero);
     expect(logsJoin(g)).toContain('直接释放了其中');   // 万剑归宗自动释放了抽到的武术
     const s = snap();
@@ -194,14 +206,23 @@ describe('直接释放 / 直接施放类卡牌专项审计', () => {
     expect(takeAsyncError()).toBeNull();
   });
 
-  it('法师锦囊：容器选 1 张直接施放（pouch）', async () => {
-    const g = makeGame([card('tt7-stratagem')], '法师');
-    BattleSession.start(g, [foeDef()], { isBoss: false, name: '直释审计' });
+  it('法师锦囊：空锦囊无效果；预存法术后打出选 1 释放（2026-09-16 定版）', async () => {
+    const pouch = card('tt7-stratagem');
+    const spell = card('tt3-fireball');
+    const g = makeGame([pouch, spell], '法师');
+    BattleSession.start(g, [foeDef()], { isBoss: false, name: '锦囊审计' });
     await drain();
-    await playIt(g, g.ownedCards[0].uid, card('tt7-stratagem'));
-    expect(logsJoin(g)).toContain('法师锦囊');
-    const s = snap();
-    expect(s.busy || s.actionQueueLength > 0).toBe(false);
+    // 空锦囊打出：无效果
+    BattleSession.commands.playCard(g.ownedCards[0].uid, 0);
+    await drain();
+    expect(logsJoin(g)).toContain('锦囊是空的');
+    // 模拟背包预存法术（往 _pouch 火球）
+    g.ownedCards[0].card._pouch = [{ ...card('tt3-fireball') }];
+    // 再打一次：从预存法术选 1 释放
+    BattleSession.commands.playCard(g.ownedCards[0].uid, 0);
+    await drain();
+    const s2 = snap();
+    expect(s2.busy || s2.actionQueueLength > 0).toBe(false);
     endBattle(g);
     expect(takeAsyncError()).toBeNull();
   });

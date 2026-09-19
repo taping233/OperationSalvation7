@@ -78,6 +78,10 @@ function unplayableReasonFor(card, mode, ctx) {
   if (card.type === '资源') return '资源卡无法在对战中打出（资源在背包中使用或出售）';
   if (card.type === '事件') return '事件卡只能在棋盘的事件格中触发，无法打出';
   if (card.type === '生物') return '生物卡是敌人图鉴，记录敌人信息，无法打出';
+  // 封印之牌（受缚之残影/封印肢体1-4/化形后的深渊主宰，2026-09-16 定版）：
+  // 抽到无效果也无法打出——集齐 5 张封印之牌后由 battle.core 破封化形
+  if (/无法打出/.test(String(card.desc || ''))) return '封印之牌：抽到时无效果，集齐 5 张封印之牌后破除封印';
+  if (mode === 'normal' && card.type === '能力卡') return '能力卡只能在对 BOSS 战时使用（普通战无法使用能力卡）';
   if (mode === 'boss' && card.type === '道具') return '道具卡只能在普通战斗中使用（BOSS 战牌库不含道具）';
   if (mode === 'normal' && DECK_ONLY_PATTERN.test(String(card.desc || ''))) {
     return '「牌库」词条只有对战 BOSS 时生效——普通战斗没有牌库与墓地，无法打出';

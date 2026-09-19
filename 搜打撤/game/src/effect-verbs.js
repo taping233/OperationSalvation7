@@ -125,6 +125,12 @@ const ELSEWHERE = [
   { id: 'extraCastTimes', label: '额外施放 N 次（结构化）', impl: 'battle.core', gate: 'structuredHit', pattern: /额外施放\s*\d+\s*次/ },
   { id: 'spellBonusDouble', label: '受法伤加成翻倍（结构化）', impl: 'battle.core', gate: 'structuredHit', pattern: /受法伤加成翻倍/ },
   { id: 'atkEqualToDamage', label: '造成等同于攻击力的伤害（结构化）', impl: 'battle.core', gate: 'structuredHit', pattern: /造成等同于攻击力的伤害/ },
+  { id: 'poisonLegacy', label: '中毒敌人死亡时层数转移（腐化之种，battle.core 打出登记 + 三死亡入口结算）', impl: 'battle.core', pattern: /死亡时[^。]*中毒层数转移/ },
+  { id: 'curseImmune', label: '免疫诅咒（深渊主宰·妲莉薇特，battle.core addPlayerCurse 拦截）', impl: 'battle.core', pattern: /免疫诅咒/ },
+  { id: 'spellsInfused', label: '本场所有法术均已注能（深渊主宰·妲莉薇特，battle.core infusedBase 贯通）', impl: 'battle.core', pattern: /均已注能/ },
+  { id: 'unplayableSeal', label: '封印之牌无法打出（受缚之残影系，battle.rules unplayableReasonFor 拦截）', impl: 'battle.rules', pattern: /无法打出/ },
+  { id: 'sealTransform', label: '集齐封印之牌破封化形（受缚之残影 → 深渊主宰·妲莉薇特，battle.core 集齐检测）', impl: 'battle.core', pattern: /集齐[^。]*封印|化为深渊主宰/ },
+  { id: 'summonStatlessLimbs', label: '召唤 4 名封印肢体（无攻血场面物件，battle.core 打出登记）', impl: 'battle.core', pattern: /召唤\s*4\s*名封印肢体/ },
 ];
 
 /* ---------- 2b. 已知未实装的设计者留白（显式列出，避免被当成「已识别」而埋掉） ----------

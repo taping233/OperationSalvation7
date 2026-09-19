@@ -174,7 +174,9 @@ describe('结构化词条与描述一致性（合并残留检查）', () => {
 
 describe('限制卡池识别验证（老板 2026-09-08 清单）', () => {
   const myClass = '侠客';
-  const count = (noun) => C.all().filter(c => c.rarity !== '衍生' && !['生物', '事件'].includes(c.type) && (parsePoolNoun(noun, myClass) || (() => false))(c)).length;
+  // 2026-09-16 留言「把火球设定成衍生」后，「火球」池唯一命中的是衍生火球（三重火球等效果仍会用到），
+  // 故池子识别验证不再排除衍生卡，只看谓词命中
+  const count = (noun) => C.all().filter(c => !['生物', '事件'].includes(c.type) && (parsePoolNoun(noun, myClass) || (() => false))(c)).length;
   const cases = [
     ['能施加诅咒的招式', 1], ['能施加诅咒的卡牌', 1], ['招式', 1], ['武术', 1], ['法术', 1],
     ['装备', 1], ['0费招式', 1], ['1费', 1], ['2费', 1], ['古朴', 1], ['能力卡', 1],

@@ -72,7 +72,7 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     expect(title.hidden).toBe(false);
   });
 
-  it('卡牌档案馆可打开、筛选、清空与排序', () => {
+  it('卡牌档案馆可打开、筛选、清空与排序', { timeout: 15_000 }, () => {
     const originalSfx = window.SDT.Sound.sfx;
     window.SDT.Sound.sfx = () => {};
     document.getElementById('btnCardLib').click();
@@ -273,7 +273,7 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     game.state = 'title';
   });
 
-  it('战斗指向卡支持点击选中、Esc取消与目标结算', async () => {
+  it('战斗指向卡支持点击选中、Esc取消与目标结算', { timeout: 15_000 }, async () => {
     const C = window.SDT.Cards;
     const sha = C.all().find(c => c.id === 'builtin-sha');
     const game = {

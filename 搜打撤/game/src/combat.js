@@ -5,7 +5,8 @@
   // 诅咒状态表：bleed/poison 为叠层（无上限不衰减），其余为计时（共享回合钟：每回合结束统一递减）
   // burn（灼烧）2026-09-08 定版：独立于中毒的计时诅咒——不叠加（重复施加只刷新剩余回合）、
   // 每回合结束时受到 1 点固定伤害（tickBurn 结算）
-  const CURSES = ['bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban', 'burn'];
+  const COMBAT_HOOKS = {};   // 战斗层钩子（冰冻符文等）
+const CURSES = ['bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban', 'burn'];
   const CURSE_META = {
     bleed:   { name: '流血', icon: '[[icon:blood]]', stack: true,  desc: '每层使受到的攻击伤害 +1' },
     poison:  { name: '中毒', icon: '[[icon:skull]]', stack: true,  desc: '每层在回合结束时受到 1 点固定伤害' },
@@ -159,6 +160,8 @@
   // 挂诅咒：bleed/poison 按层叠加（n 可为负做减层）；计时类取「剩余较大值」不叠加
   function addCurse(target, key, n) {
     if (!CURSE_META[key]) return 0;
+    // 龙巢：黑暗元素的轮换诅咒免疫（noCurseKeys 由战斗层每回合重掷）
+    if (target && target.noCurseKeys && target.noCurseKeys.includes(key)) return 0;
     // 层数/回合数兜底：调用方偶发传入 NaN/负值（如无层数的「附加流血」）时按 1 处理，
     // 否则状态会被写成 NaN——角标不显示、后续伤害结算全线变 NaN
     n = Number.isFinite(+n) && +n > 0 ? Math.floor(+n) : 1;
@@ -168,6 +171,7 @@
     } else {
       target.status[key] = Math.max(target.status[key], n);
     }
+    if (key === 'freeze' && COMBAT_HOOKS.onFreeze) COMBAT_HOOKS.onFreeze(target);
     return target.status[key];
   }
 
@@ -465,7 +469,7 @@
     return { pass: failed.length === 0, total, failed, lines };
   }
 
-export { TYPES, TYPE_NAME, dealDamage, previewDamage,
+export { COMBAT_HOOKS, TYPES, TYPE_NAME, dealDamage, previewDamage,
          addBleed, clearBleed,
          CURSES, CURSE_META, addCurse, hasCurse, purify,
          BUFFS, BUFF_META, addBlessing, isStealthed, breakStealth,

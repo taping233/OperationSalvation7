@@ -21,12 +21,12 @@ describe('四层种子化地图生成器', () => {
     const map = generateLayeredMap(20260908);
     expect(map.layers).toHaveLength(4);
     expect(map.generatorVersion).toBe(3);
-    expect(map.layoutVersion).toBe(7);   // v7：2026-09-13 老板——L1 恒定七格
+    expect(map.layoutVersion).toBe(8);   // v8：2026-09-16 Item 17——L2 总格 15→12、新增物资格与分层配额下限
     expect(validateGeneratedMap(map.layers).ok).toBe(true);
     expect(checkConnectivity(createLayeredMap(20260908)).ok).toBe(true);
     for (let seed = 0; seed < 100; seed++) {
       const batch = generateLayeredMap(`batch-${seed}`);
-      expect(batch.layers.map(layer => layer.nodes.length)).toEqual([7, 15, 17, 15]);
+      expect(batch.layers.map(layer => layer.nodes.length)).toEqual([7, 12, 17, 17]);   // Item 17：L2=12（=L3 配置总量）、L4=17（终局链+分层配额）
       expect(validateGeneratedMap(batch.layers).ok).toBe(true);
       expect(batch.layers.every(layer => layer.gridBounds && layer.gridBounds.maxX > layer.gridBounds.minX)).toBe(true);
     }

@@ -278,7 +278,7 @@ export function openDoorModal(door, cellDef) {
 }
 
 // ---------- 第四层终局：祭坛格（弃3激活选奖励）→ 首脑格 → 终局撤离点 ----------
-// 祭坛：弃掉背包 3 张牌激活后二选一奖励；集齐 2 枚彩色令牌碎片可不走弃牌直接换英雄卡。
+// 祭坛：弃掉背包 3 张牌激活后二选一奖励；集齐 2 枚彩色令牌碎片可不走弃牌直接换能力卡。
 // 激活（或兑换）成功才算触发过本格；离开未激活可再来。首脑格必须先激活祭坛。
 export function openAltarRitual(def) {
   game.state = 'modal';
@@ -293,16 +293,16 @@ export function openAltarRitual(def) {
   const frags = game.fragments || 0;
   // 碎片不足时不再隐藏选项，改为禁用态并说明原因（2026-09-10 撤离测试：玩家不知道选项为何消失）
   const fragOpt = frags >= 2
-    ? nodeOpt('altarFragHero', `献上 2 枚彩色令牌碎片（不弃牌）`, `获得 1 张本职业随机英雄卡（现有碎片 ${frags}）`, 'ok')
-    : nodeOpt('altarFragLocked', '献上 2 枚彩色令牌碎片（不弃牌）', `碎片不足（现有 ${frags}/2）——集齐 2 枚后可在任意祭坛直接兑换英雄卡`, '', 'disabled title="彩色令牌碎片不足，无法兑换"');
+    ? nodeOpt('altarFragHero', `献上 2 枚彩色令牌碎片（不弃牌）`, `获得 1 张本职业随机能力卡（现有碎片 ${frags}）`, 'ok')
+    : nodeOpt('altarFragLocked', '献上 2 枚彩色令牌碎片（不弃牌）', `碎片不足（现有 ${frags}/2）——集齐 2 枚后可在任意祭坛直接兑换能力卡`, '', 'disabled title="彩色令牌碎片不足，无法兑换"');
   nodeShell({
     tone: 'altar', icon: '[[icon:crystal]]', title: '污染祭坛',
     sub: '弃掉背包中 3 张卡牌激活祭坛，任选一项奖励' +
-      (frags >= 2 ? '；也可以不弃牌，直接献上 2 枚彩色令牌碎片换取英雄卡' : ''),
+      (frags >= 2 ? '；也可以不弃牌，直接献上 2 枚彩色令牌碎片换取能力卡' : ''),
     body:
       nodeOpt('altarOn3', '弃 3 张 · 激活祭坛', '激活后二选一：① 复原 3 张消耗卡 + 回复 10 血；② 随机获取 1 张传说卡和 1 张装备卡', 'ok') +
       fragOpt +
-      nodeOpt('altarItemRestore', '献祭道具 · 复原卡牌', '献祭 1 张道具卡，从消耗口袋复原 2 张卡牌（不影响其他献祭功能，可重复使用）') +
+      nodeOpt('altarItemRestore', '献祭道具 · 复原卡牌', '献祭 1 张道具卡，从消耗口袋复原 2 张卡牌（选后本祭坛不可再进行其他献祭）') +
       nodeOpt('altarLeave', '离开', '祭坛保持沉睡——回到当前格子，稍后再来'),
   });
   const markActivated = () => {
@@ -338,7 +338,7 @@ export function openAltarRitual(def) {
     if (!pool.length) {
       nodeShell({
         tone: 'altar', icon: '[[icon:crystal]]', title: '碎片兑换 · 暂不可用',
-        sub: `${game.myClass ? '【' + esc(game.myClass) + '】职业目前没有可兑换的英雄卡' : '还没有选定职业'}——彩色令牌碎片已原样保留（现有 ${(game.fragments || 0)} 枚）`,
+        sub: `${game.myClass ? '【' + esc(game.myClass) + '】职业目前没有可兑换的能力卡' : '还没有选定职业'}——彩色令牌碎片已原样保留（现有 ${(game.fragments || 0)} 枚）`,
         body: nodeOpt('altarFragBack', '返回祭坛', '换个方式激活，或留着碎片以后再兑'),
       });
       UI.act('altarFragBack', () => openAltarRitual(def));
@@ -350,7 +350,7 @@ export function openAltarRitual(def) {
     if (!grantEventCard(card)) return;
     game.fragments = (game.fragments || 0) - 2;
     markActivated();
-    UI.log(`[[icon:gem]] 献上 2 枚彩色令牌碎片（剩 ${game.fragments}）——获得本职业英雄卡【<b>${esc(card.name)}</b>】；<b>祭坛苏醒了</b>`, 'loot');
+    UI.log(`[[icon:gem]] 献上 2 枚彩色令牌碎片（剩 ${game.fragments}）——获得本职业能力卡【<b>${esc(card.name)}</b>】；<b>祭坛苏醒了</b>`, 'loot');
     saveGame();
     finishInstant();
   });
@@ -442,7 +442,9 @@ export function openBossGate(def) {
   });
   UI.act('fightBoss', () => {
     UI.hideOverlay();
-    SDT.Battle.start(game, scaledEnemy(b), { isBoss: true, name: b.name });
+    const bossFoe = scaledEnemy(b);
+    bossFoe.boss = true;   // 首脑死亡立即结束战斗（2026-09-16 留言 #25）
+    SDT.Battle.start(game, bossFoe, { isBoss: true, name: b.name });
   });
   UI.act('bossLeave', () => { UI.hideOverlay(); game.state = 'idle'; saveGame(); UI.refresh(game); });
   UI.refresh(game);
@@ -577,8 +579,32 @@ function doExtract() {
   SDT.Sound.sfx('victory');
   SDT.Sound.music('title');
   const B = SDT.Base;
-  // 木材/口粮自动入库（纯资源，没有丢弃的意义）；消耗口袋自动回收（复原后回仓库）
-  B.deposit(game.inventory);
+  // 木材/口粮自动入库（纯资源，没有丢弃的意义）。
+  // Item 16（2026-09-16 老板定版）：离开对局时，消耗口袋只有 1/3 保留下来（逐张判定），
+  // 其余散失；保留下来的回基地消耗口袋，用钥匙复原后回仓库。
+  const keptPocket = [];
+  let lostN = 0;
+  let totalN = 0;
+  game.usedPocket.forEach(p => { totalN += p.count || 1; });
+  game.usedPocket.forEach(p => {
+    for (let k = 0; k < (p.count || 1); k++) {
+      if (Random.random('pocket') < 1 / 3) {
+        const s = keptPocket.find(x => x.card.name === p.card.name);
+        if (s) s.count++;
+        else keptPocket.push({ card: { ...p.card }, count: 1 });
+      } else lostN++;
+    }
+  });
+  game.usedPocket = keptPocket;
+  if (totalN > 0) {
+    UI.log(`[[icon:pocket]] 撤离结算：消耗口袋 <b>${totalN}</b> 张只有 1/3 保留（带回 ${totalN - lostN} 张，散失 ${lostN} 张）`, 'sys');
+  }
+  // Item：首次击败一图首脑并成功撤离 → 解锁第二地图「龙巢」
+  if (game.bossKilled) {
+    const Bn = SDT.Base;
+    if (!Bn.data.nestUnlocked) { Bn.data.nestUnlocked = true; Bn.save(); UI.log('[[icon:door]] 龙巢已解锁——基地出现新的远征目标', 'loot'); }
+  }
+    B.deposit(game.inventory);
   B.depositCards(game.usedPocket, true);
   SDT.Meta.track('extract', { coins: game.coins, actions: game.turn - 1, cls: game.myClass });
   // 卡牌堆交给整理界面，由玩家决定入不入库
@@ -655,6 +681,7 @@ function renderExtractStash() {
           ${extractLeft.length ? `<button class="ov-btn ok" data-act="exAll" ${room > 0 && totalLeft <= room ? '' : 'disabled'}
             style="width:100%">[[icon:archive]] 全部入库（${Math.min(totalLeft, room)}/${totalLeft} 张可入）</button>` : ''}
           <div class="dep-foot" style="margin-top:10px">
+            <button class="ov-btn ok" data-act="exSmart" style="width:100%;margin-top:8px">[[icon:sparkles]] 智能整理（优先价值最高 · 上限仓库空格）</button>
             <button id="btnDeploy" data-act="exFinish">[[icon:check]] 完成整理${extractLeft.length ? `（${totalLeft} 张将丢失）` : ''}</button>
           </div>
         </section>
@@ -676,19 +703,37 @@ function renderExtractStash() {
   });
   UI.act('exAll', () => {
     let n = 0;
-    const room = B.stashRoom();
-    let left = room;
+    let room = B.stashRoom();
     for (const s of extractLeft.slice()) {
-      if (left <= 0) break;
-      const take = Math.min(s.count, left);
+      if (room <= 0) break;
+      const take = Math.min(s.count, room);
+      if (take <= 0) continue;
       B.depositCards([{ card: s.card, count: take }]);
       SDT.Meta.track('stash', { count: take });
       s.count -= take;
-      left -= take;
+      room -= take;
       n += take;
       if (s.count <= 0) extractLeft.splice(extractLeft.indexOf(s), 1);
     }
-    if (n) { Sfx.ding(); UI.log(`[[icon:archive]] 共 <b>${n}</b> 张卡牌已放入仓库`, 'loot'); }
+    if (n) { Sfx.ding(); UI.log(`[[icon:archive]] 全部入库：<b>${n}</b> 张已放入仓库（仓库余 ${B.stashRoom()} 格）`, 'loot'); }
+    renderExtractStash();
+  });
+  // 智能整理（2026-09-16 留言 #27）：一键入库，数量在仓库空格内、优先价值最高的卡牌
+  UI.act('exSmart', () => {
+    let room = B.stashRoom();
+    const ordered = extractLeft.slice().sort((a, b) => SDT.Cards.sellPrice(b.card) - SDT.Cards.sellPrice(a.card));
+    let n = 0;
+    for (const s of ordered) {
+      if (room <= 0) break;
+      const take = Math.min(s.count, room);
+      B.depositCards([{ card: s.card, count: take }]);
+      SDT.Meta.track('stash', { count: take });
+      s.count -= take;
+      room -= take;
+      n += take;
+      if (s.count <= 0) extractLeft.splice(extractLeft.indexOf(s), 1);
+    }
+    if (n) { Sfx.ding(); UI.log(`[[icon:archive]] 智能整理：按价值入库 <b>${n}</b> 张（仓库余 ${B.stashRoom()} 格）`, 'loot'); }
     renderExtractStash();
   });
   UI.act('exFinish', () => showExtractDone());
@@ -711,7 +756,7 @@ function showExtractDone() {
     body: `
       <p class="result-line"><span class="ov-note">[[icon:home]] 已运回基地：[[icon:wood]] 木材 ×${woodN} · [[icon:bread]] 口粮 ×${ratN} · [[icon:archive]] 仓库 <b>${B.stashUsed()}/${B.stashCap()}</b> 张 ·
         [[icon:sparkles]] 图鉴 <b>${Object.keys(B.data.collection).length}</b></span></p>
-      <p class="ov-note">下次出发时可以从仓库选择卡牌携带；储备币 <b>${B.data.coins}</b> 币将作为开局币随身带走。</p>`,
+      <p class="ov-note">下次出发时可以从仓库选择卡牌携带；储备币 <b>${B.data.coins}</b> 币留在基地（不进局，用于孵蛋与基地建设）。</p>`,
     foot: `
       <button class="ov-btn" data-act="goBase">[[icon:home]] 回基地</button>
       <button class="ov-btn ok" data-act="again">[[icon:runner]] 再出发</button>`,

@@ -3,6 +3,7 @@ export const NODE_INFO = {
   battle: ['遭遇战', '准备迎敌 · 胜利后搜刮', 'swords', 'danger'],
   boss: ['首脑', '终局挑战 · 检查随身卡牌', 'skull', 'danger'],
   chest: ['物资点', '搜寻卡牌与补给', 'gem', 'gold'],
+  resource: ['物资格', '按爆率刷新 2 张随机资源卡 · 选 1 带走', 'gem', 'gold'],
   fire: ['火堆', '恢复生命 · 复原消耗卡牌', 'fire', 'warm'],
   shop: ['商店', '用金币补充装备与卡牌', 'coin', 'safe'],
   event: ['未知事件', '新的机遇，也可能有代价', 'question', 'mystery'],

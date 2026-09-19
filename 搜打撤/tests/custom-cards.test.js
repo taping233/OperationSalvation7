@@ -47,12 +47,12 @@ describe('卡牌库完整性（2026-09-10 批次 v4–v10）', () => {
     });
   });
 
-  it('迷之匣已改版为限定技能（旧开战被动移除）', () => {
+  it('迷之匣已改版为主动技能（旧开战被动移除；2026-09-16 留言措辞变更）', () => {
     const hits = C.all().filter(c => c.id === 'tt3eq-mistbox');
     expect(hits.length).toBe(1);
     const c = hits[0];
     expect(c.type).toBe('装备');
-    expect(c.desc).toContain('限定技能');
+    expect(c.desc).toContain('主动技能');
     expect(c.desc).toContain('发现两张随机招式');
     expect(c.desc).toContain('交换其费用');
     expect(c.desc).not.toContain('对战开始时');

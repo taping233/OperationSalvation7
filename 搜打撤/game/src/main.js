@@ -36,6 +36,7 @@ import './chests.js';
 import './game.storage.js';
 import './game.store.js';
 import './game.session.js';
+import './game.nest.js';
 import './game.run.js';
 import './game.hub.js';
 import './game.bag.js';

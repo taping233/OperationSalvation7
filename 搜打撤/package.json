@@ -1,7 +1,7 @@
 {
   "name": "codename7-soudache-game",
   "private": true,
-  "version": "0.54.0",
+  "version": "0.56.1",
   "license": "MIT",
   "type": "module",
   "description": "搜打撤 · 代号7 游戏源码（Vite + Vitest）",
@@ -19,7 +19,8 @@
     "assets:audit": "node scripts/asset-audit.cjs",
     "sfx:gen": "node game/scripts/jsfxr-generate.cjs",
     "cards:sync": "node scripts/sync-cards-from-live.mjs",
-    "validate:data": "node scripts/validate-data.mjs"
+    "validate:data": "node scripts/validate-data.mjs",
+    "docs:compendium": "vitest run tests/compendium.test.js"
   },
   "devDependencies": {
     "acorn": "^8.14.0",

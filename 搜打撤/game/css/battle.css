@@ -189,6 +189,16 @@
   border:1.5px solid #8f8b7e; background:#23231f; color:#e8e4d8; font-size:14px; font-weight:700; cursor:pointer;
   pointer-events:auto; white-space:nowrap; z-index:6; }
 .bt-hand-page:hover { filter:brightness(1.2); }
+/* 背包砸击按钮（2026-09-16 老板：改回按钮形态——手牌左侧的背包图案按钮，
+   不再向手牌置入常驻令牌；slamPending 时点亮提示「再点一次取消」） */
+.bt-slam-btn { flex:0 0 auto; align-self:flex-end; margin:0 2px 6px; padding:7px 14px; border-radius:9px;
+  border:1.5px solid #8f8b7e; background:#23231f; color:#e8e4d8; font-size:14px; font-weight:700; cursor:pointer;
+  pointer-events:auto; white-space:nowrap; z-index:6;
+  box-shadow:0 1px 6px rgba(0,0,0,.5); }
+.bt-slam-btn .ic { width:18px; height:18px; vertical-align:-3px; margin-right:4px; }
+.bt-slam-btn:hover { filter:brightness(1.2); }
+.bt-slam-btn.active { border-color:#e8c37a; color:#ffd98a; box-shadow:0 0 14px rgba(232,195,122,.5); }
+.bt-slam-btn:disabled { opacity:.4; cursor:not-allowed; filter:none; box-shadow:none; }
 /* —— 扇形手牌（2026-09-09 重做）：槽位定位圆弧位（--fx/--fy/--frot/--fs 由 battle.hand.js 扇形数学给出），
    hover/瞄准/展开等状态变换叠在内层 .bt-card 上，与槽位 transform 互不打架 —— */
 /* 2026-09-12 紧凑手牌：卡高随内容自动缩短（文字区 display:none）。二次定向：整体更沉——
@@ -383,6 +393,21 @@
 .battle-stage[data-phase="enemy"] .sts-hand { transform:translateY(72%); opacity:.08; pointer-events:none; }
 /* 离场克隆体：挂在 overlay 常驻层沿弧线飞向目标/弃牌堆 */
 .sts-cardfly { position:absolute; z-index:75; pointer-events:none; }
+/* 法力奔涌逐发横幅（2026-09-16 留言「慢动作打出4张卡牌」）：顶部居中报出每一发的招式与目标 */
+.surge-wave { position:absolute; z-index:76; top:9%; left:50%; transform:translateX(-50%);
+  pointer-events:none; display:flex; flex-direction:column; align-items:center; gap:2px;
+  padding:7px 18px; border-radius:10px; background:rgba(10,16,24,.78);
+  border:1px solid rgba(143,208,232,.4); box-shadow:0 4px 18px rgba(0,0,0,.45);
+  color:#eaf6fb; font-size:13px; letter-spacing:.04em; white-space:nowrap;
+  opacity:0; animation:surgeWaveIn 1s ease both; }
+.surge-wave b { color:#8fd0e8; font-size:13.5px; }
+.surge-wave span { color:#d9c07a; font-size:12.5px; }
+@keyframes surgeWaveIn {
+  0% { opacity:0; transform:translateX(-50%) translateY(-10px); }
+  12% { opacity:1; transform:translateX(-50%) translateY(0); }
+  78% { opacity:1; }
+  100% { opacity:0; transform:translateX(-50%) translateY(6px); }
+}
 .sts-cardfly .hs-card { font-size:16px; }   /* 与手牌内卡面同尺寸（脱离 .sts-hand 上下文后需补回） */
 .sts-cardfly .bt-card { width:100%; height:100%; }
 /* 回合过渡横幅（批次F，STS2 Enemy Turn 式）：细带横穿战场中带，文字滑入-停留-滑出 */

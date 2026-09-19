@@ -50,7 +50,10 @@ import { DATA } from './data-loader.js';
       keys: 0,        // 真实钥匙储备（仓库钥匙材料卡「使用」后折入；宝藏大门计数）
       bagUp: 0, safeUp: 0,
       stashUp: 0,     // 仓库扩建等级（每次 +3 张容量）
-      coins: 0,       // 储备币：卖出仓库物品所得，出发时随身带走
+      coins: 0,       // 储备币：卖出仓库物品所得（Item 18：只用于孵蛋/建设，不进局）
+      nestUnlocked: false,   // 龙巢：击败一图首脑并成功撤离后解锁
+      runes: [],      // 仓库符文 [{kind,name,rarity,attrs,desc}]（每块占 1 仓库格）
+      nestBagUp: 0,   // 符文背包升级次数（10 + n 格，上限 25）
       stash: [],      // 卡牌仓库 [{card, count}]——出发时自选携带；「初始攻击」不可入库
       pocket: [],     // 基地消耗口袋 [{card, count}]，用钥匙复原后才回仓库
       pets: {},       // 已拥有宠物 [宠物id] => { lv, ts }（宠物蛋孵化；初始宠物汪汪狗自动获得）
@@ -60,6 +63,7 @@ import { DATA } from './data-loader.js';
       selMode: 'standard',    // 上次出发的玩法（standard / elite / casual）
       classes: {},            // [职业名] => { lv, xp }（与卡牌库职业表同源）
       stats: {
+        nestBossKills: [], reviveKills: 0, turnMovesMax: 0, battleEquipsMax: 0,
         extracts: 0, deaths: 0, kills: 0, actions: 0,
         playSeconds: 0,      // 该档累计实际对局时间；旧档由默认值安全补齐
         bossKills: [],        // 击败过的 BOSS 名
@@ -101,6 +105,13 @@ import { DATA } from './data-loader.js';
     });
     mergeDef(d, def());
     if (!Array.isArray(d.stats.bossKills)) d.stats.bossKills = [];
+    if (!Array.isArray(d.stats.nestBossKills)) d.stats.nestBossKills = [];
+    if (typeof d.stats.reviveKills !== 'number') d.stats.reviveKills = 0;
+    if (typeof d.stats.turnMovesMax !== 'number') d.stats.turnMovesMax = 0;
+    if (typeof d.stats.battleEquipsMax !== 'number') d.stats.battleEquipsMax = 0;
+    if (!Array.isArray(d.runes)) d.runes = [];
+    if (typeof d.nestBagUp !== 'number') d.nestBagUp = 0;
+    if (typeof d.nestUnlocked !== 'boolean') d.nestUnlocked = false;
     if (!d.backs || typeof d.backs !== 'object') d.backs = { classic: true };
     d.backs.classic = true;   // 默认卡背永远可用
     if (!d.backSel || !d.backs[d.backSel]) d.backSel = 'classic';
@@ -265,7 +276,7 @@ import { DATA } from './data-loader.js';
   // 卡牌仓库容量：按张计（每张卡占 1 格容量），同名堆叠不省容量
   const stashCap = () => Math.min(rules().stashMax,
     rules().stashStart + data.stashUp * rules().stashUpgradeSlots);
-  const stashUsed = () => data.stash.reduce((a, b) => a + (b.count || 0), 0);
+  const stashUsed = () => (data.runes ? data.runes.length : 0) + data.stash.reduce((a, b) => a + (b.count || 0), 0);   // 符文也占仓库格（Item 17 龙巢）
   const stashRoom = () => Math.max(0, stashCap() - stashUsed());
   const canUpgradeBag = () => data.bagUp < rules().bagMax - rules().bagSize &&
     data.wood >= rules().bagUpgradeWood;
@@ -295,7 +306,24 @@ import { DATA } from './data-loader.js';
   function upgradeStash() {
     if (!canUpgradeStash()) return false;
     data.wood -= rules().stashUpgradeWood;
+    // Item 17：仓库 50 格以后，每格额外消耗 2 符文（龙巢产出）
+    if (stashCap() >= (rules().stashRuneSlotFrom || 50)) {
+      if ((data.runes || []).length < (rules().stashRuneSlotCost || 2)) return false;
+      data.runes.splice(0, rules().stashRuneSlotCost || 2);
+    }
     data.stashUp++;
+    save();
+    return true;
+  }
+
+  // 龙巢：符文背包升级（2 符文 + 5 币升级 1 格，10 → 25）
+  function nestBagCap() { return 10 + (data.nestBagUp || 0); }
+  function canUpgradeNestBag() { return nestBagCap() < 25 && (data.runes || []).length >= 2 && data.coins >= 5; }
+  function upgradeNestBag() {
+    if (!canUpgradeNestBag()) return false;
+    data.runes.splice(0, 2);
+    data.coins -= 5;
+    data.nestBagUp = (data.nestBagUp || 0) + 1;
     save();
     return true;
   }
@@ -498,6 +526,7 @@ import { DATA } from './data-loader.js';
     get data() { return data; },
     bagCap, safeCap, stashCap, stashUsed, stashRoom,
     canUpgradeBag, canUpgradePet, canUpgradeStash, upgradeBag, upgradePet, upgradeStash,
+    nestBagCap, canUpgradeNestBag, upgradeNestBag,
     petUpCost, petLevel, PET_LEVEL_MAX, PET_UP_COSTS,
     deposit, depositCards, restore, pocketKeyCost, takeStashCards,
     sellStashCards, sellRaw, collectToggle, isCollected, takeReserveCoins,

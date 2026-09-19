@@ -59,11 +59,11 @@ const mistbox = () => C.all().find(c => c.id === 'tt3eq-mistbox');
 const baseCost = (id) => (C.all().find(c => c.id === id) || {}).cost;
 
 describe('迷之匣（tt3eq-mistbox 改版）', () => {
-  it('卡牌已改版：装备，限定技能发现两张随机招式', () => {
+  it('卡牌已改版：装备，主动技能发现两张随机招式（2026-09-16 留言措辞变更）', () => {
     const c = mistbox();
     expect(c).toBeTruthy();
     expect(c.type).toBe('装备');
-    expect(c.desc).toContain('限定技能');
+    expect(c.desc).toContain('主动技能');
     expect(c.desc).toContain('发现两张随机招式');
     expect(c.desc).toContain('交换其费用');
     expect(c.desc).not.toContain('对战开始时');   // 旧开战被动已移除

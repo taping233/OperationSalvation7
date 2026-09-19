@@ -128,7 +128,7 @@ function resolveCell() {
   }
 
   // 2) 即时效果类（币/木材/宝箱/口粮/钥匙/火堆/事件）：拾取或场景演出后再继续
-  const INSTANT_TYPES = ['coin', 'wood', 'chest', 'rations', 'key', 'fire', 'event'];
+  const INSTANT_TYPES = ['coin', 'wood', 'chest', 'rations', 'key', 'fire', 'event', 'resource'];
   if (def && INSTANT_TYPES.includes(def.type)) {
     runInstant(def, () => {
       // 即时效果完成 → 本格若兼为节点（如带商店的门、祭坛入口）继续节点演出
@@ -159,6 +159,38 @@ function resolveCell() {
   UI.refresh(game);
 }
 
+// 物资格（2026-09-16 Item 17 定版）：按爆率（与商店/宝箱同源权重）刷新 2 张随机资源卡，二选一带走
+function openResourcePick(done) {
+  const weights = SDT.Cards.DROP_WEIGHTS;
+  const pool = SDT.Cards.all().filter(c => c.type === '资源' && SDT.Cards.isRandomObtainable(c));
+  const pickOne = (taken) => {
+    const avail = pool.filter(c => !(taken && taken.has(c.name)));
+    const total = avail.reduce((sum, c) => sum + (weights[c.rarity] || 2), 0);
+    if (!total) return null;
+    let roll = Random.random('loot') * total;
+    for (const c of avail) { roll -= (weights[c.rarity] || 2); if (roll <= 0) return c; }
+    return avail[avail.length - 1] || null;
+  };
+  const first = pickOne(null);
+  const second = first ? pickOne(new Set([first.name])) : null;
+  const cards = [first, second].filter(Boolean);
+  if (!cards.length) { done(); return; }
+  game.state = 'modal';
+  UI.showOverlay('[[icon:gem]] 物资格 · 二选一', `
+    <p class="ov-note">按爆率刷新了 2 张随机资源卡——选择 1 张带走，另一张留在原地。</p>
+    <div class="ov-btns">
+      ${cards.map((c, i) => `<button class="ov-btn ${i === 0 ? 'ok' : ''}" data-act="resPick${i}">[[icon:${c.id === 'tt-key' ? 'key' : c.id === 'tt-wood' ? 'wood' : 'cards'}]] 【${esc(c.name)}】· ${esc(c.rarity)}</button>`).join('')}
+    </div>
+    <div class="ov-btns"><button class="ov-btn" data-act="resSkip">都不要，继续赶路</button></div>`, 'discover');
+  cards.forEach((c, i) => UI.act('resPick' + i, () => {
+    grantEventCard(c);
+    UI.hideOverlay();
+    UI.log(`[[icon:gem]] 物资格：带走了【<b>${esc(c.name)}</b>】`, 'loot');
+    done();
+  }));
+  UI.act('resSkip', () => { UI.hideOverlay(); done(); });
+}
+
 // 空白安全节点提示页：明确告诉玩家这格无事发生（背景图后续再补）
 function runInstant(def, after) {
   const done = after || finishInstant;
@@ -180,7 +212,9 @@ function runInstant(def, after) {
       });
     } break;
     // 物资格（露天宝箱格，2026-09-09 玩法定版）：70% 小宝箱（随机 1 张）/ 30% 中宝箱（3 选 1）
-    case 'chest': openChestsOnCell([Random.random('loot') < 0.7 ? { kind: 'small' } : { kind: 'medium' }]); break;
+    case 'chest': openChestsOnCell([Random.random('loot') < 0.7 ? { kind: 'small' } : { kind: 'medium' }], null, { resourceOnly: true }); break;
+    // 物资格（2026-09-16 Item 17 定版）：按爆率刷新 2 张随机资源卡，二选一带走
+    case 'resource': openResourcePick(done); break;
     case 'rations': {
       // 2026-09-06 #11：口粮同样以卡牌形式入包
       const card = SDT.Cards.all().find(c => c.id === 'tt-rations');

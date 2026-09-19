@@ -225,6 +225,8 @@ async function auditOne(card) {
   try {
     BattleSession.start(game, [foeDef()], { isBoss: false, name: '审计' });
     const uid = game.ownedCards[0].uid;
+    // 受缚之残影（2026-09-16 定版重做）：开局即破封化形，原卡按设计离场（abyss-sovereign.test.js 实打覆盖）
+    if (card.id === 'tt8-hero-sealer') { endBattle(game); return; }
     if (!snap().hand.includes(uid)) { record(card, 'A-手牌', '战斗卡未进手牌'); endBattle(game); return; }
     const r = await playInBattle(game, uid, card);
     if (r.after === r.before) record(card, 'A-手牌', '零可观测效果');

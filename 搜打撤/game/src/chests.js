@@ -61,7 +61,7 @@ import { Random } from './random.js';
       let card = null;
       for (let guard = 0; guard < 40 && !card; guard++) {
         // mode 由流程层读门面后传入（2026-09-11 架构批次 1：cards 数据模块不读全局会话）
-        const got = SDT.Cards.randomDropCard(seen.ids, (SDT.game && SDT.game.mode) || null);
+        const got = SDT.Cards.randomDropCard(seen.ids, (SDT.game && SDT.game.mode) || null, K.resourceOnly ? '资源' : null);
         if (!got) break;
         // 只撞卡名（不同版本的同一张牌）时，记下 id 再抽一张，别停下
         if (seen.dup(got)) { seen.ids.add(got.id); continue; }
@@ -164,7 +164,8 @@ import { Random } from './random.js';
   }
 
   // ---------- 开箱 UI（逐个弹窗，全部开完调 onDone） ----------
-  function open(game, chests, done) {
+  function open(game, chests, done, opts) {
+    const K = Object.assign({ resourceOnly: false }, opts || {});
     G = game;
     queue = chests.slice();
     idx = 0;

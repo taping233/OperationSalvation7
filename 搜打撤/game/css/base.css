@@ -295,6 +295,8 @@
     border-radius: 12px; padding: 12px 14px; }
   .bag-side-card .hint { margin: 0 0 8px; }
   .bag-side-card .pk-list { max-height: 26vh; overflow-y: auto; }
+  /* 安全格移到右栏消耗口袋下方（2026-09-16 留言），网格按右栏宽度收窄 */
+  .bag-side-card .bag-grid.safe-grid { grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); }
   @media (max-width: 1080px) { .bag-layout { grid-template-columns: 1fr; } .bag-side { position: static; } }
   .bag-view .bag-grid { grid-template-columns: repeat(auto-fill, minmax(92px, 116px)); gap: 10px;
     overflow: visible; max-height: none; align-items: start; }

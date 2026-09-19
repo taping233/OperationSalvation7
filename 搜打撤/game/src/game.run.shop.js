@@ -22,7 +22,7 @@ function createShopController({
   usedSlots,
 }) {
   function generateShopStock() {
-    const lib = SDT.Cards.all().filter(card => card.rarity !== '衍生' && !card.unrandom);
+    const lib = SDT.Cards.all().filter(card => card.rarity !== '衍生' && !card.unrandom && card.id !== 'tt-token-color');   // 员工通行证A是碎片合成材料，不上架（2026-09-17 留言口径同卡牌库）
     // 稀有度权重与宝箱爆率同源（2026-09-08 定版：古朴60/稀有28/史诗9/传说3），
     // 档内挑卡走 pickOfRarity（类型均分，道具 ×0.7）
     const weights = SDT.Cards.SHOP_WEIGHTS;
@@ -35,19 +35,23 @@ function createShopController({
       }
       return '古朴';
     };
-    const pickRandomCard = () => {
+    // 2026-09-13 留言：同一面板不允许刷出同样的卡牌（同名不同版也算重复）
+    const panelTaken = new Set();
+    const pickRandomCard = (taken) => {
       for (let tries = 0; tries < 50; tries++) {
         const card = SDT.Cards.pickOfRarity(pickWeightedRarity());
-        if (card) return card;
+        if (card && !(taken && taken.has(card.name))) return card;
       }
-      return lib.length ? lib[Math.floor(Random.random('shop') * lib.length)] : null;
+      const fallback = lib.filter(c => !(taken && taken.has(c.name)));
+      return fallback.length ? fallback[Math.floor(Random.random('shop') * fallback.length)] : null;
     };
 
     const slots = [];
     // 招财猫（需求 #4，2026-09-09）：携带时商店第一格的卡牌免费
     const catFree = !!(SDT.Base.carriedPet && SDT.Base.carriedPet()?.effect?.shopFree);
     for (let i = 0; i < 6; i++) {
-      const card = pickRandomCard();
+      const card = pickRandomCard(panelTaken);
+      if (card) panelTaken.add(card.name);
       slots.push(card
         ? { card, price: (catFree && i === 0) ? 0 : (SDT.Cards.PRICE[card.rarity] || 2), sold: false, free: catFree && i === 0 }
         : { empty: true, label: '卡牌库无货' });
@@ -60,7 +64,15 @@ function createShopController({
     slots.push({ card: healSlot, price: 2, sold: false });
     // 初始攻击补充位（2026-09-08 老板定版）：固定栏位，1 币 1 张，每次到站最多补 5 张
     slots.push({ card: { ...SDT.Cards.SHA }, price: 1, sold: false, shaReplenish: 5 });
-    const mysteryCard = lib.length ? lib[Math.floor(Random.random('shop') * lib.length)] : null;
+    const mysteryCard = (() => {
+      // 神秘货箱同样不与面板重复（2026-09-13 留言口径）
+      for (let tries = 0; tries < 50; tries++) {
+        const card = lib[Math.floor(Random.random('shop') * lib.length)];
+        if (card && !panelTaken.has(card.name)) return card;
+      }
+      return null;
+    })();
+    if (mysteryCard) panelTaken.add(mysteryCard.name);
     slots.push(mysteryCard
       ? { card: mysteryCard, price: 3, sold: false, mystery: true }
       : { empty: true, label: '卡牌库无货' });
@@ -99,7 +111,10 @@ function createShopController({
         <span class="shop-price${afford ? '' : ' short'}">[[icon:coin]] ${slot.price} · 余 ${slot.shaReplenish}</span>
       </div>`;
     }
-    if (slot.mystery) return `<div ${buyAttrs('buyCard', `购买神秘货箱，开出随机卡牌，${slot.price} 币`)}><div class="shop-empty">[[icon:dice]] 随机卡牌</div>${priceTag}</div>`;
+    if (slot.mystery) {
+      // 问号卡面（2026-09-13 留言）：未购买时用「？」卡面占位，买完才亮出真卡
+      return `<div ${buyAttrs('buyCard', `购买神秘货箱，开出随机卡牌，${slot.price} 币`)}><div class="shop-card-mystery">[[icon:crystal]]<b>？</b><span>随机卡牌</span></div>${priceTag}</div>`;
+    }
     return `<div ${buyAttrs('buyCard', `购买「${slot.card.name}」，${slot.price} 币`)}>${cardHTML(slot.card)}${priceTag}</div>`;
   }
 
@@ -240,12 +255,11 @@ function createShopController({
         SDT.Sound.sfx('error');
         return;
       }
-      // 需求（2026-09-13 老板）：背包满时不能再获得卡牌——补充初始攻击与买卡同口径
-      //（叠放上限内并入不占格；堆满或新格需要空位，「初始攻击」叠放上限 5 张）
-      if (game.canReceiveCard
-        ? !game.canReceiveCard(slot.card)
-        : (!game.ownedCards.some(owned => owned.card.name === slot.card.name) && !game.canAcceptCard(slot.card))) {
-        UI.log(`[[icon:bag]] 背包已满（${usedSlots()}/${bagCap()} 格，初始攻击最多叠 5 张），补充不了`, 'warn');
+      // 2026-09-17 留言「商店现在每次只卖3张初始攻击」：补充位只受背包容量约束（同名堆叠
+      // 不设 5 张上限——上限曾随背包存量吃掉可买数量，观感即「只卖 N 张」）；2026-09-13
+      // 老板需求保留：背包真的满了才拒买
+      if (usedSlots() >= bagCap() && !game.ownedCards.some(owned => owned.card.name === slot.card.name)) {
+        UI.log(`[[icon:bag]] 背包已满（${usedSlots()}/${bagCap()} 格），补充不了`, 'warn');
         SDT.Sound.sfx('error');
         return;
       }

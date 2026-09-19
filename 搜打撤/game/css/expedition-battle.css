@@ -16,6 +16,11 @@
   linear-gradient(180deg,rgba(0,0,0,0) 65.8%,rgba(52,41,32,.5) 67.3%,rgba(42,33,26,.68) 76%,rgba(30,24,19,.8) 100%),
   linear-gradient(180deg,rgba(5,10,16,.58),rgba(7,13,19,.08) 28%,rgba(5,8,13,.14) 70%,rgba(5,8,13,.34) 85%,rgba(4,7,11,.88)); }
 #overlay .battle-stage.sts > *:not(.battle-stage-shade) { position:relative; z-index:1; }
+/* 2026-09-18 留言「药水栏还是不能用」根因：上行的通配 z-index:1 让 .bt-potions 与场景层
+   .sts-arena 同层且 DOM 靠前——透明的场景画布把顶栏点击全部吃掉（看得见点不着）。
+   药水栏整体抬到场景之上：容器继续穿透点击，chip 本体可点。 */
+#overlay .battle-stage.sts > .bt-potions { position:absolute; z-index:7; pointer-events:none; }
+#overlay .battle-stage.sts > .bt-potions .bt-potion { pointer-events:auto; }
 
 #overlay .battle-stage.sts .sts-topbar { flex:0 0 auto; min-height:48px; display:flex; align-items:center; gap:12px; padding:7px clamp(12px,2vw,28px); background:rgba(8,13,20,.76); border-bottom:1px solid rgba(200,220,228,.18); box-shadow:0 4px 18px rgba(0,0,0,.24); }
 .sts-encounter { display:flex; align-items:baseline; gap:9px; min-width:clamp(180px,25vw,310px); letter-spacing:.5px; }

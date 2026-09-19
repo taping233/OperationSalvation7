@@ -89,6 +89,12 @@ import { Random } from './random.js';
     petHatch3: (_s, d) => petHatchedN(d) >= 3,
     petMax: (_s, d) => Object.values((d || B().data).pets || {}).some(p => (p.lv || 1) >= 5),
     petAll: (_s, d) => Object.keys((d || B().data).pets || {}).length >= (SDT.Base.PETS || []).length,
+    unlimitedEnergy: (_s, d) => ((d || B().data).stats || {}).turnMovesMax >= 10,
+    weaponMaster: (_s, d) => ((d || B().data).stats || {}).battleEquipsMax >= 5,
+    runeFan: (_s, d) => new Set(((d || B().data).runes || []).flatMap(r2 => r2.attrs)).size >= 5,
+    savior: (_s, d) => (((d || B().data).stats || {}).nestBossKills || []).length >= 2,
+    beautifulVase: (_s, d) => ((d || B().data).runes || []).some(r2 => r2.attrs.length >= 2 && r2.kind === 'rainbow'),
+    excuseMe: (_s, d) => ((d || B().data).stats || {}).reviveKills >= 1,
   };
   const ACHIEVEMENTS = DATA.achievements.achievements.map(a => ({ ...a, done: ACH_DONE[a.id] }));
   // 孵化计数 = 已拥有宠物数 - 初始宠物（汪汪狗自动获得，不算孵化）
@@ -167,13 +173,12 @@ import { Random } from './random.js';
   }
 
   // 收藏经验结算（仓库收藏动作后调用）：职业卡 +10 / 能力卡 +50 人物经验。
-  // 同一张卡只结算一次——collXp 落档，取消收藏不退还、重新收藏不重复发放。
+  // 2026-09-16 定版（Item 15）：重复收藏重复获得经验——取消「同一张只结算一次」的门槛；
+  // 收藏进度（data.collection）仍只在首次收藏时登记（见 game.hub collCollectOne）。
   function onCollect(card, now) {
     if (!now || !isCollectible(card)) return null;
     const d = B().data;
     if (!d.collXp) d.collXp = {};
-    if (d.collXp[card.id]) return null;
-    d.collXp[card.id] = true;
     const amount = card.type === '能力卡' ? 50 : 10;
     const ups = addXP(card.cls, amount);
     if (SDT.UI) {
@@ -264,6 +269,15 @@ import { Random } from './random.js';
     const s = B().data.stats;
     let changed = true;
     switch (type) {
+      case 'turnMoves':
+        if ((d.n || 0) > (s.turnMovesMax || 0)) s.turnMovesMax = d.n;
+        break;
+      case 'battleEquips':
+        if ((d.n || 0) > (s.battleEquipsMax || 0)) s.battleEquipsMax = d.n;
+        break;
+      case 'reviveKill':
+        s.reviveKills = (s.reviveKills || 0) + 1;
+        break;
       case 'kill':
         if (d.boss) {
           if (!s.bossKills.includes(d.name)) s.bossKills.push(d.name);

@@ -18,6 +18,18 @@ import THUMB_MANIFEST from './generated/thumb-manifest.js';
   const CLASS_IDS = Object.freeze({ ...DATA.art.classIds });
   const CLASS_NAMES = Object.freeze(Object.fromEntries(Object.entries(CLASS_IDS).map(([name, id]) => [id, name])));
   const MONSTER_IDS = new Set(DATA.art.monsterIds);
+  // 龙巢敌人（2026-09-16 新增）暂无专属立绘，暂借同主题家族图：
+  // 专属美术出图后，把对应 webp 放进 portraits/enemies/ 并把 id 加入 art-mapping.json monsterIds 即可接管
+  const NEST_MONSTER_ALIASES = {
+    'nest-dark-elem': 'water_el',      // 黑暗元素 → 水元素（深色系）
+    'nest-sand-elem': 'grass_el',      // 沙暴元素 → 草元素（土系）
+    'nest-dragon': 'dragon',           // 巨龙
+    'nest-evil-dragon': 'dragon',      // 恶龙
+    'nest-envoy': 'esper_crow',        // 黑暗使者 → 异能者·鸦
+    'nest-ancient-dragon': 'dragon',   // 远古龙尊
+    'nest-elem-lord': 'boss_elem',     // 完全形态·元素领主
+    'nest-storm-hand': 'boss_elem',    // 风暴之手
+  };
   const CARD_FAMILIES = new Set(DATA.art.cardFamilies);
   const RESOURCE_ART = Object.freeze({ ...DATA.art.resourceArt });
   const HERO_CARD_ART = Object.freeze({ ...DATA.art.heroCardArt });
@@ -223,10 +235,11 @@ function characterArt(value, full=false) {
       return this.classArt(className);
     },
     monsterArt(id) {
-      if (!MONSTER_IDS.has(id)) return fallback('enemy', id, id || '未知敌人');
-      return image(`portraits/enemies/${id}.webp`, 'art-portrait art-hostile', id, `enemy-${id}`);
+      const fid = NEST_MONSTER_ALIASES[id] || id;
+      if (!MONSTER_IDS.has(fid)) return fallback('enemy', id, id || '未知敌人');
+      return image(`portraits/enemies/${fid}.webp`, 'art-portrait art-hostile', id, `enemy-${fid}`);
     },
-    has(id) { return Boolean(resolveClass(id)) || MONSTER_IDS.has(id); },
+    has(id) { return Boolean(resolveClass(id)) || MONSTER_IDS.has(id) || !!NEST_MONSTER_ALIASES[id]; },
     // 全量卡面美术预热（2026-09-07 老板：能首次离线进内存的就不在用时计算）。
     // 复用渲染端同款生成器抽取最终 URL（含 ?v= 构建号），与 <img> 实际 src 完全一致，
     // 保证命中浏览器 HTTP/解码缓存。

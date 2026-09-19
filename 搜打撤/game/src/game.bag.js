@@ -287,6 +287,7 @@ import { _set_cardPageOpen } from './game.cardslib.js';
           ${o.card.id === 'tt-token-color' && (game.fragments || 0) >= 2
             ? '<button class="ov-btn ok" data-act="craftColorTokenByFragments">合成彩色令牌（2 碎片 + 1 通行证A）</button>' : ''}
           ${o.card.id === 'tt2-pearlbox' ? '<button class="ov-btn ok" data-act="pearlStore">[[icon:gem]] 存入 / 取出资源卡</button>' : ''}
+          ${o.card.id === 'tt7-stratagem' ? '<button class="ov-btn ok" data-act="pouchStore">[[icon:cards]] 打开锦囊（存放法术 ×3）</button>' : ''}
           ${fromSafe ? '<button class="ov-btn" data-act="detailFromSafe">移回背包</button>' :
             (isSha ? '' : '<button class="ov-btn" data-act="detailToSafe">移入安全格</button>')}
           ${isSha ? '' : '<button class="ov-btn danger" data-act="detailDiscard">丢弃 1 张</button>'}
@@ -294,6 +295,7 @@ import { _set_cardPageOpen } from './game.cardslib.js';
     });
     // 特写挂在 body（overlay 之外）：动作执行前先模拟点背景收回，回到背包页
     const closeZoom = () => document.getElementById('cardZoom')?.querySelector('.cz-backdrop')?.click();
+    const closeCardZoom = () => document.getElementById('cardZoom')?.querySelector('.cz-backdrop')?.click();
     UI.act('useDetailCard', () => { closeZoom(); useOwnedCard(o.uid); });
     UI.act('craftColorToken', () => {
       closeZoom();
@@ -324,6 +326,65 @@ import { _set_cardPageOpen } from './game.cardslib.js';
     UI.act('detailToSafe', () => { closeZoom(); moveStackSafe(name, true); });
     UI.act('detailDiscard', () => { closeZoom(); showDiscardConfirm(name, fromSafe); });
     UI.act('pearlStore', () => { closeZoom(); openPearlStore(); });
+    UI.act('pouchStore', () => { closeZoom(); openPouchStore(); });
+  }
+
+  // —— 法师锦囊 · 存放法术牌（2026-09-16 留言 #4 定版）——
+  // 点背包里的锦囊 → 存入/取出法术牌：上限 3 张，战斗中打出锦囊时从里面选 1 张直接释放
+  function openPouchStore() {
+    game.state = 'modal';
+    const POUCH_ID = 'tt7-stratagem';
+    const stored = () => game.ownedCards.filter(x => x.pouchOf === POUCH_ID && !x.stored);
+    const storedStacks = () => {
+      const map = new Map();
+      game.ownedCards.forEach(x => {
+        if (x.pouchOf !== POUCH_ID || !x.card) return;
+        if (!map.has(x.card.name)) map.set(x.card.name, { card: x.card, count: 0 });
+        map.get(x.card.name).count++;
+      });
+      return [...map.values()];
+    };
+    const bagSpellStacks = () => cardStacks(false).filter(st => st.card.type === '法术' && !st.card.cls);
+    const render = () => {
+      const storedHTML = storedStacks().map(st => `
+        <div class="bt-card" data-act="pouchTake" data-name="${escAttr(st.card.name)}"
+          title="${escAttr(st.card.name + ' ×' + st.count + '——点击取出回背包')}">
+          ${SDT.Cards.cardHTML(st.card, 'sm')}
+          <span class="bt-count">×${st.count}</span>
+        </div>`).join('') || '<p class="ov-empty">（锦囊是空的——存入法术牌后战斗中打出可释放）</p>';
+      const bagHTML = bagSpellStacks().map(st => `
+        <div class="bt-card" data-act="pouchPut" data-name="${escAttr(st.card.name)}"
+          title="${escAttr(st.card.name + ' ×' + st.count + '——点击存入锦囊')}">
+          ${SDT.Cards.cardHTML(st.card, 'sm')}
+          <span class="bt-count">×${st.count}</span>
+        </div>`).join('') || '<p class="ov-empty">（背包里没有法术卡）</p>';
+      UI.showOverlay('[[icon:cards]] 法师锦囊 · 存放法术牌', `
+        <p class="ov-note">锦囊中 <b>${stored().length}/3</b> 张法术——战斗中打出锦囊后，从这 ${stored().length} 张里选 1 张直接释放（锦囊为空则无效果）</p>
+        <h3 class="set-h">锦囊中的法术（点击整叠取出）</h3>
+        <div class="bt-hand">${storedHTML}</div>
+        <h3 class="set-h">背包里的法术卡（点击整叠存入）</h3>
+        <div class="bt-hand">${bagHTML}</div>
+        <div class="ov-btns"><button class="ov-btn ok" data-act="pouchBack">[[icon:arrow]] 收好锦囊</button></div>`);
+    };
+    UI.act('pouchPut', (d) => {
+      if (stored().length >= 3) { UI.log('[[icon:cards]] 锦囊已满（3 张法术）', 'warn'); return; }
+      const stack = bagSpellStacks().find(st => st.card.name === d.name);
+      if (!stack) return;
+      stack.uids.forEach(uid => { const o = game.ownedCards.find(x => x.uid === uid); if (o) { o.pouchOf = POUCH_ID; o.stored = 1; } });
+      UI.log(`[[icon:cards]] 【<b>${esc(stack.card.name)}</b>】存入法师锦囊`, 'ok');
+      saveGame();
+      render();
+    });
+    UI.act('pouchTake', (d) => {
+      const stack = storedStacks().find(st => st.card.name === d.name);
+      if (!stack) return;
+      game.ownedCards.forEach(x => { if (x.pouchOf === POUCH_ID && x.card.name === d.name) { delete x.pouchOf; delete x.stored; } });
+      UI.log(`[[icon:cards]] 【<b>${esc(stack.card.name)}</b>】已从锦囊取出`, 'ok');
+      saveGame();
+      render();
+    });
+    UI.act('pouchBack', () => { game.state = 'idle'; renderHub(); });
+    render();
   }
 
   // —— 珍珠盒 · 存放资源卡（2026-09-10 留言 #29）——
@@ -538,7 +599,7 @@ import { _set_cardPageOpen } from './game.cardslib.js';
     UI.registerHelp('bag', {
       title: '背包说明',
       html: `
-        <p class="help-item"><b>背包格</b>物资与卡牌混占格数（同名堆叠只占 1 格）。双击卡牌翻面看卡背；按住拖动整理顺序，拖入下方安全格即存入。</p>
+        <p class="help-item"><b>背包格</b>物资与卡牌混占格数（同名堆叠只占 1 格）。双击卡牌翻面看卡背；按住拖动整理顺序，拖入右侧安全格即存入。</p>
         <p class="help-item"><b>安全格</b>由宠物阿七看守：撤离失败或放弃对局时，只有安全格里的卡牌会被抢运回基地，其余全部丢失。容量在基地「升级」页用口粮升级。</p>
         <p class="help-item"><b>消耗口袋</b>对小怪用过的卡、注能消耗的卡会进到这里：本局无法再用，容量无限。基地可免费复原；火堆每次休整可复原 2 张；道具「能源结晶」可就地复原 3 张。</p>
         <p class="help-item"><b>丢弃</b>把卡牌拖到背包页面外的空地可申请丢弃 1 张——丢弃的牌无法取回，请谨慎操作。</p>`,
@@ -571,13 +632,15 @@ import { _set_cardPageOpen } from './game.cardslib.js';
             </span>
           </h3>
           <div class="bag-grid">${cells}</div>
-          <h3 class="set-h">[[icon:lock]] 安全格</h3>
-          <div class="bag-grid safe-grid">${safeCells}</div>
         </div>
         <aside class="bag-side">
           <div class="bag-side-card">
             <h3 class="set-h">[[icon:pocket]] 消耗口袋 <span class="set-tip">${pkN} 张</span></h3>
             <div class="pk-list pk-cards">${pocketHTML}</div>
+          </div>
+          <div class="bag-side-card">
+            <h3 class="set-h">[[icon:lock]] 安全格</h3>
+            <div class="bag-grid safe-grid">${safeCells}</div>
           </div>
         </aside>
       </div></div>`, 'bagpage');
@@ -588,11 +651,36 @@ import { _set_cardPageOpen } from './game.cardslib.js';
       const st = cardStacks(d.safe === '1').find(s => s.card.name === d.name);
       if (!st) return;
       const usable = d.safe !== '1' && st.card.type === '道具';
+      // 珍珠盒/法师锦囊：点击直接打开容器界面（2026-09-16 留言）
+      const isPearl = st.card.id === 'tt2-pearlbox' && d.safe !== '1';
+      const isPouch = st.card.id === 'tt7-stratagem' && d.safe !== '1';
+      let containerBtn = '';
+      if (isPearl) containerBtn = '<div class="ov-btns"><button class="ov-btn ok" data-act="pearlStoreZoom">[[icon:gem]] 打开珍珠盒</button></div>';
+      if (isPouch) containerBtn = '<div class="ov-btns"><button class="ov-btn ok" data-act="pouchStoreZoom">[[icon:cards]] 打开锦囊（存放法术 ×3）</button></div>';
+      // 点击移动（2026-09-16 留言）：背包卡可移入安全格、安全格卡可移回背包（不必拖拽）
+      const isShaStack = st.card.name === (SDT.Cards.SHA && SDT.Cards.SHA.name);
+      const moveBtn = d.safe === '1'
+        ? '<div class="ov-btns"><button class="ov-btn" data-act="zoomMoveToBag">[[icon:bag]] 移回背包</button></div>'
+        : (isShaStack ? '' : '<div class="ov-btns"><button class="ov-btn" data-act="zoomMoveToSafe">[[icon:lock]] 移入安全格</button></div>');
       UI.showCardZoom(st.card, {
-        footer: `
+        footer: `${containerBtn}
           ${usable ? '<div class="ov-btns"><button class="ov-btn ok" data-act="useDetailCard">使用这张道具</button></div>' : ''}
-          <p class="ov-note">${d.safe === '1' ? '[[icon:lock]] 安全格 · 拖回背包可取出' : '按住拖动整理顺序 · 双击翻看卡背'}</p>`,
+          ${moveBtn}
+          <p class="ov-note">${d.safe === '1' ? '[[icon:lock]] 安全格 · 可拖回背包或点击「移回背包」' : '按住拖动整理顺序 · 双击翻看卡背 · 可点击「移入安全格」'}</p>`,
       });
+      if (d.safe === '1') {
+        UI.act('zoomMoveToBag', () => {
+          document.getElementById('cardZoom')?.querySelector('.cz-backdrop')?.click();
+          moveStackSafe(st.card.name, false);
+        });
+      } else if (!isShaStack) {
+        UI.act('zoomMoveToSafe', () => {
+          document.getElementById('cardZoom')?.querySelector('.cz-backdrop')?.click();
+          moveStackSafe(st.card.name, true);
+        });
+      }
+      if (isPearl) UI.act('pearlStoreZoom', () => { closeCardZoom(); openPearlStore(); });
+      if (isPouch) UI.act('pouchStoreZoom', () => { closeCardZoom(); openPouchStore(); });
       if (usable) UI.act('useDetailCard', () => {
         document.getElementById('cardZoom')?.querySelector('.cz-backdrop')?.click();
         useOwnedCard(st.uids[0]);
@@ -751,6 +839,32 @@ import { _set_cardPageOpen } from './game.cardslib.js';
       if (!d.fromSafe) moveStackSafe(d.name, true);   // 拖入安全格
       return;
     }
+    // 拖资源卡到珍珠盒上 = 直接存入（2026-09-17 留言「拖动资源卡到珍珠盒上可以把资源卡移动到珍珠盒内」）
+    if (t.kind === 'stack' && !d.fromSafe && t.name === '珍珠盒') {
+      const stack = cardStacks(false).find(st => st.card.name === d.name);
+      if (!stack) return;
+      if (stack.card.type !== '资源') {
+        UI.log('[[icon:gem]] 珍珠盒只收资源卡（木材/口粮/钥匙/货币等）——点击珍珠盒可打开存放界面', 'warn');
+        SDT.Sound.sfx('deny');
+        showBackpack(true);
+        return;
+      }
+      const boxes = game.ownedCards.filter(x => x.card && x.card.id === 'tt2-pearlbox').length;
+      const cap = boxes * 9;
+      const storedN = game.ownedCards.filter(x => x.stored).length;
+      if (storedN + stack.count > cap) {
+        UI.log(`[[icon:gem]] 珍珠盒放不下了（${storedN}/${cap} 张）——先取出一些`, 'warn');
+        SDT.Sound.sfx('deny');
+        showBackpack(true);
+        return;
+      }
+      stack.uids.forEach(uid => { const o = game.ownedCards.find(x => x.uid === uid); if (o) o.stored = 1; });
+      UI.log(`[[icon:gem]] 【<b>${esc(stack.card.name)}</b>】×${stack.count} 已拖入珍珠盒——腾出 1 个背包格`, 'ok');
+      SDT.Sound.sfx('gain');
+      saveGame();
+      showBackpack(true);
+      return;
+    }
     if (d.fromSafe) {
       // 从安全格拖回背包：落点之前插入并取出
       moveStackOrder(d.name, t.kind === 'stack' ? t.name : null);
@@ -790,12 +904,26 @@ import { _set_cardPageOpen } from './game.cardslib.js';
         <p class="ov-note">[[icon:skull]] 本场墓地可回收 <b>${graveN}</b> 张，已与原背包及 BOSS 宝箱新牌一起列出。<b>未选中的牌确认后永久丢弃，无法从火堆取回。</b></p>
         <div class="bt-hand">${cardsHTML}</div>
         <div class="ov-btns">
+          <button class="ov-btn" data-act="bossPackSmart"
+            title="一键选择：带走的数量不超过仓库空格，优先保留价值最高的卡牌">[[icon:sparkles]] 智能选择（按价值 · 上限仓库空格）</button>
           <button class="ov-btn" data-act="bossPackAll">全部带走</button>
           <button class="ov-btn" data-act="bossPackNone">全部丢弃</button>
           <button class="ov-btn ok" data-act="bossPackConfirm">[[icon:check]] 带走 ${keptN} 张 · 丢弃 ${dropN} 张</button>
         </div>`, true);
       UI.act('bossPackToggle', (d) => {
         if (keep.has(d.uid)) keep.delete(d.uid); else keep.add(d.uid);
+        renderCleanup();
+      });
+      // 智能选择（2026-09-16 留言「增加一个一键选择功能（选择数量在仓库的空格数量内，
+      // 优先选择价值最高的卡牌）」）：全部带走会在撤离入库时超仓被丢，这里按 sellPrice
+      // 降序预选至多 SDT.Base.stashRoom() 张，保证精选的都能带得回基地
+      UI.act('bossPackSmart', () => {
+        let room = SDT.Base.stashRoom();
+        keep.clear();
+        candidates.slice()
+          .sort((a, b) => SDT.Cards.sellPrice(b.card) - SDT.Cards.sellPrice(a.card))
+          .forEach(o => { if (room > 0) { keep.add(o.uid); room--; } });
+        UI.log(`[[icon:sparkles]] 智能选择：按价值带走 <b>${keep.size}</b> 张（仓库空格 ${SDT.Base.stashRoom()} 格，其余将丢弃）`, 'sys');
         renderCleanup();
       });
       UI.act('bossPackAll', () => { candidates.forEach(o => keep.add(o.uid)); renderCleanup(); });
@@ -824,10 +952,12 @@ import { _set_cardPageOpen } from './game.cardslib.js';
   // ESM：循环导入下本模块体可能先于 game.session 执行，顶层读 game 会 TDZ，延迟到 boot 统一绑定
   function bindBagMixins() {
   const onBattleEnd = async function (opts, playedUids, win, consumedUids) {
+    if (game.nestActive) return;   // 龙巢战斗结算由 game.nest 的总线订阅接管（一图战后流程不适用）
     UI.hideOverlay();
     if (win === false) { game.bossCleanupPending = false; doDeath(); return; }
-    // 需求 #1/#6（2026-09-09）：战斗中消耗的卡牌战后 1/3 概率进入消耗口袋；
-    // 职业卡与初始牌「初始攻击」不进消耗口袋（直接消散）。
+    // Item 16（2026-09-16 老板定版）：局内满足条件的牌 100% 进入消耗口袋（招式和装备）——
+    // 「1/3 保留」改到离开对局（撤离结算）时统一结算，见 game.run.altar doExtract。
+    // 衍生卡（如 闪金之锤）不能进消耗口袋（2026-09-15 留言）；职业卡与初始攻击仍直接消散。
     const toPocket = (uids, why) => {
       const moved = [];
       let gone = 0;
@@ -837,22 +967,22 @@ import { _set_cardPageOpen } from './game.cardslib.js';
         const card = game.ownedCards[i].card;
         game.ownedCards.splice(i, 1);
         if (card.rarity === '职业' || SDT.Base.isSha(card)) { gone++; return; }
-        if (Random.random('pocket') >= 1 / 3) { gone++; return; }
+        if (card.rarity === '衍生') { gone++; return; }
         moved.push(card);
       });
       moved.forEach(card => pocketAdd(card));
       if ((moved.length || gone) && why) {
         UI.log(`[[icon:archive]] ${why}：<b>${moved.length}</b> 张卡牌进入消耗口袋` +
           (gone ? `，<b>${gone}</b> 张消散了（本局无法再用）` : '（本局无法再用）') +
-          '，撤离后回基地用钥匙复原', 'sys');
+          '，撤离结算时只有 1/3 能带回基地', 'sys');
       }
       return moved.length;
     };
-    if (!opts.isBoss && playedUids.length) {
+    // Item 16 定版：所有战斗（含 BOSS）的消耗牌都进消耗口袋，撤离点统一 1/3 结算
+    if (playedUids && playedUids.length) {
       toPocket(playedUids, '使用过的卡牌');
     }
-    // 普通战/撤出 BOSS：消耗牌仍进消耗口袋；击败 BOSS 时则留给整理背包回收或丢弃。
-    if (consumedUids && consumedUids.length && (!opts.isBoss || win !== true)) {
+    if (consumedUids && consumedUids.length) {
       toPocket(consumedUids, '注能消耗的卡牌');
     }
     // 开完宝箱后的续流：普通战/首脑战（第四层 boss 格发起）都回待机
@@ -930,8 +1060,7 @@ import { _set_cardPageOpen } from './game.cardslib.js';
     }
     // 战胜 100% 掉宝箱（按所在环层 / BOSS 宝箱）
     const afterRewards = () => {
-      if (opts.isBoss) { showBossPackCleanup(consumedUids || [], settle); return; }
-      settle();
+      settle();   // Item 16：BOSS 战后不再进入整理背包
     };
     const drops = SDT.Chests.rollDrops(opts);
     const all = eventChests.concat(drops);

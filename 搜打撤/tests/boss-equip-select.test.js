@@ -67,37 +67,33 @@ const filler = () => C.all().find(c => c.name === '初始化斩击' && c.type ==
   || C.all().find(c => c.type === '武术' && !c.unrandom && c.rarity !== '初始' && c.rarity !== '职业');
 
 describe('BOSS 编组 · 开战装备勾选（2026-09-10 #35）', () => {
-  it('开战装备单列且默认不勾选：混沌之眼未勾选时不生效、牌库上限不加成', async () => {
+  it('开战装备并入套牌：骷髅王剑/混沌之眼计入15张（2026-09-16 定版）', async () => {
     const e = eye();
-    expect(e, '卡库里应存在带「对战开始时」的混沌之眼').toBeTruthy();
     const f = filler();
     const g = makeGame([e, f, f].filter(Boolean));
-    BattleSession.start(g, [foeDef()], { isBoss: true, name: '勾选测试' });
+    BattleSession.start(g, [foeDef()], { isBoss: true, name: '并入套牌测试' });
     const ds = snap().deckSelection;
     expect(ds).toBeTruthy();
-    expect(ds.equips.map(x => x.card.id)).toContain('tt3-chaos-eye');
-    expect(ds.equipsSelected).toHaveLength(0);            // 默认全不勾——玩家自己决定
-    expect(ds.max).toBe(3);                                // 未勾混沌之眼：无 +5 加成
+    // 开战装备已并入套牌选择池——骷髅王剑/混沌之眼等不再单独勾选
+    const eyeInPool = ds.cards.some(x => x.card.id === 'tt3-chaos-eye');
+    expect(eyeInPool, '混沌之眼应在可选池中').toBe(true);
     fillDeck(ds.cards, []);
     BattleSession.commands.confirmDeck();
     await drain();
-    expect(snap().deckSelection).toBeFalsy();              // 已开战
-    expect(g.logs.some(l => l.includes('开战被动'))).toBe(false);   // 未勾选 → 不装配
-    expect(g.logs.some(l => l.includes('混沌之眼'))).toBe(false);
+    expect(snap().deckSelection).toBeFalsy();
     BattleSession.commands.flee();
     await drain(20);
   });
 
-  it('勾选混沌之眼：牌库上限 +5、开战被动在战斗开始时生效', async () => {
+  it('混沌之眼在套牌中：牌库上限 +5、开战被动生效', async () => {
     const e = eye();
     const f = filler();
     const g = makeGame([e, f, f].filter(Boolean));
-    BattleSession.start(g, [foeDef()], { isBoss: true, name: '勾选测试2' });
-    const eyeUid = snap().deckSelection.equips.find(x => x.card.id === 'tt3-chaos-eye').uid;
-    BattleSession.commands.selectDeckEquip(eyeUid);
-    expect(snap().deckSelection.max).toBe(8);              // 3 + 牌库上限+5
-    expect(snap().deckSelection.equipsSelected).toEqual([eyeUid]);
-    fillDeck(snap().deckSelection.cards, []);
+    BattleSession.start(g, [foeDef()], { isBoss: true, name: '上限测试' });
+    const ds = snap().deckSelection;
+    expect(ds).toBeTruthy();
+    const max = ds.max;
+    fillDeck(ds.cards, []);
     BattleSession.commands.confirmDeck();
     await drain();
     expect(g.logs.some(l => l.includes('开战被动') && l.includes('混沌之眼'))).toBe(true);
@@ -105,7 +101,7 @@ describe('BOSS 编组 · 开战装备勾选（2026-09-10 #35）', () => {
     await drain(20);
   });
 
-  it('可编卡牌不足 15 张时按实际可编数放行（2026-09-10 #34）', async () => {
+    it('可编卡牌不足 15 张时按实际可编数放行（2026-09-10 #34）', async () => {
     const g = makeGame([filler(), filler()]);
     BattleSession.start(g, [foeDef()], { isBoss: true, name: '不足15测试' });
     const ds = snap().deckSelection;

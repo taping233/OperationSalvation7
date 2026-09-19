@@ -7,7 +7,8 @@ function renderPileBadge({ className = '', dataAct = '', title = '', count = 0, 
 
 function renderCombatPiles({ mode, drawCount, discardCount, graveCount, pileTip, cardBackHTML, escAttr }) {
   if (mode !== 'boss') return { draw: '', rest: '' };
-  const draw = renderPileBadge({ title: `牌库：${pileTip(drawCount)}`, count: drawCount.length, cardBackHTML }, escAttr);
+  // 牌库徽标可点击查看（2026-09-13 留言：点击应该能看牌库和墓地中的卡牌）
+  const draw = renderPileBadge({ className: 'clickable', dataAct: 'btDeck', title: `牌库：${pileTip(drawCount)}（点击查看）`, count: drawCount.length, cardBackHTML }, escAttr);
   const discard = renderPileBadge({ className: '', title: `弃牌堆：${pileTip(discardCount)}（牌库抽空后自动洗回）`, count: discardCount.length, cardBackHTML: `<span class="down">${cardBackHTML}</span>` }, escAttr);
   const grave = renderPileBadge({ className: 'clickable', dataAct: 'btGrave', title: `墓地：${pileTip(graveCount)}（被消耗的牌 · 不参与洗回 · 点击查看）`, count: graveCount.length, cardBackHTML: `<span class="down">${cardBackHTML}</span>`, suffix: '[[icon:skull]] ' }, escAttr);
   return { draw, rest: `${discard}${grave}` };

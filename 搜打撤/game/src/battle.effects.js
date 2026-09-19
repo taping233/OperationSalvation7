@@ -27,8 +27,9 @@ function splitEffectClauses(description) {
       out.turnStart.push({ text: match[2], each: /^每回合开始/.test(text) });
       return;
     }
-    // 「限定技能：」句不随打出结算：装备穿戴后由角色信息区的技能按钮手动发动（2026-09-09 老板 #9）
-    if ((match = text.match(/^限定技能[：:]\s*(.+)$/))) {
+    // 「主动技能：」句不随打出结算：装备穿戴后由角色信息区的技能按钮手动发动（2026-09-09 老板 #9）
+    // 2026-09-16 留言措辞改「主动技能」，兼容旧档快照的「限定技能」
+    if ((match = text.match(/^(?:主动技能|限定技能)[：:]\s*(.+)$/))) {
       out.skill.push(match[1]);
       return;
     }

@@ -72,7 +72,7 @@ check('事件·二选一与三选一分支', (() => {
 })(), true);
 check('兼容·未知事件仍走旧效果', /return null;/.test(gameSource) && /applyEventEffect\(card\)/.test(gameSource), true);
 check('BOSS·战斗/整理阶段锁住背包入口', /if \(game\.battleActive \|\| game\.bossCleanupPending\)/.test(gameSource), true);
-check('BOSS·胜利进入整理背包状态', /showBossPackCleanup\(consumedUids \|\| \[\], settle\)/.test(gameSource), true);
+check('BOSS·胜利直接结算（Item 16 定版：战后不再进入整理背包，showBossPackCleanup 退役备用）', /settle\(\);   \/\/ Item 16：BOSS 战后不再进入整理背包/.test(gameSource), true);
 check('BOSS·未选卡牌在确认时从 ownedCards 删除', /game\.ownedCards = game\.ownedCards\.filter\(o => !discardedUids\.has\(o\.uid\)\)/.test(gameSource), true);
 check('档位概览仅展示游玩时间与已解锁成就', /PLAYTIME/.test(gameSource) && /ACHIEVEMENTS/.test(gameSource), true);
 check('背包入口支持再次点击关闭', /if \(!refreshOnly && backpackOpen/.test(gameSource), true);

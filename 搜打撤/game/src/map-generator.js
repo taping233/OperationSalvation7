@@ -1,10 +1,10 @@
 /* Seeded four-layer map generator. Emits plain data for session and renderer. */
-const TARGETS = [7, 15, 17, 15];   // L1=7：2026-09-13 老板——首层流程改短，恒定七格
-const WIDTHS = [4, 8, 9, 8];   // L1 宽 4：与 TARGETS[0]=7 保持 spine 配套（2×(width-1)+1=7），坐标数才不会溢出目标格数
+const TARGETS = [7, 12, 17, 17];   // L1=7：2026-09-13 首层流程改短恒定七格；L2=12：2026-09-16 Item 17——L2 总格上限 = L3 配置总量（4+3+2+1+1+1）
+const WIDTHS = [4, 6, 9, 8];   // L2 宽 6：spine 11 格 + 生长 1 = 12，与 TARGETS[1]=12 配套（Item 17）   // L1 宽 4：与 TARGETS[0]=7 保持 spine 配套（2×(width-1)+1=7），坐标数才不会溢出目标格数
 const ROW_MIN = -3;
 const ROW_MAX = 3;
 const GENERATOR_VERSION = 3;
-const LAYOUT_VERSION = 7;   // v7：2026-09-13 老板——L1 恒定七格（TARGETS[0] 13→7、宽度 7→5）；旧对局读档后按新版本重生成地图
+const LAYOUT_VERSION = 8;   // v8：2026-09-16 Item 17——L2 总格 15→12、新增物资格（resource）格型与分层配额下限；旧对局读档后按新版本重生成地图
                             // v6：2026-09-13 老板——每层事件格 ≤3（第 3 层 17 格受战斗≤4+搜刮≤4 的
                             // 既有定版约束，结构性最少 4 个，放宽到 ≤4）
 const MAX_ATTEMPTS = 8;
@@ -41,7 +41,7 @@ function makeLayer(li, target, width, random) {
   const types = { 战斗: 'battle', 事件: 'event', 火堆: 'fire', 搜刮点: 'chest', 补给站: 'shop', 精英战: 'battle' };
   // 名字必须忠实于节点类型（2026-09-09 老板：节点名与实际内容匹配）——
   // 此前 name 按 idx % names.length 机械循环，出现「1层·火堆」实为战斗的误导性命名
-  const NAME_BY_TYPE = { battle: '战斗', event: '事件', fire: '火堆', chest: '搜刮点', shop: '补给站', emergencyExit: '紧急撤离点', altar: '祭坛', boss: '首脑' };
+  const NAME_BY_TYPE = { battle: '战斗', event: '事件', fire: '火堆', chest: '搜刮点', shop: '补给站', emergencyExit: '紧急撤离点', altar: '祭坛', boss: '首脑', resource: '物资格' };
   const nodes = coords.map((c, idx) => ({ id: `L${li + 1}_N${idx + 1}`, li, idx, x: c.x, row: c.row,
     type: types[pick(random, names)], name: '', next: [], extraction: false }));
   for (let a = 0; a < nodes.length; a++) for (let b = a + 1; b < nodes.length; b++) if (adjacent(nodes[a], nodes[b])) addEdge(nodes[a], nodes[b]);
@@ -202,6 +202,35 @@ function makeLayer(li, target, width, random) {
       boss.type = 'boss';
       altar.type = 'altar';
     }
+  }
+  // —— 分层配额下限（2026-09-16 Item 17 定版；数字为下限）——
+  //   L2：敌3 宝2 事件2 物资1 · L3：敌4 宝3 事件2 物资1 · L4：敌4 宝4 事件2 物资1
+  // 火堆/补给站（每层 1）与 L4 祭坛/首脑由上方既有规则保证，不在本段重复。
+  // L1 保持原样（老板：第一层不变）。
+  const LAYER_FLOORS = {
+    1: { battle: 3, chest: 2, event: 2, resource: 1 },
+    2: { battle: 4, chest: 3, event: 2, resource: 1 },
+    3: { battle: 4, chest: 4, event: 2, resource: 1 },
+  };
+  const FLOOR = LAYER_FLOORS[li];
+  if (FLOOR) {
+    const cnt = (t) => nodes.filter(n => n.type === t).length;
+    const isConvert = (n) => !SPECIAL.has(n.type) && !placed.includes(n) && n.type !== 'altar' && n.type !== 'boss';
+    const ensure = (type, min) => {
+      for (let guard = 0; cnt(type) < min && guard < 24; guard++) {
+        // 捐献顺序：事件优先；宝箱/战斗仅在高于自身下限时让出（宝箱 ≥1、战斗 ≥3 既有保底不动）
+        let pool = nodes.filter(n => isConvert(n) && n.type === 'event' && cnt('event') > FLOOR.event);
+        if (!pool.length) pool = nodes.filter(n => isConvert(n) &&
+          ((n.type === 'chest' && cnt('chest') > FLOOR.chest) || (n.type === 'battle' && cnt('battle') > FLOOR.battle)));
+        if (!pool.length) break;
+        pool.sort(byKind);
+        pool[Math.floor(random() * pool.length)].type = type;
+      }
+    };
+    ensure('resource', FLOOR.resource);
+    ensure('chest', FLOOR.chest);
+    ensure('event', FLOOR.event);
+    ensure('battle', FLOOR.battle);
   }
   nodes.forEach((n) => { if (!n.name) n.name = `${li + 1}层·${NAME_BY_TYPE[n.type] || '据点'}`; });
   return { nodes, entry, exit, altarEntrances, gridBounds: { minX: 0, maxX: width - 1, minRow: ROW_MIN, maxRow: ROW_MAX } };

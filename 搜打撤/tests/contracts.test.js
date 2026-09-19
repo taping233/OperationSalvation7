@@ -26,7 +26,7 @@ describe('规则与接口契约', () => {
     expect(RULES.map).toEqual({ diceSides: 3, stepMs: 340, emergencyExitCost: 10, fireHeal: 8, staminaMax: 60, staminaWarn: 10, fireClassCardChance: 0.3 });
     expect(RULES.battle.energy).toBe(2);
     expect(RULES.backpack).toMatchObject({ start: 16, max: 30, safeStart: 2, safeMax: 6 });
-    expect(RULES.base.stashMax).toBe(49);
+    expect(RULES.base.stashMax).toBe(100);   // Item 17：仓库可升到 100 格
     expect(RULES.growth).toEqual({ playerMaxHp: 30, playerAtk: 4 });
     expect(window.SDT.MAP.rules).not.toBe(RULES);
     expect(window.SDT.MAP.rules).toEqual(RULES);

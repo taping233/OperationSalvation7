@@ -33,12 +33,14 @@ let hubTab = 'deploy';
     const TABS = [
       { id: 'deploy', icon: 'flag', name: '出发' },
       { id: 'stash', icon: 'home', name: '仓库' },
+      { id: 'shop', icon: 'coin', name: '商店' },
       { id: 'upgrade', icon: 'tools', name: '升级' },
       { id: 'classes', icon: 'medal', name: '人物' },
       { id: 'ach', icon: 'trophy', name: '成就·收藏室' },
     ];
     const body = hubTab === 'deploy' ? hubDeployHTML()
       : hubTab === 'stash' ? hubStashHTML()
+      : hubTab === 'shop' ? hubShopHTML()
       : hubTab === 'upgrade' ? hubUpgradeHTML()
       : hubTab === 'classes' ? hubClassesHTML()
       : hubAchHTML();
@@ -54,7 +56,7 @@ let hubTab = 'deploy';
             <span class="res-chip">[[icon:wood]] 木材 <b>${B.data.wood}</b></span>
             <span class="res-chip">[[icon:bread]] 口粮 <b>${B.data.rations}</b></span>
             <span class="res-chip" title="真实钥匙储备 + 仓库钥匙卡（宝藏大门计数）">[[icon:key]] 钥匙 <b>${B.keyCount ? B.keyCount() : 0}</b></span>
-            <span class="res-chip" title="卖出仓库物品所得 · 出发时随身带走">[[icon:coin]] 储备 <b>${B.data.coins}</b> 币</span>
+            <span class="res-chip" title="卖出仓库物品所得 · 不进局，用于孵蛋与基地建设">[[icon:coin]] 储备 <b>${B.data.coins}</b> 币</span>
           </span>
         </header>
         <div class="hub-body">
@@ -67,8 +69,32 @@ let hubTab = 'deploy';
           <div class="hub-page${tabChanged ? ' page-in' : ''}">${body}</div>
         </div>
       </div>`, 'page');
+    // 局外商店购买（2026-09-16 留言「局外商店提供基础卡牌」）：储备币直购，货入卡牌仓库
+    UI.act('shopBuy', (d) => {
+      const g = HUB_SHOP_GOODS[+d.i];
+      if (!g) return;
+      const B = SDT.Base;
+      if (B.data.coins < g.price) { UI.log('[[icon:coin]] 储备币不足，无法购买', 'warn'); return; }
+      B.data.coins -= g.price;
+      if (g.material) {
+        B.data[g.material] = (B.data[g.material] || 0) + 1;
+        B.save();
+        Sfx.ding();
+        UI.log(`[[icon:coin]] 购入<b>${esc(g.name)}</b> ×1 → 基地物资（${esc(g.name)} ${B.data[g.material]} · 储备余 ${B.data.coins} 币）`, 'loot');
+        renderHub();
+        return;
+      }
+      const card = hubShopGoodsCard(g);
+      if (!card) { B.data.coins += g.price; return; }
+      if (B.stashRoom() <= 0) { B.data.coins += g.price; UI.log('[[icon:archive]] 仓库已满，无法入库', 'warn'); return; }
+      B.depositCards([{ card: { ...card }, count: 1 }]);
+      Sfx.ding();
+      UI.log(`[[icon:coin]] 购入【<b>${esc(card.name)}</b>】×1 → 卡牌仓库（储备余 ${B.data.coins} 币）`, 'loot');
+      renderHub();
+    });
     UI.act('hubTab', (d) => { hubTab = d.tab; renderHub(); });
     UI.act('selMode', (d) => { B.data.selMode = d.mode; B.save(); renderHub(); });
+    UI.act('nestDeploy', () => { SDT.Nest.openNestPrep(); });
     UI.act('deploy', () => { openDepartPrep(); });
     UI.act('gateInfo', () => {
       const n = B.keyCount ? B.keyCount() : 0;
@@ -158,8 +184,12 @@ let hubTab = 'deploy';
         ['出征预报', '点击「出发」后会打开出征整备：选择要从仓库携带的卡牌——只有带上的卡才能在战斗中使用。撤离成功后也会出现整理界面，让你把背包战利品放回仓库。'],
         ['宝藏大门', '在棋盘的钥匙格收集钥匙，集齐 ' + (SDT.Base.KEY_NEEDED || 10) + ' 把可开启特殊关卡（关卡制作中）。'],
       ] },
+      shop: { title: '商店说明', items: [
+        ['基础卡牌', '用储备币购买基础招式 / 装备 / 资源卡，买下直接放入卡牌仓库，出发前勾选带入。'],
+        ['储备币', '卖出仓库物品与撤离结算所得；不进局，只用于基地消费（孵蛋、商店）。'],
+      ] },
       stash: { title: '仓库说明', items: [
-        ['卡牌仓库', '点击物品可卖出换储备币，或收藏进图鉴（收藏职业卡 +10、能力卡 +50 对应人物熟练度经验，同一张只计一次；收藏只做记录与转化经验，卡牌保留在仓库；收藏进度可在「成就·收藏室」领一次性奖励。传说卡与桌游珍宝是特殊收藏品，收藏期间不可卖出）。出发时自选携带（职业卡带出后无法带入）。'],
+        ['卡牌仓库', '点击物品可卖出换储备币，或收藏进图鉴（收藏职业卡 +10、能力卡 +50 对应人物熟练度经验，重复收藏重复获得经验（进度只记首次）；收藏即用掉这张卡，不再占仓库格；收藏进度可在「成就·收藏室」领一次性奖励。传说卡与桌游珍宝是特殊收藏品，收藏期间不可卖出）。出发时自选携带（职业卡带出后无法带入）。'],
         ['材料卡 / 宠物蛋', '木材/口粮/钥匙材料卡可直接「使用」折入真实物资；宠物蛋 + 50 币可孵化随机宠物（宝箱 0.7% 掉落）。'],
         ['消耗口袋', '战斗中消耗的卡牌有 1/3 概率随撤离回到这里（职业卡与初始牌除外）；用钥匙按稀有度复原：古朴1 / 稀有2 / 史诗3 / 传说4。下一次出发后口袋清空。'],
         ['宠物', '初始宠物「汪汪狗」自动获得，携带 1 只出战（出发页可切换）；其余用宠物蛋孵化。宠物在「升级」页用口粮升级（2-3-4-5）。'],
@@ -176,7 +206,7 @@ let hubTab = 'deploy';
       ach: { title: '成就与职业收藏室', items: [
         ['卡背图鉴', '牌库堆 / 背包翻面使用的卡背；领取对应成就奖励解锁，点击即可装备。'],
         ['成就', '达成条件后自动解锁（页内显示奖励内容），回基地点击「领取」获得物资与卡背奖励。'],
-        ['职业收藏室', '仓库中收藏的职业卡与能力卡会陈列在此：收藏只做记录并转化为人物熟练度经验（职业卡 +10、能力卡 +50，同一张只计一次），卡牌保留在仓库。收藏不同的职业卡与能力卡推进进度，5 / 15 / 30 / 45 / 全收集各有一次奖励，达成后点击「领取」。'],
+        ['职业收藏室', '仓库中收藏的职业卡与能力卡会陈列在此：每次收藏都转化为人物熟练度经验（职业卡 +10、能力卡 +50，重复收藏重复获得），卡牌收藏即用掉、不再占仓库格。收藏不同的职业卡与能力卡推进进度，5 / 15 / 30 / 45 / 全收集各有一次奖励，达成后点击「领取」。'],
       ] },
     };
     const t = T[tab];
@@ -206,6 +236,8 @@ let hubTab = 'deploy';
             <p class="deploy-mission-lead">从边缘街区切入，搜集资源、识别风险，并把能带回来的东西带回基地。</p>
             <div class="deploy-mission-target"><span>本局目标</span><b>${esc(m.name)}</b><small>${esc(m.ckpt)}</small></div>
             <button id="btnDeploy" class="deploy-primary" data-act="deploy">[[icon:exit]] 出发整备 <span>→</span></button>
+            <button id="btnNest" class="deploy-primary" data-act="nestDeploy" style="margin-top:10px;background:linear-gradient(160deg,#2a1c33,#151020)"
+              title="${SDT.Base.data.nestUnlocked ? '第二地图：直捣龙巢，夺取符文与龙宝' : '首次击败一图首脑并成功撤离后解锁'}">${SDT.Base.data.nestUnlocked ? '[[icon:skull]] 龙巢远征 <span>→</span>' : '[[icon:lock]] 龙巢（未解锁）'}</button>
           </div>
           <div class="deploy-mode-dock">
             <span class="dock-label">选择行动模式</span>
@@ -457,6 +489,52 @@ let hubTab = 'deploy';
   const isSpecialCollect = (card) => !!card &&
     (card.rarity === '传说' || SPECIAL_COLLECT_IDS.has(card.id));
 
+  // —— 局外商店（2026-09-16 留言「局外商店提供基础卡牌」）——
+  // 用储备币（卖出所得，不进局）购买基础卡，直接入卡牌仓库；初始攻击每局自动携带、
+  // 火球为衍生牌不外售，故货架只放可入库的基础招式/装备/资源卡。
+  // 2026-09-17 留言「买的木材没到账」：口粮/木材改为直接折入基地物资（老板预期=看物资计数），
+  // 卡牌货架只留基础招式/装备
+  const HUB_SHOP_GOODS = [
+    { id: 'tt3-skewer',  price: 6, tip: '基础招式 · 造成 2 点伤害，无视护甲' },
+    { id: 'tt3-staff',   price: 6, tip: '基础装备 · 法伤 +1' },
+    { material: 'rations', name: '口粮', price: 4, tip: '基地物资 +1 · 升级宠物' },
+    { material: 'wood',    name: '木材', price: 4, tip: '基地物资 +1 · 扩建背包与仓库' },
+  ];
+  const hubShopGoodsCard = (g) => g.id === 'sha'
+    ? { ...SDT.Cards.SHA }
+    : (SDT.Cards.all().find(c => c.id === g.id) || null);
+  function hubShopHTML() {
+    const B = SDT.Base;
+    const room = B.stashRoom();
+    const rows = HUB_SHOP_GOODS.map((g, i) => {
+      const affordCoin = B.data.coins >= g.price;
+      const roomOk = g.material ? true : room > 0;
+      const afford = affordCoin && roomOk;
+      const why = !affordCoin ? '储备币不足' : (roomOk ? (g.material ? '买入物资' : '买入仓库') : '仓库已满');
+      const label = g.material
+        ? `[[icon:${g.material === 'wood' ? 'wood' : 'bread'}]] <b>${esc(g.name)}</b><span class="dim"> · 基地物资 · ${escAttr(g.tip)}</span>`
+        : (() => { const card = hubShopGoodsCard(g); return card ? `[[icon:cards]] <b>${esc(card.name)}</b><span class="dim"> · ${esc(card.type)} · ${escAttr(g.tip)}</span>` : ''; })();
+      return `<div class="pk-row stash-row" title="${escAttr(g.tip)}">
+          <span>${label}</span>
+        <button class="mini-btn ok" data-act="shopBuy" data-i="${i}" ${afford ? '' : 'disabled'} title="${escAttr(why)}">[[icon:coin]] ${g.price} 币</button>
+      </div>`;
+    }).join('');
+    return `
+      <div class="hub-two">
+        <section class="hub-card">
+          <h3>[[icon:coin]] 远征补给商店</h3>
+          <div class="base-line">储备 <b>${B.data.coins}</b> 币 · 仓库空格 <b>${room}</b> 格</div>
+          <div class="stash-list">${rows}</div>
+        </section>
+        <section class="hub-card">
+          <h3>[[icon:book]] 补给说明</h3>
+          <p class="ov-note">买下的基础卡直接放入<b>卡牌仓库</b>；出发前在「出发」页勾选带入对局。</p>
+          <p class="ov-note">[[icon:coin]] 储备币来源：仓库卖出与撤离结算。储备币不进局，只用于基地消费。</p>
+          <p class="ov-note">口粮/木材买入直接折入基地物资（升级宠物 / 扩建）。「初始攻击」每局自动携带、火球为衍生牌，均不在货架。</p>
+        </section>
+      </div>`;
+  }
+
   function hubStashHTML() {
     const B = SDT.Base;
     const used = B.stashUsed(), cap = B.stashCap();
@@ -610,8 +688,8 @@ let hubTab = 'deploy';
     const marked = B.isCollected(s.card);
     const price = SDT.Cards.sellPrice(s.card);
     const special = isSpecialCollect(s.card);
-    // 职业收藏室（2026-09-10 留言 #39 定版）：收藏职业卡 / 能力卡计入收藏室并转化为熟练度经验，
-    // 卡牌保留在仓库（此前整堆删除，玩家感受等同卖出）。同一张卡只有首次收藏计入经验（Meta.collXp）。
+    // 职业收藏室（2026-09-16 Item 15 定版）：收藏即用掉（从仓库移除），每次收藏都转化熟练度经验；
+    // 收藏进度（data.collection）只在首次登记。旧「同一张只计一次/卡牌保留」口径作废。
     const convertType = !!s.card.cls && (s.card.rarity === '职业' || s.card.type === '能力卡');
     const convertible = convertType && !marked;
     game.state = 'modal';
@@ -622,15 +700,12 @@ let hubTab = 'deploy';
         ${s.count > 1 ? `（全部卖出 +${price * s.count} 币）` : ''}</p>
       ${special ? '<p class="ov-note">[[icon:sparkles]] <b>特殊收藏品</b>——收藏后可完成对应成就，且收藏期间不可卖出。</p>' : ''}
       ${marked && !convertType ? '<p class="ov-note">[[icon:sparkles]] 收藏中的物品受保护：取消收藏后才能卖出（图鉴记录会保留）。</p>' : ''}
-      ${convertible ? `<p class="ov-note">[[icon:medal]] <b>职业收藏室</b>：收藏后计入收藏室陈列，并转化为对应人物的熟练度经验（同一张卡只有首次收藏计入进度）——<b>卡牌保留在仓库</b>。</p>` : ''}
-      ${marked && convertType ? '<p class="ov-note">[[icon:medal]] 该卡已收藏入职业收藏室（经验已结算）——卡牌保留在仓库，可正常卖出或继续存放。</p>' : ''}
+      ${convertible ? `<p class="ov-note">[[icon:medal]] <b>职业收藏室</b>：收藏即用掉这张卡（从仓库移除、不再占格），转化为对应人物的熟练度经验——<b>重复收藏重复获得经验</b>（同一张卡只有首次收藏推进收藏进度）。</p>` : ''}
       <div class="ov-btns">
         ${s.card.id === 'tt-econpack' ? `<button class="ov-btn ok" data-act="econpackUse">[[icon:cards]] 使用（获得 5 张随机卡牌）</button>` : ''}
         ${convertible
-          ? `<button class="ov-btn ok" data-act="collToggle">[[icon:medal]] 收藏（转化经验 · 卡牌保留）</button>`
-          : marked && convertType
-            ? ''
-            : `<button class="ov-btn${marked ? '' : ' ok'}" data-act="collToggle">${marked ? '[[icon:sparkles]] 取消收藏' : '[[icon:sparkles]] 收藏'}</button>`}
+          ? `<button class="ov-btn ok" data-act="collCollectOne">[[icon:medal]] 收藏 1 张（+${s.card.type === '能力卡' ? 50 : 10} 经验 · 卡牌用掉）</button>${s.count > 1 ? `<button class="ov-btn" data-act="collCollectAll">全部收藏（×${s.count}）</button>` : ''}`
+          : `<button class="ov-btn${marked ? '' : ' ok'}" data-act="collToggle">${marked ? '[[icon:sparkles]] 取消收藏' : '[[icon:sparkles]] 收藏'}</button>`}
         <button class="ov-btn${marked ? ' ok' : ''}" data-act="sellOne" ${marked ? 'disabled' : ''}>[[icon:coin]] 卖出 1 张（+${price}）</button>
       </div>
       <div class="ov-btns">
@@ -654,6 +729,36 @@ let hubTab = 'deploy';
       } else {
         UI.log('[[icon:bag]] 背包已满，经济卡包没有拆开', 'warn');
       }
+      renderHub();
+    });
+    UI.act('collCollectOne', () => {
+      // 2026-09-16 定版（Item 15）：职业卡/能力卡收藏即用掉——重复收藏重复获得经验，进度只记首次
+      if (!convertType) return;
+      const first = !B.isCollected(s.card);
+      if (first) B.collectToggle(s.card);   // 仅首次登记收藏进度
+      SDT.Meta.onCollect(s.card, true);     // 每次收藏都结算经验
+      const si = B.data.stash.indexOf(s);
+      if (si >= 0) { s.count--; if (s.count <= 0) B.data.stash.splice(si, 1); }
+      B.save();
+      SDT.Meta.checkUnlocks();
+      Sfx.ding();
+      UI.log(`[[icon:medal]] 已收藏【<b>${esc(s.card.name)}</b>】并转化为人物经验（卡牌用掉，不再占格${first ? '，收藏进度 +1' : ''}）`, 'loot');
+      renderHub();
+    });
+    UI.act('collCollectAll', () => {
+      if (!convertType) return;
+      const n = s.count;
+      for (let k = 0; k < n; k++) {
+        const first = k === 0 && !B.isCollected(s.card);
+        if (first) B.collectToggle(s.card);
+        SDT.Meta.onCollect(s.card, true);
+      }
+      const si = B.data.stash.indexOf(s);
+      if (si >= 0) B.data.stash.splice(si, 1);
+      B.save();
+      SDT.Meta.checkUnlocks();
+      Sfx.ding();
+      UI.log(`[[icon:medal]] 已收藏【<b>${esc(s.card.name)}</b>】×${n}，全部转化为人物经验（卡牌用掉）`, 'loot');
       renderHub();
     });
     UI.act('collToggle', () => {

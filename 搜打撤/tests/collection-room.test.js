@@ -23,12 +23,18 @@ beforeAll(() => {
 
 // 把一张卡直接放入仓库（模拟撤离入库）
 const intoStash = (card, n = 1) => { Base.data.stash.push({ card: { ...card }, count: n }); Base.save(); };
-// 仓库 → 收藏（与 UI 收藏按钮同一结算路径）
+// 仓库 → 收藏（与 UI collCollectOne 同一结算路径，2026-09-16 Item 15 定版）：
+// 首次登记进度、每次都结算经验，并从仓库用掉一张；非收藏池不结算也不消耗
 const collectById = (id) => {
   const stack = Base.data.stash.find(s => s.card.id === id);
   expect(stack, `仓库里应有 ${id}`).toBeTruthy();
-  const now = Base.collectToggle(stack.card);
-  return Meta.onCollect(stack.card, now);
+  if (!Meta.isCollectible(stack.card)) return null;
+  const first = !Base.isCollected(stack.card);
+  if (first) Base.collectToggle(stack.card);
+  const r = Meta.onCollect(stack.card, true);
+  stack.count--;
+  if (stack.count <= 0) Base.data.stash.splice(Base.data.stash.indexOf(stack), 1);
+  return r;
 };
 const resetBase = () => {
   Base.data.collClaimed = {}; Base.data.collXp = {}; Base.data.collection = {};
@@ -66,18 +72,19 @@ describe('收藏池与进度', () => {
 });
 
 describe('收藏经验', () => {
-  it('收藏职业卡为对应人物 +10 经验，同一张只结算一次', () => {
+  it('收藏职业卡为对应人物 +10 经验；重复收藏重复获得经验（2026-09-16 Item 15 定版）', () => {
     resetBase();
     const card = Meta.collectPool().find(c => c.rarity === '职业');
     intoStash(card);
     const r1 = collectById(card.id);
     expect(r1).toMatchObject({ cls: card.cls, amount: 10 });
     expect(Meta.classXP(card.cls)).toBe(10);
-    // 取消收藏再重新收藏：经验不重复发放
-    const stack = Base.data.stash.find(s => s.card.id === card.id);
-    Base.collectToggle(stack.card);          // 取消
-    expect(Meta.onCollect(stack.card, true)).toBeNull();
-    expect(Meta.classXP(card.cls)).toBe(10);
+    // 再收一张同名卡：经验照发（进度只记首次，不再翻倍）
+    intoStash(card);
+    const r2 = collectById(card.id);
+    expect(r2 && r2.amount).toBe(10);
+    expect(Meta.classXP(card.cls)).toBe(20);
+    expect(Object.keys(Base.data.collection).length).toBe(1);   // 进度只记首次
     resetBase();
   });
   it('收藏能力卡为对应人物 +50 经验', () => {
@@ -183,17 +190,18 @@ describe('收藏里程碑（一次性奖励）', () => {
 });
 
 
-describe('收藏保留卡牌（2026-09-10 留言 #39 定版）', () => {
-  it('收藏职业卡后卡牌仍保留在仓库（不再整堆删除），经验照常结算', () => {
+describe('收藏即用掉（2026-09-16 Item 15 定版，取代 09-10 保留口径）', () => {
+  it('收藏后卡牌从仓库移除（不再占格）；收藏记录照常', () => {
     resetBase();
     const pool = Cards.classPool('侠客').filter(c => c.rarity === '职业' && !c.hero);
     const card = pool[0];
     intoStash(card, 3);
     collectById(card.id);
-    expect(Base.data.stash, '收藏后卡牌应保留在仓库').toHaveLength(1);
-    expect(Base.data.stash[0].count).toBe(3);
+    const stack = Base.data.stash.find(s2 => s2.card.id === card.id);
+    expect(stack && stack.count).toBe(2);                     // 3 张收 1 张：剩 2 张
     expect(Base.data.collection[card.id]).toBeTruthy();       // 收藏记录照常
-    expect(Object.keys(Base.data.collXp).length).toBe(1); // 经验只结算一次
+    collectById(card.id); collectById(card.id);               // 再收 2 张：全部用掉
+    expect(Base.data.stash.some(s2 => s2.card.id === card.id)).toBe(false);
     resetBase();
   });
 });

@@ -270,7 +270,7 @@ export function openBattleCell(def, encounter) {
 }
 
 // 宝箱格 / 事件卡开真宝箱：开完回待机并存档（场景演出后由本函数自行收尾）
-export function openChestsOnCell(chests, text) {
+export function openChestsOnCell(chests, text, opts) {
   UI.log(`[[icon:archive]] ${text || '回收了' + SDT.Chests.dropText(chests)}`, 'loot');
   SDT.Chests.open(game, chests, () => {
     game.state = 'idle';

@@ -12,7 +12,7 @@ const BOOT_ORDER = [
   'event-bus', 'notes', 'cards', 'combat', 'base', 'meta', 'render-scheduler', 'renderer.fx',
   'renderer', 'ui', 'shared',
   'battle.effects', 'battle.core', 'battle.view', 'chests',
-  'game.storage', 'game.store', 'game.session', 'game.run', 'game.hub', 'game.bag',
+  'game.storage', 'game.store', 'game.session', 'game.nest', 'game.run', 'game.hub', 'game.bag',
   'game.notes', 'game.cardslib', 'game.boot',
 ];
 
