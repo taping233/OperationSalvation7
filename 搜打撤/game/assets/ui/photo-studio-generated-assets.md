@@ -16,3 +16,20 @@
 - 原始文件：`D:\素材\代号柒\.tmp\nai\output\photo-nail-alpha-20260919\photo-nail_seed272566725.png`
 
 用途：每张卡牌顶部中央独立叠放一枚墙钉；麻绳与夹子方案已取消，相关发布资产已移除。
+
+## 影廊版素材（2026-09-19 深夜，照相馆 4.0 影廊改造）
+
+老板拍板「酒红绒布影廊」方向后全新生成，`assets/ui/photo-studio/` 下五张 webp（quality 78，共约 159KB），
+CSS 挂载点见 `expedition-library.css` 的 photo-studio-v3 段；图丢失时各挂载点均有渐变兜底层：
+
+| 文件 | 原图 seed | 规格 | 挂载点 |
+| --- | --- | --- | --- |
+| wall.webp | 207888680 | 1216×832 | 卡格区背景墙（clib-main，cover） |
+| sign.webp | 1928749931 | 1216×832 | 页头牌匾底纹（library-head，88-93% 暗化） |
+| desk.webp | 438337378 | 832×1216 | 选片台台面（library-inspector，cover） |
+| empty.webp | 120616023 | 1216×832 | 空态静物插画（clib-empty，cover） |
+| back.webp | 1959446116 | 832×1216 | 大图背签相纸背面（#cardZoom .cz-note.has） |
+
+出图脚本：`D:\素材\代号柒\.tmp\nai\cardlib_gallery_0919.py`（官方 painterly 模块 v1.0，
+socks5h://127.0.0.1:7890 通道，45s 铁律/429/000 重试内置）。同批取代「塑料图钉/卷角/磨损斑」
+旧拟物层：photo-nail-v1.png 自此无引用（保留未删，处置待老板定）。

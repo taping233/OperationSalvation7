@@ -69,9 +69,10 @@
    本段全部规则都带 body.cardlib-open 前缀 + !important：cards.css 的牌库去动画禁令是
    (1,1,2) 的 !important，只有更高优先级才能逐条豁免；豁免原则沿用 09-08 定调——
    只放 transform/opacity（合成器线程），filter/drop-shadow 类重绘仍然全禁。 */
-body.cardlib-open #overlay .card-library-page { --lib-c1:#dfc28d; --lib-c2:#5fc9c0; --lib-c3:#c79bff; }
+body.cardlib-open #overlay .card-library-page { --lib-c1:#dfc28d; --lib-c2:#d8b57e; --lib-c3:#c79bff; }
 
-/* 第二色调：当前页签、命中数、筛选栏分隔、输入焦点、按钮悬停 */
+/* 主色仍是档案金 #dfc28d；第二色原为青玉（2026-09-19 影廊改造：跟随照相馆主题回归金铜系），
+   第三色=紫晶 #c79bff（空态/危险操作/全息彩蛋）。 */
 body.cardlib-open #overlay .card-library-page .type-tab.on {
   border-color:var(--lib-c2)!important; background:rgba(95,201,192,.13)!important;
   box-shadow:inset 3px 0 var(--lib-c2)!important; }
@@ -117,7 +118,7 @@ body.cardlib-open #overlay .card-library-page .clib-count b.bump {
 body.cardlib-open #overlay .card-library-page .lib-cardwrap { position:relative; }
 body.cardlib-open #overlay .card-library-page .lib-cardwrap::after {
   content:''; position:absolute; inset:0; pointer-events:none; opacity:0; border-radius:inherit;
-  background:linear-gradient(120deg, transparent 33%, rgba(223,194,141,.17) 46%, rgba(95,201,192,.19) 56%, transparent 68%);
+  background:linear-gradient(120deg, transparent 33%, rgba(223,194,141,.17) 46%, rgba(216,181,126,.19) 56%, transparent 68%);
   transition:opacity .18s ease!important; }
 body.cardlib-open #overlay .card-library-page .lib-cardwrap:hover::after { opacity:1; }
 
@@ -372,27 +373,37 @@ body.cardlib-open #overlay .card-library-page .clib-empty {
   body.cardlib-open #overlay .card-library-page .clib-main { padding:18px!important; }
 }
 
-/* ============ 照相馆 3.0：轻量照片墙 ============ */
+/* ============ 照相馆 4.0：深夜影廊（2026-09-19 影廊改造）============
+   口径（老板拍板）：主题钉死照相馆，从「廉价冲印墙」升格为「深夜影廊」。
+   材质语言：酒红绒布墙 + 胡桃木 + 黄铜件 + 象牙白相纸 + 暖白看片灯。
+   删：塑料图钉/卷角/磨损斑/3D 倾斜（廉价拟物四件套）；
+   留：照片悬挂隐喻、按 id 稳定的微倾与落影、全部动效彩蛋（09-13 点名要的）。
+   青色 #18d1ff 全系退役 → 黄铜金 #d4af7a；背景先走酒红渐变占位，生图墙纸到位后替换。 */
 body.cardlib-open #overlay .photo-studio-v3 {
-  --studio-gold:#18d1ff;
-  --studio-gold-soft:#8ee6ff;
-  --studio-ice:#4dd8f5;
-  --studio-panel:#141416;
-  --studio-control:#1d1f20;
-  --studio-control-hi:#242424;
-  --studio-text:#f2f2f2;
-  --studio-muted:#ababab;
-  --studio-line:rgba(255,255,255,.14);
-  --studio-paper:#e8e6e3;
-  --studio-wall:#141414;
+  --studio-gold:#d4af7a;
+  --studio-gold-soft:#ecd9b0;
+  --studio-ice:#d4af7a;
+  --studio-panel:#1d1512;
+  --studio-control:#251b14;
+  --studio-control-hi:#2e2218;
+  --studio-text:#f2ede4;
+  --studio-muted:#a99e8f;
+  --studio-line:rgba(212,175,122,.18);
+  --studio-paper:#ece8e0;
+  --studio-wall:#170f0d;
+  --studio-brass-hi:#f0d9a8;
+  --studio-brass:#c9a468;
+  --studio-brass-lo:#8a6a3c;
+  --studio-velvet:#5a1c24;
   display:flex!important;
   flex-direction:column!important;
   min-height:100%!important;
   overflow:hidden!important;
   color:var(--studio-text)!important;
   background:
-    radial-gradient(110% 72% at 52% -22%,rgba(24,209,255,.06),transparent 60%),
-    linear-gradient(180deg,#0b0b0d,#101013 62%,#08080a)!important;
+    radial-gradient(110% 60% at 50% -10%, rgba(255,216,170,.10), transparent 56%),
+    radial-gradient(120% 80% at 50% 112%, rgba(90,28,36,.42), transparent 60%),
+    linear-gradient(180deg,#1b0e10,#210f12 52%,#140a0b)!important;
 }
 
 body.cardlib-open #overlay .photo-studio-v3 .library-head {
@@ -403,15 +414,19 @@ body.cardlib-open #overlay .photo-studio-v3 .library-head {
   gap:9px 18px!important;
   padding:14px clamp(18px,2.2vw,34px) 12px!important;
   align-items:center!important;
-  border-bottom:1px solid rgba(255,255,255,.12)!important;
-  background:linear-gradient(180deg,#0e0e10,#0a0a0c)!important;
-  box-shadow:inset 0 -1px rgba(255,255,255,.08),0 4px 14px rgba(0,0,0,.5);
+  border-bottom:1px solid rgba(212,175,122,.22)!important;
+  /* 门头牌匾生图做微透底纹（15% 量级），牌面留白区正落在标题下方 */
+  background:
+    linear-gradient(180deg, rgba(26,13,11,.88), rgba(20,10,8,.93)),
+    url('../assets/ui/photo-studio/sign.webp') center 34%/cover no-repeat,
+    linear-gradient(180deg,#221412,#180d0b)!important;
+  box-shadow:inset 0 -1px rgba(212,175,122,.10),0 4px 14px rgba(0,0,0,.5);
 }
 body.cardlib-open #overlay .photo-studio-v3 .library-title { grid-area:title; padding:0!important; }
 body.cardlib-open #overlay .photo-studio-v3 .library-kicker {
   display:block;
   margin:0 0 3px;
-  color:#18d1ff!important;
+  color:var(--studio-gold)!important;
   font:700 9px/1.2 "Cascadia Code",monospace!important;
   letter-spacing:.24em!important;
 }
@@ -440,13 +455,13 @@ body.cardlib-open #overlay .photo-studio-v3 .clib-count {
   gap:2px 8px;
   align-items:end;
   padding:6px 12px;
-  border-left:1px solid rgba(255,255,255,.15);
-  color:#8d8d8d!important;
+  border-left:1px solid rgba(212,175,122,.2);
+  color:#9a8d7c!important;
   white-space:nowrap;
 }
 body.cardlib-open #overlay .photo-studio-v3 .clib-count small { font-size:9px; letter-spacing:.08em; }
 body.cardlib-open #overlay .photo-studio-v3 .clib-count b {
-  color:#18d1ff!important;
+  color:var(--studio-gold-soft)!important;
   font:700 16px/1 ui-monospace,monospace!important;
 }
 body.cardlib-open #overlay .photo-studio-v3 .clib-count i { display:none; }
@@ -455,9 +470,9 @@ body.cardlib-open #overlay .photo-studio-v3 .library-head>.pg-close {
   position:static!important;
   width:40px!important;
   height:40px!important;
-  border-color:rgba(255,255,255,.25)!important;
-  color:#ababab!important;
-  background:rgba(20,20,22,.6)!important;
+  border-color:rgba(212,175,122,.3)!important;
+  color:var(--studio-muted)!important;
+  background:rgba(29,21,18,.6)!important;
   box-shadow:0 3px 8px rgba(0,0,0,.45)!important;
 }
 body.cardlib-open #overlay .photo-studio-v3 .library-tools {
@@ -471,9 +486,9 @@ body.cardlib-open #overlay .photo-studio-v3 .studio-search {
   flex:1;
   min-width:180px;
   display:grid;
-  border:1px solid rgba(255,255,255,.16);
+  border:1px solid rgba(212,175,122,.22);
   border-radius:2px;
-  background:#1d1f20;
+  background:var(--studio-control);
 }
 body.cardlib-open #overlay .photo-studio-v3 .studio-search .clib-search {
   width:100%;
@@ -483,30 +498,30 @@ body.cardlib-open #overlay .photo-studio-v3 .studio-search .clib-search {
   border-radius:0!important;
   background:transparent!important;
   box-shadow:none!important;
-  color:#f0f0f0!important;
+  color:var(--studio-text)!important;
 }
-body.cardlib-open #overlay .photo-studio-v3 .studio-search .clib-search::placeholder { color:#585858!important; }
+body.cardlib-open #overlay .photo-studio-v3 .studio-search .clib-search::placeholder { color:#6b5f50!important; }
 body.cardlib-open #overlay .photo-studio-v3 .studio-search:focus-within {
-  border-color:rgba(24,209,255,.7);
-  box-shadow:0 0 0 2px rgba(24,209,255,.15);
+  border-color:rgba(212,175,122,.65);
+  box-shadow:0 0 0 2px rgba(212,175,122,.16);
 }
 body.cardlib-open #overlay .photo-studio-v3 .library-tools>.pg-select,
 body.cardlib-open #overlay .photo-studio-v3 .library-tools>.hs-btn {
   min-height:42px!important;
-  border-color:rgba(255,255,255,.16)!important;
-  color:#e8e6e3!important;
-  background:#1d1f20!important;
-  box-shadow:0 2px 5px rgba(50,64,65,.12)!important;
+  border-color:rgba(212,175,122,.22)!important;
+  color:#e8dfd0!important;
+  background:var(--studio-control)!important;
+  box-shadow:0 2px 5px rgba(20,10,6,.3)!important;
 }
 body.cardlib-open #overlay .photo-studio-v3 .library-tools>.pg-select:hover,
 body.cardlib-open #overlay .photo-studio-v3 .library-tools>.hs-btn:hover {
-  border-color:rgba(24,209,255,.55)!important;
-  background:#242424!important;
+  border-color:rgba(212,175,122,.6)!important;
+  background:var(--studio-control-hi)!important;
 }
 body.cardlib-open #overlay .photo-studio-v3 .studio-edit-toggle.on {
   border-color:var(--studio-gold)!important;
-  color:#041518!important;
-  background:#18d1ff!important;
+  color:#241708!important;
+  background:linear-gradient(180deg,var(--studio-brass-hi),var(--studio-brass))!important;
 }
 
 body.cardlib-open #overlay .photo-studio-v3 .studio-filterbar {
@@ -516,9 +531,9 @@ body.cardlib-open #overlay .photo-studio-v3 .studio-filterbar {
   gap:9px;
   align-items:center;
   padding:8px clamp(18px,2.2vw,34px);
-  border-bottom:1px solid rgba(255,255,255,.1);
-  background:#141416;
-  box-shadow:inset 0 1px rgba(255,255,255,.07),inset 0 -1px rgba(0,0,0,.4);
+  border-bottom:1px solid rgba(212,175,122,.14);
+  background:var(--studio-panel);
+  box-shadow:inset 0 1px rgba(255,255,255,.05),inset 0 -1px rgba(0,0,0,.4);
 }
 body.cardlib-open #overlay .photo-studio-v3 .clib-tabs {
   display:flex;
@@ -539,22 +554,23 @@ body.cardlib-open #overlay .photo-studio-v3 .type-tab {
   border:1px solid transparent;
   border-radius:2px;
   background:transparent;
-  color:#ababab;
+  color:var(--studio-muted);
 }
 body.cardlib-open #overlay .photo-studio-v3 .type-tab i { display:grid; place-items:center; opacity:.66; }
 body.cardlib-open #overlay .photo-studio-v3 .type-tab .ic { width:13px; height:13px; }
 body.cardlib-open #overlay .photo-studio-v3 .type-tab em {
-  color:#585858;
+  color:#6b5f50;
   font:700 10px "Cascadia Code",monospace;
   font-style:normal;
 }
+/* 选中页签：金色线框（不再用实底色块），金字金计数 */
 body.cardlib-open #overlay .photo-studio-v3 .type-tab.on {
-  color:#000;
-  border-color:#18d1ff;
-  background:#18d1ff;
-  box-shadow:inset 0 1px rgba(255,255,255,.35),0 2px 8px rgba(24,209,255,.25);
+  color:var(--studio-gold-soft);
+  border-color:rgba(212,175,122,.62);
+  background:rgba(212,175,122,.10);
+  box-shadow:inset 0 0 0 1px rgba(212,175,122,.16),0 2px 8px rgba(0,0,0,.3);
 }
-body.cardlib-open #overlay .photo-studio-v3 .type-tab.on em { color:#003a4a; }
+body.cardlib-open #overlay .photo-studio-v3 .type-tab.on em { color:var(--studio-gold); }
 body.cardlib-open #overlay .photo-studio-v3 .library-advanced { position:relative; }
 body.cardlib-open #overlay .photo-studio-v3 .library-advanced summary,
 body.cardlib-open #overlay .photo-studio-v3 .studio-clear {
@@ -562,10 +578,10 @@ body.cardlib-open #overlay .photo-studio-v3 .studio-clear {
   display:flex;
   align-items:center;
   padding:0 11px;
-  border:1px solid rgba(255,255,255,.16);
+  border:1px solid rgba(212,175,122,.22);
   border-radius:2px;
-  background:#1d1f20;
-  color:#ababab;
+  background:var(--studio-control);
+  color:var(--studio-muted);
   font:600 11px var(--font-ui);
   white-space:nowrap;
 }
@@ -578,12 +594,12 @@ body.cardlib-open #overlay .photo-studio-v3 .library-advanced>div {
   display:grid;
   gap:7px;
   padding:10px;
-  border:1px solid rgba(255,255,255,.14);
-  background:#1d1f20;
-  color:#e8e6e3;
-  box-shadow:0 16px 36px rgba(0,0,0,.5);
+  border:1px solid rgba(212,175,122,.24);
+  background:var(--studio-control);
+  color:#e8dfd0;
+  box-shadow:0 16px 36px rgba(0,0,0,.55);
 }
-body.cardlib-open #overlay .photo-studio-v3 .studio-clear { color:#585858; }
+body.cardlib-open #overlay .photo-studio-v3 .studio-clear { color:#6b5f50; }
 body.cardlib-open #overlay .photo-studio-v3 .studio-active-filters {
   flex:0 0 auto;
   min-height:29px;
@@ -591,18 +607,18 @@ body.cardlib-open #overlay .photo-studio-v3 .studio-active-filters {
   align-items:center;
   gap:6px;
   padding:3px clamp(18px,2.2vw,34px);
-  color:#8d8d8d;
+  color:#9a8d7c;
   font-size:10px;
-  border-bottom:1px solid rgba(255,255,255,.08);
-  background:#101012;
+  border-bottom:1px solid rgba(212,175,122,.1);
+  background:rgba(23,15,13,.8);
 }
 body.cardlib-open #overlay .photo-studio-v3 .studio-active-filters:empty { display:none; }
 body.cardlib-open #overlay .photo-studio-v3 .studio-active-filters button {
   padding:3px 8px;
-  border:1px solid rgba(24,209,255,.35);
+  border:1px solid rgba(212,175,122,.4);
   border-radius:999px;
-  background:#1d1f20;
-  color:#8ee6ff;
+  background:var(--studio-control);
+  color:var(--studio-gold-soft);
 }
 
 body.cardlib-open #overlay .photo-studio-v3 .clib-main {
@@ -614,12 +630,13 @@ body.cardlib-open #overlay .photo-studio-v3 .clib-main {
   padding:14px clamp(18px,2.2vw,34px) 22px!important;
   overflow:hidden!important;
   align-items:stretch!important;
+  /* 酒红绒布墙：生图墙纸打底（cover 铺满、不进滚动容器），渐变做加载兜底与暗化层 */
   background:
-    radial-gradient(ellipse at 8% 14%,rgba(255,255,255,.035),transparent 24%),
-    radial-gradient(ellipse at 82% 76%,rgba(0,0,0,.3),transparent 28%),
-    radial-gradient(circle at 31% 42%,rgba(255,255,255,.14) 0 1px,transparent 2px),
-    radial-gradient(circle at 67% 23%,rgba(24,209,255,.1) 0 1px,transparent 2px),
-    linear-gradient(180deg,#1a1a1c 0%,var(--studio-wall) 52%,#0d0d0f 100%)!important;
+    linear-gradient(180deg, rgba(23,10,9,.42), rgba(23,10,9,.28) 40%, rgba(16,7,6,.5)),
+    radial-gradient(90% 42% at 46% -6%, rgba(255,214,168,.10), transparent 58%),
+    url('../assets/ui/photo-studio/wall.webp') center 18%/cover no-repeat,
+    radial-gradient(130% 90% at 50% 30%, rgba(90,28,36,.5), transparent 72%),
+    linear-gradient(180deg,#241114 0%,#1b0d0f 52%,#120908 100%)!important;
   border-top:1px solid rgba(0,0,0,.7);
   box-shadow:inset 0 18px 40px rgba(0,0,0,.3),inset 0 -28px 50px rgba(0,0,0,.35);
 }
@@ -634,10 +651,10 @@ body.cardlib-open #overlay .photo-studio-v3 .lib-grid {
   padding:20px 12px 42px!important;
   align-content:start;
   scrollbar-width:thin;
-  scrollbar-color:#333 transparent;
+  scrollbar-color:#4a3230 transparent;
   background:
-    radial-gradient(ellipse at 18% 8%,rgba(255,255,255,.03),transparent 28%),
-    radial-gradient(ellipse at 74% 44%,rgba(0,0,0,.08),transparent 32%);
+    radial-gradient(ellipse at 18% 8%,rgba(255,255,255,.028),transparent 28%),
+    radial-gradient(ellipse at 74% 44%,rgba(0,0,0,.1),transparent 32%);
 }
 body.cardlib-open #overlay .photo-studio-v3 .lib-grid.is-empty {
   display:grid!important;
@@ -652,7 +669,7 @@ body.cardlib-open #overlay .photo-studio-v3 .lib-item {
   content-visibility:auto;
   contain:layout style;
   contain-intrinsic-size:auto 236px!important;
-  perspective:720px;
+  perspective:760px;
   rotate:var(--photo-tilt,0deg);
   transition:transform .18s ease!important;
 }
@@ -674,64 +691,53 @@ body.cardlib-open #overlay .photo-studio-v3 .lib-cardwrap.studio-photo {
   box-shadow:none!important;
   transform:none!important;
 }
+/* 相纸：象牙白卡纸。实体感三件套——纸边厚度硬阴影、非均匀表面反光、随卡微 3D 侧倾；
+   悬挂件=黄铜相片夹（顶部金属条），替代塑料图钉 */
 body.cardlib-open #overlay .photo-studio-v3 .studio-photo-paper {
   position:relative;
   display:block;
   min-width:0;
-  padding:7px 7px 12px;
-  border:1px solid rgba(255,255,255,.85);
-  border-right-color:rgba(120,120,120,.76);
-  border-bottom-color:rgba(100,100,100,.84);
+  padding:6px 6px 10px;
+  border:1px solid rgba(250,246,238,.9);
+  border-right-color:rgba(150,138,120,.7);
+  border-bottom-color:rgba(130,118,100,.78);
   border-radius:2px;
   background:
-    linear-gradient(102deg,rgba(255,255,255,.14),transparent 24% 76%,rgba(40,40,40,.075)),
-    linear-gradient(145deg,#efedea,#d2cfca);
+    linear-gradient(102deg,rgba(255,255,255,.2),transparent 26% 74%,rgba(88,76,60,.1)),
+    linear-gradient(145deg,#f0ede7,#d9d4ca);
   box-shadow:
-    1px 2px 0 rgba(70,70,70,.8),
-    2px 4px 0 rgba(20,20,20,.3),
-    var(--photo-shadow-x,0) var(--photo-shadow-y,14px) min(var(--photo-shadow-blur,26px),18px) rgba(0,0,0,.5),
-    0 2px 2px rgba(0,0,0,.58),
-    inset 1px 1px 0 rgba(255,255,255,.5);
+    0 2px 0 rgba(96,86,70,.6),
+    0 4px 0 rgba(38,30,22,.3),
+    var(--photo-shadow-x,0) var(--photo-shadow-y,16px) min(var(--photo-shadow-blur,28px),22px) rgba(10,4,3,.55),
+    inset 1px 1px 0 rgba(255,255,255,.6);
   transform:rotateX(var(--photo-lean-x,0deg)) rotateY(var(--photo-lean-y,0deg)) translateZ(0);
-  transform-origin:var(--photo-pin-x,50%) 2%;
+  transform-origin:50% 2%;
   backface-visibility:hidden;
-  transition:border-color .16s ease,box-shadow .16s ease,transform .16s ease;
+  transition:border-color .16s ease,box-shadow .16s ease;
 }
+/* 黄铜相片夹：顶部居中一条金属横夹，影廊的"挂相"方式 */
 body.cardlib-open #overlay .photo-studio-v3 .studio-photo-paper::before {
   content:'';
   position:absolute;
   z-index:4;
-  top:-12px;
-  left:var(--photo-pin-x,50%);
-  width:20px;
-  height:20px;
+  top:-7px;
+  left:50%;
+  width:46px;
+  height:13px;
   transform:translateX(-50%);
-  border-radius:50%;
-  background:
-    radial-gradient(circle at 36% 30%,#eaeaea 0 8%,#8a8a8a 18%,#3a3a3c 55%,#17181a 78%);
-  box-shadow:0 5px 6px rgba(0,0,0,.55),inset -2px -2px 3px rgba(0,0,0,.45);
+  border-radius:3px;
+  background:linear-gradient(180deg,var(--studio-brass-hi) 0%,var(--studio-brass) 46%,var(--studio-brass-lo) 82%,#6b4f2a 100%);
+  box-shadow:0 2px 4px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.65);
 }
-body.cardlib-open #overlay .photo-studio-v3 .studio-photo-paper::after {
-  content:'';
-  position:absolute;
-  inset:0;
-  z-index:3;
-  pointer-events:none;
-  border-radius:2px;
-  background:
-    radial-gradient(ellipse 18% 11% at var(--photo-wear-x,24%) var(--photo-wear-y,18%),rgba(60,60,62,.48),transparent 74%),
-    linear-gradient(96deg,rgba(45,45,47,.25),transparent 5% 94%,rgba(42,42,44,.24));
-  opacity:calc(var(--photo-wear-opacity,.16) * .62);
-}
+/* 磨损斑伪元素已随拟物减法移除（::after 不再使用） */
 body.cardlib-open #overlay .photo-studio-v3 .studio-photo-art {
   position:relative;
   display:block;
   overflow:hidden;
   aspect-ratio:4/3;
-  border:1px solid rgba(48,52,50,.74);
-  background:radial-gradient(ellipse at 50% 38%,#232326,#101012 82%);
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,.1),inset 0 0 14px rgba(2,8,12,.28);
-  transform:translateZ(1px);
+  border:1px solid rgba(48,44,38,.74);
+  background:radial-gradient(ellipse at 50% 38%,#26221e,#14100d 82%);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.1),inset 0 0 14px rgba(10,4,2,.3);
 }
 body.cardlib-open #overlay .photo-studio-v3 .studio-photo-art::before,
 body.cardlib-open #overlay .photo-studio-v3 .studio-photo-art::after {
@@ -742,11 +748,7 @@ body.cardlib-open #overlay .photo-studio-v3 .studio-photo-art::after {
   pointer-events:none;
 }
 body.cardlib-open #overlay .photo-studio-v3 .studio-photo-art::before {
-  box-shadow:inset 0 0 10px rgba(5,9,11,.34),inset 0 -9px 13px rgba(8,10,11,.12);
-}
-body.cardlib-open #overlay .photo-studio-v3 .studio-photo-art::after {
-  background:linear-gradient(118deg,rgba(255,255,255,.18),rgba(255,255,255,.035) 22%,transparent 39% 72%,rgba(255,255,255,.055));
-  opacity:.72;
+  box-shadow:inset 0 0 10px rgba(8,4,3,.34),inset 0 -9px 13px rgba(10,6,4,.12);
 }
 body.cardlib-open #overlay .photo-studio-v3 .studio-photo-art img {
   width:100%;
@@ -754,6 +756,7 @@ body.cardlib-open #overlay .photo-studio-v3 .studio-photo-art img {
   display:block;
   object-fit:cover;
 }
+/* 费用：黄铜圆铭牌（原青色玻璃球退役） */
 body.cardlib-open #overlay .photo-studio-v3 .studio-photo-cost {
   position:absolute;
   z-index:5;
@@ -763,13 +766,13 @@ body.cardlib-open #overlay .photo-studio-v3 .studio-photo-cost {
   height:34px;
   display:grid;
   place-items:center;
-  border:2px solid #d8f4ff;
+  border:1px solid var(--studio-brass-lo);
   border-radius:50%;
-  color:#f8fbfc;
-  background:radial-gradient(circle at 35% 28%,#bdf0ff,#2ab4dc 47%,#0d5570 78%);
-  box-shadow:0 3px 8px rgba(0,0,0,.52),inset 0 0 0 2px rgba(22,59,66,.58);
+  color:#2e1f10;
+  background:radial-gradient(circle at 34% 28%,var(--studio-brass-hi),var(--studio-brass) 52%,var(--studio-brass-lo) 88%);
+  box-shadow:0 3px 8px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.6);
   font:700 14px/1 ui-monospace,monospace;
-  text-shadow:0 1px 2px #0a3d52;
+  text-shadow:0 1px 0 rgba(255,246,228,.5);
 }
 body.cardlib-open #overlay .photo-studio-v3 .studio-photo-caption {
   display:grid;
@@ -780,7 +783,7 @@ body.cardlib-open #overlay .photo-studio-v3 .studio-photo-caption {
 }
 body.cardlib-open #overlay .photo-studio-v3 .studio-photo-caption b {
   overflow:hidden;
-  color:#1c1c1e;
+  color:#241f18;
   font:700 14px/1.2 var(--serif);
   letter-spacing:.08em;
   text-overflow:ellipsis;
@@ -788,7 +791,7 @@ body.cardlib-open #overlay .photo-studio-v3 .studio-photo-caption b {
 }
 body.cardlib-open #overlay .photo-studio-v3 .studio-photo-caption small {
   overflow:hidden;
-  color:#565656;
+  color:#6a6156;
   font:600 10px/1.2 var(--font-ui);
   letter-spacing:.06em;
   text-overflow:ellipsis;
@@ -801,7 +804,7 @@ body.cardlib-open #overlay .photo-studio-v3 .studio-photo-marks {
   gap:6px;
   width:100%;
   overflow:visible;
-  color:#565656;
+  color:#6a6156;
   letter-spacing:.04em;
 }
 body.cardlib-open #overlay .photo-studio-v3 .photo-type-mark,
@@ -814,69 +817,60 @@ body.cardlib-open #overlay .photo-studio-v3 .photo-rarity-mark {
   white-space:nowrap;
 }
 body.cardlib-open #overlay .photo-studio-v3 .photo-type-mark {
-  border:1px solid rgba(40,40,40,.3);
-  background:rgba(30,30,30,.08);
-  color:#4a4a4c;
+  border:1px solid rgba(70,62,52,.32);
+  background:transparent;
+  color:#5d554a;
   font-family:ui-monospace,monospace;
 }
+/* 稀有度：实体色签——gem 实底（在象牙纸上够跳）+象牙白字，不做渐变不旋转 */
 body.cardlib-open #overlay .photo-studio-v3 .photo-rarity-mark {
   width:100%;
   min-height:18px;
   padding-inline:8px;
-  border:1px solid color-mix(in srgb,var(--gem,#777) 72%,#26262a);
+  border:1px solid color-mix(in srgb,var(--gem,#777) 90%,#241f18);
   color:#fffdf5;
-  background:linear-gradient(90deg,
-    color-mix(in srgb,var(--gem,#777) 72%,#202024),
-    color-mix(in srgb,var(--gem,#777) 76%,#e8e6e3));
-  box-shadow:inset 0 1px rgba(255,255,255,.25),inset 0 -1px rgba(20,20,22,.24),0 1px 2px rgba(20,20,22,.2);
+  background:color-mix(in srgb,var(--gem,#777) 82%,#241f18);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.3),inset 0 -1px rgba(20,14,10,.3),0 1px 2px rgba(20,14,10,.28);
   font-family:var(--serif);
   font-weight:800;
+  letter-spacing:.14em;
   line-height:16px;
   text-align:center;
-  text-shadow:0 1px 1px rgba(25,19,15,.62);
-  transform:rotate(-1.5deg);
+  text-shadow:0 1px 1px rgba(20,14,10,.55);
+  transform:none;
 }
-body.cardlib-open #overlay .photo-studio-v3 .studio-photo.rv0 .photo-rarity-mark,
-body.cardlib-open #overlay .photo-studio-v3 .studio-photo.rv4 .photo-rarity-mark {
-  color:#26262a;
-  text-shadow:0 1px rgba(255,255,255,.38);
+/* 棱彩=全息封膜：保留幻彩身份，半透明流彩+幻彩细描边 */
+body.cardlib-open #overlay .photo-studio-v3 .studio-photo.rv7 .photo-rarity-mark,
+body.cardlib-open #overlay .photo-studio-v3 .studio-photo.rv-prism .photo-rarity-mark {
+  border-color:rgba(179,107,255,.65);
+  color:#3d1c3a;
+  background:linear-gradient(90deg,
+    rgba(201,119,161,.62),rgba(215,181,102,.62) 34%,rgba(112,175,162,.62) 66%,rgba(116,143,187,.62));
+  box-shadow:inset 0 0 0 1px rgba(179,107,255,.38),inset 0 1px 0 rgba(255,255,255,.45);
+  text-shadow:0 1px 0 rgba(255,255,255,.55);
 }
-body.cardlib-open #overlay .photo-studio-v3 .studio-photo.rv7 .photo-rarity-mark {
-  border-color:#9d568c;
-  color:#4f254b;
-  background:linear-gradient(90deg,#c977a1,#d7b566 34%,#70afa2 66%,#748fbb);
-  box-shadow:inset 0 1px rgba(255,255,255,.52),inset 0 -1px rgba(61,35,70,.22),0 1px 3px rgba(92,43,91,.3);
-  text-shadow:0 1px rgba(255,255,255,.45);
-}
-body.cardlib-open #overlay .photo-studio-v3 .studio-photo-curl {
-  position:absolute;
-  z-index:6;
-  right:-1px;
-  bottom:-1px;
-  width:var(--photo-curl,15px);
-  height:var(--photo-curl,15px);
-  pointer-events:none;
-  clip-path:polygon(100% 0,100% 100%,0 100%);
-  background:linear-gradient(135deg,transparent 0 45%,#6e6e70 47% 52%,#f2f1ee 54% 72%,#a2a2a4 100%);
-  filter:drop-shadow(-2px -2px 2px rgba(0,0,0,.25));
-}
+/* 卷角装饰已随拟物减法移除 */
+/* 悬停：整卡轻微前倾+落影加深，"拿起照片"的实体手感 */
 body.cardlib-open #overlay .photo-studio-v3 .lib-item:hover .studio-photo-paper,
 body.cardlib-open #overlay .photo-studio-v3 .studio-photo:focus-visible .studio-photo-paper {
-  transform:rotateX(calc(var(--photo-lean-x,0deg) - .8deg)) rotateY(var(--photo-lean-y,0deg)) translateZ(5px);
+  transform:rotateX(calc(var(--photo-lean-x,0deg) - 1deg)) rotateY(var(--photo-lean-y,0deg)) translateZ(6px);
+  box-shadow:
+    0 2px 0 rgba(96,86,70,.6),
+    0 4px 0 rgba(38,30,22,.3),
+    var(--photo-shadow-x,0) calc(var(--photo-shadow-y,16px) + 4px) calc(min(var(--photo-shadow-blur,28px),22px) + 6px) rgba(10,4,3,.6),
+    inset 1px 1px 0 rgba(255,255,255,.6),
+    0 0 0 1px rgba(212,175,122,.5);
 }
 body.cardlib-open #overlay .photo-studio-v3 .lib-item.selected .studio-photo-paper {
-  border-color:#18d1ff;
-  box-shadow:0 13px 18px rgba(0,0,0,.5),0 0 0 2px rgba(24,209,255,.4);
+  border-color:var(--studio-gold);
+  box-shadow:0 13px 18px rgba(0,0,0,.5),0 0 0 2px rgba(212,175,122,.42);
 }
 body.cardlib-open #overlay .photo-studio-v3 .lib-grid.scrolling .studio-photo-paper {
   box-shadow:0 3px 5px rgba(0,0,0,.45),inset 0 0 0 1px rgba(255,255,255,.18);
-  transform:none;
 }
-body.cardlib-open #overlay .photo-studio-v3 .lib-grid.scrolling .studio-photo-paper::after,
-body.cardlib-open #overlay .photo-studio-v3 .lib-grid.scrolling .studio-photo-art::after,
-body.cardlib-open #overlay .photo-studio-v3 .lib-grid.scrolling .studio-photo-curl { display:none; }
+body.cardlib-open #overlay .photo-studio-v3 .lib-grid.scrolling .studio-photo-paper::before { display:none; }
 body.cardlib-open #overlay .photo-studio-v3 .studio-photo:focus-visible {
-  outline:2px solid var(--studio-ice)!important;
+  outline:2px solid var(--studio-gold)!important;
   outline-offset:5px!important;
 }
 body.cardlib-open #overlay .photo-studio-v3 .studio-load-more {
@@ -886,21 +880,25 @@ body.cardlib-open #overlay .photo-studio-v3 .studio-load-more {
   min-height:42px;
   margin:4px 0 8px;
   padding:0 18px;
-  border:1px solid rgba(24,209,255,.45);
+  border:1px solid rgba(212,175,122,.45);
   border-radius:2px;
   color:var(--studio-gold-soft);
-  background:rgba(18,18,20,.82);
+  background:rgba(29,21,18,.82);
   font:600 11px var(--font-ui);
   letter-spacing:.08em;
 }
-body.cardlib-open #overlay .photo-studio-v3 .studio-load-more b { color:#8ee6ff; }
+body.cardlib-open #overlay .photo-studio-v3 .studio-load-more b { color:var(--studio-gold-soft); }
 body.cardlib-open #overlay .photo-studio-v3 .clib-empty {
   grid-column:1/-1;
   width:min(480px,90%);
   padding:42px 20px!important;
-  border:1px dashed rgba(24,209,255,.35)!important;
-  background:rgba(255,255,255,.02)!important;
-  color:#ababab!important;
+  border:1px dashed rgba(212,175,122,.35)!important;
+  /* 空态=照相馆静物插画（相机与油灯等着照片），暗化层保文字 */
+  background:
+    linear-gradient(180deg, rgba(18,9,8,.52), rgba(14,7,6,.72)),
+    url('../assets/ui/photo-studio/empty.webp') center/cover no-repeat,
+    rgba(18,9,8,.9)!important;
+  color:var(--studio-muted)!important;
   text-align:center;
 }
 
@@ -908,14 +906,18 @@ body.cardlib-open #overlay .photo-studio-v3 .library-inspector {
   min-height:0;
   overflow-y:auto;
   padding:14px;
-  border:1px solid rgba(24,209,255,.28);
-  background:linear-gradient(165deg,#151517,#0b0b0d)!important;
+  border:1px solid rgba(212,175,122,.3);
+  /* 选片台台面生图打底，暗化层保证文字可读 */
+  background:
+    linear-gradient(180deg, rgba(24,13,11,.6), rgba(18,9,8,.82) 55%, rgba(14,7,6,.9)),
+    url('../assets/ui/photo-studio/desk.webp') center/cover no-repeat,
+    linear-gradient(165deg,#221512,#150c0a)!important;
   box-shadow:0 18px 36px rgba(0,0,0,.24);
   scrollbar-width:thin;
 }
 body.cardlib-open #overlay .photo-studio-v3 .studio-inspector-head {
   padding:0 2px 11px;
-  border-bottom:1px solid rgba(255,255,255,.1);
+  border-bottom:1px solid rgba(212,175,122,.16);
 }
 body.cardlib-open #overlay .photo-studio-v3 .studio-inspector-head b {
   color:var(--studio-gold-soft);
@@ -942,7 +944,7 @@ body.cardlib-open #overlay .photo-studio-v3 .studio-preview-frame .hs-card {
 }
 body.cardlib-open #overlay .photo-studio-v3 .studio-preview-copy {
   padding:11px 4px 0;
-  border-top:1px solid rgba(255,255,255,.1);
+  border-top:1px solid rgba(212,175,122,.16);
 }
 body.cardlib-open #overlay .photo-studio-v3 .studio-preview-copy h3 {
   margin:0 0 7px!important;
@@ -962,9 +964,9 @@ body.cardlib-open #overlay .photo-studio-v3 .studio-zoom {
   width:100%;
   min-height:40px;
   margin-top:12px;
-  border:1px solid rgba(24,209,255,.5);
+  border:1px solid rgba(212,175,122,.5);
   border-radius:2px;
-  background:linear-gradient(180deg,rgba(24,209,255,.12),rgba(29,31,32,.6));
+  background:linear-gradient(180deg,rgba(212,175,122,.14),rgba(37,27,20,.6));
   color:var(--studio-gold-soft);
   font:700 11px var(--font-ui);
 }
@@ -995,9 +997,9 @@ body.cardlib-open #overlay .photo-studio-v3 .studio-edit-actions {
 }
 #cardZoom .cz-close:hover,
 #cardZoom .cz-close:focus-visible {
-  color:#aef0ff;
-  border-color:rgba(24,209,255,.7);
-  outline:2px solid rgba(24,209,255,.8);
+  color:#f4e3c2;
+  border-color:rgba(212,175,122,.7);
+  outline:2px solid rgba(212,175,122,.8);
   outline-offset:3px;
 }
 #cardZoom .cz-note.has {
@@ -1007,7 +1009,11 @@ body.cardlib-open #overlay .photo-studio-v3 .studio-edit-actions {
   padding:13px 18px 15px!important;
   border:1px solid rgba(91,77,50,.72)!important;
   border-radius:2px!important;
-  background:linear-gradient(165deg,rgba(231,224,198,.98),rgba(183,177,155,.98))!important;
+  /* 背签=生图相纸背面（金线框+角花），暗化极轻保证手写体文字可读 */
+  background:
+    linear-gradient(180deg, rgba(236,232,224,.35), rgba(216,210,198,.5)),
+    url('../assets/ui/photo-studio/back.webp') center/cover no-repeat,
+    linear-gradient(165deg,rgba(231,224,198,.98),rgba(183,177,155,.98))!important;
   color:#302c25!important;
   box-shadow:0 14px 32px rgba(0,0,0,.48),inset 0 0 22px rgba(88,71,43,.08)!important;
   transform:rotate(-.35deg);
@@ -1052,6 +1058,19 @@ body.cardlib-open #overlay .photo-studio-v3 .studio-edit-actions {
   font:10px/1.2 ui-monospace,monospace;
   letter-spacing:.12em;
 }
+
+/* ---- 旧版段落（档案馆/画廊版）遗留青色规则缝隙收编：同名属性后者胜，逐点覆盖 ---- */
+body.cardlib-open #overlay .photo-studio-v3 .library-head > .pg-close:hover {
+  color:var(--studio-gold-soft)!important; border-color:rgba(212,175,122,.55)!important;
+  background:rgba(212,175,122,.1)!important; }
+body.cardlib-open #overlay .photo-studio-v3 .library-sidebar .type-tab:not(.on):hover {
+  background:rgba(212,175,122,.08)!important; color:#f0e4cf!important; }
+body.cardlib-open #overlay .photo-studio-v3 .clib-search:focus,
+body.cardlib-open #overlay .photo-studio-v3 .pg-select:focus {
+  border-color:rgba(212,175,122,.6)!important; background:#261a13!important;
+  box-shadow:0 0 0 3px rgba(212,175,122,.14)!important; }
+body.cardlib-open #overlay .photo-studio-v3 #libRar { border-left:2px solid rgba(212,175,122,.62)!important; }
+body.cardlib-open #overlay .photo-studio-v3 #libCls { border-left:2px solid rgba(199,155,255,.5)!important; }
 
 @media(max-width:1100px) {
   body.cardlib-open #overlay .photo-studio-v3 .clib-main {

@@ -117,19 +117,16 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
   function photoStyle(card, index) {
     const seed = card.id || card.name || index;
     const between = (salt, min, max) => min + photoUnit(seed, salt) * (max - min);
+    // 影廊版实体感：每张卡带收窄的悬挂微倾与轻 3D 侧倾（幅度比旧版减半），落影
+    // 角度/虚实随卡不同；差异按卡牌 id 稳定生成，筛选重绘不跳位。
     return [
       `--i:${index}`,
-      `--photo-tilt:${between(11, -.35, .35).toFixed(2)}deg`,
-      `--photo-shadow-x:${between(23, -2.2, 2.2).toFixed(1)}px`,
-      `--photo-shadow-y:${between(37, 11, 17).toFixed(1)}px`,
-      `--photo-shadow-blur:${between(41, 22, 30).toFixed(1)}px`,
-      `--photo-wear-x:${between(53, 12, 88).toFixed(1)}%`,
-      `--photo-wear-y:${between(67, 10, 90).toFixed(1)}%`,
-      `--photo-wear-opacity:${between(79, .12, .22).toFixed(2)}`,
-      `--photo-pin-x:${between(83, 45, 55).toFixed(1)}%`,
-      `--photo-lean-x:${between(89, -.65, .65).toFixed(2)}deg`,
-      `--photo-lean-y:${between(97, -.85, .85).toFixed(2)}deg`,
-      `--photo-curl:${between(101, 12, 18).toFixed(1)}px`,
+      `--photo-tilt:${between(11, -.15, .15).toFixed(2)}deg`,
+      `--photo-shadow-x:${between(23, -3, 3).toFixed(1)}px`,
+      `--photo-shadow-y:${between(37, 14, 22).toFixed(1)}px`,
+      `--photo-shadow-blur:${between(41, 24, 34).toFixed(1)}px`,
+      `--photo-lean-x:${between(89, -.3, .3).toFixed(2)}deg`,
+      `--photo-lean-y:${between(97, -.3, .3).toFixed(2)}deg`,
     ].join(';');
   }
 
@@ -176,7 +173,6 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
           <span class="studio-photo-art">${art}</span>
           <span class="studio-photo-cost" aria-label="费用 ${escAttr(cost)}">${esc(cost)}</span>
           <span class="studio-photo-caption"><b>${esc(c.name || '未命名卡牌')}</b><small class="studio-photo-marks"><span class="photo-type-mark">${esc(c.type || '?')}</span><span class="photo-rarity-mark">${esc(rarity)}</span></small></span>
-          <span class="studio-photo-curl" aria-hidden="true"></span>
         </span>
       </button>
     </div>`;
