@@ -12,9 +12,11 @@ const bgm = new Howl({ src: [BGM_URL], loop: true, html5: true, preload: false, 
 // 开屏曲目不预载（6.3MB）：自动播放策略下首次交互前必然无声，改为首次 syncBgm 时按需加载，
 // 启动带宽让给首屏图与字体；Howler 对 preload:false 的实例会在 play() 时自动 load。
 const titleBgm = new Howl({ src: [TITLE_BGM_URL], loop: true, html5: true, preload: false, volume: 0 });
-// 战斗专用曲目：《「次生预案」战斗曲》——musicMode='battle' 时替代通用曲，行军仍走通用曲
+// 战斗专用曲目：《「次生预案」战斗曲》——musicMode='battle' 时替代通用曲，行军仍走通用曲。
+// html5:false（WebAudio 解码）：HTML5 audio 的 loop 在 Chromium 系有可闻重启缝，战斗曲要反复听几十遍；
+// WebAudio buffer loop 无缝。代价是解码后 PCM 驻留（~90MB float32），在 syncBgm 离场时 unload 释放。
 const BATTLE_BGM_URL = new URL('../assets/bgm-cisheng-yuanan.mp3', import.meta.url).href;
-const battleBgm = new Howl({ src: [BATTLE_BGM_URL], loop: true, html5: true, preload: false, volume: 0 });
+const battleBgm = new Howl({ src: [BATTLE_BGM_URL], loop: true, html5: false, preload: false, volume: 0 });
   let ctx = null, master = null, masterComp = null, sfxGain = null, clickGain = null, clickComp = null, scape = null;
   // 三级开关：muted 全局静音（侧边栏 [[icon:gear]]）· musicOff 只关音乐 · sfxOff 只关音效（设置页）
   let muted = false, musicOff = false, sfxOff = false;
@@ -187,12 +189,23 @@ const battleBgm = new Howl({ src: [BATTLE_BGM_URL], loop: true, html5: true, pre
     legend:     [1, 2, 3].map(i => assetUrl(`assets/sfx/battle/legend-${i}.ogg`)),
     victory:    [1, 2].map(i => assetUrl(`assets/sfx/battle/victory-${i}.ogg`)),
     defeat:     [1].map(i => assetUrl(`assets/sfx/battle/defeat-${i}.ogg`)),
+    // 卡牌操作实录（Kenney Casino sounds，CC0）：抽牌=cardSlide×4，洗牌=cardShuffle，出牌=cardPlace×4
+    draw:       [1, 2, 3, 4].map(i => assetUrl(`assets/sfx/battle/draw-${i}.ogg`)),
+    shuffle:    [1].map(i => assetUrl(`assets/sfx/battle/shuffle-${i}.ogg`)),
+    card:       [1, 2, 3, 4].map(i => assetUrl(`assets/sfx/battle/cardPlace-${i}.ogg`)),
   };
   // 采样峰值统一到 95% 后偏响，按键系数压回（参考原合成音的相对响度）
   const BATTLE_GAIN = {
     hit: 0.55, hurt: 0.55, parry: 0.4, curse: 0.35, heal: 0.45,
     chestShake: 0.5, chestBurst: 0.65, reveal: 0.45, legend: 0.55,
     victory: 0.5, defeat: 0.5,
+    draw: 0.45, shuffle: 0.5, card: 0.5,
+  };
+  // 敌我方向分化（音频 P2#10）：我打敌（hit）=升 rate 更亮更利；敌打我（hurt）=降 rate+低通更闷更沉，
+  // 闭眼也能分辨「谁在挨打」；其余键保持 ±5% 通用变调
+  const BATTLE_TONE_SHAPE = {
+    hit:  { rateMin: 1.05, rateMax: 1.18 },
+    hurt: { rateMin: 0.82, rateMax: 0.9, lowpass: 1400 },
   };
   let battleBuffers = null; // null=未加载 {}=加载中/部分就绪
   function loadBattle() {
@@ -275,6 +288,14 @@ const battleBgm = new Howl({ src: [BATTLE_BGM_URL], loop: true, html5: true, pre
       tone({ f, type: 'triangle', dur: .26, vol: .055, delay: i * .1 });
       tone({ f: f * 2, type: 'sine', dur: .2, vol: .018, delay: i * .1 + .02 });
     }),
+    // —— 回合权交接（P1#4）：你的回合=轻上行双音，敌方回合=低频闷坠 ——
+    turnSelf: () => { tone({ f: 587, type: 'triangle', dur: .09, vol: .04 }); tone({ f: 880, type: 'triangle', dur: .16, vol: .05, delay: .07 }); },
+    turnFoe:  () => { tone({ f: 210, f2: 92, type: 'sine', dur: .24, vol: .065 }); },
+    // —— 敌方攻击前摇（P2#8）：高频→低频快速扫频=挥击呼啸，提示「要挨打了」——
+    foeLunge: () => noise({ dur: .22, vol: .04, fHi: 2400, fLo: 300 }),
+    // —— 祝福挂上/到期（P2#6）：上行三连=增益入手，下滑+碎裂=增益消失 ——
+    buffUp:   () => [523, 659, 784].forEach((f, i) => tone({ f, type: 'triangle', dur: .12, vol: .04, delay: i * .06 })),
+    buffDown: () => { tone({ f: 660, f2: 392, type: 'triangle', dur: .18, vol: .04 }); noise({ dur: .08, vol: .02, fHi: 1800, fLo: 600 }); },
   };
   /* ---------- jsfxr 采样（程序化生成 wav，scripts/jsfxr-generate.cjs 可再生成）---------- */
   const JSFX_URLS = {
@@ -318,11 +339,22 @@ const battleBgm = new Howl({ src: [BATTLE_BGM_URL], loop: true, html5: true, pre
       try {
         const src = ctx.createBufferSource();
         src.buffer = pool[Math.floor(Random.random('audio') * pool.length)];
-        // SFX 变调随机化（audio-design）：±5% 播放速率，连续打击不机械
-        src.playbackRate.value = 0.95 + Random.random('audio') * 0.1;
+        // SFX 变调随机化（audio-design）：±5% 播放速率，连续打击不机械；
+        // hit/hurt 按 BATTLE_TONE_SHAPE 覆盖（P2#10 敌我方向分化）
+        const shape = BATTLE_TONE_SHAPE[name];
+        src.playbackRate.value = shape
+          ? shape.rateMin + Random.random('audio') * (shape.rateMax - shape.rateMin)
+          : 0.95 + Random.random('audio') * 0.1;
         const g = ctx.createGain();
         g.gain.value = BATTLE_GAIN[name] || 0.5;
-        src.connect(g); g.connect(sfxGain);
+        if (shape && shape.lowpass) {
+          const lp = ctx.createBiquadFilter();
+          lp.type = 'lowpass'; lp.frequency.value = shape.lowpass;
+          src.connect(lp); lp.connect(g);
+        } else {
+          src.connect(g);
+        }
+        g.connect(sfxGain);
         src.start();
         return;
       } catch (e) { /* 落入合成回退 */ }
@@ -347,7 +379,8 @@ const battleBgm = new Howl({ src: [BATTLE_BGM_URL], loop: true, html5: true, pre
     if (scape) {
       scape.setVolume(BASE_MUSIC * dbGain(musicVol) * 0.32 * (ducked ? 0.45 : 1));
       scape.setMode(on && musicSource === 'scape' ? (['title', 'base'].includes(musicMode) ? 'title' : musicMode === 'battle' ? 'battle' : 'board') : null);
-      scape.setMuted(!on || musicSource !== 'scape');
+      // mp3 音乐源下不再整体静音声景：BOSS 紧张垫要经它透出（battle 层旁路，P2#12）
+      scape.setMuted(!on);
     }
     const cur = activeBgm();
     const target = BASE_MUSIC * dbGain(musicVol) * (ducked ? 0.45 : 1);
@@ -356,7 +389,13 @@ const battleBgm = new Howl({ src: [BATTLE_BGM_URL], loop: true, html5: true, pre
       if ((!originalOn || track !== cur) && track.playing()) {
         track.fade(track.volume(), 0, 280);
         setTimeout(() => {
-          if (track !== activeBgm() || !musicMode || muted || musicOff || document.hidden || musicSource !== 'original') track.pause();
+          const leaveOriginal = !musicMode || muted || musicOff || document.hidden || musicSource !== 'original';
+          if (track !== activeBgm() || leaveOriginal) {
+            track.pause();
+            // 战斗曲 WebAudio 解码 PCM 驻留大（~90MB float32）：仅在确认切走曲目时卸载释放，
+            // 页签隐藏（musicMode 仍为 'battle'）只暂停，回来免重载
+            if (track === battleBgm && musicMode !== 'battle' && track.state() === 'loaded') track.unload();
+          }
         }, 300);
       }
     });
@@ -400,6 +439,10 @@ const battleBgm = new Howl({ src: [BATTLE_BGM_URL], loop: true, html5: true, pre
     if (v === ducked) return;
     ducked = v;
     syncBgm();
+  }
+  // BOSS 紧张垫开关（音频 P2#12）：声景 battle 层旁路+tension 抬升，与正曲叠加出首脑战压迫感
+  function setBoss(on) {
+    if (scape) scape.setBoss(on);
   }
   // 只关音效（设置页）
   function setSfxMuted(m) {
@@ -463,7 +506,7 @@ const battleBgm = new Howl({ src: [BATTLE_BGM_URL], loop: true, html5: true, pre
   });
 
   sdtDefine('Sound', {
-    sfx, music, setMuted, setMusicMuted, setMusicSource, setSfxMuted, setMusicVolume, setSfxVolume, setDucked, ensure,
+    sfx, music, setMuted, setMusicMuted, setMusicSource, setSfxMuted, setMusicVolume, setSfxVolume, setDucked, setBoss, ensure,
     get muted() { return muted; },
     get musicMuted() { return musicOff; },
     get sfxMuted() { return sfxOff; },

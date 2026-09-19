@@ -13,6 +13,8 @@ import { Random } from './random.js';
 import * as Combat from './combat.js';
 import { emit as busEmit } from './event-bus.js';
 /* battle.core.js —— 战斗逻辑：牌库/出牌结算/词条时点/回合流转（渲染由注入的视图完成） */
+// 祝福挂上反馈钩（音频 P2#6）：addBlessing 生效即响，敌我通用——敌人强化同样是可听信息
+COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
 /* ============================================================
  * 搜打撤 v0.24 —— M1 两类战斗（多敌人 + 拖拽选目标 + BOSS 词缀 + 词条时点体系）
  *
@@ -139,7 +141,7 @@ import { emit as busEmit } from './event-bus.js';
     if (card && card.id) return `id:${card.id}`;
     return `legacy:${card?.name || ''}|${card?.type || ''}|${card?.desc || ''}`;
   }
-  const isStarterAttack = card => !!card && (card.id === 'builtin-sha' || (!card.id && card.name === '初始攻击'));
+  const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!card.id && card.name === '初始攻击'));
 
   const R = () => SDT.MAP.rules;
   const alive = () => foes.filter(f => !f.dead);
@@ -178,10 +180,12 @@ import { emit as busEmit } from './event-bus.js';
 
   function drawCards(n) {
     let got = 0;
+    let drawnToHand = 0;   // 真正入手张数（抽到即施放/灰烬符文直接释放的不占手牌，不计入）
     lastDrawnUids = [];
     while (n-- > 0) {
       if (!drawPile.length && discard.length) {
         const recycled = refillDrawPile(drawPile, discard);
+        SDT.Sound.sfx('shuffle');   // 洗牌音（P1#5）：弃牌堆洗回牌库
         G.log(`[[icon:recycle]] 弃牌堆 ${recycled} 张洗回牌库（墓地不参与洗回）`, 'dim');
       }
       if (!drawPile.length) break;
@@ -212,7 +216,10 @@ import { emit as busEmit } from './event-bus.js';
       lastDrawnUids.push(uid);
       cardAnims.push({ kind: 'draw', uid, name: entry ? entry.card.name : '' });
       got++;
+      drawnToHand++;
     }
+    // 抽牌反馈音（P1#5）：一批抽牌只播一声，连抽不叠音
+    if (drawnToHand > 0 && SDT.Sound) SDT.Sound.sfx('draw');
     checkSealTransformation();   // 受缚之残影：每批抽牌后检查手牌是否集齐 5 张封印之牌
     return got;
   }
@@ -1190,6 +1197,14 @@ import { emit as busEmit } from './event-bus.js';
   // enemyDefs：数组（多敌人遭遇）或单个对象（兼容旧调用）
   function start(game, enemyDefs, options) {
     G = game;
+    // 战斗开局预热本局可用卡面：手牌 img 是 lazy，手牌重建瞬间图未解码会露插画窗深底（黑窗）。
+    // URL 走 collectCardAssets 与 <img> 实际 src 完全一致，命中 HTTP/解码缓存；已预热项内部自动去重。
+    // restore 读档恢复同样走 start，两条进战斗路径都覆盖。
+    try {
+      if (SDT.Art && SDT.Art.collectCardAssets && SDT.Art.warm) {
+        SDT.Art.warm(SDT.Art.collectCardAssets((G.ownedCards || []).map(o => o && o.card).filter(Boolean)));
+      }
+    } catch (_) {}
     const defs = Array.isArray(enemyDefs) ? enemyDefs : [enemyDefs];
     const startOptions = Object.assign({ isBoss: false }, options || {});
     if (!restoringRestartCheckpoint) {
@@ -1205,6 +1220,7 @@ import { emit as busEmit } from './event-bus.js';
     G.battleActive = true;   // game.js 用它锁住侧栏/快捷键背包入口
     if (SDT.Sound) SDT.Sound.setDucked(true);   // 战斗期间 BGM 侧链压低（audio-design ducking）
     opts = startOptions;
+    if (SDT.Sound) SDT.Sound.setBoss?.(opts.isBoss);   // BOSS 战抬升紧张垫（音频 P2#12）
     mode = opts.isBoss ? 'boss' : 'normal';
     battleState = createBattleState({ mode });
     foes = defs.map(d => {
@@ -1853,7 +1869,7 @@ import { emit as busEmit } from './event-bus.js';
   const ITEM_BOSS_FLEE_PATTERN = /非\s*BOSS\s*战/;
   function itemUsability(card) {
     if (!card) return { usable: false, why: '未知道具' };
-    if (card.id === 'tt-token-color') return { usable: false, why: '合成材料：集齐 2 枚彩色令牌碎片后在背包里合成' };
+    if (card.id === 'tt-token-color') return { usable: false, why: '合成材料：集齐 2 枚员工通行证A碎片后在背包里合成' };
     if (mode === 'boss' && ITEM_BOSS_FLEE_PATTERN.test(String(card.desc || ''))) return { usable: false, why: 'BOSS 战中无法逃跑' };
     if (itemTargetSideFor(card) === 'enemy' && !alive().length) return { usable: false, why: '场上没有敌人可用' };
     return { usable: true, why: '' };
@@ -1870,7 +1886,7 @@ import { emit as busEmit } from './event-bus.js';
     const rm = desc.match(/获得\s*(\d+)\s*份?\s*口粮/) || desc.match(/口粮\s*[×x]\s*(\d+)/);
     const wm = desc.match(/木材\s*[×x]\s*(\d+)/);
     if (!healM && !isCrystal && !isPotion && !rm && !wm) {
-      // 2026-09-12：战斗效果类道具（药水/TNT/烟雾弹/通行证C/彩色令牌）走药水栏结算
+      // 2026-09-12：战斗效果类道具（药水/TNT/烟雾弹/通行证C/员工通行证A）走药水栏结算
       useBattleEffectItem(entry, side);
       return;
     }
@@ -2677,6 +2693,7 @@ import { emit as busEmit } from './event-bus.js';
     const meta = (k) => Combat.CURSE_META[k] || Combat.BUFF_META[k];
     const expired = Combat.tickDurations(target);
     expired.forEach(k => G.log(`[[icon:sparkles]] ${esc(who)} 的<b>${meta(k).name}</b>效果结束了`, 'dim'));
+    if (expired.some(k => Combat.BUFF_META[k])) SDT.Sound.sfx('buffDown');   // 增益到期=轻碎裂提示（音频 P2#6，与挂上音成对）
   }
 
   function flee() {
@@ -2775,6 +2792,7 @@ import { emit as busEmit } from './event-bus.js';
     G.battleActive = true;
     G.state = 'modal';
     if (SDT.Sound) SDT.Sound.setDucked(true);
+    SDT.Sound.setBoss?.(true);   // BOSS 读档恢复：紧张垫同步（音频 P2#12）
     SDT.Sound.music('battle');
     if (data.deckSelect) {
       prepareDeckSelection();   // BOSS 战退出在编组阶段：重开编组（还没实际开打，无进度损失）
@@ -2817,6 +2835,7 @@ import { emit as busEmit } from './event-bus.js';
     G.state = 'idle';
     G.battleActive = false;
     if (SDT.Sound) SDT.Sound.setDucked(false);   // 战斗结束恢复 BGM 音量
+    if (SDT.Sound) SDT.Sound.setBoss?.(false);   // BOSS 紧张垫解除（音频 P2#12）
     opts.foeNames = foes.map(f => f.name);
     SDT.Sound.music('board');   // 战斗结束切回行军氛围
     // 战斗结束广播（2026-09-11 批次 5）：订阅方各自响应（背包结算/基地/统计），

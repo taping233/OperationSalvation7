@@ -18,7 +18,7 @@ import { assetUrl } from './asset-url.js';
 const cardIdentityKey = card => card && card.id
   ? `id:${card.id}`
   : `legacy:${card?.name || ''}|${card?.type || ''}|${card?.desc || ''}`;
-const isStarterAttack = card => !!card && (card.id === 'builtin-sha' || (!card.id && card.name === '初始攻击'));
+const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!card.id && card.name === '初始攻击'));
 
   // 状态角标：祝福（绿）+ 诅咒（红）——2026-09-11 架构批次 1 自 battle.core 外迁（纯视图函数）
   function statusChips(status) {
@@ -464,9 +464,9 @@ const isStarterAttack = card => !!card && (card.id === 'builtin-sha' || (!card.i
           <p class="ov-note">完整设置可在基地 / 标题页打开。关闭后回到战斗。</p>
           <div class="ov-btns"><button class="ov-btn ok" data-act="btSettingsBack">[[icon:cross]] 返回战斗</button></div>
         </div>`, true);
-      const syncMusic = (on) => { SDT.Sound.musicMuted = !on; if (SDT.Sound.setDucked) SDT.Sound.setDucked(); };
+      const syncMusic = (on) => { SDT.Sound.setMusicMuted(!on); if (SDT.Sound.setDucked) SDT.Sound.setDucked(); };
       document.getElementById('btSetMusic').addEventListener('change', (e) => syncMusic(e.target.checked));
-      document.getElementById('btSetSfx').addEventListener('change', (e) => { SDT.Sound.sfxMuted = !e.target.checked; });
+      document.getElementById('btSetSfx').addEventListener('change', (e) => { SDT.Sound.setSfxMuted(!e.target.checked); });
       document.getElementById('btSetShake').addEventListener('change', (e) => { localStorage.setItem('sdt-reduce-shake', e.target.checked ? '0' : '1'); });
       UI.act('btSettingsBack', () => render());
     });
@@ -478,7 +478,16 @@ const isStarterAttack = card => !!card && (card.id === 'builtin-sha' || (!card.i
         SDT.Sound.sfx('deny');
         return;
       }
-      surrender();   // 玩法定版：主动撤离=本局失败（烟雾弹走 fleeBattle 豁免）
+      // 撤离=判负不可逆：两步确认防误触（同设置弹窗危险钮模式，2.6 秒后自动还原）
+      const btn = document.querySelector('#ovBody [data-act="btFlee"]');
+      if (!btn || btn.dataset.confirm) { surrender(); return; }   // 玩法定版：主动撤离=本局失败（烟雾弹走 fleeBattle 豁免）
+      const prev = btn.innerHTML;
+      btn.dataset.confirm = '1';
+      btn.innerHTML = SDT.Icons.rich('[[icon:runner]] 确认撤离？');
+      btn.classList.add('arm');
+      setTimeout(() => {
+        if (btn.isConnected) { delete btn.dataset.confirm; btn.classList.remove('arm'); btn.innerHTML = prev; }
+      }, 2600);
     });
     UI.act('btGrave', openGrave);
     UI.act('btDeck', openDeckView);
@@ -752,7 +761,8 @@ const isStarterAttack = card => !!card && (card.id === 'builtin-sha' || (!card.i
       // U8：操作指引走 #tooltip（见槽位创建处的 mouseenter），原生 title 不再挂
       rec.card.removeAttribute('title');
       rec.card.setAttribute('aria-pressed', clickSelectedUid === st.uid ? 'true' : 'false');
-      if (rec.sig !== st.inner) { rec.card.innerHTML = st.inner; rec.sig = st.inner; }
+      // 卡面外的角标（目标侧/费用变化/注能/诅咒）带 [[icon:]] 宏——写入时统一渲染，否则宏原文直接上屏
+      if (rec.sig !== st.inner) { rec.card.innerHTML = SDT.Icons.rich(st.inner); rec.sig = st.inner; }
       ordered.push(rec);
     });
     // —— 顺序校正（DOM 序 = 扇形叠放序）：失序才搬节点 ——
@@ -815,6 +825,9 @@ const isStarterAttack = card => !!card && (card.id === 'builtin-sha' || (!card.i
       ], { duration: 200, easing: 'ease-in', fill: 'forwards' });
       setTimeout(() => rec.slot.remove(), 240);
     });
+    // 手牌重建后立即补解码（img 是 lazy）：衍生牌等未走开局预热的卡面防首帧黑窗；
+    // 已解码图 decode() 立即兑现，重复调用无副作用。
+    if (SDT.Art && SDT.Art.decodeIn) SDT.Art.decodeIn(handLayer);
     return { flightMs };
   }
 
@@ -1262,6 +1275,7 @@ const isStarterAttack = card => !!card && (card.id === 'builtin-sha' || (!card.i
       // 纯演出指令（无文字）：敌方攻击前摇+弹道 / 诅咒施加彩闪
       if ((f.cls || '').includes('lungefx')) {
         if (!SDT.Motion?.reduceMotion()) { foeLunge(figEl); foeAttackLine(body, figEl); }
+        SDT.Sound.sfx('foeLunge');   // 前摇呼啸（音频 P2#8）：提示「要挨打了」，无论是否减动效都响
         return;
       }
       if ((f.cls || '').includes('cursefx')) { if (!SDT.Motion?.reduceMotion()) curseFlash(figEl, f.cls); return; }
@@ -1440,6 +1454,7 @@ const isStarterAttack = card => !!card && (card.id === 'builtin-sha' || (!card.i
   function showTurnBanner(text, side) {
     const ov = UI.el.overlay;
     if (!ov) return;
+    SDT.Sound.sfx(side === 'foe' ? 'turnFoe' : 'turnSelf');   // 回合权交接提示音（P1#4）
     const el = document.createElement('div');
     el.className = `bt-turnbanner ${side === 'foe' ? 'foe' : 'self'}`;
     el.innerHTML = `<b>${esc(text)}</b>`;

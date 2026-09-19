@@ -276,6 +276,7 @@ const CURSES = ['bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban', 'bu
       }
     } else if (m.timed) target.status[key] = Math.max(target.status[key], n);
     else target.status[key] = 1;
+    if (COMBAT_HOOKS.onBlessing) COMBAT_HOOKS.onBlessing(target, key, n);   // 战斗层反馈钩（音频 P2#6）
     return target.status[key];
   }
 

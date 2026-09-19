@@ -6,6 +6,7 @@ class WinterSoundscape {
     this.ctx = context; this.destination = destination;
     this.root = context.createGain(); this.root.gain.value = 0; this.root.connect(destination);
     this.layers = new Map(); this.nodes = []; this.mode = null; this.volume = 0.11; this.paused = false; this.muted = false;
+    this.boss = false; this.tensionGain = null; this.pulseGain = null;   // BOSS 紧张垫（音频 P2#12）
     this._visibility = () => this.setPaused(document.hidden);
     if (typeof document !== 'undefined') document.addEventListener('visibilitychange', this._visibility);
     this._build();
@@ -34,10 +35,17 @@ class WinterSoundscape {
     const pulse = this._gain(0.016); this._osc('sine', 110, pulse); pulse.connect(battle);
     const pulseDepth = this._gain(0.009); this._osc('sine', 1.6, pulseDepth); pulseDepth.connect(pulse.gain);
     const tension = this._gain(0.018); this._osc('sawtooth', 146.83, tension); tension.connect(battle);
+    this.tensionGain = tension; this.pulseGain = pulse;   // BOSS 态增益抬升用
   }
   _applyMode() {
     const now = this.ctx.currentTime;
-    this.layers.forEach((gain, name) => { gain.gain.cancelScheduledValues(now); gain.gain.setTargetAtTime(name === this.mode && !this.paused ? 1 : 0, now, 0.45); });
+    this.layers.forEach((gain, name) => {
+      let target = name === this.mode && !this.paused ? 1 : 0;
+      // BOSS 垫旁路（P2#12）：即使 mp3 音乐源（mode=null）也把 battle 层半开，
+      // 只让 tension/pulse/drone 以低增益透出，与正曲叠加出「首脑战」紧张感
+      if (name === 'battle' && this.boss && !this.paused) target = Math.max(target, 0.55);
+      gain.gain.cancelScheduledValues(now); gain.gain.setTargetAtTime(target, now, 0.45);
+    });
     this.root.gain.cancelScheduledValues(now); this.root.gain.setTargetAtTime(this.muted || this.paused ? 0 : this.volume, now, 0.28);
   }
   setMode(mode) {
@@ -59,6 +67,16 @@ class WinterSoundscape {
     const next = !!paused;
     if (next === this.paused) return;
     this.paused = next; this._applyMode();
+  }
+  // BOSS 紧张垫（音频 P2#12）：battle 层旁路 + tension/pulse 增益抬升
+  setBoss(on) {
+    const next = !!on;
+    if (next === this.boss) return;
+    this.boss = next;
+    const now = this.ctx.currentTime;
+    if (this.tensionGain) this.tensionGain.gain.setTargetAtTime(next ? 0.05 : 0.018, now, 0.4);
+    if (this.pulseGain) this.pulseGain.gain.setTargetAtTime(next ? 0.028 : 0.009, now, 0.4);
+    this._applyMode();
   }
   destroy() {
     if (typeof document !== 'undefined') document.removeEventListener('visibilitychange', this._visibility);
