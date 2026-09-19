@@ -62,6 +62,18 @@ function createGameMenuController(deps) {
         void ring.offsetWidth;
         ring.classList.add('ak-click');
       });
+      // 2026-09-19 留言 #13：标题页可点击互动小动画——字标抖动/撤离次数弹跳/字牌闪金
+      document.getElementById('title')?.addEventListener('click', (e) => {
+        const play = (el, cls) => { el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls); };
+        const wordmark = e.target.closest?.('.winter-wordmark');
+        if (wordmark) { play(wordmark, 'wm-jolt'); SDT.Sound.sfx('hover'); return; }
+        const sec = e.target.closest?.('.ak-sec');
+        if (sec) { play(sec.querySelector('b') || sec, 'sec-pop'); SDT.Sound.sfx('gain'); return; }
+        const word = e.target.closest?.('.ak-word');
+        if (word) { play(word, 'word-glint'); return; }
+        const kicker = e.target.closest?.('.title-kicker');
+        if (kicker) { play(kicker, 'kick-blink'); return; }
+      });
       document.addEventListener('contextmenu', (e) => {
         if (e.target.closest('#sugLayer')) return;   // 建议层内部右键不重开
         e.preventDefault();

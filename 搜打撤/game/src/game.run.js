@@ -9,10 +9,10 @@
  * 并对外维持原有导出面（game.boot.js / game.bag.js / 测试照旧 import）。
  * ============================================================ */
 import { esc } from './shared.js';
-import { MAP, game, newRun, scaledEnemy } from './game.session.js';
+import { MAP, game, newRun, saveGame, scaledEnemy } from './game.session.js';
 import { buildEncounter, grantEventCard, openChestsOnCell, openShop, showRunTransition } from './game.run.scenes.js';
 import { openAltarRitual, openClassChoice, openFireRest } from './game.run.altar.js';
-import { moveTo, runEventDeck } from './game.run.flow.js';
+import { moveTo, reenterCell, runEventDeck } from './game.run.flow.js';
 
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const SDT = window.SDT;
@@ -89,4 +89,76 @@ function devJumpNode(kind) {
   }
 }
 
-export { bindRunMixins, moveTo, openAltarRitual, openClassChoice, openShop, showRunTransition, devForceBattle, devJumpNode };
+// —— 开发者控制台（2026-09-19 留言 #22：战斗中按 Ctrl+L 触发）——
+// 局内通用功能（金币/指定卡/回血）在此实现；战斗内功能经 SDT.Battle.commands.dev 分发。
+// 卡名搜索命中即发卡；金币/伤害数值用快捷档位按钮，不造复杂表单。
+function openDevConsole() {
+  if (!game.runActive && !game.battleActive) { UI.log('[[icon:lock]] 开发者控制台需要在对局/战斗中使用', 'warn'); return; }
+  const query = { q: '' };
+  const hitCards = () => {
+    const q = query.q.trim().toLowerCase();
+    if (!q) return [];
+    return SDT.Cards.all().filter(c => (c.name || '').toLowerCase().includes(q)).slice(0, 8);
+  };
+  const devBattle = () => !!(game.battleActive && SDT.Battle.commands && SDT.Battle.commands.dev);
+  const render = () => {
+    const hits = hitCards();
+    UI.showOverlay('[[icon:tools]] 开发者控制台', `
+      <p class="ov-note">调试用面板（Ctrl+L 开关）——修改会立即写入本局存档，别在正经挑战里用。</p>
+      <div class="devc-grid">
+        <section class="devc-sec">
+          <b class="devc-h">资源</b>
+          <div class="devc-row">
+            <button class="hs-btn" data-act="devcCoin" data-n="50">+50 币</button>
+            <button class="hs-btn" data-act="devcCoin" data-n="200">+200 币</button>
+            <button class="hs-btn" data-act="devcHeal" data-n="10">回 10 血</button>
+            <button class="hs-btn" data-act="devcHeal" data-n="999">回满血</button>
+          </div>
+        </section>
+        <section class="devc-sec">
+          <b class="devc-h">指定卡牌</b>
+          <input id="devcSearch" class="clib-search" placeholder="输入卡名搜索，如：江湖救急" value="${esc(query.q)}">
+          <div class="devc-hits">${hits.length
+            ? hits.map((c, i) => `<button class="hs-btn sm devc-hit" data-act="devcCard" data-i="${i}">【${esc(c.name)}】· ${esc(c.type)} · ${esc(c.rarity || '')}</button>`).join('')
+            : '<span class="dim">输入卡名后点结果发卡（同名堆叠规则照常生效）</span>'}</div>
+        </section>
+        ${devBattle() ? `
+        <section class="devc-sec">
+          <b class="devc-h">战斗调试</b>
+          <div class="devc-row">
+            <button class="hs-btn" data-act="devcB" data-k="energy">能量回满</button>
+            <button class="hs-btn" data-act="devcB" data-k="draw" data-n="2">抽 2 张</button>
+            <button class="hs-btn" data-act="devcB" data-k="heal">生命回满</button>
+            <button class="hs-btn" data-act="devcB" data-k="freezeAll">冰冻敌人×2回合</button>
+            <button class="hs-btn" data-act="devcB" data-k="damageAll" data-n="10">全体 10 伤</button>
+            <button class="hs-btn" data-act="devcB" data-k="win">直接胜利</button>
+          </div>
+        </section>` : ''}
+      </div>
+      <div class="ov-btns"><button class="ov-btn ok" data-act="devcClose">关闭（Esc / Ctrl+L）</button></div>`, 'discover');
+    UI._inputHandler = (e) => {
+      if (e.target.id !== 'devcSearch') return;
+      query.q = e.target.value;
+      render();
+      const input = document.getElementById('devcSearch');
+      if (input) { input.focus(); input.setSelectionRange(input.value.length, input.value.length); }
+    };
+  };
+  UI.act('devcCoin', (d) => { const n = +d.n || 50; game.coins += n; UI.log(`[[icon:coin]] 开发者：+${n} 币（现有 ${game.coins}）`, 'coin'); saveGameDev(); render(); });
+  UI.act('devcHeal', (d) => { const n = +d.n || 10; game.hp = n >= 999 ? game.maxHp : Math.min(game.maxHp, game.hp + n); UI.log(`[[icon:heart]] 开发者：生命 ${game.hp}/${game.maxHp}`, 'ok'); saveGameDev(); render(); });
+  UI.act('devcCard', (d) => {
+    const c = hitCards()[+d.i];
+    if (!c) return;
+    if (game.grantCard) game.grantCard(c);
+    render();
+  });
+  UI.act('devcB', (d) => { SDT.Battle.commands.dev(d.k, d.n); });
+  UI.act('devcClose', () => { UI.hideOverlay(); UI.refresh(game); });
+  render();
+}
+function saveGameDev() {
+  if (game.runActive && typeof game.persistSave === 'function') game.persistSave();
+  else saveGame();
+}
+
+export { bindRunMixins, moveTo, reenterCell, openAltarRitual, openClassChoice, openShop, showRunTransition, devForceBattle, devJumpNode, openDevConsole };

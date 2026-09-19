@@ -52,6 +52,9 @@ export function moveTo(toLi, toIdx) {
     game.layerIdx = toLi;
     game.trackPos = toIdx;
     markSeen(toLi, toIdx);
+    // 2026-09-19 留言 #24：离开旧格时才把它标记为已消耗（踩格不锁，站在格上可反复重开）
+    game.visited = game.visited || {};
+    game.visited[fromLi + ',' + fromIdx] = 1;
     if (game.cam?.frameMode === 'routes') game.cam.frameExploration(game);
     game.hop = 0;
     game.moveTarget = null;
@@ -82,6 +85,15 @@ export function moveTo(toLi, toIdx) {
   return true;
 }
 
+// 2026-09-19 留言 #24：点击脚下所在格 = 反复重开本格内容（商店/事件/战斗等）。
+// 仅 idle（站在格上、没有弹层与移动事务）时可用；内容是否可重复由 resolveCell 的
+// visited/repeatable 语义决定——本格在离开前永远不会被写入 visited。
+export function reenterCell() {
+  if (game.state !== 'idle' || activeMove) return false;
+  resolveCell();
+  return true;
+}
+
 function resolveCell() {
   const layer = curLayer(), idx = game.trackPos;
   const lc = layer.logical[idx];
@@ -89,11 +101,13 @@ function resolveCell() {
   const door = (layer.doors || []).find(d => d.at === idx);
   const altarE = (layer.altarEntrances || []).find(a => a.at === idx);
 
-  // 一次性内容防重刷（2026-09-09 玩法定版：任何格子只能触发一次）：
-  // 战斗/宝箱/拾取/事件/火堆/商店/祭坛/首脑结算过一次就标记，回头路再次踏入只提示不重触发。
+  // 一次性内容防重刷（2026-09-19 留言 #24 改口径）：「没离开前可以反复进入」——
+  // 踩格时不再写入 visited（旧的"落格即锁"作废），改为**离开本格**（移向下一格）时
+  // 在 moveTo 里补写（此时本格在地图上转为"已消耗"样式）。站在格上点脚下格可经
+  // reenterCell() 反复重开本格内容（商店重逛/战斗再打/事件再看）。
+  // visited 检查保留：防御读档/异常流程重复结算已离开的格子。
   // 仍可通行/使用的格：门/紧急撤离/终局撤离（通路）、空白格；
   // 祭坛已激活但奖励未领取时可重进（只开回赠面板领奖，见 openAltarRitual）。
-  // 走过的格子会在地图上标绿（renderer 按 visited 绘制）。
   game.visited = game.visited || {};
   const vKey = game.layerIdx + ',' + idx;
   const repeatable = !def || door || altarE ||
@@ -106,10 +120,7 @@ function resolveCell() {
     UI.refresh(game);
     return;
   }
-  // 祭坛格：踩上不锁定，激活（或用碎片兑换）成功后才算触发过；
-  // 首脑格：编组/战斗前也不锁定——放弃编组可再来，只有击败首脑后才消耗本格。
-  const ritualPending = def && (def.type === 'altar' || def.type === 'boss');
-  if (!ritualPending) game.visited[vKey] = 1;
+  // 首脑格：编组/战斗前不锁定——放弃编组可再来；击败首脑由战斗收尾写 visited（bag.js）
 
   // 杀戮尖塔式房间切换：从落脚开始到本格全部结算完成，地图始终由全屏房间页取代。
   UI.beginRoom();
@@ -281,7 +292,7 @@ function triggerEventCard(card) {
           <b>${esc(o.label)}</b>
           ${o.detail ? `<span>${esc(o.detail)}</span>` : ''}
         </button>`).join('')
-    : `<button class="evt-opt ok" data-act="evtNext"><b>继 续</b></button>`;
+    : `<button class="evt-opt ok" data-act="evtNext"><b>获取并离开</b></button>`;
   nodeShell({
     tone: 'event', asset: sceneMeta[2], icon: '[[icon:dice]]', title: card.name,
     sub: esc((narrative && narrative.intro) || card.desc || '神秘事件发生了……'),
@@ -431,10 +442,14 @@ function applyEventEffect(card) {
     case 'cmtn7qttxqo4':   // 修鞋铺（2026-09-09 审计补实装）：获得彩色令牌碎片；复原 1 张卡牌
       game.fragments = (game.fragments || 0) + 1;
       UI.log(`[[icon:crystal]] 修鞋铺送了你一枚彩色令牌碎片（${game.fragments}/2）`, 'loot');
+      // 2026-09-19 留言 #21：在事件本界面内复原，不再跳成「营火休整」页
       openPocketRestore(1, () => {
         game.state = 'idle';
         saveGame();
         UI.refresh(game);
+      }, {
+        tone: 'event', icon: '[[icon:tools]]', title: '修鞋铺 · 修整行装',
+        sub: '老师傅顺手替你把装备修好了——可以从消耗口袋复原 <b>1</b> 张卡牌（点击卡面复原）',
       });
       return;   // openPocketRestore 自管收尾
     default:

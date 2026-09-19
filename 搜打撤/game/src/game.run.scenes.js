@@ -223,7 +223,7 @@ export function openPickupPage(kind, gain, onDone) {
   setTimeout(() => {
     if (!main || !main.isConnected) return;   // 页面已被换掉/关掉就不再揭晓
     main.innerHTML = `<p class="gain-big">${gain}</p>
-      <button class="evt-opt ok" data-act="pickupGo"><b>继 续</b></button>`;
+      <button class="evt-opt ok" data-act="pickupGo"><b>获取并离开</b></button>`;
     SDT.Sound.sfx('gain');
     const go = main.querySelector('[data-act="pickupGo"]');
     if (go) go.focus({ preventScroll: true });
@@ -324,7 +324,9 @@ export function grantEventCard(tpl, opts = {}) {
 }
 // ESM：循环导入下本模块体先于 game.session 执行，顶层读 game 会 TDZ，延迟到 boot 统一绑定
 export const FIRE_RESTORABLE = (card) => card.type !== '道具' && card.type !== '装备';
-export function openPocketRestore(picks, done) {
+// opts = { title, icon, tone, sub }：2026-09-19 留言 #21——复原页不再一律伪装成
+// 「营火休整」（修鞋铺等事件里复原时跳成火堆页观感）；不传 opts 保持火堆口径
+export function openPocketRestore(picks, done, opts = {}) {
   game.state = 'modal';
   let left = picks;
   const restorable = () => game.usedPocket.filter(p => FIRE_RESTORABLE(p.card));
@@ -338,10 +340,10 @@ export function openPocketRestore(picks, done) {
             ${SDT.Cards.cardHTML(p.card, 'sm')}
             ${p.count > 1 ? `<span class="bt-count" title="同名卡牌还剩 ${p.count} 张">×${p.count}</span>` : ''}
           </div>`).join('')
-      : `<p class="ov-empty">（消耗口袋里没有可复原的卡牌${blockedN ? `——另有 ${blockedN} 张道具/装备不可在火堆复原` : ''}）</p>`;
+      : `<p class="ov-empty">（消耗口袋里没有可复原的卡牌${blockedN ? `——另有 ${blockedN} 张道具/装备不可在此复原` : ''}）</p>`;
     nodeShell({
-      tone: 'fire', icon: '[[icon:fire]]', title: '营火休整',
-      sub: `还可从消耗口袋中复原 <b>${left}</b> 张（最多 ${picks} 张）· 点击卡牌复原` +
+      tone: opts.tone || 'fire', icon: opts.icon || '[[icon:fire]]', title: opts.title || '营火休整',
+      sub: (opts.sub != null ? opts.sub : `还可从消耗口袋中复原 <b>${left}</b> 张（最多 ${picks} 张）· 点击卡牌复原`) +
         (blockedN ? ` · 道具/装备共 ${blockedN} 张不可复原` : ''),
       body: `<div class="bt-hand fire-restore-hand">${cardsHTML}</div>`,
       foot: `<button class="ov-btn ok fire-done-btn" data-act="fireDone"><svg class="ic svg-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h13M12 5.5 18.5 12 12 18.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> 继续旅程</button>`,

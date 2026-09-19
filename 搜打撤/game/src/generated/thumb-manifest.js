@@ -97,7 +97,6 @@ export default [
   "cards/martial-cc-cursed-blade.webp",
   "cards/martial-cc-dual-wield.webp",
   "cards/martial-cc-jianghu.webp",
-  "cards/martial-cc-prep.webp",
   "cards/martial-cc-rapid-fire.webp",
   "cards/martial-cc-treasure.webp",
   "cards/martial-cc-unmoved.webp",

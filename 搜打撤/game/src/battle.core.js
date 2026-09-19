@@ -2928,6 +2928,45 @@ import { emit as busEmit } from './event-bus.js';
   function takeFloats() { const list = floats; floats = []; return list; }
   function takeCardAnims() { const list = cardAnims; cardAnims = []; return list; }
 
+  // —— 开发者控制台（2026-09-19 留言 #22：战斗中 Ctrl+L 弹出）——
+  // 调试能力统一入口：只有 openDevConsole 的按钮会调用，不进任何常规交互链路
+  function devCommand(name, arg) {
+    switch (name) {
+      case 'energy':
+        energy = maxEnergy;
+        G.log('[[icon:bolt]] 开发者：能量已回满', 'sys');
+        break;
+      case 'draw': {
+        const n = drawCards(Math.max(1, +arg || 2));
+        G.log(`[[icon:cards]] 开发者：抽了 <b>${n}</b> 张牌`, 'sys');
+        break;
+      }
+      case 'heal':
+        G.hp = G.maxHp;
+        G.log('[[icon:heart]] 开发者：生命已回满', 'sys');
+        break;
+      case 'freezeAll':
+        alive().forEach(f => Combat.addBlessing(f, 'freeze', 2));
+        G.log('[[icon:crystal]] 开发者：所有敌人被冰冻 2 回合', 'sys');
+        break;
+      case 'damageAll': {
+        const dmg = Math.max(1, +arg || 10);
+        [...alive()].forEach(f => hitFoe(f, null, dmg, Combat.TYPES.FIXED));
+        sweepDead();
+        G.log(`[[icon:swords]] 开发者：对所有敌人造成 <b>${dmg}</b> 点固定伤害`, 'sys');
+        break;
+      }
+      case 'win':
+        G.log('[[icon:trophy]] 开发者：直接结算胜利', 'sys');
+        finish(true);
+        return true;
+      default:
+        return false;
+    }
+    requestBattleRender();
+    return true;
+  }
+
   const commands = Object.freeze({
     playCard: play,
     selectInfusion: toggleInfusePick,
@@ -2959,6 +2998,7 @@ import { emit as busEmit } from './event-bus.js';
     pickChoice,
     setPendingHint,
     lockPendingTarget,
+    dev: devCommand,   // #22 开发者控制台（战斗内：能量/抽牌/回血/冰冻/群伤/胜利）
     refreshView: requestBattleRender,   // U9：战斗被外层全屏页（远征手册等）覆盖返回后重绘战斗
     // —— 批次C：统一交互 API（审计 P1：click/drag/controller 共用一条管线）——
     // begin=验证并进入等待目标（无需目标则直接结算）；resolve=带目标结算；cancel=幂等取消

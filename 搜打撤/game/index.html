@@ -121,21 +121,19 @@
         </svg>
       </button>
       <button id="btnHelp" title="远征手册（操作与流程速查）">
-        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
-          <path d="M8.1 9a3.9 3.9 0 1 1 6.05 3.27c-1.25.83-2.15 1.55-2.15 3.03v.3" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/>
-          <circle cx="12" cy="19.7" r="1.35" fill="currentColor"/>
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+          <path d="M8.1 9a3.9 3.9 0 1 1 6.05 3.27c-1.25.83-2.15 1.55-2.15 3.03v.3" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+          <circle cx="12" cy="19.7" r="1.35" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
         </svg>
       </button>
       <button id="btnMute" title="音效 / 背景乐开关">
-        <svg class="ic-sound-on" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
-          <path d="M4 9.5v5h3.5L13 19V5L7.5 9.5H4z" fill="currentColor"/>
-          <path d="M16 8.6a5 5 0 0 1 0 6.8M18.6 6a8.4 8.4 0 0 1 0 12"
-                fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
+        <svg class="ic-sound-on" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+          <path d="M4.5 9.5v5h3l4.5 4V5.5l-4.5 4h-3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M15.2 9.2a4.4 4.4 0 0 1 0 5.6M17.8 7a8 8 0 0 1 0 10" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
         </svg>
-        <svg class="ic-sound-off" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
-          <path d="M4 9.5v5h3.5L13 19V5L7.5 9.5H4z" fill="currentColor"/>
-          <path d="M16.5 9.5l5 5M21.5 9.5l-5 5"
-                fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
+        <svg class="ic-sound-off" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+          <path d="M4.5 9.5v5h3l4.5 4V5.5l-4.5 4h-3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M15.5 9.5l5 5M20.5 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
         </svg>
       </button>
       <div id="hpHud" title="生命值">
@@ -154,6 +152,19 @@
       </div>
     </div>
     <div id="tooltip" hidden></div>
+    <!-- 全局背包入口（2026-09-19 留言 #27）：对局中任何界面（战斗/商店/事件/全屏页）
+         都可从同一位置打开背包；仅对局中且已选角色时显示，点击行为同 B 键 -->
+    <button id="bagBtnFloat" hidden title="打开 / 关闭背包（B）">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+        <path d="M6.5 8.5 8 4.8A1.6 1.6 0 0 1 9.5 3.8h5a1.6 1.6 0 0 1 1.5 1l1.5 3.7"
+              fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="4" y="8.5" width="16" height="11" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.9"/>
+        <path d="M4 13h16" stroke="currentColor" stroke-width="1.6"/>
+        <path d="M10.4 11.6h3.2v2.8h-3.2z" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="bbf-label">背包</span>
+      <b id="bagCountFloat">0/16</b>
+    </button>
     <div id="title">
       <div class="title-bg" aria-hidden="true"></div>
       <div class="title-inner">
@@ -209,10 +220,10 @@
             <span class="c-en">Achievement</span>
           </button>
           <!-- 左侧圆形入口：收藏图鉴 / 设置 -->
-          <button class="ak-circle ak-lib" id="btnCardLib" title="收藏图鉴">
+          <button class="ak-circle ak-lib" id="btnCardLib" title="卡牌库">
             <span class="c-ring"><svg viewBox="0 0 24 24" width="34" height="34" aria-hidden="true"><rect x="3.2" y="6.5" width="10" height="13.5" rx="1.4" transform="rotate(-8 8.2 13.2)" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="11" y="4" width="10" height="13.5" rx="1.4" transform="rotate(8 16 10.7)" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></span>
-            <span class="c-cn">收藏图鉴</span>
-            <span class="c-en">Collection</span>
+            <span class="c-cn">卡牌库</span>
+            <span class="c-en">Card Library</span>
           </button>
           <button class="ak-circle ak-set" id="mSettings" title="设置">
             <span class="c-ring"><svg viewBox="0 0 24 24" width="34" height="34" aria-hidden="true"><circle cx="12" cy="12" r="6.2" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="2.4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 2.6v3.2M12 18.2v3.2M2.6 12h3.2M18.2 12h3.2M5.4 5.4l2.3 2.3M16.3 16.3l2.3 2.3M18.6 5.4l-2.3 2.3M7.7 16.3l-2.3 2.3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>

@@ -4,7 +4,7 @@ const SDT = window.SDT;
 import { TYPE_NAME } from './game.notes.js';
 import { MAP } from './game.session.js';
 import { SLOT_COUNT, buildDerived, cam, canvas, configureGameRuntime, ctx, dpr, game, hasRun, migrateOldSave, openLeaveMenu, openSettings, openTitleGuide, quitGame, saveGame, setLobby, showTitle, startNewGame, _set_dpr, _set_cam } from './game.session.js';
-import { bindRunMixins, devForceBattle, devJumpNode, moveTo, openClassChoice, openShop, showRunTransition } from './game.run.js';
+import { bindRunMixins, devForceBattle, devJumpNode, moveTo, openDevConsole, reenterCell, openClassChoice, openShop, showRunTransition } from './game.run.js';
 import { PRELOAD_SCENES } from './game.run.data.js';
 import { openBaseHub } from './game.hub.js';
 import { bindBagMixins, showBackpack, setBagReturnHook } from './game.bag.js';
@@ -80,7 +80,11 @@ import { renderMiniMap } from './game.session.js';
             n = pickNode(wUp.x, wUp.y, true);
           }
           if (n) {
-            if (isReachable(n)) {
+            // 2026-09-19 留言 #24：点击脚下所在格 = 反复重开本格内容（离开前不锁格）
+            if (n.li === game.layerIdx && n.idx === game.trackPos) {
+              reenterCell();
+            }
+            else if (isReachable(n)) {
               canvas.style.cursor = 'wait';
               moveTo(n.li, n.idx);
             }
@@ -118,6 +122,15 @@ import { renderMiniMap } from './game.session.js';
 
     // 键盘走动作映射层（src/input.js）：玩法读动作，键位是数据（可改键/可接手柄）
     window.addEventListener('keydown', (e) => {
+      // #22 开发者控制台：战斗/对局中 Ctrl+L 开关（不走动作映射，避免与改键层耦合）
+      if (e.ctrlKey && !e.altKey && !e.metaKey && (e.key === 'l' || e.key === 'L')) {
+        const ov = UI.el.overlay;
+        const consoleOpen = !ov.hidden && ov.querySelector?.('#devcSearch');
+        if (consoleOpen) { UI.hideOverlay(); e.preventDefault(); return; }
+        openDevConsole();
+        e.preventDefault();
+        return;
+      }
       const tag = e.target && e.target.tagName;
       if (tag === 'TEXTAREA' || tag === 'INPUT' || tag === 'SELECT' || e.target?.isContentEditable) return;
       // Native buttons own Space/Enter. Do not let map shortcuts swallow keyboard activation.
@@ -154,6 +167,8 @@ import { renderMiniMap } from './game.session.js';
     });
 
     UI.el.bagBtn.addEventListener('click', () => showBackpack());
+    // #27 全局浮动背包键：对局中任何界面同位置开背包（战斗中 showBackpack 自动转战斗背包）
+    document.getElementById('bagBtnFloat')?.addEventListener('click', () => showBackpack());
     document.getElementById('routePanel')?.addEventListener('click', e => {
       const button = e.target.closest('button[data-route-index]');
       if (!button || button.disabled || game.state !== 'idle') return;

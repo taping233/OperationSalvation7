@@ -367,6 +367,8 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
       hero: card ? !!card.hero : false,
       tokenOf: card ? (card.tokenOf || undefined) : undefined,
       unrandom: card ? !!card.unrandom : false,
+      // 2026-09-19 留言 #29：玩家备注描述（与卡面效果描述分开的一段自由文本）
+      note: card ? (card.note || '') : '',
     };
     renderDesigner();
   }
@@ -473,6 +475,8 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
                 <label class="sellable-tgl" title="所有卡牌默认不可出售，勾选后才能在商店卖掉"><input type="checkbox" id="cardSellable" ${draft.sellable ? 'checked' : ''}> 可出售</label>
                 <span class="dmg-hint">0 = 不显示角标；勾「可出售」才能卖给商店</span>
               </div></div>
+            <div class="cdes-row"><label>备注描述 <span class="row-tip">可选 · 点卡放大时展示</span></label>
+              <textarea id="cardNote" rows="2" maxlength="200" placeholder="写给自己的备注：使用心得、combo 提示、来源纪念……（与效果描述分开，不影响战斗）">${esc(draft.note)}</textarea></div>
             <p class="dmg-hint">[[icon:lantern]] 保存后可在商店刷出、在战斗中实装；数据保存在本浏览器。</p>
           </div>
         </div>
@@ -494,6 +498,7 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
       else if (e.target.id === 'cardArmor') draft.armor = Math.max(0, Math.min(99, Math.floor(+e.target.value || 0)));
       else if (e.target.id === 'cardValue') draft.value = Math.max(0, Math.min(99, Math.floor(+e.target.value || 0)));
       else if (e.target.id === 'cardSellable') { draft.sellable = e.target.checked; return; }
+      else if (e.target.id === 'cardNote') { draft.note = e.target.value; return; }
       else return;
       updateDesignerPreview();
     };
@@ -577,6 +582,11 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
     if (draft.hero) card.hero = true;
     if (draft.tokenOf) card.tokenOf = draft.tokenOf;
     if (draft.unrandom) card.unrandom = true;
+    // #29 备注描述：有内容写入、清空则摘除字段。upsert 内部已 saveAll，
+    // 这些 upsert 之后的字段补写必须再显式落盘一次，否则关页面即丢
+    if (draft.note.trim()) card.note = draft.note.trim();
+    else delete card.note;
+    SDT.Cards.saveAll(SDT.Cards.all());
     lastSavedId = card.id;
     Sfx.ding();
     UI.log(`[[icon:cards]] 卡牌【<b>${esc(card.name)}</b>】已${wasEditing ? '更新' : '保存到卡牌库'}`, 'ok');

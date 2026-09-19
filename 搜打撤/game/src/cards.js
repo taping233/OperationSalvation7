@@ -608,7 +608,6 @@ import { DATA } from './data-loader.js';
       { id: 'tt7-bulwark',     name: '坚盾',       cost: 1, rarity: '职业', type: '武术', cls: '战士', unrandom: true, desc: '本回合获得 8 点护甲，回合结束 -4 点。', value: 2 },
       { id: 'tt7-armup',       name: '武装',       cost: 1, rarity: '职业', type: '武术', cls: '战士', unrandom: true, desc: '从牌库中抽取 1 张装备贮藏。', value: 2 },
       { id: 'tt7-whirlwind',   name: '旋风斩',     cost: 2, rarity: '职业', type: '武术', cls: '战士', unrandom: true, dmg: 1, dmgType: 'attack', desc: '攻1，全体攻击。', value: 2 },   // 2026-09-17 留言「旋风斩应为2费」
-      { id: 'cc-prep',         name: '厉兵秣马',   cost: 2, rarity: '职业', type: '武术', cls: '战士', unrandom: true, desc: '本回合攻击 +2，抽 2 张牌。', value: 3 },
       { id: 'tt7-demonbreaker', name: '破甲重斩',  cost: 3, rarity: '职业', type: '武术', cls: '战士', unrandom: true, dmg: 5, dmgType: 'attack', desc: '攻5，附加破甲；击杀则 +4 甲。', value: 3 },
       { id: 'tt7-fullstrike',  name: '全力一击',   cost: 3, rarity: '职业', type: '武术', cls: '战士', unrandom: true, dmg: 5, dmgType: 'attack', desc: '攻5，抽 1 张牌。', value: 2 },
       { id: 'tt7-ironphalanx', name: '铁甲阵',     cost: 2, rarity: '职业', type: '武术', cls: '战士', unrandom: true, desc: '+10 甲，洗入 5 张随机卡牌。', value: 4 },
@@ -911,7 +910,7 @@ import { DATA } from './data-loader.js';
     // 桌游手绘卡 · 第十一批（2026-09-09 与设计者实机卡库导出完全对齐，老板拍板）：
     // 以微信接收的设计者导出（搜打撤·代号7_卡牌库_233张.json，裸数组旧格式）为准：
     //   · 补入设计者实机有而仓库缺失的 26 张（tt7 旧职业卡 9 / 封印肢体 4 /
-    //     制作坊自建 cmtn* 13）；厉兵秣马·不变应万变新旧两版并存，与设计者实机一致
+    //     制作坊自建 cmtn* 13）；不变应万变新旧两版并存，与设计者实机一致；厉兵秣马双版已终（cc-prep 于 2026-09-19 退役，只留 tt7-ironcharge）
     //     （旧版 tt7-* 无 cls，不进职业池；例外：法力补给 tt7-maxsupply 仓库侧补
     //     cls=法师——白塔专属，卡面「人物专属」写不清归属）；
     //   · 恶魔之力 tt7-drunksong 整卡退役（2026-09-13 老板拍板删除：同名双版收口只留
@@ -1182,7 +1181,7 @@ import { DATA } from './data-loader.js';
     //   · 39 张仓库独有卡退役（RETIRE_TT11；「新兵操典」种子不带 id，按名字清理）；
     //   · 25 张共享 id 卡整卡取设计者稿（能力卡 type「能力卡」与敌人图鉴 art
     //     为仓库实现标记，不回退，见 TABLETOP11 注释）。
-    // 有意结果：厉兵秣马/不变应万变 新旧两版并存（设计者实机如此，
+    // 有意结果：不变应万变 新旧两版并存（设计者实机如此；厉兵秣马 cc-prep 已于 2026-09-19 退役，只留 tt7-ironcharge），
     // 旧版 tt7-* 无 cls 不进职业池，法力补给除外——cls=法师 为仓库定版）；
     // 恶魔之力 tt7-drunksong 已整卡退役（2026-09-13 老板拍板删除，同名双版只留 cc-demon）。
     // 初始牌只剩初始攻击与应急绷带（设计者稿）。

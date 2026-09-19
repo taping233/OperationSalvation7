@@ -1,4 +1,5 @@
 import { characterName } from './characters.js';
+import { esc } from './shared.js';
 import { renderExpeditionPanel } from './expedition.view.js';
   const SDT = window.SDT;
   const $ = (id) => document.getElementById(id);
@@ -17,6 +18,7 @@ import { renderExpeditionPanel } from './expedition.view.js';
         charAtk: $('charAtk'),
         heroAva: $('heroAva'),
         bagCount: $('bagCount'), bagBtn: $('bagBtn'), btnHome: $('btnHome'),
+        bagBtnFloat: $('bagBtnFloat'), bagCountFloat: $('bagCountFloat'),
         log: $('log'),
         logPanel: $('logPanel'),
         overlay: $('overlay'), ovTitle: $('ovTitle'), ovBody: $('ovBody'),
@@ -155,10 +157,18 @@ import { renderExpeditionPanel } from './expedition.view.js';
       if (!card) return;
       const old = document.getElementById('cardZoom');
       if (old) old.remove();
+      // 2026-09-19 留言 #29：特写多一个「备注」区，展示这张卡的玩家备注（卡牌库可编辑）
+      const note = (opts.note != null ? opts.note : (card.note || '')) || '';
+      const noteHTML = `
+        <div class="cz-note${note ? ' has' : ''}">
+          <span class="cz-note-tag">[[icon:pen]] 备注</span>
+          <p class="cz-note-text">${note ? esc(note) : '暂无备注——可在卡牌库中编辑这张卡的备注描述'}</p>
+        </div>`;
       const el = document.createElement('div');
       el.id = 'cardZoom';
       el.innerHTML = `<div class="cz-backdrop" aria-hidden="true"></div>
         <div class="cz-card">${SDT.Cards.cardHTML(card, 'lg')}</div>
+        ${noteHTML}
         ${opts.footer ? `<div class="cz-foot">${opts.footer}</div>` : ''}
         <span class="cz-hint">点击任意处收回</span>`;
       let closed = false;
@@ -283,6 +293,11 @@ import { renderExpeditionPanel } from './expedition.view.js';
         // 2026-09-06 #18：背包满/接近满时图标标红
         if (this.el.bagBtn) this.el.bagBtn.classList.toggle('bag-full', used >= cap);
         else if (this.el.bagCount.parentElement) this.el.bagCount.parentElement.classList.toggle('bag-full', used >= cap);
+        if (this.el.bagCountFloat) this.el.bagCountFloat.textContent = bagKey;
+      }
+      // #27 全局浮动背包键：对局中（且已选角色）任何界面显示；标题/基地/整备/选人时隐藏
+      if (this.el.bagBtnFloat) {
+        this.el.bagBtnFloat.hidden = !(game.runActive && game.myClass);
       }
     },
 
@@ -314,25 +329,9 @@ import { renderExpeditionPanel } from './expedition.view.js';
     },
 
     showTooltip(clientX, clientY, title, lines) {
-      const el = this.el.tooltip;
-      const key = title + '\n' + lines.join('\n');
-      if (this._tooltipKey !== key) {
-        this._tooltipKey = key;
-        el.innerHTML = `<b>${SDT.Icons.rich(title)}</b>` + lines.map(l => `<span>${SDT.Icons.rich(l)}</span>`).join('');
-        el.hidden = false;
-        // offsetWidth/Height 是布局值（不含 UiScale.zoom），换算边界判断正需要这个口径
-        this._tooltipSize = { width: el.offsetWidth, height: el.offsetHeight };
-      }
-      el.hidden = false;
-      const vw = this.el.viewport.clientWidth, vh = this.el.viewport.clientHeight;
-      const r = this._tooltipSize || { width: 0, height: 0 };
-      // 入参是视口坐标（e.clientX/Y），定位是布局坐标：过 UiScale.pt 统一口径
-      const p = SDT.UiScale.pt(clientX, clientY);
-      let x = p.x + 14, y = p.y + 14;
-      if (x + r.width > vw - 8) x = p.x - r.width - 10;
-      if (y + r.height > vh - 8) y = p.y - r.height - 10;
-      el.style.left = x + 'px';
-      el.style.top = y + 'px';
+      // 2026-09-19 留言 #7：任意界面鼠标停留都不再弹解释框——入口保留但整体空转，
+      // 地图节点/顶栏/手牌等调用点零改动，#tooltip 元素永不显示
+      void clientX; void clientY; void title; void lines;
     },
 
     hideTooltip() { this.el.tooltip.hidden = true; },
@@ -425,6 +424,9 @@ import { renderExpeditionPanel } from './expedition.view.js';
       // 撤离失败页（2026-09-13 留言：UI 重做 + 背景透明）：标记在 overlay 上，
       // 让该页脱离 room-view 的整屏不透明底，改走半透明暗纱 + 玻璃面板
       this.el.overlay.classList.toggle('fx-doom', mode === 'doom');
+      // 玻璃确认浮层（2026-09-19 留言 #25「丢弃卡牌？」等小确认页背景透明）：
+      // 同 fx-doom 的暗纱透底，面板走中性色调玻璃卡
+      this.el.overlay.classList.toggle('fx-glass', mode === 'glass');
       // 已打开状态下且弹窗模式变化（场景→战斗→结算等）时重播滑入动画；
       // 战斗内反复 render（同模式）不重播，避免每出一张卡就闪一次
       // 2026-09-12 留言 #33：page 页之间的返回/前进导航也重播入场动画（battle/bag 等高频重绘模式除外）
@@ -448,8 +450,9 @@ import { renderExpeditionPanel } from './expedition.view.js';
       // 每次重建时放大整页样式失效范围，body 类只触发一次单类切换
       document.body.classList.toggle('page-opaque', this.el.overlay.classList.contains('opaque'));
       // page 全屏页自带 CSS 入场动画（.card.page 的 pgIn），WAAPI 再叠一层会与
-      // CSS 动画互相覆盖造成过渡期跳帧——这里只跑 CSS 那套
-      if ((!wasOpen || prevMode !== mode) && SDT.Motion && mode !== 'page') SDT.Motion.overlayIn(card);
+      // CSS 动画互相覆盖造成过渡期跳帧——这里只跑 CSS 那套。
+      // bagpage 背包页同理（2026-09-19 留言 #3：展开动画走 .card.bag-page 的 bagIn）
+      if ((!wasOpen || prevMode !== mode) && SDT.Motion && mode !== 'page' && mode !== 'bagpage') SDT.Motion.overlayIn(card);
       // 只在弹窗真正打开/切换模式时播开窗音效——战斗内反复 render 不刷音效
       if (!wasOpen || prevMode !== mode) {
         SDT.Sound.sfx('open');
@@ -516,6 +519,7 @@ import { renderExpeditionPanel } from './expedition.view.js';
         this.el.overlay.classList.remove('opaque');
         this.el.overlay.classList.remove('bag-full');
         this.el.overlay.classList.remove('fx-doom');
+        this.el.overlay.classList.remove('fx-glass');
         this.el.overlay.hidden = true;
       };
       if (instant) { finish(); return; }

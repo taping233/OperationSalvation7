@@ -260,12 +260,15 @@ import { _set_cardPageOpen } from './game.cardslib.js';
   function showDiscardConfirm(name, fromSafe) {
     backpackOpen = false;
     game.state = 'modal';
+    // 2026-09-19 留言 #25：确认页背景透明——走 fx-glass 暗纱 + 中性玻璃面板
     UI.showOverlay('[[icon:question]] 丢弃卡牌？', `
-      <p class="ov-note">你把【<b>${esc(name)}</b>】拖到了背包外。确认后将永久丢弃 1 张，无法从消耗口袋或墓地取回。</p>
-      <div class="ov-btns">
-        <button class="ov-btn danger" data-act="confirmDragDiscard">确认丢弃</button>
-        <button class="ov-btn" data-act="cancelDragDiscard">取消，放回背包</button>
-      </div>`);
+      <div class="glass-panel">
+        <p class="ov-note">你把【<b>${esc(name)}</b>】拖到了背包外。确认后将永久丢弃 1 张，无法从消耗口袋或墓地取回。</p>
+        <div class="ov-btns">
+          <button class="ov-btn danger" data-act="confirmDragDiscard">确认丢弃</button>
+          <button class="ov-btn" data-act="cancelDragDiscard">取消，放回背包</button>
+        </div>
+      </div>`, 'glass');
     UI.act('confirmDragDiscard', () => { discardOwnedCard(name, fromSafe); showBackpack(true); });
     UI.act('cancelDragDiscard', () => showBackpack(true));
   }
@@ -923,17 +926,41 @@ import { _set_cardPageOpen } from './game.cardslib.js';
     // 「卡牌是消耗品」一次性教学（2026-09-19 关卡审查）：
     // 打出的卡不回背包、初始攻击/职业卡直接消散——这条核心规则此前只有战后台志提到过，
     // 新手首层打光 5 张初始攻击就会陷入无攻击牌死局。首胜结算后弹一次说明（按档位只弹一次）。
+    // 2026-09-19 留言 #17：重做成大版图解页——卡面实物 + 箭头流向 + 图标分栏，不再挤小字
     const teachAmmoOnce = () => {
       const B = SDT.Base;
       if (!B || !B.data || B.data.ammoTaught) return;
       B.data.ammoTaught = true;
       B.save();
       game.state = 'modal';
+      const shaCard = SDT.Cards.all().find(c => c.id === SDT.Cards.SHA.id) || SDT.Cards.SHA;
       UI.showOverlay('[[icon:cards]] 卡牌是消耗品', `
-        <p class="ov-note">战斗中<b>打出过的卡牌不会回到背包</b>：</p>
-        <p class="ov-note">· 普通卡进入<b>消耗口袋</b>——可在火堆/祭坛复原，撤离结算只有 1/3 能带回基地；<br>
-        · 【初始攻击】与职业卡打出后<b>直接消散</b>——补给站的初始攻击 1 币 1 张，路过记得补弹。</p>
-        <p class="ov-note">省着打，多开箱、常逛商店——祝顺利撤离。</p>
+        <div class="ammo-teach">
+          <section class="at-col">
+            <div class="at-flow">
+              <span class="at-card">${SDT.Cards.cardHTML(shaCard, 'sm')}</span>
+              <span class="at-arrow">➜</span>
+              <span class="at-node"><span class="at-ico">[[icon:pocket]]</span><b>消耗口袋</b></span>
+            </div>
+            <p class="at-txt">普通卡打出后<b>不会回到背包</b>，先进入消耗口袋——可在火堆/修鞋铺复原；撤离结算只有 <b class="gold">1/3</b> 能带回基地。</p>
+          </section>
+          <section class="at-col">
+            <div class="at-flow">
+              <span class="at-card">${SDT.Cards.cardHTML(shaCard, 'sm')}</span>
+              <span class="at-arrow">➜</span>
+              <span class="at-node gone"><span class="at-ico">[[icon:skull]]</span><b>直接消散</b></span>
+            </div>
+            <p class="at-txt">【初始攻击】与职业卡打出后<b>直接消散</b>——补给站的初始攻击 1 币 1 张，路过记得补弹。</p>
+          </section>
+          <section class="at-col">
+            <div class="at-flow">
+              <span class="at-node"><span class="at-ico">[[icon:archive]]</span><b>多开箱</b></span>
+              <span class="at-dot">·</span>
+              <span class="at-node"><span class="at-ico">[[icon:bag]]</span><b>常逛商店</b></span>
+            </div>
+            <p class="at-txt">弹药有限——多开宝箱、常逛商店补牌。祝顺利撤离。</p>
+          </section>
+        </div>
         <div class="ov-btns"><button class="ov-btn ok" data-act="ammoTeachOk">[[icon:check]] 知道了</button></div>`, 'discover');
       UI.act('ammoTeachOk', () => {
         UI.hideOverlay();

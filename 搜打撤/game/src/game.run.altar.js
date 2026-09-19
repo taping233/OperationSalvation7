@@ -244,13 +244,27 @@ export function openClassChoice() {
       dengkui: '灯已点亮，照归途',
     };
     const startLine = START_LINES[characterFor(cl).id] || '整备完毕，探索开始';
+    // 2026-09-19 留言 #16：开局发放的两张职业卡改走专门「启程 event」页——不再只靠
+    // 日志静默入包，先展示卡面（获取并离开），再接启程过渡动画
+    const grantedCards = [card, ...(card2 && card2.id !== card.id ? [card2] : [])].filter(Boolean);
     showRunTransition({
       tone: 'door', asset: 'scene-door-bg', eyebrow: 'EXPEDITION START',
       title: characterName(cl), detail: startLine, duration: 1600,
     }).then(() => {
-      game.state = 'idle';
-      saveGame();
-      UI.refresh(game);
+      game.state = 'modal';
+      nodeShell({
+        tone: 'event', icon: '[[icon:medal]]', title: `${characterName(cl)} · 启程补给`,
+        sub: `从${esc(characterName(cl))}的专属卡池抽得了 <b>${grantedCards.length}</b> 张职业卡——与 5 张【初始攻击】一起放入背包`,
+        body: `<div class="bt-hand cls-grant-hand">${grantedCards.map(c => SDT.Cards.cardHTML(c)).join('')}</div>
+          <p class="ov-note">职业卡带出对局后留在仓库（不占消耗口袋）；本局内打出后与其他卡同规则结算。</p>`,
+        foot: `<button class="ov-btn ok cls-grant-go" data-act="clsGrantGo"><svg class="svg-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h13M12 5.5 18.5 12 12 18.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> 获取并离开</button>`,
+      });
+      UI.act('clsGrantGo', () => {
+        UI.hideOverlay();
+        game.state = 'idle';
+        saveGame();
+        UI.refresh(game);
+      });
     });
   });
   render();
@@ -638,17 +652,16 @@ function renderExtractStash() {
   const otherN = game.inventory.filter(i => i.name !== '木材' && i.name !== '口粮')
     .reduce((a, b) => a + b.count, 0);
   const room = B.stashRoom();
-  const rows = extractLeft.map((s, i) => {
+  // 2026-09-19 留言 #28：整理页重做——背包卡牌区从文字行改为点卡即入库的卡面网格
+  const rows = `<div class="ext-cards">${extractLeft.map((s, i) => {
     const fits = s.count <= Math.max(0, room);
-    return `<div class="pk-row dep-row">
-      <span class="dep-name">[[icon:cards]] <b>${esc(s.card.name)}</b>${s.count > 1 ? ` ×${s.count}` : ''}
-        <span class="dim">· 收购 ${SDT.Cards.sellPrice(s.card)} 币/张</span></span>
-      <span class="dep-stepper">
-        <button class="mini-btn ok" data-act="exStash" data-i="${i}" ${fits ? '' : 'disabled'}
-          title="${fits ? '放入仓库' : '仓库容量不足'}">[[icon:archive]] 入库</button>
-      </span>
+    return `<div class="ext-card${fits ? '' : ' off'}" data-act="exStash" data-i="${i}" role="button" tabindex="0"
+      aria-label="入库 ${escAttr(s.card.name)}" title="${fits ? '点击入库' : '仓库容量不足'}——【${escAttr(s.card.name)}】×${s.count}">
+      ${SDT.Cards.cardHTML(s.card, 'sm')}
+      ${s.count > 1 ? `<span class="bt-count" title="同名卡牌 ${s.count} 张">×${s.count}</span>` : ''}
+      ${fits ? '' : '<span class="ext-noroom">容量不足</span>'}
     </div>`;
-  }).join('');
+  }).join('') || '<p class="ov-empty" style="margin:6px 0 0">背包里没有可入库的卡牌。</p>'}</div>`;
   const shaRow = shaN
     ? `<div class="pk-row dep-row locked"><span>[[icon:cards]] [[icon:lock]] <b>初始攻击</b> ×${shaN}
         <span class="dim">· 初始牌不可入库（每局自动携带 ${MAP.rules.starterSha} 张）</span></span>
@@ -680,8 +693,8 @@ function renderExtractStash() {
       <div class="result-summary"><span class="result-kicker">EXTRACTION REPORT</span><b>战利品已回收，正在等待你的入库决定</b><span>容量 ${B.stashUsed()}/${B.stashCap()} · 未入库卡牌会在完成整理时丢失</span></div>
       <div class="dep-body result-columns">
         <section class="hub-card">
-          <h3>[[icon:bag]] 背包卡牌</h3>
-          <div class="dep-list">${rows || '<p class="ov-empty" style="margin:6px 0 0">背包里没有可入库的卡牌。</p>'}${shaRow}</div>
+          <h3>[[icon:bag]] 背包卡牌 <span class="hub-card-tip">点击卡面放入仓库</span></h3>
+          <div class="dep-list">${rows}${shaRow}</div>
         </section>
         <section class="hub-card">
           <h3>[[icon:archive]] 自动入库</h3>

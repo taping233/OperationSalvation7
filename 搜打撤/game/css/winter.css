@@ -1532,3 +1532,108 @@ body.reduce-motion #layerBanner { animation: none !important; }
 #overlay .card.chest::before{display:none}
 #overlay .card.chest .bt-hand{gap:48px;align-items:flex-start}
 #overlay .card.chest .bt-hand .hs-card{height:14em!important}
+
+/* ============================================================
+ * 2026-09-19 留言批次（09-19 晚 · #8/#12/#14/#25/#29 等）
+ * ============================================================ */
+/* #12 标题页：快速参考胶囊与静音键加大，和左侧退出键等高对齐（ak-sq 基准 64×58） */
+.ak-quickref{height:58px;padding:0 26px;font-size:16px}
+.ak-quickref svg{width:22px;height:22px}
+/* #25 玻璃确认浮层：暗纱透底 + 中性玻璃面板（丢弃卡牌等小确认页） */
+#overlay.room-view.fx-glass,#overlay.fx-glass{background:rgba(6,10,14,.42);backdrop-filter:blur(3px) saturate(.75)}
+#overlay.fx-glass .card{background:none;border:0;box-shadow:none}
+#overlay.fx-glass .card::before{display:none}
+#overlay.fx-glass .glass-panel{width:min(560px,92%);margin:0 auto;padding:22px 26px 18px;text-align:center;
+  background:linear-gradient(180deg,rgba(24,32,40,.85),rgba(9,13,18,.9));
+  border:1px solid rgba(206,222,234,.22);border-radius:16px;
+  box-shadow:0 30px 80px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.06);
+  animation:glassIn .3s cubic-bezier(.22,1,.36,1)}
+@keyframes glassIn{from{opacity:0;transform:translateY(20px) scale(.97)}}
+/* #29 卡牌特写备注区：lg 卡面下方固定一块备注描述（有备注亮色，无备注灰提示） */
+#cardZoom .cz-note{margin:12px auto 0;width:min(560px,86%);display:flex;gap:10px;align-items:flex-start;text-align:left;
+  padding:10px 14px;border-radius:12px;background:rgba(12,20,27,.82);
+  border:1px solid rgba(182,211,214,.18)}
+#cardZoom .cz-note.has{border-color:rgba(223,194,141,.45);box-shadow:inset 0 0 18px rgba(223,194,141,.06)}
+#cardZoom .cz-note-tag{flex:0 0 auto;display:inline-flex;align-items:center;gap:4px;color:#dfc28d;font-size:12px;letter-spacing:2px;font-weight:700;padding-top:2px}
+#cardZoom .cz-note-text{margin:0;font-size:13px;line-height:1.75;color:#c8d4d8}
+#cardZoom .cz-note.has .cz-note-text{color:#efe8d8}
+
+/* #13 标题页可点击互动小动画（game.menu.js bindTitleExtras 挂类） */
+.winter-wordmark.wm-jolt{animation:wmJolt .5s cubic-bezier(.36,.07,.19,.97) both}
+@keyframes wmJolt{10%,90%{transform:translateX(-2px) rotate(-.4deg)}20%,80%{transform:translateX(3px) rotate(.5deg)}30%,50%,70%{transform:translateX(-5px) rotate(-.6deg)}40%,60%{transform:translateX(5px) rotate(.6deg)}}
+.ak-sec b.sec-pop{animation:secPop .45s cubic-bezier(.22,1.6,.36,1)}
+@keyframes secPop{0%{transform:scale(1)}40%{transform:scale(1.5);color:#ffd876}100%{transform:scale(1)}}
+.ak-word.word-glint{animation:wordGlint .7s ease}
+@keyframes wordGlint{0%{filter:brightness(1)}35%{filter:brightness(2.1) drop-shadow(0 0 10px #ffd876cc);border-color:#ffe3a1}100%{filter:brightness(1)}}
+.title-kicker.kick-blink{animation:kickBlink .8s steps(2) 2}
+@keyframes kickBlink{50%{opacity:.25;letter-spacing:5px}}
+
+/* #27 全局浮动背包按钮：对局中任何界面同一位置可开背包（右下 btnLocate 同列上方，
+   z-index 高于 overlay 压住全屏页）；标题页/基地/选人时由 UI.refresh 置 hidden */
+#bagBtnFloat{position:fixed;right:16px;bottom:calc(105px + 66px);z-index:30;width:44px;height:58px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+  background:#142c38d9;border:1px solid #637c89;border-radius:3px;color:#d8e2e6;cursor:pointer;
+  box-shadow:0 4px 14px rgba(0,0,0,.35);transition:background .15s,color .15s,border-color .15s}
+#bagBtnFloat:hover{background:#1d3d4c;color:#fff;border-color:#9fb6bf}
+#bagBtnFloat .bbf-label{font-size:10px;letter-spacing:2px}
+#bagBtnFloat #bagCountFloat{font:700 10px Consolas;color:#ffd876}
+#bagBtnFloat[hidden]{display:none}
+
+/* #3 背包展开动画：bag-page 打开时从地面轻轻升起放大（入场只播一次，battle 高频
+   重绘走 wasOpen/mode 判断不重播；bagpage 模式在 ui.js 跳过 WAAPI 避免叠层） */
+@keyframes bagIn{from{opacity:0;transform:translateY(26px) scale(.94)}60%{opacity:1}to{opacity:1;transform:none}}
+#overlay .card.bag-page{animation:bagIn .34s cubic-bezier(.22,1,.36,1)}
+#overlay.closing .card.bag-page{animation:ovFadeOut .2s forwards!important}
+
+/* #10 卡牌库亮色设计：鎏金渐变标题 + 页头三色顶线（青玉/鎏金/紫晶）+ 展示区顶部微光 */
+#overlay .library-title h2{
+  background:linear-gradient(92deg,#e8d9a8 0%,#ffe9b8 30%,#8fd8c8 55%,#e8d9a8 78%,#c9a6e8 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 2px 8px rgba(223,194,141,.18));
+}
+#overlay .card-library-page .library-title{position:relative;padding-top:10px}
+#overlay .card-library-page .library-title::before{content:'';position:absolute;top:0;left:4px;right:4px;height:2px;
+  background:linear-gradient(90deg,transparent,#7fc8b8 18%,#dfc28d 50%,#b48ad8 82%,transparent);
+  border-radius:2px;opacity:.85}
+#overlay .card-library-page .clib-main{background:
+  radial-gradient(120% 46% at 50% 0%,rgba(143,216,200,.07),transparent 62%),
+  radial-gradient(90% 40% at 82% 0%,rgba(180,138,216,.06),transparent 60%),
+  #e9e4d6}
+
+/* #22 开发者控制台（Ctrl+L）面板 */
+.devc-grid{display:grid;gap:14px;margin:6px 0 14px}
+.devc-sec{padding:12px 14px;border:1px solid rgba(182,211,214,.2);border-radius:10px;background:rgba(10,18,24,.5);text-align:left}
+.devc-h{display:block;margin-bottom:8px;color:#dfc28d;font-size:12.5px;letter-spacing:2px}
+.devc-row{display:flex;flex-wrap:wrap;gap:8px}
+.devc-hits{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;max-height:180px;overflow:auto}
+.devc-hit{max-width:100%}
+#devcSearch{width:100%;max-width:420px}
+
+/* #17 「卡牌是消耗品」教学页：三分栏图解（卡面 → 流向节点），替代旧小字堆叠 */
+.ammo-teach{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:8px 0 14px}
+@media(max-width:1100px){.ammo-teach{grid-template-columns:1fr}}
+.ammo-teach .at-col{padding:14px 12px;border:1px solid rgba(206,222,234,.16);border-radius:12px;
+  background:rgba(12,20,27,.6);text-align:center}
+.ammo-teach .at-flow{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:12px}
+.ammo-teach .at-card .hs-card{font-size:11px;transform:scale(.92)}
+.ammo-teach .at-arrow{font-size:22px;color:#dfc28d;text-shadow:0 0 12px rgba(223,194,141,.5)}
+.ammo-teach .at-dot{font-size:20px;color:#8ba1a8}
+.ammo-teach .at-node{display:inline-flex;flex-direction:column;align-items:center;gap:4px;padding:10px 12px;
+  border:1px solid rgba(223,194,141,.4);border-radius:10px;background:rgba(20,30,38,.8);color:#e6eef1}
+.ammo-teach .at-node.gone{border-color:rgba(214,120,96,.5)}
+.ammo-teach .at-ico svg,.ammo-teach .at-ico img{width:26px;height:26px}
+.ammo-teach .at-node b{font-size:12.5px;letter-spacing:1px}
+.ammo-teach .at-txt{margin:0;font-size:13px;line-height:1.85;color:#c8d4d8;text-align:left}
+.ammo-teach .at-txt b{color:#efe8d8}
+
+/* #28 撤离整理页（result-pg）重做：背包区卡面网格 + 点卡入库 */
+#overlay .result-pg .ext-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(122px,1fr));gap:10px;padding:4px 0 8px}
+#overlay .result-pg .ext-card{position:relative;cursor:pointer;border:1px solid rgba(182,211,214,.2);border-radius:6px;
+  background:#0d2029;padding:4px;transition:border-color .12s,transform .12s}
+#overlay .result-pg .ext-card:hover{border-color:#d6ba7e;transform:translateY(-2px)}
+#overlay .result-pg .ext-card.off{opacity:.5;filter:grayscale(.75);cursor:not-allowed}
+#overlay .result-pg .ext-card .hs-card{font-size:12px}
+#overlay .result-pg .ext-noroom{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);white-space:nowrap;
+  padding:2px 8px;font-size:10px;letter-spacing:1px;color:#ffb9a6;background:rgba(60,18,12,.9);
+  border:1px solid rgba(214,120,96,.55);border-radius:999px}
+#overlay .result-pg .hub-card-tip{margin-left:8px;font-size:11px;letter-spacing:1px;color:#8ba1a8;font-weight:400}
