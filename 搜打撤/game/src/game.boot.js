@@ -10,7 +10,7 @@ import { PERFORMANCE_BUDGETS, STARTUP_SCENE_KEYS } from './performance-budgets.j
 import { openBaseHub } from './game.hub.js';
 import { bindBagMixins, showBackpack, setBagReturnHook } from './game.bag.js';
 import { configureShopRuntime } from './game.run.shop.js';
-import { bindDevMode, bindNotesMixins, initDevMode, openCellEditor, rebuildNotes, showClearOverlay, showExportOverlay, showImportOverlay, syncDevVisibility } from './game.notes.js';
+import { bindNotesMixins, initDevMode, openCellEditor, rebuildNotes, showClearOverlay, showExportOverlay, showImportOverlay, syncDevVisibility } from './game.notes.js';
 import { cardPageOpen, closeCardPageTop, openCardDesigner, openCardLibrary } from './game.cardslib.js';
 import { renderScheduler } from './render-scheduler.js';
 import { nodeHitRadius } from './camera.js';
@@ -227,7 +227,6 @@ import { renderMiniMap } from './game.session.js';
     if (UI.el.btnImport) UI.el.btnImport.addEventListener('click', showImportOverlay);
     if (UI.el.btnClear) UI.el.btnClear.addEventListener('click', showClearOverlay);
     initDevMode();
-    bindDevMode();
     // 开发者一键进战斗（devTools 面板，仅 devMode 可见）
     if (UI.el.devBattle) UI.el.devBattle.addEventListener('click', () => devForceBattle(false));
     if (UI.el.devBoss) UI.el.devBoss.addEventListener('click', () => devForceBattle(true));

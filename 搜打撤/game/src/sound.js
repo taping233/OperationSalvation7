@@ -38,7 +38,7 @@ const battleBgm = new Howl({ src: [BATTLE_BGM_URL], loop: true, html5: true, pre
     if (ctx) { if (ctx.state === 'suspended') ctx.resume().catch(() => {}); return true; }
     try { ctx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { return false; }
     master = ctx.createGain(); master.gain.value = muted ? 0 : 1;
-    // 所有合成音共享一个软限幅器，给卡牌连击/骰子多段碰撞保留峰值余量。
+    // 所有合成音共享一个软限幅器，给卡牌连击多段碰撞保留峰值余量。
     masterComp = ctx.createDynamicsCompressor();
     masterComp.threshold.value = -6; masterComp.knee.value = 8;
     masterComp.ratio.value = 12; masterComp.attack.value = 0.003; masterComp.release.value = 0.18;
@@ -258,18 +258,6 @@ const battleBgm = new Howl({ src: [BATTLE_BGM_URL], loop: true, html5: true, pre
     parry:  () => { tone({ f: 1250, f2: 1850, type: 'sine', dur: .12, vol: .05 }); tone({ f: 2600, type: 'sine', dur: .07, vol: .02, delay: .05 }); },
     heal:   () => { tone({ f: 520, f2: 780, type: 'sine', dur: .18, vol: .04 }); tone({ f: 660, f2: 990, type: 'sine', dur: .2, vol: .03, delay: .09 }); },
     coin:   () => { tone({ f: 1250, type: 'triangle', dur: .09, vol: .045 }); tone({ f: 1870, type: 'triangle', dur: .14, vol: .035, delay: .06 }); },
-    dice:   () => {
-      // 老板留言 #56：骰子滚动声改为多段随机碰撞嗒声（匹配 640ms 翻滚期，末段落定重音）
-      let t = 0;
-      while (t < .52) {
-        const step = .035 + Random.random('audio') * .05;
-        noise({ dur: .018 + Random.random('audio') * .022, vol: .022 + Random.random('audio') * .03, delay: t, fHi: 4200, fLo: 1400 });
-        if (Random.random('audio') < .4) tone({ f: 2100 + Random.random('audio') * 1500, type: 'sine', dur: .03, vol: .012, delay: t });
-        t += step;
-      }
-      noise({ dur: .05, vol: .05, delay: .54, fHi: 2600, fLo: 700 });
-      tone({ f: 190, f2: 120, type: 'sine', dur: .09, vol: .04, delay: .54 });
-    },
     scene:  () => noise({ dur: .32, vol: .032, fHi: 1300, fLo: 280 }),
     flee:   () => noise({ dur: .26, vol: .04, fHi: 700, fLo: 2600 }),
     ding:   () => { tone({ f: 880, type: 'triangle', dur: .12, vol: .05 }); tone({ f: 1318, type: 'triangle', dur: .18, vol: .04, delay: .09 }); },

@@ -23,7 +23,7 @@ button,input,select,textarea{font-family:inherit}button{border-radius:1px;transi
 #sidebar{position:relative;z-index:30;height:105px;min-height:105px;padding:8px 28px;gap:22px;border-top:1px solid #6f8994;background:linear-gradient(105deg,#122a36,#1b3541);overflow:visible;box-shadow:0 -5px 25px #0b233555}#sidebar .panel{border:0;border-right:1px solid #425d6880;background:none;box-shadow:none;padding:2px 22px 2px 0}#charPanel{display:flex;align-items:flex-end;position:relative;min-width:176px;padding:0 18px 0 4px}.hero-ava{position:absolute;left:4px;bottom:-6px;width:132px;min-width:132px;height:165px;border-radius:10px;overflow:hidden;border:2px solid #8fa8b0;box-shadow:0 6px 20px #0b233588}.hero-ava img.art-avatar{width:100%;height:100%;object-fit:cover;object-position:center}#bagBtn{background:#2c4652;border:1px solid #728b91;padding:12px;min-height:50px}#statsPanel{min-width:180px;flex:1!important;display:flex;flex-direction:column;justify-content:center}
 #miniMap{width:100%;max-width:560px;height:76px;display:block;opacity:.95}
 /* 行动/价值数字仍由 UI.refresh 维护（元素被引用），仅按要求不显示 */
-#statsPanel .stat-duo{display:none}#dicePanel{width:260px;min-width:240px}#layerBanner{top:20px;padding:10px 28px;background:#132b36e8;border-bottom:2px solid #d5b47d}#layerBanner .lb-zh{font:18px var(--font-ui);letter-spacing:5px}#layerBanner .lb-en{font:9px 'Cascadia Code';letter-spacing:3px;color:#c0bd9f}#topBtns{left:22px;top:20px}#resHud{top:20px;right:22px}#hpHud{background:#132b36;border:1px solid #637c89;box-shadow:none;clip-path:none}.hp-hud-icon,.hp-hud-label{background:#547c90}.hp-hud-label{font-weight:400;letter-spacing:2px}#topBtns #btnHome{background:linear-gradient(160deg,#A02020 0%,#701616 100%);border:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 2px 6px rgba(0,0,0,.45);color:#f3eae8}#topBtns #btnHome:hover{background:linear-gradient(160deg,#B82A2A 0%,#82201B 100%);color:#fff}#topBtns #btnMute{background:#142c38;border:1px solid #637c89;box-shadow:none}#topBtns #btnHelp{background:#142c38;border:1px solid #637c89;box-shadow:none;padding:0;width:42px;height:42px;display:inline-flex;align-items:center;justify-content:center;color:#cfdde2}
+#statsPanel .stat-duo{display:none}#devPanel{width:260px;min-width:240px}#layerBanner{top:20px;padding:10px 28px;background:#132b36e8;border-bottom:2px solid #d5b47d}#layerBanner .lb-zh{font:18px var(--font-ui);letter-spacing:5px}#layerBanner .lb-en{font:9px 'Cascadia Code';letter-spacing:3px;color:#c0bd9f}#topBtns{left:22px;top:20px}#resHud{top:20px;right:22px}#hpHud{background:#132b36;border:1px solid #637c89;box-shadow:none;clip-path:none}.hp-hud-icon,.hp-hud-label{background:#547c90}.hp-hud-label{font-weight:400;letter-spacing:2px}#topBtns #btnHome{background:linear-gradient(160deg,#A02020 0%,#701616 100%);border:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 2px 6px rgba(0,0,0,.45);color:#f3eae8}#topBtns #btnHome:hover{background:linear-gradient(160deg,#B82A2A 0%,#82201B 100%);color:#fff}#topBtns #btnMute{background:#142c38;border:1px solid #637c89;box-shadow:none}#topBtns #btnHelp{background:#142c38;border:1px solid #637c89;box-shadow:none;padding:0;width:42px;height:42px;display:inline-flex;align-items:center;justify-content:center;color:#cfdde2}
 #topBtns #btnHelp:hover{background:#1d3d4c;color:#fff}#resHud .chip-mini{background:#132b36e8;border:1px solid #637c89;box-shadow:none;min-width:92px;height:42px}#resHud .res-gold b{color:#e2c28b}
 #mapLabels{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:2}#mapLabels[hidden]{display:none}.map-label{position:absolute;left:0;top:0;min-width:20px;text-align:center;padding:3px 6px;color:#dceae7;background:#152e3bd9;border-bottom:1px solid #9ebac0;opacity:.6;font:10px 'Cascadia Code';white-space:nowrap}.map-label.current{opacity:1;color:#f3e3c3;background:#152a34f0;border-color:#d9bd89}.map-label.destination{color:#f3d2a1;border-color:#dab27a}
 #sceneTools{position:absolute;right:22px;bottom:24px;z-index:7;display:flex;gap:5px}#sceneTools button{padding:9px 13px;background:#17303ce8;color:#d4e4e6;border:1px solid #75929d;font-size:11px}body.lobby #sceneTools,body.scene-battle-3d #sceneTools{display:none}
@@ -508,7 +508,7 @@ body.page-opaque #sidebar{visibility:hidden}
 
 /* ═══════════ 留言批次 2026-09-07 六批（20:48-21:06 Edge 5199 共 11 条） ═══════════ */
 
-/* —— 选人页等 page 弹层打开时，底部黑边+骰子(下边栏)露出来：
+/* —— 选人页等 page 弹层打开时，底部黑边+侧栏露出来：
       sidebar 之前只 visibility:hidden 仍占 105px 布局位，这里彻底移出布局 —— */
 body:has(#overlay.opaque:not([hidden])) #sidebar{display:none!important}
 
@@ -1580,9 +1580,10 @@ body.reduce-motion #layerBanner { animation: none !important; }
 .title-kicker.kick-blink{animation:kickBlink .8s steps(2) 2}
 @keyframes kickBlink{50%{opacity:.25;letter-spacing:5px}}
 
-/* #27 全局浮动背包按钮：对局中任何界面同一位置可开背包（右下 btnLocate 同列上方，
+/* #27 全局浮动背包按钮：对局中任何界面同一位置可开背包（右下「已知区域」按钮正上方，
+   底 210px = 已知区域顶边距底 200px + 10px 间隙，避免与其重叠（2026-09-19）；
    z-index 高于 overlay 压住全屏页）；标题页/基地/选人时由 UI.refresh 置 hidden */
-#bagBtnFloat{position:fixed;right:16px;bottom:calc(105px + 66px);z-index:30;width:44px;height:58px;
+#bagBtnFloat{position:fixed;right:22px;bottom:210px;z-index:30;width:44px;height:58px;
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
   background:#142c38d9;border:1px solid #637c89;border-radius:3px;color:#d8e2e6;cursor:pointer;
   box-shadow:0 4px 14px rgba(0,0,0,.35);transition:background .15s,color .15s,border-color .15s}

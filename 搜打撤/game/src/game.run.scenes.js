@@ -143,7 +143,7 @@ export function finishScene() {
 // 节点与战斗结算之间的短过场：复用现有场景美术，不引入额外资源或阻塞式页面。
 export function showRunTransition({ tone = 'battle', asset = 'scene-battle-bg', eyebrow = 'AREA ENTERED', title, detail = '', duration = 900 }) {
   // 结束时必须恢复状态：战斗/节点流程下游会自行改状态，但「继续对局」路径
-  // 过渡后无人收拾，曾导致 game.state 卡死在 modal、骰子按钮永久禁用
+  // 过渡后无人收拾，曾导致 game.state 卡死在 modal、侧栏按钮永久禁用
   const prevState = game.state;
   game.state = 'modal';
   return new Promise(resolve => {

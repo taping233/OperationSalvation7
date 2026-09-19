@@ -504,13 +504,6 @@
   /* 按钮按压反馈：轻微下沉 */
   #sidebar button:active, #topBtns button:active, .mini-btn:active { transform: translateY(1px) scale(.985); }
 
-  /* 骰子历史数字：弹入（重掷时整排小节奏重现） */
-  #diceHist .chip { animation: chipPop .3s cubic-bezier(.34,1.56,.64,1) backwards; }
-  #diceHist .chip:nth-last-child(3) { animation-delay: .04s; }
-  #diceHist .chip:nth-last-child(2) { animation-delay: .08s; }
-  #diceHist .chip:nth-last-child(1) { animation-delay: .12s; }
-  @keyframes chipPop { from { transform: scale(.4); opacity: 0; } }
-
   /* tooltip：淡入 + 轻微上浮缩放 */
   #tooltip { animation: tipIn .14s ease; }
   @keyframes tipIn { from { opacity: 0; transform: translateY(3px) scale(.97); } }
@@ -524,7 +517,7 @@
   /* 减弱动态效果：本节动画一并降级 */
   @media (prefers-reduced-motion: reduce) {
     #sidebar .panel, #topBtns button, #topBtns #hpHud, #resHud .chip-mini,
-    #diceHist .chip, #tooltip, #layerBanner .lb-zh,
+    #tooltip, #layerBanner .lb-zh,
     #resHud .res-gold:hover .res-ic {
       animation: none !important; }
   }

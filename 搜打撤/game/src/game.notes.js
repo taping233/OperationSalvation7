@@ -199,7 +199,7 @@ import { game } from './game.session.js';
   }
 
   // ---------- 开发者模式 ----------
-  // 开发者面板统一显隐：侧边栏骰子工具 + 标题页节点测试面板（两处共用，勿各自设 hidden）
+  // 开发者面板统一显隐：侧边栏开发者工具 + 标题页节点测试面板（两处共用，勿各自设 hidden）
   function syncDevVisibility() {
     UI.el.devTools.hidden = !game.devMode;
     if (UI.el.titleDev) UI.el.titleDev.hidden = !game.devMode;
@@ -210,8 +210,4 @@ import { game } from './game.session.js';
     syncDevVisibility();
   }
 
-  function bindDevMode() {
-    // 骰子系统已整体移除（2026-09-19 老板定向），此钩子保留为空实现（boot 启动链仍调用）
-  }
-
-export { TYPE_NAME, bindDevMode, bindNotesMixins, initDevMode, openCellEditor, rebuildNotes, showClearOverlay, showExportOverlay, showImportOverlay, syncDevVisibility };
+export { TYPE_NAME, bindNotesMixins, initDevMode, openCellEditor, rebuildNotes, showClearOverlay, showExportOverlay, showImportOverlay, syncDevVisibility };

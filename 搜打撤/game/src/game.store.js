@@ -24,7 +24,6 @@ function createGameState(map) {
     cardOrder: [],
     usedPocket: [],
     shopStock: [],
-    dice: null,
     inventory: [],
     discoveredPairs: new Set(),
     altarFrom: null,
@@ -61,7 +60,7 @@ class GameStore {
 
 // 快照只读保障（2026-09-11 架构批次 1）：集合元素逐行浅拷贝后冻结——
 // 视图改快照内嵌对象会 TypeError（ESM strict）而不是静默污染 state。
-// map / hover / moveTarget / dice 等节点或第三方对象保持引用：地图节点
+// map / hover / moveTarget 等节点或第三方对象保持引用：地图节点
 // 的 visited 由渲染层就地标记，不属于快照只读范畴。
 function freezeRows(rows) {
   return Object.freeze((rows || []).map((row) => {

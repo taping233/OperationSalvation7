@@ -66,9 +66,9 @@ describe('照相馆陈列交互', () => {
     expect(library).toContain('--photo-pin-x:');
     expect(css).toContain('grid-template-columns:max-content minmax(0,1fr)');
     expect(css).toContain('background:linear-gradient(90deg,#c977a1,#d7b566 34%,#70afa2 66%,#748fbb)');
-    expect(css).toContain('--studio-wall:#392b22');
-    expect(css).toContain('background:linear-gradient(180deg,#e4e8e1,#c7d0cc)');
-    expect(css).toContain('background:linear-gradient(180deg,#c7d1ce,#aebdba)');
+    expect(css).toContain('--studio-wall:#141414');
+    expect(css).toContain('linear-gradient(102deg,rgba(255,255,255,.14),transparent 24% 76%,rgba(40,40,40,.075))');
+    expect(css).toContain('linear-gradient(145deg,#efedea,#d2cfca)');
     expect(css).toContain('perspective:720px');
     expect(css).toContain('.studio-photo-art::after');
   });

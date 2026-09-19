@@ -105,7 +105,7 @@
   #sidebar .panel { flex-shrink: 0; }
   #charPanel { min-width: 300px; }
   #statsPanel { min-width: 230px; flex: 1 1 230px; }
-  #dicePanel { min-width: 210px; flex: 0 1 210px; }
+  #devPanel { min-width: 210px; flex: 0 1 210px; }
 
   /* 左上角浮动按钮（离开 / 声音）+ 顶部血量 HUD */
   #topBtns { position: absolute; top: 12px; left: 12px; z-index: 8; display: flex; gap: 8px; align-items: stretch; }
@@ -347,14 +347,14 @@
   .help-body .help-item b { display: block; margin-bottom: 2px; color: #ececec; font-size: 13px;
     letter-spacing: 1px; }
 
-  /* 骰子面板（仅存开发者工具容器；骰子/掷骰 UI 已于 2026-09-19 整体移除） */
-  #dicePanel { text-align: center; }
-  .dev-dice-tools { display: grid; grid-template-columns: auto minmax(104px, 1fr); align-items: center; gap: 8px;
+  /* 开发者工具面板（强制遭遇战 / BOSS 战） */
+  #devPanel { text-align: center; }
+  .dev-tools { display: grid; grid-template-columns: auto minmax(104px, 1fr); align-items: center; gap: 8px;
     margin-top: 7px; padding-top: 7px; border-top: 1px solid rgba(164,164,164,.22); font-size: 11.5px; }
-  .dev-dice-tools[hidden] { display: none; }
-  .dev-dice-tools label { display: flex; align-items: center; gap: 5px; color: var(--sub); white-space: nowrap; }
-  .dev-dice-tools label .ic { width: 14px; height: 14px; }
-  .dev-dice-tools select { min-width: 0; padding: 4px 6px; border: 1px solid var(--line2); border-radius: 5px;
+  .dev-tools[hidden] { display: none; }
+  .dev-tools label { display: flex; align-items: center; gap: 5px; color: var(--sub); white-space: nowrap; }
+  .dev-tools label .ic { width: 14px; height: 14px; }
+  .dev-tools select { min-width: 0; padding: 4px 6px; border: 1px solid var(--line2); border-radius: 5px;
     background: var(--inset); color: var(--txt); font: inherit; cursor: pointer; }
 
   .chk { display: flex; align-items: center; gap: 8px; font-size: 13px; padding: 3px 0; cursor: pointer; }
@@ -382,4 +382,4 @@
 #routePanel { border-color: rgba(216,180,106,.28); }
 #routePanel .route-title { color: #f0d28e; font-weight: 700; letter-spacing: .08em; }
 #routePanel .route-help { margin-top: 5px; color: #a9b9c1; font-size: 12px; line-height: 1.5; }
-#dicePanel[hidden] { display: none !important; }
+#devPanel[hidden] { display: none !important; }
