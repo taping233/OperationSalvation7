@@ -2959,6 +2959,7 @@ import { emit as busEmit } from './event-bus.js';
     pickChoice,
     setPendingHint,
     lockPendingTarget,
+    refreshView: requestBattleRender,   // U9：战斗被外层全屏页（远征手册等）覆盖返回后重绘战斗
     // —— 批次C：统一交互 API（审计 P1：click/drag/controller 共用一条管线）——
     // begin=验证并进入等待目标（无需目标则直接结算）；resolve=带目标结算；cancel=幂等取消
     beginCardInteraction: play,

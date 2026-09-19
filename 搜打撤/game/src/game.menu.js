@@ -328,6 +328,10 @@ function createGameMenuController(deps) {
       UI.hideOverlay();
       // 战斗 modal 态不可降级为 idle（战斗界面会丢）：口径同 showRunTransition 的恢复守卫
       game.state = (prevState === 'modal' && !game.battleActive) ? 'idle' : prevState;
+      // 战斗被手册整页覆盖后 ovBody 已被清：返回战斗态时补一次重绘（U9）
+      if (game.battleActive && SDT.Battle && SDT.Battle.commands && SDT.Battle.commands.refreshView) {
+        SDT.Battle.commands.refreshView();
+      }
     });
   }
 
