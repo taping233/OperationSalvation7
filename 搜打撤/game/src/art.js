@@ -182,6 +182,24 @@ const FIGURE_FULL_ART = Object.freeze({
   xuanli: 'portraits/full/xuanli.webp',
   dengkui: 'portraits/full/dengkui.webp',
 });
+// 皮肤立绘（2026-09-19 老板令）：角色 id → 备选皮肤立绘（选人页可切换，会话内记忆不入存档）
+const SKIN_FULL_ART = Object.freeze({
+  shuangling: Object.freeze([
+    { id: 'casual', name: '春日·机车', file: 'portraits/full/shuangling-casual.webp' },
+    { id: 'spring', name: '新春·旗袍', file: 'portraits/full/shuangling-spring.webp' },
+    { id: 'beach', name: '盛夏·水枪', file: 'portraits/full/shuangling-beach.webp' },
+  ]),
+});
+const activeSkins = {};   // classId -> skin id（未设置的用 default 主立绘）
+function activeFigureFile(c) {
+  const skins = SKIN_FULL_ART[c.id];
+  const want = skins && activeSkins[c.id];
+  if (skins && want) {
+    const hit = skins.find(s => s.id === want);
+    if (hit) return hit.file;
+  }
+  return FIGURE_FULL_ART[c.id];
+}
 // 个别角色配 Q 版战斗头像（portraits/avatars/<角色id>.webp）：局内下边栏人物面板用
 const AVATAR_ART = Object.freeze({
   shuangling: 'portraits/avatars/shuangling.webp',
@@ -198,9 +216,10 @@ const BATTLE_ART = Object.freeze({
   xuanli: 'portraits/battle/xuanli.webp',
   dengkui: 'portraits/battle/dengkui.webp',
 });
-function characterArt(value, full=false) {
+function characterArt(value, full=false, useDefault=false) {
  const c=characterFor(value); if(!c)return null;
- const figure = FIGURE_FULL_ART[c.id];
+ // useDefault=true：强制用标准主立绘（如选人页底部头像条不跟随皮肤）
+ const figure = useDefault ? FIGURE_FULL_ART[c.id] : activeFigureFile(c);
  if (figure && full) {
    // 选人页大幅位：主体层铺满 + 同图模糊延伸层填满左侧空区（各图用自身色调向左晕开）
    const back = image(figure, 'art-figure-back', '', `figure-back-${c.id}`);
@@ -223,6 +242,16 @@ function characterArt(value, full=false) {
     // 首开现场解码慢，头像条/大立绘会先露底色（白/黑）几秒，观感像坏图。
     // openClassChoice 打开选人页前调用，与卡面预热同一解码池。
     warmClassRoster() { warm(Object.values(FIGURE_FULL_ART).map(p => assetUrl(ROOT + p))); },
+    // 皮肤系统（2026-09-19）：列出某角色的皮肤；setSkin 切换后选人页立绘即时更换
+    listSkins(classId) { const c = characterFor(classId); return (c && SKIN_FULL_ART[c.id]) || []; },
+    setSkin(classId, skinId) { const c = characterFor(classId); if (c && skinId) activeSkins[c.id] = skinId; },
+    getSkin(classId) { const c = characterFor(classId); return (c && activeSkins[c.id]) || 'default'; },
+    skinUrl(classId, skinId) {
+      const c = characterFor(classId);
+      if (!c) return '';
+      const hit = (SKIN_FULL_ART[c.id] || []).find(s => s.id === skinId);
+      return hit ? assetUrl(ROOT + hit.file) : assetUrl(ROOT + FIGURE_FULL_ART[c.id]);
+    },
     // 就地预解码某块 DOM 里已渲染的 <img>（卡牌库开页后补热用）：
     // 启动的全量预热清单补的是原图，库里显示的是 assets/thumbs/ 缩略图，不补这一步
     // 首轮滚动就要现场解码——实测首轮滚动 32~35fps → 44~45fps，长帧减半。
@@ -236,8 +265,8 @@ function characterArt(value, full=false) {
         try { im.decode?.()?.catch?.(() => {}); } catch (_) {}
       });
     },
-    classArt(className) {
-      if(characterFor(className)) return characterArt(className);
+    classArt(className, useDefault=false) {
+      if(characterFor(className)) return characterArt(className, false, useDefault);
       // 旧 11 职业立绘已随「以立绘为基准」清理下线，无法解析的历史职业一律走占位图
       return fallback('class', className, className || '未知职业');
     },

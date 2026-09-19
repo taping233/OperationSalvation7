@@ -89,18 +89,21 @@ body.lobby #logPanel, body.page-opaque #logPanel { display: none; }
 
 /* Compact expedition dashboard, with actual legal routes as the primary action. */
 #sidebar {
-  display: grid; grid-template-columns: 76px 112px 186px minmax(0, 1fr);
+  display: grid; grid-template-columns: 176px 186px minmax(0, 1fr);
   height: 142px; min-height: 142px; gap: 18px; padding: 14px 24px;
   background: linear-gradient(105deg, #0c1b27, #172c39); border-top: 1px solid #738a9366;
-  overflow: hidden; box-shadow: 0 -10px 35px #030b1655;
+  overflow: visible; box-shadow: 0 -10px 35px #030b1655;
 }
 #sidebar .panel { min-width: 0; width: auto; padding: 0; border: 0; background: none; box-shadow: none; }
-#sidebar #charPanel { display: flex; align-items: center; }
-#sidebar .hero-ava { width: 68px; min-width: 68px; height: 82px; border: 1px solid #71818f6b; border-radius: 4px; }
+#sidebar #charPanel { display: flex; align-items: flex-end; }
+/* 头像尺寸统一由 winter.css 底栏重设计（118×118 出血版）定义，此处不再覆盖（2026-09-19） */
 #sidebar #bagPanel { display: flex; align-items: center; }
 #sidebar #bagBtn { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; width: 100%; min-height: 80px; padding: 10px; color: var(--exp-text); background: #1a3343; border: 1px solid #526f806b; box-shadow: none; }
 #sidebar #bagBtn b { flex-basis: 100%; color: var(--exp-gold); font: 16px 'Cascadia Code', monospace; }
 #sidebar #bagBtn.bag-full { border-color: #ce8873; }
+/* 底栏背包按钮删除后（2026-09-19）：满载警示移到全局浮动背包键 */
+#bagBtnFloat.bag-full { box-shadow: 0 0 0 2px #ce8873, 0 4px 18px #030b1688; }
+#bagBtnFloat.bag-full::after { content: '满'; position: absolute; top: -6px; right: -6px; padding: 1px 6px; border-radius: 8px; background: #ce8873; color: #14212b; font: 700 10px/1.4 ui-monospace, monospace; }
 #sidebar #statsPanel { display: flex; justify-content: center; gap: 5px; border-right: 1px solid var(--exp-line); padding-right: 16px; }
 #sidebar #miniMap { width: 100%; height: 66px; max-width: none; border-radius: 3px; background: #08131f80; }
 #sidebar #statsPanel .stat-duo { display: flex; justify-content: space-between; gap: 5px; margin: 0; font-size: 10px; color: var(--exp-muted); }

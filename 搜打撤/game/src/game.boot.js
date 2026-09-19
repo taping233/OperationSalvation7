@@ -166,7 +166,7 @@ import { renderMiniMap } from './game.session.js';
       }
     });
 
-    UI.el.bagBtn.addEventListener('click', () => showBackpack());
+    // 底栏背包按钮已删（2026-09-19）：入口收敛到全局浮动背包键与 B 快捷键
     // #27 全局浮动背包键：对局中任何界面同位置开背包（战斗中 showBackpack 自动转战斗背包）
     document.getElementById('bagBtnFloat')?.addEventListener('click', () => showBackpack());
     document.getElementById('routePanel')?.addEventListener('click', e => {

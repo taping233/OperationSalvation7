@@ -20,7 +20,7 @@ button,input,select,textarea{font-family:inherit}button{border-radius:1px;transi
 .ak-hud>*{animation:akIn .5s cubic-bezier(.2,.7,.3,1) both}.ak-hud>:nth-child(n+5){animation-delay:70ms}.ak-hud>:nth-child(n+9){animation-delay:140ms}.ak-hud>:nth-child(n+13){animation-delay:210ms}
 @keyframes akIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 #exitScr{background:linear-gradient(130deg,#132c39,#0a1821)}#exitScr .title-inner{display:grid;place-content:center;text-align:center;gap:30px}#exitScr .menu-btn{padding:16px;background:#ddb876;color:#152b35;border:0}.exit-msg{font-size:24px;letter-spacing:4px}
-#sidebar{height:105px;min-height:105px;padding:12px 28px;gap:26px;border-top:1px solid #6f8994;background:linear-gradient(105deg,#122a36,#1b3541);overflow:hidden;box-shadow:0 -5px 25px #0b233555}#sidebar .panel{border:0;border-right:1px solid #425d6880;background:none;box-shadow:none;padding:2px 22px 2px 0}#charPanel{display:flex;align-items:center;min-width:0;padding:0 6px}.hero-ava{width:78px;min-width:78px;height:78px;align-self:center;flex:none;border-radius:8px;overflow:hidden;border:1px solid #728b91;box-shadow:0 2px 8px #0b233566}.hero-ava img.art-avatar{width:100%;height:100%;object-fit:cover;object-position:center}#bagPanel{min-width:185px;display:flex;align-items:center;gap:18px}#heroName{font-size:18px;letter-spacing:3px;white-space:nowrap}#bagBtn{background:#2c4652;border:1px solid #728b91;padding:12px;min-height:50px}#statsPanel{min-width:180px;flex:1!important;display:flex;flex-direction:column;justify-content:center}
+#sidebar{position:relative;z-index:30;height:105px;min-height:105px;padding:8px 28px;gap:22px;border-top:1px solid #6f8994;background:linear-gradient(105deg,#122a36,#1b3541);overflow:visible;box-shadow:0 -5px 25px #0b233555}#sidebar .panel{border:0;border-right:1px solid #425d6880;background:none;box-shadow:none;padding:2px 22px 2px 0}#charPanel{display:flex;align-items:flex-end;position:relative;min-width:176px;padding:0 18px 0 4px}.hero-ava{position:absolute;left:4px;bottom:-6px;width:132px;min-width:132px;height:165px;border-radius:10px;overflow:hidden;border:2px solid #8fa8b0;box-shadow:0 6px 20px #0b233588}.hero-ava img.art-avatar{width:100%;height:100%;object-fit:cover;object-position:center}#bagBtn{background:#2c4652;border:1px solid #728b91;padding:12px;min-height:50px}#statsPanel{min-width:180px;flex:1!important;display:flex;flex-direction:column;justify-content:center}
 #miniMap{width:100%;max-width:560px;height:76px;display:block;opacity:.95}
 /* 行动/价值数字仍由 UI.refresh 维护（元素被引用），仅按要求不显示 */
 #statsPanel .stat-duo{display:none}#dicePanel{width:260px;min-width:240px}#layerBanner{top:20px;padding:10px 28px;background:#132b36e8;border-bottom:2px solid #d5b47d}#layerBanner .lb-zh{font:18px var(--font-ui);letter-spacing:5px}#layerBanner .lb-en{font:9px 'Cascadia Code';letter-spacing:3px;color:#c0bd9f}#topBtns{left:22px;top:20px}#resHud{top:20px;right:22px}#hpHud{background:#132b36;border:1px solid #637c89;box-shadow:none;clip-path:none}.hp-hud-icon,.hp-hud-label{background:#547c90}.hp-hud-label{font-weight:400;letter-spacing:2px}#topBtns #btnHome{background:linear-gradient(160deg,#A02020 0%,#701616 100%);border:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 2px 6px rgba(0,0,0,.45);color:#f3eae8}#topBtns #btnHome:hover{background:linear-gradient(160deg,#B82A2A 0%,#82201B 100%);color:#fff}#topBtns #btnMute{background:#142c38;border:1px solid #637c89;box-shadow:none}#topBtns #btnHelp{background:#142c38;border:1px solid #637c89;box-shadow:none;padding:0;width:42px;height:42px;display:inline-flex;align-items:center;justify-content:center;color:#cfdde2}
@@ -31,8 +31,8 @@ button,input,select,textarea{font-family:inherit}button{border-radius:1px;transi
 .slot-card{border-color:#63808b;background:linear-gradient(180deg,#0e2430,#0a1a24);border-radius:0;box-shadow:0 12px 30px #05131a66}.slot-card:hover{border-color:#cbdcd8}.slot-card-name{color:#e8eeea}.slot-empty{color:#9cbbc5}.si-line em{color:#8faab3}.cls-grid{gap:10px;grid-template-columns:repeat(5,minmax(0,1fr))}.cls-pick{border:1px solid #66818d;background:#1d3c4a;border-radius:0;box-shadow:none;overflow:hidden}.cls-pick.sel{border-color:#e1c28a;box-shadow:inset 0 -3px #d8b77c}.cls-pick b{font-size:21px;letter-spacing:3px;font-weight:500}.cls-pick-art{box-shadow:none;border-radius:0;max-width:90px}.cls-detail{background:#142d3a!important;border:1px solid #4c6b77;border-radius:0;color:#bfd0d3}.cls-story{line-height:1.9;color:#bacdd2}.cls-detail-name{font-size:34px;letter-spacing:5px;font-weight:400}.cls-detail-tag{color:#d8bd86}.roster-portrait{display:block;aspect-ratio:var(--portrait-ratio);height:100%;max-width:100%;background-repeat:no-repeat}.cls-pick-art .roster-portrait{width:100%;height:100%}.cls-figure .roster-portrait{height:100%;width:auto;margin:auto}.cls-hub-art .roster-portrait{height:84px;width:40px}.xp-bar{background:#102631}.xp-bar i{background:#9bc5c0}
 .pk-row,.dep-row{border-bottom:1px solid #42616d}.settings .set-h{color:#d8c08f;border-bottom:1px solid #45616d}.settings .chk{color:#ceddde}.settings input[type=range]{accent-color:#d7bb87}.settings input[type=checkbox]{accent-color:#9bbdb7}input,textarea,select{background:#102b39;color:#e4eeea;border:1px solid #657f89;border-radius:1px}input::placeholder,textarea::placeholder{color:#829fa9}.bag-slot{background:#17313f;border-color:#4d7180;border-radius:1px}.bag-slot.safe-slot{border-color:#c8b483;background:#333c39}.bag-slot.drop-here{outline:2px solid #d8c28e}.lib-filters,.bag-toolbar{background:#112936;border-color:#54747e}.hs-card,.card-tile{box-shadow:0 4px 12px #07151e70}.hs-card:hover{box-shadow:0 8px 20px #03111f99}.scene-line p{background:#132f3bd9;border:1px solid #728c93;color:#e4ebe6;border-radius:0}.scene-title{font-family:'SimSun',serif;font-weight:400}.scene-ops .ov-btn{min-height:44px}.flow-title{font-family:'SimSun',serif;letter-spacing:.16em}
 body.scene-battle-3d #sidebar,body.scene-battle-3d #layerBanner,body.scene-battle-3d #topBtns,body.scene-battle-3d #resHud{display:none!important}body.scene-battle-3d #overlay,body.scene-battle-3d #overlay .card,body.scene-battle-3d #ovBody,body.scene-battle-3d .battle-stage{background:transparent!important;backdrop-filter:none!important;box-shadow:none!important}body.scene-battle-3d .battle-stage::before,body.scene-battle-3d .battle-stage::after,body.scene-battle-3d .battle-stage-shade{display:none!important}body.scene-battle-3d .sts-figure>*{visibility:hidden}body.scene-battle-3d .sts-figure{height:clamp(140px,29vh,300px);filter:none}body.scene-battle-3d .sts-nameplate{background:#132e3adf!important;border:1px solid #7f99a3!important;padding:8px 15px!important;color:#e5ebe5}body.scene-battle-3d .sts-hud{background:linear-gradient(0deg,#102735 72%,#10273500)!important}body.scene-battle-3d .sts-intent{background:#e0c894;color:#193342;box-shadow:none;border:0}#overlay .card.battle{width:100%;height:100%;max-width:none;max-height:none;border:0;padding:0}body[data-gpu-lost]::after{content:'图形设备暂时中断，请保存后重启游戏';position:fixed;inset:35% 20%;z-index:999;padding:40px;background:#173441;color:#e1c997;text-align:center}
-@media(max-width:1100px){.ak-sq,.ak-quickref{transform:scale(.9);transform-origin:left top}.ak-quickref{left:168px}.ak-banner{right:190px;transform:scale(.92);transform-origin:right top}.ak-user{transform:scale(.85);transform-origin:right top}.ak-circle .c-ring{width:72px;height:72px}.ak-circle .c-cn{font-size:13px}.ak-ach{right:44px;top:132px}.ak-lib{left:5.5%;top:43%}.ak-set{left:10.5%;top:56.5%}.ak-hex{width:64px;height:72px}.ak-invest{left:30%}.ak-sec{right:22%;top:66%}.ak-bp{right:21%}.ak-start .st-cn{font-size:34px;letter-spacing:8px}.ak-start .st-en{font-size:13px}.ak-line1{left:330px}.title-heading{width:clamp(360px,48vw,560px)}.title-kicker{font-size:8px;letter-spacing:1.8px}#sidebar{gap:15px;padding:12px 18px}.cls-grid{grid-template-columns:repeat(3,minmax(0,1fr))}#layerBanner{padding:8px 15px}#layerBanner .lb-zh{font-size:15px}#layerBanner .lb-en{font-size:8px}.title-quote{font-size:11px}}
-@media(max-height:740px){.ak-tl{top:10px;left:12px}.ak-quickref{top:10px;left:170px}.ak-banner{top:10px;right:200px;height:50px}.ak-user{top:8px;right:14px}.ak-ach{top:126px}.ak-lib{top:43%}.ak-set{top:57%}.ak-hex{bottom:13%}.ak-invest{bottom:10%}.ak-start{bottom:4%}.ak-start .st-cn{font-size:36px}.cn-title{font-size:clamp(36px,5vw,68px)}.title-heading{top:6%}.title-quote{bottom:6%;font-size:11px}.title-quote small{margin-top:4px}#sidebar{height:88px;min-height:88px;padding:8px 20px}.cls-story{font-size:12px}.pg-head,.hub-head{padding-bottom:12px}}
+@media(max-width:1100px){.ak-sq,.ak-quickref{transform:scale(.9);transform-origin:left top}.ak-quickref{left:168px}.ak-banner{right:190px;transform:scale(.92);transform-origin:right top}.ak-user{transform:scale(.85);transform-origin:right top}.ak-circle .c-ring{width:72px;height:72px}.ak-circle .c-cn{font-size:13px}.ak-ach{right:44px;top:132px}.ak-lib{left:5.5%;top:43%}.ak-set{left:10.5%;top:56.5%}.ak-hex{width:64px;height:72px}.ak-invest{left:30%}.ak-sec{right:22%;top:66%}.ak-bp{right:21%}.ak-start .st-cn{font-size:34px;letter-spacing:8px}.ak-start .st-en{font-size:13px}.ak-line1{left:330px}.title-heading{width:clamp(360px,48vw,560px)}.title-kicker{font-size:8px;letter-spacing:1.8px}.cls-grid{grid-template-columns:repeat(3,minmax(0,1fr))}#layerBanner{padding:8px 15px}#layerBanner .lb-zh{font-size:15px}#layerBanner .lb-en{font-size:8px}.title-quote{font-size:11px}}
+@media(max-height:740px){.ak-tl{top:10px;left:12px}.ak-quickref{top:10px;left:170px}.ak-banner{top:10px;right:200px;height:50px}.ak-user{top:8px;right:14px}.ak-ach{top:126px}.ak-lib{top:43%}.ak-set{top:57%}.ak-hex{bottom:13%}.ak-invest{bottom:10%}.ak-start{bottom:4%}.ak-start .st-cn{font-size:36px}.cn-title{font-size:clamp(36px,5vw,68px)}.title-heading{top:6%}.title-quote{bottom:6%;font-size:11px}.title-quote small{margin-top:4px}.cls-story{font-size:12px}.pg-head,.hub-head{padding-bottom:12px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 /* 快速参考弹窗（标题页） */
 .guide-list{display:grid;grid-template-columns:1fr 1fr;gap:8px 18px;margin-bottom:14px}.guide-row{display:flex;align-items:center;gap:12px;padding:8px 12px;background:#10273380;border:1px solid #3f5a6655}.guide-row b{min-width:104px;font:11px 'Cascadia Code';color:#d8c08f;letter-spacing:1px}.guide-row span{font-size:12.5px;color:#b6c9ce}
@@ -48,6 +48,9 @@ body.scene-battle-3d #sidebar,body.scene-battle-3d #layerBanner,body.scene-battl
 /* #1 #24 #27 静音按钮：透明幽灵件 + 线稿 SVG 重画 */
 .ak-home{border-radius:2px}
 #btnTitleMute{width:58px;height:58px;background:none;border:none;color:#e8efe9;transition:color .18s,filter .18s}
+/* 2026-09-19 老板：音量键看着比退出键小——按钮盒同为 58×58，但喇叭图形在 24 视框内占比小，
+   图标放大到 29px 与退出键图形视觉等大 */
+#btnTitleMute svg{width:29px;height:29px}
 #btnTitleMute::after{display:none}
 #btnTitleMute:hover{color:#ffffff;filter:drop-shadow(0 0 8px #a9efc366)}
 #btnTitleMute.muted{color:#8b9791}
@@ -259,15 +262,17 @@ body.page-opaque #sidebar{visibility:hidden}
 .pg-close .ic{transition:transform .45s cubic-bezier(.34,1.3,.5,1)}
 .pg-close:hover .ic{transform:rotate(180deg)}
 
-/* —— 选档页：「返回 BACK」键（2026-09-10 留言 #17：返回键不见了、页面该下移——
-   从左上角钉死改为沉到左下角常驻，窗口偏矮/顶部被任务栏遮挡时也不再被裁掉；
-   页面主体恢复顶部留白整体下移，不再顶着屏幕上沿） —— */
-.pg.slot-page .pg-back{position:absolute;z-index:5;left:22px;bottom:22px;display:inline-flex;align-items:center;gap:8px;
-  padding:12px 26px;font-size:14px;letter-spacing:3px;color:#e3eeea;cursor:pointer;border-radius:8px;
-  background:linear-gradient(160deg,#244653,#1a3441);border:1px solid #77919b;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 2px 10px rgba(0,0,0,.4);transition:all .15s}
-.pg.slot-page .pg-back:hover{background:linear-gradient(160deg,#325a69,#22404e);border-color:#cadcd9;transform:translateY(-1px)}
-.pg.slot-page .pg-back .en{font:10px 'Cascadia Code';letter-spacing:2px;opacity:.7}
+/* —— 选档页：「返回 BACK」键（2026-09-19 老板：放回左上角——
+   09-10 曾因矮窗口被裁沉到左下角，前提是选档卡片 880px 定高居中、卡片顶边在视口外；
+   现卡片已改 100%×100% 全屏（卡片顶=视口顶），页头 clamp 留白带保证左上角恒为空区，不再有裁切） —— */
+/* 注意：文字色必须压过 expedition-inventory.css 的 #overlay .pg-back{color:#b7cbd0}
+   （ID 特异度更高且后加载），故选择器也带 #overlay 前缀，否则金底上强制浅灰蓝字、完全看不清 */
+#overlay .pg.slot-page .pg-back{position:absolute;z-index:5;left:22px;top:18px;display:inline-flex;align-items:center;gap:8px;
+  padding:12px 26px;font-size:14px;letter-spacing:3px;color:#2b1f0e;cursor:pointer;border-radius:8px;
+  background:linear-gradient(160deg,#e9cf96,#c9a05a);border:1px solid #f0d9a6;
+  box-shadow:inset 0 1px 0 rgba(255,244,214,.65),0 2px 12px rgba(201,160,90,.35);transition:all .15s}
+#overlay .pg.slot-page .pg-back:hover{background:linear-gradient(160deg,#f3ddae,#d4ab66);border-color:#ffe9bd;transform:translateY(-1px)}
+#overlay .pg.slot-page .pg-back .en{font:10px 'Cascadia Code';letter-spacing:2px;opacity:.75}
 .pg.slot-page .slot-deck{padding-bottom:34px}
 
 /* —— 基地主页：四面留白 + 壁纸（老板指定图，assets/scenes/hub-wallpaper.webp） —— */
@@ -926,9 +931,9 @@ body,body *{font-family:'HarmonyOS Sans SC','HarmonyOS Sans','Noto Sans SC Sub',
   text-shadow:0 1px 2px rgba(0,0,0,.42)!important;
 }
 
-/* HUD 头像：灰底大卡面，给新接入的角色头像留出更清晰的识别区域。 */
-#sidebar{height:118px;min-height:118px;padding-top:10px;padding-bottom:10px}
-#sidebar .hero-ava{width:96px;min-width:96px;height:96px;border-color:#c2c2c2;
+/* HUD 头像：灰底大卡面，给新接入的角色头像留出更清晰的识别区域。
+   （2026-09-19 底栏重设计：118×118 出血版由文件头部 #sidebar/.hero-ava 统一定义，此处旧尺寸已合并） */
+#sidebar .hero-ava{border-color:#c2c2c2;
   background:linear-gradient(145deg,#9b9b9b,#666);}
 
 /* 2026-09-08：接入无人雪夜街道战斗背景；角色以脚底而非名牌作为地面基线。 */
@@ -1340,7 +1345,7 @@ img[data-asset-key="card-wu-myriadswords"]{object-position:50% 40%!important}
 #overlay .bag-view .bag-slot .flip-face{padding:4.5cqw}
 #overlay .bag-view .bag-slot .flip-face.flip-front .hs-card{width:100%;height:100%;max-width:none;max-height:none;font-size:calc((100cqw - 9cqw)/10);box-shadow:none}
 /* 数量角标：右上角归位（左上=费用、右下=币值/伤害，四角各居其位），随格子等比缩放 */
-#overlay .bag-view .bag-slot .stack-count{top:.5em;right:.5em;bottom:auto;left:auto;font-size:max(10px,calc(9.1cqw*.78));padding:.1em .5em;background:rgba(7,19,26,.85);border:1px solid rgba(216,189,134,.45);color:#f4d78c;border-radius:999px}
+#overlay .bag-view .bag-slot .stack-count{top:.5em;right:.5em;bottom:auto;left:auto;font-size:max(10px,min(calc(9.1cqw*.78),16px));padding:.1em .5em;background:rgba(7,19,26,.85);border:1px solid rgba(216,189,134,.45);color:#f4d78c;border-radius:999px}
 /* 物资格：与卡格同一 font 基准的等比排版（名/价竖排居中，稀有角标左上）
    注意：cqw 在容器元素自身上会回退 viewport，字号必须写在子元素上 */
 #overlay .bag-view .bag-slot:not(.card-slot):not(.safe-slot).filled{aspect-ratio:10/14;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:14px 8px;background:linear-gradient(165deg,rgba(23,49,63,.92),rgba(13,30,41,.96))}
@@ -1398,7 +1403,7 @@ body #overlay .battle-stage.sts .sts-me{bottom:-5vh!important}
 #overlay .card.battle-bag .battle-bag-slot:hover{border-color:#d6ba7e;transform:translateY(-2px)}
 #overlay .card.battle-bag .battle-bag-slot.off{opacity:.45;filter:grayscale(.8);cursor:default}
 #overlay .card.battle-bag .battle-bag-slot .hs-card{margin:4.5cqw;width:calc(100% - 9cqw);height:calc(100% - 9cqw);font-size:calc((100cqw - 9cqw)/10);box-shadow:none}
-#overlay .card.battle-bag .bt-count{position:absolute;top:.5em;right:.5em;z-index:3;color:#ffd876;font-weight:700;font-size:max(10px,calc(9.1cqw*.78));text-shadow:0 1px 3px #000;background:rgba(7,19,26,.85);border:1px solid rgba(216,189,134,.45);border-radius:999px;padding:.1em .5em}
+#overlay .card.battle-bag .bt-count{position:absolute;top:.5em;right:.5em;z-index:3;color:#ffd876;font-weight:700;font-size:max(10px,min(calc(9.1cqw*.78),16px));text-shadow:0 1px 3px #000;background:rgba(7,19,26,.85);border:1px solid rgba(216,189,134,.45);border-radius:999px;padding:.1em .5em}
 
 /* ===== 2026-09-13 留言复检追加 ===== */
 /* 血条黑框彻底去除：名牌容器（黑底+灰边）与内槽全部透明化，名字加深色描边保可读 */
@@ -1585,20 +1590,22 @@ body.reduce-motion #layerBanner { animation: none !important; }
 #overlay .card.bag-page{animation:bagIn .34s cubic-bezier(.22,1,.36,1)}
 #overlay.closing .card.bag-page{animation:ovFadeOut .2s forwards!important}
 
-/* #10 卡牌库亮色设计：鎏金渐变标题 + 页头三色顶线（青玉/鎏金/紫晶）+ 展示区顶部微光 */
-#overlay .library-title h2{
-  background:linear-gradient(92deg,#e8d9a8 0%,#ffe9b8 30%,#8fd8c8 55%,#e8d9a8 78%,#c9a6e8 100%);
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-  filter:drop-shadow(0 2px 8px rgba(223,194,141,.18));
+/* #10 卡牌库亮色设计：鎏金渐变标题 + 页头三色顶线（青玉/鎏金/紫晶）+ 展示区顶部微光
+   （特异度压过 expedition-library.css:190/41 的同名 important 规则——它后加载，必须更高一级） */
+body.cardlib-open #overlay .card .card-library-page .library-title h2{
+  background:linear-gradient(92deg,#e8d9a8 0%,#ffe9b8 30%,#8fd8c8 55%,#e8d9a8 78%,#c9a6e8 100%)!important;
+  -webkit-background-clip:text!important;background-clip:text!important;color:transparent!important;
+  text-shadow:none!important;
+  filter:drop-shadow(0 2px 8px rgba(223,194,141,.28));
 }
-#overlay .card-library-page .library-title{position:relative;padding-top:10px}
-#overlay .card-library-page .library-title::before{content:'';position:absolute;top:0;left:4px;right:4px;height:2px;
+body.cardlib-open #overlay .card-library-page .library-title{position:relative;padding-top:10px}
+body.cardlib-open #overlay .card-library-page .library-title::before{content:'';position:absolute;top:0;left:4px;right:4px;height:2px;
   background:linear-gradient(90deg,transparent,#7fc8b8 18%,#dfc28d 50%,#b48ad8 82%,transparent);
   border-radius:2px;opacity:.85}
-#overlay .card-library-page .clib-main{background:
-  radial-gradient(120% 46% at 50% 0%,rgba(143,216,200,.07),transparent 62%),
-  radial-gradient(90% 40% at 82% 0%,rgba(180,138,216,.06),transparent 60%),
-  #e9e4d6}
+body.cardlib-open #overlay .card-library-page .clib-main{background:
+  radial-gradient(120% 46% at 50% 0%,rgba(143,216,200,.09),transparent 62%),
+  radial-gradient(90% 40% at 82% 0%,rgba(180,138,216,.08),transparent 60%),
+  #0a1620!important}
 
 /* #22 开发者控制台（Ctrl+L）面板 */
 .devc-grid{display:grid;gap:14px;margin:6px 0 14px}
@@ -1637,3 +1644,11 @@ body.reduce-motion #layerBanner { animation: none !important; }
   padding:2px 8px;font-size:10px;letter-spacing:1px;color:#ffb9a6;background:rgba(60,18,12,.9);
   border:1px solid rgba(214,120,96,.55);border-radius:999px}
 #overlay .result-pg .hub-card-tip{margin-left:8px;font-size:11px;letter-spacing:1px;color:#8ba1a8;font-weight:400}
+
+/* #23 背包按钮生图图标：sidebar 键与全局浮动键共用同一张画（assets/ui/bag-icon.webp） */
+#bagBtn .bag-btn-art{width:1.35em;height:1.35em;object-fit:contain;vertical-align:-0.28em;filter:drop-shadow(0 2px 4px rgba(0,0,0,.4))}
+#bagBtnFloat .bbf-art{width:26px;height:26px;object-fit:contain;filter:drop-shadow(0 2px 4px rgba(0,0,0,.45))}
+
+/* #1 商店拒买反馈：货位左右抖动一下（币不够/装不下），原因显示在顶栏提示条 */
+@keyframes shopDeny{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(3px)}}
+.shop-slot.shop-deny{animation:shopDeny .42s ease}

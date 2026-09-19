@@ -66,25 +66,56 @@ export function openClassChoice() {
     const displaySel = sel || picks[0];
     const story = characterFor(displaySel);
     const lv = displaySel ? SDT.Meta.classLv(displaySel) : 0;
+    // 熟练度进度（真实存档数据）：xp / 升级所需，满级显示 MAX
+    const xp = displaySel ? SDT.Meta.classXP(displaySel) : 0;
+    const maxed = !!displaySel && lv >= SDT.Meta.LEVEL_MAX;
+    const need = maxed ? 0 : (lv ? SDT.Meta.xpForNext(lv) : 0);
+    const clsPct = maxed ? 100 : need ? Math.min(100, Math.round(xp / need * 100)) : 0;
     const roster = picks.map(cl => ({ cl, c: characterFor(cl) }));
     UI.showOverlay('', `
       <div class="pg cls2-page">
         <div class="cls2-stage">
           ${displaySel ? `<div class="cls2-fullart">${SDT.Art.classFullArt(displaySel)}</div>` : ''}
-          <aside class="cls2-panel${sel ? '' : ' cls2-preview'}">
+          <aside class="cls2-panel${sel ? '' : ' cls2-preview'}" style="--cls-color:${story ? story.color : '#69aec2'}" data-wm="${escAttr(story ? story.id : '')}">
             ${story ? `
+              <div class="cls2-eyebrow">WINTER EXPEDITION · CLASS SELECT</div>
               <h2 class="cls2-name">${esc(story.name)}</h2>
-              <div class="cls2-role-tag">${esc(story.rulesetId)} · ${sel ? '当前选择' : '预览'}</div>
-              <div class="cls2-lv">[[icon:medal]] 熟练度 Lv.${lv} · ${SDT.Meta.perkText(lv)}</div>
-              <div class="cls2-ability"><span>专属卡池</span><b>${poolCount(displaySel)} 张角色卡</b></div>
+              <div class="cls2-chips">
+                <span class="cls2-chip cls2-chip-role">${esc(story.rulesetId)}</span>
+                <span class="cls2-chip${sel ? ' cls2-chip-live' : ''}">${sel ? '本局人物' : '预览'}</span>
+              </div>
+              <div class="cls2-level">
+                <div class="cls2-level-num"><i>LV</i>${lv}</div>
+                <div class="cls2-level-meta">
+                  <div class="cls2-xpbar"><span style="width:${clsPct}%"></span></div>
+                  <div class="cls2-xptext">${maxed ? '熟练度已满级 MAX' : `${xp} / ${need} XP`}</div>
+                  <div class="cls2-perk">[[icon:medal]] 出征加成 ${esc(SDT.Meta.perkText(lv))}</div>
+                </div>
+              </div>
+              <div class="cls2-palette" title="人物配色">
+                <i style="background:${story.hair}"></i><i style="background:${story.skin}"></i><i style="background:${story.outfit}"></i><i style="background:${story.color}"></i>
+              </div>
+              <dl class="cls2-stats">
+                <div><dt>专属卡池</dt><dd>${poolCount(displaySel)}<i>张</i></dd></div>
+                <div><dt>熟练加成</dt><dd>+${lv - 1}<i>生命</i></dd></div>
+              </dl>
               <p class="cls2-story">${sel ? (esc(CLASS_STORY[characterFor(displaySel)?.id] || '确认后以此人物进入远征，熟练度加成与职业卡将在确认时生效。')) : '先查看人物能力与立绘；点击下方头像选择，确认按钮才会提交本局职业。'}</p>
+              ${(SDT.Art.listSkins ? SDT.Art.listSkins(displaySel) : []).length ? `
+                <div class="cls2-skins-wrap">
+                  <div class="cls2-sub">皮肤 <i>SKINS</i></div>
+                  <div class="cls2-skins">
+                    <button class="cls2-skin-btn${SDT.Art.getSkin(displaySel) === 'default' ? ' sel' : ''}" data-act="clsSkin" data-cls="${escAttr(displaySel)}" data-skin="default">标准</button>
+                    ${SDT.Art.listSkins(displaySel).map(s => `
+                      <button class="cls2-skin-btn${SDT.Art.getSkin(displaySel) === s.id ? ' sel' : ''}" data-act="clsSkin" data-cls="${escAttr(displaySel)}" data-skin="${escAttr(s.id)}" title="${escAttr(s.name)}">${esc(s.name)}</button>`).join('')}
+                  </div>
+                </div>` : ''}
               <button class="ov-btn cls2-pool-btn" data-act="clsPool" ${sel ? '' : 'disabled'}>[[icon:cards]] 查看角色卡池（${poolCount(displaySel)} 张）</button>`
             : '<p class="cls2-hint">[[icon:medal]]<br>从下方选择一名角色</p>'}
           </aside>
         </div>
         <div class="cls2-strip">${roster.map(({ cl, c }) => `
           <button class="cls2-face${cl === sel ? ' sel' : ''}" data-act="selClass" data-cls="${escAttr(cl)}" title="${escAttr(c.name)}" aria-pressed="${cl === sel ? 'true' : 'false'}">
-            ${SDT.Art.classArt(cl)}<b>${esc(c.name)}</b>
+            ${SDT.Art.classArt(cl, true)}<b>${esc(c.name)}</b>
           </button>`).join('')}</div>
         <button class="cls2-back" data-act="cls2Quit" title="返回标题界面"><svg class="svg-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.5 5.5 4 12l6.5 6.5M4.6 12H20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <button class="cls2-confirm" data-act="pickClass" ${sel ? '' : 'disabled'} title="${sel ? '出发' : '请先选择角色'}" aria-label="${sel ? '出发' : '请先选择角色'}"><span>${sel ? '出发' : '选择角色后出发'}</span><svg class="svg-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12.5 10 18 19.5 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -201,6 +232,21 @@ export function openClassChoice() {
     view = 'select';
     Sfx.tick();
     render();
+  });
+  UI.act('clsSkin', (d) => {   // 皮肤切换（2026-09-19）：只换选人页大立绘，会话内记忆不入存档
+    SDT.Art.setSkin(d.cls, d.skin);
+    const url = SDT.Art.skinUrl(d.cls, d.skin);
+    document.querySelectorAll('.cls2-fullart img.art-figure, .cls2-fullart img.art-figure-back')
+      .forEach(im => {
+        im.src = url;
+        im.classList.remove('skin-swap');
+        void im.offsetWidth;   // 强制重排：连续切换也能重放过渡
+        im.classList.add('skin-swap');
+        // 注意：动画结束后保留 skin-swap 类——若摘除会回落到 cls2ArtIn 入场动画造成二次闪烁
+      });
+    document.querySelectorAll(`.cls2-skin-btn[data-cls="${d.cls}"]`)
+      .forEach(b => b.classList.toggle('sel', b.dataset.skin === d.skin));
+    Sfx.tick();
   });
   UI.act('cls2Quit', () => {   // 左下角返回键：放弃选角回标题（弹层淡出后 exitToTitle 的弹窗守卫才放行）
     UI.hideOverlay();

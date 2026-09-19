@@ -17,7 +17,6 @@ import { renderExpeditionPanel } from './expedition.view.js';
         hpBar: $('hpBar'), hpBarWrap: $('hpBarWrap'), hpText: $('hpText'), charCoins: $('charCoins'),
         charAtk: $('charAtk'),
         heroAva: $('heroAva'),
-        bagCount: $('bagCount'), bagBtn: $('bagBtn'), btnHome: $('btnHome'),
         bagBtnFloat: $('bagBtnFloat'), bagCountFloat: $('bagCountFloat'),
         log: $('log'),
         logPanel: $('logPanel'),
@@ -289,11 +288,9 @@ import { renderExpeditionPanel } from './expedition.view.js';
       const bagKey = `${used}/${cap}`;
       if (this._lastBagKey !== bagKey) {
         this._lastBagKey = bagKey;
-        this.el.bagCount.textContent = bagKey;
-        // 2026-09-06 #18：背包满/接近满时图标标红
-        if (this.el.bagBtn) this.el.bagBtn.classList.toggle('bag-full', used >= cap);
-        else if (this.el.bagCount.parentElement) this.el.bagCount.parentElement.classList.toggle('bag-full', used >= cap);
+        // 底栏背包按钮已删（2026-09-19）：入口收敛到全局浮动键，满载警示也移到浮动键上
         if (this.el.bagCountFloat) this.el.bagCountFloat.textContent = bagKey;
+        if (this.el.bagBtnFloat) this.el.bagBtnFloat.classList.toggle('bag-full', used >= cap);
       }
       // #27 全局浮动背包键：对局中（且已选角色）任何界面显示；标题/基地/整备/选人时隐藏
       if (this.el.bagBtnFloat) {
