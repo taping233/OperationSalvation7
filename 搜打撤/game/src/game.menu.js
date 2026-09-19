@@ -324,7 +324,11 @@ function createGameMenuController(deps) {
         <p class="manual-note">鼠标拖拽平移地图，滚轮缩放。地图只开放当前节点的相邻可通行路线；已探索节点的奖励不会重复刷新。</p>
       </div>
       <div class="ov-btns ov-btns-corner"><button class="ov-btn back-sm" data-act="guideBack">返回 <i class="en">BACK</i></button></div>`, true);
-    UI.act('guideBack', () => { UI.hideOverlay(); game.state = prevState === 'modal' ? 'idle' : prevState; });
+    UI.act('guideBack', () => {
+      UI.hideOverlay();
+      // 战斗 modal 态不可降级为 idle（战斗界面会丢）：口径同 showRunTransition 的恢复守卫
+      game.state = (prevState === 'modal' && !game.battleActive) ? 'idle' : prevState;
+    });
   }
 
   // 成就总览：以最近游玩档位的基地档案为准（只读；领奖需进入基地）
