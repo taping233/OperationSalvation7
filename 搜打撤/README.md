@@ -13,6 +13,8 @@ npm run dev
 
 `index.html` 使用 ESM，不能通过 `file://` 直接双击运行。`npm run dev` 由 Vite 读取 `game`；`npm run build` 构建生产版。桌面启动会先构建，再读取 `desktop-app/game`。
 
+网页版浏览器要求：Chromium 105+ / Edge 常青版 / Firefox 121+（样式层使用 `:has()` 与容器查询 `cqw`，旧内核 WebView 下部分界面样式会退化）。桌面版内置 Electron 44，无此限制。
+
 ## 常用检查
 
 ```powershell

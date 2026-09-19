@@ -25,8 +25,8 @@ import './meta.js';
 import './render-scheduler.js';
 import './renderer.fx.js';
 
-import './renderer.js';        // 老板留言 #53：对局地图改回原二维面板（停用 3D 场景）
-// import './scene/runtime.js'; // 3D 场景暂退（如需恢复取消注释并移除上一行）
+import './renderer.js';        // 老板留言 #53：对局地图改回原二维面板（停用 3D 场景）；
+                               // scene/ 目录已随 2026-09-19 技术清理删除，需要 3D 时从 git 历史找回
 import './ui.js';
 import './shared.js';
 import './battle.effects.js';

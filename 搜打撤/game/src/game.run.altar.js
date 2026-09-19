@@ -48,6 +48,7 @@ export function openFireRest() {
 // 需求 #12：消耗的装备不能在火堆复原（与道具一样）——列表里直接滤掉，不可选
 export function openClassChoice() {
   preloadAllNodeShellBgs();   // 选角这几秒正好把整页事件背景图预载完（webp 大图打开才请求会黑屏数秒）
+  if (SDT.Art && SDT.Art.warmClassRoster) SDT.Art.warmClassRoster();   // 头像条/大立绘五张 4K 图预热，防露底色（2026-09-19 走查 B8）
   const picks = CHARACTERS.map(c => c.rulesetId).filter(cl => SDT.Cards.classPool(cl).length);
   if (!picks.length) return;
   game.state = 'modal';

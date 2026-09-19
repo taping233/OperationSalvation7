@@ -25,7 +25,24 @@ export function cardBackHTML(backId, cls) {
 // 卡面渲染（em 布局，cls 控制尺寸 sm/lg/xl；game.js / battle.js 共用）
 // opts.hideCost：隐去左上角费用角标——仅对 NO_COST_TYPES 生效（背包/宝箱等界面传 true，卡牌库不传）
 // opts.costOverride：{ v } 战斗内实际费用（2026-09-09 需求 #16）——降低 = 绿字，提高 = 红字
+// cardHTML 结果缓存：战斗手牌每次 requestBattleRender 都对每叠卡重算 HTML 再签名
+// diff 丢弃，其中 rarityOf 对衍生牌全量扫卡库（233+ 张）——渲染路径上反复白算。
+// 以卡对象为键的 WeakMap 安全性：对局内卡对象字段不原地改（费用/伤害变化走 opts
+// 传入，见 costOverride/dmgOverride）；制作坊 upsert 是整卡替换新对象，旧键随之作废。
+// opts 不同的调用（hideCost/low/放大查看）各自命中不同 key，互不污染。
+const cardHTMLMemo = new WeakMap();
 export function cardHTML(c, cls, opts) {
+  let key;
+  try { key = (cls || '') + '|' + JSON.stringify(opts || null); }
+  catch (e) { return buildCardHTML(c, cls, opts); }   // opts 含循环引用等异常：放弃缓存直算
+  const hit = cardHTMLMemo.get(c);
+  if (hit && hit.key === key) return hit.html;
+  const html = buildCardHTML(c, cls, opts);
+  cardHTMLMemo.set(c, { key, html });
+  return html;
+}
+
+function buildCardHTML(c, cls, opts) {
   const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   const escAttr = (s) => esc(s).replace(/"/g, '&quot;');
   const hideCost = !!(opts && opts.hideCost) && SDT.Cards.NO_COST_TYPES.includes(c.type);
@@ -71,6 +88,12 @@ function descRich(desc) {
   s = s.replace(/([⁺⁻+\-]?[0-9]+(?:\.[0-9]+)?)/g, '<b class="d-num">$1</b>');
   return s;
 }
+// 长描述按长度降级字号（B5）：≥22 字收一档、≥32 字两档，防 sm 卡面底部裁字；
+// lg/xl 特写卡由 card-v3.css 的 id 级选择器接管，不受这两档影响
+function descLenCls(c) {
+  const n = (c && c.desc || '').length;
+  return n >= 32 ? ' long xlong' : n >= 22 ? ' long' : '';
+}
 // 效果词条角标（类型行下方的小药丸；数据字段见文件头 draw / infuse / heal / armor）
 const drawN = +(c.draw || 0), infN = +(c.infuse || 0);
   const healN = +(c.heal || 0), armN = +(c.armor || 0);
@@ -99,7 +122,7 @@ const drawN = +(c.draw || 0), infN = +(c.infuse || 0);
     <div class="hsc-type">${esc(c.type || '?')} · ${esc(ro === '职业' ? ((c.cls ? characterName(c.cls) : '人物') + '专属') : ro)}</div>
     ${kwHTML}
     <i class="hsc-gem"></i>
-    <div class="hsc-desc">${c.desc ? `<span>${descRich(c.desc)}</span>` : ''}</div>
+    <div class="hsc-desc${descLenCls(c)}">${c.desc ? `<span>${descRich(c.desc)}</span>` : ''}</div>
     ${showDmg ? `<div class="hsc-dmg${dmgUp ? ' dmg-up' : ''}" title="${escAttr(dmgUp
       ? `${mark.tip}（含法伤加成 +${dmgOverride.bonus}）`
       : mark.tip)}">${mark.icon}<b>${mark.text}</b></div>` : ''}

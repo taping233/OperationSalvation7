@@ -592,7 +592,7 @@ function createGameMenuController(deps) {
   function openLeaveMenu() {
     game.state = 'modal';
     UI.showOverlay('[[icon:door]] 离开对局？', `
-      <p class="ov-note">当前对局进度已自动保存——下次「开始游戏」进入 <b>档位 ${getActiveSlot()}</b> 会直接继续这场对局。</p>
+      <p class="ov-note">当前对局进度已自动保存——下次「开始游戏」进入 <b>${getActiveSlot() ? `档位 0${getActiveSlot()}` : '当前档位'}</b> 会直接继续这场对局。</p>
       <p class="ov-note" style="color:#f0b9ae">[[icon:question]] 若选择<b>放弃对局</b>：带入本局的卡牌<b>全部丢失</b>；
         对局中获得的卡牌只有存入<b>安全格</b>的会被宠物运回基地；物资与金币全部散失。</p>
       <div class="ov-btns">
@@ -775,7 +775,7 @@ function createGameMenuController(deps) {
     sfxVolEl.addEventListener('change', () => SDT.Sound.sfx('ding'));
   }
 
-  return Object.freeze({ setLobby, showTitle, startNewGame, exitToTitle, quitGame, openSettings });
+  return Object.freeze({ setLobby, showTitle, startNewGame, exitToTitle, quitGame, openSettings, openLeaveMenu });
 }
 
 export { createGameMenuController };

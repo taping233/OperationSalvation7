@@ -3,7 +3,7 @@ const UI = window.SDT.UI;
 const SDT = window.SDT;
 import { TYPE_NAME } from './game.notes.js';
 import { MAP } from './game.session.js';
-import { SLOT_COUNT, buildDerived, cam, canvas, configureGameRuntime, ctx, dpr, exitToTitle, game, hasRun, migrateOldSave, openSettings, quitGame, saveGame, setLobby, showTitle, startNewGame, _set_dpr, _set_cam } from './game.session.js';
+import { SLOT_COUNT, buildDerived, cam, canvas, configureGameRuntime, ctx, dpr, game, hasRun, migrateOldSave, openLeaveMenu, openSettings, quitGame, saveGame, setLobby, showTitle, startNewGame, _set_dpr, _set_cam } from './game.session.js';
 import { bindRunMixins, devForceBattle, devJumpNode, moveTo, openClassChoice, openShop, showRunTransition } from './game.run.js';
 import { PRELOAD_SCENES } from './game.run.data.js';
 import { openBaseHub } from './game.hub.js';
@@ -386,14 +386,13 @@ import { renderMiniMap } from './game.session.js';
     // 标题页无侧栏不变式（2026-09-07 留言：下边栏跑到主页反复出现）：回主页的任何路径
     // 只要漏调 setLobby(true)，下一帧在这里被强制纠正——不再依赖每个流程点自觉
     if (game.state === 'title' && !document.body.classList.contains('lobby')) setLobby(true);
-    const fxActive = SDT.FX && (SDT.FX.floats.length || SDT.FX.pulses.length || SDT.FX.shakes.length);
-    // 帧率分两档（功耗权衡）：active 120 只留给快节奏状态（掷骰/移动/特效/战斗——
+    // 帧率分两档（功耗权衡）：active 120 只留给快节奏状态（掷骰/移动/战斗——
     // 帧率拉满才不掉帧感）；对局站立 idle 的棋盘动画全是慢速环境效果（呼吸/火光/流光
     // 均为 1Hz 量级正弦），60fps 与 120fps 观感无差，功耗直接减半。拖拽/缩放等输入
     // 走 renderScheduler.invalidate() 逐事件触发绘制，不受降档影响。标题等未开局画面
     // 同样 idle 60；战斗页盖在画布上时（自绘场景大图基本不透明，画布只从边缝透出）
     // 也降到 idle 60：底图隔着重度 blur(6px) 无人能分辨帧率，省下的余量让给战斗页动画。
-    const active = !battleBehind && (game.battleActive || game.state === 'moving' || game.state === 'rolling' || !!fxActive);
+    const active = !battleBehind && (game.battleActive || game.state === 'moving' || game.state === 'rolling');
     // 镜头平滑追随仅在棋子移动中生效（指数趋近，帧率无关；大距离跳变直接贴合）。
     // 站立/拖拽时镜头完全归玩家：早先每帧无差别追随会把玩家拖拽的镜头拉回去，
     // 拖动观感失效（老板留言：地图无法正常拖动）。
@@ -460,7 +459,9 @@ import { renderMiniMap } from './game.session.js';
     // 预加载选档页存档卡背景图，避免首次打开时解码卡顿
     const slotBg = new Image();
     slotBg.src = new URL('../assets/slot-bg-knight-fantasy.webp', import.meta.url).href;
-    document.getElementById('btnHome').addEventListener('click', exitToTitle);
+    // btnHome 打开「离开对局」三选弹窗（保存 / 放弃 / 继续）——
+    // 此前绑定 exitToTitle 导致 openLeaveMenu 成死代码、放弃对局无入口（2026-09-19 交互走查 B1）
+    document.getElementById('btnHome').addEventListener('click', openLeaveMenu);
     // 音效/背景乐开关（持久化在 sound.js）
     const btnMute = document.getElementById('btnMute');
     if (btnMute) {
@@ -481,6 +482,24 @@ import { renderMiniMap } from './game.session.js';
   // 模块脚本位于 body 末尾，此时标题 DOM 已存在。首页交互必须先于存档、
   // 画布和卡牌初始化绑定，否则任一后续启动异常都会留下“能看但不能点”的死首页。
   bindTitle();
+
+  // ---------- 后台冻结兜底（2026-09-19 交互走查 B3） ----------
+  // 后台标签/最小化窗口时 document 时间线冻结，纯 CSS 入场动画（首帧 opacity:0，
+  // 如宝箱 chestFlyIn / 弹层入场）会停在透明态，浮层看似黑屏死机——WAAPI 已有
+  // animateSafe 兜底（battle.view.js），CSS 动画补这里：回到前台时把 overlay 与
+  // body 直挂浮层（cardZoom/legendGet/cardGet）内的动画跳到终态。
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState !== 'visible') return;
+    [document.getElementById('overlay'), document.body].forEach(root => {
+      if (!root || !root.getAnimations) return;
+      root.getAnimations().forEach(a => {
+        try {
+          if (a.effect && a.effect.getTiming && a.effect.getTiming().iterations === Infinity) return;   // 雪花等循环动画不碰
+          a.finish();
+        } catch (e) { /* 已被移除/尚未开始的动画 finish 会抛，忽略 */ }
+      });
+    });
+  });
 
 // ---------- 启动 ----------
   window.addEventListener('DOMContentLoaded', () => {
@@ -594,7 +613,9 @@ import { renderMiniMap } from './game.session.js';
       for (const sheet of Array.from(document.styleSheets)) {
         try { walkRules(sheet.cssRules, sheet.href || location.href); } catch (_) { /* 读不了规则的样式表跳过 */ }
       }
-      if (found.size) { try { SDT.Art.warm(Array.from(found)); } catch (_) {} }
+      // CSS 背景图的解码位图不钉进预热池（retain:false）：CSS background 走浏览器
+      // 自带缓存，JS 持引用帮不到渲染，只会把 75 张大场景图的位图白占在内存里。
+      if (found.size) { try { SDT.Art.warm(Array.from(found), { retain: false }); } catch (_) {} }
     };
     const scheduleCssWarm = () => {
       if ('requestIdleCallback' in window) requestIdleCallback(warmCssBackdropArt, { timeout: 8000 });

@@ -8,7 +8,7 @@
  * 商店控制器也在此装配（openShop 唯一实例，供 ALTAR/FLOW 复用）。
  * ============================================================ */
 import { esc, escAttr } from './shared.js';
-import { FX, MAP, bagCap, game, newUid, pick, saveGame, scaledEnemy, usedSlots } from './game.session.js';
+import { MAP, bagCap, game, newUid, pick, saveGame, scaledEnemy, usedSlots } from './game.session.js';
 import { tone } from './sound.js';
 import { Sfx, _set_cardPageOpen, cardHTML } from './game.cardslib.js';
 import { IMMEDIATE_SCENES, NODE_BG, PICKUP_BG, PRELOAD_SCENES, SCENES, SCENE_META } from './game.run.data.js';
@@ -288,8 +288,7 @@ export function grantEventCard(tpl, opts = {}) {
     ? game.canReceiveCard(tpl)
     : (game.ownedCards.some(o => o.card.name === tpl.name) || game.canAcceptCard(tpl));
   if (!canReceive) {
-    // 2026-09-09 老板 #12：收不下要当场给提示（飘字+音效+日志，口径同 addItem），不能只默默掉在原地
-    FX.float('背包已满', game.pos.x, game.pos.y, '#ff6b5e');
+    // 2026-09-09 老板 #12：收不下要当场给提示（音效+日志，口径同 addItem），不能只默默掉在原地
     SDT.Sound.sfx('deny');
     UI.log(`[[icon:bag]] 背包已满（${usedSlots()}/${bagCap()} 格${tpl.type !== '资源' ? '，珍珠盒扩格只收资源卡' : ''}），【${esc(tpl.name)}】掉在了原地…`, 'warn');
     return false;

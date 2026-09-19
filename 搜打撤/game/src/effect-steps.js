@@ -116,7 +116,7 @@ export function createEffectSteps(deps) {
   /** 对单个目标结算伤害并冒伤害数字（旧代码里重复了 ~10 次的固定搭配）。 */
   const hitFoe = (ctx, t, n, type, caster = {}) => {
     const r = combat.dealDamage(caster, t, n, type);
-    if (r.dealt > 0) pushFloat({ unit: foeIndexOf ? foeIndexOf(t) : 0, text: '-' + r.dealt, cls: 'dmg' });
+    if (r.dealt > 0) pushFloat({ unit: foeIndexOf ? foeIndexOf(t) : 0, text: '-' + r.dealt, cls: 'dmg', type });   // type：命中贴图按伤害类型染色（P1）
     // 文本步骤路径不经过 battle.core 的 hitFoe，0 血死亡判定补在这里（2026-09-13 实测：快意恩仇打至 0 血敌人不倒）
     if (t && !t.dead && t.hp <= 0 && typeof sweepDead === 'function') sweepDead();
     return r;

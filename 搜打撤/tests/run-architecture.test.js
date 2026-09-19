@@ -19,6 +19,23 @@ const SCENES = source('game.run.scenes.js');
 const ALTAR = source('game.run.altar.js');
 const FLOW = source('game.run.flow.js');
 
+it('满包拒绝新卡，只允许普通背包已有未满堆合并', () => {
+  const text = source('game.session.js');
+  const body = text.match(/function canReceiveCard\(card\) \{([\s\S]*?)\n  \}/)[1];
+  const game = { ownedCards: [] };
+  const receive = new Function('game', 'stackCapOf', 'canAcceptCard', `return function(card) {${body}}`)(game, () => 3, () => false);
+  const card = { name: '测试卡' };
+  expect(receive(card)).toBe(false);
+  game.ownedCards = [{ card, safe: true }, { card, stored: true }];
+  expect(receive(card)).toBe(false);
+  game.ownedCards = [{ card }];
+  expect(receive(card)).toBe(true);
+  game.ownedCards = Array.from({ length: 3 }, () => ({ card }));
+  expect(receive(card)).toBe(false);
+  game.ownedCards.push({ card });
+  expect(receive(card)).toBe(true);
+});
+
 describe('局内流程模块分层（批次 4）', () => {
   it('壳只做装配：不再定义任何被拆走的流程入口', () => {
     for (const name of ['moveTo', 'resolveCell', 'runInstant', 'buildEncounter', 'openScene', 'nodeShell', 'grantEventCard', 'openAltarRitual', 'openClassChoice', 'openDoorModal', 'doExtract', 'triggerEventCard']) {

@@ -341,7 +341,18 @@ import { emit as busEmit } from './event-bus.js';
   }
 
   const applyTextEffects = createEffectExecutor({
-    combat: Combat,
+    // 诅咒施加视觉差分（P1）：包装 addCurse——卡牌文本路径对敌方施加诅咒时推 cursefx 彩闪
+    //（玩家自身中诅咒不闪，仍走日志+角标）。Combat 是模块命名空间（属性 only-getter，
+    // 不能 Object.create 委托），展开为快照普通对象再覆盖——combat.js 导出全是函数/常量，快照安全。
+    combat: {
+      ...Combat,
+      addCurse(t, key, n) {
+        Combat.addCurse(t, key, n);
+        if (t && !t.dead && t !== pstat) {
+          floats.push({ unit: foeIdx(t), text: '', cls: `cursefx curse-${key}` });
+        }
+      },
+    },
     getAlive: alive,
     getPlayerStatus: () => pstat,
     getPlayerDefense: () => pdef,
@@ -1406,34 +1417,33 @@ import { emit as busEmit } from './event-bus.js';
     queueCardExecution(uid, card, fuel, alive()[0] || null);
   }
 
+  // 出牌稳定点节流落盘：全量 JSON.stringify + 同步 localStorage 写在 Defender
+  // 实时扫描下可能到几十 ms，逐次写会造成出牌后的掉帧尖刺。回合开始仍无条件
+  // 落盘，窗口内闪退最多回退数秒内的出牌（正常关窗走 beforeunload 全量保存）。
+  let lastPersistAt = 0;
+  const PERSIST_MIN_MS = 8000;
   function queueCardExecution(uid, card, fuelUids, target, freeCost) {
-    (window.__dbg = window.__dbg || []).push('qce enter phase=' + battleState.phase);
     battleState = transitionBattle(battleState, BATTLE_PHASES.RESOLVING);
     busy = true;
-    (window.__dbg = window.__dbg || []).push('qce transition ok');
     requestBattleRender();
-    (window.__dbg = window.__dbg || []).push('qce render ok');
-    actionQueue.enqueue(() => execPlay(uid, card, fuelUids, target, freeCost)).then(() => {
-      (window.__dbg = window.__dbg || []).push('qce action resolved');
-    }, (e) => {
-      (window.__dbg = window.__dbg || []).push('qce action REJECTED: ' + (e && e.message));
-    }).finally(() => {
-      (window.__dbg = window.__dbg || []).push('qce finally phase=' + battleState.phase + ' q=' + actionQueue.length);
-      // 触发效果可能继续入队；队列未空时保持 resolving/busy，避免玩家插入新动作。
-      if (actionQueue.length === 0) {
-        if (battleState.phase === BATTLE_PHASES.RESOLVING) battleState = transitionBattle(battleState, BATTLE_PHASES.PLAYER);
-        busy = false;
-        (window.__dbg = window.__dbg || []).push('qce finally done -> player');
-        // 稳定点落盘（战斗快照随对局存档写入，刷新/闪退后可续打）
-        if (G.persistSave && G.battleActive && battleState.phase === BATTLE_PHASES.PLAYER) G.persistSave();
-      }
-      requestBattleRender();
-      (window.__dbg = window.__dbg || []).push('qce finally render ok');
-    });
+    actionQueue.enqueue(() => execPlay(uid, card, fuelUids, target, freeCost))
+      .catch(e => console.error('[battle] 出牌动作异常：', e))
+      .finally(() => {
+        // 触发效果可能继续入队；队列未空时保持 resolving/busy，避免玩家插入新动作。
+        if (actionQueue.length === 0) {
+          if (battleState.phase === BATTLE_PHASES.RESOLVING) battleState = transitionBattle(battleState, BATTLE_PHASES.PLAYER);
+          busy = false;
+          // 稳定点落盘（战斗快照随对局存档写入，刷新/闪退后可续打；节流见上）
+          if (G.persistSave && G.battleActive && battleState.phase === BATTLE_PHASES.PLAYER) {
+            const now = performance.now();
+            if (now - lastPersistAt >= PERSIST_MIN_MS) { lastPersistAt = now; G.persistSave(); }
+          }
+        }
+        requestBattleRender();
+      });
   }
 
   async function execPlay(uid, card, fuelUids, target, freeCost) {
-    (window.__dbg = window.__dbg || []).push('execPlay enter ' + (card && card.name));
     const effCost = effCostOf(card, uid);
     if (effCost !== card.cost) G.log(`[[icon:sparkles]] <b>费用变化</b>：【${esc(card.name)}】按 <b>${effCost}</b> 费打出（原 ${card.cost} 费）`, 'sys');
     if (!freeCost) energy -= effCost;
@@ -1483,9 +1493,7 @@ import { emit as busEmit } from './event-bus.js';
     const infusedBase = fuelUids.length > 0 || (allSpellsInfused && (card.type === '武术' || card.type === '法术'));
     const aliveBefore = alive().length;
     resolveCard(card, target, infusedBase, fuelCostSum, uid);
-    (window.__dbg = window.__dbg || []).push('execPlay resolveCard done');
     await takeSurge();   // 法力奔涌：演出未完不结束本次出牌动作
-    (window.__dbg = window.__dbg || []).push('execPlay takeSurge done');
     // 2026-09-09 老板 #9：装备卡打出即穿戴（角色信息区显示装备与限定技能按钮）
     if (card.type === '装备') registerEquip(uid, card);
     // 「若本牌为最后一张手牌，效果触发 N 次」（急行军/破釜沉舟）：整卡效果再跑一遍。
@@ -1632,7 +1640,7 @@ import { emit as busEmit } from './event-bus.js';
       }
       foe.hp -= loss;
       SDT.Sound.sfx('hit');
-      if (loss > 0) floats.push({ unit: foeIdx(foe), text: '-' + loss + '♥', cls: 'dmg' });
+      if (loss > 0) floats.push({ unit: foeIdx(foe), text: '-' + loss + '♥', cls: 'dmg', type });
       G.log(`[[icon:play]] <b>${esc(card.name)}</b> → ${esc(foe.name)}：${isTrue || abreakOn ? '真伤/破甲，' : ''}击碎 <b>${loss}</b> 颗心（余 ${Math.max(0, foe.hp)} 心）`, 'sys');
       if (foe.hp <= 0 && !foe.dead) {
         if (nestRevive(foe)) return loss;
@@ -1652,7 +1660,7 @@ import { emit as busEmit } from './event-bus.js';
       return 0;
     }
     SDT.Sound.sfx('hit');
-    if (r.dealt > 0) floats.push({ unit: foeIdx(foe), text: '-' + r.dealt, cls: 'dmg' });
+    if (r.dealt > 0) floats.push({ unit: foeIdx(foe), text: '-' + r.dealt, cls: 'dmg', type });
     G.log(`[[icon:play]] <b>${esc(card.name)}</b>${seg || ''} → ${esc(foe.name)}：造成 <b>${r.dealt}</b> 点${Combat.TYPE_NAME[type]}` +
       (r.log.length ? `（${r.log.join('，')}）` : ''), 'sys');
     // 造成伤害会破除自己的潜行（不造成伤害便不会破除）
@@ -2297,8 +2305,9 @@ import { emit as busEmit } from './event-bus.js';
     }
     G.hp = Math.max(0, playerRef.hp);
     SDT.Sound.sfx('hurt');
-    floats.push({ unit: 'self', text: '-' + r.dealt, cls: 'hurt' });
-    if (r.dealt > 0) floats.push({ unit: 'self', text: '💢', cls: 'stk stk-late' });
+    // delay 130ms：让敌方 lungefx 前倾先播，数字随后到（读得出「这一刀是谁砍的」）
+    floats.push({ unit: 'self', text: '-' + r.dealt, cls: 'hurt', delay: 130 });
+    if (r.dealt > 0) floats.push({ unit: 'self', text: '💢', cls: 'stk stk-late', delay: 130 });
     G.log(`[[icon:demon]] <b>${esc(foe.name)}</b> 反击：你受到 <b>${r.dealt}</b> 点攻击伤害（${G.hp}/${G.maxHp}）`, 'warn');
     return r.dealt;
   }
@@ -2434,6 +2443,7 @@ import { emit as busEmit } from './event-bus.js';
           // 随从优先替主人承受伤害（Q4 老板定向：步兵「优先为主人承受伤害」；无攻血物件除外）
           const guard = allies.find(a => !a.dead && !a.statless);
           if (guard) {
+            floats.push({ unit: foes.indexOf(foe), text: '', cls: 'lungefx' });   // 攻击前摇：敌人前倾
             const ar = Combat.dealDamage({ atk: foe.atk }, guard, 0, Combat.TYPES.ATTACK);
             SDT.Sound.sfx('hurt');
             floats.push({ unit: 'ally:' + allies.indexOf(guard), text: '-' + ar.dealt, cls: 'hurt' });
@@ -2444,6 +2454,7 @@ import { emit as busEmit } from './event-bus.js';
             }
             continue;
           }
+          floats.push({ unit: foes.indexOf(foe), text: '', cls: 'lungefx' });   // 攻击前摇：敌人前倾
           const dealt = playerTakeHit(foe);
           // 敌人造成伤害也会破除它自己的潜行
           if (dealt > 0 && Combat.breakStealth(foe)) {
@@ -2506,11 +2517,11 @@ import { emit as busEmit } from './event-bus.js';
         if (eb) burnDealt += eb.dealt;
       }
       if (poisonDealt) {
-        floats.push({ unit: foes.indexOf(foe), text: '-' + poisonDealt, cls: 'dmg' });
+        floats.push({ unit: foes.indexOf(foe), text: '-' + poisonDealt, cls: 'dmg', tintKey: 'poison' });
         G.log(`[[icon:skull]] 中毒结算：<b>${esc(foe.name)}</b> 受到 <b>${poisonDealt}</b> 点固定伤害（${Math.max(0, foe.hp)}/${foe.maxHp}）${timeRune ? '（时光×2）' : ''}`, 'sys');
       }
       if (burnDealt) {
-        floats.push({ unit: foes.indexOf(foe), text: '-' + burnDealt, cls: 'dmg' });
+        floats.push({ unit: foes.indexOf(foe), text: '-' + burnDealt, cls: 'dmg', tintKey: 'burn' });
         G.log(`[[icon:fire]] 灼烧结算：<b>${esc(foe.name)}</b> 受到 <b>${burnDealt}</b> 点固定伤害（${Math.max(0, foe.hp)}/${foe.maxHp}）`, 'sys');
       }
       if (foe.hp <= 0 && !foe.dead) { foe.dead = true;
@@ -2612,7 +2623,7 @@ import { emit as busEmit } from './event-bus.js';
     // 视图的 data-phase="enemy" 规则（手牌下沉/禁点）会吞掉之后每个玩家回合
     battleState = transitionBattle(battleState, BATTLE_PHASES.PLAYER);
     busy = false;
-    if (G.persistSave && G.battleActive) G.persistSave();   // 回合开始落盘
+    if (G.persistSave && G.battleActive) { lastPersistAt = performance.now(); G.persistSave(); }   // 回合开始落盘（无条件，同步节流时钟）
     requestBattleRender();
   }
 

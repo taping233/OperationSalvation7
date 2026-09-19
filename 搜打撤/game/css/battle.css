@@ -270,20 +270,8 @@
   18% { opacity:1; transform:translate(-50%,-55%) scale(1.12); }
   100% { opacity:0; transform:translate(-50%,-160%) scale(1); }
 }
-/* 单位受击抖动（敌人横抖、自己后仰+红染） */
-.sts-figure.fx-hit { animation:stsShake .42s ease; }
-.sts-figure.fx-hit-self { animation:stsSelfHit .45s ease; }
-@keyframes stsShake {
-  0%,100% { transform:translateX(0); }
-  20% { transform:translateX(-9px); filter:brightness(1.9) saturate(1.25); }
-  40% { transform:translateX(7px); filter:brightness(1.45); }
-  60% { transform:translateX(-5px); } 80% { transform:translateX(3px); }
-}
-@keyframes stsSelfHit {
-  0%,100% { transform:translateX(0); filter:none; }
-  25% { transform:translateX(7px); filter:brightness(1.6) saturate(1.6) drop-shadow(0 0 14px rgba(255,90,70,.8)); }
-  60% { transform:translateX(3px); filter:brightness(1.15); }
-}
+/* 单位受击抖动走 WAAPI（battle.view.js stsShake/stsSelfHit）；旧 .fx-hit/.fx-hit-self
+   CSS 类从未被挂载，2026-09-19 随死样式清理删除——新增受击表现请进 JS 抖动函数 */
 /* 全屏受击红闪（径向暗角） */
 .sts-hurtflash { position:absolute; inset:0; z-index:70; pointer-events:none;
   background:radial-gradient(ellipse at 50% 55%, transparent 42%, rgba(168,26,26,.5) 100%);

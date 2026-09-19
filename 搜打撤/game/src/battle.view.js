@@ -98,7 +98,8 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
             <span class="bt-count">${deckSelection.equipsSelected.includes(entry.uid) ? '[[icon:check]] 已勾选' : '[[icon:cross]] 未勾选'}</span>
           </div>`).join('')}
         </div>` : ''}
-      <h3 class="set-h">可选卡牌 <span class="bs-count">已选 ${selected.length} 张（至少 ${deckSelection.need}${deckSelection.max > deckSelection.need ? ' · 至多 ' + deckSelection.max : ''}）</span></h3>
+      ${deckSelection.cards.length < deckSelection.need ? `<p class="ov-note">[[icon:cross]] 背包可编卡牌不足 <b>${deckSelection.need}</b> 张（现有 ${deckSelection.cards.length} 张）——选完后按现有卡牌迎战首脑</p>` : ''}
+      <h3 class="set-h">可选卡牌 <span class="bs-count">已选 ${selected.length} 张（至少 ${need}${deckSelection.max > deckSelection.need ? ' · 至多 ' + deckSelection.max : ''}）</span></h3>
       <div class="bt-hand">${cardsHTML}</div>
       <div class="ov-btns">
         <button class="ov-btn ok" data-act="bossGo" ${ready ? '' : 'disabled'}>${ready ? `[[icon:swords]] 开始战斗（牌库 ${selected.length + deckSelection.starterCount} 张）` : `还需选择 ${need - selected.length} 张…`}</button>
@@ -1020,16 +1021,70 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
   // baseDelay：等出牌飞行落点后再结算（杀戮尖塔式：牌到手伤害才跳）
   // —— STS2 打击感两件套（2026-09-12 对齐） ——
   // AnimShake：x(t)=10·sin(4t)·sin(t/2)，t:0→2π、Cubic-Out 时间映射（快速颤动带衰减包络）
-  function stsShake(figEl, power = 1) {
+  // stopMs>0：开头插入静止段（演出层顿帧）——重击/终结一击先卡住一拍再弹开
+  function stsShake(figEl, power = 1, stopMs = 0) {
     if (!figEl || !figEl.animate) return;
     const T = Math.PI * 2, N = 32, kf = [];
+    const total = 1000 + stopMs;
+    const lead = stopMs / total;
+    if (stopMs) kf.push({ transform: 'translateX(0px)', offset: 0 });
     for (let i = 0; i <= N; i++) {
       const u = i / N;
       const t = T * (1 - Math.pow(1 - u, 3));
-      kf.push({ transform: `translateX(${(10 * power * Math.sin(4 * t) * Math.sin(0.5 * t)).toFixed(2)}px)`, offset: u });
+      kf.push({ transform: `translateX(${(10 * power * Math.sin(4 * t) * Math.sin(0.5 * t)).toFixed(2)}px)`, offset: lead + u * (1 - lead) });
     }
-    figEl.animate(kf, { duration: 1000, easing: 'linear' });
+    figEl.animate(kf, { duration: total, easing: 'linear' });
   }
+  // 自我受击：后仰 + 红染（原 .fx-hit-self CSS 类从未被挂载，2026-09-19 改走 WAAPI 落地；
+  // 玩家立绘在左侧面向敌人，后仰=向左拉开距离；关键帧结构沿用旧 stsSelfHit 设计）
+  function stsSelfHit(figEl, power = 1, stopMs = 0) {
+    if (!figEl || !figEl.animate) return;
+    const total = 450 + stopMs;
+    const lead = stopMs / total;
+    const kf = [
+      { transform: 'translateX(0)', filter: 'none', offset: 0 },
+      { transform: 'translateX(0)', filter: 'none', offset: lead },
+      { transform: `translateX(${(-8 * power).toFixed(1)}px)`, filter: 'brightness(1.6) saturate(1.6) drop-shadow(0 0 14px rgba(255,90,70,.8))', offset: lead + 0.25 * (1 - lead) },
+      { transform: `translateX(${(-3 * power).toFixed(1)}px)`, filter: 'brightness(1.15)', offset: lead + 0.6 * (1 - lead) },
+      { transform: 'translateX(0)', filter: 'none', offset: 1 },
+    ];
+    figEl.animate(kf, { duration: total, easing: 'ease-out' });
+  }
+  // 敌方攻击前摇（P1）：立绘向玩家方向突进再回弹——敌人面向左，突进=负 X
+  function foeLunge(figEl) {
+    if (!figEl || !figEl.animate) return;
+    figEl.animate([
+      { transform: 'translateX(0)' },
+      { transform: 'translateX(-14px) scale(1.04)', offset: 0.45 },
+      { transform: 'translateX(0)' },
+    ], { duration: 260, easing: 'cubic-bezier(.3,.7,.4,1)' });
+  }
+  // 诅咒施加彩闪（P1）：按诅咒 key 上色的边缘光一闪（替代已删除的粒子喷发）
+  const CURSE_TINT = {
+    burn: 'rgba(255,140,60,', bleed: 'rgba(220,60,70,', poison: 'rgba(140,200,90,',
+    freeze: 'rgba(140,215,255,', silence: 'rgba(170,140,200,', abreak: 'rgba(200,170,90,',
+    healban: 'rgba(180,90,160,',
+  };
+  function curseFlash(figEl, cls) {
+    if (!figEl || !figEl.animate) return;
+    const key = (String(cls).match(/curse-(\w+)/) || [])[1];
+    const col = CURSE_TINT[key] || 'rgba(200,120,255,';
+    figEl.animate([
+      { filter: 'none' },
+      { filter: `brightness(1.25) drop-shadow(0 0 18px ${col}.9)`, offset: 0.3 },
+      { filter: `brightness(1.25) drop-shadow(0 0 18px ${col}.9)`, offset: 0.55 },
+      { filter: 'none' },
+    ], { duration: 700, easing: 'ease-out' });
+  }
+  // 伤害类型染色（P1）：按伤害类型给命中贴图着色——攻击=原生琥珀不染、固定=炽橙、
+  // 法术=青蓝、真实=纯白；毒/灼烧 DoT 走 tintKey 优先（贴图黑底走 screen 混合，filter 只染纹样）
+  const IMPACT_TINT = {
+    fixed: 'sepia(1) saturate(2.8) hue-rotate(-15deg) brightness(1.25)',
+    spell: 'sepia(1) saturate(2.4) hue-rotate(160deg) brightness(1.15)',
+    true: 'saturate(0) brightness(1.9)',
+    poison: 'sepia(1) saturate(2.2) hue-rotate(55deg) brightness(1.1)',
+    burn: 'sepia(1) saturate(3) hue-rotate(-10deg) brightness(1.3)',
+  };
   // NDamageNumVfx：伤害数字抛体——随机初速上抛 + 重力下坠 + 后半程淡出（WAAPI 预采样）。
   // 随机全部走种子随机服务（random.test 禁 Math.random），'fx' 流不进对局存档口径
   function physicsFloat(span) {
@@ -1057,27 +1112,50 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
     list.forEach((f, listIdx) => {
       const fire = () => {
       const isSelf = f.unit === 'self';
+      const allyI = isSelf ? null : (/^ally:(\d+)$/.exec(String(f.unit)) || [])[1];   // 随从替伤：battle.core 推 'ally:N'
       const figEl = isSelf
         ? body.querySelector('#btSelf .sts-figure')
-        : body.querySelector(`.sts-foe[data-eidx="${f.unit}"] .sts-figure`);
+        : allyI != null
+          ? body.querySelector(`.sts-ally[data-ally-i="${allyI}"] .sts-figure`)
+          : body.querySelector(`.sts-foe[data-eidx="${f.unit}"] .sts-figure`);
       if (!figEl) return;
+      // 纯演出指令（无文字）：敌方攻击前摇 / 诅咒施加彩闪
+      if ((f.cls || '').includes('lungefx')) { if (!SDT.Motion?.reduceMotion()) foeLunge(figEl); return; }
+      if ((f.cls || '').includes('cursefx')) { if (!SDT.Motion?.reduceMotion()) curseFlash(figEl, f.cls); return; }
       const reduced = !!SDT.Motion?.reduceMotion();
       const stk = (f.cls || '').includes('stk');
       const isBlock = (f.cls || '').includes('block');
       const damage = !f.warm && !stk && !isBlock;
       const amt = parseInt(String(f.text).replace(/[^\d-]/g, ''), 10) || 0;
-      const heavy = damage && amt >= 10;   // 重击：≥10 点——更大命中贴图 + 更猛抖动 + 更多粒子
-      // STS2 口径：hurt 骨骼/序列帧动画与抖动互斥——帧播上了就不抖；敌人静图走正弦衰减抖动
-      const framesPlayed = damage && !reduced && playUnitFrames(isSelf ? 'hurt' : 'atk');
-      if (damage && !reduced && !framesPlayed) stsShake(figEl, heavy ? 1.55 : 1);
+      const heavy = damage && amt >= 10;   // 重击：≥10 点——更大命中贴图 + 更猛抖动 + 顿帧
+      const finisher = damage && feedbackClass(f).includes('fx-finisher');
+      const stopMs = (heavy || finisher) && !reduced ? 60 : 0;   // 演出层顿帧：先卡住一拍再弹开
+      // STS2 口径：hurt 骨骼/序列帧动画与抖动互斥——帧播上了就不抖；随从无帧集，不代播玩家动作。
+      // 攻击动作（atk）改在卡牌起飞时播（见 animateBattleTransition），此处不再倒挂重播
+      const framesPlayed = damage && !reduced && isSelf && playUnitFrames('hurt');
+      if (damage && !reduced && !framesPlayed) {
+        if (isSelf) stsSelfHit(figEl, heavy ? 1.35 : 1, stopMs);   // 自己：后仰+红染
+        else stsShake(figEl, heavy ? 1.55 : 1, stopMs);
+      }
       if (!reduced && !stk && SDT.VisualFX) SDT.VisualFX.burstAtElement(figEl, {
-        color: f.warm ? 0x61d69b : (isSelf ? 0xff6659 : 0xffb34d),
+        color: f.warm ? 0x61d69b : ((isSelf || allyI != null) ? 0xff6659 : 0xffb34d),
         count: f.warm ? 10 : (heavy ? 22 : 14),
       });
       if (isSelf && damage && !reduced) hurtFlash(ov);
       // 2026-09-13 老板：治疗闪绿光；自己攻击或造成伤害时轻微抖屏（受击红闪已有）
       if (isSelf && f.warm && !reduced) healFlash(ov);
-      if (damage && !isSelf && !reduced) screenShake(body);
+      if (damage && !isSelf && allyI == null && !reduced) screenShake(body);
+      // 掉血血条槽体红闪（样式 winter.css .hp-dropping；320ms 错峰配 300ms 清除避免竞态）
+      if (damage && !reduced) {
+        const unitEl = figEl.closest('.sts-unit');
+        const bar = unitEl && unitEl.querySelector('.bt-hpwrap');
+        if (bar) {
+          bar.classList.remove('hp-dropping');
+          void bar.offsetWidth;   // 强制 reflow，让连续掉血重播闪红
+          bar.classList.add('hp-dropping');
+          setTimeout(() => bar.classList.remove('hp-dropping'), 300);
+        }
+      }
       if (f.warm) {   // 治疗暖色滤镜（表情反馈·零美术）
         figEl.classList.add('fx-warm');
         setTimeout(() => figEl.classList.remove('fx-warm'), 950);
@@ -1094,7 +1172,12 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
         imp.style.margin = `${-half}px 0 0 ${-half}px`;
         imp.style.left = (r.left - ovR.left + r.width / 2) + 'px';
         imp.style.top = (r.top - ovR.top + r.height * 0.4) + 'px';
-        imp.style.setProperty('--imp-rot', Math.floor(Random.random('fx') * 360) + 'deg');
+        // 方向收敛（P1）：以贴图原生斜向为基准 ±22° 抖动（读得出「斩击」而非乱转的贴图）；
+        // 自伤/我方受击转 180° 镜像方向。伤害类型染色（攻击=原生琥珀不染）
+        const baseRot = (isSelf || allyI != null) ? 180 : 0;
+        imp.style.setProperty('--imp-rot', Math.floor(baseRot + Random.random('fx') * 44 - 22) + 'deg');
+        const tint = IMPACT_TINT[f.tintKey || f.type];
+        if (tint) imp.style.filter = tint;
         ov.appendChild(imp);
         imp.addEventListener('animationend', () => imp.remove(), { once: true });
         setTimeout(() => imp.remove(), 900);
@@ -1115,7 +1198,7 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
         setTimeout(() => span.remove(), 1400);   // 兜底：animationend 偶尔不触发时清掉不可见残骸
       }
       };
-      const delay = baseDelay + feedbackDelay(f.unit, perUnit, FEEDBACK_DELTA_MS);   // 同单位每多一段 +320ms
+      const delay = baseDelay + (f.delay || 0) + feedbackDelay(f.unit, perUnit, FEEDBACK_DELTA_MS);   // f.delay：演出错拍（如敌方前摇先播 130ms）；同单位每多一段 +320ms
       if (delay) setTimeout(fire, delay); else fire();
     });
   }
@@ -1354,7 +1437,10 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
     playedEvs.forEach(ev => { if (ev.kind === 'play') queueIdx.set(ev.uid, queueIdx.size); });
     const queueN = queueIdx.size;
     playedEvs.forEach(ev => {
+      // 攻击动作随卡牌起飞播（P1 时序修正）：法术=cast 施法舒展、武术=atk 起手连命中——
+      // atk-wind 320ms ≈ 飞行 400ms，hit 帧正好落在伤害数字冒出瞬间（此前在命中后才播，倒挂）
       if (ev.kind === 'play' && ev.type === '法术') playUnitFrames('cast');   // 批次D：施法动作
+      else if (ev.kind === 'play' && ev.type === '武术') playUnitFrames('atk');
       const old = prev && (prev.cards[ev.uid] || Object.values(prev.cards).find(c => c.name === ev.name));
       if (!old) return;
       const sink = exitSinkFor(ev, old.rect, body, ovR);

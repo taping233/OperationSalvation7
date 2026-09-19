@@ -60,11 +60,31 @@ import THUMB_MANIFEST from './generated/thumb-manifest.js';
   // 上限压到 128：预热仍把文件拉进 HTTP/磁盘缓存，但不再要求全部常驻解码位图。
   const warmPool = [];
   const WARM_POOL_CAP = 128;
+  // 解码位图字节预算：只按张数封顶挡不住大图——CSS 补热的 75 张 1080p 级场景图
+  // 恰好落在预热尾声顶掉早期小图，128 张口径理论上可钉住数百 MB。按解码字节数
+  // （naturalWidth×naturalHeight×4）双保险封顶，超预算从最旧开始淘汰。
+  const WARM_POOL_BYTES = 256 * 1024 * 1024;
+  let warmPoolBytes = 0;
+  function releaseWarmedHead() {
+    const im = warmPool.shift();
+    if (!im) return;
+    im.__released = true;
+    warmPoolBytes -= im.__bytes || 0;
+  }
   function retainWarmed(im) {
     warmPool.push(im);
-    if (warmPool.length > WARM_POOL_CAP) warmPool.shift();
+    if (warmPool.length > WARM_POOL_CAP) releaseWarmedHead();
+    // load 异步到账后才拿得到尺寸：到账时若已被淘汰（__released）则不再计账
+    im.addEventListener('load', () => {
+      if (im.__released) return;
+      im.__bytes = (im.naturalWidth || 0) * (im.naturalHeight || 0) * 4;
+      warmPoolBytes += im.__bytes;
+      while (warmPool.length > 1 && (warmPoolBytes > WARM_POOL_BYTES || warmPool.length > WARM_POOL_CAP)) {
+        releaseWarmedHead();
+      }
+    }, { once: true });
   }
-  function warm(urls) {
+  function warm(urls, retain = true) {
     for (let u of urls) {
       if (!u || warmedUrls.has(u)) continue;
       warmedUrls.add(u);
@@ -72,7 +92,7 @@ import THUMB_MANIFEST from './generated/thumb-manifest.js';
       im.decoding = 'async';
       im.onload = () => { try { im.decode?.()?.catch?.(() => {}); } catch (_) {} };
       im.src = u;
-      retainWarmed(im);
+      if (retain) retainWarmed(im);
     }
   }
   // 卡面缩略图（assets/thumbs/**，离线烘焙见 game/tools/bake-card-thumbs.cjs）：
@@ -195,8 +215,14 @@ function characterArt(value, full=false) {
 }
 
   SDT.Art = {
-    // 提前预载/解码位图（传 <img> 同款最终 URL），翻页/切页前调用可消掉首帧解码卡顿
-    warm,
+    // 提前预载/解码位图（传 <img> 同款最终 URL），翻页/切页前调用可消掉首帧解码卡顿。
+    // opts.retain（默认 true）：把解码位图钉进预热池；CSS 背景图传 false——浏览器对
+    // CSS background 有自己的图片缓存，JS 持引用帮不到它，只会白占内存。
+    warm(urls, opts) { return warm(urls, !opts || opts.retain !== false); },
+    // 选人页五张 full 立绘预热（2026-09-19 走查 B8）：黑像/星月是 4K 横版图，
+    // 首开现场解码慢，头像条/大立绘会先露底色（白/黑）几秒，观感像坏图。
+    // openClassChoice 打开选人页前调用，与卡面预热同一解码池。
+    warmClassRoster() { warm(Object.values(FIGURE_FULL_ART).map(p => assetUrl(ROOT + p))); },
     // 就地预解码某块 DOM 里已渲染的 <img>（卡牌库开页后补热用）：
     // 启动的全量预热清单补的是原图，库里显示的是 assets/thumbs/ 缩略图，不补这一步
     // 首轮滚动就要现场解码——实测首轮滚动 32~35fps → 44~45fps，长帧减半。

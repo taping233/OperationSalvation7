@@ -118,6 +118,10 @@
     box-shadow: inset 0 1px 3px rgba(63,63,63,.25);
     font-size: .78em; line-height: 1.3; overflow: hidden; }
   .hsc-desc:empty::before { content: '效果描述（可选）'; color: #848484; }
+  /* 长描述降级字号：≥22 字再收一档、≥32 字两档，防 sm 卡面底部裁字（2026-09-19 走查 B5；
+     lg/xl 特写卡由 card-v3.css 的 id 级选择器接管，不受这两档影响） */
+  .hsc-desc.long { font-size: .7em; line-height: 1.26; }
+  .hsc-desc.long.xlong { font-size: .64em; }
   /* 伤害词条：左下角红色宝石 */
   .hsc-dmg { position: absolute; z-index: 3; bottom: -.5em; left: -.55em; width: 2.3em; height: 2.6em;
     display: flex; flex-direction: column; align-items: center; justify-content: flex-end;

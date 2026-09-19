@@ -48,7 +48,7 @@ let hubTab = 'deploy';
     UI.showOverlay('', `
       <div class="pg hub hub-${hubTab}" id="hubMain">
        <header class="hub-head hub-head-min">
-          <h2>远征基地</h2><span class="hub-slot-label">档位 0${getActiveSlot() || '—'}</span>
+          <h2>远征基地</h2><span class="hub-slot-label">${getActiveSlot() ? `档位 0${getActiveSlot()}` : '未选档'}</span>
          <button class="hub-back" data-act="closeBase" title="返回主菜单（Esc）">← 返回</button>
           ${UI.helpBtn('hub-' + hubTab)}
           <span class="pg-spacer"></span>

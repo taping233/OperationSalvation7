@@ -4,7 +4,7 @@
  * 由 game.run.js 拆出。层位最高（L2）：依赖 scenes（L0）与 altar（L1），不被二者依赖。
  * ============================================================ */
 import { esc } from './shared.js';
-import { FX, MAP, cellCenter, curLayer, gainCoins, game, markSeen, modeCfg, pick, saveGame, scaledEnemy, weighted } from './game.session.js';
+import { MAP, cellCenter, curLayer, gainCoins, game, markSeen, modeCfg, pick, saveGame, scaledEnemy, weighted } from './game.session.js';
 import { tone } from './sound.js';
 import { _set_cardPageOpen } from './game.cardslib.js';
 import { EVENT_SCENE_META } from './game.run.data.js';
@@ -113,12 +113,6 @@ function resolveCell() {
 
   // 杀戮尖塔式房间切换：从落脚开始到本格全部结算完成，地图始终由全屏房间页取代。
   UI.beginRoom();
-
-  // 落点脉冲（按事件类型着色）
-  const PULSE_COL = { coin: '#f5c542', chest: '#f5c542', key: '#f5c542', fire: '#f2854a',
-    shop: '#52d273', battle: '#ff6b5e', rations: '#7fdd9c', wood: '#c8956a',
-    event: '#41d0a8', emergencyExit: '#52d273', altar: '#b77ad8', boss: '#ff6b5e' };
-  FX.pulse(game.pos.x, game.pos.y, PULSE_COL[def && def.type] || '#d8b46a');
 
   // 1) 战斗格：先给出短暂接敌过场，再进入遭遇战。
   if (def && def.type === 'battle') {
@@ -265,6 +259,9 @@ export function runEventDeck() {
 function triggerEventCard(card) {
   game.eventLog = game.eventLog || [];
   game.eventLog.push({ name: card.name, desc: card.desc || '', turn: game.turn });
+  // 封顶：eventLog 随对局只增不减，而每次落盘都会全量 JSON.stringify——
+  // 长局会让每次 persistSave 的同步序列化越来越慢。留 200 条足够回溯。
+  if (game.eventLog.length > 200) game.eventLog = game.eventLog.slice(-200);
   UI.log(`[[icon:dice]] 触发事件【<b>${esc(card.name)}</b>】${card.desc ? '· ' + esc(card.desc) : ''}`, 'sys');
   // 主界面大字揭晓：展示事件卡卡面与描述，点击任意处后结算
   game.state = 'modal';

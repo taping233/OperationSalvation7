@@ -1465,7 +1465,7 @@ body #overlay .battle-stage.sts .sts-hand .bt-slot:hover .bt-card:not(.off):not(
   text-shadow:0 0 8px rgba(200,40,30,.85),0 2px 3px #000,-1.5px 0 0 #6e1815,1.5px 0 0 #6e1815,0 -1.5px 0 #6e1815;
 }
 #overlay .battle-stage.sts .sts-float.hurt{font-size:42px;color:#ffb3a0}
-#overlay .battle-stage.sts .sts-float.finisher{
+#overlay .battle-stage.sts .sts-float.fx-finisher{
   font-size:46px;color:#ffd76a;
   text-shadow:0 0 12px rgba(255,170,60,.9),0 2px 4px #000,-2px 0 0 #7a4a10,2px 0 0 #7a4a10;
 }
@@ -1536,30 +1536,15 @@ body.reduce-motion #layerBanner { animation: none !important; }
 #overlay .card.discover .bt-hand.sac-hand{gap:16px;padding:14px 4px 8px}
 #overlay .card.discover .bt-hand.sac-hand .hs-card{font-size:14px}
 #overlay .card.chest .bt-hand{gap:28px}
-/* —— 说明文字收敛：卡面只留 名/费/画/词条角标/伤害·币值，描述与类型铭牌悬停浮出 —— */
-#overlay .card.discover .bt-card .hsc-desc,
-#overlay .card.discover .bt-card .hsc-type,
-#overlay .card.chest .bt-card .hsc-desc,
-#overlay .card.chest .bt-card .hsc-type{display:none}
-#overlay .card.discover .bt-card:hover .hsc-desc,
-#overlay .card.chest .bt-card:hover .hsc-desc{
-  display:block;position:absolute;left:5%;right:5%;bottom:3.5%;z-index:9;
-  margin:0;padding:.4em .48em;text-align:left;font-size:.56em;line-height:1.5;
-  color:#d5dfe6!important;background:linear-gradient(180deg,rgba(9,15,21,.95),rgba(5,9,13,.97))!important;
-  border:1px solid rgba(160,190,212,.4);border-radius:.32em;
-  box-shadow:0 .18em .7em rgba(0,0,0,.65);
-}
-#overlay .card.discover .bt-card:hover .hsc-desc span,
-#overlay .card.chest .bt-card:hover .hsc-desc span{display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden}
 
-/* ═══ 2026-09-15 老板复检奖励界面（Friday）：卡距拉宽 · 卡高统一 · 面板真透明 ═══
-   上面 09-15 重做块落地后老板实测仍不满意：28px 卡距依旧显挤、词条行有无把卡身
-   拉得参差（height:auto 只该服务于牌库/图鉴流）、.76/.86 的玻璃近乎实心板。
-   纯追加级联覆盖，不改上面块的任何行。 */
+/* 仅奖励浮层固定卡身尺寸，其他场景保留随内容伸缩。 */
 #overlay .card.chest{
-  background:linear-gradient(180deg,rgba(14,24,33,.40),rgba(5,9,14,.55))!important;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  backdrop-filter:none;
+  overflow-y:auto;
 }
-/* 奖励行卡距：三选一给足呼吸感（实测 5/6 卡多行排布 48px 也放得下） */
-#overlay .card.chest .bt-hand{gap:48px}
-/* 奖励行内卡高统一钉回 10:14 固定框：顶底两条线对齐，大小完全一致 */
+#overlay .card.chest::before{display:none}
+#overlay .card.chest .bt-hand{gap:48px;align-items:flex-start}
 #overlay .card.chest .bt-hand .hs-card{height:14em!important}

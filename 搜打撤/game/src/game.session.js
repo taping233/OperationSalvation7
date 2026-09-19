@@ -30,7 +30,7 @@ function configureGameRuntime(hooks) {
  *   紧急撤离点：花 10 币直接撤离
  * ============================================================ */
   const MAP = SDT.MAP;
-  const FX = SDT.FX; // 渲染特效：飘字 / 脉冲 / 震屏
+  const FX = SDT.FX; // 顿帧反馈（hitStop；2D 飘字/脉冲/震屏已废弃，见 renderer.fx.js）
 
   const store = new GameStore(MAP);
   const game = store.state;
@@ -101,10 +101,9 @@ function configureGameRuntime(hooks) {
   game.damage = function (n, reason) {
     game.hp -= n;
     const p = fxAt();
-    // 三档反馈（game-feel）：玩家受伤=large（大飘字+震屏+顿帧+受击音），重伤加重
+    // 三档反馈（game-feel）：玩家受伤=large（顿帧+受击音）；≥10 与战斗内重击口径一致
     FX.feedback(p.x, p.y, {
-      text: `-${n} 生命`, color: '#ff6b5e', big: true,
-      tier: n >= 8 ? 'large' : 'medium', sfx: 'strike',
+      tier: n >= 10 ? 'large' : 'medium', sfx: 'strike',
     });
     UI.log(`[[icon:heart]] ${reason ? reason : ''}损失 <b>${n}</b> 点生命（${Math.max(0, game.hp)}/${game.maxHp}）`, 'warn');
     if (game.hp <= 0) doDeath();
@@ -242,8 +241,6 @@ function configureGameRuntime(hooks) {
     // 同名物品堆叠占一格；背包上限 bagCap() 格（基地可扩建）
     let slot = game.inventory.find(it => it.name === tpl.name && it.tier === (tpl.tier || 'C'));
     if (!slot && usedSlots() >= bagCap()) {
-      const pf = fxAt();
-      FX.float('背包已满', pf.x, pf.y, '#ff6b5e');
       SDT.Sound.sfx('deny');
       UI.log(`[[icon:bag]] 背包已满（${usedSlots()}/${bagCap()} 格，可在基地用木材扩建），无法获得 <b>${tpl.name}</b>`, 'warn');
       return null;
@@ -253,8 +250,6 @@ function configureGameRuntime(hooks) {
       game.inventory.push(slot);
     }
     slot.count += n;
-    const ps = fxAt();
-    FX.float(`+${tpl.name}`, ps.x, ps.y, '#c9b6ee');
     UI.log(`获得 <b>${tpl.name}${slot.count > 1 ? ` ×${slot.count}` : ''}</b>（¥${(tpl.value || 0) * slot.count}）`, 'loot');
     UI.refresh(game);
     return slot;
@@ -337,6 +332,7 @@ function configureGameRuntime(hooks) {
 
   // ---------- 存档（五档位，互相独立；基地数据也按档位隔离，见 base.js） ----------
   let activeSlot = null;                // 当前游玩的档位（1..5），标题界面为 null
+  let saveFailedWarned = false;         // 写档失败只警示一次，避免每次落盘刷屏
 
   const hasRun = (i) => RunStorage.has(i);                            // 该档有进行中的对局
   const hasSlot = (i) => hasRun(i) || SDT.Base.hasSlot(i);           // 该档位已被创建
@@ -356,7 +352,7 @@ function configureGameRuntime(hooks) {
     if (!activeSlot) return;
     syncPlayTime();
     assertZones();
-    RunStorage.write(activeSlot, {
+    const ok = RunStorage.write(activeSlot, {
         seed: Random.seed, rngState: Random.snapshot(),
         mapSeed: game.mapSeed ?? Random.seed,
         generatorVersion: game.generatorVersion ?? GENERATOR_VERSION,
@@ -393,6 +389,13 @@ function configureGameRuntime(hooks) {
         nestTargetedBox: game.nestTargetedBox || 0,
         pendingRunePick: game.pendingRunePick || null,
       });
+    if (!ok && !saveFailedWarned) {
+      // 写失败（典型：localStorage 配额满，五档对局+基地+留言共约 5MB）不提示
+      // 就是无声丢档。只警示一次，玩家处置后同会话内不再刷屏。
+      saveFailedWarned = true;
+      UI.log('[[icon:cross]] 对局存档写入失败（存储空间可能已满），进度未被保存——请导出存档或删除旧档位', 'warn');
+      console.error('[save] RunStorage.write 失败：对局进度未落盘（配额满或存储不可用）');
+    }
   }
 
   function syncPlayTime() {
@@ -541,7 +544,7 @@ function configureGameRuntime(hooks) {
     getActiveSlot: () => activeSlot,
     setActiveSlot: value => { activeSlot = value; },
   });
-  const { setLobby, showTitle, startNewGame, exitToTitle, quitGame, openSettings } = menuController;
+  const { setLobby, showTitle, startNewGame, exitToTitle, quitGame, openSettings, openLeaveMenu } = menuController;
 
   // ---------- 流程 ----------
   const newUid = () => 'o' + Date.now().toString(36) +
@@ -633,7 +636,6 @@ function configureGameRuntime(hooks) {
     game.visited = {};   // 已结算过的一次性格（防回头路重刷战斗/宝箱/事件）
     game.seen = {};      // 战争迷雾：走过的节点 + 当前相邻节点可见，其余隐藏
     SDT.Sound.music('board');   // 出发：切入行军氛围
-    FX.clear();
     UI.clearLog();
     UI.log(`欢迎来到<b>代号7</b>：本次玩法【<b>${modeCfg().name}</b>】——${modeCfg().ckpt}`, 'sys');
     UI.log('点击相邻节点前进，落脚触发事件；层间闸门通往更深区域，终层可完成撤离', 'sys');
@@ -788,7 +790,7 @@ function configureGameRuntime(hooks) {
     UI.refresh(game);
   }
 
-export { FX, MAP, MODES, SLOT_COUNT, bagCap, buildDerived, cam, canAcceptCard, canvas, cardStacks, cellCenter, clearSave, configureGameRuntime, ctx, curLayer, doDeath, dpr, markSeen, safeCap, enterLayer, exitToTitle, gainCoins, game, hasRun, migrateOldSave, modeCfg, newRun, newUid, openSettings, pick, quitGame, rndDice, safeUsed, saveGame, scaledEnemy, setLobby, showTitle, startNewGame, syncPlayTime, usedSlots, weighted };
+export { FX, MAP, MODES, SLOT_COUNT, bagCap, buildDerived, cam, canAcceptCard, canvas, cardStacks, cellCenter, clearSave, configureGameRuntime, ctx, curLayer, doDeath, dpr, markSeen, safeCap, enterLayer, exitToTitle, gainCoins, game, hasRun, migrateOldSave, modeCfg, newRun, newUid, openLeaveMenu, openSettings, pick, quitGame, rndDice, safeUsed, saveGame, scaledEnemy, setLobby, showTitle, startNewGame, syncPlayTime, usedSlots, weighted };
 const _set_dpr = (v) => { dpr = v; };
 export { _set_dpr };
 export const getActiveSlot = () => activeSlot;

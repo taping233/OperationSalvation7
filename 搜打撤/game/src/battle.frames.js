@@ -67,13 +67,23 @@ function ensureApp() {
     host.style.cssText = 'position:absolute;inset:0;pointer-events:none;z-index:6;';
     if (ov) ov.appendChild(host);
     const app = new Application({
-      resizeTo: ov || window, backgroundAlpha: 0, antialias: true,
+      // antialias 关闭：帧图是预烘 webp 纹理，纹理采样自带双线性过滤，MSAA 对
+      // 纹理四边形毫无收益，只烧全屏 MSAA 带宽。
+      resizeTo: ov || window, backgroundAlpha: 0, antialias: false,
       autoStart: false, powerPreference: 'low-power',
     });
     host.appendChild(app.view);
     sprite = new Sprite();
     sprite.anchor.set(0.5, 1);   // 底部中心锚点：脚底对齐
     app.stage.addChild(sprite);
+    // 序列帧节奏最慢 ~1.5s/帧，30fps 上限足够顺滑：不设限就会在 120Hz 屏上按刷新率
+    // 全速渲染全屏透明画布（120 次合成/秒）白烧 GPU。配合脏标记跳帧见 ticker。
+    app.ticker.maxFPS = 30;
+    // 画布尺寸变化会清空 WebGL 后备缓冲：置脏补一帧，否则脏标记跳帧会在
+    // resize 后留一帧空画布。
+    if (typeof ResizeObserver !== 'undefined') {
+      new ResizeObserver(() => { if (cur) cur.dirty = true; }).observe(app.view);
+    }
     return { app, host };
   })().catch(error => {
     console.warn('[SDT.BattleFrames] PixiJS init failed:', error);
@@ -132,12 +142,17 @@ function wakeRenderer(holdMs = 350) {
 function setTexture(tex) {
   if (!sprite || !tex || sprite.texture === tex) return;
   sprite.texture = tex;
+  if (cur) cur.dirty = true;
 }
 
 function layout() {
   if (!cur || !cur.fig || !cur.fig.isConnected) return;
   const r = cur.fig.getBoundingClientRect();
   if (r.width <= 0) return;
+  const lr = cur.lastRect;
+  if (!lr || r.left !== lr[0] || r.top !== lr[1] || r.width !== lr[2] || r.height !== lr[3]) {
+    cur.dirty = true;   // 位/尺寸变了才需要重画；sprite 属性照常赋值（幂等）
+  }
   // sprite 高度对齐 img 显示高，宽度按帧画布纵横比；底部中心锚点贴 img 底边中点
   const h = r.height * 1.02;
   sprite.x = r.left - cur.ovLeft + r.width / 2;
@@ -213,7 +228,12 @@ function startLoop() {
     app._bfHooked = true;
     app.ticker.add(() => {
       tickLoop();
-      if (cur && cur.fig && cur.fig.isConnected) app.renderer.render(app.stage);
+      // 脏标记跳帧：纹理与 rect 都没变的 tick 直接跳过 renderer.render，
+      // 上一帧内容继续显示（WebGL 画布不清屏就保持）；maxFPS=30 已封顶频率。
+      if (cur && cur.dirty && cur.fig && cur.fig.isConnected) {
+        cur.dirty = false;
+        app.renderer.render(app.stage);
+      }
     });
     app.stop();   // autoStart=false：只在 wakeRenderer 拉起时跑
   });
@@ -260,6 +280,7 @@ async function attach(body) {
   cur = {
     role, fig, img, set: set.set, seqs: set.seqs, play: null, fi: 0, tNext: 0,
     fallback: set.seqs.get('idle')[0], lastRect: null, ovLeft: ovR.left, ovTop: ovR.top,
+    dirty: true,   // 首帧必须渲染
   };
   img.style.visibility = 'hidden';   // 保布局，内容由 sprite 呈现
   hostVisible(true);
@@ -287,6 +308,9 @@ function hide() {
   if (host) host.hidden = true;
   hostVisible(false);
   if (appPromise) appPromise.then(rt => { if (rt) rt.app.stop(); });
+  // 轮询 interval 只在战斗立绘在场时有意义：hide 后不清理会全程空转（每 200ms
+  // 一次 rect 读取直到进程结束）。
+  if (pollTimer) { clearInterval(pollTimer); pollTimer = 0; }
 }
 
 document.addEventListener('visibilitychange', () => {
