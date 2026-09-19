@@ -11,6 +11,7 @@ import { Random } from './random.js';
 
 // 基地当前页签（原为隐式全局，ESM 严格模式下必须显式声明）
 let hubTab = 'deploy';
+let hubCollectionView = 'backs';
   function openBaseHub(tab) {
     game.state = 'modal';
     _set_cardPageOpen(true);
@@ -93,6 +94,11 @@ let hubTab = 'deploy';
       renderHub();
     });
     UI.act('hubTab', (d) => { hubTab = d.tab; renderHub(); });
+    UI.act('hubCollectionView', (d) => {
+      if (!['backs', 'achievements', 'classes'].includes(d.view)) return;
+      hubCollectionView = d.view;
+      renderHub();
+    });
     UI.act('selMode', (d) => { B.data.selMode = d.mode; B.save(); renderHub(); });
     UI.act('nestDeploy', () => { SDT.Nest.openNestPrep(); });
     UI.act('deploy', () => { openDepartPrep(); });
@@ -929,21 +935,39 @@ let hubTab = 'deploy';
 
   // —— 人物页：各人物熟练度等级 ——
   function hubClassesHTML() {
-    const rows = SDT.Meta.classSummary().map(c => `
-      <div class="ach-row${c.lv > 1 || c.xp > 0 ? ' done' : ''}">
-        <div class="cls-hub-art">${SDT.Art.classArt(c.cls)}</div>
-        <div class="ach-info">
-          <b>${esc(characterName(c.cls))} <span style="color:#e0a458;font-size:12px">Lv.${c.lv}${c.maxed ? ' · MAX' : ''}</span></b>
-          <span>熟练加成：${SDT.Meta.perkText(c.lv)}（出征时生效） · 人物卡 ${c.pool} 张</span>
-          <div class="xp-bar"><i style="width:${c.maxed ? 100 : (c.xp / c.need * 100).toFixed(1)}%"></i></div>
-          <div class="xp-txt">${c.maxed ? '已满级' : `经验 ${c.xp} / ${c.need}`}</div>
+    const summary = SDT.Meta.classSummary();
+    const totalCards = summary.reduce((n, c) => n + c.pool, 0);
+    const trained = summary.filter(c => c.lv > 1 || c.xp > 0).length;
+    const rows = summary.map((c, index) => {
+      const pct = c.maxed ? 100 : Math.min(100, c.need ? c.xp / c.need * 100 : 0);
+      return `<article class="class-dossier${c.lv > 1 || c.xp > 0 ? ' trained' : ''}">
+        <div class="class-dossier-art">${SDT.Art.classArt(c.cls)}</div>
+        <div class="class-dossier-shade"></div>
+        <div class="class-dossier-index">0${index + 1}</div>
+        <div class="class-dossier-copy">
+          <span class="class-dossier-kicker">FIELD OPERATIVE</span>
+          <h3>${esc(characterName(c.cls))}</h3>
+          <p>${esc(SDT.Meta.perkText(c.lv))}</p>
+          <div class="class-dossier-meta"><b>Lv.${c.lv}${c.maxed ? ' · MAX' : ''}</b><span>人物卡 ${c.pool} 张</span></div>
+          <div class="xp-bar" aria-label="熟练度 ${pct.toFixed(0)}%"><i style="width:${pct.toFixed(1)}%"></i></div>
+          <div class="xp-txt">${c.maxed ? '熟练度已满' : `经验 ${c.xp} / ${c.need}`}</div>
         </div>
-      </div>`).join('');
+      </article>`;
+    }).join('');
     return `
-      <section class="hub-card">
-        <h3>[[icon:medal]] 人物熟练度</h3>
-        <div class="ach-list">${rows}</div>
-      </section>`;
+      <section class="class-command">
+        <div class="class-command-copy">
+          <span class="section-kicker">BASE PERSONNEL // 05</span>
+          <h3>人物档案</h3>
+          <p>熟练度加成会在出征时自动生效。收藏对应人物的职业卡与能力卡，可继续积累经验。</p>
+        </div>
+        <div class="class-command-stats">
+          <span><small>在册人物</small><b>${summary.length}</b></span>
+          <span><small>已培养</small><b>${trained}</b></span>
+          <span><small>人物卡池</small><b>${totalCards}</b></span>
+        </div>
+      </section>
+      <section class="class-dossier-grid" aria-label="人物熟练度档案">${rows}</section>`;
   }
 
   // —— 职业收藏室（2026-09-09：成就系统 → 成就与职业收藏室系统）——
@@ -1024,16 +1048,33 @@ let hubTab = 'deploy';
         <span class="dim">${unlocked ? (on ? '[[icon:check]] 使用中' : '点击装备') : '[[icon:lock]] ' + b.from}</span>
       </button>`;
     }).join('');
+    const collTotal = M.collTotal();
+    const collProgress = M.collProgress();
+    const unlockedBacks = (SDT.Cards.CARD_BACKS || []).filter(b => B.isBackUnlocked(b.id)).length;
+    const content = hubCollectionView === 'achievements'
+      ? `<section class="hub-card collection-panel"><h3>[[icon:trophy]] 成就记录 <span class="set-tip">${doneN} / ${M.ACHIEVEMENTS.length} 已解锁</span></h3><div class="ach-list">${rows}</div></section>`
+      : hubCollectionView === 'classes'
+        ? collRoomHTML()
+        : `<section class="hub-card collection-panel"><h3>[[icon:cards]] 卡背图鉴 <span class="set-tip">${unlockedBacks} / ${(SDT.Cards.CARD_BACKS || []).length} 已解锁</span></h3><div class="back-grid">${backsHTML}</div></section>`;
     return `
-      <section class="hub-card">
-        <h3>[[icon:cards]] 卡背图鉴</h3>
-        <div class="back-grid">${backsHTML}</div>
+      <section class="collection-command">
+        <div class="collection-command-copy">
+          <span class="section-kicker">ARCHIVE COLLECTION // 07</span>
+          <h3>收藏档案室</h3>
+          <p>卡背、成就与人物收藏分区归档。切换分类不会离开基地，也不会丢失当前浏览位置。</p>
+        </div>
+        <div class="collection-command-stats">
+          <span><small>卡背</small><b>${unlockedBacks}/${(SDT.Cards.CARD_BACKS || []).length}</b></span>
+          <span><small>成就</small><b>${doneN}/${M.ACHIEVEMENTS.length}</b></span>
+          <span><small>人物收藏</small><b>${collProgress}/${collTotal}</b></span>
+        </div>
       </section>
-      <section class="hub-card">
-        <h3>[[icon:trophy]] 成就 <span class="set-tip">${doneN} / ${M.ACHIEVEMENTS.length} 已解锁</span></h3>
-        <div class="ach-list">${rows}</div>
-      </section>
-      ${collRoomHTML()}`;
+      <nav class="collection-tabs" aria-label="收藏分类">
+        <button class="${hubCollectionView === 'backs' ? 'on' : ''}" data-act="hubCollectionView" data-view="backs" aria-pressed="${hubCollectionView === 'backs'}">[[icon:cards]] 卡背图鉴</button>
+        <button class="${hubCollectionView === 'achievements' ? 'on' : ''}" data-act="hubCollectionView" data-view="achievements" aria-pressed="${hubCollectionView === 'achievements'}">[[icon:trophy]] 成就记录</button>
+        <button class="${hubCollectionView === 'classes' ? 'on' : ''}" data-act="hubCollectionView" data-view="classes" aria-pressed="${hubCollectionView === 'classes'}">[[icon:sparkles]] 人物收藏</button>
+      </nav>
+      ${content}`;
   }
 
   function closeBase() {

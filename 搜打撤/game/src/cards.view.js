@@ -35,10 +35,14 @@ export function cardHTML(c, cls, opts) {
   let key;
   try { key = (cls || '') + '|' + JSON.stringify(opts || null); }
   catch (e) { return buildCardHTML(c, cls, opts); }   // opts 含循环引用等异常：放弃缓存直算
-  const hit = cardHTMLMemo.get(c);
-  if (hit && hit.key === key) return hit.html;
+  let variants = cardHTMLMemo.get(c);
+  if (variants?.has(key)) return variants.get(key);
   const html = buildCardHTML(c, cls, opts);
-  cardHTMLMemo.set(c, { key, html });
+  if (!variants) {
+    variants = new Map();
+    cardHTMLMemo.set(c, variants);
+  }
+  variants.set(key, html);
   return html;
 }
 

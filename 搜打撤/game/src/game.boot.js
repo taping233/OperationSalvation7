@@ -6,6 +6,7 @@ import { MAP } from './game.session.js';
 import { SLOT_COUNT, buildDerived, cam, canvas, configureGameRuntime, ctx, dpr, game, hasRun, migrateOldSave, openLeaveMenu, openSettings, openTitleGuide, quitGame, saveGame, setLobby, showTitle, startNewGame, _set_dpr, _set_cam } from './game.session.js';
 import { bindRunMixins, devForceBattle, devJumpNode, moveTo, openDevConsole, reenterCell, openClassChoice, openShop, showRunTransition } from './game.run.js';
 import { PRELOAD_SCENES } from './game.run.data.js';
+import { PERFORMANCE_BUDGETS, STARTUP_SCENE_KEYS } from './performance-budgets.js';
 import { openBaseHub } from './game.hub.js';
 import { bindBagMixins, showBackpack, setBagReturnHook } from './game.bag.js';
 import { configureShopRuntime } from './game.run.shop.js';
@@ -106,6 +107,7 @@ import { renderMiniMap } from './game.session.js';
     canvas.addEventListener('pointerleave', () => {
       if (pointerId == null) {
         pendingHover = null;
+        if (game.hover) renderScheduler.invalidate();
         game.hover = null;
         canvas.style.cursor = 'grab';
         UI.hideTooltip();
@@ -126,7 +128,12 @@ import { renderMiniMap } from './game.session.js';
       if (e.ctrlKey && !e.altKey && !e.metaKey && (e.key === 'l' || e.key === 'L')) {
         const ov = UI.el.overlay;
         const consoleOpen = !ov.hidden && ov.querySelector?.('#devcSearch');
-        if (consoleOpen) { UI.hideOverlay(); e.preventDefault(); return; }
+        if (consoleOpen) {
+          if (game.battleActive && SDT.Battle.commands?.refreshView) SDT.Battle.commands.refreshView();
+          else UI.hideOverlay();
+          e.preventDefault();
+          return;
+        }
         openDevConsole();
         e.preventDefault();
         return;
@@ -329,6 +336,7 @@ import { renderMiniMap } from './game.session.js';
   function updateHover(e) {
     const r = canvas.getBoundingClientRect();
     if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) {
+      if (game.hover) renderScheduler.invalidate();
       game.hover = null;
       UI.hideTooltip();
       return;
@@ -337,7 +345,10 @@ import { renderMiniMap } from './game.session.js';
     const n = pickNode(w.x, w.y, true);
     const legal = !!n && game.state === 'idle' && isReachable(n);
     canvas.style.cursor = legal ? 'pointer' : n ? (game.devMode ? 'cell' : 'not-allowed') : 'grab';
-    if (n !== game.hover) SDT.Sound.sfx('hover');   // 悬停结点变化时轻提示一声
+    if (n !== game.hover) {
+      SDT.Sound.sfx('hover');   // 悬停结点变化时轻提示一声
+      renderScheduler.invalidate();
+    }
     game.hover = n;
     if (!n) { UI.hideTooltip(); return; }
     UI.showTooltip(e.clientX - r.left, e.clientY - r.top, ...hoverInfo(n));
@@ -371,14 +382,51 @@ import { renderMiniMap } from './game.session.js';
 
   // ---------- 主循环 ----------
   const ELAPSED_STATES = new Set(['idle', 'moving', 'modal']);
+  const IDLE_LOOP_MS = 250;
   let lastT = performance.now();
   let coverTitle = null, coverExit = null;   // 标题 / 退出界面（DOMContentLoaded 时缓存）
+  let wasCanvasCovered = true;
+  let loopFrame = 0, idleLoopTimer = 0;
+
+  function requestLoopFrame() {
+    if (idleLoopTimer) {
+      clearTimeout(idleLoopTimer);
+      idleLoopTimer = 0;
+    }
+    if (loopFrame) return;
+    loopFrame = requestAnimationFrame(now => {
+      loopFrame = 0;
+      loop(now);
+    });
+  }
+
+  function scheduleNextLoop(active = false) {
+    if (active) {
+      requestLoopFrame();
+      return;
+    }
+    if (loopFrame || idleLoopTimer) return;
+    idleLoopTimer = setTimeout(() => {
+      idleLoopTimer = 0;
+      requestLoopFrame();
+    }, IDLE_LOOP_MS);
+  }
+
+  renderScheduler.setWake(requestLoopFrame);
+  document.addEventListener('visibilitychange', requestLoopFrame);
+
   function loop(now) {
-    requestAnimationFrame(loop);
-    const dt = Math.min(0.05, (now - lastT) / 1000);
+    const realDt = Math.max(0, (now - lastT) / 1000);
+    const dt = Math.min(0.05, realDt);
     lastT = now;
+    const stats = SDT.__frameStats || (SDT.__frameStats = { updateMs: 0, renderMs: 0, fps: 0, loopTicks: 0 });
+    stats.loopTicks = (stats.loopTicks || 0) + 1;
     // 标题 / 退出界面盖住画布时跳过整帧渲染（省电省 GPU，回来时 dt 已钳制不会跳变）
-    if ((coverTitle && !coverTitle.hidden) || (coverExit && !coverExit.hidden)) return;
+    if ((coverTitle && !coverTitle.hidden) || (coverExit && !coverExit.hidden)) {
+      wasCanvasCovered = true;
+      scheduleNextLoop(false);
+      return;
+    }
     // 全屏不透明页（事件/节点/背包页/房间战斗）盖住画布时同样跳帧，不重绘被遮挡的画布。
     // 战斗页 room-view 已是完全不透明 #0c0c0c 全屏层（overlays.css），画布根本不可见——
     // 也并入 covered 停画（旧逻辑给战斗页留 60fps 重绘是 backdrop blur 时代的注释，已过时）。
@@ -389,21 +437,25 @@ import { renderMiniMap } from './game.session.js';
     const covered = document.hidden || (!ov.hidden &&
       (ov.classList.contains('opaque') || ov.classList.contains('room-view') ||
        battleBehind || UI._lastMode === 'chest'));
+    if (covered) wasCanvasCovered = true;
+    else if (wasCanvasCovered) {
+      wasCanvasCovered = false;
+      renderScheduler.invalidate();
+    }
     const ts = (SDT.FX && SDT.FX.timeScale) || 1;
     const sdt = dt * ts;   // hit-stop 冻结世界：逻辑时间缩放，rAF 与恢复计时仍走真实时间
-    game.time += sdt;
-    if (ELAPSED_STATES.has(game.state)) game.elapsed += sdt;
+    // 空闲循环降到 4Hz 后，视觉时钟/游玩计时仍按真实经过时间推进；物理式插值继续用钳制 dt，
+    // 避免切回前台时一次性跨过过长时间。
+    const clockDt = Math.min(0.5, realDt) * ts;
+    game.time += clockDt;
+    if (!document.hidden && ELAPSED_STATES.has(game.state)) game.elapsed += clockDt;
     // 同步到 body，驱动 CSS 状态样式（提示条显隐 / 掷骰按钮呼吸灯）
     if (document.body.dataset.state !== game.state) document.body.dataset.state = game.state;
     // 标题页无侧栏不变式（2026-09-07 留言：下边栏跑到主页反复出现）：回主页的任何路径
     // 只要漏调 setLobby(true)，下一帧在这里被强制纠正——不再依赖每个流程点自觉
     if (game.state === 'title' && !document.body.classList.contains('lobby')) setLobby(true);
-    // 帧率分两档（功耗权衡）：active 120 只留给快节奏状态（掷骰/移动/战斗——
-    // 帧率拉满才不掉帧感）；对局站立 idle 的棋盘动画全是慢速环境效果（呼吸/火光/流光
-    // 均为 1Hz 量级正弦），60fps 与 120fps 观感无差，功耗直接减半。拖拽/缩放等输入
-    // 走 renderScheduler.invalidate() 逐事件触发绘制，不受降档影响。标题等未开局画面
-    // 同样 idle 60；战斗页盖在画布上时（自绘场景大图基本不透明，画布只从边缝透出）
-    // 也降到 idle 60：底图隔着重度 blur(6px) 无人能分辨帧率，省下的余量让给战斗页动画。
+    // 活动态走 rAF；静态地图只保留 4Hz 状态巡检，输入/状态变化由 invalidate() 立即唤醒。
+    // 这样不仅停止 Canvas DrawCall，也停止高刷屏上 144/165Hz 的空主循环 JS 唤醒。
     const active = !battleBehind && (game.battleActive || game.state === 'moving');
     // 镜头平滑追随仅在棋子移动中生效（指数趋近，帧率无关；大距离跳变直接贴合）。
     // 站立/拖拽时镜头完全归玩家：早先每帧无差别追随会把玩家拖拽的镜头拉回去，
@@ -421,16 +473,19 @@ import { renderMiniMap } from './game.session.js';
     }
     // 模拟按每次 rAF 的真实 dt 更新；绘制可以降频。若只在 draw 帧更新，165 Hz 屏幕上
     // dt 会被丢掉约 2/3，镜头会变慢并呈现不均匀的追赶感。
-    if (!renderScheduler.shouldDraw(now, { covered, active })) return;
+    if (!renderScheduler.shouldDraw(now, { covered, active })) {
+      scheduleNextLoop(active);
+      return;
+    }
 
     // 帧时间分桶（performance-optimization：先测量再优化）——EMA 平滑，供 perf 基准/排查读取
     const t0 = performance.now();
     try { SDT.Renderer.draw(ctx, game); } catch (e) { console.error('渲染异常：', e); }
     const renderMs = performance.now() - t0;
-    const stats = SDT.__frameStats || (SDT.__frameStats = { updateMs: 0, renderMs: 0, fps: 0 });
     stats.renderMs = stats.renderMs * 0.9 + renderMs * 0.1;
     stats.updateMs = stats.updateMs * 0.9 + (dt * 1000 - renderMs > 0 ? dt * 1000 - renderMs : 0) * 0.1;
     stats.fps = stats.fps * 0.9 + (1 / Math.max(dt, 1e-4)) * 0.1;
+    scheduleNextLoop(active);
   }
 
   function resize() {
@@ -489,8 +544,7 @@ import { renderMiniMap } from './game.session.js';
       syncMute();
     }
     window.addEventListener('beforeunload', saveGame);
-    // 战斗内周期性落盘（2026-09-09 试玩反馈：战斗中刷新丢整场进度）——battle.core 在
-    // 动作队列清空/回合开始时调用，把战斗快照写进对局存档（读档由 Battle.restore 续打）
+    // 战斗内周期性落盘——battle.core 保存本场入场检查点；读档由 Battle.restore 从战斗开头重开
     game.persistSave = saveGame;
     title.dataset.controlsBound = 'true';
   }
@@ -591,52 +645,15 @@ import { renderMiniMap } from './game.session.js';
     };
     if ('requestIdleCallback' in window) requestIdleCallback(warmHubWallpaper, { timeout: 4000 });
     else setTimeout(warmHubWallpaper, 2000);
-    // 全量美术预热（2026-09-08 老板：启动时强制进行，首页显示原因与进度；
-    // 2026-09-13 老板：扩大到全部美术资源，立绘/序列帧/场景/卡面/图标全覆盖）：
-    // 节点+战斗场景图 → 敌人/角色立绘 → 清单全量（序列帧/剪裁图等，vite 构建期扫描
-    // 生成 art-manifest.js）→ 卡面 → 图标，分小批拉进内存并预解码，进度条走完后
-    // 牌库/战斗/开箱的 <img> 零首帧请求与解码延迟。解码离主线程，批次间隔让出
-    // 主线程，标题页交互不掉帧。
+    // 启动只预热首轮高频场景；卡面/图鉴走 lazy+缩略图，后续场景在路线确认时预取。
+    // 禁止把清单、卡库和 CSS 背景重新并入这里，否则会恢复 800+ 请求和数百 MB 解码峰值。
     const warmupTip = document.getElementById('warmupTip');
     const warmupBar = document.getElementById('warmupBar');
     const warmupNum = document.getElementById('warmupNum');
-    const urls = [
-      ...Object.values(PRELOAD_SCENES),
-      ...SDT.Art.collectCardAssets(SDT.Cards.all()),
-      ...SDT.Art.collectManifestAssets(),
-      ...SDT.Icons.urls(),
-    ];
-    // CSS 背景图补热（战斗背景/事件/宝箱/远征等全场大图，走 Vite 哈希管线）：
-    // CSSOM 里只有相对路径，需按所在样式表 href 解析成绝对 URL。主清单热完后的
-    // 空闲期再跑，不和上面的优先队列抢带宽。
-    const warmCssBackdropArt = () => {
-      const found = new Set();
-      const walkRules = (rules, base) => {
-        for (const rule of rules || []) {
-          if (rule.cssRules) walkRules(rule.cssRules, base);
-          const text = rule.cssText || '';
-          if (!text.includes('url(')) continue;
-          const re = /url\((['"]?)([^'")]+)\1\)/gi;
-          let m;
-          while ((m = re.exec(text))) {
-            const raw = m[2];
-            if (!raw || raw.startsWith('data:')) continue;
-            if (!/\.(webp|png|jpe?g|gif|svg)([?#]|$)/i.test(raw)) continue;
-            try { found.add(new URL(raw, base).href); } catch (_) { /* 相对路径解析失败就跳过 */ }
-          }
-        }
-      };
-      for (const sheet of Array.from(document.styleSheets)) {
-        try { walkRules(sheet.cssRules, sheet.href || location.href); } catch (_) { /* 读不了规则的样式表跳过 */ }
-      }
-      // CSS 背景图的解码位图不钉进预热池（retain:false）：CSS background 走浏览器
-      // 自带缓存，JS 持引用帮不到渲染，只会把 75 张大场景图的位图白占在内存里。
-      if (found.size) { try { SDT.Art.warm(Array.from(found), { retain: false }); } catch (_) {} }
-    };
-    const scheduleCssWarm = () => {
-      if ('requestIdleCallback' in window) requestIdleCallback(warmCssBackdropArt, { timeout: 8000 });
-      else setTimeout(warmCssBackdropArt, 4000);
-    };
+    const urls = STARTUP_SCENE_KEYS.map(key => PRELOAD_SCENES[key]).filter(Boolean);
+    if (urls.length > PERFORMANCE_BUDGETS.startupPreloadMax) {
+      throw new Error(`启动预热超预算：${urls.length}/${PERFORMANCE_BUDGETS.startupPreloadMax}`);
+    }
     if (warmupTip && urls.length) {
       warmupTip.hidden = false;
       SDT.Art.warmBatched(urls, (done, total) => {
@@ -646,11 +663,11 @@ import { renderMiniMap } from './game.session.js';
           warmupTip.classList.add('done');
           setTimeout(() => { warmupTip.hidden = true; }, 600);
         }, 350);
-      }).then(scheduleCssWarm).catch(scheduleCssWarm);
+      }).catch(error => console.warn('[warmup] 首屏资源预热未完成', error));
     } else {
-      try { SDT.Art.warmBatched(urls).then(scheduleCssWarm).catch(scheduleCssWarm); } catch (_) { scheduleCssWarm(); }
+      try { SDT.Art.warmBatched(urls).catch(error => console.warn('[warmup] 首屏资源预热未完成', error)); } catch (_) {}
     }
-    requestAnimationFrame(loop);
+    requestLoopFrame();
   });
 
 export { resize };

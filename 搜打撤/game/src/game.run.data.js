@@ -3,6 +3,7 @@
    PRELOAD_SCENES 依赖 import.meta.url 的资源 URL 解析、IMMEDIATE_SCENES 是 Set，
    二者留在代码中组装。 */
 import { DATA } from './data-loader.js';
+import { STARTUP_SCENE_KEYS } from './performance-budgets.js';
 
 const SCENES = DATA.scenes.scenes;
 const SCENE_META = DATA.scenes.sceneMeta;
@@ -29,7 +30,7 @@ const CLASS_STORY = DATA.scenes.classStory;
     eventC: new URL('../assets/scenes/event-tt6-relief.webp', import.meta.url).href,
     chest: new URL('../assets/scenes/scene-chest-anime-v2.webp', import.meta.url).href,
   });
-  const IMMEDIATE_SCENES = new Set(['battle', 'coin', 'wood', 'rations', 'key', 'fire']);
+  const IMMEDIATE_SCENES = new Set(STARTUP_SCENE_KEYS);
 
 Object.freeze(SCENES);
 Object.freeze(SCENE_META);

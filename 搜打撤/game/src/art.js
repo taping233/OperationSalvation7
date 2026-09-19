@@ -6,6 +6,7 @@ import { BUILD_VERSION, assetUrl } from './asset-url.js';
 import { DATA } from './data-loader.js';
 import ART_MANIFEST from './generated/art-manifest.js';
 import THUMB_MANIFEST from './generated/thumb-manifest.js';
+import { PERFORMANCE_BUDGETS } from './performance-budgets.js';
 
   
   const ROOT = 'assets/';
@@ -59,11 +60,11 @@ import THUMB_MANIFEST from './generated/thumb-manifest.js';
   // 浏览器解码缓存被挤到反复驱逐，滚动到新卡就得重新解码——这正是库页掉帧的主因。
   // 上限压到 128：预热仍把文件拉进 HTTP/磁盘缓存，但不再要求全部常驻解码位图。
   const warmPool = [];
-  const WARM_POOL_CAP = 128;
+  const WARM_POOL_CAP = PERFORMANCE_BUDGETS.retainedImageCountMax;
   // 解码位图字节预算：只按张数封顶挡不住大图——CSS 补热的 75 张 1080p 级场景图
   // 恰好落在预热尾声顶掉早期小图，128 张口径理论上可钉住数百 MB。按解码字节数
   // （naturalWidth×naturalHeight×4）双保险封顶，超预算从最旧开始淘汰。
-  const WARM_POOL_BYTES = 256 * 1024 * 1024;
+  const WARM_POOL_BYTES = PERFORMANCE_BUDGETS.retainedImageBytesMax;
   let warmPoolBytes = 0;
   function releaseWarmedHead() {
     const im = warmPool.shift();
@@ -84,7 +85,8 @@ import THUMB_MANIFEST from './generated/thumb-manifest.js';
       }
     }, { once: true });
   }
-  function warm(urls, retain = true) {
+  function warm(urls, options = true) {
+    const retain = typeof options === 'object' ? options.retain !== false : options !== false;
     for (let u of urls) {
       if (!u || warmedUrls.has(u)) continue;
       warmedUrls.add(u);
@@ -148,7 +150,6 @@ import THUMB_MANIFEST from './generated/thumb-manifest.js';
   { // 逐张空闲预解码，避免 18 张图片同时解码/上传造成启动长帧
     const groups = { enemies: Array.from(MONSTER_IDS) };
     const queue = Object.keys(groups).flatMap(group => groups[group].map(id => `assets/portraits/cut/${group}/${id}.webp`));
-    const decoded = new Map(); // 持有引用，避免刚预解码完就被回收
     const schedule = (task) => {
       if (globalThis.scheduler && typeof globalThis.scheduler.postTask === 'function') {
         globalThis.scheduler.postTask(task, { priority: 'background' }).catch(() => setTimeout(task, 50));
@@ -159,10 +160,15 @@ import THUMB_MANIFEST from './generated/thumb-manifest.js';
       const src = queue.shift();
       if (!src) return;
       if (typeof Image === 'undefined') return;   // 非浏览器环境（单测等）直接放弃预解码，避免定时器报错
+      const url = assetUrl(src);
+      if (warmedUrls.has(url)) { schedule(next); return; }
+      warmedUrls.add(url);
       const im = new Image();
       im.decoding = 'async';
-      decoded.set(src, im);
-      im.src = src;
+      // 敌人预解码也必须进入统一 LRU/字节预算；旧实现用独立 Map 永久钉住约 28.5MiB，
+      // 导致 retainedImageBytesMax 并不是实际图片常驻上限。
+      retainWarmed(im);
+      im.src = url;
       const ready = typeof im.decode === 'function'
         ? im.decode().catch(() => {})
         : new Promise(resolve => { im.onload = im.onerror = resolve; });
@@ -238,6 +244,8 @@ function characterArt(value, full=false, useDefault=false) {
     // opts.retain（默认 true）：把解码位图钉进预热池；CSS 背景图传 false——浏览器对
     // CSS background 有自己的图片缓存，JS 持引用帮不到它，只会白占内存。
     warm(urls, opts) { return warm(urls, !opts || opts.retain !== false); },
+    // 性能探针只读口径：确认所有预解码图片都受同一张数/字节预算约束。
+    warmStats() { return Object.freeze({ count: warmPool.length, bytes: warmPoolBytes, maxCount: WARM_POOL_CAP, maxBytes: WARM_POOL_BYTES }); },
     // 选人页五张 full 立绘预热（2026-09-19 走查 B8）：黑像/星月是 4K 横版图，
     // 首开现场解码慢，头像条/大立绘会先露底色（白/黑）几秒，观感像坏图。
     // openClassChoice 打开选人页前调用，与卡面预热同一解码池。

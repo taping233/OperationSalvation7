@@ -271,9 +271,8 @@ const CURSES = ['bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban', 'bu
       target.status[key] = Math.max(0, target.status[key] + n);
       if (turns > 0) {
         if (!target.__timedBuffs) target.__timedBuffs = [];
-        const rec = target.__timedBuffs.find(r => r.key === key);
-        if (rec) { rec.amount += n; rec.turns = Math.max(rec.turns, turns); }
-        else target.__timedBuffs.push({ key, amount: n, turns });
+        // 不同来源/持续时间独立到期。此前按 key 合并并取最长持续时间，会把短时加成错误延长。
+        target.__timedBuffs.push({ key, amount: n, turns });
       }
     } else if (m.timed) target.status[key] = Math.max(target.status[key], n);
     else target.status[key] = 1;

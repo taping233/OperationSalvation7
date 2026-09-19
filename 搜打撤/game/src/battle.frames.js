@@ -39,6 +39,22 @@ let wanted = false;         // 已 attach（战斗进行中）
 let pollTimer = 0;
 let renderHoldT = 0;
 
+async function evictOtherTextureSets(keepRole, Assets, Texture) {
+  const evictions = [];
+  for (const [role, pending] of texSets) {
+    if (role === keepRole || cur?.role === role) continue;
+    texSets.delete(role);
+    evictions.push(Promise.resolve(pending).then(async loaded => {
+      if (!loaded) return;
+      if (sprite && (!cur || cur.role !== role)) sprite.texture = Texture.EMPTY;
+      for (const url of loaded.urls || []) {
+        try { await Assets.unload(url); } catch (_) { /* 已被 Pixi 回收则忽略 */ }
+      }
+    }).catch(() => {}));
+  }
+  await Promise.all(evictions);
+}
+
 // 探测某角色实际存在的帧：基准帧 <动作>.webp + 追加帧 <动作>-1..N.webp（idle 尾部含呼吸帧）
 function candidateNames() {
   const names = [];
@@ -103,11 +119,15 @@ function loadSet(role) {
   const p = (async () => {
     const rt = await ensureApp();
     if (!rt) return null;
-    const { Assets } = await import('pixi.js');
+    const { Assets, Texture } = await import('pixi.js');
+    // 序列帧纹理是 GPU/解码内存的大头（当前三套合计约 57.9MiB）。只保留最近
+    // 使用角色；切换角色时卸载旧套，避免长局把所有角色纹理永久累积。
+    await evictOtherTextureSets(role, Assets, Texture);
     const set = new Map();
+    const urls = [];
     for (const name of candidateNames()) {
       const url = assetUrl(`assets/portraits/frames/${role}/${name}.webp`);
-      try { set.set(name, await Assets.load(url)); } catch (e) { /* 探测：没这帧就跳过 */ }
+      try { set.set(name, await Assets.load(url)); urls.push(url); } catch (e) { /* 探测：没这帧就跳过 */ }
     }
     // 每动作的实际帧序列 = 候选名里加载成功的按序集合
     const seqs = new Map();
@@ -116,7 +136,7 @@ function loadSet(role) {
         .filter(n => set.has(n)).concat(a === 'idle' && set.has('idle-breathe') ? ['idle-breathe'] : []);
       if (frames.length) seqs.set(a, frames);
     }
-    return seqs.get('idle') ? { set, seqs } : null;
+    return seqs.get('idle') ? { set, seqs, urls } : null;
   })().catch(() => null);
   texSets.set(role, p);
   return p;
@@ -318,6 +338,10 @@ function hide() {
   if (pollTimer) { clearInterval(pollTimer); pollTimer = 0; }
 }
 
+function cacheStats() {
+  return Object.freeze({ roles: texSets.size, roleNames: [...texSets.keys()] });
+}
+
 document.addEventListener('visibilitychange', () => {
   if (document.hidden) { if (appPromise) appPromise.then(rt => { if (rt) rt.app.stop(); }); }
   else if (cur) wakeRenderer(600);
@@ -331,4 +355,4 @@ busOn('battle:end', () => hide());
 // 奖励/搜刮/背包/卡牌库等任何其他模式渲染时一律卸下，新增界面默认不在白名单。
 document.addEventListener('sdt-overlay-mode', (e) => { if (e.detail !== 'battle') hide(); });
 
-export { attach, play, hide, isLiveBattleFigure };
+export { attach, play, hide, isLiveBattleFigure, cacheStats };

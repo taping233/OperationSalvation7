@@ -1,13 +1,14 @@
 {
   "cardArtOverrides": {
-    "tt8-hero-assassin": "cards/expedition-starters/wu-void.webp",
-    "tt8-hero-sword": "cards/expedition-starters/wu-myriadswords.webp",
-    "tt8-hero-ranger": "cards/expedition-starters/wu-heavensword.webp",
+    "tt8-hero-assassin": "cards/wu-void.webp",
+    "tt8-hero-sword": "cards/wu-myriadswords.webp",
+    "tt8-hero-ranger": "cards/wu-heavensword.webp",
     "builtin-sha": "cards/expedition-starters/basic-attack.webp",
     "tt3-fireball": "cards/expedition-starters/fireball.webp",
     "tt3-skewer": "cards/expedition-starters/pierce.webp",
     "tt3-staff": "cards/expedition-starters/staff.webp",
-    "tt-wood": "cards/expedition-starters/wood.webp",
+    "tt-wood": "cards/resources/wood.webp",
+    "cc-thousand": "cards/spell-cmtn1p9vb5au.webp",
     "tt-rations": "cards/expedition-starters/rations.webp"
   },
   "classIds": {
@@ -266,7 +267,16 @@
     "tt6-airdrop": "event-tt6-airdrop",
     "tt6-chestdraw": "event-tt6-chestdraw",
     "tt6-systemsupply": "event-tt6-systemsupply",
-    "cmtn7qttxqo4": "event-cmtn7qttxqo4"
+    "cmtn7qttxqo4": "event-cmtn7qttxqo4",
+    "ev19-vital": "event-ev19-vital",
+    "ev19-pearlbox": "event-ev19-pearlbox",
+    "ev19-fireballs": "event-ev19-fireballs",
+    "ev19-classchest": "event-ev19-classchest",
+    "ev19-recode": "event-ev19-recode",
+    "ev19-potions": "event-ev19-potions",
+    "ev19-arrows": "event-ev19-arrows",
+    "ev19-gamble": "event-ev19-gamble",
+    "ev19-quartermaster": "event-ev19-quartermaster"
   },
   "itemArt": {
     "builtin-fuyuanyao": "builtin-fuyuanyao",

@@ -30,9 +30,7 @@ import './renderer.js';        // 老板留言 #53：对局地图改回原二维
                                // scene/ 目录已随 2026-09-19 技术清理删除，需要 3D 时从 git 历史找回
 import './ui.js';
 import './shared.js';
-import './battle.effects.js';
-import './battle.core.js';
-import './battle.view.js';
+import './battle-loader.js';
 import './chests.js';
 import './game.storage.js';
 import './game.store.js';

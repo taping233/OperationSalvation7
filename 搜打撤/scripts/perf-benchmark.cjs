@@ -7,6 +7,8 @@ const path = require('node:path');
 const ROOT = path.resolve(__dirname, '..');
 const PORT = 48731;
 const URL = `http://127.0.0.1:${PORT}/`;
+const SOAK_MS = Math.max(5000, Number(process.env.SDT_PERF_SOAK_MS) ||
+  (process.argv.includes('--soak') ? 10 * 60 * 1000 : 15 * 1000));
 
 function waitForServer(timeoutMs = 15000) {
   const started = Date.now();
@@ -54,10 +56,10 @@ ${serverLog}`);
     const probe = spawn(electron, [__filename], {
       cwd: ROOT,
       stdio: 'inherit',
-      env: { ...process.env, SDT_PERF_RESULT: resultPath },
+      env: { ...process.env, SDT_PERF_RESULT: resultPath, SDT_PERF_SOAK_MS: String(SOAK_MS) },
     });
-    await new Promise(resolveExit => probe.on('exit', resolveExit));
-    if (!existsSync(resultPath)) throw new Error('Electron 性能探针未产生结果');
+    const probeExitCode = await new Promise(resolveExit => probe.on('exit', resolveExit));
+    if (!existsSync(resultPath)) throw new Error(`Electron 性能探针未产生结果（exit ${probeExitCode}）`);
     const output = readFileSync(resultPath, 'utf8');
     unlinkSync(resultPath);
     console.log(output);
@@ -70,6 +72,7 @@ ${serverLog}`);
 
 async function runElectronProbe() {
   const { app, BrowserWindow, screen } = require('electron');
+  const soakMs = Math.max(5000, Number(process.env.SDT_PERF_SOAK_MS) || 15000);
   if (process.env.SDT_PERF_GPU !== 'auto') app.commandLine.appendSwitch('force_high_performance_gpu');
   await app.whenReady();
   const scaleFactor = screen.getPrimaryDisplay().scaleFactor || 1;
@@ -79,7 +82,15 @@ async function runElectronProbe() {
     useContentSize: true,
     width: Math.round(1920 / scaleFactor),
     height: Math.round(1080 / scaleFactor),
-    webPreferences: { backgroundThrottling: false },
+    // 非持久 partition：性能探针可以自由构造战斗/牌库压力场景，不污染玩家存档。
+    webPreferences: { backgroundThrottling: false, partition: `sdt-perf-${process.pid}` },
+  });
+  win.webContents.on('render-process-gone', (_event, details) => {
+    console.error('[perf] renderer process gone', JSON.stringify(details));
+  });
+  win.webContents.on('unresponsive', () => console.error('[perf] renderer unresponsive'));
+  win.webContents.on('did-fail-load', (_event, code, description) => {
+    console.error(`[perf] load failed ${code}: ${description}`);
   });
   win.setAlwaysOnTop(true, 'screen-saver');
   await win.loadURL(URL);
@@ -107,8 +118,13 @@ async function runElectronProbe() {
     const rounds = [];
     const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
     await wait(1800);
+    const battleWasDeferred = !window.SDT.Battle;
+    const battleLoadStarted = performance.now();
+    await window.SDT.BattleLoader.ensure();
+    const lazyBattleLoadMs = +(performance.now() - battleLoadStarted).toFixed(1);
     async function sample(name, duration, setup) {
       const step = setup ? setup() : null;
+      const loopTicksBefore = window.SDT.__frameStats?.loopTicks || 0;
       let calls = 0, drawTotal = 0, drawMax = 0;
       const drawTimes = [];
       const longTasks = [];
@@ -138,6 +154,8 @@ async function runElectronProbe() {
       longTaskObserver?.disconnect();
       const result = {
         name, calls,
+        loopTicks: (window.SDT.__frameStats?.loopTicks || 0) - loopTicksBefore,
+        loopHz: +(((window.SDT.__frameStats?.loopTicks || 0) - loopTicksBefore) / duration * 1000).toFixed(1),
         rendererFps: +(calls / duration * 1000).toFixed(1),
         averageDrawMs: +(drawTotal / Math.max(1, calls)).toFixed(2),
         drawP95: +(drawTimes[Math.floor(drawTimes.length * .95)] || 0).toFixed(2),
@@ -187,6 +205,8 @@ async function runElectronProbe() {
     const summary = ['idle', 'moving', 'zoom', 'covered'].map(name => ({
       name,
       calls: metricMedian(name, 'calls'),
+      loopTicks: metricMedian(name, 'loopTicks'),
+      loopHz: metricMedian(name, 'loopHz'),
       rendererFps: metricMedian(name, 'rendererFps'),
       averageDrawMs: metricMedian(name, 'averageDrawMs'),
       drawP95: metricMedian(name, 'drawP95'),
@@ -199,34 +219,153 @@ async function runElectronProbe() {
       frames: metricMedian(name, 'frames'),
       duration: rounds[0].samples.find(sample => sample.name === name).duration,
     }));
+
+    // P1 最坏场景：四敌人 + 24 张手牌的战斗 DOM 重绘，以及全卡库快速滚动。
+    // 随后反复切换三套角色帧纹理/卡牌库，检查 JS 堆、DOM 与受控纹理缓存是否回落。
+    const saved = {
+      ownedCards: game.ownedCards, hp: game.hp, maxHp: game.maxHp, atk: game.atk,
+      spellPower: game.spellPower, myClass: game.myClass, characterId: game.characterId,
+      state: game.state, battleActive: game.battleActive,
+    };
+    const combatCards = window.SDT.Cards.all()
+      .filter(card => ['武术', '法术', '装备'].includes(card.type))
+      .slice(0, 24);
+    game.ownedCards = combatCards.map((card, i) => ({ uid: 'perf-' + i, card: { ...card }, safe: false }));
+    game.hp = game.maxHp = 9999; game.atk = 5; game.spellPower = 2;
+    const roles = [
+      { cls: '侠客', id: 'shuangling' },
+      { cls: '降临者', id: 'baiqi' },
+      { cls: '法师', id: 'lituan' },
+    ];
+    const foes = Array.from({ length: 4 }, (_, i) => ({
+      id: ['infantry', 'archer', 'bandit', 'orc_axe'][i],
+      name: '压力靶-' + (i + 1), hp: 9999, atk: 1,
+    }));
+    async function openPerfBattle(role) {
+      if (game.battleActive) { window.SDT.Battle.commands.flee(); await wait(300); }
+      if (title) title.hidden = true;
+      game.state = 'idle'; game.myClass = role.cls; game.characterId = role.id;
+      window.SDT.Battle.start(game, foes, { isBoss: false, layer: 0, name: '性能压力战' });
+      await wait(700);
+    }
+    async function closePerfBattle() {
+      if (game.battleActive) window.SDT.Battle.commands.flee();
+      await wait(320);
+      window.SDT.UI.hideOverlay();
+      game.state = 'idle';
+      await wait(260);
+    }
+    async function openPerfLibrary() {
+      window.SDT.UI.hideOverlay();
+      game.state = 'idle';
+      await wait(260);
+      game.debug.openCardLibrary();
+      await wait(700);
+    }
+    async function closePerfLibrary() {
+      window.SDT.UI.hideOverlay();
+      await wait(320);
+      game.state = 'idle';
+    }
+
+    const stress = [];
+    await openPerfBattle(roles[0]);
+    stress.push(await sample('battle-heavy', 2400, () => {
+      let next = 0;
+      return now => {
+        if (now < next) return;
+        next = now + 150;
+        window.SDT.Battle.commands.refreshView();
+      };
+    }));
+    await closePerfBattle();
+    await openPerfLibrary();
+    stress.push(await sample('card-library-scroll', 2400, () => now => {
+      const grid = document.getElementById('libGrid');
+      if (!grid) return;
+      const span = Math.max(1, grid.scrollHeight - grid.clientHeight);
+      grid.scrollTop = (now * 1.7) % span;
+      grid.dispatchEvent(new Event('scroll'));
+    }));
+    await closePerfLibrary();
+
+    // 先把三种角色都走一遍，基线包含正常的首次模块/纹理解码成本；之后只测重复循环增长。
+    for (const role of roles) { await openPerfBattle(role); await closePerfBattle(); }
+    const heapBefore = performance.memory?.usedJSHeapSize || 0;
+    const domBefore = document.getElementsByTagName('*').length;
+    const soakStarted = performance.now();
+    let soakCycles = 0;
+    while (performance.now() - soakStarted < ${soakMs}) {
+      const role = roles[soakCycles % roles.length];
+      await openPerfBattle(role);
+      window.SDT.Battle.commands.refreshView();
+      await wait(180);
+      await closePerfBattle();
+      await openPerfLibrary();
+      const grid = document.getElementById('libGrid');
+      if (grid) { grid.scrollTop = grid.scrollHeight; grid.dispatchEvent(new Event('scroll')); }
+      await wait(180);
+      await closePerfLibrary();
+      soakCycles++;
+    }
+    const heapAfter = performance.memory?.usedJSHeapSize || 0;
+    const domAfter = document.getElementsByTagName('*').length;
+    const frameCache = window.SDT.Battle._perf.frameCacheStats();
+    const warmPool = window.SDT.Art.warmStats();
+    const memory = {
+      soakMs: Math.round(performance.now() - soakStarted), soakCycles,
+      heapBefore, heapAfter, heapGrowthBytes: heapBefore && heapAfter ? heapAfter - heapBefore : null,
+      domBefore, domAfter, domGrowth: domAfter - domBefore,
+      frameCache, warmPool,
+    };
+    Object.assign(game, saved);
+    if (title) title.hidden = false;
+
     const active = summary.filter(sample => sample.name === 'moving' || sample.name === 'zoom');
     const idle = summary.find(sample => sample.name === 'idle');
     const covered = summary.find(sample => sample.name === 'covered');
     const viewport = [innerWidth, innerHeight];
     const physicalViewport = viewport.map(value => Math.round(value * devicePixelRatio));
     const canvasBackingStore = [canvas.width, canvas.height];
-    const physicalViewportIs1920x1080 = physicalViewport[0] === 1920 && physicalViewport[1] === 1080;
+    // Chromium 在 125% DPI 下 CSS→物理像素偶尔会因窗口边界取整少 1px；这不是性能
+    // 退化。容许单像素误差，同时仍校验 Canvas 后备缓冲与实际物理视口一致。
+    const physicalViewportIs1920x1080 = Math.abs(physicalViewport[0] - 1920) <= 1 &&
+      Math.abs(physicalViewport[1] - 1080) <= 1 &&
+      canvasBackingStore[0] === physicalViewport[0] && canvasBackingStore[1] === physicalViewport[1];
     const rendererP95AtMost8 = active.every(sample => sample.drawP95 <= 8);
     const coveredDrawsZero = covered.calls === 0;
     const idleDrawReductionAtLeast40 = idle.calls <= idle.duration / 1000 * 60 * 0.6;
+    const idleLoopAtMost8Hz = idle.loopHz <= 8;
     const activeTargetIs120 = Math.abs(1000 / window.SDT.RenderScheduler.activeInterval - 120) < 0.01;
     const target120DeliveryMet = summary.find(sample => sample.name === 'moving').rendererFps >= 110;
     const experienceTargetMet = active.every(sample => sample.frameP95 <= 20 && sample.slowRate < 5);
+    const stressExperienceMet = stress.every(sample => sample.frameP95 <= 20 && sample.slowRate < 5 && sample.longTasks === 0);
+    const memoryStable = (memory.heapGrowthBytes == null || memory.heapGrowthBytes <= 32 * 1024 * 1024) &&
+      memory.domGrowth <= 300 && memory.frameCache.roles <= 1 &&
+      memory.warmPool.count <= memory.warmPool.maxCount && memory.warmPool.bytes <= memory.warmPool.maxBytes;
     return {
       viewport,
       devicePixelRatio,
       physicalViewport,
       canvasBackingStore,
       acceptance: {
-        performanceGatePassed: physicalViewportIs1920x1080 && rendererP95AtMost8 && coveredDrawsZero && idleDrawReductionAtLeast40 && activeTargetIs120,
+        performanceGatePassed: physicalViewportIs1920x1080 && rendererP95AtMost8 && coveredDrawsZero && idleDrawReductionAtLeast40 && idleLoopAtMost8Hz && activeTargetIs120 && target120DeliveryMet && experienceTargetMet && stressExperienceMet && memoryStable && battleWasDeferred && lazyBattleLoadMs <= 1500,
         physicalViewportIs1920x1080,
         rendererP95AtMost8,
         idleDrawReductionAtLeast40,
+        idleLoopAtMost8Hz,
         coveredDrawsZero,
         activeTargetIs120,
         target120DeliveryMet,
         experienceTargetMet,
+        stressExperienceMet,
+        memoryStable,
+        battleWasDeferred,
+        lazyBattleLoadUnder1500ms: lazyBattleLoadMs <= 1500,
       },
+      lazyBattleLoadMs,
+      stress,
+      memory,
       rounds,
       summary,
     };
@@ -246,5 +385,8 @@ async function runElectronProbe() {
   app.quit();
 }
 
-if (process.versions.electron) runElectronProbe().catch(error => { console.error(error); process.exit(1); });
+if (process.versions.electron) {
+  console.error(`[perf] Electron probe runtime ${process.versions.electron}`);
+  runElectronProbe().catch(error => { console.error(error); process.exit(1); });
+}
 else orchestrate().catch(error => { console.error(error); process.exitCode = 1; });

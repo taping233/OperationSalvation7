@@ -22,6 +22,7 @@ const CLASS_STORY = {
 
 import { Sfx, _set_cardPageOpen, cardHTML } from './game.cardslib.js';
 import { Random } from './random.js';
+import { ensureBattleReady, startBattle } from './battle-loader.js';
 import { FIRE_RESTORABLE, finishInstant, grantEventCard, nodeOpt, nodeShell, openPocketRestore, openShop, preloadAllNodeShellBgs, showRunTransition } from './game.run.scenes.js';
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const SDT = window.SDT;
@@ -49,7 +50,12 @@ export function openFireRest() {
 export function openClassChoice(options = {}) {
   const onCancel = typeof options.onCancel === 'function' ? options.onCancel : null;
   const beforeConfirm = typeof options.beforeConfirm === 'function' ? options.beforeConfirm : null;
-  preloadAllNodeShellBgs();   // 选角这几秒正好把整页事件背景图预载完（webp 大图打开才请求会黑屏数秒）
+  preloadAllNodeShellBgs();   // 只补首轮高频节点；其余场景在确认路线时按目标格预取
+  // 玩家停留选角页时后台准备战斗域；不占标题首屏预算，又能让首场遭遇直接进入。
+  const warmBattleRuntime = () => ensureBattleReady().catch(error => console.warn('[battle-loader] 选角页后台预取失败', error));
+  if (globalThis.scheduler?.postTask) globalThis.scheduler.postTask(warmBattleRuntime, { priority: 'background' }).catch(() => {});
+  else if (typeof requestIdleCallback === 'function') requestIdleCallback(warmBattleRuntime, { timeout: 3000 });
+  else setTimeout(warmBattleRuntime, 500);
   if (SDT.Art && SDT.Art.warmClassRoster) SDT.Art.warmClassRoster();   // 头像条/大立绘五张 4K 图预热，防露底色（2026-09-19 走查 B8）
   const picks = CHARACTERS.map(c => c.rulesetId).filter(cl => SDT.Cards.classPool(cl).length);
   if (!picks.length) return;
@@ -141,7 +147,7 @@ export function openClassChoice(options = {}) {
       <button class="hs-btn sm" data-act="poolNext"${poolPage >= totalPages - 1 ? ' disabled' : ''}>下一页 ›</button>`;
   };
   const poolPreviewHTML = (c) => {
-    if (!c) return '<div class="pv-empty">[[icon:cards]]</div><p class="pv-hint">把鼠标悬停在右侧卡牌上<br>这里会显示大图预览</p>';
+    if (!c) return '<div class="pv-empty">[[icon:cards]]</div><p class="pv-hint">选择右侧卡牌<br>这里会显示档案预览</p>';
     const dmgTxt = SDT.Cards.DMG_TYPES.includes(c.type) ? `<br>伤害词条：<b class="dmg-num">${c.dmg || 0}</b>` : '';
     return `${SDT.Cards.cardHTML(c, 'lg')}<p class="pv-hint">${esc(c.type)} · ${esc(SDT.Cards.rarityOf(c))}${dmgTxt}<br>点击卡面可放大查看</p>`;
   };
@@ -151,7 +157,7 @@ export function openClassChoice(options = {}) {
     if (poolPage >= totalPages) poolPage = totalPages - 1;
     const cards = pool.slice(poolPage * POOL_PAGE_SIZE, (poolPage + 1) * POOL_PAGE_SIZE);
     return `<div class="lib-grid cls-pool-grid" id="poolGrid">${cards.map((c, i) => `
-      <div class="lib-item"><div class="lib-cardwrap" data-act="poolZoom" data-i="${poolPage * POOL_PAGE_SIZE + i}" title="点击放大查看">${SDT.Cards.cardHTML(c)}</div></div>`).join('')}</div>`;
+      <div class="lib-item"><button class="lib-cardwrap pool-card-button${i === 0 ? ' selected' : ''}" data-act="poolZoom" data-i="${poolPage * POOL_PAGE_SIZE + i}" title="点击放大查看" aria-label="查看 ${escAttr(c.name)} 详情">${SDT.Cards.cardHTML(c)}</button></div>`).join('')}</div>`;
   };
   // 预解码下一页插画（翻页零解码等待，同卡牌库 warmNextLibPage）
   const warmNextPoolPage = () => {
@@ -171,6 +177,10 @@ export function openClassChoice(options = {}) {
     if (grid) grid.outerHTML = poolGridHTML();
     const pagerEl = document.getElementById('poolPager');
     if (pagerEl) pagerEl.innerHTML = poolPagerHTML();
+    const first = SDT.Cards.classPool(sel)[poolPage * POOL_PAGE_SIZE];
+    const preview = document.getElementById('poolPreview');
+    if (first && preview) preview.innerHTML = poolPreviewHTML(first);
+    bindPoolFocusPreview();
     warmNextPoolPage();
   };
   const renderPool = () => {
@@ -179,11 +189,11 @@ export function openClassChoice(options = {}) {
     UI.showOverlay('', `
       <div class="pg cls-pool-page">
         <header class="pg-head">
-          <h2>[[icon:cards]] ${esc(characterName(sel))} · 角色卡池（${pool.length} 张）</h2>
-          <span class="sub">确认选择「${esc(characterName(sel))}」后，从以下卡池随机获得角色卡（与 5 张「初始攻击」一起带入背包）· 悬停卡面左侧预览大图</span>
+          <div class="pool-archive-title"><span class="section-kicker">ROLE ARCHIVE // ${esc(characterName(sel))}</span><h2>[[icon:cards]] 角色卡池档案</h2></div>
+          <span class="sub">确认选择「${esc(characterName(sel))}」后，将从 ${pool.length} 张人物卡中随机获得角色卡，并与 5 张「初始攻击」一起带入背包。</span>
         </header>
         <div class="clib-main">
-          <aside class="clib-preview" id="poolPreview">${poolPreviewHTML(null)}</aside>
+          <aside class="clib-preview" id="poolPreview" aria-live="polite">${poolPreviewHTML(pool[0])}</aside>
           ${poolGridHTML()}
         </div>
         <footer class="cls-foot cls-foot-pool">
@@ -192,7 +202,27 @@ export function openClassChoice(options = {}) {
           <button class="ov-btn ok" data-act="pickClass">出发</button>
         </footer>
       </div>`, 'page');
+    bindPoolFocusPreview();
     warmNextPoolPage();
+  };
+  const showPoolPreview = (el, tick = false) => {
+    const i = Number(el?.dataset?.i);
+    const c = (SDT.Cards.classPool(sel) || [])[i];
+    const pv = document.getElementById('poolPreview');
+    if (!c || !pv) return;
+    document.querySelectorAll('#poolGrid .pool-card-button.selected').forEach(node => node.classList.remove('selected'));
+    el.classList.add('selected');
+    pv.innerHTML = poolPreviewHTML(c);
+    if (tick) Sfx.tick();
+  };
+  const bindPoolFocusPreview = () => {
+    const grid = document.getElementById('poolGrid');
+    if (!grid || grid.dataset.previewBound) return;
+    grid.dataset.previewBound = '1';
+    grid.addEventListener('focusin', (e) => {
+      const card = e.target.closest && e.target.closest('[data-act="poolZoom"]');
+      if (card) showPoolPreview(card);
+    });
   };
   // 悬停大图预览（炉石式，同卡牌库）：mouseover 因子元素冒泡重复触发，90ms 去抖
   let poolPreviewTimer = null;
@@ -204,8 +234,7 @@ export function openClassChoice(options = {}) {
     poolPreviewTimer = setTimeout(() => {
       poolPreviewTimer = null;
       const c = (SDT.Cards.classPool(sel) || [])[i];
-      const pv = document.getElementById('poolPreview');
-      if (c && pv) { pv.innerHTML = poolPreviewHTML(c); Sfx.tick(); }
+      if (c) showPoolPreview(w, true);
     }, 90);
   };
   UI.act('poolZoom', (d) => {
@@ -509,11 +538,11 @@ export function openBossGate(def) {
       nodeOpt('fightBoss', '编组牌库，迎战首脑', '从背包选 15 张招式/装备/能力卡，附加 5 张初始攻击（混沌之眼可多带 5 张）', 'ok') +
       nodeOpt('bossLeave', '暂不挑战', '留在当前格子（本格不消耗，可再来）'),
   });
-  UI.act('fightBoss', () => {
+  UI.act('fightBoss', async () => {
     UI.hideOverlay();
     const bossFoe = scaledEnemy(b);
     bossFoe.boss = true;   // 首脑死亡立即结束战斗（2026-09-16 留言 #25）
-    SDT.Battle.start(game, bossFoe, { isBoss: true, name: b.name });
+    await startBattle(game, bossFoe, { isBoss: true, name: b.name });
   });
   UI.act('bossLeave', () => { UI.hideOverlay(); game.state = 'idle'; saveGame(); UI.refresh(game); });
   UI.refresh(game);

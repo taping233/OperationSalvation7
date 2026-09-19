@@ -33,7 +33,6 @@ const KNOWN_ORPHANS = [
   'martial-cc-treasure',      // 盗宝旧 id（现役=cmtn1i64j7y7 已有图），2026-09-12 落错名事故遗留
   'martial-cc-jianghu',       // 江湖救急旧 id（现役=cmtn1wnhhym 已有图），同上
   'spell-cc-manasupply',      // 法力补给旧 id 死图（现役 tt7-maxsupply 已有图）
-  'spell-cc-thousand',        // 千变万化旧 id 死图（现役 cmtn1p9vb5au 已有图）
   'martial-melee',            // art.js 通用兜底图（按卡名规则引用，非按 id），合法非死图
   'martial-ranged',           // 同上
   'equip-tt3-dark-blade',     // 灭魔之剑整卡退役（2026-09-16 留言「删除灭魔之剑」），专属图成为已批死图

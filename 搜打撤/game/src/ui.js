@@ -173,24 +173,61 @@ import { renderExpeditionPanel } from './expedition.view.js';
     showCardZoom(card, opts = {}) {
       if (!card) return;
       const old = document.getElementById('cardZoom');
-      if (old) old.remove();
-      // 2026-09-19 留言 #29：特写多一个「备注」区，展示这张卡的玩家备注（卡牌库可编辑）
+      if (old) {
+        if (typeof old._closeCardZoom === 'function') old._closeCardZoom(true);
+        else old.remove();
+      }
+      const previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+      const inertHost = this.el.overlay;
+      const overlayWasInert = !!inertHost?.inert;
+      if (inertHost) inertHost.inert = true;
+      // 2026-09-19 留言 #29：特写多一个「馆方记录」区，展示老板手写的正式记录（卡牌库可编辑）
       const note = (opts.note != null ? opts.note : (card.note || '')) || '';
-      const noteHTML = `
+      const noteLabel = opts.noteLabel || '备注';
+      const notePlaceholder = opts.notePlaceholder || '点击这里写备注……';
+      const noteHTML = opts.noteEditable ? `
+        <label class="cz-note has editable">
+          <span class="cz-note-tag">[[icon:pen]] ${esc(noteLabel)}</span>
+          <textarea class="cz-note-input" maxlength="240" rows="3" placeholder="${esc(notePlaceholder)}" aria-label="${esc(noteLabel)}">${esc(note)}</textarea>
+          <span class="cz-note-status" aria-live="polite">${note ? '已存档' : '尚未撰写'}</span>
+        </label>` : `
         <div class="cz-note${note ? ' has' : ''}">
-          <span class="cz-note-tag">[[icon:pen]] 备注</span>
-          <p class="cz-note-text">${note ? esc(note) : '暂无备注——可在卡牌库中编辑这张卡的备注描述'}</p>
+          <span class="cz-note-tag">[[icon:pen]] ${esc(noteLabel)}</span>
+          <p class="cz-note-text">${note ? esc(note) : '暂无备注'}</p>
         </div>`;
       const el = document.createElement('div');
       el.id = 'cardZoom';
+      el.setAttribute('role', 'dialog');
+      el.setAttribute('aria-modal', 'true');
+      el.setAttribute('aria-label', `${card.name || '卡牌'}大图与${noteLabel}`);
+      el.tabIndex = -1;
       el.innerHTML = `<div class="cz-backdrop" aria-hidden="true"></div>
+        <button type="button" class="cz-close" aria-label="关闭卡牌大图">[[icon:cross]]</button>
         <div class="cz-card">${SDT.Cards.cardHTML(card, 'lg')}</div>
         ${noteHTML}
         ${opts.footer ? `<div class="cz-foot">${opts.footer}</div>` : ''}
-        <span class="cz-hint">点击任意处收回</span>`;
+        <span class="cz-hint">Esc 或点击背景收回</span>`;
       let closed = false;
-      const close = () => {
+      let noteSaveTimer = null;
+      const noteInput = el.querySelector('.cz-note-input');
+      const noteStatus = el.querySelector('.cz-note-status');
+      const saveNote = () => {
+        if (!noteInput || typeof opts.onNoteSave !== 'function') return;
+        const saved = opts.onNoteSave(noteInput.value);
+        if (noteStatus) noteStatus.textContent = saved ? '已存档' : '尚未撰写';
+      };
+      if (noteInput) {
+        noteInput.addEventListener('input', () => {
+          if (noteStatus) noteStatus.textContent = '保存中…';
+          clearTimeout(noteSaveTimer);
+          noteSaveTimer = setTimeout(saveNote, 240);
+        });
+        noteInput.addEventListener('blur', () => { clearTimeout(noteSaveTimer); saveNote(); });
+      }
+      const close = (immediate = false) => {
         if (closed) return;
+        clearTimeout(noteSaveTimer);
+        saveNote();
         closed = true;
         // cz-flip 的 animation:none 会一并压掉 czOut，收回前摘掉它恢复出场动画
         // （inline transform/opacity 一并清掉，防中途收回残留）
@@ -200,24 +237,49 @@ import { renderExpeditionPanel } from './expedition.view.js';
           cardEl.style.transform = '';
           cardEl.style.opacity = '';
         }
+        if (inertHost) inertHost.inert = overlayWasInert;
+        if (previousFocus?.isConnected) previousFocus.focus({ preventScroll: true });
+        if (immediate) {
+          el.remove();
+          return;
+        }
         el.classList.add('cz-out');
         setTimeout(() => el.remove(), 260);
       };
+      el._closeCardZoom = close;
       // 特写挂在 body（overlay 之外），footer 按钮的 data-act 走不到 ovBody 的全局委托；
       // 且不用 {once:true}：点按钮会白白消费掉监听，之后（含 bagZoomRemove 的模拟 backdrop
       // 点击）再也关不掉 → 整页卡死（2026-09-07 老板实测）。故监听常驻：非按钮区域总能收回，
       // footer 按钮（如「移出背包」）在本层直接分发。
       el.addEventListener('click', (e) => {
         if (closed) return;
+        if (e.target.closest('.cz-close')) { close(); return; }
         const btn = e.target.closest('.cz-foot [data-act]');
         if (btn) {
           const fn = this._acts[btn.dataset.act];
           if (fn) fn(btn.dataset);
           return;
         }
+        if (e.target.closest('.cz-note')) return;
         close();
       });
+      el.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          e.preventDefault();
+          e.stopPropagation();
+          close();
+          return;
+        }
+        if (e.key !== 'Tab') return;
+        const focusable = [...el.querySelectorAll('button,textarea,[href],[tabindex]:not([tabindex="-1"])')]
+          .filter(node => !node.disabled && node.getClientRects().length);
+        if (!focusable.length) { e.preventDefault(); el.focus(); return; }
+        const first = focusable[0], last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }, true);
       document.body.appendChild(el);
+      el.querySelector('.cz-close')?.focus({ preventScroll: true });
       // FLIP 起点终点都取布局口径（UiScale.rect）：dx/dy 喂 transform（布局值），zoom≠1 才不错位
       const fromR = opts.from && (opts.from.getBoundingClientRect ? SDT.UiScale.rect(opts.from) : opts.from);
       if (fromR && fromR.width > 0) {
@@ -547,6 +609,13 @@ import { renderExpeditionPanel } from './expedition.view.js';
         this.el.overlay.classList.remove('fx-glass');
         this.el.overlay.hidden = true;
         this._restoreOverlayBackground();
+        // 隐藏不等于释放：卡牌库一次可生成 5k+ DOM 节点与数百张 <img>。关闭后若仍留在
+        // ovBody，会长期占用 JS/DOM/图片资源，反复开关虽不线性叠加但峰值永不回落。
+        // showOverlay 每次都会完整重建内容，因此关闭动画完成后可以安全清空。
+        this.el.ovBody.replaceChildren();
+        this._hasBattleStage = false;
+        // 关闭不透明页面后，Canvas 从低频巡检态立即醒来补一帧，避免最多 250ms 的回图延迟。
+        SDT.RenderScheduler?.invalidate?.();
         const returnFocus = this._overlayReturnFocus;
         this._overlayReturnFocus = null;
         if (returnFocus && returnFocus.isConnected && !returnFocus.closest('[inert]') && !returnFocus.hidden) {

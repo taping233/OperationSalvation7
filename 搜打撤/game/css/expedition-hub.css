@@ -62,3 +62,92 @@
   .brief-pet em { width:100%; max-width:none; margin-left:45px; text-align:left; }
 }
 @media (prefers-reduced-motion:reduce) { #overlay .deploy-primary:hover { transform:none; } }
+
+/* 人物档案与收藏档案：与基地的深青金属骨架共用视觉语言。 */
+#overlay .hub-classes .hub-page,
+#overlay .hub-ach .hub-page { max-width:1420px; margin:0 auto; width:100%; }
+.section-kicker { display:block; margin-bottom:8px; color:#d6bd7e; font:700 10px/1.2 "Cascadia Code",monospace; letter-spacing:.2em; }
+.class-command,
+.collection-command { display:flex; align-items:flex-end; justify-content:space-between; gap:28px; margin-bottom:16px; padding:20px 24px; border:1px solid rgba(183,209,214,.2); border-left:3px solid #d5bb79; background:linear-gradient(110deg,rgba(17,40,52,.96),rgba(8,21,31,.96)); box-shadow:0 14px 30px rgba(0,0,0,.18); }
+.class-command-copy,
+.collection-command-copy { max-width:670px; }
+.class-command h3,
+.collection-command h3 { margin:0 0 7px; color:#f2ead8; font:400 clamp(25px,2.4vw,36px)/1.1 var(--serif); letter-spacing:5px; }
+.class-command p,
+.collection-command p { margin:0; color:#aebfc3; font-size:13px; line-height:1.7; }
+.class-command-stats,
+.collection-command-stats { display:flex; gap:8px; flex:0 0 auto; }
+.class-command-stats > span,
+.collection-command-stats > span { min-width:94px; padding:10px 12px; border:1px solid rgba(185,208,211,.16); background:rgba(4,13,20,.45); }
+.class-command-stats small,
+.collection-command-stats small { display:block; margin-bottom:4px; color:#8ea5ad; font-size:10px; letter-spacing:1px; }
+.class-command-stats b,
+.collection-command-stats b { color:#ead69e; font:700 19px/1 "Cascadia Code",monospace; }
+
+.class-dossier-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:12px; }
+.class-dossier { position:relative; isolation:isolate; min-height:clamp(350px,48vh,600px); overflow:hidden; border:1px solid rgba(157,188,197,.25); background:#0c1c26; box-shadow:0 16px 30px rgba(0,0,0,.2); }
+.class-dossier.trained { border-color:rgba(211,187,120,.42); }
+.class-dossier-art { position:absolute; inset:0; z-index:-3; }
+.class-dossier-art .art,
+.class-dossier-art .art-figure-wrap { width:100%; height:100%; }
+.class-dossier-art img { width:100%; height:100%; object-fit:cover; object-position:center 22%; filter:saturate(.76) contrast(1.03); transition:transform .32s ease,filter .32s ease; }
+.class-dossier-shade { position:absolute; inset:0; z-index:-2; background:linear-gradient(180deg,rgba(5,15,23,.05) 25%,rgba(5,14,21,.48) 55%,rgba(4,11,17,.97) 91%); }
+.class-dossier-index { position:absolute; top:13px; right:13px; color:rgba(235,220,182,.72); font:700 11px "Cascadia Code",monospace; letter-spacing:2px; }
+.class-dossier-copy { position:absolute; left:0; right:0; bottom:0; padding:20px 18px 16px; }
+.class-dossier-kicker { color:#d6bd7e; font:700 8px "Cascadia Code",monospace; letter-spacing:.18em; }
+.class-dossier h3 { margin:5px 0 7px; color:#f2eee3; font:400 clamp(20px,1.8vw,29px)/1.1 var(--serif); letter-spacing:5px; }
+.class-dossier p { min-height:3em; margin:0 0 12px; color:#b5c4c7; font-size:11px; line-height:1.55; }
+.class-dossier-meta { display:flex; align-items:center; justify-content:space-between; gap:8px; color:#9fb1b5; font-size:10px; }
+.class-dossier-meta b { color:#ead296; font:700 12px "Cascadia Code",monospace; }
+.class-dossier .xp-bar { height:4px; margin-top:9px; background:rgba(220,230,228,.12); }
+.class-dossier .xp-bar i { background:linear-gradient(90deg,#8caeb4,#dfc47d); }
+.class-dossier .xp-txt { color:#97a9ae; font-size:9px; }
+.class-dossier:hover .class-dossier-art img { transform:scale(1.025); filter:saturate(.92) contrast(1.04); }
+
+.collection-tabs { position:sticky; top:0; z-index:3; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; margin-bottom:12px; padding:8px; border:1px solid rgba(171,200,205,.18); background:rgba(7,19,28,.94); backdrop-filter:blur(12px); }
+.collection-tabs button { min-height:44px; border:1px solid transparent; background:transparent; color:#9fb0b5; font:700 13px var(--font-ui); letter-spacing:1px; cursor:pointer; }
+.collection-tabs button .ic { width:16px; height:16px; vertical-align:-.2em; }
+.collection-tabs button:hover { color:#e9eee8; border-color:rgba(173,202,207,.24); }
+.collection-tabs button.on { border-color:rgba(216,190,123,.55); background:linear-gradient(180deg,rgba(72,62,38,.72),rgba(38,37,29,.72)); color:#f3dfaa; box-shadow:inset 0 1px rgba(255,255,255,.08); }
+#overlay .hub-ach .collection-panel,
+#overlay .hub-ach .coll-room { padding:18px 20px; border:1px solid rgba(176,203,208,.2); border-radius:2px; background:linear-gradient(160deg,rgba(17,37,48,.96),rgba(9,22,31,.97)); color:#dce6e4; }
+#overlay .hub-ach .collection-panel > h3,
+#overlay .hub-ach .coll-room > h3 { color:#efe8d6; font-size:16px; letter-spacing:2px; }
+#overlay .hub-ach .ach-row,
+#overlay .hub-ach .coll-ms { border-color:rgba(171,199,204,.16); border-radius:2px; background:rgba(5,15,22,.42); }
+#overlay .hub-ach .ach-row.done,
+#overlay .hub-ach .coll-ms.reach { border-color:rgba(211,187,120,.36); background:rgba(57,48,28,.35); }
+#overlay .hub-ach .ach-info b,
+#overlay .hub-ach .coll-ms b,
+#overlay .hub-ach .coll-group-head b { color:#e9ece6; }
+#overlay .hub-ach .ach-info span,
+#overlay .hub-ach .coll-ms .rw,
+#overlay .hub-ach .coll-group-head .dim { color:#a8b9bd; }
+#overlay .hub-ach .coll-slot.off { border:1px solid rgba(151,181,188,.18); background:linear-gradient(145deg,rgba(31,57,68,.66),rgba(10,25,34,.82)); box-shadow:inset 0 0 28px rgba(161,203,207,.04); }
+#overlay .hub-ach .coll-slot.off span { color:rgba(190,211,211,.3); }
+#overlay .hub-ach .back-grid { gap:10px; }
+#overlay .hub-ach .back-card { min-width:0; padding:13px 10px; border:1px solid rgba(163,192,198,.2); border-radius:2px; background:linear-gradient(155deg,rgba(19,45,56,.9),rgba(8,24,33,.94)); color:#dce5e3; box-shadow:none; }
+#overlay .hub-ach .back-card:hover:not(.locked) { border-color:#d6bd7e; transform:translateY(-2px); }
+#overlay .hub-ach .back-card.on { border-color:#d6bd7e; background:linear-gradient(155deg,rgba(69,62,39,.88),rgba(20,34,37,.94)); box-shadow:inset 0 0 0 1px rgba(214,189,126,.18); }
+#overlay .hub-ach .back-card.locked { opacity:.68; filter:saturate(.45); background:linear-gradient(155deg,rgba(30,52,60,.72),rgba(9,24,32,.88)); }
+#overlay .hub-ach .back-card b { color:#e5ebe5; }
+#overlay .hub-ach .back-card .dim { color:#9fb1b5; }
+#overlay .hub-ach .back-card.locked .back-thumb { opacity:.58; filter:grayscale(1) contrast(.9); }
+
+@media (max-width:1180px) {
+  .class-dossier-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .class-dossier { min-height:430px; }
+}
+@media (max-width:820px) {
+  .class-command,.collection-command { align-items:flex-start; flex-direction:column; }
+  .class-command-stats,.collection-command-stats { width:100%; }
+  .class-command-stats > span,.collection-command-stats > span { flex:1; min-width:0; }
+  .class-dossier-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+@media (max-width:560px) {
+  .class-dossier-grid { grid-template-columns:1fr; }
+  .class-dossier { min-height:500px; }
+  .collection-tabs { grid-template-columns:1fr; position:static; }
+  .class-command-stats,.collection-command-stats { flex-wrap:wrap; }
+}
+@media (prefers-reduced-motion:reduce) { .class-dossier-art img { transition:none; } }

@@ -16,7 +16,7 @@ import { esc, escAttr } from './shared.js';
 import { MAP, game, clearSave, saveGame, syncPlayTime, exitToTitle } from './game.session.js';
 import { UI } from './ui.js';
 import SDT, { sdtDefine } from './sdt-facade.js';
-import { BattleSession } from './battle.core.js';
+import { startBattle } from './battle-loader.js';
 import { rollRune, rollRuneKind, rollAttribute, RUNE_KINDS } from './runes.js';
 import { on as busOn } from './event-bus.js';
 
@@ -217,7 +217,7 @@ function advance() {
 }
 
 /* —— 龙巢战斗：牌盒即牌库（BOSS 制式：开局 5 张、每回合 2 费抽 1 张）—— */
-let battleStartFn = (g, foes, opts) => BattleSession.start(g, foes, opts);   // BOOT_ORDER 保证 battle.core 先于本模块加载
+let battleStartFn = startBattle;
 export function bindBattleStart(fn) { battleStartFn = fn; }
 
 const cell = () => NEST_MAP[game.nestPos] || NEST_MAP[0];   // 当前格（此前调用未定义的 cell() 会让每场龙巢战斗静默崩溃——2026-09-18 第1局实测）
@@ -236,7 +236,7 @@ function startNestBattle(def) {
   UI.hideOverlay();
   nestBattleCtx = { savedOwned, savedRules, def, isBossCell };
   if (!battleStartFn) { UI.log('[[icon:cross]] 战斗模块未就绪', 'warn'); return; }
-  battleStartFn(game, foeDefs, { isBoss: true, name: bossDef.name, nest: { runes: (game.nestEquipped || []).slice() } });
+  return battleStartFn(game, foeDefs, { isBoss: true, name: bossDef.name, nest: { runes: (game.nestEquipped || []).slice() } });
 }
 
 // 龙巢战斗结算（总线订阅；一图战后流程在 bag 侧对龙巢战斗让位）。

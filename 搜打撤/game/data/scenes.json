@@ -234,6 +234,51 @@
       "event-cobbler",
       "scene-event-cobbler",
       "scene-event-cobbler"
+    ],
+    "ev19-vital": [
+      "event-vital",
+      "scene-event-vital",
+      "scene-event-vital"
+    ],
+    "ev19-pearlbox": [
+      "event-pearlbox",
+      "scene-event-pearlbox",
+      "scene-event-pearlbox"
+    ],
+    "ev19-fireballs": [
+      "event-fireballs",
+      "scene-event-fireballs",
+      "scene-event-fireballs"
+    ],
+    "ev19-classchest": [
+      "event-classchest",
+      "scene-event-classchest",
+      "scene-event-classchest"
+    ],
+    "ev19-recode": [
+      "event-recode",
+      "scene-event-recode",
+      "scene-event-recode"
+    ],
+    "ev19-potions": [
+      "event-potions",
+      "scene-event-potions",
+      "scene-event-potions"
+    ],
+    "ev19-arrows": [
+      "event-arrows",
+      "scene-event-arrows",
+      "scene-event-arrows"
+    ],
+    "ev19-gamble": [
+      "event-gamble",
+      "scene-event-gamble",
+      "scene-event-gamble"
+    ],
+    "ev19-quartermaster": [
+      "event-quartermaster",
+      "scene-event-quartermaster",
+      "scene-event-quartermaster"
     ]
   },
   "nodeBg": {

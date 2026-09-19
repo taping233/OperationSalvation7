@@ -11,8 +11,7 @@ const BOOT_ORDER = [
   'ui-scale',   // 全局 UI 缩放：无依赖且须在首帧渲染前挂 zoom，故居首
   'random', 'rules', 'mapData', 'art', 'icons-bitmap', 'sound', 'camera', 'motion', 'input',
   'event-bus', 'notes', 'cards', 'combat', 'base', 'meta', 'render-scheduler', 'renderer.fx',
-  'renderer', 'ui', 'shared',
-  'battle.effects', 'battle.core', 'battle.view', 'chests',
+  'renderer', 'ui', 'shared', 'battle-loader', 'chests',
   'game.storage', 'game.store', 'game.session', 'game.nest', 'game.run', 'game.hub', 'game.bag',
   'game.notes', 'game.cardslib', 'game.boot',
 ];

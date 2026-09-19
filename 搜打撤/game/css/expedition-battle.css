@@ -143,3 +143,16 @@
 
 #overlay .sts-hand .bt-card.click-selected { outline:2px solid #efcd89; outline-offset:3px; box-shadow:0 0 20px #e9c47a55; }
 #overlay .sts-hand .bt-card.click-selected::after { content:'选择目标 · Esc 取消'; position:absolute; bottom:4px; left:4px; right:4px; padding:4px 0; color:#112735; background:#dfc28d; font-size:10px; text-align:center; pointer-events:none; }
+
+/* 战斗全屏边界：不继承通用弹窗的居中/动画位移，顶部牌堆和底部战术台始终留在视口内。 */
+#overlay.room-view:has(.card.battle) { align-items:stretch; overflow:hidden; }
+#overlay.room-view .card.battle { position:fixed; inset:0; width:auto; height:auto; min-width:0; min-height:0; transform:none!important; }
+#overlay.room-view .card.battle #ovBody { width:100%; height:100%; min-width:0; min-height:0; overflow:hidden; }
+#overlay.room-view .card.battle #ovBody > .battle-stage.sts { width:100%!important; max-width:none; height:100%!important; min-height:0!important; overflow:hidden; }
+#overlay .battle-stage.sts .sts-topbar { top:max(0px,env(safe-area-inset-top))!important; padding-left:max(clamp(12px,2vw,28px),env(safe-area-inset-left)); padding-right:max(clamp(12px,2vw,28px),env(safe-area-inset-right)); }
+
+/* 选目标时建立明确的“合法目标/其他单位”层级，避免与单位常驻蓝光混淆。 */
+#overlay .battle-stage[data-phase="targeting"] .sts-unit:not(.can-target) { opacity:.38; filter:grayscale(.6) saturate(.55); }
+#overlay .battle-stage[data-phase="targeting"] .sts-unit.can-target { opacity:1; z-index:8; outline:3px solid #ffe7a1; outline-offset:7px; border-radius:18px; background:radial-gradient(ellipse at center,rgba(255,221,128,.24),transparent 68%); box-shadow:0 0 0 2px rgba(69,43,13,.75),0 0 28px rgba(255,210,104,.72); }
+#overlay .battle-stage[data-phase="targeting"] .sts-unit.can-target .sts-figure { filter:drop-shadow(0 0 5px #fff) drop-shadow(0 0 18px #ffc84d) drop-shadow(0 0 32px rgba(255,153,0,.9)); }
+#overlay .battle-stage[data-phase="targeting"] .sts-unit.can-target::after { content:'可选目标'; position:absolute; left:50%; top:6px; transform:translateX(-50%); white-space:nowrap; padding:4px 10px; border:2px solid #ffe7a1; border-radius:999px; color:#2a1905; background:#ffd76f; font-size:11px; font-weight:900; letter-spacing:1px; box-shadow:0 2px 0 rgba(69,43,13,.85),0 0 18px rgba(255,205,91,.8); pointer-events:none; }

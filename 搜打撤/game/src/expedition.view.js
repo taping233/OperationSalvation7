@@ -67,7 +67,7 @@ export function renderExpeditionPanel(panel, game, iconHTML) {
   if (chapter && chapter.dataset.viewKey !== chapterKey) {
     chapter.dataset.viewKey = chapterKey;
     const names = (game.layerData || []).map((layer, i) => layer.name || `第 ${i + 1} 层`);
-    chapter.innerHTML = `<div class="chapter-kicker">EXPEDITION / ${String(game.layerIdx + 1).padStart(2, '0')}</div><ol>${names.map((name, i) => `<li class="${i === game.layerIdx ? 'current' : i < game.layerIdx ? 'passed' : ''}" ${i === game.layerIdx ? 'aria-current="step"' : ''}><span>0${i + 1}</span>${name}</li>`).join('')}</ol><small>亮环可达 · 滚轮缩放 · 拖动浏览</small>`;
+    chapter.innerHTML = `<div class="chapter-kicker">EXPEDITION / ${String(game.layerIdx + 1).padStart(2, '0')}</div><ol>${names.map((name, i) => `<li class="${i === game.layerIdx ? 'current' : i < game.layerIdx ? 'passed' : ''}" ${i === game.layerIdx ? 'aria-current="step"' : ''}><span>0${i + 1}</span>${name}</li>`).join('')}</ol>`;
   }
   // Stable markup while state is unchanged preserves keyboard focus and avoids DOM churn.
   const key = JSON.stringify([routes, objective, disabled]);

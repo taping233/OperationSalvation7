@@ -3,16 +3,25 @@
 function intentViewModel(intent) {
   if (!intent) return null;
   const intents = Array.isArray(intent) ? intent : [intent];
-  return intents.filter(Boolean).map((item) => ({
-    icon: String(item.icon || ''),
-    label: String(item.label || ''),
-    damage: Number.isFinite(Number(item.damage)) && Number(item.damage) > 0 ? Number(item.damage) : null,
-    kind: String(item.kind || 'unknown'),
-  }));
+  return intents.filter(Boolean).map((item) => {
+    const damage = Number.isFinite(Number(item.damage)) && Number(item.damage) > 0 ? Number(item.damage) : null;
+    const hits = Number.isFinite(Number(item.hits)) && Number(item.hits) > 1 ? Math.floor(Number(item.hits)) : 1;
+    return {
+      icon: String(item.icon || ''),
+      label: String(item.label || ''),
+      damage,
+      hits,
+      totalDamage: damage == null ? null : damage * hits,
+      kind: String(item.kind || 'unknown'),
+    };
+  });
 }
 
 function intentSummary(intent) {
-  return intentViewModel(intent).map(item => `${item.label}${item.damage == null ? '' : ` · ${item.damage}`}`).join(' / ');
+  return intentViewModel(intent).map(item => {
+    if (item.damage == null) return item.label;
+    return `${item.label} · ${item.damage}${item.hits > 1 ? ` ×${item.hits}（共${item.totalDamage}）` : ''}`;
+  }).join(' / ');
 }
 
 export { intentSummary, intentViewModel };

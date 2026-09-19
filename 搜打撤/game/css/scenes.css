@@ -596,5 +596,21 @@
   #overlay .scene[data-asset-key="scene-event-cobbler"] { background-image:url('../assets/scenes/event-cmtn7qttxqo4.webp'); }
   #overlay .node-pg[data-asset-key="scene-event-cobbler"] { background-image:url('../assets/scenes/event-cmtn7qttxqo4.webp'); }
 
+  #overlay :is(.scene,.node-pg)[data-asset-key="scene-event-vital"] { background-image:url('../assets/scenes/event-ev19-vital.webp'); }
+  #overlay :is(.scene,.node-pg)[data-asset-key="scene-event-pearlbox"] { background-image:url('../assets/scenes/event-ev19-pearlbox.webp'); }
+  #overlay :is(.scene,.node-pg)[data-asset-key="scene-event-fireballs"] { background-image:url('../assets/scenes/event-ev19-fireballs.webp'); }
+  #overlay :is(.scene,.node-pg)[data-asset-key="scene-event-classchest"] { background-image:url('../assets/scenes/event-ev19-classchest.webp'); }
+  #overlay :is(.scene,.node-pg)[data-asset-key="scene-event-recode"] { background-image:url('../assets/scenes/event-ev19-recode.webp'); }
+  #overlay :is(.scene,.node-pg)[data-asset-key="scene-event-potions"] { background-image:url('../assets/scenes/event-ev19-potions.webp'); }
+  #overlay :is(.scene,.node-pg)[data-asset-key="scene-event-arrows"] { background-image:url('../assets/scenes/event-ev19-arrows.webp'); }
+  #overlay :is(.scene,.node-pg)[data-asset-key="scene-event-gamble"] { background-image:url('../assets/scenes/event-ev19-gamble.webp'); }
+  #overlay :is(.scene,.node-pg)[data-asset-key="scene-event-quartermaster"] { background-image:url('../assets/scenes/event-ev19-quartermaster.webp'); }
+
+  .event-choice-hand { align-items:stretch; max-height:50vh; overflow:auto; padding:8px 4px 14px; }
+  button.event-choice-card { appearance:none; -webkit-appearance:none; padding:0; border:0; background:transparent; color:inherit; cursor:pointer; position:relative; }
+  button.event-choice-card:hover,
+  button.event-choice-card:focus-visible { transform:translateY(-5px); filter:brightness(1.08); outline:2px solid rgba(126,211,255,.88); outline-offset:3px; }
+  button.event-choice-card.picked { transform:translateY(-7px); filter:brightness(1.12); outline:3px solid #73ddc3; outline-offset:3px; }
+
   #overlay .scene[data-asset-key="scene-event-cobbler"] { background-image:url('../assets/scenes/event-cmtn7qttxqo4.webp'); }
   #overlay .node-pg[data-asset-key="scene-event-cobbler"] { background-image:url('../assets/scenes/event-cmtn7qttxqo4.webp'); }

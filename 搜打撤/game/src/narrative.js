@@ -1,6 +1,3 @@
-import { Story } from 'inkjs';
-import storyContent from './generated/narrative-events.js';
-
 const KNOTS = Object.freeze({
   'tt6-timeskip': 'tt6_timeskip',
   'tt6-demondeal': 'tt6_demondeal',
@@ -23,9 +20,21 @@ function parseChoice(text) {
   return { label: label.trim(), effect: metadata.effect || '', detail: metadata.detail || '', tone: metadata.tone || '' };
 }
 
-function eventNarrative(cardId) {
+async function eventNarrative(cardId) {
   const knot = KNOTS[cardId];
   if (!knot) return null;
+  // Ink 解释器只服务 10 张专属事件卡，不应进入每次启动都解析的首屏依赖图。
+  // 与编译后的故事一起按需加载；失败时返回 null，由事件页沿用卡面描述/default 结算。
+  let Story, storyContent;
+  try {
+    [{ Story }, { default: storyContent }] = await Promise.all([
+      import('inkjs'),
+      import('./generated/narrative-events.js'),
+    ]);
+  } catch (error) {
+    console.warn('[narrative] Ink 叙事模块加载失败，回退卡面事件', error);
+    return null;
+  }
   const story = new Story(storyContent);
   story.ChoosePathString(knot);
   const intro = story.ContinueMaximally().trim();

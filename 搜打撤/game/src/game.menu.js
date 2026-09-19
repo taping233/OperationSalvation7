@@ -3,7 +3,7 @@ function createGameMenuController(deps) {
   const {
     SDT, UI, game, runtime, SLOT_COUNT, esc, readSlot, loadGame, clearSlot,
     saveGame, syncPlayTime, clearSave, clearAllSlots, getActiveSlot, setActiveSlot,
-    hasRun, RunStorage,
+    hasRun, RunStorage, ensureBattleReady = async () => SDT.Battle,
   } = deps;
 
   // ---------- 标题界面 ----------
@@ -541,7 +541,10 @@ function createGameMenuController(deps) {
       setActiveSlot(slot);
       SDT.Base.use(slot);
       // 能力卡术语迁移（原「英雄卡」类型，2026-09-08 定版）：基地仓库/口袋副本同步更名
-      if (SDT.Cards.applyAbilityRename((SDT.Base.data.stash || []).concat(SDT.Base.data.pocket || []).map(st => st.card))) SDT.Base.save();
+      const storedCards = (SDT.Base.data.stash || []).concat(SDT.Base.data.pocket || []).map(st => st.card);
+      const abilityChanged = SDT.Cards.applyAbilityRename(storedCards);
+      const duplicateChanged = SDT.Cards.applyDuplicateRenames(storedCards);
+      if (abilityChanged || duplicateChanged) SDT.Base.save();
       const bi = SDT.Base.issue(slot);
       if (bi === 'corrupt') UI.log('[[icon:cross]] 该档位基地数据损坏（原数据已备份），本次以空档案启动', 'warn');
       else if (bi === 'tooNew') UI.log('[[icon:cross]] 该档位基地数据来自更新版本的游戏，已以空档案启动', 'warn');
@@ -576,6 +579,8 @@ function createGameMenuController(deps) {
             detail: '欢迎回到战场',
             duration: 900,
           });
+          // 存档可能包含战斗快照；必须先加载战斗域，loadGame 才能同步 restore。
+          await ensureBattleReady();
           inRun = !!loadGame(slot);
           if (!inRun) { RunStorage.issue(slot); UI.log('对局存档读取失败，先回基地', 'warn'); }
           else return;   // loadGame 已恢复地图/战斗界面：停留局内，不再进基地整备

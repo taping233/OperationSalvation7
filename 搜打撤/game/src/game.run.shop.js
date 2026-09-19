@@ -164,9 +164,10 @@ function createShopController({
           <div class="shop-board-grid">
             ${slots}
             <button class="shop-sellpost" data-act="openSell" title="打开收购台，挑卡卖掉">
+              <span class="sellpost-index">ACQ // 08</span>
               <span class="sellpost-coin">[[icon:cards]]</span>
-              <span class="sellpost-name">卖牌处</span>
-              <span class="sellpost-hint">${sellableCount ? `可卖 ${sellableCount} 张` : '暂无可卖卡牌'}</span>
+              <span class="sellpost-copy"><span class="sellpost-name">收购台</span><span class="sellpost-hint">${sellableCount ? `已识别 ${sellableCount} 张可出售卡` : '当前没有可出售卡牌'}</span></span>
+              <span class="sellpost-enter">进入 →</span>
             </button>
           </div>
         </div>
@@ -181,10 +182,12 @@ function createShopController({
     shopPage = 'sell';
     const sellableOwned = game.ownedCards.filter(owned => SDT.Cards.isSellable(owned.card) && !owned.stored);   // 珍珠盒中存放的资源卡不在此列出（2026-09-10 #29）
     const total = sellableOwned.length;
+    const totalValue = sellableOwned.reduce((sum, owned) => sum + SDT.Cards.sellPrice(owned.card), 0);
     const rows = sellableOwned.map(owned => `
       <div class="bag-card sell-item">
         ${cardHTML(owned.card, 'sm')}
-        <button class="mini-btn ok" data-act="sellCard" data-uid="${owned.uid}">卖出 +${SDT.Cards.sellPrice(owned.card)} 币</button>
+        <div class="sell-item-offer"><span>商队估值</span><b>+${SDT.Cards.sellPrice(owned.card)} 币</b></div>
+        <button class="mini-btn ok" data-act="sellCard" data-uid="${owned.uid}">确认卖出</button>
       </div>`).join('');
     const ownedAll = game.ownedCards.length;
     const grid = total
@@ -203,8 +206,19 @@ function createShopController({
           <div class="shop-resources"><span class="shop-resource coin"><small>当前金币</small><b>${game.coins}</b><em>币</em></span><span class="shop-resource"><small>可出售</small><b>${total}</b><em>张</em></span></div>
         </header>
         <div class="shop-board sell-board">
-          ${total ? `<p class="sell-tip">持有 ${ownedAll} 张 · 可卖 ${total} 张——其余卡没打「可出售」备注，商店不收（不在此显示）</p>` : ''}
-          ${grid}
+          <div class="sell-desk">
+            <aside class="sell-ledger">
+              <span class="sell-ledger-kicker">MERCHANT LEDGER</span>
+              <h3>商队收购单</h3>
+              <div class="sell-ledger-total"><small>本页可换取</small><b>${totalValue}</b><span>币</span></div>
+              <dl><div><dt>持有卡牌</dt><dd>${ownedAll} 张</dd></div><div><dt>符合条件</dt><dd>${total} 张</dd></div><div><dt>当前金币</dt><dd>${game.coins} 币</dd></div></dl>
+              <div class="sell-ledger-rule"><b>收购规则</b><p>仅识别带“可出售”备注的货币与宝石类卡牌。点击“确认卖出”后立即成交，价格等于卡面币值。</p></div>
+            </aside>
+            <section class="sell-catalog" aria-label="可出售卡牌">
+              <div class="sell-catalog-head"><div><span>APPRAISAL LIST</span><h3>待估物清单</h3></div><b>${total} 件</b></div>
+              ${grid}
+            </section>
+          </div>
         </div>
         <button class="shop-back" data-act="backShop">[[icon:arrow]] 返回商店</button>
       </div>`, 'page');

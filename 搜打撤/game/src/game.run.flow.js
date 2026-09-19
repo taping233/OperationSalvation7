@@ -3,14 +3,16 @@
  *
  * 由 game.run.js 拆出。层位最高（L2）：依赖 scenes（L0）与 altar（L1），不被二者依赖。
  * ============================================================ */
-import { esc } from './shared.js';
+import { esc, escAttr } from './shared.js';
 import { MAP, cellCenter, curLayer, gainCoins, game, markSeen, modeCfg, pick, saveGame, scaledEnemy, weighted } from './game.session.js';
 import { tone } from './sound.js';
 import { _set_cardPageOpen } from './game.cardslib.js';
 import { EVENT_SCENE_META } from './game.run.data.js';
 import { Random } from './random.js';
 import { eventNarrative } from './narrative.js';
-import { buildEncounter, cancelLegacyChainMove, enterNode, finishInstant, grantEventCard, nodeShell, openBattleCell, openBlankSafePage, openChestsOnCell, openPickupPage, openPocketRestore, openShop } from './game.run.scenes.js';
+import { startBattle } from './battle-loader.js';
+import { renderScheduler } from './render-scheduler.js';
+import { buildEncounter, cancelLegacyChainMove, enterNode, finishInstant, grantEventCard, nodeShell, openBattleCell, openBlankSafePage, openChestsOnCell, openPickupPage, openPocketRestore, openShop, preloadCellScene } from './game.run.scenes.js';
 import { openDoorModal, openFireRest, openAltarRitual, openBossGate, openEmergencyModal } from './game.run.altar.js';
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const SDT = window.SDT;
@@ -35,6 +37,8 @@ export function moveTo(toLi, toIdx) {
   const from = cellCenter(fromLi, fromIdx);
   const to = cellCenter(toLi, toIdx);
   if (!from || !to) return false;
+  // 玩家确认路线时才预取目标房间；移动动画提供约 220ms 的网络/解码窗口。
+  preloadCellScene(game.layerData?.[toLi], toIdx);
 
   const seq = ++moveSeq;
   const startedAt = typeof performance !== 'undefined' && performance.now ? performance.now() : Date.now();
@@ -77,6 +81,7 @@ export function moveTo(toLi, toIdx) {
   game.moveTarget = { li: toLi, idx: toIdx, seq, progress: 0, moving: true };
   game.state = 'moving';
   UI.refresh(game);
+  renderScheduler.invalidate();
   game.pos = { ...from };
   // rAF 在后台页可能被暂停；看门狗确保事务最终回到稳定节点。
   watchdog = setTimeout(finish, MOVE_DURATION + 700);
@@ -251,12 +256,12 @@ export function runEventDeck() {
     else UI.log(`【事件】${ev.text}`, 'dim');
     return;
   }
-  triggerEventCard(pick(deck));
+  return triggerEventCard(pick(deck));
 }
 
 // 把库里的卡发给玩家（同名堆未满并入现有格；堆满或新卡需要空格——叠放上限见 game.session #7；
 // 珍珠盒扩出来的格子只收资源卡——canAcceptCard 统一判定，Q5 老板定向）
-function triggerEventCard(card) {
+async function triggerEventCard(card) {
   game.eventLog = game.eventLog || [];
   game.eventLog.push({ name: card.name, desc: card.desc || '', turn: game.turn });
   // 封顶：eventLog 随对局只增不减，而每次落盘都会全量 JSON.stringify——
@@ -267,7 +272,7 @@ function triggerEventCard(card) {
   game.state = 'modal';
   _set_cardPageOpen(false);
   SDT.Sound.sfx('scene');
-  const narrative = eventNarrative(card.id);
+  const narrative = await eventNarrative(card.id);
   const choices = eventChoiceSpec(card, narrative);
   // 2026-09-10 留言 #18：没有专属图的事件此前全部回落到祭坛图（等于所有事件共用 1 张背景）。
   // 改为从 3 张事件场景图中随机轮换（scene-event-custom-a/b/c，见 css/scenes.css）。
@@ -305,6 +310,179 @@ function triggerEventCard(card) {
     if (game.state !== 'modal') finishInstant();   // 同上（旧事件 default 分支此前漏收尾）
   });
   UI.refresh(game);
+}
+
+function eventPool(types) {
+  const wanted = new Set(Array.isArray(types) ? types : [types]);
+  return SDT.Cards.all().filter(c => wanted.has(c.type) && SDT.Cards.isRandomObtainable(c));
+}
+
+function uniqueEventPicks(pool, count) {
+  const bag = [...pool];
+  const out = [];
+  while (bag.length && out.length < count) {
+    const at = Math.floor(Random.random('event') * bag.length);
+    const picked = bag.splice(at, 1)[0];
+    if (picked && !out.some(c => c.id === picked.id || c.name === picked.name)) out.push(picked);
+  }
+  return out;
+}
+
+function closeEventFlow() {
+  UI.hideOverlay();
+  game.state = 'idle';
+  saveGame();
+  UI.refresh(game);
+}
+
+function spendEventCoins(amount, reason) {
+  if ((game.coins || 0) < amount) {
+    SDT.Sound.sfx('deny');
+    UI.log(`[[icon:coin]] 币不足：「${esc(reason)}」需要 ${amount} 币（现有 ${game.coins || 0}）`, 'warn');
+    return false;
+  }
+  game.coins -= amount;
+  SDT.Sound.sfx('coin');
+  UI.log(`[[icon:coin]] ${esc(reason)}：-${amount} 币（剩余 ${game.coins}）`, 'coin');
+  return true;
+}
+
+function openEventCardChoice({ title, sub, cards, action = '选择获得', onPick, asset = 'scene-event-custom-a' }) {
+  game.state = 'modal';
+  const list = (cards || []).filter(Boolean);
+  if (!list.length) {
+    UI.log(`【${esc(title)}】可用卡池为空，本次未获得卡牌`, 'warn');
+    closeEventFlow();
+    return;
+  }
+  nodeShell({
+    tone: 'event', asset, icon: '[[icon:cards]]', title,
+    sub,
+    body: `<div class="bt-hand event-choice-hand">${list.map((card, i) => `
+      <button type="button" class="bt-card event-choice-card" data-act="eventCardPick" data-i="${i}" aria-label="${escAttr(action)}：${escAttr(card.name)}">
+        ${SDT.Cards.cardHTML(card, 'sm')}
+      </button>`).join('')}</div>
+      <p class="loot-footer-note">点击一张卡牌${action}</p>`,
+  });
+  let picked = false;
+  UI.act('eventCardPick', (d) => {
+    if (picked) return;
+    const card = list[+d.i];
+    if (!card || (onPick ? onPick(card) === false : !grantEventCard(card))) return;
+    picked = true;
+    closeEventFlow();
+  });
+  UI.refresh(game);
+}
+
+function transformCandidates(card) {
+  if (!card || !['武术', '法术', '装备'].includes(card.type)) return [];
+  return SDT.Cards.all().filter(c => {
+    if (!c || c.id === card.id || c.name === card.name || c.type !== card.type || c.rarity !== card.rarity) return false;
+    if (SDT.Cards.isRandomObtainable(c)) return true;
+    return card.rarity === '职业' && c.rarity === '职业' && c.cls === game.myClass && !c.hero;
+  });
+}
+
+function openEventRecode() {
+  game.state = 'modal';
+  const eligible = game.ownedCards.filter(o => o && o.card && !o.safe && !o.stored && transformCandidates(o.card).length);
+  const need = Math.min(2, eligible.length);
+  if (!need) {
+    UI.log('[[icon:cards]] 背包中没有可转换的招式或装备卡', 'warn');
+    closeEventFlow();
+    return;
+  }
+  const selected = new Set();
+  const render = () => {
+    nodeShell({
+      tone: 'event', asset: 'scene-event-recode', icon: '[[icon:recycle]]', title: '故障重编',
+      sub: `选择 <b>${need}</b> 张招式或装备卡，将其随机变为同稀有度、同类型的卡牌（${selected.size}/${need}）`,
+      body: `<div class="bt-hand event-choice-hand">${eligible.map((o, i) => `
+        <button type="button" class="bt-card event-choice-card${selected.has(o.uid) ? ' picked' : ''}" data-act="eventRecodePick" data-i="${i}" aria-pressed="${selected.has(o.uid)}">
+          ${SDT.Cards.cardHTML(o.card, 'sm')}
+          ${selected.has(o.uid) ? '<span class="chest-got-mark">已选</span>' : ''}
+        </button>`).join('')}</div>
+        <div class="scene-ops"><button class="ov-btn" data-act="eventRecodeLeave">放弃转换</button><button class="ov-btn ok" data-act="eventRecodeGo" ${selected.size !== need ? 'disabled' : ''}>启动重编</button></div>`,
+    });
+    UI.act('eventRecodePick', (d) => {
+      const entry = eligible[+d.i];
+      if (!entry) return;
+      if (selected.has(entry.uid)) selected.delete(entry.uid);
+      else if (selected.size < need) selected.add(entry.uid);
+      render();
+    });
+    UI.act('eventRecodeLeave', closeEventFlow);
+    UI.act('eventRecodeGo', () => {
+      if (selected.size !== need) return;
+      for (const uid of selected) {
+        const entry = game.ownedCards.find(o => o.uid === uid);
+        if (!entry) continue;
+        const before = entry.card;
+        const pool = transformCandidates(before);
+        if (!pool.length) continue;
+        const after = pool[Math.floor(Random.random('card') * pool.length)];
+        entry.card = { ...after };
+        UI.log(`[[icon:recycle]] 【${esc(before.name)}】重编为同类型同稀有度的【${esc(after.name)}】`, 'loot');
+      }
+      closeEventFlow();
+    });
+    UI.refresh(game);
+  };
+  render();
+}
+
+function openEventPotions() {
+  const pool = eventPool('道具').filter(c => /药水/.test(c.name));
+  openEventCardChoice({
+    title: '避难市集药摊', asset: 'scene-event-potions',
+    sub: '污染区药师只能保住一瓶——从 3 瓶随机药水中选择 1 瓶。',
+    cards: uniqueEventPicks(pool, 3),
+  });
+}
+
+function openEventQuartermaster() {
+  const cards = uniqueEventPicks(eventPool('装备'), 3);
+  if (!spendEventCoins(3, '军需征用')) { closeEventFlow(); return; }
+  openEventCardChoice({
+    title: '装备征用令', asset: 'scene-event-quartermaster',
+    sub: '已支付 3 币。从军需官摆出的 3 件装备中选择 1 件。', cards,
+  });
+}
+
+function openEventGamble() {
+  game.state = 'modal';
+  const equip = uniqueEventPicks(eventPool('装备'), 1);
+  const moves = uniqueEventPicks(eventPool(['武术', '法术']), 2);
+  const prizes = [...equip, ...moves];
+  let attempts = 0;
+  let settled = false;
+  const render = (lastMiss = false) => {
+    nodeShell({
+      tone: 'event', asset: 'scene-event-gamble', icon: '[[icon:dice]]', title: '地下商场黑市',
+      sub: `每次投入 <b>3 币</b>，有 <b>50%</b> 概率拿走全部三张卡；第 <b>5</b> 次必定成功。已尝试 ${attempts}/5 次。${lastMiss ? '<br><b class="danger">指示灯变红，这次什么也没拿到。</b>' : ''}`,
+      body: `<div class="bt-hand event-choice-hand">${prizes.map(c => `<div class="bt-card">${SDT.Cards.cardHTML(c, 'sm')}</div>`).join('')}</div>
+        <div class="scene-ops"><button class="ov-btn" data-act="eventGambleLeave">放弃并离开</button><button class="ov-btn ok" data-act="eventGambleTry" ${(game.coins || 0) < 3 || !prizes.length ? 'disabled' : ''}>[[icon:coin]] 投入 3 币${attempts === 4 ? '（本次保底）' : ''}</button></div>`,
+    });
+    UI.act('eventGambleLeave', () => { if (!settled) { settled = true; closeEventFlow(); } });
+    UI.act('eventGambleTry', () => {
+      if (settled || !spendEventCoins(3, '黑市抽签')) return;
+      attempts++;
+      const hit = attempts >= 5 || Random.random('event') < 0.5;
+      if (!hit) { render(true); return; }
+      settled = true;
+      prizes.forEach(c => grantEventCard(c));
+      UI.log(`[[icon:sparkles]] 黑市闸门弹开：第 ${attempts} 次投币成功，获得 1 张装备与 2 张招式`, 'loot');
+      closeEventFlow();
+    });
+    UI.refresh(game);
+  };
+  if (prizes.length < 3) {
+    UI.log('[[icon:cards]] 黑市货架无法生成完整的三张奖品', 'warn');
+    closeEventFlow();
+    return;
+  }
+  render(false);
 }
 
 // 事件分支只覆盖已有资源/效果；未列出的旧事件继续单按钮结算，兼容旧存档与自定义事件卡。
@@ -358,6 +536,47 @@ function eventChoiceSpec(card, narrative = null) {
     'tt6-goldhammer': () => [
       { label: '收下', detail: "获得卡牌「闪金之锤」", tone: 'ok', run: settle(() => { grantEventCard(SDT.Cards.all().find(c => c.id === 'cmtn0xt0zr7')); }) },
     ],
+    'ev19-vital': () => [
+      { label: '接受强化急救', detail: '生命上限 +3，并回复 3 点生命', tone: 'ok', run: settle(() => {
+        game.maxHp += 3; game.hp += 3;
+        UI.log(`[[icon:heart]] 强化药剂生效：生命上限 +3（${game.hp}/${game.maxHp}）`, 'ok');
+      }) },
+    ],
+    'ev19-pearlbox': () => [
+      { label: '取走珍珠匣', detail: '获得卡牌「珍珠盒」', tone: 'ok', run: settle(() => {
+        grantEventCard(SDT.Cards.all().find(c => c.id === 'tt2-pearlbox'));
+      }) },
+    ],
+    'ev19-fireballs': () => [
+      { label: '接收封装火种', detail: '获得两张「火球」', tone: 'ok', run: settle(() => {
+        const fireball = SDT.Cards.all().find(c => c.id === 'tt3-fireball');
+        if (fireball) { grantEventCard(fireball); grantEventCard(fireball); }
+      }) },
+    ],
+    'ev19-classchest': () => [
+      { label: '启封黑箱', detail: '开启 1 个职业·密封物资箱', tone: 'ok', run: () => {
+        openChestsOnCell([{ kind: 'medium', isClass: true }], '军方调拨的黑色职业宝箱');
+      } },
+    ],
+    'ev19-recode': () => [
+      { label: '接入重编台', detail: '选择 2 张招式或装备卡进行同稀有度同类型转换', tone: 'ok', run: openEventRecode },
+    ],
+    'ev19-potions': () => [
+      { label: '查看药摊', detail: '从 3 瓶随机药水中选择 1 瓶', tone: 'ok', run: openEventPotions },
+    ],
+    'ev19-arrows': () => [
+      { label: '打开弹药柜', detail: '获得 2 张随机非职业箭系列卡', tone: 'ok', run: settle(() => {
+        const arrows = uniqueEventPicks(eventPool(['武术', '法术', '装备']).filter(c => /箭/.test(c.name) && c.rarity !== '职业' && !c.cls), 2);
+        arrows.forEach(c => grantEventCard(c));
+      }) },
+    ],
+    'ev19-gamble': () => [
+      { label: '查看黑市货物', detail: '每次 3 币，50% 概率，第 5 次保底；可随时放弃', run: openEventGamble },
+    ],
+    'ev19-quartermaster': () => [
+      { label: '支付 3 币', detail: (game.coins || 0) >= 3 ? '从 3 张装备卡中选择 1 张' : `币不足（现有 ${game.coins || 0}）`, tone: (game.coins || 0) >= 3 ? 'ok' : 'danger', run: openEventQuartermaster },
+      { label: '放弃征用', detail: '保留货币继续行进', run: settle(() => { UI.log('你没有签下军需征用单', 'dim'); }) },
+    ],
   };
   if (V2[card.id]) return V2[card.id]();
   if (narrative) return narrative.choices.map(choice => {
@@ -390,7 +609,7 @@ function eventChoiceSpec(card, narrative = null) {
         const legends = SDT.Cards.all().filter(c => c.rarity === '传说' && ['装备', '武术', '法术'].includes(c.type));
         grantEventCard(legends.length ? legends[Math.floor(Random.random('card') * legends.length)] : null);
       }),
-      bandits_fight: () => {   // 战斗与开箱路径自管收尾，不走 settle（同 chest_*）
+      bandits_fight: async () => {   // 战斗与开箱路径自管收尾，不走 settle（同 chest_*）
         narrate();
         // 2026-09-11 实机定版：数量随层数缩放（第 1 层 3 只 → 第 3 层起 5 只）——
         // 此前固定 ×5，1-2 层新档（2 费 / 35 血 / 无 AOE）近乎必死
@@ -401,9 +620,9 @@ function eventChoiceSpec(card, narrative = null) {
         const tpl = MAP.monsters.bandit;
         const gang = [];
         for (let i = 0; i < gangN; i++) gang.push(scaledEnemy({ ...tpl }));
-        SDT.Battle.start(game, gang, { isBoss: false, layer: game.layerIdx, name: tpl.name });
+        await startBattle(game, gang, { isBoss: false, layer: game.layerIdx, name: tpl.name });
       },
-      goldhammer_strike: () => {
+      goldhammer_strike: async () => {
         narrate();
         const enc = MAP.encounters[game.layerIdx] || MAP.encounters[0];
         const tpl = MAP.monsters[enc.pool[Math.floor(Random.random('enemy') * enc.pool.length)]];
@@ -417,7 +636,7 @@ function eventChoiceSpec(card, narrative = null) {
         }
         UI.log(`[[icon:tools]] 闪金之锤重击 <b>${esc(foe.name)}</b>（-5 血），战斗打响！`, 'warn');
         game.state = 'modal';
-        SDT.Battle.start(game, [foe], { isBoss: false, layer: game.layerIdx, name: foe.name });
+        await startBattle(game, [foe], { isBoss: false, layer: game.layerIdx, name: foe.name });
       },
     };
     return { label: choice.label, detail: choice.detail, tone: choice.tone, run: effects[choice.effect] || settle(narrate) };

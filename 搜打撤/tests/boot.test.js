@@ -72,7 +72,7 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     expect(title.hidden).toBe(false);
   });
 
-  it('卡牌档案馆可打开、筛选、清空与排序', { timeout: 15_000 }, () => {
+  it('卡牌档案馆可打开、筛选、清空与排序', { timeout: 15_000 }, async () => {
     const originalSfx = window.SDT.Sound.sfx;
     window.SDT.Sound.sfx = () => {};
     document.getElementById('btnCardLib').click();
@@ -82,6 +82,7 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     const search = document.getElementById('cardSearch');
     search.value = '不存在的卡牌';
     search.dispatchEvent(new Event('input', { bubbles: true }));
+    await new Promise(r => setTimeout(r, 150));
     expect(document.querySelector('.clib-empty')).not.toBeNull();
     document.querySelector('[data-act="libClearFilter"]').click();
     expect(document.querySelector('.lib-grid')).not.toBeNull();
@@ -119,10 +120,13 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     expect(g.TYPE_NAME && typeof g.TYPE_NAME.coin).toBe('string'); // bindNotesMixins
     expect(typeof g.debug.openShop).toBe('function'); // boot 调试入口
   });
-  it('SDT 命名空间核心模块均已发布', () => {
-    for (const k of ['RULES', 'MAP', 'Art', 'Icons', 'Sound', 'Camera', 'Notes', 'Cards', 'Base', 'Meta', 'RenderScheduler', 'Renderer', 'UI', 'Battle', 'Chests']) {
+  it('核心模块已发布，战斗域按需加载后发布', async () => {
+    for (const k of ['RULES', 'MAP', 'Art', 'Icons', 'Sound', 'Camera', 'Notes', 'Cards', 'Base', 'Meta', 'RenderScheduler', 'Renderer', 'UI', 'Chests']) {
       expect(window.SDT[k], `window.SDT.${k} 未发布`).toBeTruthy();
     }
+    const { ensureBattleReady } = await import('../game/src/battle-loader.js');
+    await ensureBattleReady();
+    expect(window.SDT.Battle, 'window.SDT.Battle 按需加载后未发布').toBeTruthy();
     expect(typeof window.SDT.Battle.getSnapshot).toBe('function');
     expect(Object.isFrozen(window.SDT.Battle)).toBe(true);
     for (const command of ['playCard', 'selectInfusion', 'confirmInfusion', 'cancelInfusion', 'endTurn', 'flee', 'openGrave', 'closeGrave', 'selectDeckCard', 'confirmDeck', 'cancelDeck', 'cancelPendingTarget']) {

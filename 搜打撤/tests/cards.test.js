@@ -67,6 +67,20 @@ describe('指定道具定名迁移', () => {
   });
 });
 
+describe('同名异 ID 卡牌定名迁移', () => {
+  it('仅按稳定 ID 给后定义版本追加「-改」，且可重复执行', () => {
+    const cards = [
+      { id: 'cc-unmoved', name: '不变应万变' },
+      { id: 'tt7-imitate', name: '不变应万变' },
+      { id: 'tt2-jianghu', name: '江湖救急' },
+      { id: 'cmtn1wnhhym', name: '江湖救急' },
+    ];
+    expect(Cards.applyDuplicateRenames(cards)).toBe(true);
+    expect(cards.map(card => card.name)).toEqual(['不变应万变', '不变应万变-改', '江湖救急', '江湖救急-改']);
+    expect(Cards.applyDuplicateRenames(cards)).toBe(false);
+  });
+});
+
 describe('道具专属图片映射', () => {
   beforeAll(() => {
     window.SDT.Icons = window.SDT.Icons || {};

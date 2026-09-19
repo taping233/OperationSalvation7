@@ -14,6 +14,7 @@ import { Sfx, _set_cardPageOpen, cardHTML } from './game.cardslib.js';
 import { IMMEDIATE_SCENES, NODE_BG, PICKUP_BG, PRELOAD_SCENES, SCENES, SCENE_META } from './game.run.data.js';
 import { Random } from './random.js';
 import { createShopController } from './game.run.shop.js';
+import { startBattle } from './battle-loader.js';
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const SDT = window.SDT;
 const UI = window.SDT.UI;
@@ -51,6 +52,7 @@ export function preloadScene(name) {
   if (img.decode) img.decode().catch(() => {});
 }
 export function preloadCellScene(layer, idx) {
+  if (!layer?.logical) return;
   const cell = layer.logical[idx];
   const cellType = cell && cell.def && cell.def.type;
   const door = (layer.doors || []).some(d => d.at === idx);
@@ -59,8 +61,8 @@ export function preloadCellScene(layer, idx) {
   const type = immediate ? cellType : door ? 'door' : altar ? 'altar' : cellType;
   preloadScene(PRELOAD_SCENES[type]);
 }
-// 开局一次性预载全部整页背景（nodeShell 的 NODE_BG + 预载表）：
-// 这些 webp 若等 CSS background-image 打开页面才请求，大图加载期间整页近乎黑屏（2026-09-09 实测反馈）
+// 兼容旧调用：只预载最常见的即时节点，不再一次吞入全部事件背景。
+// 其他房间由 preloadCellScene 在路线确认时按目标格预取。
 const _preloaded = new Set();
 export function preloadSceneList(urls) {
   urls.forEach(url => {
@@ -73,20 +75,7 @@ export function preloadSceneList(urls) {
   });
 }
 export function preloadAllNodeShellBgs() {
-  preloadSceneList(Object.values(PRELOAD_SCENES));
-  // NODE_BG 存的是 asset-key，实际 URL 与 PRELOAD_SCENES 同图（见 css/scenes.css 映射），上面已覆盖
-  // U1（2026-09-19 交互走查）：事件页专属背景只预载了通用轮换 3 张，带专属图的事件
-  // （恶魔交易/盗匪/金矿/闪金之锤/开箱/系统补给/修鞋铺）首开时 CSS background 才发请求，
-  // 大图解码期间整页纯黑。节点未完成前重进会再次打开节点页，黑屏每次都会重现——这里一次补齐。
-  preloadSceneList([
-    'event-tt6-demondeal.webp',
-    'event-bandits-anime-v2.webp',
-    'event-tt6-goldmine.webp',
-    'event-tt6-goldhammer.webp',
-    'event-tt6-chestdraw.webp',
-    'event-tt6-systemsupply.webp',
-    'event-cmtn7qttxqo4.webp',
-  ].map(name => new URL(`../assets/scenes/${name}`, import.meta.url).href));
+  preloadSceneList(Array.from(IMMEDIATE_SCENES, key => PRELOAD_SCENES[key]).filter(Boolean));
 }
 let sceneState = null;
 
@@ -277,7 +266,7 @@ export function openBlankSafePage() {
 export function openBattleCell(def, encounter) {
   game.state = 'modal';
   const list = encounter || buildEncounter(game.layerIdx);
-  SDT.Battle.start(game, list, { isBoss: false, layer: game.layerIdx, name: list[0].name,
+  return startBattle(game, list, { isBoss: false, layer: game.layerIdx, name: list[0].name,
     risk: list.risk, strategy: list.strategy });
 }
 

@@ -115,3 +115,22 @@ describe('法力奔涌识别兜底（2026-09-10 #37）', () => {
     await drain(20);
   });
 });
+
+describe('限时数值增益', () => {
+  it('「攻击力 +2，持续 1 回合」在本回合结束时准确撤回', async () => {
+    const timedBuff = { id: 'test-timed-atk', name: '短时强化', cost: 0, rarity: '古朴', type: '武术', desc: '获得 2 点攻击力，持续 1 回合。' };
+    const g = makeGame([timedBuff]);
+    BattleSession.start(g, [foeDef()], { isBoss: false, name: '限时增益测试' });
+    await drain();
+    const uid = g.ownedCards[0].uid;
+    expect(snap().hand).toContain(uid);
+    BattleSession.commands.playCard(uid, 'self');
+    await drain();
+    expect(snap().pstat.status.atkUp).toBe(2);
+    BattleSession.commands.endTurn();
+    await drain(500);
+    expect(snap().pstat.status.atkUp).toBe(0);
+    BattleSession.commands.flee();
+    await drain(20);
+  });
+});

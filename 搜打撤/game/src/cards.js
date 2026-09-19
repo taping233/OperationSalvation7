@@ -62,6 +62,7 @@ import { DATA } from './data-loader.js';
   const TT10_KEY = 'sdt-cards-tt10-v2-seeded';   // 第十批：设计者实机定版同步（2026-09-07 双向合并）；v2：清掉合并残留的错误词条（能力卡 armor:5 等）并重播覆盖一次
   const TT11_KEY = 'sdt-cards-tt11-v5-seeded';   // 第十一批：与设计者实机卡库导出完全对齐（2026-09-09 老板拍板，见 TABLETOP11 注释）；v2：法力补给补 cls=法师（白塔专属）；v3：不变应万变补 cls=侠客（无专属，老板 2026-09-12 拍板）；v4：恶魔之力补 cls=牧师（星月专属，老板 2026-09-13 拍板）；v5：恶魔之力 tt7-drunksong 整卡退役（老板 2026-09-13 改拍板删除，同名双版收口只留 cc-demon）——均换 key 重播让旧档拿到
   const ITEM_RENAME_KEY = 'sdt-cards-item-renames-v1'; // 2026-09-08：道具定名 + 金创药/金疮药合并
+  const EVENTS_0919_KEY = 'sdt-events-0919-v1-seeded'; // 2026-09-19：都市污染事件池（10 旧事件改名 + 9 新事件）
   // 第十批退役：同设计重复 id（设计者实机已把同名卡定版在旧 id 上，见 TABLETOP10 尾部注释）
   const RETIRE_TT10 = ['tt3-freeze', 'tt3-flame-potion', 'tt3-toxic-potion', 'tt3-bleed-potion'];
   // 第十一批退役（2026-09-09 对齐设计者实机）：仓库独有、设计者实机没有的 39 张。
@@ -93,6 +94,27 @@ import { DATA } from './data-loader.js';
     TYPE_ICON: { '武术': '[[icon:swords]]', '法术': '[[icon:sparkles]]', '生物': '[[icon:paw]]', '道具': '[[icon:flask]]', '装备': '[[icon:shield]]', '事件': '[[icon:question]]', '能力卡': '[[icon:helmet]]', '资源': '[[icon:wood]]' },
     // 类型到位图图标名（卡面插画与页签用；TYPE_ICON 保留给纯文本场景）
     TYPE_ART: { '武术': 'swords', '法术': 'sparkles', '生物': 'paw', '道具': 'flask', '装备': 'shield', '事件': 'question', '能力卡': 'helmet', '资源': 'wood' },
+    EVENTS_0919: [
+      { id: 'tt6-demondeal', name: '隧道血契', cost: 0, rarity: '衍生', type: '事件', desc: '-5 血，获得 1 个大宝箱。', value: 0, sellable: false, unrandom: true },
+      { id: 'tt6-bandits', name: '暴雨劫道', cost: 0, rarity: '衍生', type: '事件', battle: true, desc: '反抗组织拾荒者 ×3~5（随层数增加）。奖励：密封物资箱 ×2。', value: 0, sellable: false, unrandom: true },
+      { id: 'tt6-mystery', name: '实验室余粮', cost: 0, rarity: '衍生', type: '事件', desc: '获得员工通行证A碎片，+2 币。', value: 0, sellable: false, unrandom: true },
+      { id: 'tt6-goldmine', name: '塌方采掘点', cost: 0, rarity: '衍生', type: '事件', desc: '稳妥取走 3 币，或冒险深挖获得 6 币并损失 3 血。', value: 0, sellable: false, unrandom: true },
+      { id: 'tt6-goldhammer', name: '满电动力锤', cost: 0, rarity: '衍生', type: '事件', desc: '获得卡牌「闪金之锤」。', value: 0, sellable: false, unrandom: true },
+      { id: 'tt6-relief', name: '临时救护站', cost: 0, rarity: '衍生', type: '事件', desc: '回复 6 点生命。', value: 0, sellable: false, unrandom: true },
+      { id: 'tt6-airdrop', name: '污染空投箱', cost: 0, rarity: '衍生', type: '事件', desc: '从木材、口粮、能量饮料、随机药水中选择一项。', value: 0, sellable: false, unrandom: true },
+      { id: 'tt6-chestdraw', name: '熔断双箱', cost: 0, rarity: '衍生', type: '事件', desc: '从小型与密封物资箱中选择 1 个开启。', value: 0, sellable: false, unrandom: true },
+      { id: 'tt6-systemsupply', name: '末班配送无人机', cost: 0, rarity: '衍生', type: '事件', desc: '获得员工通行证A碎片和木材卡 ×1。', value: 0, sellable: false, unrandom: true },
+      { id: 'cmtn7qttxqo4', name: '巷口修鞋匠', cost: 0, rarity: '衍生', type: '事件', desc: '获得彩色令牌碎片；复原 1 张卡牌。', value: 0, sellable: false, unrandom: true },
+      { id: 'ev19-vital', name: '高压急救', cost: 0, rarity: '衍生', type: '事件', desc: '生命上限 +3，并回复 3 点生命。', value: 0, sellable: false, unrandom: true },
+      { id: 'ev19-pearlbox', name: '遗落的珍珠匣', cost: 0, rarity: '衍生', type: '事件', desc: '获得卡牌「珍珠盒」。', value: 0, sellable: false, unrandom: true },
+      { id: 'ev19-fireballs', name: '双焰走私', cost: 0, rarity: '衍生', type: '事件', desc: '获得两张「火球」。', value: 0, sellable: false, unrandom: true },
+      { id: 'ev19-classchest', name: '黑箱调拨', cost: 0, rarity: '衍生', type: '事件', desc: '获得 1 个职业·密封物资箱。', value: 0, sellable: false, unrandom: true },
+      { id: 'ev19-recode', name: '故障重编', cost: 0, rarity: '衍生', type: '事件', desc: '选择 2 张招式或装备卡，随机变为同稀有度、同类型的卡牌。', value: 0, sellable: false, unrandom: true },
+      { id: 'ev19-potions', name: '避难市集药摊', cost: 0, rarity: '衍生', type: '事件', desc: '从 3 瓶随机药水中选择 1 瓶获得。', value: 0, sellable: false, unrandom: true },
+      { id: 'ev19-arrows', name: '海堤箭库', cost: 0, rarity: '衍生', type: '事件', desc: '获得 2 张随机非职业箭系列卡牌。', value: 0, sellable: false, unrandom: true },
+      { id: 'ev19-gamble', name: '地下商场黑市', cost: 0, rarity: '衍生', type: '事件', desc: '每次投入 3 币，50% 获得预览的 1 张装备和 2 张招式；第 5 次必定成功，可随时放弃。', value: 0, sellable: false, unrandom: true },
+      { id: 'ev19-quartermaster', name: '装备征用令', cost: 0, rarity: '衍生', type: '事件', desc: '花费 3 币，从 3 张随机装备卡中选择 1 张获得。', value: 0, sellable: false, unrandom: true },
+    ],
     // 拥有伤害词条（红色伤害宝石）的类型
     DMG_TYPES: ['武术', '法术'],
 
@@ -928,7 +950,7 @@ import { DATA } from './data-loader.js';
       { id: "tt7-talisman", name: "灵符", cost: 0, rarity: "稀有", type: "装备", dmg: 0, draw: 2, desc: "对战开始时，额外抽 2 张牌。", value: 3, sellable: false }, // 稀有度改稀有（2026-09-16 留言）
       { id: "tt7-ironcharge", name: "厉兵秣马", cost: 2, rarity: "职业", type: "武术", dmg: 0, draw: 2, armor: 12, desc: "+12 甲，抽 2 张牌。", value: 3, sellable: false },
       { id: "tt7-maxsupply", cls: "法师", name: "法力补给", cost: 1, rarity: "职业", type: "法术", dmg: 0, desc: "抽牌，直到有 4 张手牌。", value: 3, sellable: false }, // cls 为仓库侧定版（老板 2026-09-09 拍板白塔专属），设计者实机稿无 cls
-      { id: "tt7-imitate", cls: "侠客", name: "不变应万变", cost: 1, rarity: "职业", type: "武术", dmg: 0, desc: "在手牌中时，本牌变为打出的上一张武术牌的1费复制。", value: 3, sellable: false }, // cls 为定版归属（老板 2026-09-12 拍板无专属）
+      { id: "tt7-imitate", cls: "侠客", name: "不变应万变-改", cost: 1, rarity: "职业", type: "武术", dmg: 0, desc: "在手牌中时，本牌变为打出的上一张武术牌的1费复制。", value: 3, sellable: false }, // 同名不同效果版本按老板 2026-09-19 规则追加「-改」
       { id: "tt8-healplus", tokenOf: "tt8-hero-sealer", name: "封印肢体4", cost: 0, rarity: "棱彩", type: "生物", dmg: 0, desc: "法伤 +1。", value: 8, sellable: false, unrandom: true },
       { id: "tt8-energycap", tokenOf: "tt8-hero-sealer", name: "封印肢体2", cost: 0, rarity: "棱彩", type: "生物", dmg: 0, desc: "能量上限 +1。", value: 8, sellable: false, unrandom: true },
       { id: "tt8-nofocus", tokenOf: "tt8-hero-sealer", name: "封印肢体3", cost: 0, rarity: "棱彩", type: "生物", dmg: 0, desc: "无需注能。", value: 8, sellable: false, unrandom: true },
@@ -942,7 +964,7 @@ import { DATA } from './data-loader.js';
       { id: "cmtn1ntxzoc4", cls: "降临者", name: "火焰形态", cost: 1, rarity: "职业", type: "法术", dmg: 0, desc: "本局对战中，法伤+1", value: 2, sellable: false, unrandom: true },
       { id: "cmtn1p9vb5au", cls: "法师", name: "千变万化", cost: 2, rarity: "职业", type: "法术", dmg: 0, desc: "发现一种形态并释放", value: 3, sellable: false, unrandom: true },
       { id: "cmtn1r10xnl1", cls: "降临者", name: "黑暗形态", cost: 1, rarity: "职业", type: "法术", dmg: 0, desc: "本局对战中，每当你发现卡牌时，增加1个可选项", value: 2, sellable: false, unrandom: true },
-      { id: "cmtn1wnhhym", cls: "侠客", name: "江湖救急", cost: 0, rarity: "职业", type: "武术", dmg: 0, desc: "随机获得3张临时卡牌，回合开始时将其消耗。", value: 3, sellable: false, unrandom: true },   // 2026-09-18 老板定版：随机直接给3张（不走发现面板）
+      { id: "cmtn1wnhhym", cls: "侠客", name: "江湖救急-改", cost: 0, rarity: "职业", type: "武术", dmg: 0, desc: "随机获得3张临时卡牌，回合开始时将其消耗。", value: 3, sellable: false, unrandom: true },   // 同名不同效果版本按老板 2026-09-19 规则追加「-改」
       { id: "cmtn28jv33wx", name: "搜索大宝箱", cost: 0, rarity: "衍生", type: "法术", dmg: 0, desc: "随机获取3张卡牌", value: 3, sellable: false },
       { id: "cmtn6bge52qt", name: "复原药水", cost: 0, rarity: "稀有", type: "道具", dmg: 0, desc: "在背包中才能使用，复原最多两张卡牌", value: 3, sellable: false },
       { id: "cmtn7qttxqo4", name: "修鞋铺", cost: 0, rarity: "衍生", type: "事件", dmg: 0, desc: "获得彩色令牌碎片；复原1张卡牌", value: 0, sellable: false },
@@ -1223,6 +1245,19 @@ import { DATA } from './data-loader.js';
         localStorage.setItem(seedKey, '1');
       } catch (e) { /* 隐私模式等场景静默跳过 */ }
     },
+    ensureEvents0919() {
+      try {
+        if (localStorage.getItem(EVENTS_0919_KEY)) return;
+        const cards = SDT.Cards.all();
+        SDT.Cards.EVENTS_0919.forEach(d => {
+          const i = cards.findIndex(c => c.id === d.id);
+          if (i >= 0) cards[i] = { ...cards[i], ...d };
+          else cards.push({ ...d });
+        });
+        SDT.Cards.saveAll(cards);
+        localStorage.setItem(EVENTS_0919_KEY, '1');
+      } catch (e) { /* 隐私模式等场景静默跳过 */ }
+    },
     // 指定道具定名迁移：保留稳定 id 与存档引用，只更新展示名；
     // 旧内置金疮药并入正式 tt-jinchuangyao，避免仓库里继续存在两个定义。
     ensureItemRenames() {
@@ -1277,6 +1312,8 @@ import { DATA } from './data-loader.js';
       SDT.Cards.ensureTabletopSync11();
       SDT.Cards.ensureFoeRename();     // 敌人图鉴改名同步（新世界观命名 + 五层分布，含老存档，2026-09-09 定版）
       SDT.Cards.ensureCardsSyncLive(); // 实机卡库同步（数据见 game/data/cards-sync.json，只跑一次）
+      SDT.Cards.ensureDuplicateRenames(); // 同名不同 ID/效果版本统一在后者追加「-改」（含旧卡库）
+      SDT.Cards.ensureEvents0919();    // 0919 都市污染事件池：放在实机同步之后，以本轮定稿名与效果为准
     },
 
     // 职业稀有度迁移（设计者 2026-09-04 定版）：老档里第七批职业卡（tt7- 前缀）
@@ -1465,6 +1502,25 @@ import { DATA } from './data-loader.js';
         if (c && c.type === '英雄卡') { c.type = '能力卡'; dirty = true; }
       });
       return dirty;
+    },
+
+    // 同名不同 ID 且效果不同的现役卡：保留先定义版本原名，后定义版本追加「-改」。
+    // 按稳定 id 迁移，避免名称本身再次参与身份判断；每次启动幂等执行，防止后续同步覆盖回旧名。
+    applyDuplicateRenames(cards) {
+      const names = { 'tt7-imitate': '不变应万变-改', 'cmtn1wnhhym': '江湖救急-改' };
+      let dirty = false;
+      (Array.isArray(cards) ? cards : []).forEach(card => {
+        const name = card && names[card.id];
+        if (name && card.name !== name) { card.name = name; dirty = true; }
+      });
+      return dirty;
+    },
+
+    ensureDuplicateRenames() {
+      try {
+        const cards = SDT.Cards.all();
+        if (SDT.Cards.applyDuplicateRenames(cards)) SDT.Cards.saveAll(cards);
+      } catch (e) { /* 隐私模式等场景静默跳过 */ }
     },
 
     ensureAbilityRename() {

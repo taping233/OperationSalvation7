@@ -46,6 +46,8 @@ const OUT_DIR = process.env.SDT_BUILD_OUT_DIR
   ? path.resolve(ROOT, process.env.SDT_BUILD_OUT_DIR)
   : path.join(ROOT, 'desktop-app', 'game');
 const RUNTIME_ASSET_DIRS = ['cards', 'portraits', 'icons', 'scenes', 'thumbs', path.join('ui', 'icons'), 'sfx'];
+const ASSETS_ROOT = path.join(GAME_ROOT, 'assets');
+const RUNTIME_ASSET_PREFIXES = RUNTIME_ASSET_DIRS.map(dir => dir.split(path.sep).join('/') + '/');
 // 美术清单扫描范围：RUNTIME 目录去掉 sfx（音频不是美术）与 thumbs（缩略图按需取用；
 // 进清单会被全量预热，等于原图+缩略图两份位图都常驻，与预加载初衷相反）。图片扩展名兜底过滤。
 const ART_MANIFEST_DIRS = RUNTIME_ASSET_DIRS.filter(dir => dir !== 'sfx' && dir !== 'thumbs');
@@ -103,6 +105,20 @@ function buildVersion() {
   }
 }
 
+// 静态引用与动态 assetUrl 引用统一落到同一份稳定路径。
+// 过去静态引用输出 hash 文件、copyStatic 又复制原文件，单次构建会白白多出约 10MB。
+function assetFileName(assetInfo) {
+  const originals = assetInfo.originalFileNames || [];
+  for (const original of originals) {
+    // Vite/Rollup 报告的是相对 root(game/) 的路径，不是相对仓库根目录。
+    const absolute = path.isAbsolute(original) ? original : path.resolve(GAME_ROOT, original);
+    const relative = path.relative(ASSETS_ROOT, absolute).split(path.sep).join('/');
+    if (relative.startsWith('../') || path.isAbsolute(relative)) continue;
+    if (RUNTIME_ASSET_PREFIXES.some(prefix => relative.startsWith(prefix))) return `assets/${relative}`;
+  }
+  return 'assets/[name]-[hash][extname]';
+}
+
 // 只复制无法由 Vite 静态分析的动态资源族；其余图片、场景和音乐交给
 // new URL(..., import.meta.url) / CSS 管线哈希，避免产物同时保留哈希版和原始版。
 function copyStatic() {
@@ -156,10 +172,12 @@ export default defineConfig({
       output: {
         entryFileNames: 'assets/js/[name]-[hash].js',
         chunkFileNames: 'assets/js/[name]-[hash].js',
+        assetFileNames: assetFileName,
         // 大依赖各自成 chunk：主入口回到 500kB 以下，且库不升级时哈希稳定利于缓存
         manualChunks(id) {
           if (/[\\/]node_modules[\\/](three|pixi\.js|@pixi)[\\/]/.test(id)) return 'vendor-render';
-          if (/[\\/]node_modules[\\/](howler|motion|inkjs|sortablejs)[\\/]/.test(id)) return 'vendor-misc';
+          if (/[\\/]node_modules[\\/]inkjs[\\/]/.test(id)) return 'vendor-narrative';
+          if (/[\\/]node_modules[\\/](howler|motion|sortablejs)[\\/]/.test(id)) return 'vendor-runtime';
         },
       },
     },

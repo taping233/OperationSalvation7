@@ -5,6 +5,7 @@ import { esc } from './shared.js';
 import { RunStorage, SLOT_COUNT } from './game.storage.js';
 import { GameStore } from './game.store.js';
 import { createGameMenuController } from './game.menu.js';
+import { ensureBattleReady } from './battle-loader.js';
 import { Random } from './random.js';
 import { checkConnectivity } from './map-graph.js';
 import { createLayeredMap } from './layeredMap.js';
@@ -380,7 +381,7 @@ function requestClassChoice(options) {
         shopStocks: game.shopStocks || {},   // 各商店货架（按格子/门持久，防关门重刷，2026-09-19 审计 D-1）
         elapsed: game.elapsed,
         slot: activeSlot, savedAt: Date.now(),
-        // 战斗中退出/关窗（beforeunload）：把战斗局面一并写入，读档后续打而非重开
+        // 战斗中退出/关窗（beforeunload）：只写战斗入场检查点；读档从本场战斗开头重开
         battle: (game.battleActive && SDT.Battle && typeof SDT.Battle.serialize === 'function')
           ? SDT.Battle.serialize() : null,
         // 龙巢进行中状态（2026-09-18 断点续战）
@@ -469,11 +470,15 @@ function requestClassChoice(options) {
     applyModeRules();
     game.inventory = Array.isArray(s.inventory) ? s.inventory : [];
     game.ownedCards = Array.isArray(s.ownedCards) ? s.ownedCards : [];
+    game.cardBox = Array.isArray(s.cardBox) ? s.cardBox : [];
     // 能力卡术语迁移（原「英雄卡」类型，2026-09-08 定版）：存档内整卡副本与基地仓库/口袋同步更名
     {
       const copies = game.ownedCards.map(o => o.card)
+        .concat(game.cardBox || [])
         .concat((SDT.Base.data.stash || []).concat(SDT.Base.data.pocket || []).map(st => st.card));
-      if (SDT.Cards.applyAbilityRename(copies)) SDT.Base.save();
+      const abilityChanged = SDT.Cards.applyAbilityRename(copies);
+      const duplicateChanged = SDT.Cards.applyDuplicateRenames(copies);
+      if (abilityChanged || duplicateChanged) SDT.Base.save();
     }
     game.cardOrder = Array.isArray(s.cardOrder) ? s.cardOrder : [];
     game.usedPocket = Array.isArray(s.usedPocket) ? s.usedPocket : [];
@@ -482,6 +487,7 @@ function requestClassChoice(options) {
     // 带着旧措辞描述（识别正则失配整卡无效）。读档时按 id 用现行卡库刷新克隆。
     refreshCardClones(game.ownedCards.map(o => o.card)
       .concat(game.usedPocket.map(p => p.card))
+      .concat(game.cardBox || [])
       .concat((SDT.Base.data.stash || []).concat(SDT.Base.data.pocket || []).map(st => st.card).filter(Boolean)));
     game.eventLog = Array.isArray(s.eventLog) ? s.eventLog : [];
     // 迷雾与防重刷（旧档无字段 → {}，走【全部可见/可重复】的兼容路径）
@@ -513,7 +519,6 @@ function requestClassChoice(options) {
       // 龙巢进行中存档：恢复牌盒/符文/进度并直接回到巢穴地图（2026-09-18 断点续战）
       game.nestActive = true;
       game.nestPos = s.nestPos || 0;
-      game.cardBox = s.cardBox || [];
       game.nestRunes = s.nestRunes || [];
       game.nestEquipped = s.nestEquipped || [];
       game.nestBossName = s.nestBossName || '？？？';
@@ -529,7 +534,7 @@ function requestClassChoice(options) {
     }
     enterLayer(safeLayer, safeIdx);
     SDT.Sound.music('board');
-    UI.log(`[[icon:download]] 已读取【档位 ${slot}】存档，直接回到上一局未结束的对局`, 'ok');
+    UI.log(`[[icon:download]] 已读取【档位 ${slot}】存档`, 'ok');
     if (!game.myClass) runtime.openClassChoice();   // 上次存档时还没选职业：补上开局选择
     else if (s.battle && SDT.Battle && typeof SDT.Battle.restore === 'function') {
       if (SDT.Battle.restore(game, s.battle)) {
@@ -543,7 +548,7 @@ function requestClassChoice(options) {
 
   const menuController = createGameMenuController({
     SDT, UI, game, runtime, SLOT_COUNT, esc, readSlot, loadGame, clearSlot,
-    hasRun, RunStorage,
+    hasRun, RunStorage, ensureBattleReady,
     saveGame, syncPlayTime, clearSave, clearAllSlots,
     getActiveSlot: () => activeSlot,
     setActiveSlot: value => { activeSlot = value; },

@@ -29,6 +29,7 @@ await import('../game/src/game.session.js');
 await import('../game/src/game.nest.js');
 const { BattleSession, configureBattleRenderer } = await import('../game/src/battle.core.js');
 configureBattleRenderer(() => {});
+window.SDT.Nest.bindBattleStart(BattleSession.start);
 const C = window.SDT.Cards;
 
 beforeAll(() => {
@@ -77,7 +78,7 @@ describe('龙巢回归', () => {
   it('startNestBattle 不再因 pickNestBoss 未定义而崩溃，且整盒成库、不进编组', async () => {
     const g = prepRun();
     const def = { id: 'nest-sand-elem', name: '沙暴元素', hearts: 8, atk: 8, heartsMode: true, reward: { coins: 3, chests: [], runes: ['small'] } };
-    window.SDT.Nest.startNestBattle(def);
+    await window.SDT.Nest.startNestBattle(def);
     const s = await drain();
     expect(s.deckSelection, '龙巢战斗不应进 BOSS 编组').toBeFalsy();
     expect(g.nestBoss, 'pickNestBoss 应补上巢主').toBeTruthy();
@@ -90,7 +91,7 @@ describe('龙巢回归', () => {
   it('战斗结束走龙巢结算：状态还原、回满血、推进一格、不跑一图战后流程', async () => {
     const g = prepRun();
     const def = { id: 'nest-sand-elem', name: '沙暴元素', hearts: 4, atk: 8, heartsMode: true, reward: { coins: 3, chests: [], runes: [] } };
-    window.SDT.Nest.startNestBattle(def);
+    await window.SDT.Nest.startNestBattle(def);
     await drain();
     g.hp = 30;   // 战后应回满 60
     // 两刀 99 攻击 → 每刀 -2 心 → 4 心清空
@@ -109,7 +110,7 @@ describe('龙巢回归', () => {
   it('心模式按最终伤害折算：初始攻击（卡面 0 伤）也击碎 2 心', async () => {
     const g = prepRun();
     const def = { id: 'nest-sand-elem', name: '沙暴元素', hearts: 8, atk: 8, heartsMode: true, reward: { coins: 3, chests: [], runes: [] } };
-    window.SDT.Nest.startNestBattle(def);
+    await window.SDT.Nest.startNestBattle(def);
     await drain();
     const sha = g.ownedCards.find(o => o.card.name === '初始攻击');
     BattleSession.commands.playCard(sha.uid, 0);
@@ -124,12 +125,13 @@ describe('龙巢回归', () => {
 describe('江湖救急 · 随机直接给3张', () => {
   it('打出后不弹发现面板，手牌直接多 3 张临时卡，并登记回合开始消耗', async () => {
     const g = prepRun();
-    g.cardBox.push({ id: 'cmtn1wnhhym', name: '江湖救急', cost: 0, rarity: '职业', type: '武术', dmg: 0, desc: '随机获得3张临时卡牌，回合开始时将其消耗。', value: 3, sellable: false, unrandom: true });
+    // 单卡牌盒保证目标牌必在起手，避免随机洗牌让测试误从牌库外调用 uid。
+    g.cardBox = [{ id: 'cmtn1wnhhym', name: '江湖救急-改', cost: 0, rarity: '职业', type: '武术', dmg: 0, desc: '随机获得3张临时卡牌，回合开始时将其消耗。', value: 3, sellable: false, unrandom: true }];
     const def = { id: 'nest-sand-elem', name: '沙暴元素', hearts: 8, atk: 8, heartsMode: true, reward: { coins: 3, chests: [], runes: [] } };
-    window.SDT.Nest.startNestBattle(def);
+    await window.SDT.Nest.startNestBattle(def);
     await drain();
     const before = snap().hand.length;
-    const e = g.ownedCards.find(o => o.card.name === '江湖救急');
+    const e = g.ownedCards.find(o => o.card.id === 'cmtn1wnhhym');
     BattleSession.commands.playCard(e.uid, 'any');
     const s = await drain();
     expect(s.discovering, '不应弹出发现面板').toBeFalsy();

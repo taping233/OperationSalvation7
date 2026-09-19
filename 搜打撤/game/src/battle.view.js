@@ -12,8 +12,13 @@ import { groupHandCards, fanLayout } from './battle.hand.js';
 import { intentSummary, intentViewModel } from './battle.intents.js';
 import { FEEDBACK_DELTA_MS, feedbackClass, feedbackDelay } from './battle.feedback.js';
 import { renderCombatPiles } from './battle.piles.view.js';
-import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFrames } from './battle.frames.js';
+import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFrames, cacheStats as frameCacheStats } from './battle.frames.js';
 import { assetUrl } from './asset-url.js';
+
+const cardIdentityKey = card => card && card.id
+  ? `id:${card.id}`
+  : `legacy:${card?.name || ''}|${card?.type || ''}|${card?.desc || ''}`;
+const isStarterAttack = card => !!card && (card.id === 'builtin-sha' || (!card.id && card.name === '初始攻击'));
 
   // 状态角标：祝福（绿）+ 诅咒（红）——2026-09-11 架构批次 1 自 battle.core 外迁（纯视图函数）
   function statusChips(status) {
@@ -117,12 +122,13 @@ import { assetUrl } from './asset-url.js';
     const statLine = Object.keys(byType).length
       ? Object.entries(byType).sort((a, b) => b[1] - a[1]).map(([type, count]) => `${esc(type)} <b>${count}</b>`).join(' · ')
       : '（墓地还是空的——注能等效果消耗的牌会进入这里）';
-    const byName = {};
+    const byName = new Map();
     cards.forEach(entry => {
-      if (!byName[entry.card.name]) byName[entry.card.name] = { card: entry.card, count: 0 };
-      byName[entry.card.name].count++;
+      const key = cardIdentityKey(entry.card);
+      if (!byName.has(key)) byName.set(key, { card: entry.card, count: 0 });
+      byName.get(key).count++;
     });
-    const listHTML = Object.values(byName).map(stack => `
+    const listHTML = [...byName.values()].map(stack => `
       <div class="bt-gy-row" title="${escAttr(stack.card.desc || '')}">
         <span>[[icon:cards]] <b>${esc(stack.card.name)}</b>${stack.count > 1 ? ` ×${stack.count}` : ''}</span>
         <span class="bt-gy-meta">${esc(stack.card.type)} · ${stack.card.cost}费 · ${esc(stack.card.rarity || '')}</span>
@@ -139,13 +145,14 @@ import { assetUrl } from './asset-url.js';
   // 战斗背包（2026-09-09 老板：战斗中开背包使用道具；2026-09-09 玩法定版：
   // 新增「存入安全格」——撤离判负前把卡牌转移进安全格，失败抢运时才保得住）
   function renderBattleBag(snapshot) {
-    const byName = {};
+    const byName = new Map();
     (SDT.game.ownedCards || []).forEach(o => {
       if (!o.card || o.card.type !== '道具' || o.safe) return;
-      if (!byName[o.card.name]) byName[o.card.name] = { card: o.card, uids: [] };
-      byName[o.card.name].uids.push(o.uid);
+      const key = cardIdentityKey(o.card);
+      if (!byName.has(key)) byName.set(key, { key, card: o.card, uids: [] });
+      byName.get(key).uids.push(o.uid);
     });
-    const stacks = Object.values(byName);
+    const stacks = [...byName.values()];
     const cardsHTML = stacks.length
       ? stacks.map(st => `
           <div class="bt-card bag-slot filled battle-bag-slot" data-act="btUseItem" data-uid="${st.uids[0]}"
@@ -157,18 +164,19 @@ import { assetUrl } from './asset-url.js';
     // —— 安全格转移（同名堆叠整组存入；容量在基地用口粮升级）——
     const cap = (SDT.game.safeCap && SDT.game.safeCap()) || 0;
     const used = (SDT.game.safeUsed && SDT.game.safeUsed()) || 0;
-    const bySafe = {};
+    const bySafe = new Map();
     (SDT.game.ownedCards || []).forEach(o => {
-      if (!o.card || o.safe || o.stored || o.card.name === '初始攻击') return;   // 珍珠盒存放中的卡不在此列出（2026-09-10 #29）
-      if (!bySafe[o.card.name]) bySafe[o.card.name] = { card: o.card, uids: [] };
-      bySafe[o.card.name].uids.push(o.uid);
+      if (!o.card || o.safe || o.stored || isStarterAttack(o.card)) return;   // 珍珠盒存放中的卡不在此列出（2026-09-10 #29）
+      const key = cardIdentityKey(o.card);
+      if (!bySafe.has(key)) bySafe.set(key, { key, card: o.card, uids: [] });
+      bySafe.get(key).uids.push(o.uid);
     });
-    const safeStacks = Object.values(bySafe);
+    const safeStacks = [...bySafe.values()];
     const room = Math.max(0, cap - used);
     const safeHTML = safeStacks.length
       ? safeStacks.map(st => {
           const fits = st.uids.length <= room;
-          return `<div class="bt-card bag-slot filled battle-bag-slot${fits ? '' : ' off'}" data-act="btSafeMove" data-name="${escAttr(st.card.name)}"
+          return `<div class="bt-card bag-slot filled battle-bag-slot${fits ? '' : ' off'}" data-act="btSafeMove" data-card-key="${escAttr(st.key)}"
             title="${escAttr(`将「${st.card.name}」×${st.uids.length} 整组存入安全格（撤离失败时安全运回）${fits ? '' : '——安全格空位不足'}`)}">
             ${SDT.Cards.cardHTML(st.card, 'sm')}
             ${st.uids.length > 1 ? `<span class="bt-count">×${st.uids.length}</span>` : ''}
@@ -186,12 +194,13 @@ import { assetUrl } from './asset-url.js';
     UI.act('btUseItem', (d) => useItemCmd(d.uid));
     UI.act('btSafeMove', (d) => {
       const g = SDT.game;
-      const group = (g.ownedCards || []).filter(o => o.card && !o.safe && o.card.name === d.name);
+      const group = (g.ownedCards || []).filter(o => o.card && !o.safe && cardIdentityKey(o.card) === d.cardKey);
       if (!group.length) return;
+      const name = group[0].card.name;
       const free = Math.max(0, ((g.safeCap && g.safeCap()) || 0) - ((g.safeUsed && g.safeUsed()) || 0));
-      if (group.length > free) { UI.log(`[[icon:lock]] 安全格空位不足（${free} 格）——存不进「${esc(d.name)}」×${group.length}`, 'warn'); SDT.Sound.sfx('deny'); return; }
+      if (group.length > free) { UI.log(`[[icon:lock]] 安全格空位不足（${free} 格）——存不进「${esc(name)}」×${group.length}`, 'warn'); SDT.Sound.sfx('deny'); return; }
       group.forEach(o => { o.safe = true; });
-      UI.log(`[[icon:lock]] 【${esc(d.name)}】×${group.length} 已存入安全格（撤离失败时安全运回）`, 'sys');
+      UI.log(`[[icon:lock]] 【${esc(name)}】×${group.length} 已存入安全格（撤离失败时安全运回）`, 'sys');
       if (g.saveGame) g.saveGame();
       renderBattleBag(getSnapshot());
     });
@@ -534,7 +543,7 @@ import { assetUrl } from './asset-url.js';
     // 单位区常驻层挂载 + 差分更新（批次B）：玩家/随从/敌人节点跨渲染复用（须在手牌层之前，
     // 复用其 handSuspended 判定「战斗中弹层挂起 vs 战斗已收尾」）
     const unitMounts = mountUnitLayer(body, snapshot.battleToken);
-    if (unitMounts) updateUnits(unitMounts, snapshot, { isBoss: opts.isBoss, pendingItem, slamPending, dartPending });
+    if (unitMounts) updateUnits(unitMounts, snapshot, { isBoss: opts.isBoss, pendingTarget, pendingItem, slamPending, dartPending });
     if (SDT.Art.cutoutFigures) SDT.Art.cutoutFigures(body);
     attachUnitFrames(body);   // 批次D：玩家立绘切序列帧（无帧集/降动效自动跳过）
     mountHandLayer(body, tip, snapshot.battleToken);
@@ -915,11 +924,11 @@ import { assetUrl } from './asset-url.js';
     if (sig.hpTxt !== txt) { sig.hpTxt = txt; parts.hpTxt.textContent = txt; }
   }
   function updateUnits(mounts, snapshot, ctx) {
-    updateSelfUnit(snapshot);
+    updateSelfUnit(snapshot, ctx);
     updateAllies(mounts.alliesMount, snapshot.allies || []);
     updateFoes(mounts.foesMount, snapshot.foes || [], ctx);
   }
-  function updateSelfUnit(snapshot) {
+  function updateSelfUnit(snapshot, ctx) {
     const { player, pdef, pstat, equipped } = snapshot;
     const sig = selfSig;
     setSection(selfParts.fig, sig, 'fig',
@@ -940,6 +949,8 @@ import { assetUrl } from './asset-url.js';
     // 状态挂件（P2）：玩家自己被冰冻/灼烧时同样点亮常驻状态光
     selfUnit.classList.toggle('fx-frozen', (pstat.status.freeze || 0) > 0);
     selfUnit.classList.toggle('fx-burning', (pstat.status.burn || 0) > 0);
+    const pendingCard = ctx.pendingTarget && findCard(ctx.pendingTarget.uid);
+    selfUnit.classList.toggle('can-target', !!(pendingCard && targetSide(pendingCard.card) === 'self'));
     // 已穿戴装备（2026-09-09 老板 #9）：名称 + 说明 tooltip；带限定技能的可点击发动
     const equipsHTML = (equipped || []).map(e => e.skill
       ? `<button class="sts-equip has-skill${e.used ? ' used' : ''}" data-act="btEquipSkill" data-uid="${escAttr(e.uid)}"
@@ -1032,7 +1043,9 @@ import { assetUrl } from './asset-url.js';
       slot.classList.toggle('is-boss', !!(ctx.isBoss || f.affix));
       slot.classList.toggle('dead', !!f.dead);
       slot.classList.toggle('aegis', !!immune);
-      slot.classList.toggle('can-target', !!(ctx.pendingItem || ctx.slamPending || ctx.dartPending) && !f.dead);   // dartPending：血毒双镖二段点选也高亮（2026-09-17 留言）
+      const pendingCard = ctx.pendingTarget && findCard(ctx.pendingTarget.uid);
+      const cardTargetsEnemy = !!(pendingCard && targetSide(pendingCard.card) === 'enemy');
+      slot.classList.toggle('can-target', !!(cardTargetsEnemy || ctx.pendingItem || ctx.slamPending || ctx.dartPending) && !f.dead);   // dartPending：血毒双镖二段点选也高亮（2026-09-17 留言）
       slot.dataset.foeId = f.id || f.name;
       slot.dataset.eidx = idx;
       slot.title = aff ? aff.name + '：' + aff.desc : '';
@@ -1051,7 +1064,7 @@ import { assetUrl } from './asset-url.js';
       const intentTip = frozen ? '冰冻中——本回合无法行动' : `下一回合预告：${intentSummary(f.intent)}`;
       if (!f.dead && intents.length) {
         setSection(parts.intent, sig, 'intent',
-          intents.map(intent => `${intent.icon} ${esc(intent.label)}${intent.damage == null ? '' : ` · ${intent.damage}`}`).join(' '));
+          intents.map(intent => `${intent.icon} ${esc(intent.label)}${intent.damage == null ? '' : ` · ${intent.damage}${intent.hits > 1 ? ` ×${intent.hits}（共${intent.totalDamage}）` : ''}`}`).join(' '));
         if (sig.intentTip !== intentTip) { sig.intentTip = intentTip; parts.intent.title = intentTip; }
         parts.intent.style.display = '';
       } else parts.intent.style.display = 'none';
@@ -2082,7 +2095,10 @@ import { assetUrl } from './asset-url.js';
     if (p) p.remove();
   }
 
-  sdtDefine('Battle', Object.freeze({ ...BattleSession, _test: Object.freeze({ refillDrawPile }) }));
+  sdtDefine('Battle', Object.freeze({ ...BattleSession,
+    _perf: Object.freeze({ frameCacheStats }),
+    _test: Object.freeze({ refillDrawPile }),
+  }));
 
 configureBattleRenderer(render);
 
