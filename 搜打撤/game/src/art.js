@@ -178,7 +178,7 @@ const rosterUrl = assetUrl('assets/portraits/expedition-roster.webp');
 const FIGURE_FULL_ART = Object.freeze({
   shuangling: 'portraits/full/shuangling.webp',
   baiqi: 'portraits/full/baiqi.webp',
-  lituan: 'portraits/full/baita.webp',
+  lituan: 'portraits/full/lituan.webp',
   xuanli: 'portraits/full/xuanli.webp',
   dengkui: 'portraits/full/dengkui.webp',
 });

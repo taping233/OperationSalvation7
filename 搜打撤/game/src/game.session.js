@@ -73,7 +73,6 @@ function configureGameRuntime(hooks) {
   const curLayer = () => game.layerData[game.layerIdx];
   // 结点地图：pos 与结点坐标一律为世界像素（几何唯一来源见 buildDerived 的 nodePos）
   const cellCenter = (li, idx) => ({ ...game.nodePos[li][idx] });
-  const rndDice = () => 1 + Math.floor(Random.random('dice') * MAP.rules.diceSides);
   const pick = (arr) => arr[Math.floor(Random.random('gameplay') * arr.length)];
   const fxAt = () => ({ x: game.pos.x, y: game.pos.y });
 
@@ -373,8 +372,9 @@ function configureGameRuntime(hooks) {
         altarActivated: !!game.altarActivated,   // 第四层祭坛是否已激活（首脑格准入条件）
         altarRewardPending: !!game.altarRewardPending,   // 祭坛奖励待领取（回赠面板可重进，只能领一次）
         bossPlan: (game.bossPlan == null ? null : game.bossPlan),   // 本层首脑预案（进层 roll 一次存全层，2026-09-13 老板拍板）
-        diceHistory: game.diceHistory, elapsed: game.elapsed,
-        stamina: game.stamina == null ? MAP.rules.staminaMax : game.stamina,
+        altarItemSacrificed: !!game.altarItemSacrificed,   // 祭坛道具献祭一次性锁（2026-09-19 老板定版）
+        shopStocks: game.shopStocks || {},   // 各商店货架（按格子/门持久，防关门重刷，2026-09-19 审计 D-1）
+        elapsed: game.elapsed,
         slot: activeSlot, savedAt: Date.now(),
         // 战斗中退出/关窗（beforeunload）：把战斗局面一并写入，读档后续打而非重开
         battle: (game.battleActive && SDT.Battle && typeof SDT.Battle.serialize === 'function')
@@ -490,9 +490,9 @@ function configureGameRuntime(hooks) {
     game.bossPlan = (s.bossPlan == null ? null : +s.bossPlan);   // 本层首脑预案（旧档无字段 → null，进 boss 格时现 roll）
     game.pendingEventLoot = null;
     game.discoveredPairs = new Set(s.discovered || []);
-    game.diceHistory = s.diceHistory || [];
     game.elapsed = s.elapsed || 0;
-    game.stamina = typeof s.stamina === 'number' ? s.stamina : MAP.rules.staminaMax;   // 旧档无体力字段 → 回满
+    game.altarItemSacrificed = !!s.altarItemSacrificed;   // 祭坛道具献祭一次性锁（旧档无字段 → false）
+    game.shopStocks = (s.shopStocks && typeof s.shopStocks === 'object') ? s.shopStocks : {};
     // 旧存档只有本局 elapsed：首次读取时把它安全迁入累计游玩时间。
     if ((SDT.Base.data.stats.playSeconds || 0) < game.elapsed) {
       SDT.Base.data.stats.playSeconds = game.elapsed;
@@ -608,11 +608,12 @@ function configureGameRuntime(hooks) {
     setLobby(false);          // 进入棋盘：恢复左侧栏
     game.inventory = [];
     game.ownedCards = [];
-    game.stamina = MAP.rules.staminaMax;   // 体力系统（2026-09-06 #29）
+    game.shopStocks = {};   // 商店货架按局重置（D-1 防关门重刷）
     game.cardOrder = [];
     game.usedPocket = [];
     game.eventLog = [];
     game.fragments = 0;   // 彩色令牌碎片（Q6 隐藏计数器）
+    game.altarItemSacrificed = false;   // 祭坛道具献祭一次性锁（每局重置）
     game.pendingEventLoot = null;
     game.myClass = null;
     game.characterId = null;
@@ -622,8 +623,6 @@ function configureGameRuntime(hooks) {
     game.hp = game.maxHp;
     game.atk = MAP.rules.playerAtk;
     game.discoveredPairs = new Set();
-    game.diceHistory = [];
-    game.dice = null;
     game.turn = 1;
     game.elapsed = 0;
     game.elapsedSynced = 0;
@@ -790,7 +789,7 @@ function configureGameRuntime(hooks) {
     UI.refresh(game);
   }
 
-export { FX, MAP, MODES, SLOT_COUNT, bagCap, buildDerived, cam, canAcceptCard, canvas, cardStacks, cellCenter, clearSave, configureGameRuntime, ctx, curLayer, doDeath, dpr, markSeen, safeCap, enterLayer, exitToTitle, gainCoins, game, hasRun, migrateOldSave, modeCfg, newRun, newUid, openLeaveMenu, openSettings, openTitleGuide, pick, quitGame, rndDice, safeUsed, saveGame, scaledEnemy, setLobby, showTitle, startNewGame, syncPlayTime, usedSlots, weighted };
+export { FX, MAP, MODES, SLOT_COUNT, bagCap, buildDerived, cam, canAcceptCard, canvas, cardStacks, cellCenter, clearSave, configureGameRuntime, ctx, curLayer, doDeath, dpr, markSeen, safeCap, enterLayer, exitToTitle, gainCoins, game, hasRun, migrateOldSave, modeCfg, newRun, newUid, openLeaveMenu, openSettings, openTitleGuide, pick, quitGame, safeUsed, saveGame, scaledEnemy, setLobby, showTitle, startNewGame, syncPlayTime, usedSlots, weighted };
 const _set_dpr = (v) => { dpr = v; };
 export { _set_dpr };
 export const getActiveSlot = () => activeSlot;

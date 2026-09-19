@@ -79,11 +79,21 @@ function createShopController({
     return slots;
   }
 
-  function openShop(onClose) {
+  function openShop(stockKey, onClose) {
+    if (typeof stockKey !== 'string') { onClose = stockKey; stockKey = ''; }   // 兼容旧调用（debug/回调直调）
     if (!['idle', 'moving', 'modal'].includes(game.state)) return;
     game.state = 'modal';
     setCardPageOpen(false);
-    game.shopStock = generateShopStock();
+    // D-1 防重刷（2026-09-19 审计）：货架按 shopKey 持久——同一家店（商店格 / 门旁商队）
+    // 本局内重复进入不再重 roll、售出状态保留（此前每次 openShop 全量重掷，门旁商店可无限
+    // 免费刷货）。货架表随对局存档落盘，刷新/读档同样不可刷。空 key（debug 直调）保持旧行为。
+    if (stockKey) {
+      game.shopStocks = game.shopStocks || {};
+      if (!game.shopStocks[stockKey]) game.shopStocks[stockKey] = generateShopStock();
+      game.shopStock = game.shopStocks[stockKey];
+    } else {
+      game.shopStock = generateShopStock();
+    }
     shopNotice = '';
     shopOnClose = onClose || null;
     renderShop();
@@ -136,7 +146,7 @@ function createShopController({
           <button class="shop-bag-btn" data-act="shopOpenBag" title="打开背包整理卡牌">[[icon:bag]] 背包</button>
           <div class="shop-resources" data-act="shopOpenBag" title="点击打开背包" aria-label="远征资源（点击打开背包）"><span class="shop-resource"><small>持有卡牌</small><b id="resCards">${game.ownedCards.length}</b><em>张</em></span><span class="shop-resource coin"><small>当前金币</small><b id="resCoins">${game.coins}</b><em>币</em></span><span class="shop-resource"><small>背包容量</small><b id="resCap">${usedSlots()}/${bagCap()}</b><em>格</em></span></div>
         </header>
-          <div class="shop-toolbar"><div><b>补给清单</b><span>六个随机货位 · 能量饮料 · 初始攻击补充 · 神秘货箱</span></div><span class="shop-live" id="shopLive" aria-live="polite">${shopNotice || '点击货位即可直接购买（价签＝价格）'}</span></div>
+          <div class="shop-toolbar"><div><b>补给清单</b><span>六个随机货位 · 能量饮料 · 初始攻击补充 · 神秘货箱</span></div><span class="shop-live" id="shopLive" aria-live="polite">${shopNotice || '点击货位即可直接购买（价签＝价格） · 随身币不随撤离带回，离局前记得花掉'}</span></div>
         <div class="shop-board" aria-label="商店商品">
           <div class="shop-board-grid">
             ${slots}

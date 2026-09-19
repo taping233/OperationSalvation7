@@ -15,7 +15,7 @@
 |---|---|---|---|---|
 | [无](shuangling.md) | shuangling | 侠客 | [ref-images/shuangling.webp](ref-images/shuangling.webp) | 外观锚点已定稿（09-12 老板复核）；性格背景待老板提供 |
 | [常无欲](baiqi.md) | baiqi | 降临者 | [ref-images/baiqi.webp](ref-images/baiqi.webp) | **外观锚点已定稿**（按立绘高清核对：魔女帽/圆眼镜/尖耳/黑袍紫衬/胸口羽饰蓝宝胸针/黄瞳）；降临者卡面重做中；性格背景待老板提供 |
-| [白塔](lituan.md) | lituan | 法师 | [ref-images/baita.webp](ref-images/baita.webp) | 全部待老板提供 |
+| [白塔](lituan.md) | lituan | 法师 | [ref-images/lituan.webp](ref-images/lituan.webp) | **外观锚点已定稿并入库**（09-19 painterly 全身立绘，老板授权 Friday 定锚点）；性格背景待老板提供 |
 | [黑像](xuanli.md) | xuanli | 战士 | [ref-images/xuanli.webp](ref-images/xuanli.webp) | **外观锚点已定稿并入库**（09-12 白底喝咖啡赛璐璐大图验收）；性格背景待老板提供 |
 | [星月](dengkui.md) | dengkui | 牧师 | [ref-images/dengkui.webp](ref-images/dengkui.webp) | **外观锚点已定稿并入库**（09-12 赛璐璐大图验收）；性格背景待老板提供 |
 

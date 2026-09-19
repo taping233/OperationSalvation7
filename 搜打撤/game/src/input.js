@@ -10,7 +10,7 @@ import SDT from './sdt-facade.js';
 
 // 动作 → 默认键位（e.key 的小写形式；Space 键名为 ' '）
 const DEFAULT_BINDINGS = {
-  roll:         [' ', 'enter'],   // 掷骰 / 确认推进
+  roll:         [' ', 'enter'],   // 循环选择相邻路线 / 确认推进
   camRotateL:   ['q'],
   camRotateR:   ['e'],
   camOverview:  ['g'],

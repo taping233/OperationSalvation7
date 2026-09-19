@@ -129,25 +129,7 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
       expect(typeof window.SDT.Battle.commands[command], `Battle.commands.${command} 未发布`).toBe('function');
     }
   });
-  it('第一次投掷前显示完整的静止骰子', () => {
-    const face = document.getElementById('diceFace');
-    expect(face.classList.contains('idle-dice')).toBe(true);
-    expect(face.querySelectorAll('.dice-f')).toHaveLength(6);
-    expect(face.querySelector('.dice-cube').style.transform).toBe('rotateX(90deg) rotateY(0deg) rotateZ(0deg)');
-  });
-  it('骰子六种结果都以目标点数朝上的姿态落定', () => {
-    const expected = {
-      1: [90, 0, 0], 2: [0, 0, 0], 3: [0, 0, 270],
-      4: [0, 0, 90], 5: [180, 0, 0], 6: [270, 0, 0],
-    };
-    for (let value = 1; value <= 6; value++) {
-      window.SDT.UI.drawDice(value);
-      const transform = document.querySelector('#diceFace .dice-cube').style.transform;
-      const angles = [...transform.matchAll(/rotate[XYZ]\((-?\d+)deg\)/g)]
-        .map(match => ((+match[1] % 360) + 360) % 360);
-      expect(angles, `${value} 点没有朝上落定`).toEqual(expected[value]);
-    }
-  });
+  // 骰子 UI 的两个落定测试已随骰子系统整体移除一并退役（2026-09-19 老板定向）。
 
   it('运行时按 mapSeed 重建局部几何，并以稳定节点提交移动事务', async () => {
     const session = await import('../game/src/game.session.js');

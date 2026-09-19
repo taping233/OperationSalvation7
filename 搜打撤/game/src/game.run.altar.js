@@ -29,7 +29,7 @@ const UI = window.SDT.UI;
 
 export function openFireRest() {
   game.heal(MAP.rules.fireHeal);
-  UI.log(`[[icon:fire]] <b>进入火堆</b>：自动回复 <b>${MAP.rules.fireHeal}</b> 点生命（体力不恢复，谨慎消耗）`, 'ok');
+  UI.log(`[[icon:fire]] <b>进入火堆</b>：自动回复 <b>${MAP.rules.fireHeal}</b> 点生命`, 'ok');
   // 2026-09-06 留言：火堆界面的音效删掉（原 levelup 提示音）
   if (Random.random('card') < MAP.rules.fireClassCardChance) {
     UI.log('[[icon:wood]] 营火余烬里翻出了一张先行者掉落的职业卡！', 'loot');
@@ -274,7 +274,7 @@ export function openDoorModal(door, cellDef) {
     UI.log(`穿过隔离闸门 → <b>${target.name}</b>`, 'sys');
     enterLayer(door.toLayer, door.arriveAt);
   });
-  UI.act('doorShop', () => openShop());
+  UI.act('doorShop', () => openShop('door:' + door.pair));
   UI.refresh(game);
 }
 
@@ -303,7 +303,9 @@ export function openAltarRitual(def) {
     body:
       nodeOpt('altarOn3', '弃 3 张 · 激活祭坛', '激活后二选一：① 复原 3 张消耗卡 + 回复 10 血；② 随机获取 1 张传说卡和 1 张装备卡', 'ok') +
       fragOpt +
-      nodeOpt('altarItemRestore', '献祭道具 · 复原卡牌', '献祭 1 张道具卡，从消耗口袋复原 2 张卡牌（选后本祭坛不可再进行其他献祭）') +
+      (game.altarItemSacrificed
+        ? nodeOpt('altarItemUsed', '献祭道具 · 已用过', '这座祭坛的道具献祭已受理过一次，不再 repeat——换其他方式激活，或直接离开', '', 'disabled title="道具献祭每座祭坛限一次"')
+        : nodeOpt('altarItemRestore', '献祭道具 · 复原卡牌', '献祭 1 张道具卡，从消耗口袋复原 2 张卡牌（每座祭坛限一次）')) +
       nodeOpt('altarLeave', '离开', '祭坛保持沉睡——回到当前格子，稍后再来'),
   });
   const markActivated = () => {
@@ -312,13 +314,15 @@ export function openAltarRitual(def) {
     game.visited[game.layerIdx + ',' + game.trackPos] = 1;   // 激活成功才消耗本格
   };
   // 献祭道具复原（2026-09-10 需求）：1 张道具卡 → 从消耗口袋复原 2 张；
-  // 独立于弃 3 张激活/碎片兑换——不消耗本格、不影响其他献祭功能，可重复使用
+  // 每座祭坛限一次（2026-09-19 老板定版：真加一次性锁，标记随存档持久化）
   UI.act('altarItemRestore', () => {
+    if (game.altarItemSacrificed) { UI.log('[[icon:crystal]] 这座祭坛的道具献祭已经受理过了', 'warn'); return; }
     if (!game.ownedCards.some(o => o.card.type === '道具')) { UI.log('[[icon:bag]] 背包里没有道具卡可供献祭', 'warn'); return; }
     const restorableN = game.usedPocket.filter(p => FIRE_RESTORABLE(p.card)).length;
     if (!game.usedPocket.length || !restorableN) { UI.log('[[icon:bag]] 消耗口袋里没有可复原的卡牌——先去战斗吧', 'warn'); return; }
     openBagSacrifice(1, (chosen) => {
-      UI.log(`[[icon:crystal]] 献上道具【<b>${esc(chosen[0].card.name)}</b>】——从消耗口袋复原卡牌`, 'loot');
+      game.altarItemSacrificed = true;   // 确认献祭才上锁；取消献祭不上锁
+      UI.log(`[[icon:crystal]] 献上道具【<b>${esc(chosen[0].card.name)}</b>】——从消耗口袋复原卡牌（本祭坛的道具献祭已用完）`, 'loot');
       saveGame();
       openPocketRestore(Math.min(2, restorableN), () => { saveGame(); openAltarRitual(def); });
     }, () => openAltarRitual(def), '道具');
@@ -503,6 +507,10 @@ export function emergencyExitPaymentState(cardCount) {
 
 export function openEmergencyModal() {
   game.state = 'modal';
+  // 随身币不随撤离带回（Item 18 / 离局清零）——撤离面板显式提醒未花掉的币（2026-09-19 审计 D-2）
+  const coinHint = game.coins > 0
+    ? `<p class="ov-note">[[icon:coin]] 提醒：随身 <b class="gold">${game.coins}</b> 币不会带回基地——离开前记得回商店花掉。</p>`
+    : '';
   const def = curLayer()?.logical?.[game.trackPos]?.def;
   const isEmergency = def && def.type === 'emergencyExit';
   if (isEmergency) {
@@ -522,6 +530,7 @@ export function openEmergencyModal() {
       tone: 'exit', icon: '[[icon:cross]]', title: '紧急撤离点',
       sub: '紧急信标过载——撤离前必须献祭 3 张卡牌作为代价',
       body:
+        coinHint +
         nodeOpt('payExit', '紧急撤离（献祭 3 张卡牌）', payment.canPay
           ? '从背包选择 3 张卡牌献祭，带着剩余战利品返回基地'
           : `卡牌不足（现有 ${payment.available}/3）——至少需要 3 张卡牌`, payment.canPay ? 'ok' : '', payment.canPay ? '' : 'disabled title="至少需要 3 张卡牌"') +
@@ -549,6 +558,7 @@ export function openEmergencyModal() {
       tone: 'exit', icon: '[[icon:exit]]', title: '终局撤离点',
       sub: '污染核心的首脑已被击破——撤离信标无条件放行',
       body:
+        coinHint +
         nodeOpt('payExit', '立即撤离', '带着全部战利品返回基地', 'ok') +
         nodeOpt('stayHere', '继续深入', '留在地图上，继续选择相邻节点'),
     });

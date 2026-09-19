@@ -25,6 +25,15 @@
 - 画风：**赛璐璐色块**（cel shading + flat color）。
 - 构图：全身居中、约占画幅高 85%、不出框；横版宽幅 16:9（4096×2304）。
 
+## 2026-09-19 painterly 全身立绘定稿（老板授权 Friday 定锚点）
+
+- 依据：`roster-painterly-four-v2-20260919-120257/xuanli-120257.png`（seed 1111442184），已实装 `portraits/full/xuanli.webp`。
+- 演出：延续定稿反差萌——**单手捏小咖啡杯啜饮（小指微翘、托碟、热气）**；巨剑由"插身侧"改为**背负**（剑柄露出肩上）。
+- 围巾：**围在颈间 + 单条飘带**（不再是整幅披风）。
+- 疤痕钉死左脸颊（his left cheek / 观众视角右）；发型句必带 `slicked back hair, exposed forehead` + 发型句原文。
+- 色调：黑白灰 + 棕橙围巾为全身唯一暖色（主题色 `#d0805a` 落地）；simple background 素底。
+- 画风：painterly 统一画风模块（miv4t+quasarcake，`official_painterly_style.py`）。
+
 ## 性格与背景（待老板提供）
 
 - 性格：立绘神态可参考「坏笑、寡言、压迫感 + 反差萌」，完整定稿文字待老板提供。

@@ -23,7 +23,7 @@ button,input,select,textarea{font-family:inherit}button{border-radius:1px;transi
 #sidebar{height:105px;min-height:105px;padding:12px 28px;gap:26px;border-top:1px solid #6f8994;background:linear-gradient(105deg,#122a36,#1b3541);overflow:hidden;box-shadow:0 -5px 25px #0b233555}#sidebar .panel{border:0;border-right:1px solid #425d6880;background:none;box-shadow:none;padding:2px 22px 2px 0}#charPanel{display:flex;align-items:center;min-width:0;padding:0 6px}.hero-ava{width:78px;min-width:78px;height:78px;align-self:center;flex:none;border-radius:8px;overflow:hidden;border:1px solid #728b91;box-shadow:0 2px 8px #0b233566}.hero-ava img.art-avatar{width:100%;height:100%;object-fit:cover;object-position:center}#bagPanel{min-width:185px;display:flex;align-items:center;gap:18px}#heroName{font-size:18px;letter-spacing:3px;white-space:nowrap}#bagBtn{background:#2c4652;border:1px solid #728b91;padding:12px;min-height:50px}#statsPanel{min-width:180px;flex:1!important;display:flex;flex-direction:column;justify-content:center}
 #miniMap{width:100%;max-width:560px;height:76px;display:block;opacity:.95}
 /* 行动/价值数字仍由 UI.refresh 维护（元素被引用），仅按要求不显示 */
-#statsPanel .stat-duo{display:none}#dicePanel{width:260px;min-width:240px}#rollBtn{background:#dec28e;color:#17303e;font-weight:700;min-height:44px;padding:10px 20px;border:0;box-shadow:none}#rollBtn:hover{background:#f0d5a1}#diceHist{font-size:9px;color:#8da6af}#layerBanner{top:20px;padding:10px 28px;background:#132b36e8;border-bottom:2px solid #d5b47d}#layerBanner .lb-zh{font:18px var(--font-ui);letter-spacing:5px}#layerBanner .lb-en{font:9px 'Cascadia Code';letter-spacing:3px;color:#c0bd9f}#topBtns{left:22px;top:20px}#resHud{top:20px;right:22px}#hpHud{background:#132b36;border:1px solid #637c89;box-shadow:none;clip-path:none}.hp-hud-icon,.hp-hud-label{background:#547c90}.hp-hud-label{font-weight:400;letter-spacing:2px}#topBtns #btnHome{background:linear-gradient(160deg,#A02020 0%,#701616 100%);border:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 2px 6px rgba(0,0,0,.45);color:#f3eae8}#topBtns #btnHome:hover{background:linear-gradient(160deg,#B82A2A 0%,#82201B 100%);color:#fff}#topBtns #btnMute{background:#142c38;border:1px solid #637c89;box-shadow:none}#topBtns #btnHelp{background:#142c38;border:1px solid #637c89;box-shadow:none;padding:0;width:42px;height:42px;display:inline-flex;align-items:center;justify-content:center;color:#cfdde2}
+#statsPanel .stat-duo{display:none}#dicePanel{width:260px;min-width:240px}#layerBanner{top:20px;padding:10px 28px;background:#132b36e8;border-bottom:2px solid #d5b47d}#layerBanner .lb-zh{font:18px var(--font-ui);letter-spacing:5px}#layerBanner .lb-en{font:9px 'Cascadia Code';letter-spacing:3px;color:#c0bd9f}#topBtns{left:22px;top:20px}#resHud{top:20px;right:22px}#hpHud{background:#132b36;border:1px solid #637c89;box-shadow:none;clip-path:none}.hp-hud-icon,.hp-hud-label{background:#547c90}.hp-hud-label{font-weight:400;letter-spacing:2px}#topBtns #btnHome{background:linear-gradient(160deg,#A02020 0%,#701616 100%);border:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 2px 6px rgba(0,0,0,.45);color:#f3eae8}#topBtns #btnHome:hover{background:linear-gradient(160deg,#B82A2A 0%,#82201B 100%);color:#fff}#topBtns #btnMute{background:#142c38;border:1px solid #637c89;box-shadow:none}#topBtns #btnHelp{background:#142c38;border:1px solid #637c89;box-shadow:none;padding:0;width:42px;height:42px;display:inline-flex;align-items:center;justify-content:center;color:#cfdde2}
 #topBtns #btnHelp:hover{background:#1d3d4c;color:#fff}#resHud .chip-mini{background:#132b36e8;border:1px solid #637c89;box-shadow:none;min-width:92px;height:42px}#resHud .res-gold b{color:#e2c28b}
 #mapLabels{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:2}#mapLabels[hidden]{display:none}.map-label{position:absolute;left:0;top:0;min-width:20px;text-align:center;padding:3px 6px;color:#dceae7;background:#152e3bd9;border-bottom:1px solid #9ebac0;opacity:.6;font:10px 'Cascadia Code';white-space:nowrap}.map-label.current{opacity:1;color:#f3e3c3;background:#152a34f0;border-color:#d9bd89}.map-label.destination{color:#f3d2a1;border-color:#dab27a}
 #sceneTools{position:absolute;right:22px;bottom:24px;z-index:7;display:flex;gap:5px}#sceneTools button{padding:9px 13px;background:#17303ce8;color:#d4e4e6;border:1px solid #75929d;font-size:11px}body.lobby #sceneTools,body.scene-battle-3d #sceneTools{display:none}
@@ -32,7 +32,7 @@ button,input,select,textarea{font-family:inherit}button{border-radius:1px;transi
 .pk-row,.dep-row{border-bottom:1px solid #42616d}.settings .set-h{color:#d8c08f;border-bottom:1px solid #45616d}.settings .chk{color:#ceddde}.settings input[type=range]{accent-color:#d7bb87}.settings input[type=checkbox]{accent-color:#9bbdb7}input,textarea,select{background:#102b39;color:#e4eeea;border:1px solid #657f89;border-radius:1px}input::placeholder,textarea::placeholder{color:#829fa9}.bag-slot{background:#17313f;border-color:#4d7180;border-radius:1px}.bag-slot.safe-slot{border-color:#c8b483;background:#333c39}.bag-slot.drop-here{outline:2px solid #d8c28e}.lib-filters,.bag-toolbar{background:#112936;border-color:#54747e}.hs-card,.card-tile{box-shadow:0 4px 12px #07151e70}.hs-card:hover{box-shadow:0 8px 20px #03111f99}.scene-line p{background:#132f3bd9;border:1px solid #728c93;color:#e4ebe6;border-radius:0}.scene-title{font-family:'SimSun',serif;font-weight:400}.scene-ops .ov-btn{min-height:44px}.flow-title{font-family:'SimSun',serif;letter-spacing:.16em}
 body.scene-battle-3d #sidebar,body.scene-battle-3d #layerBanner,body.scene-battle-3d #topBtns,body.scene-battle-3d #resHud{display:none!important}body.scene-battle-3d #overlay,body.scene-battle-3d #overlay .card,body.scene-battle-3d #ovBody,body.scene-battle-3d .battle-stage{background:transparent!important;backdrop-filter:none!important;box-shadow:none!important}body.scene-battle-3d .battle-stage::before,body.scene-battle-3d .battle-stage::after,body.scene-battle-3d .battle-stage-shade{display:none!important}body.scene-battle-3d .sts-figure>*{visibility:hidden}body.scene-battle-3d .sts-figure{height:clamp(140px,29vh,300px);filter:none}body.scene-battle-3d .sts-nameplate{background:#132e3adf!important;border:1px solid #7f99a3!important;padding:8px 15px!important;color:#e5ebe5}body.scene-battle-3d .sts-hud{background:linear-gradient(0deg,#102735 72%,#10273500)!important}body.scene-battle-3d .sts-intent{background:#e0c894;color:#193342;box-shadow:none;border:0}#overlay .card.battle{width:100%;height:100%;max-width:none;max-height:none;border:0;padding:0}body[data-gpu-lost]::after{content:'图形设备暂时中断，请保存后重启游戏';position:fixed;inset:35% 20%;z-index:999;padding:40px;background:#173441;color:#e1c997;text-align:center}
 @media(max-width:1100px){.ak-sq,.ak-quickref{transform:scale(.9);transform-origin:left top}.ak-quickref{left:168px}.ak-banner{right:190px;transform:scale(.92);transform-origin:right top}.ak-user{transform:scale(.85);transform-origin:right top}.ak-circle .c-ring{width:72px;height:72px}.ak-circle .c-cn{font-size:13px}.ak-ach{right:44px;top:132px}.ak-lib{left:5.5%;top:43%}.ak-set{left:10.5%;top:56.5%}.ak-hex{width:64px;height:72px}.ak-invest{left:30%}.ak-sec{right:22%;top:66%}.ak-bp{right:21%}.ak-start .st-cn{font-size:34px;letter-spacing:8px}.ak-start .st-en{font-size:13px}.ak-line1{left:330px}.title-heading{width:clamp(360px,48vw,560px)}.title-kicker{font-size:8px;letter-spacing:1.8px}#sidebar{gap:15px;padding:12px 18px}.cls-grid{grid-template-columns:repeat(3,minmax(0,1fr))}#layerBanner{padding:8px 15px}#layerBanner .lb-zh{font-size:15px}#layerBanner .lb-en{font-size:8px}.title-quote{font-size:11px}}
-@media(max-height:740px){.ak-tl{top:10px;left:12px}.ak-quickref{top:10px;left:170px}.ak-banner{top:10px;right:200px;height:50px}.ak-user{top:8px;right:14px}.ak-ach{top:126px}.ak-lib{top:43%}.ak-set{top:57%}.ak-hex{bottom:13%}.ak-invest{bottom:10%}.ak-start{bottom:4%}.ak-start .st-cn{font-size:36px}.cn-title{font-size:clamp(36px,5vw,68px)}.title-heading{top:6%}.title-quote{bottom:6%;font-size:11px}.title-quote small{margin-top:4px}#sidebar{height:88px;min-height:88px;padding:8px 20px}#diceHist{max-height:15px}.cls-story{font-size:12px}.pg-head,.hub-head{padding-bottom:12px}}
+@media(max-height:740px){.ak-tl{top:10px;left:12px}.ak-quickref{top:10px;left:170px}.ak-banner{top:10px;right:200px;height:50px}.ak-user{top:8px;right:14px}.ak-ach{top:126px}.ak-lib{top:43%}.ak-set{top:57%}.ak-hex{bottom:13%}.ak-invest{bottom:10%}.ak-start{bottom:4%}.ak-start .st-cn{font-size:36px}.cn-title{font-size:clamp(36px,5vw,68px)}.title-heading{top:6%}.title-quote{bottom:6%;font-size:11px}.title-quote small{margin-top:4px}#sidebar{height:88px;min-height:88px;padding:8px 20px}.cls-story{font-size:12px}.pg-head,.hub-head{padding-bottom:12px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 /* 快速参考弹窗（标题页） */
 .guide-list{display:grid;grid-template-columns:1fr 1fr;gap:8px 18px;margin-bottom:14px}.guide-row{display:flex;align-items:center;gap:12px;padding:8px 12px;background:#10273380;border:1px solid #3f5a6655}.guide-row b{min-width:104px;font:11px 'Cascadia Code';color:#d8c08f;letter-spacing:1px}.guide-row span{font-size:12.5px;color:#b6c9ce}
@@ -177,9 +177,7 @@ body.page-opaque #sidebar{visibility:hidden}
 #overlay .card.page:has(.cdes){width:100%;height:100%;max-width:none;max-height:none}
 
 /* 体力系统（2026-09-06） */
-.stamina-row{margin-top:6px;font-size:12px;color:#9db4bd;display:flex;align-items:center;gap:5px}
-.stamina-row b{color:#e4eeea}
-.stamina-row.stamina-low,.stamina-row.stamina-low b{color:#ff7b6b}
+
 
 /* 祭坛献祭选卡（2026-09-06） */
 .sac-list{display:flex;flex-direction:column;gap:6px;max-height:52vh;overflow:auto;margin:10px 0}
@@ -1301,11 +1299,6 @@ img[data-asset-key="card-wu-myriadswords"]{object-position:50% 40%!important}
 .pg.cls-pool-page .cls-foot .lib-pageinfo{color:#b6c9ce}
 .pool-foot-sep{width:1px;height:26px;background:#607c8666}
 
-/* ===== 选人页立绘对齐（2026-09-12 留言 #6/#7）：黑像头部压顶、星月整体偏左，
-   以「无」的头部屏上位置为基准微调；只动 cls2-fullart 大图，头像条/档案位不受影响 ===== */
-.cls2-fullart .figure-xuanli img.art-figure{translate:0 20%;object-position:40% bottom}
-.cls2-fullart .figure-dengkui img.art-figure{object-position:14% bottom}
-
 /* ===== 2026-09-12 晚留言批次 ===== */
 /* 卡牌库卡面再大一点：收窄卡片内边距（侧栏/页边距在 expedition-library.css 同步收窄） */
 #overlay .card-library-page .lib-item{padding:10px 6px}
@@ -1315,16 +1308,6 @@ img[data-asset-key="card-wu-myriadswords"]{object-position:50% 40%!important}
 /* 收藏图鉴等圆钮点击脉冲（game.menu.js 点击时挂 .ak-click） */
 @keyframes akRingPulse{0%{scale:1}35%{scale:.88}100%{scale:1}}
 .ak-circle .c-ring.ak-click{animation:akRingPulse .32s ease-out}
-
-/* 黑像顶部白填（2026-09-12 留言：立绘下移后顶部露出的模糊背景层改白，取其画布顶边色 #fefefe 防接缝） */
-.cls2-fullart .figure-xuanli img.art-figure-back{display:none}
-.cls2-fullart .art-figure-wrap.figure-xuanli{background:#fefefe}
-/* 星月头像钮对应大图右移：人物落到头像框中部（大图窗口/头像窗口几何不同，分别标定） */
-#overlay .cls2-face img[data-asset-key="figure-dengkui"]{object-position:32% 30%}
-
-/* 黑像头像钮下移（2026-09-12 留言）：与大图同款下移 20%，钮底改白与画布衔接 */
-#overlay .cls2-face:has(img[data-asset-key="figure-xuanli"]){background:#fefefe}
-#overlay .cls2-face img[data-asset-key="figure-xuanli"]{translate:0 20%}
 
 /* ===== 2026-09-12 晚第二批：商店重做 + 背包重做 ===== */
 /* —— 商店：点卡即买、价格居中、鎏金价签（2026-09-13 留言：去格子线条边框；价格移到卡面下方居中，不再被费用角标遮挡） —— */

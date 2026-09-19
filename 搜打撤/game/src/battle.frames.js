@@ -1,6 +1,7 @@
 import SDT from './sdt-facade.js';
 import { assetUrl } from './asset-url.js';
 import { on as busOn } from './event-bus.js';
+import { rect as uiRect, scale as uiScale } from './ui-scale.js';
 
 // ---------- 战斗单位序列帧播放器（批次D：Pixi 材质层） ----------
 // 定调（老板 2026-09-12）：动画路线 = Pixi 材质层 + 序列帧，跳过 Spine；敌人本轮不上序列帧；
@@ -70,6 +71,10 @@ function ensureApp() {
       // antialias 关闭：帧图是预烘 webp 纹理，纹理采样自带双线性过滤，MSAA 对
       // 纹理四边形毫无收益，只烧全屏 MSAA 带宽。
       resizeTo: ov || window, backgroundAlpha: 0, antialias: false,
+      // 物理分辨率补 UiScale.zoom（stage 坐标是布局值）：zoom>1 的大屏序列帧不糊；
+      // autoDensity 保持 canvas CSS 尺寸=逻辑尺寸，显示仍由 html zoom 等比缩放
+      resolution: Math.max(1, (window.devicePixelRatio || 1) * uiScale()),
+      autoDensity: true,
       autoStart: false, powerPreference: 'low-power',
     });
     host.appendChild(app.view);
@@ -147,7 +152,7 @@ function setTexture(tex) {
 
 function layout() {
   if (!cur || !cur.fig || !cur.fig.isConnected) return;
-  const r = cur.fig.getBoundingClientRect();
+  const r = uiRect(cur.fig);   // 布局口径：sprite 坐标是 Pixi stage 布局值
   if (r.width <= 0) return;
   const lr = cur.lastRect;
   if (!lr || r.left !== lr[0] || r.top !== lr[1] || r.width !== lr[2] || r.height !== lr[3]) {
@@ -211,7 +216,7 @@ function tickLoop() {
   if (!cur || document.hidden) return;
   advance(performance.now());
   if (cur && cur.fig) {
-    const r = cur.fig.getBoundingClientRect();
+    const r = uiRect(cur.fig);   // 与 lastRect（布局口径）同尺比较
     const lr = cur.lastRect;
     if (!lr || r.left !== lr[0] || r.top !== lr[1] || r.width !== lr[2] || r.height !== lr[3]) {
       layout();
@@ -240,7 +245,7 @@ function startLoop() {
   if (!pollTimer) {
     pollTimer = setInterval(() => {   // 静止期轮询：rect 变了（回合沉浮/hover）拉起渲染
       if (!cur || document.hidden) return;
-      const r = cur.fig && cur.fig.getBoundingClientRect();
+      const r = cur.fig && uiRect(cur.fig);   // 与 lastRect（布局口径）同尺比较
       if (!r || !r.width) return;
       const lr = cur.lastRect;
       if (!lr || r.left !== lr[0] || r.top !== lr[1] || r.width !== lr[2] || r.height !== lr[3]) {
@@ -276,7 +281,7 @@ async function attach(body) {
     return;
   }
   const ov = document.getElementById('overlay');
-  const ovR = ov ? ov.getBoundingClientRect() : { left: 0, top: 0 };
+  const ovR = ov ? uiRect(ov) : { left: 0, top: 0 };   // 布局口径：layout() 里 sprite 换算用
   cur = {
     role, fig, img, set: set.set, seqs: set.seqs, play: null, fi: 0, tNext: 0,
     fallback: set.seqs.get('idle')[0], lastRect: null, ovLeft: ovR.left, ovTop: ovR.top,

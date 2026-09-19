@@ -200,9 +200,6 @@ import { renderMiniMap } from './game.session.js';
       chip.addEventListener('mouseleave', () => UI.hideTooltip());
     });
 
-    if (UI.el.rollBtn) UI.el.rollBtn.addEventListener('click', () => {
-      chooseNextTarget(1);
-    });
     if (UI.el.tglIndex) UI.el.tglIndex.addEventListener('change', e => { game.toggles.index = e.target.checked; });
     if (UI.el.btnExport) UI.el.btnExport.addEventListener('click', showExportOverlay);
     if (UI.el.btnImport) UI.el.btnImport.addEventListener('click', showImportOverlay);
@@ -358,7 +355,7 @@ import { renderMiniMap } from './game.session.js';
   }
 
   // ---------- 主循环 ----------
-  const ELAPSED_STATES = new Set(['idle', 'rolling', 'moving', 'modal']);
+  const ELAPSED_STATES = new Set(['idle', 'moving', 'modal']);
   let lastT = performance.now();
   let coverTitle = null, coverExit = null;   // 标题 / 退出界面（DOMContentLoaded 时缓存）
   function loop(now) {
@@ -392,7 +389,7 @@ import { renderMiniMap } from './game.session.js';
     // 走 renderScheduler.invalidate() 逐事件触发绘制，不受降档影响。标题等未开局画面
     // 同样 idle 60；战斗页盖在画布上时（自绘场景大图基本不透明，画布只从边缝透出）
     // 也降到 idle 60：底图隔着重度 blur(6px) 无人能分辨帧率，省下的余量让给战斗页动画。
-    const active = !battleBehind && (game.battleActive || game.state === 'moving' || game.state === 'rolling');
+    const active = !battleBehind && (game.battleActive || game.state === 'moving');
     // 镜头平滑追随仅在棋子移动中生效（指数趋近，帧率无关；大距离跳变直接贴合）。
     // 站立/拖拽时镜头完全归玩家：早先每帧无差别追随会把玩家拖拽的镜头拉回去，
     // 拖动观感失效（老板留言：地图无法正常拖动）。
@@ -419,11 +416,13 @@ import { renderMiniMap } from './game.session.js';
     stats.renderMs = stats.renderMs * 0.9 + renderMs * 0.1;
     stats.updateMs = stats.updateMs * 0.9 + (dt * 1000 - renderMs > 0 ? dt * 1000 - renderMs : 0) * 0.1;
     stats.fps = stats.fps * 0.9 + (1 / Math.max(dt, 1e-4)) * 0.1;
-    UI.refreshTime(game);
   }
 
   function resize() {
-    const cw = canvas.clientWidth, ch = canvas.clientHeight;
+    // 视口口径（getBoundingClientRect 含 UiScale.zoom）：cam/事件坐标全程同口径，
+    // 内部分辨率按视口尺寸 × dpr —— zoom≠1 时物理像素密度仍恒等于 dpr，不糊不费。
+    const vr = canvas.getBoundingClientRect();
+    const cw = vr.width, ch = vr.height;
     if (!cw || !ch) return;
     const dprNow = window.devicePixelRatio || 1;
     // 尺寸与 dpr 都没变就不重设：ResizeObserver 在 canvas.width 赋值后也会触发，防止空转/递归

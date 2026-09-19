@@ -28,8 +28,9 @@ beforeAll(() => {
 describe('Item 17：分层配额下限与物资格', () => {
   const FLOORS = { 1: { battle: 3, chest: 2, event: 2, resource: 1 }, 2: { battle: 4, chest: 3, event: 2, resource: 1 }, 3: { battle: 4, chest: 4, event: 2, resource: 1 } };
 
-  it('生成器版本 = 8（旧档按新版本重生成）', () => {
-    expect(generateLayeredMap('item17').layoutVersion).toBe(8);
+  it('生成器版本 = 9（旧档按新版本重生成）', () => {
+    // v9（a60e551）：L3 紧急撤离点改落层后半段（x≥4）；原 v8 断言随版升一并更新
+    expect(generateLayeredMap('item17').layoutVersion).toBe(9);
   });
 
   it('200 个 seed：L2~L4 各类型达到下限，火堆/补给站恒 1，L2 总格 ≤ 12，物资格存在', () => {

@@ -6,6 +6,7 @@
  * 下面的导入顺序即启动顺序，须与 boot-order.js 的 BOOT_ORDER 一致
  * （tests/contracts.test.js 有守护断言，勿随意调换）。
  * ============================================================ */
+import './ui-scale.js';   // 全局 UI 缩放：须在首帧渲染前挂 zoom，故先于一切模块
 import './random.js';
 import './rules.js';
 import './mapData.js';

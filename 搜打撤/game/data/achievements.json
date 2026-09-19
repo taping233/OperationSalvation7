@@ -163,7 +163,7 @@
       "id": "unlimitedEnergy",
       "icon": "[[icon:bolt]]",
       "name": "无限能源",
-      "desc": "在一回合内打出 10 张及以上的招式",
+      "desc": "在一回合内打出 10 张及以上的招式（0 费连招流可达成）",
       "reward": {
         "rations": 2
       }

@@ -25,7 +25,6 @@ function createGameState(map) {
     usedPocket: [],
     shopStock: [],
     dice: null,
-    diceHistory: [],
     inventory: [],
     discoveredPairs: new Set(),
     altarFrom: null,
@@ -54,7 +53,6 @@ class GameStore {
       cardOrder: Object.freeze(state.cardOrder.slice()),
       usedPocket: freezeRows(state.usedPocket),
       shopStock: freezeRows(state.shopStock),
-      diceHistory: freezeRows(state.diceHistory),
       inventory: freezeRows(state.inventory),
       discoveredPairs: Object.freeze([...state.discoveredPairs]),
     });

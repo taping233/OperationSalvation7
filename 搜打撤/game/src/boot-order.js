@@ -8,6 +8,7 @@
  * 依赖方向口诀：底座（随机/规则/数据/渲染原语）→ 玩法数据 → 战斗 → 局内流程 → 启动
  * ============================================================ */
 const BOOT_ORDER = [
+  'ui-scale',   // 全局 UI 缩放：无依赖且须在首帧渲染前挂 zoom，故居首
   'random', 'rules', 'mapData', 'art', 'icons-bitmap', 'sound', 'camera', 'motion', 'input',
   'event-bus', 'notes', 'cards', 'combat', 'base', 'meta', 'render-scheduler', 'renderer.fx',
   'renderer', 'ui', 'shared',

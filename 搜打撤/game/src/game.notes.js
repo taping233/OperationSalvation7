@@ -208,20 +208,10 @@ import { game } from './game.session.js';
   function initDevMode() {
     game.devMode = localStorage.getItem('sdt-dev') === '1';
     syncDevVisibility();
-    const savedDice = parseInt(localStorage.getItem('sdt-dev-dice') || '0', 10);
-    const dMax = SDT.MAP.rules.diceSides;
-    game.nextDice = savedDice >= 1 && savedDice <= dMax ? savedDice : 0;
-    UI.el.devDice.value = String(game.nextDice);
   }
 
   function bindDevMode() {
-    UI.el.devDice.addEventListener('change', (e) => {
-      const value = +e.target.value;
-      const dMax = SDT.MAP.rules.diceSides;
-      game.nextDice = value >= 1 && value <= dMax ? value : 0;
-      localStorage.setItem('sdt-dev-dice', String(game.nextDice));
-      UI.log(game.nextDice > 0 ? `[[icon:tools]] 骰子已固定为 ${game.nextDice} 点` : '骰子恢复随机', 'sys');
-    });
+    // 骰子系统已整体移除（2026-09-19 老板定向），此钩子保留为空实现（boot 启动链仍调用）
   }
 
 export { TYPE_NAME, bindDevMode, bindNotesMixins, initDevMode, openCellEditor, rebuildNotes, showClearOverlay, showExportOverlay, showImportOverlay, syncDevVisibility };

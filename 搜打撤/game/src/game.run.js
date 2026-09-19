@@ -81,7 +81,7 @@ function devJumpNode(kind) {
   switch (kind) {
     case 'battle': devForceBattle(false); break;
     case 'boss': devForceBattle(true); break;
-    case 'shop': openShop(); break;
+    case 'shop': openShop('dev'); break;
     case 'event': runEventDeck(); break;
     case 'fire': openFireRest(); break;
     case 'altar': openAltarRitual(); break;   // def 参数仅供重进递归用，直接进不需要格子定义

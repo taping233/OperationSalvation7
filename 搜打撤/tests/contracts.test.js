@@ -12,7 +12,6 @@ describe('规则与接口契约', () => {
   it('关键玩法数值保持冻结且与现行规则一致', () => {
     expect(Object.isFrozen(RULES)).toBe(true);
     expect(RULES).toMatchObject({
-      diceSides: 3,
       emergencyExitCost: 10,
       playerMaxHp: 30,
       bagSize: 16,
@@ -23,7 +22,8 @@ describe('规则与接口契约', () => {
       bossDeckSize: 15,
       starterSha: 5,
     });
-    expect(RULES.map).toEqual({ diceSides: 3, stepMs: 340, emergencyExitCost: 10, fireHeal: 8, staminaMax: 60, staminaWarn: 10, fireClassCardChance: 0.3 });
+    // 2026-09-19：骰子/体力系统整体移除，diceSides/staminaMax/staminaWarn 退出规则表
+    expect(RULES.map).toEqual({ stepMs: 340, emergencyExitCost: 10, fireHeal: 8, fireClassCardChance: 0.3 });
     expect(RULES.battle.energy).toBe(2);
     expect(RULES.backpack).toMatchObject({ start: 16, max: 30, safeStart: 2, safeMax: 6 });
     expect(RULES.base.stashMax).toBe(100);   // Item 17：仓库可升到 100 格

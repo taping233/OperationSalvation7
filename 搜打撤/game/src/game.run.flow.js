@@ -143,7 +143,7 @@ function resolveCell() {
   if (def && def.type === 'altar') { enterNode('altar', openAltarRitual); return; }
   if (def && def.type === 'boss') { enterNode('boss', openBossGate); return; }
   if (def && (def.type === 'emergencyExit' || def.type === 'extraction')) { enterNode('emergencyExit', openEmergencyModal); return; }
-  if (def && def.type === 'shop') { enterNode('shop', openShop); return; }
+  if (def && def.type === 'shop') { enterNode('shop', () => openShop('cell:' + game.layerIdx + ',' + game.trackPos)); return; }
 
   // 4) 空白安全格（无任何事件）：给完整提示页（2026-09-06 留言）
   if (!def) { openBlankSafePage(); return; }
@@ -373,7 +373,8 @@ function eventChoiceSpec(card, narrative = null) {
       airdrop_heal: settle(() => { narrate(); game.heal(3); }),
       chest_small: () => { narrate(); openChestsOnCell([{ kind: 'small' }], '你选择了稳妥的小型物资箱'); },
       chest_medium: () => { narrate(); openChestsOnCell([{ kind: 'medium' }], '你选择了高风险的密封物资箱'); },
-      timeskip_move: settle(() => { narrate(); UI.log('[[icon:crystal]] 时空孔隙把你向前卷了 <b>6</b> 格！', 'sys'); game.chainMove = 6; }),
+      // timeskip_move（时空孔隙「前进 6 格」）已随 2026-09-19 老板定向从事件池摘除：
+      // 卡库本就无 tt6-timeskip 事件卡，此 effect 入口一并退役（scenes 的 chainMove 守卫保留兜底）。
       relief_heal: settle(() => { narrate(); UI.log('[[icon:heart]] 爱心救济站为你处理了伤口', 'ok'); game.heal(6); }),
       mystery_supply: settle(() => { narrate(); grantEventCard(SDT.Cards.all().find(c => c.id === 'tt-token-color')); gainCoins(2); }),
       systemsupply_restock: settle(() => {

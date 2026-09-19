@@ -54,6 +54,7 @@ import { DATA } from './data-loader.js';
       nestUnlocked: false,   // 龙巢：击败一图首脑并成功撤离后解锁
       runes: [],      // 仓库符文 [{kind,name,rarity,attrs,desc}]（每块占 1 仓库格）
       nestBagUp: 0,   // 符文背包升级次数（10 + n 格，上限 25）
+      eggPity: 0,     // 宠物蛋软保底：连续未出蛋的开箱次数（出蛋归零，2026-09-19 老板定向）
       stash: [],      // 卡牌仓库 [{card, count}]——出发时自选携带；「初始攻击」不可入库
       pocket: [],     // 基地消耗口袋 [{card, count}]，用钥匙复原后才回仓库
       pets: {},       // 已拥有宠物 [宠物id] => { lv, ts }（宠物蛋孵化；初始宠物汪汪狗自动获得）
@@ -475,18 +476,6 @@ import { DATA } from './data-loader.js';
       msg: `[[icon:coin]] 卖出【<b>${name}</b>】×${qty}，+ ${price * qty} 币（储备 ${data.coins}）` };
   }
 
-  // 卖出基地储备资源（wood / rations）：价值即币
-  function sellRaw(kind, all) {
-    const item = kind === 'wood' ? window.SDT.MAP.items.wood : window.SDT.MAP.items.rations;
-    const qty = all ? data[kind] : Math.min(1, data[kind]);
-    if (qty <= 0) return { ok: false, why: 'empty' };
-    data[kind] -= qty;
-    data.coins += item.value * qty;
-    save();
-    return { ok: true, qty, coins: item.value * qty,
-      msg: `[[icon:coin]] 卖出【<b>${item.name}</b>】×${qty}，+ ${item.value * qty} 币（储备 ${data.coins}）` };
-  }
-
   // 收藏 / 取消收藏（图鉴记录 = [[icon:sparkles]]标记本身；收藏中的堆不可卖出）
   function collectToggle(card) {
     if (!card || !card.id) return false;
@@ -500,15 +489,6 @@ import { DATA } from './data-loader.js';
     return true;      // 现在已收藏
   }
   const isCollected = (card) => !!card && !!card.id && !!data.collection[card.id];
-
-  // ---------- 储备币 ----------
-  // 出发时把储备币全部带走（本局开局币的一部分）
-  function takeReserveCoins() {
-    const c = data.coins || 0;
-    data.coins = 0;
-    save();
-    return c;
-  }
 
   // ---------- 宝藏大门 ----------
   // 钥匙计数：真实钥匙储备 + 仓库里的钥匙类卡牌（「一串钥匙」= 2 把，其余钥匙 = 1 把）
@@ -529,7 +509,7 @@ import { DATA } from './data-loader.js';
     nestBagCap, canUpgradeNestBag, upgradeNestBag,
     petUpCost, petLevel, PET_LEVEL_MAX, PET_UP_COSTS,
     deposit, depositCards, restore, pocketKeyCost, takeStashCards,
-    sellStashCards, sellRaw, collectToggle, isCollected, takeReserveCoins,
+    sellStashCards, collectToggle, isCollected,
     useStashMaterial, materialInfo, materialAmount,
     keyCount, KEY_NEEDED,
     isSha,

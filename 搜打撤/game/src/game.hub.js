@@ -186,14 +186,14 @@ let hubTab = 'deploy';
       ] },
       shop: { title: '商店说明', items: [
         ['基础卡牌', '用储备币购买基础招式 / 装备 / 资源卡，买下直接放入卡牌仓库，出发前勾选带入。'],
-        ['储备币', '卖出仓库物品与撤离结算所得；不进局，只用于基地消费（孵蛋、商店）。'],
+        ['储备币', '卖出仓库物品所得；不进局、不随对局增减，只用于基地消费（孵蛋、商店）。'],
       ] },
       stash: { title: '仓库说明', items: [
         ['卡牌仓库', '点击物品可卖出换储备币，或收藏进图鉴（收藏职业卡 +10、能力卡 +50 对应人物熟练度经验，重复收藏重复获得经验（进度只记首次）；收藏即用掉这张卡，不再占仓库格；收藏进度可在「成就·收藏室」领一次性奖励。传说卡与桌游珍宝是特殊收藏品，收藏期间不可卖出）。出发时自选携带（职业卡带出后无法带入）。'],
-        ['材料卡 / 宠物蛋', '木材/口粮/钥匙材料卡可直接「使用」折入真实物资；宠物蛋 + 50 币可孵化随机宠物（宝箱 0.7% 掉落）。'],
+        ['材料卡 / 宠物蛋', '木材/口粮/钥匙材料卡可直接「使用」折入真实物资；宠物蛋 + 50 币可孵化随机宠物（宝箱 0.7% 起掉落，有软保底）。'],
         ['消耗口袋', '战斗中消耗的卡牌有 1/3 概率随撤离回到这里（职业卡与初始牌除外）；用钥匙按稀有度复原：古朴1 / 稀有2 / 史诗3 / 传说4。下一次出发后口袋清空。'],
         ['宠物', '初始宠物「汪汪狗」自动获得，携带 1 只出战（出发页可切换）；其余用宠物蛋孵化。宠物在「升级」页用口粮升级（2-3-4-5）。'],
-        ['物资', '木材/口粮/钥匙是基地建设材料（木材扩建背包与仓库、口粮升级宠物、钥匙复原口袋与开启宝藏大门），不可卖出换币。储备币会在下次出发时随身带走。'],
+        ['物资', '木材/口粮/钥匙是基地建设材料（木材扩建背包与仓库、口粮升级宠物、钥匙复原口袋与开启宝藏大门），不可卖出换币。储备币只留在基地消费，不随对局带走。'],
       ] },
       upgrade: { title: '升级说明', items: [
         ['背包扩建', '每消耗木材 ×' + R.bagUpgradeWood + ' 扩建 1 格，上限 ' + R.bagMax + ' 格。'],
@@ -257,7 +257,7 @@ let hubTab = 'deploy';
             <div class="readiness-item ready"><i>01</i><span>基础参考（角色出发后选择）</span><b>${MAP.rules.playerMaxHp + (pet?.effect?.maxHp || 0)} 生命 · ${MAP.rules.playerAtk} 攻击</b></div>
             <div class="readiness-item"><i>02</i><span>携带容量</span><b>${B.bagCap()} 格背包 · 仓库 ${B.stashUsed()}/${B.stashCap()}</b></div>
             <div class="readiness-item"><i>03</i><span>保护与回收</span><b>${B.safeCap()} 格可用</b></div>
-            <div class="readiness-item"><i>04</i><span>随身储备</span><b>${(m.startCoins || 0) + B.data.coins} 币 · ${B.data.rations} 口粮</b></div>
+            <div class="readiness-item"><i>04</i><span>随身储备</span><b>开局 ${m.startCoins || 0} 币（储备币不进局） · ${B.data.rations} 口粮</b></div>
           </div>
           <div class="brief-pet">
             <span class="brief-pet-icon">[[icon:paw]]</span><span><small>随队宠物</small><b>${pet ? esc(pet.name) : '未携带'}</b></span>
@@ -366,7 +366,7 @@ let hubTab = 'deploy';
           <span class="pg-spacer"></span>
           <span class="hub-res">
             <span class="res-chip">[[icon:bag]] 背包 <b class="${full ? 'fulled' : ''}">${slots}/${B.bagCap()}</b> 格</span>
-            <span class="res-chip">[[icon:coin]] 携带 <b>${B.data.coins}</b> 币</span>
+            <span class="res-chip" title="储备币留在基地消费，不进对局；开局只带当前模式的赠送币">[[icon:coin]] 开局 <b>${MODES[m].startCoins || 0}</b> 币</span>
           </span>
         </header>
         <div class="dep-body${deployJustOpened ? ' page-in' : ''}">
@@ -397,6 +397,14 @@ let hubTab = 'deploy';
       }
       const cur = deployPick[name] || 0;
       if (cur >= stack.count) return;
+      // 局内同名叠放上限（初始攻击/火球 5，其余 3，见 game.session stackCapOf）——
+      // 带 4 张会占 2 格，整备页按「种类数」预览会失真，来源上直接按局内口径封顶（2026-09-19 审计）
+      const stackCap = game.stackCapOf ? game.stackCapOf(stack.card) : 3;
+      if (cur >= stackCap) {
+        deployHint = `[[icon:cross]] 同名卡牌最多携带 ${stackCap} 张（局内叠放上限）——想多带就分摊到不同卡牌上。`;
+        renderDepartPrep();
+        return;
+      }
       if (cur === 0 && deploySlotsUsed() >= B2.bagCap()) {
         deployHint = `[[icon:bag]] 背包格数已满（${B2.bagCap()} 格）——先移出其他卡牌，或回基地用木材扩建背包。`;
         renderDepartPrep();
@@ -529,7 +537,7 @@ let hubTab = 'deploy';
         <section class="hub-card">
           <h3>[[icon:book]] 补给说明</h3>
           <p class="ov-note">买下的基础卡直接放入<b>卡牌仓库</b>；出发前在「出发」页勾选带入对局。</p>
-          <p class="ov-note">[[icon:coin]] 储备币来源：仓库卖出与撤离结算。储备币不进局，只用于基地消费。</p>
+          <p class="ov-note">[[icon:coin]] 储备币来源：仓库卖出。储备币不进局、不随对局增减，只用于基地消费。</p>
           <p class="ov-note">口粮/木材买入直接折入基地物资（升级宠物 / 扩建）。「初始攻击」每局自动携带、火球为衍生牌，均不在货架。</p>
         </section>
       </div>`;
@@ -618,7 +626,7 @@ let hubTab = 'deploy';
     return `
       <section class="hub-card" style="margin-top:14px">
         <h3>[[icon:paw]] 宠物 <span class="set-tip">${owned.length} / ${B.PETS.length} 只 · 携带 1 只出战</span></h3>
-        <p class="ov-note" style="margin:0 0 6px">初始宠物「汪汪狗」自动获得；其余只能用<b>宠物蛋</b>（宝箱 0.7% 掉落）+ 50 币在仓库孵化。宠物在「升级」页用口粮升级，携带不同宠物保护格数量不同。</p>
+        <p class="ov-note" style="margin:0 0 6px">初始宠物「汪汪狗」自动获得；其余只能用<b>宠物蛋</b>（宝箱 0.7% 起掉落，连续未出逐步提升）+ 50 币在仓库孵化。宠物在「升级」页用口粮升级，携带不同宠物保护格数量不同。</p>
         <div class="stash-list">${rows}</div>
         ${hasEgg ? '<p class="hint ok-hint">[[icon:crystal]] 仓库里有宠物蛋——点击它进行孵化！</p>' : ''}
       </section>`;
@@ -908,7 +916,7 @@ let hubTab = 'deploy';
     return `
       <section class="hub-card coll-room">
         <h3>[[icon:sparkles]] 职业收藏室 <span class="set-tip">收藏进度 ${prog} / ${total}</span></h3>
-        <p class="ov-note" style="margin:0 0 8px">收藏的职业卡与能力卡会陈列在这里（收藏只做记录并转化为对应人物的经验，卡牌保留在仓库），每收藏一张职业卡为对应人物 <b>+10</b> 点经验、能力卡 <b>+50</b> 点（同一张只计一次）。收藏<b>不同</b>的职业卡与能力卡推进进度，阶段目标各有一次奖励。</p>
+        <p class="ov-note" style="margin:0 0 8px">收藏的职业卡与能力卡会陈列在这里。收藏即用掉这张卡（从仓库移除、不再占格），转化为对应人物熟练度经验——职业卡 <b>+10</b> 点、能力卡 <b>+50</b> 点，<b>重复收藏重复获得经验</b>（同一张卡只有首次收藏推进收藏进度）。收藏<b>不同</b>的职业卡与能力卡推进进度，阶段目标各有一次奖励。</p>
         <div class="base-bar"><i style="width:${pct.toFixed(1)}%"></i></div>
         <div class="coll-ms-list">${msRows}</div>
         ${groups}

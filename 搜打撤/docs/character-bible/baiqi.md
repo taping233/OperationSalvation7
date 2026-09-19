@@ -27,6 +27,14 @@
 - 画风：人设图/立绘质感（miv4t+quasarcake + limited palette + film grain），深紫→淡紫渐变氛围背景，人物紫边光保证脸部与金饰可读。
 - 构图：横版 384:291 半身起步，主体大。
 
+## 2026-09-19 painterly 全身立绘定稿（老板授权 Friday 定锚点）
+
+- 依据：`roster-painterly-four-v2-20260919-120257/baiqi-120257.png`（seed 1317726425），已实装 `portraits/full/baiqi.webp`。
+- 演出：全身站姿，**右手抬起扶圆框眼镜**，**左手扶黑法杖点地、金纹杖头上凝一颗紫色魔法光珠**。
+- 服装：黑高领长袍 + **紫色大内衬随披风展开、袍摆拖地**，金滚边，黑手套黑靴；白羽蓝宝石金扣胸针在左胸。
+- 色调：**紫 + 金为全身点缀色**（主题色 `#ad9ddd` 落地）；simple background 素底。
+- 画风：painterly 统一画风模块（miv4t+quasarcake，`official_painterly_style.py`）；三分钟视角正脸、黄瞳于镜后清晰可见。
+
 ## 性格与背景（待老板提供）
 
 - 性格：待老板提供。

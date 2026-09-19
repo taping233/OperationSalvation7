@@ -71,11 +71,21 @@ import { Random } from './random.js';
       seen.add(card);
       c.cards.push(card);
     }
-    // 宠物蛋（2026-09-09 需求 #2）：固定 0.7% 爆率额外开出（不占随机卡池，unrandom）
-    if (Random.random('loot') < 0.007) {
+    // 宠物蛋（2026-09-09 需求 #2）：0.7% 基础爆率 + 软保底（2026-09-19 老板定向）——
+    // 每次开箱未出蛋 +3% 累进、出蛋归零；计数存基地档位（跨局累计，不占格）
+    const pityN = (SDT.Base.data.eggPity || 0) + 1;
+    if (Random.random('loot') < 0.007 + 0.03 * (pityN - 1)) {
       const egg = (SDT.Cards.all() || []).find(x => x.id === 'pet-egg');
-      if (egg && !seen.dup(egg)) { seen.add(egg); c.cards.push(egg); c.eggHit = true; }
+      if (egg && !seen.dup(egg)) {
+        seen.add(egg); c.cards.push(egg); c.eggHit = true;
+        SDT.Base.data.eggPity = 0;
+      } else {
+        SDT.Base.data.eggPity = pityN;   // 面板重复等异常未实际出蛋：保底照常累计
+      }
+    } else {
+      SDT.Base.data.eggPity = pityN;
     }
+    SDT.Base.save();
     // —— 宝箱保底（2026-09-09 试玩反馈；设计者定版权重 60:28:9:3 不动）——
     // 中宝箱（3 选 1）整包全古朴的概率约 21.6%，体验很差：保底至少 1 张「稀有」+；
     // 大宝箱 / 首脑宝箱保底至少 1 张「史诗」+。未达标就重掷最后一张（目标档内挑卡，

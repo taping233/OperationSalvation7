@@ -572,16 +572,18 @@ import { DATA } from './data-loader.js';
     // 背包里会记录本局触发过哪些事件（game.js 事件格结算 + 背包「事件记录」）。
     // 因此稀有度记为「衍生」（不进商店/随机池），并全部加 unrandom 双保险；
     // 闪金之锤角标 <事件战斗>、盗匪横行含反抗组织拾荒者×5，battle: true 供战斗结算识别。
+    // tt6 事件卡与下方桌面区同名同 id 双版并存（微信版 233 张定版口径）——两处描述必须
+    // 保持一致（2026-09-19 审计 D-5 对齐），实际结算效果以 game.run.flow eventChoiceSpec V2 为准。
     TABLETOP6: [
-      { id: 'tt6-demondeal',   name: '恶魔交易',   cost: 0, rarity: '衍生', type: '事件', unrandom: true, desc: '-1 血，获得传奇武器。' },
+      { id: 'tt6-demondeal',   name: '恶魔交易',   cost: 0, rarity: '衍生', type: '事件', unrandom: true, desc: '-5血，获得1个大宝箱。' },
       { id: 'tt6-bandits',     name: '盗匪横行',   cost: 0, rarity: '衍生', type: '事件', battle: true, unrandom: true, desc: '反抗组织拾荒者 ×3~5（随层数增加）。奖励：密封物资箱 ×2。' },
-      { id: 'tt6-mystery',     name: '神秘补给',   cost: 0, rarity: '衍生', type: '事件', unrandom: true, desc: '获得员工通行证A（特殊单位），+2 币。' },
+      { id: 'tt6-mystery',     name: '神秘补给',   cost: 0, rarity: '衍生', type: '事件', unrandom: true, desc: '获得员工通行证A碎片，+2 币。' },
       { id: 'tt6-goldmine',    name: '金矿',       cost: 0, rarity: '衍生', type: '事件', unrandom: true, desc: '获得 3 币。' },
       { id: 'tt6-goldhammer',  name: '闪金之锤',   cost: 0, rarity: '衍生', type: '事件', battle: true, unrandom: true, desc: '造成 5 点伤害，若斩杀敌人，+2 币。' },
       { id: 'tt6-relief',      name: '爱心救济站', cost: 0, rarity: '衍生', type: '事件', unrandom: true, desc: '回复 6 血。' },
-      { id: 'tt6-airdrop',     name: '空中补给',   cost: 0, rarity: '衍生', type: '事件', unrandom: true, desc: '从木材、口粮、绷带、碘酒中抽取一项。' }, // 后两项重辨存疑
-      { id: 'tt6-chestdraw',   name: '遗留物资',   cost: 0, rarity: '衍生', type: '事件', unrandom: true, desc: '从遗留物资箱中撬开 1 个。' },
-      { id: 'tt6-systemsupply', name: '系统补给',  cost: 0, rarity: '衍生', type: '事件', unrandom: true, desc: '获得员工通行证A（特殊单位），木材 ×1。' }, // 卡名/描述重辨存疑，与「神秘补给」同系列
+      { id: 'tt6-airdrop',     name: '空中补给',   cost: 0, rarity: '衍生', type: '事件', unrandom: true, desc: '从木材、口粮、能量饮料、随机药水中抽取一项。' },
+      { id: 'tt6-chestdraw',   name: '宝箱',       cost: 0, rarity: '衍生', type: '事件', unrandom: true, desc: '从大，中，小宝箱中抽取 1 个。' },
+      { id: 'tt6-systemsupply', name: '系统补给',  cost: 0, rarity: '衍生', type: '事件', unrandom: true, desc: '获得员工通行证A碎片，木材 ×1。' },
     ],
 
     // 桌游手绘卡 · 第七批（2026-09-01「职业卡」照片 → 2026-09-05 职业整合定版）：

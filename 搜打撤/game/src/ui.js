@@ -1,5 +1,4 @@
 import { characterName } from './characters.js';
-import { Random } from './random.js';
 import { renderExpeditionPanel } from './expedition.view.js';
   const SDT = window.SDT;
   const $ = (id) => document.getElementById(id);
@@ -18,14 +17,13 @@ import { renderExpeditionPanel } from './expedition.view.js';
         charAtk: $('charAtk'),
         heroAva: $('heroAva'),
         bagCount: $('bagCount'), bagBtn: $('bagBtn'), btnHome: $('btnHome'),
-        rollBtn: $('rollBtn'), diceFace: $('diceFace'), diceHist: $('diceHist'), staminaVal: $('staminaVal'), staminaRow: $('staminaRow'),
         log: $('log'),
         logPanel: $('logPanel'),
         overlay: $('overlay'), ovTitle: $('ovTitle'), ovBody: $('ovBody'),
         tooltip: $('tooltip'),
         tglIndex: $('tglIndex'),
         btnExport: $('btnExport'), btnImport: $('btnImport'), btnClear: $('btnClear'),
-        devTools: $('devTools'), devDice: $('devDice'),
+        devTools: $('devTools'),
         devBattle: $('devBattle'), devBoss: $('devBoss'),
         titleDev: $('titleDev'),
         btnCardDesigner: $('btnCardDesigner'), btnCardLib: $('btnCardLib'),
@@ -61,7 +59,6 @@ import { renderExpeditionPanel } from './expedition.view.js';
         void ava.offsetWidth;
         ava.classList.add('ava-shake');
       });
-      this.buildDiceCube();
     },
 
     act(name, fn) { this._acts[name] = fn; },
@@ -92,45 +89,6 @@ import { renderExpeditionPanel } from './expedition.view.js';
       el.classList.add('popnum');
     },
 
-    // 搭建真 3D 骰子立方体：六个面（对面和为 7）各自 rotate+translateZ 拼合
-    buildDiceCube() {
-      const PIP_CELLS = { 1: [4], 2: [0, 8], 3: [0, 4, 8], 4: [0, 2, 6, 8], 5: [0, 2, 4, 6, 8], 6: [0, 2, 3, 5, 6, 8] };
-      const faces = Array.from({ length: 6 }, (_, k) => {
-        const v = k + 1;
-        const dots = Array.from({ length: 9 }, (_, i) =>
-          PIP_CELLS[v].includes(i) ? '<span></span>' : '<i></i>').join('');
-        return `<div class="dice-f f${v}">${dots}</div>`;
-      }).join('');
-      this.el.diceFace.innerHTML =
-        `<div class="dice-hop"><div class="dice-tilt"><div class="dice-cube">${faces}</div></div></div>`;
-      // 尚未投掷时也摆一颗完整骰子：1 点朝上，作为第一次翻滚的起始姿态。
-      this._diceRot = [90, 0, 0];
-      this.el.diceFace.querySelector('.dice-cube').style.transform = 'rotateX(90deg) rotateY(0deg) rotateZ(0deg)';
-    },
-
-    // 让立方体翻滚着停在 v 点朝上的朝向；外层 tilt 只负责俯视观察，不改变落定点数。
-    // force=true：掷骰流程主动调用——与上一点数相同也翻滚（2026-09-07 留言：同面也要有动画）；
-    // refresh 的被动同步不带 force，同值跳过避免每次刷新都空转。
-    drawDice(v, force) {
-      const face = this.el.diceFace, cube = face.querySelector('.dice-cube');
-      if (!cube || (!force && v === this._drawn)) return;
-      this._drawn = v;
-      if (v == null) {
-        face.classList.add('idle-dice');
-        return;
-      }
-      face.classList.remove('idle-dice');
-      // 与上次点数相同也强制换一条翻转路径：追加的整圈数与方向每次随机
-      const spinX = (720 + 360 * Math.floor(Random.random('visual') * 2)) * (Random.random('visual') < .5 ? -1 : 1);
-      const spinY = (720 + 360 * Math.floor(Random.random('visual') * 2)) * (Random.random('visual') < .5 ? -1 : 1);
-      const spinZ = 360 * (1 + Math.floor(Random.random('visual') * 2)) * (Random.random('visual') < .5 ? -1 : 1);
-      const REST = { 1: [90, 0, 0], 6: [-90, 0, 0], 3: [0, 0, -90], 4: [0, 0, 90], 2: [0, 0, 0], 5: [180, 0, 0] };
-      const [rx, ry, rz] = REST[v];
-      this._diceRot = [this._diceRot[0] + spinX + rx - (this._diceRot[0] % 360),
-                       this._diceRot[1] + spinY + ry - (this._diceRot[1] % 360),
-                       this._diceRot[2] + spinZ + rz - (this._diceRot[2] % 360)];
-      cube.style.transform = `rotateX(${this._diceRot[0]}deg) rotateY(${this._diceRot[1]}deg) rotateZ(${this._diceRot[2]}deg)`;
-    },
 
     // 传说卡获得特写（2026-09-07 留言：获得传说物品没有提示和界面）：
     // 全屏暗幕 + 金色光柱 + 大卡面揭晓，点击任意处或 2.8s 后自动收场。
@@ -233,10 +191,11 @@ import { renderExpeditionPanel } from './expedition.view.js';
         close();
       });
       document.body.appendChild(el);
-      const fromR = opts.from && (opts.from.getBoundingClientRect ? opts.from.getBoundingClientRect() : opts.from);
+      // FLIP 起点终点都取布局口径（UiScale.rect）：dx/dy 喂 transform（布局值），zoom≠1 才不错位
+      const fromR = opts.from && (opts.from.getBoundingClientRect ? SDT.UiScale.rect(opts.from) : opts.from);
       if (fromR && fromR.width > 0) {
         const cardEl = el.querySelector('.cz-card');
-        const toR = cardEl.getBoundingClientRect();
+        const toR = SDT.UiScale.rect(cardEl);
         if (toR.width > 0) {
           // FLIP：先摆到来源卡位置与等比尺寸（中心对齐），下一帧过渡到居中位。
           // 起步带低透明度 + 缓和曲线（.22,.61）：观感是"卡从原位浮现长大"，
@@ -255,20 +214,6 @@ import { renderExpeditionPanel } from './expedition.view.js';
         }
       }
       SDT.Sound.sfx('hover');
-    },
-    refreshTime(game) {
-      // 每帧调用：状态未翻转时不触碰 DOM
-      const idle = game.state === 'idle';
-      if (this._lastIdle === idle) return;
-      this._lastIdle = idle;
-      this.el.rollBtn.disabled = !idle;
-      // 2026-09-07 老板实测「掷骰按钮文案消失」：存在 state→idle 只经过本函数
-      // （refreshTime 只改 disabled）而不触发 refresh() 文案分支的路径，按钮会卡在
-      // 「…」。idle 翻转的瞬间同步纠正文案，并同步 _lastRollState 防止 refresh 重复重建。
-      if (idle) {
-        this._lastRollState = 'idle';
-        this.el.rollBtn.innerHTML = SDT.Icons.rich('[[icon:dice]] 掷骰子移动');
-      }
     },
 
     refresh(game) {
@@ -339,37 +284,6 @@ import { renderExpeditionPanel } from './expedition.view.js';
         if (this.el.bagBtn) this.el.bagBtn.classList.toggle('bag-full', used >= cap);
         else if (this.el.bagCount.parentElement) this.el.bagCount.parentElement.classList.toggle('bag-full', used >= cap);
       }
-
-      // 掷骰按钮：状态未变化时不重建 innerHTML（refresh 调用频繁）
-      if (this._lastRollState !== game.state) {
-        this._lastRollState = game.state;
-        this.el.rollBtn.disabled = game.state !== 'idle';
-        this.el.rollBtn.innerHTML = game.state === 'idle' ? SDT.Icons.rich('[[icon:dice]] 掷骰子移动')
-          : game.state === 'moving' ? SDT.Icons.rich('[[icon:hourglass]] 移动中…')
-          : game.state === 'rolling' ? SDT.Icons.rich('[[icon:dice]] 骰子转动中…') : SDT.Icons.rich('[[icon:hourglass]] …');
-      }
-
-      // 体力（2026-09-06 #29）：≤10 标红警告
-      if (this.el.staminaVal && game.runActive) {
-        const st = game.stamina == null ? SDT.MAP.rules.staminaMax : game.stamina;
-        if (this._lastStamina !== st) {
-          this._lastStamina = st;
-          this.el.staminaVal.textContent = st;
-          this.el.staminaRow.classList.toggle('stamina-low', st <= SDT.MAP.rules.staminaWarn);
-        }
-      }
-      // 骰子面：右侧桌上骰子，用点数替代数字
-      this.drawDice(game.dice);
-      if (this._lastDice !== undefined && game.dice != null && this._lastDice !== game.dice) {
-        this.popNum(this.el.diceFace);
-      }
-      this._lastDice = game.dice;
-      const histKey = game.diceHistory.slice(-8).join(',');
-      if (histKey !== this._lastHistKey) {
-        this._lastHistKey = histKey;
-        this.el.diceHist.innerHTML = game.diceHistory.slice(-8)
-          .map(d => `<span class="chip">${d}</span>`).join('');
-      }
     },
 
     log(msg, cls) {
@@ -406,15 +320,17 @@ import { renderExpeditionPanel } from './expedition.view.js';
         this._tooltipKey = key;
         el.innerHTML = `<b>${SDT.Icons.rich(title)}</b>` + lines.map(l => `<span>${SDT.Icons.rich(l)}</span>`).join('');
         el.hidden = false;
-        const r = el.getBoundingClientRect();
-        this._tooltipSize = { width: r.width, height: r.height };
+        // offsetWidth/Height 是布局值（不含 UiScale.zoom），换算边界判断正需要这个口径
+        this._tooltipSize = { width: el.offsetWidth, height: el.offsetHeight };
       }
       el.hidden = false;
       const vw = this.el.viewport.clientWidth, vh = this.el.viewport.clientHeight;
       const r = this._tooltipSize || { width: 0, height: 0 };
-      let x = clientX + 14, y = clientY + 14;
-      if (x + r.width > vw - 8) x = clientX - r.width - 10;
-      if (y + r.height > vh - 8) y = clientY - r.height - 10;
+      // 入参是视口坐标（e.clientX/Y），定位是布局坐标：过 UiScale.pt 统一口径
+      const p = SDT.UiScale.pt(clientX, clientY);
+      let x = p.x + 14, y = p.y + 14;
+      if (x + r.width > vw - 8) x = p.x - r.width - 10;
+      if (y + r.height > vh - 8) y = p.y - r.height - 10;
       el.style.left = x + 'px';
       el.style.top = y + 'px';
     },

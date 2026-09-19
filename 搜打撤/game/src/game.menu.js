@@ -98,7 +98,7 @@ function createGameMenuController(deps) {
       const modeName = { page: '全屏页', battle: '战斗弹层', bag: '背包弹层', bagpage: '背包页', chest: '宝箱浮层', scene: '场景弹层', wide: '宽幅弹层' }[UI._lastMode] || '弹层';
       return { id: 'mode:' + (UI._lastMode || ''), name: modeName };
     }
-    const stateName = { boot: '启动', title: '标题页', idle: '对局地图', moving: '对局移动中', rolling: '对局骰子中', modal: '弹层页面', done: '结算页', bossCleanup: 'BOSS 收尾' }[game.state] || game.state;
+    const stateName = { boot: '启动', title: '标题页', idle: '对局地图', moving: '对局移动中', modal: '弹层页面', done: '结算页', bossCleanup: 'BOSS 收尾' }[game.state] || game.state;
     return { id: 'state:' + (game.state || ''), name: stateName };
   }
 

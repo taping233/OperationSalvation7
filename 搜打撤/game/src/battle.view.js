@@ -1,4 +1,5 @@
 import { sdtDefine } from './sdt-facade.js';
+import { rect as uiRect, scale as uiScale } from './ui-scale.js';
 import { characterName } from './characters.js';
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const SDT = window.SDT;
@@ -312,7 +313,7 @@ import { assetUrl } from './asset-url.js';
         <div class="bt-hand">${optsHTML}</div>`, 'discover');
       UI.act('btDiscover', (d) => {
         const el = document.querySelector(`.bt-card[data-act="btDiscover"][data-i="${d.i}"]`);
-        if (el) { const r = el.getBoundingClientRect(); discoverSrcRect = { left: r.left, top: r.top, width: r.width, height: r.height }; }
+        if (el) { discoverSrcRect = uiRect(el); }   // 布局口径：消费端喂 transform
         pickDiscover(d.i);
       });
       UI.refresh(SDT.game);
@@ -690,7 +691,7 @@ import { assetUrl } from './asset-url.js';
       spellBonus: (extra && extra.spellBonus) || 0,
     };
     // 旧槽位现矩形一次量完：目标值更新引发的位移以此为准做补间
-    handSlots.forEach(rec => { rec.rect = rec.slot.isConnected ? rec.slot.getBoundingClientRect() : null; });
+    handSlots.forEach(rec => { rec.rect = rec.slot.isConnected ? uiRect(rec.slot) : null; });   // 布局口径
     // —— 第一遍：算状态 / 更新目标值与内容 / 建缺失槽位 ——
     const ordered = [];
     pageGroups.forEach((g, i) => {
@@ -729,7 +730,7 @@ import { assetUrl } from './asset-url.js';
       rec.card.dataset.side = st.side || '';
       // U8：操作指引走 #tooltip（见槽位创建处的 mouseenter），原生 title 不再挂
       rec.__tip = st.tip;
-      rec.__name = `${g.card.name} · ${effCost} 费`;
+      rec.__name = `${g.card.name} · ${effCostOf(g.card, st.uid)} 费`;
       rec.card.removeAttribute('title');
       rec.card.setAttribute('aria-pressed', clickSelectedUid === st.uid ? 'true' : 'false');
       if (rec.sig !== st.inner) { rec.card.innerHTML = st.inner; rec.sig = st.inner; }
@@ -751,11 +752,11 @@ import { assetUrl } from './asset-url.js';
     } else if (emptyHint) emptyHint.remove();
     // —— 第二遍：量新矩形，幸存者归位补间 + 新牌错峰飞入 ——
     const ov = UI.el.overlay;
-    const ovR = ov.getBoundingClientRect();
+    const ovR = uiRect(ov);   // 布局口径：飞入位移喂 transform
     let flightMs = 0;
     let drawIdx = 0;
     ordered.forEach(rec => {
-      const r = rec.slot.getBoundingClientRect();
+      const r = uiRect(rec.slot);
       if (rec.isNew) {
         rec.isNew = false;
         if (drawn.has(rec.card.dataset.uid)) {
@@ -1136,8 +1137,8 @@ import { assetUrl } from './asset-url.js';
   // 一次性元素即抛即毁、纯 transform/opacity 走合成器，不建常驻渲染管线
   function spawnSparks(ov, figEl, { color = '#ffb34d', count = 12 } = {}) {
     if (!ov || !figEl) return;
-    const r = figEl.getBoundingClientRect();
-    const ovR = ov.getBoundingClientRect();
+    const r = uiRect(figEl);
+    const ovR = uiRect(ov);
     const cx = r.left - ovR.left + r.width / 2, cy = r.top - ovR.top + r.height * 0.42;
     for (let i = 0; i < count; i++) {
       const p = document.createElement('i');
@@ -1168,12 +1169,13 @@ import { assetUrl } from './asset-url.js';
     const ov = UI.el.overlay;
     const me = body.querySelector('#btSelf .sts-figure');
     if (!ov || !me) return;
-    const ovR = ov.getBoundingClientRect();
-    const a = figEl.getBoundingClientRect(), b = me.getBoundingClientRect();
+    const ovR = uiRect(ov);
+    const a = uiRect(figEl), b = uiRect(me);
     const x1 = a.left - ovR.left + a.width * 0.35, y1 = a.top - ovR.top + a.height * 0.42;
     const x2 = b.left - ovR.left + b.width * 0.65, y2 = b.top - ovR.top + b.height * 0.42;
     const w = Math.max(2, Math.ceil(ovR.width)), h = Math.max(2, Math.ceil(ovR.height));
-    const ratio = Math.max(1, window.devicePixelRatio || 1);
+    // 坐标是布局口径：物理密度补上 zoom（大屏 zoom>1 时不糊）
+    const ratio = Math.max(1, (window.devicePixelRatio || 1) * uiScale());
     const cv = document.createElement('canvas');
     cv.className = 'sts-attack-line';
     cv.width = w * ratio; cv.height = h * ratio;
@@ -1222,7 +1224,7 @@ import { assetUrl } from './asset-url.js';
     const list = takeFloats();
     if (!list.length) return;
     const ov = UI.el.overlay;
-    const ovR = ov.getBoundingClientRect();
+    const ovR = uiRect(ov);   // 布局口径：飘字/贴图定位
     const perUnit = {};   // #19：同单位多段伤害错峰呈现
     list.forEach((f, listIdx) => {
       const fire = () => {
@@ -1278,7 +1280,7 @@ import { assetUrl } from './asset-url.js';
         figEl.classList.add('fx-warm');
         setTimeout(() => figEl.classList.remove('fx-warm'), 950);
       }
-      const r = figEl.getBoundingClientRect();
+      const r = uiRect(figEl);
       // 命中特效贴图：格挡/免伤=护盾碎裂，治疗不出，其余伤害=斩击（黑底图走 screen 混合）
       const impactCls = isBlock ? 'fx-block'
         : (f.warm || stk) ? null : 'fx-slash';
@@ -1362,11 +1364,11 @@ import { assetUrl } from './asset-url.js';
     if (!ov || ov.hidden) return null;
     const handEl = ov.querySelector('.sts-hand');
     if (!handEl) return null;
-    const ovR = ov.getBoundingClientRect();
+    const ovR = uiRect(ov);   // 布局口径：rect 存档供飞行动画消费
     const stage = handEl.closest('.battle-stage');
     const cards = {};
     handEl.querySelectorAll('.bt-card[data-uid]').forEach(el => {
-      const r = el.getBoundingClientRect();
+      const r = uiRect(el);
       cards[el.dataset.uid] = {
         html: el.outerHTML,
         name: ((el.querySelector('.hsc-name') || {}).textContent || '').trim(),
@@ -1376,7 +1378,7 @@ import { assetUrl } from './asset-url.js';
     const rectOf = (sel) => {
       const el = ov.querySelector(sel);
       if (!el) return null;
-      const r = el.getBoundingClientRect();
+      const r = uiRect(el);
       return { left: r.left - ovR.left, top: r.top - ovR.top, width: r.width, height: r.height };
     };
     const energyEl = stage ? stage.querySelector('.sts-energy b') : null;
@@ -1390,7 +1392,7 @@ import { assetUrl } from './asset-url.js';
   // 离场去处：指向敌人/自己 → 单位立绘中心；常规打出/倾倒 → 弃牌堆徽标；注能牺牲品 → 原地碎化上飘
   function exitSinkFor(ev, rect, body, ovR) {
     const centerOf = (el) => {
-      const r = el.getBoundingClientRect();
+      const r = uiRect(el);
       return { x: r.left - ovR.left + r.width / 2, y: r.top - ovR.top + r.height / 2 };
     };
     if (ev.kind === 'play') {
@@ -1481,7 +1483,7 @@ import { assetUrl } from './asset-url.js';
     }
     if (!handEl || !events.length) return { flightMs };
     const ov = UI.el.overlay;
-    const ovR = ov.getBoundingClientRect();
+    const ovR = uiRect(ov);   // 布局口径：飞卡定位/目标换算
     const played = new Set(), drawn = new Set();
     const shuffles = [];   // 洗入牌动画事件（addDeckCard：「将 X 洗入牌库」）
     const surges = [];     // 法力奔涌逐发演出事件（castRandomSpells 慢动作）
@@ -1500,7 +1502,7 @@ import { assetUrl } from './asset-url.js';
         pileEl.classList.add('pile-shuffle');
         setTimeout(() => pileEl.classList.remove('pile-shuffle'), 1600 + shuffles.length * 250);
         // 洗入牌动画：卡背从手牌区中央飞向牌库图标，旋入消失
-        const pileR = pileEl.getBoundingClientRect();
+        const pileR = uiRect(pileEl);
         shuffles.forEach((ev, i) => {
           const fly = document.createElement('div');
           fly.className = 'sts-cardfly pile-fly';
@@ -1540,7 +1542,7 @@ import { assetUrl } from './asset-url.js';
         clone.innerHTML = SDT.Cards.cardHTML ? SDT.Cards.cardHTML(ev.card || { name: ev.name }, 'sm') : esc(ev.name || '');
         ov.appendChild(clone);
         const foeEl = (ev.target != null && ev.target >= 0) ? body.querySelector(`.sts-foe[data-eidx="${ev.target}"]`) : null;
-        const fr = foeEl ? foeEl.getBoundingClientRect() : null;
+        const fr = foeEl ? uiRect(foeEl) : null;
         const dx = fr ? (fr.left + fr.width / 2) - (sx + 66) : 0;
         const dy = fr ? (fr.top + fr.height / 2) - (sy + 90) : -ovR.height * 0.32;
         const anim = clone.animate([
@@ -1653,8 +1655,10 @@ import { assetUrl } from './asset-url.js';
     const canvas = aimCanvasEnsure();
     vr = vr || UI.el.overlay.getBoundingClientRect();
     const ratio = Math.max(1, window.devicePixelRatio || 1);
-    const width = Math.max(1, Math.round(vr.width));
-    const height = Math.max(1, Math.round(vr.height));
+    const zA = uiScale();
+    // vr/坐标全是视口口径；画布布局尺寸=视口/z，绘制矩阵除 z 抵消 → 物理密度恰为 dpr
+    const width = Math.max(1, Math.round(vr.width / zA));
+    const height = Math.max(1, Math.round(vr.height / zA));
     if (canvas.width !== Math.round(width * ratio) || canvas.height !== Math.round(height * ratio)) {
       canvas.width = Math.round(width * ratio);
       canvas.height = Math.round(height * ratio);
@@ -1662,7 +1666,7 @@ import { assetUrl } from './asset-url.js';
       canvas.style.height = `${height}px`;
     }
     const ctx = canvas.getContext('2d');
-    ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+    ctx.setTransform(ratio / zA, 0, 0, ratio / zA, 0, 0);
     ctx.clearRect(0, 0, width, height);
     const mx = (x1 + x2) / 2, my = (y1 + y2) / 2;
     const dx = x2 - x1, dy = y2 - y1, len = Math.hypot(dx, dy) || 1;
@@ -1849,7 +1853,8 @@ import { assetUrl } from './asset-url.js';
   function enterDock(a) {
     const dockCx = window.innerWidth / 2;
     const dockCy = window.innerHeight - (a.restCenter.h * 0.75) / 2;
-    a.dock = { x: dockCx - a.restCenter.cx, y: dockCy - a.restCenter.cy };
+    const zD = uiScale();   // dock 喂 transform（布局值），dockAnchor 留视口口径喂箭头
+    a.dock = { x: (dockCx - a.restCenter.cx) / zD, y: (dockCy - a.restCenter.cy) / zD };
     a.dockAnchor = { x: dockCx - a.vr.left, y: dockCy - a.vr.top };
     aimClearHover();
   }
@@ -1890,8 +1895,10 @@ import { assetUrl } from './asset-url.js';
     aim.moved = true;
     const vr = aim.vr;   // 指向期间 overlay 尺寸不变（重渲染会 cancelAim），缓存省去每次 move 的布局读取
     if (e.clientY <= cancelZoneY()) aim.hasLeftCancel = true;   // STS2 _hasLeftCardCancelZoneOnce
-    aim.tgt.x = e.clientX - aim.sx;
-    aim.tgt.y = e.clientY - aim.sy;
+    // 指针视口位移 → 卡牌 transform（布局值）：过 UiScale 换算，zoom≠1 才能跟手
+    const zNow = uiScale();
+    aim.tgt.x = (e.clientX - aim.sx) / zNow;
+    aim.tgt.y = (e.clientY - aim.sy) / zNow;
 
     if (aim.follow) {
       // —— 状态机：drag →（过出牌线）→ target（指向卡）/ multi（未指向卡） ——
