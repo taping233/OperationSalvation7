@@ -108,7 +108,12 @@
   width:clamp(130px,13vw,210px); border:0; padding:0; background:none; box-shadow:none; border-radius:0; }
 #overlay .battle-stage.sts .sts-foe.is-boss { width:clamp(190px,20vw,290px); }
 .sts-me .sts-figure { width:84%; margin:0 auto; }
-.sts-figure { position:relative; line-height:0; filter:drop-shadow(0 16px 20px rgba(0,0,0,.62)); }
+/* 常驻投影：脚下椭圆软影（P2 性能——drop-shadow 是逐像素滤镜，受击抖动时每帧重绘大立绘；
+   椭圆影一次合成零逐帧成本）。交互高亮（can-target/drag-over/aegis）仍走 filter，不受影响 */
+.sts-figure { position:relative; line-height:0; }
+.sts-figure::after { content:''; position:absolute; left:12%; right:12%; bottom:1%; height:6%;
+  border-radius:50%; pointer-events:none;
+  background:radial-gradient(ellipse at 50% 50%, rgba(0,0,0,.5), rgba(0,0,0,.24) 55%, transparent 75%); }
 .sts-figure img { width:100%; height:auto; transition:transform .15s; }
 .sts-nameplate { margin:6px auto 0; width:100%; padding:5px 8px 6px; border:1px solid rgba(150,150,150,.35);
   border-radius:2px; background:linear-gradient(180deg,rgba(12,12,12,.5),rgba(8,8,8,.85)); }
@@ -122,7 +127,7 @@
 .bt-hpwrap i.sts-hp-main { position: relative; }
 .bt-hpwrap i.sts-hp-ghost { position: absolute; left: 0; top: 0; height: 100%; width: 0;
   background: linear-gradient(90deg, #e6c26a, #f4e3a2);
-  transition: width .55s cubic-bezier(.22, 1, .36, 1) .4s; }
+  transition: width .55s var(--ease-entrance) .4s; }
 #overlay .battle-stage.sts .sts-hp i.sts-hp-ghost {
   background: linear-gradient(90deg, #e6c26a, #f4e3a2); }   /* 压过 expedition 的红色 i 覆盖 */
 .sts-stats { color:#b9b9b9; font-size:11.5px; margin-top:3px; }
@@ -208,7 +213,7 @@
 .bt-slot:hover { z-index:9; }
 .bt-slot:has(.aim-lift) { z-index:20; }
 /* 2026-09-13 老板口令：弹出动画要慢、带物理弹性——0.5s 过冲弹簧曲线（transform 合成器通道） */
-.sts-hand .bt-card { transition:transform .5s cubic-bezier(.3,1.4,.45,1); }
+.sts-hand .bt-card { transition:transform .5s var(--ease-spring); }
 .sts-hand .bt-card.off { transform:translateY(8px) scale(.97); filter:brightness(.55) saturate(.7); }
 .sts-hand .bt-slot:hover .bt-card:not(.off):not(.aim-lift) { transform:translateY(-24px) scale(1.04); }
 .sts-hand .bt-slot:hover .bt-card.off { transform:translateY(8px) scale(.97); }
@@ -260,11 +265,11 @@
 .sts-float { position:absolute; z-index:80; transform:translate(-50%,-50%); pointer-events:none;
   font-family:var(--cal); font-size:30px; font-weight:900; letter-spacing:1px;
   text-shadow:0 0 6px rgba(0,0,0,.9), 0 2px 4px rgba(0,0,0,.8);
-  animation:stsFloatUp .95s cubic-bezier(.2,.7,.4,1) forwards; }
+  animation:stsFloatUp .95s var(--ease-float) forwards; }
 .sts-float.phys { animation:none; }   /* 伤害数字走 JS 抛体（physicsFloat），抑制 CSS 上飘 */
-.sts-float.dmg { color:#f2c9c9; }
-.sts-float.hurt { color:#ff8f7a; font-size:34px; }
-.sts-float.block { color:#c9c9c9; font-size:22px; }
+.sts-float.dmg { color:var(--fx-dmg); }
+.sts-float.hurt { color:var(--fx-dmg-strong); font-size:34px; }
+.sts-float.block { color:var(--fx-block); font-size:22px; }
 @keyframes stsFloatUp {
   0% { opacity:0; transform:translate(-50%,-30%) scale(.6); }
   18% { opacity:1; transform:translate(-50%,-55%) scale(1.12); }
@@ -274,12 +279,12 @@
    CSS 类从未被挂载，2026-09-19 随死样式清理删除——新增受击表现请进 JS 抖动函数 */
 /* 全屏受击红闪（径向暗角） */
 .sts-hurtflash { position:absolute; inset:0; z-index:70; pointer-events:none;
-  background:radial-gradient(ellipse at 50% 55%, transparent 42%, rgba(168,26,26,.5) 100%);
+  background:radial-gradient(ellipse at 50% 55%, transparent 42%, var(--fx-blood) 100%);
   animation:stsHurtFlash .6s ease-out forwards; }
 @keyframes stsHurtFlash { 0% { opacity:0; } 15% { opacity:1; } 100% { opacity:0; } }
 /* 全屏治疗绿闪（2026-09-13 老板：回复血量时闪绿光，口径同受击红闪） */
 .sts-healflash { position:absolute; inset:0; z-index:70; pointer-events:none;
-  background:radial-gradient(ellipse at 50% 55%, transparent 42%, rgba(97,214,155,.5) 100%);
+  background:radial-gradient(ellipse at 50% 55%, transparent 42%, var(--fx-vital) 100%);
   animation:stsHealFlash .6s ease-out forwards; }
 @keyframes stsHealFlash { 0% { opacity:0; } 15% { opacity:1; } 100% { opacity:0; } }
 /* 攻击抖屏（2026-09-13 老板：自己攻击或造成伤害时轻微抖屏）——战斗内容层小幅位移，不叠层 */
@@ -296,7 +301,7 @@
 /* 表情贴纸：Q 弹摔落式弹出，盖过数字飘字 */
 .sts-float.stk { font-size:42px; font-family:"Segoe UI Emoji","Noto Color Emoji",sans-serif;
   font-weight:400; letter-spacing:0; text-shadow:0 3px 6px rgba(0,0,0,.6);
-  animation:stkPop 1s cubic-bezier(.2,.8,.3,1) forwards; }
+  animation:stkPop 1s var(--ease-pop) forwards; }
 .sts-float.stk.stk-late { opacity:0; animation-delay:.16s; }
 @keyframes stkPop {
   0% { opacity:0; transform:translate(-50%,-50%) scale(.2) rotate(-14deg); }
@@ -433,7 +438,7 @@
   background:radial-gradient(circle at 50% 40%, rgba(96,22,18,.55), rgba(0,0,0,.9) 74%);
   display:flex; align-items:center; justify-content:center;
   animation:bossIntroFade 1.6s ease forwards; }
-.boss-intro-inner { text-align:center; animation:bossIntroZoom 1.6s cubic-bezier(.2,.8,.3,1) forwards; }
+.boss-intro-inner { text-align:center; animation:bossIntroZoom 1.6s var(--ease-pop) forwards; }
 .boss-intro-tag { font-size:15px; letter-spacing:16px; text-indent:16px; color:#ff8a70; opacity:.9;
   margin-bottom:10px; }
 .boss-intro-art { height:min(50vh,400px); display:flex; align-items:flex-end; justify-content:center;

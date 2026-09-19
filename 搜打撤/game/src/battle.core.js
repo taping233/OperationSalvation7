@@ -83,9 +83,9 @@ import { emit as busEmit } from './event-bus.js';
   let playedMartialThisTurn = 0; // 本回合已打出的武术数（追斩「每打出一张其他武术→费用-1」，回合开始清零）
   let playedMovesThisTurn = 0;   // 本回合已打出的招式数＝武术+法术（连续射击「每打出一张其他招式→2点固定伤害」，回合开始清零）
   let selPool = [], selShaN = 0, sel = new Set(), lastDeckSel = [], selectingDeck = false, selDeckMax = 15;
-  // 「对战开始时」装备（2026-09-10 留言 #35）：不再持有即全体自动生效——
-  // 编组界面单列一区由玩家勾选（默认不选），只有勾选的开战装备才在 BOSS 战开始时装配。
-  let selEquipPool = [], selEquips = new Set(), lastEquipSel = [];
+  // 「对战开始时」装备（2026-09-16 定版）：并入 15 张套牌——编入即在本场开战自动生效。
+  // 旧「单列勾选区」只改 selEquips、从不驱动被动/上限（被动与上限都读 sel），属死 UI，
+  // 2026-09-19 审计 P2-6 拆除：selEquipPool/selEquips/lastEquipSel/toggleDeckEquip 全套移除。
   // —— 2026-09-09 机制审计补实装（Q1-Q8 老板定向批次）——
   let allies = [];               // 随从位（征召）：优先替玩家承伤、每回合自动攻击
   let growthNames = new Set();   // 「回合开始时本牌伤害+N」卡名（充能火球）
@@ -1158,8 +1158,6 @@ import { emit as busEmit } from './event-bus.js';
     if (mode === 'boss') {
     if (opts.nest) {
       // 龙巢（2026-09-18 留言「牌盒即牌库」）：跳过编组，卡盒全部卡牌直接成库
-      selEquipPool = (G.ownedCards || []).filter(o => o.card && isBattleStartEquip(o.card));
-      selEquips = new Set();
       selPool = G.ownedCards.filter(o => !['道具', '资源', '事件', '生物'].includes(o.card.type) && o.card.name !== '初始攻击');
       selShaN = 0;
       sel = new Set(selPool.map(o => o.uid));
@@ -1213,12 +1211,9 @@ import { emit as busEmit } from './event-bus.js';
   }
 
   // ---------- BOSS战：编组牌库 ----------
-  // 2026-09-09 玩法定版：必选 15 张（招式/装备/能力卡）起步；勾选混沌之眼开战装备可多选 5 张（上限 20）。
+  // 2026-09-09 玩法定版：必选 15 张（招式/装备/能力卡）起步；混沌之眼编入后牌库上限 +5（上限 20）。
   function prepareDeckSelection() {
-    selEquipPool = (G.ownedCards || []).filter(o => o.card && isBattleStartEquip(o.card));
-    // 上次勾选的记忆优先；第一次进编组界面默认全不勾——带不带开战装备由玩家自己决定（留言 #35）
-    selEquips = new Set(lastEquipSel.filter(uid => selEquipPool.some(entry => entry.uid === uid)));
-    selDeckMax = R().bossDeckSize + deckCapBonus();   // 混沌之眼「牌库上限+5」（勾选后才计入）
+    selDeckMax = R().bossDeckSize + deckCapBonus();   // 混沌之眼「牌库上限+5」（编入后才计入）
     // 2026-09-16 老板定版：骷髅王剑/混沌之眼等「对战开始时」装备计入 15 张套牌（不再独立勾选）
     selPool = G.ownedCards.filter(o => !['道具', '资源', '事件', '生物'].includes(o.card.type) && o.card.name !== '初始攻击');
     const shas = G.ownedCards.filter(o => o.card.name === '初始攻击');
@@ -1237,16 +1232,6 @@ import { emit as busEmit } from './event-bus.js';
     requestBattleRender();
   }
 
-  // 勾选/取消「对战开始时」开战装备（留言 #35）：勾选混沌之眼会即时抬高牌库上限，取消则回落并裁掉超编的牌
-  function toggleDeckEquip(uid) {
-    if (!selectingDeck || !selEquipPool.some(entry => entry.uid === uid)) return;
-    if (selEquips.has(uid)) selEquips.delete(uid); else selEquips.add(uid);
-    selDeckMax = R().bossDeckSize + deckCapBonus();
-    const cap = Math.min(selDeckMax, selPool.length);
-    while (sel.size > cap) sel.delete(sel.values().next().value);
-    requestBattleRender();
-  }
-
   function cancelDeckSelection() {
     if (!selectingDeck) return;
     G.log('[[icon:runner]] 你放下了挑战，首脑仍在污染核心深处盘踞', 'sys');
@@ -1259,7 +1244,6 @@ import { emit as busEmit } from './event-bus.js';
     if (sel.size < Math.min(R().bossDeckSize, selPool.length)) return;
     const shas = G.ownedCards.filter(o => o.card.name === '初始攻击').slice(0, R().starterSha).map(o => o.uid);
     lastDeckSel = [...sel];
-    lastEquipSel = [...selEquips];
     selectingDeck = false;
     drawPile = shuffle([...sel].concat(shas));   // 骷髅王剑/混沌之眼等对战开始时装备已在 sel 内
     hand = []; discard = []; granted = []; played = []; consumed = []; grave = [];
@@ -2831,8 +2815,7 @@ import { emit as busEmit } from './event-bus.js';
     if (pTgt) sig.push(pTgt.uid, pTgt.card);
     // 已穿戴装备（老板 #9）：穿戴/技能已用状态变化都要重渲染
     sig.push('eq' + equipped.map(e => e.uid + (e.used ? '1' : '0')).join(','));
-    if (selectingDeck) sig.push(sel.size, [...sel].sort().join(','), selPool.length,
-      'eq' + [...selEquips].sort().join(','), selDeckMax);   // 开战装备勾选与牌库上限也进签名（2026-09-10 #35）
+    if (selectingDeck) sig.push(sel.size, [...sel].sort().join(','), selPool.length, selDeckMax);
     return sig.join('\u0001');
   }
 
@@ -2869,9 +2852,7 @@ import { emit as busEmit } from './event-bus.js';
       starterCount: selShaN,
       selected: Object.freeze([...sel]),
       cards: Object.freeze(selPool.map(entry => Object.freeze({ uid: entry.uid, card: freezeObject(entry.card) }))),
-      // 「对战开始时」开战装备（2026-09-10 留言 #35）：单列一区由玩家勾选，默认不选
-      equips: Object.freeze(selEquipPool.map(entry => Object.freeze({ uid: entry.uid, card: freezeObject(entry.card) }))),
-      equipsSelected: Object.freeze([...selEquips]),
+      // 「对战开始时」装备已并入 cards 套牌池（2026-09-16 定版），不再单列勾选区
       boss: readonlyFoes[0] || null,
     }) : null;
     snapCache = Object.freeze({
@@ -2970,7 +2951,6 @@ import { emit as busEmit } from './event-bus.js';
     beginInfusion: beginInfuse,
     useEquipSkill,
     selectDeckCard: toggleDeckCard,
-    selectDeckEquip: toggleDeckEquip,
     confirmDeck: beginBoss,
     cancelDeck: cancelDeckSelection,
     pickDiscover,

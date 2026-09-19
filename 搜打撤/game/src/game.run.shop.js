@@ -256,10 +256,11 @@ function createShopController({
         return;
       }
       // 2026-09-17 留言「商店现在每次只卖3张初始攻击」：补充位只受背包容量约束（同名堆叠
-      // 不设 5 张上限——上限曾随背包存量吃掉可买数量，观感即「只卖 N 张」）；2026-09-13
-      // 老板需求保留：背包真的满了才拒买
-      if (usedSlots() >= bagCap() && !game.ownedCards.some(owned => owned.card.name === slot.card.name)) {
-        UI.log(`[[icon:bag]] 背包已满（${usedSlots()}/${bagCap()} 格），补充不了`, 'warn');
+      // 不设 5 张上限——上限曾随背包存量吃掉可买数量，观感即「只卖 N 张」）。
+      // 2026-09-19 审计 P2-7：改走 canReceiveCard 统一口径——堆未满并入不占格、堆满或
+      // 满包拒买；旧判定「满包但有同名就放行」会在堆也满时把第 6 张推出容量外
+      if (!game.canReceiveCard(slot.card)) {
+        UI.log(`[[icon:bag]] 背包已满（${usedSlots()}/${bagCap()} 格，初始攻击同名最多叠 5 张），补充不了`, 'warn');
         SDT.Sound.sfx('error');
         return;
       }

@@ -1466,7 +1466,7 @@ body #overlay .battle-stage.sts .sts-hand .bt-slot:hover .bt-card:not(.off):not(
 }
 #overlay .battle-stage.sts .sts-float.hurt{font-size:42px;color:#ffb3a0}
 #overlay .battle-stage.sts .sts-float.fx-finisher{
-  font-size:46px;color:#ffd76a;
+  font-size:46px;color:var(--fx-dmg-crit);
   text-shadow:0 0 12px rgba(255,170,60,.9),0 2px 4px #000,-2px 0 0 #7a4a10,2px 0 0 #7a4a10;
 }
 /* 掉血时血条槽体红闪一下（幽灵黄尾已有，补槽体瞬红强化感知） */

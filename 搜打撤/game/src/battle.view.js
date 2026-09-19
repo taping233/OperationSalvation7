@@ -73,11 +73,17 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
     const { deckSelection, opts } = snapshot;
     const selected = deckSelection.selected;
     const need = Math.min(deckSelection.need, deckSelection.cards.length);
+    const isStartEquip = (card) => card && card.type === '装备' && /对战开始时/.test(String(card.desc || ''));
     const cardsHTML = deckSelection.cards.length
-      ? deckSelection.cards.map(entry => `
-          <div class="bt-card${selected.includes(entry.uid) ? ' sel' : ''}" data-act="bossSel" data-uid="${entry.uid}" title="点击 编入/移出 牌库">
+      ? deckSelection.cards.map(entry => {
+          // 「对战开始时」装备已并入套牌池（2026-09-16 定版）：编入即生效，挂角标提示
+          const startEquip = isStartEquip(entry.card);
+          return `
+          <div class="bt-card${selected.includes(entry.uid) ? ' sel' : ''}" data-act="bossSel" data-uid="${entry.uid}" title="点击 编入/移出 牌库${startEquip ? '——「对战开始时」装备：编入即在本场开战自动生效' : ''}">
             ${SDT.Cards.cardHTML(entry.card, 'sm')}
-          </div>`).join('')
+            ${startEquip ? '<span class="bt-count">[[icon:bolt]] 开战被动 · 编入即生效</span>' : ''}
+          </div>`;
+        }).join('')
       : '<p class="ov-empty">背包里没有可编入的非道具卡牌……</p>';
     const boss = deckSelection.boss;
     const affix = boss && boss.affix ? AFFIX_META[boss.affix] : null;
@@ -86,18 +92,9 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
       <p class="ov-stats">本局首脑：<b>${esc(boss && boss.name || '???')}</b>（${boss ? `${boss.atk}-${boss.maxHp || boss.hp}` : '?-?'}）——从背包选 <b>${deckSelection.need}</b> 张<b>招式 / 装备 / 能力卡</b>，与 <b>${deckSelection.starterCount}</b> 张初始攻击组成牌库 ·
         开局抽 ${R().battleStartDraw} 张 · 每回合开始抽 ${R().battleTurnDraw} 张 · 每回合固定 ${R().battleEnergy} 费</p>
       ${affix ? `<p class="ov-note">[[icon:question]] <b>${esc(boss.name)}</b> 词缀【${affix.icon} ${affix.name}】${esc(affix.desc)}</p>` : ''}
-      ${deckSelection.max > R().bossDeckSize ? '<p class="ov-note">[[icon:eye]] 混沌之眼：牌库上限 +5——勾选后可在 15 张基础上多选，最多编 ' + deckSelection.max + ' 张</p>' : ''}
+      ${deckSelection.max > R().bossDeckSize ? '<p class="ov-note">[[icon:eye]] 混沌之眼：牌库上限 +5——编入后可在 15 张基础上多选，最多编 ' + deckSelection.max + ' 张</p>' : ''}
       <p class="ov-note">[[icon:lock]] 固定编入：初始攻击 ×${deckSelection.starterCount}${deckSelection.starterCount < R().starterSha ? `（初始攻击不足 ${R().starterSha} 张——部分进消耗口袋了）` : ''}
-        · [[icon:cross]] 道具 / 资源 / 事件卡与初始攻击不可选入</p>
-      ${deckSelection.equips && deckSelection.equips.length ? `
-        <h3 class="set-h">开战装备（「对战开始时」生效，不占牌库） <span class="bs-count">已勾选 ${deckSelection.equipsSelected.length}/${deckSelection.equips.length} · 不勾选则本场不生效</span></h3>
-        <div class="bt-hand deck-equip-hand">${deckSelection.equips.map(entry => `
-          <div class="bt-card${deckSelection.equipsSelected.includes(entry.uid) ? ' sel' : ''}" data-act="bossSelEquip" data-uid="${entry.uid}"
-            title="点击 勾选/取消——只有勾选的装备才会在这场 BOSS 战开始时自动生效">
-            ${SDT.Cards.cardHTML(entry.card, 'sm')}
-            <span class="bt-count">${deckSelection.equipsSelected.includes(entry.uid) ? '[[icon:check]] 已勾选' : '[[icon:cross]] 未勾选'}</span>
-          </div>`).join('')}
-        </div>` : ''}
+        · [[icon:cross]] 道具 / 资源 / 事件卡与初始攻击不可选入 · [[icon:bolt]] 「对战开始时」装备编入即生效（卡面带角标）</p>
       ${deckSelection.cards.length < deckSelection.need ? `<p class="ov-note">[[icon:cross]] 背包可编卡牌不足 <b>${deckSelection.need}</b> 张（现有 ${deckSelection.cards.length} 张）——选完后按现有卡牌迎战首脑</p>` : ''}
       <h3 class="set-h">可选卡牌 <span class="bs-count">已选 ${selected.length} 张（至少 ${need}${deckSelection.max > deckSelection.need ? ' · 至多 ' + deckSelection.max : ''}）</span></h3>
       <div class="bt-hand">${cardsHTML}</div>
@@ -106,7 +103,6 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
         <button class="ov-btn" data-act="bossCancel">↩ 放弃挑战</button>
       </div>`, true);
     UI.act('bossSel', data => selectDeckCard(data.uid));
-    UI.act('bossSelEquip', data => commands.selectDeckEquip(data.uid));
     UI.act('bossGo', confirmDeck);
     UI.act('bossCancel', cancelDeck);
     UI.refresh(SDT.game);

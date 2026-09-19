@@ -49,6 +49,23 @@
     --gold: #d4b078; --ember: #c8503c; --ember-hi: #ff8a5c;
     --ok: #6f9e6a; --arcane: #9b7fb8;
     --serif: var(--font-ui);
+    /* —— 特效语义 token（P2 风格统一）：战斗/反馈特效禁用裸 hex，新增特效一律引用此处 —— */
+    --fx-dmg: #f2c9c9;               /* 伤害数字（常规） */
+    --fx-dmg-strong: #ff8f7a;        /* 伤害数字（我方受击加重） */
+    --fx-dmg-crit: #ffd76a;          /* 终结/暴击金 */
+    --fx-hit: #ffb34d;               /* 命中琥珀（攻击系默认） */
+    --fx-hurt: #ff6659;              /* 我方受击红 */
+    --fx-heal: #61d69b;              /* 治疗绿 */
+    --fx-block: #c9c9c9;             /* 格挡/免伤灰白 */
+    --fx-curse: #b77ad8;             /* 异能/诅咒紫 */
+    --fx-blood: rgba(168,26,26,.5);  /* 受击红闪暗角 */
+    --fx-vital: rgba(97,214,155,.5); /* 治疗绿闪暗角 */
+    /* —— 缓动 token：入场 / 弹出 / 过冲弹簧 / 飞行离场 / 飘字上浮——新增动效从这五条里选 —— */
+    --ease-entrance: cubic-bezier(.22,1,.36,1);
+    --ease-pop: cubic-bezier(.2,.8,.3,1);
+    --ease-spring: cubic-bezier(.3,1.4,.45,1);
+    --ease-fly: cubic-bezier(.45,.05,.55,.95);
+    --ease-float: cubic-bezier(.2,.7,.4,1);
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body { height: 100%; background: var(--ink); color: var(--txt); overflow: hidden;
