@@ -21,5 +21,5 @@
 
 ## 参考图说明
 
-`ref-images/` 内为各角色当前定稿全身立绘的快照（拷贝自 `game/assets/portraits/full/`，2026-09-12）。
+`ref-images/` 内为各角色当前定稿全身立绘的快照（拷贝自 `game/assets/portraits/full/`，2026-09-19 五人 painterly 版）。
 立绘以游戏内实际引用文件为准，本目录是「定稿时点」的存档；若游戏内立绘更新，需同步替换并在此记录。
