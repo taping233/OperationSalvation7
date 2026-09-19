@@ -977,6 +977,12 @@ import { _set_cardPageOpen } from './game.cardslib.js';
       //   ② 击败巨兽「荒渊」（第 3/4 层精英）：30% 概率额外 1 张传说卡。
       // 都在整理背包之后结算（先让玩家清背包空间再领取）。
       const slewDragon = !opts.isBoss && (opts.foeNames || []).some(n => String(n).includes('巨兽'));
+      // 宠物蛋保底新档（2026-09-19 老板拍板）：每打赢一场战斗，蛋的爆率永久 +0.2%
+      //（叠加在 0.7% 基础 + 每空开箱 +3% 之上；计数存基地档位跨局累计）
+      if (win === true && SDT.Base && SDT.Base.data) {
+        SDT.Base.data.eggBattles = (SDT.Base.data.eggBattles || 0) + 1;
+        SDT.Base.save();
+      }
       let legends = 0;
       if (opts.isBoss && win === true) {
         legends = 1;

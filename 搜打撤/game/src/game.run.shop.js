@@ -128,6 +128,19 @@ function createShopController({
     return `<div ${buyAttrs('buyCard', `购买「${slot.card.name}」，${slot.price} 币`)}>${cardHTML(slot.card)}${priceTag}</div>`;
   }
 
+  // 买不起/装不下时的货位即时反馈（2026-09-19 留言 #1：点了没反应像"买不了"）：
+  // 货位抖一下 + 顶栏提示条说明原因
+  function denySlotFeedback(index, reason) {
+    shopNotice = reason;
+    refreshShopSlot(index);
+    const el = document.querySelectorAll('.shop-board-grid .shop-slot')[index];
+    if (el) {
+      el.classList.remove('shop-deny');
+      void el.offsetWidth;
+      el.classList.add('shop-deny');
+    }
+  }
+
   function renderShop() {
     shopPage = 'main';
     const slots = game.shopStock.map(slotHTML).join('');
@@ -239,6 +252,7 @@ function createShopController({
       if (game.coins < slot.price) {
         UI.log('币不够，买不起', 'warn');
         SDT.Sound.sfx('error');
+        denySlotFeedback(+data.i, `币不够——这张要 ${slot.price} 币，身上只有 ${game.coins} 币`);
         return;
       }
       if (game.canReceiveCard
@@ -246,6 +260,7 @@ function createShopController({
         : (!game.ownedCards.some(owned => owned.card.name === slot.card.name) && !game.canAcceptCard(slot.card))) {
         UI.log(`[[icon:bag]] 背包已满（${usedSlots()}/${bagCap()} 格，同名卡最多叠 3 张——初始攻击/火球 5 张），买不下这张卡`, 'warn');
         SDT.Sound.sfx('error');
+        denySlotFeedback(+data.i, `背包装不下（${usedSlots()}/${bagCap()} 格）`);
         return;
       }
       game.coins -= slot.price;
@@ -263,6 +278,7 @@ function createShopController({
       if (game.coins < slot.price) {
         UI.log('币不够，买不起', 'warn');
         SDT.Sound.sfx('error');
+        denySlotFeedback(+data.i, `币不够——补一张初始攻击要 ${slot.price} 币，身上只有 ${game.coins} 币`);
         return;
       }
       // 2026-09-17 留言「商店现在每次只卖3张初始攻击」：补充位只受背包容量约束（同名堆叠
@@ -272,6 +288,7 @@ function createShopController({
       if (!game.canReceiveCard(slot.card)) {
         UI.log(`[[icon:bag]] 背包已满（${usedSlots()}/${bagCap()} 格，初始攻击同名最多叠 5 张），补充不了`, 'warn');
         SDT.Sound.sfx('error');
+        denySlotFeedback(+data.i, `补不了——背包已满（${usedSlots()}/${bagCap()} 格，初始攻击同名最多叠 5 张）`);
         return;
       }
       game.coins -= slot.price;

@@ -243,8 +243,9 @@ body.cardlib-open #overlay .card-library-page .hs-btn.gold {
 body.cardlib-open #overlay .card-library-page .hs-btn.danger { color:#9aa8ae!important; }
 
 /* ---- 主体：侧栏去盒子，选中项改金色竖线指示 ---- */
+/* 2026-09-19 留言 #10：原 background:transparent!important 压制声明已摘除（让位 winter 尾部亮色光晕），布局参数不动 */
 body.cardlib-open #overlay .card-library-page .clib-main {
-  background:transparent!important; grid-template-columns:172px minmax(0,1fr)!important;
+  grid-template-columns:172px minmax(0,1fr)!important;
   gap:38px!important; padding:28px 46px 52px!important; }
 body.cardlib-open #overlay .card-library-page .library-sidebar { padding-right:4px!important; }
 body.cardlib-open #overlay .card-library-page .library-filter-head {

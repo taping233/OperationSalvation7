@@ -674,7 +674,8 @@ import { assetUrl } from './asset-url.js';
     }
     battleToken = token;
     handSuspended = false;
-    handLayer.title = tip;   // 等价旧模板 title="${escAttr(tip)}"（DOM 属性自动转义）
+    // 2026-09-19 留言 #19/#7：不再挂原生 title（系统白底黑字提示框）——描述就在卡面上，
+    // 黑框 tooltip（UI.showTooltip）也已全局停用
     mount.replaceWith(handLayer);
     return handLayer;
   }

@@ -522,7 +522,8 @@ function createGameMenuController(deps) {
           <i class="bokeh"></i><i class="bokeh"></i><i class="bokeh"></i><i class="bokeh"></i>
           ${SLOT_BG_SILHOUETTES}
         </div>
-        <!-- 返回键沉到左下角常驻（2026-09-10 留言 #17：顶部在矮窗口下会被裁掉看不见；页面主体恢复顶部留白整体下移） -->
+        <!-- 返回键在左上角（2026-09-19 老板指定；09-10 曾因矮窗口裁切沉到左下角——
+             选档卡片改全屏后卡片顶=视口顶、页头 clamp 留白带兜底，裁切前提已不存在） -->
         <button class="pg-back" data-act="slotBack">返回 <i class="en">BACK</i></button>
         <!-- U6（2026-09-19 走查）：帮助「?」从孤悬左上挪进标题行，与标题同排 -->
         <header class="slot-page-head">

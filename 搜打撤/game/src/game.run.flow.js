@@ -105,21 +105,10 @@ function resolveCell() {
   // 踩格时不再写入 visited（旧的"落格即锁"作废），改为**离开本格**（移向下一格）时
   // 在 moveTo 里补写（此时本格在地图上转为"已消耗"样式）。站在格上点脚下格可经
   // reenterCell() 反复重开本格内容（商店重逛/战斗再打/事件再看）。
-  // visited 检查保留：防御读档/异常流程重复结算已离开的格子。
-  // 仍可通行/使用的格：门/紧急撤离/终局撤离（通路）、空白格；
-  // 祭坛已激活但奖励未领取时可重进（只开回赠面板领奖，见 openAltarRitual）。
+  // visited 不再拦截 resolveCell：地图是前向 DAG，离开的格子不会再次踏入；
+  // 读档恢复/旧存档遗留的 visited 标记只影响地图"已消耗"渲染，不锁玩法。
   game.visited = game.visited || {};
   const vKey = game.layerIdx + ',' + idx;
-  const repeatable = !def || door || altarE ||
-    ['emergencyExit', 'extraction'].includes(def.type) ||
-    (def.type === 'altar' && game.altarActivated && game.altarRewardPending);
-  if (game.visited[vKey] && !repeatable) {
-    UI.log('[[icon:map]] 这里已经来过了——能拿的都拿走了，什么也没有。', 'sys');
-    game.state = 'idle';
-    saveGame();
-    UI.refresh(game);
-    return;
-  }
   // 首脑格：编组/战斗前不锁定——放弃编组可再来；击败首脑由战斗收尾写 visited（bag.js）
 
   // 杀戮尖塔式房间切换：从落脚开始到本格全部结算完成，地图始终由全屏房间页取代。

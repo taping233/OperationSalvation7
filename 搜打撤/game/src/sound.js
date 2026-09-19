@@ -12,6 +12,9 @@ const bgm = new Howl({ src: [BGM_URL], loop: true, html5: true, preload: false, 
 // 开屏曲目不预载（6.3MB）：自动播放策略下首次交互前必然无声，改为首次 syncBgm 时按需加载，
 // 启动带宽让给首屏图与字体；Howler 对 preload:false 的实例会在 play() 时自动 load。
 const titleBgm = new Howl({ src: [TITLE_BGM_URL], loop: true, html5: true, preload: false, volume: 0 });
+// 战斗专用曲目：《「次生预案」战斗曲》——musicMode='battle' 时替代通用曲，行军仍走通用曲
+const BATTLE_BGM_URL = new URL('../assets/bgm-cisheng-yuanan.mp3', import.meta.url).href;
+const battleBgm = new Howl({ src: [BATTLE_BGM_URL], loop: true, html5: true, preload: false, volume: 0 });
   let ctx = null, master = null, masterComp = null, sfxGain = null, clickGain = null, clickComp = null, scape = null;
   // 三级开关：muted 全局静音（侧边栏 [[icon:gear]]）· musicOff 只关音乐 · sfxOff 只关音效（设置页）
   let muted = false, musicOff = false, sfxOff = false;
@@ -348,7 +351,7 @@ const titleBgm = new Howl({ src: [TITLE_BGM_URL], loop: true, html5: true, prelo
   // 自动播放策略：首次交互前 BGM 必然无声。此时不触发 play()——preload:false 的 Howl
   // 会在 play() 时立即 load（标题曲 3.7MB），把启动带宽让给首屏图与字体；首次交互 kick() 后再开播。
   let userGestured = false;
-  function activeBgm() { return musicMode === 'title' ? titleBgm : bgm; }
+  function activeBgm() { return musicMode === 'title' ? titleBgm : musicMode === 'battle' ? battleBgm : bgm; }
   function syncBgm() {
     const visible = typeof document === 'undefined' || !document.hidden;
     const on = !!(musicMode && !muted && !musicOff && userGestured && visible);
@@ -360,7 +363,7 @@ const titleBgm = new Howl({ src: [TITLE_BGM_URL], loop: true, html5: true, prelo
     }
     const cur = activeBgm();
     const target = BASE_MUSIC * dbGain(musicVol) * (ducked ? 0.45 : 1);
-    [bgm, titleBgm].forEach(track => {
+    [bgm, titleBgm, battleBgm].forEach(track => {
       track.mute(!originalOn || track !== cur);
       if ((!originalOn || track !== cur) && track.playing()) {
         track.fade(track.volume(), 0, 280);

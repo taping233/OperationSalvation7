@@ -211,8 +211,10 @@ import { DATA } from './data-loader.js';
   function seedStarterStash() {
     const C = window.SDT.Cards;
     if (!C || typeof C.all !== 'function') return;
+    // 2026-09-19 老板拍板：新手预置 5 张只发武术/法术（招式开局，道具/装备/资源靠局内获取）
     const pool = C.all().filter(c =>
-      c.rarity !== '衍生' && c.name !== '初始攻击' && C.isRandomObtainable(c));
+      c.rarity !== '衍生' && c.name !== '初始攻击' && C.isRandomObtainable(c) &&
+      (c.type === '武术' || c.type === '法术'));
     if (!pool.length) return;
     const weights = C.SHOP_WEIGHTS ? Object.entries(C.SHOP_WEIGHTS) : null;
     const totalW = weights ? weights.reduce((a, b) => a + b[1], 0) : 0;

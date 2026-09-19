@@ -71,10 +71,12 @@ import { Random } from './random.js';
       seen.add(card);
       c.cards.push(card);
     }
-    // 宠物蛋（2026-09-09 需求 #2）：0.7% 基础爆率 + 软保底（2026-09-19 老板定向）——
-    // 每次开箱未出蛋 +3% 累进、出蛋归零；计数存基地档位（跨局累计，不占格）
+    // 宠物蛋（2026-09-09 需求 #2）：0.7% 基础爆率 + 两路保底——
+    //   ① 每次开箱未出蛋 +3% 累进、出蛋归零（2026-09-19 老板定向）；
+    //   ② 每打赢一场战斗永久 +0.2%（2026-09-19 晚老板拍板，战斗计数存基地档位跨局累计）。
     const pityN = (SDT.Base.data.eggPity || 0) + 1;
-    if (Random.random('loot') < 0.007 + 0.03 * (pityN - 1)) {
+    const eggRate = 0.007 + 0.03 * (pityN - 1) + 0.002 * (SDT.Base.data.eggBattles || 0);
+    if (Random.random('loot') < eggRate) {
       const egg = (SDT.Cards.all() || []).find(x => x.id === 'pet-egg');
       if (egg && !seen.dup(egg)) {
         seen.add(egg); c.cards.push(egg); c.eggHit = true;

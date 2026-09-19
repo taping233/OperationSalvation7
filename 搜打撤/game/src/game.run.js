@@ -152,7 +152,11 @@ function openDevConsole() {
     if (game.grantCard) game.grantCard(c);
     render();
   });
-  UI.act('devcB', (d) => { SDT.Battle.commands.dev(d.k, d.n); });
+  UI.act('devcB', (d) => {
+    SDT.Battle.commands.dev(d.k, d.n);
+    // 战斗 dev 命令会 requestBattleRender 重写弹层，控制台被顶掉——稍候重绘控制台压回
+    setTimeout(render, 80);
+  });
   UI.act('devcClose', () => { UI.hideOverlay(); UI.refresh(game); });
   render();
 }
