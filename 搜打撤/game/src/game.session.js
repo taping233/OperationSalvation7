@@ -544,7 +544,7 @@ function configureGameRuntime(hooks) {
     getActiveSlot: () => activeSlot,
     setActiveSlot: value => { activeSlot = value; },
   });
-  const { setLobby, showTitle, startNewGame, exitToTitle, quitGame, openSettings, openLeaveMenu } = menuController;
+  const { setLobby, showTitle, startNewGame, exitToTitle, quitGame, openSettings, openLeaveMenu, openTitleGuide } = menuController;
 
   // ---------- 流程 ----------
   const newUid = () => 'o' + Date.now().toString(36) +
@@ -790,7 +790,7 @@ function configureGameRuntime(hooks) {
     UI.refresh(game);
   }
 
-export { FX, MAP, MODES, SLOT_COUNT, bagCap, buildDerived, cam, canAcceptCard, canvas, cardStacks, cellCenter, clearSave, configureGameRuntime, ctx, curLayer, doDeath, dpr, markSeen, safeCap, enterLayer, exitToTitle, gainCoins, game, hasRun, migrateOldSave, modeCfg, newRun, newUid, openLeaveMenu, openSettings, pick, quitGame, rndDice, safeUsed, saveGame, scaledEnemy, setLobby, showTitle, startNewGame, syncPlayTime, usedSlots, weighted };
+export { FX, MAP, MODES, SLOT_COUNT, bagCap, buildDerived, cam, canAcceptCard, canvas, cardStacks, cellCenter, clearSave, configureGameRuntime, ctx, curLayer, doDeath, dpr, markSeen, safeCap, enterLayer, exitToTitle, gainCoins, game, hasRun, migrateOldSave, modeCfg, newRun, newUid, openLeaveMenu, openSettings, openTitleGuide, pick, quitGame, rndDice, safeUsed, saveGame, scaledEnemy, setLobby, showTitle, startNewGame, syncPlayTime, usedSlots, weighted };
 const _set_dpr = (v) => { dpr = v; };
 export { _set_dpr };
 export const getActiveSlot = () => activeSlot;

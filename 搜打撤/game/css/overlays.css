@@ -296,6 +296,8 @@
   .slot-page-rule::after { content: ''; position: absolute; left: 50%; top: 50%; width: 7px; height: 7px;
     transform: translate(-50%, -50%) rotate(45deg); background: #eef0ff;
     box-shadow: 0 0 10px rgba(200,210,255,.95); }
+  /* U6（2026-09-19 走查）：帮助「?」随标题行排布（原孤悬页面左上角，视觉上像误放的悬浮点） */
+  .slot-page-help { position: absolute; right: clamp(20px, 8vw, 140px); top: clamp(56px, 8.8vh, 84px); }
 
   .slot-deck { position: relative; z-index: 1; flex: 1; min-height: 0; display: flex;
     gap: clamp(10px, 1.5vw, 20px); align-items: stretch; justify-content: center;
@@ -358,6 +360,10 @@
 
   .ov-btn:disabled { opacity: 0.35; cursor: default; }
   .ov-btn:disabled:hover { filter: none; transform: none; box-shadow: none; }
+  /* U4（2026-09-19 走查）：BOSS 态背包/撤离的「可点但受限」态——观感同禁用，
+     但保留点击反馈（点击走 handler 给 log+deny 音效说明原因），不再只靠 title 解释。 */
+  .ov-btn.dis { opacity: 0.35; cursor: not-allowed; }
+  .ov-btn.dis:hover { filter: none; transform: none; box-shadow: none; }
   .ov-btn.arm, .mini-btn.arm { border-color: #5c5c5c; background: #2c2c2c; color: #ffffff; }
 
   /* 左上角按钮（旧侧栏头部样式已移除，样式见 #topBtns） */

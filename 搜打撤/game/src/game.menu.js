@@ -306,7 +306,10 @@ function createGameMenuController(deps) {
   }
 
   // 远征手册：只描述当前 Vite 版真实输入与流程
+  // U9（2026-09-19 走查）：对局内也可打开（左上 ? 钮）——进入时记下原状态，返回恢复，
+  // 不再把对局态改写成 title（标题页调用 prev='title'，行为不变）。
   function openTitleGuide() {
+    const prevState = game.state;
     game.state = 'modal';
     UI.showOverlay('[[icon:question]] 远征手册', `
       <div class="expedition-manual">
@@ -321,7 +324,7 @@ function createGameMenuController(deps) {
         <p class="manual-note">鼠标拖拽平移地图，滚轮缩放。地图只开放当前节点的相邻可通行路线；已探索节点的奖励不会重复刷新。</p>
       </div>
       <div class="ov-btns ov-btns-corner"><button class="ov-btn back-sm" data-act="guideBack">返回 <i class="en">BACK</i></button></div>`, true);
-    UI.act('guideBack', () => { UI.hideOverlay(); game.state = 'title'; });
+    UI.act('guideBack', () => { UI.hideOverlay(); game.state = prevState === 'modal' ? 'idle' : prevState; });
   }
 
   // 成就总览：以最近游玩档位的基地档案为准（只读；领奖需进入基地）
@@ -501,10 +504,11 @@ function createGameMenuController(deps) {
         </div>
         <!-- 返回键沉到左下角常驻（2026-09-10 留言 #17：顶部在矮窗口下会被裁掉看不见；页面主体恢复顶部留白整体下移） -->
         <button class="pg-back" data-act="slotBack">返回 <i class="en">BACK</i></button>
-        <span class="slot-page-help">${UI.helpBtn('slots')}</span>
+        <!-- U6（2026-09-19 走查）：帮助「?」从孤悬左上挪进标题行，与标题同排 -->
         <header class="slot-page-head">
           <span class="slot-page-en">选择存档</span>
           <i class="slot-page-rule"></i>
+          <span class="slot-page-help">${UI.helpBtn('slots')}</span>
         </header>
         <div class="slot-deck">${cards.join('')}</div>
       </div>`, 'page');
@@ -775,7 +779,7 @@ function createGameMenuController(deps) {
     sfxVolEl.addEventListener('change', () => SDT.Sound.sfx('ding'));
   }
 
-  return Object.freeze({ setLobby, showTitle, startNewGame, exitToTitle, quitGame, openSettings, openLeaveMenu });
+  return Object.freeze({ setLobby, showTitle, startNewGame, exitToTitle, quitGame, openSettings, openLeaveMenu, openTitleGuide });
 }
 
 export { createGameMenuController };

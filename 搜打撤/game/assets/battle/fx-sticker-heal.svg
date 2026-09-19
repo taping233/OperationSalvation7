@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- 愈/治疗贴纸（替代 💚）：绿爱心 + 高光，配色 = --fx-heal -->
+  <path d="M32 55 C9 41 4.5 26 13 16.5 C19.5 9 29.5 11.5 32 20 C34.5 11.5 44.5 9 51 16.5 C59.5 26 55 41 32 55 Z"
+        fill="#61d69b" stroke="#1f5c3d" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M19 23 C20.5 18.5 25 17 28 19.5" fill="none" stroke="#d8ffe9" stroke-width="4.5" stroke-linecap="round"/>
+  <circle cx="44" cy="24" r="2.2" fill="#d8ffe9"/>
+</svg>

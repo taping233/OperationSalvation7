@@ -666,7 +666,7 @@ export function createEffectSteps(deps) {
         ctx.healed = true;
         if ((ctx.pstat.status.healban || 0) > 0) {
           log(`[[icon:heart]] 禁疗中：回复 ${m[1]} 点生命无效（还剩 ${ctx.pstat.status.healban} 回合）`, 'warn');
-        } else { heal(+m[1]); pushFloat({ unit: 'self', text: '💚', cls: 'stk', warm: true }); }
+        } else { heal(+m[1]); pushFloat({ unit: 'self', text: '', cls: 'stk sticker-heal', warm: true }); }
         ctx.did = true;
       },
     },
@@ -831,7 +831,7 @@ export function createEffectSteps(deps) {
           f.hp = 0; f.dead = true;
           log(`[[icon:skull]] <b>${esc(f.name)}</b> 被消灭！`, 'ok');
         });
-        if (targets.length) { pushFloat({ unit: 'self', text: '💥', cls: 'stk' }); ctx.did = true; }
+        if (targets.length) { pushFloat({ unit: 'self', text: '', cls: 'stk sticker-boom' }); ctx.did = true; }
       },
     },
     {
@@ -905,7 +905,7 @@ export function createEffectSteps(deps) {
           log(`[[icon:heart]] 禁疗中：回复至 ${want} 血无效（还剩 ${ctx.pstat.status.healban} 回合）`, 'warn');
         } else if (want > cur) {
           heal(want - cur);
-          pushFloat({ unit: 'self', text: '💚', cls: 'stk', warm: true });
+          pushFloat({ unit: 'self', text: '', cls: 'stk sticker-heal', warm: true });
           log(`[[icon:heart]] 回复至 <b>${want}</b> 血（当前 ${cur}，回复 ${want - cur}）`, 'ok');
         } else {
           log(`[[icon:heart]] 回复至 ${want} 血：当前 ${cur} 不低于目标值，无变化`, 'ok');
@@ -968,7 +968,7 @@ export function createEffectSteps(deps) {
         const healedN = perM ? +perM[1] : 0;
         if (healedN && spells > 0) {
           heal(healedN * spells);
-          pushFloat({ unit: 'self', text: '💚', cls: 'stk', warm: true });
+          pushFloat({ unit: 'self', text: '', cls: 'stk sticker-heal', warm: true });
           log(`[[icon:cards]] <b>${esc(ctx.card.name)}</b>：置入 ${put} 张随机卡牌（手牌达到 ${getHandSize()} 张），其中 ${spells} 张法术 → 回复 ${healedN * spells} 血`, 'loot');
         } else {
           log(`[[icon:cards]] <b>${esc(ctx.card.name)}</b>：置入 ${put} 张随机卡牌（手牌达到 ${getHandSize()} 张）`, 'loot');
@@ -1044,7 +1044,7 @@ export function createEffectSteps(deps) {
       when: (ctx) => /治疗所有队友|治疗全体/.test(ctx.desc) ? true : null,
       run: (ctx) => {
         heal(3);
-        pushFloat({ unit: 'self', text: '💚', cls: 'stk', warm: true });
+        pushFloat({ unit: 'self', text: '', cls: 'stk sticker-heal', warm: true });
         log(`[[icon:heart]] 治疗所有队友：回复 <b>3</b> 点生命`, 'ok');
         ctx.did = true;
       },

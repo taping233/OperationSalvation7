@@ -920,6 +920,29 @@ import { _set_cardPageOpen } from './game.cardslib.js';
     if (consumedUids && consumedUids.length) {
       toPocket(consumedUids, '注能消耗的卡牌');
     }
+    // 「卡牌是消耗品」一次性教学（2026-09-19 关卡审查）：
+    // 打出的卡不回背包、初始攻击/职业卡直接消散——这条核心规则此前只有战后台志提到过，
+    // 新手首层打光 5 张初始攻击就会陷入无攻击牌死局。首胜结算后弹一次说明（按档位只弹一次）。
+    const teachAmmoOnce = () => {
+      const B = SDT.Base;
+      if (!B || !B.data || B.data.ammoTaught) return;
+      B.data.ammoTaught = true;
+      B.save();
+      game.state = 'modal';
+      UI.showOverlay('[[icon:cards]] 卡牌是消耗品', `
+        <p class="ov-note">战斗中<b>打出过的卡牌不会回到背包</b>：</p>
+        <p class="ov-note">· 普通卡进入<b>消耗口袋</b>——可在火堆/祭坛复原，撤离结算只有 1/3 能带回基地；<br>
+        · 【初始攻击】与职业卡打出后<b>直接消散</b>——补给站的初始攻击 1 币 1 张，路过记得补弹。</p>
+        <p class="ov-note">省着打，多开箱、常逛商店——祝顺利撤离。</p>
+        <div class="ov-btns"><button class="ov-btn ok" data-act="ammoTeachOk">[[icon:check]] 知道了</button></div>`, 'discover');
+      UI.act('ammoTeachOk', () => {
+        UI.hideOverlay();
+        game.state = 'idle';
+        saveGame();
+        UI.refresh(game);
+      });
+      UI.refresh(game);
+    };
     // 开完宝箱后的续流：普通战/首脑战（第四层 boss 格发起）都回待机
     const settle = () => {
       // 战后保底传说（2026-09-09 玩法定版）：
@@ -944,6 +967,7 @@ import { _set_cardPageOpen } from './game.cardslib.js';
       game.state = 'idle';
       saveGame();
       UI.refresh(game);
+      teachAmmoOnce();   // 首胜后一次性说明「卡牌是消耗品」（见上方 teachAmmoOnce 注释）
     };
     if (win !== true) {   // 撤退：不发宝箱、不发事件奖励
       game.pendingEventLoot = null;

@@ -7,7 +7,7 @@
  * ============================================================ */
 import { CHARACTERS, characterFor, characterName } from './characters.js';
 import { esc, escAttr } from './shared.js';
-import { MAP, cellCenter, clearSave, curLayer, enterLayer, exitToTitle, game, newUid, saveGame, scaledEnemy, syncPlayTime } from './game.session.js';
+import { MAP, clearSave, curLayer, enterLayer, exitToTitle, game, newUid, saveGame, scaledEnemy, syncPlayTime } from './game.session.js';
 import { tone } from './sound.js';
 import { openBaseHub } from './game.hub.js';
 
@@ -411,12 +411,12 @@ export function openBossGate(def) {
     nodeShell({
       tone: 'altar', icon: '[[icon:skull]]', title: '首脑巢穴 · 封印中',
       sub: '三位首脑被污染祭坛的辐射护盾庇护——先激活祭坛（弃 3 张卡牌），再来挑战',
-      body: nodeOpt('bossBounce', '退回', '回到上一格，先去激活祭坛', 'ok'),
+      body: nodeOpt('bossBounce', '离开', '首脑格不消耗——先去激活祭坛，随时回来挑战', 'ok'),
     });
     UI.act('bossBounce', () => {
       UI.hideOverlay();
-      game.trackPos = Math.max(0, game.trackPos - 1);
-      game.pos = cellCenter(game.layerIdx, game.trackPos);
+      // 首脑格未激活祭坛时不置 visited（见 resolveCell 的 ritualPending），原地离开即可；
+      // 此前按「数组下标-1」回退，2000 种子里 28.2% 的落点与首脑格不相邻（等于穿墙传送）
       game.state = 'idle';
       saveGame();
       UI.refresh(game);

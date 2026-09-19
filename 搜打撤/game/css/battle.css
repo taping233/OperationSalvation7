@@ -469,3 +469,39 @@
 .sts-cardfly.pile-fly::after { content:''; position:absolute; inset:7px;
   border:1px solid rgba(216,199,154,.6); border-radius:5px;
   background:repeating-linear-gradient(45deg, rgba(255,255,255,.07) 0 6px, transparent 6px 13px); }
+
+/* ===== 2026-09-19 P2 补强批次：火花 / 弹道线 / 氛围尘 / 状态挂件 / SVG 贴纸 ===== */
+/* 受击火花（替代已删除的 Pixi 粒子通道）：一次性元素，JS 内联定位/着色/关键帧 */
+.sts-spark { position:absolute; z-index:79; border-radius:50%; pointer-events:none; }
+/* 敌方攻击弹道：一次性 canvas 闪现弧线+箭头，层级在卡牌飞行(75)之下 */
+.sts-attack-line { position:absolute; inset:0; z-index:74; pointer-events:none; }
+/* 战斗氛围尘：低频上浮微光，纯合成器动画（reduced-motion 全局豁免自动覆盖）；
+   尘点在场景遮罩(0)之上、单位区(2)之下，人物从尘后走过 */
+.sts-ambient { position:absolute; inset:0; z-index:1; overflow:hidden; pointer-events:none; }
+.sts-ambient i { position:absolute; bottom:-3%; display:block; border-radius:50%;
+  background:rgba(255,200,130,.5); box-shadow:0 0 6px rgba(255,190,110,.5);
+  animation:stsAmbient linear infinite; }
+.sts-ambient i:nth-child(even) { background:rgba(255,235,190,.35); box-shadow:0 0 5px rgba(255,220,160,.4); }
+@keyframes stsAmbient {
+  0% { transform:translate(0,0); opacity:0; }
+  12% { opacity:.7; }
+  85% { opacity:.4; }
+  100% { transform:translate(4vw,-58vh); opacity:0; }
+}
+/* 场景色调差分：祭坛首脑=紫红尘 */
+.battle-stage[data-asset-key="battle-boss-element"] .sts-ambient i {
+  background:rgba(200,150,255,.45); box-shadow:0 0 6px rgba(183,122,216,.45); }
+/* 状态挂件：诅咒持续期间的常驻状态光（冰冻=青晶边光；灼烧=立绘底部向上橙焰光）。
+   与交互高亮（can-target 等）是覆盖关系，指向时可被高亮临时接管 */
+.sts-foe.fx-frozen .sts-figure, .sts-me.fx-frozen .sts-figure {
+  filter:saturate(.8) brightness(1.05) drop-shadow(0 0 12px rgba(140,215,255,.8)); }
+.sts-foe.fx-burning .sts-figure, .sts-me.fx-burning .sts-figure {
+  filter:brightness(1.06) drop-shadow(0 -7px 16px rgba(255,140,60,.75)); }
+/* SVG 贴纸（替代 emoji）：尺寸由图定，stkPop 动画照常作用于整个 span */
+.sts-float.stk.sticker { font-size:0; }
+.sts-float.stk.sticker img { width:46px; height:46px;
+  filter:drop-shadow(0 3px 6px rgba(0,0,0,.55)); }
+/* 击杀文字欢呼（替代 👍✌️✨ emoji）：小号金色， stkPop 弹出 */
+.sts-float.stk.stk-cheer { font-size:19px; font-family:var(--cal); font-weight:800;
+  letter-spacing:2px; color:var(--fx-dmg-crit);
+  text-shadow:0 0 8px rgba(0,0,0,.85), 0 2px 4px rgba(0,0,0,.8); }

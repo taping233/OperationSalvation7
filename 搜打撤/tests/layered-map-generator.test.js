@@ -21,7 +21,7 @@ describe('四层种子化地图生成器', () => {
     const map = generateLayeredMap(20260908);
     expect(map.layers).toHaveLength(4);
     expect(map.generatorVersion).toBe(3);
-    expect(map.layoutVersion).toBe(8);   // v8：2026-09-16 Item 17——L2 总格 15→12、新增物资格与分层配额下限
+    expect(map.layoutVersion).toBe(9);   // v9：2026-09-19 关卡审查——L3 紧急撤离点改落层后半段（x≥4）
     expect(validateGeneratedMap(map.layers).ok).toBe(true);
     expect(checkConnectivity(createLayeredMap(20260908)).ok).toBe(true);
     for (let seed = 0; seed < 100; seed++) {

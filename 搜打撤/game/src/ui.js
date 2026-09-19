@@ -20,6 +20,7 @@ import { renderExpeditionPanel } from './expedition.view.js';
         bagCount: $('bagCount'), bagBtn: $('bagBtn'), btnHome: $('btnHome'),
         rollBtn: $('rollBtn'), diceFace: $('diceFace'), diceHist: $('diceHist'), staminaVal: $('staminaVal'), staminaRow: $('staminaRow'),
         log: $('log'),
+        logPanel: $('logPanel'),
         overlay: $('overlay'), ovTitle: $('ovTitle'), ovBody: $('ovBody'),
         tooltip: $('tooltip'),
         tglIndex: $('tglIndex'),
@@ -379,11 +380,24 @@ import { renderExpeditionPanel } from './expedition.view.js';
       const hh = String(t.getHours()).padStart(2, '0'), mm = String(t.getMinutes()).padStart(2, '0'), ss = String(t.getSeconds()).padStart(2, '0');
       div.title = `${hh}:${mm}:${ss}`;   // 时间戳收进悬浮提示，减少视觉拥挤
       div.innerHTML = SDT.Icons.rich(msg);
+      // U10（2026-09-19 走查）：空面板只占位不干活——首条日志进来时自动展开
+      if (this.el.logPanel && this.el.log.children.length === 0) {
+        this.el.logPanel.classList.remove('collapsed');
+        localStorage.setItem('sdt-log-collapsed', '0');
+      }
       this.el.log.prepend(div);
       while (this.el.log.children.length > 60) this.el.log.lastChild.remove();
     },
 
-    clearLog() { if (this.el.log) this.el.log.innerHTML = ''; },
+    clearLog() {
+      if (!this.el.log) return;
+      this.el.log.innerHTML = '';
+      // U10：清空后回折叠态（U10 空态收起，避免开局左下大块空面板）
+      if (this.el.logPanel) {
+        this.el.logPanel.classList.add('collapsed');
+        localStorage.setItem('sdt-log-collapsed', '1');
+      }
+    },
 
     showTooltip(clientX, clientY, title, lines) {
       const el = this.el.tooltip;
@@ -530,6 +544,32 @@ import { renderExpeditionPanel } from './expedition.view.js';
           if (focusables.length) focusables[0].focus({ preventScroll: true });
         });
       }
+      // U1（2026-09-19 交互走查）：整页节点/场景壳的背景大图首次打开才发请求，
+      // 解码期间页面近乎纯黑、无任何反馈。这里读出 data-asset-key 元素的背景 URL，
+      // 未就绪时挂 bg-loading 类（CSS 显示「正在进入…」微提示），图片到齐后自动摘除。
+      this._checkPageBg();
+    },
+
+    // U1：整页背景就绪检测。_bgReady 缓存已确认加载过的 URL，重复打开零开销。
+    _bgReady: null,
+    _checkPageBg() {
+      const host = this.el.ovBody.querySelector('[data-asset-key]');
+      if (!host) return;
+      const m = /url\("?([^")]+)"?\)/.exec(getComputedStyle(host).backgroundImage || '');
+      if (!m) return;
+      const url = m[1];
+      if (this._bgReady && this._bgReady.has(url)) return;
+      if (!this._bgReady) this._bgReady = new Set();
+      const probe = new Image();
+      const done = () => {
+        this._bgReady.add(url);
+        // 页面可能在加载期间被换掉：只摘当前在台面上的 loading 类
+        if (!this.el.overlay.hidden && this.el.ovBody.contains(host)) host.classList.remove('bg-loading');
+      };
+      probe.onload = done;
+      if (probe.complete && probe.naturalWidth > 0) { done(); return; }
+      host.classList.add('bg-loading');
+      probe.src = url;
     },
 
     hideOverlay() {

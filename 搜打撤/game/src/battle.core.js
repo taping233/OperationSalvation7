@@ -72,7 +72,7 @@ import { emit as busEmit } from './event-bus.js';
   let viewingBag = false;    // 正在查看战斗背包（2026-09-09 老板：战斗中可开背包用道具）
   let floats = [];           // 待展示的飘字/受击特效 [{unit:'self'|敌人idx, text, cls}]（渲染后由视图消费）
   let cardAnims = [];        // 待播放的牌局动画事件 [{kind:'draw'|'play'|'burn'|'dump', uid, name, side, target}]（渲染后由视图消费）
-  const KILL_CHEER = ['👍', '✌️', '✨'];   // 击杀后自己头上的随机欢呼贴纸
+  const KILL_CHEER = ['漂亮！', '好剑！', '干净利落！'];   // 击杀后自己头上的随机文字欢呼（替代 emoji，配 stk-cheer 小字样式）
   let dreadShown = false;    // BOSS 登场竖线阴影每场只演一次
   let spellCost1 = false;    // 「本局对战内所有法术 1 费」（银河之旅，战斗内永久）
   let meleeCost1 = false;    // 「本局对战内所有招式 1 费」（银河之旅 2026-09-08 描述改版，招式=武术）
@@ -195,8 +195,8 @@ import { emit as busEmit } from './event-bus.js';
       if (!f.dead && f.hp <= 0) {
         f.dead = true;
         G.log(`[[icon:skull]] <b>${esc(f.name)}</b> 被击倒！（剩 ${alive().length} 个敌人）`, 'ok');
-        floats.push({ unit: foeIdx(f), text: '💥', cls: 'stk' });
-        floats.push({ unit: 'self', text: KILL_CHEER[Math.floor(Random.random('battle') * KILL_CHEER.length)], cls: 'stk stk-late' });
+        floats.push({ unit: foeIdx(f), text: '', cls: 'stk sticker-boom' });
+        floats.push({ unit: 'self', text: KILL_CHEER[Math.floor(Random.random('battle') * KILL_CHEER.length)], cls: 'stk stk-late stk-cheer' });
         transferPoisonLegacy(f);
         if (nestRevive(f)) return;
         nestKillCheck(f);
@@ -764,7 +764,7 @@ import { emit as busEmit } from './event-bus.js';
           G.log(`[[icon:heart]] 禁疗中：吸血回复无效（还剩 ${pstat.status.healban} 回合）`, 'warn');
         } else {
           G.heal(dealtTotal);
-          floats.push({ unit: 'self', text: '💚', cls: 'stk', warm: true });
+          floats.push({ unit: 'self', text: '', cls: 'stk sticker-heal', warm: true });
           G.log(`[[icon:heart]] 吸血：回复 ${dealtTotal} 点生命`, 'ok');
         }
       }
@@ -818,7 +818,7 @@ import { emit as busEmit } from './event-bus.js';
       const n = +(card.heal || 0);
       if ((pstat.status.healban || 0) > 0) {
         G.log(`[[icon:heart]] 禁疗中：回复 ${n} 点生命无效（还剩 ${pstat.status.healban} 回合）`, 'warn');
-      } else { G.heal(n); floats.push({ unit: 'self', text: '💚', cls: 'stk', warm: true }); }
+      } else { G.heal(n); floats.push({ unit: 'self', text: '', cls: 'stk sticker-heal', warm: true }); }
       did = true;
     }
     if (!armored && !skillOnly && +(card.armor || 0) > 0) {
@@ -1630,7 +1630,7 @@ import { emit as busEmit } from './event-bus.js';
         if (nestRevive(foe)) return loss;
         foe.dead = true;
         G.log(`[[icon:skull]] <b>${esc(foe.name)}</b> 被击倒！（剩 ${alive().length} 个敌人）`, 'ok');
-        floats.push({ unit: foeIdx(foe), text: '💥', cls: 'stk' });
+        floats.push({ unit: foeIdx(foe), text: '', cls: 'stk sticker-boom' });
         nestKillCheck(foe);
         if (foe.boss) { finish(true); return loss; }   // 首脑死亡立即结束（2026-09-16 留言 #25）
       }
@@ -1654,8 +1654,8 @@ import { emit as busEmit } from './event-bus.js';
     if (foe.hp <= 0 && !foe.dead) {
       foe.dead = true;
       G.log(`[[icon:skull]] <b>${esc(foe.name)}</b> 被击倒！（剩 ${alive().length} 个敌人）`, 'ok');
-      floats.push({ unit: foeIdx(foe), text: '💥', cls: 'stk' });
-      floats.push({ unit: 'self', text: KILL_CHEER[Math.floor(Random.random('battle') * KILL_CHEER.length)], cls: 'stk stk-late' });
+      floats.push({ unit: foeIdx(foe), text: '', cls: 'stk sticker-boom' });
+      floats.push({ unit: 'self', text: KILL_CHEER[Math.floor(Random.random('battle') * KILL_CHEER.length)], cls: 'stk stk-late stk-cheer' });
       transferPoisonLegacy(foe);
       if (nestRevive(foe)) return r.dealt;
       nestKillCheck(foe);
@@ -1817,7 +1817,7 @@ import { emit as busEmit } from './event-bus.js';
         G.log(`[[icon:heart]] 禁疗中：回复 <b>${n}</b> 点生命无效（还剩 ${pstat.status.healban} 回合）`, 'warn');
       } else {
         G.heal(n);
-        floats.push({ unit: 'self', text: '💚', cls: 'stk', warm: true });
+        floats.push({ unit: 'self', text: '', cls: 'stk sticker-heal', warm: true });
       }
     }
     if (isCrystal) {
@@ -1827,7 +1827,7 @@ import { emit as busEmit } from './event-bus.js';
       const r = Random.random('loot');
       if (r < 1 / 3) {
         if ((pstat.status.healban || 0) > 0) G.log('[[icon:flask]] 禁疗中：神秘药水的回复无效', 'warn');
-        else { G.heal(8); floats.push({ unit: 'self', text: '💚', cls: 'stk', warm: true }); }
+        else { G.heal(8); floats.push({ unit: 'self', text: '', cls: 'stk sticker-heal', warm: true }); }
       } else if (r < 2 / 3) {
         G.coins += 3;
         G.log('[[icon:flask]] 神秘药水：获得 <b>3</b> 币', 'coin');
@@ -2291,7 +2291,7 @@ import { emit as busEmit } from './event-bus.js';
     SDT.Sound.sfx('hurt');
     // delay 130ms：让敌方 lungefx 前倾先播，数字随后到（读得出「这一刀是谁砍的」）
     floats.push({ unit: 'self', text: '-' + r.dealt, cls: 'hurt', delay: 130 });
-    if (r.dealt > 0) floats.push({ unit: 'self', text: '💢', cls: 'stk stk-late', delay: 130 });
+    if (r.dealt > 0) floats.push({ unit: 'self', text: '', cls: 'stk stk-late sticker-hurt', delay: 130 });
     G.log(`[[icon:demon]] <b>${esc(foe.name)}</b> 反击：你受到 <b>${r.dealt}</b> 点攻击伤害（${G.hp}/${G.maxHp}）`, 'warn');
     return r.dealt;
   }
@@ -2510,8 +2510,8 @@ import { emit as busEmit } from './event-bus.js';
       }
       if (foe.hp <= 0 && !foe.dead) { foe.dead = true;
         G.log(`[[icon:skull]] <b>${esc(foe.name)}</b> 毒发倒地！（剩 ${alive().length} 个敌人）`, 'ok');
-        floats.push({ unit: foes.indexOf(foe), text: '💥', cls: 'stk' });
-        floats.push({ unit: 'self', text: KILL_CHEER[Math.floor(Random.random('battle') * KILL_CHEER.length)], cls: 'stk stk-late' });
+        floats.push({ unit: foes.indexOf(foe), text: '', cls: 'stk sticker-boom' });
+        floats.push({ unit: 'self', text: KILL_CHEER[Math.floor(Random.random('battle') * KILL_CHEER.length)], cls: 'stk stk-late stk-cheer' });
         transferPoisonLegacy(foe); }
     });
     if (!alive().length) { busy = false; finish(true); return; }

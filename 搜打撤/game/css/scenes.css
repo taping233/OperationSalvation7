@@ -293,6 +293,16 @@
   #overlay .card.page:has(.node-pg)::before { display: none; }
   .node-pg { padding: 0; position: relative; overflow: hidden; }
   .node-pg[data-asset-key] { background-color: #101010; background-size: cover; background-position: center; }
+  /* U1（2026-09-19 走查）：整页背景大图首载期间的「正在进入…」微提示——
+     bg-loading 类由 ui.js showOverlay 的背景就绪检测挂/摘，图到齐即消失。 */
+  .node-pg.bg-loading::after, .scene.bg-loading::after {
+    content: "正在进入…"; position: absolute; right: 22px; bottom: 18px; z-index: 2;
+    color: #9fb4bd; font: 12px/1 var(--font-ui, sans-serif); letter-spacing: 3px;
+    padding: 8px 14px; border: 1px solid rgba(159,180,189,.25); border-radius: 999px;
+    background: rgba(10,20,26,.55); pointer-events: none;
+    animation: bgWaitPulse 1.4s ease-in-out infinite;
+  }
+  @keyframes bgWaitPulse { 0%, 100% { opacity: .45; } 50% { opacity: 1; } }
   /* 只把画面右侧压暗保可读（杀戮尖塔式暗角），不加面板 */
   .node-pg::before { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
     background: linear-gradient(90deg, rgba(9,9,9,.12) 42%, rgba(9,9,9,.55) 66%, rgba(9,9,9,.82)); }

@@ -89,7 +89,8 @@ function createShopController({
     renderShop();
   }
 
-  // 货位渲染：卡面 + 下方价签（对齐参考图：价格挂在卡牌正下方）
+  // 货位渲染：卡面 + 右上角价格角标（U7，2026-09-19 走查：原底部独立价签存在感弱，
+  // 与「点击货位直接购买」引导割裂——价签改挂卡面右上、买不起红化，一眼可读）
   function slotHTML(slot, index) {
     if (slot.empty) return `<div class="shop-slot"><div class="shop-empty">${slot.label || '无货'}</div></div>`;
     if (slot.sold) {
@@ -99,16 +100,15 @@ function createShopController({
       return '<div class="shop-slot sold"><div class="shop-empty">已售出</div></div>';
     }
     const afford = game.coins >= slot.price;
-    // 2026-09-12 留言：直接点击卡牌即可购买（价格挂卡面右上角标），不再点下面的金币钮
     const priceTag = `<span class="shop-price${afford ? '' : ' short'}">${slot.free ? '[[icon:paw]] 免费' : `[[icon:coin]] ${slot.price}`}</span>`;
     const shortAttr = afford ? '' : ' data-short="1"';
     // 2026-09-13：货位是 div，Tab 走不到、读屏也读不出价格——补 button 语义（Enter/Space 由 bindShopKeys 触发）
     const buyAttrs = (act, label) => `class="shop-slot buy" data-act="${act}" data-i="${index}"${shortAttr} role="button" tabindex="0" aria-label="${esc(label)}" title="${afford ? '点击购买' : '币不够'}"`;
     if (slot.shaReplenish != null) {
       if (slot.shaReplenish <= 0) return '<div class="shop-slot sold"><div class="shop-empty">初始攻击已补满</div></div>';
-      // 本站剩余张数并进价签：原来单独挂一行备注，把该格撑高 48px，同排价格签因此低 20px
+      // 本站剩余张数并进角标副行（原独立备注行已并入）
       return `<div ${buyAttrs('buySha', `补充初始攻击，${slot.price} 币，本站余 ${slot.shaReplenish} 张`)}>${cardHTML(slot.card)}
-        <span class="shop-price${afford ? '' : ' short'}">[[icon:coin]] ${slot.price} · 余 ${slot.shaReplenish}</span>
+        <span class="shop-price${afford ? '' : ' short'}">[[icon:coin]] ${slot.price}<em>余 ${slot.shaReplenish}</em></span>
       </div>`;
     }
     if (slot.mystery) {

@@ -75,6 +75,18 @@ export function preloadSceneList(urls) {
 export function preloadAllNodeShellBgs() {
   preloadSceneList(Object.values(PRELOAD_SCENES));
   // NODE_BG 存的是 asset-key，实际 URL 与 PRELOAD_SCENES 同图（见 css/scenes.css 映射），上面已覆盖
+  // U1（2026-09-19 交互走查）：事件页专属背景只预载了通用轮换 3 张，带专属图的事件
+  // （恶魔交易/盗匪/金矿/闪金之锤/开箱/系统补给/修鞋铺）首开时 CSS background 才发请求，
+  // 大图解码期间整页纯黑。节点未完成前重进会再次打开节点页，黑屏每次都会重现——这里一次补齐。
+  preloadSceneList([
+    'event-tt6-demondeal.webp',
+    'event-bandits-anime-v2.webp',
+    'event-tt6-goldmine.webp',
+    'event-tt6-goldhammer.webp',
+    'event-tt6-chestdraw.webp',
+    'event-tt6-systemsupply.webp',
+    'event-cmtn7qttxqo4.webp',
+  ].map(name => new URL(`../assets/scenes/${name}`, import.meta.url).href));
 }
 let sceneState = null;
 

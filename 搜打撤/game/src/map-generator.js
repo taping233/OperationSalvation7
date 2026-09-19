@@ -4,7 +4,8 @@ const WIDTHS = [4, 6, 9, 8];   // L2 宽 6：spine 11 格 + 生长 1 = 12，与 
 const ROW_MIN = -3;
 const ROW_MAX = 3;
 const GENERATOR_VERSION = 3;
-const LAYOUT_VERSION = 8;   // v8：2026-09-16 Item 17——L2 总格 15→12、新增物资格（resource）格型与分层配额下限；旧对局读档后按新版本重生成地图
+const LAYOUT_VERSION = 9;   // v9：2026-09-19 关卡审查——L3 紧急撤离点改落层后半段（x≥4），逃生门不再贴着入口；旧对局读档后按新版本重生成地图
+                            // v8：2026-09-16 Item 17——L2 总格 15→12、新增物资格（resource）格型与分层配额下限；旧对局读档后按新版本重生成地图
                             // v6：2026-09-13 老板——每层事件格 ≤3（第 3 层 17 格受战斗≤4+搜刮≤4 的
                             // 既有定版约束，结构性最少 4 个，放宽到 ≤4）
 const MAX_ATTEMPTS = 8;
@@ -129,11 +130,18 @@ function makeLayer(li, target, width, random) {
   }
   // —— 紧急撤离点（2026-09-09 需求 #13：只能在第三层和第五层撤离）——
   // 紧急撤离点只放在第三层（li===2，献祭 3 张卡牌撤离）；第五层走终局撤离点（败 BOSS 后放行）。
-  // 落点取向同火堆/补给站，优先吃事件格，其次战斗格（战斗不足 3 场时留给战斗下限补位）。
+  // 2026-09-19 关卡审查：逃生门此前 84% 落在入口两步内，「满载而逃」的张力出不来——
+  // 落点改取层后半段（x ≥ ⌊宽/2⌋=4）里最深的事件/战斗格；深处凑不出合法格才回退全域。
   if (li === 2) {
-    const evPool = nodes.filter(n => n.type === 'event');
-    const btPool = battleCount() > 3 ? nodes.filter(n => n.type === 'battle') : [];
-    const pool = (evPool.length ? evPool : btPool).sort(byKind);
+    const deepMinX = Math.floor(WIDTHS[2] / 2);
+    const deepEv = nodes.filter(n => n.type === 'event' && n.x >= deepMinX);
+    const deepBt = battleCount() > 3 ? nodes.filter(n => n.type === 'battle' && n.x >= deepMinX) : [];
+    let pool = [...deepEv, ...deepBt].sort((a, b) => b.x - a.x || byKind(a, b));
+    if (!pool.length) {
+      const evPool = nodes.filter(n => n.type === 'event');
+      const btPool = battleCount() > 3 ? nodes.filter(n => n.type === 'battle') : [];
+      pool = (evPool.length ? evPool : btPool).sort(byKind);
+    }
     if (pool.length) pool[0].type = 'emergencyExit';
   }
   // —— 连续战斗上限（2026-09-09 老板定向：不要连续三个战斗，最多连续两个）——

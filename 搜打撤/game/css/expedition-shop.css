@@ -90,15 +90,27 @@
 /* 货板撑满页宽后列宽变宽，卡面放宽到 winter.css 的原值 190，货位不再显得空 */
 #overlay .sc-shop .shop-slot .hs-card { width:100%; max-width: 190px; }
 /* winter.css 用 (1,2,0) 选择器把货位压成 justify-content:flex-start：同排等高后价签要贴底对齐 */
-#overlay .sc-shop .shop-slot { justify-content: space-between !important; }
-#overlay .sc-shop .shop-slot .shop-price { margin-top: auto !important; }
+#overlay .sc-shop .shop-slot { justify-content: flex-start !important; }
+/* U7（2026-09-19 走查）：价签从「货位底部独立条」改为「卡面右上角浮动角标」——
+   与「点击货位直接购买」引导合一，扫一眼即得价格；买不起 data-short 时红化。
+   shop-slot 需 relative 定位角标，flex 主轴改为顶对齐（卡面充满货位）。 */
+#overlay .shop-slot { position: relative; }
 #overlay .shop-price {
-  width:100%; min-height:36px; border:1px solid rgba(223,194,141,.52) !important;
-  background:rgba(20,49,59,.96) !important; color:var(--shop-gold) !important; font-weight:700;
+  position: absolute; top: -8px; right: 6px; z-index: 3; width: auto !important; min-height: 0;
+  padding: 3px 9px; font-size: 12.5px; line-height: 1.35; text-align: center; white-space: nowrap;
+  border: 1px solid rgba(223,194,141,.62) !important;
+  background: linear-gradient(180deg, rgba(24,58,70,.97), rgba(12,32,42,.97)) !important;
+  color: var(--shop-gold) !important; font-weight: 700; border-radius: 999px;
+  box-shadow: 0 2px 8px rgba(4,12,16,.55);
 }
-#overlay .shop-price:disabled { color:#71848a !important; border-color:rgba(120,145,150,.2) !important; background:rgba(9,23,30,.8) !important; }
-/* 价签收紧（winter.css 的 .sc-shop 版本靠加载顺序覆盖）：两行货位各省 4px */
-#overlay .sc-shop .shop-price { padding: 4px 12px; margin-top: 0; min-height: 0; }
+#overlay .shop-price em { display: block; font-style: normal; font-size: 10px; font-weight: 500;
+  color: #9fb6bd; letter-spacing: 1px; }
+#overlay .shop-price.short { color: #ff9d8a !important; border-color: rgba(255,122,96,.55) !important;
+  background: linear-gradient(180deg, rgba(64,26,22,.97), rgba(38,14,12,.97)) !important; }
+#overlay .shop-price.short .ic { filter: grayscale(.4); }
+#overlay .shop-slot.buy[data-short] { opacity: 1; filter: none; }
+#overlay .sc-shop .shop-slot.buy[data-short] .hs-card, #overlay .sc-shop .shop-slot.buy[data-short] .shop-card-mystery {
+  opacity: .6; filter: saturate(.6); }
 #overlay .shop-slotnote { color:var(--shop-muted); font-size:11px; margin-top:4px; text-align:center; }
 /* 空格子（神秘货箱/已售出）原来吃 cards.css 写死的 140×196，比真卡（190 宽）小一圈一小截；
    改成与卡面同宽、同量级高度；顺带把 12px 小字提到 6:1 以上对比度 */

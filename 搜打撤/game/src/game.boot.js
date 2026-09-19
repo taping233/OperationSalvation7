@@ -3,7 +3,7 @@ const UI = window.SDT.UI;
 const SDT = window.SDT;
 import { TYPE_NAME } from './game.notes.js';
 import { MAP } from './game.session.js';
-import { SLOT_COUNT, buildDerived, cam, canvas, configureGameRuntime, ctx, dpr, game, hasRun, migrateOldSave, openLeaveMenu, openSettings, quitGame, saveGame, setLobby, showTitle, startNewGame, _set_dpr, _set_cam } from './game.session.js';
+import { SLOT_COUNT, buildDerived, cam, canvas, configureGameRuntime, ctx, dpr, game, hasRun, migrateOldSave, openLeaveMenu, openSettings, openTitleGuide, quitGame, saveGame, setLobby, showTitle, startNewGame, _set_dpr, _set_cam } from './game.session.js';
 import { bindRunMixins, devForceBattle, devJumpNode, moveTo, openClassChoice, openShop, showRunTransition } from './game.run.js';
 import { PRELOAD_SCENES } from './game.run.data.js';
 import { openBaseHub } from './game.hub.js';
@@ -462,6 +462,8 @@ import { renderMiniMap } from './game.session.js';
     // btnHome 打开「离开对局」三选弹窗（保存 / 放弃 / 继续）——
     // 此前绑定 exitToTitle 导致 openLeaveMenu 成死代码、放弃对局无入口（2026-09-19 交互走查 B1）
     document.getElementById('btnHome').addEventListener('click', openLeaveMenu);
+    // U9（2026-09-19 走查）：对局内帮助入口——左上 ? 打开远征手册，返回恢复对局
+    document.getElementById('btnHelp')?.addEventListener('click', openTitleGuide);
     // 音效/背景乐开关（持久化在 sound.js）
     const btnMute = document.getElementById('btnMute');
     if (btnMute) {

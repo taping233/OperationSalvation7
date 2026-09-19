@@ -12,6 +12,7 @@ import { intentSummary, intentViewModel } from './battle.intents.js';
 import { FEEDBACK_DELTA_MS, feedbackClass, feedbackDelay } from './battle.feedback.js';
 import { renderCombatPiles } from './battle.piles.view.js';
 import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFrames } from './battle.frames.js';
+import { assetUrl } from './asset-url.js';
 
   // 状态角标：祝福（绿）+ 诅咒（红）——2026-09-11 架构批次 1 自 battle.core 外迁（纯视图函数）
   function statusChips(status) {
@@ -259,6 +260,7 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
       potionBar, pendingItem, slamPending, dartPending, viewingDeck,
     } = snapshot;
     if (aim) cancelAim();   // 重渲染时中止进行中的指向（DOM 将重建）
+    UI.hideTooltip();   // U8：重渲染摘换手牌节点时 mouseleave 不触发，防 tooltip 残留
     // 战斗中弹层接管（墓地/背包/抉择/选牌/发现）：序列帧层挂在 overlay 直下不随 ovBody
     // 销毁，不藏会浮在弹层之上（09-12 实机：背包弹层上残留玩家序列帧立绘）——
     // 卸下 sprite 恢复静态立绘，关闭弹层走主渲染 attach 自动恢复
@@ -418,9 +420,9 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
         <div class="bt-hand sts-hand"></div>
         <div class="sts-tactics" aria-label="战术操作">
           <div class="sts-tactics-secondary">
-            <button class="ov-btn ghost" data-act="btBag" ${busy || infusingNow || mode === 'boss' ? 'disabled' : ''}
+            <button class="ov-btn ghost${mode === 'boss' ? ' dis' : ''}" data-act="btBag" ${busy || infusingNow ? 'disabled' : ''}
               ${mode === 'boss' ? 'title="BOSS 战为牌库制：道具与资源不参战，背包不可打开"' : 'title="打开战斗背包（B）"'}>[[icon:bag]] 背包</button>
-            <button class="ov-btn ghost" data-act="btFlee" ${busy || infusingNow || mode === 'boss' ? 'disabled' : ''}
+            <button class="ov-btn ghost${mode === 'boss' ? ' dis' : ''}" data-act="btFlee" ${busy || infusingNow ? 'disabled' : ''}
               ${mode === 'boss' ? 'title="BOSS 战不可撤离——击败首脑或战败即终局"' : 'title="撤离将视为本局失败（安全格中的卡牌会抢运回基地，其余丢失）"'}>[[icon:runner]] 撤离（判负）</button>
             <button class="ov-btn ghost" data-act="btSettings" title="战斗设置（音频 / 震动）">[[icon:gear]] 设置</button>
           </div>
@@ -458,11 +460,27 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
       document.getElementById('btSetShake').addEventListener('change', (e) => { localStorage.setItem('sdt-reduce-shake', e.target.checked ? '0' : '1'); });
       UI.act('btSettingsBack', () => render());
     });
-    UI.act('btFlee', surrender);   // 玩法定版：主动撤离=本局失败（烟雾弹走 fleeBattle 豁免）
+    // U4（2026-09-19 走查）：BOSS 态两钮不再 disabled——点了给 log+音效说明原因，
+    // 不再让玩家对着灰按钮悬停猜（dis 类保留禁用观感，但可接收点击）。
+    UI.act('btFlee', () => {
+      if (getSnapshot().opts.isBoss) {
+        UI.log('[[icon:lock]] BOSS 战不可撤离——击败首脑或战败即终局', 'warn');
+        SDT.Sound.sfx('deny');
+        return;
+      }
+      surrender();   // 玩法定版：主动撤离=本局失败（烟雾弹走 fleeBattle 豁免）
+    });
     UI.act('btGrave', openGrave);
     UI.act('btDeck', openDeckView);
     UI.act('btDeckBack', closeDeckView);
-    UI.act('btBag', openBagCmd);
+    UI.act('btBag', () => {
+      if (getSnapshot().opts.isBoss) {
+        UI.log('[[icon:lock]] BOSS 战为牌库制：道具与资源不参战，背包不可打开', 'warn');
+        SDT.Sound.sfx('deny');
+        return;
+      }
+      openBagCmd();
+    });
     UI.act('btSlam', bagSlam);   // 背包砸击按钮（2026-09-16 老板：改回按钮形态，置于手牌左侧）
     UI.act('btInfuseStart', (d) => beginInfuse(d.uid));   // 需求 #15：卡面注能角标
     UI.act('btInfuseGo', confirmInfuse);
@@ -475,6 +493,23 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
       usePotion(d.uid);
     });
     const body = UI.el.ovBody;
+    // 战斗氛围尘（P2）：低频上浮微光点，纯 transform/opacity 合成器动画；色调随场景资产键走 CSS
+    const stageEl = body.querySelector('.battle-stage');
+    if (stageEl && !stageEl.querySelector('.sts-ambient')) {
+      const ambient = document.createElement('div');
+      ambient.className = 'sts-ambient';
+      ambient.setAttribute('aria-hidden', 'true');
+      for (let i = 0; i < 12; i++) {
+        const s = document.createElement('i');
+        s.style.left = (Random.random('ambient') * 100).toFixed(1) + '%';
+        s.style.animationDuration = (7 + Random.random('ambient') * 9).toFixed(1) + 's';
+        s.style.animationDelay = (-Random.random('ambient') * 14).toFixed(1) + 's';
+        const sz = (2 + Random.random('ambient') * 3).toFixed(1);
+        s.style.width = s.style.height = sz + 'px';
+        ambient.appendChild(s);
+      }
+      stageEl.prepend(ambient);
+    }
     body.querySelectorAll('.bt-potion[data-potion-aim="1"]').forEach(el => {
       el.addEventListener('pointerdown', (e) => { if (e.button === 0) startAim(e, el, 'potion'); });
     });
@@ -671,6 +706,13 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
           if (e.target.closest && e.target.closest('.bt-infchip')) return;
           if (e.button === 0 && rec.card.dataset.aim === '1') startAim(e, rec.card);
         });
+        // U8（2026-09-19 走查）：操作指引改 #tooltip 即时提示——原生 title 有 1s 延迟、
+        // 移开即消、键盘拿不到；tooltip 常驻组件零延迟跟随。槽位常驻只绑一次。
+        rec.card.addEventListener('mouseenter', (e) => {
+          if (!rec.__tip) return;
+          UI.showTooltip(e.clientX, e.clientY, rec.__name || '', [rec.__tip]);
+        });
+        rec.card.addEventListener('mouseleave', () => UI.hideTooltip());
         rec.slot.appendChild(rec.card);
         handSlots.set(key, rec);
       }
@@ -685,7 +727,10 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
       rec.card.dataset.act = 'btPlay';
       rec.card.dataset.aim = st.side ? '1' : '';
       rec.card.dataset.side = st.side || '';
-      rec.card.setAttribute('title', st.tip);
+      // U8：操作指引走 #tooltip（见槽位创建处的 mouseenter），原生 title 不再挂
+      rec.__tip = st.tip;
+      rec.__name = `${g.card.name} · ${effCost} 费`;
+      rec.card.removeAttribute('title');
       rec.card.setAttribute('aria-pressed', clickSelectedUid === st.uid ? 'true' : 'false');
       if (rec.sig !== st.inner) { rec.card.innerHTML = st.inner; rec.sig = st.inner; }
       ordered.push(rec);
@@ -881,6 +926,9 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
     setSection(selfParts.stats, sig, 'stats',
       `[[icon:swords]] ${atkShow}${atkTag}${spTag}${pdef.shield ? ' · [[icon:shield]] 盾 ' + pdef.shield : ''}${pdef.armor ? ' · [[icon:plate]] 甲 ' + pdef.armor : ''}${pdef.guard ? ' · 格挡中' : ''}`);
     setSection(selfParts.chips, sig, 'chips', curseChips(pstat.status));
+    // 状态挂件（P2）：玩家自己被冰冻/灼烧时同样点亮常驻状态光
+    selfUnit.classList.toggle('fx-frozen', (pstat.status.freeze || 0) > 0);
+    selfUnit.classList.toggle('fx-burning', (pstat.status.burn || 0) > 0);
     // 已穿戴装备（2026-09-09 老板 #9）：名称 + 说明 tooltip；带限定技能的可点击发动
     const equipsHTML = (equipped || []).map(e => e.skill
       ? `<button class="sts-equip has-skill${e.used ? ' used' : ''}" data-act="btEquipSkill" data-uid="${escAttr(e.uid)}"
@@ -983,6 +1031,9 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
       // 冰冻敌人显示专用意图图标（2026-09-09 玩法定版）：冰冻中无法行动，
       // 用冰晶图标替换原攻击/蓄力预告，解冻后恢复正常意图显示
       const frozen = !f.dead && f.status && (f.status.freeze || 0) > 0;
+      // 状态挂件（P2）：诅咒持续期间的常驻视觉——冰冻青晶边光 / 灼烧底部橙焰光
+      slot.classList.toggle('fx-frozen', frozen);
+      slot.classList.toggle('fx-burning', !f.dead && f.status && (f.status.burn || 0) > 0);
       const intents = frozen
         ? [{ icon: '[[icon:crystal]]', label: '冰冻·无法行动', damage: null, kind: 'frozen' }]
         : intentViewModel(f.intent);
@@ -1081,6 +1132,74 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
     poison: 'sepia(1) saturate(2.2) hue-rotate(55deg) brightness(1.1)',
     burn: 'sepia(1) saturate(3) hue-rotate(-10deg) brightness(1.3)',
   };
+  // 轻量受击火花（P2 补回，替代已删除的 Pixi 粒子通道）：WAAPI 预采样抛散+重力+淡出，
+  // 一次性元素即抛即毁、纯 transform/opacity 走合成器，不建常驻渲染管线
+  function spawnSparks(ov, figEl, { color = '#ffb34d', count = 12 } = {}) {
+    if (!ov || !figEl) return;
+    const r = figEl.getBoundingClientRect();
+    const ovR = ov.getBoundingClientRect();
+    const cx = r.left - ovR.left + r.width / 2, cy = r.top - ovR.top + r.height * 0.42;
+    for (let i = 0; i < count; i++) {
+      const p = document.createElement('i');
+      p.className = 'sts-spark';
+      const sz = (3 + Random.random('fx') * 4).toFixed(1);
+      p.style.cssText = `left:${cx.toFixed(1)}px;top:${cy.toFixed(1)}px;width:${sz}px;height:${sz}px;background:${color}`;
+      ov.appendChild(p);
+      const ang = Random.random('fx') * Math.PI * 2;
+      const v = 70 + Random.random('fx') * 150;
+      const vx = Math.cos(ang) * v, vy = Math.sin(ang) * v - 60;
+      const dur = 420 + Random.random('fx') * 260;
+      const N = 10, kf = [];
+      for (let k = 0; k <= N; k++) {
+        const u = k / N, t = (u * dur) / 1000;
+        kf.push({
+          transform: `translate(${(vx * t).toFixed(1)}px,${(vy * t + 480 * t * t).toFixed(1)}px) scale(${(1 - u * 0.7).toFixed(2)})`,
+          opacity: u < 0.55 ? 0.95 : Math.max(0, 0.95 * (1 - (u - 0.55) / 0.45)),
+          offset: u,
+        });
+      }
+      p.animate(kf, { duration: dur, easing: 'linear', fill: 'forwards' }).onfinish = () => p.remove();
+      setTimeout(() => p.remove(), dur + 150);   // 兜底清理
+    }
+  }
+  // 敌方攻击弹道（P2）：前摇同刻从敌人立绘到玩家立绘闪现一道上弓弧线+箭头，快速淡出
+  //（多敌混战时读得出这一刀是谁砍的；一次性 canvas，与指向施法的 #aimArrow 无关）
+  function foeAttackLine(body, figEl) {
+    const ov = UI.el.overlay;
+    const me = body.querySelector('#btSelf .sts-figure');
+    if (!ov || !me) return;
+    const ovR = ov.getBoundingClientRect();
+    const a = figEl.getBoundingClientRect(), b = me.getBoundingClientRect();
+    const x1 = a.left - ovR.left + a.width * 0.35, y1 = a.top - ovR.top + a.height * 0.42;
+    const x2 = b.left - ovR.left + b.width * 0.65, y2 = b.top - ovR.top + b.height * 0.42;
+    const w = Math.max(2, Math.ceil(ovR.width)), h = Math.max(2, Math.ceil(ovR.height));
+    const ratio = Math.max(1, window.devicePixelRatio || 1);
+    const cv = document.createElement('canvas');
+    cv.className = 'sts-attack-line';
+    cv.width = w * ratio; cv.height = h * ratio;
+    cv.style.width = w + 'px'; cv.style.height = h + 'px';
+    ov.appendChild(cv);
+    const ctx = cv.getContext('2d');
+    ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+    const mx = (x1 + x2) / 2, my = (y1 + y2) / 2 - 46;   // 弓背朝上
+    ctx.strokeStyle = '#ff6659';
+    ctx.lineCap = 'round';
+    ctx.globalAlpha = .16; ctx.lineWidth = 9;
+    ctx.beginPath(); ctx.moveTo(x1, y1); ctx.quadraticCurveTo(mx, my, x2, y2); ctx.stroke();
+    ctx.globalAlpha = .85; ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.moveTo(x1, y1); ctx.quadraticCurveTo(mx, my, x2, y2); ctx.stroke();
+    const tx = x2 - mx, ty = y2 - my, tl = Math.hypot(tx, ty) || 1;
+    const ux = tx / tl, uy = ty / tl;
+    ctx.globalAlpha = .95;
+    ctx.beginPath();
+    ctx.moveTo(x2, y2);
+    ctx.lineTo(x2 - ux * 13 - uy * 6, y2 - uy * 13 + ux * 6);
+    ctx.lineTo(x2 - ux * 13 + uy * 6, y2 - uy * 13 - ux * 6);
+    ctx.closePath(); ctx.fillStyle = '#ff6659'; ctx.fill();
+    cv.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 420, easing: 'ease-out', fill: 'forwards' })
+      .onfinish = () => cv.remove();
+    setTimeout(() => cv.remove(), 580);   // 兜底清理
+  }
   // NDamageNumVfx：伤害数字抛体——随机初速上抛 + 重力下坠 + 后半程淡出（WAAPI 预采样）。
   // 随机全部走种子随机服务（random.test 禁 Math.random），'fx' 流不进对局存档口径
   function physicsFloat(span) {
@@ -1115,8 +1234,11 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
           ? body.querySelector(`.sts-ally[data-ally-i="${allyI}"] .sts-figure`)
           : body.querySelector(`.sts-foe[data-eidx="${f.unit}"] .sts-figure`);
       if (!figEl) return;
-      // 纯演出指令（无文字）：敌方攻击前摇 / 诅咒施加彩闪
-      if ((f.cls || '').includes('lungefx')) { if (!SDT.Motion?.reduceMotion()) foeLunge(figEl); return; }
+      // 纯演出指令（无文字）：敌方攻击前摇+弹道 / 诅咒施加彩闪
+      if ((f.cls || '').includes('lungefx')) {
+        if (!SDT.Motion?.reduceMotion()) { foeLunge(figEl); foeAttackLine(body, figEl); }
+        return;
+      }
       if ((f.cls || '').includes('cursefx')) { if (!SDT.Motion?.reduceMotion()) curseFlash(figEl, f.cls); return; }
       const reduced = !!SDT.Motion?.reduceMotion();
       const stk = (f.cls || '').includes('stk');
@@ -1133,9 +1255,9 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
         if (isSelf) stsSelfHit(figEl, heavy ? 1.35 : 1, stopMs);   // 自己：后仰+红染
         else stsShake(figEl, heavy ? 1.55 : 1, stopMs);
       }
-      if (!reduced && !stk && SDT.VisualFX) SDT.VisualFX.burstAtElement(figEl, {
-        color: f.warm ? 0x61d69b : ((isSelf || allyI != null) ? 0xff6659 : 0xffb34d),
-        count: f.warm ? 10 : (heavy ? 22 : 14),
+      if (!reduced && !stk) spawnSparks(ov, figEl, {
+        color: f.warm ? '#61d69b' : ((isSelf || allyI != null) ? '#ff6659' : '#ffb34d'),
+        count: f.warm ? 8 : (heavy ? 18 : 12),
       });
       if (isSelf && damage && !reduced) hurtFlash(ov);
       // 2026-09-13 老板：治疗闪绿光；自己攻击或造成伤害时轻微抖屏（受击红闪已有）
@@ -1180,7 +1302,14 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
       }
       const span = document.createElement('span');
       span.className = 'sts-float ' + feedbackClass(f);
-      span.textContent = f.text;
+      // SVG 贴纸（P2，替代 emoji）：cls 带 sticker-* 时渲染对应手绘贴纸图
+      const sticker = (String(f.cls || '').match(/sticker-(\w+)/) || [])[1];
+      if (sticker) {
+        span.classList.add('sticker');
+        span.innerHTML = `<img src="${assetUrl('assets/battle/fx-sticker-' + sticker + '.svg')}" alt="">`;
+      } else {
+        span.textContent = f.text;
+      }
       // STS2：伤害数字落点随机抖动（±10, ±5），与同伴不重影
       span.style.left = (r.left - ovR.left + r.width / 2 + (Random.random('fx') * 20 - 10)) + 'px';
       span.style.top = (r.top - ovR.top + r.height * (stk ? 0.02 : 0.32) + (Random.random('fx') * 10 - 5)) + 'px';
@@ -1619,7 +1748,10 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
     const cap = document.querySelector('.sts-arena-caption span');
     if (!cap) return;
     const entry = clickSelectedUid == null ? null : findCard(clickSelectedUid);
-    cap.textContent = entry ? `已选【${entry.card.name}】——点击${targetSide(entry.card) === 'self' ? '你' : '敌人'}确认，Esc 取消` : cap.dataset.battleDetail || '';
+    if (!entry) { cap.textContent = cap.dataset.battleDetail || ''; return; }
+    // U8：选中提示条带目标图标（敌人=红剑 / 自己=绿心），与单位区高亮框同色系
+    const target = targetSide(entry.card) === 'self' ? '[[icon:heart]] 自己（绿框立绘）' : '[[icon:swords]] 敌人（红框）';
+    cap.innerHTML = SDT.Icons.rich(`已选【${esc(entry.card.name)}】——点击 ${target} 确认，Esc 取消`);
   }
   function selectCardByClick(uid) {
     const snap = getSnapshot();
