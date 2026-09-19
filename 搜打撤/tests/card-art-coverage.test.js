@@ -36,6 +36,7 @@ const KNOWN_ORPHANS = [
   'martial-melee',            // art.js 通用兜底图（按卡名规则引用，非按 id），合法非死图
   'martial-ranged',           // 同上
   'equip-tt3-dark-blade',     // 灭魔之剑整卡退役（2026-09-16 留言「删除灭魔之剑」），专属图成为已批死图
+  'martial-builtin-sha',      // 「杀」改名 starter-attack（2026-09-20 affecbc）后暴露的旧 id 图，待老板批去留
 ];
 
 // 老板已验收定稿、必须有专属图的卡（现役 id）。每实装一批新图在此登记。
