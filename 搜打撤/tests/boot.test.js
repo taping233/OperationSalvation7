@@ -261,7 +261,7 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
 
   it('战斗指向卡支持点击选中、Esc取消与目标结算', { timeout: 15_000 }, async () => {
     const C = window.SDT.Cards;
-    const sha = C.all().find(c => c.id === 'builtin-sha');
+    const sha = C.all().find(c => c.id === 'starter-attack');
     const game = {
       ownedCards: [{ uid: 'boot-click-sha', card: sha }], hp: 30, maxHp: 30, atk: 5, spellPower: 0, coins: 0,
       myClass: '侠客', characterId: null, state: 'idle', battleActive: false,
@@ -304,7 +304,7 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
 
   it('唯一敌人时指向卡点击直接打出（STS2 TryWebClickPlay 口径）', async () => {
     const C = window.SDT.Cards;
-    const sha = C.all().find(c => c.id === 'builtin-sha');
+    const sha = C.all().find(c => c.id === 'starter-attack');
     const game = {
       ownedCards: [{ uid: 'boot-single-sha', card: sha }], hp: 30, maxHp: 30, atk: 5, spellPower: 0, coins: 0,
       myClass: '侠客', characterId: null, state: 'idle', battleActive: false,

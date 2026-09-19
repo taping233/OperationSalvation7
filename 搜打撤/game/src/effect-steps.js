@@ -72,7 +72,7 @@ export function parsePoolNoun(raw, myClass) {
   if (['火球', '箭', '箭矢', '药水', '杀', '禁咒', '形态'].includes(base)) {
     s = '';
     const key = base === '箭矢' ? '箭' : base;
-    if (key === '杀') preds.push(c => c.id === 'builtin-sha' || c.name === '杀' || c.name === '初始攻击');
+    if (key === '杀') preds.push(c => c.id === 'starter-attack' || c.name === '杀' || c.name === '初始攻击');
     else if (key === '火球') preds.push(series ? (c => String(c.name || '').includes('火球')) : (c => c.name === '火球'));
     else if (key === '箭') preds.push(c => String(c.name || '').includes('箭'));
     else if (key === '药水') preds.push(c => c.type === '道具' && String(c.name || '').includes('药水'));   // 药水池定版（2026-09-09）：所有带「药水」名字的道具——法术「药水魔法」不在池内
@@ -567,7 +567,7 @@ export function createEffectSteps(deps) {
       run: (ctx, m) => {
         const key = m[2] === '箭矢' ? '箭' : m[2];
         const pool = allCards().filter(c => c.rarity !== '衍生' && !['生物', '事件'].includes(c.type) &&
-          (key === '杀' ? (c.id === 'builtin-sha' || c.name === '杀' || c.name === '初始攻击')
+          (key === '杀' ? (c.id === 'starter-attack' || c.name === '杀' || c.name === '初始攻击')
             : key === '招式' ? c.type === '武术'
             : String(c.name || '').includes(key)));
         // 2026-09-13：卡库没有「箭」——回落到战斗令牌模板（天狼长弓的箭矢来源）

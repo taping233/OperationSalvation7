@@ -63,7 +63,7 @@ function handCardNames(s) {
 
 describe('背包砸击按钮形态', () => {
   it('开局手牌不再有「背包砸击」令牌，手牌=随身战斗卡', async () => {
-    const sha = C.all().find(c => c.id === 'builtin-sha');
+    const sha = C.all().find(c => c.id === 'starter-attack');
     const g = makeGame([sha]);
     BattleSession.start(g, [{ id: 'infantry', name: '靶子', hp: 99999, atk: 1 }], { isBoss: false, name: '按钮测试' });
     await drain();

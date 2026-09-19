@@ -10,8 +10,8 @@ window.SDT.MAP = {
 await import('../game/src/cards.js');
 const { BattleSession } = await import('../game/src/battle.core.js');
 
-const starter = window.SDT.Cards.all().find(card => card.id === 'builtin-sha') || {
-  id: 'builtin-sha', name: '初始攻击', cost: 1, type: '武术', desc: '造成攻击伤害。', dmg: 0, dmgType: 'attack',
+const starter = window.SDT.Cards.all().find(card => card.id === 'starter-attack') || {
+  id: 'starter-attack', name: '初始攻击', cost: 1, type: '武术', desc: '造成攻击伤害。', dmg: 0, dmgType: 'attack',
 };
 
 function makeGame() {

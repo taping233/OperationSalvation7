@@ -5,10 +5,23 @@ const OLD_SAVE_KEY = 'sdt-save-v1';
 // 坏档备份键：读档解析失败时原串转存于此，避免被下一次 write 无声覆盖
 const CORRUPT_KEY = index => `sdt-run-${index}-corrupt`;
 // 对局存档 schema 版本：破坏性变更时 +1 并在 MIGRATIONS 补上一级纯函数迁移
-const SAVE_VERSION = 1;
+const SAVE_VERSION = 2;
+// 2026-09-19 老板令「彻底删除『杀』」：初始攻击内部 id builtin-sha → starter-attack。
+// 深遍历而不是字段枚举：卡实例嵌在 ownedCards/cardBox/inventory/nestEquipped 及
+// battle 序列化（牌库/手牌/检查点）多层结构里，按值改名对任意嵌套深度幂等成立。
+const RENAME_CARD_IDS = { 'builtin-sha': 'starter-attack' };
+const renameCardIds = (node) => {
+  if (Array.isArray(node)) { node.forEach(renameCardIds); return; }
+  if (node && typeof node === 'object') {
+    if (typeof node.id === 'string' && RENAME_CARD_IDS[node.id]) node.id = RENAME_CARD_IDS[node.id];
+    Object.values(node).forEach(renameCardIds);
+  }
+};
 const MIGRATIONS = {
   // 0→1：首个显式版本。无 version 的旧档字段形状已由 migrateRunCharacter 兜底，盖章即可。
   // 示例：1→2 时追加 MIGRATIONS[1] = d => ({ ...d, 新字段: 默认值 })。
+  // 1→2：「杀」id 统一改名（只动 id 值等于 builtin-sha 的节点，其它 id 值不受影响）。
+  1: d => { renameCardIds(d); return d; },
 };
 // 读档异常原因（index -> 'corrupt' | 'tooNew'），供 UI 查询展示
 const issues = {};

@@ -40,7 +40,7 @@ import { DATA } from './data-loader.js';
   const issues = {};   // 档位 -> 'corrupt' | 'tooNew'，供 UI 查询
   const rules = () => window.SDT.MAP.rules;
   // 「初始攻击」初始牌：能进消耗口袋（对局中复原用），但永远不入卡牌仓库
-  const isSha = (card) => !!card && (card.id === 'builtin-sha' ||
+  const isSha = (card) => !!card && (card.id === 'starter-attack' ||
     (card.id === undefined && card.name === '初始攻击'));
 
   // 初始基地：新档案从零开始，资源全靠对局搬回与成就奖励
@@ -61,7 +61,7 @@ import { DATA } from './data-loader.js';
       petSel: null,   // 当前携带的宠物 id（出发携带效果 / 保护格数量随之变化）
       collection: {}, // 收藏图鉴 [卡牌id] => { name, rarity, ts }（[[icon:sparkles]]收藏中的物品）
       // ---- 局外成长（v0.9 职业熟练度与成就） ----
-      selMode: 'standard',    // 上次出发的玩法（standard / elite / casual）
+      selMode: 'standard',    // 上次出发的玩法（standard / elite；旧档残留的 casual 读取时回落 standard）
       classes: {},            // [职业名] => { lv, xp }（与卡牌库职业表同源）
       stats: {
         nestBossKills: [], reviveKills: 0, turnMovesMax: 0, battleEquipsMax: 0,

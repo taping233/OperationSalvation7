@@ -3,7 +3,7 @@
     "tt8-hero-assassin": "cards/wu-void.webp",
     "tt8-hero-sword": "cards/wu-myriadswords.webp",
     "tt8-hero-ranger": "cards/wu-heavensword.webp",
-    "builtin-sha": "cards/expedition-starters/basic-attack.webp",
+    "starter-attack": "cards/expedition-starters/basic-attack.webp",
     "tt3-fireball": "cards/expedition-starters/fireball.webp",
     "tt3-skewer": "cards/expedition-starters/pierce.webp",
     "tt3-staff": "cards/expedition-starters/staff.webp",
@@ -146,7 +146,6 @@
     "tt7-smite"
   ],
   "martialCardArt": [
-    "builtin-sha",
     "tt7-throwblade",
     "tt7-goldencicada",
     "tt7-sneak",

@@ -104,7 +104,7 @@ import { DATA } from './data-loader.js';
       { id: 'tt6-airdrop', name: '污染空投箱', cost: 0, rarity: '衍生', type: '事件', desc: '从木材、口粮、能量饮料、随机药水中选择一项。', value: 0, sellable: false, unrandom: true },
       { id: 'tt6-chestdraw', name: '熔断双箱', cost: 0, rarity: '衍生', type: '事件', desc: '从小型与密封物资箱中选择 1 个开启。', value: 0, sellable: false, unrandom: true },
       { id: 'tt6-systemsupply', name: '末班配送无人机', cost: 0, rarity: '衍生', type: '事件', desc: '获得员工通行证A碎片和木材卡 ×1。', value: 0, sellable: false, unrandom: true },
-      { id: 'cmtn7qttxqo4', name: '巷口修鞋匠', cost: 0, rarity: '衍生', type: '事件', desc: '获得彩色令牌碎片；复原 1 张卡牌。', value: 0, sellable: false, unrandom: true },
+      { id: 'cmtn7qttxqo4', name: '巷口修鞋匠', cost: 0, rarity: '衍生', type: '事件', desc: '获得员工通行证A碎片；复原 1 张卡牌。', value: 0, sellable: false, unrandom: true },
       { id: 'ev19-vital', name: '高压急救', cost: 0, rarity: '衍生', type: '事件', desc: '生命上限 +3，并回复 3 点生命。', value: 0, sellable: false, unrandom: true },
       { id: 'ev19-pearlbox', name: '遗落的珍珠匣', cost: 0, rarity: '衍生', type: '事件', desc: '获得卡牌「珍珠盒」。', value: 0, sellable: false, unrandom: true },
       { id: 'ev19-fireballs', name: '双焰走私', cost: 0, rarity: '衍生', type: '事件', desc: '获得两张「火球」。', value: 0, sellable: false, unrandom: true },
@@ -401,7 +401,7 @@ import { DATA } from './data-loader.js';
     // 内置初始牌「初始攻击」：每局开始固定携带 5 张（同名堆叠只占 1 格背包）。
     // 1 费 · 攻（+0）＝ 伤害等同于攻击力（combat.js：攻击伤害 = 卡面值 + 攻击力）
     SHA: {
-      id: 'builtin-sha', name: '初始攻击', cost: 1,
+      id: 'starter-attack', name: '初始攻击', cost: 1,
       rarity: '初始', type: '武术', dmg: 0, dmgType: 'attack',
       desc: '攻（+0）：造成等同于攻击力的伤害。',
     },
@@ -752,7 +752,7 @@ import { DATA } from './data-loader.js';
     //     仓库 09-06 转录用的 tt3-freeze 等四个重复 id 由 ensureTabletopSync() 移除。
     // 覆盖/补种走 ensureTabletopSync()（TT10_KEY 标记，一次性，按 id 整卡覆盖）。
     TABLETOP10: [
-      { id: 'builtin-sha', name: '初始攻击', cost: 1, rarity: '初始', type: '武术', desc: '攻（+0）：造成等同于攻击力的伤害。', dmg: 0, dmgType: 'attack', value: 1 },
+      { id: 'starter-attack', name: '初始攻击', cost: 1, rarity: '初始', type: '武术', desc: '攻（+0）：造成等同于攻击力的伤害。', dmg: 0, dmgType: 'attack', value: 1 },
       { id: 'tt-medneedle', name: '急救合剂', cost: 0, rarity: '稀有', type: '道具', desc: '回合开始时：回复 6点生命。持续 3 回合。', dmg: 0, heal: 16, value: 4 },
       { id: 'tt-copper', name: '铜币', cost: 0, rarity: '古朴', type: '资源', desc: '可出售。', dmg: 0, value: 3, sellable: true, unrandom: true },
       { id: 'tt-keys-bunch', name: '一串钥匙', cost: 0, rarity: '稀有', type: '资源', desc: '钥匙 ×2。', dmg: 0, value: 4 },
@@ -955,7 +955,7 @@ import { DATA } from './data-loader.js';
       { id: "tt8-energycap", tokenOf: "tt8-hero-sealer", name: "封印肢体2", cost: 0, rarity: "棱彩", type: "生物", dmg: 0, desc: "能量上限 +1。", value: 8, sellable: false, unrandom: true },
       { id: "tt8-nofocus", tokenOf: "tt8-hero-sealer", name: "封印肢体3", cost: 0, rarity: "棱彩", type: "生物", dmg: 0, desc: "无需注能。", value: 8, sellable: false, unrandom: true },
       { id: "tt8-curseimmune", tokenOf: "tt8-hero-sealer", name: "封印肢体1", cost: 0, rarity: "棱彩", type: "生物", dmg: 0, desc: "免疫诅咒。", value: 8, sellable: false, unrandom: true },
-      { id: "cmtmvq6ss84l", name: "彩色令牌", cost: 0, rarity: "衍生", type: "道具", dmg: 0, desc: "获取本职业的能力卡", value: 8, sellable: false },
+      { id: "cmtmvq6ss84l", name: "员工通行证A", cost: 0, rarity: "衍生", type: "道具", dmg: 0, desc: "获取本职业的能力卡", value: 8, sellable: false },
       { id: "cmtn0xt0zr7", name: "闪金之锤", cost: 1, rarity: "衍生", type: "武术", dmg: 5, dmgType: "fixed", desc: "造成5点固定伤害，若击杀敌人，+2币。", value: 3, sellable: false },
       { id: "cmtn125e1nk0", name: "神秘召唤", cost: 2, rarity: "史诗", type: "法术", dmg: 0, desc: "发现一张传说或能力卡。", value: 4, sellable: false },
       { id: "cmtn1gfhczzj", cls: "降临者", name: "厄运", cost: 0, rarity: "职业", type: "法术", dmg: 0, desc: "随机获取1张能施加诅咒的招式", value: 2, sellable: false, unrandom: true },
@@ -967,10 +967,10 @@ import { DATA } from './data-loader.js';
       { id: "cmtn1wnhhym", cls: "侠客", name: "江湖救急-改", cost: 0, rarity: "职业", type: "武术", dmg: 0, desc: "随机获得3张临时卡牌，回合开始时将其消耗。", value: 3, sellable: false, unrandom: true },   // 同名不同效果版本按老板 2026-09-19 规则追加「-改」
       { id: "cmtn28jv33wx", name: "搜索大宝箱", cost: 0, rarity: "衍生", type: "法术", dmg: 0, desc: "随机获取3张卡牌", value: 3, sellable: false },
       { id: "cmtn6bge52qt", name: "复原药水", cost: 0, rarity: "稀有", type: "道具", dmg: 0, desc: "在背包中才能使用，复原最多两张卡牌", value: 3, sellable: false },
-      { id: "cmtn7qttxqo4", name: "修鞋铺", cost: 0, rarity: "衍生", type: "事件", dmg: 0, desc: "获得彩色令牌碎片；复原1张卡牌", value: 0, sellable: false },
+      { id: "cmtn7qttxqo4", name: "修鞋铺", cost: 0, rarity: "衍生", type: "事件", dmg: 0, desc: "获得员工通行证A碎片；复原1张卡牌", value: 0, sellable: false },
       // —— 以下 25 张共享 id 卡取设计者稿（整卡覆盖） ——
       { id: "starter-emergency-bandage", name: "应急绷带", cost: 0, rarity: "稀有", type: "道具", dmg: 0, heal: 12, desc: "回复12 点生命。", value: 0, sellable: false },
-      { id: "tt-token-color", name: "员工通行证A", cost: 0, rarity: "史诗", type: "道具", dmg: 0, desc: "集齐两枚碎片，合成真正的彩色令牌：获取一张能力卡。", value: 4, sellable: false },
+      { id: "tt-token-color", name: "员工通行证A", cost: 0, rarity: "史诗", type: "道具", dmg: 0, desc: "集齐两枚碎片，合成真正的员工通行证A：获取一张能力卡。", value: 4, sellable: false },
       { id: "tt-econpack", name: "经济卡包", cost: 0, rarity: "史诗", type: "资源", dmg: 0, desc: "只能在仓库界面点击使用，获得5张随机卡牌", value: 10, sellable: false, unrandom: true },
       { id: "tt2-treasuremap", name: "寻宝图", cost: 0, rarity: "古朴", type: "装备", dmg: 0, draw: 1, desc: "主动技能：将 1张‘搜索大宝箱’洗入牌库，抽1张牌。", value: 2, sellable: false },
       { id: "tt3-flame-storm", cls: "降临者", name: "风暴火球", cost: 2, rarity: "职业", type: "法术", dmg: 4, dmgType: "spell", desc: "对全体敌人每人释放1次火球。", value: 3, sellable: false, unrandom: true },
@@ -1047,12 +1047,17 @@ import { DATA } from './data-loader.js';
       // （按 id 识别系统卡，只纠正旧默认名，不覆盖玩家后来改过的其它名字）
       try {
         const cards = SDT.Cards.all();
+        // 旧 id 迁移（2026-09-19 老板令：彻底删除「杀」id）：builtin-sha → starter-attack，
+        // 卡库层一次性归一化；对局存档侧由 RunStorage MIGRATIONS 兜底
+        let renamed = false;
+        for (const c of cards) if (c.id === 'builtin-sha') { c.id = 'starter-attack'; renamed = true; }
         const sha = cards.find(c => c.id === SDT.Cards.SHA.id);
         if (sha && sha.name === '杀') {
           sha.name = SDT.Cards.SHA.name;
           sha.desc = SDT.Cards.SHA.desc;
-          SDT.Cards.saveAll(cards);
+          renamed = true;
         }
+        if (renamed) SDT.Cards.saveAll(cards);
       } catch (e) { /* 存储不可用时静默跳过 */ }
       SDT.Cards.seedBatch([SDT.Cards.SHA], 'sdt-cards-sha-seeded');
     },

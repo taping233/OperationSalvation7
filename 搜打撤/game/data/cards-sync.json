@@ -1,5 +1,5 @@
 {
-  "version": 27,
+  "version": 29,
   "note": "实机卡库定版覆盖批次数据（同步自网页版实机卡库）。由 scripts/sync-cards-from-live.mjs 生成，勿手改；重跑该脚本整份重写。",
   "changelog": [
     "2026-09-19 老板拍板：同名双版「厉兵秣马」退役自建版 cc-prep，只留官方定版 tt7-ironcharge（本版只动 retire 名单，无覆盖批次）",
@@ -294,7 +294,7 @@
     },
     {
       "cost": 0,
-      "desc": "获得彩色令牌碎片，+2 币。",
+      "desc": "获得员工通行证A碎片，+2 币。",
       "dmg": 0,
       "id": "tt6-mystery",
       "name": "神秘补给",
@@ -304,7 +304,7 @@
     },
     {
       "cost": 0,
-      "desc": "获得彩色令牌碎片，木材 ×1。",
+      "desc": "获得员工通行证A碎片，木材 ×1。",
       "dmg": 0,
       "id": "tt6-systemsupply",
       "name": "系统补给",

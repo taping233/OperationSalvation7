@@ -18,8 +18,14 @@ describe('固定旧档兼容样本', () => {
     const legacy = fixture('save-v1-run.json');
     localStorage.setItem('sdt-save-v1', JSON.stringify(legacy));
     RunStorage.migrateLegacy();
-    // 旧档无 version 字段 → 读取时按 0 处理并盖章升到当前 SAVE_VERSION
-    expect(RunStorage.read(1)).toEqual({ ...legacy, characterId: 'xuanli', version: RunStorage.SAVE_VERSION });
+    // 旧档无 version 字段 → 读取时按 0 处理并逐级盖章升到当前 SAVE_VERSION；
+    // 1→2 迁移把「杀」旧 id（builtin-sha）归一为 starter-attack，卡内容不动
+    expect(RunStorage.read(1)).toEqual({
+      ...legacy,
+      ownedCards: [{ uid: 'legacy-card-1', card: { id: 'starter-attack', name: '初始攻击', type: '武术', cost: 1 } }],
+      characterId: 'xuanli',
+      version: RunStorage.SAVE_VERSION,
+    });
     expect(localStorage.getItem('sdt-save-v1')).toBeNull();
   });
 
