@@ -860,10 +860,10 @@ body.cardlib-open #overlay .photo-studio-v3 .photo-type-mark {
 /* 稀有度=馆印：白边右下角一枚 gem 色圆章（双圈套印+微落影），棱彩=全息贴标 */
 body.cardlib-open #overlay .photo-studio-v3 .photo-rarity-mark {
   position:absolute;
-  right:7px;
-  bottom:3px;
-  width:36px;
-  height:36px;
+  right:5px;
+  bottom:2px;
+  width:44px;
+  height:44px;
   display:grid;
   place-items:center;
   padding:0;
@@ -872,13 +872,13 @@ body.cardlib-open #overlay .photo-studio-v3 .photo-rarity-mark {
   color:#fff8ea;
   background:radial-gradient(circle at 36% 30%, color-mix(in srgb,var(--gem,#777) 72%,#fff) 0%, var(--gem,#777) 46%, color-mix(in srgb,var(--gem,#777) 78%,#1c140e) 100%);
   box-shadow:
-    inset 0 0 0 1.5px rgba(255,250,236,.4),
-    inset 0 0 0 4px rgba(28,18,10,.22),
-    0 1px 3px rgba(24,14,8,.4);
+    inset 0 0 0 2px rgba(255,250,236,.4),
+    inset 0 0 0 5px rgba(28,18,10,.22),
+    0 2px 4px rgba(24,14,8,.4);
   font-family:var(--serif);
-  font-size:10.5px;
+  font-size:12.5px;
   font-weight:800;
-  letter-spacing:1px;
+  letter-spacing:1.5px;
   line-height:1;
   text-align:center;
   text-shadow:0 1px 1px rgba(20,14,10,.55);
@@ -1055,6 +1055,34 @@ body.cardlib-open #overlay .photo-studio-v3 .studio-edit-actions {
   background:rgba(8,18,25,.82);
   box-shadow:0 8px 24px rgba(0,0,0,.35);
   cursor:pointer;
+}
+/* ============ 影廊批次三：大图弹层归队（看片灯箱）============
+   #cardZoom 是全局组件（战斗/背包共用），本段全部 body.cardlib-open 前缀 scoped，
+   其他入口的冷蓝灯箱不受影响。语言：暗房暖黑 + 照片背后一圈灯箱金晕 + 黄铜关闭钮。 */
+body.cardlib-open #cardZoom .cz-backdrop {
+  background:
+    radial-gradient(110% 62% at 50% -12%, rgba(255,216,170,.10), transparent 56%),
+    radial-gradient(120% 78% at 50% 114%, rgba(90,28,36,.38), transparent 62%),
+    rgba(16,8,6,.84);
+}
+body.cardlib-open #cardZoom .cz-card .hs-card {
+  box-shadow:
+    0 26px 84px rgba(0,0,0,.72),
+    0 0 72px rgba(212,175,122,.30),
+    0 0 0 1px rgba(212,175,122,.28)!important;
+}
+body.cardlib-open #cardZoom .cz-close {
+  border-color:rgba(212,175,122,.45);
+  color:var(--studio-gold-soft,#ecd9b0);
+  background:rgba(29,21,18,.82);
+}
+/* cross 是 PNG 位图（颜色烧死在图里），卡牌库内用静态染色链染成黄铜金 */
+body.cardlib-open #cardZoom .cz-close .ic {
+  filter:grayscale(1) brightness(1.55) sepia(1) saturate(2.6) hue-rotate(-8deg);
+}
+body.cardlib-open #cardZoom .cz-hint {
+  color:#b3a58c;
+  letter-spacing:2.4px;
 }
 #cardZoom .cz-close:hover,
 #cardZoom .cz-close:focus-visible {
