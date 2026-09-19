@@ -144,7 +144,8 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
       <button class="hs-btn" data-act="editCard" data-id="${escAttr(c.id)}">编辑卡牌</button>
       <button class="hs-btn danger" data-act="delCard" data-id="${escAttr(c.id)}">删除</button>
     </div>` : '';
-    return `<div class="studio-preview-frame">${cardHTML(c, 'lg', LIB_ART)}</div>
+    // 预览卡套相纸：选片台上放的是"照片"而不是裸卡牌（处处是照片口径，09-20 批次二）
+    return `<div class="studio-preview-frame"><span class="studio-photo-paper studio-preview-paper">${cardHTML(c, 'lg', LIB_ART)}</span></div>
       <div class="studio-preview-copy"><h3>${esc(c.name)}</h3>
       <p class="pv-hint">${esc(c.type)} · ${esc(SDT.Cards.rarityOf(c))}${dmgTxt}${kwTxt}</p>
       <button class="studio-zoom" data-act="libInspect" data-card="${escAttr(c.id)}">查看大图与背签</button>${actions}</div>`;

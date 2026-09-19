@@ -713,21 +713,24 @@ body.cardlib-open #overlay .photo-studio-v3 .lib-cardwrap.studio-photo {
   text-align:left!important;
   box-shadow:none!important;
   transform:none!important;
+  /* 黄铜放大镜光标：照相馆翻看照片的手势语言（静态 data-uri，热点对准镜头中心） */
+  cursor:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'><circle cx='13' cy='13' r='8' fill='rgba(24,14,8,.3)' stroke='%23ecd5a4' stroke-width='2.4'/><line x1='19.2' y1='19.2' x2='27' y2='27' stroke='%23c9a468' stroke-width='3.6' stroke-linecap='round'/></svg>") 13 13, pointer!important;
 }
 /* 相纸：象牙白卡纸。实体感三件套——纸边厚度硬阴影、非均匀表面反光、随卡微 3D 侧倾；
-   悬挂件=黄铜相片夹（顶部金属条），替代塑料图钉 */
+   悬挂件=黄铜相片夹（顶部金属条），替代塑料图钉。
+   白边走暖象牙（冲印相纸的米黄调，非冷白） */
 body.cardlib-open #overlay .photo-studio-v3 .studio-photo-paper {
   position:relative;
   display:block;
   min-width:0;
   padding:6px 6px 10px;
-  border:1px solid rgba(250,246,238,.9);
-  border-right-color:rgba(150,138,120,.7);
-  border-bottom-color:rgba(130,118,100,.78);
+  border:1px solid rgba(250,244,230,.9);
+  border-right-color:rgba(152,136,112,.7);
+  border-bottom-color:rgba(132,118,94,.78);
   border-radius:2px;
   background:
-    linear-gradient(102deg,rgba(255,255,255,.2),transparent 26% 74%,rgba(88,76,60,.1)),
-    linear-gradient(145deg,#f0ede7,#d9d4ca);
+    linear-gradient(102deg,rgba(255,252,240,.2),transparent 26% 74%,rgba(92,78,56,.12)),
+    linear-gradient(145deg,#f3ecdd,#ddd2ba);
   box-shadow:
     0 2px 0 rgba(96,86,70,.6),
     0 4px 0 rgba(38,30,22,.3),
@@ -773,11 +776,19 @@ body.cardlib-open #overlay .photo-studio-v3 .studio-photo-art::after {
 body.cardlib-open #overlay .photo-studio-v3 .studio-photo-art::before {
   box-shadow:inset 0 0 10px rgba(8,4,3,.34),inset 0 -9px 13px rgba(10,6,4,.12);
 }
+/* 冲印质感：暖纱+暗角罩层（::after，静态一次绘制）。轻做口径——不改变卡面画风定版，
+   只把高饱和原画往"银盐冲印"方向拢半步 */
+body.cardlib-open #overlay .photo-studio-v3 .studio-photo-art::after {
+  background:
+    linear-gradient(180deg, rgba(255,234,196,.06), transparent 32%),
+    radial-gradient(ellipse at 50% 42%, transparent 58%, rgba(62,42,24,.2));
+}
 body.cardlib-open #overlay .photo-studio-v3 .studio-photo-art img {
   width:100%;
   height:100%;
   display:block;
   object-fit:cover;
+  filter:sepia(.07) saturate(.96) contrast(1.02);
 }
 /* 费用：黄铜圆铭牌（原青色玻璃球退役） */
 body.cardlib-open #overlay .photo-studio-v3 .studio-photo-cost {
@@ -797,11 +808,13 @@ body.cardlib-open #overlay .photo-studio-v3 .studio-photo-cost {
   font:700 14px/1 ui-monospace,monospace;
   text-shadow:0 1px 0 rgba(255,246,228,.5);
 }
+/* 白边下部：名字+类型注记居中，右下角留给稀有度馆印——宝丽来留白还给白边 */
 body.cardlib-open #overlay .photo-studio-v3 .studio-photo-caption {
+  position:relative;
   display:grid;
-  gap:4px;
+  gap:3px;
   min-width:0;
-  padding:10px 5px 1px;
+  padding:10px 5px 8px;
   text-align:center;
 }
 body.cardlib-open #overlay .photo-studio-v3 .studio-photo-caption b {
@@ -820,56 +833,68 @@ body.cardlib-open #overlay .photo-studio-v3 .studio-photo-caption small {
   text-overflow:ellipsis;
   white-space:nowrap;
 }
+/* 注记行：只剩类型小字（相纸下方的铅笔注记语言），不再横条铺满 */
 body.cardlib-open #overlay .photo-studio-v3 .studio-photo-marks {
-  display:grid;
-  grid-template-columns:max-content minmax(0,1fr);
-  align-items:center;
-  gap:6px;
+  display:block;
   width:100%;
   overflow:visible;
-  color:#6a6156;
+  color:#8a8175;
   letter-spacing:.04em;
 }
 body.cardlib-open #overlay .photo-studio-v3 .photo-type-mark,
 body.cardlib-open #overlay .photo-studio-v3 .photo-rarity-mark {
   min-width:0;
   overflow:hidden;
-  padding:2px 5px 1px;
   border-radius:1px;
   text-overflow:ellipsis;
   white-space:nowrap;
 }
 body.cardlib-open #overlay .photo-studio-v3 .photo-type-mark {
-  border:1px solid rgba(70,62,52,.32);
+  display:inline-block;
+  border:0;
   background:transparent;
-  color:#5d554a;
-  font-family:ui-monospace,monospace;
-}
-/* 稀有度：实体色签——gem 实底（在象牙纸上够跳）+象牙白字，不做渐变不旋转 */
-body.cardlib-open #overlay .photo-studio-v3 .photo-rarity-mark {
-  width:100%;
-  min-height:18px;
-  padding-inline:8px;
-  border:1px solid color-mix(in srgb,var(--gem,#777) 90%,#241f18);
-  color:#fffdf5;
-  background:color-mix(in srgb,var(--gem,#777) 82%,#241f18);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.3),inset 0 -1px rgba(20,14,10,.3),0 1px 2px rgba(20,14,10,.28);
-  font-family:var(--serif);
-  font-weight:800;
+  color:#8a8175;
+  font:600 9.5px/1.4 ui-monospace,monospace;
   letter-spacing:.14em;
-  line-height:16px;
+}
+/* 稀有度=馆印：白边右下角一枚 gem 色圆章（双圈套印+微落影），棱彩=全息贴标 */
+body.cardlib-open #overlay .photo-studio-v3 .photo-rarity-mark {
+  position:absolute;
+  right:7px;
+  bottom:3px;
+  width:36px;
+  height:36px;
+  display:grid;
+  place-items:center;
+  padding:0;
+  border-radius:50%;
+  border:0;
+  color:#fff8ea;
+  background:radial-gradient(circle at 36% 30%, color-mix(in srgb,var(--gem,#777) 72%,#fff) 0%, var(--gem,#777) 46%, color-mix(in srgb,var(--gem,#777) 78%,#1c140e) 100%);
+  box-shadow:
+    inset 0 0 0 1.5px rgba(255,250,236,.4),
+    inset 0 0 0 4px rgba(28,18,10,.22),
+    0 1px 3px rgba(24,14,8,.4);
+  font-family:var(--serif);
+  font-size:10.5px;
+  font-weight:800;
+  letter-spacing:1px;
+  line-height:1;
   text-align:center;
   text-shadow:0 1px 1px rgba(20,14,10,.55);
   transform:none;
 }
-/* 棱彩=全息封膜：保留幻彩身份，半透明流彩+幻彩细描边 */
+/* 棱彩=全息贴标：幻彩流彩圆章+细描边，保留全息身份 */
 body.cardlib-open #overlay .photo-studio-v3 .studio-photo.rv7 .photo-rarity-mark,
 body.cardlib-open #overlay .photo-studio-v3 .studio-photo.rv-prism .photo-rarity-mark {
-  border-color:rgba(179,107,255,.65);
   color:#3d1c3a;
-  background:linear-gradient(90deg,
-    rgba(201,119,161,.62),rgba(215,181,102,.62) 34%,rgba(112,175,162,.62) 66%,rgba(116,143,187,.62));
-  box-shadow:inset 0 0 0 1px rgba(179,107,255,.38),inset 0 1px 0 rgba(255,255,255,.45);
+  background:
+    linear-gradient(135deg,
+      rgba(201,119,161,.9),rgba(215,181,102,.9) 34%,rgba(112,175,162,.9) 66%,rgba(116,143,187,.9));
+  box-shadow:
+    inset 0 0 0 1.5px rgba(255,255,255,.5),
+    inset 0 0 0 4px rgba(179,107,255,.28),
+    0 1px 3px rgba(24,14,8,.4);
   text-shadow:0 1px 0 rgba(255,255,255,.55);
 }
 /* 卷角装饰已随拟物减法移除 */
@@ -965,6 +990,18 @@ body.cardlib-open #overlay .photo-studio-v3 .studio-preview-frame .hs-card {
   margin:0!important;
   font-size:14px!important;
   box-shadow:0 18px 36px rgba(0,0,0,.56)!important;
+}
+/* 选片台相纸：宝丽来式下宽白边，黄铜夹沿用 .studio-photo-paper::before */
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-paper {
+  width:auto!important;
+  max-width:100%;
+  margin:0 auto;
+  padding:9px 9px 24px;
+  box-shadow:
+    0 2px 0 rgba(96,86,70,.6),
+    0 5px 0 rgba(38,30,22,.3),
+    0 18px 30px rgba(10,4,3,.55),
+    inset 1px 1px 0 rgba(255,255,255,.6);
 }
 body.cardlib-open #overlay .photo-studio-v3 .studio-preview-copy {
   padding:11px 4px 0;

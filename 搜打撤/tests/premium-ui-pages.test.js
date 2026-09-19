@@ -70,10 +70,10 @@ describe('照相馆陈列交互', () => {
     expect(css).toContain('.studio-photo-paper::before');
     expect(css).toContain('perspective:760px');
     expect(css).toContain('--studio-wall:#170f0d');
-    expect(css).toContain('linear-gradient(145deg,#f0ede7,#d9d4ca)');
-    expect(css).toContain('grid-template-columns:max-content minmax(0,1fr)');
-    // 稀有度=gem 实底色签；棱彩=半透明幻彩封膜
-    expect(css).toContain('rgba(201,119,161,.62)');
+    expect(css).toContain('linear-gradient(145deg,#f3ecdd,#ddd2ba)');
+    // 稀有度=白边右下角 gem 色馆印圆章（双圈套印）；棱彩=幻彩全息贴标
+    expect(css).toContain('inset 0 0 0 1.5px rgba(255,250,236,.4)');
+    expect(css).toContain('rgba(215,181,102,.9)');
     // 影廊生图资产挂载：墙纸/牌匾/台面/空态/背签
     expect(css).toContain('assets/ui/photo-studio/wall.webp');
     expect(css).toContain('assets/ui/photo-studio/sign.webp');
