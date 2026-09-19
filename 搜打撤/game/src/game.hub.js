@@ -713,22 +713,22 @@ let hubTab = 'deploy';
         <button class="ov-btn" data-act="stashBack">↩ 返回仓库</button>
       </div>`);
     UI.act('econpackUse', () => {
-      // 经济卡包（2026-09-09 审计补实装）：仓库界面点击使用，获得 5 张随机卡牌
+      // 经济卡包（2026-09-09 审计补实装）：仓库界面点击使用，获得 5 张随机卡牌。
+      // 只在基地仓库可用（局内不可用是定版）；局外没有对局，拆包所得必须入卡牌仓库——
+      // 塞进对局背包（game.ownedCards）会在下次开局被清空，卡就白丢了（2026-09-19 审计 P1-4）
       if (s.card.id !== 'tt-econpack') return;
+      if (B.stashRoom() < 5) { UI.log(`[[icon:archive]] 仓库空位不足 5 格（现 ${B.stashRoom()}）——先卖出或扩建仓库再拆包`, 'warn'); return; }
       const pool = SDT.Cards.all().filter(c => SDT.Cards.isRandomObtainable(c));
-      let got = 0;
+      if (!pool.length) { UI.log('[[icon:cards]] 卡牌库是空的，没有可获得的卡牌', 'warn'); return; }
+      const cards = [];
       for (let k = 0; k < 5; k++) {
-        const c = pool.length ? pool[Math.floor(Random.random('loot') * pool.length)] : null;
-        if (c && game.grantCard(c, { silent: true })) got++;   // 基地仓库页自带反馈，不叠加获得演出
+        cards.push({ card: { ...pool[Math.floor(Random.random('loot') * pool.length)] }, count: 1 });
       }
-      if (got > 0) {
-        const si = B.data.stash.indexOf(s);
-        if (si >= 0) { s.count--; if (s.count <= 0) B.data.stash.splice(si, 1); }
-        B.save();
-        UI.log(`[[icon:cards]] <b>经济卡包</b>：拆开获得 ${got} 张随机卡牌（入背包）`, 'loot');
-      } else {
-        UI.log('[[icon:bag]] 背包已满，经济卡包没有拆开', 'warn');
-      }
+      const si = B.data.stash.indexOf(s);
+      if (si >= 0) { s.count--; if (s.count <= 0) B.data.stash.splice(si, 1); }
+      B.depositCards(cards);
+      B.save();
+      UI.log(`[[icon:cards]] <b>经济卡包</b>：拆开获得 5 张随机卡牌（入卡牌仓库）`, 'loot');
       renderHub();
     });
     UI.act('collCollectOne', () => {

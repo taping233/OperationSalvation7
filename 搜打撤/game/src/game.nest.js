@@ -134,6 +134,18 @@ function pickNestBoss() {
 
 function startNestRun(boxCards) {
   game.nestActive = true;
+  // 龙巢是独立对局：生命与随身币重新起算——game 是会话单例，不重置会继承上一局
+  // 的残值（死亡退出后 hp 可能 ≤0，首场战斗即濒死；残留币让商店购买力飘忽，2026-09-19 审计 P1-5）
+  // 加成口径与 newRun 一致：熟练度每级 +1 生命上限（Lv.1 起）+ 携带宠物生命加成
+  game.maxHp = MAP.rules.playerMaxHp;
+  if (game.myClass) {
+    const lv = SDT.Meta.classLv(game.myClass);
+    if (lv > 1) game.maxHp += lv - 1;
+  }
+  const pet = SDT.Base.carriedPet ? SDT.Base.carriedPet() : null;
+  if (pet && pet.effect && pet.effect.maxHp) game.maxHp += pet.effect.maxHp;
+  game.hp = game.maxHp;
+  game.coins = 0;
   game.nestPos = 0;
   game.nestEquipped = game.nestEquipped || [];
   game.nestRunes = [];

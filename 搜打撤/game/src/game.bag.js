@@ -334,7 +334,9 @@ import { _set_cardPageOpen } from './game.cardslib.js';
   function openPouchStore() {
     game.state = 'modal';
     const POUCH_ID = 'tt7-stratagem';
-    const stored = () => game.ownedCards.filter(x => x.pouchOf === POUCH_ID && !x.stored);
+    // 口径与 storedStacks 一致：只按 pouchOf 判定。stored 是与珍珠盒共用的
+    // 「不入背包格」标记，若在这里再查 !x.stored，锦囊计数恒为 0、3 张上限永久失效
+    const stored = () => game.ownedCards.filter(x => x.pouchOf === POUCH_ID && x.card);
     const storedStacks = () => {
       const map = new Map();
       game.ownedCards.forEach(x => {
@@ -383,7 +385,7 @@ import { _set_cardPageOpen } from './game.cardslib.js';
       saveGame();
       render();
     });
-    UI.act('pouchBack', () => { game.state = 'idle'; renderHub(); });
+    UI.act('pouchBack', () => { UI.hideOverlay(); showBackpack(true); });
     render();
   }
 
@@ -395,11 +397,12 @@ import { _set_cardPageOpen } from './game.cardslib.js';
     const PEARL_ID = 'tt2-pearlbox';
     const boxes = game.ownedCards.filter(x => x.card && x.card.id === PEARL_ID).length;
     const cap = boxes * 9;
-    const storedN = () => game.ownedCards.filter(x => x.stored).length;
+    // stored 与法师锦囊共用标记：pouchOf 非空的卡在锦囊里，不属于任何珍珠盒
+    const storedN = () => game.ownedCards.filter(x => x.stored && !x.pouchOf).length;
     const storedStacks = () => {
       const map = new Map();
       game.ownedCards.forEach(x => {
-        if (!x.stored || !x.card) return;
+        if (!x.stored || x.pouchOf || !x.card) return;
         if (!map.has(x.card.name)) map.set(x.card.name, { card: x.card, count: 0 });
         map.get(x.card.name).count++;
       });
@@ -450,7 +453,8 @@ import { _set_cardPageOpen } from './game.cardslib.js';
         SDT.Sound.sfx('deny');
         return;
       }
-      game.ownedCards.forEach(x => { if (x.stored && x.card.name === stack.card.name) delete x.stored; });
+      // 只解除珍珠盒自己的标记：锦囊法术（pouchOf）不在盒中，跨容器取出会留下双份归属
+      game.ownedCards.forEach(x => { if (x.stored && !x.pouchOf && x.card.name === stack.card.name) delete x.stored; });
       UI.log(`[[icon:bag]] 【<b>${esc(stack.card.name)}</b>】×${stack.count} 从珍珠盒取出，回到背包`, 'ok');
       saveGame();
       render();
@@ -505,15 +509,13 @@ import { _set_cardPageOpen } from './game.cardslib.js';
     if (!refreshOnly && SDT.Chests && SDT.Chests.isOpen && SDT.Chests.suspend && SDT.Chests.isOpen()) {
       bagOverChest = SDT.Chests.suspend();
     }
-    if (game.battleActive || game.bossCleanupPending) {
+    if (game.battleActive) {
       // 2026-09-09 老板：战斗中也能开背包用道具——转给战斗背包（again 按 B = 关闭）
-      if (game.battleActive && !game.bossCleanupPending && SDT.Battle && SDT.Battle.commands && SDT.Battle.commands.openBag) {
+      if (SDT.Battle && SDT.Battle.commands && SDT.Battle.commands.openBag) {
         SDT.Battle.commands.openBag();
         return;
       }
-      UI.log(game.battleActive
-        ? '[[icon:lock]] 战斗中无法打开背包；请使用手牌完成战斗或撤退'
-        : '[[icon:bag]] 请先完成 BOSS 战后的「整理背包」', 'warn');
+      UI.log('[[icon:lock]] 战斗中无法打开背包；请使用手牌完成战斗或撤退', 'warn');
       return;
     }
     if (!refreshOnly && backpackOpen && game.state === 'modal' && !UI.el.overlay.hidden) {
@@ -851,7 +853,7 @@ import { _set_cardPageOpen } from './game.cardslib.js';
       }
       const boxes = game.ownedCards.filter(x => x.card && x.card.id === 'tt2-pearlbox').length;
       const cap = boxes * 9;
-      const storedN = game.ownedCards.filter(x => x.stored).length;
+      const storedN = game.ownedCards.filter(x => x.stored && !x.pouchOf).length;
       if (storedN + stack.count > cap) {
         UI.log(`[[icon:gem]] 珍珠盒放不下了（${storedN}/${cap} 张）——先取出一些`, 'warn');
         SDT.Sound.sfx('deny');
@@ -877,73 +879,6 @@ import { _set_cardPageOpen } from './game.cardslib.js';
     showBackpack(true);
   }
 
-  // BOSS 胜利后统一整理本局卡牌。墓地牌仍以原 uid 留在 ownedCards 中，
-  // 因而可与现有背包/宝箱新牌一起选择；未选中的实例会在确认时明确永久丢弃。
-  function showBossPackCleanup(consumedUids, done) {
-    const candidates = game.ownedCards.slice();
-    const graveSet = new Set(consumedUids || []);
-    const keep = new Set(candidates.map(o => o.uid)); // 安全默认：先全部带走，玩家主动点选丢弃
-    game.bossCleanupPending = true;
-
-    const renderCleanup = () => {
-      game.state = 'bossCleanup';
-      const keptN = candidates.filter(o => keep.has(o.uid)).length;
-      const dropN = candidates.length - keptN;
-      const graveN = candidates.filter(o => graveSet.has(o.uid)).length;
-      const cardsHTML = candidates.length ? candidates.map(o => {
-        const kept = keep.has(o.uid);
-        const fromGrave = graveSet.has(o.uid);
-        return `<div class="bt-card${kept ? ' sel' : ''}" data-act="bossPackToggle" data-uid="${escAttr(o.uid)}"
-          title="${kept ? '已带走；点击改为丢弃' : '将丢弃；点击改为带走'}${fromGrave ? ' · 本场从墓地回收' : ''}">
-          ${SDT.Cards.cardHTML(o.card, 'sm', { hideCost: true })}
-          <span class="bt-tt">${fromGrave ? '[[icon:skull]]' : (o.safe ? '[[icon:lock]]' : '[[icon:bag]]')}</span>
-        </div>`;
-      }).join('') : '<p class="ov-empty">没有可整理的卡牌。</p>';
-      UI.showOverlay('[[icon:bag]] 击败 BOSS · 整理背包', `
-        <p class="ov-stats">点击卡牌切换「带走 / 丢弃」 · 已选带走 <b>${keptN}</b> 张 · 将丢弃 <b>${dropN}</b> 张</p>
-        <p class="ov-note">[[icon:skull]] 本场墓地可回收 <b>${graveN}</b> 张，已与原背包及 BOSS 宝箱新牌一起列出。<b>未选中的牌确认后永久丢弃，无法从火堆取回。</b></p>
-        <div class="bt-hand">${cardsHTML}</div>
-        <div class="ov-btns">
-          <button class="ov-btn" data-act="bossPackSmart"
-            title="一键选择：带走的数量不超过仓库空格，优先保留价值最高的卡牌">[[icon:sparkles]] 智能选择（按价值 · 上限仓库空格）</button>
-          <button class="ov-btn" data-act="bossPackAll">全部带走</button>
-          <button class="ov-btn" data-act="bossPackNone">全部丢弃</button>
-          <button class="ov-btn ok" data-act="bossPackConfirm">[[icon:check]] 带走 ${keptN} 张 · 丢弃 ${dropN} 张</button>
-        </div>`, true);
-      UI.act('bossPackToggle', (d) => {
-        if (keep.has(d.uid)) keep.delete(d.uid); else keep.add(d.uid);
-        renderCleanup();
-      });
-      // 智能选择（2026-09-16 留言「增加一个一键选择功能（选择数量在仓库的空格数量内，
-      // 优先选择价值最高的卡牌）」）：全部带走会在撤离入库时超仓被丢，这里按 sellPrice
-      // 降序预选至多 SDT.Base.stashRoom() 张，保证精选的都能带得回基地
-      UI.act('bossPackSmart', () => {
-        let room = SDT.Base.stashRoom();
-        keep.clear();
-        candidates.slice()
-          .sort((a, b) => SDT.Cards.sellPrice(b.card) - SDT.Cards.sellPrice(a.card))
-          .forEach(o => { if (room > 0) { keep.add(o.uid); room--; } });
-        UI.log(`[[icon:sparkles]] 智能选择：按价值带走 <b>${keep.size}</b> 张（仓库空格 ${SDT.Base.stashRoom()} 格，其余将丢弃）`, 'sys');
-        renderCleanup();
-      });
-      UI.act('bossPackAll', () => { candidates.forEach(o => keep.add(o.uid)); renderCleanup(); });
-      UI.act('bossPackNone', () => { keep.clear(); renderCleanup(); });
-      UI.act('bossPackConfirm', () => {
-        const discarded = candidates.filter(o => !keep.has(o.uid));
-        const discardedUids = new Set(discarded.map(o => o.uid));
-        const recovered = candidates.filter(o => graveSet.has(o.uid) && keep.has(o.uid)).length;
-        game.ownedCards = game.ownedCards.filter(o => !discardedUids.has(o.uid));
-        game.bossCleanupPending = false;
-        syncCardOrder();
-        UI.log(`[[icon:bag]] 整理完成：带走 <b>${keep.size}</b> 张（其中墓地回收 <b>${recovered}</b> 张），丢弃 <b>${discarded.length}</b> 张`, discarded.length ? 'warn' : 'ok');
-        saveGame();
-        done();
-      });
-      UI.refresh(game);
-    };
-    renderCleanup();
-  }
-
   // ---------- 战后结算（battle.js 回调） ----------
   // win = true 胜利 / false 战败 / null 撤退。
   // 小怪战：使用过的卡进消耗口袋；BOSS 战：卡牌完好保留；
@@ -954,7 +889,7 @@ import { _set_cardPageOpen } from './game.cardslib.js';
   const onBattleEnd = async function (opts, playedUids, win, consumedUids) {
     if (game.nestActive) return;   // 龙巢战斗结算由 game.nest 的总线订阅接管（一图战后流程不适用）
     UI.hideOverlay();
-    if (win === false) { game.bossCleanupPending = false; doDeath(); return; }
+    if (win === false) { doDeath(); return; }
     // Item 16（2026-09-16 老板定版）：局内满足条件的牌 100% 进入消耗口袋（招式和装备）——
     // 「1/3 保留」改到离开对局（撤离结算）时统一结算，见 game.run.altar doExtract。
     // 衍生卡（如 闪金之锤）不能进消耗口袋（2026-09-15 留言）；职业卡与初始攻击仍直接消散。
@@ -1011,7 +946,6 @@ import { _set_cardPageOpen } from './game.cardslib.js';
       UI.refresh(game);
     };
     if (win !== true) {   // 撤退：不发宝箱、不发事件奖励
-      game.bossCleanupPending = false;
       game.pendingEventLoot = null;
       // 2026-09-07 留言：撤退要有文案和动画——复用启程过渡（撤离点场景）
       await showRunTransition({
@@ -1033,7 +967,6 @@ import { _set_cardPageOpen } from './game.cardslib.js';
       duration: opts.isBoss ? 1350 : 1050,
     });
     UI.log(opts.isBoss ? '[[icon:trophy]] <b>BOSS战胜利！</b>' : '[[icon:trophy]] 战斗胜利！', 'ok');
-    game.bossCleanupPending = !!opts.isBoss;
     // 需求 #13：击败首脑后，第五层终局撤离点无条件放行
     if (opts.isBoss && win === true && !game.bossKilled) {
       game.bossKilled = true;

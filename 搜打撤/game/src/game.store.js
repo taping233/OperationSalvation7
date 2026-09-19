@@ -20,7 +20,6 @@ function createGameState(map) {
     runActive: false,
     seed: null,
     battleActive: false,
-    bossCleanupPending: false,
     ownedCards: [],
     cardOrder: [],
     usedPocket: [],
