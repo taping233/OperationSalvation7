@@ -320,7 +320,6 @@ const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!car
       const optsHTML = discovering.options.map((c, i) => `
         <div class="bt-card" data-act="btDiscover" data-i="${i}" title="${escAttr(`${c.name}${c.desc ? '：' + c.desc : ''}——点击置入手牌`)}">
           ${SDT.Cards.cardHTML(c, 'sm')}
-          <p class="ov-note" style="max-width:190px;margin:4px auto 0">${esc(c.desc || '')}</p>
         </div>`).join('');
       UI.showOverlay(`${opts.isBoss ? '[[icon:demon]] BOSS战' : '[[icon:swords]] 遭遇战'} · 第 ${turn} 回合 · [[icon:question]] 发现`, `
         <p class="ov-stats">选 <b>1</b> 张置入手牌 · 战后消散</p>
