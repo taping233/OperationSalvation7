@@ -451,21 +451,52 @@ body.cardlib-open #overlay .photo-studio-v3 .library-title h2 {
 }
 body.cardlib-open #overlay .photo-studio-v3 .clib-count {
   grid-area:count;
-  display:grid;
-  grid-template-columns:auto auto;
-  gap:2px 8px;
-  align-items:end;
+  display:flex;
+  align-items:baseline;
+  gap:10px;
   padding:6px 12px;
   border-left:1px solid rgba(212,175,122,.2);
   color:#9a8d7c!important;
   white-space:nowrap;
 }
 body.cardlib-open #overlay .photo-studio-v3 .clib-count small { font-size:9px; letter-spacing:.08em; }
+/* 卷宗口径（批次四）：「第 07 卷」金色卷号领衔，馆藏/陈列跟后 */
+body.cardlib-open #overlay .photo-studio-v3 .clib-count small:first-child {
+  color:var(--studio-gold)!important;
+  letter-spacing:.22em;
+  margin-right:2px;
+}
 body.cardlib-open #overlay .photo-studio-v3 .clib-count b {
   color:var(--studio-gold-soft)!important;
   font:700 16px/1 ui-monospace,monospace!important;
 }
 body.cardlib-open #overlay .photo-studio-v3 .clib-count i { display:none; }
+/* 暗房红灯（批次四）：挂在 kicker 行首，筛选重排=暗房在冲洗，亮 900ms（JS 挂 .on）；
+   本体只动 opacity，光晕是 ::after 独立层也只动 opacity */
+body.cardlib-open #overlay .photo-studio-v3 .studio-lamp {
+  position:relative;
+  display:inline-block;
+  width:7px;
+  height:7px;
+  margin:0 9px 0 2px;
+  border-radius:50%;
+  vertical-align:1px;
+  background:radial-gradient(circle at 35% 30%, #b8837a, #7e2a22 62%, #571712);
+  box-shadow:0 0 0 1px rgba(0,0,0,.45);
+  opacity:.45;
+  transition:opacity .28s ease;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-lamp::after {
+  content:'';
+  position:absolute;
+  inset:-5px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(255,96,66,.6), transparent 70%);
+  opacity:0;
+  transition:opacity .28s ease;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-lamp.on { opacity:1; }
+body.cardlib-open #overlay .photo-studio-v3 .studio-lamp.on::after { opacity:1; }
 body.cardlib-open #overlay .photo-studio-v3 .library-head>.pg-close {
   grid-area:close;
   position:static!important;
@@ -691,7 +722,7 @@ body.cardlib-open #overlay .photo-studio-v3 .lib-item {
   border:0!important;
   content-visibility:auto;
   contain:layout style;
-  contain-intrinsic-size:auto 236px!important;
+  contain-intrinsic-size:auto 252px!important;
   perspective:760px;
   rotate:var(--photo-tilt,0deg);
   transition:transform .18s ease!important;
@@ -897,6 +928,30 @@ body.cardlib-open #overlay .photo-studio-v3 .studio-photo.rv-prism .photo-rarity
     0 1px 3px rgba(24,14,8,.4);
   text-shadow:0 1px 0 rgba(255,255,255,.55);
 }
+/* 显影入场（批次四）：首屏 24 格相纸盖一层暗房深色罩淡出，与 libItemIn 上浮并行——
+   「照片从显影液里浮出来」。只动 opacity；滚加载的新卡（25+ 格）不跑 */
+@keyframes libDevelop { from { opacity:1; } to { opacity:0; } }
+body.cardlib-open #overlay .photo-studio-v3 .lib-item:nth-child(-n+24) .studio-photo-paper::after {
+  content:'';
+  position:absolute;
+  inset:0;
+  z-index:6;
+  border-radius:inherit;
+  pointer-events:none;
+  background:linear-gradient(180deg,#2b1a10,#170d08);
+  animation:libDevelop .72s ease-out backwards!important;
+  animation-delay:calc(var(--i,0) * 26ms)!important;
+}
+/* 藏品编号（批次四）：白边下缘手写楷体小号，按 id 稳定哈希（JS photoNo） */
+body.cardlib-open #overlay .photo-studio-v3 .studio-photo-no {
+  display:block;
+  margin-top:2px;
+  color:#9a8d79;
+  font:12px/1.2 'KaiTi','STKaiti','BiauKai',serif;
+  font-style:normal;
+  letter-spacing:2px;
+  opacity:.8;
+}
 /* 卷角装饰已随拟物减法移除 */
 /* 悬停：整卡轻微前倾+落影加深，"拿起照片"的实体手感 */
 body.cardlib-open #overlay .photo-studio-v3 .lib-item:hover .studio-photo-paper,
@@ -1084,6 +1139,45 @@ body.cardlib-open #cardZoom .cz-hint {
   color:#b3a58c;
   letter-spacing:2.4px;
 }
+/* 快门白闪（批次四）：开大图一瞬的曝光闪光，只动 opacity。
+   cz-flash span 是 ui.js 无条件渲染的，其他入口无本段样式=透明无感 */
+@keyframes czFlash { 0% { opacity:0; } 12% { opacity:1; } 100% { opacity:0; } }
+body.cardlib-open #cardZoom .cz-flash {
+  position:absolute;
+  inset:0;
+  z-index:5;
+  pointer-events:none;
+  background:radial-gradient(circle at 50% 42%, rgba(255,246,224,.95), rgba(255,238,204,.72) 42%, transparent 74%);
+  animation:czFlash .5s ease-out .05s 1 both;
+}
+/* 长按大图 600ms 看底片（批次四彩蛋）：负片是一次性 class 切换（cz-neg，ui.js 挂），
+   非逐帧 filter 动画，不碰性能铁律 */
+body.cardlib-open #cardZoom.cz-neg .cz-card .hsc-art img {
+  filter:invert(1) hue-rotate(180deg) sepia(.12);
+}
+/* 背签存档章（批次四）：有馆方记录的背签右下角盖一枚斜红章（纯装饰，不挡输入） */
+body.cardlib-open #cardZoom .cz-note.has {
+  position:relative;
+}
+body.cardlib-open #cardZoom .cz-note.has::after {
+  content:'存档';
+  position:absolute;
+  right:16px;
+  bottom:12px;
+  width:44px;
+  height:44px;
+  display:grid;
+  place-items:center;
+  border:2px solid rgba(174,54,44,.55);
+  border-radius:50%;
+  color:rgba(174,54,44,.66);
+  font:700 12px/1 var(--serif);
+  letter-spacing:3px;
+  text-indent:3px;
+  transform:rotate(-9deg);
+  box-shadow:inset 0 0 0 1.5px rgba(174,54,44,.3);
+  pointer-events:none;
+}
 #cardZoom .cz-close:hover,
 #cardZoom .cz-close:focus-visible {
   color:#f4e3c2;
@@ -1176,7 +1270,6 @@ body.cardlib-open #overlay .photo-studio-v3 #libCls { border-left:2px solid rgba
     justify-self:start;
     border-left:0;
     padding-left:0;
-    grid-template-columns:auto auto auto auto;
     gap:6px;
   }
   body.cardlib-open #overlay .photo-studio-v3 .studio-filterbar {

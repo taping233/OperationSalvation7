@@ -162,6 +162,13 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
     return `<span>当前筛选</span>${filters.map(([key, label]) => `<button data-act="libRemoveFilter" data-filter="${key}" title="移除筛选：${escAttr(label)}">${esc(label)} ×</button>`).join('')}`;
   }
 
+  // 馆内藏品编号：按卡牌稳定 id 哈希成两位数，同一张卡每次进馆都是同一个号（批次四）
+  function photoNo(id) {
+    let h = 7;
+    for (let i = 0; i < id.length; i++) h = (h * 31 + id.charCodeAt(i)) >>> 0;
+    return 10 + h % 90;
+  }
+
   function photoTileHTML(c, index) {
     const rarity = SDT.Cards.rarityOf(c);
     const rarityIndex = Math.max(0, RARITIES.indexOf(rarity));
@@ -173,7 +180,7 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
         <span class="studio-photo-paper">
           <span class="studio-photo-art">${art}</span>
           <span class="studio-photo-cost" aria-label="费用 ${escAttr(cost)}">${esc(cost)}</span>
-          <span class="studio-photo-caption"><b>${esc(c.name || '未命名卡牌')}</b><small class="studio-photo-marks"><span class="photo-type-mark">${esc(c.type || '?')}</span><span class="photo-rarity-mark">${esc(rarity)}</span></small></span>
+          <span class="studio-photo-caption"><b>${esc(c.name || '未命名卡牌')}</b><small class="studio-photo-marks"><span class="photo-type-mark">${esc(c.type || '?')}</span><span class="photo-rarity-mark">${esc(rarity)}</span></small><i class="studio-photo-no" aria-hidden="true">№ ${photoNo(c.id)}</i></span>
         </span>
       </button>
     </div>`;
@@ -343,6 +350,13 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
         resultCount.classList.remove('bump');
         void resultCount.offsetWidth;
         resultCount.classList.add('bump');
+        // 暗房红灯：筛选重排=暗房在冲洗新一批照片，亮 900ms 后熄灭
+        const lamp = document.getElementById('libLamp');
+        if (lamp) {
+          lamp.classList.add('on');
+          clearTimeout(lamp._offTimer);
+          lamp._offTimer = setTimeout(() => lamp.classList.remove('on'), 900);
+        }
       }
     }
     const grid = document.getElementById('libGrid');
@@ -415,8 +429,8 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
     UI.showOverlay('', `
       <div class="pg card-library-page photo-studio-v3${libEditMode ? ' edit-mode' : ''}">
         <header class="pg-head library-head">
-          <div class="library-title"><span class="library-kicker">WINTER PHOTO STUDIO // 07</span><h2>[[icon:cards]] 照相馆</h2></div>
-          <span class="clib-count"><small>馆藏</small><b>${libCards.length}</b><i></i><small>当前陈列</small><b id="libResultCount">${libFiltered().length}</b></span>
+          <div class="library-title"><span class="library-kicker"><i class="studio-lamp" id="libLamp" aria-hidden="true"></i>WINTER PHOTO STUDIO // 07</span><h2>[[icon:cards]] 照相馆</h2></div>
+          <span class="clib-count"><small>第 07 卷</small><i></i><small>馆藏</small><b>${libCards.length}</b><small>陈列</small><b id="libResultCount">${libFiltered().length}</b></span>
           <button class="pg-close" data-act="closeCardPage" title="关闭（Esc）">[[icon:cross]]</button>
           <div class="library-tools"><label class="studio-search"><input id="cardSearch" class="clib-search" aria-label="搜索卡牌" placeholder="搜索卡名或效果…" value="${escAttr(libFilter.q)}"></label><select id="libSort" class="pg-select" title="排序"><option value="rarity"${libFilter.sort === 'rarity' ? ' selected' : ''}>按稀有度陈列</option><option value="cost"${libFilter.sort === 'cost' ? ' selected' : ''}>按费用排序</option><option value="name"${libFilter.sort === 'name' ? ' selected' : ''}>按名称排序</option></select>${editorTools}</div>
         </header>
@@ -457,6 +471,8 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
     });
     UI.act('libInspect', (d) => {
       const card = libCards.find(c => c.id === d.card);
+      // 快门声+白闪是照相馆的「取照片」仪式（sfx('shutter')，静音/音效开关由 Sound 统一把关）
+      SDT.Sound.sfx('shutter');
       // from=被点的卡面元素：特写从原位放大（FLIP），而非中央淡入
       if (card) UI.showCardZoom(card, {
         from: document.querySelector(`#libGrid .lib-cardwrap[data-card="${d.card}"]`),

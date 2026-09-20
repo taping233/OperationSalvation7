@@ -296,6 +296,12 @@ const battleBgm = new Howl({ src: [BATTLE_BGM_URL], loop: true, html5: false, pr
     // —— 祝福挂上/到期（P2#6）：上行三连=增益入手，下滑+碎裂=增益消失 ——
     buffUp:   () => [523, 659, 784].forEach((f, i) => tone({ f, type: 'triangle', dur: .12, vol: .04, delay: i * .06 })),
     buffDown: () => { tone({ f: 660, f2: 392, type: 'triangle', dur: .18, vol: .04 }); noise({ dur: .08, vol: .02, fHi: 1800, fLo: 600 }); },
+    // —— 照相馆快门（批次四）：帘幕开合双噪声脉冲 + 机械咔哒 ——
+    shutter: () => {
+      noise({ dur: .04, vol: .07, fHi: 3200, fLo: 900 });
+      noise({ dur: .05, vol: .05, fHi: 2400, fLo: 700, delay: .09 });
+      tone({ f: 1800, type: 'square', dur: .03, vol: .018, delay: .09 });
+    },
   };
   /* ---------- jsfxr 采样（程序化生成 wav，scripts/jsfxr-generate.cjs 可再生成）---------- */
   const JSFX_URLS = {

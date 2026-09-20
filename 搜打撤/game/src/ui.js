@@ -209,6 +209,7 @@ import { renderExpeditionPanel } from './expedition.view.js';
       el.setAttribute('aria-label', `${card.name || '卡牌'}大图与${noteLabel}`);
       el.tabIndex = -1;
       el.innerHTML = `<div class="cz-backdrop" aria-hidden="true"></div>
+        <span class="cz-flash" aria-hidden="true"></span>
         <button type="button" class="cz-close" aria-label="关闭卡牌大图">[[icon:cross]]</button>
         <div class="cz-card">${SDT.Cards.cardHTML(card, 'lg')}</div>
         ${noteHTML}
@@ -286,6 +287,16 @@ import { renderExpeditionPanel } from './expedition.view.js';
         else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
       }, true);
       document.body.appendChild(el);
+      // 彩蛋：长按大图 600ms「看底片」（挂 cz-neg，负片样式 scoped 在照相馆入口），松开恢复
+      const zoomCard = el.querySelector('.cz-card');
+      let negTimer = null;
+      const clearNeg = () => { clearTimeout(negTimer); el.classList.remove('cz-neg'); };
+      zoomCard?.addEventListener('pointerdown', () => {
+        clearTimeout(negTimer);
+        negTimer = setTimeout(() => el.classList.add('cz-neg'), 600);
+      });
+      ['pointerup', 'pointerleave', 'pointercancel'].forEach(ev =>
+        zoomCard?.addEventListener(ev, clearNeg));
       el.querySelector('.cz-close')?.focus({ preventScroll: true });
       // FLIP 起点终点都取布局口径（UiScale.rect）：dx/dy 喂 transform（布局值），zoom≠1 才不错位
       const fromR = opts.from && (opts.from.getBoundingClientRect ? SDT.UiScale.rect(opts.from) : opts.from);
