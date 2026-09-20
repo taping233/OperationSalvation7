@@ -928,20 +928,6 @@ body.cardlib-open #overlay .photo-studio-v3 .studio-photo.rv-prism .photo-rarity
     0 1px 3px rgba(24,14,8,.4);
   text-shadow:0 1px 0 rgba(255,255,255,.55);
 }
-/* 显影入场（批次四）：首屏 24 格相纸盖一层暗房深色罩淡出，与 libItemIn 上浮并行——
-   「照片从显影液里浮出来」。只动 opacity；滚加载的新卡（25+ 格）不跑 */
-@keyframes libDevelop { from { opacity:1; } to { opacity:0; } }
-body.cardlib-open #overlay .photo-studio-v3 .lib-item:nth-child(-n+24) .studio-photo-paper::after {
-  content:'';
-  position:absolute;
-  inset:0;
-  z-index:6;
-  border-radius:inherit;
-  pointer-events:none;
-  background:linear-gradient(180deg,#2b1a10,#170d08);
-  animation:libDevelop .72s ease-out backwards!important;
-  animation-delay:calc(var(--i,0) * 26ms)!important;
-}
 /* 藏品编号（批次四）：白边下缘手写楷体小号，按 id 稳定哈希（JS photoNo） */
 body.cardlib-open #overlay .photo-studio-v3 .studio-photo-no {
   display:block;
@@ -1139,16 +1125,17 @@ body.cardlib-open #cardZoom .cz-hint {
   color:#b3a58c;
   letter-spacing:2.4px;
 }
-/* 快门白闪（批次四）：开大图一瞬的曝光闪光，只动 opacity。
+/* 快门白闪（批次四，09-20 老板反馈收敛）：从全屏近纯白降到中心轻微曝光感，
+   峰值合成透明度 ~0.4 且快速向边缘衰减，只动 opacity。
    cz-flash span 是 ui.js 无条件渲染的，其他入口无本段样式=透明无感 */
-@keyframes czFlash { 0% { opacity:0; } 12% { opacity:1; } 100% { opacity:0; } }
+@keyframes czFlash { 0% { opacity:0; } 14% { opacity:.85; } 100% { opacity:0; } }
 body.cardlib-open #cardZoom .cz-flash {
   position:absolute;
   inset:0;
   z-index:5;
   pointer-events:none;
-  background:radial-gradient(circle at 50% 42%, rgba(255,246,224,.95), rgba(255,238,204,.72) 42%, transparent 74%);
-  animation:czFlash .5s ease-out .05s 1 both;
+  background:radial-gradient(circle at 50% 40%, rgba(255,244,214,.45), rgba(255,238,204,.24) 32%, transparent 60%);
+  animation:czFlash .42s ease-out .05s 1 both;
 }
 /* 长按大图 600ms 看底片（批次四彩蛋）：负片是一次性 class 切换（cz-neg，ui.js 挂），
    非逐帧 filter 动画，不碰性能铁律 */

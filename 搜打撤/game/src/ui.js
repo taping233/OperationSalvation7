@@ -193,7 +193,7 @@ import { renderExpeditionPanel } from './expedition.view.js';
       const noteLabel = opts.noteLabel || '备注';
       const notePlaceholder = opts.notePlaceholder || '点击这里写备注……';
       const noteHTML = opts.noteEditable ? `
-        <label class="cz-note has editable">
+        <label class="cz-note${note ? ' has' : ''} editable">
           <span class="cz-note-tag">[[icon:pen]] ${esc(noteLabel)}</span>
           <textarea class="cz-note-input" maxlength="240" rows="3" placeholder="${esc(notePlaceholder)}" aria-label="${esc(noteLabel)}">${esc(note)}</textarea>
           <span class="cz-note-status" aria-live="polite">${note ? '已存档' : '尚未撰写'}</span>
@@ -223,6 +223,8 @@ import { renderExpeditionPanel } from './expedition.view.js';
         if (!noteInput || typeof opts.onNoteSave !== 'function') return;
         const saved = opts.onNoteSave(noteInput.value);
         if (noteStatus) noteStatus.textContent = saved ? '已存档' : '尚未撰写';
+        // 存档章跟随真实内容（批次四：写空=章摘下，写了=章盖上）
+        el.querySelector('.cz-note')?.classList.toggle('has', !!(saved && noteInput.value.trim()));
       };
       if (noteInput) {
         noteInput.addEventListener('input', () => {
