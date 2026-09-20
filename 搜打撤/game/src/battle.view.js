@@ -379,21 +379,24 @@ const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!car
     // —— 道具栏（2026-09-12 老板定向）：战斗界面上方常驻，点击使用 / 拖到敌人身上 ——
     // 2026-09-09 玩法定版：BOSS 战没有道具栏（背包里的道具无法使用）
     // 09-20 P1-7：空道具时整栏隐藏——顶部不再常驻「背包里没有道具」占位
+    // 09-20 老板：药水说明不再挂系统 title（悬停延迟且触屏无效），改为自绘文字栏——
+    // 悬停 / 按下药水时在药水栏正下方弹出（data-potion-idx 对应 potions 数组下标）
     const potions = potionBar || [];
     const showItemBar = mode !== 'boss' && potions.length > 0;
     const potionsHTML = showItemBar ? `
       <div class="bt-potions">
         <span class="bt-potions-label">[[icon:flask]] 道具</span>
-        ${potions.length ? potions.map(p => p.usable === false
-          ? `<div class="bt-potion off" title="${escAttr(`${p.name} ×${p.count}：${p.desc}（不可使用——${p.why}）`)}">
+        ${potions.length ? potions.map((p, pi) => p.usable === false
+          ? `<div class="bt-potion off" data-potion-idx="${pi}">
               ${SDT.Icons.img('flask')}<b>${esc(p.name)}</b>${p.count > 1 ? `<span class="bt-potion-n">×${p.count}</span>` : ''}
             </div>`
           : `<div class="bt-potion${p.aim === 'enemy' ? ' need-target' : ''}" data-act="btPotion" data-uid="${p.uid}"
               ${p.aim === 'enemy' ? 'data-potion-aim="1"' : ''}
-              title="${escAttr(`${p.name} ×${p.count}：${p.desc}${p.aim === 'enemy' ? '（点击后选择敌人，或直接拖到敌人身上）' : '（点击直接使用）'}`)}">
+              data-potion-idx="${pi}">
               ${SDT.Icons.img('flask')}<b>${esc(p.name)}</b>${p.count > 1 ? `<span class="bt-potion-n">×${p.count}</span>` : ''}
             </div>`).join('')
           : '<span class="bt-potions-empty">背包里没有道具</span>'}
+        <div class="bt-potion-tip" data-potion-tip hidden></div>
       </div>` : '';
     const battleAssetKey = opts.isBoss
       ? ({ boss_general: 'battle-boss-general', boss_orc: 'battle-boss-orc', boss_elem: 'battle-boss-element' }[foes[0] && foes[0].id] || 'battle-boss-general')
@@ -551,6 +554,30 @@ const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!car
         if (uid) usePotion(uid);
       });
     });
+    // 药水自绘文字提示栏（09-20 老板：悬停 / 触摸药水即出说明，不用系统 title）——
+    // 挂在 .bt-potions 容器内贴药水栏正下方；触屏按下即显，松手收起（once 防残留）
+    const potionTip = body.querySelector('[data-potion-tip]');
+    if (potionTip) {
+      const showPotionTip = (p) => {
+        potionTip.innerHTML = p.usable === false
+          ? `${SDT.Icons.img('flask')} 【<b>${esc(p.name)} ×${p.count}</b>】${esc(p.desc)}（不可使用——${esc(p.why)}）`
+          : `${SDT.Icons.img('flask')} 【<b>${esc(p.name)} ×${p.count}</b>】${esc(p.desc)}${p.aim === 'enemy' ? '——点击或拖到敌人身上使用' : '——点击直接使用'}`;
+        potionTip.hidden = false;
+      };
+      const hidePotionTip = () => { potionTip.hidden = true; };
+      body.querySelectorAll('.bt-potion').forEach(el => {
+        const p = potions[Number(el.dataset.potionIdx)];
+        if (!p) return;
+        el.addEventListener('mouseenter', () => showPotionTip(p));
+        el.addEventListener('mouseleave', hidePotionTip);
+        el.addEventListener('pointerdown', (e) => {
+          if (e.button !== 0 && e.pointerType === 'mouse') return;
+          showPotionTip(p);
+          document.addEventListener('pointerup', hidePotionTip, { once: true });
+          document.addEventListener('pointercancel', hidePotionTip, { once: true });
+        });
+      });
+    }
     // —— 指向施法（炉石/杀戮尖塔式）：按住指向卡轻微拎起，弯曲箭头跟随指针 ——
     //    指向敌人 = 红色箭头，指向自己（立绘）= 绿色箭头；松手在目标身上即打出，
     //    松手没目标自动取消回手牌（轻点锁定流程已退役）。
