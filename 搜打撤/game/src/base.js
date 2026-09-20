@@ -39,6 +39,9 @@ import { DATA } from './data-loader.js';
   const carriedPet = () => petById(data.petSel) || null;
   const issues = {};   // 档位 -> 'corrupt' | 'tooNew'，供 UI 查询
   const rules = () => window.SDT.MAP.rules;
+  // 基地成长接音（迭代评审 09-20）：升级成功=levelup；base.js 无 UI/Sound 静态导入，
+  // 循 window.SDT 晚读惯例（同 :41 MAP），失败分支不播 deny（调用层 UI 已有 deny 职责）
+  const sfxLevelup = () => { if (window.SDT && window.SDT.Sound) window.SDT.Sound.sfx('levelup'); };
   // 「初始攻击」初始牌：能进消耗口袋（对局中复原用），但永远不入卡牌仓库
   const isSha = (card) => !!card && (card.id === 'starter-attack' ||
     (card.id === undefined && card.name === '初始攻击'));
@@ -58,7 +61,7 @@ import { DATA } from './data-loader.js';
       stash: [],      // 卡牌仓库 [{card, count}]——出发时自选携带；「初始攻击」不可入库
       pocket: [],     // 基地消耗口袋 [{card, count}]，用钥匙复原后才回仓库
       pets: {},       // 已拥有宠物 [宠物id] => { lv, ts }（宠物蛋孵化；初始宠物汪汪狗自动获得）
-      petSel: null,   // 当前携带的宠物 id（出发携带效果 / 保护格数量随之变化）
+      petSel: null,   // 当前携带的宠物 id（出发携带效果 / 安全格数量随之变化）
       collection: {}, // 收藏图鉴 [卡牌id] => { name, rarity, ts }（[[icon:sparkles]]收藏中的物品）
       // ---- 局外成长（v0.9 职业熟练度与成就） ----
       selMode: 'standard',    // 上次出发的玩法（standard / elite；旧档残留的 casual 读取时回落 standard）
@@ -189,13 +192,26 @@ import { DATA } from './data-loader.js';
     if (!data.petSel || !data.pets[data.petSel]) data.petSel = 'dog';
   }
 
+  // 写失败警示去重（迭代评审 09-20 G-P1）：失败连击只提示一次，成功即复位——
+  // 玩家腾出存储空间后的下一次失败会立即再报（有「已恢复」信号）
+  let saveWarned = false;
   function save() {
-    if (!slot) return;   // 未选档不落盘（标题界面的数据只读）
+    if (!slot) return true;   // 未选档不落盘（标题界面的数据只读）
     try {
       localStorage.setItem(SLOT_KEY(slot), JSON.stringify({ ...data, version: BASE_VERSION }));
       delete issues[slot];
+      saveWarned = false;
       try { localStorage.removeItem(CORRUPT_KEY(slot)); } catch (e) { /* 无关紧要 */ }
-    } catch (e) { /* 静默 */ }
+      return true;
+    } catch (e) {
+      // 写失败不再静默：仓库配额满时玩家以为卡牌已入库，重开档无声丢失。
+      // base.js 无 UI 静态导入，循 window.SDT 晚读惯例（同 rules()）
+      if (!saveWarned) {
+        saveWarned = true;
+        try { if (window.SDT && window.SDT.UI) window.SDT.UI.log('[[icon:cross]] 基地存档写入失败（存储空间可能已满），入库/升级可能未保存', 'warn'); } catch (e2) { /* 门面未就绪 */ }
+      }
+      return false;
+    }
   }
 
   // 重开档位：基地回到初始状态（覆盖开新档 / 空档开新档时调用）
@@ -295,6 +311,7 @@ import { DATA } from './data-loader.js';
     data.wood -= rules().bagUpgradeWood;
     data.bagUp++;
     save();
+    sfxLevelup();
     return true;
   }
 
@@ -303,6 +320,7 @@ import { DATA } from './data-loader.js';
     data.rations -= petUpCost(id);
     data.pets[id].lv = petLevel(id) + 1;
     save();
+    sfxLevelup();
     return true;
   }
 
@@ -316,6 +334,7 @@ import { DATA } from './data-loader.js';
     }
     data.stashUp++;
     save();
+    sfxLevelup();
     return true;
   }
 
@@ -328,6 +347,7 @@ import { DATA } from './data-loader.js';
     data.coins -= 5;
     data.nestBagUp = (data.nestBagUp || 0) + 1;
     save();
+    sfxLevelup();
     return true;
   }
 
@@ -386,7 +406,7 @@ import { DATA } from './data-loader.js';
   }
 
   // ---------- 宠物操作（需求 #2/#4）----------
-  // 携带宠物：出发携带效果与保护格数量随之切换
+  // 携带宠物：出发携带效果与安全格数量随之切换
   function setPet(id) {
     if (!data.pets[id]) return false;
     data.petSel = id;
@@ -495,9 +515,13 @@ import { DATA } from './data-loader.js';
   // ---------- 宝藏大门 ----------
   // 钥匙计数：真实钥匙储备 + 仓库里的钥匙类卡牌（「一串钥匙」= 2 把，其余钥匙 = 1 把）
   const KEY_NEEDED = 10;
+  // 钥匙计数（迭代评审 09-20 B-P1）：数量读 desc 的「×N」标记——「三把钥匙」「两把钥匙」
+  // 改名后按卡名/「一串」识别只计 1，与卡面「钥匙 ×3」矛盾；与 materialAmount 同款解析，
+  // 无 ×N 标记（「一把钥匙」）按 1 计；中文数词不参与解析（×N 只认数字，无 NaN 静默路径）
   const keyCount = () => (data.keys || 0) + data.stash.reduce((a, b) => {
     if (!/钥匙/.test(b.card.name || '')) return a;
-    return a + (/一串/.test(b.card.name) ? 2 : 1) * (b.count || 0);
+    const m = String(b.card.desc || '').match(/×\s*(\d+)/);
+    return a + (m ? +m[1] : 1) * (b.count || 0);
   }, 0);
 
   sdtDefine('Base', {

@@ -181,6 +181,11 @@ img[data-asset-key="card-martial-tt3-skewer"]{object-position:65% 60%!important}
 img[data-asset-key="card-martial-cmtn1i64j7y7"]{object-position:50% 35%!important}
 img[data-asset-key="card-martial-cmtn1wnhhym"]{object-position:50% 60%!important}
 img[data-asset-key="card-wu-myriadswords"]{object-position:50% 40%!important}
+/* 迭代评审批次（09-20 美术岗 P1）：构图异常存量补丁——细火线居中/船压顶部/剑修灰底占比小，
+   裁切窗拉回主体；全量构图清单与重裁排产见评审报告 */
+img[data-asset-key="card-spell-tt3-fireball"]{object-position:50% 42%!important}
+img[data-asset-key="card-spell-tt5-galaxy-voyage"]{object-position:50% 28%!important}
+img[data-asset-key="card-martial-tt7-swordimmortal"]{object-position:50% 38%!important}
 /* —— 自原 expedition-cards.css 保留的非皮肤条目（2026-09-12 删历史皮时并入）—— */
 .hs-card .hsc-art img[src*="expedition-starters"],.hs-card .hsc-art img[src*="wu-"]{object-position:50% 28%}
 .hs-card .hsc-kw span{background:#173444;border-color:#7b9ba54d;color:#b9d8de;border-radius:.2em}

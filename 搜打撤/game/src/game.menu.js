@@ -6,6 +6,11 @@ function createGameMenuController(deps) {
     hasRun, RunStorage, ensureBattleReady = async () => SDT.Battle,
   } = deps;
 
+  // 存储安全封装（迭代评审 09-20 G-P2）：隐私模式/配额满时裸调 localStorage 会抛异常，
+  // 设置页曾直接死按钮。本文件经 deps 注入、无静态导入，工具就地定义
+  const storeGet = (key, fallback = null) => { try { return localStorage.getItem(key) ?? fallback; } catch (e) { return fallback; } };
+  const storeSet = (key, val) => { try { localStorage.setItem(key, val); return true; } catch (e) { return false; } };
+
   // ---------- 标题界面 ----------
   // lobby = 非对局界面（标题/退出屏/基地）：隐藏左侧栏，画面更聚焦
   function setLobby(on) {
@@ -617,7 +622,12 @@ function createGameMenuController(deps) {
   function startNewGame() { openSlotPicker(); }
 
   function exitToTitle() {
-    if (!UI.el.overlay.hidden) return;   // 有弹窗（战斗/场景等）时不响应
+    // 迭代评审 09-20 客户端岗：守卫收窄不删——仅战斗未收尾时直接 return（不做「同步收战斗
+    // 再跳」：battle:end 异步续流会在标题页叠层）；触发点已全是脚本流（龙巢撤离/备战返回/选角退出），
+    // 人工入口早已改走 openLeaveMenu。immediate 同步关层消除 210ms 淡出窗口竞态（龙巢撤离死锁根因），
+    // 详见 ui.js hideOverlay——曾致撤离后卡巢穴图、可无限重刷 BOSS 奖励
+    if (game.battleActive) return;
+    UI.hideOverlay({ immediate: true });
     saveGame();   // 内部只在 runActive 时写档
     showTitle();
   }
@@ -709,11 +719,11 @@ function createGameMenuController(deps) {
         <div class="settings">
         <h3 class="set-h">[[icon:gear]] 通用 <span class="set-en">GENERAL</span></h3>
         <label class="chk"><input type="checkbox" id="setIndex" ${game.toggles.index ? 'checked' : ''}> 结点编号 <span class="set-en">NODE NUMBERS</span></label>
-        <label class="chk"><input type="checkbox" id="setHint" ${localStorage.getItem('sdt-hintbar') !== '0' ? 'checked' : ''}> 底部操作提示条 <span class="set-en">HINT BAR</span></label>
-        <label class="chk"><input type="checkbox" id="setBanner" ${localStorage.getItem('sdt-banner') !== '0' ? 'checked' : ''}> 环层横幅 <span class="set-en">LAYER BANNER</span></label>
+        <label class="chk"><input type="checkbox" id="setHint" ${storeGet('sdt-hintbar') !== '0' ? 'checked' : ''}> 底部操作提示条 <span class="set-en">HINT BAR</span></label>
+        <label class="chk"><input type="checkbox" id="setBanner" ${storeGet('sdt-banner') !== '0' ? 'checked' : ''}> 环层横幅 <span class="set-en">LAYER BANNER</span></label>
         <label class="chk"><input type="checkbox" id="setDev" ${game.devMode ? 'checked' : ''}> 开发者模式（测试工具 / 卡牌制作） <span class="set-en">DEVELOPER</span></label>
-        <label class="chk"><input type="checkbox" id="setShake" ${localStorage.getItem('sdt-reduce-shake') === '1' ? '' : 'checked'}> 屏幕震动反馈 <span class="set-en">SCREEN SHAKE</span></label>
-        <label class="chk"><input type="checkbox" id="setReduceMotion" ${localStorage.getItem('sdt-reduce-motion') === '1' ? 'checked' : ''}> 减少动态效果 <span class="set-en">REDUCE MOTION</span></label>
+        <label class="chk"><input type="checkbox" id="setShake" ${storeGet('sdt-reduce-shake') === '1' ? '' : 'checked'}> 屏幕震动反馈 <span class="set-en">SCREEN SHAKE</span></label>
+        <label class="chk"><input type="checkbox" id="setReduceMotion" ${storeGet('sdt-reduce-motion') === '1' ? 'checked' : ''}> 减少动态效果 <span class="set-en">REDUCE MOTION</span></label>
         <h3 class="set-h">[[icon:gear]] 音频 <span class="set-en">AUDIO</span></h3>
         <label class="chk"><input type="checkbox" id="setMusic" ${SDT.Sound.musicMuted ? '' : 'checked'}> 背景音乐 <span class="set-en">MUSIC</span></label>
         <label class="chk"><span>音乐来源 <span class="set-en">MUSIC SOURCE</span></span><select id="setMusicSource"><option value="scape" ${SDT.Sound.musicSource === 'scape' ? 'selected' : ''}>冬境声景</option><option value="original" ${SDT.Sound.musicSource === 'original' ? 'selected' : ''}>原有曲目</option></select></label>
@@ -765,27 +775,28 @@ function createGameMenuController(deps) {
     UI.act('closeSettings', () => { UI.hideOverlay(); game.state = prev === 'modal' ? 'idle' : prev; });
     // 勾选即时生效并同步侧边栏
     document.getElementById('setIndex').addEventListener('change', (e) => { game.toggles.index = e.target.checked; sync(); });
-    // 提示条 / 环层横幅开关（随 localStorage 持久化）
+    // 提示条 / 环层横幅开关（随 localStorage 持久化；写入走安全封装，配额满不抛异常）
     document.getElementById('setHint').addEventListener('change', (e) => {
-      localStorage.setItem('sdt-hintbar', e.target.checked ? '1' : '0');
+      storeSet('sdt-hintbar', e.target.checked ? '1' : '0');
       document.body.classList.toggle('no-hintbar', !e.target.checked);
     });
     document.getElementById('setBanner').addEventListener('change', (e) => {
-      localStorage.setItem('sdt-banner', e.target.checked ? '1' : '0');
+      storeSet('sdt-banner', e.target.checked ? '1' : '0');
       document.body.classList.toggle('no-banner', !e.target.checked);
     });
     document.getElementById('setDev').addEventListener('change', (e) => {
       game.devMode = e.target.checked;
-      localStorage.setItem('sdt-dev', e.target.checked ? '1' : '0');
+      storeSet('sdt-dev', e.target.checked ? '1' : '0');
       runtime.syncDevVisibility();
     });
     // 屏幕震动开关（无障碍；顿帧/音效/飘字不受影响，FX.shake 读取该键）
     document.getElementById('setShake').addEventListener('change', (e) => {
-      localStorage.setItem('sdt-reduce-shake', e.target.checked ? '0' : '1');
+      storeSet('sdt-reduce-shake', e.target.checked ? '0' : '1');
     });
     document.getElementById('setReduceMotion').addEventListener('change', (e) => {
-      localStorage.setItem('sdt-reduce-motion', e.target.checked ? '1' : '0');
+      storeSet('sdt-reduce-motion', e.target.checked ? '1' : '0');
       document.body.classList.toggle('reduce-motion', e.target.checked);
+      if (SDT.Motion?.refreshReduceMotion) SDT.Motion.refreshReduceMotion();   // 失效缓存（09-20 D-P3），下一次动画立即生效
     });
     // 音乐 / 音效独立开关（即时生效，随 localStorage 持久化）
     document.getElementById('setMusic').addEventListener('change', (e) => {

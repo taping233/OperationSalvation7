@@ -17,7 +17,7 @@ import { rect as uiRect, scale as uiScale } from './ui-scale.js';
 // 切帧才拉起渲染。document.hidden 时整体暂停。
 // 帧缺失容错：动作里某帧加载失败就跳过该帧；整个动作没帧则该动作不播（不罢工）。
 
-const HAS_FRAMES = new Set(['baiqi', 'lituan', 'shuangling']);
+const HAS_FRAMES = new Set(['changwuyu', 'baita', 'wu']);
 const FRAME_H = 760, FRAME_W = 512;        // 烘焙画布尺寸
 // 帧节奏：每动作总时长（ms），均分到实际存在的帧上——攻击快、施法舒展、呼吸慢循环
 const SEQ_MS = { idle: 2900, 'atk-wind': 320, 'atk-hit': 280, hurt: 420, cast: 800 };
@@ -204,7 +204,7 @@ function buildTimeline(trigger) {
   for (const a of seqNames) {
     const frames = cur.seqs.get(a);
     if (!frames || !frames.length) continue;   // 该动作没帧：跳过（如 cast 未交付时不播施法）
-    frames.forEach(f => { list.push(f); dur.push(SEQ_MS[a] / frames.length); });
+    frames.forEach(f => { list.push(f); dur.push(demoMs(SEQ_MS[a]) / frames.length); });   // demoMs：2× 档同步缩放攻击序列总时长（battle.pace.js）
   }
   return list.length ? { list, dur, loop: trigger === 'idle' } : null;
 }

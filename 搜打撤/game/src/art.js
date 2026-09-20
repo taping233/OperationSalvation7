@@ -93,6 +93,13 @@ import { PERFORMANCE_BUDGETS } from './performance-budgets.js';
       const im = new Image();
       im.decoding = 'async';
       im.onload = () => { try { im.decode?.()?.catch?.(() => {}); } catch (_) {} };
+      // 加载失败立即出池（迭代评审 09-20 D-P3）：404 图曾永居预热池上限且无字节记账，
+      // 资产缺失场景下预热池容量被无声侵占（字节尚未记账，无需扣减）
+      im.onerror = () => {
+        warmedUrls.delete(u);
+        const at = warmPool.indexOf(im);
+        if (at >= 0) { warmPool.splice(at, 1); im.__released = true; }
+      };
       im.src = u;
       if (retain) retainWarmed(im);
     }
@@ -182,18 +189,18 @@ import { PERFORMANCE_BUDGETS } from './performance-budgets.js';
 const rosterUrl = assetUrl('assets/portraits/expedition-roster.webp');
 // 个别角色配独立宽幅立绘（portraits/full/<角色id>.webp）：整张原图全图展示，不切远征队合影
 const FIGURE_FULL_ART = Object.freeze({
-  shuangling: 'portraits/full/shuangling.webp',
-  baiqi: 'portraits/full/baiqi.webp',
-  lituan: 'portraits/full/lituan.webp',
-  xuanli: 'portraits/full/xuanli.webp',
-  dengkui: 'portraits/full/dengkui.webp',
+  wu: 'portraits/full/wu.webp',
+  changwuyu: 'portraits/full/changwuyu.webp',
+  baita: 'portraits/full/baita.webp',
+  heixiang: 'portraits/full/heixiang.webp',
+  xingyue: 'portraits/full/xingyue.webp',
 });
 // 皮肤立绘（2026-09-19 老板令）：角色 id → 备选皮肤立绘（选人页可切换，会话内记忆不入存档）
 const SKIN_FULL_ART = Object.freeze({
-  shuangling: Object.freeze([
-    { id: 'casual', name: '春日·机车', file: 'portraits/full/shuangling-casual.webp' },
-    { id: 'spring', name: '新春·旗袍', file: 'portraits/full/shuangling-spring.webp' },
-    { id: 'beach', name: '盛夏·水枪', file: 'portraits/full/shuangling-beach.webp' },
+  wu: Object.freeze([
+    { id: 'casual', name: '春日·机车', file: 'portraits/full/wu-casual.webp' },
+    { id: 'spring', name: '新春·旗袍', file: 'portraits/full/wu-spring.webp' },
+    { id: 'beach', name: '盛夏·水枪', file: 'portraits/full/wu-beach.webp' },
   ]),
 });
 const activeSkins = {};   // classId -> skin id（未设置的用 default 主立绘）
@@ -208,19 +215,19 @@ function activeFigureFile(c) {
 }
 // 个别角色配 Q 版战斗头像（portraits/avatars/<角色id>.webp）：局内下边栏人物面板用
 const AVATAR_ART = Object.freeze({
-  shuangling: 'portraits/avatars/shuangling.webp',
-  baiqi: 'portraits/avatars/baiqi.webp',
-  lituan: 'portraits/avatars/lituan.webp',
-  xuanli: 'portraits/avatars/xuanli.webp',
-  dengkui: 'portraits/avatars/dengkui.webp',
+  wu: 'portraits/avatars/wu.webp',
+  changwuyu: 'portraits/avatars/changwuyu.webp',
+  baita: 'portraits/avatars/baita.webp',
+  heixiang: 'portraits/avatars/heixiang.webp',
+  xingyue: 'portraits/avatars/xingyue.webp',
 });
 // 战斗场景专用全身立绘：与角色选择页/档案立绘分开，保留战斗姿态和朝向。
 const BATTLE_ART = Object.freeze({
-  shuangling: 'portraits/battle/shuangling.webp',
-  baiqi: 'portraits/battle/baiqi.webp',
-  lituan: 'portraits/battle/lituan.webp',
-  xuanli: 'portraits/battle/xuanli.webp',
-  dengkui: 'portraits/battle/dengkui.webp',
+  wu: 'portraits/battle/wu.webp',
+  changwuyu: 'portraits/battle/changwuyu.webp',
+  baita: 'portraits/battle/baita.webp',
+  heixiang: 'portraits/battle/heixiang.webp',
+  xingyue: 'portraits/battle/xingyue.webp',
 });
 function characterArt(value, full=false, useDefault=false) {
  const c=characterFor(value); if(!c)return null;

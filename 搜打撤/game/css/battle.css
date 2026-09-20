@@ -64,6 +64,14 @@
   background-size:cover; background-position:center; }
 .battle-stage.sts .battle-stage-shade {
   background:linear-gradient(180deg,rgba(9,9,9,.32),rgba(9,9,9,.58) 55%,rgba(5,5,5,.9)); }
+/* 三首脑底图 tint 差分（迭代评审 09-20 美术岗）：过渡期四条底图统一 anime-v2 雪街后，
+   按首脑用独立 ::after 层叠色区分（不占 battle-stage-shade——它入场 2.4s 内会被 fx-dread
+   接管；data-asset-key 驱动有 scenes.css 既有先例）。z1 夹在 shade 与单位(z2)之间，pointer-events 关 */
+.battle-stage.sts { position:relative; }
+.battle-stage.sts::after { content:''; position:absolute; inset:0; z-index:1; pointer-events:none; opacity:0; transition:opacity .4s; }
+.battle-stage.sts[data-asset-key="battle-boss-general"]::after { opacity:1; background:linear-gradient(160deg, rgba(150,60,180,.2), rgba(30,10,50,.34) 70%); }
+.battle-stage.sts[data-asset-key="battle-boss-orc"]::after { opacity:1; background:linear-gradient(160deg, rgba(200,120,40,.18), rgba(60,25,8,.32) 70%); }
+.battle-stage.sts[data-asset-key="battle-boss-element"]::after { opacity:1; background:linear-gradient(160deg, rgba(70,160,220,.18), rgba(10,30,60,.32) 70%); }
 
 /* —— 场地：单位分立两侧、站在场地下方 —— */
 .sts-arena { flex:1; position:relative; min-height:clamp(220px,42vh,620px); }
@@ -144,11 +152,36 @@
   box-shadow:0 0 8px rgba(236,210,138,.3); }
 .sts-equip.has-skill:hover { background:rgba(58,48,22,.85); transform:translateY(-1px); }
 .sts-equip.has-skill.used { cursor:default; filter:grayscale(.8) brightness(.7); box-shadow:none; }
-/* 意图气泡（敌头顶） */
-.sts-intent { position:absolute; left:50%; top:-36px; transform:translateX(-50%); white-space:nowrap; z-index:3;
-  padding:3px 12px; border:1px solid #8f8f8f; border-radius:999px; background:rgba(12,12,12,.9);
-  color:#e3e3e3; font-size:12px; box-shadow:0 3px 10px rgba(0,0,0,.55); }
+/* 意图气泡（敌头顶）。迭代评审 09-20：意图详情并入气泡常驻文本后 nowrap 会在多敌横排时
+   互相压盖，改为允许两行折行（去前缀的实算段+流血角标），胶囊半径随之收紧 */
+.sts-intent { position:absolute; left:50%; top:-36px; transform:translateX(-50%); white-space:normal; z-index:3;
+  padding:3px 12px; border:1px solid #8f8f8f; border-radius:12px; background:rgba(12,12,12,.9);
+  color:#e3e3e3; font-size:12px; line-height:1.45; text-align:center; box-shadow:0 3px 10px rgba(0,0,0,.55); }
 .sts-intent .ic { width:13px; height:13px; vertical-align:-0.2em; }
+/* 敌方名牌两行化（迭代评审 09-20 美术岗）：名行 flex 化、攻击小徽右对齐（stats 行空即隐）；
+   玩家名牌三行维持——equips 是老板定版的可点击技能按钮，不参与收纳 */
+.sts-foe .sts-headrow { display:flex; align-items:center; gap:5px; }
+.sts-foe .sts-headrow b { flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; text-align:left; }
+.sts-atkbadge { display:inline-flex; align-items:center; gap:2px; flex:0 0 auto; font-size:11px; font-weight:400; color:#d8d8d8; }
+.sts-atkbadge .ic { width:11px; height:11px; }
+.sts-foe .sts-stats:empty { display:none; }
+/* 对战开始时装备卡浮现（2026-09-16 老板定版；09-20 评审补齐缺失样式——此前裸 div 挂 body 无样式不可见）：
+   fixed 居中横排、pointer-events:none 不挡操作；卡体复用 cardHTML('sm') v3 制式，
+   入场 spring 缩放 2s 后 fade-out 上浮；reduced-motion 退化为纯淡入淡出 */
+.bt-start-equip-flash { position:fixed; inset:0; z-index:900; display:flex; align-items:center; justify-content:center; gap:18px; pointer-events:none; }
+.bt-start-equip-card { position:relative; display:inline-block; filter:drop-shadow(0 12px 30px rgba(0,0,0,.6));
+  animation:btEquipIn .5s var(--ease-spring, cubic-bezier(.34,1.56,.64,1)) both; }
+.bt-start-equip-card .hs-card { box-shadow:0 6px 24px rgba(0,0,0,.55); }
+.bt-start-equip-label { position:absolute; left:50%; bottom:-24px; transform:translateX(-50%); white-space:nowrap;
+  padding:1px 10px; border-radius:999px; font-size:12px; color:#ffeec2; background:rgba(20,18,12,.85);
+  border:1px solid rgba(236,210,138,.7); }
+.bt-start-equip-flash.fade-out { animation:btEquipOut .6s ease both; }
+@keyframes btEquipIn { from { opacity:0; transform:scale(.8); } to { opacity:1; transform:scale(1.06); } }
+@keyframes btEquipOut { from { opacity:1; transform:translateY(0); } to { opacity:0; transform:translateY(-14px); } }
+@media (prefers-reduced-motion: reduce) {
+  .bt-start-equip-card { animation:btEquipInReduce .01s both; }
+  @keyframes btEquipInReduce { from, to { opacity:1; } }
+}
 /* 目标/状态高亮（拖拽指向、可选中、免伤、死亡） */
 #overlay .battle-stage.sts .sts-unit.can-target { cursor:pointer; }
 .sts-unit.can-target .sts-figure { filter:drop-shadow(0 0 15px rgba(225,225,225,.7)); }
@@ -249,9 +282,9 @@
   #overlay .battle-stage.sts .sts-foe.is-boss { width:clamp(160px,23vw,210px); }
   .sts-foes { left:36%; right:3%; gap:6px; }
 }
-/* 右侧敌人意图气泡贴边被裁剪：容器留出呼吸空间，气泡单行不换行 */
+/* 右侧敌人意图气泡贴边被裁剪：容器留出呼吸空间；折行上限 170%（单行→两行） */
 .sts-foes { padding-right:14px; }
-.sts-intent { max-width:150%; }
+.sts-intent { max-width:170%; }
 /* v0.32.1 修：能量球数字与 /上限 重叠、手牌底部被截断 */
 .sts-energy .ic { position:absolute; top:8px; left:14px; }
 .sts-energy { flex-direction:row; align-items:baseline; padding-top:12px; }

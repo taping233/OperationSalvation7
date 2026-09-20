@@ -333,7 +333,10 @@ function requestClassChoice(options) {
 
   // ---------- 存档（五档位，互相独立；基地数据也按档位隔离，见 base.js） ----------
   let activeSlot = null;                // 当前游玩的档位（1..5），标题界面为 null
-  let saveFailedWarned = false;         // 写档失败只警示一次，避免每次落盘刷屏
+  // 读档数值归一化（迭代评审 09-20 G-P2）：Number.isFinite 强转——0 是合法值不能用 || 兜底
+  //（会吃掉 0 币/0 血），缺失/NaN/类型异常回退默认，防 undefined 进血条全线 NaN、hp 缺失恒假打不死
+  const numOr = (v, d) => { const n = +v; return Number.isFinite(n) ? n : d; };
+  let lastSaveFailWarnAt = 0;           // 写档失败警示 30s 节流（迭代评审 09-20 G-P3）：成功落盘即复位
 
   const hasRun = (i) => RunStorage.has(i);                            // 该档有进行中的对局
   const hasSlot = (i) => hasRun(i) || SDT.Base.hasSlot(i);           // 该档位已被创建
@@ -391,12 +394,17 @@ function requestClassChoice(options) {
         nestTargetedBox: game.nestTargetedBox || 0,
         pendingRunePick: game.pendingRunePick || null,
       });
-    if (!ok && !saveFailedWarned) {
-      // 写失败（典型：localStorage 配额满，五档对局+基地+留言共约 5MB）不提示
-      // 就是无声丢档。只警示一次，玩家处置后同会话内不再刷屏。
-      saveFailedWarned = true;
-      UI.log('[[icon:cross]] 对局存档写入失败（存储空间可能已满），进度未被保存——请导出存档或删除旧档位', 'warn');
-      console.error('[save] RunStorage.write 失败：对局进度未落盘（配额满或存储不可用）');
+    if (!ok) {
+      // 写失败（典型：localStorage 配额满，五档对局+基地+留言共约 5MB）不提示就是无声丢档。
+      // 30s 节流+成功复位（迭代评审 09-20 G-P3）：处置前持续丢进度有感知、腾出空间后立即恢复提醒
+      const now = Date.now();
+      if (now - lastSaveFailWarnAt >= 30_000) {
+        lastSaveFailWarnAt = now;
+        UI.log('[[icon:cross]] 对局存档写入失败（存储空间可能已满），进度未被保存——请导出存档或删除旧档位', 'warn');
+        console.error('[save] RunStorage.write 失败：对局进度未落盘（配额满或存储不可用）');
+      }
+    } else {
+      lastSaveFailWarnAt = 0;   // 成功落盘=已恢复，下次失败立即提示（节流不吞「已恢复」后的第一次告警）
     }
   }
 
@@ -458,9 +466,10 @@ function requestClassChoice(options) {
     else if (bi === 'tooNew') UI.log('[[icon:cross]] 该档位基地数据来自更新版本的游戏，已以空档案启动', 'warn');
     game.runActive = true;
     setLobby(false);      // 直接回到棋盘上的对局：恢复左侧栏
-    game.hp = s.hp; game.maxHp = s.maxHp || MAP.rules.playerMaxHp;
-    game.atk = s.atk || MAP.rules.playerAtk;
-    game.coins = s.coins; game.turn = s.turn || 1;
+    game.hp = numOr(s.hp, MAP.rules.playerMaxHp);   // 归一化（09-20）：迁移链之后执行，坏字段回退默认
+    game.maxHp = numOr(s.maxHp, MAP.rules.playerMaxHp);
+    game.atk = numOr(s.atk, MAP.rules.playerAtk);
+    game.coins = numOr(s.coins, 0); game.turn = numOr(s.turn, 1);
     game.mode = MODES[s.mode] ? s.mode : 'standard';
     game.myClass = s.myClass || null;
     game.characterId = s.characterId || null;

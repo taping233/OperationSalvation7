@@ -95,13 +95,15 @@ function writeThumbManifest() {
   console.log(`[assets] thumb manifest: ${files.length} images -> ${path.relative(ROOT, target)}`);
 }
 
-// 构建版本号：取 version.json 的版本 + 当前时间戳，供 assetUrl() 做资产缓存失效
+// 构建版本号（迭代评审 09-20 D-P2）：只取 version.json 的版本号，不再拼 Date.now()——
+// 时间戳会让每次构建的全部资产 URL 变更，频繁构建下等效全量缓存失效；
+// 版本随发版推进即失效，查询参数由 copyStatic.closeBundle 的产物级重写统一补齐
 function buildVersion() {
   try {
     const { version } = JSON.parse(readFileSync(path.join(GAME_ROOT, 'version.json'), 'utf8'));
-    return `${version}.${Date.now()}`;
+    return `${version}`;
   } catch {
-    return `dev.${Date.now()}`;
+    return 'dev';
   }
 }
 
@@ -139,6 +141,7 @@ function copyStatic() {
         if (existsSync(source)) copyDir(source, path.join(OUT_DIR, 'assets', relativeDir));
       }
       writeFileSync(path.join(OUT_DIR, 'version.json'), readFileSync(path.join(GAME_ROOT, 'version.json')));
+      patchAssetVersions();
       // 哨兵：正常构建产出 1 个入口 + 1 个异步 index chunk（共 2 个）；更多说明旧产物未清掉
       const jsDir = path.join(OUT_DIR, 'assets', 'js');
       if (existsSync(jsDir)) {
@@ -149,6 +152,33 @@ function copyStatic() {
       }
     },
   };
+}
+
+// 产物级静态资产缓存失效（迭代评审 09-20 D-P1/P2）：构建完成后重写 OUT_DIR 内的 JS/CSS，
+// 给静态资产引用统一补 ?v=<version.json 版本>。只命中两种模式（引擎岗 R2 终裁口径）——
+//   ① JS 内 new URL("assets/…") 字面量（Vite 打包后的静态引用）
+//   ② CSS 内 url(…assets/…)
+// 其余字符串（含运行时经 assetUrl() 自拼 ?v= 的 RUNTIME 路径）一律不碰，避免双版本参数；
+// 版本号取 version.json（无时间戳），随发版推进即失效，频繁构建不产生缓存抖动。
+function patchAssetVersions() {
+  const version = buildVersion();
+  const JS_RE = /new URL\((['"])(\.\/)?(assets\/[^'"]+?\.(?:webp|png|jpe?g|gif|svg|mp3|ogg|wav))\1/g;
+  const CSS_RE = /url\((['"]?)([^)'"]*?assets\/[^)'"]+?\.(?:webp|png|jpe?g|gif|svg|mp3|ogg|wav|woff2?|ttf))\1\)/g;
+  const walk = (dir) => {
+    for (const e of readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, e.name);
+      if (e.isDirectory()) { walk(full); continue; }
+      if (!/\.(js|css)$/.test(e.name)) continue;
+      const isCss = e.name.endsWith('.css');
+      const before = readFileSync(full, 'utf8');
+      const after = isCss
+        ? before.replace(CSS_RE, (m, q, p) => p.includes('?v=') ? m : `url(${q}${p}?v=${version}${q})`)
+        : before.replace(JS_RE, (m, q, dot, p) => p.includes('?v=') ? m : `new URL(${q}${dot || ''}${p}?v=${version}${q}`);
+      if (after !== before) { writeFileSync(full, after); }
+    }
+  };
+  walk(OUT_DIR);
+  console.log(`[assets] asset URLs versioned: ?v=${version}`);
 }
 
 export default defineConfig({
@@ -173,11 +203,12 @@ export default defineConfig({
         entryFileNames: 'assets/js/[name]-[hash].js',
         chunkFileNames: 'assets/js/[name]-[hash].js',
         assetFileNames: assetFileName,
-        // 大依赖各自成 chunk：主入口回到 500kB 以下，且库不升级时哈希稳定利于缓存
+        // 大依赖各自成 chunk：主入口回到 500kB 以下，且库不升级时哈希稳定利于缓存。
+        // three 分支删除（迭代评审 09-20 D-P3）：three 为死依赖已移除，规则永不命中徒增误导
         manualChunks(id) {
-          if (/[\\/]node_modules[\\/](three|pixi\.js|@pixi)[\\/]/.test(id)) return 'vendor-render';
+          if (/[\\/]node_modules[\\/](pixi\.js|@pixi)[\\/]/.test(id)) return 'vendor-render';
           if (/[\\/]node_modules[\\/]inkjs[\\/]/.test(id)) return 'vendor-narrative';
-          if (/[\\/]node_modules[\\/](howler|motion|sortablejs)[\\/]/.test(id)) return 'vendor-runtime';
+          if (/[\\/]node_modules[\\/](howler|motion)[\\/]/.test(id)) return 'vendor-runtime';
         },
       },
     },

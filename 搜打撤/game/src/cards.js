@@ -62,7 +62,7 @@ import { DATA } from './data-loader.js';
   const TT10_KEY = 'sdt-cards-tt10-v2-seeded';   // 第十批：设计者实机定版同步（2026-09-07 双向合并）；v2：清掉合并残留的错误词条（能力卡 armor:5 等）并重播覆盖一次
   const TT11_KEY = 'sdt-cards-tt11-v5-seeded';   // 第十一批：与设计者实机卡库导出完全对齐（2026-09-09 老板拍板，见 TABLETOP11 注释）；v2：法力补给补 cls=法师（白塔专属）；v3：不变应万变补 cls=侠客（无专属，老板 2026-09-12 拍板）；v4：恶魔之力补 cls=牧师（星月专属，老板 2026-09-13 拍板）；v5：恶魔之力 tt7-drunksong 整卡退役（老板 2026-09-13 改拍板删除，同名双版收口只留 cc-demon）——均换 key 重播让旧档拿到
   const ITEM_RENAME_KEY = 'sdt-cards-item-renames-v1'; // 2026-09-08：道具定名 + 金创药/金疮药合并
-  const EVENTS_0919_KEY = 'sdt-events-0919-v1-seeded'; // 2026-09-19：都市污染事件池（10 旧事件改名 + 9 新事件）
+  const EVENTS_0919_KEY = 'sdt-events-0919-v2-seeded'; // 2026-09-19：都市污染事件池（10 旧事件改名 + 9 新事件）；v2：熔断双箱/隧道血契 desc 对齐实装口径（迭代评审 09-20 B-P0/P2）
   // 第十批退役：同设计重复 id（设计者实机已把同名卡定版在旧 id 上，见 TABLETOP10 尾部注释）
   const RETIRE_TT10 = ['tt3-freeze', 'tt3-flame-potion', 'tt3-toxic-potion', 'tt3-bleed-potion'];
   // 第十一批退役（2026-09-09 对齐设计者实机）：仓库独有、设计者实机没有的 39 张。
@@ -95,14 +95,14 @@ import { DATA } from './data-loader.js';
     // 类型到位图图标名（卡面插画与页签用；TYPE_ICON 保留给纯文本场景）
     TYPE_ART: { '武术': 'swords', '法术': 'sparkles', '生物': 'paw', '道具': 'flask', '装备': 'shield', '事件': 'question', '能力卡': 'helmet', '资源': 'wood' },
     EVENTS_0919: [
-      { id: 'tt6-demondeal', name: '隧道血契', cost: 0, rarity: '衍生', type: '事件', desc: '-5 血，获得 1 个大宝箱。', value: 0, sellable: false, unrandom: true },
+      { id: 'tt6-demondeal', name: '隧道血契', cost: 0, rarity: '衍生', type: '事件', desc: '-5 血，获得 1 个军用保险柜。', value: 0, sellable: false, unrandom: true },
       { id: 'tt6-bandits', name: '暴雨劫道', cost: 0, rarity: '衍生', type: '事件', battle: true, desc: '反抗组织拾荒者 ×3~5（随层数增加）。奖励：密封物资箱 ×2。', value: 0, sellable: false, unrandom: true },
       { id: 'tt6-mystery', name: '实验室余粮', cost: 0, rarity: '衍生', type: '事件', desc: '获得员工通行证A碎片，+2 币。', value: 0, sellable: false, unrandom: true },
       { id: 'tt6-goldmine', name: '塌方采掘点', cost: 0, rarity: '衍生', type: '事件', desc: '稳妥取走 3 币，或冒险深挖获得 6 币并损失 3 血。', value: 0, sellable: false, unrandom: true },
       { id: 'tt6-goldhammer', name: '满电动力锤', cost: 0, rarity: '衍生', type: '事件', desc: '获得卡牌「闪金之锤」。', value: 0, sellable: false, unrandom: true },
       { id: 'tt6-relief', name: '临时救护站', cost: 0, rarity: '衍生', type: '事件', desc: '回复 6 点生命。', value: 0, sellable: false, unrandom: true },
       { id: 'tt6-airdrop', name: '污染空投箱', cost: 0, rarity: '衍生', type: '事件', desc: '从木材、口粮、能量饮料、随机药水中选择一项。', value: 0, sellable: false, unrandom: true },
-      { id: 'tt6-chestdraw', name: '熔断双箱', cost: 0, rarity: '衍生', type: '事件', desc: '从小型与密封物资箱中选择 1 个开启。', value: 0, sellable: false, unrandom: true },
+      { id: 'tt6-chestdraw', name: '熔断双箱', cost: 0, rarity: '衍生', type: '事件', desc: '从大、中、小宝箱中随机抽取 1 个开启。', value: 0, sellable: false, unrandom: true },
       { id: 'tt6-systemsupply', name: '末班配送无人机', cost: 0, rarity: '衍生', type: '事件', desc: '获得员工通行证A碎片和木材卡 ×1。', value: 0, sellable: false, unrandom: true },
       { id: 'cmtn7qttxqo4', name: '巷口修鞋匠', cost: 0, rarity: '衍生', type: '事件', desc: '获得员工通行证A碎片；复原 1 张卡牌。', value: 0, sellable: false, unrandom: true },
       { id: 'ev19-vital', name: '高压急救', cost: 0, rarity: '衍生', type: '事件', desc: '生命上限 +3，并回复 3 点生命。', value: 0, sellable: false, unrandom: true },
@@ -1009,7 +1009,12 @@ import { DATA } from './data-loader.js';
       return _cardsCache;
     },
 
-    saveAll(cards) { _cardsCache = cards; localStorage.setItem(KEY, JSON.stringify(cards)); },
+    // 写入走安全封装（迭代评审 09-20 G-P2）：配额满时裸写曾抛未捕获异常、卡牌设计器无声失败
+    saveAll(cards) {
+      _cardsCache = cards;
+      try { localStorage.setItem(KEY, JSON.stringify(cards)); return true; }
+      catch (e) { console.error('[cards] 自定义卡库保存失败（存储空间可能已满）：', e); return false; }
+    },
 
     upsert(card) {
       const cards = SDT.Cards.all();

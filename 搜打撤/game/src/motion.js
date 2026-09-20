@@ -17,17 +17,23 @@ function syncReducedMotionClass(reduced) {
   }
 }
 
+// 结果缓存（迭代评审 09-20 D-P3）：此前每次动画创建都同步读 localStorage+matchMedia+classList。
+// 缓存经 refreshReduceMotion() 失效——媒体查询 change 与设置页「减少动态效果」开关都会调它
+let cachedReducedMotion = null;
 const reduceMotion = () => {
+  if (cachedReducedMotion !== null) return cachedReducedMotion;
   let mediaQuery = null;
   try { mediaQuery = window.matchMedia?.('(prefers-reduced-motion: reduce)') || null; } catch (_) {}
   const reduced = resolveReducedMotion(typeof localStorage === 'undefined' ? null : localStorage, mediaQuery);
   syncReducedMotionClass(reduced);
+  cachedReducedMotion = reduced;
   return reduced;
 };
+const refreshReduceMotion = () => { cachedReducedMotion = null; reduceMotion(); };
 reduceMotion();
 try {
   const mediaQuery = window.matchMedia?.('(prefers-reduced-motion: reduce)');
-  mediaQuery?.addEventListener?.('change', () => reduceMotion());
+  mediaQuery?.addEventListener?.('change', () => refreshReduceMotion());
 } catch (_) { /* Media query is optional; the local setting remains available. */ }
 const canAnimate = element => element && typeof element.animate === 'function' && !reduceMotion();
 const activeHits = new WeakMap();
@@ -64,6 +70,6 @@ function hit(element, self = false) {
   return true;
 }
 
-SDT.Motion = Object.freeze({ pop, overlayIn, hit, reduceMotion });
+SDT.Motion = Object.freeze({ pop, overlayIn, hit, reduceMotion, refreshReduceMotion });
 
-export { hit, overlayIn, pop, reduceMotion, resolveReducedMotion };
+export { hit, overlayIn, pop, reduceMotion, refreshReduceMotion, resolveReducedMotion };

@@ -15,6 +15,7 @@ import { IMMEDIATE_SCENES, NODE_BG, PICKUP_BG, PRELOAD_SCENES, SCENES, SCENE_MET
 import { Random } from './random.js';
 import { createShopController } from './game.run.shop.js';
 import { startBattle } from './battle-loader.js';
+import { setBagReturnHook } from './bag-return-hook.js';
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const SDT = window.SDT;
 const UI = window.SDT.UI;
@@ -200,6 +201,9 @@ export function finishInstant() {
 const PICKUP_SEARCH_MS = 950;
 export function openPickupPage(kind, gain, onDone) {
   const f = SCENES[kind];
+  // 来源页恢复（迭代评审 09-20 C-P1）：背包盖开再关后重放本页——搜索动画与揭晓重来，
+  // 但 onDone 只会经 pickupGo 触发一次，奖励不再因关背包被吞（此前发奖仅 pickupGo 一个入口）
+  setBagReturnHook(() => openPickupPage(kind, gain, onDone));
   nodeShell({ tone: 'pickup', asset: PICKUP_BG[kind], icon: f.icon, title: f.title,
     sub: pick(f.lines),
     body: `<div class="pick-search">
@@ -217,7 +221,7 @@ export function openPickupPage(kind, gain, onDone) {
     const go = main.querySelector('[data-act="pickupGo"]');
     if (go) go.focus({ preventScroll: true });
   }, PICKUP_SEARCH_MS);
-  UI.act('pickupGo', () => { UI.hideOverlay(); onDone(); });
+  UI.act('pickupGo', () => { setBagReturnHook(null); UI.hideOverlay(); onDone(); });
 }
 
 // ---------- 遭遇组建（设计者 2026-09-02 定版：按环层抽怪，1-3 只，越内层越强） ----------

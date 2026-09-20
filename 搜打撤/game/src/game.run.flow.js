@@ -10,6 +10,7 @@ import { _set_cardPageOpen } from './game.cardslib.js';
 import { EVENT_SCENE_META } from './game.run.data.js';
 import { Random } from './random.js';
 import { eventNarrative } from './narrative.js';
+import { setBagReturnHook } from './bag-return-hook.js';
 import { startBattle } from './battle-loader.js';
 import { renderScheduler } from './render-scheduler.js';
 import { buildEncounter, cancelLegacyChainMove, enterNode, finishInstant, grantEventCard, nodeShell, openBattleCell, openBlankSafePage, openChestsOnCell, openPickupPage, openPocketRestore, openShop, preloadCellScene } from './game.run.scenes.js';
@@ -270,6 +271,9 @@ export function runEventDeck() {
     if (ev.coins) { UI.log(`【事件】${ev.text}`, 'sys'); gainCoins(ev.coins[0] + Math.floor(Random.random('event') * (ev.coins[1] - ev.coins[0] + 1))); }
     else if (ev.item) { UI.log(`【事件】${ev.text}`, 'sys'); game.addItem(pick(MAP.chestTable)); }
     else UI.log(`【事件】${ev.text}`, 'dim');
+    // 旧随机表没有事件页收尾点：不补 finishInstant 会把格子永久卡在 moving（迭代评审 09-20 C-P2，
+    // 设置页「清空卡牌库」后踩事件格必现）
+    finishInstant();
     return;
   }
   return triggerEventCard(pick(deck));
@@ -288,7 +292,10 @@ async function triggerEventCard(card) {
   game.state = 'modal';
   _set_cardPageOpen(false);
   SDT.Sound.sfx('scene');
-  const narrative = await eventNarrative(card.id);
+  // ink 运行时异常兜底（迭代评审 09-20 C-P2）：此前 await 抛错会永久卡 modal（事件页永不渲染、仅按 B 可解）
+  let narrative = null;
+  try { narrative = await eventNarrative(card.id); }
+  catch (e) { console.error('[event] ink 叙事运行异常，回落默认结算：', e); }
   const choices = eventChoiceSpec(card, narrative);
   // 2026-09-10 留言 #18：没有专属图的事件此前全部回落到祭坛图（等于所有事件共用 1 张背景）。
   // 改为从 3 张事件场景图中随机轮换（scene-event-custom-a/b/c，见 css/scenes.css）。
@@ -303,29 +310,39 @@ async function triggerEventCard(card) {
           ${o.detail ? `<span>${esc(o.detail)}</span>` : ''}
         </button>`).join('')
     : `<button class="evt-opt ok" data-act="evtNext"><b>获取并离开</b></button>`;
-  nodeShell({
-    tone: 'event', asset: sceneMeta[2], icon: '[[icon:dice]]', title: card.name,
-    sub: esc((narrative && narrative.intro) || card.desc || '神秘事件发生了……'),
-    body: optHTML,
-  });
+  // 事件页渲染收敛为可重入闭包（迭代评审 09-20 C-P1 来源恢复协议）：背包盖开再关后经
+  // bag-return-hook 重放本闭包恢复事件页——选项进度由外层 evtSettled 保全，不再吞结算；
+  // 每次渲染都重新登记钩子（被消费后再次开背包仍有保护），结算时显式清空
   let evtSettled = false;   // 防连点：事件选项二次触发会重复发奖（2026-09-13 实测连点3次入包2张）
-  UI.act('evtChoice', (d) => {
-    if (!choices || evtSettled) return;
-    const choice = choices[+d.i];
-    if (!choice) return;
-    evtSettled = true;
-    UI.hideOverlay();
-    choice.run();
-    if (game.state !== 'modal') finishInstant();   // 选项未自开新页时兜底收尾（幂等）
-  });
-  UI.act('evtNext', () => {
-    if (choices || evtSettled) return;
-    evtSettled = true;
-    UI.hideOverlay();
-    applyEventEffect(card);
-    if (game.state !== 'modal') finishInstant();   // 同上（旧事件 default 分支此前漏收尾）
-  });
-  UI.refresh(game);
+  const renderEventPage = () => {
+    if (evtSettled) return;
+    setBagReturnHook(renderEventPage);
+    nodeShell({
+      tone: 'event', asset: sceneMeta[2], icon: '[[icon:dice]]', title: card.name,
+      sub: esc((narrative && narrative.intro) || card.desc || '神秘事件发生了……'),
+      body: optHTML,
+    });
+    UI.act('evtChoice', (d) => {
+      if (!choices || evtSettled) return;
+      const choice = choices[+d.i];
+      if (!choice) return;
+      evtSettled = true;
+      setBagReturnHook(null);
+      UI.hideOverlay();
+      choice.run();
+      if (game.state !== 'modal') finishInstant();   // 选项未自开新页时兜底收尾（幂等）
+    });
+    UI.act('evtNext', () => {
+      if (choices || evtSettled) return;
+      evtSettled = true;
+      setBagReturnHook(null);
+      UI.hideOverlay();
+      applyEventEffect(card);
+      if (game.state !== 'modal') finishInstant();   // 同上（旧事件 default 分支此前漏收尾）
+    });
+    UI.refresh(game);
+  };
+  renderEventPage();
 }
 
 function eventPool(types) {
@@ -507,7 +524,9 @@ function eventChoiceSpec(card, narrative = null) {
   const settle = (run) => () => { run(); game.state = 'idle'; saveGame(); UI.refresh(game); };
   const gainFragment = () => {
     game.fragments = (game.fragments || 0) + 1;
-    UI.log(`[[icon:crystal]] 获得员工通行证A碎片（${game.fragments}/2，集齐 2 枚可随员工通行证A合成员工通行证A）`, 'loot');
+    // 提示语改写（迭代评审 09-20 B-P1）：原句「可随员工通行证A合成员工通行证A」不成句，
+    // 兑换规则以 cards-sync tt-token-color desc 为准
+    UI.log(`[[icon:crystal]] 获得员工通行证A碎片（${game.fragments}/2，集齐 2 枚可合成员工通行证A，兑换一张能力卡）`, 'loot');
   };
   // —— 2026-09-09 事件 v2（Q6/C13 老板定向）：描述已按设计者新版对齐的七个事件，
   //     直接走自定义选项（旧 ink 叙事仍作 intro 展示，效果按新卡面结算）——
@@ -523,7 +542,7 @@ function eventChoiceSpec(card, narrative = null) {
       }) },
     ],
     'tt6-demondeal': () => [
-      { label: '成交', detail: '-5 血，获得 1 个大宝箱', tone: 'danger', run: () => {
+      { label: '成交', detail: '-5 血，获得 1 个军用保险柜', tone: 'danger', run: () => {
         game.hp = Math.max(1, game.hp - 5);
         UI.log('[[icon:demon]] 恶魔收走了 5 点生命力，并丢给你一个军用保险柜', 'warn');
         openChestsOnCell([{ kind: 'large' }], '恶魔的报酬');

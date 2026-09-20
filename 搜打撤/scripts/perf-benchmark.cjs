@@ -76,12 +76,16 @@ async function runElectronProbe() {
   if (process.env.SDT_PERF_GPU !== 'auto') app.commandLine.appendSwitch('force_high_performance_gpu');
   await app.whenReady();
   const scaleFactor = screen.getPrimaryDisplay().scaleFactor || 1;
+  // 虚拟分辨率档（迭代评审 09-20 D-P2）：SDT_PERF_VR_H=2160 可采样 4K/高 DPI——
+  // 高分屏为 report-only 独立预算（draw p95≤16ms），不进 1080p 的 AND 发布门禁
+  const vrHeight = Number(process.env.SDT_PERF_VR_H) || 1080;
+  const vrWidth = Math.round((1920 * vrHeight) / 1080);
   const win = new BrowserWindow({
     show: true,
     frame: false,
     useContentSize: true,
-    width: Math.round(1920 / scaleFactor),
-    height: Math.round(1080 / scaleFactor),
+    width: Math.round(vrWidth / scaleFactor),
+    height: Math.round(vrHeight / scaleFactor),
     // 非持久 partition：性能探针可以自由构造战斗/牌库压力场景，不污染玩家存档。
     webPreferences: { backgroundThrottling: false, partition: `sdt-perf-${process.pid}` },
   });
@@ -233,9 +237,9 @@ async function runElectronProbe() {
     game.ownedCards = combatCards.map((card, i) => ({ uid: 'perf-' + i, card: { ...card }, safe: false }));
     game.hp = game.maxHp = 9999; game.atk = 5; game.spellPower = 2;
     const roles = [
-      { cls: '侠客', id: 'shuangling' },
-      { cls: '降临者', id: 'baiqi' },
-      { cls: '法师', id: 'lituan' },
+      { cls: '侠客', id: 'wu' },
+      { cls: '降临者', id: 'changwuyu' },
+      { cls: '法师', id: 'baita' },
     ];
     const foes = Array.from({ length: 4 }, (_, i) => ({
       id: ['infantry', 'archer', 'bandit', 'orc_axe'][i],
@@ -343,11 +347,16 @@ async function runElectronProbe() {
     const memoryStable = (memory.heapGrowthBytes == null || memory.heapGrowthBytes <= 32 * 1024 * 1024) &&
       memory.domGrowth <= 300 && memory.frameCache.roles <= 1 &&
       memory.warmPool.count <= memory.warmPool.maxCount && memory.warmPool.bytes <= memory.warmPool.maxBytes;
+    // 高分屏 report-only 预算（迭代评审 09-20 D-P2）：fill rate 随分辨率翻倍，1080p 的 8ms
+    // 门禁不适用；4K/VR 档独立看 draw p95≤16ms，只上报不参与 performanceGatePassed
+    const vrReportOnly = vrHeight !== 1080;
+    const vrDrawP95Within16 = active.every(sample => sample.drawP95 <= 16);
     return {
       viewport,
       devicePixelRatio,
       physicalViewport,
       canvasBackingStore,
+      virtualResolution: { height: vrHeight, reportOnly: vrReportOnly, drawP95BudgetMs: 16, drawP95WithinBudget: vrDrawP95Within16 },
       acceptance: {
         performanceGatePassed: physicalViewportIs1920x1080 && rendererP95AtMost8 && coveredDrawsZero && idleDrawReductionAtLeast40 && idleLoopAtMost8Hz && activeTargetIs120 && target120DeliveryMet && experienceTargetMet && stressExperienceMet && memoryStable && battleWasDeferred && lazyBattleLoadMs <= 1500,
         physicalViewportIs1920x1080,

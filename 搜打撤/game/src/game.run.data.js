@@ -13,6 +13,12 @@ const PICKUP_BG = DATA.scenes.pickupBg;
 const CLASS_STORY = DATA.scenes.classStory;
   const PRELOAD_SCENES = Object.freeze({
     battle: new URL('../assets/scenes/battle-normal-anime-v2.webp', import.meta.url).href,
+    // 三首脑底图挂载槽（迭代评审 09-20 美术岗 D-P2）：专属底图排产中，先挂 anime-v2 同图占位——
+    // 底图就位后只改这三个 URL 即接管，css/scenes.css 的 per-boss tint 差分同步保留；
+    // 与 altar 同属路线内场景，不进 STARTUP_SCENE_KEYS（启动带宽零冲击）
+    bossGeneral: new URL('../assets/scenes/battle-normal-anime-v2.webp', import.meta.url).href,
+    bossOrc: new URL('../assets/scenes/battle-normal-anime-v2.webp', import.meta.url).href,
+    bossElement: new URL('../assets/scenes/battle-normal-anime-v2.webp', import.meta.url).href,
     coin: new URL('../assets/scenes/scene-pickup-coin-anime-v2.webp', import.meta.url).href,
     wood: new URL('../assets/scenes/scene-pickup-wood-anime-v2.webp', import.meta.url).href,
     rations: new URL('../assets/scenes/scene-pickup-rations-anime-v2.webp', import.meta.url).href,

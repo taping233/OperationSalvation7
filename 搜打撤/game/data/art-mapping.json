@@ -6,6 +6,10 @@
     "tt8-hero-sealer": "cards/bound-shadow.webp",
     "tt8-hero-mage": "cards/lore-raving.webp",
     "tt8-hero-warlock": "cards/dark-eclipse.webp",
+    "tt8-curse1": "cards/curse-drain.webp",
+    "tt8-curse2": "cards/curse-freeze.webp",
+    "tt8-curse3": "cards/curse-venom.webp",
+    "tt8-curse4": "cards/curse-silence.webp",
     "starter-attack": "cards/expedition-starters/basic-attack.webp",
     "tt3-fireball": "cards/expedition-starters/fireball.webp",
     "tt3-skewer": "cards/expedition-starters/pierce.webp",
@@ -86,7 +90,6 @@
   },
   "spellCardArt": [
     "cc-manasupply",
-    "cc-thousand",
     "tt3-firm-barrier",
     "tt7-arcanebolt",
     "tt7-bladebloom",

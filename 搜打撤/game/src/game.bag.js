@@ -7,6 +7,7 @@ import { escAttr } from './shared.js';
 import { cardStacks, doDeath, game, newUid, safeUsed, saveGame, usedSlots } from './game.session.js';
 import { Random } from './random.js';
 import { on as busOn } from './event-bus.js';
+import { setBagReturnHook as _setBagReturnHook, takeBagReturnHook } from './bag-return-hook.js';
 import { showRunTransition } from './game.run.js';
 import { _set_cardPageOpen } from './game.cardslib.js';
 
@@ -232,11 +233,11 @@ import { _set_cardPageOpen } from './game.cardslib.js';
       UI.refresh(game);
       return;
     }
-    // 从其他页面（商店等）打开的背包：关闭后调用返回钩子回到原页面（2026-09-12 留言 #31）
-    if (bagReturnHook) {
-      const hook = bagReturnHook;
-      bagReturnHook = null;
-      hook();
+    // 从其他页面（商店/事件/物资格页等）打开的背包：关闭后调用返回钩子回到原页面（2026-09-12 留言 #31；
+    // 来源恢复协议 09-20——钩子消费即清空，由 bag-return-hook.js 中立模块承载）
+    const returnHook = takeBagReturnHook();
+    if (returnHook) {
+      returnHook();
       return;
     }
     game.state = 'idle';
@@ -699,7 +700,8 @@ import { _set_cardPageOpen } from './game.cardslib.js';
 
   let backpackOpen = false;   // 背包弹窗开关（必须声明：showBackpack 打开路径会读取它）
   let bagOverChest = false;   // 背包是否从搜刮界面打开（关闭时回搜刮面板，2026-09-09 留言 #13）
-  let bagReturnHook = null;   // 从商店等页面打开背包时的关闭返回钩子（2026-09-12 留言 #31）
+  // 来源页返回钩子迁移到 bag-return-hook.js 中立模块（迭代评审 09-20）：事件页/物资格页
+  // 也要登记恢复路径，而 scenes/flow 不能反向 import 本模块（会经 game.run 成环）
 
   // ---------- 背包拖拽（v0.21）：3D 立体手感 · 堆排序 · 拖入/拖出安全格 ----------
   let bagDrag = null;   // {name, fromSafe, cell, ghost, card3d, sx, sy, lx, ly, vx, vy, moved}
@@ -889,6 +891,10 @@ import { _set_cardPageOpen } from './game.cardslib.js';
   // 胜利 100% 掉宝箱（按所在环层 / BOSS 固定 BOSS宝箱），开完宝箱再续流。
   // ESM：循环导入下本模块体可能先于 game.session 执行，顶层读 game 会 TDZ，延迟到 boot 统一绑定
   function bindBagMixins() {
+  // Esc/遮罩关背包的唯一收口（迭代评审 09-20 C-P1）：ui.js 的 Esc 分支回调 closeBackpack，
+  // 复位 game.state——此前直接 hideOverlay 会把状态卡死在 modal、地图/路线全部无响应。
+  // 晚绑定注册避免 ui→bag 静态成环（bag.js:2 的 UI 取自 window.SDT 门面）
+  UI._bagCloseHook = closeBackpack;
   const onBattleEnd = async function (opts, playedUids, win, consumedUids) {
     if (game.nestActive) return;   // 龙巢战斗结算由 game.nest 的总线订阅接管（一图战后流程不适用）
     UI.hideOverlay();
@@ -1066,5 +1072,5 @@ import { _set_cardPageOpen } from './game.cardslib.js';
   game.onBattleEnd = onBattleEnd;
   }
 
-function setBagReturnHook(fn) { bagReturnHook = typeof fn === 'function' ? fn : null; }
+function setBagReturnHook(fn) { _setBagReturnHook(fn); }   // 中立模块再导出（boot 商店运行时注入用）
 export { bindBagMixins, showBackpack, setBagReturnHook };

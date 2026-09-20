@@ -123,7 +123,7 @@ let hubCollectionView = 'backs';
       const pet = SDT.Base.petById(d.id);
       if (!SDT.Base.upgradePet(d.id)) return;
       Sfx.ding();
-      UI.log(`[[icon:paw]] <b>「${esc(pet.name)}」</b>升级到 <b>Lv.${SDT.Base.petLevel(d.id)}</b>：保护格 <b>${B.safeCap()}</b> 格`, 'ok');
+      UI.log(`[[icon:paw]] <b>「${esc(pet.name)}」</b>升级到 <b>Lv.${SDT.Base.petLevel(d.id)}</b>：安全格 <b>${B.safeCap()}</b> 格`, 'ok');
       SDT.Meta.checkUnlocks();
       renderHub();
     });
@@ -131,7 +131,7 @@ let hubCollectionView = 'backs';
       if (!SDT.Base.setPet(d.id)) return;
       const pet = SDT.Base.petById(d.id);
       Sfx.ding();
-      UI.log(`[[icon:paw]] 已携带宠物<b>「${esc(pet.name)}」</b>：${esc(pet.desc)} · 保护格 <b>${SDT.Base.safeCap()}</b> 格`, 'ok');
+      UI.log(`[[icon:paw]] 已携带宠物<b>「${esc(pet.name)}」</b>：${esc(pet.desc)} · 安全格 <b>${SDT.Base.safeCap()}</b> 格`, 'ok');
       renderHub();
     });
     UI.act('upStash', () => {
@@ -204,7 +204,7 @@ let hubCollectionView = 'backs';
       upgrade: { title: '升级说明', items: [
         ['背包扩建', '每消耗木材 ×' + R.bagUpgradeWood + ' 扩建 1 格，上限 ' + R.bagMax + ' 格。'],
         ['仓库扩建', '每消耗木材 ×' + R.stashUpgradeWood + ' 扩建 ' + R.stashUpgradeSlots + ' 张容量，上限 ' + R.stashMax + ' 张。'],
-        ['宠物升级', '每只宠物独立升级，口粮消耗递增 2-3-4-5，上限 Lv.5；Lv.1 起每级 +1 保护格。携带不同宠物保护格数量不同（小企鹅咕嘎 4-8 格）。'],
+        ['宠物升级', '每只宠物独立升级，口粮消耗递增 2-3-4-5，上限 Lv.5；Lv.1 起每级 +1 安全格。携带不同宠物安全格数量不同（小企鹅咕嘎 4-8 格）。'],
       ] },
       classes: { title: '人物说明', items: [
         ['熟练度', '每局出发时从全部角色中自由选择 1 个；击败敌人、撤离成功都会累积所选角色的熟练度经验，升级获得常驻加成（下一局出征生效）。'],
@@ -649,7 +649,7 @@ let hubCollectionView = 'backs';
     return `
       <section class="hub-card" style="margin-top:14px">
         <h3>[[icon:paw]] 宠物 <span class="set-tip">${owned.length} / ${B.PETS.length} 只 · 携带 1 只出战</span></h3>
-        <p class="ov-note" style="margin:0 0 6px">初始宠物「汪汪狗」自动获得；其余只能用<b>宠物蛋</b>（宝箱 0.7% 起掉落：每开箱未出 +3%、每打赢一场战斗再 +0.2%）+ 50 币在仓库孵化。宠物在「升级」页用口粮升级，携带不同宠物保护格数量不同。</p>
+        <p class="ov-note" style="margin:0 0 6px">初始宠物「汪汪狗」自动获得；其余只能用<b>宠物蛋</b>（宝箱 0.7% 起掉落：每开箱未出 +3%、每打赢一场战斗再 +0.2%）+ 50 币在仓库孵化。宠物在「升级」页用口粮升级，携带不同宠物安全格数量不同。</p>
         <div class="stash-list">${rows}</div>
         ${hasEgg ? '<p class="hint ok-hint">[[icon:crystal]] 仓库里有宠物蛋——点击它进行孵化！</p>' : ''}
       </section>`;
@@ -891,7 +891,7 @@ let hubCollectionView = 'backs';
     const owned = B.ownedPets();
     const sel = B.carriedPet();
     // 宠物升级：每只宠物独立进度，口粮递增 2-3-4-5，上限 Lv.5；
-    // 携带中的宠物决定保护格数量（小企鹅咕嘎 +2：4-8 格）
+    // 携带中的宠物决定安全格数量（小企鹅咕嘎 +2：4-8 格）
     // 09-20 P1-8：未孵化的不再逐只铺「？？？」占位行（与仓库页重复且无操作），
     // 收成一行摘要 + 去仓库按钮；已孵化的正常列出升级入口。
     const lockedN = B.PETS.length - owned.length;
@@ -930,8 +930,8 @@ let hubCollectionView = 'backs';
         </section>
       </div>
       <section class="hub-card" style="margin-top:14px">
-        <h3>[[icon:paw]] 宠物升级 <span class="set-tip">口粮 ${B.PET_UP_COSTS.join('-')} · 携带中的宠物决定保护格 <b>${B.safeCap()}</b> 格</span></h3>
-        <p class="ov-note" style="margin:0 0 6px">每只宠物的升级进度相互独立（Lv.1 起每级 +1 保护格）；携带不同宠物，保护格数量不同——小企鹅咕嘎可到 4-8 格。在仓库页切换携带的宠物。</p>
+        <h3>[[icon:paw]] 宠物升级 <span class="set-tip">口粮 ${B.PET_UP_COSTS.join('-')} · 携带中的宠物决定安全格 <b>${B.safeCap()}</b> 格</span></h3>
+        <p class="ov-note" style="margin:0 0 6px">每只宠物的升级进度相互独立（Lv.1 起每级 +1 安全格）；携带不同宠物，安全格数量不同——小企鹅咕嘎可到 4-8 格。在仓库页切换携带的宠物。</p>
         ${lockedN > 0 ? `<div class="pk-row pet-row locked"><span>[[icon:paw]] <b>？？？</b><span class="dim">· 未孵化 ×${lockedN}——宠物蛋 + 50 币在仓库页孵化</span></span><button class="mini-btn ok" data-act="hubTab" data-tab="stash">去仓库孵化</button></div>` : ''}
         <div class="stash-list">${petRows}</div>
       </section>`;

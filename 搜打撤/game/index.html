@@ -302,6 +302,28 @@
   </main>
 </div>
 
+<script>
+  // 启动失败兜底（迭代评审 09-20 D-P3）：main.js 以 type=module 加载，404/解析失败不会触发
+  // window.onerror——3 秒后仍无 window.SDT 即显示重试提示条；资源加载错误（capture 阶段
+  // 可收到 <script>/<img> 的 error 事件）提前触发。正常启动不需要任何清理，提示条不出现。
+  (function () {
+    var shown = false;
+    function showBootFail() {
+      if (shown) return;
+      shown = true;
+      var bar = document.createElement('div');
+      bar.textContent = '游戏加载失败——请检查网络后刷新页面重试；多次失败可尝试清除浏览器缓存';
+      bar.style.cssText = 'position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:9999;'
+        + 'padding:8px 18px;border-radius:6px;background:#3a1216;color:#ffd9d4;border:1px solid #a4524a;'
+        + 'font:13px/1.6 system-ui,sans-serif;box-shadow:0 6px 18px rgba(0,0,0,.5)';
+      document.body.appendChild(bar);
+    }
+    window.addEventListener('error', function (e) {
+      if (e && e.target && (e.target.tagName === 'SCRIPT' || e.target.tagName === 'LINK')) showBootFail();
+    }, true);
+    setTimeout(function () { if (!window.SDT) showBootFail(); }, 3000);
+  })();
+</script>
 <script type="module" src="./src/main.js"></script>
 </body>
 </html>

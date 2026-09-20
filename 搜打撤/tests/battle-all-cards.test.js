@@ -9,9 +9,12 @@
  *   E 资源/事件/生物 → 断言正确地不进手牌（不可打出是设计行为）
  * 判定口径：
  *   崩溃（异常抛出）/ 卡死（busy 或队列悬挂）/ 意外败北 = 硬失败；
- *   打出后零可观测变化 = 警告清单（人工复核用，恒通过，以趋势为准，同 card-audit.test.js 口径）。 */
+ *   打出后零可观测变化 = 分级（迭代评审 09-20）：手牌代价卡在「审计空手牌」环境下
+ *   条件必不满足 → 警告清单（人工复核，句式引自 hand-cost-patterns.js 单一登记点）；
+ *   无前置条件的卡零效果 → 硬失败（堵死「描述改成解析不出动词的死卡静默入库」的入口）。 */
 import { describe, it, expect, beforeAll } from 'vitest';
 import { targetSideFor, unplayableReasonFor } from '../game/src/battle.rules.js';
+import { HAND_COST_PATTERNS } from '../game/src/hand-cost-patterns.js';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };
 window.SDT.Icons.TYPE_ART = {};
@@ -91,6 +94,11 @@ function classify(card) {
   return 'hand';
 }
 
+// 条件卡判定：手牌代价句（与预检/结算同一登记点）在审计环境（无手牌燃料）下必不满足
+const isConditionalCard = (card) => HAND_COST_PATTERNS.some(re => re.test(String(card.desc || '')));
+const ZERO_CONDITIONAL = '零可观测效果（手牌代价卡：审计环境条件必不满足，人工复核）';
+const ZERO_UNCONDITIONAL = '零可观测效果（无前置条件）';
+
 function sideFor(card) {
   const side = targetSideFor(card, C.DMG_TYPES);
   if (side === 'enemy') return 0;
@@ -134,7 +142,7 @@ async function playInBattle(game, uid, card) {
 // ---------- 汇总审计 ----------
 const results = [];
 const record = (card, path, problem) => results.push({ id: card.id, name: card.name, type: card.type, path, problem });
-const hardFails = () => results.filter(r => !r.problem.startsWith('零可观测'));
+const hardFails = () => results.filter(r => !r.problem.startsWith('零可观测') || r.problem.includes('无前置条件'));
 const softWarns = () => results.filter(r => r.problem.startsWith('零可观测'));
 const endBattle = (game) => { if (game.battleActive && !snap().busy) BattleSession.commands.flee(); };
 
@@ -212,7 +220,7 @@ async function auditOne(card) {
         if (game.logs.length <= 2) record(card, 'B-BOSS', '编组后未进手牌也未结算');
       } else {
         const r = await playInBattle(game, uid, card);
-        if (r.after === r.before) record(card, 'B-BOSS', '零可观测效果');
+        if (r.after === r.before) record(card, 'B-BOSS', isConditionalCard(card) ? ZERO_CONDITIONAL : ZERO_UNCONDITIONAL);
       }
       if (snap().busy || snap().actionQueueLength > 0) record(card, 'B-BOSS', '结算悬挂（busy/队列未清）');
       if (game.lastBattleEnd && game.lastBattleEnd.win === false) record(card, 'B-BOSS', '打出后意外败北');
@@ -229,7 +237,7 @@ async function auditOne(card) {
     if (card.id === 'tt8-hero-sealer') { endBattle(game); return; }
     if (!snap().hand.includes(uid)) { record(card, 'A-手牌', '战斗卡未进手牌'); endBattle(game); return; }
     const r = await playInBattle(game, uid, card);
-    if (r.after === r.before) record(card, 'A-手牌', '零可观测效果');
+    if (r.after === r.before) record(card, 'A-手牌', isConditionalCard(card) ? ZERO_CONDITIONAL : ZERO_UNCONDITIONAL);
     if (r.end.busy || r.end.actionQueueLength > 0) record(card, 'A-手牌', '结算悬挂（busy/队列未清）');
     if (game.lastBattleEnd && game.lastBattleEnd.win === false) record(card, 'A-手牌', '打出后意外败北');
   } catch (e) { record(card, 'A-手牌', '崩溃:' + e.message); }

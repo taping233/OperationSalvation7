@@ -13,6 +13,8 @@ function intentViewModel(intent) {
       hits,
       totalDamage: damage == null ? null : damage * hits,
       kind: String(item.kind || 'unknown'),
+      // 意图实算口径（迭代评审 09-20）：预告已含目标流血层数，角标供玩家核对
+      bleedBonus: Number.isFinite(Number(item.bleedBonus)) && Number(item.bleedBonus) > 0 ? Math.floor(Number(item.bleedBonus)) : 0,
     };
   });
 }

@@ -35,7 +35,14 @@ function emit(event, ...args) {
   let served = 0;
   for (const fn of [...set]) {
     if (!set.has(fn)) continue;   // 派发过程中被退订的跳过
-    try { fn(...args); served++; }
+    try {
+      const r = fn(...args);
+      // async 订阅者的 rejection 不再变成 unhandledRejection（迭代评审 09-20）：
+      // 保持同步派发与返回值语义不变——battle:end 的「0 订阅回退」判定和
+      // 「finish() 返回前完成广播」时序都不受影响，仅把异步异常接住上报
+      if (r && typeof r.then === 'function') r.catch(e => console.error(`[Bus] ${event} 异步订阅者异常:`, e));
+      served++;
+    }
     catch (e) { console.error(`[Bus] ${event} 订阅者异常:`, e); }
   }
   return served;

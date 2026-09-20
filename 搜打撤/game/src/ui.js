@@ -600,8 +600,27 @@ import { renderExpeditionPanel } from './expedition.view.js';
       probe.src = url;
     },
 
-    hideOverlay() {
-      if (this._hideTimer) return;   // 淡出中，避免重复触发
+    // 跳转代际令牌（迭代评审 09-20 QA 岗）：exitToTitle 的 immediate 关层即「跳转发生」；
+    // 计划在跳转后迟到的 showOverlay 可自留 token 并用 layerValid() 自检，失败即放弃开层
+    _jumpSeq: 0,
+    layerToken() { return ++this._jumpSeq; },
+    layerValid(t) { return t === this._jumpSeq; },
+    // 背包关闭回调（game.bag bindBagMixins 晚绑定注册，避免 ui→bag 静态成环）：
+    // Esc/遮罩关背包必须走 closeBackpack 的状态复位，直接 hideOverlay 会把 game.state 卡死在 modal
+    _bagCloseHook: null,
+
+    hideOverlay(opts) {
+      const immediate = !!(opts && opts.immediate);
+      // 已关闭且无挂起收尾：短路（迭代评审 09-20 客户端岗）——迟到的 transition/chest 收尾
+      // 不再空跑 finish、重放 close 音
+      if (!this._hideTimer && this.el.overlay.hidden) return;
+      // 淡出中重复触发：普通调用忽略；immediate 调用清掉挂起收尾改为同步执行——
+      // 消灭「210ms 淡出窗口内二次跳转/开层被旧 finish 撕掉」竞态（龙巢撤离死锁根因）
+      if (this._hideTimer) {
+        if (!immediate) return;
+        clearTimeout(this._hideTimer);
+        this._hideTimer = null;
+      }
       this._lastMode = null;
       this._acts = {};
       this._inputHandler = null;
@@ -610,10 +629,12 @@ import { renderExpeditionPanel } from './expedition.view.js';
       const card = this.el.ovBody.parentElement;
       // 不透明整屏页淡出：boss 留言 #52 要求所有界面退出都有过渡动画（200ms 淡出+下移）；
       // room-view（战斗/房间页）例外保持瞬隐——留言 #33 实测整屏淡出每帧全屏重合成是
-      // 「继续」卡顿来源，性能口径优先（overlays.css 有同步注释）
-      const instant = this.el.overlay.classList.contains('room-view');
+      // 「继续」卡顿来源，性能口径优先（overlays.css 有同步注释）。
+      // immediate（exitToTitle 收口）同样走同步：跳转不允许留任何异步尾巴
+      const instant = immediate || this.el.overlay.classList.contains('room-view');
       const finish = () => {
         this._hideTimer = null;
+        this._finishHide = null;
         document.body.classList.remove('page-covered');
         document.body.classList.remove('page-opaque');
         card.classList.remove('wide');
@@ -648,6 +669,7 @@ import { renderExpeditionPanel } from './expedition.view.js';
       this.el.overlay.classList.add('closing');
       // 等淡出动画播完再真正隐藏并还原布局类，避免淡出期间跳版；
       // 期间 hidden 仍为 false，输入拦截逻辑不受影响
+      this._finishHide = finish;
       this._hideTimer = setTimeout(finish, 210);
     },
 
@@ -664,8 +686,9 @@ import { renderExpeditionPanel } from './expedition.view.js';
       if (cancelBtn) { cancelBtn.click(); return true; }
       // 场景演出页（点击任意处继续）：走 sceneNext 通道
       if (this.el.ovBody.querySelector('[data-act="sceneNext"]')) { this.act('sceneNext'); return true; }
-      // 背包这类只有信息没有按钮的浮层：直接关
-      if (mode === 'bag' || mode === 'bagpage') { this.hideOverlay(); return true; }
+      // 背包这类只有信息没有按钮的浮层：走 bag 侧注册的关闭回调（closeBackpack 唯一收口，
+      // 复位 game.state）；钩子未注册时（启动早期）退回直接关
+      if (mode === 'bag' || mode === 'bagpage') { if (this._bagCloseHook) this._bagCloseHook(); else this.hideOverlay(); return true; }
       return false;
     },
 

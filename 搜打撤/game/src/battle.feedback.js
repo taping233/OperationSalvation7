@@ -1,5 +1,7 @@
 /* 战斗反馈节奏：纯函数，不操作 DOM，便于逻辑测试和后续替换为 VFX。 */
 
+import { demoMs } from './battle.pace.js';
+
 const FEEDBACK_DELTA_MS = 320;
 
 function feedbackTier(feedback = {}) {
@@ -18,7 +20,7 @@ function feedbackClass(feedback = {}) {
   return [base, `fx-${tier}`, feedback.critical ? 'critical' : ''].filter(Boolean).join(' ');
 }
 
-function feedbackDelay(unitKey, counters, delta = FEEDBACK_DELTA_MS) {
+function feedbackDelay(unitKey, counters, delta = demoMs(FEEDBACK_DELTA_MS)) {
   const key = unitKey == null ? 'self' : String(unitKey);
   const count = Object.prototype.hasOwnProperty.call(counters, key) ? counters[key] : 0;
   // 用 defineProperty 处理 `__proto__` 等合法但特殊的单位键，避免污染普通对象原型。

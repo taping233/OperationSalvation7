@@ -264,7 +264,9 @@ const CURSES = ['bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban', 'bu
   //（「获得 2 点攻击力，持续 1 回合」类词条；见 tickDurations）。
   function addBlessing(target, key, n, turns) {
     if (!BUFF_META[key]) return 0;
-    n = n == null ? 1 : n;
+    // NaN 兜底（迭代评审 09-20 G-P3）：与 addCurse 同款 Number.isFinite 防护——
+    // 调用方误传 NaN 时 atkUp/spellUp 会被写成 NaN，伤害全线 NaN
+    n = n == null ? 1 : (Number.isFinite(+n) ? Math.floor(+n) : 1);
     ensureStatus(target);
     const m = BUFF_META[key];
     if (m.value) {

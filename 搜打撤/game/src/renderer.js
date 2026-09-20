@@ -49,6 +49,11 @@ const SDT = window.SDT;
   }
   let backdropCanvas = null;               // 壁纸合成层（尺寸/层或就绪状态变化时重建）
   const backdropKey = { w: 0, h: 0, ready: false, li: -1 };
+  // 拖拽窗口防抖（迭代评审 09-20 D-P2）：拖拽时视口尺寸逐帧变化，原逻辑每帧全屏重烘焙
+  // 底图（5 渐变+3 填充，10ms 级长帧连发）。尺寸连续变化期间直接复用旧底，由绘制端
+  // drawImage 按目标尺寸拉伸铺满；停止 ~150ms 后置空强制重烘焙一次。
+  // 壁纸 onload 置空 backdropCanvas 的强制重建路径不受影响
+  let backdropResizeTimer = null;
   function drawCover(ctx, image, w, h) {
     const iw = image.naturalWidth || image.width;
     const ih = image.naturalHeight || image.height;
@@ -61,6 +66,12 @@ const SDT = window.SDT;
   function ensureBackdrop(cam, li) {
     const { img, veil } = backdropFor(li);
     const ready = img.complete && img.naturalWidth > 0;
+    const sizeChanged = backdropCanvas && (backdropKey.w !== cam.viewW || backdropKey.h !== cam.viewH);
+    if (sizeChanged && backdropKey.li === li && backdropKey.ready === ready) {
+      clearTimeout(backdropResizeTimer);
+      backdropResizeTimer = setTimeout(() => { backdropCanvas = null; SDT.RenderScheduler?.invalidate(); }, 150);
+      return backdropCanvas;
+    }
     if (backdropCanvas && backdropKey.w === cam.viewW && backdropKey.h === cam.viewH &&
         backdropKey.ready === ready && backdropKey.li === li) return backdropCanvas;
     backdropKey.w = cam.viewW; backdropKey.h = cam.viewH; backdropKey.ready = ready; backdropKey.li = li;

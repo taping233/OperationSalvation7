@@ -1,3 +1,5 @@
+import { HAND_COST_PATTERNS, HAND_COST_CN_NUM } from './hand-cost-patterns.js';
+
 const AOE_PATTERN = /所有敌人|群体|全体/;
 const SELF_TARGET_PATTERN = /回复\s*\d+\s*(?:点\s*生命|点?血)|净化|获得\s*\d+\s*点?\s*护甲|\+\s*\d+\s*甲|获得\s*\d+\s*点?\s*护盾|所受伤害降为/;
 const DECK_ONLY_PATTERN = /洗入|置入牌库|放入牌库|牌库底|牌库上限/;
@@ -51,14 +53,9 @@ function targetSideFor(card, damageTypes) {
 }
 
 // 手牌代价句（2026-09-09 老板 #14：条件不满足时整张卡打不出去，而不是打出去再空过）——
-// 正则与 battle.effects.js 的执行正则一一对应，保证「判定」与「结算」永远同一口径。
-const HAND_COST_PATTERNS = [
-  // 「消耗 N 张 X，效果」：battle.effects consM
-  /消耗\s*(一张|两|二|三|\d+)\s*张?\s*(?:手牌中的)?(初始攻击|武术|法术|装备|牌|杀)牌?[,，]\s*(.+)$/,
-  // 「选择 N 张手牌中的 X 施放/打出」：battle.effects selPlay
-  /选择(?:\s*手牌中)?\s*(\d+|[一两二三四五])\s*张(?:手牌中的?)?\s*(武术|法术|装备|牌)?\s*卡?[^，。；;]*?(?:施放|释放|打出)/,
-];
-const CN_NUM = { '一': 1, '两': 2, '二': 2, '三': 3, '四': 4, '五': 5 };
+// 正则收敛到 hand-cost-patterns.js 单一登记点（迭代评审 09-20）：与 effect-steps.js 的执行
+// 正则同一来源，保证「判定」与「结算」永远同一口径，新增措辞只登记一处。
+const CN_NUM = HAND_COST_CN_NUM;
 function handCostOf(card) {
   const desc = String(card.desc || '');
   for (const re of HAND_COST_PATTERNS) {

@@ -9,7 +9,8 @@ import { escAttr } from './shared.js';
 import { Random } from './random.js';
 import { BattleSession, commands, configureBattleRenderer, getSnapshot, viewApi } from './battle.core.js';
 import { groupHandCards, fanLayout } from './battle.hand.js';
-import { intentSummary, intentViewModel } from './battle.intents.js';
+import { intentViewModel } from './battle.intents.js';
+import { demoMs, getPace, setPace } from './battle.pace.js';
 import { FEEDBACK_DELTA_MS, feedbackClass, feedbackDelay } from './battle.feedback.js';
 import { renderCombatPiles } from './battle.piles.view.js';
 import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFrames, cacheStats as frameCacheStats } from './battle.frames.js';
@@ -21,21 +22,25 @@ const cardIdentityKey = card => card && card.id
 const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!card.id && card.name === '初始攻击'));
 
   // 状态角标：祝福（绿）+ 诅咒（红）——2026-09-11 架构批次 1 自 battle.core 外迁（纯视图函数）
-  function statusChips(status) {
-    const buffs = Combat.BUFFS
-      .filter(k => (status[k] || 0) > 0)
-      .map(k => {
-        const m = Combat.BUFF_META[k];
-        const v = m.timed ? ` ${status[k]}回合` : (m.flag ? '' : ` ${status[k]}`);
-        return `<span class="bt-buff b-${k}" title="${escAttr('祝福：' + m.desc)}">${m.icon} ${m.name}${v}</span>`;
-      });
-    const curses = Combat.CURSES
-      .filter(k => (status[k] || 0) > 0)
-      .map(k => {
-        const m = Combat.CURSE_META[k];
-        const txt = m.stack ? `${m.name} ${status[k]}` : `${m.name} ${status[k]}回合`;
-        return `<span class="bt-curse c-${k}" title="${escAttr(m.desc)}">${m.icon} ${txt}</span>`;
-      });
+  // compact（敌方名牌收纳，迭代评审 09-20）：总数>4 时退化为「图标+层数」，名字/全文保进 title
+  // ——纯图标会丢层数（美术岗复核口径）；玩家名牌不传 compact，维持原样
+  function statusChips(status, opts) {
+    const compactAll = !!(opts && opts.compact);
+    const activeBuffs = Combat.BUFFS.filter(k => (status[k] || 0) > 0);
+    const activeCurses = Combat.CURSES.filter(k => (status[k] || 0) > 0);
+    const compact = compactAll && (activeBuffs.length + activeCurses.length) > 4;
+    const buffs = activeBuffs.map(k => {
+      const m = Combat.BUFF_META[k];
+      const v = m.timed ? ` ${status[k]}回合` : (m.flag ? '' : ` ${status[k]}`);
+      const label = compact ? `${status[k]}${m.timed ? '回合' : ''}` : `${m.name}${v}`;
+      return `<span class="bt-buff b-${k}" title="${escAttr(compact ? ('祝福：' + m.name + '——' + m.desc) : ('祝福：' + m.desc))}">${m.icon} ${label}</span>`;
+    });
+    const curses = activeCurses.map(k => {
+      const m = Combat.CURSE_META[k];
+      const txt = m.stack ? `${m.name} ${status[k]}` : `${m.name} ${status[k]}回合`;
+      const label = compact ? (m.stack ? `${status[k]}` : `${status[k]}回合`) : txt;
+      return `<span class="bt-curse c-${k}" title="${escAttr(compact ? (m.name + '——' + m.desc) : m.desc)}">${m.icon} ${label}</span>`;
+    });
     return buffs.concat(curses).join(' ');
   }
   const curseChips = statusChips;   // 兼容旧调用名
@@ -462,13 +467,18 @@ const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!car
           <label class="chk"><input type="checkbox" id="btSetMusic" ${SDT.Sound.musicMuted ? '' : 'checked'}> 背景音乐</label>
           <label class="chk"><input type="checkbox" id="btSetSfx" ${SDT.Sound.sfxMuted ? '' : 'checked'}> 音效</label>
           <label class="chk"><input type="checkbox" id="btSetShake" ${localStorage.getItem('sdt-reduce-shake') === '1' ? '' : 'checked'}> 屏幕震动反馈</label>
+          <label class="chk"><input type="checkbox" id="btSetPace" ${getPace() === 2 ? 'checked' : ''}> 2× 战斗节奏（敌方行动加速）</label>
           <p class="ov-note">完整设置可在基地 / 标题页打开。关闭后回到战斗。</p>
           <div class="ov-btns"><button class="ov-btn ok" data-act="btSettingsBack">[[icon:cross]] 返回战斗</button></div>
         </div>`, true);
-      const syncMusic = (on) => { SDT.Sound.setMusicMuted(!on); if (SDT.Sound.setDucked) SDT.Sound.setDucked(); };
+      // 迭代评审 09-20：删除无参 setDucked()——它被 setDucked 内部 !!v 强转成 false，
+      // 战斗中关音乐会静默解除侧链压低；setMusicMuted 内部已走 syncBgm，无需额外调用
+      const syncMusic = (on) => { SDT.Sound.setMusicMuted(!on); };
       document.getElementById('btSetMusic').addEventListener('change', (e) => syncMusic(e.target.checked));
       document.getElementById('btSetSfx').addEventListener('change', (e) => { SDT.Sound.setSfxMuted(!e.target.checked); });
       document.getElementById('btSetShake').addEventListener('change', (e) => { localStorage.setItem('sdt-reduce-shake', e.target.checked ? '0' : '1'); });
+      // 2× 演示倍率（迭代评审 09-20）：单一倍率同步缩放步进/序列帧/前摇/飘字四处时长（battle.pace.js）
+      document.getElementById('btSetPace').addEventListener('change', (e) => { setPace(e.target.checked ? 2 : 1); });
       UI.act('btSettingsBack', () => render());
     });
     // U4（2026-09-19 走查）：BOSS 态两钮不再 disabled——点了给 log+音效说明原因，
@@ -886,6 +896,7 @@ const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!car
     const np = document.createElement('div');
     np.className = 'sts-nameplate';
     parts.head = document.createElement('div');
+    parts.head.className = 'sts-headrow';   // 名行 flex 钩子（敌方名牌两行化，迭代评审 09-20）
     parts.hp = document.createElement('div');
     parts.hp.className = 'bt-hpwrap sts-hp';
     parts.hpGhost = document.createElement('i');   // STS2 式幽灵条：掉血时延迟收缩的黄尾
@@ -1075,21 +1086,23 @@ const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!car
       const intents = frozen
         ? [{ icon: '[[icon:crystal]]', label: '冰冻·无法行动', damage: null, kind: 'frozen' }]
         : intentViewModel(f.intent);
-      const intentTip = frozen ? '冰冻中——本回合无法行动' : `下一回合预告：${intentSummary(f.intent)}`;
+      // 迭代评审 09-20：意图详情并入气泡常驻文本（原生 title 已随手牌侧停用，交互口径统一）；
+      // 实算伤害外带窄位流血角标「流血 N 层」；气泡允许两行折行（battle.css .sts-intent）
       if (!f.dead && intents.length) {
         setSection(parts.intent, sig, 'intent',
-          intents.map(intent => `${intent.icon} ${esc(intent.label)}${intent.damage == null ? '' : ` · ${intent.damage}${intent.hits > 1 ? ` ×${intent.hits}（共${intent.totalDamage}）` : ''}`}`).join(' '));
-        if (sig.intentTip !== intentTip) { sig.intentTip = intentTip; parts.intent.title = intentTip; }
+          intents.map(intent => `${intent.icon} ${esc(intent.label)}${intent.damage == null ? '' : ` · ${intent.damage}${intent.hits > 1 ? ` ×${intent.hits}（共${intent.totalDamage}）` : ''}`}${intent.bleedBonus ? ` · [[icon:blood]]流血 ${intent.bleedBonus} 层` : ''}`).join(' '));
         parts.intent.style.display = '';
       } else parts.intent.style.display = 'none';
       setSection(parts.fig, sig, 'fig', f.id && SDT.Art.has(f.id) ? SDT.Art.monsterArt(f.id) : SDT.Icons.img('slime'));
+      // 敌方名牌两行化（迭代评审 09-20 美术岗）：名行右侧收敛攻击小徽（狂乱 ×2 并入），
+      // stats 行仅剩免伤提示（庇幕高亮本就有 aegis 类）；玩家名牌三行维持——equips 是老板定版技能按钮
       setSection(parts.head, sig, 'head',
         `<b>${esc(f.name)}</b>${f.dead ? ' <span class="bt-deadmark">[[icon:cross]]</span>' : ''}` +
+        `<span class="sts-atkbadge" title="攻击力${f.affix === 'frenzy' ? '（狂乱：每回合攻击 2 次）' : ''}">[[icon:swords]] ${f.atk}${f.affix === 'frenzy' ? '×2' : ''}</span>` +
         (aff ? `<span class="bt-affix" title="${escAttr(aff.desc)}">${aff.icon} ${aff.name}</span>` : ''));
       setUnitHP(parts, sig, f.hp, f.maxHp, !sig.init);
-      setSection(parts.stats, sig, 'stats',
-        `[[icon:swords]] ${f.atk}${f.affix === 'frenzy' ? ' ×2' : ''}${immune ? ' · [[icon:crystal]] 庇幕免伤中' : ''}`);
-      setSection(parts.chips, sig, 'chips', curseChips(f.status));
+      setSection(parts.stats, sig, 'stats', immune ? '[[icon:crystal]] 庇幕免伤中' : '');
+      setSection(parts.chips, sig, 'chips', curseChips(f.status, { compact: true }));
       sig.init = true;
       ordered.push(rec);
     });
@@ -1142,7 +1155,7 @@ const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!car
       { transform: 'translateX(0)' },
       { transform: 'translateX(-14px) scale(1.04)', offset: 0.45 },
       { transform: 'translateX(0)' },
-    ], { duration: 260, easing: 'cubic-bezier(.3,.7,.4,1)' });
+    ], { duration: demoMs(260), easing: 'cubic-bezier(.3,.7,.4,1)' });
   }
   // 诅咒施加彩闪（P1）：按诅咒 key 上色的边缘光一闪（替代已删除的粒子喷发）
   const CURSE_TINT = {
@@ -1159,20 +1172,31 @@ const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!car
       { filter: `brightness(1.25) drop-shadow(0 0 18px ${col}.9)`, offset: 0.3 },
       { filter: `brightness(1.25) drop-shadow(0 0 18px ${col}.9)`, offset: 0.55 },
       { filter: 'none' },
-    ], { duration: 700, easing: 'ease-out' });
+    ], { duration: demoMs(700), easing: 'ease-out' });
   }
   // 伤害类型染色（P1）：按伤害类型给命中贴图着色——攻击=原生琥珀不染、固定=炽橙、
-  // 法术=青蓝、真实=纯白；毒/灼烧 DoT 走 tintKey 优先（贴图黑底走 screen 混合，filter 只染纹样）
+  // 法术=青蓝、真实=纯白；毒/灼烧 DoT 走 tintKey 优先（贴图黑底走 screen 混合，filter 只染纹样）。
+  // freeze/thunder 键为冰/雷系预留（迭代评审 09-20 美术岗）：卡片透传 tintKey 即生效
   const IMPACT_TINT = {
     fixed: 'sepia(1) saturate(2.8) hue-rotate(-15deg) brightness(1.25)',
     spell: 'sepia(1) saturate(2.4) hue-rotate(160deg) brightness(1.15)',
     true: 'saturate(0) brightness(1.9)',
     poison: 'sepia(1) saturate(2.2) hue-rotate(55deg) brightness(1.1)',
     burn: 'sepia(1) saturate(3) hue-rotate(-10deg) brightness(1.3)',
+    freeze: 'sepia(1) saturate(2.6) hue-rotate(150deg) brightness(1.5)',
+    thunder: 'sepia(1) saturate(1.6) hue-rotate(215deg) brightness(1.7)',
+  };
+  // 元素三系火花参数包（迭代评审 09-20 美术岗 Top3）：颜色/数量/速度差分——
+  // tintKey 命中即换包（毒=绿缓、灼烧=橙密快、冰=蓝疏慢、雷=紫白密更快），未命中走默认琥珀
+  const SPARK_PRESETS = {
+    burn: { color: '#ffb34d', count: 16, speed: 1.15 },
+    poison: { color: '#8cc85a', count: 10, speed: 0.85 },
+    freeze: { color: '#bfe8ff', count: 12, speed: 0.7 },
+    thunder: { color: '#e8e0ff', count: 18, speed: 1.4 },
   };
   // 轻量受击火花（P2 补回，替代已删除的 Pixi 粒子通道）：WAAPI 预采样抛散+重力+淡出，
   // 一次性元素即抛即毁、纯 transform/opacity 走合成器，不建常驻渲染管线
-  function spawnSparks(ov, figEl, { color = '#ffb34d', count = 12 } = {}) {
+  function spawnSparks(ov, figEl, { color = '#ffb34d', count = 12, speed = 1 } = {}) {
     if (!ov || !figEl) return;
     const r = uiRect(figEl);
     const ovR = uiRect(ov);
@@ -1184,7 +1208,7 @@ const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!car
       p.style.cssText = `left:${cx.toFixed(1)}px;top:${cy.toFixed(1)}px;width:${sz}px;height:${sz}px;background:${color}`;
       ov.appendChild(p);
       const ang = Random.random('fx') * Math.PI * 2;
-      const v = 70 + Random.random('fx') * 150;
+      const v = (70 + Random.random('fx') * 150) * speed;
       const vx = Math.cos(ang) * v, vy = Math.sin(ang) * v - 60;
       const dur = 420 + Random.random('fx') * 260;
       const N = 10, kf = [];
@@ -1235,7 +1259,7 @@ const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!car
     ctx.lineTo(x2 - ux * 13 - uy * 6, y2 - uy * 13 + ux * 6);
     ctx.lineTo(x2 - ux * 13 + uy * 6, y2 - uy * 13 - ux * 6);
     ctx.closePath(); ctx.fillStyle = '#ff6659'; ctx.fill();
-    cv.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 420, easing: 'ease-out', fill: 'forwards' })
+    cv.animate([{ opacity: 1 }, { opacity: 0 }], { duration: demoMs(420), easing: 'ease-out', fill: 'forwards' })
       .onfinish = () => cv.remove();
     setTimeout(() => cv.remove(), 580);   // 兜底清理
   }
@@ -1276,7 +1300,9 @@ const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!car
       // 纯演出指令（无文字）：敌方攻击前摇+弹道 / 诅咒施加彩闪
       if ((f.cls || '').includes('lungefx')) {
         if (!SDT.Motion?.reduceMotion()) { foeLunge(figEl); foeAttackLine(body, figEl); }
-        SDT.Sound.sfx('foeLunge');   // 前摇呼啸（音频 P2#8）：提示「要挨打了」，无论是否减动效都响
+        // 2× 档呼啸提速 ×1.5（迭代评审 09-20 音频岗）：步进压缩后 0.22s 呼啸会「未完即中弹」
+        // 丢失预警语义；经 opts 传参不在 sfx() 里读全局节奏态（音频岗 R3 落点）
+        SDT.Sound.sfx('foeLunge', getPace() > 1 ? { rateScale: 1.5 } : undefined);   // 前摇呼啸（音频 P2#8）：提示「要挨打了」，无论是否减动效都响
         return;
       }
       if ((f.cls || '').includes('cursefx')) { if (!SDT.Motion?.reduceMotion()) curseFlash(figEl, f.cls); return; }
@@ -1295,10 +1321,13 @@ const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!car
         if (isSelf) stsSelfHit(figEl, heavy ? 1.35 : 1, stopMs);   // 自己：后仰+红染
         else stsShake(figEl, heavy ? 1.55 : 1, stopMs);
       }
-      if (!reduced && !stk) spawnSparks(ov, figEl, {
-        color: f.warm ? '#61d69b' : ((isSelf || allyI != null) ? '#ff6659' : '#ffb34d'),
-        count: f.warm ? 8 : (heavy ? 18 : 12),
-      });
+      if (!reduced && !stk) {
+        const preset = SPARK_PRESETS[f.tintKey];
+        spawnSparks(ov, figEl, preset ? { ...preset } : {
+          color: f.warm ? '#61d69b' : ((isSelf || allyI != null) ? '#ff6659' : '#ffb34d'),
+          count: f.warm ? 8 : (heavy ? 18 : 12),
+        });
+      }
       if (isSelf && damage && !reduced) hurtFlash(ov);
       // 2026-09-13 老板：治疗闪绿光；自己攻击或造成伤害时轻微抖屏（受击红闪已有）
       if (isSelf && f.warm && !reduced) healFlash(ov);
@@ -1363,7 +1392,7 @@ const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!car
         setTimeout(() => span.remove(), 1400);   // 兜底：animationend 偶尔不触发时清掉不可见残骸
       }
       };
-      const delay = baseDelay + (f.delay || 0) + feedbackDelay(f.unit, perUnit, FEEDBACK_DELTA_MS);   // f.delay：演出错拍（如敌方前摇先播 130ms）；同单位每多一段 +320ms
+      const delay = baseDelay + (f.delay || 0) + feedbackDelay(f.unit, perUnit, demoMs(FEEDBACK_DELTA_MS));   // f.delay：演出错拍（如敌方前摇先播 130ms）；同单位每多一段 +320ms（2× 时经 demoMs 缩放）
       if (delay) setTimeout(fire, delay); else fire();
     });
   }

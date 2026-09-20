@@ -22,6 +22,7 @@
  * 本文件是「结算」本体；ELSEWHERE 命中仍只标记 did，不在此重复结算。
  * ============================================================ */
 import { matchElsewhere, noteUnknownEffect } from './effect-verbs.js';
+import { HAND_COST_CONSUME_RE, HAND_COST_SELECT_RE } from './hand-cost-patterns.js';
 
 /* 「箭」战斗令牌模板（2026-09-13 实装）：卡库中不存在任何名为「箭」的牌，导致
  * 天狼长弓（回合开始获得随机箭矢）与连弩（直接释放手牌中所有「箭」）两张卡自实装以来
@@ -678,10 +679,10 @@ export function createEffectSteps(deps) {
     {
       id: 'hand.selectFamily', gate: 'fresh', label: '手选家族：选牌施放 / 复制 / 消耗+尾段',
       when: (ctx) => {
-        const selPlay = ctx.desc.match(/选择(?:\s*手牌中)?\s*(\d+|[一两二三四五])\s*张(?:手牌中的?)?\s*(武术|法术|装备|牌)?\s*卡?[^，。；;]*?(?:施放|释放|打出)/);
+        const selPlay = ctx.desc.match(HAND_COST_SELECT_RE);   // 句式单一登记点（hand-cost-patterns.js，与预检同源）
         if (selPlay) return { kind: 'play', m: selPlay };
         if (/选择并复制你的\s*(?:1\s*|一\s*)?张?手牌/.test(ctx.desc) && typeof queueHandSelect === 'function') return { kind: 'copy' };
-        const consM = ctx.desc.match(/消耗\s*(一张|两|二|三|\d+)\s*张?\s*(?:手牌中的)?(初始攻击|武术|法术|装备|牌|杀)牌?[,，]\s*(.+)$/);
+        const consM = ctx.desc.match(HAND_COST_CONSUME_RE);   // 句式单一登记点（hand-cost-patterns.js，与预检同源）
         if (consM) return { kind: 'consume', m: consM };
         return null;
       },

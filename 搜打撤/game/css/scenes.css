@@ -534,7 +534,7 @@
   #overlay .scene[data-asset-key]::before { content:""; position:absolute; inset:0; z-index:0; pointer-events:none; background:linear-gradient(90deg,rgba(9,9,9,.94),rgba(9,9,9,.72) 46%,rgba(9,9,9,.34)); }
   #overlay .scene[data-asset-key] > * { z-index:1; }
 
-  #overlay .scene[data-asset-key="scene-battle-bg"] { background-image:url('../assets/scenes/battle-ruins-night-anime-v3.webp'); }
+  #overlay .scene[data-asset-key="scene-battle-bg"] { background-image:url('../assets/scenes/battle-normal-anime-v2.webp'); }   /* 过场横幅与战斗 overlay 同图（迭代评审 09-20 E-P2：此前 ruins-v3 与 overlay 雪街割裂） */
   #overlay .scene[data-asset-key="scene-shop-bg"] { background-image:url('../assets/scenes/scene-shop-anime-v2.webp'); }
   #overlay .scene[data-asset-key="scene-event-bg"] { background-image:url('../assets/scenes/event-tt6-mystery.webp'); }
   #overlay .scene[data-asset-key="scene-fire-bg"] { background-image:url('../assets/scenes/scene-fire-anime-v2.webp'); }
@@ -585,10 +585,13 @@
   #overlay .scene[data-asset-key="scene-event-custom-c"], #overlay .node-pg[data-asset-key="scene-event-custom-c"] { background-image:url('../assets/scenes/event-tt6-relief.webp'); }
 
   .battle-stage { background-size:cover; background-position:center; }
-  .battle-stage[data-asset-key="battle-normal"] { background-image:url('../assets/scenes/battle-street-amber-anime-v1.webp'); }
-  .battle-stage[data-asset-key="battle-boss-general"] { background-image:url('../assets/scenes/battle-street-amber-anime-v1.webp'); }
-  .battle-stage[data-asset-key="battle-boss-orc"] { background-image:url('../assets/scenes/event-bandits-anime-v2.webp'); }
-  .battle-stage[data-asset-key="battle-boss-element"] { background-image:url('../assets/scenes/scene-altar-anime-v2.webp'); }
+  /* 战斗底图一键换血（迭代评审 09-20 美术岗 E-P1）：写实 street-amber 退役，四条统一挂
+     已预载的动漫雪街 battle-normal-anime-v2（进战斗不再从雪街跳写实现代都市）；
+     三首脑以 battle.css 的 per-boss ::after tint 差分区分，专属底图排产中（PRELOAD_SCENES 已留槽） */
+  .battle-stage[data-asset-key="battle-normal"] { background-image:url('../assets/scenes/battle-normal-anime-v2.webp'); }
+  .battle-stage[data-asset-key="battle-boss-general"] { background-image:url('../assets/scenes/battle-normal-anime-v2.webp'); }
+  .battle-stage[data-asset-key="battle-boss-orc"] { background-image:url('../assets/scenes/battle-normal-anime-v2.webp'); }
+  .battle-stage[data-asset-key="battle-boss-element"] { background-image:url('../assets/scenes/battle-normal-anime-v2.webp'); }
 
   #overlay .scene[data-asset-key="scene-event-cobbler"] { background-image:url('../assets/scenes/event-cmtn7qttxqo4.webp'); }
   #overlay .node-pg[data-asset-key="scene-event-cobbler"] { background-image:url('../assets/scenes/event-cmtn7qttxqo4.webp'); }

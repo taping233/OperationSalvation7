@@ -77,6 +77,9 @@ export function unlockNest() {
     Bn.data.nestUnlocked = true;
     Bn.save();
     UI.log('[[icon:door]] 污染核心的震动平息了……远方的<b>龙巢</b>苏醒——基地解锁了新的远征目标', 'loot');
+    // legend 琶音错峰 ~350ms（迭代评审 09-20 音频岗）：撤离时刻 victory 采样正在响，
+    // 叠放会糊；battle 采样路径无 delay 参数，只能外置 setTimeout
+    setTimeout(() => { if (SDT.Sound) SDT.Sound.sfx('legend'); }, 350);
   }
 }
 
@@ -120,7 +123,7 @@ export function openNestPrep() {
       else if (game.nestEquipped.length < 3) game.nestEquipped.push(r2);
       render();
     }));
-    UI.act('nestBack', () => { UI.hideOverlay(); game.state = 'idle'; exitToTitle(); });
+    UI.act('nestBack', () => { game.state = 'idle'; exitToTitle(); });   // 09-20：去手工 hideOverlay——exitToTitle 自带 immediate 同步关层
     UI.act('nestGo', () => startNestRun(eligible().filter((s2, i) => picks.has(i)).map(s2 => s2.card)));
   };
   game.nestEquipped = [];
@@ -149,6 +152,10 @@ function startNestRun(boxCards) {
   game.nestPos = 0;
   game.nestEquipped = game.nestEquipped || [];
   game.nestRunes = [];
+  // 跨局残留清零（迭代评审 09-20 C-P2）：上一局没选完的符文三选一 / 没用掉的定向符文箱
+  // 曾被带入下一局白拿——与 game.session 读档恢复对称
+  game.pendingRunePick = null;
+  game.nestTargetedBox = 0;
   pickNestBoss();
   game.cardBox = boxCards.map(c => ({ ...c }));
   // 附赠：初始攻击 ×5 + 职业卡 ×2（随机）

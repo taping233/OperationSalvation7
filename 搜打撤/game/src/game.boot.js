@@ -641,7 +641,8 @@ import { renderMiniMap } from './game.session.js';
     // 镜头快捷键按钮（旋转/定位/全景）已按 2026-09-06 留言删除，键盘 Q/E/F/G 仍可用
     const quality=document.getElementById('sceneQuality');
     if(quality){if(SDT.Renderer.metrics)quality.value=SDT.Renderer.metrics.quality;quality.addEventListener('change',()=>SDT.Renderer.setQuality?.(quality.value));}
-    document.getElementById('sceneFps')?.addEventListener('change',e=>{renderScheduler.activeInterval=1000/Number(e.target.value);renderScheduler.invalidate();});
+    // sceneFps 死监听删除（迭代评审 09-20 D-P3）：该元素在 index.html/ui.js 中均不存在，
+    // 且直改 activeInterval 绕过封装无校验；若将来恢复节奏档，走战斗设置 2× 档（battle.pace.js）
   SDT.Cards.ensureStarters();    // 补入初始牌（缺失时）
   SDT.Cards.ensureSha();         // 播入初始牌「初始攻击」（只播一次）
   SDT.Cards.ensureTabletop();    // 播入桌游手绘道具卡（只播一次）

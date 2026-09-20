@@ -13,17 +13,18 @@ import { openBaseHub } from './game.hub.js';
 
 // 选人页机制简介（2026-09-12 留言：按各职业卡池真实机制写，键 = characters.js 的 id）
 const CLASS_STORY = {
-  shuangling: '擅长物理攻击，可以潜行，精通流血与连击。',
-  baiqi: '以法术伤害为核心，精通用火球与诅咒压制敌人。',
-  lituan: '精通奥术法术，擅长发现新法术与召唤帮手。',
-  xuanli: '正面硬扛的战士，擅长叠护甲与施加流血。',
-  dengkui: '擅长治疗与圣盾，用圣光法术守护自己。',
+  wu: '擅长物理攻击，可以潜行，精通流血与连击。',
+  changwuyu: '以法术伤害为核心，精通用火球与诅咒压制敌人。',
+  baita: '精通奥术法术，擅长发现新法术与召唤帮手。',
+  heixiang: '正面硬扛的战士，擅长叠护甲与施加流血。',
+  xingyue: '擅长治疗与圣盾，用圣光法术守护自己。',
 };
 
 import { Sfx, _set_cardPageOpen, cardHTML } from './game.cardslib.js';
 import { Random } from './random.js';
 import { ensureBattleReady, startBattle } from './battle-loader.js';
 import { FIRE_RESTORABLE, finishInstant, grantEventCard, nodeOpt, nodeShell, openPocketRestore, openShop, preloadAllNodeShellBgs, showRunTransition } from './game.run.scenes.js';
+import { unlockNest } from './game.nest.js';
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const SDT = window.SDT;
 const UI = window.SDT.UI;
@@ -281,8 +282,9 @@ export function openClassChoice(options = {}) {
   });
   UI.act('cls2Quit', () => {   // 出发整备进来的选角页回整备；独立进入时仍回标题
     if (onCancel) { onCancel(); return; }
-    UI.hideOverlay();
-    setTimeout(() => exitToTitle(), 240);
+    // 迭代评审 09-20 客户端岗：setTimeout(240) 时序补丁退役——exitToTitle 现在自带
+    // immediate 同步关层，淡出窗口竞态在 ui.js 层根治
+    exitToTitle();
   });
   UI.act('pickClass', () => {
     if (!sel) return;
@@ -316,11 +318,11 @@ export function openClassChoice(options = {}) {
     // 2026-09-07 留言：选人进局要有过渡动画——复用节点过场（大门场景 + 角色名揭晓）；
     // 启程文案按人物区分（对应各自 tag 的语气）
     const START_LINES = {
-      shuangling: '刀锋出鞘，踏雪先行',
-      baiqi: '契约既成，答案待启',
-      lituan: '口袋里的星图，亮了',
-      xuanli: '最后一道防线，就位',
-      dengkui: '灯已点亮，照归途',
+      wu: '刀锋出鞘，踏雪先行',
+      changwuyu: '契约既成，答案待启',
+      baita: '口袋里的星图，亮了',
+      heixiang: '最后一道防线，就位',
+      xingyue: '灯已点亮，照归途',
     };
     const startLine = START_LINES[characterFor(cl).id] || '整备完毕，探索开始';
     // 2026-09-19 留言 #16：开局发放的两张职业卡改走专门「启程 event」页——不再只靠
@@ -706,10 +708,8 @@ function doExtract() {
     UI.log(`[[icon:pocket]] 撤离结算：消耗口袋 <b>${totalN}</b> 张只有 1/3 保留（带回 ${totalN - lostN} 张，散失 ${lostN} 张）`, 'sys');
   }
   // Item：首次击败一图首脑并成功撤离 → 解锁第二地图「龙巢」
-  if (game.bossKilled) {
-    const Bn = SDT.Base;
-    if (!Bn.data.nestUnlocked) { Bn.data.nestUnlocked = true; Bn.save(); UI.log('[[icon:door]] 龙巢已解锁——基地出现新的远征目标', 'loot'); }
-  }
+  // 迭代评审 09-20：内联解锁改调 unlockNest() 单一写点（legend 接音/文案随 nest.js 版）
+  if (game.bossKilled) unlockNest();
     B.deposit(game.inventory);
   B.depositCards(game.usedPocket, true);
   SDT.Meta.track('extract', { coins: game.coins, actions: game.turn - 1, cls: game.myClass });

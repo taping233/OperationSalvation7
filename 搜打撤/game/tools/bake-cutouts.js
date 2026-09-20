@@ -83,13 +83,17 @@ app.whenReady().then(async () => {
     const srcDir = path.join(ROOT, group);
     const outDir = path.join(OUT, group);
     fs.mkdirSync(outDir, { recursive: true });
-    for (const f of fs.readdirSync(srcDir).filter(n => n.endsWith('.png'))) {
+    // 输入兼容 .png/.webp（迭代评审 09-20 美术岗 D-P1）：portraits/enemies 现役 18 张全为 .webp，
+    // 旧过滤 .endsWith('.png') 对龙巢新图会 0 产出静默空转；MIME 跟随输入扩展名，产出统一 png
+    for (const f of fs.readdirSync(srcDir).filter(n => /\.png$|\.webp$/i.test(n))) {
+      const mime = /\.webp$/i.test(f) ? 'image/webp' : 'image/png';
       const b64 = fs.readFileSync(path.join(srcDir, f)).toString('base64');
       // 把 processOne 的函数源码内嵌进渲染进程调用（about:blank 页里没有主进程的符号）
       const url = await win.webContents.executeJavaScript(
-        `(${processOne.toString()})('data:image/png;base64,${b64}', ${MAX_H})`, true);
+        `(${processOne.toString()})('data:${mime};base64,${b64}', ${MAX_H})`, true);
       if (!url) { console.log(`跳过（判定失败）: ${group}/${f}`); skipped++; continue; }
-      fs.writeFileSync(path.join(outDir, f), Buffer.from(url.split(',')[1], 'base64'));
+      const outName = f.replace(/\.webp$/i, '.png');
+      fs.writeFileSync(path.join(outDir, outName), Buffer.from(url.split(',')[1], 'base64'));
       done++;
       console.log(`OK: ${group}/${f}`);
     }

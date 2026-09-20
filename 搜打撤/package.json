@@ -1,7 +1,7 @@
 {
   "name": "codename7-soudache-game",
   "private": true,
-  "version": "0.56.1",
+  "version": "0.57.0",
   "license": "MIT",
   "type": "module",
   "description": "搜打撤 · 代号7 游戏源码（Vite + Vitest）",
@@ -34,13 +34,9 @@
     "vitest": "^3.0.0"
   },
   "dependencies": {
-    "@pixi/particle-emitter": "^5.0.10",
     "howler": "^2.2.4",
     "inkjs": "^2.4.0",
     "motion": "^13.2.0",
-    "pixi.js": "^7.4.3",
-    "sortablejs": "^1.15.7",
-    "stats.js": "^0.17.0",
-    "three": "0.185.1"
+    "pixi.js": "^7.4.3"
   }
 }

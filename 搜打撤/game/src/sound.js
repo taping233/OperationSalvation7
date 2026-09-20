@@ -200,12 +200,16 @@ const battleBgm = new Howl({ src: [BATTLE_BGM_URL], loop: true, html5: false, pr
     chestShake: 0.5, chestBurst: 0.65, reveal: 0.45, legend: 0.55,
     victory: 0.5, defeat: 0.5,
     draw: 0.45, shuffle: 0.5, card: 0.5,
+    strike: 0.55,
   };
   // 敌我方向分化（音频 P2#10）：我打敌（hit）=升 rate 更亮更利；敌打我（hurt）=降 rate+低通更闷更沉，
   // 闭眼也能分辨「谁在挨打」；其余键保持 ±5% 通用变调
+  // strike（技能伤害，迭代评审 09-20）：复用 hit 实录池但 rate 微下探、不加低通——
+  // 与 hit（1.05-1.18 亮）/ hurt（0.82-0.9+低通闷）成「亮/沉/闷」三段，盲听可辨
   const BATTLE_TONE_SHAPE = {
     hit:  { rateMin: 1.05, rateMax: 1.18 },
     hurt: { rateMin: 0.82, rateMax: 0.9, lowpass: 1400 },
+    strike: { rateMin: 0.92, rateMax: 1.0 },
   };
   let battleBuffers = null; // null=未加载 {}=加载中/部分就绪
   function loadBattle() {
@@ -334,23 +338,34 @@ const battleBgm = new Howl({ src: [BATTLE_BGM_URL], loop: true, html5: false, pr
   }
 
   const lastSfxAt = new Map();
-  function sfx(name) {
+  // deny 反向抑制（迭代评审 09-20）：click 音挂在全局 pointerdown 委托、deny 多在 click 处理器内
+  // 触发——同一次按压必先响 click（间隔≈按住时长）。deny 播出前若发现新鲜 click 记录则吞掉 deny
+  // 保底音，消除「咔哒+错误低鸣」一按双响；视觉反馈（抖动/toast）不受影响。
+  // 窗口取 350ms 覆盖按住时长；非按钮路径（程序化 deny）无新鲜 click 记录，照常出声。
+  const DENY_SUPPRESS_MS = 350;
+  function sfx(name, opts) {
     if (muted || sfxOff) return;
     const stamp = typeof performance !== 'undefined' && performance.now ? performance.now() : Date.now();
+    if (name === 'deny') {
+      const lastClick = lastSfxAt.get('click');
+      if (lastClick != null && stamp - lastClick < DENY_SUPPRESS_MS) return;
+    }
     if (!shouldPlaySfx(name, stamp, lastSfxAt)) return;
     if (!ensure()) return;
     // 战斗/开箱采样优先（随机选一），未就绪或缺位时回退合成音
-    const pool = battleBuffers && battleBuffers[name];
+    // strike（技能伤害）复用 hit 实录池：避免同一批 ogg 双份解码驻留，音色差异靠 TONE_SHAPE rate 三段化
+    const poolKey = name === 'strike' ? 'hit' : name;
+    const pool = battleBuffers && battleBuffers[poolKey];
     if (pool && pool.length) {
       try {
         const src = ctx.createBufferSource();
         src.buffer = pool[Math.floor(Random.random('audio') * pool.length)];
         // SFX 变调随机化（audio-design）：±5% 播放速率，连续打击不机械；
-        // hit/hurt 按 BATTLE_TONE_SHAPE 覆盖（P2#10 敌我方向分化）
+        // hit/hurt/strike 按 BATTLE_TONE_SHAPE 覆盖（P2#10 敌我分化 + 09-20 技能沉音）
         const shape = BATTLE_TONE_SHAPE[name];
-        src.playbackRate.value = shape
+        src.playbackRate.value = (shape
           ? shape.rateMin + Random.random('audio') * (shape.rateMax - shape.rateMin)
-          : 0.95 + Random.random('audio') * 0.1;
+          : 0.95 + Random.random('audio') * 0.1) * ((opts && opts.rateScale) || 1);
         const g = ctx.createGain();
         g.gain.value = BATTLE_GAIN[name] || 0.5;
         if (shape && shape.lowpass) {
@@ -365,7 +380,8 @@ const battleBgm = new Howl({ src: [BATTLE_BGM_URL], loop: true, html5: false, pr
         return;
       } catch (e) { /* 落入合成回退 */ }
     }
-    // jsfxr 采样（gain/confirm/deny/levelup/strike）：语义独立，不与合成音互为回退
+    // jsfxr 采样（gain/confirm/deny/levelup/strike）：语义独立，不与合成音互为回退；
+    // strike 例外——实录为主（上方 hit 池），jsfxr hit 仅作实录未就绪时的兜底
     if (playJsfx(name)) return;
     const fn = SFX[name];
     if (!fn) return;
@@ -384,6 +400,8 @@ const battleBgm = new Howl({ src: [BATTLE_BGM_URL], loop: true, html5: false, pr
     const originalOn = on && musicSource === 'original';
     if (scape) {
       scape.setVolume(BASE_MUSIC * dbGain(musicVol) * 0.32 * (ducked ? 0.45 : 1));
+      // 模式映射定版（迭代评审 09-20）：title/base→title 层、battle→battle 层，
+      // 其余（含龙巢备战等 modal 界面）一律落 board 行军层——零成本，独立声景层留给未来真场景图
       scape.setMode(on && musicSource === 'scape' ? (['title', 'base'].includes(musicMode) ? 'title' : musicMode === 'battle' ? 'battle' : 'board') : null);
       // mp3 音乐源下不再整体静音声景：BOSS 紧张垫要经它透出（battle 层旁路，P2#12）
       scape.setMuted(!on);
@@ -439,9 +457,11 @@ const battleBgm = new Howl({ src: [BATTLE_BGM_URL], loop: true, html5: false, pr
     try { localStorage.setItem('sdt-music-source', musicSource); } catch (e) {}
     syncBgm();
   }
-  // 战斗 ducking 开关（battle.core 进出战斗时调用）
+  // 战斗 ducking 开关（battle.core 进出战斗时调用）。
+  // 参数校验（迭代评审 09-20）：曾有无参调用 setDucked() 被 !!v 强转成 false，
+  // 战斗中关音乐会静默解除侧链压低——非布尔直接拒绝并告警，防同类回归。
   function setDucked(v) {
-    v = !!v;
+    if (typeof v !== 'boolean') { console.warn('[sound] setDucked 需要布尔参数，收到：', v); return; }
     if (v === ducked) return;
     ducked = v;
     syncBgm();

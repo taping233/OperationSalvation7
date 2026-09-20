@@ -75,7 +75,7 @@ import { Random } from './random.js';
     bagMax: (_s, d) => (d
       ? SDT.MAP.rules.bagSize + (d.bagUp || 0)
       : SDT.Base.bagCap()) >= SDT.MAP.rules.bagMax,
-    // v2 基地：保护格由「携带宠物等级」驱动（safeUp 已废除）——旧公式 safeStart+safeUp
+    // v2 基地：安全格由「携带宠物等级」驱动（safeUp 已废除）——旧公式 safeStart+safeUp
     // 恒为 safeStart，成就永久死锁（2026-09-19 审计 P2-10）。此处按数据自算，peek 档与当前档通用。
     safeMax: (_s, d) => {
       const R = SDT.MAP.rules;
@@ -211,10 +211,21 @@ import { Random } from './random.js';
     if (dirty) B().save();
   }
 
+  // 播报去重按档位隔离（迭代评审 09-20 C-P3）：_seen 此前挂在模块级 ACHIEVEMENTS/
+  // COLL_MILESTONES 定义对象上、会话内不清——档位 1 解锁过的成就到档位 2 不再播报。
+  // 以 Base.slot 为键分桶，换档自动换新集合
+  const seenBySlot = new Map();
+  const seenSet = () => {
+    const k = (SDT.Base && SDT.Base.slot) || 'default';
+    if (!seenBySlot.has(k)) seenBySlot.set(k, new Set());
+    return seenBySlot.get(k);
+  };
+
   // 收藏进度达成播报（每次收藏后检查；未领取的里程碑只播报一次）
   function checkCollMilestones() {
-    const fresh = COLL_MILESTONES.filter(m => !isCollClaimed(m.id) && collMsReached(m) && !m._seen);
-    fresh.forEach(m => { m._seen = true; });
+    const seen = seenSet();
+    const fresh = COLL_MILESTONES.filter(m => !isCollClaimed(m.id) && collMsReached(m) && !seen.has('coll:' + m.id));
+    fresh.forEach(m => { seen.add('coll:' + m.id); });
     fresh.forEach(m => {
       if (SDT.UI) {
         SDT.UI.log(`[[icon:sparkles]] 职业收藏进度达成 <b>${collMsNeed(m)} / ${collTotal()}</b>` +
@@ -262,8 +273,9 @@ import { Random } from './random.js';
   function checkUnlocks() {
     syncBackUnlocks();
     syncCollXp();
-    const fresh = ACHIEVEMENTS.filter(a => isUnlocked(a) && !isClaimed(a.id) && !a._seen);
-    fresh.forEach(a => { a._seen = true; });
+    const seen = seenSet();
+    const fresh = ACHIEVEMENTS.filter(a => isUnlocked(a) && !isClaimed(a.id) && !seen.has('ach:' + a.id));
+    fresh.forEach(a => { seen.add('ach:' + a.id); });
     fresh.forEach(a => {
       if (SDT.UI) SDT.UI.log(`[[icon:trophy]] 成就解锁【<b>${a.name}</b>】${a.desc}——回基地领取奖励`, 'loot');
     });

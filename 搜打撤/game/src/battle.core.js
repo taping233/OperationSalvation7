@@ -11,6 +11,7 @@ import { createActionQueue } from './battle.actions.js';
 import { BATTLE_PHASES, beginTargeting, cancelTargeting, createBattleState, transitionBattle } from './battle.state.js';
 import { Random } from './random.js';
 import * as Combat from './combat.js';
+import { demoMs } from './battle.pace.js';
 import { emit as busEmit } from './event-bus.js';
 /* battle.core.js —— 战斗逻辑：牌库/出牌结算/词条时点/回合流转（渲染由注入的视图完成） */
 // 祝福挂上反馈钩（音频 P2#6）：addBlessing 生效即响，敌我通用——敌人强化同样是可听信息
@@ -160,7 +161,16 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
     const kind = def.behavior || (def.affix === 'grow' ? 'general' : def.affix === 'frenzy' ? 'orc_boss' : def.affix === 'aegis' ? 'element_boss' : 'strike');
     const meta = INTENT_META[kind] || INTENT_META.strike;
     const hits = def.affix === 'frenzy' || kind === 'orc_boss' ? 2 : 1;
-    return { kind, icon: meta[0], label: meta[1], damage: Math.max(0, def.atk || 0), hits };
+    // evenAttack 敌人（恶龙等）：奇数回合蓄力不攻击（与敌方阶段 evenAttack 分支同口径）。
+    // 此前意图恒显「攻击·18」却一半回合不动手，预告信任度崩坏（迭代评审 09-20 A-P1）
+    if (def.evenAttack && ((round || 1) % 2 === 1)) {
+      return { kind, icon: '[[icon:crystal]]', label: '蓄力·下回合行动', damage: null, hits: 1 };
+    }
+    // 意图实算口径（迭代评审 09-20 A-P1）：敌方普攻实际伤害 = atk + 玩家当前流血层
+    // （combat.js ATTACK 分支把目标流血计入 bonus），意图数字按同口径预告并带流血角标
+    const bleed = (pstat && pstat.status && pstat.status.bleed) || 0;
+    const atk = Math.max(0, def.atk || 0);
+    return { kind, icon: meta[0], label: meta[1], damage: atk + bleed, hits, bleedBonus: bleed };
   }
 
   const shuffle = shuffleCards;
@@ -656,10 +666,12 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
   function registerBattle(card, clause, target) {
     G.log(`[[icon:question]] <b>本局对战内</b>：${esc(clause)}（整场战斗有效，离开战斗失效）`, 'ok');
     const inner = clause.replace(/^(本局对战内|本场对战|本场战斗)[中内]?[：:，,]?\s*/, '');
-    if (/所有(?:法术|招式)[^。]*?1\s*费/.test(inner)) {
-      if (/所有招式/.test(inner)) {
+    // 银河之旅（迭代评审 09-20 终裁）：desc 已定稿「你的所有武术均为 1 费」——
+    // 触发正则补「武术」分支；实装只降武术（:530），「所有卡牌」是宇宙形态的口径，不得混同
+    if (/所有(?:法术|招式|武术)[^。]*?1\s*费/.test(inner)) {
+      if (/所有招式|所有武术/.test(inner)) {
         meleeCost1 = true;
-        G.log('[[icon:sparkles]] 持续规则：你的所有招式（武术）均按 <b>1</b> 费打出', 'ok');
+        G.log('[[icon:sparkles]] 持续规则：你的所有武术均按 <b>1</b> 费打出', 'ok');
       } else {
         spellCost1 = true;
         G.log('[[icon:sparkles]] 持续规则：你的所有法术均按 <b>1</b> 费打出', 'ok');
@@ -1484,10 +1496,13 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
     requestBattleRender();
   }
   function confirmInfuse() {
-    if (!infusing || infusing.picked.size !== infusing.need) return;
+    // 迭代评审 09-20：特色机制全程接音——成功=confirm 生效感，校验不过=deny（按钮路径会被
+    // deny 反向抑制吞掉、仅保留视觉，程序化路径正常出声，见 sound.js DENY_SUPPRESS_MS）
+    if (!infusing || infusing.picked.size !== infusing.need) { SDT.Sound.sfx('deny'); return; }
     const { uid, card } = infusing;
     const fuel = [...infusing.picked];
     infusing = null;
+    SDT.Sound.sfx('confirm');
     queueCardExecution(uid, card, fuel, alive()[0] || null);
   }
 
@@ -2489,7 +2504,7 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
         step(); return;
       }
       if (foe.evenAttack && turn % 2 === 1) {
-        G.log(`[[icon:crystal]] <b>${esc(foe.name)}</b> 蓄势待发（只有偶数回合攻击）`, 'sys');
+        G.log(`[[icon:crystal]] <b>${esc(foe.name)}</b> 蓄力（偶数回合才会攻击）`, 'sys');
         step(); return;
       }
       if (foe.noFirstAttack && turn === 1) {
@@ -2559,9 +2574,9 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
       }
       requestBattleRender();
       if (G.hp <= 0) { busy = false; finish(false); return; }
-      setTimeout(step, 420);
+      setTimeout(step, demoMs(420));   // 敌方步进：2× 档经 demoMs 单一倍率缩放（battle.pace.js）
     };
-    setTimeout(step, 420);
+    setTimeout(step, demoMs(420));
   }
 
   function afterEnemies() {
