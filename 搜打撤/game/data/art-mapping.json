@@ -86,7 +86,9 @@
     "tt8-hero-ranger": "wu-heavensword",
     "tt8-hero-descender": "hero-volcano",
     "tt8-hero-guardian": "hero-sacredsword",
-    "tt8-hero-warlock": "hero-forbidden"
+    "tt8-hero-warlock": "hero-forbidden",
+    "tt8-hero-priest": "hero-sacredrain",
+    "tt8-abyss-sovereign": "hero-abysssovereign"
   },
   "spellCardArt": [
     "cc-manasupply",
@@ -149,7 +151,10 @@
     "tt7-holyheal",
     "tt7-provoke",
     "tt7-bloodpotion",
-    "tt7-smite"
+    "tt7-smite",
+    "cc-ember-burst",
+    "cc-poison-burst",
+    "cc-rot-seed"
   ],
   "martialCardArt": [
     "tt7-throwblade",
@@ -213,7 +218,8 @@
     "tt7-demonbreaker",
     "tt7-fullstrike",
     "tt7-ironphalanx",
-    "tt7-bloodpoison"
+    "tt7-bloodpoison",
+    "cc-last-stand"
   ],
   "creatureCardArt": [
     "cmtn6ulm4boj",

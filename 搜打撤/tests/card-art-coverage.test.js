@@ -55,6 +55,14 @@ const LANDMARK_ART = [
   'equip-tt8-archdemon',         // 天启诛魔剑
   // 无专属新定（2026-09-12 老板拍板 cls=侠客 + 专属卡面）
   'martial-tt7-imitate',         // 不变应万变（静立环刃）
+  // 缺口补图批次（2026-09-20 老板验收实装：6 装 1 弃——青龙化身维持 hero-warrior 职业图，不装新图）
+  // hero 族条目直接登记卡 id（文件经 heroCardArt 映射解析，与三族"族-卡id.webp"约定不同）
+  'tt8-hero-priest',             // 浪掷风吟（星灯甘霖 hero-sacredrain，替换牧师职业图兜底）
+  'tt8-abyss-sovereign',         // 深渊主宰·妲莉薇特（真身显形 hero-abysssovereign，替换降临者职业图兜底）
+  'spell-cc-ember-burst',        // 余烬爆裂（死灰双层炸裂）
+  'spell-cc-poison-burst',       // 毒爆（双重冲击环）
+  'spell-cc-rot-seed',           // 腐化之种（腐种破土芽指下一宿主）
+  'martial-cc-last-stand',       // 破釜沉舟（背水剪影）
 ];
 
 let allCards;
@@ -82,8 +90,18 @@ describe('卡面实装守卫：孤儿检测', () => {
 });
 
 describe('卡面实装守卫：定稿卡面清单', () => {
+  // hero 族能力卡的卡面文件名与卡 id 解耦（heroCardArt: 卡id → 图key，文件 cards/<图key>.webp），
+  // 三族仍是"族-卡id.webp"直读。清单里无三族前缀的条目按 hero 族映射解析。
+  const artMapping = JSON.parse(readFileSync(path.join(ROOT, 'game', 'data', 'art-mapping.json'), 'utf8'));
+  const HERO_KEY_BY_CARD = artMapping.heroCardArt || {};
+  const landmarkFileMissing = (key) => {
+    if (/^(martial|spell|equip)-/.test(key)) return !existsSync(path.join(CARDS_DIR, `${key}.webp`));
+    const heroKey = HERO_KEY_BY_CARD[key];
+    return !heroKey || !existsSync(path.join(CARDS_DIR, `${heroKey}.webp`));
+  };
+
   it('LANDMARK_ART 登记的每张卡都有对应专属图文件', () => {
-    const missing = LANDMARK_ART.filter(key => !existsSync(path.join(CARDS_DIR, `${key}.webp`)));
+    const missing = LANDMARK_ART.filter(landmarkFileMissing);
     expect(missing, `定稿卡面缺文件: ${missing.join(', ')}`).toEqual([]);
   });
 
