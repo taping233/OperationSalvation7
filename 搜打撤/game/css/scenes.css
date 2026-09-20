@@ -350,6 +350,34 @@
   }
   @keyframes psFill { to { width: 100%; } }
   @keyframes psBlink { 0%, 100% { opacity: .5; } 50% { opacity: 1; } }
+  /* 宝箱立绘（2026-09-20 老板令：奖励界面宝箱专门放图片和动画）——
+     搜索态=大图居中轻晃（被翻检的手感，替换旧提灯图标替身）；
+     揭晓态=缩到卡牌上方，出场爆闪一次 + 盖缝金光呼吸（::before 径向光斑）。
+     动画只走 transform/opacity 合成器通道（性能三铁律） */
+  .chest-prop { display:block; width:clamp(240px,32vw,360px); height:auto; pointer-events:none;
+    user-select:none; filter:drop-shadow(0 14px 22px rgba(0,0,0,.6)); }
+  .pick-search .chest-prop { animation: chestRummage 1.5s ease-in-out infinite; }
+  @keyframes chestRummage {
+    0%, 100% { transform: rotate(0deg) translateY(0); }
+    22% { transform: rotate(-1.7deg) translateY(-2px); }
+    38% { transform: rotate(1.8deg) translateY(0); }
+    54% { transform: rotate(-1.3deg) translateY(-3px); }
+    70% { transform: rotate(1.5deg) translateY(-1px); }
+    86% { transform: rotate(0deg) translateY(0); }
+  }
+  .chest-reveal { position:relative; isolation:isolate; display:flex; justify-content:center; margin:2px 0 0; }
+  .chest-reveal .chest-prop { width:clamp(170px,20vw,230px);
+    animation: chestOpenPop .62s cubic-bezier(.2,1.4,.4,1) backwards; }
+  .chest-reveal::before { content:''; position:absolute; left:50%; bottom:6%; transform:translateX(-50%);
+    width:72%; height:58%; border-radius:50%; pointer-events:none; z-index:-1;
+    background:radial-gradient(ellipse at center, rgba(255,206,120,.42), rgba(255,206,120,0) 70%);
+    filter:blur(6px); animation: chestGlowPulse 1.9s ease-in-out .55s infinite backwards; }
+  @keyframes chestOpenPop {
+    0% { transform: scale(.6) translateY(12px); opacity:.4; }
+    55% { transform: scale(1.07) translateY(-3px); opacity:1; }
+    100% { transform: scale(1) translateY(0); opacity:1; }
+  }
+  @keyframes chestGlowPulse { 0%, 100% { opacity:.5; } 50% { opacity:1; } }
   /* 选项条：深色半透明圆角条 + 细亮描边，文字居中（杀戮尖塔式） */
   /* 选项条：深色半透明圆角条 + 细亮描边（2026-09-15 与 expedition-rewards 生效值对齐，单源化） */
   #overlay .node-pg .evt-opt { align-items: flex-start; text-align: left; gap: 6px;

@@ -16,6 +16,19 @@ import { escAttr } from './shared.js';
   const KINDS = () => SDT.MAP.chestKinds;
   const rndInt = (a, b) => a + Math.floor(Random.random('loot') * (b - a + 1));
 
+  // 宝箱立绘（2026-09-20 老板令：奖励界面宝箱要专门放图片和动画）——
+  // 五种宝箱各一张 NAI painterly 立绘（近黑底已抠透明），scenes/ 目录自动进预加载清单；
+  // 职业宝箱=medium+isClass 的黑色变体，走独立图
+  const CHEST_ART = {
+    small: new URL('../assets/scenes/scene-chest-small-anime-v1.webp', import.meta.url).href,
+    medium: new URL('../assets/scenes/scene-chest-medium-anime-v1.webp', import.meta.url).href,
+    large: new URL('../assets/scenes/scene-chest-large-anime-v1.webp', import.meta.url).href,
+    boss: new URL('../assets/scenes/scene-chest-boss-anime-v1.webp', import.meta.url).href,
+  };
+  const chestArtOf = (cur) => cur.isClass
+    ? new URL('../assets/scenes/scene-chest-class-anime-v1.webp', import.meta.url).href
+    : (CHEST_ART[cur.kind] || CHEST_ART.medium);
+
   // 同一面板去重（2026-09-13 老板口径：同一个选择面板内不许重复）：
   // 除同 id 外，卡名相同的不同版本（如「冰冻药水」有法术/道具两张）在面板里
   // 看起来也是同一张牌，一并算重复。ids 同时喂给 cards.js 随机池排除
@@ -207,6 +220,8 @@ import { escAttr } from './shared.js';
 
   // 搜索物资演出（2026-09-09 老板 #3）：搜刮点/宝箱先演一段「翻检」，
   // 约 0.78s 后才揭晓开出的卡牌，收获不再凭空蹦出来
+  // 09-20 老板令：搜索阶段直接上宝箱本体立绘（轻晃=被翻检的手感），
+  // 旧提灯图标（没图时代的替身）退役；进度条/提示文字保留
   const SEARCH_MS = 780;
   function renderSearch() {
     const K = KINDS()[cur.kind];
@@ -214,7 +229,7 @@ import { escAttr } from './shared.js';
     UI.showOverlay(`[[icon:archive]] 搜刮！${cur.isClass ? '职业·' : ''}${K.name} · 第 ${idx} / ${queue.length}`, `
       <p class="evt-sts-desc">${cur.isClass ? '黑色职业宝箱：只掉落<b>职业卡牌</b>' : '你俯身翻检箱子——灰尘、锈迹，还有别的东西。'}</p>
       <div class="pick-search">
-        <span class="ps-lantern">[[icon:lantern]]</span>
+        <img class="chest-prop ps-chest" src="${chestArtOf(cur)}" alt="" draggable="false">
         <span class="ps-ground"><i></i></span>
         <p class="ps-tip">正在搜索物资…</p>
       </div>`, 'chest');
@@ -284,6 +299,7 @@ import { escAttr } from './shared.js';
       ${cur.isClass ? '<p class="evt-sts-desc cls-chest-note">黑色职业宝箱：只掉落<b>职业卡牌</b></p>' : ''}
       <p class="evt-sts-desc">${lootLine}</p>
       ${warnLine}
+      <div class="chest-reveal"><img class="chest-prop opened" src="${chestArtOf(cur)}" alt="" draggable="false"></div>
       ${cur.cards.length ? `<div class="bt-hand${taken.size ? ' no-anim' : ''}" data-n="${cur.cards.length}">${cardsHTML}</div>` : '<p class="ov-empty">（卡牌库是空的，什么也没开出）</p>'}
       <div class="loot-footer-note">${isPick ? '点击一张收下' : '点击卡牌可逐张收取'} · 未收取的卡牌将散落</div>${ops}`, 'chest');
     UI.act('chestTake', takeAll);

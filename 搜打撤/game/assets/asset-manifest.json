@@ -1,8 +1,14 @@
 {
   "_comment": "资产清单(create-game-assets模板裁剪版): path/ext/bytes/license。assets:audit 校验未登记文件。",
   "generated": "2026-09-08",
-  "count": 262,
+  "count": 267,
   "assets": [
+    {
+      "path": "bgm-cisheng-yuanan.mp3",
+      "ext": "mp3",
+      "bytes": 4406738,
+      "license": "项目自有（初弦 创作授权）"
+    },
     {
       "path": "bgm-liejie-fuhe.mp3",
       "ext": "mp3",
@@ -14,12 +20,6 @@
       "ext": "mp3",
       "bytes": 3745036,
       "license": "项目自有（自制/AI 生成）"
-    },
-    {
-      "path": "bgm-cisheng-yuanan.mp3",
-      "ext": "mp3",
-      "bytes": 4406738,
-      "license": "项目自有（初弦 创作授权）"
     },
     {
       "path": "brand-mark-codename7.png",
@@ -628,13 +628,13 @@
       "license": "项目自有（自制/AI 生成）"
     },
     {
-      "path": "portraits/avatars/baiqi.webp",
+      "path": "portraits/avatars/changwuyu.webp",
       "ext": "webp",
       "bytes": 13808,
       "license": "项目自有（自制/AI 生成）"
     },
     {
-      "path": "portraits/avatars/shuangling.webp",
+      "path": "portraits/avatars/wu.webp",
       "ext": "webp",
       "bytes": 13582,
       "license": "项目自有（自制/AI 生成）"
@@ -814,19 +814,19 @@
       "license": "项目自有（自制/AI 生成）"
     },
     {
-      "path": "portraits/full/baiqi.webp",
-      "ext": "webp",
-      "bytes": 513796,
-      "license": "项目自有（自制/AI 生成）"
-    },
-    {
       "path": "portraits/full/baita.webp",
       "ext": "webp",
       "bytes": 600084,
       "license": "项目自有（老板指定立绘）"
     },
     {
-      "path": "portraits/full/shuangling.webp",
+      "path": "portraits/full/changwuyu.webp",
+      "ext": "webp",
+      "bytes": 513796,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "portraits/full/wu.webp",
       "ext": "webp",
       "bytes": 417520,
       "license": "项目自有（自制/AI 生成）"
@@ -865,6 +865,36 @@
       "path": "scenes/scene-chest-anime-v2.webp",
       "ext": "webp",
       "bytes": 102936,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "scenes/scene-chest-boss-anime-v1.webp",
+      "ext": "webp",
+      "bytes": 124864,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "scenes/scene-chest-class-anime-v1.webp",
+      "ext": "webp",
+      "bytes": 93464,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "scenes/scene-chest-large-anime-v1.webp",
+      "ext": "webp",
+      "bytes": 156162,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "scenes/scene-chest-medium-anime-v1.webp",
+      "ext": "webp",
+      "bytes": 131346,
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "scenes/scene-chest-small-anime-v1.webp",
+      "ext": "webp",
+      "bytes": 131822,
       "license": "项目自有（自制/AI 生成）"
     },
     {
