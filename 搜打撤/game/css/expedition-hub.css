@@ -14,6 +14,12 @@
 .deploy-mission-target small { color:#d2d7d0; font-size:11px; }
 #overlay .deploy-primary { display:inline-flex; align-items:center; justify-content:space-between; gap:28px; width:min(100%,270px); margin-top:22px; padding:12px 15px; border:1px solid #e0c77f; border-radius:2px; background:linear-gradient(135deg,#c5a85e,#967a3f); color:#17150f; font-weight:800; font-size:15px; box-shadow:0 8px 22px rgba(0,0,0,.28); cursor:pointer; }
 #overlay .deploy-primary:hover { filter:brightness(1.1); transform:translateY(-1px); }
+/* 龙巢（09-20 高级感改造批1）：未解锁态不再内联暗紫底+金底深字（深字压暗底不可读），
+   改 class 双态——解锁=与出发整备同款金底，未解锁=暗蓝底浅字弱化 */
+#overlay .deploy-primary.nest-locked { border-color:rgba(224,199,127,.35); background:linear-gradient(135deg,rgba(36,58,74,.92),rgba(14,30,42,.94)); color:#cfe0e4; box-shadow:none; }
+#overlay .deploy-primary.nest-locked:hover { filter:none; transform:translateY(-1px); border-color:rgba(224,199,127,.6); }
+/* 金底上的位图图标压成深色剪影（09-20 批1）：exit/lock 原图为青蓝调，直接放金底显脏 */
+#overlay .deploy-primary .ic { filter:brightness(.45) saturate(.9); }
 .deploy-primary span { font-size:21px; line-height:1; }
 .deploy-mode-dock { position:relative; z-index:2; padding:14px clamp(16px,2.4vw,28px) 16px; background:rgba(5,12,19,.82); border-top:1px solid rgba(210,201,169,.22); }
 .dock-label { display:block; margin-bottom:10px; color:#d9d1bd; font-size:11px; letter-spacing:1.5px; }

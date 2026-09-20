@@ -275,13 +275,12 @@ body.page-opaque #sidebar{visibility:hidden}
 #overlay .pg.slot-page .pg-back .en{font:10px 'Cascadia Code';letter-spacing:2px;opacity:.75}
 .pg.slot-page .slot-deck{padding-bottom:34px}
 
-/* —— 基地主页：四面留白 + 壁纸（老板指定图，assets/scenes/hub-wallpaper.webp） —— */
+/* —— 基地主页：四面留白 + 壁纸（老板指定图，assets/scenes/hub-wallpaper.webp）
+   注意：背景栈已被 expedition-inventory.css 的 #overlay #hubMain（09-20 批1提亮版）接管，
+   此处 #hubMain 特异性较低仅为历史底稿，生效规则以 expedition-inventory.css 为准 —— */
 #hubMain{padding:22px 30px 26px}
 #hubMain .hub-head{padding:12px 12px 12px 16px;border-radius:10px;background:rgba(10,20,28,.55);border:1px solid #68808b55}
 #hubMain .hub-body{margin-top:14px;border-radius:10px}
-#hubMain{background:
-  linear-gradient(180deg,rgba(9,18,26,.66),rgba(9,18,26,.8)),
-  url('../assets/scenes/hub-wallpaper.webp') center/cover no-repeat fixed}
 
 /* —— 设置页：重排（行距/分组拉开）+ 色调与成就页统一（深蓝金） —— */
 .pg.settings-page{background:linear-gradient(125deg,#1b3645,#102431)}
@@ -389,48 +388,11 @@ body.page-opaque #sidebar{visibility:hidden}
 /* —— 选档页：返回键已挪左上（上面的 left/top 生效），旧的触底覆盖删除 —— */
 .pg.slot-page .slot-deck{padding-bottom:clamp(56px,9vh,96px)}
 
-/* —— 基地页：hub-card 框改浅色背景（与卡牌库浅色展示区同系），文字随之深色化 —— */
-#overlay .hub-card,#overlay .hub-card.gate-strip{background:linear-gradient(168deg,#ece9e2,#dcd8ce);border-color:#b7b4aa}
-#overlay .hub-card h3{color:#3c3a33}
-#overlay .hub-card h3 .ic,#overlay .hub-card .base-line .ic,#overlay .hub-card .pk-row .ic,
-#overlay .hub-card .ov-btn .ic,#overlay .hub-card .mini-btn .ic,#overlay .hub-card .hint .ic{filter:brightness(.42) saturate(1.15)}
-#overlay .hub-card .set-tip{color:#8a8677}
-#overlay .hub-card .pk-row,#overlay .hub-card .stash-row,#overlay .hub-card .dep-row{border-bottom-color:#c9c5b8}
-#overlay .hub-card .pk-row,#overlay .hub-card .base-line,#overlay .hub-card .dim,
-#overlay .hub-card .hint,#overlay .hub-card .ov-empty,#overlay .hub-card .xp-txt,
-#overlay .hub-card .ach-info span,#overlay .hub-card .ach-info b,#overlay .hub-card .pet-row div,
-#overlay .hub-card .si-line,#overlay .hub-card .back-card b{color:#4a473e}
-#overlay .hub-card .base-line b,#overlay .hub-card .pk-row b{color:#7a5c22}
-#overlay .hub-card .ok-hint{color:#3f6e46}
-#overlay .hub-card .base-bar{background:#d3cfc2}
-#overlay .hub-card .xp-bar{background:#d3cfc2}
-#overlay .hub-card .res-chip,#overlay .hub-card .fc-chip{background:#f7f5ef;border-color:#bcb8aa;color:#55524a}
-#overlay .hub-card .res-chip b,#overlay .hub-card .fc-chip b{color:#7a5c22}
-#overlay .hub-card .res-chip .ic,#overlay .hub-card .fc-chip .ic{filter:brightness(.42) saturate(1.15)}
-#overlay .hub-card .mode-card{background:#f7f5ef;border-color:#c9c5b8}
-#overlay .hub-card .mode-card.on{background:#fff;border-color:#b8934c;box-shadow:inset 3px 0 #b8934c}
-#overlay .hub-card .mode-card .mode-info b{color:#3c3a33}
-#overlay .hub-card .mode-card .mode-info span{color:#6b685b}
-#overlay .hub-card .mode-card .mode-ckpt{color:#8a6a2f}
-#overlay .hub-card .mode-card .mode-ico .ic{filter:brightness(.42) saturate(1.15)}
-#overlay .hub-card .ov-btn,#overlay .hub-card .mini-btn{background:#e2dfd5;border-color:#a8a496;color:#3c3a33}
-#overlay .hub-card .ov-btn:hover,#overlay .hub-card .mini-btn:hover{background:#d5d1c3;border-color:#7d796b}
-#overlay .hub-card .ov-btn.ok,#overlay .hub-card .mini-btn.ok{background:#d8bc86;border-color:#c8a860;color:#17303e}
-#overlay .hub-card .ov-btn.danger,#overlay .hub-card .mini-btn.danger{background:#8f4a42;border-color:#a8695f;color:#f3dcd5}
-#overlay .hub-card .back-card{background:#f7f5ef;border-color:#c9c5b8}
-#overlay .hub-card .back-card .dim{color:#6b685b}
-#overlay .hub-card .ach-row{border-bottom-color:#c9c5b8}
-#overlay .hub-card .gate-txt b,#overlay .hub-card .gate-txt span{color:#4a473e}
-#overlay .hub-card .stash-pop-card{color:#4a473e}
-#overlay .hub-card .rw{color:#6b685b}
-#overlay .hub-card .got{color:#3f6e46}
-/* 职业收藏室（浅色主题适配） */
-#overlay .hub-card .coll-ms{background:#f7f5ef;border-color:#c9c5b8}
-#overlay .hub-card .coll-ms.reach{background:#fff;border-color:#b8934c}
-#overlay .hub-card .coll-ms b,#overlay .hub-card .coll-group-head b{color:#3c3a33}
-#overlay .hub-card .coll-slot.on{background:#f7f5ef;border-color:#b7b4aa}
-#overlay .hub-card .coll-slot.off{border-color:#b7b4aa;background:repeating-linear-gradient(45deg,#eceae2,#eceae2 6px,#e4e1d7 6px,#e4e1d7 12px)}
-#overlay .hub-card .coll-slot.off span{color:#a8a496}
+/* 09-20 高级感改造批4：原「基地页 hub-card 米白化」391-432 段与「浅色化补漏」489-499 段
+   已整体删除——该两段为旧米白纸感主题所写，hub-card 背景与文字色现由 expedition-inventory.css
+   （深海军蓝体系）以更高特异性接管，米白段仅剩 gate-txt 深棕字、图标压暗 filter 等残留继续
+   制造对比度问题；运行时 CSSOM 删除对照验证两上下文（仓库/成就）样式零变化后移除。
+   出征整备（depMain）、卡牌库、图标尺寸等穿插规则未受影响，原样保留。 */
 
 /* —— 出征整备页（depMain）：沿用基地主页壁纸 —— */
 #depMain{padding:22px 30px 26px;background:
@@ -487,17 +449,8 @@ body.page-opaque #sidebar{visibility:hidden}
 /* 滚动中（.scrolling 由 JS 挂）禁用 hover 缩放，消除滑动时逐卡层切换开销 */
 .lib-grid.scrolling .lib-cardwrap{pointer-events:none}
 
-/* —— 基地浅色化补漏：pk-row 行底仍是深黑、ach-row 仍是深蓝，看不清 —— */
-#overlay .hub-card .pk-row,#overlay .pk-row{background:#f7f5ef;border-color:#c9c5b8}
-#overlay .hub-card .pk-row .dim,#overlay .pk-row .dim{color:#8a8677}
-#overlay .hub-card .stash-row:hover{background:#efece2;border-color:#a8a496}
-#overlay .hub-card .stash-row.collected{background:linear-gradient(180deg,#fbf9f3,#f0ede3);border-color:#b8934c}
-#overlay .hub-card .ach-row{background:#f7f5ef;border-color:#c9c5b8}
-#overlay .hub-card .ach-row.done{background:linear-gradient(180deg,#fbf9f3,#f0ede3);border-color:#b8934c}
-#overlay .hub-card .ach-ico{border-color:#c9c5b8;background:radial-gradient(ellipse at 50% 30%,#efece2,#dcd8ce 85%)}
-#overlay .hub-card .ach-row .rw{color:#6b685b}
-#overlay .hub-card .ach-ops .mini-btn{background:#e2dfd5;border-color:#a8a496;color:#3c3a33}
-#overlay .hub-card .dep-stepper .step-btn{background:#e2dfd5;border-color:#a8a496;color:#3c3a33}
+/* 09-20 批4：原「基地浅色化补漏」段（pk-row/ach-row/step-btn 米白底）一并删除，
+   同属旧米白主题残留，现役深蓝样式以 expedition-inventory.css 为准。 */
 
 /* —— 选人页：「查看角色卡池」点不到——cls2-strip 全宽透明容器（z:3）盖住面板底部，
       加上左下返回键重叠；让条只命头像本身，面板底部抬高让卡池按钮露出 —— */

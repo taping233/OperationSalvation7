@@ -242,7 +242,7 @@ let hubCollectionView = 'backs';
             <p class="deploy-mission-lead">从边缘街区切入，搜集资源、识别风险，并把能带回来的东西带回基地。</p>
             <div class="deploy-mission-target"><span>本局目标</span><b>${esc(m.name)}</b><small>${esc(m.ckpt)}</small></div>
             <button id="btnDeploy" class="deploy-primary" data-act="deploy">[[icon:exit]] 出发整备 <span>→</span></button>
-            <button id="btnNest" class="deploy-primary" data-act="nestDeploy" style="margin-top:10px;background:linear-gradient(160deg,#2a1c33,#151020)"
+            <button id="btnNest" class="deploy-primary${SDT.Base.data.nestUnlocked ? '' : ' nest-locked'}" data-act="nestDeploy" style="margin-top:10px"
               title="${SDT.Base.data.nestUnlocked ? '第二地图：直捣龙巢，夺取符文与龙宝' : '首次击败一图首脑并成功撤离后解锁'}">${SDT.Base.data.nestUnlocked ? '[[icon:skull]] 龙巢远征 <span>→</span>' : '[[icon:lock]] 龙巢（未解锁）'}</button>
           </div>
           <div class="deploy-mode-dock">
@@ -535,18 +535,23 @@ let hubCollectionView = 'backs';
   function hubShopHTML() {
     const B = SDT.Base;
     const room = B.stashRoom();
+    // 09-20 高级感改造批3：货架化——卡牌商品挂小卡面（同仓库网格缩放法），物资挂大图标；
+    // 09-20 P1-6 的 poor 降饱和与原因行内可见口径保留
     const rows = HUB_SHOP_GOODS.map((g, i) => {
       const affordCoin = B.data.coins >= g.price;
       const roomOk = g.material ? true : room > 0;
       const afford = affordCoin && roomOk;
       const why = !affordCoin ? '储备币不足' : (roomOk ? (g.material ? '买入物资' : '买入仓库') : '仓库已满');
-      const label = g.material
-        ? `[[icon:${g.material === 'wood' ? 'wood' : 'bread'}]] <b>${esc(g.name)}</b><span class="dim"> · 基地物资 · ${escAttr(g.tip)}</span>`
-        : (() => { const card = hubShopGoodsCard(g); return card ? `[[icon:cards]] <b>${esc(card.name)}</b><span class="dim"> · ${esc(card.type)} · ${escAttr(g.tip)}</span>` : ''; })();
-      // 09-20 P1-6：买不起整行降饱和（poor 类）+ 原因写在行内（title 已被全局摘除不可依赖）；
-      // 价签换描边胶囊（shop-price-tag），不再是大色块压描述
-      return `<div class="pk-row stash-row${afford ? '' : ' poor'}" title="${escAttr(g.tip)}">
-          <span>${label}${afford ? '' : `<span class="dim poor-why"> · ${escAttr(why)}</span>`}</span>
+      const card = g.material ? null : hubShopGoodsCard(g);
+      const visual = g.material
+        ? `<span class="shelf-ico">[[icon:${g.material === 'wood' ? 'wood' : 'bread'}]]</span>`
+        : (card ? SDT.Cards.cardHTML(card, 'sm') : '');
+      const name = g.material ? esc(g.name) : (card ? esc(card.name) : '');
+      const kind = g.material ? '基地物资' : (card ? esc(card.type) : '');
+      return `<div class="shelf-item${afford ? '' : ' poor'}">
+        <span class="shelf-visual">${visual}</span>
+        <span class="shelf-info"><b>${name}</b><span class="dim">${kind} · ${escAttr(g.tip)}</span>
+          ${afford ? '' : `<span class="poor-why">${escAttr(why)}</span>`}</span>
         <button class="mini-btn ok shop-price-tag" data-act="shopBuy" data-i="${i}" ${afford ? '' : 'disabled'} title="${escAttr(why)}">[[icon:coin]] ${g.price} 币</button>
       </div>`;
     }).join('');
@@ -555,7 +560,7 @@ let hubCollectionView = 'backs';
         <section class="hub-card">
           <h3>[[icon:coin]] 远征补给商店</h3>
           <div class="base-line">储备 <b>${B.data.coins}</b> 币 · 仓库空格 <b>${room}</b> 格</div>
-          <div class="stash-list">${rows}</div>
+          <div class="shop-shelf">${rows}</div>
         </section>
         <section class="hub-card">
           <h3>[[icon:book]] 补给说明</h3>
@@ -572,26 +577,33 @@ let hubCollectionView = 'backs';
     const pkN = B.data.pocket.reduce((a, b) => a + b.count, 0);
     const collN = Object.keys(B.data.collection).length;
     const keys = B.keyCount ? B.keyCount() : 0;
+    // 09-20 高级感改造批2：卡牌仓库从文字行改卡面网格——复用出征整备/收藏室同款
+    // cardHTML('sm') 卡面，点击仍走 stashItem 弹窗（卖出/收藏交互不变）
     const stashRows = B.data.stash.length
-      ? B.data.stash.map((s, i) => {
+      ? `<div class="stash-cardgrid">${B.data.stash.map((s, i) => {
           const marked = B.isCollected(s.card);
           const mat = B.materialInfo ? B.materialInfo(s.card) : null;
-          const meta = mat
-            ? `可使用 · 每张折入${mat.label} ×${B.materialAmount(s.card)} · 不可卖币`
-            : `${s.card.cost}费 · ${s.card.type}${s.card.cls ? ' · ' + esc(characterName(s.card.cls)) : ''} · 收购 ${SDT.Cards.sellPrice(s.card)} 币/张`;
-          return `<button type="button" class="pk-row stash-row${marked ? ' collected' : ''}" data-act="stashItem" data-i="${i}"
-              aria-label="${escAttr(s.card.name)}，${mat ? '使用材料' : '卖出或收藏'}" title="${mat ? '点击查看：使用（材料不可卖出）' : '点击查看：卖出 / 收藏'}">
-            <span>[[icon:cards]] ${marked ? '[[icon:sparkles]]' : ''} <b>${esc(s.card.name)}</b>${s.count > 1 ? ` ×${s.count}` : ''}</span>
-            <span class="dim">${meta}</span>
+          return `<button type="button" class="stash-cell${marked ? ' collected' : ''}${mat ? ' is-material' : ''}" data-act="stashItem" data-i="${i}"
+              aria-label="${escAttr(s.card.name)}${s.count > 1 ? ` ×${s.count}` : ''}，${mat ? '使用材料' : '卖出或收藏'}"
+              title="${escAttr(s.card.name)}${s.count > 1 ? ` ×${s.count}` : ''} · ${mat ? '点击使用（材料不可卖出）' : '点击卖出 / 收藏'}">
+            ${SDT.Cards.cardHTML(s.card, 'sm')}
+            ${s.count > 1 ? `<b class="stack-count">×${s.count}</b>` : ''}
+            ${marked ? '<span class="cell-mark">[[icon:sparkles]]</span>' : ''}
+            ${mat ? '<span class="cell-tag">可使用</span>' : ''}
           </button>`;
-        }).join('')
-      : '<p class="ov-empty" style="margin:2px 0 0">（空——撤离成功后在整理界面把战利品放回这里）</p>';
-    // 消耗口袋：按稀有度用钥匙复原（需求 #1/#11：古朴1/稀有2/史诗3/传说4）
+        }).join('')}</div>`
+      : `<div class="stash-empty">
+          <span class="empty-ico">[[icon:archive]]</span>
+          <b>仓库空空如也</b>
+          <span>撤离成功后在整理界面把战利品放回这里；出发页点「出发整备」即可开启第一趟远征。</span>
+        </div>`;
+    // 消耗口袋：按稀有度用钥匙复原（需求 #1/#11：古朴1/稀有2/史诗3/传说4）；行首挂小卡面缩略
     const pocketRows = B.data.pocket.length
       ? B.data.pocket.map((p, i) => {
           const cost = B.pocketKeyCost(p);
           const afford = keys >= cost;
-          return `<div class="pk-row"><span>[[icon:cards]] <b>${esc(p.card.name)}</b>${p.count > 1 ? ` ×${p.count}` : ''}
+          return `<div class="pk-row pocket-row"><span class="pocket-thumb">${SDT.Cards.cardHTML(p.card, 'sm')}</span>
+            <span class="pocket-info"><b>${esc(p.card.name)}</b>${p.count > 1 ? ` ×${p.count}` : ''}
               <span class="dim">· ${esc(p.card.rarity || '?')}</span></span>
             <button class="mini-btn ok" data-act="restoreCard" data-i="${i}" ${afford ? '' : 'disabled'}
               title="${afford ? '消耗钥匙复原到卡牌仓库' : '钥匙不足'}">[[icon:key]] 复原 ×${cost}</button></div>`;
@@ -603,19 +615,23 @@ let hubCollectionView = 'backs';
           <h3>[[icon:archive]] 卡牌仓库</h3>
           <div class="base-line">仓库容量 <b>${used}</b> / ${cap} 张 · [[icon:sparkles]] 图鉴 <b>${collN}</b></div>
           <div class="base-bar"><i style="width:${(used / cap * 100).toFixed(1)}%"></i></div>
-          <div class="stash-list">${stashRows}</div>
+          <div class="stash-scroll">${stashRows}</div>
         </section>
         <section class="hub-card">
           <h3>[[icon:pocket]] 消耗口袋 <span class="set-tip">共 ${pkN} 张</span></h3>
           <p class="ov-note" style="margin:0 0 6px">[[icon:key]] 用钥匙复原（古朴1 / 稀有2 / 史诗3 / 传说4）· <b>下一次出发后口袋清空</b></p>
           <div class="stash-list">${pocketRows}</div>
           <h3 style="margin-top:14px">[[icon:archive]] 物资</h3>
-          <button type="button" class="pk-row stash-row" data-act="rawItem" data-kind="wood" aria-label="木材，基地建设材料，不可卖出" title="基地建设材料 · 不可卖出">
-            <span>[[icon:wood]] <b>木材</b> ×<b>${B.data.wood}</b></span><span class="dim">背包与仓库扩建用 · 不可卖币</span>
-          </button>
-          <button type="button" class="pk-row stash-row" data-act="rawItem" data-kind="rations" aria-label="口粮，基地建设材料，不可卖出" title="基地建设材料 · 不可卖出">
-            <span>[[icon:bread]] <b>口粮</b> ×<b>${B.data.rations}</b></span><span class="dim">宠物升级用 · 不可卖币</span>
-          </button>
+          <div class="material-grid">
+            <button type="button" class="material-cell" data-act="rawItem" data-kind="wood" aria-label="木材 ×${B.data.wood}，基地建设材料，不可卖出" title="基地建设材料 · 不可卖出">
+              <span class="mat-ico">[[icon:wood]]</span><b>${B.data.wood}</b>
+              <span class="mat-use">背包与仓库扩建</span>
+            </button>
+            <button type="button" class="material-cell" data-act="rawItem" data-kind="rations" aria-label="口粮 ×${B.data.rations}，基地建设材料，不可卖出" title="基地建设材料 · 不可卖出">
+              <span class="mat-ico">[[icon:bread]]</span><b>${B.data.rations}</b>
+              <span class="mat-use">宠物升级</span>
+            </button>
+          </div>
         </section>
       </div>
       ${hubPetsHTML()}`;
@@ -913,28 +929,28 @@ let hubCollectionView = 'backs';
       </div>`;
     }).join('');
     return `
-      <div class="hub-two">
-        <section class="hub-card">
+      <div class="hub-upgrade-layout">
+        <section class="hub-card up-card">
           <h3>[[icon:bag]] 背包扩建</h3>
-          <div class="base-line">背包容量 <b>${B.bagCap()}</b> / ${R.bagMax} 格</div>
+          <div class="up-cap"><b>${B.bagCap()}</b><small>/ ${R.bagMax} 格</small></div>
           <div class="base-bar"><i style="width:${(B.bagCap() / R.bagMax * 100).toFixed(1)}%"></i></div>
           <button class="ov-btn ok" data-act="upBag" ${B.canUpgradeBag() ? '' : 'disabled'}>[[icon:wood]] ×${R.bagUpgradeWood} 扩建 +1 格</button>
           ${B.bagCap() >= R.bagMax ? '<p class="hint ok-hint">[[icon:check]] 已达上限</p>' : ''}
         </section>
-        <section class="hub-card">
+        <section class="hub-card up-card">
           <h3>[[icon:archive]] 仓库扩建</h3>
-          <div class="base-line">仓库容量 <b>${B.stashCap()}</b> / ${R.stashMax} 张</div>
+          <div class="up-cap"><b>${B.stashCap()}</b><small>/ ${R.stashMax} 张</small></div>
           <div class="base-bar"><i style="width:${(B.stashCap() / R.stashMax * 100).toFixed(1)}%"></i></div>
           <button class="ov-btn ok" data-act="upStash" ${B.canUpgradeStash() ? '' : 'disabled'}>[[icon:wood]] ×${R.stashUpgradeWood} 扩建 +${R.stashUpgradeSlots} 张</button>
           ${B.stashCap() >= R.stashMax ? '<p class="hint ok-hint">[[icon:check]] 已达上限</p>' : ''}
         </section>
-      </div>
-      <section class="hub-card" style="margin-top:14px">
-        <h3>[[icon:paw]] 宠物升级 <span class="set-tip">口粮 ${B.PET_UP_COSTS.join('-')} · 携带中的宠物决定安全格 <b>${B.safeCap()}</b> 格</span></h3>
-        <p class="ov-note" style="margin:0 0 6px">每只宠物的升级进度相互独立（Lv.1 起每级 +1 安全格）；携带不同宠物，安全格数量不同——小企鹅咕嘎可到 4-8 格。在仓库页切换携带的宠物。</p>
-        ${lockedN > 0 ? `<div class="pk-row pet-row locked"><span>[[icon:paw]] <b>？？？</b><span class="dim">· 未孵化 ×${lockedN}——宠物蛋 + 50 币在仓库页孵化</span></span><button class="mini-btn ok" data-act="hubTab" data-tab="stash">去仓库孵化</button></div>` : ''}
-        <div class="stash-list">${petRows}</div>
-      </section>`;
+        <section class="hub-card up-pets">
+          <h3>[[icon:paw]] 宠物升级 <span class="set-tip">口粮 ${B.PET_UP_COSTS.join('-')} · 携带中的宠物决定安全格 <b>${B.safeCap()}</b> 格</span></h3>
+          <p class="ov-note" style="margin:0 0 6px">每只宠物的升级进度相互独立（Lv.1 起每级 +1 安全格）；携带不同宠物，安全格数量不同——小企鹅咕嘎可到 4-8 格。在仓库页切换携带的宠物。</p>
+          ${lockedN > 0 ? `<div class="pk-row pet-row locked"><span>[[icon:paw]] <b>？？？</b><span class="dim">· 未孵化 ×${lockedN}——宠物蛋 + 50 币在仓库页孵化</span></span><button class="mini-btn ok" data-act="hubTab" data-tab="stash">去仓库孵化</button></div>` : ''}
+          <div class="stash-list">${petRows}</div>
+        </section>
+      </div>`;
   }
 
   // —— 人物页：各人物熟练度等级 ——
