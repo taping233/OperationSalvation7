@@ -435,7 +435,7 @@ const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!car
           title="手牌分栏：每栏最多 ${HAND_PAGE_SIZE} 叠，放不下的进第二栏——点击切换第一栏/第二栏">[[icon:cards]] 第 ${handPage + 1}/${handPages} 栏</button>` : ''}
         <button class="bt-slam-btn${slamPending ? ' active' : ''}" data-act="btSlam"
           ${busy || infusingNow || (energy < 2 && !slamPending) ? 'disabled' : ''}
-          title="背包砸击：2 费 · 4 点固定伤害 · 点击后选择一名敌人，再点一次取消">[[icon:bag]] 砸击</button>
+          title="背包砸击：2 费 · 4 点固定伤害 · 按住拖到敌人身上松手直接释放，也可点击后再点敌人">[[icon:bag]] 砸击</button>
         <div class="bt-hand sts-hand"></div>
         <div class="sts-tactics" aria-label="战术操作">
           <div class="sts-tactics-secondary">
@@ -514,7 +514,10 @@ const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!car
       }
       openBagCmd();
     });
-    UI.act('btSlam', bagSlam);   // 背包砸击按钮（2026-09-16 老板：改回按钮形态，置于手牌左侧）
+    UI.act('btSlam', () => {
+      if (Date.now() - aimPlayedAt < 300) return;   // 拖拽松手刚砸完，忽略残留 click（同药水栏口径）
+      bagSlam();
+    });   // 背包砸击按钮（2026-09-16 老板：改回按钮形态，置于手牌左侧）；09-20 老板：支持按住拖到敌人身上松手释放
     UI.act('btInfuseStart', (d) => beginInfuse(d.uid));   // 需求 #15：卡面注能角标
     UI.act('btInfuseGo', confirmInfuse);
     UI.act('btInfuseCancel', cancelInfuse);
@@ -545,6 +548,10 @@ const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!car
     }
     body.querySelectorAll('.bt-potion[data-potion-aim="1"]').forEach(el => {
       el.addEventListener('pointerdown', (e) => { if (e.button === 0) startAim(e, el, 'potion'); });
+    });
+    // 砸击拖动释放（09-20 老板）：按住砸击按钮拖到敌人身上松手=结算；轻点仍走 btSlam 点选流
+    body.querySelectorAll('.bt-slam-btn').forEach(el => {
+      el.addEventListener('pointerdown', (e) => { if (e.button === 0) startAim(e, el, 'slam'); });
     });
     // 药水栏点击直接使用兜底（2026-09-16 留言 #11：普通战药水栏点不动）
     body.querySelectorAll('.bt-potion:not([data-potion-aim="1"]):not(.off)').forEach(el => {
@@ -1912,11 +1919,14 @@ const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!car
     const { busy, infusing, discovering, energy, choosing } = snap;
     if (busy || infusing || discovering || choosing || aim) return;
     const uid = el.dataset.uid;
-    const entry = findCard(uid);
+    // 09-20 老板：砸击改拖动释放——按钮无卡牌 uid，喂伪卡（4 点固定伤害）复用
+    // 药水式非跟手指向（红箭头 + 敌人高亮 + 伤害预览）；能量门槛由按钮 disabled 承担
+    const isSlam = kind === 'slam';
+    const entry = isSlam ? { card: { name: '背包砸击', desc: '4 点固定伤害', dmg: 4 } } : findCard(uid);
     if (!entry) return;
-    const side = kind === 'potion' ? 'enemy' : (targetSide(entry.card) || 'any');   // null = 无目标招式：拖到中间空地即可
-    if (kind !== 'potion' && effCostOf(entry.card, uid) > energy) return;   // 能量不足：不进入指向（点击会有提示）；药水不耗能量
-    const isCard = kind !== 'potion';
+    const side = (kind === 'potion' || isSlam) ? 'enemy' : (targetSide(entry.card) || 'any');   // null = 无目标招式：拖到中间空地即可
+    if (!isSlam && kind !== 'potion' && effCostOf(entry.card, uid) > energy) return;   // 能量不足：不进入指向（点击会有提示）；药水不耗能量
+    const isCard = kind !== 'potion' && !isSlam;
     const vr = UI.el.overlay.getBoundingClientRect();
     const r = el.getBoundingClientRect();
     aim = {
@@ -2054,11 +2064,16 @@ const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!car
     a.moved = false;
     const inCancel = a.follow && a.hasLeftCancel && e.clientY > cancelZoneY();
 
-    // —— 药水（非跟手，原口径）：松手有敌=使用，否则取消 ——
+    // —— 药水 / 砸击（非跟手，原口径）：松手有敌=使用，否则取消 ——
     if (!a.follow) {
       const hit = wasMoved ? aimHoverAt(e.clientX, e.clientY, a.side, a.snap) : null;
       finishAim(a);
-      if (wasMoved && hit && hit.kind === 'enemy') { aimPlayedAt = Date.now(); useItemCmd(a.uid, hit.idx); return; }
+      if (wasMoved && hit && hit.kind === 'enemy') {
+        aimPlayedAt = Date.now();
+        if (a.kind === 'slam') { if (!a.snap.slamPending) bagSlam(); resolveSlam(hit.idx); return; }   // 09-20 老板：砸击拖到敌人身上松手=释放（先点选过的不再反转为取消）
+        useItemCmd(a.uid, hit.idx);
+        return;
+      }
       cancelPendingTarget();
       return;
     }
