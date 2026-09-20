@@ -140,16 +140,23 @@ export function openClassChoice(options = {}) {
   // （一页 10 张大卡，5 列 × 2 行），替换原深蓝 flex 长页滚动。
   // 右上叉号保持删除（底部已有「返回选角」）；卡面点击仍可放大查看
   let poolPage = 0;
-  const POOL_PAGE_SIZE = 10;
+  const POOL_PAGE_MAX = 10;
+  // 尾页均衡（2026-09-20 P0）：固定 10 会切出 10+4/10+7 的孤页——size = ceil(总数 / ceil(总数/10))，
+  // 14 张→7+7、17 张→9+8，两页行数接近满格
+  const poolPageSize = (pool) => {
+    const total = pool.length;
+    const totalPages = Math.max(1, Math.ceil(total / POOL_PAGE_MAX));
+    return Math.ceil(total / totalPages);
+  };
   // 分页条（2026-09-12 留言 #9/#10：原挂网格末尾会溢出浅色区压进深色底，且被页脚盖住点不了；
   // 现由页脚承载，与「返回选角/确认」同排，renderPoolGrid 翻页时同步刷新）
   const poolPagerHTML = () => {
     const pool = SDT.Cards.classPool(sel);
-    const totalPages = Math.max(1, Math.ceil(pool.length / POOL_PAGE_SIZE));
+    const totalPages = Math.max(1, Math.ceil(pool.length / poolPageSize(pool)));
     if (totalPages <= 1) return '';
     return `
       <button class="hs-btn sm" data-act="poolPrev"${poolPage <= 0 ? ' disabled' : ''}>‹ 上一页</button>
-      <span class="lib-pageinfo">第 ${poolPage + 1} / ${totalPages} 页 · 共 ${pool.length} 张</span>
+      <span class="pool-pageinfo">第 ${poolPage + 1} / ${totalPages} 页 · 共 ${pool.length} 张</span>
       <button class="hs-btn sm" data-act="poolNext"${poolPage >= totalPages - 1 ? ' disabled' : ''}>下一页 ›</button>`;
   };
   const poolPreviewHTML = (c) => {
@@ -163,19 +170,21 @@ export function openClassChoice(options = {}) {
   };
   const poolGridHTML = () => {
     const pool = SDT.Cards.classPool(sel);
-    const totalPages = Math.max(1, Math.ceil(pool.length / POOL_PAGE_SIZE));
+    const size = poolPageSize(pool);
+    const totalPages = Math.max(1, Math.ceil(pool.length / size));
     if (poolPage >= totalPages) poolPage = totalPages - 1;
-    const cards = pool.slice(poolPage * POOL_PAGE_SIZE, (poolPage + 1) * POOL_PAGE_SIZE);
+    const cards = pool.slice(poolPage * size, (poolPage + 1) * size);
     return `<div class="pool-grid" id="poolGrid">${cards.map((c, i) => `
-      <div class="pool-cell"><button class="lib-cardwrap pool-card-button${i === 0 ? ' selected' : ''}" data-act="poolZoom" data-i="${poolPage * POOL_PAGE_SIZE + i}" title="点击放大查看" aria-label="查看 ${escAttr(c.name)} 详情">${SDT.Cards.cardHTML(c)}</button></div>`).join('')}</div>`;
+      <div class="pool-cell"><button class="lib-cardwrap pool-card-button${i === 0 ? ' selected' : ''}" data-act="poolZoom" data-i="${poolPage * size + i}" title="点击放大查看" aria-label="查看 ${escAttr(c.name)} 详情">${SDT.Cards.cardHTML(c)}</button></div>`).join('')}</div>`;
   };
   // 预解码下一页插画（翻页零解码等待，同卡牌库 warmNextLibPage）
   const warmNextPoolPage = () => {
     const warm = window.SDT?.Art?.warm;
     if (!warm) return;
     const pool = SDT.Cards.classPool(sel);
+    const size = poolPageSize(pool);
     const urls = [];
-    for (const c of pool.slice((poolPage + 1) * POOL_PAGE_SIZE, (poolPage + 2) * POOL_PAGE_SIZE)) {
+    for (const c of pool.slice((poolPage + 1) * size, (poolPage + 2) * size)) {
       const m = /src="([^"]+)"/.exec((window.SDT.Art.cardIcon && SDT.Art.cardIcon(c)) || '');
       if (m) urls.push(m[1]);
     }
@@ -187,7 +196,8 @@ export function openClassChoice(options = {}) {
     if (grid) grid.outerHTML = poolGridHTML();
     const pagerEl = document.getElementById('poolPager');
     if (pagerEl) pagerEl.innerHTML = poolPagerHTML();
-    const first = SDT.Cards.classPool(sel)[poolPage * POOL_PAGE_SIZE];
+    const pool = SDT.Cards.classPool(sel);
+    const first = pool[poolPage * poolPageSize(pool)];
     const preview = document.getElementById('poolPreview');
     if (first && preview) preview.innerHTML = poolPreviewHTML(first);
     bindPoolFocusPreview();
@@ -257,7 +267,7 @@ export function openClassChoice(options = {}) {
   });
   UI.act('poolPrev', () => { if (poolPage > 0) { poolPage--; renderPoolGrid(); } });
   UI.act('poolNext', () => {
-    const totalPages = Math.ceil((SDT.Cards.classPool(sel).length) / POOL_PAGE_SIZE);
+    const totalPages = Math.ceil((SDT.Cards.classPool(sel).length) / poolPageSize(SDT.Cards.classPool(sel)));
     if (poolPage < totalPages - 1) { poolPage++; renderPoolGrid(); }
   });
   UI.act('selClass', (d) => {
