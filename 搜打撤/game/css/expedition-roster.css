@@ -117,7 +117,7 @@
 #overlay .pg.cls-pool-page .pool-watermark { position:absolute; inset:0; z-index:0; display:flex; align-items:flex-end; justify-content:flex-end; overflow:hidden; pointer-events:none; }
 #overlay .pg.cls-pool-page .pool-watermark img { width:min(56%,620px); max-height:104%; object-fit:contain; object-position:right bottom; opacity:.17; filter:saturate(.8) brightness(1.05); mask-image:radial-gradient(ellipse at 72% 62%,#000 42%,transparent 74%); -webkit-mask-image:radial-gradient(ellipse at 72% 62%,#000 42%,transparent 74%); }
 #overlay .pg.cls-pool-page .pool-watermark::after { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 78% 66%, color-mix(in srgb,var(--cls-color,#69aec2) 15%,transparent), transparent 60%); }
-#overlay .pg.cls-pool-page .pool-side { position:relative; z-index:1; flex:0 0 300px; width:300px; min-width:0; display:flex; flex-direction:column; align-self:stretch; padding:26px 22px 18px; border:1px solid rgba(104,128,139,.3); border-radius:2px; background:linear-gradient(165deg,#163847,#0d2431); box-shadow:inset 4px 0 0 color-mix(in srgb,var(--cls-color,#69aec2),transparent 45%),0 9px 22px rgba(3,14,20,.45); overflow:hidden auto; }
+#overlay .pg.cls-pool-page .pool-side { position:relative; z-index:1; flex:0 0 300px; width:300px; min-width:0; display:flex; flex-direction:column; align-self:stretch; padding:26px 22px 18px; border:1px solid rgba(104,128,139,.3); border-radius:2px; background:linear-gradient(165deg,#163847,#0d2431); box-shadow:inset 4px 0 0 color-mix(in srgb,var(--cls-color,#69aec2),transparent 45%),0 9px 22px rgba(3,14,20,.45); overflow:hidden; }
 #overlay .pg.cls-pool-page .pool-side::before { content:none; }
 /* 批三：预览栏档案卡化——pv-head 角色小节垫顶，获取规则 pv-rule 沉底，pv-body 是选中卡预览区
    P1-D2（2026-09-20 老板反馈"太挤"）：三段留白节奏拉开——头部下距/规则行上距/属性行间距 */
@@ -137,8 +137,10 @@
 /* 2026-09-20 P0：裸 center 在内容超高时上下双向溢出且顶部滚不到（720p 首行裁半、滚到底露白），
    safe center 让溢出时自动退化顶对齐可滚动；前置裸 center 声明作旧内核回退。
    2026-09-20 P1-D3：grid 改 flex wrap + 居中——grid 的尾行永远靠左（5+2 时右侧成片空白），
-   flex 逐行居中让不满行两侧均衡留白，空区让位水印立绘 */
-#overlay .pg.cls-pool-page .pool-grid { position:relative; z-index:1; flex:1; min-width:0; min-height:0; display:flex; flex-wrap:wrap; align-content:center; justify-content:center; align-content:safe center; justify-content:safe center; gap:26px 26px; padding:6px 6px; overflow:hidden auto; }
+   flex 逐行居中让不满行两侧均衡留白，空区让位水印立绘。
+   2026-09-20 P2+：老板令取消本页上下滚动设计——overflow 收敛为 hidden，
+   一屏式弹层；尺寸适配靠 cell 弹性 + 分页控制每页张数，不再提供滚动逃生口 */
+#overlay .pg.cls-pool-page .pool-grid { position:relative; z-index:1; flex:1; min-width:0; min-height:0; display:flex; flex-wrap:wrap; align-content:center; justify-content:center; align-content:safe center; justify-content:safe center; gap:26px 26px; padding:6px 6px; overflow:hidden; }
 #overlay .pg.cls-pool-page .pool-cell { position:relative; min-width:0; flex:1 0 236px; max-width:262px; }
 /* 卡底座主题色光晕（批二）：椭圆柔光垫在卡下，缓和绿框卡与深蓝底的冲突 */
 #overlay .pg.cls-pool-page .pool-cell::before { content:''; position:absolute; left:10%; right:10%; bottom:-4px; height:16px; border-radius:50%; background:color-mix(in srgb,var(--cls-color,#69aec2) 38%,transparent); filter:blur(12px); opacity:.4; z-index:0; pointer-events:none; }
@@ -183,11 +185,13 @@
 body:has(#overlay .cls-pool-page) #bagBtnFloat { display:none; }
 
 @media (max-width:1280px) {
-  #overlay .pg.cls-pool-page .pool-cell { flex-basis:196px; }
+  /* 取消滚动后 cell 尺寸按"一屏两行"反推：720p 高度下 5 列 2 行恰好放下 9 张 */
+  #overlay .pg.cls-pool-page .pool-cell { flex-basis:160px; }
   #overlay .pg.cls-pool-page .pool-side { flex-basis:260px; width:260px; }
 }
 @media (max-width:900px) {
-  #overlay .pg.cls-pool-page .pool-cell { flex-basis:172px; }
+  /* 796 窄窗：3 列 3 行一屏收 9 张 */
+  #overlay .pg.cls-pool-page .pool-cell { flex-basis:132px; }
 }
 @media (max-width:760px) {
   #overlay .pg.cls-pool-page .pg-head { align-items:flex-start; flex-direction:column; gap:8px; }
