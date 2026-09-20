@@ -5,7 +5,7 @@ import { esc } from './shared.js';
 import { escAttr } from './shared.js';
 import { game } from './game.session.js';
 import { characterName } from './characters.js';
-import { PHOTO_NOTE_PLACEHOLDER, photoNoteFor, savePhotoNote } from './card-photo-notes.js';
+import { PHOTO_NOTE_PLACEHOLDER, photoNoteFor, savePhotoNote, exportNotes } from './card-photo-notes.js';
 
 const navigation = {
   closeBase: () => {},
@@ -432,7 +432,7 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
           <div class="library-title"><span class="library-kicker"><i class="studio-lamp" id="libLamp" aria-hidden="true"></i>WINTER PHOTO STUDIO // 07</span><h2>[[icon:cards]] 照相馆</h2></div>
           <span class="clib-count"><small>第 07 卷</small><i></i><small>馆藏</small><b>${libCards.length}</b><small>陈列</small><b id="libResultCount">${libFiltered().length}</b></span>
           <button class="pg-close" data-act="closeCardPage" title="关闭（Esc）">[[icon:cross]]</button>
-          <div class="library-tools"><label class="studio-search"><input id="cardSearch" class="clib-search" aria-label="搜索卡牌" placeholder="搜索卡名或效果…" value="${escAttr(libFilter.q)}"></label><select id="libSort" class="pg-select" title="排序"><option value="rarity"${libFilter.sort === 'rarity' ? ' selected' : ''}>按稀有度陈列</option><option value="cost"${libFilter.sort === 'cost' ? ' selected' : ''}>按费用排序</option><option value="name"${libFilter.sort === 'name' ? ' selected' : ''}>按名称排序</option></select>${editorTools}</div>
+          <div class="library-tools"><label class="studio-search"><input id="cardSearch" class="clib-search" aria-label="搜索卡牌" placeholder="搜索卡名或效果…" value="${escAttr(libFilter.q)}"></label><select id="libSort" class="pg-select" title="排序"><option value="rarity"${libFilter.sort === 'rarity' ? ' selected' : ''}>按稀有度陈列</option><option value="cost"${libFilter.sort === 'cost' ? ' selected' : ''}>按费用排序</option><option value="name"${libFilter.sort === 'name' ? ' selected' : ''}>按名称排序</option></select><button class="hs-btn" data-act="exportNotes" title="导出全部备注（含手写改写）为 card-notes.json">[[icon:download]] 导出备注</button>${editorTools}</div>
         </header>
         <section class="studio-filterbar" aria-label="卡牌类型筛选">
           <div class="clib-tabs">${tabs}</div>
@@ -477,7 +477,7 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
       if (card) UI.showCardZoom(card, {
         from: document.querySelector(`#libGrid .lib-cardwrap[data-card="${d.card}"]`),
         note: photoNoteFor(card),
-        noteLabel: '照片背签',
+        noteLabel: '备注',
         noteEditable: true,
         notePlaceholder: PHOTO_NOTE_PLACEHOLDER,
         onNoteSave: value => savePhotoNote(card, value),
@@ -500,6 +500,17 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
     });
     UI.act('exportCards', () => showCardsExportOverlay());
     UI.act('importCards', () => showCardsImportOverlay());
+    // 备注同步闭环（2026-09-20 老板定版）：导出 底稿+手写 合并的完整 card-notes.json，
+    // 老板整文件回填 data/ 提交即完成"改的东西进数据库"
+    UI.act('exportNotes', () => {
+      const blob = new Blob([exportNotes()], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'card-notes.json';
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+      UI.log('[[icon:download]] 备注已导出为 card-notes.json，回填 data/ 即同步进数据库', 'ok');
+    });
     // 彩蛋 1 的触发点：标题连点三次（1.6s 内）
     const titleEl = document.querySelector('.card-library-page .library-title');
     if (titleEl) titleEl.addEventListener('click', () => {
