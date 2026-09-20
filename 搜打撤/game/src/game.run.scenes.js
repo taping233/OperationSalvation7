@@ -302,7 +302,8 @@ export function grantEventCard(tpl, opts = {}) {
   UI.log(`[[icon:archive]] 获得卡牌【<b>${esc(tpl.name)}</b>】`, 'loot');
   // 2026-09-13 老板：发卡要有奖励动画，不能静默进背包——统一走获得演出
   //（传说卡保留金色光柱 + legend 音效，普通卡中性演出；多张连发自动排队逐张播）
-  if (!opts.silent) UI.showCardReward(tpl);
+  // opts.reason：获得原因文字（2026-09-20 老板：火堆等发牌点要说明"为什么给这张牌"），可省略
+  if (!opts.silent) UI.showCardReward(tpl, opts.reason);
   // 阿猫的礼物（2026-09-12 实装）：「发现或随机获取该牌时，回复1点能量并获取另1张随机卡牌」
   // 地图侧没有能量概念，只结算附赠卡；战斗内触发走 battle.core fireCatGift（含能量）
   if (tpl.id === 'tt2-apollo') {

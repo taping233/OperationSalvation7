@@ -33,9 +33,14 @@ export function openFireRest() {
   game.heal(MAP.rules.fireHeal);
   UI.log(`[[icon:fire]] <b>进入火堆</b>：自动回复 <b>${MAP.rules.fireHeal}</b> 点生命`, 'ok');
   // 2026-09-06 留言：火堆界面的音效删掉（原 levelup 提示音）
+  // 2026-09-20 老板：火堆只发本职业卡（randomClassCard 须传 game.myClass，不传会全职业混抽）；
+  //   获得演出带原因文字（营火余烬翻出），不再只靠侧边日志
   if (Random.random('card') < MAP.rules.fireClassCardChance) {
-    UI.log('[[icon:wood]] 营火余烬里翻出了一张先行者掉落的职业卡！', 'loot');
-    grantEventCard(SDT.Cards.randomClassCard());
+    const campCard = SDT.Cards.randomClassCard(game.myClass);
+    if (campCard) {
+      UI.log('[[icon:wood]] 营火余烬里翻出了一张先行者掉落的本职业卡！', 'loot');
+      grantEventCard(campCard, { reason: '营火余烬里翻出的先行者遗落卡 · 本职业限定' });
+    }
   }
   game.state = 'modal';
   openPocketRestore(2, () => {

@@ -139,23 +139,25 @@ import { renderExpeditionPanel } from './expedition.view.js';
     // 卡牌获得奖励演出（2026-09-13 老板：事件发卡要有奖励动画，不能静默进背包）：
     // 与传说特写同壳（#cardGet 复用 #legendGet 的样式与动画），传说卡保留金色光柱与
     // legend 音效，其余卡为中性演出 + gain 音效。多张连发走队列逐张播放。
+    // reason：可选的获得原因文字（2026-09-20 老板——发牌点要说明为什么给这张牌）
     _cardGetQueue: [],
     _cardGetShowing: false,
-    showCardReward(card) {
+    showCardReward(card, reason) {
       if (!card) return;
-      this._cardGetQueue.push(card);
+      this._cardGetQueue.push({ card, reason });
       if (this._cardGetShowing) return;
       this._cardGetShowing = true;
       const showNext = () => {
         const next = this._cardGetQueue.shift();
         if (!next) { this._cardGetShowing = false; return; }
-        const legendary = next.rarity === '传说';
+        const legendary = next.card.rarity === '传说';
         const el = document.createElement('div');
         el.id = 'cardGet';
         el.innerHTML = `<div class="lg-beam${legendary ? '' : ' lg-beam-plain'}" aria-hidden="true"></div>
           <span class="lg-kicker">${legendary ? 'LEGENDARY · 传说' : 'REWARD · 获得卡牌'}</span>
-          <div class="lg-card">${SDT.Cards.cardHTML(next, 'lg')}</div>
-          <b class="lg-name">${next.name}</b>
+          <div class="lg-card">${SDT.Cards.cardHTML(next.card, 'lg')}</div>
+          <b class="lg-name">${next.card.name}</b>
+          ${next.reason ? `<span class="lg-reason">${esc(next.reason)}</span>` : ''}
           <span class="lg-hint">点击任意处继续</span>`;
         let closed = false;
         const close = () => {

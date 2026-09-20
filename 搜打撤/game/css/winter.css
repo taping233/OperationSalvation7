@@ -363,6 +363,8 @@ body.page-opaque #sidebar{visibility:hidden}
 #legendGet .lg-kicker,#cardGet .lg-kicker{font:11px 'Cascadia Code';letter-spacing:8px;color:#e5c793;text-shadow:0 0 18px rgba(216,182,128,.6)}
 #legendGet .lg-card,#cardGet .lg-card{position:relative;z-index:1;animation:legendPop .5s cubic-bezier(.2,1.4,.4,1) .1s both}
 #legendGet .lg-name,#cardGet .lg-name{font-size:20px;letter-spacing:6px;color:#f3e3c3;z-index:1}
+/* 获得原因文字（2026-09-20 老板：发卡演出要说明为什么给这张牌；未传 reason 不渲染） */
+#legendGet .lg-reason,#cardGet .lg-reason{font-size:13px;letter-spacing:2px;color:#a9c3ce;z-index:1;padding:0 24px;text-align:center}
 #legendGet .lg-hint,#cardGet .lg-hint{font-size:11px;letter-spacing:3px;color:#8da6af;z-index:1}
 @keyframes legendPop{from{opacity:0;transform:translateY(46px) scale(.7) rotate(-4deg)}to{opacity:1;transform:none}}
 
