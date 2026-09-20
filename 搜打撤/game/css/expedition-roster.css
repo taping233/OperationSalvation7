@@ -97,19 +97,26 @@
    5×2 网格带间距、竖直居中；首屏卡面黑窗由 altar.js 侧 decodeIn 显式解码处理。
    注意：pool-card-button 上保留 lib-cardwrap 类名——card-v3.css 的卡面尺寸链依赖它。 */
 #overlay .card.page:has(.cls-pool-page) { width:100%; height:100%; max-width:none; max-height:none; border:1px solid rgba(194,212,211,.22); background:#0a1c27; box-shadow:0 28px 80px rgba(0,0,0,.5); }
+/* 批二氛围层 A（2026-09-20 老板拍板）：页面级主题色光斑 —— --cls-color 随角色渗入背景 */
 #overlay .pg.cls-pool-page { display:flex; flex-direction:column; color:#dfe9e8; background:
   linear-gradient(90deg,rgba(134,160,166,.05) 1px,transparent 1px) 0 0/32px 32px,
+  radial-gradient(ellipse at 84% 22%, color-mix(in srgb,var(--cls-color,#69aec2) 9%,transparent), transparent 52%),
   linear-gradient(180deg,rgba(7,23,32,.22),rgba(7,23,32,.22)),
   linear-gradient(125deg,#1b3645,#102431); }
 #overlay .pg.cls-pool-page .pg-head { position:relative; flex:0 0 auto; align-items:center; gap:24px; padding:18px 28px 16px; border-bottom:1px solid rgba(104,128,139,.26); background:linear-gradient(180deg,#14313f,#0d2330); }
-#overlay .pg.cls-pool-page .pg-head::after { content:''; position:absolute; left:0; right:0; bottom:-1px; height:1px; background:linear-gradient(90deg,var(--cls-color,#69aec2),rgba(216,188,134,.8) 46%,transparent 84%); opacity:.6; }
+#overlay .pg.cls-pool-page .pg-head::after { content:''; position:absolute; left:0; right:0; bottom:-1px; height:1px; background:linear-gradient(90deg,var(--cls-color,#69aec2),rgba(216,188,134,.8) 46%,transparent 84%); opacity:.85; }
 #overlay .pg.cls-pool-page .pool-archive-title { flex:0 0 auto; }
 #overlay .pg.cls-pool-page .pool-archive-title .section-kicker { margin-bottom:5px; color:var(--cls-color,#69aec2); text-shadow:0 0 14px color-mix(in srgb,var(--cls-color,#69aec2),transparent 55%); }
 #overlay .card.page .pg.cls-pool-page .pool-archive-title h2 { display:block; margin:0; color:#f0ece0; font:400 clamp(21px,2vw,30px)/1.1 var(--serif); letter-spacing:4px; }
 #overlay .pg.cls-pool-page .pg-head .sub { flex:1; max-width:760px; color:#a8c0c4; font-size:12.5px; line-height:1.7; white-space:normal; }
 
-#overlay .pg.cls-pool-page .pool-main { flex:1; min-height:0; display:flex; align-items:stretch; gap:24px; padding:20px 28px; background:transparent; }
-#overlay .pg.cls-pool-page .pool-side { position:relative; flex:0 0 300px; width:300px; min-width:0; display:flex; flex-direction:column; align-self:stretch; padding:22px 18px 15px; border:1px solid rgba(104,128,139,.3); border-radius:2px; background:linear-gradient(165deg,#163847,#0d2431); box-shadow:inset 3px 0 0 color-mix(in srgb,var(--cls-color,#69aec2),transparent 35%),0 9px 22px rgba(3,14,20,.45); overflow:hidden auto; }
+#overlay .pg.cls-pool-page .pool-main { position:relative; flex:1; min-height:0; display:flex; align-items:stretch; gap:24px; padding:20px 28px; background:transparent; }
+/* 角色立绘水印（批二 A）：右半区垫 classFullArt 大立绘，低透明+径向 mask 融边，主题色光斑罩；
+   pool-side/pool-grid 均 relative 盖其上，水印只作氛围底 */
+#overlay .pg.cls-pool-page .pool-watermark { position:absolute; inset:0; z-index:0; display:flex; align-items:flex-end; justify-content:flex-end; overflow:hidden; pointer-events:none; }
+#overlay .pg.cls-pool-page .pool-watermark img { width:min(56%,620px); max-height:104%; object-fit:contain; object-position:right bottom; opacity:.13; filter:saturate(.8) brightness(1.05); mask-image:radial-gradient(ellipse at 72% 62%,#000 42%,transparent 74%); -webkit-mask-image:radial-gradient(ellipse at 72% 62%,#000 42%,transparent 74%); }
+#overlay .pg.cls-pool-page .pool-watermark::after { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 78% 66%, color-mix(in srgb,var(--cls-color,#69aec2) 15%,transparent), transparent 60%); }
+#overlay .pg.cls-pool-page .pool-side { position:relative; z-index:1; flex:0 0 300px; width:300px; min-width:0; display:flex; flex-direction:column; align-self:stretch; padding:22px 18px 15px; border:1px solid rgba(104,128,139,.3); border-radius:2px; background:linear-gradient(165deg,#163847,#0d2431); box-shadow:inset 4px 0 0 color-mix(in srgb,var(--cls-color,#69aec2),transparent 45%),0 9px 22px rgba(3,14,20,.45); overflow:hidden auto; }
 #overlay .pg.cls-pool-page .pool-side::before { content:'SELECTED RECORD'; display:block; margin-bottom:13px; color:#d7bd7d; font:700 9px "Cascadia Code",monospace; letter-spacing:.2em; }
 #overlay .pg.cls-pool-page .pool-side .pv-empty { color:#8fb0b6; }
 #overlay .pg.cls-pool-page .pool-side .pv-meta { display:flex; flex-direction:column; gap:6px; margin-top:12px; }
@@ -121,10 +128,12 @@
 
 /* 2026-09-20 P0：裸 center 在内容超高时上下双向溢出且顶部滚不到（720p 首行裁半、滚到底露白），
    safe center 让溢出时自动退化顶对齐可滚动；前置裸 center 声明作旧内核回退 */
-#overlay .pg.cls-pool-page .pool-grid { flex:1; min-width:0; min-height:0; display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:22px 20px; align-content:center; justify-content:center; align-content:safe center; justify-content:safe center; padding:6px 2px; overflow:hidden auto; }
-#overlay .pg.cls-pool-page .pool-cell { min-width:0; }
-#overlay .pg.cls-pool-page .pool-cell .hs-card { width:100%; height:auto; font-size:clamp(12px,1.02vw,15px); }
-#overlay .pg.cls-pool-page .pool-card-button { display:block; width:100%; padding:0; border:2px solid transparent; border-radius:10px; background:transparent; color:inherit; font:inherit; cursor:zoom-in; transition:transform .16s,border-color .16s,box-shadow .16s; }
+#overlay .pg.cls-pool-page .pool-grid { position:relative; z-index:1; flex:1; min-width:0; min-height:0; display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:22px 20px; align-content:center; justify-content:center; align-content:safe center; justify-content:safe center; padding:6px 2px; overflow:hidden auto; }
+#overlay .pg.cls-pool-page .pool-cell { position:relative; min-width:0; }
+/* 卡底座主题色光晕（批二）：椭圆柔光垫在卡下，缓和绿框卡与深蓝底的冲突 */
+#overlay .pg.cls-pool-page .pool-cell::before { content:''; position:absolute; left:10%; right:10%; bottom:-4px; height:16px; border-radius:50%; background:color-mix(in srgb,var(--cls-color,#69aec2) 38%,transparent); filter:blur(12px); opacity:.4; z-index:0; pointer-events:none; }
+#overlay .pg.cls-pool-page .pool-cell .hs-card { position:relative; z-index:1; width:100%; height:auto; font-size:clamp(12px,1.02vw,15px); }
+#overlay .pg.cls-pool-page .pool-card-button { position:relative; z-index:1; display:block; width:100%; padding:0; border:2px solid transparent; border-radius:10px; background:transparent; color:inherit; font:inherit; cursor:zoom-in; transition:transform .16s,border-color .16s,box-shadow .16s; box-shadow:0 0 0 1px color-mix(in srgb,var(--cls-color,#69aec2) 18%,transparent),0 4px 14px rgba(2,10,16,.35); }
 /* 卡牌库影廊的 hover 放大旋转（cards.css scale 1.17）在此页过激，收敛为浮起+主题色描边 */
 #overlay .pg.cls-pool-page .pool-card-button.lib-cardwrap:hover,
 #overlay .pg.cls-pool-page .pool-card-button.lib-cardwrap:focus-visible { transform:none; filter:none; }
@@ -136,9 +145,10 @@
 #overlay .pg.cls-pool-page .cls-foot .pool-pager { display:flex; align-items:center; gap:12px; margin-right:auto; }
 #overlay .pg.cls-pool-page .cls-foot .pool-pager .hs-btn { min-height:34px; padding:0 14px; background:#24424f; border:1px solid #607c86; border-radius:1px; color:#e3eeea; }
 #overlay .pg.cls-pool-page .cls-foot .pool-pager .hs-btn:disabled { opacity:.4; }
-#overlay .pg.cls-pool-page .cls-foot .pool-pager .pool-pageinfo { min-width:150px; text-align:center; color:#b6c9ce; font-size:12.5px; letter-spacing:1px; }
+#overlay .pg.cls-pool-page .cls-foot .pool-pageinfo { min-width:150px; text-align:center; color:#b6c9ce; font-size:12.5px; letter-spacing:1px; }
+#overlay .pg.cls-pool-page .cls-foot .pool-pageinfo .pool-page-now { color:var(--cls-color,#69aec2); font-weight:700; }
 #overlay .pg.cls-pool-page .cls-foot .ov-btn { min-height:44px; border-radius:1px; letter-spacing:2px; }
-#overlay .pg.cls-pool-page .cls-foot .ov-btn.ok { min-width:150px; background:#dfc691; border-color:#dfc691; color:#17323f; font-weight:500; letter-spacing:5px; }
+#overlay .pg.cls-pool-page .cls-foot .ov-btn.ok { min-width:150px; background:#dfc691; border-color:#dfc691; color:#17323f; font-weight:500; letter-spacing:5px; box-shadow:0 0 0 1px color-mix(in srgb,var(--cls-color,#69aec2) 40%,transparent),0 0 16px color-mix(in srgb,var(--cls-color,#69aec2) 22%,transparent); }
 #overlay .pg.cls-pool-page .cls-foot .ov-btn.ok:hover { background:#e9d9ae; border-color:#e9d9ae; }
 
 @media (max-width:1280px) {

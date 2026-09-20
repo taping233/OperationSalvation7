@@ -156,7 +156,7 @@ export function openClassChoice(options = {}) {
     if (totalPages <= 1) return '';
     return `
       <button class="hs-btn sm" data-act="poolPrev"${poolPage <= 0 ? ' disabled' : ''}>‹ 上一页</button>
-      <span class="pool-pageinfo">第 ${poolPage + 1} / ${totalPages} 页 · 共 ${pool.length} 张</span>
+      <span class="pool-pageinfo">第 <b class="pool-page-now">${poolPage + 1}</b> / ${totalPages} 页 · 共 ${pool.length} 张</span>
       <button class="hs-btn sm" data-act="poolNext"${poolPage >= totalPages - 1 ? ' disabled' : ''}>下一页 ›</button>`;
   };
   const poolPreviewHTML = (c) => {
@@ -215,6 +215,7 @@ export function openClassChoice(options = {}) {
           <span class="sub">确认选择「${esc(characterName(sel))}」后，将从 ${pool.length} 张人物卡中随机获得角色卡，并与 5 张「初始攻击」一起带入背包。</span>
         </header>
         <div class="pool-main">
+          <div class="pool-watermark" aria-hidden="true">${sel ? SDT.Art.classFullArt(sel) : ''}</div>
           <aside class="pool-side" id="poolPreview" aria-live="polite">${poolPreviewHTML(pool[0])}</aside>
           ${poolGridHTML()}
         </div>
