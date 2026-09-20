@@ -60,7 +60,7 @@ import { DATA } from './data-loader.js';
   const TT8_KEY = 'sdt-cards-tt8-seeded';        // 第八批：能力卡及衍生牌（原类型「英雄卡」，2026-09-08 定版更名「能力卡」；每职业 1 英雄，衍生牌围绕英雄效果）
   const TT9_KEY = 'sdt-cards-tt9-seeded';        // 第九批：生物图鉴（全部敌人信息录入，类型「生物」）
   const TT10_KEY = 'sdt-cards-tt10-v2-seeded';   // 第十批：设计者实机定版同步（2026-09-07 双向合并）；v2：清掉合并残留的错误词条（能力卡 armor:5 等）并重播覆盖一次
-  const TT11_KEY = 'sdt-cards-tt11-v5-seeded';   // 第十一批：与设计者实机卡库导出完全对齐（2026-09-09 老板拍板，见 TABLETOP11 注释）；v2：法力补给补 cls=法师（白塔专属）；v3：不变应万变补 cls=侠客（无专属，老板 2026-09-12 拍板）；v4：恶魔之力补 cls=牧师（星月专属，老板 2026-09-13 拍板）；v5：恶魔之力 tt7-drunksong 整卡退役（老板 2026-09-13 改拍板删除，同名双版收口只留 cc-demon）——均换 key 重播让旧档拿到
+  const TT11_KEY = 'sdt-cards-tt11-v6-seeded';   // 第十一批：与设计者实机卡库导出完全对齐（2026-09-09 老板拍板，见 TABLETOP11 注释）；v2：法力补给补 cls=法师（白塔专属）；v3：不变应万变补 cls=侠客（无专属，老板 2026-09-12 拍板）；v4：恶魔之力补 cls=牧师（星月专属，老板 2026-09-13 拍板）；v5：恶魔之力 tt7-drunksong 整卡退役（老板 2026-09-13 改拍板删除，同名双版收口只留 cc-demon）；v6：圣光之源补 cls=牧师（星月专属，老板 2026-09-20 拍板）——均换 key 重播让旧档拿到
   const ITEM_RENAME_KEY = 'sdt-cards-item-renames-v1'; // 2026-09-08：道具定名 + 金创药/金疮药合并
   const EVENTS_0919_KEY = 'sdt-events-0919-v2-seeded'; // 2026-09-19：都市污染事件池（10 旧事件改名 + 9 新事件）；v2：熔断双箱/隧道血契 desc 对齐实装口径（迭代评审 09-20 B-P0/P2）
   // 第十批退役：同设计重复 id（设计者实机已把同名卡定版在旧 id 上，见 TABLETOP10 尾部注释）
@@ -943,7 +943,7 @@ import { DATA } from './data-loader.js';
     //     desc「英雄卡」字样改「能力卡」（2026-09-08 术语定版）；
     // 覆盖/补种/退役走 ensureTabletopSync11()（TT11_KEY 标记，一次性）。
     TABLETOP11: [
-      { id: "tt7-livingwater", name: "圣光之源", cost: 2, rarity: "职业", type: "法术", dmg: 0, draw: 5, desc: "抽 5 张牌。", value: 3, sellable: false },
+      { id: "tt7-livingwater", cls: "牧师", name: "圣光之源", cost: 2, rarity: "职业", type: "法术", dmg: 0, draw: 5, desc: "抽 5 张牌。", value: 3, sellable: false }, // cls 为定版归属（老板 2026-09-20 拍板星月专属）
       { id: "tt7-naturestaff", name: "自然法杖", cost: 0, rarity: "稀有", type: "装备", dmg: 0, desc: "主动技能：选择 1 张卡牌，下回合将其变为 0 费。", value: 3, sellable: false }, // 稀有度改稀有 + 限定技能改主动技能（2026-09-16 留言）
       { id: "tt7-darkfort", cls: "降临者", name: "黑暗吊坠", cost: 0, rarity: "职业", type: "装备", dmg: 0, desc: "免疫 1 次致命伤害，并在该回合内处于无敌状态。", value: 3, sellable: false }, // cls 为定版归属（老板 2026-09-09 拍板常无欲专属）
       { id: "tt7-arcanescroll", cls: "法师", name: "奥术残卷", cost: 0, rarity: "职业", type: "装备", dmg: 0, draw: 3, desc: "消耗该牌时抽 3 张牌。", value: 3, sellable: false }, // cls 为定版归属（老板 2026-09-09 拍板白塔专属）
@@ -1407,8 +1407,9 @@ import { DATA } from './data-loader.js';
         const CC_CONVERT = ['盗宝', '花瓣法阵', '千变万化', '厄运', '黑暗形态', '充能火球', '火焰形态', '致命射线', '风暴火球'];
         // ④ 退役（未入列旧职业卡 + 印记衍生牌×4；邪渊主宰·妲莉薇特已改归降临者，不再退役；
         //    奥术残卷→法师、黑暗吊坠→降临者 2026-09-09 老板改判收编，从退役表移除；
-        //    法力补给同批移除——09-09 已拍板白塔专属，留在表里会在 v3 重播时误删其 cls）
-        const CC_RETIRE = ['tt7-drunksong', 'tt7-livingwater', 'tt7-naturestaff',
+        //    法力补给同批移除——09-09 已拍板白塔专属，留在表里会在 v3 重播时误删其 cls；
+        //    圣光之源→牧师 2026-09-20 老板拍板星月专属，同理由移除）
+        const CC_RETIRE = ['tt7-drunksong', 'tt7-naturestaff',
           'tt7-talisman', 'tt7-ironcharge', 'tt7-bloodthirst',
           'tt7-imitate', 'tt7-bloodblade', 'tt8-healplus', 'tt8-energycap',
           'tt8-nofocus', 'tt8-curseimmune'];
