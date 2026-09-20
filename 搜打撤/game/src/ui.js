@@ -66,6 +66,8 @@ import { renderExpeditionPanel } from './expedition.view.js';
           return;
         }
         if (e.key === 'Escape') {
+          // 输入法组合中（keyCode 229）：Esc 是取消拼音组合，不是关面板
+          if (e.isComposing || e.keyCode === 229) return;
           if (this.closeTopOverlayByEsc()) {
             e.preventDefault();
             e.stopPropagation();

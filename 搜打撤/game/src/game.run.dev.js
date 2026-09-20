@@ -83,8 +83,15 @@ function openDevConsole() {
     return q ? SDT.Cards.all().filter(card => (card.name || '').toLowerCase().includes(q)).slice(0, 8) : [];
   };
   const devBattle = () => !!(game.battleActive && SDT.Battle?.commands?.dev);
-  const render = () => {
+  const hitsHTML = () => {
     const hits = hitCards();
+    return hits.length ? hits.map((card, i) => `<button class="hs-btn sm devc-hit" data-act="devcCard" data-i="${i}">【${esc(card.name)}】· ${esc(card.type)} · ${esc(card.rarity || '')}</button>`).join('') : '<span class="dim">输入卡名后点结果发卡（同名堆叠规则照常生效）</span>';
+  };
+  const renderHits = () => {
+    const box = document.getElementById('devcHits');
+    if (box) box.innerHTML = hitsHTML();
+  };
+  const render = () => {
     UI.showOverlay('[[icon:tools]] 开发者控制台', `
       <p class="ov-note">调试用面板（Ctrl+L 开关）——修改会立即写入本局存档，别在正经挑战里用。</p>
       <div class="devc-grid">
@@ -94,7 +101,7 @@ function openDevConsole() {
         </div></section>
         <section class="devc-sec"><b class="devc-h">指定卡牌</b>
           <input id="devcSearch" class="clib-search" placeholder="输入卡名搜索，如：江湖救急" value="${esc(query.q)}">
-          <div class="devc-hits">${hits.length ? hits.map((card, i) => `<button class="hs-btn sm devc-hit" data-act="devcCard" data-i="${i}">【${esc(card.name)}】· ${esc(card.type)} · ${esc(card.rarity || '')}</button>`).join('') : '<span class="dim">输入卡名后点结果发卡（同名堆叠规则照常生效）</span>'}</div>
+          <div class="devc-hits" id="devcHits">${hitsHTML()}</div>
         </section>
         ${devBattle() ? `<section class="devc-sec"><b class="devc-h">战斗调试</b><div class="devc-row">
           <button class="hs-btn" data-act="devcB" data-k="energy">能量回满</button><button class="hs-btn" data-act="devcB" data-k="draw" data-n="2">抽 2 张</button>
@@ -105,9 +112,9 @@ function openDevConsole() {
     UI._inputHandler = event => {
       if (event.target.id !== 'devcSearch') return;
       query.q = event.target.value;
-      render();
-      const input = document.getElementById('devcSearch');
-      if (input) { input.focus(); input.setSelectionRange(input.value.length, input.value.length); }
+      // 只重绘结果列表，绝不重建 overlay：输入法组合期间拆掉宿主 input 会掐断
+      // 组合输入，中文打不进去（同卡牌库页搜索「只重绘卡格保持焦点」的口径）。
+      renderHits();
     };
   };
   UI.act('devcCoin', data => { const n = +data.n || 50; game.coins += n; UI.log(`[[icon:coin]] 开发者：+${n} 币（现有 ${game.coins}）`, 'coin'); saveGameDev(); render(); });
