@@ -548,16 +548,6 @@ body:has(#overlay.opaque:not([hidden])) #sidebar{display:none!important}
 /* —— 对局背包弹层（bag-page）：背景加透明度，透出底下地图 —— */
 #overlay .card.bag-page{background:linear-gradient(125deg,rgba(27,54,69,.84),rgba(16,36,49,.84))}
 
-/* —— 选人卡池页重做（2026-09-09 留言：旧版深蓝 flex 长页与全局风格脱节、卡小间距挤）：
-      骨架对齐卡牌库——clib-main 浅色展示区 + 左侧悬停大图预览 + lib-pager 翻页制，
-      一页 10 张大卡（5 列 × 2 行），格子沿用卡库辅助线。 —— */
-.pg.cls-pool-page .pg-head{padding-bottom:14px}
-.pg.cls-pool-page .clib-preview{width:300px;min-width:300px}
-.lib-grid.cls-pool-grid{grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:0!important;padding:0!important;overflow-y:auto}
-@media(max-width:1280px){.lib-grid.cls-pool-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}}
-@media(max-width:900px){.lib-grid.cls-pool-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
-#overlay .cls-pool-grid .lib-cardwrap .hs-card{font-size:clamp(13px,1.18vw,18px)}
-.cls-pool-page .cls-foot{padding-top:22px;gap:16px}
 
 /* —— 留言库（设置页入口）：历史留言列表，待处理可删、已完成存档 —— */
 .sugin-row{border:1px solid #48667466;background:#19344155;border-radius:8px;padding:10px 14px;margin-bottom:8px}
@@ -1250,16 +1240,6 @@ img[data-asset-key="card-wu-myriadswords"]{object-position:50% 40%!important}
 .manual-controls>span:not(.manual-control-key){color:#9db4bd;font-size:13px}
 .manual-note{margin:0;text-align:center;color:#8ba3ab;font-size:12.5px;letter-spacing:.5px}
 
-/* ===== 选人卡池页脚一行化（2026-09-12 留言 #9/#10：分页条原挂网格末尾，网格溢出浅色区
-   压出深色底“黑边”，下半截还被页脚盖住导致下一页点不了；现翻页与返回选角/确认同排进页脚） ===== */
-#overlay .pg.cls-pool-page .clib-main{display:flex;align-items:stretch;gap:22px;padding:24px 28px 20px}
-.pg.cls-pool-page .lib-grid.cls-pool-grid{flex:1;min-width:0;min-height:0;height:auto}
-.pg.cls-pool-page .cls-foot{align-items:center;padding-top:14px}
-.pg.cls-pool-page .cls-foot .lib-pager{grid-column:auto;border-top:0;padding:0;gap:12px}
-.pg.cls-pool-page .cls-foot .lib-pager .hs-btn{background:#24424f;border:1px solid #607c86;color:#e3eeea}
-.pg.cls-pool-page .cls-foot .lib-pager .hs-btn:disabled{opacity:.4}
-.pg.cls-pool-page .cls-foot .lib-pageinfo{color:#b6c9ce}
-.pool-foot-sep{width:1px;height:26px;background:#607c8666}
 
 /* ===== 2026-09-12 晚留言批次 ===== */
 /* 卡牌库卡面再大一点：收窄卡片内边距（侧栏/页边距在 expedition-library.css 同步收窄） */

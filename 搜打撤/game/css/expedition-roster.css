@@ -91,35 +91,63 @@
   #overlay .cls2-face:hover, #overlay .cls2-confirm:hover, #overlay .cls2-back:hover { transform:none; }
 }
 
-/* 角色卡池：保留亮色档案页，外框改成基地统一的深青金属。 */
-#overlay .card.page:has(.cls-pool-page) { border:1px solid rgba(194,212,211,.22); background:#0a1c27; box-shadow:0 28px 80px rgba(0,0,0,.5); }
-#overlay .pg.cls-pool-page { color:#273238; background:
-  linear-gradient(90deg,rgba(86,112,119,.08) 1px,transparent 1px) 0 0/32px 32px,
-  linear-gradient(180deg,#f0eee6,#ddd9cc); }
-#overlay .pg.cls-pool-page .pg-head { align-items:center; gap:24px; padding:18px 28px 15px; border-bottom:1px solid rgba(48,72,78,.24); background:linear-gradient(180deg,#112f3c,#0b202c); }
+/* 角色卡池：2026-09-20 深色化重写（老板拍板方向 A + 授权废弃旧规则）。pool-* 专用类体系
+   彻底脱离卡牌库 clib/lib 样式（winter.css 的浅色 !important 与 :has(.clib-main) 压底不再命中）；
+   对齐标题页/基地页「冬日猜想」深蓝金体系，主题色随角色 --cls-color 贯穿（altar.js 挂载）；
+   5×2 网格带间距、竖直居中；首屏卡面黑窗由 altar.js 侧 decodeIn 显式解码处理。
+   注意：pool-card-button 上保留 lib-cardwrap 类名——card-v3.css 的卡面尺寸链依赖它。 */
+#overlay .card.page:has(.cls-pool-page) { width:100%; height:100%; max-width:none; max-height:none; border:1px solid rgba(194,212,211,.22); background:#0a1c27; box-shadow:0 28px 80px rgba(0,0,0,.5); }
+#overlay .pg.cls-pool-page { display:flex; flex-direction:column; color:#dfe9e8; background:
+  linear-gradient(90deg,rgba(134,160,166,.05) 1px,transparent 1px) 0 0/32px 32px,
+  linear-gradient(180deg,rgba(7,23,32,.22),rgba(7,23,32,.22)),
+  linear-gradient(125deg,#1b3645,#102431); }
+#overlay .pg.cls-pool-page .pg-head { position:relative; flex:0 0 auto; align-items:center; gap:24px; padding:18px 28px 16px; border-bottom:1px solid rgba(104,128,139,.26); background:linear-gradient(180deg,#14313f,#0d2330); }
+#overlay .pg.cls-pool-page .pg-head::after { content:''; position:absolute; left:0; right:0; bottom:-1px; height:1px; background:linear-gradient(90deg,var(--cls-color,#69aec2),rgba(216,188,134,.8) 46%,transparent 84%); opacity:.6; }
 #overlay .pg.cls-pool-page .pool-archive-title { flex:0 0 auto; }
-#overlay .pg.cls-pool-page .pool-archive-title .section-kicker { margin-bottom:5px; color:#d7bd7d; }
+#overlay .pg.cls-pool-page .pool-archive-title .section-kicker { margin-bottom:5px; color:var(--cls-color,#69aec2); text-shadow:0 0 14px color-mix(in srgb,var(--cls-color,#69aec2),transparent 55%); }
 #overlay .card.page .pg.cls-pool-page .pool-archive-title h2 { display:block; margin:0; color:#f0ece0; font:400 clamp(21px,2vw,30px)/1.1 var(--serif); letter-spacing:4px; }
-#overlay .pg.cls-pool-page .pg-head .sub { flex:1; max-width:760px; color:#b9c9ca; font-size:12px; line-height:1.7; white-space:normal; }
-#overlay .pg.cls-pool-page .clib-main { background:transparent; }
-#overlay .pg.cls-pool-page .clib-preview { position:relative; align-self:stretch; padding:22px 18px 15px; border:1px solid rgba(65,84,86,.24); border-radius:2px; background:linear-gradient(165deg,rgba(250,248,240,.96),rgba(210,207,195,.94)); box-shadow:0 9px 22px rgba(43,48,45,.16); }
-#overlay .pg.cls-pool-page .clib-preview::before { content:'SELECTED RECORD'; display:block; margin-bottom:13px; color:#5f777b; font:700 9px "Cascadia Code",monospace; letter-spacing:.2em; }
-#overlay .pg.cls-pool-page .clib-preview .pv-hint { color:#506166; font-size:11px; line-height:1.65; }
-#overlay .pg.cls-pool-page .cls-pool-grid { padding:12px; border:1px solid rgba(65,84,86,.2); border-radius:2px; background:rgba(252,250,243,.52); }
-#overlay .pg.cls-pool-page .lib-item { padding:7px; }
-#overlay .pg.cls-pool-page .pool-card-button { display:block; width:100%; padding:0; border:2px solid transparent; border-radius:8px; background:transparent; color:inherit; font:inherit; cursor:zoom-in; transition:transform .15s,border-color .15s,box-shadow .15s; }
-#overlay .pg.cls-pool-page .pool-card-button:hover,
-#overlay .pg.cls-pool-page .pool-card-button:focus-visible { outline:0; border-color:#5e7f85; transform:translateY(-2px); box-shadow:0 7px 18px rgba(42,61,64,.18); }
-#overlay .pg.cls-pool-page .pool-card-button.selected { border-color:#b08c4d; box-shadow:0 0 0 2px rgba(176,140,77,.16),0 7px 18px rgba(42,61,64,.16); }
-#overlay .pg.cls-pool-page .cls-foot { min-height:62px; padding:12px 28px; border-top:1px solid rgba(158,187,191,.18); background:#102a36; }
-#overlay .pg.cls-pool-page .cls-foot .ov-btn { min-height:42px; border-radius:2px; }
+#overlay .pg.cls-pool-page .pg-head .sub { flex:1; max-width:760px; color:#a8c0c4; font-size:12.5px; line-height:1.7; white-space:normal; }
 
-@media (max-width:1100px) {
-  #overlay .pg.cls-pool-page .clib-main { gap:14px; padding:16px; }
-  #overlay .pg.cls-pool-page .clib-preview { width:230px; min-width:230px; }
+#overlay .pg.cls-pool-page .pool-main { flex:1; min-height:0; display:flex; align-items:stretch; gap:24px; padding:20px 28px; background:transparent; }
+#overlay .pg.cls-pool-page .pool-side { position:relative; flex:0 0 300px; width:300px; min-width:0; display:flex; flex-direction:column; align-self:stretch; padding:22px 18px 15px; border:1px solid rgba(104,128,139,.3); border-radius:2px; background:linear-gradient(165deg,#163847,#0d2431); box-shadow:inset 3px 0 0 color-mix(in srgb,var(--cls-color,#69aec2),transparent 35%),0 9px 22px rgba(3,14,20,.45); overflow:hidden auto; }
+#overlay .pg.cls-pool-page .pool-side::before { content:'SELECTED RECORD'; display:block; margin-bottom:13px; color:#d7bd7d; font:700 9px "Cascadia Code",monospace; letter-spacing:.2em; }
+#overlay .pg.cls-pool-page .pool-side .pv-empty { color:#8fb0b6; }
+#overlay .pg.cls-pool-page .pool-side .pv-meta { display:flex; flex-direction:column; gap:6px; margin-top:12px; }
+#overlay .pg.cls-pool-page .pool-side .pv-row { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:7px 10px; background:#102833; border:1px solid #4c6a76; border-radius:1px; }
+#overlay .pg.cls-pool-page .pool-side .pv-row span { color:#8fb0b6; font-size:12px; letter-spacing:1px; }
+#overlay .pg.cls-pool-page .pool-side .pv-row b { color:#e5d4ae; font-size:13.5px; }
+#overlay .pg.cls-pool-page .pool-side .pv-row .dmg-num { color:#e8b6a0; }
+#overlay .pg.cls-pool-page .pool-side .pv-hint { margin-top:10px; color:#8fb0b6; font-size:12.5px; line-height:1.65; }
+
+#overlay .pg.cls-pool-page .pool-grid { flex:1; min-width:0; min-height:0; display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:22px 20px; align-content:center; justify-content:center; padding:6px 2px; overflow:hidden auto; }
+#overlay .pg.cls-pool-page .pool-cell { min-width:0; }
+#overlay .pg.cls-pool-page .pool-cell .hs-card { width:100%; height:auto; font-size:clamp(12px,1.02vw,15px); }
+#overlay .pg.cls-pool-page .pool-card-button { display:block; width:100%; padding:0; border:2px solid transparent; border-radius:10px; background:transparent; color:inherit; font:inherit; cursor:zoom-in; transition:transform .16s,border-color .16s,box-shadow .16s; }
+/* 卡牌库影廊的 hover 放大旋转（cards.css scale 1.17）在此页过激，收敛为浮起+主题色描边 */
+#overlay .pg.cls-pool-page .pool-card-button.lib-cardwrap:hover,
+#overlay .pg.cls-pool-page .pool-card-button.lib-cardwrap:focus-visible { transform:none; filter:none; }
+#overlay .pg.cls-pool-page .pool-card-button:hover,
+#overlay .pg.cls-pool-page .pool-card-button:focus-visible { outline:0; border-color:color-mix(in srgb,var(--cls-color,#69aec2),transparent 18%); transform:translateY(-4px); box-shadow:0 10px 24px rgba(2,10,16,.6),0 0 12px color-mix(in srgb,var(--cls-color,#69aec2),transparent 62%); }
+#overlay .pg.cls-pool-page .pool-card-button.selected { border-color:#d8bc86; box-shadow:0 0 0 2px rgba(216,188,134,.2),0 0 16px rgba(216,188,134,.22),0 7px 18px rgba(2,10,16,.5); }
+
+#overlay .pg.cls-pool-page .cls-foot { flex:0 0 auto; display:flex; flex-wrap:wrap; align-items:center; gap:14px; min-height:66px; padding:14px 28px; border-top:1px solid rgba(104,128,139,.26); background:linear-gradient(180deg,#0f2733,#0b1f2a); }
+#overlay .pg.cls-pool-page .cls-foot .pool-pager { display:flex; align-items:center; gap:12px; margin-right:auto; }
+#overlay .pg.cls-pool-page .cls-foot .pool-pager .hs-btn { min-height:34px; padding:0 14px; background:#24424f; border:1px solid #607c86; border-radius:1px; color:#e3eeea; }
+#overlay .pg.cls-pool-page .cls-foot .pool-pager .hs-btn:disabled { opacity:.4; }
+#overlay .pg.cls-pool-page .cls-foot .pool-pager .pool-pageinfo { min-width:150px; text-align:center; color:#b6c9ce; font-size:12.5px; letter-spacing:1px; }
+#overlay .pg.cls-pool-page .cls-foot .ov-btn { min-height:44px; border-radius:1px; letter-spacing:2px; }
+#overlay .pg.cls-pool-page .cls-foot .ov-btn.ok { min-width:150px; background:#dfc691; border-color:#dfc691; color:#17323f; font-weight:500; letter-spacing:5px; }
+#overlay .pg.cls-pool-page .cls-foot .ov-btn.ok:hover { background:#e9d9ae; border-color:#e9d9ae; }
+
+@media (max-width:1280px) {
+  #overlay .pg.cls-pool-page .pool-grid { grid-template-columns:repeat(4,minmax(0,1fr)); }
+  #overlay .pg.cls-pool-page .pool-side { flex-basis:260px; width:260px; }
+}
+@media (max-width:900px) {
+  #overlay .pg.cls-pool-page .pool-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
 }
 @media (max-width:760px) {
   #overlay .pg.cls-pool-page .pg-head { align-items:flex-start; flex-direction:column; gap:8px; }
-  #overlay .pg.cls-pool-page .clib-main { flex-direction:column; }
-  #overlay .pg.cls-pool-page .clib-preview { width:100%; min-width:0; max-height:360px; }
+  #overlay .pg.cls-pool-page .pool-main { flex-direction:column; }
+  #overlay .pg.cls-pool-page .pool-side { width:100%; flex-basis:auto; max-height:360px; }
 }

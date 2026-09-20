@@ -194,10 +194,6 @@
   .hero-ava img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
   .cls-hub-art { width: 52px; min-width: 52px; border-radius: 10px; overflow: hidden;
     border: 1px solid #424242; box-shadow: 0 2px 8px rgba(0,0,0,.4); }
-  /* 职业选择二级页（page 模式）：角色卡池全览
-     2026-09-09 重做：卡格区结构已对齐卡牌库（clib-main + lib-grid + lib-pager），
-     样式见 winter.css「选人卡池页重做」段；这里只保留页脚。 */
-  .cls-pool-page .cls-foot { display: flex; justify-content: center; gap: 12px; }
   .cls-foot { flex-shrink: 0; text-align: center; padding-top: 14px; }
   .cls-foot .ov-btn:disabled { opacity: .45; cursor: not-allowed; }
 
@@ -245,8 +241,8 @@
     filter: blur(42px) saturate(.92) brightness(.75); }
   .cls2-fullart img.art-figure { position: relative; z-index: 1; width: 100%; height: 100%; max-width: none; object-fit: cover; object-position: center bottom; }
   /* 白塔选人壁纸：以底边为锚点，避免立绘下方随窗口高度出现留空 */
-  .cls2-fullart .figure-lituan img.art-figure-back { inset: auto 0 0; width: 100%; height: 100%; }
-  .cls2-fullart .figure-lituan img.art-figure { height: 100%; margin-top: 0; }
+  .cls2-fullart .figure-baita img.art-figure-back { inset: auto 0 0; width: 100%; height: 100%; }
+  .cls2-fullart .figure-baita img.art-figure { height: 100%; margin-top: 0; }
   .cls2-face img.art-figure { object-fit: cover; object-position: center 30%; }
   .cls-hub-art img.art-figure, .cls-pick-art img.art-figure, .bt-fportrait img.art-figure { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
   /* 左下返回（局内同款朱红）/ 右下确认大键：与头像条同排贴底 */

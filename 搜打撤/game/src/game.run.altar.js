@@ -149,16 +149,20 @@ export function openClassChoice(options = {}) {
   };
   const poolPreviewHTML = (c) => {
     if (!c) return '<div class="pv-empty">[[icon:cards]]</div><p class="pv-hint">选择右侧卡牌<br>这里会显示档案预览</p>';
-    const dmgTxt = SDT.Cards.DMG_TYPES.includes(c.type) ? `<br>伤害词条：<b class="dmg-num">${c.dmg || 0}</b>` : '';
-    return `${SDT.Cards.cardHTML(c, 'lg')}<p class="pv-hint">${esc(c.type)} · ${esc(SDT.Cards.rarityOf(c))}${dmgTxt}<br>点击卡面可放大查看</p>`;
+    const dmgRow = SDT.Cards.DMG_TYPES.includes(c.type) ? `<div class="pv-row"><span>伤害词条</span><b class="dmg-num">${c.dmg || 0}</b></div>` : '';
+    return `${SDT.Cards.cardHTML(c, 'lg')}<div class="pv-meta">
+      <div class="pv-row"><span>类型</span><b>${esc(c.type)}</b></div>
+      <div class="pv-row"><span>稀有度</span><b>${esc(SDT.Cards.rarityOf(c))}</b></div>
+      ${dmgRow}
+    </div><p class="pv-hint">点击卡面可放大查看</p>`;
   };
   const poolGridHTML = () => {
     const pool = SDT.Cards.classPool(sel);
     const totalPages = Math.max(1, Math.ceil(pool.length / POOL_PAGE_SIZE));
     if (poolPage >= totalPages) poolPage = totalPages - 1;
     const cards = pool.slice(poolPage * POOL_PAGE_SIZE, (poolPage + 1) * POOL_PAGE_SIZE);
-    return `<div class="lib-grid cls-pool-grid" id="poolGrid">${cards.map((c, i) => `
-      <div class="lib-item"><button class="lib-cardwrap pool-card-button${i === 0 ? ' selected' : ''}" data-act="poolZoom" data-i="${poolPage * POOL_PAGE_SIZE + i}" title="点击放大查看" aria-label="查看 ${escAttr(c.name)} 详情">${SDT.Cards.cardHTML(c)}</button></div>`).join('')}</div>`;
+    return `<div class="pool-grid" id="poolGrid">${cards.map((c, i) => `
+      <div class="pool-cell"><button class="lib-cardwrap pool-card-button${i === 0 ? ' selected' : ''}" data-act="poolZoom" data-i="${poolPage * POOL_PAGE_SIZE + i}" title="点击放大查看" aria-label="查看 ${escAttr(c.name)} 详情">${SDT.Cards.cardHTML(c)}</button></div>`).join('')}</div>`;
   };
   // 预解码下一页插画（翻页零解码等待，同卡牌库 warmNextLibPage）
   const warmNextPoolPage = () => {
@@ -183,28 +187,31 @@ export function openClassChoice(options = {}) {
     if (first && preview) preview.innerHTML = poolPreviewHTML(first);
     bindPoolFocusPreview();
     warmNextPoolPage();
+    if (SDT.Art && SDT.Art.decodeIn) SDT.Art.decodeIn(document.querySelector('.cls-pool-page'));   // 翻页新卡显式解码，防合成黑窗
   };
   const renderPool = () => {
     poolPage = 0;
     const pool = SDT.Cards.classPool(sel);
+    const story = characterFor(sel);
     UI.showOverlay('', `
-      <div class="pg cls-pool-page">
+      <div class="pg cls-pool-page" style="--cls-color:${story ? story.color : '#69aec2'}">
         <header class="pg-head">
           <div class="pool-archive-title"><span class="section-kicker">ROLE ARCHIVE // ${esc(characterName(sel))}</span><h2>[[icon:cards]] 角色卡池档案</h2></div>
           <span class="sub">确认选择「${esc(characterName(sel))}」后，将从 ${pool.length} 张人物卡中随机获得角色卡，并与 5 张「初始攻击」一起带入背包。</span>
         </header>
-        <div class="clib-main">
-          <aside class="clib-preview" id="poolPreview" aria-live="polite">${poolPreviewHTML(pool[0])}</aside>
+        <div class="pool-main">
+          <aside class="pool-side" id="poolPreview" aria-live="polite">${poolPreviewHTML(pool[0])}</aside>
           ${poolGridHTML()}
         </div>
         <footer class="cls-foot cls-foot-pool">
-          ${poolPagerHTML() ? `<div class="lib-pager pool-pager" id="poolPager">${poolPagerHTML()}</div><span class="pool-foot-sep" aria-hidden="true"></span>` : ''}
+          ${poolPagerHTML() ? `<div class="pool-pager" id="poolPager">${poolPagerHTML()}</div>` : ''}
           <button class="ov-btn" data-act="clsBack">[[icon:medal]] 返回选角</button>
           <button class="ov-btn ok" data-act="pickClass">出发</button>
         </footer>
       </div>`, 'page');
     bindPoolFocusPreview();
     warmNextPoolPage();
+    if (SDT.Art && SDT.Art.decodeIn) SDT.Art.decodeIn(document.querySelector('.cls-pool-page'));   // 首屏卡面显式解码，防 IAB 合成黑窗（同战斗手牌修法）
   };
   const showPoolPreview = (el, tick = false) => {
     const i = Number(el?.dataset?.i);
