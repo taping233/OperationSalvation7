@@ -90,6 +90,7 @@ export default [
   "cards/items/tt4-shine-token.webp",
   "cards/items/tt4-smoke-bomb.webp",
   "cards/items/tt4-woodify.webp",
+  "cards/lore-raving.webp",
   "cards/martial-builtin-sha.webp",
   "cards/martial-cc-chase-slash.webp",
   "cards/martial-cc-cursed-blade.webp",
