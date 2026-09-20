@@ -117,16 +117,17 @@
 #overlay .pg.cls-pool-page .pool-watermark { position:absolute; inset:0; z-index:0; display:flex; align-items:flex-end; justify-content:flex-end; overflow:hidden; pointer-events:none; }
 #overlay .pg.cls-pool-page .pool-watermark img { width:min(56%,620px); max-height:104%; object-fit:contain; object-position:right bottom; opacity:.13; filter:saturate(.8) brightness(1.05); mask-image:radial-gradient(ellipse at 72% 62%,#000 42%,transparent 74%); -webkit-mask-image:radial-gradient(ellipse at 72% 62%,#000 42%,transparent 74%); }
 #overlay .pg.cls-pool-page .pool-watermark::after { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 78% 66%, color-mix(in srgb,var(--cls-color,#69aec2) 15%,transparent), transparent 60%); }
-#overlay .pg.cls-pool-page .pool-side { position:relative; z-index:1; flex:0 0 300px; width:300px; min-width:0; display:flex; flex-direction:column; align-self:stretch; padding:22px 18px 15px; border:1px solid rgba(104,128,139,.3); border-radius:2px; background:linear-gradient(165deg,#163847,#0d2431); box-shadow:inset 4px 0 0 color-mix(in srgb,var(--cls-color,#69aec2),transparent 45%),0 9px 22px rgba(3,14,20,.45); overflow:hidden auto; }
+#overlay .pg.cls-pool-page .pool-side { position:relative; z-index:1; flex:0 0 300px; width:300px; min-width:0; display:flex; flex-direction:column; align-self:stretch; padding:26px 22px 18px; border:1px solid rgba(104,128,139,.3); border-radius:2px; background:linear-gradient(165deg,#163847,#0d2431); box-shadow:inset 4px 0 0 color-mix(in srgb,var(--cls-color,#69aec2),transparent 45%),0 9px 22px rgba(3,14,20,.45); overflow:hidden auto; }
 #overlay .pg.cls-pool-page .pool-side::before { content:none; }
-/* 批三：预览栏档案卡化——pv-head 角色小节垫顶，获取规则 pv-rule 沉底，pv-body 是选中卡预览区 */
-#overlay .pg.cls-pool-page .pool-side .pv-head { flex:0 0 auto; margin-bottom:14px; padding-bottom:13px; border-bottom:1px solid rgba(104,128,139,.3); }
+/* 批三：预览栏档案卡化——pv-head 角色小节垫顶，获取规则 pv-rule 沉底，pv-body 是选中卡预览区
+   P1-D2（2026-09-20 老板反馈"太挤"）：三段留白节奏拉开——头部下距/规则行上距/属性行间距 */
+#overlay .pg.cls-pool-page .pool-side .pv-head { flex:0 0 auto; margin-bottom:18px; padding-bottom:14px; border-bottom:1px solid rgba(104,128,139,.3); }
 #overlay .pg.cls-pool-page .pool-side .pv-kicker { display:block; margin-bottom:7px; color:color-mix(in srgb,var(--cls-color,#69aec2) 78%,white); font:700 9px "Cascadia Code",monospace; letter-spacing:.26em; }
 #overlay .pg.cls-pool-page .pool-side .pv-name { color:#f0ece0; font:400 26px/1.2 var(--serif); letter-spacing:4px; text-shadow:0 0 18px color-mix(in srgb,var(--cls-color,#69aec2) 35%,transparent); }
 #overlay .pg.cls-pool-page .pool-side .pv-body { flex:0 0 auto; min-height:0; }
-#overlay .pg.cls-pool-page .pool-side .pv-rule { margin:auto 0 0; padding-top:12px; border-top:1px solid rgba(104,128,139,.24); color:#8faeb8; font-size:11.5px; line-height:1.75; }
+#overlay .pg.cls-pool-page .pool-side .pv-rule { margin:auto 0 0; padding-top:16px; border-top:1px solid rgba(104,128,139,.24); color:#8faeb8; font-size:11.5px; line-height:1.75; }
 #overlay .pg.cls-pool-page .pool-side .pv-empty { color:#8fb0b6; }
-#overlay .pg.cls-pool-page .pool-side .pv-meta { display:flex; flex-direction:column; gap:6px; margin-top:12px; }
+#overlay .pg.cls-pool-page .pool-side .pv-meta { display:flex; flex-direction:column; gap:8px; margin-top:14px; }
 #overlay .pg.cls-pool-page .pool-side .pv-row { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:7px 10px; background:#102833; border:1px solid #4c6a76; border-radius:1px; }
 #overlay .pg.cls-pool-page .pool-side .pv-row span { color:#8fb0b6; font-size:12px; letter-spacing:1px; }
 #overlay .pg.cls-pool-page .pool-side .pv-row b { color:#e5d4ae; font-size:13.5px; }
@@ -134,12 +135,22 @@
 #overlay .pg.cls-pool-page .pool-side .pv-hint { margin-top:10px; color:#8fb0b6; font-size:12.5px; line-height:1.65; }
 
 /* 2026-09-20 P0：裸 center 在内容超高时上下双向溢出且顶部滚不到（720p 首行裁半、滚到底露白），
-   safe center 让溢出时自动退化顶对齐可滚动；前置裸 center 声明作旧内核回退 */
-#overlay .pg.cls-pool-page .pool-grid { position:relative; z-index:1; flex:1; min-width:0; min-height:0; display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:22px 20px; align-content:center; justify-content:center; align-content:safe center; justify-content:safe center; padding:6px 2px; overflow:hidden auto; }
-#overlay .pg.cls-pool-page .pool-cell { position:relative; min-width:0; }
+   safe center 让溢出时自动退化顶对齐可滚动；前置裸 center 声明作旧内核回退。
+   2026-09-20 P1-D3：grid 改 flex wrap + 居中——grid 的尾行永远靠左（5+2 时右侧成片空白），
+   flex 逐行居中让不满行两侧均衡留白，空区让位水印立绘 */
+#overlay .pg.cls-pool-page .pool-grid { position:relative; z-index:1; flex:1; min-width:0; min-height:0; display:flex; flex-wrap:wrap; align-content:center; justify-content:center; align-content:safe center; justify-content:safe center; gap:26px 26px; padding:6px 6px; overflow:hidden auto; }
+#overlay .pg.cls-pool-page .pool-cell { position:relative; min-width:0; flex:1 0 236px; max-width:262px; }
 /* 卡底座主题色光晕（批二）：椭圆柔光垫在卡下，缓和绿框卡与深蓝底的冲突 */
 #overlay .pg.cls-pool-page .pool-cell::before { content:''; position:absolute; left:10%; right:10%; bottom:-4px; height:16px; border-radius:50%; background:color-mix(in srgb,var(--cls-color,#69aec2) 38%,transparent); filter:blur(12px); opacity:.4; z-index:0; pointer-events:none; }
-#overlay .pg.cls-pool-page .pool-cell .hs-card { position:relative; z-index:1; width:100%; height:auto; font-size:clamp(12px,1.02vw,15px); }
+#overlay .pg.cls-pool-page .pool-cell .hs-card { position:relative; z-index:1; width:100%; height:auto; font-size:clamp(14.2px,1.02vw,15px); }
+/* P1-C1 稀有度角标（2026-09-20 走查）：框色=职业、角标=稀有度，两套语义分道；
+   棱彩走全息渐变边呼应卡面 rv-prism */
+#overlay .pg.cls-pool-page .pool-cell .pool-rarity-tag { position:absolute; top:-10px; right:8px; z-index:2; padding:3px 10px; border:1px solid rgba(104,128,139,.6); border-radius:1px; background:#122c39; color:#b9cdd2; font:700 10px/1 "Cascadia Code",monospace; letter-spacing:3px; box-shadow:0 2px 8px rgba(2,10,16,.5); pointer-events:none; }
+#overlay .pg.cls-pool-page .pool-cell .pool-rarity-tag.prism { border:1px solid transparent; background:linear-gradient(#132e3b,#132e3b) padding-box,linear-gradient(100deg,#e8b6a6,#f2e2b8,#bfe3d2,#cdb9e8,#e8b6a6) border-box; color:#f0e6d2; }
+/* P1-C2 卡面渐晕（2026-09-20 走查）：黑底特效图与米白亮底卡同屏明度跳变明显，
+   卡面画窗统一内衬暗角把明度差压平，画风混装的割裂感收敛 */
+#overlay .pg.cls-pool-page .pool-cell .hsc-art { position:relative; }
+#overlay .pg.cls-pool-page .pool-cell .hsc-art::after { content:''; position:absolute; inset:0; box-shadow:inset 0 0 30px rgba(7,15,21,.42); pointer-events:none; }
 #overlay .pg.cls-pool-page .pool-card-button { position:relative; z-index:1; display:block; width:100%; padding:0; border:2px solid transparent; border-radius:10px; background:transparent; color:inherit; font:inherit; cursor:zoom-in; transition:transform .16s,border-color .16s,box-shadow .16s; box-shadow:0 0 0 1px color-mix(in srgb,var(--cls-color,#69aec2) 18%,transparent),0 4px 14px rgba(2,10,16,.35); }
 /* 卡牌库影廊的 hover 放大旋转（cards.css scale 1.17）在此页过激，收敛为浮起+主题色描边 */
 #overlay .pg.cls-pool-page .pool-card-button.lib-cardwrap:hover,
@@ -157,8 +168,8 @@
 #overlay .pg.cls-pool-page .cls-foot .pool-pageinfo { min-width:150px; text-align:center; color:#b6c9ce; font-size:12.5px; letter-spacing:1px; }
 #overlay .pg.cls-pool-page .cls-foot .pool-pageinfo .pool-page-now { color:var(--cls-color,#69aec2); font-weight:700; }
 #overlay .pg.cls-pool-page .cls-foot .ov-btn { min-height:44px; border-radius:1px; letter-spacing:2px; }
-#overlay .pg.cls-pool-page .cls-foot .ov-btn.ok { min-width:150px; background:#dfc691; border-color:#dfc691; color:#17323f; font-weight:500; letter-spacing:5px; box-shadow:0 0 0 1px color-mix(in srgb,var(--cls-color,#69aec2) 40%,transparent),0 0 16px color-mix(in srgb,var(--cls-color,#69aec2) 22%,transparent); }
-#overlay .pg.cls-pool-page .cls-foot .ov-btn.ok:hover { background:#e9d9ae; border-color:#e9d9ae; }
+#overlay .pg.cls-pool-page .cls-foot .ov-btn.ok { min-width:150px; background:color-mix(in srgb,#dfc691 86%,#38606e); border-color:color-mix(in srgb,#dfc691 86%,#38606e); color:#17323f; font-weight:500; letter-spacing:5px; box-shadow:0 0 0 1px color-mix(in srgb,var(--cls-color,#69aec2) 40%,transparent),0 0 16px color-mix(in srgb,var(--cls-color,#69aec2) 22%,transparent); }
+#overlay .pg.cls-pool-page .cls-foot .ov-btn.ok:hover { background:color-mix(in srgb,#e9d9ae 86%,#38606e); border-color:color-mix(in srgb,#e9d9ae 86%,#38606e); }
 
 /* 批三：滚动条主题化（深色细轨+主题色 hover），替换系统默认浅色条 */
 #overlay .pg.cls-pool-page ::-webkit-scrollbar { width:9px; height:9px; }
@@ -169,11 +180,11 @@
 #overlay .card.page:has(.cls-pool-page) .ov-x:hover { color:var(--cls-color,#69aec2); border-color:color-mix(in srgb,var(--cls-color,#69aec2) 60%,transparent); }
 
 @media (max-width:1280px) {
-  #overlay .pg.cls-pool-page .pool-grid { grid-template-columns:repeat(4,minmax(0,1fr)); }
+  #overlay .pg.cls-pool-page .pool-cell { flex-basis:196px; }
   #overlay .pg.cls-pool-page .pool-side { flex-basis:260px; width:260px; }
 }
 @media (max-width:900px) {
-  #overlay .pg.cls-pool-page .pool-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+  #overlay .pg.cls-pool-page .pool-cell { flex-basis:172px; }
 }
 @media (max-width:760px) {
   #overlay .pg.cls-pool-page .pg-head { align-items:flex-start; flex-direction:column; gap:8px; }

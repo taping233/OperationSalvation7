@@ -174,8 +174,10 @@ export function openClassChoice(options = {}) {
     const totalPages = Math.max(1, Math.ceil(pool.length / size));
     if (poolPage >= totalPages) poolPage = totalPages - 1;
     const cards = pool.slice(poolPage * size, (poolPage + 1) * size);
-    return `<div class="pool-grid" id="poolGrid">${cards.map((c, i) => `
-      <div class="pool-cell"><button class="lib-cardwrap pool-card-button${i === 0 ? ' selected' : ''}" data-act="poolZoom" data-i="${poolPage * size + i}" title="点击放大查看" aria-label="查看 ${escAttr(c.name)} 详情">${SDT.Cards.cardHTML(c)}</button></div>`).join('')}</div>`;
+    return `<div class="pool-grid" id="poolGrid">${cards.map((c, i) => {
+      const ro = SDT.Cards.rarityOf(c);   // 衍生牌全量扫卡库，单卡只调一次
+      return `<div class="pool-cell"><span class="pool-rarity-tag${ro === '棱彩' ? ' prism' : ''}">${esc(ro)}</span><button class="lib-cardwrap pool-card-button${i === 0 ? ' selected' : ''}" data-act="poolZoom" data-i="${poolPage * size + i}" title="点击放大查看" aria-label="查看 ${escAttr(c.name)} 详情">${SDT.Cards.cardHTML(c)}</button></div>`;
+    }).join('')}</div>`;
   };
   // 预解码下一页插画（翻页零解码等待，同卡牌库 warmNextLibPage）
   const warmNextPoolPage = () => {
@@ -244,6 +246,7 @@ export function openClassChoice(options = {}) {
     document.querySelectorAll('#poolGrid .pool-card-button.selected').forEach(node => node.classList.remove('selected'));
     el.classList.add('selected');
     pv.innerHTML = poolPreviewHTML(c);
+    if (SDT.Art && SDT.Art.decodeIn) SDT.Art.decodeIn(pv);   // 侧栏 lg 大图变体显式解码，防 IAB 合成黑窗（网格小卡已解码不代表大尺寸变体可用，2026-09-20 走查实锤）
     if (tick) Sfx.tick();
   };
   const bindPoolFocusPreview = () => {
