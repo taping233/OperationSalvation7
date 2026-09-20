@@ -1,7 +1,8 @@
 {
-  "version": 31,
+  "version": 32,
   "note": "实机卡库定版覆盖批次数据（同步自网页版实机卡库）。由 scripts/sync-cards-from-live.mjs 生成，勿手改；重跑该脚本整份重写。",
   "changelog": [
+    "2026-09-20 禁咒补种批次（v32）：补 tt8-curse1~4 四张整卡——禁咒系列 09-16 随 v21 重做加入 cards.js 但从未进过 sync 数组，旧档播种库缺失且无补种机制，导致卡牌库搜不到；条目照 cards.js 定版（禁咒I 夺取攻击力 / II 冰冻 / III 中毒流血 / IV 沉默 1 回合，衍生法术 tokenOf tt8-hero-warlock）",
     "2026-09-20 定名找回批次（v31）：补 tt8-hero-warlock 整卡覆盖——该卡此前的旧名「无极梦魇·血苑修罗」残留在旧档播种数据里且 sync 数组无此条目导致无法刷新，现按 2026-09-13 老板实机定名「禁术解放」整卡覆盖（cost 0/稀有/能力卡/牧师/无定横行）",
     "2026-09-20 迭代评审批次（v30）：文案对齐实装口径整卡覆盖五张——圣盾半角句点改逗号+空格规范、骷髅王剑引号方向修正、银河之旅「招式」改「武术」（实现只降武术，正则已同步补分支）、星陨之力「火球术」改「火球」（现役卡名检索一致）、破甲重斩「。；」连用修正；desc 全部经 effect 解析兼容性核对（多轮评审终裁）",
     "2026-09-19 老板拍板：同名双版「厉兵秣马」退役自建版 cc-prep，只留官方定版 tt7-ironcharge（本版只动 retire 名单，无覆盖批次）",
@@ -438,6 +439,54 @@
       "name": "禁术解放",
       "rarity": "稀有",
       "type": "能力卡",
+      "unrandom": true,
+      "value": 5
+    },
+    {
+      "cls": "牧师",
+      "cost": 0,
+      "desc": "抽到时施放：夺取 1 点攻击力。",
+      "id": "tt8-curse1",
+      "name": "禁咒I",
+      "rarity": "衍生",
+      "tokenOf": "tt8-hero-warlock",
+      "type": "法术",
+      "unrandom": true,
+      "value": 5
+    },
+    {
+      "cls": "牧师",
+      "cost": 0,
+      "desc": "抽到时施放：冰冻。",
+      "id": "tt8-curse2",
+      "name": "禁咒II",
+      "rarity": "衍生",
+      "tokenOf": "tt8-hero-warlock",
+      "type": "法术",
+      "unrandom": true,
+      "value": 5
+    },
+    {
+      "cls": "牧师",
+      "cost": 0,
+      "desc": "抽到时施放：中毒，流血。",
+      "id": "tt8-curse3",
+      "name": "禁咒III",
+      "rarity": "衍生",
+      "tokenOf": "tt8-hero-warlock",
+      "type": "法术",
+      "unrandom": true,
+      "value": 5
+    },
+    {
+      "cls": "牧师",
+      "cost": 0,
+      "desc": "抽到时施放：沉默 1 回合。",
+      "id": "tt8-curse4",
+      "name": "禁咒IV",
+      "rarity": "衍生",
+      "tokenOf": "tt8-hero-warlock",
+      "type": "法术",
       "unrandom": true,
       "value": 5
     },
