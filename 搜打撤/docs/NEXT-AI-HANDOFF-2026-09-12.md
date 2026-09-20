@@ -8,7 +8,7 @@
 - 用户希望全面、大刀阔斧的改造，UI、地图、商店、事件、人物、卡面、音效、动画都可调整。不要退回零碎修边框的方式。
 - 视觉参考明日方舟与集成战略的信息层级、战术版式、画面留白；本项目使用冬日蓝黑、霜白、香槟金，危险用珊瑚红。官方参考：https://ak.hypergryph.com/is/gardenofgrotesqueries?source_from=official
 - 战斗可参考杀戮尖塔 2 的操作与分区设计。用户说文件夹里有相关代码，但本轮没有定位到可确认的参考源码，不能宣称已移植该游戏代码。
-- 无（`shuangling` / 侠客）的人设：蓝眼睛；有刘海但不遮眼；白色长发、高马尾与蓝缎带；黑礼裙；可戴墨镜，通常在头顶；神态嚣张、自信。共同参照首页壁纸与已有定稿立绘，不要每张卡随机改变脸、眼色和发型。
+- 无（`wu` / 侠客）的人设：蓝眼睛；有刘海但不遮眼；白色长发、高马尾与蓝缎带；黑礼裙；可戴墨镜，通常在头顶；神态嚣张、自信。共同参照首页壁纸与已有定稿立绘，不要每张卡随机改变脸、眼色和发型。
 - 默认中文，称呼老板；Friday 是本轮协调者。可用多个 Luna 子代理分工，但修改文件所有权必须明确。
 
 ## 已落地的基础
@@ -28,7 +28,7 @@
 - `game/assets/scenes/winter-expedition/`：四层背景 + 普通/首脑战场，共 6 张。
 - `game/assets/cards/expedition-starters/`：初始攻击、火球、穿刺、法杖、木材、口粮、无的 3 张能力卡，共 9 张。以 `art-mapping.json` 的 `cardArtOverrides` 为最终命中入口。
 - 无的 6 张人物卡面已按蓝眼、露眼刘海、墨镜、嚣张神态重绘并由根代理检查。早期错误眼色的 `cards/wu-*.webp` 仍留在旧路径，但三个能力 ID 已优先映射到 `expedition-starters/wu-*.webp`；后续可清理冗余，切勿改回旧图。
-- 玄砾 `xuanli`、灯葵 `dengkui`：已补 `portraits/full`、`avatars`、`battle` 三组映射。初版 full 与 avatar 已看图；battle 初版不透明，最后一批正在替换透明战斗图时停止。当前 battle 文件最后写入时间约 19:42–19:43，必须检查 alpha 和实机效果，不能把「生成成功」当作透明素材验收成功。
+- 玄砾 `heixiang`、灯葵 `xingyue`：已补 `portraits/full`、`avatars`、`battle` 三组映射。初版 full 与 avatar 已看图；battle 初版不透明，最后一批正在替换透明战斗图时停止。当前 battle 文件最后写入时间约 19:42–19:43，必须检查 alpha 和实机效果，不能把「生成成功」当作透明素材验收成功。
 - 生图管线说明：`C:\Users\太平\.zcode\cli\memories\projects\project-9f3e184c77472436\memory\soudache-nai-card-pipeline.md`。遵守 NAI 单队列和间隔，不并发生图，不输出或提交 token。
 - 提示词/原图/manifest 保存在仓库根 `.tmp/nai/friday-*20260912/`，属于本地工作记录，不在本次 Git 提交中。
 
@@ -51,7 +51,7 @@
 2. 运行 `npx vitest run`、`node game/selftest.js`、`npm run build`；esbuild 若遇 Windows sandbox 的 spawn EPERM，使用获准的本机执行方式，不修改全局配置。
 3. 重看最新地图、基地、整备、商店、选角、牌库、卡面详情。历史 `winter.css` 有大量高优先级覆盖，不能只看新 CSS 文件就宣布有效。
 4. 实战排版：最终 `expedition-battle.css` 将手牌 `.bt-slot` 从 `bottom:-28px` 改为 `18px`，我方/敌方整体底边改为 `60px`；这解决此前底部裁切的方向正确，但**最后这组值尚未实机复验**。检查手牌不遮血条、名字、战场目标，并在 720 高度适配角色尺寸。
-5. 检查 `xuanli/dengkui` 的 battle WebP 透明通道与底部脚是否完整；若仍有背景矩形，需要补完已有离线抠图流程。
+5. 检查 `heixiang/xingyue` 的 battle WebP 透明通道与底部脚是否完整；若仍有背景矩形，需要补完已有离线抠图流程。
 6. 检查商店 h2 是否仍被旧 `display:none` 隐藏、价格按钮是否有清晰卡名语义、购买反馈与可离开按钮在溢出时是否可见；不要让三列大格只有中央一小张卡造成空洞。
 7. 选角目前是默认「预览」而非已选中，首次确认仍禁用且要点头像。可简化为本地默认选择（仅确认时写游戏状态）。新按钮与头像条有重叠风险，尤其 820 宽。
 8. 核对战斗选中状态在换牌、拖拽、翻页、回合切换和关闭时是否一致；旧目标/费用提示文案有残留，统一为真实支持的操作。

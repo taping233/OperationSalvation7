@@ -1,12 +1,12 @@
-# 星月（dengkui / 牧师）
+# 星月（xingyue / 牧师）
 
-![星月·定稿立绘](ref-images/dengkui.webp)
+![星月·定稿立绘](ref-images/xingyue.webp)
 
 ## 基础信息（以 characters.js / 选人界面为准）
 
 | 项 | 值 |
 |---|---|
-| id | `dengkui` |
+| id | `xingyue` |
 | 名字 | 星月（2026-09-12 由「灯葵」改名，id 与立绘文件名不变） |
 | 职业 | 牧师 |
 | 主题色 | `#81bcb0` |
@@ -27,7 +27,7 @@
 
 ## 2026-09-19 painterly 全身立绘定稿（老板授权 Friday 定锚点）
 
-- 依据：`roster-painterly-four-v2-20260919-120257/dengkui-120257.png`（seed 1412045851），已实装 `portraits/full/dengkui.webp`。
+- 依据：`roster-painterly-four-v2-20260919-120257/dengkui-120257.png`（seed 1412045851），已实装 `portraits/full/xingyue.webp`。
 - 演出：全身站姿，**右手提星灯平举身侧（灯光照亮裙摆）+ 左手胸前祈祷手势**；正脸三分钟视角、双眼金色可见（禁全侧面）。
 - 月牙发饰沿用钉死句：观众视角**右侧**、贴发斜置（v1 曾出在左侧，v2 已修正）。
 - 服装：白神官裙金滚边（层叠裙摆）+ 深青绿披肩金边；白袜短靴。

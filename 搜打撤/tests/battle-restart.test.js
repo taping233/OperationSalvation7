@@ -19,7 +19,7 @@ function makeGame() {
     ownedCards: [{ uid: 'starter-1', card: { ...starter }, safe: false }],
     inventory: [{ id: 'ration', count: 1 }], cardOrder: ['starter-1'], usedPocket: [], eventLog: [],
     hp: 30, maxHp: 30, atk: 5, spellPower: 0, coins: 8, turn: 1,
-    myClass: '战士', characterId: 'xuanli', state: 'idle', battleActive: false,
+    myClass: '战士', characterId: 'heixiang', state: 'idle', battleActive: false,
     log(message) { this.eventLog.push(String(message)); }, heal(n) { this.hp = Math.min(this.maxHp, this.hp + n); },
     onBattleEnd() {},
   };

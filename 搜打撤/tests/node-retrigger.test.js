@@ -87,7 +87,7 @@ describe('节点离开后返回不得重复触发（2026-09-19 bug 回归）', (
     newRun(20260919, 'standard', []);
     await tick(50);
     game.myClass = '战士';
-    game.characterId = 'xuanli';
+    game.characterId = 'heixiang';
     game.state = 'idle';
   });
 

@@ -1,12 +1,12 @@
-# 无（shuangling / 侠客）
+# 无（wu / 侠客）
 
-![无·定稿立绘](ref-images/shuangling.webp)
+![无·定稿立绘](ref-images/wu.webp)
 
 ## 基础信息（以 characters.js / 选人界面为准）
 
 | 项 | 值 |
 |---|---|
-| id | `shuangling` |
+| id | `wu` |
 | 名字 | 无 |
 | 职业 | 侠客 |
 | 主题色 | `#ed9b53` |
@@ -34,7 +34,7 @@
 
 ## 2026-09-19 painterly 全身立绘定稿（老板逐项反馈修订）
 
-- 依据：`roster-fix-20260919-170117/shuangling-170117.png`（seed 1769771149），已实装 `portraits/full/shuangling.webp`。
+- 依据：`roster-fix-20260919-170117/shuangling-170117.png`（seed 1769771149），已实装 `portraits/full/wu.webp`。
 - **发型修订（0919 老板反馈）**：马尾收紧=**光滑束紧的高马尾**（`sleek smooth hair, tight neat high ponytail`），头发平贴不蓬松（禁 fluffy/voluminous/messy hair）——原「大波浪」口径按此收紧执行。
 - **墨镜修订（0919 老板反馈）**：**哑光黑镜片、不反光无眩光**（`matte black`；UC 排 reflective sunglasses / lens flare / glasses reflection）。
 - 演出：全身站姿叉腰，**黑色长剑斜背背后**（剑柄露肩上）+ 主句归属；裙摆 `high-low` 前短后长且**后摆止于小腿**（有效钉法=`the skirt in back stops at the shins`，`high-low skirt` tag 有拖地先验禁用）。

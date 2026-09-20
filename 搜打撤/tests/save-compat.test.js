@@ -23,7 +23,7 @@ describe('固定旧档兼容样本', () => {
     expect(RunStorage.read(1)).toEqual({
       ...legacy,
       ownedCards: [{ uid: 'legacy-card-1', card: { id: 'starter-attack', name: '初始攻击', type: '武术', cost: 1 } }],
-      characterId: 'xuanli',
+      characterId: 'heixiang',
       version: RunStorage.SAVE_VERSION,
     });
     expect(localStorage.getItem('sdt-save-v1')).toBeNull();
@@ -37,7 +37,7 @@ describe('固定旧档兼容样本', () => {
     RunStorage.write(3, { ...slot2, slot: 3, myClass: '剑仙' });
     RunStorage.write(5, { ...slot2, slot: 5, myClass: '法师' });
     expect(RunStorage.read(1)).toBeNull();
-    expect(RunStorage.read(2)).toEqual({ ...slot2, myClass: '牧师', characterId: 'dengkui', version: RunStorage.SAVE_VERSION });
+    expect(RunStorage.read(2)).toEqual({ ...slot2, myClass: '牧师', characterId: 'xingyue', version: RunStorage.SAVE_VERSION });
     expect(RunStorage.read(3).myClass).toBe('剑仙');
     expect(RunStorage.read(4)).toBeNull();
     expect(RunStorage.read(5).myClass).toBe('法师');

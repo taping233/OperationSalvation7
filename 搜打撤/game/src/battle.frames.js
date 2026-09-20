@@ -2,6 +2,7 @@ import SDT from './sdt-facade.js';
 import { assetUrl } from './asset-url.js';
 import { on as busOn } from './event-bus.js';
 import { rect as uiRect, scale as uiScale } from './ui-scale.js';
+import { demoMs } from './battle.pace.js';
 
 // ---------- 战斗单位序列帧播放器（批次D：Pixi 材质层） ----------
 // 定调（老板 2026-09-12）：动画路线 = Pixi 材质层 + 序列帧，跳过 Spine；敌人本轮不上序列帧；
@@ -19,6 +20,7 @@ import { rect as uiRect, scale as uiScale } from './ui-scale.js';
 
 const HAS_FRAMES = new Set(['changwuyu', 'baita', 'wu']);
 const FRAME_H = 760, FRAME_W = 512;        // 烘焙画布尺寸
+const GEO_TUNE = 1.02;                     // 人物等高对齐静态立绘的视觉微调（沿用旧画布口径）
 // 帧节奏：每动作总时长（ms），均分到实际存在的帧上——攻击快、施法舒展、呼吸慢循环
 const SEQ_MS = { idle: 2900, 'atk-wind': 320, 'atk-hit': 280, hurt: 420, cast: 800 };
 const ACTIONS = Object.keys(SEQ_MS);
@@ -68,6 +70,53 @@ function candidateNames() {
 
 function reduceMotion() {
   return !!(SDT.Motion && SDT.Motion.reduceMotion && SDT.Motion.reduceMotion());
+}
+
+// —— 人物包围盒测量（帧/立绘构图归一化的依据） ——
+// 这批序列帧是独立重烘的，人物在 512×760 画布中的占比帧与帧、角色与角色都不一致
+// （idle 69%~98%，立绘 94%~100%），整画布等比贴放会在切帧/进出动作时人物忽大忽小。
+// 逐帧量 alpha 包围盒后按「人物实际显示高恒定」反推画布缩放，战斗演出才稳定。
+const SAMPLE = 4, ALPHA_MIN = 8;
+function measureAlphaBox(source, w, h) {
+  const sw = Math.max(1, Math.ceil(w / SAMPLE)), sh = Math.max(1, Math.ceil(h / SAMPLE));
+  const cv = document.createElement('canvas');
+  cv.width = sw; cv.height = sh;
+  const cx = cv.getContext('2d', { willReadFrequently: true });
+  if (!cx) return null;
+  cx.drawImage(source, 0, 0, sw, sh);
+  let data;
+  try { data = cx.getImageData(0, 0, sw, sh).data; } catch (_) { return null; }
+  let x0 = sw, y0 = sh, x1 = -1, y1 = -1;
+  for (let y = 0; y < sh; y++) {
+    const row = y * sw;
+    for (let x = 0; x < sw; x++) {
+      if (data[(row + x) * 4 + 3] >= ALPHA_MIN) {
+        if (x < x0) x0 = x;
+        if (x > x1) x1 = x;
+        if (y < y0) y0 = y;
+        if (y > y1) y1 = y;
+      }
+    }
+  }
+  if (x1 < 0) return null;
+  const kx = w / sw, ky = h / sh;
+  return { x0: x0 * kx, y0: y0 * ky, x1: (x1 + 1) * kx, y1: (y1 + 1) * ky };
+}
+
+// 立绘人物高占立绘画布高的比例（静态立绘 ≈ 满高 0.94~1.0），按角色缓存
+const portraitFillCache = new Map();
+async function portraitFillOf(role, img) {
+  if (portraitFillCache.has(role)) return portraitFillCache.get(role);
+  let fill = 1;
+  try {
+    if (!img.complete && img.decode) await img.decode().catch(() => {});
+    if (img.complete && img.naturalWidth) {
+      const box = measureAlphaBox(img, img.naturalWidth, img.naturalHeight);
+      if (box && box.y1 > box.y0) fill = Math.min(1, (box.y1 - box.y0) / img.naturalHeight);
+    }
+  } catch (_) { /* 量不出按满高处理 */ }
+  portraitFillCache.set(role, fill);
+  return fill;
 }
 
 function ensureApp() {
@@ -124,10 +173,26 @@ function loadSet(role) {
     // 使用角色；切换角色时卸载旧套，避免长局把所有角色纹理永久累积。
     await evictOtherTextureSets(role, Assets, Texture);
     const set = new Map();
+    const boxes = new Map();
     const urls = [];
     for (const name of candidateNames()) {
       const url = assetUrl(`assets/portraits/frames/${role}/${name}.webp`);
-      try { set.set(name, await Assets.load(url)); urls.push(url); } catch (e) { /* 探测：没这帧就跳过 */ }
+      // 包围盒测量走独立 fetch（与 Assets.load 同 URL 命中缓存）：不依赖 Pixi 纹理内部
+      // 结构拿位图，v8 的 source.resource 在部分环境下不可用，拿不到会让全部 box 为空、
+      // sprite 退化到画布原点（人物消失）。
+      const boxP = (async () => {
+        const resp = await fetch(url);
+        const bmp = await createImageBitmap(await resp.blob());
+        const box = measureAlphaBox(bmp, bmp.width, bmp.height);
+        bmp.close();
+        return box;
+      })().catch(() => null);
+      try {
+        const tex = await Assets.load(url);
+        set.set(name, tex);
+        boxes.set(name, await boxP);
+        urls.push(url);
+      } catch (e) { /* 探测：没这帧就跳过 */ }
     }
     // 每动作的实际帧序列 = 候选名里加载成功的按序集合
     const seqs = new Map();
@@ -136,7 +201,7 @@ function loadSet(role) {
         .filter(n => set.has(n)).concat(a === 'idle' && set.has('idle-breathe') ? ['idle-breathe'] : []);
       if (frames.length) seqs.set(a, frames);
     }
-    return seqs.get('idle') ? { set, seqs, urls } : null;
+    return seqs.get('idle') ? { set, seqs, urls, boxes } : null;
   })().catch(() => null);
   texSets.set(role, p);
   return p;
@@ -178,22 +243,40 @@ function layout() {
   if (!lr || r.left !== lr[0] || r.top !== lr[1] || r.width !== lr[2] || r.height !== lr[3]) {
     cur.dirty = true;   // 位/尺寸变了才需要重画；sprite 属性照常赋值（幂等）
   }
-  // sprite 高度对齐 img 显示高，宽度按帧画布纵横比；底部中心锚点贴 img 底边中点
-  const h = r.height * 1.02;
-  sprite.x = r.left - cur.ovLeft + r.width / 2;
-  sprite.y = r.top - cur.ovTop + r.height;
-  sprite.width = h * (FRAME_W / FRAME_H);
+  // 人物等高锚定：「人物实际显示高」= 静态立绘显示高 × 立绘人物占比 × GEO_TUNE，
+  // 帧间恒定；当前帧画布按人物包围盒反向放大（h = baseCharH × 760/人物高），
+  // 人物脚底贴 img 底边（帧内脚底不在画布底时锚点相应上移）。
+  cur.baseCharH = r.height * cur.portraitFill * GEO_TUNE;
+  cur.imgBottom = r.top - cur.ovTop + r.height;
+  cur.centerX = r.left - cur.ovLeft + r.width / 2;
+  const box = cur.curBox;
+  if (!box || box.y1 <= box.y0) return;   // 无帧盒：保持上次几何（异常兜底）
+  const h = cur.baseCharH * (FRAME_H / (box.y1 - box.y0));
   sprite.height = h;
+  sprite.width = h * (FRAME_W / FRAME_H);
+  sprite.x = cur.centerX;
+  sprite.y = cur.imgBottom + (FRAME_H - box.y1) / FRAME_H * h;
   cur.lastRect = [r.left, r.top, r.width, r.height];
 }
 
 function applyFrame(name) {
   if (!cur || !cur.set) return;
-  const tex = cur.set.get(name) || cur.set.get(cur.fallback);   // 缺帧兜底：待机基准帧
+  const used = cur.set.has(name) ? name : cur.fallback;          // 缺帧兜底：待机基准帧
+  const tex = cur.set.get(used);
   if (!tex) return;
+  cur.curBox = (cur.boxes && cur.boxes.get(used)) || null;       // 盒跟实际贴的纹理走
   setTexture(tex);
   layout();
   wakeRenderer();
+  // TODO(临时调试钩子，查完立绘闪现问题即删)：记录切帧时 sprite 几何与宿主状态
+  const host = document.getElementById('unitFrames');
+  window.__bfDebug = {
+    t: Date.now(), frame: name, role: cur.role,
+    spriteW: Math.round(sprite.width), spriteH: Math.round(sprite.height),
+    spriteX: Math.round(sprite.x), spriteY: Math.round(sprite.y),
+    hostHidden: host ? host.hidden : 'no-host',
+    anchor: sprite.anchor && (sprite.anchor.x + ',' + sprite.anchor.y),
+  };
 }
 
 // 把一个触发动作展开成帧时间轴：{ list, dur, loop }（帧数按实际资产，总时长均分）
@@ -288,11 +371,18 @@ async function attach(body) {
   const m = /portraits\/battle\/([a-z]+?)\.webp/.exec(String(img.getAttribute('src') || ''));
   const role = m && m[1];
   if (!role || !HAS_FRAMES.has(role)) { hide(); return; }
+  // 确认有帧集后立刻藏静态 img：纹理异步装载期间静态立绘会露一脸、就绪后跳切序列帧
+  // （老板 09-20 实机反馈首次进场「闪一下」）。visibility 只藏内容不塌布局，
+  // 装载失败/战斗已结束的原路恢复显示，静态立绘兜底不受影响。
+  img.style.visibility = 'hidden';
   const rt = await ensureApp();
-  if (!rt) return;
+  if (!rt) { img.style.visibility = ''; return; }
   const set = await loadSet(role);
   // 资源探测是异步的：战斗可能已结束并切到搜刮/奖励页，旧 fig 即使仍有引用也不能复活帧层。
-  if (!set || !isLiveBattleFigure(body, fig)) return;
+  if (!set || !isLiveBattleFigure(body, fig)) { img.style.visibility = ''; return; }
+  const fill = await portraitFillOf(role, img);
+  // 量立绘占比也是异步的，fig 可能在等待期间随战斗结束被移除，复活前再查一次。
+  if (!isLiveBattleFigure(body, fig)) { img.style.visibility = ''; return; }
   if (cur && cur.role === role) {
     // 同战斗内重渲染：只换 DOM 引用（ovBody 重建后 fig/img 是新节点），不重置播放状态，
     // 否则出牌结算的多次 render 会把正在播的攻击/受击动作打断
@@ -303,7 +393,9 @@ async function attach(body) {
   const ov = document.getElementById('overlay');
   const ovR = ov ? uiRect(ov) : { left: 0, top: 0 };   // 布局口径：layout() 里 sprite 换算用
   cur = {
-    role, fig, img, set: set.set, seqs: set.seqs, play: null, fi: 0, tNext: 0,
+    role, fig, img, set: set.set, seqs: set.seqs, boxes: set.boxes,
+    portraitFill: fill, curBox: null, baseCharH: 0, imgBottom: 0, centerX: 0,
+    play: null, fi: 0, tNext: 0,
     fallback: set.seqs.get('idle')[0], lastRect: null, ovLeft: ovR.left, ovTop: ovR.top,
     dirty: true,   // 首帧必须渲染
   };

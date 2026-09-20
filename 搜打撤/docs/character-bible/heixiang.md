@@ -1,12 +1,12 @@
-# 黑像（xuanli / 战士）
+# 黑像（heixiang / 战士）
 
-![黑像·定稿立绘](ref-images/xuanli.webp)
+![黑像·定稿立绘](ref-images/heixiang.webp)
 
 ## 基础信息（以 characters.js / 选人界面为准）
 
 | 项 | 值 |
 |---|---|
-| id | `xuanli` |
+| id | `heixiang` |
 | 名字 | 黑像（2026-09-12 由「玄砾」改名，id 与立绘文件名不变） |
 | 职业 | 战士 |
 | 主题色 | `#d0805a` |
@@ -27,7 +27,7 @@
 
 ## 2026-09-19 painterly 全身立绘定稿（老板授权 Friday 定锚点）
 
-- 依据：`roster-painterly-four-v2-20260919-120257/xuanli-120257.png`（seed 1111442184），已实装 `portraits/full/xuanli.webp`。
+- 依据：`roster-painterly-four-v2-20260919-120257/xuanli-120257.png`（seed 1111442184），已实装 `portraits/full/heixiang.webp`。
 - 演出：延续定稿反差萌——**单手捏小咖啡杯啜饮（小指微翘、托碟、热气）**；巨剑由"插身侧"改为**背负**（剑柄露出肩上）。
 - 围巾：**围在颈间 + 单条飘带**（不再是整幅披风）。
 - 疤痕钉死左脸颊（his left cheek / 观众视角右）；发型句必带 `slicked back hair, exposed forehead` + 发型句原文。

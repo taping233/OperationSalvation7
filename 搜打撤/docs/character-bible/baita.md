@@ -1,12 +1,12 @@
-# 白塔（lituan / 法师）
+# 白塔（baita / 法师）
 
-![白塔·定稿立绘](ref-images/lituan.webp)
+![白塔·定稿立绘](ref-images/baita.webp)
 
 ## 基础信息（以 characters.js / 选人界面为准）
 
 | 项 | 值 |
 |---|---|
-| id | `lituan` |
+| id | `baita` |
 | 名字 | 白塔 |
 | 职业 | 法师 |
 | 主题色 | `#e9bd69` |
@@ -14,7 +14,7 @@
 ## 外观锚点（已定稿）
 
 2026-09-19 老板授权 Friday 按 painterly 全身立绘定稿，当日二次修订（老板反馈）定稿：
-依据 `roster-fix-20260919-170117/lituan-170117.png`（seed 1486003179），已实装 `portraits/full/lituan.webp`。
+依据 `roster-fix-20260919-170117/lituan-170117.png`（seed 1486003179），已实装 `portraits/full/baita.webp`。
 
 - **女性**，安静书卷气，表情平静温柔，目视镜头。
 - **深棕色长卷发**，刘海别开不遮眼；**绿色眼瞳**（0919 二次修订：老板令参考原立绘定绿瞳，琥珀瞳作废）。

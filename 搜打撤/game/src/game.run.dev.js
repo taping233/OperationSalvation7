@@ -45,7 +45,7 @@ function devEnsureRun() {
   document.getElementById('title').hidden = true;
   newRun('standard');
   // 节点测试绕过了正常的选人流程；补齐一个真实角色，避免战斗 HUD 落入“未选择人物”。
-  game.characterId = 'xuanli';
+  game.characterId = 'heixiang';
   game.myClass = '战士';
   UI.log('[[icon:tools]] 开发者：已开一局<b>测试局</b>（不占档位、不写存档）', 'sys');
   return true;
