@@ -501,6 +501,8 @@ body:has(#overlay.opaque:not([hidden])) #sidebar{display:none!important}
 /* FLIP 入场（2026-09-12 留言）：从来源卡位置/尺寸放大到居中，禁 czIn 改走 transform+opacity 过渡 */
 #cardZoom .cz-card.cz-flip{animation:none;transition:transform .38s cubic-bezier(.22,.61,.36,1),opacity .3s ease}
 #cardZoom .cz-card .hs-card{font-size:34px;box-shadow:0 24px 80px rgba(0,0,0,.7),0 0 40px rgba(216,182,128,.25)}
+/* 特写卡面图解码完成前垫深底，防 IAB 合成黑窗刺眼（2026-09-20 走查） */
+#cardZoom .cz-card .hsc-art img{background:radial-gradient(ellipse at 50% 40%,#23262c,#151a20 82%)}
 #cardZoom .cz-foot{position:relative;z-index:1;animation:czIn .24s .05s cubic-bezier(.2,1.3,.4,1) both}
 #cardZoom .cz-hint{position:relative;z-index:1;font-size:11px;letter-spacing:3px;color:#c9d4d8;animation:czFade .3s .1s ease both}
 #cardZoom.cz-out .cz-backdrop{animation:czFadeOut .24s ease both}

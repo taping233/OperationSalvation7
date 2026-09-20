@@ -180,3 +180,12 @@
   #overlay .pg.cls-pool-page .pool-main { flex-direction:column; }
   #overlay .pg.cls-pool-page .pool-side { width:100%; flex-basis:auto; max-height:360px; }
 }
+/* P0 走查（2026-09-20）：720p 矮视口下侧栏总高约超一屏 62px，沉底的获取规则行
+   （pv-rule，本页唯一教学信息）被挤出首屏视野。预览卡是高度大头（lg=24px em 制
+   10em×14em），矮视口下整体缩至 19.6px 等比降高约 62px，属性行与规则行行距微收，
+   规则行回到可视区。pool-side 自带 overflow 滚动兜底，此处只解"默认不可见"。 */
+@media (max-height:760px) {
+  #overlay .pg.cls-pool-page .pool-side .pv-body .hs-card.lg { font-size:19.6px; margin:0 auto; }
+  #overlay .pg.cls-pool-page .pool-side .pv-row { padding:5px 10px; }
+  #overlay .pg.cls-pool-page .pool-side .pv-rule { line-height:1.6; }
+}

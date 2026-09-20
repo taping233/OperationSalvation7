@@ -291,6 +291,8 @@ import { renderExpeditionPanel } from './expedition.view.js';
         else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
       }, true);
       document.body.appendChild(el);
+      // 大图显式解码，防 IAB 合成黑窗（同池页首屏/战斗手牌修法；2026-09-20 走查实锤特写黑窗）
+      if (SDT.Art && SDT.Art.decodeIn) SDT.Art.decodeIn(el);
       // 彩蛋：长按大图 600ms「看底片」（挂 cz-neg，负片样式 scoped 在照相馆入口），松开恢复
       const zoomCard = el.querySelector('.cz-card');
       let negTimer = null;
