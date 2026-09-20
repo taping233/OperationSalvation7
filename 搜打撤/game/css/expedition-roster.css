@@ -115,7 +115,7 @@
 /* 角色立绘水印（批二 A）：右半区垫 classFullArt 大立绘，低透明+径向 mask 融边，主题色光斑罩；
    pool-side/pool-grid 均 relative 盖其上，水印只作氛围底 */
 #overlay .pg.cls-pool-page .pool-watermark { position:absolute; inset:0; z-index:0; display:flex; align-items:flex-end; justify-content:flex-end; overflow:hidden; pointer-events:none; }
-#overlay .pg.cls-pool-page .pool-watermark img { width:min(56%,620px); max-height:104%; object-fit:contain; object-position:right bottom; opacity:.13; filter:saturate(.8) brightness(1.05); mask-image:radial-gradient(ellipse at 72% 62%,#000 42%,transparent 74%); -webkit-mask-image:radial-gradient(ellipse at 72% 62%,#000 42%,transparent 74%); }
+#overlay .pg.cls-pool-page .pool-watermark img { width:min(56%,620px); max-height:104%; object-fit:contain; object-position:right bottom; opacity:.17; filter:saturate(.8) brightness(1.05); mask-image:radial-gradient(ellipse at 72% 62%,#000 42%,transparent 74%); -webkit-mask-image:radial-gradient(ellipse at 72% 62%,#000 42%,transparent 74%); }
 #overlay .pg.cls-pool-page .pool-watermark::after { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 78% 66%, color-mix(in srgb,var(--cls-color,#69aec2) 15%,transparent), transparent 60%); }
 #overlay .pg.cls-pool-page .pool-side { position:relative; z-index:1; flex:0 0 300px; width:300px; min-width:0; display:flex; flex-direction:column; align-self:stretch; padding:26px 22px 18px; border:1px solid rgba(104,128,139,.3); border-radius:2px; background:linear-gradient(165deg,#163847,#0d2431); box-shadow:inset 4px 0 0 color-mix(in srgb,var(--cls-color,#69aec2),transparent 45%),0 9px 22px rgba(3,14,20,.45); overflow:hidden auto; }
 #overlay .pg.cls-pool-page .pool-side::before { content:none; }
@@ -160,7 +160,7 @@
 #overlay .pg.cls-pool-page .pool-card-button.selected { border-color:#d8bc86; box-shadow:0 0 0 2px rgba(216,188,134,.2),0 0 16px rgba(216,188,134,.22),0 7px 18px rgba(2,10,16,.5); }
 
 #overlay .pg.cls-pool-page .cls-foot { flex:0 0 auto; display:flex; flex-wrap:wrap; align-items:center; gap:14px; min-height:66px; padding:14px 28px; border-top:1px solid rgba(104,128,139,.26); background:linear-gradient(180deg,#0f2733,#0b1f2a); }
-#overlay .pg.cls-pool-page .cls-foot .pool-pager { display:flex; align-items:center; gap:12px; margin-right:auto; }
+#overlay .pg.cls-pool-page .cls-foot .pool-pager { display:flex; align-items:center; gap:12px; margin-right:auto; font-size:13px; }
 /* 批三：分页钮与 ov-btn 同族制式（透明深底+主题色 hover），替代 hs-btn 深灰小钮 */
 #overlay .pg.cls-pool-page .cls-foot .pool-pager .hs-btn { min-height:38px; padding:0 18px; background:rgba(9,26,38,.6); border:1px solid rgba(104,128,139,.5); border-radius:1px; color:#c9d8db; letter-spacing:1px; transition:border-color .15s,color .15s; }
 #overlay .pg.cls-pool-page .cls-foot .pool-pager .hs-btn:hover:not(:disabled) { border-color:var(--cls-color,#69aec2); color:#f0ece0; }
@@ -178,6 +178,9 @@
 #overlay .pg.cls-pool-page ::-webkit-scrollbar-thumb:hover { background:color-mix(in srgb,var(--cls-color,#69aec2) 55%,#607c86); }
 /* 批三：右上关闭钮融入主题（hover 主题色） */
 #overlay .card.page:has(.cls-pool-page) .ov-x:hover { color:var(--cls-color,#69aec2); border-color:color-mix(in srgb,var(--cls-color,#69aec2) 60%,transparent); }
+/* P2-R2（2026-09-20 走查）：基地出发整备后进卡池页，hub 的背包浮钮仍悬浮在网格右下角
+   遮挡卡格且与本页功能无关，弹层在场时隐藏（同 winter.css #sidebar 的 :has 先例） */
+body:has(#overlay .cls-pool-page) #bagBtnFloat { display:none; }
 
 @media (max-width:1280px) {
   #overlay .pg.cls-pool-page .pool-cell { flex-basis:196px; }
