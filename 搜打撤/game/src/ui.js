@@ -769,6 +769,9 @@ import { renderExpeditionPanel } from './expedition.view.js';
       while (node && node.parentElement) {
         for (const sibling of node.parentElement.children) {
           if (sibling === node || sibling.hasAttribute('inert')) continue;
+          // 右键建议层设计为叠加在任意界面（含 overlay）之上的常驻交互层，
+          // 被 inert 后确认/取消/输入框在弹层页面（战斗/基地等）全部点不动
+          if (sibling.id === 'sugLayer') continue;
           sibling.setAttribute('inert', '');
           this._overlayInerted.push(sibling);
         }
