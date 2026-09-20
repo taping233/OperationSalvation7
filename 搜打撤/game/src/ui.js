@@ -542,8 +542,10 @@ import { renderExpeditionPanel } from './expedition.view.js';
       const prevMode = this._lastMode;
       this._lastMode = mode;
       this.el.overlay.hidden = false;
-      // 右上角 × 显隐：只有能被取消类入口安全关闭的浮层才显示（必选流程/战斗页自动隐藏）
-      if (this.el.ovCloseX) this.el.ovCloseX.hidden = !this._canCancelOverlay();
+      // 右上角 × 显隐：只有能被取消类入口安全关闭的浮层才显示（必选流程/战斗页自动隐藏）。
+      // 卡牌库整页头部自带关闭钮（photo-studio v3 的 pg-close），全局 × 与它并排重复
+      // （2026-09-20 老板：卡牌库有两个退出键）——该页隐藏全局 ×，Esc 仍走页内钮关闭
+      if (this.el.ovCloseX) this.el.ovCloseX.hidden = !this._canCancelOverlay() || !!this.el.ovBody.querySelector('.card-library-page');
       this._isolateOverlayBackground();
       // 全屏覆盖型页面（卡牌库/整备整页/战斗房间/宝箱）：被盖住的主页动画一律暂停
       // （2026-09-07 老板：动画不出现在画面中就暂停，回到页面再恢复）。
