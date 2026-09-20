@@ -212,11 +212,18 @@ export function openClassChoice(options = {}) {
       <div class="pg cls-pool-page" style="--cls-color:${story ? story.color : '#69aec2'}">
         <header class="pg-head">
           <div class="pool-archive-title"><span class="section-kicker">ROLE ARCHIVE // ${esc(characterName(sel))}</span><h2>[[icon:cards]] 角色卡池档案</h2></div>
-          <span class="sub">确认选择「${esc(characterName(sel))}」后，将从 ${pool.length} 张人物卡中随机获得角色卡，并与 5 张「初始攻击」一起带入背包。</span>
+          <span class="pool-head-badge"><b>${pool.length}</b>CARDS</span>
         </header>
         <div class="pool-main">
           <div class="pool-watermark" aria-hidden="true">${sel ? SDT.Art.classFullArt(sel) : ''}</div>
-          <aside class="pool-side" id="poolPreview" aria-live="polite">${poolPreviewHTML(pool[0])}</aside>
+          <aside class="pool-side">
+            <div class="pv-head">
+              <span class="pv-kicker">CHARACTER ARCHIVE</span>
+              <b class="pv-name">${esc(characterName(sel))}</b>
+            </div>
+            <div class="pv-body" id="poolPreview" aria-live="polite">${poolPreviewHTML(pool[0])}</div>
+            <p class="pv-rule">[[icon:medal]] 确认选择「${esc(characterName(sel))}」后，将从 ${pool.length} 张人物卡中随机获得 1 张角色卡，并与 5 张「初始攻击」一起带入背包。</p>
+          </aside>
           ${poolGridHTML()}
         </div>
         <footer class="cls-foot cls-foot-pool">
