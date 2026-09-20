@@ -11,6 +11,7 @@ export default [
   "cards/creature-tt8-energycap.webp",
   "cards/creature-tt8-healplus.webp",
   "cards/creature-tt8-nofocus.webp",
+  "cards/dark-eclipse.webp",
   "cards/equip-tt2-apollo.webp",
   "cards/equip-tt2-frostsword.webp",
   "cards/equip-tt2-pearlbox.webp",
