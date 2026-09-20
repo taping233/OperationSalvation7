@@ -1172,7 +1172,11 @@ body.cardlib-open #cardZoom .cz-note.has::after {
   outline:2px solid rgba(212,175,122,.8);
   outline-offset:3px;
 }
-#cardZoom .cz-note.has {
+/* 背签相纸视觉：editable（卡牌库可编辑背签）恒有相纸底——空内容也要看得见输入区
+   （09-20 老板反馈「备注功能消失」：曾把视觉错捆在 has=有内容上，空备注整块隐身）；
+   has 另承载存档章（跟随真实内容，见下方 ::after） */
+#cardZoom .cz-note.has,
+#cardZoom .cz-note.editable {
   width:min(620px,90%)!important;
   box-sizing:border-box;
   display:block!important;
@@ -1188,7 +1192,8 @@ body.cardlib-open #cardZoom .cz-note.has::after {
   box-shadow:0 14px 32px rgba(0,0,0,.48),inset 0 0 22px rgba(88,71,43,.08)!important;
   transform:rotate(-.35deg);
 }
-#cardZoom .cz-note.has .cz-note-tag {
+#cardZoom .cz-note.has .cz-note-tag,
+#cardZoom .cz-note.editable .cz-note-tag {
   display:flex;
   padding:0 0 7px!important;
   margin:0 0 7px;
