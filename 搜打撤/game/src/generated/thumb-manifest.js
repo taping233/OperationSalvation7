@@ -2,6 +2,7 @@
 // 卡面缩略图清单：assets/thumbs/ 下全部图片（相对 thumbs/ 的 POSIX 路径）。
 // 与源图同相对路径；art.js 命中清单时低倍率场景换用缩略图，否则回退原图。
 export default [
+  "cards/bound-shadow.webp",
   "cards/consumable.webp",
   "cards/creature-cmtn6ulm4boj.webp",
   "cards/creature-cmtn79743r2n.webp",
