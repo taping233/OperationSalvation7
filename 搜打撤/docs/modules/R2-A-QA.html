@@ -1,0 +1,22 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>R2-a 隔离恢复验收</title>
+<style>body{font:16px/1.55 system-ui;background:#111923;color:#e9f0f4;max-width:980px;margin:32px auto;padding:0 20px}button{margin:4px;padding:9px 14px}pre{background:#091018;padding:14px;white-space:pre-wrap}.warn{color:#ffd27d}</style>
+<h1>R2-a 隔离恢复验收页</h1>
+<p class="warn">测试样本只使用 <code>sdt-qa-r2-*</code> 键，不读取或修改五个玩家档。这里验证恢复门面；尚未接入游戏结算与真实选档。Web Locks 只约束同门面参与者，旧同步直写或其他标签绕过门面时不提供全局线性化。</p>
+<button id="init">1 初始化隔离样本</button><button id="break">2 通过门面提交并在基地写后中断</button><button id="recover">3 刷新后通过门面恢复</button><button id="retry">4 通过门面重试同一 request</button><pre id="out"></pre>
+<script type="module">
+import {createRecoveryCommands} from '../../game/src/recovery.commands.js';
+const prefix='sdt-qa-r2-', keys=slot=>({base:`${prefix}base-${slot}`,run:`${prefix}run-${slot}`,journal:`${prefix}tx-${slot}`});
+const context={slotId:1,requestId:'qa-request-1',expectedBaseRevision:0,expectedRunRevision:0};
+const prepared={command:'qa.settle',runId:'qa-run-1',payload:{outcome:'qa-only'},afterBase:{coins:12},afterRun:null,output:{closed:true}};
+const baseApi={BASE_VERSION:2,SLOT_KEY:slot=>keys(slot).base,_readForCommit:slot=>{const raw=localStorage.getItem(keys(slot).base);return raw?JSON.parse(raw):null;},_refreshExternal:()=>{}};
+const runStore={_invalidate:()=>{},write:()=>false};
+const makeApi=failpoint=>createRecoveryCommands({storage:localStorage,lockManager:navigator.locks,failpoint,baseApi,runStore,keyFactory:keys,baseVersion:2,runVersion:2});
+const output=document.getElementById('out');
+const inspect=()=>{const k=keys(1),raw=localStorage.getItem(k.base);let receipt=null;try{receipt=JSON.parse(raw)?._m01?.requests?.['qa.settle:qa-request-1']?.result||null;}catch{}return {base:raw,run:localStorage.getItem(k.run),journal:localStorage.getItem(k.journal),receipt};};
+const show=(label,result)=>output.textContent=`${label}\nresult=${JSON.stringify(result)}\n\n${JSON.stringify(inspect(),null,2)}`;
+document.getElementById('init').onclick=()=>{const k=keys(1);localStorage.setItem(k.base,JSON.stringify({version:2,coins:10,_m01:{revision:0,requests:{}}}));localStorage.setItem(k.run,JSON.stringify({version:2,hp:20,_r2:{runId:'qa-run-1',revision:0}}));localStorage.removeItem(k.journal);show('已初始化真实 schema 隔离样本',{ok:true});};
+document.getElementById('break').onclick=async()=>{let once=true;const api=makeApi(point=>{if(once&&point==='after-base'){once=false;throw Error('QA_INTERRUPT_AFTER_BASE');}});show('门面提交的预期故障结果；现在请真正刷新页面',await api.commitBaseAndRun(context,prepared));};
+document.getElementById('recover').onclick=async()=>show('门面恢复结果',await makeApi().recoverSlot(1));
+document.getElementById('retry').onclick=async()=>show('同 request 真实调用 commitBaseAndRun 的返回结果',await makeApi().commitBaseAndRun(context,prepared));
+show('等待操作；如浏览器不支持 Web Locks，门面会明确返回 CAPABILITY_UNAVAILABLE',null);
+</script></html>

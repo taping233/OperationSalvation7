@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "scope": "upper-body-sword-rig",
+  "canvas": {
+    "width": 928,
+    "height": 760
+  },
+  "pivot": {
+    "x": 320,
+    "y": 731
+  },
+  "joints": {
+    "shoulderFar": {
+      "x": 255,
+      "y": 163
+    },
+    "elbowFar": {
+      "x": 298,
+      "y": 218
+    },
+    "wristFar": {
+      "x": 432,
+      "y": 249
+    },
+    "shoulderNear": {
+      "x": 390,
+      "y": 169
+    },
+    "elbowNear": {
+      "x": 411,
+      "y": 224
+    },
+    "wristNear": {
+      "x": 457,
+      "y": 249
+    },
+    "hipFar": {
+      "x": 286,
+      "y": 383
+    },
+    "kneeFar": {
+      "x": 280,
+      "y": 524
+    },
+    "ankleFar": {
+      "x": 273,
+      "y": 655
+    },
+    "hipNear": {
+      "x": 350,
+      "y": 383
+    },
+    "kneeNear": {
+      "x": 359,
+      "y": 518
+    },
+    "ankleNear": {
+      "x": 368,
+      "y": 655
+    }
+  },
+  "layers": [
+    "scarf_static",
+    "lower_body_static",
+    "torso_fill",
+    "arm_far_upper",
+    "arm_far_fore",
+    "sword",
+    "arm_near_upper",
+    "shoulder_armor",
+    "arm_near_fore",
+    "hands_rigid",
+    "neck_scarf_collar",
+    "head",
+    "face_detail_lock"
+  ],
+  "sources": {
+    "identity": "game/assets/portraits/battle/heixiang.webp",
+    "fillReference": "game/art-source/characters/heixiang-rig-v1/source/heixiang-fill-reference.png",
+    "identitySha256": "2834728e40be8d320bc1ebdea3e6505f8fe2bc77f6876e8a1929256a6e276186"
+  },
+  "usage": {
+    "fillReference": [
+      "torso_fill interior only"
+    ],
+    "identitySource": [
+      "head",
+      "face_detail_lock",
+      "arms",
+      "hands_rigid",
+      "shoulder_armor",
+      "neck_scarf_collar",
+      "scarf_static",
+      "lower_body_static",
+      "sword"
+    ],
+    "staticInCandidate": [
+      "lower_body_static",
+      "scarf_static"
+    ],
+    "experimentalNotRendered": [
+      "leg IK from kinematics report"
+    ]
+  }
+}

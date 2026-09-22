@@ -7,6 +7,7 @@
  * ============================================================ */
 import SDT from './sdt-facade.js';
 import { characterName } from './characters.js';
+import { termKeyFor } from './term-tips.js';
 
 // 卡背渲染：backId 缺省 = 当前存档装备的卡背（未选档时回退默认）。
 // 样式类 hb-* 定义在 index.html；cls 控制尺寸场景（如缩略图）。
@@ -88,7 +89,12 @@ const DESC_TERMS = ['对战开始时', '回合开始时', '回合结束时', '�
 function descRich(desc) {
   let s = esc(desc);
   s = s.replace(/^([^<>：\n]{1,10})：/, '<b class="d-kw">$1：</b>');
-  s = s.replace(new RegExp('(' + DESC_TERMS.join('|') + ')', 'g'), '<i class="d-term">$1</i>');
+  // 09-20 老板：特殊词条触摸讲解——命中词带 data-term（term-tips.js 全局委托弹自绘讲解框），
+  // 伤害/生命/回合等常识词无讲解条目，保持纯高亮不弹框
+  s = s.replace(new RegExp('(' + DESC_TERMS.join('|') + ')', 'g'), (w) => {
+    const key = termKeyFor(w);
+    return key ? `<i class="d-term" data-term="${key}">${w}</i>` : `<i class="d-term">${w}</i>`;
+  });
   s = s.replace(/([⁺⁻+\-]?[0-9]+(?:\.[0-9]+)?)/g, '<b class="d-num">$1</b>');
   return s;
 }
@@ -123,7 +129,7 @@ const drawN = +(c.draw || 0), infN = +(c.infuse || 0);
       : (c.cost != null ? `<div class="hsc-cost">${c.cost}</div>` : '')}
     <div class="hsc-art">${artHTML}</div>
     <div class="hsc-name"><span>${esc(c.name || '未命名卡牌')}</span></div>
-    <div class="hsc-type">${esc(c.type || '?')} · ${esc(ro === '职业' ? ((c.cls ? characterName(c.cls) : '人物') + '专属') : ro)}</div>
+    <div class="hsc-type">${c.type === '能力卡' ? '<span data-term="ability">能力卡</span>' : esc(c.type || '?')} · ${esc(ro === '职业' ? ((c.cls ? characterName(c.cls) : '人物') + '专属') : ro)}</div>
     ${kwHTML}
     <i class="hsc-gem"></i>
     <div class="hsc-desc${descLenCls(c)}">${c.desc ? `<span>${descRich(c.desc)}</span>` : ''}</div>

@@ -4,16 +4,19 @@
  * 由 game.run.js 拆出。层位最高（L2）：依赖 scenes（L0）与 altar（L1），不被二者依赖。
  * ============================================================ */
 import { esc, escAttr } from './shared.js';
-import { MAP, cellCenter, curLayer, gainCoins, game, markSeen, modeCfg, pick, saveGame, scaledEnemy, weighted } from './game.session.js';
+import { MAP, cellCenter, curLayer, gainCoins, game, getActiveSlot, markSeen, modeCfg, pick, saveGame, scaledEnemy, weighted } from './game.session.js';
 import { tone } from './sound.js';
 import { _set_cardPageOpen } from './game.cardslib.js';
 import { EVENT_SCENE_META } from './game.run.data.js';
 import { Random } from './random.js';
-import { eventNarrative } from './narrative.js';
+import { eventNarrative, lastLampNarrative } from './narrative.js';
+import { makeLastLampEventInstanceId } from './story.last-lamp.js';
+import { RunStorage } from './game.storage.js';
+import { storyCommands } from './story.commands.js';
 import { setBagReturnHook } from './bag-return-hook.js';
 import { startBattle } from './battle-loader.js';
 import { renderScheduler } from './render-scheduler.js';
-import { buildEncounter, cancelLegacyChainMove, enterNode, finishInstant, grantEventCard, nodeShell, openBattleCell, openBlankSafePage, openChestsOnCell, openPickupPage, openPocketRestore, openShop, preloadCellScene } from './game.run.scenes.js';
+import { buildEncounter, cancelLegacyChainMove, consumeCell, consumeCurrentCell, enterNode, finishInstant, grantEventCard, nodeShell, openBattleCell, openBlankSafePage, openChestsOnCell, openPickupPage, openPocketRestore, openShop, preloadCellScene } from './game.run.scenes.js';
 import { openDoorModal, openFireRest, openAltarRitual, openBossGate, openEmergencyModal } from './game.run.altar.js';
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const SDT = window.SDT;
@@ -57,9 +60,8 @@ export function moveTo(toLi, toIdx) {
     game.layerIdx = toLi;
     game.trackPos = toIdx;
     markSeen(toLi, toIdx);
-    // 2026-09-19 留言 #24：离开旧格时才把它标记为已消耗（踩格不锁，站在格上可反复重开）
-    game.visited = game.visited || {};
-    game.visited[fromLi + ',' + fromIdx] = 1;
+    // 商店是唯一按「离开房间」消耗的节点；其余节点在奖励/事件实际结算完成时自行写入。
+    if (current?.def?.type === 'shop') consumeCell(fromLi, fromIdx);
     if (game.cam?.frameMode === 'routes') game.cam.frameExploration(game);
     game.hop = 0;
     game.moveTarget = null;
@@ -91,9 +93,7 @@ export function moveTo(toLi, toIdx) {
   return true;
 }
 
-// 2026-09-19 留言 #24：点击脚下所在格 = 反复重开本格内容（商店/事件/战斗等）。
-// 仅 idle（站在格上、没有弹层与移动事务）时可用；内容是否可重复由 resolveCell 的
-// visited/repeatable 语义决定——本格在离开前永远不会被写入 visited。
+// 点击脚下所在格可重开尚未完成的内容；完成结算的节点已写 visited，商店则在离开时写入。
 export function reenterCell() {
   if (game.state !== 'idle' || activeMove) return false;
   resolveCell();
@@ -110,18 +110,14 @@ function resolveCell() {
   const door = (layer.doors || []).find(d => d.at === idx);
   const altarE = (layer.altarEntrances || []).find(a => a.at === idx);
 
-  // 一次性内容防重刷（2026-09-19 留言 #24 + 当日 bug 修复）：踩格不写 visited，
-  // 站在格上点脚下格可经 reenterCell() 反复重开本格内容（商店重逛/战斗再打/事件再看）；
-  // 离开本格时由 moveTo 补写 visited（地图转"已消耗"样式）。注意地图边是双向的
-  //（map-generator addEdge 双向登记），走回头路是合法移动——可消耗格（战斗/物资/
-  // 火堆/事件/商店）一旦离开（visited）再踏入就不再触发，防止返回旧格反复回血/
-  // 刷物资/刷战斗。进度型节点自管"可再来"语义，不受 visited 拦截：门（可再开）、
+  // 一次性内容防重刷：奖励/事件/战斗完成后立即写 visited；未实际触发就退出仍可重进。
+  // 商店例外：在店内可反复浏览，离开所在格才写 visited。进度型节点自管"可再来"语义：门、
   // 祭坛（未激活可再来，激活/领奖由 altarActivated 自判）、撤离点（面板自管）。
   game.visited = game.visited || {};
   const vKey = game.layerIdx + ',' + idx;
   const consumed = !!game.visited[vKey];
   if (consumed && !door && def && (def.type === 'battle' || def.type === 'shop' || INSTANT_TYPES.includes(def.type))) {
-    UI.log('[[icon:exit]] 该节点已被消耗——离开过的节点不会重复触发', 'dim');
+    UI.log('[[icon:exit]] 该节点已完成结算，现已变为普通节点', 'dim');
     finishInstant();
     return;
   }
@@ -146,7 +142,8 @@ function resolveCell() {
 
   // 2) 即时效果类：拾取或场景演出后再继续
   if (def && INSTANT_TYPES.includes(def.type)) {
-    runInstant(def, () => {
+    runInstant(def, (consume = true) => {
+      if (consume !== false) consumeCurrentCell();
       // 即时效果完成 → 本格若兼为节点（如带商店的门、祭坛入口）继续节点演出
       if (door) { enterNode('door', () => openDoorModal(door, def)); return; }
       finishInstant();
@@ -190,21 +187,24 @@ function openResourcePick(done) {
   const first = pickOne(null);
   const second = first ? pickOne(new Set([first.name])) : null;
   const cards = [first, second].filter(Boolean);
-  if (!cards.length) { done(); return; }
+  if (!cards.length) { done(false); return; }
   game.state = 'modal';
-  UI.showOverlay('[[icon:gem]] 物资格 · 二选一', `
-    <p class="ov-note">按爆率刷新了 2 张随机资源卡——选择 1 张带走，另一张留在原地。</p>
-    <div class="ov-btns">
-      ${cards.map((c, i) => `<button class="ov-btn ${i === 0 ? 'ok' : ''}" data-act="resPick${i}">[[icon:${c.id === 'tt-key' ? 'key' : c.id === 'tt-wood' ? 'wood' : 'cards'}]] 【${esc(c.name)}】· ${esc(c.rarity)}</button>`).join('')}
-    </div>
-    <div class="ov-btns"><button class="ov-btn" data-act="resSkip">都不要，继续赶路</button></div>`, 'discover');
+  nodeShell({
+    tone: 'event', asset: 'scene-event-airdrop', icon: '[[icon:gem]]', title: '物资投放点',
+    sub: '信标亮起，封存物资正在展开——选择 1 张资源卡带走。',
+    body: `<div class="bt-hand event-choice-hand">${cards.map((c, i) => `
+      <button type="button" class="bt-card event-choice-card" data-act="resPick${i}" aria-label="带走 ${escAttr(c.name)}">
+        ${SDT.Cards.cardHTML(c, 'sm')}
+      </button>`).join('')}</div><p class="loot-footer-note">领取后，本物资点会变为普通节点。</p>`,
+    foot: '<button class="ov-btn" data-act="resSkip">暂不领取，离开投放点</button>',
+  });
   cards.forEach((c, i) => UI.act('resPick' + i, () => {
-    grantEventCard(c);
+    if (!grantEventCard(c)) return;
     UI.hideOverlay();
     UI.log(`[[icon:gem]] 物资格：带走了【<b>${esc(c.name)}</b>】`, 'loot');
-    done();
+    done(true);
   }));
-  UI.act('resSkip', () => { UI.hideOverlay(); done(); });
+  UI.act('resSkip', () => { UI.hideOverlay(); done(false); });
 }
 
 // 空白安全节点提示页：明确告诉玩家这格无事发生（背景图后续再补）
@@ -228,7 +228,7 @@ function runInstant(def, after) {
       });
     } break;
     // 物资格（露天宝箱格，2026-09-09 玩法定版）：70% 小宝箱（随机 1 张）/ 30% 中宝箱（3 选 1）
-    case 'chest': openChestsOnCell([Random.random('loot') < 0.7 ? { kind: 'small' } : { kind: 'medium' }], null, { resourceOnly: true }); break;
+    case 'chest': openChestsOnCell([Random.random('loot') < 0.7 ? { kind: 'small' } : { kind: 'medium' }], null, { resourceOnly: true, consumeNode: true }); break;
     // 物资格（2026-09-16 Item 17 定版）：按爆率刷新 2 张随机资源卡，二选一带走
     case 'resource': openResourcePick(done); break;
     case 'rations': {
@@ -264,7 +264,8 @@ function runInstant(def, after) {
 // ---------- 事件卡（第六批桌游事件：只能经事件格触发，背包记录触发历史） ----------
 // 事件卡池 = 卡牌库中类型「事件」的卡；卡牌库无事件卡时退回旧随机事件表。
 // 导出供开发者节点测试面板（game.run.js devJumpNode）直接进事件页，玩法口径与事件格一致。
-export function runEventDeck() {
+export async function runEventDeck() {
+  if (await tryLastLampEvent()) return;
   const deck = SDT.Cards.all().filter(c => c.type === '事件');
   if (!deck.length) {
     const ev = weighted(MAP.randomEvents);
@@ -273,10 +274,147 @@ export function runEventDeck() {
     else UI.log(`【事件】${ev.text}`, 'dim');
     // 旧随机表没有事件页收尾点：不补 finishInstant 会把格子永久卡在 moving（迭代评审 09-20 C-P2，
     // 设置页「清空卡牌库」后踩事件格必现）
+    consumeCurrentCell();
     finishInstant();
     return;
   }
   return triggerEventCard(pick(deck));
+}
+
+function currentLastLampIdentity(slotId, runId) {
+  if (getActiveSlot() !== slotId) return { ok: false, code: 'RUN_CHANGED', message: '当前探索已改变，请在新探索中重新进入事件。' };
+  const identity = RunStorage.readIdentity(slotId);
+  if (!identity.ok) return identity;
+  return identity.value.runId === runId ? identity : { ok: false, code: 'RUN_CHANGED', message: '当前探索已改变，请在新探索中重新进入事件。' };
+}
+
+function currentLastLampPage(binding) {
+  const identity = currentLastLampIdentity(binding.slotId, binding.runId);
+  if (!identity.ok) return identity;
+  if (game.layerIdx !== binding.layerIdx || game.trackPos !== binding.trackPos ||
+      makeLastLampEventInstanceId(binding.runId, game.layerIdx, game.trackPos) !== binding.eventInstanceId) {
+    return { ok: false, code: 'EVENT_CHANGED', message: '当前事件节点已改变。' };
+  }
+  return identity;
+}
+
+function lastLampResultText(segmentId, choiceId) {
+  if (segmentId === 1) return '冰霜化开后，新旧漆面的边缘同时显了出来。这不是画错的箭头，而是某次改道留下的两套路线。';
+  if (segmentId === 2) return '两层箭头都是真的。一条是平日近路，一条是风雪封路后的公共疏散线；北门那盏灯才是最后的确认标记。';
+  return choiceId === 'open_beacon'
+    ? '灯光越过风雪落在体育馆方向，远处也能看清路标；北门通道从此不再藏在暗处。'
+    : '窄光贴着墙面照出旧箭头，近处的路仍可辨认；从风雪深处望来，北门依旧是一片黑暗。';
+}
+
+function renderLastLampResult(record, text, binding, saveError = '') {
+  if (!currentLastLampPage(binding).ok) return;
+  game.state = 'modal';
+  let finishing = false;
+  nodeShell({ tone: 'event', asset: 'story-last-lamp', icon: '[[icon:notes]]', title: '最后一盏引路灯',
+    sub: esc(text || lastLampResultText(record.segmentId, record.choiceId)),
+    body: `${record.mementoId ? `<p><b>${record.mementoId === 'last_lamp_open_beacon' ? '北门远灯记录' : '遮光近照记录'}</b>已写入基地的见闻纪念。故事记录不提供地图或战力效果。</p>` : '<p>本段见闻已永久记录；下一次探索可继续这条线索。</p>'}
+      ${saveError ? `<p class="warn">${esc(saveError)}</p>` : ''}
+      <button class="evt-opt ok" data-act="lastLampFinish"><b>${saveError ? '重试保存节点' : '记下并离开'}</b><span>故事记录已经保存，不会重复推进</span></button>`,
+  });
+  setBagReturnHook(() => { if (currentLastLampPage(binding).ok) renderLastLampResult(record, text, binding, saveError); });
+  UI.act('lastLampFinish', () => {
+    if (finishing) return;
+    if (!currentLastLampPage(binding).ok) return;
+    finishing = true;
+    const key = `${game.layerIdx},${game.trackPos}`;
+    const wasVisited = !!game.visited?.[key];
+    consumeCurrentCell();
+    if (saveGame() !== true) {
+      if (!wasVisited && game.visited) delete game.visited[key];
+      renderLastLampResult(record, text, binding, '故事记录已保存，但本次节点保存失败。请重试，期间不会重复推进故事。');
+      return;
+    }
+    setBagReturnHook(null);
+    UI.hideOverlay();
+    finishInstant();
+  });
+  UI.refresh(game);
+}
+
+async function tryLastLampEvent() {
+  const slotId = getActiveSlot();
+  if (!slotId) return false;
+  const identity = RunStorage.readIdentity(slotId);
+  if (!identity.ok) {
+    if (identity.code === 'RECOVERY_REQUIRED') {
+      game.state = 'modal';
+      nodeShell({ tone: 'event', asset: 'story-last-lamp', icon: '[[icon:cross]]', title: '故事记录暂不可用',
+        sub: '该档位存在待恢复事务，当前节点没有被消费。',
+        body: '<button class="evt-opt" data-act="lastLampRetry"><b>重试读取</b><span>恢复完成后再继续；不会写入故事或结算原事件</span></button>',
+      });
+      UI.act('lastLampRetry', () => runEventDeck());
+      UI.refresh(game);
+      return true;
+    }
+    console.warn('[story] 无法读取稳定探索身份，回退普通事件', identity);
+    return false;
+  }
+  const runId = identity.value.runId;
+  const eventInstanceId = makeLastLampEventInstanceId(runId, game.layerIdx, game.trackPos);
+  const binding = { slotId, runId, eventInstanceId, layerIdx: game.layerIdx, trackPos: game.trackPos };
+  const status = storyCommands.inspect(slotId, { runId, eventInstanceId });
+  if (!status.ok) { console.warn('[story] 故事状态不可用，保留原数据并回退普通事件', status); return false; }
+  if (status.value.kind === 'complete' || status.value.kind === 'already-read-this-run') return false;
+  if (status.value.kind === 'recover') {
+    renderLastLampResult(status.value.record, lastLampResultText(status.value.record.segmentId, status.value.record.choiceId), binding);
+    return true;
+  }
+  const segmentId = status.value.segmentId;
+  let narrative = null;
+  try { narrative = await lastLampNarrative(segmentId); }
+  catch (error) { console.warn('[story] 环境故事运行失败，回退普通事件', error); }
+  if (!currentLastLampPage(binding).ok) return true;
+  if (!narrative || !narrative.choices?.length) return false; // 原事件照旧结算，不因故事消费节点
+  game.state = 'modal';
+  let settled = false;
+  nodeShell({ tone: 'event', asset: 'story-last-lamp', icon: '[[icon:notes]]', title: '最后一盏引路灯',
+    sub: esc(narrative.intro),
+    body: narrative.choices.map((choice, index) => `<button class="evt-opt ${choice.tone || ''}" data-act="lastLampChoice" data-i="${index}"><b>${esc(choice.label)}</b><span>${esc(choice.detail)}</span></button>`).join(''),
+  });
+  UI.act('lastLampChoice', async d => {
+    if (settled) return;
+    const choice = narrative.choices[+d.i];
+    if (!choice) return;
+    const boundBefore = currentLastLampPage(binding);
+    if (!boundBefore.ok) { UI.log(`[[icon:cross]] ${boundBefore.message}`, 'warn'); return; }
+    settled = true;
+    const fresh = storyCommands.inspect(slotId, { runId, eventInstanceId });
+    if (!fresh.ok) { settled = false; if (currentLastLampPage(binding).ok) showChoiceError(fresh.message || '故事档案读取失败'); return; }
+    if (fresh.value.kind === 'recover') { renderLastLampResult(fresh.value.record, lastLampResultText(segmentId, fresh.value.record.choiceId), binding); return; }
+    const requestId = `last-lamp:${eventInstanceId}`;
+    const result = await storyCommands.record({ slotId, requestId, expectedRevision: fresh.revision },
+      { runId, eventInstanceId, segmentId, choiceId: choice.effect });
+    if (!result.ok) {
+      settled = false;
+      if (currentLastLampPage(binding).ok) showChoiceError(result.message || '故事记录保存失败，请重试');
+      return;
+    }
+    const boundAfter = currentLastLampPage(binding);
+    if (!boundAfter.ok) { console.warn('[story] 旧探索记录已保存，但不会消费当前节点', boundAfter); return; }
+    setBagReturnHook(null);
+    const output = result.value.output;
+    const record = { ...output, mementoId: output.mementoId || null };
+    let resultText = lastLampResultText(record.segmentId, record.choiceId);
+    try { resultText = choice.choose() || resultText; }
+    catch (error) { console.warn('[story] 环境故事结尾解析失败，使用固定结果文案', error); }
+    renderLastLampResult(record, resultText, binding);
+  });
+  UI.refresh(game);
+  setBagReturnHook(() => { if (currentLastLampPage(binding).ok) tryLastLampEvent(); });
+  function showChoiceError(message) {
+    if (!currentLastLampPage(binding).ok) return;
+    nodeShell({ tone: 'event', asset: 'story-last-lamp', icon: '[[icon:cross]]', title: '最后一盏引路灯', sub: esc(message),
+      body: '<button class="evt-opt" data-act="lastLampChoiceRetry"><b>重试选择</b><span>尚未写入故事，也未消费当前节点</span></button>' });
+    setBagReturnHook(() => { if (currentLastLampPage(binding).ok) showChoiceError(message); });
+    UI.act('lastLampChoiceRetry', () => { if (!currentLastLampPage(binding).ok) return; settled = false; tryLastLampEvent(); });
+    UI.refresh(game);
+  }
+  return true;
 }
 
 // 把库里的卡发给玩家（同名堆未满并入现有格；堆满或新卡需要空格——叠放上限见 game.session #7；
@@ -329,6 +467,7 @@ async function triggerEventCard(card) {
       evtSettled = true;
       setBagReturnHook(null);
       UI.hideOverlay();
+      consumeCurrentCell();
       choice.run();
       if (game.state !== 'modal') finishInstant();   // 选项未自开新页时兜底收尾（幂等）
     });
@@ -338,6 +477,7 @@ async function triggerEventCard(card) {
       setBagReturnHook(null);
       UI.hideOverlay();
       applyEventEffect(card);
+      consumeCurrentCell();
       if (game.state !== 'modal') finishInstant();   // 同上（旧事件 default 分支此前漏收尾）
     });
     UI.refresh(game);
@@ -558,7 +698,7 @@ function eventChoiceSpec(card, narrative = null) {
         { label: '木材', detail: '木材卡 ×1', run: settle(() => { if (woodCard) grantEventCard(woodCard); }) },   // 需求 #10：物资一律以卡牌入包
         { label: '口粮', detail: '口粮卡 ×1', run: settle(() => { if (rationCard) grantEventCard(rationCard); }) },
         { label: '能量饮料', detail: '回复 6 血', tone: 'ok', run: settle(() => { game.heal(6); UI.log('[[icon:heart]] 一罐能量饮料下肚，回复 6 点生命', 'ok'); }) },
-        { label: '随机药水', detail: potion ? `获得【${potion.name}】` : '（补给已耗尽）', tone: 'ok', run: settle(() => { if (potion) grantEventCard(potion); }) },
+        { label: '随机药水', detail: potion ? `获得【${potion.name}】：${potion.desc || '效果见卡牌说明'}` : '（补给已耗尽）', tone: 'ok', run: settle(() => { if (potion) grantEventCard(potion); }) },
       ];
     },
     'tt6-chestdraw': () => [

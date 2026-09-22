@@ -195,7 +195,7 @@ const FIGURE_FULL_ART = Object.freeze({
   heixiang: 'portraits/full/heixiang.webp',
   xingyue: 'portraits/full/xingyue.webp',
 });
-// 皮肤立绘（2026-09-19 老板令）：角色 id → 备选皮肤立绘（选人页可切换，会话内记忆不入存档）
+// 皮肤立绘（2026-09-19 老板令）：角色 id → 备选皮肤立绘。
 const SKIN_FULL_ART = Object.freeze({
   wu: Object.freeze([
     { id: 'casual', name: '春日·机车', file: 'portraits/full/wu-casual.webp' },
@@ -204,6 +204,22 @@ const SKIN_FULL_ART = Object.freeze({
   ]),
 });
 const activeSkins = {};   // classId -> skin id（未设置的用 default 主立绘）
+function setActiveSkin(classId, skinId) {
+  const c = characterFor(classId);
+  if (!c) return false;
+  if (!skinId || skinId === 'default') {
+    delete activeSkins[c.id];
+    return true;
+  }
+  if (!(SKIN_FULL_ART[c.id] || []).some(s => s.id === skinId)) return false;
+  activeSkins[c.id] = skinId;
+  return true;
+}
+function hydrateSelectedSkins(selectedSkins) {
+  Object.keys(activeSkins).forEach(id => { delete activeSkins[id]; });
+  Object.entries(selectedSkins || {}).forEach(([characterId, skinId]) => { setActiveSkin(characterId, skinId); });
+  return Object.freeze({ ...activeSkins });
+}
 function activeFigureFile(c) {
   const skins = SKIN_FULL_ART[c.id];
   const want = skins && activeSkins[c.id];
@@ -259,8 +275,9 @@ function characterArt(value, full=false, useDefault=false) {
     warmClassRoster() { warm(Object.values(FIGURE_FULL_ART).map(p => assetUrl(ROOT + p))); },
     // 皮肤系统（2026-09-19）：列出某角色的皮肤；setSkin 切换后选人页立绘即时更换
     listSkins(classId) { const c = characterFor(classId); return (c && SKIN_FULL_ART[c.id]) || []; },
-    setSkin(classId, skinId) { const c = characterFor(classId); if (c && skinId) activeSkins[c.id] = skinId; },
+    setSkin(classId, skinId) { return setActiveSkin(classId, skinId); },
     getSkin(classId) { const c = characterFor(classId); return (c && activeSkins[c.id]) || 'default'; },
+    hydrateSelectedSkins,
     skinUrl(classId, skinId) {
       const c = characterFor(classId);
       if (!c) return '';
@@ -481,4 +498,4 @@ function characterArt(value, full=false, useDefault=false) {
     missingKeys
   };
 
-export { ROOT, SDT, esc, missingKeys, reportMissing };
+export { ROOT, SDT, esc, missingKeys, reportMissing, SKIN_FULL_ART, setActiveSkin, hydrateSelectedSkins };

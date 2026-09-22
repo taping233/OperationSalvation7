@@ -75,6 +75,7 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
   let viewingBag = false;    // 正在查看战斗背包（2026-09-09 老板：战斗中可开背包用道具）
   let floats = [];           // 待展示的飘字/受击特效 [{unit:'self'|敌人idx, text, cls}]（渲染后由视图消费）
   let cardAnims = [];        // 待播放的牌局动画事件 [{kind:'draw'|'play'|'burn'|'dump', uid, name, side, target}]（渲染后由视图消费）
+  let presentationActionSeq = 0; // 本场合法动作提交序号；仅供表现层 receipt 去重，不参与规则结算
   const KILL_CHEER = ['漂亮！', '好剑！', '干净利落！'];   // 击杀后自己头上的随机文字欢呼（替代 emoji，配 stk-cheer 小字样式）
   let dreadShown = false;    // BOSS 登场竖线阴影每场只演一次
   let spellCost1 = false;    // 「本局对战内所有法术 1 费」（银河之旅，战斗内永久）
@@ -860,6 +861,8 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
     });
     let healed = false, armored = false, drawn = false;
     imm.forEach(cl => {
+      // 双镖首段若已击杀原目标，流血不得借文本执行器的空目标回退串到下一名活敌人。
+      if (card.id === 'tt7-bloodpoison' && target && target.dead && /流血/.test(cl)) return;
       const res = applyTextEffects(card, cl, target, { structuredHit, infused, fuelCost, uid });
       did = did || res.did;
       healed = healed || res.healed;
@@ -1020,6 +1023,34 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
     const text = equipSkillText(e.card);
     if (!text) return;
     if (e.used) { G.log(`[[icon:cross]] 【${esc(e.card.name)}】的主动技能本场已经用过了`, 'warn'); return; }
+    // 魔法锅炉的「注能」是装备技能代价：先强制消耗 2 张手牌，完成后随机入手 3 张，
+    // 不走「发现」面板。燃料不足时不消耗本场唯一一次技能。
+    if (e.card.id === 'tt3eq-boiler') {
+      const need = 2;
+      if (hand.length < need) {
+        G.log(`[[icon:flask]] 【${esc(e.card.name)}】注能(${need}) 需要消耗 ${need} 张手牌，当前只有 ${hand.length} 张`, 'warn');
+        return;
+      }
+      e.used = true;
+      G.log(`[[icon:sparkles]] <b>${esc(e.card.name)}</b> 主动技能：注能(${need})，随机获取 3 张卡牌`, 'ok');
+      handSelectQueue.push({
+        n: need, act: 'consume', mandatory: true, srcCard: e.card,
+        onDone: () => {
+          const got = [];
+          for (let i = 0; i < 3; i++) {
+            const card = randomDiscoverCard(null);
+            if (!card) break;
+            addTempCard(card);
+            fireCatGift(card);
+            got.push(card.name);
+          }
+          G.log(`[[icon:cards]] <b>${esc(e.card.name)}</b>：随机获取 ${got.length} 张卡牌${got.length ? `（${got.map(esc).join('、')}）` : ''}`, 'loot');
+        },
+      });
+      processHandSelect();
+      requestBattleRender();
+      return;
+    }
     e.used = true;
     G.log(`[[icon:sparkles]] <b>${esc(e.card.name)}</b> 主动技能：${esc(text)}`, 'ok');
     applyTextEffects(e.card, text, alive()[0] || null, {});
@@ -1279,7 +1310,7 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
     turn = 1; busy = false;
     pdef = { shield: 0, armor: 0, guard: false };
     pstat = Combat.ensureStatus({ hp: G.hp });
-    infusing = null; discovering = null; discoverQueue = []; handSelecting = null; handSelectQueue.length = 0; interaction = null; floats = []; cardAnims = [];
+    infusing = null; discovering = null; discoverQueue = []; handSelecting = null; handSelectQueue.length = 0; interaction = null; floats = []; cardAnims = []; presentationActionSeq = 0;
     choosing = null; choiceQueue.length = 0; stealthStrike = false; nextSpellTwice = 0;
     delayed = []; noDrawNext = false; spellCost1 = false; meleeCost1 = false;
     shaTransform = null; consumeFireballN = 0; lastDrawnUids = []; lastPlayedType = null;
@@ -1291,7 +1322,7 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
     applyBattleStartPassives();
     // 普通战无法使用能力卡（2026-09-16 老板定版）：能力卡不进普通战手牌（对 BOSS 编组不受限）
     if (alive().length > 1) G.log(`[[icon:question]] 以一敌多：伤害与群体卡都<b>拖到任意敌人身上</b>打出（群体自动命中全体）`, 'sys');
-    G.log(`[[icon:cards]] 普通战斗无需抽牌：随身 <b>${hand.length}</b> 张战斗卡直接可打出（道具/资源/事件卡不在手牌中） · 每回合固定 <b>${maxEnergy}</b> 费`, 'sys');
+    G.log(`[[icon:cards]] 普通战斗无需抽牌：随身 <b>${hand.length}</b> 张战斗卡直接可打出；道具/资源/事件卡不入手，能力卡只能收藏或编入 BOSS 战牌库 · 每回合固定 <b>${maxEnergy}</b> 费`, 'sys');
     requestBattleRender();
   }
 
@@ -1354,7 +1385,7 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
     turn = 1; busy = false;
     pdef = { shield: 0, armor: 0, guard: false };
     pstat = Combat.ensureStatus({ hp: G.hp });
-    infusing = null; discovering = null; discoverQueue = []; interaction = null; floats = []; cardAnims = [];
+    infusing = null; discovering = null; discoverQueue = []; interaction = null; floats = []; cardAnims = []; presentationActionSeq = 0;
     handSelecting = null; handSelectQueue.length = 0;
     choosing = null; choiceQueue.length = 0; stealthStrike = false; nextSpellTwice = 0;
     delayed = []; noDrawNext = false; spellCost1 = false; meleeCost1 = false;
@@ -1397,9 +1428,13 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
     return unplayableReasonFor(card, mode, { handCards, selfCard: card });
   }
 
-  function play(uid, side) {
+  function play(uid, side, forceDirect) {
+    // 迟到/非法 uid 必须在任何交互状态变更前拒绝；否则会顺带取消当前药水点选。
+    if (!hand.includes(uid)) return;
     if (interactionOf('item')) interaction = null;   // 打出手牌时取消药水点选（单槽幂等清 item）
     if (busy || infusing || discovering || choosing || viewingGrave || viewingDeck) return;
+    // 玩家命令只能提交当前手牌。内部直接释放继续直接走 queueCardExecution，
+    // 保留牌与弃牌洗回重抽后 uid 会重新位于 hand，因此仍可再次合法使用。
     const entry = findCard(uid);
     if (!entry) return;
     const card = entry.card;
@@ -1407,8 +1442,6 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
     if (why) { G.log(`[[icon:cross]] 【${esc(card.name)}】无法打出：${why}`, 'warn'); return; }
     const effCost = effCostOf(card, uid);
     if (effCost > energy) { G.log(`[[icon:bolt]] 能量不足：【${esc(card.name)}】需要 ${effCost} 点能量`, 'warn'); return; }
-    // 需求 #15（2026-09-09）：注能卡可以直接打出（弱效果）——注能流程改由卡面上的
-    // 「注能」角标触发（beginInfuse：选 N 张手牌消耗后强化打出）
     // 需求 #18：装备最多同时装配 2 件（圣剑化身「装备上限 +1」生效），超编拒打
     if (card.type === '装备') {
       const cap = equipCap();
@@ -1418,10 +1451,14 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
         return;
       }
     }
+    // 09-20 老板定版（取代需求 #15 的「点卡直打」）：注能卡点卡先进注能态——
+    // 注能条内提供「不注能直接打出」；拖拽到目标（side 非空）与该直打钮（forceDirect）仍直接打出
+    if (!forceDirect && side == null && infuseOf(card) > 0) { beginInfuse(uid); return; }
     // 目标校验：指向性卡必须拖到对应目标（点卡只是锁定提示，不会打出）
     const need = targetSide(card);
     let target = null;
     const isFree = freeCast.has(uid);
+    const pendingCard = interactionOf('card');
     if (need === 'enemy') {
       if (side == null || side === 'self') { beginCardTargeting(uid, card, alive().map(foe => foe.id)); return; }
       target = foes[+side];
@@ -1431,7 +1468,7 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
     } else {
       target = alive()[0] || null;
     }
-    if (interactionOf('card')) interaction = null;   // 交互正常结算：清卡牌槽（不 cancelTargeting，RESOLVING 迁移接管阶段）
+    if (pendingCard) interaction = null;   // 交互正常结算：清卡牌槽（不 cancelTargeting，RESOLVING 迁移接管阶段）
     pendingHint = '';
     freeCast.delete(uid);
     // 「杀化为X」战斗规则：打出的初始攻击以目标卡形态结算（uid 沿用，弃牌簿记不变）
@@ -1440,7 +1477,7 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
       const tpl = SDT.Cards.all().find(c => c.name === shaTransform);
       if (tpl) playCard = { ...tpl };
     }
-    queueCardExecution(uid, playCard, [], target, isFree);
+    queueCardExecution(uid, playCard, pendingCard?.fuelUids || [], target, isFree);
   }
 
   // 需求 #17（2026-09-09）：「直接释放」的卡免费打出（freeCost），但仍要选目标——
@@ -1503,6 +1540,10 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
     const fuel = [...infusing.picked];
     infusing = null;
     SDT.Sound.sfx('confirm');
+    if (targetSide(card) === 'enemy' && alive().length > 1) {
+      beginCardTargeting(uid, card, alive().map(foe => foe.id), `注能完成：选择【${card.name}】的目标`, fuel);
+      return;
+    }
     queueCardExecution(uid, card, fuel, alive()[0] || null);
   }
 
@@ -1512,10 +1553,11 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
   let lastPersistAt = 0;
   const PERSIST_MIN_MS = 8000;
   function queueCardExecution(uid, card, fuelUids, target, freeCost) {
+    const receipt = Object.freeze({ battleToken: battleState.token, actionSeq: ++presentationActionSeq });
     battleState = transitionBattle(battleState, BATTLE_PHASES.RESOLVING);
     busy = true;
     requestBattleRender();
-    actionQueue.enqueue(signal => execPlay(uid, card, fuelUids, target, freeCost, signal))
+    actionQueue.enqueue(signal => execPlay(uid, card, fuelUids, target, freeCost, signal, receipt))
       .catch(e => { if (e?.name !== 'BattleActionCancelledError') console.error('[battle] 出牌动作异常：', e); })
       .finally(() => {
         // 触发效果可能继续入队；队列未空时保持 resolving/busy，避免玩家插入新动作。
@@ -1532,7 +1574,7 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
       });
   }
 
-  async function execPlay(uid, card, fuelUids, target, freeCost, signal) {
+  async function execPlay(uid, card, fuelUids, target, freeCost, signal, receipt) {
     activeActionSignal = signal;
     try {
     throwIfActionCancelled(signal);
@@ -1546,6 +1588,7 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
       kind: 'play', uid, name: card.name, type: card.type,
       side: targetSideFor(card, SDT.Cards.DMG_TYPES),
       target: target && !target.dead ? foes.indexOf(target) : null,
+      receipt,
     });
     fuelUids.forEach(f => removeUid(hand, f));
     fuelUids.forEach(f => {
@@ -1803,11 +1846,16 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
       processHandSelect();
       return;
     }
-    handSelecting = { n: Math.min(job.n || 1, matched), type: job.type || null, act: job.act || 'play', thenText: job.thenText || '', target: job.target || null, srcCard: job.srcCard || null };
+    handSelecting = {
+      n: Math.min(job.n || 1, matched), type: job.type || null, act: job.act || 'play',
+      thenText: job.thenText || '', target: job.target || null, srcCard: job.srcCard || null,
+      mandatory: !!job.mandatory, onDone: job.onDone || null,
+    };
     requestBattleRender();
   }
   function skipHandSelect() {
     if (!handSelecting) return;
+    if (handSelecting.mandatory) { SDT.Sound.sfx('deny'); return; }
     handSelecting = null;
     G.log('[[icon:cards]] 跳过手牌选择，该效果未结算', 'warn');
     processHandSelect();
@@ -1855,6 +1903,7 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
     if (handSelecting.n > 0) { requestBattleRender(); return; }
     const job = handSelecting;
     handSelecting = null;
+    if (typeof job.onDone === 'function') job.onDone();
     if (job.thenText) applyTextEffects(job.srcCard || entry.card, job.thenText, job.target || null);
     if (!alive().length) { finish(true); return; }
     processHandSelect();
@@ -1988,9 +2037,14 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
     requestBattleRender();
   }
   function resolveDart(side) {
-    if (interactionOf('dart')) interaction = null;
-    const t = (side != null && foes[+side] && !foes[+side].dead) ? foes[+side] : alive()[0];
-    if (!t) return;
+    if (!interactionOf('dart')) return;
+    const t = side != null ? foes[+side] : null;
+    if (!t || t.dead) {
+      G.log('[[icon:cross]] 血毒双镖：请重新选择一名存活敌人', 'warn');
+      requestBattleRender();
+      return;
+    }
+    interaction = null;
     SDT.Sound.sfx('strike');
     const aliveBefore = alive().length;
     hitFoe(t, { name: '血毒双镖·第二镖', desc: '' }, 1, Combat.TYPES.ATTACK, '');
@@ -2001,10 +2055,15 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
     requestBattleRender();
   }
   function resolveSlam(side) {
-    if (interactionOf('slam')) interaction = null;
+    if (!interactionOf('slam')) return;
     if (energy < 2) { G.log('[[icon:bolt]] 能量不足：背包砸击需要 2 点能量', 'warn'); requestBattleRender(); return; }
-    const t = (side != null && foes[+side] && !foes[+side].dead) ? foes[+side] : alive()[0];
-    if (!t) return;
+    const t = side != null ? foes[+side] : null;
+    if (!t || t.dead) {
+      G.log('[[icon:cross]] 背包砸击：请重新选择一名存活敌人', 'warn');
+      requestBattleRender();
+      return;
+    }
+    interaction = null;
     energy -= 2;
     SDT.Sound.sfx('strike');
     const r = Combat.dealDamage({ atk: G.atk }, t, 4, Combat.TYPES.FIXED);
@@ -2377,6 +2436,13 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
   function playerTakeHit(foe) {
     const playerRef = { hp: G.hp, defense: pdef, status: pstat.status };
     const r = Combat.dealDamage({ atk: foe.atk }, playerRef, 0, Combat.TYPES.ATTACK);
+    // 闪避（09-20 老板定版：免疫下一次攻击，非减伤）——演出对齐元素庇幕免伤（parry+浮字）
+    if (r.dodged) {
+      SDT.Sound.sfx('parry');
+      floats.push({ unit: 'self', text: '闪避', cls: 'block' });
+      G.log(`[[icon:runner]] <b>闪避！</b><b>${esc(foe.name)}</b> 的攻击被完全避开（剩余 ${Math.max(0, pstat.status.dodge || 0)} 层）`, 'ok');
+      return 0;
+    }
     // 黑暗吊坠：免疫 1 次致命伤害，并在该回合内无敌（2026-09-09 C11）
     if (r.dealt > 0 && G.hp - r.dealt <= 0 && deathSave > 0) {
       deathSave--;
@@ -2800,7 +2866,7 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
     cardOverrides = new Map(data.cardOverrides || []);
     infusing = null; discovering = null; discoverQueue.length = 0;
     handSelecting = null; handSelectQueue.length = 0; choosing = null; choiceQueue.length = 0;
-    interaction = null; pendingHint = ''; floats = []; cardAnims = [];
+    interaction = null; pendingHint = ''; floats = []; cardAnims = []; presentationActionSeq = 0;
     viewingGrave = false; viewingDeck = false; selectingDeck = false; viewingBag = false;
     sel = new Set(); selPool = []; selShaN = 0;
     busy = false;
@@ -2997,6 +3063,72 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
     return snapCache;
   }
 
+  // R3-a 可信预览窄口：只把真实结算所需的当前上下文复制出去，
+  // 不暴露内部 Map/Set，不执行卡牌效果、RNG 或 Combat hooks。
+  function getPreviewContext(uid, targetIndex) {
+    const entry = findCard(uid);
+    const card = entry && entry.card;
+    const target = foes[+targetIndex];
+    if (!card || !target) return null;
+    const need = targetSide(card);
+    const pendingCard = interactionOf('card');
+    const matchingTargeting = battleState.phase === BATTLE_PHASES.TARGETING
+      && pendingCard && pendingCard.uid === uid;
+    let illegalReason = '';
+    if (!hand.includes(uid)) illegalReason = '这张牌已不在当前手牌中';
+    else if ((battleState.phase !== BATTLE_PHASES.PLAYER && !matchingTargeting) || busy) illegalReason = '当前不能打出卡牌';
+    else if (infusing || discovering || choosing || viewingGrave || viewingDeck) illegalReason = '请先完成当前操作';
+    else if (unplayableReason(card)) illegalReason = `当前无法打出：${unplayableReason(card)}`;
+    else if (need !== 'enemy') illegalReason = '这张牌不能指定敌人';
+    else if (target.dead) illegalReason = '该目标已经倒下';
+    const isFreeCast = freeCast.has(uid);
+    const playCheckCost = effCostOf(card, uid);
+    const effectiveCost = isFreeCast ? 0 : playCheckCost;
+    // play() 当前先做能量门槛，再判 freeCast 是否实际扣费；预览忠实反映该既有口径。
+    if (!illegalReason && playCheckCost > energy) illegalReason = isFreeCast
+      ? `当前仍需至少 ${playCheckCost} 点能量才能直接释放（结算不扣费）`
+      : `能量不足（需要 ${playCheckCost}，当前 ${energy}）`;
+    const selectedFuelUids = pendingCard && pendingCard.uid === uid
+      ? (pendingCard.fuelUids || []).slice()
+      : (infusing && infusing.uid === uid ? [...infusing.picked] : []);
+    const targetIndexes = need === 'enemy'
+      ? foes.map((foe, index) => !foe.dead ? index : -1).filter(index => index >= 0)
+      : [];
+    const lastRealCard = hand.filter(handUid => handUid !== uid).every(handUid => {
+      const handEntry = findCard(handUid);
+      return handEntry && /永远被保留在手牌中/.test(String(handEntry.card.desc || ''));
+    });
+    const lastCardRepeat = /最后一张手牌[^。；]*?触发\s*(\d+)?\s*次?/.test(String(card.desc || '')) && lastRealCard;
+    const wholeCardRepeats = 1 + ((nextSpellTwice > 0 && card.type === '法术') ? 1 : 0) + (lastCardRepeat ? 1 : 0);
+    const targetProtected = !!(target.protected && foes.some(foe => !foe.dead && foe.protects));
+    const stealthStrikeActive = !!(stealthStrike && Combat.isStealthed(pstat));
+    const nestDark3 = !!nestSyn.dark3;
+    // 暗 1 每一段命中前重新判断半血；即便目标当前高于半血，多段也可能在中途跨阈值。
+    const nestDark1 = !!nestSyn.dark1;
+    return Object.freeze({
+      card: Object.freeze({ ...card }),
+      legal: !illegalReason,
+      illegalReason,
+      effectiveCost,
+      isFreeCast,
+      selectedFuelUids: Object.freeze(selectedFuelUids),
+      damageGrowth: +(growth[uid] || 0),
+      wholeCardRepeats,
+      arrowRuneRepeat: !!(arrowRune && (card.name === '箭' || card.id === 'token-arrow')),
+      aegisBlocked: aegisBlocked(target),
+      targetProtected,
+      heartsMode: !!target.heartsMode,
+      shaTransformed: !!(shaTransform && (card.name === '初始攻击' || card.name === '杀')),
+      targetIndexes: Object.freeze(targetIndexes),
+      modifiers: Object.freeze({
+        stealthStrike: stealthStrikeActive,
+        nestDark1,
+        nestDark3,
+        allSpellsInfused: !!(allSpellsInfused && infuseOf(card) > 0),
+      }),
+    });
+  }
+
   function openGrave() { viewingGrave = true; requestBattleRender(); }
   function openDeckView() { if (mode !== 'boss') return; viewingDeck = true; requestBattleRender(); }
   function closeDeckView() { viewingDeck = false; requestBattleRender(); }
@@ -3013,8 +3145,8 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
   }
   function cancelPendingTarget() { cancelInteraction(); }
   // 统一交互入场（批次C）：指向性卡牌进入「等待目标」，单槽顶替旧交互
-  function beginCardTargeting(uid, card, targetIds, hint) {
-    interaction = { kind: 'card', uid, card, hint: hint || '' };
+  function beginCardTargeting(uid, card, targetIds, hint, fuelUids = []) {
+    interaction = { kind: 'card', uid, card, hint: hint || '', fuelUids };
     battleState = beginTargeting(battleState, uid, targetIds);
     pendingHint = hint || '';
     requestBattleRender();
@@ -3085,6 +3217,8 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
     resolveSlam,
     resolveDart,
     beginInfusion: beginInfuse,
+    // 09-20 老板定版：注能条「不注能直接打出」——退出注能态并跳过注能分流走直接打出
+    playDirect: uid => { cancelInfuse(); play(uid, null, true); },
     useEquipSkill,
     selectDeckCard: toggleDeckCard,
     confirmDeck: beginBoss,
@@ -3115,6 +3249,7 @@ const viewApi = Object.freeze({
   infuseOf, markDreadShown, pileTip, refillDrawPile,
   takeFloats, takeCardAnims, targetSide, unplayableReason,
   matchHandSelectKey, handCurseSpecs,
+  getPreviewContext,
 });
 const BattleSession = Object.freeze({ start, getSnapshot, commands, serialize, restore });
 

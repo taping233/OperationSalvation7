@@ -611,6 +611,8 @@
   #overlay .scene[data-asset-key="scene-event-custom-a"], #overlay .node-pg[data-asset-key="scene-event-custom-a"] { background-image:url('../assets/scenes/event-tt6-mystery.webp'); }
   #overlay .scene[data-asset-key="scene-event-custom-b"], #overlay .node-pg[data-asset-key="scene-event-custom-b"] { background-image:url('../assets/scenes/event-tt6-airdrop.webp'); }
   #overlay .scene[data-asset-key="scene-event-custom-c"], #overlay .node-pg[data-asset-key="scene-event-custom-c"] { background-image:url('../assets/scenes/event-tt6-relief.webp'); }
+  /* R6 环境故事复用无人雪街氛围图；这是场景背景，不是专属剧情插画。 */
+  #overlay .scene[data-asset-key="story-last-lamp"], #overlay .node-pg[data-asset-key="story-last-lamp"] { background-image:url('../assets/scenes/winter-expedition/outskirts.webp'); }
 
   .battle-stage { background-size:cover; background-position:center; }
   /* 战斗底图一键换血（迭代评审 09-20 美术岗 E-P1）：写实 street-amber 退役，四条统一挂

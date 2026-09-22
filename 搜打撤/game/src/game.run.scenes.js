@@ -16,6 +16,7 @@ import { Random } from './random.js';
 import { createShopController } from './game.run.shop.js';
 import { startBattle } from './battle-loader.js';
 import { setBagReturnHook } from './bag-return-hook.js';
+import { selectEncounterSpec } from './encounter-selector.js';
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const SDT = window.SDT;
 const UI = window.SDT.UI;
@@ -101,6 +102,13 @@ export function nodeShell(o) {
 export function nodeOpt(act, label, detail, tone = '', extra = '') {
   return `<button class="evt-opt ${tone}" data-act="${act}" ${extra}><b>${label}</b>${detail ? `<span>${detail}</span>` : ''}</button>`;
 }
+
+export function consumeCell(layerIdx = game.layerIdx, trackPos = game.trackPos) {
+  game.visited = game.visited || {};
+  game.visited[`${layerIdx},${trackPos}`] = 1;
+}
+
+export function consumeCurrentCell() { consumeCell(); }
 
 // 打开场景：对话展示 →（点击任意处继续）→ onDone 开启真正内容
 // opts.foes = 遭遇敌人数组：战斗场景展示统一位图敌人立绘。
@@ -228,29 +236,27 @@ export function openPickupPage(kind, gain, onDone) {
 export function buildEncounter(layerIdx) {
   const enc = MAP.encounters[layerIdx] || MAP.encounters[0];
   let pool, size;
-  let strategy = enc.strategy || '';
-  let risk = enc.risk || '中';   // 风险等级随层写在 encounters 表里
+  const selected=selectEncounterSpec(enc,MAP.monsters,()=>Random.random('enemy'));
+  if(!selected.ok) throw new Error(`遭遇配置无效：${selected.code}`);
+  const spec=selected.value;
+  let strategy=spec.strategy, risk=spec.risk;
   // 2026-09-10 玩法定版：每层每种敌人有固定数量区间（一律落在 1~3 只，如 2-3 只），
   // 区间内每个数量等概率生成（MAP.rollCount）；巨兽「荒渊」按层概率刷出（第 3 层 3%、第 4 层 10%），固定单体。
-  if (enc.elite && Random.random('enemy') < enc.elite.chance) {
-    pool = enc.elite.pool; size = enc.elite.size; strategy = enc.elite.strategy || strategy; risk = '精英';
-  } else {
-    const entries = enc.entries || [];
-    const ent = entries[Math.floor(Random.random('enemy') * entries.length)] || entries[0];
-    pool = ent ? [ent.id] : [];
-    size = ent ? ent.size : [1, 1];
-  }
-  const n = MAP.rollCount ? MAP.rollCount(size, () => Random.random('enemy')) : size[0] + Math.floor(Random.random('enemy') * (size[1] - size[0] + 1));
+  pool=spec.enemyIds; size=spec.size;
+  const n=spec.kind==='group'?2:(MAP.rollCount ? MAP.rollCount(size, () => Random.random('enemy')) : size[0] + Math.floor(Random.random('enemy') * (size[1] - size[0] + 1)));
   const list = [];
   for (let i = 0; i < n; i++) {
-    const tpl = MAP.monsters[pool[Math.floor(Random.random('enemy') * pool.length)]];
+    const id=spec.kind==='group'?pool[i]:pool[Math.floor(Random.random('enemy') * pool.length)];
+    const tpl = MAP.monsters[id];
     list.push(scaledEnemy({ ...tpl }));
   }
   // 元数据不参与战斗结算，仅用于战前预告和战斗内提示；旧敌人对象仍保持原字段。
   list.risk = risk;
   list.strategy = strategy;
+  list.encounterId=spec.encounterId; list.encounterKind=spec.kind; list.rewardKind=spec.rewardKind; list.fallbackReason=spec.fallbackReason;
   return list;
 }
+
 
 export function openBlankSafePage() {
   game.state = 'modal';
@@ -271,17 +277,19 @@ export function openBattleCell(def, encounter) {
   game.state = 'modal';
   const list = encounter || buildEncounter(game.layerIdx);
   return startBattle(game, list, { isBoss: false, layer: game.layerIdx, name: list[0].name,
-    risk: list.risk, strategy: list.strategy });
+    risk: list.risk, strategy: list.strategy, encounterId:list.encounterId, encounterKind:list.encounterKind,
+    rewardKind:list.rewardKind, fallbackReason:list.fallbackReason });
 }
 
 // 宝箱格 / 事件卡开真宝箱：开完回待机并存档（场景演出后由本函数自行收尾）
 export function openChestsOnCell(chests, text, opts) {
   UI.log(`[[icon:archive]] ${text || '回收了' + SDT.Chests.dropText(chests)}`, 'loot');
   SDT.Chests.open(game, chests, () => {
+    if (opts?.consumeNode) consumeCurrentCell();
     game.state = 'idle';
     saveGame();
     UI.refresh(game);
-  });
+  }, opts);
 }
 
 // 即时效果（经场景演出后结算）；after = 效果完成后的续流回调

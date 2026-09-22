@@ -1,4 +1,4 @@
-import { characterName } from './characters.js';
+import { CHARACTERS, characterFor, characterName } from './characters.js';
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const SDT = window.SDT;
 const UI = window.SDT.UI;
@@ -8,21 +8,96 @@ import { escAttr } from './shared.js';
 import { MODES, game, getActiveSlot, newRun, requestClassChoice, setLobby, showTitle } from './game.session.js';
 import { Sfx, configureCardNavigation, _set_cardPageOpen } from './game.cardslib.js';
 import { Random } from './random.js';
+import { readBase, readBaseReceipt, commitBase } from './base.commands.js';
+import { convertCollection, getCharacter, getCollection, selectSkin, stackKeyOf } from './collection.commands.js';
+import { createHomeCommands } from './home.commands.js';
+import { presentHome, homeErrorMessage } from './home.presenter.js';
+import { mountHome } from './home.scene.js';
+import { getM04VisualPack } from './home.visuals.js';
+import { validateLastLampState } from './story.last-lamp.js';
+import { createPreparationCommands, getPreparation, previewDeployment } from './preparation.commands.js';
+import { buildPreparationViewModel, mountPreparationView } from './preparation.view.js';
+import '../css/preparation.css';
+
+const homeCommands = createHomeCommands({
+  readBase, readBaseReceipt, commitBase,
+  getCollection: snapshot => getCollection(snapshot, SDT.Cards),
+});
+let homeController = null;
+let preparationController = null;
+let homeRequestSeq = 0;
+const homeRequestId = prefix => `m05-${prefix}-${Date.now().toString(36)}-${++homeRequestSeq}`;
+const disposeHome = () => { homeController?.dispose(); homeController = null; };
+const disposePreparation = () => { preparationController?.dispose(); preparationController = null; };
+const preparationCommands = createPreparationCommands({ readBase, readBaseReceipt, commitBase });
 
 // 基地当前页签（原为隐式全局，ESM 严格模式下必须显式声明）
 let hubTab = 'deploy';
 let hubCollectionView = 'backs';
   function openBaseHub(tab) {
+    disposePreparation();
     game.state = 'modal';
     _set_cardPageOpen(true);
     setLobby(true);           // 基地也属于非对局界面：隐藏左侧栏
     hubTab = tab || 'deploy';
     SDT.Sound.music('base');   // 基地氛围
+    SDT.Art.hydrateSelectedSkins(SDT.Base.data.appearance?.selectedSkins);
     SDT.Meta.checkUnlocks();   // 进基地时补播新解锁的成就
-    renderHub();
+    renderHomeScene();
+  }
+
+  function readHomeView() {
+    const result = readBase(SDT.Base.slot);
+    if (!result.ok) return result;
+    return { ok: true, value: presentHome(result.value, { cardCatalog: SDT.Cards.all(), revision: result.revision }), revision: result.revision };
+  }
+
+  function renderHomeScene() {
+    disposePreparation();
+    disposeHome();
+    const read = readHomeView();
+    if (!read.ok) { UI.log(homeErrorMessage(read), 'warn'); renderHub(); return; }
+    UI.showOverlay('', '<div id="homeSceneHost" class="home-scene-host"></div>', 'page');
+    const host = document.getElementById('homeSceneHost');
+    const refresh = () => {
+      const next = readHomeView();
+      if (next.ok && homeController) homeController.update(next.value);
+      return next;
+    };
+    const visualPack = getM04VisualPack();
+    homeController = mountHome({
+      host, view: read.value, assets: {
+        ...visualPack,
+        characterHTML: characterId => SDT.Art.classArt(characterFor(characterId)?.rulesetId || characterId),
+        characterLabel: characterId => characterName(characterId),
+        cardHTML: cardId => {
+          const card = SDT.Cards.all().find(item => item.id === cardId);
+          return card ? SDT.Cards.cardHTML(card, 'sm') : '';
+        },
+      },
+      onIntent: async intent => {
+        if (intent.type === 'close') { closeBase(); return { ok: true }; }
+        if (intent.type === 'openPanel') {
+          hubTab = ({ collection: 'ach', characters: 'classes', pets: 'stash' }[intent.panel] || intent.panel);
+          renderHub(); return { ok: true };
+        }
+        if (intent.type === 'previewPlacement') return { ok: true, value: intent.placement };
+        const context = { slotId: SDT.Base.slot, requestId: homeRequestId(intent.type), expectedRevision: intent.expectedRevision };
+        let result;
+        if (intent.type === 'buyFurniture') result = await homeCommands.buyFurniture(context, intent);
+        else if (intent.type === 'submitLayout') result = await homeCommands.saveLayout(context, intent);
+        else if (intent.type === 'selectDisplay') result = await homeCommands.setDisplay(context, intent);
+        else return { ok: false, code: 'INVALID_ARGUMENT', message: '未知基地操作' };
+        if (result.ok) refresh();
+        else result = { ...result, message: homeErrorMessage(result) };
+        return result;
+      },
+    });
   }
 
   function renderHub() {
+    disposeHome();
+    disposePreparation();
     const B = SDT.Base;
     const M = SDT.Meta;
     _set_cardPageOpen(true);      // Hub 页面：Esc / 点击背景可关闭
@@ -32,6 +107,7 @@ let hubCollectionView = 'backs';
     renderHub._lastTab = hubTab;
     // v0.22 图标页签：大图标为主 + 小字注记（仓库=木房子）
     const TABS = [
+      { id: 'home', icon: 'home', name: '基地' },
       { id: 'deploy', icon: 'flag', name: '出发' },
       { id: 'stash', icon: 'home', name: '仓库' },
       { id: 'shop', icon: 'coin', name: '商店' },
@@ -93,10 +169,19 @@ let hubCollectionView = 'backs';
       UI.log(`[[icon:coin]] 购入【<b>${esc(card.name)}</b>】×1 → 卡牌仓库（储备余 ${B.data.coins} 币）`, 'loot');
       renderHub();
     });
-    UI.act('hubTab', (d) => { hubTab = d.tab; renderHub(); });
+    UI.act('hubTab', (d) => { if (d.tab === 'home') { renderHomeScene(); return; } hubTab = d.tab; renderHub(); });
     UI.act('hubCollectionView', (d) => {
       if (!['backs', 'achievements', 'classes'].includes(d.view)) return;
       hubCollectionView = d.view;
+      renderHub();
+    });
+    UI.act('openPreparation', () => openPreparationPanel());
+    UI.act('selectCharacterSkin', async (d) => {
+      const read = readBase(B.slot);
+      if (!read.ok) { UI.log(homeErrorMessage(read), 'warn'); return; }
+      const result = await selectSkin({ slotId: B.slot, requestId: homeRequestId('skin'), expectedRevision: read.revision }, { characterId: d.character, skinId: d.skin });
+      if (!result.ok) { UI.log(result.message || '皮肤选择失败', 'warn'); return; }
+      UI.log(result.value.assetFallback ? '皮肤选择已保存；当前素材缺失，暂用默认立绘。' : '人物皮肤已保存。', result.value.assetFallback ? 'warn' : 'ok');
       renderHub();
     });
     UI.act('selMode', (d) => { B.data.selMode = d.mode; B.save(); renderHub(); });
@@ -181,6 +266,63 @@ let hubCollectionView = 'backs';
     UI.act('closeBase', closeBase);
   }
 
+  function preparationModel(snapshot, error = '') {
+    const state = getPreparation(snapshot);
+    const cards = SDT.Cards.all();
+    const pets = (SDT.Base.PETS || []).map(pet => ({ id: pet.id, name: pet.name }));
+    const characterOptions = CHARACTERS.map(character => ({ id: character.id, name: character.name }));
+    return buildPreparationViewModel({ baseSnapshot: snapshot, preparation: state, cardCatalog: cards, characters: characterOptions, pets, catalogVersion: 'm06-v1', bagCapacity: SDT.Base.bagCap(), error });
+  }
+
+  function openPreparationPanel() {
+    disposeHome(); disposePreparation();
+    const current = readBase(SDT.Base.slot);
+    if (!current.ok) { UI.log(homeErrorMessage(current), 'warn'); return; }
+    UI.showOverlay('', '<div class="preparation-shell"><button class="ov-btn" data-act="preparationBack">← 返回基地出发页</button><div id="preparationRoot"></div></div>', 'page');
+    UI.act('preparationBack', () => { hubTab = 'deploy'; renderHub(); });
+    const root = document.getElementById('preparationRoot');
+    const repaint = (error = '') => {
+      const fresh = readBase(SDT.Base.slot);
+      if (fresh.ok) preparationController?.update(preparationModel(fresh.value, error));
+      return fresh;
+    };
+    preparationController = mountPreparationView(root, {
+      model: preparationModel(current.value),
+      onIntent: async ({ type, payload }) => {
+        const fresh = readBase(SDT.Base.slot);
+        if (!fresh.ok) { repaint(homeErrorMessage(fresh)); return; }
+        const context = { slotId: SDT.Base.slot, requestId: homeRequestId(`prep-${type}`), expectedRevision: fresh.revision };
+        const state = getPreparation(fresh.value);
+        const preset = state.presets.find(item => item.id === payload.presetId);
+        let result = null;
+        if (type === 'goal-add' || type === 'goal-remove') {
+          const tracked = type === 'goal-add' ? [...state.tracked, payload.targetId] : state.tracked.filter(id => id !== payload.targetId);
+          result = await preparationCommands.setTrackedGoals(context, { targetIds: tracked.filter(Boolean) });
+        } else if (type === 'preset-field' && preset) {
+          result = await preparationCommands.savePreset(context, { ...preset, presetId: preset.id, [payload.field]: payload.value });
+        } else if ((type === 'preset-pick-add' || type === 'preset-pick-remove') && preset) {
+          const existing = preset.picks.filter(item => item.card.cardId !== payload.cardId);
+          const picks = type === 'preset-pick-add' && payload.cardId ? existing.concat({ card: { cardId: payload.cardId }, count: payload.count }) : existing;
+          result = await preparationCommands.savePreset(context, { ...preset, presetId: preset.id, picks });
+        } else if (type === 'preset-preview') {
+          repaint(); return;
+        } else if (type === 'preset-apply' && preset) {
+          const preview = previewDeployment({ baseSnapshot: fresh.value, preset, cardCatalog: SDT.Cards.all(), characters: CHARACTERS, pets: SDT.Base.PETS || [], bagCapacity: SDT.Base.bagCap() });
+          if (!preview.canStart) { repaint('库存或资格已变化，预设无法应用。'); return; }
+          deployPick = {};
+          for (const item of preview.resolvedPicks.filter(item => item.status === 'ready' && item.appliedCount === item.requestedCount)) {
+            const stack = fresh.value.stash.find(entry => entry.card?.id === item.card.cardId);
+            if (stack) deployPick[stack.card.name] = item.appliedCount;
+          }
+          disposePreparation(); openDepartPrep(); return;
+        } else if (type === 'preset-start' && preset) {
+          result = await preparationCommands.startDeployment(context, { presetId: preset.id, mode: 'standard', expectedRunRevision: 0 });
+        }
+        repaint(result?.ok ? '' : (result?.message || '操作失败'));
+      },
+    });
+  }
+
   // —— 基地各页签的 ? 帮助主题（说明文字统一收进二级界面，不在页面直铺） ——
   function registerHubHelp(tab) {
     const R = MAP.rules;
@@ -242,6 +384,7 @@ let hubCollectionView = 'backs';
             <p class="deploy-mission-lead">从边缘街区切入，搜集资源、识别风险，并把能带回来的东西带回基地。</p>
             <div class="deploy-mission-target"><span>本局目标</span><b>${esc(m.name)}</b><small>${esc(m.ckpt)}</small></div>
             <button id="btnDeploy" class="deploy-primary" data-act="deploy">[[icon:exit]] 出发整备 <span>→</span></button>
+            <button class="ov-btn" data-act="openPreparation" style="margin-top:10px">[[icon:flag]] 下一局目标与两套预设</button>
             <button id="btnNest" class="deploy-primary${SDT.Base.data.nestUnlocked ? '' : ' nest-locked'}" data-act="nestDeploy" style="margin-top:10px"
               title="${SDT.Base.data.nestUnlocked ? '第二地图：直捣龙巢，夺取符文与龙宝' : '首次击败一图首脑并成功撤离后解锁'}">${SDT.Base.data.nestUnlocked ? '[[icon:skull]] 龙巢远征 <span>→</span>' : '[[icon:lock]] 龙巢（未解锁）'}</button>
           </div>
@@ -808,15 +951,13 @@ let hubCollectionView = 'backs';
       if (s.count === 1) { confirmStashAction('这是仓库里的最后一个经济卡包，拆开后卡包将消失。', useEconPack); return; }
       useEconPack();
     });
-    const collectOne = () => {
+    const collectOne = async () => {
       // 2026-09-16 定版（Item 15）：职业卡/能力卡收藏即用掉——重复收藏重复获得经验，进度只记首次
       const first = !B.isCollected(s.card);
-      if (first) B.collectToggle(s.card);   // 仅首次登记收藏进度
-      SDT.Meta.onCollect(s.card, true);     // 每次收藏都结算经验
-      const si = B.data.stash.indexOf(s);
-      if (si >= 0) { s.count--; if (s.count <= 0) B.data.stash.splice(si, 1); }
-      B.save();
-      SDT.Meta.checkUnlocks();
+      const read = readBase(B.slot);
+      if (!read.ok) { UI.log(homeErrorMessage(read), 'warn'); return; }
+      const result = await convertCollection({ slotId: B.slot, requestId: homeRequestId('collect-one'), expectedRevision: read.revision }, { stackKey: stackKeyOf(s), count: 1 });
+      if (!result.ok) { UI.log(result.message || '收藏失败，卡牌未消耗', 'warn'); return; }
       Sfx.ding();
       UI.log(`[[icon:medal]] 已收藏【<b>${esc(s.card.name)}</b>】并转化为人物经验（卡牌用掉，不再占格${first ? '，收藏进度 +1' : ''}）`, 'loot');
       renderHub();
@@ -825,18 +966,13 @@ let hubCollectionView = 'backs';
       if (!convertType) return;
       confirmStashAction(`收藏【${esc(s.card.name)}】会消耗 1 张卡并转化为人物熟练度经验。`, collectOne);
     });
-    const collectAll = () => {
+    const collectAll = async () => {
       if (!convertType) return;
       const n = s.count;
-      for (let k = 0; k < n; k++) {
-        const first = k === 0 && !B.isCollected(s.card);
-        if (first) B.collectToggle(s.card);
-        SDT.Meta.onCollect(s.card, true);
-      }
-      const si = B.data.stash.indexOf(s);
-      if (si >= 0) B.data.stash.splice(si, 1);
-      B.save();
-      SDT.Meta.checkUnlocks();
+      const read = readBase(B.slot);
+      if (!read.ok) { UI.log(homeErrorMessage(read), 'warn'); return; }
+      const result = await convertCollection({ slotId: B.slot, requestId: homeRequestId('collect-all'), expectedRevision: read.revision }, { stackKey: stackKeyOf(s), count: n });
+      if (!result.ok) { UI.log(result.message || '收藏失败，卡牌未消耗', 'warn'); return; }
       Sfx.ding();
       UI.log(`[[icon:medal]] 已收藏【<b>${esc(s.card.name)}</b>】×${n}，全部转化为人物经验（卡牌用掉）`, 'loot');
       renderHub();
@@ -960,6 +1096,9 @@ let hubCollectionView = 'backs';
     const trained = summary.filter(c => c.lv > 1 || c.xp > 0).length;
     const rows = summary.map((c, index) => {
       const pct = c.maxed ? 100 : Math.min(100, c.need ? c.xp / c.need * 100 : 0);
+      const character = characterFor(c.cls);
+      const skinView = character && getCharacter(SDT.Base.data, character.id);
+      const skins = skinView?.availableSkinIds || ['default'];
       return `<article class="class-dossier${c.lv > 1 || c.xp > 0 ? ' trained' : ''}">
         <div class="class-dossier-art">${SDT.Art.classArt(c.cls)}</div>
         <div class="class-dossier-shade"></div>
@@ -971,6 +1110,7 @@ let hubCollectionView = 'backs';
           <div class="class-dossier-meta"><b>Lv.${c.lv}${c.maxed ? ' · MAX' : ''}</b><span>人物卡 ${c.pool} 张</span></div>
           <div class="xp-bar" aria-label="熟练度 ${pct.toFixed(0)}%"><i style="width:${pct.toFixed(1)}%"></i></div>
           <div class="xp-txt">${c.maxed ? '熟练度已满' : `经验 ${c.xp} / ${c.need}`}</div>
+          <div class="class-skins" aria-label="${esc(characterName(c.cls))}皮肤">${skins.map(id => `<button class="mini-btn${skinView.selectedSkinId === id ? ' ok' : ''}" data-act="selectCharacterSkin" data-character="${character.id}" data-skin="${escAttr(id)}" aria-pressed="${skinView.selectedSkinId === id}">${id === 'default' ? '默认' : esc(id)}</button>`).join('')}</div>
         </div>
       </article>`;
     }).join('');
@@ -1071,12 +1211,22 @@ let hubCollectionView = 'backs';
     const collTotal = M.collTotal();
     const collProgress = M.collProgress();
     const unlockedBacks = (SDT.Cards.CARD_BACKS || []).filter(b => B.isBackUnlocked(b.id)).length;
+    const storyCheck = validateLastLampState(B.data.story);
+    const storyState = storyCheck.ok ? storyCheck.value : null;
+    const storyRecord = !storyCheck.ok
+      ? `<section class="hub-card"><h3>[[icon:notes]] 见闻纪念</h3><p class="ov-note">故事记录无法读取，原数据已保留。</p></section>`
+      : storyState.stage < 3
+        ? `<section class="hub-card"><h3>[[icon:notes]] 见闻纪念 <span class="set-tip">${storyState.stage} / 3</span></h3><p class="ov-note">${storyState.stage ? '《最后一盏引路灯》的线索已经记入档案，等待下一次探索。' : '尚未记录环境故事。'} 故事记录不提供地图或战力效果。</p></section>`
+        : storyState.ending === 'open_beacon'
+          ? `<section class="hub-card"><h3>[[icon:notes]] 北门远灯记录</h3><p class="ov-note">你让灯光越过风雪，公共疏散线也随之暴露。故事记录不提供地图或战力效果。</p></section>`
+          : `<section class="hub-card"><h3>[[icon:notes]] 遮光近照记录</h3><p class="ov-note">你让窄光留在墙边，近路仍隐蔽，远处却看不见出口。故事记录不提供地图或战力效果。</p></section>`;
     const content = hubCollectionView === 'achievements'
       ? `<section class="hub-card collection-panel"><h3>[[icon:trophy]] 成就记录 <span class="set-tip">${doneN} / ${M.ACHIEVEMENTS.length} 已解锁</span></h3><div class="ach-list">${rows}</div></section>`
       : hubCollectionView === 'classes'
         ? collRoomHTML()
         : `<section class="hub-card collection-panel"><h3>[[icon:cards]] 卡背图鉴 <span class="set-tip">${unlockedBacks} / ${(SDT.Cards.CARD_BACKS || []).length} 已解锁</span></h3><div class="back-grid">${backsHTML}</div></section>`;
     return `
+      ${storyRecord}
       <section class="collection-command">
         <div class="collection-command-copy">
           <span class="section-kicker">ARCHIVE COLLECTION // 07</span>
@@ -1098,6 +1248,7 @@ let hubCollectionView = 'backs';
   }
 
   function closeBase() {
+    disposeHome();
     _set_cardPageOpen(false);
     UI.hideOverlay();
     showTitle();   // 基地只在局外（标题/撤离结算后）可达，关闭即回主菜单
@@ -1106,7 +1257,7 @@ let hubCollectionView = 'backs';
   // ---------- 背包（物资+卡牌混占格 · 安全格 · 消耗口袋） ----------
   // 设计者 2026-09-02 定版：从背包丢弃的牌无法取回；消耗的牌可在火堆复原
 
-export { closeBase, deployPick, openBaseHub, renderHub };
+export { closeBase, deployPick, openBaseHub, renderHub, renderHomeScene };
 configureCardNavigation({
   closeBase,
   renderHub,

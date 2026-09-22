@@ -94,10 +94,16 @@ describe('龙巢回归', () => {
     await window.SDT.Nest.startNestBattle(def);
     await drain();
     g.hp = 30;   // 战后应回满 60
-    // 两刀 99 攻击 → 每刀 -2 心 → 4 心清空
-    for (let k = 0; k < 2; k++) {
-      const e = g.ownedCards.find(o => o.card.name === '穿刺');
-      BattleSession.commands.playCard(e.uid, 0);
+    // 从真实起手取两张不同伤害牌：两刀 99 攻击 → 每刀 -2 心 → 4 心清空。
+    const attackUids = snap().hand.filter(uid => {
+      const entry = g.ownedCards.find(o => o.uid === uid);
+      return !!(entry && entry.card.dmgType);
+    }).slice(0, 2);
+    expect(attackUids).toHaveLength(2);
+    expect(new Set(attackUids).size).toBe(2);
+    for (const uid of attackUids) {
+      expect(snap().hand).toContain(uid);
+      BattleSession.commands.playCard(uid, 0);
       await drain();
       if (!SDT.game.battleActive) break;
     }
@@ -112,8 +118,13 @@ describe('龙巢回归', () => {
     const def = { id: 'nest-sand-elem', name: '沙暴元素', hearts: 8, atk: 8, heartsMode: true, reward: { coins: 3, chests: [], runes: [] } };
     await window.SDT.Nest.startNestBattle(def);
     await drain();
-    const sha = g.ownedCards.find(o => o.card.name === '初始攻击');
-    BattleSession.commands.playCard(sha.uid, 0);
+    const shaUid = snap().hand.find(uid => {
+      const entry = g.ownedCards.find(o => o.uid === uid);
+      return entry && entry.card.name === '初始攻击';
+    });
+    expect(shaUid, '起手 5 张在仅 1 张非初始攻击的牌盒中必含初始攻击').toBeTruthy();
+    expect(snap().hand).toContain(shaUid);
+    BattleSession.commands.playCard(shaUid, 0);
     await drain();
     expect(snap().foes[0].hp, '99 攻击应击碎 2 心（8→6）').toBe(6);
     BattleSession.commands.flee();

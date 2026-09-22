@@ -15,6 +15,7 @@ import { FEEDBACK_DELTA_MS, feedbackClass, feedbackDelay } from './battle.feedba
 import { renderCombatPiles } from './battle.piles.view.js';
 import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFrames, cacheStats as frameCacheStats } from './battle.frames.js';
 import { assetUrl } from './asset-url.js';
+import { previewAction } from './battle.preview.js';
 
 const cardIdentityKey = card => card && card.id
   ? `id:${card.id}`
@@ -22,8 +23,9 @@ const cardIdentityKey = card => card && card.id
 const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!card.id && card.name === '初始攻击'));
 
   // 状态角标：祝福（绿）+ 诅咒（红）——2026-09-11 架构批次 1 自 battle.core 外迁（纯视图函数）
-  // compact（敌方名牌收纳，迭代评审 09-20）：总数>4 时退化为「图标+层数」，名字/全文保进 title
-  // ——纯图标会丢层数（美术岗复核口径）；玩家名牌不传 compact，维持原样
+  // compact（敌方名牌收纳，迭代评审 09-20）：总数>4 时退化为「图标+层数」——纯图标会丢层数（美术岗复核口径）；
+  // 玩家名牌不传 compact，维持原样。09-20 老板：词条触摸讲解——data-term 交 term-tips.js 弹自绘讲解框
+  // （系统 title 已被 game.boot 全局移除，触屏也无效），讲解框自带全名+全文，compact 不再需要分叉文案
   function statusChips(status, opts) {
     const compactAll = !!(opts && opts.compact);
     const activeBuffs = Combat.BUFFS.filter(k => (status[k] || 0) > 0);
@@ -33,13 +35,13 @@ const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!car
       const m = Combat.BUFF_META[k];
       const v = m.timed ? ` ${status[k]}回合` : (m.flag ? '' : ` ${status[k]}`);
       const label = compact ? `${status[k]}${m.timed ? '回合' : ''}` : `${m.name}${v}`;
-      return `<span class="bt-buff b-${k}" title="${escAttr(compact ? ('祝福：' + m.name + '——' + m.desc) : ('祝福：' + m.desc))}">${m.icon} ${label}</span>`;
+      return `<span class="bt-buff b-${k}" data-term="${k}">${m.icon} ${label}</span>`;
     });
     const curses = activeCurses.map(k => {
       const m = Combat.CURSE_META[k];
       const txt = m.stack ? `${m.name} ${status[k]}` : `${m.name} ${status[k]}回合`;
       const label = compact ? (m.stack ? `${status[k]}` : `${status[k]}回合`) : txt;
-      return `<span class="bt-curse c-${k}" title="${escAttr(compact ? (m.name + '——' + m.desc) : m.desc)}">${m.icon} ${label}</span>`;
+      return `<span class="bt-curse c-${k}" data-term="${k}">${m.icon} ${label}</span>`;
     });
     return buffs.concat(curses).join(' ');
   }
@@ -49,9 +51,10 @@ const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!car
     AFFIX_META, Combat, R, aegisBlocked, effCostOf, findCard,
     infuseOf, markDreadShown, pileTip, refillDrawPile,
     takeFloats, takeCardAnims, targetSide, unplayableReason, matchHandSelectKey,
-    handCurseSpecs,
+    handCurseSpecs, getPreviewContext,
   } = viewApi;
   const play = commands.playCard;
+  const playDirect = commands.playDirect;       // 09-20：注能条「不注能直接打出」
   const cancelInfuse = commands.cancelInfusion;
   const confirmInfuse = commands.confirmInfusion;
   const beginInfuse = commands.beginInfusion;   // 需求 #15：卡面「注能」角标入口
@@ -309,9 +312,9 @@ const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!car
       UI.showOverlay(`${opts.isBoss ? '[[icon:demon]] BOSS战' : '[[icon:swords]] 遭遇战'} · 第 ${turn} 回合 · [[icon:cards]] 选择手牌`, `
         <p class="ov-stats">从手牌中选择 <b>${handSelecting.n}</b> 张${handSelecting.type ? `<b>${handSelecting.type}</b>` : '卡牌'}${handSelecting.act === 'play' ? '打出（不扣费）' : '消耗'}</p>
         <div class="bt-hand">${optsHTML || '<p class="ov-empty">手牌中没有符合条件的卡牌</p>'}</div>
-        <p class="ov-note"><button class="ov-btn ghost" data-act="btPickHandSkip">跳过该效果</button></p>`, 'discover');
+        ${handSelecting.mandatory ? '<p class="ov-note">必须选满燃料后才会发动。</p>' : '<p class="ov-note"><button class="ov-btn ghost" data-act="btPickHandSkip">跳过该效果</button></p>'}`, 'discover');
       UI.act('btPickHand', (d) => pickHandSelect(d.uid));
-      UI.act('btPickHandSkip', () => skipHandSelect());
+      if (!handSelecting.mandatory) UI.act('btPickHandSkip', () => skipHandSelect());
       UI.refresh(SDT.game);
       return;
     }
@@ -366,6 +369,7 @@ const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!car
       <div class="bt-infuse">
         [[icon:flask]] <b>注能(${infusing.need})</b>：选择 <b>${infusing.need}</b> 张手牌消耗，才能打出【${esc(infusing.card.name)}】
         （已选 <b>${infusing.picked.length}/${infusing.need}</b> · 同名堆叠每点一次消耗一张 · 被消耗的牌战后进消耗口袋，可在火堆复原）
+        <button class="mini-btn" data-act="btInfuseDirect" data-uid="${infusing.uid}">不注能直接打出</button>
         <button class="mini-btn ok" data-act="btInfuseGo" ${infusing.picked.length !== infusing.need ? 'disabled' : ''}>[[icon:swords]] 发动</button>
         <button class="mini-btn" data-act="btInfuseCancel">[[icon:cross]] 取消</button>
       </div>` : '';
@@ -430,7 +434,7 @@ const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!car
         <div class="sts-energy-wrap">
           <div class="sts-energy" title="能量：每回合固定 ${maxEnergy} 费">[[icon:bolt]] <b>${energy}</b><span>/${maxEnergy}</span></div>
         </div>
-        ${handPages > 1 ? `<button class="bt-hand-page" data-act="btHandPage"
+        ${handPages > 1 ? `<button class="bt-hand-page has-more" data-act="btHandPage" aria-label="还有另一栏手牌，当前第 ${handPage + 1} 栏，共 ${handPages} 栏"
           title="手牌分栏：每栏最多 ${HAND_PAGE_SIZE} 叠，放不下的进第二栏——点击切换第一栏/第二栏">[[icon:cards]] 第 ${handPage + 1}/${handPages} 栏</button>` : ''}
         <button class="bt-slam-btn${slamPending ? ' active' : ''}" data-act="btSlam"
           ${busy || infusingNow || (energy < 2 && !slamPending) ? 'disabled' : ''}
@@ -518,6 +522,7 @@ const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!car
       bagSlam();
     });   // 背包砸击按钮（2026-09-16 老板：改回按钮形态，置于手牌左侧）；09-20 老板：支持按住拖到敌人身上松手释放
     UI.act('btInfuseStart', (d) => beginInfuse(d.uid));   // 需求 #15：卡面注能角标
+    UI.act('btInfuseDirect', (d) => playDirect(d.uid));   // 09-20 老板定版：注能条内不注能直打
     UI.act('btInfuseGo', confirmInfuse);
     UI.act('btInfuseCancel', cancelInfuse);
     UI.act('btPickCancel', cancelPendingTarget);
@@ -677,14 +682,15 @@ const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!car
       ? (isSelf ? '正在注能的卡牌' : `点击选择消耗（注能）${g.uids.length > 1 ? `· 本叠还有 ${g.uids.length} 张` : ''}`)
       : blocked
         ? `[[icon:cross]] 无法打出：${blocked}`
+        : infuseOf(g.card) > 0
+        ? `费用 ${effCost}${costTip} · 点击进入注能（选 ${infuseOf(g.card)} 张手牌消耗强化打出），注能条内也可「不注能直接打出」${side === 'enemy' ? '或拖到敌人身上直打' : side === 'self' ? '或拖到左侧人物直打' : ''}（悬停看完整描述）`
         : side === 'enemy'
         ? `费用 ${effCost}${costTip} · 点击选中后点敌人，也可拖到敌人身上打出（悬停看完整描述）`
         : side === 'self'
           ? `费用 ${effCost}${costTip} · 点击选中后点自己，也可拖到左侧人物（悬停看完整描述）`
           : side === 'any'
             ? `费用 ${effCost}${costTip} · 点击直接打出，也可拖到战场空地（悬停看完整描述）`
-            : `费用 ${effCost}${costTip} · 点击出牌（悬停看完整描述）` +
-              (infuseOf(g.card) > 0 ? ` · 点卡面「注能」角标可消耗 ${infuseOf(g.card)} 张手牌强化效果（不点则直接打出弱效果）` : '');
+            : `费用 ${effCost}${costTip} · 点击出牌（悬停看完整描述）`;
     const badge = side === 'enemy' ? '<span class="bt-tt">[[icon:swords]]</span>'
       : side === 'self' ? '<span class="bt-tt">[[icon:heart]]</span>'
         : side === 'any' ? '<span class="bt-tt">[[icon:sparkles]]</span>' : '';
@@ -693,25 +699,26 @@ const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!car
     const baseCost = (g.card._baseCost != null) ? g.card._baseCost : g.card.cost;
     const costDiff = effCost !== baseCost;
     const costBadge = costDiff ? `<span class="bt-cost1 cost-mod ${effCost < baseCost ? 'mod-down' : 'mod-up'}" title="费用变化：按 ${effCost} 费打出（原 ${baseCost} 费）">[[icon:bolt]]${effCost}</span>` : '';
-    // 需求 #15：注能卡可直接打出，也可点「注能」角标进入注能流程（强化效果）
+    // 09-20 老板定版：注能卡点卡面即进注能态；角标保留作可见性提示（同入口）
     const infN = infuseOf(g.card);
     const infChip = (!infusingNow && !blocked && infN > 0)
       ? `<button class="bt-infchip" data-act="btInfuseStart" data-uid="${uid}"
-          title="注能(${infN})：选择 ${infN} 张手牌消耗，强化本牌效果（直接打出则用弱效果）">[[icon:crystal]] 注能${infN}</button>`
+          title="注能(${infN})：选 ${infN} 张手牌消耗强化本牌；注能条内也可「不注能直接打出」">[[icon:crystal]] 注能${infN}</button>`
       : '';
     const cnt = g.uids.length > 1 ? `<span class="bt-count" title="同名卡 ${g.uids.length} 张堆叠为一叠">×${g.uids.length}</span>` : '';
     // 诅咒之刃（2026-09-10 需求）：卡面实时显示手牌招式（武术+法术）提供的全部诅咒
+    // 09-20 老板：单个诅咒 chip 带 data-term，触摸弹 term-tips 讲解框（title 已被全局移除）
     const curseChip = (g.card.id === 'cc-cursed-blade' && typeof handCurseSpecs === 'function')
       ? (() => {
           const specs = handCurseSpecs();
           if (!specs.length) {
-            return `<div class="bt-cursechips empty" title="手牌中的招式当前没有可附加的诅咒"><span class="bt-cursechip-i none">无诅咒</span></div>`;
+            return `<div class="bt-cursechips empty"><span class="bt-cursechip-i none">无诅咒</span></div>`;
           }
           const items = specs.map(s => {
             const meta = Combat.CURSE_META[s.key] || { name: s.key, icon: '', stack: false, desc: '' };
-            return `<span class="bt-cursechip-i" title="${escAttr(meta.desc)}">${meta.icon}${meta.name}${meta.stack ? '×' + s.n : ''}</span>`;
+            return `<span class="bt-cursechip-i" data-term="${s.key}">${meta.icon}${meta.name}${meta.stack ? '×' + s.n : ''}</span>`;
           }).join('');
-          return `<div class="bt-cursechips" title="手牌招式提供的诅咒（实时）">${items}</div>`;
+          return `<div class="bt-cursechips">${items}</div>`;
         })()
       : '';
     const inner = SDT.Cards.cardHTML(g.card, 'sm', {
@@ -1090,9 +1097,9 @@ const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!car
         slot.addEventListener('mouseenter', () => {
           if (clickSelectedUid == null || slot.classList.contains('dead')) return;
           const entry = findCard(clickSelectedUid);
-          if (entry && targetSide(entry.card) === 'enemy') showFoePreview(slot, +slot.dataset.eidx, entry.card, getSnapshot());
+          if (entry && targetSide(entry.card) === 'enemy') showFoePreview(slot, +slot.dataset.eidx, clickSelectedUid, entry.card, 'click');
         });
-        slot.addEventListener('mouseleave', () => clearFoePreview(slot));
+        slot.addEventListener('mouseleave', () => { if (clickSelectedUid == null) clearFoePreview(slot); });
         foeSlots.set(key, rec);
       }
       const slot = rec.slot, parts = rec.parts, sig = rec.sig;
@@ -1102,7 +1109,8 @@ const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!car
       slot.classList.toggle('dead', !!f.dead);
       slot.classList.toggle('aegis', !!immune);
       const pendingCard = ctx.pendingTarget && findCard(ctx.pendingTarget.uid);
-      const cardTargetsEnemy = !!(pendingCard && targetSide(pendingCard.card) === 'enemy');
+      const clickCard = clickSelectedUid != null && findCard(clickSelectedUid);
+      const cardTargetsEnemy = !!((pendingCard && targetSide(pendingCard.card) === 'enemy') || (clickCard && targetSide(clickCard.card) === 'enemy'));
       slot.classList.toggle('can-target', !!(cardTargetsEnemy || ctx.pendingItem || ctx.slamPending || ctx.dartPending) && !f.dead);   // dartPending：血毒双镖二段点选也高亮（2026-09-17 留言）
       slot.dataset.foeId = f.id || f.name;
       slot.dataset.eidx = idx;
@@ -1110,6 +1118,9 @@ const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!car
       // 残留的指向预览气泡清掉（常驻节点上它不会随重建消失）
       const fp = slot.querySelector('.bt-fpreview');
       if (fp) fp.remove();
+      if (!f.dead && clickCard && targetSide(clickCard.card) === 'enemy') {
+        showFoePreview(slot, idx, clickSelectedUid, clickCard.card, 'click');
+      }
       // 冰冻敌人显示专用意图图标（2026-09-09 玩法定版）：冰冻中无法行动，
       // 用冰晶图标替换原攻击/蓄力预告，解冻后恢复正常意图显示
       const frozen = !f.dead && f.status && (f.status.freeze || 0) > 0;
@@ -1131,8 +1142,8 @@ const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!car
       // stats 行仅剩免伤提示（庇幕高亮本就有 aegis 类）；玩家名牌三行维持——equips 是老板定版技能按钮
       setSection(parts.head, sig, 'head',
         `<b>${esc(f.name)}</b>${f.dead ? ' <span class="bt-deadmark">[[icon:cross]]</span>' : ''}` +
-        `<span class="sts-atkbadge" title="攻击力${f.affix === 'frenzy' ? '（狂乱：每回合攻击 2 次）' : ''}">[[icon:swords]] ${f.atk}${f.affix === 'frenzy' ? '×2' : ''}</span>` +
-        (aff ? `<span class="bt-affix" title="${escAttr(aff.desc)}">${aff.icon} ${aff.name}</span>` : ''));
+        `<span class="sts-atkbadge"${f.affix === 'frenzy' ? ' data-term="frenzy"' : ''}>[[icon:swords]] ${f.atk}${f.affix === 'frenzy' ? '×2' : ''}</span>` +
+        (aff ? `<span class="bt-affix" data-term="${f.affix}">${aff.icon} ${aff.name}</span>` : ''));
       setUnitHP(parts, sig, f.hp, f.maxHp, !sig.init);
       setSection(parts.stats, sig, 'stats', immune ? '[[icon:crystal]] 庇幕免伤中' : '');
       setSection(parts.chips, sig, 'chips', curseChips(f.status, { compact: true }));
@@ -1847,7 +1858,20 @@ const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!car
       el.setAttribute('aria-pressed', 'false');
     });
     updateClickSelectionUI();
+    syncClickTargetPreviews();
     return true;
+  }
+  function syncClickTargetPreviews() {
+    const snapshot = getSnapshot();
+    const entry = clickSelectedUid == null ? null : findCard(clickSelectedUid);
+    document.querySelectorAll('.bt-foe[data-eidx]').forEach(el => {
+      clearFoePreview(el);
+      const idx = +el.dataset.eidx;
+      if (entry && targetSide(entry.card) === 'enemy' && snapshot.foes[idx] && !snapshot.foes[idx].dead) {
+        showFoePreview(el, idx, clickSelectedUid, entry.card, 'click');
+      }
+      el.classList.toggle('can-target', !!(entry && targetSide(entry.card) === 'enemy' && snapshot.foes[idx] && !snapshot.foes[idx].dead));
+    });
   }
   function updateClickSelectionUI() {
     const cap = document.querySelector('.sts-arena-caption span');
@@ -1865,6 +1889,9 @@ const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!car
     if (!entry) return;
     const why = unplayableReason(entry.card);
     if (why || effCostOf(entry.card, uid) > snap.energy) { play(uid); return; }
+    // 09-20 老板定版：注能卡点卡先进注能态（注能条内可改「不注能直接打出」）——
+    // 唯一敌人免选直打捷径对注能卡不适用，必须在选择锁定之前分流
+    if (infuseOf(entry.card) > 0) { play(uid); return; }
     const side = targetSide(entry.card);
     if (!side) { play(uid); return; }
     // STS2 TryWebClickPlay：指向敌人的卡在唯一敌人时免选目标，直接打出
@@ -1879,6 +1906,7 @@ const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!car
     const el = [...document.querySelectorAll('.sts-hand .bt-card')].find(x => x.dataset.uid === uid);
     if (el) { el.classList.add('click-selected'); el.setAttribute('aria-pressed', 'true'); }
     updateClickSelectionUI();
+    syncClickTargetPreviews();
   }
   function clickSelectedTarget(side, idx) {
     if (clickSelectedUid == null) return false;
@@ -2027,7 +2055,7 @@ const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!car
     const hit = targeting ? aimHoverAt(e.clientX, e.clientY, aim.side, aim.snap) : null;
     if (aim.hover && (!hit || hit.el !== aim.hover.el)) aimClearHover();
     if (hit) {
-      if (hit.kind === 'enemy') { hit.el.classList.add('drag-over'); showFoePreview(hit.el, hit.idx, aim.card, aim.snap); }
+      if (hit.kind === 'enemy') { hit.el.classList.add('drag-over'); showFoePreview(hit.el, hit.idx, aim.uid, aim.card, 'drag'); }
       else hit.el.classList.add('drop-here');
       aim.hover = hit;
     }
@@ -2134,47 +2162,44 @@ const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!car
   }
 
   // ---------- 指向悬停效果预览（松手前暗示打出结果；card = 指向中的卡） ----------
-  // snap 可传入指向期间缓存的快照（见 startAim），避免拖拽路径反复重建快照
-  function showFoePreview(el, idx, card, snap) {
-    if (el.querySelector('.bt-fpreview')) return;   // 已显示则不重建（move 连续触发）
-    const snapshot = snap || getSnapshot();
+  function showFoePreview(el, idx, uid, card, interactionMode) {
+    // 气泡每次都用同一时刻的当前快照/上下文重算，避免拖拽缓存与新 core 状态混用。
+    const existing = el.querySelector('.bt-fpreview');
+    const previousMode = existing && existing.dataset.previewMode;
+    if (existing) existing.remove();
+    const snapshot = getSnapshot();
     const foe = snapshot.foes[idx];
     const useCard = card || (snapshot.pendingTarget && snapshot.pendingTarget.card) || null;
     if (!foe || foe.dead || !useCard) return;
-    const desc = String(useCard.desc || '');
-    const tm = desc.match(/(?:攻击|命中)\s*(\d+)\s*次/) || desc.match(/(\d+)\s*段/);
-    const times = tm ? Math.max(1, +tm[1]) : 1;
-    let main, sub = '';
-    if (aegisBlocked(foe)) {
-      main = '[[icon:crystal]] 将被元素庇幕完全减免';
-      sub = '先挂「破甲」再打才能造成伤害';
+    const context = getPreviewContext(uid || (snapshot.pendingTarget && snapshot.pendingTarget.uid), idx);
+    if (!context) return;
+    const result = previewAction({ snapshot, action: { kind: 'play-card', uid: uid || snapshot.pendingTarget?.uid, targetIndex: idx }, cardContext: context });
+    let main, sub;
+    if (!result.legal || !result.damage) {
+      main = '[[icon:question]] 伤害预览：无法精算';
+      sub = [`费${result.cost}`, result.reasons.join(' · ') || '当前效果超出可证明范围'].join(' · ');
     } else {
-      const type = SDT.Cards.DMG_TYPE_META[useCard.dmgType] ? useCard.dmgType : Combat.TYPES.FIXED;
-      const amount = +useCard.dmg || 0;
-      // 预览结算（克隆快照，不改动真实状态）
-      const snap = { hp: foe.hp, status: Object.assign({}, foe.status),
-        defense: { shield: foe.defense.shield, armor: foe.defense.armor, guard: foe.defense.guard } };
-      const r = Combat.previewDamage({
-        atk: snapshot.player.atk,
-        spellPower: snapshot.player.spellPower,
-        // 法术强化祝福计入预览（口径同 dealDamage：spellPower + status.spellUp）
-        status: (snapshot.pstat && snapshot.pstat.status) || undefined,
-      }, snap, amount, type);
-      if (r.stealthed) {
-        main = `[[icon:runner]] <b>${esc(foe.name)}</b> 潜行中——伤害无法命中`;
-        sub = '等潜行结束，或先用非伤害卡过渡';
-      } else {
-        const total = r.dealt * times;
-        main = `[[icon:bolt]] 预计造成 <b>${total}</b> 点${Combat.TYPE_NAME[type]}` + (times > 1 ? `（${r.dealt} × ${times} 段）` : '');
-        sub = r.log.length ? r.log.join(' · ') : '无加成';
-        if (foe.hp - total <= 0) { main = `[[icon:skull]] 预计击倒 ${esc(foe.name)}！`; }
-      }
+      const d = result.damage;
+      const segments = d.hits.length > 1 ? `（${d.hits.join(' + ')}）` : '';
+      main = d.lethal
+        ? `[[icon:skull]] 精确伤害：<b>${d.total}</b> ${segments}，将击倒 ${esc(foe.name)}`
+        : `[[icon:bolt]] 精确伤害：<b>${d.total}</b> 点${Combat.TYPE_NAME[d.type]} ${segments}`;
+      const details = [`费${result.cost}`];
+      if (d.blockedBy === 'aegis') details.push('元素庇幕完全减免');
+      if (d.blockedBy === 'protected') details.push('存活护卫者庇护，伤害偏转');
+      if (d.shieldBefore !== d.shieldAfter) details.push(`护盾 ${d.shieldBefore}→${d.shieldAfter}`);
+      if (d.armorBefore !== d.armorAfter) details.push(`护甲 ${d.armorBefore}→${d.armorAfter}`);
+      if (d.dodgeBefore !== d.dodgeAfter) details.push(`闪避 ${d.dodgeBefore}→${d.dodgeAfter}`);
+      details.push(...d.notes);
+      if (result.unknownEffects.length) details.push(...result.unknownEffects);
+      sub = [...new Set(details)].join(' · ') || '无伤害修正';
     }
     const div = document.createElement('div');
     div.className = 'bt-fpreview';
-    div.innerHTML = `<b>${main}</b><span>${sub}</span><span class="bt-fpreview-tip">—— 松手打出 ——</span>`;
+    div.dataset.previewMode = interactionMode || 'drag';
+    div.innerHTML = `<b>${main}</b><span>${esc(sub)}</span><span class="bt-fpreview-tip">—— ${interactionMode === 'click' ? '点击该敌人打出' : '松手打出'} ——</span>`;
     el.appendChild(div);
-    SDT.Sound.sfx('hover');
+    if (interactionMode !== 'click' && previousMode !== interactionMode) SDT.Sound.sfx('hover');
   }
   function clearFoePreview(el) {
     const p = el.querySelector('.bt-fpreview');

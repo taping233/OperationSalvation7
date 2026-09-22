@@ -39,6 +39,7 @@ const DEV_NODE_LABEL = {
   'chest-large': '大宝箱', event: '事件', fire: '火堆', altar: '祭坛',
 };
 
+
 function devEnsureRun() {
   if (game.battleActive) { UI.log('[[icon:lock]] 战斗进行中——先打完或退出战斗再跳节点', 'warn'); return false; }
   if (game.runActive) return true;
@@ -83,6 +84,10 @@ function openDevConsole() {
     return q ? SDT.Cards.all().filter(card => (card.name || '').toLowerCase().includes(q)).slice(0, 8) : [];
   };
   const devBattle = () => !!(game.battleActive && SDT.Battle?.commands?.dev);
+  const routeInfo = () => {
+    const plan=game.routePlan || {};
+    return `mapSeed=${esc(game.mapSeed ?? '—')} · snapshot=${esc(game.routeVersion ? 'v2' : 'v1')} · routeVersion=${esc(game.routeVersion ?? 'none')} · status=${esc(plan.status ?? 'legacy')} · fallbackReason=${esc(plan.fallbackReason ?? 'none')}`;
+  };
   const hitsHTML = () => {
     const hits = hitCards();
     return hits.length ? hits.map((card, i) => `<button class="hs-btn sm devc-hit" data-act="devcCard" data-i="${i}">【${esc(card.name)}】· ${esc(card.type)} · ${esc(card.rarity || '')}</button>`).join('') : '<span class="dim">输入卡名后点结果发卡（同名堆叠规则照常生效）</span>';
@@ -94,6 +99,7 @@ function openDevConsole() {
   const render = () => {
     UI.showOverlay('[[icon:tools]] 开发者控制台', `
       <p class="ov-note">调试用面板（Ctrl+L 开关）——修改会立即写入本局存档，别在正经挑战里用。</p>
+      <p class="ov-note" data-route-debug>${routeInfo()}</p>
       <div class="devc-grid">
         <section class="devc-sec"><b class="devc-h">资源</b><div class="devc-row">
           <button class="hs-btn" data-act="devcCoin" data-n="50">+50 币</button><button class="hs-btn" data-act="devcCoin" data-n="200">+200 币</button>

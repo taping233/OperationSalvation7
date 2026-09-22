@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>M05 独立档位验收准备</title>
+<style>body{font:18px/1.7 system-ui;background:#172328;color:#eee;max-width:900px;margin:50px auto;padding:24px}button,a{display:inline-block;padding:14px;margin:8px;color:inherit;background:#395057;border:1px solid #bda46c}pre{white-space:pre-wrap}</style>
+<h1>M05 独立档位验收准备</h1>
+<p>仅在档位 05 的基地和对局都不存在时建立测试夹具：20 储备币、2 张当前卡库的飞刃偷袭。不会修改档位 01—04，也不会覆盖已存在的档位 05。</p>
+<p>这是验收初始条件，不是正常游戏奖励。购买、摆放、收藏、展示及重开全部在游戏原界面执行；本页不代执行任何这些操作。</p>
+<button id="prepare" disabled>建立空档 05 验收夹具</button>
+<a href="/" target="_blank">打开实际游戏进行验收</a>
+<button id="inspect">只读检查结果</button>
+<pre id="result">正在加载当前规则…</pre>
+<script type="module">
+window.SDT ||= { Icons: { img: () => '' } };
+await import('../../../game/src/cards.js');
+await import('../../../game/src/base.commands.js');
+const output = document.getElementById('result');
+const Base = window.SDT.Base;
+window.SDT.Cards.ensureTabletop();
+const protectedKeys = Array.from({length:4},(_,i)=>i+1).flatMap(i=>[`sdt-base-v2-slot${i}`,`sdt-save-v2-slot${i}`]);
+const original = Object.fromEntries(protectedKeys.map(key=>[key,localStorage.getItem(key)]));
+const summarize = () => {
+ const data=JSON.parse(localStorage.getItem('sdt-base-v2-slot5') || 'null');
+ output.textContent=JSON.stringify({otherSlotsUnchanged:protectedKeys.every(key=>localStorage.getItem(key)===original[key]),
+  slot5:data && {coins:data.coins,stash:data.stash?.map(s=>({id:s.card.id,name:s.card.name,count:s.count})),
+  collection:data.collection,characters:data.characters,home:data.home,goals:data.goals,appearance:data.appearance}},null,2);
+};
+document.getElementById('inspect').onclick=summarize;
+document.getElementById('prepare').disabled=false;
+document.getElementById('prepare').onclick=()=>{
+ if(localStorage.getItem('sdt-base-v2-slot5')!==null || localStorage.getItem('sdt-save-v2-slot5')!==null){output.textContent='拒绝：档位 05 已有数据，未覆盖。';return;}
+ const card=window.SDT.Cards.all().find(c=>c.id==='tt7-throwblade');
+ if(!card){output.textContent='缺少当前卡库样本，未建档。';return;}
+ Base.use(5);
+ Base.data.coins=20;
+ Base.data.stash=[{card:structuredClone(card),count:2}];
+ const ok=Base.save();
+ if(!ok){output.textContent='测试档保存失败。';return;}
+ document.getElementById('prepare').disabled=true;
+ summarize();
+};
+summarize();
+</script></html>

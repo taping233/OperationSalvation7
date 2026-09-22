@@ -8,6 +8,8 @@ import { DATA } from './data-loader.js';
   const LEGACY_KEY = 'sdt-base-v1';   // 旧版全局基地（v0.20 及之前），启动时迁移
   // 坏档备份键：解析失败时原串转存于此（基地是跨局数据，损坏比对局档更严重）
   const CORRUPT_KEY = (i) => 'sdt-base-' + i + '-corrupt';
+  const TX_KEY = (i) => 'sdt-tx-v1-slot' + i;
+  const txPending = (i) => { try { return localStorage.getItem(TX_KEY(i)) !== null; } catch { return true; } };
   // 基地 schema 版本：破坏性变更时 +1 并在 BASE_MIGRATIONS 补纯函数迁移
   const BASE_VERSION = 2;
   const BASE_MIGRATIONS = {
@@ -16,7 +18,8 @@ import { DATA } from './data-loader.js';
     1: (s) => {
       s.pets = (s.pets && typeof s.pets === 'object') ? s.pets : {};
       if (!Object.keys(s.pets).length) {
-        s.pets.dog = { lv: Math.max(1, Math.min(5, 1 + (s.safeUp || 0))), ts: Date.now() };
+        // 迁移必须可重复；历史数据没有获得时间时使用稳定哨兵值，不能每次读取写入新时间。
+        s.pets.dog = { lv: Math.max(1, Math.min(5, 1 + (s.safeUp || 0))), ts: 0 };
       }
       if (!s.petSel || !s.pets[s.petSel]) s.petSel = Object.keys(s.pets)[0] || 'dog';
       return s;
@@ -80,6 +83,14 @@ import { DATA } from './data-loader.js';
       // ---- 卡背（v0.21）：backs 解锁表 + backSel 当前装备；默认卡背恒解锁 ----
       backs: { classic: true },
       backSel: 'classic',
+      // ---- 模块化基地字段（M01 v1） ----
+      // 旧收藏、职业经验与仓库仍保留在原字段；这里不复制其真源。
+      home: { owned: {}, placements: [], displays: [] },
+      appearance: { characterSkins: {}, selectedSkins: {} },
+      goals: { tracked: [], presets: {} },
+      story: { flags: {}, outcomes: {} },
+      // M01 内部提交元数据；领域模块通过 readBase/commitBase 使用，不直接修改。
+      _m01: { revision: 0, requests: {} },
     };
   }
 
@@ -119,6 +130,9 @@ import { DATA } from './data-loader.js';
     if (!d.backs || typeof d.backs !== 'object') d.backs = { classic: true };
     d.backs.classic = true;   // 默认卡背永远可用
     if (!d.backSel || !d.backs[d.backSel]) d.backSel = 'classic';
+    if (!d._m01 || typeof d._m01 !== 'object') d._m01 = { revision: 0, requests: {} };
+    if (!Number.isInteger(d._m01.revision) || d._m01.revision < 0) d._m01.revision = 0;
+    if (!d._m01.requests || typeof d._m01.requests !== 'object' || Array.isArray(d._m01.requests)) d._m01.requests = {};
     return migrateCharacterProgress(d);
   }
 
@@ -130,7 +144,7 @@ import { DATA } from './data-loader.js';
   function parseRaw(i) {
     let raw = null;
     try { raw = localStorage.getItem(SLOT_KEY(i)); } catch (e) { return null; }
-    if (raw == null) { peekCache.delete(i); return null; }
+    if (raw == null) { peekCache.delete(i); delete issues[i]; return null; }
     const hit = peekCache.get(i);
     if (hit && hit.raw === raw) return hit.parsed;
     let s;
@@ -169,10 +183,12 @@ import { DATA } from './data-loader.js';
       const legacy = localStorage.getItem(LEGACY_KEY);
       if (!legacy) return;
       const targets = (Array.isArray(existingSlots) && existingSlots.length) ? existingSlots : [1];
+      if (targets.some(txPending)) return false;
       targets.forEach(i => {
         if (!localStorage.getItem(SLOT_KEY(i))) localStorage.setItem(SLOT_KEY(i), legacy);
       });
       localStorage.removeItem(LEGACY_KEY);
+      return true;
     } catch (e) { /* 存储不可用时静默 */ }
   }
 
@@ -197,8 +213,18 @@ import { DATA } from './data-loader.js';
   let saveWarned = false;
   function save() {
     if (!slot) return true;   // 未选档不落盘（标题界面的数据只读）
+    if (txPending(slot)) return false;
+    // 损坏档／未来版本只允许显式 reset 覆盖，普通旧流程不得把兜底默认值写回原键。
+    if (issue(slot)) return false;
     try {
-      localStorage.setItem(SLOT_KEY(slot), JSON.stringify({ ...data, version: BASE_VERSION }));
+      const revision = ((data._m01 && data._m01.revision) || 0) + 1;
+      const next = { ...data, version: BASE_VERSION,
+        _m01: { ...(data._m01 || {}), revision, requests: { ...((data._m01 && data._m01.requests) || {}) } } };
+      const raw = JSON.stringify(next);
+      localStorage.setItem(SLOT_KEY(slot), raw);
+      data.version = BASE_VERSION;
+      data._m01 = next._m01;
+      peekCache.set(slot, { raw, parsed: next });
       delete issues[slot];
       saveWarned = false;
       try { localStorage.removeItem(CORRUPT_KEY(slot)); } catch (e) { /* 无关紧要 */ }
@@ -217,11 +243,13 @@ import { DATA } from './data-loader.js';
   // 重开档位：基地回到初始状态（覆盖开新档 / 空档开新档时调用）
   // 新档案仓库预置 5 张随机卡牌（按稀有度权重抽取，不重复），让第一局就有牌可带
   function reset(s) {
+    if (txPending(s)) return false;
     slot = s;
+    delete issues[s]; // reset 是玩家明确的新开档动作，允许覆盖先前不可读档。
     data = def();
     ensureStarterPet();
     seedStarterStash();
-    save();
+    return save();
   }
 
   function seedStarterStash() {
@@ -260,8 +288,32 @@ import { DATA } from './data-loader.js';
   // 只读概览：读取某档位的基地数据但不切换当前档位（选档界面展示用）
   function peek(i) { const raw = parseRaw(i); return raw ? adopt(raw) : null; }
 
+  // M01 命令门面的内部窄接口。领域/UI 不应直接调用；单键写成功后才替换当前内存。
+  function _readForCommit(i) {
+    const raw = parseRaw(i);
+    return raw ? adopt(raw) : (issue(i) ? null : def());
+  }
+  function _writeCommitted(i, next) {
+    if (txPending(i)) throw new Error('pending cross-key transaction');
+    const normalized = adopt(next);
+    normalized.version = BASE_VERSION;
+    const raw = JSON.stringify(normalized);
+    localStorage.setItem(SLOT_KEY(i), raw);
+    peekCache.set(i, { raw, parsed: normalized });
+    delete issues[i];
+    try { localStorage.removeItem(CORRUPT_KEY(i)); } catch (e) { /* 无关紧要 */ }
+    if (slot === i) data = normalized;
+    return normalized;
+  }
+  function _refreshExternal(i) {
+    peekCache.delete(i);
+    const raw = parseRaw(i);
+    if (raw && slot === i) data = adopt(raw);
+    return raw ? adopt(raw) : null;
+  }
+
   // 删除某档位的基地数据
-  function wipe(i) { try { localStorage.removeItem(SLOT_KEY(i)); } catch (e) { /* 静默 */ } }
+  function wipe(i) { if (txPending(i)) return false; try { localStorage.removeItem(SLOT_KEY(i)); return true; } catch (e) { return false; } }
   const hasSlot = (i) => { try { return !!localStorage.getItem(SLOT_KEY(i)); } catch (e) { return false; } };
 
   // ---------- 卡背（v0.21） ----------
@@ -528,6 +580,7 @@ import { DATA } from './data-loader.js';
     SLOT_KEY, LEGACY_KEY,
     migrateLegacy, use, save, reset, peek, wipe, hasSlot,
     issue, CORRUPT_KEY, BASE_VERSION,
+    _readForCommit, _writeCommitted, _refreshExternal,
     get slot() { return slot; },
     get data() { return data; },
     bagCap, safeCap, stashCap, stashUsed, stashRoom,

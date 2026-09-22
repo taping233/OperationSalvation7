@@ -1,9 +1,9 @@
-/* 回归测试（2026-09-19 老板 bug）：节点离开进入新节点后，返回旧节点不得再次触发内容。
+/* 回归测试（2026-09-20 老板定版）：节点完成结算后立即变普通；未触发退出仍可重进；商店离开才消耗。
  * 地图边是双向的（map-generator addEdge 双向登记），走回头路是合法移动——
  * 此前 resolveCell 无 visited 拦截，返回旧格会重刷宝箱/火堆/事件等。
  * 口径：
- *   1) 站在格上 reenterCell() 仍可反复重开（2026-09-19 留言 #24）；
- *   2) 离开过的可消耗格（visited，由 moveTo 离开时补写）再踏入不触发，状态回 idle。
+ *   1) 收益节点完成领取即写 visited，站在格上也不能重刷；
+ *   2) 商店关闭后仍可重开，离开商店格时才写 visited。
  * 场景用固定种子 20260919 第 1 层的直线图：0入口 1战斗 2商店 3宝箱 4火堆 5战斗 6门；
  * enterLayer 落位不触发内容，正好构造「站在宝箱格」的起点。 */
 import { describe, it, expect, beforeAll } from 'vitest';
@@ -68,7 +68,7 @@ async function sweep(max = 120) {
     await tick(30);
     if (game.state === 'idle') return;
     for (const act of ['flowContinue', 'chestTake', 'chestPick', 'chestSkip', 'pickupGo', 'closeShop',
-      'blankSafeDone', 'evtNext', 'resPick0', 'resSkip', 'fireDone', 'stayHere', 'goDoor']) {
+      'blankSafeDone', 'evtNext', 'evtChoice', 'resPick0', 'resSkip', 'fireDone', 'stayHere', 'goDoor']) {
       if (clickAct(act)) break;
     }
   }
@@ -82,7 +82,7 @@ const typeOfLocal = (li, idx) => {
   return c && c.def ? c.def.type : 'blank';
 };
 
-describe('节点离开后返回不得重复触发（2026-09-19 bug 回归）', () => {
+describe('节点完成/离开后的消耗时机（2026-09-20 定版）', () => {
   beforeAll(async () => {
     newRun(20260919, 'standard', []);
     await tick(50);
@@ -91,7 +91,7 @@ describe('节点离开后返回不得重复触发（2026-09-19 bug 回归）', (
     game.state = 'idle';
   });
 
-  it('站在格上可重开；离开后返回不触发', async () => {
+  it('收益完成即锁；商店离开才锁；返回均不重复触发', async () => {
     // 层内类型布局按局随机（newRun 不接种子，Random.reseed() 每局重摇），
     // 动态选目标格：优先宝箱/物资格（收益可计数），兜底商店（页面可观测），
     // 且其邻格存在可正常结算的格子（避开战斗/门/祭坛/首脑/撤离点）。
@@ -99,7 +99,7 @@ describe('节点离开后返回不得重复触发（2026-09-19 bug 回归）', (
     const li = 0;
     const sweepable = t => !['battle', 'door', 'extraction', 'altar', 'boss', 'emergencyExit'].includes(t);
     const neighborsOf = idx => (game.layerData[li].logical[idx].next || []).filter(([l]) => l === li).map(([, i]) => i);
-    const LOOT_TYPES = ['chest', 'coin', 'wood', 'rations', 'key'];
+    const LOOT_TYPES = ['chest', 'coin', 'wood', 'rations', 'key', 'resource'];
     let cellIdx = -1, leaveIdx = -1, kind = '';
     for (const want of [LOOT_TYPES, ['shop']]) {
       for (let i = 0; i < game.layerData[li].logical.length; i++) {
@@ -117,15 +117,27 @@ describe('节点离开后返回不得重复触发（2026-09-19 bug 回归）', (
     const vKey = li + ',' + cellIdx;
     expect(game.visited[vKey]).toBeFalsy();   // 踩格不写 visited（留言 #24）
 
-    // 站在格上重开（留言 #24 口径保持）：内容再次触发
+    // 第一次进入并完成结算。
     const loot1 = lootCount();
     expect(reenterCell()).toBe(true);
     await sweep();
     expect(game.state).toBe('idle');
-    if (kind !== 'shop') expect(lootCount(), `${kind} 格重开应再入账`).toBeGreaterThan(loot1);
-    expect(game.visited[vKey]).toBeFalsy();   // 重开不写 visited
+    if (kind !== 'shop') {
+      expect(lootCount(), `${kind} 格领取应入账`).toBeGreaterThan(loot1);
+      expect(game.visited[vKey]).toBe(1);     // 收益完成立即消耗
+      const settledLoot = lootCount();
+      expect(reenterCell()).toBe(true);
+      await sweep();
+      expect(lootCount(), `${kind} 格完成后站在原地也不得重刷`).toBe(settledLoot);
+      expect(document.body.textContent).toContain('已完成结算');
+    } else {
+      expect(game.visited[vKey]).toBeFalsy(); // 关闭商店尚未离开，仍可重逛
+      expect(reenterCell()).toBe(true);
+      await sweep();
+      expect(game.visited[vKey]).toBeFalsy();
+    }
 
-    // 走去邻格：离开本格（moveTo 此刻补写 visited）
+    // 走去邻格：商店在此刻补写 visited；收益节点保持已完成。
     expect(moveTo(li, leaveIdx)).toBe(true);
     await sweep();
     expect(game.state).toBe('idle');
@@ -138,6 +150,51 @@ describe('节点离开后返回不得重复触发（2026-09-19 bug 回归）', (
     expect(game.state).toBe('idle');
     expect(game.trackPos).toBe(cellIdx);
     if (kind !== 'shop') expect(lootCount(), `${kind} 格返回后不得再入账`).toBe(loot2);
-    expect(document.body.textContent).toContain('该节点已被消耗');
+    expect(document.body.textContent).toContain('已完成结算');
+  });
+
+  it('物资格有独立场景层；暂不领取可重进，领取后立即变普通', async () => {
+    newRun(20260920, 'standard', []);
+    await tick(30);
+    game.myClass = '战士'; game.characterId = 'heixiang'; game.state = 'idle';
+    const li = 0;
+    const idx = game.layerData[li].logical.findIndex(cell => (cell.next || []).some(([nextLi]) => nextLi === li));
+    expect(idx).toBeGreaterThanOrEqual(0);
+    game.layerData[li].logical[idx].def = { type: 'resource' };
+    enterLayer(li, idx);
+    const key = `${li},${idx}`;
+
+    expect(reenterCell()).toBe(true);
+    await tick(30);
+    expect(document.querySelector('.node-pg[data-asset-key="scene-event-airdrop"]')).toBeTruthy();
+    expect(clickAct('resSkip')).toBe(true);
+    await tick(30);
+    expect(game.visited[key]).toBeFalsy();
+
+    expect(reenterCell()).toBe(true);
+    await tick(30);
+    expect(clickAct('resPick0')).toBe(true);
+    await sweep();
+    expect(game.visited[key]).toBe(1);
+  });
+
+  it('商店关闭不消耗，离开所在格才变普通', async () => {
+    newRun(20260921, 'standard', []);
+    await tick(30);
+    game.myClass = '战士'; game.characterId = 'heixiang'; game.state = 'idle';
+    const li = 0;
+    const idx = game.layerData[li].logical.findIndex(cell => (cell.next || []).some(([nextLi]) => nextLi === li));
+    const nextIdx = game.layerData[li].logical[idx].next.find(([nextLi]) => nextLi === li)[1];
+    game.layerData[li].logical[idx].def = { type: 'shop' };
+    game.layerData[li].logical[nextIdx].def = undefined;
+    enterLayer(li, idx);
+    const key = `${li},${idx}`;
+
+    expect(reenterCell()).toBe(true);
+    await sweep();
+    expect(game.visited[key]).toBeFalsy();
+    expect(moveTo(li, nextIdx)).toBe(true);
+    await sweep();
+    expect(game.visited[key]).toBe(1);
   });
 });

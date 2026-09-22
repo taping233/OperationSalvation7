@@ -126,8 +126,13 @@ export function createEffectSteps(deps) {
   return [
     /* ============ 前置改写与门控（旧实现顶部） ============ */
     {
+      id: 'gate.infuseRequired', gate: 'always', label: '未注能时跳过纯注能效果句',
+      when: (ctx) => ctx.flags.infused !== true && /^注能\s*[（(][^）)]*[）)][：:]?/.test(ctx.desc),
+      run: () => HALT(FRESH_RESULT(false)),
+    },
+    {
       id: 'pre.infuseLead', gate: 'always', label: '「注能(N)：效果」前缀剥离',
-      when: (ctx) => ctx.desc.match(/^注能\s*[（(][^）)]*[）)][：:]?\s*(.+)$/),
+      when: (ctx) => ctx.flags.infused === true ? ctx.desc.match(/^注能\s*[（(][^）)]*[）)][：:]?\s*(.+)$/) : null,
       run: (ctx, m) => { ctx.infLead = m; ctx.desc = m[1]; },
     },
     {
@@ -653,8 +658,10 @@ export function createEffectSteps(deps) {
       when: (ctx) => ctx.desc.match(/避开第\s*(\d+)\s*段伤害/),
       run: (ctx, m) => {
         const n = +m[1] || 1;
-        combat.addBlessing(ctx.pstat, 'reduce', n, 1);
-        log(`[[icon:shield]] <b>闪避</b>：本回合受到的伤害 -${n}`, 'ok');
+        // 09-20 老板定版：闪避=免疫下一次攻击（完整避开该段伤害），不是获得减伤——
+        // dodge 祝福按层计数每层挡 1 次攻击；「本回合」口径沿用 turns=1 回合末过期
+        combat.addBlessing(ctx.pstat, 'dodge', n, 1);
+        log(`[[icon:shield]] <b>闪避</b>：接下来 ${n} 次攻击将被完全避开${n > 1 ? '（各消耗 1 层）' : ''}`, 'ok');
         ctx.did = true;
       },
     },

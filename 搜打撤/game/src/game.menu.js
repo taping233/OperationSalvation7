@@ -1,8 +1,9 @@
+import { appendLocalFeedback, downloadFeedbackRecord, readLocalFeedback } from './feedback.local.js';
 /* 标题、选档、离开与设置页面流程。只通过注入端口调用会话能力。 */
 function createGameMenuController(deps) {
   const {
     SDT, UI, game, runtime, SLOT_COUNT, esc, readSlot, loadGame, clearSlot,
-    saveGame, syncPlayTime, clearSave, clearAllSlots, getActiveSlot, setActiveSlot,
+    saveGame, syncPlayTime, clearSave, clearAllSlots, getActiveSlot, setActiveSlot, preflightRunMap,
     hasRun, RunStorage, ensureBattleReady = async () => SDT.Battle,
   } = deps;
 
@@ -115,6 +116,10 @@ function createGameMenuController(deps) {
       const modeName = { page: '全屏页', battle: '战斗弹层', bag: '背包弹层', bagpage: '背包页', chest: '宝箱浮层', scene: '场景弹层', wide: '宽幅弹层' }[UI._lastMode] || '弹层';
       return { id: 'mode:' + (UI._lastMode || ''), name: modeName };
     }
+    // 设置→留言库→返回设置的旧状态恢复会留下 idle，但标题屏本身仍真实可见。
+    // 页面识别以可见 DOM 为准，同时保留正常 state:title 的稳定 id。
+    const title = document.getElementById('title');
+    if (title && !title.hidden && !title._scrHiding) return { id: 'state:title', name: '标题页' };
     const stateName = { boot: '启动', title: '标题页', idle: '对局地图', moving: '对局移动中', modal: '弹层页面', done: '结算页', bossCleanup: 'BOSS 收尾' }[game.state] || game.state;
     return { id: 'state:' + (game.state || ''), name: stateName };
   }
@@ -182,20 +187,16 @@ function createGameMenuController(deps) {
   // ---------- 首页留言：右键任意位置写给 Friday 的建议 ----------
   // 桌面版经 Electron IPC 写入仓库 output/suggestions.json；浏览器版退回 localStorage。
   // 每条建议携带 page（所在页面/弹层）、target（右键命中的 UI 位置）与 at（屏幕百分比坐标）。
-  async function saveSuggestion(text, target, at, page) {
-    const entry = { ts: new Date().toISOString(), page: page || null, target: target || null, at: at || null, text };
+  async function saveSuggestion(fields, target, at, page) {
+    const entry = { ts: new Date().toISOString(), version: document.getElementById('gameVersion')?.textContent?.trim() || '未知',
+      page: page || null, target: target || null, at: at || null, ...fields };
     if (window.sdtDesktop?.appendSuggestion) {
       try {
         const result = await window.sdtDesktop.appendSuggestion(entry);
         return result === true || result?.ok === true;
       } catch (_) { return false; }
     }
-    try {
-      const list = JSON.parse(localStorage.getItem('sdt-suggestions-v1') || '[]');
-      list.push(entry);
-      localStorage.setItem('sdt-suggestions-v1', JSON.stringify(list));
-      return true;
-    } catch (_) { return false; }
+    return appendLocalFeedback(entry).ok;
   }
 
   function openSuggestionBox(target, at, page) {
@@ -203,26 +204,36 @@ function createGameMenuController(deps) {
     if (!layer || !layer.hidden) return;   // 已打开则忽略
     const prevState = game.state;
     game.state = 'modal';                  // 暂停对局输入，返回时恢复
-    document.getElementById('sugHead').innerHTML = SDT.Icons.rich('[[icon:book]] 写建议给 Friday');
+    document.getElementById('sugHead').innerHTML = SDT.Icons.rich('[[icon:book]] 记录试玩反馈');
     document.getElementById('sugWhere').innerHTML = target
-      ? `针对位置：<b>${esc(target.name)}</b> <code style="color:#9a9a9a">${esc(target.selector || '')}</code>${at ? `（屏幕 ${at.x}%, ${at.y}%）` : ''}`
+      ? `针对位置：<b>${esc(target.name)}</b>${at ? `（屏幕 ${at.x}%, ${at.y}%）` : ''}`
       : '';
     const ta = document.getElementById('sugText');
-    ta.value = '';
+    const fields = ['sugText', 'sugSteps', 'sugExpected', 'sugActual'].map(id => document.getElementById(id));
+    fields.forEach(el => { el.value = ''; });
     layer.hidden = false;
-    const close = () => { UI.hideScreen(layer, () => { game.state = prevState; }); };
+    const token = Symbol('suggestion'); layer._openToken = token;
+    const saveBtn = document.getElementById('sugSaveBtn'); saveBtn.disabled = false;
+    const close = () => { if (layer._openToken !== token) return; layer._openToken = null; UI.hideScreen(layer, () => { if (layer._openToken === null) game.state = prevState; }); };
     document.getElementById('sugCancelBtn').onclick = close;
-    document.getElementById('sugSaveBtn').onclick = async () => {
+    let busy = false;
+    saveBtn.onclick = async () => {
+      if (busy || layer._openToken !== token) return;
       const text = ta.value.trim();
       if (!text) return;
-      const ok = await saveSuggestion(text, target, at, page);
+      busy = true; saveBtn.disabled = true;
+      const payload = { text, steps: fields[1].value.trim(), expected: fields[2].value.trim(), actual: fields[3].value.trim() };
+      let ok = false;
+      try { ok = await saveSuggestion(payload, target, at, page); }
+      catch { ok = false; }
+      if (layer._openToken !== token) return;
+      busy = false; saveBtn.disabled = false;
       document.getElementById('sugWhere').innerHTML = ok
-        ? '建议已记录，Friday 会看到，谢谢老板！'
-        : '写入失败，可稍后再试。';
-      if (ok) ta.value = '';
-      setTimeout(close, ok ? 900 : 1500);
+        ? '已保存在本浏览器。请到设置 → 留言库导出此条 JSON，再交给制作者。'
+        : '写入失败，输入已保留，请重试。';
+      if (ok) fields.forEach(el => { el.value = ''; });
     };
-    setTimeout(() => ta.focus(), 0);
+    setTimeout(() => { if (layer._openToken === token) ta.focus(); }, 0);
   }
 
   // ---------- 留言库：设置页入口，查看历史留言与完成状态，未完成的可删除 ----------
@@ -235,7 +246,8 @@ function createGameMenuController(deps) {
         if (r?.ok && Array.isArray(r.list)) return r.list;
       } catch (_) { /* 落回 localStorage */ }
     }
-    try { return JSON.parse(localStorage.getItem('sdt-suggestions-v1') || '[]'); } catch (_) { return []; }
+    const read = readLocalFeedback();
+    return read.ok ? read.value : read;
   }
 
   async function removeSuggestion(ts) {
@@ -260,7 +272,7 @@ function createGameMenuController(deps) {
   };
 
   let sugCache = null;   // 留言库打开期间的数据副本，删除后本地同步
-  function sugRowHTML(e, done) {
+  function sugRowHTML(e, done, index) {
     const page = e?.page?.name || (e?.target?.name ? String(e.target.name).split(' · ')[0] : '未知位置');
     const where = e?.target?.name || '';
     return `<div class="sugin-row${done ? ' done' : ''}">
@@ -268,9 +280,14 @@ function createGameMenuController(deps) {
         <span class="sugin-mark">${done ? '[[icon:check]]' : '[[icon:book]]'}</span>
         <span class="sugin-time">${fmtSugTime(e?.ts)}</span>
         <span class="sugin-page-name">${esc(page)}</span>
+        <button class="mini-btn" data-act="sugExport" data-idx="${index}">导出此条</button>
         ${done ? '' : `<button class="mini-btn danger sugin-del" data-act="sugDel" data-ts="${esc(e?.ts || '')}">删除</button>`}
       </div>
       <div class="sugin-text">${esc(e?.text || '')}</div>
+      <div class="sugin-where">版本：${esc(e?.version || '未知')}</div>
+      ${e?.steps ? `<div class="sugin-detail"><b>复现步骤</b>${esc(e.steps)}</div>` : ''}
+      ${e?.expected ? `<div class="sugin-detail"><b>期望结果</b>${esc(e.expected)}</div>` : ''}
+      ${e?.actual ? `<div class="sugin-detail"><b>实际结果</b>${esc(e.actual)}</div>` : ''}
       ${where ? `<div class="sugin-where">${esc(where)}</div>` : ''}
     </div>`;
   }
@@ -278,14 +295,16 @@ function createGameMenuController(deps) {
   function renderSugBox() {
     const box = document.getElementById('sugBox');
     if (!box) return;
-    const list = (sugCache || []).slice().reverse();   // 新留言在前
-    const pend = list.filter((e) => !e?.done);
-    const done = list.filter((e) => e?.done);
+    if (!Array.isArray(sugCache)) { box.innerHTML = `<p class="ov-empty danger">${esc(sugCache?.message || '留言库读取失败，原数据已保留')}</p>`; return; }
+    const list = sugCache.map((entry, index) => ({ entry, index })).reverse();
+    const entries = list.map(x => x.entry);
+    const pend = list.filter((x) => !x.entry?.done);
+    const done = list.filter((x) => x.entry?.done);
     let html = `<p class="hint">共 ${list.length} 条留言 · 待处理 ${pend.length} · 已完成 ${done.length}。已完成的留言是历史档案；未完成的可删除，删除需点两次确认。</p>`;
-    if (pend.length) html += `<h3 class="set-h">待处理 <span class="set-en">PENDING · ${pend.length}</span></h3>` + pend.map((e) => sugRowHTML(e, false)).join('');
+    if (pend.length) html += `<h3 class="set-h">待处理 <span class="set-en">PENDING · ${pend.length}</span></h3>` + pend.map((x) => sugRowHTML(x.entry, false, x.index)).join('');
     html += `<h3 class="set-h">已完成 <span class="set-en">DONE · ${done.length}</span></h3>`;
-    html += done.length ? done.map((e) => sugRowHTML(e, true)).join('') : '<p class="ov-empty">还没有已完成的留言。</p>';
-    if (!list.length) html = '<p class="ov-empty">还没有历史留言。在游戏任意界面右键即可写给 Friday。</p>';
+    html += done.length ? done.map((x) => sugRowHTML(x.entry, true, x.index)).join('') : '<p class="ov-empty">还没有已完成的留言。</p>';
+    if (!entries.length) html = '<p class="ov-empty">还没有本地留言。在游戏任意界面右键可记录，保存后需主动导出交给制作者。</p>';
     box.innerHTML = SDT.Icons.rich(html);
   }
 
@@ -299,6 +318,12 @@ function createGameMenuController(deps) {
         <div class="ov-btns ov-btns-corner"><button class="ov-btn back-sm ok" data-act="sugBack">返回 <i class="en">BACK</i></button></div>
       </div>`, 'page');
     UI.act('sugBack', () => openSettings());
+    UI.act('sugExport', d => {
+      const entry = Array.isArray(sugCache) ? sugCache[+d.idx] : null; if (!entry) return;
+      const btn = document.querySelector(`[data-act="sugExport"][data-idx="${+d.idx}"]`);
+      const result = downloadFeedbackRecord(entry);
+      if (btn) btn.textContent = result.ok ? '已导出' : '导出失败，请重试';
+    });
     UI.act('sugDel', async (d) => {
       const ts = d?.ts;
       // UI.act 只回传 dataset，按钮要按 ts 从 DOM 反查（同 openSettings 的 armDanger 模式）
@@ -542,6 +567,7 @@ function createGameMenuController(deps) {
           <i class="slot-page-rule"></i>
           <span class="slot-page-help">${UI.helpBtn('slots')}</span>
         </header>
+        <p id="slotRestoreError" class="slot-restore-error" role="alert" aria-live="assertive" hidden></p>
         <div class="slot-deck">${cards.join('')}</div>
       </div>`, 'page');
     // 进入档位：加载该档基地并执行后续（续打 / 进基地）
@@ -575,10 +601,21 @@ function createGameMenuController(deps) {
     UI.act('newSlot', (d) => launch(+d.slot, () => { SDT.Base.reset(+d.slot); runtime.openBaseHub('deploy'); }));
     UI.act('enterSlot', (d) => {
       const slot = +d.slot;
+      const hasSavedRun = RunStorage.has(slot);
+      if (hasSavedRun) {
+        const checked = preflightRunMap(slot);
+        if (!checked.ok) {
+          const message=`${checked.message || '路线存档无法安全恢复'}，原档已保留；请稍后用兼容版本重试，或显式覆盖档位`;
+          UI.log(`[[icon:cross]] ${message}`, 'warn');
+          const visible=document.getElementById('slotRestoreError');
+          if(visible){visible.hidden=false;visible.textContent=message;visible.tabIndex=-1;visible.focus();}
+          return;
+        }
+      }
       launch(slot, async () => {
         // 上一局未结束 → 直接回到局内（2026-09-07 留言：不进基地换人/重新带卡）；
-        // 有存档键但读不出（损坏/版本过新）→ loadGame 内部会给出具体原因，回基地重整
-        const resumed = RunStorage.has(slot);
+        // 有存档键但不能安全恢复（损坏/版本过新/地图无证据）→ 保留原串并回标题，不进入整备。
+        const resumed = hasSavedRun;
         let inRun = false;
         if (resumed) {
           // 2026-09-09：先播转场再读档。战斗中断档在 loadGame 里由 Battle.restore
@@ -592,9 +629,14 @@ function createGameMenuController(deps) {
           });
           // 存档可能包含战斗快照；必须先加载战斗域，loadGame 才能同步 restore。
           await ensureBattleReady();
-          inRun = !!loadGame(slot);
-          if (!inRun) { RunStorage.issue(slot); UI.log('对局存档读取失败，先回基地', 'warn'); }
-          else return;   // loadGame 已恢复地图/战斗界面：停留局内，不再进基地整备
+          const loaded = loadGame(slot);
+          inRun = loaded.ok;
+          if (!inRun) {
+            RunStorage.issue(slot);
+            UI.log(`${loaded.message || '对局存档读取失败'}，原档已保留，已返回标题`, 'warn');
+            showTitle();
+            return;
+          } else return;   // loadGame 已恢复地图/战斗界面：停留局内，不再进基地整备
         }
         await runtime.showRunTransition({
           tone: 'door', asset: 'scene-door-bg',
@@ -822,7 +864,7 @@ function createGameMenuController(deps) {
     sfxVolEl.addEventListener('change', () => SDT.Sound.sfx('ding'));
   }
 
-  return Object.freeze({ setLobby, showTitle, startNewGame, exitToTitle, quitGame, openSettings, openLeaveMenu, openTitleGuide });
+  return Object.freeze({ setLobby, showTitle, startNewGame, exitToTitle, quitGame, openSettings, openLeaveMenu, openTitleGuide, openSuggestionInbox });
 }
 
 export { createGameMenuController };

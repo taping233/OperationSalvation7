@@ -1,0 +1,9 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>R7-a 混编战斗隔离验收</title><link rel="stylesheet" href="../../../game/css/base.css"><link rel="stylesheet" href="../../../game/css/overlays.css"><link rel="stylesheet" href="../../../game/css/battle.css">
+<style>body{margin:0;background:#111;color:#eee;font-family:system-ui}.qa-bar{position:relative;z-index:20;padding:12px;background:#171c22;border-bottom:1px solid #46515d}.qa-bar button{margin:4px;padding:8px 12px}.qa-bar output{display:block;margin-top:6px;color:#a9d9b2}#overlay{position:relative;inset:auto;display:block;min-height:720px}#overlay[hidden]{display:none}#overlay>.card{position:relative;inset:auto;transform:none;width:100%;max-width:none}.qa-note{color:#e7c98c}</style></head><body>
+<header class="qa-bar"><b>R7-a 隔离验收</b> <span class="qa-note">固定50生命 / 4攻击 / 两张初始攻击；无奖励、无存档、无真实玩家档接线。</span><br>
+<button data-sample="l2-archer-cavalry">开始/重开 L2 射手＋机动兵</button><button data-sample="l4-fire-grass">开始/重开 L4 灼热＋滋生</button>
+<button id="qaEnd">结束回合</button><button id="qaReset">退出样本</button><output id="qaState">正在加载真实 BattleSession + BattleView；存储状态显示前后快照是否变化，不代表写入次数。</output></header>
+<section id="overlay" hidden><div class="card"><h2 id="ovTitle"></h2><div id="ovBody"></div></div></section><div id="log"></div>
+<script type="module" src="../../../game/src/r7a.qa.js"></script></body></html>
+

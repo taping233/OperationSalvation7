@@ -10,6 +10,8 @@ import { Random } from './random.js';
 import { checkConnectivity } from './map-graph.js';
 import { createLayeredMap } from './layeredMap.js';
 import { GENERATOR_VERSION, LAYOUT_VERSION } from './map-generator.js';
+import { createMapSnapshot, planMapRestore, validateMapSnapshot } from './map-snapshot.js';
+import { applyRouteOverlay, ROUTE_VERSION } from './route-overlay.js';
 
 const runtime = {
   openClassChoice: () => {},
@@ -275,12 +277,14 @@ function requestClassChoice(options) {
     return Math.max(0, Math.min(Math.max(0, max - 1), n));
   }
 
-  function buildDerived(mapSeed = game.mapSeed ?? game.seed ?? Random.seed ?? 0) {
+  function installDerived(layerData, mapSeed, generatorVersion = GENERATOR_VERSION, layoutVersion = LAYOUT_VERSION, routeVersion = null, routePlan = null) {
     game.rings = [];
     game.mapSeed = mapSeed;
-    game.generatorVersion = GENERATOR_VERSION;
-    game.layoutVersion = LAYOUT_VERSION;
-    game.layerData = createLayeredMap(mapSeed);
+    game.routeVersion = routeVersion;
+    game.routePlan = routePlan;
+    game.generatorVersion = generatorVersion;
+    game.layoutVersion = layoutVersion;
+    game.layerData = layerData;
     game.layerData.forEach(ld => { ld.toLogical = new Map(ld.logical.map((_, i) => [i, i])); });
     const reachable = checkConnectivity(game.layerData);
     if (!reachable.ok) console.error('[map] 不可达结点：', reachable.unreachable.join(' · '));
@@ -331,6 +335,17 @@ function requestClassChoice(options) {
     });
   }
 
+  function buildDerived(mapSeed = game.mapSeed ?? game.seed ?? Random.seed ?? 0) {
+    installDerived(createLayeredMap(mapSeed), mapSeed, GENERATOR_VERSION, LAYOUT_VERSION);
+  }
+
+  function buildNewRunDerived(mapSeed) {
+    const base=createLayeredMap(mapSeed);
+    const routed=applyRouteOverlay({seed:mapSeed,generatorVersion:GENERATOR_VERSION,layoutVersion:LAYOUT_VERSION,layerData:base,routeVersion:ROUTE_VERSION});
+    if(!routed.ok){ installDerived(base,mapSeed,GENERATOR_VERSION,LAYOUT_VERSION,ROUTE_VERSION,{layerIndex:1,status:'fallback',fallbackReason:'SESSION_OVERLAY_REJECTED'}); return; }
+    installDerived(routed.value.layerData,mapSeed,GENERATOR_VERSION,LAYOUT_VERSION,routed.value.routeVersion,routed.value.routePlan);
+  }
+
   // ---------- 存档（五档位，互相独立；基地数据也按档位隔离，见 base.js） ----------
   let activeSlot = null;                // 当前游玩的档位（1..5），标题界面为 null
   // 读档数值归一化（迭代评审 09-20 G-P2）：Number.isFinite 强转——0 是合法值不能用 || 兜底
@@ -356,12 +371,23 @@ function requestClassChoice(options) {
     if (!activeSlot) return;
     syncPlayTime();
     assertZones();
+    let snapshotResult = game.nestActive ? { ok: true, value: null } : createMapSnapshot({
+      mapSeed: game.mapSeed, generatorVersion: game.generatorVersion, layoutVersion: game.layoutVersion, layerData: game.layerData,
+      routeVersion:game.routeVersion, routePlan:game.routePlan,
+    });
+    if (snapshotResult.ok && !game.nestActive) snapshotResult = validateMapSnapshot(snapshotResult.value, { layerIdx:game.layerIdx, trackPos:game.trackPos });
+    if (!snapshotResult.ok) {
+      UI.log('[[icon:cross]] 路线快照校验失败，本次未覆盖旧对局存档', 'warn');
+      return false;
+    }
     const ok = RunStorage.write(activeSlot, {
         seed: Random.seed, rngState: Random.snapshot(),
         mapSeed: game.mapSeed ?? Random.seed,
         generatorVersion: game.generatorVersion ?? GENERATOR_VERSION,
         layoutVersion: game.layoutVersion ?? LAYOUT_VERSION,
         geometryVersion: game.geometryVersion ?? null,
+        routeVersion: game.routeVersion ?? null,
+        mapSnapshot: snapshotResult.value,
         layerIdx: game.layerIdx, trackPos: game.trackPos,
         hp: game.hp, maxHp: game.maxHp, coins: game.coins, turn: game.turn,
         atk: game.atk, mode: game.mode, myClass: game.myClass || null, characterId: game.characterId || null,
@@ -406,6 +432,7 @@ function requestClassChoice(options) {
     } else {
       lastSaveFailWarnAt = 0;   // 成功落盘=已恢复，下次失败立即提示（节流不吞「已恢复」后的第一次告警）
     }
+    return ok;
   }
 
   function syncPlayTime() {
@@ -447,19 +474,26 @@ function requestClassChoice(options) {
     return n;
   }
 
-  function loadGame(slot) {
+  function preflightRunMap(slot) {
     const s = readSlot(slot);
     if (!s) {
-      const ri = RunStorage.issue(slot);
-      if (ri === 'corrupt') UI.log('[[icon:cross]] 对局存档损坏（原数据已备份），无法读取', 'warn');
-      else if (ri === 'tooNew') UI.log('[[icon:cross]] 对局存档来自更新版本的游戏，无法读取', 'warn');
-      return false;
+      return { ok:false, code:RunStorage.issue(slot)==='tooNew'?'RUN_TOO_NEW':'RUN_UNREADABLE', message:'对局存档无法读取', preserveRun:true };
     }
+    const planned=planMapRestore(s);
+    return planned.ok?{ok:true,value:{run:s,plan:planned.value}}:planned;
+  }
+
+  function loadGame(slot) {
+    const preflight=preflightRunMap(slot);
+    if(!preflight.ok) {
+      if (preflight.code === 'RUN_UNREADABLE') UI.log('[[icon:cross]] 对局存档损坏（原数据已备份），无法读取', 'warn');
+      else if (preflight.code === 'RUN_TOO_NEW') UI.log('[[icon:cross]] 对局存档来自更新版本的游戏，无法读取', 'warn');
+      else UI.log(`[[icon:cross]] ${preflight.message}，原档已保留`, 'warn');
+      return preflight;
+    }
+    const {run:s,plan}=preflight.value;
     game.seed = Random.restore(s.rngState || s.seed);
-    // 旧档没有 mapSeed 时，以旧 seed 作为确定性地图种子；若连 seed 都没有，
-    // 使用带档位的固定回退值，避免每次读档得到不同地图。
-    const restoredMapSeed = s.mapSeed ?? s.seed ?? `legacy-slot-${slot}`;
-    buildDerived(restoredMapSeed);
+    if (plan.source !== 'nest') installDerived(plan.layerData, plan.mapSeed, plan.generatorVersion, plan.layoutVersion, plan.routeVersion, plan.routePlan);
     SDT.Base.use(slot);   // 该档位的基地数据（仓库/熟练度/成就/卡背）
     const bi = SDT.Base.issue(slot);
     if (bi === 'corrupt') UI.log('[[icon:cross]] 该档位基地数据损坏（原数据已备份），本次以空档案启动', 'warn');
@@ -515,13 +549,7 @@ function requestClassChoice(options) {
       SDT.Base.save();
     }
     game.elapsedSynced = game.elapsed;
-    const safeLayer = clampIndex(s.layerIdx, game.layerData.length, 0);
-    const layer = game.layerData[safeLayer];
-    const requestedIdx = Number.isFinite(+s.trackPos) ? Math.floor(+s.trackPos) : -1;
-    const safeIdx = layer?.logical?.[requestedIdx]
-      ? requestedIdx
-      : (layer?.entrances?.[0] ?? clampIndex(requestedIdx, layer?.logical?.length || 1, 0));
-    if (s.nestActive) {
+    if (plan.source === 'nest') {
       // 龙巢进行中存档：恢复牌盒/符文/进度并直接回到巢穴地图（2026-09-18 断点续战）
       game.nestActive = true;
       game.nestPos = s.nestPos || 0;
@@ -536,8 +564,11 @@ function requestClassChoice(options) {
       if (s.battle && SDT.Battle && typeof SDT.Battle.restore === 'function') {
         if (SDT.Battle.restore(game, s.battle)) saveGame();
       }
-      return true;
+      return {ok:true,value:true};
     }
+    game.nestActive = false;
+    const safeLayer = s.layerIdx;
+    const safeIdx = s.trackPos;
     enterLayer(safeLayer, safeIdx);
     SDT.Sound.music('board');
     UI.log(`[[icon:download]] 已读取【档位 ${slot}】存档`, 'ok');
@@ -549,14 +580,14 @@ function requestClassChoice(options) {
         saveGame();   // 恢复后立刻回写，防二次退出丢进度
       }
     }
-    return true;
+    return {ok:true,value:true};
   }
 
   const menuController = createGameMenuController({
     SDT, UI, game, runtime, SLOT_COUNT, esc, readSlot, loadGame, clearSlot,
     hasRun, RunStorage, ensureBattleReady,
     saveGame, syncPlayTime, clearSave, clearAllSlots,
-    getActiveSlot: () => activeSlot,
+    getActiveSlot: () => activeSlot, preflightRunMap,
     setActiveSlot: value => { activeSlot = value; },
   });
   const { setLobby, showTitle, startNewGame, exitToTitle, quitGame, openSettings, openLeaveMenu, openTitleGuide } = menuController;
@@ -615,7 +646,7 @@ function requestClassChoice(options) {
   function newRun(mode, picks, options = {}) {
     game.seed = Random.reseed();
     game.mapSeed = game.seed;
-    buildDerived(game.mapSeed);
+    buildNewRunDerived(game.mapSeed);
     game.mode = MODES[mode] ? mode : 'standard';
     applyModeRules();
     game.runActive = true;    // v0.21：从这一刻起才写对局存档
@@ -804,9 +835,10 @@ function requestClassChoice(options) {
     UI.refresh(game);
   }
 
-export { FX, MAP, MODES, SLOT_COUNT, bagCap, buildDerived, cam, canAcceptCard, canvas, cardStacks, cellCenter, clearSave, configureGameRuntime, ctx, curLayer, doDeath, dpr, markSeen, requestClassChoice, safeCap, enterLayer, exitToTitle, gainCoins, game, hasRun, migrateOldSave, modeCfg, newRun, newUid, openLeaveMenu, openSettings, openTitleGuide, pick, quitGame, safeUsed, saveGame, scaledEnemy, setLobby, showTitle, startNewGame, syncPlayTime, usedSlots, weighted };
+export { FX, MAP, MODES, SLOT_COUNT, bagCap, buildDerived, cam, canAcceptCard, canvas, cardStacks, cellCenter, clearSave, configureGameRuntime, ctx, curLayer, doDeath, dpr, markSeen, requestClassChoice, safeCap, enterLayer, exitToTitle, gainCoins, game, hasRun, loadGame, migrateOldSave, modeCfg, newRun, newUid, openLeaveMenu, openSettings, openTitleGuide, pick, preflightRunMap, quitGame, safeUsed, saveGame, scaledEnemy, setLobby, showTitle, startNewGame, syncPlayTime, usedSlots, weighted };
 const _set_dpr = (v) => { dpr = v; };
 export { _set_dpr };
 export const getActiveSlot = () => activeSlot;
+export const _set_active_slot = value => { activeSlot = value; };
 const _set_cam = (v) => { cam = v; };
 export { _set_cam };

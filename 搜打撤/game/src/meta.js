@@ -41,6 +41,24 @@ import { Random } from './random.js';
   // 职业加成文本（出征时生效）：每级 +1 生命上限（2026-09-09 需求 #5）
   const perkText = (lv) => `生命上限 +${Math.max(0, (lv - 1) * 1)}`;
 
+  // M02 事务门面使用的纯规则：只改调用方提供的 draft，不保存、不播音效、不写 UI。
+  // 保持与 addXP 完全相同的等级上限和逐级扣经验口径。
+  function addXpToProgress(progress, amount) {
+    const before = { lv: Math.max(1, Number(progress && progress.lv) || 1), xp: Math.max(0, Number(progress && progress.xp) || 0) };
+    const after = { ...before };
+    const gain = Math.max(0, Number(amount) || 0);
+    if (after.lv < LEVEL_MAX && gain > 0) {
+      after.xp += gain;
+      while (after.lv < LEVEL_MAX && after.xp >= xpForNext(after.lv)) {
+        after.xp -= xpForNext(after.lv);
+        after.lv++;
+      }
+    }
+    return Object.freeze({ before: Object.freeze(before), after: Object.freeze(after), levelsGained: after.lv - before.lv });
+  }
+
+  const collectionXpFor = card => card && card.type === '能力卡' ? 50 : 10;
+
   // 增加经验并处理升级；返回升级次数
   function addXP(cls, amount) {
     if (!cls || amount <= 0) return 0;
@@ -347,6 +365,7 @@ import { Random } from './random.js';
 
   SDT.Meta = {
     LEVEL_MAX, xpForNext, perkText,
+    addXpToProgress, collectionXpFor,
     classList, classLv, classXP, addXP, classSummary,
     ACHIEVEMENTS, achById, isUnlocked, isClaimed, pendingAch, claim, checkUnlocks, syncBackUnlocks,
     track, setXpMul,
@@ -357,3 +376,4 @@ import { Random } from './random.js';
   };
 
 export { SDT };
+export { LEVEL_MAX, xpForNext, perkText, addXpToProgress, collectionXpFor };

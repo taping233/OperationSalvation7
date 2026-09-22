@@ -50,6 +50,13 @@ describe('expedition view route projection', () => {
     expect(routes.map(r => r.ariaLabel)).toEqual(['遭遇战 · 路线1（节点 2）', '遭遇战 · 路线2（节点 3）']);
     expect(routes.map(r => r.idx)).toEqual([1, 2]);
   });
+
+  it('只在路线起点标出补给支路和交战支路',()=>{
+    const logical=[{id:'start',def:{type:'event'},next:[[0,1],[0,2]]},{id:'supply',def:{type:'chest'},next:[]},{id:'risk',def:{type:'battle'},next:[]}];
+    const g=makeGame({layerData:[{logical,doors:[]}],routePlan:{status:'applied',layerIndex:0,startNodeId:'start',supplyNodeId:'supply',riskNodeId:'risk'}});
+    expect(expeditionRoutes(g).map(r=>r.name)).toEqual(['补给支路 · 物资点','交战支路 · 遭遇战']);
+    expect(expeditionRoutes({...g,trackPos:1})).toEqual([]);
+  });
 });
 
 describe('expedition view DOM rendering', () => {
@@ -93,5 +100,13 @@ describe('expedition view DOM rendering', () => {
     expect(buttons.map(b => b.getAttribute('aria-label'))).toEqual([
       '遭遇战 · 路线1（节点 2）', '遭遇战 · 路线2（节点 3）',
     ]);
+  });
+
+  it('转义快照可变的层名和路线文本',()=>{
+    document.body.insertAdjacentHTML('beforeend','<div id="expeditionChapter"></div>');
+    const g=makeGame({layerData:[{...layer,name:'<img src=x onerror=alert(1)>'}]});
+    renderExpeditionPanel(panel,g,()=>'<i></i>');
+    expect(document.querySelector('#expeditionChapter img')).toBeNull();
+    expect(document.getElementById('expeditionChapter').textContent).toContain('<img');
   });
 });

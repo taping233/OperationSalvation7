@@ -23,7 +23,7 @@ const CLASS_STORY = {
 import { Sfx, _set_cardPageOpen, cardHTML } from './game.cardslib.js';
 import { Random } from './random.js';
 import { ensureBattleReady, startBattle } from './battle-loader.js';
-import { FIRE_RESTORABLE, finishInstant, grantEventCard, nodeOpt, nodeShell, openPocketRestore, openShop, preloadAllNodeShellBgs, showRunTransition } from './game.run.scenes.js';
+import { FIRE_RESTORABLE, consumeCurrentCell, finishInstant, grantEventCard, nodeOpt, nodeShell, openPocketRestore, openShop, preloadAllNodeShellBgs, showRunTransition } from './game.run.scenes.js';
 import { unlockNest } from './game.nest.js';
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const SDT = window.SDT;
@@ -44,6 +44,7 @@ export function openFireRest() {
   }
   game.state = 'modal';
   openPocketRestore(2, () => {
+    consumeCurrentCell();
     game.state = 'idle';
     saveGame();
     UI.refresh(game);

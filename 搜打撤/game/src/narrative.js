@@ -48,4 +48,29 @@ async function eventNarrative(cardId) {
   return { intro, choices };
 }
 
-export { eventNarrative, parseChoice, KNOTS };
+async function lastLampNarrative(segmentId) {
+  if (![1, 2, 3].includes(+segmentId)) return null;
+  let Story, storyContent;
+  try {
+    [{ Story }, { default: storyContent }] = await Promise.all([
+      import('inkjs'), import('./generated/narrative-events.js'),
+    ]);
+  } catch (error) {
+    console.warn('[narrative] 环境故事加载失败，回退普通事件', error);
+    return null;
+  }
+  try {
+    const story = new Story(storyContent);
+    story.ChoosePathString(`r6_last_lamp_${segmentId}`);
+    const intro = story.ContinueMaximally().trim();
+    const choices = story.currentChoices.map((choice, index) => ({ ...parseChoice(choice.text), choose() {
+      story.ChooseChoiceIndex(index); return story.ContinueMaximally().trim();
+    } }));
+    return { intro, choices };
+  } catch (error) {
+    console.warn('[narrative] 环境故事解析失败，回退普通事件', error);
+    return null;
+  }
+}
+
+export { eventNarrative, lastLampNarrative, parseChoice, KNOTS };

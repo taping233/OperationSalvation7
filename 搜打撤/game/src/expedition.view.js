@@ -1,3 +1,5 @@
+const esc = value => String(value).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+
 // Exploration presentation only. Legal edges and outcomes remain owned by the run flow.
 export const NODE_INFO = {
   battle: ['遭遇战', '准备迎敌 · 胜利后搜刮', 'swords', 'danger'],
@@ -30,10 +32,14 @@ export function expeditionRoutes(game) {
     const door = layer.doors?.find(d => d.at === idx);
     const type = door ? 'door' : cell.def?.type;
     const [name, hint, icon, tone] = NODE_INFO[type] || ['安全节点', '继续探明周围的路线', 'map', 'quiet'];
+    const plan=game.routePlan?.status==='applied' && game.routePlan.layerIndex===li && current.id===game.routePlan.startNodeId ? game.routePlan : null;
+    const role=plan && cell.id===plan.supplyNodeId?'supply':plan && cell.id===plan.riskNodeId?'risk':null;
+    const routeName=role==='supply'?'补给支路 · 物资点':role==='risk'?'交战支路 · 遭遇战':name;
+    const routeHint=role==='supply'?'已知物资节点 · 具体收获进入后决定':role==='risk'?'已知战斗风险 · 胜利后按现有规则结算':hint;
     const cleared = !!game.visited?.[`${li},${idx}`] &&
       !door && !['entrance', 'emergencyExit', 'extraction', 'altar', 'boss'].includes(type);
-    return [{ li, idx, baseName: name, name, icon, tone: cleared ? 'quiet' : tone,
-      hint: cleared ? '已探索 · 可通行，物资不再刷新' : door?.reverse ? '返回上一片区域' : hint,
+    return [{ li, idx, baseName: routeName, name:routeName, icon, tone: cleared ? 'quiet' : tone,
+      hint: cleared ? '已探索 · 可通行，物资不再刷新' : door?.reverse ? '返回上一片区域' : routeHint,
       cleared, selected: game.moveTarget?.li === li && game.moveTarget?.idx === idx }];
   });
   // 同一屏可能有多条同类型路线（例如两个相邻遭遇战）。只显示“遭遇战”会让
@@ -67,7 +73,7 @@ export function renderExpeditionPanel(panel, game, iconHTML) {
   if (chapter && chapter.dataset.viewKey !== chapterKey) {
     chapter.dataset.viewKey = chapterKey;
     const names = (game.layerData || []).map((layer, i) => layer.name || `第 ${i + 1} 层`);
-    chapter.innerHTML = `<div class="chapter-kicker">EXPEDITION / ${String(game.layerIdx + 1).padStart(2, '0')}</div><ol>${names.map((name, i) => `<li class="${i === game.layerIdx ? 'current' : i < game.layerIdx ? 'passed' : ''}" ${i === game.layerIdx ? 'aria-current="step"' : ''}><span>0${i + 1}</span>${name}</li>`).join('')}</ol>`;
+    chapter.innerHTML = `<div class="chapter-kicker">EXPEDITION / ${String(game.layerIdx + 1).padStart(2, '0')}</div><ol>${names.map((name, i) => `<li class="${i === game.layerIdx ? 'current' : i < game.layerIdx ? 'passed' : ''}" ${i === game.layerIdx ? 'aria-current="step"' : ''}><span>0${i + 1}</span>${esc(name)}</li>`).join('')}</ol>`;
   }
   // Stable markup while state is unchanged preserves keyboard focus and avoids DOM churn.
   const key = JSON.stringify([routes, objective, disabled]);
@@ -81,9 +87,9 @@ export function renderExpeditionPanel(panel, game, iconHTML) {
   title.textContent = disabled ? '行动进行中' : `下一步 · ${routes.length} 条路线`;
   note.textContent = objective.text;
   note.dataset.tone = objective.tone;
-  options.innerHTML = routes.map(r => `<button type="button" class="route-option${r.selected ? ' selected' : ''}" data-route-index="${r.idx}" data-route-layer="${r.li}" data-tone="${r.tone}" aria-label="${r.ariaLabel || `${r.name}（节点 ${r.idx + 1}）`}" ${disabled ? 'disabled' : ''}>
+  options.innerHTML = routes.map(r => `<button type="button" class="route-option${r.selected ? ' selected' : ''}" data-route-index="${r.idx}" data-route-layer="${r.li}" data-tone="${r.tone}" aria-label="${esc(r.ariaLabel || `${r.name}（节点 ${r.idx + 1}）`)}" ${disabled ? 'disabled' : ''}>
     <span class="route-icon" aria-hidden="true">${iconHTML(r.icon)}</span>
-    <span class="route-copy"><b>${r.name}${r.cleared ? ' · 已探索' : ''}</b><small>${r.hint}</small></span>
+    <span class="route-copy"><b>${esc(r.name)}${r.cleared ? ' · 已探索' : ''}</b><small>${esc(r.hint)}</small></span>
     <span class="route-arrow" aria-hidden="true">↗</span>
   </button>`).join('');
   if (!routes.length) options.innerHTML = '<span class="route-empty">当前没有相邻路线，请检查本节点的事件。</span>';

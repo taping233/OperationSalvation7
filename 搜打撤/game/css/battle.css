@@ -6,14 +6,15 @@
     background: linear-gradient(180deg, #222222, #191919);
     box-shadow: inset 0 1px 0 rgba(240,240,240,.05); transition: box-shadow .15s, border-color .15s, transform .15s; }
   /* 拖拽悬停：打出效果预览面板 */
-  .bt-fpreview { position: absolute; left: 50%; top: -16px; transform: translateX(-50%); z-index: 6;
-    min-width: 170px; max-width: 92%; text-align: center; pointer-events: none;
+  .bt-fpreview { position: absolute; left: 50%; top: auto; bottom: calc(100% + 44px); transform: translateX(-50%); z-index: 6;
+    box-sizing: border-box; width: calc(100% - 8px); min-width: 0; max-width: calc(100% - 8px); text-align: center; pointer-events: none;
     background: rgba(14,14,14,.96); border: 1px solid rgba(196,196,196,.75); border-radius: 10px;
-    padding: 8px 12px; box-shadow: 0 8px 22px rgba(0,0,0,.65), 0 0 16px rgba(196,196,196,.28);
+    padding: 6px 5px; overflow-wrap: anywhere; box-shadow: 0 8px 22px rgba(0,0,0,.65), 0 0 16px rgba(196,196,196,.28);
     animation: ovFadeIn .12s ease; }
-  .bt-fpreview b { display: block; color: #d9d9d9; font-size: 13.5px; }
+  .bt-fpreview > b { display: block; color: #d9d9d9; font-size: 13.5px; }
+  .bt-fpreview > b b { display: inline; color: inherit; font-size: inherit; }
   .bt-fpreview span { display: block; color: #adadad; font-size: 10.5px; margin-top: 3px; }
-  .bt-fpreview .bt-fpreview-tip { color: #7c7c7c; font-size: 9.5px; letter-spacing: 2px; margin-top: 4px; }
+  .bt-fpreview .bt-fpreview-tip { color: #7c7c7c; font-size: 9.5px; letter-spacing: .5px; margin-top: 4px; }
   .bt-fportrait { width: 64px; min-width: 64px; border-radius: 10px; overflow: hidden;
     border: 1px solid #565656; box-shadow: inset 0 2px 8px rgba(0,0,0,.55); }
   .bt-finfo { flex: 1; min-width: 0; }
@@ -206,8 +207,8 @@
 .sts-foe.dead .bt-hpwrap, .sts-foe.dead .sts-intent, .bt-foe.dead .bt-hpwrap { display:none; }
 #overlay .battle-stage.sts .sts-foe.aegis { border:0; box-shadow:none; }
 .sts-foe.aegis .sts-figure { filter:drop-shadow(0 0 18px rgba(160,160,160,.85)); }
-/* 拖拽悬停的伤害预览气泡上移到意图上方 */
-#overlay .battle-stage.sts .bt-fpreview { top:-108px; }
+/* 伤害预览以敌人格顶部为基准，落在意图气泡上方并保留间隔。 */
+#overlay .battle-stage.sts .bt-fpreview { top:auto; bottom:calc(100% + 44px); }
 
 /* —— HUD：能量球 + 牌堆 | 扇形手牌 | 弃牌/墓地 + 操作 —— */
 /* 2026-09-06 留言：手牌区加大+稍微透明，让战斗背景透过来 */
@@ -243,6 +244,11 @@
   border:1.5px solid #8f8b7e; background:#23231f; color:#e8e4d8; font-size:14px; font-weight:700; cursor:pointer;
   pointer-events:auto; white-space:nowrap; z-index:6; }
 .bt-hand-page:hover { filter:brightness(1.2); }
+.bt-hand-page.has-more { border-color:#f0c96f; color:#fff1b7;
+  background:linear-gradient(135deg,#5f451b,#2b2417); box-shadow:0 0 0 2px rgba(240,201,111,.18),0 0 20px rgba(240,175,70,.45);
+  animation:handPageReminder 1.35s ease-in-out infinite; }
+@keyframes handPageReminder { 50% { transform:translateY(-3px); filter:brightness(1.3); box-shadow:0 0 0 3px rgba(240,201,111,.26),0 0 28px rgba(240,175,70,.72); } }
+@media (prefers-reduced-motion:reduce) { .bt-hand-page.has-more { animation:none; } }
 /* 背包砸击按钮（2026-09-16 老板：改回按钮形态——手牌左侧的背包图案按钮，
    不再向手牌置入常驻令牌；slamPending 时点亮提示「再点一次取消」）
    09-20 老板反馈「缺少明显的背包砸击按钮」根因实锤：底栏改 grid 后本按钮无坐标、

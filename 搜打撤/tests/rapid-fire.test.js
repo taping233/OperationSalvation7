@@ -7,7 +7,7 @@ window.SDT = window.SDT || { Icons: { img: () => '' } };
 window.SDT.Icons.TYPE_ART = {};
 window.SDT.Sound = { music() {}, sfx() {}, setDucked() {} };
 window.SDT.MAP = {
-  rules: { battleEnergy: 99, battleHandMax: 99, bossDeckSize: 1, starterSha: 0, battleStartDraw: 5, battleTurnDraw: 2, diceSides: 6 },
+  rules: { battleEnergy: 99, battleHandMax: 99, bossDeckSize: 1, starterSha: 0, battleStartDraw: 5, battleTurnDraw: 99, diceSides: 6 },
   items: { rations: { name: '口粮' }, wood: { name: '木材' } },
 };
 await import('../game/src/cards.js');
@@ -58,10 +58,11 @@ async function drain(maxLoops = 300) {
   return snap();
 }
 
-const cardByName = (g, name) => g.ownedCards.find(o => o.card.name === name);
 async function playByName(g, name) {
-  const entry = cardByName(g, name);
+  const hand = snap().hand || [];
+  const entry = hand.map(uid => g.ownedCards.find(o => o.uid === uid)).find(o => o?.card?.name === name);
   expect(entry, `手牌中应有【${name}】`).toBeTruthy();
+  expect(hand, `【${name}】uid 必须在当前手牌`).toContain(entry.uid);
   BattleSession.commands.playCard(entry.uid, 0);
   if (snap().infusing) {   // 无注能卡兜底：万一误配注能，自动补燃料
     for (let i = 0; i < 30 && snap().infusing; i++) {
@@ -140,7 +141,7 @@ describe('连续射击（cc-rapid-fire）', () => {
   });
 
   it('新回合开始计数清零 → 连射重新从 0 算起', async () => {
-    const g = await freshBattle([sha(), rapid()]);
+    const g = await freshBattle([sha(), rapid(), rapid()]);
     await playByName(g, '初始攻击');
     await playByName(g, '连续射击');           // n=1 → -2
     const afterCombo = foeHp();

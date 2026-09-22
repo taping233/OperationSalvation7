@@ -271,11 +271,15 @@
     </div>
     <div id="sugLayer" hidden>
       <div class="sug-panel">
-        <h3 class="sug-head" id="sugHead">写建议给 Friday</h3>
+        <h3 class="sug-head" id="sugHead">记录试玩反馈</h3>
         <p class="sug-where" id="sugWhere"></p>
-        <p class="sug-tip">想法、手感问题、bug 都可以写；保存后 Friday 下次工作时会直接读取并知道改哪里。</p>
+        <p class="sug-tip">只保存在当前浏览器，不会自动发送。保存后请从设置的留言库导出单条 JSON 交给制作者。</p>
+        <label class="sug-label" for="sugText">反馈正文（必填）</label>
         <textarea id="sugText" class="sug-textarea" rows="6" maxlength="2000"
           placeholder="例如：这个按钮太小，容易误触……"></textarea>
+        <label class="sug-label" for="sugSteps">复现步骤（可选）</label><textarea id="sugSteps" class="sug-textarea sug-small" maxlength="1200"></textarea>
+        <label class="sug-label" for="sugExpected">期望结果（可选）</label><textarea id="sugExpected" class="sug-textarea sug-small" maxlength="800"></textarea>
+        <label class="sug-label" for="sugActual">实际结果（可选）</label><textarea id="sugActual" class="sug-textarea sug-small" maxlength="800"></textarea>
         <div class="sug-btns">
           <button class="ov-btn ok" id="sugSaveBtn">保存 <i class="en">SAVE</i></button>
           <button class="ov-btn" id="sugCancelBtn">返回 <i class="en">BACK</i></button>

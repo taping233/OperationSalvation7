@@ -83,9 +83,9 @@ import { _set_cardPageOpen } from './game.cardslib.js';
       showBackpack(true);
       return;
     }
-    // 2026-09-06 #10：员工通行证B（抽取 1 张传说卡 → 背包中使用改为直接获得传说卡）
-    if (card.id === 'tt-token-gold' || /抽取\s*1\s*张传说卡/.test(desc)) {
-      const pool = SDT.Cards.all().filter(c => c.rarity === '传说' && SDT.Cards.isRandomObtainable(c));
+    // 员工通行证B：直接随机获得，不进入「发现」候选页；棱彩牌明确排除。
+    if (card.id === 'tt-token-gold' || /(?:抽取|随机获取)\s*1\s*张传说卡/.test(desc)) {
+      const pool = SDT.Cards.all().filter(c => c.rarity === '传说' && c.rarity !== '棱彩' && SDT.Cards.isRandomObtainable(c));
       if (!pool.length) { UI.log('卡牌库中没有可获得的传说卡', 'warn'); return; }
       game.ownedCards.splice(i, 1);
       const got = pool[Math.floor(Random.random('loot') * pool.length)];
@@ -989,12 +989,13 @@ import { _set_cardPageOpen } from './game.cardslib.js';
         SDT.Base.data.eggBattles = (SDT.Base.data.eggBattles || 0) + 1;
         SDT.Base.save();
       }
+      if (win === true) {
+        game.visited = game.visited || {};
+        game.visited[game.layerIdx + ',' + game.trackPos] = 1;
+      }
       let legends = 0;
       if (opts.isBoss && win === true) {
         legends = 1;
-        // 击败首脑才消耗首脑格（编组前放弃不消耗，2026-09-09 玩法定版）
-        game.visited = game.visited || {};
-        game.visited[game.layerIdx + ',' + game.trackPos] = 1;
       }
       if (slewDragon && win === true && Random.random('loot') < 0.3) legends += 1;
       if (legends > 0) UI.log('[[icon:trophy]] 首脑宝库开启：额外奖励 <b>1 张传说卡</b>！', 'loot');

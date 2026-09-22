@@ -1,0 +1,573 @@
+{
+  "schemaVersion": 1,
+  "poses": {
+    "idle": {
+      "id": "idle",
+      "angleDeg": 0,
+      "pelvisOffsetPx": [
+        0,
+        0
+      ],
+      "chestOffsetPx": [
+        0,
+        0
+      ],
+      "sword": {
+        "grip": {
+          "x": 457,
+          "y": 258
+        },
+        "tip": {
+          "x": 438,
+          "y": 719
+        },
+        "corners": {
+          "pommelLeft": {
+            "x": 449.902,
+            "y": 211.668
+          },
+          "pommelRight": {
+            "x": 467.887,
+            "y": 212.41
+          },
+          "guardLeft": {
+            "x": 412.244,
+            "y": 251.151
+          },
+          "guardRight": {
+            "x": 502.168,
+            "y": 254.857
+          },
+          "bladeBaseLeft": {
+            "x": 424.204,
+            "y": 276.665
+          },
+          "bladeBaseRight": {
+            "x": 488.149,
+            "y": 279.301
+          },
+          "tipLeft": {
+            "x": 433.004,
+            "y": 718.794
+          },
+          "tipRight": {
+            "x": 442.996,
+            "y": 719.206
+          }
+        },
+        "lengthPx": 461.391,
+        "boundsOk": true
+      },
+      "arms": {
+        "far": {
+          "reachable": true,
+          "targetErrorPx": 0,
+          "shoulder": {
+            "x": 255,
+            "y": 163
+          },
+          "elbow": {
+            "x": 298,
+            "y": 218
+          },
+          "wrist": {
+            "x": 432,
+            "y": 249
+          },
+          "upperLengthErrorPx": 0,
+          "lowerLengthErrorPx": 0
+        },
+        "near": {
+          "reachable": true,
+          "targetErrorPx": 0,
+          "shoulder": {
+            "x": 390,
+            "y": 169
+          },
+          "elbow": {
+            "x": 411,
+            "y": 224
+          },
+          "wrist": {
+            "x": 457,
+            "y": 249
+          },
+          "upperLengthErrorPx": 0,
+          "lowerLengthErrorPx": 0
+        }
+      },
+      "legs": {
+        "far": {
+          "reachable": true,
+          "footErrorPx": 0,
+          "hip": {
+            "x": 286,
+            "y": 383
+          },
+          "knee": {
+            "x": 280,
+            "y": 524
+          },
+          "ankle": {
+            "x": 273,
+            "y": 655
+          },
+          "toe": {
+            "x": 273,
+            "y": 735
+          },
+          "upperLengthErrorPx": 0,
+          "lowerLengthErrorPx": 0
+        },
+        "near": {
+          "reachable": true,
+          "footErrorPx": 0,
+          "hip": {
+            "x": 350,
+            "y": 383
+          },
+          "knee": {
+            "x": 359,
+            "y": 518
+          },
+          "ankle": {
+            "x": 368,
+            "y": 655
+          },
+          "toe": {
+            "x": 383,
+            "y": 735
+          },
+          "upperLengthErrorPx": 0,
+          "lowerLengthErrorPx": 0
+        }
+      }
+    },
+    "windup": {
+      "id": "windup",
+      "angleDeg": 58,
+      "pelvisOffsetPx": [
+        -5,
+        4
+      ],
+      "chestOffsetPx": [
+        6,
+        -3
+      ],
+      "sword": {
+        "grip": {
+          "x": 457,
+          "y": 258
+        },
+        "tip": {
+          "x": 55.981,
+          "y": 486.18
+        },
+        "corners": {
+          "pommelLeft": {
+            "x": 492.53,
+            "y": 227.428
+          },
+          "pommelRight": {
+            "x": 501.432,
+            "y": 243.073
+          },
+          "guardLeft": {
+            "x": 439.091,
+            "y": 216.415
+          },
+          "guardRight": {
+            "x": 483.6,
+            "y": 294.639
+          },
+          "bladeBaseLeft": {
+            "x": 423.791,
+            "y": 240.078
+          },
+          "bladeBaseRight": {
+            "x": 455.443,
+            "y": 295.704
+          },
+          "tipLeft": {
+            "x": 53.509,
+            "y": 481.834
+          },
+          "tipRight": {
+            "x": 58.454,
+            "y": 490.526
+          }
+        },
+        "lengthPx": 461.391,
+        "boundsOk": true
+      },
+      "arms": {
+        "far": {
+          "reachable": true,
+          "targetErrorPx": 0,
+          "shoulder": {
+            "x": 261,
+            "y": 160
+          },
+          "elbow": {
+            "x": 317.338,
+            "y": 201.232
+          },
+          "wrist": {
+            "x": 451.384,
+            "y": 232.03
+          },
+          "upperLengthErrorPx": 0,
+          "lowerLengthErrorPx": 0
+        },
+        "near": {
+          "reachable": true,
+          "targetErrorPx": 0,
+          "shoulder": {
+            "x": 396,
+            "y": 166
+          },
+          "elbow": {
+            "x": 429.51,
+            "y": 214.406
+          },
+          "wrist": {
+            "x": 464.632,
+            "y": 253.231
+          },
+          "upperLengthErrorPx": 0,
+          "lowerLengthErrorPx": 0
+        }
+      },
+      "legs": {
+        "far": {
+          "reachable": true,
+          "footErrorPx": 0,
+          "hip": {
+            "x": 281,
+            "y": 387
+          },
+          "knee": {
+            "x": 300.63,
+            "y": 526.756
+          },
+          "ankle": {
+            "x": 273,
+            "y": 655
+          },
+          "toe": {
+            "x": 273,
+            "y": 735
+          },
+          "upperLengthErrorPx": 0,
+          "lowerLengthErrorPx": 0
+        },
+        "near": {
+          "reachable": true,
+          "footErrorPx": 0,
+          "hip": {
+            "x": 345,
+            "y": 387
+          },
+          "knee": {
+            "x": 378.44,
+            "y": 518.102
+          },
+          "ankle": {
+            "x": 368,
+            "y": 655
+          },
+          "toe": {
+            "x": 383,
+            "y": 735
+          },
+          "upperLengthErrorPx": 0,
+          "lowerLengthErrorPx": 0
+        }
+      }
+    },
+    "hit": {
+      "id": "hit",
+      "angleDeg": -72,
+      "pelvisOffsetPx": [
+        7,
+        2
+      ],
+      "chestOffsetPx": [
+        18,
+        -4
+      ],
+      "sword": {
+        "grip": {
+          "x": 457,
+          "y": 258
+        },
+        "tip": {
+          "x": 889.566,
+          "y": 418.527
+        },
+        "corners": {
+          "pommelLeft": {
+            "x": 410.743,
+            "y": 250.433
+          },
+          "pommelRight": {
+            "x": 417.005,
+            "y": 233.558
+          },
+          "guardLeft": {
+            "x": 436.656,
+            "y": 298.449
+          },
+          "guardRight": {
+            "x": 467.969,
+            "y": 214.072
+          },
+          "bladeBaseLeft": {
+            "x": 464.617,
+            "y": 294.959
+          },
+          "bladeBaseRight": {
+            "x": 486.884,
+            "y": 234.958
+          },
+          "tipLeft": {
+            "x": 887.826,
+            "y": 423.215
+          },
+          "tipRight": {
+            "x": 891.305,
+            "y": 413.839
+          }
+        },
+        "lengthPx": 461.391,
+        "boundsOk": true
+      },
+      "arms": {
+        "far": {
+          "reachable": true,
+          "targetErrorPx": 0,
+          "shoulder": {
+            "x": 273,
+            "y": 159
+          },
+          "elbow": {
+            "x": 323.221,
+            "y": 207.496
+          },
+          "wrist": {
+            "x": 440.715,
+            "y": 278.995
+          },
+          "upperLengthErrorPx": 0,
+          "lowerLengthErrorPx": 0
+        },
+        "near": {
+          "reachable": true,
+          "targetErrorPx": 0,
+          "shoulder": {
+            "x": 408,
+            "y": 165
+          },
+          "elbow": {
+            "x": 406.521,
+            "y": 223.854
+          },
+          "wrist": {
+            "x": 448.44,
+            "y": 255.219
+          },
+          "upperLengthErrorPx": 0,
+          "lowerLengthErrorPx": 0
+        }
+      },
+      "legs": {
+        "far": {
+          "reachable": true,
+          "footErrorPx": 0,
+          "hip": {
+            "x": 293,
+            "y": 385
+          },
+          "knee": {
+            "x": 297.203,
+            "y": 526.065
+          },
+          "ankle": {
+            "x": 273,
+            "y": 655
+          },
+          "toe": {
+            "x": 273,
+            "y": 735
+          },
+          "upperLengthErrorPx": 0,
+          "lowerLengthErrorPx": 0
+        },
+        "near": {
+          "reachable": true,
+          "footErrorPx": 0,
+          "hip": {
+            "x": 357,
+            "y": 385
+          },
+          "knee": {
+            "x": 380.381,
+            "y": 518.264
+          },
+          "ankle": {
+            "x": 368,
+            "y": 655
+          },
+          "toe": {
+            "x": 383,
+            "y": 735
+          },
+          "upperLengthErrorPx": 0,
+          "lowerLengthErrorPx": 0
+        }
+      }
+    },
+    "recovery": {
+      "id": "recovery",
+      "angleDeg": -24,
+      "pelvisOffsetPx": [
+        2,
+        1
+      ],
+      "chestOffsetPx": [
+        6,
+        -1
+      ],
+      "sword": {
+        "grip": {
+          "x": 457,
+          "y": 258
+        },
+        "tip": {
+          "x": 627.148,
+          "y": 686.872
+        },
+        "corners": {
+          "pommelLeft": {
+            "x": 431.671,
+            "y": 218.561
+          },
+          "pommelRight": {
+            "x": 448.402,
+            "y": 211.923
+          },
+          "guardLeft": {
+            "x": 413.328,
+            "y": 269.947
+          },
+          "guardRight": {
+            "x": 496.985,
+            "y": 236.758
+          },
+          "bladeBaseLeft": {
+            "x": 434.631,
+            "y": 288.391
+          },
+          "bladeBaseRight": {
+            "x": 494.12,
+            "y": 264.79
+          },
+          "tipLeft": {
+            "x": 622.501,
+            "y": 688.716
+          },
+          "tipRight": {
+            "x": 631.796,
+            "y": 685.029
+          }
+        },
+        "lengthPx": 461.391,
+        "boundsOk": true
+      },
+      "arms": {
+        "far": {
+          "reachable": true,
+          "targetErrorPx": 0,
+          "shoulder": {
+            "x": 261,
+            "y": 162
+          },
+          "elbow": {
+            "x": 298.653,
+            "y": 220.79
+          },
+          "wrist": {
+            "x": 430.501,
+            "y": 259.947
+          },
+          "upperLengthErrorPx": 0,
+          "lowerLengthErrorPx": 0
+        },
+        "near": {
+          "reachable": true,
+          "targetErrorPx": 0,
+          "shoulder": {
+            "x": 396,
+            "y": 168
+          },
+          "elbow": {
+            "x": 406.756,
+            "y": 225.882
+          },
+          "wrist": {
+            "x": 453.339,
+            "y": 249.778
+          },
+          "upperLengthErrorPx": 0,
+          "lowerLengthErrorPx": 0
+        }
+      },
+      "legs": {
+        "far": {
+          "reachable": true,
+          "footErrorPx": 0,
+          "hip": {
+            "x": 288,
+            "y": 384
+          },
+          "knee": {
+            "x": 291.259,
+            "y": 525.09
+          },
+          "ankle": {
+            "x": 273,
+            "y": 655
+          },
+          "toe": {
+            "x": 273,
+            "y": 735
+          },
+          "upperLengthErrorPx": 0,
+          "lowerLengthErrorPx": 0
+        },
+        "near": {
+          "reachable": true,
+          "footErrorPx": 0,
+          "hip": {
+            "x": 352,
+            "y": 384
+          },
+          "knee": {
+            "x": 372.279,
+            "y": 517.771
+          },
+          "ankle": {
+            "x": 368,
+            "y": 655
+          },
+          "toe": {
+            "x": 383,
+            "y": 735
+          },
+          "upperLengthErrorPx": 0,
+          "lowerLengthErrorPx": 0
+        }
+      }
+    }
+  }
+}

@@ -514,12 +514,15 @@
     transition:border-color .15s ease; }
   .sug-textarea:focus { outline:none; border-color:#8b8b8b; }
   .sug-textarea::placeholder { color:#6b6b6b; }
+  .sug-label { display:block; margin:7px 0 4px; color:#c9c9c9; font-size:12px; }
+  .sug-textarea.sug-small { min-height:54px; margin-bottom:7px; }
 
   /* 全局右键建议层：叠加在任意界面之上，不占用 overlay 系统 */
   #sugLayer { position:fixed; inset:0; z-index:900; display:grid; place-items:center;
     background:rgba(8,10,12,.62); backdrop-filter:blur(3px); }
   #sugLayer[hidden] { display:none; }
   #sugLayer .sug-panel { width:min(520px, 92vw); padding:22px 24px 18px;
+    max-height:min(90vh, 760px); overflow:auto;
     background:linear-gradient(180deg, #262626, #171717); border:1px solid #454545; border-radius:14px;
     box-shadow:0 18px 50px rgba(0,0,0,.55), inset 0 1px 0 rgba(240,240,240,.07); }
   #sugLayer .sug-head { margin:0 0 10px; font-size:16.5px; font-weight:700; color:#ececec; letter-spacing:.06em; }
@@ -528,6 +531,8 @@
   #sugLayer .sug-where:empty { display:none; }
   #sugLayer .sug-tip { color:#8b8b8b; font-size:11.5px; margin:0 0 10px; }
   #sugLayer .sug-btns { display:flex; gap:10px; justify-content:flex-end; }
+  .sugin-detail { margin-top:6px; white-space:pre-wrap; color:#c9c9c9; font-size:12px; }
+  .sugin-detail b { display:block; color:#8b8b8b; font-size:10px; letter-spacing:.08em; }
 
   /* ============ 职业宝箱（黑箱，2026-09-06）：只掉落职业卡牌 ============ */
   .cls-chest-note { color: #c9b98a; }
@@ -596,3 +601,16 @@
 #overlay .card .ov-x:active { transform: scale(.92); }
 /* hidden 属性会被上面的 display:flex 覆盖（作者样式>UA默认），显式补回隐藏态 */
 #overlay .card .ov-x[hidden] { display: none; }
+
+/* 词条讲解浮框（09-20 老板：特殊词条触摸时自绘文字框讲解——形态/中毒等诅咒/祝福/机制词/敌方词缀）
+ * 单例 fixed 挂 body（term-tips.js），跟随触发词条定位；视觉走药水提示栏同族纸白底+近黑字（09-13 定版口径） */
+.term-tip { position: fixed; z-index: 9999; pointer-events: none;
+  width: max-content; max-width: min(88vw, 420px);
+  padding: 8px 14px; border: 1px solid rgba(122,107,84,.45); border-radius: 10px;
+  background: rgba(250,247,238,.96); color: #1c1a16;
+  font-size: clamp(12px, 1.2vw, 13.5px); line-height: 1.65;
+  box-shadow: 0 4px 14px rgba(40,32,20,.42); }
+.term-tip img, .term-tip svg { width: 15px; height: 15px; vertical-align: -2px; margin-right: 3px; }
+.term-tip b { color: #5a3c14; }
+.term-tip .term-tip-sep { color: #a08e6e; padding: 0 2px; }
+.term-tip[hidden] { display: none; }

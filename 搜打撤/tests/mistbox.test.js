@@ -63,6 +63,7 @@ describe('迷之匣（tt3eq-mistbox 改版）', () => {
     const c = mistbox();
     expect(c).toBeTruthy();
     expect(c.type).toBe('装备');
+    expect(c.rarity).toBe('史诗');
     expect(c.desc).toContain('主动技能');
     expect(c.desc).toContain('发现两张随机招式');
     expect(c.desc).toContain('交换其费用');

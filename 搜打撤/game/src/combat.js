@@ -19,13 +19,14 @@ const CURSES = ['bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban', 'bu
 
   // 祝福状态表（v0.20）：value=数值型（可叠加，本场战斗）；timed=计时型（共享回合钟递减）；
   // flag=开关型（本局对战常驻）
-  const BUFFS = ['atkUp', 'spellUp', 'stealth', 'immune', 'reduce', 'swordForm', 'natureForm', 'cosmosForm'];
+  const BUFFS = ['atkUp', 'spellUp', 'stealth', 'immune', 'reduce', 'dodge', 'swordForm', 'natureForm', 'cosmosForm'];
   const BUFF_META = {
     atkUp:      { name: '攻击强化', icon: '[[icon:swords]]', value: true, desc: '攻击伤害 +N（本场战斗）' },
     spellUp:    { name: '法术强化', icon: '[[icon:crystal]]', value: true, desc: '法术伤害 +N（本场战斗）' },
     stealth:    { name: '潜行', icon: '[[icon:runner]]', timed: true, desc: '无法成为被攻击对象；造成伤害会破除潜行' },
     immune:     { name: '免疫伤害', icon: '[[icon:sparkles]]', timed: true, desc: '不受到任何伤害' },
     reduce:     { name: '减伤', icon: '[[icon:plate]]', value: true, desc: '每次受到的伤害 -N（真实伤害除外）' },
+    dodge:      { name: '闪避', icon: '[[icon:runner]]', value: true, desc: '免疫下一次攻击（每层避开 1 次，完整躲掉该段伤害）' },
     swordForm:  { name: '剑仙形态', icon: '[[icon:sword]]', flag: true, desc: '回合开始时额外抽 1 张' },
     natureForm: { name: '自然形态', icon: '[[icon:wood]]', flag: true, desc: '回合开始时额外获得 1 点能量' },
     cosmosForm: { name: '宇宙形态', icon: '[[icon:sparkles]]', flag: true, desc: '本局对战所有卡牌变为 1 费' },
@@ -84,6 +85,15 @@ const CURSES = ['bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban', 'bu
     if ((target.status.stealth || 0) > 0) {
       r.stealthed = true;
       r.log.push('潜行：无法成为被攻击对象');
+      return r;
+    }
+    // 闪避（祝福，09-20 老板定版）：免疫下一次攻击——完整避开这次攻击并消耗 1 层。
+    // 仅对攻击类型生效（法术/固定/真实不可闪避）；非攻击伤害不消耗层数。
+    // 预览走 previewDamage 的浅拷贝，此处扣层不会污染真实状态。
+    if ((target.status.dodge || 0) > 0 && type === TYPES.ATTACK) {
+      target.status.dodge -= 1;
+      r.dodged = true;
+      r.log.push('闪避：避开这次攻击');
       return r;
     }
 
@@ -455,6 +465,24 @@ const CURSES = ['bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban', 'bu
     eq('减伤 3：固定 10 → 7', dealDamage({ atk: 0 }, B, 10, TYPES.FIXED).dealt, 7);
     eq('  减伤后 HP 扣 7', B.hp, 23);
     eq('  真实伤害无视减伤', dealDamage({ atk: 0 }, B, 5, TYPES.TRUE).dealt, 5);
+
+    // 20b 闪避（09-20 老板定版）：免疫下一次攻击——完整避开并消耗 1 层，不是减伤
+    B = { hp: 30 };
+    addBlessing(B, 'dodge', 1, 1);
+    eq('闪避 1：攻击 12 完整避开', dealDamage({ atk: 12 }, B, 1, TYPES.ATTACK).dealt, 0);
+    eq('  闪避后不扣血', B.hp, 30);
+    eq('  闪避消耗 1 层', B.status.dodge, 0);
+    eq('  层数用尽后恢复受伤', dealDamage({ atk: 2 }, B, 1, TYPES.ATTACK).dealt, 3);
+    B = { hp: 30 };
+    addBlessing(B, 'dodge', 2, 1);
+    dealDamage({ atk: 9 }, B, 1, TYPES.ATTACK);
+    eq('  2 层闪避挡 1 次剩 1 层', B.status.dodge, 1);
+    eq('  闪避不挡法术（层数保留）', dealDamage({ spellPower: 4 }, B, 3, TYPES.SPELL).dealt, 7);
+    eq('    法术后仍剩 1 层', B.status.dodge, 1);
+    eq('  闪避不挡固定伤害', dealDamage({ atk: 0 }, B, 5, TYPES.FIXED).dealt, 5);
+    eq('    固定伤害后仍剩 1 层', B.status.dodge, 1);
+    tickDurations(B);
+    eq('  「本回合」1 回合后过期', B.status.dodge, 0);
 
     // 21 祝福加成：攻击力增加 / 法伤增加
     A = { atk: 4, status: { atkUp: 2 } };

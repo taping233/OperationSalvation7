@@ -29,6 +29,7 @@ import './renderer.fx.js';
 import './renderer.js';        // 老板留言 #53：对局地图改回原二维面板（停用 3D 场景）；
                                // scene/ 目录已随 2026-09-19 技术清理删除，需要 3D 时从 git 历史找回
 import './ui.js';
+import './term-tips.js';   // 词条讲解浮框（09-20 老板：特殊词条触摸即讲解）——全局委托
 import './shared.js';
 import './battle-loader.js';
 import './chests.js';

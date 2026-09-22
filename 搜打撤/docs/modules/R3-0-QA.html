@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>R3-0 命令守卫隔离验收</title>
+<style>
+  :root{color-scheme:dark;font-family:system-ui,"Microsoft YaHei",sans-serif;background:#091018;color:#e9f0f4}
+  body{max-width:1180px;margin:0 auto;padding:24px}h1,h2{margin:.2em 0 .55em}p{line-height:1.65}
+  .notice{padding:12px 15px;border:1px solid #8a7135;background:#2b2415;color:#ffe3a1;border-radius:10px}
+  .toolbar,.foes{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}button{border:1px solid #51677b;background:#172736;color:#eef7ff;border-radius:8px;padding:9px 13px;cursor:pointer}
+  button:hover{background:#23415a}.primary{border-color:#5f9d75;background:#163426}.danger{border-color:#9c625e;background:#3b201e}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.panel{border:1px solid #334454;background:#101b25;border-radius:12px;padding:16px;min-width:0}
+  .foe{min-width:180px;text-align:left}.dead{opacity:.48;text-decoration:line-through}pre{margin:0;white-space:pre-wrap;word-break:break-word;background:#080e14;padding:13px;border-radius:8px;max-height:420px;overflow:auto}
+  code{color:#a9dbff}.pass{color:#98e2a8}.warn{color:#ffd27d}@media(max-width:780px){.grid{grid-template-columns:1fr}}
+</style>
+<body>
+<h1>R3-0 命令守卫隔离验收</h1>
+<p class="notice"><b>边界：</b>这是命令 UI 夹具，不是完整游戏战斗界面。它直接使用正式 <code>cards.js</code>、<code>BattleSession</code>、真实卡牌与地图敌人定义，按钮只调用正式 <code>BattleSession.commands</code>。页面用内存 Storage 替换本页的 localStorage，因此不读取或写入玩家档。</p>
+
+<div class="toolbar">
+  <button class="primary" id="normal">场景 A：普通战·血毒双镖</button>
+  <button class="primary" id="boss">场景 B：首脑战·背包砸击（2 能量）</button>
+</div>
+
+<section class="panel">
+  <h2 id="scene">正在载入真实模块…</h2>
+  <div id="facts"></div>
+  <div class="foes" id="foes"></div>
+  <div class="toolbar">
+    <button id="playDart">打出真实血毒双镖 → 0号敌人</button>
+    <button id="beginSlam">开始背包砸击</button>
+    <button id="cancel">取消当前交互</button>
+  </div>
+  <div class="toolbar">
+    <button class="danger" id="lateDart">直接调用 resolveDart(1)</button>
+    <button class="danger" id="lateSlam">直接调用 resolveSlam(0)</button>
+    <button class="danger" id="deadTarget">调用当前命令 → 死亡0号</button>
+    <button class="danger" id="wrongSide">调用当前命令 → 错误side 99</button>
+  </div>
+  <p class="warn">敌人按钮会按真实 snapshot 的 pending 类型调用 <code>resolveDart(index)</code> 或 <code>resolveSlam(index)</code>。红色按钮用于无交互、取消后迟到、有效后重复等故意越界调用。</p>
+</section>
+
+<div class="grid" style="margin-top:16px">
+  <section class="panel"><h2>真实 snapshot 摘要</h2><pre id="snapshot"></pre></section>
+  <section class="panel"><h2>真实 game.log</h2><pre id="logs"></pre></section>
+</div>
+
+<script type="module">
+const memory = new Map();
+const memoryStorage = {
+  get length(){ return memory.size; }, key(i){ return [...memory.keys()][i] ?? null; },
+  getItem(k){ return memory.has(String(k)) ? memory.get(String(k)) : null; },
+  setItem(k,v){ memory.set(String(k),String(v)); }, removeItem(k){ memory.delete(String(k)); }, clear(){ memory.clear(); },
+};
+Object.defineProperty(window, 'localStorage', { value: memoryStorage, configurable: true });
+
+window.SDT = { Icons:{ img:()=>'' }, Sound:{ music(){},sfx(){},setDucked(){},setBoss(){} } };
+window.SDT.Icons.TYPE_ART = {};
+// 沿正式启动路径组装 MAP：mapData.js 合并 map.json 与 rules.js 的真实 RULES，
+// 避免 QA 自行复制一份会漂移的规则对象。
+await import('../../game/src/mapData.js');
+const map = window.SDT.MAP;
+await import('../../game/src/cards.js');
+const { BattleSession, configureBattleRenderer } = await import('../../game/src/battle.core.js');
+const Cards = window.SDT.Cards;
+Cards.ensureSha(); Cards.ensureStarters(); Cards.ensureTabletop(); Cards.ensureDmgTypes(); Cards.ensureEffectFields();
+
+let game = null;
+let dartUid = null;
+let activeScene = 'none';
+const $ = id => document.getElementById(id);
+const clean = value => String(value).replace(/\[\[[^\]]+\]\]/g,'').replace(/<[^>]*>/g,'');
+function makeGame(cards){
+  const logs=[];
+  return {
+    ownedCards:cards.map((card,i)=>({uid:`r3-qa-${Date.now()}-${i}`,card:{...card},safe:false})),
+    hp:99,maxHp:99,atk:0,spellPower:0,coins:0,myClass:'战士',characterId:null,state:'idle',battleActive:false,
+    logs,log(message){logs.push(clean(message));},heal(n){this.hp=Math.min(this.maxHp,this.hp+n);},addItem(){},onBattleEnd(){},
+  };
+}
+function summary(s){
+  return {
+    mode:s.mode, turn:s.turn, energy:`${s.energy}/${s.maxEnergy}`, busy:s.busy,
+    dartPending:s.dartPending, slamPending:s.slamPending,
+    hand:s.hand, foes:s.foes.map((f,index)=>({index,id:f.id,name:f.name,hp:`${f.hp}/${f.maxHp}`,dead:f.dead,bleed:f.status.bleed||0,poison:f.status.poison||0})),
+  };
+}
+function render(s=BattleSession.getSnapshot()){
+  $('snapshot').textContent=JSON.stringify(summary(s),null,2);
+  $('logs').textContent=(game?.logs||[]).map((line,i)=>`${i+1}. ${line}`).join('\n');
+  $('logs').scrollTop=$('logs').scrollHeight;
+  $('facts').innerHTML=activeScene==='normal'
+    ? '<span class="pass">真实卡：血毒双镖。</span> 0号联邦巡防兵由地图定义复制后仅将 HP 调为 1；1号保持地图原始 HP。先点“打出”，再点死亡0号验证不回退，最后点存活1号完成第二镖。'
+    : '<span class="pass">真实首脑：肃清总督。</span> 规则能量临时设为 2，便于直接观察一次合法砸击只扣一次、重复命令不再扣费。';
+  $('foes').replaceChildren(...s.foes.map((f,index)=>{
+    const b=document.createElement('button');
+    b.className=`foe ${f.dead?'dead':''}`; b.textContent=`${index}号 ${f.name}｜HP ${f.hp}/${f.maxHp}｜流血 ${f.status.bleed||0}｜中毒 ${f.status.poison||0}`;
+    b.onclick=()=>act(()=>s.dartPending?BattleSession.commands.resolveDart(index):s.slamPending?BattleSession.commands.resolveSlam(index):null);
+    return b;
+  }));
+}
+configureBattleRenderer(render);
+function act(fn){
+  try{fn();}catch(error){game?.logs.push(`QA捕获异常：${error.stack||error}`);}
+  render(); setTimeout(()=>render(),0); setTimeout(()=>render(),80);
+}
+function endCurrent(){ if(!game?.battleActive)return; const s=BattleSession.getSnapshot(); if(s.deckSelection)BattleSession.commands.cancelDeck();else BattleSession.commands.flee(); }
+function loadNormal(){
+  endCurrent(); activeScene='normal'; $('scene').textContent='场景 A：普通战·双镖首段击杀与第二目标';
+  const dart=Cards.all().find(c=>c.id==='tt7-bloodpoison'); if(!dart)throw Error('真实卡库缺少 tt7-bloodpoison');
+  const base=map.monsters.infantry; game=makeGame([dart]); dartUid=game.ownedCards[0].uid;
+  BattleSession.start(game,[{...base,hp:1,name:`${base.name}·残血`},{...base,name:`${base.name}·存活`}],{isBoss:false,name:'R3-0 QA'}); render();
+}
+function loadBoss(){
+  endCurrent(); activeScene='boss'; $('scene').textContent='场景 B：首脑战·背包砸击命令守卫'; dartUid=null;
+  const oldEnergy=map.rules.battleEnergy; map.rules.battleEnergy=2;
+  game=makeGame([]); BattleSession.start(game,[{...map.altar.bosses[0]}],{isBoss:true,name:'R3-0 QA'}); BattleSession.commands.confirmDeck();
+  map.rules.battleEnergy=oldEnergy; render();
+}
+$('normal').onclick=()=>act(loadNormal); $('boss').onclick=()=>act(loadBoss);
+$('playDart').onclick=()=>act(()=>dartUid&&BattleSession.commands.playCard(dartUid,0));
+$('beginSlam').onclick=()=>act(()=>BattleSession.commands.bagSlam());
+$('cancel').onclick=()=>act(()=>BattleSession.commands.cancelInteraction());
+$('lateDart').onclick=()=>act(()=>BattleSession.commands.resolveDart(1));
+$('lateSlam').onclick=()=>act(()=>BattleSession.commands.resolveSlam(0));
+$('deadTarget').onclick=()=>act(()=>{const s=BattleSession.getSnapshot();return s.slamPending?BattleSession.commands.resolveSlam(0):BattleSession.commands.resolveDart(0);});
+$('wrongSide').onclick=()=>act(()=>{const s=BattleSession.getSnapshot();return s.slamPending?BattleSession.commands.resolveSlam(99):BattleSession.commands.resolveDart(99);});
+loadNormal();
+</script>
+</body></html>
