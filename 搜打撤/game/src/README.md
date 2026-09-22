@@ -8,7 +8,7 @@
 2. `art.js`、`icons-bitmap.js`、`sound.js`、`camera.js`、`combat.js`、`base.js`、`meta.js`、`renderer.primitives.js`：独立能力与纯工具。
 3. `game.store.js`、`game.storage.js`、`game.session.js`、`battle.core.js`、`battle.effects.js`、`battle.deck.js`、`battle.rules.js`：状态、持久化和领域逻辑；`game.menu.js` 是标题/选档/设置控制器。
 4. `renderer.js`（聚合 `renderer.icons.js` / `renderer.fx.js`）、`battle.view.js`、`ui.js`：Canvas 或 DOM 表现层；`renderer.fx.js` 挂载的 `SDT.FX` 必须先于 `game.session.js` 求值（main.js 导入顺序不可调换）。
-5. `game.run.js`、`game.run.shop.js`、`game.hub.js`、`game.bag.js`、`game.notes.js`、`game.cardslib.js`：功能流程。
+5. `game.run.js`、`game.run.shop.js`、`game.hub.js`（基地壳）、`game.hub.depart.js`（出征整备）、`game.hub.pages.js`（六页签 HTML）、`game.hub.bridge.js`（壳↔切片中立桥）、`game.bag.js`、`game.notes.js`、`game.cardslib.js`：功能流程。
 6. `game.boot.js`：输入、跨功能接线和启动；这是唯一允许了解多数功能模块的地方。
 
 ## 关键约束

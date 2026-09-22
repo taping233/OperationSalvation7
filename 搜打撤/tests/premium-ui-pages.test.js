@@ -4,7 +4,9 @@ import { readFileSync } from 'node:fs';
 const src = (path) => readFileSync(path, 'utf8');
 
 describe('基地人物与收藏页的信息架构', () => {
-  const hub = src('game/src/game.hub.js');
+  // 2026-09-22 hub 拆分：断言串分布在壳与两个切片，三文件拼接后仍断言「基地源码含 X」
+  const hub = ['game.hub.js', 'game.hub.depart.js', 'game.hub.pages.js']
+    .map((f) => src(`game/src/${f}`)).join('\n');
   const css = src('game/css/expedition-hub.css');
 
   it('人物页使用档案墙和汇总数据，而非旧成就列表', () => {

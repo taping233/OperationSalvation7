@@ -1,7 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
 
-const hub = readFileSync('game/src/game.hub.js', 'utf8');
+// 2026-09-22 hub 拆分：断言串分布在壳与两个切片，三文件拼接后仍断言「基地源码含 X」
+const hub = ['game.hub.js', 'game.hub.depart.js', 'game.hub.pages.js']
+  .map((f) => readFileSync(`game/src/${f}`, 'utf8')).join('\n');
 const altar = readFileSync('game/src/game.run.altar.js', 'utf8');
 const session = readFileSync('game/src/game.session.js', 'utf8');
 
