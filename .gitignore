@@ -1,7 +1,6 @@
 node_modules/
 .playwright-cli/
 output/
-搜打撤/desktop/electron/
 图片/
 搜打撤/desktop-app/dist/
 搜打撤/desktop-app/dist2/
@@ -16,8 +15,6 @@ output/
 /*.zip
 搜打撤/desktop-app/game/
 搜打撤/desktop-app/dist-shell-check/
-搜打撤/desktop/_fps_probe_tmp.cjs
-搜打撤/prototypes/map-system/tools/_fps_probe_tmp.*
 /SoudacheUnity/
 /_incoming_sdc2/
 /_cards_diff.txt
