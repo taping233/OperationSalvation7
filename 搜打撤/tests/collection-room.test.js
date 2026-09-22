@@ -48,8 +48,11 @@ describe('收藏池与进度', () => {
     const pool = Meta.collectPool();
     expect(pool.every(c => c.cls && Cards.CLASSES.includes(c.cls))).toBe(true);
     expect(pool.every(c => c.rarity === '职业' || c.type === '能力卡')).toBe(true);
-    // 卡库里确有退役旧职业卡（rarity=职业 但无 cls）与衍生牌，但都被排除
-    expect(Cards.all().some(c => c.rarity === '职业' && !c.cls)).toBe(true);
+    // 2026-09-23：09-09 职业整合 v3 已给全部职业卡补归属，「rarity=职业 但无 cls」标本从卡库消灭，
+    // 原「标本存在性」断言过时——改为对过滤规则入口做规则级断言（collectPool = all().filter(isCollectible)）：
+    // 无归属/无效归属的职业卡一律不入池。衍生牌标本仍在（下方进度用例会用到），且池内无衍生（本块末行）。
+    expect(Meta.isCollectible({ rarity: '职业', cls: null })).toBe(false);
+    expect(Meta.isCollectible({ rarity: '职业', cls: '不存在的职业' })).toBe(false);
     expect(Cards.all().some(c => c.rarity === '衍生' && c.cls)).toBe(true);
     pool.forEach(c => expect(c.rarity).not.toBe('衍生'));
   });

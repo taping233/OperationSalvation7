@@ -20,7 +20,8 @@ describe('基地出发与选角回流回归', () => {
 
 describe('基地操作键盘语义与危险操作保护', () => {
   it('仓库行使用原生按钮，整备拖拽卡面提供键盘语义与焦点样式', () => {
-    expect(hub).toContain('<button type="button" class="pk-row stash-row');
+    // 2026-09-23 对齐 09-20 仓库卡面化拍板（2d5ad9e）：文字行改卡面格，原生按钮语义保留
+    expect(hub).toContain('<button type="button" class="stash-cell');
     expect(hub).toContain('role="button" tabindex="0" aria-pressed=');
     expect(hub).toContain("e.key !== 'Enter' && e.key !== ' '");
     expect(readFileSync('game/css/hub.css', 'utf8')).toContain('.dep-card[role="button"]:focus-visible');
