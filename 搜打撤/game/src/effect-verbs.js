@@ -10,6 +10,8 @@
  *                      供新卡作者查「这句话这么说能不能被识别」，也是覆盖度断言的依据。
  *   ELSEWHERE       —— 由文本执行器之外的层实装的句式（出牌结算 battle.core /
  *                      战斗规则 battle.rules / 背包 game.bag 等）。
+ *                      注：impl 字段是人类可读的历史标注、无代码分发消费方——2026-09-22
+ *                      批6 拆分后 battle.core 已拆为 battle.engine.js 等，impl 值保留不改。
  *                      执行器命中这些只标记「已识别」，不重复结算。
  *                      表内句式与门控逐条冻结（快照见 tests/fixtures/effect-elsewhere-frozen.json）。
  *   DESIGNER_BLANKS —— 已知未实装的设计者留白句；显式登记以免被当成新问题或悄悄放行。
