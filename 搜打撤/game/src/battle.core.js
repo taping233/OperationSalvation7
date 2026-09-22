@@ -3253,4 +3253,6 @@ const viewApi = Object.freeze({
 });
 const BattleSession = Object.freeze({ start, getSnapshot, commands, serialize, restore });
 
+// 批5 理顺：battle.view 拆片后按名直引（viewApi 原样保留给既有消费方与测试）
+export { AFFIX_META, Combat, R, aegisBlocked, effCostOf, findCard, infuseOf, markDreadShown, pileTip, refillDrawPile, takeFloats, takeCardAnims, targetSide, unplayableReason, matchHandSelectKey, handCurseSpecs, getPreviewContext };
 export { BattleSession, commands, configureBattleRenderer, getSnapshot, restore, serialize, start, viewApi };

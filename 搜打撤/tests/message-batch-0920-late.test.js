@@ -50,7 +50,10 @@ describe('2026-09-20 晚间留言卡牌数据', () => {
 
   it('物资格、药水说明、能力提示与手牌翻页提醒均有界面守卫', () => {
     const flow = readFileSync(resolve(process.cwd(), 'game/src/game.run.flow.js'), 'utf8');
-    const battleView = readFileSync(resolve(process.cwd(), 'game/src/battle.view.js'), 'utf8');
+    // 2026-09-22 battle.view 拆片：断言串（bt-hand-page 在 render 分派段）壳+六片拼接读
+    const battleView = ['battle.view.js', 'battle.overlays.js', 'battle.layers.js', 'battle.vfx.js',
+      'battle.anim.js', 'battle.aim.js', 'battle.hover.js']
+      .map((f) => readFileSync(resolve(process.cwd(), 'game/src', f), 'utf8')).join('\n');
     const battleCss = readFileSync(resolve(process.cwd(), 'game/css/battle.css'), 'utf8');
     expect(flow).toContain("asset: 'scene-event-airdrop'");
     expect(flow).toContain("potion.desc || '效果见卡牌说明'");

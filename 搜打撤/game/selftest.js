@@ -18,9 +18,16 @@ import { fileURLToPath } from 'node:url';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 
-// game.run.* 为架构批次 4 拆出的局内流程模块（scenes→altar→flow），与壳合并扫描
-const GAME_PARTS = ['game.session.js', 'game.menu.js', 'game.run.data.js', 'game.run.js', 'game.run.scenes.js', 'game.run.altar.js', 'game.run.flow.js', 'game.hub.js', 'game.bag.js', 'game.notes.js', 'game.cardslib.js', 'game.boot.js'];
-const BATTLE_PARTS = ['battle.core.js', 'battle.view.js'];
+// game.run.* 为架构批次 4 拆出的局内流程模块（scenes→altar→flow），与壳合并扫描；
+// 2026-09-22 六文件重构批1-5 拆出的切片一并并入（effect-steps/cards/hub/bag/battle.view 各片）
+const GAME_PARTS = ['game.session.js', 'game.menu.js', 'game.run.data.js', 'game.run.js', 'game.run.scenes.js', 'game.run.altar.js', 'game.run.flow.js',
+  'effect-steps.ctx.js', 'effect-steps.gates.js', 'effect-steps.curse.js', 'effect-steps.damage.js', 'effect-steps.recovery.js', 'effect-steps.kills.js', 'effect-steps.deck.js', 'effect-steps.rules.js', 'effect-steps.audit.js', 'effect-steps.tail.js',
+  'cards.consts.js', 'cards.rules.js', 'cards.data.js', 'cards.sync.js',
+  'game.hub.js', 'game.hub.depart.js', 'game.hub.pages.js', 'game.hub.bridge.js',
+  'game.bag.js', 'game.bag.drag.js', 'game.bag.settle.js', 'game.bag.bridge.js',
+  'game.notes.js', 'game.cardslib.js', 'game.boot.js'];
+const BATTLE_PARTS = ['battle.core.js', 'battle.view.js', 'battle.overlays.js', 'battle.layers.js',
+  'battle.vfx.js', 'battle.anim.js', 'battle.aim.js', 'battle.hover.js'];
 const src = (p) => {
   if (p === 'game.js') return GAME_PARTS.map(f => fs.readFileSync(path.join(HERE, 'src', f), 'utf8')).join('\n');
   if (p === 'battle.js') return BATTLE_PARTS.map(f => fs.readFileSync(path.join(HERE, 'src', f), 'utf8')).join('\n');
