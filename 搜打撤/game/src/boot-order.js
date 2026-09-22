@@ -11,7 +11,7 @@ const BOOT_ORDER = [
   'ui-scale',   // 全局 UI 缩放：无依赖且须在首帧渲染前挂 zoom，故居首
   'random', 'rules', 'mapData', 'art', 'icons-bitmap', 'sound', 'camera', 'motion', 'input',
   'event-bus', 'notes', 'cards', 'combat', 'base', 'meta', 'render-scheduler', 'renderer.fx',
-  'renderer', 'ui', 'shared', 'battle-loader', 'chests',
+  'renderer', 'ui', 'term-tips', 'shared', 'battle-loader', 'chests',   // term-tips=词条讲解浮框（09-20 上线时漏登记，2026-09-22 补）
   'game.storage', 'game.store', 'game.session', 'game.nest', 'game.run', 'game.hub', 'game.bag',
   'game.notes', 'game.cardslib', 'game.boot',
 ];

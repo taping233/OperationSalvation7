@@ -56,6 +56,8 @@ function makeGame(cards, over = {}) {
 }
 const foe = (name = '靶子') => ({ id: 'infantry', name, hp: 99999, atk: 1 });
 const tick = () => new Promise(r => setTimeout(r, 0));
+const nap = (ms) => new Promise(r => setTimeout(r, ms));   // 空闲确认用真实延时（根治负载 flake）
+const waitLog = async (pred, ms = 4000) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (pred()) return true; await nap(20); } return false; };   // 结果级轮询：等动作链真正落日志/终态再断言（根治负载 flake）
 const snap = () => BattleSession.getSnapshot();
 const handNames = () => snap().hand.map(u => (viewApi.findCard(u) || {}).card && (viewApi.findCard(u) || {}).card.name);
 const pileNames = () => snap().drawPile.map(u => (viewApi.findCard(u) || {}).card && (viewApi.findCard(u) || {}).card.name);
@@ -67,7 +69,12 @@ async function drain(maxLoops = 400) {
     if (s.choosing) continue;                       // 抉择留给用例自己决定
     if (s.discovering) { BattleSession.commands.pickDiscover(0); continue; }
     if (s.handSelecting) { BattleSession.commands.skipHandSelect(); continue; }
-    if (!s.busy && s.actionQueueLength === 0) return s;
+    if (!s.busy && s.actionQueueLength === 0) {
+      await nap(30);   // 根治负载 flake：首闲≠终闲——用新鲜快照跨调度间隙再确认
+      const fresh = snap();
+      if (!fresh.busy && fresh.actionQueueLength === 0) return fresh;
+      continue;
+    }
   }
   return snap();
 }
@@ -77,7 +84,12 @@ async function waitIdle(maxLoops = 400) {
     await tick();
     const s = snap();
     if (s.handSelecting || s.choosing) return s;
-    if (!s.busy && s.actionQueueLength === 0 && !s.discovering) return s;
+    if (!s.busy && s.actionQueueLength === 0 && !s.discovering) {
+      await nap(30);   // 根治负载 flake：首闲≠终闲——用新鲜快照跨调度间隙再确认
+      const fresh = snap();
+      if (!fresh.busy && fresh.actionQueueLength === 0 && !fresh.discovering) return fresh;
+      continue;
+    }
   }
   return snap();
 }
@@ -89,7 +101,12 @@ async function nextTurn(maxLoops = 400) {
     if (s.choosing) { BattleSession.commands.pickChoice(0); continue; }
     if (s.discovering) { BattleSession.commands.pickDiscover(0); continue; }
     if (s.handSelecting) { BattleSession.commands.skipHandSelect(); continue; }
-    if (!s.busy && s.actionQueueLength === 0 && String(s.phase).includes('player')) return s;
+    if (!s.busy && s.actionQueueLength === 0 && String(s.phase).includes('player')) {
+      await nap(30);   // 根治负载 flake：首闲≠终闲——用新鲜快照跨调度间隙再确认
+      const fresh = snap();
+      if (!fresh.busy && fresh.actionQueueLength === 0 && String(fresh.phase).includes('player')) return fresh;
+      continue;
+    }
   }
   return snap();
 }
@@ -143,11 +160,19 @@ undefined
   it('无量仙剑·云风（BOSS战）：抽牌并直接释放其中武术', async () => {
     // 牌库全武术（确定性）：无论怎么洗抽，抽到的必然全部被「直接释放」，不残留手牌
     const m = martialDmg(3);
-    const g = await startBoss([hero('tt8-hero-sword'), m, m, m, m, m, m, m]);
+    let g;
+    for (let a = 0; a < 30; a++) {
+      g = await startBoss([hero('tt8-hero-sword'), m, m, m, m, m, m, m]);
+      const u = uidOf(g, hero('tt8-hero-sword'));
+      if (snap().hand.includes(u) && snap().drawPile.length > 0) break;   // 触发卡在起手且牌库有余（洗牌随机 → 重试到满足）
+      if (a === 29) throw new Error('30 次尝试内未同时满足「触发卡在起手 + 牌库有余」');
+    }
     mark(g);
     BattleSession.commands.playCard(uidOf(g, hero('tt8-hero-sword')), null);
     await drain();
+    await waitLog(() => /抽了 \d+ 张牌/.test(slice(g)));
     expect(/抽了 \d+ 张牌/.test(slice(g)), slice(g)).toBe(true);
+    await waitLog(() => /直接释放了其中 [1-5] 张武术/.test(slice(g)));
     expect(/直接释放了其中 [1-5] 张武术/.test(slice(g)), slice(g)).toBe(true);
     // 释放语义 = 只自动打出「刚抽到的」武术；开局已在手牌的同名卡照常保留（同名堆叠干扰计数，
     // 故以释放日志为准，不按名字断言手牌残留）
@@ -244,6 +269,7 @@ describe('英雄卡实打 · 牧师', () => {
     BattleSession.commands.playCard(uidOf(g, hero('tt8-hero-priest')), 'self');
     const s = await drain();
     expect(s.hand.length, `手牌应补到 6 张：${s.hand.length}`).toBe(6);
+    await waitLog(() => /置入 \d+ 张随机卡牌/.test(slice(g)));
     expect(/置入 \d+ 张随机卡牌/.test(slice(g)), slice(g)).toBe(true);
     expect(g.hp > 100, '置入法术应回复生命').toBe(true);
     BattleSession.commands.flee();

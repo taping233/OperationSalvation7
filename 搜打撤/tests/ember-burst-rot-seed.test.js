@@ -42,6 +42,7 @@ function makeGame(cards) {
 }
 const foeDef = (name, hp) => ({ id: 'infantry', name: name || '靶子', hp: hp || 99999, atk: 1 });
 const tick = () => new Promise(r => setTimeout(r, 0));
+const nap = (ms) => new Promise(r => setTimeout(r, ms));   // 空闲确认用真实延时（根治负载 flake）
 const snap = () => BattleSession.getSnapshot();
 
 async function drain(maxLoops = 300) {
@@ -51,7 +52,12 @@ async function drain(maxLoops = 300) {
     if (s.discovering) { BattleSession.commands.pickDiscover(0); continue; }
     if (s.choosing) { BattleSession.commands.pickChoice(0); continue; }
     if (s.handSelecting) { BattleSession.commands.skipHandSelect(); continue; }
-    if (!s.busy && s.actionQueueLength === 0) return s;
+    if (!s.busy && s.actionQueueLength === 0) {
+      await nap(30);   // 根治负载 flake：首闲≠终闲——用新鲜快照跨调度间隙再确认
+      const fresh = snap();
+      if (!fresh.busy && fresh.actionQueueLength === 0) return fresh;
+      continue;
+    }
   }
   return snap();
 }

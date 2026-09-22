@@ -52,6 +52,8 @@ function makeGame(cards, myClass = '侠客') {
 }
 const foeDef = () => ({ id: 'infantry', name: '直释靶子', hp: 99999, atk: 1 });
 const tick = () => new Promise(r => setTimeout(r, 0));
+const nap = (ms) => new Promise(r => setTimeout(r, ms));   // 空闲确认用真实延时（根治负载 flake）
+const waitLog = async (pred, ms = 4000) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (pred()) return true; await nap(20); } return false; };   // 结果级轮询：等动作链真正落日志/终态再断言（根治负载 flake）
 const snap = () => BattleSession.getSnapshot();
 const logsJoin = (g) => g.logs.join('\n');
 const endBattle = (g) => { try { if (g.battleActive && !snap().busy) BattleSession.commands.flee(); } catch (_) {} };
@@ -69,7 +71,12 @@ async function drain(maxLoops = 300, stopPanel = false) {
     if (s.discovering) { BattleSession.commands.pickDiscover(0); continue; }
     if (s.choosing) { BattleSession.commands.pickChoice(0); continue; }
     if (s.handSelecting) { BattleSession.commands.skipHandSelect(); continue; }
-    if (!s.busy && s.actionQueueLength === 0) return s;
+    if (!s.busy && s.actionQueueLength === 0) {
+      await nap(30);   // 根治负载 flake：首闲≠终闲——用新鲜快照跨调度间隙再确认
+      const fresh = snap();
+      if (!fresh.busy && fresh.actionQueueLength === 0) return fresh;
+      continue;
+    }
   }
   return snap();
 }
@@ -108,21 +115,27 @@ describe('直接释放 / 直接施放类卡牌专项审计', () => {
     // 2026-09-18：填充足的武术牌——原 9 张时英雄卡能否进开局手牌、以及打牌时牌库余量
     // 都靠洗牌运气，卡池变化（v25）会让「直接释放了其中」时有时无；厚牌库让断言确定。
     const fillers = Array.from({ length: 29 }, () => card('tt2-jianghu'));
-    const g = makeGame([hero, ...fillers], '侠客');
-    BattleSession.start(g, [foeDef()], { isBoss: true, name: '直释审计' });
-    await drain();
-    expect(snap().deckSelection, 'BOSS 战应先进入编组').toBeTruthy();
-    while (snap().deckSelection && snap().deckSelection.selected.length < Math.min(snap().deckSelection.need, snap().deckSelection.cards.length)) {
-      const next = snap().deckSelection.cards.find(c => !snap().deckSelection.selected.includes(c.uid));
-      if (!next) break;
-      BattleSession.commands.selectDeckCard(next.uid);
+    let g, uid;
+    for (let a = 0; a < 30; a++) {
+      g = makeGame([hero, ...fillers], '侠客');
+      BattleSession.start(g, [foeDef()], { isBoss: true, name: '直释审计' });
+      await drain();
+      expect(snap().deckSelection, 'BOSS 战应先进入编组').toBeTruthy();
+      while (snap().deckSelection && snap().deckSelection.selected.length < Math.min(snap().deckSelection.need, snap().deckSelection.cards.length)) {
+        const next = snap().deckSelection.cards.find(c => !snap().deckSelection.selected.includes(c.uid));
+        if (!next) break;
+        BattleSession.commands.selectDeckCard(next.uid);
+      }
+      BattleSession.commands.confirmDeck();
+      await drain();
+      uid = g.ownedCards[0].uid;
+      for (let t = 0; t < 8 && !snap().hand.includes(uid); t++) { BattleSession.commands.endTurn(); await drain(); }
+      if (snap().hand.includes(uid) && snap().drawPile.length > 0) break;   // 触发卡在起手且牌库有余（洗牌随机 → 重试到满足）
+      if (a === 29) throw new Error('30 次尝试内未同时满足「触发卡在起手 + 牌库有余」');
     }
-    BattleSession.commands.confirmDeck();
-    await drain();
-    const uid = g.ownedCards[0].uid;
-    for (let t = 0; t < 8 && !snap().hand.includes(uid); t++) { BattleSession.commands.endTurn(); await drain(); }
     expect(snap().hand.includes(uid)).toBe(true);   // 能力卡在 BOSS 战正常进手牌（回合抽牌必到手）
     await playIt(g, uid, hero);
+    await waitLog(() => logsJoin(g).includes('直接释放了其中'));
     expect(logsJoin(g)).toContain('直接释放了其中');   // 万剑归宗自动释放了抽到的武术
     const s = snap();
     expect(s.busy || s.actionQueueLength > 0).toBe(false);
@@ -161,7 +174,9 @@ describe('直接释放 / 直接施放类卡牌专项审计', () => {
     await drain();
     const handBefore = snap().hand.length;
     await playIt(g, g.ownedCards[0].uid, bloom);   // drain 会自动选发现第 0 张
+    await waitLog(() => logsJoin(g).includes('并直接施放'));
     expect(logsJoin(g)).toContain('并直接施放');
+    await waitLog(() => logsJoin(g).includes('其余的'));
     expect(logsJoin(g)).toContain('其余的');   // 剩余两张入手
     const s = snap();
     expect(s.hand.length).toBeGreaterThanOrEqual(handBefore + 1);
@@ -175,6 +190,7 @@ describe('直接释放 / 直接施放类卡牌专项审计', () => {
     BattleSession.start(g, [foeDef()], { isBoss: false, name: '直释审计' });
     await drain();
     await playIt(g, g.ownedCards[0].uid, cardByName('千变万化'));
+    await waitLog(() => logsJoin(g).includes('并直接施放'));
     expect(logsJoin(g)).toContain('并直接施放');
     const s = snap();
     expect(s.busy || s.actionQueueLength > 0).toBe(false);
@@ -187,6 +203,7 @@ describe('直接释放 / 直接施放类卡牌专项审计', () => {
     BattleSession.start(g, [foeDef()], { isBoss: false, name: '直释审计' });
     await drain();
     await playIt(g, g.ownedCards[0].uid, cardByName('千变万化'));
+    await waitLog(() => logsJoin(g).includes('并直接施放'));
     expect(logsJoin(g)).toContain('并直接施放');
     const s = snap();
     expect(s.busy || s.actionQueueLength > 0).toBe(false);
@@ -199,6 +216,7 @@ describe('直接释放 / 直接施放类卡牌专项审计', () => {
     BattleSession.start(g, [foeDef()], { isBoss: false, name: '直释审计' });
     await drain();
     await playIt(g, g.ownedCards[0].uid, card('tt3sp-magicoil'));
+    await waitLog(() => logsJoin(g).includes('药水'));
     expect(logsJoin(g)).toContain('药水');
     const s = snap();
     expect(s.busy || s.actionQueueLength > 0).toBe(false);
@@ -215,6 +233,7 @@ describe('直接释放 / 直接施放类卡牌专项审计', () => {
     // 空锦囊打出：无效果
     BattleSession.commands.playCard(g.ownedCards[0].uid, 0);
     await drain();
+    await waitLog(() => logsJoin(g).includes('锦囊是空的'));
     expect(logsJoin(g)).toContain('锦囊是空的');
     // 模拟背包预存法术（往 _pouch 火球）
     g.ownedCards[0].card._pouch = [{ ...card('tt3-fireball') }];
@@ -245,12 +264,14 @@ describe('直接释放 / 直接施放类卡牌专项审计', () => {
     let s = await drain();
     // 敌人行动后回到玩家回合（hp 99999 扛得住）
     for (let i = 0; i < 20 && s.phase !== 'player'; i++) { BattleSession.commands.endTurn?.(); await tick(); s = snap(); }
+    await waitLog(() => logsJoin(g).includes('箭'));
     expect(logsJoin(g)).toContain('箭');   // 「获得【箭】，其费用已变为 0」
     // 连弩限定技能：直接释放手牌中的所有「箭」
     const xbowEntry = snap().equipped.find(e => e.name === '连弩');
     expect(xbowEntry).toBeTruthy();
     BattleSession.commands.useEquipSkill(xbowEntry.uid);
     s = await drain();
+    await waitLog(() => /释放了手牌中 \d+ 张「箭」/.test(logsJoin(g)));
     expect(logsJoin(g)).toMatch(/释放了手牌中 \d+ 张「箭」/);
     expect(s.busy || s.actionQueueLength > 0).toBe(false);
     endBattle(g);

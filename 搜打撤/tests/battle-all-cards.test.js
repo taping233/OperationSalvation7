@@ -56,6 +56,7 @@ function makeGame(cards, myClass = '侠客') {
 const foeDef = () => ({ id: 'infantry', name: '审计靶子', hp: 99999, atk: 1 });
 
 const tick = () => new Promise(r => setTimeout(r, 0));
+const nap = (ms) => new Promise(r => setTimeout(r, ms));   // 空闲确认用真实延时（根治负载 flake）
 const snap = () => BattleSession.getSnapshot();
 
 // 抽干动作队列并顺手关掉发现/抉择/手选面板（都选第 0 项），返回最终快照
@@ -66,7 +67,12 @@ async function drain(maxLoops = 200) {
     if (s.discovering) { BattleSession.commands.pickDiscover(0); continue; }
     if (s.choosing) { BattleSession.commands.pickChoice(0); continue; }
     if (s.handSelecting) { BattleSession.commands.skipHandSelect(); continue; }
-    if (!s.busy && s.actionQueueLength === 0) return s;
+    if (!s.busy && s.actionQueueLength === 0) {
+      await nap(30);   // 根治负载 flake：首闲≠终闲——用新鲜快照跨调度间隙再确认
+      const fresh = snap();
+      if (!fresh.busy && fresh.actionQueueLength === 0) return fresh;
+      continue;
+    }
   }
   return snap();
 }

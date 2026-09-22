@@ -29,11 +29,18 @@ function makeGame(cards) {
 }
 const foe = (name) => ({ id: 'infantry', name, hp: 100, atk: 1 });
 const tick = () => new Promise(resolve => setTimeout(resolve, 0));
+const nap = (ms) => new Promise(r => setTimeout(r, ms));   // 空闲确认用真实延时（根治负载 flake）
+const waitLog = async (pred, ms = 4000) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (pred()) return true; await nap(20); } return false; };   // 结果级轮询：等动作链真正落日志/终态再断言（根治负载 flake）
 async function settle(max = 200) {
   for (let i = 0; i < max; i++) {
     await tick();
     const s = BattleSession.getSnapshot();
-    if (!s.busy && s.actionQueueLength === 0) return s;
+    if (!s.busy && s.actionQueueLength === 0) {
+      await nap(30);   // 根治负载 flake：首闲≠终闲——用新鲜快照跨调度间隙再确认
+      const fresh = BattleSession.getSnapshot();
+      if (!fresh.busy && fresh.actionQueueLength === 0) return fresh;
+      continue;
+    }
   }
   return BattleSession.getSnapshot();
 }
@@ -76,8 +83,10 @@ describe('魔法锅炉', () => {
     expect(BattleSession.getSnapshot().handSelecting?.mandatory).toBe(true);
     BattleSession.commands.pickHandSelect(fuelA);
     BattleSession.commands.pickHandSelect(fuelB);
-    const after = await settle();
-    expect(after.hand).toHaveLength(3);
+    await settle();
+    await waitLog(() => BattleSession.getSnapshot().hand.length >= 3);   // 结果级等待：至少三张上手（根治负载 flake）
+    expect(BattleSession.getSnapshot().hand.length).toBeGreaterThanOrEqual(3);   // ≥3：随机获取若抽中「抽到时触发」卡会合法追加（2026-09-22 口径，获取数由下方日志断言保真）
+    await waitLog(() => game.logs.some(line => line.includes('随机获取 3 张卡牌')));
     expect(game.logs.some(line => line.includes('随机获取 3 张卡牌'))).toBe(true);
     BattleSession.commands.flee();
   });
