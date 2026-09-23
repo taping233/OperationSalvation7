@@ -114,6 +114,7 @@ function requestClassChoice(options) {
   };
 
   function doDeath() {
+    if (!game.runActive) return false;   // 死亡终局只结算一次；晚到的伤害/战斗回调不得重复搬运安全格
     syncPlayTime();
     game.state = 'done';
     game.runActive = false;
@@ -157,6 +158,7 @@ function requestClassChoice(options) {
     UI.act('goBase', () => { UI.hideOverlay(); runtime.openBaseHub('deploy'); });
     UI.act('again', () => { UI.hideOverlay(); runtime.openBaseHub('deploy'); });
     UI.refresh(game);
+    return true;
   }
 
   // ---------- 背包容量（基地扩建后生效）----------

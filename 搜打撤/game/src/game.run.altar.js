@@ -713,7 +713,8 @@ export function openEmergencyModal() {
 // 「初始攻击」为初始牌不可入库；木材/口粮自动入库；消耗口袋自动回收。
 let extractLeft = null;   // 待整理的卡牌堆 [{card, count}]（撤离整理页暂存）
 
-function doExtract() {
+export function doExtract() {
+  if (!game.runActive) return false;   // 撤离信标可能被重复确认；runActive 是本局一次性结算闩
   syncPlayTime();
   game.state = 'done';
   game.runActive = false;
@@ -757,6 +758,7 @@ function doExtract() {
   });
   extractLeft = [...byName.values()];
   renderExtractStash();
+  return true;
 }
 
 function renderExtractStash() {

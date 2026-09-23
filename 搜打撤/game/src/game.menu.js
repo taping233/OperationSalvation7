@@ -704,6 +704,7 @@ function createGameMenuController(deps) {
   }
 
   function abandonRun() {
+    if (!game.runActive) return false;   // 双击确认/迟到动作不能重复结算同一局
     syncPlayTime();
     game.state = 'done';
     game.runActive = false;
@@ -737,6 +738,7 @@ function createGameMenuController(deps) {
     UI.act('goBase', () => { UI.hideOverlay(); runtime.openBaseHub('deploy'); });
     UI.act('toTitle', () => { UI.hideOverlay(); showTitle(); });
     UI.refresh(game);
+    return true;
   }
 
   function quitGame() {
