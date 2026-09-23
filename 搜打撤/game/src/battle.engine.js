@@ -1174,6 +1174,18 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     // 「对战开始时」装备（Q1 老板定向：持有即自动生效）不进手牌、改为开战被动
     // 普通战无法使用能力卡（2026-09-16 老板定版）：能力卡与道具/资源/事件/生物一样不进普通战手牌
     set$hand(G.ownedCards.filter(o => !['道具', '资源', '事件', '生物', '能力卡'].includes(o.card.type) && !isBattleStartEquip(o.card)).map(o => o.uid));
+    resetBattleEntryState();
+    set$battleState(transitionBattle(battleState, BATTLE_PHASES.PLAYER));
+    G.state = 'modal';
+    applyBattleStartPassives();
+    // 普通战无法使用能力卡（2026-09-16 老板定版）：能力卡不进普通战手牌（对 BOSS 编组不受限）
+    if (alive().length > 1) G.log(`[[icon:question]] 以一敌多：伤害与群体卡都<b>拖到任意敌人身上</b>打出（群体自动命中全体）`, 'sys');
+    G.log(`[[icon:cards]] 普通战斗无需抽牌：随身 <b>${hand.length}</b> 张战斗卡直接可打出；道具/资源/事件卡不入手，能力卡只能收藏或编入 BOSS 战牌库 · 每回合固定 <b>${maxEnergy}</b> 费`, 'sys');
+    requestBattleRender();
+  }
+
+  // 两种战斗入口共用的运行态重置；牌区与模式专属开战步骤留在各自入口。
+  function resetBattleEntryState() {
     set$maxEnergy(R().battleEnergy);
     set$energy(maxEnergy);
     set$turn(1); set$busy(false);
@@ -1186,13 +1198,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     set$viewingGrave(false); set$viewingDeck(false); set$dreadShown(false); set$selectingDeck(false);
     set$viewingBag(false);
     resetBattleExtras();
-    set$battleState(transitionBattle(battleState, BATTLE_PHASES.PLAYER));
-    G.state = 'modal';
-    applyBattleStartPassives();
-    // 普通战无法使用能力卡（2026-09-16 老板定版）：能力卡不进普通战手牌（对 BOSS 编组不受限）
-    if (alive().length > 1) G.log(`[[icon:question]] 以一敌多：伤害与群体卡都<b>拖到任意敌人身上</b>打出（群体自动命中全体）`, 'sys');
-    G.log(`[[icon:cards]] 普通战斗无需抽牌：随身 <b>${hand.length}</b> 张战斗卡直接可打出；道具/资源/事件卡不入手，能力卡只能收藏或编入 BOSS 战牌库 · 每回合固定 <b>${maxEnergy}</b> 费`, 'sys');
-    requestBattleRender();
+    set$pendingHint('');
   }
 
   // —— 新增战斗规则变量统一清零（begin/beginBoss/finish 共用）——
@@ -1249,19 +1255,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     set$selectingDeck(false);
     set$drawPile(shuffle([...sel].concat(shas)));   // 骷髅王剑/混沌之眼等对战开始时装备已在 sel 内
     set$hand([]); set$discard([]); set$granted([]); set$played([]); set$consumed([]); set$grave([]);
-    set$maxEnergy(R().battleEnergy);
-    set$energy(maxEnergy);
-    set$turn(1); set$busy(false);
-    set$pdef({ shield: 0, armor: 0, guard: false });
-    set$pstat(Combat.ensureStatus({ hp: G.hp }));
-    set$infusing(null); set$discovering(null); set$discoverQueue([]); set$interaction(null); set$floats([]); set$cardAnims([]); set$presentationActionSeq(0);
-    set$handSelecting(null); handSelectQueue.length = 0;
-    set$choosing(null); choiceQueue.length = 0; set$stealthStrike(false); set$nextSpellTwice(0);
-    set$delayed([]); set$noDrawNext(false); set$spellCost1(false); set$meleeCost1(false);
-    set$shaTransform(null); set$consumeFireballN(0); set$lastDrawnUids([]); set$lastPlayedType(null);
-    set$viewingGrave(false); set$viewingDeck(false); set$dreadShown(false); set$selectingDeck(false);
-    set$viewingBag(false);
-    resetBattleExtras();
+    resetBattleEntryState();
     set$battleState(transitionBattle(battleState, BATTLE_PHASES.PLAYER));
     G.state = 'modal';
     G.log(opts.nest
