@@ -105,6 +105,9 @@ function makeRunner(myClass) {
     queuePouchCast: () => { rec.pouch = true; },
     registerGrowthCard: () => { rec.growth = true; },
     unlockSeal: () => { rec.seal = true; },
+    // —— 2026-09-23 第十二批新卡补实装端口（真实接线在 battle.engine）——
+    refillEnergy: () => { rec.refilled = true; return 99; },
+    isRandomObtainable: c => C.isRandomObtainable(c),
   });
   return { applyTextEffects, rec, foes, pstat, pdef };
 }

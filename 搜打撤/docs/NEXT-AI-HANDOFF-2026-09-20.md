@@ -1,4 +1,18 @@
-# 搜打撤（Vite 版）· AI 交接文档 · 2026-09-20
+# 搜打撤（Vite 版）· AI 交接文档（原编于 2026-09-20，状态更新至 2026-09-23）
+
+## 当前状态：整体提交（复核于 2026-09-23 16:17 +08:00）
+
+- 老板明确要求将当时全部未提交改动入库。本段随该次提交入库；提交基线为 `034b2bd`，提交后的 HEAD 以本段所属提交为准。提交前相对本地 `origin/master` ahead 40 / behind 0，未联网刷新远端。
+- 提交前 `git status --short` 包括 60 个已跟踪文件修改、38 项未跟踪、暂存区为空。范围含根 `AGENTS.md`、项目文档、战斗/卡牌/效果与照相馆代码、测试、卡面与缩略图、美术映射与生成清单、NAI 工具、标题牌图片；包括 `game/.tmp_sign_check.png` 和 `tools/__pycache__/` 的 2 个 `.pyc` 文件。
+- 并行任务仍在写入封印肢体素材与本交接文档；具体改动归属、整体验收未核实。本次不运行构建、测试或新的浏览器验收；提交后需以实时 `git status --short` 核对是否有后续写入。
+
+## 当前状态补充：封印肢体透明素材重出（复核于 2026-09-23 16:17 +08:00）
+
+- 使用项目官方 painterly v1.2 与 NovelAI Diffusion V5 Full，生成左手、右手、左腿、右腿四张独立透明 PNG；原图与提示词/种子清单保存在 `D:\素材\代号柒\.tmp\r\nai\output\sealed-limbs-v12-20260923\`。
+- 同步替换 `game/assets/cards/creature-tt8-{curseimmune,energycap,nofocus,healplus}.webp` 与对应缩略图；卡面为 896×896，缩略图为 448×448，均保留 alpha。
+- PNG 与 WebP 均已用 Pillow 核对尺寸和 alpha 范围 0–255。未跑测试、构建或游戏页面视觉验收。
+- 16:17 复核：老板反馈旧第 3、4 张腿图易看成两条腿，已仅重出左腿/右腿为单一连续肢体轮廓并替换对应卡面与缩略图；左右手保持不变。新 WebP 卡面为 896×896、缩略图为 448×448，alpha 均为 0–255；生成 PNG 与提示词/种子记录在 `.tmp/nai/output/sealed-limbs-v12-r3-20260923/`。未跑测试、构建或游戏页面视觉验收。
+- HEAD `034b2bd`，相对本地 `origin/master` ahead 40 / behind 0（未联网刷新）。`git status --short` 共 98 项；本补充记录本次 8 个素材文件，其余工作区改动仍沿用未核归属/验收状态。
 
 <!-- photo-studio-commit:start -->
 ## 当前状态补充：照相馆提交（复核于 2026-09-23 15:30 +08:00）
@@ -9,24 +23,72 @@
 - 验证边界：此前相关5文件39项通过；老板接管验收后的素材、相纸和退出键更新未重新运行游戏测试/浏览器。本次同步测试的退出按钮定位，未执行该测试。指南结构/内部链接已检查；入库不代表完整美术验收通过。
 - 此前资源故障为5173服务停止，后台Vite已恢复；验收页、面板PNG、代表照片WebP曾在本轮HTTP读取返回200。服务与工作区均会变化，接手时重查实际状态。
 
+- 2026-09-23 15:57 +08:00：照相馆底图与退出键修复已在提交 `034b2bd` 入库：展墙使用已有 `wall.webp`，关闭键复用标题页锚点与尺寸；Codex 内置浏览器确认底图显示，点击关闭返回标题页。当前相对本地 `origin/master` ahead 40 / behind 0（未联网刷新）；其他未提交改动的归属与验收仍待核实。
+
 <!-- photo-studio-commit:end -->
 
-> 老板 2026-09-20 指令：项目转交其他 AI 继续。本文写给接手的 AI，力求自包含；
-> 同机 ZCode 的 AI 额外可读记忆库（见 §8）。上一版交接 `NEXT-AI-HANDOFF-2026-09-12.md`
-> 是 09-12 冬日远征改造暂停点，其 P0/P1 大多已消化，仅作背景，以本文为准。
-> 接手第一件事：读完 §1（工作区有未提交的多套半成品），并与老板逐套确认去留，再动手。
+> 本文于 2026-09-20 初编，当前状态区更新至 2026-09-23。接手以本次对话指令、根 `AGENTS.md` 和实时仓库为准；后文带日期的盘点与决策清单均为历史快照。
+> 旧版 `NEXT-AI-HANDOFF-2026-09-12.md` 仅作可选历史背景，不是开工前置条件。
+
+## 60 秒接手
+
+| 先看 | 当前信息 |
+| --- | --- |
+| 范围 | 唯一开发主线是 Vite；Godot / Unity 冻结。遵守仓库根 `AGENTS.md`。 |
+| 快照 | 2026-09-23 16:02 +08:00：`master`，HEAD `034b2bd`，领先本地 `origin/master` 40 / 落后 0，未联网刷新；工作区仍有其他未提交改动。**开始操作前重跑 `git status --short`**。 |
+| 进行中 | 照相馆当前底图与退出键已在内置浏览器核对；此前响应式、文案和动效改动仍待统一验收。战斗/卡牌/效果、卡面与 NAI 工具仍有未提交改动，归属/状态待核对。 |
+| 下一步 | 核对老板最新指示及文件所有权，再选一个确认过的工作切片；归属不明的共享文件先不改。 |
+| 验证 | [结算恢复计划](settlement-recovery-plan-2026-09-23.md)记录隔离全量 118 文件/652 项通过、最终定向回归与死亡实机流程通过；正常成功撤离闭环仍未验收。其他当前未提交改动的合并验证状态未知。入口见 §3。 |
+| 边界 | 保留现有未提交改动；不清理、不回滚、不提交、不推送。其他会话改动仍在时，不 build 或覆盖共享文件。 |
+| 决策清单 | §7 是 2026-09-20 历史清单；当前哪些事项仍待老板决定尚未复核，不能直接照单执行。 |
 
 ## 0. 项目速览
 
 - 项目：**搜打撤**（仓库名「代号柒」，GitHub: taping233/OperationSalvation7）—— roguelike 卡牌网页游戏（杀戮尖塔式战斗 + 撤离玩法），中文，美术为动漫立绘+卡面。
-- **唯一主线 = Vite 版**（源码 `D:\素材\代号柒\搜打撤\game`，全局对象 `window.SDT`，事件走 ink）。Godot / Unity / SoudacheGodot / SoudacheUnity 全部冻结，不开发、不清理、不当事故报。
-- 桌面版（exe）已停维护（09-13 老板令），验证一律 Vite dev + vitest。
-- 老板 = 王俊豪。默认中文交流，称呼「老板」；Friday 是移交前的 AI 协调者名字。
-- 关键文档目录 `搜打撤/docs/`：`architecture.md`（架构）、`development.md`（开发）、`rules.md`、`design.md`、`terminology.md`（术语）、`game-compendium.md`（全书卡牌/敌人数据出处，**勿手改**，`npm run docs:compendium` 再生成）、`roadmap.md`、`changelog.md`、`character-bible/`（五角色人设权威，出图锚点照抄）、`save-format.md`、`multi-agent-review-changelog-2026-09-20.md`（7 岗位评审终案+实装顺序）。
+- 源码位于仓库内 `搜打撤/game`，全局兼容对象为 `window.SDT`，叙事由 ink 驱动。桌面 EXE 已停维护；验证方式见 §3。
+- 默认中文交流，称呼用户「老板」；助手名为 Friday。
+- 按主题查阅规则、架构、开发、验证与美术文档（§§ 3–6）；长期约束见根 `AGENTS.md`。
 
-## 1. ⚠️ 工作区未提交改动盘点（2026-09-20，接手必读）
+## 当前状态（复核于 2026-09-23 16:02 +08:00）
 
-`git status`：11 个已跟踪文件修改 + 一批 untracked。这些是**多会话并行的任务半成品**，全部测试绿/实机验证过，只是未到提交点或等老板验收。**规矩：绝不 `git checkout`/`clean`/顺手提交；每套的去留由老板拍板。**
+- 重新读取 `git status --short` 与 `git log -1`：分支 `master`，HEAD `034b2bd`（`fix: restore photo studio background and align exit`）；相对本地 `origin/master` ahead 40 / behind 0，未联网刷新远端。
+- 本轮只提交照相馆修复：`game/src/game.cardslib.js` 中退出键挂载到标题页 `.ak-tl` 锚点，`game/css/photo-studio-craft.css` 中对齐 64×58 尺寸并恢复已有 `wall.webp` 底图、叠加深绿暗纱。`game.cardslib.js` 中既有的伤害/攻击词条改动未核归属，未提交。
+- Codex 内置浏览器 `http://127.0.0.1:5173/` 实际检查（1028×1003）：照相馆加载 273 张馆藏，背景墙可见、照片和筛选可读；点击关闭按钮返回标题页。未运行测试或构建；工作区仍有其他会话未提交改动，整体归属/验收未核实。
+- 其他战斗/卡牌、素材、NAI 工具与文档改动继续保留，未覆盖、构建或提交；交接文档含其他范围改写，当前状态补充也仅留在工作区，未暂存。
+
+## 历史状态快照（复核于 2026-09-23 15:26 +08:00）
+
+- 指南任务补充：HEAD `d32a7d6`，相对本地 `origin/master` ahead 38 / behind 0，未联网刷新远端。其他未提交工作保留，归属/整体验收未核实。
+- 资源服务：此前全部图片失效时，5173端口无监听、请求连接被拒绝，文件仍在。已恢复后台Vite服务；本轮HTTP读取验收页、木雕面板PNG和代表照片WebP均返回200及正确类型。没有操作用户页面，HTTP恢复不代表视觉验收通过。
+- 新增 `docs/UI-ART-OVERHAUL-GUIDE.md`。技能与四份配套说明位于 `C:\Users\太平\.codex\skills\ui-art-overhaul`；未修改Codex配置或游戏实现。技能结构验证通过，内部Markdown链接无缺失；未进行小模型端到端实跑、游戏测试、构建或浏览器验收。
+- 下方15:23的其他任务核验记录保持原样，本指南任务没有重复验证其结果。
+
+### 此前状态记录（2026-09-23 15:23 +08:00）
+
+- 本次重新读取 `git status --short` 与 `git log -1`：HEAD `d32a7d6`；相对本地远端跟踪引用 `origin/master` ahead 38 / behind 0，未联网刷新远端。
+- 此前照相馆改动仅涉及 `game/src/game.cardslib.js` 的退出按钮标记、`game/css/photo-studio-craft.css` 的对应样式，以及本状态记录。退出键复用封面相同 SVG 路径、58×58 按钮尺寸、24×24 图标和窄屏缩放样式，退出事件不变。
+- 卡面核验：`高端研发`（`tt12-hitechrd`）与`基础开发`（`tt12-basicdev`）已分别使用对应 `spell-<id>.webp` 新卡面，缩略图也已在位。通过内置浏览器打开照相馆搜索两张卡并目视确认；本轮没有改游戏文件，也未运行测试或构建。该核验仅覆盖这两张卡，不代表其他未提交卡牌素材已验收。
+- 本对话子代理已无运行任务。其他战斗/卡牌、素材、NAI 工具及文档等未提交改动仍在；其归属与验收状态未核实，不覆盖、不构建、不提交。
+- 老板此前已明确自行验收照相馆退出按钮；其最新退出按钮画面仍未由本轮验收。此前照相馆测试与画面检查不能作为最新素材和退出按钮的验收结果。
+
+### 上一次状态快照（2026-09-23 12:50 +08:00，历史）
+
+本节记录的是复核时的仓库证据。复核时间不是有效期；开工前重查实时状态。提交、文件归属或验收结果发生变化时，按根 `AGENTS.md` 更新本节；历史快照另行标日期保留。
+
+- Git：分支 `master`，HEAD `d32a7d6`（2026-09-23，`fix: recover terminal and extraction settlements atomically`），比 `origin/master` ahead 38。
+- 最新检查时 `git status --short` 显示 30 个已跟踪文件修改、9 个未跟踪项（含本次文档改动）。仍有战斗/卡牌效果、照相馆/UI 和 NAI 工具改动；不要将它们与已提交的结算恢复工作混为一组。接手时仍须重查实时状态与文件所有权。
+- **终局/撤离恢复**：实现已在 `d32a7d6` 本地提交；[结算恢复计划](settlement-recovery-plan-2026-09-23.md)记录了隔离全量、定向回归、故障注入和死亡路径内置浏览器验收。正常四层游玩后的生产撤离整理刷新/多次入库闭环仍未验收；该提交未推送。
+- **战斗/卡牌/效果**：`battle.*`、`cards.*`、`effect-steps.*`、`effect-verbs.js`、卡牌 compendium 和相关测试均有改动。仅凭当前文件清单无法确认各改动的任务归属或整体验收状态。
+- **照相馆/UI/美术工具**：照相馆 CSS、图库/UI 模块、图标、相关测试、素材、`game/dev/` 和 NAI 工具均有改动。`PHOTO-STUDIO-ART-ACCEPTANCE-2026-09-23.md` 明确记录最新响应式、文案和动效修改仍待统一真实页面验收。
+- **验证边界**：结算恢复证据和缺口见 `settlement-recovery-plan-2026-09-23.md`；历史可靠性记录见 `reliability-plan-2026-09-23.md`。已提交恢复工作通过不代表其他当前未提交改动通过。
+- 本次 P2 只改文档，未运行测试、构建或浏览器流程；当前未提交游戏改动的整体验证状态仍未核验。
+- 安全接手动作：先核对并行任务/文件所有权与老板最新指示，再选定一组改动；不要清理、回滚、提交或推送这些未提交内容。
+
+## 1. 历史工作区未提交改动盘点（2026-09-20；已过期）
+
+以下内容仅保留作历史记录，不代表当前文件清单、负责人或验收状态。
+
+当时的 `git status` 为 11 个已跟踪文件修改 + 一批 untracked。这些是多会话并行任务的历史盘点；各项测试与实机状态以各行说明为准（并非全部通过）。清单已过期，当前去留须重新核对。
 
 | # | 涉及文件 | 归属任务 | 状态 |
 | --- | --- | --- | --- |
@@ -44,57 +106,27 @@ untracked 杂项：
 
 Git 状态：`master` 领先 `origin/master` **8 个提交未推送**（最新 2dfec66）。换机器交接需老板拍板后 push；同机交接无碍。
 
-## 2. 老板工作方式铁律（违反会被纠正，别试）
+## 2. 通用改动边界
 
-- 用户级指令 `C:\Users\太平\.zcode\AGENTS.md` + 项目级 `D:\素材\代号柒\AGENTS.md` 先读。
-- **不确定就问，多问别猜**（AskUserQuestion）；能从文件/日志/代码查证的先查证，只有老板决策项才问。
-- **没要求的不写；只改被要求的部分**。顺带发现的问题只报告不动手（含重构、格式化、顺手修复）。
-- **删除必先报批**：任何删除先列清单报老板批准，绝不与改动命令捆绑。git checkout HEAD -- 可救误删。
-- **快速交付**：压缩测试验证，构建通过即交付，老板亲自过目；快 ≠ 少确认。
-- 默认**不用子 agent**（老板点名才用）。
-- 结论必须绑定具体路径/日志/哈希/验证结果；不做凭空规划。
-- **并行会话协调**：老板常开多个 AI 会话并行。文件所有权划线、热点文件串行、收尾即落库、**树上别人半成品在场绝不 build/提交**。接手任务前先读首页留言信箱里老板的建议。
-- Windows 中文路径+编码坑：`PYTHONIOENCODING=utf-8`；node 会静默死、rmSync 删不掉、ps1 无 BOM 被 GBK 读、MSYS 命令假阴性——文件存在性以 python isfile 为准。
+当前协作、安全、验证范围和提交边界统一维护在仓库根 `AGENTS.md`；本交接不复制这些长期规则。
 
-## 3. 验证 / 测试口径
+## 3. 验证入口
 
-- 起服：`npm run dev`（Vite；默认 5173 起，僵尸端口直接换）。**python http.server 直出源码必死**。测产物用 build + 8139/preview。
-- 测试：`npx vitest run`（**全量必须加 `--no-file-parallelism`**）；`node game/selftest.js`；`node scripts/validate-data.mjs`。
-- 已知 flake 别当改坏：药水/mana-surge 抖动、nest 负载 flake（复跑 3 次再定性）。红灯先归因：并行会话在途、已知预期红灯（当前在案：card-photo-notes 2 红=§1#4）。
-- 实机验证用内置浏览器（IAB）拉 localhost，禁 computer-use。IAB 坑合集：locator 点击失效→evaluate 合成事件；截图全黑→先 finish 动画；boot 预热期 state=boot 可超 60s 先轮询；build 触发 HMR 重载会杀测试序列；webview 反复脱挂→整流程压缩进单次 evaluate；页面跑旧 bundle 先怀疑缓存。
-- 实机进战斗必须走真实开局流程（devForceBattle 新会话会拒：「还没有随身卡牌」）。开发者测试面板：标题页 `#titleDev` 一键跳 9 类节点（构造性测节点入口，只在标题页可点是设计如此）。
-- 战斗日志在 DOM `#log`，没有 `game.logs`。
+改动相关测试与全量检查的选择口径见根 `AGENTS.md`；本地质量门、卡牌审计和内置浏览器验收要点见 `quality-gates.md`。当前基线结果见上方速览和 `reliability-plan-2026-09-23.md`。
 
-## 4. 卡牌库铁律（最容易踩雷的域）
+## 4. 卡牌与战斗规则
 
-- `game/data/cards-sync.json` 由 `scripts/sync-cards-from-live.mjs` 生成**勿手改**；改 desc 必须 version+1；删卡=移进 retire 名单+version+1；**cards.js 新增卡不进 sync 数组 = 老档永久缺失**（禁咒/满电动力锤两次实锤）。
-- cards.js 内 TT10/TT11 内联快照与 sync 定版必须同步改，`tests/cards-sync-snapshot-guard.test.js` 守卫红灯（09-20 退回事故，见 §1#3）。
-- `effect-steps.js` 步骤表顺序即语义**别重排**；识别面 fixtures 冻结在 tests/fixtures，改表先跑差分。
-- 卡库定版基准：微信版 233 张定版 + 后续批次；同名双版并存是定版不是 bug。稀有度口径：衍生/初始/职业不进随机、发现、商店池。
-- 同一选择面板内不许重复卡（面板去重口径）；商店货架 25.6% 重复率是已知待点名项。
-- 全量卡牌数据出处查 `docs/game-compendium.md`。
+玩家规则见 `rules.md`；模块与卡牌历史数据约束见 `architecture.md`；卡牌文本语义见 `terminology.md`；生成的卡牌/敌人数据见 `game-compendium.md`（勿手改）。卡牌效果审计与对应测试见 `quality-gates.md`。
 
-## 5. UI / 前端铁律
+## 5. 界面实现与性能
 
-- **全局 UI 缩放**：ui-scale.js zoom 挂 `<html>`，基准 1920×1080 完全跟随。新坐标代码必须过 uiRect()；`position:fixed` 元素坐标 = getBoundingClientRect() / scale。
-- **title 全局死刑**：boot MutationObserver 移除一切 `title` 属性——提示一律自绘文字浮层（药水提示栏/term-tip 是定版先例）。
-- **overlay 输入框**：handler 里不许整页 render() 重建（IME 中文组合必被掐断，2dfec66）；Esc 分支必须判 `isComposing`。
-- **inert 隔离**：`_isolateOverlayBackground` 会把 #overlay 兄弟层 inert 化（Chrome 下对 hit-test 隐身）；**新增常驻层必须加进排除名单**（#sugLayer 先例，fc2aef5）。
-- 大图挂载后调 `SDT.Art.decodeIn(el)`，否则 IAB 合成器画黑窗（showCardZoom/池页/战斗手牌三次同源坑）。
-- 性能三铁律：不出画面的动画即暂停；常驻动画只走 transform/opacity 合成器；idle 预热。
-- 事件页排版单一真源=expedition-rewards 样式；样式级联真源表与 CSS 孤儿口径见记忆。
+界面坐标、输入、遮罩和图片挂载约定见 `development.md`；样式级联来源见 `architecture.md`；动画与空闲性能约定见 `performance.md`。
 
-## 6. 美术 / NAI 出图管线
+## 6. 美术与素材
 
-- **画风权威口径：painterly v1.0 全游戏统一**；立绘画师串 = miv4t + quasarcake（卡通版不挂）。提示词按 nai5-prompting skill 写； anatomical/prompt 坑合集见记忆。
-- 人设权威 = `docs/character-bible/`，出图锚点照抄（0919 细粒度定稿）；星月已解绑星灯道具（c4cdf8b）。
-- **卡面出图铁律**：职业卡必须体现本人形象；黑球/黑雾=诅咒系专属意象，火球=火球系专属，不可混用。
-- 卡面规格 1.32 横版（角色脸必须可见）；道具透明图走色距抠底+WebP exact 保 alpha（员工通行证A 先例）；**同名不同 id 双覆盖**（材料版+衍生产物版都要挂图）。
-- **新增/换卡面必须重跑 thumbs 烘焙**（thumbs 不进 art-manifest）；`art.js` 是唯一路径构造点，守卫测试 card-art-coverage 双层红灯；LANDMARK_ART 支持 hero 族条目。
-- NAI 链路：唯一稳定通道 = curl 子进程 `--noproxy --ssl-no-revoke`；image 子域 TUN 被掐走 `socks5h://7890`；**一轮一张 ≥45s，429 停 15 分钟，403 立即停手上报**；出图产物直接给老板看，不自检。Clash 保持 rule 模式，不切节点（尤其不切香港）。
-- 项目根 `NovelAI生图功能手册-AI接手版.md` 是生图接手手册。出图脚本/seed 台账在 `搜打撤/.tmp/nai/`。
+当前 NAI 提示词公共风格以 `搜打撤/tools/nai_style.py` 为准，角色外观锚点见 `docs/character-bible/`。NAI API 与素材落地流程参考仓库根 `NovelAI生图功能手册-AI接手版.md`；其内按日期记录的旧风格示例不得覆盖当前公共风格模块。卡面覆盖审计是带日期的状态记录，不当作当前覆盖真源。
 
-## 7. 等老板拍板 / 验收清单（截至 09-20，接手后逐项对齐，别自作主张）
+## 7. 历史待拍板 / 验收清单（截至 09-20；逐项核对是否仍有效）
 
 1. §1 四套未提交改动的去留与提交时机；master ahead 8 是否推送。
 2. 闪避重做实机演出走查；term-tips 浮框验收（§1#1/#2）。
@@ -109,16 +141,6 @@ Git 状态：`master` 领先 `origin/master` **8 个提交未推送**（最新 2
 
 ## 8. 资源指针
 
-- **ZCode 记忆库（同机接手必读）**：`C:\Users\太平\.zcode\cli\memories\projects\project-9f3e184c77472436\memory\`——95 个记忆文件 + `MEMORY.md` 索引（每次会话自动加载）。坑/铁律/验收状态都在里面，本文只是摘要。
-- 用户级指令：`C:\Users\太平\.zcode\AGENTS.md`（老板背景+基本原则）；旧 Codex 记忆 `~/.zcode/memories/`。
-- 首页留言信箱：老板在游戏首页留言布置任务，网页版存于 Edge localStorage（读法见记忆 soudache-suggestions-inbox）——**接手任务前先读**。
-- STS2 逆向参考：80 万行官方 C# 在 `搜打撤/.tmp/sts2-reverse`（战斗机制对标源）。
-- Godot 事实源：`SoudacheGodot/_planning/`（冻结，仅查阅）。
-- 设计者回传合并口径与 v0.56.1 取舍见记忆 soudache-designer-v0561-merge；全量测试的 CRLF 假差、裸 sha1 坑也在该条。
-
-## 9. 禁止事项速查
-
-- 不动 Godot/Unity/SoudacheGodot 工作区；不打包 exe；不维护桌面版。
-- 不删任何东西（含 untracked、_tmp、死代码）未经老板批准。
-- 未经老板拍板不 push、不提交他人会话的半成品、不重排 main.js boot 导入。
-- 不切代理节点；不对外发布任何内容；不把「生成成功」当验收成功（美术/实机都以老板过目为准）。
+- **当前必需来源**：本次对话指令、仓库根 `AGENTS.md`、当前源码和主题文档。Codex 记忆若由运行环境提供，只作补充；不能替代仓库现状或当前指令，也不作为接手前置条件。
+- **首页留言箱（补充任务线索）**：按老板此前要求，接手新任务时尝试核对游戏首页留言；它保存在原浏览器的本地存储，通常只有同机 Edge 会话可读。若当前环境无法访问，不要声称已检查，也不因此阻断无关工作；只有范围依赖留言内容时再请老板转发。
+- **可选只读背景**：`搜打撤/.tmp/sts2-reverse`（若本机存在）用于相关战斗机制对照；`SoudacheGodot/_planning/` 是已冻结版本的历史设计资料，仅在问题明确涉及旧方案时查阅。两者均非 Vite 接手前置条件。

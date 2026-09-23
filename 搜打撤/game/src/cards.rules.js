@@ -14,7 +14,7 @@ export const rulesSlice = {
     TYPE_ICON: { '武术': '[[icon:swords]]', '法术': '[[icon:sparkles]]', '生物': '[[icon:paw]]', '道具': '[[icon:flask]]', '装备': '[[icon:shield]]', '事件': '[[icon:question]]', '能力卡': '[[icon:helmet]]', '资源': '[[icon:wood]]' },
     // 类型到位图图标名（卡面插画与页签用；TYPE_ICON 保留给纯文本场景）
     // 类型到位图图标名（卡面插画与页签用；TYPE_ICON 保留给纯文本场景）
-    TYPE_ART: { '武术': 'swords', '法术': 'sparkles', '生物': 'paw', '道具': 'flask', '装备': 'shield', '事件': 'question', '能力卡': 'helmet', '资源': 'wood' },
+    TYPE_ART: { '武术': 'swords', '法术': 'sparkles', '生物': 'paw', '道具': 'flask', '装备': 'shield', '事件': 'dice', '能力卡': 'helmet', '资源': 'wood' },
     // 拥有伤害词条（红色伤害宝石）的类型
     DMG_TYPES: ['武术', '法术'],
 

@@ -2,28 +2,59 @@
  * 铁律：顺序即语义——本分节在壳 effect-steps.js 的 concat 顺序即旧 if 链物理顺序，勿重排。
  * 共享端口由壳经参数 s 注入（deps 展开 + esc/hitFoe + 模块级常量），本文件零 import。 */
 export function damageSteps(s) {
-  const {combat, getAlive, log, addTempCard, allCards, random01, getPlayerCaster, damagePlayer, addPlayerMaxHp, dumpHand, esc, hitFoe, ARROW_TOKEN} = s;
+  const {combat, getAlive, log, addTempCard, allCards, random01, getPlayerCaster, damagePlayer, addPlayerMaxHp, dumpHand, esc, hitFoe, ARROW_TOKEN, num} = s;
   return [
       /* ============ 伤害段 ============ */
+      {
+        // 第十二批·元素爆裂（2026-09-23）：对随机敌人 + 区间触发次数——每段随机选一名存活敌人。
+        // 必须先于 dmg.direct：本步骤置位 did 后，dmg.direct 另有区间触发排除双保险。
+        id: 'dmg.randomRepeat', gate: 'fresh', label: '对随机敌人造成 N 点法伤、触发 M-K 次（区间随机目标）',
+        when: (ctx) => ctx.desc.match(/对随机敌人造成\s*(\d+)\s*点法(?:术)?伤[，,]\s*触发\s*(\d+)\s*[-–~至]\s*(\d+)\s*次/),
+        run: (ctx, m) => {
+          const lo = Math.min(+m[2], +m[3]), hi = Math.max(+m[2], +m[3]);
+          const times = lo + Math.floor(random01() * (hi - lo + 1));
+          const caster = getPlayerCaster ? getPlayerCaster() : {};
+          const type = combat.TYPES.SPELL;
+          let total = 0, hits = 0;
+          for (let i = 0; i < times; i++) {
+            const pool = getAlive().filter(t => t && !t.dead);
+            if (!pool.length) break;
+            const t = pool[Math.floor(random01() * pool.length)];
+            total += hitFoe(ctx, t, +m[1], type, caster).dealt;
+            hits++;
+          }
+          if (hits) {
+            log(`[[icon:play]] <b>${esc(ctx.card.name)}</b> → 随机敌人 ×${hits}：造成 <b>${total}</b> 点${combat.TYPE_NAME[type]}`, 'sys');
+            ctx.did = true;
+          }
+        },
+      },
       {
         id: 'dmg.direct', gate: 'always', label: '造成 N 点固定/法术/真实/攻击伤害（结构化已结算时跳过）',
         // 卡面伤害词条已结算过时跳过，防双倍；「消耗该牌时」前缀句只在消耗触发点结算。
         // 「连开 N 枪」延迟段由 dmg.fourShots 专责结算（2026-09-16 修 09-13 留言「正午决战有bug」：
         // 此前本步骤抢先吃掉「每枪造成2点固定伤害」，四枪只打出一枪 2 点）。
+        // 区间触发句（触发 M-K 次）归 dmg.randomRepeat——此处排除防双结算（2026-09-23 第十二批）。
         // 位置在诅咒处理之后：流血药水类「造成 N 点伤害，附加流血」需要伤害与诅咒都结算
-        when: (ctx) => (!ctx.flags.structuredHit && !/该牌时/.test(ctx.desc) && !/连开\s*[一二三四五六七八九十\d]+\s*枪/.test(ctx.desc))
-          ? ((sp => sp ? [null, sp[1], '法术'] : null)(ctx.desc.match(/造成\s*(\d+)\s*点法(?:术)?伤/))
+        when: (ctx) => (!ctx.flags.structuredHit && !/该牌时/.test(ctx.desc) && !/连开\s*[一二三四五六七八九十\d]+\s*枪/.test(ctx.desc)
+            && !/触发\s*\d+\s*[-–~至]\s*\d+\s*次/.test(ctx.desc))
+          ? ((rg => rg ? [null, rg[1], '法术', rg[2]] : null)(ctx.desc.match(/造成\s*(\d+)\s*[-–~至]\s*(\d+)\s*点法(?:术)?伤/))
+            || (sp => sp ? [null, sp[1], '法术'] : null)(ctx.desc.match(/造成\s*(\d+)\s*点法(?:术)?伤/))
             || ctx.desc.match(/造成\s*(\d+)\s*点(?:\s*(固定|法术|真实|攻击))?\s*伤害/))
           : null,
         run: (ctx, tdm) => {
           const type = tdm[2] === '法术' ? combat.TYPES.SPELL
             : tdm[2] === '真实' ? combat.TYPES.TRUE
             : tdm[2] === '攻击' ? combat.TYPES.ATTACK : combat.TYPES.FIXED;
+          // 区间伤害（tdm[3]=上限，第十二批 不稳定射线 4-6）：含端点掷骰
+          const amount = tdm[3] != null
+            ? Math.min(+tdm[1], +tdm[3]) + Math.floor(random01() * (Math.abs(+tdm[3] - +tdm[1]) + 1))
+            : +tdm[1];
           const aoe = /所有敌人|敌方全体|全体敌人|目标为全体|对全体/.test(ctx.desc);
           const targets = (aoe ? getAlive().slice() : (ctx.curseTarget ? [ctx.curseTarget] : [])).filter(t => t && !t.dead);
           const caster = getPlayerCaster ? getPlayerCaster() : {};
           let total = 0;
-          targets.forEach(t => { total += hitFoe(ctx, t, +tdm[1], type, caster).dealt; });
+          targets.forEach(t => { total += hitFoe(ctx, t, amount, type, caster).dealt; });
           if (targets.length) {
             log(`[[icon:play]] <b>${esc(ctx.card.name)}</b> → ${targets.map(t => esc(t.name)).join('、')}：造成 <b>${total}</b> 点${combat.TYPE_NAME[type]}`, 'sys');
             ctx.did = true;
@@ -99,12 +130,14 @@ export function damageSteps(s) {
         },
       },
       {
-        id: 'curse.randomKinds', gate: 'fresh', label: '附加 N 种随机诅咒（致命射线）',
-        when: (ctx) => ctx.desc.match(/附加\s*(\d+)\s*种随机诅咒/),
+        id: 'curse.randomKinds', gate: 'fresh', label: '附加 N 种/层随机诅咒（致命射线 / 感染射线）',
+        // 第十二批·感染射线（2026-09-23）：量词扩到「层」、数词支持中文（一层随机诅咒）
+        when: (ctx) => ctx.desc.match(/附加\s*(\d+|[一二两三四五])\s*[种层]随机诅咒/),
         run: (ctx, m) => {
+          const n = num(m[1]);
           const keys = ['bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban', 'burn']
             .sort(() => random01() - 0.5)
-            .slice(0, +m[1]);
+            .slice(0, n);
           const t = ctx.curseTarget;
           if (t) {
             keys.forEach(k => combat.addCurse(t, k, 1));

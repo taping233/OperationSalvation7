@@ -2,7 +2,7 @@
  * 铁律：顺序即语义——本分节在壳 effect-steps.js 的 concat 顺序即旧 if 链物理顺序，勿重排。
  * 共享端口由壳经参数 s 注入（deps 展开 + esc/hitFoe + 模块级常量），本文件零 import。 */
 export function tailSteps(s) {
-  const {log, addEnergy, addEnergyCap, matchElsewhere} = s;
+  const {log, addEnergy, addEnergyCap, matchElsewhere, refillEnergy} = s;
   return [
       /* ============ 外部层实装识别 + 能量 + 哨兵 ============ */
       {
@@ -25,6 +25,16 @@ export function tailSteps(s) {
         run: (ctx, m) => {
           const currentMax = addEnergyCap(+m[1]);
           log(`[[icon:bolt]] 本场战斗能量上限 +${m[1]}（每回合 ${currentMax} 费）`, 'sys');
+          ctx.did = true;
+        },
+      },
+      {
+        // 第十二批·后备能源（2026-09-23）：「回复所有费用」= 能量直接回满
+        id: 'res.energyRefill', gate: 'always', label: '回复所有费用（能量回满）',
+        when: (ctx) => (/回复所有费用|回满所有能量/.test(ctx.desc)) ? true : null,
+        run: (ctx) => {
+          const current = refillEnergy();
+          log(`[[icon:bolt]] 能量回满（${current} 费）`, 'sys');
           ctx.did = true;
         },
       },

@@ -62,7 +62,7 @@ import { BUILD_VERSION, assetUrl } from './asset-url.js';
     scrubAttrs(root);
     if(root.querySelectorAll)root.querySelectorAll('[title],[placeholder],[aria-label]').forEach(scrubAttrs);
   }
-  const TYPE_ART={'武术':'swords','法术':'sparkles','道具':'flask','装备':'shield','事件':'question','能力卡':'helmet','资源':'gem'};
+  const TYPE_ART={'武术':'swords','法术':'sparkles','道具':'flask','装备':'shield','事件':'dice','能力卡':'helmet','资源':'gem'};
   if(typeof document!=='undefined'&&document.body)hydrate(document.body);
   if (typeof MutationObserver!=='undefined'&&typeof document!=='undefined'&&document.body){
     // 战斗/背包会一次重建上百节点：合并同帧变更，但只扫描真正新增的子树，

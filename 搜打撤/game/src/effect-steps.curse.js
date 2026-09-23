@@ -80,6 +80,18 @@ export function curseSteps(s) {
         id: 'curse.freeze', gate: 'always', label: '冰冻/冻结（免疫冰冻句除外）',
         when: (ctx) => (!/免疫冰冻|对冰冻/.test(ctx.desc) && /附加冰冻|冰冻\s*所有|冰冻\s*(?:\d+|[一两二三四五])\s*名|冻结/.test(ctx.desc)) ? true : null,
         run: (ctx) => {
+          // 第十二批·冷冻射线（2026-09-23）：「若此前其未曾受到过伤害」——以本卡结算前的
+          // hpAtCast 快照为准（同卡先行伤害会让满血判定误杀）；无快照时回退当前满血。
+          if (/未曾受到过伤害/.test(ctx.desc)) {
+            const t0 = ctx.curseTarget;
+            const pre = t0 && ctx.flags.hpAtCast ? ctx.flags.hpAtCast.get(t0) : null;
+            const undmg = t0 ? (pre != null ? pre >= (t0.maxHp || 0) : t0.hp >= (t0.maxHp || 0)) : false;
+            if (!undmg) {
+              if (t0) log(`[[icon:crystal]] ${esc(t0.name)} 此前已受过伤，冰冻未生效`, 'dim');
+              ctx.did = true;
+              return;
+            }
+          }
           const fm = ctx.desc.match(/(?:冻结|冰冻)状态\s*(\d+)\s*回合/);
           const n = fm ? +fm[1] : (ctx.durOv ? +ctx.durOv : 1);
           // 2026-09-06 #13：desc 带「冰冻 N 名」时对前 N 个存活目标生效；2026-09-12：支持中文量词
@@ -168,7 +180,8 @@ export function curseSteps(s) {
         id: 'buff.immune', gate: 'always', label: '免疫伤害 / 无敌',
         when: (ctx) => {
           const dsave = ctx.desc.match(/免疫\s*(\d+)\s*次致命伤害/);
-          return ((/免疫伤害/.test(ctx.desc) || /无敌/.test(ctx.desc)) && !dsave) ? true : null;
+          // 「免疫所有伤害」（第十二批·邪能护体 2026-09-23）与「免疫伤害」同义入祝福
+          return ((/免疫(?:所有)?伤害/.test(ctx.desc) || /无敌/.test(ctx.desc)) && !dsave) ? true : null;
         },
         run: (ctx) => {
           const im = ctx.desc.match(/(\d+)\s*回合内[^。]*无敌/) || ctx.desc.match(/无敌[^。]*?(\d+)\s*回合/);

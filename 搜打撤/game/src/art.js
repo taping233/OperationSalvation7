@@ -110,9 +110,11 @@ import { PERFORMANCE_BUDGETS } from './performance-budgets.js';
   // 448 宽缩略图；放大看卡面（#cardZoom）、战斗与立绘仍走原图。
   // 清单里没有的图直接回退原图，保证新素材不改 art.js 也不会 404。
   const THUMBS = new Set(THUMB_MANIFEST);
-  function image(src, cls, alt, key, style, low) {
+  function image(src, cls, alt, key, style, low, defer) {
     const rel = (low && THUMBS.has(src)) ? `thumbs/${src}` : src;
-    return `<img class="${esc(cls)}" src="${assetUrl(ROOT + rel)}" alt="${esc(alt)}" data-asset-key="${esc(key)}"${style ? ` style="${esc(style)}"` : ''} draggable="false" loading="lazy" decoding="async">`;
+    const url = assetUrl(ROOT + rel);
+    const source = defer ? ` data-lib-src="${esc(url)}"` : ` src="${url}"`;
+    return `<img class="${esc(cls)}"${source} alt="${esc(alt)}" data-asset-key="${esc(key)}"${style ? ` style="${esc(style)}"` : ''} draggable="false" loading="lazy" decoding="async">`;
   }
   function fallback(kind, key, alt) {
     reportMissing(kind, key);
@@ -407,10 +409,12 @@ function characterArt(value, full=false, useDefault=false) {
         next();
       });
     },
-    // opts.low：低倍率场景（卡牌库网格 / 悬停预览）取缩略图；缺省 = 原图（战斗、放大看卡面等）
+    // opts.low：低倍率场景（卡牌库网格 / 悬停预览）取缩略图；opts.defer 仅供虚拟卡库在接近视口时赋 src。
+    // 缺省 = 原图（战斗、放大看卡面等）
     cardIcon(card, opts) {
       const low = !!(opts && opts.low);
-      const art = (src, cls, alt, key, style) => image(src, cls, alt, key, style, low);
+      const defer = !!(opts && opts.defer);
+      const art = (src, cls, alt, key, style) => image(src, cls, alt, key, style, low, defer);
       const cardId = String(card && card.id || '');
       const illustration = DATA.art.cardArtOverrides?.[cardId];
       if (illustration) return art(illustration, 'art-card-image art-hero-fit', card?.name || cardId, `card-${cardId}`, 'width:100%;height:100%;object-fit:cover;display:block');

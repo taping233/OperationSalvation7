@@ -47,7 +47,7 @@ export function parsePoolNoun(raw, myClass) {
   if (rarKey) { s = ''; preds.push(c => c.rarity === rarKey); }
   const series = /系列$/.test(s);
   const base = s.replace(/系列$/, '');
-  if (['火球', '箭', '箭矢', '药水', '杀', '禁咒', '形态'].includes(base)) {
+  if (['火球', '箭', '箭矢', '药水', '杀', '禁咒', '形态', '射线'].includes(base)) {
     s = '';
     const key = base === '箭矢' ? '箭' : base;
     if (key === '杀') preds.push(c => c.id === 'starter-attack' || c.name === '杀' || c.name === '初始攻击');
@@ -56,6 +56,9 @@ export function parsePoolNoun(raw, myClass) {
     else if (key === '药水') preds.push(c => c.type === '道具' && String(c.name || '').includes('药水'));   // 药水池定版（2026-09-09）：所有带「药水」名字的道具——法术「药水魔法」不在池内
     else if (key === '禁咒') preds.push(c => String(c.name || '').startsWith('禁咒'));
     else if (key === '形态') preds.push(c => /形态/.test(String(c.name || '')));
+    // 第十二批（2026-09-23）：射线枪「发现一张射线牌」——只取可发现的射线法术
+    //（type 过滤排除射线枪自身（装备）；unrandom 排除职业版致命射线，职业卡不进发现池）
+    else if (key === '射线') preds.push(c => c.type === '法术' && !c.unrandom && String(c.name || '').includes('射线'));
   }
   if (/^注能/.test(s)) { s = ''; preds.push(c => +(c.infuse || 0) > 0 || /注能/.test(String(c.desc || ''))); }
   if (!preds.length || s) return null;   // 有未识别的残留名词 → 交回通用池，避免误配

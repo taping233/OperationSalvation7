@@ -154,7 +154,23 @@
     "tt7-smite",
     "cc-ember-burst",
     "cc-poison-burst",
-    "cc-rot-seed"
+    "cc-rot-seed",
+    "tt12-raydragon",
+    "tt12-sporewall",
+    "tt12-elemburst",
+    "tt12-hitechrd",
+    "tt12-barriermend",
+    "tt12-saturate",
+    "tt12-felguard",
+    "tt12-unstableray",
+    "tt12-infectray",
+    "tt12-basicdev",
+    "tt12-firecracker",
+    "tt12-magicfind",
+    "tt12-chargeray",
+    "tt12-breakthrough",
+    "tt12-backupcell",
+    "tt12-freezeray"
   ],
   "martialCardArt": [
     "tt7-throwblade",
@@ -266,7 +282,8 @@
     "tt7-naturestaff",
     "tt7-darkfort",
     "tt7-arcanescroll",
-    "tt7-talisman"
+    "tt7-talisman",
+    "tt12-raygun"
   ],
   "eventCardArt": {
     "tt6-demondeal": "event-tt6-demondeal",

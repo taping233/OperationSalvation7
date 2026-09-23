@@ -35,6 +35,13 @@ npm run docs:compendium
 
 `allowMissingCardIds` 仅列出当前工作区已有、但独立工程提交尚不包含的五张 TT12 卡。该卡存在时照常检查未知项和过期例外；缺少其他已记录卡牌仍会失败。TT12 正式合入后应删除这五个缺席许可，保留仍有证据支持的精确句式记录。
 
+## 内置浏览器验收
+
+- 优先使用 Codex 内置浏览器访问 Vite dev server；不要用 `python http.server` 直接提供源码。共享工作区有其他未提交任务时，不运行会触发 build/HMR 的流程。
+- 战斗验收走真实开局流程；`devForceBattle` 在没有随身卡牌的新局会拒绝启动。标题页 `#titleDev` 面板只用于构造节点入口测试。
+- locator 点击失效时先检查实际 DOM，再按需合成事件；截图发黑时先等待转场动画结束。启动状态 `boot` 可能持续较久，应轮询状态；页面疑似旧 bundle 时先重载确认缓存。
+- 检查页面 `error`、真实状态和完整交互路径。单张截图、DOM 静态结构或自动化单测不能替代真实页面验收；战斗日志位于 `#log`。
+
 ## CI 状态
 
 workflow 配置了 Node.js 22、从 `搜打撤/package-lock.json` 执行 `npm ci`，随后运行语法检查、数据校验、串行测试和 Vite 构建（含性能预算）。检查失败会直接使 job 失败。文档描述的是配置的流程；远端 GitHub Actions 是否实际运行及其结果，应以对应提交或 pull request 的 Actions 记录为准。

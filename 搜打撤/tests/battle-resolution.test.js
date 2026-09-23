@@ -28,7 +28,7 @@ function makeResolver(state) {
 
 describe('battle resolution ports', () => {
   it('preserves damage-before-text order', () => {
-    const runtime = { current: { mode: 'boss', playedMovesThisTurn: 1, grave: [] } };
+    const runtime = { current: { mode: 'boss', playedMovesThisTurn: 1, infuseFuels: 0, grave: [] } };
     const target = { hp: 20, maxHp: 20, dead: false, status: {} };
     const { resolver, events } = makeResolver({ current: runtime.current, playerStatus: { status: {} }, target });
     const card = { id: 'probe', name: '顺序探针', type: '武术', dmg: 3, dmgType: 'fixed', desc: '本回合每打出一张其他招式，造成2点固定伤害。' };
@@ -37,7 +37,7 @@ describe('battle resolution ports', () => {
   });
 
   it('reads rebound runtime values on the next cast', () => {
-    const runtime = { current: { mode: 'boss', playedMovesThisTurn: 1, grave: [] } };
+    const runtime = { current: { mode: 'boss', playedMovesThisTurn: 1, infuseFuels: 0, grave: [] } };
     const target = { hp: 20, maxHp: 20, dead: false, status: {} };
     const { resolver, events } = makeResolver({ get current() { return runtime.current; }, playerStatus: { status: {} }, target });
     const card = { id: 'probe', name: '状态探针', type: '武术', dmg: 3, dmgType: 'fixed', desc: '本回合每打出一张其他招式，造成2点固定伤害。' };
@@ -53,7 +53,7 @@ describe('battle resolution ports', () => {
     const player = { current: { status: {} } };
     const healCard = { id: 'probe-heal', name: '禁疗探针', type: '法术', dmg: 0, desc: '可观察顺序', heal: 3 };
     // Mutate the player binding from a command before the structured heal fallback reads status.
-    const callState = { current: { mode: 'boss', playedMovesThisTurn: 0, grave: [] }, get playerStatus() { return player.current; }, target: { hp: 20, dead: false, status: {} }, onText: () => { player.current = { status: { healban: 2 } }; } };
+    const callState = { current: { mode: 'boss', playedMovesThisTurn: 0, infuseFuels: 0, grave: [] }, get playerStatus() { return player.current; }, target: { hp: 20, dead: false, status: {} }, onText: () => { player.current = { status: { healban: 2 } }; } };
     const { resolver, events } = makeResolver(callState);
     const target = callState.target;
     resolver(healCard, target, false, 0, null);
@@ -63,7 +63,7 @@ describe('battle resolution ports', () => {
 
   it('sends structured armor through the armor command after text effects', () => {
     const target = { hp: 20, dead: false, status: {} };
-    const { resolver, events } = makeResolver({ current: { mode: 'boss', playedMovesThisTurn: 0, grave: [] }, playerStatus: { status: {} }, target });
+    const { resolver, events } = makeResolver({ current: { mode: 'boss', playedMovesThisTurn: 0, infuseFuels: 0, grave: [] }, playerStatus: { status: {} }, target });
     resolver({ id: 'probe-armor', name: '护甲探针', type: '法术', dmg: 0, desc: '可观察顺序', armor: 4 }, target, false, 0, null);
     expect(events.filter(event => ['text', 'armor'].includes(event[0]))).toEqual([['text'], ['armor', 4]]);
   });

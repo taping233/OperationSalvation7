@@ -15,7 +15,7 @@ import { BATTLE_PHASES, beginTargeting, cancelTargeting, createBattleState, tran
 import { Random } from './random.js';
 import * as Combat from './combat.js';
 import { emit as busEmit } from './event-bus.js';
-import { calculateEffectiveCardCost } from './battle.card-cost.js';
+import { calculateEffectiveCardCost, pocketSpellDiscountFor } from './battle.card-cost.js';
 import { calculateEnemyIntent } from './battle.intent.js';
 import { createBattleSnapshot } from './battle.snapshot.js';
 import { createBattleResolution } from './battle.resolution.js';
@@ -57,12 +57,6 @@ function cardIdentity(card) {
 const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!card.id && card.name === '初始攻击'));
 const R = () => SDT.MAP.rules;
 const alive = () => foes.filter(f => !f.dead);
-const INTENT_META = {
-    strike: ['[[icon:swords]]', '攻击'], volley: ['[[icon:swords]]', '攻击'], charge: ['[[icon:swords]]', '攻击'],
-    guard: ['[[icon:swords]]', '攻击'], burn: ['[[icon:fire]]', '攻击并灼烧'], curse: ['[[icon:skull]]', '攻击并施加诅咒'],
-    dragon: ['[[icon:demon]]', '攻击·阶段效果'], general: ['[[icon:arrow]]', '攻击·回合末强化'],
-    orc_boss: ['[[icon:tools]]', '双击并施加诅咒'], element_boss: ['[[icon:crystal]]', '攻击·偶数回合庇幕'],
-  };
 function intentFor(def, round) {
     return calculateEnemyIntent(def, round, pstat && pstat.status);
   }
@@ -292,6 +286,9 @@ const applyTextEffects = createEffectExecutor({
     shuffleDeck: () => { set$drawPile(shuffle(drawPile)); return drawPile.length; },
     addEnergy: amount => { set$energy(energy + (amount)); return energy; },
     addEnergyCap: amount => { set$maxEnergy(maxEnergy + (amount)); set$energy(energy + (amount)); return maxEnergy; },
+    // 第十二批（2026-09-23）：后备能源「回复所有费用」= 能量回满；招式池谓词复用卡库判定
+    refillEnergy: () => { set$energy(maxEnergy); return maxEnergy; },
+    isRandomObtainable: c => SDT.Cards.isRandomObtainable(c),
     // —— 2026-09-08 补线：以下端口此前从未传入，相关描述一打就崩 ——
     getPlayerHp: () => G.hp,
     getHandSize: () => hand.length,
@@ -374,11 +371,26 @@ const findCard = (uid) => {
   };
 const drawOf = (card) => +(card.draw || 0) || SDT.Cards.deriveDraw(card) || 0;
 const infuseOf = (card) => card._noInfuse ? 0 : (+(card.infuse || 0) || SDT.Cards.deriveInfuse(card) || 0);
-const effCostOf = (card, uid) => calculateEffectiveCardCost(card, uid, {
-      unlimitedRune, zeroFeeTurn: uid ? zeroFeeUntil.get(uid) : undefined, turn,
-      cosmosForm: pstat && pstat.status && pstat.status.cosmosForm, spellCost1, meleeCost1,
-      lastPlayedType, playedMartialThisTurn, armor: pdef ? (pdef.armor || 0) : null,
+const effCostOf = (card, uid) => {
+    // 仅后备能源类描述需要读取消耗口袋；常规求费不扫描消耗区。
+    const pocketDiscount = pocketSpellDiscountFor(card);
+    const consumedSpellCount = pocketDiscount
+      ? consumed.filter(u => { const o = findCard(u); return o && o.card.type === '法术'; }).length
+      : 0;
+    return calculateEffectiveCardCost(card, uid, {
+      unlimitedRune,
+      zeroFeeTurn: uid ? zeroFeeUntil.get(uid) : undefined,
+      turn,
+      cosmosForm: pstat && pstat.status && pstat.status.cosmosForm,
+      spellCost1,
+      meleeCost1,
+      lastPlayedType,
+      playedMartialThisTurn,
+      armor: pdef ? (pdef.armor || 0) : null,
+      pocketDiscount,
+      consumedSpellCount,
     });
+  };
 const isAOE = isAreaEffect;
 const CURSE_SCAN = [
     { key: 'bleed',   re: /(?:附加|施加)\s*(?:(\d+)\s*层?)?\s*流血/, def: 1 },
@@ -687,6 +699,25 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
         consumeHandUids(q.uids || [], q.cardName);
         return;   // 一次性，不保留
       }
+      // 第十二批（2026-09-23）两个一次性 special：均不走沉默门（状态还原/费用记账非技能句）
+      if (q.special === 'curseImmuneOff') {
+        set$playerCurseImmune(!!q.restore);
+        return;   // 一次性，不保留
+      }
+      if (q.special === 'costDecay') {
+        // 高端研发：被发现的「N 费招式」每回合开始费用 -1；降至 0 或卡已离场即注销
+        const o = q.uid ? findCard(q.uid) : null;
+        if (o) {
+          const cur = +(o.card.cost || 0);
+          const nc = Math.max(0, cur - 1);
+          if (nc !== cur) {
+            cardOverrides.set(q.uid, { ...o.card, cost: nc, _baseCost: o.card._baseCost != null ? o.card._baseCost : cur });
+            G.log(`[[icon:bolt]] <b>回合开始时</b>：【${esc(o.card.name)}】费用 -1（现 ${nc} 费）`, 'sys');
+          }
+          if (nc > 0) keep.push(q);
+        }
+        return;   // 保留与否自行管理
+      }
       if (silenced) {
         G.log(`[[icon:cross]] 沉默中：【${esc(q.cardName)}】的回合开始效果无法生效`, 'warn');
       } else {
@@ -746,7 +777,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
   // 出牌结算（目标：单点卡 = target；群体卡 = 所有存活敌人；infused = 作为注能主卡打出；
   // fuelCost = 注能牺牲品费用合计，供「N 倍于被注能卡牌价格」类效果折算；uid = 成长/容器定位）
   const resolveCard = createBattleResolution({
-    readState: () => ({ mode, playedMovesThisTurn, grave }),
+    readState: () => ({ mode, playedMovesThisTurn, infuseFuels, grave }),
     getPlayerStatus: () => pstat,
     esc,
     log: (...args) => G.log(...args),
@@ -1525,6 +1556,16 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
       set$playerCurseImmune(true);
       G.log('[[icon:shield]] <b>旧日再临</b>：诅咒无法侵染深渊主宰', 'ok');
     }
+    // 第十二批·邪能护体（2026-09-23）：「本回合免疫所有伤害和诅咒效果」——注能打出才登记；
+    // 诅咒部分走 playerCurseImmune，下回合开始由 curseImmuneOff 还原（restore 记原值：
+    // 深渊主宰的永久免疫在场时原值为 true，还原后仍免疫，不受本卡影响）。
+    // 伤害部分由文本侧祝福·免疫伤害（buff.immune，n=1 回合）承担。
+    if (infusedBase && /免疫所有伤害和诅咒效果/.test(String(card.desc || ''))) {
+      const prior = playerCurseImmune;
+      set$playerCurseImmune(true);
+      delayed.push({ special: 'curseImmuneOff', restore: !!prior });
+      G.log('[[icon:shield]] <b>邪能护体</b>：本回合免疫所有伤害与诅咒效果', 'ok');
+    }
     if (/均视为已注能|均已注能/.test(String(card.desc || ''))) {
       set$allSpellsInfused(true);
       G.log('[[icon:sparkles]] <b>旧日再临</b>：所有可注能与必须注能的招式，均视为已注能', 'ok');
@@ -2005,7 +2046,12 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
   // 玩家侧诅咒统一入口：旧日再临后免疫诅咒（灼烧也是诅咒，2026-09-09 留言口径）
   function addPlayerCurse(key, n, foe) {
     if (playerCurseImmune) {
-      G.log(`[[icon:shield]] 深渊主宰的威压：诅咒「${Combat.CURSE_META[key] ? Combat.CURSE_META[key].name : key}」被免疫`, 'ok');
+      // 第十二批（2026-09-23）：邪能护体的本回合临时免疫在场时用中性措辞（深渊主宰的
+      // 永久免疫无本条 pending 时维持原口吻；两免疫同场的极端组合按临时措辞展示，仅文案差异）
+      const pending = delayed.some(q => q.special === 'curseImmuneOff');
+      G.log(pending
+        ? `[[icon:shield]] 本回合免疫：诅咒「${Combat.CURSE_META[key] ? Combat.CURSE_META[key].name : key}」被抵抗`
+        : `[[icon:shield]] 深渊主宰的威压：诅咒「${Combat.CURSE_META[key] ? Combat.CURSE_META[key].name : key}」被免疫`, 'ok');
       return;
     }
     if (holyRune && turn <= 3) {
@@ -2196,7 +2242,8 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     if (job.explicit && job.explicit.length) {
       set$discovering({ options: job.explicit.slice(0, 3), n: job.n, rarity: job.rarity, pred: job.pred, act: job.act || null,
         priceArmor: !!job.priceArmor, pouchUid: job.pouchUid || null, consumeTempAtTurn: !!job.consumeTempAtTurn, tempUids: job.tempUids || [],
-        swapPair: job.swapPair || null, deckBottom: !!job.deckBottom, deckBottomUids: job.explicitUids || [] });
+        swapPair: job.swapPair || null, deckBottom: !!job.deckBottom, deckBottomUids: job.explicitUids || [],
+        zeroCost: !!job.zeroCost, decayEachTurn: !!job.decayEachTurn });
       requestBattleRender();
       return;
     }
@@ -2215,7 +2262,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     if (!options.length) { G.log('（没有符合条件的卡牌可发现）', 'dim'); return; }
     set$discovering({ options, n: job.n, rarity: job.rarity, pred: job.pred, act: job.act || null,
       priceArmor: !!job.priceArmor, pouchUid: job.pouchUid || null, consumeTempAtTurn: !!job.consumeTempAtTurn, tempUids: job.tempUids || [],
-      swapPair: job.swapPair || null });
+      swapPair: job.swapPair || null, zeroCost: !!job.zeroCost, decayEachTurn: !!job.decayEachTurn });
     requestBattleRender();
   }
 
@@ -2224,7 +2271,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     const card = discovering.options[+i];
     if (!card) return;
     const { n, rarity, pred, act, options, priceArmor, pouchUid, consumeTempAtTurn, tempUids, swapPair,
-      deckBottom, deckBottomUids } = discovering;
+      deckBottom, deckBottomUids, zeroCost, decayEachTurn } = discovering;
     set$discovering(null);
     // 探宝·牌库底：未选中的候选按原顺序放回牌库底（数组头部 = 底）
     if (deckBottom && deckBottomUids.length) {
@@ -2277,10 +2324,19 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
       if (consumeTempAtTurn) tempUids.push(uid);
       // 迷之匣：发现的招式记入待换费对（两张到齐后交换费用）
       if (swapPair) swapPair.push(uid);
+      // 第十二批（2026-09-23）：魔法新发现「使其变为0费」/ 高端研发「回合开始时使其-1费」
+      if (zeroCost) {
+        cardOverrides.set(uid, { ...card, cost: 0, _baseCost: card.cost });
+        G.log(`[[icon:bolt]] 发现：【<b>${esc(card.name)}</b>】费用变为 0`, 'loot');
+      }
+      if (decayEachTurn) {
+        delayed.push({ special: 'costDecay', uid });
+        G.log(`[[icon:hourglass]] 发现：【<b>${esc(card.name)}</b>】每回合开始费用 -1`, 'sys');
+      }
     }
     sweepDead();
     if (!alive().length) { finish(true); return; }
-    if (n > 1) discoverQueue.unshift({ n: n - 1, rarity, pred, act, priceArmor, pouchUid, consumeTempAtTurn, tempUids, swapPair });
+    if (n > 1) discoverQueue.unshift({ n: n - 1, rarity, pred, act, priceArmor, pouchUid, consumeTempAtTurn, tempUids, swapPair, zeroCost, decayEachTurn });
     else if (consumeTempAtTurn && tempUids.length) {
       delayed.push({ special: 'consumeTemps', uids: [...tempUids], cardName: '江湖救急' });
       G.log(`[[icon:hourglass]] <b>江湖救急</b>：置入的 ${tempUids.length} 张临时卡将在下个回合开始时消耗`, 'sys');
@@ -2338,4 +2394,3 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     SDT.Sound.sfx('curse');
     G.log(`[[icon:skull]] <b>${esc(foe.name)}</b> 的攻击附加了 <b>1</b> 层${Combat.CURSE_META[key].name}`, 'warn');
   }
-

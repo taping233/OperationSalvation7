@@ -45,11 +45,17 @@ function createBattleResolution(ports) {
     // 卡面若只有技能句，结构化 heal/armor/draw 兜底也一并跳过，否则穿戴即自动放了一次技能。
     const skillOnly = parts.skill.length > 0 && !parts.immediate.length && !parts.turnStart.length &&
       !parts.battle.length && !parts.onInfused.length && !parts.onDraw.length;
+    // 第十二批（2026-09-23）：纯注能句（desc 以「注能（N）」开头）未注能直打时，文本执行器
+    // 已被 gate.infuseRequired 整句拦停——结构化 damage/heal/armor/draw 兜底同门跳过，
+    // 否则未注能白嫖回填字段（邪能护体 draw:3 即此例）；注能打出时不受影响。
+    const infuseLead = /^注能\s*[（(]/.test(desc);
+    // 冷冻射线「若此前其未曾受到过伤害」：本卡结算前的血量快照（先行伤害会让满血判定误杀）
+    const hpAtCast = new Map(getAliveFoes().map(f => [f, f.hp]));
     let did = false;
     const isDmgType = getDamageTypes().includes(card.type);
     let structuredHit = false;
     // —— 伤害（卡面伤害词条立即结算，不受沉默影响） ——
-    if (isDmgType && ((+card.dmg || 0) > 0 || card.dmgType === 'attack')) {
+    if (isDmgType && ((+card.dmg || 0) > 0 || card.dmgType === 'attack') && !(infuseLead && !infused)) {
       structuredHit = true;
       const type = getDamageTypeMeta()[card.dmgType] ? card.dmgType : fixedDamageType;
       let dmgVal = (+card.dmg || 0) + ((uid && getGrowth(uid)) || 0);   // 充能火球：回合成长
@@ -68,7 +74,7 @@ function createBattleResolution(ports) {
       // 触发 n 次；n=0 时不造成伤害。计数器在结算后自增（execPlay），所以读到的不含本牌；
       // 注能牺牲品不算「打出」，万剑归宗等免费释放的招式会计入。
       if (/本回合每打出一张其他招式/.test(desc)) {
-        times = readState().playedMovesThisTurn;
+      times = readState().playedMovesThisTurn;
         log(times > 0
           ? `[[icon:swords]] <b>${esc(card.name)}</b>：本回合已打出 ${times} 张招式，固定伤害触发 ${times} 次`
           : `[[icon:cross]] <b>${esc(card.name)}</b>：本回合还没有打出其他招式，不造成伤害`, times > 0 ? 'sys' : 'dim');
@@ -81,6 +87,14 @@ function createBattleResolution(ports) {
           dmgVal += cnt * +graveM[2];
           log(`[[icon:recycle]] 墓地增伤：墓地中有 ${cnt} 张【${esc(graveM[1])}】牌，伤害 +${cnt * +graveM[2]}`, 'sys');
         }
+      }
+      // 注能在手增伤（第十二批·充能射线 2026-09-23）：「本牌在你手牌中时每注能过 1 张卡牌，伤害 +N」——
+      // 打出时本牌必在手，计数取本局累计注能数（state.infuseFuels，与元素符印同一计数器）。
+      const inhandM = desc.match(/每注能过\s*1?\s*张?卡牌[^。；]*?伤害\s*\+\s*(\d+)/);
+      if (inhandM && readState().infuseFuels > 0) {
+        const infusedCount = readState().infuseFuels;
+        dmgVal += infusedCount * +inhandM[1];
+        log(`[[icon:crystal]] <b>${esc(card.name)}</b>：本局已注能 ${infusedCount} 张，伤害 +${infusedCount * +inhandM[1]}`, 'sys');
       }
       // 斩杀阈值（斩杀：对 N 血以下角色才造成伤害）
       const hpCap = +((desc.match(/对\s*(\d+)\s*血以下/) || [])[1] || 0);
@@ -139,10 +153,13 @@ function createBattleResolution(ports) {
           log(`[[icon:play]] 对手身负诅咒：【${esc(card.name)}】额外施放 ${sm[1]} 次`, 'sys');
         }
       }
-      // 击杀连锁（余烬爆裂）：「若击杀敌人，再施放一次」——本段伤害击杀过敌人时，存活目标再结算一段
-      if (/若击杀(?:任何)?敌人[^。；]*再施放一次/.test(desc) && targets.some(t => t.dead)) {
+      // 击杀连锁（余烬爆裂「再施放一次」/ 第十二批·饱和打击「如果消灭敌人，额外释放一次」2026-09-23）——
+      // 本段伤害击杀过敌人时：群体→存活目标再结算一段；单体全灭→顺延给战场第一名存活敌人。
+      if (/(?:若击杀(?:任何)?敌人|如果(?:消灭|击杀)(?:任何)?敌人)[^。；]*(?:再施放一次|额外释放一次)/.test(desc) && targets.some(t => t.dead)) {
+        const rest = targets.filter(t => !t.dead);
+        const recast = rest.length ? rest : getAliveFoes().slice(0, 1);
         log(`[[icon:sparkles]] <b>${esc(card.name)}</b>：击杀敌人，再施放一次`, 'sys');
-        targets.forEach(foe => { if (!foe.dead) hitFoe(foe, card, dmgVal, type, '（再施放）'); });
+        recast.forEach(foe => { if (!foe.dead) hitFoe(foe, card, dmgVal, type, '（再施放）'); });
       }
       did = true;
     }
@@ -171,27 +188,27 @@ function createBattleResolution(ports) {
     imm.forEach(cl => {
       // 双镖首段若已击杀原目标，流血不得借文本执行器的空目标回退串到下一名活敌人。
       if (card.id === 'tt7-bloodpoison' && target && target.dead && /流血/.test(cl)) return;
-      const res = applyTextEffects(card, cl, target, { structuredHit, infused, fuelCost, uid });
+      const res = applyTextEffects(card, cl, target, { structuredHit, infused, fuelCost, uid, hpAtCast });
       did = did || res.did;
       healed = healed || res.healed;
       armored = armored || res.armored;
       drawn = drawn || res.drawn;
     });
-    // 结构化词条兜底（描述未写明但制作坊标注了回复/护甲/抽卡字段时）
-    if (!healed && !skillOnly && +(card.heal || 0) > 0) {
+    // 结构化词条兜底（描述未写明但制作坊标注了回复/护甲/抽卡字段时）——纯注能句未注能时同门跳过（第十二批）
+    if (!(infuseLead && !infused) && !healed && !skillOnly && +(card.heal || 0) > 0) {
       const n = +(card.heal || 0);
       if ((getPlayerStatus().status.healban || 0) > 0) {
         log(`[[icon:heart]] 禁疗中：回复 ${n} 点生命无效（还剩 ${getPlayerStatus().status.healban} 回合）`, 'warn');
       } else { heal(n); addFloat({ unit: 'self', text: '', cls: 'stk sticker-heal', warm: true }); }
       did = true;
     }
-    if (!armored && !skillOnly && +(card.armor || 0) > 0) {
+    if (!(infuseLead && !infused) && !armored && !skillOnly && +(card.armor || 0) > 0) {
       addArmor(+(card.armor || 0));
       log(`[[icon:plate]]获得 ${+(card.armor || 0)} 点护甲`, 'sys');
       did = true;
     }
-    // 卡面结构化抽卡字段兜底（描述未写「抽 N 张牌」时）
-    if (!drawn && !skillOnly && drawOf(card) > 0) {
+    // 卡面结构化抽卡字段兜底（描述未写「抽 N 张牌」时）——邪能护体 draw:3 依赖此门防未注能白嫖
+    if (!(infuseLead && !infused) && !drawn && !skillOnly && drawOf(card) > 0) {
       const n = drawOf(card);
       if (readState().mode === 'boss') {
         const got = drawCards(n);
@@ -208,7 +225,7 @@ function createBattleResolution(ports) {
     parts.battle.forEach(cl => { did = registerBattle(card, cl, target) || did; });
     // 「被注能时」句在打出时不结算（splitClauses 已剥出，留给 resolveInfusedFuel）
     if (!did && !skillOnly) log(`[[icon:play]] <b>${esc(card.name)}</b>：该效果在 M1 后续实装（占位）`, 'dim');
-
+  
   };
 }
 

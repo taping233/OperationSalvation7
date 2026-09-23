@@ -708,5 +708,27 @@ export const dataSlice = {
       { id: "foe-grass_el", name: "滋生异变体", cost: 0, rarity: "衍生", type: "生物", dmg: 0, desc: "攻击 5 / 生命 12。变异·第5层。攻击并施加诅咒。", value: 0, sellable: false, art: "grass_el" },
     ], 'TABLETOP11'),
 
+    // 第十二批：射线/研发系列新卡 17 张（2026-09-23 老板卡表）。全新 KEY（TT12_KEY）播种，老档启动补播。
+    // 类型补全口径：原表 5 张未标类型（邪能护体/不稳定射线/感染射线/基础开发/违禁烟火），按效果语义均为法术；
+    // 「朴」按 古朴 归一；「2，稀有」按 cost=2。damage 字段只在固定值时显式给（区间/注能门卡走文本路径）。
+    TABLETOP12: [
+      { id: 'tt12-raydragon',   name: '龙焰射线', cost: 2, rarity: '古朴', type: '法术', infuse: 1, desc: '注能（1）：造成11点法伤' },
+      { id: 'tt12-sporewall',   name: '孢子城墙', cost: 1, rarity: '古朴', type: '法术', armor: 6, desc: '对一名敌人附加2层中毒，自己获得6点护甲' },
+      { id: 'tt12-elemburst',   name: '元素爆裂', cost: 2, rarity: '稀有', type: '法术', desc: '对随机敌人造成2点法伤，触发4-5次' },
+      { id: 'tt12-hitechrd',    name: '高端研发', cost: 1, rarity: '稀有', type: '法术', desc: '发现一张2费招式，在每个回合开始时，使其-1费' },
+      { id: 'tt12-barriermend', name: '屏障修复', cost: 1, rarity: '古朴', type: '法术', armor: 6, desc: '获得6点护甲，如果你此时没有护甲，该牌变为0费' },
+      { id: 'tt12-saturate',    name: '饱和打击', cost: 2, rarity: '稀有', type: '法术', dmg: 7, dmgType: 'spell', desc: '造成7点法伤，如果消灭敌人，额外释放一次' },
+      { id: 'tt12-felguard',    name: '邪能护体', cost: 2, rarity: '史诗', type: '法术', infuse: 2, draw: 3, desc: '注能（2）：抽3张牌，本回合免疫所有伤害和诅咒效果' },
+      { id: 'tt12-unstableray', name: '不稳定射线', cost: 1, rarity: '古朴', type: '法术', desc: '造成4-6点法伤' },
+      { id: 'tt12-infectray',   name: '感染射线', cost: 1, rarity: '古朴', type: '法术', dmg: 4, dmgType: 'spell', desc: '造成4点法伤，附加一层随机诅咒' },
+      { id: 'tt12-basicdev',    name: '基础开发', cost: 1, rarity: '古朴', type: '法术', desc: '随机获取两张0费招式' },
+      { id: 'tt12-firecracker', name: '违禁烟火', cost: 0, rarity: '古朴', type: '法术', dmg: 1, dmgType: 'fixed', desc: '对全体敌人造成1点固定伤害' },
+      { id: 'tt12-magicfind',   name: '魔法新发现', cost: 1, rarity: '古朴', type: '法术', desc: '发现1张1费招式，使其变为0费。' },
+      { id: 'tt12-chargeray',   name: '充能射线', cost: 1, rarity: '稀有', type: '法术', dmg: 5, dmgType: 'spell', desc: '造成5点法伤，本牌在你手牌中时每注能过1张卡牌，伤害+2' },
+      { id: 'tt12-breakthrough', name: '突破进展', cost: 1, rarity: '稀有', type: '法术', desc: '随机获取1张0费，一张1费，一张2费招式' },
+      { id: 'tt12-raygun',      name: '射线枪', cost: 0, rarity: '古朴', type: '装备', desc: '主动技能：发现一张射线牌并直接释放' },
+      { id: 'tt12-backupcell',  name: '后备能源', cost: 6, rarity: '史诗', type: '法术', draw: 2, desc: '抽2张牌并回复所有费用，消耗口袋中每有一张法术牌，本牌费用-1' },
+      { id: 'tt12-freezeray',   name: '冷冻射线', cost: 1, rarity: '稀有', type: '法术', dmg: 4, dmgType: 'spell', desc: '造成4点法伤；若此前其未曾受到过伤害，对其附加冰冻' },
+    ],
 
 };

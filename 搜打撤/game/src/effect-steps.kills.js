@@ -2,7 +2,7 @@
  * 铁律：顺序即语义——本分节在壳 effect-steps.js 的 concat 顺序即旧 if 链物理顺序，勿重排。
  * 共享端口由壳经参数 s 注入（deps 展开 + esc/hitFoe + 模块级常量），本文件零 import。 */
 export function killsSteps(s) {
-  const {combat, getAlive, log, heal, pushFloat, queueDiscover, randomDiscoverCard, addTempCard, allCards, random01, getPlayerHp, getHandSize, getHandCards, burstPoison, deckDraw, fleeBattle, getPlayerCaster, damagePlayer, setNextSpellTwice, randomAcquired, esc, hitFoe, POOL_NUM_MAP, parsePoolNoun} = s;
+  const {combat, getAlive, log, heal, pushFloat, queueDiscover, randomDiscoverCard, addTempCard, allCards, random01, getPlayerHp, getHandSize, getHandCards, burstPoison, deckDraw, fleeBattle, getPlayerCaster, damagePlayer, setNextSpellTwice, randomAcquired, esc, hitFoe, POOL_NUM_MAP, parsePoolNoun, isRandomObtainable} = s;
   return [
       /* ============ 击杀 / 行动 / 资源段 ============ */
       {
@@ -280,17 +280,45 @@ export function killsSteps(s) {
         },
       },
       {
+        // 第十二批（2026-09-23）：基础开发「随机获取两张0费招式」/ 突破进展「0/1/2 费各一张」——
+        // 「随机获取」直接随机入手，不走发现面板（同魔法锅炉口径）；先于 discover.pool 声明抢占。
+        id: 'rand.getCostedMoves', gate: 'fresh', label: '随机获取 N 张指定费用招式（直接入手）',
+        when: (ctx) => {
+          if (/随机获取\s*(?:两|2)\s*张\s*0费招式/.test(ctx.desc)) return [0, 0];
+          if (/随机获取\s*1?\s*张\s*0费[，,]\s*一\s*张\s*1费[，,]\s*一\s*张\s*2费招式/.test(ctx.desc)) return [0, 1, 2];
+          return null;
+        },
+        run: (ctx, costs) => {
+          const got = [];
+          for (const k of costs) {
+            const base = parsePoolNoun(`${k}费招式`, ctx.myClass);
+            const c = base && typeof isRandomObtainable === 'function'
+              ? randomDiscoverCard(x => base(x) && isRandomObtainable(x)) : null;
+            if (c) {
+              addTempCard(c);
+              if (typeof randomAcquired === 'function') randomAcquired(c);
+              got.push(c.name);
+            }
+          }
+          if (got.length) log(`[[icon:cards]] <b>${esc(ctx.card.name)}</b>：随机获取 ${got.length} 张招式（${got.map(esc).join('、')}）`, 'loot');
+          else log(`[[icon:question]] <b>${esc(ctx.card.name)}</b>：卡池里没有符合条件的招式`, 'dim');
+          ctx.did = true;
+        },
+      },
+      {
         id: 'discover.pool', gate: 'fresh', label: '发现/随机获取/获得 N 张 ______（统一入口 + 限制卡池）',
         when: (ctx) => {
           // 「该牌时」= 获得/消耗时才触发的被动，出牌时跳过
+          // 结尾组 +招式（第十二批 2026-09-23：发现/获取「N 费招式」）
           const dPool = !/该牌时/.test(ctx.desc)
-            ? ctx.desc.match(/(?:发现|随机获取|获取|获得)(?:并直接施放)?\s*(?:(\d+|[一两二三四五])\s*[张种])?\s*([^，。；,\s]{0,8}?)(卡牌|的卡|的牌|能力卡|牌|卡)/)
+            ? ctx.desc.match(/(?:发现|随机获取|获取|获得)(?:并直接施放)?\s*(?:(\d+|[一两二三四五])\s*[张种])?\s*([^，。；,\s]{0,8}?)(卡牌|的卡|的牌|能力卡|牌|卡|招式)/)
             : null;
           return dPool || null;
         },
         run: (ctx, dPool) => {
           const n0 = POOL_NUM_MAP[dPool[1]] != null ? POOL_NUM_MAP[dPool[1]] : (dPool[1] ? +dPool[1] : 1);
-          const noun = dPool[2] || '';
+          // 招式尾拼回名词（2费招式 → parsePoolNoun 才能同时吃费用+武术两道限制）；牌/卡尾维持原样丢弃
+          const noun = (dPool[2] || '') + (dPool[3] === '招式' ? '招式' : '');
           const pred = parsePoolNoun(noun, ctx.myClass);
           const n = /等量随机卡牌/.test(ctx.desc) ? 2 : n0;   // 魔法锅炉「发现等量随机卡牌」（消耗至多 2 张）
           let act = null;
@@ -302,7 +330,10 @@ export function killsSteps(s) {
           // 挖宝：「并获得等同于其价格的护甲」；江湖救急：「回合开始时将其消耗」
           queueDiscover({ n, pred, act,
             priceArmor: /获得等同于(?:其|该卡|该牌)价格的护甲/.test(ctx.desc),
-            consumeTempAtTurn: /回合开始时将其消耗/.test(ctx.desc) });
+            consumeTempAtTurn: /回合开始时将其消耗/.test(ctx.desc),
+            // 第十二批（2026-09-23）：魔法新发现「使其变为0费」/ 高端研发「回合开始时使其-1费」
+            zeroCost: /使其变为0费/.test(ctx.desc),
+            decayEachTurn: /回合开始时[，,]?\s*使其-1费/.test(ctx.desc) });
           const label = pred ? noun.replace(/的$/, '') : '';
           log(`[[icon:question]] <b>${esc(ctx.card.name)}</b>：${act === 'play' ? '发现并直接施放' : act === 'playKeep' ? '发现（施放 1 张，其余入手）' : '发现'} ${n} 张${label ? `【${esc(label)}】` : ''}卡牌${pred ? '（限制卡池）' : ''}`, 'sys');
           ctx.did = true;

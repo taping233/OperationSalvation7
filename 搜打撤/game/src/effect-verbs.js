@@ -34,10 +34,10 @@ const looksLikeEffect = (text) => ACTION_RE.test(String(text || ''));
 /* ---------- 1. 已实装的效果动词（检测句式，与结算代码一一对应） ---------- */
 const VERBS = [
   { id: 'attackMod', label: '攻击力增减（攻+N / 攻（-N）/ 获得 N 点攻击力）', impl: 'battle.effects', pattern: /攻\s*[（(]?\s*[+＋\-−]?\s*\d|获得\s*\d+\s*点攻击力|攻击力?\s*\+\s*\d|本回合攻击\s*\+\s*\d|攻击\s*\+\s*\d/ },
-  { id: 'damage', label: '造成伤害（N 点攻击/法术/固定/真实伤害）', impl: 'battle.effects', pattern: /造成[\s\d一两二三四五六七八九十]*点?(?:攻击|法术|固定|真实)?伤害|\d+\s*点?(?:法术|固定|真实)伤害|造成等同于|伤害\s*\+\s*\d/ },
+  { id: 'damage', label: '造成伤害（N 点攻击/法术/固定/真实伤害 / N 点法伤 / 区间 M-N）', impl: 'battle.effects', pattern: /造成[\s\d一两二三四五六七八九十]*点?(?:攻击|法术|固定|真实)?伤害|造成\s*\d+(?:\s*[-–~至]\s*\d+)?\s*点法(?:术)?伤|\d+\s*点?(?:法术|固定|真实)伤害|造成等同于|伤害\s*\+\s*\d/ },
   { id: 'aoeDamage', label: '对全体/多目标伤害', impl: 'battle.effects', pattern: /对所有敌|对全体敌|攻击全体敌|敌方全体|目标为敌方全体|目标为全体敌人|对随机敌/ },
   { id: 'aoeFixedByPrice', label: '按价格折算的全体固定伤害', impl: 'battle.effects', pattern: /造成等同于其价格的固定伤害/ },
-  { id: 'damageRepeat', label: '伤害/效果触发 N 次', impl: 'battle.effects', pattern: /触发\s*\d+\s*次|攻击\s*\d+\s*次|[‘'’”]?\d+[′'’”]/ },
+  { id: 'damageRepeat', label: '伤害/效果触发 N 次（含区间 M-N）', impl: 'battle.effects', pattern: /触发\s*\d+(?:\s*[-–~至]\s*\d+)?\s*次|攻击\s*\d+\s*次|[‘'’”]?\d+[′'’”]/ },
   { id: 'selfDamage', label: '自伤', impl: 'battle.effects', pattern: /受到\s*\d+\s*点?伤害|损失\s*\d+\s*点?(?:生命|血)|回合开始\s*-\s*\d+\s*血|每次?消耗[^。]*?-\s*\d+\s*血/ },
   { id: 'heal', label: '回复生命', impl: 'battle.effects', pattern: /回复[\s\d一两二三四五六七八九十]*点?(?:生命|血)|回血|\+\s*\d+\s*血|回复等量生命|回复\s*至\s*\d+\s*血|治疗所有队友|治疗全体/ },
   { id: 'armor', label: '获得护甲', impl: 'battle.effects', pattern: /\+?\s*\d+\s*(?:点)?甲|获得\s*\d+\s*点护甲|护甲\s*\+\s*\d+/ },

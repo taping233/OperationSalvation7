@@ -17,6 +17,7 @@
   const TT11_KEY = 'sdt-cards-tt11-v6-seeded';   // 第十一批：与设计者实机卡库导出完全对齐（2026-09-09 老板拍板，见 TABLETOP11 注释）；v2：法力补给补 cls=法师（白塔专属）；v3：不变应万变补 cls=侠客（无专属，老板 2026-09-12 拍板）；v4：恶魔之力补 cls=牧师（星月专属，老板 2026-09-13 拍板）；v5：恶魔之力 tt7-drunksong 整卡退役（老板 2026-09-13 改拍板删除，同名双版收口只留 cc-demon）；v6：圣光之源补 cls=牧师（星月专属，老板 2026-09-20 拍板）——均换 key 重播让旧档拿到
   const ITEM_RENAME_KEY = 'sdt-cards-item-renames-v1'; // 2026-09-08：道具定名 + 金创药/金疮药合并
   const EVENTS_0919_KEY = 'sdt-events-0919-v2-seeded'; // 2026-09-19：都市污染事件池（10 旧事件改名 + 9 新事件）；v2：熔断双箱/隧道血契 desc 对齐实装口径（迭代评审 09-20 B-P0/P2）
+  const TT12_KEY = 'sdt-cards-tt12-v1-seeded';         // 第十二批：射线/研发系列新卡 17 张（2026-09-23 老板卡表）；全新 KEY——老档未标记过，启动即补播（不进 cards-sync 数组）
   // 第十批退役：同设计重复 id（设计者实机已把同名卡定版在旧 id 上，见 TABLETOP10 尾部注释）
   const RETIRE_TT10 = ['tt3-freeze', 'tt3-flame-potion', 'tt3-toxic-potion', 'tt3-bleed-potion'];
   // 第十一批退役（2026-09-09 对齐设计者实机）：仓库独有、设计者实机没有的 39 张。
@@ -38,4 +39,4 @@
   //   法师（← 法师/召唤师）· 降临者（← 降临者/授印者）
   // 整合明细与逐卡归属见 docs/class-consolidation.md；实机卡库迁移见 ensureClassConsolidation()。
   const CLASSES = ['侠客', '战士', '牧师', '法师', '降临者'];
-export { KEY, TT2_KEY_V3, TT1_KEY_V6, TT4_KEY_V2, TT3_KEY_V5, TT5_KEY, TT6_KEY, TT7_KEY, TT7_KEY_V2, TT8_KEY, TT9_KEY, TT10_KEY, TT11_KEY, ITEM_RENAME_KEY, EVENTS_0919_KEY, RETIRE_TT10, RETIRE_TT11, CC_KEY, CLASSES };
+export { KEY, TT2_KEY_V3, TT1_KEY_V6, TT4_KEY_V2, TT3_KEY_V5, TT5_KEY, TT6_KEY, TT7_KEY, TT7_KEY_V2, TT8_KEY, TT9_KEY, TT10_KEY, TT11_KEY, ITEM_RENAME_KEY, EVENTS_0919_KEY, TT12_KEY, RETIRE_TT10, RETIRE_TT11, CC_KEY, CLASSES };
