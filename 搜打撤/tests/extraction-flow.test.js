@@ -11,7 +11,7 @@ beforeEach(() => {
   openBaseHub = vi.fn(() => { game.state = 'modal'; });
   const SDT = { Base: base, Sound: { sfx() {}, music() {} }, Cards: { cardHTML: c => c.name, sellPrice: () => 1 }, Meta: { track() {} } };
   const nodeShell = o => UI.showOverlay('', `${o.body || ''}${o.foot || ''}`);
-  const code = source.slice(source.indexOf('function openBagSacrifice(')).replace('export function emergencyExitPaymentState', 'function emergencyExitPaymentState').replace('export function openEmergencyModal', 'function openEmergencyModal');
+  const code = source.slice(source.indexOf('function openBagSacrifice(')).replace('export function emergencyExitPaymentState', 'function emergencyExitPaymentState').replace('export function openEmergencyModal', 'function openEmergencyModal').replace('export function doExtract', 'function doExtract');
   openEmergencyModal = new Function('game', 'UI', 'SDT', 'curLayer', 'esc', 'escAttr', 'Sfx', 'MAP', 'syncPlayTime', 'clearSave', '_set_cardPageOpen', 'nodeShell', 'nodeOpt', 'openBaseHub', `${code}; return openEmergencyModal;`)(game, UI, SDT, () => ({ logical: [{ def: { type: 'emergencyExit' } }] }), String, String, { tick() {}, ding() {} }, { rules: {} }, () => {}, () => {}, () => {}, nodeShell, (act, label) => `<button data-act="${act}">${label}</button>`, openBaseHub);
 });
 
