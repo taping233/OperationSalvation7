@@ -82,6 +82,7 @@ let hubCollectionView = 'backs';
         },
       },
       onIntent: async intent => {
+        if (request !== homeSceneRequest) return null;
         if (intent.type === 'close') { closeBase(); return { ok: true }; }
         if (intent.type === 'openPanel') {
           hubTab = ({ collection: 'ach', characters: 'classes', pets: 'stash' }[intent.panel] || intent.panel);
@@ -94,8 +95,9 @@ let hubCollectionView = 'backs';
         else if (intent.type === 'submitLayout') result = await homeCommands.saveLayout(context, intent);
         else if (intent.type === 'selectDisplay') result = await homeCommands.setDisplay(context, intent);
         else return { ok: false, code: 'INVALID_ARGUMENT', message: '未知基地操作' };
-        if (result.ok) refresh();
-        else result = { ...result, message: homeErrorMessage(result) };
+        if (result.ok) {
+          if (request === homeSceneRequest) refresh();
+        } else result = { ...result, message: homeErrorMessage(result) };
         return result;
       },
       });
