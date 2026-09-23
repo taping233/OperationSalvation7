@@ -1,0 +1,17 @@
+{
+  "//": "渐进类型化试点配置（2026-09-23）：checkJs 只覆盖试点文件，严禁扩大 include 到全仓——会引发报错海啸。扩容流程见 docs/ts-check-rollout-2026-09-23.md。",
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "lib": ["esnext", "dom"],
+    "checkJs": true,
+    "strict": false,
+    "skipLibCheck": true,
+    "noEmit": true
+  },
+  "include": [
+    "game/src/run/map-graph.js",
+    "game/src/cards/mech-sentences.js"
+  ]
+}

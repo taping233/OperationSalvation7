@@ -1,3 +1,4 @@
+// @ts-check
 /* ============================================================
  * map-graph.js —— 环层图连通性检查（纯函数）
  *
@@ -7,7 +8,22 @@
  * 只做检查不改数据；session 在构建 layerData 后调用并告警。
  * ============================================================ */
 
+/**
+ * 环层地图数据（结构与 layeredMap.js 的 layerData 输出对齐）。
+ * 未在生成器里显式给出的字段一律可选：手工层常省略 doors 等。
+ * @typedef {Object} MapLayer
+ * @property {{ next?: [number, number][] }[]} logical   每层逻辑结点；next 为 [目标层号, 层内序号]（生成器图才带）
+ * @property {{ pair?: string, at: number, toLayer: number, arriveAt: number }[]} [doors]   环间双向门
+ * @property {{ at: number }[]} [altarEntrances]         祭坛入口（连向中央结点 '-1,0'）
+ * @property {number[]} [entrances]                      第 0 层授权图的玩家入口序号
+ */
+
   // 构建邻接表：环上相邻结点互连（闭环），门/祭坛入口按转移边连接
+  /**
+   * @param {MapLayer[]} layerData
+   * @returns {{ adj: Map<string, Set<string>>, key: (li: number, idx: number) => string }}
+   *   adj 键/值均为 'li,idx' 结点键（含中央 '-1,0'）。
+   */
   function buildAdjacency(layerData) {
     const adj = new Map();
     const key = (li, idx) => `${li},${idx}`;
@@ -41,6 +57,7 @@
 
   /**
    * 从 (0层,0号结点) 出发做可达性 flood-fill。
+   * @param {MapLayer[]} layerData
    * @returns {{ ok: boolean, unreachable: string[] }} unreachable 为 'li,idx' 列表
    */
   function checkConnectivity(layerData) {

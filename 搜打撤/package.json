@@ -16,6 +16,7 @@
     "pretest": "npm run narrative:compile && node scripts/validate-data.mjs",
     "test": "vitest run --no-file-parallelism --reporter=dot",
     "check:syntax": "node scripts/check-syntax.mjs",
+    "lint": "eslint game/src tests",
     "check:quality": "npm run check:syntax && npm run validate:data && npm test && npm run build",
     "test:watch": "vitest",
     "perf": "node scripts/perf-benchmark.cjs",
@@ -30,8 +31,10 @@
   "devDependencies": {
     "acorn": "^8.14.0",
     "acorn-walk": "^8.3.4",
+    "eslint": "^10.11.0",
     "jsdom": "^25.0.1",
     "jsfxr": "^1.4.1",
+    "typescript": "^7.0.2",
     "vite": "^6.0.0",
     "vitest": "^3.0.0"
   },

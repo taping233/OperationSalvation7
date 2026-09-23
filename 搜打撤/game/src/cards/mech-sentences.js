@@ -1,6 +1,25 @@
+// @ts-check
 // ======== 机制词条（制作坊一键写入规范句式，battle.core.applyTextEffects 按文本结算） ========
   // sen：匹配描述中整条机制句（含句尾标点）；cnt：读当前次数（第一个捕获组）
   // tpl(n)：生成规范句式；max：可叠加的最大次数（1 = 只能开/关）
+/**
+ * 单条机制句式。cnt 省略表示该机制不读当前次数（如破甲/禁疗/格挡）。
+ * @typedef {Object} MechItem
+ * @property {string} k        机制键名（battle 文本解释层的结算标识）
+ * @property {string} label    词条中文名（制作坊 UI 展示）
+ * @property {string} icon     图标标识
+ * @property {(n?: number) => string} tpl   规范句式生成器（n 为层数/持续回合）
+ * @property {RegExp} sen      从卡牌描述里识别整条机制句的正则
+ * @property {RegExp} [cnt]    从句子里读当前次数的正则（第一个捕获组）
+ * @property {number} max      可叠加的最大次数（1 = 只能开/关）
+ */
+/**
+ * 机制分组（诅咒/祝福/资源三组，制作坊按组渲染）。
+ * @typedef {Object} MechGroup
+ * @property {string} name     分组名
+ * @property {MechItem[]} items  组内句式列表
+ */
+/** @type {MechGroup[]} */
 const MECH_GROUPS = [
   { name: '诅咒 · 拖到敌人身上', items: [
     { k: 'bleed',   label: '流血', icon: 'blood',   tpl: n => `附加 ${n} 层流血。`, sen: /附加\s*\d*\s*层?\s*流血[^。；;]*。?/, cnt: /附加\s*(\d+)\s*层?\s*流血/, max: 5 },
@@ -28,6 +47,7 @@ const MECH_GROUPS = [
     { k: 'maxEner', label: '能量上限+', icon: 'bolt', tpl: () => `能量上限 +1。`, sen: /能量上限\s*\+\s*\d+[^。；;]*。?/, max: 1 },
   ] },
   ];
+/** @type {MechItem[]} */
 const MECH_ALL = MECH_GROUPS.flatMap(g => g.items);
 
 export { MECH_GROUPS, MECH_ALL };
