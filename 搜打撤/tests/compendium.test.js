@@ -1,8 +1,8 @@
 /* 游戏全书生成（2026-09-16 留言「所有系统做成标准化分章节文档，与游戏一一对应」）：
- * 在 vitest jsdom 环境装配真实卡牌库后重建 docs/game-compendium.md，
+ * 在 vitest jsdom 环境装配真实卡牌库后生成文档内容；仅 npm run docs:compendium 写入文件，
  * 并校验文档与运行时数据一致（卡牌计数、退役卡不出现、时点词条样例存在）。 */
 import { describe, it, expect, beforeAll } from 'vitest';
-import { readFileSync, writeFileSync } from 'node:fs';
+import { writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { buildCompendium } from '../scripts/generate-compendium.mjs';
 
@@ -31,11 +31,12 @@ beforeAll(() => {
     mapData: DATA.map,
     generatedAt: new Date().toISOString().slice(0, 10),
   });
-  writeFileSync(OUT, md, 'utf-8');
+  // 普通回归只校验生成内容，避免全量测试覆盖工作区已有的文档修改。
+  if (process.env.npm_lifecycle_event === 'docs:compendium') writeFileSync(OUT, md, 'utf-8');
 });
 
 describe('游戏全书与运行时数据一一对应', () => {
-  it('文档已重建且含全部类型章节', () => {
+  it('生成内容含全部类型章节', () => {
     expect(md).toContain('# 搜打撤 · 代号7 游戏全书');
     for (const t of ['招式（武术）', '法术', '装备', '道具', '资源', '能力卡']) expect(md).toContain(t);
   });
