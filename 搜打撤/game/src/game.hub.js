@@ -12,7 +12,6 @@ import { readBase, readBaseReceipt, commitBase } from './base.commands.js';
 import { convertCollection, getCharacter, getCollection, selectSkin, stackKeyOf } from './collection.commands.js';
 import { createHomeCommands } from './home.commands.js';
 import { presentHome, homeErrorMessage } from './home.presenter.js';
-import { mountHome } from './home.scene.js';
 import { getM04VisualPack } from './home.visuals.js';
 import { validateLastLampState } from './story.last-lamp.js';
 import { createPreparationCommands, getPreparation, previewDeployment } from './preparation.commands.js';
@@ -30,6 +29,7 @@ const homeCommands = createHomeCommands({
 });
 let homeController = null;
 let preparationController = null;
+let homeSceneRequest = 0;
 const disposeHome = () => { homeController?.dispose(); homeController = null; };
 const disposePreparation = () => { preparationController?.dispose(); preparationController = null; };
 const preparationCommands = createPreparationCommands({ readBase, readBaseReceipt, commitBase });
@@ -56,6 +56,7 @@ let hubCollectionView = 'backs';
   }
 
   function renderHomeScene() {
+    const request = ++homeSceneRequest;
     disposePreparation();
     disposeHome();
     const read = readHomeView();
@@ -68,7 +69,9 @@ let hubCollectionView = 'backs';
       return next;
     };
     const visualPack = getM04VisualPack();
-    homeController = mountHome({
+    import('./home.scene.js').then(({ mountHome }) => {
+      if (request !== homeSceneRequest || !host.isConnected) return;
+      homeController = mountHome({
       host, view: read.value, assets: {
         ...visualPack,
         characterHTML: characterId => SDT.Art.classArt(characterFor(characterId)?.rulesetId || characterId),
@@ -95,10 +98,17 @@ let hubCollectionView = 'backs';
         else result = { ...result, message: homeErrorMessage(result) };
         return result;
       },
+      });
+    }).catch(error => {
+      if (request !== homeSceneRequest) return;
+      disposeHome();
+      UI.log(`基地场景加载失败：${error?.message || error}；可切换页签后重试。`, 'warn');
+      renderHub();
     });
   }
 
   function renderHub() {
+    homeSceneRequest++;
     disposeHome();
     disposePreparation();
     const B = SDT.Base;
@@ -372,6 +382,7 @@ let hubCollectionView = 'backs';
 
 
   function closeBase() {
+    homeSceneRequest++;
     disposeHome();
     _set_cardPageOpen(false);
     UI.hideOverlay();

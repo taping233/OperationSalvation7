@@ -5,12 +5,14 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 // 逐文件读写拷贝：copyFileSync 在 Windows 下对只读源文件会 EPERM，read+write 则正常
-function copyDir(src, dest) {
+function copyDir(src, dest, relativePrefix = '') {
   mkdirSync(dest, { recursive: true });
   for (const e of readdirSync(src, { withFileTypes: true })) {
     const s = path.join(src, e.name), d = path.join(dest, e.name);
-    if (e.isDirectory()) copyDir(s, d);
+    const relativeAsset = relativePrefix ? `${relativePrefix}/${e.name}` : e.name;
+    if (e.isDirectory()) copyDir(s, d, relativeAsset);
     else {
+      if (getAliasedDuplicateAssets().has(relativeAsset)) continue;
       // 只读残留会令 writeFileSync EPERM，且 rmSync 对只读文件静默失败，先清属性再删
       try { chmodSync(d, 0o666); } catch { /* 不存在则忽略 */ }
       rmSync(d, { force: true });
@@ -52,6 +54,26 @@ const RUNTIME_ASSET_PREFIXES = RUNTIME_ASSET_DIRS.map(dir => dir.split(path.sep)
 // 进清单会被全量预热，等于原图+缩略图两份位图都常驻，与预加载初衷相反）。图片扩展名兜底过滤。
 const ART_MANIFEST_DIRS = RUNTIME_ASSET_DIRS.filter(dir => dir !== 'sfx' && dir !== 'thumbs');
 const IMAGE_EXT_RE = /\.(webp|png|jpe?g|gif|svg)$/i;
+const ITEM_ART_ALIAS = Object.freeze({ id: 'tt-token-color', target: 'cmtmvq6ss84l' });
+let aliasedDuplicateAssets = null;
+
+// 仅当权威 itemArt 仍指向等字节别名时，从发布清单与副本中省略旧键文件。
+// 若映射被恢复为独立素材，或两份源文件发生分歧，则自动保留两份。
+function getAliasedDuplicateAssets() {
+  if (aliasedDuplicateAssets) return aliasedDuplicateAssets;
+  aliasedDuplicateAssets = new Set();
+  const mapping = JSON.parse(readFileSync(path.join(GAME_ROOT, 'data', 'art-mapping.json'), 'utf8'));
+  if (mapping.itemArt?.[ITEM_ART_ALIAS.id] !== ITEM_ART_ALIAS.target) return aliasedDuplicateAssets;
+  for (const prefix of ['cards/items', 'thumbs/cards/items']) {
+    const oldAsset = `${prefix}/${ITEM_ART_ALIAS.id}.webp`;
+    const targetAsset = `${prefix}/${ITEM_ART_ALIAS.target}.webp`;
+    const oldPath = path.join(ASSETS_ROOT, ...oldAsset.split('/'));
+    const targetPath = path.join(ASSETS_ROOT, ...targetAsset.split('/'));
+    if (existsSync(oldPath) && existsSync(targetPath)
+      && readFileSync(oldPath).equals(readFileSync(targetPath))) aliasedDuplicateAssets.add(oldAsset);
+  }
+  return aliasedDuplicateAssets;
+}
 
 // 递归收集目录下图片文件，返回相对 assets/ 的 POSIX 路径
 function collectImageFiles(dir, prefix = '') {
@@ -69,7 +91,9 @@ function collectImageFiles(dir, prefix = '') {
 // 构建期扫描生成 game/src/generated/art-manifest.js，art.js 按它补热。
 // 新增/删除图片后重跑构建清单自动更新，运行时零维护。
 function writeArtManifest() {
-  const files = ART_MANIFEST_DIRS.flatMap(dir => collectImageFiles(path.join(GAME_ROOT, 'assets', dir), dir));
+  const omittedAliases = getAliasedDuplicateAssets();
+  const files = ART_MANIFEST_DIRS.flatMap(dir => collectImageFiles(path.join(GAME_ROOT, 'assets', dir), dir))
+    .filter(file => !omittedAliases.has(file));
   const target = path.join(GAME_ROOT, 'src', 'generated', 'art-manifest.js');
   writeFileSync(
     target,
@@ -84,7 +108,9 @@ function writeArtManifest() {
 // art.js 靠它判断某张图有没有缩略图变体，没有就回退原图，不会打 404。
 // 这里重写一份是为了新增/删除缩略图后无需手动同步；thumbs 目录不存在时写出空清单。
 function writeThumbManifest() {
-  const files = collectImageFiles(path.join(GAME_ROOT, 'assets', 'thumbs')).sort();
+  const omittedAliases = getAliasedDuplicateAssets();
+  const files = collectImageFiles(path.join(GAME_ROOT, 'assets', 'thumbs'))
+    .filter(file => !omittedAliases.has(`thumbs/${file}`)).sort();
   const target = path.join(GAME_ROOT, 'src', 'generated', 'thumb-manifest.js');
   writeFileSync(
     target,
@@ -138,7 +164,7 @@ function copyStatic() {
       const srcAssets = path.join(GAME_ROOT, 'assets');
       for (const relativeDir of RUNTIME_ASSET_DIRS) {
         const source = path.join(srcAssets, relativeDir);
-        if (existsSync(source)) copyDir(source, path.join(OUT_DIR, 'assets', relativeDir));
+        if (existsSync(source)) copyDir(source, path.join(OUT_DIR, 'assets', relativeDir), relativeDir.split(path.sep).join('/'));
       }
       writeFileSync(path.join(OUT_DIR, 'version.json'), readFileSync(path.join(GAME_ROOT, 'version.json')));
       patchAssetVersions();
@@ -206,6 +232,10 @@ export default defineConfig({
         // 大依赖各自成 chunk：主入口回到 500kB 以下，且库不升级时哈希稳定利于缓存。
         // three 分支删除（迭代评审 09-20 D-P3）：three 为死依赖已移除，规则永不命中徒增误导
         manualChunks(id) {
+          const normalized = id.split(path.sep).join('/');
+          // 卡牌定义与目录解析是稳定内容数据层：独立缓存，但仍是静态启动依赖，
+          // perf-budget 的首屏总量会继续完整计入该 chunk。
+          if (/\/game\/src\/(?:cards\.(?:data|catalog|consts)|data-loader)\.js$/.test(normalized)) return 'game-card-catalog';
           if (/[\\/]node_modules[\\/](pixi\.js|@pixi)[\\/]/.test(id)) return 'vendor-render';
           if (/[\\/]node_modules[\\/]inkjs[\\/]/.test(id)) return 'vendor-narrative';
           if (/[\\/]node_modules[\\/](howler|motion)[\\/]/.test(id)) return 'vendor-runtime';
