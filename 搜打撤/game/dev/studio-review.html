@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>照相馆独立尺寸验收</title>
+<style>
+  *{box-sizing:border-box}body{margin:0;background:#101713;color:#e8e2d2;font:14px system-ui}
+  header{height:52px;display:flex;align-items:center;gap:16px;padding:10px 18px}
+  select{font:inherit;padding:5px 10px;background:#24362d;color:inherit;border:1px solid #8eaa96}
+  main{display:flex;justify-content:center;align-items:flex-start;overflow:auto;padding:12px}
+  #stage{position:relative;flex:none}iframe{position:absolute;inset:0;border:0;transform-origin:top left;background:#111}
+</style>
+<header><label>验收尺寸 <select id="size"><option value="1280,720">1280 × 720</option><option value="1920,1080">1920 × 1080</option><option value="390,844">390 × 844</option></select></label><label><input type="checkbox" id="grayscale">去色对照</label><span>独立页面 · 不调整其他游戏页的视口</span></header>
+<main><div id="stage"><iframe id="game" title="独立游戏验收" src="/"></iframe></div></main>
+<script>
+  const size=document.querySelector('#size'),frame=document.querySelector('#game'),stage=document.querySelector('#stage');
+  function fit(){const [w,h]=size.value.split(',').map(Number),scale=Math.min(1,(innerWidth-24)/w,(innerHeight-76)/h);frame.style.width=w+'px';frame.style.height=h+'px';frame.style.transform='scale('+scale+')';stage.style.width=w*scale+'px';stage.style.height=h*scale+'px';}
+  size.addEventListener('change',fit);addEventListener('resize',fit);fit();
+  document.querySelector('#grayscale').addEventListener('change',e=>{frame.style.filter=e.target.checked?'grayscale(1)':'none';});
+</script>
+</html>

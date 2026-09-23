@@ -76,7 +76,9 @@ describe('照相馆陈列交互', () => {
     // 保留：纸厚阴影+黄铜相片夹
     expect(css).toContain('.studio-photo-paper::before');
     expect(css).toContain('--studio-wall:#170f0d');
-    expect(css).toContain('linear-gradient(145deg,#f3ecdd,#ddd2ba)');
+    expect(css).toContain('linear-gradient(145deg,var(--studio-paper-light),var(--studio-paper))');
+    expect(css).toContain('assets/ui/photo-studio/frame-atelier-v1.png');
+    expect(css).toContain('assets/ui/photo-studio/leather-archive-v1.png');
     // 影廊生图资产挂载：墙纸/台面/空态/背签（牌匾 sign.webp 09-23 拍板移除=彩带）
     expect(css).toContain('assets/ui/photo-studio/wall.webp');
     expect(css).not.toContain('assets/ui/photo-studio/sign.webp');

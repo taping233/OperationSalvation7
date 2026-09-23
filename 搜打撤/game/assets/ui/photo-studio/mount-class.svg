@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320">
+  <!-- Class: dark oxblood leather with a restrained dark-brass inner rule and corner guards. -->
+  <defs>
+    <linearGradient id="leather" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#713b39"/><stop offset=".46" stop-color="#512927"/><stop offset="1" stop-color="#321d1d"/></linearGradient>
+    <linearGradient id="brass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#b09055"/><stop offset=".5" stop-color="#80653b"/><stop offset="1" stop-color="#58472e"/></linearGradient>
+    <g id="guard">
+      <path d="M3 3H45V8H10V45H3Z" fill="url(#brass)" stroke="#342a22" stroke-width="1.3"/>
+      <path d="M6 6H38L6 38Z" fill="#533b2e" stroke="#bd9b5b" stroke-width="1.2"/>
+      <path d="M9 9L29 9M9 9L9 29" fill="none" stroke="#d0b477" stroke-width="1.5"/>
+    </g>
+  </defs>
+  <path fill="url(#leather)" fill-rule="evenodd" d="M0 0H320V320H0Z M46 46V274H274V46Z"/>
+  <path fill="url(#brass)" fill-rule="evenodd" d="M7 7H313V313H7Z M11 11V309H309V11Z"/>
+  <path d="M15 15H305V305H15Z" fill="none" stroke="#291b1b" stroke-width="4"/>
+  <path d="M23 23H297V297H23Z" fill="none" stroke="#765331" stroke-width="2"/>
+  <path d="M32 32H288V288H32Z" fill="none" stroke="#3e2422" stroke-width="3"/>
+  <path d="M41 41H279V279H41Z" fill="none" stroke="#997849" stroke-width="2"/>
+  <use href="#guard"/><use href="#guard" transform="translate(320) rotate(90)"/><use href="#guard" transform="translate(320 320) rotate(180)"/><use href="#guard" transform="translate(0 320) rotate(270)"/>
+</svg>

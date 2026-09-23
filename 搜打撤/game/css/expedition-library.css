@@ -389,16 +389,17 @@ body.cardlib-open #overlay .photo-studio-v3 {
   --studio-text:#f2ede4;
   --studio-muted:#a99e8f;
   --studio-line:rgba(212,175,122,.18);
-  --studio-paper:#ece8e0;
+  --studio-paper:#e7dece;
+  --studio-paper-light:#f0e9dc;
+  --studio-paper-edge:rgba(104,87,64,.38);
   --studio-wall:#170f0d;
   --studio-brass-hi:#f0d9a8;
   --studio-brass:#c9a468;
   --studio-brass-lo:#8a6a3c;
   --studio-velvet:#5a1c24;
-  /* 照相馆内字体口径（09-23 拍板）：只用 HarmonyOS Sans + Noto Sans 两支，
-     遮蔽 :root 同名变量，本页后代 var(--font-ui)/var(--serif) 全部走此栈 */
+  /* 正文保持无衬线；馆名、照片名称和索引标题按老板新要求恢复宋体层级。 */
   --font-ui:'HarmonyOS Sans SC','HarmonyOS Sans','Noto Sans SC Sub','Noto Sans SC',sans-serif;
-  --serif:'HarmonyOS Sans SC','HarmonyOS Sans','Noto Sans SC Sub','Noto Sans SC',sans-serif;
+  --serif:'Noto Serif SC','Source Han Serif SC','Songti SC','SimSun','STSong',serif;
   font-family:var(--font-ui)!important;
   display:flex!important;
   flex-direction:column!important;
@@ -476,10 +477,18 @@ body.cardlib-open #overlay .photo-studio-v3 .library-head>.pg-close {
   position:static!important;
   width:40px!important;
   height:40px!important;
-  border-color:rgba(212,175,122,.3)!important;
+  border-radius:2px!important;
+  border-color:rgba(212,175,122,.24)!important;
   color:var(--studio-muted)!important;
   background:rgba(29,21,18,.6)!important;
-  box-shadow:0 3px 8px rgba(0,0,0,.45)!important;
+  box-shadow:0 2px 6px rgba(0,0,0,.3)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .library-head>.pg-close .ic,
+body.cardlib-open #overlay .photo-studio-v3 .library-head>.pg-close .ic img {
+  display:block;
+  width:15px!important;
+  height:15px!important;
+  object-fit:contain;
 }
 body.cardlib-open #overlay .photo-studio-v3 .library-tools {
   grid-area:tools;
@@ -506,14 +515,14 @@ body.cardlib-open #overlay .photo-studio-v3 .studio-search .clib-search {
   box-shadow:none!important;
   color:var(--studio-text)!important;
 }
-body.cardlib-open #overlay .photo-studio-v3 .studio-search .clib-search::placeholder { color:#6b5f50!important; }
+body.cardlib-open #overlay .photo-studio-v3 .studio-search .clib-search::placeholder { color:#b2a38f!important; }
 body.cardlib-open #overlay .photo-studio-v3 .studio-search:focus-within {
-  border-color:rgba(212,175,122,.65);
-  box-shadow:0 0 0 2px rgba(212,175,122,.16);
+  border-color:#83b8b1;
+  box-shadow:0 0 0 2px rgba(131,184,177,.24);
 }
 body.cardlib-open #overlay .photo-studio-v3 .library-tools>.pg-select,
 body.cardlib-open #overlay .photo-studio-v3 .library-tools>.hs-btn {
-  min-height:42px!important;
+  min-height:40px!important;
   border-color:rgba(212,175,122,.22)!important;
   color:#e8dfd0!important;
   background:var(--studio-control)!important;
@@ -537,8 +546,8 @@ body.cardlib-open #overlay .photo-studio-v3 .studio-filterbar {
   gap:9px;
   align-items:center;
   padding:8px clamp(18px,2.2vw,34px);
-  border-top:1px solid rgba(212,175,122,.16);
-  border-bottom:1px solid rgba(212,175,122,.14);
+  border-top:1px solid rgba(212,175,122,.09);
+  border-bottom:1px solid rgba(212,175,122,.08);
   background:var(--studio-panel);
   box-shadow:inset 0 1px rgba(255,255,255,.05),inset 0 -1px rgba(0,0,0,.4);
 }
@@ -727,18 +736,16 @@ body.cardlib-open #overlay .photo-studio-v3 .studio-photo-paper {
   position:relative;
   display:block;
   min-width:0;
-  padding:6px 6px 10px;
-  border:1px solid rgba(250,244,230,.9);
-  border-right-color:rgba(152,136,112,.7);
-  border-bottom-color:rgba(132,118,94,.78);
+  padding:6px 6px 6px;
+  border:1px solid var(--studio-paper-edge);
   border-radius:2px;
   background:
     linear-gradient(102deg,rgba(255,252,240,.2),transparent 26% 74%,rgba(92,78,56,.12)),
-    linear-gradient(145deg,#f3ecdd,#ddd2ba);
+    linear-gradient(145deg,var(--studio-paper-light),var(--studio-paper));
   box-shadow:
-    0 2px 0 rgba(96,86,70,.6),
-    0 4px 0 rgba(38,30,22,.3),
-    var(--photo-shadow-x,0) var(--photo-shadow-y,16px) min(var(--photo-shadow-blur,28px),22px) rgba(10,4,3,.55),
+    0 2px 0 rgba(96,86,70,.42),
+    0 4px 0 rgba(38,30,22,.22),
+    var(--photo-shadow-x,0) var(--photo-shadow-y,16px) min(var(--photo-shadow-blur,28px),22px) rgba(10,4,3,.46),
     inset 1px 1px 0 rgba(255,255,255,.6);
   transition:border-color .16s ease,box-shadow .16s ease;
 }
@@ -799,34 +806,32 @@ body.cardlib-open #overlay .photo-studio-v3 .studio-photo-art img {
 body.cardlib-open #overlay .photo-studio-v3 .studio-photo-caption {
   position:relative;
   display:grid;
-  gap:3px;
+  gap:4px;
   min-width:0;
-  padding:10px 5px 8px;
+  padding:8px 5px 6px;
   text-align:center;
 }
 body.cardlib-open #overlay .photo-studio-v3 .studio-photo-caption b {
   overflow:hidden;
-  color:#241f18;
-  font:700 15px/1.25 var(--serif);
-  letter-spacing:.06em;
+  color:#2b241d;
+  font:700 17px/1.35 var(--serif);
+  letter-spacing:.02em;
   white-space:normal;
   display:-webkit-box;
   -webkit-line-clamp:2;
   -webkit-box-orient:vertical;
-  min-height:2.5em;
 }
 body.cardlib-open #overlay .photo-studio-v3 .studio-photo-caption small {
   overflow:hidden;
-  color:#6a6156;
-  font:600 10px/1.2 var(--font-ui);
+  color:#5d5042;
+  font:600 12px/1.2 var(--font-ui);
   letter-spacing:.06em;
   text-overflow:ellipsis;
   white-space:nowrap;
 }
 /* 类型小字/稀有度馆印/瓦片编号已随 09-23「照片墙上只有画+名字」拍板移除 */
 /* 悬停：照片从墙上抬起（整卡上浮+落影加深），静态无 3D 变形 */
-body.cardlib-open #overlay .photo-studio-v3 .lib-item:hover .studio-photo-paper,
-body.cardlib-open #overlay .photo-studio-v3 .studio-photo:focus-visible .studio-photo-paper {
+body.cardlib-open #overlay .photo-studio-v3 .lib-item:hover .studio-photo-paper {
   box-shadow:
     0 2px 0 rgba(96,86,70,.6),
     0 4px 0 rgba(38,30,22,.3),
@@ -844,8 +849,8 @@ body.cardlib-open #overlay .photo-studio-v3 .lib-grid.scrolling .studio-photo-pa
 }
 body.cardlib-open #overlay .photo-studio-v3 .lib-grid.scrolling .studio-photo-paper::before { display:none; }
 body.cardlib-open #overlay .photo-studio-v3 .studio-photo:focus-visible {
-  outline:2px solid var(--studio-gold)!important;
-  outline-offset:5px!important;
+  outline:2px dashed #c3d8d4!important;
+  outline-offset:2px!important;
 }
 body.cardlib-open #overlay .photo-studio-v3 .studio-load-more {
   grid-column:1/-1;
@@ -924,6 +929,10 @@ body.cardlib-open #overlay .photo-studio-v3 .studio-preview-paper {
   max-width:240px;
   margin:0 auto;
   padding:7px 7px 12px;
+  border:1px solid var(--studio-paper-edge);
+  background:
+    linear-gradient(102deg,rgba(255,252,240,.2),transparent 26% 74%,rgba(92,78,56,.12)),
+    linear-gradient(145deg,var(--studio-paper-light),var(--studio-paper));
   box-shadow:
     0 2px 0 rgba(96,86,70,.6),
     0 5px 0 rgba(38,30,22,.3),
@@ -1129,10 +1138,11 @@ body.cardlib-open #overlay .photo-studio-v3 .library-sidebar .type-tab:not(.on):
   background:rgba(212,175,122,.08)!important; color:#f0e4cf!important; }
 body.cardlib-open #overlay .photo-studio-v3 .clib-search:focus,
 body.cardlib-open #overlay .photo-studio-v3 .pg-select:focus {
-  border-color:rgba(212,175,122,.6)!important; background:#261a13!important;
-  box-shadow:0 0 0 3px rgba(212,175,122,.14)!important; }
-body.cardlib-open #overlay .photo-studio-v3 #libRar { border-left:2px solid rgba(212,175,122,.62)!important; }
-body.cardlib-open #overlay .photo-studio-v3 #libCls { border-left:2px solid rgba(199,155,255,.5)!important; }
+  border-color:#83b8b1!important; background-color:#243734!important;
+  box-shadow:0 0 0 2px rgba(131,184,177,.24)!important;
+  outline:2px solid #a9c9c4!important; outline-offset:2px!important; }
+body.cardlib-open #overlay .photo-studio-v3 #libRar,
+body.cardlib-open #overlay .photo-studio-v3 #libCls { border-left:2px solid rgba(212,175,122,.36)!important; }
 
 @media(max-width:1100px) {
   body.cardlib-open #overlay .photo-studio-v3 .clib-main {
@@ -1174,7 +1184,7 @@ body.cardlib-open #overlay .photo-studio-v3 #libCls { border-left:2px solid rgba
     padding:16px 7px 34px!important;
   }
   body.cardlib-open #overlay .photo-studio-v3 .lib-item { padding-top:13px!important; }
-  body.cardlib-open #overlay .photo-studio-v3 .studio-photo-caption b { font-size:13px; }
+  body.cardlib-open #overlay .photo-studio-v3 .studio-photo-caption b { font-size:15px; }
   #cardZoom .cz-close { top:12px; right:12px; }
 }
 @media(prefers-reduced-motion:reduce) {
@@ -1250,8 +1260,8 @@ body.cardlib-open #overlay .photo-studio-v3 .studio-search::before {
   position:absolute;
   left:13px;
   top:50%;
-  width:9px;
-  height:9px;
+  width:10px;
+  height:10px;
   margin-top:-6px;
   border:1.5px solid #8a7d6a;
   border-radius:50%;
@@ -1313,12 +1323,6 @@ body.cardlib-open #overlay .photo-studio-v3 .studio-photo-paper::after {
 }
 /* 选片台填满（E）：效果全文 + 藏品编号 + 备注预览——数据全部现成（c.desc/photoNo/photoNoteFor） */
 body.cardlib-open #overlay .photo-studio-v3 .library-inspector { overflow-y:auto; scrollbar-width:thin; }
-body.cardlib-open #overlay .photo-studio-v3 .studio-preview-copy .pv-desc {
-  margin:9px 0 0;
-  color:#d9cfbd;
-  font:400 12.5px/1.65 var(--serif);
-  letter-spacing:.02em;
-}
 /* 选片台描述富文本（09-23：与卡面 descRich 同款三色——数字 Georgia 金 / 行首关键词金 / 术语冰蓝；
    data-term 词条由 term-tips 全局委托弹触摸讲解，与战斗内一致） */
 body.cardlib-open #overlay .photo-studio-v3 .pv-desc .d-num {
@@ -1341,10 +1345,10 @@ body.cardlib-open #overlay .photo-studio-v3 .pv-desc .d-term[data-term] {
   border-bottom:1px dotted rgba(143,208,232,.45);
 }
 body.cardlib-open #overlay .photo-studio-v3 .studio-preview-copy .pv-no {
-  margin:7px 0 0;
-  color:var(--studio-muted);
-  font:600 10px/1.4 var(--font-ui);
-  letter-spacing:.18em;
+  margin:8px 0 0;
+  color:#b7a996;
+  font:600 12px/1.4 var(--font-ui);
+  letter-spacing:.12em;
 }
 body.cardlib-open #overlay .photo-studio-v3 .studio-preview-copy .pv-note {
   margin:9px 0 0;
@@ -1405,21 +1409,26 @@ body.cardlib-open #overlay .photo-studio-v3 .pv-nav {
 }
 body.cardlib-open #overlay .photo-studio-v3 .pv-navbtn {
   flex:1;
-  min-height:30px;
+  min-height:38px;
   border:1px solid rgba(212,175,122,.3);
   border-radius:2px;
   background:rgba(29,21,18,.55);
   color:var(--studio-gold-soft);
-  font:600 11px var(--font-ui);
+  font:600 13px var(--font-ui);
   letter-spacing:.06em;
 }
 body.cardlib-open #overlay .photo-studio-v3 .pv-navbtn:hover:not(:disabled) {
-  border-color:rgba(212,175,122,.7);
-  background:rgba(46,34,24,.8);
+  border-color:#83b8b1;
+  background:#243734;
+  color:#e4efec;
 }
 body.cardlib-open #overlay .photo-studio-v3 .pv-navbtn:disabled {
-  opacity:.32;
-  cursor:default;
+  opacity:1;
+  color:#a99d8b;
+  border-color:rgba(169,157,139,.28);
+  background:rgba(20,15,12,.72);
+  box-shadow:none;
+  cursor:not-allowed;
 }
 body.cardlib-open #overlay .photo-studio-v3 .pv-pos {
   flex:0 0 auto;
@@ -1445,7 +1454,7 @@ body.cardlib-open #overlay .photo-studio-v3 .studio-zoom:hover {
   filter:brightness(1.06);
 }
 /* 编号降权：小字靠边，不与效果文案抢 */
-body.cardlib-open #overlay .photo-studio-v3 .studio-preview-copy .pv-no { opacity:.62; }
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-copy .pv-no { opacity:1; }
 /* —— 类型徽章恢复（瓦片名字下方，09-23「起码保留类型标注」） —— */
 body.cardlib-open #overlay .photo-studio-v3 .type-badge {
   justify-self:center;
@@ -1604,22 +1613,16 @@ body.cardlib-open #overlay .photo-studio-v3 .studio-photo-caption b {
 }
 /* ============ 照相馆 4.6：选片台字号 + 顶部收敛 + 稀有度特殊名 + 相角贴（09-23）============ */
 /* 选片台整体提字号（老板：字太小）——标签/chip/词条/描述/编号/备注/导航/主按钮全线 +1.5~2px */
-body.cardlib-open #overlay .photo-studio-v3 .pv-label { font-size:11.5px; }
-body.cardlib-open #overlay .photo-studio-v3 .pv-cost { font-size:16px; }
+body.cardlib-open #overlay .photo-studio-v3 .pv-label { font-size:12.5px; }
+body.cardlib-open #overlay .photo-studio-v3 .pv-cost { font-size:18px; }
 body.cardlib-open #overlay .photo-studio-v3 .pv-chip {
   padding:2px 8px;
-  font-size:11.5px;
+  font-size:12.5px;
   letter-spacing:.05em;
 }
-body.cardlib-open #overlay .photo-studio-v3 .pv-terms { font-size:12.5px; }
-body.cardlib-open #overlay .photo-studio-v3 .studio-preview-copy .pv-desc {
-  font-size:14px;
-  line-height:1.72;
-  -webkit-line-clamp:6;
-}
-body.cardlib-open #overlay .photo-studio-v3 .studio-preview-copy .pv-no { font-size:11px; }
+body.cardlib-open #overlay .photo-studio-v3 .pv-terms { font-size:13px; }
 body.cardlib-open #overlay .photo-studio-v3 .studio-preview-copy .pv-note { font-size:13px; }
-body.cardlib-open #overlay .photo-studio-v3 .pv-navbtn { min-height:34px; font-size:12.5px; }
+body.cardlib-open #overlay .photo-studio-v3 .pv-navbtn { min-height:38px; font-size:13px; }
 body.cardlib-open #overlay .photo-studio-v3 .pv-pos { font-size:12px; }
 body.cardlib-open #overlay .photo-studio-v3 .studio-zoom { min-height:46px; font-size:14px; }
 body.cardlib-open #overlay .photo-studio-v3 .studio-preview-copy .pv-hint { font-size:12.5px!important; }
@@ -1630,27 +1633,30 @@ body.cardlib-open #overlay .photo-studio-v3 .advanced-row {
   border-radius:2px;
   padding:2px;
 }
-/* 传说/棱彩卡名特殊字（米白纸上：渐变裁字+压印投影，其余稀有度保持墨色） */
-body.cardlib-open #overlay .photo-studio-v3 .rv4 .studio-photo-caption b {
-  color:transparent;
-  background:linear-gradient(180deg,#c2851a 0%,#a86a10 55%,#7a4f08 100%);
-  -webkit-background-clip:text;
-  background-clip:text;
-  text-shadow:none;
-  filter:drop-shadow(0 1px 0 rgba(255,255,255,.55));
-  font-weight:800;
-  letter-spacing:.1em;
+/* 传说/棱彩照片名称保持纸面深色墨字，稀有度仍由夹子与角饰表达。 */
+body.cardlib-open #overlay .photo-studio-v3 .rv4 .studio-photo-caption b,
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-paper.rv4 .studio-photo-caption b {
+  color:#68430f;
+  background:none;
+  -webkit-background-clip:border-box;
+  background-clip:border-box;
+  text-shadow:none!important;
+  filter:none;
+  font-weight:700;
+  letter-spacing:.02em;
 }
 body.cardlib-open #overlay .photo-studio-v3 .rv7 .studio-photo-caption b,
-body.cardlib-open #overlay .photo-studio-v3 .rv-prism .studio-photo-caption b {
-  color:transparent;
-  background:linear-gradient(100deg,#b0568c 0%,#a8842a 34%,#3f9080 66%,#5f74b4 100%);
-  -webkit-background-clip:text;
-  background-clip:text;
-  text-shadow:none;
-  filter:drop-shadow(0 1px 0 rgba(255,255,255,.45));
-  font-weight:800;
-  letter-spacing:.1em;
+body.cardlib-open #overlay .photo-studio-v3 .rv-prism .studio-photo-caption b,
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-paper.rv7 .studio-photo-caption b,
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-paper.rv-prism .studio-photo-caption b {
+  color:#49304e;
+  background:none;
+  -webkit-background-clip:border-box;
+  background-clip:border-box;
+  text-shadow:none!important;
+  filter:none;
+  font-weight:700;
+  letter-spacing:.02em;
 }
 /* 相角贴：传说/棱彩照片右上角金花贴（corner.webp，09-23 出图裁切落地） */
 body.cardlib-open #overlay .photo-studio-v3 .photo-corner {
@@ -1669,9 +1675,9 @@ body.cardlib-open #overlay .photo-studio-v3 .photo-corner {
 body.cardlib-open #overlay .photo-studio-v3 .studio-photo-art {
   border-radius:3px;
   box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,.1),
-    inset 0 0 0 2px rgba(212,175,122,.3),
-    inset 0 0 12px rgba(10,4,2,.16);
+    inset 0 0 0 1px rgba(255,255,255,.12),
+    inset 0 0 0 2px rgba(212,175,122,.16),
+    inset 0 0 9px rgba(10,4,2,.1);
 }
 /* ② 控件高光顶线：页签/下拉/按钮上缘 1px 亮线（立体感）；选中态 border 优先级更高不受影响 */
 body.cardlib-open #overlay .photo-studio-v3 .type-tab,
@@ -1686,4 +1692,1212 @@ body.cardlib-open #overlay .photo-studio-v3 .clib-count b,
 body.cardlib-open #overlay .photo-studio-v3 .type-tab em,
 body.cardlib-open #overlay .photo-studio-v3 .pv-pos {
   font-variant-numeric:tabular-nums;
+}
+
+/* 照相馆 4.8：让展墙退后、选中照片成为画面主角。 */
+@media(min-width:1101px) {
+  body.cardlib-open #overlay .photo-studio-v3 .library-head {
+    grid-template-columns:minmax(220px,270px) minmax(0,1fr) auto 40px!important;
+    grid-template-areas:'title tools count close'!important;
+    gap:14px!important;
+    padding-top:9px!important;
+    padding-bottom:9px!important;
+  }
+  body.cardlib-open #overlay .photo-studio-v3 .library-tools {
+    width:min(100%,760px);
+    justify-self:end;
+  }
+  body.cardlib-open #overlay .photo-studio-v3 .studio-search { max-width:360px; }
+  body.cardlib-open #overlay .photo-studio-v3 .studio-search .clib-search { min-height:38px!important; }
+  body.cardlib-open #overlay .photo-studio-v3 .library-tools>.pg-select,
+  body.cardlib-open #overlay .photo-studio-v3 .library-tools>.hs-btn { min-height:38px!important; }
+  body.cardlib-open #overlay .photo-studio-v3 .studio-filterbar {
+    min-height:48px;
+    padding-top:4px!important;
+    padding-bottom:4px!important;
+  }
+  body.cardlib-open #overlay .photo-studio-v3 .clib-main {
+    grid-template-columns:minmax(0,1fr) clamp(390px,33vw,580px)!important;
+    gap:clamp(16px,1.25vw,24px)!important;
+    padding-top:12px!important;
+    padding-bottom:16px!important;
+  }
+  body.cardlib-open #overlay .photo-studio-v3 .lib-grid {
+    gap:22px 18px!important;
+    padding-top:16px!important;
+    padding-bottom:36px!important;
+  }
+  body.cardlib-open #overlay .photo-studio-v3 .studio-preview-paper { max-width:none; }
+  body.cardlib-open #overlay .photo-studio-v3 .library-head {
+    border-bottom-color:rgba(212,175,122,.13)!important;
+    box-shadow:inset 0 -1px rgba(212,175,122,.05),0 2px 8px rgba(0,0,0,.3)!important;
+  }
+  body.cardlib-open #overlay .photo-studio-v3 .studio-filterbar {
+    border-top-color:rgba(212,175,122,.10);
+    border-bottom-color:rgba(212,175,122,.10);
+    box-shadow:inset 0 1px rgba(255,255,255,.025),inset 0 -1px rgba(0,0,0,.24)!important;
+  }
+  body.cardlib-open #overlay .photo-studio-v3 .library-head,
+  body.cardlib-open #overlay .photo-studio-v3 .studio-filterbar,
+  body.cardlib-open #overlay .photo-studio-v3 .studio-active-filters,
+  body.cardlib-open #overlay .photo-studio-v3 .clib-main {
+    padding-left:64px!important;
+    padding-right:64px!important;
+  }
+}
+body.cardlib-open #overlay .photo-studio-v3 .library-title::before {
+  left:-14px;
+  width:140px;
+  height:70px;
+  opacity:.24;
+}
+body.cardlib-open #overlay .photo-studio-v3 .library-title h2::after {
+  width:calc(100% + 12px);
+  opacity:.5;
+}
+body.cardlib-open #overlay .photo-studio-v3 .type-tab.on {
+  border-color:transparent!important;
+  background:rgba(212,175,122,.055)!important;
+  box-shadow:inset 0 -2px 0 rgba(212,175,122,.8)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .type-tab {
+  color:#b8ac9b;
+  font:600 12px var(--font-ui);
+}
+body.cardlib-open #overlay .photo-studio-v3 .type-tab em { color:#938575; }
+body.cardlib-open #overlay .photo-studio-v3 .advanced-row {
+  border-color:transparent;
+  background:transparent;
+  padding:0;
+}
+body.cardlib-open #overlay .photo-studio-v3 #libRar,
+body.cardlib-open #overlay .photo-studio-v3 #libCls {
+  border-left:1px solid rgba(212,175,122,.22)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .clib-main {
+  box-shadow:inset 0 12px 26px rgba(0,0,0,.28),
+    inset 0 -20px 34px rgba(0,0,0,.3),
+    inset 0 0 0 1px rgba(212,175,122,.08)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .clib-main::before { opacity:.25; }
+body.cardlib-open #overlay .photo-studio-v3 .studio-photo-paper::after { opacity:.13; }
+body.cardlib-open #overlay .photo-studio-v3 .studio-photo-art {
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),
+    inset 0 0 0 2px rgba(212,175,122,.13),
+    inset 0 0 10px rgba(10,4,2,.12);
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-photo-art img {
+  filter:sepia(.02) saturate(1.02) contrast(1.01) brightness(1.02);
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-paper .studio-photo-art img { filter:none; }
+body.cardlib-open #overlay .photo-studio-v3 .type-badge {
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  color:#766c5f;
+  font-size:10px;
+  letter-spacing:.08em;
+}
+body.cardlib-open #overlay .photo-studio-v3 .lib-item.selected .studio-photo-paper {
+  border-color:rgba(212,175,122,.72);
+  box-shadow:0 2px 0 rgba(96,86,70,.6),0 4px 0 rgba(38,30,22,.3),
+    0 17px 24px rgba(10,4,3,.6),0 0 0 1px rgba(212,175,122,.8);
+}
+body.cardlib-open #overlay .photo-studio-v3 .library-inspector {
+  position:relative;
+  background:radial-gradient(ellipse 78% 43% at 50% 27%,rgba(255,222,172,.055),transparent 82%),
+    linear-gradient(180deg,rgba(24,13,11,.48),rgba(18,9,8,.7) 46%,rgba(14,7,6,.88)),
+    url('../assets/ui/photo-studio/desk.webp') center top/cover no-repeat,
+    linear-gradient(165deg,#221512,#150c0a)!important;
+  border-color:rgba(212,175,122,.22);
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-inspector-head {
+  padding-bottom:5px;
+  border-bottom-color:rgba(212,175,122,.09);
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-inspector-head b {
+  padding:6px 18px;
+  font-size:12px;
+  letter-spacing:3px;
+}
+body.cardlib-open #overlay .photo-studio-v3 .library-preview { padding-top:8px!important; }
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-frame { padding:2px 4px 9px; }
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-paper {
+  padding:7px 8px 8px;
+  box-shadow:0 2px 0 rgba(96,86,70,.42),0 4px 0 rgba(38,30,22,.22),
+    0 14px 28px rgba(10,4,3,.42),
+    inset 1px 1px 0 rgba(255,255,255,.6);
+  animation:studioPhotoSettle .22s ease-out both;
+}
+body.cardlib-open #overlay .photo-studio-v3 .library-preview,
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-copy {
+  flex:0 0 auto;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-zoom {
+  margin-top:10px!important;
+  border-color:rgba(212,175,122,.3);
+  background:linear-gradient(180deg,rgba(67,45,31,.9),rgba(30,20,16,.95))!important;
+  color:#e1c394!important;
+  box-shadow:0 2px 5px rgba(0,0,0,.24),inset 0 1px rgba(255,255,255,.05);
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-zoom:hover,
+body.cardlib-open #overlay .photo-studio-v3 .studio-zoom:focus-visible {
+  border-color:rgba(230,195,137,.72);
+  background:linear-gradient(180deg,rgba(91,62,41,.96),rgba(39,26,20,.98))!important;
+  color:#f0d7ab!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-zoom:focus-visible {
+  outline:2px solid rgba(230,195,137,.6);
+  outline-offset:2px;
+}
+@keyframes studioPhotoSettle {
+  from { opacity:.75; transform:translateY(6px); }
+  to { opacity:1; transform:none; }
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-paper .studio-photo-caption {
+  padding:12px 8px 8px;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-paper .studio-photo-caption b {
+  display:block;
+  min-height:0;
+  overflow:visible;
+  overflow-wrap:anywhere;
+  -webkit-line-clamp:unset;
+  -webkit-box-orient:initial;
+  font-size:24px;
+  line-height:1.3;
+  letter-spacing:.02em;
+  color:#2b241d;
+  text-shadow:none;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-copy {
+  padding-top:14px;
+  border-top-color:rgba(212,175,122,.08);
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-copy .pv-desc {
+  display:block;
+  margin:10px 0 0;
+  overflow:visible;
+  overflow-wrap:anywhere;
+  -webkit-line-clamp:unset;
+  -webkit-box-orient:initial;
+  font-size:16px;
+  line-height:1.65;
+  color:#e5dbc9;
+}
+body.cardlib-open #overlay .photo-studio-v3 .pv-terms {
+  margin-top:10px;
+  font-size:13px;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-copy .pv-no {
+  margin-top:8px;
+  color:#b7a996;
+  font-size:12px;
+  opacity:1;
+}
+body.cardlib-open #overlay .photo-studio-v3 .pv-nav { margin-top:12px; }
+@media(min-width:1101px) and (max-width:1399px) {
+  body.cardlib-open #overlay .photo-studio-v3 .studio-photo-caption b { font-size:16px; }
+  body.cardlib-open #overlay .photo-studio-v3 .studio-photo-caption small { font-size:11.5px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  body.cardlib-open #overlay .photo-studio-v3 .lib-item,
+  body.cardlib-open #overlay .photo-studio-v3 .studio-photo-paper {
+    transition:none!important;
+    animation:none!important;
+  }
+}
+@media(max-width:1100px) {
+  body.cardlib-open #overlay .photo-studio-v3 .library-inspector { display:none!important; }
+}
+/* 照相馆控件状态收口：只覆盖本页，维持相纸与暖棕底色。 */
+body.cardlib-open #overlay .photo-studio-v3 .studio-search,
+body.cardlib-open #overlay .photo-studio-v3 .studio-clear,
+body.cardlib-open #overlay .photo-studio-v3 .type-tab,
+body.cardlib-open #overlay .photo-studio-v3 .advanced-row .pg-select,
+body.cardlib-open #overlay .photo-studio-v3 .library-tools>.pg-select,
+body.cardlib-open #overlay .photo-studio-v3 .library-tools>.hs-btn,
+body.cardlib-open #overlay .photo-studio-v3 .pv-navbtn,
+body.cardlib-open #overlay .photo-studio-v3 .library-head>.pg-close,
+body.cardlib-open #overlay .photo-studio-v3 .studio-zoom {
+  border-radius:2px!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-search .clib-search,
+body.cardlib-open #overlay .photo-studio-v3 .library-tools>.pg-select,
+body.cardlib-open #overlay .photo-studio-v3 .library-tools>.hs-btn,
+body.cardlib-open #overlay .photo-studio-v3 .studio-clear,
+body.cardlib-open #overlay .photo-studio-v3 .type-tab {
+  min-height:40px!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-search .clib-search,
+body.cardlib-open #overlay .photo-studio-v3 .library-tools>.pg-select,
+body.cardlib-open #overlay .photo-studio-v3 .advanced-row .pg-select,
+body.cardlib-open #overlay .photo-studio-v3 .studio-clear,
+body.cardlib-open #overlay .photo-studio-v3 .type-tab,
+body.cardlib-open #overlay .photo-studio-v3 .library-tools>.hs-btn,
+body.cardlib-open #overlay .photo-studio-v3 .pv-navbtn {
+  font-size:13px!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-search .clib-search {
+  padding-right:12px!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .library-tools>.pg-select,
+body.cardlib-open #overlay .photo-studio-v3 .advanced-row .pg-select {
+  padding-right:34px!important;
+  padding-left:10px!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-clear {
+  padding:0 11px;
+  color:#c9bdad;
+  background:var(--studio-control);
+}
+body.cardlib-open #overlay .photo-studio-v3 .type-tab {
+  padding:6px 10px;
+  color:#c9bdad!important;
+  border-color:rgba(212,175,122,.18)!important;
+  background:rgba(29,21,18,.42)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .pv-navbtn { min-height:38px!important; }
+body.cardlib-open #overlay .photo-studio-v3 .type-tab:not(.on):hover,
+body.cardlib-open #overlay .photo-studio-v3 .studio-clear:hover,
+body.cardlib-open #overlay .photo-studio-v3 .advanced-row .pg-select:hover,
+body.cardlib-open #overlay .photo-studio-v3 .library-tools>.pg-select:hover,
+body.cardlib-open #overlay .photo-studio-v3 .library-tools>.hs-btn:hover,
+body.cardlib-open #overlay .photo-studio-v3 .library-head>.pg-close:hover,
+body.cardlib-open #overlay .photo-studio-v3 .pv-navbtn:hover:not(:disabled),
+body.cardlib-open #overlay .photo-studio-v3 .studio-zoom:hover {
+  border-color:#83b8b1!important;
+  background-color:#243734!important;
+  color:#e4efec!important;
+  box-shadow:0 1px 4px rgba(0,0,0,.28)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .type-tab:not(.on):hover,
+body.cardlib-open #overlay .photo-studio-v3 .library-tools>.hs-btn:hover {
+  transform:none!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .type-tab.on,
+body.cardlib-open #overlay .photo-studio-v3 .type-tab.on:hover {
+  color:#d5e4e0!important;
+  border-color:transparent!important;
+  background:rgba(131,184,177,.10)!important;
+  box-shadow:inset 0 -2px 0 #83b8b1!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .type-tab.on em { color:#b9d2cd!important; }
+body.cardlib-open #overlay .photo-studio-v3 .studio-search:focus-within {
+  border-color:#83b8b1!important;
+  outline:2px solid #a9c9c4!important;
+  outline-offset:2px!important;
+  box-shadow:0 0 0 2px rgba(131,184,177,.22)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-search .clib-search:focus-visible {
+  outline:2px solid #a9c9c4!important;
+  outline-offset:-3px!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .pg-close:focus-visible,
+body.cardlib-open #overlay .photo-studio-v3 .studio-clear:focus-visible,
+body.cardlib-open #overlay .photo-studio-v3 .advanced-row .pg-select:focus-visible,
+body.cardlib-open #overlay .photo-studio-v3 .library-tools>.pg-select:focus-visible,
+body.cardlib-open #overlay .photo-studio-v3 .library-tools>.hs-btn:focus-visible,
+body.cardlib-open #overlay .photo-studio-v3 .pv-navbtn:focus-visible,
+body.cardlib-open #overlay .photo-studio-v3 .studio-zoom:focus-visible {
+  outline:2px solid #a9c9c4!important;
+  outline-offset:2px!important;
+  border-color:#83b8b1!important;
+  box-shadow:0 0 0 2px rgba(131,184,177,.22)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .type-tab:focus-visible {
+  outline:2px solid #a9c9c4!important;
+  outline-offset:-3px!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-clear:active,
+body.cardlib-open #overlay .photo-studio-v3 .type-tab:not(.on):active,
+body.cardlib-open #overlay .photo-studio-v3 .library-head>.pg-close:active,
+body.cardlib-open #overlay .photo-studio-v3 .pv-navbtn:active:not(:disabled),
+body.cardlib-open #overlay .photo-studio-v3 .studio-zoom:active,
+body.cardlib-open #overlay .photo-studio-v3 .library-tools>.hs-btn:active:not(:disabled) {
+  transform:none!important;
+  color:#e4efec!important;
+  border-color:#83b8b1!important;
+  background-color:#1b2e2b!important;
+  box-shadow:inset 0 2px 4px rgba(0,0,0,.45)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-zoom:hover { filter:none!important; }
+body.cardlib-open #overlay .photo-studio-v3 .pv-navbtn:disabled,
+body.cardlib-open #overlay .photo-studio-v3 .pv-navbtn:disabled:hover,
+body.cardlib-open #overlay .photo-studio-v3 .pv-navbtn:disabled:active {
+  opacity:1!important;
+  cursor:not-allowed!important;
+  color:#a99d8b!important;
+  border-color:rgba(169,157,139,.28)!important;
+  background:rgba(20,15,12,.72)!important;
+  box-shadow:none!important;
+  transform:none!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .lib-item.selected .studio-photo-paper,
+body.cardlib-open #overlay .photo-studio-v3 .lib-cardwrap[aria-current="true"] .studio-photo-paper {
+  border-color:#83b8b1!important;
+  outline:2px solid #83b8b1!important;
+  outline-offset:2px!important;
+  box-shadow:0 0 0 1px rgba(14,8,7,.98),0 13px 18px rgba(0,0,0,.5),
+    0 0 5px rgba(131,184,177,.24)!important;
+}
+@media(max-width:600px) {
+  body.cardlib-open #overlay .photo-studio-v3 .studio-search .clib-search,
+  body.cardlib-open #overlay .photo-studio-v3 .library-tools>.pg-select,
+  body.cardlib-open #overlay .photo-studio-v3 .studio-clear,
+  body.cardlib-open #overlay .photo-studio-v3 .type-tab,
+  body.cardlib-open #overlay .photo-studio-v3 .advanced-row .pg-select {
+    min-height:48px!important;
+  }
+  body.cardlib-open #overlay .photo-studio-v3 .advanced-row { flex-wrap:wrap; }
+  body.cardlib-open #overlay .photo-studio-v3 .advanced-row .pg-select {
+    flex:1 1 135px;
+    min-width:0;
+  }
+}
+
+/* 第五步：照片模式专用背签灯箱；默认战斗/背包 cardHTML 弹层不受影响。 */
+body.cardlib-open #cardZoom.cz-photo {
+  --font-ui:'HarmonyOS Sans SC','HarmonyOS Sans','Noto Sans SC Sub','Noto Sans SC',sans-serif;
+  --serif:'Noto Serif SC','Source Han Serif SC','Songti SC','SimSun','STSong',serif;
+  --studio-paper:#e7dece;
+  --studio-paper-light:#f0e9dc;
+  --studio-paper-edge:rgba(104,87,64,.38);
+  font-family:var(--font-ui);
+  cursor:default;
+  gap:12px;
+  padding:28px 24px 22px;
+  box-sizing:border-box;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-close {
+  border-radius:2px;
+  border-color:rgba(131,184,177,.38);
+  color:#c0d6d2;
+  background:rgba(29,39,36,.92);
+}
+body.cardlib-open #cardZoom.cz-photo .cz-close .ic {
+  filter:grayscale(1) brightness(1.35) sepia(.18) saturate(.7) hue-rotate(125deg);
+}
+body.cardlib-open #cardZoom.cz-photo .cz-close:hover,
+body.cardlib-open #cardZoom.cz-photo .cz-close:focus-visible {
+  border-color:#83b8b1;
+  color:#e4efec;
+  outline:2px solid #a9c9c4;
+  outline-offset:3px;
+  background:#243734;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-backdrop {
+  background:
+    radial-gradient(110% 62% at 50% -12%,rgba(255,216,170,.045),transparent 56%),
+    radial-gradient(120% 78% at 50% 114%,rgba(90,28,36,.24),transparent 62%),
+    rgba(16,8,6,.86);
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-layout {
+  position:relative;
+  z-index:1;
+  display:grid;
+  grid-template-columns:minmax(0,1.7fr) minmax(300px,.8fr);
+  align-items:center;
+  gap:26px;
+  width:min(1600px,94vw);
+  max-height:calc(100vh - 92px);
+  min-height:0;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-main {
+  min-width:0;
+  min-height:0;
+  display:grid;
+  place-items:center;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-paper {
+  box-sizing:border-box;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+  max-width:100%;
+  max-height:calc(100vh - 110px);
+  padding:14px 14px 10px;
+  border:1px solid var(--studio-paper-edge);
+  border-radius:2px;
+  background:
+    linear-gradient(102deg,rgba(255,252,240,.2),transparent 26% 74%,rgba(92,78,56,.12)),
+    linear-gradient(145deg,var(--studio-paper-light),var(--studio-paper));
+  box-shadow:0 18px 54px rgba(0,0,0,.58),0 3px 8px rgba(0,0,0,.25);
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-image {
+  display:grid;
+  place-items:center;
+  min-width:0;
+  max-width:min(100%,900px);
+  max-height:calc(100vh - 150px);
+  position:relative;
+  z-index:1;
+  transition:transform .38s cubic-bezier(.22,.61,.36,1),opacity .3s ease;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-image.cz-flip {
+  animation:none;
+  transition:transform .38s cubic-bezier(.22,.61,.36,1),opacity .3s ease;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-image img {
+  display:block;
+  width:auto!important;
+  height:auto!important;
+  max-width:100%!important;
+  max-height:calc(100vh - 150px)!important;
+  object-fit:contain!important;
+  border-radius:0;
+  box-shadow:none;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-caption {
+  display:none;
+  max-width:100%;
+  color:#342a20;
+  font:700 15px/1.35 var(--serif);
+  text-align:center;
+  overflow-wrap:anywhere;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-info {
+  box-sizing:border-box;
+  min-width:0;
+  max-height:calc(100vh - 104px);
+  overflow:auto;
+  overscroll-behavior:contain;
+  padding:24px 22px;
+  border:1px solid rgba(194,157,103,.24);
+  border-radius:2px;
+  color:#e5dbc9;
+  background:linear-gradient(145deg,rgba(48,34,26,.96),rgba(27,20,17,.97));
+  box-shadow:inset 0 0 0 1px rgba(255,239,209,.035),0 16px 44px rgba(0,0,0,.38);
+  scrollbar-color:#75604a #241b17;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-title {
+  margin:0 0 18px;
+  color:#f1e5d0;
+  font:700 26px/1.25 var(--serif);
+  overflow-wrap:anywhere;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-details {
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px 8px;
+  margin:0 0 18px;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-detail {
+  display:flex;
+  gap:7px;
+  align-items:baseline;
+  padding:5px 8px;
+  border:1px solid rgba(194,157,103,.15);
+  border-radius:2px;
+  background:rgba(12,9,8,.28);
+  font-size:13px;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-detail span { color:#b8a991; }
+body.cardlib-open #cardZoom.cz-photo .cz-photo-detail b { color:#f0dfbf; font-size:15px; }
+body.cardlib-open #cardZoom.cz-photo .cz-photo-rules {
+  margin:0 0 16px;
+  color:#e5dbc9;
+  font-size:16px;
+  line-height:1.65;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-rules .d-kw { color:#d9b875; }
+body.cardlib-open #cardZoom.cz-photo .cz-photo-rules [data-term] { color:#9bc9c5; }
+body.cardlib-open #cardZoom.cz-photo .cz-note.has,
+body.cardlib-open #cardZoom.cz-photo .cz-note.editable {
+  width:100%!important;
+  max-width:100%;
+  margin:0!important;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-note.has,
+body.cardlib-open #cardZoom.cz-photo .cz-note.editable {
+  background:
+    linear-gradient(180deg,rgba(236,232,224,.62),rgba(216,210,198,.70)),
+    url('../assets/ui/photo-studio/back.webp') center/cover no-repeat,
+    linear-gradient(165deg,rgba(231,224,198,.98),rgba(183,177,155,.98))!important;
+  box-shadow:0 8px 22px rgba(0,0,0,.3),inset 0 0 16px rgba(88,71,43,.06)!important;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-note.has::after {
+  top:10px;
+  right:12px;
+  bottom:auto;
+  width:34px;
+  height:34px;
+  border-width:1px;
+  font-size:10px;
+  box-shadow:inset 0 0 0 1px rgba(174,54,44,.24);
+}
+body.cardlib-open #cardZoom.cz-photo .cz-note.editable .cz-note-tag { padding-right:44px!important; }
+body.cardlib-open #cardZoom.cz-photo .cz-note-status {
+  color:#554938;
+  font-size:12px;
+  font-weight:700;
+  opacity:1;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-note-input { min-height:76px; }
+body.cardlib-open #cardZoom.cz-photo .cz-note-input::placeholder { color:#786f60; opacity:1; }
+body.cardlib-open #cardZoom.cz-photo.cz-neg .cz-photo-image img {
+  filter:invert(1) hue-rotate(180deg) sepia(.12);
+}
+/* 照片的整框 FLIP 由 ui.js 设置来源；默认战斗/背包仍使用 czOut。 */
+body.cardlib-open #cardZoom.cz-photo .cz-photo-paper {
+  transform-origin:center;
+  transition:transform var(--cz-photo-motion-ms,420ms) cubic-bezier(.22,.72,.22,1),
+    opacity var(--cz-photo-motion-ms,420ms) ease;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-info {
+  transition:opacity 260ms ease var(--cz-photo-info-delay,80ms),
+    transform 360ms cubic-bezier(.22,.72,.22,1) var(--cz-photo-info-delay,80ms);
+}
+body.cardlib-open #cardZoom.cz-photo.cz-photo-entering .cz-photo-paper {
+  transform:var(--cz-photo-from-transform,scale(.92));
+  opacity:.25;
+}
+body.cardlib-open #cardZoom.cz-photo.cz-photo-entering .cz-photo-info {
+  opacity:0;
+  transform:translateX(14px);
+}
+body.cardlib-open #cardZoom.cz-photo.cz-photo-closing-to-source .cz-photo-paper {
+  transform:var(--cz-photo-to-transform,scale(.92));
+  opacity:.15;
+}
+body.cardlib-open #cardZoom.cz-photo.cz-photo-closing-fallback .cz-photo-paper {
+  transform:translateY(16px) scale(.94);
+  opacity:0;
+}
+body.cardlib-open #cardZoom.cz-photo.cz-photo-closing .cz-photo-info {
+  opacity:0;
+  transform:translateX(10px);
+  transition-delay:0ms;
+  transition-duration:180ms;
+}
+body.cardlib-open #cardZoom.cz-photo:is(.cz-out,.cz-photo-closing) .cz-backdrop {
+  animation:czFadeOut var(--cz-photo-close-ms,320ms) ease both;
+}
+body.cardlib-open #cardZoom.cz-photo.cz-photo-closing :is(.cz-hint,.cz-close) {
+  opacity:0;
+  transition:opacity 140ms ease;
+}
+body.cardlib-open #cardZoom.cz-photo.cz-out :is(.cz-photo-layout,.cz-photo-paper,.cz-photo-info,.cz-note) {
+  animation:none;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-flash { display:none; }
+body.cardlib-open #cardZoom.cz-photo.cz-photo-reduced :is(.cz-photo-paper,.cz-photo-info) {
+  transition:none;
+}
+@media(max-width:760px) {
+  body.cardlib-open #cardZoom.cz-photo { padding:58px 12px 34px; }
+  body.cardlib-open #cardZoom.cz-photo .cz-photo-layout {
+    grid-template-columns:minmax(0,1fr);
+    align-content:start;
+    align-items:start;
+    gap:14px;
+    width:min(720px,100%);
+    max-height:calc(100vh - 94px);
+    overflow:auto;
+    overscroll-behavior:contain;
+  }
+  body.cardlib-open #cardZoom.cz-photo .cz-photo-paper { max-height:none; padding:9px 9px 7px; }
+  body.cardlib-open #cardZoom.cz-photo .cz-photo-image { max-height:56vh; }
+  body.cardlib-open #cardZoom.cz-photo .cz-photo-image img { max-height:56vh!important; }
+  body.cardlib-open #cardZoom.cz-photo .cz-photo-info { max-height:none; padding:17px 15px; overflow:visible; }
+  body.cardlib-open #cardZoom.cz-photo .cz-photo-title { font-size:22px; margin-bottom:12px; }
+  body.cardlib-open #cardZoom.cz-photo .cz-photo-details { margin-bottom:12px; }
+  body.cardlib-open #cardZoom.cz-photo .cz-photo-rules { font-size:15px; }
+}
+
+/* 统一观看链：展墙的相纸、选片台的装裱与特写的完整工艺框。 */
+body.cardlib-open #overlay .photo-studio-v3 {
+  --studio-control:#1c2822;
+  --studio-control-hi:#293b31;
+  --studio-accent:#a6beb0;
+  --studio-text:#eee7d8;
+  --studio-muted:#b7b4a7;
+  background:linear-gradient(150deg,#1d211b,#101913)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .library-head {
+  background:linear-gradient(180deg,rgba(23,28,23,.94),rgba(17,24,20,.96)),
+    url('../assets/ui/photo-studio/leather-archive-v1.png') center/480px!important;
+  border-bottom-color:rgba(195,174,130,.32)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-filterbar {
+  background:#17211c!important;
+  border-bottom:1px solid rgba(195,174,130,.22)!important;
+  box-shadow:inset 0 1px rgba(235,226,201,.035),0 6px 15px rgba(0,0,0,.16);
+}
+body.cardlib-open #overlay .photo-studio-v3 .clib-main {
+  background:radial-gradient(ellipse at 42% 0,rgba(186,164,116,.055),transparent 60%),
+    linear-gradient(180deg,rgba(10,18,14,.81),rgba(9,15,12,.91)),
+    url('../assets/ui/photo-studio/leather-archive-v1.png') center/640px!important;
+  box-shadow:inset 0 12px 30px rgba(0,0,0,.24)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .clib-main::before { opacity:.1; }
+body.cardlib-open #overlay .photo-studio-v3 .clib-main::after {
+  background:linear-gradient(transparent,#101912);
+  height:34px;
+}
+body.cardlib-open #overlay .photo-studio-v3 .lib-grid {
+  background:radial-gradient(ellipse at 50% 0,rgba(222,203,154,.035),transparent 70%);
+}
+body.cardlib-open #overlay .photo-studio-v3 .library-inspector,
+body.cardlib-open #cardZoom.cz-photo .cz-photo-info {
+  position:relative;
+  border:1px solid rgba(190,165,116,.42);
+  border-radius:4px;
+  background:linear-gradient(155deg,rgba(28,42,33,.86),rgba(14,25,18,.92)),
+    url('../assets/ui/photo-studio/leather-archive-v1.png') center/420px!important;
+  box-shadow:inset 0 0 0 4px rgba(6,12,8,.5),inset 0 0 0 5px rgba(198,176,130,.14),
+    0 16px 36px rgba(0,0,0,.34);
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-inspector-head {
+  padding:2px 0 12px;
+  border-bottom-color:rgba(195,174,130,.2);
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-inspector-head b {
+  padding:4px 20px;
+  background:none;
+  color:#d8c6a2;
+  font:600 15px/1.5 var(--font-ui);
+  letter-spacing:.22em;
+  text-shadow:0 1px 1px #060c08;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-inspector-head b::before,
+body.cardlib-open #overlay .photo-studio-v3 .studio-inspector-head b::after {
+  content:'◆';
+  display:inline-block;
+  margin:0 12px;
+  font-size:6px;
+  color:#ab976f;
+  vertical-align:middle;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-paper {
+  border:16px solid transparent;
+  border-image:url('../assets/ui/photo-studio/frame-atelier-v1.png') 170 stretch;
+  padding:3px 3px 0;
+  box-shadow:0 12px 22px rgba(0,0,0,.38);
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-paper::before,
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-paper .photo-corner { display:none; }
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-paper .studio-photo-caption {
+  padding:8px 3px 7px;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-paper .studio-photo-caption b {
+  font-size:22px;
+  line-height:1.3;
+}
+body.cardlib-open #overlay .photo-studio-v3 :is(.studio-search .clib-search,.library-tools>.pg-select,.advanced-row .pg-select,.studio-clear,.type-tab,.library-tools>.hs-btn,.pv-navbtn) {
+  font-size:15px!important;
+  line-height:1.35!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .type-tab {
+  padding:8px 12px;
+  border-color:transparent!important;
+  background:transparent!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .type-tab em { font-size:11px; opacity:.82; }
+body.cardlib-open #overlay .photo-studio-v3 .type-tab.on {
+  color:#efe8d5!important;
+  background:linear-gradient(180deg,rgba(165,196,176,.1),rgba(165,196,176,.035))!important;
+  box-shadow:inset 0 -2px #a6beb0!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 :is(.studio-search,.pg-select,.studio-clear,.pv-navbtn) {
+  border-color:rgba(190,180,150,.28)!important;
+  background-color:#1b2821!important;
+  color:#dedccc!important;
+  box-shadow:inset 0 1px 0 rgba(241,230,199,.045)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-active-filters {
+  background:#18231c;
+  color:#c0c5b8;
+  font-size:13px;
+}
+body.cardlib-open #overlay .photo-studio-v3 .pg-select option {
+  background:#17231c;
+  color:#eee7d8;
+  font-size:15px;
+}
+body.cardlib-open #overlay .photo-studio-v3 .clib-empty {
+  border-color:rgba(195,174,130,.3)!important;
+  background:linear-gradient(180deg,rgba(12,24,17,.64),rgba(9,18,13,.87)),
+    url('../assets/ui/photo-studio/empty.webp') center/cover no-repeat!important;
+  color:var(--studio-text)!important;
+  font-size:16px;
+  line-height:1.7;
+}
+body.cardlib-open #overlay .photo-studio-v3 :is(.studio-load-more,.clib-empty .hs-btn) {
+  min-height:46px;
+  padding:10px 18px;
+  border:1px solid rgba(190,180,150,.35)!important;
+  background:var(--studio-control)!important;
+  color:var(--studio-text)!important;
+  font:500 15px/1.4 var(--font-ui)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 :is(.studio-clear,.pg-select,.pv-navbtn,.studio-load-more,.clib-empty .hs-btn):hover:not(:disabled) {
+  border-color:var(--studio-accent)!important;
+  background:var(--studio-control-hi)!important;
+  color:#eee7d8!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .type-tab:not(.on):hover {
+  background:rgba(166,190,176,.08)!important;
+  color:#eee7d8!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .type-tab.on,
+body.cardlib-open #overlay .photo-studio-v3 .type-tab.on:hover {
+  border-color:transparent!important;
+  background:linear-gradient(180deg,rgba(165,196,176,.1),rgba(165,196,176,.035))!important;
+  box-shadow:inset 0 -2px var(--studio-accent)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 :is(.studio-clear,.pv-navbtn,.studio-load-more,.clib-empty .hs-btn):active:not(:disabled) {
+  background:#142018!important;
+  box-shadow:inset 0 2px 4px rgba(0,0,0,.45)!important;
+  transform:none!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 :is(.studio-load-more,.clib-empty .hs-btn):focus-visible {
+  outline:2px solid var(--studio-accent)!important;
+  outline-offset:3px;
+}
+body.cardlib-open #overlay .photo-studio-v3 .pv-navbtn:disabled,
+body.cardlib-open #overlay .photo-studio-v3 .pv-navbtn:disabled:hover,
+body.cardlib-open #overlay .photo-studio-v3 .pv-navbtn:disabled:active {
+  background:#17201a!important;
+  color:#9da699!important;
+  border-color:#465046!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .pv-meta,
+body.cardlib-open #overlay .photo-studio-v3 .pv-terms { font-size:14px; line-height:1.55; }
+body.cardlib-open #overlay .photo-studio-v3 .pv-no {
+  margin:10px 0;
+  color:#b9b5a4;
+  font-size:12px;
+  letter-spacing:.1em;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-zoom {
+  min-height:46px;
+  font-size:15px!important;
+  letter-spacing:.08em;
+  color:#e8d7b4!important;
+  border:1px solid rgba(199,169,113,.56)!important;
+  background:linear-gradient(180deg,#413a2c,#2f2b21)!important;
+  box-shadow:inset 0 1px rgba(248,224,176,.12),0 3px 8px rgba(0,0,0,.2)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .library-head>.pg-close,
+body.cardlib-open #cardZoom.cz-photo .cz-close {
+  border:1px solid rgba(178,155,108,.6)!important;
+  background:linear-gradient(150deg,#393d2e,#1e2a21)!important;
+  box-shadow:inset 0 0 0 3px rgba(8,17,11,.42),inset 0 0 0 4px rgba(202,183,139,.12),
+    0 3px 8px rgba(0,0,0,.25)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .library-head>.pg-close .ic,
+body.cardlib-open #cardZoom.cz-photo .cz-close .ic {
+  filter:grayscale(1) brightness(1.35) sepia(.6);
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-zoom:hover {
+  background:linear-gradient(180deg,#524835,#3d3528)!important;
+  border-color:#cfb47c!important;
+  box-shadow:inset 0 1px rgba(248,224,176,.2),0 3px 8px rgba(0,0,0,.25)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-zoom:active {
+  background:#302b20!important;
+  box-shadow:inset 0 2px 5px rgba(0,0,0,.5)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .library-head>.pg-close:hover,
+body.cardlib-open #cardZoom.cz-photo .cz-close:hover {
+  background:linear-gradient(150deg,#47503b,#2b3b2f)!important;
+  border-color:#c6b084!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .library-head>.pg-close:active,
+body.cardlib-open #cardZoom.cz-photo .cz-close:active {
+  background:#1c281e!important;
+  box-shadow:inset 0 2px 5px rgba(0,0,0,.5)!important;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-backdrop {
+  background:radial-gradient(ellipse at 35% 30%,rgba(51,47,32,.22),transparent 60%),rgba(6,12,9,.9);
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-layout { gap:clamp(24px,3vw,52px); }
+body.cardlib-open #cardZoom.cz-photo .cz-hint {
+  color:#c0c1ad;
+  font:400 13px/1.5 var(--font-ui);
+  letter-spacing:.08em;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-paper {
+  border:34px solid transparent;
+  border-image:url('../assets/ui/photo-studio/frame-atelier-v1.png') 170 stretch;
+  width:min(100%,calc((100vh - 190px) * var(--cz-photo-ratio,1) + 82px));
+  padding:7px;
+  gap:0;
+  max-height:calc(100vh - 104px);
+  background:#e7dece;
+  box-shadow:0 28px 70px rgba(0,0,0,.56);
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-image {
+  width:100%;
+  min-height:0;
+  aspect-ratio:var(--cz-photo-ratio,1);
+  max-height:calc(100vh - 190px)!important;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-image img {
+  width:100%!important;
+  height:100%!important;
+  max-height:100%!important;
+  min-height:0;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-title {
+  padding-bottom:16px;
+  margin-bottom:16px;
+  border-bottom:1px solid rgba(198,176,130,.25);
+  font-size:26px;
+  line-height:1.4;
+  color:#f0e6cc;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-index {
+  margin:0 0 10px;
+  color:#b9b396;
+  font:500 12px/1.5 var(--font-ui);
+  letter-spacing:.14em;
+  font-variant-numeric:tabular-nums;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-detail {
+  border:0;
+  border-right:1px solid rgba(198,176,130,.24);
+  padding:0 12px 0 0;
+  background:none;
+  font-size:14px;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-detail:last-child { border-right:0; }
+body.cardlib-open #cardZoom.cz-photo .cz-photo-detail span { color:#b9bba8; }
+body.cardlib-open #cardZoom.cz-photo .cz-photo-rules { line-height:1.85; }
+body.cardlib-open #cardZoom.cz-photo .cz-note.editable {
+  transform:rotate(-.15deg);
+  border:16px solid transparent!important;
+  border-image:url('../assets/ui/photo-studio/note-atelier-v1.png') 140 fill stretch!important;
+  padding:9px 11px!important;
+  background:#eee6d4!important;
+  box-shadow:0 3px 0 rgba(99,85,54,.4),0 8px 18px rgba(0,0,0,.35)!important;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-note-input {
+  border:0;
+  border-bottom:1px dashed rgba(87,83,57,.4);
+  border-radius:0;
+  padding:8px 2px;
+  background:rgba(255,254,241,.18);
+  color:#39372b;
+  line-height:1.8;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-note-input:focus-visible {
+  outline:2px solid #536d59;
+  outline-offset:3px;
+  border-bottom-color:transparent;
+  box-shadow:none;
+  background:rgba(255,254,241,.35);
+}
+body.cardlib-open #cardZoom.cz-photo .cz-note-status {
+  font-size:12px;
+  font-weight:500;
+  letter-spacing:.06em;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-note.has::after {
+  top:0;
+  right:2px;
+  color:rgba(140,63,43,.72);
+  border-color:rgba(140,63,43,.52);
+}
+body.cardlib-open #overlay .photo-studio-v3 .pv-note {
+  padding:10px 12px;
+  border-left:2px solid #ac9770;
+  background:rgba(224,213,183,.065);
+  color:#ddd5bf;
+  font-size:14px;
+  line-height:1.7;
+}
+@media(min-width:1101px) and (max-width:1399px) {
+  body.cardlib-open #overlay .photo-studio-v3 .studio-filterbar { flex-wrap:wrap; gap:8px; }
+  body.cardlib-open #overlay .photo-studio-v3 .clib-tabs { flex:1 1 650px; }
+  body.cardlib-open #overlay .photo-studio-v3 .advanced-row { margin-left:auto; }
+}
+@media(max-width:760px) {
+  body.cardlib-open #cardZoom.cz-photo .cz-photo-paper {
+    border-width:23px;
+    padding:4px;
+    width:min(100%,calc(52vh * var(--cz-photo-ratio,1) + 54px));
+  }
+  body.cardlib-open #cardZoom.cz-photo .cz-photo-image { max-height:52vh!important; }
+  body.cardlib-open #cardZoom.cz-photo .cz-photo-layout { gap:16px; }
+  body.cardlib-open #overlay .photo-studio-v3 .type-tab { padding:8px 10px; }
+  body.cardlib-open #cardZoom.cz-photo .cz-photo-title { font-size:23px; }
+  body.cardlib-open #cardZoom.cz-photo .cz-photo-info { padding:20px 17px; }
+}
+@media(max-width:600px) {
+  body.cardlib-open #overlay .photo-studio-v3 .library-head {
+    grid-template-columns:minmax(0,1fr) auto 40px!important;
+    grid-template-areas:'title count close' 'tools tools tools'!important;
+    gap:8px!important;
+  }
+  body.cardlib-open #overlay .photo-studio-v3 .clib-count {
+    font-size:11px;
+    padding:5px 7px;
+  }
+  body.cardlib-open #overlay .photo-studio-v3 .library-title h2 {
+    font-size:24px!important;
+    letter-spacing:.12em!important;
+  }
+}
+@media(prefers-reduced-motion:reduce) {
+  body.cardlib-open #cardZoom.cz-photo :is(.cz-photo-paper,.cz-photo-info) { transition:none!important; }
+}
+
+/* 馆藏索引：检索与展墙共用一列，选片台独立；不再把筛选塞进页眉。 */
+body.cardlib-open #overlay .photo-studio-v3.studio-index-layout .library-head {
+  grid-template-columns:44px minmax(0,1fr) auto!important;
+  grid-template-areas:'close tools count'!important;
+  min-height:82px;
+  gap:20px!important;
+  padding-top:14px!important;
+  padding-bottom:14px!important;
+}
+body.cardlib-open #overlay .studio-index-layout .library-title::before,
+body.cardlib-open #overlay .studio-index-layout .library-title h2::after { display:none!important; }
+body.cardlib-open #overlay .studio-index-layout .library-title h2 {
+  color:#ece2c9!important;
+  font:700 30px/1.35 var(--serif)!important;
+  letter-spacing:.18em!important;
+  text-shadow:0 1px 1px #07110b!important;
+}
+body.cardlib-open #overlay .studio-index-layout .library-title h2 .ic { display:none!important; }
+body.cardlib-open #overlay .studio-index-layout .clib-count {
+  gap:8px;
+  border:0!important;
+  background:none!important;
+  box-shadow:none!important;
+  padding:0 12px;
+}
+body.cardlib-open #overlay .studio-index-layout .clib-count small {
+  font-size:13px!important;
+  color:#c6c2ad!important;
+  letter-spacing:.03em!important;
+}
+body.cardlib-open #overlay .studio-index-layout .clib-count b { font-size:23px!important; font-weight:500!important; }
+body.cardlib-open #overlay .studio-index-layout .library-tools { width:auto; justify-self:end; flex-wrap:wrap; }
+body.cardlib-open #overlay .studio-index-layout .library-tools:empty { display:none; }
+body.cardlib-open #overlay .studio-index-layout .studio-catalog {
+  min-width:0;
+  min-height:0;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-catalog .lib-grid {
+  flex:1;
+  min-height:0;
+  width:100%;
+  box-sizing:border-box;
+  padding-top:24px!important;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-catalog .studio-filterbar {
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+  gap:12px;
+  padding:16px 20px 18px!important;
+  border:3px solid #8a7650!important;
+  border-radius:3px;
+  background:linear-gradient(120deg,rgba(255,255,245,.26),transparent 56%),#dbd6c5!important;
+  outline:1px solid #bcaa7d;
+  outline-offset:-2px;
+  box-shadow:inset 0 0 0 3px #e7ddc3,inset 0 0 0 4px #aa9b78,0 3px 0 #403a29,0 7px 16px rgba(0,0,0,.35)!important;
+  color:#343e34;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-index-heading {
+  display:flex;
+  align-items:center;
+  gap:14px;
+  min-height:26px;
+  color:#535b4a;
+  font:500 13px/1.4 var(--font-ui);
+  letter-spacing:.08em;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-index-heading>span:first-child {
+  padding-left:10px;
+  border-left:3px solid #7f7451;
+  font-weight:700;
+  font-family:var(--serif)!important;
+  font-size:16px;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-index-heading .lib-show { font-size:12px; letter-spacing:0; }
+body.cardlib-open #overlay .studio-index-layout .studio-index-heading .lib-show[hidden] { display:none!important; }
+body.cardlib-open #overlay .studio-index-layout .studio-index-heading .studio-clear {
+  margin-left:auto;
+  min-height:28px!important;
+  padding:2px 0 2px 12px;
+  border:0!important;
+  border-left:1px solid #b8b09a!important;
+  background:none!important;
+  box-shadow:none!important;
+  color:#54634e!important;
+  font:500 13px/1.5 var(--font-ui)!important;
+  letter-spacing:0;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-index-heading .studio-clear:hover { color:#1c412e!important; text-decoration:underline; text-underline-offset:3px; }
+body.cardlib-open #overlay .studio-index-layout .studio-catalog .clib-tabs {
+  flex:0 0 auto;
+  gap:4px;
+  padding:0 0 8px;
+  border-bottom:1px solid #bcb49e;
+  scrollbar-color:#8c967e transparent;
+  scrollbar-width:thin;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-catalog .type-tab {
+  min-height:36px!important;
+  gap:6px;
+  padding:7px 10px;
+  border:1px solid transparent!important;
+  color:#4f594b!important;
+  font:500 15px/1.4 var(--font-ui)!important;
+  letter-spacing:0!important;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-catalog .type-tab em { color:#69715e!important; font:400 11px/1 var(--font-ui); font-variant-numeric:tabular-nums; opacity:1; }
+body.cardlib-open #overlay .studio-index-layout .studio-catalog .type-tab:not(.on):hover { background:#c9ccba!important; color:#283e2d!important; }
+body.cardlib-open #overlay .studio-index-layout .studio-catalog .type-tab.on,
+body.cardlib-open #overlay .studio-index-layout .studio-catalog .type-tab.on:hover {
+  border-color:#475a41!important;
+  color:#faf3de!important;
+  background:linear-gradient(180deg,#56674d,#3d503c)!important;
+  box-shadow:inset 0 1px rgba(247,236,203,.2),0 2px 3px rgba(74,74,49,.17)!important;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-catalog .type-tab.on em { color:#d6dfc8!important; }
+body.cardlib-open #overlay .studio-index-layout .studio-search-row {
+  display:grid;
+  grid-template-columns:minmax(170px,1.7fr) minmax(136px,1fr) minmax(122px,1fr) minmax(112px,.85fr);
+  gap:12px;
+  min-width:0;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-field { display:grid; gap:6px; min-width:0; }
+body.cardlib-open #overlay .studio-index-layout .studio-field-label { color:#525e48; font:500 14px/1.4 var(--font-ui); letter-spacing:.03em; }
+body.cardlib-open #overlay .studio-index-layout .studio-field .studio-search,
+body.cardlib-open #overlay .studio-index-layout .studio-select-shell {
+  position:relative;
+  display:block;
+  min-width:0;
+  width:100%;
+  max-width:none;
+  box-sizing:border-box;
+  border:1px solid #a5ad97!important;
+  border-radius:2px!important;
+  background:#eeeede!important;
+  box-shadow:inset 0 1px 3px rgba(91,97,70,.09),0 1px rgba(255,255,244,.5)!important;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-field .pg-select,
+body.cardlib-open #overlay .studio-index-layout .studio-field .clib-search {
+  display:block;
+  appearance:none!important;
+  -webkit-appearance:none!important;
+  box-sizing:border-box;
+  width:100%!important;
+  min-width:0!important;
+  max-width:none!important;
+  height:42px!important;
+  min-height:42px!important;
+  padding:0 32px 0 12px!important;
+  border:0!important;
+  border-radius:2px!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  color:#2e4131!important;
+  font:500 15px/1.4 var(--font-ui)!important;
+  letter-spacing:0!important;
+  text-shadow:none!important;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-field .clib-search { padding-left:34px!important; padding-right:10px!important; }
+body.cardlib-open #overlay .studio-index-layout .studio-field .clib-search::placeholder { color:#727c65!important; font-weight:400; }
+body.cardlib-open #overlay .studio-index-layout .studio-field .pg-select option { background:#eeeede; color:#2e4131; }
+body.cardlib-open #overlay .studio-index-layout .studio-select-shell::after {
+  content:'';
+  position:absolute;
+  right:13px;
+  top:16px;
+  width:6px;
+  height:6px;
+  border-right:1.5px solid #667452;
+  border-bottom:1.5px solid #667452;
+  transform:rotate(45deg);
+  pointer-events:none;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-search::before {
+  content:'';
+  position:absolute;
+  left:12px;
+  top:14px;
+  width:9px;
+  height:9px;
+  border:1.5px solid #7b876b;
+  border-radius:50%;
+  pointer-events:none;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-search::after { content:''; position:absolute; left:21px; top:24px; width:5px; height:1.5px; background:#7b876b; transform:rotate(45deg); pointer-events:none; }
+body.cardlib-open #overlay .studio-index-layout .studio-field :is(.studio-search,.studio-select-shell):hover { border-color:#687f5a!important; }
+body.cardlib-open #overlay .studio-index-layout .studio-field :is(.studio-search,.studio-select-shell):focus-within { outline:2px solid #5f7753!important; outline-offset:2px!important; box-shadow:none!important; }
+body.cardlib-open #overlay .studio-index-layout .studio-field :is(.pg-select,.clib-search):focus-visible { outline:none!important; }
+body.cardlib-open #overlay .studio-index-layout .studio-catalog .studio-active-filters {
+  flex-wrap:wrap;
+  min-height:0;
+  padding:0!important;
+  border:0;
+  background:none;
+  color:#616950;
+  font-size:13px;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-catalog .studio-active-filters button { max-width:100%; overflow-wrap:anywhere; padding:4px 9px; border:1px solid #a6af95; border-radius:2px; background:#ced5be; color:#344a33; font:500 13px/1.5 var(--font-ui); }
+body.cardlib-open #overlay .studio-index-layout .studio-catalog .studio-active-filters button:focus-visible { outline:2px solid #536d45; outline-offset:2px; }
+body.cardlib-open #overlay .studio-index-layout .studio-photo-caption b { font-family:var(--serif)!important; font-weight:700; letter-spacing:.015em; line-height:1.45; width:fit-content; max-width:100%; margin-inline:auto; }
+body.cardlib-open #overlay .studio-index-layout .pv-desc { font-weight:400; letter-spacing:0; line-height:1.8; }
+body.cardlib-open #overlay .studio-index-layout .studio-inspector-head b { font-family:var(--serif)!important; font-size:17px; }
+body.cardlib-open #cardZoom.cz-photo .cz-photo-title,
+body.cardlib-open #cardZoom.cz-photo .cz-photo-title span { font-family:var(--serif)!important; }
+/* 照相馆稀有度字色：相纸用深墨，暗色背签用亮墨，保留静态棱彩与金字。 */
+body.cardlib-open :is(.photo-studio-v3,#cardZoom.cz-photo) [data-studio-rarity] { --rarity-ink:#485344; --rarity-bright:#cbd5c3; }
+body.cardlib-open :is(.photo-studio-v3,#cardZoom.cz-photo) [data-studio-rarity="稀有"] { --rarity-ink:#245b98; --rarity-bright:#8dbff2; }
+body.cardlib-open :is(.photo-studio-v3,#cardZoom.cz-photo) [data-studio-rarity="史诗"] { --rarity-ink:#793a9f; --rarity-bright:#cda0ef; }
+body.cardlib-open :is(.photo-studio-v3,#cardZoom.cz-photo) [data-studio-rarity="传说"] { --rarity-ink:#946111; --rarity-bright:#efc76d; }
+body.cardlib-open :is(.photo-studio-v3,#cardZoom.cz-photo) [data-studio-rarity="衍生"] { --rarity-ink:#1a7564; --rarity-bright:#7ed4bd; }
+body.cardlib-open :is(.photo-studio-v3,#cardZoom.cz-photo) [data-studio-rarity="职业"] { --rarity-ink:#a02e32; --rarity-bright:#ed9897; }
+body.cardlib-open :is(.photo-studio-v3,#cardZoom.cz-photo) [data-studio-rarity="棱彩"] { --rarity-ink:#78377c; --rarity-bright:#e8b4e7; }
+body.cardlib-open #overlay .photo-studio-v3 .studio-photo-caption b[data-studio-rarity] { color:var(--rarity-ink)!important; }
+body.cardlib-open #overlay .photo-studio-v3 .pv-chip[data-studio-rarity],
+body.cardlib-open #cardZoom.cz-photo [data-studio-rarity] { color:var(--rarity-bright)!important; }
+body.cardlib-open #overlay .photo-studio-v3 .studio-photo-caption b[data-studio-rarity="传说"] {
+  background:linear-gradient(180deg,#795013 10%,#b47c1e 46%,#69420c 85%)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-photo-caption b[data-studio-rarity="棱彩"] {
+  background:linear-gradient(100deg,#aa3468,#8c4eb0 28%,#286ca0 53%,#287957 75%,#966714)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .pv-chip[data-studio-rarity="棱彩"],
+body.cardlib-open #cardZoom.cz-photo [data-studio-rarity="棱彩"] {
+  background:linear-gradient(100deg,#f2a9cd,#c4a6fa 28%,#9ccdf6 53%,#a7dfbc 75%,#efce8b)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-photo-caption b:is([data-studio-rarity="传说"],[data-studio-rarity="棱彩"]),
+body.cardlib-open #overlay .photo-studio-v3 .pv-chip[data-studio-rarity="棱彩"],
+body.cardlib-open #cardZoom.cz-photo [data-studio-rarity="棱彩"] {
+  -webkit-background-clip:text!important;
+  background-clip:text!important;
+  -webkit-text-fill-color:transparent;
+  text-shadow:none!important;
+}
+@media(max-width:1100px) {
+  body.cardlib-open #overlay .studio-index-layout .clib-main { grid-template-columns:minmax(0,1fr)!important; }
+}
+@media(max-width:760px) {
+  body.cardlib-open #overlay .photo-studio-v3.studio-index-layout .library-head { min-height:66px; gap:10px!important; padding:10px 18px!important; }
+  body.cardlib-open #overlay .studio-index-layout .clib-main { padding:10px 14px 14px!important; }
+  body.cardlib-open #overlay .studio-index-layout .studio-catalog .studio-filterbar { padding:12px 13px 14px!important; gap:9px; }
+  body.cardlib-open #overlay .studio-index-layout .studio-search-row { grid-template-columns:repeat(3,minmax(0,1fr)); gap:9px; }
+  body.cardlib-open #overlay .studio-index-layout .studio-query { grid-column:1/-1; }
+  body.cardlib-open #overlay .studio-index-layout .studio-field .pg-select { font-size:14px!important; padding-left:8px!important; padding-right:23px!important; }
+  body.cardlib-open #overlay .studio-index-layout .studio-select-shell::after { right:10px; }
+  body.cardlib-open #overlay .studio-index-layout .library-title h2 { font-size:25px!important; }
+  body.cardlib-open #overlay .studio-index-layout .clib-count { padding:0; gap:5px; }
+  body.cardlib-open #overlay .studio-index-layout .clib-count b { font-size:20px!important; }
+  body.cardlib-open #overlay .studio-index-layout .library-tools:not(:empty) { grid-column:1/-1; grid-row:2; justify-self:start; }
 }

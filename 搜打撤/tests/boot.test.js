@@ -93,15 +93,71 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     window.SDT.Sound.sfx = originalSfx;
   });
 
-  it('卡牌档案馆卡面点击进入详情，Esc 关闭档案馆', async () => {
+  it('照相馆以照片背签打开，默认大图仍用卡牌面且保留 footer 委托', async () => {
     const originalSfx = window.SDT.Sound.sfx;
     window.SDT.Sound.sfx = () => {};
     const card = document.querySelector('#libGrid .lib-cardwrap');
     expect(card).not.toBeNull();
+    const sourcePaper = card.querySelector('.studio-photo-paper');
+    const originalUiRect = window.SDT.UiScale.rect;
+    const originalClientRects = Element.prototype.getClientRects;
+    const sourceBox = { left: 80, top: 90, width: 120, height: 160 };
+    const targetBox = { left: 300, top: 160, width: 620, height: 500 };
+    const rect = box => ({ ...box, right: box.left + box.width, bottom: box.top + box.height });
+    sourcePaper.getBoundingClientRect = () => rect(sourceBox);
+    window.SDT.UiScale.rect = node => node.classList?.contains('cz-photo-paper')
+      ? rect(targetBox)
+      : node.classList?.contains('studio-photo-paper') ? rect(sourceBox) : originalUiRect(node);
+    Element.prototype.getClientRects = function () { return this.isConnected ? [{}] : []; };
+    card.focus();
     card.click();
-    expect(document.getElementById('cardZoom')).not.toBeNull();
+    const photoZoom = document.getElementById('cardZoom');
+    expect(photoZoom?.classList.contains('cz-photo')).toBe(true);
+    expect(photoZoom.querySelector('.cz-photo-image img')).not.toBeNull();
+    expect(photoZoom.querySelector('.cz-photo-rules')).not.toBeNull();
+    expect(photoZoom.querySelector('.cz-card')).toBeNull();
+    expect(photoZoom.style.getPropertyValue('--cz-photo-from-transform')).toContain('translate(');
+    const photoNote = photoZoom.querySelector('.cz-note-input');
+    expect(photoNote.maxLength).toBe(240);
+    photoNote.value = '测试照片背签';
+    photoNote.dispatchEvent(new Event('input', { bubbles: true }));
+    photoZoom.querySelector('.cz-photo-info').click();
+    expect(document.getElementById('cardZoom')).toBe(photoZoom);
+    await new Promise(r => setTimeout(r, 260));
+    expect(photoZoom.querySelector('.cz-note-status').textContent).toBe('已存档');
     document.querySelector('#cardZoom .cz-backdrop').click();
-    document.querySelector('.card-library-page .pg-close').click();
+    expect(photoZoom.classList.contains('cz-photo-closing-to-source')).toBe(true);
+    expect(photoZoom.style.getPropertyValue('--cz-photo-to-transform')).toContain('translate(');
+    expect(document.getElementById('overlay').inert).toBe(true);
+    expect(photoZoom.querySelector('.cz-note-status').textContent).toBe('已存档');
+    await new Promise(r => setTimeout(r, 400));
+    expect(document.getElementById('cardZoom')).toBeNull();
+    expect(document.getElementById('overlay').inert).toBe(false);
+    expect(document.activeElement).toBe(card);
+    window.SDT.UiScale.rect = originalUiRect;
+    Element.prototype.getClientRects = originalClientRects;
+
+    // Reopening while a photo is reversing cancels that pending removal immediately.
+    card.click();
+    const reversingPhoto = document.getElementById('cardZoom');
+    reversingPhoto.querySelector('.cz-backdrop').click();
+    let footerCalled = 0;
+    window.SDT.UI.act('zoomTestFooter', () => { footerCalled += 1; });
+    window.SDT.UI.showCardZoom(window.SDT.Cards.all()[0], {
+      footer: '<button type="button" data-act="zoomTestFooter">测试</button>',
+    });
+    const defaultZoom = document.getElementById('cardZoom');
+    expect(reversingPhoto.isConnected).toBe(false);
+    expect(defaultZoom.querySelector('.cz-card .hs-card')).not.toBeNull();
+    expect(defaultZoom.querySelector('.cz-photo-layout')).toBeNull();
+    defaultZoom.querySelector('.cz-foot [data-act="zoomTestFooter"]').click();
+    expect(footerCalled).toBe(1);
+    expect(document.getElementById('cardZoom')).toBe(defaultZoom);
+    defaultZoom.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, isComposing: true }));
+    expect(document.getElementById('cardZoom')).toBe(defaultZoom);
+    defaultZoom.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+    await new Promise(r => setTimeout(r, 270));
+    document.querySelector('.card-library-page [data-act="closeCardPage"]').click();
     await new Promise(r => setTimeout(r, 230));
     expect(document.getElementById('overlay').hidden).toBe(true);
     window.SDT.Sound.sfx = originalSfx;

@@ -1,0 +1,167 @@
+/* Cabinet joinery: the same brass, paper and leather from index to inspection. */
+body.cardlib-open #overlay .photo-studio-v3.studio-index-layout .library-head {
+  grid-template-columns:58px minmax(0,1fr) auto!important;
+  border-bottom:3px solid #5f573d!important;
+  box-shadow:inset 0 -1px #baa47770,0 3px 0 #080f0a,0 5px 0 #a18b5838;
+}
+/* Match the cover exit: same SVG, 58px hit area and ak-sq responsive scaling. */
+body.cardlib-open #overlay .studio-index-layout .studio-exit {
+  grid-area:close;
+  width:58px;
+  height:58px;
+  padding:0;
+  border:1px solid transparent;
+  background:none;
+  box-shadow:none;
+  color:#e8efe9;
+  transition:color .18s,filter .18s;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-exit::after { display:none; }
+body.cardlib-open #overlay .studio-index-layout .studio-exit:hover {
+  background:none;
+  color:#fff;
+  border-color:var(--akmint);
+  filter:drop-shadow(0 0 8px #a9efc366);
+}
+body.cardlib-open #overlay .studio-index-layout .library-title {
+  position:relative;
+  padding:0 14px!important;
+  border:8px solid transparent!important;
+  border-image:url('../assets/ui/photo-studio/cabinet-plaque.svg') 32 fill stretch!important;
+  border-radius:2px;
+  background:linear-gradient(140deg,#55523d,#29372b 55%,#17251c);
+  box-shadow:inset 0 0 0 2px #17241c,inset 0 0 0 3px #b59c6350,0 3px 5px #0007;
+}
+body.cardlib-open #overlay .studio-index-layout .library-title::after {
+  content:'';
+  position:absolute;
+  inset:0 7px;
+  pointer-events:none;
+  background:radial-gradient(circle at left center,#decb97 0 1px,#574b32 1.5px 2.5px,transparent 3px),radial-gradient(circle at right center,#decb97 0 1px,#574b32 1.5px 2.5px,transparent 3px);
+}
+body.cardlib-open #overlay .studio-index-layout .library-title h2 {
+  font-size:28px!important;
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+  background:none!important;
+  text-shadow:none!important;
+  filter:none!important;
+}
+body.cardlib-open #overlay .studio-index-layout .clib-count {
+  padding:6px 14px;
+  border:1px solid #8a795657!important;
+  border-radius:2px;
+  background:linear-gradient(180deg,#0a140c80,#36463240)!important;
+  box-shadow:inset 0 1px 3px #0006,0 1px #ddc48e20!important;
+}
+body.cardlib-open #overlay .studio-index-layout .clib-main::before { opacity:.32; }
+body.cardlib-open #overlay .studio-index-layout .studio-catalog .studio-filterbar {
+  border:18px solid transparent!important;
+  border-image:url('../assets/ui/photo-studio/cabinet-trim-painted-v2.png') 230 stretch!important;
+  padding:10px 14px 12px!important;
+  outline:none;
+  background:linear-gradient(125deg,#e4ddcaed,#d7d0bfee),url('../assets/ui/photo-studio/paper-grain.png') center/256px,#dbd6c5!important;
+  box-shadow:inset 0 0 0 1px #b4a581,0 4px 0 #12170f,0 7px 16px #0005!important;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-filterbar::before,
+body.cardlib-open #overlay .studio-index-layout .studio-filterbar::after {
+  content:'';
+  position:absolute;
+  top:5px;
+  bottom:5px;
+  width:12px;
+  pointer-events:none;
+  opacity:.9;
+  background:linear-gradient(#b49a68,#73623f) left top/12px 2px no-repeat,linear-gradient(#b49a68,#73623f) left bottom/12px 2px no-repeat,linear-gradient(#a3895a,#73623f) left top/2px 12px no-repeat,linear-gradient(#a3895a,#73623f) left bottom/2px 12px no-repeat;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-filterbar::before { left:5px; }
+body.cardlib-open #overlay .studio-index-layout .studio-filterbar::after { right:5px; transform:scaleX(-1); }
+body.cardlib-open #overlay .studio-index-layout .studio-index-heading>span:first-child {
+  border-left:0;
+  padding:3px 12px;
+  color:#51462e;
+  border:1px solid #a4926a;
+  background:linear-gradient(180deg,#eee3c7,#d8c9a7);
+  box-shadow:inset 0 0 0 2px #eaddbe,0 1px 2px #4f412c26;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-catalog .clib-tabs {
+  border-bottom:1px solid #ada18a;
+  box-shadow:0 1px #fff9e575;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-catalog .type-tab {
+  border-radius:2px 2px 0 0;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-catalog .type-tab.on {
+  box-shadow:inset 0 1px #e8d1a765,inset 0 -2px #bfa36a,0 2px 3px #4a4a312b!important;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-field :is(.studio-search,.studio-select-shell) {
+  border-color:#a39476!important;
+  background:linear-gradient(180deg,#e4deca,#f2eddd)!important;
+  box-shadow:inset 0 2px 3px #51442d1f,0 1px #fff9e6!important;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-select-shell::after {
+  border-color:#776b4c;
+  filter:drop-shadow(0 1px #fff8df);
+}
+body.cardlib-open #overlay .studio-index-layout .library-inspector,
+body.cardlib-open #cardZoom.cz-photo .cz-photo-info {
+  border:18px solid transparent;
+  border-image:url('../assets/ui/photo-studio/cabinet-trim-painted-v2.png') 230 stretch;
+  outline:none;
+  box-shadow:inset 0 0 0 2px #10190f,inset 0 0 0 3px #c7ad6e42,inset 0 8px 18px #0004,0 5px 0 #080e0a,0 14px 28px #0005;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-inspector-head {
+  margin-bottom:17px;
+  padding-bottom:16px;
+  border-bottom:1px solid #a18a574d;
+  box-shadow:0 1px #050e0866;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-inspector-head b {
+  display:inline-block;
+  padding:4px 14px;
+  border:1px solid #aa8f584f;
+  background:linear-gradient(180deg,#ad986524,#14271a24);
+  box-shadow:inset 0 0 0 2px #08100955;
+}
+body.cardlib-open #overlay .studio-index-layout .pv-meta {
+  padding:12px 0;
+  border-top:1px solid #c4aa7038;
+  border-bottom:1px solid #c4aa7028;
+  box-shadow:inset 0 1px #0005;
+}
+body.cardlib-open #overlay .studio-index-layout .pv-desc { padding-bottom:10px; }
+body.cardlib-open #overlay .studio-index-layout :is(.pv-navbtn,.studio-zoom,.studio-load-more) {
+  border:5px solid transparent!important;
+  border-image:url('../assets/ui/photo-studio/cabinet-plaque.svg') 32 fill stretch!important;
+  padding:7px 12px;
+  color:#f1e9d4!important;
+  box-shadow:0 2px 0 #070e09,0 4px 7px #0003!important;
+  text-shadow:none!important;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-zoom {
+  border-width:7px!important;
+  font:700 16px/1.4 var(--serif)!important;
+  letter-spacing:.06em;
+}
+body.cardlib-open #overlay .studio-index-layout :is(.pv-navbtn,.studio-zoom,.studio-load-more):hover:not(:disabled) {
+  outline:1px solid #d8c18b;
+  outline-offset:1px;
+}
+body.cardlib-open #overlay .studio-index-layout :is(.pv-navbtn,.studio-zoom,.studio-load-more):active:not(:disabled) {
+  box-shadow:inset 0 2px 4px #0008!important;
+}
+body.cardlib-open #overlay .studio-index-layout .pv-navbtn:disabled { opacity:.45; }
+/* Keep ink crisp: no texture or glow composited over glyphs. */
+body.cardlib-open #overlay .studio-index-layout .studio-photo-caption b { font-size:18px; text-shadow:none!important; }
+body.cardlib-open #overlay .studio-index-layout .studio-photo-caption span { font-size:13px; color:#514e40; }
+body.cardlib-open #overlay .studio-index-layout .studio-preview-paper .studio-photo-caption b { font-size:23px; }
+body.cardlib-open #overlay .studio-index-layout .studio-field-label { color:#414b39; }
+body.cardlib-open #overlay .studio-index-layout .pv-no { color:#c4c5b4; font-size:13px; }
+body.cardlib-open #overlay .studio-index-layout .studio-photo-paper::after { display:none!important; }
+body.cardlib-open #overlay .studio-index-layout .studio-photo-art img { filter:none!important; }
+@media(max-width:760px) {
+  body.cardlib-open #overlay .studio-index-layout .library-title { padding:0 6px!important; }
+  body.cardlib-open #overlay .studio-index-layout .library-title h2 { font-size:23px!important; letter-spacing:.12em!important; }
+  body.cardlib-open #overlay .studio-index-layout .clib-count { padding:5px 8px; }
+  body.cardlib-open #overlay .studio-index-layout .studio-index-heading>span:first-child { padding:3px 7px; }
+}

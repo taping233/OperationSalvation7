@@ -1,0 +1,4 @@
+interface:
+  display_name: "界面美术彻底整改"
+  short_description: "从参考图或现有界面出发，执行美术诊断、素材接入、连续复核与性能检查"
+  default_prompt: "使用 $ui-art-overhaul 整改指定界面；有参考图则提炼其美术规律，没有则依据产品建立基准，完成实现及已获授权的验收。"

@@ -1,6 +1,8 @@
 import { characterName } from './characters.js';
 import { esc } from './shared.js';
 import { renderExpeditionPanel } from './expedition.view.js';
+import { descRich } from './cards.view.js';
+import { photoMountFor } from './photo-studio-presentation.js';
   const SDT = window.SDT;
   const $ = (id) => document.getElementById(id);
 
@@ -37,7 +39,10 @@ import { renderExpeditionPanel } from './expedition.view.js';
         const btn = e.target.closest('[data-act]');
         if (!btn) return;
         const fn = this._acts[btn.dataset.act] || this._baseActs[btn.dataset.act];
-        if (fn) fn(btn.dataset);
+        if (fn) {
+          if (btn.hasAttribute('data-photo-zoom-source')) fn(btn.dataset, btn);
+          else fn(btn.dataset);
+        }
       });
       // 面板右上角 × 与遮罩点击（09-20 老板 P1-1）：都走 closeTopOverlayByEsc 同一条链，
       // 必选流程（事件必选/BOSS 编组/战斗页）探测不到取消语义时按钮自动隐藏、遮罩点击无效。
@@ -188,7 +193,9 @@ import { renderExpeditionPanel } from './expedition.view.js';
         if (typeof old._closeCardZoom === 'function') old._closeCardZoom(true);
         else old.remove();
       }
-      const previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+      const previousFocus = opts.returnFocus instanceof HTMLElement
+        ? opts.returnFocus
+        : (document.activeElement instanceof HTMLElement ? document.activeElement : null);
       const inertHost = this.el.overlay;
       const overlayWasInert = !!inertHost?.inert;
       if (inertHost) inertHost.inert = true;
@@ -206,21 +213,98 @@ import { renderExpeditionPanel } from './expedition.view.js';
           <span class="cz-note-tag">[[icon:pen]] ${esc(noteLabel)}</span>
           <p class="cz-note-text">${note ? esc(note) : '暂无备注'}</p>
         </div>`;
+      const photoMode = opts.presentation === 'photo';
+      const photoArt = photoMode && SDT.Art?.cardIcon ? SDT.Art.cardIcon(card) : '';
+      const photoRarity = photoMode ? SDT.Cards.rarityOf(card) : '';
+      const photoMount = photoMode ? photoMountFor(photoRarity) : null;
+      const creatureStats = photoMode && card.type === '生物'
+        ? String(card.desc || '').match(/^攻击\s*(\d+)\s*\/\s*生命\s*(\d+)/)
+        : null;
+      const cardDamage = +(card.dmg || 0);
+      const showPhotoDamage = photoMode && SDT.Cards.DMG_TYPES.includes(card.type)
+        && (cardDamage > 0 || (cardDamage < 0 && card.dmgType === 'attack'));
+      const photoStats = photoMode ? [
+        card.type && ['类型', card.type === '能力卡' ? '能力' : card.type],
+        photoRarity && ['稀有度', photoRarity],
+        card.cost != null && ['费用', card.cost],
+        creatureStats ? ['攻击', creatureStats[1]] : (showPhotoDamage && [card.type === '生物' || card.dmgType === 'attack' ? '攻击' : '伤害', card.dmg]),
+        creatureStats ? ['生命', creatureStats[2]] : (card.hp != null && ['生命', card.hp]),
+      ].filter(Boolean) : [];
+      const photoDetails = photoStats.map(([label, value]) => `<div class="cz-photo-detail"><span>${esc(label)}</span><b${label === '稀有度' ? ` data-studio-rarity="${esc(photoRarity)}"` : ''}>${esc(value)}</b></div>`).join('');
+      const photoIndex = photoMode && opts.photoNumber != null
+        ? `<div class="cz-photo-index">藏品编号 № ${esc(opts.photoNumber)}</div>`
+        : '';
+      const photoHTML = photoMode ? `<div class="cz-photo-layout">
+        <div class="cz-photo-main"><div class="cz-photo-paper" data-photo-mount="${photoMount.kind}">
+          <span class="studio-mount-mark" aria-hidden="true"></span>
+          <div class="cz-photo-image">${photoArt}</div>
+          <div class="cz-photo-caption">${esc(card.name || '未命名卡牌')}</div>
+        </div></div>
+        <aside class="cz-photo-info" aria-label="照片背签与卡牌信息">
+          <h2 class="cz-photo-title"><span data-studio-rarity="${esc(photoRarity)}">${esc(card.name || '未命名卡牌')}</span></h2>
+          ${photoIndex}
+          <div class="cz-photo-details">${photoDetails}</div>
+          ${card.desc ? `<div class="cz-photo-rules">${descRich(card.desc)}</div>` : ''}
+          ${noteHTML}
+        </aside>
+      </div>` : '';
       const el = document.createElement('div');
       el.id = 'cardZoom';
+      const reducedMotion = photoMode && !!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+      if (photoMode) {
+        el.classList.add('cz-photo');
+        // Reserve the same artwork ratio before the full-resolution image decodes.
+        // Thumbnail and original share composition; this avoids a frame jump on first open.
+        const sourceImage = opts.from?.querySelector?.('img');
+        const sourceRatio = sourceImage?.naturalHeight > 0 ? sourceImage.naturalWidth / sourceImage.naturalHeight : 1;
+        el.style.setProperty('--cz-photo-ratio', String(sourceRatio > 0 ? sourceRatio : 1));
+        if (!reducedMotion) el.classList.add('cz-photo-entering');
+        el.style.setProperty('--cz-photo-enter-ms', '420ms');
+        el.style.setProperty('--cz-photo-close-ms', '320ms');
+        el.style.setProperty('--cz-photo-info-delay', '80ms');
+        el.style.setProperty('--cz-photo-motion-ms', '420ms');
+      }
       el.setAttribute('role', 'dialog');
       el.setAttribute('aria-modal', 'true');
       el.setAttribute('aria-label', `${card.name || '卡牌'}大图与${noteLabel}`);
       el.tabIndex = -1;
       el.innerHTML = `<div class="cz-backdrop" aria-hidden="true"></div>
         <span class="cz-flash" aria-hidden="true"></span>
-        <button type="button" class="cz-close" aria-label="关闭卡牌大图">[[icon:cross]]</button>
-        <div class="cz-card">${SDT.Cards.cardHTML(card, 'lg')}</div>
-        ${noteHTML}
+        <button type="button" class="cz-close" aria-label="${photoMode ? '收回照片' : '关闭卡牌大图'}">[[icon:cross]]</button>
+        ${photoMode ? photoHTML : `<div class="cz-card">${SDT.Cards.cardHTML(card, 'lg')}</div>${noteHTML}`}
         ${opts.footer ? `<div class="cz-foot">${opts.footer}</div>` : ''}
-        <span class="cz-hint">Esc 或点击背景收回</span>`;
+        <span class="cz-hint">${photoMode ? '点击照片外或按 Esc 收回 · 背签可编辑' : 'Esc 或点击背景收回'}</span>`;
       let closed = false;
+      let removed = false;
       let noteSaveTimer = null;
+      let negTimer = null;
+      let enterTimer = null;
+      let closeTimer = null;
+      let finishClose = null;
+      let closeTransitionEnd = null;
+      let photoLayoutRect = null;
+      let photoViewport = null;
+      const visiblePhotoSourceRect = () => {
+        const source = opts.from;
+        if (!source?.isConnected || !source.getClientRects?.().length) return null;
+        const rect = source.getBoundingClientRect();
+        if (!(rect.width > 0 && rect.height > 0)) return null;
+        let left = 0, top = 0, right = window.innerWidth, bottom = window.innerHeight;
+        for (let node = source; node; node = node.parentElement) {
+          const style = getComputedStyle(node);
+          if (style.display === 'none' || style.visibility === 'hidden') return null;
+          if (node === source) continue;
+          const clipsX = /^(auto|scroll|hidden|clip)$/.test(style.overflowX || style.overflow);
+          const clipsY = /^(auto|scroll|hidden|clip)$/.test(style.overflowY || style.overflow);
+          if (!clipsX && !clipsY) continue;
+          const clip = node.getBoundingClientRect();
+          if (clipsX) { left = Math.max(left, clip.left); right = Math.min(right, clip.right); }
+          if (clipsY) { top = Math.max(top, clip.top); bottom = Math.min(bottom, clip.bottom); }
+        }
+        // A clipped source cannot provide a continuous whole-photo transition.
+        if (rect.left < left - 1 || rect.top < top - 1 || rect.right > right + 1 || rect.bottom > bottom + 1) return null;
+        return SDT.UiScale.rect(source);
+      };
       const noteInput = el.querySelector('.cz-note-input');
       const noteStatus = el.querySelector('.cz-note-status');
       const saveNote = () => {
@@ -239,13 +323,66 @@ import { renderExpeditionPanel } from './expedition.view.js';
         noteInput.addEventListener('blur', () => { clearTimeout(noteSaveTimer); saveNote(); });
       }
       const close = (immediate = false) => {
-        if (closed) return;
+        if (closed) {
+          if (photoMode && immediate && !removed) {
+            clearTimeout(enterTimer);
+            clearTimeout(closeTimer);
+            removed = true;
+            el.remove();
+            if (inertHost) inertHost.inert = overlayWasInert;
+            if (previousFocus?.isConnected) previousFocus.focus({ preventScroll: true });
+          }
+          return;
+        }
         clearTimeout(noteSaveTimer);
+        clearTimeout(enterTimer);
+        clearTimeout(negTimer);
+        el.classList.remove('cz-neg');
         saveNote();
         closed = true;
+        if (photoMode && !immediate && !reducedMotion) {
+          const photoPaper = el.querySelector('.cz-photo-paper');
+          const viewportUnchanged = photoViewport
+            && photoViewport.width === window.innerWidth
+            && photoViewport.height === window.innerHeight
+            && photoViewport.scale === SDT.UiScale.scale();
+          const sourceRect = viewportUnchanged ? visiblePhotoSourceRect() : null;
+          const targetRect = photoLayoutRect || (photoPaper ? SDT.UiScale.rect(photoPaper) : null);
+          el.style.setProperty('--cz-photo-motion-ms', '320ms');
+          el.classList.remove('cz-photo-entering');
+          el.classList.add('cz-photo-closing');
+          if (photoPaper) {
+            if (sourceRect && targetRect?.width > 0) {
+              const scale = sourceRect.width / targetRect.width;
+              const dx = sourceRect.left + sourceRect.width / 2 - (targetRect.left + targetRect.width / 2);
+              const dy = sourceRect.top + sourceRect.height / 2 - (targetRect.top + targetRect.height / 2);
+              el.style.setProperty('--cz-photo-to-transform', `translate(${dx}px, ${dy}px) scale(${scale})`);
+              el.classList.add('cz-photo-closing-to-source');
+            } else {
+              el.classList.add('cz-photo-closing-fallback');
+            }
+          } else {
+            el.classList.add('cz-photo-closing-fallback');
+          }
+          finishClose = () => {
+            if (removed) return;
+            removed = true;
+            clearTimeout(closeTimer);
+            if (photoPaper && closeTransitionEnd) photoPaper.removeEventListener('transitionend', closeTransitionEnd);
+            el.remove();
+            if (inertHost) inertHost.inert = overlayWasInert;
+            if (previousFocus?.isConnected) previousFocus.focus({ preventScroll: true });
+          };
+          closeTransitionEnd = (e) => {
+            if (e.target === photoPaper && e.propertyName === 'transform') finishClose();
+          };
+          photoPaper?.addEventListener('transitionend', closeTransitionEnd);
+          closeTimer = setTimeout(() => finishClose(), 380);
+          return;
+        }
         // cz-flip 的 animation:none 会一并压掉 czOut，收回前摘掉它恢复出场动画
         // （inline transform/opacity 一并清掉，防中途收回残留）
-        const cardEl = el.querySelector('.cz-card');
+        const cardEl = el.querySelector(photoMode ? '.cz-photo-image' : '.cz-card');
         if (cardEl) {
           cardEl.classList.remove('cz-flip');
           cardEl.style.transform = '';
@@ -253,8 +390,11 @@ import { renderExpeditionPanel } from './expedition.view.js';
         }
         if (inertHost) inertHost.inert = overlayWasInert;
         if (previousFocus?.isConnected) previousFocus.focus({ preventScroll: true });
-        if (immediate) {
+        if (immediate || (photoMode && reducedMotion)) {
+          removed = true;
           el.remove();
+          if (inertHost) inertHost.inert = overlayWasInert;
+          if (previousFocus?.isConnected) previousFocus.focus({ preventScroll: true });
           return;
         }
         el.classList.add('cz-out');
@@ -274,11 +414,22 @@ import { renderExpeditionPanel } from './expedition.view.js';
           if (fn) fn(btn.dataset);
           return;
         }
+        if (photoMode) {
+          // Layout gaps, info-panel padding and the hint are outside the photo too.
+          // Keep the photo and editable/interactive content usable.
+          if (!e.target.closest('.cz-photo-paper,.cz-note,button,input,textarea,select,a,[data-term]')) close();
+          return;
+        }
         if (e.target.closest('.cz-note')) return;
         close();
       });
       el.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
+          if (e.isComposing || e.keyCode === 229) {
+            e.preventDefault();
+            e.stopPropagation();
+            return;
+          }
           e.preventDefault();
           e.stopPropagation();
           close();
@@ -296,8 +447,7 @@ import { renderExpeditionPanel } from './expedition.view.js';
       // 大图显式解码，防 IAB 合成黑窗（同池页首屏/战斗手牌修法；2026-09-20 走查实锤特写黑窗）
       if (SDT.Art && SDT.Art.decodeIn) SDT.Art.decodeIn(el);
       // 彩蛋：长按大图 600ms「看底片」（挂 cz-neg，负片样式 scoped 在照相馆入口），松开恢复
-      const zoomCard = el.querySelector('.cz-card');
-      let negTimer = null;
+      const zoomCard = el.querySelector(photoMode ? '.cz-photo-image' : '.cz-card');
       const clearNeg = () => { clearTimeout(negTimer); el.classList.remove('cz-neg'); };
       zoomCard?.addEventListener('pointerdown', () => {
         clearTimeout(negTimer);
@@ -306,9 +456,45 @@ import { renderExpeditionPanel } from './expedition.view.js';
       ['pointerup', 'pointerleave', 'pointercancel'].forEach(ev =>
         zoomCard?.addEventListener(ev, clearNeg));
       el.querySelector('.cz-close')?.focus({ preventScroll: true });
+      const photoPaper = photoMode ? el.querySelector('.cz-photo-paper') : null;
+      if (photoPaper) {
+        // Measure the final paper box without its entrance transform; keep this natural rect
+        // for reverse FLIP even when the user closes before the entrance finishes.
+        const wasEntering = el.classList.contains('cz-photo-entering');
+        const oldTransition = photoPaper.style.transition;
+        photoPaper.style.transition = 'none';
+        if (wasEntering) el.classList.remove('cz-photo-entering');
+        photoLayoutRect = SDT.UiScale.rect(photoPaper);
+        photoViewport = { width: window.innerWidth, height: window.innerHeight, scale: SDT.UiScale.scale() };
+        if (wasEntering) el.classList.add('cz-photo-entering');
+        void photoPaper.offsetWidth;
+        photoPaper.style.transition = oldTransition;
+      }
       // FLIP 起点终点都取布局口径（UiScale.rect）：dx/dy 喂 transform（布局值），zoom≠1 才不错位
-      const fromR = opts.from && (opts.from.getBoundingClientRect ? SDT.UiScale.rect(opts.from) : opts.from);
-      if (fromR && fromR.width > 0) {
+      const fromR = photoMode ? visiblePhotoSourceRect()
+        : opts.from && (opts.from.getBoundingClientRect ? SDT.UiScale.rect(opts.from) : opts.from);
+      if (photoMode) {
+        if (fromR?.width > 0 && photoLayoutRect?.width > 0 && !reducedMotion) {
+          // Commit the source pose without a transition before transitioning to the final pose.
+          // Otherwise changing the source CSS variable starts a competing transition from .92.
+          const previousTransition = photoPaper.style.transition;
+          photoPaper.style.transition = 'none';
+          const scale = fromR.width / photoLayoutRect.width;
+          const dx = fromR.left + fromR.width / 2 - (photoLayoutRect.left + photoLayoutRect.width / 2);
+          const dy = fromR.top + fromR.height / 2 - (photoLayoutRect.top + photoLayoutRect.height / 2);
+          el.style.setProperty('--cz-photo-from-transform', `translate(${dx}px, ${dy}px) scale(${scale})`);
+          el.classList.add('cz-photo-flipping');
+          void photoPaper.offsetWidth;
+          photoPaper.style.transition = previousTransition;
+          el.classList.remove('cz-photo-entering');
+          enterTimer = setTimeout(() => el.classList.remove('cz-photo-flipping'), 500);
+        } else {
+          el.classList.add(reducedMotion ? 'cz-photo-reduced' : 'cz-photo-flipping');
+          void photoPaper?.offsetWidth;
+          el.classList.remove('cz-photo-entering');
+          if (!reducedMotion) enterTimer = setTimeout(() => el.classList.remove('cz-photo-flipping'), 500);
+        }
+      } else if (fromR && fromR.width > 0) {
         const cardEl = el.querySelector('.cz-card');
         const toR = SDT.UiScale.rect(cardEl);
         if (toR.width > 0) {

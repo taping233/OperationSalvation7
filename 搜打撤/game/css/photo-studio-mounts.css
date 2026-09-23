@@ -1,0 +1,118 @@
+/* One mount identity across the wall, inspection tray and photo-only zoom.
+   Paper grain is behind the image and text, never a filter over their pixels. */
+body.cardlib-open [data-photo-mount] {
+  --mount-art:url('../assets/ui/photo-studio/mount-plain.svg');
+  --mount-slice:48;
+  --mount-stroke:4px;
+  --mount-metal:#a19376;
+  --mount-paper:#e8e1d0;
+  --mount-depth:4px;
+}
+body.cardlib-open [data-photo-mount="proof"] { --mount-art:url('../assets/ui/photo-studio/mount-proof.svg'); --mount-stroke:3px; --mount-paper:#e2dfd1; --mount-metal:#96978c; --mount-depth:2px; }
+body.cardlib-open [data-photo-mount="rare"] { --mount-art:url('../assets/ui/photo-studio/mount-rare.svg'); --mount-stroke:7px; --mount-metal:#93adbf; --mount-paper:#e7e5d8; --mount-depth:5px; }
+body.cardlib-open [data-photo-mount="epic"] { --mount-art:url('../assets/ui/photo-studio/mount-epic.svg'); --mount-stroke:14px; --mount-metal:#b6a6c3; --mount-paper:#e2dccd; --mount-depth:7px; }
+body.cardlib-open [data-photo-mount="legendary"] { --mount-art:url('../assets/ui/photo-studio/frame-atelier-v1.png'); --mount-slice:170; --mount-stroke:17px; --mount-metal:#dfbd76; --mount-paper:#eaddbc; --mount-depth:9px; }
+body.cardlib-open [data-photo-mount="prismatic"] { --mount-art:url('../assets/ui/photo-studio/mount-prismatic.svg'); --mount-stroke:16px; --mount-metal:#bbd8da; --mount-paper:#e6e4df; --mount-depth:8px; }
+body.cardlib-open [data-photo-mount="class"] { --mount-art:url('../assets/ui/photo-studio/mount-class.svg'); --mount-stroke:7px; --mount-metal:#ba7770; --mount-paper:#e3d9c8; --mount-depth:5px; }
+body.cardlib-open [data-photo-mount="derived"] { --mount-art:url('../assets/ui/photo-studio/mount-derived.svg'); --mount-stroke:5px; --mount-metal:#6f9c91; --mount-paper:#dce2d2; --mount-depth:3px; }
+
+body.cardlib-open #overlay .photo-studio-v3 .studio-photo-paper[data-photo-mount],
+body.cardlib-open #cardZoom.cz-photo .cz-photo-paper[data-photo-mount] {
+  --mount-scale:1;
+  --clip-scale:1;
+  --mount-space:max(14px,calc(var(--mount-stroke) + 3px));
+  --mount-border:calc(var(--mount-stroke) * var(--mount-scale));
+  --paper-lift:12px;
+  --paper-blur:16px;
+  --paper-shadow:inset 0 1px 0 #fff7df99,0 2px 0 #b9b099,1px var(--mount-depth) 0 #66604d,2px var(--paper-lift) var(--paper-blur) #0009;
+  position:relative;
+  box-sizing:border-box;
+  border:var(--mount-border) solid transparent;
+  border-image:var(--mount-art) var(--mount-slice) stretch;
+  padding:calc(var(--mount-space) - var(--mount-border));
+  border-radius:0;
+  outline:none;
+  background:linear-gradient(135deg,#fff8df30,transparent 58%),linear-gradient(color-mix(in srgb,var(--mount-paper) 88%,transparent),color-mix(in srgb,var(--mount-paper) 88%,transparent)),url('../assets/ui/photo-studio/paper-grain.png') center/180px,var(--mount-paper);
+  box-shadow:var(--paper-shadow);
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-paper[data-photo-mount] {
+  --mount-scale:1.8;
+  --clip-scale:1.3;
+  --mount-space:max(24px,calc(var(--mount-stroke) * 1.8 + 4px));
+  --paper-lift:18px;
+  --paper-blur:24px;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-photo-paper[data-photo-mount]::before { display:none!important; }
+body.cardlib-open #overlay .photo-studio-v3 .studio-photo-paper[data-photo-mount]::after { opacity:.06; }
+body.cardlib-open #overlay .photo-studio-v3 .lib-cardwrap[aria-current="true"] .studio-photo-paper[data-photo-mount] {
+  border-color:transparent!important;
+  outline:2px solid #aac3b0;
+  outline-offset:4px!important;
+  box-shadow:var(--paper-shadow)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-photo-paper[data-photo-mount] .studio-photo-caption {
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  justify-content:center;
+  align-items:baseline;
+  gap:5px 6px;
+  padding:9px 0 3px;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-photo-paper[data-photo-mount] .studio-photo-caption b { grid-column:1/-1; }
+/* Same photo clip shape, with a rarity-specific metal finish. */
+body.cardlib-open #overlay .photo-studio-v3 [data-photo-mount]>.studio-mount-mark,
+body.cardlib-open #cardZoom.cz-photo [data-photo-mount]>.studio-mount-mark {
+  position:absolute;
+  z-index:5;
+  display:block;
+  left:50%;
+  top:calc(-1 * var(--mount-border) - 7px);
+  width:calc(34px * var(--clip-scale));
+  height:calc(13px * var(--clip-scale));
+  transform:translateX(-50%) rotate(-2deg);
+  border:1px solid color-mix(in srgb,var(--mount-metal),#241f18 60%);
+  border-radius:3px 3px 2px 2px;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--mount-metal),#fff6da 55%) 0%,var(--mount-metal) 22%,color-mix(in srgb,var(--mount-metal),white 25%) 30%,var(--mount-metal) 72%,color-mix(in srgb,var(--mount-metal),#24231c 50%) 76%,var(--mount-metal) 94%);
+  box-shadow:0 3px 3px #0008,inset 1px 0 #f5e1b582,inset -1px 0 #49372180;
+  pointer-events:none;
+}
+body.cardlib-open .studio-mount-mark::before {
+  content:'';
+  position:absolute;
+  width:36%;
+  height:45%;
+  left:32%;
+  top:-38%;
+  border:2px solid var(--mount-metal);
+  border-bottom:0;
+  border-radius:4px 4px 0 0;
+  box-shadow:inset 0 1px #514332,0 -1px #e2c9a1;
+}
+body.cardlib-open .studio-mount-mark::after {
+  content:'';
+  position:absolute;
+  inset:3px 4px 4px;
+  border-left:2px solid color-mix(in srgb,var(--mount-metal),#24231c 40%);
+  border-right:2px solid color-mix(in srgb,var(--mount-metal),#24231c 40%);
+  box-shadow:1px 0 #e5c994,-1px 0 #e5c994;
+}
+body.cardlib-open #overlay .photo-studio-v3 [data-photo-mount="prismatic"]>.studio-mount-mark,
+body.cardlib-open #cardZoom.cz-photo [data-photo-mount="prismatic"]>.studio-mount-mark {
+  background:linear-gradient(180deg,#fff9e370,transparent 42%,#24323770 76%,#fff3df30),linear-gradient(100deg,#bcb3d7,#a1c4d0 28%,#adcbb0 54%,#d3c594 77%,#d8afbd);
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-paper[data-photo-mount] {
+  --mount-scale:3;
+  --clip-scale:1.65;
+  --mount-space:max(39px,calc(var(--mount-stroke) * 3 + 5px));
+  width:min(100%,calc((100vh - 190px) * var(--cz-photo-ratio,1) + 2 * var(--mount-space)));
+  --paper-lift:24px;
+  --paper-blur:40px;
+}
+@media(max-width:760px) {
+  body.cardlib-open #overlay .photo-studio-v3 .studio-photo-paper[data-photo-mount] { --mount-space:max(12px,calc(var(--mount-stroke) * .9 + 3px)); --mount-scale:.9; }
+  body.cardlib-open #cardZoom.cz-photo .cz-photo-paper[data-photo-mount] {
+    --mount-scale:2;
+    --mount-space:max(27px,calc(var(--mount-stroke) * 2 + 4px));
+    width:min(100%,calc(52vh * var(--cz-photo-ratio,1) + 2 * var(--mount-space)));
+  }
+}

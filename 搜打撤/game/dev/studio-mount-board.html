@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>照相馆装裱对照板</title>
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/winter.css">
+  <link rel="stylesheet" href="/css/expedition-library.css">
+  <link rel="stylesheet" href="/css/photo-studio-mounts.css">
+  <link rel="stylesheet" href="/css/photo-studio-craft.css">
+  <style>
+    body.cardlib-open { height:auto!important; overflow:auto!important; }
+    body.cardlib-open #overlay {
+      position:static!important;
+      inset:auto!important;
+      display:block!important;
+      width:100%!important;
+      height:auto!important;
+      min-height:100vh!important;
+      padding:0!important;
+      overflow:visible!important;
+      background:transparent!important;
+    }
+    body.cardlib-open #overlay>.photo-studio-v3 {
+      display:block!important;
+      width:100%!important;
+      min-height:100vh!important;
+      height:auto!important;
+      overflow:visible!important;
+      padding-bottom:24px;
+    }
+    body.cardlib-open #overlay>.photo-studio-v3.studio-index-layout>.library-head {
+      grid-template-columns:1fr!important;
+      grid-template-areas:'title' 'tools'!important;
+      min-height:60px!important;
+      padding:10px 32px!important;
+    }
+    .mount-board-tools {
+      display:flex;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:12px 24px;
+      padding:14px clamp(16px,3vw,40px);
+      color:#e7dece;
+      border-bottom:1px solid rgba(212,175,122,.2);
+      background:rgba(10,7,6,.28);
+      font:14px/1.5 var(--font-ui,sans-serif);
+    }
+    .mount-board-tools strong { color:#f2dfbd; font-weight:600; }
+    .mount-board-tools label { display:inline-flex; align-items:center; gap:8px; cursor:pointer; }
+    body.cardlib-open #overlay>.photo-studio-v3>.clib-main {
+      display:block!important;
+      min-height:0!important;
+      height:auto!important;
+      overflow:visible!important;
+      padding:18px clamp(16px,3vw,40px) 32px!important;
+    }
+    body.cardlib-open #overlay>.photo-studio-v3>.clib-main::after { display:none!important; }
+    body.cardlib-open #overlay>.photo-studio-v3 #mount-board {
+      display:grid!important;
+      grid-template-columns:repeat(4,minmax(0,220px))!important;
+      justify-content:center;
+      align-items:start;
+      gap:18px 24px!important;
+      width:100%;
+      height:auto!important;
+      min-height:0!important;
+      max-height:none!important;
+      overflow:visible!important;
+      padding:12px!important;
+      background:none!important;
+    }
+    #mount-board .mount-sample {
+      min-width:0;
+      padding-top:5px;
+    }
+    #mount-board .lib-item { min-width:0; }
+    #mount-board .lib-cardwrap {
+      display:block;
+      width:100%;
+      padding:0;
+      border:0;
+      background:transparent;
+      cursor:default;
+    }
+    #mount-board .studio-photo-paper { width:100%; }
+    #mount-board .studio-photo-art { display:block; aspect-ratio:4/3; overflow:hidden; }
+    #mount-board .studio-photo-art img {
+      display:block;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+    #mount-board .studio-photo-caption { min-height:44px; }
+    #mount-board .mount-sample-name {
+      margin:0 0 12px;
+      color:#e8d8b8;
+      font:600 14px/1.4 var(--font-ui,sans-serif);
+      letter-spacing:.04em;
+      text-align:center;
+    }
+    #mount-board.mount-board-grayscale .mount-sample-photo { filter:grayscale(1); }
+    #mount-board.mount-board-hide-text .mount-sample-photo .studio-photo-caption { visibility:hidden!important; }
+    @media(max-width:800px) {
+      body.cardlib-open #overlay>.photo-studio-v3 #mount-board { grid-template-columns:repeat(2,minmax(0,220px))!important; }
+    }
+  </style>
+</head>
+<body class="cardlib-open">
+  <div id="overlay">
+    <main class="photo-studio-v3 studio-index-layout">
+      <header class="library-head">
+        <div class="library-title"><h2>照相馆 · 装裱研究</h2></div>
+      </header>
+      <div class="mount-board-tools">
+        <strong>同一原图比较边框工艺；夹子造型统一，颜色随稀有度变化。</strong>
+        <label for="mount-board-grayscale"><input id="mount-board-grayscale" type="checkbox">去色对照</label>
+        <label for="mount-board-hide-text"><input id="mount-board-hide-text" type="checkbox">隐藏文字</label>
+      </div>
+      <section class="clib-main" aria-label="八档照片装裱对照">
+        <div class="lib-grid" id="mount-board"></div>
+      </section>
+    </main>
+  </div>
+  <script type="module">
+    import { photoMountFor } from '/src/photo-studio-presentation.js';
+
+    const samples = [
+      ['初始', 'proof'],
+      ['古朴', 'plain'],
+      ['稀有', 'rare'],
+      ['史诗', 'epic'],
+      ['传说', 'legendary'],
+      ['衍生', 'derived'],
+      ['职业', 'class'],
+      ['棱彩', 'prismatic'],
+    ];
+    const board = document.getElementById('mount-board');
+    board.innerHTML = samples.map(([rarity], index) => {
+      const mount = photoMountFor(rarity);
+      return `<article class="mount-sample lib-item" data-i="${index}" style="--photo-tilt:0deg;--photo-delay:0ms">
+        <p class="mount-sample-name">${rarity}</p>
+        <div class="mount-sample-photo lib-cardwrap studio-photo rv${index}">
+          <span class="studio-photo-paper" data-photo-mount="${mount.kind}">
+            <span class="studio-mount-mark" aria-hidden="true"></span>
+            <span class="studio-photo-art"><img src="/assets/thumbs/cards/curse-drain.webp" alt="禁咒I相片原画"></span>
+            <span class="studio-photo-caption">
+              <b data-studio-rarity="${rarity}">禁咒I</b>
+            </span>
+          </span>
+        </div>
+      </article>`;
+    }).join('');
+
+    document.getElementById('mount-board-grayscale').addEventListener('change', event => {
+      board.classList.toggle('mount-board-grayscale', event.currentTarget.checked);
+    });
+    document.getElementById('mount-board-hide-text').addEventListener('change', event => {
+      board.classList.toggle('mount-board-hide-text', event.currentTarget.checked);
+    });
+  </script>
+</body>
+</html>
