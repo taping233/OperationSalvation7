@@ -1,33 +1,54 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { PHOTO_NOTE_PLACEHOLDER, photoNoteFor, savePhotoNote } from '../game/src/card-photo-notes.js';
-import notesData from '../game/data/card-notes.json';
 
 describe('卡牌备注（底稿+手写两层）', () => {
-  it('非底稿卡且未手写时返回空值，由界面展示统一占位文本', () => {
+  it('非底稿卡且未手写时返回空值，不沿用旧 note 字段', () => {
     localStorage.clear();
     expect(photoNoteFor({ id: 'x', type: '道具', note: '旧自动文案' })).toBe('');
-    expect(PHOTO_NOTE_PLACEHOLDER).toContain('备注');
   });
 
-  it('底稿卡未手写时返回 data/card-notes.json 的永久备注', () => {
+  it('底稿为空时，未手写卡和清空手写后都返回空值', async () => {
     localStorage.clear();
-    const card = { id: 'pet-egg', name: '宠物蛋', type: '资源' };
-    expect(photoNoteFor(card)).toBe(String(notesData.notes['pet-egg']).trim());
+    const card = { id: 'empty-base-card', name: '无底稿卡', type: '资源' };
+    vi.doMock('../game/data/card-notes.json', () => ({
+      default: { version: 1, _comment: 'isolated empty fixture', notes: {} },
+    }));
+    vi.resetModules();
+    try {
+      const { photoNoteFor: photoNoteForWithoutBase, savePhotoNote: savePhotoNoteWithoutBase } =
+        await import('../game/src/card-photo-notes.js');
+      expect(photoNoteForWithoutBase(card)).toBe('');
+      savePhotoNoteWithoutBase(card, '临时手写');
+      savePhotoNoteWithoutBase(card, '   ');
+      expect(photoNoteForWithoutBase(card)).toBe('');
+      expect(PHOTO_NOTE_PLACEHOLDER).toContain('备注');
+    } finally {
+      vi.doUnmock('../game/data/card-notes.json');
+      vi.resetModules();
+      localStorage.clear();
+    }
   });
 
-  it('按卡牌 id 保存手写记录，且优先于底稿', () => {
+  it('有底稿时默认展示底稿，手写优先且清空后回落底稿', async () => {
     localStorage.clear();
     const card = { id: 'pet-egg', name: '宠物蛋', type: '资源' };
-    expect(savePhotoNote(card, '  我来写的文案  ')).toBe('我来写的文案');
-    expect(photoNoteFor(card)).toBe('我来写的文案');
-  });
-
-  it('清空输入会删除手写备注并回落底稿', () => {
-    localStorage.clear();
-    const card = { id: 'pet-egg', name: '宠物蛋', type: '资源' };
-    savePhotoNote(card, '临时文案');
-    savePhotoNote(card, '   ');
-    expect(photoNoteFor(card)).toBe(String(notesData.notes['pet-egg']).trim());
+    vi.doMock('../game/data/card-notes.json', () => ({
+      default: { version: 1, _comment: 'isolated fixture', notes: { 'pet-egg': 'fixture 底稿' } },
+    }));
+    vi.resetModules();
+    try {
+      const { photoNoteFor: photoNoteForWithBase, savePhotoNote: savePhotoNoteWithBase } =
+        await import('../game/src/card-photo-notes.js');
+      expect(photoNoteForWithBase(card)).toBe('fixture 底稿');
+      expect(savePhotoNoteWithBase(card, '  我来写的文案  ')).toBe('我来写的文案');
+      expect(photoNoteForWithBase(card)).toBe('我来写的文案');
+      savePhotoNoteWithBase(card, '   ');
+      expect(photoNoteForWithBase(card)).toBe('fixture 底稿');
+    } finally {
+      vi.doUnmock('../game/data/card-notes.json');
+      vi.resetModules();
+      localStorage.clear();
+    }
   });
 
   it('不同卡牌的备注互不覆盖', () => {

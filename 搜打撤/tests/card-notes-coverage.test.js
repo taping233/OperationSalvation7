@@ -1,11 +1,8 @@
-/* 卡牌备注守卫（2026-09-20 老板定版：全量永久备注进数据库）：
+/* 卡牌备注守卫（2026-09-20 老板定版：永久底稿允许为空）：
  *
- * 底稿 = game/data/card-notes.json（惊悚乐园腔，255 条全量）。
- * 双向断言，防两头脱节：
- *   1. 现役卡每张都必须有备注条目 —— 新卡漏配直接红灯；
- *   2. 备注条目的 id 都必须存在于现役卡库 —— 卡 id 退役/改名后旧条目成为死数据，
- *      同 card-art-coverage 的"落错名"事故口径；
- *   3. 文案质量底线：非空、≤60 字、全库无重复句（防偷懒复制）。
+ * 对已有条目做守卫，空对象是有效底稿：
+ *   1. 备注条目的 id 都必须存在于现役卡库；
+ *   2. 文案非空、≤60 字、全库无重复句。
  * 同步链与 battle-all-cards.test.js 同口径（ensureSha/Starters/Tabletop 含 TT11 退役替换），
  * all() 结果即实机现役卡库。
  */
@@ -31,13 +28,7 @@ beforeAll(() => {
   allCards = C.all();
 });
 
-describe('卡牌备注守卫：覆盖与死条目', () => {
-  it('现役卡库每张卡都有备注条目（新卡漏配 = 红灯）', () => {
-    const missing = allCards.filter(c => !String(notesData.notes[c.id] || '').trim());
-    expect(missing.map(c => `${c.id}（${c.name}）`), `以下现役卡缺备注，请在 game/data/card-notes.json 补齐: ` +
-      missing.map(c => c.id).join(', ')).toEqual([]);
-  });
-
+describe('卡牌备注守卫：已有条目 id 有效', () => {
   it('备注条目的 id 都能在现役卡库找到（退役/改名的死条目 = 红灯）', () => {
     const ids = new Set(allCards.map(c => c.id));
     const stale = Object.keys(notesData.notes).filter(id => !ids.has(id));
