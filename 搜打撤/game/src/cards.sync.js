@@ -4,6 +4,15 @@ const SDT = window.SDT;   // ESM 垫片（与 cards.js 同源，main.js 加载�
 import { KEY, TT7_KEY_V2, TT8_KEY, TT10_KEY, TT11_KEY, ITEM_RENAME_KEY, EVENTS_0919_KEY, RETIRE_TT10, RETIRE_TT11, CC_KEY, CLASSES } from './cards.consts.js';
 import { Random } from './random.js';
 import { DATA } from './data-loader.js';
+// 历史批次 key 可能独立重播；即使 live-sync 已标记，也不能写回旧语义或复活退役卡。
+// 同 id 以定版字段为准，定版未携带的 art 等仓库元数据继续取历史快照。
+const cardsSyncById = new Map(DATA.cardsSync.cards.map(card => [card.id, card]));
+const cardsSyncRetired = new Set(DATA.cardsSync.retire);
+const canonicalTabletopSnapshot = (snapshot) => {
+  if (cardsSyncRetired.has(snapshot.id)) return null;
+  const current = cardsSyncById.get(snapshot.id);
+  return current ? { ...snapshot, ...current } : snapshot;
+};
 export const syncSlice = {
 
     // 伤害类型词条回填：只补缺失值，绝不覆盖玩家已标注的 dmgType（每次启动运行）
@@ -241,9 +250,9 @@ export const syncSlice = {
         if (localStorage.getItem(TT10_KEY)) return;
         const cards = SDT.Cards.all();
         for (let i = cards.length - 1; i >= 0; i--) {
-          if (RETIRE_TT10.includes(cards[i].id)) cards.splice(i, 1);
+          if (RETIRE_TT10.includes(cards[i].id) || cardsSyncRetired.has(cards[i].id)) cards.splice(i, 1);
         }
-        SDT.Cards.TABLETOP10.forEach(d => {
+        SDT.Cards.TABLETOP10.map(canonicalTabletopSnapshot).filter(Boolean).forEach(d => {
           const i = cards.findIndex(c => c.id === d.id);
           if (i >= 0) cards[i] = { ...d }; else cards.push({ ...d });
         });
@@ -278,9 +287,9 @@ export const syncSlice = {
         if (localStorage.getItem(TT11_KEY)) return;
         const cards = SDT.Cards.all();
         for (let i = cards.length - 1; i >= 0; i--) {
-          if (RETIRE_TT11.includes(cards[i].id) || cards[i].name === '新兵操典') cards.splice(i, 1);
+          if (RETIRE_TT11.includes(cards[i].id) || cardsSyncRetired.has(cards[i].id) || cards[i].name === '新兵操典') cards.splice(i, 1);
         }
-        SDT.Cards.TABLETOP11.forEach(d => {
+        SDT.Cards.TABLETOP11.map(canonicalTabletopSnapshot).filter(Boolean).forEach(d => {
           const i = cards.findIndex(c => c.id === d.id);
           if (i >= 0) cards[i] = { ...d }; else cards.push({ ...d });
         });
