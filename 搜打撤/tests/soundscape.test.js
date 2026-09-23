@@ -40,4 +40,21 @@ describe('冬境声景节点生命周期', () => {
     expect(scape.nodes).toHaveLength(0);
     expect(scape.mode).toBe(null);
   });
+
+  it('压力层随战斗压力平滑抬升，首脑态锁定最高压力', () => {
+    const scape = new WinterSoundscape(fakeContext(), {});
+    scape.setMode('battle');
+    scape.setPressure(0.5);
+    expect(scape.pressure).toBe(0.5);
+    expect(scape.pressureGain.gain.targets.at(-1)).toBe(0.006);
+    expect(scape.tensionGain.gain.targets.at(-1)).toBe(0.034);
+    scape.setBoss(true);
+    expect(scape.pressure).toBe(1);
+    scape.setPressure(0.1);
+    expect(scape.pressure).toBe(1);
+    expect(scape.pressureGain.gain.targets.at(-1)).toBe(0.012);
+    scape.setBoss(false);
+    expect(scape.pressure).toBe(0);
+    scape.destroy();
+  });
 });

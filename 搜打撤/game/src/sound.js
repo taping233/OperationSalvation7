@@ -27,6 +27,7 @@ const battleBgm = new Howl({ src: [BATTLE_BGM_URL], loop: true, html5: false, pr
   const dbGain = k => Number(k) <= 0 ? 0 : Math.pow(10, ((Math.min(1, Number(k)) - 1) * 30) / 20);
   // 战斗 ducking：战斗期间 BGM 侧链压低（audio-design），结束恢复
   let ducked = false;
+  let battleBoss = false, battlePressure = 0;
   try {
     muted = localStorage.getItem('sdt-muted') === '1';
     musicOff = localStorage.getItem('sdt-music-off') === '1';
@@ -52,6 +53,8 @@ const battleBgm = new Howl({ src: [BATTLE_BGM_URL], loop: true, html5: false, pr
     clickComp.threshold.value = -14; clickComp.ratio.value = 4;
     clickGain.connect(clickComp); clickComp.connect(sfxGain);
     scape = new WinterSoundscape(ctx, master);
+    if (battleBoss) scape.setBoss(true);
+    else if (battlePressure > 0) scape.setPressure(battlePressure);
     loadClicks();
     loadHovers();
     loadSwitches();
@@ -193,6 +196,10 @@ const battleBgm = new Howl({ src: [BATTLE_BGM_URL], loop: true, html5: false, pr
     draw:       [1, 2, 3, 4].map(i => assetUrl(`assets/sfx/battle/draw-${i}.ogg`)),
     shuffle:    [1].map(i => assetUrl(`assets/sfx/battle/shuffle-${i}.ogg`)),
     card:       [1, 2, 3, 4].map(i => assetUrl(`assets/sfx/battle/cardPlace-${i}.ogg`)),
+    cardSelect: [assetUrl('assets/sfx/battle/additions/card-select.ogg')],
+    discard:    [assetUrl('assets/sfx/battle/additions/card-discard.ogg')],
+    shieldUp:   [assetUrl('assets/sfx/battle/additions/shield-up.ogg')],
+    kill:       [assetUrl('assets/sfx/battle/additions/kill-impact.ogg')],
   };
   // 采样峰值统一到 95% 后偏响，按键系数压回（参考原合成音的相对响度）
   const BATTLE_GAIN = {
@@ -200,6 +207,9 @@ const battleBgm = new Howl({ src: [BATTLE_BGM_URL], loop: true, html5: false, pr
     chestShake: 0.5, chestBurst: 0.65, reveal: 0.45, legend: 0.55,
     victory: 0.5, defeat: 0.5,
     draw: 0.45, shuffle: 0.5, card: 0.5,
+    cardSelect: 0.34, discard: 0.3, burn: 0.38, kill: 0.28, danger: 0.38,
+    energyUp: 0.25, energyDown: 0.28, shieldUp: 0.22, shieldBreak: 0.48,
+    phase: 0.28, rarePlay: 0.42, curseEnd: 0.34,
     strike: 0.55,
   };
   // 敌我方向分化（音频 P2#10）：我打敌（hit）=升 rate 更亮更利；敌打我（hurt）=降 rate+低通更闷更沉，
@@ -269,6 +279,20 @@ const battleBgm = new Howl({ src: [BATTLE_BGM_URL], loop: true, html5: false, pr
     pick:   () => { noise({ dur: .06, vol: .04, fHi: 2000, fLo: 800 }); tone({ f: 520, f2: 720, type: 'triangle', dur: .07, vol: .035 }); },
     drop:   () => { noise({ dur: .07, vol: .045, fHi: 1200, fLo: 400 }); tone({ f: 480, f2: 300, type: 'triangle', dur: .09, vol: .04 }); },
     card:   () => { noise({ dur: .13, vol: .055, fHi: 2600, fLo: 700 }); tone({ f: 520, f2: 300, type: 'triangle', dur: .1, vol: .03 }); },
+    cardSelect: () => { tone({ f: 740, f2: 1040, type: 'sine', dur: .055, vol: .022 }); },
+    discard: () => { noise({ dur: .11, vol: .026, fHi: 2100, fLo: 500 }); tone({ f: 420, f2: 260, type: 'triangle', dur: .1, vol: .022 }); },
+    burn: () => { noise({ dur: .22, vol: .028, fHi: 1800, fLo: 180, type: 'lowpass' }); tone({ f: 560, f2: 120, type: 'sine', dur: .2, vol: .025 }); },
+    kill: () => { tone({ f: 180, f2: 72, type: 'triangle', dur: .18, vol: .055 }); noise({ dur: .07, vol: .026, fHi: 900, fLo: 180 }); },
+    danger: () => { tone({ f: 520, f2: 390, type: 'sine', dur: .16, vol: .03 }); tone({ f: 520, f2: 390, type: 'sine', dur: .16, vol: .03, delay: .21 }); },
+    energyUp: () => { tone({ f: 540, f2: 810, type: 'triangle', dur: .1, vol: .027 }); },
+    energyDown: () => { tone({ f: 620, f2: 360, type: 'triangle', dur: .1, vol: .027 }); },
+    shieldUp: () => { tone({ f: 460, f2: 780, type: 'triangle', dur: .14, vol: .03 }); tone({ f: 1120, type: 'sine', dur: .07, vol: .016, delay: .05 }); },
+    shieldBreak: () => { noise({ dur: .13, vol: .04, fHi: 3200, fLo: 420 }); tone({ f: 720, f2: 120, type: 'triangle', dur: .16, vol: .032 }); },
+    phase: (opts = {}) => opts.side === 'foe'
+      ? tone({ f: 230, f2: 110, type: 'sine', dur: .2, vol: .033 })
+      : (tone({ f: 520, f2: 650, type: 'triangle', dur: .08, vol: .024 }), tone({ f: 700, f2: 940, type: 'triangle', dur: .12, vol: .026, delay: .08 })),
+    rarePlay: () => [587, 740, 988].forEach((f, i) => tone({ f, type: 'triangle', dur: .15, vol: .025, delay: i * .055 })),
+    curseEnd: () => { tone({ f: 380, f2: 170, type: 'sawtooth', dur: .14, vol: .022 }); noise({ dur: .06, vol: .017, fHi: 1700, fLo: 450, delay: .08 }); },
     hit:    () => { noise({ dur: .12, vol: .09, fHi: 900, fLo: 130, type: 'lowpass' }); tone({ f: 150, f2: 55, type: 'sine', dur: .16, vol: .1 }); },
     hurt:   () => { noise({ dur: .16, vol: .09, fHi: 1300, fLo: 220 }); tone({ f: 220, f2: 70, type: 'sawtooth', dur: .2, vol: .05 }); },
     curse:  () => tone({ f: 300, f2: 170, type: 'sawtooth', dur: .18, vol: .035 }),
@@ -368,6 +392,11 @@ const battleBgm = new Howl({ src: [BATTLE_BGM_URL], loop: true, html5: false, pr
           : 0.95 + Random.random('audio') * 0.1) * ((opts && opts.rateScale) || 1);
         const g = ctx.createGain();
         g.gain.value = BATTLE_GAIN[name] || 0.5;
+        if (name === 'shieldUp') {
+          const t = ctx.currentTime;
+          g.gain.setValueAtTime(g.gain.value, t);
+          g.gain.linearRampToValueAtTime(0, t + 0.42);
+        }
         if (shape && shape.lowpass) {
           const lp = ctx.createBiquadFilter();
           lp.type = 'lowpass'; lp.frequency.value = shape.lowpass;
@@ -376,7 +405,8 @@ const battleBgm = new Howl({ src: [BATTLE_BGM_URL], loop: true, html5: false, pr
           src.connect(g);
         }
         g.connect(sfxGain);
-        src.start();
+        if (name === 'shieldUp') src.start(0, 0, Math.min(0.42, src.buffer.duration));
+        else src.start();
         return;
       } catch (e) { /* 落入合成回退 */ }
     }
@@ -385,11 +415,12 @@ const battleBgm = new Howl({ src: [BATTLE_BGM_URL], loop: true, html5: false, pr
     if (playJsfx(name)) return;
     const fn = SFX[name];
     if (!fn) return;
-    try { fn(); } catch (e) { /* 静默 */ }
+    try { fn(opts); } catch (e) { /* 静默 */ }
   }
 
   /* ---------- 文件背景乐 ---------- */
   let musicMode = null;
+  const fadeTokens = new WeakMap();
   // 自动播放策略：首次交互前 BGM 必然无声。此时不触发 play()——preload:false 的 Howl
   // 会在 play() 时立即 load（标题曲 3.7MB），把启动带宽让给首屏图与字体；首次交互 kick() 后再开播。
   let userGestured = false;
@@ -409,19 +440,30 @@ const battleBgm = new Howl({ src: [BATTLE_BGM_URL], loop: true, html5: false, pr
     const cur = activeBgm();
     const target = BASE_MUSIC * dbGain(musicVol) * (ducked ? 0.45 : 1);
     [bgm, titleBgm, battleBgm].forEach(track => {
-      track.mute(!originalOn || track !== cur);
-      if ((!originalOn || track !== cur) && track.playing()) {
+      const shouldRun = originalOn && track === cur;
+      const token = (fadeTokens.get(track) || 0) + 1;
+      fadeTokens.set(track, token);
+      if (!shouldRun && track.playing()) {
+        const visibleNow = typeof document === 'undefined' || !document.hidden;
+        if (musicOff || !visibleNow || muted) {
+          track.mute(true); track.pause();
+          if (track === battleBgm && musicMode !== 'battle' && track.state() === 'loaded') track.unload();
+          return;
+        }
+        // 淡出期间保持未静音；先 mute() 会直接截断 Howler 音量曲线。
+        track.mute(false);
         track.fade(track.volume(), 0, 280);
         setTimeout(() => {
-          const leaveOriginal = !musicMode || muted || musicOff || document.hidden || musicSource !== 'original';
-          if (track !== activeBgm() || leaveOriginal) {
-            track.pause();
-            // 战斗曲 WebAudio 解码 PCM 驻留大（~90MB float32）：仅在确认切走曲目时卸载释放，
-            // 页签隐藏（musicMode 仍为 'battle'）只暂停，回来免重载
+          if (fadeTokens.get(track) !== token) return;
+          const isVisibleNow = typeof document === 'undefined' || !document.hidden;
+          const stillInactive = track !== activeBgm() || !musicMode || muted || musicOff || !isVisibleNow || musicSource !== 'original';
+          if (stillInactive) {
+            track.pause(); track.mute(true);
+            // 战斗曲 WebAudio 解码 PCM 驻留大：确认切走后卸载；隐藏页面仍保留解码。
             if (track === battleBgm && musicMode !== 'battle' && track.state() === 'loaded') track.unload();
           }
         }, 300);
-      }
+      } else if (!shouldRun) track.mute(true);
     });
     if (!originalOn) return;
     cur.mute(false);
@@ -436,7 +478,12 @@ const battleBgm = new Howl({ src: [BATTLE_BGM_URL], loop: true, html5: false, pr
   }
   function music(mode) {
     if (mode === musicMode) { syncBgm(); return; }
-    musicMode = mode || null;
+    const nextMode = mode || null;
+    if (musicMode === 'battle' && nextMode !== 'battle') {
+      battlePressure = 0;
+      if (scape && !battleBoss) scape.setPressure(0);
+    }
+    musicMode = nextMode;
     syncBgm();
   }
   function setMuted(m) {
@@ -468,7 +515,12 @@ const battleBgm = new Howl({ src: [BATTLE_BGM_URL], loop: true, html5: false, pr
   }
   // BOSS 紧张垫开关（音频 P2#12）：声景 battle 层旁路+tension 抬升，与正曲叠加出首脑战压迫感
   function setBoss(on) {
+    battleBoss = !!on;
     if (scape) scape.setBoss(on);
+  }
+  function setBattlePressure(value) {
+    battlePressure = Math.max(0, Math.min(1, Number(value) || 0));
+    if (scape) scape.setPressure(value);
   }
   // 只关音效（设置页）
   function setSfxMuted(m) {
@@ -479,10 +531,7 @@ const battleBgm = new Howl({ src: [BATTLE_BGM_URL], loop: true, html5: false, pr
   function setMusicVolume(v) {
     musicVol = Math.min(1, Math.max(0, +v || 0));
     try { localStorage.setItem('sdt-music-vol', String(musicVol)); } catch (e) {}
-    const target = BASE_MUSIC * dbGain(musicVol) * (ducked ? 0.45 : 1);
-    bgm.volume(target);
-    titleBgm.volume(target);
-    if (scape) scape.setVolume(target * 0.32);
+    syncBgm();
   }
   function setSfxVolume(v) {
     sfxVol = Math.min(1, Math.max(0, +v || 0));
@@ -532,7 +581,7 @@ const battleBgm = new Howl({ src: [BATTLE_BGM_URL], loop: true, html5: false, pr
   });
 
   sdtDefine('Sound', {
-    sfx, music, setMuted, setMusicMuted, setMusicSource, setSfxMuted, setMusicVolume, setSfxVolume, setDucked, setBoss, ensure,
+    sfx, music, setMuted, setMusicMuted, setMusicSource, setSfxMuted, setMusicVolume, setSfxVolume, setDucked, setBoss, setBattlePressure, ensure,
     get muted() { return muted; },
     get musicMuted() { return musicOff; },
     get sfxMuted() { return sfxOff; },

@@ -124,7 +124,9 @@ import { processDelayed, accrueGrowth, resolveCard, syncCurseCondEquips, applyKi
           const guard = allies.find(a => !a.dead && !a.statless);
           if (guard) {
             floats.push({ unit: foes.indexOf(foe), text: '', cls: 'lungefx' });   // 攻击前摇：敌人前倾
+            const shieldBefore = guard.defense?.shield || 0;
             const ar = Combat.dealDamage({ atk: foe.atk }, guard, 0, Combat.TYPES.ATTACK);
+            if (shieldBefore > 0 && !(guard.defense?.shield || 0)) SDT.Sound.sfx('shieldBreak');
             SDT.Sound.sfx('hurt');
             floats.push({ unit: 'ally:' + allies.indexOf(guard), text: '-' + ar.dealt, cls: 'hurt' });
             G.log(`[[icon:runner]] <b>${esc(guard.name)}</b> 替你承受了 <b>${ar.dealt}</b> 点攻击伤害（${Math.max(0, guard.hp)}/${guard.maxHp}）`, 'sys');
@@ -135,7 +137,9 @@ import { processDelayed, accrueGrowth, resolveCard, syncCurseCondEquips, applyKi
             continue;
           }
           floats.push({ unit: foes.indexOf(foe), text: '', cls: 'lungefx' });   // 攻击前摇：敌人前倾
+          const shieldBefore = pdef.shield || 0;
           const dealt = playerTakeHit(foe);
+          if (shieldBefore > 0 && !(pdef.shield || 0)) SDT.Sound.sfx('shieldBreak');
           // 敌人造成伤害也会破除它自己的潜行
           if (dealt > 0 && Combat.breakStealth(foe)) {
             G.log(`[[icon:runner]] <b>${esc(foe.name)}</b> 发动了攻击，<b>潜行</b>被破除`, 'dim');
@@ -154,6 +158,7 @@ import { processDelayed, accrueGrowth, resolveCard, syncCurseCondEquips, applyKi
             const ph = foe.phase || 1;
             if (ph === 1) {
               const keys = ['bleed', 'poison', 'silence', 'abreak', 'healban', 'burn'];
+              SDT.Sound.sfx('danger');
               addPlayerCurse(keys[Math.floor(Random.random('battle') * keys.length)], 1, foe);
               G.log('[[icon:fire]] 远古龙尊的吐息附加了一层随机诅咒（冰冻除外）', 'warn');
             } else if (ph === 2) {
@@ -163,6 +168,7 @@ import { processDelayed, accrueGrowth, resolveCard, syncCurseCondEquips, applyKi
           }
           // 行为型附加：灼热异变体（攻击并灼烧）/ 滋生异变体（攻击并施加诅咒）
           if (dealt > 0 && foe.behavior === 'burn') {
+            SDT.Sound.sfx('danger');
             addPlayerCurse('burn', 2, foe);
             SDT.Sound.sfx('curse');
             G.log(`[[icon:fire]] <b>${esc(foe.name)}</b> 的攻击附加了<b>灼烧</b>（2 回合内每回合结束受 1 点固定伤害）`, 'warn');
@@ -183,6 +189,7 @@ import { processDelayed, accrueGrowth, resolveCard, syncCurseCondEquips, applyKi
     if (holyRune && turn <= 3) {
       const n = timeRune ? 8 : 4;   // 时光符文：回合结束效果触发 2 次
       pdef.armor += n;
+      SDT.Sound.sfx('shieldUp');
       G.log('[[icon:shield]] <b>圣洁符文</b>：回合结束获得 ' + n + ' 点护甲（' + pdef.armor + '）', 'sys');
     }
     // —— 敌人回合结束：中毒 / 灼烧结算 + 词缀 ——
@@ -204,7 +211,7 @@ import { processDelayed, accrueGrowth, resolveCard, syncCurseCondEquips, applyKi
         floats.push({ unit: foes.indexOf(foe), text: '-' + burnDealt, cls: 'dmg', tintKey: 'burn' });
         G.log(`[[icon:fire]] 灼烧结算：<b>${esc(foe.name)}</b> 受到 <b>${burnDealt}</b> 点固定伤害（${Math.max(0, foe.hp)}/${foe.maxHp}）`, 'sys');
       }
-      resolveFoeDefeat(foe, '毒发倒地');
+      if (resolveFoeDefeat(foe, '毒发倒地')) SDT.Sound.sfx('kill');
     });
     if (!alive().length) { set$busy(false); finish(true); return; }
     applyKillRewards(null, aliveBeforeTick - alive().length);   // 毒杀计入饮血剑击杀层数
@@ -283,7 +290,12 @@ import { processDelayed, accrueGrowth, resolveCard, syncCurseCondEquips, applyKi
       const fbPool = SDT.Cards.all().filter(c => String(c.name || '').includes('火球') && c.type === '法术');
       if (fbPool.length) {
         const fb = fbPool[Math.floor(Random.random('battle') * fbPool.length)];
-        resolveCard(fb, alive()[0] || null, false, 0);
+        const target = alive()[0] || null;
+        if (target) {
+          cardAnims.push({ kind: 'surge', i: 1, n: 1, sourceName: '火球符文', name: fb.name, target: foes.indexOf(target), targetName: target.name, card: { ...fb } });
+          G.log(`[[icon:fire]] <b>火球符文</b>：随机释放【${esc(fb.name)}】→ <b>${esc(target.name)}</b>`, 'loot');
+        }
+        resolveCard(fb, target, false, 0);
       }
     }
     // —— 新回合开始：「回合开始时」延迟段结算 ——
@@ -300,6 +312,10 @@ import { processDelayed, accrueGrowth, resolveCard, syncCurseCondEquips, applyKi
     set$battleState(transitionBattle(battleState, BATTLE_PHASES.PLAYER));
     set$busy(false);
     if (G.persistSave && G.battleActive) { set$lastPersistAt(performance.now()); G.persistSave(); }   // 回合开始落盘（无条件，同步节流时钟）
+    if (typeof SDT.Sound?.setBattlePressure === 'function') {
+      const hpRatio = G.maxHp > 0 ? G.hp / G.maxHp : 1;
+      SDT.Sound.setBattlePressure(Math.max(0, Math.min(1, 1 - hpRatio)));
+    }
     requestBattleRender();
   }
 
@@ -308,6 +324,7 @@ import { processDelayed, accrueGrowth, resolveCard, syncCurseCondEquips, applyKi
     const expired = Combat.tickDurations(target);
     expired.forEach(k => G.log(`[[icon:sparkles]] ${esc(who)} 的<b>${meta(k).name}</b>效果结束了`, 'dim'));
     if (expired.some(k => Combat.BUFF_META[k])) SDT.Sound.sfx('buffDown');   // 增益到期=轻碎裂提示（音频 P2#6，与挂上音成对）
+    if (expired.some(k => Combat.CURSE_META[k])) SDT.Sound.sfx('curseEnd');
   }
 
   

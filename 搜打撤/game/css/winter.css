@@ -151,13 +151,14 @@ body.page-opaque #sidebar{visibility:hidden}
 /* ===== 选档页留言落地（#15 #16 #17 #18） ===== */
 /* #16 #17 左上 HUD 已在结构中移除 */
 /* #18 「选择存档」中文细体 */
-.slot-page .slot-page-en{font:300 14px var(--font-ui);letter-spacing:12px;text-indent:12px;color:#cfdde2}
+.slot-page .slot-page-en{font:400 20px var(--font-ui);letter-spacing:8px;text-indent:8px;color:#eef3f1}
 /* #15 存档卡：专属背景图 + 雪粒 + 打光 */
 .slot-card{overflow:hidden}
 .slot-card .slot-card-bg{position:absolute;inset:0;z-index:0;background-size:cover;background-position:center;opacity:.5;filter:saturate(.85) brightness(.9)}
-.slot-card .slot-card-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,#0d1b2488 0%,#0d1b2455 42%,#0c1a23e6 100%)}
+.slot-card .slot-card-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,#0d1b2488 0%,#0b1a24b3 40%,#08151cf2 78%,#08151cfa 100%)}
 .slot-card .slot-card-light{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse at 50% -8%,#bfe3ff33,transparent 55%),radial-gradient(ellipse at 50% 112%,#0a141bcc,transparent 62%)}
 .slot-card .slot-card-flakes{position:absolute;inset:0;z-index:1;pointer-events:none}
+.slot-page .slot-card-flakes{opacity:.25}
 .slot-card .slot-card-flakes i{position:absolute;top:-6px;display:block;width:3px;height:3px;border-radius:50%;background:#dfeef5;opacity:0;animation:slotSnow linear infinite}
 .slot-card .slot-card-flakes i:nth-child(1){left:12%;animation-duration:7s;animation-delay:-1s}
 .slot-card .slot-card-flakes i:nth-child(2){left:26%;animation-duration:9s;animation-delay:-4s}
@@ -169,7 +170,7 @@ body.page-opaque #sidebar{visibility:hidden}
 @keyframes slotSnow{0%{transform:translateY(0);opacity:0}10%{opacity:.8}100%{transform:translateY(112%);opacity:0}}
 .slot-card>*:not(.slot-card-bg):not(.slot-card-light):not(.slot-card-flakes){position:relative;z-index:2}
 .slot-card:not(.filled) .slot-card-bg{opacity:.22;filter:saturate(.4) brightness(.6)}
-.slot-card:hover .slot-card-bg{opacity:.72}
+.slot-card:hover .slot-card-bg{opacity:.55}
 .slot-card:hover .slot-card-light{background:radial-gradient(ellipse at 50% -8%,#d8ecff4d,transparent 58%),radial-gradient(ellipse at 50% 112%,#0a141bcc,transparent 62%)}
 .slot-card.slot-art-1 .slot-card-bg{background-image:url('../assets/slot-bg-knight-fantasy.webp');background-size:500% 100%;background-position:0% center}
 .slot-card.slot-art-2 .slot-card-bg{background-image:url('../assets/slot-bg-knight-fantasy.webp');background-size:500% 100%;background-position:25% center}
@@ -265,14 +266,39 @@ body.page-opaque #sidebar{visibility:hidden}
 /* —— 选档页：「返回 BACK」键（2026-09-19 老板：放回左上角——
    09-10 曾因矮窗口被裁沉到左下角，前提是选档卡片 880px 定高居中、卡片顶边在视口外；
    现卡片已改 100%×100% 全屏（卡片顶=视口顶），页头 clamp 留白带保证左上角恒为空区，不再有裁切） —— */
-/* 注意：文字色必须压过 expedition-inventory.css 的 #overlay .pg-back{color:#b7cbd0}
-   （ID 特异度更高且后加载），故选择器也带 #overlay 前缀，否则金底上强制浅灰蓝字、完全看不清 */
-#overlay .pg.slot-page .pg-back{position:absolute;z-index:5;left:22px;top:18px;display:inline-flex;align-items:center;gap:8px;
-  padding:12px 26px;font-size:14px;letter-spacing:3px;color:#2b1f0e;cursor:pointer;border-radius:8px;
-  background:linear-gradient(160deg,#e9cf96,#c9a05a);border:1px solid #f0d9a6;
-  box-shadow:inset 0 1px 0 rgba(255,244,214,.65),0 2px 12px rgba(201,160,90,.35);transition:all .15s}
-#overlay .pg.slot-page .pg-back:hover{background:linear-gradient(160deg,#f3ddae,#d4ab66);border-color:#ffe9bd;transform:translateY(-1px)}
-#overlay .pg.slot-page .pg-back .en{font:10px 'Cascadia Code';letter-spacing:2px;opacity:.75}
+/* 与主页左上退出键共用图形、58px 尺寸和透明悬停样式。 */
+#overlay:has(.slot-page) #ovCloseX{display:none}
+#overlay .pg.slot-page .pg-back{position:absolute;z-index:5;left:18px;top:16px;display:inline-flex;align-items:center;justify-content:center;
+  width:58px;height:58px;padding:0;color:#e8efe9;cursor:pointer;border-radius:1px;
+  background:none;border:1px solid transparent;box-shadow:none;transition:color .18s,filter .18s,border-color .18s}
+#overlay .pg.slot-page .pg-back:hover{background:none;border-color:var(--akmint);color:#fff;filter:drop-shadow(0 0 8px #a9efc366);transform:none}
+#overlay .pg.slot-page .pg-back svg{width:24px;height:24px}
+.slot-page .slot-card-desc{font-size:14px;line-height:1.55;color:#e3ebf0}
+.slot-page .slot-card-desc .si-line em{color:#bfd1d6;letter-spacing:.16em}
+.slot-page .slot-card-desc .si-progress{padding:7px 8px 8px;margin:0 -8px 10px;background:rgba(5,16,23,.58);border-left:2px solid #d8bc86}
+.slot-page .slot-card-desc .si-progress b{display:block;font-size:16px;line-height:1.45;color:#fff}
+.slot-page .slot-card-status{display:inline-flex;align-items:center;justify-content:center;min-height:24px;margin-top:10px;padding:3px 8px;
+  border:1px solid #8ca7ae66;background:#10252dbb;color:#c7d8dc;font-size:11px;letter-spacing:1px;white-space:nowrap}
+.slot-page .slot-card-status::before{content:'';width:5px;height:5px;margin-right:7px;border-radius:50%;background:#95bfc1}
+.slot-page .slot-state-base .slot-card-status{border-color:#8eb4a377;color:#c5e0d0}
+.slot-page .slot-state-empty .slot-card-status{border-color:#7a8b9366;color:#9eafb5}
+.slot-page .slot-state-empty .slot-card-status::before{background:#829198}
+.slot-page .slot-recent .slot-card-status{border-color:#d8bc86;background:#3a3021cc;color:#f1deb8}
+.slot-page .slot-recent .slot-card-status::before{background:#e9c788}
+.slot-page .slot-card-desc .si-saved{color:#e2d1ac}
+#overlay .slot-page .slot-card-cta{width:100%;min-height:40px;padding:8px 10px;background:#d8bc86;border-color:#f1d7a3;color:#152e3b;font-size:13px;font-weight:600;letter-spacing:2px}
+#overlay .slot-page .slot-card-cta:hover,#overlay .slot-page .slot-card-cta:focus-visible{background:#f0d9a8;border-color:#ffe7b8;color:#122d3a}
+@media (max-height:600px){
+  #overlay .pg.slot-page .slot-deck{padding-top:10px;padding-bottom:16px}
+  .slot-page .slot-card{padding-top:10px;padding-bottom:10px}
+  .slot-page .slot-card-art{flex:0 0 64px;min-height:64px}
+  .slot-page .slot-card-art .slot-ico{width:64px;height:64px}
+  .slot-page .slot-card-name{margin-top:5px}
+  .slot-page .slot-card-status{margin-top:5px;min-height:21px;padding:2px 6px}
+  .slot-page .slot-card-rule{margin:5px 0}
+  .slot-page .slot-card-desc .si-line{margin-bottom:5px}
+  .slot-page .slot-card-desc .si-progress{padding:4px 7px;margin-bottom:5px}
+}
 .pg.slot-page .slot-deck{padding-bottom:34px}
 
 /* —— 基地主页：四面留白 + 壁纸（老板指定图，assets/scenes/hub-wallpaper.webp）

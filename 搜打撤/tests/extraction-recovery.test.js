@@ -89,6 +89,32 @@ describe('撤离整理 paired recovery', () => {
     expect(RunStorage.read(3)).toBeNull();
   });
 
+  it('整理中刷新后可分两次入库、完成并重新建立下一局，资源和卡牌只结算一次', async () => {
+    const h = await harness(1);
+    const started = await h.commands.begin();
+    expect(started.ok).toBe(true);
+    const runId = started.value.runId;
+    const selected = [{ name: card.name, count: 1 }];
+    expect((await h.commands.updateCards(selected, runId, 1)).count).toBe(1);
+
+    // 模拟页面刷新后仅从持久运行档恢复整理页，不沿用内存中的 pending 对象。
+    h.game.pendingExtraction = structuredClone(RunStorage.read(1).pendingExtraction);
+    expect(h.game.pendingExtraction.remainingCards[0].count).toBe(1);
+    expect((await h.newCommands().updateCards(selected, runId, 1)).count).toBe(1);
+    expect(h.game.pendingExtraction.remainingCards).toEqual([]);
+    expect((await h.newCommands().finish(runId, 1)).ok).toBe(true);
+
+    const base = JSON.parse(localStorage.getItem(Base.SLOT_KEY(1)));
+    expect(base.stash.find(stack => stack.card.id === card.id).count).toBe(2);
+    expect(base.wood).toBe(3);
+    expect(base.rations).toBe(2);
+    expect(base.stats.extracts).toBe(1);
+    expect(RunStorage.read(1)).toBeNull();
+
+    expect(RunStorage.write(1, { seed: 'next-run', hp: 30, maxHp: 30 })).toBe(true);
+    expect(RunStorage.readIdentity(1).value.runId).not.toBe(runId);
+  });
+
   it('slot=null只修改内存，即使Base当前指向旧档也不写localStorage', async () => {
     const h = await harness(4);
     const before = localStorage.getItem(Base.SLOT_KEY(4));

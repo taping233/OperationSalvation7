@@ -8,16 +8,64 @@
   --exp-muted: #a2b5c0;
 }
 
-/* Keep the snowbound scene legible while the right rail stays quiet behind text. */
+/* Preserve the illustration's midtones; concentrate contrast behind the controls. */
 #title::after {
-  background: linear-gradient(90deg, #07121c0d 15%, #0917231c 43%, #07131de8 86%),
-    linear-gradient(0deg, #081723a3, #0a182526 42%, #0a18251a 68%);
+  background: linear-gradient(90deg, #07121c0a 18%, #09172312 48%, #07131d80 100%),
+    linear-gradient(0deg, #08172372, transparent 37%);
 }
-#title .title-heading { left: auto; right: 5%; top: 13%; width: clamp(280px, 27vw, 390px); transform: none; }
-#title .title-kicker { color: #b8cbd2; font-size: 9px; letter-spacing: 3px; }
-.winter-wordmark { margin: 10px 0 20px; font: 52px/1.2 'SimSun',serif; font-weight: 400; letter-spacing: 7px; color: #edf0e9; text-shadow: 0 4px 24px #061019; }
-.winter-wordmark small { display: block; font-size: 24px; letter-spacing: 9px; margin-bottom: 8px; color: var(--exp-gold); }
-.winter-edition { display: flex; justify-content: space-between; padding-top: 10px; border-top: 1px solid #b6c6cc44; font: 9px monospace; letter-spacing: 2px; color: #a2b5c0; }
+#title::before {
+  content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: radial-gradient(ellipse 10% 14% at 47% 41%, #ffcb9133, transparent 74%);
+  mix-blend-mode: screen; animation: titleRoseBreath 5.6s ease-in-out infinite alternate;
+}
+@keyframes titleRoseBreath { from { opacity: .35; } to { opacity: .78; } }
+/* The wallpaper is a single image, so use restrained local light to separate its focal points. */
+#title .title-bg::before, #title .title-bg::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+}
+#title .title-bg::before {
+  background: radial-gradient(ellipse 24% 34% at 12% 28%, #081b2c38, transparent 78%),
+    radial-gradient(ellipse 27% 29% at 67% 22%, #081b2c32, transparent 78%);
+}
+#title .title-bg::after {
+  background: radial-gradient(ellipse 17% 24% at 36% 24%, #d8ecff30, transparent 72%),
+    radial-gradient(ellipse 11% 13% at 46% 39%, #ffd5af29, transparent 72%),
+    radial-gradient(ellipse 33% 19% at 45% 78%, #98bdd024, transparent 75%);
+  mix-blend-mode: screen;
+}
+/* Two loose paper corners cross the illustration at the bottom without blocking controls. */
+#title .title-foreground-paper {
+  position: absolute; inset: 0; z-index: 3; pointer-events: none; overflow: hidden;
+}
+#title .title-foreground-paper::before, #title .title-foreground-paper::after {
+  content: ''; position: absolute; display: block;
+  background: linear-gradient(145deg, #b9c4c5c9, #7c959cc2 66%, #536f7aab),
+    url('../assets/ui/photo-studio/paper-grain.png') center / 96px;
+  background-blend-mode: multiply; filter: drop-shadow(0 -5px 8px #06121bb8);
+}
+#title .title-foreground-paper::before {
+  left: 33%; bottom: -7%; width: 11%; height: 11%; transform: rotate(-13deg);
+  clip-path: polygon(4% 0, 98% 5%, 100% 92%, 13% 100%, 0 84%);
+}
+#title .title-foreground-paper::after {
+  left: 43%; bottom: -8%; width: 9%; height: 12%; transform: rotate(12deg);
+  clip-path: polygon(2% 8%, 96% 0, 100% 93%, 8% 100%, 0 77%);
+  opacity: .68;
+}
+#title .title-inner::before {
+  content: ''; position: absolute; inset: 0 0 0 auto; width: 54%;
+  background: radial-gradient(ellipse 95% 78% at 100% 52%, #071723b8, #07172380 48%, transparent 83%);
+  pointer-events: none;
+}
+#title .title-heading { left: auto; right: 3.6%; top: 9.5%; width: clamp(380px, 35vw, 500px); transform: none; }
+#title .title-kicker { display: none; }
+#title .winter-wordmark {
+  width: 100%; aspect-ratio: 3200 / 1486; margin: 0;
+  background: url('../assets/title-wordmark.png') center / contain no-repeat;
+  font-size: 0; line-height: 0; color: transparent; text-shadow: none;
+  filter: brightness(1.3) drop-shadow(0 4px 14px #061019cc);
+}
+#title .winter-wordmark small, #title .winter-edition { display: none; }
 .title-expedition-copy { position: absolute; left: 5.4%; bottom: 11%; color: var(--exp-text); }
 .title-expedition-copy > span { color: var(--exp-gold); font: 10px 'Cascadia Code', monospace; letter-spacing: 3px; }
 .title-expedition-copy p { margin: 14px 0 9px; font: 26px/1.5 'SimSun', serif; letter-spacing: 4px; }
@@ -27,42 +75,89 @@
 #title .ak-user { right: 5%; top: 30px; transform: none; }
 #title .ak-user .ak-ava { width: 40px; height: 40px; }
 #title .ak-lv em { font-style: normal; letter-spacing: 2px; color: var(--exp-muted); }
-/* One cold metal finish for the small controls and the destination plaques. */
-#title .ak-sq, #title .ak-quickref, #title .ak-user,
-#title .ak-banner, #title .ak-circle {
+/* Metal plaques remain on the destinations and archive; the three top-left controls float over the scene. */
+#title .ak-user, #title .ak-banner, #title .ak-circle {
   background: linear-gradient(90deg, #0a1924df, #10232bbd),
     url('../assets/ui/title-plaque-metal-v1.png') center / cover;
   border: 1px solid #b8c7c76b;
   box-shadow: inset 0 0 0 2px #0a1725a8, inset 0 1px #e5eef026, 0 4px 18px #07111b55;
 }
+#title .ak-sq, #title .ak-quickref,
+#title .ak-sq:hover, #title .ak-quickref:hover {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+#title .ak-sq, #title .ak-quickref {
+  color: #f4f7f4;
+  text-shadow: 0 1px 3px #071823, 0 0 8px #071823;
+  filter: drop-shadow(0 1px 2px #071823);
+}
+#title .ak-sq::after { display: none; }
+#title .ak-sq:hover, #title .ak-quickref:hover { color: #fff; filter: drop-shadow(0 1px 2px #071823) drop-shadow(0 0 5px #dcecef9c); }
 #title .ak-quickref { padding-inline: 16px 21px; letter-spacing: 2px; }
 #title .ak-user { padding: 6px 10px; }
+/* A faint rail sits behind the icon tabs and ends at the primary action. */
+#title .ak-hud::before {
+  content: ''; position: absolute; top: 36%; bottom: 11%;
+  right: calc(5% + clamp(280px, 27vw, 390px) + 4px); width: 2px;
+  background: linear-gradient(180deg, transparent, #d8c69a63 12%, #a9c5c450 72%, transparent);
+  box-shadow: 2px 0 10px #071923a8; pointer-events: none;
+}
 #title .ak-banner, #title .ak-circle {
   left: auto; right: 5%; width: clamp(280px, 27vw, 390px); height: 57px;
   display: grid; grid-template-columns: 59px minmax(0, 1fr) auto; grid-template-rows: 1fr 1fr;
   column-gap: 8px; align-items: center; padding: 5px 14px; transform: none;
   color: var(--exp-text); border-left: 2px solid #dfc28d9c;
   border-radius: 0; text-align: left; overflow: visible;
-  transition: background .2s, border-color .2s, transform .2s;
+  box-shadow: inset 0 0 0 2px #0a1725a8, inset 0 1px #e5eef026,
+    -8px 6px 18px #020b1570, 0 7px 20px #020b1570;
+  transition: background .2s, border-color .2s, transform .2s, box-shadow .2s;
 }
 #title .ak-banner { top: 38%; }
 #title .ak-lib { top: 47%; }
 #title .ak-ach { top: 56%; }
 #title .ak-set { top: 65%; }
 #title .ak-circle .c-ring, #title .ak-banner .bn-ico {
-  grid-column: 1; grid-row: 1 / 3; position: relative; left: -20px;
+  grid-column: 1; grid-row: 1 / 3; position: relative; left: -24px;
   width: 61px; height: 61px; border: 0; border-radius: 0;
-  background: none; box-shadow: none; color: var(--exp-gold);
+  background: linear-gradient(145deg, #1e3541, #0a1b27 72%);
+  border: 1px solid #dfc28d75;
+  box-shadow: inset 0 0 0 3px #091923, inset 0 1px #f6e6bc30, 0 5px 13px #020b15a8;
+  color: var(--exp-gold);
 }
 #title .c-ring::after { display: none; }
 #title .c-ring img, #title .bn-ico img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 3px 5px #020a12b8); }
+/* Shared ink-dark vignette behind each painted cutout; the small brass orbit is varied per entry. */
+#title .ak-banner .bn-ico, #title .ak-circle .c-ring {
+  isolation: isolate; overflow: visible; background: transparent; border: 0; box-shadow: none;
+}
+#title .ak-banner .bn-ico svg, #title .ak-circle .c-ring svg { display: none; }
+#title .ak-banner .bn-ico::before, #title .ak-circle .c-ring::before {
+  content: ''; position: absolute; inset: -13px -15px; z-index: 0; pointer-events: none;
+  background: var(--home-icon) center / var(--home-icon-size, 54px) no-repeat,
+    radial-gradient(ellipse 68% 61% at 49% 52%, #02070cf5 18%, #030b11e8 49%, #030b1199 66%, transparent 86%);
+  filter: drop-shadow(0 4px 6px #02070baa);
+}
+#title .ak-banner .bn-ico::after, #title .ak-circle .c-ring::after {
+  content: ''; display: block; position: absolute; z-index: 1; pointer-events: none;
+  left: -5px; top: -7px; width: 18px; height: 18px; border: 1px solid #cba96d9c;
+  border-radius: 50%; box-shadow: inset 0 0 0 3px #04101980, 12px 13px 0 -8px #d9b77b;
+}
+#title .ak-banner .bn-ico { --home-icon: url('../assets/ui/home-icons-v12/workshop-staff.webp'); --home-icon-size: 52px; }
+#title .ak-ach .c-ring { --home-icon: url('../assets/ui/home-icons-v12/achievement-shield.webp'); --home-icon-size: 53px; }
+#title .ak-lib .c-ring { --home-icon: url('../assets/ui/home-icons-v12/photo-orb-book.webp'); --home-icon-size: 51px; }
+#title .ak-set .c-ring { --home-icon: url('../assets/ui/home-icons-v12/settings-gear.webp'); --home-icon-size: 49px; }
+#title .ak-ach .c-ring::after { left: auto; right: -8px; top: 4px; }
+#title .ak-lib .c-ring::after { left: -8px; top: 24px; width: 13px; height: 13px; }
+#title .ak-set .c-ring::after { left: auto; right: -7px; top: -6px; width: 14px; height: 14px; }
 #title .ak-circle .c-cn, #title .ak-banner .bn-cn {
   grid-column: 2; grid-row: 1; align-self: end;
-  font: 600 16px/1.2 var(--font-ui); letter-spacing: 2px; text-shadow: 0 1px 6px #06111ccc; white-space: nowrap;
+  font: 600 17px/1.2 var(--font-ui); letter-spacing: 2px; text-shadow: 0 1px 6px #06111ccc; white-space: nowrap;
 }
 #title .ak-circle .c-en, #title .ak-banner .bn-en {
   grid-column: 2; grid-row: 2; align-self: start; margin: 3px 0 0;
-  font: 9px/1.2 'Cascadia Code', monospace; letter-spacing: .7px; color: #b9c8cf;
+  font: 10px/1.2 'Cascadia Code', monospace; letter-spacing: .7px; color: #b9c8cf;
 }
 #title .ak-circle .c-tag { grid-column: 3; grid-row: 1 / 3; position: static; border: 0; background: none; padding: 0; color: var(--exp-gold); font-size: 11px; }
 #title .ak-banner .bn-arrow { display: none; }
@@ -70,22 +165,157 @@
   background: linear-gradient(90deg, #213b4bd9, #152d3aca),
     url('../assets/ui/title-plaque-metal-v1.png') center / cover;
   border-color: var(--exp-gold); transform: translateX(-4px);
+  box-shadow: inset 0 0 0 2px #0a1725a8, inset 0 1px #e5eef050, 0 8px 28px #020b16a0;
 }
 #title .ak-start {
   right: 5%; bottom: 11%; width: clamp(280px, 27vw, 390px); min-height: 86px; padding: 17px 10px;
-  color: var(--exp-ink); border: 1px solid #f0d5a4; background: linear-gradient(110deg, #e6cfa3, #c5a772);
-  box-shadow: 0 8px 34px #030a1260; border-radius: 2px; gap: 7px;
+  color: var(--exp-ink); border: 1px solid #f0d5a4;
+  background: linear-gradient(160deg, #f0dfba, #d7ba86 58%, #b99761);
+  box-shadow: inset 0 1px #fff3d5, inset 0 -5px 12px #886c4438, 0 10px 36px #030a1280;
+  border-radius: 2px; gap: 7px; overflow: hidden;
 }
-#title .ak-start::before { display: none; }
+#title .ak-start::before {
+  content: ''; display: block; position: absolute; top: -35%; bottom: auto; left: -35%; right: auto;
+  width: 28%; height: 170%; background: linear-gradient(90deg, transparent, #fff9de99, transparent);
+  filter: blur(10px); z-index: 0; pointer-events: none;
+  animation: titleStartGleam 8s ease-in-out infinite;
+}
+@keyframes titleStartGleam {
+  0%, 54% { transform: translateX(0) skewX(-18deg); opacity: 0; }
+  59% { opacity: .35; }
+  76% { transform: translateX(470%) skewX(-18deg); opacity: .42; }
+  82%, 100% { transform: translateX(470%) skewX(-18deg); opacity: 0; }
+}
+#title .ak-start .st-row, #title .ak-start .st-en { position: relative; z-index: 1; }
+#title .ak-start .st-row { gap: 5px; }
+#title .ak-start .st-orn { display: none; }
+#title .ak-start .st-row::before {
+  content: ''; display: block; flex: 0 0 86px; width: 86px; height: 43px;
+  background: url('../assets/ui/home-icons-v12/explore-sword.webp') center / contain no-repeat,
+    radial-gradient(ellipse 58% 42% at 50% 50%, #07111dae, transparent 85%);
+  filter: drop-shadow(0 2px 3px #10202b88);
+}
+#title .ak-start::after { content: ''; position: absolute; inset: 4px; border: 1px solid #7b67445c; pointer-events: none; }
 #title .ak-start .st-cn { font: 27px/1.1 var(--font-ui); letter-spacing: 6px; text-shadow: none; color: #182734; }
 #title .ak-start .st-en { color: #38454a; font: 9px 'Cascadia Code', monospace; letter-spacing: 1px; text-shadow: none; }
 #title .ak-start .st-orn { color: #596158; filter: none; width: 27px; }
-#title .ak-start:hover { background: #efdab3; box-shadow: 0 8px 38px #dfbc7430; }
+#title .ak-start:hover { background: linear-gradient(160deg, #fff0cb, #e7cb95 58%, #caa871); box-shadow: inset 0 1px #fff8e9, inset 0 -5px 12px #886c4438, 0 10px 40px #dfbc7460; }
 #title .ak-sec { top: auto; bottom: 6.4%; right: 5%; color: var(--exp-muted); gap: 6px; }
 #title .ak-sec span { color: var(--exp-muted); font-size: 11px; letter-spacing: 1px; }
 #title .ak-sec b { padding: 2px 6px; color: var(--exp-gold); border: 0; background: none; font-size: 15px; }
 #title .ak-bp, #title .ak-plus, #title .ak-line1 { display: none; }
 #title .title-quote { bottom: 3.5%; left: 5.4%; color: #a5b8c47a; font-size: 9px; letter-spacing: 2px; border: 0; padding: 0; }
+
+/* Home destinations are standalone painted emblems with labels, not framed rows. */
+#title .ak-hud::before { display: none; }
+#title .ak-hud::after {
+  content: ''; position: absolute; inset: 27% 2% 12% 65%; pointer-events: none;
+  background:
+    radial-gradient(circle at 18% 18%, #ffe5adca 0 1px, transparent 3px),
+    radial-gradient(circle at 63% 11%, #ecba72ab 0 1px, transparent 3px),
+    radial-gradient(circle at 84% 37%, #f3d4a9ae 0 1px, transparent 3px),
+    radial-gradient(circle at 40% 68%, #d3ac72b0 0 1px, transparent 3px),
+    radial-gradient(circle at 73% 86%, #ffe3a4c9 0 1px, transparent 3px);
+  filter: drop-shadow(0 0 5px #e3b870b0); opacity: .65;
+  animation: homeDustDrift 8s ease-in-out infinite alternate;
+}
+@keyframes homeDustDrift { from { transform: translateY(4px); opacity: .4; } to { transform: translateY(-8px); opacity: .8; } }
+#title .ak-banner, #title .ak-circle {
+  width: 170px; height: 150px; padding: 0; border: 0; border-radius: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+  gap: 0; background: transparent; box-shadow: none; text-align: center;
+  transform: none; overflow: visible;
+}
+#title .ak-banner { top: 35%; right: 21%; }
+#title .ak-lib { top: 35%; right: 4%; }
+#title .ak-ach { top: 57%; right: 21%; }
+#title .ak-set { top: 57%; right: 4%; }
+#title .ak-banner:hover, #title .ak-circle:hover {
+  background: transparent; border: 0; box-shadow: none; transform: translateY(-4px);
+  filter: drop-shadow(0 0 9px #e4c78d68);
+}
+#title .ak-banner .bn-ico, #title .ak-circle .c-ring {
+  position: relative; left: auto; width: 112px; height: 112px; flex: 0 0 112px;
+  background: transparent; border: 0; box-shadow: none;
+}
+#title .ak-banner .bn-ico::before, #title .ak-circle .c-ring::before {
+  inset: -27px -30px; background-size: var(--home-icon-size, 108px), 100% 100%;
+  filter: drop-shadow(0 4px 6px #02070baa) drop-shadow(0 0 7px var(--home-glow, #d9bb8252));
+  animation: homeEmblemFloat 6.2s ease-in-out infinite;
+}
+#title .ak-lib .c-ring::before { animation-delay: -1.7s; animation-duration: 5.7s; }
+#title .ak-ach .c-ring::before { animation-delay: -3.1s; animation-duration: 6.8s; }
+#title .ak-set .c-ring::before { animation-delay: -2.2s; animation-duration: 5.9s; }
+#title .ak-banner .bn-ico::after, #title .ak-circle .c-ring::after {
+  animation: homeOrbitGleam 4.8s ease-in-out infinite alternate;
+}
+#title .ak-lib .c-ring::after { animation-delay: -1.9s; }
+#title .ak-ach .c-ring::after { animation-delay: -3.2s; }
+#title .ak-set .c-ring::after { animation-delay: -1.1s; }
+@keyframes homeEmblemFloat {
+  0%, 100% { transform: translateY(1px) scale(1); }
+  50% { transform: translateY(-3px) scale(1.025); }
+}
+@keyframes homeOrbitGleam { from { opacity: .4; } to { opacity: .95; } }
+#title .ak-banner .bn-ico { --home-icon-size: 130px; --home-glow: #a16bdf75; }
+#title .ak-banner .bn-ico::before {
+  background-image: var(--home-icon),
+    radial-gradient(ellipse 47% 58% at 49% 52%, #02070cf0 17%, #030b11da 52%, transparent 86%);
+}
+#title .ak-ach .c-ring { --home-icon-size: 120px; --home-glow: #e7a15b70; }
+#title .ak-lib .c-ring { --home-icon-size: 108px; --home-glow: #99c7e073; }
+#title .ak-set .c-ring { --home-icon-size: 104px; --home-glow: #b4cad171; }
+#title .ak-banner .bn-cn, #title .ak-circle .c-cn {
+  position: relative; grid-column: auto; grid-row: auto; align-self: auto;
+  margin: 0; color: #f4ead4; font: 700 24px/1.08 'KaiTi', 'STKaiti', 'SimSun', serif;
+  font-family: 'KaiTi', 'STKaiti', 'SimSun', serif !important;
+  letter-spacing: 3px; text-shadow: 0 2px 5px #000, 0 0 15px #050d14, 0 -1px #fff7e04d;
+}
+#title .ak-banner .bn-en, #title .ak-circle .c-en {
+  position: relative; grid-column: auto; grid-row: auto; align-self: auto;
+  margin: 4px 0 0; color: #dfbd82; font: italic 11px/1.2 Georgia, serif;
+  font-family: Georgia, serif !important;
+  letter-spacing: 1px; text-shadow: 0 1px 5px #000, 0 0 7px #b8955670;
+}
+#title .ak-banner .bn-en::after, #title .ak-circle .c-en::after {
+  content: ''; display: block; width: 34px; height: 1px; margin: 6px auto 0;
+  background: linear-gradient(90deg, transparent, #d9bb82b3, transparent);
+  box-shadow: 0 0 5px #d9bb8275;
+}
+#title .ak-circle .c-tag {
+  order: 4; position: relative; grid-column: auto; grid-row: auto;
+  margin: 3px 0 0; font-size: 9px; color: #c9b78d;
+}
+#title .ak-start {
+  right: 8%; bottom: 1%; width: 260px; min-height: 125px; height: 125px;
+  padding: 0; gap: 0; border: 0; background: transparent; box-shadow: none;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  overflow: visible;
+}
+#title .ak-start::before, #title .ak-start::after { display: none; }
+#title .ak-start:hover {
+  background: transparent; border: 0; box-shadow: none; transform: translateY(-4px);
+  filter: drop-shadow(0 0 12px #e6bb6b80);
+}
+#title .ak-start .st-row { display: flex; flex-direction: column; align-items: center; gap: 0; }
+#title .ak-start .st-row::before {
+  flex: 0 0 66px; width: 250px; height: 66px;
+  background: url('../assets/ui/home-icons-v12/explore-sword.webp') center / contain no-repeat,
+    radial-gradient(ellipse 67% 39% at 50% 55%, #02070bef 18%, #02070ba8 57%, transparent 85%);
+  animation: homeEmblemFloat 7.4s ease-in-out infinite;
+}
+#title .ak-start .st-cn {
+  color: #ffe9b6; font: 700 34px/1.05 'KaiTi', 'STKaiti', 'SimSun', serif;
+  font-family: 'KaiTi', 'STKaiti', 'SimSun', serif !important;
+  letter-spacing: 6px; text-shadow: 0 2px 7px #000, 0 0 16px #d5a65ba8;
+  animation: homeGoldLetter 5.8s ease-in-out infinite alternate;
+}
+#title .ak-start .st-en { margin-top: 5px; color: #d8b87e; font: italic 11px/1.1 Georgia, serif; font-family: Georgia, serif !important; letter-spacing: 1px; text-shadow: 0 1px 5px #000; }
+@keyframes homeGoldLetter {
+  from { text-shadow: 0 2px 7px #000, 0 0 10px #d5a65b70; }
+  to { text-shadow: 0 2px 7px #000, 0 0 21px #e8c382c9; }
+}
+#title .ak-sec { bottom: 1.5%; right: 30%; }
 
 /* 开发者节点测试面板（标题页左侧、快速参考下方；仅开发者模式可见，显隐见 notes.syncDevVisibility）。
    位置避开右列菜单轴与底部「开始探索」，窄窗口下依旧落在左侧空白区。 */
@@ -179,6 +409,7 @@ body.no-hintbar .route-help { display: none !important; }
   .title-expedition-copy p { font-size: 21px; letter-spacing: 2px; }
 }
 @media (max-width: 850px) {
+  #title .ak-hud::before { display: none; }
   #sidebar { height: 190px; min-height: 190px; grid-template-columns: 52px 92px minmax(0, 1fr); grid-template-rows: 59px 90px; gap: 10px 14px; }
   #sidebar #charPanel { grid-area: 1 / 1; }
   #sidebar .hero-ava { width: 48px; min-width: 48px; height: 56px; }
@@ -203,6 +434,9 @@ body.no-hintbar .route-help { display: none !important; }
   #layerBanner { top: 77px; }
 }
 @media (max-width: 560px) {
+  /* The cover crop moves the character outside these desktop light zones. */
+  #title .title-bg::before, #title .title-bg::after { display: none; }
+  #title::before { display: none; }
   #title .ak-user { display: none; }
   #title .title-heading { top: 11%; width: 260px; left: auto; right: 5%; }
   #title .ak-circle, #title .ak-banner, #title .ak-start { width: 260px; right: 5%; height: 55px; }
@@ -223,6 +457,23 @@ body.no-hintbar .route-help { display: none !important; }
 body.reduce-motion *, body.reduce-motion *::before, body.reduce-motion *::after {
   animation-duration: .001ms !important; animation-delay: 0ms !important;
   transition-duration: .001ms !important; scroll-behavior: auto !important;
+}
+body.reduce-motion #title::before { animation: none; opacity: .45; }
+body.reduce-motion #title .ak-start::before { display: none; }
+body.reduce-motion #title .ak-hud::after { animation: none; }
+body.reduce-motion #title .ak-banner .bn-ico::before,
+body.reduce-motion #title .ak-circle .c-ring::before,
+body.reduce-motion #title .ak-banner .bn-ico::after,
+body.reduce-motion #title .ak-circle .c-ring::after,
+body.reduce-motion #title .ak-start .st-row::before,
+body.reduce-motion #title .ak-start .st-cn { animation: none; }
+@media (prefers-reduced-motion: reduce) {
+  #title::before { animation: none; opacity: .45; }
+  #title .ak-start::before { display: none; }
+  #title .ak-hud::after { animation: none; }
+  #title .ak-banner .bn-ico::before, #title .ak-circle .c-ring::before,
+  #title .ak-banner .bn-ico::after, #title .ak-circle .c-ring::after,
+  #title .ak-start .st-row::before, #title .ak-start .st-cn { animation: none; }
 }
 body.reduce-motion .sts-float { animation: none !important; opacity: 1; }
 body.reduce-motion .sts-impact, body.reduce-motion .sts-hurtflash { display: none; }

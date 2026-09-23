@@ -13,8 +13,7 @@ const PERFORMANCE_BUDGETS = Object.freeze({
   packageBytesMax: 72 * 1024 * 1024,
 });
 
-// 标题页只准备首轮高频遭遇。其余场景在玩家选择路线时按目标格预取，
-// 卡面与图鉴继续依赖 loading="lazy" / 缩略图，禁止恢复全量启动预热。
+// 启动总预热时优先排入首轮高频遭遇；完整运行时美术与图鉴缩略图随后分批加载。
 const STARTUP_SCENE_KEYS = Object.freeze(['battle', 'coin', 'wood', 'rations', 'key', 'fire']);
 
 export { PERFORMANCE_BUDGETS, STARTUP_SCENE_KEYS };

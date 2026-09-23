@@ -34,6 +34,68 @@ function configureCardNavigation(hooks) {
   let draft = null;              // 制作坊草稿
   const CARD_DESIGNER_WRITES_ENABLED = false;
 
+  // 开发模式 ?photoFps=1：采样 DOM 页的 rAF 间隔，不使用被遮挡画布的 FPS 统计。
+  const photoFpsEnabled = import.meta.env.DEV && new URLSearchParams(location.search).has('photoFps');
+  let photoFpsProbe = null;
+  let photoFpsSettledTimer = null;
+  function stopPhotoFpsProbe() {
+    if (!photoFpsProbe) return;
+    cancelAnimationFrame(photoFpsProbe.frame);
+    photoFpsProbe.observer?.disconnect();
+    photoFpsProbe.frameObserver?.disconnect();
+    photoFpsProbe = null;
+  }
+  function samplePhotoFps(label, duration = 2500, requireOpen = true) {
+    if (!photoFpsEnabled) return;
+    stopPhotoFpsProbe();
+    const started = performance.now();
+    let previous = started;
+    const gaps = [];
+    const slowFrames = [];
+    const longTasks = [];
+    const longAnimationFrames = [];
+    const observer = typeof PerformanceObserver === 'function'
+      ? new PerformanceObserver(list => list.getEntries().forEach(entry => longTasks.push(entry.duration)))
+      : null;
+    try { observer?.observe({ type: 'longtask', buffered: false }); } catch (_) {}
+    const frameObserver = typeof PerformanceObserver === 'function'
+      ? new PerformanceObserver(list => list.getEntries().forEach(entry => longAnimationFrames.push({
+        duration: +entry.duration.toFixed(1),
+        renderMs: +(entry.duration - (entry.renderStart - entry.startTime)).toFixed(1),
+        layoutMs: +(entry.duration - (entry.styleAndLayoutStart - entry.startTime)).toFixed(1),
+        scripts: entry.scripts?.slice(0, 2).map(script => [script.invoker, +script.duration.toFixed(1)]),
+      })))
+      : null;
+    try { frameObserver?.observe({ type: 'long-animation-frame', buffered: false }); } catch (_) {}
+    const probe = { frame: 0, observer, frameObserver };
+    photoFpsProbe = probe;
+    const tick = now => {
+      if (photoFpsProbe !== probe || (requireOpen && !cardPageOpen)) return;
+      const gap = now - previous;
+      gaps.push(gap);
+      if (gap > 20) slowFrames.push([+(now - started).toFixed(0), +gap.toFixed(1)]);
+      previous = now;
+      if (now - started < duration) { probe.frame = requestAnimationFrame(tick); return; }
+      const sorted = [...gaps].sort((a, b) => a - b);
+      console.info('[photo-fps]', JSON.stringify({
+        label,
+        fps: +(gaps.length * 1000 / (now - started)).toFixed(1),
+        frameP95: +sorted[Math.floor(sorted.length * .95)].toFixed(1),
+        frameMax: +sorted[sorted.length - 1].toFixed(1),
+        over8ms: gaps.filter(gap => gap > 8.33).length,
+        over20ms: gaps.filter(gap => gap > 20).length,
+        longTasks: longTasks.length,
+        longTaskMax: +Math.max(0, ...longTasks).toFixed(1),
+        longAnimationFrames: longAnimationFrames.slice(0, 8),
+        slowFrames,
+        frames: gaps.length,
+        visible: document.visibilityState,
+      }));
+      stopPhotoFpsProbe();
+    };
+    probe.frame = requestAnimationFrame(tick);
+  }
+
 
   // 音效统一走 SDT.Sound（sound.js：程序化音效 + 生成式背景乐）；保留别名兼容旧调用
   const Sfx = {
@@ -61,8 +123,7 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
   const cardHTML = (c, cls, opts) => SDT.Cards.cardHTML(c, cls, opts);
 
   // ======== 卡牌收藏页（照相馆） ========
-  // 视觉仍是连续照片墙，不拆成分页页面；DOM 以 48 张为一批渐进追加，避免打开时
-  // 同步创建整库卡牌结构。用户滚到陈列末尾时会自动接上下一批。
+  // 固定分页限制每次创建的卡格与图片数量，筛选和切页只重绘当前页。
   function openCardLibrary() {
     if (game.state !== 'idle' && game.state !== 'modal' && game.state !== 'title') return;
     if (game.state !== 'modal') cardPagePrevState = game.state;   // 记录来源（idle/title），关闭时还原
@@ -73,6 +134,7 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
   // 过滤+排序结果缓存（用空间换时间）：筛选条件与卡库规模不变时直接复用，
   // 翻页/重绘不再重复全量 sort。renderCardLibrary 重新取 libCards 时失效。
   let _libFilteredCache = null, _libFilteredKey = '';
+  let _libSearchText = new WeakMap();
   function libFiltered() {
     const key = `${libFilter.tab}|${libFilter.rar}|${libFilter.cls}|${libFilter.q}|${libFilter.sort}|${libCards.length}`;
     if (_libFilteredCache && key === _libFilteredKey) return _libFilteredCache;
@@ -82,7 +144,7 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
       // 稀有度按有效稀有度筛选（2026-09-04 定版：棱彩已实装进卡牌库——能力卡与其衍生牌 rarityOf 推导为「棱彩」，可经下拉筛选）
       (libFilter.rar === '全部' || SDT.Cards.rarityOf(c) === libFilter.rar) &&
       (libFilter.cls === '全部' || (libFilter.cls === '通用' ? !c.cls : c.cls === libFilter.cls)) &&
-      (!q || (c.name || '').toLowerCase().includes(q) || (c.desc || '').toLowerCase().includes(q))
+      (!q || (_libSearchText.get(c) || '').includes(q))
     ).sort((a, b) => {
       const nameCmp = String(a.name).localeCompare(b.name, 'zh');
       if (libFilter.sort === 'name') return nameCmp;
@@ -99,13 +161,9 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
   // 滚动时解码缓存反复驱逐重解码。改取 448 宽缩略图（assets/thumbs，见 art.js cardIcon）。
   // 放大看卡面（libInspect → showCardZoom）不传 low，仍是原图。
   const LIB_ART = { low: true };
-  // 卡库只保留视口附近的行；屏幕外照片不保留 DOM，也不提前请求插画。
-  const LIB_INITIAL_COUNT = 24;
-  const LIB_OVERSCAN_ROWS = 2;
-  const LIB_ESTIMATED_ROW_HEIGHT = 300;
-  let libGridResizeObserver = null;
-  let libWindowFrame = 0;
-  let libRenderedWindowKey = '';
+  // 每页四列两行，控制照片节点、阴影层和待解码缩略图的数量。
+  const LIB_PAGE_SIZE = 8;
+  let libPageIndex = 0;
   let libSearchTimer = null;
 
   // 照片陈列差异按卡牌稳定 id 生成：同一张卡每次打开保持同一磨损与落影，
@@ -194,13 +252,13 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
     return 10 + h % 90;
   }
 
-  function photoTileHTML(c, index) {
+  function photoTileHTML(c, index, motionIndex = index) {
     const rarity = SDT.Cards.rarityOf(c);
     const rarityIndex = Math.max(0, RARITIES.indexOf(rarity));
     const mount = photoMountFor(rarity);
     const art = (SDT.Art && SDT.Art.cardIcon && SDT.Art.cardIcon(c, { ...LIB_ART, defer: true })) ||
       SDT.Icons.img(SDT.Cards.TYPE_ART[c.type] || 'question');
-    return `<div class="lib-item${c.id === lastSavedId ? ' saved' : ''}${c.id === libSelectedId ? ' selected' : ''}" data-i="${index}" style="${photoStyle(c, index)}">
+    return `<div class="lib-item${c.id === lastSavedId ? ' saved' : ''}${c.id === libSelectedId ? ' selected' : ''}" data-i="${index}" style="${photoStyle(c, motionIndex)}">
       <button type="button" class="lib-cardwrap studio-photo rv${rarityIndex}" data-act="libInspect" data-photo-zoom-source data-card="${escAttr(c.id)}" aria-label="查看照片：${escAttr(c.name || '未命名卡牌')}" aria-current="${c.id === libSelectedId ? 'true' : 'false'}" title="查看大图与照片背签">
         <span class="studio-photo-paper" data-photo-mount="${mount.kind}">
           <span class="studio-mount-mark" aria-hidden="true"></span>
@@ -211,7 +269,7 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
     </div>`;
   }
 
-  function libGridContentsHTML(all = libFiltered(), range = null) {
+  function libGridContentsHTML(all = libFiltered(), pageIndex = libPageIndex) {
     if (!all.length) {
       const filtered = libCards.length > 0 &&
         (libFilter.tab !== '全部' || libFilter.rar !== '全部' || libFilter.cls !== '全部' || libFilter.q.trim() !== '');
@@ -219,90 +277,80 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
         <p>${libCards.length ? '没有符合条件的照片' : (game.devMode ? '收藏还是空的，进入编辑模式后可制作新卡' : '当前没有可展示的照片')}</p>
         ${filtered ? '<button class="hs-btn sm" data-act="libClearFilter">重置筛选</button>' : ''}</div>`;
     }
-    const start = Math.max(0, range?.start ?? 0);
-    const end = Math.min(all.length, range?.end ?? LIB_INITIAL_COUNT);
-    const spacer = (side, height) => height > 0
-      ? `<div class="studio-virtual-spacer" data-side="${side}" aria-hidden="true" style="grid-column:1/-1;height:${height.toFixed(1)}px;min-height:${height.toFixed(1)}px;pointer-events:none;visibility:hidden"></div>`
-      : '';
-    return spacer('top', range?.topHeight || 0) +
-      all.slice(start, end).map((card, offset) => photoTileHTML(card, start + offset)).join('') +
-      spacer('bottom', range?.bottomHeight || 0);
+    const start = pageIndex * LIB_PAGE_SIZE;
+    return all.slice(start, start + LIB_PAGE_SIZE)
+      .map((card, offset) => photoTileHTML(card, start + offset, offset)).join('');
+  }
+
+  function libPageControlsHTML(all = libFiltered()) {
+    const pageCount = Math.max(1, Math.ceil(all.length / LIB_PAGE_SIZE));
+    const page = Math.min(libPageIndex + 1, pageCount);
+    return `<nav class="pv-nav studio-page-nav" id="libPageControls" aria-label="照片分页"${pageCount <= 1 ? ' hidden' : ''}>
+      <button type="button" class="pv-navbtn" data-act="libPagePrev"${page <= 1 ? ' disabled' : ''}>‹ 上一页</button>
+      <span class="pv-pos" aria-live="polite">第 ${page} / ${pageCount} 页 · 共 ${all.length} 张</span>
+      <button type="button" class="pv-navbtn" data-act="libPageNext"${page >= pageCount ? ' disabled' : ''}>下一页 ›</button>
+    </nav>`;
   }
 
   function libGridHTML() {
     const all = libFiltered();
-    return `<div class="lib-grid${all.length ? '' : ' is-empty'}" id="libGrid">${libGridContentsHTML(all)}</div>`;
+    return `<div class="lib-grid${all.length ? '' : ' is-empty'}" id="libGrid">${libGridContentsHTML(all)}</div>${libPageControlsHTML(all)}`;
   }
 
   let libCardById = new Map();
   let libCardNodeById = new Map();
+  // 当前页外最多保留相邻两页的节点（合计最多 24 张缩略图）。筛选与重新开库即清空。
+  const libPageCache = new Map();
+  let libPageCacheFilterKey = '';
+  let libRenderedPageIndex = null;
+  let libPageWarmTask = null;
+  let libPageWarmGeneration = 0;
 
-  function libGridMetrics(grid, all) {
-    const style = getComputedStyle(grid);
-    const columns = Math.max(1, style.gridTemplateColumns.trim().split(/\s+/).filter(Boolean).length || 4);
-    const rowGap = parseFloat(style.rowGap) || 0;
-    const rowHeight = grid.querySelector('.lib-item')?.offsetHeight || LIB_ESTIMATED_ROW_HEIGHT;
-    const rowPitch = Math.max(1, rowHeight + rowGap);
-    const totalRows = Math.ceil(all.length / columns);
-    const viewportHeight = grid.clientHeight || rowPitch * 3;
-    return { columns, rowGap, rowHeight, rowPitch, totalRows, viewportHeight };
+  function cancelLibPageWarm() {
+    libPageWarmGeneration++;
+    if (libPageWarmTask != null) {
+      if (typeof cancelIdleCallback === 'function') cancelIdleCallback(libPageWarmTask);
+      else clearTimeout(libPageWarmTask);
+      libPageWarmTask = null;
+    }
   }
 
-  function libGridWindow(grid, all) {
-    const metrics = libGridMetrics(grid, all);
-    if (!all.length) return { ...metrics, start: 0, end: 0, topHeight: 0, bottomHeight: 0 };
-    const firstRow = Math.floor(Math.max(0, grid.scrollTop) / metrics.rowPitch);
-    const startRow = Math.max(0, firstRow - LIB_OVERSCAN_ROWS);
-    const endRow = Math.min(metrics.totalRows,
-      Math.ceil((Math.max(0, grid.scrollTop) + metrics.viewportHeight) / metrics.rowPitch) + LIB_OVERSCAN_ROWS);
-    const remainingRows = Math.max(0, metrics.totalRows - endRow);
-    return {
-      ...metrics,
-      start: startRow * metrics.columns,
-      end: Math.min(all.length, endRow * metrics.columns),
-      topHeight: startRow > 0 ? Math.max(0, startRow * metrics.rowPitch - metrics.rowGap) : 0,
-      bottomHeight: remainingRows > 0 ? Math.max(0, remainingRows * metrics.rowPitch - metrics.rowGap) : 0
+  function warmNextLibPage(all) {
+    const nextPage = libPageIndex + 1;
+    if (nextPage * LIB_PAGE_SIZE >= all.length || libPageCache.has(nextPage)) return;
+    const generation = libPageWarmGeneration;
+    const run = () => {
+      libPageWarmTask = null;
+      if (generation !== libPageWarmGeneration || !cardPageOpen) return;
+      const template = document.createElement('template');
+      template.innerHTML = libGridContentsHTML(all, nextPage);
+      const fragment = template.content;
+      for (const image of fragment.querySelectorAll('.studio-photo-art img')) {
+        decodeLibImage(image);
+        image.dataset.libWarm = '1';
+      }
+      libPageCache.set(nextPage, fragment);
+      while (libPageCache.size > 2) libPageCache.delete(libPageCache.keys().next().value);
     };
+    libPageWarmTask = typeof requestIdleCallback === 'function'
+      ? requestIdleCallback(run, { timeout: 1000 })
+      : setTimeout(run, 50);
   }
 
-  function renderLibVirtualWindow(grid, all, force = false) {
-    if (!grid) return false;
-    const range = libGridWindow(grid, all);
-    const key = [range.start, range.end, range.columns, range.rowHeight, range.rowGap,
-      range.topHeight.toFixed(1), range.bottomHeight.toFixed(1), all.length].join(':');
-    if (!force && key === libRenderedWindowKey) return false;
-    // 旧窗口的图片观察器不能继续持有已移出 DOM 的图像。
-    libArtObserver?.disconnect();
-    libArtObserver = null;
-    libArtRoot = null;
-    grid.innerHTML = libGridContentsHTML(all, range);
-    libRenderedWindowKey = key;
-    bindLibGridScroll();
-    return true;
-  }
-
-  function scheduleLibVirtualWindow() {
-    if (libWindowFrame) return;
-    libWindowFrame = requestAnimationFrame(() => {
-      libWindowFrame = 0;
-      const grid = document.getElementById('libGrid');
-      if (!grid) return;
-      if (renderLibVirtualWindow(grid, libFiltered())) warmLibArt();
-    });
-  }
-
-  function scrollLibIndexIntoWindow(index, all = libFiltered()) {
-    const grid = document.getElementById('libGrid');
-    if (!grid || index < 0 || index >= all.length) return null;
-    const { columns, rowPitch } = libGridMetrics(grid, all);
-    const row = Math.floor(index / columns);
-    grid.scrollTop = Math.max(0, row * rowPitch - LIB_OVERSCAN_ROWS * rowPitch);
-    if (renderLibVirtualWindow(grid, all)) warmLibArt();
-    return libCardNodeById.get(all[index].id) || null;
+  function switchLibPage(page, all = libFiltered()) {
+    const pageCount = Math.max(1, Math.ceil(all.length / LIB_PAGE_SIZE));
+    const next = Math.max(0, Math.min(pageCount - 1, page));
+    if (next === libPageIndex) return;
+    const pageDirection = next > libPageIndex ? 'next' : 'previous';
+    libPageIndex = next;
+    clearTimeout(photoFpsSettledTimer);
+    samplePhotoFps('page');
+    renderLibGrid({ keepPage: true, pageDirection });
   }
 
   function setLibSelection(id, playSound = false) {
     const card = libCardById.get(id) || null;
+    const selectionChanged = libSelectedId !== (card ? card.id : null);
     libSelectedId = card ? card.id : null;
     const previousItem = document.querySelector('#libGrid .lib-item.selected');
     const previousCard = document.querySelector('#libGrid .lib-cardwrap[aria-current="true"]');
@@ -314,33 +362,20 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
       selected.closest('.lib-item')?.classList.add('selected');
     }
     const preview = document.getElementById('libPreview');
-    if (preview) {
+    if (preview && selectionChanged) {
       preview.innerHTML = libPreviewHTML(card);
       preview.classList.toggle('has-preview', !!card);
     }
     if (playSound && card) Sfx.tick();
   }
 
-  // 滚动静默窗（滚动期间禁 hover 预览，见 renderCardLibrary 的 mouseover 段）：
-  // renderLibGrid 会整块换掉 #libGrid 节点，监听器必须跟着新节点重绑，否则第一次
-  // 改筛选条件后滚动静默就永久失效，滚动中重新出现 hover 预览重建风暴。
-  let libScrollTimer = null;
-  function bindLibGridScroll() {
+  function bindLibGridNavigation() {
     const grid = document.getElementById('libGrid');
     if (!grid) return;
     libCardNodeById = new Map([...grid.querySelectorAll('.lib-cardwrap[data-card]')]
       .map(node => [node.dataset.card, node]));
     if (grid.dataset.bound === '1') return;
     grid.dataset.bound = '1';
-    grid.addEventListener('scroll', () => {
-      grid.classList.add('scrolling');
-      if (libScrollTimer) clearTimeout(libScrollTimer);
-      libScrollTimer = setTimeout(() => grid.classList.remove('scrolling'), 160);
-      scheduleLibVirtualWindow();
-      // 回顶按钮：滚过一屏半后现身（09-23）
-      const topBtn = document.querySelector('.studio-top');
-      if (topBtn) topBtn.classList.toggle('show', grid.scrollTop > 360);
-    }, { passive: true });
     grid.addEventListener('focusin', (e) => {
       const card = e.target.closest && e.target.closest('.lib-cardwrap[data-card]');
       if (card) setLibSelection(card.dataset.card);
@@ -352,19 +387,15 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
       const index = Number(item?.dataset.i);
       if (!current || !Number.isInteger(index)) return;
       const all = libFiltered();
-      const cols = libGridMetrics(grid, all).columns;
+      const cols = Math.max(1, getComputedStyle(grid).gridTemplateColumns.trim().split(/\s+/).filter(Boolean).length || 4);
       const delta = e.key === 'ArrowLeft' ? -1 : e.key === 'ArrowRight' ? 1 : e.key === 'ArrowUp' ? -cols : cols;
       const targetIndex = index + delta;
       if (targetIndex >= 0 && targetIndex < all.length) {
         e.preventDefault();
-        scrollLibIndexIntoWindow(targetIndex, all);
+        switchLibPage(Math.floor(targetIndex / LIB_PAGE_SIZE), all);
         requestAnimationFrame(() => libCardNodeById.get(all[targetIndex].id)?.focus());
       }
     });
-    if (typeof ResizeObserver === 'function') {
-      libGridResizeObserver = new ResizeObserver(scheduleLibVirtualWindow);
-      libGridResizeObserver.observe(grid);
-    }
   }
 
   // 卡面缩略图预解码：启动时的全量预热清单补的是 assets/ 原图，库页显示的是
@@ -384,7 +415,7 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
   function warmLibArt() {
     const grid = document.getElementById('libGrid');
     if (!grid) return;
-    // 同一个网格渐进追加时复用 observer；只有整页重建、根节点变化才重新创建。
+  // 当前页创建后观察近屏缩略图；网格根节点变化时重建 observer。
     if (libArtRoot !== grid) {
       libArtObserver?.disconnect();
       libArtObserver = null;
@@ -394,15 +425,7 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
     images.forEach(image => { image.dataset.libWarm = '1'; });
     // 图片先保留 data-lib-src；只有接近视口才赋 src 并异步解码，避免原生 lazy 提前加载整批。
     if (typeof IntersectionObserver !== 'function') {
-      const all = libFiltered();
-      const { columns, rowPitch, viewportHeight } = libGridMetrics(grid, all);
-      const start = Math.max(0, Math.floor(grid.scrollTop / rowPitch) - 1) * columns;
-      const end = Math.min(all.length,
-        (Math.ceil((grid.scrollTop + viewportHeight) / rowPitch) + 1) * columns);
-      images.filter(image => {
-        const index = Number(image.closest('.lib-item')?.dataset.i);
-        return Number.isInteger(index) && index >= start && index < end;
-      }).forEach(decodeLibImage);
+      images.forEach(decodeLibImage);
     } else {
       if (!libArtObserver) {
         libArtObserver = new IntersectionObserver(entries => {
@@ -419,12 +442,22 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
   }
 
   // 筛选后只重绘卡格区（整页 showOverlay 会重置搜索焦点、重挂全部事件）
-  // opts.keepBatch：翻看导航复用（不重置滚动位置）
+  // opts.keepPage：翻看导航跨页时保留目标页（当前页卡格滚动仍回到顶部）
   function renderLibGrid(opts) {
-    const keepBatch = !!(opts && opts.keepBatch);
+    cancelLibPageWarm();
+    const keepPage = !!(opts && opts.keepPage);
+    const filterKey = JSON.stringify([libFilter.tab, libFilter.rar, libFilter.cls, libFilter.q, libFilter.sort]);
+    if (!keepPage || filterKey !== libPageCacheFilterKey) {
+      libPageCache.clear();
+      libRenderedPageIndex = null;
+      libPageCacheFilterKey = filterKey;
+    }
     const filtered = libFiltered();
     const n = filtered.length;
-    if (!filtered.some(c => c.id === libSelectedId)) libSelectedId = filtered[0]?.id || null;
+    if (!keepPage) libPageIndex = 0;
+    libPageIndex = Math.min(libPageIndex, Math.max(0, Math.ceil(n / LIB_PAGE_SIZE) - 1));
+    const nextSelectedId = filtered.some(c => c.id === libSelectedId)
+      ? libSelectedId : (filtered[0]?.id || null);
     const resultCount = document.getElementById('libResultCount');
     if (resultCount) {
       // 全量时隐藏「陈列」组（09-23 计数语义：馆藏=总量，陈列只在筛选分家后有意义）
@@ -439,16 +472,39 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
         resultCount.classList.add('bump');
       }
     }
+    const controls = document.getElementById('libPageControls');
+    if (controls) controls.outerHTML = libPageControlsHTML(filtered);
     const grid = document.getElementById('libGrid');
     if (grid) {
+      grid.classList.toggle('lib-page-next', opts?.pageDirection === 'next');
+      grid.classList.toggle('lib-page-previous', opts?.pageDirection === 'previous');
       grid.classList.toggle('is-empty', !filtered.length);
-      if (!keepBatch) grid.scrollTop = 0;
-      renderLibVirtualWindow(grid, filtered, true);
+      libArtObserver?.disconnect();
+      libArtObserver = null;
+      libArtRoot = null;
+      if (keepPage && libRenderedPageIndex != null && libRenderedPageIndex !== libPageIndex && grid.childNodes.length) {
+        const fragment = document.createDocumentFragment();
+        for (const image of grid.querySelectorAll('.studio-photo-art img')) delete image.dataset.libWarm;
+        while (grid.firstChild) fragment.appendChild(grid.firstChild);
+        libPageCache.delete(libRenderedPageIndex);
+        libPageCache.set(libRenderedPageIndex, fragment);
+        while (libPageCache.size > 2) libPageCache.delete(libPageCache.keys().next().value);
+      }
+      const cachedPage = keepPage ? libPageCache.get(libPageIndex) : null;
+      if (cachedPage) {
+        libPageCache.delete(libPageIndex);
+        grid.replaceChildren(cachedPage);
+      } else {
+        grid.innerHTML = libGridContentsHTML(filtered);
+      }
+      libRenderedPageIndex = libPageIndex;
+      bindLibGridNavigation();
     }
     const active = document.getElementById('libActiveFilters');
     if (active) active.innerHTML = libActiveFiltersHTML();
-    setLibSelection(libSelectedId);
+    setLibSelection(nextSelectedId);
     warmLibArt();
+    warmNextLibPage(filtered);
   }
 
   // 侧栏筛选控件同步到当前 libFilter（局部重绘时不重建侧栏，得手动回写控件状态）
@@ -486,17 +542,24 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
   }
 
   function renderCardLibrary() {
+    const photoOpenStarted = photoFpsEnabled ? performance.now() : 0;
+    cancelLibPageWarm();
+    libPageCache.clear();
+    libPageCacheFilterKey = '';
+    libRenderedPageIndex = null;
     cardPageOpen = true;
     // 牌库页去动画开关（2026-09-08 老板拍板）：期间禁全部动画/过渡/流光/hover 特效，
     // CSS 侧规则见 cards.css 的 body.cardlib-open 段
     document.body.classList.add('cardlib-open');
     // 员工通行证A是碎片合成材料（特殊收藏品），不进卡牌库（2026-09-16 留言「在卡牌库中删除员工通行证a」）
     libCards = SDT.Cards.all().filter(c => c.id !== 'tt-token-color');
+    _libSearchText = new WeakMap(libCards.map(c => [c, `${c.name || ''}\n${c.desc || ''}`.toLowerCase()]));
     libCardById = new Map(libCards.map(card => [card.id, card]));
     // 库内容刷新即失效筛选缓存：防止卡牌增删/改卡后命中旧缓存
     // （旧缓存键只含 libCards.length，同张数的内容变化会读到陈旧列表）
     _libFilteredCache = null;
     _libFilteredKey = '';
+    libPageIndex = 0;
     const counts = {};
     libCards.forEach(c => { counts[c.type] = (counts[c.type] || 0) + 1; });
     const tabs = ['全部'].concat(TYPES).map(t =>
@@ -537,17 +600,21 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
             ${libGridHTML()}
           </section>
           <aside class="library-inspector" aria-label="选中卡牌详情"><div class="studio-inspector-head"><b>选片台</b></div><div class="library-preview${selectedPreview ? ' has-preview' : ''}" id="libPreview" aria-live="polite">${libPreviewHTML(selectedPreview)}</div></aside>
-          <button type="button" class="studio-top" data-act="libTop" title="回到墙顶" aria-label="回到墙顶">↑</button>
         </div>
       </div>`, 'page');
     lastSavedId = null;
-    renderLibVirtualWindow(document.getElementById('libGrid'), libFiltered(), true);
+    libPageCacheFilterKey = JSON.stringify([libFilter.tab, libFilter.rar, libFilter.cls, libFilter.q, libFilter.sort]);
+    libRenderedPageIndex = libPageIndex;
+    bindLibGridNavigation();
     warmLibArt();
+    warmNextLibPage(libFiltered());
     // 注意：lastPreviewId 在下方悬停处理段声明（函数内 let），此处不可提前赋值——
     // 昨晚"悬停去重"改动曾在此赋值触发 TDZ ReferenceError，导致后续全部 UI.act
     // 注册被跳过，卡牌库整页按钮（含右上关闭钮）无响应（老板留言：退出点不动）。
     UI.act('closeCardPage', closeLibPage);
     UI.act('newCard', () => { if (CARD_DESIGNER_WRITES_ENABLED) openCardDesigner(null); });
+    UI.act('libPagePrev', () => switchLibPage(libPageIndex - 1));
+    UI.act('libPageNext', () => switchLibPage(libPageIndex + 1));
     // 切页签/清筛选只重绘卡格区：整页 renderCardLibrary() 会重建 245 张卡面的 HTML
     // （实测主线程阻塞 ~100ms）并重挂全部事件，而这两处改动只影响卡格与页签高亮
     UI.act('libTab', (d) => { libFilter.tab = d.t; syncLibFilterUI(); renderLibGrid(); });
@@ -567,13 +634,11 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
       if (i < 0 || !list.length) return;
       const j = Math.max(0, Math.min(list.length - 1, i + delta));
       if (j === i) return;
-      scrollLibIndexIntoWindow(j, list);
+      switchLibPage(Math.floor(j / LIB_PAGE_SIZE), list);
       setLibSelection(list[j].id, true);
-      libCardNodeById.get(list[j].id)?.closest('.lib-item')?.scrollIntoView({ block: 'nearest' });
     };
     UI.act('libPrev', () => navStep(-1));
     UI.act('libNext', () => navStep(1));
-    UI.act('libTop', () => { const g = document.getElementById('libGrid'); if (g) g.scrollTo({ top: 0 }); });
     UI.act('editCard', (d) => {
       if (!CARD_DESIGNER_WRITES_ENABLED) return;
       const card = SDT.Cards.all().find(c => c.id === (d.card || d.id));
@@ -604,7 +669,18 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
           noteLabel: '备注',
           noteEditable: true,
           notePlaceholder: PHOTO_NOTE_PLACEHOLDER,
-          onNoteSave: value => savePhotoNote(card, value),
+          onNoteSave: value => {
+            const saved = savePhotoNote(card, value);
+            if (libSelectedId === card.id) {
+              const preview = document.getElementById('libPreview');
+              const oldNote = preview?.querySelector('.pv-note');
+              const note = photoNoteFor(card);
+              const noteHTML = note ? `<div class="pv-note"><b>备注</b>${esc(note)}</div>` : '';
+              if (oldNote) oldNote.outerHTML = noteHTML;
+              else if (noteHTML) preview?.querySelector('.pv-nav')?.insertAdjacentHTML('beforebegin', noteHTML);
+            }
+            return saved;
+          },
         });
       }
     });
@@ -669,17 +745,10 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
     // 记住上一张预览的卡，扫过同一张卡时不再整页重建预览 DOM / 重复播悬停音；
     // 2026-09-06 留言（库页滑动很卡）：预览大图的解码/重建在主线程，滚动扫过时
     // 再加 90ms 去抖——只有停留的卡才真正重建，滚动风暴中预览零重建。
-    // 2026-09-07 留言（滑动依然有点卡）：滚动期间整段禁掉 hover——Chromium 滚动
-    // 会重算 hover 目标触发 mouseover 风暴（含卡面 :hover 缩放的层级切换），
-    // 给网格挂 .scrolling 类，滚动静默 160ms 后恢复。
     let lastPreviewId = null;
     let previewTimer = null;
-    bindLibGridScroll();
+    bindLibGridNavigation();
     UI._hoverHandler = (e) => {
-      // 取活的 #libGrid：改筛选会整块换掉节点，闭包里捕获的旧节点永远是「没在滚」，
-      // 滚动静默窗会失效（旧写法遗留）
-      const liveGrid = document.getElementById('libGrid');
-      if (liveGrid && liveGrid.classList.contains('scrolling')) return;
       const w = e.target.closest ? e.target.closest('[data-card]') : null;
       const id = w ? w.dataset.card : null;
       if (id === lastPreviewId) return;
@@ -688,7 +757,7 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
       if (!id) return;   // 移出卡面：保留当前预览不动
       previewTimer = setTimeout(() => {
         previewTimer = null;
-        const card = libCards.find(c => c.id === id);
+        const card = libCardById.get(id);
         if (card) setLibSelection(card.id, true);
       }, 90);
     };
@@ -698,26 +767,38 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
       e.preventDefault(); document.getElementById('cardSearch')?.focus();
     });
     UI.refresh(game);
+    if (photoFpsEnabled) console.info('[photo-fps]', JSON.stringify({
+      label: 'render-sync',
+      ms: +(performance.now() - photoOpenStarted).toFixed(1),
+      photos: document.querySelectorAll('#libGrid .lib-item').length,
+    }));
+    clearTimeout(photoFpsSettledTimer);
+    samplePhotoFps('open', 1500);
+    if (photoFpsEnabled) photoFpsSettledTimer = setTimeout(() => {
+      if (cardPageOpen) samplePhotoFps('settled-idle', 3500);
+    }, 1800);
   }
 
   function closeLibPage() {
     cardPageOpen = false;
+    clearTimeout(photoFpsSettledTimer);
+    stopPhotoFpsProbe();
+    cancelLibPageWarm();
     clearTimeout(libSearchTimer);
     libSearchTimer = null;
     libArtObserver?.disconnect();
     libArtObserver = null;
     libArtRoot = null;
-    libGridResizeObserver?.disconnect();
-    libGridResizeObserver = null;
-    if (libWindowFrame) cancelAnimationFrame(libWindowFrame);
-    libWindowFrame = 0;
-    libRenderedWindowKey = '';
+    libPageIndex = 0;
     libCardNodeById.clear();
+    libPageCache.clear();
+    libRenderedPageIndex = null;
     document.body.classList.remove('cardlib-open');
     UI.hideOverlay();
     game.state = cardPagePrevState || 'idle';   // 从标题界面打开则回到标题，其余维持原 'idle' 行为
     cardPagePrevState = null;
     UI.refresh(game);
+    samplePhotoFps('title', 3500, false);
   }
 
   // ======== 卡牌制作坊 ========

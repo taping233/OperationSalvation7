@@ -193,7 +193,7 @@ import { escAttr } from './shared.js';
   function open(game, chests, done, opts) {
     const K = Object.assign({ resourceOnly: false }, opts || {});
     G = game;
-    queue = chests.slice();
+    queue = chests.map((chest, i) => ({ ...chest, battleSummary: i === 0 ? K.battleSummary || null : null }));
     idx = 0;
     onDone = done || null;
     G.state = 'modal';
@@ -214,6 +214,7 @@ import { escAttr } from './shared.js';
     }
     cur = rollContents(queue[idx].kind, queue[idx].isClass);
     cur.isClass = !!queue[idx].isClass;
+    cur.battleSummary = queue[idx].battleSummary || null;
     idx++;
     renderSearch();
   }
@@ -298,6 +299,7 @@ import { escAttr } from './shared.js';
       <div class="loot-manifest"><div><span>FIELD SUPPLY / ${String(idx).padStart(2, '0')}</span><b>${isPick ? '选一件，继续前行。' : '发现补给，整理收获。'}</b></div><div class="loot-capacity"><small>背包占用</small><b>${G.usedSlots()} <em>/ ${G.bagCap()}</em></b></div></div>
       ${cur.isClass ? '<p class="evt-sts-desc cls-chest-note">黑色职业宝箱：只掉落<b>职业卡牌</b></p>' : ''}
       <p class="evt-sts-desc">${lootLine}</p>
+      ${cur.battleSummary ? `<p class="evt-sts-desc battle-loot-summary">本战击败 <b>${cur.battleSummary.defeated}</b> 名敌人 · 剩余生命 <b>${cur.battleSummary.hp}/${cur.battleSummary.maxHp}</b></p>` : ''}
       ${warnLine}
       <div class="chest-reveal"><img class="chest-prop opened" src="${chestArtOf(cur)}" alt="" draggable="false"></div>
       ${cur.cards.length ? `<div class="bt-hand${taken.size ? ' no-anim' : ''}" data-n="${cur.cards.length}">${cardsHTML}</div>` : '<p class="ov-empty">（卡牌库是空的，什么也没开出）</p>'}

@@ -18,6 +18,7 @@ function lockManager() { return { request: (_name, _options, callback) => callba
 
 async function harness(slotId, failAt = null) {
   localStorage.clear();
+  RunStorage.remove(slotId);
   Base.use(slotId);
   Base.reset(slotId);
   RunStorage.write(slotId, { seed: 'terminal-test', hp: 0, maxHp: 30, inventory: [], ownedCards: [], myClass: '侠客' });

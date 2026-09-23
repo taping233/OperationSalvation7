@@ -93,8 +93,13 @@
 #overlay .battle-stage.sts .sts-hand .bt-slot { bottom:18px!important; }
 #overlay .battle-stage.sts .sts-hand .bt-slot .bt-card { min-width:0; }
 @media (max-height:760px) and (min-width:901px) {
-  #overlay .battle-stage.sts .sts-hud { flex-basis:220px!important; min-height:220px!important; height:220px!important; }
-  #overlay .battle-stage.sts .sts-hand { min-height:200px!important; height:200px!important; }
+  #overlay .battle-stage.sts .sts-hud { flex-basis:270px!important; min-height:270px!important; height:270px!important; }
+  #overlay .battle-stage.sts .sts-hand { min-height:250px!important; height:250px!important; padding-top:12px!important; }
+  #overlay .battle-stage.sts .sts-hand .bt-slot { bottom:10px!important; width:10em; font-size:15px; }
+  #overlay .battle-stage.sts .sts-hand[data-readable="true"] .bt-card.compact .hsc-desc { display:block; font-size:11px; line-height:1.25; }
+  #overlay .battle-stage.sts .sts-hand[data-readable="true"] .bt-card.compact .hsc-desc > span:not(.bt-rulehint) { -webkit-line-clamp:3; }
+  #overlay .battle-stage.sts .sts-hand .bt-slot:hover .bt-card:not(.off):not(.aim-lift) { transform:translateY(-8px) scale(1.02); }
+  /* 目标选择时把选中牌收进左侧手牌区，避免盖住敌人血条；transform 不触发布局重排。 */
 }
 @media (max-width:900px) {
   #overlay .battle-stage.sts .sts-hud { flex-basis:230px!important; min-height:230px!important; height:230px!important; }
@@ -142,6 +147,11 @@
 }
 
 #overlay .sts-hand .bt-card.click-selected { outline:2px solid #efcd89; outline-offset:3px; box-shadow:0 0 20px #e9c47a55; }
+@media (max-height:760px) and (min-width:901px) {
+  #overlay .battle-stage.sts .sts-hand .bt-slot:has(.bt-card.click-selected) { z-index:40!important; }
+  #overlay .battle-stage.sts .sts-hand .bt-card.click-selected { transform:translate(-330px,-8px) scale(1.02); z-index:30; }
+  body #overlay .battle-stage.sts .sts-hand .bt-slot:hover .bt-card.click-selected:not(.off):not(.aim-lift) { transform:translate(-330px,-8px) scale(1.02)!important; }
+}
 #overlay .sts-hand .bt-card.click-selected::after { content:'选择目标 · Esc 取消'; position:absolute; bottom:4px; left:4px; right:4px; padding:4px 0; color:#112735; background:#dfc28d; font-size:10px; text-align:center; pointer-events:none; }
 
 /* 战斗全屏边界：不继承通用弹窗的居中/动画位移，顶部牌堆和底部战术台始终留在视口内。 */

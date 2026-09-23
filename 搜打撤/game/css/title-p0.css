@@ -1,0 +1,201 @@
+/* Title page art direction: preserve the painted wordmark and original artwork. */
+#title .title-bg {
+  background-size: cover;
+  background-position: center;
+}
+
+#title .title-bg::before {
+  background:
+    linear-gradient(180deg, #0715229c 0%, #0a1a2766 21%, transparent 49%, #07152220 100%),
+    linear-gradient(90deg, #0715222b 0%, transparent 28%, transparent 52%, #07152257 74%, #0715228c 100%);
+}
+
+#title .title-bg::after {
+  background:
+    radial-gradient(ellipse 18% 25% at 31% 30%, #dceeff28, transparent 75%),
+    radial-gradient(ellipse 9% 11% at 31% 43%, #f8c6aa26, transparent 75%);
+  mix-blend-mode: screen;
+}
+
+#title::after {
+  background:
+    linear-gradient(90deg, #04111cba 0%, #07192480 24%, transparent 42%, #07131d95 100%),
+    linear-gradient(0deg, #07131d82, transparent 32%);
+}
+
+#title .title-inner::before {
+  background: radial-gradient(ellipse 88% 78% at 100% 48%, #071723ad, #07172370 49%, transparent 83%);
+}
+
+@media (min-width: 1101px) {
+  #title .title-heading {
+    left: -2%;
+    right: auto;
+    top: 18%;
+    width: min(620px, 50vw);
+    transform: none;
+  }
+}
+
+#title .ak-banner,
+#title .ak-circle {
+  height: 130px;
+  opacity: .82;
+  transition: opacity .2s, transform .2s, filter .2s;
+}
+
+#title .ak-banner:hover,
+#title .ak-circle:hover,
+#title .ak-banner:focus-visible,
+#title .ak-circle:focus-visible {
+  opacity: 1;
+}
+
+#title .ak-banner .bn-ico,
+#title .ak-circle .c-ring {
+  width: 92px;
+  height: 92px;
+  flex-basis: 92px;
+}
+
+#title .ak-banner .bn-ico::before,
+#title .ak-circle .c-ring::before {
+  inset: -17px -19px;
+  background-size: var(--home-icon-size, 88px), 100% 100%;
+}
+
+#title .ak-banner .bn-ico { --home-icon-size: 110px; }
+#title .ak-ach .c-ring { --home-icon-size: 100px; }
+#title .ak-lib .c-ring { --home-icon-size: 90px; }
+#title .ak-set .c-ring { --home-icon-size: 88px; }
+
+#title .ak-banner .bn-cn,
+#title .ak-circle .c-cn {
+  color: #f0eee8;
+  font-family: var(--font-ui) !important;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-shadow: 0 2px 9px #020912e8;
+}
+
+#title .ak-banner .bn-en,
+#title .ak-circle .c-en {
+  color: #c1c6c6;
+  font-family: var(--font-ui) !important;
+  font-size: 10px;
+  font-style: normal;
+  letter-spacing: .04em;
+}
+
+#title .ak-start {
+  right: 6.4%;
+  bottom: 3.7%;
+  width: clamp(260px, 25vw, 340px);
+  min-height: 130px;
+  height: 130px;
+  background: radial-gradient(ellipse 69% 49% at 50% 55%, #07131de8 0%, #07131da8 53%, transparent 100%);
+}
+
+#title .ak-start:hover {
+  background: radial-gradient(ellipse 69% 49% at 50% 55%, #07131df5 0%, #07131db5 53%, transparent 100%);
+}
+
+#title .ak-start .st-cn {
+  color: #ffebc0;
+  font-family: var(--font-ui) !important;
+  font-size: 31px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-shadow: 0 2px 8px #020912, 0 0 15px #d5a65b8c;
+}
+
+#title .ak-start .st-en {
+  color: #d9c7a0;
+  font-family: var(--font-ui) !important;
+  font-size: 10px;
+  font-style: normal;
+  letter-spacing: .05em;
+}
+
+@media (max-width: 1100px) {
+  #title .ak-banner,
+  #title .ak-circle { width: 150px; }
+  #title .ak-banner,
+  #title .ak-ach { right: 21%; }
+  #title .ak-lib,
+  #title .ak-set { right: 4%; }
+}
+
+@media (max-width: 800px) {
+  #title .ak-start { right: 3%; bottom: 2%; width: 240px; }
+}
+
+/* P1: reference layout: two left destinations, one top destination, one right utility. */
+@media (min-width: 1101px) {
+  #title .ak-banner {
+    left: auto; right: 31%; top: 4%;
+    width: 280px; height: 120px;
+    display: grid; grid-template-columns: 116px 1fr; grid-template-rows: 1fr 1fr;
+    text-align: left; align-items: center; opacity: .9;
+  }
+  #title .ak-banner .bn-ico {
+    grid-column: 1; grid-row: 1 / 3;
+    width: 114px; height: 114px; --home-icon-size: 132px;
+  }
+  #title .ak-banner .bn-cn { grid-column: 2; grid-row: 1; align-self: end; }
+  #title .ak-banner .bn-en { grid-column: 2; grid-row: 2; align-self: start; }
+  #title .ak-circle { width: 190px; height: 180px; }
+  #title .ak-circle .c-ring { width: 138px; height: 138px; flex-basis: 138px; }
+  #title .ak-lib { left: 4%; right: auto; top: 53%; }
+  #title .ak-lib .c-ring { --home-icon-size: 135px; }
+  #title .ak-ach { left: 17%; right: auto; top: 71%; }
+  #title .ak-ach .c-ring { --home-icon-size: 150px; }
+  #title .ak-set { left: auto; right: 5%; top: 22%; }
+  #title .ak-set .c-ring { width: 129px; height: 129px; flex-basis: 129px; --home-icon-size: 132px; }
+  #title .ak-start { right: 4%; bottom: 4%; width: 400px; height: 190px; }
+  #title .ak-start .st-row::before { width: 375px; height: 99px; flex-basis: 99px; }
+}
+
+/* P2: keep atmosphere, but let the illustration and interaction supply motion. */
+#title::before { animation: none; opacity: .42; }
+#title .ak-hud::after { animation: none; opacity: .34; }
+#title .title-snow { opacity: .55; }
+#title .title-snow i:nth-child(n+13) { display: none; }
+#title .title-foreground-paper::before { opacity: .42; }
+#title .title-foreground-paper::after { opacity: .2; }
+#title .ak-banner .bn-ico::before,
+#title .ak-circle .c-ring::before,
+#title .ak-banner .bn-ico::after,
+#title .ak-circle .c-ring::after,
+#title .ak-start .st-row::before,
+#title .ak-start .st-cn { animation: none; }
+
+/* The primary action is the one continuous light source. */
+#title .ak-start {
+  isolation: isolate;
+  filter: drop-shadow(0 0 23px #fff3c4bb) drop-shadow(0 0 42px #d59b4b91);
+}
+#title .ak-start::before {
+  content: ''; display: block; position: absolute; z-index: 0;
+  inset: 15% 4% 4%; width: auto; height: auto;
+  background: radial-gradient(ellipse 56% 46% at 50% 54%, #fff8d5b8, #e9b35970 46%, transparent 78%);
+  filter: blur(19px); opacity: .85; pointer-events: none;
+  animation: titleActionHalo 3s ease-in-out infinite alternate;
+}
+#title .ak-start .st-row::before {
+  animation: titleBladeBloom 3s ease-in-out infinite alternate;
+}
+#title .ak-start .st-cn {
+  color: #fff3d3;
+  font-size: 34px;
+  text-shadow: 0 2px 8px #020912, 0 0 18px #ffe5a9c7;
+}
+@keyframes titleActionHalo {
+  from { opacity: .55; transform: scale(.96); }
+  to { opacity: 1; transform: scale(1.05); }
+}
+@keyframes titleBladeBloom {
+  from { filter: drop-shadow(0 0 13px #fff7dbd6) brightness(1.25); }
+  to { filter: drop-shadow(0 0 30px #fff4c9f0) brightness(1.65); }
+}

@@ -18,6 +18,16 @@
     "cc-thousand": "cards/spell-cmtn1p9vb5au.webp",
     "tt-rations": "cards/expedition-starters/rations.webp"
   },
+  "cardArtRevisions": {
+    "tt7-throwblade": "wu-throwblade-v5-20260923",
+    "tt7-goldencicada": "wu-action-v3-20260923",
+    "tt7-ghostblade": "wu-action-v3-20260923",
+    "tt7-sneak": "wu-action-v3-20260923",
+    "tt7-thundergrudge": "wu-action-v3-20260923",
+    "tt7-meteorrain": "wu-action-v3-20260923",
+    "tt7-stealth": "wu-action-v3-20260923",
+    "tt7-swordimmortal": "wu-action-v3-20260923"
+  },
   "classIds": {
     "侠客": "sword",
     "战士": "warrior",

@@ -4,7 +4,8 @@
 const SDT = window.SDT;
 const UI = window.SDT.UI;
 import { esc } from './shared.js';
-import { cardStacks, doDeath, game, newUid, safeUsed, saveGame, usedSlots } from './game.session.js';
+import { cardStacks, doDeath, game, getActiveSlot, newUid, safeUsed, saveGame, usedSlots } from './game.session.js';
+import { RunStorage } from './game.storage.js';
 import { Random } from './random.js';
 import { on as busOn } from './event-bus.js';
 import { showRunTransition } from './game.run.js';
@@ -20,10 +21,40 @@ import { bagSlots } from './game.bag.bridge.js';
   // 复位 game.state——此前直接 hideOverlay 会把状态卡死在 modal、地图/路线全部无响应。
   // 晚绑定注册避免 ui→bag 静态成环（bag.js:2 的 UI 取自 window.SDT 门面）
   UI._bagCloseHook = bagSlots.closeBackpack;
+  const settlements = new WeakMap();
   const onBattleEnd = async function (opts, playedUids, win, consumedUids) {
     if (game.nestActive) return;   // 龙巢战斗结算由 game.nest 的总线订阅接管（一图战后流程不适用）
-    UI.hideOverlay();
     if (win === false) { doDeath(); return; }
+    // battle.engine 为每次开战创建独立 opts；同一场结束通知和失败重试共用这份记录。
+    let settlement = settlements.get(opts);
+    if (!settlement) {
+      const slotId = getActiveSlot();
+      const identity = slotId ? RunStorage.readIdentity(slotId) : null;
+      settlement = { phase: 'new', promise: null, slotId, runId: identity?.ok ? identity.value.runId : null,
+        rewardsApplied: false, runSaved: false, baseSaved: false };
+      settlements.set(opts, settlement);
+    }
+    const sameRun = () => {
+      if (getActiveSlot() !== settlement.slotId) return false;
+      if (!settlement.slotId) return true;
+      const identity = RunStorage.readIdentity(settlement.slotId);
+      return !!identity.ok && identity.value.runId === settlement.runId;
+    };
+    if (!sameRun()) return false;
+    if (settlement.promise) return settlement.promise;
+    if (settlement.phase === 'done' || settlement.phase === 'chests') return;
+    const retry = error => {
+      if (error) console.error('[battle:settle] 战后结算未完成', error);
+      UI.log('[[icon:cross]] 战后结算未保存，请重试；本场奖励不会重新发放', 'warn');
+      game.state = 'modal';
+      UI.showOverlay('战后结算未完成', '<div class="ov-btns"><button class="ov-btn ok" data-act="battleSettleRetry">重试保存战后奖励</button></div>', 'discover');
+      UI.act('battleSettleRetry', () => { onBattleEnd(opts, playedUids, win, consumedUids); });
+      return false;
+    };
+    const run = async () => {
+    if (!sameRun()) return false;
+    if (settlement.phase === 'new') {
+    UI.hideOverlay();
     // Item 16（2026-09-16 老板定版）：局内满足条件的牌 100% 进入消耗口袋（招式和装备）——
     // 「1/3 保留」改到离开对局（撤离结算）时统一结算，见 game.run.altar doExtract。
     // 衍生卡（如 闪金之锤）不能进消耗口袋（2026-09-15 留言）；职业卡与初始攻击仍直接消散。
@@ -54,6 +85,8 @@ import { bagSlots } from './game.bag.bridge.js';
     if (consumedUids && consumedUids.length) {
       toPocket(consumedUids, '注能消耗的卡牌');
     }
+    settlement.phase = 'pocket';
+    }
     // 「卡牌是消耗品」一次性教学（2026-09-19 关卡审查）：
     // 打出的卡不回背包、初始攻击/职业卡直接消散——这条核心规则此前只有战后台志提到过，
     // 新手首层打光 5 张初始攻击就会陷入无攻击牌死局。首胜结算后弹一次说明（按档位只弹一次）。
@@ -62,7 +95,7 @@ import { bagSlots } from './game.bag.bridge.js';
       const B = SDT.Base;
       if (!B || !B.data || B.data.ammoTaught) return;
       B.data.ammoTaught = true;
-      B.save();
+      if (getActiveSlot()) B.save();
       game.state = 'modal';
       const shaCard = SDT.Cards.all().find(c => c.id === SDT.Cards.SHA.id) || SDT.Cards.SHA;
       UI.showOverlay('[[icon:cards]] 卡牌是消耗品', `
@@ -103,6 +136,7 @@ import { bagSlots } from './game.bag.bridge.js';
     };
     // 开完宝箱后的续流：普通战/首脑战（第四层 boss 格发起）都回待机
     const settle = () => {
+      if (!sameRun()) return false;
       // 战后保底传说（2026-09-09 玩法定版）：
       //   ① 首脑战胜利：额外 1 张传说卡；
       //   ② 击败巨兽「荒渊」（第 3/4 层精英）：30% 概率额外 1 张传说卡。
@@ -110,44 +144,58 @@ import { bagSlots } from './game.bag.bridge.js';
       const slewDragon = !opts.isBoss && (opts.foeNames || []).some(n => String(n).includes('巨兽'));
       // 宠物蛋保底新档（2026-09-19 老板拍板）：每打赢一场战斗，蛋的爆率永久 +0.2%
       //（叠加在 0.7% 基础 + 每空开箱 +3% 之上；计数存基地档位跨局累计）
-      if (win === true && SDT.Base && SDT.Base.data) {
+      if (!settlement.rewardsApplied && win === true && SDT.Base && SDT.Base.data) {
         SDT.Base.data.eggBattles = (SDT.Base.data.eggBattles || 0) + 1;
-        SDT.Base.save();
       }
-      if (win === true) {
+      if (!settlement.rewardsApplied && win === true) {
         game.visited = game.visited || {};
         game.visited[game.layerIdx + ',' + game.trackPos] = 1;
       }
       let legends = 0;
-      if (opts.isBoss && win === true) {
+      if (!settlement.rewardsApplied && opts.isBoss && win === true) {
         legends = 1;
       }
-      if (slewDragon && win === true && Random.random('loot') < 0.3) legends += 1;
+      if (!settlement.rewardsApplied && slewDragon && win === true && Random.random('loot') < 0.3) legends += 1;
       if (legends > 0) UI.log('[[icon:trophy]] 首脑宝库开启：额外奖励 <b>1 张传说卡</b>！', 'loot');
       for (let i = 0; i < legends; i++) {
         const pool = SDT.Cards.all().filter(c => c.rarity === '传说' && SDT.Cards.isRandomObtainable(c));
         const card = pool.length ? pool[Math.floor(Random.random('loot') * pool.length)] : null;
         if (card) game.grantCard(card);
       }
+      settlement.rewardsApplied = true;
+      settlement.phase = 'saving';
       game.state = 'idle';
-      saveGame();
+      // 先持久化玩家本局奖励：若 Run 写失败，基地计数尚未落盘，刷新重打不会多计一次。
+      if (!settlement.runSaved) {
+        if (saveGame() === false && getActiveSlot()) return retry();
+        settlement.runSaved = true;
+      }
+      if (!settlement.baseSaved && win === true && settlement.slotId && SDT.Base && SDT.Base.data) {
+        if (SDT.Base.save() === false) return retry();
+        settlement.baseSaved = true;
+      }
+      settlement.phase = 'done';
       UI.refresh(game);
       teachAmmoOnce();   // 首胜后一次性说明「卡牌是消耗品」（见上方 teachAmmoOnce 注释）
+      return true;
     };
+    if (settlement.phase === 'saving') return settle();
     if (win !== true) {   // 撤退：不发宝箱、不发事件奖励
       game.pendingEventLoot = null;
       // 2026-09-07 留言：撤退要有文案和动画——复用启程过渡（撤离点场景）
-      await showRunTransition({
+      if (settlement.phase === 'pocket') await showRunTransition({
         tone: 'exit', asset: 'scene-extract-bg',
         eyebrow: 'TACTICAL RETREAT', title: '全身而退',
         detail: opts.isBoss ? '你撤出了 BOSS战 · 已结算的战利品完好保存' : '撤出战斗 · 打出过的卡照常结算',
         duration: 1050,
       });
-      UI.log('[[icon:runner]] ' + (opts.isBoss ? '你撤出了 BOSS战' : '你撤出了战斗（打出过的卡照常结算）'), 'sys');
+      if (!sameRun()) return false;
+      if (settlement.phase === 'pocket') UI.log('[[icon:runner]] ' + (opts.isBoss ? '你撤出了 BOSS战' : '你撤出了战斗（打出过的卡照常结算）'), 'sys');
+      settlement.phase = 'saving';
       settle();
       return;
     }
-    await showRunTransition({
+    if (settlement.phase === 'pocket') await showRunTransition({
       tone: opts.isBoss ? 'altar' : 'battle',
       asset: 'scene-battle-bg',
       eyebrow: opts.isBoss ? 'TARGET ELIMINATED' : 'AREA SECURED',
@@ -155,6 +203,9 @@ import { bagSlots } from './game.bag.bridge.js';
       detail: opts.isBoss ? '污染反应正在消退 · 准备整理战利品' : '威胁解除 · 正在回收战利品',
       duration: opts.isBoss ? 1350 : 1050,
     });
+    if (!sameRun()) return false;
+    if (settlement.phase === 'pocket') settlement.phase = 'transitioned';
+    if (settlement.phase === 'transitioned') {
     UI.log(opts.isBoss ? '[[icon:trophy]] <b>BOSS战胜利！</b>' : '[[icon:trophy]] 战斗胜利！', 'ok');
     // 需求 #13：击败首脑后，第五层终局撤离点无条件放行
     if (opts.isBoss && win === true && !game.bossKilled) {
@@ -180,18 +231,29 @@ import { bagSlots } from './game.bag.bridge.js';
         eventChests = loot.chests.map(k => ({ kind: k }));
       }
     }
+    settlement.eventChests = eventChests;
+    settlement.phase = 'rewardsReady';
+    }
     // 战胜 100% 掉宝箱（按所在环层 / BOSS 宝箱）
     const afterRewards = () => {
+      if (!sameRun()) return false;
+      settlement.phase = 'saving';
       settle();   // Item 16：BOSS 战后不再进入整理背包
     };
-    const drops = SDT.Chests.rollDrops(opts);
-    const all = eventChests.concat(drops);
+    settlement.allChests ||= settlement.eventChests.concat(SDT.Chests.rollDrops(opts));
+    const all = settlement.allChests;
     if (all.length) {
       UI.log(`[[icon:archive]] 战利品掉落：${SDT.Chests.dropText(all)}`, 'loot');
-      SDT.Chests.open(game, all, afterRewards);
+      SDT.Chests.open(game, all, afterRewards, {
+        battleSummary: { defeated: (opts.foeNames || []).length, hp: game.hp, maxHp: game.maxHp },
+      });
+      if (settlement.phase === 'rewardsReady') settlement.phase = 'chests';
       return;
     }
     afterRewards();
+    };
+    settlement.promise = run().catch(retry).finally(() => { settlement.promise = null; });
+    return settlement.promise;
   };
   // 战斗结束改经总线广播订阅（批次 5）；G.onBattleEnd 保留为无订阅方时的回退路径
   busOn('battle:end', onBattleEnd);

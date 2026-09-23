@@ -56,7 +56,7 @@ function storePending(slot, pending) {
 
 beforeEach(() => {
   localStorage.clear();
-  for (let slot = 1; slot <= 5; slot++) RunStorage._invalidate(slot);
+  for (let slot = 1; slot <= 5; slot++) RunStorage.remove(slot);
   session._set_active_slot(null);
   session.game.pendingExtraction = null;
   session.game.extractionPending = null;

@@ -6,6 +6,18 @@
   /* 内嵌终端字体（OFL，子集见 assets/fonts/README.md）：
      西文/数字走 Cascadia Code 等宽，中文走思源黑体子集，缺字回退雅黑 */
   @font-face {
+    font-family: 'HarmonyOS Sans SC';
+    src: url('../assets/fonts/HarmonyOS_Sans_SC_Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'HarmonyOS Sans SC';
+    src: url('../assets/fonts/HarmonyOS_Sans_SC_Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-display: swap;
+  }
+  @font-face {
     font-family: 'Cascadia Code';
     src: url('../assets/fonts/cascadia-code-400.woff2') format('woff2');
     font-weight: 400; font-display: swap;

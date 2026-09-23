@@ -176,6 +176,8 @@ import { cardRuleHint } from './battle.preview.js';
   // 差分更新：新建/保留/移除槽位 + 目标扇形位补间 + 新牌飞入。返回动画时长供飘字延迟取用。
   function updateHand(snapshot, prev, pageGroups, events, extra) {
     if (!handLayer) return { flightMs: 0 };
+    const readable = pageGroups.length <= 6 ? 'true' : 'false';
+    if (handLayer.dataset.readable !== readable) handLayer.dataset.readable = readable;
     const evs = events || [];
     const drawn = new Set(), played = new Set();
     evs.forEach(ev => { if (ev.kind === 'draw') drawn.add(ev.uid); else if (ev.kind !== 'shuffle' && ev.kind !== 'surge') played.add(ev.uid); });

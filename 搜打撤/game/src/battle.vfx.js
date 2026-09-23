@@ -272,7 +272,12 @@ import { takeFloats } from './battle.core.js';
         span.classList.add('sticker');
         span.innerHTML = `<img src="${assetUrl('assets/battle/fx-sticker-' + sticker + '.svg')}" alt="">`;
       } else {
-        span.textContent = f.text;
+        if (f.label) {
+          const label = document.createElement('small');
+          label.textContent = f.label + ' ';
+          span.appendChild(label);
+        }
+        span.appendChild(document.createTextNode(f.text));
       }
       // STS2：伤害数字落点随机抖动（±10, ±5），与同伴不重影
       span.style.left = (r.left - ovR.left + r.width / 2 + (Random.random('fx') * 20 - 10)) + 'px';
@@ -287,7 +292,7 @@ import { takeFloats } from './battle.core.js';
         setTimeout(() => span.remove(), 1400);   // 兜底：animationend 偶尔不触发时清掉不可见残骸
       }
       };
-      const delay = baseDelay + (f.delay || 0) + feedbackDelay(f.unit, perUnit, demoMs(FEEDBACK_DELTA_MS));   // f.delay：演出错拍（如敌方前摇先播 130ms）；同单位每多一段 +320ms（2× 时经 demoMs 缩放）
+      const delay = baseDelay + (f.delay || 0) + feedbackDelay(f.unit, perUnit, demoMs(FEEDBACK_DELTA_MS));   // f.delay：演出错拍；同单位每多一段 +320ms
       if (delay) setTimeout(fire, delay); else fire();
     });
   }

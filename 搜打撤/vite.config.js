@@ -50,8 +50,8 @@ const OUT_DIR = process.env.SDT_BUILD_OUT_DIR
 const RUNTIME_ASSET_DIRS = ['cards', 'portraits', 'icons', 'scenes', 'thumbs', path.join('ui', 'icons'), 'sfx'];
 const ASSETS_ROOT = path.join(GAME_ROOT, 'assets');
 const RUNTIME_ASSET_PREFIXES = RUNTIME_ASSET_DIRS.map(dir => dir.split(path.sep).join('/') + '/');
-// 美术清单扫描范围：RUNTIME 目录去掉 sfx（音频不是美术）与 thumbs（缩略图按需取用；
-// 进清单会被全量预热，等于原图+缩略图两份位图都常驻，与预加载初衷相反）。图片扩展名兜底过滤。
+// 原图清单排除 sfx 与 thumbs；缩略图有独立清单，启动时可和原图分批统一预热。
+// 图片扩展名兜底过滤。
 const ART_MANIFEST_DIRS = RUNTIME_ASSET_DIRS.filter(dir => dir !== 'sfx' && dir !== 'thumbs');
 const IMAGE_EXT_RE = /\.(webp|png|jpe?g|gif|svg)$/i;
 const ITEM_ART_ALIAS = Object.freeze({ id: 'tt-token-color', target: 'cmtmvq6ss84l' });

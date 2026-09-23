@@ -214,7 +214,13 @@ import { photoMountFor } from './photo-studio-presentation.js';
           <p class="cz-note-text">${note ? esc(note) : '暂无备注'}</p>
         </div>`;
       const photoMode = opts.presentation === 'photo';
-      const photoArt = photoMode && SDT.Art?.cardIcon ? SDT.Art.cardIcon(card) : '';
+      const photoArt = photoMode && SDT.Art?.cardIcon ? SDT.Art.cardIcon(card, { low: true }) : '';
+      let photoFullSrc = '';
+      if (photoMode && SDT.Art?.cardIcon) {
+        const fullArt = document.createElement('template');
+        fullArt.innerHTML = SDT.Art.cardIcon(card);
+        photoFullSrc = fullArt.content.querySelector('img')?.getAttribute('src') || '';
+      }
       const photoRarity = photoMode ? SDT.Cards.rarityOf(card) : '';
       const photoMount = photoMode ? photoMountFor(photoRarity) : null;
       const creatureStats = photoMode && card.type === '生物'
@@ -259,10 +265,10 @@ import { photoMountFor } from './photo-studio-presentation.js';
         const sourceRatio = sourceImage?.naturalHeight > 0 ? sourceImage.naturalWidth / sourceImage.naturalHeight : 1;
         el.style.setProperty('--cz-photo-ratio', String(sourceRatio > 0 ? sourceRatio : 1));
         if (!reducedMotion) el.classList.add('cz-photo-entering');
-        el.style.setProperty('--cz-photo-enter-ms', '420ms');
+        el.style.setProperty('--cz-photo-enter-ms', '240ms');
         el.style.setProperty('--cz-photo-close-ms', '320ms');
-        el.style.setProperty('--cz-photo-info-delay', '80ms');
-        el.style.setProperty('--cz-photo-motion-ms', '420ms');
+        el.style.setProperty('--cz-photo-info-delay', '0ms');
+        el.style.setProperty('--cz-photo-motion-ms', '240ms');
       }
       el.setAttribute('role', 'dialog');
       el.setAttribute('aria-modal', 'true');
@@ -279,6 +285,7 @@ import { photoMountFor } from './photo-studio-presentation.js';
       let noteSaveTimer = null;
       let negTimer = null;
       let enterTimer = null;
+      let photoSourceTimer = null;
       let closeTimer = null;
       let finishClose = null;
       let closeTransitionEnd = null;
@@ -326,6 +333,7 @@ import { photoMountFor } from './photo-studio-presentation.js';
         if (closed) {
           if (photoMode && immediate && !removed) {
             clearTimeout(enterTimer);
+            clearTimeout(photoSourceTimer);
             clearTimeout(closeTimer);
             removed = true;
             el.remove();
@@ -336,6 +344,7 @@ import { photoMountFor } from './photo-studio-presentation.js';
         }
         clearTimeout(noteSaveTimer);
         clearTimeout(enterTimer);
+        clearTimeout(photoSourceTimer);
         clearTimeout(negTimer);
         el.classList.remove('cz-neg');
         saveNote();
@@ -444,6 +453,21 @@ import { photoMountFor } from './photo-studio-presentation.js';
         else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
       }, true);
       document.body.appendChild(el);
+      if (photoFullSrc) {
+        photoSourceTimer = setTimeout(() => {
+          const visibleImage = el.querySelector('.cz-photo-image img');
+          if (!visibleImage || !el.isConnected || closed || visibleImage.src === new URL(photoFullSrc, document.baseURI).href) return;
+          const fullImage = new Image();
+          fullImage.decoding = 'async';
+          fullImage.src = photoFullSrc;
+          const ready = typeof fullImage.decode === 'function'
+            ? fullImage.decode().catch(() => null)
+            : new Promise(resolve => { fullImage.onload = resolve; fullImage.onerror = resolve; });
+          ready.then(() => {
+            if (el.isConnected && !closed && fullImage.naturalWidth) visibleImage.src = fullImage.src;
+          });
+        }, reducedMotion ? 0 : 260);
+      }
       // 大图显式解码，防 IAB 合成黑窗（同池页首屏/战斗手牌修法；2026-09-20 走查实锤特写黑窗）
       if (SDT.Art && SDT.Art.decodeIn) SDT.Art.decodeIn(el);
       // 彩蛋：长按大图 600ms「看底片」（挂 cz-neg，负片样式 scoped 在照相馆入口），松开恢复

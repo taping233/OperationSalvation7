@@ -665,27 +665,34 @@ import { renderMiniMap } from './game.session.js';
     };
     if ('requestIdleCallback' in window) requestIdleCallback(warmHubWallpaper, { timeout: 4000 });
     else setTimeout(warmHubWallpaper, 2000);
-    // 启动只预热首轮高频场景；卡面/图鉴走 lazy+缩略图，后续场景在路线确认时预取。
-    // 禁止把清单、卡库和 CSS 背景重新并入这里，否则会恢复 800+ 请求和数百 MB 解码峰值。
+    // 启动时完整预取原图与缩略图文件；只解码首轮场景，其他美术在显示前再按需解码。
     const warmupTip = document.getElementById('warmupTip');
     const warmupBar = document.getElementById('warmupBar');
     const warmupNum = document.getElementById('warmupNum');
-    const urls = STARTUP_SCENE_KEYS.map(key => PRELOAD_SCENES[key]).filter(Boolean);
-    if (urls.length > PERFORMANCE_BUDGETS.startupPreloadMax) {
-      throw new Error(`启动预热超预算：${urls.length}/${PERFORMANCE_BUDGETS.startupPreloadMax}`);
+    const sceneUrls = STARTUP_SCENE_KEYS.map(key => PRELOAD_SCENES[key]).filter(Boolean);
+    if (sceneUrls.length > PERFORMANCE_BUDGETS.startupPreloadMax) {
+      throw new Error(`首轮场景预热超预算：${sceneUrls.length}/${PERFORMANCE_BUDGETS.startupPreloadMax}`);
     }
+    const urls = [...new Set([
+      ...sceneUrls,
+      ...SDT.Art.collectThumbnailAssets(),
+      ...SDT.Art.collectManifestAssets(),
+    ])];
     if (warmupTip && urls.length) {
       warmupTip.hidden = false;
-      SDT.Art.warmBatched(urls, (done, total) => {
-        if (warmupNum) warmupNum.textContent = `${done}/${total}`;
-        if (warmupBar) warmupBar.style.width = `${Math.round(done / total * 100)}%`;
-        if (done >= total) setTimeout(() => {
-          warmupTip.classList.add('done');
-          setTimeout(() => { warmupTip.hidden = true; }, 600);
-        }, 350);
-      }).catch(error => console.warn('[warmup] 首屏资源预热未完成', error));
+      const sceneSet = new Set(sceneUrls);
+      const deferredUrls = urls.filter(url => !sceneSet.has(url));
+      SDT.Art.warmBatched(sceneUrls, null, 2).then(() => SDT.Art.prefetchBatched(deferredUrls, (done, total) => {
+        const complete = sceneUrls.length + done;
+        const grand = sceneUrls.length + total;
+        if (warmupNum) warmupNum.textContent = `${complete}/${grand}`;
+        if (warmupBar) warmupBar.style.width = `${Math.round(complete / grand * 100)}%`;
+      }, 4)).then(() => setTimeout(() => {
+        warmupTip.classList.add('done');
+        setTimeout(() => { warmupTip.hidden = true; }, 600);
+      }, 350)).catch(error => console.warn('[warmup] 首屏资源预取未完成', error));
     } else {
-      try { SDT.Art.warmBatched(urls).catch(error => console.warn('[warmup] 首屏资源预热未完成', error)); } catch (_) {}
+      try { SDT.Art.prefetchBatched(urls, null, 4).catch(error => console.warn('[warmup] 首屏资源预取未完成', error)); } catch (_) {}
     }
     requestLoopFrame();
   });

@@ -58,6 +58,45 @@
 .loot-footer-note { font-size:11px; color:#8da7b4; margin:12px 0; text-align:center; }
 #overlay .card.chest .chest-ops { display:grid; grid-template-columns:1fr 1.5fr; gap:12px; padding-top:12px; border-top:1px solid #adbec633; }
 #overlay .card.chest .chest-ops .ov-btn { min-height:44px; font-size:12px; }
+/* 短视口战后开箱：压缩装饰和间距，把战绩、奖励卡与领取按钮收进首屏。 */
+@media (max-height:760px) and (min-width:761px) {
+  #overlay .card.chest {
+    box-sizing:border-box;
+    max-height:calc(100vh - 20px)!important;
+    max-height:calc(100dvh - 20px)!important;
+    overflow-y:auto!important;
+    padding:10px 24px 12px!important;
+  }
+  #overlay .card.chest > h2 { margin:0 0 4px; padding:2px 4px 6px; font-size:17px; }
+  #overlay .card.chest .loot-manifest { margin:4px 0; gap:12px; }
+  #overlay .card.chest .loot-manifest > div:first-child { gap:2px; }
+  #overlay .card.chest .loot-manifest span { font-size:9px; }
+  #overlay .card.chest .loot-manifest > div:first-child > b { font-size:20px; line-height:1.2; }
+  #overlay .card.chest .loot-capacity { gap:2px; }
+  #overlay .card.chest .loot-capacity small { font-size:11px; }
+  #overlay .card.chest .loot-capacity b { font-size:20px; }
+  #overlay .card.chest .evt-sts-desc { margin:4px 0; padding:2px 6px; font-size:13px; line-height:1.35; }
+  #overlay .card.chest .battle-loot-summary {
+    padding:7px 12px;
+    border:1px solid rgba(223,194,141,.5);
+    border-radius:8px;
+    background:linear-gradient(100deg,rgba(105,76,34,.6),rgba(35,47,47,.72));
+    color:#f2e4c2;
+    font-size:15px;
+    font-weight:700;
+  }
+  #overlay .card.chest .chest-reveal { height:52px; margin:0; overflow:hidden; }
+  #overlay .card.chest .chest-reveal .chest-prop { width:auto; height:52px; animation:none; }
+  #overlay .card.chest .chest-reveal::before { display:none; }
+  #overlay .card.chest .bt-hand { min-height:0!important; gap:12px!important; padding:4px 0 2px!important; }
+  #overlay .card.chest .bt-hand .hs-card { height:12.5em!important; font-size:15px!important; }
+  #overlay .card.chest .bt-hand[data-n="5"] .hs-card { font-size:14px!important; }
+  #overlay .card.chest .bt-hand[data-n="6"] .hs-card,
+  #overlay .card.chest .bt-hand:not([data-n]) .hs-card { font-size:13px!important; }
+  #overlay .card.chest .loot-footer-note { margin:4px 0; font-size:12px; }
+  #overlay .card.chest .chest-ops { gap:10px; margin-top:8px; padding-top:8px; }
+  #overlay .card.chest .chest-ops .ov-btn { min-height:48px; padding:8px 12px; font-size:14px; letter-spacing:1px; }
+}
 @media(max-width:760px) {
   #overlay .node-panel { width:62%; padding:24px 20px; }
   #overlay .card.chest { padding:18px; }

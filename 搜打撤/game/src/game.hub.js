@@ -42,11 +42,11 @@ let hubCollectionView = 'backs';
     game.state = 'modal';
     _set_cardPageOpen(true);
     setLobby(true);           // 基地也属于非对局界面：隐藏左侧栏
-    hubTab = tab || 'deploy';
+    hubTab = tab === 'home' ? 'deploy' : (tab || 'deploy');
     SDT.Sound.music('base');   // 基地氛围
     SDT.Art.hydrateSelectedSkins(SDT.Base.data.appearance?.selectedSkins);
     SDT.Meta.checkUnlocks();   // 进基地时补播新解锁的成就
-    renderHomeScene();
+    renderHub();
   }
 
   function readHomeView() {
@@ -122,7 +122,6 @@ let hubCollectionView = 'backs';
     renderHub._lastTab = hubTab;
     // v0.22 图标页签：大图标为主 + 小字注记（仓库=木房子）
     const TABS = [
-      { id: 'home', icon: 'home', name: '基地' },
       { id: 'deploy', icon: 'flag', name: '出发' },
       { id: 'stash', icon: 'home', name: '仓库' },
       { id: 'shop', icon: 'coin', name: '商店' },
@@ -184,7 +183,7 @@ let hubCollectionView = 'backs';
       UI.log(`[[icon:coin]] 购入【<b>${esc(card.name)}</b>】×1 → 卡牌仓库（储备余 ${B.data.coins} 币）`, 'loot');
       renderHub();
     });
-    UI.act('hubTab', (d) => { if (d.tab === 'home') { renderHomeScene(); return; } hubTab = d.tab; renderHub(); });
+    UI.act('hubTab', (d) => { hubTab = d.tab === 'home' ? 'deploy' : d.tab; renderHub(); });
     UI.act('hubCollectionView', (d) => {
       if (!['backs', 'achievements', 'classes'].includes(d.view)) return;
       hubCollectionView = d.view;

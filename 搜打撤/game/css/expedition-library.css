@@ -673,15 +673,15 @@ body.cardlib-open #overlay .photo-studio-v3 .clib-main::after {
 body.cardlib-open #overlay .photo-studio-v3 .lib-grid {
   min-height:0;
   min-width:0;
-  overflow-y:auto;
+  overflow-y:hidden;
   overflow-x:hidden;
+  overscroll-behavior:none;
   display:grid!important;
   grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  grid-template-rows:repeat(2,minmax(0,1fr));
   gap:32px 26px!important;
   padding:20px 12px 42px!important;
   align-content:start;
-  scrollbar-width:thin;
-  scrollbar-color:#4a3230 transparent;
   /* 影廊射灯：沿四列各一束静态锥光打向照片（背景画在容器上不随内容滚动，灯"钉在墙上"）；
      首层=光衰减（顶部暖亮→36% 消失，09-23 ⑥）；尾部一道宽暗角收底。纯静态渐变 */
   background:
@@ -693,6 +693,10 @@ body.cardlib-open #overlay .photo-studio-v3 .lib-grid {
     radial-gradient(150px 480px at 75% -30px, rgba(255,218,168,.11), transparent 74%),
     radial-gradient(150px 480px at 92% -30px, rgba(255,218,168,.11), transparent 74%),
     radial-gradient(ellipse at 74% 44%, rgba(0,0,0,.1), transparent 32%);
+}
+body.cardlib-open #overlay .photo-studio-v3.studio-index-layout {
+  overflow:hidden!important;
+  overscroll-behavior:none;
 }
 body.cardlib-open #overlay .photo-studio-v3 .lib-grid.is-empty {
   display:grid!important;
@@ -844,10 +848,6 @@ body.cardlib-open #overlay .photo-studio-v3 .lib-item.selected .studio-photo-pap
   border-color:var(--studio-gold);
   box-shadow:0 13px 18px rgba(0,0,0,.5),0 0 0 2px rgba(212,175,122,.42),0 0 22px rgba(255,214,168,.32);
 }
-body.cardlib-open #overlay .photo-studio-v3 .lib-grid.scrolling .studio-photo-paper {
-  box-shadow:0 3px 5px rgba(0,0,0,.45),inset 0 0 0 1px rgba(255,255,255,.18);
-}
-body.cardlib-open #overlay .photo-studio-v3 .lib-grid.scrolling .studio-photo-paper::before { display:none; }
 body.cardlib-open #overlay .photo-studio-v3 .studio-photo:focus-visible {
   outline:2px dashed #c3d8d4!important;
   outline-offset:2px!important;
@@ -1179,12 +1179,13 @@ body.cardlib-open #overlay .photo-studio-v3 #libCls { border-left:2px solid rgba
   body.cardlib-open #overlay .photo-studio-v3 .studio-filterbar { padding:7px 16px; }
   body.cardlib-open #overlay .photo-studio-v3 .clib-main { padding:10px 12px 14px!important; }
   body.cardlib-open #overlay .photo-studio-v3 .lib-grid {
-    grid-template-columns:repeat(2,minmax(0,1fr))!important;
-    gap:18px 10px!important;
-    padding:16px 7px 34px!important;
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    grid-template-rows:repeat(2,minmax(0,1fr));
+    gap:6px 4px!important;
+    padding:8px 4px!important;
   }
-  body.cardlib-open #overlay .photo-studio-v3 .lib-item { padding-top:13px!important; }
-  body.cardlib-open #overlay .photo-studio-v3 .studio-photo-caption b { font-size:15px; }
+  body.cardlib-open #overlay .photo-studio-v3 .lib-item { padding:8px 1px 2px!important; }
+  body.cardlib-open #overlay .photo-studio-v3 .studio-photo-caption b { font-size:12px; }
   #cardZoom .cz-close { top:12px; right:12px; }
 }
 @media(prefers-reduced-motion:reduce) {
@@ -1486,30 +1487,6 @@ body.cardlib-open #overlay .photo-studio-v3 .library-tools>.studio-edit-toggle.o
   color:#241708!important;
   border-color:var(--studio-brass-lo)!important;
 }
-/* —— ⑩ 回顶按钮：滚过一屏半现身 —— */
-body.cardlib-open #overlay .photo-studio-v3 .studio-top {
-  position:absolute;
-  right:26px;
-  bottom:26px;
-  z-index:5;
-  width:40px;
-  height:40px;
-  border:1px solid rgba(212,175,122,.45);
-  border-radius:50%;
-  background:rgba(29,21,18,.88);
-  color:var(--studio-gold-soft);
-  font:700 16px var(--font-ui);
-  box-shadow:0 4px 12px rgba(0,0,0,.5);
-  opacity:0;
-  pointer-events:none;
-  transform:translateY(6px);
-  transition:opacity .18s ease,transform .18s ease;
-}
-body.cardlib-open #overlay .photo-studio-v3 .studio-top.show {
-  opacity:1;
-  pointer-events:auto;
-  transform:none;
-}
 /* —— 稀有度夹子分档（CSS 换色零素材；rv2/rv3=默认黄铜不写） —— */
 body.cardlib-open #overlay .photo-studio-v3 .lib-cardwrap.rv0 .studio-photo-paper::before,
 body.cardlib-open #overlay .photo-studio-v3 .lib-cardwrap.rv1 .studio-photo-paper::before {
@@ -1787,7 +1764,7 @@ body.cardlib-open #overlay .photo-studio-v3 .studio-photo-art {
     inset 0 0 10px rgba(10,4,2,.12);
 }
 body.cardlib-open #overlay .photo-studio-v3 .studio-photo-art img {
-  filter:sepia(.02) saturate(1.02) contrast(1.01) brightness(1.02);
+  filter:none;
 }
 body.cardlib-open #overlay .photo-studio-v3 .studio-preview-paper .studio-photo-art img { filter:none; }
 body.cardlib-open #overlay .photo-studio-v3 .type-badge {
@@ -2336,6 +2313,7 @@ body.cardlib-open #overlay .photo-studio-v3 .clib-main {
 }
 body.cardlib-open #overlay .photo-studio-v3 .clib-main::before { opacity:.1; }
 body.cardlib-open #overlay .photo-studio-v3 .clib-main::after {
+  display:none;
   background:linear-gradient(transparent,#101912);
   height:34px;
 }
@@ -2694,6 +2672,33 @@ body.cardlib-open #overlay .studio-index-layout .studio-catalog .lib-grid {
   width:100%;
   box-sizing:border-box;
   padding-top:24px!important;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-page-nav {
+  flex:0 0 auto;
+  justify-content:center;
+  gap:12px;
+  margin:4px 8px 0;
+  padding:0 4px;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-page-nav[hidden] { display:none!important; }
+body.cardlib-open #overlay .studio-index-layout .studio-page-nav .pv-pos { min-width:150px; text-align:center; }
+@keyframes libPhotoPageIn { from { opacity:0; transform:translateX(var(--lib-page-enter-x,14px)) scale(.985); } }
+body.cardlib-open #overlay .photo-studio-v3.studio-index-layout .lib-grid > .lib-item {
+  animation:libPhotoPageIn .18s ease-out both!important;
+  animation-delay:calc(var(--i,0) * 8ms)!important;
+}
+/* 分页后同屏仅 8 张；避免每次翻页创建 8 个动画层，也不再在悬停时切换内容可见性。 */
+body.cardlib-open #overlay .photo-studio-v3.studio-index-layout .lib-grid > .lib-item {
+  animation:none!important;
+  content-visibility:visible!important;
+}
+body.cardlib-open #overlay .photo-studio-v3.studio-index-layout .lib-grid.lib-page-next { --lib-page-enter-x:14px; }
+body.cardlib-open #overlay .photo-studio-v3.studio-index-layout .lib-grid.lib-page-previous { --lib-page-enter-x:-14px; }
+@media(prefers-reduced-motion:reduce) {
+  body.cardlib-open #overlay .photo-studio-v3.studio-index-layout .lib-grid > .lib-item { animation:none!important; }
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-info {
+  transition:opacity 180ms ease,transform 180ms cubic-bezier(.22,.72,.22,1)!important;
 }
 body.cardlib-open #overlay .studio-index-layout .studio-catalog .studio-filterbar {
   position:relative;

@@ -6,7 +6,7 @@ class WinterSoundscape {
     this.ctx = context; this.destination = destination;
     this.root = context.createGain(); this.root.gain.value = 0; this.root.connect(destination);
     this.layers = new Map(); this.nodes = []; this.mode = null; this.volume = 0.11; this.paused = false; this.muted = false;
-    this.boss = false; this.tensionGain = null; this.pulseGain = null;   // BOSS 紧张垫（音频 P2#12）
+    this.boss = false; this.pressure = 0; this.tensionGain = null; this.pulseGain = null; this.pressureGain = null;   // BOSS/高压层
     this._visibility = () => this.setPaused(document.hidden);
     if (typeof document !== 'undefined') document.addEventListener('visibilitychange', this._visibility);
     this._build();
@@ -35,7 +35,9 @@ class WinterSoundscape {
     const pulse = this._gain(0.016); this._osc('sine', 110, pulse); pulse.connect(battle);
     const pulseDepth = this._gain(0.009); this._osc('sine', 1.6, pulseDepth); pulseDepth.connect(pulse.gain);
     const tension = this._gain(0.018); this._osc('sawtooth', 146.83, tension); tension.connect(battle);
+    const pressure = this._gain(0); this._osc('triangle', 196, pressure); pressure.connect(battle);
     this.tensionGain = tension; this.pulseGain = pulse;   // BOSS 态增益抬升用
+    this.pressureGain = pressure;
   }
   _applyMode() {
     const now = this.ctx.currentTime;
@@ -73,10 +75,21 @@ class WinterSoundscape {
     const next = !!on;
     if (next === this.boss) return;
     this.boss = next;
+    this.pressure = next ? 1 : 0;
     const now = this.ctx.currentTime;
     if (this.tensionGain) this.tensionGain.gain.setTargetAtTime(next ? 0.05 : 0.018, now, 0.4);
     if (this.pulseGain) this.pulseGain.gain.setTargetAtTime(next ? 0.028 : 0.009, now, 0.4);
+    if (this.pressureGain) this.pressureGain.gain.setTargetAtTime(next ? 0.012 : 0, now, 0.4);
     this._applyMode();
+  }
+  setPressure(value) {
+    const next = this.boss ? 1 : Math.max(0, Math.min(1, Number(value) || 0));
+    if (next === this.pressure) return;
+    this.pressure = next;
+    const now = this.ctx.currentTime;
+    if (this.tensionGain) this.tensionGain.gain.setTargetAtTime(0.018 + next * 0.032, now, 0.5);
+    if (this.pulseGain) this.pulseGain.gain.setTargetAtTime(0.009 + next * 0.019, now, 0.5);
+    if (this.pressureGain) this.pressureGain.gain.setTargetAtTime(next * 0.012, now, 0.5);
   }
   destroy() {
     if (typeof document !== 'undefined') document.removeEventListener('visibilitychange', this._visibility);

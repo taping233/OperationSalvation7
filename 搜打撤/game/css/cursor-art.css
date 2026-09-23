@@ -1,0 +1,171 @@
+/* Codename 7 cursor family. Keep the pointer tip at (4, 4); aiming is centered. */
+#app,
+#app * {
+  cursor: url("../assets/ui/cursors/field-pointer.png") 4 4, auto !important;
+}
+
+#app :is(input:not([type="button"]):not([type="submit"]):not([type="range"]):not([type="checkbox"]):not([type="radio"]), textarea, [contenteditable="true"]),
+#app :is(input:not([type="button"]):not([type="submit"]):not([type="range"]):not([type="checkbox"]):not([type="radio"]), textarea, [contenteditable="true"]) * {
+  cursor: text !important;
+}
+
+#app :where(
+  button:not(:disabled), a[href], [role="button"], [data-action], [data-route-index],
+  .ov-btn:not(.dis), .menu-btn:not(:disabled), .mode-card, .cls-card, .stash-row, .step-btn:not(:disabled),
+  .bt-card:not(.off), .bt-pile.clickable, .bt-foe.can-target, .sts-unit.can-target,
+  .sts-equip.has-skill:not(.used), .shop-row, .bag-cell.filled,
+  .dep-card, .sac-row, .event-choice-card, .type-tab
+),
+#app :where(
+  button:not(:disabled), a[href], [role="button"], [data-action], [data-route-index],
+  .ov-btn:not(.dis), .menu-btn:not(:disabled), .mode-card, .cls-card, .stash-row, .step-btn:not(:disabled),
+  .bt-card:not(.off), .bt-pile.clickable, .bt-foe.can-target, .sts-unit.can-target,
+  .sts-equip.has-skill:not(.used), .shop-row, .bag-cell.filled,
+  .dep-card, .sac-row, .event-choice-card, .type-tab
+) * {
+  cursor: url("../assets/ui/cursors/interactive.svg") 4 4, pointer !important;
+}
+
+#app :where(#btnMapOverview),
+#app :where(#btnMapOverview) * {
+  cursor: url("../assets/ui/cursors/interactive.svg") 4 4, pointer !important;
+}
+
+#app :is(.bt-card[data-aim="1"], .dep-card) {
+  cursor: url("../assets/ui/cursors/field-pointer.png") 4 4, grab !important;
+}
+
+#app :is(.bt-card[data-aim="1"], .dep-card):active,
+#game[style*="cursor: grabbing"] {
+  cursor: url("../assets/ui/cursors/grabbing.svg") 4 4, grabbing !important;
+}
+
+#game[style*="cursor: wait"] {
+  cursor: url("../assets/ui/cursors/waiting.svg") 4 4, wait !important;
+}
+
+#game[style*="cursor: not-allowed"] {
+  cursor: url("../assets/ui/cursors/unavailable.svg") 4 4, not-allowed !important;
+}
+
+#game[style*="cursor: pointer"],
+#game[style*="cursor: cell"] {
+  cursor: url("../assets/ui/cursors/interactive.svg") 4 4, pointer !important;
+}
+
+#overlay :where(.battle-stage[data-phase="targeting"]) :where(.sts-unit.can-target, .bt-foe.can-target, .bt-card.targeting, .bt-potion.need-target),
+#overlay :where(.battle-stage[data-phase="targeting"]) :where(.sts-unit.can-target, .bt-foe.can-target, .bt-card.targeting, .bt-potion.need-target) * {
+  cursor: url("../assets/ui/cursors/target.svg") 24 24, crosshair !important;
+}
+
+#app :where(:disabled, [aria-disabled="true"], .bt-card.off, .bt-potion.off, .ov-btn.dis, .sts-equip.used),
+#app :where(:disabled, [aria-disabled="true"], .bt-card.off, .bt-potion.off, .ov-btn.dis, .sts-equip.used) * {
+  cursor: url("../assets/ui/cursors/unavailable.svg") 4 4, not-allowed !important;
+}
+
+/* Preserve the existing magnifier cursor used for library card zoom. */
+#app :where(.lib-cardwrap),
+#app :where(.lib-cardwrap) * {
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'><circle cx='13' cy='13' r='8' fill='rgba(24,14,8,.3)' stroke='%23ecd5a4' stroke-width='2.4'/><line x1='19.2' y1='19.2' x2='27' y2='27' stroke='%23c9a468' stroke-width='3.6' stroke-linecap='round'/></svg>") 13 13, zoom-in !important;
+}
+
+#app[data-cursor-left-down="true"] * {
+  cursor: url("../assets/ui/cursors/pressed.svg") 4 4, pointer !important;
+}
+
+/* Once the overlay is active, hide the OS cursor inside the game canvas. */
+#app[data-cursor-ready="true"],
+#app[data-cursor-ready="true"] * {
+  cursor: none !important;
+}
+
+#app[data-cursor-ready="true"] :is(input:not([type="button"]):not([type="submit"]):not([type="range"]):not([type="checkbox"]):not([type="radio"]), textarea, [contenteditable="true"]),
+#app[data-cursor-ready="true"] :is(input:not([type="button"]):not([type="submit"]):not([type="range"]):not([type="checkbox"]):not([type="radio"]), textarea, [contenteditable="true"]) * {
+  cursor: text !important;
+}
+
+#codenameCursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  width: 48px;
+  height: 48px;
+  pointer-events: none;
+  contain: layout style;
+  will-change: transform;
+}
+
+#codenameCursor[hidden] { display: none; }
+
+#codenameCursor img {
+  display: block;
+  width: 48px;
+  height: 48px;
+  user-select: none;
+  transform-origin: 8.33% 8.33%;
+  transition: transform 90ms cubic-bezier(.2, .8, .3, 1);
+}
+
+#codenameCursor.is-target img { transform-origin: center; }
+#codenameCursor.is-pressed img { transform: scale(.78); }
+#codenameCursor.is-pulsing img { animation: codename-cursor-release 220ms cubic-bezier(.18, .8, .25, 1.2); }
+
+#codenameCursor::after {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 12px;
+  height: 12px;
+  border: 1px solid rgba(255, 207, 120, .9);
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(255, 185, 78, .65);
+  content: "";
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(.35);
+}
+
+#codenameCursor.is-target::after { top: 24px; left: 24px; }
+#codenameCursor.is-pulsing::after { animation: codename-cursor-ripple 260ms ease-out; }
+
+@keyframes codename-cursor-release {
+  0% { transform: scale(.78); }
+  55% { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+
+@keyframes codename-cursor-ripple {
+  0% { opacity: .9; transform: translate(-50%, -50%) scale(.35); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(2.6); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #codenameCursor.is-pressed img { transform: scale(.88); }
+  #codenameCursor.is-pulsing img,
+  #codenameCursor.is-pulsing::after { animation-duration: 100ms; }
+}
+
+/* The photo studio has legacy !important cursor rules with higher specificity. */
+body.cardlib-open #overlay .photo-studio-v3 .lib-cardwrap.studio-photo,
+body.cardlib-open #overlay .photo-studio-v3 .lib-cardwrap.studio-photo *,
+body.cardlib-open #overlay .card-library-page .lib-cardwrap,
+body.cardlib-open #overlay .card-library-page .lib-cardwrap * {
+  cursor: none !important;
+}
+
+body.cardlib-open #overlay .photo-studio-v3 .pv-navbtn:disabled,
+body.cardlib-open #overlay .photo-studio-v3 .pv-navbtn:disabled:hover,
+body.cardlib-open #overlay .photo-studio-v3 .pv-navbtn:disabled:active {
+  cursor: none !important;
+}
+
+/* Some game dialogs (such as #cardZoom) are mounted directly under body. */
+body[data-cursor-ready="true"] *,
+body[data-cursor-ready="true"] #cardZoom {
+  cursor: none !important;
+}
+
+body[data-cursor-ready="true"] :is(input:not([type="button"]):not([type="submit"]):not([type="range"]):not([type="checkbox"]):not([type="radio"]), textarea, [contenteditable="true"]),
+body[data-cursor-ready="true"] :is(input:not([type="button"]):not([type="submit"]):not([type="range"]):not([type="checkbox"]):not([type="radio"]), textarea, [contenteditable="true"]) * {
+  cursor: text !important;
+}

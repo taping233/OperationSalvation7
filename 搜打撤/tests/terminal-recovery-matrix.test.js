@@ -53,7 +53,7 @@ function seed(slotId) {
 describe('生产双键结算恢复边界', () => {
   beforeEach(() => {
     localStorage.clear();
-    for (let slotId = 1; slotId <= 5; slotId++) RunStorage._invalidate(slotId);
+    for (let slotId = 1; slotId <= 5; slotId++) RunStorage.remove(slotId);
   });
 
   it('无日志选档不需要 Web Locks；有空/坏日志或读错误时不能忽略', async () => {

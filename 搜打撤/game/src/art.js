@@ -53,6 +53,7 @@ import { PERFORMANCE_BUDGETS } from './performance-budgets.js';
   // 位图预解码池（用空间换时间）：warm(url) 把文件拉进缓存并提前解码，
   // 之后 <img> 首次渲染零解码延迟。重复 warm 同一地址直接跳过。
   const warmedUrls = new Set();
+  const prefetchedUrls = new Set();
   // 持有已预热 Image 的引用：不持有时浏览器可能把刚解码完的位图回收，
   // 首次渲染又要重解码。池子上限兜底，超出按 FIFO 淘汰最早一批。
   // 2026-09-13 卡牌库卡顿排查：原上限 800 大于全量清单（496 张），等于把整份美术的
@@ -111,7 +112,10 @@ import { PERFORMANCE_BUDGETS } from './performance-budgets.js';
   // 清单里没有的图直接回退原图，保证新素材不改 art.js 也不会 404。
   const THUMBS = new Set(THUMB_MANIFEST);
   function image(src, cls, alt, key, style, low, defer) {
-    const rel = (low && THUMBS.has(src)) ? `thumbs/${src}` : src;
+    // 缩略图统一使用 WebP；PNG/JPEG 源图的派生文件改为 .webp，避免扩展名与编码不匹配。
+    const thumb = low && THUMBS.has(src.split('?')[0]);
+    const thumbSrc = thumb ? src.replace(/\.(?:png|jpe?g)(?=\?|$)/i, '.webp') : src;
+    const rel = thumb ? `thumbs/${thumbSrc}` : src;
     const url = assetUrl(ROOT + rel);
     const source = defer ? ` data-lib-src="${esc(url)}"` : ` src="${url}"`;
     return `<img class="${esc(cls)}"${source} alt="${esc(alt)}" data-asset-key="${esc(key)}"${style ? ` style="${esc(style)}"` : ''} draggable="false" loading="lazy" decoding="async">`;
@@ -376,6 +380,10 @@ function characterArt(value, full=false, useDefault=false) {
       };
       return [...ART_MANIFEST].sort((a, b) => rank(a) - rank(b)).map(p => assetUrl(`assets/${p}`));
     },
+    // 卡牌库使用的 448px 缩略图不在原图清单内，启动总预热时单独并入。
+    collectThumbnailAssets() {
+      return THUMB_MANIFEST.map(p => assetUrl(`assets/thumbs/${p}`));
+    },
     // 2026-09-08 老板：预热改启动时强制进行并显示进度。分小批加载+解码（decode 离线），
     // 每张完成即回调 onProgress(done,total)；已预热过的 URL 直接计入完成。
     warmBatched(urls, onProgress, batch = 6) {
@@ -390,32 +398,93 @@ function characterArt(value, full=false, useDefault=false) {
       if (onProgress && grand) onProgress(done, grand);
       let i = 0;
       return new Promise((resolve) => {
+        const scheduleNext = () => {
+          const run = () => {
+            if (document.body?.classList.contains('cardlib-open')) {
+              setTimeout(scheduleNext, 160);
+              return;
+            }
+            next();
+          };
+          if (typeof requestIdleCallback === 'function') requestIdleCallback(run, { timeout: 400 });
+          else setTimeout(run, 32);
+        };
         const next = () => {
           if (i >= list.length) { resolve(); return; }
           const slice = list.slice(i, i + batch);
           i += slice.length;
           let left = slice.length;
-          const one = () => { done++; if (onProgress) onProgress(done, grand); if (!--left) next(); };
+          const one = () => { done++; if (onProgress) onProgress(done, grand); if (!--left) scheduleNext(); };
           for (const u of slice) {
             warmedUrls.add(u);
             const im = new Image();
             im.decoding = 'async';
-            im.onload = () => { try { im.decode?.()?.catch?.(() => {}); } catch (_) {} one(); };
+            im.onload = () => {
+              let decoded;
+              try { decoded = im.decode?.(); } catch (_) {}
+              Promise.resolve(decoded).catch(() => {}).then(one);
+            };
             im.onerror = one;
-            im.src = u;
             retainWarmed(im);
+            im.src = u;
           }
         };
         next();
       });
     },
-    // opts.low：低倍率场景（卡牌库网格 / 悬停预览）取缩略图；opts.defer 仅供虚拟卡库在接近视口时赋 src。
+    // 全量美术只拉入浏览器 HTTP 缓存，不创建 Image、不解码、不占解码位图池。
+    // 启动时仍覆盖完整清单；可见场景与卡库按需解码，避免 888 项解码挤占渲染。
+    prefetchBatched(urls, onProgress, batch = 8) {
+      const list = [];
+      const seen = new Set();
+      for (const u of urls || []) {
+        if (u && !seen.has(u) && !prefetchedUrls.has(u)) { seen.add(u); list.push(u); }
+      }
+      const grand = (urls || []).length;
+      let done = grand - list.length;
+      if (onProgress && grand) onProgress(done, grand);
+      let i = 0;
+      return new Promise((resolve) => {
+        const scheduleNext = () => {
+          const run = () => {
+            if (document.body?.classList.contains('cardlib-open')) {
+              setTimeout(scheduleNext, 160);
+              return;
+            }
+            next();
+          };
+          if (typeof requestIdleCallback === 'function') requestIdleCallback(run, { timeout: 1200 });
+          else setTimeout(run, 48);
+        };
+        const next = () => {
+          if (i >= list.length) { resolve(); return; }
+          const slice = list.slice(i, i + batch);
+          i += slice.length;
+          Promise.all(slice.map(async (url) => {
+            try {
+              const response = await fetch(url, { cache: 'force-cache' });
+              if (!response.ok) throw new Error(`HTTP ${response.status}`);
+              await response.arrayBuffer();
+              prefetchedUrls.add(url);
+            } catch (error) {
+              console.warn('[warmup] 美术资源预取失败', url, error);
+            } finally {
+              done++;
+              if (onProgress) onProgress(done, grand);
+            }
+          })).then(scheduleNext);
+        };
+        scheduleNext();
+      });
+    },
+    // opts.low：低倍率场景（卡牌库网格 / 悬停预览）取缩略图；opts.defer 仅供分页卡库在接近视口时赋 src。
     // 缺省 = 原图（战斗、放大看卡面等）
     cardIcon(card, opts) {
       const low = !!(opts && opts.low);
       const defer = !!(opts && opts.defer);
-      const art = (src, cls, alt, key, style) => image(src, cls, alt, key, style, low, defer);
       const cardId = String(card && card.id || '');
+      const revision = DATA.art.cardArtRevisions?.[cardId];
+      const art = (src, cls, alt, key, style) => image(revision ? `${src}?art=${revision}` : src, cls, alt, key, style, low, defer);
       const illustration = DATA.art.cardArtOverrides?.[cardId];
       if (illustration) return art(illustration, 'art-card-image art-hero-fit', card?.name || cardId, `card-${cardId}`, 'width:100%;height:100%;object-fit:cover;display:block');
       // 职业专属法术卡面（spell-<id>.webp，2026-09-09 配图批次）：优先于一切通用家族图，cover 填满

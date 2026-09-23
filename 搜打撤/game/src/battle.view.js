@@ -452,7 +452,8 @@ import { aim, aimPlayedAt, clickSelectedUid, selectCardByClick, startAim, cancel
     attachUnitFrames(body);   // 批次D：玩家立绘切序列帧（无帧集/降动效自动跳过）
     mountHandLayer(body, tip, snapshot.battleToken);
     showBattleStartEquipFlash(snapshot.equipped);
-    const handAnim = updateHand(snapshot, prevView, pageGroups, animEvents, { spellBonus, mode });
+    const handAnim = updateHand(snapshot, prevView, pageGroups, animEvents, { spellBonus, mode, discoverSrcRect });
+    discoverSrcRect = null;
     // 牌局动画：离场克隆飞行 / 手牌区随回合显隐 / 能量与牌堆脉冲
     const anim = animateBattleTransition(prevView, body, animEvents, handAnim.flightMs);
     // BOSS 登场演出：竖线阴影压过场景 2.4s（每场一次）+ 开始动画（暗幕+立绘+名号亮相，约 1.5s）

@@ -500,21 +500,26 @@ function createGameMenuController(deps) {
       </g>
     </svg>`;
 
-  // 档位卡信息：进行中对局的进度（层/人物）+ 累计游玩时间 + 已解锁成就。
-  // 进度行是 5 张「继续对局」卡之间唯一的区分依据（09-19 二轮走查 B7）。
+  // 档位卡信息：进行中对局的进度、最近保存时间、累计游玩时间和成就。
   function slotInfoHTML(baseData, run) {
-    if (!baseData && !run) return '<span class="slot-empty">EMPTY SLOT · 空档位</span>';
+    if (!baseData && !run) return '<span class="slot-empty">尚未建立存档</span>';
     const total = Math.max(baseData?.stats?.playSeconds || 0, run?.elapsed || 0);
     const names = baseData
       ? SDT.Meta.ACHIEVEMENTS.filter(a => SDT.Meta.isUnlocked(a, baseData)).map(a => a.name)
       : [];
     const prog = run
-      ? `<div class="si-line"><em>EXPEDITION</em>${run.nestActive ? '龙巢远征进行中' : `第 ${(run.layerIdx ?? 0) + 1} 层 · ${esc(run.myClass || '未选人物')}`}</div>`
+      ? `<div class="si-line si-progress"><em>当前进度</em><b>${run.nestActive ? '龙巢远征进行中' : `第 ${(run.layerIdx ?? 0) + 1} 层 · ${esc(run.myClass || '未选人物')}`}</b></div>`
+      : '';
+    const saved = Number(run?.savedAt) > 0 ? new Date(Number(run.savedAt)) : null;
+    const p = (n) => String(n).padStart(2, '0');
+    const savedLine = saved && !Number.isNaN(saved.getTime())
+      ? `<div class="si-line si-saved"><em>上次保存</em>${p(saved.getMonth() + 1)}-${p(saved.getDate())} ${p(saved.getHours())}:${p(saved.getMinutes())}</div>`
       : '';
     return prog +
+      savedLine +
       `<div class="si-line"><em>PLAYTIME</em>游玩时间 <b class="num">${total > 0 ? fmtPlayTime(total) : '暂无记录'}</b></div>` +
       `<div class="si-line"><em>ACHIEVEMENTS</em>已解锁成就 <b class="num">${names.length}</b>` +
-      `<span class="si-sub">${names.length ? esc(names.join('、')) : '暂无'}</span></div>`;
+      `${names.length ? `<span class="si-sub">${esc(names.join('、'))}</span>` : ''}</div>`;
   }
 
   // 选档页：参照明日方舟「选择分队」的横排暗色卡片（居中发光图标 + 档名 + 分隔线 + 描述）。
@@ -522,19 +527,24 @@ function createGameMenuController(deps) {
   function openSlotPicker() {
     game.state = 'modal';
     const cards = [];
+    const latest = pickLatestSlot();
     for (let i = 1; i <= SLOT_COUNT; i++) {
       const run = readSlot(i);
       const baseData = SDT.Base.peek(i);
       const exists = !!run || !!baseData;
+      const recent = !!run?.savedAt && latest?.slot === i && latest.ts > 0;
+      const state = run ? 'run' : baseData ? 'base' : 'empty';
+      const status = recent ? '最近游玩 · 对局进行中' : run ? '对局进行中' : baseData ? '基地档案' : '空档位';
       const cta = !exists ? '开新档 <i class="en">NEW GAME</i>'
         : run ? '继续对局 <i class="en">CONTINUE</i>' : '进入存档 <i class="en">ENTER</i>';
-     cards.push(`<article class="slot-card slot-art-${i}${exists ? ' filled' : ''}">
+     cards.push(`<article class="slot-card slot-art-${i} slot-state-${state}${exists ? ' filled' : ''}${recent ? ' slot-recent' : ''}">
         <i class="slot-card-bg" aria-hidden="true"></i>
         <i class="slot-card-light" aria-hidden="true"></i>
         <i class="slot-card-flakes" aria-hidden="true">${'<i></i>'.repeat(7)}</i>
         <span class="slot-card-art">${SLOT_ICONS[i - 1]}<i class="slot-card-spark"></i></span>
         <b class="slot-card-name">档位 0${i}</b>
         <span class="slot-card-sub">SLOT 0${i}</span>
+        <span class="slot-card-status">${status}</span>
         <i class="slot-card-rule"></i>
         <span class="slot-card-desc">${slotInfoHTML(baseData, run)}</span>
        <button class="slot-card-cta" data-act="${exists ? 'enterSlot' : 'newSlot'}" data-slot="${i}" aria-label="${exists ? '进入档位 0' + i : '在档位 0' + i + ' 开始新游戏'}">${cta}</button>
@@ -560,7 +570,7 @@ function createGameMenuController(deps) {
         </div>
         <!-- 返回键在左上角（2026-09-19 老板指定；09-10 曾因矮窗口裁切沉到左下角——
              选档卡片改全屏后卡片顶=视口顶、页头 clamp 留白带兜底，裁切前提已不存在） -->
-        <button class="pg-back" data-act="slotBack">返回 <i class="en">BACK</i></button>
+        <button class="pg-back" data-act="slotBack" aria-label="返回主菜单" title="返回主菜单（Esc）"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M9 4h9a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 18 20H9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M4 12h10M4 12l4-4M4 12l4 4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <!-- U6（2026-09-19 走查）：帮助「?」从孤悬左上挪进标题行，与标题同排 -->
         <header class="slot-page-head">
           <span class="slot-page-en">选择存档</span>

@@ -38,6 +38,12 @@ function walk(dir, prefix, out) {
   return out;
 }
 
+// Canvas always emits WebP bytes, so raster sources with other extensions must
+// also use .webp for the thumbnail output path.
+function thumbRel(rel) {
+  return rel.replace(/\.(?:png|jpe?g)$/i, '.webp');
+}
+
 // 在渲染进程里跑的单文件处理：返回 { url, w, h }、{ skip:true }（源图已够小）或 null
 // 注意：本函数源码会被内嵌进渲染进程执行，不能引用本文件作用域的变量（一律参数传入）
 // 尺寸判定放在这里而非主进程的 nativeImage：nativeImage 读不了 webp（getSize 返回 0），
@@ -88,7 +94,7 @@ app.whenReady().then(async () => {
     if (!fs.existsSync(srcRoot)) continue;
     for (const rel of walk(srcRoot, dir, [])) {
       const src = path.join(ASSETS, rel);
-      const out = path.join(OUT, rel);
+      const out = path.join(OUT, thumbRel(rel));
       if (fs.existsSync(out) && fs.statSync(out).mtimeMs >= fs.statSync(src).mtimeMs) {
         produced.push(rel.replace(/\\/g, '/')); fresh++; continue;
       }

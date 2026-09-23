@@ -66,7 +66,7 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
   function showTurnBanner(text, side) {
     const ov = UI.el.overlay;
     if (!ov) return;
-    SDT.Sound.sfx(side === 'foe' ? 'turnFoe' : 'turnSelf');   // 回合权交接提示音（P1#4）
+    SDT.Sound.sfx('phase', { side });   // 回合权交接提示音，与横幅同帧触发
     const el = document.createElement('div');
     el.className = `bt-turnbanner ${side === 'foe' ? 'foe' : 'self'}`;
     el.innerHTML = `<b>${esc(text)}</b>`;
@@ -125,10 +125,13 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
       const energyEl = stage.querySelector('.sts-energy b');
       const now = energyEl ? parseInt(energyEl.textContent, 10) : NaN;
       const orb = stage.querySelector('.sts-energy');
-      if (!isNaN(now) && now !== prev.energy && orb && orb.animate) {
-        orb.animate(
-          [{ filter: 'brightness(1)' }, { filter: 'brightness(1.9) saturate(1.3)' }, { filter: 'brightness(1)' }],
-          { duration: 380, easing: 'ease-out' });
+      if (!isNaN(now) && now !== prev.energy && orb) {
+        SDT.Sound.sfx(now > prev.energy ? 'energyUp' : 'energyDown');
+        if (orb.animate) {
+          orb.animate(
+            [{ filter: 'brightness(1)' }, { filter: 'brightness(1.9) saturate(1.3)' }, { filter: 'brightness(1)' }],
+            { duration: 380, easing: 'ease-out' });
+        }
       }
     }
     if (!handEl || !events.length) return { flightMs };
@@ -144,6 +147,7 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
       else played.add(ev.uid);
     });
     drawn.forEach(u => played.delete(u));   // 打出又回手（不朽斩）：同帧两事件抵消不演
+    if (events.some(ev => ev.kind === 'burn')) SDT.Sound.sfx('burn');   // 同帧多张消耗卡合并为一次燃烧提示
     // —— 牌库图标动画（2026-09-11 需求，约 1.5s）：抽牌脉冲 / 洗入旋光 ——
     const pileEl = body.querySelector('.sts-hud-l .bt-pile');
     if (pileEl) {
@@ -181,7 +185,7 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
         const delay = 180 + ((ev.i || 1) - 1) * STEP;
         const wave = document.createElement('div');
         wave.className = 'surge-wave';
-        wave.innerHTML = `<b>法力奔涌 · 第 ${ev.i || 1}/${ev.n || surges.length} 发</b><span>【${esc(ev.name || '?')}】→ ${esc(ev.targetName || '')}</span>`;
+        wave.innerHTML = `<b>${esc(ev.sourceName || '法力奔涌')} · 第 ${ev.i || 1}/${ev.n || surges.length} 发</b><span>【${esc(ev.name || '?')}】→ ${esc(ev.targetName || '')}</span>`;
         wave.style.animationDelay = `${delay}ms`;
         ov.appendChild(wave);
         setTimeout(() => wave.remove(), delay + STEP + 200);

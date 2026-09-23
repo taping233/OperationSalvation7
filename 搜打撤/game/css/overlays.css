@@ -336,7 +336,7 @@
     background: linear-gradient(90deg, transparent, rgba(200,212,250,.6), transparent); }
   .slot-page .slot-card-desc { flex: 1 1 auto; min-height: 0; width: 100%; overflow: hidden;
     font-size: 12px; line-height: 1.7; color: #c2cbe4; }
-  .slot-card-desc .si-line { text-align: left; margin-bottom: 7px; }
+  .slot-card-desc .si-line { text-align: left; margin-bottom: 9px; }
   .slot-card-desc .si-line em { font-style: normal; display: block; font-size: 9px;
     letter-spacing: .3em; color: #97a3cc; }
   .slot-card-desc .si-line b { color: #f0f3fb; font-weight: 600; }

@@ -305,7 +305,7 @@ const SDT = window.SDT;
       Number(isCurrentNode(game, a)) * 2 - Number(g.legalKeys.has(`${a.li},${a.idx}`)));
     ctx.save(); ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
     // 字体固定 12px：宽度只取决于文本，按标签串缓存测量结果（省每帧 measureText）
-    ctx.font = `600 12px "Noto Sans SC Sub",sans-serif`;
+    ctx.font = `600 12px "HarmonyOS Sans SC","HarmonyOS Sans","Noto Sans SC Sub",sans-serif`;
     for (const n of ordered) {
       const current = isCurrentNode(game, n), legal = g.legalKeys.has(`${n.li},${n.idx}`);
       if (!current && !legal && z < .65) continue;

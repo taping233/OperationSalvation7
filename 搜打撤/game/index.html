@@ -7,6 +7,7 @@
 <!-- 首屏关键资源提前预载：标题壁纸与字标是首屏核心视觉；
      其余资源（BGM/立绘/卡面）保持按需加载，避免挤占启动带宽 -->
 <link rel="preload" as="image" href="assets/reconstruction/wallpaper-original.webp" />
+<link rel="preload" as="font" type="font/ttf" href="assets/fonts/HarmonyOS_Sans_SC_Regular.ttf" crossorigin />
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/cascadia-code-400.woff2" crossorigin />
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/notosans-sc-400.woff2" crossorigin />
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/notosans-sc-700.woff2" crossorigin />
@@ -158,6 +159,7 @@
     </button>
     <div id="title">
       <div class="title-bg" aria-hidden="true"></div>
+      <div class="title-foreground-paper" aria-hidden="true"></div>
       <div class="title-inner">
         <div class="title-heading"><div class="title-kicker">THE ASCENSION SOCIETY</div><h1 class="winter-wordmark"><small>升格会的</small>冬日猜想</h1><div class="winter-edition">A WINTER CONJECTURE <span>VOL. 07</span></div></div>
         <div class="title-expedition-copy"><span>WINTER EXPEDITION / 07</span></div>
@@ -250,7 +252,7 @@
           <span class="ak-line1" aria-hidden="true"></span>
         </div>
         <div class="title-quote">WINTER ARCHIVE / TERMINAL STANDBY</div>
-        <p class="title-credits">制作者：太平 · 创 · Tang</p>
+        <p class="title-credits">制作者：太平 · 创 · Tang · 字体：HarmonyOS Sans</p>
         <p class="title-ver" hidden>ASCENSION COUNCIL · <span id="gameVersion">v…</span></p>
       </div>
       <!-- 开发者节点测试面板：仅「设置 → 开发者模式」开启后可见，一键跳到各类节点

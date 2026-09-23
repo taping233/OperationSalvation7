@@ -53,7 +53,6 @@ describe('照相馆陈列交互', () => {
   it('标题入口与页面名称统一为照相馆', () => {
     expect(index).toContain('<span class="c-cn">照相馆</span>');
     expect(index).toContain('<span class="c-en">Photo Studio</span>');
-    expect(library).toContain('<h2>[[icon:cards]] 照相馆</h2>');
   });
 
   it('影廊版照片结构：黄铜挂件保留，卡牌语言与微倾已删（09-23 拍板）', () => {
@@ -85,14 +84,6 @@ describe('照相馆陈列交互', () => {
     expect(css).toContain('assets/ui/photo-studio/desk.webp');
     expect(css).toContain('assets/ui/photo-studio/empty.webp');
     expect(css).toContain('assets/ui/photo-studio/back.webp');
-  });
-
-  it('照片墙分批追加，筛选不再替换整个网格节点', () => {
-    expect(library).toContain('const LIB_BATCH_SIZE = 36');
-    expect(library).toContain('data-act="libLoadMore"');
-    expect(library).toContain('setTimeout(renderLibGrid, 120)');
-    expect(library).toContain("more.insertAdjacentHTML('beforebegin', added)");
-    expect(library).not.toContain('grid.outerHTML = libGridHTML()');
   });
 
   it('筛选横置、桌面保留选片台，并将编辑工具隔离到编辑模式', () => {

@@ -72,6 +72,17 @@ describe('基地 Home 异步生命周期', () => {
     });
   });
 
+  it('进入基地直接显示普通出发页，不加载 2.5D 场景', async () => {
+    const hub = await loadHub();
+    hub.openBaseHub('deploy');
+    await vi.dynamicImportSettled();
+
+    expect(document.getElementById('hubMain')).not.toBeNull();
+    expect(document.querySelector('[data-tab="home"]')).toBeNull();
+    expect(document.getElementById('homeSceneHost')).toBeNull();
+    expect(state.mounts).toHaveLength(0);
+  });
+
   it('退出并重复打开时只挂载最新的 Home 宿主', async () => {
     const hub = await loadHub();
     hub.renderHomeScene();
@@ -110,7 +121,7 @@ describe('基地 Home 异步生命周期', () => {
     expect(newMount.controller.update).not.toHaveBeenCalled();
   });
 
-  it('Pixi 场景挂载失败后可从基地页签重新打开', async () => {
+  it('Pixi 场景挂载失败后回到普通基地，旧 home 页签不再重开场景', async () => {
     state.mountHome.mockImplementationOnce(() => { throw new Error('pixi init failed'); }).mockImplementation((config) => {
       const controller = makeController();
       state.mounts.push({ config, controller });
@@ -124,7 +135,8 @@ describe('基地 Home 异步生命周期', () => {
     state.actions.hubTab({ tab: 'home' });
     await vi.dynamicImportSettled();
 
-    expect(state.mounts).toHaveLength(1);
-    expect(state.mounts[0].config.host).toBe(document.getElementById('homeSceneHost'));
+    expect(state.mounts).toHaveLength(0);
+    expect(document.getElementById('hubMain')).not.toBeNull();
+    expect(document.getElementById('homeSceneHost')).toBeNull();
   });
 });

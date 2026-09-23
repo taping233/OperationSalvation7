@@ -331,6 +331,7 @@
 .sts-float.dmg { color:var(--fx-dmg); }
 .sts-float.hurt { color:var(--fx-dmg-strong); font-size:34px; }
 .sts-float.block { color:var(--fx-block); font-size:22px; }
+.sts-float small { display:block; font:700 11px/1.1 var(--cal); letter-spacing:.04em; color:#fff0bd; }
 @keyframes stsFloatUp {
   0% { opacity:0; transform:translate(-50%,-30%) scale(.6); }
   18% { opacity:1; transform:translate(-50%,-55%) scale(1.12); }
@@ -407,6 +408,7 @@
 .hsc-desc span { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 .sts-hand .hs-card .hsc-desc { font-size: 10.5px; line-height: 1.35; }
 .sts-hand .hs-card .hsc-desc span { -webkit-line-clamp: 4; }
+.sts-hand .hsc-desc .bt-rulehint { display:block; -webkit-line-clamp:unset; -webkit-box-orient:initial; overflow:visible; margin-top:.35em; color:#ffe2a0; font-weight:700; }
 
 /* ============ 2026-09-12 紧凑手牌（老板定向）：常态只露牌面+名字，悬停弹出完整描述 ============ */
 /* 同一 DOM 双态：compact 隐藏文字区块（卡高随内容自动缩短），悬停由 CSS 显示回来。
