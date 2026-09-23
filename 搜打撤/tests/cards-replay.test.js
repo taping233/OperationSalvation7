@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest';
-import { DATA } from '../game/src/data-loader.js';
-import { KEY as CARDS_KEY, TT10_KEY, TT11_KEY } from '../game/src/cards.consts.js';
+import { DATA } from '../game/src/core/data-loader.js';
+import { KEY as CARDS_KEY, TT10_KEY, TT11_KEY } from '../game/src/cards/cards.consts.js';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };
-await import('../game/src/cards.js');
+await import('../game/src/cards/cards.js');
 
 const Cards = window.SDT.Cards;
 const liveSyncKey = `sdt-cards-sync-v${DATA.cardsSync.version}-seeded`;

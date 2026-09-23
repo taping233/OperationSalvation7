@@ -1,7 +1,7 @@
 /* 职业整合（2026-09-05 定版，迁移自完整包）回归测试：5 职业卡池、旧档卡库迁移、爆率、生物图鉴、熟练度迁移 */
 import { describe, it, expect, beforeAll } from 'vitest';
 window.SDT = window.SDT || { Icons: { img: () => '' } };
-await import('../game/src/cards.js');
+await import('../game/src/cards/cards.js');
 const Cards = window.SDT.Cards;
 
 describe('职业整合数据迁移冒烟', () => {
@@ -59,10 +59,10 @@ describe('职业整合数据迁移冒烟', () => {
     }
   });
   it('生物图鉴入卡库且不可随机/打出', async () => {
-    await import('../game/src/battle.rules.js');
+    await import('../game/src/battle/battle.rules.js');
     const foe = Cards.all().find(c => c.type === '生物');
     expect(foe).toBeTruthy();
-    const { unplayableReasonFor } = await import('../game/src/battle.rules.js');
+    const { unplayableReasonFor } = await import('../game/src/battle/battle.rules.js');
     expect(unplayableReasonFor(foe, 'boss')).toMatch(/图鉴/);
   });
 });
@@ -70,7 +70,7 @@ describe('职业整合数据迁移冒烟', () => {
 describe('meta 职业熟练度迁移冒烟', () => {
   it('侠客取刺客/剑客/游侠中最高一份', async () => {
     window.SDT.Base = { data: { classes: { 刺客: { lv: 3, xp: 10 }, 剑客: { lv: 5, xp: 0 } } }, save() {} };
-    await import('../game/src/meta.js');
+    await import('../game/src/hub/meta.js');
     const Meta = window.SDT.Meta;
     expect(Meta.classLv('侠客')).toBe(5);
   });

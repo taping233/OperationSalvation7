@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 globalThis.window = globalThis.window || {};
 window.SDT = {};
-const { nodeHitRadius } = await import('../game/src/camera.js');
+const { nodeHitRadius } = await import('../game/src/core/camera.js');
 
 describe('地图相机交互几何', () => {
   it('screen/world 转换互为逆运算', async () => {

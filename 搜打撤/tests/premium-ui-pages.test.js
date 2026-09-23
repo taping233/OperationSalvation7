@@ -5,7 +5,7 @@ const src = (path) => readFileSync(path, 'utf8');
 
 describe('基地人物与收藏页的信息架构', () => {
   // 2026-09-22 hub 拆分：断言串分布在壳与两个切片，三文件拼接后仍断言「基地源码含 X」
-  const hub = ['game.hub.js', 'game.hub.depart.js', 'game.hub.pages.js']
+  const hub = ['hub/game.hub.js', 'hub/game.hub.depart.js', 'hub/game.hub.pages.js']
     .map((f) => src(`game/src/${f}`)).join('\n');
   const css = src('game/css/expedition-hub.css');
 
@@ -26,8 +26,8 @@ describe('基地人物与收藏页的信息架构', () => {
 });
 
 describe('角色卡池与收购台交互契约', () => {
-  const altar = src('game/src/game.run.altar.js');
-  const shop = src('game/src/game.run.shop.js');
+  const altar = src('game/src/run/game.run.altar.js');
+  const shop = src('game/src/run/game.run.shop.js');
 
   it('角色卡池默认提供预览，并用原生按钮支持键盘焦点', () => {
     expect(altar).toContain('poolPreviewHTML(pool[0])');
@@ -45,10 +45,10 @@ describe('角色卡池与收购台交互契约', () => {
 });
 
 describe('照相馆陈列交互', () => {
-  const library = src('game/src/game.cardslib.js');
+  const library = src('game/src/hub/game.cardslib.js');
   const index = src('game/index.html');
   const css = src('game/css/expedition-library.css');
-  const ui = src('game/src/ui.js');
+  const ui = src('game/src/ui/ui.js');
 
   it('标题入口与页面名称统一为照相馆', () => {
     expect(index).toContain('<span class="c-cn">照相馆</span>');

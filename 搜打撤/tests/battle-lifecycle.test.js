@@ -7,8 +7,8 @@ window.SDT.MAP = {
   rules: { battleEnergy: 6, battleHandMax: 8, bossDeckSize: 15, starterSha: 5, battleStartDraw: 5, battleTurnDraw: 1, diceSides: 6 },
   items: { rations: { name: '口粮' }, wood: { name: '木材' } },
 };
-await import('../game/src/cards.js');
-const { BattleSession, viewApi } = await import('../game/src/battle.core.js');
+await import('../game/src/cards/cards.js');
+const { BattleSession, viewApi } = await import('../game/src/battle/battle.core.js');
 
 window.SDT.Cards.ensureSha();
 window.SDT.Cards.ensureStarters();

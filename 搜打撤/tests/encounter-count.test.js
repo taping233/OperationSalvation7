@@ -4,8 +4,8 @@
 import { describe, it, expect, beforeAll } from 'vitest';
 
 window.SDT = window.SDT || {};
-await import('../game/src/rules.js');
-await import('../game/src/mapData.js');
+await import('../game/src/core/rules.js');
+await import('../game/src/core/mapData.js');
 const MAP = window.SDT.MAP;
 
 beforeAll(() => { /* mapData 只依赖 rules 副本，无需额外准备 */ });

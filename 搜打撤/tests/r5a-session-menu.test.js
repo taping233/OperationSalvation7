@@ -1,19 +1,19 @@
 import { beforeAll,beforeEach,describe,expect,it,vi } from 'vitest';
-import { createLayeredMap } from '../game/src/layeredMap.js';
-import { createMapSnapshot } from '../game/src/map-snapshot.js';
+import { createLayeredMap } from '../game/src/run/layeredMap.js';
+import { createMapSnapshot } from '../game/src/run/map-snapshot.js';
 
 const ctx=new Proxy({}, {get:()=>()=>ctx,set:()=>true});
 window.HTMLCanvasElement.prototype.getContext=()=>ctx;
 document.body.innerHTML='<canvas id="game"></canvas><div id="title"></div><div id="exitScr"></div>';
 window.SDT={Icons:{img:()=>'',TYPE_ART:{}},Sound:{music(){},sfx(){},setDucked(){}},FX:{feedback(){}},
   MAP:{rules:{playerMaxHp:50,playerAtk:4,fireHeal:5,battleEnergy:2,battleHandMax:10,bossDeckSize:10,starterSha:0,battleStartDraw:5,battleTurnDraw:1,diceSides:6},items:{rations:{name:'口粮'},wood:{name:'木材'}}}};
-await import('../game/src/cards.js');
-await import('../game/src/ui.js');
-await import('../game/src/base.js');
-const session=await import('../game/src/game.session.js');
-const { Random }=await import('../game/src/random.js');
-const { RunStorage }=await import('../game/src/game.storage.js');
-const { createGameMenuController }=await import('../game/src/game.menu.js');
+await import('../game/src/cards/cards.js');
+await import('../game/src/ui/ui.js');
+await import('../game/src/hub/base.js');
+const session=await import('../game/src/run/game.session.js');
+const { Random }=await import('../game/src/core/random.js');
+const { RunStorage }=await import('../game/src/hub/game.storage.js');
+const { createGameMenuController }=await import('../game/src/ui/game.menu.js');
 
 beforeAll(()=>{
   Object.assign(window.SDT.UI,{log(){},refresh(){},clearLog(){},hideOverlay(){},hideScreen(){},showScreen(){},showOverlay(){},act(){},registerHelp(){},helpBtn(){return'';}});

@@ -7,12 +7,12 @@ window.SDT = {
     bossDeckSize: 10, starterSha: 0, battleStartDraw: 5, battleTurnDraw: 1, diceSides: 6,
     stashStart: 20, stashMax: 100, stashUpgradeSlots: 5 } },
 };
-await import('../game/src/cards.js');
-await import('../game/src/base.js');
-await import('../game/src/meta.js');
-const { RunStorage } = await import('../game/src/game.storage.js');
-const { createRecoveryCommands } = await import('../game/src/recovery.commands.js');
-const { createExtractionCommands } = await import('../game/src/extraction.commands.js');
+await import('../game/src/cards/cards.js');
+await import('../game/src/hub/base.js');
+await import('../game/src/hub/meta.js');
+const { RunStorage } = await import('../game/src/hub/game.storage.js');
+const { createRecoveryCommands } = await import('../game/src/hub/recovery.commands.js');
+const { createExtractionCommands } = await import('../game/src/hub/extraction.commands.js');
 const Base = window.SDT.Base;
 
 const lockManager = { request: (_name, _options, callback) => callback() };

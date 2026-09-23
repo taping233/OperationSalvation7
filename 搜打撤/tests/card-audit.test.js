@@ -12,8 +12,8 @@ window.SDT = window.SDT || { Icons: { img: () => '' } };
 // 所以必须补齐而不是直接赋值。
 window.SDT.Icons = window.SDT.Icons || { img: () => '' };
 window.SDT.Icons.TYPE_ART = {};
-await import('../game/src/cards.js');
-import { createEffectExecutor, splitEffectClauses, parsePoolNoun } from '../game/src/battle.effects.js';
+await import('../game/src/cards/cards.js');
+import { createEffectExecutor, splitEffectClauses, parsePoolNoun } from '../game/src/battle/battle.effects.js';
 
 const C = window.SDT.Cards;
 

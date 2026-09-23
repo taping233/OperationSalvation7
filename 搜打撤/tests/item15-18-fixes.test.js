@@ -5,7 +5,7 @@
  *   18 储备币不进局：出发流程不再调用 takeReserveCoins
  * 以及数据修正：治愈 5 血 / 元素风暴无注能 / 急速跑鞋普通战给初始攻击（既有行为回归）。 */
 import { describe, it, expect, beforeAll } from 'vitest';
-import { generateLayeredMap } from '../game/src/map-generator.js';
+import { generateLayeredMap } from '../game/src/run/map-generator.js';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };
 window.SDT.Icons.TYPE_ART = {};
@@ -14,7 +14,7 @@ window.SDT.MAP = {
   rules: { battleEnergy: 99, battleHandMax: 99, bossDeckSize: 1, starterSha: 0, battleStartDraw: 5, battleTurnDraw: 2, diceSides: 6 },
   items: { rations: { name: '口粮' }, wood: { name: '木材' } },
 };
-await import('../game/src/cards.js');
+await import('../game/src/cards/cards.js');
 const C = window.SDT.Cards;
 
 beforeAll(() => {
@@ -59,11 +59,11 @@ describe('Item 17：分层配额下限与物资格', () => {
 
 describe('Item 18：储备币不进局', () => {
   it('出发流程不再把储备币带进局（game.session 不再调用 takeReserveCoins）', async () => {
-    const src = (await import('node:fs')).readFileSync('game/src/game.session.js', 'utf8');
+    const src = (await import('node:fs')).readFileSync('game/src/run/game.session.js', 'utf8');
     expect(src.includes('takeReserveCoins')).toBe(false);
   });
   it('储备币仍用于孵蛋（base.js 孵蛋口径不变）', async () => {
-    const src = (await import('node:fs')).readFileSync('game/src/base.js', 'utf8');
+    const src = (await import('node:fs')).readFileSync('game/src/hub/base.js', 'utf8');
     expect(src.includes('hatchPet')).toBe(true);
     expect(src.includes('HATCH_COST')).toBe(true);
   });
@@ -71,7 +71,7 @@ describe('Item 18：储备币不进局', () => {
 
 describe('Item 15：职业卡重复收藏', () => {
   it('重复收藏重复获得经验（无 once 门槛）', async () => {
-    const src = (await import('node:fs')).readFileSync('game/src/meta.js', 'utf8');
+    const src = (await import('node:fs')).readFileSync('game/src/hub/meta.js', 'utf8');
     expect(src.includes('重复收藏重复获得经验')).toBe(true);          // once 门槛已移除
     expect(src.includes('if (d.collXp[card.id]) return null;')).toBe(false);
   });

@@ -7,8 +7,8 @@ window.SDT.MAP = {
   rules: { battleEnergy: 2, battleHandMax: 8, bossDeckSize: 15, starterSha: 5, battleStartDraw: 5, battleTurnDraw: 1, diceSides: 6 },
   items: { rations: { name: '口粮' }, wood: { name: '木材' } },
 };
-await import('../game/src/cards.js');
-const { BattleSession } = await import('../game/src/battle.core.js');
+await import('../game/src/cards/cards.js');
+const { BattleSession } = await import('../game/src/battle/battle.core.js');
 
 const starter = window.SDT.Cards.all().find(card => card.id === 'starter-attack') || {
   id: 'starter-attack', name: '初始攻击', cost: 1, type: '武术', desc: '造成攻击伤害。', dmg: 0, dmgType: 'attack',

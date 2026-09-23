@@ -4,6 +4,8 @@
 
 `index.html` 只加载 `src/main.js`。所有源码均为 ESM；`main.js` 负责确定初始化顺序，模块自身使用显式 `import` 描述依赖。
 
+源码按功能域分目录（2026-09-23 目录化）：`core/`（底座：随机/规则/输入/渲染/事件/数据/诊断/门面）、`ui/`（全局 UI 与控制器）、`battle/`（战斗全域，含 effect-steps 效果流水线与 combat 伤害）、`cards/`（卡库数据/同步/规则/schema/视图）、`run/`（局内流程与对局地图）、`hub/`（基地/局外：仓库/背包/存档/商店/整备/命令）、`home/`（首页/叙事）、`audio/`（音频）；根层只留装配与入口（`main.js`、`boot-order.js`、`game.boot.js`、`r7a.qa.js`）和 `generated/`。分层判据与目录一致，详见 `game/src/README.md`。
+
 分层从底向上为：规则/数据与纯工具 → 状态和领域逻辑 → 功能视图 → 启动接线；高层依赖低层。核心状态模块不得反向导入 `boot`、`run`、`hub`、`notes` 或具体视图。`tests/contracts.test.js` 通过 AST 依赖图拒绝循环依赖，覆盖子目录、重导出与动态字面量 import。
 
 ## 稳定接口
@@ -51,5 +53,5 @@
 ## 质量检查与文档生成
 
 模块级改进范围与验收记录见 `code-health-plan-2026-09-23.md`、`architecture-alignment-plan-2026-09-23.md`，自动检查入口见 `quality-gates.md`。
-`scripts/architecture-graph.mjs` 由契约测试和 `tests/architecture-boundaries.test.js` 共用。检查包含缺失 JS 模块、不透明动态 import、运行时导入范围与独立领域模块的浏览器全局访问。`battle.runtime.js` 仅允许 core、engine、enemy-phase 三个装配/执行模块导入；战斗视图通过 core 的快照和命令访问领域。这是源码依赖约束，不代表已消除兼容门面上的全部可变状态。
+`scripts/architecture-graph.mjs` 由契约测试和 `tests/architecture-boundaries.test.js` 共用。检查包含缺失 JS 模块、不透明动态 import、运行时导入范围与独立领域模块的浏览器全局访问；2026-09-23 起分层判据按域目录路径（如 `battle/runtime.js`、`hub/`、`run/` 前缀）而非文件名。`battle/battle.runtime.js` 仅允许 core、engine、enemy-phase 三个装配/执行模块导入；战斗视图通过 core 的快照和命令访问领域。这是源码依赖约束，不代表已消除兼容门面上的全部可变状态。
 普通测试中的游戏全书校验只在内存生成内容；`npm run docs:compendium` 才会写入 `docs/game-compendium.md`，避免回归测试覆盖工作区文档。

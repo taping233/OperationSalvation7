@@ -1,9 +1,9 @@
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { KEY as CARDS_KEY } from '../game/src/cards.consts.js';
-import { validateCardRules } from '../game/src/card-rules.schema.js';
-import { RunStorage } from '../game/src/game.storage.js';
+import { KEY as CARDS_KEY } from '../game/src/cards/cards.consts.js';
+import { validateCardRules } from '../game/src/cards/card-rules.schema.js';
+import { RunStorage } from '../game/src/hub/game.storage.js';
 
 window.HTMLCanvasElement.prototype.getContext = () => ({
   measureText: () => ({ width: 10 }), clearRect() {}, fillRect() {}, drawImage() {},
@@ -24,8 +24,8 @@ beforeAll(async () => {
   await import('../game/src/main.js');
   document.dispatchEvent(new Event('DOMContentLoaded', { bubbles: true }));
   await new Promise(resolveTick => setTimeout(resolveTick, 0));
-  ({ game } = await import('../game/src/game.session.js'));
-  bag = await import('../game/src/game.bag.js');
+  ({ game } = await import('../game/src/run/game.session.js'));
+  bag = await import('../game/src/hub/game.bag.js');
   Cards = window.SDT.Cards;
   sampleCard = Cards.all().find(card => card.type === '法术' || card.type === '攻击');
 });
@@ -75,7 +75,7 @@ describe('原始定版背包规则与旧档回填', () => {
     expect(validateCardRules(crystal)).toMatchObject({ ok: true, errors: [], pending: [] });
     expect(validateCardRules(elixir)).toMatchObject({ ok: true, errors: [], pending: [] });
     expect(validateCardRules(potion)).toMatchObject({ ok: true, errors: [], pending: [] });
-    const source = readFileSync(resolve(process.cwd(), 'game/src/cards.data.js'), 'utf8');
+    const source = readFileSync(resolve(process.cwd(), 'game/src/cards/cards.data.js'), 'utf8');
     expect(source).toMatch(/\"tt-crystal\"/);
     expect(source).toMatch(/\"tt3-savior-elixir\"/);
   });
@@ -179,7 +179,7 @@ describe('原始定版背包规则与旧档回填', () => {
 
   it('真实旧档 loadGame 刷新无规则 ownedCards 快照，名称与描述采用现行卡库', async () => {
     const slot = 7;
-    const session = await import('../game/src/game.session.js');
+    const session = await import('../game/src/run/game.session.js');
     const originalRun = RunStorage.read(slot);
     const originalBaseRaw = localStorage.getItem(`sdt_base_${slot}`);
     try {

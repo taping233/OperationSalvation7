@@ -1,10 +1,10 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import fs from 'node:fs';
-import { RunStorage } from '../game/src/game.storage.js';
-import { createStoryCommands } from '../game/src/story.commands.js';
-import { storyCommands } from '../game/src/story.commands.js';
-import { inspectLastLamp, makeLastLampEventInstanceId, prepareLastLampChoice, validateLastLampState } from '../game/src/story.last-lamp.js';
-import { lastLampNarrative } from '../game/src/narrative.js';
+import { RunStorage } from '../game/src/hub/game.storage.js';
+import { createStoryCommands } from '../game/src/home/story.commands.js';
+import { storyCommands } from '../game/src/home/story.commands.js';
+import { inspectLastLamp, makeLastLampEventInstanceId, prepareLastLampChoice, validateLastLampState } from '../game/src/home/story.last-lamp.js';
+import { lastLampNarrative } from '../game/src/home/narrative.js';
 
 const base = () => ({ coins: 7, story: { flags: { existing: true }, outcomes: { otherStory: { kept: true } } } });
 const input = (runId, segmentId, choiceId = 'continue', node = '1,2') => ({
@@ -118,7 +118,7 @@ describe('R6-a 最后一盏引路灯', () => {
   });
 
   it('事件接线先提交 Base，再消费节点；保存失败路径撤销 visited 并保留重试页', () => {
-    const source = fs.readFileSync('game/src/game.run.flow.js', 'utf8');
+    const source = fs.readFileSync('game/src/run/game.run.flow.js', 'utf8');
     expect(source).toMatch(/await storyCommands\.record[\s\S]*renderLastLampResult\(record, resultText, binding\)/);
     expect(source).toMatch(/UI\.act\('lastLampFinish'[\s\S]*consumeCurrentCell\(\);/);
     expect(source).toContain("if (!wasVisited && game.visited) delete game.visited[key]");

@@ -1,7 +1,7 @@
 import { describe,expect,it } from 'vitest';
-import { createLayeredMap } from '../game/src/layeredMap.js';
-import { createMapSnapshot,hydrateMapSnapshot,planMapRestore,validateMapSnapshot } from '../game/src/map-snapshot.js';
-import { applyRouteOverlay,ROUTE_VERSION } from '../game/src/route-overlay.js';
+import { createLayeredMap } from '../game/src/run/layeredMap.js';
+import { createMapSnapshot,hydrateMapSnapshot,planMapRestore,validateMapSnapshot } from '../game/src/run/map-snapshot.js';
+import { applyRouteOverlay,ROUTE_VERSION } from '../game/src/ui/route-overlay.js';
 
 const make = seed => createMapSnapshot({mapSeed:seed,generatorVersion:3,layoutVersion:9,layerData:createLayeredMap(seed)}).value;
 

@@ -9,29 +9,29 @@ const state = vi.hoisted(() => ({
   view: { revision: 1, home: { placements: [] } },
 }));
 
-vi.mock('../game/src/characters.js', () => ({ CHARACTERS: [], characterFor: (id) => ({ rulesetId: id }), characterName: (id) => id }));
-vi.mock('../game/src/shared.js', () => ({ esc: String, escAttr: String }));
-vi.mock('../game/src/game.session.js', () => ({
+vi.mock('../game/src/core/characters.js', () => ({ CHARACTERS: [], characterFor: (id) => ({ rulesetId: id }), characterName: (id) => id }));
+vi.mock('../game/src/core/shared.js', () => ({ esc: String, escAttr: String }));
+vi.mock('../game/src/run/game.session.js', () => ({
   MAP: { rules: {} }, MODES: {}, game: { state: '' }, getActiveSlot: () => 1,
   newRun: vi.fn(), requestClassChoice: vi.fn(), setLobby: vi.fn(), showTitle: vi.fn(),
 }));
-vi.mock('../game/src/game.cardslib.js', () => ({ Sfx: {}, configureCardNavigation: vi.fn(), _set_cardPageOpen: vi.fn() }));
-vi.mock('../game/src/random.js', () => ({ Random: {} }));
-vi.mock('../game/src/base.commands.js', () => ({ readBase: (...args) => state.readBase(...args), readBaseReceipt: vi.fn(), commitBase: vi.fn() }));
-vi.mock('../game/src/collection.commands.js', () => ({ convertCollection: vi.fn(), getCharacter: vi.fn(), getCollection: vi.fn(), selectSkin: vi.fn(), stackKeyOf: vi.fn() }));
-vi.mock('../game/src/home.commands.js', () => ({ createHomeCommands: () => ({ buyFurniture: (...args) => state.buyFurniture(...args), saveLayout: vi.fn(), setDisplay: vi.fn() }) }));
-vi.mock('../game/src/home.presenter.js', () => ({ presentHome: (value) => value, homeErrorMessage: (value) => value?.message || 'error' }));
-vi.mock('../game/src/home.visuals.js', () => ({ getM04VisualPack: () => ({}) }));
-vi.mock('../game/src/story.last-lamp.js', () => ({ validateLastLampState: vi.fn() }));
-vi.mock('../game/src/preparation.commands.js', () => ({ createPreparationCommands: () => ({}), getPreparation: vi.fn(), previewDeployment: vi.fn() }));
-vi.mock('../game/src/preparation.view.js', () => ({ buildPreparationViewModel: vi.fn(), mountPreparationView: vi.fn() }));
-vi.mock('../game/src/game.hub.bridge.js', () => ({ slots: {}, homeRequestId: (type) => type }));
-vi.mock('../game/src/game.hub.depart.js', () => ({ hubDeployHTML: () => '<div>deploy</div>', openDepartPrep: vi.fn(), deployPick: {}, setDeployPick: vi.fn() }));
-vi.mock('../game/src/game.hub.pages.js', () => ({
+vi.mock('../game/src/hub/game.cardslib.js', () => ({ Sfx: {}, configureCardNavigation: vi.fn(), _set_cardPageOpen: vi.fn() }));
+vi.mock('../game/src/core/random.js', () => ({ Random: {} }));
+vi.mock('../game/src/hub/base.commands.js', () => ({ readBase: (...args) => state.readBase(...args), readBaseReceipt: vi.fn(), commitBase: vi.fn() }));
+vi.mock('../game/src/hub/collection.commands.js', () => ({ convertCollection: vi.fn(), getCharacter: vi.fn(), getCollection: vi.fn(), selectSkin: vi.fn(), stackKeyOf: vi.fn() }));
+vi.mock('../game/src/home/home.commands.js', () => ({ createHomeCommands: () => ({ buyFurniture: (...args) => state.buyFurniture(...args), saveLayout: vi.fn(), setDisplay: vi.fn() }) }));
+vi.mock('../game/src/home/home.presenter.js', () => ({ presentHome: (value) => value, homeErrorMessage: (value) => value?.message || 'error' }));
+vi.mock('../game/src/home/home.visuals.js', () => ({ getM04VisualPack: () => ({}) }));
+vi.mock('../game/src/home/story.last-lamp.js', () => ({ validateLastLampState: vi.fn() }));
+vi.mock('../game/src/hub/preparation.commands.js', () => ({ createPreparationCommands: () => ({}), getPreparation: vi.fn(), previewDeployment: vi.fn() }));
+vi.mock('../game/src/hub/preparation.view.js', () => ({ buildPreparationViewModel: vi.fn(), mountPreparationView: vi.fn() }));
+vi.mock('../game/src/hub/game.hub.bridge.js', () => ({ slots: {}, homeRequestId: (type) => type }));
+vi.mock('../game/src/hub/game.hub.depart.js', () => ({ hubDeployHTML: () => '<div>deploy</div>', openDepartPrep: vi.fn(), deployPick: {}, setDeployPick: vi.fn() }));
+vi.mock('../game/src/hub/game.hub.pages.js', () => ({
   hubShopHTML: () => '', hubStashHTML: () => '', openStashItem: vi.fn(), openRawItem: vi.fn(),
   hubUpgradeHTML: () => '', hubClassesHTML: () => '', hubAchHTML: () => '', HUB_SHOP_GOODS: [], hubShopGoodsCard: vi.fn(),
 }));
-vi.mock('../game/src/home.scene.js', () => ({ mountHome: (...args) => state.mountHome(...args) }));
+vi.mock('../game/src/home/home.scene.js', () => ({ mountHome: (...args) => state.mountHome(...args) }));
 
 function makeController() {
   return { update: vi.fn(), dispose: vi.fn() };
@@ -51,7 +51,7 @@ async function loadHub() {
     Art: { hydrateSelectedSkins: vi.fn(), classArt: vi.fn() }, Meta: { checkUnlocks: vi.fn(), pendingAch: () => [], pendingColl: () => [] },
     Icons: { img: () => '' },
   };
-  state.hub ||= await import('../game/src/game.hub.js');
+  state.hub ||= await import('../game/src/hub/game.hub.js');
   return state.hub;
 }
 

@@ -2,19 +2,19 @@ import { beforeEach, expect, it, vi } from 'vitest';
 
 const altarState = vi.hoisted(() => ({ game: {}, random: vi.fn(() => 0) }));
 
-vi.mock('../game/src/game.session.js', () => ({
+vi.mock('../game/src/run/game.session.js', () => ({
   MAP: { rules: { starterSha: 0, stashUpgradeWood: 1, stashUpgradeSlots: 1 } },
   MODES: {}, game: altarState.game, getActiveSlot: () => null,
   clearSave: vi.fn(), curLayer: () => ({ logical: [{ def: { type: altarState.game.layerIdx === 2 ? 'emergencyExit' : 'exit' } }] }),
   enterLayer: vi.fn(), exitToTitle: vi.fn(), newUid: vi.fn(), saveGame: vi.fn(),
   scaledEnemy: vi.fn(), syncPlayTime: vi.fn(),
 }));
-vi.mock('../game/src/characters.js', () => ({ CHARACTERS: [], characterFor: () => null, characterName: () => '' }));
-vi.mock('../game/src/shared.js', () => ({ esc: String, escAttr: String }));
-vi.mock('../game/src/sound.js', () => ({ tone: vi.fn() }));
-vi.mock('../game/src/game.hub.js', () => ({ openBaseHub: (...args) => altarState.openBaseHub(...args) }));
-vi.mock('../game/src/game.cardslib.js', () => ({ Sfx: { tick: vi.fn(), ding: vi.fn() }, _set_cardPageOpen: vi.fn(), cardHTML: c => c.name }));
-vi.mock('../game/src/random.js', () => ({
+vi.mock('../game/src/core/characters.js', () => ({ CHARACTERS: [], characterFor: () => null, characterName: () => '' }));
+vi.mock('../game/src/core/shared.js', () => ({ esc: String, escAttr: String }));
+vi.mock('../game/src/audio/sound.js', () => ({ tone: vi.fn() }));
+vi.mock('../game/src/hub/game.hub.js', () => ({ openBaseHub: (...args) => altarState.openBaseHub(...args) }));
+vi.mock('../game/src/hub/game.cardslib.js', () => ({ Sfx: { tick: vi.fn(), ding: vi.fn() }, _set_cardPageOpen: vi.fn(), cardHTML: c => c.name }));
+vi.mock('../game/src/core/random.js', () => ({
   Random: { random: altarState.random, seed: 1, restore: vi.fn() },
   SeededRandomService: class {
     constructor(seed) { this.state = { seed }; }
@@ -23,16 +23,16 @@ vi.mock('../game/src/random.js', () => ({
     snapshot() { return this.state; }
   },
 }));
-vi.mock('../game/src/battle-loader.js', () => ({ ensureBattleReady: vi.fn(), startBattle: vi.fn() }));
-vi.mock('../game/src/game.run.scenes.js', () => ({
+vi.mock('../game/src/battle/battle-loader.js', () => ({ ensureBattleReady: vi.fn(), startBattle: vi.fn() }));
+vi.mock('../game/src/run/game.run.scenes.js', () => ({
   FIRE_RESTORABLE: [], consumeCurrentCell: vi.fn(), finishInstant: vi.fn(), grantEventCard: vi.fn(),
   nodeOpt: (act, label) => `<button data-act="${act}">${label}</button>`,
   nodeShell: ({ body = '', foot = '' }) => window.SDT.UI.showOverlay('', `${body}${foot}`),
   openPocketRestore: vi.fn(), openShop: vi.fn(), preloadAllNodeShellBgs: vi.fn(), showRunTransition: vi.fn(),
 }));
-vi.mock('../game/src/game.nest.js', () => ({ unlockNest: vi.fn() }));
-vi.mock('../game/src/game.storage.js', () => ({ RunStorage: {} }));
-vi.mock('../game/src/recovery.commands.js', () => ({ commitBaseAndRun: vi.fn(), readSettlementReceipt: vi.fn(), recoverSlot: vi.fn() }));
+vi.mock('../game/src/run/game.nest.js', () => ({ unlockNest: vi.fn() }));
+vi.mock('../game/src/hub/game.storage.js', () => ({ RunStorage: {} }));
+vi.mock('../game/src/hub/recovery.commands.js', () => ({ commitBaseAndRun: vi.fn(), readSettlementReceipt: vi.fn(), recoverSlot: vi.fn() }));
 
 let game, UI, base, openEmergencyModal, openBaseHub;
 let stashLimit = 0;
@@ -66,7 +66,7 @@ beforeEach(async () => {
     UI, Base: base, Sound: { sfx: vi.fn(), music: vi.fn() },
     Cards: { cardHTML: c => c.name, sellPrice: () => 1 }, Meta: { track: vi.fn(), addXpToProgress: x => ({ after: x }) },
   };
-  ({ openEmergencyModal } = await import('../game/src/game.run.altar.js'));
+  ({ openEmergencyModal } = await import('../game/src/run/game.run.altar.js'));
 });
 
 it('三张献祭完成后到达整理页，仓库满仍能完成整理并回基地', async () => {

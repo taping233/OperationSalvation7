@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { PHOTO_NOTE_PLACEHOLDER, photoNoteFor, savePhotoNote } from '../game/src/card-photo-notes.js';
+import { PHOTO_NOTE_PLACEHOLDER, photoNoteFor, savePhotoNote } from '../game/src/cards/card-photo-notes.js';
 
 describe('卡牌备注（底稿+手写两层）', () => {
   it('非底稿卡且未手写时返回空值，不沿用旧 note 字段', () => {
@@ -16,7 +16,7 @@ describe('卡牌备注（底稿+手写两层）', () => {
     vi.resetModules();
     try {
       const { photoNoteFor: photoNoteForWithoutBase, savePhotoNote: savePhotoNoteWithoutBase } =
-        await import('../game/src/card-photo-notes.js');
+        await import('../game/src/cards/card-photo-notes.js');
       expect(photoNoteForWithoutBase(card)).toBe('');
       savePhotoNoteWithoutBase(card, '临时手写');
       savePhotoNoteWithoutBase(card, '   ');
@@ -38,7 +38,7 @@ describe('卡牌备注（底稿+手写两层）', () => {
     vi.resetModules();
     try {
       const { photoNoteFor: photoNoteForWithBase, savePhotoNote: savePhotoNoteWithBase } =
-        await import('../game/src/card-photo-notes.js');
+        await import('../game/src/cards/card-photo-notes.js');
       expect(photoNoteForWithBase(card)).toBe('fixture 底稿');
       expect(savePhotoNoteWithBase(card, '  我来写的文案  ')).toBe('我来写的文案');
       expect(photoNoteForWithBase(card)).toBe('我来写的文案');

@@ -1,11 +1,11 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };
-await import('../game/src/cards.js');
-const { readBase } = await import('../game/src/base.commands.js');
+await import('../game/src/cards/cards.js');
+const { readBase } = await import('../game/src/hub/base.commands.js');
 const {
   convertCollection, getCharacter, getCollection, selectSkin, stackKeyOf,
-} = await import('../game/src/collection.commands.js');
+} = await import('../game/src/hub/collection.commands.js');
 
 const Base = window.SDT.Base;
 const Cards = window.SDT.Cards;

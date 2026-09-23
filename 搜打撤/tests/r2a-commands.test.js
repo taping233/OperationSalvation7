@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { createRecoveryCommands } from '../game/src/recovery.commands.js';
-import { RunStorage } from '../game/src/game.storage.js';
+import { createRecoveryCommands } from '../game/src/hub/recovery.commands.js';
+import { RunStorage } from '../game/src/hub/game.storage.js';
 
 class MemoryStorage { constructor(seed={}){this.m=new Map(Object.entries(seed));} getItem(k){return this.m.has(k)?this.m.get(k):null;} setItem(k,v){this.m.set(k,String(v));} removeItem(k){this.m.delete(k);} }
 const keys = n => ({ base:`sdt-qa-r2-base-${n}`, run:`sdt-qa-r2-run-${n}`, journal:`sdt-qa-r2-tx-${n}` });

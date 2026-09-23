@@ -6,7 +6,7 @@ const harness = globalThis.__r6Flow = {
   narrative: async () => ({ intro: '灯', choices: [{ label: '继续', detail: '继续调查', effect: 'continue', choose: () => '记录' }] }),
 };
 
-vi.mock('../game/src/game.session.js', () => ({
+vi.mock('../game/src/run/game.session.js', () => ({
   MAP: { randomEvents: [{ w: 1, text: '普通事件' }], chestTable: [], monsters: {}, encounters: [], items: {}, rules: {} },
   game: harness.game,
   getActiveSlot: () => harness.activeSlot,
@@ -14,7 +14,7 @@ vi.mock('../game/src/game.session.js', () => ({
   weighted: xs => xs[0], pick: xs => xs[0], gainCoins: () => {}, scaledEnemy: x => x,
   cellCenter: () => ({ x: 0, y: 0 }), curLayer: () => ({ logical: [] }), markSeen: () => {}, modeCfg: () => ({ coinMul: 1 }),
 }));
-vi.mock('../game/src/game.run.scenes.js', () => ({
+vi.mock('../game/src/run/game.run.scenes.js', () => ({
   nodeShell: page => harness.pages.push(page), consumeCurrentCell: () => {
     harness.consumed++; harness.game.visited[`${harness.game.layerIdx},${harness.game.trackPos}`] = 1;
   }, finishInstant: () => { harness.finish++; },
@@ -22,14 +22,14 @@ vi.mock('../game/src/game.run.scenes.js', () => ({
   openBattleCell: () => {}, openBlankSafePage: () => {}, openChestsOnCell: () => {}, openPickupPage: () => {}, openPocketRestore: () => {},
   openShop: () => {}, preloadCellScene: () => {},
 }));
-vi.mock('../game/src/game.run.altar.js', () => ({ openDoorModal() {}, openFireRest() {}, openAltarRitual() {}, openBossGate() {}, openEmergencyModal() {} }));
-vi.mock('../game/src/game.cardslib.js', () => ({ Sfx: {}, _set_cardPageOpen() {}, cardHTML: () => '' }));
-vi.mock('../game/src/battle-loader.js', () => ({ startBattle: async () => {} }));
-vi.mock('../game/src/render-scheduler.js', () => ({ renderScheduler: { invalidate() {} } }));
-vi.mock('../game/src/sound.js', () => ({ tone: () => '' }));
-vi.mock('../game/src/random.js', () => ({ Random: { random: () => 0 } }));
-vi.mock('../game/src/game.run.data.js', () => ({ EVENT_SCENE_META: {} }));
-vi.mock('../game/src/narrative.js', () => ({ eventNarrative: async () => null, lastLampNarrative: (...args) => harness.narrative(...args) }));
+vi.mock('../game/src/run/game.run.altar.js', () => ({ openDoorModal() {}, openFireRest() {}, openAltarRitual() {}, openBossGate() {}, openEmergencyModal() {} }));
+vi.mock('../game/src/hub/game.cardslib.js', () => ({ Sfx: {}, _set_cardPageOpen() {}, cardHTML: () => '' }));
+vi.mock('../game/src/battle/battle-loader.js', () => ({ startBattle: async () => {} }));
+vi.mock('../game/src/core/render-scheduler.js', () => ({ renderScheduler: { invalidate() {} } }));
+vi.mock('../game/src/audio/sound.js', () => ({ tone: () => '' }));
+vi.mock('../game/src/core/random.js', () => ({ Random: { random: () => 0 } }));
+vi.mock('../game/src/run/game.run.data.js', () => ({ EVENT_SCENE_META: {} }));
+vi.mock('../game/src/home/narrative.js', () => ({ eventNarrative: async () => null, lastLampNarrative: (...args) => harness.narrative(...args) }));
 
 let runEventDeck, RunStorage, Base, takeBagReturnHook;
 beforeAll(async () => {
@@ -37,11 +37,11 @@ beforeAll(async () => {
     Icons: { img: () => '' }, Cards: { all: () => [] }, Sound: { sfx() {} }, Meta: { track() {} },
     UI: { act: (name, fn) => { harness.acts[name] = fn; }, refresh() {}, log() {}, hideOverlay() {} },
   };
-  await import('../game/src/base.js');
+  await import('../game/src/hub/base.js');
   Base = window.SDT.Base;
-  ({ RunStorage } = await import('../game/src/game.storage.js'));
-  ({ takeBagReturnHook } = await import('../game/src/bag-return-hook.js'));
-  ({ runEventDeck } = await import('../game/src/game.run.flow.js'));
+  ({ RunStorage } = await import('../game/src/hub/game.storage.js'));
+  ({ takeBagReturnHook } = await import('../game/src/hub/bag-return-hook.js'));
+  ({ runEventDeck } = await import('../game/src/run/game.run.flow.js'));
 });
 
 function seedRun(slot, runId) {

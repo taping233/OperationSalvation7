@@ -6,12 +6,12 @@ window.SDT = {
   MAP: { rules: { playerMaxHp: 50, playerAtk: 4, fireHeal: 5, battleEnergy: 2, battleHandMax: 10,
     bossDeckSize: 10, starterSha: 0, battleStartDraw: 5, battleTurnDraw: 1, diceSides: 6 } },
 };
-await import('../game/src/cards.js');
-await import('../game/src/base.js');
-await import('../game/src/meta.js');
-const { RunStorage } = await import('../game/src/game.storage.js');
-const { createRecoveryCommands } = await import('../game/src/recovery.commands.js');
-const { createTerminalCommands } = await import('../game/src/terminal.commands.js');
+await import('../game/src/cards/cards.js');
+await import('../game/src/hub/base.js');
+await import('../game/src/hub/meta.js');
+const { RunStorage } = await import('../game/src/hub/game.storage.js');
+const { createRecoveryCommands } = await import('../game/src/hub/recovery.commands.js');
+const { createTerminalCommands } = await import('../game/src/hub/terminal.commands.js');
 const Base = window.SDT.Base;
 
 function lockManager() { return { request: (_name, _options, callback) => callback() }; }

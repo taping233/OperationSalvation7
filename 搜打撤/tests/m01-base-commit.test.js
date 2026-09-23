@@ -1,8 +1,8 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };
-await import('../game/src/base.js');
-const { readBase, readBaseReceipt, commitBase } = await import('../game/src/base.commands.js');
+await import('../game/src/hub/base.js');
+const { readBase, readBaseReceipt, commitBase } = await import('../game/src/hub/base.commands.js');
 
 const Base = window.SDT.Base;
 const key = slot => `sdt-base-v2-slot${slot}`;

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { RenderScheduler } from '../game/src/render-scheduler.js';
+import { RenderScheduler } from '../game/src/core/render-scheduler.js';
 
 describe('RenderScheduler', () => {
   it('空闲只在失效时绘制，活动状态允许 120 FPS', () => {

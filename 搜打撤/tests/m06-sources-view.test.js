@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
-import { getSources } from '../game/src/preparation.sources.js';
-import { buildPreparationViewModel, mountPreparationView } from '../game/src/preparation.view.js';
+import { getSources } from '../game/src/hub/preparation.sources.js';
+import { buildPreparationViewModel, mountPreparationView } from '../game/src/hub/preparation.view.js';
 
 describe('M06-D source evidence', () => {
   it('uses actual pool evidence and marks unsupported sources unknown', () => {

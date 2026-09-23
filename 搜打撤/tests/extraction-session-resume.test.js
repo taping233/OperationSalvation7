@@ -7,11 +7,11 @@ window.SDT = {
   Icons: { img: () => '', TYPE_ART: {} }, Sound: { music() {}, sfx() {}, setDucked() {} }, FX: { feedback() {} },
   MAP: { rules: { playerMaxHp: 50, playerAtk: 4, fireHeal: 5, battleEnergy: 2, battleHandMax: 10, bossDeckSize: 10, starterSha: 0, battleStartDraw: 5, battleTurnDraw: 1, diceSides: 6 }, items: { rations: { name: '口粮' }, wood: { name: '木材' } } },
 };
-await import('../game/src/cards.js');
-await import('../game/src/ui.js');
-await import('../game/src/base.js');
-const session = await import('../game/src/game.session.js');
-const { RunStorage } = await import('../game/src/game.storage.js');
+await import('../game/src/cards/cards.js');
+await import('../game/src/ui/ui.js');
+await import('../game/src/hub/base.js');
+const session = await import('../game/src/run/game.session.js');
+const { RunStorage } = await import('../game/src/hub/game.storage.js');
 const Base = window.SDT.Base;
 
 const resumeHook = vi.fn(() => ({ ok: true }));

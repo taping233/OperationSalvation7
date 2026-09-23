@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { WinterSoundscape } from '../game/src/sound.scape.js';
+import { WinterSoundscape } from '../game/src/audio/sound.scape.js';
 
 function fakeContext() {
   const makeGain = () => {

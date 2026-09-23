@@ -67,7 +67,7 @@ import {
   mountHome,
   projectHomePoint,
   unprojectHomePoint,
-} from "../game/src/home.scene.js";
+} from "../game/src/home/home.scene.js";
 
 const view = () => ({
   revision: 2,

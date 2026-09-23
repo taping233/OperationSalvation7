@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { FURNITURE_CATALOG, ROOM_SPEC } from '../game/src/home.catalog.js';
-import { createHomeCommands, getHome, validateLayout } from '../game/src/home.commands.js';
+import { FURNITURE_CATALOG, ROOM_SPEC } from '../game/src/home/home.catalog.js';
+import { createHomeCommands, getHome, validateLayout } from '../game/src/home/home.commands.js';
 
 const initial = (coins = 30) => ({ coins, collection: {}, home: { owned: {}, placements: [], displays: [] }, xp: 7, power: 11 });
 

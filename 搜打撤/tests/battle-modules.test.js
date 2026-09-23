@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { refillDrawPile } from '../game/src/battle.deck.js';
-import { isAreaEffect, targetSideFor, unplayableReasonFor } from '../game/src/battle.rules.js';
-import { createEffectExecutor } from '../game/src/battle.effects.js';
+import { refillDrawPile } from '../game/src/battle/battle.deck.js';
+import { isAreaEffect, targetSideFor, unplayableReasonFor } from '../game/src/battle/battle.rules.js';
+import { createEffectExecutor } from '../game/src/battle/battle.effects.js';
 
 describe('战斗牌堆与出牌规则模块', () => {
   it('只在抽牌堆为空时回收弃牌堆', () => {

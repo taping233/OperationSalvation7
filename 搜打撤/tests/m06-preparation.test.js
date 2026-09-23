@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { createPreparationCommands, getPreparation, previewDeployment } from '../game/src/preparation.commands.js';
+import { createPreparationCommands, getPreparation, previewDeployment } from '../game/src/hub/preparation.commands.js';
 
 const cards = [
   { id: 'common-a', name: '远行短刃', rarity: '古朴', type: '武术' },

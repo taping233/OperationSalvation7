@@ -1,7 +1,7 @@
 import { describe,expect,it } from 'vitest';
-import { createLayeredMap } from '../game/src/layeredMap.js';
-import { applyRouteOverlay, ROUTE_VERSION } from '../game/src/route-overlay.js';
-import { validateGeneratedMap } from '../game/src/map-generator.js';
+import { createLayeredMap } from '../game/src/run/layeredMap.js';
+import { applyRouteOverlay, ROUTE_VERSION } from '../game/src/ui/route-overlay.js';
+import { validateGeneratedMap } from '../game/src/run/map-generator.js';
 
 const apply=seed=>applyRouteOverlay({seed,generatorVersion:3,layoutVersion:9,layerData:createLayeredMap(seed),routeVersion:ROUTE_VERSION});
 const types=layers=>layers[1].logical.map(n=>n.def.type);

@@ -3,8 +3,8 @@ import { beforeAll, beforeEach, afterEach, describe, expect, it, vi } from 'vite
 let UI, SDT, source, opener, naturalRect;
 const card = { id: 'photo-test', name: '照片测试', type: '法术', cost: 2, desc: '测试规则' };
 beforeAll(async () => {
-  SDT = (await import('../game/src/sdt-facade.js')).default;
-  ({ UI } = await import('../game/src/ui.js'));
+  SDT = (await import('../game/src/core/sdt-facade.js')).default;
+  ({ UI } = await import('../game/src/ui/ui.js'));
 });
 beforeEach(() => {
   vi.useFakeTimers();

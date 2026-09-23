@@ -3,7 +3,7 @@
  * 本文件锁住三件事：① 三个已知手牌代价卡全部命中登记点正则（审计据此归条件卡）；
  * ② 非代价句不误命中；③ 中日数词映射与历史行为一致。 */
 import { describe, expect, it } from 'vitest';
-import { HAND_COST_CONSUME_RE, HAND_COST_SELECT_RE, HAND_COST_PATTERNS, HAND_COST_CN_NUM } from '../game/src/hand-cost-patterns.js';
+import { HAND_COST_CONSUME_RE, HAND_COST_SELECT_RE, HAND_COST_PATTERNS, HAND_COST_CN_NUM } from '../game/src/battle/hand-cost-patterns.js';
 
 describe('手牌代价句式登记点', () => {
   it('已知手牌代价卡全部命中（审计条件卡白名单依据）', () => {

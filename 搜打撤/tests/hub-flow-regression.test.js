@@ -2,10 +2,10 @@ import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
 
 // 2026-09-22 hub 拆分：断言串分布在壳与两个切片，三文件拼接后仍断言「基地源码含 X」
-const hub = ['game.hub.js', 'game.hub.depart.js', 'game.hub.pages.js']
+const hub = ['hub/game.hub.js', 'hub/game.hub.depart.js', 'hub/game.hub.pages.js']
   .map((f) => readFileSync(`game/src/${f}`, 'utf8')).join('\n');
-const altar = readFileSync('game/src/game.run.altar.js', 'utf8');
-const session = readFileSync('game/src/game.session.js', 'utf8');
+const altar = readFileSync('game/src/run/game.run.altar.js', 'utf8');
+const session = readFileSync('game/src/run/game.session.js', 'utf8');
 
 describe('基地出发与选角回流回归', () => {
   it('选角预览同步初始选择，并支持从整备页取消回流', () => {

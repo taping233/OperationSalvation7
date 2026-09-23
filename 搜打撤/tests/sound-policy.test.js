@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { SFX_PRIORITY, shouldPlaySfx } from '../game/src/sound.policy.js';
+import { SFX_PRIORITY, shouldPlaySfx } from '../game/src/audio/sound.policy.js';
 
 describe('音效高频事件策略', () => {
   it('限制点击、悬停和场景音效的重复触发，其他战斗音效不节流', () => {

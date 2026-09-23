@@ -21,8 +21,8 @@ beforeAll(async () => {
   await import('../game/src/main.js');
   document.dispatchEvent(new Event('DOMContentLoaded', { bubbles: true }));
   await new Promise(r => setTimeout(r, 0));
-  session = await import('../game/src/game.session.js');
-  bag = await import('../game/src/game.bag.js');
+  session = await import('../game/src/run/game.session.js');
+  bag = await import('../game/src/hub/game.bag.js');
   game = session.game;
   elixir = window.SDT.Cards.all().find(c => c.id === 'tt3-savior-elixir');
   crystal = window.SDT.Cards.all().find(c => c.id === 'tt-crystal');

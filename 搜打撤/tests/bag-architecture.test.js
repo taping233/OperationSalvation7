@@ -18,10 +18,10 @@ import { resolve } from 'node:path';
 const source = (file) => readFileSync(resolve(process.cwd(), `game/src/${file}`), 'utf8');
 const importedModules = (code) => [...code.matchAll(/^(?:import|export)\s+(?:\{[^}]*\}\s+from\s+)?'\.\/([\w.]+)\.js';/gm)].map((m) => m[1]);
 
-const SHELL = source('game.bag.js');
-const DRAG = source('game.bag.drag.js');
-const SETTLE = source('game.bag.settle.js');
-const BRIDGE = source('game.bag.bridge.js');
+const SHELL = source('hub/game.bag.js');
+const DRAG = source('hub/game.bag.drag.js');
+const SETTLE = source('hub/game.bag.settle.js');
+const BRIDGE = source('hub/game.bag.bridge.js');
 
 describe('背包模块分层（批4 拆分）', () => {
   it('壳只做本体：被拆走的拖拽/结算入口不在 game.bag.js 定义，行数不上浮', () => {

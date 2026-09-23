@@ -19,10 +19,10 @@ import { resolve } from 'node:path';
 const source = (file) => readFileSync(resolve(process.cwd(), `game/src/${file}`), 'utf8');
 const importedModules = (code) => [...code.matchAll(/^import\s+(?:\{[^}]*\}\s+from\s+)?'\.\/([\w.]+)\.js';/gm)].map((m) => m[1]);
 
-const SHELL = source('game.hub.js');
-const DEPART = source('game.hub.depart.js');
-const PAGES = source('game.hub.pages.js');
-const BRIDGE = source('game.hub.bridge.js');
+const SHELL = source('hub/game.hub.js');
+const DEPART = source('hub/game.hub.depart.js');
+const PAGES = source('hub/game.hub.pages.js');
+const BRIDGE = source('hub/game.hub.bridge.js');
 
 describe('基地模块分层（批3 拆分）', () => {
   it('壳只做装配：被拆走的入口不在 game.hub.js 定义，行数不上浮', () => {

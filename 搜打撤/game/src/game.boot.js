@@ -1,21 +1,21 @@
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const UI = window.SDT.UI;
 const SDT = window.SDT;
-import { TYPE_NAME } from './game.notes.js';
-import { MAP } from './game.session.js';
-import { SLOT_COUNT, buildDerived, cam, canvas, configureGameRuntime, ctx, dpr, game, hasRun, migrateOldSave, openLeaveMenu, openSettings, openTitleGuide, quitGame, saveGame, setLobby, showTitle, startNewGame, _set_dpr, _set_cam } from './game.session.js';
-import { bindRunMixins, devForceBattle, devJumpNode, moveTo, openDevConsole, reenterCell, openClassChoice, openShop, showRunTransition } from './game.run.js';
-import { PRELOAD_SCENES } from './game.run.data.js';
-import { resumeExtraction } from './game.run.altar.js';
-import { PERFORMANCE_BUDGETS, STARTUP_SCENE_KEYS } from './performance-budgets.js';
-import { openBaseHub } from './game.hub.js';
-import { bindBagMixins, showBackpack, setBagReturnHook } from './game.bag.js';
-import { configureShopRuntime } from './game.run.shop.js';
-import { bindNotesMixins, initDevMode, openCellEditor, rebuildNotes, showClearOverlay, showExportOverlay, showImportOverlay, syncDevVisibility } from './game.notes.js';
-import { cardPageOpen, closeCardPageTop, openCardDesigner, openCardLibrary } from './game.cardslib.js';
-import { renderScheduler } from './render-scheduler.js';
-import { nodeHitRadius } from './camera.js';
-import { renderMiniMap } from './game.session.js';
+import { TYPE_NAME } from './hub/game.notes.js';
+import { MAP } from './run/game.session.js';
+import { SLOT_COUNT, buildDerived, cam, canvas, configureGameRuntime, ctx, dpr, game, hasRun, migrateOldSave, openLeaveMenu, openSettings, openTitleGuide, quitGame, saveGame, setLobby, showTitle, startNewGame, _set_dpr, _set_cam } from './run/game.session.js';
+import { bindRunMixins, devForceBattle, devJumpNode, moveTo, openDevConsole, reenterCell, openClassChoice, openShop, showRunTransition } from './run/game.run.js';
+import { PRELOAD_SCENES } from './run/game.run.data.js';
+import { resumeExtraction } from './run/game.run.altar.js';
+import { PERFORMANCE_BUDGETS, STARTUP_SCENE_KEYS } from './core/performance-budgets.js';
+import { openBaseHub } from './hub/game.hub.js';
+import { bindBagMixins, showBackpack, setBagReturnHook } from './hub/game.bag.js';
+import { configureShopRuntime } from './run/game.run.shop.js';
+import { bindNotesMixins, initDevMode, openCellEditor, rebuildNotes, showClearOverlay, showExportOverlay, showImportOverlay, syncDevVisibility } from './hub/game.notes.js';
+import { cardPageOpen, closeCardPageTop, openCardDesigner, openCardLibrary } from './hub/game.cardslib.js';
+import { renderScheduler } from './core/render-scheduler.js';
+import { nodeHitRadius } from './core/camera.js';
+import { renderMiniMap } from './run/game.session.js';
 
   configureGameRuntime({ openClassChoice, openBaseHub, rebuildNotes, resize: () => resize(), showRunTransition, syncDevVisibility, resumeExtraction });
   configureShopRuntime({ openBag: (onReturn) => {

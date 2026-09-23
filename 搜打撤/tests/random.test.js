@@ -1,7 +1,7 @@
 import { readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { Random, SeededRandomService, setRandomService } from '../game/src/random.js';
+import { Random, SeededRandomService, setRandomService } from '../game/src/core/random.js';
 
 describe('带种子的随机数服务', () => {
   it('同 seed、同命名流产生相同序列', () => {
@@ -39,11 +39,14 @@ describe('带种子的随机数服务', () => {
 
   it('源码不再绕过随机数服务，且对局存档包含 seed 与流状态', () => {
     const root = resolve(process.cwd(), 'game/src');
-    const sources = readdirSync(root)
-      .filter(name => name.endsWith('.js') && name !== 'random.js')
-      .map(name => readFileSync(resolve(root, name), 'utf8'));
+    const listJs = (dir) => readdirSync(dir, { withFileTypes: true }).flatMap((e) => {
+      const p = resolve(dir, e.name);
+      return e.isDirectory() ? listJs(p) : (e.name.endsWith('.js') && e.name !== 'random.js' ? [p] : []);
+    });
+    const sources = listJs(root).map((p) => readFileSync(p, 'utf8'));
+    expect(sources.length).toBeGreaterThan(100);   // 目录化后递归扫描全树，防止根层只剩入口文件时断言假松
     expect(sources.join('\n')).not.toContain('Math.random()');
-    const session = readFileSync(resolve(root, 'game.session.js'), 'utf8');
+    const session = readFileSync(resolve(root, 'run/game.session.js'), 'utf8');
     expect(session).toContain('seed: Random.seed, rngState: Random.snapshot()');
     expect(session).toContain('Random.restore(s.rngState || s.seed)');
   });

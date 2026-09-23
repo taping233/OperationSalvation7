@@ -8,10 +8,10 @@ window.SDT.MAP = {
   rules: { battleEnergy: 99, battleHandMax: 99, bossDeckSize: 1, starterSha: 0, battleStartDraw: 5, battleTurnDraw: 2, diceSides: 6 },
   items: { rations: { name: '口粮' }, wood: { name: '木材' } },
 };
-await import('../game/src/cards.js');
-const { BattleSession, viewApi } = await import('../game/src/battle.core.js');
-const { cardRuleHint, previewAction } = await import('../game/src/battle.preview.js');
-const { Random } = await import('../game/src/random.js');
+await import('../game/src/cards/cards.js');
+const { BattleSession, viewApi } = await import('../game/src/battle/battle.core.js');
+const { cardRuleHint, previewAction } = await import('../game/src/battle/battle.preview.js');
+const { Random } = await import('../game/src/core/random.js');
 const Cards = window.SDT.Cards;
 
 beforeAll(() => {
@@ -79,7 +79,7 @@ describe('R3-a 可信伤害预览', () => {
     expect(cardRuleHint({ ...card, rules: undefined }, 'normal')).toBe('');
   });
   it('视图预览不再复用 aim.snap 或命中旧气泡早退，三敌气泡宽度受单位格约束', () => {
-    const viewSource = fs.readFileSync('game/src/battle.view.js', 'utf8');
+    const viewSource = fs.readFileSync('game/src/battle/battle.view.js', 'utf8');
     const cssSource = fs.readFileSync('game/css/battle.css', 'utf8');
     expect(viewSource).not.toMatch(/showFoePreview\([^\n]*aim\.snap/);
     expect(viewSource).not.toContain("if (el.querySelector('.bt-fpreview')) return");

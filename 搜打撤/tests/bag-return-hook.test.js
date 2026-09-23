@@ -1,7 +1,7 @@
 /* 背包来源页返回钩子契约（迭代评审 09-20 C-P1）：
  * 事件页/物资格页/商店开背包再关闭后恢复原页面——钩子取走即清空，防陈旧钩子误触发。 */
 import { describe, expect, it, vi } from 'vitest';
-import { setBagReturnHook, takeBagReturnHook } from '../game/src/bag-return-hook.js';
+import { setBagReturnHook, takeBagReturnHook } from '../game/src/hub/bag-return-hook.js';
 
 describe('背包来源恢复钩子', () => {
   it('登记后可取走，且取走即清空（防二次误触发）', () => {

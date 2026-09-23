@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { createLayeredMap } from '../game/src/layeredMap.js';
-import { generateLayeredMap, validateGeneratedMap } from '../game/src/map-generator.js';
-import { checkConnectivity } from '../game/src/map-graph.js';
+import { createLayeredMap } from '../game/src/run/layeredMap.js';
+import { generateLayeredMap, validateGeneratedMap } from '../game/src/run/map-generator.js';
+import { checkConnectivity } from '../game/src/run/map-graph.js';
 
 describe('四层种子化地图生成器', () => {
   it('同 seed 生成完全一致的拓扑与坐标', () => {

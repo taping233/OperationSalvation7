@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { createGameMenuController } from '../game/src/game.menu.js';
+import { createGameMenuController } from '../game/src/ui/game.menu.js';
 
 beforeEach(() => {
   vi.clearAllMocks();

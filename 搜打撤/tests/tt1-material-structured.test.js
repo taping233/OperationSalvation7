@@ -1,9 +1,9 @@
 import { afterAll, beforeEach, describe, expect, it } from 'vitest';
-import { validateCardRules } from '../game/src/card-rules.schema.js';
+import { validateCardRules } from '../game/src/cards/card-rules.schema.js';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };
-await import('../game/src/cards.js');
-await import('../game/src/base.js');
+await import('../game/src/cards/cards.js');
+await import('../game/src/hub/base.js');
 
 const Cards = window.SDT.Cards;
 const Base = window.SDT.Base;

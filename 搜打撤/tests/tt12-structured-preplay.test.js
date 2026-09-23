@@ -1,11 +1,11 @@
 import { afterAll, describe, expect, it } from 'vitest';
-import { calculateEffectiveCardCost, pocketSpellDiscountFor } from '../game/src/battle.card-cost.js';
-import { isAreaEffect, targetSideFor } from '../game/src/battle.rules.js';
-import { validateCardRules } from '../game/src/card-rules.schema.js';
-import { KEY as CARDS_KEY, TT12_KEY } from '../game/src/cards.consts.js';
+import { calculateEffectiveCardCost, pocketSpellDiscountFor } from '../game/src/battle/battle.card-cost.js';
+import { isAreaEffect, targetSideFor } from '../game/src/battle/battle.rules.js';
+import { validateCardRules } from '../game/src/cards/card-rules.schema.js';
+import { KEY as CARDS_KEY, TT12_KEY } from '../game/src/cards/cards.consts.js';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };
-await import('../game/src/cards.js');
+await import('../game/src/cards/cards.js');
 
 const Cards = window.SDT.Cards;
 const RULES_KEY = 'sdt-cards-tt12-preplay-v1-seeded';

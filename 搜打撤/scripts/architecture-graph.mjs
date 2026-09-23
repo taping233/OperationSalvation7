@@ -4,12 +4,15 @@ import { parse } from 'acorn';
 import { simple } from 'acorn-walk';
 
 const JS_FILE = /\.(?:js|mjs)$/;
-const RUNTIME_OWNERS = new Set(['battle.core.js', 'battle.engine.js', 'battle.enemy-phase.js']);
+// 2026-09-23 目录化重构起，分层判据从文件名制改为目录路径制（键相对 game/src）。
+const RUNTIME_OWNERS = new Set(['battle/core.js', 'battle/engine.js', 'battle/enemy-phase.js']);
 const PURE_MODULES = new Set([
-  'battle.card-cost.js', 'battle.intent.js', 'battle.resolution.js',
-  'battle.snapshot.js', 'cards.catalog.js',
+  'battle/card-cost.js', 'battle/intent.js', 'battle/resolution.js',
+  'battle/snapshot.js', 'cards/catalog.js',
 ]);
-const VIEW_MODULES = /^battle\.(?:view|overlays|layers|vfx|anim|aim|hover|frames|piles\.view)\.js$/;
+const VIEW_MODULES = /^battle\/(?:view|overlays|layers|vfx|anim|aim|hover|frames|piles\.view)\.js$/;
+// 流程域（基地/局外 + 局内流程）——纯规则/快照模块不得反向依赖。
+const FLOW_PREFIXES = ['hub/', 'run/'];
 
 export function readModuleSources(root) {
   const sources = new Map();
@@ -87,14 +90,14 @@ export function architectureViolations(graph) {
   const violations = [];
   for (const [name, module] of graph) {
     for (const { target, line } of module.dependencies) {
-      if (target === 'battle.runtime.js' && !RUNTIME_OWNERS.has(name)) {
+      if (target === 'battle/runtime.js' && !RUNTIME_OWNERS.has(name)) {
         violations.push(`${name}:${line}: 战斗运行时仅允许 core/engine/enemy-phase 访问`);
       }
-      if (VIEW_MODULES.test(name) && ['battle.engine.js', 'battle.enemy-phase.js'].includes(target)) {
+      if (VIEW_MODULES.test(name) && ['battle/engine.js', 'battle/enemy-phase.js'].includes(target)) {
         violations.push(`${name}:${line}: 视图须通过 core 命令与快照访问战斗`);
       }
-      if (PURE_MODULES.has(name) && (/^battle\.(?:runtime|engine|core|enemy-phase)\.js$/.test(target) || VIEW_MODULES.test(target)
-        || target === 'sdt-facade.js' || target.startsWith('game.'))) {
+      if (PURE_MODULES.has(name) && (/^battle\/(?:runtime|engine|core|enemy-phase)\.js$/.test(target) || VIEW_MODULES.test(target)
+        || target === 'core/sdt-facade.js' || FLOW_PREFIXES.some(prefix => target.startsWith(prefix)))) {
         violations.push(`${name}:${line}: 独立规则/快照模块不能反向依赖 ${target}`);
       }
     }

@@ -6,7 +6,7 @@ const source = (name) => readFileSync(resolve(process.cwd(), 'game/src', name), 
 
 describe('核心卡牌交互的键盘与读屏契约', () => {
   it('照相馆照片只保留单一按钮焦点，编辑工具由开发者模式控制', () => {
-    const cards = source('game.cardslib.js');
+    const cards = source('hub/game.cardslib.js');
     expect(cards).toContain('<button type="button" class="lib-cardwrap studio-photo');
     expect(cards).toContain('aria-label="查看照片：');
     expect(cards).toContain('let libEditMode = false');
@@ -16,15 +16,15 @@ describe('核心卡牌交互的键盘与读屏契约', () => {
   });
 
   it('宝箱中可拾取的卡牌使用原生按钮', () => {
-    const chests = source('chests.js');
+    const chests = source('run/chests.js');
     expect(chests).toContain("const tag = act ? 'button' : 'div'");
     expect(chests).toContain('type="button" aria-label=');
   });
 
   it('战斗手牌提供 button 语义和 Enter/Space 操作', () => {
     // 2026-09-22 battle.view 拆片：断言串随片走，壳+六片拼接后仍断言「战斗源码含 X」
-    const battle = ['battle.view.js', 'battle.overlays.js', 'battle.layers.js', 'battle.vfx.js',
-      'battle.anim.js', 'battle.aim.js', 'battle.hover.js']
+    const battle = ['battle/battle.view.js', 'battle/battle.overlays.js', 'battle/battle.layers.js', 'battle/battle.vfx.js',
+      'battle/battle.anim.js', 'battle/battle.aim.js', 'battle/battle.hover.js']
       .map((f) => source(f)).join('\n');
     expect(battle).toContain("rec.card.setAttribute('role', 'button')");
     expect(battle).toContain('rec.card.tabIndex = 0');

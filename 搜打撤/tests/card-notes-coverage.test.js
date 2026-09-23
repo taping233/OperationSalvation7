@@ -13,9 +13,9 @@ import path from 'node:path';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };
 window.SDT.Icons.TYPE_ART = {};
-await import('../game/src/cards.js');
+await import('../game/src/cards/cards.js');
 const C = window.SDT.Cards;
-await import('../game/src/card-photo-notes.js');
+await import('../game/src/cards/card-photo-notes.js');
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const notesData = JSON.parse(readFileSync(path.join(ROOT, 'game', 'data', 'card-notes.json'), 'utf8'));
@@ -59,7 +59,7 @@ describe('卡牌备注守卫：文案质量底线', () => {
 
 describe('卡牌备注运行链：photoNoteFor 两层优先级', () => {
   it('默认读底稿；localStorage 手写优先；清空手写回落底稿', async () => {
-    const { photoNoteFor, savePhotoNote } = await import('../game/src/card-photo-notes.js');
+    const { photoNoteFor, savePhotoNote } = await import('../game/src/cards/card-photo-notes.js');
     const sample = allCards[0];
     // 底稿层
     expect(photoNoteFor(sample)).toBe(String(notesData.notes[sample.id] || '').trim());

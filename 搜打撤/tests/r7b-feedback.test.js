@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { downloadFeedbackRecord, feedbackExportRecord, readLocalFeedback } from '../game/src/feedback.local.js';
-import { createGameMenuController } from '../game/src/game.menu.js';
+import { downloadFeedbackRecord, feedbackExportRecord, readLocalFeedback } from '../game/src/ui/feedback.local.js';
+import { createGameMenuController } from '../game/src/ui/game.menu.js';
 
 function setup() {
   document.body.innerHTML = `<div id="title"><button id="titleSettings">设置</button></div><div id="exitScr"></div><span id="gameVersion">v9.1</span><div id="overlay" hidden><h2 id="ovTitle"></h2><div id="ovBody"></div></div><div id="sugLayer" hidden><h3 id="sugHead"></h3><p id="sugWhere"></p>

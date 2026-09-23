@@ -6,40 +6,40 @@
  * 下面的导入顺序即启动顺序，须与 boot-order.js 的 BOOT_ORDER 一致
  * （tests/contracts.test.js 有守护断言，勿随意调换）。
  * ============================================================ */
-import './ui-scale.js';   // 全局 UI 缩放：须在首帧渲染前挂 zoom，故先于一切模块
-import './random.js';
-import './rules.js';
-import './mapData.js';
-import './art.js';
-import './icons-bitmap.js';
-import './sound.js';
-import './camera.js';
-import './motion.js';
-import './input.js';
+import './ui/ui-scale.js';   // 全局 UI 缩放：须在首帧渲染前挂 zoom，故先于一切模块
+import './core/random.js';
+import './core/rules.js';
+import './core/mapData.js';
+import './core/art.js';
+import './core/icons-bitmap.js';
+import './audio/sound.js';
+import './core/camera.js';
+import './core/motion.js';
+import './core/input.js';
 
-import './event-bus.js';   // 模块间事件总线（批次 5）：须早于战斗/背包的订阅方
-import './notes.js';
-import './cards.js';
-import './combat.js';
-import './base.js';
-import './meta.js';
-import './render-scheduler.js';
-import './renderer.fx.js';
+import './core/event-bus.js';   // 模块间事件总线（批次 5）：须早于战斗/背包的订阅方
+import './core/notes.js';
+import './cards/cards.js';
+import './battle/combat.js';
+import './hub/base.js';
+import './hub/meta.js';
+import './core/render-scheduler.js';
+import './core/renderer.fx.js';
 
-import './renderer.js';        // 老板留言 #53：对局地图改回原二维面板（停用 3D 场景）；
+import './core/renderer.js';        // 老板留言 #53：对局地图改回原二维面板（停用 3D 场景）；
                                // scene/ 目录已随 2026-09-19 技术清理删除，需要 3D 时从 git 历史找回
-import './ui.js';
-import './term-tips.js';   // 词条讲解浮框（09-20 老板：特殊词条触摸即讲解）——全局委托
-import './shared.js';
-import './battle-loader.js';
-import './chests.js';
-import './game.storage.js';
-import './game.store.js';
-import './game.session.js';
-import './game.nest.js';
-import './game.run.js';
-import './game.hub.js';
-import './game.bag.js';
-import './game.notes.js';
-import './game.cardslib.js';
+import './ui/ui.js';
+import './ui/term-tips.js';   // 词条讲解浮框（09-20 老板：特殊词条触摸即讲解）——全局委托
+import './core/shared.js';
+import './battle/battle-loader.js';
+import './run/chests.js';
+import './hub/game.storage.js';
+import './hub/game.store.js';
+import './run/game.session.js';
+import './run/game.nest.js';
+import './run/game.run.js';
+import './hub/game.hub.js';
+import './hub/game.bag.js';
+import './hub/game.notes.js';
+import './hub/game.cardslib.js';
 import './game.boot.js';

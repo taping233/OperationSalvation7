@@ -1,8 +1,8 @@
 import { afterAll, beforeEach, describe, expect, it } from 'vitest';
-import { KEY } from '../game/src/cards.consts.js';
+import { KEY } from '../game/src/cards/cards.consts.js';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };
-await import('../game/src/cards.js');
+await import('../game/src/cards/cards.js');
 
 const Cards = window.SDT.Cards;
 const originalRaw = localStorage.getItem(KEY);

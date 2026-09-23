@@ -11,13 +11,13 @@ window.SDT = {
     battleHandMax: 10, bossDeckSize: 10, starterSha: 0, battleStartDraw: 5,
     battleTurnDraw: 1, diceSides: 6 } },
 };
-await import('../game/src/cards.js');
-await import('../game/src/ui.js');
-await import('../game/src/base.js');
-await import('../game/src/meta.js');
+await import('../game/src/cards/cards.js');
+await import('../game/src/ui/ui.js');
+await import('../game/src/hub/base.js');
+await import('../game/src/hub/meta.js');
 Object.defineProperty(navigator, 'locks', { configurable: true, value: { request: (_name, _options, callback) => callback() } });
-const { RunStorage } = await import('../game/src/game.storage.js');
-const session = await import('../game/src/game.session.js');
+const { RunStorage } = await import('../game/src/hub/game.storage.js');
+const session = await import('../game/src/run/game.session.js');
 const { game, doDeath } = session;
 const actions = new Map();
 

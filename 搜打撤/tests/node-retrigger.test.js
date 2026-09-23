@@ -54,8 +54,8 @@ await import('../game/src/main.js');
 document.dispatchEvent(new Event('DOMContentLoaded', { bubbles: true }));
 await new Promise(r => setTimeout(r, 0));
 
-const { game, newRun, enterLayer } = await import('../game/src/game.session.js');
-const { moveTo, reenterCell } = await import('../game/src/game.run.js');
+const { game, newRun, enterLayer } = await import('../game/src/run/game.session.js');
+const { moveTo, reenterCell } = await import('../game/src/run/game.run.js');
 const tick = (ms = 0) => new Promise(r => setTimeout(r, ms));
 
 const clickAct = (act) => {

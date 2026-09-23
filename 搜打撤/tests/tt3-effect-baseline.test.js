@@ -1,6 +1,6 @@
 import { beforeAll, describe, expect, it, vi } from 'vitest';
-import { KEY as CARDS_KEY, TT10_KEY } from '../game/src/cards.consts.js';
-import { validateCardRules } from '../game/src/card-rules.schema.js';
+import { KEY as CARDS_KEY, TT10_KEY } from '../game/src/cards/cards.consts.js';
+import { validateCardRules } from '../game/src/cards/card-rules.schema.js';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };
 window.SDT.Icons.TYPE_ART = {};
@@ -10,8 +10,8 @@ window.SDT.MAP = {
   items: { rations: { name: '口粮' }, wood: { name: '木材' } },
 };
 
-await import('../game/src/cards.js');
-const { BattleSession } = await import('../game/src/battle.core.js');
+await import('../game/src/cards/cards.js');
+const { BattleSession } = await import('../game/src/battle/battle.core.js');
 const Cards = window.SDT.Cards;
 const MIGRATION_KEY = 'sdt-cards-tt10-onplay-v1-seeded';
 

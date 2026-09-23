@@ -10,9 +10,9 @@ window.SDT.MAP = {
   rules: { battleEnergy: 99, battleHandMax: 99, bossDeckSize: 1, starterSha: 0, battleStartDraw: 5, battleTurnDraw: 2, diceSides: 6 },
   items: { rations: { name: '口粮' }, wood: { name: '木材' } },
 };
-await import('../game/src/cards.js');
-const { Random } = await import('../game/src/random.js');
-const { BattleSession } = await import('../game/src/battle.core.js');
+await import('../game/src/cards/cards.js');
+const { Random } = await import('../game/src/core/random.js');
+const { BattleSession } = await import('../game/src/battle/battle.core.js');
 
 const C = window.SDT.Cards;
 

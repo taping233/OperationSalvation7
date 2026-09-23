@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { calculateEffectiveCardCost, pocketSpellDiscountFor } from '../game/src/battle.card-cost.js';
-import { isAreaEffect, targetSideFor, unplayableReasonFor } from '../game/src/battle.rules.js';
-import { calculateEnemyIntent } from '../game/src/battle.intent.js';
+import { calculateEffectiveCardCost, pocketSpellDiscountFor } from '../game/src/battle/battle.card-cost.js';
+import { isAreaEffect, targetSideFor, unplayableReasonFor } from '../game/src/battle/battle.rules.js';
+import { calculateEnemyIntent } from '../game/src/battle/battle.intent.js';
 
 const cost = (card, state = {}, uid) => calculateEffectiveCardCost(card, uid, {
   unlimitedRune: false,

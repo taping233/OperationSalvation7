@@ -21,7 +21,7 @@ import path from 'node:path';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };
 window.SDT.Icons.TYPE_ART = {};
-await import('../game/src/cards.js');
+await import('../game/src/cards/cards.js');
 const C = window.SDT.Cards;
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');

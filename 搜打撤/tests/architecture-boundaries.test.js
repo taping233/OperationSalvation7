@@ -35,34 +35,44 @@ describe('AST 架构检查的识别与负面场景', () => {
 
   it('允许既有状态装配模块读取 runtime，禁止视图旁路', () => {
     const graph = graphOf({
-      'battle.runtime.js': 'export let energy = 0;',
-      'battle.engine.js': "import { energy } from './battle.runtime.js';",
-      'battle.view.js': "import { energy } from './battle.runtime.js'; import './battle.engine.js';",
+      'battle/runtime.js': 'export let energy = 0;',
+      'battle/engine.js': "import { energy } from './runtime.js';",
+      'battle/view.js': "import { energy } from './runtime.js'; import './engine.js';",
     });
     const problems = architectureViolations(graph);
     expect(problems).toHaveLength(2);
-    expect(problems.every(x => x.startsWith('battle.view.js:'))).toBe(true);
+    expect(problems.every(x => x.startsWith('battle/view.js:'))).toBe(true);
   });
 
   it('纯模块不能借全局门面或反向 import 访问运行时，说明文字不误报', () => {
     const graph = graphOf({
-      'battle.runtime.js': 'export const state = {};',
-      'battle.resolution.js': "import './battle.runtime.js'; const state = window['SDT'];",
-      'battle.snapshot.js': "const comment = 'window.SDT'; export function read(value) { return value; }",
+      'battle/runtime.js': 'export const state = {};',
+      'battle/resolution.js': "import './runtime.js'; const state = window['SDT'];",
+      'battle/snapshot.js': "const comment = 'window.SDT'; export function read(value) { return value; }",
     });
     const problems = architectureViolations(graph);
     expect(problems.some(x => x.includes('全局浏览器对象 window:1'))).toBe(true);
-    expect(problems.some(x => x.includes('反向依赖 battle.runtime.js'))).toBe(true);
-    expect(problems.some(x => x.startsWith('battle.snapshot.js:'))).toBe(false);
+    expect(problems.some(x => x.includes('反向依赖 battle/runtime.js'))).toBe(true);
+    expect(problems.some(x => x.startsWith('battle/snapshot.js:'))).toBe(false);
+  });
+
+  it('纯模块不能反向依赖流程域目录（hub/run）', () => {
+    const graph = graphOf({
+      'battle/resolution.js': "import '../hub/game.bag.js';",
+      'hub/game.bag.js': 'export const bag = {};',
+    });
+    expect(architectureViolations(graph)).toEqual([
+      'battle/resolution.js:1: 独立规则/快照模块不能反向依赖 hub/game.bag.js',
+    ]);
   });
 
   it('独立领域模块不能通过视图切片接入界面', () => {
     const graph = graphOf({
-      'battle.resolution.js': "import './battle.vfx.js';",
-      'battle.vfx.js': 'export const float = () => {};',
+      'battle/resolution.js': "import './vfx.js';",
+      'battle/vfx.js': 'export const float = () => {};',
     });
     expect(architectureViolations(graph)).toEqual([
-      'battle.resolution.js:1: 独立规则/快照模块不能反向依赖 battle.vfx.js',
+      'battle/resolution.js:1: 独立规则/快照模块不能反向依赖 battle/vfx.js',
     ]);
   });
 });

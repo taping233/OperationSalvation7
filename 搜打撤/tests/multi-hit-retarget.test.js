@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { damageSteps } from '../game/src/effect-steps.damage.js';
-import { makeHitFoe } from '../game/src/effect-steps.ctx.js';
+import { damageSteps } from '../game/src/battle/effect-steps.damage.js';
+import { makeHitFoe } from '../game/src/battle/effect-steps.ctx.js';
 
 function fixture(hpList, attack = 3) {
   const foes = hpList.map((hp, i) => ({ id: `foe-${i}`, name: `敌人${i + 1}`, hp, dead: false, status: {} }));

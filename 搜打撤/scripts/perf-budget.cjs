@@ -21,7 +21,7 @@ function mib(bytes) { return `${(bytes / 1024 / 1024).toFixed(2)} MiB`; }
 function kib(bytes) { return `${(bytes / 1024).toFixed(1)} KiB`; }
 
 async function run() {
-  const { PERFORMANCE_BUDGETS, STARTUP_SCENE_KEYS } = await import(pathToFileURL(path.join(ROOT, 'game/src/performance-budgets.js')).href);
+  const { PERFORMANCE_BUDGETS, STARTUP_SCENE_KEYS } = await import(pathToFileURL(path.join(ROOT, 'game/src/core/performance-budgets.js')).href);
   const outDir = process.env.SDT_BUILD_OUT_DIR
     ? path.resolve(ROOT, process.env.SDT_BUILD_OUT_DIR)
     : path.join(ROOT, 'desktop-app', 'game');

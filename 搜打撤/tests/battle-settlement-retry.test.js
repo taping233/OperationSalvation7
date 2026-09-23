@@ -2,16 +2,16 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 const state = vi.hoisted(() => ({ game: null, saveGame: null, transition: null, actions: null, chestDone: null }));
 
-vi.mock('../game/src/game.session.js', () => ({
+vi.mock('../game/src/run/game.session.js', () => ({
   game: state.game, saveGame: (...args) => state.saveGame(...args), getActiveSlot: () => 1,
   doDeath: vi.fn(), cardStacks: vi.fn(), newUid: vi.fn(), safeUsed: vi.fn(), usedSlots: vi.fn(),
 }));
-vi.mock('../game/src/game.storage.js', () => ({ RunStorage: { readIdentity: () => ({ ok: true, value: { runId: state.runId } }) } }));
-vi.mock('../game/src/game.run.js', () => ({ showRunTransition: (...args) => state.transition(...args) }));
-vi.mock('../game/src/game.bag.bridge.js', () => ({ bagSlots: { closeBackpack: vi.fn(), pocketAdd: vi.fn() } }));
-vi.mock('../game/src/event-bus.js', () => ({ on: vi.fn() }));
-vi.mock('../game/src/random.js', () => ({ Random: { random: () => 0.5 } }));
-vi.mock('../game/src/shared.js', () => ({ esc: String }));
+vi.mock('../game/src/hub/game.storage.js', () => ({ RunStorage: { readIdentity: () => ({ ok: true, value: { runId: state.runId } }) } }));
+vi.mock('../game/src/run/game.run.js', () => ({ showRunTransition: (...args) => state.transition(...args) }));
+vi.mock('../game/src/hub/game.bag.bridge.js', () => ({ bagSlots: { closeBackpack: vi.fn(), pocketAdd: vi.fn() } }));
+vi.mock('../game/src/core/event-bus.js', () => ({ on: vi.fn() }));
+vi.mock('../game/src/core/random.js', () => ({ Random: { random: () => 0.5 } }));
+vi.mock('../game/src/core/shared.js', () => ({ esc: String }));
 
 beforeEach(() => {
   vi.resetModules();
@@ -42,7 +42,7 @@ beforeEach(() => {
 });
 
 async function bind() {
-  const { bindBagMixins } = await import('../game/src/game.bag.settle.js');
+  const { bindBagMixins } = await import('../game/src/hub/game.bag.settle.js');
   bindBagMixins();
   return state.game.onBattleEnd;
 }
@@ -57,7 +57,7 @@ describe('真实战后结算入口的重复通知和保存重试', () => {
 
     expect(await onBattleEnd(opts, ['played-1'], true, [])).toBe(false);
     expect(state.game.ownedCards).toHaveLength(0);
-    const { bagSlots } = await import('../game/src/game.bag.bridge.js');
+    const { bagSlots } = await import('../game/src/hub/game.bag.bridge.js');
     expect(bagSlots.pocketAdd).toHaveBeenCalledTimes(1);
     await state.actions.battleSettleRetry();
     expect(bagSlots.pocketAdd).toHaveBeenCalledTimes(1);

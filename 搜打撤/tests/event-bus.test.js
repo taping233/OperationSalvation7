@@ -1,7 +1,7 @@
 /* 模块间事件总线（批次 5）：battle.core 广播 battle:end，game.bag 订阅消费。
  * 这里只验总线本身的契约：订阅/派发/退订/计数/异常隔离。 */
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { emit, off, on, reset } from '../game/src/event-bus.js';
+import { emit, off, on, reset } from '../game/src/core/event-bus.js';
 
 describe('事件总线', () => {
   beforeEach(() => reset());

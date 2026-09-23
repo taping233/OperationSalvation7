@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { createBattleSnapshot } from '../game/src/battle.snapshot.js';
+import { createBattleSnapshot } from '../game/src/battle/battle.snapshot.js';
 
 describe('battle snapshot builder', () => {
   it('isolates nested state and freezes collections without mutating source values', () => {

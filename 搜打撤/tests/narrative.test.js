@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { eventNarrative, parseChoice } from '../game/src/narrative.js';
-import { EVENT_SCENE_META } from '../game/src/game.run.data.js';
+import { eventNarrative, parseChoice } from '../game/src/home/narrative.js';
+import { EVENT_SCENE_META } from '../game/src/run/game.run.data.js';
 
 describe('inkjs event narrative bridge', () => {
   it('parses hidden choice metadata without leaking it into the label', () => {

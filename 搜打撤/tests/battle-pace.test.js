@@ -1,7 +1,7 @@
 /* 战斗演示倍率契约（迭代评审 09-20 敌方阶段 2× 档）：
  * 单一倍率同步缩放四处演出时长；80ms 下限定时器密度；非法档位拒绝；localStorage 持久化。 */
 import { beforeEach, describe, expect, it } from 'vitest';
-import { demoMs, getPace, setPace } from '../game/src/battle.pace.js';
+import { demoMs, getPace, setPace } from '../game/src/battle/battle.pace.js';
 
 describe('battle.pace 演示倍率', () => {
   beforeEach(() => {

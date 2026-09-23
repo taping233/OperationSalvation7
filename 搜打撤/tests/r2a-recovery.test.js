@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { createRecoverablePair } from '../game/src/recoverable-pair.js';
+import { createRecoverablePair } from '../game/src/hub/recoverable-pair.js';
 
 class MemoryStorage {
   constructor(seed = {}) { this.map = new Map(Object.entries(seed)); }

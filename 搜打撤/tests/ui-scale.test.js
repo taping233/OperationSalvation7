@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { apply, BASE_H, BASE_W, MIN_ZOOM, scale, scaleForViewport } from '../game/src/ui-scale.js';
+import { apply, BASE_H, BASE_W, MIN_ZOOM, scale, scaleForViewport } from '../game/src/ui/ui-scale.js';
 
 describe('全局 UI 缩放策略', () => {
   it.each([

@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { getM04VisualPack } from '../game/src/home.visuals.js';
+import { getM04VisualPack } from '../game/src/home/home.visuals.js';
 
 const root = path.resolve(import.meta.dirname, '..');
 

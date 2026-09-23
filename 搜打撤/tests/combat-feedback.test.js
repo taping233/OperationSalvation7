@@ -3,8 +3,8 @@ import {
   feedbackClass,
   feedbackDelay,
   feedbackTier,
-} from '../game/src/battle.feedback.js';
-import { resolveReducedMotion } from '../game/src/motion.js';
+} from '../game/src/battle/battle.feedback.js';
+import { resolveReducedMotion } from '../game/src/core/motion.js';
 
 describe('战斗反馈节奏', () => {
   it('按事件强度给出稳定的表现层级，不改变反馈文本', () => {

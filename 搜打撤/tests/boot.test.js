@@ -131,7 +131,7 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     photoNote.value = '';
     photoNote.dispatchEvent(new Event('input', { bubbles: true }));
     await new Promise(r => setTimeout(r, 260));
-    const { photoNoteFor } = await import('../game/src/card-photo-notes.js');
+    const { photoNoteFor } = await import('../game/src/cards/card-photo-notes.js');
     const selectedCard = window.SDT.Cards.all().find(c => c.id === card.dataset.card);
     const restoredNote = photoNoteFor(selectedCard);
     expect(document.querySelector('#libPreview .pv-note')?.textContent || '').toBe(restoredNote ? `备注${restoredNote}` : '');
@@ -190,7 +190,7 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     for (const k of ['RULES', 'MAP', 'Art', 'Icons', 'Sound', 'Camera', 'Notes', 'Cards', 'Base', 'Meta', 'RenderScheduler', 'Renderer', 'UI', 'Chests']) {
       expect(window.SDT[k], `window.SDT.${k} 未发布`).toBeTruthy();
     }
-    const { ensureBattleReady } = await import('../game/src/battle-loader.js');
+    const { ensureBattleReady } = await import('../game/src/battle/battle-loader.js');
     await ensureBattleReady();
     expect(window.SDT.Battle, 'window.SDT.Battle 按需加载后未发布').toBeTruthy();
     expect(typeof window.SDT.Battle.getSnapshot).toBe('function');
@@ -202,8 +202,8 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
   // 骰子 UI 的两个落定测试已随骰子系统整体移除一并退役（2026-09-19 老板定向）。
 
   it('运行时按 mapSeed 重建局部几何，并以稳定节点提交移动事务', async () => {
-    const session = await import('../game/src/game.session.js');
-    const run = await import('../game/src/game.run.js');
+    const session = await import('../game/src/run/game.session.js');
+    const run = await import('../game/src/run/game.run.js');
     const game = session.game;
     session.buildDerived('integration-map-seed');
     expect(game.mapSeed).toBe('integration-map-seed');
@@ -239,8 +239,8 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
   });
 
   it('非 reduced-motion 的 fake rAF 移动最终只提交一次', async () => {
-    const session = await import('../game/src/game.session.js');
-    const run = await import('../game/src/game.run.js');
+    const session = await import('../game/src/run/game.session.js');
+    const run = await import('../game/src/run/game.run.js');
     const game = session.game;
     session.buildDerived('async-move-seed');
     const li = 0;
@@ -276,8 +276,8 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
   });
 
   it('第一层 door 确认后进入第二层，终层仍保留 extraction', async () => {
-    const session = await import('../game/src/game.session.js');
-    const run = await import('../game/src/game.run.js');
+    const session = await import('../game/src/run/game.session.js');
+    const run = await import('../game/src/run/game.run.js');
     const game = session.game;
     session.buildDerived('door-transition-seed');
     const door = game.layerData[0].doors[0];
@@ -302,7 +302,7 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
   });
 
   it('enterLayer 将入口与可走分支一起构图，隐藏节点不占据画面', async () => {
-    const session = await import('../game/src/game.session.js');
+    const session = await import('../game/src/run/game.session.js');
     const game = session.game;
     const camera = session.cam;
     session.buildDerived('fit-layer-seed');

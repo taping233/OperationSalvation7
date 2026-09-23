@@ -1,5 +1,5 @@
 import { describe, expect, it, beforeEach } from 'vitest';
-import { expeditionObjective, expeditionRoutes, renderExpeditionPanel } from '../game/src/expedition.view.js';
+import { expeditionObjective, expeditionRoutes, renderExpeditionPanel } from '../game/src/run/expedition.view.js';
 
 const layer = {
   logical: [

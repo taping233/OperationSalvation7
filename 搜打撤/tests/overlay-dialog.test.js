@@ -26,7 +26,7 @@ describe('overlay dialog accessibility contract', () => {
 
   beforeEach(async () => {
     makeDom();
-    const mod = await import('../game/src/ui.js');
+    const mod = await import('../game/src/ui/ui.js');
     UI = mod.UI;
     UI._acts = {};
     UI._overlayReturnFocus = null;

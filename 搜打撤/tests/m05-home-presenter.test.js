@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { presentHome, homeErrorMessage } from '../game/src/home.presenter.js';
-import { readBase } from '../game/src/base.commands.js';
-import { buyFurniture } from '../game/src/home.commands.js';
+import { presentHome, homeErrorMessage } from '../game/src/home/home.presenter.js';
+import { readBase } from '../game/src/hub/base.commands.js';
+import { buyFurniture } from '../game/src/home/home.commands.js';
 
 const snapshot = () => ({
   coins: 12, wood: 3, rations: 4, selClass: 'wu',

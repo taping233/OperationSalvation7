@@ -4,8 +4,8 @@
 import { describe, expect, it, beforeAll } from 'vitest';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };
-await import('../game/src/cards.js');
-await import('../game/src/base.js');
+await import('../game/src/cards/cards.js');
+await import('../game/src/hub/base.js');
 
 let Base;
 beforeAll(() => {

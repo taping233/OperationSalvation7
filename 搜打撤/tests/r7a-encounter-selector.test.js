@@ -1,5 +1,5 @@
 import {describe,expect,it} from 'vitest';
-import {resolveEncounterGroup,selectEncounterSpec} from '../game/src/encounter-selector.js';
+import {resolveEncounterGroup,selectEncounterSpec} from '../game/src/run/encounter-selector.js';
 import map from '../game/data/map.json';
 
 const seq=(...values)=>{let i=0;return()=>values[Math.min(i++,values.length-1)];};

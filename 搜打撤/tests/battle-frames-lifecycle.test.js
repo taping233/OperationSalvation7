@@ -47,7 +47,7 @@ vi.mock('pixi.js', () => ({
   },
 }));
 
-import { attach, cacheStats, isLiveBattleFigure, hide } from '../game/src/battle.frames.js';
+import { attach, cacheStats, isLiveBattleFigure, hide } from '../game/src/battle/battle.frames.js';
 
 describe('battle frame lifecycle', () => {
   beforeEach(() => {

@@ -1,9 +1,9 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };
-await import('../game/src/base.js');
-const { createRecoveryCommands } = await import('../game/src/recovery.commands.js');
-const { RunStorage } = await import('../game/src/game.storage.js');
+await import('../game/src/hub/base.js');
+const { createRecoveryCommands } = await import('../game/src/hub/recovery.commands.js');
+const { RunStorage } = await import('../game/src/hub/game.storage.js');
 const Base = window.SDT.Base;
 
 const keys = slotId => ({

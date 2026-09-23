@@ -1,12 +1,12 @@
 import fs from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
-import { FURNITURE_CATALOG, ROOM_SPEC } from "../game/src/home.catalog.js";
+import { FURNITURE_CATALOG, ROOM_SPEC } from "../game/src/home/home.catalog.js";
 import {
   getM04VisualPack,
   HOME_VISUAL_IDS,
   projectHomeCell,
-} from "../game/src/home.visuals.js";
+} from "../game/src/home/home.visuals.js";
 
 const projectRoot = path.resolve(import.meta.dirname, "..");
 

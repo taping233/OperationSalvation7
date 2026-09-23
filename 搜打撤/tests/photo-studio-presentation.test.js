@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { photoMountFor } from '../game/src/photo-studio-presentation.js';
+import { photoMountFor } from '../game/src/hub/photo-studio-presentation.js';
 
 describe('照相馆稀有度装裱映射', () => {
   it('为每种馆藏稀有度提供稳定的装裱身份与名称', () => {

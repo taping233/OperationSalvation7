@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { validateCardRules } from '../game/src/card-rules.schema.js';
+import { validateCardRules } from '../game/src/cards/card-rules.schema.js';
 
 describe('card rules v1 schema', () => {
   it('accepts an in-memory supported battle contract', () => {

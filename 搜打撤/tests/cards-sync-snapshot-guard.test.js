@@ -6,11 +6,11 @@ import { parse } from 'acorn';
 import cardsSync from '../game/data/cards-sync.json';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };
-await import('../game/src/cards.js');
+await import('../game/src/cards/cards.js');
 
 const Cards = window.SDT.Cards;
 const syncMap = new Map(cardsSync.cards.map(card => [card.id, card]));
-const source = readFileSync(path.resolve(process.cwd(), 'game/src/cards.data.js'), 'utf8');
+const source = readFileSync(path.resolve(process.cwd(), 'game/src/cards/cards.data.js'), 'utf8');
 const ast = parse(source, { ecmaVersion: 'latest', sourceType: 'module' });
 const dataSlice = ast.body
   .find(node => node.type === 'ExportNamedDeclaration')

@@ -1,7 +1,7 @@
 import { afterEach, beforeAll, describe, expect, it } from 'vitest';
-import { validateCardRules } from '../game/src/card-rules.schema.js';
-import { Random } from '../game/src/random.js';
-import { pstat, set$pstat } from '../game/src/battle.runtime.js';
+import { validateCardRules } from '../game/src/cards/card-rules.schema.js';
+import { Random } from '../game/src/core/random.js';
+import { pstat, set$pstat } from '../game/src/battle/battle.runtime.js';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };
 window.SDT.Icons = window.SDT.Icons || { img: () => '' };
@@ -11,8 +11,8 @@ window.SDT.MAP = {
   rules: { battleEnergy: 99, battleHandMax: 99, bossDeckSize: 15, starterSha: 0, battleStartDraw: 5, battleTurnDraw: 1, diceSides: 6 },
   items: { rations: { name: '口粮' }, wood: { name: '木材' } },
 };
-await import('../game/src/cards.js');
-const { BattleSession } = await import('../game/src/battle.core.js');
+await import('../game/src/cards/cards.js');
+const { BattleSession } = await import('../game/src/battle/battle.core.js');
 const Cards = window.SDT.Cards;
 
 beforeAll(() => {

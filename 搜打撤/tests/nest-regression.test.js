@@ -22,12 +22,12 @@ window.SDT = window.SDT || { Icons: { img: () => '' } };
 window.SDT.Icons.TYPE_ART = {};
 window.SDT.Sound = { music() {}, sfx() {}, setDucked() {} };
 window.SDT.MAP = { rules: { battleEnergy: 2, battleHandMax: 99, bossDeckSize: 10, starterSha: 5, battleStartDraw: 5, battleTurnDraw: 1, diceSides: 6 }, items: { rations: { name: '口粮' }, wood: { name: '木材' } } };
-await import('../game/src/cards.js');
-await import('../game/src/ui.js');            // UI.init 需要的 overlay 骨架
-await import('../game/src/base.js');          // SDT.Base（boot-order 同款绑定）
-await import('../game/src/game.session.js');
-await import('../game/src/game.nest.js');
-const { BattleSession, configureBattleRenderer } = await import('../game/src/battle.core.js');
+await import('../game/src/cards/cards.js');
+await import('../game/src/ui/ui.js');            // UI.init 需要的 overlay 骨架
+await import('../game/src/hub/base.js');          // SDT.Base（boot-order 同款绑定）
+await import('../game/src/run/game.session.js');
+await import('../game/src/run/game.nest.js');
+const { BattleSession, configureBattleRenderer } = await import('../game/src/battle/battle.core.js');
 configureBattleRenderer(() => {});
 window.SDT.Nest.bindBattleStart(BattleSession.start);
 const C = window.SDT.Cards;

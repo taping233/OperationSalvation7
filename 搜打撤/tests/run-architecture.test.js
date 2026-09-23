@@ -14,13 +14,13 @@ import { resolve } from 'node:path';
 const source = (file) => readFileSync(resolve(process.cwd(), `game/src/${file}`), 'utf8');
 const importedModules = (code) => [...code.matchAll(/^import\s+(?:\{[^}]*\}\s+from\s+)?'\.\/([\w.]+)\.js';/gm)].map(m => m[1]);
 
-const SHELL = source('game.run.js');
-const SCENES = source('game.run.scenes.js');
-const ALTAR = source('game.run.altar.js');
-const FLOW = source('game.run.flow.js');
+const SHELL = source('run/game.run.js');
+const SCENES = source('run/game.run.scenes.js');
+const ALTAR = source('run/game.run.altar.js');
+const FLOW = source('run/game.run.flow.js');
 
 it('满包拒绝新卡，只允许普通背包已有未满堆合并', () => {
-  const text = source('game.session.js');
+  const text = source('run/game.session.js');
   const body = text.match(/function canReceiveCard\(card\) \{([\s\S]*?)\n  \}/)[1];
   const game = { ownedCards: [] };
   const receive = new Function('game', 'stackCapOf', 'canAcceptCard', `return function(card) {${body}}`)(game, () => 3, () => false);

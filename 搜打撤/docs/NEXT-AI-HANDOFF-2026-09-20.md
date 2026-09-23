@@ -1,3 +1,10 @@
+## 当前状态补充：src 平铺目录化重构（2026-09-23 23:45 +08:00）
+
+- 老板令解决「140 个 JS 平铺 game/src」问题：按 8 功能域目录化（core/ui/battle/cards/run/hub/home/audio），根层只留 4 个入口（main.js、boot-order.js、game.boot.js、r7a.qa.js）+ README + generated/。分层判据同步从文件名制改为目录路径制（architecture-graph.mjs 的 RUNTIME_OWNERS/PURE_MODULES/VIEW_MODULES 改按 `battle/`、`hub/`、`run/` 前缀判），BOOT_ORDER 条目改带域前缀路径，contracts/bag/hub/run-architecture/random 等测试的硬路径与正则同步。迁移用一次性脚本（`.tmp/migrate-src-layout.mjs` acorn 重写 + `git mv`，干完即弃不进 git）。
+- 踩坑记录：脚本初版对非迁移目标（generated/）与 .json/css/assets 相对引用漏改，分别以「原 src 根解析存在即重算」补丁脚本修复（58 处）；`new URL('../assets/...')` 与 `import '../css/...'` 同类。文档仅更新活文档（src/README.md、docs/architecture.md、generate-compendium 模板），docs/ 历史计划/交付文档按史实保留旧路径；desktop-app/game 旧构建产物待下次 build 重生成。
+- 验证：check-syntax 154 文件 0 错；全量串行 **142 文件 / 798 用例全绿**（比迁移前基线多 1 用例：random.test 改递归扫描全树后激活条件注册，并新增 `>100` 防假松断言）；守卫负例（合成图断言违规仍被抓）保持有效；`npm run docs:compendium` 入口重生成 docs/game-compendium.md（注意：直跑 generate-compendium.mjs 不落盘，写盘条件是 npm_lifecycle_event === 'docs:compendium'）。浏览器实机冒烟：标题页启动（SDT 25 模块）→ 开发面板跳遭遇战 → 手牌渲染/出牌命令/结束回合/敌方阶段/回大厅结算，全程零 JS 错误。
+- 本轮为 rename-only 单提交（除路径/正则/文档外零行为变更）；dev server 5173 已重启可用。未构建、未推送。
+
 ## 当前状态补充：09-23 工作区整批落库（2026-09-23 22:43 +08:00）
 
 - 老板指示「先提交」，将 09-23 各并行批次未提交改动整批落库（共 103 个修改 + 11 个新增路径，无删除）：无（侠客）职业卡/资源卡/穿刺等美术与 `art-mapping.json` 修订号、卡牌库照片墙与首页视觉（`expedition.css`/`winter.css`/`title-p0.css`/home-icons-v12）、光标素材（`cursor-art.js/.css`/cursors）、HarmonyOS 字体三件、音频（`sound.js`/`sound.policy.js`/`sound.scape.js`+新增战斗 sfx）、`game.cardslib.js`/`game.bag.settle.js` 等代码与配套测试（含新增 `battle-settlement-retry.test.js`）、本交接文档与 `audio-system.md`、`AGENTS.md`。

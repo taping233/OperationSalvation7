@@ -1,6 +1,6 @@
 import { afterAll, afterEach, beforeAll, describe, expect, it } from 'vitest';
-import { decayEffectiveCardCost } from '../game/src/battle.card-cost.js';
-import { validateCardRules } from '../game/src/card-rules.schema.js';
+import { decayEffectiveCardCost } from '../game/src/battle/battle.card-cost.js';
+import { validateCardRules } from '../game/src/cards/card-rules.schema.js';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };
 window.SDT.Icons.TYPE_ART = {};
@@ -10,8 +10,8 @@ window.SDT.MAP = {
   items: { rations: { name: '口粮' }, wood: { name: '木材' } },
 };
 
-await import('../game/src/cards.js');
-const { BattleSession, viewApi } = await import('../game/src/battle.core.js');
+await import('../game/src/cards/cards.js');
+const { BattleSession, viewApi } = await import('../game/src/battle/battle.core.js');
 const Cards = window.SDT.Cards;
 const DISCOVER_RULES_KEY = 'sdt-cards-tt12-discover-v1-seeded';
 let originalCards = null;

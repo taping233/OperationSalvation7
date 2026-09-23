@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { basename, join, resolve } from 'node:path';
-import { RULES } from '../game/src/rules.js';
-import '../game/src/mapData.js';
-import { createEffectExecutor, splitEffectClauses } from '../game/src/battle.effects.js';
-import { RunStorage } from '../game/src/game.storage.js';
-import { GameStore } from '../game/src/game.store.js';
+import { RULES } from '../game/src/core/rules.js';
+import '../game/src/core/mapData.js';
+import { createEffectExecutor, splitEffectClauses } from '../game/src/battle/battle.effects.js';
+import { RunStorage } from '../game/src/hub/game.storage.js';
+import { GameStore } from '../game/src/hub/game.store.js';
 import { BOOT_ORDER } from '../game/src/boot-order.js';
 import { readModuleSources, buildModuleGraph, assertAcyclic } from '../scripts/architecture-graph.mjs';
 
@@ -116,12 +116,12 @@ describe('ESM 依赖方向', () => {
   });
 
   it('game.session 不反向导入页面功能模块', () => {
-    const source = readFileSync(resolve(process.cwd(), 'game/src/game.session.js'), 'utf8');
-    expect(source).not.toMatch(/from ['"]\.\/game\.(boot|run|hub|notes|cardslib)\.js['"]/);
+    const source = readFileSync(resolve(process.cwd(), 'game/src/run/game.session.js'), 'utf8');
+    expect(source).not.toMatch(/from ['"][^'"]*game\.(boot|run|hub|notes|cardslib)\.js['"]/);
   });
 
   it('battle.core 不访问 DOM 或反向导入战斗视图', () => {
-    const source = readFileSync(resolve(process.cwd(), 'game/src/battle.core.js'), 'utf8');
+    const source = readFileSync(resolve(process.cwd(), 'game/src/battle/battle.core.js'), 'utf8');
     expect(source).not.toMatch(/from\s+['"][^'"]*battle\.view\.js['"]|\bUI\.|document\./);
   });
 });
@@ -141,11 +141,11 @@ describe('架构守护（2026-09-11 批次 1）', () => {
   });
 
   it('核心机制层不访问 DOM', () => {
-    const core = ['battle.core.js', 'battle.runtime.js', 'battle.engine.js', 'battle.enemy-phase.js',
-      'battle.effects.js', 'battle.deck.js', 'battle.rules.js',
-      'battle.state.js', 'battle.piles.js', 'game.store.js', 'game.storage.js', 'cards.js',
-      'rules.js', 'meta.js', 'base.js', 'random.js', 'mapData.js', 'map-graph.js',
-      'mech-sentences.js', 'characters.js', 'shared.js', 'asset-url.js', 'sdt-facade.js'];
+    const core = ['battle/battle.core.js', 'battle/battle.runtime.js', 'battle/battle.engine.js', 'battle/battle.enemy-phase.js',
+      'battle/battle.effects.js', 'battle/battle.deck.js', 'battle/battle.rules.js',
+      'battle/battle.state.js', 'battle/battle.piles.js', 'hub/game.store.js', 'hub/game.storage.js', 'cards/cards.js',
+      'core/rules.js', 'hub/meta.js', 'hub/base.js', 'core/random.js', 'core/mapData.js', 'run/map-graph.js',
+      'cards/mech-sentences.js', 'core/characters.js', 'core/shared.js', 'core/asset-url.js', 'core/sdt-facade.js'];
     const offenders = [];
     for (const name of core) {
       const source = readFileSync(join(SRC, name), 'utf8');
@@ -156,12 +156,12 @@ describe('架构守护（2026-09-11 批次 1）', () => {
   });
 
   it('数据模块 cards.js 不生成 HTML（卡面渲染已外迁 cards.view.js）', () => {
-    const source = readFileSync(join(SRC, 'cards.js'), 'utf8');
+    const source = readFileSync(join(SRC, 'cards/cards.js'), 'utf8');
     expect(source).not.toMatch(/<div|<span|innerHTML/);
   });
 
   it('实机卡库批次数据外置到 game/data/cards-sync.json（批次 6）', () => {
-    const source = readFileSync(join(SRC, 'cards.js'), 'utf8');
+    const source = readFileSync(join(SRC, 'cards/cards.js'), 'utf8');
     // 源码不再内嵌实机同步卡数据，只从中央数据源取
     expect(source).not.toContain('[sync-cards-from-live:begin]');
     expect(source).toContain('CARDS_SYNC: DATA.cardsSync.cards');
@@ -204,8 +204,8 @@ describe('Electron 启动契约', () => {
 
   it('main.js 副作用导入顺序与 boot-order.js 的 BOOT_ORDER 逐项一致（批次 5）', () => {
     const source = readFileSync(resolve(process.cwd(), 'game/src/main.js'), 'utf8');
-    // 只取顶格的副作用导入；被注释掉的模块（如 scene/runtime.js）不计入
-    const imported = [...source.matchAll(/^\s*import\s+'\.\/([\w.-]+)\.js';/gm)].map(m => m[1]);
+    // 只取顶格的副作用导入；被注释掉的模块（如 scene/runtime.js）不计入；id 含域目录前缀
+    const imported = [...source.matchAll(/^\s*import\s+'\.\/([\w./-]+)\.js';/gm)].map(m => m[1]);
     expect(imported.length).toBeGreaterThan(0);
     expect(imported).toEqual(BOOT_ORDER);
     for (const id of BOOT_ORDER) {

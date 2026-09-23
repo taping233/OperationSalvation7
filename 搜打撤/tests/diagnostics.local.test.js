@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { DIAGNOSTICS_KEY, MAX_DIAGNOSTICS, getDiagnosticSummary, installRuntimeDiagnostics, readLocalDiagnostics, recordDiagnostic, resetDiagnosticMemory } from '../game/src/diagnostics.local.js';
-import { emit, reset } from '../game/src/event-bus.js';
-import { feedbackExportRecord } from '../game/src/feedback.local.js';
+import { DIAGNOSTICS_KEY, MAX_DIAGNOSTICS, getDiagnosticSummary, installRuntimeDiagnostics, readLocalDiagnostics, recordDiagnostic, resetDiagnosticMemory } from '../game/src/core/diagnostics.local.js';
+import { emit, reset } from '../game/src/core/event-bus.js';
+import { feedbackExportRecord } from '../game/src/ui/feedback.local.js';
 
 beforeEach(() => {
   localStorage.removeItem(DIAGNOSTICS_KEY);
@@ -71,8 +71,8 @@ describe('本地运行时诊断摘要', () => {
 
   it('Bus 同步与异步订阅异常都会记录来源，同时保留原控制台日志', async () => {
     const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {});
-    const offSync = (await import('../game/src/event-bus.js')).on('diagnostic-test', () => { throw new TypeError('secret'); });
-    const offAsync = (await import('../game/src/event-bus.js')).on('diagnostic-test', () => Promise.reject(new RangeError('secret')));
+    const offSync = (await import('../game/src/core/event-bus.js')).on('diagnostic-test', () => { throw new TypeError('secret'); });
+    const offAsync = (await import('../game/src/core/event-bus.js')).on('diagnostic-test', () => Promise.reject(new RangeError('secret')));
     emit('diagnostic-test');
     await Promise.resolve();
     offSync(); offAsync();

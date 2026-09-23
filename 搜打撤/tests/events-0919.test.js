@@ -8,7 +8,7 @@ import scenes from '../game/data/scenes.json';
 window.SDT = window.SDT || { Icons: { img: () => '' } };
 window.SDT.Icons = window.SDT.Icons || { img: () => '' };
 window.SDT.Icons.TYPE_ART = {};
-await import('../game/src/cards.js');
+await import('../game/src/cards/cards.js');
 const C = window.SDT.Cards;
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -35,7 +35,7 @@ describe('0919 都市污染事件池', () => {
   });
 
   it('九项需求的结算端口均已实装，不是卡面占位描述', () => {
-    const source = readFileSync(path.join(ROOT, 'game', 'src', 'game.run.flow.js'), 'utf8');
+    const source = readFileSync(path.join(ROOT, 'game', 'src', 'run', 'game.run.flow.js'), 'utf8');
     [
       'ev19-vital', 'ev19-pearlbox', 'ev19-fireballs', 'ev19-classchest', 'ev19-recode',
       'ev19-potions', 'ev19-arrows', 'ev19-gamble', 'ev19-quartermaster',

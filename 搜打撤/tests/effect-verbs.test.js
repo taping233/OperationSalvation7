@@ -10,13 +10,13 @@
  * 另含哨兵的单测：牌面像有效果却没结算也没被认领时，记入 UNKNOWN_EFFECTS。 */
 import { beforeEach, describe, expect, it } from 'vitest';
 import frozenElsewhere from './fixtures/effect-elsewhere-frozen.json';
-import { createEffectExecutor, splitEffectClauses } from '../game/src/battle.effects.js';
-import { DESIGNER_BLANKS, ELSEWHERE, VERBS, getUnknownEffects, isRecognized, looksLikeEffect, matchVerbs, resetUnknownEffects } from '../game/src/effect-verbs.js';
+import { createEffectExecutor, splitEffectClauses } from '../game/src/battle/battle.effects.js';
+import { DESIGNER_BLANKS, ELSEWHERE, VERBS, getUnknownEffects, isRecognized, looksLikeEffect, matchVerbs, resetUnknownEffects } from '../game/src/battle/effect-verbs.js';
 
 window.SDT = window.SDT || {};
 window.SDT.Icons = window.SDT.Icons || { img: () => '' };
 window.SDT.Icons.TYPE_ART = {};
-await import('../game/src/cards.js');
+await import('../game/src/cards/cards.js');
 const C = window.SDT.Cards;
 
 const BUCKETS = ['immediate', 'turnStart', 'battle', 'onInfused', 'onDraw', 'skill'];

@@ -2,8 +2,8 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 const state = vi.hoisted(() => ({ game: null, ui: null, saveGame: vi.fn(), uid: 0 }));
 
-vi.mock('../game/src/shared.js', () => ({ esc: value => String(value), escAttr: value => String(value) }));
-vi.mock('../game/src/game.session.js', () => ({
+vi.mock('../game/src/core/shared.js', () => ({ esc: value => String(value), escAttr: value => String(value) }));
+vi.mock('../game/src/run/game.session.js', () => ({
   MAP: { items: { rations: 'rations', wood: 'wood' } },
   bagCap: () => state.game.cap,
   safeCap: () => 0,
@@ -26,14 +26,14 @@ vi.mock('../game/src/game.session.js', () => ({
   saveGame: (...args) => state.saveGame(...args),
   usedSlots: () => new Set(state.game.ownedCards.filter(entry => !entry.safe).map(entry => entry.card.name)).size,
 }));
-vi.mock('../game/src/random.js', () => ({ Random: { random: () => 0 } }));
-vi.mock('../game/src/event-bus.js', () => ({ on: vi.fn() }));
-vi.mock('../game/src/bag-return-hook.js', () => ({ setBagReturnHook: vi.fn(), takeBagReturnHook: vi.fn() }));
-vi.mock('../game/src/game.run.js', () => ({ showRunTransition: vi.fn() }));
-vi.mock('../game/src/game.cardslib.js', () => ({ _set_cardPageOpen: vi.fn() }));
-vi.mock('../game/src/game.bag.bridge.js', () => ({ bagSlots: { bindBagDrag: vi.fn() } }));
-vi.mock('../game/src/game.bag.drag.js', () => ({ bagDrag: null, resetBagDrag: vi.fn() }));
-vi.mock('../game/src/game.bag.settle.js', () => ({ bindBagMixins: vi.fn() }));
+vi.mock('../game/src/core/random.js', () => ({ Random: { random: () => 0 } }));
+vi.mock('../game/src/core/event-bus.js', () => ({ on: vi.fn() }));
+vi.mock('../game/src/hub/bag-return-hook.js', () => ({ setBagReturnHook: vi.fn(), takeBagReturnHook: vi.fn() }));
+vi.mock('../game/src/run/game.run.js', () => ({ showRunTransition: vi.fn() }));
+vi.mock('../game/src/hub/game.cardslib.js', () => ({ _set_cardPageOpen: vi.fn() }));
+vi.mock('../game/src/hub/game.bag.bridge.js', () => ({ bagSlots: { bindBagDrag: vi.fn() } }));
+vi.mock('../game/src/hub/game.bag.drag.js', () => ({ bagDrag: null, resetBagDrag: vi.fn() }));
+vi.mock('../game/src/hub/game.bag.settle.js', () => ({ bindBagMixins: vi.fn() }));
 
 let showBackpack;
 
@@ -62,7 +62,7 @@ beforeEach(async () => {
       cardBackHTML: () => '',
     },
   };
-  ({ showBackpack } = await import('../game/src/game.bag.js'));
+  ({ showBackpack } = await import('../game/src/hub/game.bag.js'));
 });
 
 function useCard() {

@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { DATA } from '../game/src/data-loader.js';
-import { buildCanonicalCardMap, resolveCardCatalog } from '../game/src/cards.catalog.js';
+import { DATA } from '../game/src/core/data-loader.js';
+import { buildCanonicalCardMap, resolveCardCatalog } from '../game/src/cards/cards.catalog.js';
 
 const canonical = DATA.cardsSync.cards.find(card => card.id === 'tt8-hero-sealer');
 
