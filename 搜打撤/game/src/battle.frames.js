@@ -36,10 +36,38 @@ const ACT_SEQS = {
 let appPromise = null;      // { app, host }
 let texSets = new Map();    // role -> Promise<{ set, seqs }> | null
 let sprite = null;
+let emptyTexture = null;
 let cur = null;             // { role, fig, img, set, seqs, play, fi, tNext, lastRect }
 let wanted = false;         // 已 attach（战斗进行中）
 let pollTimer = 0;
 let renderHoldT = 0;
+let lifecycle = 0;
+let releasePromise = null;
+
+function releaseTextureSets() {
+  if (releasePromise) return releasePromise;
+  const entries = [...texSets];
+  texSets.clear();
+  if (!entries.length) return Promise.resolve();
+
+  const pending = (async () => {
+    const { Assets, Texture } = await import('pixi.js');
+    // 宿主先隐藏，再清掉 sprite 的 GPU 引用并卸载 URL；新 attach 等释放完成。
+    if (sprite) sprite.texture = Texture.EMPTY;
+    await Promise.all(entries.map(async ([, assetPromise]) => {
+      try {
+        const loaded = await assetPromise;
+        for (const url of loaded?.urls || []) {
+          try { await Assets.unload(url); } catch (_) { /* Pixi may already have evicted it. */ }
+        }
+      } catch (_) { /* Failed probes have nothing to release. */ }
+    }));
+  })().finally(() => {
+    if (releasePromise === pending) releasePromise = null;
+  });
+  releasePromise = pending;
+  return pending;
+}
 
 async function evictOtherTextureSets(keepRole, Assets, Texture) {
   const evictions = [];
@@ -122,7 +150,7 @@ async function portraitFillOf(role, img) {
 function ensureApp() {
   if (appPromise) return appPromise;
   appPromise = (async () => {
-    const { Application, Sprite } = await import('pixi.js');
+    const { Application, Sprite, Texture } = await import('pixi.js');
     const ov = document.getElementById('overlay');
     const host = document.createElement('div');
     host.id = 'unitFrames';
@@ -144,6 +172,7 @@ function ensureApp() {
     });
     host.appendChild(app.view);
     sprite = new Sprite();
+    emptyTexture = Texture.EMPTY;
     sprite.anchor.set(0.5, 1);   // 底部中心锚点：脚底对齐
     app.stage.addChild(sprite);
     // 序列帧节奏最慢 ~1.5s/帧，30fps 上限足够顺滑：不设限就会在 120Hz 屏上按刷新率
@@ -201,7 +230,13 @@ function loadSet(role) {
         .filter(n => set.has(n)).concat(a === 'idle' && set.has('idle-breathe') ? ['idle-breathe'] : []);
       if (frames.length) seqs.set(a, frames);
     }
-    return seqs.get('idle') ? { set, seqs, urls, boxes } : null;
+    if (!seqs.get('idle')) {
+      await Promise.all(urls.map(async url => {
+        try { await Assets.unload(url); } catch (_) { /* Pixi may already have evicted it. */ }
+      }));
+      return null;
+    }
+    return { set, seqs, urls, boxes };
   })().catch(() => null);
   texSets.set(role, p);
   return p;
@@ -363,6 +398,7 @@ function startLoop() {
 
 // 战斗渲染后调用：接管 #btSelf 的立绘为序列帧（无帧集/降动效时自动跳过）
 async function attach(body) {
+  const token = ++lifecycle;
   wanted = true;
   if (reduceMotion()) return;
   const fig = body && body.querySelector('#btSelf .sts-figure');
@@ -375,14 +411,16 @@ async function attach(body) {
   // （老板 09-20 实机反馈首次进场「闪一下」）。visibility 只藏内容不塌布局，
   // 装载失败/战斗已结束的原路恢复显示，静态立绘兜底不受影响。
   img.style.visibility = 'hidden';
+  if (releasePromise) await releasePromise;
+  if (token !== lifecycle) { img.style.visibility = ''; return; }
   const rt = await ensureApp();
-  if (!rt) { img.style.visibility = ''; return; }
+  if (!rt || token !== lifecycle) { img.style.visibility = ''; return; }
   const set = await loadSet(role);
   // 资源探测是异步的：战斗可能已结束并切到搜刮/奖励页，旧 fig 即使仍有引用也不能复活帧层。
-  if (!set || !isLiveBattleFigure(body, fig)) { img.style.visibility = ''; return; }
+  if (!set || token !== lifecycle || !isLiveBattleFigure(body, fig)) { img.style.visibility = ''; return; }
   const fill = await portraitFillOf(role, img);
   // 量立绘占比也是异步的，fig 可能在等待期间随战斗结束被移除，复活前再查一次。
-  if (!isLiveBattleFigure(body, fig)) { img.style.visibility = ''; return; }
+  if (token !== lifecycle || !isLiveBattleFigure(body, fig)) { img.style.visibility = ''; return; }
   if (cur && cur.role === role) {
     // 同战斗内重渲染：只换 DOM 引用（ovBody 重建后 fig/img 是新节点），不重置播放状态，
     // 否则出牌结算的多次 render 会把正在播的攻击/受击动作打断
@@ -416,9 +454,11 @@ function play(name) {
 
 // 战斗收尾/弹层挂起：卸下 sprite，恢复静态 img
 function hide() {
+  lifecycle++;
   wanted = false;
   if (cur && cur.img) cur.img.style.visibility = '';
   cur = null;
+  if (sprite && emptyTexture) sprite.texture = emptyTexture;
   // 先同步收起 overlay 直下的宿主，避免战斗结束后搜刮/奖励弹层出现一帧残留立绘；
   // 后续 attach 仍会复用同一宿主并重新显示，不影响返回战斗。
   const host = document.getElementById('unitFrames');
@@ -428,6 +468,7 @@ function hide() {
   // 轮询 interval 只在战斗立绘在场时有意义：hide 后不清理会全程空转（每 200ms
   // 一次 rect 读取直到进程结束）。
   if (pollTimer) { clearInterval(pollTimer); pollTimer = 0; }
+  void releaseTextureSets();
 }
 
 function cacheStats() {

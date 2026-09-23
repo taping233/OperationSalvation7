@@ -140,6 +140,11 @@ import { DATA } from './data-loader.js';
   // peek×5，基地档含全量卡牌/收藏数据，逐槽 JSON.parse 不便宜。raw 串指纹失配自动
   // 重解析，绕过 write 直写 localStorage（旧代码/另一标签页）也不会读到脏缓存。
   const peekCache = new Map();
+  // 标签页所见的基地原始串。普通 save 以原始串做乐观并发检查，
+  // 避免旧内存状态把另一标签页已保存的进度覆盖。
+  const writeBaseline = new Map();
+  // 选档页确认为空的基地槽快照；newSlot/reset 时防止基于过期空槽判断清空新档。
+  const emptySlotObservation = new Map();
 
   function parseRaw(i) {
     let raw = null;
@@ -195,6 +200,8 @@ import { DATA } from './data-loader.js';
   // 进入档位：加载该档独立的基地数据（没有则用初始值 = 新档案）
   function use(s) {
     slot = s;
+    try { writeBaseline.set(s, localStorage.getItem(SLOT_KEY(s))); }
+    catch (e) { writeBaseline.set(s, null); }
     const raw = parseRaw(s);
     data = raw ? adopt(raw) : def();
     ensureStarterPet();
@@ -217,11 +224,20 @@ import { DATA } from './data-loader.js';
     // 损坏档／未来版本只允许显式 reset 覆盖，普通旧流程不得把兜底默认值写回原键。
     if (issue(slot)) return false;
     try {
+      const currentRaw = localStorage.getItem(SLOT_KEY(slot));
+      if (writeBaseline.has(slot) && currentRaw !== writeBaseline.get(slot)) {
+        if (!saveWarned) {
+          saveWarned = true;
+          try { if (window.SDT && window.SDT.UI) window.SDT.UI.log('[[icon:cross]] 基地存档已被其他标签页更新，请重新载入档位后继续', 'warn'); } catch (e2) { /* 门面未就绪 */ }
+        }
+        return false;
+      }
       const revision = ((data._m01 && data._m01.revision) || 0) + 1;
       const next = { ...data, version: BASE_VERSION,
         _m01: { ...(data._m01 || {}), revision, requests: { ...((data._m01 && data._m01.requests) || {}) } } };
       const raw = JSON.stringify(next);
       localStorage.setItem(SLOT_KEY(slot), raw);
+      writeBaseline.set(slot, raw);
       data.version = BASE_VERSION;
       data._m01 = next._m01;
       peekCache.set(slot, { raw, parsed: next });
@@ -244,12 +260,21 @@ import { DATA } from './data-loader.js';
   // 新档案仓库预置 5 张随机卡牌（按稀有度权重抽取，不重复），让第一局就有牌可带
   function reset(s) {
     if (txPending(s)) return false;
+    try {
+      const currentRaw = localStorage.getItem(SLOT_KEY(s));
+      if (emptySlotObservation.has(s) && currentRaw !== emptySlotObservation.get(s)) {
+        try { if (window.SDT && window.SDT.UI) window.SDT.UI.log('[[icon:cross]] 档位已在其他标签页创建，请返回选档重新进入', 'warn'); } catch (e2) { /* 门面未就绪 */ }
+        return false;
+      }
+    } catch (e) { return false; }
     slot = s;
     delete issues[s]; // reset 是玩家明确的新开档动作，允许覆盖先前不可读档。
     data = def();
     ensureStarterPet();
     seedStarterStash();
-    return save();
+    const saved = save();
+    if (saved) emptySlotObservation.delete(s);
+    return saved;
   }
 
   function seedStarterStash() {
@@ -286,7 +311,15 @@ import { DATA } from './data-loader.js';
   }
 
   // 只读概览：读取某档位的基地数据但不切换当前档位（选档界面展示用）
-  function peek(i) { const raw = parseRaw(i); return raw ? adopt(raw) : null; }
+  function peek(i) {
+    try {
+      const raw = localStorage.getItem(SLOT_KEY(i));
+      if (raw === null) emptySlotObservation.set(i, null);
+      else emptySlotObservation.delete(i);
+    } catch (e) { emptySlotObservation.delete(i); }
+    const raw = parseRaw(i);
+    return raw ? adopt(raw) : null;
+  }
 
   // M01 命令门面的内部窄接口。领域/UI 不应直接调用；单键写成功后才替换当前内存。
   function _readForCommit(i) {
@@ -299,6 +332,7 @@ import { DATA } from './data-loader.js';
     normalized.version = BASE_VERSION;
     const raw = JSON.stringify(normalized);
     localStorage.setItem(SLOT_KEY(i), raw);
+    writeBaseline.set(i, raw);
     peekCache.set(i, { raw, parsed: normalized });
     delete issues[i];
     try { localStorage.removeItem(CORRUPT_KEY(i)); } catch (e) { /* 无关紧要 */ }
@@ -308,6 +342,7 @@ import { DATA } from './data-loader.js';
   function _refreshExternal(i) {
     peekCache.delete(i);
     const raw = parseRaw(i);
+    try { writeBaseline.set(i, localStorage.getItem(SLOT_KEY(i))); } catch (e) { writeBaseline.delete(i); }
     if (raw && slot === i) data = adopt(raw);
     return raw ? adopt(raw) : null;
   }

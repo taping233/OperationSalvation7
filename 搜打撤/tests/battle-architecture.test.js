@@ -28,6 +28,29 @@ describe('battle architecture foundation', () => {
     expect(queue.length).toBe(0);
   });
 
+  it('keeps the action chain locked until a nested action has finished', async () => {
+    const queue = createActionQueue();
+    let releaseChild;
+    let unlocked = false;
+    const parent = queue.enqueue(() => {
+      queue.enqueue(() => new Promise(resolve => { releaseChild = resolve; }));
+    });
+    const settled = parent.finally(async () => {
+      await queue.idle();
+      if (!queue.length && !queue.running) unlocked = true;
+    });
+
+    await parent;
+    await Promise.resolve();
+    expect(queue.length).toBe(0); // 子动作已开始，因此不再计入待执行数
+    expect(queue.running).toBe(true);
+    expect(unlocked).toBe(false);
+
+    releaseChild();
+    await settled;
+    expect(unlocked).toBe(true);
+  });
+
   it('aborts the running action and rejects queued actions when the battle ends', async () => {
     const queue = createActionQueue();
     const first = queue.enqueue(signal => new Promise((resolve, reject) => {

@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { RunStorage, SLOT_COUNT } from '../game/src/game.storage.js';
@@ -12,7 +12,10 @@ const fixture = name => JSON.parse(readFileSync(resolve(process.cwd(), `tests/fi
 const Base = window.SDT.Base;
 
 describe('固定旧档兼容样本', () => {
-  beforeEach(() => localStorage.clear());
+  beforeEach(() => {
+    localStorage.clear();
+    for (let slot = 1; slot <= 5; slot++) RunStorage.remove(slot);
+  });
 
   it('v1 单档迁入档位 1，并完整保留未完成对局字段', () => {
     const legacy = fixture('save-v1-run.json');
@@ -62,6 +65,36 @@ describe('固定旧档兼容样本', () => {
     expect(localStorage.getItem('sdt-save-v2-slot2')).toBe(future);
   });
 
+  it('旧标签页加载对局后发现档位已更新时拒绝覆盖', () => {
+    RunStorage.readForLoad(4); // 旧标签看到空档
+    const newer = JSON.stringify({ version: RunStorage.SAVE_VERSION, hp: 27,
+      _r2: { runId: 'other-tab-run', revision: 0 } });
+    localStorage.setItem(RunStorage.key(4), newer); // 模拟另一标签先写入
+    RunStorage.read(4); // 列表只读重查不得替旧内存快照推进基线
+    expect(RunStorage.write(4, { hp: 10 })).toBe(false);
+    expect(localStorage.getItem(RunStorage.key(4))).toBe(newer);
+  });
+
+  it('重新载入另一标签保存的最新对局后允许继续保存', () => {
+    RunStorage.readForLoad(5);
+    const latest = JSON.stringify({ version: RunStorage.SAVE_VERSION, hp: 27,
+      _r2: { runId: 'latest-run', revision: 2 } });
+    localStorage.setItem(RunStorage.key(5), latest);
+    expect(RunStorage.read(5).hp).toBe(27); // 列表读取不移动旧编辑基线
+    expect(RunStorage.write(5, { hp: 10 })).toBe(false);
+    expect(RunStorage.readForLoad(5).hp).toBe(27); // 真正载入时接受最新基线
+    expect(RunStorage.write(5, { hp: 26 })).toBe(true);
+    expect(RunStorage.read(5).hp).toBe(26);
+  });
+
+  it('无编辑基线时也拒绝覆盖另一标签刚创建的对局', () => {
+    const latest = JSON.stringify({ version: RunStorage.SAVE_VERSION, hp: 27,
+      _r2: { runId: 'new-slot-run', revision: 0 } });
+    localStorage.setItem(RunStorage.key(4), latest);
+    expect(RunStorage.write(4, { hp: 10 })).toBe(false);
+    expect(localStorage.getItem(RunStorage.key(4))).toBe(latest);
+  });
+
   it('旧基地迁移保留仓库、职业、成就和卡背，并补齐新字段', () => {
     const legacyBase = fixture('base-v1.json');
     localStorage.setItem('sdt-base-v1', JSON.stringify(legacyBase));
@@ -89,5 +122,28 @@ describe('固定旧档兼容样本', () => {
     expect(Base.peek(3)).toBeNull();
     expect(Base.issue(3)).toBe('corrupt');
     expect(localStorage.getItem(Base.CORRUPT_KEY(3))).toBe('{broken');
+  });
+
+  it('旧标签页基地数据过期时拒绝覆盖并保留新存档', () => {
+    const base = Base.use(4);
+    base.wood = 2;
+    const newer = JSON.stringify({ version: Base.BASE_VERSION, wood: 19,
+      _m01: { revision: 1, requests: {} } });
+    localStorage.setItem(Base.SLOT_KEY(4), newer); // 模拟另一标签先写入
+    expect(Base.save()).toBe(false);
+    expect(localStorage.getItem(Base.SLOT_KEY(4))).toBe(newer);
+  });
+
+  it('选档时观察为空、另一标签创建基地后拒绝按newSlot重置', () => {
+    const log = vi.fn();
+    window.SDT.UI = { log };
+    expect(Base.peek(5)).toBeNull();
+    const newer = JSON.stringify({ version: Base.BASE_VERSION, wood: 19,
+      _m01: { revision: 1, requests: {} } });
+    localStorage.setItem(Base.SLOT_KEY(5), newer);
+    Base.use(5); // newSlot launch 路径会先进入基地
+    expect(Base.reset(5)).toBe(false);
+    expect(localStorage.getItem(Base.SLOT_KEY(5))).toBe(newer);
+    expect(log).toHaveBeenCalledWith(expect.stringContaining('请返回选档重新进入'), 'warn');
   });
 });

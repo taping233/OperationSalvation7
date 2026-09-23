@@ -11,6 +11,7 @@
  *   - 只做通知，不做状态查询——需要同步取值的场景（如开箱挂起/恢复）不要用总线。
  * ============================================================ */
 import { sdtDefine } from './sdt-facade.js';
+import { recordDiagnostic } from './diagnostics.local.js';
 
 const listeners = new Map();   // event -> Set<fn>
 
@@ -40,10 +41,16 @@ function emit(event, ...args) {
       // async 订阅者的 rejection 不再变成 unhandledRejection（迭代评审 09-20）：
       // 保持同步派发与返回值语义不变——battle:end 的「0 订阅回退」判定和
       // 「finish() 返回前完成广播」时序都不受影响，仅把异步异常接住上报
-      if (r && typeof r.then === 'function') r.catch(e => console.error(`[Bus] ${event} 异步订阅者异常:`, e));
+      if (r && typeof r.then === 'function') r.catch(e => {
+        recordDiagnostic('event-bus.async', e);
+        console.error(`[Bus] ${event} 异步订阅者异常:`, e);
+      });
       served++;
     }
-    catch (e) { console.error(`[Bus] ${event} 订阅者异常:`, e); }
+    catch (e) {
+      recordDiagnostic('event-bus.sync', e);
+      console.error(`[Bus] ${event} 订阅者异常:`, e);
+    }
   }
   return served;
 }

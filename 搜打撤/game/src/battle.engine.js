@@ -1447,16 +1447,20 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
   
   const PERSIST_MIN_MS = 8000;
   function queueCardExecution(uid, card, fuelUids, target, freeCost) {
-    const receipt = Object.freeze({ battleToken: battleState.token, actionSeq: (set$presentationActionSeq(presentationActionSeq + 1), presentationActionSeq) });
+    const battleToken = battleState.token;
+    const receipt = Object.freeze({ battleToken, actionSeq: (set$presentationActionSeq(presentationActionSeq + 1), presentationActionSeq) });
     set$battleState(transitionBattle(battleState, BATTLE_PHASES.RESOLVING));
     set$busy(true);
     requestBattleRender();
     actionQueue.enqueue(signal => execPlay(uid, card, fuelUids, target, freeCost, signal, receipt))
       .catch(e => { if (e?.name !== 'BattleActionCancelledError') console.error('[battle] 出牌动作异常：', e); })
-      .finally(() => {
-        // 触发效果可能继续入队；队列未空时保持 resolving/busy，避免玩家插入新动作。
-        if (actionQueue.length === 0) {
-          if (battleState.phase === BATTLE_PHASES.RESOLVING) set$battleState(transitionBattle(battleState, BATTLE_PHASES.PLAYER));
+      .finally(async () => {
+        // 当前动作可能已将连锁动作入队；待执行数为 0 时，队列仍可能有动作正在运行。
+        await actionQueue.idle();
+        // 旧战斗的异步收尾不能更改终局状态或新一场战斗的 busy/phase。
+        if (battleState.token !== battleToken) return;
+        if (actionQueue.length === 0 && !actionQueue.running && battleState.phase === BATTLE_PHASES.RESOLVING) {
+          set$battleState(transitionBattle(battleState, BATTLE_PHASES.PLAYER));
           set$busy(false);
           // 稳定点落盘（战斗快照随对局存档写入，刷新/闪退后可续打；节流见上）
           if (G.persistSave && G.battleActive && battleState.phase === BATTLE_PHASES.PLAYER) {

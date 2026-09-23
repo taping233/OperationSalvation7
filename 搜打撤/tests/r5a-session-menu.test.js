@@ -54,6 +54,21 @@ describe('R5-a real session persistence',()=>{
     expect(session.saveGame()).toBe(false); expect(localStorage.getItem(RunStorage.key(slot))).toBe(oldRaw);
   });
 
+  it('跨标签存档冲突提示重新载入，而不是提示存储空间不足',()=>{
+    const slot=1; window.SDT.Base.use(slot); session._set_active_slot(slot);
+    session.newRun('standard',[],{skipClassChoice:true});
+    expect(session.saveGame()).toBe(true);
+    expect(session.loadGame(slot).ok).toBe(true);
+    const latest=JSON.parse(localStorage.getItem(RunStorage.key(slot)));
+    latest.hp=Math.max(1,latest.hp-1); latest._r2.revision++;
+    localStorage.setItem(RunStorage.key(slot),JSON.stringify(latest));
+    const log=vi.fn(); window.SDT.UI.log=log;
+    expect(session.saveGame()).toBe(false);
+    expect(RunStorage.lastWriteIssue(slot)).toBe('STALE_SLOT');
+    expect(log.mock.calls.flat().join(' ')).toContain('重新载入档位后继续');
+    expect(log.mock.calls.flat().join(' ')).not.toContain('存储空间可能已满');
+  });
+
   it('坏地图不改变Random/game且原run串不被覆盖；nest无需普通layerData',()=>{
     const beforeRandom=Random.snapshot(), beforeLayers=session.game.layerData;
     const bad=JSON.stringify({version:2,seed:'bad',mapSeed:'bad',generatorVersion:99,layoutVersion:99,layerIdx:0,trackPos:0});

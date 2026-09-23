@@ -407,6 +407,7 @@ function requestClassChoice(options) {
   //（会吃掉 0 币/0 血），缺失/NaN/类型异常回退默认，防 undefined 进血条全线 NaN、hp 缺失恒假打不死
   const numOr = (v, d) => { const n = +v; return Number.isFinite(n) ? n : d; };
   let lastSaveFailWarnAt = 0;           // 写档失败警示 30s 节流（迭代评审 09-20 G-P3）：成功落盘即复位
+  let lastSaveConflictWarnAt = 0;
 
   const hasRun = (i) => RunStorage.has(i);                            // 该档有进行中的对局
   const hasSlot = (i) => hasRun(i) || SDT.Base.hasSlot(i);           // 该档位已被创建
@@ -478,6 +479,15 @@ function requestClassChoice(options) {
         pendingRunePick: game.pendingRunePick || null,
       });
     if (!ok) {
+      if (RunStorage.lastWriteIssue(activeSlot) === 'STALE_SLOT') {
+        const now = Date.now();
+        if (now - lastSaveConflictWarnAt >= 30_000) {
+          lastSaveConflictWarnAt = now;
+          UI.log('[[icon:cross]] 档位已在其他标签页更新，对局进度未保存，请重新载入档位后继续', 'warn');
+          console.warn('[save] 对局存档版本冲突：请重新载入档位后继续');
+        }
+        return false;
+      }
       // 写失败（典型：localStorage 配额满，五档对局+基地+留言共约 5MB）不提示就是无声丢档。
       // 30s 节流+成功复位（迭代评审 09-20 G-P3）：处置前持续丢进度有感知、腾出空间后立即恢复提醒
       const now = Date.now();
@@ -488,6 +498,7 @@ function requestClassChoice(options) {
       }
     } else {
       lastSaveFailWarnAt = 0;   // 成功落盘=已恢复，下次失败立即提示（节流不吞「已恢复」后的第一次告警）
+      lastSaveConflictWarnAt = 0;
     }
     return ok;
   }
@@ -541,7 +552,7 @@ function requestClassChoice(options) {
   function preflightRunMap(slot) {
     const identity = RunStorage.readIdentity(slot);
     if (identity.code === 'RECOVERY_REQUIRED') return { ...identity, preserveRun: true };
-    const s = readSlot(slot);
+    const s = RunStorage.readForLoad(slot);
     if (!s) {
       return { ok:false, code:RunStorage.issue(slot)==='tooNew'?'RUN_TOO_NEW':'RUN_UNREADABLE', message:'对局存档无法读取', preserveRun:true };
     }

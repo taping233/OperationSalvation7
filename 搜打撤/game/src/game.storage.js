@@ -29,12 +29,16 @@ const MIGRATIONS = {
 };
 // 读档异常原因（index -> 'corrupt' | 'tooNew'），供 UI 查询展示
 const issues = {};
+const writeIssues = new Map();
 
 // 2026-09-07 留言：点「开始探索」会卡一下 = openSlotPicker 同步 readSlot×5 + Base.peek×5
 // 全量 JSON.parse。对局存档大（ownedCards/eventLog），这里缓存解析结果。
 // 缓存值带原始串指纹：localStorage 被绕过 write 直写（旧版代码/另一标签页/测试）
 // 后指纹失配自动重解析，不会读到脏缓存；省的是昂贵的 parse+迁移，getItem 照常执行。
 const readCache = new Map();
+// 每个标签页记录最后加载/成功写入的原始串。普通写入前作乐观冲突检查，
+// 防止旧标签页在另一标签保存后继续递增 revision 并覆盖新状态。
+const writeBaseline = new Map();
 const publicRun = data => { const value = { ...data }; delete value._r2; return value; };
 
 const RunStorage = Object.freeze({
@@ -71,6 +75,14 @@ const RunStorage = Object.freeze({
     readCache.set(index, { raw, data });
     return publicRun(data);
   },
+  // 实际进入/恢复对局时调用；档位列表和事务探测只用 read()，不改变编辑基线。
+  readForLoad(index) {
+    try { writeBaseline.set(index, localStorage.getItem(RUN_KEY(index))); }
+    catch { writeBaseline.delete(index); }
+    writeIssues.delete(index);
+    return this.read(index);
+  },
+  lastWriteIssue(index) { return writeIssues.get(index) || null; },
   // 坏档处理：原串备份到 corrupt 键后返回 null（原键不动，由玩家决定是否覆盖重开）
   _corrupt(index, raw) {
     issues[index] = 'corrupt';
@@ -99,30 +111,53 @@ const RunStorage = Object.freeze({
     return Object.freeze({ ok: true, value: Object.freeze({ runId: identity.runId, revision: identity.revision }) });
   },
   write(index, value) {
-    if (txPending(index)) return false;
+    if (txPending(index)) { writeIssues.set(index, 'RECOVERY_REQUIRED'); return false; }
     try {
+      const hasBaseline = writeBaseline.has(index);
+      const expectedRaw = writeBaseline.get(index);
+      const currentRaw = localStorage.getItem(RUN_KEY(index));
+      if (hasBaseline && currentRaw !== expectedRaw) { writeIssues.set(index, 'STALE_SLOT'); return false; }
+      if (!hasBaseline && currentRaw !== null) {
+        let existingIdentity = null;
+        try { existingIdentity = JSON.parse(currentRaw)?._r2 || null; } catch { /* 损坏档保留既有显式恢复路径 */ }
+        // 新开档从列表页进入时可能没有读档基线；若现代对局已存在，
+        // 不允许无基线写入把它覆盖。无身份旧档仍可由恢复流程升级。
+        if (existingIdentity) { writeIssues.set(index, 'STALE_SLOT'); return false; }
+      }
       let persistedIdentity = null;
-      try { persistedIdentity = JSON.parse(localStorage.getItem(RUN_KEY(index)) || 'null')?._r2 || null; } catch { /* 读取失败走新身份 */ }
+      try { persistedIdentity = JSON.parse(currentRaw || 'null')?._r2 || null; } catch { /* 读取失败走新身份 */ }
       const identity = persistedIdentity || value?._r2 || { runId: newRunId(index), revision: -1 };
       const nextIdentity = { runId: identity.runId, revision: Math.max(-1, Number(identity.revision) || 0) + 1 };
-      localStorage.setItem(RUN_KEY(index), JSON.stringify({ ...value, _r2: nextIdentity, version: SAVE_VERSION }));
+      const nextRaw = JSON.stringify({ ...value, _r2: nextIdentity, version: SAVE_VERSION });
+      localStorage.setItem(RUN_KEY(index), nextRaw);
+      writeBaseline.set(index, nextRaw);
+      writeIssues.delete(index);
       readCache.delete(index);
       delete issues[index];
       try { localStorage.removeItem(CORRUPT_KEY(index)); } catch { /* 无关紧要 */ }
       return true;
-    } catch { return false; }
+    } catch { writeIssues.set(index, 'STORAGE'); return false; }
   },
   remove(index) {
     if (txPending(index)) return false;
     try {
       localStorage.removeItem(RUN_KEY(index));
       localStorage.removeItem(CORRUPT_KEY(index));
-    } catch { return false; }
+    } catch { writeIssues.set(index, 'STORAGE'); return false; }
     readCache.delete(index);
+    writeBaseline.delete(index);
+    writeIssues.delete(index);
     delete issues[index];
     return true;
   },
-  _invalidate(index) { readCache.delete(index); delete issues[index]; },
+  _invalidate(index) {
+    readCache.delete(index);
+    delete issues[index];
+    writeIssues.delete(index);
+    // 仅事务恢复会调用此入口；恢复已按事务 revision 校验并提交，
+    // 因而本标签可将后续写入基线推进到事务后的持久状态。
+    try { writeBaseline.set(index, localStorage.getItem(RUN_KEY(index))); } catch { writeBaseline.delete(index); }
+  },
   migrateLegacy() {
     try {
       const old = localStorage.getItem(OLD_SAVE_KEY);

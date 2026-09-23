@@ -1,4 +1,5 @@
 import { sdtDefine } from './sdt-facade.js';
+import { recordDiagnostic } from './diagnostics.local.js';
 
 // 战斗域按需加载边界。
 // 标题、基地与地图不解析战斗核心；首次开战或恢复存档时才拉取完整战斗模块。
@@ -28,6 +29,7 @@ async function startBattle(game, foes, options) {
     const battle = await ensureBattleReady();
     return battle.start(game, foes, options);
   } catch (error) {
+    recordDiagnostic('battle-loader', error);
     console.error('[battle-loader] 战斗模块加载失败', error);
     if (game) game.state = 'idle';
     window.SDT?.UI?.log?.('[[icon:cross]] 战斗模块加载失败，请重试', 'warn');
