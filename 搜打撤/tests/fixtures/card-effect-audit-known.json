@@ -1,0 +1,107 @@
+{
+  "allowMissingCardIds": [
+    "tt12-raydragon",
+    "tt12-saturate",
+    "tt12-felguard",
+    "tt12-chargeray",
+    "tt12-freezeray"
+  ],
+  "known": [
+    {
+      "id": "tt3sp-silverthorn",
+      "clause": "注能(1)：伤害+3",
+      "reason": {
+        "kind": "unsupported",
+        "detail": "文本效果解析器当前未识别注能伤害增量句式。"
+      }
+    },
+    {
+      "id": "tt7-holyheal",
+      "clause": "注能（1）：回复 2 倍于被注能卡牌价格的血量",
+      "reason": {
+        "kind": "audit_context",
+        "detail": "该表达依赖注能燃料费用；审计运行器用零燃料和零最近抽牌费用，不能验证实际结算。"
+      }
+    },
+    {
+      "id": "tt7-meteorstrong",
+      "clause": "注能(2)：施放 3 次火球",
+      "reason": {
+        "kind": "unsupported",
+        "detail": "文本效果解析器当前未识别注能后多次施放火球的句式。"
+      }
+    },
+    {
+      "id": "tt8-hero-sealer",
+      "clause": "深海封印：对战开始时，将本牌与四张「封印肢体」洗入牌库",
+      "reason": {
+        "kind": "audit_context",
+        "detail": "该效果由战斗开始流程处理；此审计只逐句运行卡牌文本效果解析器。"
+      }
+    },
+    {
+      "id": "cc-cursed-blade",
+      "clause": "攻（+3），附加手牌中的招式所具有的全部诅咒效果",
+      "reason": {
+        "kind": "audit_context",
+        "detail": "诅咒继承由真实战斗流程读取实际手牌；审计运行器仅提供无诅咒的占位手牌。"
+      }
+    },
+    {
+      "id": "cc-ember-burst",
+      "clause": "若击杀敌人，再施放一次",
+      "reason": {
+        "kind": "audit_context",
+        "detail": "击杀后重施放由战斗结算流程处理；逐句文本审计未模拟出牌与击杀连锁。"
+      }
+    },
+    {
+      "id": "cc-mana-surge",
+      "clause": "对随机敌人释放4个随机法术（这些随机法术默认已注能）",
+      "reason": {
+        "kind": "audit_context",
+        "detail": "随机法术释放由战斗引擎的专用结算流程处理；此审计未驱动随机出牌流程。"
+      }
+    },
+    {
+      "id": "tt12-raydragon",
+      "clause": "注能（1）：造成11点法伤",
+      "reason": {
+        "kind": "unsupported",
+        "detail": "文本效果解析器当前未识别该注能法术伤害句式。"
+      }
+    },
+    {
+      "id": "tt12-saturate",
+      "clause": "造成7点法伤，如果消灭敌人，额外释放一次",
+      "reason": {
+        "kind": "audit_context",
+        "detail": "重复施放依赖实际击杀结果；审计逐句调用文本解析器，不执行完整出牌结算。"
+      }
+    },
+    {
+      "id": "tt12-felguard",
+      "clause": "注能（2）：抽3张牌，本回合免疫所有伤害和诅咒效果",
+      "reason": {
+        "kind": "audit_context",
+        "detail": "免疫状态由战斗引擎在成功注能后登记；审计未模拟完整注能出牌流程。"
+      }
+    },
+    {
+      "id": "tt12-chargeray",
+      "clause": "造成5点法伤，本牌在你手牌中时每注能过1张卡牌，伤害+2",
+      "reason": {
+        "kind": "unsupported",
+        "detail": "文本效果解析器当前未识别留在手牌期间随注能提升伤害的句式。"
+      }
+    },
+    {
+      "id": "tt12-freezeray",
+      "clause": "造成4点法伤",
+      "reason": {
+        "kind": "unsupported",
+        "detail": "文本效果解析器当前未识别该法术伤害写法；结构化伤害字段不能替代本审计对文本的识别。"
+      }
+    }
+  ]
+}

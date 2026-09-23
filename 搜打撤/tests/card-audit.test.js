@@ -2,9 +2,11 @@
    1) 用真实种子流程灌库 + 真实效果解析器逐句跑描述，防止「一打就崩」的描述进库；
    2) 结构化词条与描述的一致性（合并残留错误词条）；
    3) 老板 2026-09-08 限制卡池清单逐项验证。
-   注意：「未识别清单」输出为人工复核用（恒通过），其中结构化词条覆盖的句子
-   （如「造成 2 点伤害」有 dmg 字段）属正常假阳性，以未识别总数趋势为准。 */
+   未识别项必须与精确 ID/句式例外清单一致；结构化字段覆盖的句子仍需逐项注明原因，
+   新增项或仍在卡池中的过期例外都会让测试失败。 */
 import { describe, it, expect, beforeAll } from 'vitest';
+import knownAuditFindings from './fixtures/card-effect-audit-known.json';
+import { compareEffectAuditFindings } from './helpers/card-effect-audit.js';
 window.SDT = window.SDT || { Icons: { img: () => '' } };
 // 静态 import 会先于本文件顶层代码执行，此时 sdt-facade 可能已建好 window.SDT（无 Icons）——
 // 所以必须补齐而不是直接赋值。
@@ -137,19 +139,43 @@ const BATTLE_TYPES = ['武术', '法术', '装备', '道具', '能力卡'];
 describe('全卡库描述实装审计', () => {
   let bad = [];
   beforeAll(() => {
-    bad = [];
+    const findingsById = new Map();
     C.all().forEach(card => {
       if (!BATTLE_TYPES.includes(card.type)) return;
       for (const cls of ['侠客', '战士', '牧师', '法师', '降临者', null]) {
         const r = auditCard(card, cls);
-        if (r.unrecognized.length) { bad.push(r); break; }
+        if (!r.unrecognized.length) continue;
+        const finding = findingsById.get(card.id) || { card, unrecognized: new Set() };
+        r.unrecognized.forEach(clause => finding.unrecognized.add(clause));
+        findingsById.set(card.id, finding);
       }
     });
+    bad = [...findingsById.values()].map(({ card, unrecognized }) => ({ card, unrecognized: [...unrecognized] }));
   });
-  it('输出未识别清单（人工复核用）', () => {
+  it('未识别项必须是有明确原因的已知例外', () => {
     const lines = bad.map(r => `【${r.card.name}】(${r.card.type}) => ${r.unrecognized.join(' ⧼ NEXT ⧽ ')}`);
     console.log(`\n===== 未识别句式的战斗卡：${bad.length} 张 =====\n` + lines.join('\n') + '\n');
-    expect(true).toBe(true);
+    const actual = bad.flatMap(r => r.unrecognized.map(clause => ({ id: r.card.id, clause })));
+    const availableIds = new Set(C.all().map(card => card.id));
+    const { unknown, stale } = compareEffectAuditFindings(actual, knownAuditFindings, availableIds);
+    const badReasons = knownAuditFindings.known.filter(item =>
+      !['unsupported', 'audit_context'].includes(item.reason?.kind) || !item.reason.detail?.trim());
+    expect(badReasons, '每个例外都要标明未支持或审计上下文原因及说明').toEqual([]);
+    expect({ unknown, stale }, '新增句式须复核；仍在卡池但已被识别的例外须从 fixture 移除').toEqual({ unknown: [], stale: [] });
+  });
+  it('发现新增未知句式时比较器必须拒绝', () => {
+    const sample = { id: 'audit-negative-sample', clause: '新增未知效果句式' };
+    const newClauseOnKnownCard = { id: knownAuditFindings.known[0].id, clause: '同卡新增未知效果句式' };
+    const result = compareEffectAuditFindings([sample, newClauseOnKnownCard], knownAuditFindings,
+      new Set([sample.id, newClauseOnKnownCard.id]));
+    expect(result.unknown).toEqual([sample, newClauseOnKnownCard]);
+
+    const supported = { id: 'supported-card', clause: '已识别效果句式', reason: { kind: 'unsupported', detail: 'fixture example' } };
+    expect(compareEffectAuditFindings([], { known: [supported], allowMissingCardIds: [] },
+      new Set([supported.id])).stale).toEqual([supported]);
+
+    const optional = { id: 'tt12-optional-sample', clause: '分支特有句式', reason: { kind: 'unsupported', detail: 'fixture example' } };
+    expect(compareEffectAuditFindings([], { known: [optional], allowMissingCardIds: [optional.id] }, new Set()).stale).toEqual([]);
   });
   it('不得存在「一打就崩」的描述（此前 getPlayerHp 等端口缺失）', () => {
     const crashed = bad.filter(r => r.unrecognized.some(u => u.includes('[崩溃')));
