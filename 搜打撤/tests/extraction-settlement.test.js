@@ -1,93 +1,108 @@
-/* 撤离结算契约（迭代评审 09-20 G-P1：撤离经济零测试保护——第一道防线）：
- * 切片 game.run.altar doExtract 纯逻辑段，锁三件事：
- *   ① 消耗口袋 1/3 保留口径（逐张判定，保留/散失计数与日志一致）；
- *   ② 结算链完整：clearSave + 木材/口粮自动入库 + 口袋交还 depositCards + 整理页打开；
- *   ③ 首脑击杀后撤离必经 unlockNest 单一写点（legend 接音随 nest.js 版）。
- * 随身币清零/仓库满丢失逻辑位于整理页 goBase 链路（base.depositCards 内部），
- * 属浏览器级回归用例（QA 用例清单 #2），不在本切片范围。 */
+/* 撤离结算契约：真实 altar ESM + slot=null 命令分支，验证内存迁移分支的经济快照。 */
 import { beforeEach, expect, it, vi } from 'vitest';
-import { readFileSync } from 'node:fs';
 
-const source = readFileSync('game/src/game.run.altar.js', 'utf8');
+const altarState = vi.hoisted(() => ({ game: {}, random: vi.fn(() => 0) }));
+vi.mock('../game/src/game.session.js', () => ({
+  MAP: { rules: { starterSha: 0, stashUpgradeWood: 1, stashUpgradeSlots: 1 } },
+  MODES: {}, game: altarState.game, getActiveSlot: () => null,
+  clearSave: vi.fn(), curLayer: () => null, enterLayer: vi.fn(), exitToTitle: vi.fn(), newUid: vi.fn(),
+  saveGame: vi.fn(), scaledEnemy: vi.fn(), syncPlayTime: vi.fn(),
+}));
+vi.mock('../game/src/characters.js', () => ({ CHARACTERS: [], characterFor: () => null, characterName: () => '' }));
+vi.mock('../game/src/shared.js', () => ({ esc: String, escAttr: String }));
+vi.mock('../game/src/sound.js', () => ({ tone: vi.fn() }));
+vi.mock('../game/src/game.hub.js', () => ({ openBaseHub: vi.fn() }));
+vi.mock('../game/src/game.cardslib.js', () => ({ Sfx: { ding: vi.fn() }, _set_cardPageOpen: vi.fn(), cardHTML: c => c.name }));
+vi.mock('../game/src/random.js', () => ({
+  Random: { random: altarState.random, seed: 1, restore: vi.fn() },
+  SeededRandomService: class {
+    constructor(seed) { this.state = { seed }; }
+    restore(state) { this.state = state; }
+    random() { return altarState.random(); }
+    snapshot() { return this.state; }
+  },
+}));
+vi.mock('../game/src/battle-loader.js', () => ({ ensureBattleReady: vi.fn(), startBattle: vi.fn() }));
+vi.mock('../game/src/game.run.scenes.js', () => ({
+  FIRE_RESTORABLE: [], consumeCurrentCell: vi.fn(), finishInstant: vi.fn(), grantEventCard: vi.fn(),
+  nodeOpt: (act, label) => `<button data-act="${act}">${label}</button>`,
+  nodeShell: ({ body = '', foot = '' }) => window.SDT.UI.showOverlay('', `${body}${foot}`),
+  openPocketRestore: vi.fn(), openShop: vi.fn(), preloadAllNodeShellBgs: vi.fn(), showRunTransition: vi.fn(),
+}));
+vi.mock('../game/src/game.nest.js', () => ({ unlockNest: vi.fn() }));
+vi.mock('../game/src/game.storage.js', () => ({ RunStorage: {} }));
+vi.mock('../game/src/recovery.commands.js', () => ({ commitBaseAndRun: vi.fn(), readSettlementReceipt: vi.fn(), recoverSlot: vi.fn() }));
 
-function buildDoExtract({ coinFlip = 0, bossKilled = true } = {}) {
-  const game = {
-    state: 'modal', runActive: true, layerIdx: 2,
-    hp: 20, maxHp: 30, coins: 7, turn: 3, myClass: '侠客',
-    bossKilled,
-    inventory: [{ name: '木材', count: 2 }],
-    usedPocket: [{ card: { id: 'a', name: '卡A' }, count: 4 }],
-    ownedCards: [{ uid: 'u1', card: { id: 'b', name: '卡B' } }],
+let game, UI, base, doExtract;
+const makeGame = ({ bossKilled = true } = {}) => ({
+  state: 'modal', runActive: true, pendingExtraction: null, layerIdx: 2,
+  hp: 20, maxHp: 30, coins: 7, turn: 3, myClass: null, mode: 'normal', bossKilled,
+  inventory: [{ name: '木材', count: 2 }, { name: '口粮', count: 3 }],
+  usedPocket: [{ card: { id: 'a', name: '口袋卡' }, count: 4 }],
+  ownedCards: [{ uid: 'u1', card: { id: 'b', name: '背包卡' } }],
+  elapsed: 0,
+});
+
+beforeEach(async () => {
+  vi.resetModules();
+  Object.assign(altarState.game, makeGame());
+  game = altarState.game;
+  document.body.innerHTML = '<div id="body"></div>';
+  UI = {
+    acts: {}, log: vi.fn(), hideOverlay: vi.fn(), refresh: vi.fn(), registerHelp: vi.fn(), helpBtn: () => '',
+    showOverlay: (_title, html) => { document.body.innerHTML = html; }, act(name, fn) { this.acts[name] = fn; },
   };
-  const UI = { log: vi.fn(), hideOverlay: vi.fn(), refresh: vi.fn() };
-  const SDT = {
-    Sound: { sfx: vi.fn(), music: vi.fn() },
-    Base: { deposit: vi.fn(), depositCards: vi.fn(), isSha: () => false },
-    Meta: { checkUnlocks: vi.fn(), track: vi.fn() },
+  base = {
+    data: { wood: 0, rations: 0, pocket: [], stash: [], nestUnlocked: false,
+      coins: 0, collection: {}, stats: { extracts: 0, bestRunCoins: 0, stashTotal: 0 } },
+    deposit: vi.fn(), depositCards: vi.fn(), isSha: () => false, stashRoom: () => 5,
+    stashUsed: () => 0, stashCap: () => 5,
   };
-  const clearSave = vi.fn();
-  const syncPlayTime = vi.fn();
-  const unlockNest = vi.fn();
-  const renderExtractStash = vi.fn();
-  const Random = { random: () => coinFlip };   // 0=恒保留（<1/3）；0.99=恒散失（≥1/3）
-
-  const code = source.slice(
-    source.indexOf('function doExtract()'),
-    source.indexOf('function renderExtractStash()'),
-  );
-  const doExtract = new Function(
-    'game', 'UI', 'SDT', 'Random', 'clearSave', 'syncPlayTime', 'unlockNest', 'renderExtractStash',
-    `${code}; return doExtract;`,
-  )(game, UI, SDT, Random, clearSave, syncPlayTime, unlockNest, renderExtractStash);
-  return { doExtract, game, UI, SDT, clearSave, unlockNest, renderExtractStash };
-}
-
-let ctx;
-beforeEach(() => { ctx = buildDoExtract(); });
-
-it('撤离结算：对局档清除 + 木材口粮自动入库 + 口袋交还 + 打开整理页', () => {
-  const { doExtract, game, SDT, clearSave, renderExtractStash } = ctx;
-  doExtract();
-  expect(game.runActive).toBe(false);
-  expect(game.state).toBe('done');
-  expect(clearSave).toHaveBeenCalledOnce();
-  expect(SDT.Base.deposit).toHaveBeenCalledWith(game.inventory);
-  expect(SDT.Base.depositCards).toHaveBeenCalledTimes(1);
-  expect(renderExtractStash).toHaveBeenCalledOnce();
-  expect(SDT.Meta.track).toHaveBeenCalled();
+  window.SDT = {
+    UI, Base: base, Sound: { sfx: vi.fn(), music: vi.fn() },
+    Cards: { cardHTML: c => c.name, sellPrice: () => 1 }, Meta: { track: vi.fn(), addXpToProgress: x => ({ after: x }) },
+  };
+  altarState.random.mockReset().mockReturnValue(0);
+  ({ doExtract } = await import('../game/src/game.run.altar.js'));
 });
 
-it('消耗口袋 1/3 保留：恒保留侧（coinFlip<1/3）四张全带回且日志一致', () => {
-  const { doExtract, game, UI, SDT } = buildDoExtract({ coinFlip: 0 });
-  doExtract();
-  expect(game.usedPocket).toHaveLength(1);
-  expect(game.usedPocket[0].count).toBe(4);
-  expect(UI.log).toHaveBeenCalledWith(
-    expect.stringContaining('张只有 1/3 保留（带回 4 张，散失 0 张）'),
-    'sys',
-  );
-  const deposited = SDT.Base.depositCards.mock.calls[0][0];
-  expect(deposited).toHaveLength(1);
-  expect(deposited[0].count).toBe(4);
+it('真实撤离命令创建整理快照，资源自动入库并打开整理页', async () => {
+  expect(await doExtract()).toBe(true);
+  expect(game.runActive).toBe(true);
+  expect(game.pendingExtraction).toMatchObject({ phase: 'organizing', resources: { wood: 2, rations: 3 } });
+  expect(base.data.wood).toBe(2);
+  expect(base.data.rations).toBe(3);
+  expect(base.data.stats.extracts).toBe(1);
+  expect(base.data.nestUnlocked).toBe(true);
+  expect(document.querySelector('#exMain')).not.toBeNull();
+  expect(base.deposit).not.toHaveBeenCalled();
+  expect(base.depositCards).not.toHaveBeenCalled();
 });
 
-it('消耗口袋 1/3 保留：恒散失侧（coinFlip≥1/3）全散失且不误入库', () => {
-  const { doExtract, game, UI, SDT } = buildDoExtract({ coinFlip: 0.99 });
-  doExtract();
-  expect(game.usedPocket).toHaveLength(0);
-  expect(UI.log).toHaveBeenCalledWith(
-    expect.stringContaining('带回 0 张，散失 4 张'),
-    'sys',
-  );
-  expect(SDT.Base.depositCards.mock.calls[0][0]).toHaveLength(0);
+it('消耗口袋 1/3 保留：恒保留侧四张全带回且日志/快照一致', async () => {
+  altarState.random.mockReturnValue(0);
+  expect(await doExtract()).toBe(true);
+  expect(game.pendingExtraction.keptPocket).toEqual([{ card: { id: 'a', name: '口袋卡' }, count: 4 }]);
+  expect(game.pendingExtraction.totalPocketCount).toBe(4);
+  expect(game.pendingExtraction.lostPocketCount).toBe(0);
+  expect(UI.log).toHaveBeenCalledWith(expect.stringContaining('张只有 1/3 保留（带回 4 张，散失 0 张）'), 'sys');
+  expect(base.data.pocket).toEqual([{ card: { id: 'a', name: '口袋卡' }, count: 4 }]);
 });
 
-it('击败首脑后撤离必经 unlockNest 单一写点；未击败则不触发', () => {
-  const withBoss = buildDoExtract({ bossKilled: true });
-  withBoss.doExtract();
-  expect(withBoss.unlockNest).toHaveBeenCalledOnce();
+it('消耗口袋 1/3 保留：恒散失侧全部散失且不进入基地口袋', async () => {
+  altarState.random.mockReturnValue(0.99);
+  expect(await doExtract()).toBe(true);
+  expect(game.pendingExtraction.keptPocket).toEqual([]);
+  expect(game.pendingExtraction.lostPocketCount).toBe(4);
+  expect(UI.log).toHaveBeenCalledWith(expect.stringContaining('带回 0 张，散失 4 张'), 'sys');
+  expect(base.data.pocket).toEqual([]);
+});
 
-  const noBoss = buildDoExtract({ bossKilled: false });
-  noBoss.doExtract();
-  expect(noBoss.unlockNest).not.toHaveBeenCalled();
+it('击败首脑后解锁龙巢，未击败则不解锁', async () => {
+  expect(await doExtract()).toBe(true);
+  expect(base.data.nestUnlocked).toBe(true);
+  Object.assign(game, makeGame({ bossKilled: false }));
+  base.data.nestUnlocked = false;
+  expect(await doExtract()).toBe(true);
+  expect(base.data.nestUnlocked).toBe(false);
 });

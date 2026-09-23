@@ -14,7 +14,12 @@ window.SDT = {
 await import('../game/src/cards.js');
 await import('../game/src/ui.js');
 await import('../game/src/base.js');
-const { game, doDeath } = await import('../game/src/game.session.js');
+await import('../game/src/meta.js');
+Object.defineProperty(navigator, 'locks', { configurable: true, value: { request: (_name, _options, callback) => callback() } });
+const { RunStorage } = await import('../game/src/game.storage.js');
+const session = await import('../game/src/game.session.js');
+const { game, doDeath } = session;
+const actions = new Map();
 
 beforeAll(() => {
   Object.assign(window.SDT.UI, {
@@ -22,15 +27,19 @@ beforeAll(() => {
     hideScreen: vi.fn(), showScreen: vi.fn(), showOverlay: vi.fn(), act: vi.fn(),
     registerHelp: vi.fn(), helpBtn: () => '',
   });
-  window.SDT.Meta = { setXpMul: vi.fn(), track: vi.fn() };
+  window.SDT.UI.act = vi.fn((name, fn) => actions.set(name, fn));
   window.SDT.Nest = { renderNestMap: vi.fn() };
 });
 
 describe('死亡终局幂等', () => {
   beforeEach(() => {
-    localStorage.clear();
-    window.SDT.Base.use(8);
-    window.SDT.Base.reset(8);
+    window.localStorage.clear();
+    window.SDT.Base.use(2);
+    window.SDT.Base.reset(2);
+    window.SDT.Base.data.characters = { wu: { lv: 1, xp: 47 } };
+    window.SDT.Base.save();
+    session._set_active_slot(2);
+    RunStorage.write(2, { seed: 'terminal-death', hp: 0, maxHp: 30, inventory: [], ownedCards: [], myClass: '侠客' });
     game.runActive = true;
     game.state = 'idle';
     game.myClass = '侠客';
@@ -38,41 +47,93 @@ describe('死亡终局幂等', () => {
     game.inventory = [{ name: '木材', count: 2, value: 1 }];
     game.ownedCards = [];
     game.hp = 0;
+    game.elapsed = 0;
+    game.elapsedSynced = 0;
+    game.terminalPending = null;
+    actions.clear();
     window.SDT.UI.log.mockClear();
     window.SDT.UI.showOverlay.mockClear();
-    window.SDT.Meta.track.mockClear();
+    vi.spyOn(window.SDT.Meta, 'checkUnlocks').mockClear();
     vi.spyOn(window.SDT.Base, 'depositCards').mockClear();
   });
 
-  it('死亡后的迟到重复回调只记录一次死亡并搬运一次安全格', () => {
+  it('存储首次失败时保留运行档/卡牌，重试配对提交后死亡统计和升级只落一次', async () => {
     const card = { id: 'qa-terminal-safe', name: '测试安全卡', type: '法术', rarity: '古朴' };
     game.ownedCards = [{ uid: 'safe-death-card', card, safe: true }];
+    const baseKey = window.SDT.Base.SLOT_KEY(2);
+    const runKey = RunStorage.key(2);
+    const baseRaw = window.localStorage.getItem(baseKey);
+    const runRaw = window.localStorage.getItem(runKey);
+    let failJournal = true;
+    const storagePrototype = Object.getPrototypeOf(window.localStorage);
+    const nativeSetItem = storagePrototype.setItem;
+    const setSpy = vi.spyOn(storagePrototype, 'setItem').mockImplementation(function (key, value) {
+      if (key === `sdt-tx-v1-slot2` && failJournal) { failJournal = false; throw new Error('journal failure'); }
+      return nativeSetItem.call(this, key, value);
+    });
 
-    expect(doDeath()).toBe(true);
+    expect(await doDeath()).toBe(false);
+    expect(game.runActive).toBe(true);
+    expect(game.ownedCards).toHaveLength(1);
+    expect(game.terminalPending).toBeTruthy();
+    expect(window.localStorage.getItem(baseKey)).toBe(baseRaw);
+    expect(window.localStorage.getItem(runKey)).toBe(runRaw);
+    expect(window.SDT.UI.showOverlay).toHaveBeenCalledWith(expect.stringContaining('终局结算未保存'), expect.any(String));
+    setSpy.mockRestore();
+
+    expect(await actions.get('retryTerminalDeath')()).toBe(true);
     expect(doDeath()).toBe(false);
 
     expect(game.runActive).toBe(false);
-    expect(window.SDT.Meta.track).toHaveBeenCalledTimes(1);
-    expect(window.SDT.Base.depositCards).toHaveBeenCalledOnce();
-    expect(window.SDT.Base.depositCards).toHaveBeenCalledWith([{ card, count: 1 }]);
+    expect(game.terminalPending).toBeNull();
+    expect(window.SDT.Base.depositCards).not.toHaveBeenCalled();
     expect(window.SDT.Base.data.stash.find(x => x.card.id === card.id)?.count).toBe(1);
-    expect(window.SDT.UI.showOverlay).toHaveBeenCalledOnce();
+    expect(window.localStorage.getItem(runKey)).toBeNull();
+    expect(JSON.parse(window.localStorage.getItem(baseKey)).stats.deaths).toBe(1);
+    expect(window.SDT.Base.data.characters.wu).toMatchObject({ lv: 2, xp: 2 });
+    expect(window.SDT.Meta.checkUnlocks).toHaveBeenCalledOnce();
+    expect(window.SDT.UI.log).toHaveBeenCalledWith(expect.stringContaining('熟练度提升'), 'ok');
+    expect(window.SDT.UI.showOverlay).toHaveBeenCalledTimes(2);
   });
 
-  it('开启新局后死亡结算闩复位，同一卡可再次入库', () => {
+  it('同局迟到回调不重复结算，新开局可用新runId再次结算', async () => {
     const card = { id: 'qa-terminal-safe', name: '测试安全卡', type: '法术', rarity: '古朴' };
     game.ownedCards = [{ uid: 'safe-first', card, safe: true }];
-    expect(doDeath()).toBe(true);
+    const deathResult = await doDeath();
+    expect(deathResult, JSON.stringify(window.SDT.UI.showOverlay.mock.calls)).toBe(true);
     expect(doDeath()).toBe(false);
     expect(window.SDT.Base.data.stash.find(x => x.card.id === card.id)?.count).toBe(1);
 
+    session.newRun('standard', [], { skipClassChoice: true });
+    const identity = RunStorage.readIdentity(2);
+    expect(identity.ok).toBe(true);
+    game.myClass = '侠客';
+    game.hp = 0;
+    game.ownedCards.push({ uid: 'safe-next', card: { ...card }, safe: true });
+    expect(await doDeath()).toBe(true);
+
+    expect(window.SDT.Base.depositCards).not.toHaveBeenCalled();
+    expect(window.SDT.Base.data.stash.find(x => x.card.id === card.id)?.count).toBe(2);
+    expect(JSON.parse(localStorage.getItem(window.SDT.Base.SLOT_KEY(2))).stats.deaths).toBe(2);
+  });
+
+  it('slot=null但Base仍加载旧档时只做内存测试投影，不写基地或运行档', async () => {
+    const card = { id: 'qa-terminal-ephemeral', name: '临时安全卡', type: '法术', rarity: '古朴' };
+    const baseKey = window.SDT.Base.SLOT_KEY(2);
+    const runKey = RunStorage.key(2);
+    const baseRaw = window.localStorage.getItem(baseKey);
+    const runRaw = window.localStorage.getItem(runKey);
+    session._set_active_slot(null);
     game.runActive = true;
     game.state = 'idle';
-    game.ownedCards = [{ uid: 'safe-next', card: { ...card }, safe: true }];
-    expect(doDeath()).toBe(true);
+    game.ownedCards = [{ uid: 'ephemeral-safe', card, safe: true }];
 
-    expect(window.SDT.Meta.track).toHaveBeenCalledTimes(2);
-    expect(window.SDT.Base.depositCards).toHaveBeenCalledTimes(2);
-    expect(window.SDT.Base.data.stash.find(x => x.card.id === card.id)?.count).toBe(2);
+    expect(await doDeath()).toBe(true);
+
+    expect(window.SDT.Base.data.stash.find(x => x.card.id === card.id)?.count).toBe(1);
+    expect(window.localStorage.getItem(baseKey)).toBe(baseRaw);
+    expect(window.localStorage.getItem(runKey)).toBe(runRaw);
+    expect(window.SDT.Base.depositCards).not.toHaveBeenCalled();
+    expect(window.SDT.Meta.checkUnlocks).not.toHaveBeenCalled();
   });
 });

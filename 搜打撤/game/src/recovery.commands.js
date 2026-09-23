@@ -85,6 +85,15 @@ export function createRecoveryCommands({ storage = globalThis.localStorage, lock
     });
   };
 
+  const recoverSlotIfPending = async slotId => {
+    if (!validSlot(slotId)) return fail('INVALID_ARGUMENT', 'slotId 必须为 1～5');
+    let raw;
+    try { raw = storage.getItem(keys(slotId).journal); }
+    catch { return fail('STORAGE_READ_FAILED', '无法读取恢复日志', true, { slotId }); }
+    if (raw === null) return { ok: true, value: null };
+    return recoverSlot(slotId);
+  };
+
   const readSettlementReceipt = async (context, identity) => {
     const invalid = validateContext(context);
     if (invalid || !identity || typeof identity.command !== 'string') return invalid || fail('INVALID_ARGUMENT', 'command 无效');
@@ -164,10 +173,11 @@ export function createRecoveryCommands({ storage = globalThis.localStorage, lock
       return committed.ok ? committed.value : committed;
     });
   };
-  return Object.freeze({ recoverSlot, readSettlementReceipt, commitBaseAndRun });
+  return Object.freeze({ recoverSlot, recoverSlotIfPending, readSettlementReceipt, commitBaseAndRun });
 }
 
 const production = createRecoveryCommands();
 export const recoverSlot = production.recoverSlot;
+export const recoverSlotIfPending = production.recoverSlotIfPending;
 export const readSettlementReceipt = production.readSettlementReceipt;
 export const commitBaseAndRun = production.commitBaseAndRun;

@@ -7,7 +7,8 @@
  * ============================================================ */
 import { CHARACTERS, characterFor, characterName } from './characters.js';
 import { esc, escAttr } from './shared.js';
-import { MAP, clearSave, curLayer, enterLayer, exitToTitle, game, newUid, saveGame, scaledEnemy, syncPlayTime } from './game.session.js';
+import { MAP, MODES, curLayer, enterLayer, exitToTitle, game, getActiveSlot, newUid, saveGame, scaledEnemy } from './game.session.js';
+import { createExtractionCommands, validatePendingExtraction } from './extraction.commands.js';
 import { tone } from './sound.js';
 import { openBaseHub } from './game.hub.js';
 
@@ -21,13 +22,27 @@ const CLASS_STORY = {
 };
 
 import { Sfx, _set_cardPageOpen, cardHTML } from './game.cardslib.js';
-import { Random } from './random.js';
+import { Random, SeededRandomService } from './random.js';
 import { ensureBattleReady, startBattle } from './battle-loader.js';
 import { FIRE_RESTORABLE, consumeCurrentCell, finishInstant, grantEventCard, nodeOpt, nodeShell, openPocketRestore, openShop, preloadAllNodeShellBgs, showRunTransition } from './game.run.scenes.js';
-import { unlockNest } from './game.nest.js';
+import { RunStorage } from './game.storage.js';
+import { commitBaseAndRun, readSettlementReceipt, recoverSlot } from './recovery.commands.js';
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const SDT = window.SDT;
 const UI = window.SDT.UI;
+const extractionCommands = createExtractionCommands({
+  getActiveSlot, runStore: RunStorage, baseApi: SDT.Base,
+  recovery: { commitBaseAndRun, readSettlementReceipt, recoverSlot }, game,
+  random: () => Random.random('pocket'), characterFor,
+  makePocketStream(snapshot) {
+    const stream = new SeededRandomService(snapshot?.seed ?? Random.seed);
+    stream.restore(snapshot || { seed: Random.seed });
+    return { random: () => stream.random('pocket'), snapshot: () => stream.snapshot() };
+  },
+  restoreRandom(snapshot) { if (snapshot) Random.restore(snapshot); },
+  addXpToProgress: SDT.Meta.addXpToProgress,
+  xpMultiplier: () => MODES[game.mode]?.xpMul || 1,
+});
 
 export function openFireRest() {
   game.heal(MAP.rules.fireHeal);
@@ -712,57 +727,87 @@ export function openEmergencyModal() {
 // 撤离成功 → 「整理入库」交互：把背包中的物品放回仓库（不入库的会丢失）。
 // 「初始攻击」为初始牌不可入库；木材/口粮自动入库；消耗口袋自动回收。
 let extractLeft = null;   // 待整理的卡牌堆 [{card, count}]（撤离整理页暂存）
+let extractionStarting = false;
+let extractViewRevision = 0;
 
-export function doExtract() {
-  if (!game.runActive) return false;   // 撤离信标可能被重复确认；runActive 是本局一次性结算闩
-  syncPlayTime();
-  game.state = 'done';
-  game.runActive = false;
-  clearSave();
-  SDT.Sound.sfx('victory');
-  SDT.Sound.music('title');
-  const B = SDT.Base;
-  // 木材/口粮自动入库（纯资源，没有丢弃的意义）。
-  // Item 16（2026-09-16 老板定版）：离开对局时，消耗口袋只有 1/3 保留下来（逐张判定），
-  // 其余散失；保留下来的回基地消耗口袋，用钥匙复原后回仓库。
-  const keptPocket = [];
-  let lostN = 0;
-  let totalN = 0;
-  game.usedPocket.forEach(p => { totalN += p.count || 1; });
-  game.usedPocket.forEach(p => {
-    for (let k = 0; k < (p.count || 1); k++) {
-      if (Random.random('pocket') < 1 / 3) {
-        const s = keptPocket.find(x => x.card.name === p.card.name);
-        if (s) s.count++;
-        else keptPocket.push({ card: { ...p.card }, count: 1 });
-      } else lostN++;
-    }
-  });
-  game.usedPocket = keptPocket;
-  if (totalN > 0) {
-    UI.log(`[[icon:pocket]] 撤离结算：消耗口袋 <b>${totalN}</b> 张只有 1/3 保留（带回 ${totalN - lostN} 张，散失 ${lostN} 张）`, 'sys');
-  }
-  // Item：首次击败一图首脑并成功撤离 → 解锁第二地图「龙巢」
-  // 迭代评审 09-20：内联解锁改调 unlockNest() 单一写点（legend 接音/文案随 nest.js 版）
-  if (game.bossKilled) unlockNest();
-    B.deposit(game.inventory);
-  B.depositCards(game.usedPocket, true);
-  SDT.Meta.track('extract', { coins: game.coins, actions: game.turn - 1, cls: game.myClass });
-  // 卡牌堆交给整理界面，由玩家决定入不入库
-  const byName = new Map();
-  game.ownedCards.forEach(o => {
-    if (B.isSha(o.card)) return;              // 「初始攻击」不可入库
-    const s = byName.get(o.card.name);
-    if (s) s.count++;
-    else byName.set(o.card.name, { card: { ...o.card }, count: 1 });
-  });
-  extractLeft = [...byName.values()];
+export function resumeExtraction(pending) {
+  const checked = validatePendingExtraction(pending);
+  if (!checked.ok) return checked;
+  game.pendingExtraction = pending;
+  game.extractionPending = false;
+  game.runActive = true;
+  game.state = 'modal';
+  extractLeft = pending.remainingCards.map(stack => ({ card: { ...stack.card }, count: stack.count }));
   renderExtractStash();
-  return true;
+  return { ok: true };
+}
+
+export async function doExtract() {
+  if (!game.runActive || game.pendingExtraction || extractionStarting) return false;
+  extractionStarting = true;
+  const startedFromSlot = getActiveSlot();
+  const initialIdentity = startedFromSlot ? RunStorage.readIdentity(startedFromSlot) : null;
+  const pendingToken = game.extractionPending && typeof game.extractionPending === 'object'
+    ? game.extractionPending : { slotId: startedFromSlot, runId: initialIdentity?.ok ? initialIdentity.value.runId : null };
+  game.extractionPending = pendingToken;
+  const wasNestUnlocked = !!SDT.Base.data.nestUnlocked;
+  game.state = 'modal';
+  try {
+    const started = await extractionCommands.begin();
+    if (game.extractionPending !== pendingToken || getActiveSlot() !== startedFromSlot) return false;
+    if (!started.ok) {
+      if (pendingToken.slotId !== startedFromSlot ||
+          (pendingToken.runId && started.runId && pendingToken.runId !== started.runId)) return false;
+      pendingToken.runId ||= started.runId || null;
+      UI.log(`[[icon:cross]] 撤离整理尚未保存：${started.message || started.code}，可重试`, 'warn');
+      showExtractionRetry();
+      return false;
+    }
+    if (getActiveSlot() !== startedFromSlot) return false;
+    if (pendingToken.slotId !== startedFromSlot || (pendingToken.runId && pendingToken.runId !== started.value.runId)) return false;
+    if (startedFromSlot) {
+      const identity = RunStorage.readIdentity(startedFromSlot);
+      if (!identity.ok || identity.value.runId !== started.value.runId) return false;
+    }
+    game.extractionPending = false;
+    game.pendingExtraction = started.value;
+    game.runActive = true;
+    SDT.Sound.sfx('victory');
+    SDT.Sound.music('title');
+    if (game.bossKilled && !wasNestUnlocked) {
+      UI.log('[[icon:door]] 污染核心的震动平息了……远方的<b>龙巢</b>苏醒——基地解锁了新的远征目标', 'loot');
+      setTimeout(() => { if (SDT.Sound) SDT.Sound.sfx('legend'); }, 350);
+    }
+    const { totalPocketCount, lostPocketCount } = started.value;
+    if (totalPocketCount > 0) {
+      UI.log(`[[icon:pocket]] 撤离结算：消耗口袋 <b>${totalPocketCount}</b> 张只有 1/3 保留（带回 ${totalPocketCount - lostPocketCount} 张，散失 ${lostPocketCount} 张）`, 'sys');
+    }
+    extractLeft = started.value.remainingCards.map(stack => ({ card: { ...stack.card }, count: stack.count }));
+    renderExtractStash();
+    return true;
+  } catch (error) {
+    if (game.extractionPending !== pendingToken || getActiveSlot() !== startedFromSlot) return false;
+    UI.log(`[[icon:cross]] 撤离整理保存遇到错误：${error?.message || error}，请重试`, 'warn');
+    showExtractionRetry();
+    return false;
+  } finally {
+    extractionStarting = false;
+  }
+}
+
+function showExtractionRetry() {
+  game.state = 'modal';
+  UI.showOverlay('', '<div class="pg hub"><h2>撤离结算待恢复</h2><p>撤离已成功，整理快照尚未确认写入。请重试保存后继续。</p><button class="ov-btn ok" data-act="extractRetry">重试撤离整理</button></div>', 'page');
+  UI.act('extractRetry', () => { UI.hideOverlay(); doExtract(); });
 }
 
 function renderExtractStash() {
   const B = SDT.Base;
+  const viewRevision = ++extractViewRevision;
+  const viewSlot = getActiveSlot();
+  const viewRunId = game.pendingExtraction?.runId;
+  const stillThisView = (finished = false) => viewRevision === extractViewRevision && getActiveSlot() === viewSlot &&
+    (game.pendingExtraction?.runId === viewRunId || (finished && !game.runActive && !game.pendingExtraction));
   const woodN = game.inventory.filter(i => i.name === '木材').reduce((a, b) => a + b.count, 0);
   const ratN = game.inventory.filter(i => i.name === '口粮').reduce((a, b) => a + b.count, 0);
   const shaN = game.ownedCards.filter(o => B.isSha(o.card)).length;
@@ -828,61 +873,60 @@ function renderExtractStash() {
         </section>
       </div>
     </div>`, 'page');
-  UI.act('exStash', (d) => {
+  UI.act('exStash', async (d) => {
     const s = extractLeft[+d.i];
     if (!s) return;
     const r = B.stashRoom();
     if (r <= 0) return;
     const take = Math.min(s.count, r);
-    B.depositCards([{ card: s.card, count: take }]);
-    SDT.Meta.track('stash', { count: take });
+    const saved = await extractionCommands.updateCards([{ name: s.card.name, count: take }], viewRunId, viewSlot);
+    if (!stillThisView()) return;
+    if (!saved.ok) { UI.log(`[[icon:cross]] 入库未保存：${saved.message || saved.code}，可重试`, 'warn'); return; }
+    if (saved.unchanged) return;
     Sfx.ding();
     UI.log(`[[icon:archive]] 【<b>${esc(s.card.name)}</b>】×${take} 已放入仓库`, 'loot');
-    s.count -= take;
-    if (s.count <= 0) extractLeft.splice(+d.i, 1);
+    extractLeft = saved.value.remainingCards.map(stack => ({ card: { ...stack.card }, count: stack.count }));
     renderExtractStash();
   });
-  UI.act('exAll', () => {
-    let n = 0;
-    let room = B.stashRoom();
-    for (const s of extractLeft.slice()) {
-      if (room <= 0) break;
-      const take = Math.min(s.count, room);
-      if (take <= 0) continue;
-      B.depositCards([{ card: s.card, count: take }]);
-      SDT.Meta.track('stash', { count: take });
-      s.count -= take;
-      room -= take;
-      n += take;
-      if (s.count <= 0) extractLeft.splice(extractLeft.indexOf(s), 1);
-    }
-    if (n) { Sfx.ding(); UI.log(`[[icon:archive]] 全部入库：<b>${n}</b> 张已放入仓库（仓库余 ${B.stashRoom()} 格）`, 'loot'); }
+  UI.act('exAll', async () => {
+    const selections = extractLeft.map(s => ({ name: s.card.name, count: s.count }));
+    const saved = await extractionCommands.updateCards(selections, viewRunId, viewSlot);
+    if (!stillThisView()) return;
+    if (!saved.ok) { UI.log(`[[icon:cross]] 入库未保存：${saved.message || saved.code}，可重试`, 'warn'); return; }
+    if (saved.count) { Sfx.ding(); UI.log(`[[icon:archive]] 全部入库：<b>${saved.count}</b> 张已放入仓库（仓库余 ${B.stashRoom()} 格）`, 'loot'); }
+    extractLeft = saved.value.remainingCards.map(stack => ({ card: { ...stack.card }, count: stack.count }));
     renderExtractStash();
   });
   // 智能整理（2026-09-16 留言 #27）：一键入库，数量在仓库空格内、优先价值最高的卡牌
-  UI.act('exSmart', () => {
+  UI.act('exSmart', async () => {
     let room = B.stashRoom();
     const ordered = extractLeft.slice().sort((a, b) => SDT.Cards.sellPrice(b.card) - SDT.Cards.sellPrice(a.card));
-    let n = 0;
+    const selections = [];
     for (const s of ordered) {
       if (room <= 0) break;
       const take = Math.min(s.count, room);
-      B.depositCards([{ card: s.card, count: take }]);
-      SDT.Meta.track('stash', { count: take });
-      s.count -= take;
+      selections.push({ name: s.card.name, count: take });
       room -= take;
-      n += take;
-      if (s.count <= 0) extractLeft.splice(extractLeft.indexOf(s), 1);
     }
-    if (n) { Sfx.ding(); UI.log(`[[icon:archive]] 智能整理：按价值入库 <b>${n}</b> 张（仓库余 ${B.stashRoom()} 格）`, 'loot'); }
+    const saved = await extractionCommands.updateCards(selections, viewRunId, viewSlot);
+    if (!stillThisView()) return;
+    if (!saved.ok) { UI.log(`[[icon:cross]] 智能整理未保存：${saved.message || saved.code}，可重试`, 'warn'); return; }
+    if (saved.count) { Sfx.ding(); UI.log(`[[icon:archive]] 智能整理：按价值入库 <b>${saved.count}</b> 张（仓库余 ${B.stashRoom()} 格）`, 'loot'); }
+    extractLeft = saved.value.remainingCards.map(stack => ({ card: { ...stack.card }, count: stack.count }));
     renderExtractStash();
   });
-  UI.act('exFinish', () => showExtractDone());
+  UI.act('exFinish', async () => {
+    const saved = await extractionCommands.finish(viewRunId, viewSlot);
+    if (!stillThisView(true)) return;
+    if (!saved.ok) { UI.log(`[[icon:cross]] 整理完成未保存：${saved.message || saved.code}，可重试`, 'warn'); return; }
+    showExtractDone();
+  });
 }
 
 // 整理完成 → 撤离结算（回基地 / 再出发）
 function showExtractDone() {
   const B = SDT.Base;
+  game.extractionPending = false;
   extractLeft = null;
   const woodN = game.inventory.filter(i => i.name === '木材').reduce((a, b) => a + b.count, 0);
   const ratN = game.inventory.filter(i => i.name === '口粮').reduce((a, b) => a + b.count, 0);

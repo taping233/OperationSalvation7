@@ -6,6 +6,7 @@ import { MAP } from './game.session.js';
 import { SLOT_COUNT, buildDerived, cam, canvas, configureGameRuntime, ctx, dpr, game, hasRun, migrateOldSave, openLeaveMenu, openSettings, openTitleGuide, quitGame, saveGame, setLobby, showTitle, startNewGame, _set_dpr, _set_cam } from './game.session.js';
 import { bindRunMixins, devForceBattle, devJumpNode, moveTo, openDevConsole, reenterCell, openClassChoice, openShop, showRunTransition } from './game.run.js';
 import { PRELOAD_SCENES } from './game.run.data.js';
+import { resumeExtraction } from './game.run.altar.js';
 import { PERFORMANCE_BUDGETS, STARTUP_SCENE_KEYS } from './performance-budgets.js';
 import { openBaseHub } from './game.hub.js';
 import { bindBagMixins, showBackpack, setBagReturnHook } from './game.bag.js';
@@ -16,7 +17,7 @@ import { renderScheduler } from './render-scheduler.js';
 import { nodeHitRadius } from './camera.js';
 import { renderMiniMap } from './game.session.js';
 
-  configureGameRuntime({ openClassChoice, openBaseHub, rebuildNotes, resize: () => resize(), showRunTransition, syncDevVisibility });
+  configureGameRuntime({ openClassChoice, openBaseHub, rebuildNotes, resize: () => resize(), showRunTransition, syncDevVisibility, resumeExtraction });
   configureShopRuntime({ openBag: (onReturn) => {
     setBagReturnHook(onReturn);
     showBackpack(true);

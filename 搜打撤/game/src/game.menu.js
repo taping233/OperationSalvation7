@@ -4,7 +4,7 @@ function createGameMenuController(deps) {
   const {
     SDT, UI, game, runtime, SLOT_COUNT, esc, readSlot, loadGame, clearSlot,
     saveGame, syncPlayTime, clearSave, clearAllSlots, getActiveSlot, setActiveSlot, preflightRunMap,
-    hasRun, RunStorage, ensureBattleReady = async () => SDT.Battle,
+    hasRun, RunStorage, ensureBattleReady = async () => SDT.Battle, recoverSlotIfPending, terminalCommands,
   } = deps;
 
   // 存储安全封装（迭代评审 09-20 G-P2）：隐私模式/配额满时裸调 localStorage 会抛异常，
@@ -598,17 +598,37 @@ function createGameMenuController(deps) {
       }, 2600);
       return false;
     };
-    UI.act('newSlot', (d) => launch(+d.slot, () => { SDT.Base.reset(+d.slot); runtime.openBaseHub('deploy'); }));
-    UI.act('enterSlot', (d) => {
+    let enteringSlot = false;
+    const restoreError = message => {
+      UI.log(`[[icon:cross]] ${message}`, 'warn');
+      const visible = document.getElementById('slotRestoreError');
+      if (visible) { visible.hidden = false; visible.textContent = message; visible.tabIndex = -1; visible.focus(); }
+    };
+    UI.act('newSlot', (d) => { if (!enteringSlot) launch(+d.slot, () => { SDT.Base.reset(+d.slot); runtime.openBaseHub('deploy'); }); });
+    UI.act('enterSlot', async (d) => {
+      if (enteringSlot) return;
       const slot = +d.slot;
+      if (recoverSlotIfPending) {
+        const picker = document.getElementById('slotRestoreError');
+        enteringSlot = true;
+        try {
+          const recovered = await recoverSlotIfPending(slot);
+          if (picker && !picker.isConnected) return;
+          if (!recovered.ok) {
+            restoreError(`${recovered.message || '存档恢复尚未完成'}；原档与恢复记录已保留，请重试进入该档位`);
+            return;
+          }
+        } catch {
+          if (!picker || picker.isConnected) restoreError('存档恢复失败；原档与恢复记录已保留，请重试进入该档位');
+          return;
+        } finally { enteringSlot = false; }
+      }
       const hasSavedRun = RunStorage.has(slot);
       if (hasSavedRun) {
         const checked = preflightRunMap(slot);
         if (!checked.ok) {
           const message=`${checked.message || '路线存档无法安全恢复'}，原档已保留；请稍后用兼容版本重试，或显式覆盖档位`;
-          UI.log(`[[icon:cross]] ${message}`, 'warn');
-          const visible=document.getElementById('slotRestoreError');
-          if(visible){visible.hidden=false;visible.textContent=message;visible.tabIndex=-1;visible.focus();}
+          restoreError(message);
           return;
         }
       }
@@ -648,11 +668,13 @@ function createGameMenuController(deps) {
       });
     });
     UI.act('overwriteSlot', (d) => {
+      if (enteringSlot) return;
       if (!armConfirm(`[data-act="overwriteSlot"][data-slot="${d.slot}"]`, '确认重开？', '覆盖重开')) return;
       clearSlot(+d.slot);
       launch(+d.slot, () => { SDT.Base.reset(+d.slot); runtime.openBaseHub('deploy'); });
     });
     UI.act('delSlot', (d) => {
+      if (enteringSlot) return;
       if (!armConfirm(`[data-act="delSlot"][data-slot="${d.slot}"]`, '确认删除？', '删除')) return;
       clearSlot(+d.slot);
       UI.log(`[[icon:trash]] 已删除【档位 ${d.slot}】的存档（含基地数据）`, 'warn');
@@ -699,46 +721,89 @@ function createGameMenuController(deps) {
         }, 2600);
         return;
       }
-      abandonRun();
+      return abandonRun();
     });
   }
 
   function abandonRun() {
-    if (!game.runActive) return false;   // 双击确认/迟到动作不能重复结算同一局
-    syncPlayTime();
-    game.state = 'done';
-    game.runActive = false;
-    clearSave();
-    SDT.Sound.sfx('defeat');
-    SDT.Sound.music('title');
-    // 带入本局的卡牌全部丢失（即使放进了安全格）；获得的卡只有安全格里的被宠物运回
-    const kept = game.ownedCards.filter(o => o.safe && !o.brought);
-    if (kept.length) SDT.Base.depositCards(kept.map(o => ({ card: o.card, count: 1 })));
-    const broughtN = game.ownedCards.filter(o => o.brought).length;
-    const keptMap = new Map();
-    kept.forEach(o => {
-      const k = o.card.name;
-      if (!keptMap.has(k)) keptMap.set(k, { card: o.card, count: 0 });
-      keptMap.get(k).count++;
-    });
-    const keptList = [...keptMap.values()];
-    UI.log('<b>[[icon:flag]] 已放弃对局</b>：带入的卡牌全部遗失，物资与金币散失', 'warn');
-    const keptHTML = keptList.length
-      ? `<p class="ov-note">[[icon:lock]] 宠物从安全格抢运回 <b>${kept.length}</b> 张对局中获得的卡牌：` +
-        keptList.map(s => `${esc(s.card.name)}${s.count > 1 ? ' ×' + s.count : ''}`).join('、') + '</p>'
-      : '<p class="ov-note">安全格里没有对局中获得的卡牌——本次放弃没有带回任何卡牌。</p>';
-    UI.showOverlay('[[icon:flag]] 已放弃对局', `
-      <p class="ov-stats">带入本局的 <b>${broughtN}</b> 张卡牌全部丢失；对局中获得的卡牌除安全格保护的外也全部失去；
-        物资与 <b class="gold">${game.coins} 币</b>一并散失。</p>
-      ${keptHTML}
-      <div class="ov-btns">
-        <button class="ov-btn" data-act="goBase">[[icon:home]] 回基地</button>
-        <button class="ov-btn ok" data-act="toTitle">[[icon:archive]] 回主菜单</button>
-      </div>`);
-    UI.act('goBase', () => { UI.hideOverlay(); runtime.openBaseHub('deploy'); });
-    UI.act('toTitle', () => { UI.hideOverlay(); showTitle(); });
-    UI.refresh(game);
-    return true;
+    if (!game.runActive || game.terminalPending) return false;
+    const slotId = getActiveSlot();
+    const token = {
+      kind: 'abandon', slotId, cards: game.ownedCards.filter(o => o.safe && !o.brought).map(o => ({ card: o.card, count: 1 })),
+      broughtN: game.ownedCards.filter(o => o.brought).length, attempt: null, busy: false, promise: null, ephemeral: !slotId,
+    };
+    game.terminalPending = token;
+    game.state = 'terminalPending';
+    const current = () => game.terminalPending === token && getActiveSlot() === token.slotId;
+    const finish = () => {
+      if (!current()) return false;
+      game.terminalPending = null;
+      game.state = 'done';
+      game.runActive = false;
+      SDT.Sound.sfx('defeat');
+      SDT.Sound.music('title');
+      if (token.ephemeral) UI.log('[[icon:info]] 测试结算仅更新内存，没有写入基地存档', 'sys');
+      const kept = token.cards;
+      const keptMap = new Map();
+      kept.forEach(o => {
+        const k = o.card.name;
+        if (!keptMap.has(k)) keptMap.set(k, { card: o.card, count: 0 });
+        keptMap.get(k).count++;
+      });
+      const keptList = [...keptMap.values()];
+      UI.log('<b>[[icon:flag]] 已放弃对局</b>：带入的卡牌全部遗失，物资与金币散失', 'warn');
+      const keptHTML = keptList.length
+        ? `<p class="ov-note">[[icon:lock]] 宠物从安全格抢运回 <b>${kept.length}</b> 张对局中获得的卡牌：` +
+          keptList.map(s => `${esc(s.card.name)}${s.count > 1 ? ' ×' + s.count : ''}`).join('、') + '</p>'
+        : '<p class="ov-note">安全格里没有对局中获得的卡牌——本次放弃没有带回任何卡牌。</p>';
+      UI.showOverlay('[[icon:flag]] 已放弃对局', `
+        <p class="ov-stats">带入本局的 <b>${token.broughtN}</b> 张卡牌全部丢失；对局中获得的卡牌除安全格保护的外也全部失去；
+          物资与 <b class="gold">${game.coins} 币</b>一并散失。</p>
+        ${token.ephemeral ? '<p class="ov-note">开发测试档未选择存档槽；基地奖励仅暂存于内存。</p>' : ''}
+        ${keptHTML}
+        <div class="ov-btns">
+          <button class="ov-btn" data-act="goBase">[[icon:home]] 回基地</button>
+          <button class="ov-btn ok" data-act="toTitle">[[icon:archive]] 回主菜单</button>
+        </div>`);
+      UI.act('goBase', () => { UI.hideOverlay(); runtime.openBaseHub('deploy'); });
+      UI.act('toTitle', () => { UI.hideOverlay(); showTitle(); });
+      UI.refresh(game);
+      return true;
+    };
+    const showRetry = message => {
+      if (!current()) return;
+      token.busy = false;
+      token.promise = null;
+      UI.showOverlay('[[icon:cross]] 终局结算未保存', `<p class="ov-note">${esc(message || '基地与对局尚未完成结算，原对局仍保留。')}</p><button class="ov-btn ok" data-act="retryAbandon">重试结算</button>`);
+      UI.act('retryAbandon', () => { if (current() && !token.busy) return run(); });
+      UI.refresh(game);
+    };
+    const run = async () => {
+      if (!current() || token.busy) return false;
+      token.busy = true;
+      token.promise = (async () => {
+        try {
+          if (token.ephemeral) {
+            terminalCommands.projectEphemeral({ command: 'run.abandon', cards: token.cards });
+            return finish();
+          }
+          if (!terminalCommands) { showRetry('终局安全提交服务不可用'); return false; }
+          if (!token.attempt) {
+            const created = await terminalCommands.createAttempt({ slotId, command: 'run.abandon', cards: token.cards });
+            if (!current()) return false;
+            if (!created.ok) { showRetry(created.message); return false; }
+            if (created.replay) return finish();
+            token.attempt = created.attempt;
+          }
+          const committed = await terminalCommands.commitAttempt(token.attempt);
+          if (!current()) return false;
+          if (!committed.ok) { showRetry(committed.message); return false; }
+          return finish();
+        } catch (error) { showRetry(error && error.message); return false; }
+      })();
+      return token.promise;
+    };
+    return run();
   }
 
   function quitGame() {
