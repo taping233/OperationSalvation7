@@ -1,13 +1,13 @@
 /* Cabinet joinery: the same brass, paper and leather from index to inspection. */
 body.cardlib-open #overlay .photo-studio-v3.studio-index-layout .library-head {
-  grid-template-columns:58px minmax(0,1fr) auto!important;
+  grid-template-columns:minmax(0,1fr) auto!important;
+  grid-template-areas:'tools count'!important;
   border-bottom:3px solid #5f573d!important;
   box-shadow:inset 0 -1px #baa47770,0 3px 0 #080f0a,0 5px 0 #a18b5838;
 }
-/* Match the cover exit: same SVG, 58px hit area and ak-sq responsive scaling. */
+/* Match the cover exit: same anchor, button dimensions and ak-sq responsive scaling. */
 body.cardlib-open #overlay .studio-index-layout .studio-exit {
-  grid-area:close;
-  width:58px;
+  width:64px;
   height:58px;
   padding:0;
   border:1px solid transparent;
@@ -22,6 +22,14 @@ body.cardlib-open #overlay .studio-index-layout .studio-exit:hover {
   color:#fff;
   border-color:var(--akmint);
   filter:drop-shadow(0 0 8px #a9efc366);
+}
+body.cardlib-open #overlay .studio-index-layout .studio-exit-anchor { z-index:12; }
+/* Restore the velvet photo wall beneath the gallery, darkened to sit with the green cabinet UI. */
+body.cardlib-open #overlay .photo-studio-v3.studio-index-layout .clib-main {
+  background:
+    linear-gradient(180deg,rgba(10,18,13,.28),rgba(8,14,10,.46)),
+    url('../assets/ui/photo-studio/wall.webp') center bottom/cover no-repeat,
+    linear-gradient(180deg,#182019,#0d150f)!important;
 }
 body.cardlib-open #overlay .studio-index-layout .library-title {
   position:relative;

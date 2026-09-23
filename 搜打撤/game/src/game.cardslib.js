@@ -452,13 +452,15 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
     const selectedPreview = libCards.find(c => c.id === libSelectedId) || first;
     UI.showOverlay('', `
       <div class="pg card-library-page photo-studio-v3 studio-index-layout${libEditMode ? ' edit-mode' : ''}">
-        <header class="pg-head library-head">
+        <div class="ak-tl studio-exit-anchor">
           <button class="ak-sq ak-exit studio-exit" data-act="closeCardPage" title="退出照相馆（Esc）" aria-label="关闭照相馆">
             <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
               <path d="M9 4h9a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 18 20H9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
               <path d="M4 12h10M4 12l4-4M4 12l4 4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </button>
+        </div>
+        <header class="pg-head library-head">
           <span class="clib-count"><small>馆藏</small><b>${libCards.length}</b><small>张</small></span>
           <div class="library-tools">${libEditMode ? '<button class="hs-btn" data-act="exportNotes" aria-label="导出全部照片备注">[[icon:download]] 导出备注</button>' : ''}${editorTools}</div>
         </header>
