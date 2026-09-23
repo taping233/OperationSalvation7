@@ -7,6 +7,7 @@ import { createEffectExecutor, splitEffectClauses } from '../game/src/battle.eff
 import { RunStorage } from '../game/src/game.storage.js';
 import { GameStore } from '../game/src/game.store.js';
 import { BOOT_ORDER } from '../game/src/boot-order.js';
+import { readModuleSources, buildModuleGraph, assertAcyclic } from '../scripts/architecture-graph.mjs';
 
 describe('规则与接口契约', () => {
   it('关键玩法数值保持冻结且与现行规则一致', () => {
@@ -110,27 +111,8 @@ describe('旧对局存档迁移', () => {
 describe('ESM 依赖方向', () => {
   it('src 模块不存在循环依赖', () => {
     const root = resolve(process.cwd(), 'game/src');
-    const files = readdirSync(root).filter(name => name.endsWith('.js'));
-    const graph = new Map(files.map(name => [name, []]));
-    for (const name of files) {
-      const source = readFileSync(join(root, name), 'utf8');
-      for (const match of source.matchAll(/from\s+['"]\.\/(.+?\.js)['"]|import\s+['"]\.\/(.+?\.js)['"]/g)) {
-        const dependency = basename(match[1] || match[2]);
-        if (graph.has(dependency)) graph.get(name).push(dependency);
-      }
-    }
-    const visiting = new Set();
-    const visited = new Set();
-    const visit = (name, trail = []) => {
-      if (visiting.has(name)) throw new Error(`循环依赖：${[...trail, name].join(' -> ')}`);
-      if (visited.has(name)) return;
-      visiting.add(name);
-      for (const dependency of graph.get(name)) visit(dependency, [...trail, name]);
-      visiting.delete(name);
-      visited.add(name);
-    };
-    for (const name of files) visit(name);
-    expect(visited.size).toBe(files.length);
+    const graph = buildModuleGraph(readModuleSources(root));
+    expect(assertAcyclic(graph)).toBe(graph.size);
   });
 
   it('game.session 不反向导入页面功能模块', () => {
