@@ -382,7 +382,7 @@ body.cardlib-open #overlay .card-library-page .clib-empty {
 body.cardlib-open #overlay .photo-studio-v3 {
   --studio-gold:#d4af7a;
   --studio-gold-soft:#ecd9b0;
-  --studio-ice:#d4af7a;
+  --studio-ice:#8fd4e8;
   --studio-panel:#1d1512;
   --studio-control:#251b14;
   --studio-control-hi:#2e2218;
@@ -395,6 +395,11 @@ body.cardlib-open #overlay .photo-studio-v3 {
   --studio-brass:#c9a468;
   --studio-brass-lo:#8a6a3c;
   --studio-velvet:#5a1c24;
+  /* 照相馆内字体口径（09-23 拍板）：只用 HarmonyOS Sans + Noto Sans 两支，
+     遮蔽 :root 同名变量，本页后代 var(--font-ui)/var(--serif) 全部走此栈 */
+  --font-ui:'HarmonyOS Sans SC','HarmonyOS Sans','Noto Sans SC Sub','Noto Sans SC',sans-serif;
+  --serif:'HarmonyOS Sans SC','HarmonyOS Sans','Noto Sans SC Sub','Noto Sans SC',sans-serif;
+  font-family:var(--font-ui)!important;
   display:flex!important;
   flex-direction:column!important;
   min-height:100%!important;
@@ -415,39 +420,34 @@ body.cardlib-open #overlay .photo-studio-v3 .library-head {
   padding:14px clamp(18px,2.2vw,34px) 12px!important;
   align-items:center!important;
   border-bottom:1px solid rgba(212,175,122,.22)!important;
-  /* 门头牌匾生图：cover 后只显示图的一条窄带，position 49% 让牌匾木框条带（图内垂直
-     26%-72%）横贯页头正中，标题字直接落在木面上；暗化压到 0.58-0.68 保金框与射灯光晕可见 */
-  background:
-    linear-gradient(180deg, rgba(26,13,11,.58), rgba(20,10,8,.68)),
-    url('../assets/ui/photo-studio/sign.webp') center 49%/cover no-repeat,
-    linear-gradient(180deg,#221412,#180d0b)!important;
+  /* 门头牌匾图（sign.webp）随 09-23「彩带去掉」拍板移除：cover 窄带裁出的杂色横条 */
+  background:linear-gradient(180deg,#221412,#180d0b)!important;
   box-shadow:inset 0 -1px rgba(212,175,122,.10),0 4px 14px rgba(0,0,0,.5);
 }
-body.cardlib-open #overlay .photo-studio-v3 .library-title { grid-area:title; padding:0!important; }
-body.cardlib-open #overlay .photo-studio-v3 .library-kicker {
-  display:block;
-  margin:0 0 3px;
-  color:var(--studio-gold)!important;
-  font:700 9px/1.2 "Cascadia Code",monospace!important;
-  letter-spacing:.24em!important;
-}
-body.cardlib-open #overlay .photo-studio-v3 .library-kicker::before {
+body.cardlib-open #overlay .photo-studio-v3 .library-title { grid-area:title; padding:0!important; position:relative; }
+/* kicker 装饰行（英文 mono + 横线）与暗房红灯随 09-23「删多余美术」拍板移除 */
+/* 标题金翼衬花（09-23 出图落地：painterly 金翼纹样垫在「照相馆」文字后，炉石标题花纹同位） */
+body.cardlib-open #overlay .photo-studio-v3 .library-title::before {
   content:'';
-  display:inline-block;
-  width:18px;
-  height:1px;
-  margin-right:8px;
-  vertical-align:middle;
-  background:currentColor;
-  opacity:.72;
+  position:absolute;
+  left:-26px;
+  top:50%;
+  transform:translateY(-58%);
+  width:250px;
+  height:130px;
+  background:url('../assets/ui/photo-studio/header-flourish.webp') no-repeat center/contain;
+  opacity:.42;
+  filter:drop-shadow(0 2px 6px rgba(0,0,0,.5));
+  pointer-events:none;
 }
 body.cardlib-open #overlay .photo-studio-v3 .library-title h2 {
   display:block!important;
+  position:relative;
   margin:0!important;
   color:#f5f5f5!important;
   font:400 clamp(23px,2.2vw,31px)/1.1 var(--serif)!important;
   letter-spacing:7px!important;
-  text-shadow:none!important;
+  text-shadow:0 2px 8px rgba(0,0,0,.75)!important;
 }
 body.cardlib-open #overlay .photo-studio-v3 .clib-count {
   grid-area:count;
@@ -468,35 +468,9 @@ body.cardlib-open #overlay .photo-studio-v3 .clib-count small:first-child {
 }
 body.cardlib-open #overlay .photo-studio-v3 .clib-count b {
   color:var(--studio-gold-soft)!important;
-  font:700 16px/1 ui-monospace,monospace!important;
+  font:700 16px/1 var(--font-ui)!important;
 }
 body.cardlib-open #overlay .photo-studio-v3 .clib-count i { display:none; }
-/* 暗房红灯（批次四）：挂在 kicker 行首，筛选重排=暗房在冲洗，亮 900ms（JS 挂 .on）；
-   本体只动 opacity，光晕是 ::after 独立层也只动 opacity */
-body.cardlib-open #overlay .photo-studio-v3 .studio-lamp {
-  position:relative;
-  display:inline-block;
-  width:7px;
-  height:7px;
-  margin:0 9px 0 2px;
-  border-radius:50%;
-  vertical-align:1px;
-  background:radial-gradient(circle at 35% 30%, #b8837a, #7e2a22 62%, #571712);
-  box-shadow:0 0 0 1px rgba(0,0,0,.45);
-  opacity:.45;
-  transition:opacity .28s ease;
-}
-body.cardlib-open #overlay .photo-studio-v3 .studio-lamp::after {
-  content:'';
-  position:absolute;
-  inset:-5px;
-  border-radius:50%;
-  background:radial-gradient(circle, rgba(255,96,66,.6), transparent 70%);
-  opacity:0;
-  transition:opacity .28s ease;
-}
-body.cardlib-open #overlay .photo-studio-v3 .studio-lamp.on { opacity:1; }
-body.cardlib-open #overlay .photo-studio-v3 .studio-lamp.on::after { opacity:1; }
 body.cardlib-open #overlay .photo-studio-v3 .library-head>.pg-close {
   grid-area:close;
   position:static!important;
@@ -563,6 +537,7 @@ body.cardlib-open #overlay .photo-studio-v3 .studio-filterbar {
   gap:9px;
   align-items:center;
   padding:8px clamp(18px,2.2vw,34px);
+  border-top:1px solid rgba(212,175,122,.16);
   border-bottom:1px solid rgba(212,175,122,.14);
   background:var(--studio-panel);
   box-shadow:inset 0 1px rgba(255,255,255,.05),inset 0 -1px rgba(0,0,0,.4);
@@ -579,7 +554,7 @@ body.cardlib-open #overlay .photo-studio-v3 .type-tab {
   flex:0 0 auto;
   min-height:37px;
   display:grid;
-  grid-template-columns:15px auto auto;
+  grid-template-columns:auto auto;
   align-items:center;
   gap:6px;
   padding:6px 9px;
@@ -588,11 +563,10 @@ body.cardlib-open #overlay .photo-studio-v3 .type-tab {
   background:transparent;
   color:var(--studio-muted);
 }
-body.cardlib-open #overlay .photo-studio-v3 .type-tab i { display:grid; place-items:center; opacity:.66; }
-body.cardlib-open #overlay .photo-studio-v3 .type-tab .ic { width:13px; height:13px; }
+/* 页签图标随 09-23「先撤图标只留文字+计数」拍板移除，待图标重绘批落库后统一挂回 */
 body.cardlib-open #overlay .photo-studio-v3 .type-tab em {
   color:#6b5f50;
-  font:700 10px "Cascadia Code",monospace;
+  font:700 10px var(--font-ui);
   font-style:normal;
 }
 /* 选中页签：金色线框（不再用实底色块），金字金计数 */
@@ -693,15 +667,16 @@ body.cardlib-open #overlay .photo-studio-v3 .lib-grid {
   overflow-y:auto;
   overflow-x:hidden;
   display:grid!important;
-  grid-template-columns:repeat(6,minmax(0,1fr))!important;
-  gap:24px 18px!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:32px 26px!important;
   padding:20px 12px 42px!important;
   align-content:start;
   scrollbar-width:thin;
   scrollbar-color:#4a3230 transparent;
-  /* 影廊射灯：沿六列各一束静态锥光打向照片（背景画在容器上不随内容滚动，灯"钉在墙上"）；
-     尾部一道宽暗角收底。纯静态渐变一次绘制，不碰动画铁律 */
+  /* 影廊射灯：沿四列各一束静态锥光打向照片（背景画在容器上不随内容滚动，灯"钉在墙上"）；
+     首层=光衰减（顶部暖亮→36% 消失，09-23 ⑥）；尾部一道宽暗角收底。纯静态渐变 */
   background:
+    linear-gradient(180deg, rgba(255,218,168,.055), transparent 36%),
     radial-gradient(150px 480px at 8% -30px, rgba(255,218,168,.11), transparent 74%),
     radial-gradient(150px 480px at 25% -30px, rgba(255,218,168,.11), transparent 74%),
     radial-gradient(150px 480px at 41.7% -30px, rgba(255,218,168,.11), transparent 74%),
@@ -723,8 +698,6 @@ body.cardlib-open #overlay .photo-studio-v3 .lib-item {
   content-visibility:auto;
   contain:layout style;
   contain-intrinsic-size:auto 252px!important;
-  perspective:760px;
-  rotate:var(--photo-tilt,0deg);
   transition:transform .18s ease!important;
 }
 body.cardlib-open #overlay .photo-studio-v3 .lib-item:hover {
@@ -767,9 +740,6 @@ body.cardlib-open #overlay .photo-studio-v3 .studio-photo-paper {
     0 4px 0 rgba(38,30,22,.3),
     var(--photo-shadow-x,0) var(--photo-shadow-y,16px) min(var(--photo-shadow-blur,28px),22px) rgba(10,4,3,.55),
     inset 1px 1px 0 rgba(255,255,255,.6);
-  transform:rotateX(var(--photo-lean-x,0deg)) rotateY(var(--photo-lean-y,0deg)) translateZ(0);
-  transform-origin:50% 2%;
-  backface-visibility:hidden;
   transition:border-color .16s ease,box-shadow .16s ease;
 }
 /* 黄铜相片夹：顶部居中一条金属横夹，影廊的"挂相"方式 */
@@ -786,7 +756,8 @@ body.cardlib-open #overlay .photo-studio-v3 .studio-photo-paper::before {
   background:linear-gradient(180deg,var(--studio-brass-hi) 0%,var(--studio-brass) 46%,var(--studio-brass-lo) 82%,#6b4f2a 100%);
   box-shadow:0 2px 4px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.65);
 }
-/* 磨损斑伪元素已随拟物减法移除（::after 不再使用） */
+/* 纸纹颗粒（09-23 ⑤）：::after 复用为 grain 层——程序生成 128px 无缝噪点，
+   multiply 低透明度铺满整卡（照片上=银盐颗粒，白边上=纸纤维，主题吻合） */
 body.cardlib-open #overlay .photo-studio-v3 .studio-photo-art {
   position:relative;
   display:block;
@@ -794,7 +765,7 @@ body.cardlib-open #overlay .photo-studio-v3 .studio-photo-art {
   aspect-ratio:4/3;
   border:1px solid rgba(48,44,38,.74);
   background:radial-gradient(ellipse at 50% 38%,#26221e,#14100d 82%);
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,.1),inset 0 0 14px rgba(10,4,2,.3);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.1),inset 0 0 12px rgba(10,4,2,.16);
 }
 body.cardlib-open #overlay .photo-studio-v3 .studio-photo-art::before,
 body.cardlib-open #overlay .photo-studio-v3 .studio-photo-art::after {
@@ -805,41 +776,26 @@ body.cardlib-open #overlay .photo-studio-v3 .studio-photo-art::after {
   pointer-events:none;
 }
 body.cardlib-open #overlay .photo-studio-v3 .studio-photo-art::before {
-  box-shadow:inset 0 0 10px rgba(8,4,3,.34),inset 0 -9px 13px rgba(10,6,4,.12);
+  box-shadow:inset 0 0 7px rgba(8,4,3,.16),inset 0 -9px 13px rgba(10,6,4,.06);
 }
 /* 冲印质感：暖纱+暗角罩层（::after，静态一次绘制）。轻做口径——不改变卡面画风定版，
-   只把高饱和原画往"银盐冲印"方向拢半步 */
+   只把高饱和原画往"银盐冲印"方向拢半步（09-23 暗卡提亮：暗角 .2→.12） */
 body.cardlib-open #overlay .photo-studio-v3 .studio-photo-art::after {
   background:
     linear-gradient(180deg, rgba(255,234,196,.06), transparent 32%),
-    radial-gradient(ellipse at 50% 42%, transparent 58%, rgba(62,42,24,.2));
+    radial-gradient(ellipse at 50% 42%, transparent 62%, rgba(62,42,24,.12));
 }
+/* 暗卡提亮（09-23 批次，曝光回调）：静态滤镜一次绘制、无 transition/animation；
+   brightness 曾到 1.14 老板嫌曝光过亮 → 回调 1.03，只保轻微提亮不吃高光 */
 body.cardlib-open #overlay .photo-studio-v3 .studio-photo-art img {
   width:100%;
   height:100%;
   display:block;
   object-fit:cover;
-  filter:sepia(.07) saturate(.96) contrast(1.02);
+  filter:sepia(.04) saturate(1.04) contrast(1.05) brightness(1.03);
 }
-/* 费用：黄铜圆铭牌（原青色玻璃球退役） */
-body.cardlib-open #overlay .photo-studio-v3 .studio-photo-cost {
-  position:absolute;
-  z-index:5;
-  top:-5px;
-  left:-5px;
-  width:34px;
-  height:34px;
-  display:grid;
-  place-items:center;
-  border:1px solid var(--studio-brass-lo);
-  border-radius:50%;
-  color:#2e1f10;
-  background:radial-gradient(circle at 34% 28%,var(--studio-brass-hi),var(--studio-brass) 52%,var(--studio-brass-lo) 88%);
-  box-shadow:0 3px 8px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.6);
-  font:700 14px/1 ui-monospace,monospace;
-  text-shadow:0 1px 0 rgba(255,246,228,.5);
-}
-/* 白边下部：名字+类型注记居中，右下角留给稀有度馆印——宝丽来留白还给白边 */
+/* 费用铜币已随 09-23「照片不是卡牌」拍板移除（费用数据在选片台文字行） */
+/* 白边下部：只有名字居中——照片墙上一张照片 = 画 + 一行名字 */
 body.cardlib-open #overlay .photo-studio-v3 .studio-photo-caption {
   position:relative;
   display:grid;
@@ -851,10 +807,13 @@ body.cardlib-open #overlay .photo-studio-v3 .studio-photo-caption {
 body.cardlib-open #overlay .photo-studio-v3 .studio-photo-caption b {
   overflow:hidden;
   color:#241f18;
-  font:700 14px/1.2 var(--serif);
-  letter-spacing:.08em;
-  text-overflow:ellipsis;
-  white-space:nowrap;
+  font:700 15px/1.25 var(--serif);
+  letter-spacing:.06em;
+  white-space:normal;
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  min-height:2.5em;
 }
 body.cardlib-open #overlay .photo-studio-v3 .studio-photo-caption small {
   overflow:hidden;
@@ -864,85 +823,10 @@ body.cardlib-open #overlay .photo-studio-v3 .studio-photo-caption small {
   text-overflow:ellipsis;
   white-space:nowrap;
 }
-/* 注记行：只剩类型小字（相纸下方的铅笔注记语言），不再横条铺满 */
-body.cardlib-open #overlay .photo-studio-v3 .studio-photo-marks {
-  display:block;
-  width:100%;
-  overflow:visible;
-  color:#8a8175;
-  letter-spacing:.04em;
-}
-body.cardlib-open #overlay .photo-studio-v3 .photo-type-mark,
-body.cardlib-open #overlay .photo-studio-v3 .photo-rarity-mark {
-  min-width:0;
-  overflow:hidden;
-  border-radius:1px;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-}
-body.cardlib-open #overlay .photo-studio-v3 .photo-type-mark {
-  display:inline-block;
-  border:0;
-  background:transparent;
-  color:#8a8175;
-  font:600 9.5px/1.4 ui-monospace,monospace;
-  letter-spacing:.14em;
-}
-/* 稀有度=馆印：白边右下角一枚 gem 色圆章（双圈套印+微落影），棱彩=全息贴标 */
-body.cardlib-open #overlay .photo-studio-v3 .photo-rarity-mark {
-  position:absolute;
-  right:5px;
-  bottom:2px;
-  width:44px;
-  height:44px;
-  display:grid;
-  place-items:center;
-  padding:0;
-  border-radius:50%;
-  border:0;
-  color:#fff8ea;
-  background:radial-gradient(circle at 36% 30%, color-mix(in srgb,var(--gem,#777) 72%,#fff) 0%, var(--gem,#777) 46%, color-mix(in srgb,var(--gem,#777) 78%,#1c140e) 100%);
-  box-shadow:
-    inset 0 0 0 2px rgba(255,250,236,.4),
-    inset 0 0 0 5px rgba(28,18,10,.22),
-    0 2px 4px rgba(24,14,8,.4);
-  font-family:var(--serif);
-  font-size:12.5px;
-  font-weight:800;
-  letter-spacing:1.5px;
-  line-height:1;
-  text-align:center;
-  text-shadow:0 1px 1px rgba(20,14,10,.55);
-  transform:none;
-}
-/* 棱彩=全息贴标：幻彩流彩圆章+细描边，保留全息身份 */
-body.cardlib-open #overlay .photo-studio-v3 .studio-photo.rv7 .photo-rarity-mark,
-body.cardlib-open #overlay .photo-studio-v3 .studio-photo.rv-prism .photo-rarity-mark {
-  color:#3d1c3a;
-  background:
-    linear-gradient(135deg,
-      rgba(201,119,161,.9),rgba(215,181,102,.9) 34%,rgba(112,175,162,.9) 66%,rgba(116,143,187,.9));
-  box-shadow:
-    inset 0 0 0 1.5px rgba(255,255,255,.5),
-    inset 0 0 0 4px rgba(179,107,255,.28),
-    0 1px 3px rgba(24,14,8,.4);
-  text-shadow:0 1px 0 rgba(255,255,255,.55);
-}
-/* 藏品编号（批次四）：白边下缘手写楷体小号，按 id 稳定哈希（JS photoNo） */
-body.cardlib-open #overlay .photo-studio-v3 .studio-photo-no {
-  display:block;
-  margin-top:2px;
-  color:#9a8d79;
-  font:12px/1.2 'KaiTi','STKaiti','BiauKai',serif;
-  font-style:normal;
-  letter-spacing:2px;
-  opacity:.8;
-}
-/* 卷角装饰已随拟物减法移除 */
-/* 悬停：整卡轻微前倾+落影加深，"拿起照片"的实体手感 */
+/* 类型小字/稀有度馆印/瓦片编号已随 09-23「照片墙上只有画+名字」拍板移除 */
+/* 悬停：照片从墙上抬起（整卡上浮+落影加深），静态无 3D 变形 */
 body.cardlib-open #overlay .photo-studio-v3 .lib-item:hover .studio-photo-paper,
 body.cardlib-open #overlay .photo-studio-v3 .studio-photo:focus-visible .studio-photo-paper {
-  transform:rotateX(calc(var(--photo-lean-x,0deg) - 1deg)) rotateY(var(--photo-lean-y,0deg)) translateZ(6px);
   box-shadow:
     0 2px 0 rgba(96,86,70,.6),
     0 4px 0 rgba(38,30,22,.3),
@@ -950,9 +834,10 @@ body.cardlib-open #overlay .photo-studio-v3 .studio-photo:focus-visible .studio-
     inset 1px 1px 0 rgba(255,255,255,.6),
     0 0 0 1px rgba(212,175,122,.5);
 }
+/* 选中=射灯打亮：金线框+暖光晕（静态样式，不碰 09-08 禁动画） */
 body.cardlib-open #overlay .photo-studio-v3 .lib-item.selected .studio-photo-paper {
   border-color:var(--studio-gold);
-  box-shadow:0 13px 18px rgba(0,0,0,.5),0 0 0 2px rgba(212,175,122,.42);
+  box-shadow:0 13px 18px rgba(0,0,0,.5),0 0 0 2px rgba(212,175,122,.42),0 0 22px rgba(255,214,168,.32);
 }
 body.cardlib-open #overlay .photo-studio-v3 .lib-grid.scrolling .studio-photo-paper {
   box-shadow:0 3px 5px rgba(0,0,0,.45),inset 0 0 0 1px rgba(255,255,255,.18);
@@ -1005,14 +890,21 @@ body.cardlib-open #overlay .photo-studio-v3 .library-inspector {
   box-shadow:0 18px 36px rgba(0,0,0,.24);
   scrollbar-width:thin;
 }
+/* 选片台牌匾（09-23 出图落地）：木牌匾托底替代裸文字+金线，与页眉金翼同批装饰件 */
 body.cardlib-open #overlay .photo-studio-v3 .studio-inspector-head {
-  padding:0 2px 11px;
+  display:flex;
+  justify-content:center;
+  padding:0 0 10px;
   border-bottom:1px solid rgba(212,175,122,.16);
 }
 body.cardlib-open #overlay .photo-studio-v3 .studio-inspector-head b {
-  color:var(--studio-gold-soft);
-  font:400 17px var(--serif);
-  letter-spacing:3px;
+  display:inline-block;
+  padding:11px 30px;
+  background:url('../assets/ui/photo-studio/plaque.webp') no-repeat center/100% 100%;
+  color:#f0d9a8;
+  font:700 15px var(--serif);
+  letter-spacing:4px;
+  text-shadow:0 1px 3px rgba(0,0,0,.8);
 }
 body.cardlib-open #overlay .photo-studio-v3 .library-preview {
   margin:0!important;
@@ -1025,25 +917,20 @@ body.cardlib-open #overlay .photo-studio-v3 .studio-preview-frame {
   justify-content:center;
   padding:4px 10px 12px;
 }
-body.cardlib-open #overlay .photo-studio-v3 .studio-preview-frame .hs-card {
-  width:100%!important;
-  max-width:205px!important;
-  margin:0!important;
-  font-size:14px!important;
-  box-shadow:0 18px 36px rgba(0,0,0,.56)!important;
-}
-/* 选片台相纸：宝丽来式下宽白边，黄铜夹沿用 .studio-photo-paper::before */
+/* 选片台上是一张放大照片（09-23 拍板：v3 战斗卡框退出这一页）——相纸语言与墙面瓦片同源 */
 body.cardlib-open #overlay .photo-studio-v3 .studio-preview-paper {
-  width:auto!important;
-  max-width:100%;
+  display:block;
+  width:100%;
+  max-width:240px;
   margin:0 auto;
-  padding:9px 9px 24px;
+  padding:7px 7px 12px;
   box-shadow:
     0 2px 0 rgba(96,86,70,.6),
     0 5px 0 rgba(38,30,22,.3),
     0 18px 30px rgba(10,4,3,.55),
     inset 1px 1px 0 rgba(255,255,255,.6);
 }
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-paper .studio-photo-art { font-size:15px; }
 body.cardlib-open #overlay .photo-studio-v3 .studio-preview-copy {
   padding:11px 4px 0;
   border-top:1px solid rgba(212,175,122,.16);
@@ -1230,7 +1117,7 @@ body.cardlib-open #cardZoom .cz-note.has::after {
 #cardZoom .cz-note-status {
   justify-self:end;
   color:rgba(70,62,48,.58);
-  font:10px/1.2 ui-monospace,monospace;
+  font:10px/1.2 var(--font-ui);
   letter-spacing:.12em;
 }
 
@@ -1288,14 +1175,515 @@ body.cardlib-open #overlay .photo-studio-v3 #libCls { border-left:2px solid rgba
   }
   body.cardlib-open #overlay .photo-studio-v3 .lib-item { padding-top:13px!important; }
   body.cardlib-open #overlay .photo-studio-v3 .studio-photo-caption b { font-size:13px; }
-  body.cardlib-open #overlay .photo-studio-v3 .studio-photo-cost {
-    width:31px;
-    height:31px;
-    font-size:13px;
-  }
   #cardZoom .cz-close { top:12px; right:12px; }
 }
 @media(prefers-reduced-motion:reduce) {
   body.cardlib-open #overlay .photo-studio-v3 .lib-item,
   body.cardlib-open #overlay .photo-studio-v3 .studio-photo-paper { transition:none!important; }
+}
+/* ============ 照相馆 4.3：信息层级与工具行质感（2026-09-23 批）============
+   ①选片台分组排版+按钮贴底稳重心 ②搜索放大镜/下拉定制箭头 ④费用=冰蓝冷色锚点
+   ⑤相纸 grain 层 ⑦页签内衬。全部纯 CSS，grain 图=程序生成 paper-grain.png。 */
+/* —— ① 选片台：费用锚点 + 类型/稀有度 chip + 词条行分组 —— */
+body.cardlib-open #overlay .photo-studio-v3 .library-inspector {
+  display:flex;
+  flex-direction:column;
+}
+body.cardlib-open #overlay .photo-studio-v3 .library-preview {
+  flex:1 1 auto;
+  min-height:0;
+  display:flex;
+  flex-direction:column;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-copy {
+  flex:1 1 auto;
+  display:flex;
+  flex-direction:column;
+}
+body.cardlib-open #overlay .photo-studio-v3 .pv-meta {
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:6px;
+  margin:0!important;
+}
+/* ④ 冷色锚点：全页唯一冰蓝——费用数字（炉石蓝水晶的同位角色） */
+body.cardlib-open #overlay .photo-studio-v3 .pv-cost {
+  font:700 13px/1 var(--font-ui);
+  letter-spacing:.04em;
+  color:var(--studio-ice);
+}
+body.cardlib-open #overlay .photo-studio-v3 .pv-chip {
+  padding:1.5px 7px;
+  border:1px solid rgba(212,175,122,.28);
+  border-radius:2px;
+  background:rgba(29,21,18,.66);
+  color:#c9bfae;
+  font-size:10.5px;
+  letter-spacing:.04em;
+}
+body.cardlib-open #overlay .photo-studio-v3 .pv-terms {
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:7px;
+  margin:8px 0 0;
+  color:#ababab;
+  font-size:11px;
+  line-height:1.5;
+}
+body.cardlib-open #overlay .photo-studio-v3 .pv-terms b { font-weight:700; }
+body.cardlib-open #overlay .photo-studio-v3 .pv-terms .dmg-num { color:#e08a7d; }
+body.cardlib-open #overlay .photo-studio-v3 .pv-terms i {
+  display:inline-block;
+  width:1px;
+  height:10px;
+  background:rgba(212,175,122,.3);
+}
+/* 按钮贴底：文字重心压住右栏下半的空 */
+body.cardlib-open #overlay .photo-studio-v3 .studio-zoom { margin-top:auto; }
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-copy .studio-edit-actions { margin-top:10px; }
+/* —— ② 工具行：搜索放大镜（纯 CSS 画）+ 下拉自绘箭头 —— */
+body.cardlib-open #overlay .photo-studio-v3 .studio-search { position:relative; }
+body.cardlib-open #overlay .photo-studio-v3 .studio-search::before {
+  content:'';
+  position:absolute;
+  left:13px;
+  top:50%;
+  width:9px;
+  height:9px;
+  margin-top:-6px;
+  border:1.5px solid #8a7d6a;
+  border-radius:50%;
+  pointer-events:none;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-search::after {
+  content:'';
+  position:absolute;
+  left:23px;
+  top:50%;
+  width:6px;
+  height:1.5px;
+  background:#8a7d6a;
+  transform:rotate(45deg);
+  transform-origin:left center;
+  pointer-events:none;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-search .clib-search { padding-left:34px!important; }
+body.cardlib-open #overlay .photo-studio-v3 .library-tools>.pg-select {
+  appearance:none!important;
+  -webkit-appearance:none!important;
+  padding-right:26px!important;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23d4af7a' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E")!important;
+  background-repeat:no-repeat!important;
+  background-position:right 10px center!important;
+}
+/* —— ⑦ 页签区浅内衬：把文字页签"框"进结构里 —— */
+body.cardlib-open #overlay .photo-studio-v3 .clib-tabs {
+  background:rgba(255,250,238,.03);
+  border:1px solid rgba(212,175,122,.1);
+  border-radius:2px;
+  padding:2px;
+}
+/* —— ⑤ 纸纹 grain：::after 复用，multiply 低透明（照片=银盐颗粒/白边=纸纤维）—— */
+body.cardlib-open #overlay .photo-studio-v3 .studio-photo-paper::after {
+  content:'';
+  position:absolute;
+  z-index:3;
+  inset:0;
+  border-radius:2px;
+  background:url('../assets/ui/photo-studio/paper-grain.png') repeat;
+  background-size:128px;
+  mix-blend-mode:multiply;
+  opacity:.32;
+  pointer-events:none;
+}
+/* ============ 照相馆 4.2：留白与选片台填满（2026-09-23 零新增美术批次）============
+   老板令：界面太挤、两侧要留空白（先出预览认可 56px 档）；选片台大片空白要填内容。
+   仅 ≥901px 生效——窄屏沿用既有响应式 padding（1280 档 30px / 900 档 18px 不动）。 */
+@media(min-width:901px) {
+  body.cardlib-open #overlay .photo-studio-v3 .library-head,
+  body.cardlib-open #overlay .photo-studio-v3 .studio-filterbar,
+  body.cardlib-open #overlay .photo-studio-v3 .studio-active-filters,
+  body.cardlib-open #overlay .photo-studio-v3 .clib-main {
+    padding-left:128px!important;
+    padding-right:128px!important;
+  }
+  body.cardlib-open #overlay .photo-studio-v3 .lib-grid { padding-left:4px!important; padding-right:4px!important; }
+}
+/* 选片台填满（E）：效果全文 + 藏品编号 + 备注预览——数据全部现成（c.desc/photoNo/photoNoteFor） */
+body.cardlib-open #overlay .photo-studio-v3 .library-inspector { overflow-y:auto; scrollbar-width:thin; }
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-copy .pv-desc {
+  margin:9px 0 0;
+  color:#d9cfbd;
+  font:400 12.5px/1.65 var(--serif);
+  letter-spacing:.02em;
+}
+/* 选片台描述富文本（09-23：与卡面 descRich 同款三色——数字 Georgia 金 / 行首关键词金 / 术语冰蓝；
+   data-term 词条由 term-tips 全局委托弹触摸讲解，与战斗内一致） */
+body.cardlib-open #overlay .photo-studio-v3 .pv-desc .d-num {
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:1.18em;
+  font-weight:600;
+  color:#ecc985;
+}
+body.cardlib-open #overlay .photo-studio-v3 .pv-desc .d-kw {
+  color:#d8b878;
+  font-weight:700;
+  font-style:normal;
+}
+body.cardlib-open #overlay .photo-studio-v3 .pv-desc .d-term {
+  color:#8fd0e8;
+  font-style:normal;
+}
+body.cardlib-open #overlay .photo-studio-v3 .pv-desc .d-term[data-term] {
+  cursor:help;
+  border-bottom:1px dotted rgba(143,208,232,.45);
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-copy .pv-no {
+  margin:7px 0 0;
+  color:var(--studio-muted);
+  font:600 10px/1.4 var(--font-ui);
+  letter-spacing:.18em;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-copy .pv-note {
+  margin:9px 0 0;
+  padding:8px 10px;
+  border:1px dashed rgba(212,175,122,.35);
+  background:rgba(212,175,122,.07);
+  color:#e7dcc4;
+  font:400 12px/1.6 var(--serif);
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-copy .pv-note b {
+  display:block;
+  margin-bottom:3px;
+  color:var(--studio-gold);
+  font:700 9px/1.4 var(--font-ui);
+  letter-spacing:.28em;
+}
+/* ============ 照相馆 4.4：筛选提级 + 选片台导航 + 等级装饰（2026-09-23 批）============
+   ②高级筛选提级平铺 ①选片台翻看导航/标签体系/实底主按钮 类型徽章恢复
+   工具按钮主次 ⑩回顶 稀有度夹子分档（CSS 换色，零素材）。 */
+/* —— ② 筛选栏平铺：稀有度/人物两下拉直接可见，弃 details 折叠 —— */
+body.cardlib-open #overlay .photo-studio-v3 .advanced-row {
+  display:flex;
+  gap:6px;
+  min-width:0;
+}
+body.cardlib-open #overlay .photo-studio-v3 .advanced-row .pg-select {
+  appearance:none!important;
+  -webkit-appearance:none!important;
+  min-height:33px;
+  padding:0 24px 0 9px!important;
+  border:1px solid rgba(212,175,122,.22);
+  border-radius:2px;
+  background:var(--studio-control)!important;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23d4af7a' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E")!important;
+  background-repeat:no-repeat!important;
+  background-position:right 8px center!important;
+  color:#e8dfd0;
+  font-size:11.5px;
+  box-shadow:0 2px 5px rgba(20,10,6,.3);
+}
+body.cardlib-open #overlay .photo-studio-v3 .advanced-row .pg-select:hover {
+  border-color:rgba(212,175,122,.6);
+}
+/* —— ① 选片台：标签/值两层 —— */
+body.cardlib-open #overlay .photo-studio-v3 .pv-label {
+  color:#8a7d6a;
+  font-size:10px;
+  letter-spacing:.14em;
+}
+body.cardlib-open #overlay .photo-studio-v3 .pv-meta { gap:7px; }
+/* —— 翻看导航：上一片 / 位置 / 下一片（主按钮上方一行） —— */
+body.cardlib-open #overlay .photo-studio-v3 .pv-nav {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  margin-top:12px;
+}
+body.cardlib-open #overlay .photo-studio-v3 .pv-navbtn {
+  flex:1;
+  min-height:30px;
+  border:1px solid rgba(212,175,122,.3);
+  border-radius:2px;
+  background:rgba(29,21,18,.55);
+  color:var(--studio-gold-soft);
+  font:600 11px var(--font-ui);
+  letter-spacing:.06em;
+}
+body.cardlib-open #overlay .photo-studio-v3 .pv-navbtn:hover:not(:disabled) {
+  border-color:rgba(212,175,122,.7);
+  background:rgba(46,34,24,.8);
+}
+body.cardlib-open #overlay .photo-studio-v3 .pv-navbtn:disabled {
+  opacity:.32;
+  cursor:default;
+}
+body.cardlib-open #overlay .photo-studio-v3 .pv-pos {
+  flex:0 0 auto;
+  color:var(--studio-muted);
+  font:600 10.5px var(--font-ui);
+  letter-spacing:.1em;
+  font-variant-numeric:tabular-nums;
+}
+/* —— 主操作实底黄铜：全页唯一实底按钮 —— */
+body.cardlib-open #overlay .photo-studio-v3 .studio-zoom {
+  width:100%;
+  min-height:42px;
+  margin-top:8px;
+  border:1px solid var(--studio-brass-lo);
+  border-radius:2px;
+  background:linear-gradient(180deg,var(--studio-brass-hi),var(--studio-brass) 55%,var(--studio-brass-lo))!important;
+  color:#241708!important;
+  font:800 12.5px var(--font-ui)!important;
+  letter-spacing:.12em;
+  box-shadow:0 3px 8px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.5);
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-zoom:hover {
+  filter:brightness(1.06);
+}
+/* 编号降权：小字靠边，不与效果文案抢 */
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-copy .pv-no { opacity:.62; }
+/* —— 类型徽章恢复（瓦片名字下方，09-23「起码保留类型标注」） —— */
+body.cardlib-open #overlay .photo-studio-v3 .type-badge {
+  justify-self:center;
+  display:inline-block;
+  padding:1px 8px;
+  border:1px solid rgba(117,89,47,.55);
+  border-radius:999px;
+  background:rgba(255,252,238,.5);
+  color:#6a5c48;
+  font:600 10px/1.5 var(--font-ui);
+  letter-spacing:.12em;
+  white-space:nowrap;
+}
+/* —— 工具按钮主次：导出/编辑退幽灵（金底只留给激活态与选片台主按钮） —— */
+body.cardlib-open #overlay .photo-studio-v3 .library-tools>.hs-btn {
+  background:rgba(29,21,18,.35)!important;
+  border-color:rgba(212,175,122,.25)!important;
+  color:#cfc4b2!important;
+  box-shadow:none!important;
+  font-weight:600;
+}
+body.cardlib-open #overlay .photo-studio-v3 .library-tools>.hs-btn:hover {
+  background:rgba(46,34,24,.7)!important;
+  border-color:rgba(212,175,122,.55)!important;
+  color:var(--studio-gold-soft)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .library-tools>.studio-edit-toggle.on {
+  background:linear-gradient(180deg,var(--studio-brass-hi),var(--studio-brass))!important;
+  color:#241708!important;
+  border-color:var(--studio-brass-lo)!important;
+}
+/* —— ⑩ 回顶按钮：滚过一屏半现身 —— */
+body.cardlib-open #overlay .photo-studio-v3 .studio-top {
+  position:absolute;
+  right:26px;
+  bottom:26px;
+  z-index:5;
+  width:40px;
+  height:40px;
+  border:1px solid rgba(212,175,122,.45);
+  border-radius:50%;
+  background:rgba(29,21,18,.88);
+  color:var(--studio-gold-soft);
+  font:700 16px var(--font-ui);
+  box-shadow:0 4px 12px rgba(0,0,0,.5);
+  opacity:0;
+  pointer-events:none;
+  transform:translateY(6px);
+  transition:opacity .18s ease,transform .18s ease;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-top.show {
+  opacity:1;
+  pointer-events:auto;
+  transform:none;
+}
+/* —— 稀有度夹子分档（CSS 换色零素材；rv2/rv3=默认黄铜不写） —— */
+body.cardlib-open #overlay .photo-studio-v3 .lib-cardwrap.rv0 .studio-photo-paper::before,
+body.cardlib-open #overlay .photo-studio-v3 .lib-cardwrap.rv1 .studio-photo-paper::before {
+  background:linear-gradient(180deg,#c3c8cd 0%,#9aa0a7 46%,#6b7178 82%,#4d5359 100%);
+  box-shadow:0 2px 4px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.7);
+}
+/* 稀有=蓝夹（09-23 老板定色：稀有蓝/史诗紫/职业红，宝石色系对位炉石） */
+body.cardlib-open #overlay .photo-studio-v3 .lib-cardwrap.rv2 .studio-photo-paper::before {
+  background:linear-gradient(180deg,#d4e4f6 0%,#7aa8d8 40%,#3f6fa8 80%,#2a4f7a 100%);
+  box-shadow:0 2px 4px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.75),0 0 8px rgba(95,143,200,.4);
+}
+/* 史诗=紫夹 */
+body.cardlib-open #overlay .photo-studio-v3 .lib-cardwrap.rv3 .studio-photo-paper::before {
+  background:linear-gradient(180deg,#e4d4f6 0%,#a87ad8 40%,#7a4fa8 80%,#522f7a 100%);
+  box-shadow:0 2px 4px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.75),0 0 8px rgba(155,105,210,.4);
+}
+body.cardlib-open #overlay .photo-studio-v3 .lib-cardwrap.rv4 .studio-photo-paper::before {
+  width:54px;
+  background:linear-gradient(180deg,#fff3c4 0%,#f0d070 40%,#d9a836 74%,#a87818 100%);
+  box-shadow:0 2px 5px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.85),0 0 10px rgba(240,208,112,.45);
+}
+body.cardlib-open #overlay .photo-studio-v3 .lib-cardwrap.rv5 .studio-photo-paper::before {
+  background:linear-gradient(180deg,#8d7660 0%,#6a5540 46%,#4a3a2a 82%,#35281c 100%);
+  box-shadow:0 2px 4px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.4);
+}
+/* 职业=红夹 */
+body.cardlib-open #overlay .photo-studio-v3 .lib-cardwrap.rv6 .studio-photo-paper::before {
+  background:linear-gradient(180deg,#f6d4d4 0%,#d87a7a 40%,#b04545 80%,#7a2a2a 100%);
+  box-shadow:0 2px 4px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.7),0 0 8px rgba(200,90,90,.4);
+}
+body.cardlib-open #overlay .photo-studio-v3 .lib-cardwrap.rv7 .studio-photo-paper::before,
+body.cardlib-open #overlay .photo-studio-v3 .lib-cardwrap.rv-prism .studio-photo-paper::before {
+  background:linear-gradient(100deg,#c977a1 0%,#d7b566 34%,#70afa2 66%,#748fbb 100%);
+  box-shadow:0 2px 4px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.7),0 0 8px rgba(179,107,255,.4);
+}
+/* ============ 照相馆 4.5：区域补框（2026-09-23 A-F 清单收口，全纯 CSS）============
+   A 卡墙外框（双线+四角 L 角标）/ B 标题下衬线 / E7 计数铭牌 / E8 筛选栏两端收头
+   E5 相纸内衬金线 / F 名字压印。 */
+/* A 卡墙外框：内缘金双线（在原投影列表上追加，暗部保留） */
+body.cardlib-open #overlay .photo-studio-v3 .clib-main {
+  box-shadow:
+    inset 0 18px 40px rgba(0,0,0,.3),
+    inset 0 -28px 50px rgba(0,0,0,.35),
+    inset 0 0 0 1px rgba(212,175,122,.2),
+    inset 0 0 0 4px rgba(0,0,0,0),
+    inset 0 0 0 5px rgba(212,175,122,.1)!important;
+}
+/* A 四角 L 角标：::before 八笔线性渐变画四角（::after 已被底部渐隐占用） */
+body.cardlib-open #overlay .photo-studio-v3 .clib-main::before {
+  content:'';
+  position:absolute;
+  inset:9px;
+  z-index:3;
+  pointer-events:none;
+  opacity:.55;
+  background:
+    linear-gradient(#d4af7a,#d4af7a) left top/16px 1.5px no-repeat,
+    linear-gradient(#d4af7a,#d4af7a) left top/1.5px 16px no-repeat,
+    linear-gradient(#d4af7a,#d4af7a) right top/16px 1.5px no-repeat,
+    linear-gradient(#d4af7a,#d4af7a) right top/1.5px 16px no-repeat,
+    linear-gradient(#d4af7a,#d4af7a) left bottom/16px 1.5px no-repeat,
+    linear-gradient(#d4af7a,#d4af7a) left bottom/1.5px 16px no-repeat,
+    linear-gradient(#d4af7a,#d4af7a) right bottom/16px 1.5px no-repeat,
+    linear-gradient(#d4af7a,#d4af7a) right bottom/1.5px 16px no-repeat;
+}
+/* B 标题下衬线：渐隐金横线 + 两端方点（标题金翼花纹的"托"） */
+body.cardlib-open #overlay .photo-studio-v3 .library-title h2::after {
+  content:'';
+  position:absolute;
+  left:0;
+  bottom:-8px;
+  width:calc(100% + 36px);
+  height:7px;
+  pointer-events:none;
+  background:
+    linear-gradient(90deg, transparent, rgba(212,175,122,.6) 16%, rgba(212,175,122,.6) 84%, transparent) no-repeat center/100% 1px,
+    linear-gradient(#d4af7a,#d4af7a) no-repeat left center/5px 5px,
+    linear-gradient(#d4af7a,#d4af7a) no-repeat right center/5px 5px;
+}
+/* E7 计数铭牌：馆藏/陈列从裸文字升为金边暗底小铭牌 */
+body.cardlib-open #overlay .photo-studio-v3 .clib-count {
+  background:rgba(29,21,18,.6);
+  border:1px solid rgba(212,175,122,.3)!important;
+  border-radius:2px;
+  padding:6px 14px!important;
+  box-shadow:0 2px 6px rgba(0,0,0,.4),inset 0 1px rgba(255,255,255,.05);
+}
+/* E8 筛选栏两端收头：左右各一条金竖线（box-shadow 追加不掀原投影） */
+body.cardlib-open #overlay .photo-studio-v3 .studio-filterbar {
+  box-shadow:inset 0 1px rgba(255,255,255,.05),inset 0 -1px rgba(0,0,0,.4),
+    inset 1px 0 0 rgba(212,175,122,.38),inset -1px 0 0 rgba(212,175,122,.38)!important;
+}
+/* E5 相纸内衬金线：outline 内缩圈（独立属性，不被 hover/选中态的 box-shadow 覆盖） */
+body.cardlib-open #overlay .photo-studio-v3 .studio-photo-paper {
+  outline:1px solid rgba(212,175,122,.42);
+  outline-offset:-3px;
+}
+/* F 名字压印：白纸上凸字（纸面反向高光） */
+body.cardlib-open #overlay .photo-studio-v3 .studio-photo-caption b {
+  text-shadow:0 1px 0 rgba(255,255,255,.55);
+}
+/* ============ 照相馆 4.6：选片台字号 + 顶部收敛 + 稀有度特殊名 + 相角贴（09-23）============ */
+/* 选片台整体提字号（老板：字太小）——标签/chip/词条/描述/编号/备注/导航/主按钮全线 +1.5~2px */
+body.cardlib-open #overlay .photo-studio-v3 .pv-label { font-size:11.5px; }
+body.cardlib-open #overlay .photo-studio-v3 .pv-cost { font-size:16px; }
+body.cardlib-open #overlay .photo-studio-v3 .pv-chip {
+  padding:2px 8px;
+  font-size:11.5px;
+  letter-spacing:.05em;
+}
+body.cardlib-open #overlay .photo-studio-v3 .pv-terms { font-size:12.5px; }
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-copy .pv-desc {
+  font-size:14px;
+  line-height:1.72;
+  -webkit-line-clamp:6;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-copy .pv-no { font-size:11px; }
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-copy .pv-note { font-size:13px; }
+body.cardlib-open #overlay .photo-studio-v3 .pv-navbtn { min-height:34px; font-size:12.5px; }
+body.cardlib-open #overlay .photo-studio-v3 .pv-pos { font-size:12px; }
+body.cardlib-open #overlay .photo-studio-v3 .studio-zoom { min-height:46px; font-size:14px; }
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-copy .pv-hint { font-size:12.5px!important; }
+/* 顶部收敛：下拉组加内衬底板，与左侧页签区形成对称两组（不再是散控件） */
+body.cardlib-open #overlay .photo-studio-v3 .advanced-row {
+  background:rgba(255,250,238,.03);
+  border:1px solid rgba(212,175,122,.1);
+  border-radius:2px;
+  padding:2px;
+}
+/* 传说/棱彩卡名特殊字（米白纸上：渐变裁字+压印投影，其余稀有度保持墨色） */
+body.cardlib-open #overlay .photo-studio-v3 .rv4 .studio-photo-caption b {
+  color:transparent;
+  background:linear-gradient(180deg,#c2851a 0%,#a86a10 55%,#7a4f08 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  text-shadow:none;
+  filter:drop-shadow(0 1px 0 rgba(255,255,255,.55));
+  font-weight:800;
+  letter-spacing:.1em;
+}
+body.cardlib-open #overlay .photo-studio-v3 .rv7 .studio-photo-caption b,
+body.cardlib-open #overlay .photo-studio-v3 .rv-prism .studio-photo-caption b {
+  color:transparent;
+  background:linear-gradient(100deg,#b0568c 0%,#a8842a 34%,#3f9080 66%,#5f74b4 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  text-shadow:none;
+  filter:drop-shadow(0 1px 0 rgba(255,255,255,.45));
+  font-weight:800;
+  letter-spacing:.1em;
+}
+/* 相角贴：传说/棱彩照片右上角金花贴（corner.webp，09-23 出图裁切落地） */
+body.cardlib-open #overlay .photo-studio-v3 .photo-corner {
+  position:absolute;
+  top:3px;
+  right:3px;
+  z-index:2;
+  width:34px;
+  height:44px;
+  background:url('../assets/ui/photo-studio/corner.webp') no-repeat right top/contain;
+  filter:drop-shadow(0 1px 2px rgba(0,0,0,.45));
+  pointer-events:none;
+}
+/* ============ 照相馆 4.7：炉石细节第三轮（09-23 老板令三点自查落地）============ */
+/* ① 插画窗画框感：微圆角 + 内衬金双线（炉石画窗对位） */
+body.cardlib-open #overlay .photo-studio-v3 .studio-photo-art {
+  border-radius:3px;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.1),
+    inset 0 0 0 2px rgba(212,175,122,.3),
+    inset 0 0 12px rgba(10,4,2,.16);
+}
+/* ② 控件高光顶线：页签/下拉/按钮上缘 1px 亮线（立体感）；选中态 border 优先级更高不受影响 */
+body.cardlib-open #overlay .photo-studio-v3 .type-tab,
+body.cardlib-open #overlay .photo-studio-v3 .advanced-row .pg-select,
+body.cardlib-open #overlay .photo-studio-v3 .library-tools>.pg-select,
+body.cardlib-open #overlay .photo-studio-v3 .library-tools>.hs-btn,
+body.cardlib-open #overlay .photo-studio-v3 .pv-navbtn {
+  border-top-color:rgba(255,240,210,.42);
+}
+/* ③ 计数/页签数字 tabular 对齐：跳数不抖 */
+body.cardlib-open #overlay .photo-studio-v3 .clib-count b,
+body.cardlib-open #overlay .photo-studio-v3 .type-tab em,
+body.cardlib-open #overlay .photo-studio-v3 .pv-pos {
+  font-variant-numeric:tabular-nums;
 }

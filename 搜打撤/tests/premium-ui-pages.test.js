@@ -56,36 +56,37 @@ describe('照相馆陈列交互', () => {
     expect(library).toContain('<h2>[[icon:cards]] 照相馆</h2>');
   });
 
-  it('影廊版照片结构：黄铜挂件与费用铭牌，拟物减法到位', () => {
+  it('影廊版照片结构：黄铜挂件保留，卡牌语言与微倾已删（09-23 拍板）', () => {
     expect(library).toContain('function photoTileHTML');
-    expect(library).toContain('class="studio-photo-cost"');
     expect(library).toContain('photo-studio-v3');
     expect(css).toContain('照相馆 4.0：深夜影廊');
-    expect(css).toContain('grid-template-columns:repeat(6,minmax(0,1fr))');
-    expect(library).toContain('class="photo-type-mark"');
-    expect(library).toContain('class="photo-rarity-mark"');
-    // 拟物减法：图钉/卷角/磨损退役；实体感=纸厚阴影+收窄微倾+轻 3D 侧倾+黄铜相片夹
+    expect(css).toContain('grid-template-columns:repeat(4,minmax(0,1fr))');
+    // 照片墙上一张照片=画+名字：费用铜币/类型小字/稀有度馆印/瓦片编号不上墙
+    expect(library).not.toContain('class="studio-photo-cost"');
+    expect(library).not.toContain('class="photo-type-mark"');
+    expect(library).not.toContain('class="photo-rarity-mark"');
+    expect(css).not.toContain('.studio-photo-cost');
+    expect(css).not.toContain('.photo-rarity-mark');
+    // 拟物减法：图钉/卷角/磨损退役；微倾/3D 侧倾 09-23 删除（网格不齐）
     expect(library).not.toContain('studio-photo-curl');
     expect(library).not.toContain('--photo-pin-x:');
-    expect(library).toContain('--photo-tilt:');
-    expect(library).toContain('--photo-lean-x:');
+    expect(library).not.toContain('--photo-tilt:');
+    expect(library).not.toContain('--photo-lean-x:');
+    expect(css).not.toContain('perspective:760px');
+    // 保留：纸厚阴影+黄铜相片夹
     expect(css).toContain('.studio-photo-paper::before');
-    expect(css).toContain('perspective:760px');
     expect(css).toContain('--studio-wall:#170f0d');
     expect(css).toContain('linear-gradient(145deg,#f3ecdd,#ddd2ba)');
-    // 稀有度=白边右下角 gem 色馆印圆章（双圈套印）；棱彩=幻彩全息贴标
-    expect(css).toContain('inset 0 0 0 2px rgba(255,250,236,.4)');
-    expect(css).toContain('rgba(215,181,102,.9)');
-    // 影廊生图资产挂载：墙纸/牌匾/台面/空态/背签
+    // 影廊生图资产挂载：墙纸/台面/空态/背签（牌匾 sign.webp 09-23 拍板移除=彩带）
     expect(css).toContain('assets/ui/photo-studio/wall.webp');
-    expect(css).toContain('assets/ui/photo-studio/sign.webp');
+    expect(css).not.toContain('assets/ui/photo-studio/sign.webp');
     expect(css).toContain('assets/ui/photo-studio/desk.webp');
     expect(css).toContain('assets/ui/photo-studio/empty.webp');
     expect(css).toContain('assets/ui/photo-studio/back.webp');
   });
 
   it('照片墙分批追加，筛选不再替换整个网格节点', () => {
-    expect(library).toContain('const LIB_BATCH_SIZE = 24');
+    expect(library).toContain('const LIB_BATCH_SIZE = 36');
     expect(library).toContain('data-act="libLoadMore"');
     expect(library).toContain('setTimeout(renderLibGrid, 120)');
     expect(library).toContain("more.insertAdjacentHTML('beforebegin', added)");

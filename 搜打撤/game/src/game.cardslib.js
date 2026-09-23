@@ -3,6 +3,7 @@ const SDT = window.SDT;
 const UI = window.SDT.UI;
 import { esc } from './shared.js';
 import { escAttr } from './shared.js';
+import { descRich } from './cards.view.js';
 import { game } from './game.session.js';
 import { characterName } from './characters.js';
 import { PHOTO_NOTE_PLACEHOLDER, photoNoteFor, savePhotoNote, exportNotes } from './card-photo-notes.js';
@@ -97,7 +98,7 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
   // 放大看卡面（libInspect → showCardZoom）不传 low，仍是原图。
   const LIB_ART = { low: true };
   // 桌面每行六张，一批四行；既保留连续照片墙，也避免首开同时解码过多缩略图。
-  const LIB_BATCH_SIZE = 24;
+  const LIB_BATCH_SIZE = 36;
   let libVisibleCount = LIB_BATCH_SIZE;
   let libPageObserver = null;
   let libSearchTimer = null;
@@ -117,48 +118,64 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
   function photoStyle(card, index) {
     const seed = card.id || card.name || index;
     const between = (salt, min, max) => min + photoUnit(seed, salt) * (max - min);
-    // 影廊版实体感：每张卡带收窄的悬挂微倾与轻 3D 侧倾（幅度比旧版减半），落影
-    // 角度/虚实随卡不同；差异按卡牌 id 稳定生成，筛选重绘不跳位。
+    // 落影角度/虚实随卡不同，按卡牌 id 稳定生成，筛选重绘不跳位。
+    // （悬挂微倾/3D 侧倾 2026-09-23 拍板删除：网格不齐损害清晰度）
     return [
       `--i:${index}`,
-      `--photo-tilt:${between(11, -.15, .15).toFixed(2)}deg`,
       `--photo-shadow-x:${between(23, -3, 3).toFixed(1)}px`,
       `--photo-shadow-y:${between(37, 14, 22).toFixed(1)}px`,
       `--photo-shadow-blur:${between(41, 24, 34).toFixed(1)}px`,
-      `--photo-lean-x:${between(89, -.3, .3).toFixed(2)}deg`,
-      `--photo-lean-y:${between(97, -.3, .3).toFixed(2)}deg`,
     ].join(';');
   }
 
   function libPreviewHTML(c) {
     if (!c) return '<div class="studio-preview-empty"><div class="pv-empty">[[icon:cards]]</div><p class="pv-hint">没有符合条件的卡牌<br>调整筛选后重新陈列</p></div>';
-    const dmgTxt = DMG_TYPES.includes(c.type) ? `<br>伤害词条：<b class="dmg-num">${c.dmg || 0}</b>${c.dmgType ? ' · ' + (SDT.Cards.DMG_TYPE_META[c.dmgType] || {}).name : ''}` : '';
+    const dmgTxt = DMG_TYPES.includes(c.type) ? `伤害词条：<b class="dmg-num">${c.dmg || 0}</b>${c.dmgType ? ' · ' + (SDT.Cards.DMG_TYPE_META[c.dmgType] || {}).name : ''}` : '';
     const drawN = +(c.draw || 0) || SDT.Cards.deriveDraw(c);
     const infN = +(c.infuse || 0) || SDT.Cards.deriveInfuse(c);
     const healN = +(c.heal || 0) || SDT.Cards.deriveHeal(c);
     const armorN = +(c.armor || 0) || SDT.Cards.deriveArmor(c);
     const kw = [drawN ? `抽卡 ${drawN}` : '', infN ? `注能(${infN})` : '',
       healN ? `回复 ${healN}` : '', armorN ? `护甲 ${armorN}` : ''].filter(Boolean).join(' · ');
-    const kwTxt = kw ? `<br>效果词条：<b>${kw}</b>` : '';
+    const kwTxt = kw ? `效果词条：<b>${kw}</b>` : '';
     const actions = game.devMode && libEditMode ? `<div class="studio-edit-actions">
       <button class="hs-btn" data-act="editCard" data-id="${escAttr(c.id)}">编辑卡牌</button>
       <button class="hs-btn danger" data-act="delCard" data-id="${escAttr(c.id)}">删除</button>
     </div>` : '';
-    // 预览卡套相纸：选片台上放的是"照片"而不是裸卡牌（处处是照片口径，09-20 批次二）
-    return `<div class="studio-preview-frame"><span class="studio-photo-paper studio-preview-paper">${cardHTML(c, 'lg', LIB_ART)}</span></div>
-      <div class="studio-preview-copy"><h3>${esc(c.name)}</h3>
-      <p class="pv-hint">${esc(c.type)} · ${esc(SDT.Cards.rarityOf(c))}${dmgTxt}${kwTxt}</p>
+    // 选片台上陈列的是一张"放大照片"（相纸语言），不是战斗卡框——费用/类型/稀有度走文字行（09-23 拍板）
+    const note = photoNoteFor(c);
+    const cost = c.cost == null ? 0 : c.cost;
+    const art = (SDT.Art && SDT.Art.cardIcon && SDT.Art.cardIcon(c, LIB_ART)) ||
+      SDT.Icons.img(SDT.Cards.TYPE_ART[c.type] || 'question');
+    const list = libFiltered();
+    const idx = list.findIndex(x => x.id === c.id);
+    const pos = idx >= 0 ? `${idx + 1} / ${list.length}` : '';
+    const rarity = SDT.Cards.rarityOf(c);
+    const rarityIndex = Math.max(0, RARITIES.indexOf(rarity));
+    return `<div class="studio-preview-frame"><span class="studio-photo-paper studio-preview-paper rv${rarityIndex}">
+      <span class="studio-photo-art">${art}</span>
+      <span class="studio-photo-caption"><b>${esc(c.name || '未命名卡牌')}</b></span>
+      ${(rarityIndex === 4 || rarityIndex === 7) ? '<i class="photo-corner" aria-hidden="true"></i>' : ''}
+    </span></div>
+      <div class="studio-preview-copy">
+      <p class="pv-meta"><span class="pv-label">费用</span><b class="pv-cost">${cost}</b><span class="pv-chip">${esc(c.type === '能力卡' ? '能力' : c.type)}</span><span class="pv-chip">${esc(rarity)}</span></p>
+      ${(dmgTxt || kwTxt) ? `<p class="pv-terms">${[dmgTxt, kwTxt].filter(Boolean).join('<i></i>')}</p>` : ''}
+      ${c.desc ? `<p class="pv-desc">${descRich(c.desc)}</p>` : ''}
+      <p class="pv-no">藏品编号 № ${photoNo(c.id)}</p>
+      ${note ? `<div class="pv-note"><b>备注</b>${esc(note)}</div>` : ''}
+      <div class="pv-nav"><button type="button" class="pv-navbtn" data-act="libPrev"${idx <= 0 ? ' disabled' : ''}>‹ 上一片</button><span class="pv-pos">${pos}</span><button type="button" class="pv-navbtn" data-act="libNext"${idx < 0 || idx >= list.length - 1 ? ' disabled' : ''}>下一片 ›</button></div>
       <button class="studio-zoom" data-act="libInspect" data-card="${escAttr(c.id)}">查看大图与背签</button>${actions}</div>`;
   }
 
   function libActiveFiltersHTML() {
     const filters = [
-      libFilter.tab !== '全部' ? ['tab', libFilter.tab] : null,
+      libFilter.tab !== '全部' ? ['tab', libFilter.tab === '能力卡' ? '能力' : libFilter.tab] : null,
       libFilter.rar !== '全部' ? ['rar', libFilter.rar] : null,
       libFilter.cls !== '全部' ? ['cls', libFilter.cls === '通用' ? '通用' : characterName(libFilter.cls)] : null,
       libFilter.q.trim() ? ['q', `“${libFilter.q.trim()}”`] : null,
     ].filter(Boolean);
-    if (!filters.length) return '';
+    // 单条件不占独立行（09-23：页签高亮/搜索框已自表达），≥2 条件叠加才出 chip 行
+    if (filters.length < 2) return '';
     return `<span>当前筛选</span>${filters.map(([key, label]) => `<button data-act="libRemoveFilter" data-filter="${key}" title="移除筛选：${escAttr(label)}">${esc(label)} ×</button>`).join('')}`;
   }
 
@@ -174,13 +191,12 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
     const rarityIndex = Math.max(0, RARITIES.indexOf(rarity));
     const art = (SDT.Art && SDT.Art.cardIcon && SDT.Art.cardIcon(c, LIB_ART)) ||
       SDT.Icons.img(SDT.Cards.TYPE_ART[c.type] || 'question');
-    const cost = c.cost == null ? 0 : c.cost;
     return `<div class="lib-item${c.id === lastSavedId ? ' saved' : ''}${c.id === libSelectedId ? ' selected' : ''}" data-i="${index}" style="${photoStyle(c, index)}">
       <button type="button" class="lib-cardwrap studio-photo rv${rarityIndex}" data-act="libInspect" data-card="${escAttr(c.id)}" aria-label="查看照片：${escAttr(c.name || '未命名卡牌')}" aria-current="${c.id === libSelectedId ? 'true' : 'false'}" title="查看大图与照片背签">
         <span class="studio-photo-paper">
           <span class="studio-photo-art">${art}</span>
-          <span class="studio-photo-cost" aria-label="费用 ${escAttr(cost)}">${esc(cost)}</span>
-          <span class="studio-photo-caption"><b>${esc(c.name || '未命名卡牌')}</b><small class="studio-photo-marks"><span class="photo-type-mark">${esc(c.type || '?')}</span><span class="photo-rarity-mark">${esc(rarity)}</span></small><i class="studio-photo-no" aria-hidden="true">№ ${photoNo(c.id)}</i></span>
+          <span class="studio-photo-caption"><b>${esc(c.name || '未命名卡牌')}</b>${c.type ? `<small class="type-badge">${esc(c.type === '能力卡' ? '能力' : c.type)}</small>` : ''}</span>
+          ${(rarityIndex === 4 || rarityIndex === 7) ? '<i class="photo-corner" aria-hidden="true"></i>' : ''}
         </span>
       </button>
     </div>`;
@@ -243,6 +259,9 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
       grid.classList.add('scrolling');
       if (libScrollTimer) clearTimeout(libScrollTimer);
       libScrollTimer = setTimeout(() => grid.classList.remove('scrolling'), 160);
+      // 回顶按钮：滚过一屏半后现身（09-23）
+      const topBtn = document.querySelector('.studio-top');
+      if (topBtn) topBtn.classList.toggle('show', grid.scrollTop > 360);
     }, { passive: true });
     grid.addEventListener('focusin', (e) => {
       const card = e.target.closest && e.target.closest('.lib-cardwrap[data-card]');
@@ -336,34 +355,32 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
   }
 
   // 筛选后只重绘卡格区（整页 showOverlay 会重置搜索焦点、重挂全部事件）
-  function renderLibGrid() {
+  // opts.keepBatch：翻看导航复用（不重置分批、不回顶到墙首）
+  function renderLibGrid(opts) {
+    const keepBatch = !!(opts && opts.keepBatch);
     const filtered = libFiltered();
     const n = filtered.length;
-    libVisibleCount = LIB_BATCH_SIZE;
+    if (!keepBatch) libVisibleCount = LIB_BATCH_SIZE;
     if (!filtered.some(c => c.id === libSelectedId)) libSelectedId = filtered[0]?.id || null;
     const resultCount = document.getElementById('libResultCount');
     if (resultCount) {
+      // 全量时隐藏「陈列」组（09-23 计数语义：馆藏=总量，陈列只在筛选分家后有意义）
+      const showWrap = resultCount.closest('.lib-show');
+      if (showWrap) showWrap.hidden = (n === libCards.length);
       // 数量真的变了才播脉冲（重绘时数字没变就别闪）
       const changed = resultCount.textContent !== String(n);
       resultCount.textContent = n;
-      if (changed) {
+        if (changed) {
         resultCount.classList.remove('bump');
         void resultCount.offsetWidth;
         resultCount.classList.add('bump');
-        // 暗房红灯：筛选重排=暗房在冲洗新一批照片，亮 900ms 后熄灭
-        const lamp = document.getElementById('libLamp');
-        if (lamp) {
-          lamp.classList.add('on');
-          clearTimeout(lamp._offTimer);
-          lamp._offTimer = setTimeout(() => lamp.classList.remove('on'), 900);
-        }
       }
     }
     const grid = document.getElementById('libGrid');
     if (grid) {
       grid.classList.toggle('is-empty', !filtered.length);
       grid.innerHTML = libGridContentsHTML(filtered);
-      grid.scrollTop = 0;
+      if (!keepBatch) grid.scrollTop = 0;
       bindLibGridScroll();
     }
     const active = document.getElementById('libActiveFilters');
@@ -419,8 +436,8 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
     const counts = {};
     libCards.forEach(c => { counts[c.type] = (counts[c.type] || 0) + 1; });
     const tabs = ['全部'].concat(TYPES).map(t =>
-      `<button class="type-tab${libFilter.tab === t ? ' on' : ''}" data-act="libTab" data-t="${t}">
-        <i>${SDT.Icons.img(t === '全部' ? 'archive' : (SDT.Cards.TYPE_ART[t] || 'question'))}</i>${t}<em>${t === '全部' ? libCards.length : (counts[t] || 0)}</em>
+      `<button type="button" class="type-tab${libFilter.tab === t ? ' on' : ''}" data-act="libTab" data-t="${t}">
+      ${t === '能力卡' ? '能力' : t}<em>${t === '全部' ? libCards.length : (counts[t] || 0)}</em>
       </button>`).join('');
     const editorTools = game.devMode ? `<button class="hs-btn studio-edit-toggle${libEditMode ? ' on' : ''}" data-act="libEditMode" aria-pressed="${libEditMode}">${libEditMode ? '退出编辑' : '编辑模式'}</button>${libEditMode ? '<button class="hs-btn gold" data-act="newCard">＋ 制作新卡</button><button class="hs-btn" data-act="exportCards">[[icon:upload]] 导出</button><button class="hs-btn" data-act="importCards">[[icon:download]] 导入</button>' : ''}` : '';
     const first = libFiltered()[0] || null;
@@ -429,20 +446,21 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
     UI.showOverlay('', `
       <div class="pg card-library-page photo-studio-v3${libEditMode ? ' edit-mode' : ''}">
         <header class="pg-head library-head">
-          <div class="library-title"><span class="library-kicker"><i class="studio-lamp" id="libLamp" aria-hidden="true"></i>WINTER PHOTO STUDIO // 07</span><h2>[[icon:cards]] 照相馆</h2></div>
-          <span class="clib-count"><small>第 07 卷</small><i></i><small>馆藏</small><b>${libCards.length}</b><small>陈列</small><b id="libResultCount">${libFiltered().length}</b></span>
+          <div class="library-title"><h2>[[icon:cards]] 照相馆</h2></div>
+          <span class="clib-count"><small>馆藏</small><b>${libCards.length}</b><span class="lib-show"${libFiltered().length === libCards.length ? ' hidden' : ''}><small>陈列</small><b id="libResultCount">${libFiltered().length}</b></span></span>
           <button class="pg-close" data-act="closeCardPage" title="关闭（Esc）">[[icon:cross]]</button>
-          <div class="library-tools"><label class="studio-search"><input id="cardSearch" class="clib-search" aria-label="搜索卡牌" placeholder="搜索卡名或效果…" value="${escAttr(libFilter.q)}"></label><select id="libSort" class="pg-select" title="排序"><option value="rarity"${libFilter.sort === 'rarity' ? ' selected' : ''}>按稀有度陈列</option><option value="cost"${libFilter.sort === 'cost' ? ' selected' : ''}>按费用排序</option><option value="name"${libFilter.sort === 'name' ? ' selected' : ''}>按名称排序</option></select><button class="hs-btn" data-act="exportNotes" title="导出全部备注（含手写改写）为 card-notes.json">[[icon:download]] 导出备注</button>${editorTools}</div>
+          <div class="library-tools"><label class="studio-search"><input id="cardSearch" class="clib-search" aria-label="搜索卡牌" placeholder="搜索卡名或效果…" value="${escAttr(libFilter.q)}"></label><select id="libSort" class="pg-select" title="排序"><option value="rarity"${libFilter.sort === 'rarity' ? ' selected' : ''}>按稀有度陈列</option><option value="cost"${libFilter.sort === 'cost' ? ' selected' : ''}>按费用排序</option><option value="name"${libFilter.sort === 'name' ? ' selected' : ''}>按名称排序</option></select>${libEditMode ? '<button class="hs-btn" data-act="exportNotes" title="导出全部备注（含手写改写）为 card-notes.json">[[icon:download]] 导出备注</button>' : ''}${editorTools}</div>
         </header>
         <section class="studio-filterbar" aria-label="卡牌类型筛选">
           <div class="clib-tabs">${tabs}</div>
-          <details class="library-advanced"${libFilter.rar !== '全部' || libFilter.cls !== '全部' ? ' open' : ''}><summary>高级筛选</summary><div><select id="libRar" class="pg-select library-select" title="按稀有度筛选"><option value="全部">全部稀有度</option>${RARITIES.map(r => `<option value="${r}"${libFilter.rar === r ? ' selected' : ''}>${r}</option>`).join('')}</select><select id="libCls" class="pg-select library-select" title="按职业筛选"><option value="全部">全部人物</option><option value="通用"${libFilter.cls === '通用' ? ' selected' : ''}>通用</option>${[...new Set(libCards.map(c => c.cls).filter(Boolean))].sort().map(c => `<option value="${escAttr(c)}"${libFilter.cls === c ? ' selected' : ''}>${esc(characterName(c))}</option>`).join('')}</select></div></details>
+          <div class="advanced-row" role="group" aria-label="高级筛选"><select id="libRar" class="pg-select library-select" title="按稀有度筛选"><option value="全部">全部稀有度</option>${RARITIES.map(r => `<option value="${r}"${libFilter.rar === r ? ' selected' : ''}>${r}</option>`).join('')}</select><select id="libCls" class="pg-select library-select" title="按人物筛选"><option value="全部">全部人物</option><option value="通用"${libFilter.cls === '通用' ? ' selected' : ''}>通用</option>${[...new Set(libCards.map(c => c.cls).filter(Boolean))].sort().map(c => `<option value="${escAttr(c)}"${libFilter.cls === c ? ' selected' : ''}>${esc(characterName(c))}</option>`).join('')}</select></div>
           <button class="studio-clear" data-act="libClearFilter">清空筛选</button>
         </section>
         <div class="studio-active-filters" id="libActiveFilters">${libActiveFiltersHTML()}</div>
         <div class="clib-main">
           ${libGridHTML()}
           <aside class="library-inspector" aria-label="选中卡牌详情"><div class="studio-inspector-head"><b>选片台</b></div><div class="library-preview${selectedPreview ? ' has-preview' : ''}" id="libPreview" aria-live="polite">${libPreviewHTML(selectedPreview)}</div></aside>
+          <button type="button" class="studio-top" data-act="libTop" title="回到墙顶" aria-label="回到墙顶">↑</button>
         </div>
       </div>`, 'page');
     lastSavedId = null;
@@ -465,6 +483,23 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
       syncLibFilterUI(); renderLibGrid();
     });
     UI.act('libEditMode', () => { libEditMode = !libEditMode; renderCardLibrary(); });
+    // 选片台翻看（09-23：上一片/下一片，在当前筛选集内走，带音效）
+    const navStep = (delta) => {
+      const list = libFiltered();
+      const i = list.findIndex(c => c.id === libSelectedId);
+      if (i < 0 || !list.length) return;
+      const j = Math.max(0, Math.min(list.length - 1, i + delta));
+      if (j === i) return;
+      if (j >= libVisibleCount) {
+        libVisibleCount = Math.ceil((j + 1) / LIB_BATCH_SIZE) * LIB_BATCH_SIZE;
+        renderLibGrid({ keepBatch: true });
+      }
+      setLibSelection(list[j].id, true);
+      libCardNodeById.get(list[j].id)?.closest('.lib-item')?.scrollIntoView({ block: 'nearest' });
+    };
+    UI.act('libPrev', () => navStep(-1));
+    UI.act('libNext', () => navStep(1));
+    UI.act('libTop', () => { const g = document.getElementById('libGrid'); if (g) g.scrollTo({ top: 0 }); });
     UI.act('editCard', (d) => {
       const card = SDT.Cards.all().find(c => c.id === (d.card || d.id));
       if (card) openCardDesigner(card);
