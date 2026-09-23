@@ -11,6 +11,7 @@ window.SDT.MAP = {
   items: { rations: { name: '口粮' }, wood: { name: '木材' } },
 };
 await import('../game/src/cards.js');
+const { Random } = await import('../game/src/random.js');
 const { BattleSession } = await import('../game/src/battle.core.js');
 
 const C = window.SDT.Cards;
@@ -79,6 +80,7 @@ describe('法力奔涌（cc-mana-surge）', () => {
 
   it('打出后恰好释放 4 发随机法术，均为池内法术且不含自身', async () => {
     const g = makeGame([surge()]);
+    Random.reseed('mana-surge-observable-regression');
     BattleSession.start(g, [foeDef()], { isBoss: false, name: '奔涌测试' });
     await drain();
     const entry = g.ownedCards[0];

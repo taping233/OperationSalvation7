@@ -11,8 +11,8 @@
       "id": "tt3sp-silverthorn",
       "clause": "注能(1)：伤害+3",
       "reason": {
-        "kind": "unsupported",
-        "detail": "文本效果解析器当前未识别注能伤害增量句式。"
+        "kind": "audit_context",
+        "detail": "战斗解析器读取注能状态并按描述增加伤害；逐句审计不驱动真实注能出牌，独立战斗断言确认注能后伤害为 8。"
       }
     },
     {
@@ -27,8 +27,8 @@
       "id": "tt7-meteorstrong",
       "clause": "注能(2)：施放 3 次火球",
       "reason": {
-        "kind": "unsupported",
-        "detail": "文本效果解析器当前未识别注能后多次施放火球的句式。"
+        "kind": "audit_context",
+        "detail": "战斗效果步骤识别注能后的火球次数并逐次命中；逐句审计不驱动真实注能出牌，独立战斗断言确认三次火球共造成 12 点法伤。"
       }
     },
     {
