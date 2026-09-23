@@ -20,6 +20,10 @@ const ENEMY_EFFECT_PATTERN = new RegExp([
 ].join('|'));
 
 function isAreaEffect(card) {
+  const battle = card && card.rules && card.rules.battle;
+  if (battle && battle.target && Object.prototype.hasOwnProperty.call(battle.target, 'area')) {
+    return !!battle.target.area;
+  }
   return AOE_PATTERN.test(String(card.desc || ''));
 }
 
@@ -44,7 +48,11 @@ function isPureAreaEffect(card) {
 
 function targetSideFor(card, damageTypes) {
   const desc = String(card.desc || '');
-  // 需求 #18（2026-09-09）：装备装配要指向自己——拖到左侧「你」的立绘上穿戴
+  const battle = card && card.rules && card.rules.battle;
+  if (battle && battle.target && Object.prototype.hasOwnProperty.call(battle.target, 'side')) {
+    return battle.target.side ?? null;
+  }
+  // 需求 #18（2026-09-09）：未声明结构化目标的旧装备仍指向自己。
   if (card.type === '装备') return 'self';
   const isMove = damageTypes.includes(card.type);
   if (!isPureAreaEffect(card) && (isMove ? hasEnemyEffect(card) : (card.dmgType === 'attack' || isAreaEffect(card)))) return 'enemy';
@@ -77,15 +85,27 @@ function unplayableReasonFor(card, mode, ctx) {
   if (card.type === '生物') return '生物卡是敌人图鉴，记录敌人信息，无法打出';
   // 封印之牌（受缚之残影/封印肢体1-4/化形后的深渊主宰，2026-09-16 定版）：
   // 抽到无效果也无法打出——集齐 5 张封印之牌后由 battle.core 破封化形
-  if (/无法打出/.test(String(card.desc || ''))) return '封印之牌：抽到时无效果，集齐 5 张封印之牌后破除封印';
+  const battle = card && card.rules && card.rules.battle;
+  const structuredRequirements = battle && Array.isArray(battle.requirements) ? battle.requirements : null;
+  if (structuredRequirements
+    ? structuredRequirements.some(rule => rule.kind === 'unplayable')
+    : /无法打出/.test(String(card.desc || ''))) {
+    return '封印之牌：抽到时无效果，集齐 5 张封印之牌后破除封印';
+  }
   if (mode === 'normal' && card.type === '能力卡') return '能力卡只能在对 BOSS 战时使用（普通战无法使用能力卡）';
   if (mode === 'boss' && card.type === '道具') return '道具卡只能在普通战斗中使用（BOSS 战牌库不含道具）';
-  if (mode === 'normal' && DECK_ONLY_PATTERN.test(String(card.desc || ''))) {
+  const deckOnly = structuredRequirements
+    ? structuredRequirements.some(rule => rule.kind === 'deckOnly')
+    : DECK_ONLY_PATTERN.test(String(card.desc || ''));
+  if (mode === 'normal' && deckOnly) {
     return '「牌库」词条只有对战 BOSS 时生效——普通战斗没有牌库与墓地，无法打出';
   }
   // 手牌代价不足（快意恩仇「消耗 2 张初始攻击」等）：整张卡不可打出，避免白消耗一张牌
   if (ctx && ctx.handCards) {
-    const cost = handCostOf(card);
+    const structuredCost = structuredRequirements && structuredRequirements.find(rule => rule.kind === 'handCards');
+    const cost = structuredCost
+      ? { n: Math.max(0, +(structuredCost.count ?? 1) || 0), type: structuredCost.type || null }
+      : structuredRequirements ? null : handCostOf(card);
     if (cost) {
       const avail = ctx.handCards.filter(e => e.card !== ctx.selfCard && handCardMatches(e.card, cost.type)).length;
       if (avail < cost.n) {

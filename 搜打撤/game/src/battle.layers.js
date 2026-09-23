@@ -17,6 +17,7 @@ import { commands, getSnapshot, AFFIX_META, Combat, aegisBlocked, effCostOf, fin
 import { animateSafe } from './battle.anim.js';
 import { aim, clickSelectedUid, selectCardByClick, clickSelectedTarget, startAim, cancelAim, cancelClickSelection } from './battle.aim.js';
 import { showFoePreview, clearFoePreview } from './battle.hover.js';
+import { cardRuleHint } from './battle.preview.js';
   // 数字键选牌 / Esc 取消（原在 aim 片：需读手牌层 handLayer，随迁本片解 aim↔layers 环——2026-09-22 批5）
   document.addEventListener('keydown', (e) => {
     if (!handLayer || e.defaultPrevented || e.key === 'Escape') {
@@ -83,7 +84,7 @@ import { showFoePreview, clearFoePreview } from './battle.hover.js';
   }
   // 单叠手牌的即时视图状态：side/类名/提示语/卡面内容一次算全（原 render 内联计算外提）
   function handGroupState(g, ctx) {
-    const { infusingNow, infusing, pendingTarget, energy, busy, spellBonus } = ctx;
+    const { infusingNow, infusing, pendingTarget, energy, busy, spellBonus, mode } = ctx;
     const uid = g.uids[0];
     const isSelf = infusingNow && g.self;
     const pickedN = infusingNow ? g.uids.filter(u => infusing.picked.includes(u)).length : 0;
@@ -101,6 +102,7 @@ import { showFoePreview, clearFoePreview } from './battle.hover.js';
     const costTip = effCost !== g.card.cost
       ? (effCost === 0 ? `（[[icon:bolt]] 当前按 0 费打出）` : `（[[icon:sparkles]] 费用变化：按 ${effCost} 费打出）`)
       : '';
+    const ruleHint = cardRuleHint(g.card, mode);
     const tip = infusingNow
       ? (isSelf ? '正在注能的卡牌' : `点击选择消耗（注能）${g.uids.length > 1 ? `· 本叠还有 ${g.uids.length} 张` : ''}`)
       : blocked
@@ -150,7 +152,7 @@ import { showFoePreview, clearFoePreview } from './battle.hover.js';
           ? { dmgOverride: { bonus: spellBonus } } : {}),
       })
       + cnt + badge + costBadge + infChip + curseChip;
-    return { g, uid, side, cls, tip, inner };
+    return { g, uid, side, cls, tip, inner, ruleHint };
   }
   // 挂载：把手牌常驻层接回刚重建的舞台（占位节点 → 常驻节点）。
   // 战斗实例令牌变了 = 上一场战斗已收尾/新战斗开打：清掉旧槽位再开新局。
@@ -182,6 +184,7 @@ import { showFoePreview, clearFoePreview } from './battle.hover.js';
       infusingNow: !!snapshot.infusing, infusing: snapshot.infusing,
       pendingTarget: snapshot.pendingTarget, energy: snapshot.energy, busy: snapshot.busy,
       spellBonus: (extra && extra.spellBonus) || 0,
+      mode: extra && extra.mode,
     };
     // 旧槽位现矩形一次量完：目标值更新引发的位移以此为准做补间
     handSlots.forEach(rec => { rec.rect = rec.slot.isConnected ? uiRect(rec.slot) : null; });   // 布局口径
@@ -230,13 +233,24 @@ import { showFoePreview, clearFoePreview } from './battle.hover.js';
       rec.__name = `${g.card.name} · ${effCostOf(g.card, st.uid)} 费`;
       rec.card.setAttribute('role', 'button');
       rec.card.tabIndex = 0;
-      rec.card.setAttribute('aria-label', `${rec.__name}。${st.tip || '按回车或空格选择这张牌'}`);
+      rec.card.setAttribute('aria-label', `${rec.__name}。${st.ruleHint ? st.ruleHint + ' ' : ''}${st.tip || '按回车或空格选择这张牌'}`);
       rec.card.setAttribute('aria-disabled', st.cls.includes('off') ? 'true' : 'false');
       // U8：操作指引走 #tooltip（见槽位创建处的 mouseenter），原生 title 不再挂
       rec.card.removeAttribute('title');
       rec.card.setAttribute('aria-pressed', clickSelectedUid === st.uid ? 'true' : 'false');
       // 卡面外的角标（目标侧/费用变化/注能/诅咒）带 [[icon:]] 宏——写入时统一渲染，否则宏原文直接上屏
-      if (rec.sig !== st.inner) { rec.card.innerHTML = SDT.Icons.rich(st.inner); rec.sig = st.inner; }
+      const renderSig = `${st.inner}\u0000${st.ruleHint}`;
+      if (rec.sig !== renderSig) {
+        rec.card.innerHTML = SDT.Icons.rich(st.inner);
+        const desc = rec.card.querySelector('.hsc-desc');
+        if (desc && st.ruleHint) {
+          const hint = document.createElement('span');
+          hint.className = 'bt-rulehint';
+          hint.textContent = st.ruleHint;
+          desc.appendChild(hint);
+        }
+        rec.sig = renderSig;
+      }
       ordered.push(rec);
     });
     // —— 顺序校正（DOM 序 = 扇形叠放序）：失序才搬节点 ——

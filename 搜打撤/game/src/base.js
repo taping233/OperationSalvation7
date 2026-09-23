@@ -538,12 +538,35 @@ import { DATA } from './data-loader.js';
     { re: /口粮/, kind: 'rations', label: '口粮', icon: 'bread' },
     { re: /钥匙/, kind: 'keys', label: '钥匙', icon: 'key' },
   ];
+  const baseMaterialRule = (card) => {
+    const baseRules = card && card.rules && card.rules.base;
+    if (baseRules && Object.prototype.hasOwnProperty.call(baseRules, 'material')) {
+      const material = baseRules.material;
+      const id = card.id || '<missing id>';
+      const invalid = (reason) => { throw new Error(`Invalid base.material for card ${id}: ${reason}`); };
+      if (!material || typeof material !== 'object' || Array.isArray(material)) invalid('material must be an object');
+      if (!Object.prototype.hasOwnProperty.call(material, 'kind')) invalid('missing kind');
+      if (!MATERIAL_KINDS.some(m => m.kind === material.kind)) invalid(`unknown kind ${String(material.kind)}`);
+      if (!Object.prototype.hasOwnProperty.call(material, 'amount')) invalid('missing amount');
+      if (!Number.isInteger(material.amount) || material.amount <= 0) invalid('amount must be a positive integer');
+      if (card.type !== '资源') invalid('material rules require a resource card');
+      return { present: true, value: material };
+    }
+    return { present: false, value: null };
+  };
+  const structuredMaterialAmount = (rule) => rule.amount;
   const materialInfo = (card) => {
+    const structured = baseMaterialRule(card);
+    if (structured.present) {
+      return MATERIAL_KINDS.find(m => m.kind === structured.value.kind);
+    }
     if (!card || card.type !== '资源') return null;
     return MATERIAL_KINDS.find(m => m.re.test(card.name || '')) || null;
   };
   // 每张卡折入的数量：描述「×N」优先，缺省 1
   const materialAmount = (card) => {
+    const structured = baseMaterialRule(card);
+    if (structured.present) return structuredMaterialAmount(structured.value);
     const m = String(card.desc || '').match(/×\s*(\d+)/);
     return m ? +m[1] : 1;
   };
@@ -606,6 +629,11 @@ import { DATA } from './data-loader.js';
   // 改名后按卡名/「一串」识别只计 1，与卡面「钥匙 ×3」矛盾；与 materialAmount 同款解析，
   // 无 ×N 标记（「一把钥匙」）按 1 计；中文数词不参与解析（×N 只认数字，无 NaN 静默路径）
   const keyCount = () => (data.keys || 0) + data.stash.reduce((a, b) => {
+    const structured = baseMaterialRule(b.card);
+    if (structured.present) {
+      if (!structured.value || structured.value.kind !== 'keys') return a;
+      return a + structuredMaterialAmount(structured.value) * (b.count || 0);
+    }
     if (!/钥匙/.test(b.card.name || '')) return a;
     const m = String(b.card.desc || '').match(/×\s*(\d+)/);
     return a + (m ? +m[1] : 1) * (b.count || 0);

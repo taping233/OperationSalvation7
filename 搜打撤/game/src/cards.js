@@ -51,6 +51,33 @@ import { KEY, TT2_KEY_V3, TT1_KEY_V6, TT4_KEY_V2, TT3_KEY_V5, TT5_KEY, TT6_KEY, 
 import { rulesSlice } from './cards.rules.js';
 import { dataSlice } from './cards.data.js';
 import { syncSlice } from './cards.sync.js';
+import { validateCardRules } from './card-rules.schema.js';
+
+let _cardsCacheRaw = null;
+
+function restoreLastValidCardsCache() {
+  if (_cardsCacheRaw == null) {
+    _cardsCache = null;
+    return;
+  }
+  try { _cardsCache = JSON.parse(_cardsCacheRaw); }
+  catch (e) { _cardsCache = null; }
+}
+
+function assertValidCardRules(cards) {
+  for (const card of cards) {
+    if (!card || card.rules === undefined) continue;
+    const result = validateCardRules(card);
+    if (!result.ok) {
+      const details = result.errors
+        .map(error => `${error.cardId} ${error.path}: ${error.message}`)
+        .join('; ');
+      const error = new Error(`Invalid card rules: ${details}`);
+      error.name = 'CardRulesValidationError';
+      throw error;
+    }
+  }
+}
   SDT.Cards = {
     ...rulesSlice,
     ...dataSlice,
@@ -59,11 +86,24 @@ import { syncSlice } from './cards.sync.js';
       // 内存缓存（2026-09-07 性能）：卡库全量存 localStorage（数百张含全部描述文本），
       // 每张卡渲染时 rarityOf/sellPrice/isHeroLine 都会调 all() 全量 JSON.parse——
       // 战斗页一次 render 按「手牌衍生/能力卡数 ×2-3」放大解析次数。
-      // 写路径只有 saveAll / clearAll，在那两处同步更新/失效保持一致
-      // （调用方均以 filter/重新赋值产生新数组，无原地修改）。
+      // 写路径由 saveAll / clearAll 同步缓存；序列化快照用于写失败时撤销调用方
+      // 对 all() 缓存数组做过的原地修改。冷加载时仅校验一次，热读取不重复扫描。
       if (_cardsCache) return _cardsCache;
-      try { _cardsCache = JSON.parse(localStorage.getItem(KEY)) || []; }
-      catch (e) { _cardsCache = []; }
+      let raw;
+      let cards;
+      try {
+        raw = localStorage.getItem(KEY);
+        cards = JSON.parse(raw) || [];
+      } catch (e) {
+        _cardsCache = [];
+        _cardsCacheRaw = '[]';
+        return _cardsCache;
+      }
+      // 规则错误必须显式中断加载，保留原始 localStorage 内容供诊断/修复；
+      // 这里与 JSON 解析失败分开，避免把有效但含未知规则版本的卡库当空库。
+      assertValidCardRules(cards);
+      _cardsCache = cards;
+      _cardsCacheRaw = JSON.stringify(cards);
       return _cardsCache;
     },
 
@@ -71,14 +111,27 @@ import { syncSlice } from './cards.sync.js';
 
     // 写入走安全封装（迭代评审 09-20 G-P2）：配额满时裸写曾抛未捕获异常、卡牌设计器无声失败
     saveAll(cards) {
-      _cardsCache = cards;
-      try { localStorage.setItem(KEY, JSON.stringify(cards)); return true; }
-      catch (e) { console.error('[cards] 自定义卡库保存失败（存储空间可能已满）：', e); return false; }
+      try { assertValidCardRules(cards); }
+      catch (e) {
+        restoreLastValidCardsCache();
+        throw e;
+      }
+      try {
+        const serialized = JSON.stringify(cards);
+        localStorage.setItem(KEY, serialized);
+        _cardsCache = cards;
+        _cardsCacheRaw = serialized;
+        return true;
+      } catch (e) {
+        restoreLastValidCardsCache();
+        console.error('[cards] 自定义卡库保存失败（存储空间可能已满）：', e);
+        return false;
+      }
     },
 
 
     upsert(card) {
-      const cards = SDT.Cards.all();
+      const cards = SDT.Cards.all().slice();
       if (!card.id) card.id = 'c' + Date.now().toString(36) + Math.floor(Random.random('identity') * 46656).toString(36);
       const i = cards.findIndex(c => c.id === card.id);
       if (i >= 0) cards[i] = card; else cards.push(card);
@@ -90,7 +143,7 @@ import { syncSlice } from './cards.sync.js';
     remove(id) { SDT.Cards.saveAll(SDT.Cards.all().filter(c => c.id !== id)); },
 
 
-    clearAll() { _cardsCache = null; localStorage.removeItem(KEY); },
+    clearAll() { _cardsCache = null; _cardsCacheRaw = null; localStorage.removeItem(KEY); },
 
     // ---- 卡背图案（v0.21）：默认「行囊粗布」恒解锁，其余由成就领取解锁 ----
     // emblem 印在卡背中央；from 说明解锁途径（基地成就页展示）。
@@ -151,6 +204,14 @@ import { syncSlice } from './cards.sync.js';
       SDT.Cards.ensureDuplicateRenames(); // 同名不同 ID/效果版本统一在后者追加「-改」（含旧卡库）
       SDT.Cards.ensureEvents0919();    // 0919 都市污染事件池：放在实机同步之后，以本轮定稿名与效果为准
       SDT.Cards.seedBatch(SDT.Cards.TABLETOP12, TT12_KEY, 'tt12'); // 第十二批：射线/研发系列新卡 17 张（2026-09-23）；新 KEY 老档补播，放最后以本批定稿为准
+      SDT.Cards.ensureTT12PreplayRules(); // 从定版定义补齐 TT12 的出牌前规则与即时效果规则
+      SDT.Cards.ensureTT10BaseMaterialRules(); // 从 TT10 定版定义补齐两张材料卡规则
+      SDT.Cards.ensureTT1BaseMaterialRules(); // 从第一批定版定义补齐六张基地材料卡规则
+      SDT.Cards.ensureTT10OnPlayRules(); // 从 TT10 定版定义补齐包扎、坚守的有序即时效果规则
+      SDT.Cards.ensureBagUseRules(); // 从代码定版定义补齐两张背包道具的使用规则
+      SDT.Cards.ensureTT7MultiHitRules(); // TT7 多段攻击与偷袭卡按稳定 id 补齐旧卡规则
+      SDT.Cards.ensureTT7StatusRules(); // 冰封千里按稳定 id 补齐群体冰冻规则
+      SDT.Cards.ensureTT12DiscoverRules(); // 高端研发按稳定 id 补齐发现与逐回合降费规则
     },
 
     // 职业稀有度迁移（设计者 2026-09-04 定版）：老档里第七批职业卡（tt7- 前缀）

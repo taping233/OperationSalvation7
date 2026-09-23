@@ -138,15 +138,27 @@ import { aim, aimPlayedAt, clickSelectedUid, selectCardByClick, startAim, cancel
     if (handSelecting) {
       setHandSuspended(true);
       // 2026-09-06 #24/#25：从手牌选择卡牌施放/消耗的通用弹层
-      const pool = hand.map(findCard).filter(o => o && matchHandSelectKey(o.card, handSelecting.type));
+      const isPayment = handSelecting.act === 'payment';
+      const unavailable = isPayment
+        ? new Set([...(handSelecting.excludedUids || []), ...(handSelecting.selectedUids || [])])
+        : null;
+      const pool = hand.map(findCard).filter(o => o && matchHandSelectKey(o.card, handSelecting.type)
+        && (!unavailable || !unavailable.has(o.uid)));
       const optsHTML = pool.map(o => `
         <div class="bt-card" data-act="btPickHand" data-uid="${o.uid}" title="点击选择">
           ${SDT.Cards.cardHTML(o.card, 'sm')}
         </div>`).join('');
-      UI.showOverlay(`${opts.isBoss ? '[[icon:demon]] BOSS战' : '[[icon:swords]] 遭遇战'} · 第 ${turn} 回合 · [[icon:cards]] 选择手牌`, `
-        <p class="ov-stats">从手牌中选择 <b>${handSelecting.n}</b> 张${handSelecting.type ? `<b>${handSelecting.type}</b>` : '卡牌'}${handSelecting.act === 'play' ? '打出（不扣费）' : '消耗'}</p>
+      const paymentName = handSelecting.payment?.card?.name;
+      const paymentLabel = isPayment
+        ? `支付代价${paymentName ? `：为【${esc(paymentName)}】选择` : ''}`
+        : '选择手牌';
+      const paymentNote = isPayment
+        ? '<p class="ov-note">已选手牌和本次牌/燃料不在候选池中；选取后会作为支付代价消耗。</p>'
+        : '<p class="ov-note">必须选满燃料后才会发动。</p>';
+      UI.showOverlay(`${opts.isBoss ? '[[icon:demon]] BOSS战' : '[[icon:swords]] 遭遇战'} · 第 ${turn} 回合 · [[icon:cards]] ${paymentLabel}`, `
+        <p class="ov-stats">${isPayment ? '还需支付：' : '从手牌中选择 '}<b>${handSelecting.n}</b> 张${handSelecting.type ? `<b>${handSelecting.type}</b>` : '卡牌'}${handSelecting.act === 'play' ? '打出（不扣费）' : isPayment ? '作为支付代价' : '消耗'}</p>
         <div class="bt-hand">${optsHTML || '<p class="ov-empty">手牌中没有符合条件的卡牌</p>'}</div>
-        ${handSelecting.mandatory ? '<p class="ov-note">必须选满燃料后才会发动。</p>' : '<p class="ov-note"><button class="ov-btn ghost" data-act="btPickHandSkip">跳过该效果</button></p>'}`, 'discover');
+        ${handSelecting.mandatory ? paymentNote : '<p class="ov-note"><button class="ov-btn ghost" data-act="btPickHandSkip">跳过该效果</button></p>'}`, 'discover');
       UI.act('btPickHand', (d) => pickHandSelect(d.uid));
       if (!handSelecting.mandatory) UI.act('btPickHandSkip', () => skipHandSelect());
       UI.refresh(SDT.game);

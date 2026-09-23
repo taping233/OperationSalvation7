@@ -20,10 +20,23 @@ function normalizeDesc(value) {
 }
 
 function semanticMatch(card) {
+  const operation = card?.rules?.triggers?.onPlay?.find(item => item.op === 'damage' && item.retarget === 'livingFoes');
+  if (operation) return card.type === '武术' && card.dmgType === 'attack' && Number.isFinite(+card.dmg)
+    ? { hits: Math.max(1, Math.floor(+operation.hitCount || 1)), retarget: true } : null;
   const spec = card && SEMANTICS[card.id];
   if (!spec) return null;
   return card.type === spec[0] && card.dmgType === spec[1] && +card.dmg === spec[2]
     && normalizeDesc(card.desc) === spec[3] ? { hits: spec[4] } : null;
+}
+
+function cardRuleHint(card, mode) {
+  if (!card) return '';
+  const operation = card.rules?.triggers?.onPlay?.find(item => item.op === 'damage' && item.retarget === 'livingFoes');
+  if (!operation) return '';
+  const payment = card.rules?.battle?.requirements?.find(rule => rule.kind === 'handCards');
+  return payment
+    ? `先消耗 ${payment.count} 张${payment.type || '手牌'}；${operation.hitCount} 段，目标倒下后按战场顺序转移。`
+    : `${operation.hitCount} 段；目标倒下后按战场顺序转移。`;
 }
 
 function cloneTarget(foe) {
@@ -71,28 +84,46 @@ function previewAction({ snapshot, action, cardContext }) {
   if (!Combat.TYPE_NAME[card.dmgType] || !Number.isFinite(+card.dmg)) return unknown(cost, frozenTargets, '这张牌没有可预览的固定伤害流程');
 
   const hitsPlanned = exactSpec.hits;
-  const target = cloneTarget(foe);
+  const hasRetargetSpecial = exactSpec.retarget && hitsPlanned > 1 && snapshot.foes.some((candidate, index) => index !== targetIndex
+    && !candidate.dead && candidate.hp > 0
+    && (candidate.heartsMode || candidate.protected || candidate.affix === 'aegis'));
+  if (hasRetargetSpecial) return unknown(cost, frozenTargets, '后续转向目标带有特殊免伤或生命规则，无法精确预览');
+  const targetsByIndex = snapshot.foes.map(cloneTarget);
+  const target = targetsByIndex[targetIndex];
   const hpBefore = target.hp;
   const shieldBefore = target.defense.shield;
   const armorBefore = target.defense.armor;
   const dodgeBefore = +(target.status.dodge || 0);
   const hits = [];
+  const targetIndexesByHit = [];
+  const defeatedTargetIndexes = [];
   const logs = [];
   if (cardContext.targetProtected || cardContext.aegisBlocked) {
-    for (let i = 0; i < hitsPlanned; i++) hits.push(0);
+    for (let i = 0; i < hitsPlanned; i++) { hits.push(0); targetIndexesByHit.push(targetIndex); }
   } else {
     const attacker = { atk: +(snapshot.player?.atk || 0), spellPower: +(snapshot.player?.spellPower || 0), status: { ...(snapshot.pstat?.status || {}) } };
     const amount = (+card.dmg || 0) + (+cardContext.damageGrowth || 0);
-    for (let i = 0; i < hitsPlanned && target.hp > 0; i++) {
-      const result = Combat.dealDamage(attacker, target, amount, card.dmgType);
+    let currentIndex = targetIndex;
+    for (let i = 0; i < hitsPlanned; i++) {
+      if (!exactSpec.retarget && target.hp <= 0) break;
+      let hitIndex = currentIndex;
+      if (exactSpec.retarget && targetsByIndex[hitIndex].hp <= 0) hitIndex = targetsByIndex.findIndex((t, index) => snapshot.foes[index] && !snapshot.foes[index].dead && t.hp > 0);
+      if (hitIndex < 0 || !targetsByIndex[hitIndex]) break;
+      const hitTarget = targetsByIndex[hitIndex];
+      const hpBeforeHit = hitTarget.hp;
+      const result = Combat.dealDamage(attacker, hitTarget, amount, card.dmgType);
       hits.push(result.dealt);
+      targetIndexesByHit.push(hitIndex);
+      if (hpBeforeHit > 0 && hitTarget.hp <= 0) defeatedTargetIndexes.push(hitIndex);
       logs.push(...result.log);
+      currentIndex = hitIndex;
     }
   }
   const total = hits.reduce((sum, value) => sum + value, 0);
   return Object.freeze({
     legal: true, cost, targetIndexes: frozenTargets, confidence: 'exact',
-    damage: Object.freeze({ type: card.dmgType, hits: Object.freeze(hits), total, hpBefore, hpAfter: target.hp,
+    damage: Object.freeze({ type: card.dmgType, hits: Object.freeze(hits), targetIndexesByHit: Object.freeze(targetIndexesByHit),
+      defeatedTargetIndexes: Object.freeze(defeatedTargetIndexes), total, hpBefore, hpAfter: target.hp,
       lethal: hpBefore > 0 && target.hp <= 0, shieldBefore, shieldAfter: target.defense.shield,
       armorBefore, armorAfter: target.defense.armor, dodgeBefore, dodgeAfter: +(target.status.dodge || 0),
       blockedBy: cardContext.targetProtected ? 'protected' : cardContext.aegisBlocked ? 'aegis' : null,
@@ -101,4 +132,4 @@ function previewAction({ snapshot, action, cardContext }) {
   });
 }
 
-export { normalizeDesc, previewAction, semanticMatch };
+export { cardRuleHint, normalizeDesc, previewAction, semanticMatch };

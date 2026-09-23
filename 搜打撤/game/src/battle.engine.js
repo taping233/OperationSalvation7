@@ -15,7 +15,7 @@ import { BATTLE_PHASES, beginTargeting, cancelTargeting, createBattleState, tran
 import { Random } from './random.js';
 import * as Combat from './combat.js';
 import { emit as busEmit } from './event-bus.js';
-import { calculateEffectiveCardCost, pocketSpellDiscountFor } from './battle.card-cost.js';
+import { calculateEffectiveCardCost, decayEffectiveCardCost, pocketSpellDiscountFor } from './battle.card-cost.js';
 import { calculateEnemyIntent } from './battle.intent.js';
 import { createBattleSnapshot } from './battle.snapshot.js';
 import { createBattleResolution } from './battle.resolution.js';
@@ -364,10 +364,24 @@ const applyTextEffects = createEffectExecutor({
     handCurseSpecs,
     queueSwapCostDiscover,
   });
+function repairLegacyTT7Card(card) {
+    if (!card || !['tt7-thundergrudge', 'tt7-meteorrain'].includes(card.id)) return card;
+    // Active battle snapshots may retain old card clones. The canonical card catalog
+    // remains the sole source for their gameplay fields and structured rule contract.
+    const definition = SDT.Cards.TABLETOP10?.find(entry => entry.id === card.id);
+    if (!definition?.rules) return card;
+    card.dmg = definition.dmg;
+    card.dmgType = definition.dmgType;
+    if (JSON.stringify(card.rules) !== JSON.stringify(definition.rules))
+      card.rules = JSON.parse(JSON.stringify(definition.rules));
+    return card;
+  }
 const findCard = (uid) => {
     const ov = cardOverrides.get(uid);
-    if (ov) return { uid, card: ov };
-    return G.ownedCards.find(o => o.uid === uid) || granted.find(o => o.uid === uid) || null;
+    if (ov) return { uid, card: repairLegacyTT7Card(ov) };
+    const entry = G.ownedCards.find(o => o.uid === uid) || granted.find(o => o.uid === uid) || null;
+    if (entry) repairLegacyTT7Card(entry.card);
+    return entry;
   };
 const drawOf = (card) => +(card.draw || 0) || SDT.Cards.deriveDraw(card) || 0;
 const infuseOf = (card) => card._noInfuse ? 0 : (+(card.infuse || 0) || SDT.Cards.deriveInfuse(card) || 0);
@@ -545,6 +559,7 @@ function finish(win) {
     if (SDT.Meta && SDT.Meta.track) SDT.Meta.track('battleEquips', { n: equipped.length });
     if (win === false && battleState.phase !== BATTLE_PHASES.DEFEAT) set$battleState(transitionBattle(battleState, BATTLE_PHASES.DEFEAT));
     actionQueue.clear();      // 终局后残留的动作回调再跑会触发 victory->enemy 非法迁移（2026-09-13 实测 UNCAUGHT）
+    set$busy(false);
     SDT.Sound.sfx(win === true ? 'victory' : win === false ? 'defeat' : 'flee');
     const playedCopy = played.slice();
     const consumedCopy = consumed.slice();
@@ -602,7 +617,8 @@ function snapshotSignature() {
     }
     if (infusing) sig.push(infusing.uid, infusing.need, infusing.card, infusing.picked.size, [...infusing.picked].sort().join(','));
     if (discovering) sig.push(discovering.n, discovering.rarity, discovering.options.length);
-    if (handSelecting) sig.push(handSelecting.n, handSelecting.type, handSelecting.act, handSelecting.thenText);
+    if (handSelecting) sig.push(handSelecting.n, handSelecting.type, handSelecting.act, handSelecting.thenText,
+      ...(handSelecting.selectedUids || []), ...(handSelecting.excludedUids || []));
     if (choosing) sig.push(choosing.cardName, choosing.options.join('|'));
     const pTgt = pendingTargetOf();
     if (pTgt) sig.push(pTgt.uid, pTgt.card);
@@ -704,15 +720,16 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
         set$playerCurseImmune(!!q.restore);
         return;   // 一次性，不保留
       }
-      if (q.special === 'costDecay') {
-        // 高端研发：被发现的「N 费招式」每回合开始费用 -1；降至 0 或卡已离场即注销
+      if (q.special === 'costDecay' || q.special === 'ruleCostDecay') {
+        // Legacy text jobs and structured rule jobs both bind decay to the discovered card uid.
         const o = q.uid ? findCard(q.uid) : null;
         if (o) {
           const cur = +(o.card.cost || 0);
-          const nc = Math.max(0, cur - 1);
+          const decayed = decayEffectiveCardCost(o.card, q.special === 'costDecay' ? 1 : q.amount);
+          const nc = +(decayed.cost || 0);
           if (nc !== cur) {
-            cardOverrides.set(q.uid, { ...o.card, cost: nc, _baseCost: o.card._baseCost != null ? o.card._baseCost : cur });
-            G.log(`[[icon:bolt]] <b>回合开始时</b>：【${esc(o.card.name)}】费用 -1（现 ${nc} 费）`, 'sys');
+            cardOverrides.set(q.uid, decayed);
+            G.log(`[[icon:bolt]] <b>回合开始时</b>：【${esc(o.card.name)}】费用 -${cur - nc}（现 ${nc} 费）`, 'sys');
           }
           if (nc > 0) keep.push(q);
         }
@@ -796,6 +813,13 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     hasCurse: foe => Combat.hasCurse(foe),
     getAliveFoes: alive,
     getGrowth: uid => growth[uid],
+    applyStatus: (foe, status, duration) => {
+      const applied = Combat.addCurse(foe, status, duration);
+      if (applied > 0 && foe && !foe.dead) {
+        floats.push({ unit: foeIdx(foe), text: '', cls: `cursefx curse-${status}` });
+      }
+      return applied;
+    },
     findCard, addTempCard, queueDiscover: value => discoverQueue.push(value), splitClauses, applyTextEffects,
     registerTurnStart, registerBattle, castRandomSpells, drawCards, grantSha, hitFoe,
     drawOf, isAOE,
@@ -1326,7 +1350,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     // 迟到/非法 uid 必须在任何交互状态变更前拒绝；否则会顺带取消当前药水点选。
     if (!hand.includes(uid)) return;
     if (interactionOf('item')) set$interaction(null);   // 打出手牌时取消药水点选（单槽幂等清 item）
-    if (busy || infusing || discovering || choosing || viewingGrave || viewingDeck) return;
+    if (busy || infusing || discovering || choosing || handSelecting || viewingGrave || viewingDeck) return;
     // 玩家命令只能提交当前手牌。内部直接释放继续直接走 queueCardExecution，
     // 保留牌与弃牌洗回重抽后 uid 会重新位于 hand，因此仍可再次合法使用。
     const entry = findCard(uid);
@@ -1364,7 +1388,6 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     }
     if (pendingCard) set$interaction(null);   // 交互正常结算：清卡牌槽（不 cancelTargeting，RESOLVING 迁移接管阶段）
     set$pendingHint('');
-    freeCast.delete(uid);
     // 「杀化为X」战斗规则：打出的初始攻击以目标卡形态结算（uid 沿用，弃牌簿记不变）
     let playCard = card;
     if (shaTransform && (card.name === '初始攻击' || card.name === '杀')) {
@@ -1446,13 +1469,34 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
   // 落盘，窗口内闪退最多回退数秒内的出牌（正常关窗走 beforeunload 全量保存）。
   
   const PERSIST_MIN_MS = 8000;
-  function queueCardExecution(uid, card, fuelUids, target, freeCost) {
+  function queueCardExecution(uid, card, fuelUids, target, freeCost, requirementsPaid = false, paymentUids = []) {
+    const handRequirement = card?.rules?.battle?.requirements?.find(rule => rule.kind === 'handCards');
+    if (handRequirement && !requirementsPaid) {
+      const excludedUids = [...new Set([uid, ...(fuelUids || [])])];
+      const available = hand.filter(handUid => {
+        if (excludedUids.includes(handUid)) return false;
+        const entry = findCard(handUid);
+        return entry && matchHandSelectKey(entry.card, handRequirement.type);
+      });
+      if (available.length < handRequirement.count) {
+        G.log(`[[icon:cross]] 【${esc(card.name)}】无法打出：手牌支付不足，需要 ${handRequirement.count} 张${handRequirement.type ? `「${esc(handRequirement.type)}」` : ''}，现有 ${available.length} 张`, 'warn');
+        return false;
+      }
+      set$handSelecting({
+        act: 'payment', mandatory: true, n: handRequirement.count, type: handRequirement.type || null,
+        excludedUids, selectedUids: [],
+        payment: { uid, card, fuelUids: [...(fuelUids || [])], target, freeCost },
+      });
+      requestBattleRender();
+      return false;
+    }
+    if (handRequirement && requirementsPaid && paymentUids.length !== handRequirement.count) return false;
     const battleToken = battleState.token;
     const receipt = Object.freeze({ battleToken, actionSeq: (set$presentationActionSeq(presentationActionSeq + 1), presentationActionSeq) });
     set$battleState(transitionBattle(battleState, BATTLE_PHASES.RESOLVING));
     set$busy(true);
     requestBattleRender();
-    actionQueue.enqueue(signal => execPlay(uid, card, fuelUids, target, freeCost, signal, receipt))
+    actionQueue.enqueue(signal => execPlay(uid, card, fuelUids, target, freeCost, signal, receipt, paymentUids))
       .catch(e => { if (e?.name !== 'BattleActionCancelledError') console.error('[battle] 出牌动作异常：', e); })
       .finally(async () => {
         // 当前动作可能已将连锁动作入队；待执行数为 0 时，队列仍可能有动作正在运行。
@@ -1472,10 +1516,39 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
       });
   }
 
-  async function execPlay(uid, card, fuelUids, target, freeCost, signal, receipt) {
+  async function execPlay(uid, card, fuelUids, target, freeCost, signal, receipt, paymentUids = []) {
     set$activeActionSignal(signal);
     try {
     throwIfActionCancelled(signal);
+    const handRequirement = card?.rules?.battle?.requirements?.find(rule => rule.kind === 'handCards');
+    if (handRequirement) {
+      const excludedUids = new Set([uid, ...(fuelUids || [])]);
+      const validPayment = paymentUids.length === handRequirement.count &&
+        new Set(paymentUids).size === paymentUids.length &&
+        paymentUids.every(paymentUid => {
+          if (excludedUids.has(paymentUid) || !hand.includes(paymentUid)) return false;
+          const entry = findCard(paymentUid);
+          return entry && matchHandSelectKey(entry.card, handRequirement.type);
+        });
+      if (!validPayment) {
+        G.log(`[[icon:cross]] 【${esc(card.name)}】手牌支付未完成，本次打出已取消`, 'warn');
+        return;
+      }
+      // Commit all selected payment cards together before charging or playing the source card.
+      const paid = new Set(paymentUids);
+      const entries = paymentUids.map(paymentUid => findCard(paymentUid));
+      set$hand(hand.filter(handUid => !paid.has(handUid)));
+      for (let i = 0; i < paymentUids.length; i++) {
+        const paymentUid = paymentUids[i];
+        const entry = entries[i];
+        consumed.push(paymentUid);
+        cardAnims.push({ kind: 'burn', uid: paymentUid, name: entry.card.name });
+        G.log(`[[icon:flask]] 消耗了手牌中的【<b>${esc(entry.card.name)}</b>】作为出牌代价`, 'sys');
+      }
+      entries.forEach(entry => fireConsumeTriggers(entry.card, null));
+      throwIfActionCancelled(signal);
+    }
+    freeCast.delete(uid);
     const effCost = effCostOf(card, uid);
     if (effCost !== card.cost) G.log(`[[icon:sparkles]] <b>费用变化</b>：【${esc(card.name)}】按 <b>${effCost}</b> 费打出（原 ${card.cost} 费）`, 'sys');
     if (!freeCost) set$energy(energy - (effCost));
@@ -1773,6 +1846,36 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     if (!handSelecting) return;
     const entry = findCard(uid);
     if (!entry) return;
+    if (handSelecting.act === 'payment') {
+      const selectedUids = handSelecting.selectedUids || [];
+      const excludedUids = handSelecting.excludedUids || [];
+      if (!hand.includes(uid) || excludedUids.includes(uid) || selectedUids.includes(uid) ||
+          !matchHandSelectKey(entry.card, handSelecting.type)) return;
+      const nextSelected = [...selectedUids, uid];
+      const remaining = Math.max(0, (+handSelecting.n || 1) - 1);
+      if (remaining > 0) {
+        set$handSelecting({ ...handSelecting, n: remaining, selectedUids: nextSelected });
+        requestBattleRender();
+        return;
+      }
+      const { uid: cardUid, card, fuelUids, target, freeCost } = handSelecting.payment || {};
+      const payment = nextSelected;
+      const valid = card && hand.includes(cardUid) && payment.length ===
+        card.rules?.battle?.requirements?.find(rule => rule.kind === 'handCards')?.count &&
+        payment.every(paymentUid => {
+          const current = findCard(paymentUid);
+          return hand.includes(paymentUid) && !excludedUids.includes(paymentUid) && current &&
+            matchHandSelectKey(current.card, handSelecting.type);
+        });
+      set$handSelecting(null);
+      if (!valid) {
+        G.log(`[[icon:cross]] 【${esc(card?.name || '卡牌')}】手牌支付未凑齐，未消耗手牌或能量`, 'warn');
+        requestBattleRender();
+        return;
+      }
+      queueCardExecution(cardUid, card, fuelUids || [], target || null, !!freeCost, true, payment);
+      return;
+    }
     if (handSelecting.act === 'play') {
       set$handSelecting(null);
       queueCardExecution(uid, entry.card, [], alive()[0] || null, true);   // 选卡施放：不扣费
@@ -2241,13 +2344,22 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     const legacyPred = job.rarity ? (c => c.rarity === job.rarity)
       : job.otherCls ? (c => c.rarity === '职业' && c.cls && c.cls !== G.myClass)
       : null;
-    const pred = job.pred || legacyPred;
+    const structuredPool = job.pool;
+    const structuredPred = structuredPool?.kind === 'moves'
+      ? card => card.type === '武术' && (structuredPool.cost === undefined || (+card.cost || 0) === structuredPool.cost)
+      : null;
+    if (structuredPool && !structuredPred) {
+      G.log(`[[icon:cross]] 无法发现：不支持的结构化卡池「${esc(structuredPool.kind || '未知')}」`, 'warn');
+      return;
+    }
+    const pred = job.pred || structuredPred || legacyPred;
     // 显式候选（探宝·牌库底）：三张就是给定的真实卡牌，不走随机池
     if (job.explicit && job.explicit.length) {
       set$discovering({ options: job.explicit.slice(0, 3), n: job.n, rarity: job.rarity, pred: job.pred, act: job.act || null,
         priceArmor: !!job.priceArmor, pouchUid: job.pouchUid || null, consumeTempAtTurn: !!job.consumeTempAtTurn, tempUids: job.tempUids || [],
         swapPair: job.swapPair || null, deckBottom: !!job.deckBottom, deckBottomUids: job.explicitUids || [],
-        zeroCost: !!job.zeroCost, decayEachTurn: !!job.decayEachTurn });
+        zeroCost: !!job.zeroCost, decayEachTurn: !!job.decayEachTurn,
+        costDecayPerTurn: job.costDecayPerTurn, sourceCardId: job.sourceCardId || null, pool: structuredPool || null });
       requestBattleRender();
       return;
     }
@@ -2266,7 +2378,8 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     if (!options.length) { G.log('（没有符合条件的卡牌可发现）', 'dim'); return; }
     set$discovering({ options, n: job.n, rarity: job.rarity, pred: job.pred, act: job.act || null,
       priceArmor: !!job.priceArmor, pouchUid: job.pouchUid || null, consumeTempAtTurn: !!job.consumeTempAtTurn, tempUids: job.tempUids || [],
-      swapPair: job.swapPair || null, zeroCost: !!job.zeroCost, decayEachTurn: !!job.decayEachTurn });
+      swapPair: job.swapPair || null, zeroCost: !!job.zeroCost, decayEachTurn: !!job.decayEachTurn,
+      costDecayPerTurn: job.costDecayPerTurn, sourceCardId: job.sourceCardId || null, pool: structuredPool || null });
     requestBattleRender();
   }
 
@@ -2275,7 +2388,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     const card = discovering.options[+i];
     if (!card) return;
     const { n, rarity, pred, act, options, priceArmor, pouchUid, consumeTempAtTurn, tempUids, swapPair,
-      deckBottom, deckBottomUids, zeroCost, decayEachTurn } = discovering;
+      deckBottom, deckBottomUids, zeroCost, decayEachTurn, costDecayPerTurn, sourceCardId, pool } = discovering;
     set$discovering(null);
     // 探宝·牌库底：未选中的候选按原顺序放回牌库底（数组头部 = 底）
     if (deckBottom && deckBottomUids.length) {
@@ -2333,14 +2446,18 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
         cardOverrides.set(uid, { ...card, cost: 0, _baseCost: card.cost });
         G.log(`[[icon:bolt]] 发现：【<b>${esc(card.name)}</b>】费用变为 0`, 'loot');
       }
-      if (decayEachTurn) {
+      if (costDecayPerTurn > 0) {
+        delayed.push({ special: 'ruleCostDecay', uid, sourceCardId, amount: costDecayPerTurn });
+        G.log(`[[icon:hourglass]] 发现：【<b>${esc(card.name)}</b>】每回合开始费用 -${costDecayPerTurn}`, 'sys');
+      } else if (decayEachTurn) {
         delayed.push({ special: 'costDecay', uid });
         G.log(`[[icon:hourglass]] 发现：【<b>${esc(card.name)}</b>】每回合开始费用 -1`, 'sys');
       }
     }
     sweepDead();
     if (!alive().length) { finish(true); return; }
-    if (n > 1) discoverQueue.unshift({ n: n - 1, rarity, pred, act, priceArmor, pouchUid, consumeTempAtTurn, tempUids, swapPair, zeroCost, decayEachTurn });
+    if (n > 1) discoverQueue.unshift({ n: n - 1, rarity, pred, act, priceArmor, pouchUid, consumeTempAtTurn, tempUids, swapPair, zeroCost, decayEachTurn,
+      costDecayPerTurn, sourceCardId, pool });
     else if (consumeTempAtTurn && tempUids.length) {
       delayed.push({ special: 'consumeTemps', uids: [...tempUids], cardName: '江湖救急' });
       G.log(`[[icon:hourglass]] <b>江湖救急</b>：置入的 ${tempUids.length} 张临时卡将在下个回合开始时消耗`, 'sys');

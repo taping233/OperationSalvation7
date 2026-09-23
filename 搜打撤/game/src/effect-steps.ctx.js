@@ -73,9 +73,10 @@ const FRESH_RESULT = (did) => ({ did, drawn: false, healed: false, armored: fals
 /** 对单个目标结算伤害并冒伤害数字（原 effect-steps.js 117-124，逐字搬迁）。 */
 export function makeHitFoe(deps) {
   const {combat, pushFloat, foeIndexOf, sweepDead} = deps;
-    const hitFoe = (ctx, t, n, type, caster = {}) => {
+    const hitFoe = (ctx, t, n, type, caster = {}, segmentOrder) => {
       const r = combat.dealDamage(caster, t, n, type);
-      if (r.dealt > 0) pushFloat({ unit: foeIndexOf ? foeIndexOf(t) : 0, text: '-' + r.dealt, cls: 'dmg', type });   // type：命中贴图按伤害类型染色（P1）
+      if (r.dealt > 0) pushFloat({ unit: foeIndexOf ? foeIndexOf(t) : 0, text: '-' + r.dealt, cls: 'dmg', type,
+        label: segmentOrder ? `第 ${segmentOrder} 段` : '', sequence: segmentOrder });   // 文本结算多段也逐段标号
       // 文本步骤路径不经过 battle.core 的 hitFoe，0 血死亡判定补在这里（2026-09-13 实测：快意恩仇打至 0 血敌人不倒）
       if (t && !t.dead && t.hp <= 0 && typeof sweepDead === 'function') sweepDead();
       return r;

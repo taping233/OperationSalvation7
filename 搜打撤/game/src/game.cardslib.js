@@ -32,6 +32,7 @@ function configureCardNavigation(hooks) {
   let libSelectedId = null;     // 照相馆选片台当前陈列卡
   let libEditMode = false;      // 开发者工具与日常浏览分离，避免每张卡常驻危险操作
   let draft = null;              // 制作坊草稿
+  const CARD_DESIGNER_WRITES_ENABLED = false;
 
 
   // 音效统一走 SDT.Sound（sound.js：程序化音效 + 生成式背景乐）；保留别名兼容旧调用
@@ -144,7 +145,7 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
     const kw = [drawN ? `抽卡 ${drawN}` : '', infN ? `注能(${infN})` : '',
       healN ? `回复 ${healN}` : '', armorN ? `护甲 ${armorN}` : ''].filter(Boolean).join(' · ');
     const kwTxt = kw ? `效果词条：<b>${kw}</b>` : '';
-    const actions = game.devMode && libEditMode ? `<div class="studio-edit-actions">
+    const actions = CARD_DESIGNER_WRITES_ENABLED && game.devMode && libEditMode ? `<div class="studio-edit-actions">
       <button class="hs-btn" data-act="editCard" data-id="${escAttr(c.id)}">编辑卡牌</button>
       <button class="hs-btn danger" data-act="delCard" data-id="${escAttr(c.id)}">删除</button>
     </div>` : '';
@@ -502,7 +503,7 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
       `<button type="button" class="type-tab${libFilter.tab === t ? ' on' : ''}" data-act="libTab" data-t="${t}" aria-pressed="${libFilter.tab === t}">
       ${t === '能力卡' ? '能力' : t}<em>${t === '全部' ? libCards.length : (counts[t] || 0)}</em>
       </button>`).join('');
-    const editorTools = game.devMode ? `<button class="hs-btn studio-edit-toggle${libEditMode ? ' on' : ''}" data-act="libEditMode" aria-pressed="${libEditMode}">${libEditMode ? '退出编辑' : '编辑模式'}</button>${libEditMode ? '<button class="hs-btn gold" data-act="newCard">＋ 制作新卡</button><button class="hs-btn" data-act="exportCards">[[icon:upload]] 导出</button><button class="hs-btn" data-act="importCards">[[icon:download]] 导入</button>' : ''}` : '';
+    const editorTools = game.devMode ? `<button class="hs-btn studio-edit-toggle${libEditMode ? ' on' : ''}" data-act="libEditMode" aria-pressed="${libEditMode}">${libEditMode ? '收起工具' : '导出工具'}</button>${libEditMode ? `<button class="hs-btn" data-act="exportCards">[[icon:upload]] 导出</button>${CARD_DESIGNER_WRITES_ENABLED ? '<button class="hs-btn gold" data-act="newCard">＋ 制作新卡</button><button class="hs-btn" data-act="importCards">[[icon:download]] 导入</button>' : ''}` : ''}` : '';
     const first = libFiltered()[0] || null;
     if (!libSelectedId || !libFiltered().some(c => c.id === libSelectedId)) libSelectedId = first?.id || null;
     const selectedPreview = libCards.find(c => c.id === libSelectedId) || first;
@@ -546,7 +547,7 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
     // 昨晚"悬停去重"改动曾在此赋值触发 TDZ ReferenceError，导致后续全部 UI.act
     // 注册被跳过，卡牌库整页按钮（含右上关闭钮）无响应（老板留言：退出点不动）。
     UI.act('closeCardPage', closeLibPage);
-    UI.act('newCard', () => openCardDesigner(null));
+    UI.act('newCard', () => { if (CARD_DESIGNER_WRITES_ENABLED) openCardDesigner(null); });
     // 切页签/清筛选只重绘卡格区：整页 renderCardLibrary() 会重建 245 张卡面的 HTML
     // （实测主线程阻塞 ~100ms）并重挂全部事件，而这两处改动只影响卡格与页签高亮
     UI.act('libTab', (d) => { libFilter.tab = d.t; syncLibFilterUI(); renderLibGrid(); });
@@ -574,6 +575,7 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
     UI.act('libNext', () => navStep(1));
     UI.act('libTop', () => { const g = document.getElementById('libGrid'); if (g) g.scrollTo({ top: 0 }); });
     UI.act('editCard', (d) => {
+      if (!CARD_DESIGNER_WRITES_ENABLED) return;
       const card = SDT.Cards.all().find(c => c.id === (d.card || d.id));
       if (card) openCardDesigner(card);
     });
@@ -607,6 +609,7 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
       }
     });
     UI.act('delCard', (d) => {
+      if (!CARD_DESIGNER_WRITES_ENABLED) return;
       const btn = [...document.querySelectorAll('.card-library-page [data-act="delCard"][data-id]')].find(el => el.dataset.id === d.id);
       if (btn && !btn.dataset.confirm) {
         btn.dataset.confirm = '1'; btn.textContent = '确认删除？'; btn.classList.add('arm');
@@ -622,7 +625,7 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
       renderCardLibrary();
     });
     UI.act('exportCards', () => showCardsExportOverlay());
-    UI.act('importCards', () => showCardsImportOverlay());
+    UI.act('importCards', () => { if (CARD_DESIGNER_WRITES_ENABLED) showCardsImportOverlay(); });
     // 备注同步闭环（2026-09-20 老板定版）：导出 底稿+手写 合并的完整 card-notes.json，
     // 老板整文件回填 data/ 提交即完成"改的东西进数据库"
     UI.act('exportNotes', () => {
@@ -719,6 +722,7 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
 
   // ======== 卡牌制作坊 ========
   function openCardDesigner(card) {
+    if (!CARD_DESIGNER_WRITES_ENABLED) { openCardLibrary(); return; }
     if (game.state !== 'idle' && game.state !== 'modal' && game.state !== 'title') return;
     if (game.state !== 'modal') cardPagePrevState = game.state;   // 同 openCardLibrary：记录来源
     game.state = 'modal';
@@ -946,6 +950,7 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
   }
 
   function saveDraftCard() {
+    if (!CARD_DESIGNER_WRITES_ENABLED) return;
     if (!draft.name.trim()) { UI.log('卡牌名称不能为空', 'warn'); return; }
     const wasEditing = !!editingCard;
     const card = SDT.Cards.upsert({
@@ -1020,6 +1025,7 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
   }
 
   function showCardsImportOverlay() {
+    if (!CARD_DESIGNER_WRITES_ENABLED) { openCardLibrary(); return; }
     cardPageOpen = false;
     UI.showOverlay('[[icon:download]] 导入卡牌', `
       <p class="ov-note">粘贴卡牌 JSON（按 id 合并覆盖）。</p>
@@ -1029,6 +1035,7 @@ import { MECH_GROUPS, MECH_ALL } from './mech-sentences.js';
         <button class="ov-btn" data-act="backLib2">取消</button>
       </div>`);
     UI.act('doImportCards', () => {
+      if (!CARD_DESIGNER_WRITES_ENABLED) return;
       const ta = document.getElementById('ovImport');
       try {
         const parsed = JSON.parse(ta.value);

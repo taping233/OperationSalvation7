@@ -189,8 +189,9 @@ import { showFoePreview, clearFoePreview } from './battle.hover.js';
     syncClickTargetPreviews();
   }
   function clickSelectedTarget(side, idx) {
-    if (clickSelectedUid == null) return false;
-    const uid = clickSelectedUid;
+    const pending = getSnapshot().pendingTarget;
+    if (clickSelectedUid == null && !pending) return false;
+    const uid = pending?.uid ?? clickSelectedUid;
     const entry = findCard(uid);
     if (!entry) { cancelClickSelection(); return false; }
     const need = targetSide(entry.card);

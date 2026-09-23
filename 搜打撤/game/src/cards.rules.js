@@ -4,6 +4,19 @@ const SDT = window.SDT;   // ESM 垫片（与 cards.js 同源，main.js 加载�
 import { CLASSES } from './cards.consts.js';
 import { Random } from './random.js';
 import { cardHTML } from './cards.view.js';
+import { DATA } from './data-loader.js';
+
+let fixedCardIdSet;
+function fixedCardIds() {
+  if (!fixedCardIdSet) {
+    const batches = Object.entries(SDT.Cards)
+      .filter(([key]) => /^TABLETOP\d*$/.test(key))
+      .flatMap(([, cards]) => cards || []);
+    fixedCardIdSet = new Set([...batches, ...DATA.cardsSync.cards]
+      .map(entry => typeof entry === 'string' ? entry : entry?.id).filter(Boolean));
+  }
+  return fixedCardIdSet;
+}
 export const rulesSlice = {
     // 2026-09-04 定版增补：稀有度新增「棱彩」（能力卡及其衍生牌专属，rv7/渐变棱彩）；
     // 稀有稀有度宝石改为蓝色（原黑色，见 base.css rv2）。
@@ -218,22 +231,14 @@ export const rulesSlice = {
       return null;
     },
 
-    // 出售资格判定（设计者 2026-09-01 定版：所有卡牌默认不可出售，
-    // 只有特殊备注「可出售」的道具才能卖给商店）：
-    //   1. 已标注 sellable（true/false）→ 原样（制作坊勾选，优先级最高）
-    //   2. 描述带「不可出售」→ 不可出售（如经济卡包，注意优先于「可出售」判断）
-    //   3. 描述带「可出售」→ 可出售（桌游手绘卡备注：铜币/银币/金币/钻石/石榴石弹珠）
-    //   4. 其余一律不可出售
-
-    // 出售资格判定（设计者 2026-09-01 定版：所有卡牌默认不可出售，
-    // 只有特殊备注「可出售」的道具才能卖给商店）：
-    //   1. 已标注 sellable（true/false）→ 原样（制作坊勾选，优先级最高）
-    //   2. 描述带「不可出售」→ 不可出售（如经济卡包，注意优先于「可出售」判断）
-    //   3. 描述带「可出售」→ 可出售（桌游手绘卡备注：铜币/银币/金币/钻石/石榴石弹珠）
-    //   4. 其余一律不可出售
+    // 固定卡缺省不可出售；历史备注可售卡按稳定 id 保留资格。
+    // 旧自定义卡继续兼容描述备注，显式 sellable 始终优先。
+    SELLABLE_LEGACY_IDS: new Set(['tt-copper', 'tt-gold', 'tt-silver', 'tt3-diamond', 'tt3-garnet-marble']),
     isSellable(card) {
+      if (!card) return false;
       if (card.sellable === true) return true;
       if (card.sellable === false) return false;
+      if (card.id && fixedCardIds().has(card.id)) return SDT.Cards.SELLABLE_LEGACY_IDS.has(card.id);
       const desc = String(card.desc || '');
       if (desc.includes('不可出售')) return false;
       return desc.includes('可出售');

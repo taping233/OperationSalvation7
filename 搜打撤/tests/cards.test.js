@@ -40,6 +40,28 @@ describe('卡面角标', () => {
     expect(Cards.cardHTML({ name: '铁壁', cost: 1, rarity: '初始', type: '武术', armor: 4 }).includes('甲 4')).toBe(true));
 });
 
+describe('出售资格与收购价', () => {
+  it('固定卡按稳定 id 保持历史可出售清单，不随描述改写', () => {
+    for (const id of ['tt-copper', 'tt-gold', 'tt-silver', 'tt3-diamond', 'tt3-garnet-marble']) {
+      expect(Cards.isSellable({ id, desc: '效果说明已改写。' }), id).toBe(true);
+    }
+    expect(Cards.isSellable({ id: 'tt-crystal', desc: '可出售。' })).toBe(false);
+    expect(Cards.isSellable({ id: 'cc-mana-surge', desc: '可出售。' })).toBe(false);
+  });
+
+  it('显式资格优先，非定版旧自定义卡保留描述兼容', () => {
+    expect(Cards.isSellable({ id: 'tt-copper', sellable: false, desc: '可出售。' })).toBe(false);
+    expect(Cards.isSellable({ id: 'tt-crystal', sellable: true, desc: '不可出售。' })).toBe(true);
+    expect(Cards.isSellable({ id: 'legacy-custom-card', desc: '可出售。' })).toBe(true);
+    expect(Cards.isSellable({ desc: '不可出售，也可出售。' })).toBe(false);
+    expect(Cards.isSellable({ id: 'legacy-custom-card' })).toBe(false);
+  });
+
+  it('收购价优先使用币值，且不读取描述', () => {
+    expect(Cards.sellPrice({ id: 'tt3-diamond', value: 16, desc: '改写后的说明。' })).toBe(16);
+  });
+});
+
 describe('指定道具定名迁移', () => {
   it('按稳定 id 改名并合并旧内置金疮药', () => {
     const key = 'sdt-cards-item-renames-v1';

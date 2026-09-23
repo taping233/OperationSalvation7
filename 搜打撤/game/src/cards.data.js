@@ -35,21 +35,21 @@ export const dataSlice = {
       // —— 第一排 ——
       { id: 'tt-medneedle',  name: '急救合剂', cost: 1, rarity: '古朴', type: '道具', desc: '回复 16 点生命。', value: 4 },
       { id: 'tt-copper',     name: '铜币',     cost: 0, rarity: '初始', type: '道具', desc: '高价值，可出售。', value: 3, unrandom: true }, // 2026-09-13 老板拍板：经济牌退出商店/发现池，堵买低卖高套利
-      { id: 'tt-keys-bunch', name: '一串钥匙', cost: 0, rarity: '古朴', type: '资源', desc: '钥匙 ×2。', value: 4 },
-      { id: 'tt-rations',    name: '口粮',     cost: 0, rarity: '初始', type: '资源', desc: '升级宠物。', value: 3 },
+      { id: 'tt-keys-bunch', name: '一串钥匙', cost: 0, rarity: '古朴', type: '资源', desc: '钥匙 ×2。', value: 4, rules: { version: 1, base: { material: { kind: 'keys', amount: 2 } } } },
+      { id: 'tt-rations',    name: '口粮',     cost: 0, rarity: '初始', type: '资源', desc: '升级宠物。', value: 3, rules: { version: 1, base: { material: { kind: 'rations', amount: 1 } } } },
       { id: 'tt-token-color', name: '员工通行证A', cost: 2, rarity: '史诗', type: '道具', desc: '觉醒。', value: 8 },
       // —— 第二排 ——
       { id: 'tt-gold',       name: '金币',     cost: 0, rarity: '史诗', type: '道具', desc: '贵重货币，可出售。', value: 9, unrandom: true },
       { id: 'tt-econpack',   name: '经济卡包', cost: 2, rarity: '传说', type: '资源', desc: '带入战场时，以 5 张随机卡牌开局。可出售。', value: 10, sellable: true, unrandom: true }, // 资源标注重拍：卡面明确「可出售 10币」
       { id: 'tt-silver',     name: '银币',     cost: 0, rarity: '古朴', type: '道具', desc: '可出售。', value: 6, unrandom: true },
-      { id: 'tt-key',        name: '钥匙',     cost: 0, rarity: '初始', type: '资源', desc: '解锁神秘宝箱。', value: 2 },
+      { id: 'tt-key',        name: '钥匙',     cost: 0, rarity: '初始', type: '资源', desc: '解锁神秘宝箱。', value: 2, rules: { version: 1, base: { material: { kind: 'keys', amount: 1 } } } },
       // —— 第三排 ——
-      { id: 'tt-crystal',    name: '能源结晶', cost: 1, rarity: '古朴', type: '道具', desc: '复活最多 3 张卡牌。', value: 3 },
-      { id: 'tt-key-one',    name: '一把钥匙', cost: 0, rarity: '古朴', type: '资源', desc: '钥匙 ×3。', value: 6 },
+      { id: 'tt-crystal',    name: '能源结晶', cost: 1, rarity: '古朴', type: '道具', desc: '复活最多 3 张卡牌。', value: 3, rules: { version: 1, bag: { use: [{ op: 'restoreConsumed', amount: 3 }] } } },
+      { id: 'tt-key-one',    name: '一把钥匙', cost: 0, rarity: '古朴', type: '资源', desc: '钥匙 ×3。', value: 6, rules: { version: 1, base: { material: { kind: 'keys', amount: 3 } } } },
       { id: 'tt-token-gold', name: '员工通行证B', cost: 1, rarity: '稀有', type: '道具', desc: '抽取 1 张传说卡。', value: 5 }, // 照片重辨：手写为「传说卡」（[[icon:crystal]]传），非「传统卡」
       { id: 'tt-jinchuangyao', name: '金疮药', cost: 1, rarity: '古朴', type: '道具', desc: '回复 10 点生命。', value: 3 },
-      { id: 'tt-wood',       name: '木材',     cost: 0, rarity: '初始', type: '资源', desc: '木材 ×1。', value: 2 }, // 资源标注重拍：纯资源卡（无回复效果）；「木化」药水另录于 TABLETOP4
-      { id: 'tt-wood-lots',  name: '大量木材', cost: 0, rarity: '古朴', type: '资源', desc: '木材 ×2。', value: 4 },
+      { id: 'tt-wood',       name: '木材',     cost: 0, rarity: '初始', type: '资源', desc: '木材 ×1。', value: 2, rules: { version: 1, base: { material: { kind: 'wood', amount: 1 } } } }, // 资源标注重拍：纯资源卡（无回复效果）；「木化」药水另录于 TABLETOP4
+      { id: 'tt-wood-lots',  name: '大量木材', cost: 0, rarity: '古朴', type: '资源', desc: '木材 ×2。', value: 4, rules: { version: 1, base: { material: { kind: 'wood', amount: 2 } } } },
     ],
 
     // 桌游手绘卡 · 第二批（2026-09-01 照片提取，17 张：7 装备 + 10 武术）。
@@ -162,7 +162,7 @@ export const dataSlice = {
       { id: 'tt3-master-staff',  name: '大师的神杖', cost: 2, rarity: '稀有', type: '道具', desc: '回合开始时回复 5 点生命。', value: 5 },
       { id: 'tt3-chaos-eye',     name: '混沌之眼', cost: 1, rarity: '传说', type: '装备', desc: '装备：血量上限 +10，牌库上限 5。', value: 5 }, // 传说系列重拍：卡名/效果按本批照片（旧读「混沌眼」「生命上限+10」）
       { id: 'tt3-execute',       name: '斩杀',     cost: 3, rarity: '传说', type: '武术', dmg: 9, dmgType: 'spell', desc: "对 9 血以下角色造成 9′。", value: 5 }, // 传说系列重拍：角标武术、阈值 9 血
-      { id: 'tt3-savior-elixir', name: '斗神酒', cost: 0, rarity: '传说', type: '道具', desc: '回复 99 点生命（相当于回满）。', value: 5 },
+      { id: 'tt3-savior-elixir', name: '斗神酒', cost: 0, rarity: '传说', type: '道具', heal: 99, desc: '回复 99 点生命（相当于回满）。', value: 5, rules: { version: 1, bag: { use: [{ op: 'heal', amountField: 'heal' }] } } },
       // —— 装备（武器/防具/符印一摞；角标与描述已按第四批高清照片逐张重辨修正，
       //     未在本摞照片中出现的条目（魔纹银剑/深红丝袋/圣杖/玄龟/草甲/逆弓/聚魔之血/深衍日记）保持原样）——
       { id: 'tt3-silver-runesword', name: '魔纹银剑', cost: 2, rarity: '稀有', type: '装备', desc: '装备：攻击 +3。', value: 3 },
@@ -481,12 +481,12 @@ export const dataSlice = {
       { id: 'tt3-noon-duel', name: '正午决战', cost: 1, rarity: '史诗', type: '武术', desc: '下回合开始时，连开四枪！（每枪造成2点固定伤害）。', dmg: 0, value: 3 },
       { id: 'tt3-armor-rush', name: '破甲急袭', cost: 2, rarity: '稀有', type: '武术', desc: '攻（+4），附加 2 层流血。', dmg: 4, dmgType: 'attack', value: 3 },
       { id: 'tt3-double-shot', name: '连射', cost: 1, rarity: '稀有', type: '武术', desc: '造成2 点固定伤害，触发 3 次。', dmg: 2, dmgType: 'fixed', value: 2 },
-      { id: 'tt3-bandage', name: '包扎', cost: 1, rarity: '古朴', type: '武术', desc: '+3 血，+3 甲。', dmg: 0, heal: 3, armor: 3 },
+      { id: 'tt3-bandage', name: '包扎', cost: 1, rarity: '古朴', type: '武术', desc: '+3 血，+3 甲。', dmg: 0, heal: 3, armor: 3, rules: { version: 1, battle: { target: { side: 'self', area: false } }, triggers: { onPlay: [{ op: 'heal', amountField: 'heal' }, { op: 'armor', amountField: 'armor' }] } } },
       { id: 'tt3-purify-arrow', name: '净化箭', cost: 1, rarity: '古朴', type: '武术', desc: '攻（-1），净化自身。', dmg: -1, dmgType: 'attack', value: 2 },
       { id: 'tt3-arrow-rain', name: '箭雨', cost: 1, rarity: '古朴', type: '武术', desc: '攻（-1），目标为敌方全体。', dmg: -1, dmgType: 'attack', value: 2 },
       { id: 'tt3-wave-slash', name: '破浪斩', cost: 1, rarity: '稀有', type: '武术', desc: '攻（+3），下回合无法抽牌。', dmg: 3, dmgType: 'attack', value: 2 },
       { id: 'tt3-qi-wave', name: '气功波', cost: 1, rarity: '古朴', type: '武术', desc: '抽 1 张牌，对全体敌人造成等同于其价格的固定伤害。', dmg: 0, draw: 1, value: 2 },
-      { id: 'tt3-hold-fast', name: '坚守', cost: 1, rarity: '古朴', type: '武术', desc: '+5 甲，抽 1 张牌。', dmg: 0, draw: 1, armor: 5, value: 2 },
+      { id: 'tt3-hold-fast', name: '坚守', cost: 1, rarity: '古朴', type: '武术', desc: '+5 甲，抽 1 张牌。', dmg: 0, draw: 1, armor: 5, value: 2, rules: { version: 1, battle: { target: { side: 'self', area: false } }, triggers: { onPlay: [{ op: 'armor', amountField: 'armor' }, { op: 'draw', amountField: 'draw' }] } } },
       { id: 'tt3-life-arrow', name: '生命箭', cost: 1, rarity: '古朴', type: '武术', desc: '攻（-1），获得 1 张随机卡牌。', dmg: -1, dmgType: 'attack', value: 2 },
       { id: 'tt3-dig-treasure', name: '挖宝', cost: 1, rarity: '古朴', type: '武术', desc: '从牌库底发现 1 张牌，并获得等同于其价格的护甲。', dmg: 0, value: 2 },
       { id: 'tt3-reshot', name: '重斩', cost: 1, rarity: '古朴', type: '武术', desc: '攻（+2）。', dmg: 2, dmgType: 'attack', value: 2 },
@@ -550,8 +550,8 @@ export const dataSlice = {
       { id: 'tt3-deep-diary', name: '深海咒印', cost: 0, rarity: '史诗', type: '装备', desc: '自身处于诅咒状态时，获得 2 点攻击力且法伤 +2。', dmg: 0, value: 4 },
       "tt3eq-boiler",
       "tt3eq-mistbox",
-      { id: 'tt3-wood-bundle', name: '一捆木材', cost: 0, rarity: '史诗', type: '资源', desc: '木材 ×3。', dmg: 0, value: 6 },
-      { id: 'tt3-ration-double', name: '双份口粮', cost: 0, rarity: '史诗', type: '资源', desc: '口粮 ×2。', dmg: 0, value: 6 },
+      { id: 'tt3-wood-bundle', name: '一捆木材', cost: 0, rarity: '史诗', type: '资源', desc: '木材 ×3。', dmg: 0, value: 6, rules: { version: 1, base: { material: { kind: 'wood', amount: 3 } } } },
+      { id: 'tt3-ration-double', name: '双份口粮', cost: 0, rarity: '史诗', type: '资源', desc: '口粮 ×2。', dmg: 0, value: 6, rules: { version: 1, base: { material: { kind: 'rations', amount: 2 } } } },
       { id: 'tt4-shine-token', name: '员工通行证C', cost: 0, rarity: '史诗', type: '道具', desc: '发现 1 张传说卡。', dmg: 0, value: 4 },
       { id: 'tt4-smoke-bomb', name: '烟雾弹', cost: 0, rarity: '稀有', type: '道具', desc: '非 BOSS 战逃跑一次。', dmg: 0, value: 3 },
       { id: 'tt4-woodify', name: '能量饮料', cost: 0, rarity: '古朴', type: '道具', desc: '回复 6 点生命。', dmg: 0, heal: 6, value: 2 },
@@ -567,8 +567,10 @@ export const dataSlice = {
       { id: 'tt7-stealth', cls: '侠客', name: '潜匿', cost: 1, rarity: '职业', type: '武术', desc: '进入潜行状态 1 回合，抽1张牌。', dmg: 0, draw: 1, value: 3, unrandom: true },
       { id: 'tt7-ghostblade', cls: '侠客', name: '鬼魅之刃', cost: 1, rarity: '职业', type: '武术', desc: '攻（+1），破除隐身时伤害 +2，并抽 2 张牌。', dmg: 1, dmgType: 'attack', draw: 2, value: 3, unrandom: true },
       { id: 'tt7-goldencicada', cls: '侠客', name: '金蝉脱壳', cost: 0, rarity: '职业', type: '武术', desc: '消耗所有手牌，抽 3 张。', dmg: 0, value: 3, unrandom: true },
-      { id: 'tt7-thundergrudge', cls: '侠客', name: '快意恩仇', cost: 1, rarity: '职业', type: '武术', desc: '消耗 2 张初始攻击，攻击 3 次。', dmg: 0, value: 3, unrandom: true },
-      { id: 'tt7-sneak', cls: '侠客', name: '偷袭', cost: 0, rarity: '职业', type: '武术', desc: '攻（-1）。', dmg: -1, dmgType: 'attack', value: 3, unrandom: true },
+      { id: 'tt7-thundergrudge', cls: '侠客', name: '快意恩仇', cost: 1, rarity: '职业', type: '武术', desc: '消耗 2 张初始攻击，攻击 3 次。', dmg: 0, dmgType: 'attack', value: 3, unrandom: true,
+        rules: { version: 1, battle: { target: { side: 'enemy', area: false }, requirements: [{ kind: 'handCards', count: 2, type: '初始攻击' }] }, triggers: { onPlay: [{ op: 'damage', amountField: 'dmg', target: 'chosenEnemy', hitCount: 3, retarget: 'livingFoes' }] } } },
+      { id: 'tt7-sneak', cls: '侠客', name: '偷袭', cost: 0, rarity: '职业', type: '武术', desc: '攻（-1）。', dmg: -1, dmgType: 'attack', value: 3, unrandom: true,
+        rules: { version: 1, battle: { target: { side: 'enemy', area: false } }, triggers: { onPlay: [{ op: 'damage', amountField: 'dmg', target: 'chosenEnemy' }] } } },
       { id: 'tt7-swordimmortal', cls: '侠客', name: '剑仙形态', cost: 2, rarity: '职业', type: '武术', desc: '本局对战中，回合开始时额外抽 1 张牌。', dmg: 0, draw: 1, value: 4, unrandom: true },
       { id: 'tt7-ironphalanx', cls: '战士', name: '铁甲阵', cost: 2, rarity: '职业', type: '武术', desc: '+10 甲，将 5 张随机卡牌洗入牌库，并使其费用均-1。', dmg: 0, armor: 10, value: 3, unrandom: true },
       { id: 'tt7-bloodpotion', cls: '牧师', name: '噬血术', cost: 1, rarity: '职业', type: '法术', desc: '3′，回复等量生命。', dmg: 3, dmgType: 'spell', value: 3, unrandom: true },
@@ -587,10 +589,12 @@ export const dataSlice = {
       { id: 'tt7-twinfireball', cls: '降临者', name: '三重火球', cost: 1, rarity: '职业', type: '法术', desc: '4′，将2张‘火球’置入手牌。', dmg: 4, dmgType: 'spell', value: 3, unrandom: true },
       "tt7-meteorstrong",
       { id: 'tt7-recruit', cls: '法师', name: '征召', cost: 2, rarity: '职业', type: '法术', desc: '召唤步兵（4-4） ×2为你抵挡伤害并自动战斗。', dmg: 0, value: 3, unrandom: true },
-      { id: 'tt7-frozenight', cls: '法师', name: '冰封千里', cost: 1, rarity: '职业', type: '法术', desc: '冰冻所有敌人，持续 1 回合。', dmg: 0, value: 3, unrandom: true },
+      { id: 'tt7-frozenight', cls: '法师', name: '冰封千里', cost: 1, rarity: '职业', type: '法术', desc: '冰冻所有敌人，持续 1 回合。', dmg: 0, value: 3, unrandom: true,
+        rules: { version: 1, battle: { target: { side: null, area: true } }, triggers: { onPlay: [{ op: 'status', status: 'freeze', target: 'allEnemies', duration: 1 }] } } },
       { id: 'tt7-fullstrike', cls: '战士', name: '全力一击', cost: 2, rarity: '职业', type: '武术', desc: '攻（+5），抽 1 张牌。', dmg: 5, dmgType: 'attack', draw: 1, value: 2, unrandom: true },
       { id: 'tt7-bulwark', cls: '战士', name: '坚盾', cost: 1, rarity: '职业', type: '武术', desc: '本回合获得 8点护甲，下回合开始时 -4 点。', dmg: 0, armor: 8, value: 3, unrandom: true },
-      { id: 'tt7-meteorrain', cls: '侠客', name: '流星箭雨', cost: 1, rarity: '职业', type: '武术', desc: '攻（-1）；触发 2 次。', dmg: -1, dmgType: 'attack', value: 3, unrandom: true },
+      { id: 'tt7-meteorrain', cls: '侠客', name: '流星箭雨', cost: 1, rarity: '职业', type: '武术', desc: '攻（-1）；触发 2 次。', dmg: -1, dmgType: 'attack', value: 3, unrandom: true,
+        rules: { version: 1, battle: { target: { side: 'enemy', area: false } }, triggers: { onPlay: [{ op: 'damage', amountField: 'dmg', target: 'chosenEnemy', hitCount: 2, retarget: 'livingFoes' }] } } },
       { id: 'tt7-armup', cls: '战士', name: '武装', cost: 1, rarity: '职业', type: '武术', desc: '从牌库中抽取 2 张装备牌。', dmg: 0, value: 3, unrandom: true },
       "tt7-demonbreaker",
       "tt7-whirlwind",   // 2026-09-17 留言「旋风斩应为2费」
@@ -677,7 +681,7 @@ export const dataSlice = {
       { id: "cmtn1r10xnl1", cls: "降临者", name: "黑暗形态", cost: 1, rarity: "职业", type: "法术", dmg: 0, desc: "本局对战中，每当你发现卡牌时，增加1个可选项", value: 2, sellable: false, unrandom: true },
       "cmtn1wnhhym",   // 同名不同效果版本按老板 2026-09-19 规则追加「-改」
       { id: "cmtn28jv33wx", name: "搜索大宝箱", cost: 0, rarity: "衍生", type: "法术", dmg: 0, desc: "随机获取3张卡牌", value: 3, sellable: false },
-      { id: "cmtn6bge52qt", name: "复原药水", cost: 0, rarity: "稀有", type: "道具", dmg: 0, desc: "在背包中才能使用，复原最多两张卡牌", value: 3, sellable: false },
+      { id: "cmtn6bge52qt", name: "复原药水", cost: 0, rarity: "稀有", type: "道具", dmg: 0, desc: "在背包中才能使用，复原最多两张卡牌", value: 3, sellable: false, rules: { version: 1, bag: { use: [{ op: 'restoreConsumed', amount: 2 }] } } },
       { id: "cmtn7qttxqo4", name: "修鞋铺", cost: 0, rarity: "衍生", type: "事件", dmg: 0, desc: "获得员工通行证A碎片；复原1张卡牌", value: 0, sellable: false },
       // —— 以下 25 张共享 id 卡取设计者稿（整卡覆盖） ——
       { id: "starter-emergency-bandage", name: "应急绷带", cost: 0, rarity: "稀有", type: "道具", dmg: 0, heal: 12, desc: "回复12 点生命。", value: 0, sellable: false },
@@ -715,19 +719,20 @@ export const dataSlice = {
       { id: 'tt12-raydragon',   name: '龙焰射线', cost: 2, rarity: '古朴', type: '法术', infuse: 1, desc: '注能（1）：造成11点法伤' },
       { id: 'tt12-sporewall',   name: '孢子城墙', cost: 1, rarity: '古朴', type: '法术', armor: 6, desc: '对一名敌人附加2层中毒，自己获得6点护甲' },
       { id: 'tt12-elemburst',   name: '元素爆裂', cost: 2, rarity: '稀有', type: '法术', desc: '对随机敌人造成2点法伤，触发4-5次' },
-      { id: 'tt12-hitechrd',    name: '高端研发', cost: 1, rarity: '稀有', type: '法术', desc: '发现一张2费招式，在每个回合开始时，使其-1费' },
-      { id: 'tt12-barriermend', name: '屏障修复', cost: 1, rarity: '古朴', type: '法术', armor: 6, desc: '获得6点护甲，如果你此时没有护甲，该牌变为0费' },
+      { id: 'tt12-hitechrd',    name: '高端研发', cost: 1, rarity: '稀有', type: '法术', desc: '发现一张2费招式，在每个回合开始时，使其-1费',
+        rules: { version: 1, battle: { target: { side: null, area: false } }, triggers: { onPlay: [{ op: 'discover', count: 1, pool: { kind: 'moves', cost: 2 }, costDecayPerTurn: 1 }] } } },
+      { id: 'tt12-barriermend', name: '屏障修复', cost: 1, rarity: '古朴', type: '法术', armor: 6, desc: '获得6点护甲，如果你此时没有护甲，该牌变为0费', rules: { version: 1, battle: { target: { side: 'self', area: false }, costModifiers: [{ kind: 'armorZeroFree' }] }, triggers: { onPlay: [{ op: 'armor', amountField: 'armor' }] } } },
       { id: 'tt12-saturate',    name: '饱和打击', cost: 2, rarity: '稀有', type: '法术', dmg: 7, dmgType: 'spell', desc: '造成7点法伤，如果消灭敌人，额外释放一次' },
       { id: 'tt12-felguard',    name: '邪能护体', cost: 2, rarity: '史诗', type: '法术', infuse: 2, draw: 3, desc: '注能（2）：抽3张牌，本回合免疫所有伤害和诅咒效果' },
       { id: 'tt12-unstableray', name: '不稳定射线', cost: 1, rarity: '古朴', type: '法术', desc: '造成4-6点法伤' },
       { id: 'tt12-infectray',   name: '感染射线', cost: 1, rarity: '古朴', type: '法术', dmg: 4, dmgType: 'spell', desc: '造成4点法伤，附加一层随机诅咒' },
       { id: 'tt12-basicdev',    name: '基础开发', cost: 1, rarity: '古朴', type: '法术', desc: '随机获取两张0费招式' },
-      { id: 'tt12-firecracker', name: '违禁烟火', cost: 0, rarity: '古朴', type: '法术', dmg: 1, dmgType: 'fixed', desc: '对全体敌人造成1点固定伤害' },
+      { id: 'tt12-firecracker', name: '违禁烟火', cost: 0, rarity: '古朴', type: '法术', dmg: 1, dmgType: 'fixed', desc: '对全体敌人造成1点固定伤害', rules: { version: 1, battle: { target: { side: 'enemy', area: true } }, triggers: { onPlay: [{ op: 'damage', amountField: 'dmg', target: 'allEnemies' }] } } },
       { id: 'tt12-magicfind',   name: '魔法新发现', cost: 1, rarity: '古朴', type: '法术', desc: '发现1张1费招式，使其变为0费。' },
       { id: 'tt12-chargeray',   name: '充能射线', cost: 1, rarity: '稀有', type: '法术', dmg: 5, dmgType: 'spell', desc: '造成5点法伤，本牌在你手牌中时每注能过1张卡牌，伤害+2' },
       { id: 'tt12-breakthrough', name: '突破进展', cost: 1, rarity: '稀有', type: '法术', desc: '随机获取1张0费，一张1费，一张2费招式' },
       { id: 'tt12-raygun',      name: '射线枪', cost: 0, rarity: '古朴', type: '装备', desc: '主动技能：发现一张射线牌并直接释放' },
-      { id: 'tt12-backupcell',  name: '后备能源', cost: 6, rarity: '史诗', type: '法术', draw: 2, desc: '抽2张牌并回复所有费用，消耗口袋中每有一张法术牌，本牌费用-1' },
+      { id: 'tt12-backupcell',  name: '后备能源', cost: 6, rarity: '史诗', type: '法术', draw: 2, desc: '抽2张牌并回复所有费用，消耗口袋中每有一张法术牌，本牌费用-1', rules: { version: 1, battle: { target: { side: null, area: false }, costModifiers: [{ kind: 'consumedSpellDiscount', amount: 1 }] } } },
       { id: 'tt12-freezeray',   name: '冷冻射线', cost: 1, rarity: '稀有', type: '法术', dmg: 4, dmgType: 'spell', desc: '造成4点法伤；若此前其未曾受到过伤害，对其附加冰冻' },
     ],
 

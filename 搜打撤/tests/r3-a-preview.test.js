@@ -10,7 +10,7 @@ window.SDT.MAP = {
 };
 await import('../game/src/cards.js');
 const { BattleSession, viewApi } = await import('../game/src/battle.core.js');
-const { previewAction } = await import('../game/src/battle.preview.js');
+const { cardRuleHint, previewAction } = await import('../game/src/battle.preview.js');
 const { Random } = await import('../game/src/random.js');
 const Cards = window.SDT.Cards;
 
@@ -65,6 +65,19 @@ function preview(uid, targetIndex = 0) {
 }
 
 describe('R3-a 可信伤害预览', () => {
+  it('只对声明结构化多段规则的卡展示确定提示，并按规则预览逐段目标', () => {
+    const card = {
+      id: 'ui-structured-multi-hit', name: '结构化连击', type: '武术', dmgType: 'attack', dmg: 2,
+      desc: '卡面描述不参与规则推断。',
+      rules: {
+        triggers: { onPlay: [{ op: 'damage', hitCount: 3, retarget: 'livingFoes' }] },
+        battle: { requirements: [{ kind: 'handCards', count: 2, type: '初始攻击' }] },
+      },
+    };
+    expect(cardRuleHint(card, 'normal')).toContain('先消耗 2 张初始攻击；3 段');
+    expect(cardRuleHint({ ...card, rules: undefined }, 'normal')).toBe('');
+    expect(cardRuleHint({ ...card, rules: undefined }, 'normal')).toBe('');
+  });
   it('视图预览不再复用 aim.snap 或命中旧气泡早退，三敌气泡宽度受单位格约束', () => {
     const viewSource = fs.readFileSync('game/src/battle.view.js', 'utf8');
     const cssSource = fs.readFileSync('game/css/battle.css', 'utf8');

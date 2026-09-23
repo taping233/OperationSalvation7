@@ -3,6 +3,24 @@
  * 共享端口由壳经参数 s 注入（deps 展开 + esc/hitFoe + 模块级常量），本文件零 import。 */
 export function damageSteps(s) {
   const {combat, getAlive, log, addTempCard, allCards, random01, getPlayerCaster, damagePlayer, addPlayerMaxHp, dumpHand, esc, hitFoe, ARROW_TOKEN, num} = s;
+  const repeatLiveTargets = (ctx, initialTarget, count, amount, type, caster, label) => {
+    let preferred = initialTarget;
+    let total = 0;
+    const hitTargets = [];
+    for (let i = 0; i < count; i++) {
+      const target = preferred && !preferred.dead ? preferred : getAlive().find(foe => foe && !foe.dead);
+      if (!target) {
+        log(`[[icon:cross]] <b>${esc(ctx.card.name)}</b>：第 ${i + 1}/${count} 段未施放，场上已无可攻击的敌人`, 'dim');
+        break;
+      }
+      const dealt = hitFoe(ctx, target, amount, type, caster, i + 1).dealt;
+      total += dealt;
+      hitTargets.push(target);
+      log(`[[icon:play]] <b>${esc(ctx.card.name)}</b>：第 ${i + 1}/${count} 段${label || ''} → <b>${esc(target.name)}</b>（${dealt} 点）`, 'sys');
+      preferred = target;
+    }
+    return { total, hitTargets };
+  };
   return [
       /* ============ 伤害段 ============ */
       {
@@ -20,7 +38,9 @@ export function damageSteps(s) {
             const pool = getAlive().filter(t => t && !t.dead);
             if (!pool.length) break;
             const t = pool[Math.floor(random01() * pool.length)];
-            total += hitFoe(ctx, t, +m[1], type, caster).dealt;
+            const dealt = hitFoe(ctx, t, +m[1], type, caster, i + 1).dealt;
+            total += dealt;
+            log(`[[icon:play]] <b>${esc(ctx.card.name)}</b>：第 ${i + 1}/${times} 段 → <b>${esc(t.name)}</b>（${dealt} 点）`, 'sys');
             hits++;
           }
           if (hits) {
@@ -65,10 +85,8 @@ export function damageSteps(s) {
         id: 'dmg.fourShots', gate: 'fresh', label: '连开四枪（4×2 固定）',
         when: (ctx) => /连开\s*四\s*枪/.test(ctx.desc) ? true : null,
         run: (ctx) => {
-          const t = ctx.curseTarget;
-          let total = 0;
-          for (let i = 0; i < 4 && t && !t.dead; i++) total += hitFoe(ctx, t, 2, combat.TYPES.FIXED).dealt;
-          log(`[[icon:swords]] <b>连开四枪</b>：对 ${t ? esc(t.name) : '目标'} 造成 ${total} 点固定伤害（每枪 2 点）`, 'sys');
+          const { total, hitTargets } = repeatLiveTargets(ctx, ctx.curseTarget, 4, 2, combat.TYPES.FIXED, {}, '（连开四枪）');
+          log(`[[icon:swords]] <b>连开四枪</b>：${hitTargets.map(t => esc(t.name)).join('、') || '无目标'}，共 ${total} 点固定伤害（每枪 2 点）`, 'sys');
           ctx.did = true;
         },
       },
@@ -76,12 +94,10 @@ export function damageSteps(s) {
         id: 'dmg.multiAttack', gate: 'fresh', label: '「攻击 N 次」整句（手选消耗后的尾段）',
         when: (ctx) => ctx.desc.match(/^攻击\s*(\d+)\s*次[。.！!]?$/),
         run: (ctx, m) => {
-          const t = ctx.curseTarget;
           const caster = getPlayerCaster ? getPlayerCaster() : {};
           const times = Math.max(1, +m[1]);
-          let total = 0;
-          for (let i = 0; i < times && t && !t.dead; i++) total += hitFoe(ctx, t, 0, combat.TYPES.ATTACK, caster).dealt;
-          if (t) log(`[[icon:swords]] <b>${esc(ctx.card.name)}</b> → ${esc(t.name)}：攻击 <b>${times}</b> 次，共造成 <b>${total}</b> 点攻击伤害`, 'sys');
+          const { total, hitTargets } = repeatLiveTargets(ctx, ctx.curseTarget, times, 0, combat.TYPES.ATTACK, caster, '（攻击）');
+          if (hitTargets.length) log(`[[icon:swords]] <b>${esc(ctx.card.name)}</b>：攻击 <b>${hitTargets.length}/${times}</b> 次，共造成 <b>${total}</b> 点攻击伤害`, 'sys');
           ctx.did = true;
         },
       },
@@ -213,11 +229,8 @@ export function damageSteps(s) {
         when: (ctx) => (ctx.curseTarget ? ctx.desc.match(/施放\s*(\d+)\s*次?火球(?:术)?/) : null),
         run: (ctx, m) => {
           const caster = getPlayerCaster ? getPlayerCaster() : {};
-          let total = 0;
-          for (let k = 0; k < +m[1] && ctx.curseTarget && !ctx.curseTarget.dead; k++) {
-            total += hitFoe(ctx, ctx.curseTarget, 4, combat.TYPES.SPELL, caster).dealt;
-          }
-          log(`[[icon:fire]] <b>${esc(ctx.card.name)}</b>：施放 ${m[1]} 次火球 → ${esc(ctx.curseTarget.name)}，共 ${total} 点法术伤害`, 'sys');
+          const { total, hitTargets } = repeatLiveTargets(ctx, ctx.curseTarget, +m[1], 4, combat.TYPES.SPELL, caster, '（火球）');
+          log(`[[icon:fire]] <b>${esc(ctx.card.name)}</b>：施放 ${hitTargets.length} 次火球${hitTargets.length === +m[1] ? '' : `（计划 ${m[1]} 次）`} → ${hitTargets.map(t => esc(t.name)).join('、') || '无目标'}，共 ${total} 点法术伤害`, 'sys');
           ctx.did = true;
         },
       },
@@ -227,11 +240,25 @@ export function damageSteps(s) {
         run: (ctx, m) => {
           const caster = getPlayerCaster ? getPlayerCaster() : {};
           const per = m[1] ? +m[1] : 1;
-          let total = 0;
-          getAlive().slice().forEach(t => {
-            for (let k = 0; k < per && !t.dead; k++) total += hitFoe(ctx, t, 4, combat.TYPES.SPELL, caster).dealt;
-          });
-          log(`[[icon:fire]] 火球风暴：对全体敌人各施放 ${per} 次火球，共 ${total} 点法术伤害`, 'sys');
+          const initialTargets = getAlive().filter(t => t && !t.dead);
+          const planned = initialTargets.length * per;
+          let total = 0, sequence = 0;
+          const hitTargets = [];
+          for (const original of initialTargets) {
+            let preferred = original;
+            for (let k = 0; k < per; k++) {
+              const target = preferred && !preferred.dead ? preferred : getAlive().find(foe => foe && !foe.dead);
+              if (!target) break;
+              sequence++;
+              const dealt = hitFoe(ctx, target, 4, combat.TYPES.SPELL, caster, sequence).dealt;
+              total += dealt;
+              hitTargets.push(target);
+              log(`[[icon:fire]] 火球风暴：第 ${sequence}/${planned} 发 → <b>${esc(target.name)}</b>（${dealt} 点）`, 'sys');
+              preferred = target;
+            }
+            if (sequence >= planned) break;
+          }
+          log(`[[icon:fire]] 火球风暴：对全体初始敌人各施放 ${per} 次火球，实际 ${sequence}/${planned} 发，共 ${total} 点法术伤害`, 'sys');
           ctx.did = true;
         },
       },

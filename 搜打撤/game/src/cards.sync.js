@@ -4,6 +4,7 @@ const SDT = window.SDT;   // ESM 垫片（与 cards.js 同源，main.js 加载�
 import { KEY, TT7_KEY_V2, TT8_KEY, TT10_KEY, TT11_KEY, ITEM_RENAME_KEY, EVENTS_0919_KEY, RETIRE_TT10, RETIRE_TT11, CC_KEY, CLASSES } from './cards.consts.js';
 import { Random } from './random.js';
 import { DATA } from './data-loader.js';
+import { validateCardRules } from './card-rules.schema.js';
 // 历史批次 key 可能独立重播；即使 live-sync 已标记，也不能写回旧语义或复活退役卡。
 // 同 id 以定版字段为准，定版未携带的 art 等仓库元数据继续取历史快照。
 const cardsSyncById = new Map(DATA.cardsSync.cards.map(card => [card.id, card]));
@@ -13,6 +14,88 @@ const canonicalTabletopSnapshot = (snapshot) => {
   const current = cardsSyncById.get(snapshot.id);
   return current ? { ...snapshot, ...current } : snapshot;
 };
+function backfillStructuredRuleDefinitions({ markerKey, ids, definitions, domains, extraFieldsById = {}, canonicalFieldsById = {} }) {
+  try {
+    if (definitions.size !== ids.length) {
+      console.error('[cards] Structured rule migration definitions missing:', ids.filter(id => !definitions.has(id)));
+      return;
+    }
+    const marked = localStorage.getItem(markerKey) === '1';
+    const cards = SDT.Cards.all();
+    const foundIds = new Set();
+    let dirty = false;
+    const nextCards = cards.map(card => {
+      const definition = definitions.get(card.id);
+      if (!definition) return card;
+      foundIds.add(card.id);
+      const nextCard = { ...card };
+      const operations = [
+        ...(definition.rules?.triggers?.onPlay || []),
+        ...(definition.rules?.bag?.use || []),
+      ];
+      const fields = new Set([
+        ...operations.map(operation => operation.amountField).filter(Boolean),
+        ...(extraFieldsById[card.id] || []),
+      ]);
+      for (const field of fields) {
+        if ((nextCard[field] === undefined || nextCard[field] === null) && definition[field] !== undefined) {
+          nextCard[field] = definition[field];
+        }
+      }
+      for (const field of canonicalFieldsById[card.id] || []) {
+        if (definition[field] !== undefined) nextCard[field] = definition[field];
+      }
+
+      if (nextCard.rules !== undefined && (!nextCard.rules || typeof nextCard.rules !== 'object' || Array.isArray(nextCard.rules))) {
+        console.error(`[cards] Structured rule migration failed for ${card.id} at rules: expected an object.`);
+        return null;
+      }
+      const rules = nextCard.rules || {};
+      const nextRules = { ...rules, version: definition.rules.version };
+      for (const domain of domains) {
+        const current = rules[domain];
+        if (current !== undefined && (!current || typeof current !== 'object' || Array.isArray(current))) {
+          console.error(`[cards] Structured rule migration failed for ${card.id} at rules.${domain}: expected an object.`);
+          return null;
+        }
+        nextRules[domain] = { ...(current || {}), ...(definition.rules[domain] || {}) };
+      }
+      nextCard.rules = nextRules;
+      if (JSON.stringify(card) !== JSON.stringify(nextCard)) dirty = true;
+      return nextCard;
+    });
+
+    if (foundIds.size !== ids.length) {
+      console.error('[cards] Structured rule migration cards missing:', ids.filter(id => !foundIds.has(id)));
+      return;
+    }
+    if (nextCards.some(card => card === null)) return;
+    for (const card of nextCards) {
+      if (!ids.includes(card.id)) continue;
+      const result = validateCardRules(card);
+      if (!result.ok) {
+        const details = result.errors.map(error => `${error.cardId} ${error.path}: ${error.message}`);
+        console.error('[cards] Structured rule migration validation failed:', details);
+        return;
+      }
+    }
+    if (dirty) {
+      let saved = false;
+      try { saved = SDT.Cards.saveAll(nextCards); }
+      catch (error) {
+        console.error('[cards] Structured rule migration save failed; marker was not written:', error);
+        return;
+      }
+      if (!saved) {
+        console.error('[cards] Structured rule migration save returned false; marker was not written.');
+        return;
+      }
+    }
+    if (!marked) localStorage.setItem(markerKey, '1');
+  } catch (error) {
+    console.error('[cards] Structured rule migration failed; marker was not written:', error && error.message ? error.message : error);
+  }
+}
 export const syncSlice = {
 
     // 伤害类型词条回填：只补缺失值，绝不覆盖玩家已标注的 dmgType（每次启动运行）
@@ -260,6 +343,103 @@ export const syncSlice = {
         localStorage.setItem(TT10_KEY, '1');
       } catch (e) { /* 隐私模式等场景静默跳过 */ }
     },
+    // TT10 基地材料规则回填：按稳定 id 从 TABLETOP10 定义取 rules，只补旧档规则字段。
+    ensureTT10BaseMaterialRules() {
+      const ids = ['tt3-wood-bundle', 'tt3-ration-double'];
+      const definitions = new Map(
+        SDT.Cards.TABLETOP10
+          .filter(card => ids.includes(card.id) && card.rules?.base?.material)
+          .map(card => [card.id, { rules: card.rules }]),
+      );
+      backfillStructuredRuleDefinitions({
+        markerKey: 'sdt-cards-tt10-base-material-v1-seeded',
+        ids,
+        definitions,
+        domains: ['base'],
+      });
+    },
+    // 第一批资源卡的定版材料数量：旧卡库保留玩家文案，只按稳定 id 补规则。
+    ensureTT1BaseMaterialRules() {
+      const ids = ['tt-keys-bunch', 'tt-key', 'tt-key-one', 'tt-wood', 'tt-wood-lots', 'tt-rations'];
+      const definitions = new Map(SDT.Cards.TABLETOP
+        .filter(card => ids.includes(card.id) && card.rules?.base?.material)
+        .map(card => [card.id, card]));
+      backfillStructuredRuleDefinitions({
+        markerKey: 'sdt-cards-tt1-base-material-v1-seeded',
+        ids,
+        definitions,
+        domains: ['base'],
+      });
+    },
+    // TT10 旧档即时效果规则回填：只迁稳定 id，从定版字段补足规则引用值。
+    ensureTT10OnPlayRules() {
+      const ids = ['tt3-bandage', 'tt3-hold-fast'];
+      const definitions = new Map(
+        SDT.Cards.TABLETOP10
+          .filter(card => ids.includes(card.id) && card.rules?.triggers?.onPlay)
+          .map(card => [card.id, card]),
+      );
+      if (definitions.size !== ids.length) {
+        console.error('[cards] TT10 onPlay migration definitions missing:', ids.filter(id => !definitions.has(id)));
+        return;
+      }
+      backfillStructuredRuleDefinitions({
+        markerKey: 'sdt-cards-tt10-onplay-v1-seeded',
+        ids,
+        definitions,
+        domains: ['battle', 'triggers'],
+      });
+    },
+    ensureTT7MultiHitRules() {
+      const ids = ['tt7-thundergrudge', 'tt7-meteorrain', 'tt7-sneak'];
+      const definitions = new Map(
+        SDT.Cards.TABLETOP10
+          .filter(card => ids.includes(card.id) && card.rules?.triggers?.onPlay)
+          .map(card => [card.id, card]),
+      );
+      backfillStructuredRuleDefinitions({
+        markerKey: 'sdt-cards-tt7-multihit-v1-seeded',
+        ids,
+        definitions,
+        domains: ['battle', 'triggers'],
+        canonicalFieldsById: {
+          'tt7-thundergrudge': ['dmg', 'dmgType'],
+          'tt7-meteorrain': ['dmg', 'dmgType'],
+          'tt7-sneak': ['dmg', 'dmgType'],
+        },
+      });
+    },
+    ensureTT7StatusRules() {
+      const ids = ['tt7-frozenight'];
+      const definitions = new Map(
+        SDT.Cards.TABLETOP10
+          .filter(card => ids.includes(card.id) && card.rules?.triggers?.onPlay)
+          .map(card => [card.id, card]),
+      );
+      backfillStructuredRuleDefinitions({
+        markerKey: 'sdt-cards-tt7-status-v1-seeded',
+        ids,
+        definitions,
+        domains: ['battle', 'triggers'],
+      });
+    },
+    // 背包道具效果规则：定版真源来自原始 TABLETOP / TABLETOP3 定义，
+    // TABLETOP10 的 cards-sync 字符串引用保持不变。
+    ensureBagUseRules() {
+      const ids = ['tt-crystal', 'tt3-savior-elixir', 'cmtn6bge52qt'];
+      const sourceDefinitions = [...SDT.Cards.TABLETOP, ...SDT.Cards.TABLETOP3, ...SDT.Cards.TABLETOP11];
+      const definitions = new Map(
+        sourceDefinitions
+          .filter(card => ids.includes(card.id) && card.rules?.bag?.use)
+          .map(card => [card.id, card]),
+      );
+      backfillStructuredRuleDefinitions({
+        markerKey: 'sdt-cards-bag-use-v2-seeded',
+        ids,
+        definitions,
+        domains: ['bag'],
+      });
+    },
 
     // 第十一批同步（2026-09-09 老板拍板）：与设计者实机卡库导出（微信接收的
     // 「搜打撤·代号7_卡牌库_233张.json」，裸数组旧格式）完全对齐——
@@ -330,6 +510,52 @@ export const syncSlice = {
         SDT.Cards.saveAll(cards);
         localStorage.setItem(EVENTS_0919_KEY, '1');
       } catch (e) { /* 隐私模式等场景静默跳过 */ }
+    },
+    // TT12 出牌前规则字段回填：只补指定定版 id 的 rules，保留旧档自定义文案与其他字段。
+    ensureTT12PreplayRules() {
+      const ids = ['tt12-barriermend', 'tt12-backupcell'];
+      const definitions = new Map(
+        SDT.Cards.TABLETOP12
+          .filter(card => ids.includes(card.id) && card.rules && card.rules.battle)
+          .map(card => [card.id, card]),
+      );
+      backfillStructuredRuleDefinitions({
+        markerKey: 'sdt-cards-tt12-preplay-v1-seeded',
+        ids,
+        definitions,
+        domains: ['battle'],
+      });
+      this.ensureTT12OnPlayRules();
+    },
+    // 独立版本标记，确保已完成 preplay-v1 的旧档也补到即时效果规则。
+    ensureTT12OnPlayRules() {
+      const ids = ['tt12-barriermend', 'tt12-firecracker'];
+      const definitions = new Map(
+        SDT.Cards.TABLETOP12
+          .filter(card => ids.includes(card.id) && card.rules?.triggers?.onPlay)
+          .map(card => [card.id, card]),
+      );
+      backfillStructuredRuleDefinitions({
+        markerKey: 'sdt-cards-tt12-onplay-v1-seeded',
+        ids,
+        definitions,
+        domains: ['battle', 'triggers'],
+        extraFieldsById: { 'tt12-firecracker': ['dmgType'] },
+      });
+    },
+    ensureTT12DiscoverRules() {
+      const ids = ['tt12-hitechrd'];
+      const definitions = new Map(
+        SDT.Cards.TABLETOP12
+          .filter(card => ids.includes(card.id) && card.rules?.triggers?.onPlay)
+          .map(card => [card.id, card]),
+      );
+      backfillStructuredRuleDefinitions({
+        markerKey: 'sdt-cards-tt12-discover-v1-seeded',
+        ids,
+        definitions,
+        domains: ['battle', 'triggers'],
+      });
     },
     // 指定道具定名迁移：保留稳定 id 与存档引用，只更新展示名；
     // 旧内置金疮药并入正式 tt-jinchuangyao，避免仓库里继续存在两个定义。

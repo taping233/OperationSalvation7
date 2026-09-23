@@ -35,4 +35,29 @@ describe('宝藏大门钥匙计数', () => {
     Base.data.stash = [{ card: { id: 'tt-wood', name: '木材', desc: '木材 ×3。' }, count: 5 }];
     expect(Base.keyCount()).toBe(0);
   });
+
+  it('旧档按名称统计钥匙，即使快照缺少资源 type', () => {
+    Base.data.keys = 0;
+    Base.data.stash = [{ card: { id: 'legacy-key-event', name: '钥匙包', desc: '钥匙 ×2。' }, count: 3 }];
+    expect(Base.keyCount()).toBe(6);
+  });
+
+  it('结构化材料按稳定卡 id 对应的数据计数，不读取改写后的 desc', () => {
+    Base.data.keys = 1;
+    Base.data.stash = [
+      { card: { id: 'tt-key-one', name: '任意改名', type: '资源', desc: '纯展示文案',
+        rules: { version: 1, base: { material: { kind: 'keys', amount: 3 } } } }, count: 2 },
+      { card: { id: 'tt3-wood-bundle', name: '任意改名', type: '资源', desc: '纯展示文案',
+        rules: { version: 1, base: { material: { kind: 'wood', amount: 3 } } } }, count: 1 },
+    ];
+    expect(Base.keyCount()).toBe(7);
+    expect(Base.materialInfo(Base.data.stash[1].card).kind).toBe('wood');
+    expect(Base.materialAmount(Base.data.stash[1].card)).toBe(3);
+  });
+
+  it('拒绝无效的结构化材料参数，避免静默退回 desc', () => {
+    const card = { id: 'tt-key-one', type: '资源', name: '钥匙', desc: '钥匙 ×9',
+      rules: { version: 1, base: { material: { kind: 'keys', amount: 0 } } } };
+    expect(() => Base.materialAmount(card)).toThrow(/Invalid base\.material for card tt-key-one/);
+  });
 });

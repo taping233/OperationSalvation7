@@ -2,7 +2,7 @@
 function createBattleResolution(ports) {
   const { readState, getPlayerStatus, esc, log, heal, addFloat, addDelayed, takeDeckBottom, deckBottomCount,
     startSurge, getAllCards, isRandomObtainable, randomBattle, getDamageTypes, getDamageTypeMeta,
-    fixedDamageType, hasCurse, getAliveFoes, getGrowth, addArmor, findCard, addTempCard, queueDiscover,
+    fixedDamageType, hasCurse, getAliveFoes, getGrowth, addArmor, applyStatus, findCard, addTempCard, queueDiscover,
     splitClauses, applyTextEffects, registerTurnStart, registerBattle, castRandomSpells,
     drawCards, grantSha, hitFoe, drawOf, isAOE } = ports;
   return function resolveCard(card, target, infused, fuelCost, uid) {
@@ -11,6 +11,9 @@ function createBattleResolution(ports) {
     // 随本牌目标结算；二段（攻+1 附加中毒）由 execPlay 收尾进入点选（interaction 'dart'），
     // 可另选目标或重复选择同一目标
     let desc = String(card.desc || '');
+    const hasStructuredOnPlay = card.rules?.triggers != null &&
+      Object.prototype.hasOwnProperty.call(card.rules.triggers, 'onPlay');
+    const structuredOnPlay = hasStructuredOnPlay ? card.rules.triggers.onPlay : [];
     if (card.id === 'tt7-bloodpoison') desc = '攻（+1），附加流血。';
     // 江湖救急（2026-09-18 老板定版）：「随机直接给 3 张」才是本意——不走发现面板。
     // 随机池与发现同口径（isRandomObtainable），置入的临时卡在下个回合开始时消耗。
@@ -55,7 +58,33 @@ function createBattleResolution(ports) {
     const isDmgType = getDamageTypes().includes(card.type);
     let structuredHit = false;
     // —— 伤害（卡面伤害词条立即结算，不受沉默影响） ——
-    if (isDmgType && ((+card.dmg || 0) > 0 || card.dmgType === 'attack') && !(infuseLead && !infused)) {
+    if (hasStructuredOnPlay) {
+      const type = getDamageTypeMeta()[card.dmgType] ? card.dmgType : fixedDamageType;
+      const damageCard = { ...card, desc: '' };
+      for (const operation of structuredOnPlay) {
+        if (['heal', 'armor', 'draw', 'status', 'discover'].includes(operation.op)) continue;
+        if (operation.op !== 'damage' || operation.amountField !== 'dmg') {
+          throw new TypeError(`Unsupported onPlay operation for card ${card.id || '<missing id>'}`);
+        }
+        const dmgVal = +card[operation.amountField] + ((uid && getGrowth(uid)) || 0);
+        const hitCount = operation.hitCount || 1;
+        let preferred = target;
+        for (let segment = 0; segment < hitCount; segment++) {
+          const targets = operation.target === 'allEnemies'
+            ? getAliveFoes()
+            : [preferred && !preferred.dead ? preferred : getAliveFoes()[0]].filter(Boolean);
+          if (!targets.length) break;
+          for (const foe of targets) {
+            if (!foe.dead) hitFoe(foe, damageCard, dmgVal, type,
+              hitCount > 1 ? `（第 ${segment + 1} 段）` : '', hitCount > 1 ? segment + 1 : null);
+          }
+          if (operation.target === 'chosenEnemy') preferred = targets[0];
+          if (operation.retarget !== 'livingFoes' && operation.target === 'chosenEnemy' && preferred.dead) break;
+        }
+        structuredHit = true;
+        did = true;
+      }
+    } else if (isDmgType && ((+card.dmg || 0) > 0 || card.dmgType === 'attack') && !(infuseLead && !infused)) {
       structuredHit = true;
       const type = getDamageTypeMeta()[card.dmgType] ? card.dmgType : fixedDamageType;
       let dmgVal = (+card.dmg || 0) + ((uid && getGrowth(uid)) || 0);   // 充能火球：回合成长
@@ -113,7 +142,11 @@ function createBattleResolution(ports) {
       if (!targets.length) return;
       let dealtTotal = 0;
       for (let i = 0; i < times; i++) {
-        targets.forEach(foe => {
+        const segmentTargets = isAOE(card)
+          ? getAliveFoes()
+          : [target && !target.dead ? target : getAliveFoes()[0]].filter(Boolean);
+        if (!segmentTargets.length) break;
+        segmentTargets.forEach(foe => {
           if (!foe.dead) {
             if (hpCap > 0 && foe.hp > hpCap) {
               if (i === 0) log(`[[icon:cross]] <b>${esc(foe.name)}</b> 血量高于 ${hpCap}：${esc(card.name)} 无效`, 'warn');
@@ -130,7 +163,7 @@ function createBattleResolution(ports) {
               foeDmg += +pierceB[1];
               if (i === 0) log(`[[icon:blood]] <b>${esc(foe.name)}</b> 处于流血状态，伤害 +${pierceB[1]}`, 'sys');
             }
-            dealtTotal += hitFoe(foe, card, foeDmg, type, times > 1 ? `（第 ${i + 1} 段）` : '');
+            dealtTotal += hitFoe(foe, card, foeDmg, type, times > 1 ? `（第 ${i + 1} 段）` : '', times > 1 ? i + 1 : null);
           }
         });
       }
@@ -147,10 +180,17 @@ function createBattleResolution(ports) {
       // 条件额外施放（暗影射击：对手处于诅咒状态，额外施放 1 次）
       const sm = desc.match(/若[^。]*?诅咒[^。]*?额外施放\s*(\d+)\s*次/);
       if (sm) {
-        const t0 = targets.find(t => !t.dead);
-        if (t0 && hasCurse(t0)) {
-          for (let k = 0; k < +sm[1]; k++) hitFoe(t0, card, dmgVal, type, '（额外施放）');
-          log(`[[icon:play]] 对手身负诅咒：【${esc(card.name)}】额外施放 ${sm[1]} 次`, 'sys');
+        const t0 = targets.find(t => hasCurse(t));
+        if (t0) {
+          let preferred = t0, cast = 0;
+          for (let k = 0; k < +sm[1]; k++) {
+            const next = preferred && !preferred.dead ? preferred : getAliveFoes()[0];
+            if (!next) break;
+            hitFoe(next, card, dmgVal, type, `（额外施放第 ${k + 1} 次）`, k + 1);
+            preferred = next;
+            cast++;
+          }
+          log(`[[icon:play]] 对手身负诅咒：【${esc(card.name)}】额外施放 ${cast}/${sm[1]} 次`, 'sys');
         }
       }
       // 击杀连锁（余烬爆裂「再施放一次」/ 第十二批·饱和打击「如果消灭敌人，额外释放一次」2026-09-23）——
@@ -168,10 +208,59 @@ function createBattleResolution(ports) {
       log(`[[icon:cross]] <b>${esc(card.name)}</b> 的技能效果被沉默封印（只剩攻击生效，持续 ${getPlayerStatus().status.silence} 回合）`, 'warn');
       return;
     }
+    if (hasStructuredOnPlay) {
+      for (const operation of structuredOnPlay) {
+        if (operation.op === 'damage') continue;
+        if (operation.op === 'status' && operation.status === 'freeze' && operation.target === 'allEnemies' &&
+            Number.isInteger(operation.duration) && operation.duration > 0) {
+          const targets = getAliveFoes();
+          const affected = targets.filter(foe => applyStatus(foe, 'freeze', operation.duration) > 0);
+          if (affected.length) {
+            const names = affected.length === targets.length
+              ? '全体敌人'
+              : affected.map(foe => esc(foe.name)).join('、');
+            log(`[[icon:crystal]] ${names} 被冰冻 ${operation.duration} 回合（无法行动）`, 'sys');
+            did = true;
+          }
+          continue;
+        }
+        if (operation.op === 'discover' && Number.isInteger(operation.count) && operation.count > 0) {
+          queueDiscover({ n: operation.count, pool: operation.pool, costDecayPerTurn: operation.costDecayPerTurn,
+            sourceCardId: card.id });
+          did = true;
+          continue;
+        }
+        if (!['heal', 'armor', 'draw'].includes(operation.op) || operation.amountField !== operation.op) {
+          throw new TypeError(`Unsupported onPlay operation for card ${card.id || '<missing id>'}`);
+        }
+        const amount = +card[operation.amountField];
+        if (operation.op === 'heal') {
+          const healban = getPlayerStatus().status.healban || 0;
+          if (healban > 0) {
+            log(`[[icon:heart]] 禁疗中：回复 ${amount} 点生命无效（还剩 ${getPlayerStatus().status.healban} 回合）`, 'warn');
+          } else {
+            heal(amount);
+            addFloat({ unit: 'self', text: '', cls: 'stk sticker-heal', warm: true });
+          }
+        } else if (operation.op === 'armor') {
+          addArmor(amount);
+          log(`[[icon:plate]]获得 ${amount} 点护甲`, 'sys');
+        } else {
+          if (readState().mode === 'boss') {
+            const got = drawCards(amount);
+            log(`[[icon:cards]] <b>${esc(card.name)}</b>：抽了 ${got} 张牌`, 'sys');
+          } else {
+            grantSha(amount);
+            log(`[[icon:cards]] <b>${esc(card.name)}</b>：获得 ${amount} 张【初始攻击】（普通战斗抽牌效果改为获得初始攻击）`, 'sys');
+          }
+        }
+        did = true;
+      }
+    }
     // 法力奔涌（2026-09-10 需求 #37/#38）：「对随机敌人释放4个随机法术（这些随机法术默认已注能）」。
     // 识别加名称/ID 兜底——旧档背包里的快照克隆可能带着旧措辞描述，正则失配曾导致整卡无效果。
     const surgeM = desc.match(/对随机敌人释放\s*(\d+|四)\s*个随机法术/);
-    if (surgeM || card.id === 'cc-mana-surge' || /法力奔涌/.test(String(card.name || ''))) {
+    if (!hasStructuredOnPlay && (surgeM || card.id === 'cc-mana-surge' || /法力奔涌/.test(String(card.name || '')))) {
       startSurge(castRandomSpells(surgeM ? (surgeM[1] === '四' ? 4 : Math.max(1, +surgeM[1])) : 4, card.id));
       did = true;
     }
@@ -180,7 +269,7 @@ function createBattleResolution(ports) {
     // 例外：神灯类「抉择：1° …；2° …」的编号续句（^\d° 开头）必须并回抉择主句，
     // 否则选项会被拆成独立子句抢先自动结算（2026-09-12 回归修复）
     const imm = [];
-    parts.immediate.forEach(cl => {
+    if (!hasStructuredOnPlay) parts.immediate.forEach(cl => {
       if (/^\s*\d\s*[°º]/.test(cl) && imm.length && /抉择[:：]/.test(imm[imm.length - 1])) imm[imm.length - 1] += '，' + cl;
       else imm.push(cl);
     });
@@ -195,20 +284,20 @@ function createBattleResolution(ports) {
       drawn = drawn || res.drawn;
     });
     // 结构化词条兜底（描述未写明但制作坊标注了回复/护甲/抽卡字段时）——纯注能句未注能时同门跳过（第十二批）
-    if (!(infuseLead && !infused) && !healed && !skillOnly && +(card.heal || 0) > 0) {
+    if (!hasStructuredOnPlay && !(infuseLead && !infused) && !healed && !skillOnly && +(card.heal || 0) > 0) {
       const n = +(card.heal || 0);
       if ((getPlayerStatus().status.healban || 0) > 0) {
         log(`[[icon:heart]] 禁疗中：回复 ${n} 点生命无效（还剩 ${getPlayerStatus().status.healban} 回合）`, 'warn');
       } else { heal(n); addFloat({ unit: 'self', text: '', cls: 'stk sticker-heal', warm: true }); }
       did = true;
     }
-    if (!(infuseLead && !infused) && !armored && !skillOnly && +(card.armor || 0) > 0) {
+    if (!hasStructuredOnPlay && !(infuseLead && !infused) && !armored && !skillOnly && +(card.armor || 0) > 0) {
       addArmor(+(card.armor || 0));
       log(`[[icon:plate]]获得 ${+(card.armor || 0)} 点护甲`, 'sys');
       did = true;
     }
     // 卡面结构化抽卡字段兜底（描述未写「抽 N 张牌」时）——邪能护体 draw:3 依赖此门防未注能白嫖
-    if (!(infuseLead && !infused) && !drawn && !skillOnly && drawOf(card) > 0) {
+    if (!hasStructuredOnPlay && !(infuseLead && !infused) && !drawn && !skillOnly && drawOf(card) > 0) {
       const n = drawOf(card);
       if (readState().mode === 'boss') {
         const got = drawCards(n);
@@ -220,11 +309,11 @@ function createBattleResolution(ports) {
       did = true;
     }
     // —— 「回合开始时」生效时刻词条 ——
-    if (parts.turnStart.length) { registerTurnStart(card, parts.turnStart); did = true; }
+    if (!hasStructuredOnPlay && parts.turnStart.length) { registerTurnStart(card, parts.turnStart); did = true; }
     // —— 「本局对战内」持续时间词条 ——
-    parts.battle.forEach(cl => { did = registerBattle(card, cl, target) || did; });
+    if (!hasStructuredOnPlay) parts.battle.forEach(cl => { did = registerBattle(card, cl, target) || did; });
     // 「被注能时」句在打出时不结算（splitClauses 已剥出，留给 resolveInfusedFuel）
-    if (!did && !skillOnly) log(`[[icon:play]] <b>${esc(card.name)}</b>：该效果在 M1 后续实装（占位）`, 'dim');
+    if (!did && !skillOnly && !hasStructuredOnPlay) log(`[[icon:play]] <b>${esc(card.name)}</b>：该效果在 M1 后续实装（占位）`, 'dim');
   
   };
 }
