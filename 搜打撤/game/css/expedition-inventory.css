@@ -89,9 +89,11 @@
 /* —— 仓库页卡面化（09-20 高级感改造批2）：文字行 → 卡面网格，卡面复用整备页同款
    cardHTML('sm')；点击行为不变（stashItem 弹窗）。命名避开旧 .stash-grid（bag 4×4 网格） —— */
 #overlay .hub-page .stash-scroll { max-height:46vh; overflow-y:auto; padding:2px 2px 6px; scrollbar-color:#496977 #081722; }
-#overlay .hub-page .stash-cardgrid { display:grid; grid-template-columns:repeat(auto-fill, minmax(96px, 1fr)); gap:10px; }
+#overlay .hub-page .stash-cardgrid { display:grid; grid-template-columns:repeat(auto-fill, minmax(140px, 1fr)); gap:12px; }
 #overlay .hub-page .stash-cell { position:relative; padding:0; border:1px solid rgba(182,211,214,.22); border-radius:2px; background:#0c2230; cursor:pointer; transition:transform .14s, border-color .14s, box-shadow .14s; }
-#overlay .hub-page .stash-cell .hs-card { width:100%; height:auto; aspect-ratio:10/14; font-size:clamp(8px, .72vw, 10px); box-shadow:none; border-radius:0; }
+#overlay .hub-page .stash-cell .hs-card { width:100%; height:auto; aspect-ratio:10/14; font-size:clamp(11px, .9vw, 13px); box-shadow:none; border-radius:0; }
+#overlay .hub-page .stash-cell .hsc-art { flex:1 1 auto!important; height:auto!important; min-height:0; aspect-ratio:auto!important; }
+#overlay .hub-page .stash-cell .hsc-desc { display:none; }
 #overlay .hub-page .stash-cell:hover { transform:translateY(-2px); border-color:#dfc28d; box-shadow:0 6px 16px rgba(0,0,0,.38); }
 #overlay .hub-page .stash-cell.collected { border-color:#dfc28d; box-shadow:inset 0 0 0 1px rgba(223,194,141,.5), 0 0 10px rgba(223,194,141,.12); }
 #overlay .hub-page .stash-cell .stack-count { position:absolute; right:3px; bottom:3px; z-index:5; min-width:18px; padding:1px 5px; border-radius:999px; color:#f0f0f0; background:rgba(8,18,26,.92); border:1px solid rgba(196,196,196,.55); font-size:10px; font-weight:800; }
@@ -123,6 +125,15 @@
 
 /* —— 商店货架化（09-20 高级感改造批3）：卡牌商品挂小卡面，物资挂大图标 —— */
 #overlay .hub-page .shop-shelf { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+#overlay .hub-shop .hub-page,
+#overlay .hub-upgrade .hub-page { background:linear-gradient(180deg,rgba(5,17,26,.7),rgba(5,17,26,.82)); }
+#overlay .hub-shop .hub-two { grid-template-columns:minmax(0,1.3fr) minmax(300px,.7fr); align-items:start; }
+#overlay .hub-shop .hub-two > .hub-card,
+#overlay .hub-upgrade .hub-upgrade-layout > .hub-card { background:rgba(10,29,41,.95); border-color:rgba(182,211,214,.24); }
+#overlay .hub-shop .shop-shelf { grid-template-columns:1fr; }
+#overlay .hub-shop .shelf-item { min-height:135px; }
+#overlay .hub-shop .shelf-item .shelf-visual { width:84px; height:116px; }
+#overlay .hub-shop .shelf-item .shelf-visual .hs-card { font-size:8px; }
 #overlay .hub-page .shelf-item { display:flex; align-items:center; gap:12px; padding:12px 14px 12px 12px; border:1px solid rgba(182,211,214,.2); border-radius:2px; background:#102735; transition:border-color .14s, transform .14s; }
 #overlay .hub-page .shelf-item:hover { border-color:#dfc28d; transform:translateY(-1px); }
 #overlay .hub-page .shelf-item .shelf-visual { flex:0 0 auto; width:66px; height:92px; overflow:hidden; border-radius:2px; background:#0c2230; display:flex; align-items:center; justify-content:center; }
@@ -132,21 +143,28 @@
 #overlay .hub-page .shelf-item .shelf-info b { color:#e6eef1; font-size:15px; letter-spacing:1px; }
 #overlay .hub-page .shelf-item .shelf-info .dim { font-size:11.5px; line-height:1.6; }
 #overlay .hub-page .shelf-item .poor-why { color:#c98b7e; font-size:11px; }
-#overlay .hub-page .shelf-item.poor { opacity:.62; filter:grayscale(.65); }
+#overlay .hub-page .shelf-item.poor { border-color:rgba(182,211,214,.16); }
+#overlay .hub-page .shelf-item.poor .shop-price-tag:disabled { opacity:1; background:#30434a; border-color:#637985; color:#d0dbdc; }
 #overlay .hub-page .shelf-item .shop-price-tag { flex:0 0 auto; }
 
 /* —— 升级页重排（09-20 高级感改造批3）：上排两张扩建卡大数字化，下排宠物升级全宽，
       整体撑满视口高度，不再留下 2/3 空白 —— */
-#overlay .hub-page .hub-upgrade-layout { display:grid; grid-template-columns:1fr 1fr; grid-template-rows:auto minmax(0,1fr); gap:16px; min-height:calc(100vh - 300px); }
+#overlay .hub-page .hub-upgrade-layout { display:grid; grid-template-columns:1fr 1fr; grid-template-rows:minmax(185px,auto) minmax(230px,1fr); gap:16px; min-height:calc(100vh - 170px); }
 #overlay .hub-page .up-card { display:flex; flex-direction:column; gap:8px; padding:18px 20px; }
 #overlay .hub-page .up-cap { display:flex; align-items:baseline; gap:8px; margin:6px 0 0; }
 #overlay .hub-page .up-cap b { font-size:46px; line-height:1; color:#f0d38e; font-variant-numeric:tabular-nums; text-shadow:0 2px 10px rgba(0,0,0,.4); }
 #overlay .hub-page .up-cap small { color:#9db0b8; font-size:13px; letter-spacing:1px; }
 #overlay .hub-page .up-card .base-bar { margin:4px 0 8px; }
 #overlay .hub-page .up-card .ov-btn { margin-top:auto; min-height:44px; }
+#overlay .hub-page .up-card .ov-btn:disabled,
+#overlay .hub-page .up-pets .mini-btn:disabled { opacity:1; background:#30434a; border-color:#637985; color:#d0dbdc; }
 #overlay .hub-page .up-pets { grid-column:1 / -1; }
 
 @media (max-width:900px) {
+  #overlay .hub-shop .hub-two,
+  #overlay .hub-upgrade .hub-upgrade-layout { grid-template-columns:1fr; min-height:0; }
+  #overlay .hub-upgrade .hub-upgrade-layout { grid-template-rows:auto; }
+  #overlay .hub-upgrade .up-pets { grid-column:auto; }
   #overlay #depMain { overflow:auto; }
   #overlay #depMain .dep-body { grid-template-columns:1fr; overflow:auto; }
   #overlay #depMain .dep-body > .hub-card { min-height:360px; }

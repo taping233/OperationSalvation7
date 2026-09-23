@@ -460,6 +460,7 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
       const character = characterFor(c.cls);
       const skinView = character && getCharacter(SDT.Base.data, character.id);
       const skins = skinView?.availableSkinIds || ['default'];
+      const skinNames = new Map(SDT.Art.listSkins(c.cls).map(skin => [skin.id, skin.name]));
       return `<article class="class-dossier${c.lv > 1 || c.xp > 0 ? ' trained' : ''}">
         <div class="class-dossier-art">${SDT.Art.classArt(c.cls)}</div>
         <div class="class-dossier-shade"></div>
@@ -471,7 +472,7 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
           <div class="class-dossier-meta"><b>Lv.${c.lv}${c.maxed ? ' · MAX' : ''}</b><span>人物卡 ${c.pool} 张</span></div>
           <div class="xp-bar" aria-label="熟练度 ${pct.toFixed(0)}%"><i style="width:${pct.toFixed(1)}%"></i></div>
           <div class="xp-txt">${c.maxed ? '熟练度已满' : `经验 ${c.xp} / ${c.need}`}</div>
-          <div class="class-skins" aria-label="${esc(characterName(c.cls))}皮肤">${skins.map(id => `<button class="mini-btn${skinView.selectedSkinId === id ? ' ok' : ''}" data-act="selectCharacterSkin" data-character="${character.id}" data-skin="${escAttr(id)}" aria-pressed="${skinView.selectedSkinId === id}">${id === 'default' ? '默认' : esc(id)}</button>`).join('')}</div>
+          <div class="class-skins" aria-label="${esc(characterName(c.cls))}皮肤">${skins.map(id => `<button class="mini-btn${skinView.selectedSkinId === id ? ' ok' : ''}" data-act="selectCharacterSkin" data-character="${character.id}" data-skin="${escAttr(id)}" aria-pressed="${skinView.selectedSkinId === id}">${id === 'default' ? '默认' : esc(skinNames.get(id) || id)}</button>`).join('')}</div>
         </div>
       </article>`;
     }).join('');
@@ -564,7 +565,7 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
       const on = equipped === b.id;
       return `<button class="back-card${on ? ' on' : ''}${unlocked ? '' : ' locked'}"
           data-act="selBack" data-id="${b.id}" title="${unlocked ? (on ? '当前卡背' : '点击装备') : '未解锁 · ' + b.from}">
-        <span class="back-thumb">${SDT.Cards.cardBackHTML(b.id)}</span>
+        <span class="back-thumb">${SDT.Cards.cardBackHTML(b.id)}${unlocked ? '' : '<span class="back-lock">[[icon:lock]]</span>'}</span>
         <b>${b.name}</b>
         <span class="dim">${unlocked ? (on ? '[[icon:check]] 使用中' : '点击装备') : '[[icon:lock]] ' + b.from}</span>
       </button>`;

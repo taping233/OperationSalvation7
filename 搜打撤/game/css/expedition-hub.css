@@ -1,6 +1,6 @@
 /* 远征基地出发页：简报优先，所有数值来自 game.hub.js 的真实基地状态。 */
 #overlay .hub-deploy .hub-page { max-width:1420px; }
-#overlay .hub-deploy .hub-head h2 { display:block; }
+#overlay #hubMain .hub-head h2 { display:block; font-size:clamp(16px,1.6vw,21px); }
 #overlay .hub-deploy .deploy-brief { display:grid; grid-template-columns:minmax(0,1.45fr) minmax(320px,.72fr); gap:16px; }
 #overlay .deploy-mission { position:relative; isolation:isolate; overflow:hidden; min-height:clamp(520px, 58vh, 900px); display:flex; flex-direction:column; justify-content:space-between; border:1px solid rgba(199,190,154,.28); border-radius:2px; background:#0d1721 url('../assets/scenes/winter-expedition/outskirts.webp') center/cover no-repeat; box-shadow:0 18px 42px rgba(0,0,0,.28); }
 #overlay .deploy-mission-shade { position:absolute; inset:0; z-index:-1; background:linear-gradient(180deg,rgba(5,14,23,.18),rgba(5,12,20,.56) 46%,rgba(5,9,15,.94)); }
@@ -91,7 +91,7 @@
 .collection-command-stats b { color:#ead69e; font:700 19px/1 "Cascadia Code",monospace; }
 
 .class-dossier-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:12px; }
-.class-dossier { position:relative; isolation:isolate; min-height:clamp(350px,48vh,600px); overflow:hidden; border:1px solid rgba(157,188,197,.25); background:#0c1c26; box-shadow:0 16px 30px rgba(0,0,0,.2); }
+.class-dossier { position:relative; isolation:isolate; min-height:clamp(390px,50vh,600px); overflow:hidden; border:1px solid rgba(157,188,197,.25); background:#0c1c26; box-shadow:0 16px 30px rgba(0,0,0,.2); }
 .class-dossier.trained { border-color:rgba(211,187,120,.42); }
 .class-dossier-art { position:absolute; inset:0; z-index:-3; }
 .class-dossier-art .art,
@@ -103,11 +103,13 @@
 .class-dossier-kicker { color:#d6bd7e; font:700 8px "Cascadia Code",monospace; letter-spacing:.18em; }
 .class-dossier h3 { margin:5px 0 7px; color:#f2eee3; font:400 clamp(20px,1.8vw,29px)/1.1 var(--serif); letter-spacing:5px; }
 .class-dossier p { min-height:3em; margin:0 0 12px; color:#b5c4c7; font-size:11px; line-height:1.55; }
-.class-dossier-meta { display:flex; align-items:center; justify-content:space-between; gap:8px; color:#9fb1b5; font-size:10px; }
+.class-dossier-meta { display:flex; align-items:center; justify-content:space-between; gap:8px; color:#c1d0d1; font-size:11px; }
 .class-dossier-meta b { color:#ead296; font:700 12px "Cascadia Code",monospace; }
 .class-dossier .xp-bar { height:4px; margin-top:9px; background:rgba(220,230,228,.12); }
 .class-dossier .xp-bar i { background:linear-gradient(90deg,#8caeb4,#dfc47d); }
-.class-dossier .xp-txt { color:#97a9ae; font-size:9px; }
+.class-dossier .xp-txt { color:#bdcbcd; font-size:10px; }
+.class-skins { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:5px; margin-top:8px; }
+.class-skins .mini-btn { min-width:0; padding:6px 3px; font-size:10px; letter-spacing:0; white-space:nowrap; }
 .class-dossier:hover .class-dossier-art img { transform:scale(1.025); filter:saturate(.92) contrast(1.04); }
 
 .collection-tabs { position:sticky; top:0; z-index:3; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; margin-bottom:12px; padding:8px; border:1px solid rgba(171,200,205,.18); background:rgba(7,19,28,.94); backdrop-filter:blur(12px); }
@@ -135,10 +137,20 @@
 #overlay .hub-ach .back-card { min-width:0; padding:13px 10px; border:1px solid rgba(163,192,198,.2); border-radius:2px; background:linear-gradient(155deg,rgba(19,45,56,.9),rgba(8,24,33,.94)); color:#dce5e3; box-shadow:none; }
 #overlay .hub-ach .back-card:hover:not(.locked) { border-color:#d6bd7e; transform:translateY(-2px); }
 #overlay .hub-ach .back-card.on { border-color:#d6bd7e; background:linear-gradient(155deg,rgba(69,62,39,.88),rgba(20,34,37,.94)); box-shadow:inset 0 0 0 1px rgba(214,189,126,.18); }
-#overlay .hub-ach .back-card.locked { opacity:.68; filter:saturate(.45); background:linear-gradient(155deg,rgba(30,52,60,.72),rgba(9,24,32,.88)); }
+#overlay .hub-ach .back-card.locked { --back-accent:#9bafba; opacity:1; border-top:2px solid var(--back-accent); background:linear-gradient(155deg,rgba(30,52,60,.92),rgba(9,24,32,.96)); }
 #overlay .hub-ach .back-card b { color:#e5ebe5; }
 #overlay .hub-ach .back-card .dim { color:#9fb1b5; }
-#overlay .hub-ach .back-card.locked .back-thumb { opacity:.58; filter:grayscale(1) contrast(.9); }
+#overlay .hub-ach .back-card.locked:has(.hb-wolf) { --back-accent:#86a99a; }
+#overlay .hub-ach .back-card.locked:has(.hb-coin) { --back-accent:#c7ae72; }
+#overlay .hub-ach .back-card.locked:has(.hb-vault) { --back-accent:#a28b70; }
+#overlay .hub-ach .back-card.locked:has(.hb-boss) { --back-accent:#ae7881; }
+#overlay .hub-ach .back-card.locked:has(.hb-altar) { --back-accent:#9998c5; }
+#overlay .hub-ach .back-card.locked:has(.hb-pet) { --back-accent:#b4957b; }
+#overlay .hub-ach .back-card.locked .back-thumb { opacity:1; filter:none; }
+#overlay .hub-ach .back-card.locked .back-thumb::after { display:none; }
+#overlay .hub-ach .back-card.locked .back-thumb .hs-back { outline:2px solid var(--back-accent); outline-offset:-3px; }
+#overlay .hub-ach .back-lock { position:absolute; z-index:6; top:-5px; right:-6px; display:grid; place-items:center; width:20px; height:20px; border:1px solid var(--back-accent); border-radius:50%; background:#0b202c; }
+#overlay .hub-ach .back-lock .ic { width:11px; height:11px; }
 
 @media (max-width:1180px) {
   .class-dossier-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
