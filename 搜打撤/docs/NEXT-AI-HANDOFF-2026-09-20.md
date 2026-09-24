@@ -318,3 +318,15 @@ Git 状态：`master` 领先 `origin/master` **8 个提交未推送**（最新 2
 - 老板指示将上一轮盘点的剩余工作区内容全部提交。本段随该提交入库；提交前 HEAD `2dc7f3c`，相对本地 `origin/master` ahead 1 / behind 0；提交标识以本段所属提交的实时 `git log -1` 为准，提交后预计 ahead 2 / behind 0，未联网刷新远端，未推送。
 - 收编 `game/css/winter.css` 的照相馆相框样式、`game/index.html` 的已跟踪 `lab-ending.css` 引用、`game/src/game.boot.js` 与 `game/src/hub/game.cardslib.js` 的少量代码整理，以及 `game/.sdt-shots-upgrade/` 的 9 张走查截图。提交前暂存区为空，工作区除这些路径外无其他改动；提交后以实时 `git status --short` 复核。
 - 本批依老板此前指示未运行测试、构建或新的页面验收。截图是已有走查产物，不代表此次代码已有新的实机验收。
+
+## 当前状态补充：六路战斗代码改进（2026-09-24 11:54 +08:00）
+
+- 当前 HEAD `66ecb57`；相对本地 `origin/master` ahead 2 / behind 0，未联网刷新远端，未推送。此前剩余界面改动及 9 张截图已在该提交入库；其后的战斗代码是本段记录的**新未提交改动**。
+- 6 位 GPT-6 Luna 子代理分工处理回合自动效果、统一演出时钟、攻击 cue 生产/消费和目标会话；本会话整合敌方行动间隔到共享等待，并检查接口衔接。工作区新改动仅在 `game/src/battle/`（10 个已跟踪文件修改、3 个新文件）及本交接/塔2差距文档；具体范围、同步例外与实现边界见 `docs/sts2-combat-delta-2026-09-24.md` 的“并行代码切片”。
+- 依老板要求，**未运行测试、构建或浏览器走查**；子代理仅对部分文件做静态语法/差异格式检查。不能将上一批 11 文件 / 63 项或 Boss 页面采样作为这批未提交代码的验收证据。未提交、未推送；接手前重查 `git status --short` 与 `git log -1`。
+
+## 当前状态补充：六路战斗代码提交（2026-09-24 12:05 +08:00）
+
+- 老板授权确认无明显问题后提交。提交前 HEAD `66ecb57`，相对本地 `origin/master` ahead 2 / behind 0；本段随本批提交入库，提交标识以实时 `git log -1` 为准，提交后预计 ahead 3 / behind 0。未联网刷新远端，未推送。
+- 本批范围为 `game/src/battle/` 的 10 个已跟踪文件改动、3 个新增模块（`battle.clock.js`、`battle.attack-cues.js`、`battle.target-session.js`）及本交接/塔2差距文档。提交前静态审查补正了 2× 抛体轨迹、CSS 反馈清理时长、首击动作重复起播，以及回合初延迟伤害清场后的胜利收尾；详情见 `docs/sts2-combat-delta-2026-09-24.md` 的“并行切片提交补记”。
+- 依老板此前要求，本批未运行测试、构建或浏览器走查；`node --check` 覆盖 13 个战斗 JS 文件、`git diff --check` 通过（仅 LF/CRLF 提示）。此前 11 文件 / 63 项和 Boss 页面采样不覆盖本批。实际逐击、顿帧、音效与取消边界仍待实机确认。

@@ -9,6 +9,7 @@ import { escAttr } from '../core/shared.js';
 import { Random } from '../core/random.js';
 import { groupHandCards } from './battle.hand.js';
 import { getPace, setPace } from './battle.pace.js';
+import { schedulePresentationMs } from './battle.clock.js';
 import { renderCombatPiles } from './battle.piles.view.js';
 import { attach as attachUnitFrames, hide as hideUnitFrames, cacheStats as frameCacheStats } from './battle.frames.js';
 import { BattleSession, commands, configureBattleRenderer, getSnapshot, R, effCostOf, findCard, markDreadShown, pileTip, refillDrawPile, takeCardAnims, unplayableReason, matchHandSelectKey } from './battle.core.js';
@@ -91,8 +92,8 @@ import { aim, aimPlayedAt, selectCardByClick, showCardBlockReason, startAim, can
       return wrap.outerHTML;
     }).join('');
     document.body.appendChild(container);
-    setTimeout(() => { container.classList.add('fade-out'); }, 2000);
-    setTimeout(() => { container.remove(); battleStartFlashDone = false; }, 2600);
+    schedulePresentationMs(() => { container.classList.add('fade-out'); }, 2000);
+    schedulePresentationMs(() => { container.remove(); battleStartFlashDone = false; }, 2600);
   }
   function render(snapshot = getSnapshot()) {
     const prevView = captureBattleView();   // 重建前的手牌/牌堆位：供飞行与归位动画取样
@@ -453,7 +454,7 @@ import { aim, aimPlayedAt, selectCardByClick, showCardBlockReason, startAim, can
     if (opts.isBoss && !dreadShown) {
       markDreadShown();
       const st = body.querySelector('.battle-stage');
-      if (st) { st.classList.add('fx-dread'); setTimeout(() => st.classList.remove('fx-dread'), 2500); }
+      if (st) { st.classList.add('fx-dread'); schedulePresentationMs(() => st.classList.remove('fx-dread'), 2500); }
       const bossFoe = foes[0];
       const bossName = (bossFoe && bossFoe.name) || '???';
       const art = bossFoe && bossFoe.id && SDT.Art.has(bossFoe.id)
@@ -470,7 +471,7 @@ import { aim, aimPlayedAt, selectCardByClick, showCardBlockReason, startAim, can
       const ovEl = UI.el.overlay;
       if (ovEl) {
         ovEl.appendChild(intro);
-        setTimeout(() => intro.remove(), 1800);   // 动画 1.6s + 缓冲后移除
+        schedulePresentationMs(() => intro.remove(), 1800);   // 动画 1.6s + 缓冲后移除
       }
     }
     spawnFloats(body, anim.flightMs ? Math.min(340, anim.flightMs * 0.8) : 0);

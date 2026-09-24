@@ -5,6 +5,7 @@ const UI = window.SDT.UI;
 import { rect as uiRect } from '../ui/ui-scale.js';
 import { esc } from '../core/shared.js';
 import { play as playUnitFrames } from './battle.frames.js';
+import { schedulePresentationMs } from './battle.clock.js';
   // ---------- 牌局动画（2026-09-09）：离场克隆飞行 / 新牌飞入 / 幸存者归位 / 手牌区显隐 ----------
   // 渲染是整块重建，跨渲染的位移全部走 WAAPI：离场牌在 overlay 常驻层放克隆体飞行，
   // 入场/归位用 composite:'add' 加法合成——不破坏槽位自身的扇形 transform。
@@ -71,7 +72,7 @@ import { play as playUnitFrames } from './battle.frames.js';
     el.className = `bt-turnbanner ${side === 'foe' ? 'foe' : 'self'}`;
     el.innerHTML = `<b>${esc(text)}</b>`;
     ov.appendChild(el);
-    setTimeout(() => el.remove(), 1450);
+    schedulePresentationMs(() => el.remove(), 1450);
   }
   // WAAPI 防冻保护：遮挡/后台 webview 里文档时间线可能被冻结（currentTime 恒 0），
   // 动画会永远停在第一帧（例如把手牌钉在敌方阶段的 0.08 透明度）——起跑失败就取消，
@@ -83,7 +84,7 @@ import { play as playUnitFrames } from './battle.frames.js';
     // 兜底窗口须覆盖正常播完的时间（duration 可能 > 300，如回合升回 380ms），
     // 否则正常播放中的动画会被当成「没按时启动」误杀（09-12 实机）
     const dur = (options && options.duration) || 0;
-    setTimeout(() => {
+    schedulePresentationMs(() => {
       if (anim.playState === 'running' && (anim.currentTime == null || anim.currentTime < delay + 30)) {
         try { anim.cancel(); } catch { /* 已被移除的元素上取消会抛，忽略 */ }
       }
@@ -151,10 +152,10 @@ import { play as playUnitFrames } from './battle.frames.js';
     // —— 牌库图标动画（2026-09-11 需求，约 1.5s）：抽牌脉冲 / 洗入旋光 ——
     const pileEl = body.querySelector('.sts-hud-l .bt-pile');
     if (pileEl) {
-      if (drawn.size) { pileEl.classList.add('pile-pulse'); setTimeout(() => pileEl.classList.remove('pile-pulse'), 1600); }
+      if (drawn.size) { pileEl.classList.add('pile-pulse'); schedulePresentationMs(() => pileEl.classList.remove('pile-pulse'), 1600); }
       if (shuffles.length) {
         pileEl.classList.add('pile-shuffle');
-        setTimeout(() => pileEl.classList.remove('pile-shuffle'), 1600 + shuffles.length * 250);
+        schedulePresentationMs(() => pileEl.classList.remove('pile-shuffle'), 1600 + shuffles.length * 250);
         // 洗入牌动画：卡背从手牌区中央飞向牌库图标，旋入消失
         const pileR = uiRect(pileEl);
         shuffles.forEach((ev, i) => {
@@ -171,7 +172,7 @@ import { play as playUnitFrames } from './battle.frames.js';
             { transform: `translate(${dx}px,${dy}px) rotate(346deg) scale(0.35)`, opacity: 0.05 },
           ], { duration: 1200, delay: i * 250, easing: 'cubic-bezier(.3,.7,.4,1)', fill: 'forwards' });
           anim.onfinish = () => fly.remove();
-          setTimeout(() => fly.remove(), 1600 + i * 250);
+          schedulePresentationMs(() => fly.remove(), 1600 + i * 250);
           flightMs = Math.max(flightMs, 1200 + i * 250);
         });
       }
@@ -188,7 +189,7 @@ import { play as playUnitFrames } from './battle.frames.js';
         wave.innerHTML = `<b>${esc(ev.sourceName || '法力奔涌')} · 第 ${ev.i || 1}/${ev.n || surges.length} 发</b><span>【${esc(ev.name || '?')}】→ ${esc(ev.targetName || '')}</span>`;
         wave.style.animationDelay = `${delay}ms`;
         ov.appendChild(wave);
-        setTimeout(() => wave.remove(), delay + STEP + 200);
+        schedulePresentationMs(() => wave.remove(), delay + STEP + 200);
         const clone = document.createElement('div');
         clone.className = 'sts-cardfly surge-fly';
         const sx = ovR.width / 2 - 66, sy = ovR.height * 0.6;
@@ -206,7 +207,7 @@ import { play as playUnitFrames } from './battle.frames.js';
           { transform: `translate(${dx}px,${dy}px) scale(.32)`, opacity: 0 },
         ], { duration: FLY, delay, easing: 'cubic-bezier(.3,.7,.4,1)', fill: 'both' });
         anim.onfinish = () => clone.remove();
-        setTimeout(() => clone.remove(), delay + FLY + 300);
+        schedulePresentationMs(() => clone.remove(), delay + FLY + 300);
         flightMs = Math.max(flightMs, delay + FLY);
       });
     }
@@ -252,7 +253,7 @@ import { play as playUnitFrames } from './battle.frames.js';
           { transform: `translate(${qx + dx2}px,${qy + dy2}px) scale(${sink.scale})`, opacity: sink.fade },
         ], { duration: sink.dur, delay: t2, easing: 'cubic-bezier(.45,.05,.55,.95)', fill: 'forwards' });
         fly2.onfinish = () => clone.remove();
-        setTimeout(() => clone.remove(), t2 + sink.dur + 300);   // 兜底清理
+        schedulePresentationMs(() => clone.remove(), t2 + sink.dur + 300);   // 兜底清理
         flightMs = Math.max(flightMs, t2 + sink.dur);
         return;
       }
@@ -265,7 +266,7 @@ import { play as playUnitFrames } from './battle.frames.js';
         { transform: `translate(${dx}px,${dy}px) scale(${sink.scale})`, opacity: sink.fade },
       ], { duration: sink.dur, easing: 'cubic-bezier(.45,.05,.55,.95)', fill: 'forwards' });
       fly.onfinish = () => clone.remove();
-      setTimeout(() => clone.remove(), sink.dur + 300);   // 兜底清理
+      schedulePresentationMs(() => clone.remove(), sink.dur + 300);   // 兜底清理
       flightMs = Math.max(flightMs, sink.dur);
     });
     // 新牌飞入 / 幸存者归位已改在手牌常驻层的差分更新里做（updateHand）——

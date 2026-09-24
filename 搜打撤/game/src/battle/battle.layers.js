@@ -16,6 +16,7 @@ import { commands, getSnapshot, AFFIX_META, Combat, aegisBlocked, effCostOf, fin
   const cancelPendingTarget = commands.cancelPendingTarget;
   const HAND_PAGE_SIZE = 9;   // 2026-09-16 老板：每栏最多 9 张（原 battle.view 渲染段，随 updateHand 的 handIndex 落位迁入——批5）
 import { animateSafe } from './battle.anim.js';
+import { schedulePresentationMs } from './battle.clock.js';
 import { aim, clickSelectedUid, selectCardByClick, clickSelectedTarget, setTargetable, startAim, cancelAim, cancelClickSelection } from './battle.aim.js';
 import { showFoePreview, clearFoePreview } from './battle.hover.js';
 import { cardRuleHint } from './battle.preview.js';
@@ -335,7 +336,7 @@ import { cardRuleHint } from './battle.preview.js';
         { transform: 'translate(0px,0px)', opacity: 1 },
         { transform: 'translateY(46px)', opacity: 0 },
       ], { duration: 200, easing: 'ease-in', fill: 'forwards' });
-      setTimeout(() => rec.slot.remove(), 240);
+      schedulePresentationMs(() => rec.slot.remove(), 240);
     });
     // 手牌重建后立即补解码（img 是 lazy）：衍生牌等未走开局预热的卡面防首帧黑窗；
     // 已解码图 decode() 立即兑现，重复调用无副作用。

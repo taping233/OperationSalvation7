@@ -5,8 +5,9 @@ const UI = window.SDT.UI;
 import { rect as uiRect, scale as uiScale } from '../ui/ui-scale.js';
 import { Random } from '../core/random.js';
 import { demoMs, getPace } from './battle.pace.js';
+import { schedulePresentation, schedulePresentationMs, waitHitStop } from './battle.clock.js';
 import { FEEDBACK_DELTA_MS, enqueueFeedback, feedbackClass, feedbackDelay, feedbackShakeDuration, waitMs } from './battle.feedback.js';
-import { play as playUnitFrames, setPaused as setUnitFramesPaused } from './battle.frames.js';
+import { play as playUnitFrames } from './battle.frames.js';
 import { assetUrl } from '../core/asset-url.js';
 import { takeFloats } from './battle.core.js';
 const foeHurtTimers = new WeakMap();
@@ -52,7 +53,7 @@ const shakeAnimations = new WeakMap();
     const unit = figEl.closest('.sts-foe');
     const img = figEl.querySelector('img');
     if (!unit || !img) return;
-    clearTimeout(foeHurtTimers.get(unit));
+    foeHurtTimers.get(unit)?.();
     unit.classList.remove('fx-hit');
     void img.offsetWidth;
     unit.classList.add('fx-hit');
@@ -60,11 +61,11 @@ const shakeAnimations = new WeakMap();
       if (event && event.animationName !== 'btFoeHurt') return;
       unit.classList.remove('fx-hit');
       img.removeEventListener('animationend', finish);
-      clearTimeout(foeHurtTimers.get(unit));
+      foeHurtTimers.get(unit)?.();
       foeHurtTimers.delete(unit);
     };
     img.addEventListener('animationend', finish);
-    foeHurtTimers.set(unit, setTimeout(() => finish(), demoMs(900)));
+    foeHurtTimers.set(unit, schedulePresentation(() => finish(), 900));
   }
   // 敌方攻击前摇（P1）：立绘向玩家方向突进再回弹——敌人面向左，突进=负 X
   function foeLunge(figEl) {
@@ -112,6 +113,8 @@ const shakeAnimations = new WeakMap();
     freeze: { color: '#bfe8ff', count: 12, speed: 0.7 },
     thunder: { color: '#e8e0ff', count: 18, speed: 1.4 },
   };
+  const CUE_ATTACKER_ACTION = Object.freeze({ 'player-attack': 'atk', 'player-spell': 'cast' });
+  const CUE_HIT_SOUND = Object.freeze({ hit: 'hit', strike: 'strike' });
   // 轻量受击火花（P2 补回，替代已删除的 Pixi 粒子通道）：WAAPI 预采样抛散+重力+淡出，
   // 一次性元素即抛即毁、纯 transform/opacity 走合成器，不建常驻渲染管线
   function spawnSparks(ov, figEl, { color = '#ffb34d', count = 12, speed = 1 } = {}) {
@@ -128,10 +131,11 @@ const shakeAnimations = new WeakMap();
       const ang = Random.random('fx') * Math.PI * 2;
       const v = (70 + Random.random('fx') * 150) * speed;
       const vx = Math.cos(ang) * v, vy = Math.sin(ang) * v - 60;
-      const dur = 420 + Random.random('fx') * 260;
+      const baseDur = 420 + Random.random('fx') * 260;
+      const dur = demoMs(baseDur);
       const N = 10, kf = [];
       for (let k = 0; k <= N; k++) {
-        const u = k / N, t = (u * dur) / 1000;
+        const u = k / N, t = (u * baseDur) / 1000;
         kf.push({
           transform: `translate(${(vx * t).toFixed(1)}px,${(vy * t + 480 * t * t).toFixed(1)}px) scale(${(1 - u * 0.7).toFixed(2)})`,
           opacity: u < 0.55 ? 0.95 : Math.max(0, 0.95 * (1 - (u - 0.55) / 0.45)),
@@ -139,7 +143,7 @@ const shakeAnimations = new WeakMap();
         });
       }
       p.animate(kf, { duration: dur, easing: 'linear', fill: 'forwards' }).onfinish = () => p.remove();
-      setTimeout(() => p.remove(), dur + 150);   // 兜底清理
+      schedulePresentation(() => p.remove(), baseDur + 150);   // 兜底清理
     }
   }
   // 敌方攻击弹道（P2）：前摇同刻从敌人立绘到玩家立绘闪现一道上弓弧线+箭头，快速淡出
@@ -179,7 +183,7 @@ const shakeAnimations = new WeakMap();
     ctx.closePath(); ctx.fillStyle = '#ff6659'; ctx.fill();
     cv.animate([{ opacity: 1 }, { opacity: 0 }], { duration: demoMs(420), easing: 'ease-out', fill: 'forwards' })
       .onfinish = () => cv.remove();
-    setTimeout(() => cv.remove(), 580);   // 兜底清理
+    schedulePresentation(() => cv.remove(), 580);   // 兜底清理
   }
   // NDamageNumVfx：伤害数字抛体——随机初速上抛 + 重力下坠 + 后半程淡出（WAAPI 预采样）。
   // 随机全部走种子随机服务（random.test 禁 Math.random），'fx' 流不进对局存档口径
@@ -187,10 +191,11 @@ const shakeAnimations = new WeakMap();
     const vx = Random.random('fx') * 180 - 90;
     const vy = -(500 + Random.random('fx') * 160);
     const g = 960;
-    const dur = 1000 + Random.random('fx') * 180;
+    const baseDur = 1000 + Random.random('fx') * 180;
+    const dur = demoMs(baseDur);
     const N = 20, kf = [];
     for (let i = 0; i <= N; i++) {
-      const u = i / N, t = (u * dur) / 1000;
+      const u = i / N, t = (u * baseDur) / 1000;
       kf.push({
         transform: `translate(-50%,-50%) translate(${(vx * t).toFixed(1)}px,${(vy * t + 0.5 * g * t * t).toFixed(1)}px)`,
         opacity: u < 0.45 ? 1 : Math.max(0, 1 - (u - 0.45) / 0.55),
@@ -199,19 +204,9 @@ const shakeAnimations = new WeakMap();
     }
     span.animate(kf, { duration: dur, easing: 'linear', fill: 'forwards' });
   }
-  async function globalHitStop(ms) {
-    if (!(ms > 0) || SDT.Motion?.reduceMotion()) return;
-    const running = typeof document.getAnimations === 'function'
-      ? document.getAnimations().filter(animation => animation.playState === 'running') : [];
-    running.forEach(animation => { try { animation.pause(); } catch { /* 已结束的动画不参与顿帧 */ } });
-    setUnitFramesPaused(true);
-    try { await new Promise(resolve => setTimeout(resolve, demoMs(ms))); }
-    finally {
-      setUnitFramesPaused(false);
-      running.forEach(animation => {
-        if (animation.playState === 'paused') { try { animation.play(); } catch { /* 已移除节点上的动画无需恢复 */ } }
-      });
-    }
+  async function globalHitStop(ms, signal) {
+    if (!(ms > 0) || SDT.Motion?.reduceMotion() || signal?.aborted) return;
+    await waitHitStop(ms, signal);
   }
   function presentHitHealth(body, unit, hp, maxHp, instant = false) {
     if (unit == null || !(maxHp > 0) || !Number.isFinite(Number(hp))) return;
@@ -250,7 +245,7 @@ const shakeAnimations = new WeakMap();
         stagedHealth.add(String(f.unit));
         presentHitHealth(body, f.unit, f.hpBefore, f.maxHp, true);
       }
-      const fire = async () => {
+      const fire = async signal => {
       const isSelf = f.unit === 'self';
       const allyI = isSelf ? null : (/^ally:(\d+)$/.exec(String(f.unit)) || [])[1];   // 随从替伤：battle.core 推 'ally:N'
       const figEl = isSelf
@@ -263,7 +258,10 @@ const shakeAnimations = new WeakMap();
       if ((f.cls || '').includes('windupfx')) {
         if (!SDT.Motion?.reduceMotion()) {
           figEl.classList.add('bt-hit-anticipate');
-          setTimeout(() => figEl.classList.remove('bt-hit-anticipate'), demoMs(130));
+          schedulePresentation(() => figEl.classList.remove('bt-hit-anticipate'), 130);
+          const attackerAction = CUE_ATTACKER_ACTION[f.cue?.attacker];
+          // 首击动作已在卡牌起飞时播；仅后续分段补播，避免同一帧重启动作。
+          if (attackerAction && f.cue?.replayAttacker) playUnitFrames(attackerAction);
         }
         return;
       }
@@ -283,7 +281,11 @@ const shakeAnimations = new WeakMap();
       const heavy = damage && amt >= 10;   // 重击：≥10 点——更大命中贴图 + 更猛抖动 + 顿帧
       const finisher = damage && feedbackClass(f).includes('fx-finisher');
       const stopMs = (heavy || finisher) && !reduced ? 100 : 0;   // 全场顿帧一拍，2× 同步缩短
-      if (damage) SDT.Sound.sfx('hit', { rateScale: heavy ? 1.18 : amt >= 5 ? 1.08 : 0.96 });
+      const cue = f.cue;
+      const cueSound = CUE_HIT_SOUND[cue?.hitSound];
+      if (damage && cueSound) SDT.Sound.sfx(cueSound, cueSound === 'hit'
+        ? { rateScale: heavy ? 1.18 : amt >= 5 ? 1.08 : 0.96 } : undefined);
+      else if (damage) SDT.Sound.sfx('hit', { rateScale: heavy ? 1.18 : amt >= 5 ? 1.08 : 0.96 });
       if (f.shieldBreak) SDT.Sound.sfx('shieldBreak');
       // STS2 口径：hurt 骨骼/序列帧动画与抖动互斥——帧播上了就不抖；随从无帧集，不代播玩家动作。
       // 攻击动作（atk）改在卡牌起飞时播（见 animateBattleTransition），此处不再倒挂重播
@@ -314,12 +316,12 @@ const shakeAnimations = new WeakMap();
           bar.classList.remove('hp-dropping');
           void bar.offsetWidth;   // 强制 reflow，让连续掉血重播闪红
           bar.classList.add('hp-dropping');
-          setTimeout(() => bar.classList.remove('hp-dropping'), 300);
+          schedulePresentation(() => bar.classList.remove('hp-dropping'), 300);
         }
       }
       if (f.warm) {   // 治疗暖色滤镜（表情反馈·零美术）
         figEl.classList.add('fx-warm');
-        setTimeout(() => figEl.classList.remove('fx-warm'), 950);
+        schedulePresentationMs(() => figEl.classList.remove('fx-warm'), 950);
       }
       const r = uiRect(figEl);
       // 命中特效贴图：格挡/免伤=护盾碎裂，治疗不出，其余伤害=斩击（黑底图走 screen 混合）
@@ -337,11 +339,11 @@ const shakeAnimations = new WeakMap();
         // 自伤/我方受击转 180° 镜像方向。伤害类型染色（攻击=原生琥珀不染）
         const baseRot = (isSelf || allyI != null) ? 180 : 0;
         imp.style.setProperty('--imp-rot', Math.floor(baseRot + Random.random('fx') * 44 - 22) + 'deg');
-        const tint = IMPACT_TINT[f.tintKey || f.type];
+        const tint = cue?.hit === 'target-magic' ? IMPACT_TINT.spell : IMPACT_TINT[f.tintKey || f.type];
         if (tint) imp.style.filter = tint;
         ov.appendChild(imp);
         imp.addEventListener('animationend', () => imp.remove(), { once: true });
-        setTimeout(() => imp.remove(), 900);
+        schedulePresentationMs(() => imp.remove(), 900);
       }
       const span = document.createElement('span');
       span.className = 'sts-float ' + feedbackClass(f);
@@ -365,17 +367,17 @@ const shakeAnimations = new WeakMap();
       if (damage && !reduced && span.animate) {
         span.classList.add('phys');   // 抑制 CSS 上飘动画，走抛体
         physicsFloat(span);
-        setTimeout(() => span.remove(), 1400);
+        schedulePresentation(() => span.remove(), 1400);
       } else {
         span.addEventListener('animationend', () => span.remove(), { once: true });
-        setTimeout(() => span.remove(), 1400);   // 兜底：animationend 偶尔不触发时清掉不可见残骸
+        schedulePresentationMs(() => span.remove(), 1400);   // CSS 动画不按倍速缩短，兜底也保持原时长
       }
-      await globalHitStop(stopMs);
+      await globalHitStop(stopMs, signal);
       };
       const due = baseDelay + (f.delay || 0) + feedbackDelay(f.unit, perUnit, demoMs(FEEDBACK_DELTA_MS));   // 同单位多段按节拍错开
       const gap = Math.max(0, due - previousDue);
       previousDue = Math.max(previousDue, due);
-      enqueueFeedback(async () => {
+      enqueueFeedback(async signal => {
         const isSelf = f.unit === 'self';
         const allyI = isSelf ? null : (/^ally:(\d+)$/.exec(String(f.unit)) || [])[1];
         const fig = isSelf
@@ -386,10 +388,10 @@ const shakeAnimations = new WeakMap();
         const damage = !f.warm && !(f.cls || '').includes('stk') && !(f.cls || '').includes('block') && !(f.cls || '').includes('windupfx');
         if (fig && damage && !SDT.Motion?.reduceMotion()) {
           fig.classList.add('bt-hit-anticipate');
-          try { await waitMs(demoMs(85)); } finally { fig.classList.remove('bt-hit-anticipate'); }
+          try { await waitMs(demoMs(85), signal); } finally { fig.classList.remove('bt-hit-anticipate'); }
         }
         if (f.hpAfter != null) presentHitHealth(body, f.unit, f.hpAfter, f.maxHp);
-        await fire();
+        await fire(signal);
       }, gap);
     });
   }
@@ -400,7 +402,7 @@ const shakeAnimations = new WeakMap();
     div.className = 'sts-hurtflash';
     ov.appendChild(div);
     div.addEventListener('animationend', () => div.remove(), { once: true });
-    setTimeout(() => div.remove(), 1000);   // 兜底清理
+    schedulePresentationMs(() => div.remove(), 1000);   // CSS 动画保持原时长
   }
   // 全屏治疗绿闪（2026-09-13 老板：回复血量时闪绿光）——口径同 hurtFlash
   function healFlash(ov) {
@@ -409,7 +411,7 @@ const shakeAnimations = new WeakMap();
     div.className = 'sts-healflash';
     ov.appendChild(div);
     div.addEventListener('animationend', () => div.remove(), { once: true });
-    setTimeout(() => div.remove(), 1000);   // 兜底清理
+    schedulePresentationMs(() => div.remove(), 1000);   // CSS 动画保持原时长
   }
   // 轻微抖屏（2026-09-13 老板：自己攻击或造成伤害时）——战斗内容层小幅位移 240ms，抖动中不叠层
   function screenShake(body) {
@@ -417,7 +419,7 @@ const shakeAnimations = new WeakMap();
     body.classList.add('sts-screenshake');
     const clear = () => body.classList.remove('sts-screenshake');
     body.addEventListener('animationend', clear, { once: true });
-    setTimeout(clear, 400);   // 兜底：animationend 偶发不触发时也能复位
+    schedulePresentationMs(clear, 400);   // CSS 动画保持原时长
   }
 
 export { spawnFloats };

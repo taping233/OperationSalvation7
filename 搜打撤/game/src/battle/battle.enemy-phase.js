@@ -8,7 +8,7 @@ import * as Combat from './combat.js';
 import { waitForFeedback, waitMs } from './battle.feedback.js';
 import { demoMs } from './battle.pace.js';
 import { battleState, G, foes, mode, drawPile, hand, consumed, grave, energy, maxEnergy, turn, pdef, pstat, busy, infusing, discovering, handSelecting, choosing, interaction, noDrawNext, floats, cardAnims, playedMovesThisTurn, allies, extraTurn, timeRune, holyRune, fireballRuneOn, swiftRune, timeSpaceRune, timeSpaceUsed, set$noDrawNext, set$energy, set$extraTurn, set$battleState, set$interaction, set$turn, set$busy, set$timeSpaceUsed, set$playedMartialThisTurn, set$playedMovesThisTurn, set$pendingHint, set$lastPersistAt } from './battle.runtime.js';
-import { processDelayed, accrueGrowth, resolveCard, syncCurseCondEquips, applyKillRewards, unplayableReason, queueCardExecution, foeIdx, addPlayerCurse, playerTakeHit, frenzyCurse, elCurse, requestBattleRender, R, alive, intentFor, drawCards, resolveFoeDefeat, sweepDead, nestPhase, grantSha, findCard, effCostOf, finish } from './battle.engine.js';
+import { processDelayed, accrueGrowth, resolveCardWithFeedback, syncCurseCondEquips, applyKillRewards, unplayableReason, queueCardExecution, foeIdx, addPlayerCurse, playerTakeHit, frenzyCurse, elCurse, requestBattleRender, R, alive, intentFor, drawCards, resolveFoeDefeat, sweepDead, nestPhase, grantSha, findCard, effCostOf, finish } from './battle.engine.js';
 
   // 敌方步进演出节拍在 vitest 环境归零（比照 battle.engine.js 的 SURGE_WAVE_MS 先例）：
   // 回归测试的等待辅助用固定次数 setTimeout(0) tick 当预算，其真实间隔平台相关
@@ -32,22 +32,8 @@ import { processDelayed, accrueGrowth, resolveCard, syncCurseCondEquips, applyKi
     set$busy(true);
     // —— 额外回合（命运钟表 C7）：跳过敌方阶段，直接刷新为你的下一个回合 ——
     if (extraTurn) {
-      set$extraTurn(false);
-      set$turn(turn + 1);
-      foes.forEach(foe => { if (!foe.dead) foe.intent = intentFor(foe, turn); });
-      set$energy(maxEnergy);
-      if ((pstat.status.natureForm || 0) > 0) set$energy(energy + 1);
-      if ((pstat.status.swordForm || 0) > 0) {
-        if (mode === 'boss') { const got = drawCards(1); G.log(`[[icon:sword]] <b>剑仙形态</b>：额外抽了 ${got} 张牌`, 'ok'); }
-        else grantSha(1);
-      }
-      if (noDrawNext) { set$noDrawNext(false); G.log('[[icon:cross]] <b>下回合无法抽牌</b>生效：本回合开始不抽牌', 'warn'); }
-      else if (mode === 'boss') drawCards(R().battleTurnDraw);
-      processDelayed();
-      G.log(`[[icon:hourglass]] <b>额外回合</b>：敌人被钉在原地，你再次行动！（第 ${turn} 回合）`, 'ok');
-      set$battleState(transitionBattle(battleState, BATTLE_PHASES.PLAYER));
-      set$busy(false);
-      requestBattleRender();
+      const extraTurnToken = battleState.token;
+      void resolveExtraTurn(extraTurnToken).catch(error => recoverAutoPhaseError(error, extraTurnToken, BATTLE_PHASES.PLAYER));
       return;
     }
     if (swiftRune && hand.length) {
@@ -63,62 +49,121 @@ import { processDelayed, accrueGrowth, resolveCard, syncCurseCondEquips, applyKi
     set$battleState(transitionBattle(battleState, BATTLE_PHASES.ENEMY));
     set$interaction(null);
     set$pendingHint('');
+    const enemyToken = battleState.token;
+    const stillEnemyPhase = () => G?.battleActive && battleState.token === enemyToken && battleState.phase === BATTLE_PHASES.ENEMY;
+    void resolvePlayerEndTurn(enemyToken, stillEnemyPhase).catch(error => recoverAutoPhaseError(error, enemyToken, BATTLE_PHASES.ENEMY));
+  }
+
+  function recoverAutoPhaseError(error, token, phase) {
+    if (!G?.battleActive || battleState.token !== token || battleState.phase !== phase || phase === BATTLE_PHASES.VICTORY || phase === BATTLE_PHASES.DEFEAT) return;
+    console.error('Battle turn auto-effect sequence failed; restoring player phase.', error);
+    if (phase === BATTLE_PHASES.ENEMY) set$battleState(transitionBattle(battleState, BATTLE_PHASES.PLAYER));
+    set$busy(false);
+    requestBattleRender();
+  }
+
+  async function resolveExtraTurn(extraTurnToken) {
+    const stillPlayerPhase = () => G?.battleActive && battleState.token === extraTurnToken && battleState.phase === BATTLE_PHASES.PLAYER;
+    set$extraTurn(false);
+    set$turn(turn + 1);
+    foes.forEach(foe => { if (!foe.dead) foe.intent = intentFor(foe, turn); });
+    set$energy(maxEnergy);
+    if ((pstat.status.natureForm || 0) > 0) set$energy(energy + 1);
+    if ((pstat.status.swordForm || 0) > 0) {
+      if (mode === 'boss') { const got = drawCards(1); G.log(`[[icon:sword]] <b>剑仙形态</b>：额外抽了 ${got} 张牌`, 'ok'); }
+      else grantSha(1);
+    }
+    if (noDrawNext) { set$noDrawNext(false); G.log('[[icon:cross]] <b>下回合无法抽牌</b>生效：本回合开始不抽牌', 'warn'); }
+    else if (mode === 'boss') drawCards(R().battleTurnDraw);
+    try {
+      await processDelayed();
+    } catch (error) {
+      if (!stillPlayerPhase()) return;
+      throw error;
+    }
+    if (!stillPlayerPhase()) return;
+    if (G.hp <= 0) { finish(false); return; }
+    sweepDead();
+    if (!stillPlayerPhase()) return;
+    if (!alive().length) { finish(true); return; }
+    G.log(`[[icon:hourglass]] <b>额外回合</b>：敌人被钉在原地，你再次行动！（第 ${turn} 回合）`, 'ok');
+    set$battleState(transitionBattle(battleState, BATTLE_PHASES.PLAYER));
+    set$busy(false);
+    requestBattleRender();
+  }
+
+  async function awaitBattleFeedback(stillEnemyPhase) {
+    requestBattleRender();
+    await waitForFeedback();
+    return stillEnemyPhase();
+  }
+
+  async function resolvePlayerEndTurn(enemyToken, stillEnemyPhase) {
     // —— 玩家回合结束：中毒 / 灼烧结算 ——
     const pref = { hp: G.hp, defense: pdef, status: pstat.status };
     // 时光符文：回合结束效果触发 2 次（中毒/灼烧结算双倍）
     const tickPasses = timeRune ? 2 : 1;
-    let pr = null, br = null;
     for (let pass = 0; pass < tickPasses; pass++) {
       const p1 = Combat.tickPoison(pref);
-      if (p1) { pr = pr ? { dealt: pr.dealt + p1.dealt } : p1; }
+      if (p1?.dealt > 0) {
+        G.hp = Math.max(0, pref.hp);
+        floats.push({ unit: 'self', text: '-' + p1.dealt, cls: 'hurt' });
+        G.log(`[[icon:skull]] 中毒结算：你受到 <b>${p1.dealt}</b> 点固定伤害（${G.hp}/${G.maxHp}）`, 'warn');
+        if (!await awaitBattleFeedback(stillEnemyPhase)) return;
+      }
       const b1 = Combat.tickBurn(pref);
-      if (b1) { br = br ? { dealt: br.dealt + b1.dealt } : b1; }
-    }
-    G.hp = Math.max(0, pref.hp);
-    if (pr) {
-      floats.push({ unit: 'self', text: '-' + pr.dealt, cls: 'hurt' });
-      G.log(`[[icon:skull]] 中毒结算：你受到 <b>${pr.dealt}</b> 点固定伤害（${G.hp}/${G.maxHp}）`, 'warn');
-    }
-    if (br) {
-      floats.push({ unit: 'self', text: '-' + br.dealt, cls: 'hurt' });
-      G.log(`[[icon:fire]] 灼烧结算：你受到 <b>${br.dealt}</b> 点固定伤害（${G.hp}/${G.maxHp}）`, 'warn');
+      if (b1?.dealt > 0) {
+        G.hp = Math.max(0, pref.hp);
+        floats.push({ unit: 'self', text: '-' + b1.dealt, cls: 'hurt' });
+        G.log(`[[icon:fire]] 灼烧结算：你受到 <b>${b1.dealt}</b> 点固定伤害（${G.hp}/${G.maxHp}）`, 'warn');
+        if (!await awaitBattleFeedback(stillEnemyPhase)) return;
+      }
     }
     // 计时状态不在玩家阶段递减——共享回合钟统一在每回合结束（afterEnemies 末尾）递减
+    G.hp = Math.max(0, pref.hp);
     requestBattleRender();
     if (G.hp <= 0) { set$busy(false); finish(false); return; }
     // —— 随从自动攻击（Q4 老板定向：步兵等为你自动战斗；无攻血场面物件不参与）——
-    allies.filter(a => !a.dead && !a.statless).forEach(a => {
+    for (const a of allies.filter(a => !a.dead && !a.statless)) {
       const t = alive()[0];
-      if (!t) return;
+      if (!t) break;
       const r = Combat.dealDamage({ atk: a.atk, status: a.status }, t, 0, Combat.TYPES.ATTACK);
       if (r.dealt > 0) floats.push({ unit: foeIdx(t), text: '-' + r.dealt, cls: 'dmg' });
       G.log(`[[icon:swords]] <b>${esc(a.name)}</b> 自动攻击 ${esc(t.name)}：造成 <b>${r.dealt}</b> 点攻击伤害`, 'sys');
-    });
+      if (!await awaitBattleFeedback(stillEnemyPhase)) return;
+    }
+    if (!stillEnemyPhase()) return;
     sweepDead();
     if (!alive().length) { set$busy(false); finish(true); return; }
     // —— 敌人回合：逐个行动 ——
     const acting = alive();
-    const enemyToken = battleState.token;
-    const stillEnemyPhase = () => G?.battleActive && battleState.token === enemyToken && battleState.phase === BATTLE_PHASES.ENEMY;
     let i = 0;
+    const scheduleStep = delay => {
+      const next = () => {
+        if (!stillEnemyPhase()) return;
+        void step().catch(error => recoverAutoPhaseError(error, enemyToken, BATTLE_PHASES.ENEMY));
+      };
+      if (ENEMY_STEP_ZERO) { setTimeout(next, 0); return; }
+      void waitMs(delay).then(next).catch(error => recoverAutoPhaseError(error, enemyToken, BATTLE_PHASES.ENEMY));
+    };
     const step = async () => {
       if (!stillEnemyPhase()) return;
       if (G.hp <= 0) { set$busy(false); finish(false); return; }
-      if (i >= acting.length) { afterEnemies(); return; }
+      if (i >= acting.length) { await afterEnemies(enemyToken); return; }
       const foe = acting[i++];
-      if (foe.dead) { step(); return; }
+      if (foe.dead) return step();
       if (foe.stunned) {
         foe.stunned = false;
         G.log(`[[icon:crystal]] <b>${esc(foe.name)}</b> 蓄力完毕，下回合行动`, 'sys');
-        step(); return;
+        return step();
       }
       if (foe.evenAttack && turn % 2 === 1) {
         G.log(`[[icon:crystal]] <b>${esc(foe.name)}</b> 蓄力（偶数回合才会攻击）`, 'sys');
-        step(); return;
+        return step();
       }
       if (foe.noFirstAttack && turn === 1) {
         G.log(`[[icon:crystal]] <b>${esc(foe.name)}</b> 第一回合蓄力，不会攻击`, 'sys');
-        step(); return;
+        return step();
       }
       if (!Combat.canAct(foe)) {
         G.log(`[[icon:crystal]] <b>${esc(foe.name)}</b> 被冰冻，无法行动！`, 'sys');
@@ -200,12 +245,14 @@ import { processDelayed, accrueGrowth, resolveCard, syncCurseCondEquips, applyKi
       }
       requestBattleRender();
       if (G.hp <= 0) { set$busy(false); finish(false); return; }
-      setTimeout(step, ENEMY_STEP_ZERO ? 0 : demoMs(420));   // 敌方步进：2× 档经 demoMs 单一倍率缩放（battle.pace.js）；vitest 归零（见文件头 ENEMY_STEP_ZERO）
+      scheduleStep(ENEMY_STEP_ZERO ? 0 : demoMs(420));   // 敌方步进：2× 档经 demoMs 单一倍率缩放（battle.pace.js）；vitest 归零（见文件头 ENEMY_STEP_ZERO）
     };
-    setTimeout(step, ENEMY_STEP_ZERO ? 0 : demoMs(420));
+    scheduleStep(ENEMY_STEP_ZERO ? 0 : demoMs(420));
   }
 
-  function afterEnemies() {
+  async function afterEnemies(enemyToken = battleState.token) {
+    const stillEnemyPhase = () => G?.battleActive && battleState.token === enemyToken && battleState.phase === BATTLE_PHASES.ENEMY;
+    if (!stillEnemyPhase()) return;
     const aliveBeforeTick = alive().length;
     if (holyRune && turn <= 3) {
       const n = timeRune ? 8 : 4;   // 时光符文：回合结束效果触发 2 次
@@ -214,26 +261,26 @@ import { processDelayed, accrueGrowth, resolveCard, syncCurseCondEquips, applyKi
       G.log('[[icon:shield]] <b>圣洁符文</b>：回合结束获得 ' + n + ' 点护甲（' + pdef.armor + '）', 'sys');
     }
     // —— 敌人回合结束：中毒 / 灼烧结算 + 词缀 ——
-    foes.forEach(foe => {
-      if (foe.dead) return;
+    for (const foe of foes) {
+      if (foe.dead) continue;
       const tickPasses = timeRune ? 2 : 1;   // 时光符文：回合结束效果触发 2 次
-      let poisonDealt = 0, burnDealt = 0;
       for (let tp = 0; tp < tickPasses; tp++) {
         const er = Combat.tickPoison(foe);
-        if (er) poisonDealt += er.dealt;
+        if (er?.dealt > 0) {
+          floats.push({ unit: foes.indexOf(foe), text: '-' + er.dealt, cls: 'dmg', tintKey: 'poison' });
+          G.log(`[[icon:skull]] 中毒结算：<b>${esc(foe.name)}</b> 受到 <b>${er.dealt}</b> 点固定伤害（${Math.max(0, foe.hp)}/${foe.maxHp}）${timeRune ? '（时光×2）' : ''}`, 'sys');
+          if (!await awaitBattleFeedback(stillEnemyPhase)) return;
+        }
         const eb = Combat.tickBurn(foe);
-        if (eb) burnDealt += eb.dealt;
-      }
-      if (poisonDealt) {
-        floats.push({ unit: foes.indexOf(foe), text: '-' + poisonDealt, cls: 'dmg', tintKey: 'poison' });
-        G.log(`[[icon:skull]] 中毒结算：<b>${esc(foe.name)}</b> 受到 <b>${poisonDealt}</b> 点固定伤害（${Math.max(0, foe.hp)}/${foe.maxHp}）${timeRune ? '（时光×2）' : ''}`, 'sys');
-      }
-      if (burnDealt) {
-        floats.push({ unit: foes.indexOf(foe), text: '-' + burnDealt, cls: 'dmg', tintKey: 'burn' });
-        G.log(`[[icon:fire]] 灼烧结算：<b>${esc(foe.name)}</b> 受到 <b>${burnDealt}</b> 点固定伤害（${Math.max(0, foe.hp)}/${foe.maxHp}）`, 'sys');
+        if (eb?.dealt > 0) {
+          floats.push({ unit: foes.indexOf(foe), text: '-' + eb.dealt, cls: 'dmg', tintKey: 'burn' });
+          G.log(`[[icon:fire]] 灼烧结算：<b>${esc(foe.name)}</b> 受到 <b>${eb.dealt}</b> 点固定伤害（${Math.max(0, foe.hp)}/${foe.maxHp}）`, 'sys');
+          if (!await awaitBattleFeedback(stillEnemyPhase)) return;
+        }
       }
       if (resolveFoeDefeat(foe, '毒发倒地')) SDT.Sound.sfx('kill');
-    });
+    }
+    if (!stillEnemyPhase()) return;
     if (!alive().length) { set$busy(false); finish(true); return; }
     applyKillRewards(null, aliveBeforeTick - alive().length);   // 毒杀计入饮血剑击杀层数
     // 军威（肃清总督）：回合结束时攻击力 +2
@@ -316,11 +363,33 @@ import { processDelayed, accrueGrowth, resolveCard, syncCurseCondEquips, applyKi
           cardAnims.push({ kind: 'surge', i: 1, n: 1, sourceName: '火球符文', name: fb.name, target: foes.indexOf(target), targetName: target.name, card: { ...fb } });
           G.log(`[[icon:fire]] <b>火球符文</b>：随机释放【${esc(fb.name)}】→ <b>${esc(target.name)}</b>`, 'loot');
         }
-        resolveCard(fb, target, false, 0);
+        try {
+          await resolveCardWithFeedback(fb, target, false, 0, null);
+        } catch (error) {
+          if (!stillEnemyPhase()) return;
+          throw error;
+        }
+        if (!stillEnemyPhase()) return;
       }
+      if (!await awaitBattleFeedback(stillEnemyPhase)) return;
     }
+    if (!stillEnemyPhase()) return;
+    if (G.hp <= 0) { finish(false); return; }
+    sweepDead();
+    if (!stillEnemyPhase()) return;
+    if (!alive().length) { finish(true); return; }
     // —— 新回合开始：「回合开始时」延迟段结算 ——
-    processDelayed();
+    try {
+      await processDelayed();
+    } catch (error) {
+      if (!stillEnemyPhase()) return;
+      throw error;
+    }
+    if (!stillEnemyPhase()) return;
+    if (G.hp <= 0) { finish(false); return; }
+    sweepDead();
+    if (!stillEnemyPhase()) return;
+    if (!alive().length) { finish(true); return; }
     // —— 常规抽牌（「下回合无法抽牌」标记在本回合开始消耗掉） ——
     if (noDrawNext) {
       set$noDrawNext(false);
@@ -328,6 +397,7 @@ import { processDelayed, accrueGrowth, resolveCard, syncCurseCondEquips, applyKi
     } else if (mode === 'boss') {
       drawCards(R().battleTurnDraw);
     }
+    if (!stillEnemyPhase()) return;
     // 敌人回合结束必须转回玩家阶段：此前 phase 卡在 enemy，
     // 视图的 data-phase="enemy" 规则（手牌下沉/禁点）会吞掉之后每个玩家回合
     set$battleState(transitionBattle(battleState, BATTLE_PHASES.PLAYER));

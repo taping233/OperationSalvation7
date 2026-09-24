@@ -1,4 +1,5 @@
 // Card resolution is isolated behind explicit state reads and domain commands.
+import { attackCue } from './battle.attack-cues.js';
 function createBattleResolution(ports) {
   const { readState, getPlayerStatus, esc, log, heal, addFloat, addDelayed, takeDeckBottom, deckBottomCount,
     startSurge, getAllCards, isRandomObtainable, randomBattle, getDamageTypes, getDamageTypeMeta,
@@ -74,7 +75,8 @@ function createBattleResolution(ports) {
             ? getAliveFoes()
             : [preferred && !preferred.dead ? preferred : getAliveFoes()[0]].filter(Boolean);
           if (!windupTargets.length) break;
-          yield { kind: 'windup', targets: windupTargets };
+          const cue = attackCue(type);
+          yield { kind: 'windup', targets: windupTargets, ...(cue ? { cue } : {}) };
           const targets = operation.target === 'allEnemies'
             ? getAliveFoes()
             : [preferred && !preferred.dead ? preferred : getAliveFoes()[0]].filter(Boolean);
@@ -87,7 +89,7 @@ function createBattleResolution(ports) {
               hitThisSegment = true;
             }
           }
-          if (hitThisSegment) yield { kind: 'hit', segment: segment + 1 };
+          if (hitThisSegment) yield { kind: 'hit', segment: segment + 1, ...(cue ? { cue } : {}) };
           if (operation.target === 'chosenEnemy') preferred = targets[0];
           if (operation.retarget !== 'livingFoes' && operation.target === 'chosenEnemy' && preferred.dead) break;
         }
@@ -156,7 +158,8 @@ function createBattleResolution(ports) {
           ? getAliveFoes()
           : [target && !target.dead ? target : getAliveFoes()[0]].filter(Boolean);
         if (!windupTargets.length) break;
-        yield { kind: 'windup', targets: windupTargets };
+        const cue = attackCue(type);
+        yield { kind: 'windup', targets: windupTargets, ...(cue ? { cue } : {}) };
         const segmentTargets = isAOE(card)
           ? getAliveFoes()
           : [target && !target.dead ? target : getAliveFoes()[0]].filter(Boolean);
@@ -183,7 +186,7 @@ function createBattleResolution(ports) {
             hitThisSegment = true;
           }
         }
-        if (hitThisSegment) yield { kind: 'hit', segment: i + 1 };
+        if (hitThisSegment) yield { kind: 'hit', segment: i + 1, ...(cue ? { cue } : {}) };
       }
       // 吸血：回复等量生命（嗜血刃/噬血术/血蝠风暴）
       if (/回复等量生命/.test(desc) && dealtTotal > 0) {
@@ -204,11 +207,12 @@ function createBattleResolution(ports) {
           for (let k = 0; k < +sm[1]; k++) {
             let next = preferred && !preferred.dead ? preferred : getAliveFoes()[0];
             if (!next) break;
-            yield { kind: 'windup', targets: [next] };
+            const cue = attackCue(type);
+            yield { kind: 'windup', targets: [next], ...(cue ? { cue } : {}) };
             next = preferred && !preferred.dead ? preferred : getAliveFoes()[0];
             if (!next) break;
             hitFoe(next, card, dmgVal, type, `（额外施放第 ${k + 1} 次）`, k + 1);
-            yield { kind: 'hit', segment: k + 1 };
+            yield { kind: 'hit', segment: k + 1, ...(cue ? { cue } : {}) };
             preferred = next;
             cast++;
           }
@@ -221,12 +225,13 @@ function createBattleResolution(ports) {
         const rest = targets.filter(t => !t.dead);
         const recast = rest.length ? rest : getAliveFoes().slice(0, 1);
         log(`[[icon:sparkles]] <b>${esc(card.name)}</b>：击杀敌人，再施放一次`, 'sys');
-        if (recast.length) yield { kind: 'windup', targets: recast };
+        const cue = attackCue(type);
+        if (recast.length) yield { kind: 'windup', targets: recast, ...(cue ? { cue } : {}) };
         let recastHit = false;
         for (const foe of recast) {
           if (!foe.dead) { hitFoe(foe, card, dmgVal, type, '（再施放）'); recastHit = true; }
         }
-        if (recastHit) yield { kind: 'hit', segment: times + 1 };
+        if (recastHit) yield { kind: 'hit', segment: times + 1, ...(cue ? { cue } : {}) };
       }
       did = true;
     }

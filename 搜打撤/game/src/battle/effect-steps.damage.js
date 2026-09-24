@@ -1,6 +1,7 @@
 /* 由 effect-steps.js 拆出（2026-09-22 六文件重构批1）。原第 431-668 行，逐字搬迁。
  * 铁律：顺序即语义——本分节在壳 effect-steps.js 的 concat 顺序即旧 if 链物理顺序，勿重排。
- * 共享端口由壳经参数 s 注入（deps 展开 + esc/hitFoe + 模块级常量），本文件零 import。 */
+ * 共享端口由壳经参数 s 注入（deps 展开 + esc/hitFoe + 模块级常量）；攻击表现 cue 来自白名单模块。 */
+import { attackCue } from './battle.attack-cues.js';
 export function damageSteps(s) {
   const {combat, getAlive, log, addTempCard, allCards, random01, getPlayerCaster, damagePlayer, addPlayerMaxHp, dumpHand, esc, hitFoe, ARROW_TOKEN, num} = s;
   const drain = steps => {
@@ -20,7 +21,8 @@ export function damageSteps(s) {
         log(`[[icon:cross]] <b>${esc(ctx.card.name)}</b>：第 ${i + 1}/${count} 段未施放，场上已无可攻击的敌人`, 'dim');
         break;
       }
-      yield { kind: 'windup', targets: [target] };
+      const cue = attackCue(type);
+      yield { kind: 'windup', targets: [target], ...(cue ? { cue } : {}) };
       target = preferred && !preferred.dead ? preferred : getAlive().find(foe => foe && !foe.dead);
       if (!target) {
         log(`[[icon:cross]] <b>${esc(ctx.card.name)}</b>：第 ${i + 1}/${count} 段未施放，场上已无可攻击的敌人`, 'dim');
@@ -31,7 +33,7 @@ export function damageSteps(s) {
       hitTargets.push(target);
       log(`[[icon:play]] <b>${esc(ctx.card.name)}</b>：第 ${i + 1}/${count} 段${label || ''} → <b>${esc(target.name)}</b>（${dealt} 点）`, 'sys');
       preferred = target;
-      yield { kind: 'hit', segment: i + 1 };
+      yield { kind: 'hit', segment: i + 1, ...(cue ? { cue } : {}) };
     }
     return { total, hitTargets };
   }
@@ -52,12 +54,13 @@ export function damageSteps(s) {
             const pool = getAlive().filter(t => t && !t.dead);
             if (!pool.length) break;
             const t = pool[Math.floor(random01() * pool.length)];
-            yield { kind: 'windup', targets: [t] };
+            const cue = attackCue(type);
+            yield { kind: 'windup', targets: [t], ...(cue ? { cue } : {}) };
             const dealt = hitFoe(ctx, t, +m[1], type, caster, i + 1).dealt;
             total += dealt;
             log(`[[icon:play]] <b>${esc(ctx.card.name)}</b>：第 ${i + 1}/${times} 段 → <b>${esc(t.name)}</b>（${dealt} 点）`, 'sys');
             hits++;
-            yield { kind: 'hit', segment: i + 1 };
+            yield { kind: 'hit', segment: i + 1, ...(cue ? { cue } : {}) };
           }
           if (hits) {
             log(`[[icon:play]] <b>${esc(ctx.card.name)}</b> → 随机敌人 ×${hits}：造成 <b>${total}</b> 点${combat.TYPE_NAME[type]}`, 'sys');
@@ -90,11 +93,12 @@ export function damageSteps(s) {
           const targets = (aoe ? getAlive().slice() : (ctx.curseTarget ? [ctx.curseTarget] : [])).filter(t => t && !t.dead);
           const caster = getPlayerCaster ? getPlayerCaster() : {};
           let total = 0;
-          if (targets.length) yield { kind: 'windup', targets };
+          const cue = attackCue(type);
+          if (targets.length) yield { kind: 'windup', targets, ...(cue ? { cue } : {}) };
           for (const t of targets) {
             total += hitFoe(ctx, t, amount, type, caster).dealt;
           }
-          if (targets.length) yield { kind: 'hit' };
+          if (targets.length) yield { kind: 'hit', ...(cue ? { cue } : {}) };
           if (targets.length) {
             log(`[[icon:play]] <b>${esc(ctx.card.name)}</b> → ${targets.map(t => esc(t.name)).join('、')}：造成 <b>${total}</b> 点${combat.TYPE_NAME[type]}`, 'sys');
             ctx.did = true;
@@ -238,9 +242,10 @@ export function damageSteps(s) {
           if (t) {
             const keyMap = { '冰冻': 'freeze', '流血': 'bleed', '中毒': 'poison', '沉默': 'silence', '破甲': 'abreak', '禁疗': 'healban', '灼烧': 'burn' };
             if (m[1]) {
-              yield { kind: 'windup', targets: [t] };
+              const cue = attackCue(combat.TYPES.SPELL);
+              yield { kind: 'windup', targets: [t], ...(cue ? { cue } : {}) };
               hitFoe(ctx, t, +m[1], combat.TYPES.SPELL, getPlayerCaster ? getPlayerCaster() : {});
-              yield { kind: 'hit' };
+              yield { kind: 'hit', ...(cue ? { cue } : {}) };
             }
             m[2].split(/[、，]\s*/).forEach(w => combat.addCurse(t, keyMap[w], 1));
             log(`[[icon:skull]] <b>${esc(t.name)}</b> 附加：${esc(m[2])}${m[1] ? `（并受到 ${m[1]} 点法术伤害）` : ''}`, 'sys');
@@ -273,7 +278,8 @@ export function damageSteps(s) {
             for (let k = 0; k < per; k++) {
               let target = preferred && !preferred.dead ? preferred : getAlive().find(foe => foe && !foe.dead);
               if (!target) break;
-              yield { kind: 'windup', targets: [target] };
+              const cue = attackCue(combat.TYPES.SPELL);
+              yield { kind: 'windup', targets: [target], ...(cue ? { cue } : {}) };
               target = preferred && !preferred.dead ? preferred : getAlive().find(foe => foe && !foe.dead);
               if (!target) break;
               sequence++;
@@ -282,7 +288,7 @@ export function damageSteps(s) {
               hitTargets.push(target);
               log(`[[icon:fire]] 火球风暴：第 ${sequence}/${planned} 发 → <b>${esc(target.name)}</b>（${dealt} 点）`, 'sys');
               preferred = target;
-              yield { kind: 'hit', segment: sequence };
+              yield { kind: 'hit', segment: sequence, ...(cue ? { cue } : {}) };
             }
             if (sequence >= planned) break;
           }

@@ -698,7 +698,7 @@ function beginCardTargeting(uid, card, targetIds, hint, fuelUids = []) {
     requestBattleRender();
   }
 
-export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, intentFor, drawCards, resolveFoeDefeat, sweepDead, nestPhase, grantSha, findCard, infuseOf, effCostOf, swapCardCosts, restore, finish, cancelInteraction, flee, handCurseSpecs, getSnapshot, snapshotSignature, processDelayed, accrueGrowth, resolveCard, syncCurseCondEquips, useEquipSkill, applyKillRewards, start, toggleDeckCard, cancelDeckSelection, beginBoss, targetSide, unplayableReason, play, toggleInfusePick, cancelInfuse, beginInfuse, confirmInfuse, queueCardExecution, aegisBlocked, foeIdx, hitFoe, matchHandSelectKey, skipHandSelect, pickHandSelect, useItem, bagSlam, resolveDart, resolveSlam, addPlayerCurse, usePotion, openBag, closeBag, pickChoice, pickDiscover, playerTakeHit, frenzyCurse, elCurse };
+export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, intentFor, drawCards, resolveFoeDefeat, sweepDead, nestPhase, grantSha, findCard, infuseOf, effCostOf, swapCardCosts, restore, finish, cancelInteraction, flee, handCurseSpecs, getSnapshot, snapshotSignature, processDelayed, accrueGrowth, resolveCard, resolveCardWithFeedback, syncCurseCondEquips, useEquipSkill, applyKillRewards, start, toggleDeckCard, cancelDeckSelection, beginBoss, targetSide, unplayableReason, play, toggleInfusePick, cancelInfuse, beginInfuse, confirmInfuse, queueCardExecution, aegisBlocked, foeIdx, hitFoe, matchHandSelectKey, skipHandSelect, pickHandSelect, useItem, bagSlam, resolveDart, resolveSlam, addPlayerCurse, usePotion, openBag, closeBag, pickChoice, pickDiscover, playerTakeHit, frenzyCurse, elCurse };
 
 /* —— 六段正文（原行 606-2479，逐字）—— */
   // ---------- 生效时刻 / 持续时间 / 生效条件（设计者 2026-09-02 定版） ----------
@@ -729,20 +729,20 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
 
   // 回合开始：结算延迟段（沉默中技能无效——一次性段被吞掉，重复段保留到下回合；
   // notBeforeTurn = 花开两面未选之门「两回合后」的定时刻；special = 江湖救急临时卡消耗）
-  function processDelayed() {
+  async function processDelayed(signal = activeActionSignal) {
     if (!delayed.length) return;
     const silenced = (pstat.status.silence || 0) > 0;
     const keep = [];
-    delayed.forEach(q => {
-      if (q.notBeforeTurn && turn < q.notBeforeTurn) { keep.push(q); return; }
+    for (const q of delayed) {
+      if (q.notBeforeTurn && turn < q.notBeforeTurn) { keep.push(q); continue; }
       if (q.special === 'consumeTemps') {
-        consumeHandUids(q.uids || [], q.cardName);
-        return;   // 一次性，不保留
+        await consumeHandUids(q.uids || [], q.cardName, signal);
+        continue;   // 一次性，不保留
       }
       // 第十二批（2026-09-23）两个一次性 special：均不走沉默门（状态还原/费用记账非技能句）
       if (q.special === 'curseImmuneOff') {
         set$playerCurseImmune(!!q.restore);
-        return;   // 一次性，不保留
+        continue;   // 一次性，不保留
       }
       if (q.special === 'costDecay' || q.special === 'ruleCostDecay') {
         // Legacy text jobs and structured rule jobs both bind decay to the discovered card uid.
@@ -757,19 +757,23 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
           }
           if (nc > 0) keep.push(q);
         }
-        return;   // 保留与否自行管理
+        continue;   // 保留与否自行管理
       }
       if (silenced) {
         G.log(`[[icon:cross]] 沉默中：【${esc(q.cardName)}】的回合开始效果无法生效`, 'warn');
       } else {
         G.log(`[[icon:hourglass]] <b>回合开始时</b>：【${esc(q.cardName)}】${esc(q.text)}`, 'sys');
-        applyTextEffects({ name: q.cardName }, q.text, alive()[0] || null);
+        if (applyTextEffects.steps) {
+          await runStagedSteps(applyTextEffects.steps({ name: q.cardName }, q.text, alive()[0] || null, {}), signal);
+        } else {
+          applyTextEffects({ name: q.cardName }, q.text, alive()[0] || null);
+        }
       }
       if (q.repeat) {
         if (typeof q.left === 'number') { q.left -= 1; if (q.left > 0) keep.push(q); }
         else keep.push(q);
       }
-    });
+    }
     set$delayed(keep);
   }
 
@@ -866,21 +870,40 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     };
     stagedResolutionDepth++;
     let result;
+    let pendingCue;
+    let cueWindups = 0;
     try {
       while (true) {
         ensureCurrentBattle();
+        const floatStart = floats.length;
         const next = steps.next();
         if (next.done) { result = next.value; break; }
         const step = next.value;
         if (step.kind === 'windup') {
-          for (const foe of step.targets) {
+          const windupCue = step.cue ? { ...step.cue, replayAttacker: cueWindups++ > 0 } : null;
+          pendingCue = windupCue;
+          for (let i = 0; i < step.targets.length; i++) {
+            const foe = step.targets[i];
             const unit = foeIdx(foe);
-            if (unit >= 0 && !foe.dead) floats.push({ unit, text: '', cls: 'windupfx' });
+            if (unit >= 0 && !foe.dead) floats.push({ unit, text: '', cls: 'windupfx', ...(i === 0 && windupCue ? { cue: windupCue } : {}) });
           }
           requestBattleRender();
           await waitForFeedback(signal);
-          await waitMs(demoMs(130), signal);
+          await waitMs(demoMs(step.cue?.windupMs ?? 130), signal);
           continue;
+        }
+        if (step.kind === 'hit') {
+          const cue = step.cue || pendingCue;
+          if (cue) {
+            let firstDamageCue = true;
+            for (let i = floatStart; i < floats.length; i++) {
+              const feedback = floats[i];
+              if (feedback.hpBefore == null || feedback.unit === 'self') continue;
+              feedback.cue = firstDamageCue ? cue : { ...cue, attacker: null };
+              firstDamageCue = false;
+            }
+          }
+          pendingCue = null;
         }
         requestBattleRender();
         await waitForFeedback(signal);
@@ -937,7 +960,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
       });
     }
   }
-  function resolveCardWithFeedback(card, target, infused, fuelCost, uid, signal) {
+  function resolveCardWithFeedback(card, target, infused, fuelCost, uid, signal = activeActionSignal) {
     return runStagedSteps(resolveCard.steps(card, target, infused, fuelCost, uid), signal);
   }
 
@@ -1224,33 +1247,20 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     }
   }
   // 江湖救急：回合开始将其置入的临时卡消耗（会正确触发「每消耗 1 张」联动）
-  function consumeHandUids(uids, cardName) {
+  async function consumeHandUids(uids, cardName, signal = activeActionSignal) {
     let n = 0;
-    (uids || []).forEach(u => {
+    for (const u of (uids || [])) {
       const idx = hand.indexOf(u);
-      if (idx < 0) return;
+      if (idx < 0) continue;
       hand.splice(idx, 1);
       consumed.push(u);
       if (mode === 'boss') grave.push(u);
       const o = findCard(u);
       cardAnims.push({ kind: 'burn', uid: u, name: o ? o.card.name : '' });
       if (o) resolveInfusedFuel(o.card, alive()[0] || null);
-      if (consumeFireballN > 0) {
-        for (let k = 0; k < consumeFireballN; k++) {
-          const t = alive()[0];
-          if (!t) break;
-          const r = Combat.dealDamage({
-            atk: G.atk,
-            spellPower: G.spellPower || 0,   // spellUp 由 status 传入只算一次（2026-09-09 修复双重计数）
-            status: pstat.status,
-          }, t, 4, Combat.TYPES.SPELL);
-          if (r.dealt > 0) floats.push({ unit: foeIdx(t), text: '-' + r.dealt, cls: 'dmg' });
-          G.log(`[[icon:fire]] 深渊降焰：施放 1 次火球 → ${esc(t.name)}：造成 <b>${r.dealt}</b> 点法术伤害`, 'sys');
-          sweepDead();
-        }
-      }
+      if (consumeFireballN > 0) await runStagedSteps(consumeFireballSteps(consumeFireballN), signal);
       n++;
-    });
+    }
     if (n) G.log(`[[icon:flask]] <b>${esc(cardName || '临时卡')}</b>：回合开始，消耗了 ${n} 张临时卡`, 'sys');
     return n;
   }

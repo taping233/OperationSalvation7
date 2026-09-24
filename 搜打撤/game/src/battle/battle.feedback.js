@@ -1,35 +1,31 @@
 /* 战斗反馈节奏：纯函数，不操作 DOM，便于逻辑测试和后续替换为 VFX。 */
 
 import { demoMs } from './battle.pace.js';
+import { waitPresentationMs } from './battle.clock.js';
 
 const FEEDBACK_DELTA_MS = 320;
 
 let feedbackTail = Promise.resolve();
 let feedbackGeneration = 0;
+let feedbackController = new AbortController();
 
 function isTestRuntime() {
   return typeof process !== 'undefined' && process.env && process.env.VITEST === 'true';
 }
 
 function waitMs(ms, signal) {
-  if (isTestRuntime() || !(ms > 0)) return Promise.resolve();
-  return new Promise((resolve, reject) => {
-    if (signal?.aborted) { reject(signal.reason || new Error('Battle feedback cancelled')); return; }
-    const timer = setTimeout(done, ms);
-    function cleanup() { signal?.removeEventListener('abort', cancel); }
-    function done() { cleanup(); resolve(); }
-    function cancel() { clearTimeout(timer); cleanup(); reject(signal.reason || new Error('Battle feedback cancelled')); }
-    signal?.addEventListener('abort', cancel, { once: true });
-  });
+  if (isTestRuntime()) return Promise.resolve();
+  return waitPresentationMs(ms, signal);
 }
 
 function enqueueFeedback(run, delayMs = 0) {
   const generation = feedbackGeneration;
+  const signal = feedbackController.signal;
   const task = feedbackTail.then(async () => {
-    if (generation !== feedbackGeneration) return;
-    await waitMs(delayMs);
-    if (generation !== feedbackGeneration) return;
-    await run();
+    if (generation !== feedbackGeneration || signal.aborted) return;
+    await waitMs(delayMs, signal);
+    if (generation !== feedbackGeneration || signal.aborted) return;
+    await run(signal);
   });
   feedbackTail = task.catch(() => {});
   return feedbackTail;
@@ -50,6 +46,8 @@ function waitForFeedback(signal) {
 
 function clearFeedback() {
   feedbackGeneration++;
+  feedbackController.abort(new Error('Battle feedback cleared'));
+  feedbackController = new AbortController();
   feedbackTail = Promise.resolve();
 }
 

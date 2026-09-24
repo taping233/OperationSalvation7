@@ -31,6 +31,9 @@ import { commands, getSnapshot, effCostOf, findCard, infuseOf, targetSide, unpla
     return !!reason;
   }
 import { showFoePreview, clearFoePreview, showThoughtBubble, clearThoughtBubble } from './battle.hover.js';
+import { createTargetSession } from './battle.target-session.js';
+import { battleState, foes } from './battle.runtime.js';
+import { BATTLE_PHASES } from './battle.state.js';
   // ---------- 指向施法（STS2 NMouseCardPlay 状态机同款） ----------
   // 拖拽=卡跟手；上拖过「出牌线」（视口75%，按抓取点校正）后：
   //   指向卡 → CenterCard 停靠视口底部中央缩 0.75，箭头自卡指向指针（松手有目标=打出，
@@ -47,6 +50,10 @@ import { showFoePreview, clearFoePreview, showThoughtBubble, clearThoughtBubble 
   let aim = null;            // {uid, card, side, el, ax, ay, sx, sy, moved, hover}
   let aimPlayedAt = 0;       // 指向松手刚打出成功的时间戳（抑制随后误触发的 click 锁定）
   let clickSelectedUid = null; // 点击选中的指向卡；拖拽路径仍由 aim 独立处理
+  let clickTargetSession = null;
+  function targetSessionBattleCurrent(token) {
+    return battleState.token === token && (battleState.phase === BATTLE_PHASES.PLAYER || battleState.phase === BATTLE_PHASES.TARGETING);
+  }
 
   function aimCanvasEnsure() {
     let canvas = document.getElementById('aimArrow');
@@ -112,33 +119,29 @@ import { showFoePreview, clearFoePreview, showThoughtBubble, clearThoughtBubble 
   // side 显式传入：endAim 时全局 aim 已清空，不能再依赖它
   // snap 可传入指向开始时缓存的快照（见 startAim）——拖拽 pointermove 高频路径
   // 每次都重建整棵冻结快照是纯浪费；指向期间战斗状态不会变（重渲染会 cancelAim）
-  function aimHoverAt(x, y, side, snap) {
-    const elAt = document.elementFromPoint(x, y);
-    if (!elAt || !side) return null;
-    if (side === 'any') {
-      // 无对敌效果的招式（2026-09-09 老板 #7）：敌我中间的空地即可落牌——
-      // 落在战场内、且不在手牌区/顶部按钮/药水栏上就算有效
-      if (!elAt.closest('.battle-stage')) return null;
-      if (elAt.closest('.sts-hud') || elAt.closest('.sts-topbar') || elAt.closest('.bt-potions')) return null;
-      return { kind: 'any', el: elAt.closest('.battle-stage') };
-    }
-    if (side === 'enemy') {
-      const foeEl = elAt.closest('.bt-foe[data-eidx]');
-      if (foeEl) {
-        const idx = +foeEl.dataset.eidx;
-        const foe = (snap || getSnapshot()).foes[idx];
-        if (foe && !foe.dead) return { kind: 'enemy', idx, el: foeEl };
-      }
-      return null;
-    }
-    const selfEl = elAt.closest('#btSelf');
-    return selfEl ? { kind: 'self', el: selfEl } : null;
+  function aimHoverAt(x, y, session) { return session?.hitAt(x, y) || null; }
+  function makeAimTargetSession(a) {
+    return createTargetSession({
+      side: a.side, snapshot: a.snap,
+      isBattleCurrent: () => targetSessionBattleCurrent(a.snap.battleToken),
+      getTargets: () => foes,
+      onHover(next, previous) {
+        if (previous) {
+          previous.el.classList.remove('drag-over', 'drop-here', 'drop-any');
+          if (previous.kind === 'enemy') clearFoePreview(previous.el);
+        }
+        a.hover = next;
+        if (!next) return;
+        if (next.kind === 'enemy') {
+          next.el.classList.add('drag-over');
+          showFoePreview(next.el, next.idx, a.uid, a.card, a.mode === 'clickTarget' ? 'click' : 'drag');
+        } else next.el.classList.add('drop-here');
+      },
+    });
   }
   function aimClearHover() {
-    if (!aim || !aim.hover) return;
-    aim.hover.el.classList.remove('drag-over', 'drop-here', 'drop-any');
-    if (aim.hover.kind === 'enemy') clearFoePreview(aim.hover.el);
-    aim.hover = null;
+    if (!aim) return;
+    aim.targetSession?.setHover(null);
   }
   function aimCleanup(a) {
     if (a) {
@@ -147,10 +150,13 @@ import { showFoePreview, clearFoePreview, showThoughtBubble, clearThoughtBubble 
         a.hover.el.classList.remove('drag-over', 'drop-here', 'drop-any');
         if (a.hover.kind === 'enemy') clearFoePreview(a.hover.el);
       }
+      a.targetSession?.cancel();
     }
     aimArrowRemove();
   }
   function cancelClickSelection() {
+    clickTargetSession?.cancel();
+    clickTargetSession = null;
     if (clickSelectedUid == null) return false;
     clickSelectedUid = null;
     document.querySelectorAll('.sts-hand .bt-card.click-selected').forEach(el => {
@@ -176,6 +182,16 @@ import { showFoePreview, clearFoePreview, showThoughtBubble, clearThoughtBubble 
   }
   function syncClickTargetPreviews() {
     const snapshot = getSnapshot();
+    if (clickSelectedUid != null && !clickTargetSession?.isCurrent()) {
+      clickTargetSession?.cancel();
+      clickTargetSession = null;
+      clickSelectedUid = null;
+      document.querySelectorAll('.sts-hand .bt-card.click-selected').forEach(el => {
+        el.classList.remove('click-selected');
+        el.setAttribute('aria-pressed', 'false');
+      });
+      updateClickSelectionUI();
+    }
     const entry = clickSelectedUid == null ? null : findCard(clickSelectedUid);
     const selectedSide = entry && targetSide(entry.card);
     const pendingEntry = snapshot.pendingTarget && findCard(snapshot.pendingTarget.uid);
@@ -203,6 +219,7 @@ import { showFoePreview, clearFoePreview, showThoughtBubble, clearThoughtBubble 
   }
   function selectCardByClick(uid, focusTarget = false) {
     const snap = getSnapshot();
+    if (clickSelectedUid != null && !clickTargetSession?.isCurrent()) cancelClickSelection();
     if (!snap || snap.busy || snap.infusing || snap.discovering || snap.choosing) return;
     const entry = findCard(uid);
     if (!entry) return;
@@ -223,10 +240,16 @@ import { showFoePreview, clearFoePreview, showThoughtBubble, clearThoughtBubble 
       if (snap.pendingTarget?.uid === uid) cancelPendingTarget();
       return;
     }
+    clickTargetSession?.cancel();
     if ((snap.pendingTarget && snap.pendingTarget.uid !== uid) || snap.pendingItem || snap.slamPending || snap.dartPending) {
       cancelPendingTarget();
     }
     clickSelectedUid = uid;
+    clickTargetSession = createTargetSession({
+      side, snapshot: snap,
+      isBattleCurrent: () => targetSessionBattleCurrent(snap.battleToken),
+      getTargets: () => foes,
+    });
     document.querySelectorAll('.sts-hand .bt-card.click-selected').forEach(el => {
       el.classList.remove('click-selected');
       el.setAttribute('aria-pressed', 'false');
@@ -244,7 +267,8 @@ import { showFoePreview, clearFoePreview, showThoughtBubble, clearThoughtBubble 
     if (focusTarget) document.querySelector(side === 'self' ? '#btSelf.can-target' : '.bt-foe.can-target')?.focus();
   }
   function clickSelectedTarget(side, idx) {
-    const pending = getSnapshot().pendingTarget;
+    const snapshot = getSnapshot();
+    const pending = snapshot.pendingTarget;
     if (clickSelectedUid == null && !pending) return false;
     const uid = pending?.uid ?? clickSelectedUid;
     const entry = findCard(uid);
@@ -255,6 +279,18 @@ import { showFoePreview, clearFoePreview, showThoughtBubble, clearThoughtBubble 
       showThoughtBubble(`【${entry.card.name}】不能对这个目标使用`);
       return true;
     }
+    if (!clickTargetSession && pending) {
+      clickTargetSession = createTargetSession({
+        side: need || side, snapshot,
+        isBattleCurrent: () => targetSessionBattleCurrent(snapshot.battleToken),
+        getTargets: () => foes,
+      });
+    }
+    if (!clickTargetSession?.isCurrent() || !clickTargetSession.selectDirect(side, idx)) {
+      cancelClickSelection();
+      return false;
+    }
+    clickTargetSession = null;
     clickSelectedUid = null;
     play(uid, side === 'enemy' ? idx : side === 'self' ? 'self' : undefined);
     return true;
@@ -292,6 +328,7 @@ import { showFoePreview, clearFoePreview, showThoughtBubble, clearThoughtBubble 
       dock: null, dockAnchor: null,
       cur: { x: 0, y: 0 }, tgt: { x: 0, y: 0 }, lastT: 0, raf: 0,
     };
+    aim.targetSession = makeAimTargetSession(aim);
     el.classList.add('aim-lift');
     if (isCard) {
       flashCardPickup(el);
@@ -376,20 +413,12 @@ import { showFoePreview, clearFoePreview, showThoughtBubble, clearThoughtBubble 
 
     // 悬停检测：瞄准态（含药水全程）高亮目标；drag 态 STS2 无悬停反馈
     const targeting = !aim.follow || aim.mode === 'target' || aim.mode === 'clickTarget';
-    const hit = targeting ? aimHoverAt(e.clientX, e.clientY, aim.side, aim.snap) : null;
+    const hit = targeting ? aimHoverAt(e.clientX, e.clientY, aim.targetSession) : null;
     if (aim.playBlockedReason && aim.mode !== 'drag' && !aim.reasonShown) {
       showThoughtBubble(aim.playBlockedReason, true);
       aim.reasonShown = true;
     }
-    if (aim.hover && (!hit || hit.el !== aim.hover.el)) aimClearHover();
-    if (hit && !aim.hover) {
-      if (hit.kind === 'enemy') {
-        hit.el.classList.add('drag-over');
-        showFoePreview(hit.el, hit.idx, aim.uid, aim.card, aim.mode === 'clickTarget' ? 'click' : 'drag');
-      }
-      else hit.el.classList.add('drop-here');
-      aim.hover = hit;
-    }
+    aim.targetSession.setHover(hit);
 
     // 箭头：药水自拎起位画向指针；指向卡瞄准态自停靠位画向指针（STS2 NTargetingArrow）
     if (!aim.follow || aim.mode === 'target' || aim.mode === 'clickTarget') {
@@ -425,9 +454,10 @@ import { showFoePreview, clearFoePreview, showThoughtBubble, clearThoughtBubble 
 
     // —— 药水 / 砸击（非跟手，原口径）：松手有敌=使用，否则取消 ——
     if (!a.follow) {
-      const hit = wasMoved ? aimHoverAt(e.clientX, e.clientY, a.side, a.snap) : null;
+      const hit = wasMoved ? aimHoverAt(e.clientX, e.clientY, a.targetSession) : null;
+      const selected = hit?.kind === 'enemy' && a.targetSession.select(hit);
       finishAim(a);
-      if (wasMoved && hit && hit.kind === 'enemy') {
+      if (wasMoved && selected) {
         aimPlayedAt = Date.now();
         if (a.kind === 'slam') { if (!a.snap.slamPending) bagSlam(); resolveSlam(hit.idx); return; }   // 09-20 老板：砸击拖到敌人身上松手=释放（先点选过的不再反转为取消）
         useItemCmd(a.uid, hit.idx);
@@ -439,23 +469,27 @@ import { showFoePreview, clearFoePreview, showThoughtBubble, clearThoughtBubble 
 
     // —— STS2 状态机松手语义 ——
     if (a.mode === 'target') {
-      const hit = wasMoved ? aimHoverAt(e.clientX, e.clientY, a.side, a.snap) : null;
-      if (hit) {   // 松手在目标上=打出
+      const hit = wasMoved ? aimHoverAt(e.clientX, e.clientY, a.targetSession) : null;
+      if (hit && a.targetSession.select(hit)) {   // 松手在目标上=打出
         finishAim(a);
         aimPlayedAt = Date.now();
         play(a.uid, hit.kind === 'enemy' ? hit.idx : 'self');
         return;
       }
+      if (hit) { finishAim(a); cancelPendingTarget(); return; }
       if (inCancel) { finishAim(a); cancelPendingTarget(); return; }
       // 2026-09-15 老板定向：无歧义目标（self 卡 / 唯一活敌）拖到空白处松手=直接打出；
       // 多活敌仍转「点击确认」（STS2 ReleaseMouseToTarget→ClickMouseToTarget），避免打错目标
       if (a.side === 'self') {
+        if (!a.targetSession.selectDirect('self')) { finishAim(a); cancelPendingTarget(); return; }
         finishAim(a);
         aimPlayedAt = Date.now();
         play(a.uid, 'self');
         return;
       }
       if (a.side === 'enemy' && a.snap.foes.filter(f => !f.dead).length === 1) {
+        const idx = a.snap.foes.findIndex(f => !f.dead);
+        if (!a.targetSession.selectDirect('enemy', idx)) { finishAim(a); cancelPendingTarget(); return; }
         finishAim(a);
         aimPlayedAt = Date.now();
         play(a.uid, a.snap.foes.findIndex(f => !f.dead));
@@ -463,14 +497,17 @@ import { showFoePreview, clearFoePreview, showThoughtBubble, clearThoughtBubble 
       }
       // 多活敌：松手无目标=箭头保持，转「点击确认」
       a.mode = 'clickTarget';
+      a.targetSession.setHover(null);
       aim = a;
       return;
     }
     if (a.mode === 'clickTarget') {
       // 确认点击：点到目标=打出，点空=取消回手（STS2 FinishTargeting(null)→TryPlayCard(null)）
-      const hit = aimHoverAt(e.clientX, e.clientY, a.side, a.snap);
+      const hit = aimHoverAt(e.clientX, e.clientY, a.targetSession);
+      const selected = hit && a.targetSession.select(hit);
+      if (!selected) a.targetSession.cancel();
       finishAim(a);
-      if (hit) { aimPlayedAt = Date.now(); play(a.uid, hit.kind === 'enemy' ? hit.idx : 'self'); return; }
+      if (selected) { aimPlayedAt = Date.now(); play(a.uid, hit.kind === 'enemy' ? hit.idx : 'self'); return; }
       cancelPendingTarget();
       return;
     }
@@ -494,5 +531,8 @@ import { showFoePreview, clearFoePreview, showThoughtBubble, clearThoughtBubble 
     clearThoughtBubble();
   }
 
-function setClickSelectedUid(v) { clickSelectedUid = v; }   // 壳 render 分派改经 setter（ESM 导入绑定不可赋值，2026-09-22 批5 理顺点）
+function setClickSelectedUid(v) {
+  if (v == null) { cancelClickSelection(); return; }
+  clickSelectedUid = v;
+}   // 壳 render 分派改经 setter（ESM 导入绑定不可赋值，2026-09-22 批5 理顺点）
 export { aim, aimPlayedAt, clickSelectedUid, selectCardByClick, clickSelectedTarget, setTargetable, showCardBlockReason, startAim, cancelAim, cancelClickSelection, setClickSelectedUid };
