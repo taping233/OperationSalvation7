@@ -152,6 +152,9 @@
 .sts-figure::after { content:''; position:absolute; left:12%; right:12%; bottom:1%; height:6%;
   border-radius:50%; pointer-events:none;
   background:radial-gradient(ellipse at 50% 50%, rgba(0,0,0,.5), rgba(0,0,0,.24) 55%, transparent 75%); }
+/* 09-25 回退：常驻 filter 触发 art.js:298 已知「合成层缓存空栅格」问题——
+   实测加 filter 后立绘整场不可见（DOM/透明度正常但栅格为空），撤掉 filter 立绘恢复。
+   偏暗融入问题的兜底改由下方 ::after 椭圆影 + 名牌承担，不再动 img 本体 */
 .sts-figure img { width:100%; height:auto; transition:transform .15s; }
 .sts-nameplate { margin:6px auto 0; width:100%; padding:5px 8px 6px; border:1px solid rgba(150,150,150,.35);
   border-radius:2px; background:linear-gradient(180deg,rgba(12,12,12,.5),rgba(8,8,8,.85)); }
@@ -187,13 +190,15 @@
 .sts-intent { position:absolute; left:50%; top:-36px; transform:translateX(-50%); white-space:normal; z-index:3;
   padding:3px 12px; border:1px solid #8f8f8f; border-radius:12px; background:rgba(12,12,12,.9);
   color:#e3e3e3; font-size:12px; line-height:1.45; text-align:center; box-shadow:0 3px 10px rgba(0,0,0,.55); }
-.sts-intent .ic { width:13px; height:13px; vertical-align:-0.2em; }
+.sts-intent .ic { width:14px; height:14px; vertical-align:-0.2em;
+  filter:drop-shadow(0 0 2px rgba(0,0,0,.9)); }   /* 09-25：13px 交叉剑在胶囊里读作乘号，提 1px + 暗描边定型 */
 /* 敌方名牌两行化（迭代评审 09-20 美术岗）：名行 flex 化、攻击小徽右对齐（stats 行空即隐）；
    玩家名牌三行维持——equips 是老板定版的可点击技能按钮，不参与收纳 */
 .sts-foe .sts-headrow { display:flex; align-items:center; gap:5px; }
 .sts-foe .sts-headrow b { flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; text-align:left; }
 .sts-atkbadge { display:inline-flex; align-items:center; gap:2px; flex:0 0 auto; font-size:11px; font-weight:400; color:#d8d8d8; }
-.sts-atkbadge .ic { width:11px; height:11px; }
+.sts-atkbadge .ic { width:14px; height:14px;
+  filter:drop-shadow(0 0 2px rgba(0,0,0,.9)); }   /* 09-25：11px 交叉剑读作乘号，同胶囊口径提到 14px */
 .sts-foe .sts-stats:empty { display:none; }
 /* 对战开始时装备卡浮现（2026-09-16 老板定版；09-20 评审补齐缺失样式——此前裸 div 挂 body 无样式不可见）：
    fixed 居中横排、pointer-events:none 不挡操作；卡体复用 cardHTML('sm') v3 制式，
@@ -258,16 +263,27 @@
    09-20 修：底栏实为 3 列 grid（expedition-battle.css sts-hud display:grid），本按钮
    未写坐标被 auto-placement 塞进隐式第 2 行溢出到屏幕外——显式钉回手牌列第 1 行贴底，
    margin-left 让位给同格的砸击按钮 */
-.bt-hand-page { grid-row:1; grid-column:2; justify-self:start; align-self:flex-end;
+.bt-hand-page { position:relative; grid-row:1; grid-column:2; justify-self:start; align-self:flex-end;
   flex:0 0 auto; margin:0 2px 6px 122px; padding:7px 12px; border-radius:9px;
   border:1.5px solid #8f8b7e; background:#23231f; color:#e8e4d8; font-size:14px; font-weight:700; cursor:pointer;
   pointer-events:auto; white-space:nowrap; z-index:6; }
 .bt-hand-page:hover { filter:brightness(1.2); }
+/* 09-25 P1-a 体检批 L 项：翻页提醒动画只剩合成器通道（transform/opacity）——
+   按钮本体只动 transform（抬升）；原 50% 关键帧里的 filter:brightness 与 box-shadow
+   逐帧重排/重绘改为 ::after 叠层（白色提亮洗 + 强光晕）只动 opacity 呈现 */
 .bt-hand-page.has-more { border-color:#f0c96f; color:#fff1b7;
   background:linear-gradient(135deg,#5f451b,#2b2417); box-shadow:0 0 0 2px rgba(240,201,111,.18),0 0 20px rgba(240,175,70,.45);
   animation:handPageReminder 1.35s ease-in-out infinite; }
-@keyframes handPageReminder { 50% { transform:translateY(-3px); filter:brightness(1.3); box-shadow:0 0 0 3px rgba(240,201,111,.26),0 0 28px rgba(240,175,70,.72); } }
-@media (prefers-reduced-motion:reduce) { .bt-hand-page.has-more { animation:none; } }
+@keyframes handPageReminder { 50% { transform:translateY(-3px); } }
+.bt-hand-page.has-more::after { content:''; position:absolute; inset:-1.5px; border-radius:inherit; pointer-events:none;
+  background:rgba(255,240,205,.16);
+  box-shadow:0 0 0 3px rgba(240,201,111,.26),0 0 28px rgba(240,175,70,.72);
+  opacity:0; animation:handPageGlow 1.35s ease-in-out infinite; }
+@keyframes handPageGlow { 50% { opacity:1; } }
+@media (prefers-reduced-motion:reduce) { .bt-hand-page.has-more, .bt-hand-page.has-more::after { animation:none; } }
+/* 09-25：overlay STS 语境（page-battle-ui.css）已把本钮提醒定为静态金强调（animation:none
+   只压按钮本体），这里同步压掉 ::after 辉光层（opacity:0 即隐），保持该语境静态口径不变 */
+#overlay .battle-stage.sts .bt-hand-page.has-more::after { animation:none; }
 /* 背包砸击按钮（2026-09-16 老板：改回按钮形态——手牌左侧的背包图案按钮，
    不再向手牌置入常驻令牌；slamPending 时点亮提示「再点一次取消」）
    09-20 老板反馈「缺少明显的背包砸击按钮」根因实锤：底栏改 grid 后本按钮无坐标、
@@ -302,7 +318,7 @@
 .sts-hand .bt-slot:hover .bt-card:not(.off) { animation:cardHoverFlash .45s ease; }
 @keyframes cardHoverFlash {
   0% { filter:brightness(1); }
-  25% { filter:brightness(1.5) saturate(1.18); }
+  25% { filter:brightness(1.25) saturate(1.18); }
   100% { filter:brightness(1); }
 }
 /* 同名堆叠计数角标 */
@@ -331,10 +347,10 @@
   .sts-foes { left:36%; right:3%; gap:6px; }
 }
 /* 右侧敌人意图气泡贴边被裁剪：容器留出呼吸空间；折行上限 170%（单行→两行） */
-.sts-foes { padding-right:14px; }
-.sts-intent { max-width:170%; }
+.sts-foes { padding-right:14px; padding-left:6px; }   /* 09-25：补左 padding，意图折行后不再互压邻格 */
+.sts-intent { max-width:150%; }
 /* v0.32.1 修：能量球数字与 /上限 重叠、手牌底部被截断 */
-.sts-energy .ic { position:absolute; top:8px; left:14px; }
+.sts-energy .ic { position:absolute; top:9%; left:16%; }   /* 09-25：改百分比随球径缩放（原 8px/14px 在 56-88px 档压住数字） */
 .sts-energy { flex-direction:row; align-items:baseline; padding-top:12px; }
 .sts-energy b { font-size:30px; }
 .sts-energy span { font-size:13px; color:#a8a8a8; margin:0 0 1px 1px; }
@@ -361,12 +377,12 @@
    CSS 类从未被挂载，2026-09-19 随死样式清理删除——新增受击表现请进 JS 抖动函数 */
 /* 全屏受击红闪（径向暗角） */
 .sts-hurtflash { position:absolute; inset:0; z-index:70; pointer-events:none;
-  background:radial-gradient(ellipse at 50% 55%, transparent 42%, var(--fx-blood) 100%);
+  background:radial-gradient(ellipse at 50% 55%, transparent 30%, var(--fx-blood) 100%);
   animation:stsHurtFlash .6s ease-out forwards; }
 @keyframes stsHurtFlash { 0% { opacity:0; } 15% { opacity:1; } 100% { opacity:0; } }
 /* 全屏治疗绿闪（2026-09-13 老板：回复血量时闪绿光，口径同受击红闪） */
 .sts-healflash { position:absolute; inset:0; z-index:70; pointer-events:none;
-  background:radial-gradient(ellipse at 50% 55%, transparent 42%, var(--fx-vital) 100%);
+  background:radial-gradient(ellipse at 50% 55%, transparent 30%, var(--fx-vital) 100%);
   animation:stsHealFlash .6s ease-out forwards; }
 @keyframes stsHealFlash { 0% { opacity:0; } 15% { opacity:1; } 100% { opacity:0; } }
 /* 攻击抖屏（2026-09-13 老板：自己攻击或造成伤害时轻微抖屏）——战斗内容层小幅位移，不叠层 */
@@ -453,8 +469,7 @@
 .sts-hand .hs-card.sm { font-size: 16px; }
 .sts-hand .hs-card .hsc-desc { font-size: 12px; line-height: 1.38; }
 .sts-hand .hs-card .hsc-desc span { -webkit-line-clamp: 6; }
-.sts-hand .bt-card { opacity: .93; }
-.sts-hand .bt-slot:hover .bt-card { opacity: 1; }
+.sts-hand .bt-slot:hover .bt-card { opacity: 1; }   /* 09-25：常驻 .93 与 hover 1 不可感知，删常态透明声明（本行保留避免整块删除） */
 .battle-stage[data-phase="resolving"] .bt-card,
 .battle-stage[data-phase="enemy"] .bt-card {
   pointer-events: none;

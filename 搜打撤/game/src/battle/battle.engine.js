@@ -51,13 +51,28 @@ import { createBattleExecPlay } from './battle.exec-play.js';
 /* —— 自 battle.core 壳迁入的共享引擎件（原 head/tail，按原文件顺序）—— */
 const executionSession = createBattleExecutionSession();
 const { actionQueue, stagedDeathFx, handSelectQueue, choiceQueue } = executionSession;
-const requestBattleRender = () => {
-    if (!G || !G.battleActive) return;   // 战斗已收尾：残留重绘一律丢弃（胜利结算后不再盖写后续界面）
+/* P1-b 09-25 体检批 L 项：渲染请求按 rAF 合帧——同一帧内多次请求只渲染一次，
+   语义保持「数据变更后下一帧画面必然最新」：flush 时取 getSnapshot() 的最新状态。
+   无 rAF 环境（裸 node 冒烟等）退回同步渲染，保持旧行为。 */
+let renderFrameQueued = false;
+const flushBattleRender = () => {
+    renderFrameQueued = false;           // 先清排队标志：渲染过程中的新请求可另排下一帧，不丢更新
+    if (!G || !G.battleActive) return;   // 排队期间战斗已收尾：残留重绘一律丢弃（口径同请求时守卫）
     try {
       renderBattle(getSnapshot());
     } catch (e) {
       // 渲染失败不得打断战斗逻辑（否则出牌动作入队前就中断，busy 永久卡死——2026-09-18 实测）
       console.error('[battle] 渲染异常已兜底：', e);
+    }
+  };
+const requestBattleRender = () => {
+    if (!G || !G.battleActive) return;   // 战斗已收尾：残留重绘一律丢弃（胜利结算后不再盖写后续界面）
+    if (renderFrameQueued) return;       // 本帧已排队：后续请求并入同一次渲染
+    renderFrameQueued = true;
+    if (typeof requestAnimationFrame === 'function') {
+      requestAnimationFrame(flushBattleRender);
+    } else {
+      flushBattleRender();
     }
   };
 const interactionOf = (kind) => (interaction && interaction.kind === kind ? interaction : null);
