@@ -1,0 +1,3 @@
+# 钩子必须保持 LF：CRLF 会让 sh 解析出错（$'\r'），门禁会失灵。
+# 本文件优先于 core.autocrlf，保证任何检出方式下行尾都是 LF。
+* text eol=lf
