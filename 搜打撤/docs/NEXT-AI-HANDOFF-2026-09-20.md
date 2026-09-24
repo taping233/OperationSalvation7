@@ -370,3 +370,14 @@ Git 状态：`master` 领先 `origin/master` **8 个提交未推送**（最新 2
 - **验证**：全量 `node node_modules/vitest/vitest.mjs run --no-file-parallelism` **814/814 全绿**（15:00）；全部触及 JS 文件 `node --check` 通过。构建与浏览器实机走查未做；拖动手感、开战装备闪卡、逐击与重开终局仍需实机确认（同 13:14 节遗留）。
 - **现场待批**：基线鉴定用的 worktree `D:\素材\_wt-head-check`（含 node_modules 目录联接）与 `D:\素材\代号柒\.git` 的 worktree 注册记录，属临时验证产物，删除待老板批准。
 - 老板 15:1x 授权收尾提交并推送，并指定并行会话改动一并由本会话入库：战斗批（本节内容）、卡牌库/远征图鉴批（09-24 口头定版的上下滚动+纸纹页头+法伤角标）、`docs/previews/wu-card-art-versions-2026-09-24/` 预览图批分 3 个提交。本段随战斗批入库，提交标识以实时 `git log -1` 为准；推送后 ahead 归零以 `git status` 为准。
+
+## 当前状态补充：三子代理并行批——门禁/拆分/Lint（2026-09-24 16:40 +08:00）
+
+- 老板 15:2x 指示「拆给子代理慢慢做」。三子代理按属地划线并行：A=门禁（`.githooks`/`package.json`/`scripts`）、B=战斗拆分（`game/src/battle`+架构守卫脚本）、C=lint（`eslint.config.js`/`game/src` 除 battle/`tests`），互不触碰、互不提交，Friday 集成验收后分组落库。
+- **B 拆分批 `c387e62`**：新增 `battle.exec-play.js`（queueCardExecution+execPlay，21 件工厂注入），engine 1615→1438 行，具名导出面零变化；状态袋试点 presentation 域 set$ 外部调用 19→0、piles 56→19（域内聚合接口），core 包装改委托；新增 `docs/RUNTIME-BAG-THINNING-ROADMAP-2026-09-24.md`（interaction/effects/session 三域后续分批路线）。子代理实测 battle 定向 172/172、全量 814/814、守卫双零。
+- **A 门禁批 `fee8a7b`**：`.githooks/pre-commit`——暂存命中 `game/src|game/data|tests` 即跑与 CI 逐字一致的全量 vitest，红灯阻断并列出失败用例名，其余改动秒过；绕过口 `--no-verify` / `SKIP_FULL_TESTS=1`；`scripts/setup-commit-gate.mjs` 已在本机写入 `core.hooksPath`（`.git/config` 本地配置不入库，新克隆需重跑一次）。红/绿/绕过/轻提交四段演示在临时 worktree 完成并已清理。本批之后 `6b3ba29`、`537fd29` 两次提交各经门禁实跑 814 全绿放行。
+- **C lint 批 `537fd29`**：基线实测 115 error（battle 110+非 battle 5）→ 非 battle 归零，`eslint.config.js` 零改动无规则降级；死代码删除 2 处（`libPageWarmGeneration`、`openScene` 级联）、真修复 1 处（r5b 断言改用已解构绑定）、行内豁免 2 处带理由（selftest 正则锚定、rest 省略语义）。
+- **`6b3ba29`**：C 的开工基线抓到 `battle.engine.js:276` no-undef `restoreConsumed`（Friday 15:00 拆分批漏留转发 shim，复原类卡牌文本结算会 ReferenceError，814 用例无该分支覆盖故此前全绿）——补一行转发后 engine no-undef 归零。**此前记忆「lint 基线 493」已过时**，现场基线即 115。
+- **集成验收**：`node node_modules/vitest/vitest.mjs run --no-file-parallelism` **814/814 全绿（16:20，A+B+C+修复合体）**；`npm run lint` 总 148 全在 battle 域（开工 110，+39 属 `c387e62` 拆分产物的 unused）。
+- **未完成/遗留**：① battle 域 lint 148 待后续独立批次（含 c387e62 增量清理）；② 状态袋打薄 interaction/effects/session 三域按路线图后续分批；③ C 顺带发现（按规未动手）：`finishScene`/`sceneState` 无外部调用者、`ui.js` 的 `sceneNext` 分支与对应 CSS 处于休眠态，清理待拍板；④ 构建与浏览器实机走查仍未做（拖动手感/开战装备闪卡/逐击/重开终局 实机确认同 13:14 节遗留）；⑤ 门禁对本仓既有其他 codex worktree 的提交同样生效（共享 `core.hooksPath`，命中时约 3.5 分钟）。
+- 本段随本批文档提交入库，4 个代码提交（`c387e62`/`fee8a7b`/`6b3ba29`/`537fd29`）+ 本段推送状态以实时 `git log`/`git status` 为准。
