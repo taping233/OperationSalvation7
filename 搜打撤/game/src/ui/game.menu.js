@@ -3,14 +3,14 @@ import { appendLocalFeedback, downloadFeedbackRecord, readLocalFeedback } from '
 function createGameMenuController(deps) {
   const {
     SDT, UI, game, runtime, SLOT_COUNT, esc, readSlot, loadGame, clearSlot,
-    saveGame, syncPlayTime, clearSave, clearAllSlots, getActiveSlot, setActiveSlot, preflightRunMap,
-    hasRun, RunStorage, ensureBattleReady = async () => SDT.Battle, recoverSlotIfPending, terminalCommands,
+    saveGame, clearAllSlots, getActiveSlot, setActiveSlot, preflightRunMap,
+    RunStorage, ensureBattleReady = async () => SDT.Battle, recoverSlotIfPending, terminalCommands,
   } = deps;
 
   // 存储安全封装（迭代评审 09-20 G-P2）：隐私模式/配额满时裸调 localStorage 会抛异常，
   // 设置页曾直接死按钮。本文件经 deps 注入、无静态导入，工具就地定义
-  const storeGet = (key, fallback = null) => { try { return localStorage.getItem(key) ?? fallback; } catch (e) { return fallback; } };
-  const storeSet = (key, val) => { try { localStorage.setItem(key, val); return true; } catch (e) { return false; } };
+  const storeGet = (key, fallback = null) => { try { return localStorage.getItem(key) ?? fallback; } catch { return fallback; } };
+  const storeSet = (key, val) => { try { localStorage.setItem(key, val); return true; } catch { return false; } };
 
   // ---------- 标题界面 ----------
   // lobby = 非对局界面（标题/退出屏/基地）：隐藏左侧栏，画面更聚焦
@@ -153,7 +153,11 @@ function createGameMenuController(deps) {
   function pickLatestSlot() {
     let best = null;
     for (let i = 1; i <= SLOT_COUNT; i++) {
-      const run = readSlot(i), base = SDT.Base.peek(i);
+      // F1 兜底（2026-09-24）：单档读取异常（如基地档字段类型损坏）不阻塞最近档判定——
+      // 标题页数据件与选档页共用本函数，一档抛错会连带卡死整页
+      let run = null, base = null;
+      try { run = readSlot(i); } catch { /* 坏档按空档处理 */ }
+      try { base = SDT.Base.peek(i); } catch { /* 同上 */ }
       if (!run && !base) continue;
       const ts = +run?.savedAt || 0;
       if (!best || ts > best.ts) best = { slot: i, run, base, ts };
@@ -194,7 +198,7 @@ function createGameMenuController(deps) {
       try {
         const result = await window.sdtDesktop.appendSuggestion(entry);
         return result === true || result?.ok === true;
-      } catch (_) { return false; }
+      } catch { return false; }
     }
     return appendLocalFeedback(entry).ok;
   }
@@ -223,7 +227,7 @@ function createGameMenuController(deps) {
       if (!text) return;
       busy = true; saveBtn.disabled = true;
       const payload = { text, steps: fields[1].value.trim(), expected: fields[2].value.trim(), actual: fields[3].value.trim() };
-      let ok = false;
+      let ok;   // 不做冗余初始化：try 内必赋值，catch 置 false，两路都在读取前完成赋值
       try { ok = await saveSuggestion(payload, target, at, page); }
       catch { ok = false; }
       if (layer._openToken !== token) return;
@@ -244,7 +248,7 @@ function createGameMenuController(deps) {
       try {
         const r = await window.sdtDesktop.readSuggestions();
         if (r?.ok && Array.isArray(r.list)) return r.list;
-      } catch (_) { /* 落回 localStorage */ }
+      } catch { /* 落回 localStorage */ }
     }
     const read = readLocalFeedback();
     return read.ok ? read.value : read;
@@ -255,13 +259,13 @@ function createGameMenuController(deps) {
       try {
         const result = await window.sdtDesktop.deleteSuggestion(ts);
         return result === true || result?.ok === true;
-      } catch (_) { return false; }
+      } catch { return false; }
     }
     try {
       const list = JSON.parse(localStorage.getItem('sdt-suggestions-v1') || '[]').filter((e) => e?.ts !== ts);
       localStorage.setItem('sdt-suggestions-v1', JSON.stringify(list));
       return true;
-    } catch (_) { return false; }
+    } catch { return false; }
   }
 
   const fmtSugTime = (iso) => {
@@ -515,7 +519,7 @@ function createGameMenuController(deps) {
       ? SDT.Meta.ACHIEVEMENTS.filter(a => SDT.Meta.isUnlocked(a, baseData)).map(a => a.name)
       : [];
     const prog = run
-      ? `<div class="si-line si-progress"><em>当前进度</em><b>${run.nestActive ? '龙巢远征进行中' : `第 ${(run.layerIdx ?? 0) + 1} 层 · ${esc(run.myClass || '未选人物')}`}</b></div>`
+      ? `<div class="si-line si-progress"><em>当前进度</em><b>${run.nestActive ? '研究所远征进行中' :`第 ${(run.layerIdx ?? 0) + 1} 层 · ${esc(run.myClass || '未选人物')}`}</b></div>`
       : '';
     const saved = Number(run?.savedAt) > 0 ? new Date(Number(run.savedAt)) : null;
     const p = (n) => String(n).padStart(2, '0');
@@ -534,17 +538,21 @@ function createGameMenuController(deps) {
   function openSlotPicker() {
     game.state = 'modal';
     const cards = [];
+    const slotErrors = [];
     const latest = pickLatestSlot();
     for (let i = 1; i <= SLOT_COUNT; i++) {
-      const run = readSlot(i);
-      const baseData = SDT.Base.peek(i);
-      const exists = !!run || !!baseData;
-      const recent = !!run?.savedAt && latest?.slot === i && latest.ts > 0;
-      const state = run ? 'run' : baseData ? 'base' : 'empty';
-      const status = recent ? '最近游玩 · 对局进行中' : run ? '对局进行中' : baseData ? '基地档案' : '空档位';
-      const cta = !exists ? '开新档 <i class="en">NEW GAME</i>'
-        : run ? '继续对局 <i class="en">CONTINUE</i>' : '进入存档 <i class="en">ENTER</i>';
-     cards.push(`<article class="slot-card slot-art-${i} slot-state-${state}${exists ? ' filled' : ''}${recent ? ' slot-recent' : ''}">
+      // F1 兜底（2026-09-24）：单档渲染异常只降级该档卡片并给出可见错误，
+      // 不再让整个选档页卡死在 game.state='modal'；catch 内不写任何档，原档保留
+      try {
+        const run = readSlot(i);
+        const baseData = SDT.Base.peek(i);
+        const exists = !!run || !!baseData;
+        const recent = !!run?.savedAt && latest?.slot === i && latest.ts > 0;
+        const state = run ? 'run' : baseData ? 'base' : 'empty';
+        const status = recent ? '最近游玩 · 对局进行中' : run ? '对局进行中' : baseData ? '基地档案' : '空档位';
+        const cta = !exists ? '开新档 <i class="en">NEW GAME</i>'
+          : run ? '继续对局 <i class="en">CONTINUE</i>' : '进入存档 <i class="en">ENTER</i>';
+       cards.push(`<article class="slot-card slot-art-${i} slot-state-${state}${exists ? ' filled' : ''}${recent ? ' slot-recent' : ''}">
         <i class="slot-card-bg" aria-hidden="true"></i>
         <i class="slot-card-light" aria-hidden="true"></i>
         <i class="slot-card-flakes" aria-hidden="true">${'<i></i>'.repeat(7)}</i>
@@ -560,6 +568,19 @@ function createGameMenuController(deps) {
           <button class="mini-btn danger" data-act="delSlot" data-slot="${i}">删除</button>
         </span>` : ''}
      </article>`);
+      } catch (e) {
+        // 异常档渲染为不可进入的降级卡片（不给破坏性入口），页面继续展示其余档位
+        console.warn(`[menu] 档位 ${i} 存档渲染异常，原档已保留未写回：`, e);
+        slotErrors.push(i);
+        cards.push(`<article class="slot-card slot-art-${i} slot-state-empty">
+        <i class="slot-card-bg" aria-hidden="true"></i>
+        <b class="slot-card-name">档位 0${i}</b>
+        <span class="slot-card-sub">SLOT 0${i}</span>
+        <span class="slot-card-status">档案数据异常</span>
+        <i class="slot-card-rule"></i>
+        <span class="slot-card-desc">该档位数据读取失败，原档已保留未写回；请重试或联系开发者排查</span>
+       </article>`);
+      }
     }
     UI.registerHelp('slots', {
       title: '存档说明',
@@ -587,6 +608,13 @@ function createGameMenuController(deps) {
         <p id="slotRestoreError" class="slot-restore-error" role="alert" aria-live="assertive" hidden></p>
         <div class="slot-deck">${cards.join('')}</div>
       </div>`, 'page');
+    // F1 兜底（2026-09-24）：有档位渲染异常时在页面上给出可见提示（不阻塞其余档位）
+    if (slotErrors.length) {
+      const msg = `档位 ${slotErrors.map(i => '0' + i).join('、')} 存档数据异常，已保留原档未写回`;
+      console.warn('[menu] ' + msg);
+      const errEl = document.getElementById('slotRestoreError');
+      if (errEl) { errEl.hidden = false; errEl.textContent = msg; }
+    }
     // 进入档位：加载该档基地并执行后续（续打 / 进基地）
     const launch = (slot, fn) => {
       UI.hideOverlay();
@@ -653,7 +681,7 @@ function createGameMenuController(deps) {
         // 上一局未结束 → 直接回到局内（2026-09-07 留言：不进基地换人/重新带卡）；
         // 有存档键但不能安全恢复（损坏/版本过新/地图无证据）→ 保留原串并回标题，不进入整备。
         const resumed = hasSavedRun;
-        let inRun = false;
+        let inRun;   // 不做冗余初始化：仅 resumed 分支读取，且读取前必先赋值 loaded.ok
         if (resumed) {
           // 2026-09-09：先播转场再读档。战斗中断档在 loadGame 里由 Battle.restore
           // 直接置为战斗 modal 态并渲染战斗界面；若在其后播转场，转场结束会把
@@ -885,7 +913,7 @@ function createGameMenuController(deps) {
       }, 2600);
       return false;
     };
-    UI.act('wipeNotes', (d, btn) => {
+    UI.act('wipeNotes', () => {
       if (!armDanger('wipeNotes', '确认清空？')) return;
       SDT.Notes.clearAll(); runtime.rebuildNotes(); UI.log('已清空全部格子备注', 'warn');
     });
