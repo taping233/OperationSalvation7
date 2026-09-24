@@ -352,6 +352,7 @@ function createBattleResolution(ports) {
 
   // 敌方回合与抽到即施放仍需要同步结算；玩家动作队列可逐段推进同一规则生成器。
   function resolveCard(...args) {
+    // eslint-disable-next-line no-unused-vars -- _ 仅为把 resolveCardSteps 生成器驱动到底的占位，段值本就不消费
     for (const _ of resolveCardSteps(...args)) { /* 同步消费每段 */ }
   }
   resolveCard.steps = resolveCardSteps;

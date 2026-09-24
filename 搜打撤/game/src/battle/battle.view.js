@@ -152,10 +152,6 @@ import { aim, aimPlayedAt, selectCardByClick, showCardBlockReason, startAim, can
     syncBattleSlot(stage, previous, next, '.sts-tactics');
     stage._battleTemplate = next;
   }
-  const boundPotionAim = new WeakSet();
-  const boundPotionUse = new WeakSet();
-  const boundPotionTips = new WeakSet();
-  const boundSlamAim = new WeakSet();
   function render(snapshot = getSnapshot()) {
     const prevView = captureBattleView();   // 重建前的手牌/牌堆位：供飞行与归位动画取样
     const preserveAim = !!aim && canPreserveAim(snapshot);

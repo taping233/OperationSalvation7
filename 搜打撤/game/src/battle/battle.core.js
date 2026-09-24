@@ -4,7 +4,13 @@ import { refillDrawPile } from './battle.deck.js';
 import { COMBAT_HOOKS } from './combat.js';
 import { BATTLE_PHASES } from './battle.state.js';
 import * as Combat from './combat.js';
-import { battleState, G, foes, opts, mode, hand, energy, maxEnergy, pstat, busy, infusing, discovering, choosing, stealthStrike, nextSpellTwice, viewingGrave, viewingDeck, floats, cardAnims, shaTransform, growth, nestSyn, arrowRune, allSpellsInfused, freeCast, battleRestartCheckpoint, set$renderBattle, set$energy, set$interaction, set$floats, set$cardAnims, set$viewingGrave, set$viewingDeck, set$dreadShown, set$pendingHint, bindBattleRenderer, showDread, takeBattleFloats, takeBattleCardAnims } from './battle.runtime.js';
+import {
+  battleState, G, foes, opts, mode, hand, energy, maxEnergy, pstat, busy, infusing,
+  discovering, choosing, stealthStrike, nextSpellTwice, viewingGrave, viewingDeck,
+  shaTransform, growth, nestSyn, arrowRune, allSpellsInfused, freeCast,
+  battleRestartCheckpoint, set$energy, set$interaction, set$viewingGrave, set$viewingDeck,
+  set$pendingHint, bindBattleRenderer, showDread, takeBattleFloats, takeBattleCardAnims,
+} from './battle.runtime.js';
 import { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, drawCards, sweepDead, findCard, infuseOf, effCostOf, restore, finish, cancelInteraction, flee, handCurseSpecs, getSnapshot, useEquipSkill, start, toggleDeckCard, cancelDeckSelection, beginBoss, targetSide, unplayableReason, play, toggleInfusePick, cancelInfuse, beginInfuse, confirmInfuse, aegisBlocked, hitFoe, matchHandSelectKey, skipHandSelect, pickHandSelect, useItem, bagSlam, resolveDart, resolveSlam, usePotion, openBag, closeBag, pickChoice, pickDiscover } from './battle.engine.js';
 import { endTurn, surrender } from './battle.enemy-phase.js';
 /* battle.core.js —— 战斗逻辑：牌库/出牌结算/词条时点/回合流转（渲染由注入的视图完成） */
@@ -339,7 +345,7 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
         break;
       case 'damageAll': {
         const dmg = Math.max(1, +arg || 10);
-        [...alive()].forEach(f => hitFoe(f, null, dmg, Combat.TYPES.FIXED));
+        [...alive()].forEach(f => hitFoe(f, { name: '开发者指令', desc: '' }, dmg, Combat.TYPES.FIXED));
         sweepDead();
         G.log(`[[icon:swords]] 开发者：对所有敌人造成 <b>${dmg}</b> 点固定伤害`, 'sys');
         break;

@@ -3,25 +3,45 @@
  * 规则核（词条时点/出牌结算/命中/死亡）保留共享调用，属地模块经工厂注入解环。
  * 状态读写一律经 battle.runtime.js（活绑定 + set$Xxx）；本文件禁 import 壳（contracts 拒环）。 */
 const SDT = window.SDT;
-import { renderBattle, battleState, G, foes, opts, mode, drawPile, hand, discard, granted, played, consumed, grave, energy, maxEnergy, turn, pdef, pstat, busy, infusing, discovering, discoverQueue, handSelecting, choosing, stealthStrike, nextSpellTwice, interaction, pendingHint, delayed, viewingGrave, viewingDeck, viewingBag, floats, cardAnims, presentationActionSeq, dreadShown, spellCost1, meleeCost1, shaTransform, consumeFireballN, lastDrawnUids, lastPlayedType, playedMartialThisTurn, playedMovesThisTurn, selPool, selShaN, sel, lastDeckSel, selectingDeck, selDeckMax, allies, growthNames, growth, infuseFuels, sealUnlocked, deathSave, killAtkUp, poisonOnSpell, poisonLegacy, nestRunes, nestSyn, arrowRune, unyieldRune, ashRune, unlimitedRune, holyRune, freezeRuneOn, armorMul, sealDone, playerCurseImmune, allSpellsInfused, zeroFeeUntil, cardOverrides, equipped, freeCast, battleRestartCheckpoint, restoringRestartCheckpoint, tmpSeq, activeActionSignal, surgeWaiter, lastPersistAt, snapCache, snapSig, set$lastDrawnUids, set$tmpSeq, set$noDrawNext, set$stealthStrike, set$nextSpellTwice, set$drawPile, set$energy, set$maxEnergy, set$shaTransform, set$consumeFireballN, set$deathSave, set$hand, set$extraTurn, set$delayed, set$meleeCost1, set$spellCost1, set$surgeWaiter, set$sealUnlocked, set$discovering, set$G, set$battleRestartCheckpoint, set$opts, set$mode, set$battleState, set$foes, set$interaction, set$selPool, set$selShaN, set$sel, set$discard, set$granted, set$played, set$consumed, set$grave, set$turn, set$busy, set$pdef, set$pstat, set$infusing, set$discoverQueue, set$handSelecting, set$floats, set$cardAnims, set$presentationActionSeq, set$choosing, set$lastPlayedType, set$viewingGrave, set$viewingDeck, set$dreadShown, set$selectingDeck, set$viewingBag, set$allies, set$growthNames, set$growth, set$infuseFuels, set$killAtkUp, set$poisonOnSpell, set$poisonLegacy, set$zeroFeeUntil, set$cardOverrides, set$sealDone, set$playerCurseImmune, set$allSpellsInfused, set$nestRunes, set$nestSyn, set$timeRune, set$arrowRune, set$unyieldRune, set$ashRune, set$unlimitedRune, set$holyRune, set$fireballRuneOn, set$freezeRuneOn, set$swiftRune, set$timeSpaceRune, set$timeSpaceUsed, set$armorMul, set$freeCast, set$equipped, set$playedMartialThisTurn, set$playedMovesThisTurn, set$selDeckMax, set$lastDeckSel, set$pendingHint, set$lastPersistAt, set$activeActionSignal, set$restoringRestartCheckpoint, set$snapSig, set$snapCache, storeBattleSnapshot } from './battle.runtime.js';
+import {
+  renderBattle, battleState, G, foes, opts, mode, drawPile, hand, discard, granted, consumed,
+  grave, energy, maxEnergy, turn, pdef, pstat, busy, infusing, discovering, discoverQueue,
+  handSelecting, choosing, stealthStrike, interaction, pendingHint, delayed, viewingGrave,
+  viewingDeck, viewingBag, floats, cardAnims, dreadShown, spellCost1, meleeCost1, shaTransform,
+  consumeFireballN, lastDrawnUids, lastPlayedType, playedMartialThisTurn, playedMovesThisTurn,
+  selPool, selShaN, sel, selectingDeck, selDeckMax, allies, growthNames, growth, infuseFuels,
+  sealUnlocked, deathSave, killAtkUp, poisonLegacy, nestRunes, nestSyn, unyieldRune, ashRune,
+  unlimitedRune, holyRune, armorMul, sealDone, playerCurseImmune, zeroFeeUntil, cardOverrides,
+  equipped, freeCast, tmpSeq, activeActionSignal, surgeWaiter, lastPersistAt, snapCache,
+  snapSig, set$lastDrawnUids, set$tmpSeq, set$noDrawNext, set$stealthStrike,
+  set$nextSpellTwice, set$drawPile, set$energy, set$maxEnergy, set$shaTransform,
+  set$consumeFireballN, set$deathSave, set$hand, set$extraTurn, set$delayed, set$meleeCost1,
+  set$spellCost1, set$surgeWaiter, set$sealUnlocked, set$discovering, set$battleState,
+  set$interaction, set$busy, set$infusing, set$sealDone, set$playerCurseImmune, set$nestRunes,
+  set$nestSyn, set$timeRune, set$arrowRune, set$unyieldRune, set$ashRune, set$unlimitedRune,
+  set$holyRune, set$fireballRuneOn, set$swiftRune, set$timeSpaceRune, set$armorMul,
+  set$pendingHint, set$lastPersistAt, set$activeActionSignal, storeBattleSnapshot,
+} from './battle.runtime.js';
 import { esc } from '../core/shared.js';
 import { createEffectExecutor, splitEffectClauses, consumeTriggerTexts } from './battle.effects.js';
 import { refillDrawPile, shuffleCards } from './battle.deck.js';
-import { removeUid } from './battle.piles.js';
+import './battle.piles.js';
 import { isAreaEffect, targetSideFor, unplayableReasonFor, itemTargetSideFor } from './battle.rules.js';
-import { COMBAT_HOOKS } from './combat.js';
+
 import { createBattleExecutionSession } from './battle.execution-session.js';
 import { createBattleActionRunner } from './battle.action-runner.js';
 import { STAGED_BOSS_DEFEAT, actionCancellationError, createStagedPlayback, throwIfActionCancelled } from './battle.staged-playback.js';
-import { BATTLE_PHASES, beginTargeting, cancelTargeting, createBattleState, transitionBattle } from './battle.state.js';
+import {
+  BATTLE_PHASES, beginTargeting, cancelTargeting,
+} from './battle.state.js';
 import { Random } from '../core/random.js';
 import * as Combat from './combat.js';
-import { emit as busEmit } from '../core/event-bus.js';
+import '../core/event-bus.js';
 import { calculateEffectiveCardCost, decayEffectiveCardCost, pocketSpellDiscountFor } from './battle.card-cost.js';
 import { calculateEnemyIntent } from './battle.intent.js';
 import { createBattleSnapshot, createBattleSnapshotSignature } from './battle.snapshot.js';
 import { createBattleResolution } from './battle.resolution.js';
-import { clearFeedback } from './battle.feedback.js';
+import './battle.feedback.js';
 import { createBattleSelectionFlow } from './battle.selection-flow.js';
 import { createBattleEquipment } from './battle.equipment.js';
 import { createBattleBag } from './battle.bag.js';
