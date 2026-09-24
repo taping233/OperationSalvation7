@@ -422,6 +422,7 @@ async function attach(body) {
   // （老板 09-20 实机反馈首次进场「闪一下」）。visibility 只藏内容不塌布局，
   // 装载失败/战斗已结束的原路恢复显示，静态立绘兜底不受影响。
   img.style.visibility = 'hidden';
+  armBattleEndHide();
   if (releasePromise) await releasePromise;
   if (token !== lifecycle) { img.style.visibility = ''; return; }
   const rt = await ensureApp();
@@ -511,7 +512,14 @@ document.addEventListener('visibilitychange', () => {
 // 战斗结束必卸载（老板 09-12 实机 bug：胜利画面/地图上人物残影）——#unitFrames 挂在
 // #overlay 直下、不随 ovBody 重建销毁，战斗收尾切走后若无人 hide 就一直浮在非战斗场景上。
 // battle:end 由战斗核心 finish() 广播（victory/defeat/flee 全走这里），同步卸载。
-busOn('battle:end', () => hide());
+// 只在真正接管过立绘后才订阅（见 attach）：模块级常驻订阅会让 battle:end 的「0 订阅回退」
+// 判定失效，吞掉战斗核心对 game.onBattleEnd 的回退——审计 harness 与测试依赖该回退。
+let battleEndHideArmed = false;
+function armBattleEndHide() {
+  if (battleEndHideArmed) return;
+  battleEndHideArmed = true;
+  busOn('battle:end', () => hide());
+}
 // 2026-09-13 留言（白名单）：人物序列帧只允许出现在 battle 模式的弹层里——
 // 奖励/搜刮/背包/卡牌库等任何其他模式渲染时一律卸下，新增界面默认不在白名单。
 document.addEventListener('sdt-overlay-mode', (e) => { if (e.detail !== 'battle') hide(); });

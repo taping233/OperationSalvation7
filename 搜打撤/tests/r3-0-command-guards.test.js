@@ -101,10 +101,12 @@ describe('R3-0 真实 commands 交互守卫', () => {
 
     const liveHp = snap().foes[1].hp;
     BattleSession.commands.resolveDart(0);
+    await settle();   // 逐击演出（a85b857）后效果才落定：死目标零副作用、pending 保留供重选
     expect(snap().foes[1].hp).toBe(liveHp);
     expect(snap().foes[1].status.poison || 0).toBe(0);
     expect(snap().dartPending).toBe(true);
     BattleSession.commands.resolveDart(1);
+    await settle();
     expect(snap().foes[1].hp).toBeLessThan(liveHp);
     expect(snap().dartPending).toBe(false);
     await leaveBattle();
@@ -134,10 +136,12 @@ describe('R3-0 真实 commands 交互守卫', () => {
 
     BattleSession.commands.bagSlam();
     BattleSession.commands.resolveSlam(0);
+    await settle();   // 逐击演出（a85b857）后效果才落定：合法一击恰好扣 2 费打 4 伤
     const resolved = snap();
     expect(resolved.energy).toBe(initial.energy - 2);
     expect(resolved.foes[0].hp).toBe(initial.foes[0].hp - 4);
     BattleSession.commands.resolveSlam(0);
+    await settle();
     expect(snap().energy).toBe(resolved.energy);
     expect(snap().foes[0].hp).toBe(resolved.foes[0].hp);
     await leaveBattle();

@@ -352,3 +352,21 @@ Git 状态：`master` 领先 `origin/master` **8 个提交未推送**（最新 2
 - 老板授权提交本轮改动。提交前 HEAD `a85b857`，相对本地 `origin/master` ahead 3 / behind 0；本段随提交入库，提交标识以实时 `git log -1` 为准。未联网刷新远端，未推送。
 - 精确提交路径：`game/index.html`、`game/src/game.boot.js`、`game/src/battle/battle.aim.js`、`game/css/battle.css` 与本交接文档。另有并行任务的未跟踪 `docs/previews/wu-card-art-versions-2026-09-24/`（50 张 WebP），归属本批之外，保持未暂存。
 - 本批依老板口径未运行测试、构建或新的战斗页面验收；仅 `node --check` 与 `git diff --check` 通过。标题页入口外观证据和浏览器加载错误见 12:15 节，不能代替战斗拖拽实机验收。
+
+## 当前状态补充：战斗中心模块拆分与拖牌重绘保持（2026-09-24 13:14 +08:00）
+
+- 当前 HEAD `e9bf7a5`，相对本地 `origin/master` ahead 6 / behind 0（未联网刷新远端）；本批战斗代码未提交、未推送。并行美术与照相馆改动已另行提交；未跟踪 `docs/previews/wu-card-art-versions-2026-09-24/` 属其他任务，本批未触碰。
+- 3 个并行子代理分别修快照缓存、拖牌重绘、执行会话/动作调度；本会话接合 `battle.engine.js` 并抽出 `battle.staged-playback.js`。本批精确代码路径：修改 `game/src/battle/battle.aim.js`、`battle.core.js`、`battle.engine.js`、`battle.snapshot.js`、`battle.view.js`；新增 `battle.action-runner.js`、`battle.execution-session.js`、`battle.staged-playback.js`。动作队列、逐拍等待与取消边界脱离中心文件，旧战斗异步收尾由 generation 拦截。中心文件仍承载规则、装备、战斗入口、背包及选择流程，未完成全域拆分。
+- 快照签名现覆盖同一份视图输入的逐值变化，补入阶段、队列长度、友军状态、`viewingDeck` 与装备卡面；装备开战闪卡按战斗 token 只播一次。拖牌时常驻 overlay 接管指针捕获；安全重绘保持卡牌，刷新目标和费用，手牌 UID/槽位布局变化或阶段变化则取消。静态复核补正了检查点恢复前取消旧动作、首脑死亡后截断余句、同名叠牌代表切换及取消后的合成 click 边界。
+- 本批 8 个战斗 JS 文件 `node --check` 通过，已跟踪战斗文件 `git diff --check` 通过（仅 LF/CRLF 提示）。依老板当前要求未运行测试、构建或浏览器走查；拖动手感、开战装备闪卡、逐击与重开终局仍需实机确认。此前测试与页面证据不覆盖本批。
+
+## 当前状态补充：存量红修复 + 拆分补完（2026-09-24 15:05 +08:00）
+
+- 当前 HEAD `e9bf7a5`，相对本地 `origin/master` ahead 6 / behind 0（未联网刷新远端）；本批未提交、未推送。上一节（13:14）路径清单不全：同批还有修改 `battle.runtime.js`（退化为 7 行 `export *` 兼容壳）并新增 `battle.runtime.{session,piles,interaction,effects,presentation}.js` 与 `battle.selection-flow.js`。工作区另有并行任务改动（`game/css/page-cardslib.css`、`game/src/cards/cards.view.js`、`hub/game.cardslib.js` 等），本批未触碰。
+- **基线鉴定**：全量测试 7 个失败（架构守卫 1、playthrough-bot 1、r3-0 3、tt3 1、tt7 1）在 HEAD `e9bf7a5` 同样红、逐条同断言（`git worktree` 于 `D:\素材\_wt-head-check` 跑基线证实）——元凶是 09-24 11:29 `2dc7f3c`（逐拍节奏）与 12:07 `a85b857`（逐击演出）两批提交时未跑测试，非 13:14 拆分批引入。
+- **修复内容**：① `battle.frames.js` 的 `battle:end` 订阅改为 attach 接管立绘后惰性订阅——模块级常驻订阅会被事件总线计为「已有订阅者」，吞掉 `finish()` 对 `game.onBattleEnd` 的 0 订阅回退（审计 harness 依赖）；② `battle.engine.js` `play()` 只清「上一张卡」的指向槽，不再吞背包砸击/血毒双镖/道具点选态（R3-0「保留砍击选择态」契约）；③ `battle.aim.js` 改经 core 快照取 `battleState/foes`（视图禁直读运行时，守卫口径），3 处 `getTargets` 走 `getSnapshot().foes`；④ `scripts/architecture-graph.mjs` 守卫覆盖 runtime 全表面（壳+5 子文件）、白名单加入 selection-flow/equipment/bag/lifecycle；⑤ `tests/r3-0-command-guards.test.js` 两处效果断言改 `await settle()` 后检查（口径决策见下）。
+- **口径决策（老板未答，按推荐执行、可否决）**：镖/砸击的逐击前摇演出（a85b857）保留，r3-0 三处「命令返回瞬间可见效果」的同步断言改为演出落定后检查；守卫语义逐条保留（死目标不改打、重复命令不二扣、能量不足不结算不吞态）。若老板改判「效果即时生效」，回退方向是把两命令的效果移出 staged 步进、测试不动。
+- **拆分补完**：新增 `battle.equipment.js`（147 行，装备/主动技能/开战被动）、`battle.bag.js`（261 行，战斗背包/道具药水/砸击双镖命令）、`battle.lifecycle.js`（387 行，start/编组/restore/finish/flee）；均按 selection-flow 先例（runtime 活绑定直读 + `createBattleXxx` 工厂注入规则核件）。`battle.engine.js` 2267 → 1615 行，保留规则核（词条时点/出牌结算/命中/死亡/抽牌）与转发面（具名导出兼容 core/enemy-phase，一处未改）。规则核保留的依据是原文件头的强连通簇注释（回合循环互递归），继续外提需更大的注入面，收益低。
+- **验证**：全量 `node node_modules/vitest/vitest.mjs run --no-file-parallelism` **814/814 全绿**（15:00）；全部触及 JS 文件 `node --check` 通过。构建与浏览器实机走查未做；拖动手感、开战装备闪卡、逐击与重开终局仍需实机确认（同 13:14 节遗留）。
+- **现场待批**：基线鉴定用的 worktree `D:\素材\_wt-head-check`（含 node_modules 目录联接）与 `D:\素材\代号柒\.git` 的 worktree 注册记录，属临时验证产物，删除待老板批准。
+- 老板 15:1x 授权收尾提交并推送，并指定并行会话改动一并由本会话入库：战斗批（本节内容）、卡牌库/远征图鉴批（09-24 口头定版的上下滚动+纸纹页头+法伤角标）、`docs/previews/wu-card-art-versions-2026-09-24/` 预览图批分 3 个提交。本段随战斗批入库，提交标识以实时 `git log -1` 为准；推送后 ahead 归零以 `git status` 为准。

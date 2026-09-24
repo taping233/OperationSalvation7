@@ -3,12 +3,32 @@
 const freezeObject = value => value ? Object.freeze({ ...value }) : value;
 const statusOf = value => value ? Object.freeze({ ...value.status }) : null;
 
+// The cache key follows the same inputs as createBattleSnapshot. Walk the values
+// instead of relying on object identity: combat units and selection sets mutate
+// in place between renders.
+function signatureValue(value, ancestors = new WeakSet()) {
+  if (value === null || typeof value !== 'object') return `${typeof value}:${JSON.stringify(String(value))}`;
+  if (ancestors.has(value)) return 'circular';
+  ancestors.add(value);
+  let result;
+  if (Array.isArray(value)) result = `array:[${value.map(item => signatureValue(item, ancestors)).join(',')}]`;
+  else if (value instanceof Set) result = `set:[${[...value].map(item => signatureValue(item, ancestors)).join(',')}]`;
+  else if (value instanceof Map) result = `map:[${[...value].map(([key, item]) => `${signatureValue(key, ancestors)}=${signatureValue(item, ancestors)}`).join(',')}]`;
+  else result = `object:{${Object.keys(value).sort().map(key => `${JSON.stringify(key)}=${signatureValue(value[key], ancestors)}`).join(',')}}`;
+  ancestors.delete(value);
+  return result;
+}
+
+function createBattleSnapshotSignature(input, renderDependencies) {
+  return signatureValue([input, renderDependencies]);
+}
+
 function createBattleSnapshot(input) {
   const {
     battleToken, mode, turn, energy, maxEnergy, busy, phase, actionQueueLength,
     opts, player, pdef, pstat, foes, deathFxPending, allies, hand, drawPile, discard, grave,
     infusing, discovering, handSelecting, choosing, pendingTarget, pendingHint,
-    viewingGrave, viewingBag, dreadShown, selectingDeck, deckNeed, selDeckMax,
+    viewingGrave, viewingDeck, viewingBag, dreadShown, selectingDeck, deckNeed, selDeckMax,
     selShaN, sel, selPool, potionBar, pendingItem, slamPending, dartPending,
     equipped,
   } = input;
@@ -57,12 +77,12 @@ function createBattleSnapshot(input) {
     handSelecting: readonlyHandSelecting,
     choosing: readonlyChoosing,
     pendingTarget: pendingTarget ? Object.freeze({ ...pendingTarget, card: freezeObject(pendingTarget.card) }) : null,
-    pendingHint, viewingGrave, viewingBag, dreadShown, deckSelection,
+    pendingHint, viewingGrave, viewingDeck, viewingBag, dreadShown, deckSelection,
     potionBar: potionBar ? Object.freeze(potionBar.map(freezeObject)) : null,
     pendingItem: pendingItem ? Object.freeze({ ...pendingItem, card: freezeObject(pendingItem.card) }) : null,
     slamPending, dartPending,
-    equipped: Object.freeze(equipped.map(e => Object.freeze({ ...e }))),
+    equipped: Object.freeze(equipped.map(e => Object.freeze({ ...e, card: freezeObject(e.card) }))),
   });
 }
 
-export { createBattleSnapshot };
+export { createBattleSnapshot, createBattleSnapshotSignature };

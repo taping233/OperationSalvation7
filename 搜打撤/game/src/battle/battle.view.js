@@ -17,7 +17,7 @@ import { renderDeckSelection, renderGrave, renderBattleBag, renderDeckPileView }
 import { mountHandLayer, updateHand, mountUnitLayer, updateUnits, setHandSuspended, HAND_PAGE_SIZE } from './battle.layers.js';
 import { spawnFloats } from './battle.vfx.js';
 import { captureBattleView, animateBattleTransition } from './battle.anim.js';
-import { aim, aimPlayedAt, selectCardByClick, showCardBlockReason, startAim, cancelAim, setClickSelectedUid } from './battle.aim.js';
+import { aim, aimPlayedAt, selectCardByClick, showCardBlockReason, startAim, cancelAim, canPreserveAim, resumeAimAfterRender, setClickSelectedUid } from './battle.aim.js';
 
 /* battle.view.js —— 战斗渲染：战场 DOM/手牌/指向施法箭头/拖拽预览 */
   const play = commands.playCard;
@@ -73,12 +73,12 @@ import { aim, aimPlayedAt, selectCardByClick, showCardBlockReason, startAim, can
   }
 
   // 对战开始时效果卡牌浮现 2 秒（2026-09-16 老板：含对战开始时效果的卡牌在对战开始时在中心浮现卡牌外观然后消失）
-  let battleStartFlashDone = false;
-  function showBattleStartEquipFlash(equippedList) {
-    if (battleStartFlashDone || !equippedList || !equippedList.length) return;
-    battleStartFlashDone = true;
+  let flashedBattleToken = null;
+  function showBattleStartEquipFlash(equippedList, battleToken) {
+    if (flashedBattleToken === battleToken || !equippedList || !equippedList.length) return;
     const cards = equippedList.filter(e => e.card && /对战开始时/.test(String(e.card.desc || '')));
     if (!cards.length) return;
+    flashedBattleToken = battleToken;
     const container = document.createElement('div');
     container.className = 'bt-start-equip-flash';
     container.innerHTML = cards.map(e => {
@@ -93,10 +93,72 @@ import { aim, aimPlayedAt, selectCardByClick, showCardBlockReason, startAim, can
     }).join('');
     document.body.appendChild(container);
     schedulePresentationMs(() => { container.classList.add('fade-out'); }, 2000);
-    schedulePresentationMs(() => { container.remove(); battleStartFlashDone = false; }, 2600);
+    schedulePresentationMs(() => { container.remove(); }, 2600);
   }
+  // 只在同一场战斗的主舞台仍在屏幕上时复用外壳。弹层/设置页会通过
+  // showOverlay 更新模式、焦点和遮罩；从它们返回时必须重新走该入口。
+  function syncBattleSlot(stage, previous, next, selector, before) {
+    const oldNode = previous.querySelector(selector);
+    const nextNode = next.querySelector(selector);
+    if ((oldNode?.outerHTML || '') === (nextNode?.outerHTML || '')) return;
+    const liveNode = stage.querySelector(selector);
+    if (!nextNode) { liveNode?.remove(); return; }
+    const replacement = nextNode.cloneNode(true);
+    if (liveNode) liveNode.replaceWith(replacement);
+    else stage.querySelector(before).before(replacement);
+  }
+  function showBattleStage(html, token) {
+    const body = UI.el.ovBody;
+    const stage = body.firstElementChild;
+    const canReuse = !UI.el.overlay.hidden && UI._lastMode === 'battle'
+      && stage?.matches('.battle-stage.sts') && stage._battleToken === token
+      && stage._battleTemplate && stage.isConnected;
+    if (!canReuse) {
+      UI.showOverlay('', html, 'battle');
+      const fresh = body.firstElementChild;
+      fresh._battleToken = token;
+      fresh._battleTemplate = fresh.cloneNode(true);
+      return;
+    }
+    const template = document.createElement('template');
+    template.innerHTML = SDT.Icons.rich(html);
+    const next = template.content.firstElementChild;
+    const previous = stage._battleTemplate;
+    // 战场皮肤属于场次；异常切换时回到 showOverlay，保证背景与模式标志同步。
+    if (stage.dataset.assetKey !== next.dataset.assetKey || stage.dataset.boss !== next.dataset.boss) {
+      UI.showOverlay('', html, 'battle');
+      const fresh = body.firstElementChild;
+      fresh._battleToken = token;
+      fresh._battleTemplate = fresh.cloneNode(true);
+      return;
+    }
+    if (stage.dataset.phase !== next.dataset.phase) {
+      stage.classList.remove(`phase-${stage.dataset.phase}`);
+      stage.classList.add(`phase-${next.dataset.phase}`);
+      stage.dataset.phase = next.dataset.phase;
+    }
+    // 模板之间比较，避免把动画临时加的类（牌堆脉冲、受击等）当成状态变化。
+    // 单位、装备与手牌由 battle.layers 的差分层维护，绝不替换其挂载点。
+    syncBattleSlot(stage, previous, next, ':scope > .bt-potions', '.sts-topbar');
+    syncBattleSlot(stage, previous, next, '.sts-encounter');
+    syncBattleSlot(stage, previous, next, '.sts-hud-l');
+    syncBattleSlot(stage, previous, next, '.sts-hud-r');
+    syncBattleSlot(stage, previous, next, '.sts-arena-caption');
+    syncBattleSlot(stage, previous, next, ':scope > .bt-infuse:not(.bt-pick)', ':scope > .bt-infuse.bt-pick, .sts-hud');
+    syncBattleSlot(stage, previous, next, ':scope > .bt-infuse.bt-pick', '.sts-hud');
+    syncBattleSlot(stage, previous, next, '.sts-energy-wrap');
+    syncBattleSlot(stage, previous, next, '.bt-hand-page', '.bt-slam-btn');
+    syncBattleSlot(stage, previous, next, '.bt-slam-btn');
+    syncBattleSlot(stage, previous, next, '.sts-tactics');
+    stage._battleTemplate = next;
+  }
+  const boundPotionAim = new WeakSet();
+  const boundPotionUse = new WeakSet();
+  const boundPotionTips = new WeakSet();
+  const boundSlamAim = new WeakSet();
   function render(snapshot = getSnapshot()) {
     const prevView = captureBattleView();   // 重建前的手牌/牌堆位：供飞行与归位动画取样
+    const preserveAim = !!aim && canPreserveAim(snapshot);
     if (snapshot.phase !== 'player' || snapshot.busy || snapshot.pendingItem || snapshot.slamPending || snapshot.dartPending) setClickSelectedUid(null);
     const {
       mode, turn, energy, maxEnergy, busy, phase = 'player', opts, player, pstat,
@@ -104,7 +166,7 @@ import { aim, aimPlayedAt, selectCardByClick, showCardBlockReason, startAim, can
       pendingTarget, viewingGrave, viewingBag, dreadShown, deckSelection,
       potionBar, pendingItem, slamPending, dartPending, viewingDeck,
     } = snapshot;
-    if (aim) cancelAim();   // 重渲染时中止进行中的指向（DOM 将重建）
+    if (aim && !preserveAim) cancelAim();
     UI.hideTooltip();   // U8：重渲染摘换手牌节点时 mouseleave 不触发，防 tooltip 残留
     // 战斗中弹层接管（墓地/背包/抉择/选牌/发现）：序列帧层挂在 overlay 直下不随 ovBody
     // 销毁，不藏会浮在弹层之上（09-12 实机：背包弹层上残留玩家序列帧立绘）——
@@ -245,7 +307,7 @@ import { aim, aimPlayedAt, selectCardByClick, showCardBlockReason, startAim, can
       : 'battle-normal';
     const combatState = combatStateCopy(snapshot);
     // 战斗标题文字去掉（2026-09-13 留言）
-    UI.showOverlay('', `
+    showBattleStage(`
       <div class="battle-stage sts phase-${escAttr(phase)}" data-phase="${escAttr(phase)}" data-asset-key="${battleAssetKey}" data-boss="${opts.isBoss ? '1' : '0'}">
       <div class="battle-stage-shade"></div>
       ${potionsHTML}
@@ -289,8 +351,8 @@ import { aim, aimPlayedAt, selectCardByClick, showCardBlockReason, startAim, can
           </div>
           <button class="ov-btn ${busy || infusingNow ? '' : 'ok'} sts-end-turn" data-act="btEnd" ${busy || infusingNow ? 'disabled' : ''}>[[icon:skip]] 结束回合</button>
         </div>
-      </div>`, 'battle');
-    const caption = document.querySelector('.sts-arena-caption span');
+       </div>`, snapshot.battleToken);
+    const caption = UI.el.ovBody.querySelector('.sts-arena-caption span');
     if (caption) caption.dataset.battleDetail = combatState.detail;
     // 手牌分栏切换（2026-09-10 留言 #27）
     UI.act('btHandPage', () => { handPage = (handPage + 1) % handPages; render(); });
@@ -431,7 +493,7 @@ import { aim, aimPlayedAt, selectCardByClick, showCardBlockReason, startAim, can
     }
     // —— 指向施法（炉石/杀戮尖塔式）：按住指向卡轻微拎起，弯曲箭头跟随指针 ——
     //    指向敌人 = 红色箭头，指向自己（立绘）= 绿色箭头；松手在目标身上即打出，
-    //    松手没目标自动取消回手牌（轻点锁定流程已退役）。
+    //    松手没目标自动取消回手牌；轻点仍可选牌确认。
     // 敌人点选（砸击/药水点选）已改在单位常驻层创建槽位时绑一次（见 mountUnitLayer），
     // 不再随渲染重复挂——点击时读 getSnapshot() 实时态，避免闭包过期
     // 指向拖拽的 pointerdown 已在常驻槽位创建时绑定（见 updateHand），不再随渲染重复挂
@@ -445,9 +507,10 @@ import { aim, aimPlayedAt, selectCardByClick, showCardBlockReason, startAim, can
     if (SDT.Art.cutoutFigures) SDT.Art.cutoutFigures(body);
     attachUnitFrames(body);   // 批次D：玩家立绘切序列帧（无帧集/降动效自动跳过）
     mountHandLayer(body, tip, snapshot.battleToken);
-    showBattleStartEquipFlash(snapshot.equipped);
+    showBattleStartEquipFlash(snapshot.equipped, snapshot.battleToken);
     const handAnim = updateHand(snapshot, prevView, pageGroups, animEvents, { spellBonus, mode, discoverSrcRect });
     discoverSrcRect = null;
+    if (preserveAim) resumeAimAfterRender(snapshot);
     // 牌局动画：离场克隆飞行 / 手牌区随回合显隐 / 能量与牌堆脉冲
     const anim = animateBattleTransition(prevView, body, animEvents, handAnim.flightMs);
     // BOSS 登场演出：竖线阴影压过场景 2.4s（每场一次）+ 开始动画（暗幕+立绘+名号亮相，约 1.5s）

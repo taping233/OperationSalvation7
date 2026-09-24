@@ -225,12 +225,9 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
     requestBattleRender();
   }
 
-  // —— 快照缓存（2026-09-06 性能修复）——
-  // battle.view 的 render 与拖拽指向路径（pointermove 每秒可近百次）都会调 getSnapshot，
-  // 旧实现每次都全量拷贝 + Object.freeze 一整棵快照树（一次 20-40 个冻结对象）。
-  // 战斗状态全部由本模块变量持有、只在下方各命令函数中变更，故按「输入签名」记忆化：
-  // 状态没变就直接复用上一次的冻结快照（消费方拿到的仍是同一份只读快照，冻结模式不变）。
-  // ⚠ 新增快照字段时，必须把它的输入同步追加进 snapshotSignature()，否则视图会读到陈旧状态。
+  // —— 快照缓存 ——
+  // engine 的 captureSnapshotInput 统一采集视图输入，snapshot 模块用同一输入生成签名和只读快照。
+  // 新增视图字段时在这两处同步添加；拖拽移动复用当前快照，重绘后再取新快照。
   
      // status 全部数值键（bleed/poison 已含在 CURSES）
   

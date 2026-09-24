@@ -7,7 +7,17 @@ const JS_FILE = /\.(?:js|mjs)$/;
 // 判据键一律为相对 game/src 的真实文件路径（2026-09-23 目录化后的命名）。
 // 2026-09-24 守卫复活：全部键改为精确集合匹配（不再用路径正则），并由
 // deadGuardKeys 自检“每个键至少命中一个真实文件”，防止目录再改名时规则死、测试绿。
-const RUNTIME_INNER = new Set(['battle/battle.engine.js', 'battle/battle.enemy-phase.js']);
+// 战斗运行时的完整表面：兼容壳 + 各属地状态模块——视图/纯模块一律不得直读。
+const RUNTIME_SURFACE = new Set([
+  'battle/battle.runtime.js',
+  'battle/battle.runtime.session.js', 'battle/battle.runtime.piles.js',
+  'battle/battle.runtime.interaction.js', 'battle/battle.runtime.effects.js',
+  'battle/battle.runtime.presentation.js',
+]);
+const RUNTIME_INNER = new Set([
+  'battle/battle.engine.js', 'battle/battle.enemy-phase.js', 'battle/battle.selection-flow.js',
+  'battle/battle.equipment.js', 'battle/battle.bag.js', 'battle/battle.lifecycle.js',
+]);
 const RUNTIME_OWNERS = new Set(['battle/battle.core.js', ...RUNTIME_INNER]);
 const PURE_MODULES = new Set([
   'battle/battle.card-cost.js', 'battle/battle.intent.js', 'battle/battle.resolution.js',
@@ -21,7 +31,7 @@ const VIEW_MODULES = new Set([
 // 流程域（基地/局外 + 局内流程）——纯规则/快照模块不得反向依赖。
 const FLOW_PREFIXES = ['hub/', 'run/'];
 // 规则里作为“依赖目标”写死的路径，同样纳入防失效自检。
-const PROTECTED_TARGETS = new Set(['battle/battle.runtime.js', 'core/sdt-facade.js']);
+const PROTECTED_TARGETS = new Set([...RUNTIME_SURFACE, 'core/sdt-facade.js']);
 
 // 防再发自检：返回在真实源码树中零命中的判据键；非空即守卫腐化，守卫测试必须红。
 export function deadGuardKeys(sources) {
@@ -111,13 +121,13 @@ export function architectureViolations(graph) {
   const violations = [];
   for (const [name, module] of graph) {
     for (const { target, line } of module.dependencies) {
-      if (target === 'battle/battle.runtime.js' && !RUNTIME_OWNERS.has(name)) {
-        violations.push(`${name}:${line}: 战斗运行时仅允许 battle.core/battle.engine/battle.enemy-phase 访问`);
+      if (RUNTIME_SURFACE.has(target) && !RUNTIME_OWNERS.has(name) && !RUNTIME_SURFACE.has(name)) {
+        violations.push(`${name}:${line}: 战斗运行时仅允许 battle.core 与状态属地模块（engine/enemy-phase/selection-flow/equipment/bag/lifecycle）访问`);
       }
       if (VIEW_MODULES.has(name) && RUNTIME_INNER.has(target)) {
         violations.push(`${name}:${line}: 视图须通过 core 命令与快照访问战斗`);
       }
-      if (PURE_MODULES.has(name) && (RUNTIME_OWNERS.has(target) || target === 'battle/battle.runtime.js' || VIEW_MODULES.has(target)
+      if (PURE_MODULES.has(name) && (RUNTIME_OWNERS.has(target) || RUNTIME_SURFACE.has(target) || VIEW_MODULES.has(target)
         || target === 'core/sdt-facade.js' || FLOW_PREFIXES.some(prefix => target.startsWith(prefix)))) {
         violations.push(`${name}:${line}: 独立规则/快照模块不能反向依赖 ${target}`);
       }
