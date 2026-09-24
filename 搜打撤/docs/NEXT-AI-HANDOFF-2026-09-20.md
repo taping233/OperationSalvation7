@@ -312,3 +312,9 @@ Git 状态：`master` 领先 `origin/master` **8 个提交未推送**（最新 2
 - 本段随战斗代码提交；提交前 HEAD `b1de402`，相对本地 `origin/master` ahead 0 / behind 0。提交标识以本段所属提交的实时 `git log -1` 为准；提交后预计 ahead 1 / behind 0，未联网刷新远端，未推送。
 - 本批只收编 `game/src/battle/` 下 15 个战斗文件、`game/css/battle.css`、`game/src/audio/sound.js` 与 `sound.policy.js`、`game/css/winter.css` 中死亡演出的单个 hunk、开发战斗入口 `game/src/hub/game.notes.js`、`tests/battle-presentation.test.js` 和两份战斗文档。完整清单以本提交 `git show --stat` 为准。`winter.css` 的照相馆 hunk 及其他页面、卡库、截图现场保留未提交。
 - 继上一节的分拍页面验证后，代码又接入可取消的逐击生成器和反馈等待，覆盖卡牌、部分衍生伤害、敌方逐击行动及目标交互收尾。具体完成范围和同步例外见 `docs/sts2-combat-delta-2026-09-24.md` 的“后续代码进展”。本批后续修改依老板要求未运行测试、构建或浏览器走查；上一节的 11 文件 / 63 项及页面采样只是早期快照，不作为新增代码验收。
+
+## 当前状态补充：剩余界面改动与走查截图收编（2026-09-24 11:34 +08:00）
+
+- 老板指示将上一轮盘点的剩余工作区内容全部提交。本段随该提交入库；提交前 HEAD `2dc7f3c`，相对本地 `origin/master` ahead 1 / behind 0；提交标识以本段所属提交的实时 `git log -1` 为准，提交后预计 ahead 2 / behind 0，未联网刷新远端，未推送。
+- 收编 `game/css/winter.css` 的照相馆相框样式、`game/index.html` 的已跟踪 `lab-ending.css` 引用、`game/src/game.boot.js` 与 `game/src/hub/game.cardslib.js` 的少量代码整理，以及 `game/.sdt-shots-upgrade/` 的 9 张走查截图。提交前暂存区为空，工作区除这些路径外无其他改动；提交后以实时 `git status --short` 复核。
+- 本批依老板此前指示未运行测试、构建或新的页面验收。截图是已有走查产物，不代表此次代码已有新的实机验收。

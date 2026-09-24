@@ -3,7 +3,7 @@ const UI = window.SDT.UI;
 const SDT = window.SDT;
 import { TYPE_NAME } from './hub/game.notes.js';
 import { MAP } from './run/game.session.js';
-import { SLOT_COUNT, buildDerived, cam, canvas, configureGameRuntime, ctx, dpr, game, hasRun, migrateOldSave, openLeaveMenu, openSettings, openTitleGuide, quitGame, saveGame, setLobby, showTitle, startNewGame, _set_dpr, _set_cam } from './run/game.session.js';
+import { SLOT_COUNT, buildDerived, cam, canvas, configureGameRuntime, ctx, dpr, game, hasRun, migrateOldSave, openLeaveMenu, openSettings, openTitleGuide, saveGame, setLobby, showTitle, startNewGame, _set_dpr, _set_cam } from './run/game.session.js';
 import { bindRunMixins, devForceBattle, devJumpNode, moveTo, openDevConsole, reenterCell, openClassChoice, openShop, showRunTransition } from './run/game.run.js';
 import { PRELOAD_SCENES } from './run/game.run.data.js';
 import { resumeExtraction } from './run/game.run.altar.js';
@@ -212,7 +212,7 @@ import { renderMiniMap } from './run/game.session.js';
     document.querySelectorAll('#resHud .chip-mini[data-tip]').forEach(chip => {
       const show = (e) => {
         const r = vpEl.getBoundingClientRect();
-        const coins = chip.querySelector('#charCoins'), atk = chip.querySelector('#charAtk');
+        const coins = chip.querySelector('#charCoins');
         const line = coins ? `当前 <b>${game.coins}</b> 币` : `当前 <b>${game.atk}</b> 点 · 攻击伤害 = 卡面值 + 攻击力`;
         UI.showTooltip(e.clientX - r.left, e.clientY - r.top, chip.dataset.tip, [line]);
       };
@@ -564,7 +564,7 @@ import { renderMiniMap } from './run/game.session.js';
         try {
           if (a.effect && a.effect.getTiming && a.effect.getTiming().iterations === Infinity) return;   // 雪花等循环动画不碰
           a.finish();
-        } catch (e) { /* 已被移除/尚未开始的动画 finish 会抛，忽略 */ }
+        } catch { /* 已被移除/尚未开始的动画 finish 会抛，忽略 */ }
       });
     });
   });
@@ -690,7 +690,7 @@ import { renderMiniMap } from './run/game.session.js';
         setTimeout(() => { warmupTip.hidden = true; }, 600);
       }, 350)).catch(error => console.warn('[warmup] 首屏资源预取未完成', error));
     } else {
-      try { SDT.Art.prefetchBatched(urls, null, 4).catch(error => console.warn('[warmup] 首屏资源预取未完成', error)); } catch (_) {}
+      try { SDT.Art.prefetchBatched(urls, null, 4).catch(error => console.warn('[warmup] 首屏资源预取未完成', error)); } catch { /* 预取降级失败：不阻塞启动 */ }
     }
     requestLoopFrame();
   });

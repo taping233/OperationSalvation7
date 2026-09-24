@@ -1699,15 +1699,18 @@ body.cardlib-open #overlay.closing{animation:ovFadeOut .2s ease forwards!importa
 #overlay .sugin-page .sugin-exit:hover{border-color:#7fc8a9;background:#383d3ff2;color:#fff}
 #overlay .sugin-page .pg-head{padding-left:98px}
 
-/* #5 照相馆特写「照片被边框压住」：框图案改由 ::after 覆盖层绘制（绘制层级高于子内容），
-   照片四边外扩 45% 框宽伸入框内沿之下——还原真实相框「框条压住照片」的装裱关系。
-   选择器多挂一层 .cz-photo-main 压过 photo-studio-mounts.css 的原规则（后加载） */
+/* #5 照相馆特写「框压照片」装裱（09-24 老板澄清=要框压照片，此前未生效）：
+   09-23 版把框从 paper 的 border 挪到 ::after 覆盖层时 inset 写成 -mount-border（画到纸外 48px 悬空圈），
+   照片还缩在 53px padding 内——框与照片隔着整条纸边永不接触，「框压照片」从未生效。
+   修=::after inset 归 0（框环带画回 paper 边缘内侧 48px，即原 border 位置）；
+   照片负 margin 外推 21.6px 后其边缘落在纸内 31.4px，被框内缘压住 16.6px 一圈。
+   照片 z1 < 框 z3 =框压照片（老板要的拟真相框关系）。选择器多挂 .cz-photo-main 压过 photo-studio-mounts.css 原规则（后加载） */
 body.cardlib-open #cardZoom.cz-photo .cz-photo-main .cz-photo-paper[data-photo-mount]{
   border:none!important;
   padding:var(--mount-space)!important;
 }
 body.cardlib-open #cardZoom.cz-photo .cz-photo-main .cz-photo-paper[data-photo-mount]::after{
-  content:'';position:absolute;inset:calc(-1 * var(--mount-border));z-index:3;pointer-events:none;
+  content:'';position:absolute;inset:0;z-index:3;pointer-events:none;
   border:var(--mount-border) solid transparent;
   border-image:var(--mount-art) var(--mount-slice) stretch;
 }
