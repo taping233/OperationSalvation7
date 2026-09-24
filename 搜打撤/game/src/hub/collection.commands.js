@@ -3,16 +3,8 @@ import { characterFor } from '../core/characters.js';
 import { commitBase, readBase, readBaseReceipt } from './base.commands.js';
 import { addXpToProgress, collectionXpFor, LEVEL_MAX, perkText, xpForNext } from './meta.js';
 import { SKIN_FULL_ART, setActiveSkin } from '../core/art.js';
+import { clone, fail, freezeDeep } from './commands.shared.js';
 
-const clone = value => JSON.parse(JSON.stringify(value));
-function freezeDeep(value) {
-  if (!value || typeof value !== 'object' || Object.isFrozen(value)) return value;
-  Object.values(value).forEach(freezeDeep);
-  return Object.freeze(value);
-}
-const fail = (code, message, retryable = false, details) => ({
-  ok: false, code, message, retryable, ...(details ? { details } : {}),
-});
 const catalogCards = catalog => {
   if (Array.isArray(catalog)) return catalog;
   if (catalog && typeof catalog.all === 'function') return catalog.all() || [];

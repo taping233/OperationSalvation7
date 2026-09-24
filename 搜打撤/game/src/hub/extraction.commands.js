@@ -1,4 +1,4 @@
-const fail = (code, message, retryable = false) => ({ ok: false, code, message, retryable });
+import { clone, fail } from './commands.shared.js';
 
 function validStack(stack) {
   return !!stack && typeof stack === 'object' && !Array.isArray(stack) &&
@@ -31,7 +31,6 @@ export function validatePendingExtraction(pending) {
   return { ok: true };
 }
 
-const clone = value => JSON.parse(JSON.stringify(value));
 const stackInto = (list, stack) => {
   if (!stack || !stack.card || !stack.count) return;
   const found = list.find(item => item.card.name === stack.card.name);

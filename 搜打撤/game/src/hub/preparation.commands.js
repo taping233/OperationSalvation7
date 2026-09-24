@@ -1,8 +1,6 @@
 import { readBase, readBaseReceipt, commitBase } from './base.commands.js';
+import { clone, fail, freezeDeep } from './commands.shared.js';
 
-const clone = value => JSON.parse(JSON.stringify(value));
-const freeze = value => { if (!value || typeof value !== 'object' || Object.isFrozen(value)) return value; Object.values(value).forEach(freeze); return Object.freeze(value); };
-const fail = (code, message, retryable = false, details) => ({ ok: false, code, message, retryable, ...(details ? { details } : {}) });
 const PRESET_IDS = Object.freeze(['preset-1', 'preset-2']);
 const DEFAULT_PRESETS = Object.freeze({
   'preset-1': Object.freeze({ id: 'preset-1', name: '猛攻', characterId: null, petId: null, picks: Object.freeze([]) }),
@@ -41,12 +39,12 @@ function normalizedPresets(base) {
   return PRESET_IDS.map(id => {
     const candidate = saved[id] || DEFAULT_PRESETS[id];
     const picks = normalizePicks(candidate.picks) || [];
-    return freeze({ id, name: String(candidate.name || DEFAULT_PRESETS[id].name).slice(0, 24), characterId: candidate.characterId || null, petId: candidate.petId || null, picks });
+    return freezeDeep({ id, name: String(candidate.name || DEFAULT_PRESETS[id].name).slice(0, 24), characterId: candidate.characterId || null, petId: candidate.petId || null, picks });
   });
 }
 
 export function getPreparation(baseSnapshot) {
-  return freeze({ tracked: normalizedGoals(baseSnapshot), presets: normalizedPresets(baseSnapshot) });
+  return freezeDeep({ tracked: normalizedGoals(baseSnapshot), presets: normalizedPresets(baseSnapshot) });
 }
 
 function catalogMap(cardCatalog = []) { return new Map(cardCatalog.filter(Boolean).map(card => [card.id, card])); }
@@ -60,7 +58,7 @@ function stashCount(baseSnapshot, ref) {
 
 export function previewDeployment({ baseSnapshot, preset, mode = 'standard', cardCatalog = [], characters = [], pets = [], bagCapacity = Infinity } = {}) {
   const picks = normalizePicks(preset?.picks);
-  if (!baseSnapshot || !preset || !picks) return freeze({ resolvedPicks: [], missing: [], forbidden: [], costs: { stashCards: 0 }, qualification: {}, lossRuleSummary: '未生成预览', canStart: false, errors: ['INVALID_ARGUMENT'] });
+  if (!baseSnapshot || !preset || !picks) return freezeDeep({ resolvedPicks: [], missing: [], forbidden: [], costs: { stashCards: 0 }, qualification: {}, lossRuleSummary: '未生成预览', canStart: false, errors: ['INVALID_ARGUMENT'] });
   const cards = catalogMap(cardCatalog);
   const missing = [], forbidden = [], resolvedPicks = [];
   for (const pick of picks) {
@@ -84,7 +82,7 @@ export function previewDeployment({ baseSnapshot, preset, mode = 'standard', car
   const qualification = { characterId: preset.characterId || null, characterKnown, characterOwned, petId: preset.petId || null, petKnown, petOwned };
   const slotsUsed = resolvedPicks.filter(item => item.status === 'ready').length + 1;
   const capacityOk = !Number.isFinite(bagCapacity) || slotsUsed <= bagCapacity;
-  return freeze({ mode, resolvedPicks, missing, forbidden, costs: { stashCards: resolvedPicks.reduce((sum, item) => sum + item.appliedCount, 0), slotsUsed, bagCapacity }, qualification, lossRuleSummary: '只有实际带入并在对局中消耗或未成功撤回的卡牌按现有对局规则处理；本预览不扣卡。', canStart: !missing.length && !forbidden.length && characterKnown && characterOwned && petKnown && petOwned && capacityOk, errors: capacityOk ? [] : ['BAG_CAPACITY_EXCEEDED'] });
+  return freezeDeep({ mode, resolvedPicks, missing, forbidden, costs: { stashCards: resolvedPicks.reduce((sum, item) => sum + item.appliedCount, 0), slotsUsed, bagCapacity }, qualification, lossRuleSummary: '只有实际带入并在对局中消耗或未成功撤回的卡牌按现有对局规则处理；本预览不扣卡。', canStart: !missing.length && !forbidden.length && characterKnown && characterOwned && petKnown && petOwned && capacityOk, errors: capacityOk ? [] : ['BAG_CAPACITY_EXCEEDED'] });
 }
 
 export function createPreparationCommands(deps = {}) {

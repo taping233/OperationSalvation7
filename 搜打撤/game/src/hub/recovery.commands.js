@@ -1,14 +1,9 @@
 import './base.js';
 import { RUN_KEY, RunStorage, SAVE_VERSION } from './game.storage.js';
 import { createRecoverablePair } from './recoverable-pair.js';
+import { clone, fail, stable, validSlot } from './commands.shared.js';
 
 const Base = () => window.SDT.Base;
-const fail = (code, message, retryable = false, details) => ({ ok: false, code, message, retryable, ...(details ? { details } : {}) });
-const clone = value => JSON.parse(JSON.stringify(value));
-const stable = value => Array.isArray(value) ? `[${value.map(stable).join(',')}]`
-  : value && typeof value === 'object' ? `{${Object.keys(value).sort().map(k => `${JSON.stringify(k)}:${stable(value[k])}`).join(',')}}`
-    : JSON.stringify(value);
-const validSlot = slotId => Number.isInteger(slotId) && slotId >= 1 && slotId <= 5;
 
 function parseVersioned(raw, maxVersion, label) {
   if (raw === null) return { ok: true, value: null };

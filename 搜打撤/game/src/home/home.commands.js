@@ -1,13 +1,6 @@
 import { FURNITURE_CATALOG, ROOM_SPEC, furnitureById } from './home.catalog.js';
 import { readBase, readBaseReceipt, commitBase } from '../hub/base.commands.js';
-
-const clone = value => structuredClone(value);
-const frozen = value => {
-  if (!value || typeof value !== 'object' || Object.isFrozen(value)) return value;
-  Object.values(value).forEach(frozen);
-  return Object.freeze(value);
-};
-const fail = (code, message, retryable = false, details) => ({ ok: false, code, message, retryable, ...(details ? { details } : {}) });
+import { clone, fail, freezeDeep } from '../hub/commands.shared.js';
 
 function normalizeHome(snapshot) {
   const raw = snapshot?.home || {};
@@ -37,7 +30,7 @@ function cellsFor(placement, spec) {
 
 export function getHome(baseSnapshot, furnitureCatalog = FURNITURE_CATALOG) {
   const home = normalizeHome(baseSnapshot);
-  return frozen({
+  return freezeDeep({
     coins: Number(baseSnapshot?.coins) || 0,
     owned: home.owned,
     placements: home.placements,
@@ -95,7 +88,7 @@ export function validateLayout({ placements, roomSpec = ROOM_SPEC, ownedFurnitur
     const supported = placed.some(base => base.spec.supports.includes('table') && base.placement.zoneId === item.placement.zoneId && item.cells.every(cell => base.cells.some(c => c.x === cell.x && c.y === cell.y)));
     if (!supported) violations.push({ instanceId: item.placement.instanceId, code: 'MISSING_SUPPORT', cells: item.cells });
   }
-  return frozen({ valid: violations.length === 0, violations });
+  return freezeDeep({ valid: violations.length === 0, violations });
 }
 
 export function createHomeCommands({ readBase, readBaseReceipt = null, commitBase, getCollection = null, furnitureCatalog = FURNITURE_CATALOG, roomSpec = ROOM_SPEC }) {
@@ -108,14 +101,14 @@ export function createHomeCommands({ readBase, readBaseReceipt = null, commitBas
     if (!readBaseReceipt) return null;
     const result = await readBaseReceipt(context, { command, payload });
     if (!result?.ok) return result;
-    if (result.value) return result.value.output === undefined ? result : { ok: true, value: frozen(clone(result.value.output)), revision: result.revision };
+    if (result.value) return result.value.output === undefined ? result : { ok: true, value: freezeDeep(clone(result.value.output)), revision: result.revision };
     return null;
   };
   const commit = async (context, before, command, payload, afterState, eventPayload, output = null) => {
     const result = await commitBase(context, { beforeRevision: before.revision, command, payload, afterState, output, events: [{ type: 'home.changed', payload: eventPayload }] });
     if (!result?.ok) return result || fail('SAVE_FAILED', '基地存档写入失败', true);
     const revision = result.revision ?? result.value?.baseRevision ?? before.revision + 1;
-    return { ok: true, value: result.value?.output === undefined ? getHome(afterState, furnitureCatalog) : frozen(clone(result.value.output)), revision };
+    return { ok: true, value: result.value?.output === undefined ? getHome(afterState, furnitureCatalog) : freezeDeep(clone(result.value.output)), revision };
   };
 
   return Object.freeze({
@@ -137,7 +130,7 @@ export function createHomeCommands({ readBase, readBaseReceipt = null, commitBas
       if ((Number(state.coins) || 0) < costCoins) return fail('INSUFFICIENT_FUNDS', '储备币不足', false, { required: costCoins, available: Number(state.coins) || 0 });
       for (let i = 0; i < quantity; i++) ids.push(`${furnitureId}-${ids.length + 1}`);
       home.owned[furnitureId] = ids; state.coins -= costCoins; state.home = home;
-      const receipt = frozen({ furnitureId, quantity, instanceIds: ids.slice(-quantity), costCoins, coinsAfter: state.coins });
+      const receipt = freezeDeep({ furnitureId, quantity, instanceIds: ids.slice(-quantity), costCoins, coinsAfter: state.coins });
       const result = await commit(context, current, 'home.purchase', payload, state, { ...receipt }, receipt);
       return result;
     },
