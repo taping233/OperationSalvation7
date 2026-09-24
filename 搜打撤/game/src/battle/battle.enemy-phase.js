@@ -2,12 +2,12 @@
  * 逐字搬迁（flee 因被引擎侧 finish 环调随迁 engine）；状态经 battle.runtime.js；禁 import 壳。 */
 const SDT = window.SDT;
 import { esc } from '../core/shared.js';
-import { BATTLE_PHASES, cancelTargeting, transitionBattle } from './battle.state.js';
+import { BATTLE_PHASES, cancelTargeting } from './battle.state.js';
 import { Random } from '../core/random.js';
 import * as Combat from './combat.js';
 import { waitForFeedback, waitMs } from './battle.feedback.js';
 import { demoMs } from './battle.pace.js';
-import { battleState, G, foes, mode, drawPile, hand, consumed, grave, energy, maxEnergy, turn, pdef, pstat, busy, infusing, discovering, handSelecting, choosing, interaction, noDrawNext, floats, cardAnims, playedMovesThisTurn, allies, extraTurn, timeRune, holyRune, fireballRuneOn, swiftRune, timeSpaceRune, timeSpaceUsed, set$noDrawNext, set$energy, set$extraTurn, set$battleState, set$interaction, set$turn, set$busy, set$timeSpaceUsed, set$playedMartialThisTurn, set$playedMovesThisTurn, set$lastPersistAt, clearTargetHint } from './battle.runtime.js';
+import { battleState, G, foes, mode, drawPile, hand, consumed, grave, energy, maxEnergy, turn, pdef, pstat, busy, infusing, discovering, handSelecting, choosing, interaction, noDrawNext, floats, cardAnims, playedMovesThisTurn, allies, extraTurn, timeRune, holyRune, fireballRuneOn, swiftRune, timeSpaceRune, timeSpaceUsed, set$noDrawNext, set$energy, set$extraTurn, set$battleState, set$interaction, set$turn, set$busy, set$timeSpaceUsed, set$playedMartialThisTurn, set$playedMovesThisTurn, set$lastPersistAt, clearTargetHint, transitionTo } from './battle.runtime.js';
 import { processDelayed, accrueGrowth, resolveCardWithFeedback, syncCurseCondEquips, applyKillRewards, unplayableReason, queueCardExecution, foeIdx, addPlayerCurse, playerTakeHit, frenzyCurse, elCurse, requestBattleRender, R, alive, intentFor, drawCards, resolveFoeDefeat, sweepDead, nestPhase, grantSha, findCard, effCostOf, finish } from './battle.engine.js';
 
   // 敌方步进演出节拍在 vitest 环境归零（比照 battle.engine.js 的 SURGE_WAVE_MS 先例）：
@@ -46,7 +46,7 @@ import { processDelayed, accrueGrowth, resolveCardWithFeedback, syncCurseCondEqu
         return;
       }
     }
-    set$battleState(transitionBattle(battleState, BATTLE_PHASES.ENEMY));
+    transitionTo(BATTLE_PHASES.ENEMY);
     clearTargetHint();
     const enemyToken = battleState.token;
     const stillEnemyPhase = () => G?.battleActive && battleState.token === enemyToken && battleState.phase === BATTLE_PHASES.ENEMY;
@@ -56,7 +56,7 @@ import { processDelayed, accrueGrowth, resolveCardWithFeedback, syncCurseCondEqu
   function recoverAutoPhaseError(error, token, phase) {
     if (!G?.battleActive || battleState.token !== token || battleState.phase !== phase || phase === BATTLE_PHASES.VICTORY || phase === BATTLE_PHASES.DEFEAT) return;
     console.error('Battle turn auto-effect sequence failed; restoring player phase.', error);
-    if (phase === BATTLE_PHASES.ENEMY) set$battleState(transitionBattle(battleState, BATTLE_PHASES.PLAYER));
+    if (phase === BATTLE_PHASES.ENEMY) transitionTo(BATTLE_PHASES.PLAYER);
     set$busy(false);
     requestBattleRender();
   }
@@ -86,7 +86,7 @@ import { processDelayed, accrueGrowth, resolveCardWithFeedback, syncCurseCondEqu
     if (!stillPlayerPhase()) return;
     if (!alive().length) { finish(true); return; }
     G.log(`[[icon:hourglass]] <b>额外回合</b>：敌人被钉在原地，你再次行动！（第 ${turn} 回合）`, 'ok');
-    set$battleState(transitionBattle(battleState, BATTLE_PHASES.PLAYER));
+    transitionTo(BATTLE_PHASES.PLAYER);
     set$busy(false);
     requestBattleRender();
   }
@@ -399,7 +399,7 @@ import { processDelayed, accrueGrowth, resolveCardWithFeedback, syncCurseCondEqu
     if (!stillEnemyPhase()) return;
     // 敌人回合结束必须转回玩家阶段：此前 phase 卡在 enemy，
     // 视图的 data-phase="enemy" 规则（手牌下沉/禁点）会吞掉之后每个玩家回合
-    set$battleState(transitionBattle(battleState, BATTLE_PHASES.PLAYER));
+    transitionTo(BATTLE_PHASES.PLAYER);
     set$busy(false);
     if (G.persistSave && G.battleActive) { set$lastPersistAt(performance.now()); G.persistSave(); }   // 回合开始落盘（无条件，同步节流时钟）
     if (typeof SDT.Sound?.setBattlePressure === 'function') {

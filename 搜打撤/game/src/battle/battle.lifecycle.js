@@ -11,12 +11,12 @@ import { clearFeedback } from './battle.feedback.js';
 import { shuffleCards } from './battle.deck.js';
 import { BATTLE_PHASES, createBattleState, transitionBattle } from './battle.state.js';
 import {
-  battleState, G, foes, opts, mode, drawPile, hand, played, consumed, maxEnergy, turn, pstat,
+  battleState, G, foes, opts, mode, drawPile, hand, played, consumed, maxEnergy, pstat,
   busy, infusing, discovering, discoverQueue, choosing, selPool, sel, lastDeckSel,
   selectingDeck, selDeckMax, freezeRuneOn, equipped, battleRestartCheckpoint,
-  restoringRestartCheckpoint, set$activeActionSignal, set$surgeWaiter, set$G, set$opts,
-  set$mode, set$turn, set$maxEnergy, set$energy, set$hand, set$drawPile, set$pdef, set$pstat,
-  set$foes, set$allies, set$growth, set$growthNames, set$infuseFuels, set$sealUnlocked,
+  restoringRestartCheckpoint, set$G, set$opts, set$foes,
+  set$mode, set$hand, set$drawPile,
+  set$allies, set$growth, set$growthNames, set$infuseFuels, set$sealUnlocked,
   set$extraTurn, set$deathSave, set$killAtkUp, set$poisonOnSpell, set$poisonLegacy,
   set$discoverQueue, set$interaction, set$pendingHint, set$selectingDeck, set$sel, set$selPool,
   set$selShaN, set$busy, set$battleState, set$battleRestartCheckpoint,
@@ -27,6 +27,8 @@ import {
   restoreBattlePiles, restorePilesBookkeeping, resetPilesCarryover, resetCastOverrides,
   clearBattlePopups, closeBattleViews, restoreEffectState, restoreEffectRules, resetCostFlags,
   resetRuneFlags,
+  transitionTo, clearActionSignals, restoreBattleSession, restoreBattleCombatants,
+  resetBattlePlayerState,
 } from './battle.runtime.js';
 
 const shuffle = shuffleCards;
@@ -59,7 +61,7 @@ export function createBattleLifecycle({
   function restore(nextGame, data) {
     if (data && data.restartVersion === 1 && Array.isArray(data.enemyDefs) && data.opts) {
       session.reset('battle restarted from checkpoint');
-      set$activeActionSignal(null); set$surgeWaiter(null);
+      clearActionSignals();
       applyRunRestart(nextGame, data.run);
       Random.restore(data.rngState);
       set$battleRestartCheckpoint(cloneData(data));
@@ -82,29 +84,11 @@ export function createBattleLifecycle({
     if (!data.deckSelect && (!Array.isArray(data.foes) || !data.foes.length)) return false;
     if (!Array.isArray(data.foes)) data.foes = [];
     session.reset('battle restored');
-    set$activeActionSignal(null); set$surgeWaiter(null);
+    clearActionSignals();
     clearFeedback();
-    set$G(nextGame);
-    set$opts(JSON.parse(JSON.stringify(data.opts)));
-    set$mode(data.mode === 'boss' ? 'boss' : 'normal');
-    set$turn(+data.turn || 1);
-    set$maxEnergy(+data.maxEnergy || R().battleEnergy);
-    set$energy(Number.isFinite(+data.energy) ? +data.energy : maxEnergy);
+    restoreBattleSession(nextGame, data, R().battleEnergy);
     restoreBattlePiles(data);
-    set$pdef({ shield: 0, armor: 0, guard: false, ...(data.pdef || {}) });
-    set$pstat(Combat.ensureStatus({ hp: G.hp, status: { ...(data.pstat?.status || {}) } }));
-    set$foes(data.foes.map(f => {
-      const foe = {
-        id: f.id || null, name: f.name, hp: f.hp, maxHp: f.maxHp, atk: f.atk || 2,
-        affix: f.affix || null, affixName: f.affixName || null, behavior: f.behavior || null, dead: !!f.dead,
-        status: { ...(f.status || {}) },
-        defense: { shield: 0, armor: 0, guard: false, ...(f.defense || {}) },
-        intent: f.intent ? JSON.parse(JSON.stringify(f.intent)) : null,
-      };
-      Combat.ensureStatus(foe);
-      if (!foe.intent) foe.intent = intentFor(foe, turn);
-      return foe;
-    }));
+    restoreBattleCombatants(data, intentFor);
     restorePilesBookkeeping(data);
     restoreEffectState(data);
     // —— 2026-09-09 机制审计补实装：新战斗规则变量恢复 ——
@@ -141,10 +125,10 @@ export function createBattleLifecycle({
 
   function finish(win) {
     session.abort();
-    set$activeActionSignal(null); set$surgeWaiter(null);
-    if (win === true && battleState.phase !== BATTLE_PHASES.VICTORY) set$battleState(transitionBattle(battleState, BATTLE_PHASES.VICTORY));
+    clearActionSignals();
+    if (win === true && battleState.phase !== BATTLE_PHASES.VICTORY) transitionTo(BATTLE_PHASES.VICTORY);
     if (SDT.Meta && SDT.Meta.track) SDT.Meta.track('battleEquips', { n: equipped.length });
-    if (win === false && battleState.phase !== BATTLE_PHASES.DEFEAT) set$battleState(transitionBattle(battleState, BATTLE_PHASES.DEFEAT));
+    if (win === false && battleState.phase !== BATTLE_PHASES.DEFEAT) transitionTo(BATTLE_PHASES.DEFEAT);
     clearFeedback();
     set$busy(false);
     SDT.Sound.sfx(win === true ? 'victory' : win === false ? 'defeat' : 'flee');
@@ -187,7 +171,7 @@ export function createBattleLifecycle({
   // ---------- 入口 ----------
   function start(game, enemyDefs, options) {
     session.reset('battle replaced');
-    set$activeActionSignal(null); set$surgeWaiter(null);
+    clearActionSignals();
     clearFeedback();
     set$G(game);
     // 战斗开局预热本局可用卡面：手牌 img 是 lazy，手牌重建瞬间图未解码会露插画窗深底（黑窗）。
@@ -256,7 +240,7 @@ export function createBattleLifecycle({
     // 普通战无法使用能力卡（2026-09-16 老板定版）：能力卡与道具/资源/事件/生物一样不进普通战手牌
     set$hand(G.ownedCards.filter(o => !['道具', '资源', '事件', '生物', '能力卡'].includes(o.card.type) && !isBattleStartEquip(o.card)).map(o => o.uid));
     resetBattleEntryState();
-    set$battleState(transitionBattle(battleState, BATTLE_PHASES.PLAYER));
+    transitionTo(BATTLE_PHASES.PLAYER);
     G.state = 'modal';
     applyBattleStartPassives();
     // 普通战无法使用能力卡（2026-09-16 老板定版）：能力卡不进普通战手牌（对 BOSS 编组不受限）
@@ -267,11 +251,7 @@ export function createBattleLifecycle({
 
   // 两种战斗入口共用的运行态重置；牌区与模式专属开战步骤留在各自入口。
   function resetBattleEntryState() {
-    set$maxEnergy(R().battleEnergy);
-    set$energy(maxEnergy);
-    set$turn(1); set$busy(false);
-    set$pdef({ shield: 0, armor: 0, guard: false });
-    set$pstat(Combat.ensureStatus({ hp: G.hp }));
+    resetBattlePlayerState(R().battleEnergy);
     set$discoverQueue([]); clearBattlePopups(); resetBattlePresentation();
     handSelectQueue.length = 0; choiceQueue.length = 0; resetCostFlags();
     resetPilesCarryover();
@@ -334,7 +314,7 @@ export function createBattleLifecycle({
     set$drawPile(shuffle([...sel].concat(shas)));   // 骷髅王剑/混沌之眼等对战开始时装备已在 sel 内
     set$hand([]);
     resetBattleEntryState();
-    set$battleState(transitionBattle(battleState, BATTLE_PHASES.PLAYER));
+    transitionTo(BATTLE_PHASES.PLAYER);
     G.state = 'modal';
     G.log(opts.nest
       ? `[[icon:cards]] <b>牌盒即牌库</b>：${drawPile.length} 张 · 开局抽 ${R().battleStartDraw} · 每回合开始抽 ${R().battleTurnDraw} · 每回合固定 <b>${maxEnergy}</b> 费`
