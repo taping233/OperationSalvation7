@@ -39,6 +39,8 @@ import {
   set$fireballRuneOn, set$freezeRuneOn, set$swiftRune, set$timeSpaceRune, set$timeSpaceUsed,
   set$armorMul, set$freeCast, set$equipped, set$playedMartialThisTurn, set$playedMovesThisTurn,
   set$selDeckMax, set$lastDeckSel,
+  clearBattlePresentation, resetBattlePresentation, showDread, hideDread,
+  clearBattlePiles, restoreBattlePiles, restorePilesBookkeeping, resetPilesCarryover, resetCastOverrides,
 } from './battle.runtime.js';
 
 const shuffle = shuffleCards;
@@ -102,10 +104,7 @@ export function createBattleLifecycle({
     set$turn(+data.turn || 1);
     set$maxEnergy(+data.maxEnergy || R().battleEnergy);
     set$energy(Number.isFinite(+data.energy) ? +data.energy : maxEnergy);
-    set$hand([...(data.hand || [])]); set$drawPile([...(data.drawPile || [])]);
-    set$discard([...(data.discard || [])]); set$grave([...(data.grave || [])]);
-    set$played([...(data.played || [])]); set$consumed([...(data.consumed || [])]);
-    set$granted((data.granted || []).map(g => ({ uid: g.uid, card: { ...g.card } })));
+    restoreBattlePiles(data);
     set$pdef({ shield: 0, armor: 0, guard: false, ...(data.pdef || {}) });
     set$pstat(Combat.ensureStatus({ hp: G.hp, status: { ...(data.pstat?.status || {}) } }));
     set$foes(data.foes.map(f => {
@@ -120,10 +119,10 @@ export function createBattleLifecycle({
       if (!foe.intent) foe.intent = intentFor(foe, turn);
       return foe;
     }));
-    set$delayed((data.delayed || []).map(d => ({ ...d })));
-    set$noDrawNext(!!data.noDrawNext); set$spellCost1(!!data.spellCost1); set$meleeCost1(!!data.meleeCost1);
+    restorePilesBookkeeping(data);
+    set$spellCost1(!!data.spellCost1); set$meleeCost1(!!data.meleeCost1);
     set$shaTransform(data.shaTransform || null); set$consumeFireballN(+data.consumeFireballN || 0);
-    set$lastDrawnUids([...(data.lastDrawnUids || [])]); set$lastPlayedType(data.lastPlayedType || null);
+    set$lastPlayedType(data.lastPlayedType || null);
     set$stealthStrike(!!data.stealthStrike); set$nextSpellTwice(+data.nextSpellTwice || 0);
     // —— 2026-09-09 机制审计补实装：新战斗规则变量恢复 ——
     set$allies((data.allies || []).map(a => ({ ...a, status: { ...(a.status || {}) }, defense: { shield: 0, armor: 0, guard: false, ...(a.defense || {}) } })));
@@ -131,11 +130,9 @@ export function createBattleLifecycle({
     set$infuseFuels(+data.infuseFuels || 0); set$sealUnlocked(!!data.sealUnlocked);
     set$extraTurn(!!data.extraTurn); set$deathSave(+data.deathSave || 0);
     set$killAtkUp(+data.killAtkUp || 0); set$poisonOnSpell(!!data.poisonOnSpell);
-    set$zeroFeeUntil(new Map(data.zeroFeeUntil || []));
-    set$cardOverrides(new Map(data.cardOverrides || []));
     set$infusing(null); set$discovering(null); discoverQueue.length = 0;
     set$handSelecting(null); handSelectQueue.length = 0; set$choosing(null); choiceQueue.length = 0;
-    set$interaction(null); set$pendingHint(''); set$floats([]); set$cardAnims([]); set$presentationActionSeq(0);
+    set$interaction(null); set$pendingHint(''); resetBattlePresentation();
     set$viewingGrave(false); set$viewingDeck(false); set$selectingDeck(false); set$viewingBag(false);
     set$sel(new Set()); set$selPool([]); set$selShaN(0);
     set$busy(false);
@@ -147,7 +144,7 @@ export function createBattleLifecycle({
     if (data.deckSelect) {
       prepareDeckSelection();   // BOSS 战退出在编组阶段：重开编组（还没实际开打，无进度损失）
     } else {
-      set$dreadShown(true);        // BOSS 登场演出不重播
+      showDread();        // BOSS 登场演出不重播
       set$battleState(transitionBattle(createBattleState(), BATTLE_PHASES.PLAYER));
       G.log('[[icon:swords]] 战斗已恢复——接着上次的局面继续', 'sys');
       requestBattleRender();
@@ -174,16 +171,15 @@ export function createBattleLifecycle({
     SDT.Sound.sfx(win === true ? 'victory' : win === false ? 'defeat' : 'flee');
     const playedCopy = played.slice();
     const consumedCopy = consumed.slice();
-    set$played([]); set$consumed([]);
-    set$drawPile([]); set$hand([]); set$discard([]); set$granted([]); set$grave([]);
-    set$floats([]); set$cardAnims([]);
+    clearBattlePiles(); set$hand([]);
+    clearBattlePresentation();
     set$sel(new Set());
-    set$infusing(null); set$discovering(null); set$discoverQueue([]); set$interaction(null); set$floats([]); set$cardAnims([]);
+    set$infusing(null); set$discovering(null); set$discoverQueue([]); set$interaction(null); clearBattlePresentation();
     set$handSelecting(null); handSelectQueue.length = 0;
     set$choosing(null); choiceQueue.length = 0; set$stealthStrike(false); set$nextSpellTwice(0);
-    set$delayed([]); set$noDrawNext(false); set$spellCost1(false); set$meleeCost1(false);
-    set$shaTransform(null); set$consumeFireballN(0); set$lastDrawnUids([]); set$lastPlayedType(null);
-    set$viewingGrave(false); set$viewingDeck(false); set$dreadShown(false); set$selectingDeck(false); set$viewingBag(false);
+    resetPilesCarryover(); set$spellCost1(false); set$meleeCost1(false);
+    set$shaTransform(null); set$consumeFireballN(0); set$lastPlayedType(null);
+    set$viewingGrave(false); set$viewingDeck(false); hideDread(); set$selectingDeck(false); set$viewingBag(false);
     resetBattleExtras();
     G.state = 'idle';
     G.battleActive = false;
@@ -276,7 +272,7 @@ export function createBattleLifecycle({
   }
 
   function beginNormal() {
-    set$drawPile([]); set$discard([]); set$granted([]); set$played([]); set$consumed([]); set$grave([]);
+    clearBattlePiles();
     // 道具/资源/事件/生物卡默认不进手牌（v0.32：手牌只放可直接打出的战斗卡）；
     // 「对战开始时」装备（Q1 老板定向：持有即自动生效）不进手牌、改为开战被动
     // 普通战无法使用能力卡（2026-09-16 老板定版）：能力卡与道具/资源/事件/生物一样不进普通战手牌
@@ -298,10 +294,10 @@ export function createBattleLifecycle({
     set$turn(1); set$busy(false);
     set$pdef({ shield: 0, armor: 0, guard: false });
     set$pstat(Combat.ensureStatus({ hp: G.hp }));
-    set$infusing(null); set$discovering(null); set$discoverQueue([]); set$handSelecting(null); handSelectQueue.length = 0; set$interaction(null); set$floats([]); set$cardAnims([]); set$presentationActionSeq(0);
+    set$infusing(null); set$discovering(null); set$discoverQueue([]); set$handSelecting(null); handSelectQueue.length = 0; set$interaction(null); resetBattlePresentation();
     set$choosing(null); choiceQueue.length = 0; set$stealthStrike(false); set$nextSpellTwice(0);
-    set$delayed([]); set$noDrawNext(false); set$spellCost1(false); set$meleeCost1(false);
-    set$shaTransform(null); set$consumeFireballN(0); set$lastDrawnUids([]); set$lastPlayedType(null);
+    resetPilesCarryover(); set$spellCost1(false); set$meleeCost1(false);
+    set$shaTransform(null); set$consumeFireballN(0); set$lastPlayedType(null);
     set$viewingGrave(false); set$viewingDeck(false); set$selectingDeck(false); set$viewingBag(false);
     resetBattleExtras();
     set$pendingHint('');
@@ -311,7 +307,7 @@ export function createBattleLifecycle({
   function resetBattleExtras() {
     set$allies([]); set$growthNames(new Set()); set$growth({});
     set$infuseFuels(0); set$sealUnlocked(false); set$extraTurn(false); set$deathSave(0);
-    set$killAtkUp(0); set$poisonOnSpell(false); set$poisonLegacy(false); set$zeroFeeUntil(new Map()); set$cardOverrides(new Map());
+    set$killAtkUp(0); set$poisonOnSpell(false); set$poisonLegacy(false); resetCastOverrides();
     set$sealDone(false); set$playerCurseImmune(false); set$allSpellsInfused(false);
     set$nestRunes([]); set$nestSyn({}); set$timeRune(false); set$arrowRune(false); set$unyieldRune(false);
     set$ashRune(false); set$unlimitedRune(false); set$holyRune(false); set$fireballRuneOn(false); set$freezeRuneOn(false);
@@ -359,8 +355,9 @@ export function createBattleLifecycle({
     set$lastDeckSel([...sel]);
     if (battleRestartCheckpoint) battleRestartCheckpoint.selectedDeck = [...sel];
     set$selectingDeck(false);
+    clearBattlePiles();
     set$drawPile(shuffle([...sel].concat(shas)));   // 骷髅王剑/混沌之眼等对战开始时装备已在 sel 内
-    set$hand([]); set$discard([]); set$granted([]); set$played([]); set$consumed([]); set$grave([]);
+    set$hand([]);
     resetBattleEntryState();
     set$battleState(transitionBattle(battleState, BATTLE_PHASES.PLAYER));
     G.state = 'modal';

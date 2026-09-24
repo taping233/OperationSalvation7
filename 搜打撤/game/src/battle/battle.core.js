@@ -4,7 +4,7 @@ import { refillDrawPile } from './battle.deck.js';
 import { COMBAT_HOOKS } from './combat.js';
 import { BATTLE_PHASES } from './battle.state.js';
 import * as Combat from './combat.js';
-import { battleState, G, foes, opts, mode, hand, energy, maxEnergy, pstat, busy, infusing, discovering, choosing, stealthStrike, nextSpellTwice, viewingGrave, viewingDeck, floats, cardAnims, shaTransform, growth, nestSyn, arrowRune, allSpellsInfused, freeCast, battleRestartCheckpoint, set$renderBattle, set$energy, set$interaction, set$floats, set$cardAnims, set$viewingGrave, set$viewingDeck, set$dreadShown, set$pendingHint } from './battle.runtime.js';
+import { battleState, G, foes, opts, mode, hand, energy, maxEnergy, pstat, busy, infusing, discovering, choosing, stealthStrike, nextSpellTwice, viewingGrave, viewingDeck, floats, cardAnims, shaTransform, growth, nestSyn, arrowRune, allSpellsInfused, freeCast, battleRestartCheckpoint, set$renderBattle, set$energy, set$interaction, set$floats, set$cardAnims, set$viewingGrave, set$viewingDeck, set$dreadShown, set$pendingHint, bindBattleRenderer, showDread, takeBattleFloats, takeBattleCardAnims } from './battle.runtime.js';
 import { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, drawCards, sweepDead, findCard, infuseOf, effCostOf, restore, finish, cancelInteraction, flee, handCurseSpecs, getSnapshot, useEquipSkill, start, toggleDeckCard, cancelDeckSelection, beginBoss, targetSide, unplayableReason, play, toggleInfusePick, cancelInfuse, beginInfuse, confirmInfuse, aegisBlocked, hitFoe, matchHandSelectKey, skipHandSelect, pickHandSelect, useItem, bagSlam, resolveDart, resolveSlam, usePotion, openBag, closeBag, pickChoice, pickDiscover } from './battle.engine.js';
 import { endTurn, surrender } from './battle.enemy-phase.js';
 /* battle.core.js —— 战斗逻辑：牌库/出牌结算/词条时点/回合流转（渲染由注入的视图完成） */
@@ -23,7 +23,7 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
   
   
   function configureBattleRenderer(renderer) {
-    set$renderBattle(typeof renderer === 'function' ? renderer : () => {});
+    bindBattleRenderer(typeof renderer === 'function' ? renderer : () => {});
   }
   
 
@@ -312,9 +312,9 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
   
   function setPendingHint(value) { set$pendingHint(String(value || '')); requestBattleRender(); }
   function lockPendingTarget(value) { set$interaction(value ? { kind: 'card', uid: value.uid, card: value.card, hint: '' } : null); set$pendingHint(''); requestBattleRender(); }
-  function markDreadShown() { set$dreadShown(true); }
-  function takeFloats() { const list = floats; set$floats([]); return list; }
-  function takeCardAnims() { const list = cardAnims; set$cardAnims([]); return list; }
+  function markDreadShown() { showDread(); }
+  function takeFloats() { return takeBattleFloats(); }
+  function takeCardAnims() { return takeBattleCardAnims(); }
 
   // —— 开发者控制台（2026-09-19 留言 #22：战斗中 Ctrl+L 弹出）——
   // 调试能力统一入口：只有 openDevConsole 的按钮会调用，不进任何常规交互链路

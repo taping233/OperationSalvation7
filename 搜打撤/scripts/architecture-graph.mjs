@@ -17,6 +17,7 @@ const RUNTIME_SURFACE = new Set([
 const RUNTIME_INNER = new Set([
   'battle/battle.engine.js', 'battle/battle.enemy-phase.js', 'battle/battle.selection-flow.js',
   'battle/battle.equipment.js', 'battle/battle.bag.js', 'battle/battle.lifecycle.js',
+  'battle/battle.exec-play.js',
 ]);
 const RUNTIME_OWNERS = new Set(['battle/battle.core.js', ...RUNTIME_INNER]);
 const PURE_MODULES = new Set([
@@ -122,7 +123,7 @@ export function architectureViolations(graph) {
   for (const [name, module] of graph) {
     for (const { target, line } of module.dependencies) {
       if (RUNTIME_SURFACE.has(target) && !RUNTIME_OWNERS.has(name) && !RUNTIME_SURFACE.has(name)) {
-        violations.push(`${name}:${line}: 战斗运行时仅允许 battle.core 与状态属地模块（engine/enemy-phase/selection-flow/equipment/bag/lifecycle）访问`);
+        violations.push(`${name}:${line}: 战斗运行时仅允许 battle.core 与状态属地模块（engine/enemy-phase/selection-flow/equipment/bag/lifecycle/exec-play）访问`);
       }
       if (VIEW_MODULES.has(name) && RUNTIME_INNER.has(target)) {
         violations.push(`${name}:${line}: 视图须通过 core 命令与快照访问战斗`);

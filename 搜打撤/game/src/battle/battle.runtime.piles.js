@@ -24,3 +24,31 @@ export function set$zeroFeeUntil(v) { zeroFeeUntil = v; }
 export function set$cardOverrides(v) { cardOverrides = v; }
 export function set$equipped(v) { equipped = v; }
 export function set$freeCast(v) { freeCast = v; }
+
+/* —— 域内聚合接口（2026-09-24 状态袋打薄试点）：散 set$Xxx 调用收敛到本域。
+ * 同一域内多变量的整组重置/还原合并为一次调用；赋值顺序在域内保持原调用点的相对次序。 */
+export function clearBattlePiles() {
+  drawPile = []; discard = []; granted = []; played = []; consumed = []; grave = [];
+}
+export function restoreBattlePiles(data) {
+  hand = [...(data.hand || [])];
+  drawPile = [...(data.drawPile || [])];
+  discard = [...(data.discard || [])];
+  grave = [...(data.grave || [])];
+  played = [...(data.played || [])];
+  consumed = [...(data.consumed || [])];
+  granted = (data.granted || []).map(g => ({ uid: g.uid, card: { ...g.card } }));
+}
+export function restorePilesBookkeeping(data) {
+  delayed = (data.delayed || []).map(d => ({ ...d }));
+  noDrawNext = !!data.noDrawNext;
+  lastDrawnUids = [...(data.lastDrawnUids || [])];
+  zeroFeeUntil = new Map(data.zeroFeeUntil || []);
+  cardOverrides = new Map(data.cardOverrides || []);
+}
+export function resetPilesCarryover() {
+  delayed = []; noDrawNext = false; lastDrawnUids = [];
+}
+export function resetCastOverrides() {
+  zeroFeeUntil = new Map(); cardOverrides = new Map();
+}
