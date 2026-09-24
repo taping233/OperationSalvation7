@@ -25,3 +25,15 @@ export function set$sel(v) { sel = v; }
 export function set$lastDeckSel(v) { lastDeckSel = v; }
 export function set$selectingDeck(v) { selectingDeck = v; }
 export function set$selDeckMax(v) { selDeckMax = v; }
+
+/* —— 域内聚合接口（2026-09-25 状态袋打薄第 2 批）：散 set$Xxx 调用收敛到本域 ——
+ * 只聚「整组重置/成对清理」点；弹层状态机推进（selection-flow 等）与单点开关保持散调。 */
+export function clearBattlePopups() {
+  infusing = null; discovering = null; handSelecting = null; choosing = null; interaction = null;
+}
+export function closeBattleViews() {
+  viewingGrave = false; viewingDeck = false; viewingBag = false; selectingDeck = false;
+}
+export function clearTargetHint() {
+  interaction = null; pendingHint = '';
+}

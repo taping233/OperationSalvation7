@@ -16,20 +16,17 @@ import {
   selectingDeck, selDeckMax, freezeRuneOn, equipped, battleRestartCheckpoint,
   restoringRestartCheckpoint, set$activeActionSignal, set$surgeWaiter, set$G, set$opts,
   set$mode, set$turn, set$maxEnergy, set$energy, set$hand, set$drawPile, set$pdef, set$pstat,
-  set$foes, set$spellCost1, set$meleeCost1, set$shaTransform, set$consumeFireballN,
-  set$lastPlayedType, set$stealthStrike, set$nextSpellTwice, set$allies, set$growth,
-  set$growthNames, set$infuseFuels, set$sealUnlocked, set$extraTurn, set$deathSave,
-  set$killAtkUp, set$poisonOnSpell, set$poisonLegacy, set$infusing, set$discovering,
-  set$discoverQueue, set$handSelecting, set$choosing, set$interaction, set$pendingHint,
-  set$viewingGrave, set$viewingDeck, set$selectingDeck, set$viewingBag, set$sel, set$selPool,
+  set$foes, set$allies, set$growth, set$growthNames, set$infuseFuels, set$sealUnlocked,
+  set$extraTurn, set$deathSave, set$killAtkUp, set$poisonOnSpell, set$poisonLegacy,
+  set$discoverQueue, set$interaction, set$pendingHint, set$selectingDeck, set$sel, set$selPool,
   set$selShaN, set$busy, set$battleState, set$battleRestartCheckpoint,
   set$restoringRestartCheckpoint, set$sealDone, set$playerCurseImmune, set$allSpellsInfused,
-  set$nestRunes, set$nestSyn, set$timeRune, set$arrowRune, set$unyieldRune, set$ashRune,
-  set$unlimitedRune, set$holyRune, set$fireballRuneOn, set$freezeRuneOn, set$swiftRune,
-  set$timeSpaceRune, set$timeSpaceUsed, set$armorMul, set$freeCast, set$equipped,
-  set$playedMartialThisTurn, set$playedMovesThisTurn, set$selDeckMax, set$lastDeckSel,
+  set$freeCast, set$equipped, set$playedMartialThisTurn, set$playedMovesThisTurn,
+  set$selDeckMax, set$lastDeckSel,
   clearBattlePresentation, resetBattlePresentation, showDread, hideDread, clearBattlePiles,
   restoreBattlePiles, restorePilesBookkeeping, resetPilesCarryover, resetCastOverrides,
+  clearBattlePopups, closeBattleViews, restoreEffectState, restoreEffectRules, resetCostFlags,
+  resetRuneFlags,
 } from './battle.runtime.js';
 
 const shuffle = shuffleCards;
@@ -109,20 +106,13 @@ export function createBattleLifecycle({
       return foe;
     }));
     restorePilesBookkeeping(data);
-    set$spellCost1(!!data.spellCost1); set$meleeCost1(!!data.meleeCost1);
-    set$shaTransform(data.shaTransform || null); set$consumeFireballN(+data.consumeFireballN || 0);
-    set$lastPlayedType(data.lastPlayedType || null);
-    set$stealthStrike(!!data.stealthStrike); set$nextSpellTwice(+data.nextSpellTwice || 0);
+    restoreEffectState(data);
     // —— 2026-09-09 机制审计补实装：新战斗规则变量恢复 ——
     set$allies((data.allies || []).map(a => ({ ...a, status: { ...(a.status || {}) }, defense: { shield: 0, armor: 0, guard: false, ...(a.defense || {}) } })));
-    set$growth({ ...(data.growth || {}) }); set$growthNames(new Set(data.growthNames || []));
-    set$infuseFuels(+data.infuseFuels || 0); set$sealUnlocked(!!data.sealUnlocked);
-    set$extraTurn(!!data.extraTurn); set$deathSave(+data.deathSave || 0);
-    set$killAtkUp(+data.killAtkUp || 0); set$poisonOnSpell(!!data.poisonOnSpell);
-    set$infusing(null); set$discovering(null); discoverQueue.length = 0;
-    set$handSelecting(null); handSelectQueue.length = 0; set$choosing(null); choiceQueue.length = 0;
-    set$interaction(null); set$pendingHint(''); resetBattlePresentation();
-    set$viewingGrave(false); set$viewingDeck(false); set$selectingDeck(false); set$viewingBag(false);
+    restoreEffectRules(data);
+    discoverQueue.length = 0;
+    clearBattlePopups(); set$pendingHint(''); resetBattlePresentation();
+    closeBattleViews();
     set$sel(new Set()); set$selPool([]); set$selShaN(0);
     set$busy(false);
     G.battleActive = true;
@@ -163,12 +153,11 @@ export function createBattleLifecycle({
     clearBattlePiles(); set$hand([]);
     clearBattlePresentation();
     set$sel(new Set());
-    set$infusing(null); set$discovering(null); set$discoverQueue([]); set$interaction(null); clearBattlePresentation();
-    set$handSelecting(null); handSelectQueue.length = 0;
-    set$choosing(null); choiceQueue.length = 0; set$stealthStrike(false); set$nextSpellTwice(0);
-    resetPilesCarryover(); set$spellCost1(false); set$meleeCost1(false);
-    set$shaTransform(null); set$consumeFireballN(0); set$lastPlayedType(null);
-    set$viewingGrave(false); set$viewingDeck(false); hideDread(); set$selectingDeck(false); set$viewingBag(false);
+    set$discoverQueue([]); clearBattlePopups(); clearBattlePresentation();
+    handSelectQueue.length = 0;
+    choiceQueue.length = 0; resetCostFlags();
+    resetPilesCarryover();
+    closeBattleViews(); hideDread();
     resetBattleExtras();
     G.state = 'idle';
     G.battleActive = false;
@@ -283,11 +272,10 @@ export function createBattleLifecycle({
     set$turn(1); set$busy(false);
     set$pdef({ shield: 0, armor: 0, guard: false });
     set$pstat(Combat.ensureStatus({ hp: G.hp }));
-    set$infusing(null); set$discovering(null); set$discoverQueue([]); set$handSelecting(null); handSelectQueue.length = 0; set$interaction(null); resetBattlePresentation();
-    set$choosing(null); choiceQueue.length = 0; set$stealthStrike(false); set$nextSpellTwice(0);
-    resetPilesCarryover(); set$spellCost1(false); set$meleeCost1(false);
-    set$shaTransform(null); set$consumeFireballN(0); set$lastPlayedType(null);
-    set$viewingGrave(false); set$viewingDeck(false); set$selectingDeck(false); set$viewingBag(false);
+    set$discoverQueue([]); clearBattlePopups(); resetBattlePresentation();
+    handSelectQueue.length = 0; choiceQueue.length = 0; resetCostFlags();
+    resetPilesCarryover();
+    closeBattleViews();
     resetBattleExtras();
     set$pendingHint('');
   }
@@ -298,9 +286,7 @@ export function createBattleLifecycle({
     set$infuseFuels(0); set$sealUnlocked(false); set$extraTurn(false); set$deathSave(0);
     set$killAtkUp(0); set$poisonOnSpell(false); set$poisonLegacy(false); resetCastOverrides();
     set$sealDone(false); set$playerCurseImmune(false); set$allSpellsInfused(false);
-    set$nestRunes([]); set$nestSyn({}); set$timeRune(false); set$arrowRune(false); set$unyieldRune(false);
-    set$ashRune(false); set$unlimitedRune(false); set$holyRune(false); set$fireballRuneOn(false); set$freezeRuneOn(false);
-    set$swiftRune(false); set$timeSpaceRune(false); set$timeSpaceUsed(false); set$armorMul(1);
+    resetRuneFlags();
     set$interaction(null);
     set$freeCast(new Set());
     set$equipped([]);

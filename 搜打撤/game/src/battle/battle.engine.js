@@ -18,9 +18,9 @@ import {
   set$consumeFireballN, set$deathSave, set$hand, set$extraTurn, set$delayed, set$meleeCost1,
   set$spellCost1, set$surgeWaiter, set$sealUnlocked, set$discovering, set$battleState,
   set$interaction, set$busy, set$infusing, set$sealDone, set$playerCurseImmune, set$nestRunes,
-  set$nestSyn, set$timeRune, set$arrowRune, set$unyieldRune, set$ashRune, set$unlimitedRune,
-  set$holyRune, set$fireballRuneOn, set$swiftRune, set$timeSpaceRune, set$armorMul,
+  set$nestSyn,
   set$pendingHint, set$lastPersistAt, set$activeActionSignal, storeBattleSnapshot,
+  clearTargetHint, applyRuneFlag,
 } from './battle.runtime.js';
 import { esc } from '../core/shared.js';
 import { createEffectExecutor, splitEffectClauses, consumeTriggerTexts } from './battle.effects.js';
@@ -522,9 +522,8 @@ function getSnapshot() {
 function clearTargetSession(preserveCardUid = null) {
     if (!interaction && battleState.phase !== BATTLE_PHASES.TARGETING) return false;
     const i = interaction;
-    set$interaction(null);
+    clearTargetHint();   // 清卡牌槽位与暂存提示（成对清理聚合；freeCast 簿记不读二者，次序独立）
     if (i && i.kind === 'card' && i.uid !== preserveCardUid && freeCast.has(i.uid)) freeCast.delete(i.uid);
-    set$pendingHint('');
     if (battleState.phase === BATTLE_PHASES.TARGETING) set$battleState(cancelTargeting(battleState));
     return true;
   }
@@ -1336,16 +1335,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     nestRunes.forEach(r => {
       if (r.kind === 'attack') Combat.addBlessing(pstat, 'atkUp', 1);
       if (r.kind === 'mana') Combat.addBlessing(pstat, 'spellUp', 1);
-      if (r.kind === 'time') set$timeRune(true);
-      if (r.kind === 'arrow') set$arrowRune(true);
-      if (r.kind === 'unyield') set$unyieldRune(true);
-      if (r.kind === 'ash') set$ashRune(true);
-      if (r.kind === 'infinite') set$unlimitedRune(true);
-      if (r.kind === 'holy') set$holyRune(true);
-      if (r.kind === 'shield') set$armorMul(2);
-      if (r.kind === 'swift') set$swiftRune(true);
-      if (r.kind === 'fireball') set$fireballRuneOn(true);
-      if (r.kind === 'spacetime') set$timeSpaceRune(true);
+      applyRuneFlag(r.kind);   // 符文规则旗：time/arrow/unyield/ash/infinite/holy/shield/swift/fireball/spacetime
       if (r.kind === 'bleed') foes.forEach(f => { if (!f.dead) Combat.addCurse(f, 'bleed', 1); });
       if (r.kind === 'poison') delayed.push({ text: '对所有敌人附加 1 层中毒', cardName: '中毒符文', repeat: true });
     });

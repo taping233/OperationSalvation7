@@ -7,7 +7,7 @@ import { Random } from '../core/random.js';
 import * as Combat from './combat.js';
 import { waitForFeedback, waitMs } from './battle.feedback.js';
 import { demoMs } from './battle.pace.js';
-import { battleState, G, foes, mode, drawPile, hand, consumed, grave, energy, maxEnergy, turn, pdef, pstat, busy, infusing, discovering, handSelecting, choosing, interaction, noDrawNext, floats, cardAnims, playedMovesThisTurn, allies, extraTurn, timeRune, holyRune, fireballRuneOn, swiftRune, timeSpaceRune, timeSpaceUsed, set$noDrawNext, set$energy, set$extraTurn, set$battleState, set$interaction, set$turn, set$busy, set$timeSpaceUsed, set$playedMartialThisTurn, set$playedMovesThisTurn, set$pendingHint, set$lastPersistAt } from './battle.runtime.js';
+import { battleState, G, foes, mode, drawPile, hand, consumed, grave, energy, maxEnergy, turn, pdef, pstat, busy, infusing, discovering, handSelecting, choosing, interaction, noDrawNext, floats, cardAnims, playedMovesThisTurn, allies, extraTurn, timeRune, holyRune, fireballRuneOn, swiftRune, timeSpaceRune, timeSpaceUsed, set$noDrawNext, set$energy, set$extraTurn, set$battleState, set$interaction, set$turn, set$busy, set$timeSpaceUsed, set$playedMartialThisTurn, set$playedMovesThisTurn, set$lastPersistAt, clearTargetHint } from './battle.runtime.js';
 import { processDelayed, accrueGrowth, resolveCardWithFeedback, syncCurseCondEquips, applyKillRewards, unplayableReason, queueCardExecution, foeIdx, addPlayerCurse, playerTakeHit, frenzyCurse, elCurse, requestBattleRender, R, alive, intentFor, drawCards, resolveFoeDefeat, sweepDead, nestPhase, grantSha, findCard, effCostOf, finish } from './battle.engine.js';
 
   // 敌方步进演出节拍在 vitest 环境归零（比照 battle.engine.js 的 SURGE_WAVE_MS 先例）：
@@ -26,7 +26,7 @@ import { processDelayed, accrueGrowth, resolveCardWithFeedback, syncCurseCondEqu
     // 必须先清掉——否则 targeting→enemy 是非法迁移，endTurn 直接抛错卡死。
     // 这里硬清槽位、不走 cancelInteraction：freeCast 簿记保留（「直接释放」卡跨回合仍免费）
     if (battleState.phase === BATTLE_PHASES.TARGETING) {
-      set$interaction(null); set$pendingHint('');
+      clearTargetHint();
       set$battleState(cancelTargeting(battleState));
     }
     set$busy(true);
@@ -47,8 +47,7 @@ import { processDelayed, accrueGrowth, resolveCardWithFeedback, syncCurseCondEqu
       }
     }
     set$battleState(transitionBattle(battleState, BATTLE_PHASES.ENEMY));
-    set$interaction(null);
-    set$pendingHint('');
+    clearTargetHint();
     const enemyToken = battleState.token;
     const stillEnemyPhase = () => G?.battleActive && battleState.token === enemyToken && battleState.phase === BATTLE_PHASES.ENEMY;
     void resolvePlayerEndTurn(enemyToken, stillEnemyPhase).catch(error => recoverAutoPhaseError(error, enemyToken, BATTLE_PHASES.ENEMY));
