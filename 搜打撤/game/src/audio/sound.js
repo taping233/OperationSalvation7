@@ -35,11 +35,11 @@ const battleBgm = new Howl({ src: [BATTLE_BGM_URL], loop: true, html5: false, pr
     const mv = parseFloat(localStorage.getItem('sdt-music-vol')); if (mv >= 0 && mv <= 1) musicVol = mv;
     const sv = parseFloat(localStorage.getItem('sdt-sfx-vol')); if (sv >= 0 && sv <= 1) sfxVol = sv;
     const source = localStorage.getItem('sdt-music-source'); if (source === 'original' || source === 'scape') musicSource = source;
-  } catch (e) {}
+  } catch { /* localStorage 不可用/写入失败（隐私模式等）：音频设置回落默认值，可安全忽略 */ }
 
   function ensure() {
     if (ctx) { if (ctx.state === 'suspended') ctx.resume().catch(() => {}); return true; }
-    try { ctx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { return false; }
+    try { ctx = new (window.AudioContext || window.webkitAudioContext)(); } catch { return false; }
     master = ctx.createGain(); master.gain.value = muted ? 0 : 1;
     // 所有合成音共享一个软限幅器，给卡牌连击多段碰撞保留峰值余量。
     masterComp = ctx.createDynamicsCompressor();
@@ -358,7 +358,7 @@ const battleBgm = new Howl({ src: [BATTLE_BGM_URL], loop: true, html5: false, pr
       src.connect(g); g.connect(sfxGain);
       src.start();
       return true;
-    } catch (e) { return false; }
+    } catch { return false; }
   }
 
   const lastSfxAt = new Map();
@@ -408,14 +408,14 @@ const battleBgm = new Howl({ src: [BATTLE_BGM_URL], loop: true, html5: false, pr
         if (name === 'shieldUp') src.start(0, 0, Math.min(0.42, src.buffer.duration));
         else src.start();
         return;
-      } catch (e) { /* 落入合成回退 */ }
+      } catch { /* 落入合成回退 */ }
     }
     // jsfxr 采样（gain/confirm/deny/levelup/strike）：语义独立，不与合成音互为回退；
     // strike 例外——实录为主（上方 hit 池），jsfxr hit 仅作实录未就绪时的兜底
     if (playJsfx(name)) return;
     const fn = SFX[name];
     if (!fn) return;
-    try { fn(opts); } catch (e) { /* 静默 */ }
+    try { fn(opts); } catch { /* 静默 */ }
   }
 
   /* ---------- 文件背景乐 ---------- */
@@ -488,7 +488,7 @@ const battleBgm = new Howl({ src: [BATTLE_BGM_URL], loop: true, html5: false, pr
   }
   function setMuted(m) {
     muted = !!m;
-    try { localStorage.setItem('sdt-muted', muted ? '1' : '0'); } catch (e) {}
+    try { localStorage.setItem('sdt-muted', muted ? '1' : '0'); } catch { /* localStorage 不可用/写入失败（隐私模式等）：音频设置回落默认值，可安全忽略 */ }
     if (master) master.gain.value = muted ? 0 : 1;
     Howler.mute(muted);
     syncBgm();
@@ -496,12 +496,12 @@ const battleBgm = new Howl({ src: [BATTLE_BGM_URL], loop: true, html5: false, pr
   // 只关音乐（设置页）：立即静音已排程的乐句；重开时恢复当前 BGM
   function setMusicMuted(m) {
     musicOff = !!m;
-    try { localStorage.setItem('sdt-music-off', musicOff ? '1' : '0'); } catch (e) {}
+    try { localStorage.setItem('sdt-music-off', musicOff ? '1' : '0'); } catch { /* localStorage 不可用/写入失败（隐私模式等）：音频设置回落默认值，可安全忽略 */ }
     syncBgm();
   }
   function setMusicSource(source) {
     musicSource = source === 'original' ? 'original' : 'scape';
-    try { localStorage.setItem('sdt-music-source', musicSource); } catch (e) {}
+    try { localStorage.setItem('sdt-music-source', musicSource); } catch { /* localStorage 不可用/写入失败（隐私模式等）：音频设置回落默认值，可安全忽略 */ }
     syncBgm();
   }
   // 战斗 ducking 开关（battle.core 进出战斗时调用）。
@@ -525,17 +525,17 @@ const battleBgm = new Howl({ src: [BATTLE_BGM_URL], loop: true, html5: false, pr
   // 只关音效（设置页）
   function setSfxMuted(m) {
     sfxOff = !!m;
-    try { localStorage.setItem('sdt-sfx-off', sfxOff ? '1' : '0'); } catch (e) {}
+    try { localStorage.setItem('sdt-sfx-off', sfxOff ? '1' : '0'); } catch { /* localStorage 不可用/写入失败（隐私模式等）：音频设置回落默认值，可安全忽略 */ }
   }
   // 音量（0~1，设置页滑条）：即时生效并持久化
   function setMusicVolume(v) {
     musicVol = Math.min(1, Math.max(0, +v || 0));
-    try { localStorage.setItem('sdt-music-vol', String(musicVol)); } catch (e) {}
+    try { localStorage.setItem('sdt-music-vol', String(musicVol)); } catch { /* localStorage 不可用/写入失败（隐私模式等）：音频设置回落默认值，可安全忽略 */ }
     syncBgm();
   }
   function setSfxVolume(v) {
     sfxVol = Math.min(1, Math.max(0, +v || 0));
-    try { localStorage.setItem('sdt-sfx-vol', String(sfxVol)); } catch (e) {}
+    try { localStorage.setItem('sdt-sfx-vol', String(sfxVol)); } catch { /* localStorage 不可用/写入失败（隐私模式等）：音频设置回落默认值，可安全忽略 */ }
     if (sfxGain) sfxGain.gain.value = BASE_SFX * dbGain(sfxVol);
   }
   // 自动播放策略：首次交互后恢复上下文；若此前已选定 BGM 则立即开声

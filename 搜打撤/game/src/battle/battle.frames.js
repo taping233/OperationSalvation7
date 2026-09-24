@@ -58,9 +58,9 @@ function releaseTextureSets() {
       try {
         const loaded = await assetPromise;
         for (const url of loaded?.urls || []) {
-          try { await Assets.unload(url); } catch (_) { /* Pixi may already have evicted it. */ }
+          try { await Assets.unload(url); } catch { /* Pixi may already have evicted it. */ }
         }
-      } catch (_) { /* Failed probes have nothing to release. */ }
+      } catch { /* Failed probes have nothing to release. */ }
     }));
   })().finally(() => {
     if (releasePromise === pending) releasePromise = null;
@@ -78,7 +78,7 @@ async function evictOtherTextureSets(keepRole, Assets, Texture) {
       if (!loaded) return;
       if (sprite && (!cur || cur.role !== role)) sprite.texture = Texture.EMPTY;
       for (const url of loaded.urls || []) {
-        try { await Assets.unload(url); } catch (_) { /* 已被 Pixi 回收则忽略 */ }
+        try { await Assets.unload(url); } catch { /* 已被 Pixi 回收则忽略 */ }
       }
     }).catch(() => {}));
   }
@@ -113,7 +113,7 @@ function measureAlphaBox(source, w, h) {
   if (!cx) return null;
   cx.drawImage(source, 0, 0, sw, sh);
   let data;
-  try { data = cx.getImageData(0, 0, sw, sh).data; } catch (_) { return null; }
+  try { data = cx.getImageData(0, 0, sw, sh).data; } catch { return null; }
   let x0 = sw, y0 = sh, x1 = -1, y1 = -1;
   for (let y = 0; y < sh; y++) {
     const row = y * sw;
@@ -142,7 +142,7 @@ async function portraitFillOf(role, img) {
       const box = measureAlphaBox(img, img.naturalWidth, img.naturalHeight);
       if (box && box.y1 > box.y0) fill = Math.min(1, (box.y1 - box.y0) / img.naturalHeight);
     }
-  } catch (_) { /* 量不出按满高处理 */ }
+  } catch { /* 量不出按满高处理 */ }
   portraitFillCache.set(role, fill);
   return fill;
 }
@@ -221,7 +221,7 @@ function loadSet(role) {
         set.set(name, tex);
         boxes.set(name, await boxP);
         urls.push(url);
-      } catch (e) { /* 探测：没这帧就跳过 */ }
+      } catch { /* 探测：没这帧就跳过 */ }
     }
     // 每动作的实际帧序列 = 候选名里加载成功的按序集合
     const seqs = new Map();
@@ -232,7 +232,7 @@ function loadSet(role) {
     }
     if (!seqs.get('idle')) {
       await Promise.all(urls.map(async url => {
-        try { await Assets.unload(url); } catch (_) { /* Pixi may already have evicted it. */ }
+        try { await Assets.unload(url); } catch { /* Pixi may already have evicted it. */ }
       }));
       return null;
     }

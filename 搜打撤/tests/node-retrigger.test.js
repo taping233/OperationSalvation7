@@ -8,6 +8,8 @@
  * enterLayer 落位不触发内容，正好构造「站在宝箱格」的起点。 */
 import { describe, it, expect, beforeAll } from 'vitest';
 
+// 故意恒真：仅给下方 canvas/存储补桩一个块级作用域（lint 静音，不改逻辑）
+// eslint-disable-next-line no-constant-condition
 if (true) {
   const noopCtx = () => new Proxy(function () {}, {
     get: (_t, k) => {

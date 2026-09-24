@@ -2,11 +2,11 @@
  * 逐字搬迁；本片不 import 壳（壳→片单向）；viewApi 反取已改 battle.core 具名直引。 */
 const SDT = window.SDT;
 const UI = window.SDT.UI;
-import { rect as uiRect, scale as uiScale } from '../ui/ui-scale.js';
+import { rect as uiRect } from '../ui/ui-scale.js';
 import { characterName } from '../core/characters.js';
 import { esc } from '../core/shared.js';
 import { escAttr } from '../core/shared.js';
-import { groupHandCards, fanLayout } from './battle.hand.js';
+import { fanLayout } from './battle.hand.js';
 import { intentViewModel } from './battle.intents.js';
 import { commands, getSnapshot, AFFIX_META, Combat, aegisBlocked, effCostOf, findCard, infuseOf, targetSide, unplayableReason, handCurseSpecs } from './battle.core.js';
   const play = commands.playCard;
@@ -279,9 +279,10 @@ import { cardRuleHint } from './battle.preview.js';
       if (rec.isNew) {
         rec.isNew = false;
         if (drawn.has(rec.card.dataset.uid)) {
-          const src = (prev && prev.drawPile) || discoverSrcRect
+          // 发现选卡飞入起点：由壳（battle.view.js）经 extra.discoverSrcRect 传入，
+          // 消费后的置空也归壳（render 里调用 updateHand 后统一 discoverSrcRect = null）
+          const src = (prev && prev.drawPile) || extra.discoverSrcRect
             || { left: ovR.width - 150, top: ovR.height - 110, width: 56, height: 80 };
-          discoverSrcRect = null;
           const dx = src.left + src.width / 2 - (r.left + r.width / 2);
           const dy = src.top + src.height / 2 - (r.top + r.height / 2);
           animateSafe(rec.slot, [

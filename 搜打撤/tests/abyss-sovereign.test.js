@@ -71,7 +71,6 @@ const LIMB_IDS = ['tt8-curseimmune', 'tt8-energycap', 'tt8-nofocus', 'tt8-healpl
 const handNames = (s = snap()) => s.hand.map(u => { const o = viewApi.findCard(u); return o && o.card.name; });
 
 // BOSS 编组：只带指定卡；随后推进回合直到手牌集齐 5 张封印之牌（化形）
-const filler = () => C.all().find(c => c.id === 'tt2-shoot');
 async function startSealBoss(cards) {
   // 真实 BOSS 牌库 ≥15 张：掺入填充直伤武术，避免「抽到 6 张」因牌库过小无法结算
   const fill = Array.from({ length: 20 }, () => C.all().find(c => c.id === 'tt2-shoot') || C.all().find(c => c.name === '射击'));
@@ -174,7 +173,7 @@ describe('受缚之残影 → 深渊主宰·妲莉薇特', () => {
 
   it('实打：破封后「招式均已注能」——血蝠风暴免注能按注能形态结算（触发 2 次）', { timeout: 60_000 }, async () => {
     const storm = C.all().find(c => c.id === 'tt3sp-bloodstorm');
-    const g = await startSealBoss([sealer(), storm]);
+    await startSealBoss([sealer(), storm]);
     expect(handNames()).toContain('深渊主宰·妲莉薇特');
     const hp0 = snap().foes[0].hp;
 

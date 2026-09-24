@@ -4,11 +4,9 @@ const SDT = window.SDT;
 import { esc } from '../core/shared.js';
 import { MAP, bagCap, safeCap } from '../run/game.session.js';
 import { escAttr } from '../core/shared.js';
-import { cardStacks, doDeath, game, newUid, safeUsed, saveGame, usedSlots } from '../run/game.session.js';
+import { cardStacks, game, newUid, safeUsed, saveGame, usedSlots } from '../run/game.session.js';
 import { Random } from '../core/random.js';
-import { on as busOn } from '../core/event-bus.js';
 import { setBagReturnHook as _setBagReturnHook, takeBagReturnHook } from './bag-return-hook.js';
-import { showRunTransition } from '../run/game.run.js';
 import { _set_cardPageOpen } from './game.cardslib.js';
 import { bagSlots } from './game.bag.bridge.js';
 import { bagDrag, resetBagDrag } from './game.bag.drag.js';
@@ -350,7 +348,6 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
     });
     // 特写挂在 body（overlay 之外）：动作执行前先模拟点背景收回，回到背包页
     const closeZoom = () => document.getElementById('cardZoom')?.querySelector('.cz-backdrop')?.click();
-    const closeCardZoom = () => document.getElementById('cardZoom')?.querySelector('.cz-backdrop')?.click();
     UI.act('useDetailCard', () => { closeZoom(); useOwnedCard(o.uid); });
     UI.act('craftColorToken', () => {
       closeZoom();
@@ -736,6 +733,8 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
           moveStackSafe(st.card.name, true);
         });
       }
+      // 特写收起助手：与 showBagCardDetail 里的同名助手同体（动作前先模拟点背景收回特写）
+      const closeCardZoom = () => document.getElementById('cardZoom')?.querySelector('.cz-backdrop')?.click();
       if (isPearl) UI.act('pearlStoreZoom', () => { closeCardZoom(); openPearlStore(); });
       if (isPouch) UI.act('pouchStoreZoom', () => { closeCardZoom(); openPouchStore(); });
       if (usable) UI.act('useDetailCard', () => {

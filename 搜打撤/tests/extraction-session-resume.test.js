@@ -24,7 +24,6 @@ window.SDT.Meta = { setXpMul() {}, track() {} };
 window.SDT.Nest = { renderNestMap: vi.fn() };
 window.SDT.Battle = { restore: vi.fn() };
 
-const copy = value => JSON.parse(JSON.stringify(value));
 const pendingFor = runId => ({
   version: 1, runId, phase: 'organizing', requestSeq: 0,
   remainingCards: [{ card: { id: 'card-a', name: '整理奖励卡' }, count: 2 }],

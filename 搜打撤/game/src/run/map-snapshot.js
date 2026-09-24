@@ -1,3 +1,8 @@
+// @ts-check
+/**
+ * 校验结果的失败分支（判别联合的 ok:false 侧，ok 字面量 false 保证 if(!x.ok) 能收窄）。
+ * @typedef {{ok:false, code:string, message:string, preserveRun:true, details?:Record<string, any>}} SnapshotFail
+ */
 import { createLayeredMap } from './layeredMap.js';
 
 const SNAPSHOT_VERSION = 1;
@@ -5,6 +10,12 @@ const ROUTE_SNAPSHOT_VERSION = 2;
 const LEGACY_GENERATOR_VERSION = 3;
 const LEGACY_LAYOUT_VERSION = 9;
 const TYPES = new Set(['entrance','door','extraction','battle','event','fire','chest','shop','emergencyExit','altar','boss','resource']);
+/**
+ * @param {string} code
+ * @param {string} message
+ * @param {Record<string, any>} [details]
+ * @returns {SnapshotFail}
+ */
 const fail = (code, message, details) => ({ ok:false, code, message, preserveRun:true, ...(details ? { details } : {}) });
 const plainObject = value => !!value && typeof value === 'object' && !Array.isArray(value) && (Object.getPrototypeOf(value) === Object.prototype || Object.getPrototypeOf(value) === null);
 const int = value => Number.isInteger(value);
@@ -25,6 +36,11 @@ function normalizeLayer(layer) {
   };
 }
 
+/**
+ * 由层图数据生成地图快照并自校验；routeVersion/routePlan 缺省时产出无路线外壳。
+ * @param {{mapSeed:(string|number), generatorVersion:number, layoutVersion:number, layerData:any[], routeVersion?:any, routePlan?:any}} params
+ * @returns {SnapshotFail|{ok:true, value:any}}
+ */
 export function createMapSnapshot({ mapSeed, generatorVersion, layoutVersion, layerData, routeVersion, routePlan }) {
   try {
     const value = { kind:'normal-map', snapshotVersion:routeVersion ? ROUTE_SNAPSHOT_VERSION : SNAPSHOT_VERSION, mapSeed, generatorVersion, layoutVersion,
@@ -34,6 +50,11 @@ export function createMapSnapshot({ mapSeed, generatorVersion, layoutVersion, la
   } catch { return fail('INVALID_MAP_SNAPSHOT','地图快照无法序列化'); }
 }
 
+/**
+ * @param {any} snapshot
+ * @param {{layerIdx?:number, trackPos?:number}|null} [position]
+ * @returns {SnapshotFail|{ok:true, value:any}}
+ */
 function validateMapSnapshotInner(snapshot, position = null) {
   let encoded;
   try { encoded=JSON.stringify(snapshot); } catch { return fail('INVALID_MAP_SNAPSHOT','地图快照不是 JSON 纯数据'); }
@@ -108,11 +129,22 @@ function validateMapSnapshotInner(snapshot, position = null) {
   return {ok:true,value:clone(snapshot)};
 }
 
+/**
+ * 校验地图快照外壳、四层结构、节点/边、层间门 pair 与连通性（可附当前位置校验）。
+ * @param {any} snapshot
+ * @param {{layerIdx?:number, trackPos?:number}|null} [position]
+ * @returns {SnapshotFail|{ok:true, value:any}}
+ */
 export function validateMapSnapshot(snapshot, position = null) {
   try { return validateMapSnapshotInner(snapshot,position); }
   catch { return fail('INVALID_MAP_SNAPSHOT','地图快照校验异常'); }
 }
 
+/**
+ * 校验并把纯数据快照还原成运行时层图数据（layerData + logical）。
+ * @param {any} snapshot
+ * @returns {SnapshotFail|{ok:true, value:any}}
+ */
 export function hydrateMapSnapshot(snapshot) {
   const checked=validateMapSnapshot(snapshot); if(!checked.ok)return checked;
   const value=checked.value;

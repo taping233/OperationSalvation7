@@ -1,7 +1,7 @@
 /* ============================================================
- * 龙巢 —— 第二地图 / 第二玩法（2026-09-16 Item 定版初稿实装）
+ * 经典生命研究所（原「龙巢」，2026-09-24 老板定名）—— 第二地图 / 第二玩法（2026-09-16 Item 定版初稿实装）
  *
- *   解锁：首次击败一图 BOSS 并成功撤离。
+ *   解锁：钥匙开门——10 把真实钥匙储备（KEY_NEEDED），消耗后永久通行（2026-09-24 定版）。
  *   备战：仓库选 10 张招式/装备进牌盒（同名不可重复）+ 附赠初始攻击×5 + 职业卡×2；
  *         牌盒上限 30（混沌之眼在盒 → 35），不叠放、不进消耗口袋、不可主动弃掉，
  *         满员时 1 换 1 更换；符文背包上限 10（基地可升到 25），符文槽 3。
@@ -12,19 +12,20 @@
  *   撤离：打 BOSS 时用掉的符文与卡牌消耗（卡牌进消耗口袋），其余物资全部带走。
  * ============================================================ */
 import { Random } from '../core/random.js';
-import { esc, escAttr } from '../core/shared.js';
+import { esc } from '../core/shared.js';
 import { MAP, game, clearSave, saveGame, syncPlayTime, exitToTitle } from './game.session.js';
 import { UI } from '../ui/ui.js';
 import SDT, { sdtDefine } from '../core/sdt-facade.js';
 import { startBattle } from '../battle/battle-loader.js';
-import { rollRune, rollRuneKind, rollAttribute, RUNE_KINDS } from '../battle/runes.js';
+import { rollRune, rollAttribute, RUNE_KINDS } from '../battle/runes.js';
 import { on as busOn } from '../core/event-bus.js';
+import { playLabEnding } from './lab.ending.js';
 
 const B = () => SDT.Base;
 
 /* —— 直线 12 格（Item 17 同款定版思路：格子序列即地图）—— */
 const NEST_MAP = [
-  { type: 'start', name: '龙巢入口' },
+  { type: 'start', name: '研究所入口' },
   { type: 'battle', name: '第一轮 · 黑暗元素', battle: 'darkElem' },
   { type: 'battle', name: '第二轮 · 沙暴元素', battle: 'sandElem' },
   { type: 'shop', name: '神秘商店' },
@@ -33,8 +34,8 @@ const NEST_MAP = [
   { type: 'runeCircle', name: '符文法阵' },
   { type: 'battle', name: '第七轮 · 黑暗使者', battle: 'envoy' },
   { type: 'shop', name: '神秘商店' },
-  { type: 'altar', name: '龙巢祭坛' },
-  { type: 'boss', name: '最终轮 · 巢穴之主' },
+  { type: 'altar', name: '研究所祭坛' },
+  { type: 'boss', name: '最终轮 · 所主' },
   { type: 'extract', name: '撤离点' },
 ];
 
@@ -70,13 +71,14 @@ let uidSeq = 0;
 const nuid = () => 'nst' + Date.now().toString(36) + (uidSeq++);
 const ri = (n) => Math.floor(Random.random('nest') * n);
 
-/* —— 解锁（一图击败 BOSS 后成功撤离时由 doExtract 调用）—— */
+/* —— 旧解锁入口（原「一图击败首脑撤离后解锁」）。09-24 老板定版改纯钥匙门槛后已无调用方，
+ *    保留待批准删除；开门逻辑移入 openNestPrep。 —— */
 export function unlockNest() {
   const Bn = B();
   if (!Bn.data.nestUnlocked) {
     Bn.data.nestUnlocked = true;
     Bn.save();
-    UI.log('[[icon:door]] 污染核心的震动平息了……远方的<b>龙巢</b>苏醒——基地解锁了新的远征目标', 'loot');
+    UI.log('[[icon:door]] 大门开启——基地解锁了新的远征目标', 'loot');
     // legend 琶音错峰 ~350ms（迭代评审 09-20 音频岗）：撤离时刻 victory 采样正在响，
     // 叠放会糊；battle 采样路径无 delay 参数，只能外置 setTimeout
     setTimeout(() => { if (SDT.Sound) SDT.Sound.sfx('legend'); }, 350);
@@ -84,9 +86,41 @@ export function unlockNest() {
 }
 
 /* —— 备战：牌盒 10 张 + 符文槽 3 —— */
+/* 09-24 定版：研究所纯钥匙门槛——首次用 10 把真实钥匙储备开门（消耗），此后永久通行，
+ * 不再看一图首脑进度。钥匙不足提示与 base.pocketKeyCost 同口径（仓库钥匙卡「使用」折入储备）。 */
 export function openNestPrep() {
   const Bn = B();
-  if (!Bn.data.nestUnlocked) { UI.log('[[icon:lock]] 龙巢尚未解锁：先在一图击败首脑并成功撤离', 'warn'); return; }
+  if (!Bn.data.nestUnlocked) {
+    const need = Bn.KEY_NEEDED || 10;
+    const keys = Bn.data.keys || 0;
+    if (keys < need) {
+      UI.log(`[[icon:lock]] 经典生命研究所大门紧闭：需 <b>${need}</b> 把钥匙开门（现有 ${keys}）——钥匙可从收藏进度与成就获得，仓库钥匙卡「使用」可折入储备`, 'warn');
+      return;
+    }
+    game.state = 'modal';
+    UI.showOverlay('[[icon:key]] 经典生命研究所 · 大门', `
+      <p class="ov-note">锈蚀的大门后是感染的实验室。用 <b>${need}</b> 把钥匙打开它？</p>
+      <p class="ov-stats">真实钥匙储备 ${keys} 把 · 大门打开后永久通行</p>
+      <div class="ov-btns">
+        <button class="ov-btn ok" data-act="labOpen">用钥匙开门（-${need}）</button>
+        <button class="ov-btn" data-act="labBack">暂不进入</button>
+      </div>`, true);
+    UI.act('labOpen', () => {
+      Bn.data.keys -= need;
+      Bn.data.nestUnlocked = true;
+      Bn.save();
+      UI.log('[[icon:key]] 钥匙转动，锈门轰然开启——<b>经典生命研究所</b>向你敞开', 'loot');
+      setTimeout(() => { if (SDT.Sound) SDT.Sound.sfx('legend'); }, 350);
+      enterNestPrep();
+    });
+    UI.act('labBack', () => { game.state = 'idle'; exitToTitle(); });
+    return;
+  }
+  enterNestPrep();
+}
+
+function enterNestPrep() {
+  const Bn = B();
   game.state = 'modal';
   const picks = new Set();
   const eligible = () => Bn.data.stash.filter(s2 =>
@@ -98,8 +132,8 @@ export function openNestPrep() {
         ${on ? '[[icon:check]]' : '[[icon:cards]]'} ${esc(s2.card.name)} ×${s2.count}${on ? '（已选）' : ''}</button>`;
     }).join('');
     const equipped = game.nestEquipped || [];
-    UI.showOverlay('[[icon:skull]] 龙巢 · 备战', `
-      <p class="ov-stats">巢穴之主：<b>${esc(game.nestBossName || '？？？')}</b>（早在出发时就已注定）</p>
+    UI.showOverlay('[[icon:skull]] 研究所 · 备战', `
+      <p class="ov-stats">所主：<b>${esc(game.nestBossName || '？？？')}</b>（早在出发时就已注定）</p>
       <p class="ov-note">选择 <b>10</b> 张招式或装备进牌盒（同名不可重复）——附赠初始攻击 ×5 与职业卡 ×2。<br>
       牌盒上限 30、不叠放、不进消耗口袋；符文槽 3（从仓库符文中装备，最多 3 块）。</p>
       <div class="ov-btns">${list || '<p class="ov-empty">仓库里没有可携带的招式/装备</p>'}</div>
@@ -108,7 +142,7 @@ export function openNestPrep() {
         ${(Bn.data.runes || []).slice(0, 9).map((r2, i) => `<button class="mini-btn" data-act="nestRune${i}">${esc(r2.name)}（${r2.attrs.join('')}）</button>`).join('')}
       </div>
       <div class="ov-btns">
-        <button class="ov-btn ok" data-act="nestGo" ${picks.size !== 10 ? 'disabled' : ''}>深入龙巢（${picks.size}/10）</button>
+        <button class="ov-btn ok" data-act="nestGo" ${picks.size !== 10 ? 'disabled' : ''}>深入研究所（${picks.size}/10）</button>
         <button class="ov-btn" data-act="nestBack">返回基地</button>
       </div>`, true);
     eligible().forEach((s2, i) => UI.act('nestPick' + i, () => {
@@ -156,6 +190,8 @@ function startNestRun(boxCards) {
   // 曾被带入下一局白拿——与 game.session 读档恢复对称
   game.pendingRunePick = null;
   game.nestTargetedBox = 0;
+  game.nestKills = 0;        // 09-24 结算分数：局内击杀累计（读档续战不回填，从续战点起算）
+  game.nestBossDown = false;
   pickNestBoss();
   game.cardBox = boxCards.map(c => ({ ...c }));
   // 附赠：初始攻击 ×5 + 职业卡 ×2（随机）
@@ -178,7 +214,7 @@ export function renderNestMap() {
     return `<button class="ov-btn ${here ? 'ok' : done ? 'ghost' : next ? '' : ''}" data-act="nestCell${i}" ${next ? '' : 'disabled'}>
       ${here ? '[[icon:flag]] ' : done ? '[[icon:check]] ' : next ? '[[icon:arrow]] ' : ''}${i + 1}. ${esc(cell.name)}</button>`;
   }).join('');
-  UI.showOverlay('[[icon:skull]] 龙巢 · 巢穴之主：<b>' + esc(game.nestBossName) + '</b>', `
+  UI.showOverlay('[[icon:skull]] 研究所 · 所主：<b>' + esc(game.nestBossName) + '</b>', `
     <p class="ov-stats">推进到第 <b>${game.nestPos + 1}</b>/12 格 · 符文背包 ${game.nestRunes.length} 块 · 槽位：${(game.nestEquipped || []).map(r => esc(r.name)).join('、') || '（空）'}</p>
     <div class="ov-btns">${rows}</div>
     ${(game.pendingRunePick || []).length ? `<div class="ov-btns"><span class="dim">中符文箱显形了 3 块符文——选择 1 块带走：</span>
@@ -248,7 +284,7 @@ function startNestBattle(def) {
 
 // 龙巢战斗结算（总线订阅；一图战后流程在 bag 侧对龙巢战斗让位）。
 // 胜利：回满血 → 发奖励 → 推进并回龙巢地图；失败/撤退：回满血留在原格可再次挑战。
-function nestBattleEnd(opts, played, win, consumed) {
+function nestBattleEnd(opts, played, win) {
   if (!game.nestActive) return;
   const ctx = nestBattleCtx;
   nestBattleCtx = null;
@@ -268,11 +304,12 @@ function nestBattleEnd(opts, played, win, consumed) {
   if (win === true) {
     // 战场格 = 当前停留格（advance 才会前移），ctx 缺失时同样成立
     const battleCell = cell();
-    if (battleCell.type === 'boss') nestBossRewards();
+    game.nestKills = (game.nestKills || 0) + (opts.foeNames || []).length;   // battle:end 的 foeNames 即本场被歼名单（含 BOSS 增援）
+    if (battleCell.type === 'boss') { game.nestBossDown = true; nestBossRewards(); }
     else if (battleCell.type === 'battle') grantNestRewards((NEST_BATTLES[battleCell.battle] || {}).reward);
     advance();
   } else {
-    UI.log('[[icon:heart]] 巢穴的疗息雾气让队伍恢复力气——整队再战', 'sys');
+    UI.log('[[icon:heart]] 研究所的疗息雾气让队伍恢复力气——整队再战', 'sys');
     renderNestMap();
   }
 }
@@ -285,7 +322,7 @@ function nestBossRewards() {
   addRuneChest('large');
   // 定向大符文箱：使用时选 1 个属性，获得 3 张该属性的随机符文（0.7% 出含该属性的双属性符文）
   game.nestTargetedBox = (game.nestTargetedBox || 0) + 1;
-  UI.log('[[icon:gem]] 战胜巢穴之主：BOSS 宝箱 ×2 · 定向大符文箱 ×1', 'loot');
+  UI.log('[[icon:gem]] 战胜所主：BOSS 宝箱 ×2 · 定向大符文箱 ×1', 'loot');
   if (game.nestBoss) {
     const s = SDT.Base.data.stats;
     if (!s.nestBossKills) s.nestBossKills = [];
@@ -334,7 +371,7 @@ function addRuneChest(kind) {
 function openRuneCircle(done) {
   const runes = Array.from({ length: 5 }, () => rollRune(() => Random.random('nest')));
   UI.showOverlay('[[icon:sparkles]] 符文法阵', `
-    <p class="ov-note">献祭 3 张牌盒中的卡牌（初始攻击不行），从 5 块随机符文中选 1 块；<br>或者献祭<b>整个牌盒</b>，从龙巢紧急撤离。</p>
+    <p class="ov-note">献祭 3 张牌盒中的卡牌（初始攻击不行），从 5 块随机符文中选 1 块；<br>或者献祭<b>整个牌盒</b>，紧急撤出研究所。</p>
     <div class="ov-btns">${runes.map((r, i) => `<button class="ov-btn ${i === 0 ? 'ok' : ''}" data-act="rc${i}">${esc(r.name)}（${r.attrs.join('')}·${r.rarity}）</button>`).join('')}</div>
     <div class="ov-btns">
       <button class="ov-btn ghost" data-act="rcBox">献祭整个牌盒 · 紧急撤离</button>
@@ -350,7 +387,7 @@ function openRuneCircle(done) {
   }));
   UI.act('rcBox', () => {
     game.cardBox = game.cardBox.filter(c => SDT.Base.isSha(c));
-    UI.log('[[icon:exit]] 你献祭了整个牌盒——紧急撤离龙巢', 'sys');
+    UI.log('[[icon:exit]] 你献祭了整个牌盒——紧急撤出研究所', 'sys');
     doNestExtract();
   });
   UI.act('rcBack', () => done());
@@ -360,7 +397,7 @@ function openRuneCircle(done) {
 function openNestAltar(done) {
   let rerolls = 3;
   const render = () => {
-    UI.showOverlay('[[icon:sparkles]] 龙巢祭坛', `
+    UI.showOverlay('[[icon:sparkles]] 研究所祭坛', `
       <p class="ov-note">抉择：获得 1 张<b>英雄卡</b>与 1 张<b>职业卡</b>；或获得 <b>3</b> 次改变任一符文属性的机会（剩 ${rerolls} 次）。</p>
       <div class="ov-btns">
         <button class="ov-btn ok" data-act="naHero">获得英雄卡与职业卡</button>
@@ -401,7 +438,7 @@ function openNestShop(done) {
   const runePrice = r => (r.rarity === '古朴' ? 4 : r.rarity === '稀有' ? 5 : 6) * (r.attrs.length > 1 ? 2 : 1);
   const runeSlots = Array.from({ length: 3 }, () => { const r = rollRune(() => Random.random('nest')); return { rune: r, price: runePrice(r), sold: false }; });
   const render = () => {
-    UI.showOverlay('[[icon:coin]] 龙巢 · 神秘商店', `
+    UI.showOverlay('[[icon:coin]] 研究所 · 神秘商店', `
       <p class="ov-stats">随身币 <b>${game.coins}</b></p>
       <h3 class="set-h">随机卡牌（3 币）</h3>
       <div class="ov-btns">${cardSlots.map((s2, i) => !s2.sold && s2.card ? `<button class="ov-btn" data-act="nsC${i}">${esc(s2.card.name)}（${s2.card.rarity}）3 币</button>` : '<span class="dim">已售</span>').join(' ')}</div>
@@ -428,18 +465,55 @@ function openNestShop(done) {
 }
 
 /* —— 撤离：BOSS 战用掉的符文与卡牌消耗（卡牌进消耗口袋），其余全部带走 —— */
+/* 09-24 结算分数（三件套加权，明细可复算）：小怪击杀×10 + 所主击破 150 + 队伍血量比例×100
+ * + 带回卡牌 sellPrice 求和（初始攻击不计）+ 符文商店价表（古朴4/稀有5/史诗6·双属性×2）+ 剩余金币 1:1。 */
+const LAB_SCORE = { killMinor: 10, killBoss: 150, hpWeight: 100 };
+const runeScore = r => (r.rarity === '古朴' ? 4 : r.rarity === '稀有' ? 5 : 6) * (r.attrs.length > 1 ? 2 : 1);
+
+function computeLabScore(spentRunes) {
+  const cards = (game.cardBox || []).filter(c => !SDT.Base.isSha(c));
+  const cardPts = cards.reduce((a, c) => a + (SDT.Cards.sellPrice ? SDT.Cards.sellPrice(c) : 1), 0);
+  const runes = [...(game.nestRunes || []), ...(spentRunes || [])];
+  const runePts = runes.reduce((a, r) => a + runeScore(r), 0);
+  const kills = game.nestKills || 0;
+  const killPts = kills * LAB_SCORE.killMinor;
+  const bossPts = game.nestBossDown ? LAB_SCORE.killBoss : 0;
+  const hpPts = Math.round(((game.hp || 0) / (game.maxHp || 1)) * LAB_SCORE.hpWeight);
+  const coinPts = game.coins || 0;
+  return { kills, killPts, bossPts, hpPts, cardPts, runePts, coinPts,
+    cards: cards.length, runes: runes.length,
+    total: killPts + bossPts + hpPts + cardPts + runePts + coinPts };
+}
+
 function doNestExtract() {
   syncPlayTime();
   game.nestActive = false;
-  game.nestEquipped = [];   // 最终 BOSS 战装备中的符文消耗
+  const spentRunes = game.nestEquipped || [];   // 最终 BOSS 战装备中的符文消耗——按价表折分后一并带回
+  const score = computeLabScore(spentRunes);
+  game.nestEquipped = [];
   const Bn = B();
   (game.nestRunes || []).forEach(r => Bn.data.runes.push(r));
   game.nestRunes = [];
+  const st = Bn.data.stats;
+  st.labTotalScore = (st.labTotalScore || 0) + score.total;
+  st.labBestScore = Math.max(st.labBestScore || 0, score.total);
+  st.labRuns = (st.labRuns || 0) + 1;
   Bn.save();
-  clearSave();   // 撤离完成：清除进行中对局档（下次从龙巢备战重新出发）
+  clearSave();   // 撤离完成：清除进行中对局档（下次从研究所备战重新出发）
   SDT.Meta.checkUnlocks();
-  UI.log('[[icon:exit]] <b>龙巢撤离成功！</b>符文与战利品已运回基地', 'ok');
-  exitToTitle();
+  UI.log('[[icon:exit]] <b>研究所撤离成功！</b>符文与战利品已运回基地', 'ok');
+  playLabEnding(() => showLabSettlement(score, st));   // 09-24 方舟级通关演出 → 结算页收尾
+}
+
+function showLabSettlement(s, st) {
+  game.state = 'modal';
+  UI.showOverlay('[[icon:exit]] 经典生命研究所 · 行动结算', `
+    <p class="ov-stats">战斗表现：击杀 <b>${s.kills}</b> × ${LAB_SCORE.killMinor} = ${s.killPts} 分 · 所主击破 +${s.bossPts} 分 · 队伍状态 +${s.hpPts} 分</p>
+    <p class="ov-stats">带回物资：卡牌 ${s.cards} 张 +${s.cardPts} 分 · 符文 ${s.runes} 块 +${s.runePts} 分</p>
+    <p class="ov-stats">剩余金币 +${s.coinPts} 分</p>
+    <p class="ov-note">本次行动 <b>${s.total}</b> 分 · 累计 ${st.labTotalScore} 分（单局最佳 ${st.labBestScore}）</p>
+    <div class="ov-btns"><button class="ov-btn ok" data-act="labScoreBack">接收情报，返回基地</button></div>`, true);
+  UI.act('labScoreBack', () => exitToTitle());
 }
 
 /* —— 彩虹符文合成（卡扎库斯式）：属性 5 选 1 + 类别 5 选 1 —— */

@@ -8,6 +8,7 @@ import { commands, getSnapshot, AFFIX_META, R, findCard } from './battle.core.js
   const closeBagCmd = commands.closeBag;
   const useItemCmd = commands.useItem;
   const closeGrave = commands.closeGrave;
+  const closeDeckView = commands.closeDeckView;
   const selectDeckCard = commands.selectDeckCard;
   const confirmDeck = commands.confirmDeck;
   const cancelDeck = commands.cancelDeck;
@@ -16,7 +17,7 @@ const cardIdentityKey = card => card && card.id
   : `legacy:${card?.name || ''}|${card?.type || ''}|${card?.desc || ''}`;
 const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!card.id && card.name === '初始攻击'));
   function renderDeckSelection(snapshot) {
-    const { deckSelection, opts } = snapshot;
+    const { deckSelection } = snapshot;
     const selected = deckSelection.selected;
     const need = Math.min(deckSelection.need, deckSelection.cards.length);
     const isStartEquip = (card) => card && card.type === '装备' && /对战开始时/.test(String(card.desc || ''));
@@ -78,6 +79,37 @@ const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!car
       <p class="ov-note">墓地中的牌<b>不会在牌库空后洗回</b>；打出的牌进弃牌堆（会洗回循环）。战胜 BOSS 后可在「整理背包」环节把这些牌放回背包或丢弃。</p>
       <div class="ov-btns"><button class="ov-btn ok" data-act="btGraveBack">↩ 返回战斗</button></div>`, true);
     UI.act('btGraveBack', closeGrave);
+    UI.refresh(SDT.game);
+  }
+
+  // 牌库查看（BOSS 战专属，2026-09-13 留言：点击牌堆可看牌库中的卡）。
+  // 2026-09-23 lint 批次补实现：battle.view.js 自引入起即调用本函数但定义从未在任何提交落地，
+  // BOSS 战点牌堆（btDeck）会在 render 里抛 ReferenceError。行样式与 renderGrave 同构；
+  // btDeckBack 关闭动作 battle.view.js 已全局接线，此处按 renderGrave 模式自注册一遍（UI.act 覆盖式，幂等）。
+  function renderDeckPileView(snapshot) {
+    const cards = snapshot.drawPile.map(findCard).filter(Boolean);
+    const byType = {};
+    cards.forEach(entry => { byType[entry.card.type] = (byType[entry.card.type] || 0) + 1; });
+    const statLine = Object.keys(byType).length
+      ? Object.entries(byType).sort((a, b) => b[1] - a[1]).map(([type, count]) => `${esc(type)} <b>${count}</b>`).join(' · ')
+      : '（牌库已经空了——弃牌堆洗回后才会补充）';
+    const byName = new Map();
+    cards.forEach(entry => {
+      const key = cardIdentityKey(entry.card);
+      if (!byName.has(key)) byName.set(key, { card: entry.card, count: 0 });
+      byName.get(key).count++;
+    });
+    const listHTML = [...byName.values()].map(stack => `
+      <div class="bt-gy-row" title="${escAttr(stack.card.desc || '')}">
+        <span>[[icon:cards]] <b>${esc(stack.card.name)}</b>${stack.count > 1 ? ` ×${stack.count}` : ''}</span>
+        <span class="bt-gy-meta">${esc(stack.card.type)} · ${stack.card.cost}费 · ${esc(stack.card.rarity || '')}</span>
+      </div>`).join('');
+    UI.showOverlay(`${snapshot.opts.isBoss ? '[[icon:demon]] BOSS战' : '[[icon:swords]] 遭遇战'} · 第 ${snapshot.turn} 回合 · [[icon:cards]] 牌库`, `
+      <p class="ov-stats">牌库剩余 <b>${cards.length}</b> 张 —— ${statLine}</p>
+      <div class="bt-gy-list">${listHTML}</div>
+      <p class="ov-note">查看牌库不消耗任何资源；牌库空后会<b>洗回弃牌堆</b>循环（墓地不会洗回）。</p>
+      <div class="ov-btns"><button class="ov-btn ok" data-act="btDeckBack">↩ 返回战斗</button></div>`, true);
+    UI.act('btDeckBack', closeDeckView);
     UI.refresh(SDT.game);
   }
 
@@ -147,4 +179,4 @@ const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!car
     UI.refresh(SDT.game);
   }
 
-export { renderDeckSelection, renderGrave, renderBattleBag };
+export { renderDeckSelection, renderGrave, renderBattleBag, renderDeckPileView };

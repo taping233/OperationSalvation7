@@ -12,6 +12,9 @@
   },
   "include": [
     "game/src/run/map-graph.js",
-    "game/src/cards/mech-sentences.js"
+    "game/src/cards/mech-sentences.js",
+    "game/src/run/encounter-selector.js",
+    "game/src/cards/cards.consts.js",
+    "game/src/run/map-snapshot.js"
   ]
 }

@@ -1652,3 +1652,65 @@ body.cardlib-open #overlay .card-library-page .clib-main{background:
 /* #1 商店拒买反馈：货位左右抖动一下（币不够/装不下），原因显示在顶栏提示条 */
 @keyframes shopDeny{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(3px)}}
 .shop-slot.shop-deny{animation:shopDeny .42s ease}
+
+/* ===== 09-24 留言批次（Edge 5173 #5~#12） ===== */
+
+/* #12 标题放大 1.2 倍（09-23 留言）：位图字牌容器等比放大，锚点不动 */
+.title-heading{width:clamp(516px,51.6vw,912px)}
+
+/* #6 对局地图左上三键透明化：红底/深蓝底 → 透明+细边，图标保留，hover 反馈不变
+   （!important：winter.css 在 expedition 系之前加载，同特异性会被后加载文件压掉） */
+#topBtns #btnHome{background:transparent!important;border:1px solid #637c8959!important;box-shadow:none!important;color:#d8e4e8!important}
+#topBtns #btnHome:hover{background:#ffffff1a!important;color:#fff!important}
+#topBtns #btnHelp,#topBtns #btnMute{background:transparent!important;border-color:#637c8959!important;box-shadow:none!important}
+
+/* #7 横幅英文改金色衬线花体（原 Cascadia 9px 等宽） */
+#layerBanner .lb-en{font-family:'Segoe Script','Brush Script MT',cursive!important;font-size:13px!important;letter-spacing:2.5px!important;color:#d9bb82!important;text-shadow:0 1px 3px #000000a8!important}
+
+/* #8 已知区域键已从 HTML 移除；背包浮动键放大并落到底部栏正上方（原 bottom:20 会被 105px 底部栏盖住），
+   定位键同步上移让出重叠区 */
+#bagBtnFloat{right:22px!important;bottom:calc(105px + 12px)!important;width:56px!important;height:72px!important}
+#topBtns #btnLocate{bottom:calc(105px + 12px + 82px)!important}
+#bagBtnFloat .bbf-art{width:34px!important;height:34px!important}
+#bagBtnFloat .bbf-label{font-size:11px!important}
+
+/* #9 照相馆翻页动画：照片按翻页方向逐张落上桌面（stagger 40ms），替换纯淡入 */
+@keyframes libPhotoPageIn{from{opacity:0;transform:translateX(var(--lib-page-enter-x,30px)) translateY(12px) rotate(var(--lib-page-rot,1.1deg)) scale(.96)}to{opacity:1;transform:none}}
+body.cardlib-open #overlay .photo-studio-v3.studio-index-layout .lib-grid.lib-page-next{--lib-page-enter-x:30px!important;--lib-page-rot:1.1deg!important}
+body.cardlib-open #overlay .photo-studio-v3.studio-index-layout .lib-grid.lib-page-previous{--lib-page-enter-x:-30px!important;--lib-page-rot:-1.1deg!important}
+body.cardlib-open #overlay .photo-studio-v3.studio-index-layout .lib-grid.lib-page-next>.lib-item,
+body.cardlib-open #overlay .photo-studio-v3.studio-index-layout .lib-grid.lib-page-previous>.lib-item{
+  animation:libPhotoPageIn .38s cubic-bezier(.22,.61,.36,1) both!important;
+  animation-delay:calc(var(--i,0)*40ms)!important}
+@media(prefers-reduced-motion:reduce){
+  body.cardlib-open #overlay .photo-studio-v3.studio-index-layout .lib-grid>.lib-item{animation:none!important}}
+
+/* #10 退出照相馆闪烁：cardlib-open 的滚动优化禁动画规则（#overlay *）压掉了容器自身淡出，
+   整层瞬隐=闪。豁免容器播 ovFadeOut（内部仍禁动画，防几百张卡重播入场）；
+   closeLibPage 侧同步把摘 cardlib-open 延到淡出之后 */
+body.cardlib-open #overlay.closing{animation:ovFadeOut .2s ease forwards!important}
+
+/* #11 留言库返回键：右下 BACK 取消，改左上角，与主页退出键同款（.ak-exit 64×58）同位（top16/left18） */
+#overlay .sugin-page .sugin-exit{position:absolute;top:16px;left:18px;z-index:6;
+  background:#2c3032f2;border:1px solid #a8b0a938;color:#e8eeea}
+#overlay .sugin-page .sugin-exit::after{content:'';position:absolute;inset:5px;border:1px solid #a8b0a938;pointer-events:none}
+#overlay .sugin-page .sugin-exit:hover{border-color:#7fc8a9;background:#383d3ff2;color:#fff}
+#overlay .sugin-page .pg-head{padding-left:98px}
+
+/* #5 照相馆特写「照片被边框压住」：框图案改由 ::after 覆盖层绘制（绘制层级高于子内容），
+   照片四边外扩 45% 框宽伸入框内沿之下——还原真实相框「框条压住照片」的装裱关系。
+   选择器多挂一层 .cz-photo-main 压过 photo-studio-mounts.css 的原规则（后加载） */
+body.cardlib-open #cardZoom.cz-photo .cz-photo-main .cz-photo-paper[data-photo-mount]{
+  border:none!important;
+  padding:var(--mount-space)!important;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-main .cz-photo-paper[data-photo-mount]::after{
+  content:'';position:absolute;inset:calc(-1 * var(--mount-border));z-index:3;pointer-events:none;
+  border:var(--mount-border) solid transparent;
+  border-image:var(--mount-art) var(--mount-slice) stretch;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-main .cz-photo-image{
+  margin:calc(var(--mount-border) * -0.45);
+}
+/* #5 配套：底部操作提示提到框覆盖层之上（框 z3 / 铭牌 z5） */
+body.cardlib-open #cardZoom.cz-photo .cz-hint{position:relative;z-index:4!important}

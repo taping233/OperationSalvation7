@@ -190,7 +190,7 @@
       "id": "savior",
       "icon": "[[icon:exit]]",
       "name": "拯救者",
-      "desc": "击败 2 位龙巢最终 BOSS",
+      "desc": "击败 2 位研究所最终 BOSS",
       "reward": {
         "rations": 4
       }
@@ -211,6 +211,33 @@
       "desc": "一回合内击杀完全形态·元素领主的复活体",
       "reward": {
         "wood": 3
+      }
+    },
+    {
+      "id": "labScore1",
+      "icon": "[[icon:gem]]",
+      "name": "实验数据·铜",
+      "desc": "研究所累计结算分数达 500",
+      "reward": {
+        "keys": 3
+      }
+    },
+    {
+      "id": "labScore2",
+      "icon": "[[icon:gem]]",
+      "name": "实验数据·银",
+      "desc": "研究所累计结算分数达 1500",
+      "reward": {
+        "card": "tt3-thunderblast"
+      }
+    },
+    {
+      "id": "labScore3",
+      "icon": "[[icon:crystal]]",
+      "name": "实验数据·金",
+      "desc": "研究所累计结算分数达 4000",
+      "reward": {
+        "card": "tt3-immortal-blade"
       }
     }
   ],

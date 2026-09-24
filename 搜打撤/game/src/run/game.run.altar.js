@@ -9,7 +9,6 @@ import { CHARACTERS, characterFor, characterName } from '../core/characters.js';
 import { esc, escAttr } from '../core/shared.js';
 import { MAP, MODES, curLayer, enterLayer, exitToTitle, game, getActiveSlot, newUid, saveGame, scaledEnemy } from './game.session.js';
 import { createExtractionCommands, validatePendingExtraction } from '../hub/extraction.commands.js';
-import { tone } from '../audio/sound.js';
 import { openBaseHub } from '../hub/game.hub.js';
 
 // 选人页机制简介（2026-09-12 留言：按各职业卡池真实机制写，键 = characters.js 的 id）
@@ -21,7 +20,7 @@ const CLASS_STORY = {
   xingyue: '擅长治疗与圣盾，用圣光法术守护自己。',
 };
 
-import { Sfx, _set_cardPageOpen, cardHTML } from '../hub/game.cardslib.js';
+import { Sfx, _set_cardPageOpen } from '../hub/game.cardslib.js';
 import { Random, SeededRandomService } from '../core/random.js';
 import { ensureBattleReady, startBattle } from '../battle/battle-loader.js';
 import { FIRE_RESTORABLE, consumeCurrentCell, finishInstant, grantEventCard, nodeOpt, nodeShell, openPocketRestore, openShop, preloadAllNodeShellBgs, showRunTransition } from './game.run.scenes.js';
@@ -555,7 +554,7 @@ function openAltarReward() {
 }
 
 // 首脑格：必须先激活祭坛；三首脑任选其一挑战，胜利后终局撤离点放行
-export function openBossGate(def) {
+export function openBossGate() {
   game.state = 'modal';
   if (!game.altarActivated) {
     nodeShell({
@@ -750,7 +749,6 @@ export async function doExtract() {
   const pendingToken = game.extractionPending && typeof game.extractionPending === 'object'
     ? game.extractionPending : { slotId: startedFromSlot, runId: initialIdentity?.ok ? initialIdentity.value.runId : null };
   game.extractionPending = pendingToken;
-  const wasNestUnlocked = !!SDT.Base.data.nestUnlocked;
   game.state = 'modal';
   try {
     const started = await extractionCommands.begin();
@@ -774,10 +772,6 @@ export async function doExtract() {
     game.runActive = true;
     SDT.Sound.sfx('victory');
     SDT.Sound.music('title');
-    if (game.bossKilled && !wasNestUnlocked) {
-      UI.log('[[icon:door]] 污染核心的震动平息了……远方的<b>龙巢</b>苏醒——基地解锁了新的远征目标', 'loot');
-      setTimeout(() => { if (SDT.Sound) SDT.Sound.sfx('legend'); }, 350);
-    }
     const { totalPocketCount, lostPocketCount } = started.value;
     if (totalPocketCount > 0) {
       UI.log(`[[icon:pocket]] 撤离结算：消耗口袋 <b>${totalPocketCount}</b> 张只有 1/3 保留（带回 ${totalPocketCount - lostPocketCount} 张，散失 ${lostPocketCount} 张）`, 'sys');

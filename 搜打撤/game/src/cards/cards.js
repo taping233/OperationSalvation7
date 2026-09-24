@@ -1,7 +1,6 @@
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const SDT = window.SDT;
 import { Random } from '../core/random.js';
-import { characterName } from '../core/characters.js';
 import { cardHTML, cardBackHTML } from './cards.view.js';
 import { DATA } from '../core/data-loader.js';
 
@@ -47,7 +46,7 @@ import { DATA } from '../core/data-loader.js';
  * ============================================================ */
 
 let _cardsCache = null;   // all() 的内存缓存，见 all() 处注释（随存储层留壳）
-import { KEY, TT2_KEY_V3, TT1_KEY_V6, TT4_KEY_V2, TT3_KEY_V5, TT5_KEY, TT6_KEY, TT7_KEY, TT7_KEY_V2, TT8_KEY, TT9_KEY, TT10_KEY, TT11_KEY, ITEM_RENAME_KEY, EVENTS_0919_KEY, TT12_KEY, RETIRE_TT10, RETIRE_TT11, CC_KEY, CLASSES } from './cards.consts.js';
+import { KEY, TT2_KEY_V3, TT1_KEY_V6, TT4_KEY_V2, TT3_KEY_V5, TT5_KEY, TT6_KEY, TT7_KEY, TT8_KEY, TT9_KEY, TT12_KEY } from './cards.consts.js';
 import { rulesSlice } from './cards.rules.js';
 import { dataSlice } from './cards.data.js';
 import { syncSlice } from './cards.sync.js';
@@ -55,13 +54,30 @@ import { validateCardRules } from './card-rules.schema.js';
 
 let _cardsCacheRaw = null;
 
+// 坏库备份键（2026-09-24 F3）：口径对齐 base/run 的 corrupt 键（sdt-base-N-corrupt / sdt-run-N-corrupt）。
+// 定义在本文件、不进 cards.consts.js：仅卡库存取层使用，避免触碰敏感的键定义区。
+const CORRUPT_BACKUP_KEY = 'sdt-cards-corrupt';
+// 库串损坏降级中：暂停一切卡库写回（含启动自动播种 ensureStarters 的 upsert/saveAll），
+// 等待人工恢复——否则启动播种会用新手卡无备份地覆盖原库（F3）
+let _corruptNoWrite = false;
+let _corruptWriteWarned = false;
+function warnCorruptNoWrite() {
+  if (_corruptWriteWarned) return;
+  _corruptWriteWarned = true;
+  console.warn(`[cards] 自定义卡库串损坏，已降级为空库并暂停所有卡库写回（含启动自动播种）。` +
+    `原串已备份到 ${CORRUPT_BACKUP_KEY}。人工恢复：localStorage.setItem('${KEY}', ` +
+    `localStorage.getItem('${CORRUPT_BACKUP_KEY}')) 后刷新页面`);
+}
+// 空库统一指纹：KEY 缺失（null/undefined）与 '[]' 视为同一空库状态（F2 并发比对用）
+const libFingerprint = (s) => (s == null || s === '[]') ? '' : s;
+
 function restoreLastValidCardsCache() {
   if (_cardsCacheRaw == null) {
     _cardsCache = null;
     return;
   }
   try { _cardsCache = JSON.parse(_cardsCacheRaw); }
-  catch (e) { _cardsCache = null; }
+  catch { _cardsCache = null; }
 }
 
 function assertValidCardRules(cards) {
@@ -93,8 +109,18 @@ function assertValidCardRules(cards) {
       let cards;
       try {
         raw = localStorage.getItem(KEY);
-        cards = JSON.parse(raw) || [];
-      } catch (e) {
+        const parsed = raw == null ? [] : JSON.parse(raw);
+        // JSON 合法但不是数组（对象/数字/字符串）与解析失败同口径：先备份再降级，
+        // 不在启动链上抛 TypeError 黑屏，也不给自动播种留下「空库可覆盖」的假象
+        if (!Array.isArray(parsed)) throw new SyntaxError('card library is not an array');
+        cards = parsed;
+      } catch {
+        // F3（2026-09-24）：解析失败不再静默当空库——先把原串备份到 corrupt 键
+        //（口径同 base/run），再降级为空库并暂停一切卡库写回（含启动自动播种），
+        // 避免几百张自定义卡被新手卡无备份覆盖
+        _corruptNoWrite = true;
+        try { if (raw != null) localStorage.setItem(CORRUPT_BACKUP_KEY, raw); } catch { /* 存储不可用 */ }
+        warnCorruptNoWrite();
         _cardsCache = [];
         _cardsCacheRaw = '[]';
         return _cardsCache;
@@ -111,10 +137,25 @@ function assertValidCardRules(cards) {
 
     // 写入走安全封装（迭代评审 09-20 G-P2）：配额满时裸写曾抛未捕获异常、卡牌设计器无声失败
     saveAll(cards) {
+      if (_corruptNoWrite) { warnCorruptNoWrite(); return false; }
       try { assertValidCardRules(cards); }
       catch (e) {
         restoreLastValidCardsCache();
         throw e;
+      }
+      // F2（2026-09-24）写前并发校验：重读当前库串与本页快照（_cardsCacheRaw）比对。
+      // 不一致说明另一标签页/外部已改库（如新标签页刚播入 TT12 新批次）——旧缓存
+      // 全量回写会把新数据整体回滚且播种 marker 已置、永不自愈。这里选择「放弃本次
+      // 回写」而非合并：saveAll 收到的是调用方改过的全量数组，安全合并需按 id 做
+      // 三方差异（删除语义不明）；放弃 + 失效缓存零风险，下一次 all() 自动读到最新库。
+      // 单卡写入的合并重放见 upsert()。
+      let currentRaw = null;
+      try { currentRaw = localStorage.getItem(KEY); } catch { /* 读失败按无外部变化处理，写失败由下方兜底 */ }
+      if (_cardsCacheRaw != null && libFingerprint(currentRaw) !== libFingerprint(_cardsCacheRaw)) {
+        console.warn('[cards] 检测到卡牌库已被其他标签页或外部修改，本次写回已放弃（不覆盖新数据）；下次读取将自动刷新到最新库');
+        _cardsCache = null;
+        _cardsCacheRaw = null;
+        return false;
       }
       try {
         const serialized = JSON.stringify(cards);
@@ -131,11 +172,18 @@ function assertValidCardRules(cards) {
 
 
     upsert(card) {
-      const cards = SDT.Cards.all().slice();
+      if (_corruptNoWrite) { warnCorruptNoWrite(); return card; }
       if (!card.id) card.id = 'c' + Date.now().toString(36) + Math.floor(Random.random('identity') * 46656).toString(36);
-      const i = cards.findIndex(c => c.id === card.id);
-      if (i >= 0) cards[i] = card; else cards.push(card);
-      SDT.Cards.saveAll(cards);
+      // F2（2026-09-24）：单卡写入语义明确（按 id 覆盖/追加），并发失配被拒时缓存已
+      // 失效，重读最新库重放本次 upsert——既不回滚他人刚播入的批次，也不丢本次写入
+      //（播种 marker+upsert 幂等设计允许重放）；重放仍失败（如配额满）按原口径静默。
+      const apply = (list) => {
+        const next = list.slice();
+        const i = next.findIndex(c => c.id === card.id);
+        if (i >= 0) next[i] = card; else next.push(card);
+        return next;
+      };
+      if (!SDT.Cards.saveAll(apply(SDT.Cards.all()))) SDT.Cards.saveAll(apply(SDT.Cards.all()));
       return card;
     },
 
@@ -143,7 +191,13 @@ function assertValidCardRules(cards) {
     remove(id) { SDT.Cards.saveAll(SDT.Cards.all().filter(c => c.id !== id)); },
 
 
-    clearAll() { _cardsCache = null; _cardsCacheRaw = null; localStorage.removeItem(KEY); },
+    clearAll() {
+      _cardsCache = null;
+      _cardsCacheRaw = null;
+      _corruptNoWrite = false;   // 显式清空卡库 = 人工处置完毕，恢复可写（corrupt 备份键保留供追查）
+      _corruptWriteWarned = false;
+      localStorage.removeItem(KEY);
+    },
 
     // ---- 卡背图案（v0.21）：默认「行囊粗布」恒解锁，其余由成就领取解锁 ----
     // emblem 印在卡背中央；from 说明解锁途径（基地成就页展示）。

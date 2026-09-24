@@ -1,6 +1,5 @@
 import { afterEach, beforeAll, describe, expect, it } from 'vitest';
 import { validateCardRules } from '../game/src/cards/card-rules.schema.js';
-import { Random } from '../game/src/core/random.js';
 import { pstat, set$pstat } from '../game/src/battle/battle.runtime.js';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };

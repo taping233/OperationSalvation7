@@ -21,7 +21,7 @@ const FLOW = source('run/game.run.flow.js');
 
 it('满包拒绝新卡，只允许普通背包已有未满堆合并', () => {
   const text = source('run/game.session.js');
-  const body = text.match(/function canReceiveCard\(card\) \{([\s\S]*?)\n  \}/)[1];
+  const body = text.match(/function canReceiveCard\(card\) \{([\s\S]*?)\n {2}\}/)[1];
   const game = { ownedCards: [] };
   const receive = new Function('game', 'stackCapOf', 'canAcceptCard', `return function(card) {${body}}`)(game, () => 3, () => false);
   const card = { name: '测试卡' };

@@ -56,7 +56,7 @@ const nap = (ms) => new Promise(r => setTimeout(r, ms));   // 空闲确认用真
 const waitLog = async (pred, ms = 4000) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (pred()) return true; await nap(20); } return false; };   // 结果级轮询：等动作链真正落日志/终态再断言（根治负载 flake）
 const snap = () => BattleSession.getSnapshot();
 const logsJoin = (g) => g.logs.join('\n');
-const endBattle = (g) => { try { if (g.battleActive && !snap().busy) BattleSession.commands.flee(); } catch (_) {} };
+const endBattle = (g) => { try { if (g.battleActive && !snap().busy) BattleSession.commands.flee(); } catch { /* 已终局/不可撤离：收尾 best-effort */ } };
 
 let asyncError = null;
 process.on('unhandledRejection', (e) => { asyncError = e; });

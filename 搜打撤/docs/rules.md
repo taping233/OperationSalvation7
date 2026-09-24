@@ -1,4 +1,4 @@
-# 现行游戏规则（v0.57.0）
+# 现行游戏规则（v0.60.0）
 
 本文是玩家规则的唯一文档真源；跨模块数值的代码真源为 `src/rules.js`，地图几何由 `src/map-generator.js` 按种子生成（静态表在 `src/mapData.js`），卡牌数据在 `src/cards.js`。
 

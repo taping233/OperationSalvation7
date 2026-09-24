@@ -93,8 +93,8 @@ class WinterSoundscape {
   }
   destroy() {
     if (typeof document !== 'undefined') document.removeEventListener('visibilitychange', this._visibility);
-    this.nodes.forEach(node => { try { node.stop?.(); } catch (_) {} try { node.disconnect(); } catch (_) {} });
-    try { this.root.disconnect(); } catch (_) {} this.layers.clear(); this.nodes.length = 0; this.mode = null;
+    this.nodes.forEach(node => { try { node.stop?.(); } catch { /* 声景销毁 best-effort：节点可能已停止/断开，失败忽略 */ } try { node.disconnect(); } catch { /* 声景销毁 best-effort：节点可能已停止/断开，失败忽略 */ } });
+    try { this.root.disconnect(); } catch { /* 声景销毁 best-effort：节点可能已停止/断开，失败忽略 */ } this.layers.clear(); this.nodes.length = 0; this.mode = null;
   }
 }
 

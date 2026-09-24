@@ -3,7 +3,7 @@
  * 并携带壳侧共享引擎件（applyTextEffects/findCard/sweepDead/getSnapshot 等，自 head/tail 迁入）。
  * 状态读写一律经 battle.runtime.js（活绑定 + set$Xxx）；本文件禁 import 壳（contracts 拒环）。 */
 const SDT = window.SDT;
-import { renderBattle, battleState, G, foes, opts, mode, drawPile, hand, discard, granted, played, consumed, grave, energy, maxEnergy, turn, pdef, pstat, busy, infusing, discovering, discoverQueue, handSelecting, choosing, stealthStrike, nextSpellTwice, interaction, pendingHint, delayed, noDrawNext, viewingGrave, viewingDeck, viewingBag, floats, cardAnims, presentationActionSeq, dreadShown, spellCost1, meleeCost1, shaTransform, consumeFireballN, lastDrawnUids, lastPlayedType, playedMartialThisTurn, playedMovesThisTurn, selPool, selShaN, sel, lastDeckSel, selectingDeck, selDeckMax, allies, growthNames, growth, infuseFuels, sealUnlocked, extraTurn, deathSave, killAtkUp, poisonOnSpell, poisonLegacy, nestRunes, nestSyn, timeRune, arrowRune, unyieldRune, ashRune, unlimitedRune, holyRune, fireballRuneOn, freezeRuneOn, swiftRune, timeSpaceRune, timeSpaceUsed, armorMul, sealDone, playerCurseImmune, allSpellsInfused, zeroFeeUntil, cardOverrides, equipped, freeCast, battleRestartCheckpoint, restoringRestartCheckpoint, tmpSeq, activeActionSignal, surgeWaiter, lastPersistAt, snapCache, snapSig, set$lastDrawnUids, set$tmpSeq, set$noDrawNext, set$stealthStrike, set$nextSpellTwice, set$drawPile, set$energy, set$maxEnergy, set$shaTransform, set$consumeFireballN, set$deathSave, set$hand, set$extraTurn, set$delayed, set$meleeCost1, set$spellCost1, set$surgeWaiter, set$sealUnlocked, set$discovering, set$G, set$battleRestartCheckpoint, set$opts, set$mode, set$battleState, set$foes, set$interaction, set$selPool, set$selShaN, set$sel, set$discard, set$granted, set$played, set$consumed, set$grave, set$turn, set$busy, set$pdef, set$pstat, set$infusing, set$discoverQueue, set$handSelecting, set$floats, set$cardAnims, set$presentationActionSeq, set$choosing, set$lastPlayedType, set$viewingGrave, set$viewingDeck, set$dreadShown, set$selectingDeck, set$viewingBag, set$allies, set$growthNames, set$growth, set$infuseFuels, set$killAtkUp, set$poisonOnSpell, set$poisonLegacy, set$zeroFeeUntil, set$cardOverrides, set$sealDone, set$playerCurseImmune, set$allSpellsInfused, set$nestRunes, set$nestSyn, set$timeRune, set$arrowRune, set$unyieldRune, set$ashRune, set$unlimitedRune, set$holyRune, set$fireballRuneOn, set$freezeRuneOn, set$swiftRune, set$timeSpaceRune, set$timeSpaceUsed, set$armorMul, set$freeCast, set$equipped, set$playedMartialThisTurn, set$playedMovesThisTurn, set$selDeckMax, set$lastDeckSel, set$pendingHint, set$lastPersistAt, set$activeActionSignal, set$restoringRestartCheckpoint, set$snapSig, set$snapCache } from './battle.runtime.js';
+import { renderBattle, battleState, G, foes, opts, mode, drawPile, hand, discard, granted, played, consumed, grave, energy, maxEnergy, turn, pdef, pstat, busy, infusing, discovering, discoverQueue, handSelecting, choosing, stealthStrike, nextSpellTwice, interaction, pendingHint, delayed, viewingGrave, viewingDeck, viewingBag, floats, cardAnims, presentationActionSeq, dreadShown, spellCost1, meleeCost1, shaTransform, consumeFireballN, lastDrawnUids, lastPlayedType, playedMartialThisTurn, playedMovesThisTurn, selPool, selShaN, sel, lastDeckSel, selectingDeck, selDeckMax, allies, growthNames, growth, infuseFuels, sealUnlocked, deathSave, killAtkUp, poisonOnSpell, poisonLegacy, nestRunes, nestSyn, arrowRune, unyieldRune, ashRune, unlimitedRune, holyRune, freezeRuneOn, armorMul, sealDone, playerCurseImmune, allSpellsInfused, zeroFeeUntil, cardOverrides, equipped, freeCast, battleRestartCheckpoint, restoringRestartCheckpoint, tmpSeq, activeActionSignal, surgeWaiter, lastPersistAt, snapCache, snapSig, set$lastDrawnUids, set$tmpSeq, set$noDrawNext, set$stealthStrike, set$nextSpellTwice, set$drawPile, set$energy, set$maxEnergy, set$shaTransform, set$consumeFireballN, set$deathSave, set$hand, set$extraTurn, set$delayed, set$meleeCost1, set$spellCost1, set$surgeWaiter, set$sealUnlocked, set$discovering, set$G, set$battleRestartCheckpoint, set$opts, set$mode, set$battleState, set$foes, set$interaction, set$selPool, set$selShaN, set$sel, set$discard, set$granted, set$played, set$consumed, set$grave, set$turn, set$busy, set$pdef, set$pstat, set$infusing, set$discoverQueue, set$handSelecting, set$floats, set$cardAnims, set$presentationActionSeq, set$choosing, set$lastPlayedType, set$viewingGrave, set$viewingDeck, set$dreadShown, set$selectingDeck, set$viewingBag, set$allies, set$growthNames, set$growth, set$infuseFuels, set$killAtkUp, set$poisonOnSpell, set$poisonLegacy, set$zeroFeeUntil, set$cardOverrides, set$sealDone, set$playerCurseImmune, set$allSpellsInfused, set$nestRunes, set$nestSyn, set$timeRune, set$arrowRune, set$unyieldRune, set$ashRune, set$unlimitedRune, set$holyRune, set$fireballRuneOn, set$freezeRuneOn, set$swiftRune, set$timeSpaceRune, set$timeSpaceUsed, set$armorMul, set$freeCast, set$equipped, set$playedMartialThisTurn, set$playedMovesThisTurn, set$selDeckMax, set$lastDeckSel, set$pendingHint, set$lastPersistAt, set$activeActionSignal, set$restoringRestartCheckpoint, set$snapSig, set$snapCache } from './battle.runtime.js';
 import { esc } from '../core/shared.js';
 import { createEffectExecutor, splitEffectClauses, consumeTriggerTexts } from './battle.effects.js';
 import { refillDrawPile, shuffleCards } from './battle.deck.js';
@@ -1171,7 +1171,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
       if (SDT.Art && SDT.Art.collectCardAssets && SDT.Art.warm) {
         SDT.Art.warm(SDT.Art.collectCardAssets((G.ownedCards || []).map(o => o && o.card).filter(Boolean)));
       }
-    } catch (_) {}
+    } catch { /* 预热失败（如 Art 域未就绪/资产缺失）：不阻塞进战斗 */ }
     const defs = Array.isArray(enemyDefs) ? enemyDefs : [enemyDefs];
     const startOptions = Object.assign({ isBoss: false }, options || {});
     if (!restoringRestartCheckpoint) {
@@ -1396,18 +1396,6 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     }
     queueCardExecution(uid, playCard, pendingCard?.fuelUids || [], target, isFree);
   }
-
-  // 需求 #17（2026-09-09）：「直接释放」的卡免费打出（freeCost），但仍要选目标——
-  // 多个敌人存活时先进入指向流程（拖到敌人身上 / 点选），单敌自动指向
-  function freeCastTarget(uid, card) {
-    const need = targetSide(card);
-    if (need === 'enemy' && alive().length > 1) {
-      beginCardTargeting(uid, card, alive().map(foe => foe.id), `直接释放：把【${card.name}】拖到一名敌人身上（不消耗费用）`);
-      return false;   // 目标未定，暂不执行
-    }
-    return true;   // 单敌 / 自身 / 无目标：直接执行
-  }
-
   // v0.32 堆叠手牌：点击的是一叠同名卡的代表性 uid——选中/取消该叠中的一张
   function toggleInfusePick(uid) {
     if (!infusing || uid === infusing.uid) return;
@@ -2151,7 +2139,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
   }
 
   // 玩家侧诅咒统一入口：旧日再临后免疫诅咒（灼烧也是诅咒，2026-09-09 留言口径）
-  function addPlayerCurse(key, n, foe) {
+  function addPlayerCurse(key, n) {
     if (playerCurseImmune) {
       // 第十二批（2026-09-23）：邪能护体的本回合临时免疫在场时用中性措辞（深渊主宰的
       // 永久免疫无本条 pending 时维持原口吻；两免疫同场的极端组合按临时措辞展示，仅文案差异）
@@ -2173,7 +2161,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     set$nestRunes((opts && opts.nest && opts.nest.runes) || []);
     if (!nestRunes.length) return;
     set$nestSyn((SDT.Runes && SDT.Runes.evaluateSlots) ? SDT.Runes.evaluateSlots(nestRunes) : {});
-    G.log('[[icon:gem]] <b>龙巢符文</b>生效：' + nestRunes.map(r => esc(r.name + '（' + r.attrs.join('') + '）')).join('、'), 'ok');
+    G.log('[[icon:gem]] <b>研究所符文</b>生效：' + nestRunes.map(r => esc(r.name + '（' + r.attrs.join('') + '）')).join('、'), 'ok');
     nestRunes.forEach(r => {
       if (r.kind === 'attack') Combat.addBlessing(pstat, 'atkUp', 1);
       if (r.kind === 'mana') Combat.addBlessing(pstat, 'spellUp', 1);
@@ -2464,10 +2452,8 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     } else if (swapPair && swapPair.length >= 2) {
       swapCardCosts(swapPair[0], swapPair[1]);   // 迷之匣：两张发现完毕，交换费用
     }
-    else if (consumeTempAtTurn && tempUids.length) {
-      delayed.push({ special: 'consumeTemps', uids: [...tempUids], cardName: '江湖救急' });
-      G.log(`[[icon:hourglass]] <b>江湖救急</b>：置入的 ${tempUids.length} 张临时卡将在下个回合开始时消耗`, 'sys');
-    }
+    // （2026-09-23 lint 批次：此处原有一份与上方 2461 行重复的「江湖救急」else-if——设计者 v0.53.3
+    // 快照插入迷之匣分支时留下的复制残tail，永不执行，已删；行为零变化）
     processDiscoverQueue();
     requestBattleRender();
   }

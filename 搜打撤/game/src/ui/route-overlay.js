@@ -46,7 +46,7 @@ function candidates(layer) {
   return out.sort((x,y)=>[x.start,x.rejoin,x.supply,x.risk].join(',').localeCompare([y.start,y.rejoin,y.supply,y.risk].join(','),undefined,{numeric:true}));
 }
 
-export function applyRouteOverlay({ seed, generatorVersion, layoutVersion, layerData, routeVersion=ROUTE_VERSION }) {
+export function applyRouteOverlay({ generatorVersion, layoutVersion, layerData, routeVersion=ROUTE_VERSION }) {
   let original=null;
   try {
     if(generatorVersion!==3 || layoutVersion!==9 || routeVersion!==ROUTE_VERSION || !Array.isArray(layerData) || layerData.length!==4)

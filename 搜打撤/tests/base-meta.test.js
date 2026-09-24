@@ -17,7 +17,6 @@ beforeAll(() => {
   Cards = window.SDT.Cards;
 });
 
-const store = () => JSON.parse(JSON.stringify(globalThis.localStorage));
 
 describe('基地存档档位隔离', () => {
   it('slot1 木材落盘到独立键', () => {

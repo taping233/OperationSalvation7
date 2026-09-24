@@ -4,7 +4,7 @@
 const SDT = window.SDT;
 const UI = window.SDT.UI;
 import { esc } from '../core/shared.js';
-import { cardStacks, doDeath, game, getActiveSlot, newUid, safeUsed, saveGame, usedSlots } from '../run/game.session.js';
+import { doDeath, game, getActiveSlot, saveGame } from '../run/game.session.js';
 import { RunStorage } from './game.storage.js';
 import { Random } from '../core/random.js';
 import { on as busOn } from '../core/event-bus.js';

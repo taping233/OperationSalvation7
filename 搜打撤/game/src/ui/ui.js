@@ -1,4 +1,3 @@
-import { characterName } from '../core/characters.js';
 import { esc } from '../core/shared.js';
 import { renderExpeditionPanel } from '../run/expedition.view.js';
 import { descRich } from '../cards/cards.view.js';
@@ -942,7 +941,7 @@ import { photoMountFor } from '../hub/photo-studio-presentation.js';
       let target = null;
       if (initialFocus && initialFocus.nodeType === 1 && root.contains(initialFocus)) target = initialFocus;
       if (!target && typeof initialFocus === 'string') {
-        try { target = root.querySelector(initialFocus); } catch (_) { target = null; }
+        try { target = root.querySelector(initialFocus); } catch { target = null; }
       }
       // HTML 中的 data-initial-focus 是调用方无需接触 DOM 引用的安全显式入口。
       if (!target) target = root.querySelector('[data-initial-focus]');

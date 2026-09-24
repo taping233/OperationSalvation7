@@ -126,3 +126,63 @@ game/src/core/sdt-facade.js(10,68): error TS2339: Property 'SDT' does not exist 
 - 未动：battle/、audio/、tests/、`core/sdt-facade.js`、`package.json`/`package-lock.json`（后者有并行会话未提交改动，本会话未触碰）。
 - 未做：git commit/push（未获指示）；`NEXT-AI-HANDOFF-2026-09-20.md` 未更新（本任务硬边界禁止改动其他既有文件，交接状态由本节代述）。
 - 未核实项：无。
+
+## 六、第二批复盘（2026-09-23，P1 首批扩容）
+
+- 状态：第二批完成（3 文件 +jsconfig 扩容，tsc/测试证据见下）；HEAD 仍为 e527fec，本批改动未提交。
+- 选批流程（本批起固化为标准流程）：a) 从候选表挑 2-3 个，避开 battle/、audio/；b) 依赖体检——临时把候选放进 include 跑一次 tsc，沿 import 链两跳闭包内所有被拖入文件必须零错误；c) 避让并行任务——`git status --short` 里已有未提交改动的源文件一律不选。
+
+### 6.1 候选与依赖体检表
+
+体检方式：将 encounter-selector、cards.consts、map-snapshot 三个候选临时加入 jsconfig include 跑 tsc（批注前探针）。未提交改动避让：工作区中带未提交改动的源文件仅上一批两试点（map-graph.js、mech-sentences.js，即 P0 批自身的工作区状态）与并行任务的 docs/package/desktop-app/eslint/ci 产物，三个新选文件均干净。
+
+| 候选 | 两跳依赖闭包 | 体检（批注前探针） | 直接测试 | 判定 |
+|---|---|---|---|---|
+| `run/encounter-selector.js`（23 行） | 0 依赖 | 0 错误 | `tests/r7a-encounter-selector.test.js`（7 用例） | **入选** |
+| `cards/cards.consts.js`（42 行） | 0 依赖 | 0 错误 | 7 个测试文件直接 import（cards-replay、tt3-effect-baseline、tt12-structured-preplay 等） | **入选** |
+| `run/map-snapshot.js`（147 行） | layeredMap → map-generator（叶子，285 行，无更深 import） | **依赖两跳 0 错误**；本体 7 错（TS2339×6 union 收窄 + TS2739 参数缺省），纯 JSDoc 可修 | `tests/r5a-map-snapshot.test.js`（6 用例）、`tests/r5a-session-menu.test.js`（5 用例，直接 import map-snapshot） | **入选** |
+| `core/random.js` | sdt-facade | P0 实测 2×TS2339（window.SDT，§2.3 留证） | tests/random.test.js | 落选：SDT 口径（§四-1）仍未定，本批无 .d.ts 新增权限 |
+| `core/event-bus.js` | sdt-facade、diagnostics.local | P0 实测 diagnostics.local 8+ implicit-any（§四-2） | tests/diagnostics.local.test.js | 落选：依赖体检不过 |
+| `core/performance-budgets.js` | 0 | 本批未探针 | 无直接测试 | 落选：本批验收标准"无直接测试不选" |
+| `core/motion.js` | npm motion/mini | 未探针（外部包类型口径 §四-4 未定） | — | 落选 |
+| `cards/card-rules.schema.js` | 0 | 未探针 | 未核实 | 维持第三批（381 行 typedef 工作量） |
+
+### 6.2 证据（均在 `搜打撤/` 下执行）
+
+| 步骤 | 结果 |
+|---|---|
+| tsc 基线（改前，include=旧 2 试点） | exit 0，零错误 |
+| tsc 探针（include=5 文件，候选未批注） | exit 1，7 错全部位于 map-snapshot.js 本体；layeredMap/map-generator 0 错（错误清单：118/133/135/143/144×2 的 TS2339 `.value` 不在联合上、142 的 TS2739 createMapSnapshot 缺 routeVersion/routePlan） |
+| tsc 批注后（最终 include=5 文件） | **exit 0，零错误**（含旧两试点） |
+| 测试改前基线 | 上表 3 候选的全部覆盖测试 10 文件 **45 用例全绿** |
+| 测试改后（最终状态复跑） | 同 10 文件 **45 用例全绿** |
+| 纯注释证明 | `git diff --stat`：3 文件 **64 insertions(+)、0 deletions(-)**；新增行逐行过滤校验，全部为注释或空行（无任何代码行被改写） |
+
+本批改动摘要：
+- `game/src/run/encounter-selector.js`（+28）：`// @ts-check`；`@typedef EncounterSelectFailure`（`{ok:false, code:string}`）与 `@typedef EncounterSpec`（kind 含 `'elite'`）；`badGroup` 补 `@param/@returns{boolean}`，两个导出函数补 `@param/@returns`（判别联合）。
+- `game/src/cards/cards.consts.js`（+4）：`// @ts-check`；`RETIRE_TT10`/`RETIRE_TT11`/`CLASSES` 加**独立行** `@type {string[]}`（16 个 KEY 常量自证为 string，不加注解）。
+- `game/src/run/map-snapshot.js`（+32）：`// @ts-check`；`@typedef SnapshotFail`（**`ok:false` 写成字面量类型**）；`fail`/`createMapSnapshot`/`validateMapSnapshotInner`/`validateMapSnapshot`/`hydrateMapSnapshot` 补 `@param/@returns`。7 个自体错误全靠注释消除：ok 字面量让 `if(!checked.ok)` 收窄生效（消 6 个 TS2339），`@param` 对象类型把 routeVersion/routePlan 标可选（消 1 个 TS2739）。
+- `jsconfig.json`：include 2 → 5 个文件（仍是个位数，符合 P1 约束）。
+
+### 6.3 新发现的坑
+
+1. **"未类型化的依赖会连锁拖入报错"不能凭空推定**：P0 对 map-snapshot 的落选理由之一是"依赖 layeredMap 未类型化，会连锁拖入"，实测两跳依赖（layeredMap、map-generator）在 checkJs 下 0 错误。被拖文件是否报错只取决于它自身代码，依赖体检必须实测、不能靠猜。
+2. **行内 `/** @type */ const X = ...` 前缀会破坏"纯新增 0 删除"证据**：同代码行被改写时 git diff 出现成对 -/+。本批 cards.consts.js 初版就因此返工——JSDoc 注解必须写成独立行。
+3. **JSDoc 联合类型收窄的关键是 ok 写成字面量**：`@typedef {{ok:false, ...}}` 里的 `false` 是字面量类型；若写 `boolean`，TS 宽化后 `if(!x.ok)` 不再收窄，`.value` 照样报 TS2339。这是 Result 风格代码（ok/code/value）批注的通用解法，本批 7 错中 6 个同根。
+4. **TS2739（调用缺属性）用 `@param` 对象类型 + 可选字段 `?` 即可消**：不需要动调用方，也不需要把参数改 any。
+5. **r5a-session-menu.test.js 虽名为 session，但直接 import map-snapshot**：按"直接 import 即覆盖"口径纳入其覆盖测试集。
+
+### 6.4 剩余候选清单（第三批建议）
+
+1. `cards/card-rules.schema.js`（381 行，0 依赖）——需先核实直接测试；体量大，建议单独一批。
+2. `core/event-bus.js`（64 行）——门槛：先批注 `diagnostics.local.js`（有直接测试），且 sdt-facade 的 2 错仍需 §四-1 口径。
+3. `core/random.js`（80 行）——门槛同上：SDT 口径（§四-1 a/b 择一）。
+4. `core/performance-budgets.js`（19 行，0 依赖）——除非放宽"无直接测试"口径（如 node 直调冒烟），否则持续搁置。
+5. `run/map-generator.js`（285 行，0 依赖）——新发现：本批体检实测其 checkJs 0 错误，可作零依赖大文件候选（需先找直接测试）。
+
+### 6.5 本批边界与未动项
+
+- 修改：3 个源文件（纯注释，64 insertions/0 deletions）+ `jsconfig.json`（include 扩行）+ 本文档（追加本节）。新增：无。
+- 未动：tests/、battle/、audio/、`core/` 全部、`sdt-facade.js`、package*.json、desktop-app（后几项有并行会话未提交改动，未触碰）。
+- 未做：git commit/push（未获指示）；`NEXT-AI-HANDOFF-2026-09-20.md` 未更新（超出本批允许清单）。
+- 未核实项：`card-rules.schema.js` 与 `map-generator.js` 的直接测试覆盖（列入第三批前置核实）。

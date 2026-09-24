@@ -410,7 +410,6 @@ function requestClassChoice(options) {
   let lastSaveConflictWarnAt = 0;
 
   const hasRun = (i) => RunStorage.has(i);                            // 该档有进行中的对局
-  const hasSlot = (i) => hasRun(i) || SDT.Base.hasSlot(i);           // 该档位已被创建
 
   function readSlot(i) {
     return RunStorage.read(i);
@@ -656,7 +655,7 @@ function requestClassChoice(options) {
       game.nestTargetedBox = s.nestTargetedBox || 0;
       game.pendingRunePick = s.pendingRunePick || null;
       game.nestBoss = null;   // 巢主在开战时重新降临（boss 定义不序列化）
-      UI.log(`[[icon:download]] 已读取【档位 ${slot}】存档——龙巢远征继续`, 'ok');
+      UI.log(`[[icon:download]] 已读取【档位 ${slot}】存档——研究所远征继续`, 'ok');
       window.SDT.Nest.renderNestMap();
       if (s.battle && SDT.Battle && typeof SDT.Battle.restore === 'function') {
         if (SDT.Battle.restore(game, s.battle)) saveGame();

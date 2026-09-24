@@ -1,11 +1,9 @@
 import { sdtDefine } from './sdt-facade.js';
-/* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
-const SDT = window.SDT;
   const KEY = 'sdt-cell-notes-v1';
 
   function all() {
     try { return JSON.parse(localStorage.getItem(KEY)) || {}; }
-    catch (e) { return {}; }
+    catch { return {}; }
   }
 
   function get(floorId, x, y) {

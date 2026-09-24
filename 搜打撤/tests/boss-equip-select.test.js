@@ -98,7 +98,6 @@ describe('BOSS 编组 · 开战装备勾选（2026-09-10 #35）', () => {
     BattleSession.start(g, [foeDef()], { isBoss: true, name: '上限测试' });
     const ds = snap().deckSelection;
     expect(ds).toBeTruthy();
-    const max = ds.max;
     fillDeck(ds.cards, []);
     BattleSession.commands.confirmDeck();
     await drain();

@@ -12,7 +12,7 @@ if (app && cursor && cursorImage) {
     '.ov-btn:not(.dis)', '.menu-btn:not(:disabled)', '.mode-card', '.cls-card', '.stash-row', '.step-btn:not(:disabled)',
     '.bt-card:not(.off)', '.bt-pile.clickable', '.bt-foe.can-target', '.sts-unit.can-target',
     '.sts-equip.has-skill:not(.used)', '.shop-row', '.bag-cell.filled', '.lib-cardwrap',
-    '.dep-card', '.sac-row', '.event-choice-card', '.type-tab', '#btnMapOverview',
+    '.dep-card', '.sac-row', '.event-choice-card', '.type-tab',
   ].join(',');
   const aiming = '.battle-stage[data-phase="targeting"] :is(.sts-unit.can-target, .bt-foe.can-target, .bt-card.targeting, .bt-potion.need-target)';
   const textField = 'input:not([type="button"]):not([type="submit"]):not([type="range"]):not([type="checkbox"]):not([type="radio"]), textarea, [contenteditable="true"]';

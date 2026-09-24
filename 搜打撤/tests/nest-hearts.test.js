@@ -5,7 +5,7 @@ window.SDT.Icons.TYPE_ART = {};
 window.SDT.Sound = { music() {}, sfx() {}, setDucked() {} };
 window.SDT.MAP = { rules: { battleEnergy: 99, battleHandMax: 99, bossDeckSize: 1, starterSha: 0, battleStartDraw: 5, battleTurnDraw: 2, diceSides: 6 }, items: { rations: { name: '口粮' }, wood: { name: '木材' } } };
 await import('../game/src/cards/cards.js');
-const { BattleSession, viewApi } = await import('../game/src/battle/battle.core.js');
+const { BattleSession } = await import('../game/src/battle/battle.core.js');
 const C = window.SDT.Cards;
 beforeAll(() => { C.ensureSha(); C.ensureStarters(); C.ensureTabletop(); C.ensureDmgTypes(); C.ensureEffectFields(); });
 let uidSeq = 0;

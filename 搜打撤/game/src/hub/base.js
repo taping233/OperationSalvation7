@@ -57,7 +57,7 @@ import { DATA } from '../core/data-loader.js';
       bagUp: 0, safeUp: 0,
       stashUp: 0,     // 仓库扩建等级（每次 +3 张容量）
       coins: 0,       // 储备币：卖出仓库物品所得（Item 18：只用于孵蛋/建设，不进局）
-      nestUnlocked: false,   // 龙巢：击败一图首脑并成功撤离后解锁
+      nestUnlocked: false,   // 经典生命研究所：钥匙开门（消耗 KEY_NEEDED 把真实储备）后永久通行
       runes: [],      // 仓库符文 [{kind,name,rarity,attrs,desc}]（每块占 1 仓库格）
       nestBagUp: 0,   // 符文背包升级次数（10 + n 格，上限 25）
       eggPity: 0,     // 宠物蛋软保底：连续未出蛋的开箱次数（出蛋归零，2026-09-19 老板定向）
@@ -109,6 +109,18 @@ import { DATA } from '../core/data-loader.js';
     return dst;
   }
 
+  // 字段级类型兜底（2026-09-24 F1，口径同对局档读取的字段级默认值兜底）：
+  // JSON 合法但容器字段被写坏（字符串/数字/null/数组）时弃用原值回落默认并 console.warn
+  // 留痕，不让 adopt/peek 在严格模式下抛 TypeError 卡死选档页；缺字段（undefined）
+  // 不算损坏，仍由 mergeDef 补齐默认。
+  const isPlainObj = (v) => !!v && typeof v === 'object' && !Array.isArray(v);
+  function normalizeObjField(d, key, fallback) {
+    const v = d[key];
+    if (v === undefined || isPlainObj(v)) return;
+    console.warn(`[base] 存档字段 ${key} 类型损坏（${v === null ? 'null' : Array.isArray(v) ? 'array' : typeof v}），已回落默认值`);
+    d[key] = fallback;
+  }
+
   // 把原始 JSON 补齐为完整基地数据（读取 / 概览共用）
   function adopt(raw) {
     const d = Object.assign(def(), raw, {
@@ -118,6 +130,18 @@ import { DATA } from '../core/data-loader.js';
       collClaimed: (raw.collClaimed && typeof raw.collClaimed === 'object') ? raw.collClaimed : {},
       collXp: (raw.collXp && typeof raw.collXp === 'object') ? raw.collXp : {},
     });
+    // F1（2026-09-24）：容器字段类型兜底。stats/characters/classes/pets/home 等在
+    // peek/use/终局提交全链路被解引用或赋属性，写坏即 TypeError（JSON 语法坏已有
+    // corrupt 备份口径，这里补齐「JSON 合法但字段类型坏」的缺口：可读、可渲染、不写回）。
+    normalizeObjField(d, 'stats', def().stats);
+    normalizeObjField(d, 'characters', {});
+    normalizeObjField(d, 'classes', {});
+    normalizeObjField(d, 'pets', {});
+    normalizeObjField(d, 'home', def().home);
+    normalizeObjField(d, 'appearance', def().appearance);
+    normalizeObjField(d, 'goals', def().goals);
+    normalizeObjField(d, 'story', def().story);
+    normalizeObjField(d, 'achClaimed', {});
     mergeDef(d, def());
     if (!Array.isArray(d.stats.bossKills)) d.stats.bossKills = [];
     if (!Array.isArray(d.stats.nestBossKills)) d.stats.nestBossKills = [];
@@ -147,14 +171,14 @@ import { DATA } from '../core/data-loader.js';
   const emptySlotObservation = new Map();
 
   function parseRaw(i) {
-    let raw = null;
-    try { raw = localStorage.getItem(SLOT_KEY(i)); } catch (e) { return null; }
+    let raw;   // 不做冗余初始化：try 内必赋值，catch 直接 return（下方 == null 判断兼容 undefined）
+    try { raw = localStorage.getItem(SLOT_KEY(i)); } catch { return null; }
     if (raw == null) { peekCache.delete(i); delete issues[i]; return null; }
     const hit = peekCache.get(i);
     if (hit && hit.raw === raw) return hit.parsed;
     let s;
     try { s = JSON.parse(raw); }
-    catch (e) { return _corrupt(i, raw); }
+    catch { return _corrupt(i, raw); }
     if (!s || typeof s !== 'object') return _corrupt(i, raw);
     const v = +s.version || 0;
     if (v > BASE_VERSION) {
@@ -176,7 +200,7 @@ import { DATA } from '../core/data-loader.js';
   // 坏档处理：原串备份到 corrupt 键后返回 null（原键不动，玩家决定是否覆盖重开）
   function _corrupt(i, raw) {
     issues[i] = 'corrupt';
-    try { localStorage.setItem(CORRUPT_KEY(i), raw); } catch (e) { /* 存储不可用 */ }
+    try { localStorage.setItem(CORRUPT_KEY(i), raw); } catch { /* 存储不可用 */ }
     console.warn(`[base] 档位 ${i} 基地数据损坏，原串已备份到 ${CORRUPT_KEY(i)}`);
     return null;
   }
@@ -194,14 +218,14 @@ import { DATA } from '../core/data-loader.js';
       });
       localStorage.removeItem(LEGACY_KEY);
       return true;
-    } catch (e) { /* 存储不可用时静默 */ }
+    } catch { /* 存储不可用时静默 */ }
   }
 
   // 进入档位：加载该档独立的基地数据（没有则用初始值 = 新档案）
   function use(s) {
     slot = s;
     try { writeBaseline.set(s, localStorage.getItem(SLOT_KEY(s))); }
-    catch (e) { writeBaseline.set(s, null); }
+    catch { writeBaseline.set(s, null); }
     const raw = parseRaw(s);
     data = raw ? adopt(raw) : def();
     ensureStarterPet();
@@ -228,7 +252,7 @@ import { DATA } from '../core/data-loader.js';
       if (writeBaseline.has(slot) && currentRaw !== writeBaseline.get(slot)) {
         if (!saveWarned) {
           saveWarned = true;
-          try { if (window.SDT && window.SDT.UI) window.SDT.UI.log('[[icon:cross]] 基地存档已被其他标签页更新，请重新载入档位后继续', 'warn'); } catch (e2) { /* 门面未就绪 */ }
+          try { if (window.SDT && window.SDT.UI) window.SDT.UI.log('[[icon:cross]] 基地存档已被其他标签页更新，请重新载入档位后继续', 'warn'); } catch { /* 门面未就绪 */ }
         }
         return false;
       }
@@ -243,14 +267,14 @@ import { DATA } from '../core/data-loader.js';
       peekCache.set(slot, { raw, parsed: next });
       delete issues[slot];
       saveWarned = false;
-      try { localStorage.removeItem(CORRUPT_KEY(slot)); } catch (e) { /* 无关紧要 */ }
+      try { localStorage.removeItem(CORRUPT_KEY(slot)); } catch { /* 无关紧要 */ }
       return true;
-    } catch (e) {
+    } catch {
       // 写失败不再静默：仓库配额满时玩家以为卡牌已入库，重开档无声丢失。
       // base.js 无 UI 静态导入，循 window.SDT 晚读惯例（同 rules()）
       if (!saveWarned) {
         saveWarned = true;
-        try { if (window.SDT && window.SDT.UI) window.SDT.UI.log('[[icon:cross]] 基地存档写入失败（存储空间可能已满），入库/升级可能未保存', 'warn'); } catch (e2) { /* 门面未就绪 */ }
+        try { if (window.SDT && window.SDT.UI) window.SDT.UI.log('[[icon:cross]] 基地存档写入失败（存储空间可能已满），入库/升级可能未保存', 'warn'); } catch { /* 门面未就绪 */ }
       }
       return false;
     }
@@ -263,10 +287,10 @@ import { DATA } from '../core/data-loader.js';
     try {
       const currentRaw = localStorage.getItem(SLOT_KEY(s));
       if (emptySlotObservation.has(s) && currentRaw !== emptySlotObservation.get(s)) {
-        try { if (window.SDT && window.SDT.UI) window.SDT.UI.log('[[icon:cross]] 档位已在其他标签页创建，请返回选档重新进入', 'warn'); } catch (e2) { /* 门面未就绪 */ }
+        try { if (window.SDT && window.SDT.UI) window.SDT.UI.log('[[icon:cross]] 档位已在其他标签页创建，请返回选档重新进入', 'warn'); } catch { /* 门面未就绪 */ }
         return false;
       }
-    } catch (e) { return false; }
+    } catch { return false; }
     slot = s;
     delete issues[s]; // reset 是玩家明确的新开档动作，允许覆盖先前不可读档。
     data = def();
@@ -316,7 +340,7 @@ import { DATA } from '../core/data-loader.js';
       const raw = localStorage.getItem(SLOT_KEY(i));
       if (raw === null) emptySlotObservation.set(i, null);
       else emptySlotObservation.delete(i);
-    } catch (e) { emptySlotObservation.delete(i); }
+    } catch { emptySlotObservation.delete(i); }
     const raw = parseRaw(i);
     return raw ? adopt(raw) : null;
   }
@@ -335,21 +359,21 @@ import { DATA } from '../core/data-loader.js';
     writeBaseline.set(i, raw);
     peekCache.set(i, { raw, parsed: normalized });
     delete issues[i];
-    try { localStorage.removeItem(CORRUPT_KEY(i)); } catch (e) { /* 无关紧要 */ }
+    try { localStorage.removeItem(CORRUPT_KEY(i)); } catch { /* 无关紧要 */ }
     if (slot === i) data = normalized;
     return normalized;
   }
   function _refreshExternal(i) {
     peekCache.delete(i);
     const raw = parseRaw(i);
-    try { writeBaseline.set(i, localStorage.getItem(SLOT_KEY(i))); } catch (e) { writeBaseline.delete(i); }
+    try { writeBaseline.set(i, localStorage.getItem(SLOT_KEY(i))); } catch { writeBaseline.delete(i); }
     if (raw && slot === i) data = adopt(raw);
     return raw ? adopt(raw) : null;
   }
 
   // 删除某档位的基地数据
-  function wipe(i) { if (txPending(i)) return false; try { localStorage.removeItem(SLOT_KEY(i)); return true; } catch (e) { return false; } }
-  const hasSlot = (i) => { try { return !!localStorage.getItem(SLOT_KEY(i)); } catch (e) { return false; } };
+  function wipe(i) { if (txPending(i)) return false; try { localStorage.removeItem(SLOT_KEY(i)); return true; } catch { return false; } }
+  const hasSlot = (i) => { try { return !!localStorage.getItem(SLOT_KEY(i)); } catch { return false; } };
 
   // ---------- 卡背（v0.21） ----------
   const isBackUnlocked = (id) => !!(data.backs && data.backs[id]);

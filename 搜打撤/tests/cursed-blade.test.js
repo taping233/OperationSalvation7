@@ -76,7 +76,6 @@ async function playByName(g, name) {
 }
 
 const blade = () => C.all().find(c => c.id === 'cc-cursed-blade');
-const specOf = (key) => viewApi.handCurseSpecs().find(s => s.key === key);
 
 describe('诅咒之刃（cc-cursed-blade）', () => {
   it('卡牌已入库：2费稀有武术，攻（+3）词条', () => {

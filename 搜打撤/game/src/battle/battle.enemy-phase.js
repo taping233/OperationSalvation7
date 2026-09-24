@@ -2,12 +2,18 @@
  * 逐字搬迁（flee 因被引擎侧 finish 环调随迁 engine）；状态经 battle.runtime.js；禁 import 壳。 */
 const SDT = window.SDT;
 import { esc } from '../core/shared.js';
-import { BATTLE_PHASES, beginTargeting, cancelTargeting, createBattleState, transitionBattle } from './battle.state.js';
+import { BATTLE_PHASES, cancelTargeting, transitionBattle } from './battle.state.js';
 import { Random } from '../core/random.js';
 import * as Combat from './combat.js';
 import { demoMs } from './battle.pace.js';
-import { battleState, G, foes, mode, drawPile, hand, consumed, grave, energy, maxEnergy, turn, pdef, pstat, busy, infusing, discovering, handSelecting, choosing, interaction, pendingHint, noDrawNext, floats, playedMartialThisTurn, playedMovesThisTurn, allies, extraTurn, timeRune, holyRune, fireballRuneOn, swiftRune, timeSpaceRune, timeSpaceUsed, freeCast, lastPersistAt, set$noDrawNext, set$energy, set$extraTurn, set$battleState, set$interaction, set$turn, set$busy, set$timeSpaceUsed, set$playedMartialThisTurn, set$playedMovesThisTurn, set$pendingHint, set$lastPersistAt } from './battle.runtime.js';
-import { processDelayed, accrueGrowth, resolveCard, syncCurseCondEquips, applyKillRewards, unplayableReason, queueCardExecution, foeIdx, addPlayerCurse, playerTakeHit, frenzyCurse, elCurse, requestBattleRender, R, alive, intentFor, drawCards, resolveFoeDefeat, sweepDead, nestPhase, grantSha, findCard, effCostOf, finish, cancelInteraction, flee } from './battle.engine.js';
+import { battleState, G, foes, mode, drawPile, hand, consumed, grave, energy, maxEnergy, turn, pdef, pstat, busy, infusing, discovering, handSelecting, choosing, interaction, noDrawNext, floats, cardAnims, playedMovesThisTurn, allies, extraTurn, timeRune, holyRune, fireballRuneOn, swiftRune, timeSpaceRune, timeSpaceUsed, set$noDrawNext, set$energy, set$extraTurn, set$battleState, set$interaction, set$turn, set$busy, set$timeSpaceUsed, set$playedMartialThisTurn, set$playedMovesThisTurn, set$pendingHint, set$lastPersistAt } from './battle.runtime.js';
+import { processDelayed, accrueGrowth, resolveCard, syncCurseCondEquips, applyKillRewards, unplayableReason, queueCardExecution, foeIdx, addPlayerCurse, playerTakeHit, frenzyCurse, elCurse, requestBattleRender, R, alive, intentFor, drawCards, resolveFoeDefeat, sweepDead, nestPhase, grantSha, findCard, effCostOf, finish } from './battle.engine.js';
+
+  // 敌方步进演出节拍在 vitest 环境归零（比照 battle.engine.js 的 SURGE_WAVE_MS 先例）：
+  // 回归测试的等待辅助用固定次数 setTimeout(0) tick 当预算，其真实间隔平台相关
+  // （Windows ≈15.6ms / Linux ≈1ms），跨不过 420ms×N 的真实节拍会导致 CI 确定性红。
+  // 仅测速环境生效；运行时 demoMs 照常逐次求值（2× 档倍率不受影响）。
+  const ENEMY_STEP_ZERO = (typeof process !== 'undefined' && process.env && process.env.VITEST);
 
   // ---------- 回合结束 ----------
   function endTurn() {
@@ -179,9 +185,9 @@ import { processDelayed, accrueGrowth, resolveCard, syncCurseCondEquips, applyKi
       }
       requestBattleRender();
       if (G.hp <= 0) { set$busy(false); finish(false); return; }
-      setTimeout(step, demoMs(420));   // 敌方步进：2× 档经 demoMs 单一倍率缩放（battle.pace.js）
+      setTimeout(step, ENEMY_STEP_ZERO ? 0 : demoMs(420));   // 敌方步进：2× 档经 demoMs 单一倍率缩放（battle.pace.js）；vitest 归零（见文件头 ENEMY_STEP_ZERO）
     };
-    setTimeout(step, demoMs(420));
+    setTimeout(step, ENEMY_STEP_ZERO ? 0 : demoMs(420));
   }
 
   function afterEnemies() {

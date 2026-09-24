@@ -4,16 +4,16 @@
  * renderHub 回调经 game.hub.bridge.js 的 slots 间接调用，本文件不 import 壳。 */
 const SDT = window.SDT;
 const UI = window.SDT.UI;
-import { CHARACTERS, characterFor, characterName } from '../core/characters.js';
+import { characterFor, characterName } from '../core/characters.js';
 import { esc } from '../core/shared.js';
 import { MAP } from '../run/game.session.js';
 import { escAttr } from '../core/shared.js';
-import { MODES, game, getActiveSlot, newRun, requestClassChoice, setLobby, showTitle } from '../run/game.session.js';
-import { Sfx, configureCardNavigation, _set_cardPageOpen } from './game.cardslib.js';
+import { game } from '../run/game.session.js';
+import { Sfx, _set_cardPageOpen } from './game.cardslib.js';
 import { Random } from '../core/random.js';
-import { readBase, readBaseReceipt, commitBase } from './base.commands.js';
-import { convertCollection, getCharacter, getCollection, selectSkin, stackKeyOf } from './collection.commands.js';
-import { presentHome, homeErrorMessage } from '../home/home.presenter.js';
+import { readBase } from './base.commands.js';
+import { convertCollection, getCharacter, stackKeyOf } from './collection.commands.js';
+import { homeErrorMessage } from '../home/home.presenter.js';
 import { validateLastLampState } from '../home/story.last-lamp.js';
 import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // 别名防局部 slots（收藏槽位等）遮蔽
   // —— 仓库页：卡牌仓库（容量 / 卖出 / 收藏）+ 消耗口袋 + 物资 ——
@@ -541,8 +541,12 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
     const doneN = M.ACHIEVEMENTS.filter(a => M.isUnlocked(a)).length;
     const rows = M.ACHIEVEMENTS.map(a => {
       const unlocked = M.isUnlocked(a), claimed = M.isClaimed(a.id);
-      let rw = [a.reward.wood ? `[[icon:wood]] ×${a.reward.wood}` : '', a.reward.rations ? `[[icon:bread]] ×${a.reward.rations}` : '']
-        .filter(Boolean).join(' ');
+      let rw = [
+        a.reward.wood ? `[[icon:wood]] ×${a.reward.wood}` : '',
+        a.reward.rations ? `[[icon:bread]] ×${a.reward.rations}` : '',
+        a.reward.keys ? `[[icon:key]] ×${a.reward.keys}` : '',
+        a.reward.card ? `[[icon:cards]] ${(SDT.Cards.all().find(x => x.id === a.reward.card) || {}).name || '稀有卡牌'}` : '',
+      ].filter(Boolean).join(' ');
       if (a.back) {
         const bd = (SDT.Cards.CARD_BACKS || []).find(b => b.id === a.back);
         if (bd) rw += (rw ? ' ' : '') + `[[icon:cards]] ${bd.name}`;

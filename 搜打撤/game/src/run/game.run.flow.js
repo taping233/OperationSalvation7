@@ -5,7 +5,6 @@
  * ============================================================ */
 import { esc, escAttr } from '../core/shared.js';
 import { MAP, cellCenter, curLayer, gainCoins, game, getActiveSlot, markSeen, modeCfg, pick, saveGame, scaledEnemy, weighted } from './game.session.js';
-import { tone } from '../audio/sound.js';
 import { _set_cardPageOpen } from '../hub/game.cardslib.js';
 import { EVENT_SCENE_META } from './game.run.data.js';
 import { Random } from '../core/random.js';
@@ -30,7 +29,7 @@ let activeMove = null;
 const MOVE_DURATION = 220;
 const moveUsesReducedMotion = () => {
   try { return localStorage.getItem('sdt-reduce-motion') === '1' || window.matchMedia?.('(prefers-reduced-motion: reduce)').matches; }
-  catch (_) { return false; }
+  catch { return false; }
 };
 export function moveTo(toLi, toIdx) {
   if (game.state !== 'idle' || activeMove) return false;
@@ -108,7 +107,6 @@ function resolveCell() {
   const lc = layer.logical[idx];
   const def = lc ? lc.def : undefined;
   const door = (layer.doors || []).find(d => d.at === idx);
-  const altarE = (layer.altarEntrances || []).find(a => a.at === idx);
 
   // 一次性内容防重刷：奖励/事件/战斗完成后立即写 visited；未实际触发就退出仍可重进。
   // 商店例外：在店内可反复浏览，离开所在格才写 visited。进度型节点自管"可再来"语义：门、

@@ -1,7 +1,7 @@
 /* 由 cards.js 拆出（2026-09-22 六文件重构批2）：启动期回填迁移与播种（ensure* / seedBatch / apply* / heroOf）。
  * 逐字搬迁，属性顺序=原文件顺序；在壳 cards.js 中展开装配为 SDT.Cards，键面与数据字节不变。 */
 const SDT = window.SDT;   // ESM 垫片（与 cards.js 同源，main.js 加载顺序保证已存在）
-import { KEY, TT7_KEY_V2, TT8_KEY, TT10_KEY, TT11_KEY, ITEM_RENAME_KEY, EVENTS_0919_KEY, RETIRE_TT10, RETIRE_TT11, CC_KEY, CLASSES } from './cards.consts.js';
+import { TT7_KEY_V2, TT10_KEY, TT11_KEY, ITEM_RENAME_KEY, EVENTS_0919_KEY, RETIRE_TT10, RETIRE_TT11, CC_KEY, CLASSES } from './cards.consts.js';
 import { Random } from '../core/random.js';
 import { DATA } from '../core/data-loader.js';
 import { validateCardRules } from './card-rules.schema.js';
@@ -174,7 +174,7 @@ export const syncSlice = {
           renamed = true;
         }
         if (renamed) SDT.Cards.saveAll(cards);
-      } catch (e) { /* 存储不可用时静默跳过 */ }
+      } catch { /* 存储不可用时静默跳过 */ }
       SDT.Cards.seedBatch([SDT.Cards.SHA], 'sdt-cards-sha-seeded');
     },
 
@@ -220,7 +220,7 @@ export const syncSlice = {
           }
         });
         localStorage.setItem(markerKey, '1');
-      } catch (e) { /* 隐私模式等场景静默跳过 */ }
+      } catch { /* 隐私模式等场景静默跳过 */ }
     },
 
     // 敌人图鉴同步（2026-09-09 老板定版：新世界观命名 + 五层分布）。
@@ -248,7 +248,7 @@ export const syncSlice = {
           }
         });
         if (dirty) SDT.Cards.saveAll(cards);
-      } catch (e) { /* 隐私模式等场景静默跳过 */ }
+      } catch { /* 隐私模式等场景静默跳过 */ }
     },
 
     // 护盾→护甲术语迁移（设计者 2026-09-04 定版：护盾与护甲同义，统一为护甲；
@@ -264,7 +264,7 @@ export const syncSlice = {
           if (c.desc && String(c.desc).includes('护盾')) { c.desc = String(c.desc).replace(/护盾/g, '护甲'); dirty = true; }
         });
         if (dirty) SDT.Cards.saveAll(cards);
-      } catch (e) { /* 隐私模式等场景静默跳过 */ }
+      } catch { /* 隐私模式等场景静默跳过 */ }
     },
 
     // 「杀」→「初始攻击」术语迁移（2026-09-09 老板定版：效果文本统一写作「初始攻击」，
@@ -286,7 +286,7 @@ export const syncSlice = {
           if (d !== before) { c.desc = d; dirty = true; }
         });
         if (dirty) SDT.Cards.saveAll(cards);
-      } catch (e) { /* 隐私模式等场景静默跳过 */ }
+      } catch { /* 隐私模式等场景静默跳过 */ }
     },
 
     // 设计者定版数据修正（一次性）：爆燃火球描述未写注能收益，删除其注能字段
@@ -301,7 +301,7 @@ export const syncSlice = {
         });
         SDT.Cards.saveAll(cards);
         localStorage.setItem('sdt-mig-burnharvest', '1');
-      } catch (e) { /* 静默跳过 */ }
+      } catch { /* 静默跳过 */ }
     },
 
     // 抉择卡数据修正（一次性，2026-09-08）：神灯的护甲只属于抉择 3°——
@@ -318,7 +318,7 @@ export const syncSlice = {
         });
         SDT.Cards.saveAll(cards);
         localStorage.setItem('sdt-mig-choice', '1');
-      } catch (e) { /* 静默跳过 */ }
+      } catch { /* 静默跳过 */ }
     },
 
     // 第十批同步：设计者实机定版双向合并（TT10_KEY 标记，一次性）。按 id 整卡覆盖 + 缺失补种；
@@ -341,7 +341,7 @@ export const syncSlice = {
         });
         SDT.Cards.saveAll(cards);
         localStorage.setItem(TT10_KEY, '1');
-      } catch (e) { /* 隐私模式等场景静默跳过 */ }
+      } catch { /* 隐私模式等场景静默跳过 */ }
     },
     // TT10 基地材料规则回填：按稳定 id 从 TABLETOP10 定义取 rules，只补旧档规则字段。
     ensureTT10BaseMaterialRules() {
@@ -475,7 +475,7 @@ export const syncSlice = {
         });
         SDT.Cards.saveAll(cards);
         localStorage.setItem(TT11_KEY, '1');
-      } catch (e) { /* 隐私模式等场景静默跳过 */ }
+      } catch { /* 隐私模式等场景静默跳过 */ }
     },
 
 // ===== 实机定版覆盖批次（数据真源：game/data/cards-sync.json）=====
@@ -496,7 +496,7 @@ export const syncSlice = {
         });
         SDT.Cards.saveAll(cards);
         localStorage.setItem(seedKey, '1');
-      } catch (e) { /* 隐私模式等场景静默跳过 */ }
+      } catch { /* 隐私模式等场景静默跳过 */ }
     },
     ensureEvents0919() {
       try {
@@ -509,7 +509,7 @@ export const syncSlice = {
         });
         SDT.Cards.saveAll(cards);
         localStorage.setItem(EVENTS_0919_KEY, '1');
-      } catch (e) { /* 隐私模式等场景静默跳过 */ }
+      } catch { /* 隐私模式等场景静默跳过 */ }
     },
     // TT12 出牌前规则字段回填：只补指定定版 id 的 rules，保留旧档自定义文案与其他字段。
     ensureTT12PreplayRules() {
@@ -584,7 +584,7 @@ export const syncSlice = {
         }
         if (dirty) SDT.Cards.saveAll(cards);
         localStorage.setItem(ITEM_RENAME_KEY, '1');
-      } catch (e) { /* 隐私模式等场景静默跳过 */ }
+      } catch { /* 隐私模式等场景静默跳过 */ }
     },
 
     // 播入桌游手绘卡（第一批资源·道具 + 第二批装备/武术 + 第三批全套 + 第四/五批新设计）
@@ -605,7 +605,7 @@ export const syncSlice = {
         });
         if (dirty) SDT.Cards.saveAll(cards);
         localStorage.setItem(TT7_KEY_V2, '1');
-      } catch (e) { /* 隐私模式等场景静默跳过 */ }
+      } catch { /* 隐私模式等场景静默跳过 */ }
     },
 
     // 职业整合迁移（设计者 2026-09-05 定版）：原 11 职业 → 5 职业（侠客/战士/牧师/法师/降临者），
@@ -740,7 +740,7 @@ export const syncSlice = {
         });
         if (dirty) SDT.Cards.saveAll(cards);
         localStorage.setItem(CC_KEY, '1');
-      } catch (e) { /* 隐私模式等场景静默跳过 */ }
+      } catch { /* 隐私模式等场景静默跳过 */ }
     },
 
     // 能力卡查询（第八批）：heroOf(职业) 返回该职业的能力卡；
@@ -782,7 +782,7 @@ export const syncSlice = {
           if (def.unrandom && !c.unrandom) { c.unrandom = true; dirty = true; }
         }
         if (dirty) SDT.Cards.saveAll(cards);
-      } catch (e) { /* 隐私模式等场景静默跳过 */ }
+      } catch { /* 隐私模式等场景静默跳过 */ }
     },
 
     // 能力卡术语迁移（设计者 2026-09-08 定版）：类型「英雄卡」整体更名「能力卡」。
@@ -820,7 +820,7 @@ export const syncSlice = {
       try {
         const cards = SDT.Cards.all();
         if (SDT.Cards.applyDuplicateRenames(cards)) SDT.Cards.saveAll(cards);
-      } catch (e) { /* 隐私模式等场景静默跳过 */ }
+      } catch { /* 隐私模式等场景静默跳过 */ }
     },
 
 
@@ -828,7 +828,7 @@ export const syncSlice = {
       try {
         const cards = SDT.Cards.all();
         if (SDT.Cards.applyAbilityRename(cards)) SDT.Cards.saveAll(cards);
-      } catch (e) { /* 隐私模式等场景静默跳过 */ }
+      } catch { /* 隐私模式等场景静默跳过 */ }
     },
 
     // 能力卡补种（2026-09-09）：老档卡库可能从未播入第八批能力卡本体（TT8_KEY 标记
@@ -851,6 +851,6 @@ export const syncSlice = {
           else if (cards[i].type !== '能力卡') { cards[i].type = '能力卡'; dirty = true; }
         });
         if (dirty) SDT.Cards.saveAll(cards);
-      } catch (e) { /* 隐私模式等场景静默跳过 */ }
+      } catch { /* 隐私模式等场景静默跳过 */ }
     },
 };

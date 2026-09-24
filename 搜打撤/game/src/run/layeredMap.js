@@ -2,6 +2,8 @@
 import { generateLayeredMap } from './map-generator.js';
 
 const LAYER_NAMES = ['外围荒地', '风雪哨线', '冻土遗迹', '污染核心'];
+// 横幅英文层名（09-24 老板：lb-en 要纯英文配金色花体，此前误拼中文名）
+const LAYER_NAMES_EN = ['Outer Wastes', 'Blizzard Watchline', 'Permafrost Ruins', 'Polluted Core'];
 const LAYER_COLORS = ['#78b9d6', '#9fcf8d', '#d8ae68', '#b77ad8'];
 
 export function createLayeredMap(seed = 0) {
@@ -10,7 +12,7 @@ export function createLayeredMap(seed = 0) {
   // 过祭坛战首脑、胜后终局撤离），本层只做透传与显示命名。
   return generated.layers.map((layer, li) => ({
     id: `layer-${li + 1}`, name: `第${li + 1}层 · ${LAYER_NAMES[li]}`,
-    nameEn: `Layer ${li + 1} · ${LAYER_NAMES[li]}`, color: LAYER_COLORS[li],
+    nameEn: `Layer ${li + 1} · ${LAYER_NAMES_EN[li]}`, color: LAYER_COLORS[li],
     generatorVersion: generated.generatorVersion, layoutVersion: generated.layoutVersion,
     gridBounds: layer.gridBounds,
     nodes: layer.nodes, entrances: [layer.entry], entranceNames: [layer.nodes[layer.entry].name],

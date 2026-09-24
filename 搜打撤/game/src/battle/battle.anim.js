@@ -2,9 +2,9 @@
  * 逐字搬迁；本片不 import 壳（壳→片单向）；viewApi 反取已改 battle.core 具名直引。 */
 const SDT = window.SDT;
 const UI = window.SDT.UI;
-import { rect as uiRect, scale as uiScale } from '../ui/ui-scale.js';
+import { rect as uiRect } from '../ui/ui-scale.js';
 import { esc } from '../core/shared.js';
-import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFrames, cacheStats as frameCacheStats } from './battle.frames.js';
+import { play as playUnitFrames } from './battle.frames.js';
   // ---------- 牌局动画（2026-09-09）：离场克隆飞行 / 新牌飞入 / 幸存者归位 / 手牌区显隐 ----------
   // 渲染是整块重建，跨渲染的位移全部走 WAAPI：离场牌在 overlay 常驻层放克隆体飞行，
   // 入场/归位用 composite:'add' 加法合成——不破坏槽位自身的扇形 transform。
@@ -85,7 +85,7 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
     const dur = (options && options.duration) || 0;
     setTimeout(() => {
       if (anim.playState === 'running' && (anim.currentTime == null || anim.currentTime < delay + 30)) {
-        try { anim.cancel(); } catch (e) { /* 已被移除的元素上取消会抛，忽略 */ }
+        try { anim.cancel(); } catch { /* 已被移除的元素上取消会抛，忽略 */ }
       }
     }, delay + Math.max(300, dur + 200));
     return anim;
@@ -95,7 +95,7 @@ import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFra
   // 同刻至多一对动画：创建新动画前先 cancel 旧的；升回也用 forwards 保持终态（=CSS 默认位）。
   let handPhaseAnims = [];
   function cancelHandPhaseAnims() {
-    handPhaseAnims.forEach(a => { try { a.cancel(); } catch (e) { /* 已结束动画 cancel 不抛 */ } });
+    handPhaseAnims.forEach(a => { try { a.cancel(); } catch { /* 已结束动画 cancel 不抛 */ } });
     handPhaseAnims = [];
   }
   function animateBattleTransition(prev, body, events = [], extraFlightMs = 0) {

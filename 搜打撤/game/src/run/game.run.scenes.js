@@ -9,7 +9,6 @@
  * ============================================================ */
 import { esc, escAttr } from '../core/shared.js';
 import { MAP, bagCap, game, newUid, pick, saveGame, scaledEnemy, usedSlots } from './game.session.js';
-import { tone } from '../audio/sound.js';
 import { Sfx, _set_cardPageOpen, cardHTML } from '../hub/game.cardslib.js';
 import { IMMEDIATE_SCENES, NODE_BG, PICKUP_BG, PRELOAD_SCENES, SCENES, SCENE_META } from './game.run.data.js';
 import { Random } from '../core/random.js';

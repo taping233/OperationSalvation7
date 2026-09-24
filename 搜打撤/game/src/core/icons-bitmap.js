@@ -1,6 +1,6 @@
 import SDT from './sdt-facade.js';
   'use strict';
-import { BUILD_VERSION, assetUrl } from './asset-url.js';
+import { assetUrl } from './asset-url.js';
 
   
   const ROOT = 'assets/ui/icons/';
@@ -109,7 +109,7 @@ import { BUILD_VERSION, assetUrl } from './asset-url.js';
     for (const u of iconUrls()) {
       const im = new Image();
       im.decoding = 'async';
-      im.onload = () => { try { im.decode?.()?.catch?.(() => {}); } catch (_) {} };
+      im.onload = () => { try { im.decode?.()?.catch?.(() => { /* 解码失败：图已显示，忽略 */ }); } catch { /* decode 不可用：预热仅求提前缓存 */ } };
       im.src = u;
     }
   }

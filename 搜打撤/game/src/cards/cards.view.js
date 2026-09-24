@@ -26,7 +26,7 @@ export function descRich(desc) {
     const key = termKeyFor(w);
     return key ? `<i class="d-term" data-term="${key}">${w}</i>` : `<i class="d-term">${w}</i>`;
   });
-  s = s.replace(/([⁺⁻+\-]?[0-9]+(?:\.[0-9]+)?)/g, '<b class="d-num">$1</b>');
+  s = s.replace(/([⁺⁻+-]?[0-9]+(?:\.[0-9]+)?)/g, '<b class="d-num">$1</b>');
   return s;
 }
 
@@ -37,7 +37,7 @@ export function cardBackHTML(backId, cls) {
   let id = backId;
   if (!id) {
     try { id = window.SDT.Base ? window.SDT.Base.backSel() : 'classic'; }
-    catch (e) { id = 'classic'; }
+    catch { id = 'classic'; }
   }
   const bd = backs.find(b => b.id === id) || backs[0];
   return `<div class="hs-back hb-${bd.id}${cls ? ' ' + cls : ''}">` +
@@ -56,7 +56,7 @@ const cardHTMLMemo = new WeakMap();
 export function cardHTML(c, cls, opts) {
   let key;
   try { key = (cls || '') + '|' + JSON.stringify(opts || null); }
-  catch (e) { return buildCardHTML(c, cls, opts); }   // opts 含循环引用等异常：放弃缓存直算
+  catch { return buildCardHTML(c, cls, opts); }   // opts 含循环引用等异常：放弃缓存直算
   let variants = cardHTMLMemo.get(c);
   if (variants?.has(key)) return variants.get(key);
   const html = buildCardHTML(c, cls, opts);

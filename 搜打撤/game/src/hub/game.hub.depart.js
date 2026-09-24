@@ -6,8 +6,8 @@ const UI = window.SDT.UI;
 import { esc } from '../core/shared.js';
 import { MAP } from '../run/game.session.js';
 import { escAttr } from '../core/shared.js';
-import { MODES, game, getActiveSlot, newRun, requestClassChoice, setLobby, showTitle } from '../run/game.session.js';
-import { Sfx, configureCardNavigation, _set_cardPageOpen } from './game.cardslib.js';
+import { MODES, game, newRun, requestClassChoice } from '../run/game.session.js';
+import { Sfx, _set_cardPageOpen } from './game.cardslib.js';
 import { slots as hubBridge } from './game.hub.bridge.js';   // 别名防局部 slots（槽位数）遮蔽——实机 depBack 曾因此 TypeError
   // —— 出发页：选择玩法 + 出征预报 + 宝藏大门 ——
   function hubDeployHTML() {
@@ -29,7 +29,7 @@ import { slots as hubBridge } from './game.hub.bridge.js';   // 别名防局部 
             <button id="btnDeploy" class="deploy-primary" data-act="deploy">[[icon:exit]] 出发整备 <span>→</span></button>
             <button class="ov-btn" data-act="openPreparation" style="margin-top:10px">[[icon:flag]] 下一局目标与两套预设</button>
             <button id="btnNest" class="deploy-primary${SDT.Base.data.nestUnlocked ? '' : ' nest-locked'}" data-act="nestDeploy" style="margin-top:10px"
-              title="${SDT.Base.data.nestUnlocked ? '第二地图：直捣龙巢，夺取符文与龙宝' : '首次击败一图首脑并成功撤离后解锁'}">${SDT.Base.data.nestUnlocked ? '[[icon:skull]] 龙巢远征 <span>→</span>' : '[[icon:lock]] 龙巢（未解锁）'}</button>
+              title="${SDT.Base.data.nestUnlocked ? '第二地图：深入经典生命研究所，夺取符文与样本' : `第二地图：用 ${SDT.Base.KEY_NEEDED || 10} 把真实钥匙储备开启大门（现有 ${SDT.Base.data.keys || 0}）· 仓库钥匙卡「使用」可折入储备`}">${SDT.Base.data.nestUnlocked ? '[[icon:skull]] 研究所远征 <span>→</span>' : `[[icon:lock]] 经典生命研究所（钥匙 ${SDT.Base.data.keys || 0}/${SDT.Base.KEY_NEEDED || 10}）`}</button>
           </div>
           <div class="deploy-mode-dock">
             <span class="dock-label">选择行动模式</span>
@@ -79,7 +79,6 @@ import { slots as hubBridge } from './game.hub.bridge.js';   // 别名防局部 
   let deployJustOpened = false;   // 出发准备页刚打开（只播一次入场动画）
 
   function openDepartPrep() {
-    const B = SDT.Base;
     game.state = 'modal';
     deployHint = '';
     deployPick = {};

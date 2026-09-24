@@ -2,7 +2,7 @@ import SDT from './sdt-facade.js';
 import { characterFor, CHARACTERS } from './characters.js';
 
   'use strict';
-import { BUILD_VERSION, assetUrl } from './asset-url.js';
+import { assetUrl } from './asset-url.js';
 import { DATA } from './data-loader.js';
 import ART_MANIFEST from '../generated/art-manifest.js';
 import THUMB_MANIFEST from '../generated/thumb-manifest.js';
@@ -93,7 +93,7 @@ import { PERFORMANCE_BUDGETS } from './performance-budgets.js';
       warmedUrls.add(u);
       const im = new Image();
       im.decoding = 'async';
-      im.onload = () => { try { im.decode?.()?.catch?.(() => {}); } catch (_) {} };
+      im.onload = () => { try { im.decode?.()?.catch?.(() => { /* 解码失败：图已显示，忽略 */ }); } catch { /* decode 不可用：预热仅求提前缓存 */ } };
       // 加载失败立即出池（迭代评审 09-20 D-P3）：404 图曾永居预热池上限且无字节记账，
       // 资产缺失场景下预热池容量被无声侵占（字节尚未记账，无需扣减）
       im.onerror = () => {
@@ -315,8 +315,8 @@ function characterArt(value, full=false, useDefault=false) {
         const kick = () => {
           try {
             const p = im.decode && im.decode();
-            if (p && typeof p.then === 'function') p.then(shine).catch(() => {});
-          } catch (_) {}
+            if (p && typeof p.then === 'function') p.then(shine).catch(() => { /* 解码失败：图片照常展示 */ });
+          } catch { /* decode 抛错：高亮只是增强，跳过 */ }
         };
         if (im.complete && im.naturalWidth > 0) kick();
         else im.addEventListener('load', kick, { once: true });
@@ -359,13 +359,13 @@ function characterArt(value, full=false, useDefault=false) {
       const urls = [];
       const push = (html) => { const m = /src="([^"]+)"/.exec(html || ''); if (m) urls.push(m[1]); };
       // 立绘优先（2026-09-13 老板：立绘加载卡顿）——战斗首屏的敌人/角色立绘排在卡面前面
-      for (const id of MONSTER_IDS) { try { push(this.monsterArt(id)); } catch (_) {} }
+      for (const id of MONSTER_IDS) { try { push(this.monsterArt(id)); } catch { /* 无此立绘：跳过该资产 */ } }
       for (const name of Object.values(CLASS_NAMES)) {
-        try { push(this.classFullArt(name)); } catch (_) {}
-        try { push(this.classAvatarArt(name)); } catch (_) {}
-        try { push(this.battleArt(name)); } catch (_) {}
+        try { push(this.classFullArt(name)); } catch { /* 无此立绘：跳过该资产 */ }
+        try { push(this.classAvatarArt(name)); } catch { /* 无此立绘：跳过该资产 */ }
+        try { push(this.battleArt(name)); } catch { /* 无此立绘：跳过该资产 */ }
       }
-      if (Array.isArray(cards)) for (const c of cards) { try { push(this.cardIcon(c)); } catch (_) {} }
+      if (Array.isArray(cards)) for (const c of cards) { try { push(this.cardIcon(c)); } catch { /* 无此卡面：跳过该资产 */ } }
       return urls;
     },
     // 全量清单补热（art-manifest.js 由 vite.config 构建期扫描 RUNTIME 资产目录生成）：
@@ -421,7 +421,7 @@ function characterArt(value, full=false, useDefault=false) {
             im.decoding = 'async';
             im.onload = () => {
               let decoded;
-              try { decoded = im.decode?.(); } catch (_) {}
+              try { decoded = im.decode?.(); } catch { /* decode 不可用：Promise.resolve(undefined) 兜底 */ }
               Promise.resolve(decoded).catch(() => {}).then(one);
             };
             im.onerror = one;
@@ -536,7 +536,7 @@ function characterArt(value, full=false, useDefault=false) {
           try {
             const src = SDT.Cards.all().find(c => c.id === card.id || c.name === card.name);
             if (src) clsId = resolveClass(src.cls);
-          } catch (e) { /* 卡牌库不可用时静默回退 */ }
+          } catch { /* 卡牌库不可用时静默回退 */ }
         }
         if (clsId) return art(`cards/hero-${clsId}.webp`, 'art-card-image art-hero-fit', card && card.name || clsId, `card-hero-${clsId}`, 'width:100%;height:100%;object-fit:cover;display:block');
       }

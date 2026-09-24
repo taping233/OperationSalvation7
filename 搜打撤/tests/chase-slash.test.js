@@ -92,12 +92,11 @@ describe('追斩（cc-chase-slash）', () => {
     await drain();
 
     // n=0：原价 2 费，攻（+0）→ 5 点（攻击力 5）
-    let hp = foeHp();
     await playByName(g, '初始攻击');           // -5，n→1
     expect(energy()).toBe(99 - 1);
 
     // n=1：1 费
-    hp = foeHp();
+    let hp = foeHp();   // （lint 批次：此处原有一行首个 foeHp() 采样在被读前即被本行覆盖，已并入）
     await playByName(g, '追斩');
     expect(energy()).toBe(98 - 1);
     expect(foeHp()).toBe(hp - 5);

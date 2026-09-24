@@ -38,46 +38,6 @@ async function drain(maxLoops = 500) {
     } }
   return snap();
 }
-const cardName = u => { const o = viewApi.findCard(u); return o && o.card.name; };
-function expectFinite(s, tag) {
-  expect(Number.isFinite(s.pstat.hp), tag + ' 玩家HP').toBe(true);
-  s.foes.forEach(f => expect(Number.isFinite(f.hp), tag + ' ' + f.name + ' HP').toBe(true));
-}
-// 一场战斗：plays = 依次尝试打出的卡名（不在手牌就跳过）；余下回合结束
-async function battle(g, foes, opts, plays, tag, maxTurns = 25) {
-  const anomalies = [];
-  BattleSession.start(g, foes, opts);
-  await drain();
-  if (snap().deckSelection) {
-    while (snap().deckSelection && snap().deckSelection.selected.length < Math.min(snap().deckSelection.need, snap().deckSelection.cards.length)) {
-      const next = snap().deckSelection.cards.find(c => !snap().deckSelection.selected.includes(c.uid));
-      if (!next) break;
-      BattleSession.commands.selectDeckCard(next.uid);
-    }
-    BattleSession.commands.confirmDeck();
-    await drain();
-  }
-  expectFinite(snap(), tag + ' 开局');
-  for (let turn = 0; turn < maxTurns; turn++) {
-    if (g.lastBattleEnd) break;
-    const name = plays[turn % plays.length];
-    const uid = findInHandF(name);
-    if (uid) {
-      BattleSession.commands.playCard(uid, 0);
-      await drain();
-      if (g.lastBattleEnd) break;
-    } else {
-      BattleSession.commands.endTurn();
-      await drain();
-    }
-    expectFinite(snap(), tag + ' 回合' + turn);
-    if (snap().busy && turn === maxTurns - 1) anomalies.push('卡死');
-  }
-  await drain(100);
-  if (snap().busy) anomalies.push('终局卡死');
-  return anomalies;
-}
-function findInHandF(name) { return snap().hand.find(u => cardName(u) === name) || null; }
 
 describe('实机游玩机器人（3 局）', () => {
   it('第一局：一图推进（L1 联邦遭遇 → 变异巢母首脑）', { timeout: 120_000 }, async () => {

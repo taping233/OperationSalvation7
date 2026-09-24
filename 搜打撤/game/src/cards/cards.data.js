@@ -1,6 +1,5 @@
 /* 由 cards.js 拆出（2026-09-22 六文件重构批2）：卡池数据（EVENTS_0919 + TABLETOP/TT2-TT8 + BESTIARY + TT10/TT11）。
  * 逐字搬迁，属性顺序=原文件顺序；在壳 cards.js 中展开装配为 SDT.Cards，键面与数据字节不变。 */
-import { KEY, TT10_KEY, TT11_KEY, RETIRE_TT11 } from './cards.consts.js';
 import { resolveCardCatalog } from './cards.catalog.js';
 export const dataSlice = {
     EVENTS_0919: [

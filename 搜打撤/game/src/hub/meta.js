@@ -12,17 +12,6 @@ import { Random } from '../core/random.js';
   // 职业熟练度迁移（2026-09-05 职业整合定版）：旧职业的熟练度并入新职业——
   // 战士/牧师/法师/降临者同名直接沿用；侠客取 刺客/剑客/游侠 中熟练度最高的一份。
   // 惰性执行：第一次访问新职业数据时并入一次，旧条目保留不清除（回滚安全）。
-  const LEGACY_MERGE = { '侠客': ['刺客', '剑客', '游侠'] };
-  const mergeLegacyClasses = (d) => {
-    Object.keys(LEGACY_MERGE).forEach((nc) => {
-      if (d[nc]) return;
-      const olds = LEGACY_MERGE[nc].map(o => d[o]).filter(Boolean);
-      if (!olds.length) return;
-      const best = olds.reduce((a, b) => ((b.lv * 100000 + b.xp) > (a.lv * 100000 + a.xp) ? b : a));
-      d[nc] = { lv: best.lv || 1, xp: best.xp || 0 };
-      B().save();
-    });
-  };
   const clsData = (cls) => {
     const base = migrateCharacterProgress(B().data);
     const character = characterFor(cls);
@@ -36,7 +25,7 @@ import { Random } from '../core/random.js';
 
   // 职业清单（来自卡牌库职业表；卡牌库异常时兜底空表）
   const classList = () => {
-    try { return (SDT.Cards.CLASSES || []).slice(); } catch (e) { return []; }
+    try { return (SDT.Cards.CLASSES || []).slice(); } catch { return []; }
   };
   // 职业加成文本（出征时生效）：每级 +1 生命上限（2026-09-09 需求 #5）
   const perkText = (lv) => `生命上限 +${Math.max(0, (lv - 1) * 1)}`;
@@ -121,6 +110,10 @@ import { Random } from '../core/random.js';
     savior: (_s, d) => (((d || B().data).stats || {}).nestBossKills || []).length >= 2,
     beautifulVase: (_s, d) => ((d || B().data).runes || []).some(r2 => r2.attrs.length >= 2 && r2.kind === 'rainbow'),
     excuseMe: (_s, d) => ((d || B().data).stats || {}).reviveKills >= 1,
+    // 09-24 定版：研究所结算分数累计档（分数在 game.nest.doNestExtract 落 stats.labTotalScore）
+    labScore1: (_s, d) => (((d || B().data).stats || {}).labTotalScore || 0) >= 500,
+    labScore2: (_s, d) => (((d || B().data).stats || {}).labTotalScore || 0) >= 1500,
+    labScore3: (_s, d) => (((d || B().data).stats || {}).labTotalScore || 0) >= 4000,
   };
   const ACHIEVEMENTS = DATA.achievements.achievements.map(a => ({ ...a, done: ACH_DONE[a.id] }));
   // 孵化计数 = 已拥有宠物数 - 初始宠物（汪汪狗自动获得，不算孵化）
@@ -133,7 +126,7 @@ import { Random } from '../core/random.js';
     classList().includes(card.cls) &&
     (card.rarity === '职业' || card.type === '能力卡');
   const collectPool = () => {
-    try { return SDT.Cards.all().filter(isCollectible); } catch (e) { return []; }
+    try { return SDT.Cards.all().filter(isCollectible); } catch { return []; }
   };
   const collTotal = () => collectPool().length;
   // 收藏进度 = 图鉴中「不同」的职业卡 + 能力卡 张数
@@ -256,23 +249,37 @@ import { Random } from '../core/random.js';
   const achById = (id) => ACHIEVEMENTS.find(a => a.id === id);
   const isUnlocked = (a, data) => {
     const d = data || B().data;
-    try { return !!a.done(d.stats, d); } catch (e) { return false; }
+    try { return !!a.done(d.stats, d); } catch { return false; }
   };
   const isClaimed = (id) => !!B().data.achClaimed[id];
   const pendingAch = () => ACHIEVEMENTS.filter(a => isUnlocked(a) && !isClaimed(a.id));
 
   // 领取奖励：返回 {ok, msg}
+  // 09-24 扩展：支持 keys（此前 JSON 里 runeFan 等写了 keys 但 claim 从未发放——顺带修复）
+  // 与 card（指定现役卡 id 入仓库，复用现有卡池；容量不足整单缓发，与 claimColl 同口径）
   function claim(id) {
     const a = achById(id);
     if (!a || !isUnlocked(a) || isClaimed(id)) return { ok: false };
+    const cards = [];
+    if (a.reward.card) {
+      const c = SDT.Cards.all().find(x => x.id === a.reward.card);
+      if (c) cards.push({ card: { ...c }, count: 1 });
+    }
+    if (cards.length && SDT.Base.stashRoom() < 1) {
+      return { ok: false, why: 'full', msg: '仓库容量不足——先卖出或扩建卡牌仓库再来领取' };
+    }
     B().data.achClaimed[id] = true;
     B().data.wood += a.reward.wood || 0;
     B().data.rations += a.reward.rations || 0;
+    if (a.reward.keys) B().data.keys = (B().data.keys || 0) + a.reward.keys;
+    if (cards.length) B().depositCards(cards);
     if (a.back) B().unlockBack(a.back);   // 卡背奖励：随成就领取解锁（v0.21）
     B().save();
     const parts = [];
     if (a.reward.wood) parts.push(`[[icon:wood]] 木材 ×${a.reward.wood}`);
     if (a.reward.rations) parts.push(`[[icon:bread]] 口粮 ×${a.reward.rations}`);
+    if (a.reward.keys) parts.push(`[[icon:key]] 钥匙 ×${a.reward.keys}`);
+    cards.forEach(c => parts.push(`[[icon:cards]] 【${c.card.name}】`));
     if (a.back) {
       const bd = (SDT.Cards.CARD_BACKS || []).find(b => b.id === a.back);
       parts.push(`[[icon:cards]] 卡背【${bd ? bd.name : a.back}】`);
@@ -358,7 +365,7 @@ import { Random } from '../core/random.js';
     return classList().map(cls => {
       const lv = classLv(cls), xp = classXP(cls), need = xpForNext(lv);
       let pool = 0;
-      try { pool = SDT.Cards.classPool(cls).length; } catch (e) {}
+      try { pool = SDT.Cards.classPool(cls).length; } catch { /* 卡池未开放/未定义（早期存档）：按 0 张 */ }
       return { cls, lv, xp, need, maxed: lv >= LEVEL_MAX, pool };
     });
   }

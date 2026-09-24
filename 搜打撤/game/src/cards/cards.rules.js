@@ -3,7 +3,6 @@
 const SDT = window.SDT;   // ESM 垫片（与 cards.js 同源，main.js 加载顺序保证已存在）
 import { CLASSES } from './cards.consts.js';
 import { Random } from '../core/random.js';
-import { cardHTML } from './cards.view.js';
 import { DATA } from '../core/data-loader.js';
 
 let fixedCardIdSet;

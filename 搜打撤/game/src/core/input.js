@@ -32,7 +32,7 @@ function loadBindings() {
     Object.entries(saved).forEach(([action, key]) => {
       if (merged[action] && key) merged[action] = [String(key).toLowerCase()];
     });
-  } catch (e) { /* 覆写损坏则用默认键位 */ }
+  } catch { /* 覆写损坏则用默认键位 */ }
   return merged;
 }
 
@@ -49,7 +49,6 @@ function actionFor(event) {
 function rebind(action, key) {
   if (!bindings[action] || !key) return null;
   const k = String(key).toLowerCase();
-  const prev = bindings[action][0];
   let conflict = null;
   Object.entries(bindings).forEach(([a, keys]) => {
     if (a !== action && keys.includes(k)) { bindings[a] = keys.filter(x => x !== k); conflict = a; }
@@ -57,12 +56,12 @@ function rebind(action, key) {
   bindings[action] = [k];
   try { localStorage.setItem('sdt-keybinds', JSON.stringify(
     Object.fromEntries(Object.entries(bindings).map(([a, ks]) => [a, ks[0]]))
-  )); } catch (e) { /* 存储不可用 */ }
+  )); } catch { /* 存储不可用 */ }
   return conflict;
 }
 
 function reset() {
-  try { localStorage.removeItem('sdt-keybinds'); } catch (e) { /* 存储不可用 */ }
+  try { localStorage.removeItem('sdt-keybinds'); } catch { /* 存储不可用 */ }
   bindings = loadBindings();
 }
 

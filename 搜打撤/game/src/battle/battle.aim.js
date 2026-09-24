@@ -2,7 +2,7 @@
  * 逐字搬迁；本片不 import 壳（壳→片单向）；viewApi 反取已改 battle.core 具名直引。 */
 const SDT = window.SDT;
 const UI = window.SDT.UI;
-import { rect as uiRect, scale as uiScale } from '../ui/ui-scale.js';
+import { scale as uiScale } from '../ui/ui-scale.js';
 import { esc } from '../core/shared.js';
 import { commands, getSnapshot, effCostOf, findCard, infuseOf, targetSide, unplayableReason } from './battle.core.js';
   const play = commands.playCard;
@@ -237,7 +237,7 @@ import { showFoePreview, clearFoePreview } from './battle.hover.js';
     };
     el.classList.add('aim-lift');
     SDT.Sound.sfx('hover');
-    if (el.setPointerCapture) { try { el.setPointerCapture(e.pointerId); } catch (err) {} }
+    if (el.setPointerCapture) { try { el.setPointerCapture(e.pointerId); } catch { /* 指针可能已释放：捕获失败不影响指向 */ } }
     window.addEventListener('pointermove', moveAim, true);
     window.addEventListener('pointerup', endAim, true);
     window.addEventListener('pointercancel', cancelAim, true);

@@ -23,7 +23,7 @@ function readSavedNotes() {
   try {
     const parsed = JSON.parse(localStorage.getItem(PHOTO_NOTE_KEY) || '{}');
     return parsed && typeof parsed === 'object' && !Array.isArray(parsed) ? parsed : {};
-  } catch (_) {
+  } catch {
     return {};
   }
 }
@@ -35,7 +35,7 @@ export function savePhotoNote(card, value) {
   const notes = readSavedNotes();
   if (note) notes[id] = note;
   else delete notes[id]; // 清空 = 回落底稿；无底稿时返回空
-  try { localStorage.setItem(PHOTO_NOTE_KEY, JSON.stringify(notes)); } catch (_) {}
+  try { localStorage.setItem(PHOTO_NOTE_KEY, JSON.stringify(notes)); } catch { /* 隐私模式等写入失败：备注仅本次会话生效 */ }
   return note;
 }
 

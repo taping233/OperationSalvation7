@@ -1,6 +1,6 @@
 /* 龙巢扩展核心验证（2026-09-16）：符文滚落/羁绊/心单位/直线路径/新成就计数。 */
 import { describe, it, expect } from 'vitest';
-import { rollRune, evaluateSlots, RUNE_KINDS, RUNE_ATTRIBUTES, synergyOf } from '../game/src/battle/runes.js';
+import { rollRune, evaluateSlots, RUNE_KINDS, RUNE_ATTRIBUTES, } from '../game/src/battle/runes.js';
 
 describe('符文系统', () => {
   it('20 类符文注册（19 类别 + 双属性变体）且属性枚举正确', () => {

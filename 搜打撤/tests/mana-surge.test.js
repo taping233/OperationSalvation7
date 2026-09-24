@@ -86,7 +86,7 @@ describe('法力奔涌（cc-mana-surge）', () => {
     const entry = g.ownedCards[0];
     const before = snap().foes[0].hp;
     BattleSession.commands.playCard(entry.uid, 0);
-    const end = await drain(500);
+    await drain(500);
 
     // 恰好 4 发 = 外层循环序号 1..4 各打一次。随机池里有神灯（发现 1 张牌并将其释放），
     // 神灯发现到法力奔涌会合法地再跑一轮 4 发——所以不能数日志总行数（重放时是 8），

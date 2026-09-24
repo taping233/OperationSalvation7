@@ -4,15 +4,36 @@ import { parse } from 'acorn';
 import { simple } from 'acorn-walk';
 
 const JS_FILE = /\.(?:js|mjs)$/;
-// 2026-09-23 目录化重构起，分层判据从文件名制改为目录路径制（键相对 game/src）。
-const RUNTIME_OWNERS = new Set(['battle/core.js', 'battle/engine.js', 'battle/enemy-phase.js']);
+// 判据键一律为相对 game/src 的真实文件路径（2026-09-23 目录化后的命名）。
+// 2026-09-24 守卫复活：全部键改为精确集合匹配（不再用路径正则），并由
+// deadGuardKeys 自检“每个键至少命中一个真实文件”，防止目录再改名时规则死、测试绿。
+const RUNTIME_INNER = new Set(['battle/battle.engine.js', 'battle/battle.enemy-phase.js']);
+const RUNTIME_OWNERS = new Set(['battle/battle.core.js', ...RUNTIME_INNER]);
 const PURE_MODULES = new Set([
-  'battle/card-cost.js', 'battle/intent.js', 'battle/resolution.js',
-  'battle/snapshot.js', 'cards/catalog.js',
+  'battle/battle.card-cost.js', 'battle/battle.intent.js', 'battle/battle.resolution.js',
+  'battle/battle.snapshot.js', 'cards/cards.catalog.js',
 ]);
-const VIEW_MODULES = /^battle\/(?:view|overlays|layers|vfx|anim|aim|hover|frames|piles\.view)\.js$/;
+const VIEW_MODULES = new Set([
+  'battle/battle.view.js', 'battle/battle.overlays.js', 'battle/battle.layers.js',
+  'battle/battle.vfx.js', 'battle/battle.anim.js', 'battle/battle.aim.js',
+  'battle/battle.hover.js', 'battle/battle.frames.js', 'battle/battle.piles.view.js',
+]);
 // 流程域（基地/局外 + 局内流程）——纯规则/快照模块不得反向依赖。
 const FLOW_PREFIXES = ['hub/', 'run/'];
+// 规则里作为“依赖目标”写死的路径，同样纳入防失效自检。
+const PROTECTED_TARGETS = new Set(['battle/battle.runtime.js', 'core/sdt-facade.js']);
+
+// 防再发自检：返回在真实源码树中零命中的判据键；非空即守卫腐化，守卫测试必须红。
+export function deadGuardKeys(sources) {
+  const dead = [];
+  for (const key of [...RUNTIME_OWNERS, ...PURE_MODULES, ...VIEW_MODULES, ...PROTECTED_TARGETS]) {
+    if (!sources.has(key)) dead.push(key);
+  }
+  for (const prefix of FLOW_PREFIXES) {
+    if (![...sources.keys()].some(name => name.startsWith(prefix))) dead.push(prefix);
+  }
+  return dead;
+}
 
 export function readModuleSources(root) {
   const sources = new Map();
@@ -90,13 +111,13 @@ export function architectureViolations(graph) {
   const violations = [];
   for (const [name, module] of graph) {
     for (const { target, line } of module.dependencies) {
-      if (target === 'battle/runtime.js' && !RUNTIME_OWNERS.has(name)) {
-        violations.push(`${name}:${line}: 战斗运行时仅允许 core/engine/enemy-phase 访问`);
+      if (target === 'battle/battle.runtime.js' && !RUNTIME_OWNERS.has(name)) {
+        violations.push(`${name}:${line}: 战斗运行时仅允许 battle.core/battle.engine/battle.enemy-phase 访问`);
       }
-      if (VIEW_MODULES.test(name) && ['battle/engine.js', 'battle/enemy-phase.js'].includes(target)) {
+      if (VIEW_MODULES.has(name) && RUNTIME_INNER.has(target)) {
         violations.push(`${name}:${line}: 视图须通过 core 命令与快照访问战斗`);
       }
-      if (PURE_MODULES.has(name) && (/^battle\/(?:runtime|engine|core|enemy-phase)\.js$/.test(target) || VIEW_MODULES.test(target)
+      if (PURE_MODULES.has(name) && (RUNTIME_OWNERS.has(target) || target === 'battle/battle.runtime.js' || VIEW_MODULES.has(target)
         || target === 'core/sdt-facade.js' || FLOW_PREFIXES.some(prefix => target.startsWith(prefix)))) {
         violations.push(`${name}:${line}: 独立规则/快照模块不能反向依赖 ${target}`);
       }

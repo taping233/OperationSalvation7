@@ -85,8 +85,7 @@ function calculateBaseAndPending({ game, runId, random, baseSnapshot, baseApi, c
   keptPocket.forEach(stack => {
     if (!baseApi.isSha(stack.card) && stack.card.rarity !== '职业') stackInto(base.pocket, stack);
   });
-  if (game.bossKilled) base.nestUnlocked = true;
-  base.stats.extracts++;
+  base.stats.extracts++;   // 09-24 定版：撤离不再解锁研究所（改钥匙开门，见 game.nest.openNestPrep）
   base.stats.bestRunCoins = Math.max(base.stats.bestRunCoins, game.coins || 0);
   const elapsedNow = Math.max(0, Number(game.elapsed) || 0);
   const elapsedSynced = Math.max(0, Number(game.elapsedSynced) || 0);

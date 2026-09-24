@@ -1,0 +1,28 @@
+/* ============================================================
+ * 经典生命研究所 · 通关演出（2026-09-24 方舟级定版）
+ *   全屏三页：基调渐变（页底）→ 插画层（缺图 404 透明自然露出渐变）
+ *   → 压暗遮罩 → 打字机字幕；ken burns 缓推 + 页间淡入。
+ * ============================================================ */
+#labEnding { position: fixed; inset: 0; z-index: 9500; background: #000; opacity: 0; transition: opacity .6s ease; cursor: pointer; overflow: hidden; }
+#labEnding.on { opacity: 1; }
+
+#labEnding .lab-end-page { position: absolute; inset: 0; opacity: 0; visibility: hidden; transition: opacity .7s ease; }
+#labEnding .lab-end-page.on { opacity: 1; visibility: visible; }
+
+/* 页底基调渐变：插画就位前/加载失败时的兜底画面（three tones：崩解/回航/深渊） */
+#labEnding .lab-tone-crisis { background: radial-gradient(120% 90% at 50% 20%, #4a2333 0%, #170c12 68%, #050305 100%); }
+#labEnding .lab-tone-flight { background: linear-gradient(180deg, #081120 0%, #1c3050 52%, #0a1526 100%); }
+#labEnding .lab-tone-abyss  { background: radial-gradient(130% 100% at 50% 92%, #123324 0%, #071410 60%, #030806 100%); }
+
+#labEnding .lab-end-art { position: absolute; inset: 0; background-size: cover; background-position: center; animation: labEndKen 14s ease-out forwards; }
+@keyframes labEndKen { from { transform: scale(1) translateY(0); } to { transform: scale(1.08) translateY(-1.5%); } }
+
+#labEnding .lab-end-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.18) 0%, transparent 30%, transparent 55%, rgba(0,0,0,.84) 100%); }
+
+#labEnding .lab-end-text { position: absolute; left: 8%; right: 8%; bottom: 9%; min-height: 4.5em; color: #e8e4d8; font-size: clamp(15px, 2.2vmin, 22px); line-height: 1.9; letter-spacing: .04em; text-shadow: 0 2px 6px rgba(0,0,0,.9); }
+#labEnding .lab-end-cue { position: absolute; right: .2em; bottom: -1.7em; font-style: normal; color: #f5c542; opacity: 0; animation: labEndCue 1.2s ease-in-out infinite; }
+#labEnding .lab-end-text.done .lab-end-cue { opacity: 1; }
+@keyframes labEndCue { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+
+#labEnding .lab-end-skip { position: absolute; right: 24px; bottom: 20px; z-index: 5; padding: 8px 18px; border: 1px solid rgba(232,228,216,.4); background: rgba(0,0,0,.45); color: #e8e4d8; font-size: 14px; letter-spacing: .08em; cursor: pointer; border-radius: 4px; transition: border-color .2s, color .2s; }
+#labEnding .lab-end-skip:hover { border-color: #f5c542; color: #f5c542; }

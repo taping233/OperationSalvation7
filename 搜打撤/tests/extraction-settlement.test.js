@@ -73,7 +73,7 @@ it('真实撤离命令创建整理快照，资源自动入库并打开整理页'
   expect(base.data.wood).toBe(2);
   expect(base.data.rations).toBe(3);
   expect(base.data.stats.extracts).toBe(1);
-  expect(base.data.nestUnlocked).toBe(true);
+  expect(base.data.nestUnlocked).toBe(false);   // 09-24 定版：撤离不再解锁研究所（钥匙开门制）
   expect(document.querySelector('#exMain')).not.toBeNull();
   expect(base.deposit).not.toHaveBeenCalled();
   expect(base.depositCards).not.toHaveBeenCalled();
@@ -98,10 +98,10 @@ it('消耗口袋 1/3 保留：恒散失侧全部散失且不进入基地口袋',
   expect(base.data.pocket).toEqual([]);
 });
 
-it('击败首脑后解锁龙巢，未击败则不解锁', async () => {
+it('09-24 钥匙门槛定版：撤离不再解锁研究所（无论是否击败首脑）', async () => {
   expect(await doExtract()).toBe(true);
-  expect(base.data.nestUnlocked).toBe(true);
-  Object.assign(game, makeGame({ bossKilled: false }));
+  expect(base.data.nestUnlocked).toBe(false);
+  Object.assign(game, makeGame({ bossKilled: true }));
   base.data.nestUnlocked = false;
   expect(await doExtract()).toBe(true);
   expect(base.data.nestUnlocked).toBe(false);

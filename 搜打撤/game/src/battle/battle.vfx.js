@@ -4,9 +4,9 @@ const SDT = window.SDT;
 const UI = window.SDT.UI;
 import { rect as uiRect, scale as uiScale } from '../ui/ui-scale.js';
 import { Random } from '../core/random.js';
-import { demoMs, getPace, setPace } from './battle.pace.js';
+import { demoMs, getPace } from './battle.pace.js';
 import { FEEDBACK_DELTA_MS, feedbackClass, feedbackDelay } from './battle.feedback.js';
-import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFrames, cacheStats as frameCacheStats } from './battle.frames.js';
+import { play as playUnitFrames } from './battle.frames.js';
 import { assetUrl } from '../core/asset-url.js';
 import { takeFloats } from './battle.core.js';
   // ---------- 战斗特效（v0.32.2）：伤害/受击飘字 + 受击抖动 + 红闪 ----------
@@ -182,7 +182,7 @@ import { takeFloats } from './battle.core.js';
     const ov = UI.el.overlay;
     const ovR = uiRect(ov);   // 布局口径：飘字/贴图定位
     const perUnit = {};   // #19：同单位多段伤害错峰呈现
-    list.forEach((f, listIdx) => {
+    list.forEach((f) => {
       const fire = () => {
       const isSelf = f.unit === 'self';
       const allyI = isSelf ? null : (/^ally:(\d+)$/.exec(String(f.unit)) || [])[1];   // 随从替伤：battle.core 推 'ally:N'

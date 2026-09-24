@@ -312,10 +312,17 @@ function createGameMenuController(deps) {
     game.state = 'modal';
     UI.showOverlay('', `
       <div class="pg settings-page sugin-page">
+        <!-- 09-23 留言：右下 BACK 取消，退出键改左上角，与主页退出键（ak-sq ak-exit）同款同位 -->
+        <button class="ak-sq ak-exit sugin-exit" data-act="sugBack" title="返回设置（Esc）" aria-label="返回设置">
+          <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+            <path d="M9 4h9a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 18 20H9"
+                  fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M4 12h10M4 12l4-4M4 12l4 4"
+                  fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
         <header class="pg-head"><h2>[[icon:book]] 留言库</h2><span class="pg-spacer"></span></header>
         <div class="settings" id="sugBox"><p class="ov-empty">读取中…</p></div>
-        <!-- 2026-09-07 留言：返回键与攻略/成就页统一，改小号沉到右下角 -->
-        <div class="ov-btns ov-btns-corner"><button class="ov-btn back-sm ok" data-act="sugBack">返回 <i class="en">BACK</i></button></div>
       </div>`, 'page');
     UI.act('sugBack', () => openSettings());
     UI.act('sugExport', d => {

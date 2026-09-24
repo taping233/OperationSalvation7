@@ -141,7 +141,7 @@ export function auditSteps(s) {
         id: 'release.oneSha', gate: 'fresh', label: '立即释放一次「杀」（百炼青虹剑，消耗该牌时触发）',
         when: (ctx) => (!/该牌时/.test(ctx.desc) && typeof releaseHandMatches === 'function')
           ? ctx.desc.match(/立即释放(?:一次|1\s*次)?[‘'“]?杀/) : null,
-        run: (ctx, m) => {
+        run: (ctx) => {
           const released = releaseHandMatches('杀', 0, 1);
           log(released
             ? `[[icon:swords]] <b>${esc(ctx.card.name)}</b>：立即释放了 1 次「初始攻击」`

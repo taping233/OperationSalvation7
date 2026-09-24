@@ -116,7 +116,7 @@ import { game } from '../run/game.session.js';
       </div>`);
     UI.act('copyNotes', async () => {
       try { await navigator.clipboard.writeText(json); UI.log('备注 JSON 已复制到剪贴板', 'ok'); }
-      catch (e) { UI.log('复制失败，请在文本框里手动全选复制', 'warn'); }
+      catch { UI.log('复制失败，请在文本框里手动全选复制', 'warn'); }
     });
     UI.act('downloadNotes', () => {
       const blob = new Blob([json], { type: 'application/json' });

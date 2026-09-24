@@ -29,7 +29,7 @@ const NO_DASH = [];   // 还原实线（空点划常量，复用避免逐帧分�
   }
 
   /* ============ 卡通图标（以结点中心 cx,cy 为原点，u = 缩放） ============ */
-  function drawIcon(ctx, def, cx, cy, u, t) {
+  function drawIcon(ctx, def, cx, cy, u) {
     const k = def.type;
     switch (k) {
       case 'coin': { // 金币

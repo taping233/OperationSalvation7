@@ -62,18 +62,6 @@ async function drain(maxLoops = 300) {
   return snap();
 }
 
-async function playByName(g, name) {
-  const s = snap();
-  const entry = g.ownedCards.find(o => o.card.name === name && s.hand.includes(o.uid));
-  if (entry) {                                   // 背包卡（含熔岩爆破）
-    BattleSession.commands.playCard(entry.uid, 0);
-    return drain();
-  }
-  const uid = s.hand[0];                         // 衍生 token 不在背包：取手牌里的临时卡
-  expect(uid, `手牌中应有【${name}】`).toBeTruthy();
-  BattleSession.commands.playCard(uid, 0);
-  return drain();
-}
 
 const lava = () => C.all().find(c => c.id === 'cc-lava-blast');
 const boom = () => C.all().find(c => c.id === 'cc-double-boom');

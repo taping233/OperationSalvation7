@@ -3,20 +3,20 @@ const SDT = window.SDT;
 const UI = window.SDT.UI;
 
 import { sdtDefine } from '../core/sdt-facade.js';
-import { rect as uiRect, scale as uiScale } from '../ui/ui-scale.js';
+import { rect as uiRect } from '../ui/ui-scale.js';
 import { esc } from '../core/shared.js';
 import { escAttr } from '../core/shared.js';
 import { Random } from '../core/random.js';
-import { groupHandCards, fanLayout } from './battle.hand.js';
-import { demoMs, getPace, setPace } from './battle.pace.js';
+import { groupHandCards } from './battle.hand.js';
+import { getPace, setPace } from './battle.pace.js';
 import { renderCombatPiles } from './battle.piles.view.js';
-import { attach as attachUnitFrames, play as playUnitFrames, hide as hideUnitFrames, cacheStats as frameCacheStats } from './battle.frames.js';
+import { attach as attachUnitFrames, hide as hideUnitFrames, cacheStats as frameCacheStats } from './battle.frames.js';
 import { BattleSession, commands, configureBattleRenderer, getSnapshot, R, effCostOf, findCard, markDreadShown, pileTip, refillDrawPile, takeCardAnims, unplayableReason, matchHandSelectKey } from './battle.core.js';
-import { renderDeckSelection, renderGrave, renderBattleBag } from './battle.overlays.js';
-import { handSuspended, battleToken, mountHandLayer, updateHand, mountUnitLayer, updateUnits, setHandSuspended, HAND_PAGE_SIZE } from './battle.layers.js';
+import { renderDeckSelection, renderGrave, renderBattleBag, renderDeckPileView } from './battle.overlays.js';
+import { mountHandLayer, updateHand, mountUnitLayer, updateUnits, setHandSuspended, HAND_PAGE_SIZE } from './battle.layers.js';
 import { spawnFloats } from './battle.vfx.js';
 import { captureBattleView, animateBattleTransition } from './battle.anim.js';
-import { aim, aimPlayedAt, clickSelectedUid, selectCardByClick, startAim, cancelAim, setClickSelectedUid } from './battle.aim.js';
+import { aim, aimPlayedAt, selectCardByClick, startAim, cancelAim, setClickSelectedUid } from './battle.aim.js';
 
 /* battle.view.js —— 战斗渲染：战场 DOM/手牌/指向施法箭头/拖拽预览 */
   const play = commands.playCard;
@@ -25,30 +25,21 @@ import { aim, aimPlayedAt, clickSelectedUid, selectCardByClick, startAim, cancel
   const confirmInfuse = commands.confirmInfusion;
   const beginInfuse = commands.beginInfusion;   // 需求 #15：卡面「注能」角标入口
   const bagSlam = commands.bagSlam;             // 需求 #9：背包砸击
-  const resolveSlam = commands.resolveSlam;
-  const resolveDart = commands.resolveDart;   // 血毒双镖二段点选（2026-09-16 留言）
   const endTurn = commands.endTurn;
-  const flee = commands.flee;
   const surrender = commands.surrender;   // 玩法定版：主动撤离视为本局失败
   const openGrave = commands.openGrave;
   const openDeckView = commands.openDeckView;
   const closeDeckView = commands.closeDeckView;
-  const closeBagCmd = commands.closeBag;
   const openBagCmd = commands.openBag;
-  const useItemCmd = commands.useItem;
   const cancelPendingTarget = commands.cancelPendingTarget;
   const pickDiscover = commands.pickDiscover;
   const pickChoice = commands.pickChoice;
   const toggleInfusePick = commands.selectInfusion;
-  const closeGrave = commands.closeGrave;
-  const selectDeckCard = commands.selectDeckCard;
   const pickHandSelect = commands.pickHandSelect;
   const skipHandSelect = commands.skipHandSelect;
   const usePotion = commands.usePotion;
   const useEquipSkill = commands.useEquipSkill;
   // 双击放大已退役（2026-09-12 老板定向：紧凑手牌 + 单击展开完整卡面取代）
-  const confirmDeck = commands.confirmDeck;
-  const cancelDeck = commands.cancelDeck;
 
   // ---------- 渲染 ----------
   // 手牌分栏（2026-09-10 留言 #27）：一栏最多 12 叠，放不下的进第二栏，用按钮切换
@@ -106,9 +97,9 @@ import { aim, aimPlayedAt, clickSelectedUid, selectCardByClick, startAim, cancel
     const prevView = captureBattleView();   // 重建前的手牌/牌堆位：供飞行与归位动画取样
     if (snapshot.phase !== 'player' || snapshot.busy) setClickSelectedUid(null);
     const {
-      mode, turn, energy, maxEnergy, busy, phase = 'player', opts, player, pdef, pstat,
+      mode, turn, energy, maxEnergy, busy, phase = 'player', opts, player, pstat,
       foes, hand, drawPile, discard, grave, infusing, discovering, handSelecting, choosing,
-      pendingTarget, pendingHint, viewingGrave, viewingBag, dreadShown, deckSelection,
+      pendingTarget, viewingGrave, viewingBag, dreadShown, deckSelection,
       potionBar, pendingItem, slamPending, dartPending, viewingDeck,
     } = snapshot;
     if (aim) cancelAim();   // 重渲染时中止进行中的指向（DOM 将重建）

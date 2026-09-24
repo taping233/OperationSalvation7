@@ -205,9 +205,7 @@ import { renderMiniMap } from './run/game.session.js';
     if (btnLocate) btnLocate.addEventListener('click', () => {
       cam.frameExploration(game); renderScheduler.invalidate();
     });
-    document.getElementById('btnMapOverview')?.addEventListener('click', () => {
-      cam.frameExploration(game, true); renderScheduler.invalidate();
-    });
+    // 「已知区域」按键已按 09-24 留言 #8 移除；G 键（input.js camOverview）总览保留
 
     // 右上角资源 HUD：悬停显示项目自带提示框（与地图节点同款）
     const vpEl = UI.el.viewport;

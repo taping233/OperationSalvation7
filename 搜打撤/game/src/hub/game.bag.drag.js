@@ -5,7 +5,7 @@
 const SDT = window.SDT;
 const UI = window.SDT.UI;
 import { esc } from '../core/shared.js';
-import { cardStacks, doDeath, game, newUid, safeUsed, saveGame, usedSlots } from '../run/game.session.js';
+import { cardStacks, game, saveGame } from '../run/game.session.js';
 import { bagSlots } from './game.bag.bridge.js';
   // ---------- 背包拖拽（v0.21）：3D 立体手感 · 堆排序 · 拖入/拖出安全格 ----------
   export let bagDrag = null;   // {name, fromSafe, cell, ghost, card3d, sx, sy, lx, ly, vx, vy, moved}

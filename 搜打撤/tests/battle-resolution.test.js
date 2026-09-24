@@ -11,7 +11,7 @@ function makeResolver(state) {
     heal: amount => events.push(['heal', amount]),
     addFloat: value => events.push(['float', value]),
     addDelayed: value => events.push(['delayed', value]),
-    takeDeckBottom: count => [], deckBottomCount: () => 0,
+    takeDeckBottom: () => [], deckBottomCount: () => 0,
     startSurge: () => {}, getAllCards: () => [], isRandomObtainable: () => false,
     randomBattle: () => 0, getDamageTypes: () => ['武术'], getDamageTypeMeta: () => ({}), fixedDamageType: 'fixed',
     hasCurse: () => false, getAliveFoes: () => state.foes || [state.target], getGrowth: uid => state.growth?.[uid] || 0,

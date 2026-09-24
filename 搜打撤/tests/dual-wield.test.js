@@ -77,7 +77,7 @@ describe('二刀流（cc-dual-wield）', () => {
     BattleSession.start(g, [foeDef()], { isBoss: false, name: '双刀测试' });
     await drain();
     BattleSession.commands.playCard(g.ownedCards[0].uid, undefined);   // 无对敌效果：直接打出
-    const end = await drain(500);
+    await drain(500);
 
     // 手牌应为 2 张发现的武术（同名，×2 堆叠展示）；另有背包砸击初始牌常驻（2026-09-13 留言）
     const nonSlam = snap().hand.map(u => viewApi.findCard(u)).filter(o => o && o.card.name !== '背包砸击');

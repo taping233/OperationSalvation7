@@ -29,7 +29,7 @@ function semanticMatch(card) {
     && normalizeDesc(card.desc) === spec[3] ? { hits: spec[4] } : null;
 }
 
-function cardRuleHint(card, mode) {
+function cardRuleHint(card) {
   if (!card) return '';
   const operation = card.rules?.triggers?.onPlay?.find(item => item.op === 'damage' && item.retarget === 'livingFoes');
   if (!operation) return '';

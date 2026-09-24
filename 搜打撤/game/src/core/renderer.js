@@ -313,7 +313,6 @@ const SDT = window.SDT;
       if (p.x < 20 || p.x > game.cam.viewW - 20 || p.y < 60 || p.y > game.cam.viewH - 55) continue;
       const door = game.layerData[n.li]?.doors?.some(d => d.at === n.idx);
       const name = NODE_INFO[door ? 'door' : n.def.type]?.[0] || '安全节点';
-      const walked = !!game.visited?.[`${n.li},${n.idx}`];
       const label = `${current ? '当前位置 · ' : ''}${name}`;
       let w = labelWidthCache.get(label);
       if (w === undefined) { w = ctx.measureText(label).width + 24; labelWidthCache.set(label, w); }
@@ -332,7 +331,7 @@ const SDT = window.SDT;
   // ---------- 手绘连线（环内线按层合并批描：实描+点划叠加；门/祭坛线流光虚线逐帧） ----------
   function drawLinks(ctx, game) {
     const g = nodeGeo(game);
-    const z = game.cam.zoom, curLi = game.layerIdx, t = game.time;
+    const z = game.cam.zoom, curLi = game.layerIdx;
     ctx.save();
     ctx.lineCap = 'round';
     ctx.strokeStyle = COLORS.ringLink;
@@ -413,25 +412,6 @@ const SDT = window.SDT;
     ctx.restore();
   }
 
-  // ---------- 祭坛旋转法阵（底光已烘焙，虚线逐帧） ----------
-  function drawAltarCircle(ctx, game) {
-    const g = nodeGeo(game);
-    if (!g.altarNode) return;
-    const cx = g.altarNode.x, cy = g.altarNode.y;
-    const deep = game.layerIdx === game.layerData.length - 1;
-    const a = deep ? 0.55 : 0.20, z = game.cam.zoom;
-    ctx.save();
-    ctx.lineWidth = 1.6 / z;
-    setDash(ctx, 7 / z, 9 / z);
-    ctx.strokeStyle = `rgba(154,124,200,${a})`;
-    ctx.lineDashOffset = -(game.time * 14) / z;
-    ctx.beginPath(); ctx.arc(cx, cy, T0 * 1.05, 0, TAU); ctx.stroke();
-    ctx.strokeStyle = `rgba(186,150,230,${a * 0.8})`;
-    ctx.lineDashOffset = (game.time * 10) / z;
-    ctx.beginPath(); ctx.arc(cx, cy, T0 * 0.72, 0, TAU); ctx.stroke();
-    ctx.setLineDash(NO_DASH);
-    ctx.restore();
-  }
 
   // ---------- 当前环名胶囊标签 ----------
   // 已移除：环层名改为 DOM 固定横幅（#layerBanner），始终以固定大小显示在视口顶部居中。

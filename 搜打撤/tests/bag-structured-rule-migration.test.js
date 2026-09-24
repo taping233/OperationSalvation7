@@ -76,8 +76,8 @@ describe('原始定版背包规则与旧档回填', () => {
     expect(validateCardRules(elixir)).toMatchObject({ ok: true, errors: [], pending: [] });
     expect(validateCardRules(potion)).toMatchObject({ ok: true, errors: [], pending: [] });
     const source = readFileSync(resolve(process.cwd(), 'game/src/cards/cards.data.js'), 'utf8');
-    expect(source).toMatch(/\"tt-crystal\"/);
-    expect(source).toMatch(/\"tt3-savior-elixir\"/);
+    expect(source).toMatch(/"tt-crystal"/);
+    expect(source).toMatch(/"tt3-savior-elixir"/);
   });
 
   it('marker 已存在而 live-sync 覆盖清除规则时按稳定 id 恢复，补 heal:99 且不覆盖玩家字段', () => {
@@ -116,7 +116,7 @@ describe('原始定版背包规则与旧档回填', () => {
 
   it('保存失败时不改旧存档也不设置首次 marker', () => {
     const originalCards = JSON.parse(JSON.stringify(Cards.all()));
-    const save = vi.spyOn(Cards, 'saveAll').mockReturnValue(false);
+    vi.spyOn(Cards, 'saveAll').mockReturnValue(false);
     const errors = vi.spyOn(console, 'error').mockImplementation(() => {});
     try {
       const oldCards = originalCards.map(card => {

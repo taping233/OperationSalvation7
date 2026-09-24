@@ -8,7 +8,7 @@ export function curseSteps(s) {
       {
         id: 'curse.burn', gate: 'always', label: '灼烧（不叠加、按回合固定掉血）',
         when: (ctx) => ctx.desc.match(/(?:附加|施加|攻击并)\s*(?:\d+\s*层?\s*)?灼烧/),
-        run: (ctx, m) => {
+        run: (ctx) => {
           const fm = ctx.desc.match(/灼烧(?:状态)?\s*(\d+)\s*回合/);
           const n = fm ? +fm[1] : (ctx.durOv ? +ctx.durOv : 2);
           if (ctx.curseTarget) { combat.addCurse(ctx.curseTarget, 'burn', n); log(`[[icon:fire]] <b>${esc(ctx.curseTarget.name)}</b> 被灼烧（${n} 回合内每回合结束受 1 点固定伤害，不叠加）`, 'sys'); ctx.did = true; }

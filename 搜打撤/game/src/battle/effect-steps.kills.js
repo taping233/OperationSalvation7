@@ -260,7 +260,7 @@ export function killsSteps(s) {
       {
         id: 'discover.potion', gate: 'fresh', label: '发现 1 瓶药水并直接释放（药水魔法）',
         when: (ctx) => ctx.desc.match(/发现\s*1?\s*瓶药水/),
-        run: (ctx, m) => {
+        run: (ctx) => {
           queueDiscover({ n: 1, act: 'potion', pred: parsePoolNoun('药水', ctx.myClass) });
           log(`[[icon:flask]] <b>${esc(ctx.card.name)}</b>：发现 1 瓶药水并直接释放`, 'sys');
           ctx.did = true;

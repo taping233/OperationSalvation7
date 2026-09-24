@@ -7,7 +7,7 @@ function resolveReducedMotion(storage, mediaQuery) {
   let local = false;
   try {
     local = storage?.getItem('sdt-reduce-motion') === '1';
-  } catch (_) { /* System preference still applies when local storage is unavailable. */ }
+  } catch { /* System preference still applies when local storage is unavailable. */ }
   return local || !!mediaQuery?.matches;
 }
 
@@ -23,7 +23,7 @@ let cachedReducedMotion = null;
 const reduceMotion = () => {
   if (cachedReducedMotion !== null) return cachedReducedMotion;
   let mediaQuery = null;
-  try { mediaQuery = window.matchMedia?.('(prefers-reduced-motion: reduce)') || null; } catch (_) {}
+  try { mediaQuery = window.matchMedia?.('(prefers-reduced-motion: reduce)') || null; } catch { /* matchMedia 不可用：按无减弱动效偏好处理 */ }
   const reduced = resolveReducedMotion(typeof localStorage === 'undefined' ? null : localStorage, mediaQuery);
   syncReducedMotionClass(reduced);
   cachedReducedMotion = reduced;
@@ -34,7 +34,7 @@ reduceMotion();
 try {
   const mediaQuery = window.matchMedia?.('(prefers-reduced-motion: reduce)');
   mediaQuery?.addEventListener?.('change', () => refreshReduceMotion());
-} catch (_) { /* Media query is optional; the local setting remains available. */ }
+} catch { /* Media query is optional; the local setting remains available. */ }
 const canAnimate = element => element && typeof element.animate === 'function' && !reduceMotion();
 const activeHits = new WeakMap();
 
@@ -60,7 +60,7 @@ function hit(element, self = false) {
   if (previous && typeof previous.stop === 'function') {
     // 2026-09-18 实测：元素已离开渲染树时 motion 的 stop() 内部 commitStyles 会抛
     // InvalidStateError（Target element is not rendered），异常沿调用链打断战斗渲染——吞掉
-    try { previous.stop(); } catch (_) { /* 元素已卸载，动画随节点销毁 */ }
+    try { previous.stop(); } catch { /* 元素已卸载，动画随节点销毁 */ }
   }
   const x = self ? [0, -7, 6, -4, 2, 0] : [0, 9, -7, 5, -2, 0];
   // 位移之外加极轻的旋转和纵向压缩，命中方向更清楚；幅度短暂且回到原位。

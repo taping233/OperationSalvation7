@@ -49,7 +49,7 @@ const RunStorage = Object.freeze({
     try { return !!localStorage.getItem(RUN_KEY(index)); } catch { return false; }
   },
   read(index) {
-    let raw = null;
+    let raw;   // 不做冗余初始化：try 内必赋值，catch 直接 return（下方 == null 判断兼容 undefined）
     try { raw = localStorage.getItem(RUN_KEY(index)); } catch { return null; }
     if (raw == null) { readCache.delete(index); return null; }
     const hit = readCache.get(index);

@@ -34,8 +34,6 @@ const hero = id => {
 };
 const martialDmg = n => C.all().find(c => c.type === '武术' && (c.dmg || 0) >= n
   && !/消耗|选择|注能|抽到|释放|化为|丢弃/.test(String(c.desc || '')));
-const plainSpell = () => C.all().find(c => c.type === '法术' && c.rarity !== '初始' && c.rarity !== '职业'
-  && c.rarity !== '衍生' && !/洗入|牌库|抽到|消耗|选择|发现|释放|回合/.test(String(c.desc || '')));
 
 let uidSeq = 0;
 function makeGame(cards, over = {}) {
@@ -379,7 +377,7 @@ describe('直接释放家族实打', () => {
     const picked = s0.discovering.options[0];
     expect(Boolean(picked), '发现面板应有候选').toBe(true);
     BattleSession.commands.pickDiscover(0);
-    const s = await drain();
+    await drain();
     // 2026-09-11 实机回访 bug：发现选中的药水只被置入手牌，没有按卡面「并直接释放」结算——
     // 旧断言只查日志字样（打出药水魔法时的预告日志就含「直接释放」）而被骗过。
     // 释放语义 = 选中的卡被免费打出：不在手牌残留，且对局有可观测变化（敌掉血 / 敌冰冻 / 我回血 / 随机神秘效果）。

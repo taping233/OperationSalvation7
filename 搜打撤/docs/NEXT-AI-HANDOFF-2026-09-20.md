@@ -1,3 +1,18 @@
+## 当前状态补充：全界面美术排版流水线落库 + 09-24 批次收编（2026-09-24 08:50 +08:00）
+
+- **8a71333** `feat: unify art direction across all UI screens via page overlay layers`：15 个 `css/page-*.css` 界面增量层（4.5k 行，12 个子代理产出、各页自验：截图+computed+交互回归+Tab 焦点走查+作用域零溢出断言）+ index.html 末尾统一挂载段（ui-scale.css 之后）。覆盖：选档/基地/出发/人物/仓库/商店/升级/设置+留言库/照相馆/制作坊/成就/远征HUD/事件/奖励+背包+帮助/战斗。语言基调=冷青调色+暗角、暖金 #d9bb82 封条金线/编号短线、交互三档节奏+快按慢弹+金线焦点环；动画仅 transform/opacity。
+- **c699e4e** `feat: title screen art pass`：标题页第一二波（title-p0.css 调色/暗角/48 颗三层雪/出鞘扫光/档案徽章化 + winter.css akSnowNear 景深段）。
+- 本笔（批次收编）：并行会话「09-24 留言批次 #5~#12」（见下一段）与 lab-ending/battle/hub 等 JS 批次随老板指示一并落库；index.html/winter.css 经 hunk 级拆分，三方改动归属清晰。
+- 待老板决策：① 制作坊入口被 `game.cardslib.js:35 CARD_DESIGNER_WRITES_ENABLED=false` 代码关闭（现网点制作坊实际开照相馆）；② 战斗子代理将 handPageReminder 循环动画压成静态金强调；③ `game/.sdt-shots-upgrade/`（9 张验证截图）未入库未删除；④ 事件页 `.scene` 对话卡为休眠代码（样式已备）。
+- 验证：vitest 全量 144 文件/811 用例全绿（8a71333 前，08:42）；挂载态实机目验选档页/基地页正常；真实存档 5 档零触碰（子代理全部用 headless Edge+CDP 隔离配置目录）。
+
+## 当前状态补充：09-24 留言批次 #5~#12 落地（2026-09-24 +08:00，随批次收编提交）
+
+- Edge 5173 网页版 localStorage 捞出 12 条新留言（09-20～09-23，解析脚本重写于 `代号柒/.tmp/sug_ldb.py`；关键修正：LevelDB 块句柄 size **不含** 1 字节压缩类型字节，其后才是 4 字节 crc——此前错切一字节全盘解析失败）。#1~#4（09-20/21 战斗 4 条）老板口头确认已处理；#5~#12 本批落地，12 条全部补写进 `game/output/suggestions.json` 标 done（89→101 条；Edge localStorage 侧无法文件侧回写 done，与 8139 同限制）。
+- 落地明细（CSS 统一追加 winter.css 尾部「09-24 留言批次」注释块；对局地图左上三键透明与 lb-en 金色花体需 `!important`——winter.css 在 expedition 系之前加载，同特异性会被后加载文件压掉）：#5 照相馆特写相框改 `::after` 覆盖层绘制压在照片上方、照片四边外扩 45% 框宽伸入框下（选择器多挂 `.cz-photo-main` 压过 photo-studio-mounts.css）；#6 btnHome/btnHelp/btnMute 透明化；#7 lb-en 改 Segoe Script 金色 13px；#8 `#btnMapOverview` 按钮删除（index.html+game.boot.js 监听+cursor-art.js 引用；G 键 input.js camOverview 镜头总览保留），bagBtnFloat 放大 56×72 落底部栏（105px）正上方、btnLocate 上移 82px；#9 翻页动画 libPhotoPageIn（方向位移+微旋+stagger 40ms，消费此前无人用的 `--lib-page-enter-x`）；#10 退出照相馆闪烁根因=closeLibPage 提前摘 cardlib-open 使 `#overlay *` 禁动画规则集体解除（几百张卡重播入场）且容器淡出被压成瞬隐——摘类延至 hideOverlay 后 240ms（cardPageOpen 竞态防护）+`body.cardlib-open #overlay.closing` 豁免播 ovFadeOut；#11 留言库右下 BACK 删除，左上新增 ak-sq ak-exit 同款键（64×58 top16/left18，Esc 靠 aria-label「返回设置」仍可用，pg-head padding-left:98px 让位）；#12 标题位图字牌容器 .title-heading 宽度 ×1.2（clamp 430/43vw/760 → 516/51.6vw/912）。
+- 验证：vite dev（5222，已停）IAB 实测——#12 同视口宽度严格 ×1.2 且不压照相馆圆钮；#6/#7/#8 computed 断言+截图；#9 computed animation/delay 断言（IAB 动画时钟冻结，观感留老板实机验收）；#10 点击退出瞬间 closing+ovFadeOut 挂载、400ms 后 cardlib-open 摘除、重开正常；#11 结构/尺寸/位置断言（受控后台标签截图停在旧帧，视觉留老板复检）；#5 特写渲染截图确认四角玻璃压角+提示文字不重叠。测试档位 5（newSlot→选人→启程→leaveSave）已 delSlot 两步确认删除。
+- 现场：并行「09-24 标题页美术升级」会话改动（title-p0.css 雪花景深/wallpaper 调色 + index.html 雪花 48 颗）与「龙巢→经典生命研究所」改名批次未提交，本批全部尾部追加/定向 edit 未覆盖；version.json 0.60.0 为第四方发布改动未动。未构建、未推送。
+
 ## 当前状态补充：src 平铺目录化重构（2026-09-23 23:45 +08:00）
 
 - 老板令解决「140 个 JS 平铺 game/src」问题：按 8 功能域目录化（core/ui/battle/cards/run/hub/home/audio），根层只留 4 个入口（main.js、boot-order.js、game.boot.js、r7a.qa.js）+ README + generated/。分层判据同步从文件名制改为目录路径制（architecture-graph.mjs 的 RUNTIME_OWNERS/PURE_MODULES/VIEW_MODULES 改按 `battle/`、`hub/`、`run/` 前缀判），BOOT_ORDER 条目改带域前缀路径，contracts/bag/hub/run-architecture/random 等测试的硬路径与正则同步。迁移用一次性脚本（`.tmp/migrate-src-layout.mjs` acorn 重写 + `git mv`，干完即弃不进 git）。

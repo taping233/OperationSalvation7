@@ -9,14 +9,14 @@ let pace = 1;
 try {
   const v = parseInt(localStorage.getItem(KEY), 10);
   if (ALLOWED.includes(v)) pace = v;
-} catch (e) { /* 隐私模式等：保持默认 1× */ }
+} catch { /* 隐私模式等：保持默认 1× */ }
 
 function getPace() { return pace; }
 
 function setPace(v) {
   if (!ALLOWED.includes(v)) return;
   pace = v;
-  try { localStorage.setItem(KEY, String(v)); } catch (e) { /* 同上 */ }
+  try { localStorage.setItem(KEY, String(v)); } catch { /* 同上 */ }
 }
 
 // 时长换算：2× 时减半；80ms 下限防定时器过密与动画闪跳

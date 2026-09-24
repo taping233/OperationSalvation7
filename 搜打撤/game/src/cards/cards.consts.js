@@ -1,3 +1,4 @@
+// @ts-check
 /* 由 cards.js 拆出（2026-09-22 六文件重构批2）：模块级常量（迁移标记键/退役清单/职业表/存储键）。
  * 逐字搬迁；SDT.Cards 键面与数据字节不变，外部 API 仍由 cards.js 转出（export { KEY }）。 */
   const KEY = 'sdt-cards-v1';
@@ -19,10 +20,12 @@
   const EVENTS_0919_KEY = 'sdt-events-0919-v2-seeded'; // 2026-09-19：都市污染事件池（10 旧事件改名 + 9 新事件）；v2：熔断双箱/隧道血契 desc 对齐实装口径（迭代评审 09-20 B-P0/P2）
   const TT12_KEY = 'sdt-cards-tt12-v1-seeded';         // 第十二批：射线/研发系列新卡 17 张（2026-09-23 老板卡表）；全新 KEY——老档未标记过，启动即补播（不进 cards-sync 数组）
   // 第十批退役：同设计重复 id（设计者实机已把同名卡定版在旧 id 上，见 TABLETOP10 尾部注释）
+  /** @type {string[]} */
   const RETIRE_TT10 = ['tt3-freeze', 'tt3-flame-potion', 'tt3-toxic-potion', 'tt3-bleed-potion'];
   // 第十一批退役（2026-09-09 对齐设计者实机）：仓库独有、设计者实机没有的 39 张。
   // 含 12 张 cc-* 职业整合卡（设计者稿用 cmtn*/tt7 旧 id 版本）与新手卡新兵操典/制式口粮；
   // 新兵操典无固定 id（种子不带 id，制作坊式生成），由 ensureTabletopSync11() 按名字清理。
+  /** @type {string[]} */
   const RETIRE_TT11 = ['starter-ration', 'tt2-pouch', 'tt2-greenarrow', 'tt3-pindown', 'tt3-hop-strike',
     'tt3-plate', 'tt3-ice-arrow', 'tt3-heal-potion', 'tt3-fish-out', 'tt3-arcane-wisdom', 'tt3-fate-potion',
     'tt3-shadow-clone', 'tt3-blood-feast', 'tt3-resurrect', 'tt3-windchaser', 'tt3-snipe', 'tt3-copy-potion',
@@ -38,5 +41,6 @@
   //   侠客（← 刺客/剑客/游侠）· 战士（← 战士/守卫）· 牧师（← 牧师/授印者/术士）
   //   法师（← 法师/召唤师）· 降临者（← 降临者/授印者）
   // 整合明细与逐卡归属见 docs/class-consolidation.md；实机卡库迁移见 ensureClassConsolidation()。
+  /** @type {string[]} */
   const CLASSES = ['侠客', '战士', '牧师', '法师', '降临者'];
 export { KEY, TT2_KEY_V3, TT1_KEY_V6, TT4_KEY_V2, TT3_KEY_V5, TT5_KEY, TT6_KEY, TT7_KEY, TT7_KEY_V2, TT8_KEY, TT9_KEY, TT10_KEY, TT11_KEY, ITEM_RENAME_KEY, EVENTS_0919_KEY, TT12_KEY, RETIRE_TT10, RETIRE_TT11, CC_KEY, CLASSES };

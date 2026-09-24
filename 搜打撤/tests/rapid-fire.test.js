@@ -11,7 +11,7 @@ window.SDT.MAP = {
   items: { rations: { name: '口粮' }, wood: { name: '木材' } },
 };
 await import('../game/src/cards/cards.js');
-const { BattleSession, viewApi } = await import('../game/src/battle/battle.core.js');
+const { BattleSession } = await import('../game/src/battle/battle.core.js');
 
 const C = window.SDT.Cards;
 
@@ -150,7 +150,6 @@ describe('连续射击（cc-rapid-fire）', () => {
     const g = await freshBattle([sha(), rapid(), rapid()]);
     await playByName(g, '初始攻击');
     await playByName(g, '连续射击');           // n=1 → -2
-    const afterCombo = foeHp();
     BattleSession.commands.endTurn();
     await drain(500);
     expect(snap().foes[0].dead || snap().energy === 99).toBe(true);   // 能量回满=新回合已开始

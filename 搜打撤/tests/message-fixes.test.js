@@ -91,7 +91,6 @@ describe('铸甲 +10 甲不再双倍（2026-09-10 #25）', () => {
     const g = makeGame([t, e]);
     BattleSession.start(g, [foeDef()], { isBoss: false, name: '铸甲测试' });
     await drain();
-    const uid = snap().hand.find(u => { const o = BattleSession && u; return u; });
     const turtleUid = g.ownedCards[0].uid;
     expect(snap().hand).toContain(turtleUid);
     BattleSession.commands.playCard(turtleUid, 'self');   // 消耗句→选择 1 张装备牌
