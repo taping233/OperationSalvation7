@@ -1,3 +1,18 @@
+## 当前状态补充：持续批第一波落库（session/cardslib 拆分+存储收口）（2026-09-25 01:5x +08:00）
+
+- **交叠事故披露**：上一段（01:15 卡牌库二次优化）中 `game.cardslib.js` 的 `setLibSelection` 未提交改动，在 cardslib 拆分子代理收尾时被原样并入拆分结果、随本波提交**捎带落库**（该代理报告「并行交叠」节+集成验收均知情）。改动本身经全量 814 用例验收绿、性能口径清楚（清筛选 351→29ms），不回滚；但「单独待拍板」状态因裹挟提前结束，特此披露。`expedition-library.css` 的 content-visibility 行删除仍留工作区未动，归并行会话收尾。
+- 持续任务（cron automation-3bb7ecf1 每 3 小时）第一波完成。集成验收实测：全量 145 文件/814 用例绿、ESLint 全仓 0、语法守卫 184 文件过。三笔落库：`8a711c0` 存储收口（core/storage.js 封装 storeGet/storeSet，UI 偏好键 4 文件 7 点收口；体检批 G 项 localStorage 侧完成，battle.core 实测 0 处无需改）；`0fa8fbf` game.session.js 944→488 拆六子模块（kernel/modes/bag/map/board/death 工厂注入零回环；导出面 AST 零变化；4 个测试源文本钉死断言按原形态保留故未做纯壳）；cardslib 批（1209→699 拆五子模块 designer/photo-fps/art-warm/photo-props/common；窗口挂载性能修复逐行保留；导出面 AST 零变化，8 调用方零改动）。
+- 美术资产：lab-ending 三图已出并落库（`c89b289`，1344×768 免费档 painterly；ending-3 NAI 自加人影、去留待老板挑）；删除报批清单落 `docs/pending-deletions-2026-09-25.md`（临时文件/死图5张/截图/zip/worktree/调试钩子——battle.frames.js:308 `__bfDebug` 经只读调查结论 A 可安全删，a59e2ff 已修立绘闪现且零消费）。
+- 第二波开工：状态袋 interaction+effects 两域（路线图 87/98→≤60/≤70）、命令四件套+F01 死亡结算双写、ui.js 1001 行拆分。性能 P1×2 因 requestBattleRender 与状态袋同域冲突挪第三波；状态袋 session 域（84 点，风险最高）第三波单独评估。
+- 现场另有并行会话 expedition 系 CSS 改动（图标盘缩小+卡牌库二次优化的 css 侧）未落库，持续批不触碰。
+
+
+## 当前状态补充：卡牌库（=照相馆同页）性能二次优化（2026-09-25 01:15 +08:00）
+
+- 老板 09-25 令「卡牌库的性能优化一下」。IAB 实机实测（复用并行 5173 dev 服，267 张藏）三场景后修两处剩余瓶颈，改动落在「现场三摊」5 笔提交计划之 **② 照相馆性能修复** 的同两个文件——该批已随 `c1bdab3` 落库，**本条为其上的新一层未提交改动**，单独待拍板：① `expedition-library.css` 2692 区遗留 `content-visibility:visible!important`（同日「改回上下滚动」迭代产物）把 09-24 恢复的 `auto` 整体压制、滚动预热失效——删该行保留 `animation:none`，computed 恢复 auto，滚动 p50 38→32ms、>50ms 帧 9→5；② `game.cardslib.js` `setLibSelection` 未挂载分支同步补挂：筛选中选中深位卡再清筛选会一次同步补挂数批（实测 351ms 且随收藏量线性涨）——去掉同步补挂（翻看/键盘定位本就经 `switchLibPage` 预挂；网格后续补挂时 `photoTileHTML` 按 `libSelectedId` 自动盖章选中类与 aria-current），清筛选 351→29ms。打开耗时实测 154ms（冷）/66ms（热），全量挂载 267 张/2403 节点/17519px 无叠行（截图目验）。
+- 验证：定向 `photo-studio-presentation` 2/2 + `contracts` 17 + `premium-ui-pages` 8 + `ui-accessibility-regression` 3 全绿。环境限制：测试后段 IAB 窗口被遮挡（Chrome 停 BeginFrame），rAF/IO 类断言（键盘右键 rAF 焦点落地、遮挡态滚动补挂触发）无法复跑——键盘/翻看代码路径本批未动（09-24 已实机验收），选中环盖章逻辑 `photoTileHTML` 静态可核；**建议老板可见窗口实机复验一次滚动流畅度与键盘翻格**。无构建、无新依赖、未提交。
+
+
 ## 当前状态补充：现场三摊落库 + 代码债子代理批开工（2026-09-25 00:4x +08:00）
 
 - 老板 09-25 指示「提交，代码债你用子代理慢慢修」。落库前全量体检实测：ESLint 全仓 0 error 0 warning（含未提交现场）、`check-syntax` 172 文件通过、全量 vitest 145 文件/814 用例全绿（277s）。按归属分 5 笔提交：① battle 5 文件 = lint 收口 148→0 + `battle.core.js` damageAll 传合成卡 `{name:'开发者指令'}` 修 hitFoe card.name 空解引用（体检批 G 项战斗侧，方案与既定一致）；② 照相馆性能修复 = `game.cardslib.js` 窗口挂载 24 张+哨兵追加+补挂兜底（打开冻结 1.4s→110ms）+ `expedition-library.css` 恢复 content-visibility；③ 返回键统一+界面美术 = `game.menu.js`（指南/成就/选档返回键统一 ak-sq ak-exit 同款同位）+ winter/hub/title-p0/photo-studio-craft/page-settings 五 CSS（ak-back-tl 定位、成就弹层入场、W6 覆盖冻结暂停 55 无限动画、卡牌库退出键去封面透明变体、设置页 S5b/S6f 精修与页头让位）；④ `tools/nai_gen.py`(+pyc) = 生图 API 更新（归属 NAI 会话，验证闭环见下段）；⑤ 本文档。

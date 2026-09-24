@@ -36,3 +36,9 @@
 
 ## 8. 观望项（不删，仅记录）
 - `tools/__pycache__/nai_gen.cpython-38.pyc`：建议改 .gitignore 停跟踪（首次提交需 `git rm --cached`，属删除类操作，待批）。
+
+## 9. 调试钩子删除项（09-25 只读调查结论 A：可安全删）
+- `game/src/battle/battle.frames.js` 308-316 行（基于 HEAD c89b289）：`window.__bfDebug` 快照钩子，
+  09-20 a59e2ff 排查「立绘闪现」的观测工具；该提交即根因修复批且实机验收通过，此后无复发；
+  全仓 `bfDebug` 仅定义处一条、零消费、无测试断言。删除须同步跑 `tests/battle-frames-lifecycle.test.js`。
+- 行号在 battle 重构批次后会漂移，执行时以 rg `__bfDebug` 重定位。
