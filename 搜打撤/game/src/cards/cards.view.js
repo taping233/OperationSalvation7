@@ -139,7 +139,7 @@ const drawN = +(c.draw || 0), infN = +(c.infuse || 0);
     <div class="hsc-desc${descLenCls(c)}">${c.desc ? `<span>${descRich(c.desc)}</span>` : ''}</div>
     ${showDmg ? `<div class="hsc-dmg${dmgUp ? ' dmg-up' : ''}" title="${escAttr(dmgUp
       ? `${mark.tip}（含法伤加成 +${dmgOverride.bonus}）`
-      : mark.tip)}">${mark.icon}<b>${mark.text}</b></div>` : ''}
+      : (c.dmgType === 'spell' ? `${mark.tip} · 受法伤加成` : mark.tip))}">${mark.icon}<b>${mark.text}</b>${c.dmgType === 'spell' ? '<i>法伤</i>' : ''}</div>` : ''}
     ${ghostDmg ? `<div class="hsc-dmg ghost">${SDT.Icons.img('swords')}<b>0</b></div>` : ''}
     ${showVal ? `<div class="hsc-val" title="币值 ${val}${SDT.Cards.isSellable(c) ? ' · 可出售' : ' · 不可出售'}"><i>[[icon:coin]]</i><b>${val}</b></div>` : ''}
   </div>`;

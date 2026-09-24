@@ -122,7 +122,7 @@ import { MECH_GROUPS, MECH_ALL } from '../cards/mech-sentences.js';
   const cardHTML = (c, cls, opts) => SDT.Cards.cardHTML(c, cls, opts);
 
   // ======== 卡牌收藏页（照相馆） ========
-  // 固定分页限制每次创建的卡格与图片数量，筛选和切页只重绘当前页。
+  // 09-24 口头改回上下滚动浏览：全量渲染照片网格，纵向滚动查看，不再固定分页。
   function openCardLibrary() {
     if (game.state !== 'idle' && game.state !== 'modal' && game.state !== 'title') return;
     if (game.state !== 'modal') cardPagePrevState = game.state;   // 记录来源（idle/title），关闭时还原
@@ -268,7 +268,7 @@ import { MECH_GROUPS, MECH_ALL } from '../cards/mech-sentences.js';
     </div>`;
   }
 
-  function libGridContentsHTML(all = libFiltered(), pageIndex = libPageIndex) {
+  function libGridContentsHTML(all = libFiltered()) {
     if (!all.length) {
       const filtered = libCards.length > 0 &&
         (libFilter.tab !== '全部' || libFilter.rar !== '全部' || libFilter.cls !== '全部' || libFilter.q.trim() !== '');
@@ -276,9 +276,8 @@ import { MECH_GROUPS, MECH_ALL } from '../cards/mech-sentences.js';
         <p>${libCards.length ? '没有符合条件的照片' : (game.devMode ? '收藏还是空的，进入编辑模式后可制作新卡' : '当前没有可展示的照片')}</p>
         ${filtered ? '<button class="hs-btn sm" data-act="libClearFilter">重置筛选</button>' : ''}</div>`;
     }
-    const start = pageIndex * LIB_PAGE_SIZE;
-    return all.slice(start, start + LIB_PAGE_SIZE)
-      .map((card, offset) => photoTileHTML(card, start + offset, offset)).join('');
+    // 09-24 改回上下滚动：全量渲染，不再按页切片
+    return all.map((card, offset) => photoTileHTML(card, offset, offset)).join('');
   }
 
   function libPageControlsHTML(all = libFiltered()) {
@@ -293,7 +292,8 @@ import { MECH_GROUPS, MECH_ALL } from '../cards/mech-sentences.js';
 
   function libGridHTML() {
     const all = libFiltered();
-    return `<div class="lib-grid${all.length ? '' : ' is-empty'}" id="libGrid">${libGridContentsHTML(all)}</div>${libPageControlsHTML(all)}`;
+    // 09-24 改回上下滚动：分页条不再渲染（libPageControlsHTML 仅剩 renderLibGrid 里的空引用分支）
+    return `<div class="lib-grid${all.length ? '' : ' is-empty'}" id="libGrid">${libGridContentsHTML(all)}</div>`;
   }
 
   let libCardById = new Map();
@@ -314,37 +314,11 @@ import { MECH_GROUPS, MECH_ALL } from '../cards/mech-sentences.js';
     }
   }
 
-  function warmNextLibPage(all) {
-    const nextPage = libPageIndex + 1;
-    if (nextPage * LIB_PAGE_SIZE >= all.length || libPageCache.has(nextPage)) return;
-    const generation = libPageWarmGeneration;
-    const run = () => {
-      libPageWarmTask = null;
-      if (generation !== libPageWarmGeneration || !cardPageOpen) return;
-      const template = document.createElement('template');
-      template.innerHTML = libGridContentsHTML(all, nextPage);
-      const fragment = template.content;
-      for (const image of fragment.querySelectorAll('.studio-photo-art img')) {
-        decodeLibImage(image);
-        image.dataset.libWarm = '1';
-      }
-      libPageCache.set(nextPage, fragment);
-      while (libPageCache.size > 2) libPageCache.delete(libPageCache.keys().next().value);
-    };
-    libPageWarmTask = typeof requestIdleCallback === 'function'
-      ? requestIdleCallback(run, { timeout: 1000 })
-      : setTimeout(run, 50);
-  }
-
   function switchLibPage(page, all = libFiltered()) {
-    const pageCount = Math.max(1, Math.ceil(all.length / LIB_PAGE_SIZE));
-    const next = Math.max(0, Math.min(pageCount - 1, page));
-    if (next === libPageIndex) return;
-    const pageDirection = next > libPageIndex ? 'next' : 'previous';
-    libPageIndex = next;
-    clearTimeout(photoFpsSettledTimer);
-    samplePhotoFps('page');
-    renderLibGrid({ keepPage: true, pageDirection });
+    // 09-24 改回上下滚动：不切页，跨页定位（键盘方向键 / 选片台翻看）退化为把目标页首张滚入视野
+    const target = all[Math.max(0, page) * LIB_PAGE_SIZE];
+    const node = target ? libCardNodeById.get(target.id) : null;
+    node?.scrollIntoView({ block: 'nearest' });
   }
 
   function setLibSelection(id, playSound = false) {
@@ -496,6 +470,8 @@ import { MECH_GROUPS, MECH_ALL } from '../cards/mech-sentences.js';
       } else {
         grid.innerHTML = libGridContentsHTML(filtered);
       }
+      // 上下滚动模式（09-24）：筛选重绘后回顶，否则沿用旧滚动位置会从半截行开始看
+      grid.scrollTop = 0;
       libRenderedPageIndex = libPageIndex;
       bindLibGridNavigation();
     }
@@ -503,7 +479,6 @@ import { MECH_GROUPS, MECH_ALL } from '../cards/mech-sentences.js';
     if (active) active.innerHTML = libActiveFiltersHTML();
     setLibSelection(nextSelectedId);
     warmLibArt();
-    warmNextLibPage(filtered);
   }
 
   // 侧栏筛选控件同步到当前 libFilter（局部重绘时不重建侧栏，得手动回写控件状态）
@@ -574,8 +549,8 @@ import { MECH_GROUPS, MECH_ALL } from '../cards/mech-sentences.js';
         <div class="ak-tl studio-exit-anchor">
           <button class="ak-sq ak-exit studio-exit" data-act="closeCardPage" title="退出照相馆（Esc）" aria-label="关闭照相馆">
             <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
-              <path d="M9 4h9a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 18 20H9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
-              <path d="M4 12h10M4 12l4-4M4 12l4 4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              <rect x="12.5" y="4.5" width="8.5" height="15" rx="1.6" fill="none" stroke="currentColor" stroke-width="2.2"/>
+              <path d="M3.5 12h9M3.5 12l4-4M3.5 12l4 4" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </button>
         </div>
@@ -606,7 +581,6 @@ import { MECH_GROUPS, MECH_ALL } from '../cards/mech-sentences.js';
     libRenderedPageIndex = libPageIndex;
     bindLibGridNavigation();
     warmLibArt();
-    warmNextLibPage(libFiltered());
     // 注意：lastPreviewId 在下方悬停处理段声明（函数内 let），此处不可提前赋值——
     // 昨晚"悬停去重"改动曾在此赋值触发 TDZ ReferenceError，导致后续全部 UI.act
     // 注册被跳过，卡牌库整页按钮（含右上关闭钮）无响应（老板留言：退出点不动）。

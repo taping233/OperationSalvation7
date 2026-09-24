@@ -190,8 +190,8 @@ body.cardlib-open #overlay .card-library-page .library-kicker::before {
   background:var(--lib-c1); vertical-align:middle; opacity:.7; }
 body.cardlib-open #overlay .card-library-page .library-title h2 {
   display:block!important; margin:12px 0 8px!important;
-  font:600 30px/1.3 'SimSun',serif!important; color:#f2f7f9!important;
-  letter-spacing:11px!important; text-shadow:0 3px 30px rgba(0,0,0,.7)!important; }
+  font:600 30px/1.3 'SimSun',serif!important; color:#3a2c1a!important;
+  letter-spacing:11px!important; text-shadow:0 2px 14px rgba(255,250,235,.65)!important; }
 body.cardlib-open #overlay .card-library-page .library-title h2 .ic {
   width:.74em!important; height:.74em!important; opacity:.85; vertical-align:-.06em; }
 body.cardlib-open #overlay .card-library-page .library-title p {
@@ -673,12 +673,10 @@ body.cardlib-open #overlay .photo-studio-v3 .clib-main::after {
 body.cardlib-open #overlay .photo-studio-v3 .lib-grid {
   min-height:0;
   min-width:0;
-  overflow-y:hidden;
   overflow-x:hidden;
   overscroll-behavior:none;
   display:grid!important;
   grid-template-columns:repeat(4,minmax(0,1fr))!important;
-  grid-template-rows:repeat(2,minmax(0,1fr));
   gap:32px 26px!important;
   padding:20px 12px 42px!important;
   align-content:start;
@@ -708,9 +706,11 @@ body.cardlib-open #overlay .photo-studio-v3 .lib-item {
   position:relative!important;
   padding:15px 3px 6px!important;
   border:0!important;
-  content-visibility:auto;
+  /* 09-24 改上下滚动后摘掉 content-visibility/contain-intrinsic-size：
+     全量渲染下网格行轨道会拿跳过态的错误高度（首两行 54px）且物品长高后不重算，行叠行。
+     winter.css:251 还有条全局 .lib-item{content-visibility:auto}，必须在这里显式关掉。 */
+  content-visibility:visible!important;
   contain:layout style;
-  contain-intrinsic-size:auto 252px!important;
   transition:transform .18s ease!important;
 }
 body.cardlib-open #overlay .photo-studio-v3 .lib-item:hover {
@@ -1180,7 +1180,6 @@ body.cardlib-open #overlay .photo-studio-v3 #libCls { border-left:2px solid rgba
   body.cardlib-open #overlay .photo-studio-v3 .clib-main { padding:10px 12px 14px!important; }
   body.cardlib-open #overlay .photo-studio-v3 .lib-grid {
     grid-template-columns:repeat(4,minmax(0,1fr))!important;
-    grid-template-rows:repeat(2,minmax(0,1fr));
     gap:6px 4px!important;
     padding:8px 4px!important;
   }
@@ -2671,6 +2670,7 @@ body.cardlib-open #overlay .studio-index-layout .studio-catalog .lib-grid {
   min-height:0;
   width:100%;
   box-sizing:border-box;
+  overflow-y:auto; /* 09-24 口头改回上下滚动浏览 */
   padding-top:12px!important;
   row-gap:18px!important; /* 09-24 留言：上下两列照片挤在一起，行间拉开 */
 }
@@ -2688,7 +2688,7 @@ body.cardlib-open #overlay .photo-studio-v3.studio-index-layout .lib-grid > .lib
   animation:libPhotoPageIn .18s ease-out both!important;
   animation-delay:calc(var(--i,0) * 8ms)!important;
 }
-/* 分页后同屏仅 8 张；避免每次翻页创建 8 个动画层，也不再在悬停时切换内容可见性。 */
+/* 09-24 改回上下滚动浏览：全量渲染不开入场动画，滚动预热靠 content-visibility。 */
 body.cardlib-open #overlay .photo-studio-v3.studio-index-layout .lib-grid > .lib-item {
   animation:none!important;
   content-visibility:visible!important;

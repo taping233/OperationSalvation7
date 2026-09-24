@@ -35,12 +35,24 @@ body.cardlib-open #overlay .photo-studio-v3 {
   --studio-control-hi: #1c3648;
   --studio-accent: #d9bb82;
 }
-/* W1c 页头底色：绿皮革 → 冷青暗板（保留原皮革纹理图，只换调色层） */
+/* W1c 页头底色：09-24 老板——冷青暗板 → 黄白纸纹（复用相纸 grain 颗粒），纸上压深字色 */
 body.cardlib-open #overlay .photo-studio-v3 .library-head {
   background:
-    linear-gradient(180deg, rgba(14, 28, 39, .95), rgba(9, 19, 29, .96)),
-    url('../assets/ui/photo-studio/leather-archive-v1.png') center/480px!important;
+    linear-gradient(180deg, rgba(244, 235, 214, .96), rgba(238, 227, 202, .97)),
+    url('../assets/ui/photo-studio/paper-grain.png') repeat!important;
+  background-blend-mode:multiply, multiply;
+  --lib-c1:#8a6a35; --lib-dim:#6b5a40; --lib-dim2:#7a6748; --lib-txt:#2f2414;
+  --lib-c2:#2e6b63; --lib-line:rgba(90,70,40,.35); --lib-line2:rgba(90,70,40,.45);
 }
+/* 09-24 老板：上方栏图标配纸纹——退出键改纸面墨线（SVG 图形见 game.cardslib.js） */
+body.cardlib-open #overlay .studio-index-layout .ak-sq.ak-exit.studio-exit {
+  background:#f6efdd;
+  border-color:rgba(90,70,40,.55);
+  color:#4a3820;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.55), 0 2px 6px rgba(60,45,25,.22);
+}
+body.cardlib-open #overlay .studio-index-layout .ak-sq.ak-exit.studio-exit::after { border-color:rgba(138,106,53,.32); }
+body.cardlib-open #overlay .studio-index-layout .ak-sq.ak-exit.studio-exit:hover { background:#fbf6e8; border-color:#8a6a35; color:#2f2414; }
 /* W1d 影廊墙面：保留 wall.webp 绒布墙，压顶的调色层绿改冷青（外围容器层扣） */
 body.cardlib-open #overlay .photo-studio-v3.studio-index-layout .clib-main {
   background:
