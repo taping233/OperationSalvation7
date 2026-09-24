@@ -305,15 +305,6 @@ function applyFrame(name) {
   setTexture(tex);
   layout();
   wakeRenderer();
-  // TODO(临时调试钩子，查完立绘闪现问题即删)：记录切帧时 sprite 几何与宿主状态
-  const host = document.getElementById('unitFrames');
-  window.__bfDebug = {
-    t: Date.now(), frame: name, role: cur.role,
-    spriteW: Math.round(sprite.width), spriteH: Math.round(sprite.height),
-    spriteX: Math.round(sprite.x), spriteY: Math.round(sprite.y),
-    hostHidden: host ? host.hidden : 'no-host',
-    anchor: sprite.anchor && (sprite.anchor.x + ',' + sprite.anchor.y),
-  };
 }
 
 // 把一个触发动作展开成帧时间轴：{ list, dur, loop }（帧数按实际资产，总时长均分）

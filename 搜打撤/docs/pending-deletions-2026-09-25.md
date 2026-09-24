@@ -39,8 +39,11 @@
 ## 8. 观望项（不删，仅记录）
 - `tools/__pycache__/nai_gen.cpython-38.pyc`：建议改 .gitignore 停跟踪（首次提交需 `git rm --cached`，属删除类操作，待批）。
 
-## 9. 调试钩子删除项（09-25 只读调查结论 A：可安全删）
-- `game/src/battle/battle.frames.js` 308-316 行（基于 HEAD c89b289）：`window.__bfDebug` 快照钩子，
-  09-20 a59e2ff 排查「立绘闪现」的观测工具；该提交即根因修复批且实机验收通过，此后无复发；
-  全仓 `bfDebug` 仅定义处一条、零消费、无测试断言。删除须同步跑 `tests/battle-frames-lifecycle.test.js`。
-- 行号在 battle 重构批次后会漂移，执行时以 rg `__bfDebug` 重定位。
+## 9. 调试钩子删除项（09-25 只读调查结论 A：可安全删）——**已执行删除，待此记录随批入库**
+- `game/src/battle/battle.frames.js` 原 308-316 行 `window.__bfDebug` 快照钩子：09-20 a59e2ff 排查
+  「立绘闪现」的观测工具；该提交即根因修复批且实机验收通过，此后无复发；全仓零消费、无测试断言。
+- 09-25 02:4x 按结论 A 执行删除（9 行），`node --check` + `tests/battle-frames-lifecycle.test.js` 绿 + lint 0。
+
+## 10. 死代码孤儿（命令域批顺带发现，待批）
+- `game/src/hub/meta.js:341` 附近 `track('death')` case：全仓无调用方的孤儿死亡统计副本（已漂移成带音效/UI 版）；
+  同函数 `track('extract')` case 同样无调用方。删除须先确认 track 分发表无反射式调用。
