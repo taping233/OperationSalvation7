@@ -5,6 +5,7 @@ const UI = window.SDT.UI;
 import { sdtDefine } from '../core/sdt-facade.js';
 import { rect as uiRect } from '../ui/ui-scale.js';
 import { esc } from '../core/shared.js';
+import { storeGet, storeSet } from '../core/storage.js';
 import { escAttr } from '../core/shared.js';
 import { Random } from '../core/random.js';
 import { groupHandCards } from './battle.hand.js';
@@ -370,7 +371,7 @@ import { aim, aimPlayedAt, selectCardByClick, showCardBlockReason, startAim, can
         <div class="bt-settings">
           <label class="chk"><input type="checkbox" id="btSetMusic" ${SDT.Sound.musicMuted ? '' : 'checked'}> 背景音乐</label>
           <label class="chk"><input type="checkbox" id="btSetSfx" ${SDT.Sound.sfxMuted ? '' : 'checked'}> 音效</label>
-          <label class="chk"><input type="checkbox" id="btSetShake" ${localStorage.getItem('sdt-reduce-shake') === '1' ? '' : 'checked'}> 屏幕震动反馈</label>
+          <label class="chk"><input type="checkbox" id="btSetShake" ${storeGet('sdt-reduce-shake') === '1' ? '' : 'checked'}> 屏幕震动反馈</label>
           <label class="chk"><input type="checkbox" id="btSetPace" ${getPace() === 2 ? 'checked' : ''}> 2× 战斗节奏（敌方行动加速）</label>
           <p class="ov-note">完整设置可在基地 / 标题页打开。关闭后回到战斗。</p>
           <div class="ov-btns"><button class="ov-btn ok" data-act="btSettingsBack">[[icon:cross]] 返回战斗</button></div>
@@ -380,7 +381,7 @@ import { aim, aimPlayedAt, selectCardByClick, showCardBlockReason, startAim, can
       const syncMusic = (on) => { SDT.Sound.setMusicMuted(!on); };
       document.getElementById('btSetMusic').addEventListener('change', (e) => syncMusic(e.target.checked));
       document.getElementById('btSetSfx').addEventListener('change', (e) => { SDT.Sound.setSfxMuted(!e.target.checked); });
-      document.getElementById('btSetShake').addEventListener('change', (e) => { localStorage.setItem('sdt-reduce-shake', e.target.checked ? '0' : '1'); });
+      document.getElementById('btSetShake').addEventListener('change', (e) => { storeSet('sdt-reduce-shake', e.target.checked ? '0' : '1'); });
       // 2× 演示倍率（迭代评审 09-20）：单一倍率同步缩放步进/序列帧/前摇/飘字四处时长（battle.pace.js）
       document.getElementById('btSetPace').addEventListener('change', (e) => { setPace(e.target.checked ? 2 : 1); });
       UI.act('btSettingsBack', () => render());

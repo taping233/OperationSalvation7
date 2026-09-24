@@ -30,6 +30,20 @@ function appendLocalFeedback(entry, storage) {
   catch { return fail('WRITE_FAILED', '本地写入失败，请保留内容后重试'); }
 }
 
+// 删除指定 ts 的留言后整串覆写（存储收口批 2026-09-25：removeSuggestion
+// 浏览器回退从 game.menu.js 内联直读写收口到本封装）。键名、读写时机与
+// 解析降级和原内联实现逐点等价：键缺失按 '[]' 处理（仍会写入 '[]'）、
+// 解析失败/非数组返回 false 且原串保留，读取或写入抛异常均返回 false。
+function removeLocalFeedback(ts, storage) {
+  const port = storageOrFailure(storage);
+  if (!port.ok) return false;
+  try {
+    const list = JSON.parse(port.value.getItem(FEEDBACK_KEY) || '[]').filter((e) => e?.ts !== ts);
+    port.value.setItem(FEEDBACK_KEY, JSON.stringify(list));
+    return true;
+  } catch { return false; }
+}
+
 function feedbackExportRecord(entry, diagnostics = getDiagnosticSummary()) {
   const at = entry?.at && Number.isFinite(+entry.at.x) && Number.isFinite(+entry.at.y)
     ? { x: +entry.at.x, y: +entry.at.y } : null;
@@ -73,4 +87,4 @@ function downloadFeedbackRecord(entry, ports = {}) {
   finally { if (href && revoke) setTimeout(() => revoke(href), 0); }
 }
 
-export { FEEDBACK_KEY, appendLocalFeedback, downloadFeedbackRecord, feedbackExportRecord, readLocalFeedback };
+export { FEEDBACK_KEY, appendLocalFeedback, downloadFeedbackRecord, feedbackExportRecord, readLocalFeedback, removeLocalFeedback };

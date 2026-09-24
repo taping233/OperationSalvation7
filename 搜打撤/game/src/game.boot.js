@@ -15,6 +15,7 @@ import { bindNotesMixins, initDevMode, openCellEditor, rebuildNotes, showClearOv
 import { cardPageOpen, closeCardPageTop, openCardDesigner, openCardLibrary } from './hub/game.cardslib.js';
 import { renderScheduler } from './core/render-scheduler.js';
 import { nodeHitRadius } from './core/camera.js';
+import { storeGet, storeSet } from './core/storage.js';
 import { renderMiniMap } from './run/game.session.js';
 
   configureGameRuntime({ openClassChoice, openBaseHub, rebuildNotes, resize: () => resize(), showRunTransition, syncDevVisibility, resumeExtraction });
@@ -193,10 +194,10 @@ import { renderMiniMap } from './run/game.session.js';
     const logPanel = document.getElementById('logPanel');
     const logToggle = document.getElementById('logToggle');
     if (logPanel && logToggle) {
-      if (localStorage.getItem('sdt-log-collapsed') === '1') logPanel.classList.add('collapsed');
+      if (storeGet('sdt-log-collapsed') === '1') logPanel.classList.add('collapsed');
       logToggle.addEventListener('click', () => {
         const collapsed = logPanel.classList.toggle('collapsed');
-        localStorage.setItem('sdt-log-collapsed', collapsed ? '1' : '0');
+        storeSet('sdt-log-collapsed', collapsed ? '1' : '0');
       });
     }
 
@@ -612,8 +613,8 @@ import { renderMiniMap } from './run/game.session.js';
     Object.assign(game.debug, { openShop, showBackpack, openCardDesigner, openCardLibrary, openBase: openBaseHub });
     UI.init();
     // 应用设置里持久化的界面开关（提示条 / 环层横幅）
-    document.body.classList.toggle('no-hintbar', localStorage.getItem('sdt-hintbar') === '0');
-    document.body.classList.toggle('no-banner', localStorage.getItem('sdt-banner') === '0');
+    document.body.classList.toggle('no-hintbar', storeGet('sdt-hintbar') === '0');
+    document.body.classList.toggle('no-banner', storeGet('sdt-banner') === '0');
     coverTitle = document.getElementById('title');
     coverExit = document.getElementById('exitScr');
     resize();

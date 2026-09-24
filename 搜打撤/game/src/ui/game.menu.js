@@ -1,4 +1,4 @@
-import { appendLocalFeedback, downloadFeedbackRecord, readLocalFeedback } from './feedback.local.js';
+import { appendLocalFeedback, downloadFeedbackRecord, readLocalFeedback, removeLocalFeedback } from './feedback.local.js';
 /* 标题、选档、离开与设置页面流程。只通过注入端口调用会话能力。 */
 function createGameMenuController(deps) {
   const {
@@ -241,7 +241,7 @@ function createGameMenuController(deps) {
   }
 
   // ---------- 留言库：设置页入口，查看历史留言与完成状态，未完成的可删除 ----------
-  // 桌面版经 Electron IPC 读写 output/suggestions.json；浏览器版读写 localStorage。
+  // 桌面版经 Electron IPC 读写 output/suggestions.json；浏览器版走 feedback.local.js 封装。
   // done 标记由 Friday 落地每批留言后在 json 里补写；未完成条目显示删除键（两步确认）。
   async function loadSuggestions() {
     if (window.sdtDesktop?.readSuggestions) {
@@ -261,11 +261,7 @@ function createGameMenuController(deps) {
         return result === true || result?.ok === true;
       } catch { return false; }
     }
-    try {
-      const list = JSON.parse(localStorage.getItem('sdt-suggestions-v1') || '[]').filter((e) => e?.ts !== ts);
-      localStorage.setItem('sdt-suggestions-v1', JSON.stringify(list));
-      return true;
-    } catch { return false; }
+    return removeLocalFeedback(ts);   // 存储收口批 2026-09-25：原内联直读写移入封装层，行为逐点等价
   }
 
   const fmtSugTime = (iso) => {

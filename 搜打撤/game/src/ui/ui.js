@@ -1,4 +1,5 @@
 import { esc } from '../core/shared.js';
+import { storeSet } from '../core/storage.js';
 import { renderExpeditionPanel } from '../run/expedition.view.js';
 import { descRich } from '../cards/cards.view.js';
 import { photoMountFor } from '../hub/photo-studio-presentation.js';
@@ -624,7 +625,7 @@ import { photoMountFor } from '../hub/photo-studio-presentation.js';
       // U10（2026-09-19 走查）：空面板只占位不干活——首条日志进来时自动展开
       if (this.el.logPanel && this.el.log.children.length === 0) {
         this.el.logPanel.classList.remove('collapsed');
-        localStorage.setItem('sdt-log-collapsed', '0');
+        storeSet('sdt-log-collapsed', '0');
       }
       this.el.log.prepend(div);
       while (this.el.log.children.length > 60) this.el.log.lastChild.remove();
@@ -636,7 +637,7 @@ import { photoMountFor } from '../hub/photo-studio-presentation.js';
       // U10：清空后回折叠态（U10 空态收起，避免开局左下大块空面板）
       if (this.el.logPanel) {
         this.el.logPanel.classList.add('collapsed');
-        localStorage.setItem('sdt-log-collapsed', '1');
+        storeSet('sdt-log-collapsed', '1');
       }
     },
 
