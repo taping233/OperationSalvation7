@@ -45,6 +45,7 @@ import { processDelayed, accrueGrowth, resolveCard, syncCurseCondEquips, applyKi
       if (noDrawNext) { set$noDrawNext(false); G.log('[[icon:cross]] <b>下回合无法抽牌</b>生效：本回合开始不抽牌', 'warn'); }
       else if (mode === 'boss') drawCards(R().battleTurnDraw);
       processDelayed();
+      if (!session.isCurrent() || battleState.phase === BATTLE_PHASES.VICTORY || battleState.phase === BATTLE_PHASES.DEFEAT) return;
       G.log(`[[icon:hourglass]] <b>额外回合</b>：敌人被钉在原地，你再次行动！（第 ${turn} 回合）`, 'ok');
       set$battleState(transitionBattle(battleState, BATTLE_PHASES.PLAYER));
       set$busy(false);
@@ -323,8 +324,12 @@ import { processDelayed, accrueGrowth, resolveCard, syncCurseCondEquips, applyKi
         resolveCard(fb, target, false, 0);
       }
     }
+    // 火球符文可能击杀首脑并在 finish(true) 中结束当前战斗；不可继续跑新回合收尾。
+    if (!session.isCurrent() || battleState.phase === BATTLE_PHASES.VICTORY || battleState.phase === BATTLE_PHASES.DEFEAT) return;
     // —— 新回合开始：「回合开始时」延迟段结算 ——
     processDelayed();
+    // 回合开始延迟效果也可能击杀首脑；终局后不能继续抽牌或迁移回玩家阶段。
+    if (!session.isCurrent() || battleState.phase === BATTLE_PHASES.VICTORY || battleState.phase === BATTLE_PHASES.DEFEAT) return;
     // —— 常规抽牌（「下回合无法抽牌」标记在本回合开始消耗掉） ——
     if (noDrawNext) {
       set$noDrawNext(false);

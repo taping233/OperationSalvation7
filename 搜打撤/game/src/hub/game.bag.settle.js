@@ -11,6 +11,7 @@ import { Random } from '../core/random.js';
 import { on as busOn } from '../core/event-bus.js';
 import { showRunTransition } from '../run/game.run.js';
 import { bagSlots } from './game.bag.bridge.js';
+import { setBagReturnHook } from './bag-return-hook.js';
   // ---------- 战后结算（battle.js 回调） ----------
   // win = true 胜利 / false 战败 / null 撤退。
   // 小怪战：使用过的卡进消耗口袋；BOSS 战：卡牌完好保留；
@@ -74,13 +75,35 @@ import { bagSlots } from './game.bag.bridge.js';
         rewardsApplied: false, runSaved: false, baseSaved: false, requestId: `battle:${identity?.ok ? identity.value.runId : 'memory'}:${requestNonce}` };
       settlements.set(opts, settlement);
     }
-    const retry = error => {
-      if (error) console.error('[battle:settle] 战后结算未完成', error);
-      UI.log('[[icon:cross]] 战后结算未保存，请重试；本场奖励不会重新发放', 'warn');
+    const showLegendRewardRetry = () => {
       game.state = 'modal';
-      UI.showOverlay('战后结算未完成', '<div class="ov-btns"><button class="ov-btn ok" data-act="battleSettleRetry">重试保存战后奖励</button></div>', 'discover');
-      UI.act('battleSettleRetry', () => { onBattleEnd(opts, playedUids, win, consumedUids); });
+      setBagReturnHook(showLegendRewardRetry);
+      UI.showOverlay('战后传说卡待领取', '<p>背包已满，清理空位后领取战后传说卡。</p><div class="ov-btns"><button class="ov-btn ok" data-act="battleLegendOpenBag">打开背包</button><button class="ov-btn ok" data-act="battleSettleRetry">重试领取</button></div>', 'discover');
+      UI.act('battleLegendOpenBag', () => bagSlots.showBackpack());
+      UI.act('battleSettleRetry', () => {
+        setBagReturnHook(null);
+        onBattleEnd(opts, playedUids, win, consumedUids);
+      });
       return false;
+    };
+    const showSettlementRetry = () => {
+      game.state = 'modal';
+      setBagReturnHook(showSettlementRetry);
+      UI.showOverlay('战后结算未完成', '<div class="ov-btns"><button class="ov-btn ok" data-act="battleSettleRetry">重试保存战后奖励</button></div>', 'discover');
+      UI.act('battleSettleRetry', () => {
+        setBagReturnHook(null);
+        onBattleEnd(opts, playedUids, win, consumedUids);
+      });
+      return false;
+    };
+    const retry = (error, { legendBlocked = false } = {}) => {
+      if (error) console.error('[battle:settle] 战后结算未完成', error);
+      if (legendBlocked) {
+        UI.log('[[icon:bag]] 背包已满，战后传说卡待领取；清理空位后重试', 'warn');
+        return showLegendRewardRetry();
+      }
+      UI.log('[[icon:cross]] 战后结算未保存，请重试；本场奖励不会重新发放', 'warn');
+      return showSettlementRetry();
     };
     const sameRun = () => {
       if (getActiveSlot() !== settlement.slotId) {
@@ -217,8 +240,17 @@ import { bagSlots } from './game.bag.bridge.js';
         if (!receipt.ok) return retry(new Error(receipt.message));
         if (!ensureSameRun()) return false;
         if (!receipt.value) {
+          settlement.phase = 'saving';
           if (!settlement.rewardsApplied) {
-            for (const card of pendingLoot.legends || []) game.grantCard(card);
+            const legends = pendingLoot.legends || [];
+            settlement.legendCardsGranted ||= 0;
+            while (settlement.legendCardsGranted < legends.length) {
+              const card = legends[settlement.legendCardsGranted];
+              if ((game.canReceiveCard && !game.canReceiveCard(card)) || !game.grantCard(card)) {
+                return retry(new Error('背包已满，清理背包后重试领取传说卡'), { legendBlocked: true });
+              }
+              settlement.legendCardsGranted++;
+            }
             settlement.rewardsApplied = true;
           }
           const elapsed = Math.max(0, +game.elapsed || 0);
@@ -274,16 +306,26 @@ import { bagSlots } from './game.bag.bridge.js';
         game.visited = game.visited || {};
         game.visited[game.layerIdx + ',' + game.trackPos] = 1;
       }
-      let legends = 0;
-      if (!stageOnly && !settlement.rewardsApplied && opts.isBoss && win === true) {
-        legends = 1;
-      }
-      if (!stageOnly && !settlement.rewardsApplied && slewDragon && win === true && Random.random('loot') < 0.3) legends += 1;
-      if (legends > 0) UI.log('[[icon:trophy]] 首脑宝库开启：额外奖励 <b>1 张传说卡</b>！', 'loot');
-      for (let i = 0; i < legends; i++) {
-        const pool = SDT.Cards.all().filter(c => c.rarity === '传说' && SDT.Cards.isRandomObtainable(c));
-        const card = pool.length ? pool[Math.floor(Random.random('loot') * pool.length)] : null;
-        if (card) game.grantCard(card);
+      if (!stageOnly && !settlement.rewardsApplied && win === true) {
+        if (!settlement.legendCards) {
+          let legends = opts.isBoss ? 1 : 0;
+          if (slewDragon && Random.random('loot') < 0.3) legends++;
+          settlement.legendCards = [];
+          for (let i = 0; i < legends; i++) {
+            const pool = SDT.Cards.all().filter(c => c.rarity === '传说' && SDT.Cards.isRandomObtainable(c));
+            const card = pool.length ? pool[Math.floor(Random.random('loot') * pool.length)] : null;
+            if (card) settlement.legendCards.push({ ...card });
+          }
+          if (legends > 0) UI.log('[[icon:trophy]] 首脑宝库开启：额外奖励 <b>1 张传说卡</b>！', 'loot');
+        }
+        settlement.legendCardsGranted ||= 0;
+        while (settlement.legendCardsGranted < settlement.legendCards.length) {
+          const card = settlement.legendCards[settlement.legendCardsGranted];
+          if ((game.canReceiveCard && !game.canReceiveCard(card)) || !game.grantCard(card)) {
+            return retry(new Error('背包已满，清理背包后重试领取传说卡'), { legendBlocked: true });
+          }
+          settlement.legendCardsGranted++;
+        }
       }
       if (!stageOnly) settlement.rewardsApplied = true;
       settlement.phase = 'saving';

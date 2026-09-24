@@ -497,6 +497,7 @@ function requestClassChoice(options) {
       nestRunes: game.nestRunes || [], nestEquipped: game.nestEquipped || [], nestBossName: game.nestBossName || null,
       nestTargetedBox: game.nestTargetedBox || 0, pendingRunePick: game.pendingRunePick || null,
       pendingBattleLoot: game.pendingBattleLoot || null,
+      pendingEventLoot: game.pendingEventLoot || null,
     };
     try { return { ok: true, value: JSON.parse(JSON.stringify(value)) }; }
     catch { return { ok: false, code: 'INVALID_ARGUMENT', message: '对局结算快照无法序列化' }; }
@@ -666,6 +667,8 @@ function requestClassChoice(options) {
     else if (!game.myClass) runtime.openClassChoice();   // 上次存档时还没选职业：补上开局选择
     else if (!game.pendingBattleLoot && s.battle && SDT.Battle && typeof SDT.Battle.restore === 'function') {
       if (SDT.Battle.restore(game, s.battle)) {
+        game.pendingEventLoot = s.pendingEventLoot && typeof s.pendingEventLoot === 'object'
+          ? s.pendingEventLoot : null;
         // 读档恢复的战斗没经过 resolveCell：本格按已触发处理，撤退/胜利后不重复触发
         if (game.visited) game.visited[game.layerIdx + ',' + game.trackPos] = 1;
         saveGame();   // 恢复后立刻回写，防二次退出丢进度

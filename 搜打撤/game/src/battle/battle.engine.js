@@ -722,16 +722,17 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     if (!delayed.length) return;
     const silenced = (pstat.status.silence || 0) > 0;
     const keep = [];
-    delayed.forEach(q => {
-      if (q.notBeforeTurn && turn < q.notBeforeTurn) { keep.push(q); return; }
+    for (const q of delayed) {
+      if (battleState.phase === BATTLE_PHASES.VICTORY || battleState.phase === BATTLE_PHASES.DEFEAT) break;
+      if (q.notBeforeTurn && turn < q.notBeforeTurn) { keep.push(q); continue; }
       if (q.special === 'consumeTemps') {
         consumeHandUids(q.uids || [], q.cardName);
-        return;   // 一次性，不保留
+        continue;   // 一次性，不保留
       }
       // 第十二批（2026-09-23）两个一次性 special：均不走沉默门（状态还原/费用记账非技能句）
       if (q.special === 'curseImmuneOff') {
         set$playerCurseImmune(!!q.restore);
-        return;   // 一次性，不保留
+        continue;   // 一次性，不保留
       }
       if (q.special === 'costDecay' || q.special === 'ruleCostDecay') {
         // Legacy text jobs and structured rule jobs both bind decay to the discovered card uid.
@@ -746,19 +747,21 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
           }
           if (nc > 0) keep.push(q);
         }
-        return;   // 保留与否自行管理
+        continue;   // 保留与否自行管理
       }
       if (silenced) {
         G.log(`[[icon:cross]] 沉默中：【${esc(q.cardName)}】的回合开始效果无法生效`, 'warn');
       } else {
         G.log(`[[icon:hourglass]] <b>回合开始时</b>：【${esc(q.cardName)}】${esc(q.text)}`, 'sys');
         applyTextEffects({ name: q.cardName }, q.text, alive()[0] || null);
+        if (battleState.phase === BATTLE_PHASES.VICTORY || battleState.phase === BATTLE_PHASES.DEFEAT) break;
       }
       if (q.repeat) {
         if (typeof q.left === 'number') { q.left -= 1; if (q.left > 0) keep.push(q); }
         else keep.push(q);
       }
-    });
+    }
+    if (battleState.phase === BATTLE_PHASES.VICTORY || battleState.phase === BATTLE_PHASES.DEFEAT) return;
     set$delayed(keep);
   }
 
