@@ -1,3 +1,11 @@
+## 当前状态补充：quality gates 红修复 + 推送/落库状态核实（2026-09-24 23:35 +08:00）
+
+- HEAD `12101d3` `chore(perf): battle chunk 预算 98→102 KiB`，本地 master == origin/master（89c0037..12101d3 已推送）。此前记忆「5 提交待推」已过时：核实 89c0037 时点本地与远端即已同步。
+- CI 验收闭环：主 workflow「CI」对近期推送持续绿（此前修的 tick 平台差根因有效）；「Vite quality gates」自 12a71c0 起三连红，根因=postbuild perf-budget——battle.view chunk gzip 101.4 KiB > 预算 98 KiB（b1de402→HEAD battle 域净增约 1500 行：0d9c552 七项存量红修复+中心模块拆分、c387e62 execPlay 拆片等真实代码增长，非意外依赖拖入）。按 performance-budgets.js 自身规矩附实测数据抬至 102 KiB（留 0.6 KiB 余量保持门禁紧度；该值仅被构建门禁消费，无运行时行为变化）。修复后 run 36020548663（quality）与 36020548574（CI）双绿。
+- 核实：经典生命研究所五切片已随 `14f5a41` 落库且在 HEAD 内（此前记忆「未提交」过时）；NAI 三图 `assets/scenes/lab-ending/ending-{1,2,3}.webp` 仍缺，缺图行为=透明露出页底基调渐变，出图后无需改码。
+- 遗留待办（本批未动）：① battle 域 lint 148 error（多为 unused 删除类，删除须先报批）；② G 空引用修复仍停手待第四方；③ 近线预算提醒：entry-gzip 238.2/256 KiB、initial-js 251.0/272 KiB、css 118.8/128 KiB、duplicates 0.63/0.768 MiB，均在 82~93% 水位。
+- 现场：`搜打撤/tools/nai_gen.py`(+pyc) 未提交改动为其他会话 NAI 现场，本批未触碰。本批仅改 `game/src/core/performance-budgets.js` 与本文档，pre-commit 全量门禁 145 文件/814 用例全绿（307s）后落库。
+
 ## 当前状态补充：全界面美术排版流水线落库 + 09-24 批次收编（2026-09-24 08:50 +08:00）
 
 - **8a71333** `feat: unify art direction across all UI screens via page overlay layers`：15 个 `css/page-*.css` 界面增量层（4.5k 行，12 个子代理产出、各页自验：截图+computed+交互回归+Tab 焦点走查+作用域零溢出断言）+ index.html 末尾统一挂载段（ui-scale.css 之后）。覆盖：选档/基地/出发/人物/仓库/商店/升级/设置+留言库/照相馆/制作坊/成就/远征HUD/事件/奖励+背包+帮助/战斗。语言基调=冷青调色+暗角、暖金 #d9bb82 封条金线/编号短线、交互三档节奏+快按慢弹+金线焦点环；动画仅 transform/opacity。
