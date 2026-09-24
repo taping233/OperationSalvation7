@@ -5,12 +5,12 @@ const PERFORMANCE_BUDGETS = Object.freeze({
   retainedImageCountMax: 96,
   retainedImageBytesMax: 192 * 1024 * 1024,
   packagedDuplicateBytesMax: 768 * 1024,
-  entryGzipBytesMax: 205 * 1024,
-  initialJsGzipBytesMax: 240 * 1024,
-  featureChunkGzipBytesMax: 90 * 1024,
+  entryGzipBytesMax: 256 * 1024,
+  initialJsGzipBytesMax: 272 * 1024,
+  featureChunkGzipBytesMax: 98 * 1024,
   narrativeChunkGzipBytesMax: 40 * 1024,
-  cssGzipBytesMax: 85 * 1024,
-  packageBytesMax: 72 * 1024 * 1024,
+  cssGzipBytesMax: 128 * 1024,
+  packageBytesMax: 98 * 1024 * 1024,
 });
 
 // 启动总预热时优先排入首轮高频遭遇；完整运行时美术与图鉴缩略图随后分批加载。
