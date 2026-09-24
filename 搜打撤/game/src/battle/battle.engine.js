@@ -541,6 +541,7 @@ function equipCap() { return equipment.equipCap(); }
 function syncCurseCondEquips() { return equipment.syncCurseCondEquips(); }
 function useEquipSkill(uid) { return equipment.useEquipSkill(uid); }
 function battleBagItems() { return bag.battleBagItems(); }
+function restoreConsumed(n) { return bag.restoreConsumed(n); }
 function itemUsability(card) { return bag.itemUsability(card); }
 function useItem(uid, side) { return bag.useItem(uid, side); }
 function bagSlam() { return bag.bagSlam(); }
