@@ -1,3 +1,16 @@
+## 当前状态补充：现场三摊落库 + 代码债子代理批开工（2026-09-25 00:4x +08:00）
+
+- 老板 09-25 指示「提交，代码债你用子代理慢慢修」。落库前全量体检实测：ESLint 全仓 0 error 0 warning（含未提交现场）、`check-syntax` 172 文件通过、全量 vitest 145 文件/814 用例全绿（277s）。按归属分 5 笔提交：① battle 5 文件 = lint 收口 148→0 + `battle.core.js` damageAll 传合成卡 `{name:'开发者指令'}` 修 hitFoe card.name 空解引用（体检批 G 项战斗侧，方案与既定一致）；② 照相馆性能修复 = `game.cardslib.js` 窗口挂载 24 张+哨兵追加+补挂兜底（打开冻结 1.4s→110ms）+ `expedition-library.css` 恢复 content-visibility；③ 返回键统一+界面美术 = `game.menu.js`（指南/成就/选档返回键统一 ak-sq ak-exit 同款同位）+ winter/hub/title-p0/photo-studio-craft/page-settings 五 CSS（ak-back-tl 定位、成就弹层入场、W6 覆盖冻结暂停 55 无限动画、卡牌库退出键去封面透明变体、设置页 S5b/S6f 精修与页头让位）；④ `tools/nai_gen.py`(+pyc) = 生图 API 更新（归属 NAI 会话，验证闭环见下段）；⑤ 本文档。
+- 临时产物未动待批删：`.tmp-codemod.mjs`、`.tmp-lint-analysis.mjs`、`battle-lint.tmp.json`（lint 批工作文件）。推送未做（老板未指示）。
+- 代码债子代理批同日开工，按属地划线（验收标准：定向+全量测试绿、架构守卫双零、导出面不变）；批次进度以实时 `git log` 为准。
+
+## 当前状态补充：生图 API 更新（4.5 小图默认 + 大图日限额）验证闭环（2026-09-25 00:13 +08:00）
+
+- 老板 09-25 指令：更新生图 API（新 token、默认 4.5 小图、大图一天限额 20 张）。经核实**改动已由 09-24 深夜会话完整落在未提交现场**，本批零代码改动、只做验证：`搜打撤/tools/nai_gen.py` 已是 MODEL=`nai-diffusion-4-5-full`（V5 需显式传参）、默认尺寸 832×1216 免费小图、`_charge_large_image` 大图护栏（长×宽>108 万 px 计数、自然日、20 张封顶、发送前扣计宁保守勿超限）、curl 直连 000 自动换 socks5h 7890；`.tmp/nai/token.txt`（09-24 22:40）与新 token 逐字节一致（token 不入库不入档）。
+- 验证证据：① payload 冒烟 30 参数结构完整；② 限额护栏 4/4（832×1216 与 1344×768 免费不计数、2048×1152 计 1、计满 20 拒出；测试用临时文件，真实 large-usage.json 未触碰）；③ token 实测：空请求体探测 image 端点回 **400 `model doesn't exist` = 鉴权通过**（无效 token 应回 401）。注意：早前一次 401 是探测单行命令 `eval` 把引号内 `*` 做 glob 展开污染参数的假信号，字面写 `--noproxy '*'` 重测即排除——以后鉴权探测一律不用 eval 拼通道。
+- 网络观察（与既有瞬断口径一致）：image 域三通道（直连/socks5h/http 代理 7890）曾同时全断约数十分钟，后直连自愈；api 域仅在 http 代理口短暂可通。生图遇全通道 000 先按瞬断处理。
+- 现场：`nai_gen.py`(+pyc) 仍未提交（NAI 现场，归属 NAI 会话）；battle 系列 game/ 改动与 .tmp-codemod 等未跟踪文件属并行会话，本批未触碰。未提交、未推送。
+
 ## 当前状态补充：quality gates 红修复 + 推送/落库状态核实（2026-09-24 23:35 +08:00）
 
 - HEAD `12101d3` `chore(perf): battle chunk 预算 98→102 KiB`，本地 master == origin/master（89c0037..12101d3 已推送）。此前记忆「5 提交待推」已过时：核实 89c0037 时点本地与远端即已同步。
