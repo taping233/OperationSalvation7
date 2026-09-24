@@ -24,13 +24,20 @@
 |---|---|---|---|---|---|
 | 1a | presentation | battle.runtime.presentation.js | 7 | 19 → **0** | 已完成（2026-09-24） |
 | 1b | piles | battle.runtime.piles.js | 14 | 56 → **19** | 已完成（2026-09-24） |
-| 2 | interaction | battle.runtime.interaction.js | 16 | 87 → （目标 ≤60） | 待做 |
-| 3 | effects | battle.runtime.effects.js | 35 | 98 → （目标 ≤70） | 待做 |
-| 4 | session | battle.runtime.session.js | 18 | 84 → （目标 ≤60） | 待做 |
+| 2 | interaction | battle.runtime.interaction.js | 16 | 87 → **54** | 已完成（2026-09-25 `1687d78`） |
+| 3 | effects | battle.runtime.effects.js | 35 | 98 → **45** | 已完成（2026-09-25 `1687d78`） |
+| 4 | session | battle.runtime.session.js | 18 | 84 → **53** | 已完成（2026-09-25 `9f2a09b`；engine 侧 15 点因 P1-b 在途避让保留，≈−7 候选下批） |
 | 5 | 兼容壳 battle.runtime.js | — | — | — | 可选收尾，默认不做 |
 
 顺序依据：先收「消费者少 + 重置簇干净」的域（试点两域），再按「簇集中度高、状态机敏感度递增」
 推进 interaction → effects → session；风险最高的 battleState/动作信号放最后单独评估。
+
+> **路线图收官（2026-09-25）**：第 2/3/4 批随持续任务 wave2/wave3 落库，四域全部达标。
+> engine 规则核深拆经只读复核维持「收益低」结论：SCC（autoPlayHandType→execPlay→hitFoe→
+> resolveFoeDefeat 回路、enemy-phase⇄processDelayed/finish 互递归）剩余正文即共享结点，
+> 候选块逐一否决表见 wave3 代理报告（交接文档 2026-09-25 03:1x 段）；且任何真实拆分需同时改
+> scripts/architecture-graph.mjs 的 RUNTIME_OWNERS 白名单。保留散调点（信号推进/busy 锁/
+> 回合推进/检查点簿记等）逐条理由已在各批提交信息与报告记录。
 
 ## 第 1 批试点：presentation + piles（已完成）
 

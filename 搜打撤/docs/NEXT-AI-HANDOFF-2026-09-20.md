@@ -1,3 +1,12 @@
+## 当前状态补充：持续批第三波落库——代码债清单全清（2026-09-25 03:2x +08:00）
+
+- 第三波两笔落库：`5b25270` 性能 P1×2（handPageReminder 转 transform+::after 辉光层走 opacity，reduced-motion 同关；requestBattleRender 改 rAF 排帧去重 flushBattleRender，无 rAF 退回同步；体检批 L 项收尾）；`9f2a09b` 状态袋 session 域 84→53（transitionTo/clearActionSignals/restoreBattleSession/restoreBattleCombatants/resetBattlePlayerState 五聚合；lifecycle 43→16；状态机推进类散调按先例保留逐条理由；**engine 侧 15 点因 P1-b 同文件在途避让保留**，≈−7 候选下批）。
+- **battle.engine.js 规则核深拆再评估：维持「收益低」论证跳过**——SCC 实测（autoPlayHandType→execPlay→hitFoe→resolveFoeDefeat 回路、enemy-phase⇄processDelayed/finish 互递归）剩余正文即共享结点，候选块（抽牌域/死亡簿记/伤害终端/巢穴内容包/快照岛/卡牌工具/转发 shim）逐一否决；且任何真实拆分需同步改 architecture-graph.mjs RUNTIME_OWNERS 白名单。不为拆而拆，结论入路线图收官注。
+- **代码债清单①-⑦全部收口**：① 架构大拆 session 944→488 / cardslib 1209→699 / ui 1001→469 / engine 评估跳过（论证在案）；② 状态袋四域 presentation 0 / piles 19 / interaction 54 / effects 45 / session 53（路线图表格已更新收官注）；③ localStorage 收口（core/storage.js）；④ 性能 P1×2；⑤ commands.shared.js 单一真源；⑥ applyDeathOutcome 唯一实现；⑦ __bfDebug 已删（67cd72f）。
+- 剩余待老板批的删除类（非重构）：孤儿资产 81 文件 2.67MB+中置信 26 文件（docs/orphan-audit-2026-09-25.md）、CSS 死块 87（行号漂移需按类名重扫）、meta.js track('death') 孤儿、cardslib/ui 休眠代码（libPageWarmTask/finishScene/sceneState/sceneNext 等）。
+- **总验收部分完成**：全量 814 绿（两笔提交门禁各跑一遍）、lint 0、语法守卫 188 文件；**npm run build + perf-budget 两项待补**——现场有 UI 审查会话 38 文件未提交改动，按「对方半成品在场不 build」铁律顺延，其落库后由持续任务下一轮补跑。
+- 门禁偶发红第二次（direct-cast）同样是撞 S 代理 engine 中间态，单文件 9/9 绿后等 S 收口再提交即过；两次偶发均为「门禁与在途写文件竞态」，非代码问题，记录在案。
+
 ## 当前状态补充：持续批第二波落库（状态袋/命令域/ui 拆分+钩子删除）（2026-09-25 02:5x +08:00）
 
 - 集成验收实测：全量 145 文件/814 用例绿、ESLint 0、语法守卫 188 文件。四笔落库：`1687d78` 状态袋打薄 interaction 87→54 / effects 98→45（8 个聚合接口，51 个 set$ 导出未少，保留散调点逐条记录理由）；`abeeb94` 命令域收口（commands.shared.js 管件单一真源收 8 文件漂移 + applyDeathOutcome 死亡结算唯一实现；体检 F01/F02 口径过时部分已修正：battle 域真源已不存在，实际双写在 terminal 内部；meta.js track('death') 孤儿副本录报批清单待批）；`fd72af8` ui.js 1001→469 拆 overlay/cinematics/hud（showCardZoom 源文本钉死断言逐行保留）；`67cd72f` 删 battle.frames.js __bfDebug 调试钩子（代码债第⑦项收尾，结论 A：a59e2ff 已修立绘闪现、零消费）。
