@@ -1,0 +1,539 @@
+/* ═══════════════════════════════════════════════════════════════════
+   奖励结算弹层 + 远征背包 + 帮助手册 美术升级（2026-09-24）
+   ——对标 page-slot-select / page-expedition-hud / page-stash 定稿语言：
+     ① 冷青统一调色 + 暗角视线归属 ② #d9bb82 暖金装饰（封条顶线/金短线/
+        端点光点/发丝分隔）③ 信息排版仪式感（档案编号行/数值暖米金表格数字）
+     ④ 交互三档节奏 + 按压快按慢弹 + :focus-visible 金线焦点环
+     ⑤ 出入场只走 transform/opacity ⑥ 光标自查
+   域划分（三域互不外溢；不碰 page-expedition-hud.css 已占用的 HUD 选择器）：
+     域一 奖励结算弹层 ……… 根 #overlay .card.chest（mode 'chest' 专属类，
+                                战斗胜利搜刮 / 搜刮点开箱共用；收获时刻——
+                                可领取卡与「全部收下」用最亮的金）
+     域二 远征中背包 ………… 根 #overlay .card.bag-page（mode 'bagpage' 专属类；
+                                B 键远征背包。基地仓库页签走 page-stash.css
+                                的 .hub-page 域，战斗中 .battle-bag 不在此列）
+     域三 帮助手册/快速参考 … 根 #title .ak-quickref（标题页胶囊键）+
+                                #overlay .card:has(.expedition-manual)（远征手册，
+                                标题页 mGuide 与对局 btnHelp 共用）+
+                                #overlay .card:has(.help-body)（各页 ? 二级帮助，
+                                工具弹层——克制清晰优先）
+   约束：只覆盖不删除；不改 DOM/文案；拖拽热区（.bag-slot 点击/拖动、
+   drop-here !important 高亮、dragging 变暗）零接触——格子不挂 transform
+   过渡与 ：active 位移，翻卡 3D（flip-inner 内联 transform）不碰；
+   新增动画仅 transform/opacity（reduced-motion 由 winter.css 全局兜底）。
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── T0 统一节奏变量：fast=色彩/光晕/小位移，lift=回弹过冲（快按慢弹），press=按下快进 ── */
+#overlay .card.chest,
+#overlay .card.bag-page {
+  --rbh-fast: .18s cubic-bezier(.33, 1, .68, 1);
+  --rbh-lift: .32s cubic-bezier(.3, 1.4, .45, 1);
+  --rbh-press: .09s ease-out;
+}
+#title .ak-quickref,
+#overlay .card:has(.expedition-manual),
+#overlay .card:has(.help-body) {
+  --rbh-fast: .18s cubic-bezier(.33, 1, .68, 1);
+  --rbh-lift: .32s cubic-bezier(.3, 1.4, .45, 1);
+  --rbh-press: .09s ease-out;
+}
+
+/* ═══════════════════ 域一 · 战斗/事件奖励结算弹层（.card.chest） ═══════════════════ */
+
+/* W1 壳：磨砂玻璃档案匣 retint（winter 末尾把壳清成透明悬浮，这里按定稿语言
+   收回冷青玻璃 + 金封条顶线；!important 同特异性更晚加载压过透明化） */
+#overlay .card.chest {
+  background: linear-gradient(180deg, rgba(13, 24, 33, .88), rgba(6, 12, 18, .93)) !important;
+  border: 1px solid rgba(206, 222, 234, .15) !important;
+  border-radius: 18px;
+  box-shadow: 0 34px 110px rgba(0, 0, 0, .62), inset 0 1px 0 rgba(255, 255, 255, .06),
+    0 0 46px rgba(217, 187, 130, .06) !important;
+  backdrop-filter: blur(16px) saturate(1.05);
+  padding: 24px 40px 30px;
+}
+/* W1b 顶缘金封条：重新点亮被隐藏的 ::before，两端渐隐（档案匣封条） */
+#overlay .card.chest::before {
+  display: block;
+  top: 0; left: 18%; right: 18%; height: 1px;
+  background: linear-gradient(90deg, transparent, #d9bb82a1 24%, #d9bb82d9 50%, #d9bb82a1 76%, transparent);
+  box-shadow: 0 0 8px #d9bb8240;
+  opacity: .85;
+}
+
+/* W2 标题：冷白提字距 + 金发丝分隔（压过旧 #d8c08e 灰金） */
+#overlay .card.chest > h2 {
+  color: #f2f6f5;
+  letter-spacing: 4px;
+  text-shadow: 0 0 16px rgba(217, 187, 130, .14), 0 2px 6px rgba(2, 8, 12, .6);
+  border-bottom-color: rgba(217, 187, 130, .3);
+}
+
+/* W3 战利品清点行：档案编号语言——FIELD SUPPLY 金字编号 + 容量暖金表格数字 */
+#overlay .card.chest .loot-manifest { margin: 20px 0 10px; }
+#overlay .card.chest .loot-manifest span {
+  color: #ecd9ad; letter-spacing: 3px;
+  text-shadow: 0 0 8px rgba(217, 187, 130, .2);
+}
+#overlay .card.chest .loot-manifest > div:first-child > b {
+  color: #eef4f2; letter-spacing: 3px;
+  text-shadow: 0 2px 8px rgba(2, 8, 14, .6);
+}
+#overlay .card.chest .loot-capacity small { color: #86a0a6; letter-spacing: .18em; }
+#overlay .card.chest .loot-capacity b {
+  color: #ecd9ad; font-variant-numeric: tabular-nums; letter-spacing: .02em;
+  text-shadow: 0 0 10px rgba(217, 187, 130, .22);
+}
+#overlay .card.chest .loot-capacity em { color: #7e969c; }
+
+/* W4 战报/说明行：本战击败走"战报条"（左缘金标 + 暗金渐变），普通行冷青 */
+#overlay .card.chest .evt-sts-desc { color: #b8cbd0; }
+#overlay .card.chest .evt-sts-desc b { color: #ecd9ad; }
+#overlay .card.chest .evt-sts-desc b.gold { color: #ffe9b6; text-shadow: 0 0 10px rgba(217, 187, 130, .45); }
+#overlay .card.chest .battle-loot-summary {
+  margin: 6px auto; max-width: 560px;
+  padding: 8px 16px;
+  border: 1px solid rgba(217, 187, 130, .3);
+  border-left: 3px solid #d9bb82;
+  border-radius: 2px;
+  background: linear-gradient(90deg, rgba(217, 187, 130, .12), rgba(12, 26, 36, .55) 62%);
+  color: #f2e6c8; letter-spacing: .06em;
+}
+#overlay .card.chest .battle-loot-summary b { color: #ffe9b6; }
+#overlay .card.chest .chest-warn {
+  border-radius: 2px; border-left-width: 3px;
+  background: linear-gradient(180deg, rgba(58, 34, 16, .9), rgba(34, 20, 10, .93));
+}
+
+/* W5 宝箱揭晓：脚下金光池呼吸（仅 opacity； scenes 的落影 ::before 不碰） */
+#overlay .card.chest .chest-reveal { margin: 6px 0 0; }
+#overlay .card.chest .chest-reveal::after {
+  content: ''; position: absolute; left: 50%; bottom: 0; z-index: -1;
+  width: min(380px, 60%); height: 46%; transform: translateX(-50%);
+  pointer-events: none;
+  background: radial-gradient(ellipse 52% 42% at 50% 62%, rgba(217, 187, 130, .22), rgba(217, 187, 130, .05) 58%, transparent 76%);
+  animation: rbhPoolBreath 4.5s ease-in-out infinite alternate;
+}
+@keyframes rbhPoolBreath { from { opacity: .5; } to { opacity: 1; } }
+#overlay .card.chest .chest-prop {
+  filter: drop-shadow(0 10px 22px rgba(2, 8, 14, .6)) drop-shadow(0 0 18px rgba(217, 187, 130, .18));
+}
+
+/* W6 战利品卡（可领取=最亮的金）：hover 抬升 + 金晕；按下快缩；已收暗淡不抢戏 */
+#overlay .card.chest .bt-card {
+  transition: transform var(--rbh-lift), filter var(--rbh-lift), opacity var(--rbh-fast);
+}
+#overlay .card.chest .bt-card:hover {
+  transform: translateY(-8px);
+  filter: drop-shadow(0 16px 18px rgba(2, 8, 14, .5)) drop-shadow(0 0 16px rgba(217, 187, 130, .3));
+}
+#overlay .card.chest .bt-card:active {
+  transform: translateY(-4px) scale(.97);
+  transition: transform var(--rbh-press), filter var(--rbh-press);
+}
+#overlay .card.chest .bt-card.got { filter: grayscale(.7); }
+#overlay .card.chest .bt-card.got:hover { transform: none; filter: grayscale(.7); }
+/* 「已收」印章：收下瞬间转最亮金（收获完成的仪式感） */
+#overlay .card.chest .chest-got-mark {
+  border-color: #d9bb82;
+  background: rgba(23, 16, 5, .88);
+  color: #ffe9b6;
+  text-shadow: 0 0 10px rgba(217, 187, 130, .55);
+  box-shadow: 0 0 14px rgba(217, 187, 130, .35), inset 0 0 8px rgba(217, 187, 130, .12);
+}
+#overlay .card.chest button.bt-card:focus-visible {
+  outline: 1px solid #d9bb82cc;
+  outline-offset: 5px;
+  border-radius: 10px;
+  box-shadow: 0 0 0 1px #071720, 0 0 14px rgba(217, 187, 130, .4);
+}
+
+/* W7 页脚注 + 操作区：发丝分隔后接双钮（跳过=冷青幽灵，收下=最亮金） */
+#overlay .card.chest .loot-footer-note {
+  color: #8fa5ad; letter-spacing: .14em;
+}
+#overlay .card.chest .chest-ops {
+  margin-top: 20px; padding-top: 16px;
+  border-top: 1px solid rgba(159, 183, 188, .14);
+}
+#overlay .card.chest .chest-ops .ov-btn {
+  transition: color var(--rbh-fast), border-color var(--rbh-fast), background var(--rbh-fast),
+    box-shadow var(--rbh-fast), transform var(--rbh-fast), filter var(--rbh-fast);
+}
+#overlay .card.chest .chest-ops .ov-btn:not(.ok) {
+  border-color: rgba(159, 183, 188, .35);
+  background: rgba(12, 28, 40, .55);
+  color: #c3d3d8;
+}
+#overlay .card.chest .chest-ops .ov-btn:not(.ok):hover {
+  border-color: rgba(217, 187, 130, .55);
+  background: rgba(16, 36, 50, .85);
+  color: #f2f6f5;
+  box-shadow: 0 0 12px rgba(217, 187, 130, .12);
+  transform: translateY(-1px);
+}
+/* 「全部收下」：收获时刻的最亮金（#d9bb82 族提亮 + 金晕），warn 态保留橙警示边 */
+#overlay .card.chest .chest-ops .ov-btn.ok {
+  border-color: #e8d3a4;
+  background: linear-gradient(180deg, #f7e7bd, #d9bb82 58%, #c8a76b);
+  color: #241a09;
+  box-shadow: inset 0 1px 0 rgba(255, 246, 220, .55), 0 4px 16px rgba(2, 8, 14, .4), 0 0 18px rgba(217, 187, 130, .28);
+  letter-spacing: 3px;
+}
+#overlay .card.chest .chest-ops .ov-btn.ok:hover {
+  filter: brightness(1.07);
+  box-shadow: inset 0 1px 0 rgba(255, 250, 228, .65), 0 6px 18px rgba(2, 8, 14, .45), 0 0 24px rgba(217, 187, 130, .4);
+  transform: translateY(-1px);
+}
+#overlay .card.chest .chest-ops .ov-btn.ok.warn { border-color: #d68a5a; }
+#overlay .card.chest .chest-ops .ov-btn:active {
+  transform: translateY(1px) scale(.97);
+  filter: brightness(1.1);
+  transition-duration: var(--rbh-press);
+}
+
+/* W8 出入场：首次揭晓（未收过卡=无 .no-anim）时清点行→战报→宝箱→页脚→按钮错峰上浮；
+   单卡拾取重渲染（.no-anim）不再重播。战斗胜利 1.4s fx-victory 入场不受影响。 */
+#overlay .card.chest:has(.bt-hand:not(.no-anim)) .loot-manifest { animation: rbhRiseIn .45s cubic-bezier(.22, 1, .36, 1) backwards; }
+#overlay .card.chest:has(.bt-hand:not(.no-anim)) .evt-sts-desc { animation: rbhRiseIn .45s cubic-bezier(.22, 1, .36, 1) .05s backwards; }
+#overlay .card.chest:has(.bt-hand:not(.no-anim)) .chest-reveal { animation: rbhRiseIn .5s cubic-bezier(.22, 1, .36, 1) .1s backwards; }
+#overlay .card.chest:has(.bt-hand:not(.no-anim)) .loot-footer-note { animation: rbhRiseIn .45s cubic-bezier(.22, 1, .36, 1) .18s backwards; }
+#overlay .card.chest:has(.bt-hand:not(.no-anim)) .chest-ops { animation: rbhRiseIn .45s cubic-bezier(.22, 1, .36, 1) .22s backwards; }
+@keyframes rbhRiseIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* 域一焦点环（跳过/收下钮） */
+#overlay .card.chest .chest-ops .ov-btn:focus-visible {
+  outline: 1px solid #d9bb82cc;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 1px #071720, 0 0 12px rgba(217, 187, 130, .35);
+}
+
+/* ═══════════════════ 域二 · 远征中背包（.card.bag-page，B 键） ═══════════════════ */
+
+/* W1 整屏底：冷青纵深 + 暗角收视线（#bag-full 仅 bagpage 置位，不溅到 settings 等 opaque 页） */
+#overlay.bag-full {
+  background:
+    radial-gradient(120% 90% at 50% 24%, rgba(38, 66, 82, .5), transparent 62%),
+    radial-gradient(130% 100% at 50% 46%, transparent 46%, rgba(4, 11, 17, .55) 92%),
+    linear-gradient(125deg, #142e3b, #0f202c);
+}
+/* W1b 壳：半透明冷青（透出地图）+ 顶缘金封条（沿 winter .card::before 重绘） */
+#overlay .card.bag-page {
+  background:
+    radial-gradient(110% 70% at 50% 0%, rgba(48, 84, 102, .3), transparent 58%),
+    linear-gradient(125deg, rgba(24, 50, 64, .88), rgba(13, 32, 44, .9));
+  border-color: rgba(206, 222, 234, .16);
+  box-shadow: 0 30px 90px rgba(2, 8, 14, .6), inset 0 1px 0 rgba(214, 232, 235, .05);
+}
+#overlay .card.bag-page::before {
+  left: 26px; right: 26px; height: 1px;
+  background: linear-gradient(90deg, transparent, #d9bb82a1 22%, #d9bb82c4 50%, #d9bb82a1 78%, transparent);
+  opacity: .6;
+}
+
+/* W2 页头：标题仪式感 + 档案章片（fc-chip 与对局 HUD 资源章同族）+ 关闭键三态 */
+#overlay .card.bag-page .bag-head h2 {
+  color: #f2f6f5; letter-spacing: .22em;
+  text-shadow: 0 0 14px rgba(217, 187, 130, .12), 0 2px 6px rgba(2, 8, 12, .6);
+}
+#overlay .card.bag-page .bag-chips .fc-chip {
+  background: linear-gradient(180deg, rgba(9, 22, 33, .92), rgba(6, 16, 25, .94));
+  border-color: rgba(159, 183, 188, .26);
+  color: #9fb4bd;
+  box-shadow: inset 0 1px 0 rgba(214, 232, 235, .05);
+}
+#overlay .card.bag-page .bag-chips .fc-chip b {
+  color: #ecd9ad; font-variant-numeric: tabular-nums; letter-spacing: .02em;
+  text-shadow: 0 0 8px rgba(217, 187, 130, .16);
+}
+#overlay .card.bag-page .bag-close {
+  width: 40px; height: 40px; padding: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 1px solid rgba(159, 183, 188, .3); border-radius: 2px;
+  background: rgba(9, 22, 32, .6); color: #b7cbd0;
+  box-shadow: inset 0 1px 0 rgba(214, 232, 235, .05);
+  transition: color var(--rbh-fast), border-color var(--rbh-fast), background var(--rbh-fast),
+    box-shadow var(--rbh-fast), transform var(--rbh-fast);
+}
+#overlay .card.bag-page .bag-close:hover {
+  color: #f2f6f5; border-color: rgba(217, 187, 130, .6);
+  background: rgba(12, 28, 40, .85);
+  box-shadow: 0 0 10px rgba(217, 187, 130, .16);
+  transform: translateY(-1px);
+}
+#overlay .card.bag-page .bag-close:active { transform: scale(.92); transition-duration: var(--rbh-press); }
+#overlay .card.bag-page .bag-head .help-btn { transition: color var(--rbh-fast), border-color var(--rbh-fast), box-shadow var(--rbh-fast), transform var(--rbh-fast); }
+#overlay .card.bag-page .bag-head .help-btn:hover {
+  color: #f4e7c6; border-color: rgba(217, 187, 130, .6);
+  box-shadow: 0 0 10px rgba(217, 187, 130, .2);
+}
+
+/* W3 分节标题（背包格/消耗口袋/安全格）：前置金短线 + 暖米金（对标 stash 卡题） */
+#overlay .card.bag-page .set-h {
+  color: #ecd9ad; letter-spacing: .14em;
+  text-shadow: 0 0 10px rgba(217, 187, 130, .14);
+  border-bottom-color: rgba(217, 187, 130, .28);
+}
+#overlay .card.bag-page .set-h::before {
+  content: ''; display: inline-block; width: 14px; height: 1px; margin-right: 8px;
+  vertical-align: .32em;
+  background: linear-gradient(90deg, transparent, #d9bb82b3);
+  box-shadow: 0 0 4px #d9bb8255;
+}
+
+/* W4 背包格网格与格子：档案面 + hover 金线（不挂 transform/：active——拖拽热区零接触） */
+#overlay .card.bag-page .bag-grid {
+  border-color: rgba(159, 183, 188, .16);
+  background: rgba(6, 15, 22, .32);
+  border-radius: 2px;
+  scrollbar-color: #3d5a68 #081722;
+}
+#overlay .card.bag-page .bag-slot.filled.card-slot {
+  border-color: rgba(159, 183, 188, .26);
+  background: linear-gradient(180deg, #122a38, #0c1f2b);
+  transition: border-color var(--rbh-fast), box-shadow var(--rbh-fast), filter var(--rbh-fast);
+}
+#overlay .card.bag-page .bag-slot.filled.card-slot:hover {
+  border-color: rgba(217, 187, 130, .65);
+  box-shadow: 0 0 12px rgba(217, 187, 130, .14), inset 0 0 10px rgba(217, 187, 130, .04);
+}
+/* S 级物资格：暖金族边（旧 #f0c25c retint） */
+#overlay .card.bag-page .bag-slot.tier-bd-S { border-color: rgba(217, 187, 130, .68); }
+/* 珍珠盒扩格：金虚线界 + 中心微光（原 #b9a86e retint 到定稿金） */
+#overlay .card.bag-page .bag-slot.empty.pearl-empty {
+  border-color: rgba(217, 187, 130, .45);
+  background: radial-gradient(circle at 50% 42%, rgba(217, 187, 130, .12), rgba(20, 20, 20, 0) 72%);
+}
+/* 安全格：宠物看守语义——金描边暗面 + lock 金微光；空格金虚线 */
+#overlay .card.bag-page .bag-slot.safe-slot {
+  border: 1px solid rgba(217, 187, 130, .3);
+  background: linear-gradient(180deg, #142c3a, #0e2230);
+  transition: border-color var(--rbh-fast), box-shadow var(--rbh-fast);
+}
+#overlay .card.bag-page .bag-slot.safe-slot:hover {
+  border-color: rgba(217, 187, 130, .62);
+  box-shadow: 0 0 12px rgba(217, 187, 130, .14);
+}
+#overlay .card.bag-page .bag-grid.safe-grid { border-color: rgba(217, 187, 130, .2); }
+#overlay .card.bag-page .bag-grid.safe-grid .bag-slot.empty.safe-empty {
+  border-color: rgba(217, 187, 130, .22);
+  background: rgba(217, 187, 130, .03);
+}
+/* 堆叠角标 ×N：暖金数字（同 page-stash 语言） */
+#overlay .card.bag-page .bag-slot .stack-count {
+  background: rgba(7, 19, 29, .92);
+  border-color: rgba(217, 187, 130, .55);
+  color: #ecd9ad;
+  box-shadow: 0 0 6px rgba(217, 187, 130, .16);
+}
+
+/* W5 消耗口袋卡：红色「无法使用」标签保留警示语义，纸面 retint 冷青 */
+#overlay .card.bag-page .pk-card .hs-card { box-shadow: 0 4px 12px rgba(2, 8, 14, .45); }
+#overlay .card.bag-page .pk-card .pk-tag {
+  color: #ffd9cf;
+  background: rgba(30, 12, 10, .85);
+  border-color: rgba(201, 111, 92, .55);
+}
+#overlay .card.bag-page .pk-list .ov-empty { color: #7e969c; }
+
+/* W6 侧栏卡（口袋/安全格容器）：冷青档案卡 + 极淡封条顶线 */
+#overlay .card.bag-page .bag-side-card {
+  position: relative;
+  border-color: rgba(159, 183, 188, .18);
+  background: linear-gradient(180deg, rgba(14, 36, 50, .82), rgba(10, 27, 39, .88));
+  box-shadow: inset 0 1px 0 rgba(214, 232, 235, .04);
+}
+#overlay .card.bag-page .bag-side-card::before {
+  content: ''; position: absolute; top: 0; left: 12%; right: 12%; height: 1px;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, #d9bb82b8, transparent);
+  opacity: .2;
+}
+
+/* W7 排序按钮：幽灵键三态（hover 金线 / 按压快缩 / 焦点金环） */
+#overlay .card.bag-page .bag-sort .mini-btn {
+  transition: color var(--rbh-fast), border-color var(--rbh-fast), background var(--rbh-fast),
+    box-shadow var(--rbh-fast), transform var(--rbh-fast);
+}
+#overlay .card.bag-page .bag-sort .mini-btn:hover {
+  color: #f4e7c6; border-color: rgba(217, 187, 130, .6);
+  background: rgba(12, 28, 40, .85);
+  box-shadow: 0 0 8px rgba(217, 187, 130, .14);
+  transform: translateY(-1px);
+}
+#overlay .card.bag-page .bag-sort .mini-btn:active { transform: scale(.95); transition-duration: var(--rbh-press); }
+
+/* 域二焦点环（关闭键/排序键/帮助键） */
+#overlay .card.bag-page .bag-close:focus-visible,
+#overlay .card.bag-page .bag-sort .mini-btn:focus-visible,
+#overlay .card.bag-page .bag-head .help-btn:focus-visible {
+  outline: 1px solid #d9bb82cc;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 1px #071720, 0 0 12px rgba(217, 187, 130, .35);
+}
+
+/* ═══════════════════ 域三 · 帮助手册 / 快速参考 ═══════════════════ */
+
+/* W1 标题页「快速参考」胶囊：hover 金线下划展开 + 焦点金环 + 按压下沉
+   （hover 白青辉光沿用 expedition.css 定稿；金线是装饰语言不与相邻键冲突） */
+#title .ak-quickref { position: absolute; }
+#title .ak-quickref::after {
+  content: ''; position: absolute; left: 16px; right: 21px; bottom: 11px; height: 1px;
+  pointer-events: none;
+  background: linear-gradient(90deg, #d9bb82e0, #ffe9b6, #d9bb82e0);
+  box-shadow: 0 0 6px #d9bb8280;
+  opacity: 0; transform: scaleX(.4);
+  transform-origin: 50% 50%;
+  transition: opacity var(--rbh-fast), transform var(--rbh-lift);
+}
+#title .ak-quickref:hover::after { opacity: .95; transform: scaleX(1); }
+#title .ak-quickref:active { transform: translateY(1px); transition: transform var(--rbh-press); }
+#title .ak-quickref:focus-visible {
+  outline: 1px solid #d9bb82cc;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 1px #071720, 0 0 14px rgba(217, 187, 130, .4);
+}
+
+/* ── W2 远征手册弹层（标题页 mGuide 与对局 btnHelp 共用 .expedition-manual） ── */
+#overlay .card:has(.expedition-manual) > h2 {
+  color: #f2f6f5; letter-spacing: 6px;
+  text-shadow: 0 0 16px rgba(217, 187, 130, .14), 0 2px 6px rgba(2, 8, 12, .6);
+}
+/* 步骤卡：冷青档案卡 + 封条顶线 hover 点亮（可读性优先，不做大动效） */
+#overlay .card:has(.expedition-manual) .manual-step {
+  border-color: rgba(159, 183, 188, .2);
+  background: linear-gradient(180deg, rgba(14, 36, 50, .72), rgba(10, 27, 39, .8));
+  transition: border-color var(--rbh-fast), box-shadow var(--rbh-fast), background var(--rbh-fast);
+}
+#overlay .card:has(.expedition-manual) .manual-step::before {
+  content: ''; position: absolute; top: 0; left: 12%; right: 12%; height: 1px;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, #d9bb82cc, transparent);
+  opacity: .12;
+  transition: opacity var(--rbh-fast);
+}
+#overlay .card:has(.expedition-manual) .manual-step:hover {
+  border-color: rgba(217, 187, 130, .5);
+  background: linear-gradient(180deg, rgba(18, 44, 60, .78), rgba(12, 31, 44, .84));
+  box-shadow: 0 8px 20px rgba(2, 8, 14, .35), 0 0 10px rgba(217, 187, 130, .08);
+}
+#overlay .card:has(.expedition-manual) .manual-step:hover::before { opacity: .7; }
+/* 编号 = 档案章：暖米金表格数字 + 金晕；步骤题冷白提字距 */
+#overlay .card:has(.expedition-manual) .manual-index {
+  color: #ecd9ad; font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 12px rgba(217, 187, 130, .25);
+}
+#overlay .card:has(.expedition-manual) .manual-step h3 {
+  color: #eef4f4; letter-spacing: 4px;
+  text-shadow: 0 2px 6px rgba(2, 8, 12, .55);
+}
+#overlay .card:has(.expedition-manual) .manual-step h3::after {
+  background: linear-gradient(90deg, #d9bb82b3, transparent);
+  box-shadow: 0 0 4px #d9bb8245;
+}
+#overlay .card:has(.expedition-manual) .manual-step p { color: #aebfc6; }
+#overlay .card:has(.expedition-manual) .manual-step p b { color: #ecd9ad; }
+/* 导语：两侧金短线 retint + 引言冷青（winter 的 ── 字符线压色即可） */
+#overlay .card:has(.expedition-manual) .manual-lead { color: #c7d6d4; letter-spacing: 2.5px; }
+#overlay .card:has(.expedition-manual) .manual-lead::before,
+#overlay .card:has(.expedition-manual) .manual-lead::after { color: #d9bb82a1; }
+/* 键位表：与步骤区发丝分隔；键帽冷青暗面 + 底缘金线（工具区克制） */
+#overlay .card:has(.expedition-manual) .manual-controls {
+  margin-top: 18px; padding-top: 16px;
+  border-top: 1px solid rgba(159, 183, 188, .14);
+}
+#overlay .card:has(.expedition-manual) .manual-control-key {
+  background: linear-gradient(180deg, #122a38, #0c1f2b);
+  border-color: rgba(159, 183, 188, .4);
+  border-bottom-color: rgba(217, 187, 130, .5);
+  color: #dfe9ec; letter-spacing: 1px;
+}
+#overlay .card:has(.expedition-manual) .manual-controls > span:not(.manual-control-key) { color: #93a9ad; }
+#overlay .card:has(.expedition-manual) .manual-note { color: #86a0a6; }
+/* 出入场：导语→四步错峰→键位→注记（每次打开重播一次） */
+#overlay .card:has(.expedition-manual) .manual-lead { animation: rbhRiseIn .4s cubic-bezier(.22, 1, .36, 1) backwards; }
+#overlay .card:has(.expedition-manual) .manual-step { animation: rbhRiseIn .45s cubic-bezier(.22, 1, .36, 1) backwards; }
+#overlay .card:has(.expedition-manual) .manual-step:nth-child(1) { animation-delay: .05s; }
+#overlay .card:has(.expedition-manual) .manual-step:nth-child(2) { animation-delay: .11s; }
+#overlay .card:has(.expedition-manual) .manual-step:nth-child(3) { animation-delay: .17s; }
+#overlay .card:has(.expedition-manual) .manual-step:nth-child(4) { animation-delay: .23s; }
+#overlay .card:has(.expedition-manual) .manual-controls { animation: rbhRiseIn .45s cubic-bezier(.22, 1, .36, 1) .3s backwards; }
+#overlay .card:has(.expedition-manual) .manual-note { animation: rbhRiseIn .45s cubic-bezier(.22, 1, .36, 1) .36s backwards; }
+/* 返回键：冷青幽灵 → hover 金线（手册工具键，不与 chest ok 金冲突） */
+#overlay .card:has(.expedition-manual) .ov-btn.back-sm {
+  transition: color var(--rbh-fast), border-color var(--rbh-fast), background var(--rbh-fast),
+    box-shadow var(--rbh-fast), transform var(--rbh-fast);
+}
+#overlay .card:has(.expedition-manual) .ov-btn.back-sm:hover {
+  color: #f4e7c6; border-color: rgba(217, 187, 130, .6);
+  background: rgba(12, 28, 40, .85);
+  box-shadow: 0 0 10px rgba(217, 187, 130, .14);
+  transform: translateY(-1px);
+}
+#overlay .card:has(.expedition-manual) .ov-btn.back-sm:active {
+  transform: translateY(1px) scale(.97);
+  transition-duration: var(--rbh-press);
+}
+
+/* ── W3 ? 二级帮助弹层（.help-body：背包 ?、仓库 ? 等共用）：克制清晰 ── */
+#overlay .card:has(.help-body) > h2 {
+  color: #f2f6f5; letter-spacing: 4px;
+  text-shadow: 0 0 16px rgba(217, 187, 130, .12), 0 2px 6px rgba(2, 8, 12, .6);
+}
+#overlay .card:has(.help-body) .help-body .help-item {
+  border: 1px solid rgba(159, 183, 188, .16);
+  border-left: 2px solid rgba(217, 187, 130, .45);
+  border-radius: 2px;
+  background: linear-gradient(180deg, rgba(12, 28, 38, .78), rgba(8, 20, 29, .82));
+  color: #b9c9cf; line-height: 1.8;
+  transition: border-color var(--rbh-fast), background var(--rbh-fast);
+}
+#overlay .card:has(.help-body) .help-body .help-item:hover {
+  border-color: rgba(217, 187, 130, .4);
+  border-left-color: rgba(217, 187, 130, .7);
+  background: rgba(14, 34, 47, .85);
+}
+#overlay .card:has(.help-body) .help-body .help-item b {
+  color: #ecd9ad; letter-spacing: 2px;
+}
+#overlay .card:has(.help-body) .ov-btn.ok {
+  border-color: #e8d3a4;
+  background: linear-gradient(180deg, #e6cd9c, #cfae74);
+  color: #241a09;
+  box-shadow: inset 0 1px 0 rgba(255, 246, 220, .5);
+  transition: filter var(--rbh-fast), box-shadow var(--rbh-fast), transform var(--rbh-fast);
+}
+#overlay .card:has(.help-body) .ov-btn.ok:hover {
+  filter: brightness(1.07);
+  box-shadow: inset 0 1px 0 rgba(255, 250, 228, .6), 0 0 16px rgba(217, 187, 130, .3);
+  transform: translateY(-1px);
+}
+#overlay .card:has(.help-body) .ov-btn.ok:active {
+  transform: translateY(1px) scale(.97);
+  transition-duration: var(--rbh-press);
+}
+/* 帮助条目轻错峰（帮助页每次打开重绘，短延迟不拖节奏） */
+#overlay .card:has(.help-body) .help-body .help-item { animation: rbhRiseIn .4s cubic-bezier(.22, 1, .36, 1) backwards; }
+#overlay .card:has(.help-body) .help-body .help-item:nth-child(2) { animation-delay: .05s; }
+#overlay .card:has(.help-body) .help-body .help-item:nth-child(3) { animation-delay: .1s; }
+#overlay .card:has(.help-body) .help-body .help-item:nth-child(4) { animation-delay: .15s; }
+#overlay .card:has(.help-body) .help-body .help-item:nth-child(n+5) { animation-delay: .18s; }
+
+/* 域三焦点环（手册/帮助返回钮） */
+#overlay .card:has(.expedition-manual) .ov-btn.back-sm:focus-visible,
+#overlay .card:has(.help-body) .ov-btn:focus-visible {
+  outline: 1px solid #d9bb82cc;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 1px #071720, 0 0 12px rgba(217, 187, 130, .35);
+}
+
+/* ═════════ 交互收尾备注（核查记录，无需新规则）：
+   · 光标：域内可点元素（chest 卡钮/双钮、bag-close/排序/帮助键、quickref、
+     手册与帮助返回钮）均为 button，cursor-art 的 button 白名单已给互动光标；
+     bag 格子拖拽光标由既有 touch-action/crosshair 体系承担，不另设。
+   · 拖拽热区：封条线/光池/金短线均 pointer-events:none；.drop-here
+     （scenes.css !important 金边）与 .dragging（opacity .32）未被覆盖。
+   · 矮视口：expedition-rewards.css 的 max-height:760px 压缩块带 !important，
+     本文件壳层 padding 无 !important，压缩逻辑照常生效。 ═════════ */

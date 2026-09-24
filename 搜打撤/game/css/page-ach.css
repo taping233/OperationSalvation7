@@ -1,0 +1,385 @@
+/* ═══════════════════════════════════════════════════════════════════
+   基地·成就·收藏室页签美术升级（2026-09-24）——对标 page-hub.css /
+   page-upgrade.css / page-slot-select.css 定稿语言：
+     ① 冷青统一调色（面板分级/暗色档案底）② #d9bb82 暖金装饰
+        （封条顶线/金短线/端点光点/角标编号/金量槽）③ 成就条目三态层级：
+        未解锁（暗）→ 已领取（沉淀暖金）→ 可领取（最亮召唤金晕+呼吸）
+     ④ 进度表达：金量槽流光 + 里程碑表格数字 ⑤ 交互三档节奏：
+        hover 反馈 / :active 快按慢弹（lift 过冲曲线）/ :focus-visible
+        金线焦点环 + 页签切入分区错峰上浮与条目跟进入场 ⑥ 光标自查
+   作用域：全部规则限定成就·收藏室页签内容区——根选择器
+     #overlay #hubMain.hub-ach（#hubMain 在 ach 页签挂 .hub-ach，
+     game.hub.js renderHub 拼接 hub-${hubTab}）。页头/页签栏/资源章归
+     page-hub.css，本文件不碰。标题页成就总览弹层（game.menu.js
+     openTitleAchievements）复用 .ach-list/.ach-row 等 class 但挂在
+     #overlay .card 下、不带 #hubMain.hub-ach——本文件全部规则带根作用域
+     前缀，不外溢弹层。
+   约束：只新建本文件，不改任何现有样式；新增动画仅 transform/opacity
+     （reduced-motion 由 winter.css 全局兜底）；奖杯/徽章图标与卡牌/卡背
+     本体一律不动，只做包裹层（tile 边线/光晕）。
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── T0 统一节奏变量：fast=色彩/光晕/小位移，lift=抬升+过冲回弹（快按慢弹
+   的"慢弹"），press=按下快进 ── */
+#overlay #hubMain.hub-ach {
+  --ach-fast: .18s cubic-bezier(.33, 1, .68, 1);
+  --ach-lift: .32s cubic-bezier(.3, 1.4, .45, 1);
+  --ach-press: .09s ease-out;
+}
+
+/* ═════════ W1 档案面板：冷青分级 + 封条顶线 + 角标编号（见闻纪念/内容面板/职业收藏室） ═════════ */
+
+#overlay #hubMain.hub-ach .hub-page { counter-reset: ach-panel; }
+
+#overlay #hubMain.hub-ach .hub-page > .hub-card {
+  counter-increment: ach-panel; position: relative;
+  border-color: rgba(176, 203, 208, .18);
+  background: linear-gradient(180deg, rgba(14, 36, 50, .93), rgba(10, 27, 39, .95));
+  box-shadow: 0 14px 34px rgba(2, 8, 14, .35), inset 0 1px 0 rgba(214, 232, 235, .05);
+  transition: border-color var(--ach-fast), box-shadow var(--ach-fast);
+}
+/* W1a 卡顶"封条"金线：主内容面板常亮，见闻纪念极淡（主次标识，同 upgrade/shop W1） */
+#overlay #hubMain.hub-ach .hub-page > .hub-card::before {
+  content: ''; position: absolute; top: 0; left: 12%; right: 12%; height: 1px; z-index: 3;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, #d9bb82b8, transparent);
+  opacity: .2;
+  transition: opacity var(--ach-fast);
+}
+#overlay #hubMain.hub-ach .hub-page > .collection-panel::before,
+#overlay #hubMain.hub-ach .hub-page > .coll-room::before { opacity: .48; }
+/* W1b 角标编号 01/02：短金线引导 + 暖金小字（档案编号仪式，同 upgrade W1b） */
+#overlay #hubMain.hub-ach .hub-page > .hub-card::after {
+  content: '0' counter(ach-panel);
+  position: absolute; top: 9px; right: 12px; z-index: 2; pointer-events: none;
+  padding-right: 16px; font-size: 9px; line-height: 1; letter-spacing: .22em;
+  color: rgba(217, 187, 130, .5);
+  background: linear-gradient(270deg, transparent, rgba(217, 187, 130, .38)) right center / 12px 1px no-repeat;
+  transition: color var(--ach-fast);
+}
+/* W1c 面板不可点：hover 只点亮封条与编号（不做整卡抬升误导，同 upgrade W1c） */
+#overlay #hubMain.hub-ach .hub-page > .hub-card:hover {
+  border-color: rgba(217, 187, 130, .34);
+  box-shadow: 0 14px 34px rgba(2, 8, 14, .35), 0 0 14px rgba(217, 187, 130, .06),
+    inset 0 1px 0 rgba(214, 232, 235, .05);
+}
+#overlay #hubMain.hub-ach .hub-page > .hub-card:hover::before { opacity: .72; }
+#overlay #hubMain.hub-ach .hub-page > .hub-card:hover::after { color: rgba(239, 224, 182, .88); }
+
+/* ═════════ W2 面板题行仪式感：金短线引导 + 端点光点 + set-tip 发丝分隔 ═════════ */
+
+#overlay #hubMain.hub-ach .hub-page > .hub-card > h3 {
+  position: relative;
+  color: #eef4f4; letter-spacing: .18em;
+  text-shadow: 0 0 12px rgba(3, 10, 16, .6);
+}
+#overlay #hubMain.hub-ach .hub-page > .hub-card > h3::before {
+  content: ''; display: inline-block; width: 14px; height: 1px; margin-right: 9px;
+  vertical-align: .34em;
+  background: linear-gradient(90deg, transparent, #d9bb82b3);
+  box-shadow: 0 0 5px #d9bb8255;
+}
+#overlay #hubMain.hub-ach .hub-page > .hub-card > h3::after {
+  content: ''; position: absolute; left: 0; bottom: -3px; width: 3px; height: 3px;
+  border-radius: 50%; pointer-events: none;
+  background: #ffe9b6; box-shadow: 0 0 6px #d9bb8299;
+  animation: achGemBreath 5s ease-in-out infinite alternate;
+}
+@keyframes achGemBreath { from { opacity: .5; } to { opacity: 1; } }
+#overlay #hubMain.hub-ach .hub-page > .hub-card > h3 .ic {
+  filter: brightness(1.1) drop-shadow(0 0 4px rgba(217, 187, 130, .3));
+}
+/* h3 内计数注记：发丝线分隔小字（同 stash/deploy/upgrade W2） */
+#overlay #hubMain.hub-ach .hub-page > .hub-card > h3 .set-tip {
+  margin-left: 10px; padding-left: 10px;
+  border-left: 1px solid rgba(159, 183, 188, .22);
+  font-size: 10.5px; font-weight: 400; letter-spacing: .14em; color: #7e969c;
+}
+#overlay #hubMain.hub-ach .hub-page > .hub-card > h3 .set-tip b { color: #cfdde0; }
+/* 职业收藏室说明段：灰青正文 + 提亮强调 */
+#overlay #hubMain.hub-ach .coll-room .ov-note { color: #8fa3ab; line-height: 1.75; letter-spacing: .02em; }
+#overlay #hubMain.hub-ach .coll-room .ov-note b { color: #cfdde0; }
+
+/* ═════════ W3 收藏档案室命令条：金标线索引 + 档案章数字（archive-command） ═════════ */
+
+#overlay #hubMain.hub-ach .collection-command {
+  border-color: rgba(176, 203, 208, .18); border-left-color: #d9bb82;
+  background: linear-gradient(110deg, rgba(15, 37, 50, .96), rgba(8, 21, 31, .96));
+}
+#overlay #hubMain.hub-ach .collection-command .section-kicker { color: #d9bb82; }
+#overlay #hubMain.hub-ach .collection-command h3 {
+  text-shadow: 0 2px 18px rgba(3, 10, 16, .7), 0 0 4px rgba(217, 187, 130, .2);
+}
+#overlay #hubMain.hub-ach .collection-command p { color: #93a9ad; }
+#overlay #hubMain.hub-ach .collection-command-stats > span {
+  border-color: rgba(159, 183, 188, .2); background: rgba(5, 14, 21, .55);
+}
+#overlay #hubMain.hub-ach .collection-command-stats b {
+  color: #efe0b6;
+  text-shadow: 0 0 10px rgba(217, 187, 130, .22);
+}
+
+/* ═════════ W4 收藏子页签：金线激活态 + 端点光点 ═════════ */
+
+#overlay #hubMain.hub-ach .collection-tabs {
+  border-color: rgba(159, 183, 188, .16); background: rgba(6, 16, 24, .9);
+}
+#overlay #hubMain.hub-ach .collection-tabs button {
+  position: relative; color: #8fa3ab;
+  transition: color var(--ach-fast), border-color var(--ach-fast),
+    background var(--ach-fast), box-shadow var(--ach-fast), transform var(--ach-fast);
+}
+#overlay #hubMain.hub-ach .collection-tabs button:hover {
+  color: #e2ecee; border-color: rgba(217, 187, 130, .3);
+  background: rgba(159, 197, 205, .05);
+}
+#overlay #hubMain.hub-ach .collection-tabs button.on {
+  border-color: rgba(217, 187, 130, .6);
+  background: linear-gradient(180deg, rgba(217, 187, 130, .13), rgba(217, 187, 130, .03) 70%, transparent);
+  color: #f0e2bd; text-shadow: 0 0 10px rgba(217, 187, 130, .2);
+}
+/* 激活态底缘端点光点呼吸（同 hub-tab.on 语言） */
+#overlay #hubMain.hub-ach .collection-tabs button.on::after {
+  content: ''; position: absolute; left: 50%; bottom: 3px; width: 3px; height: 3px;
+  margin-left: -1.5px; border-radius: 50%; pointer-events: none;
+  background: #ffe9b6; box-shadow: 0 0 7px 1px rgba(217, 187, 130, .65);
+  animation: achGemBreath 5s ease-in-out infinite alternate;
+}
+
+/* ═════════ W5 成就条目三态层级：未解锁（暗）→ 已领取（沉淀暖金）→ 可领取（最亮召唤） ═════════ */
+
+#overlay #hubMain.hub-ach .ach-list { gap: 7px; }
+#overlay #hubMain.hub-ach .ach-row {
+  position: relative; overflow: hidden;
+  padding: 10px 14px; border-color: rgba(159, 183, 188, .14); border-radius: 2px;
+  background: linear-gradient(180deg, rgba(9, 24, 34, .66), rgba(6, 17, 26, .72));
+  transition: border-color var(--ach-fast), background var(--ach-fast), box-shadow var(--ach-fast);
+}
+/* W5a 已领取（.done 且无领取钮）：沉淀暖金——金界线 + 图标金晕 + 暖色题名 */
+#overlay #hubMain.hub-ach .ach-row.done {
+  border-color: rgba(217, 187, 130, .3);
+  background: linear-gradient(180deg, rgba(38, 34, 22, .5), rgba(12, 22, 30, .78));
+}
+#overlay #hubMain.hub-ach .ach-row.done .ach-ico {
+  border-color: rgba(217, 187, 130, .4);
+  box-shadow: 0 0 9px rgba(217, 187, 130, .14);
+}
+#overlay #hubMain.hub-ach .ach-row.done .ach-info b {
+  color: #f0e6cf; text-shadow: 0 0 8px rgba(217, 187, 130, .14);
+}
+#overlay #hubMain.hub-ach .ach-ops .got { color: #a9d2ae; letter-spacing: .06em; }
+/* W5b 可领取（.done 且含领取钮）：最亮召唤——金边 + 左缘金标 + 呼吸金晕 */
+#overlay #hubMain.hub-ach .ach-row.done:has(.mini-btn.ok) {
+  border-color: rgba(217, 187, 130, .62);
+  background: linear-gradient(90deg, rgba(217, 187, 130, .12), rgba(217, 187, 130, .028) 46%, rgba(10, 22, 30, .6));
+  box-shadow: inset 2px 0 0 #d9bb82, 0 0 16px rgba(217, 187, 130, .12);
+}
+#overlay #hubMain.hub-ach .ach-row.done:has(.mini-btn.ok)::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  box-shadow: 0 0 22px rgba(217, 187, 130, .16), inset 0 0 26px rgba(217, 187, 130, .05);
+  animation: achSummon 2.6s ease-in-out infinite alternate;
+}
+@keyframes achSummon { from { opacity: .35; } to { opacity: 1; } }
+#overlay #hubMain.hub-ach .ach-row.done:has(.mini-btn.ok):hover {
+  border-color: rgba(217, 187, 130, .8);
+  box-shadow: inset 2px 0 0 #d9bb82, 0 0 20px rgba(217, 187, 130, .18);
+}
+#overlay #hubMain.hub-ach .ach-row.done:has(.mini-btn.ok) .ach-ops .rw { color: #e8d7ae; }
+#overlay #hubMain.hub-ach .ach-row.done:has(.mini-btn.ok) .ach-ico {
+  border-color: rgba(217, 187, 130, .62);
+  box-shadow: 0 0 12px rgba(217, 187, 130, .26);
+}
+/* W5c 未解锁：保持暗档（比已领取更暗一级）；题名降灰青 */
+#overlay #hubMain.hub-ach .ach-row:not(.done) .ach-info b { color: #aebfc4; }
+#overlay #hubMain.hub-ach .ach-info span { color: #8299a0; }
+#overlay #hubMain.hub-ach .ach-ops .rw { color: #93a9ad; letter-spacing: .03em; }
+/* W5d 图标 tile：包裹层边线 retint（图标本体不动） */
+#overlay #hubMain.hub-ach .ach-ico {
+  border-radius: 2px; transition: border-color var(--ach-fast), box-shadow var(--ach-fast);
+}
+
+/* W5e 领取钮（成就/里程碑共用 mini-btn.ok）：暖金收口 + 快按慢弹 */
+#overlay #hubMain.hub-ach .mini-btn.ok:not(:disabled) {
+  background: linear-gradient(180deg, #e0c493, #c9a86e);
+  border-color: #e8d3a4; color: #1c1508;
+  box-shadow: inset 0 1px 0 rgba(255, 242, 207, .4), 0 0 12px rgba(217, 187, 130, .22);
+  transition: filter var(--ach-fast), box-shadow var(--ach-fast),
+    transform var(--ach-fast), border-color var(--ach-fast);
+}
+#overlay #hubMain.hub-ach .mini-btn.ok:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+  box-shadow: inset 0 1px 0 rgba(255, 246, 220, .5), 0 0 16px rgba(217, 187, 130, .38);
+}
+#overlay #hubMain.hub-ach .mini-btn.ok:active:not(:disabled) {
+  transform: translateY(1px) scale(.94);
+  filter: brightness(1.14);
+  transition: transform var(--ach-press), filter var(--ach-press), box-shadow var(--ach-press);
+}
+
+/* ═════════ W6 职业收藏室：金量槽流光 + 里程碑三态 + 收藏格金线 ═════════ */
+
+/* W6a 总进度金量槽：暗槽 + #d9bb82 金量（同 upgrade W3b）+ 缓慢流光 */
+#overlay #hubMain.hub-ach .coll-room .base-bar {
+  background: rgba(6, 15, 22, .92);
+  border: 1px solid rgba(217, 187, 130, .24);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, .5);
+}
+#overlay #hubMain.hub-ach .coll-room .base-bar i {
+  position: relative; overflow: hidden;
+  background: linear-gradient(90deg, #8a6f42, #d9bb82 55%, #e8d3a4);
+  box-shadow: 0 0 8px rgba(217, 187, 130, .3);
+}
+#overlay #hubMain.hub-ach .coll-room .base-bar i::after {
+  content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 40%;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(255, 242, 207, .34), transparent);
+  transform: translateX(-120%);
+  animation: achSweep 3.8s ease-in-out infinite;
+}
+@keyframes achSweep {
+  from { transform: translateX(-120%); }
+  to { transform: translateX(340%); }
+}
+
+/* W6b 里程碑行：普通=暗档；reach=最亮召唤（金晕呼吸）；done=沉淀暖金 */
+#overlay #hubMain.hub-ach .coll-ms {
+  position: relative; overflow: hidden;
+  border-color: rgba(159, 183, 188, .14); border-radius: 2px;
+  background: linear-gradient(180deg, rgba(9, 24, 34, .66), rgba(6, 17, 26, .72));
+  transition: border-color var(--ach-fast), background var(--ach-fast), box-shadow var(--ach-fast);
+}
+#overlay #hubMain.hub-ach .coll-ms b { color: #cfdde0; letter-spacing: 1px; }
+#overlay #hubMain.hub-ach .coll-ms .rw { color: #93a9ad; }
+#overlay #hubMain.hub-ach .coll-ms .dim {
+  color: #93a9ad; font-variant-numeric: tabular-nums; letter-spacing: .06em;
+}
+#overlay #hubMain.hub-ach .coll-ms .got { color: #a9d2ae; letter-spacing: .06em; }
+/* 已领取：沉淀暖金（弱于可领取一档） */
+#overlay #hubMain.hub-ach .coll-ms.done {
+  border-color: rgba(217, 187, 130, .28);
+  background: linear-gradient(180deg, rgba(38, 34, 22, .42), rgba(12, 22, 30, .74));
+}
+#overlay #hubMain.hub-ach .coll-ms.done b { color: #e4d9bd; }
+/* 可领取（reach）：金边 + 左缘金标 + 呼吸金晕——收藏室最亮元素 */
+#overlay #hubMain.hub-ach .coll-ms.reach {
+  border-color: rgba(217, 187, 130, .62);
+  background: linear-gradient(90deg, rgba(217, 187, 130, .12), rgba(217, 187, 130, .028) 46%, rgba(10, 22, 30, .6));
+  box-shadow: inset 2px 0 0 #d9bb82, 0 0 16px rgba(217, 187, 130, .12);
+}
+#overlay #hubMain.hub-ach .coll-ms.reach::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  box-shadow: 0 0 22px rgba(217, 187, 130, .16), inset 0 0 26px rgba(217, 187, 130, .05);
+  animation: achSummon 2.6s ease-in-out infinite alternate;
+}
+#overlay #hubMain.hub-ach .coll-ms.reach:hover {
+  border-color: rgba(217, 187, 130, .8);
+  box-shadow: inset 2px 0 0 #d9bb82, 0 0 20px rgba(217, 187, 130, .18);
+}
+#overlay #hubMain.hub-ach .coll-ms.reach b { color: #f0e6cf; }
+
+/* W6c 分组题行：金短线引导（人物名仪式）+ 计数小字 */
+#overlay #hubMain.hub-ach .coll-group-head { position: relative; }
+#overlay #hubMain.hub-ach .coll-group-head b::before {
+  content: ''; display: inline-block; width: 12px; height: 1px; margin-right: 8px;
+  vertical-align: .32em;
+  background: linear-gradient(90deg, transparent, #d9bb82a8);
+  box-shadow: 0 0 4px #d9bb8255;
+}
+#overlay #hubMain.hub-ach .coll-group-head b { color: #eee8d8; }
+#overlay #hubMain.hub-ach .coll-group-head .dim { color: #86a0a6; letter-spacing: .03em; }
+
+/* W6d 已收藏格：hover 金线点亮 + 金晕（卡牌本体不动；位移/按压沿用 page-hub W5c） */
+#overlay #hubMain.hub-ach .coll-slot.on {
+  transition: transform var(--ach-lift), border-color var(--ach-lift), box-shadow var(--ach-lift);
+}
+#overlay #hubMain.hub-ach .coll-slot.on:hover {
+  border-color: rgba(217, 187, 130, .75);
+  box-shadow: 0 6px 18px rgba(2, 8, 14, .45), 0 0 14px rgba(217, 187, 130, .22);
+}
+#overlay #hubMain.hub-ach .coll-slot.on:active { transform: translateY(0) scale(.97); transition-duration: .08s; }
+
+/* ═════════ W7 卡背图鉴：装备中金晕 + hover 金线（锁定暗档语义不动） ═════════ */
+
+#overlay #hubMain.hub-ach .back-card {
+  transition: border-color var(--ach-lift), transform var(--ach-lift),
+    box-shadow var(--ach-lift), background var(--ach-lift);
+}
+#overlay #hubMain.hub-ach .back-card:hover:not(.locked) {
+  border-color: #d9bb82;
+  box-shadow: 0 8px 20px rgba(2, 8, 14, .4), 0 0 12px rgba(217, 187, 130, .12);
+}
+/* 装备中：金边 + 常亮金晕（页内第二亮，仅次于可领取） */
+#overlay #hubMain.hub-ach .back-card.on {
+  border-color: #d9bb82;
+  box-shadow: inset 0 0 0 1px rgba(217, 187, 130, .25), 0 0 16px rgba(217, 187, 130, .18);
+}
+#overlay #hubMain.hub-ach .back-card.on b { color: #f0e6cf; }
+#overlay #hubMain.hub-ach .back-card:active:not(.locked) { transform: translateY(0) scale(.98); transition-duration: .08s; }
+
+/* ═════════ T2 焦点态：键盘导航金线焦点环（与 page-hub.css T2 同语言，
+   双保险写死在本作用域内） ═════════ */
+#overlay #hubMain.hub-ach :is(button, [role="button"]):focus-visible {
+  outline: 1px solid #d9bb82cc;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 1px #071720, 0 0 12px rgba(217, 187, 130, .35);
+}
+
+/* ═════════ T4 页签切入入场编排：仅 .page-in 首帧播放（页内操作重绘不重播，
+   backwards 结束即释放 transform 给交互态）——四分区错峰上浮 → 条目跟进 ═════════ */
+#overlay #hubMain.hub-ach .hub-page.page-in > * {
+  animation: achSecIn .5s cubic-bezier(.22, 1, .36, 1) backwards;
+}
+#overlay #hubMain.hub-ach .hub-page.page-in > *:nth-child(2) { animation-delay: .06s; }
+#overlay #hubMain.hub-ach .hub-page.page-in > *:nth-child(3) { animation-delay: .12s; }
+#overlay #hubMain.hub-ach .hub-page.page-in > *:nth-child(4) { animation-delay: .18s; }
+@keyframes achSecIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+/* 条目跟进入场：成就行前 6 / 里程碑 5 / 卡背前 8（密度克制，避免长列表全量编舞） */
+#overlay #hubMain.hub-ach .hub-page.page-in .ach-list .ach-row {
+  animation: achRowIn .45s cubic-bezier(.22, 1, .36, 1) backwards;
+}
+#overlay #hubMain.hub-ach .hub-page.page-in .ach-list .ach-row:nth-child(2) { animation-delay: .05s; }
+#overlay #hubMain.hub-ach .hub-page.page-in .ach-list .ach-row:nth-child(3) { animation-delay: .1s; }
+#overlay #hubMain.hub-ach .hub-page.page-in .ach-list .ach-row:nth-child(4) { animation-delay: .15s; }
+#overlay #hubMain.hub-ach .hub-page.page-in .ach-list .ach-row:nth-child(5) { animation-delay: .2s; }
+#overlay #hubMain.hub-ach .hub-page.page-in .ach-list .ach-row:nth-child(6) { animation-delay: .25s; }
+#overlay #hubMain.hub-ach .hub-page.page-in .coll-ms-list .coll-ms {
+  animation: achRowIn .45s cubic-bezier(.22, 1, .36, 1) backwards;
+}
+#overlay #hubMain.hub-ach .hub-page.page-in .coll-ms-list .coll-ms:nth-child(2) { animation-delay: .05s; }
+#overlay #hubMain.hub-ach .hub-page.page-in .coll-ms-list .coll-ms:nth-child(3) { animation-delay: .1s; }
+#overlay #hubMain.hub-ach .hub-page.page-in .coll-ms-list .coll-ms:nth-child(4) { animation-delay: .15s; }
+#overlay #hubMain.hub-ach .hub-page.page-in .coll-ms-list .coll-ms:nth-child(5) { animation-delay: .2s; }
+#overlay #hubMain.hub-ach .hub-page.page-in .back-grid .back-card {
+  animation: achRowIn .45s cubic-bezier(.22, 1, .36, 1) backwards;
+}
+#overlay #hubMain.hub-ach .hub-page.page-in .back-grid .back-card:nth-child(2) { animation-delay: .04s; }
+#overlay #hubMain.hub-ach .hub-page.page-in .back-grid .back-card:nth-child(3) { animation-delay: .08s; }
+#overlay #hubMain.hub-ach .hub-page.page-in .back-grid .back-card:nth-child(4) { animation-delay: .12s; }
+#overlay #hubMain.hub-ach .hub-page.page-in .back-grid .back-card:nth-child(5) { animation-delay: .16s; }
+#overlay #hubMain.hub-ach .hub-page.page-in .back-grid .back-card:nth-child(6) { animation-delay: .2s; }
+#overlay #hubMain.hub-ach .hub-page.page-in .back-grid .back-card:nth-child(7) { animation-delay: .24s; }
+#overlay #hubMain.hub-ach .hub-page.page-in .back-grid .back-card:nth-child(8) { animation-delay: .28s; }
+@keyframes achRowIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ═════════ T6 光标自查：button 默认 cursor 补 pointer（禁用态除外） ═════════ */
+#overlay #hubMain.hub-ach button:not(:disabled) { cursor: pointer; }
+
+/* ═════════ 交互收尾备注（无需新规则，核查记录）：
+   · 焦点环：本页可聚焦元素均为 button（collection-tabs / claimAch / claimColl /
+     selBack / collZoom），本文件 T2 与 page-hub.css T2 双保险覆盖。
+   · 光标：封条线 / 角标编号 / 呼吸金晕 / 金量槽流光均 pointer-events:none，
+     不遮挡点击；ach-row / coll-ms 行体不可点（热区在领取钮），
+     hover 只做 border/晕显性，不做整行抬升误导；coll-slot.off 不可点保持默认。
+   · 三态亮度排序（可领取 > 已领取 > 未解锁）：可领取=金边+左缘金标+呼吸金晕
+     +金字奖励文案；已领取=弱金界线+暖题名；未解锁=灰青暗档。
+   · 三档节奏：fast（hover 色彩/光晕）→ lift（回弹过冲 .3,1.4,.45,1）→
+     press（.09s 快进）；:active 覆盖 transition 为 press 快进。
+   · 标题页 mAch 弹层复用 .ach-row/.ach-list：本文件全部规则带
+     #overlay #hubMain.hub-ach 前缀，弹层（#overlay .card 直下）不受影响。 ═════════ */

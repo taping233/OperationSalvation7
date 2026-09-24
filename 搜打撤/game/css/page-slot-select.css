@@ -1,0 +1,290 @@
+/* ═══════════════════════════════════════════════════════════════════
+   选档页美术升级（2026-09-24）——对标标题页 title-p0.css「09-24 美术升级」定稿语言
+   手法：① 冷青统一调色（背景分级/暗角/视线归属）② #d9bb82 暖金装饰线与端点光点
+         ③ 信息排版仪式感（SLOT 编号行、主/辅层级、装饰英文字距）④ 四角收束
+   约束：全部规则限定在 .slot-page 作用域内，只覆盖不删除；动画仅 transform/opacity；
+         面板关闭即随 #overlay[hidden] 停止。
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── W1 页面底色纳入冷青系：替换蓝紫渐变，与存档卡（#0e2430→#0a1a24）同一族 ── */
+#overlay .card .pg.slot-page {
+  background:
+    radial-gradient(ellipse 120% 90% at 50% 28%, #2a4756 0%, #1f3745 34%, #152836 62%, #0c1a24 100%);
+}
+
+/* W1b 雾光层 retint：蓝紫雾 → 冷青雾（动画沿用原 slotMist，纯 transform） */
+.slot-page::before {
+  background:
+    radial-gradient(ellipse 42% 34% at 30% 62%, rgba(102, 168, 182, .26), transparent 68%),
+    radial-gradient(ellipse 38% 30% at 72% 40%, rgba(134, 196, 208, .15), transparent 70%),
+    radial-gradient(ellipse 50% 40% at 52% 84%, rgba(20, 48, 62, .55), transparent 72%);
+}
+
+/* W1c 四角暗角（对标标题页 W1b）：视线收向中央卡组 */
+.slot-page::after {
+  background:
+    radial-gradient(120% 90% at 50% 42%, transparent 50%, rgba(4, 11, 16, .48) 88%, rgba(3, 9, 13, .64) 100%),
+    linear-gradient(90deg, rgba(6, 16, 22, .48) 0%, transparent 22%, transparent 78%, rgba(6, 16, 22, .48) 100%),
+    linear-gradient(0deg, rgba(5, 13, 19, .5), transparent 26%);
+}
+
+/* W1d 光斑 retint：冷白偏青（剪影保持暖白 #fdf6e8，与金线同一暖点缀语言） */
+.slot-page .slot-bg .bokeh {
+  background: radial-gradient(circle at 38% 34%, rgba(240, 250, 252, .85), rgba(168, 214, 224, .26) 55%, transparent 72%);
+}
+
+/* ── W2 暖金装饰语言：页头分隔线（原银蓝 #b9c2e8 → #d9bb82 金线 + 端点光点呼吸） ── */
+.slot-page .slot-page-rule {
+  background: linear-gradient(90deg, transparent, #d9bb82a1 26%, #d9bb82c4 50%, #d9bb82a1 74%, transparent);
+  box-shadow: 0 0 6px #d9bb8233;
+}
+.slot-page .slot-page-rule::after {
+  background: #ffe9b6;
+  box-shadow: 0 0 10px #d9bb82d9, 0 0 22px #d9bb8255;
+  animation: slotGemBreath 5s ease-in-out infinite alternate;
+}
+@keyframes slotGemBreath { from { opacity: .55; } to { opacity: 1; } }
+
+/* W2b 卡内分隔线（原蓝白 → 金短线，同一语言） */
+.slot-page .slot-card-rule {
+  background: linear-gradient(90deg, transparent, #d9bb82a1 28%, #d9bb82b3 50%, #d9bb82a1 72%, transparent);
+}
+
+/* W2c SLOT 编号行仪式感：两侧金短线（对标标题页 ak-sec「始于/驻足于」） */
+.slot-page .slot-card-sub {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  color: #93a9ad;
+}
+.slot-page .slot-card-sub::before,
+.slot-page .slot-card-sub::after {
+  content: ''; display: block; width: 16px; height: 1px;
+  background: linear-gradient(90deg, transparent, #d9bb82a8);
+  box-shadow: 0 0 4px #d9bb8255;
+}
+.slot-page .slot-card-sub::after { transform: scaleX(-1); }
+
+/* W2d 卡顶金线：档案章的"封条"（空档极淡、有档可辨、hover/最近游玩点亮） */
+.slot-page .slot-card::before {
+  content: ''; position: absolute; top: 0; left: 14%; right: 14%; height: 1px; z-index: 3;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, #d9bb82cc, transparent);
+  opacity: .14;
+  transition: opacity .32s ease;
+}
+.slot-page .slot-card.filled::before { opacity: .42; }
+.slot-page .slot-card.slot-recent::before { opacity: .85; }
+.slot-page .slot-card:hover::before { opacity: .75; }
+
+/* W2e 底部两角金饰线（四角收束：上角已有返回键/? 键坐镇，只补下方空角） */
+.slot-page .slot-deck::before,
+.slot-page .slot-deck::after {
+  content: ''; position: absolute; z-index: 3; pointer-events: none;
+  bottom: clamp(14px, 3vh, 30px);
+  width: 54px; height: 20px;
+  opacity: .6;
+  animation: slotGemBreath 6s ease-in-out infinite alternate;
+}
+.slot-page .slot-deck::before {
+  left: clamp(22px, 3vw, 56px);
+  background:
+    radial-gradient(2.6px 2.6px at 1px calc(100% - 1px), #ffe9b6 40%, transparent 75%),
+    linear-gradient(90deg, #d9bb82b3, transparent) left bottom / 100% 1px no-repeat,
+    linear-gradient(0deg, #d9bb82b3, transparent) left bottom / 1px 100% no-repeat;
+  filter: drop-shadow(0 0 4px #d9bb8238);
+}
+.slot-page .slot-deck::after {
+  right: clamp(22px, 3vw, 56px);
+  transform: scaleX(-1);
+  background:
+    radial-gradient(2.6px 2.6px at 1px calc(100% - 1px), #ffe9b6 40%, transparent 75%),
+    linear-gradient(90deg, #d9bb82b3, transparent) left bottom / 100% 1px no-repeat,
+    linear-gradient(0deg, #d9bb82b3, transparent) left bottom / 1px 100% no-repeat;
+  filter: drop-shadow(0 0 4px #d9bb8238);
+  animation-delay: -3s;
+}
+
+/* ── W3 信息排版仪式感 ── */
+/* W3a 档名（主信息）提亮 + 一丝金晕 */
+.slot-page .slot-card-name {
+  text-shadow: 0 0 12px rgba(236, 224, 196, .3), 0 2px 6px rgba(2, 8, 12, .65);
+}
+
+/* W3b 档案信息块贴合按钮：art 吃掉弹性留白，desc 自然高度——消除卡内中段死板空区 */
+.slot-page .slot-card-desc { flex: 0 0 auto; }
+
+/* W3c 空档提示在信息区垂直居中（不再顶头悬着 + 下方大空白） */
+.slot-page .slot-card:not(.filled) .slot-card-desc {
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* W3d 层级分离：标签（em）小而灰、值（b）大而亮、数值（b.num）暖米金呼应档案语言 */
+.slot-page .slot-card-desc .si-line { margin-bottom: 10px; }
+.slot-page .slot-card-desc .si-line + .si-line {
+  border-top: 1px solid rgba(159, 183, 188, .16);
+  padding-top: 9px;
+}
+.slot-page .slot-card-desc .si-line em {
+  font-size: 10px; letter-spacing: .24em; color: #86a0a6;
+}
+.slot-page .slot-card-desc .si-line b { color: #f2f6f5; }
+.slot-page .slot-card-desc .si-line b.num { color: #efe6d2; }
+.slot-page .slot-card-desc .si-sub { color: #8da2a8; }
+
+/* W3e 空档提示 retint：蓝紫灰 → 冷青灰（与标签同一族） */
+.slot-page .slot-empty { color: #93a9ad; }
+
+/* ── W4 细节密度 ── */
+/* W4a 遗物落影（对标标题页 W3b）：有档图标"立在"卡面里 */
+.slot-page .slot-card.filled .slot-card-art::after {
+  content: ''; position: absolute; left: 50%; bottom: 5%;
+  width: 74%; height: 13%; transform: translateX(-50%);
+  pointer-events: none;
+  background: radial-gradient(ellipse 58% 36% at 50% 58%, rgba(3, 10, 15, .5), transparent 74%);
+}
+
+/* W4b CTA：暖金按钮的仪式感收口（金渐变高光 + hover 金晕；.en 英文字距） */
+#overlay .slot-page .slot-card-cta {
+  letter-spacing: 3px;
+  box-shadow: inset 0 1px 0 rgba(255, 231, 184, .45);
+  transition: background var(--slot-fast), border-color var(--slot-fast), color var(--slot-fast),
+    box-shadow var(--slot-fast), transform var(--slot-fast), filter var(--slot-fast);
+}
+#overlay .slot-page .slot-card-cta:hover,
+#overlay .slot-page .slot-card-cta:focus-visible {
+  box-shadow: inset 0 1px 0 rgba(255, 242, 207, .55), 0 0 18px rgba(217, 187, 130, .28);
+}
+.slot-page .slot-card-cta .en { letter-spacing: .14em; margin-left: 4px; opacity: .82; }
+
+/* W4c hover 边框/辉光 retint：蓝紫 → 青白 + 微金 */
+.slot-page .slot-card:hover {
+  border-color: rgba(202, 224, 226, .72);
+  box-shadow: 0 0 22px rgba(146, 197, 205, .18), 0 0 14px rgba(217, 187, 130, .1),
+    0 18px 38px rgba(2, 8, 14, .65);
+}
+
+/* ── 兼容性收口 ── */
+/* 矮窗口（winter.css max-height:600 收紧了卡内边距）：角饰线同步收紧避免压到卡片 */
+@media (max-height: 600px) {
+  .slot-page .slot-deck::before, .slot-page .slot-deck::after {
+    bottom: 6px; width: 38px; height: 13px; opacity: .4;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   交互细节轮（2026-09-24 第二批）——按压/焦点/统一节奏/出入场/悬停补全/光标
+   参考标题页 wm-jolt 思路：:active 只在按住时可见，快 click 靠"按下快、
+   松手弹性回位"的过渡差获得可感知反馈（纯 CSS 等价实现）。
+   动画全部只走 transform/opacity；reduced-motion 由 winter.css 全局
+   `*{animation:none!important;transition:none!important}` 兜底。
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── T0 统一节奏变量：fast=色彩/光晕/小位移，lift=卡片抬升，press=按下方向 ── */
+.slot-page {
+  --slot-fast: .18s cubic-bezier(.33, 1, .68, 1);
+  --slot-lift: .32s cubic-bezier(.22, 1, .36, 1);
+  --slot-press: .1s ease-out;
+}
+
+/* ── T1 按压态 ── */
+/* 先修一个隐性 bug：winter 的 slotIn 入场用 both 填充，结束后 transform:none 被动画
+   填充永久钉死（级联上压过 :hover/:active 的 transform），卡片悬停抬升与按压缩放
+   全部失效。这里以同特异性 + 更晚加载改为 backwards 填充：入场错峰上浮不变，
+   动画结束后释放 transform 给交互态。 */
+.slot-page .slot-card { animation: slotIn .5s cubic-bezier(.22, 1, .36, 1) backwards; }
+/* 卡：按下轻缩+金线微亮（快进），松手沿 lift 曲线弹性回位 */
+.slot-page .slot-card {
+  transition: border-color var(--slot-lift), box-shadow var(--slot-lift), transform var(--slot-lift);
+}
+.slot-page .slot-card:active {
+  transform: scale(.985);
+  border-color: rgba(217, 187, 130, .5);
+  transition: transform var(--slot-press), border-color var(--slot-press), box-shadow var(--slot-press);
+}
+/* CTA：按下下沉+提亮（快 click 松手后 .18s 回弹） */
+#overlay .slot-page .slot-card-cta:active {
+  transform: translateY(1px) scale(.97);
+  filter: brightness(1.12);
+  transition-duration: .08s;
+}
+/* 卡内次要按钮（覆盖重开/删除）：按下下沉 */
+.slot-page .slot-card-ops .mini-btn:active {
+  transform: translateY(1px) scale(.96);
+  transition-duration: .08s;
+}
+/* 返回键 / 帮助键：按下轻缩（补 transform 过渡） */
+#overlay .pg.slot-page .pg-back {
+  transition: color var(--slot-fast), border-color var(--slot-fast), filter var(--slot-fast), transform var(--slot-fast);
+}
+#overlay .pg.slot-page .pg-back:active { transform: scale(.94); }
+.slot-page .slot-page-help .help-btn { transition: color var(--slot-fast), border-color var(--slot-fast), box-shadow var(--slot-fast), transform var(--slot-fast); }
+.slot-page .slot-page-help .help-btn:active { transform: scale(.9); }
+
+/* ── T2 焦点态：键盘导航金线焦点环（覆盖全局裸 outline，hover 底金不冲突） ── */
+#overlay .slot-page .slot-card-cta:focus-visible,
+#overlay .slot-page .slot-card-ops .mini-btn:focus-visible,
+#overlay .pg.slot-page .pg-back:focus-visible,
+#overlay .slot-page .slot-page-help .help-btn:focus-visible {
+  outline: 1px solid #d9bb82cc;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 1px #071720, 0 0 12px rgba(217, 187, 130, .35);
+}
+#overlay .pg.slot-page .pg-back:focus-visible { border-color: rgba(217, 187, 130, .4); }
+
+/* ── T3 统一过渡节奏：全页收在 fast/lift 两族曲线里 ── */
+.slot-page .slot-card .slot-card-bg,
+.slot-page .slot-card .slot-card-light { transition: opacity var(--slot-lift), filter var(--slot-lift); }
+.slot-page .slot-card::before { transition: opacity var(--slot-fast); }
+.slot-page .slot-card-ops { transition: opacity var(--slot-fast), transform var(--slot-fast); }
+.slot-page .slot-card-ops .mini-btn {
+  transition: color var(--slot-fast), background var(--slot-fast), border-color var(--slot-fast),
+    box-shadow var(--slot-fast), transform var(--slot-fast), filter var(--slot-fast);
+}
+
+/* ── T4 弹层出入场：淡入 + 8px 上移；关闭淡出下沉（覆盖 winter pgIn/pgOut 的 slot 分支） ── */
+#overlay .card.page:has(.slot-page) {
+  animation: slotPanelIn .42s cubic-bezier(.22, 1, .36, 1) both;
+  will-change: transform, opacity;
+}
+@keyframes slotPanelIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+#overlay.closing .card.page:has(.slot-page) {
+  animation: slotPanelOut .2s ease-in both;
+}
+@keyframes slotPanelOut {
+  from { opacity: 1; transform: none; }
+  to { opacity: 0; transform: translateY(8px) scale(.99); }
+}
+/* 页头迟一拍落位，金线自中心展开——开卷仪式 */
+.slot-page .slot-page-head { animation: slotHeadIn .5s cubic-bezier(.22, 1, .36, 1) .04s both; }
+@keyframes slotHeadIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: none; }
+}
+.slot-page .slot-page-rule { transform-origin: 50% 50%; animation: slotRuleIn .55s cubic-bezier(.22, 1, .36, 1) .1s both; }
+@keyframes slotRuleIn {
+  from { opacity: 0; transform: scaleX(0); }
+  to { opacity: 1; transform: scaleX(1); }
+}
+
+/* ── T5 悬停细节补全：卡内次要按钮单独 hover；删除用暖红警示 ──
+   （带 #overlay 前缀：expedition-inventory.css 的 #overlay .mini-btn.danger 是
+   ID 特异性且加载更晚，裸类选择器的 hover 压不过它的底色） */
+#overlay .slot-page .slot-card-ops .mini-btn:hover {
+  background: #3e6472;
+  border-color: #b7cdd2;
+  color: #eef6f4;
+  box-shadow: 0 0 8px rgba(146, 197, 205, .16);
+  transform: translateY(-1px);
+}
+#overlay .slot-page .slot-card-ops .mini-btn.danger:hover {
+  background: linear-gradient(160deg, #8a3a31, #63251e);
+  border-color: #c96f5c;
+  color: #ffd9cf;
+  box-shadow: 0 0 10px rgba(190, 84, 62, .3);
+}
+
+/* ── T6 光标反馈自查：CTA（button 默认 cursor）补 pointer ── */
+#overlay .slot-page .slot-card-cta { cursor: pointer; }
+

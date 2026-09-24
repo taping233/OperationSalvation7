@@ -1,0 +1,257 @@
+/* ═══════════════════════════════════════════════════════════════════
+   基地·升级页签美术升级（2026-09-24）——对标 page-slot-select.css /
+   page-hub.css / page-deploy.css / page-stash.css / page-shop.css 定稿语言：
+     ① 冷青统一调色（三卡分级/行卡化）② #d9bb82 暖金装饰
+        （封条顶线/金短线/端点光点/角标编号/金量槽）③ 信息排版仪式感
+        （大数字暖米金/发丝分隔/表格数字）④ 交互三档节奏：hover 反馈 /
+        :active 快按慢弹（lift 过冲曲线）/ :focus-visible 金线焦点环 +
+        页签切入三卡错峰上浮与宠物行跟进入场 ⑤ 光标自查
+   作用域：全部规则限定升级页签内容区——根选择器 #overlay #hubMain.hub-upgrade
+     （#hubMain 在升级页签挂 .hub-upgrade，game.hub.js renderHub 拼接；
+       页头/页签栏/资源章归 page-hub.css，本文件不碰。pet-row 虽为
+       hubPetsHTML 同族结构，此处规则全部带 .hub-upgrade 前缀不外溢仓库页。）
+   约束：只新建本文件，不改任何现有样式；disabled 置灰语义
+     （expedition-inventory.css 升级段）不覆盖——金底全部挂 :not(:disabled)；
+     新增动画仅 transform/opacity（reduced-motion 由 winter.css 全局兜底）；
+     卡牌本体与图标一律不动，只做包裹层。
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── T0 统一节奏变量：fast=色彩/光晕/小位移，lift=抬升+过冲回弹（快按慢弹的
+   "慢弹"），press=按下快进 ── */
+#overlay #hubMain.hub-upgrade {
+  --upg-fast: .18s cubic-bezier(.33, 1, .68, 1);
+  --upg-lift: .32s cubic-bezier(.3, 1.4, .45, 1);
+  --upg-press: .09s ease-out;
+}
+
+/* ═════════ W1 三卡容器：冷青分级 + 封条顶线 + 角标编号 ═════════ */
+
+#overlay #hubMain.hub-upgrade .hub-upgrade-layout { counter-reset: upg-card; }
+
+#overlay #hubMain.hub-upgrade .hub-upgrade-layout > .hub-card {
+  counter-increment: upg-card; position: relative;
+  border-color: rgba(182, 211, 214, .2);
+  background: linear-gradient(180deg, rgba(14, 36, 50, .93), rgba(10, 27, 39, .95));
+  box-shadow: 0 14px 34px rgba(2, 8, 14, .35), inset 0 1px 0 rgba(214, 232, 235, .05);
+  transition: border-color var(--upg-fast), box-shadow var(--upg-fast);
+}
+/* W1a 卡顶"封条"金线：两张扩建卡常亮半亮，宠物卡极淡（主次标识，同 shop/stash W1） */
+#overlay #hubMain.hub-upgrade .hub-upgrade-layout > .hub-card::before {
+  content: ''; position: absolute; top: 0; left: 12%; right: 12%; height: 1px; z-index: 3;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, #d9bb82b8, transparent);
+  opacity: .18;
+  transition: opacity var(--upg-fast);
+}
+#overlay #hubMain.hub-upgrade .hub-upgrade-layout > .up-card::before { opacity: .45; }
+/* W1b 角标编号 01/02/03：短金线引导 + 暖金小字（对标 shop 货架编号仪式） */
+#overlay #hubMain.hub-upgrade .hub-upgrade-layout > .hub-card::after {
+  content: '0' counter(upg-card);
+  position: absolute; top: 9px; right: 12px; z-index: 2; pointer-events: none;
+  padding-right: 16px; font-size: 9px; line-height: 1; letter-spacing: .22em;
+  color: rgba(217, 187, 130, .55);
+  background: linear-gradient(270deg, transparent, rgba(217, 187, 130, .4)) right center / 12px 1px no-repeat;
+  transition: color var(--upg-fast);
+}
+/* W1c 卡体 hover：不可点容器只给金线与封条/编号点亮，不做整卡抬升误导 */
+#overlay #hubMain.hub-upgrade .hub-upgrade-layout > .hub-card:hover {
+  border-color: rgba(217, 187, 130, .38);
+  box-shadow: 0 14px 34px rgba(2, 8, 14, .35), 0 0 14px rgba(217, 187, 130, .07),
+    inset 0 1px 0 rgba(214, 232, 235, .05);
+}
+#overlay #hubMain.hub-upgrade .hub-upgrade-layout > .hub-card:hover::before { opacity: .75; }
+#overlay #hubMain.hub-upgrade .hub-upgrade-layout > .hub-card:hover::after { color: rgba(239, 224, 182, .9); }
+
+/* ═════════ W2 卡题仪式感：金短线引导 + 左缘端点光点 + set-tip 发丝分隔 ═════════ */
+
+#overlay #hubMain.hub-upgrade .hub-card > h3 {
+  position: relative;
+  color: #eef4f4; letter-spacing: .18em;
+  text-shadow: 0 0 12px rgba(3, 10, 16, .6);
+}
+#overlay #hubMain.hub-upgrade .hub-card > h3::before {
+  content: ''; display: inline-block; width: 14px; height: 1px; margin-right: 9px;
+  vertical-align: .34em;
+  background: linear-gradient(90deg, transparent, #d9bb82b3);
+  box-shadow: 0 0 5px #d9bb8255;
+}
+#overlay #hubMain.hub-upgrade .hub-card > h3::after {
+  content: ''; position: absolute; left: 0; bottom: -3px; width: 3px; height: 3px;
+  border-radius: 50%; pointer-events: none;
+  background: #ffe9b6; box-shadow: 0 0 6px #d9bb8299;
+  animation: upgGemBreath 5s ease-in-out infinite alternate;
+}
+@keyframes upgGemBreath { from { opacity: .5; } to { opacity: 1; } }
+#overlay #hubMain.hub-upgrade .hub-card > h3 .ic {
+  filter: brightness(1.1) drop-shadow(0 0 4px rgba(217, 187, 130, .3));
+}
+/* 宠物卡 h3 内规则注记：降级为发丝线分隔的小字注记（同 stash/deploy W2） */
+#overlay #hubMain.hub-upgrade .hub-card > h3 .set-tip {
+  margin-left: 10px; padding-left: 10px;
+  border-left: 1px solid rgba(159, 183, 188, .22);
+  font-size: 10.5px; font-weight: 400; letter-spacing: .14em; color: #7e969c;
+}
+#overlay #hubMain.hub-upgrade .hub-card > h3 .set-tip b { color: #cfdde0; }
+
+/* ═════════ W3 扩建卡：容量档案数字 + 金量槽 + 暖金主 CTA ═════════ */
+
+/* W3a 大数字：暖米金 + 金晕 + 表格数字（档案语言）；单位小字灰青 */
+#overlay #hubMain.hub-upgrade .up-cap b {
+  color: #efe0b6;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, .4), 0 0 14px rgba(217, 187, 130, .18);
+}
+#overlay #hubMain.hub-upgrade .up-cap small { color: #93a9ad; }
+
+/* W3b 金量槽：暗槽 + #d9bb82 金量（旧银灰填充 retint，同 stash W3b）+ 缓慢流光 */
+#overlay #hubMain.hub-upgrade .up-card .base-bar {
+  background: rgba(6, 15, 22, .92);
+  border: 1px solid rgba(217, 187, 130, .24);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, .5);
+}
+#overlay #hubMain.hub-upgrade .up-card .base-bar i {
+  position: relative; overflow: hidden;
+  background: linear-gradient(90deg, #8a6f42, #d9bb82 55%, #e8d3a4);
+  box-shadow: 0 0 8px rgba(217, 187, 130, .3);
+}
+#overlay #hubMain.hub-upgrade .up-card .base-bar i::after {
+  content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 40%;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(255, 242, 207, .34), transparent);
+  transform: translateX(-120%);
+  animation: upgSweep 3.8s ease-in-out infinite;
+}
+@keyframes upgSweep {
+  from { transform: translateX(-120%); }
+  to { transform: translateX(340%); }
+}
+
+/* W3c 主 CTA：金渐变收口到 #d9bb82 族（disabled 置灰语义不动，金底挂 :not） */
+#overlay #hubMain.hub-upgrade .up-card .ov-btn.ok:not(:disabled) {
+  border-color: #e3c891;
+  background: linear-gradient(165deg, #ecd8a8, #d9bb82 52%, #c2a267);
+  color: #152633; letter-spacing: 2px; font-weight: 600;
+  box-shadow: inset 0 1px 0 rgba(255, 242, 207, .5), 0 3px 12px rgba(2, 8, 14, .3);
+  transition: filter var(--upg-fast), box-shadow var(--upg-fast),
+    transform var(--upg-fast), border-color var(--upg-fast);
+}
+#overlay #hubMain.hub-upgrade .up-card .ov-btn.ok:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+  box-shadow: inset 0 1px 0 rgba(255, 248, 224, .55), 0 5px 16px rgba(2, 8, 14, .34),
+    0 0 16px rgba(217, 187, 130, .3);
+}
+/* 快按慢弹：按下 .09s 快进，松手沿 lift 过冲曲线回位 */
+#overlay #hubMain.hub-upgrade .up-card .ov-btn.ok:active:not(:disabled) {
+  transform: translateY(1px) scale(.97);
+  filter: brightness(1.14);
+  transition: transform var(--upg-press), filter var(--upg-press), box-shadow var(--upg-press);
+}
+
+/* W3d 达上限提示：冷青绿章 + 字距（沿用 ok-hint 色语义） */
+#overlay #hubMain.hub-upgrade .up-card .hint.ok-hint {
+  margin: 0; letter-spacing: .08em;
+  text-shadow: 0 0 8px rgba(143, 191, 138, .18);
+}
+
+/* ═════════ W4 宠物卡：行卡冷青化 + 携带中金线点亮 + 暖金升级钮 ═════════ */
+
+#overlay #hubMain.hub-upgrade .up-pets .ov-note { color: #93a9ad; line-height: 1.75; letter-spacing: .02em; }
+#overlay #hubMain.hub-upgrade .up-pets .ov-note b { color: #cfdde0; }
+
+#overlay #hubMain.hub-upgrade .pk-row.pet-row {
+  border-color: rgba(159, 183, 188, .16); border-radius: 2px;
+  background: linear-gradient(180deg, rgba(16, 39, 53, .8), rgba(12, 30, 43, .85));
+  transition: border-color var(--upg-fast), background var(--upg-fast), box-shadow var(--upg-fast);
+}
+/* 行体不可点（热区在升级钮）：hover 只给金线与左缘金标，不做整行抬升误导 */
+#overlay #hubMain.hub-upgrade .pk-row.pet-row:hover {
+  border-color: rgba(217, 187, 130, .4);
+  box-shadow: inset 2px 0 0 rgba(217, 187, 130, .5);
+}
+/* 携带中：左缘金标 + 金字渐变（旧 255,202,91 retint 到 #d9bb82 族，同 stash W6） */
+#overlay #hubMain.hub-upgrade .pk-row.pet-row.on {
+  border-color: rgba(217, 187, 130, .55);
+  background: linear-gradient(90deg, rgba(217, 187, 130, .12), rgba(217, 187, 130, .03) 55%, transparent);
+  box-shadow: inset 2px 0 0 #d9bb82;
+}
+/* 未孵化摘要行：虚线界弱化（透明度沿用原 locked 规则） */
+#overlay #hubMain.hub-upgrade .pk-row.pet-row.locked {
+  border-style: dashed; border-color: rgba(159, 183, 188, .14);
+  background: none; box-shadow: none;
+}
+#overlay #hubMain.hub-upgrade .pk-row.pet-row.locked:hover {
+  border-color: rgba(159, 183, 188, .14); box-shadow: none;
+}
+/* 「携带中」章：冷青绿（同 ok-hint 族）；描述灰青；等级小字表格数字 */
+#overlay #hubMain.hub-upgrade .pet-row .got { color: #a9d2ae; }
+#overlay #hubMain.hub-upgrade .pet-row .pet-desc { color: #86a0a6; }
+#overlay #hubMain.hub-upgrade .pet-row .pet-ops .dim {
+  color: #93a9ad; font-variant-numeric: tabular-nums; letter-spacing: .06em;
+}
+#overlay #hubMain.hub-upgrade .pk-row.pet-row b { color: #f0e6cf; }
+
+/* W4a 升级钮 / 去仓库孵化钮：暖金收口（disabled 置灰语义不动） */
+#overlay #hubMain.hub-upgrade .mini-btn.ok:not(:disabled) {
+  background: linear-gradient(180deg, #e0c493, #c9a86e);
+  border-color: #e8d3a4;
+  color: #1c1508;
+  box-shadow: inset 0 1px 0 rgba(255, 242, 207, .4);
+  transition: filter var(--upg-fast), box-shadow var(--upg-fast),
+    transform var(--upg-fast), border-color var(--upg-fast);
+}
+#overlay #hubMain.hub-upgrade .mini-btn.ok:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+  box-shadow: inset 0 1px 0 rgba(255, 246, 220, .5), 0 0 12px rgba(217, 187, 130, .3);
+}
+#overlay #hubMain.hub-upgrade .mini-btn.ok:active:not(:disabled) {
+  transform: translateY(1px) scale(.94);
+  filter: brightness(1.14);
+  transition: transform var(--upg-press), filter var(--upg-press), box-shadow var(--upg-press);
+}
+
+/* W4b 宠物列表滚动条 retint 冷青（同 stash W3c） */
+#overlay #hubMain.hub-upgrade .up-pets .stash-list { scrollbar-color: #3d5a68 #081722; }
+
+/* ═════════ T2 焦点态：键盘导航金线焦点环（与 page-hub.css T2 同语言，
+   双保险写死在升级作用域内） ═════════ */
+#overlay #hubMain.hub-upgrade :is(button, [role="button"]):focus-visible {
+  outline: 1px solid #d9bb82cc;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 1px #071720, 0 0 12px rgba(217, 187, 130, .35);
+}
+
+/* ═════════ T4 页签切入入场编排：仅 .page-in 首帧播放（页内升级重绘不重播，
+   backwards 结束即释放 transform 给交互态）——三卡错峰上浮 → 宠物行跟进 ═════════ */
+#overlay #hubMain.hub-upgrade .hub-page.page-in .hub-upgrade-layout > .hub-card {
+  animation: upgCardIn .5s cubic-bezier(.22, 1, .36, 1) backwards;
+}
+#overlay #hubMain.hub-upgrade .hub-page.page-in .hub-upgrade-layout > .hub-card:nth-child(2) { animation-delay: .07s; }
+#overlay #hubMain.hub-upgrade .hub-page.page-in .hub-upgrade-layout > .hub-card:nth-child(3) { animation-delay: .14s; }
+@keyframes upgCardIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+#overlay #hubMain.hub-upgrade .hub-page.page-in .up-pets .pk-row {
+  animation: upgRowIn .45s cubic-bezier(.22, 1, .36, 1) backwards;
+}
+#overlay #hubMain.hub-upgrade .hub-page.page-in .up-pets > .pk-row { animation-delay: .18s; }
+#overlay #hubMain.hub-upgrade .hub-page.page-in .up-pets .stash-list .pk-row:nth-child(1) { animation-delay: .22s; }
+#overlay #hubMain.hub-upgrade .hub-page.page-in .up-pets .stash-list .pk-row:nth-child(2) { animation-delay: .28s; }
+#overlay #hubMain.hub-upgrade .hub-page.page-in .up-pets .stash-list .pk-row:nth-child(3) { animation-delay: .34s; }
+#overlay #hubMain.hub-upgrade .hub-page.page-in .up-pets .stash-list .pk-row:nth-child(4) { animation-delay: .4s; }
+@keyframes upgRowIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ═════════ T6 光标自查：button 默认 cursor 补 pointer（禁用态除外） ═════════ */
+#overlay #hubMain.hub-upgrade button:not(:disabled) { cursor: pointer; }
+
+/* ═════════ 交互收尾备注（无需新规则，核查记录）：
+   · 焦点环：升级页全部可聚焦元素均为 button（ov-btn / mini-btn），本文件 T2
+     与 page-hub.css T2 双保险覆盖。
+   · 光标：金量槽 / 封条线 / 端点光点 / 角标编号均 pointer-events:none，
+     不遮挡点击；行卡本体不可点保持默认光标以如实反映热区。
+   · 三档节奏：fast（hover 色彩/光晕）→ lift（回弹过冲 .3,1.4,.45,1）→
+     press（.09s 快进）；:active 覆盖 transition 为 press 快进。 ═════════ */

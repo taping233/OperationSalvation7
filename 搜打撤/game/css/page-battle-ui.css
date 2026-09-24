@@ -1,0 +1,271 @@
+/* ═══════════════════════════════════════════════════════════════════
+   战斗界面 DOM 覆盖层美术升级（2026-09-24）——对标 page-expedition-hud /
+   page-slot-select 定稿语言：① 冷青统一调色+暖金 #d9bb82 装饰（金发丝线/
+   封条顶线/金短线标题）② 信息排版仪式感（眉题金化、数值表格数字、敌我语义
+   色保留：敌=暖、我=冷）③ 交互三档节奏 + hover 提亮 + 按压快按慢弹 +
+   :focus-visible 金线焦点环 ④ 光标自查（cursor-art 白名单已全覆盖，无新增
+   可点元素）。
+   作用域：仅战斗 DOM 覆盖层——#overlay .card.battle 内的 .sts-topbar /
+   .bt-pile / .sts-intent / .sts-hud 底部战术台（能量球/分栏钮/砸击钮/战术
+   按钮）/ .bt-infuse / .bt-potions，以及战斗中弹层容器（.card.discover
+   发现/抉择、.bt-gy-* 墓地、.bt-settings、.choice-list——这些类只在战斗
+   语境出现，已逐一核实）。.card.chest 结算页与 .bt-hand 通用卡格容器
+   （chests/bag/altar 复用）不碰；卡牌本体（.bt-card/.hs-card card-v3 域）
+   零接触；画布（#game / .sts-figure 立绘）零接触；page-expedition-hud.css
+   已占用的侧栏选择器不重复。
+   老板定版让路（winter.css 尾批 !important，本文件不覆盖）：
+   ① 回合条融入背景（sts-topbar 透明/绝对定位/文字描边色）
+   ② 名牌透明化（sts-nameplate 无框无底）
+   ③ 战场状态文字条隐藏（sts-arena-caption display:none）
+   ④ 发现/选卡磨砂玻璃面板（.card.discover 卡格容器）
+   ⑤ 药水栏纸白底+近黑字（09-13 定版）。
+   硬约束：战斗高频渲染——新增样式零常驻循环动画、零 filter 动画、不用大面积
+   shadow；新增过渡只走 transform/opacity/色彩，统一收在 .18s fast 档，
+   不加慢入场动画（战斗内克制，出入场仅既有结算/演出类保留）。只覆盖不删除。
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── T0 统一节奏变量：fast=色彩/光晕/小位移（战斗唯一档），press=按下快进时长
+   （只装 <time>，供 transition-duration 用；松手沿 fast 曲线回弹即"快按慢弹"） ── */
+#overlay .battle-stage.sts {
+  --bt-fast: .18s cubic-bezier(.33, 1, .68, 1);
+  --bt-press: .09s;
+}
+
+/* ═════════ W1 顶栏信息条 .sts-topbar：老板定版「回合条融入背景」透明态不覆盖；
+   只补一条底缘金封条线（两端渐隐、静态不呼吸）与数值排版 ═════════ */
+
+#overlay .battle-stage.sts .sts-topbar::before {
+  content: ''; position: absolute; left: 26px; right: 26px; bottom: -1px; height: 1px;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, #d9bb82a1 22%, #d9bb82c4 50%, #d9bb82a1 78%, transparent);
+  opacity: .55;
+}
+
+/* W1b 「第 N 回合」数值：表格数字排版（winter 定版暖字色不覆盖） */
+#overlay .battle-stage.sts .sts-encounter b {
+  font-variant-numeric: tabular-nums; letter-spacing: .04em;
+}
+/* 阶段圆点语义色保留（绿/红/金=战况语义），只收一点辉光半径 */
+#overlay .battle-stage.sts .sts-phase-dot { box-shadow: 0 0 6px currentColor; }
+
+/* ═════════ W2 牌堆徽章 .bt-pile：冷青档案章 + 金色数值 + 三态 ═════════ */
+
+#overlay .battle-stage.sts .bt-pile {
+  background: linear-gradient(180deg, rgba(9, 22, 33, .86), rgba(6, 16, 25, .9));
+  border-color: rgba(159, 183, 188, .26); border-radius: 2px;
+  color: #a9bcc1;
+  box-shadow: inset 0 1px 0 rgba(214, 232, 235, .05), 0 2px 8px rgba(2, 8, 14, .3);
+}
+#overlay .battle-stage.sts .bt-pile b {
+  color: #ecd9ad; font-variant-numeric: tabular-nums; letter-spacing: .02em;
+}
+/* 可点牌堆（牌库/墓地）：hover 金线上浮；filter 一律不进过渡（性能红线） */
+#overlay .battle-stage.sts .bt-pile.clickable {
+  transition: color var(--bt-fast), border-color var(--bt-fast),
+    box-shadow var(--bt-fast), transform var(--bt-fast);
+}
+#overlay .battle-stage.sts .bt-pile.clickable:hover {
+  filter: none;
+  color: #eef4f2;
+  border-color: rgba(217, 187, 130, .6);
+  box-shadow: inset 0 1px 0 rgba(214, 232, 235, .05), 0 0 10px rgba(217, 187, 130, .15);
+  transform: translateY(-1px);
+}
+#overlay .battle-stage.sts .bt-pile.clickable:active {
+  transform: translateY(0) scale(.95);
+  transition-duration: var(--bt-press);
+}
+
+/* ═════════ W3 敌人意图条：冷底金边档案胶囊（战场状态条已被老板定版隐藏，
+   名牌透明化定版不覆盖——本块不碰 caption / nameplate） ═════════ */
+
+#overlay .battle-stage.sts .sts-intent {
+  background: rgba(9, 17, 24, .92);
+  border-color: rgba(217, 187, 130, .5); border-radius: 4px;
+  color: #f2e3c3; font-variant-numeric: tabular-nums;
+  box-shadow: 0 3px 10px rgba(2, 8, 14, .5), 0 0 10px rgba(217, 187, 130, .08);
+}
+/* 敌方攻击徽：暖米金表格数字（意图条同族） */
+#overlay .battle-stage.sts .sts-atkbadge {
+  color: #ecd9ad; font-variant-numeric: tabular-nums;
+}
+/* 词缀小徽：冷底暖金字（档案批注语言） */
+#overlay .battle-stage.sts .bt-affix {
+  color: #e8d5a8; border-color: rgba(217, 187, 130, .45); background: rgba(217, 187, 130, .08);
+}
+
+/* ═════════ W4 能量球 + 手牌分栏钮 + 砸击钮 ═════════ */
+
+/* 能量球：金环描亮一档（球体贴图语义不动），数值表格数字 */
+#overlay .battle-stage.sts .sts-energy {
+  border-color: rgba(217, 187, 130, .75);
+}
+#overlay .battle-stage.sts .sts-energy::before { border-color: rgba(217, 187, 130, .22); }
+#overlay .battle-stage.sts .sts-energy b { font-variant-numeric: tabular-nums; }
+#overlay .battle-stage.sts .sts-energy span { font-variant-numeric: tabular-nums; }
+
+/* 手牌分栏钮：冷青档案钮；has-more 提示改静态金强调——压掉 battle.css 的
+   handPageReminder 无限循环（战斗高频场景红线），信息由金边+金晕静态保留 */
+#overlay .battle-stage.sts .bt-hand-page {
+  background: linear-gradient(180deg, rgba(12, 24, 34, .92), rgba(7, 15, 22, .94));
+  border-color: rgba(159, 183, 188, .4); border-radius: 2px; color: #c9d8dc;
+  transition: color var(--bt-fast), border-color var(--bt-fast),
+    background var(--bt-fast), box-shadow var(--bt-fast), transform var(--bt-fast);
+}
+#overlay .battle-stage.sts .bt-hand-page:hover {
+  filter: none;
+  color: #f2f6f5; border-color: rgba(217, 187, 130, .6);
+  background: rgba(12, 28, 40, .92);
+  box-shadow: 0 0 10px rgba(217, 187, 130, .16);
+  transform: translateY(-1px);
+}
+#overlay .battle-stage.sts .bt-hand-page:active:not(:disabled) {
+  transform: translateY(0) scale(.95);
+  transition-duration: var(--bt-press);
+}
+#overlay .battle-stage.sts .bt-hand-page.has-more {
+  animation: none;
+  color: #ffe9c0; border-color: rgba(217, 187, 130, .85);
+  background: linear-gradient(135deg, rgba(95, 69, 27, .9), rgba(43, 36, 23, .94));
+  box-shadow: 0 0 0 2px rgba(217, 187, 130, .16), 0 0 16px rgba(217, 187, 130, .3);
+}
+
+/* 砸击钮：保留攻击橙红语义，hover 从整片 brightness 换成金橙描边+微光（省 filter） */
+#overlay .battle-stage.sts .bt-slam-btn {
+  transition: color var(--bt-fast), border-color var(--bt-fast),
+    background var(--bt-fast), box-shadow var(--bt-fast), transform var(--bt-fast);
+}
+#overlay .battle-stage.sts .bt-slam-btn:hover:not(:disabled):not(.aim-lift) {
+  filter: none;
+  transform: translateY(-1px);
+  border-color: #ecb36e; color: #ffe2b0;
+  background: linear-gradient(180deg, #4d3020, #2a1812);
+  box-shadow: 0 6px 14px rgba(2, 8, 14, .4), 0 0 14px rgba(232, 164, 100, .3);
+}
+#overlay .battle-stage.sts .bt-slam-btn:active:not(:disabled):not(.aim-lift) {
+  transform: translateY(0) scale(.96);
+  transition-duration: var(--bt-press);
+}
+
+/* ═════════ W5 战术按钮组（背包/撤离/设置 + 结束回合）：金 hover 三态 ═════════ */
+
+#overlay .battle-stage.sts .sts-tactics .ov-btn {
+  transition: color var(--bt-fast), border-color var(--bt-fast),
+    background var(--bt-fast), box-shadow var(--bt-fast), transform var(--bt-fast);
+}
+/* 幽灵键 hover：暖金描边 + 冷底提亮 + 上浮（同 #topBtns 定稿语言） */
+#overlay .battle-stage.sts .sts-tactics .ov-btn.ghost:hover:not(:disabled):not(.dis) {
+  filter: none;
+  color: #f2f6f5;
+  border-color: rgba(217, 187, 130, .62);
+  background: rgba(12, 28, 40, .88);
+  box-shadow: 0 0 10px rgba(217, 187, 130, .16);
+  transform: translateY(-1px);
+}
+/* 撤离键 hover 保留警示红语义（判负入口，不做金） */
+#overlay .battle-stage.sts .sts-tactics [data-act="btFlee"]:hover:not(:disabled):not(.dis) {
+  color: #f2c4bb;
+  border-color: rgba(224, 144, 124, .65);
+  background: rgba(38, 16, 16, .8);
+  box-shadow: 0 0 10px rgba(224, 144, 124, .18);
+}
+/* 按压：快进 + 松手沿 fast 回弹（快按慢弹） */
+#overlay .battle-stage.sts .sts-tactics .ov-btn:active:not(:disabled):not(.dis) {
+  transform: translateY(0) scale(.95);
+  transition-duration: var(--bt-press);
+}
+/* 结束回合（主操作金钮）：hover 金晕提亮，不用 filter；按压下沉 */
+#overlay .battle-stage.sts .sts-end-turn {
+  transition: color var(--bt-fast), border-color var(--bt-fast),
+    box-shadow var(--bt-fast), transform var(--bt-fast);
+}
+#overlay .battle-stage.sts .sts-end-turn:hover:not(:disabled) {
+  filter: none;
+  color: #fff4d0; border-color: #f6e6b8;
+  box-shadow: inset 0 1px 0 rgba(255, 236, 196, .5), 0 6px 16px rgba(2, 8, 14, .4),
+    0 0 14px rgba(217, 187, 130, .22);
+  transform: translateY(-1px);
+}
+
+/* ═════════ W6 注能 / 点选提示条 .bt-infuse：档案横条 + 左缘金标 ═════════ */
+
+#overlay .battle-stage.sts .bt-infuse {
+  background: linear-gradient(180deg, rgba(12, 26, 36, .92), rgba(6, 14, 21, .95));
+  border-color: rgba(159, 183, 188, .3); border-left: 2px solid rgba(217, 187, 130, .6);
+  border-radius: 2px; color: #c3d3d8;
+}
+#overlay .battle-stage.sts .bt-infuse b { color: #ecd9ad; }
+#overlay .battle-stage.sts .bt-infuse .mini-btn { transition: color var(--bt-fast), border-color var(--bt-fast), background var(--bt-fast), box-shadow var(--bt-fast), transform var(--bt-fast); }
+#overlay .battle-stage.sts .bt-infuse .mini-btn:hover:not(:disabled) {
+  filter: none;
+  color: #f2f6f5; border-color: rgba(217, 187, 130, .55);
+}
+#overlay .battle-stage.sts .bt-infuse .mini-btn.ok:hover:not(:disabled) {
+  color: #152e3b; border-color: #ecd9ad;
+  box-shadow: 0 0 12px rgba(216, 188, 134, .4);
+}
+#overlay .battle-stage.sts .bt-infuse .mini-btn:active:not(:disabled) {
+  transform: translateY(1px) scale(.96);
+  transition-duration: var(--bt-press);
+}
+
+/* ═════════ W7 药水栏 .bt-potions：纸白底+近黑字是老板定版语义，不 retint；
+   只统一过渡节奏 + 补按压回弹（拖拽 aim-lift 态不参与） ═════════ */
+
+#overlay .battle-stage.sts .bt-potion {
+  transition: border-color var(--bt-fast), box-shadow var(--bt-fast), transform var(--bt-fast);
+}
+#overlay .battle-stage.sts .bt-potion:hover {
+  transform: translateY(-1px);
+}
+#overlay .battle-stage.sts .bt-potion:not(.aim-lift):active {
+  transform: translateY(0) scale(.96);
+  transition-duration: var(--bt-press);
+}
+
+/* ═════════ W8 战斗中弹层容器（发现/抉择/墓地/战斗设置）：容器层轻触 ═════════ */
+
+/* 墓地/牌库列表：档案表格化（发丝分隔 + 冷青灰元信息）；discover 卡格容器
+   的间距/分隔线是 09-15 定版磨砂玻璃面板语言，不碰 */
+.bt-gy-list { border-top-color: rgba(159, 183, 188, .16); }
+.bt-gy-row { border-bottom-color: rgba(159, 183, 188, .1); }
+.bt-gy-row b { color: #eef4f2; }
+.bt-gy-row .bt-gy-meta { color: #86a0a6; font-variant-numeric: tabular-nums; }
+/* 战斗设置行卡片：hover 金线反馈 */
+.bt-settings .chk {
+  transition: background var(--bt-fast), border-color var(--bt-fast);
+}
+.bt-settings .chk:hover { border-color: rgba(217, 187, 130, .4); }
+/* 抉择选项钮：与战术幽灵键同族三态（.card.discover 只在战斗语境出现） */
+#overlay .card.discover .choice-list .ov-btn {
+  transition: color var(--bt-fast), border-color var(--bt-fast),
+    background var(--bt-fast), box-shadow var(--bt-fast), transform var(--bt-fast);
+}
+#overlay .card.discover .choice-list .ov-btn:hover:not(:disabled) {
+  filter: none;
+  color: #f2f6f5;
+  border-color: rgba(217, 187, 130, .62);
+  background: rgba(12, 28, 40, .88);
+  box-shadow: 0 0 10px rgba(217, 187, 130, .16);
+  transform: translateY(-1px);
+}
+#overlay .card.discover .choice-list .ov-btn:active:not(:disabled) {
+  transform: translateY(0) scale(.97);
+  transition-duration: var(--bt-press);
+}
+
+/* ═════════ T2 焦点态：键盘导航金线焦点环（战斗全部可焦元素） ═════════ */
+#overlay .battle-stage.sts .sts-tactics .ov-btn:focus-visible,
+#overlay .battle-stage.sts .bt-slam-btn:focus-visible,
+#overlay .battle-stage.sts .bt-hand-page:focus-visible,
+#overlay .battle-stage.sts .bt-infuse .mini-btn:focus-visible,
+#overlay .card.discover .choice-list .ov-btn:focus-visible,
+.bt-settings input[type="checkbox"]:focus-visible {
+  outline: 1px solid #d9bb82cc;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 1px #071720, 0 0 12px rgba(217, 187, 130, .35);
+}
+
+/* ═════════ T6 光标自查：战斗可点元素全部在 cursor-art.css 白名单内
+   （button:not(:disabled) / .bt-pile.clickable / .bt-card / .bt-potion.need-target
+   的瞄准十字 / :disabled 不可用光标），本文件无新增可点元素，不加光标规则。 ═════════ */

@@ -1,0 +1,282 @@
+/* ═══════════════════════════════════════════════════════════════════
+   制作坊（卡牌工坊）美术排版升级（2026-09-24）——对标 page-slot-select.css /
+   page-shop.css「09-24 美术升级」定稿语言：
+     ① 冷青统一调色（工坊底/预览舞台纳入冷青夜灯，暗角收视线）
+     ② #d9bb82 暖金装饰（页顶封条线/舞台台沿金线/分区金短线/落卡金晖；
+        创造主题，金色密度略高于其余页面，全部在 #d9bb82 族内）
+     ③ 信息排版仪式感（分区标题金短线/纸面发丝分隔/表格数字）
+     ④ 交互三档节奏变量 + 按压「快按慢弹」+ 金线焦点环（暗面/纸面两套）+
+        首开出入场编排 ⑤ 光标自查
+   边界：左侧预览舞台为暗面（#d9bb82 金），右侧表单是老板定稿的浅米纸面
+     （winter 09-07 留言），纸面内金饰降档为深金 #b8934c/#a5854a 族；
+     卡面本体（hs-card / card-v3 域）零接触；保存卡牌 CTA 沿用全项目
+     ov-btn.ok / page-shop 价签的暖金键语言（#d8bc86 同族）；
+     pg-close 朱红玻璃退出键是 winter #45 全局统一语言，不换色只补节奏。
+   约束：全部规则限定 #overlay .pg.cdes（及 :has(.pg.cdes) 面板层）作用域，
+     只覆盖不删除；新增动画仅 transform/opacity；reduced-motion 由
+     winter.css 全局 `*{animation:none!important;transition:none!important}` 兜底。
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── T0 统一节奏变量：fast=色彩/光晕/小位移，lift=抬起弹性回位（过冲曲线，
+        快按慢弹的"慢弹"），press=按下快进。挂在工坊根，命名与 dep/slot/lib 同族 ── */
+#overlay .pg.cdes {
+  --forge-fast: .18s cubic-bezier(.33, 1, .68, 1);
+  --forge-lift: .32s cubic-bezier(.3, 1.4, .45, 1);
+  --forge-press: .09s ease-out;
+}
+
+/* ═════════ W1 工坊底色与工作区层级：石墨灰 → 冷青夜馆 + 暖金台灯 ═════════ */
+/* W1a 页面底：原 .pg 石墨灰渐变换成冷青深渐变；顶部一束极淡暖金"工作灯"
+        （全页暖点缀的源头）+ 底部沉暗（slot 页 W1 同构） */
+#overlay .pg.cdes {
+  background:
+    radial-gradient(120% 70% at 50% -8%, rgba(217, 187, 130, .05), transparent 52%),
+    linear-gradient(180deg, #16282f 0%, #101e28 52%, #0b161f 100%);
+}
+/* W1b 页顶封条金线：开卷收口（对标 hub 卡封条顶线；absolute 不占布局） */
+#overlay .pg.cdes::before {
+  content: ''; position: absolute; top: 0; left: 12%; right: 12%; height: 1px; z-index: 6;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, #d9bb82b8, transparent);
+  box-shadow: 0 0 6px #d9bb8233;
+  opacity: .45;
+}
+/* W1c 工作区外框：冷青边提亮一档 + 落影/内高光，让"舞台+纸面"整体浮出 */
+#overlay .pg.cdes .cdes-main {
+  border-color: rgba(143, 165, 173, .3);
+  box-shadow: 0 20px 46px rgba(2, 8, 14, .45), inset 0 1px 0 rgba(214, 232, 235, .05);
+}
+
+/* W1d 预览舞台 retint：中性灰聚光 → 冷青展台，台沿压一条暖金封条细线
+        （背景层置于 padding-box 底边，紧贴 winter 的结构性 border-bottom 之上） */
+#overlay .pg.cdes .cdes-stage {
+  background:
+    linear-gradient(90deg, transparent, rgba(217, 187, 130, .5), transparent) bottom / 100% 1px no-repeat,
+    radial-gradient(ellipse 85% 72% at 50% 38%, #24424f 0%, #1a3140 40%, #102230 72%, #0a1824 100%);
+}
+/* W1e 落卡晖影：卡下暗影"立"在台面 + 一抹暖金反射（创造主题的打光） */
+#overlay .pg.cdes .cdes-stage::before {
+  content: ''; position: absolute; left: 50%; bottom: 8%; width: 54%; height: 17%; z-index: 0;
+  transform: translateX(-50%); pointer-events: none;
+  background:
+    radial-gradient(ellipse 50% 34% at 50% 46%, rgba(217, 187, 130, .1), transparent 70%),
+    radial-gradient(ellipse 42% 30% at 50% 58%, rgba(2, 8, 14, .6), transparent 76%);
+}
+/* W1f 四角暗角：视线收向中央卡牌（slot 页 W1c 同语言，密度略低） */
+#overlay .pg.cdes .cdes-stage::after {
+  content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(115% 88% at 50% 40%, transparent 52%, rgba(4, 11, 16, .4) 86%, rgba(3, 9, 13, .58) 100%),
+    linear-gradient(0deg, rgba(4, 10, 15, .4), transparent 24%);
+}
+/* 层序：晖影/暗角压底，卡牌与提示浮上（不改卡面本体） */
+#overlay .pg.cdes #cardTilt { position: relative; z-index: 1; }
+#overlay .pg.cdes .stage-hint {
+  z-index: 2; color: #8da2a8; letter-spacing: 2px;
+  text-shadow: 0 1px 4px rgba(2, 8, 12, .6);
+}
+#overlay .pg.cdes .stage-hint .ic { opacity: .85; }
+
+/* W1g 页头：冷青薄雾压过透明底，与舞台连成同一间暗面工房
+        （底部暖金发丝线沿用 expedition-inventory 的全局页头语言，不重画） */
+#overlay .pg.cdes .pg-head {
+  background: linear-gradient(180deg, rgba(36, 66, 80, .5), rgba(16, 32, 42, 0));
+}
+
+/* ═════════ W2 保存卡牌 CTA：暖金主键收口（创造动作 = 页面唯一重金） ═════════
+   沿用 page-shop 价签 / ov-btn.ok 的暖金键语言；基底不动 ：disabled 语义 */
+#overlay .pg.cdes .pg-head .hs-btn.gold {
+  border-color: #e3c891;
+  background: linear-gradient(165deg, #ecd8a8, #d9bb82 52%, #c2a267);
+  color: #152633; letter-spacing: 1px;
+  box-shadow: inset 0 1px 0 rgba(255, 242, 207, .5), 0 3px 10px rgba(2, 8, 14, .3);
+  transition: filter var(--forge-fast), box-shadow var(--forge-fast),
+    transform var(--forge-fast), border-color var(--forge-fast);
+}
+#overlay .pg.cdes .pg-head .hs-btn.gold:hover {
+  filter: brightness(1.07);
+  transform: translateY(-1px);
+  box-shadow: inset 0 1px 0 rgba(255, 248, 224, .55), 0 5px 14px rgba(2, 8, 14, .34),
+    0 0 16px rgba(217, 187, 130, .3);
+}
+#overlay .pg.cdes .pg-head .hs-btn.gold:active {
+  transform: translateY(1px) scale(.97);
+  filter: brightness(1.13);
+  transition: transform var(--forge-press), filter var(--forge-press), box-shadow var(--forge-press);
+}
+
+/* ═════════ W3 纸面表单（创造台账）：分区金短线 + 发丝分隔 + 表格数字 ═════════ */
+/* W3a 分区标题前置金短线（暗金降档，对标 page-cardslib W3a 纸面语言） */
+#overlay .pg.cdes .cdes-sec > span::before {
+  content: ''; display: inline-block; width: 14px; height: 1px; margin-right: 9px;
+  vertical-align: .32em;
+  background: linear-gradient(90deg, rgba(184, 147, 76, .15), #b8934c);
+  box-shadow: 0 0 4px rgba(184, 147, 76, .38);
+}
+/* W3b 分区分隔线：灰米 → 暗金发丝（略多金但不抢纸面主信息） */
+#overlay .pg.cdes .cdes-sec { border-bottom-color: rgba(184, 147, 76, .26); }
+/* W3c 数字观感：步进值/字数统计用表格数字（调整时不跳宽） */
+#overlay .pg.cdes .dmg-ctl input[type="number"],
+#overlay .pg.cdes .desc-count { font-variant-numeric: tabular-nums; }
+/* W3d 纸面滚动条收进暖米族（视觉密度收口；滚动行为不动） */
+#overlay .pg.cdes .cdes-form { scrollbar-color: #c0b394 #e2ded2; }
+/* W3d-补 「可出售」开关是旧深色表单遗留的 #d5d5d5 浅灰字，winter 纸面化时未跟进，
+        米纸上几乎不可读 → 收进纸面墨色族（与 row-tip 同档） */
+#overlay .pg.cdes .sellable-tgl { color: #5a5648; }
+
+/* W3e 文本域输入：hover 边色深一档，focus 转暖金环（原灰环 → 金环） */
+#overlay .pg.cdes .cdes-row input[type="text"],
+#overlay .pg.cdes .cdes-row textarea,
+#overlay .pg.cdes .dmg-ctl input[type="number"] {
+  transition: border-color var(--forge-fast), box-shadow var(--forge-fast), background var(--forge-fast);
+}
+#overlay .pg.cdes .cdes-row input[type="text"]:hover:not(:focus),
+#overlay .pg.cdes .cdes-row textarea:hover:not(:focus),
+#overlay .pg.cdes .dmg-ctl input[type="number"]:hover:not(:focus) { border-color: #a89f8a; }
+#overlay .pg.cdes .cdes-row input[type="text"]:focus,
+#overlay .pg.cdes .cdes-row textarea:focus,
+#overlay .pg.cdes .dmg-ctl input[type="number"]:focus {
+  border-color: #a5854a;
+  box-shadow: 0 0 0 2px rgba(184, 147, 76, .18), 0 0 10px rgba(217, 187, 130, .12);
+}
+
+/* ═════════ W4 选择控件（类型/费用/稀有度/机制词条）：纸面 chip 的节奏与金选态 ═════════ */
+/* W4a 统一过渡节奏：色彩快、位移沿 lift 弹性（hover 抬升回弹） */
+#overlay .pg.cdes .seg button,
+#overlay .pg.cdes .mech-chip {
+  transition: transform var(--forge-lift), color var(--forge-fast),
+    border-color var(--forge-fast), background var(--forge-fast),
+    box-shadow var(--forge-fast), filter var(--forge-fast);
+}
+/* W4b hover：轻抬 + 纸面提亮（winter 的变色语言保留） */
+#overlay .pg.cdes .seg button:hover,
+#overlay .pg.cdes .mech-chip:hover {
+  transform: translateY(-1px);
+  background: #eae7dd;
+}
+/* W4c 选态补内高光：金渐变上加一线纸背光（不改 winter 选态配色本身） */
+#overlay .pg.cdes .seg button.on,
+#overlay .pg.cdes .mech-chip.on {
+  box-shadow: 0 0 9px rgba(184, 147, 76, .35), inset 0 1px 0 rgba(255, 248, 222, .55);
+}
+/* W4d 按压「快按慢弹」：按下 .09s 快缩，松手沿 lift 过冲曲线回位 */
+#overlay .pg.cdes .seg button:active,
+#overlay .pg.cdes .mech-chip:active {
+  transform: scale(.94);
+  transition: transform var(--forge-press), color var(--forge-press),
+    border-color var(--forge-press), background var(--forge-press), box-shadow var(--forge-press);
+}
+
+/* W4e 费用宝石：选中态银 → 暖金（费用=铸造消耗，归入创造金语言；
+        稀有度菱形的 --gem 语义色不动）。clip-path 会裁掉 outline，
+        焦点/悬停反馈一律走 drop-shadow（滤镜作用在裁剪后形状上） */
+#overlay .pg.cdes .cost-gem {
+  transition: transform var(--forge-lift), opacity var(--forge-fast), filter var(--forge-fast);
+}
+#overlay .pg.cdes .cost-gem:hover { opacity: .85; filter: drop-shadow(0 0 5px rgba(217, 187, 130, .3)); }
+#overlay .pg.cdes .cost-gem.on {
+  background: linear-gradient(180deg, #efe3c0, #d9bb82 55%, #bfa06a) !important;
+  color: #2e2410 !important;
+  opacity: 1;
+  filter: drop-shadow(0 0 7px rgba(217, 187, 130, .55));
+}
+#overlay .pg.cdes .cost-gem:active {
+  transform: scale(.9);
+  transition: transform var(--forge-press), opacity var(--forge-press), filter var(--forge-press);
+}
+
+/* ═════════ T1 其余按压点：页头按钮 / 步进圆钮 / 退出键 ═════════ */
+#overlay .pg.cdes .pg-head .hs-btn:not(.gold) {
+  transition: transform var(--forge-lift), filter var(--forge-fast),
+    border-color var(--forge-fast), box-shadow var(--forge-fast);
+}
+#overlay .pg.cdes .pg-head .hs-btn:not(.gold):active {
+  transform: translateY(1px) scale(.96);
+  transition: transform var(--forge-press), filter var(--forge-press);
+}
+#overlay .pg.cdes .dmg-ctl .hs-btn.round {
+  transition: transform var(--forge-lift), filter var(--forge-fast),
+    border-color var(--forge-fast), background var(--forge-fast);
+}
+#overlay .pg.cdes .dmg-ctl .hs-btn.round:active {
+  transform: scale(.88);
+  transition: transform var(--forge-press), filter var(--forge-press);
+}
+#overlay .pg.cdes .pg-close {
+  transition: transform var(--forge-fast), filter var(--forge-fast),
+    box-shadow var(--forge-fast), border-color var(--forge-fast);
+}
+#overlay .pg.cdes .pg-close:active {
+  transform: scale(.9);
+  transition: transform var(--forge-press), filter var(--forge-press);
+}
+
+/* ═════════ T2 焦点态：键盘导航金线焦点环（暗面/纸面两套语言） ═════════ */
+/* T2a 暗面（页头按钮）：1px 金 outline + 暗色隔离晕 + 金晕 */
+#overlay .pg.cdes .pg-head .hs-btn:focus-visible,
+#overlay .pg.cdes .pg-close:focus-visible {
+  outline: 1px solid #d9bb82cc;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 1px #071720, 0 0 12px rgba(217, 187, 130, .35);
+}
+/* T2a-补 金色 CTA 的焦点环保留键面内高光，不整套换 box-shadow */
+#overlay .pg.cdes .pg-head .hs-btn.gold:focus-visible {
+  outline: 1px solid #fff3d2;
+  outline-offset: 2px;
+  box-shadow: inset 0 1px 0 rgba(255, 248, 224, .55), 0 0 0 1px #071720, 0 0 14px rgba(217, 187, 130, .42);
+}
+/* T2b 纸面控件：环画内侧（2px 暗金，不吃纸面留白；文本域已有金 focus 环，
+        这里统一 button 侧） */
+#overlay .pg.cdes .cdes-form button:focus-visible {
+  outline: 2px solid rgba(154, 120, 60, .85);
+  outline-offset: -2px;
+}
+/* T2c 费用宝石：clip-path 裁 outline → 焦点用贴形金晕表达（双晕+提亮保证可见） */
+#overlay .pg.cdes .cost-gem:focus-visible {
+  outline: none;
+  filter: drop-shadow(0 0 2px rgba(255, 246, 218, .95)) drop-shadow(0 0 7px rgba(184, 147, 76, .8));
+}
+
+/* ═════════ T4 首开出入场编排：面板上浮 → 封条展开 → 页头下沉落位 →
+        舞台/台账错峰升位 → 台词最后浮现。全部 transform/opacity；
+        关闭走 winter pgOut（!important）不动。
+        容器级动画：pickCost/pickType 等交互只 syncDesignerForm 局部更新，
+        不会重播；mechChips 只换 innerHTML，容器动画不受影响 ═════════ */
+#overlay .card.page:has(.pg.cdes) {
+  animation: forgePanelIn .42s cubic-bezier(.22, 1, .36, 1) both;
+}
+@keyframes forgePanelIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+#overlay .pg.cdes::before {
+  transform-origin: 50% 50%;
+  animation: forgeSealIn .6s cubic-bezier(.22, 1, .36, 1) .08s backwards;
+}
+@keyframes forgeSealIn {
+  from { opacity: 0; transform: scaleX(0); }
+  to { opacity: .45; transform: scaleX(1); }
+}
+#overlay .pg.cdes .pg-head { animation: forgeHeadIn .5s cubic-bezier(.22, 1, .36, 1) .04s backwards; }
+@keyframes forgeHeadIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: none; }
+}
+#overlay .pg.cdes .cdes-stage,
+#overlay .pg.cdes .cdes-form {
+  animation: forgeRiseIn .5s cubic-bezier(.22, 1, .36, 1) backwards;
+}
+#overlay .pg.cdes .cdes-stage { animation-delay: .1s; }
+#overlay .pg.cdes .cdes-form { animation-delay: .16s; }
+@keyframes forgeRiseIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+#overlay .pg.cdes .stage-hint { animation: forgeHintIn .6s ease .5s backwards; }
+@keyframes forgeHintIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ═════════ T6 光标自查：button 默认箭头缝隙补 pointer（禁用态除外） ═════════ */
+#overlay .pg.cdes button:not(:disabled) { cursor: pointer; }

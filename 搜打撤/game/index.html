@@ -32,6 +32,22 @@
 <link rel="stylesheet" href="css/expedition-roster.css" />
 <link rel="stylesheet" href="css/expedition-shop.css" />
 <link rel="stylesheet" href="css/ui-scale.css" />
+<!-- 09-24 美术排版流水线：各界面增量层（子代理产出，主代理统一挂载；须在 ui-scale.css 之后） -->
+<link rel="stylesheet" href="css/page-slot-select.css" />
+<link rel="stylesheet" href="css/page-hub.css" />
+<link rel="stylesheet" href="css/page-deploy.css" />
+<link rel="stylesheet" href="css/page-classes.css" />
+<link rel="stylesheet" href="css/page-stash.css" />
+<link rel="stylesheet" href="css/page-shop.css" />
+<link rel="stylesheet" href="css/page-upgrade.css" />
+<link rel="stylesheet" href="css/page-settings.css" />
+<link rel="stylesheet" href="css/page-cardslib.css" />
+<link rel="stylesheet" href="css/page-ach.css" />
+<link rel="stylesheet" href="css/page-cardforge.css" />
+<link rel="stylesheet" href="css/page-expedition-hud.css" />
+<link rel="stylesheet" href="css/page-events.css" />
+<link rel="stylesheet" href="css/page-rewards-bag-help.css" />
+<link rel="stylesheet" href="css/page-battle-ui.css" />
 </head>
 <body>
 <div id="app">
@@ -164,6 +180,8 @@
         <div class="title-heading"><div class="title-kicker">THE ASCENSION SOCIETY</div><h1 class="winter-wordmark"><small>升格会的</small>冬日猜想</h1><div class="winter-edition">A WINTER CONJECTURE <span>VOL. 07</span></div></div>
         <div class="title-expedition-copy"><span>WINTER EXPEDITION / 07</span></div>
         <div class="ak-hud">
+          <!-- 09-24 W3 暖金脉络：串联入口与开始探索（对标黑流树海金色树纹），纯装饰垫底层 -->
+          <div class="ak-veins" aria-hidden="true"><i class="v1"></i><i class="v2"></i><i class="d d1"></i><i class="d d2"></i><i class="d d3"></i><i class="d d4"></i></div>
           <!-- 顶栏左：退出（最左）+ 静音 -->
           <div class="ak-tl">
             <button class="ak-sq ak-exit" id="btnTitleExit" title="退出游戏">
@@ -240,7 +258,8 @@
             <span class="st-en">EXPEDITION / 进入远征档案</span>
           </button>
           <!-- 雪花飘落特效层 -->
-          <div class="title-snow" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <!-- 09-24 W2：25-36 中景补充、37-48 近景大颗（winter.css 定义，景深三层） -->
+          <div class="title-snow" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
           <!-- 美术预热进度（2026-09-08 老板：首次打开强制预热，显示原因与进度） -->
           <div id="warmupTip" hidden aria-live="polite">
             <div class="warmup-head"><span class="warmup-spark" aria-hidden="true">❄</span>美术资源预热中 <b id="warmupNum">0/0</b></div>

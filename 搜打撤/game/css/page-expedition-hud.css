@@ -1,0 +1,263 @@
+/* ═══════════════════════════════════════════════════════════════════
+   远征地图 HUD 美术升级（2026-09-24）——对标 page-slot-select / page-hub /
+   page-deploy 定稿语言：① 冷青统一调色+半透明底（不遮地图视线）
+   ② #d9bb82 暖金装饰（金短线/发丝线/档案编号语言）③ 信息排版仪式感
+   （数值暖米金表格数字、面板金短线标题）④ 交互三档节奏 + 按压快按慢弹 +
+   :focus-visible 金线焦点环 ⑤ 光标自查
+   作用域：仅对局 DOM HUD——#sidebar（底部面板栏）/ #topBtns / #resHud /
+   #logPanel / #bagBtnFloat / #expeditionChapter / #layerBanner。
+   硬约束：Pixi 画布（#game / #miniMap）零接触；只覆盖不删除；关键帧动画
+   仅 transform/opacity 且零常驻循环（战斗中常驻界面，克制）；winter.css
+   末尾 09-24 留言批次的 !important 底态用同特异性 + 更晚加载 + !important 覆盖。
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── T0 统一节奏变量：fast=色彩/光晕/小位移，lift=回弹过冲（快按慢弹），press=按下快进 ── */
+#sidebar, #topBtns, #resHud, #logPanel, #bagBtnFloat {
+  --exh-fast: .18s cubic-bezier(.33, 1, .68, 1);
+  --exh-lift: .32s cubic-bezier(.3, 1.4, .45, 1);
+  --exh-press: .09s ease-out;
+}
+
+/* ═════════ W1 底部面板栏 #sidebar：档案化质感（冷青半透明 + 顶缘金发丝线） ═════════ */
+
+/* W1a 底栏：实色蓝灰 → 冷青半透明（地图视线透底），顶缘分隔提为暖金族 */
+#sidebar {
+  background: linear-gradient(105deg, rgba(9, 22, 32, .93), rgba(17, 34, 46, .9));
+  border-top-color: rgba(217, 187, 130, .26);
+  box-shadow: 0 -10px 30px rgba(3, 10, 17, .5), inset 0 1px 0 rgba(214, 232, 235, .05);
+}
+/* W1a-2 顶缘金发丝线：两端渐隐、中心提亮（档案"封条"，静态不呼吸） */
+#sidebar::before {
+  content: ''; position: absolute; left: 26px; right: 26px; top: -1px; height: 1px;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, #d9bb82a1 22%, #d9bb82c4 50%, #d9bb82a1 78%, transparent);
+  opacity: .66;
+}
+
+/* W1b 面板竖向分隔发丝线：冷青弱化（原 #425d6880 蓝灰） */
+#sidebar .panel { border-right-color: rgba(159, 183, 188, .14); }
+
+/* W1c 头像卡：冷青描边 + 底部内阴影落定 + 脚底金线（档案章的"镇纸"） */
+#sidebar .hero-ava {
+  border-color: rgba(196, 219, 223, .55);
+  box-shadow: 0 6px 18px rgba(3, 10, 17, .55), inset 0 -22px 30px rgba(6, 16, 24, .35);
+}
+#sidebar .hero-ava::after {
+  content: ''; position: absolute; left: 12%; right: 12%; bottom: 5px; height: 1px; z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, #d9bb82cc, transparent);
+  box-shadow: 0 0 5px #d9bb8245;
+}
+
+/* ═════════ W2 简图面板：数值排版仪式感（标签小而灰青、数值暖米金表格数字） ═════════ */
+
+#sidebar #statsPanel { border-right-color: rgba(159, 183, 188, .14); }
+#sidebar .stat-duo { gap: 8px; }
+#sidebar .stat-duo label { font-size: 10px; letter-spacing: .22em; color: #86a0a6; }
+#sidebar .stat-duo b {
+  color: #f2f6f5; font-variant-numeric: tabular-nums; letter-spacing: .03em;
+  text-shadow: 0 0 8px rgba(217, 187, 130, .14);
+}
+#sidebar .stat-duo .gold { color: #ecd9ad; }
+#sidebar .stat-duo .duo-sep { color: #6d8690; }
+
+/* ═════════ W3 路线面板：金短线标题 + 发丝分隔线 + 路线卡交互（核心操作区） ═════════ */
+
+/* W3a 「下一步」标题：前置金短线 + 暖米金（对标页头 hub-slot-label / 卡标题语言） */
+#sidebar .route-title {
+  display: inline-flex; align-items: center; gap: 8px;
+  color: #ecd9ad; font-size: 12.5px; letter-spacing: .24em;
+  text-shadow: 0 0 10px rgba(217, 187, 130, .18);
+}
+#sidebar .route-title::before {
+  content: ''; display: block; width: 16px; height: 1px;
+  background: linear-gradient(90deg, transparent, #d9bb82b3);
+  box-shadow: 0 0 4px #d9bb8255;
+}
+/* W3a-2 标题行下发丝线 / 提示行上发丝线：面板内的"档案表格"骨架 */
+#sidebar .route-heading { padding-bottom: 7px; border-bottom: 1px solid rgba(159, 183, 188, .13); }
+#sidebar .route-help { padding-top: 7px; border-top: 1px solid rgba(159, 183, 188, .11); }
+#sidebar .route-help { color: #93a9ad; }
+#sidebar .route-help span { color: #7e969c; letter-spacing: .08em; }
+#sidebar .route-objective { color: #93a9ad; letter-spacing: .05em; }
+
+/* W3b 路线卡：冷青半透明档案卡 + hover 金线上浮 + 按压快按慢弹 */
+#sidebar .route-option {
+  background: linear-gradient(180deg, rgba(24, 44, 58, .88), rgba(15, 31, 43, .92));
+  border-color: rgba(159, 183, 188, .26);
+  transition: transform var(--exh-lift), border-color var(--exh-fast),
+    background var(--exh-fast), box-shadow var(--exh-fast);
+}
+/* 卡顶"封条"金线：hover 点亮（与选档卡同语言） */
+#sidebar .route-option::after {
+  content: ''; position: absolute; top: 0; left: 12%; right: 12%; height: 1px;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, #d9bb82b8, transparent);
+  opacity: 0;
+  transition: opacity var(--exh-fast);
+}
+#sidebar .route-option:hover:not(:disabled) {
+  transform: translateY(-2px);
+  border-color: rgba(217, 187, 130, .58);
+  background: linear-gradient(180deg, rgba(34, 60, 76, .95), rgba(20, 40, 54, .95));
+  box-shadow: 0 6px 14px rgba(2, 8, 14, .38), 0 0 10px rgba(217, 187, 130, .1);
+}
+#sidebar .route-option:hover:not(:disabled)::after { opacity: .8; }
+#sidebar .route-option:active:not(:disabled) {
+  transform: translateY(0) scale(.97);
+  transition: transform var(--exh-press), border-color var(--exh-press),
+    background var(--exh-press), box-shadow var(--exh-press);
+}
+/* 选中态：金边 + 左缘金条压过 tone 强调色（expedition.css 原有 hover/selected 底色同步提冷） */
+#sidebar .route-option.selected {
+  border-color: #d9bb82;
+  background: linear-gradient(180deg, rgba(43, 64, 78, .95), rgba(25, 45, 59, .95));
+  box-shadow: 0 0 12px rgba(217, 187, 130, .12);
+}
+#sidebar .route-option:disabled { opacity: .45; }
+
+/* W3c 路线卡文字层级：主名提亮 / 副注灰青 / 箭头 hover 斜移 + 暖金 */
+#sidebar .route-copy b { color: #eef4f2; letter-spacing: .04em; }
+#sidebar .route-copy small { color: #9fb4bd; }
+#sidebar .route-arrow {
+  transition: transform var(--exh-fast), color var(--exh-fast);
+}
+#sidebar .route-option:hover:not(:disabled) .route-arrow {
+  transform: translate(2px, -2px);
+  color: #ecd9ad;
+}
+
+/* ═════════ W4 左上操作键组 #topBtns（含右下定位键）：幽灵键三态 + 金线焦点 ═════════ */
+/* winter.css 09-24 留言 #6 把三键设为透明+细边(!important)，本文件更晚加载，
+   同特异性 + !important 覆盖出统一的暖金 hover（快按慢弹节奏不变 transform 走变量） */
+
+#topBtns button {
+  transition: color var(--exh-fast), border-color var(--exh-fast), background var(--exh-fast),
+    box-shadow var(--exh-fast), transform var(--exh-fast);
+}
+#topBtns #btnHome:hover,
+#topBtns #btnHelp:hover,
+#topBtns #btnMute:hover {
+  color: #f2f6f5 !important;
+  border-color: rgba(217, 187, 130, .62) !important;
+  background: rgba(12, 28, 40, .66) !important;
+  box-shadow: 0 0 10px rgba(217, 187, 130, .16) !important;
+  transform: translateY(-1px);
+}
+#topBtns button:active:not(:disabled) {
+  transform: translateY(0) scale(.94);
+  transition-duration: var(--exh-press);
+}
+/* 右下镜头定位键（expedition-map.css 底态非 important，直接覆盖） */
+#topBtns #btnLocate {
+  background: rgba(9, 22, 32, .88);
+  border-color: rgba(159, 183, 188, .3);
+  color: #c3d3d8;
+  transition: color var(--exh-fast), border-color var(--exh-fast), background var(--exh-fast),
+    box-shadow var(--exh-fast), transform var(--exh-fast);
+}
+#topBtns #btnLocate:hover {
+  color: #f2f6f5; border-color: rgba(217, 187, 130, .6);
+  background: rgba(12, 28, 40, .9);
+  box-shadow: 0 0 10px rgba(217, 187, 130, .16);
+  transform: translateY(-1px);
+}
+#topBtns #btnLocate:active { transform: scale(.92); transition-duration: var(--exh-press); }
+
+/* W4b 血量 HUD：底座并进冷青半透明家族，图标块收饱和保 HP 蓝语义 */
+#hpHud {
+  background: linear-gradient(180deg, rgba(10, 24, 35, .88), rgba(7, 18, 28, .92));
+  border-color: rgba(159, 183, 188, .28);
+  box-shadow: 0 2px 8px rgba(2, 8, 14, .3);
+}
+.hp-hud-icon, .hp-hud-label { background: linear-gradient(160deg, #567f96 0%, #40688a 60%, #2f5474 100%); }
+.hp-hud-label { letter-spacing: 2.5px; }
+#hpText { font-variant-numeric: tabular-nums; letter-spacing: .04em; }
+
+/* ═════════ W5 右上资源章 #resHud：冷青档案章 + 金色值 + 左缘金标 ═════════ */
+
+#resHud .chip-mini {
+  background: linear-gradient(180deg, rgba(9, 22, 33, .88), rgba(6, 16, 25, .92));
+  border: 1px solid rgba(159, 183, 188, .26); border-radius: 2px;
+  box-shadow: inset 0 1px 0 rgba(214, 232, 235, .06), 0 2px 8px rgba(2, 8, 14, .35);
+}
+/* 金币章：左缘 2px 暖金标（资源主章，呼应入口牌 border-left 金条语言） */
+#resHud .res-gold { box-shadow: inset 2px 0 0 rgba(217, 187, 130, .5), inset 0 1px 0 rgba(214, 232, 235, .06), 0 2px 8px rgba(2, 8, 14, .35); }
+#resHud .res-gold b { color: #ecd9ad; text-shadow: 0 0 8px rgba(217, 187, 130, .2); }
+#resHud .res-atk b { color: #ff8d7e; }
+#resHud .chip-mini b { font-variant-numeric: tabular-nums; letter-spacing: .02em; }
+
+/* ═════════ W6 环层横幅 + 章节导航：仪式感微调（展示层，零交互开销） ═════════ */
+
+/* W6a 横幅：中文名提字距 + 微金晕，下方金发丝短线收束 */
+#layerBanner .lb-zh {
+  letter-spacing: 7px;
+  text-shadow: 0 2px 14px rgba(4, 10, 17, .9), 0 0 3px rgba(217, 187, 130, .22);
+}
+#layerBanner::after {
+  content: ''; position: absolute; left: 50%; bottom: 0; width: 56px; height: 1px;
+  transform: translateX(-50%); pointer-events: none;
+  background: linear-gradient(90deg, transparent, #d9bb82a1, transparent);
+  opacity: .8;
+}
+/* W6b 章节导航：眉题金化、当前节点金线金点、已过节点青绿提亮 */
+#expeditionChapter .chapter-kicker { color: #d9bb82; opacity: .82; letter-spacing: 3px; }
+#expeditionChapter ol { border-left-color: rgba(164, 190, 196, .28); }
+#expeditionChapter li { transition: color var(--exh-fast), border-color var(--exh-fast), background var(--exh-fast); }
+#expeditionChapter li.current { border-left-color: #d9bb82; }
+#expeditionChapter li.current span { opacity: 1; color: #e8d5a8; }
+#expeditionChapter li.passed { color: #9fc4b8; }
+#expeditionChapter > small { color: #86a0a6; }
+
+/* ═════════ W7 行动记录 #logPanel：冷青档案纸 + 标题条金线反馈 ═════════ */
+
+#logPanel {
+  background: rgba(8, 15, 22, .74);
+  border-color: rgba(159, 183, 188, .15); border-radius: 2px;
+}
+#logPanel .log-toggle {
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgba(159, 183, 188, .13);
+  color: #8fa5ad; letter-spacing: .2em;
+  transition: color var(--exh-fast), border-color var(--exh-fast);
+}
+#logPanel .log-toggle:hover { color: #ecd9ad; border-bottom-color: rgba(217, 187, 130, .42); }
+
+/* ═════════ W8 全局背包浮键 #bagBtnFloat：与资源章同族 + 三态 ═════════ */
+
+#bagBtnFloat {
+  background: linear-gradient(180deg, rgba(9, 22, 33, .9), rgba(6, 16, 25, .92));
+  border-color: rgba(159, 183, 188, .3); border-radius: 2px;
+  box-shadow: 0 4px 14px rgba(2, 8, 14, .4), inset 0 1px 0 rgba(214, 232, 235, .05);
+  transition: background var(--exh-fast), border-color var(--exh-fast), color var(--exh-fast),
+    box-shadow var(--exh-fast), transform var(--exh-fast);
+}
+#bagBtnFloat:hover {
+  background: rgba(12, 28, 40, .92);
+  border-color: rgba(217, 187, 130, .6);
+  color: #f2f6f5;
+  box-shadow: 0 6px 16px rgba(2, 8, 14, .45), 0 0 10px rgba(217, 187, 130, .15);
+  transform: translateY(-2px);
+}
+#bagBtnFloat:active {
+  transform: translateY(0) scale(.95);
+  transition-duration: var(--exh-press);
+}
+#bagBtnFloat #bagCountFloat { color: #ecd9ad; font-variant-numeric: tabular-nums; }
+
+/* ═════════ T2 焦点态：键盘导航金线焦点环（对局 HUD 全部可焦元素） ═════════ */
+#sidebar .route-option:focus-visible,
+#topBtns button:focus-visible,
+#bagBtnFloat:focus-visible,
+#logPanel .log-toggle:focus-visible {
+  outline: 1px solid #d9bb82cc;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 1px #071720, 0 0 12px rgba(217, 187, 130, .35);
+}
+/* 路线卡贴边收进：金环画在卡内，避免与相邻卡重叠 */
+#sidebar .route-option:focus-visible { outline-offset: -3px; }
+
+/* ═════════ T6 光标自查：对局 HUD 可点元素均为 <button>（cursor-art 的
+   button:not(:disabled) 白名单已给出互动光标），无新增非按钮可点元素。
+   禁用路线卡保持系统默认，压掉自定义互动光标误导。 ═════════ */
+#sidebar .route-option:disabled { cursor: default; }

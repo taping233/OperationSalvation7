@@ -1,0 +1,325 @@
+/* ═══════════════════════════════════════════════════════════════════
+   基地主页美术升级（2026-09-24）——对标标题页 title-p0.css「09-24 美术升级」
+   与选档页 page-slot-select.css 的定稿语言：
+     ① 冷青统一调色（壁纸分级/暗角视线归属）② #d9bb82 暖金装饰
+     （金线/端点光点/编号）③ 信息层级仪式感（档案编号行/资源章）
+     ④ 四角密度（底部角饰线）⑤ 交互系统（hover/按压/焦点/三档节奏/入场）
+   作用域：全部规则限定基地主页——主体挂 #overlay #hubMain；面板级入场挂
+   #overlay .card.page:has(#hubMain)；右上关闭钮经 :has(#hubMain) 条件限定。
+   约束：只覆盖不删除；动画仅 transform/opacity；节奏变量定义在
+   .card.page:has(#hubMain) 上，#hubMain 与 .ov-x 同域继承。
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── T0 统一节奏变量：fast=色彩/光晕/小位移，lift=卡片抬升，press=按下快进 ── */
+#overlay .card.page:has(#hubMain) {
+  --hub-fast: .18s cubic-bezier(.33, 1, .68, 1);
+  --hub-lift: .32s cubic-bezier(.22, 1, .36, 1);
+  --hub-press: .1s ease-out;
+}
+
+/* ── T4 出入场：基地切入 = 淡入 + 8px 上浮（backwards 结束即释放 transform
+   给交互态；页签切换不重建 .card.page，不会重播） ── */
+#overlay .card.page:has(#hubMain) {
+  animation: hubPanelIn .42s cubic-bezier(.22, 1, .36, 1) backwards;
+  will-change: transform, opacity;
+}
+@keyframes hubPanelIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+/* 页签切换沿用现有 hubPageIn 关键帧，只换入更绵的落位曲线 */
+#overlay #hubMain .hub-page.page-in { animation: hubPageIn .34s cubic-bezier(.22, 1, .36, 1); }
+
+/* ═════════ W1 冷青统一调色 + 暗角视线归属 ═════════ */
+
+/* W1a 页底分级：罩层色从灰蓝拉进冷青族（存档卡同族 #0c1a24），顶部保留淡金体积光 */
+#overlay #hubMain {
+  background:
+    radial-gradient(1100px 320px at 50% -90px, rgba(217, 187, 130, .13), transparent 70%),
+    linear-gradient(180deg, rgba(7, 18, 26, .58), rgba(5, 13, 20, .78)),
+    url('../assets/scenes/hub-wallpaper.webp') center/cover no-repeat fixed;
+}
+
+/* W1b 四角暗角：视线收向中部内容区（fixed 内容滚动时暗角不动） */
+#hubMain::after {
+  content: ''; position: absolute; inset: 0; z-index: 3; pointer-events: none;
+  background:
+    radial-gradient(130% 100% at 46% 40%, transparent 54%, rgba(3, 10, 16, .34) 88%, rgba(2, 8, 13, .52) 100%),
+    linear-gradient(0deg, rgba(4, 11, 17, .4), transparent 16%);
+}
+
+/* W1c 底部两角金饰线（对标选档页 W2e：上角有返回/?/关闭坐镇，只补下方空角） */
+#hubMain::before {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 27px;
+  z-index: 3; pointer-events: none; opacity: .55;
+  animation: hubGemBreath 6s ease-in-out infinite alternate;
+  filter: drop-shadow(0 0 4px #d9bb8238);
+  background:
+    radial-gradient(2.6px 2.6px at 23px calc(100% - 9px), #ffe9b6 40%, transparent 75%),
+    linear-gradient(90deg, #d9bb82b3, transparent) 23px calc(100% - 9px) / 54px 1px no-repeat,
+    linear-gradient(0deg, #d9bb82b3, transparent) 23px calc(100% - 27px) / 1px 18px no-repeat,
+    radial-gradient(2.6px 2.6px at calc(100% - 23px) calc(100% - 9px), #ffe9b6 40%, transparent 75%),
+    linear-gradient(270deg, #d9bb82b3, transparent) calc(100% - 77px) calc(100% - 9px) / 54px 1px no-repeat,
+    linear-gradient(0deg, #d9bb82b3, transparent) calc(100% - 23px) calc(100% - 27px) / 1px 18px no-repeat;
+}
+@keyframes hubGemBreath { from { opacity: .4; } to { opacity: .75; } }
+
+/* ═════════ W2 页头：档案仪式感（金发丝线 + 端点光点 + 竖金标） ═════════ */
+
+#overlay #hubMain .hub-head {
+  position: relative; padding: 12px 16px;
+  border: 1px solid rgba(217, 187, 130, .24); border-radius: 2px;
+  background: linear-gradient(180deg, rgba(8, 20, 29, .78), rgba(6, 15, 23, .62));
+}
+/* W2a 页头下缘金发丝线（两端渐隐，中心提亮） */
+#overlay #hubMain .hub-head::after {
+  content: ''; position: absolute; left: 10px; right: 10px; bottom: -1px; height: 1px;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, #d9bb82a1 18%, #d9bb82c4 50%, #d9bb82a1 82%, transparent);
+  box-shadow: 0 0 6px #d9bb8233;
+}
+/* W2a-2 右端光点呼吸（金线的"封蜡"） */
+#overlay #hubMain .hub-head::before {
+  content: ''; position: absolute; right: 8px; bottom: -3px; width: 5px; height: 5px;
+  border-radius: 50%; pointer-events: none;
+  background: #ffe9b6;
+  box-shadow: 0 0 10px #d9bb82d9, 0 0 22px #d9bb8255;
+  animation: hubGemBreath 5s ease-in-out infinite alternate;
+}
+
+/* W2b 页名：竖金标 + 提亮 + 微金晕（层级：页名 > 档位 > 资源） */
+#overlay #hubMain .hub-head h2 {
+  position: relative; padding-left: 14px; margin: 0;
+  font-size: clamp(17px, 1.7vw, 22px); letter-spacing: 7px; color: #f2f6f5;
+  text-shadow: 0 0 16px rgba(8, 22, 32, .8), 0 0 3px rgba(217, 187, 130, .28);
+}
+#overlay #hubMain .hub-head h2::before {
+  content: ''; position: absolute; left: 0; top: 50%; width: 2px; height: 16px;
+  transform: translateY(-50%);
+  background: linear-gradient(180deg, transparent, #d9bb82cc, transparent);
+  box-shadow: 1px 0 6px #d9bb8240;
+}
+/* W2b-2 档位编号行：前置金短线（对标标题页档案编号的仪式语言） */
+#overlay #hubMain .hub-slot-label {
+  display: inline-flex; align-items: center; gap: 8px;
+  color: #c9d4d8; letter-spacing: .18em;
+}
+#overlay #hubMain .hub-slot-label::before {
+  content: ''; display: block; width: 18px; height: 1px;
+  background: linear-gradient(90deg, transparent, #d9bb82a8);
+  box-shadow: 0 0 4px #d9bb8255;
+}
+
+/* W2c 资源章：银灰 pill → 冷青档案章，标签灰青小字 + 数值提亮微金晕 */
+#overlay #hubMain .hub-res { gap: 10px; }
+#overlay #hubMain .res-chip {
+  padding: 5px 12px; border: 1px solid rgba(159, 183, 188, .24); border-radius: 1px;
+  background: rgba(7, 18, 26, .6); color: #93a9ad; font-size: 11.5px; letter-spacing: 1px;
+}
+#overlay #hubMain .res-chip .ic { filter: brightness(1.06); }
+#overlay #hubMain .res-chip b {
+  margin-left: 2px; color: #f2f6f5; font-size: 13px; letter-spacing: 0;
+  text-shadow: 0 0 8px rgba(217, 187, 130, .2);
+}
+
+/* W2d 返回 / 帮助键：幽灵方钮 → hover 金边提亮上浮 */
+#overlay #hubMain .hub-back {
+  padding: 7px 16px; border: 1px solid rgba(159, 183, 188, .3); border-radius: 1px;
+  background: rgba(7, 18, 26, .5); color: #b7cbd0; letter-spacing: 2px;
+  transition: color var(--hub-fast), border-color var(--hub-fast), background var(--hub-fast),
+    box-shadow var(--hub-fast), transform var(--hub-fast);
+}
+#overlay #hubMain .hub-back:hover {
+  color: #f2f6f5; border-color: rgba(217, 187, 130, .55); background: rgba(10, 24, 34, .72);
+  box-shadow: 0 0 10px rgba(217, 187, 130, .15); transform: translateY(-1px);
+}
+#overlay #hubMain .hub-back:active { transform: translateY(0) scale(.96); transition-duration: .08s; }
+#overlay #hubMain .help-btn {
+  color: #9fb3ba; border-color: rgba(159, 183, 188, .3); background: rgba(7, 18, 26, .5);
+  transition: color var(--hub-fast), border-color var(--hub-fast), box-shadow var(--hub-fast), transform var(--hub-fast);
+}
+#overlay #hubMain .help-btn:hover {
+  color: #f0dcb0; border-color: rgba(217, 187, 130, .55);
+  box-shadow: 0 0 10px rgba(217, 187, 130, .16); transform: translateY(-1px);
+}
+#overlay #hubMain .help-btn:active { transform: scale(.9); transition-duration: .08s; }
+
+/* W2e 右上关闭钮：与页头同一冷青幽灵语言（:has 限定基地页才生效） */
+#overlay .card.page:has(#hubMain) .ov-x {
+  color: #b7cbd0; border-color: rgba(159, 183, 188, .35); background: rgba(7, 18, 26, .55);
+  transition: color var(--hub-fast), border-color var(--hub-fast), background var(--hub-fast),
+    box-shadow var(--hub-fast), transform var(--hub-fast);
+}
+#overlay .card.page:has(#hubMain) .ov-x:hover {
+  color: #f2f6f5; border-color: rgba(217, 187, 130, .55); background: rgba(10, 24, 34, .75);
+  box-shadow: 0 0 10px rgba(217, 187, 130, .15);
+}
+
+/* ═════════ W3 左侧页签栏：金线轨道 + 端点光点 ═════════ */
+
+#overlay #hubMain .hub-tabs { border-right-color: rgba(159, 183, 188, .12); }
+#overlay #hubMain .hub-tab {
+  gap: 11px; color: #8fa3ab;
+  transition: color var(--hub-fast), background var(--hub-fast), border-color var(--hub-fast),
+    box-shadow var(--hub-fast), transform var(--hub-fast), filter var(--hub-fast);
+}
+#overlay #hubMain .hub-tab .tab-ico .ic { transition: filter var(--hub-fast), transform var(--hub-fast); }
+#overlay #hubMain .hub-tab:hover {
+  color: #e2ecee; background: rgba(159, 197, 205, .06); transform: translateX(2px);
+}
+#overlay #hubMain .hub-tab:hover .tab-ico .ic {
+  filter: brightness(1.25) drop-shadow(0 0 5px rgba(217, 187, 130, .3));
+}
+#overlay #hubMain .hub-tab:active { transform: translateX(2px) scale(.97); transition-duration: .08s; }
+/* 激活态：金线轨道 + 暖金微光 + 左缘端点光点呼吸 */
+#overlay #hubMain .hub-tab.on {
+  color: #f0e7d0; border-left-color: #d9bb82;
+  background: linear-gradient(90deg, rgba(217, 187, 130, .14), rgba(217, 187, 130, .035) 62%, transparent);
+  text-shadow: 0 0 10px rgba(217, 187, 130, .22);
+}
+#overlay #hubMain .hub-tab.on::after {
+  content: ''; position: absolute; left: -3.5px; top: 50%; width: 5px; height: 5px;
+  margin-top: -2.5px; border-radius: 50%;
+  background: #ffe9b6; box-shadow: 0 0 8px 1px rgba(217, 187, 130, .7);
+  animation: hubGemBreath 5s ease-in-out infinite alternate;
+}
+
+/* ═════════ W4 出发页（落地主视图） ═════════ */
+
+/* W4a 简报卡：边框收进金族，眉题/主标题按档案语言提级 */
+#overlay #hubMain .deploy-mission { border-color: rgba(217, 187, 130, .26); }
+#overlay #hubMain .deploy-mission-copy .eyebrow,
+#overlay #hubMain .deploy-readiness-panel .eyebrow { color: #d9bb82; letter-spacing: 3px; }
+#overlay #hubMain .deploy-mission-copy h3 {
+  letter-spacing: 3px;
+  text-shadow: 0 2px 18px rgba(3, 10, 16, .75), 0 0 4px rgba(217, 187, 130, .22);
+}
+#overlay #hubMain .deploy-mission-target {
+  border-left-color: #d9bb82; background: rgba(5, 13, 20, .66);
+}
+#overlay #hubMain .deploy-mission-target span { color: #93a9ad; }
+#overlay #hubMain .deploy-mission-target b { color: #efe0b6; }
+
+/* W4b 主 CTA（出发整备 / 研究所）：金渐变收口到 #d9bb82 族 + 三态反馈 */
+#overlay #hubMain .deploy-primary {
+  border-color: #d9bb82;
+  background: linear-gradient(135deg, #ddc089, #ab8a4e);
+  box-shadow: inset 0 1px 0 rgba(255, 240, 205, .4), 0 8px 22px rgba(0, 0, 0, .3);
+  transition: filter var(--hub-fast), transform var(--hub-fast), box-shadow var(--hub-fast),
+    border-color var(--hub-fast);
+}
+#overlay #hubMain .deploy-primary:hover {
+  filter: brightness(1.1); transform: translateY(-1px);
+  box-shadow: inset 0 1px 0 rgba(255, 240, 205, .5), 0 10px 26px rgba(0, 0, 0, .34),
+    0 0 18px rgba(217, 187, 130, .3);
+}
+#overlay #hubMain .deploy-primary:active {
+  transform: translateY(1px) scale(.97); filter: brightness(1.16);
+  transition-duration: .08s;
+}
+/* 未解锁研究所保持暗蓝底（沿用 09-20 双态设计，只 retint 到新金族的弱化线） */
+#overlay #hubMain .deploy-primary.nest-locked {
+  border-color: rgba(217, 187, 130, .35); color: #cfe0e4;
+  background: linear-gradient(135deg, rgba(36, 58, 74, .92), rgba(14, 30, 42, .94));
+  box-shadow: none;
+}
+#overlay #hubMain .deploy-primary.nest-locked:hover {
+  filter: none; border-color: rgba(217, 187, 130, .6);
+  box-shadow: 0 0 14px rgba(217, 187, 130, .12);
+}
+
+/* W4c 行动模式卡：hover 抬升 + 激活态金线（#dfc28d → #d9bb82 同族 retint） */
+#overlay #hubMain .mode-card {
+  transition: border-color var(--hub-lift), background var(--hub-lift),
+    box-shadow var(--hub-lift), transform var(--hub-lift);
+}
+#overlay #hubMain .mode-card:hover {
+  border-color: rgba(217, 187, 130, .55); transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(2, 8, 14, .45);
+}
+#overlay #hubMain .mode-card:active { transform: translateY(0) scale(.985); transition-duration: .08s; }
+#overlay #hubMain .mode-card.on {
+  border-color: #d9bb82;
+  box-shadow: inset 3px 0 #d9bb82, 0 0 14px rgba(217, 187, 130, .12);
+}
+
+/* W4d 右栏准备面板：编号短金线化 + 状态章 retint 冷青绿 */
+#overlay #hubMain .deploy-readiness-panel { border-color: rgba(159, 183, 188, .24); }
+#overlay #hubMain .readiness-head > b { letter-spacing: 2px; }
+#overlay #hubMain .readiness-item i { color: #d9bb82; }
+#overlay #hubMain .brief-mode b { color: #efe0b6; }
+#overlay #hubMain .brief-status {
+  border-color: rgba(143, 196, 178, .42); color: #bfe0cd;
+}
+
+/* W4e 宝藏大门条：可点（此前无 pointer），hover 金线上浮，集齐态金框 */
+#overlay #hubMain .gate-strip {
+  cursor: pointer; border-color: rgba(159, 183, 188, .22);
+  transition: border-color var(--hub-lift), box-shadow var(--hub-lift),
+    transform var(--hub-lift), background var(--hub-lift);
+}
+#overlay #hubMain .gate-strip:hover {
+  border-color: rgba(217, 187, 130, .5); transform: translateY(-2px);
+  box-shadow: 0 12px 26px rgba(2, 8, 14, .4), 0 0 14px rgba(217, 187, 130, .1);
+}
+#overlay #hubMain .gate-strip:active { transform: translateY(0) scale(.99); transition-duration: .08s; }
+#overlay #hubMain .gate-strip.gate-ready { border-color: rgba(217, 187, 130, .55); }
+#overlay #hubMain .gate-txt b { color: #efe0b6; }
+
+/* ═════════ W5 其余页签共用组件（仓库/商店/升级/人物/成就） ═════════ */
+
+/* W5a 各类按钮统一节奏（ov-btn / mini-btn / step-btn / 价签） */
+#overlay #hubMain .ov-btn,
+#overlay #hubMain .mini-btn,
+#overlay #hubMain .step-btn {
+  transition: color var(--hub-fast), background var(--hub-fast), border-color var(--hub-fast),
+    box-shadow var(--hub-fast), transform var(--hub-fast), filter var(--hub-fast);
+}
+#overlay #hubMain .ov-btn:hover:not(:disabled),
+#overlay #hubMain .mini-btn:hover:not(:disabled) { transform: translateY(-1px); }
+#overlay #hubMain .ov-btn:active:not(:disabled),
+#overlay #hubMain .mini-btn:active:not(:disabled),
+#overlay #hubMain .step-btn:active:not(:disabled) {
+  transform: translateY(1px) scale(.96); transition-duration: .08s;
+}
+
+/* W5b 仓库卡格 / 材料格：节奏统一到 lift 族 + 按压回弹 */
+#overlay #hubMain .stash-cell,
+#overlay #hubMain .material-cell {
+  transition: transform var(--hub-lift), border-color var(--hub-lift),
+    box-shadow var(--hub-lift), filter var(--hub-lift);
+}
+#overlay #hubMain .stash-cell:active,
+#overlay #hubMain .material-cell:active { transform: translateY(0) scale(.97); transition-duration: .08s; }
+
+/* W5c 收藏室：页签 / 卡背卡 / 已收藏格 hover 节奏化 + 按压 */
+#overlay #hubMain .collection-tabs button {
+  transition: color var(--hub-fast), border-color var(--hub-fast),
+    background var(--hub-fast), box-shadow var(--hub-fast), transform var(--hub-fast);
+}
+#overlay #hubMain .collection-tabs button:hover { transform: translateY(-1px); }
+#overlay #hubMain .collection-tabs button:active { transform: scale(.97); transition-duration: .08s; }
+#overlay #hubMain .back-card {
+  transition: border-color var(--hub-lift), transform var(--hub-lift),
+    box-shadow var(--hub-lift), background var(--hub-lift);
+}
+#overlay #hubMain .back-card:active:not(.locked) { transform: translateY(0) scale(.98); transition-duration: .08s; }
+#overlay #hubMain .coll-slot.on {
+  transition: transform var(--hub-lift), border-color var(--hub-lift), box-shadow var(--hub-lift);
+}
+#overlay #hubMain .coll-slot.on:active { transform: translateY(0) scale(.97); transition-duration: .08s; }
+
+/* ═════════ T2 焦点态：键盘导航金线焦点环（替代全局裸 outline） ═════════ */
+#overlay #hubMain :is(button, select, input, [role="button"]):focus-visible {
+  outline: 1px solid #d9bb82cc;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 1px #071720, 0 0 12px rgba(217, 187, 130, .35);
+}
+#overlay .card.page:has(#hubMain) .ov-x:focus-visible {
+  outline: 1px solid #d9bb82cc;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 1px #071720, 0 0 12px rgba(217, 187, 130, .35);
+}
+
+/* ═════════ T6 光标自查：button 默认 cursor 补 pointer（禁用态除外） ═════════ */
+#overlay #hubMain button:not(:disabled) { cursor: pointer; }

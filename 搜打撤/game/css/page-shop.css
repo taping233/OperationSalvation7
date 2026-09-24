@@ -1,0 +1,213 @@
+/* ═══════════════════════════════════════════════════════════════════
+   基地·商店页签美术升级（2026-09-24）——对标 page-slot-select.css /
+   page-hub.css / page-deploy.css 定稿语言：
+     ① 冷青统一调色（双卡分级/视线归属）② #d9bb82 暖金装饰
+     （封条顶线/金短线/端点光点/编号短线）③ 信息排版仪式感
+     （资产条/发丝分隔线/表格数字）④ 交互三档节奏 + 按压快按慢弹 +
+     金线焦点环 + 页签切入错峰入场 ⑤ 光标自查
+   作用域：全部规则限定商店页签内容区 #overlay #hubMain.hub-shop——
+     页头/页签栏/资源章归 page-hub.css，本文件不碰。
+   约束：只覆盖不删除；.shop-price-tag 被仓库页签收购行复用（expedition-hub.css
+     pk-row.stash-row），所有规则都挂 .hub-shop 前缀防外溢；价签金底挂
+     :not(:disabled)，不压 expedition-inventory.css 的买不起置灰语义；
+     卡牌本体（hs-card / card-v3 域）不动，只做包裹层反馈；
+     新增动画仅 transform/opacity；reduced-motion 由 winter.css 全局兜底。
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── T0 统一节奏变量：fast=色彩/光晕/小位移，lift=抬升弹性回位（过冲曲线，
+   快按慢弹的"慢弹"），press=按下快进 ── */
+#overlay #hubMain.hub-shop {
+  --shop-fast: .18s cubic-bezier(.33, 1, .68, 1);
+  --shop-lift: .32s cubic-bezier(.3, 1.4, .45, 1);
+  --shop-press: .09s ease-out;
+}
+
+/* ═════════ W1 双卡面板：货架卡=金边主卡，说明卡=冷青副卡（同 deploy W3 主次语言） ═════════ */
+
+#overlay #hubMain.hub-shop .hub-two > .hub-card {
+  position: relative;
+  border-color: rgba(182, 211, 214, .2);
+  background: linear-gradient(180deg, rgba(14, 36, 50, .93), rgba(10, 27, 39, .95));
+  box-shadow: 0 14px 34px rgba(2, 8, 14, .35), inset 0 1px 0 rgba(214, 232, 235, .05);
+}
+#overlay #hubMain.hub-shop .hub-two > .hub-card:first-child {
+  border-color: rgba(217, 187, 130, .3);
+  box-shadow: 0 14px 34px rgba(2, 8, 14, .38), 0 0 16px rgba(217, 187, 130, .06),
+    inset 0 1px 0 rgba(255, 238, 200, .06);
+}
+#overlay #hubMain.hub-shop .hub-two > .hub-card:last-child {
+  background: linear-gradient(180deg, rgba(11, 28, 40, .92), rgba(8, 21, 32, .95));
+}
+/* W1a 卡顶"封条"金线：货架卡常亮、说明卡极淡（选档页 W2d / deploy W3 语言） */
+#overlay #hubMain.hub-shop .hub-two > .hub-card::before {
+  content: ''; position: absolute; top: 0; left: 12%; right: 12%; height: 1px; z-index: 3;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, #d9bb82b8, transparent);
+  opacity: .16;
+}
+#overlay #hubMain.hub-shop .hub-two > .hub-card:first-child::before { opacity: .5; }
+
+/* W1b 卡标题：金短线引导 + 左端光点呼吸（仪式感） */
+#overlay #hubMain.hub-shop .hub-card > h3 { position: relative; color: #eef4f4; }
+#overlay #hubMain.hub-shop .hub-card > h3::before {
+  content: ''; display: inline-block; width: 14px; height: 1px; margin-right: 9px;
+  vertical-align: .34em;
+  background: linear-gradient(90deg, transparent, #d9bb82b3);
+  box-shadow: 0 0 5px #d9bb8255;
+}
+#overlay #hubMain.hub-shop .hub-card > h3::after {
+  content: ''; position: absolute; left: 0; bottom: -2px; width: 3px; height: 3px;
+  border-radius: 50%; pointer-events: none;
+  background: #ffe9b6; box-shadow: 0 0 6px #d9bb8299;
+  animation: shopGemBreath 5s ease-in-out infinite alternate;
+}
+@keyframes shopGemBreath { from { opacity: .5; } to { opacity: 1; } }
+#overlay #hubMain.hub-shop .hub-card > h3 .ic {
+  filter: brightness(1.1) drop-shadow(0 0 4px rgba(217, 187, 130, .3));
+}
+
+/* W1c 资产条（储备币/仓库空格）：左缘金标的冷青档案条 + 表格数字暖米金 */
+#overlay #hubMain.hub-shop .base-line {
+  margin: 2px 0 12px; padding: 5px 12px;
+  border: 1px solid rgba(159, 183, 188, .18); border-left: 2px solid rgba(217, 187, 130, .65);
+  border-radius: 1px; background: rgba(5, 13, 20, .66);
+  color: #93a9ad; letter-spacing: .08em;
+}
+#overlay #hubMain.hub-shop .base-line b {
+  color: #efe0b6; font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 8px rgba(217, 187, 130, .22);
+}
+
+/* ═════════ W2 货架条目：封条顶线 + hover 抬升金线 + 编号仪式 + 发丝分隔 ═════════ */
+
+#overlay #hubMain.hub-shop .shop-shelf { counter-reset: goods; }
+#overlay #hubMain.hub-shop .shelf-item {
+  counter-increment: goods; position: relative;
+  border-color: rgba(159, 183, 188, .2);
+  background: linear-gradient(180deg, rgba(13, 33, 46, .9), rgba(9, 24, 35, .92));
+  box-shadow: inset 0 1px 0 rgba(214, 232, 235, .04);
+  transition: transform var(--shop-lift), border-color var(--shop-lift),
+    box-shadow var(--shop-lift), filter var(--shop-lift);
+}
+/* W2a 封条顶线：默认极淡，hover 点亮 */
+#overlay #hubMain.hub-shop .shelf-item::before {
+  content: ''; position: absolute; top: 0; left: 10%; right: 10%; height: 1px; z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, #d9bb82cc, transparent);
+  opacity: .12;
+  transition: opacity var(--shop-fast);
+}
+#overlay #hubMain.hub-shop .shelf-item::after {
+  content: '0' counter(goods);
+  position: absolute; top: 7px; right: 11px; z-index: 2; pointer-events: none;
+  padding-left: 16px; font-size: 9px; line-height: 1; letter-spacing: .22em;
+  color: rgba(217, 187, 130, .55);
+  background: linear-gradient(90deg, transparent, rgba(217, 187, 130, .4)) left center / 12px 1px no-repeat;
+  transition: color var(--shop-fast);
+}
+#overlay #hubMain.hub-shop .shelf-item:hover {
+  border-color: rgba(217, 187, 130, .55);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(2, 8, 14, .45), 0 0 14px rgba(217, 187, 130, .1);
+}
+#overlay #hubMain.hub-shop .shelf-item:hover::before { opacity: .7; }
+#overlay #hubMain.hub-shop .shelf-item:hover::after { color: rgba(239, 224, 182, .9); }
+/* W2b 快按慢弹：按下 .09s 缩放，松手沿 lift 过冲曲线回位 */
+#overlay #hubMain.hub-shop .shelf-item:active {
+  transform: translateY(0) scale(.985);
+  transition: transform var(--shop-press), border-color var(--shop-press), box-shadow var(--shop-press);
+}
+/* W2c 买不起（poor）：语义静默——不抬升不点亮不编号提亮，保留"储备币不足"红字 */
+#overlay #hubMain.hub-shop .shelf-item.poor:hover {
+  transform: none; border-color: rgba(182, 211, 214, .16);
+  box-shadow: inset 0 1px 0 rgba(214, 232, 235, .04);
+}
+#overlay #hubMain.hub-shop .shelf-item.poor:hover::before { opacity: .12; }
+#overlay #hubMain.hub-shop .shelf-item.poor:hover::after { color: rgba(217, 187, 130, .55); }
+
+/* W2d 条目内质感：卡面窗口压暗提边，图标 hover 金晕，名称提亮微金晕 */
+#overlay #hubMain.hub-shop .shelf-item .shelf-visual {
+  border: 1px solid rgba(159, 183, 188, .16);
+  background: #0a1f2c;
+  box-shadow: inset 0 0 12px rgba(2, 8, 14, .55);
+  transition: border-color var(--shop-fast), box-shadow var(--shop-fast);
+}
+#overlay #hubMain.hub-shop .shelf-item:hover .shelf-visual { border-color: rgba(217, 187, 130, .35); }
+#overlay #hubMain.hub-shop .shelf-item .shelf-ico .ic { transition: filter var(--shop-fast); }
+#overlay #hubMain.hub-shop .shelf-item:hover .shelf-ico .ic {
+  filter: brightness(1.12) drop-shadow(0 0 6px rgba(217, 187, 130, .28));
+}
+#overlay #hubMain.hub-shop .shelf-item .shelf-info b {
+  color: #f2f6f5; letter-spacing: 2px;
+  text-shadow: 0 0 10px rgba(217, 187, 130, .12), 0 2px 6px rgba(2, 8, 12, .5);
+}
+/* 名称/说明发丝分隔线（信息层级仪式感） */
+#overlay #hubMain.hub-shop .shelf-item .shelf-info .dim {
+  color: #8da2a8; letter-spacing: .04em;
+  padding-top: 5px; border-top: 1px solid rgba(159, 183, 188, .12);
+}
+
+/* ═════════ W3 价签：暖金主键收口（金渐变 + hover 提亮上浮 + 按压快慢弹） ═════════
+   基底挂 :not(:disabled)——买不起置灰（1id+5cls 的 :disabled 规则）保持原语义；
+   全部规则限定 .hub-shop，不外溢仓库页签的收购行价签 */
+#overlay #hubMain.hub-shop .shelf-item .shop-price-tag:not(:disabled) {
+  min-width: 64px; padding: 7px 14px;
+  border-color: #e3c891;
+  background: linear-gradient(165deg, #ecd8a8, #d9bb82 52%, #c2a267);
+  color: #152633; letter-spacing: 1px;
+  box-shadow: inset 0 1px 0 rgba(255, 242, 207, .5), 0 3px 10px rgba(2, 8, 14, .3);
+  transition: filter var(--shop-fast), box-shadow var(--shop-fast),
+    transform var(--shop-fast), border-color var(--shop-fast);
+}
+#overlay #hubMain.hub-shop .shelf-item .shop-price-tag:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+  box-shadow: inset 0 1px 0 rgba(255, 248, 224, .55), 0 5px 14px rgba(2, 8, 14, .34),
+    0 0 14px rgba(217, 187, 130, .3);
+}
+#overlay #hubMain.hub-shop .shelf-item .shop-price-tag:active:not(:disabled) {
+  transform: translateY(1px) scale(.94);
+  filter: brightness(1.14);
+  transition: transform var(--shop-press), filter var(--shop-press), box-shadow var(--shop-press);
+}
+
+/* ═════════ W4 说明卡：注记降为冷青灰 + 发丝线分隔，重点词暖米金 ═════════ */
+#overlay #hubMain.hub-shop .hub-two > .hub-card:last-child .ov-note { color: #9fb4ba; }
+#overlay #hubMain.hub-shop .hub-two > .hub-card:last-child .ov-note + .ov-note {
+  margin-top: 9px; padding-top: 9px;
+  border-top: 1px solid rgba(159, 183, 188, .12);
+}
+#overlay #hubMain.hub-shop .ov-note b { color: #ecdfc0; }
+
+/* ═════════ T2 焦点态：键盘导航金线焦点环（与 page-hub.css T2 同语言，
+   双保险写死在商店作用域内） ═════════ */
+#overlay #hubMain.hub-shop :is(button, [role="button"]):focus-visible {
+  outline: 1px solid #d9bb82cc;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 1px #071720, 0 0 12px rgba(217, 187, 130, .35);
+}
+
+/* ═════════ T4 页签切入入场编排：仅 .page-in 首帧播放（页内购买重绘不重播，
+   backwards 结束即释放 transform 给交互态）——双卡落位 → 货架错峰上浮 ═════════ */
+#overlay #hubMain.hub-shop .hub-page.page-in .hub-two > .hub-card {
+  animation: shopCardIn .5s cubic-bezier(.22, 1, .36, 1) backwards;
+}
+#overlay #hubMain.hub-shop .hub-page.page-in .hub-two > .hub-card:last-child { animation-delay: .08s; }
+@keyframes shopCardIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+#overlay #hubMain.hub-shop .hub-page.page-in .shelf-item {
+  animation: shopItemIn .45s cubic-bezier(.22, 1, .36, 1) backwards;
+}
+#overlay #hubMain.hub-shop .hub-page.page-in .shelf-item:nth-child(1) { animation-delay: .12s; }
+#overlay #hubMain.hub-shop .hub-page.page-in .shelf-item:nth-child(2) { animation-delay: .18s; }
+#overlay #hubMain.hub-shop .hub-page.page-in .shelf-item:nth-child(3) { animation-delay: .24s; }
+#overlay #hubMain.hub-shop .hub-page.page-in .shelf-item:nth-child(4) { animation-delay: .3s; }
+@keyframes shopItemIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ═════════ T6 光标自查：button 默认 cursor 补 pointer（禁用态除外） ═════════ */
+#overlay #hubMain.hub-shop button:not(:disabled) { cursor: pointer; }
