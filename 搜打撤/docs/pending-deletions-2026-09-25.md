@@ -27,12 +27,14 @@
 - `D:\素材\_wt-head-check\`（含 node_modules 目录联接）
 - `D:\素材\代号柒\.git` 内对应 worktree 注册记录（`git worktree remove` + `git worktree prune`）
 
-## 6. 资产孤儿（09-24 体检口径 ~100 文件 ≈8MB；原始报告已随 .tmp 丢失）
-- **待专项复核后补全路径清单**：需重新做全仓引用分析（art.js 构造点 + assetUrl + CSS url() + index.html 交叉核对），已排入持续任务的后续波次（只读分析，产出清单后另批）。
-- 已知可并案：manifest drift 中 `scenes/lab-ending/ending-1.zip` 类中间产物、source duplicates 2 组（`cards/items/cmtmvq6ss84l.webp`≡`tt-token-color.webp` 0.26MB、`cards/expedition-starters/rations.webp`≡`cards/resources/ration.webp` 0.08MB）。
+## 6. 资产孤儿（09-25 专项盘点已补全，详见 docs/orphan-audit-2026-09-25.md）
+- **高置信删除候选 81 文件 / 2.67MB，分 7 组**：cursor-art 三件套连带 9 文件、白名单死图 5 张+thumbs 5 张（并案第 2 类）、字节别名副本 2 文件、被替代旧场景图 14 文件、杂项 9 文件（sign.webp 有测试负断言锚定）、game-icons 素材库 31 svg、home-prototype 旧原型 6 svg——逐文件路径见 orphan-audit 报告 §资产孤儿。
+- **中置信 26 文件 / 3.53MB 待老板拍板**：tt-peach 2 张（卡现役但 itemArt 漏登记，删图或补映射二选一）、resources-redraw-preview 24 张对比底稿。
+- art-source 36 张创作源归档零引用但**不入候选**（创作档案）；sfx/frames/卡面/图标经动态构造规则穷举全活，零误杀。
 
-## 7. CSS 孤儿（09-24 体检口径：cursor-art 三件套 + ~190 规则块）
-- **待专项复核后补全清单**：需按 index.html 现场引用清单重扫（口径见记忆 soudache-css-orphan-files），已排入持续任务后续波次。
+## 7. CSS 孤儿（09-25 专项盘点已补全，详见 docs/orphan-audit-2026-09-25.md）
+- 文件级：`game/css/cursor-art.css` 唯一（零 link、零 JS import、index.html 无挂载点）。
+- 规则块级：87 块全类名零生成点（去重 ≈82），分组在报告 §4.2；**行号会随在途改动漂移，执行删除必须按选择器类名重扫**。
 
 ## 8. 观望项（不删，仅记录）
 - `tools/__pycache__/nai_gen.cpython-38.pyc`：建议改 .gitignore 停跟踪（首次提交需 `git rm --cached`，属删除类操作，待批）。
