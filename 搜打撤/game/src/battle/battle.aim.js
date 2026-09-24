@@ -10,7 +10,27 @@ import { commands, getSnapshot, effCostOf, findCard, infuseOf, targetSide, unpla
   const resolveSlam = commands.resolveSlam;
   const useItemCmd = commands.useItem;
   const cancelPendingTarget = commands.cancelPendingTarget;
-import { showFoePreview, clearFoePreview } from './battle.hover.js';
+  function flashCardPickup(el) {
+    if (!el) return;
+    el.classList.remove('card-pickup-flash');
+    void el.offsetWidth;
+    el.classList.add('card-pickup-flash');
+  }
+  function cardPlayBlockedReason(uid, card, snapshot) {
+    const why = unplayableReason(card);
+    if (why) return `无法打出：${why}`;
+    const cost = effCostOf(card, uid);
+    return cost > snapshot.energy ? `能量不足：需要 ${cost} 点能量，当前 ${snapshot.energy}` : '';
+  }
+  function showCardBlockReason(uid) {
+    const snapshot = getSnapshot();
+    const entry = findCard(uid);
+    if (!snapshot || !entry) return false;
+    const reason = cardPlayBlockedReason(uid, entry.card, snapshot);
+    if (reason) showThoughtBubble(reason);
+    return !!reason;
+  }
+import { showFoePreview, clearFoePreview, showThoughtBubble, clearThoughtBubble } from './battle.hover.js';
   // ---------- 指向施法（STS2 NMouseCardPlay 状态机同款） ----------
   // 拖拽=卡跟手；上拖过「出牌线」（视口75%，按抓取点校正）后：
   //   指向卡 → CenterCard 停靠视口底部中央缩 0.75，箭头自卡指向指针（松手有目标=打出，
@@ -141,16 +161,35 @@ import { showFoePreview, clearFoePreview } from './battle.hover.js';
     syncClickTargetPreviews();
     return true;
   }
+  function setTargetable(el, enabled, label) {
+    if (!el) return;
+    el.classList.toggle('can-target', enabled);
+    if (enabled) {
+      el.setAttribute('role', 'button');
+      el.tabIndex = 0;
+      el.setAttribute('aria-label', label);
+    } else {
+      el.removeAttribute('role');
+      el.removeAttribute('tabindex');
+      el.removeAttribute('aria-label');
+    }
+  }
   function syncClickTargetPreviews() {
     const snapshot = getSnapshot();
     const entry = clickSelectedUid == null ? null : findCard(clickSelectedUid);
+    const selectedSide = entry && targetSide(entry.card);
+    const pendingEntry = snapshot.pendingTarget && findCard(snapshot.pendingTarget.uid);
+    const pendingSide = pendingEntry && targetSide(pendingEntry.card);
+    setTargetable(document.getElementById('btSelf'), selectedSide === 'self' || pendingSide === 'self', '自己，按 Enter 确认目标');
     document.querySelectorAll('.bt-foe[data-eidx]').forEach(el => {
       clearFoePreview(el);
       const idx = +el.dataset.eidx;
-      if (entry && targetSide(entry.card) === 'enemy' && snapshot.foes[idx] && !snapshot.foes[idx].dead) {
+      const foe = snapshot.foes[idx];
+      const targetable = !!(foe && !foe.dead && (selectedSide === 'enemy' || pendingSide === 'enemy' || snapshot.pendingItem || snapshot.slamPending || snapshot.dartPending));
+      setTargetable(el, targetable, `${foe?.name || '敌人'}，按 Enter 确认目标`);
+      if (targetable && selectedSide === 'enemy' && el.matches(':hover, :focus')) {
         showFoePreview(el, idx, clickSelectedUid, entry.card, 'click');
       }
-      el.classList.toggle('can-target', !!(entry && targetSide(entry.card) === 'enemy' && snapshot.foes[idx] && !snapshot.foes[idx].dead));
     });
   }
   function updateClickSelectionUI() {
@@ -160,15 +199,14 @@ import { showFoePreview, clearFoePreview } from './battle.hover.js';
     if (!entry) { cap.textContent = cap.dataset.battleDetail || ''; return; }
     // U8：选中提示条带目标图标（敌人=红剑 / 自己=绿心），与单位区高亮框同色系
     const target = targetSide(entry.card) === 'self' ? '[[icon:heart]] 自己（绿框立绘）' : '[[icon:swords]] 敌人（红框）';
-    cap.innerHTML = SDT.Icons.rich(`已选【${esc(entry.card.name)}】——点击 ${target} 确认，Esc 取消`);
+    cap.innerHTML = SDT.Icons.rich(`已选【${esc(entry.card.name)}】——点击 ${target} 确认，或用方向键切换目标、Enter 确认，Esc 取消`);
   }
-  function selectCardByClick(uid) {
+  function selectCardByClick(uid, focusTarget = false) {
     const snap = getSnapshot();
     if (!snap || snap.busy || snap.infusing || snap.discovering || snap.choosing) return;
     const entry = findCard(uid);
     if (!entry) return;
-    const why = unplayableReason(entry.card);
-    if (why || effCostOf(entry.card, uid) > snap.energy) { play(uid); return; }
+    if (showCardBlockReason(uid)) { play(uid); return; }
     // 09-20 老板定版：注能卡点卡先进注能态（注能条内可改「不注能直接打出」）——
     // 唯一敌人免选直打捷径对注能卡不适用，必须在选择锁定之前分流
     if (infuseOf(entry.card) > 0) { play(uid); return; }
@@ -180,13 +218,30 @@ import { showFoePreview, clearFoePreview } from './battle.hover.js';
       const aliveIdx = snap.foes.findIndex(f => !f.dead);
       if (aliveIdx >= 0 && snap.foes.filter(f => !f.dead).length === 1) { play(uid, aliveIdx); return; }
     }
-    if (clickSelectedUid === uid) { cancelClickSelection(); return; }
+    if (clickSelectedUid === uid) {
+      cancelClickSelection();
+      if (snap.pendingTarget?.uid === uid) cancelPendingTarget();
+      return;
+    }
+    if ((snap.pendingTarget && snap.pendingTarget.uid !== uid) || snap.pendingItem || snap.slamPending || snap.dartPending) {
+      cancelPendingTarget();
+    }
     clickSelectedUid = uid;
-    document.querySelectorAll('.sts-hand .bt-card.click-selected').forEach(el => el.classList.remove('click-selected'));
+    document.querySelectorAll('.sts-hand .bt-card.click-selected').forEach(el => {
+      el.classList.remove('click-selected');
+      el.setAttribute('aria-pressed', 'false');
+    });
     const el = [...document.querySelectorAll('.sts-hand .bt-card')].find(x => x.dataset.uid === uid);
-    if (el) { el.classList.add('click-selected'); el.setAttribute('aria-pressed', 'true'); }
+    if (el) {
+      el.classList.add('click-selected');
+      el.setAttribute('aria-pressed', 'true');
+      if (focusTarget) flashCardPickup(el);
+    }
+    // 指针拿起时 startAim 已播放一次；键盘选牌没有 pointerdown，在此补上反馈。
+    if (focusTarget) SDT.Sound.sfx('cardSelect');
     updateClickSelectionUI();
     syncClickTargetPreviews();
+    if (focusTarget) document.querySelector(side === 'self' ? '#btSelf.can-target' : '.bt-foe.can-target')?.focus();
   }
   function clickSelectedTarget(side, idx) {
     const pending = getSnapshot().pendingTarget;
@@ -197,6 +252,7 @@ import { showFoePreview, clearFoePreview } from './battle.hover.js';
     const need = targetSide(entry.card);
     if (need !== side && !(need == null && side === 'any')) {
       UI.log(`[[icon:cross]] 【${esc(entry.card.name)}】不能对这个目标使用`, 'warn');
+      showThoughtBubble(`【${entry.card.name}】不能对这个目标使用`);
       return true;
     }
     clickSelectedUid = null;
@@ -207,7 +263,7 @@ import { showFoePreview, clearFoePreview } from './battle.hover.js';
 
   function startAim(e, el, kind) {
     const snap = getSnapshot();
-    const { busy, infusing, discovering, energy, choosing } = snap;
+    const { busy, infusing, discovering, choosing } = snap;
     if (busy || infusing || discovering || choosing || aim) return;
     const uid = el.dataset.uid;
     // 09-20 老板：砸击改拖动释放——按钮无卡牌 uid，喂伪卡（4 点固定伤害）复用
@@ -216,12 +272,13 @@ import { showFoePreview, clearFoePreview } from './battle.hover.js';
     const entry = isSlam ? { card: { name: '背包砸击', desc: '4 点固定伤害', dmg: 4 } } : findCard(uid);
     if (!entry) return;
     const side = (kind === 'potion' || isSlam) ? 'enemy' : (targetSide(entry.card) || 'any');   // null = 无目标招式：拖到中间空地即可
-    if (!isSlam && kind !== 'potion' && effCostOf(entry.card, uid) > energy) return;   // 能量不足：不进入指向（点击会有提示）；药水不耗能量
+    const playBlockedReason = !isSlam && kind !== 'potion' ? cardPlayBlockedReason(uid, entry.card, snap) : '';
     const isCard = kind !== 'potion' && !isSlam;
     const vr = UI.el.overlay.getBoundingClientRect();
     const r = el.getBoundingClientRect();
     aim = {
       uid, card: entry.card, side, el, kind: kind || 'card',
+      playBlockedReason, reasonShown: false,
       ax: r.left + r.width / 2 - vr.left, ay: r.top - vr.top + 6,
       sx: e.clientX, sy: e.clientY, moved: false, hover: null,
       snap, vr,   // 指向期间的快照/overlay rect 缓存：期间战斗状态不会变（重渲染会 cancelAim），pointermove 高频路径直接复用
@@ -236,7 +293,10 @@ import { showFoePreview, clearFoePreview } from './battle.hover.js';
       cur: { x: 0, y: 0 }, tgt: { x: 0, y: 0 }, lastT: 0, raf: 0,
     };
     el.classList.add('aim-lift');
-    SDT.Sound.sfx('hover');
+    if (isCard) {
+      flashCardPickup(el);
+      SDT.Sound.sfx('cardSelect');
+    }
     if (el.setPointerCapture) { try { el.setPointerCapture(e.pointerId); } catch { /* 指针可能已释放：捕获失败不影响指向 */ } }
     window.addEventListener('pointermove', moveAim, true);
     window.addEventListener('pointerup', endAim, true);
@@ -317,9 +377,16 @@ import { showFoePreview, clearFoePreview } from './battle.hover.js';
     // 悬停检测：瞄准态（含药水全程）高亮目标；drag 态 STS2 无悬停反馈
     const targeting = !aim.follow || aim.mode === 'target' || aim.mode === 'clickTarget';
     const hit = targeting ? aimHoverAt(e.clientX, e.clientY, aim.side, aim.snap) : null;
+    if (aim.playBlockedReason && aim.mode !== 'drag' && !aim.reasonShown) {
+      showThoughtBubble(aim.playBlockedReason, true);
+      aim.reasonShown = true;
+    }
     if (aim.hover && (!hit || hit.el !== aim.hover.el)) aimClearHover();
-    if (hit) {
-      if (hit.kind === 'enemy') { hit.el.classList.add('drag-over'); showFoePreview(hit.el, hit.idx, aim.uid, aim.card, 'drag'); }
+    if (hit && !aim.hover) {
+      if (hit.kind === 'enemy') {
+        hit.el.classList.add('drag-over');
+        showFoePreview(hit.el, hit.idx, aim.uid, aim.card, aim.mode === 'clickTarget' ? 'click' : 'drag');
+      }
       else hit.el.classList.add('drop-here');
       aim.hover = hit;
     }
@@ -346,6 +413,7 @@ import { showFoePreview, clearFoePreview } from './battle.hover.js';
     document.removeEventListener('contextmenu', aimCtxSuppress, true);
     stopAimFollow(a);
     aimCleanup(a);
+    if (a.reasonShown) showThoughtBubble(a.playBlockedReason);
   }
   function endAim(e) {
     const a = aim;
@@ -423,7 +491,8 @@ import { showFoePreview, clearFoePreview } from './battle.hover.js';
     aim = null;
     if (!a) return;
     finishAim(a);
+    clearThoughtBubble();
   }
 
 function setClickSelectedUid(v) { clickSelectedUid = v; }   // 壳 render 分派改经 setter（ESM 导入绑定不可赋值，2026-09-22 批5 理顺点）
-export { aim, aimPlayedAt, clickSelectedUid, selectCardByClick, clickSelectedTarget, startAim, cancelAim, cancelClickSelection, setClickSelectedUid };
+export { aim, aimPlayedAt, clickSelectedUid, selectCardByClick, clickSelectedTarget, setTargetable, showCardBlockReason, startAim, cancelAim, cancelClickSelection, setClickSelectedUid };

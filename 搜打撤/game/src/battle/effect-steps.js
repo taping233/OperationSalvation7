@@ -71,7 +71,7 @@ export function createEffectSteps(deps) {
  */
 export function createEffectPipeline(deps) {
   const steps = createEffectSteps(deps);
-  return function applyTextEffects(card, text, target, flags) {
+  function* applyTextEffectsSteps(card, text, target, flags) {
     const ctx = {
       card, target, flags: flags || {},
       desc: String(text || ''),
@@ -88,13 +88,22 @@ export function createEffectPipeline(deps) {
       if (step.gate !== 'always' && ctx.did) continue;
       const m = step.when(ctx);
       if (!m) continue;
-      const out = step.run(ctx, m);
+      const out = step.run.steps ? yield* step.run.steps(ctx, m) : step.run(ctx, m);
       if (out && out.halt) return out.result;
     }
     // —— 未识别子句哨兵（批次 3）：牌面像有效果、却既没结算也没被任何层认领 ——
     const result = { did: ctx.did, drawn: ctx.drawn, healed: ctx.healed, armored: ctx.armored };
     if (!ctx.did && !ctx.drawn && !ctx.healed && !ctx.armored) noteUnknownEffect(card, ctx.desc);
     return result;
-  };
+  }
+  // 回合触发等旧调用仍同步结算；玩家出牌可在每次命中间等待反馈。
+  function applyTextEffects(...args) {
+    const iterator = applyTextEffectsSteps(...args);
+    let next = iterator.next();
+    while (!next.done) next = iterator.next();
+    return next.value;
+  }
+  applyTextEffects.steps = applyTextEffectsSteps;
+  return applyTextEffects;
 }
 

@@ -16,7 +16,7 @@ import { renderDeckSelection, renderGrave, renderBattleBag, renderDeckPileView }
 import { mountHandLayer, updateHand, mountUnitLayer, updateUnits, setHandSuspended, HAND_PAGE_SIZE } from './battle.layers.js';
 import { spawnFloats } from './battle.vfx.js';
 import { captureBattleView, animateBattleTransition } from './battle.anim.js';
-import { aim, aimPlayedAt, selectCardByClick, startAim, cancelAim, setClickSelectedUid } from './battle.aim.js';
+import { aim, aimPlayedAt, selectCardByClick, showCardBlockReason, startAim, cancelAim, setClickSelectedUid } from './battle.aim.js';
 
 /* battle.view.js —— 战斗渲染：战场 DOM/手牌/指向施法箭头/拖拽预览 */
   const play = commands.playCard;
@@ -55,17 +55,18 @@ import { aim, aimPlayedAt, selectCardByClick, startAim, cancelAim, setClickSelec
   function combatStateCopy(snapshot) {
     const { phase = 'player', energy = 0, hand = [], infusing, choosing, handSelecting,
       pendingTarget, pendingItem, slamPending, dartPending, busy } = snapshot;
-    if (busy || phase === 'enemy') return { label: '敌方行动', detail: '敌人正在行动，准备迎接下一轮攻势。', tone: 'foe' };
+    if (phase === 'enemy') return { label: '敌方行动', detail: '敌人正在行动，准备迎接下一轮攻势。', tone: 'foe' };
+    if (busy || phase === 'resolving') return { label: '结算中', detail: '当前动作正在结算，命中反馈结束后可继续操作。', tone: 'focus' };
     if (infusing) return { label: '注能中', detail: '选择手牌作为燃料，或点“取消注能”返回。', tone: 'focus' };
     if (choosing || handSelecting) return { label: '选择中', detail: '完成当前选择后才能继续行动。', tone: 'focus' };
-    if (pendingTarget || pendingItem || slamPending || dartPending) return { label: '选择目标', detail: '点击右侧敌人确认目标，或再次点击当前动作取消。', tone: 'focus' };
+    if (pendingTarget || pendingItem || slamPending || dartPending) return { label: '选择目标', detail: '点击目标确认，按 Esc 取消；砸击或药水也可再次点击取消。', tone: 'focus' };
     // Resolve UID entries exactly as the hand renderer does, including per-card cost overrides.
     const handCards = hand.map(entry => entry && typeof entry === 'object' ? entry : findCard(entry)).filter(Boolean);
     const playable = handCards.some(entry => {
       if (unplayableReason(entry.card)) return false;
       return effCostOf(entry.card, entry.uid) <= energy;
     });
-    if (playable) return { label: '你的行动', detail: '点选手牌后点击目标 · 支持拖拽 · 1–9 选牌 · Esc 取消', tone: 'self' };
+    if (playable) return { label: '你的行动', detail: '点选手牌后点击目标 · 支持拖拽 · 1–9 选牌 · 方向键切换目标 · Esc 取消', tone: 'self' };
     if (energy > 0) return { label: '你的行动', detail: '当前没有可用卡牌，可以检查手牌或结束回合。', tone: 'warn' };
     return { label: '你的行动', detail: '能量已耗尽，结束回合让敌人行动。', tone: 'warn' };
   }
@@ -95,7 +96,7 @@ import { aim, aimPlayedAt, selectCardByClick, startAim, cancelAim, setClickSelec
   }
   function render(snapshot = getSnapshot()) {
     const prevView = captureBattleView();   // 重建前的手牌/牌堆位：供飞行与归位动画取样
-    if (snapshot.phase !== 'player' || snapshot.busy) setClickSelectedUid(null);
+    if (snapshot.phase !== 'player' || snapshot.busy || snapshot.pendingItem || snapshot.slamPending || snapshot.dartPending) setClickSelectedUid(null);
     const {
       mode, turn, energy, maxEnergy, busy, phase = 'player', opts, player, pstat,
       foes, hand, drawPile, discard, grave, infusing, discovering, handSelecting, choosing,
@@ -299,6 +300,7 @@ import { aim, aimPlayedAt, selectCardByClick, startAim, cancelAim, setClickSelec
       const el = [...document.querySelectorAll('.sts-hand .bt-card')].find(x => x.dataset.uid === d.uid);
       // 指向性卡支持点击选中，再点击目标；无目标卡保持点击即出牌。
       if (el && el.dataset.aim && el.dataset.side !== 'any') return selectCardByClick(d.uid);
+      showCardBlockReason(d.uid);
       play(d.uid);
     });
     UI.act('btEnd', endTurn);
@@ -484,4 +486,3 @@ import { aim, aimPlayedAt, selectCardByClick, startAim, cancelAim, setClickSelec
 configureBattleRenderer(render);
 
 export { render };
-

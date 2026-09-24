@@ -4,6 +4,55 @@ import { demoMs } from './battle.pace.js';
 
 const FEEDBACK_DELTA_MS = 320;
 
+let feedbackTail = Promise.resolve();
+let feedbackGeneration = 0;
+
+function isTestRuntime() {
+  return typeof process !== 'undefined' && process.env && process.env.VITEST === 'true';
+}
+
+function waitMs(ms, signal) {
+  if (isTestRuntime() || !(ms > 0)) return Promise.resolve();
+  return new Promise((resolve, reject) => {
+    if (signal?.aborted) { reject(signal.reason || new Error('Battle feedback cancelled')); return; }
+    const timer = setTimeout(done, ms);
+    function cleanup() { signal?.removeEventListener('abort', cancel); }
+    function done() { cleanup(); resolve(); }
+    function cancel() { clearTimeout(timer); cleanup(); reject(signal.reason || new Error('Battle feedback cancelled')); }
+    signal?.addEventListener('abort', cancel, { once: true });
+  });
+}
+
+function enqueueFeedback(run, delayMs = 0) {
+  const generation = feedbackGeneration;
+  const task = feedbackTail.then(async () => {
+    if (generation !== feedbackGeneration) return;
+    await waitMs(delayMs);
+    if (generation !== feedbackGeneration) return;
+    await run();
+  });
+  feedbackTail = task.catch(() => {});
+  return feedbackTail;
+}
+
+function waitForFeedback(signal) {
+  const pending = feedbackTail;
+  if (!signal) return pending;
+  if (signal.aborted) return Promise.reject(signal.reason || new Error('Battle feedback cancelled'));
+  return new Promise((resolve, reject) => {
+    function cleanup() { signal.removeEventListener('abort', cancel); }
+    function done() { cleanup(); resolve(); }
+    function cancel() { cleanup(); reject(signal.reason || new Error('Battle feedback cancelled')); }
+    signal.addEventListener('abort', cancel, { once: true });
+    pending.then(done, error => { cleanup(); reject(error); });
+  });
+}
+
+function clearFeedback() {
+  feedbackGeneration++;
+  feedbackTail = Promise.resolve();
+}
+
 function feedbackTier(feedback = {}) {
   if (feedback.warm || (feedback.cls || '').includes('stk')) return 'routine';
   if ((feedback.cls || '').includes('block')) return 'impact';
@@ -30,8 +79,15 @@ function feedbackDelay(unitKey, counters, delta = demoMs(FEEDBACK_DELTA_MS)) {
   return count * Math.max(0, Number(delta) || 0);
 }
 
+function feedbackShakeDuration(beatCount = 1) {
+  const base = demoMs(1000);
+  if (beatCount <= 1) return base;
+  // 连击的震屏不能长过下一拍，否则多条 Web Animations 会争夺同一个 transform。
+  return Math.max(80, Math.min(base, Math.round(demoMs(FEEDBACK_DELTA_MS) * 0.8)));
+}
+
 function actionFeedback(type, payload = {}) {
   return Object.freeze({ type, ...payload, timestamp: Date.now() });
 }
 
-export { FEEDBACK_DELTA_MS, actionFeedback, feedbackClass, feedbackDelay, feedbackTier };
+export { FEEDBACK_DELTA_MS, actionFeedback, clearFeedback, enqueueFeedback, feedbackClass, feedbackDelay, feedbackShakeDuration, feedbackTier, waitForFeedback, waitMs };

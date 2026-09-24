@@ -13,30 +13,51 @@ import { commands, getSnapshot, AFFIX_META, Combat, aegisBlocked, effCostOf, fin
   const resolveSlam = commands.resolveSlam;
   const resolveDart = commands.resolveDart;   // 血毒双镖二段点选（2026-09-16 留言）
   const useItemCmd = commands.useItem;
+  const cancelPendingTarget = commands.cancelPendingTarget;
   const HAND_PAGE_SIZE = 9;   // 2026-09-16 老板：每栏最多 9 张（原 battle.view 渲染段，随 updateHand 的 handIndex 落位迁入——批5）
 import { animateSafe } from './battle.anim.js';
-import { aim, clickSelectedUid, selectCardByClick, clickSelectedTarget, startAim, cancelAim, cancelClickSelection } from './battle.aim.js';
+import { aim, clickSelectedUid, selectCardByClick, clickSelectedTarget, setTargetable, startAim, cancelAim, cancelClickSelection } from './battle.aim.js';
 import { showFoePreview, clearFoePreview } from './battle.hover.js';
 import { cardRuleHint } from './battle.preview.js';
   // 数字键选牌 / Esc 取消（原在 aim 片：需读手牌层 handLayer，随迁本片解 aim↔layers 环——2026-09-22 批5）
   document.addEventListener('keydown', (e) => {
-    if (!handLayer || e.defaultPrevented || e.key === 'Escape') {
-      if (e.key === 'Escape') {
-        if (aim) cancelAim();   // STS2：Esc 也是取消指向的快捷键
-        if (clickSelectedUid != null) {
-          e.preventDefault(); e.stopPropagation();
-          cancelClickSelection();
-        }
+    if (e.key === 'Escape') {
+      if (e.defaultPrevented || !UI.el.ovBody?.querySelector('.battle-stage')) return;
+      const snap = getSnapshot();
+      const pending = snap.pendingTarget || snap.pendingItem || snap.slamPending || snap.dartPending;
+      if (aim || clickSelectedUid != null || pending) {
+        e.preventDefault(); e.stopPropagation();
+        if (aim) cancelAim();
+        if (clickSelectedUid != null) cancelClickSelection();
+        if (pending) cancelPendingTarget();
       }
       return;
     }
+    if (!handLayer || e.defaultPrevented) return;
     if (e.target && /INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) return;
     if (!/^[1-9]$/.test(e.key)) return;
     const el = handLayer.querySelector(`.bt-card[data-hand-index="${e.key}"]`);
     if (!el || el.classList.contains('off')) { if (el) play(el.dataset.uid); return; }
     e.preventDefault();
-    selectCardByClick(el.dataset.uid);
+    selectCardByClick(el.dataset.uid, true);
   });
+  function onTargetKeydown(e) {
+    if (e.target !== e.currentTarget || !e.currentTarget.classList.contains('can-target')) return;
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      e.stopPropagation();
+      e.currentTarget.click();
+      return;
+    }
+    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+    const targets = [...document.querySelectorAll('#btSelf.can-target, .bt-foe.can-target')];
+    if (targets.length < 2) return;
+    const index = targets.indexOf(e.currentTarget);
+    if (index < 0) return;
+    e.preventDefault();
+    e.stopPropagation();
+    targets[(index + (e.key === 'ArrowRight' ? 1 : -1) + targets.length) % targets.length].focus();
+  }
   // 状态角标：祝福（绿）+ 诅咒（红）——2026-09-11 架构批次 1 自 battle.core 外迁（纯视图函数）
   // compact（敌方名牌收纳，迭代评审 09-20）：总数>4 时退化为「图标+层数」——纯图标会丢层数（美术岗复核口径）；
   // 玩家名牌不传 compact，维持原样。09-20 老板：词条触摸讲解——data-term 交 term-tips.js 弹自绘讲解框
@@ -215,7 +236,7 @@ import { cardRuleHint } from './battle.preview.js';
         rec.card.addEventListener('keydown', (e) => {
           if ((e.key !== 'Enter' && e.key !== ' ') || e.target.closest('.bt-infchip')) return;
           e.preventDefault();
-          selectCardByClick(rec.card.dataset.uid);
+          selectCardByClick(rec.card.dataset.uid, true);
         });
         rec.slot.appendChild(rec.card);
         handSlots.set(key, rec);
@@ -350,11 +371,13 @@ import { cardRuleHint } from './battle.preview.js';
       selfUnit.className = 'sts-unit sts-me';
       selfUnit.id = 'btSelf';
       selfUnit.title = '你自己——治疗 / 净化 / 护盾 / 格挡类卡牌拖到这里打出';
-      selfUnit.addEventListener('click', () => {
+      selfUnit.addEventListener('click', (e) => {
+        if (e.target.closest('.sts-equip')) return;
         const snap = getSnapshot();
         if (snap.pendingItem || snap.slamPending) return;
         clickSelectedTarget('self');
       });
+      selfUnit.addEventListener('keydown', onTargetKeydown);
       selfParts = makeUnitSkeleton(selfUnit, { equips: true });
       selfSig = {};
     }
@@ -455,7 +478,8 @@ import { cardRuleHint } from './battle.preview.js';
     selfUnit.classList.toggle('fx-frozen', (pstat.status.freeze || 0) > 0);
     selfUnit.classList.toggle('fx-burning', (pstat.status.burn || 0) > 0);
     const pendingCard = ctx.pendingTarget && findCard(ctx.pendingTarget.uid);
-    selfUnit.classList.toggle('can-target', !!(pendingCard && targetSide(pendingCard.card) === 'self'));
+    const clickCard = clickSelectedUid != null && findCard(clickSelectedUid);
+    setTargetable(selfUnit, !!((pendingCard && targetSide(pendingCard.card) === 'self') || (clickCard && targetSide(clickCard.card) === 'self')), '自己，按 Enter 确认目标');
     // 已穿戴装备（2026-09-09 老板 #9）：名称 + 说明 tooltip；带限定技能的可点击发动
     const equipsHTML = (equipped || []).map(e => e.skill
       ? `<button class="sts-equip has-skill${e.used ? ' used' : ''}" data-act="btEquipSkill" data-uid="${escAttr(e.uid)}"
@@ -534,12 +558,19 @@ import { cardRuleHint } from './battle.preview.js';
           }
           if (!slot.classList.contains('dead')) clickSelectedTarget('enemy', +slot.dataset.eidx);
         });
+        slot.addEventListener('keydown', onTargetKeydown);
         slot.addEventListener('mouseenter', () => {
           if (clickSelectedUid == null || slot.classList.contains('dead')) return;
           const entry = findCard(clickSelectedUid);
           if (entry && targetSide(entry.card) === 'enemy') showFoePreview(slot, +slot.dataset.eidx, clickSelectedUid, entry.card, 'click');
         });
-        slot.addEventListener('mouseleave', () => { if (clickSelectedUid == null) clearFoePreview(slot); });
+        slot.addEventListener('mouseleave', () => { if (!slot.matches(':focus')) clearFoePreview(slot); });
+        slot.addEventListener('focusin', () => {
+          if (clickSelectedUid == null || slot.classList.contains('dead')) return;
+          const entry = findCard(clickSelectedUid);
+          if (entry && targetSide(entry.card) === 'enemy') showFoePreview(slot, +slot.dataset.eidx, clickSelectedUid, entry.card, 'click');
+        });
+        slot.addEventListener('focusout', () => { if (!slot.matches(':hover')) clearFoePreview(slot); });
         foeSlots.set(key, rec);
       }
       const slot = rec.slot, parts = rec.parts, sig = rec.sig;
@@ -547,18 +578,20 @@ import { cardRuleHint } from './battle.preview.js';
       const immune = aegisBlocked(f);
       slot.classList.toggle('is-boss', !!(ctx.isBoss || f.affix));
       slot.classList.toggle('dead', !!f.dead);
+      slot.classList.toggle('bt-death-pending', !!f.deathFxPending);
       slot.classList.toggle('aegis', !!immune);
       const pendingCard = ctx.pendingTarget && findCard(ctx.pendingTarget.uid);
       const clickCard = clickSelectedUid != null && findCard(clickSelectedUid);
       const cardTargetsEnemy = !!((pendingCard && targetSide(pendingCard.card) === 'enemy') || (clickCard && targetSide(clickCard.card) === 'enemy'));
-      slot.classList.toggle('can-target', !!(cardTargetsEnemy || ctx.pendingItem || ctx.slamPending || ctx.dartPending) && !f.dead);   // dartPending：血毒双镖二段点选也高亮（2026-09-17 留言）
+      setTargetable(slot, !!(cardTargetsEnemy || ctx.pendingItem || ctx.slamPending || ctx.dartPending) && !f.dead, `${f.name}，按 Enter 确认目标`);   // dartPending：血毒双镖二段点选也高亮（2026-09-17 留言）
       slot.dataset.foeId = f.id || f.name;
       slot.dataset.eidx = idx;
+      slot.style.setProperty('--foe-idle-phase', `${-(idx * 0.61)}s`);
       slot.title = aff ? aff.name + '：' + aff.desc : '';
       // 残留的指向预览气泡清掉（常驻节点上它不会随重建消失）
       const fp = slot.querySelector('.bt-fpreview');
       if (fp) fp.remove();
-      if (!f.dead && clickCard && targetSide(clickCard.card) === 'enemy') {
+      if (!f.dead && clickCard && targetSide(clickCard.card) === 'enemy' && slot.matches(':hover, :focus')) {
         showFoePreview(slot, idx, clickSelectedUid, clickCard.card, 'click');
       }
       // 冰冻敌人显示专用意图图标（2026-09-09 玩法定版）：冰冻中无法行动，

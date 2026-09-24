@@ -7,6 +7,11 @@ import { getSnapshot, Combat, getPreviewContext } from './battle.core.js';
   // ---------- 指向悬停效果预览（松手前暗示打出结果；card = 指向中的卡） ----------
   function showFoePreview(el, idx, uid, card, interactionMode) {
     // 气泡每次都用同一时刻的当前快照/上下文重算，避免拖拽缓存与新 core 状态混用。
+    if (interactionMode === 'click') {
+      document.querySelectorAll('.bt-foe .bt-fpreview[data-preview-mode="click"]').forEach(preview => {
+        if (preview.parentElement !== el) preview.remove();
+      });
+    }
     const existing = el.querySelector('.bt-fpreview');
     const previousMode = existing && existing.dataset.previewMode;
     if (existing) existing.remove();
@@ -19,7 +24,7 @@ import { getSnapshot, Combat, getPreviewContext } from './battle.core.js';
     const result = previewAction({ snapshot, action: { kind: 'play-card', uid: uid || snapshot.pendingTarget?.uid, targetIndex: idx }, cardContext: context });
     let main, sub;
     if (!result.legal || !result.damage) {
-      main = '[[icon:question]] 伤害预览：无法精算';
+      main = result.legal ? '[[icon:question]] 伤害预览：无法精算' : '[[icon:cross]] 当前无法打出';
       const ruleHint = cardRuleHint(useCard, snapshot.mode);
       sub = [`费${result.cost}`, result.reasons.join(' · ') || '当前效果超出可证明范围', ruleHint].filter(Boolean).join(' · ');
     } else {
@@ -46,13 +51,40 @@ import { getSnapshot, Combat, getPreviewContext } from './battle.core.js';
     const div = document.createElement('div');
     div.className = 'bt-fpreview';
     div.dataset.previewMode = interactionMode || 'drag';
-    div.innerHTML = `<b>${main}</b><span>${esc(sub)}</span><span class="bt-fpreview-tip">—— ${interactionMode === 'click' ? '点击该敌人打出' : '松手打出'} ——</span>`;
+    const tip = !result.legal ? '先解决出牌条件' : interactionMode === 'click' ? '点击该敌人打出' : '松手打出';
+    div.innerHTML = `<b>${main}</b><span>${esc(sub)}</span><span class="bt-fpreview-tip">—— ${tip} ——</span>`;
     el.appendChild(div);
-    if (interactionMode !== 'click' && previousMode !== interactionMode) SDT.Sound.sfx('hover');
+    if (result.legal && interactionMode !== 'click' && previousMode !== interactionMode) SDT.Sound.sfx('hover');
   }
   function clearFoePreview(el) {
     const p = el.querySelector('.bt-fpreview');
     if (p) p.remove();
   }
 
-export { showFoePreview, clearFoePreview };
+  let thoughtBubbleTimer = 0;
+  function showThoughtBubble(reason, persist = false) {
+    const stage = document.querySelector('#overlay .battle-stage');
+    const speaker = stage && stage.querySelector('#btSelf');
+    if (!stage || !speaker || !reason) return;
+    const current = speaker.querySelector('.bt-thought-bubble');
+    if (current?.dataset.reason === reason) {
+      clearTimeout(thoughtBubbleTimer);
+      thoughtBubbleTimer = persist ? 0 : setTimeout(clearThoughtBubble, 1500);
+      return;
+    }
+    clearThoughtBubble();
+    const bubble = document.createElement('div');
+    bubble.className = 'bt-thought-bubble';
+    bubble.dataset.reason = reason;
+    bubble.textContent = reason;
+    speaker.appendChild(bubble);
+    thoughtBubbleTimer = persist ? 0 : setTimeout(clearThoughtBubble, 1500);
+  }
+
+  function clearThoughtBubble() {
+    clearTimeout(thoughtBubbleTimer);
+    thoughtBubbleTimer = 0;
+    document.querySelectorAll('#overlay .bt-thought-bubble').forEach(bubble => bubble.remove());
+  }
+
+export { showFoePreview, clearFoePreview, showThoughtBubble, clearThoughtBubble };

@@ -8,11 +8,11 @@ const SFX_COOLDOWN_MS = Object.freeze({
   hit: 45, hurt: 60, strike: 45, kill: 90,
   buffUp: 80, buffDown: 120, foeLunge: 60, curse: 60, curseEnd: 160,
   parry: 45, coin: 80, cardSelect: 45, discard: 65, burn: 80, rarePlay: 180,
-  danger: 300, energyUp: 45, energyDown: 45, shieldUp: 220, shieldBreak: 100, phase: 180,
+  danger: 300, energyUp: 45, energyDown: 45, shieldUp: 220, shieldBreak: 100, armorBreak: 120, phase: 180,
 });
 
 const SFX_PRIORITY = Object.freeze({
-  danger: 5, phase: 4, kill: 4, shieldBreak: 5, rarePlay: 4, curseEnd: 4,
+  danger: 5, phase: 4, kill: 4, shieldBreak: 5, armorBreak: 5, rarePlay: 4, curseEnd: 4,
   hurt: 3, hit: 3, strike: 3, foeLunge: 3, shieldUp: 2, energyUp: 2, energyDown: 2,
   curse: 2, cardSelect: 1, discard: 1, burn: 1, hover: 0,
 });

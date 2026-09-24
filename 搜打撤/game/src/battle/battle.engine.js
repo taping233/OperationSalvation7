@@ -19,9 +19,14 @@ import { calculateEffectiveCardCost, decayEffectiveCardCost, pocketSpellDiscount
 import { calculateEnemyIntent } from './battle.intent.js';
 import { createBattleSnapshot } from './battle.snapshot.js';
 import { createBattleResolution } from './battle.resolution.js';
+import { clearFeedback, waitForFeedback, waitMs } from './battle.feedback.js';
+import { demoMs } from './battle.pace.js';
 
 /* —— 自 battle.core 壳迁入的共享引擎件（原 head/tail，按原文件顺序）—— */
 const actionQueue = createActionQueue();
+let stagedResolutionDepth = 0;
+const STAGED_BOSS_DEFEAT = Symbol('staged boss defeat');
+const stagedDeathFx = new Set();
 const requestBattleRender = () => {
     if (!G || !G.battleActive) return;   // 战斗已收尾：残留重绘一律丢弃（胜利结算后不再盖写后续界面）
     try {
@@ -116,7 +121,10 @@ function resolveFoeDefeat(foe, cause = '被击倒') {
     if (nestRevive(foe)) return false;
     transferPoisonLegacy(foe);
     nestKillCheck(foe);
+    if (stagedResolutionDepth > 0) stagedDeathFx.add(foe);
     if (foe.boss) {
+      // 立刻截断本卡余句，但保留致命一击的反馈，待演出后再清场胜利。
+      if (stagedResolutionDepth > 0) throw STAGED_BOSS_DEFEAT;
       finish(true);
       // 首脑死亡会清空动作队列；立即打断当前同步结算，避免胜利后仍继续执行卡牌余句。
       throwIfActionCancelled(activeActionSignal);
@@ -227,9 +235,9 @@ function releaseHandMatches(key, drawEach, max) {
       if (max && released >= max) break;
       const o = findCard(uid);
       if (!o || o.card.type === '生物' || !re.test(o.card.name || '')) continue;
-      queueCardExecution(uid, o.card, [], alive()[0] || null, true);
+      queueCardExecution(uid, o.card, [], alive()[0] || null, true, false, [],
+        drawEach ? () => { drawCards(drawEach); requestBattleRender(); } : null);
       released++;
-      if (drawEach) drawCards(drawEach);
     }
     return released;
   }
@@ -554,11 +562,13 @@ function restore(nextGame, data) {
     }
     return true;
   }
-function finish(win) {
+  function finish(win) {
+    stagedDeathFx.clear();
     if (win === true && battleState.phase !== BATTLE_PHASES.VICTORY) set$battleState(transitionBattle(battleState, BATTLE_PHASES.VICTORY));
     if (SDT.Meta && SDT.Meta.track) SDT.Meta.track('battleEquips', { n: equipped.length });
     if (win === false && battleState.phase !== BATTLE_PHASES.DEFEAT) set$battleState(transitionBattle(battleState, BATTLE_PHASES.DEFEAT));
     actionQueue.clear();      // 终局后残留的动作回调再跑会触发 victory->enemy 非法迁移（2026-09-13 实测 UNCAUGHT）
+    clearFeedback();
     set$busy(false);
     SDT.Sound.sfx(win === true ? 'victory' : win === false ? 'defeat' : 'flee');
     const playedCopy = played.slice();
@@ -600,7 +610,7 @@ function snapshotSignature() {
     sig.push(statusSig(pstat && pstat.status), pstat ? pstat.hp : 0);
     sig.push(foes.length);
     for (const f of foes) {
-      sig.push(f.id, f.name, f.behavior, f.affix, f.affixName, f.dead, f.hp, f.maxHp, f.atk, statusSig(f.status));
+      sig.push(f.id, f.name, f.behavior, f.affix, f.affixName, f.dead, stagedDeathFx.has(f), f.hp, f.maxHp, f.atk, statusSig(f.status));
       if (f.defense) sig.push(f.defense.shield, f.defense.armor, f.defense.guard);
       sig.push(f.intent);   // intent 只被整体替换不就地改，引用比较即可
     }
@@ -622,6 +632,8 @@ function snapshotSignature() {
     if (choosing) sig.push(choosing.cardName, choosing.options.join('|'));
     const pTgt = pendingTargetOf();
     if (pTgt) sig.push(pTgt.uid, pTgt.card);
+    const pItem = pendingItemOf();
+    if (pItem) sig.push('item', pItem.uid, pItem.card);
     // 已穿戴装备（老板 #9）：穿戴/技能已用状态变化都要重渲染
     sig.push('eq' + equipped.map(e => e.uid + (e.used ? '1' : '0')).join(','));
     if (selectingDeck) sig.push(sel.size, [...sel].sort().join(','), selPool.length, selDeckMax);
@@ -647,7 +659,7 @@ function getSnapshot() {
       actionQueueLength: actionQueue.length,
       opts,
       player: G ? { hp: G.hp, maxHp: G.maxHp, atk: G.atk, spellPower: G.spellPower || 0, myClass: G.myClass || null, characterId: G.characterId || null } : null,
-      pdef, pstat, foes, allies, hand, drawPile, discard, grave, infusing, discovering,
+      pdef, pstat, foes, deathFxPending: foes.map(foe => stagedDeathFx.has(foe)), allies, hand, drawPile, discard, grave, infusing, discovering,
       handSelecting, choosing, pendingTarget: pTgt, pendingHint, viewingGrave, viewingBag,
       dreadShown, selectingDeck, deckNeed: R().bossDeckSize, selDeckMax, selShaN, sel, selPool,
       potionBar, pendingItem: pItem, slamPending: !!interactionOf('slam'), dartPending: !!interactionOf('dart'),
@@ -658,16 +670,28 @@ function getSnapshot() {
     }));
     return snapCache;
   }
-function cancelInteraction() {
-    if (!interaction && battleState.phase !== BATTLE_PHASES.TARGETING) return;
+function clearTargetSession(preserveCardUid = null) {
+    if (!interaction && battleState.phase !== BATTLE_PHASES.TARGETING) return false;
     const i = interaction;
     set$interaction(null);
-    if (i && i.kind === 'card' && freeCast.has(i.uid)) freeCast.delete(i.uid);
+    if (i && i.kind === 'card' && i.uid !== preserveCardUid && freeCast.has(i.uid)) freeCast.delete(i.uid);
     set$pendingHint('');
-    set$battleState(cancelTargeting(battleState));
+    if (battleState.phase === BATTLE_PHASES.TARGETING) set$battleState(cancelTargeting(battleState));
+    return true;
+  }
+function cancelInteraction() {
+    if (!clearTargetSession()) return;
+    requestBattleRender();
+  }
+function beginSpecialTargeting(kind, uid = null, card = null) {
+    clearTargetSession();
+    set$interaction({ kind, uid, card, hint: '' });
     requestBattleRender();
   }
 function beginCardTargeting(uid, card, targetIds, hint, fuelUids = []) {
+    const previous = interactionOf('card');
+    if (previous?.uid === uid && !fuelUids.length) fuelUids = previous.fuelUids || [];
+    clearTargetSession(uid);
     set$interaction({ kind: 'card', uid, card, hint: hint || '', fuelUids });
     set$battleState(beginTargeting(battleState, uid, targetIds));
     set$pendingHint(hint || '');
@@ -817,6 +841,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
       const applied = Combat.addCurse(foe, status, duration);
       if (applied > 0 && foe && !foe.dead) {
         floats.push({ unit: foeIdx(foe), text: '', cls: `cursefx curse-${status}` });
+        if (status === 'abreak') SDT.Sound.sfx('armorBreak');
       }
       return applied;
     },
@@ -825,6 +850,96 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     drawOf, isAOE,
     addArmor: amount => { pdef.armor += amount; },
   });
+
+  async function runStagedSteps(steps, signal) {
+    const battleToken = battleState.token;
+    const ensureCurrentBattle = () => {
+      throwIfActionCancelled(signal);
+      if (battleState.token !== battleToken) throw actionCancellationError(signal);
+    };
+    const releaseDeathFx = async () => {
+      if (!stagedDeathFx.size) return;
+      await waitMs(demoMs(180), signal);
+      ensureCurrentBattle();
+      stagedDeathFx.clear();
+      requestBattleRender();
+    };
+    stagedResolutionDepth++;
+    let result;
+    try {
+      while (true) {
+        ensureCurrentBattle();
+        const next = steps.next();
+        if (next.done) { result = next.value; break; }
+        const step = next.value;
+        if (step.kind === 'windup') {
+          for (const foe of step.targets) {
+            const unit = foeIdx(foe);
+            if (unit >= 0 && !foe.dead) floats.push({ unit, text: '', cls: 'windupfx' });
+          }
+          requestBattleRender();
+          await waitForFeedback(signal);
+          await waitMs(demoMs(130), signal);
+          continue;
+        }
+        requestBattleRender();
+        await waitForFeedback(signal);
+        await releaseDeathFx();
+      }
+      requestBattleRender();
+      await waitForFeedback(signal);
+      await releaseDeathFx();
+    } catch (error) {
+      if (error === STAGED_BOSS_DEFEAT) {
+        requestBattleRender();
+        await waitForFeedback(signal);
+        await waitMs(demoMs(220), signal);   // 终结数字和死亡贴纸至少留在战场一拍
+        ensureCurrentBattle();
+        finish(true);
+        throw actionCancellationError(signal);
+      }
+      if (signal?.aborted && battleState.token === battleToken) { clearFeedback(); requestBattleRender(); }
+      throw error;
+    } finally {
+      if (battleState.token === battleToken) {
+        stagedResolutionDepth--;
+        if (stagedResolutionDepth === 0 && stagedDeathFx.size) {
+          stagedDeathFx.clear();
+          requestBattleRender();
+        }
+      }
+    }
+    ensureCurrentBattle();
+    return result;
+  }
+  function* singleTargetHitSteps(target, hit) {
+    yield { kind: 'windup', targets: [target] };
+    if (target.dead) return false;
+    if (hit() === false) return false;
+    yield { kind: 'hit' };
+    return true;
+  }
+  function* consumeFireballSteps(count) {
+    for (let k = 0; k < count; k++) {
+      const t = alive()[0];
+      if (!t) break;
+      yield* singleTargetHitSteps(t, () => {
+        const hpBefore = t.hp;
+        const r = Combat.dealDamage({
+          atk: G.atk,
+          spellPower: G.spellPower || 0,   // spellUp 由 status 传入只算一次
+          status: pstat.status,
+        }, t, 4, Combat.TYPES.SPELL);
+        if (r.dealt > 0) floats.push({ unit: foeIdx(t), text: '-' + r.dealt,
+          cls: 'dmg', hpBefore, hpAfter: t.hp, maxHp: t.maxHp });
+        G.log(`[[icon:fire]] 深渊降焰：施放 1 次火球 → ${esc(t.name)}：造成 <b>${r.dealt}</b> 点法术伤害`, 'sys');
+        sweepDead();
+      });
+    }
+  }
+  function resolveCardWithFeedback(card, target, infused, fuelCost, uid, signal) {
+    return runStagedSteps(resolveCard.steps(card, target, infused, fuelCost, uid), signal);
+  }
 
   // 法力奔涌的随机法术释放（2026-09-10 需求）：
   // 池子与「发现/随机获取」同口径（isRandomObtainable：排除 初始/职业/衍生/棱彩与 unrandom），
@@ -878,7 +993,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
       const t = targets[Math.floor(Random.random('battle') * targets.length)];
       cardAnims.push({ kind: 'surge', i: i + 1, n, name: spell.name, target: foes.indexOf(t), targetName: t.name, card: { ...spell } });   // 慢动作演出事件
       G.log(`[[icon:sparkles]] <b>法力奔涌</b>（第 ${i + 1}/${n} 发）：对 <b>${esc(t.name)}</b> 释放随机法术【<b>${esc(spell.name)}</b>】（默认已注能）`, 'loot');
-      resolveCard(spell, t, true, 0, null);
+      await resolveCardWithFeedback(spell, t, true, 0, null, signal);
       if (SURGE_WAVE_MS > 0) { requestBattleRender(); await surgeSleep(SURGE_WAVE_MS, signal); }
     }
     throwIfActionCancelled(signal);
@@ -947,6 +1062,10 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     const text = equipSkillText(e.card);
     if (!text) return;
     if (e.used) { G.log(`[[icon:cross]] 【${esc(e.card.name)}】的主动技能本场已经用过了`, 'warn'); return; }
+    if ((e.card.id === 'tt3-crimson-pouch' || e.card.id === 'tt7-naturestaff') && !hand.length) {
+      G.log(`[[icon:cards]] 【${esc(e.card.name)}】需要先有一张手牌可选，技能次数未消耗`, 'warn');
+      return;
+    }
     // 魔法锅炉的「注能」是装备技能代价：先强制消耗 2 张手牌，完成后随机入手 3 张，
     // 不走「发现」面板。燃料不足时不消耗本场唯一一次技能。
     if (e.card.id === 'tt3eq-boiler') {
@@ -955,6 +1074,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
         G.log(`[[icon:flask]] 【${esc(e.card.name)}】注能(${need}) 需要消耗 ${need} 张手牌，当前只有 ${hand.length} 张`, 'warn');
         return;
       }
+      clearTargetSession();
       e.used = true;
       G.log(`[[icon:sparkles]] <b>${esc(e.card.name)}</b> 主动技能：注能(${need})，随机获取 3 张卡牌`, 'ok');
       handSelectQueue.push({
@@ -975,14 +1095,22 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
       requestBattleRender();
       return;
     }
-    e.used = true;
-    G.log(`[[icon:sparkles]] <b>${esc(e.card.name)}</b> 主动技能：${esc(text)}`, 'ok');
-    applyTextEffects(e.card, text, alive()[0] || null, {});
-    sweepDead();
-    if (!alive().length) { finish(true); return; }
-    processChoice();
-    processDiscoverQueue();
-    requestBattleRender();
+    clearTargetSession();
+    queueBattleAction(async signal => {
+      throwIfActionCancelled(signal);
+      if (!equipped.includes(e) || e.used) return;
+      e.used = true;
+      G.log(`[[icon:sparkles]] <b>${esc(e.card.name)}</b> 主动技能：${esc(text)}`, 'ok');
+      const target = alive()[0] || null;
+      if (applyTextEffects.steps) await runStagedSteps(applyTextEffects.steps(e.card, text, target, {}), signal);
+      else applyTextEffects(e.card, text, target, {});
+      throwIfActionCancelled(signal);
+      sweepDead();
+      if (!alive().length) { finish(true); return; }
+      processChoice();
+      processDiscoverQueue();
+      requestBattleRender();
+    }, '装备技能');
   }
   // ---------- 开战被动（2026-09-09 老板定向 Q1）：描述带「对战开始时」的装备卡，持有即自动生效 ----------
   // 2026-09-10 留言 #35 定版改为「勾选生效」：编组时玩家勾选哪些开战装备，战斗开始才装配哪些。
@@ -1163,6 +1291,10 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
   // ---------- 入口 ----------
   // enemyDefs：数组（多敌人遭遇）或单个对象（兼容旧调用）
   function start(game, enemyDefs, options) {
+    actionQueue.clear('battle replaced');
+    clearFeedback();
+    stagedDeathFx.clear();
+    stagedResolutionDepth = 0;
     set$G(game);
     // 战斗开局预热本局可用卡面：手牌 img 是 lazy，手牌重建瞬间图未解码会露插画窗深底（黑窗）。
     // URL 走 collectCardAssets 与 <img> 实际 src 完全一致，命中 HTTP/解码缓存；已预热项内部自动去重。
@@ -1349,7 +1481,6 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
   function play(uid, side, forceDirect) {
     // 迟到/非法 uid 必须在任何交互状态变更前拒绝；否则会顺带取消当前药水点选。
     if (!hand.includes(uid)) return;
-    if (interactionOf('item')) set$interaction(null);   // 打出手牌时取消药水点选（单槽幂等清 item）
     if (busy || infusing || discovering || choosing || handSelecting || viewingGrave || viewingDeck) return;
     // 玩家命令只能提交当前手牌。内部直接释放继续直接走 queueCardExecution，
     // 保留牌与弃牌洗回重抽后 uid 会重新位于 hand，因此仍可再次合法使用。
@@ -1369,6 +1500,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
         return;
       }
     }
+    if (interaction && (interaction.kind !== 'card' || interaction.uid !== uid)) clearTargetSession();
     // 09-20 老板定版（取代需求 #15 的「点卡直打」）：注能卡点卡先进注能态——
     // 注能条内提供「不注能直接打出」；拖拽到目标（side 非空）与该直打钮（forceDirect）仍直接打出
     if (!forceDirect && side == null && infuseOf(card) > 0) { beginInfuse(uid); return; }
@@ -1434,6 +1566,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
       G.log(`[[icon:flask]] 手牌不足：【${esc(card.name)}】注能(${infN}) 需要消耗 ${infN} 张手牌，当前只有 ${others.length} 张可选`, 'warn');
       return;
     }
+    clearTargetSession(uid);
     set$infusing({ uid, card, need: infN, picked: new Set() });
     requestBattleRender();
   }
@@ -1457,7 +1590,34 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
   // 落盘，窗口内闪退最多回退数秒内的出牌（正常关窗走 beforeunload 全量保存）。
   
   const PERSIST_MIN_MS = 8000;
-  function queueCardExecution(uid, card, fuelUids, target, freeCost, requirementsPaid = false, paymentUids = []) {
+  function queueBattleAction(execute, label = '战斗动作') {
+    const battleToken = battleState.token;
+    set$battleState(transitionBattle(battleState, BATTLE_PHASES.RESOLVING));
+    set$busy(true);
+    requestBattleRender();
+    actionQueue.enqueue(async signal => {
+      if (battleState.token !== battleToken || !G?.battleActive) throw actionCancellationError(signal);
+      throwIfActionCancelled(signal);
+      set$activeActionSignal(signal);
+      try { return await execute(signal); }
+      finally { if (activeActionSignal === signal) set$activeActionSignal(null); }
+    })
+      .catch(e => { if (e?.name !== 'BattleActionCancelledError') console.error(`[battle] ${label}异常：`, e); })
+      .finally(async () => {
+        await actionQueue.idle();
+        if (battleState.token !== battleToken) return;
+        if (actionQueue.length === 0 && !actionQueue.running && battleState.phase === BATTLE_PHASES.RESOLVING) {
+          set$battleState(transitionBattle(battleState, BATTLE_PHASES.PLAYER));
+          set$busy(false);
+          if (G.persistSave && G.battleActive && battleState.phase === BATTLE_PHASES.PLAYER) {
+            const now = performance.now();
+            if (now - lastPersistAt >= PERSIST_MIN_MS) { set$lastPersistAt(now); G.persistSave(); }
+          }
+        }
+        requestBattleRender();
+      });
+  }
+  function queueCardExecution(uid, card, fuelUids, target, freeCost, requirementsPaid = false, paymentUids = [], onResolved = null) {
     const handRequirement = card?.rules?.battle?.requirements?.find(rule => rule.kind === 'handCards');
     if (handRequirement && !requirementsPaid) {
       const excludedUids = [...new Set([uid, ...(fuelUids || [])])];
@@ -1473,7 +1633,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
       set$handSelecting({
         act: 'payment', mandatory: true, n: handRequirement.count, type: handRequirement.type || null,
         excludedUids, selectedUids: [],
-        payment: { uid, card, fuelUids: [...(fuelUids || [])], target, freeCost },
+        payment: { uid, card, fuelUids: [...(fuelUids || [])], target, freeCost, onResolved },
       });
       requestBattleRender();
       return false;
@@ -1481,27 +1641,11 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     if (handRequirement && requirementsPaid && paymentUids.length !== handRequirement.count) return false;
     const battleToken = battleState.token;
     const receipt = Object.freeze({ battleToken, actionSeq: (set$presentationActionSeq(presentationActionSeq + 1), presentationActionSeq) });
-    set$battleState(transitionBattle(battleState, BATTLE_PHASES.RESOLVING));
-    set$busy(true);
-    requestBattleRender();
-    actionQueue.enqueue(signal => execPlay(uid, card, fuelUids, target, freeCost, signal, receipt, paymentUids))
-      .catch(e => { if (e?.name !== 'BattleActionCancelledError') console.error('[battle] 出牌动作异常：', e); })
-      .finally(async () => {
-        // 当前动作可能已将连锁动作入队；待执行数为 0 时，队列仍可能有动作正在运行。
-        await actionQueue.idle();
-        // 旧战斗的异步收尾不能更改终局状态或新一场战斗的 busy/phase。
-        if (battleState.token !== battleToken) return;
-        if (actionQueue.length === 0 && !actionQueue.running && battleState.phase === BATTLE_PHASES.RESOLVING) {
-          set$battleState(transitionBattle(battleState, BATTLE_PHASES.PLAYER));
-          set$busy(false);
-          // 稳定点落盘（战斗快照随对局存档写入，刷新/闪退后可续打；节流见上）
-          if (G.persistSave && G.battleActive && battleState.phase === BATTLE_PHASES.PLAYER) {
-            const now = performance.now();
-            if (now - lastPersistAt >= PERSIST_MIN_MS) { set$lastPersistAt(now); G.persistSave(); }
-          }
-        }
-        requestBattleRender();
-      });
+    queueBattleAction(async signal => {
+      const resolved = await execPlay(uid, card, fuelUids, target, freeCost, signal, receipt, paymentUids);
+      throwIfActionCancelled(signal);
+      if (resolved && onResolved && G?.battleActive) onResolved();
+    }, '出牌动作');
   }
 
   async function execPlay(uid, card, fuelUids, target, freeCost, signal, receipt, paymentUids = []) {
@@ -1520,7 +1664,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
         });
       if (!validPayment) {
         G.log(`[[icon:cross]] 【${esc(card.name)}】手牌支付未完成，本次打出已取消`, 'warn');
-        return;
+        return false;
       }
       // Commit all selected payment cards together before charging or playing the source card.
       const paid = new Set(paymentUids);
@@ -1550,7 +1694,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
       receipt,
     });
     fuelUids.forEach(f => removeUid(hand, f));
-    fuelUids.forEach(f => {
+    for (const f of fuelUids) {
       consumed.push(f);
       // v0.25：被消耗的牌进入墓地——墓地不参与洗回，战胜 BOSS 后可在整理背包放回
       if (mode === 'boss') grave.push(f);
@@ -1564,22 +1708,8 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
       if (o) fireConsumeTriggers(o.card, target);
       set$infuseFuels(infuseFuels + 1);   // 元素符印解锁计数
       // 深渊降焰（降临者英雄）：每消耗 1 张卡牌，自动施放 1 次火球
-      if (consumeFireballN > 0) {
-        for (let k = 0; k < consumeFireballN; k++) {
-          const t = alive()[0];
-          if (!t) break;
-          const r = Combat.dealDamage({
-            atk: G.atk,
-            spellPower: G.spellPower || 0,   // spellUp 由 status 传入只算一次（2026-09-09 修复双重计数）
-            status: pstat.status,
-          }, t, 4, Combat.TYPES.SPELL);
-          if (r.dealt > 0) floats.push({ unit: foeIdx(t), text: '-' + r.dealt, cls: 'dmg' });
-          G.log(`[[icon:fire]] 深渊降焰：施放 1 次火球 → ${esc(t.name)}：造成 <b>${r.dealt}</b> 点法术伤害`, 'sys');
-          sweepDead();
-          throwIfActionCancelled(signal);
-        }
-      }
-    });
+      if (consumeFireballN > 0) await runStagedSteps(consumeFireballSteps(consumeFireballN), signal);
+    }
     if (mode === 'boss') discard.push(uid);
     const fuelCostSum = fuelUids.reduce((a, f) => {
       const o = findCard(f);
@@ -1588,7 +1718,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     // 深渊主宰·妲莉薇特「招式均已注能」（旧日再临）：可注能/必须注能的招式无需选燃料，直接按已注能结算
     const infusedBase = fuelUids.length > 0 || (allSpellsInfused && (card.type === '武术' || card.type === '法术'));
     const aliveBefore = alive().length;
-    resolveCard(card, target, infusedBase, fuelCostSum, uid);
+    await resolveCardWithFeedback(card, target, infusedBase, fuelCostSum, uid, signal);
     await takeSurge(signal);   // 法力奔涌：演出未完不结束本次出牌动作；终局会中止余下结算
     // 2026-09-09 老板 #9：装备卡打出即穿戴（角色信息区显示装备与限定技能按钮）
     if (card.type === '装备') registerEquip(uid, card);
@@ -1601,14 +1731,14 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     });
     if (/最后一张手牌[^。；]*?触发\s*(\d+)?\s*次?/.test(String(card.desc || '')) && lastRealCard) {
       G.log(`[[icon:cards]] <b>${esc(card.name)}</b>：本牌是最后一张手牌，效果触发 2 次`, 'sys');
-      resolveCard(card, target, infusedBase, fuelCostSum, uid);
+      await resolveCardWithFeedback(card, target, infusedBase, fuelCostSum, uid, signal);
       await takeSurge(signal);
     }
     // 「下一张法术施放 N 次」（元素风暴，注能打出时注册）：法术效果再跑一遍
     if (nextSpellTwice > 0 && card.type === '法术') {
       set$nextSpellTwice(0);
       G.log(`[[icon:sparkles]] <b>元素风暴</b>：这张法术额外施放 1 次`, 'sys');
-      resolveCard(card, target, infusedBase, fuelCostSum, uid);
+      await resolveCardWithFeedback(card, target, infusedBase, fuelCostSum, uid, signal);
       await takeSurge(signal);
     }
     // —— 2026-09-09 补实装：打出侧登记（成长/被动/击杀结算/手牌变形）——
@@ -1642,7 +1772,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     // 箭矢符文：你的「箭」释放 2 次（第二段免费用）
     if (arrowRune && (card.name === '箭' || card.id === 'token-arrow')) {
       G.log('[[icon:runner]] <b>箭矢符文</b>：箭再度释放', 'sys');
-      resolveCard(card, target, infusedBase, fuelCostSum, uid);
+      await resolveCardWithFeedback(card, target, infusedBase, fuelCostSum, uid, signal);
       await takeSurge(signal);
     }
     applyKillRewards(card, aliveBefore - alive().length);
@@ -1666,10 +1796,11 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     if (card.type === '武术' || card.type === '法术') set$playedMovesThisTurn(playedMovesThisTurn + 1);
     if (card.type === '武术') set$playedMartialThisTurn(playedMartialThisTurn + 1);
     if (card.id === 'tt7-bloodpoison') beginDartStrike();   // 二段点选（2026-09-16 留言「选择两次目标」）
-    if (!alive().length) { finish(true); return; }
+    if (!alive().length) { finish(true); return false; }
     processChoice();
     processDiscoverQueue();
     requestBattleRender();
+    return true;
     } finally {
       if (activeActionSignal === signal) set$activeActionSignal(null);
     }
@@ -1736,6 +1867,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     // 永远击碎 0 心，龙巢战斗根本打不死敌人。改为先用影子目标试算最终伤害
     // （含攻击力/法伤加成与护甲减免），再按上述规则折算心数。
     if (foe.heartsMode) {
+      const hpBefore = foe.hp;
       const isTrue = type === Combat.TYPES.TRUE;
       const abreakOn = (foe.status.abreak || 0) > 0;
       let loss;
@@ -1748,12 +1880,14 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
         loss = abreakOn ? Math.max(0, probe.dealt) : (probe.dealt >= 8 ? 2 : (probe.dealt >= 1 ? 1 : 0));
       }
       foe.hp -= loss;
-      SDT.Sound.sfx('hit');
-      if (loss > 0) floats.push({ unit: foeIdx(foe), text: '-' + loss + '♥', cls: 'dmg', type });
+      if (loss > 0) floats.push({ unit: foeIdx(foe), text: '-' + loss + '♥', cls: 'dmg', type,
+        hpBefore, hpAfter: foe.hp, maxHp: foe.maxHp });
       G.log(`[[icon:play]] <b>${esc(card.name)}</b> → ${esc(foe.name)}：${isTrue || abreakOn ? '真伤/破甲，' : ''}击碎 <b>${loss}</b> 颗心（余 ${Math.max(0, foe.hp)} 心）`, 'sys');
       resolveFoeDefeat(foe);
       return loss;
     }
+    const hpBefore = foe.hp;
+    const shieldBefore = foe.defense?.shield || 0;
     const r = Combat.dealDamage({ atk: G.atk, spellPower: sp, status: statusForHit }, foe, amt, type);
     if (r.stealthed) {
       SDT.Sound.sfx('parry');
@@ -1761,8 +1895,12 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
       G.log(`[[icon:runner]] ${seg || ''}<b>${esc(foe.name)}</b> 处于<b>潜行</b>中：无法成为被攻击对象！`, 'warn');
       return 0;
     }
-    SDT.Sound.sfx('hit');
-    if (r.dealt > 0) floats.push({ unit: foeIdx(foe), text: '-' + r.dealt, cls: 'dmg', type });
+    const shieldBreak = shieldBefore > 0 && !(foe.defense?.shield || 0);
+    if (r.dealt > 0 || shieldBreak) floats.push({
+      unit: foeIdx(foe), text: r.dealt > 0 ? '-' + r.dealt : '护盾破碎',
+      cls: r.dealt > 0 ? 'dmg' : 'block', type, shieldBreak,
+      ...(r.dealt > 0 ? { hpBefore, hpAfter: foe.hp, maxHp: foe.maxHp } : {}),
+    });
     G.log(`[[icon:play]] <b>${esc(card.name)}</b>${seg || ''} → ${esc(foe.name)}：造成 <b>${r.dealt}</b> 点${Combat.TYPE_NAME[type]}` +
       (r.log.length ? `（${r.log.join('，')}）` : ''), 'sys');
     // 造成伤害会破除自己的潜行（不造成伤害便不会破除）
@@ -1830,6 +1968,22 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     processHandSelect();
     requestBattleRender();
   }
+  function finishHandSelectionEffect(card, text, target) {
+    if (text) {
+      queueBattleAction(async signal => {
+        await runStagedSteps(applyTextEffects.steps(card, text, target, {}), signal);
+        throwIfActionCancelled(signal);
+        sweepDead();
+        if (!alive().length) { finish(true); return; }
+        processHandSelect();
+        requestBattleRender();
+      }, '选牌后续效果');
+      return;
+    }
+    if (!alive().length) { finish(true); return; }
+    processHandSelect();
+    requestBattleRender();
+  }
   function pickHandSelect(uid) {
     if (!handSelecting) return;
     const entry = findCard(uid);
@@ -1846,7 +2000,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
         requestBattleRender();
         return;
       }
-      const { uid: cardUid, card, fuelUids, target, freeCost } = handSelecting.payment || {};
+      const { uid: cardUid, card, fuelUids, target, freeCost, onResolved } = handSelecting.payment || {};
       const payment = nextSelected;
       const valid = card && hand.includes(cardUid) && payment.length ===
         card.rules?.battle?.requirements?.find(rule => rule.kind === 'handCards')?.count &&
@@ -1861,7 +2015,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
         requestBattleRender();
         return;
       }
-      queueCardExecution(cardUid, card, fuelUids || [], target || null, !!freeCost, true, payment);
+      queueCardExecution(cardUid, card, fuelUids || [], target || null, !!freeCost, true, payment, onResolved);
       return;
     }
     if (handSelecting.act === 'play') {
@@ -1877,10 +2031,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
       if (handSelecting.n > 0) { requestBattleRender(); return; }
       const doneJob = handSelecting;
       set$handSelecting(null);
-      if (doneJob.thenText) applyTextEffects(entry.card, doneJob.thenText, null);
-      if (!alive().length) { finish(true); return; }
-      processHandSelect();
-      requestBattleRender();
+      finishHandSelectionEffect(entry.card, doneJob.thenText, null);
       return;
     }
     if (handSelecting.act === 'zero') {
@@ -1898,15 +2049,14 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     G.log(`[[icon:flask]] 消耗了手牌中的【<b>${esc(entry.card.name)}</b>】`, 'sys');
     // Q2 老板定向：手选消耗也算「消耗该牌时」触发
     fireConsumeTriggers(entry.card, null);
+    if (!G?.battleActive) return;
     handSelecting.n -= 1;
     if (handSelecting.n > 0) { requestBattleRender(); return; }
     const job = handSelecting;
     set$handSelecting(null);
     if (typeof job.onDone === 'function') job.onDone();
-    if (job.thenText) applyTextEffects(job.srcCard || entry.card, job.thenText, job.target || null);
-    if (!alive().length) { finish(true); return; }
-    processHandSelect();
-    requestBattleRender();
+    if (!G?.battleActive) return;
+    finishHandSelectionEffect(job.srcCard || entry.card, job.thenText, job.target || null);
   }
   // 战斗内复原：从消耗堆拿回 n 张到手牌（2026-09-06 #16）
   function restoreConsumed(n) {
@@ -1954,6 +2104,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
       return;
     }
     // 先扣再用（与地图侧道具一致）：用掉即从背包移除
+    clearTargetSession();
     G.ownedCards.splice(G.ownedCards.indexOf(entry), 1);
     G.log(`[[icon:bag]] 使用道具【<b>${esc(card.name)}</b>】`, 'sys');
     if (healM) {
@@ -1994,23 +2145,45 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
   // 战斗效果类道具（2026-09-12 药水栏批次）：描述交真实执行器结算，敌方指向道具可拖/点选目标
   function useBattleEffectItem(entry, side) {
     const card = entry.card;
-    if (itemTargetSideFor(card) === 'enemy' && side == null) {
+    const needsEnemy = itemTargetSideFor(card) === 'enemy';
+    if (needsEnemy && side == null) {
       const n = alive().length;
       if (!n) { G.log('[[icon:cross]] 场上没有敌人可以使用', 'warn'); return; }
       if (n > 1) {
-        set$interaction({ kind: 'item', uid: entry.uid, card, hint: '' });
+        beginSpecialTargeting('item', entry.uid, card);
         G.log(`[[icon:flask]] <b>${esc(card.name)}</b>：点击一名敌人使用（或把它拖到敌人身上）`, 'sys');
-        requestBattleRender();
         return;
       }
       side = foes.indexOf(alive()[0]);
     }
-    const target = (side != null && foes[+side] && !foes[+side].dead) ? foes[+side] : (alive()[0] || null);
-    G.ownedCards.splice(G.ownedCards.indexOf(entry), 1);
-    G.log(`[[icon:bag]] 使用道具【<b>${esc(card.name)}</b>】${target ? `→ ${esc(target.name)}` : ''}`, 'sys');
-    applyTextEffects(card, String(card.desc || ''), target, {});
-    sweepDead();
-    requestBattleRender();
+    const chosen = side != null ? foes[+side] : null;
+    if (needsEnemy && (!chosen || chosen.dead)) {
+      if (alive().length) beginSpecialTargeting('item', entry.uid, card);
+      else cancelInteraction();
+      G.log(`[[icon:cross]] 【${esc(card.name)}】的目标已失效，${alive().length ? '请重新选择存活敌人' : '场上已无敌人，道具未消耗'}`, 'warn');
+      return;
+    }
+    const target = chosen && !chosen.dead ? chosen : (alive()[0] || null);
+    clearTargetSession();
+    queueBattleAction(async signal => {
+      throwIfActionCancelled(signal);
+      const current = battleBagItems().find(item => item.uid === entry.uid);
+      if (!current) return;
+      if (needsEnemy && target.dead) {
+        G.log(`[[icon:cross]] 【${esc(card.name)}】的目标已失效，道具未消耗`, 'warn');
+        return;
+      }
+      const index = G.ownedCards.indexOf(current);
+      if (index < 0) return;
+      G.ownedCards.splice(index, 1);
+      G.log(`[[icon:bag]] 使用道具【<b>${esc(card.name)}</b>】${target ? `→ ${esc(target.name)}` : ''}`, 'sys');
+      if (applyTextEffects.steps) await runStagedSteps(applyTextEffects.steps(card, String(card.desc || ''), target, {}), signal);
+      else applyTextEffects(card, String(card.desc || ''), target, {});
+      throwIfActionCancelled(signal);
+      sweepDead();
+      if (!alive().length) { finish(true); return; }
+      requestBattleRender();
+    }, '道具动作');
   }
   // —— 背包砸击（2026-09-16 老板：改回按钮形态——手牌左侧的背包图案按钮，不再向手牌置入令牌；
   //     2026-09-13 曾改为自动置入手牌的常驻牌，因污染一切手牌检测作废）——
@@ -2020,9 +2193,8 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     if (interactionOf('slam')) { cancelSlam(); return; }
     if (energy < 2) { G.log('[[icon:bolt]] 能量不足：背包砸击需要 2 点能量', 'warn'); return; }
     if (!alive().length) { G.log('[[icon:cross]] 场上没有敌人可以砸击', 'warn'); return; }
-    set$interaction({ kind: 'slam', uid: null, card: null, hint: '' });
+    beginSpecialTargeting('slam');
     G.log('[[icon:bag]] <b>背包砸击</b>：点击一名敌人砸下（2 费 · 4 点固定伤害 · 不消耗卡牌）', 'sys');
-    requestBattleRender();
   }
   function cancelSlam() { cancelInteraction(); }
 
@@ -2031,30 +2203,37 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
   // 点击任意敌人结算，可以重复选择同一目标。结束回合放弃点选则二段失效。
   function beginDartStrike() {
     if (!alive().length) return;
-    set$interaction({ kind: 'dart', uid: null, card: null, hint: '' });
+    beginSpecialTargeting('dart');
     G.log('[[icon:blood]] <b>血毒双镖</b>·第二镖：点击一名敌人（攻 +1，附加中毒 · 可重复选择同一目标）', 'sys');
-    requestBattleRender();
   }
   function resolveDart(side) {
     if (!interactionOf('dart')) return;
+    if (busy) return;
     const t = side != null ? foes[+side] : null;
     if (!t || t.dead) {
       G.log('[[icon:cross]] 血毒双镖：请重新选择一名存活敌人', 'warn');
       requestBattleRender();
       return;
     }
-    set$interaction(null);
-    SDT.Sound.sfx('strike');
-    const aliveBefore = alive().length;
-    hitFoe(t, { name: '血毒双镖·第二镖', desc: '' }, 1, Combat.TYPES.ATTACK, '');
-    if (!t.dead) { Combat.addCurse(t, 'poison', 1); G.log(`[[icon:skull]] <b>${esc(t.name)}</b> 附加 1 层中毒`, 'sys'); }
-    applyKillRewards(null, aliveBefore - alive().length);
-    sweepDead();
-    if (!alive().length) { finish(true); return; }
-    requestBattleRender();
+    clearTargetSession();
+    queueBattleAction(async signal => {
+      throwIfActionCancelled(signal);
+      const aliveBefore = alive().length;
+      const struck = await runStagedSteps(singleTargetHitSteps(t, () => {
+        SDT.Sound.sfx('strike');
+        hitFoe(t, { name: '血毒双镖·第二镖', desc: '' }, 1, Combat.TYPES.ATTACK, '');
+        if (!t.dead) { Combat.addCurse(t, 'poison', 1); G.log(`[[icon:skull]] <b>${esc(t.name)}</b> 附加 1 层中毒`, 'sys'); }
+      }), signal);
+      if (!struck) return;
+      applyKillRewards(null, aliveBefore - alive().length);
+      sweepDead();
+      if (!alive().length) { finish(true); return; }
+      requestBattleRender();
+    }, '血毒双镖');
   }
   function resolveSlam(side) {
     if (!interactionOf('slam')) return;
+    if (busy) return;
     if (energy < 2) { G.log('[[icon:bolt]] 能量不足：背包砸击需要 2 点能量', 'warn'); requestBattleRender(); return; }
     const t = side != null ? foes[+side] : null;
     if (!t || t.dead) {
@@ -2062,15 +2241,30 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
       requestBattleRender();
       return;
     }
-    set$interaction(null);
-    set$energy(energy - (2));
-    SDT.Sound.sfx('strike');
-    const r = Combat.dealDamage({ atk: G.atk }, t, 4, Combat.TYPES.FIXED);
-    if (r.dealt > 0) floats.push({ unit: foes.indexOf(t), text: '-' + r.dealt, cls: 'dmg' });
-    G.log(`[[icon:bag]] <b>背包砸击</b>砸向 ${esc(t.name)}：造成 <b>${r.dealt}</b> 点固定伤害（-2 能量）`, 'sys');
-    sweepDead();
-    if (!alive().length) { finish(true); return; }
-    requestBattleRender();
+    clearTargetSession();
+    queueBattleAction(async signal => {
+      throwIfActionCancelled(signal);
+      const struck = await runStagedSteps(singleTargetHitSteps(t, () => {
+        if (energy < 2) {
+          G.log('[[icon:bolt]] 背包砸击取消：结算时能量已不足，未扣除能量', 'warn');
+          return false;
+        }
+        set$energy(energy - 2);
+        SDT.Sound.sfx('strike');
+        const hpBefore = t.hp;
+        const shieldBefore = t.defense?.shield || 0;
+        const r = Combat.dealDamage({ atk: G.atk }, t, 4, Combat.TYPES.FIXED);
+        const shieldBreak = shieldBefore > 0 && !(t.defense?.shield || 0);
+        if (r.dealt > 0 || shieldBreak) floats.push({ unit: foes.indexOf(t),
+          text: r.dealt > 0 ? '-' + r.dealt : '护盾破碎', cls: r.dealt > 0 ? 'dmg' : 'block',
+          shieldBreak, hpBefore, hpAfter: t.hp, maxHp: t.maxHp });
+        G.log(`[[icon:bag]] <b>背包砸击</b>砸向 ${esc(t.name)}：造成 <b>${r.dealt}</b> 点固定伤害（-2 能量）`, 'sys');
+        sweepDead();
+      }), signal);
+      if (!struck) return;
+      if (!alive().length) { finish(true); return; }
+      requestBattleRender();
+    }, '背包砸击');
   }
 
   // —— 受缚之残影（tt8-hero-sealer，2026-09-16 老板定版重做）——
@@ -2243,13 +2437,14 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
   function usePotion(uid) {
     const entry = battleBagItems().find(o => o.uid === uid);
     if (!entry) return;
+    if (busy || infusing || discovering || choosing || handSelecting || viewingGrave || selectingDeck) return;
+    if (interactionOf('item')?.uid === uid) { cancelInteraction(); return; }
     if (itemTargetSideFor(entry.card) === 'enemy') {
       const n = alive().length;
       if (!n) { G.log('[[icon:cross]] 场上没有敌人可以使用', 'warn'); return; }
       if (n > 1) {
-        set$interaction({ kind: 'item', uid: entry.uid, card: entry.card, hint: '' });
+        beginSpecialTargeting('item', entry.uid, entry.card);
         G.log(`[[icon:flask]] <b>${esc(entry.card.name)}</b>：点击一名敌人使用（或把它拖到敌人身上）`, 'sys');
-        requestBattleRender();
         return;
       }
       useItem(uid, foes.indexOf(alive()[0]));
@@ -2302,25 +2497,33 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
       } else {
         G.log(`[[icon:question]] 【${esc(ref.name)}】没有可展开的回合开始效果（占位）`, 'dim');
       }
-    } else {
-      applyTextEffects({ name: job.cardName }, text, alive()[0] || null);
+      completeChoice();
+      return;
     }
-    // 花开两面：「两回合后，开启未选择的那扇门」（2026-09-09 C8 补实装）
-    if (job.secondDoor && job.options.length === 2) {
-      const otherText = job.options[+i === 0 ? 1 : 0];
-      const q2 = otherText.match(/[‘“「]([^\s，。；‘’“”「」]+)[’”」]/);
-      const ref2 = q2 && SDT.Cards.all().find(c => c.name === q2[1]);
-      if (ref2 && ref2.type === '生物') {
-        const parts2 = splitClauses(String(ref2.desc || ''));
-        parts2.turnStart.forEach(it => delayed.push({ text: it.text, cardName: ref2.name, repeat: true, notBeforeTurn: turn + 2 }));
-        if (parts2.turnStart.length) G.log(`[[icon:hourglass]] <b>两回合后</b>：未选择的【${esc(ref2.name)}】也将展开`, 'sys');
+    queueBattleAction(async signal => {
+      await runStagedSteps(applyTextEffects.steps({ name: job.cardName }, text, alive()[0] || null, {}), signal);
+      throwIfActionCancelled(signal);
+      completeChoice();
+    }, '抉择效果');
+
+    function completeChoice() {
+      // 花开两面：「两回合后，开启未选择的那扇门」（2026-09-09 C8 补实装）
+      if (job.secondDoor && job.options.length === 2) {
+        const otherText = job.options[+i === 0 ? 1 : 0];
+        const q2 = otherText.match(/[‘“「]([^\s，。；‘’“”「」]+)[’”」]/);
+        const ref2 = q2 && SDT.Cards.all().find(c => c.name === q2[1]);
+        if (ref2 && ref2.type === '生物') {
+          const parts2 = splitClauses(String(ref2.desc || ''));
+          parts2.turnStart.forEach(it => delayed.push({ text: it.text, cardName: ref2.name, repeat: true, notBeforeTurn: turn + 2 }));
+          if (parts2.turnStart.length) G.log(`[[icon:hourglass]] <b>两回合后</b>：未选择的【${esc(ref2.name)}】也将展开`, 'sys');
+        }
       }
+      sweepDead();
+      if (!alive().length) { finish(true); return; }
+      processChoice();
+      processDiscoverQueue();
+      requestBattleRender();
     }
-    sweepDead();
-    if (!alive().length) { finish(true); return; }
-    processChoice();
-    processDiscoverQueue();
-    requestBattleRender();
   }
   function processDiscoverQueue() {
     if (discovering || !discoverQueue.length) return;
@@ -2478,9 +2681,9 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     }
     G.hp = Math.max(0, playerRef.hp);
     SDT.Sound.sfx('hurt');
-    // delay 130ms：让敌方 lungefx 前倾先播，数字随后到（读得出「这一刀是谁砍的」）
-    floats.push({ unit: 'self', text: '-' + r.dealt, cls: 'hurt', delay: 130 });
-    if (r.dealt > 0) floats.push({ unit: 'self', text: '', cls: 'stk stk-late sticker-hurt', delay: 130 });
+    // 敌方阶段已在命中前等待前摇，受击数字与实际扣血同拍出现。
+    floats.push({ unit: 'self', text: '-' + r.dealt, cls: 'hurt' });
+    if (r.dealt > 0) floats.push({ unit: 'self', text: '', cls: 'stk stk-late sticker-hurt' });
     G.log(`[[icon:demon]] <b>${esc(foe.name)}</b> 攻击：你受到 <b>${r.dealt}</b> 点攻击伤害（${G.hp}/${G.maxHp}）`, 'warn');
     return r.dealt;
   }

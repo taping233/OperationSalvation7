@@ -7,7 +7,7 @@
  * （id 不入 Cards.all()，不影响卡库与设计者档的对齐断言）、不可掉落/发现/上架。
  * 数值口径随「初始攻击」家族：0 费、造成等同攻击力的伤害；调数值改这一处即可。 */
 const ARROW_TOKEN = { id: 'token-arrow', name: '箭', cost: 0, rarity: '衍生', type: '武术',
-  desc: '造成等同于攻击力的伤害。', dmg: 0, unrandom: true };
+  desc: '造成等同于攻击力的伤害。', dmg: 0, dmgType: 'attack', unrandom: true };
 
 /* ---------- 限制卡池解析（老板 2026-09-08 定版池子清单） ----------
  * 「发现 / 随机获取 / 获得 N 张 ____卡/牌」句式中的名词短语 → 卡池谓词。
@@ -74,9 +74,15 @@ const FRESH_RESULT = (did) => ({ did, drawn: false, healed: false, armored: fals
 export function makeHitFoe(deps) {
   const {combat, pushFloat, foeIndexOf, sweepDead} = deps;
     const hitFoe = (ctx, t, n, type, caster = {}, segmentOrder) => {
+      const hpBefore = t.hp;
+      const shieldBefore = t.defense?.shield || 0;
       const r = combat.dealDamage(caster, t, n, type);
-      if (r.dealt > 0) pushFloat({ unit: foeIndexOf ? foeIndexOf(t) : 0, text: '-' + r.dealt, cls: 'dmg', type,
-        label: segmentOrder ? `第 ${segmentOrder} 段` : '', sequence: segmentOrder });   // 文本结算多段也逐段标号
+      const shieldBreak = shieldBefore > 0 && !(t.defense?.shield || 0);
+      if (r.dealt > 0 || shieldBreak) pushFloat({ unit: foeIndexOf ? foeIndexOf(t) : 0,
+        text: r.dealt > 0 ? '-' + r.dealt : '护盾破碎', cls: r.dealt > 0 ? 'dmg' : 'block', type,
+        label: segmentOrder ? `第 ${segmentOrder} 段` : '', sequence: segmentOrder,
+        hpBefore, hpAfter: t.hp, maxHp: t.maxHp,
+        shieldBreak });   // 文本结算多段也逐段标号
       // 文本步骤路径不经过 battle.core 的 hitFoe，0 血死亡判定补在这里（2026-09-13 实测：快意恩仇打至 0 血敌人不倒）
       if (t && !t.dead && t.hp <= 0 && typeof sweepDead === 'function') sweepDead();
       return r;

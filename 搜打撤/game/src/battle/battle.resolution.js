@@ -5,7 +5,7 @@ function createBattleResolution(ports) {
     fixedDamageType, hasCurse, getAliveFoes, getGrowth, addArmor, applyStatus, findCard, addTempCard, queueDiscover,
     splitClauses, applyTextEffects, registerTurnStart, registerBattle, castRandomSpells,
     drawCards, grantSha, hitFoe, drawOf, isAOE } = ports;
-  return function resolveCard(card, target, infused, fuelCost, uid) {
+  function* resolveCardSteps(card, target, infused, fuelCost, uid) {
 
     // 血毒双镖（2026-09-16 留言「血毒双镖应该能选择两次目标」）：两段拆开——首段（攻+1 附加流血）
     // 随本牌目标结算；二段（攻+1 附加中毒）由 execPlay 收尾进入点选（interaction 'dart'），
@@ -70,14 +70,24 @@ function createBattleResolution(ports) {
         const hitCount = operation.hitCount || 1;
         let preferred = target;
         for (let segment = 0; segment < hitCount; segment++) {
+          const windupTargets = operation.target === 'allEnemies'
+            ? getAliveFoes()
+            : [preferred && !preferred.dead ? preferred : getAliveFoes()[0]].filter(Boolean);
+          if (!windupTargets.length) break;
+          yield { kind: 'windup', targets: windupTargets };
           const targets = operation.target === 'allEnemies'
             ? getAliveFoes()
             : [preferred && !preferred.dead ? preferred : getAliveFoes()[0]].filter(Boolean);
           if (!targets.length) break;
+          let hitThisSegment = false;
           for (const foe of targets) {
-            if (!foe.dead) hitFoe(foe, damageCard, dmgVal, type,
-              hitCount > 1 ? `（第 ${segment + 1} 段）` : '', hitCount > 1 ? segment + 1 : null);
+            if (!foe.dead) {
+              hitFoe(foe, damageCard, dmgVal, type,
+                hitCount > 1 ? `（第 ${segment + 1} 段）` : '', hitCount > 1 ? segment + 1 : null);
+              hitThisSegment = true;
+            }
           }
+          if (hitThisSegment) yield { kind: 'hit', segment: segment + 1 };
           if (operation.target === 'chosenEnemy') preferred = targets[0];
           if (operation.retarget !== 'livingFoes' && operation.target === 'chosenEnemy' && preferred.dead) break;
         }
@@ -142,15 +152,21 @@ function createBattleResolution(ports) {
       if (!targets.length) return;
       let dealtTotal = 0;
       for (let i = 0; i < times; i++) {
+        const windupTargets = isAOE(card)
+          ? getAliveFoes()
+          : [target && !target.dead ? target : getAliveFoes()[0]].filter(Boolean);
+        if (!windupTargets.length) break;
+        yield { kind: 'windup', targets: windupTargets };
         const segmentTargets = isAOE(card)
           ? getAliveFoes()
           : [target && !target.dead ? target : getAliveFoes()[0]].filter(Boolean);
         if (!segmentTargets.length) break;
-        segmentTargets.forEach(foe => {
+        let hitThisSegment = false;
+        for (const foe of segmentTargets) {
           if (!foe.dead) {
             if (hpCap > 0 && foe.hp > hpCap) {
               if (i === 0) log(`[[icon:cross]] <b>${esc(foe.name)}</b> 血量高于 ${hpCap}：${esc(card.name)} 无效`, 'warn');
-              return;
+              continue;
             }
             let foeDmg = dmgVal;
             if (halfB && foe.maxHp && foe.hp <= foe.maxHp / 2) {
@@ -164,8 +180,10 @@ function createBattleResolution(ports) {
               if (i === 0) log(`[[icon:blood]] <b>${esc(foe.name)}</b> 处于流血状态，伤害 +${pierceB[1]}`, 'sys');
             }
             dealtTotal += hitFoe(foe, card, foeDmg, type, times > 1 ? `（第 ${i + 1} 段）` : '', times > 1 ? i + 1 : null);
+            hitThisSegment = true;
           }
-        });
+        }
+        if (hitThisSegment) yield { kind: 'hit', segment: i + 1 };
       }
       // 吸血：回复等量生命（嗜血刃/噬血术/血蝠风暴）
       if (/回复等量生命/.test(desc) && dealtTotal > 0) {
@@ -184,9 +202,13 @@ function createBattleResolution(ports) {
         if (t0) {
           let preferred = t0, cast = 0;
           for (let k = 0; k < +sm[1]; k++) {
-            const next = preferred && !preferred.dead ? preferred : getAliveFoes()[0];
+            let next = preferred && !preferred.dead ? preferred : getAliveFoes()[0];
+            if (!next) break;
+            yield { kind: 'windup', targets: [next] };
+            next = preferred && !preferred.dead ? preferred : getAliveFoes()[0];
             if (!next) break;
             hitFoe(next, card, dmgVal, type, `（额外施放第 ${k + 1} 次）`, k + 1);
+            yield { kind: 'hit', segment: k + 1 };
             preferred = next;
             cast++;
           }
@@ -199,7 +221,12 @@ function createBattleResolution(ports) {
         const rest = targets.filter(t => !t.dead);
         const recast = rest.length ? rest : getAliveFoes().slice(0, 1);
         log(`[[icon:sparkles]] <b>${esc(card.name)}</b>：击杀敌人，再施放一次`, 'sys');
-        recast.forEach(foe => { if (!foe.dead) hitFoe(foe, card, dmgVal, type, '（再施放）'); });
+        if (recast.length) yield { kind: 'windup', targets: recast };
+        let recastHit = false;
+        for (const foe of recast) {
+          if (!foe.dead) { hitFoe(foe, card, dmgVal, type, '（再施放）'); recastHit = true; }
+        }
+        if (recastHit) yield { kind: 'hit', segment: times + 1 };
       }
       did = true;
     }
@@ -274,15 +301,16 @@ function createBattleResolution(ports) {
       else imm.push(cl);
     });
     let healed = false, armored = false, drawn = false;
-    imm.forEach(cl => {
+    for (const cl of imm) {
       // 双镖首段若已击杀原目标，流血不得借文本执行器的空目标回退串到下一名活敌人。
-      if (card.id === 'tt7-bloodpoison' && target && target.dead && /流血/.test(cl)) return;
-      const res = applyTextEffects(card, cl, target, { structuredHit, infused, fuelCost, uid, hpAtCast });
+      if (card.id === 'tt7-bloodpoison' && target && target.dead && /流血/.test(cl)) continue;
+      const args = [card, cl, target, { structuredHit, infused, fuelCost, uid, hpAtCast }];
+      const res = applyTextEffects.steps ? yield* applyTextEffects.steps(...args) : applyTextEffects(...args);
       did = did || res.did;
       healed = healed || res.healed;
       armored = armored || res.armored;
       drawn = drawn || res.drawn;
-    });
+    }
     // 结构化词条兜底（描述未写明但制作坊标注了回复/护甲/抽卡字段时）——纯注能句未注能时同门跳过（第十二批）
     if (!hasStructuredOnPlay && !(infuseLead && !infused) && !healed && !skillOnly && +(card.heal || 0) > 0) {
       const n = +(card.heal || 0);
@@ -315,7 +343,14 @@ function createBattleResolution(ports) {
     // 「被注能时」句在打出时不结算（splitClauses 已剥出，留给 resolveInfusedFuel）
     if (!did && !skillOnly && !hasStructuredOnPlay) log(`[[icon:play]] <b>${esc(card.name)}</b>：该效果在 M1 后续实装（占位）`, 'dim');
   
-  };
+  }
+
+  // 敌方回合与抽到即施放仍需要同步结算；玩家动作队列可逐段推进同一规则生成器。
+  function resolveCard(...args) {
+    for (const _ of resolveCardSteps(...args)) { /* 同步消费每段 */ }
+  }
+  resolveCard.steps = resolveCardSteps;
+  return resolveCard;
 }
 
 export { createBattleResolution };

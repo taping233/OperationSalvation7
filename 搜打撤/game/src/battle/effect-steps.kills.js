@@ -3,12 +3,18 @@
  * 共享端口由壳经参数 s 注入（deps 展开 + esc/hitFoe + 模块级常量），本文件零 import。 */
 export function killsSteps(s) {
   const {combat, getAlive, log, heal, pushFloat, queueDiscover, randomDiscoverCard, addTempCard, allCards, random01, getPlayerHp, getHandSize, getHandCards, burstPoison, deckDraw, fleeBattle, getPlayerCaster, damagePlayer, setNextSpellTwice, randomAcquired, esc, hitFoe, POOL_NUM_MAP, parsePoolNoun, isRandomObtainable} = s;
+  const paced = steps => Object.assign((...args) => {
+    const iterator = steps(...args);
+    let next = iterator.next();
+    while (!next.done) next = iterator.next();
+    return next.value;
+  }, { steps });
   return [
       /* ============ 击杀 / 行动 / 资源段 ============ */
       {
         id: 'kill.minions', gate: 'fresh', label: '消灭 N 名敌人（可带攻击力门槛，无门槛优先残血）',
         when: (ctx) => ctx.desc.match(/消灭\s*(\d+)\s*名(?:\s*攻击力\s*(\d+)\s*点?及以下)?/),
-        run: (ctx, m) => {
+        run: paced(function* (ctx, m) {
           const n = +m[1];
           const cap = m[2] ? +m[2] : null;
           let targets;
@@ -17,12 +23,19 @@ export function killsSteps(s) {
           } else {
             targets = getAlive().filter(f => !f.dead && f.hp > 0 && f.hp < (f.maxHp || f.hp)).slice(0, n);
           }
-          targets.forEach(f => {
+          let killed = 0;
+          for (const f of targets) {
+            if (f.dead) continue;
+            yield { kind: 'windup', targets: [f] };
+            if (f.dead) continue;
             f.hp = 0; f.dead = true;
             log(`[[icon:skull]] <b>${esc(f.name)}</b> 被消灭！`, 'ok');
-          });
-          if (targets.length) { pushFloat({ unit: 'self', text: '', cls: 'stk sticker-boom' }); ctx.did = true; }
-        },
+            killed++;
+            ctx.did = true;
+            if (killed === 1) pushFloat({ unit: 'self', text: '', cls: 'stk sticker-boom' });
+            yield { kind: 'hit' };
+          }
+        }),
       },
       {
         id: 'cast.nextSpellTimes', gate: 'fresh', label: '「下一张法术施放 N 次」（元素风暴，2026-09-16 老板：删注能，直接打出即注册）',
@@ -37,25 +50,31 @@ export function killsSteps(s) {
       {
         id: 'dmg.taunt', gate: 'fresh', label: '扰敌：迫使前两名敌人相互攻击',
         when: (ctx) => /迫使其?相互攻击/.test(ctx.desc) ? true : null,
-        run: (ctx) => {
+        run: paced(function* (ctx) {
           const ts = getAlive().slice(0, 2);
           if (ts.length === 2) {
+            yield { kind: 'windup', targets: [ts[1]] };
+            if (ts[1].dead) return;
             const r = hitFoe(ctx, ts[1], 0, combat.TYPES.ATTACK, { atk: ts[0].atk });
             log(`[[icon:swords]] <b>扰敌</b>：${esc(ts[0].name)} 被迫攻击 ${esc(ts[1].name)}，造成 ${r.dealt} 点伤害`, 'sys');
             ctx.did = true;
+            yield { kind: 'hit' };
           }
-        },
+        }),
       },
       {
         id: 'dmg.attackAll', gate: 'fresh', label: '攻击全体敌人（按攻击力结算）',
         when: (ctx) => /攻击全体敌人/.test(ctx.desc) ? true : null,
-        run: (ctx) => {
+        run: paced(function* (ctx) {
           const caster = getPlayerCaster ? getPlayerCaster() : {};
+          const targets = getAlive().slice();
+          if (targets.length) yield { kind: 'windup', targets };
           let total = 0;
-          getAlive().slice().forEach(t => { total += hitFoe(ctx, t, 0, combat.TYPES.ATTACK, caster).dealt; });
+          for (const target of targets) total += hitFoe(ctx, target, 0, combat.TYPES.ATTACK, caster).dealt;
+          if (targets.length) yield { kind: 'hit' };
           log(`[[icon:swords]] <b>${esc(ctx.card.name)}</b>：攻击全体敌人，共造成 ${total} 点攻击伤害`, 'sys');
           ctx.did = true;
-        },
+        }),
       },
       {
         id: 'dmg.loseLife', gate: 'fresh', label: '损失 N 点生命（恶魔之力）',

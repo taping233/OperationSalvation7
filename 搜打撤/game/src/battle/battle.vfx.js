@@ -5,20 +5,24 @@ const UI = window.SDT.UI;
 import { rect as uiRect, scale as uiScale } from '../ui/ui-scale.js';
 import { Random } from '../core/random.js';
 import { demoMs, getPace } from './battle.pace.js';
-import { FEEDBACK_DELTA_MS, feedbackClass, feedbackDelay } from './battle.feedback.js';
-import { play as playUnitFrames } from './battle.frames.js';
+import { FEEDBACK_DELTA_MS, enqueueFeedback, feedbackClass, feedbackDelay, feedbackShakeDuration, waitMs } from './battle.feedback.js';
+import { play as playUnitFrames, setPaused as setUnitFramesPaused } from './battle.frames.js';
 import { assetUrl } from '../core/asset-url.js';
 import { takeFloats } from './battle.core.js';
+const foeHurtTimers = new WeakMap();
+const shakeAnimations = new WeakMap();
   // ---------- 战斗特效（v0.32.2）：伤害/受击飘字 + 受击抖动 + 红闪 ----------
   // 飘字挂在 #overlay 层而不是 ovBody——ovBody 每次渲染整块重建，飘字动画会被腰斩
   // baseDelay：等出牌飞行落点后再结算（杀戮尖塔式：牌到手伤害才跳）
   // —— STS2 打击感两件套（2026-09-12 对齐） ——
   // AnimShake：x(t)=10·sin(4t)·sin(t/2)，t:0→2π、Cubic-Out 时间映射（快速颤动带衰减包络）
   // stopMs>0：开头插入静止段（演出层顿帧）——重击/终结一击先卡住一拍再弹开
-  function stsShake(figEl, power = 1, stopMs = 0) {
+  function stsShake(figEl, power = 1, stopMs = 0, duration = 1000) {
     if (!figEl || !figEl.animate) return;
+    const previous = shakeAnimations.get(figEl);
+    if (previous && previous.playState !== 'finished') previous.cancel();
     const T = Math.PI * 2, N = 32, kf = [];
-    const total = 1000 + stopMs;
+    const total = duration + stopMs;
     const lead = stopMs / total;
     if (stopMs) kf.push({ transform: 'translateX(0px)', offset: 0 });
     for (let i = 0; i <= N; i++) {
@@ -26,7 +30,8 @@ import { takeFloats } from './battle.core.js';
       const t = T * (1 - Math.pow(1 - u, 3));
       kf.push({ transform: `translateX(${(10 * power * Math.sin(4 * t) * Math.sin(0.5 * t)).toFixed(2)}px)`, offset: lead + u * (1 - lead) });
     }
-    figEl.animate(kf, { duration: total, easing: 'linear' });
+    const animation = figEl.animate(kf, { duration: total, easing: 'linear' });
+    shakeAnimations.set(figEl, animation);
   }
   // 自我受击：后仰 + 红染（原 .fx-hit-self CSS 类从未被挂载，2026-09-19 改走 WAAPI 落地；
   // 玩家立绘在左侧面向敌人，后仰=向左拉开距离；关键帧结构沿用旧 stsSelfHit 设计）
@@ -42,6 +47,24 @@ import { takeFloats } from './battle.core.js';
       { transform: 'translateX(0)', filter: 'none', offset: 1 },
     ];
     figEl.animate(kf, { duration: total, easing: 'ease-out' });
+  }
+  function playFoeHurtFrame(figEl) {
+    const unit = figEl.closest('.sts-foe');
+    const img = figEl.querySelector('img');
+    if (!unit || !img) return;
+    clearTimeout(foeHurtTimers.get(unit));
+    unit.classList.remove('fx-hit');
+    void img.offsetWidth;
+    unit.classList.add('fx-hit');
+    const finish = event => {
+      if (event && event.animationName !== 'btFoeHurt') return;
+      unit.classList.remove('fx-hit');
+      img.removeEventListener('animationend', finish);
+      clearTimeout(foeHurtTimers.get(unit));
+      foeHurtTimers.delete(unit);
+    };
+    img.addEventListener('animationend', finish);
+    foeHurtTimers.set(unit, setTimeout(() => finish(), demoMs(900)));
   }
   // 敌方攻击前摇（P1）：立绘向玩家方向突进再回弹——敌人面向左，突进=负 X
   function foeLunge(figEl) {
@@ -176,14 +199,58 @@ import { takeFloats } from './battle.core.js';
     }
     span.animate(kf, { duration: dur, easing: 'linear', fill: 'forwards' });
   }
+  async function globalHitStop(ms) {
+    if (!(ms > 0) || SDT.Motion?.reduceMotion()) return;
+    const running = typeof document.getAnimations === 'function'
+      ? document.getAnimations().filter(animation => animation.playState === 'running') : [];
+    running.forEach(animation => { try { animation.pause(); } catch { /* 已结束的动画不参与顿帧 */ } });
+    setUnitFramesPaused(true);
+    try { await new Promise(resolve => setTimeout(resolve, demoMs(ms))); }
+    finally {
+      setUnitFramesPaused(false);
+      running.forEach(animation => {
+        if (animation.playState === 'paused') { try { animation.play(); } catch { /* 已移除节点上的动画无需恢复 */ } }
+      });
+    }
+  }
+  function presentHitHealth(body, unit, hp, maxHp, instant = false) {
+    if (unit == null || !(maxHp > 0) || !Number.isFinite(Number(hp))) return;
+    const target = body.querySelector(`.sts-foe[data-eidx="${unit}"]`);
+    const wrap = target && target.querySelector('.bt-hpwrap');
+    if (!wrap) return;
+    const pct = `${Math.max(0, Math.min(100, Number(hp) / maxHp * 100)).toFixed(1)}%`;
+    const bars = [wrap.querySelector('.sts-hp-main'), wrap.querySelector('.sts-hp-ghost')].filter(Boolean);
+    for (const bar of bars) {
+      if (instant) {
+        bar.style.transition = 'none';
+        bar.style.width = pct;
+        void bar.offsetWidth;
+        bar.style.transition = '';
+      } else bar.style.width = pct;
+    }
+    const text = wrap.querySelector('span');
+    if (text) text.textContent = `${Math.max(0, hp)}/${maxHp}`;
+  }
   function spawnFloats(body, baseDelay = 0) {
     const list = takeFloats();
     if (!list.length) return;
     const ov = UI.el.overlay;
     const ovR = uiRect(ov);   // 布局口径：飘字/贴图定位
     const perUnit = {};   // #19：同单位多段伤害错峰呈现
+    const damageBeatCounts = new Map();
+    let previousDue = 0;
+    const stagedHealth = new Set();
     list.forEach((f) => {
-      const fire = () => {
+      if (f.hpBefore == null) return;
+      const key = String(f.unit);
+      damageBeatCounts.set(key, (damageBeatCounts.get(key) || 0) + 1);
+    });
+    list.forEach((f) => {
+      if (f.hpBefore != null && f.maxHp > 0 && !stagedHealth.has(String(f.unit))) {
+        stagedHealth.add(String(f.unit));
+        presentHitHealth(body, f.unit, f.hpBefore, f.maxHp, true);
+      }
+      const fire = async () => {
       const isSelf = f.unit === 'self';
       const allyI = isSelf ? null : (/^ally:(\d+)$/.exec(String(f.unit)) || [])[1];   // 随从替伤：battle.core 推 'ally:N'
       const figEl = isSelf
@@ -193,6 +260,13 @@ import { takeFloats } from './battle.core.js';
           : body.querySelector(`.sts-foe[data-eidx="${f.unit}"] .sts-figure`);
       if (!figEl) return;
       // 纯演出指令（无文字）：敌方攻击前摇+弹道 / 诅咒施加彩闪
+      if ((f.cls || '').includes('windupfx')) {
+        if (!SDT.Motion?.reduceMotion()) {
+          figEl.classList.add('bt-hit-anticipate');
+          setTimeout(() => figEl.classList.remove('bt-hit-anticipate'), demoMs(130));
+        }
+        return;
+      }
       if ((f.cls || '').includes('lungefx')) {
         if (!SDT.Motion?.reduceMotion()) { foeLunge(figEl); foeAttackLine(body, figEl); }
         // 2× 档呼啸提速 ×1.5（迭代评审 09-20 音频岗）：步进压缩后 0.22s 呼啸会「未完即中弹」
@@ -208,13 +282,18 @@ import { takeFloats } from './battle.core.js';
       const amt = parseInt(String(f.text).replace(/[^\d-]/g, ''), 10) || 0;
       const heavy = damage && amt >= 10;   // 重击：≥10 点——更大命中贴图 + 更猛抖动 + 顿帧
       const finisher = damage && feedbackClass(f).includes('fx-finisher');
-      const stopMs = (heavy || finisher) && !reduced ? 60 : 0;   // 演出层顿帧：先卡住一拍再弹开
+      const stopMs = (heavy || finisher) && !reduced ? 100 : 0;   // 全场顿帧一拍，2× 同步缩短
+      if (damage) SDT.Sound.sfx('hit', { rateScale: heavy ? 1.18 : amt >= 5 ? 1.08 : 0.96 });
+      if (f.shieldBreak) SDT.Sound.sfx('shieldBreak');
       // STS2 口径：hurt 骨骼/序列帧动画与抖动互斥——帧播上了就不抖；随从无帧集，不代播玩家动作。
       // 攻击动作（atk）改在卡牌起飞时播（见 animateBattleTransition），此处不再倒挂重播
       const framesPlayed = damage && !reduced && isSelf && playUnitFrames('hurt');
       if (damage && !reduced && !framesPlayed) {
-        if (isSelf) stsSelfHit(figEl, heavy ? 1.35 : 1, stopMs);   // 自己：后仰+红染
-        else stsShake(figEl, heavy ? 1.55 : 1, stopMs);
+        if (isSelf) stsSelfHit(figEl, heavy ? 1.35 : 1);   // 自己：后仰+红染
+        else {
+          if (allyI == null) playFoeHurtFrame(figEl);
+          stsShake(figEl, heavy ? 1.55 : 1, 0, feedbackShakeDuration(damageBeatCounts.get(String(f.unit)) || 1));
+        }
       }
       if (!reduced && !stk) {
         const preset = SPARK_PRESETS[f.tintKey];
@@ -291,9 +370,27 @@ import { takeFloats } from './battle.core.js';
         span.addEventListener('animationend', () => span.remove(), { once: true });
         setTimeout(() => span.remove(), 1400);   // 兜底：animationend 偶尔不触发时清掉不可见残骸
       }
+      await globalHitStop(stopMs);
       };
-      const delay = baseDelay + (f.delay || 0) + feedbackDelay(f.unit, perUnit, demoMs(FEEDBACK_DELTA_MS));   // f.delay：演出错拍；同单位每多一段 +320ms
-      if (delay) setTimeout(fire, delay); else fire();
+      const due = baseDelay + (f.delay || 0) + feedbackDelay(f.unit, perUnit, demoMs(FEEDBACK_DELTA_MS));   // 同单位多段按节拍错开
+      const gap = Math.max(0, due - previousDue);
+      previousDue = Math.max(previousDue, due);
+      enqueueFeedback(async () => {
+        const isSelf = f.unit === 'self';
+        const allyI = isSelf ? null : (/^ally:(\d+)$/.exec(String(f.unit)) || [])[1];
+        const fig = isSelf
+          ? body.querySelector('#btSelf .sts-figure')
+          : allyI != null
+            ? body.querySelector(`.sts-ally[data-ally-i="${allyI}"] .sts-figure`)
+            : body.querySelector(`.sts-foe[data-eidx="${f.unit}"] .sts-figure`);
+        const damage = !f.warm && !(f.cls || '').includes('stk') && !(f.cls || '').includes('block') && !(f.cls || '').includes('windupfx');
+        if (fig && damage && !SDT.Motion?.reduceMotion()) {
+          fig.classList.add('bt-hit-anticipate');
+          try { await waitMs(demoMs(85)); } finally { fig.classList.remove('bt-hit-anticipate'); }
+        }
+        if (f.hpAfter != null) presentHitHealth(body, f.unit, f.hpAfter, f.maxHp);
+        await fire();
+      }, gap);
     });
   }
   // 全屏受击红闪（径向暗角，600ms 淡出）

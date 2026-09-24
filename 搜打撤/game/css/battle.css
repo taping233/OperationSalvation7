@@ -77,6 +77,23 @@
 /* —— 场地：单位分立两侧、站在场地下方 —— */
 .sts-arena { flex:1; position:relative; min-height:clamp(220px,42vh,620px); }
 .sts-unit { position:absolute; bottom:clamp(3%,2.5vh,5%); text-align:center; z-index:2; }
+.bt-thought-bubble { position:absolute; left:50%; bottom:calc(100% + 24px); transform:translateX(-50%); z-index:20;
+  width:max-content; max-width:min(280px,70vw); padding:9px 13px; border:1px solid #e6d7b2;
+  border-radius:12px; color:#302b24; background:linear-gradient(145deg,#fff9e9,#e8ddc4);
+  box-shadow:0 6px 22px #0009,inset 0 1px #fff; font:600 12px/1.5 'Noto Serif SC',serif;
+  text-align:center; pointer-events:none; animation:btThoughtIn .18s ease-out both; }
+.bt-thought-bubble::after { content:''; position:absolute; left:50%; bottom:-6px; width:10px; height:10px;
+  transform:translateX(-50%) rotate(45deg); border-right:1px solid #e6d7b2; border-bottom:1px solid #e6d7b2; background:#e8ddc4; }
+@keyframes btThoughtIn { from{opacity:0;transform:translate(-50%,5px) scale(.94)} to{opacity:1;transform:translate(-50%,0) scale(1)} }
+.bt-card.card-pickup-flash { animation:btCardPickup .28s ease-out; }
+@keyframes btCardPickup { 0%{filter:brightness(1);box-shadow:0 0 0 transparent} 45%{filter:brightness(1.35);box-shadow:0 0 18px #f2d79d99} 100%{filter:brightness(1.08);box-shadow:0 0 8px #f2d79d55} }
+.bt-hit-anticipate { filter:drop-shadow(0 0 12px #ffd27b); }
+.sts-foe .sts-figure img { transform-origin:50% 100%; animation:btFoeIdle 3.2s ease-in-out infinite alternate;
+  animation-delay:var(--foe-idle-phase,0s); }
+.sts-foe.fx-hit .sts-figure img { animation:btFoeHurt .42s ease-out both; }
+@keyframes btFoeIdle { from{transform:translateY(0) scale(1)} to{transform:translateY(-3px) scale(1.012)} }
+@keyframes btFoeHurt { 0%{filter:brightness(1);transform:translateX(0)} 18%{filter:brightness(2.2) sepia(.25);transform:translateX(-5px) scale(.98)} 52%{filter:brightness(1.55);transform:translateX(3px) scale(1.01)} 100%{filter:brightness(1);transform:translateX(0)} }
+@media(prefers-reduced-motion:reduce){.bt-thought-bubble,.bt-card.card-pickup-flash,.sts-foe .sts-figure img,.sts-foe.fx-hit .sts-figure img{animation:none}.bt-hit-anticipate{filter:none}}
 .sts-me { left:clamp(4%,6vw,7%); width:clamp(190px,22vw,320px); }
 .sts-foes { position:absolute; right:clamp(4%,6vw,7%); bottom:clamp(3%,2.5vh,5%); left:42%; display:flex; justify-content:flex-end;
   align-items:flex-end; gap:clamp(8px,1vw,18px); z-index:2; }
@@ -197,6 +214,8 @@
 }
 /* 目标/状态高亮（拖拽指向、可选中、免伤、死亡） */
 #overlay .battle-stage.sts .sts-unit.can-target { cursor:pointer; }
+.sts-unit.can-target:focus-visible { outline:2px solid #f2d79d; outline-offset:5px; border-radius:12px; }
+.sts-unit.can-target:focus-visible .sts-figure { filter:drop-shadow(0 0 20px #f2d79dcc); }
 .sts-unit.can-target .sts-figure { filter:drop-shadow(0 0 15px rgba(225,225,225,.7)); }
 .sts-me.can-target .sts-figure { filter:drop-shadow(0 0 14px rgba(120,210,150,.65)); }
 .sts-unit.drag-over .sts-figure { filter:drop-shadow(0 0 26px rgba(245,245,245,.95)); }

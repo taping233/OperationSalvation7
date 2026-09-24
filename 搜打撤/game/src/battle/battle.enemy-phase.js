@@ -5,6 +5,7 @@ import { esc } from '../core/shared.js';
 import { BATTLE_PHASES, cancelTargeting, transitionBattle } from './battle.state.js';
 import { Random } from '../core/random.js';
 import * as Combat from './combat.js';
+import { waitForFeedback, waitMs } from './battle.feedback.js';
 import { demoMs } from './battle.pace.js';
 import { battleState, G, foes, mode, drawPile, hand, consumed, grave, energy, maxEnergy, turn, pdef, pstat, busy, infusing, discovering, handSelecting, choosing, interaction, noDrawNext, floats, cardAnims, playedMovesThisTurn, allies, extraTurn, timeRune, holyRune, fireballRuneOn, swiftRune, timeSpaceRune, timeSpaceUsed, set$noDrawNext, set$energy, set$extraTurn, set$battleState, set$interaction, set$turn, set$busy, set$timeSpaceUsed, set$playedMartialThisTurn, set$playedMovesThisTurn, set$pendingHint, set$lastPersistAt } from './battle.runtime.js';
 import { processDelayed, accrueGrowth, resolveCard, syncCurseCondEquips, applyKillRewards, unplayableReason, queueCardExecution, foeIdx, addPlayerCurse, playerTakeHit, frenzyCurse, elCurse, requestBattleRender, R, alive, intentFor, drawCards, resolveFoeDefeat, sweepDead, nestPhase, grantSha, findCard, effCostOf, finish } from './battle.engine.js';
@@ -97,8 +98,11 @@ import { processDelayed, accrueGrowth, resolveCard, syncCurseCondEquips, applyKi
     if (!alive().length) { set$busy(false); finish(true); return; }
     // —— 敌人回合：逐个行动 ——
     const acting = alive();
+    const enemyToken = battleState.token;
+    const stillEnemyPhase = () => G?.battleActive && battleState.token === enemyToken && battleState.phase === BATTLE_PHASES.ENEMY;
     let i = 0;
-    const step = () => {
+    const step = async () => {
+      if (!stillEnemyPhase()) return;
       if (G.hp <= 0) { set$busy(false); finish(false); return; }
       if (i >= acting.length) { afterEnemies(); return; }
       const foe = acting[i++];
@@ -126,10 +130,16 @@ import { processDelayed, accrueGrowth, resolveCard, syncCurseCondEquips, applyKi
             G.log(`[[icon:runner]] 你在<b>潜行</b>中，<b>${esc(foe.name)}</b> 无法将你作为攻击对象`, 'sys');
             break;
           }
+          floats.push({ unit: foes.indexOf(foe), text: '', cls: 'lungefx' });
+          requestBattleRender();
+          await waitForFeedback();
+          if (!stillEnemyPhase()) return;
+          await waitMs(demoMs(130));
+          if (!stillEnemyPhase()) return;
+          if (foe.dead || G.hp <= 0) break;
           // 随从优先替主人承受伤害（Q4 老板定向：步兵「优先为主人承受伤害」；无攻血物件除外）
           const guard = allies.find(a => !a.dead && !a.statless);
           if (guard) {
-            floats.push({ unit: foes.indexOf(foe), text: '', cls: 'lungefx' });   // 攻击前摇：敌人前倾
             const shieldBefore = guard.defense?.shield || 0;
             const ar = Combat.dealDamage({ atk: foe.atk }, guard, 0, Combat.TYPES.ATTACK);
             if (shieldBefore > 0 && !(guard.defense?.shield || 0)) SDT.Sound.sfx('shieldBreak');
@@ -140,9 +150,11 @@ import { processDelayed, accrueGrowth, resolveCard, syncCurseCondEquips, applyKi
               guard.dead = true;
               G.log(`[[icon:skull]] <b>${esc(guard.name)}</b> 阵亡`, 'warn');
             }
+            requestBattleRender();
+            await waitForFeedback();
+            if (!stillEnemyPhase()) return;
             continue;
           }
-          floats.push({ unit: foes.indexOf(foe), text: '', cls: 'lungefx' });   // 攻击前摇：敌人前倾
           const shieldBefore = pdef.shield || 0;
           const dealt = playerTakeHit(foe);
           if (shieldBefore > 0 && !(pdef.shield || 0)) SDT.Sound.sfx('shieldBreak');
@@ -181,6 +193,9 @@ import { processDelayed, accrueGrowth, resolveCard, syncCurseCondEquips, applyKi
           } else if (dealt > 0 && foe.behavior === 'curse') {
             elCurse(foe);
           }
+          requestBattleRender();
+          await waitForFeedback();
+          if (!stillEnemyPhase()) return;
         }
       }
       requestBattleRender();

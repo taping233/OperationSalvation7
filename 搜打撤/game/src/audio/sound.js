@@ -208,7 +208,7 @@ const battleBgm = new Howl({ src: [BATTLE_BGM_URL], loop: true, html5: false, pr
     victory: 0.5, defeat: 0.5,
     draw: 0.45, shuffle: 0.5, card: 0.5,
     cardSelect: 0.34, discard: 0.3, burn: 0.38, kill: 0.28, danger: 0.38,
-    energyUp: 0.25, energyDown: 0.28, shieldUp: 0.22, shieldBreak: 0.48,
+    energyUp: 0.25, energyDown: 0.28, shieldUp: 0.22, shieldBreak: 0.48, armorBreak: 0.44,
     phase: 0.28, rarePlay: 0.42, curseEnd: 0.34,
     strike: 0.55,
   };
@@ -288,6 +288,7 @@ const battleBgm = new Howl({ src: [BATTLE_BGM_URL], loop: true, html5: false, pr
     energyDown: () => { tone({ f: 620, f2: 360, type: 'triangle', dur: .1, vol: .027 }); },
     shieldUp: () => { tone({ f: 460, f2: 780, type: 'triangle', dur: .14, vol: .03 }); tone({ f: 1120, type: 'sine', dur: .07, vol: .016, delay: .05 }); },
     shieldBreak: () => { noise({ dur: .13, vol: .04, fHi: 3200, fLo: 420 }); tone({ f: 720, f2: 120, type: 'triangle', dur: .16, vol: .032 }); },
+    armorBreak: () => { noise({ dur: .18, vol: .05, fHi: 2800, fLo: 240, type: 'lowpass' }); tone({ f: 420, f2: 95, type: 'sawtooth', dur: .2, vol: .04 }); },
     phase: (opts = {}) => opts.side === 'foe'
       ? tone({ f: 230, f2: 110, type: 'sine', dur: .2, vol: .033 })
       : (tone({ f: 520, f2: 650, type: 'triangle', dur: .08, vol: .024 }), tone({ f: 700, f2: 940, type: 'triangle', dur: .12, vol: .026, delay: .08 })),

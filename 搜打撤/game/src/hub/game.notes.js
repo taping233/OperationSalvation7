@@ -202,6 +202,7 @@ import { game } from '../run/game.session.js';
   // 开发者面板统一显隐：侧边栏开发者工具 + 标题页节点测试面板（两处共用，勿各自设 hidden）
   function syncDevVisibility() {
     UI.el.devTools.hidden = !game.devMode;
+    document.getElementById('devPanel').hidden = !game.devMode;
     if (UI.el.titleDev) UI.el.titleDev.hidden = !game.devMode;
   }
 

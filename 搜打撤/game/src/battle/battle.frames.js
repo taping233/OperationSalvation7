@@ -3,6 +3,7 @@ import { assetUrl } from '../core/asset-url.js';
 import { on as busOn } from '../core/event-bus.js';
 import { rect as uiRect, scale as uiScale } from '../ui/ui-scale.js';
 import { demoMs } from './battle.pace.js';
+import { Random } from '../core/random.js';
 
 // ---------- 战斗单位序列帧播放器（批次D：Pixi 材质层） ----------
 // 定调（老板 2026-09-12）：动画路线 = Pixi 材质层 + 序列帧，跳过 Spine；敌人本轮不上序列帧；
@@ -38,6 +39,7 @@ let texSets = new Map();    // role -> Promise<{ set, seqs }> | null
 let sprite = null;
 let emptyTexture = null;
 let cur = null;             // { role, fig, img, set, seqs, play, fi, tNext, lastRect }
+let pausedAt = 0;
 let wanted = false;         // 已 attach（战斗进行中）
 let pollTimer = 0;
 let renderHoldT = 0;
@@ -327,24 +329,33 @@ function buildTimeline(trigger) {
   return list.length ? { list, dur, loop: trigger === 'idle' } : null;
 }
 
-function playSeq(trigger) {
+function playSeq(trigger, phase = 0) {
   const tl = buildTimeline(trigger);
   if (!tl || !cur) return false;
-  cur.play = tl; cur.fi = 0;
-  applyFrame(tl.list[0]);
-  cur.tNext = performance.now() + tl.dur[0];
+  cur.play = tl;
+  cur.fi = tl.loop ? Math.min(tl.list.length - 1, Math.floor(Math.max(0, phase) * tl.list.length)) : 0;
+  applyFrame(tl.list[cur.fi]);
+  cur.tNext = performance.now() + tl.dur[cur.fi];
   return true;
 }
 
 // —— 帧时间轴推进（ticker 回调驱动） ——
 function advance(now) {
   const tl = cur && cur.play;
-  if (!tl) return;
+  if (!tl || pausedAt) return;
   if (now < cur.tNext) return;
   cur.fi++;
   if (cur.fi >= tl.list.length) {
     if (tl.loop) { cur.fi = 0; }               // 待机循环
-    else { playSeq('idle'); return; }          // 动作播完 → 回待机循环
+    else if (cur.resumeAfter) {
+      const resume = cur.resumeAfter;
+      cur.resumeAfter = null;
+      cur.play = resume.play;
+      cur.fi = resume.fi;
+      applyFrame(cur.play.list[cur.fi]);
+      cur.tNext = now + cur.play.dur[cur.fi];
+      return;
+    } else { playSeq('idle', Random.random('fx')); return; } // 单次动作播完 → 随机相位待机循环
   }
   applyFrame(tl.list[cur.fi]);
   cur.tNext = Math.max(cur.tNext, now) + tl.dur[cur.fi];
@@ -433,14 +444,14 @@ async function attach(body) {
   cur = {
     role, fig, img, set: set.set, seqs: set.seqs, boxes: set.boxes,
     portraitFill: fill, curBox: null, baseCharH: 0, imgBottom: 0, centerX: 0,
-    play: null, fi: 0, tNext: 0,
+    play: null, fi: 0, tNext: 0, resumeAfter: null,
     fallback: set.seqs.get('idle')[0], lastRect: null, ovLeft: ovR.left, ovTop: ovR.top,
     dirty: true,   // 首帧必须渲染
   };
   img.style.visibility = 'hidden';   // 保布局，内容由 sprite 呈现
   hostVisible(true);
   startLoop();
-  playSeq('idle');
+  playSeq('idle', Random.random('fx'));
   wakeRenderer(600);
 }
 
@@ -448,12 +459,29 @@ async function attach(body) {
 function play(name) {
   if (!cur || !cur.set || document.hidden) return;
   if (!ACT_SEQS[name]) return;
+  if (name !== 'idle') {
+    if (cur.play?.loop) cur.resumeAfter = { play: cur.play, fi: cur.fi };
+  } else {
+    cur.resumeAfter = null;
+  }
   playSeq(name);
   wakeRenderer(900);
 }
 
+function setPaused(paused) {
+  if (paused) {
+    if (!pausedAt) pausedAt = performance.now();
+    return;
+  }
+  if (!pausedAt) return;
+  const elapsed = Math.max(0, performance.now() - pausedAt);
+  pausedAt = 0;
+  if (cur && Number.isFinite(cur.tNext)) cur.tNext += elapsed;
+}
+
 // 战斗收尾/弹层挂起：卸下 sprite，恢复静态 img
 function hide() {
+  setPaused(false);
   lifecycle++;
   wanted = false;
   if (cur && cur.img) cur.img.style.visibility = '';
@@ -488,4 +516,4 @@ busOn('battle:end', () => hide());
 // 奖励/搜刮/背包/卡牌库等任何其他模式渲染时一律卸下，新增界面默认不在白名单。
 document.addEventListener('sdt-overlay-mode', (e) => { if (e.detail !== 'battle') hide(); });
 
-export { attach, play, hide, isLiveBattleFigure, cacheStats };
+export { attach, play, hide, isLiveBattleFigure, cacheStats, setPaused };

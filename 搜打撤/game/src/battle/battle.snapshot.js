@@ -6,7 +6,7 @@ const statusOf = value => value ? Object.freeze({ ...value.status }) : null;
 function createBattleSnapshot(input) {
   const {
     battleToken, mode, turn, energy, maxEnergy, busy, phase, actionQueueLength,
-    opts, player, pdef, pstat, foes, allies, hand, drawPile, discard, grave,
+    opts, player, pdef, pstat, foes, deathFxPending, allies, hand, drawPile, discard, grave,
     infusing, discovering, handSelecting, choosing, pendingTarget, pendingHint,
     viewingGrave, viewingBag, dreadShown, selectingDeck, deckNeed, selDeckMax,
     selShaN, sel, selPool, potionBar, pendingItem, slamPending, dartPending,
@@ -14,8 +14,9 @@ function createBattleSnapshot(input) {
   } = input;
   const playerStatus = pstat ? Object.freeze({ ...pstat, status: statusOf(pstat) }) : null;
   const playerDefense = freezeObject(pdef);
-  const readonlyFoes = foes.map(foe => Object.freeze({
+  const readonlyFoes = foes.map((foe, index) => Object.freeze({
     ...foe,
+    deathFxPending: !!deathFxPending?.[index],
     status: statusOf(foe),
     defense: freezeObject(foe.defense),
     intent: freezeObject(foe.intent),

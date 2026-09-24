@@ -1384,6 +1384,8 @@ body #overlay .battle-stage.sts .sts-me{bottom:-5vh!important}
 /* #7 怪物死亡不残留虚影和假血条：死亡单位整体移出画面 */
 #overlay .battle-stage.sts .sts-foe.dead,
 #overlay .battle-stage.sts .sts-unit.dead{display:none!important}
+/* 致命命中的伤害数字和死亡贴纸定位完成前，保留敌人立绘一拍。 */
+#overlay .battle-stage.sts .sts-foe.dead.bt-death-pending{display:block!important;opacity:1;filter:none}
 /* #8 发现弹层透明化（2026-09-15 重做：无框透明面板改为磨砂玻璃，
    样式统一收口到文件末尾「发现/选卡浮层统一重做」块） */
 #overlay .card.discover #ovBody{background:transparent}
