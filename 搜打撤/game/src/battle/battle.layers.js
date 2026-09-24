@@ -19,7 +19,7 @@ import { aim, clickSelectedUid, selectCardByClick, clickSelectedTarget, startAim
 import { showFoePreview, clearFoePreview } from './battle.hover.js';
 import { cardRuleHint } from './battle.preview.js';
   // 数字键选牌 / Esc 取消（原在 aim 片：需读手牌层 handLayer，随迁本片解 aim↔layers 环——2026-09-22 批5）
-  document.addEventListener('keydown', (e) => {
+  function onHandKeydown(e) {
     if (!handLayer || e.defaultPrevented || e.key === 'Escape') {
       if (e.key === 'Escape') {
         if (aim) cancelAim();   // STS2：Esc 也是取消指向的快捷键
@@ -36,7 +36,7 @@ import { cardRuleHint } from './battle.preview.js';
     if (!el || el.classList.contains('off')) { if (el) play(el.dataset.uid); return; }
     e.preventDefault();
     selectCardByClick(el.dataset.uid);
-  });
+  }
   // 状态角标：祝福（绿）+ 诅咒（红）——2026-09-11 架构批次 1 自 battle.core 外迁（纯视图函数）
   // compact（敌方名牌收纳，迭代评审 09-20）：总数>4 时退化为「图标+层数」——纯图标会丢层数（美术岗复核口径）；
   // 玩家名牌不传 compact，维持原样。09-20 老板：词条触摸讲解——data-term 交 term-tips.js 弹自绘讲解框
@@ -72,6 +72,29 @@ import { cardRuleHint } from './battle.preview.js';
   const handSlots = new Map();   // key -> { slot, card, sig, rect, isNew }
   let handSuspended = false;     // 墓地/背包/发现等战斗中弹层接管期间 = true（手牌被摘下但战斗未结束）
   let battleToken = null;        // 战斗实例令牌（snapshot.battleToken）：换场重置常驻层的唯一依据
+  let handSceneActive = false;
+
+  function enterHandScene() {
+    if (handSceneActive) return;
+    handSceneActive = true;
+    document.addEventListener('keydown', onHandKeydown);
+  }
+  function leaveHandScene() {
+    if (!handSceneActive) return;
+    handSceneActive = false;
+    document.removeEventListener('keydown', onHandKeydown);
+  }
+  function disposeHandScene() {
+    leaveHandScene();
+    handSlots.forEach(rec => rec.slot.remove());
+    handSlots.clear();
+    handLayer = null;
+    handSuspended = false;
+    battleToken = null;
+  }
+  document.addEventListener('sdt-scene-leave', (e) => {
+    if (e.detail?.scene === 'battle') leaveHandScene();
+  });
 
   function handSlotKey(g) {
     return (g.self ? 'self|' : '') + g.card.name + '|' + (g.card.desc || '');
@@ -163,14 +186,16 @@ import { cardRuleHint } from './battle.preview.js';
     if (!handLayer) handLayer = document.createElement('div');
     handLayer.className = 'bt-hand sts-hand';
     if (token !== battleToken) {
-      handSlots.forEach(rec => rec.slot.remove());
-      handSlots.clear();
+      disposeHandScene();
+      handLayer = document.createElement('div');
+      handLayer.className = 'bt-hand sts-hand';
     }
     battleToken = token;
     handSuspended = false;
     // 2026-09-19 留言 #19/#7：不再挂原生 title（系统白底黑字提示框）——描述就在卡面上，
     // 黑框 tooltip（UI.showTooltip）也已全局停用
     mount.replaceWith(handLayer);
+    enterHandScene();
     return handLayer;
   }
   // 差分更新：新建/保留/移除槽位 + 目标扇形位补间 + 新牌飞入。返回动画时长供飘字延迟取用。

@@ -323,6 +323,7 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
     UI.act('cancelDragDiscard', () => showBackpack(true));
   }
 
+  // eslint-disable-next-line no-unused-vars -- game/selftest.js guards this source-level card-detail hook during the transition to card zoom.
   function showBagCardDetail(name, fromSafe) {
     const o = game.ownedCards.find(x => !!x.safe === !!fromSafe && x.card.name === name);
     if (!o) { showBackpack(true); return; }

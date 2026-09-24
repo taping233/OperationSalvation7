@@ -1,6 +1,6 @@
 # Vite 质量门
 
-本页记录搜打撤 Vite 主线的本地检查与 GitHub Actions 检查。CI 定义在仓库根目录 `.github/workflows/vite-quality.yml`，只在 Vite 相关路径变更时，对 pull request 和 `master` push 运行。
+本页记录搜打撤 Vite 主线的本地检查与 GitHub Actions 检查。GitHub Actions 由仓库根目录 `.github/workflows/ci.yml` 和 `.github/workflows/vite-quality.yml` 定义；后者只在 Vite 相关路径变更时，对 pull request 和 `master` push 运行。
 
 ## 本地检查
 
@@ -17,7 +17,7 @@ npm run build
 
 `npm test` 会按文件串行运行 Vitest，并使用 dot reporter。现有 `pretest` 生命周期保持不变，会先编译剧情并校验数据；`npm run build` 同样保留现有 `prebuild` 数据/剧情检查和 `postbuild` 性能预算检查。
 
-在可构建的干净工作区，可用 `npm run check:quality` 按语法、数据、测试、构建顺序执行完整本地质量门。该组合入口会运行测试和构建各自已有的生命周期钩子。工作区有其他会话半成品时，不运行包含 build 的组合入口，分别执行必要检查；当前本轮即遵循这一限制。
+`npm run check:quality` 按语法、lint、试点类型检查、数据、测试、构建顺序执行完整本地质量门。类型检查由 `tsc --noEmit -p jsconfig.json` 执行，范围严格受 `jsconfig.json` 的五个试点文件约束；不要扩大 include。该组合入口会运行测试和构建各自已有的生命周期钩子。
 
 ## 卡牌图鉴生成
 
@@ -44,6 +44,6 @@ npm run docs:compendium
 
 ## CI 状态
 
-workflow 配置了 Node.js 22、从 `搜打撤/package-lock.json` 执行 `npm ci`，随后运行语法检查、数据校验、串行测试和 Vite 构建（含性能预算）。检查失败会直接使 job 失败。文档描述的是配置的流程；远端 GitHub Actions 是否实际运行及其结果，应以对应提交或 pull request 的 Actions 记录为准。
+两个 workflow 均使用 Node.js 22，并从 `搜打撤/package-lock.json` 执行 `npm ci`。`ci.yml` 运行语法检查、lint、五文件试点类型检查、数据校验和串行测试；`vite-quality.yml` 运行 Vite 构建及性能预算。检查失败会直接使对应 job 失败。文档描述的是配置的流程；远端 GitHub Actions 是否实际运行及其结果，应以对应提交或 pull request 的 Actions 记录为准。
 
 2026-09-23 本地独立提交 `89e46fa` 验收：隔离 Vite checkout 使用锁定依赖，语法检查 148 文件、数据校验、109 个测试文件 / 622 项、生产构建与原性能预算全部通过。首屏 JS gzip 227.7 KiB，入口 186.1 KiB，重复资源 0.52 MiB。基地首次加载、照相馆、战斗检查点恢复、胜利收取战利品及战后刷新读档已在内置浏览器验证。远端 Actions、长期运行性能及完整撤离/死亡分支仍未验收；详细证据与边界见 `architecture-alignment-plan-2026-09-23.md`。

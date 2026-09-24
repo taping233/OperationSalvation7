@@ -112,6 +112,7 @@ export function consumeCurrentCell() { consumeCell(); }
 // 打开场景：对话展示 →（点击任意处继续）→ onDone 开启真正内容
 // opts.foes = 遭遇敌人数组：战斗场景展示统一位图敌人立绘。
 // opts.gain = 明确结算文案（如「+2 币」）：拾取类格子用大字告知玩家获得了什么
+// eslint-disable-next-line no-unused-vars -- tests/run-architecture.test.js keeps this scene entry in the migration boundary.
 function openScene(kind, opts = {}) {
   const f = SCENES[kind];
   if (!f) { if (opts.onDone) opts.onDone(); return; }

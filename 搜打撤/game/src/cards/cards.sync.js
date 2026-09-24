@@ -5,14 +5,18 @@ import { TT7_KEY_V2, TT10_KEY, TT11_KEY, ITEM_RENAME_KEY, EVENTS_0919_KEY, RETIR
 import { Random } from '../core/random.js';
 import { DATA } from '../core/data-loader.js';
 import { validateCardRules } from './card-rules.schema.js';
+import { classifyCardContent, validateCardId } from './cards.catalog.js';
 // 历史批次 key 可能独立重播；即使 live-sync 已标记，也不能写回旧语义或复活退役卡。
 // 同 id 以定版字段为准，定版未携带的 art 等仓库元数据继续取历史快照。
 const cardsSyncById = new Map(DATA.cardsSync.cards.map(card => [card.id, card]));
 const cardsSyncRetired = new Set(DATA.cardsSync.retire);
 const canonicalTabletopSnapshot = (snapshot) => {
   if (cardsSyncRetired.has(snapshot.id)) return null;
-  const current = cardsSyncById.get(snapshot.id);
-  return current ? { ...snapshot, ...current } : snapshot;
+  if (!validateCardId(snapshot.id)) return snapshot;
+  const content = classifyCardContent(snapshot, cardsSyncById);
+  return content.kind === 'builtin'
+    ? { ...content.saved, ...content.definition }
+    : content.saved;
 };
 function backfillStructuredRuleDefinitions({ markerKey, ids, definitions, domains, extraFieldsById = {}, canonicalFieldsById = {} }) {
   try {

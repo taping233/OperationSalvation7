@@ -46,6 +46,29 @@ import { Random } from '../core/random.js';
     return Object.freeze({ before: Object.freeze(before), after: Object.freeze(after), levelsGained: after.lv - before.lv });
   }
 
+  // Pure battle settlement rule used by the paired Base+Run transaction. It mirrors
+  // track('kill') without saving midway, so retries recover one complete snapshot.
+  function applyBattleKillsToBase(base, foeNames, isBoss, cls, multiplier = 1) {
+    migrateCharacterProgress(base);
+    const stats = base.stats ||= {};
+    stats.bossKills ||= [];
+    let levelsGained = 0;
+    (foeNames?.length ? foeNames : ['敌人']).forEach((name, index) => {
+      const boss = !!isBoss && index === 0;
+      if (boss && !stats.bossKills.includes(name)) stats.bossKills.push(name);
+      stats.kills = (Number(stats.kills) || 0) + 1;
+      if (!cls) return;
+      const character = characterFor(cls);
+      const progressMap = character ? (base.characters ||= {}) : (base.classes ||= {});
+      const key = character ? character.id : cls;
+      progressMap[key] ||= { lv: 1, xp: 0 };
+      const progress = addXpToProgress(progressMap[key], Math.round((boss ? 40 : 6) * multiplier));
+      progressMap[key] = { ...progress.after };
+      levelsGained += progress.levelsGained;
+    });
+    return levelsGained;
+  }
+
   const collectionXpFor = card => card && card.type === '能力卡' ? 50 : 10;
 
   // 增加经验并处理升级；返回升级次数
@@ -64,6 +87,17 @@ import { Random } from '../core/random.js';
     }
     B().save();
     return ups;
+  }
+
+  function notifyBattleProgressLevels(cls, levelsGained) {
+    const levels = Math.max(0, Number(levelsGained) || 0);
+    if (!cls || !levels) return;
+    const finalLv = classLv(cls);
+    for (let i = levels - 1; i >= 0; i--) {
+      const lv = Math.max(1, finalLv - i);
+      if (SDT.Sound) SDT.Sound.sfx('levelup');
+      if (SDT.UI) SDT.UI.log(`[[icon:medal]] <b>${characterName(cls)}</b> 熟练度提升！现在是 <b>Lv.${lv}</b>（出征 ${perkText(lv)}）`, 'ok');
+    }
   }
 
   // ---------- 成就定义 ----------
@@ -373,6 +407,8 @@ import { Random } from '../core/random.js';
   SDT.Meta = {
     LEVEL_MAX, xpForNext, perkText,
     addXpToProgress, collectionXpFor,
+    applyBattleKillsToBase, xpMultiplier: xpMul,
+    notifyBattleProgressLevels,
     classList, classLv, classXP, addXP, classSummary,
     ACHIEVEMENTS, achById, isUnlocked, isClaimed, pendingAch, claim, checkUnlocks, syncBackUnlocks,
     track, setXpMul,
@@ -383,4 +419,4 @@ import { Random } from '../core/random.js';
   };
 
 export { SDT };
-export { LEVEL_MAX, xpForNext, perkText, addXpToProgress, collectionXpFor };
+export { LEVEL_MAX, xpForNext, perkText, addXpToProgress, collectionXpFor, applyBattleKillsToBase };

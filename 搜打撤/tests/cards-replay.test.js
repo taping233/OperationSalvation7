@@ -20,6 +20,7 @@ describe('TT10/TT11 历史重播保护', () => {
       const previousKeys = new Map([CARDS_KEY, key, liveSyncKey].map(k => [k, localStorage.getItem(k)]));
       const synced = DATA.cardsSync.cards.find(card => previousTable.some(row => row.id === card.id));
       const retiredId = DATA.cardsSync.retire[0];
+      const playerCustom = { id: 'player-custom-snapshot', name: '玩家自建卡', desc: '保留自建快照', cost: 3, customFlag: true };
       const snapshotRows = [
         { ...synced, desc: '历史旧描述', cost: -1, art: 'repository-only-art', battle: true },
         { id: retiredId, name: '退役卡', desc: '不得复活', cost: 1 },
@@ -28,7 +29,7 @@ describe('TT10/TT11 历史重播保护', () => {
       const retainedLiveKey = localStorage.getItem(liveSyncKey) || '1';
       try {
         Cards[tableName] = snapshotRows;
-        Cards.saveAll([{ id: synced.id, name: '旧存档名', desc: '旧存档描述' }, { id: retiredId, name: '退役卡' }]);
+        Cards.saveAll([{ id: synced.id, name: '旧存档名', desc: '旧存档描述' }, { id: retiredId, name: '退役卡' }, playerCustom]);
         localStorage.removeItem(key);
         localStorage.setItem(liveSyncKey, retainedLiveKey);
 
@@ -41,6 +42,7 @@ describe('TT10/TT11 历史重播保护', () => {
         expect(canonical.battle).toBe(true);
         expect(replayed.some(card => card.id === retiredId)).toBe(false);
         expect(replayed.find(card => card.id === snapshotRows[2].id)).toMatchObject(snapshotRows[2]);
+        expect(replayed.find(card => card.id === playerCustom.id)).toEqual(playerCustom);
         expect(localStorage.getItem(liveSyncKey)).toBe(retainedLiveKey);
 
         canonical.desc = '玩家重播后编辑';

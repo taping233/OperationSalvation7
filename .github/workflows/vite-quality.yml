@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - '.github/workflows/vite-quality.yml'
+      - '.github/workflows/ci.yml'
       - '搜打撤/game/**'
       - '搜打撤/narrative/**'
       - '搜打撤/scripts/**'
@@ -11,12 +12,15 @@ on:
       - '搜打撤/vite.config.*'
       - '搜打撤/package.json'
       - '搜打撤/package-lock.json'
+      - '搜打撤/jsconfig.json'
+      - '搜打撤/eslint.config.js'
       - '搜打撤/docs/game-compendium.md'
       - '搜打撤/docs/quality-gates.md'
   push:
     branches: [master]
     paths:
       - '.github/workflows/vite-quality.yml'
+      - '.github/workflows/ci.yml'
       - '搜打撤/game/**'
       - '搜打撤/narrative/**'
       - '搜打撤/scripts/**'
@@ -24,6 +28,8 @@ on:
       - '搜打撤/vite.config.*'
       - '搜打撤/package.json'
       - '搜打撤/package-lock.json'
+      - '搜打撤/jsconfig.json'
+      - '搜打撤/eslint.config.js'
       - '搜打撤/docs/game-compendium.md'
       - '搜打撤/docs/quality-gates.md'
 
@@ -43,15 +49,6 @@ jobs:
       - name: Install dependencies
         working-directory: 搜打撤
         run: npm ci
-      - name: Check JavaScript syntax
-        working-directory: 搜打撤
-        run: npm run check:syntax
-      - name: Validate game data
-        working-directory: 搜打撤
-        run: npm run validate:data
-      - name: Run serial tests
-        working-directory: 搜打撤
-        run: npm test
       - name: Build Vite and enforce performance budget
         working-directory: 搜打撤
         run: npm run build

@@ -13,6 +13,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { validateCardDefinition } from '../game/src/cards/card-rules.schema.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DATA = path.join(ROOT, 'game', 'data');
@@ -107,7 +108,10 @@ if (cardsSync) {
   dupCheck(cardsSync.cards || [], 'cards-sync.cards');
   if (!Number.isInteger(cardsSync.version) || cardsSync.version < 1) errors.push('cards-sync: version 应为正整数');
   for (const c of cardsSync.cards || []) {
-    if (!c.name || !('cost' in c) || !c.type) errors.push(`cards-sync[${c.id}]: 缺 name/cost/type`);
+    const result = validateCardDefinition(c);
+    for (const issue of result.errors) {
+      errors.push(`cards-sync[${issue.cardId}].${issue.path}: ${issue.message}`);
+    }
   }
   for (const id of cardsSync.retire || []) {
     if (typeof id !== 'string' || !id) errors.push(`cards-sync.retire: 非法 id ${JSON.stringify(id)}`);

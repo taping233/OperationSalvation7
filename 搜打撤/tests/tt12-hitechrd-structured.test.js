@@ -108,7 +108,8 @@ describe('tt12-hitechrd canonical rule and old-save backfill', () => {
     const legacyDesc = '玩家改写的旧档描述';
     const legacyCards = Cards.all().map(card => {
       if (card.id !== 'tt12-hitechrd') return card;
-      const { rules, ...legacyCard } = card;
+      const legacyCard = { ...card };
+      delete legacyCard.rules;
       return { ...legacyCard, desc: legacyDesc };
     });
     expect(Cards.saveAll(legacyCards)).toBe(true);

@@ -379,3 +379,20 @@ export function validateCardRules(card) {
 
   return { ok: errors.length === 0, errors, pending };
 }
+/** Validate the stable identity and required authored fields of a built-in definition. */
+export function validateCardDefinition(card) {
+  const errors = [];
+  const id = card?.id ?? '<missing id>';
+  const error = (path, message) => errors.push({ cardId: id, path, message });
+  if (typeof card?.id !== 'string' || card.id.length === 0 || card.id !== card.id.trim() || /\s/.test(card.id)) {
+    error('id', 'must be a non-empty stable id without whitespace');
+  }
+  if (typeof card?.name !== 'string' || !card.name.trim()) error('name', 'must be a non-empty string');
+  if (!Object.hasOwn(card ?? {}, 'cost') || !(typeof card.cost === 'number' || typeof card.cost === 'string')) {
+    error('cost', 'must be a number or string');
+  }
+  if (typeof card?.type !== 'string' || !card.type.trim()) error('type', 'must be a non-empty string');
+  const rules = validateCardRules(card);
+  errors.push(...rules.errors);
+  return { ok: errors.length === 0, errors };
+}

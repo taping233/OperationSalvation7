@@ -19,10 +19,20 @@ import { calculateEffectiveCardCost, decayEffectiveCardCost, pocketSpellDiscount
 import { calculateEnemyIntent } from './battle.intent.js';
 import { createBattleSnapshot } from './battle.snapshot.js';
 import { createBattleResolution } from './battle.resolution.js';
+import { createBattleSessionManager } from './battle.session.js';
+import { battleSession, set$battleSession } from './battle.runtime.js';
 
 /* —— 自 battle.core 壳迁入的共享引擎件（原 head/tail，按原文件顺序）—— */
 const actionQueue = createActionQueue();
-const requestBattleRender = () => {
+const sessionManager = createBattleSessionManager(reason => actionQueue.clear(reason || 'battle session ended'));
+const actionSessions = new WeakMap();
+function beginBattleSession(reason) {
+  const session = sessionManager.begin(reason);
+  set$battleSession(session);
+  return session;
+}
+const requestBattleRender = (session = battleSession) => {
+    if (session && !sessionManager.isCurrent(session)) return;
     if (!G || !G.battleActive) return;   // 战斗已收尾：残留重绘一律丢弃（胜利结算后不再盖写后续界面）
     try {
       renderBattle(getSnapshot());
@@ -466,7 +476,7 @@ function flee() {
   }
 function restore(nextGame, data) {
     if (data && data.restartVersion === 1 && Array.isArray(data.enemyDefs) && data.opts) {
-      actionQueue.clear('battle restarted from checkpoint');
+      beginBattleSession(new Error('battle restored from checkpoint'));
       applyRunRestart(nextGame, data.run);
       Random.restore(data.rngState);
       set$battleRestartCheckpoint(cloneData(data));
@@ -487,6 +497,7 @@ function restore(nextGame, data) {
     // 旧版本战斗档缺少入场检查点，只能兼容恢复一次；恢复后再次保存即升级为新格式。
     if (!data || !data.opts) return false;
     if (!data.deckSelect && (!Array.isArray(data.foes) || !data.foes.length)) return false;
+    beginBattleSession(new Error('battle restored'));
     if (!Array.isArray(data.foes)) data.foes = [];
     set$G(nextGame);
     set$opts(JSON.parse(JSON.stringify(data.opts)));
@@ -555,10 +566,12 @@ function restore(nextGame, data) {
     return true;
   }
 function finish(win) {
+    if (!battleSession || !sessionManager.isCurrent(battleSession)) return;
+    sessionManager.finish(battleSession, new Error('battle finished'));
+    set$battleSession(null);
     if (win === true && battleState.phase !== BATTLE_PHASES.VICTORY) set$battleState(transitionBattle(battleState, BATTLE_PHASES.VICTORY));
     if (SDT.Meta && SDT.Meta.track) SDT.Meta.track('battleEquips', { n: equipped.length });
     if (win === false && battleState.phase !== BATTLE_PHASES.DEFEAT) set$battleState(transitionBattle(battleState, BATTLE_PHASES.DEFEAT));
-    actionQueue.clear();      // 终局后残留的动作回调再跑会触发 victory->enemy 非法迁移（2026-09-13 实测 UNCAUGHT）
     set$busy(false);
     SDT.Sound.sfx(win === true ? 'victory' : win === false ? 'defeat' : 'flee');
     const playedCopy = played.slice();
@@ -879,7 +892,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
       cardAnims.push({ kind: 'surge', i: i + 1, n, name: spell.name, target: foes.indexOf(t), targetName: t.name, card: { ...spell } });   // 慢动作演出事件
       G.log(`[[icon:sparkles]] <b>法力奔涌</b>（第 ${i + 1}/${n} 发）：对 <b>${esc(t.name)}</b> 释放随机法术【<b>${esc(spell.name)}</b>】（默认已注能）`, 'loot');
       resolveCard(spell, t, true, 0, null);
-      if (SURGE_WAVE_MS > 0) { requestBattleRender(); await surgeSleep(SURGE_WAVE_MS, signal); }
+      if (SURGE_WAVE_MS > 0) { requestBattleRender(actionSessions.get(signal)); await surgeSleep(SURGE_WAVE_MS, signal); }
     }
     throwIfActionCancelled(signal);
     sweepDead();
@@ -1163,6 +1176,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
   // ---------- 入口 ----------
   // enemyDefs：数组（多敌人遭遇）或单个对象（兼容旧调用）
   function start(game, enemyDefs, options) {
+    if (!restoringRestartCheckpoint) beginBattleSession(new Error('battle started'));
     set$G(game);
     // 战斗开局预热本局可用卡面：手牌 img 是 lazy，手牌重建瞬间图未解码会露插画窗深底（黑窗）。
     // URL 走 collectCardAssets 与 <img> 实际 src 完全一致，命中 HTTP/解码缓存；已预热项内部自动去重。
@@ -1484,13 +1498,14 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     set$battleState(transitionBattle(battleState, BATTLE_PHASES.RESOLVING));
     set$busy(true);
     requestBattleRender();
+    const session = battleSession;
     actionQueue.enqueue(signal => execPlay(uid, card, fuelUids, target, freeCost, signal, receipt, paymentUids))
       .catch(e => { if (e?.name !== 'BattleActionCancelledError') console.error('[battle] 出牌动作异常：', e); })
       .finally(async () => {
         // 当前动作可能已将连锁动作入队；待执行数为 0 时，队列仍可能有动作正在运行。
         await actionQueue.idle();
         // 旧战斗的异步收尾不能更改终局状态或新一场战斗的 busy/phase。
-        if (battleState.token !== battleToken) return;
+        if (!sessionManager.isCurrent(session) || battleState.token !== battleToken) return;
         if (actionQueue.length === 0 && !actionQueue.running && battleState.phase === BATTLE_PHASES.RESOLVING) {
           set$battleState(transitionBattle(battleState, BATTLE_PHASES.PLAYER));
           set$busy(false);
@@ -1500,11 +1515,12 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
             if (now - lastPersistAt >= PERSIST_MIN_MS) { set$lastPersistAt(now); G.persistSave(); }
           }
         }
-        requestBattleRender();
+        requestBattleRender(session);
       });
   }
 
   async function execPlay(uid, card, fuelUids, target, freeCost, signal, receipt, paymentUids = []) {
+    if (signal && typeof signal === 'object') actionSessions.set(signal, battleSession);
     set$activeActionSignal(signal);
     try {
     throwIfActionCancelled(signal);
@@ -1669,7 +1685,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     if (!alive().length) { finish(true); return; }
     processChoice();
     processDiscoverQueue();
-    requestBattleRender();
+    requestBattleRender(actionSessions.get(signal));
     } finally {
       if (activeActionSignal === signal) set$activeActionSignal(null);
     }

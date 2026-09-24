@@ -4,8 +4,9 @@
 const SDT = window.SDT;
 const UI = window.SDT.UI;
 import { esc } from '../core/shared.js';
-import { doDeath, game, getActiveSlot, saveGame } from '../run/game.session.js';
+import { doDeath, game, getActiveSlot, prepareRunSnapshot, saveGame } from '../run/game.session.js';
 import { RunStorage } from './game.storage.js';
+import { recoverSlotIfPending, readSettlementReceipt, commitBaseAndRun } from './recovery.commands.js';
 import { Random } from '../core/random.js';
 import { on as busOn } from '../core/event-bus.js';
 import { showRunTransition } from '../run/game.run.js';
@@ -22,6 +23,43 @@ import { bagSlots } from './game.bag.bridge.js';
   // 晚绑定注册避免 ui→bag 静态成环（bag.js:2 的 UI 取自 window.SDT 门面）
   UI._bagCloseHook = bagSlots.closeBackpack;
   const settlements = new WeakMap();
+  let settlementRequestSeq = 0;
+  const promptBattleLootResume = () => {
+    game.state = 'modal';
+    UI.showOverlay('战利品恢复未完成', '<div class="ov-btns"><button class="ov-btn ok" data-act="battleLootResume">重试恢复战利品</button></div>', 'discover');
+    UI.act('battleLootResume', () => game.resumeBattleLoot());
+    return false;
+  };
+  const openStagedChests = (pending, settlement, opts) => {
+    let identityWarningShown = false;
+    const isCurrent = () => {
+      if (getActiveSlot() !== pending.slotId || game.pendingBattleLoot !== pending) return false;
+      const identity = RunStorage.readIdentity(pending.slotId);
+      if (!identity.ok) {
+        if (!identityWarningShown) { identityWarningShown = true; promptBattleLootResume(); }
+        return false;
+      }
+      identityWarningShown = false;
+      return identity.value.runId === pending.runId;
+    };
+    if (!isCurrent()) return false;
+    settlement.phase = 'chests';
+    const finish = () => {
+      if (!isCurrent()) return false;
+      settlement.phase = 'saving';
+      game.pendingBattleSettlement = pending.finalRequestId;
+      return onBattleEnd(opts, [], true, []);
+    };
+    if (!pending.chests?.queue?.length || pending.chests.index >= pending.chests.queue.length) {
+      // A stage commit can complete in the same onBattleEnd promise. Resume the
+      // final commit after that promise clears, including a reload after the last chest.
+      setTimeout(finish, 0);
+      return true;
+    }
+    const opened = SDT.Chests.openPrepared(game, pending.chests, finish,
+      { isCurrent, persist: () => saveGame() === true });
+    return opened === false ? promptBattleLootResume() : opened;
+  };
   const onBattleEnd = async function (opts, playedUids, win, consumedUids) {
     if (game.nestActive) return;   // 龙巢战斗结算由 game.nest 的总线订阅接管（一图战后流程不适用）
     if (win === false) { doDeath(); return; }
@@ -30,19 +68,12 @@ import { bagSlots } from './game.bag.bridge.js';
     if (!settlement) {
       const slotId = getActiveSlot();
       const identity = slotId ? RunStorage.readIdentity(slotId) : null;
-      settlement = { phase: 'new', promise: null, slotId, runId: identity?.ok ? identity.value.runId : null,
-        rewardsApplied: false, runSaved: false, baseSaved: false };
+      const requestNonce = globalThis.crypto?.randomUUID?.() || `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}-${(++settlementRequestSeq).toString(36)}`;
+      settlement = { phase: 'new', promise: null, slotId, initialIdentity: identity, identityChecked: false, runId: identity?.ok ? identity.value.runId : null,
+        runRevision: identity?.ok ? identity.value.revision : null,
+        rewardsApplied: false, runSaved: false, baseSaved: false, requestId: `battle:${identity?.ok ? identity.value.runId : 'memory'}:${requestNonce}` };
       settlements.set(opts, settlement);
     }
-    const sameRun = () => {
-      if (getActiveSlot() !== settlement.slotId) return false;
-      if (!settlement.slotId) return true;
-      const identity = RunStorage.readIdentity(settlement.slotId);
-      return !!identity.ok && identity.value.runId === settlement.runId;
-    };
-    if (!sameRun()) return false;
-    if (settlement.promise) return settlement.promise;
-    if (settlement.phase === 'done' || settlement.phase === 'chests') return;
     const retry = error => {
       if (error) console.error('[battle:settle] 战后结算未完成', error);
       UI.log('[[icon:cross]] 战后结算未保存，请重试；本场奖励不会重新发放', 'warn');
@@ -51,8 +82,34 @@ import { bagSlots } from './game.bag.bridge.js';
       UI.act('battleSettleRetry', () => { onBattleEnd(opts, playedUids, win, consumedUids); });
       return false;
     };
+    const sameRun = () => {
+      if (getActiveSlot() !== settlement.slotId) {
+        if (game.pendingBattleSettlement === settlement.requestId) game.pendingBattleSettlement = false;
+        return false;
+      }
+      if (!settlement.slotId) return true;
+      const identity = settlement.identityChecked ? RunStorage.readIdentity(settlement.slotId) : settlement.initialIdentity;
+      settlement.identityChecked = true;
+      if (!identity?.ok) return identity?.code === 'RECOVERY_REQUIRED' && !!settlement.runId ? true : null;
+      if (!settlement.runId) {
+        settlement.runId = identity.value.runId;
+        settlement.runRevision = identity.value.revision;
+        return true;
+      }
+      const same = identity.value.runId === settlement.runId;
+      if (!same && game.pendingBattleSettlement === settlement.requestId) game.pendingBattleSettlement = false;
+      return same;
+    };
+    const ensureSameRun = () => {
+      const state = sameRun();
+      return state === null ? retry(new Error('无法读取当前对局身份，请重试结算')) : state;
+    };
+    if (settlement.phase === 'done' || settlement.phase === 'chests') return settlement.promise || undefined;
+    if (win === true) game.pendingBattleSettlement = settlement.requestId;
+    if (!ensureSameRun()) return false;
+    if (settlement.promise) return settlement.promise;
     const run = async () => {
-    if (!sameRun()) return false;
+    if (!ensureSameRun()) return false;
     if (settlement.phase === 'new') {
     UI.hideOverlay();
     // Item 16（2026-09-16 老板定版）：局内满足条件的牌 100% 进入消耗口袋（招式和装备）——
@@ -135,8 +192,73 @@ import { bagSlots } from './game.bag.bridge.js';
       UI.refresh(game);
     };
     // 开完宝箱后的续流：普通战/首脑战（第四层 boss 格发起）都回待机
-    const settle = () => {
-      if (!sameRun()) return false;
+    const settle = async (stageOnly = false) => {
+      if (!ensureSameRun()) return false;
+      game.state = 'modal'; // block movement and ordinary saves until the pair receipt is durable
+      const pendingLoot = game.pendingBattleLoot;
+      if (!stageOnly && win === true && settlement.slotId && pendingLoot?.stageCommitted) {
+        const recovered = await recoverSlotIfPending(settlement.slotId);
+        if (!recovered.ok) return retry(new Error(recovered.message));
+        if (!ensureSameRun()) return false;
+        const identity = RunStorage.readIdentity(settlement.slotId);
+        if (!identity.ok) return retry(new Error(identity.message || '无法读取当前对局身份'));
+        if (identity.value.runId !== pendingLoot.runId) {
+          if (game.pendingBattleSettlement === settlement.requestId) game.pendingBattleSettlement = false;
+          return false;
+        }
+        const base = SDT.Base._readForCommit(settlement.slotId);
+        if (!base) return retry(new Error('无法读取基地存档'));
+        const context = settlement.context || (settlement.context = {
+          slotId: settlement.slotId, requestId: pendingLoot.finalRequestId,
+          expectedBaseRevision: base._m01.revision, expectedRunRevision: identity.value.revision,
+        });
+        const payload = { battleRunId: pendingLoot.runId, stageRequestId: pendingLoot.stageRequestId };
+        const receipt = await readSettlementReceipt(context, { command: 'battle.settle', payload, runId: pendingLoot.runId });
+        if (!receipt.ok) return retry(new Error(receipt.message));
+        if (!ensureSameRun()) return false;
+        if (!receipt.value) {
+          if (!settlement.rewardsApplied) {
+            for (const card of pendingLoot.legends || []) game.grantCard(card);
+            settlement.rewardsApplied = true;
+          }
+          const elapsed = Math.max(0, +game.elapsed || 0);
+          const elapsedSynced = Math.max(0, +game.elapsedSynced || 0);
+          game.pendingBattleLoot = null;
+          const preparedRun = prepareRunSnapshot();
+          game.pendingBattleLoot = pendingLoot;
+          if (!preparedRun.ok) return retry(new Error(preparedRun.message || '无法构造战后快照'));
+          const latestIdentity = RunStorage.readIdentity(settlement.slotId);
+          const latestBase = SDT.Base._readForCommit(settlement.slotId);
+          if (!latestIdentity.ok || !latestBase) return retry(new Error('结算期间存档无法读取，请重试'));
+          if (latestIdentity.value.runId !== pendingLoot.runId) {
+            if (game.pendingBattleSettlement === settlement.requestId) game.pendingBattleSettlement = false;
+            return false;
+          }
+          context.expectedBaseRevision = latestBase._m01.revision;
+          context.expectedRunRevision = latestIdentity.value.revision;
+          const afterBase = JSON.parse(JSON.stringify(latestBase));
+          afterBase.stats ||= {};
+          afterBase.stats.playSeconds = Math.max(0, +afterBase.stats.playSeconds || 0) + Math.max(0, elapsed - elapsedSynced);
+          const committed = await commitBaseAndRun(context, {
+            command: 'battle.settle', runId: pendingLoot.runId, payload,
+            afterBase, afterRun: preparedRun.value,
+            output: { battleRunId: pendingLoot.runId, elapsedSynced: elapsed },
+          });
+          if (!committed.ok) return retry(new Error(committed.message));
+          if (!ensureSameRun()) return false;
+          game.elapsedSynced = elapsed;
+        } else {
+          const persistedElapsed = Number(receipt.value.output?.elapsedSynced);
+          if (Number.isFinite(persistedElapsed)) game.elapsedSynced = persistedElapsed;
+        }
+        game.pendingBattleLoot = null;
+        settlement.phase = 'done';
+        if (game.pendingBattleSettlement === settlement.requestId) game.pendingBattleSettlement = false;
+        game.state = 'idle';
+        UI.refresh(game);
+        teachAmmoOnce();
+        return true;
+      }
       // 战后保底传说（2026-09-09 玩法定版）：
       //   ① 首脑战胜利：额外 1 张传说卡；
       //   ② 击败巨兽「荒渊」（第 3/4 层精英）：30% 概率额外 1 张传说卡。
@@ -144,42 +266,134 @@ import { bagSlots } from './game.bag.bridge.js';
       const slewDragon = !opts.isBoss && (opts.foeNames || []).some(n => String(n).includes('巨兽'));
       // 宠物蛋保底新档（2026-09-19 老板拍板）：每打赢一场战斗，蛋的爆率永久 +0.2%
       //（叠加在 0.7% 基础 + 每空开箱 +3% 之上；计数存基地档位跨局累计）
-      if (!settlement.rewardsApplied && win === true && SDT.Base && SDT.Base.data) {
-        SDT.Base.data.eggBattles = (SDT.Base.data.eggBattles || 0) + 1;
+      if (stageOnly && win === true) {
+        game.visited = game.visited || {};
+        game.visited[game.layerIdx + ',' + game.trackPos] = 1;
       }
-      if (!settlement.rewardsApplied && win === true) {
+      if (!stageOnly && !settlement.rewardsApplied && win === true) {
         game.visited = game.visited || {};
         game.visited[game.layerIdx + ',' + game.trackPos] = 1;
       }
       let legends = 0;
-      if (!settlement.rewardsApplied && opts.isBoss && win === true) {
+      if (!stageOnly && !settlement.rewardsApplied && opts.isBoss && win === true) {
         legends = 1;
       }
-      if (!settlement.rewardsApplied && slewDragon && win === true && Random.random('loot') < 0.3) legends += 1;
+      if (!stageOnly && !settlement.rewardsApplied && slewDragon && win === true && Random.random('loot') < 0.3) legends += 1;
       if (legends > 0) UI.log('[[icon:trophy]] 首脑宝库开启：额外奖励 <b>1 张传说卡</b>！', 'loot');
       for (let i = 0; i < legends; i++) {
         const pool = SDT.Cards.all().filter(c => c.rarity === '传说' && SDT.Cards.isRandomObtainable(c));
         const card = pool.length ? pool[Math.floor(Random.random('loot') * pool.length)] : null;
         if (card) game.grantCard(card);
       }
-      settlement.rewardsApplied = true;
+      if (!stageOnly) settlement.rewardsApplied = true;
       settlement.phase = 'saving';
-      game.state = 'idle';
-      // 先持久化玩家本局奖励：若 Run 写失败，基地计数尚未落盘，刷新重打不会多计一次。
-      if (!settlement.runSaved) {
-        if (saveGame() === false && getActiveSlot()) return retry();
-        settlement.runSaved = true;
-      }
       if (!settlement.baseSaved && win === true && settlement.slotId && SDT.Base && SDT.Base.data) {
-        if (SDT.Base.save() === false) return retry();
+        // A pending pair is completed before reading or writing any newer snapshot. Its receipt
+        // lets same-page retries finish without applying the battle reward a second time.
+        const recovered = await recoverSlotIfPending(settlement.slotId);
+        if (!recovered.ok) return retry(new Error(recovered.message));
+        if (!ensureSameRun()) return false;
+        const base = SDT.Base._readForCommit(settlement.slotId);
+        const runIdentity = RunStorage.readIdentity(settlement.slotId);
+        if (!base) return retry(new Error('无法读取基地存档，请重试结算'));
+        if (!runIdentity.ok) return retry(new Error(runIdentity.message || '无法读取当前对局身份，请重试结算'));
+        if (runIdentity.value.runId !== settlement.runId) {
+          if (game.pendingBattleSettlement === settlement.requestId) game.pendingBattleSettlement = false;
+          return false;
+        }
+        const context = settlement.context || (settlement.context = {
+          slotId: settlement.slotId, requestId: settlement.requestId,
+          expectedBaseRevision: base._m01.revision,
+          expectedRunRevision: runIdentity.value.revision,
+        });
+        const command = stageOnly ? 'battle.stage' : 'battle.settle';
+        const payload = { battleRunId: settlement.runId, win: true };
+        const receipt = await readSettlementReceipt(context, { command, payload, runId: settlement.runId });
+        if (!receipt.ok) return retry(new Error(receipt.message));
+        if (!ensureSameRun()) return false;
+        if (receipt.value) {
+          settlement.levelsGained = Number(receipt.value.output?.levelsGained) || 0;
+          const persistedElapsed = Number(receipt.value.output?.elapsedSynced);
+          if (Number.isFinite(persistedElapsed)) game.elapsedSynced = persistedElapsed;
+        }
+        if (!receipt.value) {
+          if (runIdentity.value.revision !== settlement.runRevision) return retry(new Error('对局已在其他页面更新，请重新载入后继续'));
+          const preparedRun = prepareRunSnapshot();
+          if (!preparedRun.ok) return retry(new Error(preparedRun.message || '无法构造对局结算快照'));
+          const savedIdentity = RunStorage.readIdentity(settlement.slotId);
+          const latestBase = SDT.Base._readForCommit(settlement.slotId);
+          if (!savedIdentity.ok) return retry(new Error(savedIdentity.message || '无法读取当前对局身份，请重试结算'));
+          if (savedIdentity.value.runId !== settlement.runId) {
+            if (game.pendingBattleSettlement === settlement.requestId) game.pendingBattleSettlement = false;
+            return false;
+          }
+          if (savedIdentity.value.revision !== settlement.runRevision || !latestBase) return retry(new Error('对局已在其他页面更新，请重新载入后继续'));
+          context.expectedBaseRevision = latestBase._m01.revision;
+          context.expectedRunRevision = savedIdentity.value.revision;
+          const afterBase = JSON.parse(JSON.stringify(latestBase));
+          afterBase.eggBattles = (Number(afterBase.eggBattles) || 0) + 1;
+          if (settlement.eggPity === undefined) settlement.eggPity = Number(SDT.Base.data.eggPity) || 0;
+          afterBase.eggPity = settlement.eggPity;
+          settlement.levelsGained = SDT.Meta.applyBattleKillsToBase(afterBase, settlement.foeNames || ['敌人'], !!opts.isBoss, game.myClass, SDT.Meta.xpMultiplier());
+          afterBase.stats ||= {};
+          const elapsed = Math.max(0, +game.elapsed || 0);
+          const elapsedSynced = Math.max(0, +game.elapsedSynced || 0);
+          afterBase.stats.playSeconds = Math.max(0, +afterBase.stats.playSeconds || 0) + Math.max(0, elapsed - elapsedSynced);
+          const committed = await commitBaseAndRun(context, {
+            command, runId: settlement.runId, payload,
+            afterBase, afterRun: preparedRun.value,
+            output: { battleRunId: settlement.runId, levelsGained: settlement.levelsGained, elapsedSynced: elapsed },
+          });
+          if (!committed.ok) return retry(new Error(committed.message));
+          if (!ensureSameRun()) return false;
+          settlement.levelsGained = Number(committed.value?.output?.levelsGained) || settlement.levelsGained;
+          game.elapsedSynced = elapsed;
+          settlement.runSaved = true;
+        }
         settlement.baseSaved = true;
+        SDT.Meta.checkUnlocks();
+        if (!settlement.levelsNotified) {
+          SDT.Meta.notifyBattleProgressLevels(game.myClass, settlement.levelsGained);
+          settlement.levelsNotified = true;
+        }
+      } else {
+        // No selected slot is a development-only memory flow; retain its in-memory semantics.
+        if (win === true && !settlement.baseSaved && SDT.Base?.data) {
+          SDT.Base.data.eggBattles = (SDT.Base.data.eggBattles || 0) + 1;
+          SDT.Meta.applyBattleKillsToBase(SDT.Base.data, settlement.foeNames || ['敌人'], !!opts.isBoss, game.myClass, SDT.Meta.xpMultiplier());
+          settlement.baseSaved = true;
+          SDT.Meta.checkUnlocks();
+        }
+        if (!settlement.runSaved) {
+          if (saveGame() === false && getActiveSlot()) return retry();
+          settlement.runSaved = true;
+        }
+        if (!settlement.baseSaved && win === true && SDT.Base?.data) {
+          if (SDT.Base.save() === false) return retry();
+          settlement.baseSaved = true;
+        }
+      }
+      if (stageOnly) {
+        const staged = game.pendingBattleLoot;
+        if (!staged) return retry(new Error('战利品暂存数据丢失'));
+        const stagedIdentity = RunStorage.readIdentity(settlement.slotId);
+        if (!stagedIdentity.ok) return retry(new Error(stagedIdentity.message || '无法读取当前对局身份'));
+        settlement.stageMode = false;
+        settlement.stageRequestId = settlement.requestId;
+        settlement.requestId = staged.finalRequestId;
+        settlement.context = null;
+        settlement.runRevision = stagedIdentity.value.revision;
+        if (game.pendingBattleSettlement === staged.stageRequestId) game.pendingBattleSettlement = false;
+        return openStagedChests(staged, settlement, opts);
       }
       settlement.phase = 'done';
+      if (game.pendingBattleSettlement === settlement.requestId) game.pendingBattleSettlement = false;
+      game.state = 'idle';
       UI.refresh(game);
       teachAmmoOnce();   // 首胜后一次性说明「卡牌是消耗品」（见上方 teachAmmoOnce 注释）
       return true;
     };
-    if (settlement.phase === 'saving') return settle();
+    if (settlement.phase === 'saving') return settle(!!settlement.stageMode);
     if (win !== true) {   // 撤退：不发宝箱、不发事件奖励
       game.pendingEventLoot = null;
       // 2026-09-07 留言：撤退要有文案和动画——复用启程过渡（撤离点场景）
@@ -189,10 +403,10 @@ import { bagSlots } from './game.bag.bridge.js';
         detail: opts.isBoss ? '你撤出了 BOSS战 · 已结算的战利品完好保存' : '撤出战斗 · 打出过的卡照常结算',
         duration: 1050,
       });
-      if (!sameRun()) return false;
+      if (!ensureSameRun()) return false;
       if (settlement.phase === 'pocket') UI.log('[[icon:runner]] ' + (opts.isBoss ? '你撤出了 BOSS战' : '你撤出了战斗（打出过的卡照常结算）'), 'sys');
       settlement.phase = 'saving';
-      settle();
+      await settle();
       return;
     }
     if (settlement.phase === 'pocket') await showRunTransition({
@@ -203,7 +417,7 @@ import { bagSlots } from './game.bag.bridge.js';
       detail: opts.isBoss ? '污染反应正在消退 · 准备整理战利品' : '威胁解除 · 正在回收战利品',
       duration: opts.isBoss ? 1350 : 1050,
     });
-    if (!sameRun()) return false;
+    if (!ensureSameRun()) return false;
     if (settlement.phase === 'pocket') settlement.phase = 'transitioned';
     if (settlement.phase === 'transitioned') {
     UI.log(opts.isBoss ? '[[icon:trophy]] <b>BOSS战胜利！</b>' : '[[icon:trophy]] 战斗胜利！', 'ok');
@@ -214,9 +428,7 @@ import { bagSlots } from './game.bag.bridge.js';
     }
     // 击杀统计/经验：按击败的敌人数计（BOSS 逐个记名，供祭坛征服者成就）
     const foeNames = (opts.foeNames && opts.foeNames.length) ? opts.foeNames : [opts.name || '敌人'];
-    foeNames.forEach((n, i) => {
-      SDT.Meta.track('kill', { boss: !!opts.isBoss && i === 0, name: n, cls: game.myClass });
-    });
+    settlement.foeNames = foeNames.slice();
     // 事件奖励（如盗匪横行的中宝箱 ×2，开真宝箱）
     let eventChests = [];
     if (game.pendingEventLoot) {
@@ -236,15 +448,41 @@ import { bagSlots } from './game.bag.bridge.js';
     }
     // 战胜 100% 掉宝箱（按所在环层 / BOSS 宝箱）
     const afterRewards = () => {
-      if (!sameRun()) return false;
+      if (!ensureSameRun()) return false;
       settlement.phase = 'saving';
-      settle();   // Item 16：BOSS 战后不再进入整理背包
+      return settle().catch(retry);   // Item 16：BOSS 战后不再进入整理背包
     };
     settlement.allChests ||= settlement.eventChests.concat(SDT.Chests.rollDrops(opts));
     const all = settlement.allChests;
+    if (win === true && settlement.slotId) {
+      if (!game.pendingBattleLoot) {
+        const chests = SDT.Chests.prepareBattle(all, { game,
+          battleSummary: { defeated: (opts.foeNames || []).length, hp: game.hp, maxHp: game.maxHp },
+        });
+        const slewDragon = !opts.isBoss && (opts.foeNames || []).some(n => String(n).includes('巨兽'));
+        let legendCount = opts.isBoss ? 1 : 0;
+        if (slewDragon && Random.random('loot') < 0.3) legendCount++;
+        const legends = [];
+        for (let i = 0; i < legendCount; i++) {
+          const pool = SDT.Cards.all().filter(c => c.rarity === '传说' && SDT.Cards.isRandomObtainable(c));
+          const card = pool.length ? pool[Math.floor(Random.random('loot') * pool.length)] : null;
+          if (card) legends.push({ ...card });
+        }
+        game.pendingBattleLoot = {
+          version: 1, slotId: settlement.slotId, runId: settlement.runId,
+          stageRequestId: settlement.requestId, finalRequestId: `${settlement.requestId}:final`,
+          opts: { isBoss: !!opts.isBoss, foeNames: (opts.foeNames || []).slice(), name: opts.name || null },
+          legends, chests, stageCommitted: true,
+        };
+      }
+      settlement.stageMode = true;
+      settlement.phase = 'saving';
+      return settle(true);
+    }
     if (all.length) {
       UI.log(`[[icon:archive]] 战利品掉落：${SDT.Chests.dropText(all)}`, 'loot');
       SDT.Chests.open(game, all, afterRewards, {
+        deferBaseSave: true,
         battleSummary: { defeated: (opts.foeNames || []).length, hp: game.hp, maxHp: game.maxHp },
       });
       if (settlement.phase === 'rewardsReady') settlement.phase = 'chests';
@@ -258,6 +496,19 @@ import { bagSlots } from './game.bag.bridge.js';
   // 战斗结束改经总线广播订阅（批次 5）；G.onBattleEnd 保留为无订阅方时的回退路径
   busOn('battle:end', onBattleEnd);
   game.onBattleEnd = onBattleEnd;
+  game.resumeBattleLoot = () => {
+    const pending = game.pendingBattleLoot;
+    if (!pending) return false;
+    const identity = RunStorage.readIdentity(pending.slotId);
+    if (getActiveSlot() !== pending.slotId || !identity.ok || identity.value.runId !== pending.runId) return promptBattleLootResume();
+    const opts = pending.opts || {};
+    const settlement = { phase: 'chests', promise: null, slotId: pending.slotId,
+      initialIdentity: identity, identityChecked: true, runId: pending.runId,
+      runRevision: identity.value.revision, rewardsApplied: false,
+      runSaved: true, baseSaved: true, requestId: pending.finalRequestId };
+    settlements.set(opts, settlement);
+    return openStagedChests(pending, settlement, opts);
+  };
   }
 
 

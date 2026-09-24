@@ -4,6 +4,7 @@
  * 由 game.run.js 拆出。层位最高（L2）：依赖 scenes（L0）与 altar（L1），不被二者依赖。
  * ============================================================ */
 import { esc, escAttr } from '../core/shared.js';
+import { beginRunMove, cancelRunMove, commitRunMove, interpolateRunPosition } from './game.run.movement.js';
 import { MAP, cellCenter, curLayer, gainCoins, game, getActiveSlot, markSeen, modeCfg, pick, saveGame, scaledEnemy, weighted } from './game.session.js';
 import { _set_cardPageOpen } from '../hub/game.cardslib.js';
 import { EVENT_SCENE_META } from './game.run.data.js';
@@ -27,6 +28,24 @@ const UI = window.SDT.UI;
 let moveSeq = 0;
 let activeMove = null;
 const MOVE_DURATION = 220;
+function discardActiveMove(move = activeMove) {
+  if (!move || activeMove !== move) return;
+  activeMove = null;
+  move.done = true;
+  if (move.watchdog != null) clearTimeout(move.watchdog);
+}
+function activeMoveIsCurrent(move) {
+  if (!move || activeMove !== move) return false;
+  const current = move.context;
+  if (game.state !== 'moving' || getActiveSlot() !== current.slot ||
+      game.layerData !== current.layerData || game.mapSeed !== current.mapSeed) {
+    // A run was exited, replaced, or switched while its animation was pending.
+    // Drop its callbacks without writing any part of the new run's state.
+    cancelMoveTo({ restore: false });
+    return false;
+  }
+  return true;
+}
 const moveUsesReducedMotion = () => {
   try { return localStorage.getItem('sdt-reduce-motion') === '1' || window.matchMedia?.('(prefers-reduced-motion: reduce)').matches; }
   catch { return false; }
@@ -52,43 +71,61 @@ export function moveTo(toLi, toIdx) {
     : (cb) => setTimeout(() => cb(Date.now()), 16);
   const finish = () => {
     if (done || !activeMove || activeMove.seq !== seq) return;
+    if (!activeMoveIsCurrent(activeMove)) return;
     done = true;
     if (watchdog != null) clearTimeout(watchdog);
     activeMove = null;
-    game.pos = { ...to };
-    game.layerIdx = toLi;
-    game.trackPos = toIdx;
+    Object.assign(game, commitRunMove(game, {
+      to: { li: toLi, idx: toIdx, pos: to },
+      layerBounds: game.layerBounds?.[toLi],
+      geometryVersion: `${String(game.mapSeed)}:${game.layoutVersion || 0}`,
+    }));
     markSeen(toLi, toIdx);
     // 商店是唯一按「离开房间」消耗的节点；其余节点在奖励/事件实际结算完成时自行写入。
     if (current?.def?.type === 'shop') consumeCell(fromLi, fromIdx);
     if (game.cam?.frameMode === 'routes') game.cam.frameExploration(game);
-    game.hop = 0;
-    game.moveTarget = null;
-    game.turn++;
-    game.activeLayerBounds = game.layerBounds?.[toLi] || null;
-    game.geometryVersion = game.geometryVersion || `${String(game.mapSeed)}:${game.layoutVersion || 0}`;
     SDT.Meta.track('action');
     resolveCell();
   };
   const tick = (now) => {
     if (done || !activeMove || activeMove.seq !== seq) return;
+    if (!activeMoveIsCurrent(activeMove)) return;
     const t = Math.max(0, Math.min(1, ((now || Date.now()) - startedAt) / MOVE_DURATION));
-    const eased = 1 - Math.pow(1 - t, 3);
-    game.pos = { x: from.x + (to.x - from.x) * eased, y: from.y + (to.y - from.y) * eased };
+    game.pos = interpolateRunPosition(from, to, t);
     game.moveTarget.progress = t;
     if (t >= 1) finish();
     else frame(tick);
   };
-  activeMove = { seq, from: { li: fromLi, idx: fromIdx }, to: { li: toLi, idx: toIdx }, startedAt };
-  game.moveTarget = { li: toLi, idx: toIdx, seq, progress: 0, moving: true };
-  game.state = 'moving';
+  activeMove = {
+    seq,
+    from: { li: fromLi, idx: fromIdx, pos: from },
+    origin: { state: game.state, pos: { ...game.pos }, layerIdx: fromLi, trackPos: fromIdx, turn: game.turn, hop: game.hop, moveTarget: game.moveTarget },
+    to: { li: toLi, idx: toIdx },
+    context: { slot: getActiveSlot(), layerData: game.layerData, mapSeed: game.mapSeed },
+    startedAt, watchdog: null, done: false,
+  };
+  Object.assign(game, beginRunMove({ from, to: { li: toLi, idx: toIdx }, seq }));
   UI.refresh(game);
   renderScheduler.invalidate();
-  game.pos = { ...from };
   // rAF 在后台页可能被暂停；看门狗确保事务最终回到稳定节点。
   watchdog = setTimeout(finish, MOVE_DURATION + 700);
+  activeMove.watchdog = watchdog;
   if (moveUsesReducedMotion()) finish();
   else frame(tick);
+  return true;
+}
+
+// Explicitly abort the transient animation and return to its last stable node.
+// Coordinates, layer, and turn are committed together only by finish().
+export function cancelMoveTo({ restore = true } = {}) {
+  if (!activeMove) return false;
+  const move = activeMove;
+  discardActiveMove(move);
+  if (restore) {
+    Object.assign(game, cancelRunMove(move.origin));
+    UI.refresh(game);
+    renderScheduler.invalidate();
+  }
   return true;
 }
 

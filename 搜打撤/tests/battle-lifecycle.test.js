@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };
 window.SDT.Icons.TYPE_ART = {};
@@ -8,7 +8,10 @@ window.SDT.MAP = {
   items: { rations: { name: '口粮' }, wood: { name: '木材' } },
 };
 await import('../game/src/cards/cards.js');
-const { BattleSession, viewApi } = await import('../game/src/battle/battle.core.js');
+const { BattleSession, configureBattleRenderer, viewApi } = await import('../game/src/battle/battle.core.js');
+const battleRuntime = await import('../game/src/battle/battle.runtime.js');
+const { finish, requestBattleRender } = await import('../game/src/battle/battle.engine.js');
+const { on: onBattleEnd } = await import('../game/src/core/event-bus.js');
 
 window.SDT.Cards.ensureSha();
 window.SDT.Cards.ensureStarters();
@@ -68,6 +71,93 @@ function expectFreshBattle(state, mode) {
 }
 
 describe('跨战斗生命周期重置', () => {
+  it('同一 session 二次 finish 不重复广播 battle:end', () => {
+    const game = makeGame();
+    const events = [];
+    const off = onBattleEnd('battle:end', (...args) => events.push(args));
+    try {
+      start(game, false);
+      BattleSession.commands.flee();
+      expect(events).toHaveLength(1);
+
+      finish(null); // 模拟排队中的旧完成回调迟到
+      expect(events).toHaveLength(1);
+      expect(battleRuntime.battleSession).toBeNull();
+    } finally {
+      off();
+    }
+  });
+
+  it('替换战斗时取消真实排队的敌方步骤', () => {
+    vi.useFakeTimers();
+    const game = makeGame();
+    let renderCount = 0;
+    configureBattleRenderer(() => { renderCount++; });
+    try {
+      start(game, false);
+      const first = battleRuntime.battleSession;
+      BattleSession.commands.endTurn();
+      expect(BattleSession.getSnapshot()).toMatchObject({ phase: 'enemy', busy: true });
+      expect(vi.getTimerCount()).toBeGreaterThan(0);
+
+      start(game, true);
+      const second = battleRuntime.battleSession;
+      const stableRenderCount = renderCount;
+      expect(first.signal.aborted).toBe(true);
+      vi.runOnlyPendingTimers();
+
+      expect(BattleSession.getSnapshot()).toMatchObject({ phase: 'player', busy: false });
+      expect(game.hp).toBe(30);
+      expect(renderCount).toBe(stableRenderCount);
+      expect(second.isCurrent()).toBe(true);
+    } finally {
+      vi.clearAllTimers();
+      vi.useRealTimers();
+      configureBattleRenderer(null);
+    }
+  });
+
+  it('替换战斗时撤销真实挂起出牌，旧收尾不能改状态或重绘新战', async () => {
+    const game = makeGame();
+    let renderCount = 0;
+    let releaseSurge;
+    const surge = new Promise(resolve => { releaseSurge = resolve; });
+    configureBattleRenderer(() => { renderCount++; });
+    start(game, false);
+    const first = battleRuntime.battleSession;
+    battleRuntime.set$surgeWaiter(surge);
+    BattleSession.commands.playCard('armor-1', 'self');
+    const oldActionSignal = battleRuntime.activeActionSignal;
+    expect(oldActionSignal).toBeTruthy();
+    expect(battleRuntime.surgeWaiter).toBeNull();
+
+    start(game, true);
+    expect(first.signal.aborted).toBe(true);
+    expect(first.isCurrent()).toBe(false);
+    const second = battleRuntime.battleSession;
+    expect(second.id).toBeGreaterThan(first.id);
+    const newBattleRenderCount = renderCount;
+    expect(newBattleRenderCount).toBeGreaterThan(0);
+
+    // An old async action must pass its captured session to rendering.
+    requestBattleRender(first);
+    expect(renderCount).toBe(newBattleRenderCount);
+
+    releaseSurge();
+    for (let i = 0; i < 100 && battleRuntime.activeActionSignal; i++) {
+      await new Promise(resolve => setTimeout(resolve, 0));
+    }
+    await new Promise(resolve => setTimeout(resolve, 0));
+    expect(battleRuntime.activeActionSignal).toBeNull();
+    expect(BattleSession.getSnapshot()).toMatchObject({ phase: 'player', busy: false });
+    expect(renderCount).toBe(newBattleRenderCount);
+
+    BattleSession.commands.flee();
+    expect(second.signal.aborted).toBe(true);
+    expect(battleRuntime.battleSession).toBeNull();
+    configureBattleRenderer(null);
+  });
+
   it('Boss → 普通战重置真实出牌造成的费用规则、能量与护甲', async () => {
     const game = makeGame();
     await contaminateWithRealCards(game, true);

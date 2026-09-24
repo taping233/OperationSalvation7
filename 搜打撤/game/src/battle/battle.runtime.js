@@ -75,6 +75,7 @@ import { createBattleState } from './battle.state.js';
   export let restoringRestartCheckpoint = false;
   export let tmpSeq = 0;
   export let activeActionSignal = null;
+  export let battleSession = null;
   export let surgeWaiter = null;
   export let lastPersistAt = 0;
   export let snapCache = null, snapSig = null;
@@ -166,6 +167,7 @@ export function set$lastDeckSel(v) { lastDeckSel = v; }
 export function set$pendingHint(v) { pendingHint = v; }
 export function set$lastPersistAt(v) { lastPersistAt = v; }
 export function set$activeActionSignal(v) { activeActionSignal = v; }
+export function set$battleSession(v) { battleSession = v; }
 export function set$restoringRestartCheckpoint(v) { restoringRestartCheckpoint = v; }
 export function set$snapSig(v) { snapSig = v; }
 export function set$snapCache(v) { snapCache = v; }

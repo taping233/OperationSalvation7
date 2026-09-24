@@ -421,62 +421,18 @@ function requestClassChoice(options) {
 
   function saveGame() {
     // 整理期间只有两键结算命令能推进存档，常规自动保存不得覆盖待入库状态。
-    if (game.pendingExtraction || game.extractionPending || game.terminalPending) return false;
+    if (game.pendingExtraction || game.extractionPending || game.terminalPending || game.pendingBattleSettlement) return false;
     // v0.21：只有真正开局后（runActive）才写对局存档；在基地/标题界面不产生对局文件
     // 只保存稳定节点；动画中可能仍停在线段中间，退出/刷新后必须回到上一个落点。
     if ((!game.runActive && !game.nestActive) || game.state === 'title' || game.state === 'done' || game.state === 'boot' || game.state === 'moving') return;
     if (!activeSlot) return;
     syncPlayTime();
-    assertZones();
-    let snapshotResult = game.nestActive ? { ok: true, value: null } : createMapSnapshot({
-      mapSeed: game.mapSeed, generatorVersion: game.generatorVersion, layoutVersion: game.layoutVersion, layerData: game.layerData,
-      routeVersion:game.routeVersion, routePlan:game.routePlan,
-    });
-    if (snapshotResult.ok && !game.nestActive) snapshotResult = validateMapSnapshot(snapshotResult.value, { layerIdx:game.layerIdx, trackPos:game.trackPos });
-    if (!snapshotResult.ok) {
+    const prepared = prepareRunSnapshot();
+    if (!prepared.ok) {
       UI.log('[[icon:cross]] 路线快照校验失败，本次未覆盖旧对局存档', 'warn');
       return false;
     }
-    const ok = RunStorage.write(activeSlot, {
-        seed: Random.seed, rngState: Random.snapshot(),
-        mapSeed: game.mapSeed ?? Random.seed,
-        generatorVersion: game.generatorVersion ?? GENERATOR_VERSION,
-        layoutVersion: game.layoutVersion ?? LAYOUT_VERSION,
-        geometryVersion: game.geometryVersion ?? null,
-        routeVersion: game.routeVersion ?? null,
-        mapSnapshot: snapshotResult.value,
-        layerIdx: game.layerIdx, trackPos: game.trackPos,
-        hp: game.hp, maxHp: game.maxHp, coins: game.coins, turn: game.turn,
-        atk: game.atk, mode: game.mode, myClass: game.myClass || null, characterId: game.characterId || null,
-        inventory: game.inventory, ownedCards: game.ownedCards,
-        cardOrder: game.cardOrder || [],
-        usedPocket: game.usedPocket,
-        eventLog: game.eventLog || [],
-        visited: game.visited || {},
-        seen: game.seen || {},
-        fragments: game.fragments || 0,
-        discovered: [...game.discoveredPairs],
-        bossKilled: !!game.bossKilled,
-        altarActivated: !!game.altarActivated,   // 第四层祭坛是否已激活（首脑格准入条件）
-        altarRewardPending: !!game.altarRewardPending,   // 祭坛奖励待领取（回赠面板可重进，只能领一次）
-        bossPlan: (game.bossPlan == null ? null : game.bossPlan),   // 本层首脑预案（进层 roll 一次存全层，2026-09-13 老板拍板）
-        altarItemSacrificed: !!game.altarItemSacrificed,   // 祭坛道具献祭一次性锁（2026-09-19 老板定版）
-        shopStocks: game.shopStocks || {},   // 各商店货架（按格子/门持久，防关门重刷，2026-09-19 审计 D-1）
-        elapsed: game.elapsed,
-        slot: activeSlot, savedAt: Date.now(),
-        // 战斗中退出/关窗（beforeunload）：只写战斗入场检查点；读档从本场战斗开头重开
-        battle: (game.battleActive && SDT.Battle && typeof SDT.Battle.serialize === 'function')
-          ? SDT.Battle.serialize() : null,
-        // 龙巢进行中状态（2026-09-18 断点续战）
-        nestActive: !!game.nestActive,
-        nestPos: game.nestPos == null ? 0 : game.nestPos,
-        cardBox: game.cardBox || [],
-        nestRunes: game.nestRunes || [],
-        nestEquipped: game.nestEquipped || [],
-        nestBossName: game.nestBossName || null,
-        nestTargetedBox: game.nestTargetedBox || 0,
-        pendingRunePick: game.pendingRunePick || null,
-      });
+    const ok = RunStorage.write(activeSlot, prepared.value);
     if (!ok) {
       if (RunStorage.lastWriteIssue(activeSlot) === 'STALE_SLOT') {
         const now = Date.now();
@@ -512,6 +468,38 @@ function requestClassChoice(options) {
       game.elapsedSynced = now;
       SDT.Base.save();
     }
+  }
+
+  // Produce a validated save snapshot without touching storage. Paired settlement commits
+  // use this so a battle reward never lands in Run ahead of its Base receipt.
+  function prepareRunSnapshot() {
+    if ((!game.runActive && !game.nestActive) || !activeSlot) return { ok: false, code: 'INVALID_STATE' };
+    assertZones();
+    let snapshotResult = game.nestActive ? { ok: true, value: null } : createMapSnapshot({
+      mapSeed: game.mapSeed, generatorVersion: game.generatorVersion, layoutVersion: game.layoutVersion, layerData: game.layerData,
+      routeVersion: game.routeVersion, routePlan: game.routePlan,
+    });
+    if (snapshotResult.ok && !game.nestActive) snapshotResult = validateMapSnapshot(snapshotResult.value, { layerIdx: game.layerIdx, trackPos: game.trackPos });
+    if (!snapshotResult.ok) return snapshotResult;
+    const value = {
+      seed: Random.seed, rngState: Random.snapshot(), mapSeed: game.mapSeed ?? Random.seed,
+      generatorVersion: game.generatorVersion ?? GENERATOR_VERSION, layoutVersion: game.layoutVersion ?? LAYOUT_VERSION,
+      geometryVersion: game.geometryVersion ?? null, routeVersion: game.routeVersion ?? null, mapSnapshot: snapshotResult.value,
+      layerIdx: game.layerIdx, trackPos: game.trackPos, hp: game.hp, maxHp: game.maxHp, coins: game.coins, turn: game.turn,
+      atk: game.atk, mode: game.mode, myClass: game.myClass || null, characterId: game.characterId || null,
+      inventory: game.inventory, ownedCards: game.ownedCards, cardOrder: game.cardOrder || [], usedPocket: game.usedPocket,
+      eventLog: game.eventLog || [], visited: game.visited || {}, seen: game.seen || {}, fragments: game.fragments || 0,
+      discovered: [...game.discoveredPairs], bossKilled: !!game.bossKilled, altarActivated: !!game.altarActivated,
+      altarRewardPending: !!game.altarRewardPending, bossPlan: game.bossPlan == null ? null : game.bossPlan,
+      altarItemSacrificed: !!game.altarItemSacrificed, shopStocks: game.shopStocks || {}, elapsed: game.elapsed,
+      slot: activeSlot, savedAt: Date.now(), battle: (game.battleActive && SDT.Battle && typeof SDT.Battle.serialize === 'function') ? SDT.Battle.serialize() : null,
+      nestActive: !!game.nestActive, nestPos: game.nestPos == null ? 0 : game.nestPos, cardBox: game.cardBox || [],
+      nestRunes: game.nestRunes || [], nestEquipped: game.nestEquipped || [], nestBossName: game.nestBossName || null,
+      nestTargetedBox: game.nestTargetedBox || 0, pendingRunePick: game.pendingRunePick || null,
+      pendingBattleLoot: game.pendingBattleLoot || null,
+    };
+    try { return { ok: true, value: JSON.parse(JSON.stringify(value)) }; }
+    catch { return { ok: false, code: 'INVALID_ARGUMENT', message: '对局结算快照无法序列化' }; }
   }
 
   // 删除某档位：对局进度 + 基地一起清空（该档位回到未创建状态）
@@ -575,6 +563,8 @@ function requestClassChoice(options) {
       return preflight;
     }
     const {run:s,plan}=preflight.value;
+    SDT.Chests?.cancelSession?.();
+    game.pendingBattleSettlement = false;
     game.seed = Random.restore(s.rngState || s.seed);
     if (plan.source !== 'nest') installDerived(plan.layerData, plan.mapSeed, plan.generatorVersion, plan.layoutVersion, plan.routeVersion, plan.routePlan);
     SDT.Base.use(slot);   // 该档位的基地数据（仓库/熟练度/成就/卡背）
@@ -634,6 +624,10 @@ function requestClassChoice(options) {
     game.elapsedSynced = game.elapsed;
     game.extractionPending = null;
     game.terminalPending = null;
+    game.pendingBattleSettlement = false;
+    game.pendingBattleLoot = s.pendingBattleLoot && Array.isArray(s.pendingBattleLoot.chests?.queue)
+      ? s.pendingBattleLoot : null;
+    if (game.pendingBattleLoot) game.battleActive = false;
     game.pendingExtraction = s.pendingExtraction || null;
     if (game.pendingExtraction) {
       game.battleActive = false;
@@ -668,8 +662,9 @@ function requestClassChoice(options) {
     enterLayer(safeLayer, safeIdx);
     SDT.Sound.music('board');
     UI.log(`[[icon:download]] 已读取【档位 ${slot}】存档`, 'ok');
-    if (!game.myClass) runtime.openClassChoice();   // 上次存档时还没选职业：补上开局选择
-    else if (s.battle && SDT.Battle && typeof SDT.Battle.restore === 'function') {
+    if (game.pendingBattleLoot) game.resumeBattleLoot?.();
+    else if (!game.myClass) runtime.openClassChoice();   // 上次存档时还没选职业：补上开局选择
+    else if (!game.pendingBattleLoot && s.battle && SDT.Battle && typeof SDT.Battle.restore === 'function') {
       if (SDT.Battle.restore(game, s.battle)) {
         // 读档恢复的战斗没经过 resolveCell：本格按已触发处理，撤退/胜利后不重复触发
         if (game.visited) game.visited[game.layerIdx + ',' + game.trackPos] = 1;
@@ -740,6 +735,7 @@ function requestClassChoice(options) {
   }
 
   function newRun(mode, picks, options = {}) {
+    SDT.Chests?.cancelSession?.();
     terminalGeneration++;
     game.seed = Random.reseed();
     game.mapSeed = game.seed;
@@ -750,6 +746,8 @@ function requestClassChoice(options) {
     game.pendingExtraction = null;
     game.extractionPending = null;
     game.terminalPending = null;
+    game.pendingBattleSettlement = false;
+    game.pendingBattleLoot = null;
     game.battleActive = false;   // 新开局必须与旧战斗会话切割（防旧战斗快照混入新档——2026-09-18 实测）
     setLobby(false);          // 进入棋盘：恢复左侧栏
     game.inventory = [];
@@ -935,7 +933,7 @@ function requestClassChoice(options) {
     UI.refresh(game);
   }
 
-export { FX, MAP, MODES, SLOT_COUNT, bagCap, buildDerived, cam, canAcceptCard, canvas, cardStacks, cellCenter, clearSave, configureGameRuntime, ctx, curLayer, doDeath, dpr, markSeen, requestClassChoice, safeCap, enterLayer, exitToTitle, gainCoins, game, hasRun, loadGame, migrateOldSave, modeCfg, newRun, newUid, openLeaveMenu, openSettings, openTitleGuide, pick, preflightRunMap, quitGame, safeUsed, saveGame, scaledEnemy, setLobby, showTitle, startNewGame, syncPlayTime, usedSlots, weighted };
+export { FX, MAP, MODES, SLOT_COUNT, bagCap, buildDerived, cam, canAcceptCard, canvas, cardStacks, cellCenter, clearSave, configureGameRuntime, ctx, curLayer, doDeath, dpr, markSeen, prepareRunSnapshot, requestClassChoice, safeCap, enterLayer, exitToTitle, gainCoins, game, hasRun, loadGame, migrateOldSave, modeCfg, newRun, newUid, openLeaveMenu, openSettings, openTitleGuide, pick, preflightRunMap, quitGame, safeUsed, saveGame, scaledEnemy, setLobby, showTitle, startNewGame, syncPlayTime, usedSlots, weighted };
 const _set_dpr = (v) => { dpr = v; };
 export { _set_dpr };
 export const getActiveSlot = () => activeSlot;

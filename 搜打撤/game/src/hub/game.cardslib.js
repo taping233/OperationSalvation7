@@ -20,7 +20,6 @@ function configureCardNavigation(hooks) {
 }
   const RARITIES = SDT.Cards.RARITIES;
   const TYPES = SDT.Cards.TYPES;
-  const TYPE_ICON = SDT.Cards.TYPE_ICON;
   const DMG_TYPES = SDT.Cards.DMG_TYPES;
   let editingCard = null;        // 制作坊正在编辑的原卡（null = 新建）
   let designerReturnLib = false; // 关闭制作坊时是否回到卡牌库
@@ -57,7 +56,7 @@ function configureCardNavigation(hooks) {
     const observer = typeof PerformanceObserver === 'function'
       ? new PerformanceObserver(list => list.getEntries().forEach(entry => longTasks.push(entry.duration)))
       : null;
-    try { observer?.observe({ type: 'longtask', buffered: false }); } catch (_) {}
+    try { observer?.observe({ type: 'longtask', buffered: false }); } catch { /* Long-task observation is optional. */ }
     const frameObserver = typeof PerformanceObserver === 'function'
       ? new PerformanceObserver(list => list.getEntries().forEach(entry => longAnimationFrames.push({
         duration: +entry.duration.toFixed(1),
@@ -66,7 +65,7 @@ function configureCardNavigation(hooks) {
         scripts: entry.scripts?.slice(0, 2).map(script => [script.invoker, +script.duration.toFixed(1)]),
       })))
       : null;
-    try { frameObserver?.observe({ type: 'long-animation-frame', buffered: false }); } catch (_) {}
+    try { frameObserver?.observe({ type: 'long-animation-frame', buffered: false }); } catch { /* Frame observation is optional. */ }
     const probe = { frame: 0, observer, frameObserver };
     photoFpsProbe = probe;
     const tick = now => {
@@ -409,7 +408,7 @@ import { MECH_GROUPS, MECH_ALL } from '../cards/mech-sentences.js';
       image.src = image.dataset.libSrc;
       delete image.dataset.libSrc;
     }
-    try { image.decode?.()?.catch?.(() => {}); } catch (_) {}
+    try { image.decode?.()?.catch?.(() => {}); } catch { /* Image decoding is best effort. */ }
   }
 
   function warmLibArt() {
@@ -1095,7 +1094,7 @@ import { MECH_GROUPS, MECH_ALL } from '../cards/mech-sentences.js';
       </div>`);
     UI.act('copyCards', async () => {
       try { await navigator.clipboard.writeText(json); UI.log('卡牌 JSON 已复制', 'ok'); }
-      catch (e) { UI.log('复制失败，请手动全选复制', 'warn'); }
+      catch { UI.log('复制失败，请手动全选复制', 'warn'); }
     });
     UI.act('downloadCards', () => {
       const blob = new Blob([json], { type: 'application/json' });

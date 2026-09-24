@@ -714,12 +714,16 @@ import { photoMountFor } from '../hub/photo-studio-presentation.js';
       // 2026-09-06 #17：战利品结算页 = 战斗胜利动画（1.4s 强调入场）
       const victoryCard = this.el.ovBody.parentElement;
       if (victoryCard && /搜刮！/.test(title)) { victoryCard.classList.remove('fx-victory'); void victoryCard.offsetWidth; victoryCard.classList.add('fx-victory'); }
+      const hasBattleStage = bodyHtml.includes('battle-stage');
+      if (this._hasBattleStage && !hasBattleStage) {
+        document.dispatchEvent(new CustomEvent('sdt-scene-leave', { detail: { scene: 'battle' } }));
+      }
       this.el.ovBody.innerHTML = SDT.Icons.rich(bodyHtml);
       // 广播当前弹层模式：战斗序列帧层据此做白名单（只有 battle 模式可见，2026-09-13 留言）
       document.dispatchEvent(new CustomEvent('sdt-overlay-mode', { detail: mode }));
       // 主循环每帧读此标志判断“战斗页是否盖在画布上”；battle-stage 只会经这里进
       // overlay（ovBody 无其他写入点），按内容缓存一次，免去每帧全子树 querySelector
-      this._hasBattleStage = bodyHtml.includes('battle-stage');
+      this._hasBattleStage = hasBattleStage;
       const card = this.el.ovBody.parentElement;
       card.classList.toggle('wide', mode === true || mode === 'wide' || mode === 'chest' || mode === 'discover');
       card.classList.toggle('chest', mode === 'chest');   // 战利品/开箱浮层专属类（2026-09-09 重做放大）
@@ -872,6 +876,10 @@ import { photoMountFor } from '../hub/photo-studio-presentation.js';
         // 隐藏不等于释放：卡牌库一次可生成 5k+ DOM 节点与数百张 <img>。关闭后若仍留在
         // ovBody，会长期占用 JS/DOM/图片资源，反复开关虽不线性叠加但峰值永不回落。
         // showOverlay 每次都会完整重建内容，因此关闭动画完成后可以安全清空。
+        if (this._hasBattleStage) {
+          this._hasBattleStage = false;
+          document.dispatchEvent(new CustomEvent('sdt-scene-leave', { detail: { scene: 'battle' } }));
+        }
         this.el.ovBody.replaceChildren();
         this._hasBattleStage = false;
         // 关闭不透明页面后，Canvas 从低频巡检态立即醒来补一帧，避免最多 250ms 的回图延迟。

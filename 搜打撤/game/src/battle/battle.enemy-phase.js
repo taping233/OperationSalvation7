@@ -6,7 +6,7 @@ import { BATTLE_PHASES, cancelTargeting, transitionBattle } from './battle.state
 import { Random } from '../core/random.js';
 import * as Combat from './combat.js';
 import { demoMs } from './battle.pace.js';
-import { battleState, G, foes, mode, drawPile, hand, consumed, grave, energy, maxEnergy, turn, pdef, pstat, busy, infusing, discovering, handSelecting, choosing, interaction, noDrawNext, floats, cardAnims, playedMovesThisTurn, allies, extraTurn, timeRune, holyRune, fireballRuneOn, swiftRune, timeSpaceRune, timeSpaceUsed, set$noDrawNext, set$energy, set$extraTurn, set$battleState, set$interaction, set$turn, set$busy, set$timeSpaceUsed, set$playedMartialThisTurn, set$playedMovesThisTurn, set$pendingHint, set$lastPersistAt } from './battle.runtime.js';
+import { battleState, battleSession, G, foes, mode, drawPile, hand, consumed, grave, energy, maxEnergy, turn, pdef, pstat, busy, infusing, discovering, handSelecting, choosing, interaction, noDrawNext, floats, cardAnims, playedMovesThisTurn, allies, extraTurn, timeRune, holyRune, fireballRuneOn, swiftRune, timeSpaceRune, timeSpaceUsed, set$noDrawNext, set$energy, set$extraTurn, set$battleState, set$interaction, set$turn, set$busy, set$timeSpaceUsed, set$playedMartialThisTurn, set$playedMovesThisTurn, set$pendingHint, set$lastPersistAt } from './battle.runtime.js';
 import { processDelayed, accrueGrowth, resolveCard, syncCurseCondEquips, applyKillRewards, unplayableReason, queueCardExecution, foeIdx, addPlayerCurse, playerTakeHit, frenzyCurse, elCurse, requestBattleRender, R, alive, intentFor, drawCards, resolveFoeDefeat, sweepDead, nestPhase, grantSha, findCard, effCostOf, finish } from './battle.engine.js';
 
   // 敌方步进演出节拍在 vitest 环境归零（比照 battle.engine.js 的 SURGE_WAVE_MS 先例）：
@@ -17,6 +17,8 @@ import { processDelayed, accrueGrowth, resolveCard, syncCurseCondEquips, applyKi
 
   // ---------- 回合结束 ----------
   function endTurn() {
+    const session = battleSession;
+    if (!session?.isCurrent()) return;
     if (SDT.Meta && SDT.Meta.track) SDT.Meta.track('turnMoves', { n: playedMovesThisTurn });
     if (busy || infusing || discovering || choosing) return;
     if (battleState.phase === BATTLE_PHASES.VICTORY || battleState.phase === BATTLE_PHASES.DEFEAT) return;   // 终局后点击无效（2026-09-16 实测 defeat 后连点报错）
@@ -98,9 +100,25 @@ import { processDelayed, accrueGrowth, resolveCard, syncCurseCondEquips, applyKi
     // —— 敌人回合：逐个行动 ——
     const acting = alive();
     let i = 0;
+    let pendingStepTimer = null;
+    const cancelPendingStep = () => {
+      if (pendingStepTimer !== null) clearTimeout(pendingStepTimer);
+      pendingStepTimer = null;
+    };
+    const onSessionRetired = () => cancelPendingStep();
+    const cleanupSessionListener = () => session.signal.removeEventListener('abort', onSessionRetired);
+    session.signal.addEventListener('abort', onSessionRetired, { once: true });
+    const scheduleStep = step => {
+      if (!session.isCurrent()) { cleanupSessionListener(); return; }
+      pendingStepTimer = setTimeout(() => {
+        pendingStepTimer = null;
+        step();
+      }, ENEMY_STEP_ZERO ? 0 : demoMs(420));
+    };
     const step = () => {
+      if (!session.isCurrent()) { cancelPendingStep(); cleanupSessionListener(); return; }
       if (G.hp <= 0) { set$busy(false); finish(false); return; }
-      if (i >= acting.length) { afterEnemies(); return; }
+      if (i >= acting.length) { cleanupSessionListener(); afterEnemies(session); return; }
       const foe = acting[i++];
       if (foe.dead) { step(); return; }
       if (foe.stunned) {
@@ -183,14 +201,15 @@ import { processDelayed, accrueGrowth, resolveCard, syncCurseCondEquips, applyKi
           }
         }
       }
-      requestBattleRender();
+      requestBattleRender(session);
       if (G.hp <= 0) { set$busy(false); finish(false); return; }
-      setTimeout(step, ENEMY_STEP_ZERO ? 0 : demoMs(420));   // 敌方步进：2× 档经 demoMs 单一倍率缩放（battle.pace.js）；vitest 归零（见文件头 ENEMY_STEP_ZERO）
+      scheduleStep(step);   // 敌方步进：2× 档经 demoMs 单一倍率缩放（battle.pace.js）；vitest 归零（见文件头 ENEMY_STEP_ZERO）
     };
-    setTimeout(step, ENEMY_STEP_ZERO ? 0 : demoMs(420));
+    scheduleStep(step);
   }
 
-  function afterEnemies() {
+  function afterEnemies(session) {
+    if (!session?.isCurrent()) return;
     const aliveBeforeTick = alive().length;
     if (holyRune && turn <= 3) {
       const n = timeRune ? 8 : 4;   // 时光符文：回合结束效果触发 2 次

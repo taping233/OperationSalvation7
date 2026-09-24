@@ -12,6 +12,17 @@ import { escAttr } from '../core/shared.js';
   let idx = 0;         // 已开到第几个
   let onDone = null;   // 全部开完后的续流回调
   let searchSeq = 0;   // 搜索演出代次：过期定时器不得再渲染（连开多箱/提前结束时防串台）
+  let deferBaseSave = false; // battle.settle 把 eggPity 与 Run 一起提交
+  let prepared = null;
+  let preparedDone = null;
+  let preparedOpts = null;
+  let preparedBusy = false;
+  let preparedBlocked = false;
+  let preparedAfterSave = null;
+  let sessionSeq = 0;
+
+  const currentPrepared = () => !!(prepared && G && G.pendingBattleLoot && G.pendingBattleLoot.chests === prepared
+    && (!preparedOpts || typeof preparedOpts.isCurrent !== 'function' || preparedOpts.isCurrent()));
 
   const KINDS = () => SDT.MAP.chestKinds;
   const rndInt = (a, b) => a + Math.floor(Random.random('loot') * (b - a + 1));
@@ -101,7 +112,7 @@ import { escAttr } from '../core/shared.js';
     } else {
       SDT.Base.data.eggPity = pityN;
     }
-    SDT.Base.save();
+    if (!deferBaseSave) SDT.Base.save();
     // —— 宝箱保底（2026-09-09 试玩反馈；设计者定版权重 60:28:9:3 不动）——
     // 中宝箱（3 选 1）整包全古朴的概率约 21.6%，体验很差：保底至少 1 张「稀有」+；
     // 大宝箱 / 首脑宝箱保底至少 1 张「史诗」+。未达标就重掷最后一张（目标档内挑卡，
@@ -138,6 +149,104 @@ import { escAttr } from '../core/shared.js';
       if (token && !seen.dup(token)) { seen.add(token); c.cards.push(token); c.tokenHit = true; }
     }
     return c;
+  }
+
+  // Roll battle loot once before the paired Base + Run stage commit. Keep this
+  // projection JSON-only so a reload can reopen the same cards and egg result.
+  function prepareBattle(chests, opts = {}) {
+    const oldDefer = deferBaseSave;
+    const oldGame = G;
+    if (opts.game) G = opts.game;
+    deferBaseSave = true;
+    try {
+      const rolled = (Array.isArray(chests) ? chests : []).map((chest, i) => ({
+        kind: chest.kind, isClass: !!chest.isClass,
+        battleSummary: i === 0 ? opts.battleSummary || null : null,
+        contents: rollContents(chest.kind, !!chest.isClass),
+        taken: [], choice: null, coinsTaken: false,
+      }));
+      return { version: 1, index: 0, queue: rolled, battleSummary: opts.battleSummary || null };
+    } finally { deferBaseSave = oldDefer; G = oldGame; }
+  }
+
+  function openPrepared(game, pending, done, opts = {}) {
+    if (!pending || !Array.isArray(pending.queue) || !game.pendingBattleLoot || game.pendingBattleLoot.chests !== pending) return false;
+    if (typeof opts.isCurrent === 'function' && !opts.isCurrent()) return false;
+    cancelSession();
+    G = game; prepared = pending; preparedDone = done || null; preparedOpts = opts;
+    preparedBusy = false; preparedBlocked = false; preparedAfterSave = null;
+    queue = pending.queue; idx = Math.min(pending.index || 0, queue.length);
+    deferBaseSave = true;
+    if (idx >= queue.length) return finishPrepared();
+    G.state = 'modal';
+    showPreparedCurrent();
+    return true;
+  }
+
+  function preparedCurrent() {
+    const item = prepared && prepared.queue[prepared.index];
+    if (!item) return null;
+    cur = { ...item.contents, kind: item.kind, isClass: !!item.isClass,
+      battleSummary: item.battleSummary || null, taken: new Set(item.taken || []) };
+    idx = prepared.index + 1;
+    return item;
+  }
+
+  function showPreparedCurrent() {
+    if (!currentPrepared()) return;
+    const item = preparedCurrent();
+    if (!item) return finishPrepared();
+    renderPreparedSearch();
+  }
+
+  function renderPreparedSearch() {
+    if (!currentPrepared()) return;
+    const K = KINDS()[cur.kind];
+    const tok = ++searchSeq;
+    UI.showOverlay(`[[icon:archive]] 搜刮！${cur.isClass ? '职业·' : ''}${K.name} · 第 ${idx} / ${queue.length}`, `
+      <p class="evt-sts-desc">${cur.isClass ? '黑色职业宝箱：只掉落<b>职业卡牌</b>' : '你俯身翻检箱子——灰尘、锈迹，还有别的东西。'}</p>
+      <div class="pick-search"><img class="chest-prop ps-chest" src="${chestArtOf(cur)}" alt="" draggable="false"><span class="ps-ground"><i></i></span><p class="ps-tip">正在搜索物资…</p></div>`, 'chest');
+    SDT.Sound.sfx('pick'); UI.refresh(G);
+    setTimeout(() => { if (tok !== searchSeq || !currentPrepared()) return; render(); scheduleRevealSfx(); }, SEARCH_MS);
+  }
+
+  function persistPrepared(after) {
+    if (!currentPrepared() || preparedBusy || preparedBlocked) return;
+    const token = sessionSeq;
+    preparedBusy = true;
+    let result;
+    try { result = typeof preparedOpts.persist === 'function' ? preparedOpts.persist(prepared) : false; }
+    catch { result = false; }
+    Promise.resolve(result).then(ok => {
+      if (token !== sessionSeq || !currentPrepared()) return;
+      preparedBusy = false;
+      if (ok === false || ok == null) {
+        preparedBlocked = true; preparedAfterSave = after || null;
+        UI.log('[[icon:cross]] 宝箱进度未能保存，重试保存前无法继续', 'warn'); render(); return;
+      }
+      if (after) after(); else render();
+    }, () => {
+      if (token !== sessionSeq || !currentPrepared()) return;
+      preparedBusy = false; preparedBlocked = true; preparedAfterSave = after || null;
+      UI.log('[[icon:cross]] 宝箱进度未能保存，重试保存前无法继续', 'warn'); render();
+    });
+  }
+
+  function advancePrepared() {
+    if (!currentPrepared()) return;
+    prepared.index++;
+    idx = prepared.index;
+    if (idx >= prepared.queue.length) { persistPrepared(() => finishPrepared()); return; }
+    persistPrepared(() => showPreparedCurrent());
+  }
+
+  function finishPrepared() {
+    if (!currentPrepared()) return false;
+    const cb = preparedDone;
+    searchSeq++; sessionSeq++; UI.hideOverlay(); G.state = 'idle'; cur = null; queue = [];
+    prepared = null; preparedDone = null; preparedOpts = null; preparedBlocked = false; preparedBusy = false;
+    deferBaseSave = false;
+    return cb ? cb() : true;
   }
 
   // ---------- 掉落掷骰：opts = { isBoss, layer } → 宝箱实例 [{kind}] ----------
@@ -191,7 +300,9 @@ import { escAttr } from '../core/shared.js';
 
   // ---------- 开箱 UI（逐个弹窗，全部开完调 onDone） ----------
   function open(game, chests, done, opts) {
+    cancelSession();
     const K = Object.assign({ resourceOnly: false }, opts || {});
+    deferBaseSave = !!K.deferBaseSave;
     G = game;
     queue = chests.map((chest, i) => ({ ...chest, battleSummary: i === 0 ? K.battleSummary || null : null }));
     idx = 0;
@@ -203,10 +314,12 @@ import { escAttr } from '../core/shared.js';
   function next() {
     if (idx >= queue.length) {
       searchSeq++;              // 作废未播完的搜索演出，避免收尾后又被旧定时器拉回浮层
+      sessionSeq++;
       UI.hideOverlay();
       G.state = 'idle';
       cur = null;
       queue = [];   // 开完即清：isOpen 用 queue.length 判终态，残留会恒 true 锁死背包
+      deferBaseSave = false;
       const cb = onDone;
       onDone = null;
       if (cb) cb();
@@ -227,6 +340,7 @@ import { escAttr } from '../core/shared.js';
   function renderSearch() {
     const K = KINDS()[cur.kind];
     const tok = ++searchSeq;
+    const ownerSession = sessionSeq, ownerGame = G, ownerCur = cur;
     UI.showOverlay(`[[icon:archive]] 搜刮！${cur.isClass ? '职业·' : ''}${K.name} · 第 ${idx} / ${queue.length}`, `
       <p class="evt-sts-desc">${cur.isClass ? '黑色职业宝箱：只掉落<b>职业卡牌</b>' : '你俯身翻检箱子——灰尘、锈迹，还有别的东西。'}</p>
       <div class="pick-search">
@@ -237,7 +351,7 @@ import { escAttr } from '../core/shared.js';
     SDT.Sound.sfx('pick');
     UI.refresh(G);
     setTimeout(() => {
-      if (tok !== searchSeq || !cur) return;   // 已开下一个/已收尾 → 不再揭晓
+      if (tok !== searchSeq || ownerSession !== sessionSeq || G !== ownerGame || cur !== ownerCur || !cur) return;   // 已开下一个/已收尾 → 不再揭晓
       render();
       scheduleRevealSfx();
     }, SEARCH_MS);
@@ -248,6 +362,10 @@ import { escAttr } from '../core/shared.js';
   const riOf = (card) => Math.max(0, SDT.Cards.RARITIES.indexOf(card.rarity));
 
   function render() {
+    if (prepared && !currentPrepared()) return;
+    const renderedSession = sessionSeq, renderedGame = G, renderedCur = cur;
+    const actionCurrent = () => renderedSession === sessionSeq && renderedGame === G && renderedCur === cur
+      && (!prepared || currentPrepared());
     const K = KINDS()[cur.kind];
     const isPick = !!K.pickFrom;   // 中宝箱：3 选 1
     const taken = cur.taken || (cur.taken = new Set());
@@ -303,38 +421,61 @@ import { escAttr } from '../core/shared.js';
       ${warnLine}
       <div class="chest-reveal"><img class="chest-prop opened" src="${chestArtOf(cur)}" alt="" draggable="false"></div>
       ${cur.cards.length ? `<div class="bt-hand${taken.size ? ' no-anim' : ''}" data-n="${cur.cards.length}">${cardsHTML}</div>` : '<p class="ov-empty">（卡牌库是空的，什么也没开出）</p>'}
-      <div class="loot-footer-note">${isPick ? '点击一张收下' : '点击卡牌可逐张收取'} · 未收取的卡牌将散落</div>${ops}`, 'chest');
-    UI.act('chestTake', takeAll);
+      <div class="loot-footer-note">${preparedBlocked ? '保存失败，当前操作已锁定' : `${isPick ? '点击一张收下' : '点击卡牌可逐张收取'} · 未收取的卡牌将散落`}</div>${preparedBlocked ? '<div class="scene-ops chest-ops"><button class="ov-btn ok" data-act="chestRetrySave">重试保存</button></div>' : ops}`, 'chest');
+    UI.act('chestRetrySave', () => {
+      if (!actionCurrent()) return;
+      if (!currentPrepared() || !preparedBlocked || preparedBusy) return;
+      const token = sessionSeq;
+      preparedBusy = true;
+      let result; try { result = preparedOpts.persist(prepared); } catch { result = false; }
+      Promise.resolve(result).then(ok => {
+        if (token !== sessionSeq || !actionCurrent() || !currentPrepared()) return;
+        preparedBusy = false;
+        if (ok === false || ok == null) { UI.log('[[icon:cross]] 宝箱进度仍未保存', 'warn'); return; }
+        preparedBlocked = false; const after = preparedAfterSave; preparedAfterSave = null;
+        if (after) after(); else render();
+      }, () => { if (token === sessionSeq && actionCurrent() && currentPrepared()) { preparedBusy = false; UI.log('[[icon:cross]] 宝箱进度仍未保存', 'warn'); } });
+    });
+    UI.act('chestTake', () => { if (!actionCurrent() || (prepared && !currentPrepared())) return; takeAll(); });
     UI.act('chestTake1', (d) => {
+      if (!actionCurrent()) return;
+      if (prepared && (!currentPrepared() || preparedBusy || preparedBlocked)) return;
       const card = cur.cards[+d.i];
       if (!card || cur.taken.has(+d.i)) return;
       if (G.grantCard(card, { silent: true })) {   // grantEventCard：同名并入 / 容量判定都在里面（搜刮页自带揭晓，不再叠加获得演出）
         cur.taken.add(+d.i);
-        render();
+        if (prepared) { prepared.queue[prepared.index].taken = [...cur.taken]; persistPrepared(); } else render();
       }
       // 收不下（背包满）时 grantCard 内部已 warn 日志，卡保持可点不动
     });
     UI.act('chestSkip', () => {
+      if (!actionCurrent()) return;
+      if (prepared && (!currentPrepared() || preparedBusy || preparedBlocked)) return;
       if (cur.coins) G.gainCoins(cur.coins);   // 币是无主物，跳过也收；卡牌散落
       UI.log('（你留下开出的卡牌，转身走了……）', 'dim');
-      next();
+      if (prepared) { prepared.queue[prepared.index].coinsTaken = true; advancePrepared(); } else next();
     });
     UI.act('chestPick', (d) => {
+      if (!actionCurrent()) return;
+      if (prepared && (!currentPrepared() || preparedBusy || preparedBlocked)) return;
       const card = cur.cards[+d.i];
       if (!card) return;
       // 放不下时留在面板（grantCard 内部已播报「背包已满」）：玩家可腾格重选或走「只收金币离开」，
       // 不得照常 next()——否则三选一被静默吞卡（2026-09-19 审计 P2-8）
       if (!G.grantCard(card, { silent: true })) return;
       if (cur.coins) G.gainCoins(cur.coins);
-      next();
+      if (prepared) { prepared.queue[prepared.index].choice = +d.i; prepared.queue[prepared.index].coinsTaken = true; advancePrepared(); } else next();
     });
     UI.refresh(G);
   }
 
   // 逐卡揭晓音效：史诗叮鸣、传说号角；揭晓卡带过冲 pop（game-feel）
   function scheduleRevealSfx() {
+    const owner = prepared;
+    const ownerSession = sessionSeq, ownerGame = G, ownerCur = cur;
     (cur.cards || []).forEach((c, i) => {
       setTimeout(() => {
+        if (ownerSession !== sessionSeq || G !== ownerGame || cur !== ownerCur || (owner && (prepared !== owner || !currentPrepared()))) return;
         const hand = document.querySelector('.bt-hand');
         if (!hand) return;
         SDT.Sound.sfx('reveal');
@@ -348,6 +489,7 @@ import { escAttr } from '../core/shared.js';
   }
 
   function takeAll() {
+    if (prepared && (!currentPrepared() || preparedBusy || preparedBlocked)) return;
     const taken = cur.taken;
     cur.cards.forEach((card, i) => {
       if (taken && taken.has(i)) return;   // 已单卡拾取过的不重复入包
@@ -355,7 +497,7 @@ import { escAttr } from '../core/shared.js';
     });
     if (cur.coins) G.gainCoins(cur.coins);
     if (!cur.cards.length && !cur.coins) UI.log('（空的——早被别的拾荒者搬空了……）', 'dim');
-    next();
+    if (prepared) { prepared.queue[prepared.index].taken = cur.cards.map((_, i) => i); prepared.queue[prepared.index].coinsTaken = true; advancePrepared(); } else next();
   }
 
   // 挂起/恢复（2026-09-09 留言 #13）：搜刮界面允许打开背包——
@@ -368,6 +510,16 @@ import { escAttr } from '../core/shared.js';
   function resume() {
     if (cur) render();
   }
-  sdtDefine('Chests', { rollDrops, dropText, open, rollContents, isOpen: () => !!(cur || queue.length), suspend, resume });
+  function cancelSession() {
+    sessionSeq++; searchSeq++;
+    const hadChest = !!(cur || queue.length || prepared);
+    cur = null; queue = []; idx = 0; onDone = null;
+    prepared = null; preparedDone = null; preparedOpts = null;
+    preparedBusy = false; preparedBlocked = false; preparedAfterSave = null; deferBaseSave = false;
+    G = null;
+    if (hadChest) UI.hideOverlay();
+    return hadChest;
+  }
+  sdtDefine('Chests', { rollDrops, dropText, open, rollContents, prepareBattle, openPrepared, cancelSession, isOpen: () => !!(cur || queue.length), suspend, resume });
 
 export { G, SDT, UI, render };
