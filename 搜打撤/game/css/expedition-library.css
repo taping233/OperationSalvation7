@@ -2671,13 +2671,14 @@ body.cardlib-open #overlay .studio-index-layout .studio-catalog .lib-grid {
   min-height:0;
   width:100%;
   box-sizing:border-box;
-  padding-top:24px!important;
+  padding-top:12px!important;
+  row-gap:18px!important; /* 09-24 留言：上下两列照片挤在一起，行间拉开 */
 }
 body.cardlib-open #overlay .studio-index-layout .studio-page-nav {
   flex:0 0 auto;
   justify-content:center;
   gap:12px;
-  margin:4px 8px 0;
+  margin:14px 8px 4px; /* 09-24 留言：照片与翻页键之间留距离 */
   padding:0 4px;
 }
 body.cardlib-open #overlay .studio-index-layout .studio-page-nav[hidden] { display:none!important; }
@@ -2705,7 +2706,7 @@ body.cardlib-open #overlay .studio-index-layout .studio-catalog .studio-filterba
   display:flex;
   flex-direction:column;
   align-items:stretch;
-  gap:12px;
+  gap:8px; /* 09-24 留言：压缩照相馆上方空间，给照片区让位 */
   padding:16px 20px 18px!important;
   border:3px solid #8a7650!important;
   border-radius:3px;
@@ -2719,7 +2720,7 @@ body.cardlib-open #overlay .studio-index-layout .studio-index-heading {
   display:flex;
   align-items:center;
   gap:14px;
-  min-height:26px;
+  min-height:22px;
   color:#535b4a;
   font:500 13px/1.4 var(--font-ui);
   letter-spacing:.08em;
@@ -2749,13 +2750,13 @@ body.cardlib-open #overlay .studio-index-layout .studio-index-heading .studio-cl
 body.cardlib-open #overlay .studio-index-layout .studio-catalog .clib-tabs {
   flex:0 0 auto;
   gap:4px;
-  padding:0 0 8px;
+  padding:0 0 5px;
   border-bottom:1px solid #bcb49e;
   scrollbar-color:#8c967e transparent;
   scrollbar-width:thin;
 }
 body.cardlib-open #overlay .studio-index-layout .studio-catalog .type-tab {
-  min-height:36px!important;
+  min-height:32px!important;
   gap:6px;
   padding:7px 10px;
   border:1px solid transparent!important;
