@@ -330,3 +330,25 @@ Git 状态：`master` 领先 `origin/master` **8 个提交未推送**（最新 2
 - 老板授权确认无明显问题后提交。提交前 HEAD `66ecb57`，相对本地 `origin/master` ahead 2 / behind 0；本段随本批提交入库，提交标识以实时 `git log -1` 为准，提交后预计 ahead 3 / behind 0。未联网刷新远端，未推送。
 - 本批范围为 `game/src/battle/` 的 10 个已跟踪文件改动、3 个新增模块（`battle.clock.js`、`battle.attack-cues.js`、`battle.target-session.js`）及本交接/塔2差距文档。提交前静态审查补正了 2× 抛体轨迹、CSS 反馈清理时长、首击动作重复起播，以及回合初延迟伤害清场后的胜利收尾；详情见 `docs/sts2-combat-delta-2026-09-24.md` 的“并行切片提交补记”。
 - 依老板此前要求，本批未运行测试、构建或浏览器走查；`node --check` 覆盖 13 个战斗 JS 文件、`git diff --check` 通过（仅 LF/CRLF 提示）。此前 11 文件 / 63 项和 Boss 页面采样不覆盖本批。实际逐击、顿帧、音效与取消边界仍待实机确认。
+
+## 当前状态补充：标题页制作坊图标入口移除（2026-09-24 12:15 +08:00）
+
+- 老板明确要求移除制作坊图标入口。当前 HEAD `a85b857`，相对本地 `origin/master` ahead 3 / behind 0（未联网刷新远端），未推送。本批仅改 `game/index.html` 的标题页 `btnCardDesigner` 按钮和 `game/src/game.boot.js` 对应点击绑定；本记录随代码保留在工作区，尚未提交。制作坊页面、卡牌库内部入口和调试调用未改。
+- 当前默认尺寸内置浏览器 `http://127.0.0.1:5173/` 实际看到制作坊图标消失，照相馆、成就、设置和开始探索入口仍显示。页面同时提示“游戏加载失败”；控制台错误为 `CardRulesValidationError: tt12-firecracker rules.battle.target.area/side`，栈指向 `game/src/cards/cards.js` / `cards.sync.js`，本批未改这些文件。因此本次只确认标题页入口外观，不能称整页或游戏流程通过验收。未运行测试或构建。
+
+## 当前状态补充：对敌卡拖拽改为近敌瞄准（2026-09-24 12:26 +08:00）
+
+- 老板要求对敌卡在战场自由跟手，仅靠近敌人时切为箭头瞄准；拖离敌人恢复跟手，空处松手回手牌。当前 HEAD 仍为 `a85b857`，相对本地 `origin/master` ahead 3 / behind 0（未联网刷新远端），未推送。此改动和上一节制作坊入口改动均未提交。
+- 本批改 `game/src/battle/battle.aim.js` 与 `game/css/battle.css`：以存活敌人的立绘矩形及附近范围判定瞄准（进入 72px、退出 108px），选中目标仍经过目标会话存活校验；松手在附近打出，远离回手；拖动时停用 CSS transform 过渡，松手恢复手牌弹簧过渡；拖空后的合成 click 不再误触发选牌。自指向卡、无目标卡、药水及背包砸击保留既有出牌路径。
+- 当前未提交路径：`game/index.html`、`game/src/game.boot.js`、`game/src/battle/battle.aim.js`、`game/css/battle.css`、本交接文档。依老板当前口径未运行测试或构建；这次拖拽交互未做实机页面验收，`127.0.0.1:5173` 页面现有卡牌规则加载错误仍需另行处理。
+
+## 当前状态补充：卡牌跟手物理节奏（2026-09-24 12:33 +08:00）
+
+- 老板指出拖动时卡牌追得太快。`battle.aim.js` 之前每次 `pointermove` 固定推进 16ms，随后 rAF 又按帧时间推进，导致跟手速度受鼠标事件频率影响；本批改为两个入口共用真实时间戳，只累计一次实际经过的时间。
+- 跟手位置改用保存速度的临界阻尼弹簧，自由拖动比旧指数追随慢，停靠仍稍快；拖拽与近敌瞄准间切换时保留位置和速度。当前 HEAD、远端差异和未提交路径同上一节；未提交、未推送。`node --check game/src/battle/battle.aim.js` 与 `git diff --check` 通过（仅 LF/CRLF 提示）；依老板口径未运行测试、构建或新的实机走查。
+
+## 当前状态补充：制作坊入口与卡牌拖拽提交（2026-09-24 12:39 +08:00）
+
+- 老板授权提交本轮改动。提交前 HEAD `a85b857`，相对本地 `origin/master` ahead 3 / behind 0；本段随提交入库，提交标识以实时 `git log -1` 为准。未联网刷新远端，未推送。
+- 精确提交路径：`game/index.html`、`game/src/game.boot.js`、`game/src/battle/battle.aim.js`、`game/css/battle.css` 与本交接文档。另有并行任务的未跟踪 `docs/previews/wu-card-art-versions-2026-09-24/`（50 张 WebP），归属本批之外，保持未暂存。
+- 本批依老板口径未运行测试、构建或新的战斗页面验收；仅 `node --check` 与 `git diff --check` 通过。标题页入口外观证据和浏览器加载错误见 12:15 节，不能代替战斗拖拽实机验收。

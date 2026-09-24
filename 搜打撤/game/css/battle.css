@@ -294,6 +294,7 @@
 .bt-slot:has(.aim-lift) { z-index:20; }
 /* 2026-09-13 老板口令：弹出动画要慢、带物理弹性——0.5s 过冲弹簧曲线（transform 合成器通道） */
 .sts-hand .bt-card { transition:transform .5s var(--ease-spring); }
+.sts-hand .bt-card.aim-lift { transition:none; } /* 拖动期间交给 rAF 跟手，松手再用弹簧过渡回手牌 */
 .sts-hand .bt-card.off { transform:translateY(8px) scale(.97); filter:brightness(.55) saturate(.7); }
 .sts-hand .bt-slot:hover .bt-card:not(.off):not(.aim-lift) { transform:translateY(-24px) scale(1.04); }
 .sts-hand .bt-slot:hover .bt-card.off { transform:translateY(8px) scale(.97); }

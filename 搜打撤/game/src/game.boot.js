@@ -518,7 +518,6 @@ import { renderMiniMap } from './run/game.session.js';
     document.getElementById('mStart').addEventListener('click', startNewGame);
     document.getElementById('mSettings').addEventListener('click', openSettings);
     document.getElementById('btnCardLib').addEventListener('click', openCardLibrary);
-    document.getElementById('btnCardDesigner').addEventListener('click', () => openCardDesigner(null));
     document.getElementById('mBack').addEventListener('click', () => {
       // 告别屏淡出 + 标题页淡入都由 showTitle 内部的屏幕过渡处理（交叉淡切）
       showTitle();
