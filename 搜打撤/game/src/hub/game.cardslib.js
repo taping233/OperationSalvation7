@@ -303,10 +303,8 @@ import { MECH_GROUPS, MECH_ALL } from '../cards/mech-sentences.js';
   let libPageCacheFilterKey = '';
   let libRenderedPageIndex = null;
   let libPageWarmTask = null;
-  let libPageWarmGeneration = 0;
 
   function cancelLibPageWarm() {
-    libPageWarmGeneration++;
     if (libPageWarmTask != null) {
       if (typeof cancelIdleCallback === 'function') cancelIdleCallback(libPageWarmTask);
       else clearTimeout(libPageWarmTask);

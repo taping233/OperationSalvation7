@@ -323,6 +323,7 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
     UI.act('cancelDragDiscard', () => showBackpack(true));
   }
 
+  // eslint-disable-next-line no-unused-vars -- 局部豁免：被 game/selftest.js:87 源码正则 /function showBagCardDetail/ 锚定，删除会挂红自检；#27 改版后入口已由 inspectStack 承担，函数历史保留
   function showBagCardDetail(name, fromSafe) {
     const o = game.ownedCards.find(x => !!x.safe === !!fromSafe && x.card.name === name);
     if (!o) { showBackpack(true); return; }

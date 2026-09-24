@@ -14,7 +14,7 @@ describe('R5-b deterministic route overlay',()=>{
   ])('%s matches the reviewed node/type matrix',(seed,want)=>{
     const result=apply(seed); expect(result.ok).toBe(true); expect(result.value.status).toBe('applied');
     const {swap,...plan}=want; expect(result.value.routePlan).toMatchObject(plan);
-    expect(result.value.routePlan.swaps[0].bNodeId).toBe(want.swap);
+    expect(result.value.routePlan.swaps[0].bNodeId).toBe(swap);
     const l=result.value.layerData[1], byId=new Map(l.logical.map(n=>[n.id,n]));
     expect(byId.get(want.supplyNodeId).def.type).toBe('chest');
     expect(byId.get(want.riskNodeId).def.type).toBe('battle');

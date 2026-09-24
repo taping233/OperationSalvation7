@@ -108,6 +108,7 @@ describe('tt12-hitechrd canonical rule and old-save backfill', () => {
     const legacyDesc = '玩家改写的旧档描述';
     const legacyCards = Cards.all().map(card => {
       if (card.id !== 'tt12-hitechrd') return card;
+      // eslint-disable-next-line no-unused-vars -- 局部豁免：rest 省略惯用法，剥离 rules 构造旧档缺 rules 的语义（后文断言 ensureTT12DiscoverRules 迁移回填），删绑定会破坏测试
       const { rules, ...legacyCard } = card;
       return { ...legacyCard, desc: legacyDesc };
     });

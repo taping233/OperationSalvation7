@@ -3,14 +3,14 @@
  *
  * 由 game.run.js 拆出。层位最底（L0）：只依赖会话/数据/UI 模块，
  * 不依赖 altar / flow；ALTAR 与 FLOW 反向依赖本文件。
- * 内容：场景预加载与整页壳（nodeShell/nodeOpt/openScene/finishScene）、
+ * 内容：场景预加载与整页壳（nodeShell/nodeOpt/finishScene）、
  *       行军转场、即时节点落定、拾取页、战斗/宝箱格、事件发牌、火堆复原页。
  * 商店控制器也在此装配（openShop 唯一实例，供 ALTAR/FLOW 复用）。
  * ============================================================ */
 import { esc, escAttr } from '../core/shared.js';
 import { MAP, bagCap, game, newUid, pick, saveGame, scaledEnemy, usedSlots } from './game.session.js';
-import { Sfx, _set_cardPageOpen, cardHTML } from '../hub/game.cardslib.js';
-import { IMMEDIATE_SCENES, NODE_BG, PICKUP_BG, PRELOAD_SCENES, SCENES, SCENE_META } from './game.run.data.js';
+import { _set_cardPageOpen, cardHTML } from '../hub/game.cardslib.js';
+import { IMMEDIATE_SCENES, NODE_BG, PICKUP_BG, PRELOAD_SCENES, SCENES } from './game.run.data.js';
 import { Random } from '../core/random.js';
 import { createShopController } from './game.run.shop.js';
 import { startBattle } from '../battle/battle-loader.js';
@@ -109,37 +109,6 @@ export function consumeCell(layerIdx = game.layerIdx, trackPos = game.trackPos) 
 
 export function consumeCurrentCell() { consumeCell(); }
 
-// 打开场景：对话展示 →（点击任意处继续）→ onDone 开启真正内容
-// opts.foes = 遭遇敌人数组：战斗场景展示统一位图敌人立绘。
-// opts.gain = 明确结算文案（如「+2 币」）：拾取类格子用大字告知玩家获得了什么
-function openScene(kind, opts = {}) {
-  const f = SCENES[kind];
-  if (!f) { if (opts.onDone) opts.onDone(); return; }
-  game.state = 'modal';
-  Sfx.tick();
-  SDT.Sound.sfx('scene');
-  sceneState = { onDone: opts.onDone || null };
-  const text = pick(f.lines).replace('{name}', opts.name || '不速之客');
-  const artHTML = opts.foes && opts.foes.length
-    ? `<div class="scene-foes">${opts.foes.map(foe =>
-        `<div class="art scene-foe-art" data-foe-id="${escAttr(foe.id || foe.name)}" title="${escAttr(foe.name)}">${SDT.Art.monsterArt(foe.id)}</div>`).join('')}</div>`
-    : `<div class="scene-art"><span>${f.icon}</span></div>`;
-  const meta = opts.sceneMeta || SCENE_META[kind] || [kind, `scene-${kind}`, `scene-${kind}`];
-  UI.showOverlay('', `
-    <div class="scene sc-${f.tone} ${meta[1]}" data-act="sceneNext" data-scene-id="${escAttr(meta[0])}" data-asset-key="${escAttr(meta[2])}">
-      <div class="scene-glow"></div>
-      ${artHTML}
-      <h2 class="scene-title">${f.title}</h2>
-      ${opts.gain ? `<div class="scene-gain"><b>${opts.gain}</b></div>` : ''}
-      <div class="scene-line"><p>${esc(text)}</p></div>
-      <div class="scene-ops">${f.auto ? '' :
-        `<button class="ov-btn ok" data-act="sceneGo">${opts.btn || f.btn || '继 续'}</button>`}</div>
-      <p class="scene-hint">[[icon:sparkles]] 点击任意处继续 [[icon:sparkles]]</p>
-    </div>`, 'scene');
-  UI.act('sceneNext', () => finishScene());
-  UI.act('sceneGo', () => finishScene());
-  UI.refresh(game);
-}
 export function finishScene() {
   if (!sceneState) return;
   const cb = sceneState.onDone;
