@@ -1,13 +1,17 @@
 # -*- coding: utf-8 -*-
-"""NAI V5 生图客户端 —— 全游戏生图 API 权威链路，0919 固化进 git（token 不入库）。
+"""NAI 生图客户端 —— 全游戏生图 API 权威链路，0919 固化进 git（token 不入库）。
 
-【通道（0919 实测唯一稳定）】curl 子进程直连：`curl --noproxy "*" -sS --ssl-no-revoke`
-  —— Python requests 本机对 image.novelai.net 握手必报 WinError 0，代理/直连皆然，勿改回 requests。
+【默认（09-24 老板定版，新 token 起）】模型 nai-diffusion-4-5-full + 免费档小图（832×1216/1344×768）；
+  V5 需显式传 model='nai-diffusion-5-full'。**大图一天限额 20 张**：长×宽超过免费档上限
+  即计一次，工具内按自然日计数、到顶拒出（计数文件 .tmp/nai/large-usage.json，重跑也计数，宁保守勿超限）。
+【通道（09-24 双通道互试）】curl 子进程：先直连 `--noproxy "*"`，000 自动换 `-x socks5h://127.0.0.1:7890`
+  （Clash/TUN 起来后直连常被掐，见记忆 nai-image-endpoint-network-quirks）。
+  Python requests 本机对 image.novelai.net 握手必报 WinError 0，勿改回 requests。
 【端点】POST https://image.novelai.net/ai/generate-image
   Authorization: Bearer <token>；响应是 ZIP（200/201 都算成功）取第一个条目。
 【token】绝不进 git/记忆/日志：默认读 .tmp/nai/token.txt（过滤 # 注释行），或环境变量 NAI_TOKEN。
-  .tmp 被清理后需老板重新提供。
-【计费】Opus 无限生成仅对 V5 受限：steps≤28 且 长×宽<约108万px 免费（走额度条）；超档烧 Anlas。
+  .tmp 被清理后需老板重新提供；09-24 已轮换（旧 token 作废）。
+【计费】steps≤28 且 长×宽<约108万px 免费（走额度条）；超档烧 Anlas 并计大图限额。
   迭代免费档横版 1344×768 / 竖版 832×1216；定稿大图 2048×1152 等。
 【节奏铁律】一轮一张 ≥45s 间隔；HTTP 403=token 失效立即停手上报老板；
   HTTP 429=冷却 15 分钟再跑；HTTP 000=网络瞬断，稍候重试即可（通道本身通常无恙）。
@@ -17,6 +21,7 @@
     from nai_gen import generate_image
     generate_image(prompt, uc, char_prompt='...', width=832, height=1216, out='x.png')
 """
+import datetime
 import json
 import os
 import random
@@ -25,13 +30,37 @@ import zipfile
 from pathlib import Path
 
 ENDPOINT = 'https://image.novelai.net/ai/generate-image'
-MODEL = 'nai-diffusion-5-full'
+MODEL = 'nai-diffusion-4-5-full'   # 09-24 起默认 4.5 小图；V5 显式传 model='nai-diffusion-5-full'
 # 0919「配置拉满」口径：steps 28 顶格 + scale 6.5（官方区间上限）+ variety_plus
 DEFAULTS = dict(steps=28, scale=6.5, cfg_rescale=0.0, sampler='k_euler_ancestral',
                 noise_schedule='karras', variety_plus=True)
-# 仓库根 = 本文件的上级（搜打撤/tools/nai_gen.py -> 代号柒/）
-ROOT = Path(__file__).resolve().parents[1]
+# 仓库根 = 代号柒/（搜打撤/tools/nai_gen.py → 搜打撤 → 代号柒；.tmp/nai 挂在仓库根）
+ROOT = Path(__file__).resolve().parents[2]
 TOKEN_FILE = ROOT / '.tmp' / 'nai' / 'token.txt'
+# 免费档像素上限（约 108 万）：超过即视为大图，计 20 张/日限额
+FREE_PX_CAP = 1_080_000
+LARGE_QUOTA_PER_DAY = 20
+LARGE_USAGE_FILE = ROOT / '.tmp' / 'nai' / 'large-usage.json'
+
+
+def _charge_large_image(width, height):
+    """大图日限额护栏：按自然日计数（含失败/重试，宁保守勿超限），到顶拒出。"""
+    if width * height <= FREE_PX_CAP:
+        return
+    today = datetime.date.today().isoformat()
+    usage = {}
+    if LARGE_USAGE_FILE.is_file():
+        try:
+            usage = json.loads(LARGE_USAGE_FILE.read_text(encoding='utf-8'))
+        except (ValueError, OSError):
+            usage = {}
+    used = int(usage.get(today, 0))
+    if used >= LARGE_QUOTA_PER_DAY:
+        raise SystemExit(f'NAI 大图日限额：今日 {LARGE_QUOTA_PER_DAY} 张已用完（{used}），明日再来或改小图')
+    usage[today] = used + 1
+    LARGE_USAGE_FILE.parent.mkdir(parents=True, exist_ok=True)
+    LARGE_USAGE_FILE.write_text(json.dumps(usage, ensure_ascii=False, indent=2), encoding='utf-8')
+    print(f'[quota] 大图 {used + 1}/{LARGE_QUOTA_PER_DAY}（{today}）', flush=True)
 
 
 def load_token():
@@ -94,18 +123,26 @@ def generate_image(prompt, uc='', char_prompt='', width=832, height=1216, seed=N
 
     out = Path(out)
     out.parent.mkdir(parents=True, exist_ok=True)
+    _charge_large_image(width, height)
     body = build_payload(prompt, uc, char_prompt, width, height, seed, model)
     seed = body['parameters']['seed']
     payload_file = out.with_suffix('.payload.json')
     zip_file = out.with_suffix('.zip')
     payload_file.write_text(json.dumps(body, ensure_ascii=False), encoding='utf-8')
 
-    curl = ('curl --noproxy "*" -sS --ssl-no-revoke --max-time 240 '
-            '-H "Authorization: Bearer ' + load_token() + '" -H "Content-Type: application/json" '
-            '-w "%{http_code}" -o "' + str(zip_file) + '" '
-            '--data-binary @' + str(payload_file) + ' ' + ENDPOINT)
-    status = subprocess.run(curl, shell=True, capture_output=True, text=True).stdout.strip()
-    print(f'HTTP {status} seed={seed} {width}x{height}', flush=True)
+    # 双通道互试（09-24）：Clash/TUN 起来后直连常被掐（000），自动换 socks5h 7890；
+    # 两条都 000 才报网络瞬断。顺序与 [[nai-image-endpoint-network-quirks]] 一致。
+    channels = ['--noproxy "*"', '-x socks5h://127.0.0.1:7890']
+    status = ''
+    for idx, channel in enumerate(channels):
+        curl = ('curl ' + channel + ' -sS --ssl-no-revoke --max-time 240 '
+                '-H "Authorization: Bearer ' + load_token() + '" -H "Content-Type: application/json" '
+                '-w "%{http_code}" -o "' + str(zip_file) + '" '
+                '--data-binary @' + str(payload_file) + ' ' + ENDPOINT)
+        status = subprocess.run(curl, shell=True, capture_output=True, text=True).stdout.strip()
+        print(f'HTTP {status} seed={seed} {width}x{height} channel={idx}({channel.split()[0]})', flush=True)
+        if status != '000':
+            break
     if status == '403':
         raise SystemExit('NAI HTTP 403：token 失效，立即停手上报老板')
     if status == '429':
