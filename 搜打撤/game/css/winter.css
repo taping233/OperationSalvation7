@@ -148,6 +148,33 @@ body.page-opaque #sidebar{visibility:hidden}
 .title-snow i:nth-child(23){left:44%;animation-duration:16.5s;animation-delay:-1.5s;transform:scale(.85)}
 .title-snow i:nth-child(24){left:70%;animation-duration:13s;animation-delay:-7.5s;transform:scale(.6)}
 @keyframes akSnow{0%{transform:translateY(-4vh) translateX(0);opacity:0}8%{opacity:.85}50%{transform:translateY(52vh) translateX(3vw)}100%{transform:translateY(106vh) translateX(-2vw);opacity:.15}}
+/* 09-24 W2 景深三层：25-36 中景补充（akSnow 复用），37-48 近景大颗（akSnowNear 快落+摆幅更大，blur 出景深；纯 transform/opacity，reduce-motion 全局兜底） */
+.title-snow i:nth-child(25){left:5%;animation-duration:12s;animation-delay:-2.5s;transform:scale(.72)}
+.title-snow i:nth-child(26){left:14%;animation-duration:15s;animation-delay:-9s}
+.title-snow i:nth-child(27){left:24%;animation-duration:10.5s;animation-delay:-6s;transform:scale(.58)}
+.title-snow i:nth-child(28){left:33%;animation-duration:13.5s;animation-delay:-11.5s;transform:scale(.78)}
+.title-snow i:nth-child(29){left:42%;animation-duration:11s;animation-delay:-4s}
+.title-snow i:nth-child(30){left:51%;animation-duration:16s;animation-delay:-13s;transform:scale(.62)}
+.title-snow i:nth-child(31){left:60%;animation-duration:12.5s;animation-delay:-7.5s;transform:scale(.8)}
+.title-snow i:nth-child(32){left:69%;animation-duration:14.5s;animation-delay:-1s}
+.title-snow i:nth-child(33){left:78%;animation-duration:10s;animation-delay:-10s;transform:scale(.55)}
+.title-snow i:nth-child(34){left:86%;animation-duration:15.5s;animation-delay:-5.5s;transform:scale(.74)}
+.title-snow i:nth-child(35){left:95%;animation-duration:13s;animation-delay:-14.5s}
+.title-snow i:nth-child(36){left:9%;animation-duration:11.5s;animation-delay:-8.5s;transform:scale(.66)}
+.title-snow i:nth-child(n+37){width:9px;height:9px;box-shadow:0 0 7px #ffffffcc;filter:blur(2.2px);animation:akSnowNear linear infinite}
+.title-snow i:nth-child(37){left:7%;animation-duration:8.5s;animation-delay:-3s}
+.title-snow i:nth-child(38){left:19%;animation-duration:7.5s;animation-delay:-6.5s}
+.title-snow i:nth-child(39){left:30%;animation-duration:9s;animation-delay:-1.5s}
+.title-snow i:nth-child(40){left:41%;animation-duration:7s;animation-delay:-5s}
+.title-snow i:nth-child(41){left:52%;animation-duration:8s;animation-delay:-8s}
+.title-snow i:nth-child(42){left:63%;animation-duration:9.5s;animation-delay:-2s}
+.title-snow i:nth-child(43){left:74%;animation-duration:7.2s;animation-delay:-6s}
+.title-snow i:nth-child(44){left:84%;animation-duration:8.8s;animation-delay:-4.2s}
+.title-snow i:nth-child(45){left:93%;animation-duration:7.8s;animation-delay:-7.2s}
+.title-snow i:nth-child(46){left:16%;animation-duration:8.2s;animation-delay:-1s}
+.title-snow i:nth-child(47){left:47%;animation-duration:9.2s;animation-delay:-5.8s}
+.title-snow i:nth-child(48){left:71%;animation-duration:7.6s;animation-delay:-3.6s}
+@keyframes akSnowNear{0%{transform:translateY(-4vh) translateX(0) scale(1);opacity:0}10%{opacity:.9}50%{transform:translateY(52vh) translateX(6vw) scale(1.05)}100%{transform:translateY(106vh) translateX(-4vw) scale(.98);opacity:.2}}
 /* ===== 选档页留言落地（#15 #16 #17 #18） ===== */
 /* #16 #17 左上 HUD 已在结构中移除 */
 /* #18 「选择存档」中文细体 */

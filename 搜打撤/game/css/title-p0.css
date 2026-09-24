@@ -159,9 +159,11 @@
 
 /* P2: keep atmosphere, but let the illustration and interaction supply motion. */
 #title::before { animation: none; opacity: .42; }
-#title .ak-hud::after { animation: none; opacity: .34; }
-#title .title-snow { opacity: .55; }
-#title .title-snow i:nth-child(n+13) { display: none; }
+/* 09-24 W5：右中尘埃漂移恢复（8s transform/opacity 合成器动画）并提亮 */
+#title .ak-hud::after { opacity: .5; }
+/* 09-24 W2：雪花由 12 颗/0.55 放宽到 48 颗/0.75（25-36 中景、37-48 近景见 winter.css） */
+#title .title-snow { opacity: .75; }
+#title .title-snow i:nth-child(n+49) { display: none; }
 #title .title-foreground-paper::before { opacity: .42; }
 #title .title-foreground-paper::after { opacity: .2; }
 #title .ak-banner .bn-ico::before,
@@ -198,4 +200,114 @@
 @keyframes titleBladeBloom {
   from { filter: drop-shadow(0 0 13px #fff7dbd6) brightness(1.25); }
   to { filter: drop-shadow(0 0 30px #fff4c9f0) brightness(1.65); }
+}
+
+/* ===== 09-24 美术升级第一波（W1/W2/W4，无新素材）：对标黑流树海的统一调色与景深 ===== */
+
+/* W1a 壁纸整体分级：拉对比提饱和压亮度，把灰蓝底调进和 UI 同一个冷青系统 */
+#title .title-bg { filter: saturate(1.07) contrast(1.06) brightness(.95); }
+
+/* W1b 四角暗角（vignette）：在 P0 双向渐变之上加第三层，视线归到角色；
+   改动限定 #title::after，不影响其他页 */
+#title::after {
+  background:
+    radial-gradient(120% 90% at 50% 42%, transparent 52%, rgba(4, 10, 18, .55) 100%),
+    linear-gradient(90deg, #04111cba 0%, #07192480 24%, transparent 42%, #07131d95 100%),
+    linear-gradient(0deg, #07131d82, transparent 32%);
+}
+
+/* W2b 出鞘扫光：hover「开始探索」时一道冷光扫过剑身（expedition 画牌版隐藏了
+   ak-start::after，此处复活专用）。默认隐藏，纯 transform/opacity */
+#title .ak-start::after {
+  content: ''; display: block; position: absolute; pointer-events: none;
+  top: 16px; left: 14%; width: 46px; height: 44px; z-index: 2;
+  background: linear-gradient(100deg, transparent, #fff7d9e8 48%, transparent);
+  transform: translateX(-140%) skewX(-22deg); opacity: 0;
+}
+#title .ak-start:hover::after { animation: swordGlint .9s ease-out; }
+@keyframes swordGlint {
+  0% { transform: translateX(-140%) skewX(-16deg); opacity: 0; }
+  25% { opacity: .85; }
+  100% { transform: translateX(340%) skewX(-16deg); opacity: 0; }
+}
+
+/* W4a 左下引言对比度（expedition 定的 #a5b8c47a 过淡） */
+#title .title-quote { color: #b9c9d4b0; }
+
+/* W4a-2 左下档案编号行：前置金线与撤离条/脉络同语言，与底部灰签名拉开层次 */
+#title .title-expedition-copy { display: flex; align-items: center; gap: 10px; }
+#title .title-expedition-copy::before {
+  content: ''; display: block; width: 34px; height: 1px;
+  background: linear-gradient(90deg, transparent, #d9bb82a8, transparent);
+  box-shadow: 0 0 5px #d9bb8275;
+}
+
+/* W4b 档案徽章化：档案号放大+微金晕，头像环金线，Archive 字样提亮 */
+#title .ak-lv b {
+  font-size: 30px;
+  color: #ffffff;
+  text-shadow: 0 0 14px #0e2230, 0 0 3px #d9bb824d;
+}
+#title .ak-ava { border-color: #d9bb8266; }
+#title .ak-lv em { color: #c9d4d8; }
+
+/* W4b-2 档案牌竖排层级：游玩时长从主行沉到第二行小字，主行只留 徽记+档案号 */
+#title .ak-user-row { position: relative; }
+#title .ak-uname {
+  position: absolute; top: 100%; right: 0; margin-top: 4px;
+  font-size: 10.5px; letter-spacing: 1.5px; color: #9fb3ba;
+}
+#title .ak-user { padding-bottom: 26px; }
+
+/* W4c 撤离次数两侧装饰短线（对标"始于/驻足于"的仪式感） */
+#title .ak-sec::before, #title .ak-sec::after {
+  content: ''; display: block; width: 26px; height: 1px;
+  background: linear-gradient(90deg, transparent, #d9bb82a8, transparent);
+  box-shadow: 0 0 5px #d9bb8275;
+}
+#title .ak-sec::after { transform: scaleX(-1); }
+
+/* W3a 暖金脉络：右主脉 设置→开始探索，左短脉 照相馆→成就，端点星芒。
+   坐标按 P1 布局（1920 基准）目定，纯 opacity 呼吸；veins 在 ak-hud 首位垫底 */
+#title .ak-veins { position: absolute; inset: 0; pointer-events: none; }
+#title .ak-veins i { position: absolute; display: block; }
+#title .ak-veins .v1 {
+  left: 89.8%; top: 35.5%; width: 2px; height: 43%;
+  transform-origin: top center; transform: rotate(-10deg);
+  background: linear-gradient(180deg, transparent, #d9bb82a1 14%, #d9bb8278 55%, #d9bb82b3 86%, transparent);
+  box-shadow: 1px 0 8px #d9bb8240;
+  animation: veinBreath 5s ease-in-out infinite alternate;
+}
+#title .ak-veins .v2 {
+  left: 9%; top: 66.5%; width: 13.2%; height: 1.5px;
+  transform-origin: left center; transform: rotate(11deg);
+  background: linear-gradient(90deg, transparent, #d9bb82a1 30%, #d9bb82b3 72%, transparent);
+  box-shadow: 0 1px 8px #d9bb8240;
+  animation: veinBreath 5s ease-in-out infinite alternate -2.5s;
+}
+#title .ak-veins .d {
+  width: 5px; height: 5px; border-radius: 50%; background: #ffe9b6;
+  box-shadow: 0 0 8px 2px #d9bb8299, 0 0 20px 5px #d9bb8240;
+  animation: veinBreath 5s ease-in-out infinite alternate;
+}
+#title .ak-veins .d1 { left: 89.3%; top: 33.9%; }
+#title .ak-veins .d2 { left: 85.2%; top: 77.7%; }
+#title .ak-veins .d3 { left: 8.6%; top: 65.2%; }
+#title .ak-veins .d4 { left: 21.5%; top: 70.3%; }
+#title .ak-veins .d2, #title .ak-veins .d4 { animation-delay: -2.5s; }
+@keyframes veinBreath { from { opacity: .38; } to { opacity: .85; } }
+/* 窄屏（<1101px）P1 布局失效、入口换位，脉络随之隐藏避免错位指路 */
+@media (max-width: 1100px) { #title .ak-veins { display: none; } }
+
+/* W3b 遗物落影：图标下缘的地面阴影，让插画印章"立在"雪地里 */
+#title .ak-circle .c-ring, #title .ak-banner .bn-ico {
+  background: radial-gradient(ellipse 58% 36% at 50% 84%, rgba(3, 9, 16, .5), transparent 74%);
+}
+
+/* W5 右中雾光：复活 ak-hud::before（expedition 旧 rail 已 display:none），静态冷雾提亮灰区 */
+#title .ak-hud::before {
+  content: ''; position: absolute; inset: 16% 0 18% 44%; pointer-events: none;
+  background:
+    radial-gradient(ellipse 44% 40% at 78% 46%, #9fc8d81f, transparent 70%),
+    radial-gradient(ellipse 30% 26% at 58% 32%, #bfe2ea14, transparent 72%);
 }
