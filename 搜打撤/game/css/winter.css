@@ -1699,6 +1699,22 @@ body.cardlib-open #overlay.closing{animation:ovFadeOut .2s ease forwards!importa
 #overlay .sugin-page .sugin-exit:hover{border-color:#7fc8a9;background:#383d3ff2;color:#fff}
 #overlay .sugin-page .pg-head{padding-left:98px}
 
+/* #12 返回键统一（2026-09-25 老板：所有标题层界面的返回 = 主页左上退出键同款同位）：
+   .ak-back-tl 搭 .ak-sq .ak-exit 使用（64×58 与图标来自 ak-exit），这里只补
+   页面内左上定位、实底/内框/hover，与 #11 留言库同款；页头让位由各页自理
+   （设置页见 page-settings.css S6f；指南/成就为宽卡居中标题，无需让位）。 */
+#overlay .ak-back-tl{position:absolute;top:16px;left:18px;z-index:6;
+  background:#2c3032f2;border:1px solid #a8b0a938;color:#e8eeea;
+  transition:color .18s,filter .18s,border-color .18s,background .18s,transform .18s}
+#overlay .ak-back-tl::after{content:'';position:absolute;inset:5px;border:1px solid #a8b0a938;pointer-events:none}
+#overlay .ak-back-tl:hover{border-color:#7fc8a9;background:#383d3ff2;color:#fff}
+#overlay .ak-back-tl:active{transform:scale(.94);transition-duration:.08s}
+#overlay .ak-back-tl:focus-visible{outline:1px solid #d9bb82cc;outline-offset:2px;
+  box-shadow:0 0 0 1px #071720,0 0 12px rgba(217,187,130,.35)}
+/* 指南/成就宽卡：标题左对齐，需同样给左上返回键让位 */
+#overlay .card:has(.expedition-manual) #ovTitle,
+#overlay .card:has(.ach-list) #ovTitle { padding-left: 98px; }
+
 /* #5 照相馆特写「框压照片」装裱（09-24 老板澄清=要框压照片，此前未生效）：
    09-23 版把框从 paper 的 border 挪到 ::after 覆盖层时 inset 写成 -mount-border（画到纸外 48px 悬空圈），
    照片还缩在 53px padding 内——框与照片隔着整条纸边永不接触，「框压照片」从未生效。

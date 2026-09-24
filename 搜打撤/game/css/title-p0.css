@@ -311,3 +311,12 @@
     radial-gradient(ellipse 44% 40% at 78% 46%, #9fc8d81f, transparent 70%),
     radial-gradient(ellipse 30% 26% at 58% 32%, #bfe2ea14, transparent 72%);
 }
+
+/* W6 覆盖冻结：全屏不透明 page（选档/基地/远征/战斗/设置等）打开时标题层完全
+   不可见，55 个无限动画（雪/脉络/字标呼吸）原样空跑——整体暂停省 GPU；
+   body.page-covered.page-opaque 由页面开合状态机维护；半透明浮层（成就/留言）
+   不带该类、雪保持可见呼吸；返回 lobby 自动恢复。 */
+body.page-covered.page-opaque #title,
+body.page-covered.page-opaque #title * {
+  animation-play-state: paused !important;
+}

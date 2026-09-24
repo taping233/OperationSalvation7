@@ -135,17 +135,22 @@
   border: 1px solid rgba(72, 102, 116, .28);
   margin-bottom: 6px;
   transition: background var(--set-fast), border-color var(--set-fast),
-    box-shadow var(--set-fast);
+    box-shadow var(--set-fast), transform var(--set-fast);
 }
 .pg.settings-page .chk:hover {
   background: rgba(31, 62, 77, .58);
   border-color: rgba(159, 183, 188, .48);
   box-shadow: inset 2px 0 0 rgba(217, 187, 130, .5), 0 4px 12px rgba(2, 8, 14, .3);
 }
+.pg.settings-page .chk:active { transform: translateY(1px); }
 /* 已开启的行：左侧金轨 + 金族淡边（状态一眼可辨） */
 .pg.settings-page .chk:has(input:checked) {
   background: rgba(29, 59, 73, .5);
   border-color: rgba(217, 187, 130, .22);
+}
+/* 已开启行 hover：边框留在金族（通用 hover 的冷白边不抢状态色） */
+.pg.settings-page .chk:has(input:checked):hover {
+  border-color: rgba(217, 187, 130, .48);
 }
 .pg.settings-page .chk:has(input:checked)::before {
   content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
@@ -157,26 +162,68 @@
 .pg.settings-page .chk > span:first-child { flex: 1; display: flex; align-items: center; gap: 6px; min-width: 0; }
 .pg.settings-page .chk > span:first-child .set-en { margin-left: auto; padding-left: 12px; }
 
-/* S5b 控件本体：勾选框/滑条转暖金族，数值提亮微金晕 */
-.pg.settings-page .chk input[type="checkbox"] { width: 15px; height: 15px; accent-color: #d9bb82; cursor: pointer; }
+/* S5b 控件本体：勾选框转档案金定制框，滑条转暖金族，数值提亮微金晕 */
+.pg.settings-page .chk input[type="checkbox"] {
+  appearance: none; flex: none; width: 16px; height: 16px; margin: 0;
+  border-radius: 2px;
+  border: 1px solid rgba(159, 183, 188, .5);
+  background: rgba(7, 18, 26, .6);
+  cursor: pointer;
+  transition: background var(--set-fast), border-color var(--set-fast), box-shadow var(--set-fast);
+}
+.pg.settings-page .chk input[type="checkbox"]:hover {
+  border-color: rgba(217, 187, 130, .7);
+  box-shadow: 0 0 8px rgba(217, 187, 130, .2);
+}
+.pg.settings-page .chk input[type="checkbox"]:checked {
+  border-color: rgba(217, 187, 130, .85);
+  background:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'><path d='M2.5 6.3l2.5 2.5 4.5-5.6' fill='none' stroke='%23152e3b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>")
+    center / 11px 11px no-repeat,
+    linear-gradient(135deg, #ddc089, #ab8a4e);
+  box-shadow: inset 0 1px 0 rgba(255, 231, 184, .5), 0 0 8px rgba(217, 187, 130, .25);
+}
+.pg.settings-page .chk input[type="checkbox"]:active { transform: scale(.9); transition-duration: .08s; }
 .pg.settings-page input[type="range"] { accent-color: #d9bb82; cursor: pointer; }
+.pg.settings-page input[type="range"]:hover,
+.pg.settings-page input[type="range"]:active {
+  filter: brightness(1.12) drop-shadow(0 0 4px rgba(217, 187, 130, .3));
+}
+/* 拖动/聚焦滑条时数值跟着点亮（b 紧跟 input，兄弟选择器直达） */
+.pg.settings-page input[type="range"]:active + b,
+.pg.settings-page input[type="range"]:focus-visible + b {
+  color: #ffe9b6;
+  text-shadow: 0 0 10px rgba(217, 187, 130, .5);
+}
 .pg.settings-page .chk.vol { padding: 12px 14px 12px 16px; }
 .pg.settings-page .chk b {
   color: #efe6d2; font-size: 12.5px; min-width: 34px; text-align: right;
+  font-variant-numeric: tabular-nums;
   text-shadow: 0 0 8px rgba(217, 187, 130, .2);
 }
 
-/* S5c 音乐来源下拉：冷青档案框 + hover 金边 */
+/* S5c 音乐来源下拉：冷青档案框 + hover 金边。
+   appearance 定制 + 暗色 color-scheme：弹出列表不再走系统白底；
+   option 深底浅字、选中项暖金，与行控件同一语言。 */
 .pg.settings-page select {
-  margin-left: 8px; padding: 5px 10px; border-radius: 1px;
+  appearance: none;
+  margin-left: 8px; padding: 5px 26px 5px 12px; border-radius: 2px;
   border: 1px solid rgba(96, 124, 134, .55);
-  background: rgba(10, 26, 36, .9); color: #dcebe9; cursor: pointer;
-  transition: border-color var(--set-fast), box-shadow var(--set-fast), background var(--set-fast);
+  background: rgba(10, 26, 36, .9)
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='8' height='6' viewBox='0 0 8 6'><path d='M1 1l3 3 3-3' fill='none' stroke='%23d9bb82' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/></svg>")
+    no-repeat right 10px center;
+  color: #dcebe9; cursor: pointer; color-scheme: dark;
+  font-size: 12.5px; letter-spacing: 1px;
+  transition: border-color var(--set-fast), box-shadow var(--set-fast), background-color var(--set-fast);
 }
 .pg.settings-page select:hover {
   border-color: rgba(217, 187, 130, .55);
+  background-color: rgba(16, 38, 50, .95);
   box-shadow: 0 0 8px rgba(217, 187, 130, .14);
 }
+.pg.settings-page select:active { border-color: rgba(217, 187, 130, .8); transition-duration: .08s; }
+.pg.settings-page select option { background: #0d1f2b; color: #dcebe9; }
+.pg.settings-page select option:checked { color: #d9bb82; }
 
 /* S5d 说明文字：冷青灰小字 */
 .pg.settings-page .hint { color: #7e97a0; font-size: 12px; line-height: 1.9; margin: 12px 2px 4px; }
@@ -247,6 +294,16 @@
   box-shadow: 0 0 10px rgba(217, 187, 130, .15);
 }
 #overlay .card.page:has(.pg.settings-page) .ov-x:active { transform: scale(.92); transition-duration: .08s; }
+
+/* S6f 返回键统一（2026-09-25 老板）：设置页返回 = 主页左上退出键同款同位，
+   定位/底色/内框在 winter.css #12 .ak-back-tl；这里只做页头让位与暖金 hover 收口
+   （留言库 S6e 同款语言）。底部大返回钮已随统一取消，S6c 样式留存不再命中。 */
+#overlay .pg.settings-page .pg-head { padding-left: 98px; }
+#overlay .pg.settings-page .ak-back-tl:hover {
+  border-color: rgba(217, 187, 130, .6);
+  color: #f0dcb0;
+  box-shadow: 0 0 10px rgba(217, 187, 130, .16);
+}
 
 /* S6e 留言库返回键：绿系 hover retint 到暖金族 + 按压回弹 */
 #overlay .sugin-page .sugin-exit {

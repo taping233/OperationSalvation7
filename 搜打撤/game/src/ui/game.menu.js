@@ -366,6 +366,15 @@ function createGameMenuController(deps) {
     const prevState = game.state;
     game.state = 'modal';
     UI.showOverlay('[[icon:question]] 远征手册', `
+      <!-- 2026-09-25 老板：返回键统一 = 主页左上退出键（ak-sq ak-exit）同款同位 -->
+      <button class="ak-sq ak-exit ak-back-tl" data-act="guideBack" title="返回（Esc）" aria-label="返回">
+        <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path d="M9 4h9a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 18 20H9"
+                fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+          <path d="M4 12h10M4 12l4-4M4 12l4 4"
+                fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
       <div class="expedition-manual">
         <p class="manual-lead">从基地整备，沿相邻节点深入，打完战斗后把带回来的东西安全撤离。</p>
         <div class="manual-grid">
@@ -376,8 +385,7 @@ function createGameMenuController(deps) {
         </div>
         <div class="manual-controls"><span class="manual-control-key">Space / Enter</span><span>切换路线</span><span class="manual-control-key">Z</span><span>上条路线</span><span class="manual-control-key">X</span><span>确认节点</span><span class="manual-control-key">B</span><span>背包</span><span class="manual-control-key">G / F</span><span>全景 / 定位</span><span class="manual-control-key">Esc</span><span>关闭页面</span></div>
         <p class="manual-note">鼠标拖拽平移地图，滚轮缩放。地图只开放当前节点的相邻可通行路线；已探索节点的奖励不会重复刷新。</p>
-      </div>
-      <div class="ov-btns ov-btns-corner"><button class="ov-btn back-sm" data-act="guideBack">返回 <i class="en">BACK</i></button></div>`, true);
+      </div>`, true);
     UI.act('guideBack', () => {
       UI.hideOverlay();
       // 战斗 modal 态不可降级为 idle（战斗界面会丢）：口径同 showRunTransition 的恢复守卫
@@ -408,9 +416,17 @@ function createGameMenuController(deps) {
       ? `以 <b>档位 0${latest.slot}</b> 的基地档案为准；成就奖励需进入基地领取。`
       : '暂无任何档案——完成一次远征后，成就将随基地档案记录。';
     UI.showOverlay('[[icon:medal]] 成就总览', `
+      <!-- 2026-09-25 老板：返回键统一 = 主页左上退出键（ak-sq ak-exit）同款同位 -->
+      <button class="ak-sq ak-exit ak-back-tl" data-act="achBack" title="返回（Esc）" aria-label="返回">
+        <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path d="M9 4h9a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 18 20H9"
+                fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+          <path d="M4 12h10M4 12l4-4M4 12l4 4"
+                fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
       <p class="ov-note">${note}</p>
-      <div class="ach-list">${rows}</div>
-      <div class="ov-btns ov-btns-corner"><button class="ov-btn back-sm" data-act="achBack">返回 <i class="en">BACK</i></button></div>`, true);
+      <div class="ach-list">${rows}</div>`, true);
     UI.act('achBack', () => { UI.hideOverlay(); game.state = 'title'; });
   }
 
@@ -597,8 +613,10 @@ function createGameMenuController(deps) {
           ${SLOT_BG_SILHOUETTES}
         </div>
         <!-- 返回键在左上角（2026-09-19 老板指定；09-10 曾因矮窗口裁切沉到左下角——
-             选档卡片改全屏后卡片顶=视口顶、页头 clamp 留白带兜底，裁切前提已不存在） -->
-        <button class="pg-back" data-act="slotBack" aria-label="返回主菜单" title="返回主菜单（Esc）"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M9 4h9a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 18 20H9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M4 12h10M4 12l4-4M4 12l4 4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+             选档卡片改全屏后卡片顶=视口顶、页头 clamp 留白带兜底，裁切前提已不存在）。
+             2026-09-25 老板：返回键统一 = 主页左上退出键（ak-sq ak-exit）同款同位，
+             原 58px 透明变体（.pg-back）退役 -->
+        <button class="ak-sq ak-exit ak-back-tl" data-act="slotBack" aria-label="返回主菜单" title="返回主菜单（Esc）"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M9 4h9a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 18 20H9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M4 12h10M4 12l4-4M4 12l4 4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <!-- U6（2026-09-19 走查）：帮助「?」从孤悬左上挪进标题行，与标题同排 -->
         <header class="slot-page-head">
           <span class="slot-page-en">选择存档</span>
@@ -868,7 +886,16 @@ function createGameMenuController(deps) {
     game.state = 'modal';
     UI.showOverlay('', `
       <div class="pg settings-page">
-        <!-- 2026-09-07 留言：右上叉号去掉，返回走底部「返回」按钮或 Esc -->
+        <!-- 2026-09-07 留言：右上叉号去掉。2026-09-25 老板：返回键统一 = 主页左上退出键
+             （ak-sq ak-exit）同款同位，底部大返回钮取消，Esc 仍可关 -->
+        <button class="ak-sq ak-exit ak-back-tl" data-act="closeSettings" title="返回（Esc）" aria-label="返回">
+          <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+            <path d="M9 4h9a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 18 20H9"
+                  fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M4 12h10M4 12l4-4M4 12l4 4"
+                  fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
         <header class="pg-head"><h2>[[icon:gear]] 设置</h2><span class="pg-spacer"></span></header>
         <div class="settings">
         <h3 class="set-h">[[icon:gear]] 通用 <span class="set-en">GENERAL</span></h3>
@@ -895,7 +922,6 @@ function createGameMenuController(deps) {
           <button class="mini-btn danger" data-act="wipeCards">清空卡牌库</button>
           <button class="mini-btn danger" data-act="wipeSave">清空全部存档</button>
         </div>
-        <div class="ov-btns"><button class="ov-btn ok" data-act="closeSettings">返回</button></div>
         </div><!-- /.settings -->
       </div><!-- /.pg -->`, 'page');
     const sync = () => {
