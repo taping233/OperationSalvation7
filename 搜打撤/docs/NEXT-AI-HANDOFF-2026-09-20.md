@@ -1,3 +1,20 @@
+## 当前状态补充：持续批第二波落库（状态袋/命令域/ui 拆分+钩子删除）（2026-09-25 02:5x +08:00）
+
+- 集成验收实测：全量 145 文件/814 用例绿、ESLint 0、语法守卫 188 文件。四笔落库：`1687d78` 状态袋打薄 interaction 87→54 / effects 98→45（8 个聚合接口，51 个 set$ 导出未少，保留散调点逐条记录理由）；`abeeb94` 命令域收口（commands.shared.js 管件单一真源收 8 文件漂移 + applyDeathOutcome 死亡结算唯一实现；体检 F01/F02 口径过时部分已修正：battle 域真源已不存在，实际双写在 terminal 内部；meta.js track('death') 孤儿副本录报批清单待批）；`fd72af8` ui.js 1001→469 拆 overlay/cinematics/hud（showCardZoom 源文本钉死断言逐行保留）；`67cd72f` 删 battle.frames.js __bfDebug 调试钩子（代码债第⑦项收尾，结论 A：a59e2ff 已修立绘闪现、零消费）。
+- 门禁一次偶发红（node-retrigger 宝箱格断言，与下方 UI 审查批在改的 chests.js 半成品撞车）单文件三连绿后重试即过，记录在案。下段 UI 审查大修的 38 文件未提交改动系并行会话所有，持续批未触碰；其 `cursor-art.css` 死文件结论与 orphan-audit 报告互证。
+- 第三波开工：性能 P1×2（battle.css 手牌翻页违合成器铁律 + requestBattleRender 不合帧，battle.view 状态袋收完已空闲）；状态袋 session 域（84 点，最高险）+ battle.engine 规则核深拆再评估（同代理串行，避免争 engine）。
+
+## 当前状态补充：全界面 UI/美术审查大修（9 子代理两波+实机逐页验收）（2026-09-25 02:5x +08:00，未提交待拍板）
+
+- 老板 09-25 令「八小时+并行子代理搜集全部界面美术/UI 问题并实质性修复、边做边验收」。流程：IAB 实机 16+ 张基线截图（存 `.ui-audit-0925/`）→ 6 域并行审查代理（5 域交卷，远征域限流重派后交卷）→ 两波修复代理（波次1：标题全局/基地/卡牌库/事件奖励 4 代理约 80 处；波次2：战斗/远征 2 代理 34 处）→ 主会话逐页实机验收（Ctrl+F5 强刷，Vite CSS 有浏览器缓存坑）→ 全量 vitest 145 文件/814 用例绿（291s）。
+- 修复规模：38 文件 +408/-221 行（CSS 为主）+ 19 张 `assets/scenes/event-*.webp` 白边裁剪（NAI 画布白边 20-120px，原件备份在 `.ui-audit-0925/webp-backup/`）。重点：标题页两处 P0 叠印/遮挡、事件页恢复 09-15 半透明定版+对齐 rewards 真源、卡牌库馆藏铭牌对比度 P0+选中态青绿残留 26 处转金、战斗 cardlib-open 残留禁全页动画（cards.css 收窄到 .card-library-page 作用域）、牌堆徽章非 boss 战也渲染、意图胶囊锚定名牌、背包浮键 105→142px 新底栏基数、preparation.css 整体旧棕绿 retint 冷青金、存档卡双语补齐。
+- **立绘不可见事故与回退**：战斗代理给 `.sts-figure img` 加常驻 filter 兜底后，实测立绘整场不可见（复现 art.js:298「合成层缓存空栅格」已知问题），已回退 filter 并在 battle.css 注明根因；回退后冷启动首场立绘即正常。审查代理「联邦射手素材过暗」结论不成立（luma 82 但可见性正常）。
+- 素材问题报批（未动）：`ui/icons/gear.png` 画成循环箭头非齿轮（战斗设置钮语义错误，60 图标无备用）；cursor-art.css 为未挂载死文件（老板已回退自定义光标，本批两条改动落盘但仅重新挂载后生效）。
+- 死代码清单（审查发现、按铁律未删待批）：expedition-library.css 档案馆/画廊两代规则约 370 行、稀有度夹子 8 条、6 束射灯旧值；hub.css .stash-row/.cls-list/.dep-stepper 簇；expedition.css #bagPanel/#bagBtn；#btnMapOverview 组。合并入 `docs/pending-deletions-2026-09-25.md` 口径待批。
+- 设计决策待拍板：① expedition-rewards 真源金 #dfc28d 与全局定版 #d9bb82 双金并存（page-events 已对齐真源）；② 卡牌库 4.2「按钮贴底」与 4.8「选片台主角」两版设计意图冲突（维持 4.8 现状）；③ 事件/火堆/祭坛 SimSun 32px 标题 vs 宝箱 modal 小标题两套制。
+- 现场归属：本批改动全部未 staged；**另有并行会话 staged 文件在场**（`A src/ui/cinematics.js`、`A src/ui/hud.js`、`A src/ui/overlay.js`、`M src/ui/ui.js`）及先前未提交的 expedition-library.css/expedition.css/game.cardslib.js 三件（本批避让未覆盖其行）。审查/修复临时产物：`.ui-audit-0925/`（截图证据+素材备份，保留）；审查代理生成的 `_tmp-*.png`/`_crop_*.png` 混在其中待批删。未 build、未提交、未推送。
+
+
 ## 当前状态补充：持续批第一波落库（session/cardslib 拆分+存储收口）（2026-09-25 01:5x +08:00）
 
 - **交叠事故披露**：上一段（01:15 卡牌库二次优化）中 `game.cardslib.js` 的 `setLibSelection` 未提交改动，在 cardslib 拆分子代理收尾时被原样并入拆分结果、随本波提交**捎带落库**（该代理报告「并行交叠」节+集成验收均知情）。改动本身经全量 814 用例验收绿、性能口径清楚（清筛选 351→29ms），不回滚；但「单独待拍板」状态因裹挟提前结束，特此披露。`expedition-library.css` 的 content-visibility 行删除仍留工作区未动，归并行会话收尾。
