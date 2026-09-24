@@ -164,6 +164,11 @@ import { MECH_GROUPS, MECH_ALL } from '../cards/mech-sentences.js';
   const LIB_PAGE_SIZE = 8;
   let libPageIndex = 0;
   let libSearchTimer = null;
+  // 窗口挂载（09-24 实测：全量渲染 271 张致打开主线程冻结 ~1.4s）：首屏只挂一批，
+  // 尾部哨兵接近视口再追加下一批，上下滚动浏览体验不变。
+  const LIB_MOUNT_BATCH = 24;
+  let libMountedCount = 0;
+  let libSentinelObserver = null;
 
   // 照片陈列差异按卡牌稳定 id 生成：同一张卡每次打开保持同一磨损与落影，
   // 不用原生随机函数，避免筛选/重绘时整面墙不断跳位。
@@ -276,8 +281,9 @@ import { MECH_GROUPS, MECH_ALL } from '../cards/mech-sentences.js';
         <p>${libCards.length ? '没有符合条件的照片' : (game.devMode ? '收藏还是空的，进入编辑模式后可制作新卡' : '当前没有可展示的照片')}</p>
         ${filtered ? '<button class="hs-btn sm" data-act="libClearFilter">重置筛选</button>' : ''}</div>`;
     }
-    // 09-24 改回上下滚动：全量渲染，不再按页切片
-    return all.map((card, offset) => photoTileHTML(card, offset, offset)).join('');
+    // 09-24 改回上下滚动；同日晚补窗口挂载：只渲染已挂载前缀，尾部哨兵触发追加
+    return all.slice(0, libMountedCount).map((card, offset) => photoTileHTML(card, offset, offset)).join('') +
+      (libMountedCount < all.length ? '<div class="lib-mount-sentinel" aria-hidden="true"></div>' : '');
   }
 
   function libPageControlsHTML(all = libFiltered()) {
@@ -312,11 +318,60 @@ import { MECH_GROUPS, MECH_ALL } from '../cards/mech-sentences.js';
     }
   }
 
+  // ======== 窗口挂载：哨兵接近视口时追加下一批（09-24 打开冻结修复） ========
+  function stopLibSentinelObserver() {
+    libSentinelObserver?.disconnect();
+    libSentinelObserver = null;
+  }
+
+  function observeLibSentinel(grid) {
+    stopLibSentinelObserver();
+    const sentinel = grid.querySelector('.lib-mount-sentinel');
+    if (!sentinel) return;
+    if (typeof IntersectionObserver !== 'function') return; // 降级环境由 renderLibGrid 一次性全量挂载
+    libSentinelObserver = new IntersectionObserver(entries => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        libMountMore();
+      }
+    }, { root: grid, rootMargin: '100% 0px' });
+    libSentinelObserver.observe(sentinel);
+  }
+
+  // 追加挂载下一批；返回是否还有剩余未挂
+  function libMountMore(all = libFiltered()) {
+    const grid = document.getElementById('libGrid');
+    if (!grid || libMountedCount >= all.length) return false;
+    const prev = libMountedCount;
+    libMountedCount = Math.min(all.length, libMountedCount + LIB_MOUNT_BATCH);
+    const batch = all.slice(prev, libMountedCount)
+      .map((card, i) => photoTileHTML(card, prev + i, prev + i)).join('');
+    grid.querySelector('.lib-mount-sentinel')?.remove();
+    grid.insertAdjacentHTML('beforeend', batch);
+    if (libMountedCount < all.length) {
+      grid.insertAdjacentHTML('beforeend', '<div class="lib-mount-sentinel" aria-hidden="true"></div>');
+      observeLibSentinel(grid);
+    }
+    bindLibGridNavigation();
+    warmLibArt();
+    return libMountedCount < all.length;
+  }
+
+  // 键盘翻格 / 选片台翻看定位到未挂载区时，先补挂到目标索引
+  function ensureLibMountedIndex(all, index) {
+    let guard = 0;
+    while (libMountedCount <= index && libMountMore(all)) {
+      if (++guard > 100) break;
+    }
+  }
+
   function switchLibPage(page, all = libFiltered()) {
     // 09-24 改回上下滚动：不切页，跨页定位（键盘方向键 / 选片台翻看）退化为把目标页首张滚入视野
-    const target = all[Math.max(0, page) * LIB_PAGE_SIZE];
-    const node = target ? libCardNodeById.get(target.id) : null;
-    node?.scrollIntoView({ block: 'nearest' });
+    const targetIndex = Math.max(0, page) * LIB_PAGE_SIZE;
+    const target = all[targetIndex];
+    if (!target) return;
+    if (!libCardNodeById.get(target.id)) ensureLibMountedIndex(all, targetIndex);
+    libCardNodeById.get(target.id)?.scrollIntoView({ block: 'nearest' });
   }
 
   function setLibSelection(id, playSound = false) {
@@ -328,7 +383,19 @@ import { MECH_GROUPS, MECH_ALL } from '../cards/mech-sentences.js';
     previousItem?.classList.remove('selected');
     previousCard?.setAttribute('aria-current', 'false');
     const selected = card ? libCardNodeById.get(card.id) : null;
-    if (selected) {
+    if (card && !selected) {
+      // 目标卡在未挂载区（窗口挂载下键盘/翻看跳入）：先补挂再取节点
+      const list = libFiltered();
+      const idx = list.findIndex(c => c.id === card.id);
+      if (idx >= 0) {
+        ensureLibMountedIndex(list, idx);
+        const node = libCardNodeById.get(card.id);
+        if (node) {
+          node.setAttribute('aria-current', 'true');
+          node.closest('.lib-item')?.classList.add('selected');
+        }
+      }
+    } else if (selected) {
       selected.setAttribute('aria-current', 'true');
       selected.closest('.lib-item')?.classList.add('selected');
     }
@@ -416,6 +483,7 @@ import { MECH_GROUPS, MECH_ALL } from '../cards/mech-sentences.js';
   // opts.keepPage：翻看导航跨页时保留目标页（当前页卡格滚动仍回到顶部）
   function renderLibGrid(opts) {
     cancelLibPageWarm();
+    stopLibSentinelObserver();
     const keepPage = !!(opts && opts.keepPage);
     const filterKey = JSON.stringify([libFilter.tab, libFilter.rar, libFilter.cls, libFilter.q, libFilter.sort]);
     if (!keepPage || filterKey !== libPageCacheFilterKey) {
@@ -466,12 +534,17 @@ import { MECH_GROUPS, MECH_ALL } from '../cards/mech-sentences.js';
         libPageCache.delete(libPageIndex);
         grid.replaceChildren(cachedPage);
       } else {
+        // 窗口挂载：重置为首批；无 IntersectionObserver 的环境（jsdom 测试）一次性全量
+        libMountedCount = typeof IntersectionObserver === 'function'
+          ? Math.min(LIB_MOUNT_BATCH, filtered.length)
+          : filtered.length;
         grid.innerHTML = libGridContentsHTML(filtered);
       }
       // 上下滚动模式（09-24）：筛选重绘后回顶，否则沿用旧滚动位置会从半截行开始看
       grid.scrollTop = 0;
       libRenderedPageIndex = libPageIndex;
       bindLibGridNavigation();
+      if (libMountedCount < filtered.length) observeLibSentinel(grid);
     }
     const active = document.getElementById('libActiveFilters');
     if (active) active.innerHTML = libActiveFiltersHTML();
@@ -532,6 +605,11 @@ import { MECH_GROUPS, MECH_ALL } from '../cards/mech-sentences.js';
     _libFilteredCache = null;
     _libFilteredKey = '';
     libPageIndex = 0;
+    // 窗口挂载计数要在 showOverlay 拼网格 HTML 前重置（libGridHTML 直接读它切片）
+    stopLibSentinelObserver();
+    libMountedCount = typeof IntersectionObserver === 'function'
+      ? Math.min(LIB_MOUNT_BATCH, libFiltered().length)
+      : libFiltered().length;
     const counts = {};
     libCards.forEach(c => { counts[c.type] = (counts[c.type] || 0) + 1; });
     const tabs = ['全部'].concat(TYPES).map(t =>
@@ -577,6 +655,9 @@ import { MECH_GROUPS, MECH_ALL } from '../cards/mech-sentences.js';
     lastSavedId = null;
     libPageCacheFilterKey = JSON.stringify([libFilter.tab, libFilter.rar, libFilter.cls, libFilter.q, libFilter.sort]);
     libRenderedPageIndex = libPageIndex;
+    // 整页重建的网格同样走窗口挂载：还有剩余就挂上哨兵观察
+    const libGrid = document.getElementById('libGrid');
+    if (libGrid && libMountedCount < libFiltered().length) observeLibSentinel(libGrid);
     bindLibGridNavigation();
     warmLibArt();
     // 注意：lastPreviewId 在下方悬停处理段声明（函数内 let），此处不可提前赋值——

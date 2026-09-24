@@ -706,18 +706,19 @@ body.cardlib-open #overlay .photo-studio-v3 .lib-item {
   position:relative!important;
   padding:15px 3px 6px!important;
   border:0!important;
-  /* 09-24 改上下滚动后摘掉 content-visibility/contain-intrinsic-size：
-     全量渲染下网格行轨道会拿跳过态的错误高度（首两行 54px）且物品长高后不重算，行叠行。
-     winter.css:251 还有条全局 .lib-item{content-visibility:auto}，必须在这里显式关掉。 */
-  content-visibility:visible!important;
+  /* 09-24 全量渲染曾因行轨拿跳过态错误高度摘掉 content-visibility；改窗口挂载后恢复，
+     跳过态占位由 contain-intrinsic-size 给足（单格高约 310~430px 随视宽浮动，进视口即用真实高度） */
+  content-visibility:auto;
+  contain-intrinsic-size:auto 360px;
   contain:layout style;
   transition:transform .18s ease!important;
 }
 body.cardlib-open #overlay .photo-studio-v3 .lib-item:hover {
   z-index:4;
   transform:translateY(-3px)!important;
-  content-visibility:visible!important;
 }
+/* 窗口挂载哨兵：占一格高的透明条，接近视口触发追加下一批（game.cardslib.js libMountMore） */
+body.cardlib-open #overlay .photo-studio-v3 .lib-mount-sentinel { height:1px; }
 body.cardlib-open #overlay .photo-studio-v3 .lib-cardwrap.studio-photo {
   width:100%!important;
   min-width:0!important;
