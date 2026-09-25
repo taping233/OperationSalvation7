@@ -491,3 +491,12 @@ Git 状态：`master` 领先 `origin/master` **8 个提交未推送**（最新 2
 - 根因三条在案：①战斗手牌「发白」=卡面位图白底（09-23 路线B 定版）非 CSS；②人物卡池丑=立绘不透明白底 4K 横图直贴（VP8X 无 alpha）；③首页翻译腔英文烧死在 `wallpaper-original.webp`。
 - 待老板拍板：①壁纸重绘/裁切 ②7 张纯 CSS 卡背重绘（cards.js `CARD_BACKS`）③立绘透明底重出 ④三套收藏 UI（照相馆/收藏室/图鉴）统一 ⑤徽记/蛋/结算横幅挂点 ⑥离开补给站 teal 按钮、「无」卡四皮肤按钮失衡。
 - 现场文件：调度台账+全部过程截图 `.ui-art-loop-0925/`（未跟踪，删除须报批）；生图脚本 `.tmp/nai/ui-loop-batch{1,2}-20260925.py`。`card-rules.schema.js` 仍为 A2 会话在途未提交；本批未推送，推送状态以实时 `git log`/`git status` 为准。
+
+## 当前状态补充：A2 schema v2 收口落库 + 积压推送（2026-09-25 15:05 +08:00）
+
+- 老板指令「先把提交推了，把在途未落库做完」：主会话先推送积压 9 提交（5c63559..dcc9fee），再接手 A2 会话在途的 `card-rules.schema.js` 半成品（+632/−120）收口。
+- **A2 落库 `5daed46`（4 文件 +756/−123）**：schema v2 合并校验器按 A1 规格书（docs/card-rules-v2-taxonomy-2026-09-25.md）补齐——G1 伤害泛化、G2 诅咒族、G6/G7/G10 效果键、G3/G4/G9/G11/G12/G14 pending 操作族、G13 时点触发器、G5 装备域均为键位+逐键校验；G8 留白有注释（消费点 battle.card-cost.js 不在本波属地）；version 仍须=1，v1 严格增量超集。
+- **半成品缺口修复**：在途版只靠 battle.resolution.js 伤害段既有 throw 兜底，`damage {amountField:'dmg', bonus/cond/...}` 等「v1 形状+v2 附加键」组合会被静默忽略成错结算、G13 触发器零消费者——新增 `assertStructuredRulesSupported`（resolveCardSteps 开头调用），v2 键遇真实卡数据即 throw，迁移批 A3/B1-B11 落地时随批拆除。
+- 验证：card-rules-schema 测试按 v2 语义修正旧断言+新增 v2 正/负覆盖 2 例，battle-resolution 追加守卫 throw 用例 1 例；定向 3 文件 41 用例绿；**pre-commit 门禁全量 146 文件/820 用例 PASS（218s）**。全量曾一次出现间歇性 `Errors 1`（未处理 rejection 类，非用例失败），两次复跑未再现，exit 0。
+- 推送状态：`dcc9fee..5daed46` 已推 origin/master，本地与远端对齐（截至本节写入）。上一节「card-rules.schema.js 仍为 A2 会话在途未提交；本批未推送」已过时。
+- 下一步：A3 分族迁移 B1-B11（约 181 张，禁碰 cards.data.js 到 A3）；B 类型系统 core 域等额度补派；G 空引用修复仍停手待第四方（未核实是否恢复）。
