@@ -26,7 +26,8 @@ const V2_PENDING_TRIGGER_KEYS = new Set(['onTurnStart', 'onBattleStart', 'onCons
 // hits.perFoe（每人释放一段）同为 pending——嵌套在 hits 内，需单独探查。
 const PENDING_DAMAGE_KEYS = ['graveyard', 'schedule'];
 // draw 全部 v2 键属 B4（boss/普通战双口径必须结构化表达后才放行）。
-const PENDING_DRAW_KEYS = ['amount', 'untilHandN', 'handOps'];
+// B4 进度（2026-09-26 A3 收口）：amount 已接线（字面量抽牌），untilHandN/handOps 仍 pending
+const PENDING_DRAW_KEYS = ['untilHandN', 'handOps'];
 // curse 逐键收口（B5）：schema 放行的 9 键（op/curse/stacks/duration/target/randomKinds/double/burst/extend）
 // 已全部由 resolveCurseOperation 消费——无 pending。空集保留登记位：新增 curse 键必须先在此登记，
 // 否则解释器会静默忽略（错结算），违背本守卫的存在目的。
@@ -329,7 +330,13 @@ function createBattleResolution(ports) {
     // 面板日志的池名（文本路径 discover.pool 同款：名词去尾「的」+ 限制池括注）
     const label = pred ? String(operation.pool.kind === 'moves' ? '招式' : operation.pool.kind).replace(/的$/, '') : '';
     const poolSuffix = pred ? `【${esc(label)}】（限制卡池）` : '';
-    const drawOne = () => randomDiscoverCard(pred);
+    // named 精确同名卡优先直取：「获得/将指定卡…」（熔岩爆破二次爆炸/三重火球火球/流光斩流光照影）
+    // 是指定获取语义，与文本路径 deck.gainNamed/insertHand 同款——不得被发现池的
+    // rarity=衍生/职业/unrandom 资格边界滤空（pred 谓词来自 named 兜底分支时才走此捷径，
+    // parsePoolNoun 类型/系列谓词仍走随机池口径）。仅影响 acquire 路径，不碰 discover op。
+    const namedExact = typeof getAllCards === 'function' && pred
+      ? getAllCards().find(c => c.name === operation.pool.kind) : null;
+    const drawOne = namedExact ? () => ({ ...namedExact }) : () => randomDiscoverCard(pred);
     // act 在直发路径的模板修饰：zeroCost 洗入模板静态 0 费（铁甲阵改模板先例）；noInfuse 透传 _noInfuse
     const decorate = tpl => {
       if (act === 'zeroCost') return { ...tpl, cost: 0 };
@@ -892,11 +899,12 @@ function createBattleResolution(ports) {
             log(`[[icon:hourglass]] <b>回合开始时</b>：【${esc(card.name)}】护甲 -${operation.decayAtTurnEnd} 点（下个回合开始生效）`, 'sys');
           }
         } else {
-          // draw：v2 抽牌键（amount/untilHandN/handOps）仍属 B4，由顶部守卫拦截；这里保持 v1 路径
-          if (operation.amountField !== 'draw') {
+          // draw：v1 amountField 与 v2 字面量 amount 双源（amount 本批接线；
+          // untilHandN/handOps 仍属 B4，由顶部守卫拦截）
+          if (operation.amountField === undefined && operation.amount === undefined) {
             throw new TypeError(`Unsupported onPlay operation for card ${card.id || '<missing id>'}`);
           }
-          const amount = +card[operation.amountField];
+          const amount = operation.amountField !== undefined ? +card[operation.amountField] : +(operation.amount || 0);
           if (readState().mode === 'boss') {
             const got = drawCards(amount);
             if (typeof countDrawnSpells === 'function') spellsGained += countDrawnSpells();

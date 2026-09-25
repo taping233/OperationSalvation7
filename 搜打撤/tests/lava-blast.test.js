@@ -99,7 +99,7 @@ describe('熔岩爆破 + 二次爆炸', () => {
     expect(snap().foes[0].hp).toBe(hpA - 11);
     expect(snap().foes[1].hp).toBe(hpB);            // 单体：B 不受伤
     expect(snap().energy).toBe(97);
-    expect(g.logs.some(l => l.includes('获得 1 张【二次爆炸】'))).toBe(true);
+    expect(g.logs.some(l => l.includes('获得 【二次爆炸】×1')), 'A3 acquire hand 日志（含空格口径）').toBe(true);
     expect(snap().hand.length).toBeGreaterThan(0);
 
     // 打出置入的二次爆炸（AOE）：全体 3+法伤2 = 5

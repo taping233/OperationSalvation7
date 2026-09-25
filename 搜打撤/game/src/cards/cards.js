@@ -269,6 +269,7 @@ function assertValidCardRules(cards) {
       SDT.Cards.ensureTT12DiscoverRules(); // 高端研发按稳定 id 补齐发现与逐回合降费规则
       SDT.Cards.ensureA3BattleRules(); // A3 迁移第一批：B1-B3 共 23 张文本路径卡改结构化 rules（2026-09-25）
       SDT.Cards.ensureA3CurseRules(); // A3 第二批：B5 诅咒族 8 张改结构化（curse op 接线后）
+      SDT.Cards.ensureA3AcquireBlessingRules(); // A3 第三/四批：B6 获取 12 张+B7 增益能量 4 张
     },
 
     // 职业稀有度迁移（设计者 2026-09-04 定版）：老档里第七批职业卡（tt7- 前缀）

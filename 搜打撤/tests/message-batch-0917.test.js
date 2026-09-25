@@ -86,7 +86,7 @@ describe('神秘召唤卡池（2026-09-16 留言「神秘召唤卡池错误」�
     const g = makeGame([mystic]);
     BattleSession.start(g, [foeDef()], { isBoss: false, name: '神秘召唤测试' });
     await drain();
-    BattleSession.commands.playCard(g.ownedCards[0].uid, 'any');
+    BattleSession.commands.playCard(g.ownedCards[0].uid, 'self');   // A3 迁移后结构化 self 卡
     for (let i = 0; i < 60 && !snap().discovering; i++) await tick();
     const d = snap().discovering;
     expect(d, '应弹出发现面板').toBeTruthy();
@@ -148,7 +148,7 @@ describe('法力奔涌慢动作（2026-09-16 留言）', () => {
     const g = makeGame([sg]);
     BattleSession.start(g, [foeDef()], { isBoss: false, name: '奔涌演出测试' });
     await drain();
-    BattleSession.commands.playCard(g.ownedCards[0].uid, 'any');
+    BattleSession.commands.playCard(g.ownedCards[0].uid, 'self');   // A3 迁移后结构化 self 卡
     await drain(600);
     const anims = viewApi.takeCardAnims();
     const surges = anims.filter(a => a.kind === 'surge');

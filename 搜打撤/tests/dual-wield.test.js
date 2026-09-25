@@ -76,17 +76,18 @@ describe('二刀流（cc-dual-wield）', () => {
     const g = makeGame([dual()]);
     BattleSession.start(g, [foeDef()], { isBoss: false, name: '双刀测试' });
     await drain();
-    BattleSession.commands.playCard(g.ownedCards[0].uid, undefined);   // 无对敌效果：直接打出
+    // A3 迁移后本卡为结构化 self 卡：side='self' 直接结算（v1 结构化 self 卡既有口径）
+    BattleSession.commands.playCard(g.ownedCards[0].uid, 'self');
     await drain(500);
 
-    // 手牌应为 2 张发现的武术（同名，×2 堆叠展示）；另有背包砸击初始牌常驻（2026-09-13 留言）
+    // 本体+复制共 2 张（A3 acquire discover+dup：同名走 addTempCard，可能堆叠展示）
     const nonSlam = snap().hand.map(u => viewApi.findCard(u)).filter(o => o && o.card.name !== '背包砸击');
-    expect(nonSlam.length).toBe(2);
-    expect(nonSlam[0].card.name).toBe(nonSlam[1].card.name);   // 复制=同名
+    const totalCount = nonSlam.reduce((acc, o) => acc + (o.count || 1), 0);
+    expect(totalCount, `本体+复制应共 2 张，实际条目 ${nonSlam.length}：${JSON.stringify(nonSlam.map(o => o.card.name))}`).toBe(2);
+    expect(nonSlam[0].card.name).toBe(nonSlam[nonSlam.length - 1].card.name);   // 复制=同名
     expect(nonSlam[0].card.type).toBe('武术');
-    expect(g.logs.some(l => l.includes('并额外获得 1 张复制'))).toBe(true);
-    // 发现的是候选项之一（三选一面板第一项），且为武术
-    expect(g.logs.some(l => l.includes('发现 1 张【武术】卡牌'))).toBe(true);
+    // 发现的是候选项之一（三选一面板第一项），且为招式限制池（acquire 日志池括注在中段）
+    expect(g.logs.some(l => l.includes('发现 1 张【招式】')), 'acquire discover 日志').toBe(true);
     BattleSession.commands.flee();
     await drain(100);
     expect(g.battleActive).toBe(false);

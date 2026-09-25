@@ -958,4 +958,59 @@ export const syncSlice = {
         domains: ['battle', 'triggers'],
       });
     },
+
+    // A3 第三/四批（B6 卡牌获取 + B7 增益能量，2026-09-25 深夜）：16 张迁移
+    // （acquire 12 + blessing/energy 4；解释分支已接线——resolveAcquireOperation/
+    // resolveBlessingOperation，pool 谓词走 parsePoolNoun 与文本路径同源）。
+    // 排除记账：挖宝 priceArmor/武装 deckDraw/破进展三段费用无键、灵能召唤"注能卡"
+    // 池名词不支持（parsePoolNoun 需扩）、自然形态 V（natureForm 形态旗标耦合）、
+    // 净化无 purify 键、割蚀/影噬为敌方 atk 操作（blessing 无 target 键）、
+    // 剑仙形态 G13、邪能护体注能门高危（N1 明星卡，注能白嫖风险）、H 白名单 3。
+    // schema 交叉点：铁甲阵 armor 与潜匿 draw 用字面量 amount（field-anchored 不得
+    // 与 pending op 混排——amount 与字段值一致仍满足 declaresField 契约）。
+    ensureA3AcquireBlessingRules() {
+      const R = (battle, onPlay) => ({ rules: { version: 1, battle, triggers: { onPlay } } });
+      const ENEMY_ONE = { target: { side: 'enemy', area: false } };
+      const SELF = { target: { side: 'self', area: false } };
+      const acquire = (n, kind, dest, act) => ({ op: 'acquire', n, pool: { kind }, dest, ...(act ? { act } : {}) });
+      const dmgOne = extra => R(ENEMY_ONE, [
+        { op: 'damage', amountField: 'dmg', target: 'chosenEnemy' },
+        ...extra,
+      ]);
+      const definitions = new Map([
+        // —— B6 卡牌获取 ——
+        ['cc-dual-wield', R(SELF, [acquire(1, '招式', 'discover', 'dup')])],
+        ['tt3-flux-slash', dmgOne([
+          { op: 'curse', curse: 'bleed', stacks: 2, target: 'chosenEnemy' },
+          acquire(1, '流光照影', 'deck'),
+        ])],
+        ['tt3-life-arrow', dmgOne([acquire(1, '随机', 'hand')])],
+        ['cmtn1i64j7y7', R(SELF, [acquire(1, '装备', 'discover')])],
+        ['tt7-ironphalanx', R(SELF, [
+          { op: 'armor', amount: 10 },
+          acquire(5, '随机', 'deck', 'zeroCost'),
+        ])],
+        ['tt7-twinfireball', dmgOne([acquire(2, '火球', 'hand')])],
+        ['cmtn1gfhczzj', R(SELF, [acquire(1, '能施加诅咒的招式', 'hand')])],
+        ['tt12-basicdev', R(SELF, [acquire(2, '0费招式', 'hand')])],
+        ['tt3-treasure-hunt', dmgOne([acquire(1, '随机', 'discover')])],
+        ['cc-lava-blast', dmgOne([acquire(1, '二次爆炸', 'hand')])],
+        ['cmtn125e1nk0', R(SELF, [acquire(1, '传说或能力卡', 'discover')])],
+        ['tt12-magicfind', R(SELF, [acquire(1, '1费招式', 'discover', 'zeroCost')])],
+        // —— B7 增益·祝福·能量 ——
+        ['tt7-stealth', R(SELF, [
+          { op: 'blessing', key: 'stealth', duration: 1 },
+          { op: 'draw', amount: 1 },
+        ])],
+        ['cmtn1ntxzoc4', R(SELF, [{ op: 'blessing', key: 'spellUp' }])],
+        ['tt7-energize', R(SELF, [{ op: 'energy', n: 1 }])],
+        ['tt3sp-dodge', R(SELF, [{ op: 'blessing', key: 'dodge' }])],
+      ]);
+      backfillStructuredRuleDefinitions({
+        markerKey: 'sdt-cards-a3-acquire-bless-rules-v1-seeded',
+        ids: [...definitions.keys()],
+        definitions,
+        domains: ['battle', 'triggers'],
+      });
+    },
 };

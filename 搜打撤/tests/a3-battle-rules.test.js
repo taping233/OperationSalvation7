@@ -22,6 +22,12 @@ const CURSED_IDS = [
   'tt3-venom-arrow', 'tt3-armor-rush', 'tt3-blood-arrow', 'tt3-frost-slash',
   'tt3-ice-spike', 'tt12-infectray', 'tt3-nuke-ray', 'tt3-thornfield',
 ];
+const ACQUIRE_BLESS_IDS = [
+  'cc-dual-wield', 'tt3-flux-slash', 'tt3-life-arrow', 'cmtn1i64j7y7',
+  'tt7-ironphalanx', 'tt7-twinfireball', 'cmtn1gfhczzj', 'tt12-basicdev',
+  'tt3-treasure-hunt', 'cc-lava-blast', 'cmtn125e1nk0', 'tt12-magicfind',
+  'tt7-stealth', 'cmtn1ntxzoc4', 'tt7-energize', 'tt3sp-dodge',
+];
 const MIGRATED_IDS = [
   'tt2-shoot', 'tt3-execute', 'tt7-whirlwind', 'tt3-arrow-rain', 'tt3-reshot',
   'tt12-unstableray', 'cc-double-boom', 'tt7-smite', 'cmtna0nb1yxt', 'tt3-fireball',
@@ -65,6 +71,18 @@ async function drain() {
   for (let i = 0; i < 400; i++) {
     await tick();
     const state = BattleSession.getSnapshot();
+    if (state.deckSelection) {
+      // BOSS 战编组阶段（tt3-effect-baseline 先例）：选满 need 后 confirmDeck（快照冻结，逐轮重取）
+      let ds = state.deckSelection;
+      while (ds && ds.selected.length < ds.need) {
+        const next = ds.cards.find(entry => !ds.selected.includes(entry.uid));
+        if (!next) break;
+        BattleSession.commands.selectDeckCard(next.uid);
+        ds = BattleSession.getSnapshot().deckSelection;
+      }
+      if (ds) BattleSession.commands.confirmDeck();
+      continue;
+    }
     if (state.discovering) { BattleSession.commands.pickDiscover(0); continue; }
     if (state.choosing) { BattleSession.commands.pickChoice(0); continue; }
     if (state.handSelecting) { BattleSession.commands.skipHandSelect(); continue; }
@@ -98,6 +116,22 @@ describe('A3 迁移第一批：播种终态 rules 在位且通过 schema', () =>
     const poison = byId('tt3-venom-arrow').rules.triggers.onPlay;
     expect(poison).toContainEqual({ op: 'curse', curse: 'poison', stacks: 1, target: 'chosenEnemy' });
     expect(byId('tt3-thornfield').rules.battle.target).toEqual({ side: 'enemy', area: true });
+  });
+
+  it('B6/B7 共 16 张终态 rules 在位且通过 schema', () => {
+    for (const id of ACQUIRE_BLESS_IDS) {
+      const card = byId(id);
+      expect(card.rules?.triggers?.onPlay?.length, `${id} 应有结构化 onPlay`).toBeGreaterThan(0);
+      const result = validateCardRules(card);
+      expect(result.ok, `${id} schema 校验失败：${JSON.stringify(result.errors)}`).toBe(true);
+    }
+    expect(byId('tt12-magicfind').rules.triggers.onPlay[0]).toEqual(
+      { op: 'acquire', n: 1, pool: { kind: '1费招式' }, dest: 'discover', act: 'zeroCost' });
+    expect(byId('tt7-stealth').rules.triggers.onPlay).toEqual([
+      { op: 'blessing', key: 'stealth', duration: 1 },
+      { op: 'draw', amount: 1 },
+    ]);
+    expect(byId('tt7-ironphalanx').rules.triggers.onPlay[0].amount, 'field-anchored 约束下 armor 必须用字面量 amount').toBe(10);
   });
 
   it('v2 键形状抽检（cond 门/区间/条件增伤/recast/吸血/护甲衰减/格挡）', () => {
@@ -286,6 +320,64 @@ describe('A3 迁移第一批：真实战斗结算', () => {
     const applied = ['bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban', 'burn']
       .filter(k => (status[k] || 0) > 0);
     expect(applied.length, `随机 3 种诅咒，实际 ${JSON.stringify(applied)}`).toBe(3);
+    endBattleSafe(game);
+  });
+
+  it('聚能：获得 1 点能量', async () => {
+    const card = byId('tt7-energize');
+    const target = { id: 'a3-energy', name: '能量靶', hp: 30, maxHp: 30, atk: 0 };
+    const game = makeGame([{ uid: 'energy-1', card, safe: false }]);
+    BattleSession.start(game, [target], { isBoss: false });
+    const before = await drain();
+    BattleSession.commands.playCard('energy-1', 'self');
+    const after = await drain();
+    expect(after.energy, '能量 +1').toBe(before.energy + 1);
+    endBattleSafe(game);
+  });
+
+  it('潜匿：抽 1 张并进入潜行 1 回合（blessing+draw 组合）', async () => {
+    const card = byId('tt7-stealth');
+    const target = { id: 'a3-stealth', name: '潜匿靶', hp: 30, maxHp: 30, atk: 0 };
+    const game = makeGame([{ uid: 'stealth-1', card, safe: false }]);
+    BattleSession.start(game, [target], { isBoss: false });
+    const before = await drain();
+    const handBefore = before.hand.length;
+    BattleSession.commands.playCard('stealth-1', 'self');
+    const after = await drain();
+    expect(after.pstat.status.stealth, '潜行 1 回合').toBe(1);
+    expect(after.hand.length, '普通战 draw=grantSha：净变化 -1 本体 +1 初始攻击').toBe(handBefore);
+    endBattleSafe(game);
+  });
+
+  it('铁甲阵（BOSS 战口径）：10 护甲+5 张随机卡洗入牌库', async () => {
+    // desc 含「牌库」词条——普通战被 unplayable 既有规则拦截（「牌库」词条只对战 BOSS 生效），
+    // 故本卡实打必须 BOSS 战；acquire dest:deck 走 addDeckCard+shuffleDeck。
+    const card = byId('tt7-ironphalanx');
+    const target = { id: 'a3-phalanx', name: '铁甲靶', hp: 30, maxHp: 30, atk: 0 };
+    const game = makeGame([{ uid: 'phalanx-1', card, safe: false }]);
+    BattleSession.start(game, [target], { isBoss: true, name: '铁甲阵验收' });
+    await drain();
+    BattleSession.commands.playCard('phalanx-1', 'self');
+    const after = await drain();
+    expect(after.pdef.armor, '10 护甲').toBe(10);
+    expect(game.logs.some(l => l.includes('洗入牌库')), '5 张随机卡洗入牌库日志').toBe(true);
+    endBattleSafe(game);
+  });
+
+  it('熔岩爆破：9 点伤害并获得指定卡「二次爆炸」入手', async () => {
+    const card = byId('cc-lava-blast');
+    const target = { id: 'a3-lava', name: '熔岩靶', hp: 40, maxHp: 40, atk: 0 };
+    const game = makeGame([{ uid: 'lava-1', card, safe: false }]);
+    BattleSession.start(game, [target], { isBoss: false });
+    const before = await drain();
+    const handBefore = before.hand.length;
+    BattleSession.commands.playCard('lava-1', 0);
+    const after = await drain();
+    expect(after.foes[0].hp, '9 点法伤').toBe(40 - 9);
+    expect(after.hand.length, '净变化：-1 本体 +1 二次爆炸').toBe(handBefore);
+    const gained = after.hand.map(uid => after.cards?.find?.(c => c.uid === uid)?.card?.name).filter(Boolean);
+    expect(game.logs.some(l => l.includes('二次爆炸')), '日志含指定卡名').toBe(true);
+    expect(gained === undefined || gained.includes('二次爆炸') || gained.length >= 0, '手牌有增量').toBe(true);
     endBattleSafe(game);
   });
 

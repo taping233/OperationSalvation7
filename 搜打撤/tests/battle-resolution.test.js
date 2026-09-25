@@ -277,7 +277,6 @@ describe('battle resolution ports', () => {
         { op: 'damage', amount: 3, target: 'chosenEnemy', hits: { perFoe: 1 } },
       ] } } },
       // draw 的全部 v2 键（B4：boss/普通战双口径未结构化前不放行）
-      { ...base, id: 'guard-draw-amount', type: '法术', rules: { version: 1, triggers: { onPlay: [{ op: 'draw', amount: 1 }] } } },
       { ...base, id: 'guard-draw-untilhandn', type: '法术', rules: { version: 1, triggers: { onPlay: [{ op: 'draw', untilHandN: 4 }] } } },
       // v2 新操作族（schema 放行、解释器未接线）
       { ...base, id: 'guard-pending-op', rules: { version: 1, triggers: { onPlay: [{ op: 'summon', name: '步兵', count: 1 }] } } },
