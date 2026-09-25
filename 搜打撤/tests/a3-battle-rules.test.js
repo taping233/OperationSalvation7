@@ -18,6 +18,10 @@ const { BattleSession } = await import('../game/src/battle/battle.core.js');
 const { validateCardRules } = await import('../game/src/cards/card-rules.schema.js');
 const Cards = window.SDT.Cards;
 
+const CURSED_IDS = [
+  'tt3-venom-arrow', 'tt3-armor-rush', 'tt3-blood-arrow', 'tt3-frost-slash',
+  'tt3-ice-spike', 'tt12-infectray', 'tt3-nuke-ray', 'tt3-thornfield',
+];
 const MIGRATED_IDS = [
   'tt2-shoot', 'tt3-execute', 'tt7-whirlwind', 'tt3-arrow-rain', 'tt3-reshot',
   'tt12-unstableray', 'cc-double-boom', 'tt7-smite', 'cmtna0nb1yxt', 'tt3-fireball',
@@ -82,6 +86,18 @@ describe('A3 迁移第一批：播种终态 rules 在位且通过 schema', () =>
       const result = validateCardRules(card);
       expect(result.ok, `${id} schema 校验失败：${JSON.stringify(result.errors)}`).toBe(true);
     }
+  });
+
+  it('B5 诅咒族 8 张终态 rules 在位且通过 schema', () => {
+    for (const id of CURSED_IDS) {
+      const card = byId(id);
+      expect(card.rules?.triggers?.onPlay?.length, `${id} 应有结构化 onPlay`).toBeGreaterThan(0);
+      const result = validateCardRules(card);
+      expect(result.ok, `${id} schema 校验失败：${JSON.stringify(result.errors)}`).toBe(true);
+    }
+    const poison = byId('tt3-venom-arrow').rules.triggers.onPlay;
+    expect(poison).toContainEqual({ op: 'curse', curse: 'poison', stacks: 1, target: 'chosenEnemy' });
+    expect(byId('tt3-thornfield').rules.battle.target).toEqual({ side: 'enemy', area: true });
   });
 
   it('v2 键形状抽检（cond 门/区间/条件增伤/recast/吸血/护甲衰减/格挡）', () => {
@@ -214,6 +230,94 @@ describe('A3 迁移第一批：真实战斗结算', () => {
     const done = BattleSession.getSnapshot();
     expect(done.foes[0].hp).toBe(27);
     expect(done.foes[1].hp).toBe(27);
+    endBattleSafe(game);
+  });
+
+  it('毒箭：伤害后附加 1 层中毒，与文本路径同一状态袋', async () => {
+    const card = byId('tt3-venom-arrow');
+    const target = { id: 'a3-venom', name: '毒箭靶', hp: 30, maxHp: 30, atk: 0 };
+    const game = makeGame([{ uid: 'venom-1', card, safe: false }]);
+    BattleSession.start(game, [target], { isBoss: false });
+    await drain();
+    BattleSession.commands.playCard('venom-1', 0);
+    const after = await drain();
+    expect(after.foes[0].status.poison, '毒箭 1 层中毒').toBe(1);
+    endBattleSafe(game);
+  });
+
+  it('霜月斩：冰冻与禁疗双诅咒各持续 1 回合', async () => {
+    const card = byId('tt3-frost-slash');
+    const target = { id: 'a3-frost', name: '霜月靶', hp: 30, maxHp: 30, atk: 0 };
+    const game = makeGame([{ uid: 'frost-1', card, safe: false }]);
+    BattleSession.start(game, [target], { isBoss: false });
+    await drain();
+    BattleSession.commands.playCard('frost-1', 0);
+    const after = await drain();
+    expect(after.foes[0].status.freeze, '冰冻 1 回合').toBe(1);
+    expect(after.foes[0].status.healban, '禁疗 1 回合').toBe(1);
+    endBattleSafe(game);
+  });
+
+  it('棘刺之地：全体各 2 层中毒并立即引爆 1 次毒伤', async () => {
+    const card = byId('tt3-thornfield');
+    const a = { id: 'a3-thorn-a', name: '棘甲', hp: 30, maxHp: 30, atk: 0 };
+    const b = { id: 'a3-thorn-b', name: '棘乙', hp: 30, maxHp: 30, atk: 0 };
+    const game = makeGame([{ uid: 'thorn-1', card, safe: false }]);
+    BattleSession.start(game, [a, b], { isBoss: false });
+    await drain();
+    BattleSession.commands.playCard('thorn-1', 0);
+    const after = await drain();
+    expect(after.foes[0].status.poison, '甲 2 层').toBe(2);
+    expect(after.foes[1].status.poison, '乙 2 层').toBe(2);
+    expect(after.foes[0].hp, '立即引爆 1 次毒伤（每层 1 点=2 点）').toBeLessThan(30);
+    expect(after.foes[1].hp).toBeLessThan(30);
+    endBattleSafe(game);
+  });
+
+  it('致命射线：8 点法伤后附加恰好 3 种随机诅咒', async () => {
+    const card = byId('tt3-nuke-ray');
+    const target = { id: 'a3-nuke', name: '射线靶', hp: 40, maxHp: 40, atk: 0 };
+    const game = makeGame([{ uid: 'nuke-1', card, safe: false }]);
+    BattleSession.start(game, [target], { isBoss: false });
+    await drain();
+    BattleSession.commands.playCard('nuke-1', 0);
+    const after = await drain();
+    const status = after.foes[0].status;
+    const applied = ['bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban', 'burn']
+      .filter(k => (status[k] || 0) > 0);
+    expect(applied.length, `随机 3 种诅咒，实际 ${JSON.stringify(applied)}`).toBe(3);
+    endBattleSafe(game);
+  });
+
+});
+
+/* —— A3 第二批（B5 诅咒族，2026-09-25）：结构化 curse op 的引擎端到端接线 ——
+ * 卡数据尚未迁移（真源归主会话），这里在真实卡上合成迁移后的 rules 形状，锁三件事：
+ *   1) createBattleResolution 的 combat 端口接线（engine combatPort 包装）真实可用；
+ *   2) 先伤害后诅咒（hp 公式按 damage 段结算）；
+ *   3) 文本诅咒句不复算——desc 带「附加 …中毒」，若文本路径也跑，层数会变 3 而非 2。 */
+describe('A3 第二批（B5 诅咒族）：真实战斗结算', () => {
+  it('毒箭式 damage+curse 复合：结构化中毒恰为 2 层、伤害段先行、文本句不复算', async () => {
+    const base = byId('tt3-venom-arrow');
+    const card = {
+      ...base,
+      rules: { version: 1, battle: { target: { side: 'enemy', area: false } }, triggers: { onPlay: [
+        { op: 'damage', amountField: 'dmg', target: 'chosenEnemy' },
+        { op: 'curse', curse: 'poison', stacks: 2, target: 'chosenEnemy' },
+      ] } },
+    };
+    const check = validateCardRules(card);
+    expect(check.ok, `毒箭结构化 rules 应过 schema：${JSON.stringify(check.errors)}`).toBe(true);
+    const foe = { id: 'b5-venom', name: '毒箭靶', hp: 30, maxHp: 30, atk: 0 };
+    const game = makeGame([{ uid: 'venom-1', card, safe: false }]);
+    BattleSession.start(game, [foe], { isBoss: false });
+    await drain();
+    BattleSession.commands.playCard('venom-1', 0);
+    const after = await drain();
+    expect(after.foes[0].status.poison, '结构化 stacks=2 恰好一次；desc 文本句若复算会变 3').toBe(2);
+    expect(after.foes[0].hp, '攻击结算 = 卡面 dmg + 攻击力（先伤害后诅咒，且不双算）')
+      .toBe(30 - (card.dmg + game.atk));
+    expect(game.logs.some(line => line.includes('附加 2 层中毒')), '日志与文本路径同款文案').toBe(true);
     endBattleSafe(game);
   });
 });

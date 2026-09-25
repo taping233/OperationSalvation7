@@ -921,4 +921,41 @@ export const syncSlice = {
         extraFieldsById: { 'tt12-unstableray': ['dmgType'], 'tt12-elemburst': ['dmgType'] },
       });
     },
+
+    // A3 第二批（B5 诅咒族，2026-09-25）：8 张可结构化诅咒卡迁移（curse op 解释分支已
+    // 接线——battle.resolution.js resolveCurseOperation，底层走 combat.addCurse 与文本
+    // 路径同一状态袋）。排除 15 张：混合目标契约缺口 5（破浪斩 noDrawNext/坚冰结界+
+    // 抽牌/孢子城墙+护甲/毒药+抽牌/深渊诅咒条件抽牌/禁言术+抽牌）、G13 禁咒系 4
+    // （抽到即施放无时点键）、H 白名单 2（诅咒之刃手牌聚合/腐化之种死亡转移）、
+    // schema 表达力 3（毒爆纯引爆无载体/花鸩 double 强制 stacks 语义差/冰封千里已结构化）。
+    ensureA3CurseRules() {
+      const R = (battle, onPlay) => ({ rules: { version: 1, battle, triggers: { onPlay } } });
+      const ENEMY_ONE = { target: { side: 'enemy', area: false } };
+      const ENEMY_ALL = { target: { side: 'enemy', area: true } };
+      const dmgOne = extra => R(ENEMY_ONE, [
+        { op: 'damage', amountField: 'dmg', target: 'chosenEnemy' },
+        ...extra,
+      ]);
+      const definitions = new Map([
+        ['tt3-venom-arrow', dmgOne([{ op: 'curse', curse: 'poison', stacks: 1, target: 'chosenEnemy' }])],
+        ['tt3-armor-rush', dmgOne([{ op: 'curse', curse: 'bleed', stacks: 2, target: 'chosenEnemy' }])],
+        ['tt3-blood-arrow', dmgOne([{ op: 'curse', curse: 'bleed', stacks: 1, target: 'chosenEnemy' }])],
+        ['tt3-frost-slash', dmgOne([
+          { op: 'curse', curse: 'freeze', duration: 1, target: 'chosenEnemy' },
+          { op: 'curse', curse: 'healban', duration: 1, target: 'chosenEnemy' },
+        ])],
+        ['tt3-ice-spike', dmgOne([{ op: 'curse', curse: 'freeze', duration: 1, target: 'chosenEnemy' }])],
+        ['tt12-infectray', dmgOne([{ op: 'curse', randomKinds: 1, target: 'chosenEnemy' }])],
+        ['tt3-nuke-ray', dmgOne([{ op: 'curse', randomKinds: 3, target: 'chosenEnemy' }])],
+        ['tt3-thornfield', R(ENEMY_ALL, [
+          { op: 'curse', curse: 'poison', stacks: 2, burst: 1, target: 'allEnemies' },
+        ])],
+      ]);
+      backfillStructuredRuleDefinitions({
+        markerKey: 'sdt-cards-a3-curse-rules-v1-seeded',
+        ids: [...definitions.keys()],
+        definitions,
+        domains: ['battle', 'triggers'],
+      });
+    },
 };
