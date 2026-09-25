@@ -392,7 +392,14 @@ import { cardRuleHint } from './battle.preview.js';
     const selfMount = body.querySelector('[data-unit-mount="self"]');
     const alliesMount = body.querySelector('[data-unit-mount="allies"]');
     const foesMount = body.querySelector('[data-unit-mount="foes"]');
-    if (!selfMount || !alliesMount || !foesMount) return null;
+    if (!alliesMount || !foesMount) return null;
+    // 09-24 起同场战斗走 showBattleStage 复用（ovBody 不重建），self 挂载点首轮已被
+    // replaceWith(selfUnit) 消耗——selfUnit 仍在原位时直接复用，不能再因找不到挂载点
+    // return null：那会把 updateUnits（敌我血条/意图/死亡演出 dead 类差分）整层冻结，
+    // 实机表现即老板 09-25 报的「敌人死亡动画和贴图丢失」。
+    const selfAnchor = selfMount
+      || (selfUnit && selfUnit.isConnected && body.contains(selfUnit) ? selfUnit : null);
+    if (!selfAnchor) return null;
     // 战斗实例令牌变了 = 上一场战斗已收尾：清掉旧槽位再开新局（口径同手牌层；
     // 不能用 isConnected 判定——ovBody 每次渲染整块重建，挂载前常驻节点必然脱离文档）
     if (selfUnit && token !== battleToken) {
@@ -417,7 +424,7 @@ import { cardRuleHint } from './battle.preview.js';
       selfParts = makeUnitSkeleton(selfUnit, { equips: true });
       selfSig = {};
     }
-    selfMount.replaceWith(selfUnit);
+    if (selfAnchor !== selfUnit) selfAnchor.replaceWith(selfUnit);
     return { alliesMount, foesMount };
   }
   // 单位节点固定骨架：意图(敌) + 立绘 + 名牌(名号/血条/属性/状态角标/装备)，各段按签名差分
@@ -659,12 +666,16 @@ import { cardRuleHint } from './battle.preview.js';
       sig.init = true;
       ordered.push(rec);
     });
-    // 移除消失的敌人 + 按数组序重排
+    // 移除消失的敌人 + 按数组序重排（appendChild 已连接节点只是搬移，不重建）
+    // 09-25：顺序没变的槽位不再重复 appendChild——同节点搬移会重置 CSS 动画，
+    // 把 fx-die/foeDieVanish 死亡演出反复打回起点，尸体永远停在白闪前收不了尾。
     const kept = new Set(ordered.map(r => r.key));
     foeSlots.forEach((rec, key) => {
       if (!kept.has(key)) { rec.slot.remove(); foeSlots.delete(key); }
     });
-    ordered.forEach(rec => mount.appendChild(rec.slot));
+    ordered.forEach((rec, i) => {
+      if (mount.children[i] !== rec.slot) mount.appendChild(rec.slot);
+    });
   }
 
 function setHandSuspended(v) { handSuspended = v; }   // 壳 render 分派改经 setter（ESM 导入绑定不可赋值，2026-09-22 批5 理顺点）

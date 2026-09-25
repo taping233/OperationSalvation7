@@ -1380,10 +1380,17 @@ body #overlay .battle-stage.sts .sts-foes,
 body #overlay .battle-stage.sts .sts-allies,
 body #overlay .battle-stage.sts .sts-me{bottom:-5vh!important}
 /* #7 怪物死亡不残留虚影和假血条：死亡单位整体移出画面 */
-#overlay .battle-stage.sts .sts-foe.dead,
 #overlay .battle-stage.sts .sts-unit.dead{display:none!important}
-/* 致命命中的伤害数字和死亡贴纸定位完成前，保留敌人立绘一拍。 */
+/* 09-25 老板：死亡动画和贴图一起凭空消失——display:none 腰斩了 battle.css 的 fx-die
+   白闪塌缩演出。改为 pending 一拍（立绘原样）结束后先播完 fx-die 1s，再整体隐藏；
+   foeDieVanish 显式 0%/99%/100% 帧（steps 对 visibility 离散属性实测不翻转），播完 hidden 并 forwards 保持不残留 */
+#overlay .battle-stage.sts .sts-foe.dead:not(.bt-death-pending){display:block!important;animation:foeDieVanish 1s linear forwards}
+@keyframes foeDieVanish{0%,99%{visibility:visible}100%{visibility:hidden}}
+#overlay .battle-stage.sts .sts-foe.dead:not(.bt-death-pending) .sts-figure{animation:fx-die 1s ease forwards}
+/* pending 一拍内立绘保持原样（盖过 .sts-unit.dead 的整体隐藏，09-24 定版），
+   同时压掉 battle.css 对 .dead .figure 的 fx-die，白闪不提前泄出 */
 #overlay .battle-stage.sts .sts-foe.dead.bt-death-pending{display:block!important;opacity:1;filter:none}
+#overlay .battle-stage.sts .sts-foe.dead.bt-death-pending .sts-figure{animation:none}
 /* #8 发现弹层透明化（2026-09-15 重做：无框透明面板改为磨砂玻璃，
    样式统一收口到文件末尾「发现/选卡浮层统一重做」块） */
 #overlay .card.discover #ovBody{background:transparent}

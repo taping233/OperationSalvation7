@@ -263,10 +263,13 @@
   min-height:188px; padding:26px 8px 4px; overflow:visible; }
 /* 手牌分栏切换按钮（2026-09-10 留言 #27：一栏最多 12 叠，放不下的进第二栏）
    09-20 修：底栏实为 3 列 grid（expedition-battle.css sts-hud display:grid），本按钮
-   未写坐标被 auto-placement 塞进隐式第 2 行溢出到屏幕外——显式钉回手牌列第 1 行贴底，
-   margin-left 让位给同格的砸击按钮 */
-.bt-hand-page { position:relative; grid-row:1; grid-column:2; justify-self:start; align-self:flex-end;
-  flex:0 0 auto; margin:0 2px 6px 122px; padding:7px 12px; border-radius:9px;
+   未写坐标被 auto-placement 塞进隐式第 2 行溢出到屏幕外——显式钉回手牌列第 1 行贴底。
+   09-25 再修：与砸击按钮同格叠放，expedition 皮肤把让位 margin 改回 4px 后直接盖住
+   砸击图——两钮收进 .sts-hand-tools flex 横排，不再靠猜宽度让位 */
+.sts-hand-tools { grid-row:1; grid-column:2; justify-self:start; align-self:flex-end;
+  display:flex; align-items:flex-end; gap:8px; margin:0 0 6px; pointer-events:none; }
+.sts-hand-tools > * { pointer-events:auto; }
+.bt-hand-page { position:relative; flex:0 0 auto; margin:0 2px; padding:7px 12px; border-radius:9px;
   border:1.5px solid #8f8b7e; background:#23231f; color:#e8e4d8; font-size:14px; font-weight:700; cursor:pointer;
   pointer-events:auto; white-space:nowrap; z-index:6; }
 .bt-hand-page:hover { filter:brightness(1.2); }
@@ -290,10 +293,10 @@
    不再向手牌置入常驻令牌；slamPending 时点亮提示「再点一次取消」）
    09-20 老板反馈「缺少明显的背包砸击按钮」根因实锤：底栏改 grid 后本按钮无坐标、
    auto-placement 落进隐式第 2 行溢出到视口外（实机 bottom≈1115 > 视口 1080），从加回来
-   就没露出过——显式钉回手牌列第 1 行贴底靠左，同时升级为攻击橙红大按钮（大字号 +
-   暖色描边 + 微光晕），在深色手牌区一眼可辨 */
-.bt-slam-btn { grid-row:1; grid-column:2; justify-self:start; align-self:flex-end;
-  flex:0 0 auto; margin:0 6px 6px; padding:10px 18px; border-radius:10px;
+   就没露出过——钉回手牌列第 1 行贴底靠左，同时升级为攻击橙红大按钮（大字号 +
+   暖色描边 + 微光晕），在深色手牌区一眼可辨
+   09-25：grid 坐标移交 .sts-hand-tools（与分栏按钮 flex 横排，不再同格叠放） */
+.bt-slam-btn { flex:0 0 auto; margin:0; padding:10px 18px; border-radius:10px;
   border:1.5px solid #c8843c; background:linear-gradient(180deg,#42291c,#241511); color:#ffd9a0;
   font-size:16px; font-weight:800; letter-spacing:1px; cursor:pointer;
   pointer-events:auto; white-space:nowrap; z-index:6;

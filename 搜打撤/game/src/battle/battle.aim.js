@@ -435,10 +435,12 @@ import { BATTLE_PHASES } from './battle.state.js';
     document.addEventListener('contextmenu', aimCtxSuppress, true);
     if (isCard) aim.raf = requestAnimationFrame(aimFollowStep);
   }
-  // STS2 CenterCard：指向卡进瞄准态=停靠视口底部中央、缩 0.75，箭头自卡画向指针
+  // STS2 CenterCard：指向卡进瞄准态=停靠视口底部中央（09-25 起不缩放），箭头自卡画向指针
   function enterDock(a) {
     const dockCx = window.innerWidth / 2;
-    const dockCy = window.innerHeight - (a.restCenter.h * 0.75) / 2;
+    // 09-25 老板：拖出不许变短——停靠态与自由拖同尺寸（scale 1.07），dock 中心按同尺寸
+    // 反推让卡底仍贴屏幕底缘（原按 0.75 缩后高度算，卡不缩后底边会伸出屏幕）
+    const dockCy = window.innerHeight - (a.restCenter.h * 1.07) / 2;
     const zD = uiScale();   // dock 喂 transform（布局值），dockAnchor 留视口口径喂箭头
     a.dock = { x: (dockCx - a.restCenter.cx) / zD, y: (dockCy - a.restCenter.cy) / zD };
     a.dockAnchor = { x: dockCx - a.vr.left, y: dockCy - a.vr.top };
@@ -465,7 +467,8 @@ import { BATTLE_PHASES } from './battle.state.js';
       aim.cur[axis] = tgt[axis] + (offset + spring) * decay;
       aim.vel[axis] = (aim.vel[axis] - omega * spring) * decay;
     }
-    aim.el.style.transform = `translate(${aim.cur.x.toFixed(1)}px,${aim.cur.y.toFixed(1)}px) scale(${docked ? 0.75 : 1.07})`;
+    // 09-25 老板：拖出不许变短——停靠态保持与自由拖同尺寸（原 0.75 缩放移除）
+    aim.el.style.transform = `translate(${aim.cur.x.toFixed(1)}px,${aim.cur.y.toFixed(1)}px) scale(1.07)`;
   }
   function advanceAimFollow(now) {
     if (!aim || !aim.follow) return;

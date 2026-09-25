@@ -1,3 +1,14 @@
+## 当前状态补充：战斗界面三修——拖出缩放/砸击遮挡/死亡演出（2026-09-25 13:1x +08:00，已提交）
+
+- 老板 09-25 中午报三题：「卡牌拖出改成不会变短 / 切换栏会挡住砸击的图，把砸击换个地方 / 敌人死亡动画和贴图素材丢失」，修完指示提交收尾。
+- **① 拖出不变短**：在场未提交修复（battle.aim.js applyAimTransform 去停靠态 0.75 缩放，标注 09-25 老板）+ 本会话补齐 dock 中心计算同步（enterDock dockCy 0.75→1.07，卡不缩后底边仍贴屏底）。
+- **② 砸击遮挡**：根因=expedition-battle.css:130 把分栏按钮 margin-left 122px→4px 且 z-index 8>6，同格（sts-hud grid col2 row1）直接压在砸击钮上；09-20 起靠猜宽度让位本就脆弱。根治：markup 收进 `.sts-hand-tools`（flex 横排，砸击在前贴能量、分栏在后），battle.css 两钮去 grid 坐标与猜宽 margin，expedition 覆盖规则删除。
+- **③ 死亡演出（两处根因，第二处为 09-24 引入的回归）**：
+  - winter.css `.sts-foe.dead` display:none!important 直接腰斩 battle.css fx-die 白闪塌缩——改为 pending 一拍（bt-death-pending，立绘原样，09-24 定版保留）结束后播完 fx-die 1s，foeDieVanish 显式 0%/99%/100% 帧 linear forwards 播完 visibility:hidden 不残留（steps 对 visibility 离散属性实测不翻转，弃用）。
+  - **mountUnitLayer 单位层冻结**：0d9c552（09-24 中心模块拆分）引入 showBattleStage 复用后 ovBody 不再每次重建，self 挂载点首轮即被 `selfMount.replaceWith(selfUnit)` 消耗，此后每轮渲染 mountUnitLayer 因 `[data-unit-mount="self"]` 缺失 return null，updateUnits（敌我血条/意图/死亡 dead 类差分）整层冻结——即老板实机看到的「死亡动画和贴图丢失」。修复：selfAnchor 回退复用已连接的 selfUnit。附带：updateFoes 尾部 appendChild 改为仅顺序变化才搬移（同节点搬移会重置 CSS 动画，死亡演出被反复打回起点收不了尾）。
+- **验证**：定向 5 测试文件 26 用例绿（bag-slam/battle-architecture/battle-modules/battle-presentation/battle-lifecycle）；实机（IAB+Vite 5173，rAF 劫持绕合成节流）采样死亡全链路 PASS：击杀→pending 拍（DP，立绘原样）→pending 释放 fx-die 起播（D-|fx-die）→1s 后 visibility:hidden 无残留；截屏确认砸击钮位置正常、尸体消失。**未验证**：问题①拖拽 dock 态实机（需真实拖拽，环境 rAF 节流未做）；问题②分栏按钮需手牌>12 叠触发，未实机复现遮挡场景（修复为结构性根治，逻辑确定）。教训在案：IAB 合成器暂停时原生 rAF 永不 fire 且 flushBattleRender 的 renderFrameQueued 会死锁合帧队列；并行会话写盘高频触发 Vite full reload 冲掉验证现场。
+- 提交范围：battle.aim.js / battle.view.js / battle.layers.js / battle.css / expedition-battle.css / winter.css 六文件；**card-rules.schema.js（A2 会话在途）不随本批提交**。
+
 ## 当前状态补充：UI 审查第三波——交互态/响应式/死代码删除/NAI 素材重绘（2026-09-25 11:2x +08:00，未提交待拍板）
 
 - 老板 09-25 上午放权（本会话现场指令）：「允许删除死代码、用 NovelAI 自己生图、大胆一点、多跑子代理挂了重派」。**与并行 cron 批的图标批示关系**：cron 交接段记录老板批示「UI 图标重绘方案暂时取消」（时序在先），本会话老板随后亲口重新授权生图，gear/coin 重绘据此执行并保留——最终去留请老板一并拍板。

@@ -332,11 +332,13 @@ import { aim, aimPlayedAt, selectCardByClick, showCardBlockReason, startAim, can
         <div class="sts-energy-wrap">
           <div class="sts-energy" title="能量：每回合固定 ${maxEnergy} 费">[[icon:bolt]] <b>${energy}</b><span>/${maxEnergy}</span></div>
         </div>
-        ${handPages > 1 ? `<button class="bt-hand-page has-more" data-act="btHandPage" aria-label="还有另一栏手牌，当前第 ${handPage + 1} 栏，共 ${handPages} 栏"
-          title="手牌分栏：每栏最多 ${HAND_PAGE_SIZE} 叠，放不下的进第二栏——点击切换第一栏/第二栏">[[icon:cards]] 第 ${handPage + 1}/${handPages} 栏</button>` : ''}
-        <button class="bt-slam-btn${slamPending ? ' active' : ''}" data-act="btSlam"
-          ${busy || infusingNow || (energy < 2 && !slamPending) ? 'disabled' : ''}
-          title="背包砸击：2 费 · 4 点固定伤害 · 按住拖到敌人身上松手直接释放，也可点击后再点敌人">[[icon:fire]] 砸击</button>
+        <div class="sts-hand-tools">
+          <button class="bt-slam-btn${slamPending ? ' active' : ''}" data-act="btSlam"
+            ${busy || infusingNow || (energy < 2 && !slamPending) ? 'disabled' : ''}
+            title="背包砸击：2 费 · 4 点固定伤害 · 按住拖到敌人身上松手直接释放，也可点击后再点敌人">[[icon:fire]] 砸击</button>
+          ${handPages > 1 ? `<button class="bt-hand-page has-more" data-act="btHandPage" aria-label="还有另一栏手牌，当前第 ${handPage + 1} 栏，共 ${handPages} 栏"
+            title="手牌分栏：每栏最多 ${HAND_PAGE_SIZE} 叠，放不下的进第二栏——点击切换第一栏/第二栏">[[icon:cards]] 第 ${handPage + 1}/${handPages} 栏</button>` : ''}
+        </div>
         <div class="bt-hand sts-hand"></div>
         <div class="sts-tactics" aria-label="战术操作">
           <div class="sts-tactics-secondary">
