@@ -7,9 +7,10 @@ const PERFORMANCE_BUDGETS = Object.freeze({
   packagedDuplicateBytesMax: 768 * 1024,
   entryGzipBytesMax: 256 * 1024,
   initialJsGzipBytesMax: 272 * 1024,
-  // 09-24 实测（CI run 36012211779 生产构建）：battle.view chunk gzip 101.4 KiB，
-  // 来源 0d9c552 七项存量红修复+中心模块拆分、c387e62 execPlay 拆片等真实代码增长。
-  featureChunkGzipBytesMax: 102 * 1024,
+  // 09-25 实测（CI run 36120407786 生产构建）：battle feature chunk gzip 102.1 KiB > 102.0 KiB——
+  // b3846cf 卡库三发现批 cards.sync.js 增补（ensureRandomPoolFixes 等 +18 行）顶破 0.6 KiB 余量。
+  // 按本文件自身规矩附实测数据抬至 103 KiB（留 0.9 KiB 余量保持门禁紧度；仅构建门禁消费）。
+  featureChunkGzipBytesMax: 103 * 1024,
   narrativeChunkGzipBytesMax: 40 * 1024,
   cssGzipBytesMax: 128 * 1024,
   packageBytesMax: 98 * 1024 * 1024,
