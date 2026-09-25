@@ -97,12 +97,14 @@
   opacity: .12;
   transition: opacity var(--shop-fast);
 }
+/* W2a-补 角标编号：2026-09-25 对齐 page-upgrade.css W1b 画法（短线在号右、
+   top:9px），两页镜像打架且 top 不齐的问题收口 */
 #overlay #hubMain.hub-shop .shelf-item::after {
   content: '0' counter(goods);
-  position: absolute; top: 7px; right: 11px; z-index: 2; pointer-events: none;
-  padding-left: 16px; font-size: 9px; line-height: 1; letter-spacing: .22em;
+  position: absolute; top: 9px; right: 12px; z-index: 2; pointer-events: none;
+  padding-right: 16px; font-size: 9px; line-height: 1; letter-spacing: .22em;
   color: rgba(217, 187, 130, .55);
-  background: linear-gradient(90deg, transparent, rgba(217, 187, 130, .4)) left center / 12px 1px no-repeat;
+  background: linear-gradient(270deg, transparent, rgba(217, 187, 130, .4)) right center / 12px 1px no-repeat;
   transition: color var(--shop-fast);
 }
 #overlay #hubMain.hub-shop .shelf-item:hover {
@@ -211,3 +213,54 @@
 
 /* ═════════ T6 光标自查：button 默认 cursor 补 pointer（禁用态除外） ═════════ */
 #overlay #hubMain.hub-shop button:not(:disabled) { cursor: pointer; }
+
+/* ═══════════════════════════════════════════════════════════════════
+   W6 对局内补给站走查修复（2026-09-25 审图 07）——DOM 见 game.run.shop.js
+   renderShop（.shop-pg.sc-shop）。样式基底在 expedition-shop.css（本文件
+   之后加载，同特异性可覆盖；涉 !important 处已对齐加注）。全部规则只挂
+   .shop-pg 作用域，不影响上方基地商店页签（#hubMain.hub-shop）。
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* W6a 货板 flex:1 拉伸后货架贴顶、页下半空置 → 货板纵向居中，货架视觉落回
+   中部（卖牌处页 .sell-board 为 flex:0 0 auto 不拉伸，:not 排除保持原样） */
+#overlay .shop-pg.sc-shop .shop-board:not(.sell-board) {
+  display: flex; flex-direction: column; justify-content: center;
+}
+
+/* W6b 收购台图标容器：深色方块近似占位符 → #d9bb82 细描边 + 图标轻微提亮
+   （基底 border 带 !important，此处同权重、本文件后加载生效） */
+#overlay .shop-sellpost .sellpost-coin {
+  border: 1px solid rgba(217, 187, 130, .65) !important;
+  background: linear-gradient(180deg, rgba(23, 48, 62, .8), rgba(8, 23, 30, .85));
+  box-shadow: 0 0 8px rgba(217, 187, 130, .16), inset 0 0 6px rgba(217, 187, 130, .08);
+}
+#overlay .shop-sellpost .sellpost-coin .ic {
+  filter: brightness(1.25) drop-shadow(0 0 4px rgba(217, 187, 130, .35));
+}
+
+/* W6c 货架空艺术窗兜底：12% 透明度居中占位底纹（纯 CSS 渐变、不引新图片；
+   叠在位图上时仅为极淡十字底纹，不抢画面） */
+#overlay .shop-pg .shop-slot .hs-card .hsc-art { position: relative; }
+#overlay .shop-pg .shop-slot .hs-card .hsc-art::after {
+  content: ''; position: absolute; inset: 0; border-radius: inherit;
+  pointer-events: none; opacity: .12;
+  background:
+    linear-gradient(45deg, transparent 47.5%, #d9bb82 47.5%, #d9bb82 52.5%, transparent 52.5%),
+    linear-gradient(-45deg, transparent 47.5%, #d9bb82 47.5%, #d9bb82 52.5%, transparent 52.5%),
+    radial-gradient(circle at 50% 50%, transparent 38%, #d9bb82 41%, #d9bb82 52%, transparent 56%);
+}
+
+/* W6d 页头「背包」钮：亮白实底夹在统计章间语义混乱 → 深底 + 下缘金线
+   （#d9bb82），并与右侧统计章拉开 12px；:not(:hover) 让 expedition-shop
+   的 hover 深底反馈继续生效 */
+#overlay .shop-pg .shop-bag-btn:not(:hover) {
+  margin-right: 12px;
+  border: 1px solid rgba(217, 187, 130, .45) !important;
+  border-bottom: 2px solid #d9bb82 !important;
+  background: linear-gradient(180deg, rgba(10, 28, 40, .95), rgba(7, 20, 30, .95)) !important;
+  color: #f0e7d0 !important;
+  box-shadow: 0 2px 8px rgba(2, 8, 14, .4);
+}
+
+/* W6e 币值圆牌（.hsc-val 右下角悬出 -.48em）压描述末行 → 描述区右侧让位 */
+#overlay .shop-pg .hs-card .hsc-desc { padding-right: 16px; }

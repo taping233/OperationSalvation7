@@ -8,5 +8,9 @@
 .sts-float.fx-routine { animation-duration: .78s; }
 
 @media (prefers-reduced-motion: reduce) {
-  .sts-float.fx-impact, .sts-float.fx-finisher, .sts-float.fx-routine { animation: none; }
+  /* 09-25：animation:none 会丢掉 forwards 终态（数字静显 1.4s 不退场）——
+     改 .001ms 时长保留终态（口径同 expedition-battle.css 的 reduced-motion 豁免块） */
+  .sts-float.fx-impact, .sts-float.fx-finisher, .sts-float.fx-routine {
+    animation-duration: .001ms !important; animation-iteration-count: 1 !important;
+  }
 }

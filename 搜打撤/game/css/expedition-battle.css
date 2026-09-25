@@ -8,14 +8,14 @@
   background-position:center bottom; background-size:cover;
 }
 #overlay .battle-stage.sts[data-boss="1"] { background-image:linear-gradient(180deg,rgba(30,14,8,.1),rgba(12,6,4,.2)),url('../assets/scenes/battle-street-amber-anime-v1.webp'); }
-#overlay .battle-stage.sts::after { content:''; position:absolute; inset:0; z-index:-1; pointer-events:none; opacity:.22; background:radial-gradient(circle at 50% 42%,rgba(183,216,230,.18),transparent 42%),linear-gradient(90deg,rgba(30,58,72,.16),transparent 45%,rgba(78,38,55,.2)); }
+:where(#overlay) .battle-stage.sts::after { content:''; position:absolute; inset:0; z-index:-1; pointer-events:none; opacity:.22; background:radial-gradient(circle at 50% 42%,rgba(183,216,230,.18),transparent 42%),linear-gradient(90deg,rgba(30,58,72,.16),transparent 45%,rgba(78,38,55,.2)); }   /* 09-25：#overlay 改 :where() 降特异性，让 battle.css 的首脑 [data-asset-key]::after 差分 tint 能压过本条 */
 /* 2026-09-13 留言：底部黑底压缩——压暗段下移到 85% 线，70~85% 露出战场背景 */
 /* 2026-09-13 老板口令：背景图 16:9 零余量无法滑动，改为在 67% 脚线处加一层前景地板平面
    （暖沥青调半透明、顶缘 1.2% 软过渡），人与怪踩在平面上，原路面 86% 内容透出保留 */
 #overlay .battle-stage.sts .battle-stage-shade { z-index:0; background:
   linear-gradient(180deg,rgba(0,0,0,0) 65.8%,rgba(52,41,32,.5) 67.3%,rgba(42,33,26,.68) 76%,rgba(30,24,19,.8) 100%),
   linear-gradient(180deg,rgba(5,10,16,.58),rgba(7,13,19,.08) 28%,rgba(5,8,13,.14) 70%,rgba(5,8,13,.34) 85%,rgba(4,7,11,.88)); }
-#overlay .battle-stage.sts > *:not(.battle-stage-shade) { position:relative; z-index:1; }
+#overlay .battle-stage.sts > *:not(.battle-stage-shade):not(.sts-ambient) { position:relative; z-index:1; }   /* 09-25：排除氛围尘层（battle.css absolute + inset:0，被强改 relative 后尘点从顶部飘出裁剪区） */
 /* 2026-09-18 留言「药水栏还是不能用」根因：上行的通配 z-index:1 让 .bt-potions 与场景层
    .sts-arena 同层且 DOM 靠前——透明的场景画布把顶栏点击全部吃掉（看得见点不着）。
    药水栏整体抬到场景之上：容器继续穿透点击，chip 本体可点。 */
@@ -27,7 +27,7 @@
 .sts-encounter-kicker { color:#b9cfda; font-size:10px; letter-spacing:2px; text-transform:uppercase; }
 .sts-encounter b { color:#fff2cf; font-size:14px; }
 .sts-encounter > span:last-child { color:#d7d2c8; font-size:12px; }
-.sts-phase-dot { width:7px; height:7px; flex:0 0 7px; border-radius:50%; background:#a8d8b4; box-shadow:0 0 9px currentColor; }
+.sts-phase-dot { width:7px; height:7px; flex:0 0 7px; border-radius:50%; color:#a8d8b4; background:#a8d8b4; box-shadow:0 0 9px currentColor; }   /* 09-25：补 color，辉光 currentColor 不再吃继承灰白 */
 .sts-phase-dot.foe { color:#df8e83; background:#df8e83; }
 .sts-phase-dot.focus { color:#e5c887; background:#e5c887; }
 .sts-phase-dot.warn { color:#e4a172; background:#e4a172; }
@@ -44,7 +44,9 @@
 #overlay .battle-stage.sts .sts-me, #overlay .battle-stage.sts .sts-foes, #overlay .battle-stage.sts .sts-allies { bottom:clamp(5%,3vh,9%); }
 #overlay .battle-stage.sts .sts-foes { gap:clamp(10px,1.4vw,24px); }
 #overlay .battle-stage.sts .sts-foe:not(.dead) .sts-nameplate { border-color:rgba(218,167,151,.42); background:linear-gradient(180deg,rgba(30,16,21,.7),rgba(8,10,14,.9)); }
-#overlay .battle-stage.sts .sts-intent { top:-42px; color:#ffe8bf; border-color:rgba(231,193,117,.62); background:rgba(20,15,16,.9); box-shadow:0 0 16px rgba(196,133,86,.16); }
+/* 09-25：意图胶囊改锚名牌上缘（bottom 64px ≈ 名牌高约 50px + winter 悬挂 6px + 8px 间距）——
+   原顶:-42px 挂在含整幅立绘的槽位顶，立绘不可见时胶囊悬空在半空 */
+#overlay .battle-stage.sts .sts-intent { top:auto; bottom:64px; color:#ffe8bf; border-color:rgba(231,193,117,.62); background:rgba(20,15,16,.9); box-shadow:0 0 16px rgba(196,133,86,.16); }
 #overlay .battle-stage.sts .sts-hp i { background:linear-gradient(90deg,#d26c68,#f0b276); }
 
 /* 2026-09-13 留言：HUD 渐变底前半全透明（85% 舞台高度≈自身 50% 处才渐深），去掉原 69% 处 border-top 细线 */
@@ -61,7 +63,9 @@
   #overlay .battle-stage.sts .sts-hud-r { margin-left:auto; }
   .sts-arena-caption { top:10px; }
 }
-@media (max-height:760px) and (min-width:901px) {
+@media (max-height:760px) {
+  /* 矮窗档去掉 min-width 闸：档内 min-height 值均被下方 !important 契约压制，
+     实际延伸到窄窗的只有 topbar padding-block:4px（良性收紧） */
   #overlay .battle-stage.sts .sts-topbar { min-height:42px; padding-block:4px; }
   .sts-arena { min-height:clamp(220px,40vh,430px); }
   #overlay .battle-stage.sts .sts-hud { min-height:155px; }
@@ -82,7 +86,7 @@
 /* winter.css contains legacy calibration rules with !important. These are the
    final battle-stage contract and intentionally win because this sheet is last. */
 #overlay .battle-stage.sts { position:relative!important; display:flex!important; flex-direction:column!important; min-height:0!important; height:100%!important; }
-#overlay .battle-stage.sts .sts-arena { flex:1 1 auto!important; min-height:0!important; height:auto!important; overflow:visible!important; }
+#overlay .battle-stage.sts .sts-arena { flex:1 1 auto!important; min-height:clamp(120px,18vh,240px)!important; height:auto!important; overflow:visible!important; }
 #overlay .battle-stage.sts .sts-unit { bottom:clamp(3%,2.5vh,6%)!important; }
 #overlay .battle-stage.sts .sts-me { bottom:60px!important; }
 #overlay .battle-stage.sts .sts-foes { bottom:60px!important; }
@@ -114,8 +118,8 @@
 #overlay .battle-stage.sts .sts-topbar { min-height:54px; }
 #overlay .battle-stage.sts .sts-topbar .sts-hud-r:empty { display:none; }
 #overlay .battle-stage.sts .sts-arena { min-height:clamp(250px,calc(100vh - 355px),600px); overflow:hidden; }
-#overlay .battle-stage.sts .sts-arena::before { content:'我方'; position:absolute; left:clamp(4%,6vw,7%); bottom:calc(clamp(5%,3vh,9%) + 188px); color:rgba(199,220,218,.58); font-size:10px; letter-spacing:2px; }
-#overlay .battle-stage.sts .sts-arena::after { content:'敌方意图'; position:absolute; right:clamp(5%,7vw,9%); bottom:calc(clamp(5%,3vh,9%) + 188px); color:rgba(231,192,145,.7); font-size:10px; letter-spacing:2px; }
+#overlay .battle-stage.sts .sts-arena::before { content:'我方'; position:absolute; left:clamp(4%,6vw,7%); bottom:calc(clamp(5%,3vh,9%) + 188px); color:rgba(199,220,218,.85); text-shadow:0 1px 2px rgba(0,0,0,.8); font-size:10px; letter-spacing:2px; }
+#overlay .battle-stage.sts .sts-arena::after { content:'敌方意图'; position:absolute; right:clamp(5%,7vw,9%); bottom:calc(clamp(5%,3vh,9%) + 188px); color:rgba(231,192,145,.85); text-shadow:0 1px 2px rgba(0,0,0,.8); font-size:10px; letter-spacing:2px; }
 #overlay .battle-stage.sts .sts-arena-caption { top:18px; }
 #overlay .battle-stage.sts .sts-me .sts-figure img, #overlay .battle-stage.sts .sts-foe .sts-figure img, #overlay .battle-stage.sts .sts-ally .sts-figure img { background:transparent!important; mix-blend-mode:normal; }
 #overlay .battle-stage.sts .sts-figure { background:transparent!important; }
@@ -149,8 +153,8 @@
 #overlay .sts-hand .bt-card.click-selected { outline:2px solid #efcd89; outline-offset:3px; box-shadow:0 0 20px #e9c47a55; }
 @media (max-height:760px) and (min-width:901px) {
   #overlay .battle-stage.sts .sts-hand .bt-slot:has(.bt-card.click-selected) { z-index:40!important; }
-  #overlay .battle-stage.sts .sts-hand .bt-card.click-selected { transform:translate(-330px,-8px) scale(1.02); z-index:30; }
-  body #overlay .battle-stage.sts .sts-hand .bt-slot:hover .bt-card.click-selected:not(.off):not(.aim-lift) { transform:translate(-330px,-8px) scale(1.02)!important; }
+  #overlay .battle-stage.sts .sts-hand .bt-card.click-selected { transform:translate(max(-330px,-28vw),-8px) scale(1.02); z-index:30; }
+  body #overlay .battle-stage.sts .sts-hand .bt-slot:hover .bt-card.click-selected:not(.off):not(.aim-lift) { transform:translate(max(-330px,-28vw),-8px) scale(1.02)!important; }
 }
 #overlay .sts-hand .bt-card.click-selected::after { content:'选择目标 · Esc 取消'; position:absolute; bottom:4px; left:4px; right:4px; padding:4px 0; color:#112735; background:#dfc28d; font-size:10px; text-align:center; pointer-events:none; }
 

@@ -46,7 +46,7 @@ body.cardlib-open #overlay .photo-studio-v3 .studio-photo-paper[data-photo-mount
 body.cardlib-open #overlay .photo-studio-v3 .studio-photo-paper[data-photo-mount]::after { opacity:.06; }
 body.cardlib-open #overlay .photo-studio-v3 .lib-cardwrap[aria-current="true"] .studio-photo-paper[data-photo-mount] {
   border-color:transparent!important;
-  outline:2px solid #aac3b0;
+  outline:2px solid #d9bb82; /* 09-25 验收反馈：选中相框青绿描边统一金线语言 */
   outline-offset:4px!important;
   box-shadow:var(--paper-shadow)!important;
 }

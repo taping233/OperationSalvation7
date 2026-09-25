@@ -1,4 +1,6 @@
 /* 职责拆分自 base.css；保持原始级联顺序。 */
+/* 通用：术语词条（悬停/点击出解释，走 tooltip 层） */
+  [data-term] { cursor: help; }
 /* ---------------- 战斗：多敌人横排 + 拖拽选目标 ---------------- */
   .bt-foes { display: flex; flex-wrap: wrap; gap: 10px; align-items: stretch; text-align: left; }
   .bt-foe { position: relative; flex: 1 1 200px; min-width: 200px; display: flex; gap: 10px; align-items: center;
@@ -124,7 +126,7 @@
 .bt-potion.need-target::after { content:'↳敌'; font-size:11px; color:#ff9d8a; margin-left:2px; }
 .bt-potion.aim-lift { transform:translateY(-3px) scale(1.05); z-index:7; }
 /* 不可使用的道具（2026-09-09 老板 #10）：虚化、不响应点击，悬停给原因 */
-.bt-potion.off { pointer-events:none; cursor:default; filter:grayscale(.85) brightness(.55); opacity:.75;
+.bt-potion.off { pointer-events:none; cursor:default; opacity:.5; filter:grayscale(.8);
   border-color:rgba(140,140,140,.4); }
 .bt-potions-empty { pointer-events:none; font-size:clamp(11px,1.1vw,13px); color:#1c1a16;
   padding:4px 10px; border:1px dashed rgba(122,107,84,.5); border-radius:999px;
@@ -311,7 +313,7 @@
 /* 2026-09-13 老板口令：弹出动画要慢、带物理弹性——0.5s 过冲弹簧曲线（transform 合成器通道） */
 .sts-hand .bt-card { transition:transform .5s var(--ease-spring); }
 .sts-hand .bt-card.aim-lift { transition:none; } /* 拖动期间交给 rAF 跟手，松手再用弹簧过渡回手牌 */
-.sts-hand .bt-card.off { transform:translateY(8px) scale(.97); filter:brightness(.55) saturate(.7); }
+.sts-hand .bt-card.off { transform:translateY(8px) scale(.97); opacity:.55; filter:grayscale(.75); }
 .sts-hand .bt-slot:hover .bt-card:not(.off):not(.aim-lift) { transform:translateY(-24px) scale(1.04); }
 .sts-hand .bt-slot:hover .bt-card.off { transform:translateY(8px) scale(.97); }
 /* 悬停白闪（STS2 式：亮一下再退去）；不可用牌不闪 */

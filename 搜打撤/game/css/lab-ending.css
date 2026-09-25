@@ -3,7 +3,7 @@
  *   全屏三页：基调渐变（页底）→ 插画层（缺图 404 透明自然露出渐变）
  *   → 压暗遮罩 → 打字机字幕；ken burns 缓推 + 页间淡入。
  * ============================================================ */
-#labEnding { position: fixed; inset: 0; z-index: 9500; background: #000; opacity: 0; transition: opacity .6s ease; cursor: pointer; overflow: hidden; }
+#labEnding { position: fixed; inset: 0; z-index: 9500; background: #000; opacity: 0; transition: opacity .7s ease; cursor: pointer; overflow: hidden; }
 #labEnding.on { opacity: 1; }
 
 #labEnding .lab-end-page { position: absolute; inset: 0; opacity: 0; visibility: hidden; transition: opacity .7s ease; }

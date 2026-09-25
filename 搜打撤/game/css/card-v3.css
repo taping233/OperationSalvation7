@@ -161,8 +161,6 @@
   flex:0 0 auto!important;
   aspect-ratio:384/291!important;
 }
-/* 牌库虚拟滚动占位高度按新卡高重估（卡变矮：紧凑卡 ~11px 字号 → 卡身 ~70px + 边距） */
-.lib-item{contain-intrinsic-size:auto 122px}
 /* v3.3 悬浮球裁剪修复：费用/币值/伤害球负偏移浮出卡缘（~0.55em+外环 ≈8px），
    .lib-item 的 content-visibility:auto（滚动性能）自带 paint 裁剪，
    图鉴页 lib-item padding:0 → 球一出卡即被切。padding 留 10px 裁剪余量 +

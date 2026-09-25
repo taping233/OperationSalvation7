@@ -48,6 +48,15 @@
   background: linear-gradient(90deg, transparent, #d9bb82cc, transparent);
   box-shadow: 0 0 5px #d9bb8245;
 }
+/* W1c-2 头像空档态（09-25 P1）：winter.css:938 的浅灰实心底（#9b9b9b→#666 + #c2c2c2 边）
+   在未选职业时露出成刺眼灰块，占位字（医/旅）不可见——按行规不碰 winter，在此以
+   更高特异性（+ #charPanel 一级）覆盖为深蓝底 + 冷青弱边 + 暖金占位字；
+   选中职业后立绘 img 盖满底，不受影响 */
+#sidebar #charPanel .hero-ava {
+  background: radial-gradient(ellipse at 50% 30%, #17323f, #0a1a24 88%);
+  border-color: rgba(159, 183, 188, .25);
+  color: #d9bb82;
+}
 
 /* ═════════ W2 简图面板：数值排版仪式感（标签小而灰青、数值暖米金表格数字） ═════════ */
 
@@ -78,7 +87,7 @@
 #sidebar .route-heading { padding-bottom: 7px; border-bottom: 1px solid rgba(159, 183, 188, .13); }
 #sidebar .route-help { padding-top: 7px; border-top: 1px solid rgba(159, 183, 188, .11); }
 #sidebar .route-help { color: #93a9ad; }
-#sidebar .route-help span { color: #7e969c; letter-spacing: .08em; }
+#sidebar .route-help span { color: #93a9ad; letter-spacing: .08em; } /* 09-25 P3：#7e969c 对比临界，提到 route-help 同级 */
 #sidebar .route-objective { color: #93a9ad; letter-spacing: .05em; }
 
 /* W3b 路线卡：冷青半透明档案卡 + hover 金线上浮 + 按压快按慢弹 */
@@ -243,7 +252,7 @@
   transform: translateY(0) scale(.95);
   transition-duration: var(--exh-press);
 }
-#bagBtnFloat #bagCountFloat { color: #ecd9ad; font-variant-numeric: tabular-nums; }
+#bagBtnFloat #bagCountFloat { color: #ecd9ad; font-variant-numeric: tabular-nums; font-family: 'Cascadia Code', monospace; } /* 09-25 P3：数字字体与 HUD 其余等宽制式对齐 */
 
 /* ═════════ T2 焦点态：键盘导航金线焦点环（对局 HUD 全部可焦元素） ═════════ */
 #sidebar .route-option:focus-visible,

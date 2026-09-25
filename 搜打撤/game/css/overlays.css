@@ -127,6 +127,7 @@
     border: 1.5px solid rgba(190,160,255,.75); box-shadow: 0 2px 6px rgba(0,0,0,.5);
     cursor: pointer; transition: transform .12s, box-shadow .12s; }
   .bt-infchip:hover { transform: translateY(-1px) scale(1.05); box-shadow: 0 3px 10px rgba(120,80,255,.55); }
+  .bt-infchip:active { transform: scale(.96); }
   .bt-infchip img { width: 11px; height: 11px; }
 
   /* ---------------- 标题界面 / 退出 ---------------- */
@@ -273,7 +274,7 @@
   @media (max-width: 1080px) { .slot-deck { overflow-x: auto; justify-content: flex-start; }
     .slot-page .slot-card { flex: 0 0 208px; } }
 
-  .ov-btn:disabled { opacity: 0.35; cursor: default; }
+  .ov-btn:disabled { opacity: 0.45; cursor: default; }
   .ov-btn:disabled:hover { filter: none; transform: none; box-shadow: none; }
   /* U4（2026-09-19 走查）：BOSS 态背包/撤离的「可点但受限」态——观感同禁用，
      但保留点击反馈（点击走 handler 给 log+deny 音效说明原因），不再只靠 title 解释。 */

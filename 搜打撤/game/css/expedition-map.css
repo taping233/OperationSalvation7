@@ -1,6 +1,6 @@
 /* 战术远征图：底图保留冬境氛围，路线与几何结点负责可读性。 */
 #game { background:#07131d; }
-#expeditionChapter { position: absolute; left: 28px; top: 107px; z-index: 3; width: 180px; pointer-events: none; color: #aebfc7; }
+#expeditionChapter { position: absolute; left: 28px; top: 107px; z-index: 3; width: 180px; pointer-events: none; color: #aebfc7; background: rgba(7, 18, 26, .55); padding: 8px 10px; border-radius: 2px; border: 1px solid rgba(159, 183, 188, .14); } /* 09-25 P3：层列表加半透明细底板，不再裸浮在地图上 */
 .chapter-kicker { font: 9px 'Cascadia Code',monospace; letter-spacing: 2px; color: #82b8d0; margin-bottom: 16px; }
 #expeditionChapter ol { list-style: none; margin: 0; padding: 0; border-left: 1px solid #a4bec444; }
 #expeditionChapter li { display: flex; align-items: center; gap: 12px; padding: 8px 0 8px 14px; font-size: 11px; letter-spacing: 2px; border-left: 2px solid transparent; margin-left: -1px; color: #90a6af; }
@@ -13,7 +13,11 @@
 #layerBanner .lb-en { font-size: 8px; letter-spacing: 3px; }
 #btnMapOverview { position: absolute; right: 22px; bottom: 20px; z-index: 5; background: #0b1d29e8; border: 1px solid #82b8d066; border-radius:2px; padding: 10px 14px; color: #d2dfe1; font-size: 11px; cursor: pointer; box-shadow:0 8px 22px #02091066; }
 #btnMapOverview span { display: inline-block; margin-left: 14px; color: #dfc28d; font: 10px monospace; }
-#topBtns #btnLocate { position: fixed; bottom: 162px; right: 157px; width: 36px; height: 36px; background: #0d202cdb; border: 1px solid #8ba1a866; }
+/* 09-25 P1：定位键基准统一——winter.css:1676 以 !important 定 bottom:calc(142px + 12px + 82px)
+   （底栏 142 + 间距 12 + 键组 82），right 与 #bagBtnFloat 的 22px 同轴；本条原 bottom:162px /
+   right:157px 是被覆盖的死值，现改为与 winter 生效值显式同值，仅作局部锚点（单一来源语义，
+   winter 的 !important 仍为最终裁决） */
+#topBtns #btnLocate { position: fixed; bottom: calc(142px + 12px + 82px); right: 22px; width: 36px; height: 36px; background: #0d202cdb; border: 1px solid #8ba1a866; }
 #topBtns #btnHome.exit-btn { background: #203543; box-shadow: none; color: #c6d4d9; border: 1px solid #7b959944; }
 #logPanel { background: #0a1822e8; border: 1px solid #8ba1a82e; max-width: min(340px,30vw); border-radius:2px; }
 body.lobby #expeditionChapter, body.lobby #btnMapOverview, body.page-opaque #expeditionChapter, body.page-opaque #btnMapOverview { display: none; }
@@ -21,7 +25,7 @@ body.lobby #expeditionChapter, body.lobby #btnMapOverview, body.page-opaque #exp
   #expeditionChapter { left: 16px; top: 116px; width: 150px; }
   #expeditionChapter li { padding-block: 5px; font-size: 10px; letter-spacing: 1px; }
   #expeditionChapter > small { display: none; }
-  #topBtns #btnLocate { bottom: 210px; }
+  #topBtns #btnLocate { bottom: calc(142px + 12px + 82px); } /* 09-25：原 210px 为死值，与 winter.css:1676 !important 生效值同值 */
   #logPanel { max-width: 260px; }
 }
 @media(max-width: 560px) {
@@ -32,4 +36,4 @@ body.lobby #expeditionChapter, body.lobby #btnMapOverview, body.page-opaque #exp
   #expeditionChapter li span { display: none; }
   #layerBanner { top: 78px; }
 }
-@media(max-height: 700px) and (min-width: 851px) { #topBtns #btnLocate { bottom: 142px; } }
+@media(max-height: 700px) and (min-width: 851px) { #topBtns #btnLocate { bottom: calc(122px + 12px + 82px); } } /* 09-25：原 142px 为死值，与 expedition.css:463 !important 生效值同值（矮窗口档 122px 底栏） */

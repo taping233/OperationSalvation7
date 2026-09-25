@@ -531,12 +531,12 @@ function createGameMenuController(deps) {
       ? SDT.Meta.ACHIEVEMENTS.filter(a => SDT.Meta.isUnlocked(a, baseData)).map(a => a.name)
       : [];
     const prog = run
-      ? `<div class="si-line si-progress"><em>当前进度</em><b>${run.nestActive ? '研究所远征进行中' :`第 ${(run.layerIdx ?? 0) + 1} 层 · ${esc(run.myClass || '未选人物')}`}</b></div>`
+      ? `<div class="si-line si-progress"><em>PROGRESS</em>当前进度<b>${run.nestActive ? '研究所远征进行中' :`第 ${(run.layerIdx ?? 0) + 1} 层 · ${esc(run.myClass || '未选人物')}`}</b></div>`
       : '';
     const saved = Number(run?.savedAt) > 0 ? new Date(Number(run.savedAt)) : null;
     const p = (n) => String(n).padStart(2, '0');
     const savedLine = saved && !Number.isNaN(saved.getTime())
-      ? `<div class="si-line si-saved"><em>上次保存</em>${p(saved.getMonth() + 1)}-${p(saved.getDate())} ${p(saved.getHours())}:${p(saved.getMinutes())}</div>`
+      ? `<div class="si-line si-saved"><em>SAVED</em>上次保存 ${p(saved.getMonth() + 1)}-${p(saved.getDate())} ${p(saved.getHours())}:${p(saved.getMinutes())}</div>`
       : '';
     return prog +
       savedLine +

@@ -56,7 +56,7 @@
 #overlay .card.chest .bt-hand { min-height:240px; padding:24px 8px; background:linear-gradient(180deg,#09182440,#09182400); }
 #overlay .card.chest .evt-sts-desc { color:#b8cbd0; text-align:left; font-size:12px; margin:8px 0; }
 .loot-footer-note { font-size:11px; color:#8da7b4; margin:12px 0; text-align:center; }
-#overlay .card.chest .chest-ops { display:grid; grid-template-columns:1fr 1.5fr; gap:12px; padding-top:12px; border-top:1px solid #adbec633; }
+#overlay .card.chest .chest-ops { display:grid; grid-template-columns:1fr 1.5fr; gap:12px; padding-top:12px; border-top:1px solid rgba(216,192,142,.35); }
 #overlay .card.chest .chest-ops .ov-btn { min-height:44px; font-size:12px; }
 /* 短视口战后开箱：压缩装饰和间距，把战绩、奖励卡与领取按钮收进首屏。 */
 @media (max-height:760px) and (min-width:761px) {
@@ -95,7 +95,7 @@
   #overlay .card.chest .bt-hand:not([data-n]) .hs-card { font-size:13px!important; }
   #overlay .card.chest .loot-footer-note { margin:4px 0; font-size:12px; }
   #overlay .card.chest .chest-ops { gap:10px; margin-top:8px; padding-top:8px; }
-  #overlay .card.chest .chest-ops .ov-btn { min-height:48px; padding:8px 12px; font-size:14px; letter-spacing:1px; }
+  #overlay .card.chest .chest-ops .ov-btn { min-height:44px; padding:8px 12px; font-size:12px; letter-spacing:1px; }
 }
 @media(max-width:760px) {
   #overlay .node-panel { width:62%; padding:24px 20px; }

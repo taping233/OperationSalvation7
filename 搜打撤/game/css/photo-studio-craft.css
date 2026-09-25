@@ -1,7 +1,7 @@
 /* Cabinet joinery: the same brass, paper and leather from index to inspection. */
 body.cardlib-open #overlay .photo-studio-v3.studio-index-layout .library-head {
-  grid-template-columns:minmax(0,1fr) auto!important;
-  grid-template-areas:'tools count'!important;
+  grid-template-columns:auto minmax(0,1fr)!important;
+  grid-template-areas:'count tools'!important;
   border-bottom:3px solid #5f573d!important;
   box-shadow:inset 0 -1px #baa47770,0 3px 0 #080f0a,0 5px 0 #a18b5838;
 }
@@ -41,11 +41,24 @@ body.cardlib-open #overlay .studio-index-layout .library-title h2 {
   filter:none!important;
 }
 body.cardlib-open #overlay .studio-index-layout .clib-count {
+  margin-left:84px; /* 09-25 验收反馈：铭牌移到左列后给左上 ak-exit 返回键（64×58）让位 */
   padding:6px 14px;
   border:1px solid #8a795657!important;
   border-radius:2px;
-  background:linear-gradient(180deg,#0a140c80,#36463240)!important;
+  background:#17211c!important; /* 09-25 半透明深绿叠纸白页头对比度不足，改实底墨绿（金字 ≥4.5:1） */
   box-shadow:inset 0 1px 3px #0006,0 1px #ddc48e20!important;
+}
+/* 09-25 导出工具键与馆藏铭牌同语言：实底墨绿+金字（原半透明浅底压在纸纹上发飘） */
+body.cardlib-open #overlay .photo-studio-v3 .library-tools>.studio-edit-toggle {
+  background:#17211c!important;
+  border-color:rgba(236,217,176,.4)!important;
+  color:#ecd9b0!important;
+  box-shadow:0 2px 5px rgba(20,10,6,.3)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .library-tools>.studio-edit-toggle:hover {
+  background:#24352b!important;
+  border-color:rgba(236,217,176,.7)!important;
+  color:#f4e6c2!important;
 }
 body.cardlib-open #overlay .studio-index-layout .clib-main::before { opacity:.32; }
 body.cardlib-open #overlay .studio-index-layout .studio-catalog .studio-filterbar {
@@ -157,4 +170,11 @@ body.cardlib-open #overlay .studio-index-layout .studio-photo-art img { filter:n
   body.cardlib-open #overlay .studio-index-layout .library-title h2 { font-size:23px!important; letter-spacing:.12em!important; }
   body.cardlib-open #overlay .studio-index-layout .clib-count { padding:5px 8px; }
   body.cardlib-open #overlay .studio-index-layout .studio-index-heading>span:first-child { padding:3px 7px; }
+}
+/* 矮窗口档：页头/筛选条 padding 收至 10px，18px 装饰边框收至 10px，给卡列表让高度 */
+@media(max-height:700px) {
+  body.cardlib-open #overlay .photo-studio-v3.studio-index-layout .library-head { padding:10px!important; }
+  body.cardlib-open #overlay .studio-index-layout .studio-catalog .studio-filterbar { padding:10px!important; border-width:10px!important; }
+  body.cardlib-open #overlay .studio-index-layout .library-inspector,
+  body.cardlib-open #cardZoom.cz-photo .cz-photo-info { border-width:10px; }
 }

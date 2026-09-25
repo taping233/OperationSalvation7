@@ -336,7 +336,7 @@ import { aim, aimPlayedAt, selectCardByClick, showCardBlockReason, startAim, can
           title="手牌分栏：每栏最多 ${HAND_PAGE_SIZE} 叠，放不下的进第二栏——点击切换第一栏/第二栏">[[icon:cards]] 第 ${handPage + 1}/${handPages} 栏</button>` : ''}
         <button class="bt-slam-btn${slamPending ? ' active' : ''}" data-act="btSlam"
           ${busy || infusingNow || (energy < 2 && !slamPending) ? 'disabled' : ''}
-          title="背包砸击：2 费 · 4 点固定伤害 · 按住拖到敌人身上松手直接释放，也可点击后再点敌人">[[icon:bag]] 砸击</button>
+          title="背包砸击：2 费 · 4 点固定伤害 · 按住拖到敌人身上松手直接释放，也可点击后再点敌人">[[icon:fire]] 砸击</button>
         <div class="bt-hand sts-hand"></div>
         <div class="sts-tactics" aria-label="战术操作">
           <div class="sts-tactics-secondary">

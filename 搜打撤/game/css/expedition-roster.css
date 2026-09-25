@@ -52,7 +52,7 @@
 #overlay .cls2-face b { padding:18px 0 6px; color:#e2edf0; letter-spacing:.18em; }
 #overlay .cls2-face.sel { border-color:#e2c88e; box-shadow:0 0 20px rgba(226,200,142,.3),inset 0 0 0 1px rgba(226,200,142,.55); }
 #overlay .cls2-face:focus-visible { outline:2px solid #79c4d7; outline-offset:3px; }
-#overlay .cls2-confirm { right:clamp(18px,3vw,42px); bottom:22px; width:clamp(190px,19vw,280px); height:58px; gap:14px; padding:0 20px; border-radius:2px; color:#0b202c; background:linear-gradient(115deg,#f0d59d,#bd965b); box-shadow:0 8px 26px rgba(0,0,0,.42); }
+#overlay .cls2-confirm { right:clamp(18px,3vw,42px); bottom:22px; width:clamp(190px,19vw,280px); height:58px; gap:14px; padding:0 20px; border-radius:2px; color:#0b202c; background:linear-gradient(115deg,#f7e7bd,#d9bb82 58%,#c8a76b); box-shadow:0 8px 26px rgba(0,0,0,.42); } /* 09-25 P2：主确认金钮渐变统一定版配方 #f7e7bd→#d9bb82→#c8a76b */
 #overlay .cls2-confirm span { font-size:clamp(14px,1.25vw,18px); font-weight:800; letter-spacing:.1em; white-space:nowrap; }
 #overlay .cls2-confirm:disabled { color:#9a9d96; background:#26353b; border-color:#50636a; box-shadow:none; }
 #overlay .cls2-back { left:clamp(18px,3vw,42px); bottom:24px; border-radius:2px; }
@@ -140,6 +140,8 @@
    flex 逐行居中让不满行两侧均衡留白，空区让位水印立绘。
    2026-09-20 P2+：老板令取消本页上下滚动设计——overflow 收敛为 hidden，
    一屏式弹层；尺寸适配靠 cell 弹性 + 分页控制每页张数，不再提供滚动逃生口 */
+/* P3（09-25）：align-content/justify-content 各双写——前一对裸 center 为不支持 safe 关键字的
+   旧内核回退，后一对 safe center 在新内核生效（声明后者覆盖前者） */
 #overlay .pg.cls-pool-page .pool-grid { position:relative; z-index:1; flex:1; min-width:0; min-height:0; display:flex; flex-wrap:wrap; align-content:center; justify-content:center; align-content:safe center; justify-content:safe center; gap:26px 26px; padding:6px 6px; overflow:hidden; }
 #overlay .pg.cls-pool-page .pool-cell { position:relative; min-width:0; flex:1 0 236px; max-width:262px; }
 /* 卡底座主题色光晕（批二）：椭圆柔光垫在卡下，缓和绿框卡与深蓝底的冲突 */
@@ -153,7 +155,7 @@
    卡面画窗统一内衬暗角把明度差压平，画风混装的割裂感收敛 */
 #overlay .pg.cls-pool-page .pool-cell .hsc-art { position:relative; }
 #overlay .pg.cls-pool-page .pool-cell .hsc-art::after { content:''; position:absolute; inset:0; box-shadow:inset 0 0 30px rgba(7,15,21,.42); pointer-events:none; }
-#overlay .pg.cls-pool-page .pool-card-button { position:relative; z-index:1; display:block; width:100%; padding:0; border:2px solid transparent; border-radius:10px; background:transparent; color:inherit; font:inherit; cursor:zoom-in; transition:transform .16s,border-color .16s,box-shadow .16s; box-shadow:0 0 0 1px color-mix(in srgb,var(--cls-color,#69aec2) 18%,transparent),0 4px 14px rgba(2,10,16,.35); }
+#overlay .pg.cls-pool-page .pool-card-button { position:relative; z-index:1; display:block; width:100%; padding:0; border:2px solid transparent; border-radius:2px; background:transparent; color:inherit; font:inherit; cursor:zoom-in; transition:transform .16s,border-color .16s,box-shadow .16s; box-shadow:0 0 0 1px color-mix(in srgb,var(--cls-color,#69aec2) 18%,transparent),0 4px 14px rgba(2,10,16,.35); } /* 09-25 P2：壳层圆角统一 2px（原 10px） */
 /* 卡牌库影廊的 hover 放大旋转（cards.css scale 1.17）在此页过激，收敛为浮起+主题色描边 */
 #overlay .pg.cls-pool-page .pool-card-button.lib-cardwrap:hover,
 #overlay .pg.cls-pool-page .pool-card-button.lib-cardwrap:focus-visible { transform:none; filter:none; }

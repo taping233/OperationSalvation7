@@ -93,7 +93,7 @@
   ::selection { background: rgba(171,171,171,.30); }
   ::-webkit-scrollbar { width: 9px; height: 9px; }
   ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: #3c3c3c; border-radius: 8px; border: 2px solid var(--panel); }
+  ::-webkit-scrollbar-thumb { background: var(--sb-thumb); border-radius: var(--sb-radius); border: 2px solid var(--panel); }
   ::-webkit-scrollbar-thumb:hover { background: #525252; }
   #app { display: flex; flex-direction: column; height: 100%; }
   /* 视口在上，面板栏在下 */
@@ -349,9 +349,9 @@
   /* 2026-09-06 留言：问号在圆钮内严格居中 */
   .help-btn { flex: 0 0 auto; width: 28px; height: 28px; margin-left: 2px; padding: 0;
     display: inline-flex; align-items: center; justify-content: center;
-    border: 1px solid #4a4a4a; border-radius: 50%; background: rgba(20,20,20,.7); color: #b9b9b9;
+    border: 1px solid rgba(159,183,188,.5); border-radius: 50%; background: rgba(20,20,20,.7); color: #b9b9b9;
     font-size: 14px; font-weight: 800; line-height: 1; cursor: pointer; transition: all .14s; }
-  .help-btn:hover { color: #f2f2f2; border-color: #9c9c9c;
+  .help-btn:hover { color: #f2f2f2; border-color: rgba(217,187,130,.6);
     box-shadow: 0 0 10px rgba(220,220,220,.3); transform: scale(1.08); }
   .help-body { text-align: left; display: flex; flex-direction: column; gap: 10px; }
   .help-body .help-item { margin: 0; padding: 9px 12px; border: 1px solid #333; border-radius: 8px;
@@ -370,8 +370,8 @@
     background: var(--inset); color: var(--txt); font: inherit; cursor: pointer; }
 
   .chk { display: flex; align-items: center; gap: 8px; font-size: 13px; padding: 3px 0; cursor: pointer; }
-  .chk input { accent-color: #e0a458; }
-  .chk.vol input[type="range"] { flex: 1; min-width: 140px; accent-color: #e0a458; cursor: pointer; }
+  .chk input {  }
+  .chk.vol input[type="range"] { flex: 1; min-width: 140px; cursor: pointer; }
   .chk.vol b { min-width: 3ch; text-align: right; font-size: 12px; font-family: inherit; }
   kbd { background: #212121; border: 1px solid #454545; border-bottom-width: 2px; border-radius: 5px;
     padding: 1px 6px; font-size: 11px; color: #bebebe; margin-left: auto; font-family: inherit; }

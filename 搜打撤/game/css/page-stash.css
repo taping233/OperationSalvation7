@@ -140,6 +140,11 @@
   color: #ecd9ad;
   box-shadow: 0 0 6px rgba(217, 187, 130, .16);
 }
+/* W3g-补 卡值徽标（卡面币值金币 .hsc-val 右下角悬出 -.48em）是 .stash-scroll
+   假横向滚动的源头：内缩到 right:2px（配合 W3c 的右侧吸收垫片） */
+#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .stash-cell .hsc-val {
+  right: 2px;
+}
 
 /* W3h 「可使用」章：金渐变收口到 #d9bb82 族 + 字距 */
 #overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .stash-cell .cell-tag {

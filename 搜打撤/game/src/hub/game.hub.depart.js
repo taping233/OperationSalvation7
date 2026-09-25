@@ -58,7 +58,7 @@ import { slots as hubBridge } from './game.hub.bridge.js';   // 别名防局部 
           <p class="deploy-tip">[[icon:map]] 进入整备后，可从仓库拖入本局携带卡牌；只有装入背包的卡牌才能在远征中使用。</p>
         </aside>
       </div>
-      <section class="hub-card gate-strip${gateReady ? ' gate-ready' : ' gate-locked'}" data-act="gateInfo"
+      <section class="hub-card gate-strip${gateReady ? ' gate-ready' : ' gate-locked'}" data-act="gateInfo" role="button" tabindex="0"
         title="${gateReady ? '钥匙已集齐——宝藏大门虚位以待' : '集齐 10 把钥匙开启宝藏大门（特殊关卡）'}">
         <div class="gate-ico">${SDT.Art.gateIcon(gateReady)}</div>
         <div class="gate-txt">

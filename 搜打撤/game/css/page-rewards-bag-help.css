@@ -45,7 +45,7 @@
 #overlay .card.chest {
   background: linear-gradient(180deg, rgba(13, 24, 33, .88), rgba(6, 12, 18, .93)) !important;
   border: 1px solid rgba(206, 222, 234, .15) !important;
-  border-radius: 18px;
+  border-radius: 2px; /* 09-25 P2：壳层圆角统一 2px（原 18px） */
   box-shadow: 0 34px 110px rgba(0, 0, 0, .62), inset 0 1px 0 rgba(255, 255, 255, .06),
     0 0 46px rgba(217, 187, 130, .06) !important;
   backdrop-filter: blur(16px) saturate(1.05);
@@ -143,7 +143,7 @@
 #overlay .card.chest button.bt-card:focus-visible {
   outline: 1px solid #d9bb82cc;
   outline-offset: 5px;
-  border-radius: 10px;
+  border-radius: 2px; /* 09-25 P2：焦点环圆角随壳层统一 2px（原 10px） */
   box-shadow: 0 0 0 1px #071720, 0 0 14px rgba(217, 187, 130, .4);
 }
 
@@ -239,8 +239,8 @@
   text-shadow: 0 0 14px rgba(217, 187, 130, .12), 0 2px 6px rgba(2, 8, 12, .6);
 }
 #overlay .card.bag-page .bag-chips .fc-chip {
-  background: linear-gradient(180deg, rgba(9, 22, 33, .92), rgba(6, 16, 25, .94));
-  border-color: rgba(159, 183, 188, .26);
+  background: #102735; /* 09-25 P2：fc-chip 与 expedition-inventory.css 制式统一（底 #102735 / 边 #dfc28d55，#dfc28d 为事件真源金保留） */
+  border-color: #dfc28d55;
   color: #9fb4bd;
   box-shadow: inset 0 1px 0 rgba(214, 232, 235, .05);
 }
@@ -288,7 +288,7 @@
   border-color: rgba(159, 183, 188, .16);
   background: rgba(6, 15, 22, .32);
   border-radius: 2px;
-  scrollbar-color: #3d5a68 #081722;
+  scrollbar-color: #496977 #081722; /* 09-25 P3：与 expedition-inventory.css 滚动条统一 */
 }
 #overlay .card.bag-page .bag-slot.filled.card-slot {
   border-color: rgba(159, 183, 188, .26);
@@ -500,7 +500,7 @@
 }
 #overlay .card:has(.help-body) .ov-btn.ok {
   border-color: #e8d3a4;
-  background: linear-gradient(180deg, #e6cd9c, #cfae74);
+  background: linear-gradient(180deg, #f7e7bd, #d9bb82 58%, #c8a76b); /* 09-25 P2：主确认金钮渐变统一定版配方 */
   color: #241a09;
   box-shadow: inset 0 1px 0 rgba(255, 246, 220, .5);
   transition: filter var(--rbh-fast), box-shadow var(--rbh-fast), transform var(--rbh-fast);

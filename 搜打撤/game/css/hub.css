@@ -29,10 +29,11 @@
   .hub-tab.on .tab-ico { border-color: rgba(171,171,171,.65);
     box-shadow: 0 0 14px rgba(171,171,171,.28), inset 0 1px 0 rgba(240,240,240,.1); }
   .hub-tab .dot { position: absolute; top: 7px; right: 12px; width: 8px; height: 8px; border-radius: 50%;
-    background: #8a8a8a; box-shadow: 0 0 7px rgba(124,124,124,.8); }
+    background: #d9bb82; box-shadow: 0 0 7px rgba(217,187,130,.7); }
   .hub-page { flex: 1; min-height: 0; overflow-y: auto; padding: 18px 22px 24px; }
-  /* 页签切换过渡：内容区淡入上浮（仅切换页签时挂 page-in） */
-  .hub-page.page-in, .dep-body.page-in { animation: hubPageIn .3s cubic-bezier(.22,.61,.36,1); }
+  /* 页签切换过渡：内容区淡入上浮（仅切换页签时挂 page-in）；
+     2026-09-25 与 page-hub.css:31 的 page-in 入场双动画并存，此处改 none 让位 */
+  .hub-page.page-in, .dep-body.page-in { animation: none; }
   @keyframes hubPageIn {
     from { opacity: 0; transform: translateY(12px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -62,22 +63,6 @@
   .mode-ckpt { font-size: 10.5px; color: #797979; white-space: nowrap; }
   .mode-card.on .mode-ckpt { color: #c4c4c4; }
 
-  .cls-list { display: flex; flex-direction: column; gap: 9px; }
-  .cls-card { display: flex; align-items: center; gap: 12px; text-align: left; cursor: pointer;
-    padding: 10px 13px; border-radius: 10px; border: 1.5px solid #343434; color: inherit;
-    background: #1d1d1d; transition: all .14s; width: 100%; font-family: inherit; }
-  .cls-card:hover { border-color: #595959; transform: translateY(-1px); }
-  .cls-card.on { border-color: #a1a1a1; background: linear-gradient(180deg, #2d2d2d, #1c1c1c);
-    box-shadow: 0 0 12px rgba(161,161,161,.22), inset 0 1px 0 rgba(237,237,237,.08); }
-  .cls-ico { width: 40px; height: 40px; min-width: 40px; display: flex; align-items: center;
-    justify-content: center; font-size: 19px; border-radius: 50%; border: 1.5px solid #565656;
-    background: radial-gradient(ellipse at 50% 30%, #353535, #101010 85%); }
-  .cls-info { flex: 1; min-width: 0; }
-  .cls-info .nm { display: flex; align-items: baseline; gap: 8px; }
-  .cls-info .nm b { font-size: 14px; color: #e4e4e4; }
-  .cls-info .nm i { font-style: normal; font-size: 11px; color: #ababab; }
-  .cls-info .pk { font-size: 11px; color: #8b8b8b; margin-top: 2px; }
-  .cls-info .pk b { color: #cbcbcb; font-weight: 600; }
   .xp-bar { height: 6px; border-radius: 999px; background: #121212; overflow: hidden; margin-top: 6px;
     box-shadow: inset 0 1px 2px rgba(0,0,0,.5); }
   .xp-bar i { display: block; height: 100%; border-radius: 999px;
@@ -101,24 +86,14 @@
   .stash-grid { display: flex; flex-direction: column; gap: 5px; max-height: 34vh; overflow-y: auto; }
   .stash-list { display: flex; flex-direction: column; gap: 5px; max-height: 38vh; overflow-y: auto; }
   /* 可点击的仓库物品行（卖出 / 收藏） */
-  .stash-row { cursor: pointer; transition: all .13s; width: 100%; color: inherit; font: inherit; text-align: left; }
-  .stash-row:hover { border-color: #a1a1a1; background: #232323; transform: translateY(-1px); }
-  .stash-row.collected { border-color: rgba(196,196,196,.5); background: linear-gradient(180deg, #232323, #1c1c1c); }
   .stash-row:focus-visible, .dep-card[role="button"]:focus-visible, .bag-cell[role="button"]:focus-visible {
-    outline: 2px solid #e2c48d; outline-offset: 3px;
+    outline: 1px solid #d9bb82cc; outline-offset: 2px;
   }
   /* 出征整备 / 撤离整理页 */
   .dep-body { display: grid; grid-template-columns: 1.3fr 1fr; gap: 16px; align-items: start; }
   .dep-list { display: flex; flex-direction: column; gap: 5px; max-height: 52vh; overflow-y: auto; }
   .dep-row.locked { opacity: .6; }
   .dep-row { display: flex; justify-content: space-between; align-items: center; }
-  .dep-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .dep-stepper { display: flex; align-items: center; gap: 8px; }
-  .step-btn { width: 28px; height: 26px; border-radius: 7px; border: 1px solid #595959; color: #e4e4e4;
-    background: linear-gradient(180deg, #2d2d2d, #1c1c1c); cursor: pointer; font-size: 15px; font-weight: 700;
-    line-height: 1; transition: all .13s; font-family: inherit; }
-  .step-btn:hover:not(:disabled) { filter: brightness(1.3); border-color: #a1a1a1; }
-  .step-btn:disabled { opacity: .32; cursor: default; }
   .dep-n { min-width: 26px; text-align: center; font-size: 14px; color: #797979; }
   .dep-n.on { color: #d9d9d9; }
   .warn-hint { color: #d98a80; }
@@ -267,7 +242,8 @@
     background: linear-gradient(160deg, #e5c793, #caa76a);
     box-shadow: inset 0 1px 0 rgba(255,255,255,.35), 0 3px 12px rgba(0,0,0,.4); }
   .cls2-confirm:hover { filter: brightness(1.08); transform: translateY(-1px); }
-  .cls2-confirm:disabled { filter: grayscale(.9) brightness(.55); cursor: not-allowed; transform: none; }
+  .cls2-confirm:disabled { opacity:.45; filter: grayscale(.8); cursor: not-allowed; transform: none; }
+  #overlay .cls2-confirm:active:not(:disabled) { transform: translateY(1px); filter: brightness(.97); }
   .cls2-back .svg-ic, .cls2-confirm .svg-ic { width: 26px; height: 26px; }
   /* 场景多敌人立绘 */
   .scene-foes { position: relative; display: flex; gap: 10px; justify-content: center; margin-bottom: 6px; }
@@ -280,7 +256,7 @@
 /* 仓库 / 升级页的宠物行 */
 .hub .pk-row.pet-row { flex-wrap: wrap; align-items: center; gap: 4px 10px;
   padding: 6px 8px; border-radius: 8px; border: 1px solid transparent; }
-.hub .pk-row.pet-row.on { border-color: rgba(255,202,91,.55); background: rgba(255,202,91,.08); }
+.hub .pk-row.pet-row.on { border-color: rgba(217,187,130,.55); background: rgba(255,202,91,.08); }
 .hub .pk-row.pet-row.locked { opacity: .55; }
 .hub .pk-row.pet-row .pet-desc { flex-basis: 100%; font-size: 11.5px; opacity: .8; }
 .hub .pk-row.pet-row .pet-ops { display: inline-flex; align-items: center; gap: 8px; margin-left: auto; }

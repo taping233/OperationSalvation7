@@ -303,7 +303,7 @@ import { escAttr } from '../core/shared.js';
       ${warnLine}
       <div class="chest-reveal"><img class="chest-prop opened" src="${chestArtOf(cur)}" alt="" draggable="false"></div>
       ${cur.cards.length ? `<div class="bt-hand${taken.size ? ' no-anim' : ''}" data-n="${cur.cards.length}">${cardsHTML}</div>` : '<p class="ov-empty">（卡牌库是空的，什么也没开出）</p>'}
-      <div class="loot-footer-note">${isPick ? '点击一张收下' : '点击卡牌可逐张收取'} · 未收取的卡牌将散落</div>${ops}`, 'chest');
+      <div class="loot-footer-note">${isPick ? '点击一张收下 · 未收取的卡牌将散落' : '点击卡牌收下它，未收取的将在离开时散落'}</div>${ops}`, 'chest');
     UI.act('chestTake', takeAll);
     UI.act('chestTake1', (d) => {
       const card = cur.cards[+d.i];

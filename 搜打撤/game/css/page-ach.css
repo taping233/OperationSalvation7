@@ -57,6 +57,15 @@
   background: linear-gradient(270deg, transparent, rgba(217, 187, 130, .38)) right center / 12px 1px no-repeat;
   transition: color var(--ach-fast);
 }
+/* W1b-补 「见闻纪念」故事面板（无附属类的裸 .hub-card，game.hub.pages.js
+   hubAchHTML storyRecord）不参与编号：counter 不递增 + 角标伪元素不渲染，
+   功能面板（.collection-panel / .coll-room）从 01 起编 */
+#overlay #hubMain.hub-ach .hub-page > .hub-card:not(.collection-panel):not(.coll-room) {
+  counter-increment: none;
+}
+#overlay #hubMain.hub-ach .hub-page > .hub-card:not(.collection-panel):not(.coll-room)::after {
+  content: none;
+}
 /* W1c 面板不可点：hover 只点亮封条与编号（不做整卡抬升误导，同 upgrade W1c） */
 #overlay #hubMain.hub-ach .hub-page > .hub-card:hover {
   border-color: rgba(217, 187, 130, .34);
@@ -193,9 +202,13 @@
 #overlay #hubMain.hub-ach .ach-row:not(.done) .ach-info b { color: #aebfc4; }
 #overlay #hubMain.hub-ach .ach-info span { color: #8299a0; }
 #overlay #hubMain.hub-ach .ach-ops .rw { color: #93a9ad; letter-spacing: .03em; }
-/* W5d 图标 tile：包裹层边线 retint（图标本体不动） */
+/* W5d 图标 tile：包裹层边线 retint（图标本体不动）；2026-09-25 补冷青底，
+   压掉 hub.css:148 的灰阶瓦片底（done 态金描边由 W5a/W5b 更高特异性接管） */
 #overlay #hubMain.hub-ach .ach-ico {
-  border-radius: 2px; transition: border-color var(--ach-fast), box-shadow var(--ach-fast);
+  border-radius: 2px;
+  border-color: rgba(159, 183, 188, .22);
+  background: radial-gradient(ellipse at 50% 30%, #0c2230, #081724 85%);
+  transition: border-color var(--ach-fast), box-shadow var(--ach-fast);
 }
 
 /* W5e 领取钮（成就/里程碑共用 mini-btn.ok）：暖金收口 + 快按慢弹 */

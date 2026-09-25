@@ -120,6 +120,9 @@
 #overlay .pg.cdes .desc-count { font-variant-numeric: tabular-nums; }
 /* W3d 纸面滚动条收进暖米族（视觉密度收口；滚动行为不动） */
 #overlay .pg.cdes .cdes-form { scrollbar-color: #c0b394 #e2ded2; }
+/* W3d-补2 预览舞台同款 scrollbar-color：舞台当前 overflow:hidden 不出滚动条，
+   矮窗口后续若放开滚动兜底时不再冒默认灰条 */
+#overlay .pg.cdes .cdes-stage { scrollbar-color: #c0b394 #e2ded2; }
 /* W3d-补 「可出售」开关是旧深色表单遗留的 #d5d5d5 浅灰字，winter 纸面化时未跟进，
         米纸上几乎不可读 → 收进纸面墨色族（与 row-tip 同档） */
 #overlay .pg.cdes .sellable-tgl { color: #5a5648; }

@@ -1,5 +1,6 @@
 /* 远征基地出发页：简报优先，所有数值来自 game.hub.js 的真实基地状态。 */
-#overlay .hub-deploy .hub-page { max-width:1420px; }
+/* 2026-09-25 对齐修复：与 .hub-classes/.hub-ach 页签统一 max-width + 居中，避免页签内容对齐行为不一致 */
+#overlay .hub-deploy .hub-page { max-width:1420px; margin:0 auto; width:100%; }
 #overlay #hubMain .hub-head h2 { display:block; font-size:clamp(16px,1.6vw,21px); }
 #overlay .hub-deploy .deploy-brief { display:grid; grid-template-columns:minmax(0,1.45fr) minmax(320px,.72fr); gap:16px; }
 #overlay .deploy-mission { position:relative; isolation:isolate; overflow:hidden; min-height:clamp(520px, 58vh, 900px); display:flex; flex-direction:column; justify-content:space-between; border:1px solid rgba(199,190,154,.28); border-radius:2px; background:#0d1721 url('../assets/scenes/winter-expedition/outskirts.webp') center/cover no-repeat; box-shadow:0 18px 42px rgba(0,0,0,.28); }
@@ -12,8 +13,10 @@
 .deploy-mission-target span { color:#aebfc3; font-size:11px; letter-spacing:1px; }
 .deploy-mission-target b { color:#ffe3a1; font-size:20px; }
 .deploy-mission-target small { color:#d2d7d0; font-size:11px; }
-#overlay .deploy-primary { display:inline-flex; align-items:center; justify-content:space-between; gap:28px; width:min(100%,270px); margin-top:22px; padding:12px 15px; border:1px solid #e0c77f; border-radius:2px; background:linear-gradient(135deg,#c5a85e,#967a3f); color:#17150f; font-weight:800; font-size:15px; box-shadow:0 8px 22px rgba(0,0,0,.28); cursor:pointer; }
+#overlay .deploy-primary { display:inline-flex; align-items:center; justify-content:space-between; gap:12px; width:min(100%,320px); margin-top:22px; padding:12px 15px; border:1px solid #e0c77f; border-radius:2px; background:linear-gradient(135deg,#c5a85e,#967a3f); color:#17150f; font-weight:800; font-size:15px; box-shadow:0 8px 22px rgba(0,0,0,.28); cursor:pointer; }
 #overlay .deploy-primary:hover { filter:brightness(1.1); transform:translateY(-1px); }
+/* 长文案折行收口（研究所锁定态键）：极窄容器下允许换行并收紧行距 */
+#btnNest { white-space:normal; line-height:1.35; }
 /* 龙巢（09-20 高级感改造批1）：未解锁态不再内联暗紫底+金底深字（深字压暗底不可读），
    改 class 双态——解锁=与出发整备同款金底，未解锁=暗蓝底浅字弱化 */
 #overlay .deploy-primary.nest-locked { border-color:rgba(224,199,127,.35); background:linear-gradient(135deg,rgba(36,58,74,.92),rgba(14,30,42,.94)); color:#cfe0e4; box-shadow:none; }
@@ -27,10 +30,10 @@
 #overlay .deploy-mode-dock .mode-card { display:grid; grid-template-columns:32px minmax(0,1fr); grid-template-areas:"icon info" "ckpt ckpt"; align-items:start; min-height:102px; padding:10px; border:1px solid rgba(173,193,199,.24); border-radius:2px; background:rgba(13,26,36,.78); color:#c8d2d3; text-align:left; cursor:pointer; }
 #overlay .deploy-mode-dock .mode-card.on { border-color:#d9bd77; background:rgba(76,62,33,.68); color:#fff0c5; box-shadow:inset 0 0 0 1px rgba(225,198,126,.22); }
 #overlay .deploy-mode-dock .mode-card:hover { border-color:rgba(221,202,146,.7); }
-#overlay .deploy-mode-dock .mode-ico { grid-area:icon; width:32px; min-width:32px; height:32px; margin:2px 7px 0 0; font-size:18px; border-radius:2px; }
+#overlay .deploy-mode-dock .mode-ico { grid-area:icon; width:32px; min-width:32px; height:32px; margin:2px 7px 0 0; font-size:18px; border-radius:2px; border-color:rgba(159,183,188,.25); background:radial-gradient(ellipse at 50% 30%,#122b3a,#0a1a24 85%); }
 #overlay .deploy-mode-dock .mode-info { grid-area:info; display:flex; flex-direction:column; gap:3px; min-width:0; }
 #overlay .deploy-mode-dock .mode-info b { font-size:12px; }
-#overlay .deploy-mode-dock .mode-info span, #overlay .deploy-mode-dock .mode-ckpt { color:#aebdbd; font-size:10px; line-height:1.35; }
+#overlay .deploy-mode-dock .mode-info span, #overlay .deploy-mode-dock .mode-ckpt { color:#aebdbd; font-size:10.5px; line-height:1.35; }
 #overlay .deploy-mode-dock .mode-ckpt { grid-area:ckpt; display:block; margin-top:8px; color:#d5c58e; white-space:normal; }
 
 #overlay .deploy-readiness-panel { display:flex; flex-direction:column; gap:12px; padding:clamp(20px,2.4vw,28px); border:1px solid rgba(174,201,210,.22); border-radius:2px; background:linear-gradient(165deg,rgba(16,31,43,.96),rgba(8,16,25,.96)); box-shadow:0 18px 42px rgba(0,0,0,.2); }
@@ -100,7 +103,7 @@
 .class-dossier-shade { position:absolute; inset:0; z-index:-2; background:linear-gradient(180deg,rgba(5,15,23,.05) 25%,rgba(5,14,21,.48) 55%,rgba(4,11,17,.97) 91%); }
 .class-dossier-index { position:absolute; top:13px; right:13px; color:rgba(235,220,182,.72); font:700 11px "Cascadia Code",monospace; letter-spacing:2px; }
 .class-dossier-copy { position:absolute; left:0; right:0; bottom:0; padding:20px 18px 16px; }
-.class-dossier-kicker { color:#d6bd7e; font:700 8px "Cascadia Code",monospace; letter-spacing:.18em; }
+.class-dossier-kicker { color:#d6bd7e; font:700 9px "Cascadia Code",monospace; letter-spacing:.18em; }
 .class-dossier h3 { margin:5px 0 7px; color:#f2eee3; font:400 clamp(20px,1.8vw,29px)/1.1 var(--serif); letter-spacing:5px; }
 .class-dossier p { min-height:3em; margin:0 0 12px; color:#b5c4c7; font-size:11px; line-height:1.55; }
 .class-dossier-meta { display:flex; align-items:center; justify-content:space-between; gap:8px; color:#c1d0d1; font-size:11px; }
@@ -109,7 +112,7 @@
 .class-dossier .xp-bar i { background:linear-gradient(90deg,#8caeb4,#dfc47d); }
 .class-dossier .xp-txt { color:#bdcbcd; font-size:10px; }
 .class-skins { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:5px; margin-top:8px; }
-.class-skins .mini-btn { min-width:0; padding:6px 3px; font-size:10px; letter-spacing:0; white-space:nowrap; }
+.class-skins .mini-btn { min-width:0; padding:7px 6px; font-size:10px; letter-spacing:0; white-space:nowrap; }
 .class-dossier:hover .class-dossier-art img { transform:scale(1.025); filter:saturate(.92) contrast(1.04); }
 
 .collection-tabs { position:sticky; top:0; z-index:3; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; margin-bottom:12px; padding:8px; border:1px solid rgba(171,200,205,.18); background:rgba(7,19,28,.94); backdrop-filter:blur(12px); }
@@ -170,10 +173,13 @@
 }
 @media (prefers-reduced-motion:reduce) { .class-dossier-art img { transition:none; } }
 
-/* 基地商店（09-20 P1-6）：价签描边瘦身不再压描述；买不起整行降饱和 + 原因行内可见 */
+/* 基地商店（09-20 P1-6）→ 2026-09-25 无害化：货板 DOM 已切到 .shelf-item 体系，
+   .pk-row.stash-row 簇为幽灵选择器；按走查要求保留规则块，块内可见属性
+   （background/border/color/opacity/filter）全部置初始/透明，防该类名未来
+   复用时旧金描边整段复活 */
 #overlay .pk-row.stash-row .shop-price-tag { padding: 3px 10px; font-size: 12.5px;
-  background: transparent; border: 1px solid #c9ad7a88; color: #dfc28d; }
-#overlay .pk-row.stash-row .shop-price-tag:hover:not(:disabled) { background: rgba(223,194,141,.14); }
-#overlay .pk-row.stash-row.poor { opacity: .62; filter: grayscale(.65); }
-#overlay .pk-row.stash-row.poor .shop-price-tag { border-color: #7a858c66; color: #93a3ab; }
-#overlay .pk-row.stash-row .poor-why { margin-left: 6px; color: #c98b7e; }
+  background: transparent; border: 1px solid transparent; color: inherit; }
+#overlay .pk-row.stash-row .shop-price-tag:hover:not(:disabled) { background: transparent; }
+#overlay .pk-row.stash-row.poor { opacity: 1; filter: none; }
+#overlay .pk-row.stash-row.poor .shop-price-tag { border-color: transparent; color: inherit; }
+#overlay .pk-row.stash-row .poor-why { margin-left: 6px; color: inherit; }

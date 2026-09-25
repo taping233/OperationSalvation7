@@ -66,17 +66,13 @@
   filter: brightness(1.3) drop-shadow(0 4px 14px #061019cc);
 }
 #title .winter-wordmark small, #title .winter-edition { display: none; }
-.title-expedition-copy { position: absolute; left: 5.4%; bottom: 11%; color: var(--exp-text); }
-.title-expedition-copy > span { color: var(--exp-gold); font: 10px 'Cascadia Code', monospace; letter-spacing: 3px; }
-.title-expedition-copy p { margin: 14px 0 9px; font: 26px/1.5 'SimSun', serif; letter-spacing: 4px; }
-.title-expedition-copy small { color: #becdd4; font-size: 12px; letter-spacing: 2px; }
 #title .ak-tl { left: 28px; top: 20px; gap: 4px; }
 #title .ak-quickref { left: 162px; top: 20px; height: 58px; transform: none; color: #d9e5e9; }
 #title .ak-user { right: 5%; top: 30px; transform: none; }
 #title .ak-user .ak-ava { width: 40px; height: 40px; }
 #title .ak-lv em { font-style: normal; letter-spacing: 2px; color: var(--exp-muted); }
 /* Metal plaques remain on the destinations and archive; the three top-left controls float over the scene. */
-#title .ak-user, #title .ak-banner, #title .ak-circle {
+#title .ak-user, #title .ak-circle {
   background: linear-gradient(90deg, #0a1924df, #10232bbd),
     url('../assets/ui/title-plaque-metal-v1.png') center / cover;
   border: 1px solid #b8c7c76b;
@@ -104,7 +100,7 @@
   background: linear-gradient(180deg, transparent, #d8c69a63 12%, #a9c5c450 72%, transparent);
   box-shadow: 2px 0 10px #071923a8; pointer-events: none;
 }
-#title .ak-banner, #title .ak-circle {
+#title .ak-circle {
   left: auto; right: 5%; width: clamp(280px, 27vw, 390px); height: 57px;
   display: grid; grid-template-columns: 59px minmax(0, 1fr) auto; grid-template-rows: 1fr 1fr;
   column-gap: 8px; align-items: center; padding: 5px 14px; transform: none;
@@ -114,11 +110,10 @@
     -8px 6px 18px #020b1570, 0 7px 20px #020b1570;
   transition: background .2s, border-color .2s, transform .2s, box-shadow .2s;
 }
-#title .ak-banner { top: 38%; }
 #title .ak-lib { top: 47%; }
 #title .ak-ach { top: 56%; }
 #title .ak-set { top: 65%; }
-#title .ak-circle .c-ring, #title .ak-banner .bn-ico {
+#title .ak-circle .c-ring {
   grid-column: 1; grid-row: 1 / 3; position: relative; left: -24px;
   width: 61px; height: 61px; border: 0; border-radius: 0;
   background: linear-gradient(145deg, #1e3541, #0a1b27 72%);
@@ -127,41 +122,41 @@
   color: var(--exp-gold);
 }
 #title .c-ring::after { display: none; }
-#title .c-ring img, #title .bn-ico img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 3px 5px #020a12b8); }
+#title .c-ring img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 3px 5px #020a12b8); }
 /* Shared ink-dark vignette behind each painted cutout; the small brass orbit is varied per entry. */
-#title .ak-banner .bn-ico, #title .ak-circle .c-ring {
+#title .ak-circle .c-ring {
   isolation: isolate; overflow: visible; background: transparent; border: 0; box-shadow: none;
 }
-#title .ak-banner .bn-ico svg, #title .ak-circle .c-ring svg { display: none; }
-#title .ak-banner .bn-ico::before, #title .ak-circle .c-ring::before {
+#title .ak-circle .c-ring svg { display: none; }
+/* 2026-09-25 老板：各入口的图标盘缩小一点（transform 缩放不动布局，文字位置不变） */
+#title .ak-circle .c-ring { transform: scale(.85); }
+#title .ak-circle .c-ring::before {
   content: ''; position: absolute; inset: -13px -15px; z-index: 0; pointer-events: none;
   background: var(--home-icon) center / var(--home-icon-size, 54px) no-repeat,
     radial-gradient(ellipse 68% 61% at 49% 52%, #02070cf5 18%, #030b11e8 49%, #030b1199 66%, transparent 86%);
   filter: drop-shadow(0 4px 6px #02070baa);
 }
-#title .ak-banner .bn-ico::after, #title .ak-circle .c-ring::after {
+#title .ak-circle .c-ring::after {
   content: ''; display: block; position: absolute; z-index: 1; pointer-events: none;
-  left: -5px; top: -7px; width: 18px; height: 18px; border: 1px solid #cba96d9c;
-  border-radius: 50%; box-shadow: inset 0 0 0 3px #04101980, 12px 13px 0 -8px #d9b77b;
+  left: -2px; top: -4px; width: 18px; height: 18px; border: 1px solid #cba96d9c;
+  border-radius: 50%; box-shadow: inset 0 0 0 3px #04101980, 8px 9px 0 -8px #d9b77b;
 }
-#title .ak-banner .bn-ico { --home-icon: url('../assets/ui/home-icons-v12/workshop-staff.webp'); --home-icon-size: 52px; }
 #title .ak-ach .c-ring { --home-icon: url('../assets/ui/home-icons-v12/achievement-shield.webp'); --home-icon-size: 53px; }
 #title .ak-lib .c-ring { --home-icon: url('../assets/ui/home-icons-v12/photo-orb-book.webp'); --home-icon-size: 51px; }
 #title .ak-set .c-ring { --home-icon: url('../assets/ui/home-icons-v12/settings-gear.webp'); --home-icon-size: 49px; }
 #title .ak-ach .c-ring::after { left: auto; right: -8px; top: 4px; }
 #title .ak-lib .c-ring::after { left: -8px; top: 24px; width: 13px; height: 13px; }
 #title .ak-set .c-ring::after { left: auto; right: -7px; top: -6px; width: 14px; height: 14px; }
-#title .ak-circle .c-cn, #title .ak-banner .bn-cn {
+#title .ak-circle .c-cn {
   grid-column: 2; grid-row: 1; align-self: end;
   font: 600 17px/1.2 var(--font-ui); letter-spacing: 2px; text-shadow: 0 1px 6px #06111ccc; white-space: nowrap;
 }
-#title .ak-circle .c-en, #title .ak-banner .bn-en {
+#title .ak-circle .c-en {
   grid-column: 2; grid-row: 2; align-self: start; margin: 3px 0 0;
   font: 10px/1.2 'Cascadia Code', monospace; letter-spacing: .7px; color: #b9c8cf;
 }
-#title .ak-circle .c-tag { grid-column: 3; grid-row: 1 / 3; position: static; border: 0; background: none; padding: 0; color: var(--exp-gold); font-size: 11px; }
-#title .ak-banner .bn-arrow { display: none; }
-#title .ak-circle:hover, #title .ak-banner:hover {
+#title .ak-circle .c-tag { grid-column: 3; grid-row: 1 / 3; position: static; border: 0; background: none; padding: 0; color: #e6cfa3; font-size: 12px; }
+#title .ak-circle:hover {
   background: linear-gradient(90deg, #213b4bd9, #152d3aca),
     url('../assets/ui/title-plaque-metal-v1.png') center / cover;
   border-color: var(--exp-gold); transform: translateX(-4px);
@@ -220,25 +215,29 @@
   animation: homeDustDrift 8s ease-in-out infinite alternate;
 }
 @keyframes homeDustDrift { from { transform: translateY(4px); opacity: .4; } to { transform: translateY(-8px); opacity: .8; } }
-#title .ak-banner, #title .ak-circle {
+#title .ak-circle {
   width: 170px; height: 150px; padding: 0; border: 0; border-radius: 0;
   display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
   gap: 0; background: transparent; box-shadow: none; text-align: center;
   transform: none; overflow: visible;
 }
-#title .ak-banner { top: 35%; right: 21%; }
 #title .ak-lib { top: 35%; right: 4%; }
 #title .ak-ach { top: 57%; right: 21%; }
 #title .ak-set { top: 57%; right: 4%; }
-#title .ak-banner:hover, #title .ak-circle:hover {
+#title .ak-circle:hover {
   background: transparent; border: 0; box-shadow: none; transform: translateY(-4px);
   filter: drop-shadow(0 0 9px #e4c78d68);
 }
-#title .ak-banner .bn-ico, #title .ak-circle .c-ring {
+/* P1：基态铺垫 hover 辉光的 25% 透明版 + 显式过渡，弱化 hover 亮牌/位移的突跳感 */
+#title .ak-banner, #title .ak-circle {
+  filter: drop-shadow(0 0 5px #e4c78d1a);
+  transition: opacity .2s, transform .2s, filter .2s;
+}
+#title .ak-circle .c-ring {
   position: relative; left: auto; width: 112px; height: 112px; flex: 0 0 112px;
   background: transparent; border: 0; box-shadow: none;
 }
-#title .ak-banner .bn-ico::before, #title .ak-circle .c-ring::before {
+#title .ak-circle .c-ring::before {
   inset: -27px -30px; background-size: var(--home-icon-size, 108px), 100% 100%;
   filter: drop-shadow(0 4px 6px #02070baa) drop-shadow(0 0 7px var(--home-glow, #d9bb8252));
   animation: homeEmblemFloat 6.2s ease-in-out infinite;
@@ -246,7 +245,7 @@
 #title .ak-lib .c-ring::before { animation-delay: -1.7s; animation-duration: 5.7s; }
 #title .ak-ach .c-ring::before { animation-delay: -3.1s; animation-duration: 6.8s; }
 #title .ak-set .c-ring::before { animation-delay: -2.2s; animation-duration: 5.9s; }
-#title .ak-banner .bn-ico::after, #title .ak-circle .c-ring::after {
+#title .ak-circle .c-ring::after {
   animation: homeOrbitGleam 4.8s ease-in-out infinite alternate;
 }
 #title .ak-lib .c-ring::after { animation-delay: -1.9s; }
@@ -257,34 +256,29 @@
   50% { transform: translateY(-3px) scale(1.025); }
 }
 @keyframes homeOrbitGleam { from { opacity: .4; } to { opacity: .95; } }
-#title .ak-banner .bn-ico { --home-icon-size: 130px; --home-glow: #a16bdf75; }
-#title .ak-banner .bn-ico::before {
-  background-image: var(--home-icon),
-    radial-gradient(ellipse 47% 58% at 49% 52%, #02070cf0 17%, #030b11da 52%, transparent 86%);
-}
 #title .ak-ach .c-ring { --home-icon-size: 120px; --home-glow: #e7a15b70; }
 #title .ak-lib .c-ring { --home-icon-size: 108px; --home-glow: #99c7e073; }
 #title .ak-set .c-ring { --home-icon-size: 104px; --home-glow: #b4cad171; }
-#title .ak-banner .bn-cn, #title .ak-circle .c-cn {
+#title .ak-circle .c-cn {
   position: relative; grid-column: auto; grid-row: auto; align-self: auto;
   margin: 0; color: #f4ead4; font: 700 24px/1.08 'KaiTi', 'STKaiti', 'SimSun', serif;
   font-family: 'KaiTi', 'STKaiti', 'SimSun', serif !important;
   letter-spacing: 3px; text-shadow: 0 2px 5px #000, 0 0 15px #050d14, 0 -1px #fff7e04d;
 }
-#title .ak-banner .bn-en, #title .ak-circle .c-en {
+#title .ak-circle .c-en {
   position: relative; grid-column: auto; grid-row: auto; align-self: auto;
   margin: 4px 0 0; color: #dfbd82; font: italic 11px/1.2 Georgia, serif;
   font-family: Georgia, serif !important;
   letter-spacing: 1px; text-shadow: 0 1px 5px #000, 0 0 7px #b8955670;
 }
-#title .ak-banner .bn-en::after, #title .ak-circle .c-en::after {
+#title .ak-circle .c-en::after {
   content: ''; display: block; width: 34px; height: 1px; margin: 6px auto 0;
   background: linear-gradient(90deg, transparent, #d9bb82b3, transparent);
   box-shadow: 0 0 5px #d9bb8275;
 }
 #title .ak-circle .c-tag {
   order: 4; position: relative; grid-column: auto; grid-row: auto;
-  margin: 3px 0 0; font-size: 9px; color: #c9b78d;
+  margin: 3px 0 0; font-size: 12px; color: #e6cfa3;
 }
 #title .ak-start {
   right: 8%; bottom: 1%; width: 260px; min-height: 125px; height: 125px;
@@ -325,6 +319,11 @@
   background: #08161fe0; color: var(--exp-text); font: 12px var(--font-ui);
 }
 #title .title-dev[hidden] { display: none; }
+/* P0：大屏字标移到左上（title-p0 P1 布局），原 left:28px/top:96px 会盖住字标上半；
+   大屏移到中部空白带，右缘避开右列设置入口 ak-set（right:5%）。 */
+@media (min-width: 1101px) {
+  #title .title-dev { left: auto; right: 24%; top: 22%; }
+}
 .title-dev .td-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
 .title-dev .td-head span:first-child { color: var(--exp-gold); font-size: 12px; letter-spacing: 2px; }
 .title-dev .td-en { font: 9px 'Cascadia Code', monospace; letter-spacing: 1px; color: var(--exp-muted); }
@@ -348,15 +347,11 @@ body.lobby #logPanel, body.page-opaque #logPanel { display: none; }
 #sidebar .panel { min-width: 0; width: auto; padding: 0; border: 0; background: none; box-shadow: none; }
 #sidebar #charPanel { display: flex; align-items: flex-end; }
 /* 头像尺寸统一由 winter.css 底栏重设计（118×118 出血版）定义，此处不再覆盖（2026-09-19） */
-#sidebar #bagPanel { display: flex; align-items: center; }
-#sidebar #bagBtn { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; width: 100%; min-height: 80px; padding: 10px; color: var(--exp-text); background: #1a3343; border: 1px solid #526f806b; box-shadow: none; }
-#sidebar #bagBtn b { flex-basis: 100%; color: var(--exp-gold); font: 16px 'Cascadia Code', monospace; }
-#sidebar #bagBtn.bag-full { border-color: #ce8873; }
 /* 底栏背包按钮删除后（2026-09-19）：满载警示移到全局浮动背包键 */
 #bagBtnFloat.bag-full { box-shadow: 0 0 0 2px #ce8873, 0 4px 18px #030b1688; }
 #bagBtnFloat.bag-full::after { content: '满'; position: absolute; top: -6px; right: -6px; padding: 1px 6px; border-radius: 8px; background: #ce8873; color: #14212b; font: 700 10px/1.4 ui-monospace, monospace; }
 #sidebar #statsPanel { display: flex; justify-content: center; gap: 5px; border-right: 1px solid var(--exp-line); padding-right: 16px; }
-#sidebar #miniMap { width: 100%; height: 66px; max-width: none; border-radius: 3px; background: #08131f80; }
+#sidebar #miniMap { width: 100%; height: auto; max-height: 66px; object-fit: contain; max-width: none; border-radius: 3px; background: #08131f80; } /* 09-25 P2：画布本征 560×112，原强制 height:66px 纵向拉伸 1.8 倍——改随宽等比 + 66px 封顶 contain */
 #sidebar #statsPanel .stat-duo { display: flex; justify-content: space-between; gap: 5px; margin: 0; font-size: 10px; color: var(--exp-muted); }
 #sidebar .stat-duo b { font-size: 12px; color: var(--exp-text); }
 #sidebar .stat-duo label { font-size: 10px; }
@@ -367,7 +362,11 @@ body.lobby #logPanel, body.page-opaque #logPanel { display: none; }
 .route-objective { font-size: 11px; color: var(--exp-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .route-objective[data-tone="danger"] { color: #f6a38e; }
 .route-objective[data-tone="safe"] { color: #a2d9c1; }
-.route-options { display: flex; gap: 8px; overflow-x: auto; padding: 2px; scrollbar-width: thin; }
+/* 09-25 P2：上下留 6px 给路线卡 hover translateY(-2px) 的位移空间（overflow-x:auto 会把纵向
+   也折算成裁切，无留白则上浮被剪）；两侧 16px 渐隐提示横向可滚（mask 不随内容滚动） */
+.route-options { display: flex; gap: 8px; overflow-x: auto; padding: 6px 2px; scrollbar-width: thin;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 16px, #000 calc(100% - 16px), transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 16px, #000 calc(100% - 16px), transparent 100%); }
 .route-option {
   --route-accent: #b8c7ce;
   min-width: 145px; flex: 1 0 145px; display: flex; gap: 10px; align-items: center; padding: 9px 11px;
@@ -405,7 +404,7 @@ body.no-hintbar .route-help { display: none !important; }
   .route-objective { max-width: 230px; }
   .route-copy small { font-size: 10px; }
   #routePanel .route-help > span { display: none; }
-  #title .ak-circle, #title .ak-banner, #title .ak-start { right: 4%; width: 300px; }
+  #title .ak-circle, #title .ak-start { right: 4%; width: 300px; }
   .title-expedition-copy p { font-size: 21px; letter-spacing: 2px; }
 }
 @media (max-width: 850px) {
@@ -413,8 +412,6 @@ body.no-hintbar .route-help { display: none !important; }
   #sidebar { height: 190px; min-height: 190px; grid-template-columns: 52px 92px minmax(0, 1fr); grid-template-rows: 59px 90px; gap: 10px 14px; }
   #sidebar #charPanel { grid-area: 1 / 1; }
   #sidebar .hero-ava { width: 48px; min-width: 48px; height: 56px; }
-  #sidebar #bagPanel { grid-area: 1 / 2; }
-  #sidebar #bagBtn { min-height: 52px; padding: 5px; }
   #sidebar #statsPanel { grid-area: 1 / 3; flex-direction: row; gap: 14px; align-items: center; border: 0; padding: 0; }
   #sidebar #miniMap { width: min(150px, 50%); height: 54px; }
   #sidebar #statsPanel .stat-duo { flex-direction: column; }
@@ -427,11 +424,14 @@ body.no-hintbar .route-help { display: none !important; }
   #title .ak-user .ak-ava { display: none; }
   #title .ak-quickref { left: 134px; padding-left: 10px; }
   #title .ak-tl { left: 12px; }
-  #title .ak-circle, #title .ak-banner, #title .ak-start { width: 280px; right: 4%; }
+  #title .ak-circle, #title .ak-start { width: 280px; right: 4%; }
   .title-expedition-copy { left: 4%; bottom: 18%; max-width: 230px; }
   .title-expedition-copy p { max-width: 180px; font-size: 23px; }
   .title-expedition-copy small { display: none; }
   #layerBanner { top: 77px; }
+  /* 窄档浮键基数同步：#sidebar 本档已压至 190px，winter.css 142px 基数漏同步会让浮键下半插进底栏 */
+  #bagBtnFloat { bottom: calc(190px + 12px) !important; }
+  #topBtns #btnLocate { bottom: calc(190px + 12px + 82px) !important; }
 }
 @media (max-width: 560px) {
   /* The cover crop moves the character outside these desktop light zones. */
@@ -439,7 +439,7 @@ body.no-hintbar .route-help { display: none !important; }
   #title::before { display: none; }
   #title .ak-user { display: none; }
   #title .title-heading { top: 11%; width: 260px; left: auto; right: 5%; }
-  #title .ak-circle, #title .ak-banner, #title .ak-start { width: 260px; right: 5%; height: 55px; }
+  #title .ak-circle, #title .ak-start { width: 260px; right: 5%; height: 55px; }
   #title .title-expedition-copy { display: none; }
   #title .ak-sec { bottom: 4%; }
   #title .title-quote { display: none; }
@@ -450,7 +450,17 @@ body.no-hintbar .route-help { display: none !important; }
 }
 @media (max-height: 700px) and (min-width: 851px) {
   #sidebar { height: 122px; min-height: 122px; padding-top: 8px; padding-bottom: 8px; }
-  #title .ak-circle, #title .ak-banner { height: 48px; }
+  /* 09-25：矮窗口档底栏 122px，背包浮键/定位键基数同步 */
+  #bagBtnFloat { bottom: calc(122px + 12px) !important; }
+  #topBtns #btnLocate { bottom: calc(122px + 12px + 82px) !important; }
+  /* 09-25 P1：底栏压到 122px 后路线面板余量仅 ~2px，3 行内容（标题/路线卡/帮助行）易挤出裁切——
+     本档内压缩行距与卡 padding、帮助行降 9px；用 #sidebar #routePanel 前缀取得更高特异性，
+     压过 page-expedition-hud.css（更晚加载）的同族 7px 分隔留白 */
+  #sidebar #routePanel { gap: 6px; }
+  #routePanel .route-option { padding: 6px 10px; }
+  #sidebar #routePanel .route-heading { padding-bottom: 4px; }
+  #sidebar #routePanel .route-help { padding-top: 4px; font-size: 9px; }
+  #title .ak-circle { height: 48px; }
   #title .ak-start { min-height: 66px; bottom: 9%; }
   #title .ak-sec { bottom: 3%; }
 }
@@ -461,9 +471,7 @@ body.reduce-motion *, body.reduce-motion *::before, body.reduce-motion *::after 
 body.reduce-motion #title::before { animation: none; opacity: .45; }
 body.reduce-motion #title .ak-start::before { display: none; }
 body.reduce-motion #title .ak-hud::after { animation: none; }
-body.reduce-motion #title .ak-banner .bn-ico::before,
 body.reduce-motion #title .ak-circle .c-ring::before,
-body.reduce-motion #title .ak-banner .bn-ico::after,
 body.reduce-motion #title .ak-circle .c-ring::after,
 body.reduce-motion #title .ak-start .st-row::before,
 body.reduce-motion #title .ak-start .st-cn { animation: none; }
@@ -471,8 +479,8 @@ body.reduce-motion #title .ak-start .st-cn { animation: none; }
   #title::before { animation: none; opacity: .45; }
   #title .ak-start::before { display: none; }
   #title .ak-hud::after { animation: none; }
-  #title .ak-banner .bn-ico::before, #title .ak-circle .c-ring::before,
-  #title .ak-banner .bn-ico::after, #title .ak-circle .c-ring::after,
+  #title .ak-circle .c-ring::before,
+  #title .ak-circle .c-ring::after,
   #title .ak-start .st-row::before, #title .ak-start .st-cn { animation: none; }
 }
 body.reduce-motion .sts-float { animation: none !important; opacity: 1; }

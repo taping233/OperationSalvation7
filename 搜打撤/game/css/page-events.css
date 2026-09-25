@@ -23,53 +23,66 @@
 
 /* ═════════ W1 事件面板 .node-panel：档案玻璃容器 + 顶缘金封条 ═════════ */
 
-/* W1a 右侧叙事面板：冷青半透明统一调色（原 #0817228c 平涂 → 纵向微渐变），
-   左缘分隔线并入暖金族；外阴影改向面板外侧，压住整屏背景图的高亮区 */
+/* W1a 右侧叙事面板：背景对齐真源 expedition-rewards.css #0817228c 半透明口径
+   （2026-09-15 老板定版：半透明遮罩透出背景图，不回近不透明）；
+   左缘分隔线与外阴影为本层增量，保留 */
 #overlay .node-panel {
-  background: linear-gradient(188deg, rgba(9, 24, 35, .9), rgba(6, 16, 25, .94));
-  border-left-color: rgba(217, 187, 130, .26);
+  background: #0817228c;
+  border-left-color: rgba(223, 194, 141, .26);
   box-shadow: -18px 0 44px rgba(3, 10, 17, .42), inset 0 1px 0 rgba(214, 232, 235, .05);
 }
 /* W1a-2 顶缘金封条：两端渐隐、中心提亮（对标选档卡封条 / HUD 底栏金线，静态不呼吸） */
 #overlay .node-panel::before {
   content: ''; position: absolute; left: 12%; right: 12%; top: 0; height: 1px; z-index: 2;
   pointer-events: none;
-  background: linear-gradient(90deg, transparent, #d9bb82a1 24%, #d9bb82c4 50%, #d9bb82a1 76%, transparent);
+  background: linear-gradient(90deg, transparent, #dfc28da1 24%, #dfc28dc4 50%, #dfc28da1 76%, transparent);
   opacity: .6;
 }
 
 /* ═════════ W2 眉题章 + 标题：档案编号语言 ═════════ */
 
-/* W2a FIELD ENCOUNTER 眉题：归入标准暖金 #d9bb82 + 微金晕，编号用表格数字 */
+/* W2a FIELD ENCOUNTER 眉题：制式对齐真源 expedition-rewards.css（#dfc28d / 9px / 2px 字距），
+   编号用表格数字 */
 #overlay .node-pg .node-kicker {
-  color: #d9bb82;
-  font-size: 10px;
-  letter-spacing: 2.6px;
-  text-shadow: 0 0 8px rgba(217, 187, 130, .18);
+  color: #dfc28d;
+  font-size: 9px;
+  letter-spacing: 2px;
 }
-#overlay .node-pg .node-kicker span { color: #ecd9ad; font-variant-numeric: tabular-nums; }
+#overlay .node-pg .node-kicker span { color: #dfc28d; font-variant-numeric: tabular-nums; }
 
-/* W2b 事件标题：暖白提亮 + 一丝金晕（叙事时刻的"开卷"感） */
+/* W2b 事件标题：色值对齐真源 #e6eef1、阴影对齐真源 none（2026-09-25 审计：h2 三写统一） */
 #overlay .card.page .node-pg:not(.shop-pg) .pg-head h2 {
-  color: #eef2ee;
-  text-shadow: 0 0 18px rgba(217, 187, 130, .16), 0 2px 10px rgba(3, 10, 16, .7);
+  color: #e6eef1;
+  text-shadow: none;
+}
+/* W2b-3 标题前图标：0.9em 随字缩放 + 默认平滑插值 + 微提亮（防小尺寸硬缩糊成暗块） */
+#overlay .node-panel .pg-head h2 .ic {
+  width: .9em;
+  height: .9em;
+  image-rendering: auto;
+  filter: brightness(1.15);
 }
 /* W2b-2 标题下分隔线：银金 #dfc28d 族 → 标准暖金发丝 */
-#overlay .node-panel .pg-head { border-bottom-color: rgba(217, 187, 130, .3); }
+#overlay .node-panel .pg-head { border-bottom-color: rgba(223, 194, 141, .22); }
 
-/* W2c 叙事正文（.sub）：冷青纸白微提，行距放松给文案呼吸——文字本体不动 */
+/* W2c 叙事正文（.sub）：对齐真源口径 #a8bbc1 / 行高 1.6 / 字距 .5px——文字本体不动 */
 #overlay .card.page .node-pg:not(.shop-pg) .pg-head .sub {
-  color: #bfd2d6;
-  line-height: 1.8;
-  letter-spacing: .02em;
+  color: #a8bbc1;
+  line-height: 1.6;
+  letter-spacing: .5px;
 }
+
+/* W2d 选项区上移（2026-09-25 审计 P2-17）：node-main 顶对齐 + 选项区贴正文，
+   修复单选项页正文顶置/唯一选项垂直居中导致的上下空旷（无单选项容器类，统一上移） */
+#overlay .node-main { justify-content:flex-start; }
+#overlay .node-main .node-summary { margin-top:18px; }
 
 /* ═════════ W3 选项条 .evt-opt：核心交互（冷青档案条 + 左缘金标 + 快按慢弹） ═════════ */
 
 /* W3a 底态：纵向冷青微渐变 + 过渡节奏分族（transform 走 lift，色彩走 fast） */
 #overlay .node-pg .evt-opt {
   border-color: rgba(159, 183, 188, .3);
-  background: linear-gradient(180deg, rgba(19, 42, 56, .82), rgba(12, 27, 39, .88));
+  background: #132a38b0;
   transition: transform var(--evt-lift), border-color var(--evt-fast),
     background var(--evt-fast), box-shadow var(--evt-fast);
 }
@@ -78,22 +91,21 @@
 #overlay .node-pg .evt-opt::before {
   content: ''; position: absolute; left: 0; top: 10px; bottom: 10px; width: 2px;
   pointer-events: none;
-  background: linear-gradient(180deg, transparent, #d9bb82b3 30%, #d9bb82b3 70%, transparent);
-  opacity: .3;
+  background: linear-gradient(180deg, transparent, #dfc28db3 30%, #dfc28db3 70%, transparent);
+  opacity: .5;
   transform: scaleY(.72);
   transform-origin: 50% 50%;
   transition: opacity var(--evt-fast), transform var(--evt-fast);
 }
 
-/* W3b 悬停：右移 5px（保留原 x 向语言）+ 金边 + 面板提亮 + 金标立起、▸ 转暖金 */
+/* W3b 悬停：右移 5px + 金边 + 底色对齐真源 #22414d + 金标立起、▸ 转暖金（不再叠加光晕） */
 #overlay .node-pg .evt-opt:hover:not(:disabled) {
   transform: translateX(5px);
-  border-color: rgba(217, 187, 130, .6);
-  background: linear-gradient(180deg, rgba(31, 60, 77, .9), rgba(18, 38, 53, .94));
-  box-shadow: 0 6px 16px rgba(2, 8, 14, .4), 0 0 12px rgba(217, 187, 130, .12);
+  border-color: #dfc28d;
+  background: #22414d;
 }
 #overlay .node-pg .evt-opt:hover:not(:disabled)::before { opacity: .95; transform: scaleY(1); }
-#overlay .node-pg .evt-opt:hover:not(:disabled)::after { color: #ecd9ad; }
+#overlay .node-pg .evt-opt:hover:not(:disabled)::after { color: #dfc28d; }
 #overlay .node-pg .evt-opt:hover:not(:disabled) b { color: #f6f4ea; }
 
 /* W3c 按压：快进（.09s）缩压，松手沿 lift 曲线弹性回位 */
@@ -105,16 +117,16 @@
 
 /* W3d 键盘焦点：金线焦点环画在条内（-3px 内收，避免与相邻条重叠） */
 #overlay .node-pg .evt-opt:focus-visible {
-  outline: 1px solid #d9bb82cc;
+  outline: 1px solid #dfc28dcc;
   outline-offset: -3px;
-  box-shadow: 0 0 0 1px #071720, 0 0 12px rgba(217, 187, 130, .35);
+  box-shadow: 0 0 0 1px #071720, 0 0 12px rgba(223, 194, 141, .35);
 }
 
 /* W3e 语义 tone：
    ok=主行动（获取并离开/进入闸门等）——金字 + 金标常亮，视觉上"最先读到这里" */
 #overlay .node-pg .evt-opt.ok b {
-  color: #ecd9ad;
-  text-shadow: 0 0 10px rgba(217, 187, 130, .22);
+  color: #dfc28d;
+  text-shadow: 0 0 10px rgba(223, 194, 141, .22);
 }
 #overlay .node-pg .evt-opt.ok::before { opacity: .75; transform: scaleY(1); }
 /* danger=高危选项——hover 转暖红警示（ID 级 hover 会压过 scenes 的裸 .danger，须显式接回） */
@@ -128,9 +140,10 @@
 }
 #overlay .node-pg .evt-opt.danger:hover:not(:disabled) b { color: #f2d4cb; }
 
-/* W3f 禁用态（碎片不足/限次已用）：保持可见但明确不可点；金标压到最低；光标回默认 */
+/* W3f 禁用态（碎片不足/限次已用）：可见性由 scenes.css 单处定义（opacity .45+grayscale），
+   此处不再叠加压暗金标；光标回默认 */
 #overlay .node-pg .evt-opt:disabled { cursor: default; }
-#overlay .node-pg .evt-opt:disabled::before { opacity: .12; transform: scaleY(.72); }
+#overlay .node-pg .evt-opt:disabled::before { transform: scaleY(.72); }
 
 /* ═════════ W4 底部行动区 .node-foot 的 .ov-btn：同族三态 + 焦点环 ═════════ */
 
@@ -144,16 +157,15 @@
   transition-duration: var(--evt-press);
 }
 #overlay .node-pg .node-foot .ov-btn:focus-visible {
-  outline: 1px solid #d9bb82cc;
+  outline: 1px solid #dfc28dcc;
   outline-offset: 2px;
-  box-shadow: 0 0 0 1px #071720, 0 0 12px rgba(217, 187, 130, .35);
+  box-shadow: 0 0 0 1px #071720, 0 0 12px rgba(223, 194, 141, .35);
 }
 
-/* ═════════ W5 出入场：面板自右展开（事件是叙事时刻——开卷仪式，一拍即收） ═════════
-   .node-pg 自身淡入 / pg-head 上浮 / evt-opt 逐条错峰均为 scenes.css 既有编排，
-   本文件只补"面板整体"这一层，不叠加新错峰。reduced-motion 由 winter.css 全局兜底。 */
+/* ═════════ W5 出入场（2026-09-25 审计 P2-13：整页淡入+面板展开+逐条错峰三层叠加拖沓，
+   面板层动画停用；scenes 既有 nodeFadeIn / pg-head / evt-opt 错峰编排保留） ═════════ */
 #overlay .card.page:has(.node-pg) .node-panel {
-  animation: evtPanelIn .5s cubic-bezier(.22, 1, .36, 1) backwards;
+  animation: none;
 }
 @keyframes evtPanelIn {
   from { opacity: 0; transform: translateX(18px); }

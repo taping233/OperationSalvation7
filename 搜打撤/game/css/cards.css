@@ -239,9 +239,12 @@
      2026-09-13 留言（多加一些动画和彩蛋）：禁令保留（它是滑动流畅的护栏），
      卡面 hover 抬升只留 transform（合成器线程），drop-shadow 滤镜重绘继续拦；
      库内新增动画一律在 expedition-library.css 里按更高优先级豁免单开。 */
-  body.cardlib-open #overlay *,
-  body.cardlib-open #overlay *::before,
-  body.cardlib-open #overlay *::after { animation: none !important; transition: none !important; }
+  /* 09-25 收窄：原 #overlay * 全局禁令会连同 #overlay 内的战斗 DOM 一起静默禁动效
+     （cardlib-open 类残留时战斗全部动画/过渡失效）；卡牌库与照相馆共用了同一页根
+     （.pg.card-library-page.photo-studio-v3），收窄到页根内即覆盖两者，禁令语义不变 */
+  body.cardlib-open #overlay .card-library-page *,
+  body.cardlib-open #overlay .card-library-page *::before,
+  body.cardlib-open #overlay .card-library-page *::after { animation: none !important; transition: none !important; }
   body.cardlib-open #overlay .lib-cardwrap { transition: transform .16s ease !important; }
   body.cardlib-open #overlay .lib-cardwrap:hover { filter: none; }
   body.cardlib-open #overlay .rv-beam { display: none; }
@@ -327,7 +330,6 @@
   .desc-count { font-size: 11px; color: #7c7c7c; letter-spacing: .5px; font-weight: 400; }
 
   /* ---------------- 商店（卡牌 8 栏位） ---------------- */
-  .shop-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px 10px; margin: 4px 0 6px; }
   .shop-slot { display: flex; flex-direction: column; align-items: center; gap: 6px;
     transition: transform .15s ease; }
   .shop-slot:hover { transform: translateY(-3px); }
@@ -348,3 +350,9 @@
     text-align: left; font-weight: 600; }
   .set-h .set-tip { color: #797979; font-size: 10.5px; letter-spacing: 0; margin-left: 6px; }
   .set-h .ic { width: 13px; height: 13px; vertical-align: -0.16em; }
+
+/* 窄档：制作坊表单列 min-width:400px 无收窄档，改为上下堆叠 */
+@media(max-width:760px){
+  .cdes-main { flex-direction:column; }
+  .cdes-form { min-width:0; border-left:0; border-top:1px solid #2a2a2a; }
+}

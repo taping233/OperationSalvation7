@@ -184,7 +184,7 @@
   background: rgba(217, 187, 130, .12); border-color: #d9bb82;
   box-shadow: inset 0 0 0 1px rgba(217, 187, 130, .35), 0 0 14px rgba(217, 187, 130, .15);
 }
-#overlay #depMain .bag-cell { border-radius: 8px; }
+#overlay #depMain .bag-cell { border-radius: 2px; }
 /* 空格：旧米白虚线（#b3af9f 残留）→ 冷青虚线 */
 #overlay #depMain .bag-cell.empty {
   border-color: rgba(182, 211, 214, .22);

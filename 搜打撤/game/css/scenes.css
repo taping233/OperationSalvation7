@@ -230,6 +230,12 @@
   .bt-card.rl-4 { animation: chestFlyIn .55s cubic-bezier(.2,1.25,.4,1) backwards, legendGlow 1.1s ease-in-out infinite alternate;
     box-shadow: 0 0 26px rgba(174,174,174,.65); }
   @keyframes legendGlow { from { opacity: .88; } to { opacity: 1; } }
+  /* 宝箱卡描述与币值角标（2026-09-25 审计 P0-1）：desc 限高防溢出卡底；
+     币值角标收进卡内（cards.css 负偏移挂在卡外，压住描述末行） */
+  #overlay .card.chest .hs-card .hsc-desc { max-height: 6.5em; overflow: hidden; }
+  #overlay .card.chest .hs-card .hsc-val { right: .2em; bottom: .2em; }
+  /* 开出行提示图标与数字间距（2026-09-25 审计 P1-4）：币图标贴数字被读成「0 1 币」 */
+  #overlay .card.chest .evt-sts-desc .ic { margin-right: 4px; }
 
   /* ============ v0.25 事件卡揭晓（杀戮尖塔式：标题 + 叙事 + 左立绘 + 右选项条） ============ */
   .evt-sts { gap: 0; }
@@ -238,7 +244,7 @@
     text-shadow: 0 0 24px var(--sc-glow, rgba(171,171,171,.4)), 0 2px 3px rgba(0,0,0,.7); }
   .evt-sts-title .ic { width: 26px; height: 26px; vertical-align: -0.22em; }
   .evt-sts-desc { position: relative; margin: 0 auto 26px; max-width: 720px; padding: 0 20px;
-    font-size: 14.5px; line-height: 1.9; color: #c9c9c9; text-align: center; }
+    font-size: 13px; line-height: 1.6; color: #c9c9c9; text-align: center; }
   .evt-sts-main { position: relative; flex: 1; min-height: 0; width: min(1100px, 100%);
     display: flex; gap: clamp(20px, 4vw, 56px); align-items: center; justify-content: center;
     padding: 0 clamp(20px, 4vw, 48px); }
@@ -250,24 +256,23 @@
   .evt-sts-art img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .evt-sts-opts { flex: 0 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 14px; }
   .evt-opt { display: flex; flex-direction: column; align-items: flex-start; gap: 5px; text-align: left;
-    position: relative; padding: 15px 40px 15px 22px; border-radius: 12px; border: 1.5px solid #5f5f5f; color: inherit;
+    position: relative; padding: 15px 40px 15px 22px; border-radius: 12px; border: 1.5px solid rgba(159,183,188,.3); color: inherit;
     background: linear-gradient(180deg, rgba(46,46,46,.92), rgba(30,30,30,.92));
     cursor: pointer; transition: all .16s; font-family: inherit;
     animation: sceneItemIn .45s cubic-bezier(.22,1,.36,1) backwards; }
   /* 右侧常驻方向箭头：静止态就能看出「这是可点选项」（09-20 P1-2） */
   .evt-opt::after { content: '▸'; position: absolute; right: 15px; top: 50%;
-    transform: translateY(-50%); font-size: 15px; color: #8f8f8f; transition: all .16s; }
+    transform: translateY(-50%); font-size: 15px; color: #dfc28d99; transition: all .16s; }
   .evt-opt:nth-child(1) { animation-delay: .12s; }
   .evt-opt:nth-child(2) { animation-delay: .22s; }
   .evt-opt:nth-child(3) { animation-delay: .32s; }
   .evt-opt b { font-size: 16px; color: #e6e6e6; letter-spacing: 2px; font-family: var(--serif); }
   .evt-opt span { font-size: 12px; color: #9a9a9a; line-height: 1.6; }
   .evt-opt:hover::after { color: #ffffff; transform: translateY(-50%) translateX(3px); }
-  .evt-opt:hover { border-color: #c2c2c2; transform: translateX(6px);
-    background: linear-gradient(180deg, rgba(58,58,58,.96), rgba(38,38,38,.96));
-    box-shadow: 0 0 22px rgba(194,194,194,.22), 0 8px 20px rgba(0,0,0,.45); }
+  .evt-opt:hover { border-color: #dfc28d; transform: translateX(5px);
+    background: #22414d; }
   .evt-opt:hover b { color: #ffffff; }
-  .evt-opt:active { transform: translateX(6px) scale(.985); }
+  .evt-opt:active { transform: translateX(5px) scale(.985); }
   .evt-opt.ok b { color: #d9d9d9; }
   .evt-opt.danger:hover { border-color: #b98a8a; box-shadow: 0 0 22px rgba(185,138,138,.25), 0 8px 20px rgba(0,0,0,.45); }
   .evt-opt.danger:hover b { color: #e8c8c8; }
@@ -312,7 +317,7 @@
     background: linear-gradient(90deg, rgba(9,9,9,.12) 42%, rgba(9,9,9,.55) 66%, rgba(9,9,9,.82)); }
   .node-pg > * { z-index: 1; }
   /* 右栏：无底板，标题/描述居中在上，选项条居中排布（模仿杀戮尖塔事件页） */
-  .node-panel { position: absolute; top: 0; right: 0; bottom: 0; width: min(520px, 48%);
+  .node-panel { position: absolute; top: 0; right: 0; bottom: 0; width: min(560px, 46%); /* 宽度对齐真源 expedition-rewards.css（560px/46%） */
     display: flex; flex-direction: column; gap: 18px; padding: 8vh 44px 30px 8px;
     background: none; border: 0; box-shadow: none; }
   /* 2026-09-15 老板令：事件页排版统一为左对齐体系（与 expedition-rewards 生效值一致，本段为同源基准） */
@@ -320,9 +325,9 @@
   .pg.node-pg:not(.shop-pg) .pg-head { display: flex; flex-direction: column; align-items: flex-start; gap: 20px;
     padding: 0; border: 0; background: none; text-align: left; flex-shrink: 0; }
   #overlay .card.page .node-pg:not(.shop-pg) .pg-head h2 { display: block; font-size: 32px; font-weight: 400;
-    letter-spacing: 4px; color: #e8eeea; font-family: 'SimSun', serif; text-shadow: none; }
+    letter-spacing: 4px; color: #e6eef1; font-family: 'SimSun', serif; text-shadow: none; }
   #overlay .card.page .node-pg:not(.shop-pg) .pg-head .sub { padding: 0; border: 0; white-space: normal;
-    overflow: visible; text-overflow: clip; font-size: 13px; line-height: 1.6; color: #b7c7cd;
+    overflow: visible; text-overflow: clip; font-size: 13px; line-height: 1.6; color: #a8bbc1;
     letter-spacing: .5px; text-shadow: none; }
   .node-main { flex: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column;
     justify-content: center; gap: 16px; padding: 12px 0; text-align: left; }
@@ -381,7 +386,7 @@
   /* 选项条：深色半透明圆角条 + 细亮描边，文字居中（杀戮尖塔式） */
   /* 选项条：深色半透明圆角条 + 细亮描边（2026-09-15 与 expedition-rewards 生效值对齐，单源化） */
   #overlay .node-pg .evt-opt { align-items: flex-start; text-align: left; gap: 6px;
-    padding: 16px 20px; border-radius: 2px; border: 1px solid #8aa4ae44;
+    padding: 16px 20px; border-radius: 2px; border: 1px solid rgba(159,183,188,.3);
     background: #132a38b0; box-shadow: none;
     backdrop-filter: none; -webkit-backdrop-filter: none; }
   #overlay .node-pg .evt-opt b { text-shadow: none; }
@@ -401,9 +406,14 @@
   .node-pg .fire-restore-hand { flex: 0 0 auto; width: 100%; padding: 4px 0 0; justify-content: flex-start; }
   .node-pg .fire-restore-card { cursor: pointer; transition: transform .14s, box-shadow .14s, filter .14s; }
   .node-pg .fire-restore-card:hover { transform: translateY(-6px) scale(1.04); }
-  .node-pg .fire-restore-card.off { filter: brightness(.55) saturate(.7); cursor: default; }
+  .node-pg .fire-restore-card.off { opacity: .5; filter: grayscale(.6); cursor: default; }
   .node-pg .fire-restore-card.off:hover { transform: none; }
   .node-pg .ov-empty { color: #c9c9c9; text-shadow: 0 1px 8px rgba(0,0,0,.9); }
+  /* 火堆空态（2026-09-25 审计 P3-22）：单行灰字缩在中部空洞 → 虚线占位框居中，
+     min-height 对齐 sm 卡面区（14em×12px=168px），有卡/无卡切换不跳版 */
+  .node-pg .fire-restore-hand:has(.ov-empty) { justify-content: center; align-items: center;
+    min-height: 168px; border: 1px dashed rgba(159,183,188,.35); background: none; }
+  .node-pg .fire-restore-hand .ov-empty { margin: 0; }
   /* 商店（2026-09-09 对齐参考图：墨绿货摊纸板 + 卡下价签 + 左缘离开绶带 + 右下卖牌处金币） */
   .shop-pg { display: flex; flex-direction: column; justify-content: center; gap: 14px;
     padding: 18px clamp(20px, 4vw, 64px); overflow: auto; }
@@ -640,6 +650,7 @@
   button.event-choice-card { appearance:none; -webkit-appearance:none; padding:0; border:0; background:transparent; color:inherit; cursor:pointer; position:relative; }
   button.event-choice-card:hover,
   button.event-choice-card:focus-visible { transform:translateY(-5px); filter:brightness(1.08); outline:2px solid rgba(126,211,255,.88); outline-offset:3px; }
+  button.event-choice-card:active { transform:translateY(-3px); }
   button.event-choice-card.picked { transform:translateY(-7px); filter:brightness(1.12); outline:3px solid #73ddc3; outline-offset:3px; }
 
   #overlay .scene[data-asset-key="scene-event-cobbler"] { background-image:url('../assets/scenes/event-cmtn7qttxqo4.webp'); }

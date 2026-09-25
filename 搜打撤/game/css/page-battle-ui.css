@@ -262,7 +262,7 @@
 #overlay .card.discover .choice-list .ov-btn:focus-visible,
 .bt-settings input[type="checkbox"]:focus-visible {
   outline: 1px solid #d9bb82cc;
-  outline-offset: 2px;
+  outline-offset: 4px;   /* 09-25：2→4px，大尺寸光标贴点时金环不再被光标本体盖住中心 */
   box-shadow: 0 0 0 1px #071720, 0 0 12px rgba(217, 187, 130, .35);
 }
 

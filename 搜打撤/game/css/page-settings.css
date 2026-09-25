@@ -161,6 +161,8 @@
 /* 包 span 的行（音乐来源/音量）：EN 右缘对齐与其他行一致 */
 .pg.settings-page .chk > span:first-child { flex: 1; display: flex; align-items: center; gap: 6px; min-width: 0; }
 .pg.settings-page .chk > span:first-child .set-en { margin-left: auto; padding-left: 12px; }
+/* 音量行 EN 标签右对齐并定宽，与其他行右缘制式统一（MUSIC VOL / SFX VOL） */
+.pg.settings-page .chk.vol .set-en { min-width: 96px; margin-right: 12px; text-align: right; }
 
 /* S5b 控件本体：勾选框转档案金定制框，滑条转暖金族，数值提亮微金晕 */
 .pg.settings-page .chk input[type="checkbox"] {
@@ -298,7 +300,7 @@
 /* S6f 返回键统一（2026-09-25 老板）：设置页返回 = 主页左上退出键同款同位，
    定位/底色/内框在 winter.css #12 .ak-back-tl；这里只做页头让位与暖金 hover 收口
    （留言库 S6e 同款语言）。底部大返回钮已随统一取消，S6c 样式留存不再命中。 */
-#overlay .pg.settings-page .pg-head { padding-left: 98px; }
+#overlay .pg.settings-page .pg-head { padding-left: 98px; min-height: 88px; }
 #overlay .pg.settings-page .ak-back-tl:hover {
   border-color: rgba(217, 187, 130, .6);
   color: #f0dcb0;
@@ -414,5 +416,5 @@
 /* ═════════ S10 滚动条：冷青细轨（expedition-roster 语言） ═════════ */
 .pg.settings-page .settings::-webkit-scrollbar { width: 9px; }
 .pg.settings-page .settings::-webkit-scrollbar-track { background: rgba(7, 23, 32, .35); }
-.pg.settings-page .settings::-webkit-scrollbar-thumb { background: rgba(104, 128, 139, .38); border-radius: 5px; }
+.pg.settings-page .settings::-webkit-scrollbar-thumb { background: var(--sb-thumb); border-radius: var(--sb-radius); }
 .pg.settings-page .settings::-webkit-scrollbar-thumb:hover { background: rgba(159, 183, 188, .52); }

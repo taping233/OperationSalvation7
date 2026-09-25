@@ -18,7 +18,8 @@
 #overlay .bag-main, #overlay .bag-side { background:rgba(13,34,47,.62); border:1px solid rgba(182,211,214,.14); padding:18px; }
 #overlay .bag-side { background:#0b1f2c; }
 #overlay .bag-slot.empty, #overlay .safe-empty { background:rgba(230,238,241,.025); border-color:rgba(182,211,214,.13); }
-#overlay .bag-head .fc-chip, #overlay .bag-view .fc-chip { background:#102735; color:#b7cbd0; border-color:rgba(223,194,141,.25); border-radius:2px; }
+#overlay .bag-head .fc-chip, #overlay .bag-view .fc-chip { background:#102735; color:#b7cbd0; border-color:#dfc28d55; border-radius:2px; } /* 09-25 P2：fc-chip 与 baghelp 制式统一（底 #102735 / 边 #dfc28d55，#dfc28d 为事件真源金保留） */
+#overlay .bag-head .fc-chip b, #overlay .bag-view .fc-chip b { color:#ecd9ad; } /* 09-25 P2：chip 数字暖米金，压过 winter.css 的 #e5d4ae */
 /* 背包格标题右侧的排序按钮（2026-09-13：按稀有度/按种类；nowrap 防标题挤压折行成「按稀有/度」，2026-09-19 走查 B4） */
 .bag-sort { float: right; display: inline-flex; gap: 6px; }
 .bag-sort .mini-btn { font-size: 11px; padding: 2px 8px; letter-spacing: 1px; white-space: nowrap; flex-shrink: 0; }
@@ -30,7 +31,7 @@
 #overlay .ov-btn.ok, #overlay .mini-btn.ok { background:#dfc28d; color:#0b202c; }
 #overlay .ov-btn.danger, #overlay .mini-btn.danger { background:#6f3539; border-color:#a96868; color:#ffe4df; }
 #overlay .hub-back, #overlay .bag-close, #overlay .pg-back { color:#b7cbd0; }
-@media (max-width:760px) { #overlay .hub-body { grid-template-columns:1fr; } #overlay .hub-tabs { flex-direction:row; overflow-x:auto; border-right:0; border-bottom:1px solid rgba(223,194,141,.18); padding:8px; } #overlay .hub-tab { min-width:110px; justify-content:center; border-left:0; border-bottom:3px solid transparent; } #overlay .hub-tab.on { border-left:0; border-bottom-color:#dfc28d; } #overlay .deploy-grid, #overlay .hub-two, #overlay .dep-body { grid-template-columns:1fr; } }
+@media (max-width:760px) { #overlay .hub-body { grid-template-columns:1fr; } #overlay .hub-tabs { flex-direction:row; overflow-x:auto; border-right:0; border-bottom:1px solid rgba(223,194,141,.18); padding:8px; } #overlay .hub-tab { min-width:110px; justify-content:center; border-left:0; border-bottom:3px solid transparent; } #overlay .hub-tab.on { border-left:0; border-bottom-color:#d9bb82; } #overlay .deploy-grid, #overlay .hub-two, #overlay .dep-body { grid-template-columns:1fr; } }
 @media (max-height:760px) { #overlay .hub-head, #overlay .bag-head, #overlay .pg-head { padding:12px 18px; } #overlay .hub-page { padding-top:14px; padding-bottom:28px; } }
 
 /* 出征整备页：覆盖 winter.css 的浅纸卡片与旧按钮，保证 720px 高度仍能完成确认。 */
@@ -45,7 +46,7 @@
 #overlay #depMain .dep-cards { flex:1 1 auto; min-height:0; max-height:none; overflow-y:auto; padding:4px 3px 8px; scrollbar-color:#496977 #081722; }
 #overlay #depMain .bag-grid { flex:1 1 auto; min-height:120px; overflow-y:auto; padding:9px; border-color:rgba(223,194,141,.38); border-radius:2px; scrollbar-color:#496977 #081722; }
 #overlay #depMain .dep-foot { flex-shrink:0; margin-top:12px; padding-top:12px; border-top:1px solid rgba(223,194,141,.2); }
-#overlay #depMain .dep-foot #btnDeploy { min-height:42px; padding:11px 18px; border:1px solid #dfc28d; border-radius:2px; background:linear-gradient(135deg,#dfc28d,#ad8950); color:#0b202c; box-shadow:0 6px 18px rgba(0,0,0,.24); font-weight:800; letter-spacing:.22em; }
+#overlay #depMain .dep-foot #btnDeploy { min-height:42px; padding:11px 18px; border:1px solid #dfc28d; border-radius:2px; background:linear-gradient(135deg,#f7e7bd,#d9bb82 58%,#c8a76b); color:#0b202c; box-shadow:0 6px 18px rgba(0,0,0,.24); font-weight:800; letter-spacing:.22em; } /* 09-25 P2：主确认金钮渐变统一定版配方 #f7e7bd→#d9bb82→#c8a76b */
 #overlay #depMain .dep-foot #btnDeploy:hover { background:linear-gradient(135deg,#f0d89d,#c19a5d); }
 #overlay #depMain .dep-back { border-radius:2px; }
 

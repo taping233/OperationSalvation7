@@ -41,7 +41,7 @@
 }
 
 /* W1b 四角暗角：视线收向中部内容区（fixed 内容滚动时暗角不动） */
-#hubMain::after {
+#overlay #hubMain::after {
   content: ''; position: absolute; inset: 0; z-index: 3; pointer-events: none;
   background:
     radial-gradient(130% 100% at 46% 40%, transparent 54%, rgba(3, 10, 16, .34) 88%, rgba(2, 8, 13, .52) 100%),
@@ -49,7 +49,7 @@
 }
 
 /* W1c 底部两角金饰线（对标选档页 W2e：上角有返回/?/关闭坐镇，只补下方空角） */
-#hubMain::before {
+#overlay #hubMain::before {
   content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 27px;
   z-index: 3; pointer-events: none; opacity: .55;
   animation: hubGemBreath 6s ease-in-out infinite alternate;
@@ -63,6 +63,20 @@
     linear-gradient(0deg, #d9bb82b3, transparent) calc(100% - 23px) calc(100% - 27px) / 1px 18px no-repeat;
 }
 @keyframes hubGemBreath { from { opacity: .4; } to { opacity: .75; } }
+/* W1c-补 矮窗口：27px 固定高金饰线会叠压内容，参照选档页
+   page-slot-select.css @media(max-height:600px) 先例收紧为 13px（角饰随高度重排） */
+@media (max-height: 600px) {
+  #overlay #hubMain::before {
+    height: 13px; opacity: .4;
+    background:
+      radial-gradient(2.6px 2.6px at 23px calc(100% - 5px), #ffe9b6 40%, transparent 75%),
+      linear-gradient(90deg, #d9bb82b3, transparent) 23px calc(100% - 5px) / 54px 1px no-repeat,
+      linear-gradient(0deg, #d9bb82b3, transparent) 23px calc(100% - 13px) / 1px 8px no-repeat,
+      radial-gradient(2.6px 2.6px at calc(100% - 23px) calc(100% - 5px), #ffe9b6 40%, transparent 75%),
+      linear-gradient(270deg, #d9bb82b3, transparent) calc(100% - 77px) calc(100% - 5px) / 54px 1px no-repeat,
+      linear-gradient(0deg, #d9bb82b3, transparent) calc(100% - 23px) calc(100% - 13px) / 1px 8px no-repeat;
+  }
+}
 
 /* ═════════ W2 页头：档案仪式感（金发丝线 + 端点光点 + 竖金标） ═════════ */
 
@@ -164,6 +178,12 @@
     box-shadow var(--hub-fast), transform var(--hub-fast), filter var(--hub-fast);
 }
 #overlay #hubMain .hub-tab .tab-ico .ic { transition: filter var(--hub-fast), transform var(--hub-fast); }
+/* W3b 页签图标瓦片：hub.css 灰阶底残留 → 冷青档案瓦片
+   （激活态描边仍由 hub.css .hub-tab.on .tab-ico 管理，本条不触碰） */
+#overlay #hubMain .hub-tab:not(.on) .tab-ico {
+  border-color: rgba(159, 183, 188, .25);
+  background: radial-gradient(ellipse at 50% 30%, #17323f, #0a1a24 88%);
+}
 #overlay #hubMain .hub-tab:hover {
   color: #e2ecee; background: rgba(159, 197, 205, .06); transform: translateX(2px);
 }
@@ -323,3 +343,9 @@
 
 /* ═════════ T6 光标自查：button 默认 cursor 补 pointer（禁用态除外） ═════════ */
 #overlay #hubMain button:not(:disabled) { cursor: pointer; }
+
+/* ═════════ 矮窗口档：页签与页顶留白收紧，给内容让高度 ═════════ */
+@media (max-height:700px) {
+  #overlay #hubMain .hub-tab { padding: 6px 8px; }
+  #overlay #hubMain .hub-page { padding-top: 10px; }
+}
