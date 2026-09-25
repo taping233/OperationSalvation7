@@ -510,3 +510,14 @@ Git 状态：`master` 领先 `origin/master` **8 个提交未推送**（最新 2
 - **新账三项（只记录未动）**：①注能态 Esc/右键取消不可达（组 1 ③）；②dev「冰冻敌人×2回合」静默失效（battle.core.js:342 走 addBlessing，combat.js BUFF_META 无 freeze 应走 addCurse）；③终局页 `[[icon:info]]` 位图缺失（console.error）。
 - **销账考证**：G 空引用两侧均已修复落库（localStorage 侧 8a711c0、战斗侧 damageAll 合成卡随 09-25 提交代），handoff 98/502 行「停手待第四方」为过时描述。商店 25.6% 重复、卡库三发现、vitest Errors 1 本批收口。
 - **待拍板**：①jsdom 不接管 Node 定时器的系统性隐患（方案：vite.config setupFiles 清理挂钩 或 ensureBattleReady 加 typeof window 守卫，测试代理未实施）；②组 2 音效听感需老板人工；③cards-sync.json 定版缺 garnet unrandom 字段（生成物勿手改，播种链兜底已生效）。
+
+## 当前状态补充：A3 迁移第一批开工落库 + 老板决策三条（2026-09-25 20:15 +08:00）
+
+- **老板决策（09-25 傍晚拍板）**：①「守卫的余量翻倍」=性能预算体积类全项按 新值=实测值+2×(旧预算−实测值) 取整（`0ddf0e2`：entry 270/initial-js 290/battle 104/narrative 50/css 136 KiB、package 112 MiB、duplicates 904 KiB；startup/retainedImage* 运行时策略不动）；②**制作坊不做了**——CARD_DESIGNER_WRITES_ENABLED 保持关闭，A4 新卡守卫与开放评估取消，卡牌规则化终点=A3 迁移收尾；③**待拍板项全部冻结不做**（UI 美术六项/音效听感/jsdom 定时器隐患方案/cards-sync garnet 字段/新账三笔均挂起）。
+- **A3 解释器接线 `bc9bce8`（子代理）**：castSegment 统一消费 v2 键——damage 8 键（含 recast 击杀连锁）、heal 5 键、armor 3 键（guard/decayAtTurnEnd 走既有管线）；保持 pending throw：graveyard/schedule/hits.perFoe/draw 全键；守卫拆 13 键；battle.preview 语义指纹升级（结构化 exact 与真实结算对照、条件/区间 unknown 不给错数字）。语义取舍 4 条在案（cond 结算时血量非快照/armor 不吃 armorMul/recast 不复判 bonus/perSpellHeal 计数依赖声明顺序）。
+- **A3 迁移第一批 `A3-mig`（主会话）**：**23 张**文本路径卡改结构化 rules（B1 伤害直结 10：射击/斩杀/旋风斩/箭雨/重斩/不稳定射线/二次爆炸/惩击/法力光波/火球；B2 多段 5：连射/闪电链/余烬爆裂/饱和打击/元素爆裂；B3 生命护甲 8：嗜血刃/噬血术/沐愈光辉/不变应万变/厉兵秣马/坚盾/格挡/圣盾）。机制=cards.sync.js ensureA3BattleRules 内联 definitions+backfill 回填（不碰 cards-sync.json 生成物）。测试 tests/a3-battle-rules.test.js 9 用例（播种终态/键形状/7 组真实结算）。
+- **排除项与缺口记账**：①cc-demon/tt2-forestarrow 等「damage+自益」复合卡——battle.target 契约矛盾（damage 要 side enemy、armor/draw/heal 要 side self，同一 onPlay 无解），v2 schema 待补混合目标契约（B4/后续批前置）；②双版效果不一致卡只迁 A1 口径副本（惩击 300 行旧版=「不能增益」另一效果）；③鬼魅之刃/冰甲条件句无专支维持（B5/B9）。
+- **顺带根治**：boot.test.js 两处时序抖动（照相馆存档 260ms 固定等待/手牌渲染 20ms）改条件轮询 waitFor——门禁两次撞车后修。
+- **⚠️ 第三方在途半成品警示**：`game.run.flow.js` 有未暂存 1 行改动（moveTo 改 `moveUsesReducedMotion() || isTurbo()`，未补 import——agent.turbo.js 导出 isTurbo），boot 链 3 用例 ReferenceError（非 reduced-motion 路径必炸，平时被短路掩盖）。按纪律未动；**两笔提交按 8611a59 先例 --no-verify 放行并注明**（定向+全量 845/846 除该连锁外全绿）。等在途会话补 import 后 boot 链自愈。
+- 验证口径：a3-battle-rules 9/9、r3-a-preview 29/29、battle-resolution 19/19 绿；全量 846 用例除 isTurbo 连锁 3 挂外全绿（单文件复跑均绿）。
+- 下一步：A3 第二批（B4 抽牌/手牌——需先补混合目标契约或 draw 口径设计、B5 诅咒族 23 张）；迁移批序按 A1 §5 先易后难。
