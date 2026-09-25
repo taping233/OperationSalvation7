@@ -1,3 +1,10 @@
+## 当前状态补充：老板批件执行完毕——删除批三笔落库（2026-09-25 09:3x +08:00）
+
+- 老板 09-25 批示「UI 图标重绘方案暂时取消，其他你都执行」。删除批三笔落库：**资产批**（孤儿资产 108 个跟踪文件 ≈2.8MB——cursor-art 三件套连带 9/白名单死图+thumbs 10/别名副本 2/旧场景图 14/杂项 9/game-icons 整目录 32/旧原型 6/tt-peach 2/redraw-preview 底稿 24 + 临时文件 4 + 截图产物 9 + NAI zip/payload 6 + KNOWN_ORPHANS 白名单收窄至两条合法兜底 + nai_gen.pyc 停跟踪与 `__pycache__/` 拉黑）；`cd6c3ba` **JS 死代码批**（meta.js track 孤儿 case、cardslib 分页机制残留整体清除——libPageIndex/分页条/三页缓存/预热/keepPage 死分支/死 act，LIB_PAGE_SIZE 保留供翻看换算、overlay.js sceneNext 死探测、run.scenes finishScene/sceneState）；`49f7cd7` **CSS 死块批**（overlays.css 85 行：旧 HUD 徽章族/旧战斗面板族/旧基地容器/旧背包网格/shop-list，含报告漏列的 slot-hud 族补核后删）。docs/pending-deletions-2026-09-25.md 已改写为执行完毕留档。
+- 披露：① `cursor-art.css` 上 UI 审查会话的 2 行在途改动随死文件删除一并消灭（该文件零挂载，改动无效果面）；② 删除目标抽查出报告漏列的 `.slot-hud` 族（全语料零生成点），补核后一并删除；③ 验收=定向 10+75、4+14 用例绿 + 三笔提交门禁全量 814 绿 ×2 + lint 0 + 语法守卫 187 文件（cursor-art.js 删后减一）+ card-art-coverage/premium-ui-pages 守卫绿。
+- 延后项：CSS 死块余量 43 块（base/battle/cards/expedition-library/hub/scenes/winter 七文件含 UI 审查会话在途改动）待其落库后按类名重扫清；`thumb-manifest.js` 中已删文件的清单条目为构建期自拷贝，下次 build 自动重生。UI 图标方案（含 gear.png 画错）按拍板取消搁置。
+- 巡检记录（cron 第一轮收官巡检，随本批合并执行）：UI 审查会话 70 项仍未落库，维持避让；报批临时文件已随本批删除销账；无新结构性债务。
+
 ## 当前状态补充：wave4 收官——持续任务全部完成（2026-09-25 04:0x +08:00）
 
 - `2460bc5` session 域 engine 侧收尾 53→46（nextTmpSeq 计数式聚合 tmpSeq 五连 + cancelTargetingState 聚合两处写点；守卫与 clearTargetHint 配对留原地；导出只增不减）。状态袋四域最终数字：presentation 0 / piles 19 / interaction 54 / effects 45 / session 46，路线图表格已更新。定向 172 用例绿 + 提交门禁全量 814 绿。
