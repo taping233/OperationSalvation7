@@ -293,19 +293,24 @@ function autoPlayHandType(type) {
     floats.push({ unit: 'self', text: '-' + n, cls: 'hurt' });
     G.log(`[[icon:blood]] 受到 <b>${n}</b> 点伤害（${G.hp}/${G.maxHp}）`, 'warn');
   }
+// 诅咒施加视觉差分（P1）：包装 addCurse——卡牌文本路径与结构化路径（battle.resolution.js curse op）
+// 对敌方施加诅咒时推 cursefx 彩闪（玩家自身中诅咒不闪，仍走日志+角标）。两端口共用同一份对象，
+// 保证两条路径踩的是同一套底层 API。addCurse 回传 combat.addCurse 的结果（叠层后层数/计时剩余，
+// 免疫为 0）——文本路径不消费回传值，结构化路径用它判定日志与生效。
+// Combat 是模块命名空间（属性 only-getter，不能 Object.create 委托），展开为快照普通对象再覆盖——
+// combat.js 导出全是函数/常量，快照安全。
+const combatPort = {
+  ...Combat,
+  addCurse(t, key, n) {
+    const applied = Combat.addCurse(t, key, n);
+    if (t && !t.dead && t !== pstat) {
+      floats.push({ unit: foeIdx(t), text: '', cls: `cursefx curse-${key}` });
+    }
+    return applied;
+  },
+};
 const applyTextEffects = createEffectExecutor({
-    // 诅咒施加视觉差分（P1）：包装 addCurse——卡牌文本路径对敌方施加诅咒时推 cursefx 彩闪
-    //（玩家自身中诅咒不闪，仍走日志+角标）。Combat 是模块命名空间（属性 only-getter，
-    // 不能 Object.create 委托），展开为快照普通对象再覆盖——combat.js 导出全是函数/常量，快照安全。
-    combat: {
-      ...Combat,
-      addCurse(t, key, n) {
-        Combat.addCurse(t, key, n);
-        if (t && !t.dead && t !== pstat) {
-          floats.push({ unit: foeIdx(t), text: '', cls: `cursefx curse-${key}` });
-        }
-      },
-    },
+    combat: combatPort,
     getAlive: alive,
     getPlayerStatus: () => pstat,
     getPlayerDefense: () => pdef,
@@ -742,6 +747,8 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     findCard, addTempCard, queueDiscover: value => discoverQueue.push(value), splitClauses, applyTextEffects,
     registerTurnStart, registerBattle, castRandomSpells, drawCards, grantSha, hitFoe,
     drawOf, isAOE,
+    // B5（A3 第二批）：诅咒族结构化结算与文本路径共用同一包装 combat（cursefx 彩闪 + 同一 addCurse/tickPoison/CURSE_META）
+    combat: combatPort,
     // B3 端口：自伤走 damagePlayer 命令（死亡保险/不屈符文共用）；回复至需要读玩家当前血量；
     // 护甲命令扩展 guard 选项（格挡置 pdef.guard，与文本路径 def.guard 同一旗标）；
     // perSpellHeal 需要「本批抽牌中的法术数」（lastDrawnUids 只记真正入手的牌）。

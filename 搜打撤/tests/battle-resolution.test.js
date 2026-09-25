@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { createBattleResolution } from '../game/src/battle/battle.resolution.js';
+import * as Combat from '../game/src/battle/combat.js';
 
 function makeResolver(state) {
   const events = [];
@@ -33,6 +34,18 @@ function makeResolver(state) {
     damagePlayer: amount => events.push(['selfDamage', amount]),
     getPlayerHp: () => state.playerHp ?? 10,
     countDrawnSpells: () => state.drawnSpellCount ?? 0,
+    // B5（A3 第二批）：与引擎 combatPort 同款包装——addCurse 回传生效值（免疫为 0），
+    // 敌方施放时记一条 cursefx（引擎推彩闪浮标的测试替身；玩家自身不闪，与引擎一致）。
+    combat: {
+      ...Combat,
+      addCurse(target, key, n) {
+        const applied = Combat.addCurse(target, key, n);
+        if (applied > 0 && target && !target.dead && target !== state.playerStatus) {
+          events.push(['cursefx', key]);
+        }
+        return applied;
+      },
+    },
   });
   return { resolver, events };
 }
@@ -481,5 +494,193 @@ describe('battle resolution ports', () => {
     }, target, false, 0, null);
     expect(silenced.events.some(event => ['heal', 'armor', 'float'].includes(event[0]))).toBe(false);
     expect(silenced.events.filter(event => event[0] === 'log').some(event => String(event[1]).includes('沉默'))).toBe(true);
+  });
+});
+
+/* —— A3 第二批（B5 诅咒族，2026-09-25）：结构化 onPlay curse op ——
+ * 运行时语义对齐 combat.js（CURSES/CURSE_META/addCurse/tickPoison）与文本路径
+ * effect-steps.curse/.damage/.kills 的日志文案；每键至少 1 正 1 反。 */
+describe('A3 第二批（B5 诅咒族）：结构化 onPlay curse op', () => {
+  const CURSE_KEYS = ['bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban', 'burn'];
+  const setup = ({ foes = [{}], playerStatus = { name: '我', status: {} } } = {}) => {
+    const list = foes.map((spec, index) => ({
+      name: `敌${index + 1}`, hp: spec.hp ?? 20, maxHp: spec.hp ?? 20, dead: false,
+      status: { ...(spec.status || {}) },
+    }));
+    const callState = {
+      current: { mode: 'boss', playedMovesThisTurn: 0, infuseFuels: 0, grave: [] },
+      playerStatus, target: list[0], foes: list,
+    };
+    return { foes: list, target: list[0], playerStatus, callState, ...makeResolver(callState) };
+  };
+  // battle.target 按 schema 交叉契约随 op.target 取值（chosen/random→enemy/false；all→enemy/true；self→self/false）
+  const targetContract = target => target === 'allEnemies' ? { side: 'enemy', area: true }
+    : target === 'self' ? { side: 'self', area: false } : { side: 'enemy', area: false };
+  const curseCard = (operation, desc = '展示描述') => ({
+    id: 'v2-curse', name: '诅咒测试', type: '法术', dmgType: 'spell', desc,
+    rules: { version: 1, battle: { target: targetContract(operation.target) }, triggers: { onPlay: [operation] } },
+  });
+  const logTexts = events => events.filter(event => event[0] === 'log').map(event => String(event[1]));
+
+  it('bleed：按 stacks 叠加施加，文本句跳过不双算（正/反）', () => {
+    const state = setup({ foes: [{ status: { bleed: 2 } }] });
+    const card = curseCard({ op: 'curse', curse: 'bleed', stacks: 3, target: 'chosenEnemy' }, '攻，附加流血。');
+    const kinds = [];
+    for (const step of state.resolver.steps(card, state.target, false, 0, null)) kinds.push(step.kind);
+    expect(kinds, 'windup→hit 演出节奏').toEqual(['windup', 'hit']);
+    expect(state.target.status.bleed, 'combat.addCurse 叠层：2+3').toBe(5);
+    expect(state.events.some(event => event[0] === 'text'), '结构化在位时文本诅咒句不复算').toBe(false);
+    expect(logTexts(state.events).some(t => t.includes('[[icon:blood]]') && t.includes('附加 3 层流血'))).toBe(true);
+    expect(state.events.some(event => event[0] === 'cursefx'), '敌方施放推彩闪浮标（引擎同款包装）').toBe(true);
+  });
+
+  it('poison：allEnemies 全体各施加（正），玩家自身不受影响（反）', () => {
+    const state = setup({ foes: [{}, {}] });
+    state.resolver(curseCard({ op: 'curse', curse: 'poison', stacks: 2, target: 'allEnemies' }), state.target, false, 0, null);
+    expect(state.foes.map(foe => foe.status.poison)).toEqual([2, 2]);
+    expect(state.playerStatus.status.poison ?? 0, 'allEnemies 不波及玩家').toBe(0);
+    expect(logTexts(state.events).some(t => t.includes('全体敌人附加 2 层中毒（每层回合末 1 点固定伤害）'))).toBe(true);
+  });
+
+  it('freeze：duration 施加（正）；已冻结取较大不缩短不叠加（反）', () => {
+    const fresh = setup({ foes: [{}] });
+    fresh.resolver(curseCard({ op: 'curse', curse: 'freeze', duration: 2, target: 'chosenEnemy' }), fresh.target, false, 0, null);
+    expect(fresh.target.status.freeze).toBe(2);
+    expect(logTexts(fresh.events).some(t => t.includes('[[icon:crystal]]') && t.includes('被冰冻 2 回合（无法行动）'))).toBe(true);
+
+    const longer = setup({ foes: [{ status: { freeze: 3 } }] });
+    longer.resolver(curseCard({ op: 'curse', curse: 'freeze', duration: 1, target: 'chosenEnemy' }), longer.target, false, 0, null);
+    expect(longer.target.status.freeze, '计时诅咒取较大值（combat.addCurse 语义）').toBe(3);
+  });
+
+  it('silence：施加 N 回合（正）；玩家沉默时整段封印（反）', () => {
+    const cast = setup({ foes: [{}] });
+    cast.resolver(curseCard({ op: 'curse', curse: 'silence', duration: 1, target: 'chosenEnemy' }), cast.target, false, 0, null);
+    expect(cast.target.status.silence).toBe(1);
+
+    const silenced = setup({ foes: [{}], playerStatus: { name: '我', status: { silence: 1 } } });
+    silenced.resolver(curseCard({ op: 'curse', curse: 'silence', duration: 1, target: 'chosenEnemy' }), silenced.target, false, 0, null);
+    expect(silenced.target.status.silence ?? 0, '沉默门在 damage 之后、诅咒之前').toBe(0);
+    expect(logTexts(silenced.events).some(t => t.includes('被沉默封印'))).toBe(true);
+  });
+
+  it('abreak：全体施加（正）；无存活目标时不施放不报错（反）', () => {
+    const state = setup({ foes: [{}, {}] });
+    state.resolver(curseCard({ op: 'curse', curse: 'abreak', duration: 2, target: 'allEnemies' }), state.target, false, 0, null);
+    expect(state.foes.map(foe => foe.status.abreak)).toEqual([2, 2]);
+    expect(logTexts(state.events).some(t => t.includes('破甲 2 回合（无法减免伤害——元素庇幕失效）'))).toBe(true);
+
+    const empty = setup({ foes: [] });
+    const kinds = [];
+    for (const step of empty.resolver.steps(
+      curseCard({ op: 'curse', curse: 'abreak', duration: 2, target: 'allEnemies' }), undefined, false, 0, null)) kinds.push(step.kind);
+    expect(kinds, '无目标不 windup 不 hit').toEqual([]);
+    expect(empty.events, '无目标不记日志').toEqual([]);
+  });
+
+  it('healban：target self 挂给玩家（正），敌人不受影响（反）', () => {
+    const state = setup({ foes: [{}] });
+    state.resolver(curseCard({ op: 'curse', curse: 'healban', duration: 2, target: 'self' }), state.target, false, 0, null);
+    expect(state.playerStatus.status.healban).toBe(2);
+    expect(state.target.status.healban ?? 0, 'self 不波及敌人').toBe(0);
+    expect(state.events.some(event => event[0] === 'cursefx'), '玩家自身不推彩闪（与引擎包装一致）').toBe(false);
+    expect(logTexts(state.events).some(t => t.includes('禁疗 2 回合（无法回复生命）'))).toBe(true);
+  });
+
+  it('burn：randomEnemy 施放时随机一名存活敌人（正）；重复施加不叠加（反）', () => {
+    // makeResolver 的 randomBattle 恒为 0 → 战场首位；点选的是第二名敌人
+    const state = setup({ foes: [{}, {}] });
+    state.resolver(curseCard({ op: 'curse', curse: 'burn', duration: 3, target: 'randomEnemy' }), state.foes[1], false, 0, null);
+    expect(state.foes[0].status.burn, 'randomBattle=0 → 首位存活敌人').toBe(3);
+    expect(state.foes[1].status.burn ?? 0, 'randomEnemy 不取点选目标').toBe(0);
+
+    const again = setup({ foes: [{ status: { burn: 3 } }] });
+    again.resolver(curseCard({ op: 'curse', curse: 'burn', duration: 1, target: 'chosenEnemy' }), again.target, false, 0, null);
+    expect(again.target.status.burn, '灼烧不叠加、取较大剩余（combat.js 定版）').toBe(3);
+    expect(logTexts(again.events).some(t => t.includes('被灼烧（1 回合内每回合结束受 1 点固定伤害，不叠加）'))).toBe(true);
+  });
+
+  it('damage+curse 复合：按 onPlay 数组顺序先伤害后诅咒，文本句不复算', () => {
+    const state = setup({ foes: [{ hp: 30 }] });
+    const card = {
+      id: 'v2-fatal-ray', name: '致命射线', type: '法术', dmgType: 'spell',
+      desc: '造成8点法术伤害，附加 1 层中毒。',
+      rules: { version: 1, battle: { target: { side: 'enemy', area: false } }, triggers: { onPlay: [
+        { op: 'damage', amount: 8, target: 'chosenEnemy' },
+        { op: 'curse', curse: 'poison', stacks: 1, target: 'chosenEnemy' },
+      ] } },
+    };
+    state.resolver(card, state.target, false, 0, null);
+    expect(state.events.filter(event => event[0] === 'damage')).toEqual([['damage', 8]]);
+    expect(state.target.status.poison, '结构化中毒恰好 1 层').toBe(1);
+    expect(state.events.some(event => event[0] === 'text'), 'desc 句不再复算').toBe(false);
+    const damageAt = state.events.findIndex(event => event[0] === 'damage');
+    const curseAt = state.events.findIndex(event => event[0] === 'log' && String(event[1]).includes('附加 1 层中毒'));
+    expect(damageAt).toBeGreaterThanOrEqual(0);
+    expect(curseAt, '伤害段先于诅咒段').toBeGreaterThan(damageAt);
+  });
+
+  it('randomKinds：随机 n 种不同诅咒各 1 层/1 回合（正）；超出池长截断（反）', () => {
+    const state = setup({ foes: [{}] });
+    state.resolver(curseCard({ op: 'curse', randomKinds: 3, target: 'chosenEnemy' }), state.target, false, 0, null);
+    const active = CURSE_KEYS.filter(key => (state.target.status[key] || 0) > 0);
+    expect(active, '恰抽出 3 种不同诅咒').toHaveLength(3);
+    expect(active.every(key => state.target.status[key] === 1), '叠层型 1 层 / 计时型 1 回合').toBe(true);
+    expect(logTexts(state.events).some(t => t.includes('附加了 3 种随机诅咒'))).toBe(true);
+
+    const wide = setup({ foes: [{}] });
+    wide.resolver(curseCard({ op: 'curse', randomKinds: 9, target: 'chosenEnemy' }), wide.target, false, 0, null);
+    expect(CURSE_KEYS.filter(key => (wide.target.status[key] || 0) > 0), '池只有 7 种，slice 截断').toHaveLength(7);
+  });
+
+  it('double：中毒层数翻倍（正）；计时诅咒没有层数只记日志（反）', () => {
+    const state = setup({ foes: [{ status: { poison: 4 } }] });
+    state.resolver(curseCard({ op: 'curse', curse: 'poison', stacks: 1, double: true, target: 'chosenEnemy' }), state.target, false, 0, null);
+    expect(state.target.status.poison, '先施加 4+1=5，再翻倍 5×2（与花鸩文本路径同序）').toBe(10);
+    expect(logTexts(state.events).some(t => t.includes('中毒翻倍至 10 层'))).toBe(true);
+
+    const timed = setup({ foes: [{ status: { freeze: 1 } }] });
+    timed.resolver(curseCard({ op: 'curse', curse: 'freeze', duration: 1, double: true, target: 'chosenEnemy' }), timed.target, false, 0, null);
+    expect(timed.target.status.freeze, '计时诅咒持续时间不翻倍').toBe(1);
+    expect(logTexts(timed.events).some(t => t.includes('计时诅咒，没有可翻倍的层数'))).toBe(true);
+  });
+
+  it('burst：按当前层数引爆 n 次（正）；无中毒引爆 0 点（反）', () => {
+    const state = setup({ foes: [{ hp: 20, status: { poison: 3 } }] });
+    state.resolver(curseCard({ op: 'curse', curse: 'poison', stacks: 2, burst: 2, target: 'chosenEnemy' }), state.target, false, 0, null);
+    expect(state.target.status.poison, '施加后 5 层，引爆不消耗层数').toBe(5);
+    expect(state.target.hp, '2 发 × 5 层 = 10 点固定伤害（不吃防御）').toBe(10);
+    expect(logTexts(state.events).some(t => t.includes('毒伤引爆 2 次，共 <b>10</b> 点固定伤害（5 层中毒保留）'))).toBe(true);
+
+    // 反：burst 与 op 的诅咒种类无关（只引爆既有中毒）——目标无中毒时该发计 0 点
+    const clean = setup({ foes: [{ hp: 20 }] });
+    clean.resolver(curseCard({ op: 'curse', curse: 'bleed', stacks: 1, burst: 1, target: 'chosenEnemy' }), clean.target, false, 0, null);
+    expect(clean.target.status.bleed, '本 op 施加的是流血').toBe(1);
+    expect(clean.target.hp, '无中毒可引爆 → 不掉血').toBe(20);
+    expect(logTexts(clean.events).some(t => t.includes('毒伤引爆 1 次，共 <b>0</b> 点固定伤害（0 层中毒保留）'))).toBe(true);
+  });
+
+  it('extend：已有冰冻延长 n 回合（正）；未冰冻目标不被 duration 白嫖（反）', () => {
+    const frozen = setup({ foes: [{ status: { freeze: 2 } }] });
+    frozen.resolver(curseCard({ op: 'curse', curse: 'freeze', duration: 1, extend: 1, target: 'chosenEnemy' }), frozen.target, false, 0, null);
+    expect(frozen.target.status.freeze, '2 + extend 1').toBe(3);
+    expect(logTexts(frozen.events).some(t => t.includes('的冰冻延长 1 回合（剩 3 回合）'))).toBe(true);
+
+    const clean = setup({ foes: [{}] });
+    clean.resolver(curseCard({ op: 'curse', curse: 'freeze', duration: 1, extend: 1, target: 'chosenEnemy' }), clean.target, false, 0, null);
+    expect(clean.target.status.freeze ?? 0, '延长语义：目标未冻结则不施加 schema 必填的 duration').toBe(0);
+    expect(logTexts(clean.events).some(t => t.includes('目标未被冰冻，延长无效'))).toBe(true);
+  });
+
+  it('守卫：curse op 已放行，G13 时点触发器仍逐键抛出', () => {
+    const ok = setup({ foes: [{}] });
+    expect(() => ok.resolver(
+      curseCard({ op: 'curse', curse: 'bleed', stacks: 1, target: 'chosenEnemy' }), ok.target, false, 0, null,
+    )).not.toThrow();
+
+    const pending = setup({ foes: [{}] });
+    const card = curseCard({ op: 'curse', curse: 'bleed', stacks: 1, target: 'chosenEnemy' });
+    card.rules.triggers.onDraw = [];
+    expect(() => pending.resolver(card, pending.target, false, 0, null)).toThrow(TypeError);
   });
 });
