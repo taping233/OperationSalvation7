@@ -1,3 +1,13 @@
+## 当前状态补充：UI 审查第三波——交互态/响应式/死代码删除/NAI 素材重绘（2026-09-25 11:2x +08:00，未提交待拍板）
+
+- 老板 09-25 上午放权（本会话现场指令）：「允许删除死代码、用 NovelAI 自己生图、大胆一点、多跑子代理挂了重派」。**与并行 cron 批的图标批示关系**：cron 交接段记录老板批示「UI 图标重绘方案暂时取消」（时序在先），本会话老板随后亲口重新授权生图，gear/coin 重绘据此执行并保留——最终去留请老板一并拍板。
+- **子代理并发上限**（user concurrency limit exceeded / cancelled）本波多次撞车，按老板指示失败即重派，全部补齐。
+- **死代码删除批（授权豁免报批，逐项 rg 验证零引用后删）：-212 行**——expedition-library.css 档案馆/画廊两代历史层 -127（.library-title/.library-sidebar 系列）、稀有度夹子 7 块 -35、4.8 段死规则 -43（type-badge 无框化经核实非死规则跳过）、photo-corner -14、hub.css .cls-list/.stash-row/.dep-stepper 簇 -26、winter/title-p0/expedition 的 ak-banner 死规则+lib-grid 死折叠档 -47、index.html 零引用装饰 -8、card-v3 旧 contain-intrinsic-size -3、cards.css .shop-grid -1。#btnDeploy 双定义/.dep-back/.dep-list 查实有引用保留。定向三件套 27/27 绿。**与 cron CSS 死块批（49f7cd7 overlays.css）文件不重叠**；pending-deletions 文档新增「第二批」章节（注：该文档随后被 cron 批改写为留档，两批记录并存）。
+- **交互态审查 17 条→修复 17/17**：shop-slot/ext-card div[role=button] 补 focus-visible（P1 键盘不可达）、gate-strip 补 role/tabindex+焦点环、disabled 语言统一 opacity+grayscale、data-short 双规则对齐 expedition-shop 定版、lib-item cursor:pointer、主 CTA :active 按压、全局焦点兜底补 textarea、ov-btn:disabled 0.35→0.45。
+- **响应式审查 14 条→修复 8 完成 3 有据放弃**：P1=850 档浮键基数 142→190px 漏同步已补；arena min-height clamp 防矮窗压扁；cards.css 760 窄档；照相馆 max-height:700 档；deploy-primary 320px；目标位移 max(-330px,-28vw)（代理纠正处方 min() 语义）；3 处去闸因窄窗副作用放弃（有论证）。zoom×media 结论：媒体查询按物理视口判定，窄窗档禁新增裸 px 基数。
+- **NAI 素材重绘**：gear.png（原为青色循环箭头）三轮迭代——深蓝钢写实→提亮→亮黄扁平→PIL HSV 调色定版金；coin.png（原纯圆环读作 0）→金色纹章币。管线：nai_gen 4.5-full 832×1216 白底→scipy 边缘连通 flood 抠图（保内部高光）→128×128 透明底。实机验证：设置页金齿轮语义清晰、宝箱 lootLine「🪙 1 币」读法正常。原件备份 .ui-audit-0925/icon-backup/。**教训：写实素材缩到 16-30px 必糊，小图标须 flat+高对比+定版色后处理。**
+- **并行交叠核实**：cron 批同期落库（cursor-art 三件套删除连带本会话在途 2 行消灭、cardslib 分页残留清除、staged 四文件落库），本会话 64 文件未提交改动经 git status 逐项核实完好。全量回归 **146 文件/817 用例全绿（254s，含 cron 新增用例）**。三波累计约 180 处修复+212 行死代码删除+21 张素材（19 webp 白边+2 图标重绘），全部未提交待拍板。
+
 ## 当前状态补充：删除批 build 复验 PASS（2026-09-25 09:5x +08:00）
 
 - 按 orphan-audit 报告建议（C 组删除后跑 build 确认 ITEM_ART_ALIAS 无回归）补跑：临时 worktree 干净 HEAD `18d4653` 上 `npm run build` **PASS（4.39s）+ perf-budget PASS**，删除批收益实测：包体 90.83→**84.97 MiB**（-5.9）、css-gzip 119.6→118.5、entry-gzip 239.0→237.9、initial-js 251.8→250.7、battle 101.3 持平；thumb-manifest 已自愈（worktree 内零已删文件残留）；worktree 用后摘 junction 清理。主树 manifest 待下次 build 自愈，不构成引用。审计建议的最后一项验证闭环。
