@@ -22,12 +22,17 @@ function makeResolver(state) {
     drawCards: count => { events.push(['draw', count]); return Math.min(count, state.drawnCount ?? count); },
     grantSha: count => events.push(['sha', count]),
     hitFoe: (foe, card, amount) => {
+      events.push(['damage', amount]);
+      if (state.hitFoe) return state.hitFoe(foe, amount);
       (state.hitFoes ||= []).push(foe);
       (state.hitDescriptions ||= []).push(card?.desc);
-      events.push(['damage', amount]);
       return amount;
     },
-    drawOf: () => 0, isAOE: () => false, addArmor: amount => events.push(['armor', amount]),
+    drawOf: () => 0, isAOE: () => false,
+    addArmor: (amount, opts) => events.push(opts ? ['armor', amount, opts] : ['armor', amount]),
+    damagePlayer: amount => events.push(['selfDamage', amount]),
+    getPlayerHp: () => state.playerHp ?? 10,
+    countDrawnSpells: () => state.drawnSpellCount ?? 0,
   });
   return { resolver, events };
 }
@@ -220,19 +225,261 @@ describe('battle resolution ports', () => {
     const { resolver } = makeResolver(callState);
     const base = { type: '武术', dmg: 3, dmgType: 'fixed', desc: '' };
     for (const card of [
-      // damage v1 形状 + v2 泛化附加键：v1 结算路径只消费 amountField/target/hitCount，
-      // 不守卫就会静默漏掉 cond/bonus 形成错结算
-      { ...base, id: 'guard-damage-bonus', rules: { version: 1, triggers: { onPlay: [
-        { op: 'damage', amountField: 'dmg', target: 'chosenEnemy', bonus: { amount: 2, if: { foeStatus: 'bleed' } } },
+      // B1-B3 已接线键（amount/range/cond/bonus/lifesteal/hits.count/randomEnemy、heal/armor 的
+      // v2 键）不再抛错——见下方行为用例；这里锁死仍 pending 的键：
+      // damage.graveyard（B10 墓地域）、damage.schedule（B2 延迟段）、hits.perFoe（每人释放一段）
+      { ...base, id: 'guard-damage-graveyard', rules: { version: 1, triggers: { onPlay: [
+        { op: 'damage', amount: 3, target: 'chosenEnemy', graveyard: { type: '法术', perCard: 1 } },
       ] } } },
+      { ...base, id: 'guard-damage-schedule', rules: { version: 1, triggers: { onPlay: [
+        { op: 'damage', amount: 3, target: 'chosenEnemy', schedule: 'nextTurn' },
+      ] } } },
+      { ...base, id: 'guard-damage-perfoe', rules: { version: 1, triggers: { onPlay: [
+        { op: 'damage', amount: 3, target: 'chosenEnemy', hits: { perFoe: 1 } },
+      ] } } },
+      // draw 的全部 v2 键（B4：boss/普通战双口径未结构化前不放行）
+      { ...base, id: 'guard-draw-amount', type: '法术', rules: { version: 1, triggers: { onPlay: [{ op: 'draw', amount: 1 }] } } },
+      { ...base, id: 'guard-draw-untilhandn', type: '法术', rules: { version: 1, triggers: { onPlay: [{ op: 'draw', untilHandN: 4 }] } } },
       // v2 新操作族（schema 放行、解释器未接线）
       { ...base, id: 'guard-pending-op', rules: { version: 1, triggers: { onPlay: [{ op: 'summon', name: '步兵', count: 1 }] } } },
       // G13 时点触发器（无任何运行时消费者）
       { ...base, id: 'guard-pending-trigger', rules: { version: 1, triggers: { onPlay: [], onTurnStart: [] } } },
-      // 效果操作的 v2 字面量键
-      { ...base, id: 'guard-effect-guard', type: '法术', armor: 3, rules: { version: 1, triggers: { onPlay: [{ op: 'armor', amountField: 'armor', guard: true }] } } },
     ]) {
       expect(() => resolver(card, target, false, 0, null), card.id).toThrow(TypeError);
     }
+  });
+
+  it('resolves literal, conditional, and bonus damage from v2 keys (B1)', () => {
+    const makeCall = foeState => {
+      const target = { hp: foeState.hp, maxHp: foeState.maxHp ?? 20, dead: false, status: foeState.status || {} };
+      const callState = { current: { mode: 'boss', playedMovesThisTurn: 0, infuseFuels: 0, grave: [] }, playerStatus: { status: {} }, target };
+      return { target, ...makeResolver(callState) };
+    };
+    // 字面量伤害：amount 与文本/dmg 字段无关地直接结算
+    const literal = makeCall({ hp: 20 });
+    literal.resolver({
+      id: 'v2-amount', type: '法术', dmgType: 'fixed', desc: '展示描述',
+      rules: { version: 1, battle: { target: { side: 'enemy', area: false } }, triggers: { onPlay: [{ op: 'damage', amount: 5, target: 'chosenEnemy' }] } },
+    }, literal.target, false, 0, null);
+    expect(literal.events.filter(event => event[0] === 'damage')).toEqual([['damage', 5]]);
+
+    // cond.foeHpBelow（斩杀口径：血量 ≤ n 才生效）；满血目标被条件门拦下并给出日志
+    const capped = makeCall({ hp: 20 });
+    capped.resolver({
+      id: 'v2-execute', type: '武术', dmgType: 'true', desc: '展示描述',
+      rules: { version: 1, battle: { target: { side: 'enemy', area: false } }, triggers: { onPlay: [{ op: 'damage', amount: 9, target: 'chosenEnemy', cond: { foeHpBelow: 9 } }] } },
+    }, capped.target, false, 0, null);
+    expect(capped.events.some(event => event[0] === 'damage')).toBe(false);
+    expect(capped.events.some(event => event[0] === 'log' && String(event[1]).includes('不满足条件'))).toBe(true);
+
+    const wounded = makeCall({ hp: 5 });
+    wounded.resolver({
+      id: 'v2-execute', type: '武术', dmgType: 'true', desc: '展示描述',
+      rules: { version: 1, battle: { target: { side: 'enemy', area: false } }, triggers: { onPlay: [{ op: 'damage', amount: 9, target: 'chosenEnemy', cond: { foeHpBelow: 9 } }] } },
+    }, wounded.target, false, 0, null);
+    expect(wounded.events.filter(event => event[0] === 'damage')).toEqual([['damage', 9]]);
+
+    // bonus 条件增伤（flat）：目标流血时 +2；无流血不增伤
+    const bleeding = makeCall({ hp: 20, status: { bleed: 1 } });
+    bleeding.resolver({
+      id: 'v2-pierce', type: '武术', dmgType: 'fixed', desc: '展示描述',
+      rules: { version: 1, battle: { target: { side: 'enemy', area: false } }, triggers: { onPlay: [{ op: 'damage', amount: 4, target: 'chosenEnemy', bonus: { amount: 2, if: { foeStatus: 'bleed' } } }] } },
+    }, bleeding.target, false, 0, null);
+    expect(bleeding.events.filter(event => event[0] === 'damage')).toEqual([['damage', 6]]);
+
+    const clean = makeCall({ hp: 20 });
+    clean.resolver({
+      id: 'v2-pierce', type: '武术', dmgType: 'fixed', desc: '展示描述',
+      rules: { version: 1, battle: { target: { side: 'enemy', area: false } }, triggers: { onPlay: [{ op: 'damage', amount: 4, target: 'chosenEnemy', bonus: { amount: 2, if: { foeStatus: 'bleed' } } }] } },
+    }, clean.target, false, 0, null);
+    expect(clean.events.filter(event => event[0] === 'damage')).toEqual([['damage', 4]]);
+  });
+
+  it('resolves percent bonus, range rolls, random targets, and multi-hit counts (B1/B2)', () => {
+    const makeCall = (foeState = {}) => {
+      const target = { hp: foeState.hp ?? 20, maxHp: foeState.maxHp ?? 20, dead: false, status: foeState.status || {} };
+      const callState = { current: { mode: 'boss', playedMovesThisTurn: 0, infuseFuels: 0, grave: [] }, playerStatus: { status: {} }, target, foes: foeState.foes };
+      return { target, callState, ...makeResolver(callState) };
+    };
+    // bonus.pct（惩击口径：半血 +N%，向下取整）；makeResolver 的 randomBattle 恒为 0
+    const half = makeCall({ hp: 9, maxHp: 20 });
+    half.resolver({
+      id: 'v2-smite', type: '法术', dmgType: 'spell', desc: '展示描述',
+      rules: { version: 1, battle: { target: { side: 'enemy', area: false } }, triggers: { onPlay: [{ op: 'damage', amount: 10, target: 'chosenEnemy', bonus: { pct: 50, if: { foeHpHalf: true } } }] } },
+    }, half.target, false, 0, null);
+    expect(half.events.filter(event => event[0] === 'damage')).toEqual([['damage', 15]]);
+
+    // range 区间（不稳定射线口径：含端点掷骰一次；randomBattle=0 → 下界）
+    const ranged = makeCall({});
+    ranged.resolver({
+      id: 'v2-ray', type: '法术', dmgType: 'spell', desc: '展示描述',
+      rules: { version: 1, battle: { target: { side: 'enemy', area: false } }, triggers: { onPlay: [{ op: 'damage', range: [4, 6], target: 'chosenEnemy' }] } },
+    }, ranged.target, false, 0, null);
+    expect(ranged.events.filter(event => event[0] === 'damage')).toEqual([['damage', 4]]);
+
+    // hits.count 多段（连射口径）：3 段各自 windup→hit 演出节奏
+    const multi = makeCall({});
+    const kinds = [];
+    for (const step of multi.resolver.steps({
+      id: 'v2-multihit', type: '武术', dmgType: 'fixed', desc: '展示描述',
+      rules: { version: 1, battle: { target: { side: 'enemy', area: false } }, triggers: { onPlay: [{ op: 'damage', amount: 2, target: 'chosenEnemy', hits: { count: 3 } }] } },
+    }, multi.target, false, 0, null)) kinds.push(step.kind);
+    expect(kinds).toEqual(['windup', 'hit', 'windup', 'hit', 'windup', 'hit']);
+    expect(multi.events.filter(event => event[0] === 'damage')).toEqual([['damage', 2], ['damage', 2], ['damage', 2]]);
+
+    // hits.range 段数掷骰（元素爆裂口径：randomBattle=0 → 下界 4 段）
+    const rolled = makeCall({});
+    rolled.resolver({
+      id: 'v2-rolledhits', type: '法术', dmgType: 'spell', desc: '展示描述',
+      rules: { version: 1, battle: { target: { side: 'enemy', area: false } }, triggers: { onPlay: [{ op: 'damage', amount: 2, target: 'chosenEnemy', hits: { range: [4, 5] } }] } },
+    }, rolled.target, false, 0, null);
+    expect(rolled.events.filter(event => event[0] === 'damage')).toHaveLength(4);
+
+    // target randomEnemy：randomBattle=0 → 战场第一名存活敌人（而非点选的第二名）
+    const first = { hp: 20, dead: false, status: {} };
+    const second = { hp: 20, dead: false, status: {} };
+    const random = makeCall({ foes: [first, second] });
+    random.resolver({
+      id: 'v2-random', type: '法术', dmgType: 'spell', desc: '展示描述',
+      rules: { version: 1, battle: { target: { side: 'enemy', area: false } }, triggers: { onPlay: [{ op: 'damage', amount: 2, target: 'randomEnemy' }] } },
+    }, second, false, 0, null);
+    expect(random.events.filter(event => event[0] === 'damage')).toEqual([['damage', 2]]);
+    expect(random.callState.hitFoes).toEqual([first]);
+  });
+
+  it('recasts a damage operation once per kill (B2) and keeps lifesteal off the healban-free path (B3)', () => {
+    const dying = { hp: 1, maxHp: 1, dead: false, status: {} };
+    const survivor = { hp: 20, maxHp: 20, dead: false, status: {} };
+    const killState = {
+      current: { mode: 'boss', playedMovesThisTurn: 0, infuseFuels: 0, grave: [] }, playerStatus: { status: {} },
+      target: dying, foes: [dying, survivor],
+      hitFoe: (foe, amount) => {
+        if (!foe.dead) {
+          foe.hp -= amount;
+          if (foe.hp <= 0) foe.dead = true;
+        }
+        return amount;
+      },
+    };
+    const { resolver: killResolver, events: killEvents } = makeResolver(killState);
+    killResolver({
+      id: 'v2-recast', name: '余烬', type: '法术', dmgType: 'spell', desc: '展示描述',
+      rules: { version: 1, battle: { target: { side: 'enemy', area: true } }, triggers: { onPlay: [{ op: 'damage', amount: 5, target: 'allEnemies', recast: { on: 'kill', times: 1 } }] } },
+    }, dying, false, 0, null);
+    expect(killEvents.filter(event => event[0] === 'damage')).toEqual([['damage', 5], ['damage', 5], ['damage', 5]]);
+    expect(killEvents.some(event => event[0] === 'log' && String(event[1]).includes('再施放一次'))).toBe(true);
+    expect(dying.dead).toBe(true);
+    expect(survivor.hp).toBe(10);
+
+    // 吸血：按实际伤害回复；禁疗中只给日志不回复
+    const lifestealTarget = { hp: 20, maxHp: 20, dead: false, status: {} };
+    const healState = { current: { mode: 'boss', playedMovesThisTurn: 0, infuseFuels: 0, grave: [] }, playerStatus: { status: {} }, target: lifestealTarget };
+    const { resolver: healResolver, events: healEvents } = makeResolver(healState);
+    healResolver({
+      id: 'v2-lifesteal', type: '武术', dmgType: 'fixed', desc: '展示描述',
+      rules: { version: 1, battle: { target: { side: 'enemy', area: false } }, triggers: { onPlay: [{ op: 'damage', amount: 3, target: 'chosenEnemy', lifesteal: true }] } },
+    }, lifestealTarget, false, 0, null);
+    expect(healEvents.filter(event => ['damage', 'heal'].includes(event[0]))).toEqual([['damage', 3], ['heal', 3]]);
+    expect(healEvents.some(event => event[0] === 'log' && String(event[1]).includes('吸血'))).toBe(true);
+
+    const bannedTarget = { hp: 20, maxHp: 20, dead: false, status: {} };
+    const bannedState = { current: { mode: 'boss', playedMovesThisTurn: 0, infuseFuels: 0, grave: [] }, playerStatus: { status: { healban: 1 } }, target: bannedTarget };
+    const { resolver: bannedResolver, events: bannedEvents } = makeResolver(bannedState);
+    bannedResolver({
+      id: 'v2-lifesteal', type: '武术', dmgType: 'fixed', desc: '展示描述',
+      rules: { version: 1, battle: { target: { side: 'enemy', area: false } }, triggers: { onPlay: [{ op: 'damage', amount: 3, target: 'chosenEnemy', lifesteal: true }] } },
+    }, bannedTarget, false, 0, null);
+    expect(bannedEvents.some(event => event[0] === 'heal')).toBe(false);
+    expect(bannedEvents.some(event => event[0] === 'log' && String(event[1]).includes('吸血回复无效'))).toBe(true);
+  });
+
+  it('resolves heal upTo, selfDamage, perFuelCost, and perSpellHeal sources (B3)', () => {
+    const makeCall = playerState => {
+      const target = { hp: 20, dead: false, status: {} };
+      const callState = { current: { mode: 'boss', playedMovesThisTurn: 0, infuseFuels: 0, grave: [] },
+        playerStatus: { status: playerState.playerStatus || {} }, target,
+        playerHp: playerState.playerHp, ...playerState.extra };
+      return { target, ...makeResolver(callState) };
+    };
+    // upTo（沐愈光辉口径）：低于目标值回复差值；已高于则无变化
+    const low = makeCall({ playerHp: 8 });
+    low.resolver({
+      id: 'v2-upto', type: '法术', desc: '展示描述',
+      rules: { version: 1, battle: { target: { side: 'self', area: false } }, triggers: { onPlay: [{ op: 'heal', upTo: 12 }] } },
+    }, low.target, false, 0, null);
+    expect(low.events.filter(event => event[0] === 'heal')).toEqual([['heal', 4]]);
+    expect(low.events.some(event => event[0] === 'log' && String(event[1]).includes('回复至'))).toBe(true);
+
+    const high = makeCall({ playerHp: 15 });
+    high.resolver({
+      id: 'v2-upto', type: '法术', desc: '展示描述',
+      rules: { version: 1, battle: { target: { side: 'self', area: false } }, triggers: { onPlay: [{ op: 'heal', upTo: 12 }] } },
+    }, high.target, false, 0, null);
+    expect(high.events.some(event => event[0] === 'heal')).toBe(false);
+    expect(high.events.some(event => event[0] === 'log' && String(event[1]).includes('无变化'))).toBe(true);
+
+    // selfDamage（恶魔之力口径）：走 damagePlayer 命令，禁疗中照样生效
+    const selfhurt = makeCall({ playerStatus: { healban: 2 } });
+    selfhurt.resolver({
+      id: 'v2-selfdamage', type: '法术', desc: '展示描述',
+      rules: { version: 1, battle: { target: { side: 'self', area: false } }, triggers: { onPlay: [{ op: 'heal', selfDamage: 2 }] } },
+    }, selfhurt.target, false, 0, null);
+    expect(selfhurt.events.filter(event => event[0] === 'selfDamage')).toEqual([['selfDamage', 2]]);
+    expect(selfhurt.events.some(event => event[0] === 'heal')).toBe(false);
+
+    // perFuelCost（圣光治愈口径）：N 倍于注能牺牲品费用合计（resolveCardSteps 第 4 参）
+    const fueled = makeCall({});
+    fueled.resolver({
+      id: 'v2-perfuel', type: '法术', desc: '展示描述',
+      rules: { version: 1, battle: { target: { side: 'self', area: false } }, triggers: { onPlay: [{ op: 'heal', perFuelCost: 2 }] } },
+    }, fueled.target, false, 3, null);
+    expect(fueled.events.filter(event => event[0] === 'heal')).toEqual([['heal', 6]]);
+    expect(fueled.events.some(event => event[0] === 'log' && String(event[1]).includes('牺牲品费用 3'))).toBe(true);
+
+    // perSpellHeal（浪掷风吟口径）：与 draw 组合——按本次入手的法术数折算
+    const spells = makeCall({ extra: { drawnCount: 2, drawnSpellCount: 2 } });
+    spells.resolver({
+      id: 'v2-perspell', name: '甘霖', type: '法术', draw: 2, desc: '展示描述',
+      rules: { version: 1, battle: { target: { side: 'self', area: false } }, triggers: { onPlay: [
+        { op: 'draw', amountField: 'draw' }, { op: 'heal', perSpellHeal: 3 },
+      ] } },
+    }, spells.target, false, 0, null);
+    expect(spells.events.filter(event => ['draw', 'heal'].includes(event[0]))).toEqual([['draw', 2], ['heal', 6]]);
+  });
+
+  it('resolves armor amount, guard, and decayAtTurnEnd from v2 keys (B3)', () => {
+    const target = { hp: 20, dead: false, status: {} };
+    const makeCard = operation => ({
+      id: 'v2-armor', name: 'v2-armor', type: '武术', desc: '展示描述',
+      rules: { version: 1, battle: { target: { side: 'self', area: false } }, triggers: { onPlay: [operation] } },
+    });
+    // amount + guard：护甲入账并置格挡旗标（第二个参数传给 addArmor 命令）
+    const guarded = makeResolver({ current: { mode: 'boss', playedMovesThisTurn: 0, infuseFuels: 0, grave: [] }, playerStatus: { status: {} }, target });
+    guarded.resolver(makeCard({ op: 'armor', amount: 4, guard: true }), target, false, 0, null);
+    expect(guarded.events.filter(event => event[0] === 'armor')).toEqual([['armor', 4, { guard: true }]]);
+    expect(guarded.events.some(event => event[0] === 'log' && String(event[1]).includes('格挡'))).toBe(true);
+
+    // 纯格挡（无数值）：只走格挡旗标
+    const guardOnly = makeResolver({ current: { mode: 'boss', playedMovesThisTurn: 0, infuseFuels: 0, grave: [] }, playerStatus: { status: {} }, target });
+    guardOnly.resolver(makeCard({ op: 'armor', guard: true }), target, false, 0, null);
+    expect(guardOnly.events.filter(event => event[0] === 'armor')).toEqual([['armor', 0, { guard: true }]]);
+
+    // decayAtTurnEnd：注册下回合开始的护甲衰减延迟段（与坚盾同一条 delayed 管线）
+    const decaying = makeResolver({ current: { mode: 'boss', playedMovesThisTurn: 0, infuseFuels: 0, grave: [] }, playerStatus: { status: {} }, target });
+    decaying.resolver(makeCard({ op: 'armor', amount: 8, decayAtTurnEnd: 4 }), target, false, 0, null);
+    expect(decaying.events.filter(event => event[0] === 'armor')).toEqual([['armor', 8]]);
+    const decayJob = decaying.events.find(event => event[0] === 'delayed')?.[1];
+    expect(decayJob).toMatchObject({ text: '-4 点', cardName: 'v2-armor' });
+
+    // 沉默封印：v2 数值键与 v1 同门——heal/armor 全部抑制
+    const silenced = makeResolver({ current: { mode: 'boss', playedMovesThisTurn: 0, infuseFuels: 0, grave: [] }, playerStatus: { status: { silence: 1 } }, target });
+    silenced.resolver({
+      id: 'v2-silenced', type: '武术', desc: '展示描述',
+      rules: { version: 1, battle: { target: { side: 'self', area: false } }, triggers: { onPlay: [
+        { op: 'heal', amount: 5 }, { op: 'armor', amount: 5, guard: true },
+      ] } },
+    }, target, false, 0, null);
+    expect(silenced.events.some(event => ['heal', 'armor', 'float'].includes(event[0]))).toBe(false);
+    expect(silenced.events.filter(event => event[0] === 'log').some(event => String(event[1]).includes('沉默'))).toBe(true);
   });
 });

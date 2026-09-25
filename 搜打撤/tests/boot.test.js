@@ -64,6 +64,15 @@ document.dispatchEvent(new Event('DOMContentLoaded', { bubbles: true }));
 // fetch .then 与 UI 初始化里的微任务需要清一轮
 await new Promise(r => setTimeout(r, 0));
 
+const waitFor = async (cond, ms = 3000) => {
+  const end = Date.now() + ms;
+  while (Date.now() < end) {
+    if (cond()) return true;
+    await new Promise(r => setTimeout(r, 20));
+  }
+  return cond();
+};
+
 describe('启动链（DOMContentLoaded → showTitle）', () => {
   it('启动完成后 body 挂上 lobby 类（局内控件在标题页隐藏）', () => {
     expect(document.body.classList.contains('lobby'), 'body 缺少 lobby 类').toBe(true);
@@ -127,12 +136,14 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     photoNote.dispatchEvent(new Event('input', { bubbles: true }));
     photoZoom.querySelector('.cz-note').click();
     expect(document.getElementById('cardZoom')).toBe(photoZoom);
-    await new Promise(r => setTimeout(r, 260));
+    // 存档写入是异步 storage 操作：全量负载下 260ms 固定等待会撞「保存中…」（门禁两次抖动），
+    // 按项目药方改为条件等待（有上限），条件满足即返回。
+    await waitFor(() => photoZoom.querySelector('.cz-note-status').textContent === '已存档', 3000);
     expect(photoZoom.querySelector('.cz-note-status').textContent).toBe('已存档');
     expect(document.querySelector('#libPreview .pv-note')?.textContent).toContain('测试照片背签');
     photoNote.value = '';
     photoNote.dispatchEvent(new Event('input', { bubbles: true }));
-    await new Promise(r => setTimeout(r, 260));
+    await waitFor(() => photoZoom.querySelector('.cz-note-status').textContent === '尚未撰写', 3000);
     const { photoNoteFor } = await import('../game/src/cards/card-photo-notes.js');
     const selectedCard = window.SDT.Cards.all().find(c => c.id === card.dataset.card);
     const restoredNote = photoNoteFor(selectedCard);
@@ -383,13 +394,14 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     const oldAnimate = Element.prototype.animate;
     Element.prototype.animate = function () { return { onfinish: null, cancel() {} }; };
     window.SDT.Battle.start(game, [foe], { isBoss: false, name: '单敌测试' });
-    await new Promise(resolve => setTimeout(resolve, 20));
+    // 手牌 DOM 渲染与结算都是异步：固定等待在全量负载下撞空（门禁抖动），改条件等待（有上限）
+    await waitFor(() => document.querySelector('.sts-hand .bt-card.need-target'), 3000);
     const card = document.querySelector('.sts-hand .bt-card.need-target');
     expect(card).not.toBeNull();
     card.click();
     // 单敌：不进入选中态，直接结算伤害
     expect(card.classList.contains('click-selected')).toBe(false);
-    await new Promise(resolve => setTimeout(resolve, 40));
+    await waitFor(() => window.SDT.Battle.getSnapshot().foes[0].hp < 40, 3000);
     expect(window.SDT.Battle.getSnapshot().foes[0].hp).toBeLessThan(40);
     if (game.battleActive) window.SDT.Battle.commands.flee();
     Element.prototype.animate = oldAnimate;

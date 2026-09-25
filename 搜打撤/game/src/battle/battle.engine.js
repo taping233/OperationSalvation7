@@ -279,6 +279,20 @@ function autoPlayHandType(type) {
     }
     return played;
   }
+  // 玩家自伤/受伤入口（文本路径 dmg.negHp 与结构化 heal.selfDamage 共用；黑暗吊坠死亡保险在此生效）
+  function damagePlayer(n) {
+    // 黑暗吊坠死亡保险：致死伤害被挡下，该回合无敌（C11）
+    if (n > 0 && G.hp - n <= 0 && deathSave > 0) {
+      set$deathSave(deathSave - 1);
+      Combat.addBlessing(pstat, 'immune', 1);
+      G.log(`[[icon:sparkles]] <b>致命一击被挡下！</b>（死亡保险剩余 ${deathSave} 次，本回合无敌）`, 'ok');
+      return;
+    }
+    G.hp = Math.max(0, G.hp - n);
+    if (n > 0 && unyieldRune) { const g = drawCards(1); G.log('[[icon:cards]] <b>不屈符文</b>：受到伤害，抽 ' + g + ' 张牌', 'sys'); }
+    floats.push({ unit: 'self', text: '-' + n, cls: 'hurt' });
+    G.log(`[[icon:blood]] 受到 <b>${n}</b> 点伤害（${G.hp}/${G.maxHp}）`, 'warn');
+  }
 const applyTextEffects = createEffectExecutor({
     // 诅咒施加视觉差分（P1）：包装 addCurse——卡牌文本路径对敌方施加诅咒时推 cursefx 彩闪
     //（玩家自身中诅咒不闪，仍走日志+角标）。Combat 是模块命名空间（属性 only-getter，
@@ -344,19 +358,7 @@ const applyTextEffects = createEffectExecutor({
     autoPlayHandType,
     setShaTransform: name => { set$shaTransform(name || null); },
     setConsumeFireball: n => { set$consumeFireballN(n || 0); },
-    damagePlayer: n => {
-      // 黑暗吊坠死亡保险：致死伤害被挡下，该回合无敌（C11）
-      if (n > 0 && G.hp - n <= 0 && deathSave > 0) {
-        set$deathSave(deathSave - 1);
-        Combat.addBlessing(pstat, 'immune', 1);
-        G.log(`[[icon:sparkles]] <b>致命一击被挡下！</b>（死亡保险剩余 ${deathSave} 次，本回合无敌）`, 'ok');
-        return;
-      }
-      G.hp = Math.max(0, G.hp - n);
-      if (n > 0 && unyieldRune) { const g = drawCards(1); G.log('[[icon:cards]] <b>不屈符文</b>：受到伤害，抽 ' + g + ' 张牌', 'sys'); }
-      floats.push({ unit: 'self', text: '-' + n, cls: 'hurt' });
-      G.log(`[[icon:blood]] 受到 <b>${n}</b> 点伤害（${G.hp}/${G.maxHp}）`, 'warn');
-    },
+    damagePlayer,
     addPlayerMaxHp: n => {
       G.maxHp += n;
       G.heal(n);
@@ -740,7 +742,19 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     findCard, addTempCard, queueDiscover: value => discoverQueue.push(value), splitClauses, applyTextEffects,
     registerTurnStart, registerBattle, castRandomSpells, drawCards, grantSha, hitFoe,
     drawOf, isAOE,
-    addArmor: amount => { pdef.armor += amount; },
+    // B3 端口：自伤走 damagePlayer 命令（死亡保险/不屈符文共用）；回复至需要读玩家当前血量；
+    // 护甲命令扩展 guard 选项（格挡置 pdef.guard，与文本路径 def.guard 同一旗标）；
+    // perSpellHeal 需要「本批抽牌中的法术数」（lastDrawnUids 只记真正入手的牌）。
+    damagePlayer,
+    getPlayerHp: () => G.hp,
+    countDrawnSpells: () => lastDrawnUids.reduce((n, u) => {
+      const o = findCard(u);
+      return o && o.card.type === '法术' ? n + 1 : n;
+    }, 0),
+    addArmor: (amount, opts) => {
+      pdef.armor += amount;
+      if (opts && opts.guard) pdef.guard = true;
+    },
   });
 
   const runStagedSteps = createStagedPlayback({

@@ -1,36 +1,49 @@
 // Card resolution is isolated behind explicit state reads and domain commands.
 import { attackCue } from './battle.attack-cues.js';
 
-// —— schema v2 键位先行守卫（A2，2026-09-25）——
-// card-rules.schema.js v2 已放行泛化键（docs/card-rules-v2-taxonomy-2026-09-25.md §4/§5），
-// 解释器分支按 B1-B11 迁移批逐步落地。在落地之前，v2 键一旦出现在真实卡数据里必须在此
-// 炸出——否则 v1 结算路径会静默忽略这些键（如 damage + bonus 只结算基础伤害），形成错结算。
+// —— schema v2 键位先行守卫（A2，2026-09-25；B1-B3 接线后按 op 收口，2026-09-25）——
+// card-rules.schema.js v2 已放行泛化键（docs/card-rules-v2-taxonomy-2026-09-25.md §4/§5）。
+// B1/B2（damage：amount/range/cond/bonus/lifesteal/hits{count|range}/randomEnemy/recast）
+// 与 B3（heal：amount/upTo/selfDamage/perFuelCost/perSpellHeal；armor：amount/guard/decayAtTurnEnd）
+// 已接线并从 pending 集合拆除。仍在 pending 的 v2 键一旦出现在真实卡数据里必须在此
+// 炸出——否则 v1 结算路径会静默忽略这些键（如 damage + graveyard 只结算基础伤害），形成错结算。
 const INTERPRETER_ONPLAY_OPS = new Set(['damage', 'heal', 'armor', 'draw', 'status', 'discover']);
-const V2_PENDING_DAMAGE_KEYS = new Set(['amount', 'range', 'cond', 'bonus', 'lifesteal', 'graveyard', 'hits', 'recast', 'schedule']);
-const V2_PENDING_EFFECT_KEYS = new Set(['amount', 'upTo', 'selfDamage', 'perFuelCost', 'perSpellHeal', 'guard', 'decayAtTurnEnd', 'untilHandN', 'handOps']);
 const V2_PENDING_TRIGGER_KEYS = new Set(['onTurnStart', 'onBattleStart', 'onConsume', 'onDraw', 'onKill']);
+// damage 仍 pending：graveyard（墓地增伤，B10 墓地域口径）、schedule（延迟段，需回合调度钩子，B2 尾）；
+// hits.perFoe（每人释放一段）同为 pending——嵌套在 hits 内，需单独探查。
+const PENDING_DAMAGE_KEYS = ['graveyard', 'schedule'];
+// draw 全部 v2 键属 B4（boss/普通战双口径必须结构化表达后才放行）。
+const PENDING_DRAW_KEYS = ['amount', 'untilHandN', 'handOps'];
+
+// B1-B3 已接线的 heal/armor v2 键不再 pending；draw 的 v2 键与 damage 的残余键在此逐 op 收口。
+function pendingOperationKeys(operation) {
+  if (operation.op === 'damage') {
+    const keys = PENDING_DAMAGE_KEYS.filter(key => key in operation);
+    if (operation.hits != null && typeof operation.hits === 'object' && operation.hits.perFoe !== undefined) {
+      keys.push('hits.perFoe');
+    }
+    return keys;
+  }
+  if (operation.op === 'draw') return PENDING_DRAW_KEYS.filter(key => key in operation);
+  return [];
+}
 
 function assertStructuredRulesSupported(card) {
   const triggers = card?.rules?.triggers;
   if (triggers == null || typeof triggers !== 'object') return;
   for (const key of Object.keys(triggers)) {
     if (V2_PENDING_TRIGGER_KEYS.has(key)) {
-      throw new TypeError(`Unsupported rules.triggers.${key} for card ${card.id || '<missing id>'}: schema v2 键位先行，解释器分支未接线（迁移批 A3/B1-B11）`);
+      throw new TypeError(`Unsupported rules.triggers.${key} for card ${card.id || '<missing id>'}: schema v2 键位先行，解释器分支未接线（迁移批 A3/B4-B11）`);
     }
   }
   const operations = Array.isArray(triggers.onPlay) ? triggers.onPlay : [];
   for (const operation of operations) {
     if (!operation || typeof operation !== 'object') continue;
     if (!INTERPRETER_ONPLAY_OPS.has(operation.op)) {
-      throw new TypeError(`Unsupported onPlay operation '${operation.op}' for card ${card.id || '<missing id>'}: schema v2 键位先行，解释器分支未接线（迁移批 A3/B1-B11）`);
+      throw new TypeError(`Unsupported onPlay operation '${operation.op}' for card ${card.id || '<missing id>'}: schema v2 键位先行，解释器分支未接线（迁移批 A3/B4-B11）`);
     }
-    const pendingKeys = operation.op === 'damage' ? V2_PENDING_DAMAGE_KEYS
-      : ['heal', 'armor', 'draw'].includes(operation.op) ? V2_PENDING_EFFECT_KEYS : null;
-    if (!pendingKeys) continue;
-    for (const key of pendingKeys) {
-      if (key in operation) {
-        throw new TypeError(`Unsupported onPlay ${operation.op} parameter '${key}' for card ${card.id || '<missing id>'}: schema v2 键位先行，解释器分支未接线（迁移批 A3/B1-B11）`);
-      }
+    for (const key of pendingOperationKeys(operation)) {
+      throw new TypeError(`Unsupported onPlay ${operation.op} parameter '${key}' for card ${card.id || '<missing id>'}: schema v2 键位先行，解释器分支未接线（迁移批 A3/B4-B11）`);
     }
   }
 }
@@ -40,7 +53,27 @@ function createBattleResolution(ports) {
     startSurge, getAllCards, isRandomObtainable, randomBattle, getDamageTypes, getDamageTypeMeta,
     fixedDamageType, hasCurse, getAliveFoes, getGrowth, addArmor, applyStatus, findCard, addTempCard, queueDiscover,
     splitClauses, applyTextEffects, registerTurnStart, registerBattle, castRandomSpells,
-    drawCards, grantSha, hitFoe, drawOf, isAOE } = ports;
+    drawCards, grantSha, hitFoe, drawOf, isAOE, damagePlayer, getPlayerHp, countDrawnSpells } = ports;
+  // B1：伤害条件对象（schema CONDITION_KEYS 共用形状）。
+  // 口径对照：foeHpBelow 以「血量 ≤ n」承接斩杀「对 9 血以下」（与 hpCap 同口径）；
+  // foeHpHalf 以「血量 ≤ 上限一半」承接惩击 halfB；foeStatus 查目标身上的诅咒层；
+  // foeFullHp 以「本段伤害结算前当前满血」承接冷冻射线类「未曾受到过伤害」判定。
+  function conditionMatches(cond, foe) {
+    if (!cond || typeof cond !== 'object') return true;
+    if (cond.foeHpBelow !== undefined && !(foe.hp <= cond.foeHpBelow)) return false;
+    if (cond.foeHpHalf === true && !(foe.maxHp && foe.hp <= foe.maxHp / 2)) return false;
+    if (cond.foeStatus !== undefined && !((foe.status?.[cond.foeStatus] || 0) > 0)) return false;
+    if (cond.foeFullHp === true && Number.isFinite(foe.maxHp) && foe.hp < foe.maxHp) return false;
+    return true;
+  }
+
+  // B1：区间掷骰（含端点）——与文本路径 dmg.direct 区间口径一致（不稳定射线 4-6）。
+  function rollRange(range) {
+    const min = Array.isArray(range) ? range[0] : 0;
+    const max = Array.isArray(range) ? range[1] : min;
+    return min + Math.floor(randomBattle() * (Math.abs(max - min) + 1));
+  }
+
   function* resolveCardSteps(card, target, infused, fuelCost, uid) {
 
     assertStructuredRulesSupported(card);
@@ -93,6 +126,8 @@ function createBattleResolution(ports) {
     // 冷冻射线「若此前其未曾受到过伤害」：本卡结算前的血量快照（先行伤害会让满血判定误杀）
     const hpAtCast = new Map(getAliveFoes().map(f => [f, f.hp]));
     let did = false;
+    // B3：本次结算中入手的法术数（perSpellHeal 折算基数；普通战 grantSha 发初始攻击不计）
+    let spellsGained = 0;
     const isDmgType = getDamageTypes().includes(card.type);
     let structuredHit = false;
     // —— 伤害（卡面伤害词条立即结算，不受沉默影响） ——
@@ -101,34 +136,97 @@ function createBattleResolution(ports) {
       const damageCard = { ...card, desc: '' };
       for (const operation of structuredOnPlay) {
         if (['heal', 'armor', 'draw', 'status', 'discover'].includes(operation.op)) continue;
-        if (operation.op !== 'damage' || operation.amountField !== 'dmg') {
+        if (operation.op !== 'damage' || (operation.amountField !== undefined && operation.amountField !== 'dmg')) {
           throw new TypeError(`Unsupported onPlay operation for card ${card.id || '<missing id>'}`);
         }
-        const dmgVal = +card[operation.amountField] + ((uid && getGrowth(uid)) || 0);
-        const hitCount = operation.hitCount || 1;
+        // B1：伤害来源三选一（schema 保证恰好一个）——v1 字段引用 / v2 字面量 / v2 区间。
+        // 回合成长（充能火球）按 uid 叠加；区间每次施放掷一次（含端点，与 dmg.direct 同口径）。
+        const sources = ['amountField', 'amount', 'range'].filter(field => operation[field] !== undefined);
+        if (sources.length !== 1) {
+          throw new TypeError(`Unsupported onPlay damage source for card ${card.id || '<missing id>'}`);
+        }
+        const growth = (uid && getGrowth(uid)) || 0;
+        const baseDamage = sources[0] === 'amountField' ? +card[operation.amountField] + growth
+          : sources[0] === 'amount' ? operation.amount + growth
+          : rollRange(operation.range);
+        // B2：段数来源——v1 hitCount / v2 hits.count / v2 hits.range（每次施放掷一次）；
+        // hits.perFoe 已由顶部守卫拦截（pending）。
+        const hitCount = operation.hitCount ?? operation.hits?.count
+          ?? (operation.hits?.range !== undefined ? rollRange(operation.hits.range) : 1);
         let preferred = target;
-        for (let segment = 0; segment < hitCount; segment++) {
-          const windupTargets = operation.target === 'allEnemies'
-            ? getAliveFoes()
-            : [preferred && !preferred.dead ? preferred : getAliveFoes()[0]].filter(Boolean);
-          if (!windupTargets.length) break;
+        const foesHit = [];
+        let dealtTotal = 0;
+        // 目标选取（每段重算，windup 后目标可能倒下）：allEnemies 全体 / randomEnemy 每段随机一名 /
+        // 其余为点选目标（倒下则顺延战场首位，与 v1 同口径）。
+        const pickTargets = () => {
+          if (operation.target === 'allEnemies') return getAliveFoes();
+          if (operation.target === 'randomEnemy') {
+            const alive = getAliveFoes();
+            return alive.length ? [alive[Math.floor(randomBattle() * alive.length)]] : [];
+          }
+          return [preferred && !preferred.dead ? preferred : getAliveFoes()[0]].filter(Boolean);
+        };
+        // 单段结算：windup → 逐敌（cond 门 → bonus 条件增伤 → hitFoe）→ hit。
+        // 返回 { dealt: 本段实际伤害合计, first: 段首目标（null = 无可用目标） }。
+        function* castSegment(segment, label, applyModifiers) {
+          const windupTargets = pickTargets();
+          if (!windupTargets.length) return { dealt: 0, first: null };
           const cue = attackCue(type);
           yield { kind: 'windup', targets: windupTargets, ...(cue ? { cue } : {}) };
-          const targets = operation.target === 'allEnemies'
-            ? getAliveFoes()
-            : [preferred && !preferred.dead ? preferred : getAliveFoes()[0]].filter(Boolean);
-          if (!targets.length) break;
+          const targets = pickTargets();
+          if (!targets.length) return { dealt: 0, first: null };
+          let dealt = 0;
           let hitThisSegment = false;
           for (const foe of targets) {
-            if (!foe.dead) {
-              hitFoe(foe, damageCard, dmgVal, type,
-                hitCount > 1 ? `（第 ${segment + 1} 段）` : '', hitCount > 1 ? segment + 1 : null);
-              hitThisSegment = true;
+            if (foe.dead) continue;
+            if (applyModifiers && operation.cond && !conditionMatches(operation.cond, foe)) {
+              if (segment === 0) log(`[[icon:cross]] <b>${esc(foe.name)}</b> 不满足条件：${esc(card.name)} 无效`, 'warn');
+              continue;
             }
+            let foeDamage = baseDamage;
+            if (applyModifiers && operation.bonus &&
+                (!operation.bonus.if || conditionMatches(operation.bonus.if, foe))) {
+              const before = foeDamage;
+              foeDamage = operation.bonus.amount !== undefined ? foeDamage + operation.bonus.amount
+                : Math.floor(foeDamage * (1 + operation.bonus.pct / 100));
+              if (segment === 0 && foeDamage !== before) {
+                log(`[[icon:arrow]] <b>${esc(foe.name)}</b> 满足增伤条件，伤害增加（${before} → ${foeDamage}）`, 'sys');
+              }
+            }
+            dealt += hitFoe(foe, damageCard, foeDamage, type, label, hitCount > 1 ? segment + 1 : null);
+            foesHit.push(foe);
+            hitThisSegment = true;
           }
           if (hitThisSegment) yield { kind: 'hit', segment: segment + 1, ...(cue ? { cue } : {}) };
-          if (operation.target === 'chosenEnemy') preferred = targets[0];
+          return { dealt, first: targets[0] || null };
+        }
+        for (let segment = 0; segment < hitCount; segment++) {
+          const result = yield* castSegment(segment, hitCount > 1 ? `（第 ${segment + 1} 段）` : '', true);
+          if (result.first === null) break;
+          dealtTotal += result.dealt;
+          if (operation.target === 'chosenEnemy') preferred = result.first;
           if (operation.retarget !== 'livingFoes' && operation.target === 'chosenEnemy' && preferred.dead) break;
+        }
+        // B3：吸血——按本 op 实际造成的伤害回复，走 healban 门（与文本路径吸血同口径）。
+        if (operation.lifesteal === true && dealtTotal > 0) {
+          if ((getPlayerStatus().status.healban || 0) > 0) {
+            log(`[[icon:heart]] 禁疗中：吸血回复无效（还剩 ${getPlayerStatus().status.healban} 回合）`, 'warn');
+          } else {
+            heal(dealtTotal);
+            addFloat({ unit: 'self', text: '', cls: 'stk sticker-heal', warm: true });
+            log(`[[icon:heart]] 吸血：回复 ${dealtTotal} 点生命`, 'ok');
+          }
+        }
+        // B2：recast:{on:'kill'}——本 op 击杀过敌人时再施放 N 次（镜像文本路径击杀连锁：
+        // 余烬爆裂/饱和打击）。再施放段不做 cond/bonus 复判，按基础伤害结算。
+        if (operation.recast && operation.recast.on === 'kill' && foesHit.some(foe => foe.dead)) {
+          log(`[[icon:sparkles]] <b>${esc(card.name)}</b>：击杀敌人，再施放${operation.recast.times > 1 ? ` ${operation.recast.times} 次` : '一次'}`, 'sys');
+          for (let k = 0; k < operation.recast.times; k++) {
+            const result = yield* castSegment(hitCount + k,
+              operation.recast.times > 1 ? `（再施放第 ${k + 1} 次）` : '（再施放）', false);
+            if (result.first === null) break;
+            dealtTotal += result.dealt;
+          }
         }
         structuredHit = true;
         did = true;
@@ -299,24 +397,75 @@ function createBattleResolution(ports) {
           did = true;
           continue;
         }
-        if (!['heal', 'armor', 'draw'].includes(operation.op) || operation.amountField !== operation.op) {
+        if (!['heal', 'armor', 'draw'].includes(operation.op)) {
           throw new TypeError(`Unsupported onPlay operation for card ${card.id || '<missing id>'}`);
         }
-        const amount = +card[operation.amountField];
         if (operation.op === 'heal') {
+          // B3：回复来源五选一（schema 保证恰好一个）。禁疗门统一走 healban 检查（与文本路径同口径）。
           const healban = getPlayerStatus().status.healban || 0;
-          if (healban > 0) {
-            log(`[[icon:heart]] 禁疗中：回复 ${amount} 点生命无效（还剩 ${getPlayerStatus().status.healban} 回合）`, 'warn');
+          if (operation.selfDamage !== undefined) {
+            // 自伤（恶魔之力「损失 N 点生命」）：不是治疗，不受禁疗影响，走 damagePlayer 命令
+            damagePlayer(operation.selfDamage);
+          } else if (operation.upTo !== undefined) {
+            // 回复至 N 血（沐愈光辉）：与文本路径 heal.upTo 同口径
+            const want = operation.upTo;
+            const current = getPlayerHp();
+            if (healban > 0) {
+              log(`[[icon:heart]] 禁疗中：回复至 ${want} 血无效（还剩 ${getPlayerStatus().status.healban} 回合）`, 'warn');
+            } else if (want > current) {
+              heal(want - current);
+              addFloat({ unit: 'self', text: '', cls: 'stk sticker-heal', warm: true });
+              log(`[[icon:heart]] 回复至 <b>${want}</b> 血（当前 ${current}，回复 ${want - current}）`, 'ok');
+            } else {
+              log(`[[icon:heart]] 回复至 ${want} 血：当前 ${current} 不低于目标值，无变化`, 'ok');
+            }
           } else {
-            heal(amount);
-            addFloat({ unit: 'self', text: '', cls: 'stk sticker-heal', warm: true });
+            let amount;
+            if (operation.amountField !== undefined) amount = +card[operation.amountField];
+            else if (operation.amount !== undefined) amount = operation.amount;
+            else if (operation.perFuelCost !== undefined) {
+              // 按注能牺牲品价格折算（圣光治愈「N 倍于被注能卡牌价格」）：与 pre.fuelPrice 同口径
+              const fuel = Math.max(0, fuelCost || 0);
+              amount = operation.perFuelCost * fuel;
+              log(`[[icon:flask]] 牺牲品费用 ${fuel} → 折算回复 ${amount} 点生命`, 'sys');
+            } else {
+              // perSpellHeal：按本次结算中入手的法术数折算（浪掷风吟「每置入 1 张法术回复 N 血」）
+              amount = operation.perSpellHeal * spellsGained;
+              log(`[[icon:cards]] 本次入手 ${spellsGained} 张法术 → 回复 ${amount} 点生命`, 'sys');
+            }
+            if (healban > 0) {
+              log(`[[icon:heart]] 禁疗中：回复 ${amount} 点生命无效（还剩 ${getPlayerStatus().status.healban} 回合）`, 'warn');
+            } else {
+              heal(amount);
+              addFloat({ unit: 'self', text: '', cls: 'stk sticker-heal', warm: true });
+            }
           }
         } else if (operation.op === 'armor') {
-          addArmor(amount);
-          log(`[[icon:plate]]获得 ${amount} 点护甲`, 'sys');
+          // B3：护甲来源二选一（amountField/amount）；guard=true 叠加格挡（本回合所受伤害降为 1）；
+          // decayAtTurnEnd=n 注册「下回合开始时 -n 点」延迟段（与坚盾文本路径同一条 delayed 管线）。
+          const amount = operation.amountField !== undefined ? +(card[operation.amountField] || 0) : +(operation.amount || 0);
+          if (amount > 0) {
+            addArmor(amount, operation.guard === true ? { guard: true } : undefined);
+            log(`[[icon:plate]]获得 ${amount} 点护甲`, 'sys');
+          } else if (operation.guard === true) {
+            addArmor(0, { guard: true });
+          }
+          if (operation.guard === true) {
+            log('[[icon:shield]] 格挡：本回合所受伤害降为 1', 'sys');
+          }
+          if (operation.decayAtTurnEnd !== undefined) {
+            addDelayed({ text: `-${operation.decayAtTurnEnd} 点`, cardName: card.name });
+            log(`[[icon:hourglass]] <b>回合开始时</b>：【${esc(card.name)}】护甲 -${operation.decayAtTurnEnd} 点（下个回合开始生效）`, 'sys');
+          }
         } else {
+          // draw：v2 抽牌键（amount/untilHandN/handOps）仍属 B4，由顶部守卫拦截；这里保持 v1 路径
+          if (operation.amountField !== 'draw') {
+            throw new TypeError(`Unsupported onPlay operation for card ${card.id || '<missing id>'}`);
+          }
+          const amount = +card[operation.amountField];
           if (readState().mode === 'boss') {
             const got = drawCards(amount);
+            if (typeof countDrawnSpells === 'function') spellsGained += countDrawnSpells();
             log(`[[icon:cards]] <b>${esc(card.name)}</b>：抽了 ${got} 张牌`, 'sys');
           } else {
             grantSha(amount);

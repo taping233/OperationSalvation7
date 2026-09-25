@@ -19,10 +19,34 @@ function normalizeDesc(value) {
     .replace(/\s+/g, '').replace(/[。.]+$/g, '');
 }
 
+// B1/B2（2026-09-25）：结构化 damage op → 预览规格。纯字面量/字段伤害（amount/amountField）
+// 加确定段数（hitCount/hits.count）可精确预演；条件（cond）、增伤（bonus）、区间（range）、
+// 吸血、随机目标/随机段数、墓地/重施/延迟一律降级 unknown——宁可不给数字，不给错数字。
+// 与解释器（battle.resolution.js castSegment）共享语义口径：amount 与 card.dmg 由 schema 强制一致，
+// growth 由 cardContext.damageGrowth 通道承担（>0 时 previewAction 已降级 unknown）。
+function structuredDamageSpec(card) {
+  const operation = card?.rules?.triggers?.onPlay?.find(item => item && item.op === 'damage');
+  if (!operation) return null;
+  const unstable = operation.range !== undefined || operation.cond !== undefined || operation.bonus !== undefined ||
+    operation.lifesteal === true || operation.graveyard !== undefined || operation.recast !== undefined ||
+    operation.schedule !== undefined || operation.target === 'randomEnemy' ||
+    (operation.hits != null && (operation.hits.range !== undefined || operation.hits.perFoe !== undefined));
+  if (unstable) return { unknown: true };
+  // target 未声明时解释器按「倒下顺延战场首位」结算——预览按 retarget 式逐段转移处理
+  const retarget = operation.retarget === 'livingFoes' || operation.target === undefined;
+  const countSource = operation.hitCount ?? operation.hits?.count;
+  if (countSource !== undefined && (!Number.isInteger(countSource) || countSource < 1)) return { unknown: true };
+  const hits = Math.max(1, Math.floor(countSource || 1));
+  if (operation.amount !== undefined) {
+    return Number.isFinite(+operation.amount) ? { hits, retarget, amount: +operation.amount } : { unknown: true };
+  }
+  if (operation.amountField === 'dmg' && !Number.isFinite(+card.dmg)) return { unknown: true };
+  return { hits, retarget };
+}
+
 function semanticMatch(card) {
-  const operation = card?.rules?.triggers?.onPlay?.find(item => item.op === 'damage' && item.retarget === 'livingFoes');
-  if (operation) return card.type === '武术' && card.dmgType === 'attack' && Number.isFinite(+card.dmg)
-    ? { hits: Math.max(1, Math.floor(+operation.hitCount || 1)), retarget: true } : null;
+  const structured = structuredDamageSpec(card);
+  if (structured) return structured;
   const spec = card && SEMANTICS[card.id];
   if (!spec) return null;
   return card.type === spec[0] && card.dmgType === spec[1] && +card.dmg === spec[2]
@@ -76,12 +100,15 @@ function previewAction({ snapshot, action, cardContext }) {
   if ((cardContext.wholeCardRepeats || 1) !== 1) return unknown(cost, frozenTargets, '这张牌会整体重复结算');
   if (cardContext.arrowRuneRepeat) return unknown(cost, frozenTargets, '箭矢符文会重复结算这张牌');
 
-  // 只计算通过完整语义指纹验证的有限白名单。非白名单、随机、AOE、
-  // 状态前置或任何字段被改写的卡都不猜测段数和结算顺序。
+  // 只计算通过语义验证的伤害流程。非白名单、随机、AOE、状态前置或任何字段被改写的卡
+  // 都不猜测段数和结算顺序；带 v2 条件/区间/增伤的结构化伤害降级 unknown（不猜数字）。
   const exactSpec = semanticMatch(card);
   if (!exactSpec) return unknown(cost, frozenTargets, '这张牌的伤害流程暂不支持预览');
+  if (exactSpec.unknown) return unknown(cost, frozenTargets, '这张牌带有条件/区间/随机伤害效果，暂不支持精确预览');
   if (cardContext.damageGrowth > 0) return unknown(cost, frozenTargets, '本场成长会改变这张牌的伤害');
-  if (!Combat.TYPE_NAME[card.dmgType] || !Number.isFinite(+card.dmg)) return unknown(cost, frozenTargets, '这张牌没有可预览的固定伤害流程');
+  if (!Combat.TYPE_NAME[card.dmgType] || (!Number.isFinite(+card.dmg) && exactSpec.amount === undefined)) {
+    return unknown(cost, frozenTargets, '这张牌没有可预览的固定伤害流程');
+  }
 
   const hitsPlanned = exactSpec.hits;
   const hasRetargetSpecial = exactSpec.retarget && hitsPlanned > 1 && snapshot.foes.some((candidate, index) => index !== targetIndex
@@ -102,7 +129,7 @@ function previewAction({ snapshot, action, cardContext }) {
     for (let i = 0; i < hitsPlanned; i++) { hits.push(0); targetIndexesByHit.push(targetIndex); }
   } else {
     const attacker = { atk: +(snapshot.player?.atk || 0), spellPower: +(snapshot.player?.spellPower || 0), status: { ...(snapshot.pstat?.status || {}) } };
-    const amount = (+card.dmg || 0) + (+cardContext.damageGrowth || 0);
+    const amount = (exactSpec.amount ?? (+card.dmg || 0)) + (+cardContext.damageGrowth || 0);
     let currentIndex = targetIndex;
     for (let i = 0; i < hitsPlanned; i++) {
       if (!exactSpec.retarget && target.hp <= 0) break;
