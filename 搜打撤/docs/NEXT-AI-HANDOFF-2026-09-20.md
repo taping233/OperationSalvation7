@@ -4,7 +4,7 @@
 - **battle.engine.js 规则核深拆再评估：维持「收益低」论证跳过**——SCC 实测（autoPlayHandType→execPlay→hitFoe→resolveFoeDefeat 回路、enemy-phase⇄processDelayed/finish 互递归）剩余正文即共享结点，候选块（抽牌域/死亡簿记/伤害终端/巢穴内容包/快照岛/卡牌工具/转发 shim）逐一否决；且任何真实拆分需同步改 architecture-graph.mjs RUNTIME_OWNERS 白名单。不为拆而拆，结论入路线图收官注。
 - **代码债清单①-⑦全部收口**：① 架构大拆 session 944→488 / cardslib 1209→699 / ui 1001→469 / engine 评估跳过（论证在案）；② 状态袋四域 presentation 0 / piles 19 / interaction 54 / effects 45 / session 53（路线图表格已更新收官注）；③ localStorage 收口（core/storage.js）；④ 性能 P1×2；⑤ commands.shared.js 单一真源；⑥ applyDeathOutcome 唯一实现；⑦ __bfDebug 已删（67cd72f）。
 - 剩余待老板批的删除类（非重构）：孤儿资产 81 文件 2.67MB+中置信 26 文件（docs/orphan-audit-2026-09-25.md）、CSS 死块 87（行号漂移需按类名重扫）、meta.js track('death') 孤儿、cardslib/ui 休眠代码（libPageWarmTask/finishScene/sceneState/sceneNext 等）。
-- **总验收部分完成**：全量 814 绿（两笔提交门禁各跑一遍）、lint 0、语法守卫 188 文件；**npm run build + perf-budget 两项待补**——现场有 UI 审查会话 38 文件未提交改动，按「对方半成品在场不 build」铁律顺延，其落库后由持续任务下一轮补跑。
+- **总验收完成（2026-09-25 03:4x 补齐）**：全量 814 绿（多笔提交门禁各跑一遍）、lint 0、语法守卫 188 文件、架构守卫零违例、**npm run build PASS（6.04s）+ perf-budget PASS**——build 在临时 worktree 干净 HEAD `1e6776d` 上执行（junction 复用 node_modules，不触现场 UI 审查会话半成品；实测 battle-gzip 101.3/102、entry 239.0/256、initial-js 251.8/272、css 119.6/128、duplicates 0.63/0.768 MiB，拆分三波未顶破预算；worktree 用后已摘 junction 并清理）。UI 审查会话落库后其改动量另行计入，不属本债范围。
 - 门禁偶发红第二次（direct-cast）同样是撞 S 代理 engine 中间态，单文件 9/9 绿后等 S 收口再提交即过；两次偶发均为「门禁与在途写文件竞态」，非代码问题，记录在案。
 
 ## 当前状态补充：持续批第二波落库（状态袋/命令域/ui 拆分+钩子删除）（2026-09-25 02:5x +08:00）
