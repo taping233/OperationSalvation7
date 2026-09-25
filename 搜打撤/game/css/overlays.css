@@ -529,3 +529,17 @@
 .term-tip b { color: #5a3c14; }
 .term-tip .term-tip-sep { color: #a08e6e; padding: 0 2px; }
 .term-tip[hidden] { display: none; }
+
+/* ═══ 统一弹层壳 .ov-shell（2026-09-25 UI 统一批·中心）═══
+   目标：收敛「旧素描边壳」与「09-24 封条/编号语言」双轨（09-25 审查 A 组跨页建议#3）。
+   用法：弹层根元素挂 class="ov-shell" + data-index="02"（编号按页内清单序）；
+   页面专属内容仍在各自 page-*.css 里写，壳只管外框语言。 */
+.ov-shell { position: relative;
+  background: linear-gradient(180deg, #20262c, #171c22);
+  border: 1px solid rgba(217,187,130,.28);
+  border-radius: var(--radius-panel, 2px);
+  box-shadow: 0 24px 70px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.06); }
+.ov-shell::before { content: ''; position: absolute; top: 0; left: 8%; right: 8%; height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(217,187,130,.85), transparent); }
+.ov-shell::after { content: attr(data-index); position: absolute; top: 10px; right: 16px;
+  font-size: 10px; letter-spacing: .3em; color: rgba(217,187,130,.5); pointer-events: none; }

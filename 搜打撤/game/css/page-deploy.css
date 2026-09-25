@@ -324,3 +324,98 @@
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: none; }
 }
+
+/* ═══════════════════════════════════════════════════════════════════
+   2026-09-25 二波 B 组（出征整备页）
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── B1 卡宽变量统一：卡池 128px / 背包 96px（覆盖 winter 456/542 的 118/104） ── */
+#overlay #depMain { --dep-card-w: 128px; --dep-bag-w: 96px; }
+#overlay #depMain .dep-cards {
+  grid-template-columns: repeat(auto-fill, minmax(var(--dep-card-w), 1fr));
+}
+#overlay #depMain .bag-grid {
+  grid-template-columns: repeat(auto-fill, minmax(var(--dep-bag-w), 1fr));
+}
+/* 拖拽手感自检：可拖卡面 grab / 按下 grabbing（winter 已有，此处锁语义防后续覆盖） */
+#overlay #depMain .dep-card[draggable="true"] { cursor: grab; }
+#overlay #depMain .dep-card[draggable="true"]:active { cursor: grabbing; }
+
+/* ── B2 卡池空态：虚线金框 + 细网格纹 + 引导句居中（仓库为空时 .dep-cards 只剩 .ov-empty） ── */
+#overlay #depMain .dep-cards:has(> .ov-empty) {
+  display: grid; place-items: center; min-height: 200px; padding: 22px;
+  border: 1px dashed rgba(217, 187, 130, .42); border-radius: 2px;
+  background:
+    repeating-linear-gradient(0deg, rgba(217, 187, 130, .035) 0 1px, transparent 1px 30px),
+    repeating-linear-gradient(90deg, rgba(217, 187, 130, .035) 0 1px, transparent 1px 30px),
+    rgba(217, 187, 130, .02);
+}
+#overlay #depMain .dep-cards:has(> .ov-empty) .ov-empty {
+  margin: 0 !important; max-width: 46ch; text-align: center;
+  color: #93a9ad; font-size: 12.5px; line-height: 1.9; letter-spacing: .04em;
+}
+
+/* ── B3 拖拽目标提示：拖动卡池卡牌时，空背包格金框呼吸（JS 挂 .dep-target-hint；
+   呼吸只动 ::after 覆层的 opacity，零逐帧重绘） ── */
+#overlay #depMain .bag-cell.dep-target-hint { border-color: rgba(217, 187, 130, .4); }
+#overlay #depMain .bag-cell.dep-target-hint::after {
+  content: ''; position: absolute; inset: -2px; z-index: 5; pointer-events: none;
+  border: 1.5px solid #d9bb82; border-radius: 3px;
+  box-shadow: 0 0 12px rgba(217, 187, 130, .3), inset 0 0 8px rgba(217, 187, 130, .14);
+  animation: depHintBreath 1.05s ease-in-out infinite alternate;
+}
+@keyframes depHintBreath { from { opacity: .3; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  #overlay #depMain .bag-cell.dep-target-hint::after { animation: none; opacity: .8; }
+}
+
+/* ── B4 可撕封条线：确认出发钮上方的骑缝虚线 + 两端金点（静态装饰）；
+   确认出发瞬间 #depMain 挂 .dep-tearing（JS）：封条划亮 → 页面上下两半沿缝撕开 ── */
+#overlay #depMain .dep-foot { position: relative; }
+#overlay #depMain .dep-foot::before {
+  content: ''; position: absolute; left: 12px; right: 12px; top: -11px; height: 8px; pointer-events: none;
+  background:
+    radial-gradient(2.2px 2.2px at 4px 4px, #ffe9b6 40%, transparent 75%) no-repeat,
+    radial-gradient(2.2px 2.2px at calc(100% - 4px) 4px, #ffe9b6 40%, transparent 75%) no-repeat,
+    repeating-linear-gradient(90deg, rgba(217, 187, 130, .5) 0 7px, transparent 7px 14px);
+  background-size: 8px 8px, 8px 8px, 100% 1px;
+  background-position: 0 3px, 100% 3px, 0 3px;
+  opacity: .75;
+}
+/* 撕开转场：transform/opacity only；reduced-motion 由 JS 跳过挂类，此处再兜底一层 */
+#overlay #depMain.dep-tearing::before {
+  content: ''; position: absolute; left: -2%; right: -2%; top: 50%; height: 0; z-index: 50; pointer-events: none;
+  border-top: 2px dashed #ffe9b6;
+  filter: drop-shadow(0 0 10px rgba(217, 187, 130, .65));
+  transform-origin: 50% 50%;
+  animation: depSeamSweep .52s cubic-bezier(.6, .05, .4, .95) forwards;
+}
+#overlay #depMain.dep-tearing .hub-head {
+  animation: depTearTop .5s cubic-bezier(.6, .05, .4, .95) .1s forwards;
+}
+#overlay #depMain.dep-tearing .dep-body {
+  animation: depTearBottom .5s cubic-bezier(.6, .05, .4, .95) .1s forwards;
+}
+@keyframes depSeamSweep {
+  0% { opacity: 0; transform: scaleX(.15); }
+  32% { opacity: 1; transform: scaleX(1); }
+  82% { opacity: 1; }
+  100% { opacity: 0; transform: scaleX(1.05); }
+}
+@keyframes depTearTop {
+  26% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-52px); }
+}
+@keyframes depTearBottom {
+  26% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(60px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  #overlay #depMain.dep-tearing::before,
+  #overlay #depMain.dep-tearing .hub-head,
+  #overlay #depMain.dep-tearing .dep-body { animation: none; }
+}
+/* B1b 卡面吃满轨道：卡面宽=10em（实测 10px→100px），字号随 --dep-card-w 推导，
+   池卡真正放大到 128px；背包格仍以格为尺寸单位（格内卡面居中） */
+#overlay #depMain .dep-card { width: 100%; }
+#overlay #depMain .dep-card .hs-card { font-size: calc(var(--dep-card-w) / 10); }

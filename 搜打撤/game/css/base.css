@@ -60,6 +60,9 @@
     --amber: #e0a458; --amber-soft: #f0c25c;
     --gold: #d4b078; --ember: #c8503c; --ember-hi: #ff8a5c;
     --ok: #6f9e6a; --arcane: #9b7fb8;
+    /* 09-25 UI 统一批：金色三档 + 圆角三档制式（新代码一律引 token，存量逐步收敛） */
+    --gold-main: #d9bb82; --gold-bright: #ffe9b6; --gold-dim: #b8934c;
+    --radius-panel: 2px; --radius-btn: 1px; --radius-pill: 999px;
     --serif: var(--font-ui);
     /* —— 特效语义 token（P2 风格统一）：战斗/反馈特效禁用裸 hex，新增特效一律引用此处 —— */
     --fx-dmg: #f2c9c9;               /* 伤害数字（常规） */

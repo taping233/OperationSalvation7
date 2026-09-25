@@ -190,3 +190,16 @@ img[data-asset-key="card-martial-tt7-swordimmortal"]{object-position:50% 38%!imp
 .hs-card .rv-beam{opacity:.55}
 #cardZoom .hs-card .hsc-desc{font-size:.78em}
 @media(prefers-reduced-motion:reduce){.hs-card .rv-beam::before{animation:none!important}}
+
+/* ============================================================
+   插画窗光统一（2026-09-25 UI 统一批·中心）：
+   「路线B 浅亮底」卡面位图放进 v3 深色插画窗会发白发空（战斗紧凑态窗体
+   放大后尤甚）。给插画窗统一压一层冷调渐变 + 顶部高光 + 发丝内框，
+   让浅底画心读作「镶进金属框的画」而非白洞。不改图、不加混合模式。
+   ============================================================ */
+.hs-card .hsc-art{position:relative}
+.hs-card .hsc-art::after{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:linear-gradient(180deg,rgba(14,24,32,.24),rgba(14,24,32,.04) 30% 58%,rgba(8,12,18,.55));
+  box-shadow:inset 0 0 0 1px rgba(8,12,18,.5),inset 0 0 1em rgba(10,20,30,.35)}
+.hs-card .hsc-art::before{content:'';position:absolute;left:8%;right:8%;top:0;height:1px;pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.22),transparent)}

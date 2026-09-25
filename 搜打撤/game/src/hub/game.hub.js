@@ -124,7 +124,7 @@ let hubCollectionView = 'backs';
       { id: 'shop', icon: 'coin', name: '商店' },
       { id: 'upgrade', icon: 'tools', name: '升级' },
       { id: 'classes', icon: 'medal', name: '人物' },
-      { id: 'ach', icon: 'trophy', name: '成就·收藏室' },
+      { id: 'ach', icon: 'trophy', name: '成就·收藏' },   // 09-25 A 组：页签缩写防折行（page-hub.css 配 nowrap）
     ];
     const body = hubTab === 'deploy' ? hubDeployHTML()
       : hubTab === 'stash' ? hubStashHTML()

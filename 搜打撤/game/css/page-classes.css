@@ -199,3 +199,13 @@
   from { opacity: 0; transform: translateY(14px); }
   to { opacity: 1; transform: none; }
 }
+
+/* ═════════ C6 第二波补件（2026-09-25 A 组·审查计划项7）═════════ */
+
+/* C6a 立绘头顶防裁：object-position 由 center 22% 收为 center top——
+   立绘头顶（巫帽尖/发饰）紧贴画布上缘，任何纵向裁切场景一律保头去脚 */
+#overlay #hubMain.hub-classes .class-dossier-art img { object-position: center top; }
+
+/* C6b 皮肤按钮区固定底部对齐：皮肤数不同的卡（1~4 枚）统一预留两行高度，
+   各卡标题/数据行起始位置一致，按钮组齐平卡底（copy 为 bottom 锚定） */
+#overlay #hubMain.hub-classes .class-skins { min-height: 58px; align-content: start; }

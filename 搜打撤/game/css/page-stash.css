@@ -304,3 +304,57 @@
      cursor:pointer；其余按钮由 page-hub.css T6 兜底；空仓占位与行卡
      本体不可点，保持默认光标以如实反映热区。
    · 热区：封条线 / 端点光点均 pointer-events:none，不遮挡卡格点击。 ═════════ */
+
+/* ═══════════════════════════════════════════════════════════════════
+   W8 第二波补件（2026-09-25 A 组·审查计划项4）
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* W8a 物品弹层壳迁移到统一 .ov-shell（中心壳类）：内容包裹层挂
+   ov-shell（弹层标记 JS 里挂类，随 ovBody 重建自然销毁、不外泄到别的弹层）；
+   本文件负责用 :has 把外层旧素描卡壳（灰底灰边灰顶线）让位收口 */
+#overlay .card:has(> .stash-shell) {
+  background: none;
+  border: 0;
+  border-radius: var(--radius-panel, 2px);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, .6);
+  padding: 0;
+}
+#overlay .card:has(> .stash-shell)::before { display: none; }   /* 旧灰顶线退役 */
+.ov-shell.stash-shell {
+  display: block;
+  padding: 26px 24px 22px;
+  text-align: center;
+  border-radius: var(--radius-panel, 2px);
+}
+
+/* W8b 消耗口袋空数据牌：虚线占位纹（旧 ov-empty 一行小字 → 占位框） */
+#overlay #hubMain .stash-placeholder {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  margin: 2px 0 0; padding: 22px 14px 18px;
+  border: 1px dashed rgba(159, 183, 188, .35);
+  border-radius: 2px;
+  background:
+    repeating-linear-gradient(45deg, rgba(159, 183, 188, .045) 0 9px, transparent 9px 20px),
+    rgba(7, 20, 29, .4);
+  color: #8fa5ad; text-align: center;
+}
+#overlay #hubMain .stash-placeholder .sp-ico .ic {
+  width: 22px; height: 22px; opacity: .75;
+  filter: grayscale(.3) brightness(1.05);
+}
+#overlay #hubMain .stash-placeholder b {
+  font-size: 13px; letter-spacing: 2px; color: #b9cbd0; font-weight: 600;
+}
+#overlay #hubMain .stash-placeholder span:last-child { font-size: 11.5px; color: #7e97a0; }
+
+/* W8c 物资空数据牌（数量 0）：虚线占位 + 内容降调（JS 挂 .zero） */
+#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .material-cell.zero {
+  border-style: dashed;
+  border-color: rgba(159, 183, 188, .3);
+  background:
+    repeating-linear-gradient(45deg, rgba(159, 183, 188, .04) 0 9px, transparent 9px 20px),
+    rgba(7, 20, 29, .35);
+}
+#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .material-cell.zero b { opacity: .55; }
+#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .material-cell.zero .mat-ico { opacity: .55; }
+#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .material-cell.zero:hover { border-color: rgba(217, 187, 130, .4); }

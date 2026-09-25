@@ -264,3 +264,65 @@
 
 /* W6e 币值圆牌（.hsc-val 右下角悬出 -.48em）压描述末行 → 描述区右侧让位 */
 #overlay .shop-pg .hs-card .hsc-desc { padding-right: 16px; }
+
+/* ═════════ W7 第二波补件（2026-09-25 A 组·审查计划项3）═════════ */
+
+/* W7a 买不起原因「储备币不足/仓库已满」：警示红 → 暗金灰（语义静默，红是战斗域语言；
+   图标由 game.hub.pages.js 内联 [[icon:coin]]/[[icon:archive]] 提供） */
+#overlay #hubMain.hub-shop .shelf-item .poor-why {
+  display: inline-flex; align-items: center; gap: 5px;
+  color: #a99a7c; letter-spacing: .06em;
+  text-shadow: 0 1px 4px rgba(2, 8, 12, .6);
+}
+#overlay #hubMain.hub-shop .shelf-item .poor-why img,
+#overlay #hubMain.hub-shop .shelf-item .poor-why .ic {
+  width: 12px; height: 12px; opacity: .8;
+  filter: grayscale(.25) brightness(1.05);
+}
+
+/* W7b 货架空态「今日货已售罄」封条：虚线框 + 斜纹底 + 微倾封条章（纯 CSS 无新图） */
+#overlay #hubMain.hub-shop .shop-soldout {
+  position: relative; margin: 6px 0 2px; padding: 38px 18px 30px;
+  text-align: center;
+  border: 1px dashed rgba(217, 187, 130, .38);
+  border-radius: 2px;
+  background:
+    repeating-linear-gradient(45deg, rgba(217, 187, 130, .045) 0 10px, transparent 10px 22px),
+    radial-gradient(ellipse 70% 60% at 50% 42%, rgba(217, 187, 130, .07), transparent 72%),
+    rgba(5, 13, 20, .55);
+}
+#overlay #hubMain.hub-shop .shop-soldout .so-seal {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 9px 26px; transform: rotate(-3.5deg);
+  border: 1px solid rgba(217, 187, 130, .6);
+  border-radius: 2px;
+  background: linear-gradient(160deg, rgba(217, 187, 130, .18), rgba(217, 187, 130, .05));
+  box-shadow: 0 4px 14px rgba(2, 8, 14, .4), inset 0 1px 0 rgba(255, 238, 200, .14);
+  color: #d9bb82; font-size: 14.5px; letter-spacing: 4px;
+  text-shadow: 0 0 12px rgba(217, 187, 130, .25);
+}
+#overlay #hubMain.hub-shop .shop-soldout .so-seal .ic { filter: brightness(1.1) drop-shadow(0 0 4px rgba(217,187,130,.3)); }
+#overlay #hubMain.hub-shop .shop-soldout .so-en {
+  display: block; margin-top: 12px;
+  font-size: 9px; letter-spacing: 3px; color: #68797f;
+}
+
+/* W7c 对局内神秘货箱「？」格：实线灰边 → 金虚线 + 骰点底纹（骰子感；
+   作用域仍限 .shop-pg，不外溢基地页签。page-shop 晚于 expedition-shop 加载生效） */
+#overlay .shop-pg .shop-card-mystery {
+  border: 1.5px dashed rgba(217, 187, 130, .55);
+  background:
+    radial-gradient(circle at 26% 24%, rgba(217, 187, 130, .3) 0 3px, transparent 4.5px),
+    radial-gradient(circle at 74% 24%, rgba(217, 187, 130, .3) 0 3px, transparent 4.5px),
+    radial-gradient(circle at 50% 50%, rgba(217, 187, 130, .26) 0 3px, transparent 4.5px),
+    radial-gradient(circle at 26% 76%, rgba(217, 187, 130, .3) 0 3px, transparent 4.5px),
+    radial-gradient(circle at 74% 76%, rgba(217, 187, 130, .3) 0 3px, transparent 4.5px),
+    radial-gradient(ellipse 68% 55% at 50% 44%, rgba(217, 187, 130, .12), transparent 70%),
+    repeating-linear-gradient(45deg, rgba(217, 187, 130, .04) 0 9px, transparent 9px 20px),
+    linear-gradient(160deg, #23282c, #101418 78%);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, .8), 0 0 18px rgba(217, 187, 130, .18);
+}
+#overlay .shop-pg .shop-slot.buy:has(.shop-card-mystery):hover .shop-card-mystery {
+  border-color: rgba(217, 187, 130, .95);
+  box-shadow: 0 0 16px rgba(217, 187, 130, .22), inset 0 0 14px rgba(217, 187, 130, .08);
+}

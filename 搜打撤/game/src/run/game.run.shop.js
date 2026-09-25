@@ -123,7 +123,8 @@ function createShopController({
     }
     if (slot.mystery) {
       // 问号卡面（2026-09-13 留言）：未购买时用「？」卡面占位，买完才亮出真卡
-      return `<div ${buyAttrs('buyCard', `购买神秘货箱，开出随机卡牌，${slot.price} 币`)}><div class="shop-card-mystery">[[icon:crystal]]<b>？</b><span>随机卡牌</span></div>${priceTag}</div>`;
+      // 09-25 A 组：crystal→dice（骰子感配套，虚线边+骰点底纹在 page-shop.css W6f）
+      return `<div ${buyAttrs('buyCard', `购买神秘货箱，开出随机卡牌，${slot.price} 币`)}><div class="shop-card-mystery">[[icon:dice]]<b>？</b><span>随机卡牌</span></div>${priceTag}</div>`;
     }
     return `<div ${buyAttrs('buyCard', `购买「${slot.card.name}」，${slot.price} 币`)}>${cardHTML(slot.card)}${priceTag}</div>`;
   }

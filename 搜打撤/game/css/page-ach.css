@@ -396,3 +396,54 @@
      press（.09s 快进）；:active 覆盖 transition 为 press 快进。
    · 标题页 mAch 弹层复用 .ach-row/.ach-list：本文件全部规则带
      #overlay #hubMain.hub-ach 前缀，弹层（#overlay .card 直下）不受影响。 ═════════ */
+
+/* ═══════════════════════════════════════════════════════════════════
+   W9 第二波补件（2026-09-25 A 组·审查计划项6）
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* W9a 见闻纪念档案条：并入收藏档案室标题卡的一行（JS 收成 .story-strip），
+   金短线引导 + 主辅层级（标签金、正文冷青灰） */
+#overlay #hubMain.hub-ach .collection-command .story-strip {
+  display: flex; align-items: baseline; gap: 10px;
+  margin-top: 10px; padding-top: 9px;
+  border-top: 1px solid rgba(159, 183, 188, .14);
+  font-size: 12px; line-height: 1.7; color: #8fa5ad;
+}
+#overlay #hubMain.hub-ach .collection-command .story-strip .ss-tag {
+  flex: none; display: inline-flex; align-items: center; gap: 5px;
+  color: #d9bb82; letter-spacing: 1px;
+  padding-right: 12px;
+  background: linear-gradient(270deg, transparent, rgba(217, 187, 130, .4)) right center / 10px 1px no-repeat;
+}
+#overlay #hubMain.hub-ach .collection-command .story-strip .ss-tag .ic { width: 13px; height: 13px; }
+
+/* W9b 0/26 空态「剪影陈列」：深色铭牌卡阵（悬停见名与条件），
+   网格自适应流式排布，页面高度随内容收敛（不再铺 26 行灰名单） */
+#overlay #hubMain.hub-ach .ach-silhouettes {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(78px, 1fr));
+  gap: 12px; margin-top: 12px;
+}
+#overlay #hubMain.hub-ach .ach-sil {
+  position: relative; aspect-ratio: 3 / 4;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid rgba(159, 183, 188, .18);
+  border-radius: 2px;
+  background:
+    radial-gradient(ellipse 62% 44% at 50% 38%, rgba(159, 183, 188, .07), transparent 72%),
+    linear-gradient(180deg, rgba(14, 33, 45, .8), rgba(8, 20, 30, .85));
+  color: rgba(159, 183, 188, .38);
+  cursor: help;
+}
+/* 铭牌内暗纹：中央剪影位 + 底部姓名条压痕（纯渐变） */
+#overlay #hubMain.hub-ach .ach-sil::before {
+  content: ''; position: absolute; left: 18%; right: 18%; bottom: 12%; height: 3px;
+  border-radius: 1px; background: rgba(159, 183, 188, .16);
+  box-shadow: 0 7px 0 rgba(159, 183, 188, .09);
+}
+#overlay #hubMain.hub-ach .ach-sil .ic { width: 17px; height: 17px; opacity: .5; }
+#overlay #hubMain.hub-ach .ach-sil:nth-child(3n) { transform: rotate(.4deg); }
+#overlay #hubMain.hub-ach .ach-sil:nth-child(4n+1) { transform: rotate(-.35deg); }
+#overlay #hubMain.hub-ach .ach-sil:hover {
+  border-color: rgba(217, 187, 130, .4); color: rgba(217, 187, 130, .7);
+  box-shadow: 0 4px 12px rgba(2, 8, 14, .35);
+}

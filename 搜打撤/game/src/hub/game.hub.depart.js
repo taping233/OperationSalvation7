@@ -66,7 +66,8 @@ import { slots as hubBridge } from './game.hub.bridge.js';   // 别名防局部 
           <span>[[icon:key]] 钥匙 <b class="${gateReady ? 'gate-ok' : ''}">${keys}/${B.KEY_NEEDED || 10}</b> ·
             ${gateReady ? '钥匙已集齐——特殊关卡制作中，敬请期待' : '集齐钥匙开启特殊关卡（关卡制作中）'}</span>
         </div>
-        <span class="gate-state">${gateReady ? '[[icon:sparkles]]' : '[[icon:lock]]'}</span>
+        <span class="gate-state">${gateReady ? '[[icon:sparkles]]' : ''}</span>
+        <span class="gate-scale" aria-hidden="true">${Array.from({ length: B.KEY_NEEDED || 10 }, (_, i) => `<i class="${i < keys ? 'lit' : ''}${gateReady ? ' all' : ''}"></i>`).join('')}</span>
       </section>`;
   }
 
@@ -261,6 +262,14 @@ import { slots as hubBridge } from './game.hub.bridge.js';   // 别名防局部 
         e.dataTransfer.setData('text/plain', card.dataset.name);
         e.dataTransfer.effectAllowed = 'copyMove';
       }));
+      // 09-25 二波美术：拖动卡池卡牌时，空背包格挂金框呼吸提示（.dep-target-hint），
+      // 拖拽结束（无论落入与否）统一切走
+      const setTargetHint = (on) => {
+        bag.querySelectorAll('.bag-cell.empty').forEach(c => c.classList.toggle('dep-target-hint', on));
+      };
+      pool.addEventListener('dragstart', () => setTargetHint(true));
+      [pool, bag].forEach(el => el.addEventListener('dragend', () => setTargetHint(false)));
+      bag.addEventListener('drop', () => setTargetHint(false));
       bag.addEventListener('dragover', (e) => { e.preventDefault(); bag.classList.add('drop-here'); });
       bag.addEventListener('dragleave', () => bag.classList.remove('drop-here'));
       bag.addEventListener('drop', (e) => {
@@ -281,13 +290,23 @@ import { slots as hubBridge } from './game.hub.bridge.js';   // 别名防局部 
       // deployPick 仍保留在内存中，因此不会丢失刚才的带入配置。
       const picks = { ...(deployPick || {}) };
       const mode = B.data.selMode;
-      requestClassChoice({
-        onCancel: () => renderDepartPrep(),
-        beforeConfirm: () => {
-          deployPick = null;
-          newRun(mode, picks, { skipClassChoice: true });
-        },
-      });
+      const startChoice = () => {
+        requestClassChoice({
+          onCancel: () => renderDepartPrep(),
+          beforeConfirm: () => {
+            deployPick = null;
+            newRun(mode, picks, { skipClassChoice: true });
+          },
+        });
+      };
+      // 09-25 二波美术：出发=沿「可撕封条线」撕开整备页转场（transform/opacity only）；
+      // reduced-motion 直接跳过演出
+      const stage = document.getElementById('depMain');
+      const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
+      if (stage && !reduce) {
+        stage.classList.add('dep-tearing');
+        setTimeout(startChoice, 520);
+      } else startChoice();
     });
     UI.act('depBack', () => { deployPick = null; hubBridge.renderHub(); });
     deployJustOpened = false;   // 首帧渲染完成，后续页内操作不再播动画

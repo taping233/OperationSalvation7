@@ -1,11 +1,19 @@
 /* 战斗反馈分级：由 battle.feedback.js 给飘字挂上 fx-* 类。 */
-.sts-float.fx-impact { filter: drop-shadow(0 0 5px rgba(255,179,77,.18)); }
+.sts-float.fx-impact { filter: drop-shadow(0 0 10px rgba(255,179,77,.28)); }
 .sts-float.fx-finisher {
   text-shadow: 0 0 10px rgba(255,174,71,.52), 0 2px 5px rgba(0,0,0,.9);
   animation-duration: 1.08s;
 }
 .sts-float.fx-finisher.critical { letter-spacing: 2px; }
 .sts-float.fx-routine { animation-duration: .78s; }
+
+/* 09-25 二波美术：飘字起始字号 +25%——上浮入场首帧 scale .6→.75（落点更大更有冲击），
+   覆盖 battle.css 同名关键帧（本文件经 motion.js 运行时注入，天然后置）；仍只动 transform/opacity */
+@keyframes stsFloatUp {
+  0% { opacity:0; transform:translate(-50%,-30%) scale(.75); }
+  18% { opacity:1; transform:translate(-50%,-55%) scale(1.12); }
+  100% { opacity:0; transform:translate(-50%,-160%) scale(1); }
+}
 
 @media (prefers-reduced-motion: reduce) {
   /* 09-25：animation:none 会丢掉 forwards 终态（数字静显 1.4s 不退场）——

@@ -1,1 +1,90 @@
 .preparation-module{--prep-line:rgba(159,183,188,.26);--prep-accent:#d9bb82;color:#eee4d0;display:grid;gap:14px}.preparation-module>header{display:flex;align-items:end;justify-content:space-between}.preparation-module h2{margin:2px 0}.preparation-module small{color:#bfa36f;letter-spacing:.12em}.prep-count{padding:7px 10px;border:1px solid var(--prep-line);border-radius:999px}.prep-goals{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.prep-goals article,.prep-preset{background:#142027;border:1px solid var(--prep-line);border-radius:2px;padding:14px}.prep-goals article{display:flex;justify-content:space-between;gap:10px}.prep-goals p{color:#aca18e;margin:5px 0}.prep-goal-add,.prep-add,.prep-actions,.prep-fields,.prep-preset-head{display:flex;gap:9px;align-items:end}.prep-goal-add select,.prep-add select{flex:1}.preparation-module select,.preparation-module input,.preparation-module button{min-height:42px;border:1px solid rgba(159,183,188,.26);border-radius:2px;background:#1c292f;color:inherit;padding:8px 10px}.preparation-module button:focus-visible,.preparation-module select:focus-visible,.preparation-module input:focus-visible{outline:1px solid #d9bb82cc;outline-offset:2px}.preparation-module button[disabled]{opacity:.4}.prep-presets{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.prep-preset{display:grid;gap:11px}.prep-preset-head{justify-content:space-between}.prep-preset-head label,.prep-fields label{display:grid;gap:4px;flex:1}.prep-picks{display:grid;gap:7px}.prep-pick{display:grid;grid-template-columns:1fr auto auto;gap:9px;align-items:center;padding:9px;border-left:3px solid #7ea895;background:#0f181d}.prep-pick.missing,.prep-pick.forbidden{border-left-color:#c96a5e}.prep-pick small{color:#b9ab92}.prep-summary{display:flex;justify-content:space-between;padding:9px 11px;border-left:3px solid #7ea895;background:#172921}.prep-summary.blocked{border-color:#c96a5e;background:#2a1c1c}.prep-error{padding:10px;border-left:4px solid #c96a5e;background:#2a1c1c}.prep-empty{color:#a99d89}.prep-add input{width:76px}.prep-actions{justify-content:flex-end}@media(max-width:900px){.prep-goals,.prep-presets{grid-template-columns:1fr}}@media(max-width:560px){.prep-goal-add,.prep-add,.prep-actions,.prep-fields,.prep-preset-head{align-items:stretch;flex-direction:column}.prep-pick{grid-template-columns:1fr auto}.prep-pick small{grid-column:1}.preparation-module button,.preparation-module select,.preparation-module input{min-height:44px}}
+
+/* ═══════════════════════════════════════════════════════════════════
+   备战页美术大修（2026-09-25 二波 B 组·P0）——套用 page-slot-select W1
+   背景配方 + page-deploy .hub-card 面板语言：
+   ① W1 冷青底色（radial 家族，与选档页同一族）+ prep-desk 桌面底图压暗铺底
+      （图未落盘时渐变层独立成立，视觉不断）
+   ② 四角暗角视线收束
+   ③ 预设卡 = hub-card 语言：冷青渐变面板 + 顶缘封条发丝线 + 眉题金化 + 金 hover
+   ④ 摘要条金/青双色语义（ready=金=可行动；blocked=青=待处理，硬错误仍走红）
+   ⑤ prep-goals 空态占位框
+   动画仅 transform/opacity/border-color 过渡，零逐帧重绘。
+   ═══════════════════════════════════════════════════════════════════ */
+
+.preparation-shell {
+  position: relative; isolation: isolate;
+  min-height: 100%;
+  padding: 20px clamp(16px, 3vw, 42px) 36px;
+}
+
+/* W1 底：桌面底图（压暗但可辨）+ 冷青 radial 渐变族 + W1c 四角暗角，同挂 ::before/::after */
+.preparation-shell::before {
+  content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(ellipse 120% 90% at 50% 24%, rgba(42, 71, 86, .6) 0%, rgba(31, 55, 69, .74) 36%, rgba(18, 40, 54, .86) 64%, rgba(9, 22, 33, .94) 100%),
+    linear-gradient(180deg, rgba(7, 18, 27, .68), rgba(5, 14, 23, .84)),
+    url('../assets/scenes/ui-loop-0925/prep-desk.webp') center / cover no-repeat;
+}
+.preparation-shell::after {
+  content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(120% 90% at 50% 38%, transparent 52%, rgba(4, 11, 16, .44) 88%, rgba(3, 9, 13, .6) 100%),
+    linear-gradient(90deg, rgba(6, 16, 22, .4) 0%, transparent 20%, transparent 80%, rgba(6, 16, 22, .4) 100%);
+}
+
+/* ── 预设卡：page-deploy .hub-card 面板语言移植 ── */
+.prep-preset {
+  position: relative; overflow: hidden;
+  background: linear-gradient(180deg, rgba(14, 36, 50, .93), rgba(10, 27, 39, .95));
+  border-color: rgba(182, 211, 214, .2);
+  box-shadow: 0 14px 34px rgba(2, 8, 14, .35), inset 0 1px 0 rgba(214, 232, 235, .05);
+  transition: border-color .18s cubic-bezier(.33,1,.68,1), transform .18s cubic-bezier(.33,1,.68,1), box-shadow .18s cubic-bezier(.33,1,.68,1);
+}
+.prep-preset::before {
+  content: ''; position: absolute; top: 0; left: 12%; right: 12%; height: 1px; z-index: 2; pointer-events: none;
+  background: linear-gradient(90deg, transparent, #d9bb82b8, transparent);
+  opacity: .35; transition: opacity .18s cubic-bezier(.33,1,.68,1);
+}
+.prep-preset:hover {
+  border-color: rgba(217, 187, 130, .5); transform: translateY(-2px);
+  box-shadow: 0 16px 38px rgba(2, 8, 14, .42), 0 0 14px rgba(217, 187, 130, .09),
+    inset 0 1px 0 rgba(255, 238, 200, .06);
+}
+.prep-preset:hover::before { opacity: .8; }
+/* 眉题（preset-1/preset-2 编号）：金色字距批注 */
+.prep-preset-head span {
+  color: #d9bb82; font-size: 10.5px; font-weight: 700; letter-spacing: .26em;
+  padding-left: 9px; border-left: 1px solid rgba(217, 187, 130, .45);
+  text-transform: uppercase; align-self: center;
+}
+
+/* ── 摘要条：金/青双色语义 ── */
+.prep-summary { border-left-width: 3px; border-radius: 2px; font-variant-numeric: tabular-nums; }
+.prep-summary.ready {
+  border-left-color: #d9bb82;
+  background: linear-gradient(90deg, rgba(84, 62, 22, .45), rgba(30, 24, 12, .55) 72%);
+  color: #f2e3c3;
+}
+.prep-summary.ready b { color: #ffe9b6; }
+.prep-summary.blocked {
+  border-left-color: #7ea895;
+  background: rgba(15, 30, 36, .8);
+  color: #b9ccd0;
+}
+.prep-summary.blocked b { color: #c9d8dc; }
+
+/* ── prep-goals 空态占位框 ── */
+.prep-goals .prep-empty {
+  grid-column: 1 / -1; margin: 0; padding: 18px 14px; text-align: center;
+  border: 1px dashed rgba(159, 183, 188, .32); border-radius: 2px;
+  background:
+    repeating-linear-gradient(0deg, rgba(159, 183, 188, .04) 0 1px, transparent 1px 26px),
+    repeating-linear-gradient(90deg, rgba(159, 183, 188, .04) 0 1px, transparent 1px 26px),
+    rgba(159, 183, 188, .02);
+  color: #7e9298; letter-spacing: .06em;
+}
+@media (prefers-reduced-motion: reduce) {
+  .prep-preset, .prep-preset::before { transition: none; }
+  .prep-preset:hover { transform: none; }
+}

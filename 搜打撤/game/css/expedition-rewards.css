@@ -13,6 +13,12 @@
 #overlay .node-pg .gold { color:#dfc28d; }
 #overlay .node-foot { padding:0 28px 24px; border-top:1px solid rgba(182,211,214,.12); }
 #overlay .node-foot .ov-btn.ok { background:#dfc28d; color:#0b202c; border-color:#dfc28d; min-width:150px; }
+/* 09-25 二波 C 组：结算页「回基地」降为 secondary——winter 的 teal 实心（#24424f）与
+   主行动「再出发」金实心抢层级；改深蓝描边、hover 金线，成功（sc-exit）与失败（doom）结算同语义 */
+#overlay .node-pg.sc-exit .node-foot .ov-btn:not(.ok),
+#overlay .doom-btns .ov-btn:not(.ok) { background:linear-gradient(135deg,rgba(36,58,74,.92),rgba(14,30,42,.94)); border:1px solid rgba(159,183,188,.32); color:#d5e2e6; box-shadow:none; }
+#overlay .node-pg.sc-exit .node-foot .ov-btn:not(.ok):hover,
+#overlay .doom-btns .ov-btn:not(.ok):hover { filter:none; border-color:#d9bb82; color:#ffe9b6; box-shadow:0 0 10px rgba(217,187,130,.16); }
 #overlay .result-pg { overflow:auto; }
 #overlay .result-pg .hub-head { background:rgba(8,23,34,.98); border-color:rgba(223,194,141,.24); }
 #overlay .result-pg .hub-head h2 { color:#e6eef1; letter-spacing:.1em; }

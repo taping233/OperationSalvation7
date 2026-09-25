@@ -537,3 +537,11 @@
      （scenes.css !important 金边）与 .dragging（opacity .32）未被覆盖。
    · 矮视口：expedition-rewards.css 的 max-height:760px 压缩块带 !important，
      本文件壳层 padding 无 !important，压缩逻辑照常生效。 ═════════ */
+
+/* ═══ W8 帮助弹层「返回」居中（2026-09-25 A 组·审查计划项4）═══
+   .ov-btns 基底是 1fr 1fr 双列网格，单个「↩ 返回」占左半列视觉偏左；
+   帮助弹层的按钮组恒为单返回钮：收成定宽居中（帮助正文 .help-body 之后的兄弟组） */
+#overlay .card .help-body ~ .ov-btns {
+  grid-template-columns: minmax(0, 240px);
+  justify-content: center;
+}

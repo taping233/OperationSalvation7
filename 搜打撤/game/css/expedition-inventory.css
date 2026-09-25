@@ -124,6 +124,19 @@
 /* 未孵化摘要行的按钮不被 .mini-btn 的 flex:1 拉满整行 */
 #overlay .hub-page .pet-row.locked .mini-btn { flex:0 0 auto; }
 
+/* 09-25 二波 C 组：空物格淡虚线"卡背"轮廓——口袋/仓库空态在斜纹占位上叠一张
+   微倾虚线卡背剪影（双线内衬示卡背花纹），格语感对齐卡牌库；纯装饰 pointer-events:none */
+#overlay #hubMain .stash-placeholder,
+#overlay #hubMain .stash-empty { position:relative; overflow:hidden; }
+#overlay #hubMain .stash-placeholder::after,
+#overlay #hubMain .stash-empty::after {
+  content:''; position:absolute; right:22px; top:50%; width:46px; height:64px;
+  transform:translateY(-50%) rotate(6deg);
+  border:1px dashed rgba(194,212,211,.22); border-radius:3px;
+  box-shadow:inset 0 0 0 3px rgba(194,212,211,.04), inset 0 0 0 4px rgba(194,212,211,.11);
+  pointer-events:none;
+}
+
 /* —— 商店货架化（09-20 高级感改造批3）：卡牌商品挂小卡面，物资挂大图标 —— */
 #overlay .hub-page .shop-shelf { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
 #overlay .hub-shop .hub-page,

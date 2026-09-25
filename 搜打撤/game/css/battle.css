@@ -506,21 +506,26 @@
 }
 .sts-cardfly .hs-card { font-size:16px; }   /* 与手牌内卡面同尺寸（脱离 .sts-hand 上下文后需补回） */
 .sts-cardfly .bt-card { width:100%; height:100%; }
-/* 回合过渡横幅（批次F，STS2 Enemy Turn 式）：细带横穿战场中带，文字滑入-停留-滑出 */
+/* 回合过渡横幅（批次F，STS2 Enemy Turn 式）：细带横穿战场中带，文字滑入-停留-滑出
+   09-25 二波美术：26→32px、金光 text-shadow、入场末梢带 4px 回弹顿帧（更"落锤"） */
 .bt-turnbanner { position:absolute; left:0; right:0; top:31%; display:flex; justify-content:center;
   pointer-events:none; z-index:65; }
-.bt-turnbanner b { font-weight:700; font-size:26px; letter-spacing:.4em; text-indent:.4em;
+.bt-turnbanner b { font-weight:700; font-size:32px; letter-spacing:.4em; text-indent:.4em;
   color:#f0e6c8; padding:12px 58px; white-space:nowrap;
+  text-shadow:0 0 20px rgba(217,187,130,.42), 0 2px 8px rgba(0,0,0,.85);
   background:linear-gradient(90deg,transparent,rgba(8,10,14,.78) 22% 78%,transparent);
   border-top:1px solid rgba(240,230,200,.35); border-bottom:1px solid rgba(240,230,200,.35);
   animation:btTurnKf 1.25s cubic-bezier(.3,.7,.4,1) forwards; }
-.bt-turnbanner.foe b { color:#e0907c; border-color:rgba(224,144,124,.4); }
+.bt-turnbanner.foe b { color:#e0907c; border-color:rgba(224,144,124,.4);
+  text-shadow:0 0 20px rgba(224,144,124,.38), 0 2px 8px rgba(0,0,0,.85); }
 @keyframes btTurnKf {
   0% { opacity:0; transform:translateX(90px); }
-  20% { opacity:1; transform:none; }
-  75% { opacity:1; transform:none; }
+  15% { opacity:1; transform:translateX(-4px); }
+  21% { opacity:1; transform:none; }
+  76% { opacity:1; transform:none; }
   100% { opacity:0; transform:translateX(-90px); }
 }
+@media(prefers-reduced-motion:reduce){ .bt-turnbanner b { animation:none; } }
 /* 命中特效贴图（NAI 生成，黑底 + screen 混合当发光层）：伤害=斩击，格挡/免伤=护盾碎裂 */
 .sts-impact { position:absolute; z-index:78; width:150px; height:150px; margin:-75px 0 0 -75px;
   pointer-events:none; mix-blend-mode:screen; background:center/contain no-repeat;
@@ -617,3 +622,34 @@
 .bt-settings .chk:hover { background: rgba(20,46,60,.8); }
 .bt-settings .chk input { width: 15px; height: 15px; accent-color: #9bbdb7; flex: none; }
 .bt-settings .ov-note { font-size: 12px; color: #8fa5ad; margin: 0; line-height: 1.6; }
+
+/* ===== 2026-09-25 二波 B 组：BOSS 战专属皮肤（data-boss="1" 作用域，battle.view.js 已挂） =====
+   语义：首脑战=深红金仪式感；普通战维持冷青档案语言零改动。只加静态描边/渐变/一环，零动画。
+   场地底图规则在 page-battle-ui.css（须压过 expedition-battle.css 行10 的 boss 底图接管）。 */
+/* 敌方名牌：深红→暗红金渐变 + 金发丝描边。winter 1411/1415 行「名牌透明化」是普通战定版
+   （!important、特异性 1id+5 类，:not(.dead) 计入），BOSS 战按二波任务破例恢复底色——
+   同为 !important 下特异性 1id+6 类更高胜出 */
+#overlay .battle-stage.sts[data-boss="1"] .sts-arena .sts-foe .sts-nameplate {
+  background:linear-gradient(180deg, rgba(64,14,11,.88), rgba(26,6,5,.94)) !important;
+  border:1px solid rgba(217,187,130,.55) !important;
+  box-shadow:inset 0 1px 0 rgba(240,220,174,.14), 0 2px 10px rgba(0,0,0,.5) !important;
+  padding:5px 8px 6px !important;
+}
+#overlay .battle-stage.sts[data-boss="1"] .sts-arena .sts-foe .sts-nameplate b { color:#f2e3c3; text-shadow:0 1px 3px rgba(0,0,0,.9); }
+/* 血条：金端头（左右 2px 内贴金柱）+ 双层描边（内暗外金）。冬定版 12px 高细条上叠加 */
+#overlay .battle-stage.sts[data-boss="1"] .sts-nameplate .bt-hpwrap {
+  box-shadow:0 0 0 1px rgba(8,6,4,.9), 0 0 0 2px rgba(217,187,130,.5) !important;
+}
+#overlay .battle-stage.sts[data-boss="1"] .sts-nameplate .bt-hpwrap::before,
+#overlay .battle-stage.sts[data-boss="1"] .sts-nameplate .bt-hpwrap::after {
+  content:''; position:absolute; top:0; bottom:0; width:2px; z-index:2; pointer-events:none;
+  background:linear-gradient(180deg,#f0dcae,#c9a25a);
+  box-shadow:0 0 5px rgba(217,187,130,.55);
+}
+#overlay .battle-stage.sts[data-boss="1"] .sts-nameplate .bt-hpwrap::before { left:0; }
+#overlay .battle-stage.sts[data-boss="1"] .sts-nameplate .bt-hpwrap::after { right:0; }
+/* 单位脚下金环：把既有椭圆软影叠一层金边（同一 ::after，零新增节点零动画） */
+.battle-stage.sts[data-boss="1"] .sts-figure::after {
+  border:1px solid rgba(217,187,130,.42);
+  box-shadow:0 0 10px rgba(217,187,130,.22), inset 0 0 8px rgba(217,187,130,.16);
+}

@@ -269,3 +269,36 @@
 /* ═════════ T6 光标自查：战斗可点元素全部在 cursor-art.css 白名单内
    （button:not(:disabled) / .bt-pile.clickable / .bt-card / .bt-potion.need-target
    的瞄准十字 / :disabled 不可用光标），本文件无新增可点元素，不加光标规则。 ═════════ */
+
+/* ═══════════════════════════════════════════════════════════════════
+   2026-09-25 二波 B 组（对抗/备战域美术大修·第二波）
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── B1 牌堆三徽章：拉开间距 + 数值后小字归属标签（牌库/弃牌/消耗，
+   标签由 battle.piles.view.js 渲染 .bt-pile-cap）── */
+#overlay .battle-stage.sts .sts-hud-l,
+#overlay .battle-stage.sts .sts-hud-r { gap: 14px; }
+#overlay .battle-stage.sts .bt-pile { margin-left: 0; }
+#overlay .battle-stage.sts .bt-pile b { margin-right: 3px; }
+#overlay .battle-stage.sts .bt-pile .bt-pile-cap {
+  font-style: normal; font-size: 10.5px; letter-spacing: .12em;
+  color: #7e9298; text-shadow: 0 1px 2px rgba(0,0,0,.6);
+}
+#overlay .battle-stage.sts .bt-pile.clickable:hover .bt-pile-cap { color: #a9bcc1; }
+
+/* ── B2 「我方 / 敌方意图」侧标签：10px→12px、提亮 #a9bcc1、加黑影
+   （原规则在 expedition-battle.css，本文件在 <head> 中后置，同特异性直接接管）── */
+#overlay .battle-stage.sts .sts-arena::before,
+#overlay .battle-stage.sts .sts-arena::after {
+  font-size: 12px; letter-spacing: 3px; color: #a9bcc1;
+  text-shadow: 0 1px 3px rgba(0,0,0,.95), 0 0 10px rgba(0,0,0,.55);
+}
+
+/* ── B3 BOSS 战场地底图：切 boss-arena（expedition-battle.css 行10 用同特异性接管了
+   boss 底图，本文件在 <head> 末位、同特异性后置取胜；首层图未落盘时自动退回下层 URL）── */
+#overlay .battle-stage.sts[data-boss="1"] {
+  background-image:
+    linear-gradient(180deg, rgba(30,14,8,.1), rgba(12,6,4,.2)),
+    url('../assets/scenes/ui-loop-0925/boss-arena.webp'),
+    url('../assets/scenes/battle-street-amber-anime-v1.webp');
+}

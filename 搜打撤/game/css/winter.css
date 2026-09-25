@@ -1,6 +1,6 @@
 /* Winter Conjecture — one art direction over the structural feature styles. */
 :root{--font-ui:'HarmonyOS Sans SC','HarmonyOS Sans','Noto Sans SC Sub','Microsoft YaHei',sans-serif;--ink:#101e27;--bg:#101e27;--desk1:#1c303c;--desk2:#132630;--panel:#192e39;--panel2:#233d49;--inset:#112530;--line:#3b5663;--line2:#6b828a;--txt:#e8eeea;--sub:#b2c4c9;--dim:#849da7;--amber:#ddb876;--amber-soft:#ecd2a3;--gold:#ddb876;--ok:#9bc5c0;--arcane:#b1a1c4;--cal:var(--font-ui);--sb-thumb:#5a7580;--sb-radius:4px}
-button,input,select,textarea{font-family:inherit}button{border-radius:1px;transition:background .16s,border-color .16s,transform .16s;cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:1px solid #d9bb82cc;outline-offset:2px}button:disabled{cursor:default;opacity:.4}button:active:not(:disabled){transform:translateY(1px)}::selection{background:#cfb78266}::-webkit-scrollbar-thumb{background:var(--sb-thumb);border-color:#192e39;border-radius:var(--sb-radius)}
+button,input,select,textarea{font-family:inherit}button{border-radius:1px;transition:background .16s,border-color .16s,transform .16s;cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:1px solid #d9bb82cc;outline-offset:2px}button:disabled{cursor:default;opacity:.45;filter:saturate(.55)}button:active:not(:disabled){transform:translateY(1px)}::selection{background:#cfb78266}::-webkit-scrollbar-thumb{background:var(--sb-thumb);border-color:#192e39;border-radius:var(--sb-radius)}
 #title{position:absolute;inset:0;background:#112330;isolation:isolate;display:block;overflow:hidden}#title[hidden]{display:none}#title .title-bg{position:absolute;inset:0;background:url('../assets/reconstruction/wallpaper-original.webp') center/cover;z-index:0}#title::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#0c1d264d,transparent 45%,#0b182bba),linear-gradient(0deg,#0e1c24bf,transparent 55%);z-index:1;pointer-events:none}.title-inner{position:absolute;inset:0;z-index:2;width:auto;padding:0;text-align:left}.title-heading{position:absolute;top:7%;left:0;width:clamp(430px,43vw,760px);transform:translateX(-8.1%)}.title-wordmark{display:block;width:100%;height:auto;user-select:none;filter:drop-shadow(0 3px 12px #07131bb3)}.title-kicker{font:9px/1.8 'Cascadia Code',monospace;letter-spacing:3px;color:#e8eeea;margin:0 0 12px}.cn-title{font-family:'Songti SC','SimSun',serif;font-size:clamp(40px,5.2vw,85px);font-weight:400;letter-spacing:8px;line-height:1.18;color:#f0f3e9;margin:0;text-shadow:0 3px 20px #182b34}.en-subtitle{font:11px var(--font-ui);letter-spacing:6px;margin-top:18px;color:#b9cbd0}
 /* —— AK 风格主页（明日方舟式排版：深灰黑铬件 + 荧光青绿点缀；壁纸与标题字保持原样） —— */
 .ak-hud{--akb:#222527ee;--akb2:#191c1eee;--akline:#aab2ab59;--akmint:#a9efc3;--akt:#eef1ec;--aksub:#aeb8b0;--akscript:'Segoe Script','Comic Sans MS',cursive;position:absolute;inset:0;z-index:3}.ak-hud button{font-family:inherit}
@@ -1742,3 +1742,21 @@ body.cardlib-open #cardZoom.cz-photo .cz-photo-main .cz-photo-image{
 }
 /* #5 配套：底部操作提示提到框覆盖层之上（框 z3 / 铭牌 z5） */
 body.cardlib-open #cardZoom.cz-photo .cz-hint{position:relative;z-index:4!important}
+
+/* ═══ 首页 .ak-hud 三入口 painterly 图标替换（2026-09-25 UI 统一批·A 组）═══
+   中心新绘 home-icon-{camera|shield|gear}.webp（assets/ui/home-icons-v13/，
+   1024 方图 → 256 webp q90）。旧 v12 镂空件与径向衬底由 expedition.css 接线；
+   本块以更高优先级（多一级 .ak-hud 祖先）整体接管三枚盘面：
+   徽章自带暗底，直接铺满 ::before 并用 border-radius 圆形裁切（老板指定）。 */
+#title .ak-hud .ak-circle .c-ring::before {
+  inset: -6px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--home-icon) center / cover no-repeat;
+  animation: none;
+}
+#title .ak-hud .ak-lib .c-ring { --home-icon: url('../assets/ui/home-icons-v13/home-icon-camera.webp'); }
+#title .ak-hud .ak-ach .c-ring { --home-icon: url('../assets/ui/home-icons-v13/home-icon-shield.webp'); }
+#title .ak-hud .ak-set .c-ring { --home-icon: url('../assets/ui/home-icons-v13/home-icon-gear.webp'); }
+/* 悬停时徽章轻微点亮（旧 hover 只有 drop-shadow 滤镜，对新暗底徽章偏弱） */
+#title .ak-hud .ak-circle:hover .c-ring::before { filter: brightness(1.18) saturate(1.05) drop-shadow(0 0 10px #d9bb8266); }

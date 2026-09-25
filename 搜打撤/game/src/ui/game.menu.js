@@ -172,7 +172,7 @@ function createGameMenuController(deps) {
     const base = latest?.base || null, run = latest?.run || null;
     const latestTotal = Math.max(base?.stats?.playSeconds || 0, run?.elapsed || 0);
     set('akSlotNo', latest ? `0${latest.slot}` : '--');
-    set('akPlaytime', latest ? (latestTotal > 0 ? `游玩 ${fmtPlayTime(latestTotal)}` : '暂无游玩记录') : '暂无档案');
+    set('akPlaytime', latest ? (latestTotal > 0 ? `游玩 ${fmtPlayTime(latestTotal)}` : '新档案 · 尚无对局') : '尚无档案，等待远征');
     const tag = document.getElementById('akLastTag');
     if (tag) {
       if (run?.savedAt) {
@@ -304,7 +304,14 @@ function createGameMenuController(deps) {
     if (pend.length) html += `<h3 class="set-h">待处理 <span class="set-en">PENDING · ${pend.length}</span></h3>` + pend.map((x) => sugRowHTML(x.entry, false, x.index)).join('');
     html += `<h3 class="set-h">已完成 <span class="set-en">DONE · ${done.length}</span></h3>`;
     html += done.length ? done.map((x) => sugRowHTML(x.entry, true, x.index)).join('') : '<p class="ov-empty">还没有已完成的留言。</p>';
-    if (!entries.length) html = '<p class="ov-empty">还没有本地留言。在游戏任意界面右键可记录，保存后需主动导出交给制作者。</p>';
+    if (!entries.length) html = `<div class="sugin-empty">
+        <img class="se-art" src="assets/ui/sugin-mail-empty.webp" alt="雪地邮筒" draggable="false">
+        <div class="se-text">
+          <b>邮筒还是空的</b>
+          <span>在游戏任意界面<b>点击右键</b>，就能给制作者写一张留言。</span>
+          <span>保存后在这里导出 JSON 交给制作者；处理完的留言会盖「已完成」章归档。</span>
+        </div>
+      </div>`;
     box.innerHTML = SDT.Icons.rich(html);
   }
 

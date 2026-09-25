@@ -255,3 +255,11 @@
      不遮挡点击；行卡本体不可点保持默认光标以如实反映热区。
    · 三档节奏：fast（hover 色彩/光晕）→ lift（回弹过冲 .3,1.4,.45,1）→
      press（.09s 快进）；:active 覆盖 transition 为 press 快进。 ═════════ */
+
+/* ═══ W9 升级页「头重脚轻」压缩（2026-09-25 A 组·审查计划项7）═══
+   expedition-inventory.css 给布局第二行 minmax(230px,1fr) + 容器 min-height:100vh-170，
+   宠物卡被 1fr 拉伸出大段空腔 → 行高改 auto、整体顶对齐，空腔让位给页面背景 */
+#overlay #hubMain.hub-upgrade .hub-upgrade-layout {
+  grid-template-rows: minmax(160px, auto) auto;
+  align-content: start;
+}

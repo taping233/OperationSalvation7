@@ -288,3 +288,29 @@
 /* ── T6 光标反馈自查：CTA（button 默认 cursor）补 pointer ── */
 #overlay .slot-page .slot-card-cta { cursor: pointer; }
 
+
+/* ═══════════════════════════════════════════════════════════════════
+   2026-09-25 二波 B 组（存档选择页）：空档位专属质感
+   ① .slot-card-bg 补档案斜纹淡纹理（叠在 22% 透明度底图之上）
+   ② 空态图标下「NEW GAME」竖排装饰 + 端头金线（静态，无动画）
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* 空档底图斜纹：45° 细发丝档案纹，随空档底图一起被压暗，不抢主体 */
+.slot-page .slot-card:not(.filled) .slot-card-bg::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background:
+    repeating-linear-gradient(45deg, rgba(159, 183, 188, .07) 0 1px, transparent 1px 13px),
+    repeating-linear-gradient(-45deg, rgba(159, 183, 188, .035) 0 1px, transparent 1px 26px);
+}
+
+/* 空态图标下方：竖排 NEW GAME + 金色端线（装饰性档案批注语言） */
+.slot-page .slot-state-empty .slot-card-art::after {
+  content: 'NEW GAME';
+  position: absolute; left: 50%; bottom: 4%;
+  transform: translateX(-50%);
+  writing-mode: vertical-rl; text-orientation: upright;
+  font-family: Consolas, monospace; font-size: 9.5px; letter-spacing: .42em;
+  color: rgba(217, 187, 130, .5); text-shadow: 0 1px 3px rgba(0, 0, 0, .7);
+  padding-top: 12px;
+  background: linear-gradient(180deg, #d9bb82b3, transparent) center top / 1px 10px no-repeat;
+}

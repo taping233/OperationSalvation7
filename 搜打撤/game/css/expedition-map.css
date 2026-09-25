@@ -1,5 +1,8 @@
 /* 战术远征图：底图保留冬境氛围，路线与几何结点负责可读性。 */
 #game { background:#07131d; }
+/* 09-25 二波 C 组：接中心批二底图 expedition-map-bg.webp——叠深青压暗层保证
+   层列表/结点/行动记录可读（图自带雪原纵向构图，bottom 对齐脚印线） */
+#game { background:linear-gradient(180deg,rgba(5,14,21,.5),rgba(5,13,20,.62) 60%,rgba(4,10,16,.78)),url('../assets/scenes/ui-loop-0925/expedition-map-bg.webp') center bottom / cover no-repeat,#07131d; }
 #expeditionChapter { position: absolute; left: 28px; top: 107px; z-index: 3; width: 180px; pointer-events: none; color: #aebfc7; background: rgba(7, 18, 26, .55); padding: 8px 10px; border-radius: 2px; border: 1px solid rgba(159, 183, 188, .14); } /* 09-25 P3：层列表加半透明细底板，不再裸浮在地图上 */
 .chapter-kicker { font: 9px 'Cascadia Code',monospace; letter-spacing: 2px; color: #82b8d0; margin-bottom: 16px; }
 #expeditionChapter ol { list-style: none; margin: 0; padding: 0; border-left: 1px solid #a4bec444; }
@@ -19,7 +22,9 @@
    winter 的 !important 仍为最终裁决） */
 #topBtns #btnLocate { position: fixed; bottom: calc(142px + 12px + 82px); right: 22px; width: 36px; height: 36px; background: #0d202cdb; border: 1px solid #8ba1a866; }
 #topBtns #btnHome.exit-btn { background: #203543; box-shadow: none; color: #c6d4d9; border: 1px solid #7b959944; }
-#logPanel { background: #0a1822e8; border: 1px solid #8ba1a82e; max-width: min(340px,30vw); border-radius:2px; }
+/* 09-25 二波 C 组：行动记录面板对齐 #expeditionChapter 语言——半透明底板+细边框，
+   不再近乎实色糊在地图上；文字可读性由 backdrop 不透明度与行距保证 */
+#logPanel { background: rgba(7, 18, 26, .55); border: 1px solid rgba(159, 183, 188, .14); max-width: min(340px,30vw); border-radius:2px; }
 body.lobby #expeditionChapter, body.lobby #btnMapOverview, body.page-opaque #expeditionChapter, body.page-opaque #btnMapOverview { display: none; }
 @media(max-width: 850px) {
   #expeditionChapter { left: 16px; top: 116px; width: 150px; }

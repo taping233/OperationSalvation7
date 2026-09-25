@@ -209,7 +209,7 @@
    option 深底浅字、选中项暖金，与行控件同一语言。 */
 .pg.settings-page select {
   appearance: none;
-  margin-left: 8px; padding: 5px 26px 5px 12px; border-radius: 2px;
+  margin-left: 8px; padding: 8px 30px 8px 12px; border-radius: 2px;
   border: 1px solid rgba(96, 124, 134, .55);
   background: rgba(10, 26, 36, .9)
     url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='8' height='6' viewBox='0 0 8 6'><path d='M1 1l3 3 3-3' fill='none' stroke='%23d9bb82' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/></svg>")
@@ -418,3 +418,33 @@
 .pg.settings-page .settings::-webkit-scrollbar-track { background: rgba(7, 23, 32, .35); }
 .pg.settings-page .settings::-webkit-scrollbar-thumb { background: var(--sb-thumb); border-radius: var(--sb-radius); }
 .pg.settings-page .settings::-webkit-scrollbar-thumb:hover { background: rgba(159, 183, 188, .52); }
+
+/* ═════════ S11 留言库空态「雪地邮筒」（2026-09-25 A 组·审查计划项5）═════════
+   中心 NAI 生图 sugin-mail-empty.webp（832×1216 冬日邮筒 → 360px webp q90），
+   左图右文的档案空态框：虚线框 + 斜纹底延续仓库占位语言 */
+.pg.settings-page .sugin-empty {
+  display: flex; align-items: center; gap: 22px;
+  margin: 6px 0 10px; padding: 20px 22px;
+  border: 1px dashed rgba(217, 187, 130, .38);
+  border-radius: 2px;
+  background:
+    repeating-linear-gradient(45deg, rgba(217, 187, 130, .035) 0 10px, transparent 10px 22px),
+    radial-gradient(ellipse 80% 90% at 24% 50%, rgba(217, 187, 130, .06), transparent 70%),
+    rgba(5, 13, 20, .45);
+}
+.pg.settings-page .sugin-empty .se-art {
+  flex: none; width: 128px; height: auto; align-self: stretch; object-fit: cover;
+  border: 1px solid rgba(217, 187, 130, .3); border-radius: 2px;
+  box-shadow: 0 6px 16px rgba(2, 8, 14, .45);
+  filter: saturate(.96);
+}
+.pg.settings-page .sugin-empty .se-text {
+  display: flex; flex-direction: column; gap: 7px; min-width: 0;
+  text-align: left;
+}
+.pg.settings-page .sugin-empty .se-text b {
+  font-size: 15.5px; letter-spacing: 3px; color: #efe6d2;
+  text-shadow: 0 0 12px rgba(217, 187, 130, .16);
+}
+.pg.settings-page .sugin-empty .se-text span { font-size: 12.5px; line-height: 1.8; color: #93a9ad; }
+.pg.settings-page .sugin-empty .se-text span b { color: #d9bb82; font-size: 12.5px; letter-spacing: 1px; }

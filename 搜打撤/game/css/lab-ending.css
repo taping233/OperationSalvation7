@@ -26,3 +26,66 @@
 
 #labEnding .lab-end-skip { position: absolute; right: 24px; bottom: 20px; z-index: 5; padding: 8px 18px; border: 1px solid rgba(232,228,216,.4); background: rgba(0,0,0,.45); color: #e8e4d8; font-size: 14px; letter-spacing: .08em; cursor: pointer; border-radius: 4px; transition: border-color .2s, color .2s; }
 #labEnding .lab-end-skip:hover { border-color: #f5c542; color: #f5c542; }
+
+/* ============================================================
+ * 2026-09-25 二波 B 组（实验室结局）：字幕衬底 + 金点进度 + 跳过键制式
+ * ============================================================ */
+
+/* 字幕衬底渐变：横向两端渐隐 + 纵向下沉加深，字区可读性不再全靠页面 shade */
+#labEnding .lab-end-text {
+  padding: 14px 22px 15px; border-radius: 3px;
+  background:
+    linear-gradient(90deg, rgba(4, 8, 12, 0) 0%, rgba(4, 8, 12, .5) 9% 91%, rgba(4, 8, 12, 0) 100%),
+    linear-gradient(180deg, rgba(4, 8, 12, 0), rgba(4, 8, 12, .58) 34%, rgba(4, 8, 12, .74));
+}
+#labEnding .lab-end-text .lab-end-cue { bottom: -1.9em; }
+
+/* 三页金点进度：跟随 .lab-end-page.on 切换（纯 CSS，data-page 索引点亮对应点） */
+#labEnding .lab-end-page::after {
+  content: ''; position: absolute; left: 50%; bottom: 4.6%; transform: translateX(-50%);
+  width: 58px; height: 7px; opacity: 0; transition: opacity .5s ease .25s; pointer-events: none;
+}
+#labEnding .lab-end-page.on::after { opacity: 1; }
+#labEnding .lab-end-page::after {
+  background:
+    radial-gradient(circle 2.4px at 6px 3.5px, rgba(217, 187, 130, .3), transparent 65%),
+    radial-gradient(circle 2.4px at 29px 3.5px, rgba(217, 187, 130, .3), transparent 65%),
+    radial-gradient(circle 2.4px at 52px 3.5px, rgba(217, 187, 130, .3), transparent 65%);
+}
+#labEnding .lab-end-page[data-page="0"].on::after {
+  background:
+    radial-gradient(circle 3px at 6px 3.5px, #ffe9b6, transparent 70%),
+    radial-gradient(circle 2.4px at 29px 3.5px, rgba(217, 187, 130, .3), transparent 65%),
+    radial-gradient(circle 2.4px at 52px 3.5px, rgba(217, 187, 130, .3), transparent 65%);
+}
+#labEnding .lab-end-page[data-page="1"].on::after {
+  background:
+    radial-gradient(circle 2.4px at 6px 3.5px, rgba(217, 187, 130, .3), transparent 65%),
+    radial-gradient(circle 3px at 29px 3.5px, #ffe9b6, transparent 70%),
+    radial-gradient(circle 2.4px at 52px 3.5px, rgba(217, 187, 130, .3), transparent 65%);
+}
+#labEnding .lab-end-page[data-page="2"].on::after {
+  background:
+    radial-gradient(circle 2.4px at 6px 3.5px, rgba(217, 187, 130, .3), transparent 65%),
+    radial-gradient(circle 2.4px at 29px 3.5px, rgba(217, 187, 130, .3), transparent 65%),
+    radial-gradient(circle 3px at 52px 3.5px, #ffe9b6, transparent 70%);
+}
+
+/* 跳过键：对齐 .ov-btn 制式——宽字距 + 金角标线 + 冷青档案底 */
+#labEnding .lab-end-skip {
+  padding: 9px 16px 9px 19px; border-radius: 2px; letter-spacing: .3em; text-indent: .1em;
+  border-color: rgba(217, 187, 130, .42);
+  background: linear-gradient(180deg, rgba(9, 22, 33, .88), rgba(6, 16, 25, .92));
+  color: #c9d8dc;
+  box-shadow: inset 0 1px 0 rgba(214, 232, 235, .06);
+  transition: border-color .2s, color .2s, box-shadow .2s;
+}
+#labEnding .lab-end-skip::before {
+  content: ''; position: absolute; left: 4px; top: 4px; width: 9px; height: 9px;
+  border-left: 1px solid rgba(217, 187, 130, .75); border-top: 1px solid rgba(217, 187, 130, .75);
+  pointer-events: none;
+}
+#labEnding .lab-end-skip:hover {
+  border-color: rgba(217, 187, 130, .8); color: #f2e3c3;
+  box-shadow: inset 0 1px 0 rgba(255, 238, 200, .1), 0 0 12px rgba(217, 187, 130, .18);
+}
