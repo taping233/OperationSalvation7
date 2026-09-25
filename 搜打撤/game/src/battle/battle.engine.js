@@ -12,15 +12,15 @@ import {
   selPool, selShaN, sel, selectingDeck, selDeckMax, allies, growthNames, growth, infuseFuels,
   sealUnlocked, deathSave, killAtkUp, poisonLegacy, nestRunes, nestSyn, unyieldRune, ashRune,
   unlimitedRune, holyRune, armorMul, sealDone, playerCurseImmune, zeroFeeUntil, cardOverrides,
-  equipped, freeCast, tmpSeq, activeActionSignal, surgeWaiter, lastPersistAt, snapCache,
-  snapSig, set$lastDrawnUids, set$tmpSeq, set$noDrawNext, set$stealthStrike,
+  equipped, freeCast, activeActionSignal, surgeWaiter, lastPersistAt, snapCache,
+  snapSig, set$lastDrawnUids, set$noDrawNext, set$stealthStrike,
   set$nextSpellTwice, set$drawPile, set$energy, set$maxEnergy, set$shaTransform,
   set$consumeFireballN, set$deathSave, set$hand, set$extraTurn, set$delayed, set$meleeCost1,
   set$spellCost1, set$surgeWaiter, set$sealUnlocked, set$discovering, set$battleState,
   set$interaction, set$busy, set$infusing, set$sealDone, set$playerCurseImmune, set$nestRunes,
   set$nestSyn,
   set$pendingHint, set$lastPersistAt, set$activeActionSignal, storeBattleSnapshot,
-  clearTargetHint, applyRuneFlag,
+  clearTargetHint, applyRuneFlag, nextTmpSeq, cancelTargetingState,
 } from './battle.runtime.js';
 import { esc } from '../core/shared.js';
 import { createEffectExecutor, splitEffectClauses, consumeTriggerTexts } from './battle.effects.js';
@@ -32,7 +32,7 @@ import { createBattleExecutionSession } from './battle.execution-session.js';
 import { createBattleActionRunner } from './battle.action-runner.js';
 import { STAGED_BOSS_DEFEAT, actionCancellationError, createStagedPlayback, throwIfActionCancelled } from './battle.staged-playback.js';
 import {
-  BATTLE_PHASES, beginTargeting, cancelTargeting,
+  BATTLE_PHASES, beginTargeting,
 } from './battle.state.js';
 import { Random } from '../core/random.js';
 import * as Combat from './combat.js';
@@ -202,7 +202,7 @@ function nestPhase(foe) {
     }
   }
 function addTempCard(tpl) {
-    const uid = 'bts' + Date.now().toString(36) + ((set$tmpSeq(tmpSeq + 1), tmpSeq - 1));
+    const uid = 'bts' + Date.now().toString(36) + nextTmpSeq();
     granted.push({ uid, card: { ...tpl } });
     hand.push(uid);
     cardAnims.push({ kind: 'draw', uid, name: tpl.name || '' });
@@ -212,7 +212,7 @@ function addTempCard(tpl) {
     return uid;
   }
 function addDeckCard(tpl) {
-    const uid = 'btd' + Date.now().toString(36) + ((set$tmpSeq(tmpSeq + 1), tmpSeq - 1));
+    const uid = 'btd' + Date.now().toString(36) + nextTmpSeq();
     granted.push({ uid, card: { ...tpl } });
     drawPile.push(uid);
     cardAnims.push({ kind: 'shuffle', name: tpl.name || '' });   // 洗入牌动画事件（2026-09-11 需求）
@@ -539,7 +539,7 @@ function clearTargetSession(preserveCardUid = null) {
     const i = interaction;
     clearTargetHint();   // 清卡牌槽位与暂存提示（成对清理聚合；freeCast 簿记不读二者，次序独立）
     if (i && i.kind === 'card' && i.uid !== preserveCardUid && freeCast.has(i.uid)) freeCast.delete(i.uid);
-    if (battleState.phase === BATTLE_PHASES.TARGETING) set$battleState(cancelTargeting(battleState));
+    if (battleState.phase === BATTLE_PHASES.TARGETING) cancelTargetingState();
     return true;
   }
 function cancelInteraction() {
@@ -1285,7 +1285,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     SEAL_LIMB_IDS.forEach(id => {
       const tpl = sealCardById(id);
       if (!tpl) return;
-      const uid = 'bts' + Date.now().toString(36) + ((set$tmpSeq(tmpSeq + 1), tmpSeq - 1));
+      const uid = 'bts' + Date.now().toString(36) + nextTmpSeq();
       granted.push({ uid, card: { ...tpl } });
       drawPile.push(uid);
     });
@@ -1372,7 +1372,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
       for (let k = 0; k < n && pool.length; k++) {
         const c = pool.splice(Math.floor(Random.random('battle') * pool.length), 1)[0];
         const zero = { ...c, cost: 0 };
-        const uid0 = 'bts' + Date.now().toString(36) + ((set$tmpSeq(tmpSeq + 1), tmpSeq - 1));
+        const uid0 = 'bts' + Date.now().toString(36) + nextTmpSeq();
         granted.push({ uid: uid0, card: zero });
         drawPile.push(uid0);
         picked.push(c.name);
@@ -1406,7 +1406,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     drawPile.forEach(u => {
       const o = findCard(u);
       if (o && (o.card.cost || 0) === 0 && ['武术', '法术'].includes(o.card.type)) {
-        const uid1 = 'bts' + Date.now().toString(36) + ((set$tmpSeq(tmpSeq + 1), tmpSeq - 1));
+        const uid1 = 'bts' + Date.now().toString(36) + nextTmpSeq();
         granted.push({ uid: uid1, card: { ...o.card } });
         drawPile.push(uid1);
         n++;

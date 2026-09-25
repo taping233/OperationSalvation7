@@ -1,5 +1,5 @@
 /* 一场战斗的核心状态与执行生命周期。由 battle.runtime.js 转发活绑定。 */
-import { createBattleState, transitionBattle } from './battle.state.js';
+import { createBattleState, transitionBattle, cancelTargeting } from './battle.state.js';
 import * as Combat from './combat.js';
 
 export let battleState = createBattleState();
@@ -43,6 +43,15 @@ export function set$lastPersistAt(v) { lastPersistAt = v; }
 
 // 阶段迁移（路线图第 4 批步骤 3）：lifecycle 终局/开局 ×4、enemy-phase 回合迁移 ×4 同模板点。
 export function transitionTo(phase) { battleState = transitionBattle(battleState, phase); }
+
+// 取消指向（engine clearTargetSession / enemy-phase endTurn 两处同模板写点）。
+// cancelTargeting 自带 phase 守卫（非 TARGETING 仅重置 interaction 不迁移）；调用点守卫与
+// clearTargetHint 配对留在原地，跨域语句次序不动。
+export function cancelTargetingState() { battleState = cancelTargeting(battleState); }
+
+// 临时牌 uid 序号（计数式聚合，参照 presentation nextActionSeq 先例）：自增并返回自增前序号，
+// 替代 engine 五处 `set$tmpSeq(tmpSeq + 1), tmpSeq - 1` 逗号模板。
+export function nextTmpSeq() { tmpSeq += 1; return tmpSeq - 1; }
 
 // （重）进场与终局的「abort/reset 后清信号」既有次序（lifecycle restore/finish/start 四处同模板）。
 export function clearActionSignals() { activeActionSignal = null; surgeWaiter = null; }
