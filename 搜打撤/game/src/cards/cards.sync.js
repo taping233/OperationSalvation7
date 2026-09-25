@@ -289,6 +289,23 @@ export const syncSlice = {
       } catch { /* 隐私模式等场景静默跳过 */ }
     },
 
+    // 随机池防退回修正（卡库审计 2026-09-17 发现三，2026-09-25 修复）：石榴弹珠。
+    // 老板 2026-09-13 拍板「石榴石弹珠卖价 3→4，并退出商店/发现池」（TABLETOP3 定义已带
+    // unrandom: true），但定版覆盖批次 cards-sync.json 的 tt3-garnet-marble 无 unrandom
+    // 字段，ensureCardsSyncLive 整卡覆盖会把该字段抹掉——资源/古朴卡 isRandomObtainable
+    // 只看 unrandom，抹掉即退回商店随机槽位/发现/掉落池。每次启动幂等补回（改完即无
+    // 目标，无需 key 标记），旧档、新库、定版升版重播后同口径防退回。
+    ensureRandomPoolFixes() {
+      try {
+        const cards = SDT.Cards.all();
+        const marble = cards.find(c => c.id === 'tt3-garnet-marble');
+        if (marble && !marble.unrandom) {
+          marble.unrandom = true;
+          SDT.Cards.saveAll(cards);
+        }
+      } catch { /* 隐私模式等场景静默跳过 */ }
+    },
+
     // 设计者定版数据修正（一次性）：爆燃火球描述未写注能收益，删除其注能字段
 
     // 设计者定版数据修正（一次性）：爆燃火球描述未写注能收益，删除其注能字段

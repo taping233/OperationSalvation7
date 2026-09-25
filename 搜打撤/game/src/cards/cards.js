@@ -255,6 +255,7 @@ function assertValidCardRules(cards) {
       SDT.Cards.ensureTabletopSync11();
       SDT.Cards.ensureFoeRename();     // 敌人图鉴改名同步（新世界观命名 + 五层分布，含老存档，2026-09-09 定版）
       SDT.Cards.ensureCardsSyncLive(); // 实机卡库同步（数据见 game/data/cards-sync.json，只跑一次）
+      SDT.Cards.ensureRandomPoolFixes(); // 随机池防退回（石榴弹珠 unrandom，定版整卡覆盖后的幂等补回）
       SDT.Cards.ensureDuplicateRenames(); // 同名不同 ID/效果版本统一在后者追加「-改」（含旧卡库）
       SDT.Cards.ensureEvents0919();    // 0919 都市污染事件池：放在实机同步之后，以本轮定稿名与效果为准
       SDT.Cards.seedBatch(SDT.Cards.TABLETOP12, TT12_KEY, 'tt12'); // 第十二批：射线/研发系列新卡 17 张（2026-09-23）；新 KEY 老档补播，放最后以本批定稿为准
