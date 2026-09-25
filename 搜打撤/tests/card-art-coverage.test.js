@@ -28,15 +28,11 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const CARDS_DIR = path.join(ROOT, 'game', 'assets', 'cards');
 const FAMILIES = ['martial', 'spell', 'equip'];
 
-// 已知历史死图白名单（退役 id 的旧文件）。删除需老板批准；批准后从数组移除并删文件。
+// 通用兜底图白名单（按卡名规则引用，非按 id），合法非死图。
+// （历史死图 5 张已随 2026-09-25 老板批准的孤儿清理批删除，白名单同步收窄。）
 const KNOWN_ORPHANS = [
-  'martial-cc-treasure',      // 盗宝旧 id（现役=cmtn1i64j7y7 已有图），2026-09-12 落错名事故遗留
-  'martial-cc-jianghu',       // 江湖救急旧 id（现役=cmtn1wnhhym 已有图），同上
-  'spell-cc-manasupply',      // 法力补给旧 id 死图（现役 tt7-maxsupply 已有图）
-  'martial-melee',            // art.js 通用兜底图（按卡名规则引用，非按 id），合法非死图
-  'martial-ranged',           // 同上
-  'equip-tt3-dark-blade',     // 灭魔之剑整卡退役（2026-09-16 留言「删除灭魔之剑」），专属图成为已批死图
-  'martial-builtin-sha',      // 「杀」改名 starter-attack（2026-09-20 affecbc）后暴露的旧 id 图，待老板批去留
+  'martial-melee',
+  'martial-ranged',
 ];
 
 // 老板已验收定稿、必须有专属图的卡（现役 id）。每实装一批新图在此登记。
