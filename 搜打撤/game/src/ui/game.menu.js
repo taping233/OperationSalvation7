@@ -806,6 +806,7 @@ function createGameMenuController(deps) {
       game.terminalPending = null;
       game.state = 'done';
       game.runActive = false;
+      SDT.Agent?.recorder?.recordRun('abandon', { savedCards: token.cards });   // 跑局统计（数据分析系统）
       SDT.Sound.sfx('defeat');
       SDT.Sound.music('title');
       if (token.ephemeral) UI.log('[[icon:info]] 测试结算仅更新内存，没有写入基地存档', 'sys');

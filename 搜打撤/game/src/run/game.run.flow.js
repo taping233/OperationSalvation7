@@ -14,6 +14,7 @@ import { RunStorage } from '../hub/game.storage.js';
 import { storyCommands } from '../home/story.commands.js';
 import { setBagReturnHook } from '../hub/bag-return-hook.js';
 import { startBattle } from '../battle/battle-loader.js';
+import { isTurbo } from '../agent/agent.turbo.js';
 import { renderScheduler } from '../core/render-scheduler.js';
 import { buildEncounter, cancelLegacyChainMove, consumeCell, consumeCurrentCell, enterNode, finishInstant, grantEventCard, nodeShell, openBattleCell, openBlankSafePage, openChestsOnCell, openPickupPage, openPocketRestore, openShop, preloadCellScene } from './game.run.scenes.js';
 import { openDoorModal, openFireRest, openAltarRitual, openBossGate, openEmergencyModal } from './game.run.altar.js';
@@ -87,7 +88,7 @@ export function moveTo(toLi, toIdx) {
   game.pos = { ...from };
   // rAF 在后台页可能被暂停；看门狗确保事务最终回到稳定节点。
   watchdog = setTimeout(finish, MOVE_DURATION + 700);
-  if (moveUsesReducedMotion()) finish();
+  if (moveUsesReducedMotion() || isTurbo()) finish();
   else frame(tick);
   return true;
 }

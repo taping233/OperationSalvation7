@@ -9,6 +9,7 @@ import { escAttr } from '../core/shared.js';
 import { MODES, game, newRun, requestClassChoice } from '../run/game.session.js';
 import { Sfx, _set_cardPageOpen } from './game.cardslib.js';
 import { slots as hubBridge } from './game.hub.bridge.js';   // 别名防局部 slots（槽位数）遮蔽——实机 depBack 曾因此 TypeError
+import { turboMs } from '../agent/agent.turbo.js';
   // —— 出发页：选择玩法 + 出征预报 + 宝藏大门 ——
   function hubDeployHTML() {
     const B = SDT.Base;
@@ -305,7 +306,7 @@ import { slots as hubBridge } from './game.hub.bridge.js';   // 别名防局部 
       const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
       if (stage && !reduce) {
         stage.classList.add('dep-tearing');
-        setTimeout(startChoice, 520);
+        setTimeout(startChoice, turboMs(520));
       } else startChoice();
     });
     UI.act('depBack', () => { deployPick = null; hubBridge.renderHub(); });

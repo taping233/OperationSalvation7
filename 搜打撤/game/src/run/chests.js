@@ -2,6 +2,7 @@ import { sdtDefine } from '../core/sdt-facade.js';
 
 import { Random } from '../core/random.js';
 import { escAttr } from '../core/shared.js';
+import { turboMs } from '../agent/agent.turbo.js';
 
   const SDT = window.SDT;
   const UI = SDT.UI;
@@ -240,7 +241,7 @@ import { escAttr } from '../core/shared.js';
       if (tok !== searchSeq || !cur) return;   // 已开下一个/已收尾 → 不再揭晓
       render();
       scheduleRevealSfx();
-    }, SEARCH_MS);
+    }, turboMs(SEARCH_MS));
   }
 
   // ---------- 开箱浮层：悬在当前画面上的紧凑面板（杀戮尖塔「搜刮!」式） ----------

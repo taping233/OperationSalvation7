@@ -1,5 +1,6 @@
 /* 战斗表现时钟：同一节奏下等待、清理和顿帧暂停共享生命周期。 */
 import { demoMs } from './battle.pace.js';
+import { isTurbo } from '../agent/agent.turbo.js';
 import { setPaused as setUnitFramesPaused } from './battle.frames.js';
 
 let pauseDepth = 0;
@@ -11,7 +12,7 @@ function isTestRuntime() {
 }
 
 function waitPresentationMs(ms, signal) {
-  if (isTestRuntime() || !(ms > 0)) return Promise.resolve();
+  if (isTestRuntime() || isTurbo() || !(ms > 0)) return Promise.resolve();
   return new Promise((resolve, reject) => {
     if (signal?.aborted) { reject(signal.reason || new Error('Battle presentation cancelled')); return; }
     const waiter = { remaining: ms, started: 0, timer: 0, done: false };
@@ -43,7 +44,7 @@ function waitPresentationMs(ms, signal) {
 function waitPresentation(ms, signal) { return waitPresentationMs(demoMs(ms), signal); }
 
 function waitHitStop(ms, signal) {
-  if (isTestRuntime() || !(ms > 0)) return Promise.resolve();
+  if (isTestRuntime() || isTurbo() || !(ms > 0)) return Promise.resolve();
   const release = pausePresentation();
   return new Promise((resolve, reject) => {
     if (signal?.aborted) { release(); reject(signal.reason || new Error('Battle presentation cancelled')); return; }

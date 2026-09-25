@@ -922,6 +922,8 @@ function showExtractDone() {
   const B = SDT.Base;
   game.extractionPending = false;
   extractLeft = null;
+  SDT.Agent?.recorder?.recordRun(game.bossKilled ? 'clear' : 'extract',   // 跑局统计（数据分析系统）
+    { carriedCards: (game.ownedCards || []).map(o => ({ card: o.card, count: 1 })) });
   const woodN = game.inventory.filter(i => i.name === '木材').reduce((a, b) => a + b.count, 0);
   const ratN = game.inventory.filter(i => i.name === '口粮').reduce((a, b) => a + b.count, 0);
   const total = game.inventory.reduce((a, b) => a + b.value * (b.count || 1), 0);

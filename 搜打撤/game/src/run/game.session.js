@@ -325,7 +325,7 @@ const menuController = createGameMenuController({
   getActiveSlot: () => activeSlot, preflightRunMap,
   setActiveSlot: value => { activeSlot = value; },
 });
-const { setLobby, showTitle, startNewGame, exitToTitle, quitGame, openSettings, openLeaveMenu, openTitleGuide } = menuController;
+const { setLobby, showTitle, startNewGame, exitToTitle, quitGame, openSettings, openLeaveMenu, openTitleGuide, openSuggestionInbox } = menuController;
 
 // ---------- 开局流程 ----------
 const newUid = () => 'o' + Date.now().toString(36) +
@@ -485,4 +485,4 @@ export { MODES, modeCfg, scaledEnemy } from './game.session.modes.js';
 export { bagCap, canAcceptCard, cardStacks, safeCap, safeUsed, usedSlots, gainCoins } from './game.session.bag.js';
 export { buildDerived } from './game.session.map.js';
 export { markSeen, renderMiniMap } from './game.session.board.js';
-export { clearSave, enterLayer, doDeath, exitToTitle, hasRun, loadGame, migrateOldSave, newRun, newUid, openLeaveMenu, openSettings, openTitleGuide, preflightRunMap, quitGame, saveGame, setLobby, showTitle, startNewGame, syncPlayTime };
+export { clearSave, enterLayer, doDeath, exitToTitle, hasRun, loadGame, migrateOldSave, newRun, newUid, openLeaveMenu, openSettings, openSuggestionInbox, openTitleGuide, preflightRunMap, quitGame, saveGame, setLobby, showTitle, startNewGame, syncPlayTime };

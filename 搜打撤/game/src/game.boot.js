@@ -17,6 +17,8 @@ import { renderScheduler } from './core/render-scheduler.js';
 import { nodeHitRadius } from './core/camera.js';
 import { storeGet, storeSet } from './core/storage.js';
 import { renderMiniMap } from './run/game.session.js';
+import './agent/agent.js';   // SDT.Agent 接口链（observe/act/step）：随启动挂载，供外部决策端驱动
+import './ui/quick-nav.js';  // 全页面快捷进入键（Alt+数字系，非法状态拒绝并提示）
 
   configureGameRuntime({ openClassChoice, openBaseHub, rebuildNotes, resize: () => resize(), showRunTransition, syncDevVisibility, resumeExtraction });
   configureShopRuntime({ openBag: (onReturn) => {

@@ -507,6 +507,8 @@ function doNestExtract() {
 
 function showLabSettlement(s, st) {
   game.state = 'modal';
+  SDT.Agent?.recorder?.recordRun('clear', { why: `研究所结算 ${s.total} 分`,   // 跑局统计（数据分析系统）
+    carriedCards: (game.ownedCards || []).map(o => ({ card: o.card, count: 1 })) });
   UI.showOverlay('[[icon:exit]] 经典生命研究所 · 行动结算', `
     <p class="ov-stats">战斗表现：击杀 <b>${s.kills}</b> × ${LAB_SCORE.killMinor} = ${s.killPts} 分 · 所主击破 +${s.bossPts} 分 · 队伍状态 +${s.hpPts} 分</p>
     <p class="ov-stats">带回物资：卡牌 ${s.cards} 张 +${s.cardPts} 分 · 符文 ${s.runes} 块 +${s.runePts} 分</p>

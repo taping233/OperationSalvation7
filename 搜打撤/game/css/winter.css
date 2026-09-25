@@ -1760,3 +1760,24 @@ body.cardlib-open #cardZoom.cz-photo .cz-hint{position:relative;z-index:4!import
 #title .ak-hud .ak-set .c-ring { --home-icon: url('../assets/ui/home-icons-v13/home-icon-gear.webp'); }
 /* 悬停时徽章轻微点亮（旧 hover 只有 drop-shadow 滤镜，对新暗底徽章偏弱） */
 #title .ak-hud .ak-circle:hover .c-ring::before { filter: brightness(1.18) saturate(1.05) drop-shadow(0 0 10px #d9bb8266); }
+
+/* ============================================================
+ * Agent 数据分析系统 UI（09-25）：控制台四页签 + 跑局数据页
+ * ============================================================ */
+.devc-tabs { display: flex; gap: 6px; margin: 10px 0 4px; flex-wrap: wrap; }
+.devc-tabs .hs-btn.ok { outline: 1px solid rgba(217,187,130,.55); }
+.devc-pre { background: rgba(6,12,18,.72); border: 1px solid rgba(182,211,214,.16); border-radius: 8px;
+  padding: 8px 10px; font-size: 11px; line-height: 1.5; white-space: pre-wrap; word-break: break-all;
+  color: rgba(200,220,230,.86); text-align: left; }
+.devc-row kbd { display: inline-block; min-width: 20px; text-align: center; padding: 1px 5px;
+  border: 1px solid rgba(217,187,130,.4); border-radius: 5px; font-size: 11px; color: #e8cf9a;
+  background: rgba(20,28,36,.7); margin-right: 4px; }
+.dt-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 10px; margin-top: 8px; }
+.dt-grid .hub-card { text-align: left; }
+.dt-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.dt-table th, .dt-table td { padding: 4px 6px; border-bottom: 1px solid rgba(182,211,214,.12); text-align: left; }
+.dt-table th { color: rgba(217,187,130,.85); font-weight: 600; }
+.dt-bars { display: flex; flex-direction: column; gap: 5px; }
+.dt-bar-row { display: grid; grid-template-columns: 52px 1fr 34px; align-items: center; gap: 8px; font-size: 12px; }
+.dt-bar-row i { display: block; height: 10px; border-radius: 5px;
+  background: linear-gradient(90deg, rgba(224,92,92,.9), rgba(224,92,92,.35)); min-width: 2px; }

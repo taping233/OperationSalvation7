@@ -4,6 +4,8 @@ import { buildEncounter, openChestsOnCell, openShop } from './game.run.scenes.js
 import { openAltarRitual, openFireRest } from './game.run.altar.js';
 import { runEventDeck } from './game.run.flow.js';
 import { startBattle } from '../battle/battle-loader.js';
+import { agentTabHTML, bindAgentTab, keysTabHTML, bindKeysTab } from '../agent/agent.console.js';
+import { dataPanelHTML, bindDataActions } from '../agent/agent.data.js';
 
 const SDT = window.SDT;
 const UI = window.SDT.UI;
@@ -77,7 +79,9 @@ function saveGameDev() {
 }
 
 function openDevConsole() {
-  if (!game.runActive && !game.battleActive) { UI.log('[[icon:lock]] 开发者控制台需要在对局/战斗中使用', 'warn'); return; }
+  // 控制台升级为全局开发枢纽（四页签：调试/Agent/数据/快捷键）；
+  // 「调试」页签的写操作仍只在对局/战斗中生效（各动作自带守卫）。
+  let tab = 'debug';
   const query = { q: '' };
   const hitCards = () => {
     const q = query.q.trim().toLowerCase();
@@ -96,37 +100,68 @@ function openDevConsole() {
     const box = document.getElementById('devcHits');
     if (box) box.innerHTML = hitsHTML();
   };
+  const notInRun = () => !game.runActive && !game.battleActive;
+  const debugBody = () => `
+    <div class="devc-grid">
+      <p class="ov-note">调试用面板（Ctrl+L 开关）——修改会立即写入本局存档，别在正经挑战里用。</p>
+      ${notInRun() ? '<p class="ov-note">资源/发卡/战斗调试仅在对局或战斗中生效——先开一局再回来。</p>' : ''}
+      <section class="devc-sec"><b class="devc-h">资源</b><div class="devc-row">
+        <button class="hs-btn" data-act="devcCoin" data-n="50">+50 币</button><button class="hs-btn" data-act="devcCoin" data-n="200">+200 币</button>
+        <button class="hs-btn" data-act="devcHeal" data-n="10">回 10 血</button><button class="hs-btn" data-act="devcHeal" data-n="999">回满血</button>
+      </div></section>
+      <section class="devc-sec"><b class="devc-h">指定卡牌</b>
+        <input id="devcSearch" class="clib-search" placeholder="输入卡名搜索，如：江湖救急" value="${esc(query.q)}">
+        <div class="devc-hits" id="devcHits">${hitsHTML()}</div>
+      </section>
+      ${devBattle() ? `<section class="devc-sec"><b class="devc-h">战斗调试</b><div class="devc-row">
+        <button class="hs-btn" data-act="devcB" data-k="energy">能量回满</button><button class="hs-btn" data-act="devcB" data-k="draw" data-n="2">抽 2 张</button>
+        <button class="hs-btn" data-act="devcB" data-k="heal">生命回满</button><button class="hs-btn" data-act="devcB" data-k="freezeAll">冰冻敌人×2回合</button>
+        <button class="hs-btn" data-act="devcB" data-k="damageAll" data-n="10">全体 10 伤</button><button class="hs-btn" data-act="devcB" data-k="win">直接胜利</button>
+      </div></section>` : ''}
+    </div>`;
+  const TABS = [
+    { id: 'debug', name: '调试' },
+    { id: 'agent', name: 'Agent' },
+    { id: 'data', name: '数据' },
+    { id: 'keys', name: '快捷键' },
+  ];
+  const tabsHTML = () => `<div class="devc-tabs">${TABS.map(t =>
+    `<button class="hs-btn sm${t.id === tab ? ' ok' : ''}" data-act="devcTab" data-tab="${t.id}">${t.name}</button>`).join('')}</div>`;
+  const bodyOf = () => tab === 'debug' ? debugBody()
+    : tab === 'agent' ? agentTabHTML()
+    : tab === 'data' ? dataPanelHTML()
+    : keysTabHTML();
+  const bindTab = () => {
+    if (tab === 'debug') {
+      UI.act('devcCoin', data => { if (notInRun()) return; const n = +data.n || 50; game.coins += n; UI.log(`[[icon:coin]] 开发者：+${n} 币（现有 ${game.coins}）`, 'coin'); saveGameDev(); render(); });
+      UI.act('devcHeal', data => { if (notInRun()) return; const n = +data.n || 10; game.hp = n >= 999 ? game.maxHp : Math.min(game.maxHp, game.hp + n); UI.log(`[[icon:heart]] 开发者：生命 ${game.hp}/${game.maxHp}`, 'ok'); saveGameDev(); render(); });
+      UI.act('devcCard', data => { if (notInRun()) return; const card = hitCards()[+data.i]; if (card && game.grantCard) game.grantCard(card); render(); });
+      UI.act('devcB', data => { if (!devBattle()) return; SDT.Battle.commands.dev(data.k, data.n); setTimeout(render, 80); });
+    } else if (tab === 'agent') {
+      bindAgentTab(render);
+    } else if (tab === 'data') {
+      bindDataActions(render);
+    } else {
+      bindKeysTab(render);
+    }
+  };
+  const inputHandler = event => {
+    if (event.target.id !== 'devcSearch') return;
+    query.q = event.target.value;
+    // 只重绘结果列表，绝不重建 overlay：输入法组合期间拆掉宿主 input 会掐断
+    // 组合输入，中文打不进去（同卡牌库页搜索「只重绘卡格保持焦点」的口径）。
+    renderHits();
+  };
   const render = () => {
     UI.showOverlay('[[icon:tools]] 开发者控制台', `
-      <p class="ov-note">调试用面板（Ctrl+L 开关）——修改会立即写入本局存档，别在正经挑战里用。</p>
+      ${tabsHTML()}
       <p class="ov-note" data-route-debug>${routeInfo()}</p>
-      <div class="devc-grid">
-        <section class="devc-sec"><b class="devc-h">资源</b><div class="devc-row">
-          <button class="hs-btn" data-act="devcCoin" data-n="50">+50 币</button><button class="hs-btn" data-act="devcCoin" data-n="200">+200 币</button>
-          <button class="hs-btn" data-act="devcHeal" data-n="10">回 10 血</button><button class="hs-btn" data-act="devcHeal" data-n="999">回满血</button>
-        </div></section>
-        <section class="devc-sec"><b class="devc-h">指定卡牌</b>
-          <input id="devcSearch" class="clib-search" placeholder="输入卡名搜索，如：江湖救急" value="${esc(query.q)}">
-          <div class="devc-hits" id="devcHits">${hitsHTML()}</div>
-        </section>
-        ${devBattle() ? `<section class="devc-sec"><b class="devc-h">战斗调试</b><div class="devc-row">
-          <button class="hs-btn" data-act="devcB" data-k="energy">能量回满</button><button class="hs-btn" data-act="devcB" data-k="draw" data-n="2">抽 2 张</button>
-          <button class="hs-btn" data-act="devcB" data-k="heal">生命回满</button><button class="hs-btn" data-act="devcB" data-k="freezeAll">冰冻敌人×2回合</button>
-          <button class="hs-btn" data-act="devcB" data-k="damageAll" data-n="10">全体 10 伤</button><button class="hs-btn" data-act="devcB" data-k="win">直接胜利</button>
-        </div></section>` : ''}
-      </div><div class="ov-btns"><button class="ov-btn ok" data-act="devcClose">关闭（Esc / Ctrl+L）</button></div>`, 'discover');
-    UI._inputHandler = event => {
-      if (event.target.id !== 'devcSearch') return;
-      query.q = event.target.value;
-      // 只重绘结果列表，绝不重建 overlay：输入法组合期间拆掉宿主 input 会掐断
-      // 组合输入，中文打不进去（同卡牌库页搜索「只重绘卡格保持焦点」的口径）。
-      renderHits();
-    };
+      ${bodyOf()}
+      <div class="ov-btns"><button class="ov-btn ok" data-act="devcClose">关闭（Esc / Ctrl+L）</button></div>`, 'discover');
+    UI._inputHandler = tab === 'debug' ? inputHandler : null;
+    UI.act('devcTab', d => { if (TABS.some(t => t.id === d.tab)) { tab = d.tab; render(); } });
+    bindTab();
   };
-  UI.act('devcCoin', data => { const n = +data.n || 50; game.coins += n; UI.log(`[[icon:coin]] 开发者：+${n} 币（现有 ${game.coins}）`, 'coin'); saveGameDev(); render(); });
-  UI.act('devcHeal', data => { const n = +data.n || 10; game.hp = n >= 999 ? game.maxHp : Math.min(game.maxHp, game.hp + n); UI.log(`[[icon:heart]] 开发者：生命 ${game.hp}/${game.maxHp}`, 'ok'); saveGameDev(); render(); });
-  UI.act('devcCard', data => { const card = hitCards()[+data.i]; if (card && game.grantCard) game.grantCard(card); render(); });
-  UI.act('devcB', data => { SDT.Battle.commands.dev(data.k, data.n); setTimeout(render, 80); });
   UI.act('devcClose', () => {
     // 战斗本身也承载在 overlay 中；关闭调试面板时必须重绘战斗，不能按普通弹窗隐藏。
     if (game.battleActive && SDT.Battle?.commands?.refreshView) SDT.Battle.commands.refreshView();

@@ -8,6 +8,7 @@
  * ============================================================ */
 import { assetUrl } from '../core/asset-url.js';
 import SDT from '../core/sdt-facade.js';
+import { isTurbo } from '../agent/agent.turbo.js';
 
 const PAGES = [
   {
@@ -28,6 +29,8 @@ const PAGES = [
 ];
 
 export function playLabEnding(onDone) {
+  // 快进模式跳过通关演出（Agent/批量跑用）：直接进结算，与「跳过」按钮同出口
+  if (isTurbo()) { onDone?.(); return; }
   const root = document.createElement('div');
   root.id = 'labEnding';
   root.innerHTML = `

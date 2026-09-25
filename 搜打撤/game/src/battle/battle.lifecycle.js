@@ -154,6 +154,7 @@ export function createBattleLifecycle({
     if (!busEmit('battle:end', opts, playedCopy, win, consumedCopy) && typeof G.onBattleEnd === 'function') {
       G.onBattleEnd(opts, playedCopy, win, consumedCopy);
     }
+    SDT.Agent?.recorder?.noteBattle?.(win);   // 跑局统计（不可订阅 battle:end——会吞 onBattleEnd 回退）
     set$battleRestartCheckpoint(null);
   }
 

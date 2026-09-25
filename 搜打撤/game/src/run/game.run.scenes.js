@@ -16,6 +16,7 @@ import { createShopController } from './game.run.shop.js';
 import { startBattle } from '../battle/battle-loader.js';
 import { setBagReturnHook } from '../hub/bag-return-hook.js';
 import { selectEncounterSpec } from './encounter-selector.js';
+import { turboMs } from '../agent/agent.turbo.js';
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const SDT = window.SDT;
 const UI = window.SDT.UI;
@@ -135,7 +136,7 @@ export function showRunTransition({ tone = 'battle', asset = 'scene-battle-bg', 
         <p class="flow-hint">点击跳过</p>
       </div>`, 'scene');
     UI.act('flowContinue', finish);
-    timer = setTimeout(finish, duration);
+    timer = setTimeout(finish, turboMs(duration));
     UI.refresh(game);
   });
 }
@@ -186,7 +187,7 @@ export function openPickupPage(kind, gain, onDone) {
     SDT.Sound.sfx('gain');
     const go = main.querySelector('[data-act="pickupGo"]');
     if (go) go.focus({ preventScroll: true });
-  }, PICKUP_SEARCH_MS);
+  }, turboMs(PICKUP_SEARCH_MS));
   UI.act('pickupGo', () => { setBagReturnHook(null); UI.hideOverlay(); onDone(); });
 }
 

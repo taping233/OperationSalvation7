@@ -63,6 +63,7 @@ export function createDeathSettlement({
       game.state = 'done';
       game.runActive = false;
       game.surrenderedRun = false;
+      SDT.Agent?.recorder?.recordRun('death', { why: token.why, savedCards: token.saved });   // 跑局统计（数据分析系统）
       SDT.Sound.sfx('defeat');
       SDT.Sound.music('title');
       if (token.ephemeral) {
