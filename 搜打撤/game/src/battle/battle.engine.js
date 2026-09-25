@@ -1036,24 +1036,26 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     }
     queueCardExecution(uid, playCard, pendingCard?.fuelUids || [], target, isFree);
   }
-  // v0.32 堆叠手牌：点击的是一叠同名卡的代表性 uid——选中/取消该叠中的一张
+  // v0.32 堆叠手牌：点击传入手牌 uid——按 uid 精确 toggle（N1 修复，2026-09-25 老板定版）：
+  // 点已选中的那张=取消它（per-uid delete，同叠/别叠的其他已选张不受影响）；
+  // 点未选中的=尝试选中这张本身（组级校验保留：uid 必须是手牌里与本卡同名的真手牌，
+  // 容量仍按 need 封顶）。旧实现是「组级 toggle」（组内有已选即 delete 最后一张），
+  // 同名堆叠 ×need≥2 时点第二张会顶掉第一张，燃料永远选不满（tt12 走查 N1）。
   function toggleInfusePick(uid) {
     if (!infusing || uid === infusing.uid) return;
     const entry = findCard(uid);
     if (!entry) return;
     // 「无法用于注能」（不朽斩等）不能被选作注能牺牲品
     if (/无法用于注能/.test(String(entry.card.desc || ''))) return;
-    const groupUids = hand.filter(h => {
-      if (h === infusing.uid) return false;
-      const o = findCard(h);
-      return o && cardIdentity(o.card) === cardIdentity(entry.card);
-    });
-    const pickedInGroup = groupUids.filter(u => infusing.picked.has(u));
-    if (pickedInGroup.length) {
-      infusing.picked.delete(pickedInGroup[pickedInGroup.length - 1]);
+    if (infusing.picked.has(uid)) {
+      infusing.picked.delete(uid);
     } else {
-      const free = groupUids.find(u => !infusing.picked.has(u));
-      if (free && infusing.picked.size < infusing.need) infusing.picked.add(free);
+      const groupUids = hand.filter(h => {
+        if (h === infusing.uid) return false;
+        const o = findCard(h);
+        return o && cardIdentity(o.card) === cardIdentity(entry.card);
+      });
+      if (groupUids.includes(uid) && infusing.picked.size < infusing.need) infusing.picked.add(uid);
     }
     requestBattleRender();
   }
