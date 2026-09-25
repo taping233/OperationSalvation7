@@ -104,6 +104,28 @@ import { cardRuleHint } from './battle.preview.js';
     slot.style.setProperty('--frot', L.rot + 'deg');
     slot.style.setProperty('--fs', L.scale);
   }
+  // N1 视图侧闭环（2026-09-25）：注能选牌态整叠同名卡共享一个槽位节点，点击发的
+  // dataset.uid 渲染时固定为叠代表（g.uids[0]）——连点永远发同一个 uid，引擎 per-uid
+  // toggle（99daf74）下就是 0→1→0 循环，一叠选不满 need 张。这里按「轮转」算本次
+  // 按下应发的 uid：
+  //   容量未满且组内有未选 → 从组内最近被选的那张之后（循环）发下一个未选 uid；
+  //   容量已满或组内全被选 → 发组内最早被选的 uid（引擎 delete 它 = 取消第一张）。
+  // 容量按全局 picked.length vs need 判（引擎 add 校验是全局容量）：组内还有未选但
+  // need 已被占满时，发未选 uid 只会被引擎拒收成死点击，改发取消才能「再点轮转回取消」。
+  // picked 为快照冻结数组（引擎 Set 插入序 = 点选时间序）；返回 null 表示无需轮转。
+  function infuseRotateUid(g, infusing) {
+    if (!g || g.self || !infusing || !infusing.picked) return null;
+    const uids = g.uids;
+    if (!uids || uids.length < 2) return null;   // 单张叠代表即本身，per-uid toggle 天然成立
+    const inGroup = infusing.picked.filter(u => uids.includes(u));   // 组内已选，按点选先后
+    if (inGroup.length >= uids.length || infusing.picked.length >= infusing.need) return inGroup[0] || null;
+    const cursor = inGroup.length ? uids.indexOf(inGroup[inGroup.length - 1]) : -1;
+    for (let step = 1; step <= uids.length; step++) {
+      const u = uids[(cursor + step) % uids.length];
+      if (!infusing.picked.includes(u)) return u;
+    }
+    return null;
+  }
   // 单叠手牌的即时视图状态：side/类名/提示语/卡面内容一次算全（原 render 内联计算外提）
   function handGroupState(g, ctx) {
     const { infusingNow, infusing, pendingTarget, energy, busy, spellBonus, mode } = ctx;
@@ -225,6 +247,18 @@ import { cardRuleHint } from './battle.preview.js';
         rec.card.addEventListener('pointerdown', (e) => {
           // 注能角标是按钮，点击走 ovBody 委托，不进指向（需求 #15）
           if (e.target.closest && e.target.closest('.bt-infchip')) return;
+          // N1（2026-09-25）：注能选牌态下整叠一个槽位，dataset.uid 是渲染时算好的叠代表
+          // ——连点发同一个 uid，per-uid toggle 下选不满。按下瞬间按当前快照现算轮转 uid
+          // 写回 dataset.uid，随后的 click 委托（btPlay→toggleInfusePick）即按 per-uid 生效；
+          // 现算而非渲染时算：requestBattleRender 走 rAF 合帧，连点可能同帧到达。
+          // 非注能态不碰 dataset.uid，普通点击/拖拽路径零变化。
+          if (e.button === 0) {
+            const snap = getSnapshot();
+            if (snap && snap.infusing) {
+              const rot = infuseRotateUid(rec.group, snap.infusing);
+              if (rot) rec.card.dataset.uid = rot;
+            }
+          }
           if (e.button === 0 && rec.card.dataset.aim === '1') startAim(e, rec.card);
         });
         // U8（2026-09-19 走查）：操作指引改 #tooltip 即时提示——原生 title 有 1s 延迟、
@@ -242,6 +276,7 @@ import { cardRuleHint } from './battle.preview.js';
         rec.slot.appendChild(rec.card);
         handSlots.set(key, rec);
       }
+      rec.group = g;   // 实时分组挂在常驻 rec 上：pointerdown 注能轮转按本帧分组现算（N1）
       setSlotVars(rec.slot, L);
       // 紧凑态恒挂（只露牌面+名字）；悬停弹出完整描述由 CSS :hover 驱动
       rec.card.className = 'bt-card compact' + st.cls
