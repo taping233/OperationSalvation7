@@ -267,6 +267,7 @@ function assertValidCardRules(cards) {
       SDT.Cards.ensureTT7MultiHitRules(); // TT7 多段攻击与偷袭卡按稳定 id 补齐旧卡规则
       SDT.Cards.ensureTT7StatusRules(); // 冰封千里按稳定 id 补齐群体冰冻规则
       SDT.Cards.ensureTT12DiscoverRules(); // 高端研发按稳定 id 补齐发现与逐回合降费规则
+      SDT.Cards.ensureA3BattleRules(); // A3 迁移第一批：B1-B3 共 23 张文本路径卡改结构化 rules（2026-09-25）
     },
 
     // 职业稀有度迁移（设计者 2026-09-04 定版）：老档里第七批职业卡（tt7- 前缀）

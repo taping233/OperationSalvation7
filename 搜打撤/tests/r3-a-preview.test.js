@@ -151,26 +151,30 @@ describe('R3-a 可信伤害预览', () => {
     BattleSession.commands.flee();
   });
 
-  it('语义指纹任一改写后降为 unknown，不显示数字或击倒', () => {
+  it('A3 迁移后结构化 rules 是预览权威：desc 改写不降级，预览仍与真实结算一致', async () => {
+    // tt2-shoot 已随 A3 迁移为结构化 onPlay——预览读 rules 而非 desc 语义指纹，
+    // desc 改写（旧文案/新文案）都不影响可信度；字段改写（dmg）则数字跟随且与结算一致。
     const original = Cards.all().find(entry => entry.id === 'tt2-shoot');
-    for (const changed of [
-      { ...original, desc: '造成 2 点伤害，抽 1 张牌。' },
-      { ...original, dmg: 3 },
-      { ...original, dmgType: 'attack' },
-      { ...original, type: '法术' },
-    ]) {
-      const { game, uid } = gameWith(changed);
-      restore(game, uid, { hp: 2 });
-      const result = preview(uid);
-      expect(result.confidence).toBe('unknown');
-      expect(result.damage).toBeNull();
-      expect(result.reasons[0]).toMatch(/暂不支持/);
-      BattleSession.commands.flee();
-    }
+    const { game, uid } = gameWith({ ...original, desc: '造成 2 点伤害，抽 1 张牌。' });
+    restore(game, uid, { hp: 2 });
+    const result = preview(uid);
+    expect(result.confidence, 'desc 与 rules 不符时预览仍按 rules 权威给出 exact').toBe('exact');
+    expect(result.damage.total).toBe(2);
+    BattleSession.commands.playCard(uid, 0);
+    const actual = await settle();
+    expect(actual.foes[0].hp).toBe(result.damage.hpAfter);
+    BattleSession.commands.flee();
+
+    const altered = gameWith({ ...original, dmg: 3 });
+    restore(altered.game, altered.uid, { hp: 2 });
+    const alteredResult = preview(altered.uid);
+    expect(alteredResult.confidence).toBe('exact');
+    expect(alteredResult.damage.total).toBe(3);
+    BattleSession.commands.flee();
   });
 
-  it.each(['cc-double-boom', 'tt7-whirlwind', 'cc-mana-surge', 'cc-cursed-blade'])(
-    '%s 的 AOE/状态前置流程为 unknown，预览不执行效果', id => {
+  it.each(['cc-mana-surge', 'cc-cursed-blade'])(
+    '%s 的文本路径效果为 unknown，预览不执行效果', id => {
       const card = Cards.all().find(entry => entry.id === id);
       expect(card).toBeTruthy();
       const { game, uid } = gameWith(card);
@@ -180,6 +184,22 @@ describe('R3-a 可信伤害预览', () => {
       expect(result.confidence).toBe('unknown');
       expect(result.damage).toBeNull();
       expect(BattleSession.getSnapshot()).toEqual(before);
+      BattleSession.commands.flee();
+    },
+  );
+
+  it.each(['cc-double-boom', 'tt7-whirlwind'])(
+    '%s 已随 A3 迁移为结构化 AOE：预览 exact 且数字与真实结算一致', async id => {
+      const card = Cards.all().find(entry => entry.id === id);
+      expect(card).toBeTruthy();
+      const { game, uid } = gameWith(card);
+      restore(game, uid, { hp: 12 });
+      const result = preview(uid);
+      expect(result.confidence, '纯 amountField AOE 无条件分支 → exact').toBe('exact');
+      expect(result.damage.total, 'attack 类按 atk+dmg、spell 类按 dmg——数字由结算对照兜底').toBeGreaterThan(0);
+      BattleSession.commands.playCard(uid, 0);
+      const actual = await settle();
+      expect(actual.foes[0].hp).toBe(result.damage.hpAfter);
       BattleSession.commands.flee();
     },
   );

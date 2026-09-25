@@ -870,4 +870,55 @@ export const syncSlice = {
         if (dirty) SDT.Cards.saveAll(cards);
       } catch { /* 隐私模式等场景静默跳过 */ }
     },
+
+    // A3 卡牌规则迁移第一批（2026-09-25 老板令开工）：B1 纯伤害 / B2 多段与重复 /
+    // B3 治疗护甲吸血，共 23 张文本路径/专支卡改结构化 rules（docs/card-rules-v2-taxonomy-2026-09-25.md
+    // §3 逐卡表筛选；解释器 v2 分支已接线——battle.resolution.js castSegment 段生成器）。
+    // definitions 内联手写（cc-* 纯实机卡与 tt7-ironcharge 无代码常量定义，定版在
+    // cards-sync.json——生成物勿手改，故统一走 ensure 回填而非卡表内联）。
+    // 排除项：cc-demon / tt2-forestarrow（damage+自益组合的 battle.target 契约矛盾，
+    // v2 schema 缺口记 A1 文档待补）；双版效果不一致卡只迁 A1 口径副本。
+    ensureA3BattleRules() {
+      const R = (battle, onPlay) => ({ rules: { version: 1, battle, triggers: { onPlay } } });
+      const ENEMY_ONE = { target: { side: 'enemy', area: false } };
+      const ENEMY_ALL = { target: { side: 'enemy', area: true } };
+      const SELF = { target: { side: 'self', area: false } };
+      const dmgOne = extra => R(ENEMY_ONE, [{ op: 'damage', amountField: 'dmg', target: 'chosenEnemy', ...extra }]);
+      const definitions = new Map([
+        // —— B1 伤害直结 ——
+        ['tt2-shoot', dmgOne({})],
+        ['tt3-execute', dmgOne({ cond: { foeHpBelow: 9 } })],   // 9 血以下才有伤害（伤害门）
+        ['tt7-whirlwind', R(ENEMY_ALL, [{ op: 'damage', amountField: 'dmg', target: 'allEnemies' }])],
+        ['tt3-arrow-rain', R(ENEMY_ALL, [{ op: 'damage', amountField: 'dmg', target: 'allEnemies' }])],
+        ['tt3-reshot', dmgOne({})],
+        ['tt7-smite', dmgOne({ bonus: { pct: 50, if: { foeHpHalf: true } } })],   // 全员受 10，半血受 15（bonus 非伤害门）
+        ['cmtna0nb1yxt', dmgOne({})],
+        ['tt3-fireball', dmgOne({})],   // 衍生牌；consumeFireball 等施放链走专支不经 onPlay，无波及
+        ['cc-double-boom', R(ENEMY_ALL, [{ op: 'damage', amountField: 'dmg', target: 'allEnemies' }])],
+        ['tt12-unstableray', { dmgType: 'spell', ...R(ENEMY_ONE, [{ op: 'damage', range: [4, 6], target: 'chosenEnemy' }]) }],
+        // —— B2 多段与重复 ——
+        ['tt3-double-shot', dmgOne({ hitCount: 3 })],
+        ['tt3-chain-lightning', dmgOne({ hitCount: 2 })],
+        ['cc-ember-burst', R(ENEMY_ALL, [{ op: 'damage', amountField: 'dmg', target: 'allEnemies', recast: { on: 'kill', times: 1 } }])],
+        ['tt12-saturate', dmgOne({ recast: { on: 'kill', times: 1 } })],
+        ['tt12-elemburst', { dmgType: 'spell', ...R(ENEMY_ONE, [{ op: 'damage', amount: 2, target: 'randomEnemy', hits: { range: [4, 5] } }]) }],
+        // —— B3 治疗/护甲 ——
+        ['tt2-bloodblade', dmgOne({ lifesteal: true })],
+        ['tt7-bloodpotion', dmgOne({ lifesteal: true })],
+        ['tt7-holyglow', R(SELF, [{ op: 'heal', upTo: 12 }])],
+        ['cc-unmoved', R(SELF, [{ op: 'armor', amount: 4, guard: true }])],
+        ['tt7-ironcharge', R(SELF, [{ op: 'armor', amountField: 'armor' }, { op: 'draw', amountField: 'draw' }])],
+        ['tt7-bulwark', R(SELF, [{ op: 'armor', amountField: 'armor', decayAtTurnEnd: 4 }])],
+        ['tt2-block', R(SELF, [{ op: 'armor', guard: true }])],
+        ['tt3-holy-shield', R({ target: { side: 'self', area: false }, costModifiers: [{ kind: 'armorZeroFree' }] },
+          [{ op: 'armor', amountField: 'armor' }])],
+      ]);
+      backfillStructuredRuleDefinitions({
+        markerKey: 'sdt-cards-a3-battle-rules-v1-seeded',
+        ids: [...definitions.keys()],
+        definitions,
+        domains: ['battle', 'triggers'],
+        extraFieldsById: { 'tt12-unstableray': ['dmgType'], 'tt12-elemburst': ['dmgType'] },
+      });
+    },
 };
