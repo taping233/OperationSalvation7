@@ -1,5 +1,9 @@
 // Card resolution is isolated behind explicit state reads and domain commands.
 import { attackCue } from './battle.attack-cues.js';
+// G3（A3 第三批）：获取池谓词单源——parsePoolNoun 是「发现/随机获取/获得 N 张 ____」句式
+// 的限制卡池解析器（effect-steps.ctx.js 纯叶子模块，与文本路径 effect-steps 家族同一实现，
+// 避免两份池名词清单漂移）。
+import { parsePoolNoun } from './effect-steps.ctx.js';
 
 // —— schema v2 键位先行守卫（A2，2026-09-25；B1-B3 接线后按 op 收口，2026-09-25）——
 // card-rules.schema.js v2 已放行泛化键（docs/card-rules-v2-taxonomy-2026-09-25.md §4/§5）。
@@ -11,7 +15,12 @@ import { attackCue } from './battle.attack-cues.js';
 // ①G13 时点触发器（禁咒系「抽到时施放」）——由下方 V2_PENDING_TRIGGER_KEYS 拦截（onDraw 等）；
 // ②手牌诅咒聚合（cc-cursed-blade）与死亡转移中毒（cc-rot-seed）——无对应 onPlay 键，保持文本路径（A1 §6 白名单）；
 // ③noDrawNext 等非 7 枚举 debuff——schema 层就不放行（DRAW_ALLOWED_KEYS 无此键），不属本批。
-const INTERPRETER_ONPLAY_OPS = new Set(['damage', 'heal', 'armor', 'draw', 'status', 'discover', 'curse']);
+// G3（A3 第三批，2026-09-25）：acquire 获取族（resolveAcquireOperation）与 coins 金币接线。
+// B7（A3 第三批，2026-09-25）：G4 增益·祝福·能量族接线——blessing 走 resolveBlessingOperation
+// （combat.addBlessing 同一状态袋），energy/energyCap/maxHp 走引擎资源命令，deckCap 为记录型
+// no-op（唯一消费点在开战前编组，见分支注释）；coins 归 G3（上批已接，本批不重复接）。
+const INTERPRETER_ONPLAY_OPS = new Set(['damage', 'heal', 'armor', 'draw', 'status', 'discover', 'curse', 'acquire', 'coins',
+  'blessing', 'energy', 'energyCap', 'maxHp', 'deckCap']);
 const V2_PENDING_TRIGGER_KEYS = new Set(['onTurnStart', 'onBattleStart', 'onConsume', 'onDraw', 'onKill']);
 // damage 仍 pending：graveyard（墓地增伤，B10 墓地域口径）、schedule（延迟段，需回合调度钩子，B2 尾）；
 // hits.perFoe（每人释放一段）同为 pending——嵌套在 hits 内，需单独探查。
@@ -22,6 +31,17 @@ const PENDING_DRAW_KEYS = ['amount', 'untilHandN', 'handOps'];
 // 已全部由 resolveCurseOperation 消费——无 pending。空集保留登记位：新增 curse 键必须先在此登记，
 // 否则解释器会静默忽略（错结算），违背本守卫的存在目的。
 const PENDING_CURSE_KEYS = [];
+// acquire 逐键收口（G3）：schema 放行的 6 键全部由 resolveAcquireOperation 消费——
+// n/pool/dest 无条件消费；act 按 dest×act 组合门放行（无既有机制承载的组合在分支内显式 throw，
+// 见 resolveAcquireOperation 注释）；filter 预留键接受但行为透传（本批最简实现，见分支内注释）。
+const PENDING_ACQUIRE_KEYS = [];
+// coins 逐键收口（G3）：{op, n} 两键全部消费——无 pending。
+const PENDING_COINS_KEYS = [];
+// B7 逐键收口：blessing 的 schema 4 键（op/key/stacks/duration）由 resolveBlessingOperation 全部消费，
+// 资源族 {op, n} 两键由各资源分支全部消费——无 pending。空集保留登记位：新增键必须先在此登记，
+// 否则解释器会静默忽略（错结算），违背本守卫的存在目的。
+const PENDING_BLESSING_KEYS = [];
+const PENDING_RESOURCE_KEYS = [];
 
 // B1-B3 已接线的 heal/armor v2 键不再 pending；draw 的 v2 键、damage 的残余键与 curse 的逐键清单在此收口。
 function pendingOperationKeys(operation) {
@@ -34,6 +54,12 @@ function pendingOperationKeys(operation) {
   }
   if (operation.op === 'draw') return PENDING_DRAW_KEYS.filter(key => key in operation);
   if (operation.op === 'curse') return PENDING_CURSE_KEYS.filter(key => key in operation);
+  if (operation.op === 'acquire') return PENDING_ACQUIRE_KEYS.filter(key => key in operation);
+  if (operation.op === 'coins') return PENDING_COINS_KEYS.filter(key => key in operation);
+  if (operation.op === 'blessing') return PENDING_BLESSING_KEYS.filter(key => key in operation);
+  if (['energy', 'energyCap', 'maxHp', 'deckCap'].includes(operation.op)) {
+    return PENDING_RESOURCE_KEYS.filter(key => key in operation);
+  }
   return [];
 }
 
@@ -49,6 +75,11 @@ const CURSE_VERBS = {
   healban: n => `禁疗 ${n} 回合（无法回复生命）`,
   burn: n => `被灼烧（${n} 回合内每回合结束受 1 点固定伤害，不叠加）`,
 };
+
+// B7 blessing 两型（schema BLESSING_KEYS 六键的运行时收口，语义与 combat.js BUFF_META 单源）：
+// value 型叠层相加（addBlessing 第 4 参 turns>0 到期扣回）；timed 型取「剩余较大值」（n 即回合数）。
+const BLESSING_VALUE_KEYS = new Set(['atkUp', 'spellUp', 'reduce', 'dodge']);
+const BLESSING_TIMED_KEYS = new Set(['stealth', 'immune']);
 
 function assertStructuredRulesSupported(card) {
   const triggers = card?.rules?.triggers;
@@ -76,6 +107,15 @@ function createBattleResolution(ports) {
     fixedDamageType, hasCurse, getAliveFoes, getGrowth, addArmor, applyStatus, findCard, addTempCard, queueDiscover,
     splitClauses, applyTextEffects, registerTurnStart, registerBattle, castRandomSpells,
     drawCards, grantSha, hitFoe, drawOf, isAOE, damagePlayer, getPlayerHp, countDrawnSpells,
+    // G3（A3 第三批）端口：addDeckCard/shuffleDeck 洗入牌库（deck.insert 文本路径同一底层）；
+    // randomDiscoverCard 随机池/指定池单源抽卡（battle.selection-flow.js，pred 指定池与通用池
+    // isRandomObtainable 口径都在其内部）；addCoins 战斗币（与 applyKillRewards/bag 同一 G.coins 计数）；
+    // getMyClass 供「本职业/其它职业」池谓词判定（parsePoolNoun 第二参）。
+    addDeckCard, shuffleDeck, randomDiscoverCard, addCoins, getMyClass,
+    // B7（A3 第三批）端口：能量/上限资源命令——命令体与文本路径 res.energy/res.energyCap
+    // （effect-steps.tail.js 经 applyTextEffects 用的同一批引擎命令）、开战被动 addPlayerMaxHp
+    // 逐字同款（见 battle.engine.js resolution 端口装配处注释）。
+    addEnergy, addEnergyCap, addPlayerMaxHp,
     // B5 端口：combat 为引擎侧包装后的 combat 命名空间（与文本路径 effect-steps 同一份对象）——
     // addCurse 负责状态袋与 cursefx 彩闪、tickPoison 负责毒伤引爆、CURSES/CURSE_META 供随机池与图标单源。
     combat } = ports;
@@ -226,6 +266,190 @@ function createBattleResolution(ports) {
     return true;
   }
 
+  // —— A3 第三批（G3 acquire 族，2026-09-25）：结构化 acquire/coins 结算 ——
+  // 语义真源：docs/card-rules-v2-taxonomy-2026-09-25.md §3「卡牌获取与牌库」25 张效果一句话 + G3 行。
+  // 池谓词（B6 定版「池谓词复用 parsePoolNoun 语义；注意 isRandomObtainable 口径」）：
+  //   {kind:'moves', cost?} —— v1 discover 结构化池形状，与 selection-flow structuredPred 同款（武术 + 可选费用）；
+  //   其他非空 kind —— 中文池名词直透 parsePoolNoun（'武术'/'装备'/'火球'/'2费招式'/'能施加诅咒的招式'/
+  //   '传说或能力卡'…）；parsePoolNoun 未识别时再试 named 具体卡名通道（'二次爆炸'/'流光照影'——
+  //   文本路径 deck.gainNamed 的 find-by-name 口径，parsePoolNoun 名词清单不含具体卡名）；
+  //   仍无命中 → null = 通用随机池。
+  // 随机抽卡单源 randomDiscoverCard（battle.selection-flow.js）：pred 指定池排除 生物/事件/资源/衍生、
+  //   允许职业/传说特例（江湖救急类「其它职业」池必需）；无 pred 通用池内部走 isRandomObtainable
+  //   （排除 初始/职业/衍生/棱彩/能力卡/生物/unrandom）并另排 道具/资源——与文本路径发现/随机获取同源，
+  //   外层不再叠 isRandomObtainable（三重火球「2 张火球」的初始稀有度卡必须可指定获取）。
+  function acquirePoolPred(pool, myClass) {
+    if (!pool || typeof pool !== 'object' || typeof pool.kind !== 'string' || !pool.kind.trim()) return null;
+    if (pool.kind === 'moves') {
+      const cost = pool.cost;
+      return card => card.type === '武术' && (cost === undefined || (+card.cost || 0) === cost);
+    }
+    const noun = parsePoolNoun(pool.kind, myClass);
+    if (noun) return noun;
+    // named 具体卡名（熔岩爆破「获得 1 张『二次爆炸』」/流光斩「将流光照影洗入牌库」）：
+    // 精确同名卡存在才收窄为指定池，否则维持 null 交回通用池（与文本路径「未识别 → 通用池」一致）
+    const named = typeof getAllCards === 'function' && getAllCards().find(c => c.name === pool.kind);
+    return named ? card => card.name === pool.kind : null;
+  }
+
+  // dest 三向（G3 行「去向 hand|deck|discover」，缺省 discover——发现面板三选一是本域辨识度最高的
+  // 获取途径，与 v1 discover op 口径连续）：
+  //   'hand'    随机/指定直发置入手牌（addTempCard；江湖救急-改/基础开发/厄运/三重火球先例），同名可重复；
+  //   'deck'    洗入牌库（addDeckCard + shuffleDeck，deck.insert 文本路径同一底层）——仅 BOSS 战有牌库；
+  //             普通战无牌库时降级为直接置入手牌（deckDraw/grantSha 先例口径「普通战斗无牌库，改为直接获得」）；
+  //   'discover' 走发现面板 queueDiscover（面板原生 n 展开、防重、act/费用修饰）。
+  // act 修饰（G3 行「动作 play|playKeep|dup|zeroCost|decay|noInfuse」）按 dest×act 组合门放行：
+  //   discover：play/playKeep/dup（面板原生 act，pickDiscover 直接施放/施放+入手/×2 置手）、
+  //             zeroCost/decay（面板 zeroCost/decayEachTurn 费用修饰）——全部有既有机制承载；
+  //             noInfuse 不支持（发现面板置入无免注能透传键；文本先例灵能召唤实为随机直发，应写 dest:'hand'）。
+  //   hand：dup（本体+复制 ×2 置手，二刀流语义）、noInfuse（模板透传 _noInfuse，灵能召唤先例）；
+  //         play/playKeep 需要面板外的直接施放执行通道（既有文本路径一律经发现面板承载）——pending；
+  //         zeroCost/decay 需 cardOverrides/费用衰减登记（selection-flow 内部态，无对外端口）——pending。
+  //   deck：dup（×2 洗入）、zeroCost（洗入模板静态 cost:0——铁甲阵「费用均-1」同款改模板法，
+  //         卡在牌库中无费用修饰状态，抽出即 0 费）、noInfuse（模板透传）；
+  //         play/playKeep 同 hand 理由 pending；decay（逐回合 -1 费）对牌库中的卡无结算观测点——pending。
+  //   组合门在结算层显式 throw（schema 层不做 dest×act 组合校验，错数据必须炸出而非静默忽略——
+  //   与顶部 assertStructuredRulesSupported 同一设计哲学）。
+  // filter：schema 预留键，本批最简透传（接受键存在、行为上忽略）——卡池谓词已由 pool.kind 承载，
+  //   未来组合过滤（如 type+cost 复合、排除条件）落 G3 后续批时在此消费。
+  const ACQUIRE_ACTS_BY_DEST = {
+    hand: new Set(['dup', 'noInfuse']),
+    deck: new Set(['dup', 'zeroCost', 'noInfuse']),
+    discover: new Set(['play', 'playKeep', 'dup', 'zeroCost', 'decay']),
+  };
+
+  function resolveAcquireOperation(card, operation) {
+    const myClass = typeof getMyClass === 'function' ? getMyClass() : null;
+    const pred = acquirePoolPred(operation.pool, myClass);
+    const dest = operation.dest || 'discover';
+    const act = operation.act;
+    if (act !== undefined && !ACQUIRE_ACTS_BY_DEST[dest].has(act)) {
+      throw new TypeError(`Unsupported acquire act '${act}' for dest '${dest}' for card ${card.id || '<missing id>'}: 无既有机制承载（G3 后续批 pending）`);
+    }
+    // 面板日志的池名（文本路径 discover.pool 同款：名词去尾「的」+ 限制池括注）
+    const label = pred ? String(operation.pool.kind === 'moves' ? '招式' : operation.pool.kind).replace(/的$/, '') : '';
+    const poolSuffix = pred ? `【${esc(label)}】（限制卡池）` : '';
+    const drawOne = () => randomDiscoverCard(pred);
+    // act 在直发路径的模板修饰：zeroCost 洗入模板静态 0 费（铁甲阵改模板先例）；noInfuse 透传 _noInfuse
+    const decorate = tpl => {
+      if (act === 'zeroCost') return { ...tpl, cost: 0 };
+      if (act === 'noInfuse') return { ...tpl, _noInfuse: true };
+      return { ...tpl };
+    };
+
+    if (dest === 'discover') {
+      queueDiscover({
+        n: operation.n,
+        pred,
+        act: ['play', 'playKeep', 'dup'].includes(act) ? act : undefined,
+        zeroCost: act === 'zeroCost' ? true : undefined,
+        decayEachTurn: act === 'decay' ? true : undefined,
+        sourceCardId: card.id,
+      });
+      const actLabel = act === 'play' ? '发现并直接施放' : act === 'playKeep' ? '发现（施放 1 张，其余入手）'
+        : act === 'zeroCost' ? '发现（入手后费用变为 0）' : act === 'decay' ? '发现（每回合开始费用 -1）' : '发现';
+      log(`[[icon:question]] <b>${esc(card.name)}</b>：${actLabel} ${operation.n} 张${poolSuffix}卡牌`, 'sys');
+      return true;
+    }
+
+    if (dest === 'deck') {
+      // BOSS/普通双口径：BOSS 战洗入牌库并洗混；普通战无牌库，降级为直接置入手牌
+      //（deckDraw/grantSha 同款先例「普通战斗无牌库，改为直接获得」）。
+      const isBoss = readState().mode === 'boss';
+      const gained = [];
+      for (let k = 0; k < operation.n; k++) {
+        const c = drawOne();
+        if (!c) break;
+        const tpl = decorate(c);
+        for (let copy = 0; copy < (act === 'dup' ? 2 : 1); copy++) {
+          if (isBoss) addDeckCard(act === 'dup' && copy === 1 ? { ...tpl } : tpl);
+          else addTempCard(act === 'dup' && copy === 1 ? { ...tpl } : tpl);
+        }
+        gained.push(c.name);
+      }
+      if (gained.length) {
+        const counts = {};
+        gained.forEach(name => { counts[name] = (counts[name] || 0) + 1; });
+        const detail = Object.keys(counts).map(name => `【${esc(name)}】×${counts[name] * (act === 'dup' ? 2 : 1)}`).join('、');
+        if (isBoss) {
+          const deckSize = shuffleDeck();
+          log(`[[icon:recycle]] <b>${esc(card.name)}</b>：将 ${detail} 洗入牌库（牌库 ${deckSize} 张，已洗混）`, 'sys');
+        } else {
+          log(`[[icon:cards]] <b>${esc(card.name)}</b>：普通战斗无牌库，改为直接获得 ${detail}`, 'loot');
+        }
+      } else {
+        log(`[[icon:question]] <b>${esc(card.name)}</b>：卡池里没有符合条件的卡牌`, 'dim');
+      }
+      return true;
+    }
+
+    // dest:'hand'——随机/指定直发置入手牌（同名可重复：三重火球「2 张火球」必需）
+    const gained = [];
+    for (let k = 0; k < operation.n; k++) {
+      const c = drawOne();
+      if (!c) break;
+      addTempCard(decorate(c));
+      if (act === 'dup') addTempCard({ ...c });
+      gained.push(c.name);
+    }
+    if (gained.length) {
+      const counts = {};
+      gained.forEach(name => { counts[name] = (counts[name] || 0) + 1; });
+      const detail = Object.keys(counts).map(name => `【${esc(name)}】×${counts[name] * (act === 'dup' ? 2 : 1)}`).join('、');
+      log(`[[icon:cards]] <b>${esc(card.name)}</b>：获得 ${detail}${poolSuffix ? `（${esc(label)}池）` : ''}（战斗内临时卡，战后消散）`, 'loot');
+    } else {
+      log(`[[icon:question]] <b>${esc(card.name)}</b>：卡池里没有符合条件的卡牌`, 'dim');
+    }
+    return true;
+  }
+
+  // —— A3 第三批（B7 G4 增益·祝福·能量族，2026-09-25）：结构化 blessing op 结算 ——
+  // 与文本路径增益专支（effect-steps.curse.js buff.*、effect-steps.damage.js buff.dodge）共用
+  // 同一 combat.addBlessing 与同一状态袋（getPlayerStatus().status）：
+  // value 型（atkUp/spellUp/reduce/dodge，BUFF_META.value）叠层相加；第 4 参 turns>0 时按
+  // __timedBuffs 到期扣回，缺省 0 = 本场战斗；timed 型（stealth/immune，BUFF_META.timed）取
+  // 「剩余较大值」，n 即回合数（每回合结束 tickDurations 递减）。
+  // duration 缺省口径（逐 key 对齐文本路径既有实现）：
+  //   atkUp/spellUp/reduce → 本场战斗（buff.atkUp/buff.spellUp 无回合词时 turns=0；buff.reduce 恒本场）；
+  //   dodge → 本回合（buff.dodge 固定 turns=1，09-20 老板定版「闪避=免疫下一次攻击，按层计数」）；
+  //   stealth/immune → 1 回合（buff.stealth/buff.immune 无回合词时缺省 1）。
+  // stacks/duration 组合：value 型 stacks=层数、duration=持续回合（两键语义独立、同时消费）；
+  // timed 型无层数概念——duration 优先（回合语义），stacks 兜底按回合数解释（向前兼容防数据
+  // 作者用错字段，键不静默丢弃），两键同带时以 duration 为准。
+  // 日志：逐 key 逐字对齐文本路径 buff.* 模板（含「当前加成」读加祝福后的状态袋值）。
+  function resolveBlessingOperation(operation) {
+    const key = operation.key;
+    if (!BLESSING_VALUE_KEYS.has(key) && !BLESSING_TIMED_KEYS.has(key)) return false;
+    const pstat = getPlayerStatus();
+    if (BLESSING_TIMED_KEYS.has(key)) {
+      const turns = Number.isInteger(operation.duration) ? operation.duration
+        : Number.isInteger(operation.stacks) ? operation.stacks : 1;
+      combat.addBlessing(pstat, key, turns);
+      if (key === 'stealth') {
+        log(`[[icon:runner]] <b>祝福·潜行</b>：${turns} 回合内无法成为被攻击对象（造成伤害会破除）`, 'ok');
+      } else {
+        log(`[[icon:sparkles]] <b>祝福·免疫伤害</b>：${turns} 回合内不受到任何伤害`, 'ok');
+      }
+      return true;
+    }
+    const amount = Number.isInteger(operation.stacks) ? operation.stacks : 1;
+    const turns = Number.isInteger(operation.duration) ? operation.duration : (key === 'dodge' ? 1 : 0);
+    combat.addBlessing(pstat, key, amount, turns);
+    const durLabel = turns > 0 ? `${turns} 回合` : '本场战斗';
+    if (key === 'atkUp') {
+      log(`[[icon:swords]] <b>祝福·攻击力增加</b>：攻击力 +${amount}（${durLabel}，当前加成 ${pstat.status.atkUp}）`, 'ok');
+    } else if (key === 'spellUp') {
+      log(`[[icon:crystal]] <b>祝福·法伤增加</b>：法术伤害 +${amount}（${durLabel}，当前加成 ${pstat.status.spellUp}）`, 'ok');
+    } else if (key === 'reduce') {
+      log(`[[icon:plate]] <b>祝福·减伤</b>：每次受到的伤害 -${amount}（${durLabel}）`, 'ok');
+    } else {
+      // dodge：日志逐字对齐文本路径 buff.dodge（默认本回合口径不加回合括注；显式 duration≠1 时补注）
+      const durNote = Number.isInteger(operation.duration) && operation.duration !== 1 ? `（持续 ${turns} 回合）` : '';
+      log(`[[icon:shield]] <b>闪避</b>：接下来 ${amount} 次攻击将被完全避开${amount > 1 ? '（各消耗 1 层）' : ''}${durNote}`, 'ok');
+    }
+    return true;
+  }
+
   function* resolveCardSteps(card, target, infused, fuelCost, uid) {
 
     assertStructuredRulesSupported(card);
@@ -287,8 +511,11 @@ function createBattleResolution(ports) {
       const type = getDamageTypeMeta()[card.dmgType] ? card.dmgType : fixedDamageType;
       const damageCard = { ...card, desc: '' };
       for (const operation of structuredOnPlay) {
-        // curse 在循环 2（沉默门之后）由 resolveCurseOperation 结算——伤害先于诅咒（先伤害后诅咒）
-        if (['heal', 'armor', 'draw', 'status', 'discover', 'curse'].includes(operation.op)) continue;
+        // curse 在循环 2（沉默门之后）由 resolveCurseOperation 结算——伤害先于诅咒（先伤害后诅咒）；
+        // acquire/coins 同属循环 2（G3：获取/金币在沉默门后，沉默封印一切非攻击技能效果）；
+        // B7 的 blessing 与资源族同在循环 2（先伤害后增益，与文本路径步序一致）
+        if (['heal', 'armor', 'draw', 'status', 'discover', 'curse', 'acquire', 'coins',
+          'blessing', 'energy', 'energyCap', 'maxHp', 'deckCap'].includes(operation.op)) continue;
         if (operation.op !== 'damage' || (operation.amountField !== undefined && operation.amountField !== 'dmg')) {
           throw new TypeError(`Unsupported onPlay operation for card ${card.id || '<missing id>'}`);
         }
@@ -553,6 +780,55 @@ function createBattleResolution(ports) {
         // B5（A3 第二批）：结构化诅咒——7 诅咒 × target × randomKinds/double/burst/extend 全键在此消费
         if (operation.op === 'curse') {
           did = (yield* resolveCurseOperation(card, operation, target)) || did;
+          continue;
+        }
+        // G3（A3 第三批）：结构化获取（池谓词 parsePoolNoun 单源 / dest 三向 / act 组合门）
+        if (operation.op === 'acquire') {
+          did = resolveAcquireOperation(card, operation) || did;
+          continue;
+        }
+        // G3（A3 第三批）：coins 获得金币——{op, n}，与 applyKillRewards/bag 同一 G.coins 计数
+        if (operation.op === 'coins') {
+          addCoins(operation.n);
+          log(`[[icon:coin]] <b>${esc(card.name)}</b>：获得 ${operation.n} 币`, 'loot');
+          did = true;
+          continue;
+        }
+        // B7（A3 第三批）：结构化增益——六 key 全在此消费（resolveBlessingOperation，同一状态袋）
+        if (operation.op === 'blessing') {
+          did = resolveBlessingOperation(operation) || did;
+          continue;
+        }
+        // B7：能量 +n——引擎 addEnergy 命令（文本路径 res.energy 同款，不设上限夹逼，回合开始重置回满）
+        if (operation.op === 'energy') {
+          const current = addEnergy(operation.n);
+          log(`[[icon:bolt]] 获得 ${operation.n} 点能量（当前 ${current}）`, 'sys');
+          did = true;
+          continue;
+        }
+        // B7：能量上限 +n——引擎 addEnergyCap 命令（文本路径 res.energyCap 同款：上限与当前能量同加）
+        if (operation.op === 'energyCap') {
+          const currentMax = addEnergyCap(operation.n);
+          log(`[[icon:bolt]] 本场战斗能量上限 +${operation.n}（每回合 ${currentMax} 费）`, 'sys');
+          did = true;
+          continue;
+        }
+        // B7：生命上限 +n——引擎 addPlayerMaxHp 命令。口径（B7 默认）：上限 +n 同时回复 n 点
+        //（G.maxHp += n; G.heal(n)，引擎命令内部出「血量上限 +n（…并回复 n 点）」日志，本层不重复记）。
+        if (operation.op === 'maxHp') {
+          addPlayerMaxHp(operation.n);
+          did = true;
+          continue;
+        }
+        // B7：牌库上限 +n——记录型 no-op。考古：牌库上限唯一消费点在开战前编组
+        //（battle.lifecycle.js prepareDeckSelection → deckCapBonus()，只读「编入的迎战装备」desc，
+        // 混沌之眼路径；selDeckMax 每次编组重算，战斗内无持久承载）。战斗内打出无法追溯扩容
+        // 已定格的牌库：BOSS 战注明不追溯，普通战注明无牌库。
+        if (operation.op === 'deckCap') {
+          log(readState().mode === 'boss'
+            ? `[[icon:cards]] <b>${esc(card.name)}</b>：牌库上限在开战前编组阶段生效，战斗中 +${operation.n} 不追溯扩容`
+            : `[[icon:cards]] <b>${esc(card.name)}</b>：普通战斗没有牌库，牌库上限 +${operation.n} 无处生效`, 'dim');
+          did = true;
           continue;
         }
         if (!['heal', 'armor', 'draw'].includes(operation.op)) {

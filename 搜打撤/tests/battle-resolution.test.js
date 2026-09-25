@@ -16,7 +16,24 @@ function makeResolver(state) {
     startSurge: () => {}, getAllCards: () => [], isRandomObtainable: () => false,
     randomBattle: () => 0, getDamageTypes: () => ['武术'], getDamageTypeMeta: () => ({}), fixedDamageType: 'fixed',
     hasCurse: () => false, getAliveFoes: () => state.foes || [state.target], getGrowth: uid => state.growth?.[uid] || 0,
-    findCard: () => null, addTempCard: () => 'temp', queueDiscover: () => {},
+    findCard: () => null,
+    addTempCard: tpl => { events.push(['temp', tpl.name]); return `temp-${events.length}`; },
+    queueDiscover: job => events.push(['discover', job]),
+    // G3（A3 第三批）：acquire 族替身——洗入/洗混/随机池抽卡/金币/职业名；
+    // randomDiscoverCard 默认从 state.discoverPool 轮转发卡，便于断言多张获取的次序与数量。
+    addDeckCard: tpl => { events.push(['deckAdd', tpl.name]); return `deck-${events.length}`; },
+    shuffleDeck: () => { events.push(['shuffle']); return state.deckSize ?? 0; },
+    randomDiscoverCard: pred => {
+      const pool = (state.discoverPool || []).filter(card => !pred || pred(card));
+      if (!pool.length) return null;
+      const index = (state.discoverCursor ?? 0) % pool.length;
+      const card = pool[index];
+      state.discoverCursor = index + 1;
+      events.push(['drawPool', card.name]);
+      return card;
+    },
+    addCoins: n => { state.coins = (state.coins || 0) + n; events.push(['coins', n]); },
+    getMyClass: () => state.myClass ?? null,
     splitClauses: () => ({ immediate: ['可观察顺序'], turnStart: [], battle: [], onInfused: [], onDraw: [], skill: [] }),
     applyTextEffects: () => { events.push(['text']); state.onText?.(); return { did: true }; },
     registerTurnStart: () => {}, registerBattle: () => false, castRandomSpells: () => Promise.resolve(),
@@ -31,6 +48,15 @@ function makeResolver(state) {
     },
     drawOf: () => 0, isAOE: () => false,
     addArmor: (amount, opts) => events.push(opts ? ['armor', amount, opts] : ['armor', amount]),
+    // B7（A3 第三批）：资源命令替身——energy/energyCap 记事件并回传累计值；maxHp 模拟引擎
+    // addPlayerMaxHp 命令口径（上限 +n 同时回复 n；初值 10 与 getPlayerHp 缺省对齐）。
+    addEnergy: amount => { state.energy = (state.energy ?? 0) + amount; events.push(['energy', amount]); return state.energy; },
+    addEnergyCap: amount => { state.maxEnergy = (state.maxEnergy ?? 0) + amount; events.push(['energyCap', amount]); return state.maxEnergy; },
+    addPlayerMaxHp: n => {
+      state.playerMaxHp = (state.playerMaxHp ?? 10) + n;
+      state.playerHp = (state.playerHp ?? 10) + n;
+      events.push(['maxHp', n]);
+    },
     damagePlayer: amount => events.push(['selfDamage', amount]),
     getPlayerHp: () => state.playerHp ?? 10,
     countDrawnSpells: () => state.drawnSpellCount ?? 0,
@@ -682,5 +708,334 @@ describe('A3 第二批（B5 诅咒族）：结构化 onPlay curse op', () => {
     const card = curseCard({ op: 'curse', curse: 'bleed', stacks: 1, target: 'chosenEnemy' });
     card.rules.triggers.onDraw = [];
     expect(() => pending.resolver(card, pending.target, false, 0, null)).toThrow(TypeError);
+  });
+});
+
+/* —— A3 第三批（G3 acquire 族，2026-09-25）：结构化 onPlay acquire/coins op ——
+ * 语义真源 docs/card-rules-v2-taxonomy-2026-09-25.md §3「卡牌获取与牌库」25 张效果一句话 + G3 行。
+ * 池谓词复用 parsePoolNoun 语义（B6 定版）；dest 三向 hand|deck|discover（BOSS/普通战双口径：
+ * 普通战无牌库 dest:'deck' 降级为直接获得，deckDraw/grantSha 先例口径）。 */
+describe('A3 第三批（G3 acquire 族）：结构化 onPlay acquire/coins op', () => {
+  const setup = ({ mode = 'boss', discoverPool = [], playerStatus = { name: '我', status: {} }, myClass = null } = {}) => {
+    const callState = {
+      current: { mode, playedMovesThisTurn: 0, infuseFuels: 0, grave: [] },
+      playerStatus, target: { name: '靶', hp: 20, maxHp: 20, dead: false, status: {} },
+      foes: [{ name: '靶', hp: 20, maxHp: 20, dead: false, status: {} }],
+      discoverPool, myClass,
+    };
+    return { callState, ...makeResolver(callState) };
+  };
+  const acquireCard = operation => ({
+    id: 'v2-acquire', name: '获取测试', type: '法术', desc: '展示描述',
+    rules: { version: 1, battle: { target: { side: 'self', area: false } }, triggers: { onPlay: [operation] } },
+  });
+  const logTexts = events => events.filter(event => event[0] === 'log').map(event => String(event[1]));
+  const CARD = name => ({ id: `pool-${name}`, name, type: '法术', rarity: '稀有', desc: '造成 1 点法术伤害。' });
+
+  it('守卫摘除：acquire 与 coins 不再被 PENDING 守卫抛出，其余 pending op 仍抛出', () => {
+    const state = setup({ discoverPool: [CARD('火球')] });
+    expect(() => state.resolver(acquireCard({ op: 'acquire', n: 1, pool: { kind: '随机' } }), state.callState.target, false, 0, null)).not.toThrow();
+    expect(() => state.resolver(acquireCard({ op: 'coins', n: 2 }), state.callState.target, false, 0, null)).not.toThrow();
+    // 其余 pending 族不动：summon 仍必须炸出（守卫存在目的回归锚点）
+    //（blessing 已随 B7 G4 批接线放行，不再充当 pending 锚点——见下方 B7 describe）
+    expect(() => state.resolver(acquireCard({ op: 'summon', name: '步兵', count: 1 }), state.callState.target, false, 0, null)).toThrow(TypeError);
+  });
+
+  it('dest 缺省 discover：queueDiscover 收到 n/pred 面板任务（实打）', () => {
+    const wushu = { ...CARD('斩'), type: '武术' };
+    const spell = CARD('火球');
+    const state = setup({ discoverPool: [wushu, spell] });
+    state.resolver(acquireCard({ op: 'acquire', n: 1, pool: { kind: '武术' } }), state.callState.target, false, 0, null);
+    const jobs = state.events.filter(event => event[0] === 'discover').map(event => event[1]);
+    expect(jobs).toHaveLength(1);
+    expect(jobs[0]).toMatchObject({ n: 1 });
+    expect(jobs[0].pred({ type: '武术' }), 'parsePoolNoun 武术谓词透传给面板').toBe(true);
+    expect(jobs[0].pred({ type: '法术' })).toBe(false);
+    expect(state.events.some(event => event[0] === 'temp'), '发现路径不直接入手').toBe(false);
+    expect(logTexts(state.events).some(t => t.includes('发现 1 张') && t.includes('【武术】'))).toBe(true);
+  });
+
+  it("dest:'hand'：n 多张直发置入手牌，同名可重复（三重火球语义，实打）", () => {
+    const fireball = { ...CARD('火球'), name: '火球' };
+    const state = setup({ discoverPool: [fireball] });
+    state.resolver(acquireCard({ op: 'acquire', n: 2, dest: 'hand', pool: { kind: '火球' } }), state.callState.target, false, 0, null);
+    expect(state.events.filter(event => event[0] === 'temp'), 'n=2 → 置入 2 张').toEqual([['temp', '火球'], ['temp', '火球']]);
+    expect(logTexts(state.events).some(t => t.includes('获得 【火球】×2'))).toBe(true);
+  });
+
+  it("dest:'deck'：BOSS 战洗入牌库并洗混（实打）", () => {
+    const state = setup({ mode: 'boss', discoverPool: [CARD('流光照影'), CARD('另一张')] });
+    state.resolver(acquireCard({ op: 'acquire', n: 1, dest: 'deck', pool: { kind: '流光照影' } }), state.callState.target, false, 0, null);
+    expect(state.events.filter(event => event[0] === 'deckAdd')).toEqual([['deckAdd', '流光照影']]);
+    expect(state.events.some(event => event[0] === 'shuffle'), '洗混牌库').toBe(true);
+    expect(logTexts(state.events).some(t => t.includes('洗入牌库'))).toBe(true);
+  });
+
+  it("dest:'deck' 普通战双口径：无牌库降级为直接置入手牌（deckDraw/grantSha 先例）", () => {
+    const state = setup({ mode: 'normal', discoverPool: [CARD('流光照影')] });
+    state.resolver(acquireCard({ op: 'acquire', n: 1, dest: 'deck', pool: { kind: '流光照影' } }), state.callState.target, false, 0, null);
+    expect(state.events.filter(event => event[0] === 'temp'), '普通战无牌库 → 直接获得').toEqual([['temp', '流光照影']]);
+    expect(state.events.some(event => event[0] === 'deckAdd')).toBe(false);
+    expect(state.events.some(event => event[0] === 'shuffle')).toBe(false);
+    expect(logTexts(state.events).some(t => t.includes('普通战斗无牌库，改为直接获得'))).toBe(true);
+  });
+
+  it("pool:{kind:'moves', cost} v1 形状兼容 + 未识别 kind 走通用随机池", () => {
+    const cheapMove = { ...CARD('连斩'), type: '武术', cost: 0 };
+    const priceyMove = { ...CARD('重斩'), type: '武术', cost: 3 };
+    const spell = CARD('火球');
+    const state = setup({ discoverPool: [cheapMove, priceyMove, spell] });
+    state.resolver(acquireCard({ op: 'acquire', n: 1, dest: 'hand', pool: { kind: 'moves', cost: 0 } }), state.callState.target, false, 0, null);
+    expect(state.events.filter(event => event[0] === 'temp'), 'moves+cost:0 只取 0 费武术').toEqual([['temp', '连斩']]);
+
+    const generic = setup({ discoverPool: [spell] });
+    generic.resolver(acquireCard({ op: 'acquire', n: 1, dest: 'hand', pool: { kind: '随机' } }), generic.callState.target, false, 0, null);
+    expect(generic.events.filter(event => event[0] === 'temp'), '未识别 kind → 通用池').toEqual([['temp', '火球']]);
+  });
+
+  it("act:'dup' 手牌本体+复制 ×2 置手；act:'noInfuse' 透传 _noInfuse（灵能召唤先例）", () => {
+    const state = setup({ discoverPool: [CARD('武术牌')] });
+    state.resolver(acquireCard({ op: 'acquire', n: 1, dest: 'hand', act: 'dup', pool: { kind: '随机' } }), state.callState.target, false, 0, null);
+    expect(state.events.filter(event => event[0] === 'temp'), 'dup：本体+复制共 2 张').toHaveLength(2);
+
+    const infuseFree = setup({ discoverPool: [{ ...CARD('注能卡'), infuse: 1 }] });
+    infuseFree.resolver(acquireCard({ op: 'acquire', n: 1, dest: 'hand', act: 'noInfuse', pool: { kind: '注能' } }), infuseFree.callState.target, false, 0, null);
+    expect(infuseFree.events.filter(event => event[0] === 'temp')).toEqual([['temp', '注能卡']]);
+  });
+
+  it("dest:'discover' 面板 act/费用修饰透传（play/zeroCost），面板外 pending 组合炸出", () => {
+    const play = setup({ discoverPool: [CARD('形态')] });
+    play.resolver(acquireCard({ op: 'acquire', n: 1, dest: 'discover', act: 'play', pool: { kind: '形态' } }), play.callState.target, false, 0, null);
+    expect(play.events.filter(event => event[0] === 'discover')[0][1]).toMatchObject({ act: 'play' });
+
+    const zero = setup({ discoverPool: [CARD('低费')] });
+    zero.resolver(acquireCard({ op: 'acquire', n: 1, dest: 'discover', act: 'zeroCost', pool: { kind: '1费招式' } }), zero.callState.target, false, 0, null);
+    expect(zero.events.filter(event => event[0] === 'discover')[0][1]).toMatchObject({ zeroCost: true });
+
+    // 洗入模板静态 0 费（铁甲阵改模板先例）——deck+zeroCost 放行
+    const deckZero = setup({ mode: 'boss', discoverPool: [{ ...CARD('带价卡'), cost: 2 }] });
+    deckZero.resolver(acquireCard({ op: 'acquire', n: 1, dest: 'deck', act: 'zeroCost', pool: { kind: '随机' } }), deckZero.callState.target, false, 0, null);
+    expect(deckZero.events.filter(event => event[0] === 'deckAdd')[0][1]).toBe('带价卡');
+    const deckJob = deckZero.events.filter(event => event[0] === 'deckAdd')[0];
+    expect(deckJob).toEqual(['deckAdd', '带价卡']);
+
+    // 无既有机制承载的 dest×act 组合在结算层显式失败（与守卫同风格：错数据炸出而非静默忽略）
+    const pendingHand = setup({ discoverPool: [CARD('牌')] });
+    expect(() => pendingHand.resolver(
+      acquireCard({ op: 'acquire', n: 1, dest: 'hand', act: 'play', pool: { kind: '随机' } }),
+      pendingHand.callState.target, false, 0, null,
+    )).toThrow(TypeError);
+    const pendingDeck = setup({ discoverPool: [CARD('牌')] });
+    expect(() => pendingDeck.resolver(
+      acquireCard({ op: 'acquire', n: 1, dest: 'deck', act: 'decay', pool: { kind: '随机' } }),
+      pendingDeck.callState.target, false, 0, null,
+    )).toThrow(TypeError);
+    const pendingDiscoverNoInfuse = setup({ discoverPool: [CARD('牌')] });
+    expect(() => pendingDiscoverNoInfuse.resolver(
+      acquireCard({ op: 'acquire', n: 1, dest: 'discover', act: 'noInfuse', pool: { kind: '随机' } }),
+      pendingDiscoverNoInfuse.callState.target, false, 0, null,
+    )).toThrow(TypeError);
+  });
+
+  it('池空兜底：dim 日志不炸结算；coins：获得 N 币入账（实打）', () => {
+    const empty = setup({ discoverPool: [] });
+    empty.resolver(acquireCard({ op: 'acquire', n: 1, dest: 'hand', pool: { kind: '随机' } }), empty.callState.target, false, 0, null);
+    expect(empty.events.some(event => event[0] === 'temp')).toBe(false);
+    expect(logTexts(empty.events).some(t => t.includes('卡池里没有符合条件的卡牌'))).toBe(true);
+
+    const coins = setup({});
+    coins.resolver(acquireCard({ op: 'coins', n: 3 }), coins.callState.target, false, 0, null);
+    expect(coins.callState.coins, 'G.coins 计数入账').toBe(3);
+    expect(coins.events.filter(event => event[0] === 'coins')).toEqual([['coins', 3]]);
+    expect(logTexts(coins.events).some(t => t.includes('[[icon:coin]]') && t.includes('获得 3 币'))).toBe(true);
+
+    // 沉默封印：acquire/coins 与 heal/armor/draw 同门——沉默门后的技能效果
+    const silenced = setup({ discoverPool: [CARD('牌')], playerStatus: { name: '我', status: { silence: 1 } } });
+    silenced.resolver({
+      id: 'v2-silenced-acquire', name: '获取测试', type: '法术', desc: '展示描述',
+      rules: { version: 1, battle: { target: { side: 'self', area: false } }, triggers: { onPlay: [
+        { op: 'acquire', n: 1, pool: { kind: '随机' } }, { op: 'coins', n: 3 },
+      ] } },
+    }, silenced.callState.target, false, 0, null);
+    expect(silenced.events.some(event => ['temp', 'discover', 'coins'].includes(event[0]))).toBe(false);
+    expect(logTexts(silenced.events).some(t => t.includes('被沉默封印'))).toBe(true);
+  });
+});
+
+/* —— A3 第三批（B7 G4 增益·祝福·能量族，2026-09-25）：结构化 onPlay blessing / 资源族 op ——
+ * 运行时语义对齐 combat.addBlessing（BUFF_META value/timed 两型）与文本路径增益专支
+ * （effect-steps.curse.js buff.*、effect-steps.damage.js buff.dodge、effect-steps.tail.js res.*）；
+ * 资源族走引擎命令端口（addEnergy/addEnergyCap/addPlayerMaxHp）。coins 归 G3（见其 describe）。
+ * 每 op 至少 1 正 1 反；duration/stacks 组合与 maxHp 回血口径单独成例。 */
+describe('A3 第三批（B7）：结构化 onPlay blessing 与资源族 op', () => {
+  const setup = (extra = {}) => {
+    const target = { hp: 20, dead: false, status: {} };
+    const callState = {
+      current: { mode: 'boss', playedMovesThisTurn: 0, infuseFuels: 0, grave: [] },
+      playerStatus: { name: '我', status: {} }, target, ...extra,
+    };
+    return { target, callState, playerStatus: callState.playerStatus, ...makeResolver(callState) };
+  };
+  const selfCard = (operation, desc = '展示描述') => ({
+    id: 'v2-g4', name: '增益测试', type: '法术', desc,
+    rules: { version: 1, battle: { target: { side: 'self', area: false } }, triggers: { onPlay: [operation] } },
+  });
+  const logTexts = events => events.filter(event => event[0] === 'log').map(event => String(event[1]));
+
+  it('blessing atkUp：stacks 叠层入状态袋（正），desc 攻击句不双算；duration 走到期扣回（组合）', () => {
+    const state = setup();
+    state.resolver(selfCard({ op: 'blessing', key: 'atkUp', stacks: 3 }, '攻（+99）。'), state.target, false, 0, null);
+    expect(state.playerStatus.status.atkUp, 'combat.addBlessing value 型叠层').toBe(3);
+    expect(state.playerStatus.__timedBuffs ?? null, '无 duration → 本场战斗不挂到期记录').toBeNull();
+    expect(logTexts(state.events).some(t => t.includes('[[icon:swords]]') && t.includes('攻击力 +3（本场战斗，当前加成 3）'))).toBe(true);
+    expect(state.events.some(event => event[0] === 'text'), '结构化在位时文本攻击句不复算').toBe(false);
+
+    const timed = setup();
+    timed.resolver(selfCard({ op: 'blessing', key: 'atkUp', stacks: 2, duration: 2 }), timed.target, false, 0, null);
+    expect(timed.playerStatus.status.atkUp).toBe(2);
+    expect(timed.playerStatus.__timedBuffs, 'duration → __timedBuffs 到期扣回记录（tickDurations 同款）').toEqual([{ key: 'atkUp', amount: 2, turns: 2 }]);
+    expect(logTexts(timed.events).some(t => t.includes('攻击力 +2（2 回合'))).toBe(true);
+  });
+
+  it('blessing spellUp：法伤加成叠加相加并读「当前加成」（正；反例口径：不取较大）', () => {
+    const state = setup();
+    state.resolver(selfCard({ op: 'blessing', key: 'spellUp', stacks: 1 }), state.target, false, 0, null);
+    state.resolver(selfCard({ op: 'blessing', key: 'spellUp', stacks: 2 }), state.target, false, 0, null);
+    expect(state.playerStatus.status.spellUp, 'value 型 1+2=3（叠加相加，与文本路径 buff.spellUp 同一 API）').toBe(3);
+    expect(logTexts(state.events).some(t => t.includes('[[icon:crystal]]') && t.includes('法术伤害 +2（本场战斗，当前加成 3）'))).toBe(true);
+  });
+
+  it('blessing stealth：duration 定回合数（正）；已有更长潜行取较大不缩短（反）', () => {
+    const state = setup();
+    state.resolver(selfCard({ op: 'blessing', key: 'stealth', duration: 2 }), state.target, false, 0, null);
+    expect(state.playerStatus.status.stealth, 'timed 型：n 即回合数').toBe(2);
+    expect(logTexts(state.events).some(t => t.includes('[[icon:runner]]') && t.includes('祝福·潜行') && t.includes('2 回合内无法成为被攻击对象'))).toBe(true);
+
+    const longer = setup({ playerStatus: { name: '我', status: { stealth: 3 } } });
+    longer.resolver(selfCard({ op: 'blessing', key: 'stealth', duration: 1 }), longer.target, false, 0, null);
+    expect(longer.playerStatus.status.stealth, '已有 3 回合潜行不被 1 回合缩短（addBlessing timed 取较大）').toBe(3);
+  });
+
+  it('blessing immune：免疫 N 回合（正）；timed 型 stacks 兜底按回合数解释（组合）', () => {
+    const state = setup();
+    state.resolver(selfCard({ op: 'blessing', key: 'immune', duration: 1 }), state.target, false, 0, null);
+    expect(state.playerStatus.status.immune).toBe(1);
+    expect(logTexts(state.events).some(t => t.includes('[[icon:sparkles]]') && t.includes('祝福·免疫伤害') && t.includes('1 回合内不受到任何伤害'))).toBe(true);
+
+    const stacked = setup();
+    stacked.resolver(selfCard({ op: 'blessing', key: 'immune', stacks: 2 }), stacked.target, false, 0, null);
+    expect(stacked.playerStatus.status.immune, '无 duration 时 stacks 兜底为回合数（timed 型无层数，键不静默丢弃）').toBe(2);
+  });
+
+  it('blessing dodge：按层计数本回合有效（正）；显式 duration 覆盖本回合缺省（组合）', () => {
+    const state = setup();
+    state.resolver(selfCard({ op: 'blessing', key: 'dodge', stacks: 2 }), state.target, false, 0, null);
+    expect(state.playerStatus.status.dodge).toBe(2);
+    expect(state.playerStatus.__timedBuffs, '文本路径 buff.dodge 同款：turns=1 本回合到期').toEqual([{ key: 'dodge', amount: 2, turns: 1 }]);
+    expect(logTexts(state.events).some(t => t.includes('[[icon:shield]]') && t.includes('接下来 2 次攻击将被完全避开（各消耗 1 层）'))).toBe(true);
+
+    const lasting = setup();
+    lasting.resolver(selfCard({ op: 'blessing', key: 'dodge', stacks: 1, duration: 3 }), lasting.target, false, 0, null);
+    expect(lasting.playerStatus.__timedBuffs, '显式 duration 覆盖本回合缺省口径').toEqual([{ key: 'dodge', amount: 1, turns: 3 }]);
+    expect(logTexts(lasting.events).some(t => t.includes('（持续 3 回合）'))).toBe(true);
+  });
+
+  it('blessing reduce：每次受伤 -N 本场（正）；带 duration 时挂到期扣回（组合）', () => {
+    const state = setup();
+    state.resolver(selfCard({ op: 'blessing', key: 'reduce', stacks: 2 }), state.target, false, 0, null);
+    expect(state.playerStatus.status.reduce).toBe(2);
+    expect(state.playerStatus.__timedBuffs ?? null, '无 duration → 本场战斗').toBeNull();
+    expect(logTexts(state.events).some(t => t.includes('[[icon:plate]]') && t.includes('祝福·减伤') && t.includes('每次受到的伤害 -2（本场战斗）'))).toBe(true);
+
+    const timed = setup();
+    timed.resolver(selfCard({ op: 'blessing', key: 'reduce', stacks: 1, duration: 2 }), timed.target, false, 0, null);
+    expect(timed.playerStatus.__timedBuffs).toEqual([{ key: 'reduce', amount: 1, turns: 2 }]);
+  });
+
+  it('energy：+n 入当前能量（正）；沉默封印整段（反）', () => {
+    const state = setup();
+    state.resolver(selfCard({ op: 'energy', n: 2 }), state.target, false, 0, null);
+    expect(state.callState.energy, '资源命令入账（不设上限夹逼，回合开始重置回满）').toBe(2);
+    expect(state.events.filter(event => event[0] === 'energy')).toEqual([['energy', 2]]);
+    expect(logTexts(state.events).some(t => t.includes('[[icon:bolt]] 获得 2 点能量（当前 2）'))).toBe(true);
+
+    const silenced = setup({ playerStatus: { name: '我', status: { silence: 1 } } });
+    silenced.resolver(selfCard({ op: 'energy', n: 2 }), silenced.target, false, 0, null);
+    expect(silenced.events.some(event => event[0] === 'energy'), '沉默门在资源段之前').toBe(false);
+    expect(logTexts(silenced.events).some(t => t.includes('被沉默封印'))).toBe(true);
+  });
+
+  it('energyCap：上限 +n 且当前能量同加（引擎命令口径），日志带每回合费用（正）；沉默（反）', () => {
+    const state = setup();
+    state.resolver(selfCard({ op: 'energyCap', n: 1 }), state.target, false, 0, null);
+    expect(state.callState.maxEnergy).toBe(1);
+    expect(state.events.filter(event => event[0] === 'energyCap')).toEqual([['energyCap', 1]]);
+    expect(logTexts(state.events).some(t => t.includes('[[icon:bolt]] 本场战斗能量上限 +1（每回合 1 费）'))).toBe(true);
+
+    const silenced = setup({ playerStatus: { name: '我', status: { silence: 1 } } });
+    silenced.resolver(selfCard({ op: 'energyCap', n: 1 }), silenced.target, false, 0, null);
+    expect(silenced.events.some(event => event[0] === 'energyCap')).toBe(false);
+  });
+
+  it('maxHp：上限 +n 同时回复 n（回血口径与引擎 addPlayerMaxHp 命令一致）（正）；沉默（反）', () => {
+    const state = setup({ playerHp: 4 });
+    state.resolver(selfCard({ op: 'maxHp', n: 10 }), state.target, false, 0, null);
+    expect(state.events.filter(event => event[0] === 'maxHp')).toEqual([['maxHp', 10]]);
+    expect(state.callState.playerMaxHp, '上限 10 → 20').toBe(20);
+    expect(state.callState.playerHp, '当前 4 → 14（上限 +n 同时回复 n）').toBe(14);
+
+    const silenced = setup({ playerStatus: { name: '我', status: { silence: 1 } } });
+    silenced.resolver(selfCard({ op: 'maxHp', n: 10 }), silenced.target, false, 0, null);
+    expect(silenced.events.some(event => event[0] === 'maxHp')).toBe(false);
+  });
+
+  it('deckCap：BOSS 战注明编组阶段生效不追溯（正口径）；普通战注明无牌库（反口径）——均无状态变更', () => {
+    const boss = setup();
+    boss.resolver(selfCard({ op: 'deckCap', n: 5 }), boss.target, false, 0, null);
+    expect(logTexts(boss.events).some(t => t.includes('牌库上限在开战前编组阶段生效') && t.includes('+5 不追溯扩容'))).toBe(true);
+
+    const normal = setup({ current: { mode: 'normal', playedMovesThisTurn: 0, infuseFuels: 0, grave: [] } });
+    normal.resolver(selfCard({ op: 'deckCap', n: 5 }), normal.target, false, 0, null);
+    expect(logTexts(normal.events).some(t => t.includes('普通战斗没有牌库'))).toBe(true);
+  });
+
+  it('damage + blessing 复合：按 onPlay 数组顺序先伤害后增益（循环 1 → 沉默门 → 循环 2）', () => {
+    const state = setup();
+    const card = {
+      id: 'v2-g4-combo', name: '炽焰剑', type: '武术', dmgType: 'fixed', desc: '展示描述',
+      rules: { version: 1, battle: { target: { side: 'enemy', area: false } }, triggers: { onPlay: [
+        { op: 'damage', amount: 5, target: 'chosenEnemy' },
+        { op: 'blessing', key: 'atkUp', stacks: 2 },
+      ] } },
+    };
+    state.resolver(card, state.target, false, 0, null);
+    const damageAt = state.events.findIndex(event => event[0] === 'damage');
+    const blessingAt = state.events.findIndex(event => event[0] === 'log' && String(event[1]).includes('祝福·攻击力增加'));
+    expect(damageAt).toBeGreaterThanOrEqual(0);
+    expect(blessingAt, '伤害段先于增益段').toBeGreaterThan(damageAt);
+    expect(state.playerStatus.status.atkUp).toBe(2);
+  });
+
+  it('blessing：沉默封印整段（反）——循环 2 在沉默门后，状态袋与日志均不产生', () => {
+    const silenced = setup({ playerStatus: { name: '我', status: { silence: 1 } } });
+    silenced.resolver(selfCard({ op: 'blessing', key: 'atkUp', stacks: 3 }), silenced.target, false, 0, null);
+    expect(silenced.playerStatus.status.atkUp ?? 0, '沉默门先于增益段（与文本路径 buff.* 同门）').toBe(0);
+    expect(logTexts(silenced.events).some(t => t.includes('被沉默封印'))).toBe(true);
+    expect(logTexts(silenced.events).some(t => t.includes('祝福·攻击力增加'))).toBe(false);
+  });
+
+  it('守卫：B7 五 op 已放行不再抛错；summon 等 pending 族仍逐 op 抛出', () => {
+    const ok = setup();
+    for (const operation of [
+      { op: 'blessing', key: 'atkUp', stacks: 1 },
+      { op: 'energy', n: 1 },
+      { op: 'energyCap', n: 1 },
+      { op: 'maxHp', n: 1 },
+      { op: 'deckCap', n: 1 },
+    ]) {
+      expect(() => ok.resolver(selfCard(operation), ok.target, false, 0, null), operation.op).not.toThrow();
+    }
+    const pending = setup();
+    expect(() => pending.resolver(selfCard({ op: 'summon', name: '步兵', count: 1 }), pending.target, false, 0, null)).toThrow(TypeError);
   });
 });

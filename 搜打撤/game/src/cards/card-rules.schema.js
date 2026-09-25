@@ -44,7 +44,10 @@ const STACKING_CURSE_KEYS = new Set(['bleed', 'poison']);
 const CONDITION_KEYS = new Set(['foeHpBelow', 'foeHpHalf', 'foeStatus', 'foeFullHp']);
 const DAMAGE_TARGET_KEYS = new Set(['chosenEnemy', 'allEnemies', 'randomEnemy']);
 const CURSE_TARGET_KEYS = new Set(['chosenEnemy', 'allEnemies', 'randomEnemy', 'self']);
-// v2 —— 键位已定、解释分支 pending 的操作族（schema 放行 + 解释器 throw，见设计文档 pending 清单）
+// v2 —— 键位已定的操作族（schema 放行 + 逐键校验）。解释器进度：acquire/blessing/
+// energy/energyCap/maxHp/deckCap/coins 已接线（A3 G3/G4 批，battle.resolution.js）；
+// execute/summon/transform/registerRule/extraTurn 仍 pending throw（后续批）。
+// 集合名保留 PENDING_ 前缀为兼容（路由到 validatePendingOperation 的键校验分支）。
 const PENDING_ONPLAY_OPS = new Set(['acquire', 'blessing', 'energy', 'energyCap', 'maxHp', 'deckCap',
   'execute', 'summon', 'transform', 'registerRule', 'extraTurn', 'coins']);
 const PENDING_OP_ALLOWED_KEYS = new Map([
@@ -578,7 +581,8 @@ function validateEquipRules(equip, card, error) {
  * v2 是 v1 的严格增量超集：v1 键集与校验语义原样保留（既有 21 张 v1 卡数据全部继续通过），
  * 新增键位逐键进白名单并做参数校验。`rules.version` 仍必须等于 1——v2 以「合并校验器 +
  * 解释器 pending 守卫」承担兼容，版本字段留给未来破坏性 v3（取舍见设计文档）。
- * 键位已定但解释分支未落地的操作（pending）在校验层放行、解释器遇到时 throw。
+ * 键位已定的操作族在校验层放行并逐键校验；解释器接线进度随 A3 各批次推进
+ * （已接线的在 battle.resolution.js，仍 pending 的遇卡即 throw 防静默错结算）。
  * Returns { ok, errors, pending }. No DOM or game runtime state is read.
  */
 export function validateCardRules(card) {

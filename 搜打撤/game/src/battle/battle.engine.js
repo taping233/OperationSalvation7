@@ -746,6 +746,24 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     },
     findCard, addTempCard, queueDiscover: value => discoverQueue.push(value), splitClauses, applyTextEffects,
     registerTurnStart, registerBattle, castRandomSpells, drawCards, grantSha, hitFoe,
+    // G3（A3 第三批）：acquire 族端口——洗入牌库与洗混（deck.insert 文本路径同一底层）、
+    // 随机池/指定池单源抽卡（selectionFlow.randomDiscoverCard 转发同一函数）、
+    // 战斗币（与 applyKillRewards/bag 同一 G.coins 计数）、职业名（「本职业/其它职业」池谓词）。
+    addDeckCard,
+    shuffleDeck: () => { set$drawPile(shuffle(drawPile)); return drawPile.length; },
+    randomDiscoverCard,
+    addCoins: n => { G.coins = (G.coins || 0) + n; },
+    getMyClass: () => G.myClass || null,
+    // B7（A3 第三批）：能量/上限资源命令端口——命令体与文本路径 applyTextEffects 的
+    // addEnergy/addEnergyCap、开战被动 addPlayerMaxHp（上限 +n 同时回复 n）逐字同款，
+    // 保证结构化 op 与文本路径对同一引擎状态（energy/maxEnergy/G.maxHp）结算一致。
+    addEnergy: amount => { set$energy(energy + (amount)); return energy; },
+    addEnergyCap: amount => { set$maxEnergy(maxEnergy + (amount)); set$energy(energy + (amount)); return maxEnergy; },
+    addPlayerMaxHp: n => {
+      G.maxHp += n;
+      G.heal(n);
+      G.log(`[[icon:heart]] 血量上限 +${n}（当前上限 ${G.maxHp}，并回复 ${n} 点）`, 'ok');
+    },
     drawOf, isAOE,
     // B5（A3 第二批）：诅咒族结构化结算与文本路径共用同一包装 combat（cursefx 彩闪 + 同一 addCurse/tickPoison/CURSE_META）
     combat: combatPort,
