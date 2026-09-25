@@ -1,3 +1,7 @@
+## 当前状态补充：删除批 build 复验 PASS（2026-09-25 09:5x +08:00）
+
+- 按 orphan-audit 报告建议（C 组删除后跑 build 确认 ITEM_ART_ALIAS 无回归）补跑：临时 worktree 干净 HEAD `18d4653` 上 `npm run build` **PASS（4.39s）+ perf-budget PASS**，删除批收益实测：包体 90.83→**84.97 MiB**（-5.9）、css-gzip 119.6→118.5、entry-gzip 239.0→237.9、initial-js 251.8→250.7、battle 101.3 持平；thumb-manifest 已自愈（worktree 内零已删文件残留）；worktree 用后摘 junction 清理。主树 manifest 待下次 build 自愈，不构成引用。审计建议的最后一项验证闭环。
+
 ## 当前状态补充：老板批件执行完毕——删除批三笔落库（2026-09-25 09:3x +08:00）
 
 - 老板 09-25 批示「UI 图标重绘方案暂时取消，其他你都执行」。删除批三笔落库：**资产批**（孤儿资产 108 个跟踪文件 ≈2.8MB——cursor-art 三件套连带 9/白名单死图+thumbs 10/别名副本 2/旧场景图 14/杂项 9/game-icons 整目录 32/旧原型 6/tt-peach 2/redraw-preview 底稿 24 + 临时文件 4 + 截图产物 9 + NAI zip/payload 6 + KNOWN_ORPHANS 白名单收窄至两条合法兜底 + nai_gen.pyc 停跟踪与 `__pycache__/` 拉黑）；`cd6c3ba` **JS 死代码批**（meta.js track 孤儿 case、cardslib 分页机制残留整体清除——libPageIndex/分页条/三页缓存/预热/keepPage 死分支/死 act，LIB_PAGE_SIZE 保留供翻看换算、overlay.js sceneNext 死探测、run.scenes finishScene/sceneState）；`49f7cd7` **CSS 死块批**（overlays.css 85 行：旧 HUD 徽章族/旧战斗面板族/旧基地容器/旧背包网格/shop-list，含报告漏列的 slot-hud 族补核后删）。docs/pending-deletions-2026-09-25.md 已改写为执行完毕留档。
