@@ -42,6 +42,7 @@ function makeGame(ownedCards) {
 
 const foe = () => ({ id: 'tt12-preplay-foe', name: '规则验收靶', hp: 999, atk: 1 });
 const tick = () => new Promise(resolve => setTimeout(resolve, 0));
+const nap = (ms) => new Promise(resolve => setTimeout(resolve, ms));   // 空闲确认用真实延时（根治负载 flake）
 
 async function drain() {
   for (let i = 0; i < 400; i++) {
@@ -50,7 +51,12 @@ async function drain() {
     if (state.discovering) { BattleSession.commands.pickDiscover(0); continue; }
     if (state.choosing) { BattleSession.commands.pickChoice(0); continue; }
     if (state.handSelecting) { BattleSession.commands.skipHandSelect(); continue; }
-    if (!state.busy && state.actionQueueLength === 0) return state;
+    if (!state.busy && state.actionQueueLength === 0) {
+      await nap(30);   // 根治负载 flake：首闲≠终闲——用新鲜快照跨调度间隙再确认
+      const fresh = BattleSession.getSnapshot();
+      if (!fresh.busy && fresh.actionQueueLength === 0) return fresh;
+      continue;
+    }
   }
   throw new Error('TT12 战斗动作队列等待 400 轮仍未收敛');
 }

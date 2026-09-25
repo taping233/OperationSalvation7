@@ -39,11 +39,17 @@ const start = (game, isBoss) => BattleSession.start(game, [foe()], isBoss
   ? { isBoss: true, nest: true, name: '生命周期首脑战' }
   : { isBoss: false, name: '生命周期普通战' });
 
+const nap = (ms) => new Promise(resolve => setTimeout(resolve, ms));   // 空闲确认用真实延时（根治负载 flake）
 async function drain() {
   for (let i = 0; i < 100; i++) {
-    await new Promise(resolve => setTimeout(resolve, 0));
+    await nap(0);
     const state = BattleSession.getSnapshot();
-    if (!state.busy && state.actionQueueLength === 0) return state;
+    if (!state.busy && state.actionQueueLength === 0) {
+      await nap(30);   // 根治负载 flake：首闲≠终闲——用新鲜快照跨调度间隙再确认
+      const fresh = BattleSession.getSnapshot();
+      if (!fresh.busy && fresh.actionQueueLength === 0) return fresh;
+      continue;
+    }
   }
   throw new Error('战斗动作未在生命周期用例中结算完成');
 }

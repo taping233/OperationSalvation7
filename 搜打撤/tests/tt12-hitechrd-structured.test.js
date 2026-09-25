@@ -48,6 +48,7 @@ function makeGame(desc = '改写后的发现说明') {
 }
 
 const tick = () => new Promise(resolve => setTimeout(resolve, 0));
+const nap = (ms) => new Promise(resolve => setTimeout(resolve, ms));   // 空闲确认用真实延时（根治负载 flake）
 async function drain(timeoutMs = 8000) {
   const end = Date.now() + timeoutMs;
   while (Date.now() < end) {
@@ -55,7 +56,12 @@ async function drain(timeoutMs = 8000) {
     if (state.discovering) return state;
     if (state.choosing) { BattleSession.commands.pickChoice(0); continue; }
     if (state.handSelecting) { BattleSession.commands.skipHandSelect(); continue; }
-    if (!state.busy && state.actionQueueLength === 0) return state;
+    if (!state.busy && state.actionQueueLength === 0) {
+      await nap(30);   // 根治负载 flake：首闲≠终闲——用新鲜快照跨调度间隙再确认
+      const fresh = BattleSession.getSnapshot();
+      if (!fresh.busy && fresh.actionQueueLength === 0) return fresh;
+      continue;
+    }
     await tick();
   }
   throw new Error('TT12 结构化费用迁移战斗未在时限内收敛');

@@ -86,7 +86,12 @@ const typeOfLocal = (li, idx) => {
 
 describe('节点完成/离开后的消耗时机（2026-09-20 定版）', () => {
   beforeAll(async () => {
-    newRun(20260919, 'standard', []);
+    // skipClassChoice：本用例只测节点消耗时机，选角页是干扰项（用例自行补 myClass/characterId）。
+    // 必须显式跳过——openClassChoice 会排 500ms warmBattleRuntime 定时器，vitest jsdom 环境的
+    // setTimeout 是 Node 原生实现（populateGlobal 不拷贝 window.setTimeout），文件结束 teardown
+    // 删掉 window 后该定时器仍会迟到触发（window is not defined），在全量串行跑里污染下一个文件。
+    // newRun(mode, picks, options) 只有三参，第三参就是 options（原写法传的是空数组）。
+    newRun(20260919, 'standard', { skipClassChoice: true });
     await tick(50);
     game.myClass = '战士';
     game.characterId = 'heixiang';
@@ -94,24 +99,38 @@ describe('节点完成/离开后的消耗时机（2026-09-20 定版）', () => {
   });
 
   it('收益完成即锁；商店离开才锁；返回均不重复触发', async () => {
-    // 层内类型布局按局随机（newRun 不接种子，Random.reseed() 每局重摇），
-    // 动态选目标格：优先宝箱/物资格（收益可计数），兜底商店（页面可观测），
-    // 且其邻格存在可正常结算的格子（避开战斗/门/祭坛/首脑/撤离点）。
-    // enterLayer 只置位不触发内容，用来构造「站在目标格」的起点。
-    const li = 0;
+    // 层内类型布局按局随机（种子固定但 skipClassChoice/上游随机源演进都会平移消耗序列，
+    // 固定种子不再保证「第 1 层=直线图」的旧前提），动态选目标格：优先宝箱/物资格
+    // （收益可计数），兜底商店（页面可观测），且其邻格存在可正常结算的格子
+    // （避开战斗/门/祭坛/首脑/撤离点）。enterLayer 只置位不触发内容，用来构造
+    // 「站在目标格」的起点。目标格可能落在任意层：逐层扫描；整局都没有合法格是
+    // 合法随机结果——重摇重试到找到（有上限），被测行为与具体布局无关。
     const sweepable = t => !['battle', 'door', 'extraction', 'altar', 'boss', 'emergencyExit'].includes(t);
-    const neighborsOf = idx => (game.layerData[li].logical[idx].next || []).filter(([l]) => l === li).map(([, i]) => i);
+    const neighborsOf = (li, idx) => (game.layerData[li].logical[idx].next || []).filter(([l]) => l === li).map(([, i]) => i);
     const LOOT_TYPES = ['chest', 'coin', 'wood', 'rations', 'key', 'resource'];
-    let cellIdx = -1, leaveIdx = -1, kind = '';
-    for (const want of [LOOT_TYPES, ['shop']]) {
-      for (let i = 0; i < game.layerData[li].logical.length; i++) {
-        if (!want.includes(typeOfLocal(li, i))) continue;
-        const nb = neighborsOf(i).find(n => sweepable(typeOfLocal(li, n)));
-        if (nb != null) { cellIdx = i; leaveIdx = nb; kind = typeOfLocal(li, i); break; }
+    const findTarget = () => {
+      for (let li = 0; li < game.layerData.length; li++) {
+        for (const want of [LOOT_TYPES, ['shop']]) {
+          for (let i = 0; i < game.layerData[li].logical.length; i++) {
+            if (!want.includes(typeOfLocal(li, i))) continue;
+            const nb = neighborsOf(li, i).find(n => sweepable(typeOfLocal(li, n)));
+            if (nb != null) return { li, cellIdx: i, leaveIdx: nb, kind: typeOfLocal(li, i) };
+          }
+        }
       }
-      if (cellIdx >= 0) break;
+      return null;
+    };
+    let target = findTarget();
+    for (let reroll = 0; !target && reroll < 5; reroll++) {
+      newRun(20260919 + reroll + 1, 'standard', { skipClassChoice: true });
+      await tick(50);
+      game.myClass = '战士';
+      game.characterId = 'heixiang';
+      game.state = 'idle';
+      target = findTarget();
     }
-    expect(cellIdx, '本层应存在邻格可正常结算的宝箱/物资/商店格').toBeGreaterThanOrEqual(0);
+    expect(target, '整局应存在邻格可正常结算的宝箱/物资/商店格（重摇 5 次后仍无则地图生成有问题）').toBeTruthy();
+    const { li, cellIdx, leaveIdx, kind } = target;
     enterLayer(li, cellIdx);
     await tick(30);
     expect(game.state).toBe('idle');
@@ -156,7 +175,7 @@ describe('节点完成/离开后的消耗时机（2026-09-20 定版）', () => {
   });
 
   it('物资格有独立场景层；暂不领取可重进，领取后立即变普通', async () => {
-    newRun(20260920, 'standard', []);
+    newRun(20260920, 'standard', { skipClassChoice: true });   // 同上：跳过选角页防 500ms 迟到 warm 定时器
     await tick(30);
     game.myClass = '战士'; game.characterId = 'heixiang'; game.state = 'idle';
     const li = 0;
@@ -181,7 +200,7 @@ describe('节点完成/离开后的消耗时机（2026-09-20 定版）', () => {
   });
 
   it('商店关闭不消耗，离开所在格才变普通', async () => {
-    newRun(20260921, 'standard', []);
+    newRun(20260921, 'standard', { skipClassChoice: true });   // 同上：跳过选角页防 500ms 迟到 warm 定时器
     await tick(30);
     game.myClass = '战士'; game.characterId = 'heixiang'; game.state = 'idle';
     const li = 0;

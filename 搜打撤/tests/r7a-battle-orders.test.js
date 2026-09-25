@@ -8,9 +8,9 @@ const {BattleSession}=await import('../game/src/battle/battle.core.js');
 const {Random,SeededRandomService}=await import('../game/src/core/random.js');
 const C=window.SDT.Cards;
 beforeAll(()=>{C.ensureSha();C.ensureDmgTypes();});
-const tick=()=>new Promise(r=>setTimeout(r,0));
-async function drain(){for(let i=0;i<80;i++){await tick();const s=BattleSession.getSnapshot();if(!s.busy&&s.phase==='player')return s;}return BattleSession.getSnapshot();}
-async function runEnemyTurn(){let left=false;for(let i=0;i<160;i++){await tick();const s=BattleSession.getSnapshot();if(s.phase!=='player'||s.busy)left=true;if(left&&!s.busy&&s.phase==='player')return s;}return BattleSession.getSnapshot();}
+const tick=()=>new Promise(r=>setTimeout(r,0));const nap=(ms)=>new Promise(r=>setTimeout(r,ms));   // 空闲确认用真实延时（根治负载 flake）
+async function drain(){for(let i=0;i<80;i++){await tick();const s=BattleSession.getSnapshot();if(!s.busy&&s.phase==='player'){await nap(30);const f=BattleSession.getSnapshot();if(!f.busy&&f.phase==='player')return f;}}return BattleSession.getSnapshot();}
+async function runEnemyTurn(){let left=false;for(let i=0;i<160;i++){await tick();const s=BattleSession.getSnapshot();if(s.phase!=='player'||s.busy)left=true;if(left&&!s.busy&&s.phase==='player'){await nap(30);const f=BattleSession.getSnapshot();if(!f.busy&&f.phase==='player')return f;}}return BattleSession.getSnapshot();}
 let uid=0;
 function game(cards){const chosen=cards||[C.SHA,C.SHA];return{ownedCards:chosen.map(card=>({uid:`r7-${uid++}`,card:{...card}})),hp:50,maxHp:50,atk:4,spellPower:0,coins:0,myClass:null,characterId:null,state:'idle',battleActive:false,log(){},heal(n){this.hp=Math.min(this.maxHp,this.hp+n);},addItem(){},onBattleEnd(){}};}
 async function play(defs,targets){const g=game();BattleSession.start(g,defs,{isBoss:false,encounterId:'r7-test'});await drain();for(const target of targets){const card=BattleSession.getSnapshot().hand[0];BattleSession.commands.playCard(card,target);await drain();}BattleSession.commands.endTurn();const s=await runEnemyTurn();return{g,s,checkpoint:BattleSession.serialize()};}

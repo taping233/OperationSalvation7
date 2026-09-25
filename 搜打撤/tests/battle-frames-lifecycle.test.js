@@ -115,4 +115,41 @@ describe('battle frame lifecycle', () => {
     expect(sprite.texture).toBe(pixi.emptyTexture);
     expect(cacheStats()).toEqual({ roles: 0, roleNames: [] });
   });
+
+  // —— 首进场不闪（a59e2ff 回归钉，老板 09-20 实机「首次进场闪一下」）——
+  // 机理：attach 同步段（首个 await 之前）确认角色在 HAS_FRAMES 白名单后立即
+  // visibility='hidden' 藏静态立绘，序列帧纹理异步装载就绪后由 Pixi sprite 接管。
+  // 若藏 img 的时机被挪到任何 await 之后，装载窗口内静态 img 会露一帧再跳切序列帧=闪。
+  it('hides the static portrait synchronously on first attach, before async texture loading', async () => {
+    hide();
+    await new Promise(resolve => setTimeout(resolve, 0));
+    const body = document.getElementById('ovBody');
+    const img = document.querySelector('#btSelf img');
+    const attachPromise = attach(body);
+    // 同步断言：attach() 返回 promise 的时刻（未 await）img 必须已藏——
+    // 这是「装载期间不露静态立绘」的观测点，任何把隐藏挪后到异步段的回归在此变红。
+    expect(img.style.visibility).toBe('hidden');
+    await attachPromise;
+    // 接管终态：img 保持隐藏（不与 sprite 双层叠影）、sprite 已挂待机帧——
+    // 藏了静态图就必须有序列帧顶上，两头都断防止「闪」与「人物消失」两个方向的回归。
+    // （不断 #unitFrames.hidden：beforeEach 重建 body 后模块持有的 host 是旧节点，断言会失真）
+    expect(img.style.visibility).toBe('hidden');
+    expect(pixi.sprites.at(-1).texture).toBe(pixi.idleTexture);
+    hide();
+  });
+
+  it('restores the static portrait when no playable frame set exists (fallback, no permanent blank)', async () => {
+    hide();
+    await new Promise(resolve => setTimeout(resolve, 0));
+    pixi.idleEnabled = false;   // 探测不到 idle 帧 → loadSet 返回 null
+    const body = document.getElementById('ovBody');
+    const img = document.querySelector('#btSelf img');
+    await attach(body);
+    // 失败路径原路恢复：同步段藏过 img，装载失败必须恢复静态立绘（不闪也不消失）；
+    // sprite 不得残留上一场的纹理（loadSet 失败会清空候选帧，hide 兜底置 EMPTY）
+    expect(img.style.visibility).toBe('');
+    expect(pixi.sprites.at(-1).texture).toBe(pixi.emptyTexture);
+    pixi.idleEnabled = true;
+    hide();
+  });
 });
