@@ -26,7 +26,7 @@
 | 1b | piles | battle.runtime.piles.js | 14 | 56 → **19** | 已完成（2026-09-24） |
 | 2 | interaction | battle.runtime.interaction.js | 16 | 87 → **54** | 已完成（2026-09-25 `1687d78`） |
 | 3 | effects | battle.runtime.effects.js | 35 | 98 → **45** | 已完成（2026-09-25 `1687d78`） |
-| 4 | session | battle.runtime.session.js | 18 | 84 → **53** | 已完成（2026-09-25 `9f2a09b`；engine 侧 15 点因 P1-b 在途避让保留，≈−7 候选下批） |
+| 4 | session | battle.runtime.session.js | 18 | 84 → **46** | 已完成（2026-09-25 `9f2a09b`+`2460bc5` 两批：lifecycle/enemy-phase 收敛后 engine 侧 tmpSeq 五连与 cancelTargeting 成对点补收，engine 15→9） |
 | 5 | 兼容壳 battle.runtime.js | — | — | — | 可选收尾，默认不做 |
 
 顺序依据：先收「消费者少 + 重置簇干净」的域（试点两域），再按「簇集中度高、状态机敏感度递增」

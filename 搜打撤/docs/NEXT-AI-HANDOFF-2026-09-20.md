@@ -1,4 +1,10 @@
-## 当前状态补充：持续批第三波落库——代码债清单全清（2026-09-25 03:2x +08:00）
+## 当前状态补充：wave4 收官——持续任务全部完成（2026-09-25 04:0x +08:00）
+
+- `2460bc5` session 域 engine 侧收尾 53→46（nextTmpSeq 计数式聚合 tmpSeq 五连 + cancelTargetingState 聚合两处写点；守卫与 clearTargetHint 配对留原地；导出只增不减）。状态袋四域最终数字：presentation 0 / piles 19 / interaction 54 / effects 45 / session 46，路线图表格已更新。定向 172 用例绿 + 提交门禁全量 814 绿。
+- **持续任务至此全部完成**：代码债①-⑦清零、总验收六项全绿（lint 0 / 语法 188 文件 / 全量 814 / build PASS 6.04s / perf-budget PASS / 守卫零违例，worktree 干净 HEAD 实测见下段）。cron automation-3bb7ecf1 已改收官巡检口径（UI 会话落库后预算复核 / 新债发现 / 临时文件巡视，不重做旧债）。
+- 剩余事项全部属「待老板批」：孤儿资产 81+26 文件与 CSS 死块 87（docs/orphan-audit-2026-09-25.md）、meta.js track('death') 孤儿、cardslib/ui 休眠代码、ending-3 人影去留、UI 图标方案（icon-forge 须重建）、gear.png 画错、.pyc 停跟踪——见 docs/pending-deletions-2026-09-25.md。另有 UI/美术审查会话 70 项未提交改动在场，非持续批范围。未推送（老板未指示）。
+
+
 
 - 第三波两笔落库：`5b25270` 性能 P1×2（handPageReminder 转 transform+::after 辉光层走 opacity，reduced-motion 同关；requestBattleRender 改 rAF 排帧去重 flushBattleRender，无 rAF 退回同步；体检批 L 项收尾）；`9f2a09b` 状态袋 session 域 84→53（transitionTo/clearActionSignals/restoreBattleSession/restoreBattleCombatants/resetBattlePlayerState 五聚合；lifecycle 43→16；状态机推进类散调按先例保留逐条理由；**engine 侧 15 点因 P1-b 同文件在途避让保留**，≈−7 候选下批）。
 - **battle.engine.js 规则核深拆再评估：维持「收益低」论证跳过**——SCC 实测（autoPlayHandType→execPlay→hitFoe→resolveFoeDefeat 回路、enemy-phase⇄processDelayed/finish 互递归）剩余正文即共享结点，候选块（抽牌域/死亡簿记/伤害终端/巢穴内容包/快照岛/卡牌工具/转发 shim）逐一否决；且任何真实拆分需同步改 architecture-graph.mjs RUNTIME_OWNERS 白名单。不为拆而拆，结论入路线图收官注。
