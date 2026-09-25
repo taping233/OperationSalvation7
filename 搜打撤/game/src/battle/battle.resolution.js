@@ -1,5 +1,40 @@
 // Card resolution is isolated behind explicit state reads and domain commands.
 import { attackCue } from './battle.attack-cues.js';
+
+// —— schema v2 键位先行守卫（A2，2026-09-25）——
+// card-rules.schema.js v2 已放行泛化键（docs/card-rules-v2-taxonomy-2026-09-25.md §4/§5），
+// 解释器分支按 B1-B11 迁移批逐步落地。在落地之前，v2 键一旦出现在真实卡数据里必须在此
+// 炸出——否则 v1 结算路径会静默忽略这些键（如 damage + bonus 只结算基础伤害），形成错结算。
+const INTERPRETER_ONPLAY_OPS = new Set(['damage', 'heal', 'armor', 'draw', 'status', 'discover']);
+const V2_PENDING_DAMAGE_KEYS = new Set(['amount', 'range', 'cond', 'bonus', 'lifesteal', 'graveyard', 'hits', 'recast', 'schedule']);
+const V2_PENDING_EFFECT_KEYS = new Set(['amount', 'upTo', 'selfDamage', 'perFuelCost', 'perSpellHeal', 'guard', 'decayAtTurnEnd', 'untilHandN', 'handOps']);
+const V2_PENDING_TRIGGER_KEYS = new Set(['onTurnStart', 'onBattleStart', 'onConsume', 'onDraw', 'onKill']);
+
+function assertStructuredRulesSupported(card) {
+  const triggers = card?.rules?.triggers;
+  if (triggers == null || typeof triggers !== 'object') return;
+  for (const key of Object.keys(triggers)) {
+    if (V2_PENDING_TRIGGER_KEYS.has(key)) {
+      throw new TypeError(`Unsupported rules.triggers.${key} for card ${card.id || '<missing id>'}: schema v2 键位先行，解释器分支未接线（迁移批 A3/B1-B11）`);
+    }
+  }
+  const operations = Array.isArray(triggers.onPlay) ? triggers.onPlay : [];
+  for (const operation of operations) {
+    if (!operation || typeof operation !== 'object') continue;
+    if (!INTERPRETER_ONPLAY_OPS.has(operation.op)) {
+      throw new TypeError(`Unsupported onPlay operation '${operation.op}' for card ${card.id || '<missing id>'}: schema v2 键位先行，解释器分支未接线（迁移批 A3/B1-B11）`);
+    }
+    const pendingKeys = operation.op === 'damage' ? V2_PENDING_DAMAGE_KEYS
+      : ['heal', 'armor', 'draw'].includes(operation.op) ? V2_PENDING_EFFECT_KEYS : null;
+    if (!pendingKeys) continue;
+    for (const key of pendingKeys) {
+      if (key in operation) {
+        throw new TypeError(`Unsupported onPlay ${operation.op} parameter '${key}' for card ${card.id || '<missing id>'}: schema v2 键位先行，解释器分支未接线（迁移批 A3/B1-B11）`);
+      }
+    }
+  }
+}
+
 function createBattleResolution(ports) {
   const { readState, getPlayerStatus, esc, log, heal, addFloat, addDelayed, takeDeckBottom, deckBottomCount,
     startSurge, getAllCards, isRandomObtainable, randomBattle, getDamageTypes, getDamageTypeMeta,
@@ -7,6 +42,8 @@ function createBattleResolution(ports) {
     splitClauses, applyTextEffects, registerTurnStart, registerBattle, castRandomSpells,
     drawCards, grantSha, hitFoe, drawOf, isAOE } = ports;
   function* resolveCardSteps(card, target, infused, fuelCost, uid) {
+
+    assertStructuredRulesSupported(card);
 
     // 血毒双镖（2026-09-16 留言「血毒双镖应该能选择两次目标」）：两段拆开——首段（攻+1 附加流血）
     // 随本牌目标结算；二段（攻+1 附加中毒）由 execPlay 收尾进入点选（interaction 'dart'），

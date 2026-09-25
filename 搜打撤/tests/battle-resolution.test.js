@@ -213,4 +213,26 @@ describe('battle resolution ports', () => {
     resolver({ id: 'probe-armor', name: '护甲探针', type: '法术', dmg: 0, desc: '可观察顺序', armor: 4 }, target, false, 0, null);
     expect(events.filter(event => ['text', 'armor'].includes(event[0]))).toEqual([['text'], ['armor', 4]]);
   });
+
+  it('throws on schema v2 keys the interpreter has not wired yet (guard against silent mis-resolution)', () => {
+    const target = { hp: 20, dead: false, status: {} };
+    const callState = { current: { mode: 'boss', playedMovesThisTurn: 0, infuseFuels: 0, grave: [] }, playerStatus: { status: {} }, target };
+    const { resolver } = makeResolver(callState);
+    const base = { type: '武术', dmg: 3, dmgType: 'fixed', desc: '' };
+    for (const card of [
+      // damage v1 形状 + v2 泛化附加键：v1 结算路径只消费 amountField/target/hitCount，
+      // 不守卫就会静默漏掉 cond/bonus 形成错结算
+      { ...base, id: 'guard-damage-bonus', rules: { version: 1, triggers: { onPlay: [
+        { op: 'damage', amountField: 'dmg', target: 'chosenEnemy', bonus: { amount: 2, if: { foeStatus: 'bleed' } } },
+      ] } } },
+      // v2 新操作族（schema 放行、解释器未接线）
+      { ...base, id: 'guard-pending-op', rules: { version: 1, triggers: { onPlay: [{ op: 'summon', name: '步兵', count: 1 }] } } },
+      // G13 时点触发器（无任何运行时消费者）
+      { ...base, id: 'guard-pending-trigger', rules: { version: 1, triggers: { onPlay: [], onTurnStart: [] } } },
+      // 效果操作的 v2 字面量键
+      { ...base, id: 'guard-effect-guard', type: '法术', armor: 3, rules: { version: 1, triggers: { onPlay: [{ op: 'armor', amountField: 'armor', guard: true }] } } },
+    ]) {
+      expect(() => resolver(card, target, false, 0, null), card.id).toThrow(TypeError);
+    }
+  });
 });

@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { validateCardRules } from '../game/src/cards/card-rules.schema.js';
 
-describe('card rules v1 schema', () => {
+describe('card rules schema (v2 merged)', () => {
   it('accepts an in-memory supported battle contract', () => {
     expect(validateCardRules({
       id: 'sample', cost: 3, dmg: 4,
@@ -112,7 +112,7 @@ describe('card rules v1 schema', () => {
     const result = validateCardRules({
       id: 'invalid-trigger', type: '武术', dmg: 3, dmgType: 'fixed',
       rules: { version: 1, battle: { target: { side: 'enemy', area: false } }, triggers: {
-        onDraw: [],
+        onVanish: [],
         onPlay: [
           { op: 'damage', amountField: 'heal', target: 'self', extra: true },
           { op: 'heal', amountField: 'heal', target: 'self' },
@@ -122,7 +122,7 @@ describe('card rules v1 schema', () => {
     expect(result.ok).toBe(false);
     expect(result.errors).toEqual(expect.arrayContaining([
       expect.objectContaining({ cardId: 'invalid-trigger', path: 'rules.triggers' }),
-      expect.objectContaining({ cardId: 'invalid-trigger', path: 'rules.triggers.onPlay[0]' }),
+      expect.objectContaining({ cardId: 'invalid-trigger', path: 'rules.triggers.onPlay[0].extra' }),
       expect.objectContaining({ cardId: 'invalid-trigger', path: 'rules.triggers.onPlay[0].amountField' }),
       expect.objectContaining({ cardId: 'invalid-trigger', path: 'rules.triggers.onPlay[0].target' }),
       expect.objectContaining({ cardId: 'invalid-trigger', path: 'rules.triggers.onPlay[1].amountField' }),
@@ -291,5 +291,67 @@ describe('card rules v1 schema', () => {
       expect.objectContaining({ cardId: 'duplicate-kinds', path: 'rules.battle.requirements[1].kind', message: 'duplicate kind is unsupported' }),
       expect.objectContaining({ cardId: 'duplicate-kinds', path: 'rules.battle.costModifiers[1].kind', message: 'duplicate kind is unsupported' }),
     ]));
+  });
+
+  it('accepts v2 generalized damage, curse, pending, trigger, and equip shapes', () => {
+    for (const card of [
+      // G1：条件增伤 + 诅咒条件
+      { id: 'v2-damage-generalized', type: '武术', dmg: 3, dmgType: 'fixed',
+        rules: { version: 1, battle: { target: { side: 'enemy', area: false } }, triggers: { onPlay: [
+          { op: 'damage', amountField: 'dmg', target: 'chosenEnemy', cond: { foeHpHalf: true }, bonus: { amount: 2, if: { foeStatus: 'bleed' } } },
+        ] } } },
+      // G2：叠加诅咒（bleed/poison 走 stacks）
+      { id: 'v2-curse-stacks', type: '法术',
+        rules: { version: 1, battle: { target: { side: 'enemy', area: false } }, triggers: { onPlay: [
+          { op: 'curse', curse: 'bleed', stacks: 2, target: 'chosenEnemy' },
+        ] } } },
+      // G11：召唤（pending 族，schema 放行、解释器由 battle.resolution 守卫 throw）
+      { id: 'v2-pending-summon', type: '法术',
+        rules: { version: 1, battle: { target: { side: 'self', area: false } }, triggers: { onPlay: [
+          { op: 'summon', name: '步兵', atk: 4, hp: 4, count: 2 },
+        ] } } },
+      // G13：时点触发器 + G5 装备域（键位放行）
+      { id: 'v2-triggers-equip', type: '法术', armor: 2,
+        rules: { version: 1, battle: { target: { side: 'self', area: false } },
+          triggers: { onPlay: [{ op: 'armor', amountField: 'armor' }], onTurnStart: [], onKill: [{ op: 'armor', amountField: 'armor' }] },
+          equip: { passive: { aura: { atk: 1 } } } } },
+    ]) {
+      expect(validateCardRules(card), card.id).toEqual({ ok: true, errors: [], pending: [] });
+    }
+  });
+
+  it('rejects v2 shapes that violate per-key parameter constraints', () => {
+    for (const [card, path] of [
+      // amount 与 card.dmg 不一致（battle preview 真实性契约）
+      [{ id: 'v2-amount-mismatch', type: '武术', dmg: 3, dmgType: 'fixed',
+        rules: { version: 1, battle: { target: { side: 'enemy', area: false } }, triggers: { onPlay: [{ op: 'damage', amount: 5, target: 'chosenEnemy' }] } } },
+        'rules.triggers.onPlay[0].amount'],
+      // 条件对象取值非法
+      [{ id: 'v2-cond-invalid', type: '武术', dmg: 3, dmgType: 'fixed',
+        rules: { version: 1, battle: { target: { side: 'enemy', area: false } }, triggers: { onPlay: [{ op: 'damage', amountField: 'dmg', target: 'chosenEnemy', cond: { foeHpBelow: 0 } }] } } },
+        'rules.triggers.onPlay[0].cond.foeHpBelow'],
+      // 叠加诅咒不接受 duration
+      [{ id: 'v2-curse-timed-stacks', type: '法术',
+        rules: { version: 1, battle: { target: { side: 'enemy', area: false } }, triggers: { onPlay: [{ op: 'curse', curse: 'poison', stacks: 2, duration: 3, target: 'chosenEnemy' }] } } },
+        'rules.triggers.onPlay[0].duration'],
+      // hits 与 v1 标量 hitCount 互斥
+      [{ id: 'v2-hits-scalar', type: '武术', dmg: 2, dmgType: 'attack',
+        rules: { version: 1, battle: { target: { side: 'enemy', area: false } }, triggers: { onPlay: [{ op: 'damage', amountField: 'dmg', target: 'chosenEnemy', hitCount: 2, hits: { count: 2 } }] } } },
+        'rules.triggers.onPlay[0].hits'],
+      // pending op 逐键白名单
+      [{ id: 'v2-summon-unknown-key', type: '法术',
+        rules: { version: 1, battle: { target: { side: 'self', area: false } }, triggers: { onPlay: [{ op: 'summon', name: 'x', count: 1, foo: 1 }] } } },
+        'rules.triggers.onPlay[0].foo'],
+      // randomEnemy 扩展后的 battle.target 交叉契约
+      [{ id: 'v2-random-target', type: '武术', dmg: 2, dmgType: 'fixed',
+        rules: { version: 1, battle: { target: { side: 'enemy', area: true } }, triggers: { onPlay: [{ op: 'damage', amountField: 'dmg', target: 'randomEnemy' }] } } },
+        'rules.battle.target.area'],
+      // 装备域未知键
+      [{ id: 'v2-equip-unknown', type: '法术', armor: 2,
+        rules: { version: 1, battle: { target: { side: 'self', area: false } }, triggers: { onPlay: [{ op: 'armor', amountField: 'armor' }] }, equip: { aura: { atk: 1 } } } },
+        'rules.equip'],
+    ]) {
+      expect(validateCardRules(card).errors, card.id).toContainEqual(expect.objectContaining({ cardId: card.id, path }));
+    }
   });
 });
