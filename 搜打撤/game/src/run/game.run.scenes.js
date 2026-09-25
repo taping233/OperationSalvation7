@@ -3,7 +3,7 @@
  *
  * 由 game.run.js 拆出。层位最底（L0）：只依赖会话/数据/UI 模块，
  * 不依赖 altar / flow；ALTAR 与 FLOW 反向依赖本文件。
- * 内容：场景预加载与整页壳（nodeShell/nodeOpt/finishScene）、
+ * 内容：场景预加载与整页壳（nodeShell/nodeOpt）、
  *       行军转场、即时节点落定、拾取页、战斗/宝箱格、事件发牌、火堆复原页。
  * 商店控制器也在此装配（openShop 唯一实例，供 ALTAR/FLOW 复用）。
  * ============================================================ */
@@ -78,8 +78,6 @@ export function preloadSceneList(urls) {
 export function preloadAllNodeShellBgs() {
   preloadSceneList(Array.from(IMMEDIATE_SCENES, key => PRELOAD_SCENES[key]).filter(Boolean));
 }
-let sceneState = null;
-
 // ---------- 全屏节点页外壳：杀戮尖塔式——整屏场景背景图，标题与选项虚化在右侧毛玻璃面板 ----------
 // o = { tone: 场景分色(sc-*), icon, title, sub, body, foot, asset: 背景图 asset-key（缺省按 tone 映射） }
 export function nodeShell(o) {
@@ -108,14 +106,6 @@ export function consumeCell(layerIdx = game.layerIdx, trackPos = game.trackPos) 
 }
 
 export function consumeCurrentCell() { consumeCell(); }
-
-export function finishScene() {
-  if (!sceneState) return;
-  const cb = sceneState.onDone;
-  sceneState = null;
-  UI.hideOverlay();
-  if (cb) cb();
-}
 
 // 节点与战斗结算之间的短过场：复用现有场景美术，不引入额外资源或阻塞式页面。
 export function showRunTransition({ tone = 'battle', asset = 'scene-battle-bg', eyebrow = 'AREA ENTERED', title, detail = '', duration = 900 }) {

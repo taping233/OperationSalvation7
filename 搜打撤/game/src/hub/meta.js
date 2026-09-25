@@ -333,15 +333,8 @@ import { Random } from '../core/random.js';
           addXP(d.cls, Math.round(6 * xpMul()));
         }
         break;
-      case 'extract':
-        s.extracts++;
-        s.bestRunCoins = Math.max(s.bestRunCoins, d.coins || 0);
-        addXP(d.cls, Math.round((20 + (d.actions || 0) * 2) * xpMul()));
-        break;
-      case 'death':
-        s.deaths++;
-        addXP(d.cls, 5);
-        break;
+      // （extract/death 两 case 已删：全仓无 track('extract'/'death') 调用方的孤儿副本，
+      //   2026-09-25 老板批准的休眠代码清理。统计如需恢复请随调用点一并加回。）
       case 'action':
         s.actions++;
         break;

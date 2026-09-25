@@ -243,8 +243,6 @@ export const overlayMethods = {
     // 图标关闭钮（背包 × / 卡池 ×）文本为空，按 data-act 与 aria-label/title 兜底匹配
     const cancelBtn = this._findCancelBtn();
     if (cancelBtn) { cancelBtn.click(); return true; }
-    // 场景演出页（点击任意处继续）：走 sceneNext 通道
-    if (this.el.ovBody.querySelector('[data-act="sceneNext"]')) { this.act('sceneNext'); return true; }
     // 背包这类只有信息没有按钮的浮层：走 bag 侧注册的关闭回调（closeBackpack 唯一收口，
     // 复位 game.state）；钩子未注册时（启动早期）退回直接关
     if (mode === 'bag' || mode === 'bagpage') { if (this._bagCloseHook) this._bagCloseHook(); else this.hideOverlay(); return true; }
@@ -264,7 +262,6 @@ export const overlayMethods = {
   _canCancelOverlay() {
     if (this.el.overlay.hidden || this._lastMode === 'battle') return false;
     if (this._findCancelBtn()) return true;
-    if (this.el.ovBody.querySelector('[data-act="sceneNext"]')) return false;   // 点击任意处继续，无需 ×
     const m = this._lastMode;
     return m === 'bag' || m === 'bagpage';
   },

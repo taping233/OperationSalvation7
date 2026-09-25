@@ -78,9 +78,8 @@ function libFiltered() {
   return _libFilteredCache;
 }
 
-// 每页四列两行，控制照片节点、阴影层和待解码缩略图的数量。
+// 每页四列两行：翻看/键盘定位按此把目标索引换算成页首张滚入视野（分页机制本身已移除）。
 const LIB_PAGE_SIZE = 8;
-let libPageIndex = 0;
 let libSearchTimer = null;
 // 窗口挂载（09-24 实测：全量渲染 271 张致打开主线程冻结 ~1.4s）：首屏只挂一批，
 // 尾部哨兵接近视口再追加下一批，上下滚动浏览体验不变。
@@ -172,37 +171,14 @@ function libGridContentsHTML(all = libFiltered()) {
     (libMountedCount < all.length ? '<div class="lib-mount-sentinel" aria-hidden="true"></div>' : '');
 }
 
-function libPageControlsHTML(all = libFiltered()) {
-  const pageCount = Math.max(1, Math.ceil(all.length / LIB_PAGE_SIZE));
-  const page = Math.min(libPageIndex + 1, pageCount);
-  return `<nav class="pv-nav studio-page-nav" id="libPageControls" aria-label="照片分页"${pageCount <= 1 ? ' hidden' : ''}>
-    <button type="button" class="pv-navbtn" data-act="libPagePrev"${page <= 1 ? ' disabled' : ''}>‹ 上一页</button>
-    <span class="pv-pos" aria-live="polite">第 ${page} / ${pageCount} 页 · 共 ${all.length} 张</span>
-    <button type="button" class="pv-navbtn" data-act="libPageNext"${page >= pageCount ? ' disabled' : ''}>下一页 ›</button>
-  </nav>`;
-}
-
 function libGridHTML() {
   const all = libFiltered();
-  // 09-24 改回上下滚动：分页条不再渲染（libPageControlsHTML 仅剩 renderLibGrid 里的空引用分支）
+  // 09-24 改回上下滚动：分页条已随分页机制一并移除（2026-09-25 休眠代码清理）
   return `<div class="lib-grid${all.length ? '' : ' is-empty'}" id="libGrid">${libGridContentsHTML(all)}</div>`;
 }
 
 let libCardById = new Map();
 let libCardNodeById = new Map();
-// 当前页外最多保留相邻两页的节点（合计最多 24 张缩略图）。筛选与重新开库即清空。
-const libPageCache = new Map();
-let libPageCacheFilterKey = '';
-let libRenderedPageIndex = null;
-let libPageWarmTask = null;
-
-function cancelLibPageWarm() {
-  if (libPageWarmTask != null) {
-    if (typeof cancelIdleCallback === 'function') cancelIdleCallback(libPageWarmTask);
-    else clearTimeout(libPageWarmTask);
-    libPageWarmTask = null;
-  }
-}
 
 // ======== 窗口挂载：哨兵接近视口时追加下一批（09-24 打开冻结修复） ========
 function stopLibSentinelObserver() {
@@ -314,21 +290,10 @@ function bindLibGridNavigation() {
 }
 
 // 筛选后只重绘卡格区（整页 showOverlay 会重置搜索焦点、重挂全部事件）
-// opts.keepPage：翻看导航跨页时保留目标页（当前页卡格滚动仍回到顶部）
-function renderLibGrid(opts) {
-  cancelLibPageWarm();
+function renderLibGrid() {
   stopLibSentinelObserver();
-  const keepPage = !!(opts && opts.keepPage);
-  const filterKey = JSON.stringify([libFilter.tab, libFilter.rar, libFilter.cls, libFilter.q, libFilter.sort]);
-  if (!keepPage || filterKey !== libPageCacheFilterKey) {
-    libPageCache.clear();
-    libRenderedPageIndex = null;
-    libPageCacheFilterKey = filterKey;
-  }
   const filtered = libFiltered();
   const n = filtered.length;
-  if (!keepPage) libPageIndex = 0;
-  libPageIndex = Math.min(libPageIndex, Math.max(0, Math.ceil(n / LIB_PAGE_SIZE) - 1));
   const nextSelectedId = filtered.some(c => c.id === libSelectedId)
     ? libSelectedId : (filtered[0]?.id || null);
   const resultCount = document.getElementById('libResultCount');
@@ -345,36 +310,17 @@ function renderLibGrid(opts) {
       resultCount.classList.add('bump');
     }
   }
-  const controls = document.getElementById('libPageControls');
-  if (controls) controls.outerHTML = libPageControlsHTML(filtered);
   const grid = document.getElementById('libGrid');
   if (grid) {
-    grid.classList.toggle('lib-page-next', opts?.pageDirection === 'next');
-    grid.classList.toggle('lib-page-previous', opts?.pageDirection === 'previous');
     grid.classList.toggle('is-empty', !filtered.length);
     resetLibArtWarmup();
-    if (keepPage && libRenderedPageIndex != null && libRenderedPageIndex !== libPageIndex && grid.childNodes.length) {
-      const fragment = document.createDocumentFragment();
-      for (const image of grid.querySelectorAll('.studio-photo-art img')) delete image.dataset.libWarm;
-      while (grid.firstChild) fragment.appendChild(grid.firstChild);
-      libPageCache.delete(libRenderedPageIndex);
-      libPageCache.set(libRenderedPageIndex, fragment);
-      while (libPageCache.size > 2) libPageCache.delete(libPageCache.keys().next().value);
-    }
-    const cachedPage = keepPage ? libPageCache.get(libPageIndex) : null;
-    if (cachedPage) {
-      libPageCache.delete(libPageIndex);
-      grid.replaceChildren(cachedPage);
-    } else {
-      // 窗口挂载：重置为首批；无 IntersectionObserver 的环境（jsdom 测试）一次性全量
-      libMountedCount = typeof IntersectionObserver === 'function'
-        ? Math.min(LIB_MOUNT_BATCH, filtered.length)
-        : filtered.length;
-      grid.innerHTML = libGridContentsHTML(filtered);
-    }
+    // 窗口挂载：重置为首批；无 IntersectionObserver 的环境（jsdom 测试）一次性全量
+    libMountedCount = typeof IntersectionObserver === 'function'
+      ? Math.min(LIB_MOUNT_BATCH, filtered.length)
+      : filtered.length;
+    grid.innerHTML = libGridContentsHTML(filtered);
     // 上下滚动模式（09-24）：筛选重绘后回顶，否则沿用旧滚动位置会从半截行开始看
     grid.scrollTop = 0;
-    libRenderedPageIndex = libPageIndex;
     bindLibGridNavigation();
     if (libMountedCount < filtered.length) observeLibSentinel(grid);
   }
@@ -420,10 +366,6 @@ function libHoloEgg() {
 
 function renderCardLibrary() {
   const photoOpenStarted = photoFpsEnabled ? performance.now() : 0;
-  cancelLibPageWarm();
-  libPageCache.clear();
-  libPageCacheFilterKey = '';
-  libRenderedPageIndex = null;
   cardPageOpen = true;
   // 牌库页去动画开关（2026-09-08 老板拍板）：期间禁全部动画/过渡/流光/hover 特效，
   // CSS 侧规则见 cards.css 的 body.cardlib-open 段
@@ -436,7 +378,6 @@ function renderCardLibrary() {
   // （旧缓存键只含 libCards.length，同张数的内容变化会读到陈旧列表）
   _libFilteredCache = null;
   _libFilteredKey = '';
-  libPageIndex = 0;
   // 窗口挂载计数要在 showOverlay 拼网格 HTML 前重置（libGridHTML 直接读它切片）
   stopLibSentinelObserver();
   libMountedCount = typeof IntersectionObserver === 'function'
@@ -485,8 +426,6 @@ function renderCardLibrary() {
       </div>
     </div>`, 'page');
   lastSavedId = null;
-  libPageCacheFilterKey = JSON.stringify([libFilter.tab, libFilter.rar, libFilter.cls, libFilter.q, libFilter.sort]);
-  libRenderedPageIndex = libPageIndex;
   // 整页重建的网格同样走窗口挂载：还有剩余就挂上哨兵观察
   const libGrid = document.getElementById('libGrid');
   if (libGrid && libMountedCount < libFiltered().length) observeLibSentinel(libGrid);
@@ -497,8 +436,6 @@ function renderCardLibrary() {
   // 注册被跳过，卡牌库整页按钮（含右上关闭钮）无响应（老板留言：退出点不动）。
   UI.act('closeCardPage', closeLibPage);
   UI.act('newCard', () => { if (CARD_DESIGNER_WRITES_ENABLED) openCardDesigner(null); });
-  UI.act('libPagePrev', () => switchLibPage(libPageIndex - 1));
-  UI.act('libPageNext', () => switchLibPage(libPageIndex + 1));
   // 切页签/清筛选只重绘卡格区：整页 renderCardLibrary() 会重建 245 张卡面的 HTML
   // （实测主线程阻塞 ~100ms）并重挂全部事件，而这两处改动只影响卡格与页签高亮
   UI.act('libTab', (d) => { libFilter.tab = d.t; syncLibFilterUI(); renderLibGrid(); });
@@ -665,14 +602,10 @@ function closeLibPage() {
   cardPageOpen = false;
   clearPhotoFpsSettledTimer();
   stopPhotoFpsProbe();
-  cancelLibPageWarm();
   clearTimeout(libSearchTimer);
   libSearchTimer = null;
   resetLibArtWarmup();
-  libPageIndex = 0;
   libCardNodeById.clear();
-  libPageCache.clear();
-  libRenderedPageIndex = null;
   UI.hideOverlay();
   // 摘 cardlib-open 必须等淡出（210ms）结束：提前摘会让 #overlay * 的禁动画规则
   // 集体解除、未关闭的几百张卡同时重播入场动画（09-23 留言「退出照相馆莫名闪烁」根因）；
