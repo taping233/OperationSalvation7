@@ -500,3 +500,13 @@ Git 状态：`master` 领先 `origin/master` **8 个提交未推送**（最新 2
 - 验证：card-rules-schema 测试按 v2 语义修正旧断言+新增 v2 正/负覆盖 2 例，battle-resolution 追加守卫 throw 用例 1 例；定向 3 文件 41 用例绿；**pre-commit 门禁全量 146 文件/820 用例 PASS（218s）**。全量曾一次出现间歇性 `Errors 1`（未处理 rejection 类，非用例失败），两次复跑未再现，exit 0。
 - 推送状态：`dcc9fee..5daed46` 已推 origin/master，本地与远端对齐（截至本节写入）。上一节「card-rules.schema.js 仍为 A2 会话在途未提交；本批未推送」已过时。
 - 下一步：A3 分族迁移 B1-B11（约 181 张，禁碰 cards.data.js 到 A3）；B 类型系统 core 域等额度补派；G 空引用修复仍停手待第四方（未核实是否恢复）。
+
+## 当前状态补充：三子代理并行批——测试稳定/卡库三发现/实机走查（2026-09-25 17:40 +08:00）
+
+- 老板指令「派三个子代理并行解决这些问题」。并发额度实测上限 2，按 2+1 串行补派；三代理属地划线（tests/、cards/、走查零代码），互不触碰、互不提交，Friday 集成验收分组落库。集成态全量 **148 文件/832 用例绿 exit 0**（17:26 实测）。
+- **批一（测试工程）**：①间歇 `Errors 1` 根因闭环——`tests/node-retrigger.test.js` 是全库唯一真实调 `openClassChoice` 的测试，`newRun` 未跳选角 → `setTimeout(warmBattleRuntime, 500)` 用 Node 原生定时器（vitest jsdom 不接管）跨 teardown 触发 `battle-loader.js:9 window is not defined`；修复=newRun 第三参传 `{skipClassChoice:true}`。②药水/mana-surge 家族残余 7 处「首闲即返」drain 按 82c8b3a 药方补齐（nap+新鲜快照双确认）。③新增「首进场不闪立绘」回归钉用例 2 个（battle-frames-lifecycle），回归制造验证：临时注释 attach() 同步藏 → 断言精确变红 → 还原。9 tests 文件 +60/−9，game/src 零改动。
+- **批二（卡库三发现考古收口）**：①sync carried 失效=**仍在已修**——真身在 `scripts/sync-cards-from-live.mjs`（09-22 六文件重构后路径 ENOENT 链路死亡+保留条件恒假两层失效，v34 已丢 11 张 cc-* 纯实机卡），重建沙箱拼接+carried 单调保留，新增 7 用例；②充能火山被覆盖=**不成立**（desc v18 起匹配正则、唯一写点、hero-cards 实打锁定），残留卫生问题（cards.data.js:359 旧 desc）记 A3 属地；③石榴弹珠随机池=**仍在已修**——ensureCardsSyncLive 整卡覆盖抹掉 unrandom 字段，新增 `ensureRandomPoolFixes()` 播种链幂等补回，新增 3 用例。
+- **批三（实机走查）**：报告 `docs/live-walkthrough-2026-09-25-three-batch.md`（vite 52793+puppeteer-core CDP，browser-use 子代理不可用改等价驱动）。组 1 N1：选满不取消 PASS、per-uid 轮转 PASS、**Esc/右键取消 FAIL**（Esc 被 _overlay.js:241 战斗态短路、右键误开记录反馈浮层，取消仅注能条按钮可达）——新账；组 2 九项全 PASS（两拍 251ms、longtask 0/1583 帧、死亡链 f25b7bd 无复发、拖牌/重开终局零残留）；组 3 商店重复率 **0.0%（144 槽）vs 历史 25.6% → 销账**，石榴弹珠 144 槽 0 出现（批二修复实机生效佐证）。
+- **新账三项（只记录未动）**：①注能态 Esc/右键取消不可达（组 1 ③）；②dev「冰冻敌人×2回合」静默失效（battle.core.js:342 走 addBlessing，combat.js BUFF_META 无 freeze 应走 addCurse）；③终局页 `[[icon:info]]` 位图缺失（console.error）。
+- **销账考证**：G 空引用两侧均已修复落库（localStorage 侧 8a711c0、战斗侧 damageAll 合成卡随 09-25 提交代），handoff 98/502 行「停手待第四方」为过时描述。商店 25.6% 重复、卡库三发现、vitest Errors 1 本批收口。
+- **待拍板**：①jsdom 不接管 Node 定时器的系统性隐患（方案：vite.config setupFiles 清理挂钩 或 ensureBattleReady 加 typeof window 守卫，测试代理未实施）；②组 2 音效听感需老板人工；③cards-sync.json 定版缺 garnet unrandom 字段（生成物勿手改，播种链兜底已生效）。
