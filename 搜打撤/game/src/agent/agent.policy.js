@@ -7,6 +7,7 @@
  * ============================================================ */
 
 import { Random } from '../core/random.js';
+import { resolveWeights } from './agent.weights.js';
 
 const TARGET_KEY = /攻击|伤害|造成|消灭|击|刺|斩/;
 const PREFER_LABEL = /(开始|出发|继续|确认|完成|获取|带走|进入|领取|修复|治疗|休息|入库|整理|留下)/;
@@ -50,6 +51,8 @@ const eventScore = (label, hpRatio) => {
 };
 
 const RARITY_ORDER = { '普通': 0, '常见': 0, '稀有': 1, '史诗': 2, '传说': 3, '职业': 4 };
+// 进卡组的类型（丢卡腾格时最后保留）；道具/资源/事件/生物等先丢
+const DECK_TYPES = new Set(['招式', '装备', '能力']);
 const rarityRank = (r) => RARITY_ORDER[r] ?? 1;
 
 // 策略 v2（数据驱动改版，2026-09-26）：基于 45 局 v1 基线（均层2.0、73% 死于层2、
@@ -63,6 +66,9 @@ function strategicPolicy(options = {}) {
 
 // ---------- 贪心策略（v1 基线 / strategic=v2 数据驱动改版） ----------
 function greedyPolicy({ resetSlots = false, preferNest = false, strategic = false, extractHpRatio = 0.35 } = {}) {
+  // 权重向量（09-26 架构升级）：工厂级解析一次——evolve 个体经 globalThis 注入，
+  // 每局 factory 调用时取最新；v1 对照组恒拿 DEFAULT（冻结语义）
+  const W = resolveWeights();
   const tried = new Set();   // 本回合打过且无效果的出牌（防引擎静默拒绝导致死循环）
   const fledNodes = new Set();   // v3：战斗中撤退过的格子（地图低血不回头挑战，血线恢复解锁）
   const recentUi = [];       // 最近执行过的 ui 动作键（跨面板 LRU，防 openHelp↔helpBack 之类互翻）
@@ -77,11 +83,18 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
     const m = d.match(/获得\s*(\d+)\s*点护甲/) || d.match(/\+(\d+)\s*甲/) || d.match(/(\d+)\s*点护甲/);
     return m ? +m[1] : 0;
   };
+  // intentDamage 对齐引擎 intent 形状（09-26 修根因①）：
+  // 引擎 calculateEnemyIntent 返回 {kind, icon, label, damage, hits, bleedBonus}——
+  // damage=null 表示蓄力/非攻击轮，damage=atk+bleed、hits=多段（frenzy/orc 两段）。
+  // 旧实现读 it.type||it.kind 再判 !=='attack'：引擎的 kind 是 'strike'/'general' 等
+  // 行为名，永远 ≠'attack' → 恒返回 0 → incoming/danger 全为 0 →
+  //   flee 逃生线（danger>=hp）、护甲挡伤门（incoming>armor）、威胁喝药线三处保命逻辑全失效
+  //   （实测 flee 0/120 局触发，死亡全来自战斗 97 局）
   const intentDamage = (f) => {
     const it = f.intent || {};
-    const t = it.type || it.kind;
-    if (t && t !== 'attack') return 0;
-    return Number(it.value ?? it.dmg ?? it.amount ?? f.atk ?? 0) || 0;
+    if (it.damage == null) return 0;           // 蓄力轮（damage:null）无攻击
+    const hits = Math.max(1, Number(it.hits) || 1);
+    return (Number(it.damage) || 0) * hits;
   };
 
   const battleTurn = (obs) => {
@@ -279,10 +292,18 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
       for (const c of atkCards) { const cost = c.cost ?? 1; if (cost <= eLeft) { budget += atk + (c.dmg ?? 0); eLeft -= cost; } }
       const dangerHp = living.filter(f => intentDamage(f) > 0).reduce((s, f) => s + (f.hp ?? 0), 0);
       if (!armorCanSave && dangerHp > budget) {
-        // 记住逃过的格子：地图侧低血不再回头挑战（血线恢复后解锁）
-        if (obs.run) fledNodes.add(`${(obs.run.layer ?? 1) - 1}:${obs.run.node ?? 0}`);
-        const fleeAct = find('flee');
-        if (fleeAct) return fleeAct;
+        const nodeKey = obs.run ? `${(obs.run.layer ?? 1) - 1}:${obs.run.node ?? 0}` : '';
+        // 决死规则（09-26 修根因⑤）：同格只逃一次。逃过再回=地图侧已 0 分让位、
+        // 且资源通常耗尽——再逃就陷入「打→逃→绕→再打」无限环（层3死锁实录：
+        // extraction 被 boss 锁、boss 战必逃、逃出无药可补，no-progress 弃局 0 分）。
+        // 数据上 death(2分) > abandon(0分)：二次面对同格必死之战，选择战到底。
+        // 血线恢复后回头重打是新格（fledNodes 语义不变），此规则只拦「同格连逃」。
+        if (!(nodeKey && fledNodes.has(nodeKey))) {
+          // 记住逃过的格子：地图侧低血不再回头挑战（血线恢复后解锁）
+          if (nodeKey) fledNodes.add(nodeKey);
+          const fleeAct = find('flee');
+          if (fleeAct) return fleeAct;
+        }
       }
     }
     // 3) 护甲挡伤：R3 放宽——任何溢出伤害都考虑上甲；0 费甲无脑赚，
@@ -325,8 +346,15 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
   let nodeSet = null;     // strategic 滞环检测：本次出行踩过的格子集合
   let stallSteps = 0;     // 连续踩旧格子的地图决策次数（>10 判定滞环）
   let lastDecisionNode = null;
+  let backToPrevStreak = 0;   // 连续「首选=回刚离开的格」次数（A→B→A 连发判拉锯）
   const decideMap = (obs) => {
     const moves = (obs.actions || []).filter(a => a.type === 'move');
+    // 背包满先开包腾格（09-26 断链修复①）：满包让所有宝箱/事件奖励作废，
+    // 开包-丢卡-关包三步无游戏时间代价（地图步不消耗回合），优先于一切走位
+    if (strategic) {
+      const ob = (obs.actions || []).find(a => a.type === 'sys' && a.name === 'openBackpack');
+      if (ob) return ob;
+    }
     if (!moves.length) return (obs.actions || [])[0] || null;
     const hpRatio = obs.run?.maxHp ? (obs.run.hp ?? 0) / obs.run.maxHp : 1;
     const curIdx = obs.run?.node ?? 0;
@@ -342,37 +370,81 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
       else if (nodeSet.has(here)) { stallSteps += 1; lastDecisionNode = here; }
       else { nodeSet.add(here); stallSteps = 0; lastDecisionNode = here; }
     }
-    const score = (a) => {
+    // ctx：2步前瞻时以「候选自身位置」为视角（curIdx/curLi/prevNode 替换），其余状态
+    // （hp/stalled/fled/nodeSet）是全局的照用。null=当前站位（原语义，bit 级等价）
+    const score = (a, ctx = null) => {
+      const cIdx = ctx ? ctx.curIdx : curIdx;
+      const cLi = ctx ? ctx.curLi : curLi;
+      const cPrev = ctx ? ctx.prevNode : prevNode;
+      // 滞环状态：lookahead 的邻居视角强制 stallForLook=false（09-26 γ实验根因）——
+      // stall 解锁（doorStall/forceProgress/crossBack 放行）是「本地此刻无路」的救济，
+      // 被 2 步外的邻居借走后，回浅层门在 value 里虚高（scdbg 实录 score=2 → value=17.8），
+      // 把策略吸进门回环（γ=0.5/0.2 各 8-9 例 alt2 弃局）。本地打分不受影响。
+      // 拉锯确认后当轮禁选「回刚离开的格」（09-26 alt2 弃局根因）：
+      // 血线把门压到 -32 时，已访格保底 2 分稳赢——A→B→A 连发确认后必须强制二选一破舞
+      if (strategic && banPrev && a.li === cLi && a.idx === cPrev) return W.geo.ban;
       // 滞环状态（score 内统一声明：门禁解除/跨层放行/强推三处共用）
-      const stalled = strategic && stallSteps > 10;
+      const stalled = strategic && stallSteps > 10 && (ctx ? ctx.stallForLook !== false : true);
       // 已结算节点几乎零分：防在两个已清节点间来回横跳；前进方向给推进分。
       // 「本次出行站过的格子」也算见过——空格子（无 def）引擎永不写 visited，
       // 不并入会让 forceProgress 把它当无限新格反复推（09-26 实测两格舞）
       const seen = a.visited || (strategic && !!nodeSet && nodeSet.has(`${a.li}:${a.idx}`));
-      if (seen) return 2 + (a.idx > curIdx ? 3 : 0);
+      // 逃离过的格子（含 boss/任意类型）血线恢复前压到 0 分（09-26 修根因②）：
+      // fledNodes 检查原写在下方 base 分支里，但已访格在 seen 行提前返回根本够不着——
+      // flee 修好 intentDamage 后实测 12/40 局「逃→绕回→再打→再逃」no-progress 弃局
+      // （boss seen fwd=5 分稳赢其它 seen 格 2 分，永远绕回）。0 分让位给任意其它候选。
+      // 滞环时解锁（09-26 修根因④）：0 分墙在唯一通路穿 fleeing 格时反成死锁——
+      // scdbg 实录 seed77004 血 14% 无药：门只邻节点9（fled=0），在 4→5→6→7→8
+      // 已访格绕到 no-progress。stallSteps>10=本地证据「已无其它进展」，此时让位给推进。
+      if (strategic && hpRatio < 0.7 && fledNodes.has(`${a.li}:${a.idx}`) && !stalled) return 0;
       const t = (a.label || '').match(/（(\w+)）/)?.[1] || '';
-      let base = 15;
+      // seen 提前返回只对「层出口」破例（09-26 修根因③·二版）：
+      // 一版让滞环时所有 seen 落完整打分——已清火堆/商店/宝箱因此拿到 85-95 分压过
+      // 未访格（实测 13 分），造出 3→6→7→6 已清节点死循环（scdbg 探针抓到）。
+      // 只给 door/extraction 解锁分：门 -40 在血线<75% 时低于 seen 保底 2 分，
+      // 整层踏完后永远进不去 → 60 步无新格 no-progress（R2 实测 17/40 的真正根因）。
+      const isExit = t === 'door' || t === 'extraction' || t === 'emergencyExit';
+      if (seen && !(stalled && strategic && isExit)) {
+        // strategic 读 W（可进化）；v1 对照保持字面量冻结
+        return strategic
+          ? W.geo.seen + (a.idx > cIdx ? W.geo.seenFwd : 0)
+          : 2 + (a.idx > cIdx ? 3 : 0);
+      }
+      let base = W.base.def;
       if (strategic) {
         // v2 血线门控（数据：v1 均 12 行动冲到层2 无回复死亡）：
         // 门按血量放行、火堆提前找、血不健康少打硬仗——滞环时门禁解除（死墙优先于血线）
         // R2 深层续航调参（R1 基线：87% 死、死亡主力层3×42/层1×18——带伤进硬层是主因）
-        if (t === 'fire') base = hpRatio < 0.75 ? 95 : 45;
+        // 09-26 起分档与阈值全部读 W（见 agent.weights.js），DEFAULT 与原字面量逐值相等
+        if (t === 'fire') base = hpRatio < W.gate.fire ? W.base.fireHi : W.base.fireLo;
         // v3：背包满时宝箱降分（收不进奖励白跑一趟）
-        else if (t === 'chest') base = ((obs.run?.deck ?? 0) >= (obs.run?.bagCap ?? 99)) ? 12 : 60;
-        else if (t === 'event') base = 50;
-        else if (t === 'shop') base = hpRatio < 0.75 ? 85 : 45;   // 低血商店=买药续航（2 币回 6 血固定位）
+        else if (t === 'chest') base = ((obs.run?.used ?? 0) >= (obs.run?.bagCap ?? 99)) ? W.base.chestFull : W.base.chestOk;
+        else if (t === 'event') base = W.base.event;
+        else if (t === 'shop') base = hpRatio < W.gate.fire ? W.base.shopHi : W.base.shopLo;   // 低血商店=买药续航（2 币回 6 血固定位）
         // v3：撤退过的格子血线恢复前不回头（flee 保命后防原地重蹈）
         else if (t === 'battle') {
-          base = hpRatio >= 0.75 ? 40 : hpRatio >= 0.45 ? 15 : 5;
-          if (hpRatio < 0.7 && fledNodes.has(`${a.li}:${a.idx}`)) base = 6;
+          base = hpRatio >= W.gate.fire ? W.base.battleHi : hpRatio >= W.gate.battleMid ? W.base.battleMid : W.base.battleLo;
+          if (hpRatio < W.gate.fled && fledNodes.has(`${a.li}:${a.idx}`)) base = W.base.battleFled;
         }
-        else if (t === 'boss') base = hpRatio > 0.75 ? 55 : 5;
+        else if (t === 'boss') base = hpRatio > W.gate.boss ? W.base.bossHi : W.base.bossLo;
         // R2：撤离点阈值 0.4→0.5（半血就该考虑离场，别带伤硬拼）
-        else if (t === 'extraction' || t === 'emergencyExit') base = hpRatio < 0.5 ? 95 : 20;
+        // 终局撤离点被首脑锁时（bossKilled=false）判 -100（09-26 修根因⑥）：
+        // 引擎对该节点只回「击败第四层首脑后才能撤离」+stayHere，move 成功但节点
+        // 永不 visited——95 分勾着反复撞门被拒（scdbg 实录 seed77022 死循环到
+        // no-progress）。锁着的门不是候选，让位给 boss/altar（唯一解锁路径）。
+        else if (t === 'extraction' || t === 'emergencyExit') {
+          base = hpRatio < W.gate.extract ? W.base.extractHi : W.base.extractLo;
+          if (t === 'extraction' && !obs.run?.bossKilled) base = W.base.extractLocked;
+        }
         else if (t === 'door') {
-          base = hpRatio >= 0.75 ? 30 : stalled ? 26 : hpRatio >= 0.45 ? -40 : -150;
+          // 滞环解锁只给「同层/前进」的门（修根因③的原意=破本层死墙进下一层）；
+          // 回浅层门（a.li<cLi）永远吃 crossBack 惩罚——09-26 γ实验：放行它会
+          // 造成本层↔下层门横跳（scdbg 实录 cur=1:0 连续4次选回浅层门79分）
+          const doorStallOk = stalled && a.li >= cLi;
+          base = hpRatio >= W.gate.fire ? W.base.doorHi : doorStallOk ? W.base.doorStall
+            : hpRatio >= W.gate.battleMid ? W.base.doorMid : W.base.doorLow;
           // 扫图偏好：本层还有未收的宝箱/事件先收完再进层（攒卡组厚度）
-          if (base > 0 && hasUnexplored) base -= 15;
+          if (base > 0 && hasUnexplored) base -= W.gate.doorUnexplored;
         }
       } else if (hpRatio < 0.5 && t === 'fire') base = 100;
       else if (t === 'chest') base = 60;
@@ -382,25 +454,71 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
       else if (t === 'boss') base = hpRatio > 0.7 ? 55 : 10;
       else if (t === 'extraction' || t === 'emergencyExit') base = hpRatio < extractHpRatio ? 90 : 20;
       else if (t === 'door') base = 30;
-      const fwd = (a.idx > curIdx ? 8 : 0) + (a.li > curLi ? 8 : 0);
-      // 反振荡三规则（09-26 迭代）：
-      // ①「刚离开的格子」永远 -25（防 A↔B 立即回退，任何情况不解除）
-      const backtrack = (prevNode != null && a.li === curLi && a.idx === prevNode) ? 25 : 0;
+      // v1 对照组冻结：几何权重用字面量，不随 W 变化（否则 evolve 会污染基线）
+      const fwdLit = (a.idx > cIdx ? 8 : 0) + (a.li > cLi ? 8 : 0);
+      const backLit = (cPrev != null && a.li === cLi && a.idx === cPrev) ? 25 : 0;
       if (!strategic) {
         // v1 基线保持原语义：同层低格位 -12、回更浅层 -40（冻结作对照）
-        const backward = (a.idx < curIdx ? 12 : 0) + (a.li < curLi ? 40 : 0);
-        return base + fwd - backward - backtrack;
+        const backward = (a.idx < cIdx ? 12 : 0) + (a.li < cLi ? 40 : 0);
+        return base + fwdLit - backward - backLit;
       }
+      // strategic：几何权重读 W（可进化）
+      const fwd = (a.idx > cIdx ? W.geo.fwdIdx : 0) + (a.li > cLi ? W.geo.fwdLayer : 0);
+      // 反振荡三规则（09-26 迭代）：
+      // ①「刚离开的格子」永远 -25（防 A↔B 立即回退，任何情况不解除）
+      const backtrack = (cPrev != null && a.li === cLi && a.idx === cPrev) ? W.geo.backtrack : 0;
       // v2：同层回走合法（绕路拿资源、回药铺——老板 09-26「回走是合法战术」）；
       // ② 回更浅层仅在滞环时放行（防跨层门回环），平时 -40；③ 滞环时未访非回退格 +45 强推
-      const crossBack = a.li < curLi ? (stalled ? 0 : 40) : 0;
-      const forceProgress = stalled && !a.visited && !(a.li === curLi && a.idx === prevNode) ? 45 : 0;
+      // 回浅层恒罚（09-26）：滞环放行曾被实测造成门横跳；滞环出路=同层未访(forceProgress)+前进门
+      const crossBack = a.li < cLi ? W.geo.crossBack : 0;
+      const forceProgress = stalled && !a.visited && !(a.li === cLi && a.idx === cPrev) ? W.geo.forceProgress : 0;
       return base + fwd - backtrack - crossBack + forceProgress;
     };
     // v2 扫图判定：候选里还有未访的宝箱/事件（同层）
     const hasUnexplored = strategic && moves.some(m =>
       !m.visited && m.li === curLi && /（(chest|event)）/.test(m.label || ''));
-    return moves.slice().sort((x, y) => score(y) - score(x))[0];
+    // alt2 弃局根因修复（09-26）：血线把前进项（门 -32）压到已访保底分 2 之下时，
+    // A↔B 拉锯被「回走 2 分稳赢」锁死、stallSteps>10 永远轮不到解锁，被 8 步 alt2 熔断判弃。
+    // 判据：本轮首选仍是「回刚离开的格」→ 上轮也是 → A→B→A 连发确认，当轮禁选 prevNode
+    // 强制落另一侧（单次回走是合法战术，只罚连发）
+    const isBack = (a) => a.li === curLi && a.idx === prevNode;
+    let banPrev = false;
+    // 2步前瞻价值（09-26 架构升级②）：value(a) = score(a) + γ·max邻居score（以 a 为站位视角）
+    // ——把「贪心单步」换成 depth-2 rollout：单步高分但两步内是死胡同的候选会被
+    // 「单步略低但两步内有火堆/宝箱/出口」的候选压过。γ=W.geo.lookahead（默认0.5，
+    // γ=0 严格退化为原贪心——消融开关）
+    const gamma = strategic ? W.geo.lookahead : 0;
+    const value = (a, ctx = null) => {
+      const self = score(a, ctx);
+      if (!(gamma > 0) || !Array.isArray(a.next) || !a.next.length) return self;
+      // 邻居视角：stallForLook=false → 邻居一律按常态打分（不继承本地滞环解锁）
+      const at = { curIdx: a.idx, curLi: a.li, prevNode: ctx ? ctx.curIdx : curIdx, stallForLook: false };
+      let best = -Infinity;
+      for (const nb of a.next) {
+        const s = score(nb, at);
+        if (s > best) best = s;
+      }
+      return self + gamma * (best === -Infinity ? 0 : best);
+    };
+    if (strategic && prevNode != null) {
+      const first = moves.slice().sort((x, y) => value(y) - value(x))[0];
+      if (first && isBack(first)) {
+        backToPrevStreak += 1;
+        if (backToPrevStreak >= 2) banPrev = true;
+      } else backToPrevStreak = 0;
+      if (banPrev) {
+        const forced = moves.slice().sort((x, y) => value(y) - value(x))
+          .find(m => !isBack(m));
+        if (forced) return forced;
+        banPrev = false;   // 候选只剩 prevNode：无从破舞，放行交给上层熔断收口
+      }
+    }
+    const ranked = moves.slice().sort((x, y) => value(y) - value(x));
+    if (globalThis.__scdbg && ranked.length) {
+      console.log('[scdbg]', `cur=${curLi}:${curIdx} hp=${(hpRatio * 100).toFixed(0)}% stalled=${stallSteps > 10} prev=${prevNode} streak=${backToPrevStreak} ban=${banPrev ? 1 : 0} |`,
+        ranked.map(m => `${m.id}=${value(m).toFixed(1)}(${score(m).toFixed(0)})${m.visited ? 'v' : ''}${fledNodes.has(`${m.li}:${m.idx}`) ? 'F' : ''}`).join(' '));
+    }
+    return ranked[0];
   };
 
   let overlaySteps = 0;
@@ -428,6 +546,28 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
     // 页面渲染未就绪或必选流程——点关闭必被拒且会自旋熔断，直接回 noop 慢等渲染到位
     if (!ui.some(a => !/^(openHelp|helpBack|closeOverlay)$/.test(a.name))) {
       return { type: 'sys', name: 'noop' };
+    }
+    // 背包满腾格（09-26 断链修复①）：discardCard 是 sys 动作不在 ui 链里——满包按
+    // 稀有度升序丢最低值卡（同稀有度先丢非卡组类型），丢到不满立即关包回地图。
+    // 只丢可丢的（bagActions 已滤 safe/stored/初始牌，usable 再滤本步失败键）
+    const discards = acts.filter(a => a.type === 'sys' && a.name === 'discardCard' && usable(a));
+    if (strategic && discards.length) {
+      const own = new Map((obs.run?.ownedCards || []).map(o => [o.name, o]));
+      const discardKey = (a) => {
+        const o = own.get(a.args?.[0]) || {};
+        return [rarityRank(o.rarity), DECK_TYPES.has(o.type) ? 1 : 0];
+      };
+      const sorted = discards.slice().sort((x, y) => {
+        const [rx, dx] = discardKey(x);
+        const [ry, dy] = discardKey(y);
+        return rx - ry || dx - dy;
+      });
+      return sorted[0];
+    }
+    // 丢完（已不满）且背包页还开着 → 立即关包回地图（不走 TERMINATORS 的 8 步慢收口）
+    if (strategic && !((obs.run?.used ?? 0) >= (obs.run?.bagCap ?? 99))) {
+      const closeBagBtn = ui.find(a => a.name === 'closeBag');
+      if (closeBagBtn) return closeBagBtn;
     }
     const keyOf = (a) => `${a.id}:${JSON.stringify(a.params || {})}`;
     const hpRatio = obs.run?.maxHp ? (obs.run.hp ?? 0) / obs.run.maxHp : 1;
@@ -496,8 +636,11 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
       || (strategic ? freshPick(ui
         .filter(a => (a.name === 'buyCard' || a.name === 'buySha') && affordable(a.label))
         .sort((x, y) => priceOf(x.label) - priceOf(y.label) || typeBonus(y.label) - typeBonus(x.label))) : null)
-      // v2 背包满腾格：商店收购台 → 按稀有度升序卖最低值卡（换币再买，腾格收奖励）
-      || (strategic && obs.run && (obs.run.ownedCards || []).length >= (obs.run.bagCap || 99)
+      // v2 背包满腾格：商店收购台 → 按稀有度升序卖最低值卡（换币再买，腾格收奖励）。
+      // 只有真存在可售卡才进收购台（09-26 断链修复②：普通卡进收购台是空面板，
+      // 实测 openSell 开10次卖出0张）——无可售时交给野外丢卡链路
+      || (strategic && obs.run && (obs.run?.used ?? 0) >= (obs.run?.bagCap || 99)
+        && (obs.run.ownedCards || []).some(o => o.sellable)
         ? (freshPick(ui.filter(a => a.name === 'openSell'))
           || freshPick(ui.filter(a => a.name === 'sellCard').sort((x, y) => {
             const own = new Map((obs.run.ownedCards || []).map(o => [o.uid, o.card?.rarity]));

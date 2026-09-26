@@ -9,18 +9,42 @@
  * 真实页面结构 + main.js 全量启动；游戏逻辑与浏览器同源，只是不渲染。
  * 跑完写 <out>/runs.jsonl（逐局记录，与游戏内数据页同一 schema）+ summary.json。
  * ============================================================ */
-import { mkdirSync, writeFileSync, appendFileSync } from 'node:fs';
+import { mkdirSync, writeFileSync, appendFileSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { JSDOM, VirtualConsole } from 'jsdom';
 
 // ---------- CLI ----------
+// VITEST 演出口径（09-26 均耗时⑦）：仅 4 处消费点，全是演出时长——
+//   SURGE_WAVE_MS 850ms×4发=3.4s（turbo 漏网的裸 setTimeout，wait-limit 根因伴生）
+//   battle.clock/feedback waitMs 短路（与 isTurbo 同效果）
+//   enemy-phase 步进 420ms→0（同上）
+// 游戏逻辑/结算零差异，只是无头批跑不需要的演出节拍
+process.env.VITEST = 'true';
 const argv = process.argv.slice(2);
 const argOf = (name, dflt) => {
   const i = argv.indexOf(`--${name}`);
   return i >= 0 && argv[i + 1] ? argv[i + 1] : dflt;
 };
 const RUNS = Math.max(1, parseInt(argOf('runs', '10'), 10) || 10);
+// 固定 seed 底（09-26 迭代方法论①）：第 i 局 seed = seedBase+i —— 同一 seed 底下
+// 策略 A/B 跑的是同一批地图/掉落/战斗（配对实验，消 seed 方差，模仿 ML 固定测试集）
+const SEED_BASE = argOf('seed-base', '') !== '' ? (parseInt(argOf('seed-base', '0'), 10) || 0) : null;
+// 固定 seed 注入：替换 Random 服务（random.js 官方扩展点，测试同款手法）——
+// newRun 里的 Random.reseed()（无参）改吐 pendingSeed，有参原样透传；只在批跑进程内生效。
+// 必须在 window 全局就位后动态导入：random.js→sdt-facade 顶层求值 typeof window，
+// 提前导入会让 window.SDT 永不挂载（camera.js 顶层 window.SDT.Camera 即炸）
+let pendingSeed = null;
+async function installSeedService() {
+  const { SeededRandomService, generateSeed, setRandomService } = await import('../src/core/random.js');
+  const real = new SeededRandomService();
+  setRandomService({
+    random: (...a) => real.random(...a),
+    reseed: (seed) => real.reseed(seed ?? pendingSeed ?? generateSeed()),
+    snapshot: () => real.snapshot(),
+    restore: (x) => real.restore(x),
+  });
+}
 const POLICY = argOf('policy', 'greedy');
 const OUT_DIR = resolve(process.cwd(), argOf('out', 'output/agent/'));
 const MAX_STEPS = parseInt(argOf('max-steps', '2000'), 10) || 2000;
@@ -112,6 +136,8 @@ win.Element.prototype.animate = function () {
 // 其在 jsdom 抛 No valid elements 毁掉转场链（flowContinue 打转弃局）。
 // 用游戏原生「减少动态效果」开关让 canAnimate 全程 false——必须在 main.js import 前设置。
 try { win.localStorage.setItem('sdt-reduce-motion', '1'); } catch { /* 存储不可用 */ }
+// 静音（09-26 均耗时）：sfx/noise 在 jsdom 全是白算（profile ~2.5%），无头批跑不需要声音
+try { win.localStorage.setItem('sdt-muted', '1'); } catch { /* 同上 */ }
 win.Audio = class FakeAudio {
   constructor() { this.loop = false; this.volume = 1; this.preload = ''; }
   play() { return Promise.resolve(); }
@@ -138,13 +164,21 @@ try {
 } catch { /* 有的话用原生 */ }
 
 // ---------- 全量启动（main.js + DOMContentLoaded） ----------
-// rAF 回调吞渲染异常（jsdom 无真 canvas）：保时序，渲染栈错误不中断逻辑跑批
-const rawRaf = win.requestAnimationFrame;
-win.requestAnimationFrame = (cb) => rawRaf((t) => {
-  try { cb(t); } catch (e) { console.error('[raf]', e && (e.stack || e.message) || e); }
-});
+// rAF 回调吞渲染异常（jsdom 无真 canvas）：保时序，渲染栈错误不中断逻辑跑批。
+// 09-26 均耗时⑤：pretendToBeVisual 的原生 rAF 实测 ~29ms/帧（对齐显示器刷新），
+// 而战斗渲染 flush/overlay 转场/状态推进都挂在 rAF 上——无头批跑不需要 60fps 节流，
+// 换 setTimeout(0) 让渲染调度立即跑，推进等待不再被帧间隔拖住
+// setImmediate 优先（0.1ms 级）：Node 的 setTimeout(0) 被钳到 1ms，而渲染/状态推进链
+// 常连续挂 2-3 帧 rAF——每帧省 ~1ms，尾部稳定窗等待直接砍掉渲染链那部分
+win.requestAnimationFrame = (cb) => (typeof setImmediate === 'function'
+  ? setImmediate(() => { try { cb(performance.now()); } catch (e) { console.error('[raf]', e && (e.stack || e.message) || e); } })
+  : setTimeout(() => { try { cb(performance.now()); } catch (e) { console.error('[raf]', e && (e.stack || e.message) || e); } }, 0));
 define('requestAnimationFrame', win.requestAnimationFrame);
+// 配套取消：句柄可能是 Immediate 或 Timeout，按类型分派
+win.cancelAnimationFrame = (h) => { if (h && typeof h === 'object' && typeof h._onImmediate === 'function') clearImmediate(h); else clearTimeout(h); };
+define('cancelAnimationFrame', win.cancelAnimationFrame);
 
+await installSeedService();
 await import('../src/main.js');
 
 // 批跑提速：关层走 immediate（跳过 210ms 淡出计时），纯无头不需要过渡动画
@@ -222,11 +256,23 @@ const cleanup = async () => {
 // ---------- 逐局驱动 ----------
 const policyFactory = Agent.policies[POLICY] || Agent.policies.greedy;
 const DEBUG_STEPS = parseInt(argOf('debug-steps', '0'), 10) || 0;
-if (DEBUG_STEPS) globalThis.__sigdbg = true;   // debug 模式开失败记忆 sig 差异探针
+if (DEBUG_STEPS) globalThis.__sigdbg = true;
+const SCDBG = argOf('scdbg', '0') === '1';
+if (SCDBG) globalThis.__scdbg = true;   // debug 模式开失败记忆 sig 差异探针
 const records = [];
 // 单步耗时仪表（老板 09-26 规矩：实验进行中单局 >1s 必查因）——
 // 相邻 onStep 间隔≈步耗时；超标步立刻打印现场（phase/id/stall），每局记 maxStepMs
 const SLOW_STEP_MS = (parseFloat(argOf('slow-step', '1000')) || 1000);
+// 权重向量覆盖（09-26 架构升级）：--weights 传 evolve 产物的 JSON 文件路径，或直接传
+// 内联 JSON 对象串——读入后注入 globalThis.__SDT_AGENT_WEIGHTS（agent.weights.resolveWeights 消费）
+const WEIGHTS = argOf('weights', '');
+if (WEIGHTS) {
+  const raw = WEIGHTS.trim().startsWith('{') ? WEIGHTS : readFileSync(resolve(WEIGHTS), 'utf8');
+  globalThis.__SDT_AGENT_WEIGHTS = JSON.parse(raw);
+}
+// 分相计时探针（--profile 开）：runner.step 内 settle/decide/act/tail 四段累计
+const PROFILE = argOf('profile', '0') === '1';
+if (PROFILE) globalThis.__stepProf = { settle: 0, decide: 0, act: 0, tail: 0, steps: 0, sigMs: 0, sigCalls: 0, obsMs: 0, obsCalls: 0, actLoopSigMs: 0, actLoopCalls: 0, wsSigMs: 0, wsSigCalls: 0, deferMs: 0, actChanged: 0, actDeadline: 0, actIdleExit: 0, wsResets: 0, wsIters: 0, wsOk: 0, wsWaitKeys: 0, wsTimeout: 0, wsDurMs: 0, wsBlockModal: 0, wsBlockKeys: 0 };
 mkdirSync(OUT_DIR, { recursive: true });   // 目录先行：局内 errors.log 追加才可写
 // 游戏侧探针钩子（chests 揭晓链等）：进程内直写文件，无缓冲丢失；浏览器环境无 __probe 无副作用
 const PROBE_LOG = resolve(OUT_DIR, 'probe.log');
@@ -234,9 +280,11 @@ writeFileSync(PROBE_LOG, '', 'utf8');
 globalThis.__probe = (tag, msg) => { try { appendFileSync(PROBE_LOG, `[${tag}] ${msg}\n`, 'utf8'); } catch { /* 忽略 */ } };
 let lastStepAt = 0;
 for (let i = 0; i < RUNS; i++) {
+  pendingSeed = SEED_BASE === null ? null : ((SEED_BASE + i) >>> 0);
   const before = Agent.recorder.listRuns().length;
   const startedAt = Date.now();
   const phaseHist = {};
+  const phaseMs = {};
   const fullTrace = [];   // debug 模式逐步 trace（局末落 trace-N.json）
   let trace = [];
   let timedOut = false;
@@ -261,6 +309,8 @@ for (let i = 0; i < RUNS; i++) {
             console.log(`[slow] 局${i + 1} step${stepIdx}: ${stepMs}ms phase=${r.obs.phase} id=${r.id || 'null'} stalled=${r.settleStalled === true}`);
           }
           phaseHist[r.obs.phase] = (phaseHist[r.obs.phase] || 0) + 1;
+          // 按阶段分桶步耗（09-26 耗时查因）：定位哪类步变慢
+          phaseMs[r.obs.phase] = (phaseMs[r.obs.phase] || 0) + stepMs;
           if (DEBUG_STEPS && stepIdx < DEBUG_STEPS) {
             // 完整逐步 trace 落 JSON（离散 stdout 拼不出时序真相——09-26 教训）
             const bodyHead = (document.getElementById('ovBody')?.textContent || '').replace(/\s+/g, ' ').trim();
@@ -273,6 +323,9 @@ for (let i = 0; i < RUNS; i++) {
               pt: pt ? { uid: pt.uid, name: pt.name } : null,
               e: r.obs.battle?.energy ?? null, turns: r.obs.battle?.turn ?? null,
               actions: (r.obs.actions || []).map(a => a.id),
+              mv: (r.obs.actions || []).filter(a => a.type === 'move').map(a => `${a.id}|${a.label}|v=${a.visited ? 1 : 0}`),
+              hp: r.obs.battle?.player?.hp ?? r.obs.run?.hp ?? null,
+              hpMax: r.obs.battle?.player?.maxHp ?? r.obs.run?.maxHp ?? null,
               body: bodyHead.slice(0, 140),
             });
           }
@@ -289,7 +342,9 @@ for (let i = 0; i < RUNS; i++) {
   const fresh = after.slice(before);
   const record = fresh[fresh.length - 1] || {
     id: `run-timeout-${Date.now().toString(36)}`, ts: Date.now(), driver: DRIVER,
-    outcome: 'abandon', why: timedOut ? '批跑超时' : '批跑无终局记录', seed: null,
+    // seed 必须回填（09-26 配对检验）：无终局记录的弃局走这条兜底，
+    // seed=null 会丢配对键——agent-compare 按 seed join，缺一局就废一半样本
+    outcome: 'abandon', why: timedOut ? '批跑超时' : '批跑无终局记录', seed: pendingSeed ?? null,
     mode: window.SDT.game?.nestActive ? 'nest' : 'standard',
     class: null, characterId: null, maxLayer: null, turns: null, coins: null, hpLeft: null,
     durationSec: Math.round((Date.now() - startedAt) / 1000),
@@ -298,6 +353,7 @@ for (let i = 0; i < RUNS; i++) {
   record.batchSteps = trace.length;
   record.batchMs = Date.now() - startedAt;
   record.phaseHist = phaseHist;
+  record.phaseMs = phaseMs;
   record.maxStepMs = maxStepMs;
   record.slowSteps = slowSteps;
   // 异常入账（09-26 机制）：本局真错误桶 + trace 内的单步自愈错误；jsdom 渲染噪音单独计数
@@ -309,6 +365,11 @@ for (let i = 0; i < RUNS; i++) {
   records.push(record);
   if (fullTrace.length) {
     try { writeFileSync(resolve(OUT_DIR, `trace-${i + 1}.json`), JSON.stringify(fullTrace, null, 1), 'utf8'); }
+    catch { /* 落盘失败不打断 */ }
+  } else if (record.outcome === 'abandon' && trace.length) {
+    // 弃局必落轻量 trace（09-26）：非 debug 跑弃局没现场可查——stopReason+逐步 id/spin
+    // 足以定位空转键（spin/wait/stay 死因复盘不再依赖重跑）
+    try { writeFileSync(resolve(OUT_DIR, `trace-lite-${i + 1}.json`), JSON.stringify({ stopReason: record.stopReason, steps: trace }, null, 1), 'utf8'); }
     catch { /* 落盘失败不打断 */ }
   }
   if (record.errors.length) {
@@ -331,7 +392,7 @@ const jsonl = records.map(r => JSON.stringify(r)).join('\n') + '\n';
 writeFileSync(resolve(OUT_DIR, 'runs.jsonl'), jsonl, 'utf8');
 const summary = Agent.stats.aggregate(records);
 summary.meta = {
-  policy: POLICY, driver: DRIVER, runs: RUNS, mode: MODE, generatedAt: new Date().toISOString(),
+  policy: POLICY, driver: DRIVER, runs: RUNS, mode: MODE, seedBase: SEED_BASE, generatedAt: new Date().toISOString(),
   avgRunMs: Math.round(records.reduce((s, r) => s + (r.batchMs || 0), 0) / (records.length || 1)),
   avgStepMs: (() => { const steps = records.reduce((s, r) => s + (r.batchSteps || 0), 0); return steps ? Math.round(records.reduce((s, r) => s + (r.batchMs || 0), 0) / steps) : 0; })(),
   errRuns: records.filter(r => (r.errors || []).length).length,
@@ -340,6 +401,14 @@ summary.meta = {
   slowStepRuns: records.filter(r => (r.maxStepMs || 0) > SLOW_STEP_MS).length,
 };
 writeFileSync(resolve(OUT_DIR, 'summary.json'), JSON.stringify(summary, null, 2), 'utf8');
+if (PROFILE && globalThis.__stepProf) {
+  const p = globalThis.__stepProf;
+  const tot = Math.max(1, p.settle + p.decide + p.act + p.tail);
+  const line = `settle=${Math.round(p.settle)}ms decide=${Math.round(p.decide)}ms act=${Math.round(p.act)}ms tail=${Math.round(p.tail)}ms steps=${p.steps} | settle ${(p.settle * 100 / tot).toFixed(1)}% decide ${(p.decide * 100 / tot).toFixed(1)}% act ${(p.act * 100 / tot).toFixed(1)}% tail ${(p.tail * 100 / tot).toFixed(1)}% :: sig ${Math.round(p.sigMs)}ms×${p.sigCalls} (${(p.sigMs * 100 / tot).toFixed(1)}%) observe ${Math.round(p.obsMs)}ms×${p.obsCalls} (${(p.obsMs * 100 / tot).toFixed(1)}%) :: actLoop-sig ${Math.round(p.actLoopSigMs)}ms×${p.actLoopCalls} waitSettle-sig ${Math.round(p.wsSigMs)}ms×${p.wsSigCalls} defer ${Math.round(p.deferMs)}ms (${(p.deferMs * 100 / tot).toFixed(1)}%) :: act 出口 changed=${p.actChanged} idleExit=${p.actIdleExit} deadline=${p.actDeadline} :: ws 稳定窗重置=${p.wsResets} wsOk=${p.wsOk} 平均时长=${(p.wsDurMs / Math.max(1, p.wsOk)).toFixed(1)}ms 平均轮数=${Math.round(p.wsIters / Math.max(1, p.wsOk))} 阻塞modal=${p.wsBlockModal} 阻塞keys=${p.wsBlockKeys}`;
+  console.log(`[profile] ${line}`);
+  summary.profile = p;
+  writeFileSync(resolve(OUT_DIR, 'summary.json'), JSON.stringify(summary, null, 2), 'utf8');
+}
 console.log(`[agent-batch] 完成 → ${resolve(OUT_DIR, 'runs.jsonl')}`);
 console.log(`[agent-batch] 汇总：通关率 ${summary.overall.clearRate}% · 撤离率 ${summary.overall.extractRate}% · 死亡率 ${summary.overall.deathRate}% · 均带出价值 ${summary.overall.avgCarriedValue}`);
 process.exit(0);

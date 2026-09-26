@@ -11,7 +11,9 @@
  * ============================================================ */
 
 const UI_NAME_RE = /^[A-Za-z][\w:-]*$/;
-const SYS_COMMANDS = new Set(['startGame', 'reenter', 'noop', 'discardCard']);
+// openBackpack：野外开背包（09-26 断链修复）——bagBtnFloat 无 data-act 且在 ovBody 外，
+// surface 扫不到；showBackpack 只经 game.debug 暴露。协议补此入口后「背包满→开包→丢卡」成环
+const SYS_COMMANDS = new Set(['startGame', 'reenter', 'noop', 'discardCard', 'openBackpack']);
 // 战斗命令白名单：只放行决策相关命令；dev/refreshView 等调试口不进协议
 const BATTLE_COMMANDS = new Set([
   'playCard', 'playDirect', 'endTurn', 'flee', 'surrender',
@@ -19,6 +21,10 @@ const BATTLE_COMMANDS = new Set([
   'selectDeckCard', 'confirmDeck', 'cancelDeck',
   'beginInfusion', 'selectInfusion', 'confirmInfusion', 'cancelInfusion',
   'useItem', 'usePotion', 'useEquipSkill',
+  // 砸击三件套：bagSlam（2费4伤的挂起触发）+ resolveSlam/resolveDart（挂起态选目标
+  // 出口）——引擎 commands 与动作面都有推送，白名单曾全漏（09-26 实测 334 次
+  // BATTLE_COMMAND_UNKNOWN 拒绝，砸击/血毒双镖整条链路走不通，策略卡死到熔断）
+  'bagSlam', 'resolveSlam', 'resolveDart',
   'cancelPendingTarget', 'cancelInteraction',
   'openBag', 'closeBag', 'openGrave', 'closeGrave', 'openDeckView', 'closeDeckView',
 ]);

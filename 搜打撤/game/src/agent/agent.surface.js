@@ -92,11 +92,15 @@ function collectActionKeys() {
     const act = el.getAttribute('data-act');
     if (!act) continue;
     if (el.disabled === true || el.getAttribute('aria-disabled') === 'true' || el.classList.contains('off')) continue;
-    const params = {};
-    for (const [key, value] of Object.entries(el.dataset)) {
-      if (key !== 'act') params[key] = value;
+    // 原生 attributes 直读（09-26 均耗时优化）：jsdom 的 el.dataset 是
+    // DOMStringMap 代理，Object.entries 会触发 camelCase 转换+ownKeys 全扫
+    // （profile 占 ~4% CPU）；签名只做变化检测，data-* 原名拼接语义等价
+    let params = '';
+    for (let i = 0; i < el.attributes.length; i++) {
+      const a = el.attributes[i];
+      if (a.name.startsWith('data-') && a.name !== 'data-act') params += `${a.name}=${a.value},`;
     }
-    out.push(`${act}:${JSON.stringify(params)}`);
+    out.push(`${act}:{${params}}`);
   }
   out.push('closeOverlay:{}');
   return out;

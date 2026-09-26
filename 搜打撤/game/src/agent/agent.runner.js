@@ -10,7 +10,7 @@
  * ============================================================ */
 import { normalizeAction, actionId } from './agent.protocol.js';
 import { findUiElement, collectActionKeys, overlayVisible } from './agent.surface.js';
-import { observe, settleSignature, markUiFailure } from './agent.state.js';
+import { observe, settleSignature, bustSigCache, markUiFailure } from './agent.state.js';
 import { isTurbo } from './agent.turbo.js';
 import { setDriver } from './agent.recorder.js';
 import { moveTo, reenterCell } from '../run/game.run.flow.js';
@@ -90,6 +90,18 @@ function dispatch(action, id) {
       if (action.name === 'reenter') {
         return reenterCell() ? { ok: true, id } : { ok: false, id, code: 'REENTER_REJECTED', message: '当前不可重开节点' };
       }
+      if (action.name === 'openBackpack') {
+        // 走 game.debug 挂载的 showBackpack（boot 无条件赋值）。调用后校验背包页
+        // 真的开了（closeBag 上面）——showBackpack 对非法 state 会静默返回，
+        // 不校验会让策略误以为成功、反复空开（3s 失败记忆兜底防死循环）
+        const fn = window.SDT?.game?.debug?.showBackpack;
+        if (typeof fn !== 'function') return { ok: false, id, code: 'BACKPACK_UNAVAILABLE', message: 'showBackpack 未挂载' };
+        fn();
+        const opened = !!window.SDT?.game?.debug && !!document.querySelector('#ovBody [data-act="closeBag"]');
+        return opened
+          ? { ok: true, id }
+          : { ok: false, id, code: 'BACKPACK_REJECTED', message: `开背包被拒（state=${window.SDT?.game?.state}）` };
+      }
       if (action.name === 'discardCard') {
         const ok = window.SDT.game?.discardCard?.(action.args?.[0]);
         return ok ? { ok: true, id } : { ok: false, id, code: 'DISCARD_REJECTED', message: '丢弃失败（卡不存在/初始牌保护/需先开背包）' };
@@ -103,16 +115,21 @@ function dispatch(action, id) {
 
 // 静止等待：签名连续 quietMs 不变 + 动作面非空（或允许空）即视为 settle。
 // 全程 cap 超时兜底——超时也返回当前观察值并标记 stalled，绝不无限挂起。
-async function waitSettle({ quietMs = 0, pollMs = 0, timeoutMs = 0, allowEmpty = false } = {}) {
+async function waitSettle({ quietMs = 0, pollMs = 0, timeoutMs = 0, allowEmpty = false, preStable = false } = {}) {
   const turbo = isTurbo();
   // turbo 性能档（09-26 数量级压缩三件套）：
   // ① 轮询走 setImmediate 亚毫秒让位（Windows setTimeout 被钳到 ~15ms 是旧慢根源）
   // ② 静止期只算轻量签名（无 label DOM 扫描），observe 只在判定时做一次
   // ③ quiet 3ms——turbo 下演出全短路，状态传播只剩 1-2 个宏任务
-  const quiet = quietMs || (turbo ? 1 : 40);
+  const prof = globalThis.__stepProf;
+  // preStable（09-26 耗时②）：act 轮询已确认「签名 3ms 未变 + busy/queue 全空」——
+  // 严格强于 quiet=1ms 判据，尾部稳定窗直接放行（省一次 1ms+ 等待/步）；
+  // modalGap/动作面非空两道守卫仍生效，瞬态页死锁防护不变
+  const quiet = preStable ? 0 : (quietMs || (turbo ? 1 : 40));
   const timeout = timeoutMs || (turbo ? 8000 : 20000);
   const deadline = nowMs() + timeout;
   let last = settleSignature();
+  const wsEntry = prof ? nowMs() : 0;
   let stableSince = nowMs();
   let iter = 0;
   let modalGapSince = 0;
@@ -120,12 +137,16 @@ async function waitSettle({ quietMs = 0, pollMs = 0, timeoutMs = 0, allowEmpty =
     // 先让位再判定（09-26 关键修复）：判定在 await 前时 quiet=1ms 会被 settleSignature
     // 自身的 DOM 扫描耗时吃掉 → 首轮零 defer 返回 → 事件循环不轮转 → 0ms 揭晓/
     // 转场 timer 永远轮不到（瞬态页死锁根因）。每轮先 defer 保证 timers 有机会跑。
+    const td0 = prof ? nowMs() : 0;
     await (turbo ? defer() : sleep(pollMs || 30));
+    if (prof) prof.deferMs += nowMs() - td0;
     // 签名降频：defer 间隙只有定时器能改 DOM，签名最多晚 3 轮（<1ms）被发现，
     // 但 75% 的 DOM 扫描省掉了（单局大头）
+    const tsp = prof ? nowMs() : 0;
     const sig = (iter++ % 4 === 0) ? settleSignature() : last;
+    if (prof) { prof.wsSigMs += nowMs() - tsp; if (iter % 4 === 1) prof.wsSigCalls += 1; }
     const t = nowMs();
-    if (sig !== last) { last = sig; stableSince = t; }
+    if (sig !== last) { last = sig; stableSince = t; if (prof) prof.wsResets += 1; }
     else if (t - stableSince >= quiet) {
       // 瞁态①「modal 但弹层还没挂上/刚摘掉」（showRunTransition 等 0ms 定时器窗口）——
       // 快 settle 会抓到这个空档让 decide 拿到零动作误停，必须等；但超过 300ms 的
@@ -140,11 +161,13 @@ async function waitSettle({ quietMs = 0, pollMs = 0, timeoutMs = 0, allowEmpty =
       // 判据②只防「弹层开着但按钮还没渲染出来」：overlay 本就关着（地图相/战斗相/
       // 标题相——动作来自 move/battle/sys 而非 data-act）直接放行
       if ((!modalGap || modalGapExpired) && (allowEmpty || collectActionKeys().length > 0 || !overlayVisible())) {
+        if (prof) { prof.wsOk += 1; prof.wsDurMs += nowMs() - wsEntry; prof.wsIters += iter; }
         return { ok: true, stalled: false, obs: observe() };
       }
       // 弹层开着但动作面空 / modal 空档：继续等渲染
+      if (prof) { prof.wsWaitKeys += 1; if (modalGap && !modalGapExpired) prof.wsBlockModal += 1; else prof.wsBlockKeys += 1; }
     }
-    if (t >= deadline) return { ok: false, stalled: true, obs: observe() };
+    if (t >= deadline) { if (prof) prof.wsTimeout += 1; return { ok: false, stalled: true, obs: observe() }; }
   }
 }
 
@@ -152,6 +175,10 @@ async function waitSettle({ quietMs = 0, pollMs = 0, timeoutMs = 0, allowEmpty =
 // 「等动作面推进」是防重复点击的关键：hideOverlay 是 210ms 淡出、转场页有数百 ms 生命期，
 // 这些窗口里旧按钮仍在面上，不等变化就会被驱动反复点同一钮。
 async function step(decide, options = {}) {
+  // 分相计时探针（--profile 开）：settle/decide/act/交棒四段耗时入 globalThis.__stepProf，
+  // 均耗时优化先量再改
+  const prof = globalThis.__stepProf;
+  const t0 = prof ? nowMs() : 0;
   // preSettled：上一步尾部已 settle 且步间无外部驱动（autoRun 连跑）——跳过前置等待省 quiet 窗
   // carryObs：上一步尾部 settle 的观察——步间只有微任务让位（定时器不跑），状态未变，
   // 直接复用省掉每步的第二次 observe（DOM label 扫描是步耗时大头）
@@ -159,6 +186,7 @@ async function step(decide, options = {}) {
     ? { ok: true, stalled: false, obs: options.carryObs || null }
     : await waitSettle(options);
   const obs = first.obs || observe();
+  const t1 = prof ? nowMs() : 0;
   let decision;
   try {
     decision = await decide(obs);
@@ -166,14 +194,53 @@ async function step(decide, options = {}) {
     return { obs, action: null, res: null, error: String(error?.message || error), done: true };
   }
   if (decision == null) return { obs, action: null, res: null, done: true };
+  const t2 = prof ? nowMs() : 0;
   const before = settleSignature();
   const res = act(decision);
+  bustSigCache();   // 状态已被 act 改写：作废 before 写入的 TTL 缓存，首轮探测立即可见
   const isWaitAction = decision?.type === 'sys' && decision?.name === 'noop';
   if (res.ok && !isWaitAction) {
     const deadline = nowMs() + (isTurbo() ? 40 : 1500);
-    while (settleSignature() === before && nowMs() < deadline) await (isTurbo() ? defer() : sleep(40));
+    const pl = prof;
+    let actPoll = 0;
+    let firstCheckMs = 0;
+    let idleStuckMs = 0;
+    for (;;) {
+      // 签名降频 1/4（09-26 均耗时优化）：轮询主成本是 settleSignature 本体（0.35ms/次，
+      // 深走战斗快照+DOM 键扫描），40ms 窗口内晚 ~0.5ms 发现推进无碍，签名计算省 3/4
+      if (actPoll++ % 4 === 0) {
+        const ts = pl ? nowMs() : 0;
+        const changed = settleSignature() !== before;
+        if (pl) { pl.actLoopSigMs += nowMs() - ts; pl.actLoopCalls += 1; }
+        if (changed) { if (pl) pl.actChanged += 1; break; }
+        // 引擎空闲快出（09-26 均耗时⑥）：能量/状态/buff 等变化不在签名字段里，这类动作
+        // 完成后签名永不改变 → 白等满 40ms 死线（实测 12.6% 步、占 act 段 57%）。
+        // busy/queue 全空闲 + 签名 3ms 未动 = 不会有推进了，提前放行；引擎忙时照等满窗
+        const nowE = nowMs();
+        if (!firstCheckMs) firstCheckMs = nowE;
+        const snapNow = window.SDT?.Battle?.getSnapshot?.() || null;
+        const engineIdle = !(snapNow && (snapNow.busy || snapNow.actionQueueLength > 0));
+        if (engineIdle) {
+          if (!idleStuckMs) idleStuckMs = nowE;
+          if (nowE - idleStuckMs > 3) { if (pl) pl.actIdleExit += 1; options.preStable = true; break; }
+        } else idleStuckMs = 0;
+      }
+      if (nowMs() >= deadline) { if (pl) pl.actDeadline += 1; break; }
+      const td1 = pl ? nowMs() : 0;
+      await (isTurbo() ? defer() : sleep(40));
+      if (pl) pl.deferMs += nowMs() - td1;
+    }
   }
+  const t3 = prof ? nowMs() : 0;
   const settled = res.ok ? await waitSettle(options) : { ok: true, stalled: false, obs };
+  options.preStable = false;   // 单步有效：只作用于 idleExit 后的这一次尾部 settle
+  if (prof) {
+    prof.settle += t1 - t0;
+    prof.decide += t2 - t1;
+    prof.act += t3 - t2;
+    prof.tail += nowMs() - t3;
+    prof.steps += 1;
+  }
   return { obs: settled.obs || observe(), action: res.action || decision, id: res.id, res, done: false,
     settleStalled: settled.stalled === true };
 }
@@ -184,14 +251,20 @@ async function step(decide, options = {}) {
 let runCancelled = false;
 function stopRun() { runCancelled = true; }
 
-async function autoRun({ decide, maxSteps = 800, onStep, until, driver = 'auto', spinLimit = 6, stayLimit = 500, waitLimit = 60, ...options }) {
+// waitLimit：noop 等待门改墙钟（09-26 弃局根因②）。旧口径是步数 60——turbo 下 noop 步进
+// 仅 ~2.5ms，60 步窗口只有 ~150ms，而法力奔涌 surgeSleep(850ms×多发) 等引擎内裸定时器
+// 不走 clock 短路，busy 窗口可达 3.4s：正常结算被 150ms 步数门误杀成 wait-limit 弃局。
+// 墙钟 4000ms 覆盖 4 发奔涌（3.4s）+余量；真死锁仍由它收口（30s 单局硬上限兜底）。
+const WAIT_LIMIT_MS = 4000;
+
+async function autoRun({ decide, maxSteps = 800, onStep, until, driver = 'auto', spinLimit = 6, stayLimit = 500, waitLimitMs = WAIT_LIMIT_MS, ...options }) {
   const trace = [];
   const previousDriver = setDriver(driver);
   runCancelled = false;
   let seenRunActive = false;
   let spinKey = '';
   let spinCount = 0;
-  let waitCount = 0;
+  let waitStartedMs = 0;
   let stayKey = '';
   let stayCount = 0;
   let battleTurnKey = null;
@@ -226,19 +299,19 @@ async function autoRun({ decide, maxSteps = 800, onStep, until, driver = 'auto',
       const position = `${result.obs.turn}:${result.obs.phase}:${result.obs.battle?.turn ?? '-'}`;
       const isWait = result.action?.type === 'sys' && result.action?.name === 'noop';
       if (isWait) {
-        // noop=明确等待（结算窗口）：独立计数、不碰熔断；持续卡死仍由 waitLimit 收口
-        waitCount += 1;
+        // noop=明确等待（结算窗口）：不碰熔断；卡死按墙钟收口（见 WAIT_LIMIT_MS）
         spinKey = ''; spinCount = 0;
-        if (waitCount > waitLimit) { stopReason = 'wait-limit'; break; }
+        if (!waitStartedMs) waitStartedMs = nowMs();
+        if (nowMs() - waitStartedMs > waitLimitMs) { stopReason = 'wait-limit'; break; }
       } else if (result.res?.ok) {
-        waitCount = 0;
+        waitStartedMs = 0;
         const spin = `${result.id || ''}:${JSON.stringify(result.action?.args ?? result.action?.params ?? null)}@${position}`;
         if (spin === spinKey) spinCount += 1;
         else { spinKey = spin; spinCount = 1; }
       } else {
         // 被引擎拒绝的动作不进同键熔断（09-26）：瞬态页上的 meta 失败键连点
         // 由失败记忆+TTL 管理，失败步清 spin 避免毫秒级假连击杀局
-        waitCount = 0;
+        waitStartedMs = 0;
         spinKey = ''; spinCount = 0;
       }
       // 战斗冻结守卫：战斗回合不前进的非 noop 步连续累计即收口（动作轮换躲得过同键熔断）
@@ -251,8 +324,13 @@ async function autoRun({ decide, maxSteps = 800, onStep, until, driver = 'auto',
         battleTurnKey = null;
         battleStall = 0;
       }
-      if (position === stayKey) stayCount += 1;
-      else { stayKey = position; stayCount = 1; }
+      // noop 等待步不计同位置长驻（09-26 R6）：busy 窗口（奔涌等演出）内 turn/phase 不变、
+      // noop 步进仅 5-6ms，500 步 ~3s 会先于 4s wait 墙钟触发 stay 误杀——noop 已有独立
+      // 墙钟门，stay 只统计真正执行了动作的步
+      if (!isWait) {
+        if (position === stayKey) stayCount += 1;
+        else { stayKey = position; stayCount = 1; }
+      }
       trace.push({ step: i, id: result.id || null, ok: result.res?.ok ?? null, phase: result.obs.phase, spin: spinCount, stalled: result.settleStalled === true });
       onStep?.(result, i);
       if (result.obs.run?.active) seenRunActive = true;

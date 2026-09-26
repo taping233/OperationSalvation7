@@ -8,7 +8,7 @@
  *   - 地图相邻节点（curLayer().logical[trackPos].next）
  * 输出 JSON 可直接喂 LLM / 外部脚本；每条动作带稳定 id（见 agent.protocol）。
  * ============================================================ */
-import { game, curLayer, bagCap } from '../run/game.session.js';
+import { game, curLayer, bagCap, usedSlots } from '../run/game.session.js';
 import { collectUiActions, collectActionKeys, overlayBody, overlayVisible } from './agent.surface.js';
 import { actionId } from './agent.protocol.js';
 
@@ -94,7 +94,9 @@ function battleView(snap) {
     } : null,
     infusing: snap.infusing ? { uid: snap.infusing.uid, name: snap.infusing.card?.name || '', picked: [...(snap.infusing.picked || [])] } : null,
     deckSelection: snap.deckSelection ? {
-      need: snap.deckSelection.need,
+      // need 投影即放行口径 min(need, cards.length)——与 battleActions/引擎一致，
+      // 策略第一分支 selected>=need 判定不再拿原始 15 卡死
+      need: Math.min(snap.deckSelection.need, (snap.deckSelection.cards || []).length),
       selected: [...(snap.deckSelection.selected || [])],
       cards: (snap.deckSelection.cards || []).map(e => ({ uid: e.uid, name: e.card?.name || '', rarity: e.card?.rarity || '', type: e.card?.type || '' })),
     } : null,
@@ -124,7 +126,11 @@ function battleActions(snap) {
     for (const e of snap.deckSelection.cards) {
       if (!snap.deckSelection.selected.includes(e.uid)) push('selectDeckCard', [e.uid]);
     }
-    if ((snap.deckSelection.selected || []).length >= snap.deckSelection.need) push('confirmDeck', []);
+    // confirm 门槛与引擎放行同口径（beginBoss：sel.size >= min(bossDeckSize, selPool.length)，
+    // 视图 bossGo 同款）——可编卡不足 need 时全选后必须给 confirm，否则动作面只剩
+    // cancelDeck，策略回 null 被判 decide-null 弃局（09-26 trace-76 实录）
+    const need = Math.min(snap.deckSelection.need, (snap.deckSelection.cards || []).length);
+    if ((snap.deckSelection.selected || []).length >= need) push('confirmDeck', []);
     if ((snap.deckSelection.selected || []).length > 0) push('cancelDeck', []);
     return acts;
   }
@@ -202,11 +208,23 @@ function mapActions() {
   const current = layer?.logical?.[game.trackPos];
   const acts = [];
   for (const [li, idx] of current?.next || []) {
-    const def = game.layerData?.[li]?.logical?.[idx]?.def;
+    const cell = game.layerData?.[li]?.logical?.[idx];
+    const def = cell?.def;
+    // next=该候选自身的邻居（09-26 架构升级② 2步前瞻）：observe 侧一次展开，
+    // 策略做 depth-2 rollout 不需要回读引擎。纯只读投影，不影响引擎状态
+    const next = (cell?.next || []).map(([nli, nidx]) => {
+      const ndef = game.layerData?.[nli]?.logical?.[nidx]?.def;
+      return {
+        li: nli, idx: nidx,
+        visited: !!game.visited?.[`${nli},${nidx}`],
+        label: `${ndef?.name || ndef?.type || '节点'}（${ndef?.type || '?'}）`,
+      };
+    });
     acts.push(withId({
       type: 'move', li, idx,
       visited: !!game.visited?.[`${li},${idx}`],
       label: `${def?.name || def?.type || '节点'}（${def?.type || '?'}）`,
+      next,
     }));
   }
   acts.push(withId({ type: 'sys', name: 'reenter', label: '重开脚下节点' }));
@@ -219,8 +237,10 @@ function bagActions() {
   if (!body || !overlayVisible()) return [];
   // 背包页开着的信号 = 背包关闭按钮在面上（closeBag 走 surface 的 ui 动作，这里只补丢弃）
   if (!body.querySelector('[data-act="closeBag"]')) return [];
+  // 满格口径对齐引擎（09-26）：usedSlots=物资+卡牌占格（同名堆叠1格、stored/safe 不占格）。
+  // 旧 usedCards.length 在堆叠场景下恒偏大（实例数>格数），丢卡面会提前出现/该出现不出现
+  if (usedSlots() < bagCap()) return [];
   const owned = game.ownedCards || [];
-  if (owned.length < bagCap()) return [];
   const acts = [];
   for (const o of owned) {
     if (!o.card || o.safe || o.stored) continue;
@@ -245,11 +265,17 @@ function runBrief() {
     bossKilled: !!game.bossKilled,
     state: game.state,
     bagCap: bagCap(),   // 背包容量（满时触发腾格/卖卡决策）
+    // 满格判断统一用 used（占格数，堆叠口径）；deck=卡牌实例数（整备预算用）
+    used: usedSlots(),
+    deck: (game.ownedCards || []).length,
     nodeVisited: !!game.visited?.[`${game.layerIdx},${game.trackPos}`],   // 脚下格是否已结算（死循环检测用）
     inventory: (game.inventory || []).map(i => ({ name: i.name, count: i.count, value: i.value ?? null })),
     ownedCards: (game.ownedCards || []).map(o => ({
       uid: o.uid, name: o.card?.name || '', type: o.card?.type || '',
       rarity: o.card?.rarity || '', safe: !!o.safe,
+      // 可否卖给商店（09-26 断链修复②）：openSell 只对可售卡有意义，
+      // 普通卡进收购台是空面板——策略据此决定走卖卡还是丢卡腾格
+      sellable: !!window.SDT?.Cards?.isSellable?.(o.card),
     })),
     // 仓库卡池（基地整备选卡的价值排序依据；非对局态也有，标题页除外）
     stash: (() => {
@@ -272,6 +298,8 @@ function markUiFailure(fail) {
 }
 
 function observe() {
+  const prof = globalThis.__stepProf;
+  const tObs = prof ? performance.now() : 0;
   const phase = phaseOf();
   if (game.battleActive) warmBattleLookups();
   const snap = game.battleActive && window.SDT?.Battle?.getSnapshot ? window.SDT.Battle.getSnapshot() : null;
@@ -280,6 +308,19 @@ function observe() {
   const fightActions = phase === 'battle' ? battleActions(snap) : [];
   const bagDrops = bagActions();
   const sysActions = phase === 'title' ? [withId({ type: 'sys', name: 'startGame', label: '开始探索' })] : [];
+  // 背包满开包（09-26 断链修复①）：野外唯一腾格入口。bagBtnFloat 无 data-act 且在
+  // ovBody 外 surface 扫不到、showBackpack 只经 game.debug 暴露——协议补 openBackpack。
+  // 只在 map 相推（overlay 期间 showBackpack 会与现页叠层）；无可丢卡（全 safe/初始牌）不推，
+  // 否则开包后无 discardCard 可选会空转。phase==='map' 已蕴含 overlay 未开
+  if (phase === 'map' && game.runActive && !game.battleActive) {
+    const owned = game.ownedCards || [];
+    const discardable = owned.some(o => o.card && !o.safe && !o.stored && o.card.name !== '初始攻击');
+    // 满格=usedSlots>=cap（堆叠口径）：ownedCards.length 在多张同名时虚高，
+    // 曾致 11/16 就开包丢卡（seed77023 带出价值13→0 的回归根因）
+    if (usedSlots() >= bagCap() && discardable) {
+      sysActions.push(withId({ type: 'sys', name: 'openBackpack', label: `背包已满（${usedSlots()}/${bagCap()} 格）· 开包丢卡腾格` }));
+    }
+  }
   const actions = [
     ...uiActions.map(withId),
     ...moveActions,
@@ -287,7 +328,7 @@ function observe() {
     ...bagDrops,
     ...sysActions,
   ];
-  return {
+  const out = {
     ok: true,
     settle: phase !== 'moving' && phase !== 'boot' && !(snap && (snap.busy || snap.actionQueueLength > 0)),
     lastFailed: (uiFailure && Date.now() - uiFailure.ts < 3000) ? uiFailure.fail : null,
@@ -302,18 +343,37 @@ function observe() {
     },
     actions,
   };
+  if (prof) { prof.obsMs += performance.now() - tObs; prof.obsCalls += 1; }
+  return out;
 }
 
 // settle 签名：runner 用它做「静止期」判定（连续两次不变才算稳）与动作面变化检测。
 // 动作键（name+params）进签名：按钮集一变即视为推进，防止在淡出/转场窗口里重复点同一钮。
+// 1ms TTL 缓存（09-26 均耗时④）：settleSignature 单次 0.11-0.35ms——内部 getSnapshot 每调
+// 一次就深走全量战斗快照签名（手牌/牌库/敌人数值逐叶子 JSON 化，profile 占 ~7%）+
+// collectActionKeys 全 DOM 键扫描。轮询步进（defer ~0.1ms）下连续调用读的都是同一状态，
+// 1ms 内直接回放缓存；状态传播延迟最坏 +1ms，落在 40ms 推进窗与 quiet=1ms 判定的容差内。
+let sigCacheT = -1e9;
+let sigCacheV = '';
+// act() 改写状态后必须失效（09-26）：before 指纹刚写过缓存，轮询首查必然回放旧值——
+// 同步完成的动作也要白等 TTL 过期才能看见推进
+function bustSigCache() { sigCacheT = -1e9; }
 function settleSignature() {
+  const nowC = (typeof performance !== 'undefined' && performance.now) ? performance.now() : Date.now();
+  if (nowC - sigCacheT < 1) return sigCacheV;
+  const prof = globalThis.__stepProf;
+  const t = prof ? performance.now() : 0;
   const snap = game.battleActive && window.SDT?.Battle?.getSnapshot ? window.SDT.Battle.getSnapshot() : null;
-  return JSON.stringify([
+  const out = JSON.stringify([
     game.state, game.battleActive, !!game.terminalPending, !!game.pendingExtraction,
     game.turn, snap ? [snap.busy, snap.actionQueueLength, snap.phase, snap.hand.length, snap.foes.map(f => f.hp)] : null,
     overlayVisible(),
     collectActionKeys(),   // 轻量键扫描（无 label/textContent）——settle 轮询性能关键
   ]);
+  if (prof) { prof.sigMs += performance.now() - t; prof.sigCalls += 1; }
+  sigCacheT = nowC;
+  sigCacheV = out;
+  return out;
 }
 
-export { observe, settleSignature, phaseOf, battleActions, mapActions, markUiFailure };
+export { observe, settleSignature, bustSigCache, phaseOf, battleActions, mapActions, markUiFailure };
