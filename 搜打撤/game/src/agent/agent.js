@@ -15,7 +15,7 @@ import { observe, settleSignature, phaseOf } from './agent.state.js';
 import { act, step, autoRun, waitSettle, stopRun } from './agent.runner.js';
 import { normalizeAction, actionId } from './agent.protocol.js';
 import { isTurbo, setTurbo } from './agent.turbo.js';
-import { greedyPolicy, randomPolicy } from './agent.policy.js';
+import { greedyPolicy, randomPolicy, strategicPolicy } from './agent.policy.js';
 import { decide as llmDecide, loadConfig as llmLoadConfig, saveConfig as llmSaveConfig, isEnabled as llmEnabled } from './agent.llm.js';
 import * as recorder from './agent.recorder.js';
 import * as stats from './agent.stats.js';
@@ -27,7 +27,7 @@ const Agent = Object.freeze({
   phase: phaseOf,
   settleSignature,
   normalizeAction, actionId,
-  policies: Object.freeze({ greedy: greedyPolicy, random: randomPolicy }),
+  policies: Object.freeze({ greedy: greedyPolicy, random: randomPolicy, strategic: strategicPolicy }),
   llm: Object.freeze({ decide: llmDecide, loadConfig: llmLoadConfig, saveConfig: llmSaveConfig, isEnabled: llmEnabled }),
   recorder: Object.freeze({
     recordRun: recorder.recordRun,

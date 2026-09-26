@@ -19,9 +19,17 @@ function overlayVisible() {
   return !!overlay && !overlay.hidden;
 }
 
+// label 抽取按元素缓存（09-26 速度优化）：textContent 是每步 DOM 开销大头——
+// 同一次渲染内的多步观察（事件/商店等多步同页）全部命中缓存
+const labelCache = new WeakMap();
 const textLabel = (el) => {
+  const hit = labelCache.get(el);
+  if (hit !== undefined) return hit;
   const text = (el.getAttribute('aria-label') || el.textContent || '').replace(/\s+/g, ' ').trim();
-  return text.length > 48 ? text.slice(0, 47) + '…' : text;
+  // 120：事件选项的收益/风险在 label+detail 里，截太短会丢决策依据
+  const val = text.length > 120 ? text.slice(0, 119) + '…' : text;
+  labelCache.set(el, val);
+  return val;
 };
 
 // 当前弹层可点击动作清单：name=data-act，params=其余 dataset（与点击分发同源）。
@@ -72,4 +80,26 @@ function findUiElement(name, params) {
   return null;
 }
 
-export { collectUiActions, findUiElement, overlayVisible, overlayBody };
+// 轻量键扫描（settle 签名用）：只取 data-act+dataset，不碰 textContent——
+// settle 轮询每步要算多次签名，label 抽取（textContent）是单局耗时的大头
+function collectActionKeys() {
+  const out = [];
+  const zoom = typeof document !== 'undefined' ? document.getElementById('cardZoom') : null;
+  if (zoom) out.push('czClose:{}');
+  const body = overlayBody();
+  if (!body || !overlayVisible()) return out;
+  for (const el of body.querySelectorAll('[data-act]')) {
+    const act = el.getAttribute('data-act');
+    if (!act) continue;
+    if (el.disabled === true || el.getAttribute('aria-disabled') === 'true' || el.classList.contains('off')) continue;
+    const params = {};
+    for (const [key, value] of Object.entries(el.dataset)) {
+      if (key !== 'act') params[key] = value;
+    }
+    out.push(`${act}:${JSON.stringify(params)}`);
+  }
+  out.push('closeOverlay:{}');
+  return out;
+}
+
+export { collectUiActions, collectActionKeys, findUiElement, overlayVisible, overlayBody };

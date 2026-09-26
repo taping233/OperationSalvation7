@@ -11,7 +11,7 @@
  * ============================================================ */
 
 const UI_NAME_RE = /^[A-Za-z][\w:-]*$/;
-const SYS_COMMANDS = new Set(['startGame', 'reenter', 'noop']);
+const SYS_COMMANDS = new Set(['startGame', 'reenter', 'noop', 'discardCard']);
 // 战斗命令白名单：只放行决策相关命令；dev/refreshView 等调试口不进协议
 const BATTLE_COMMANDS = new Set([
   'playCard', 'playDirect', 'endTurn', 'flee', 'surrender',
@@ -73,7 +73,11 @@ function normalizeAction(input) {
     case 'sys': {
       const name = String(input.name || '');
       if (!SYS_COMMANDS.has(name)) return { ok: false, code: 'SYS_COMMAND_UNKNOWN', message: `未知链路命令：${name}` };
-      return { ok: true, action: { type: 'sys', name } };
+      const args = input.args == null ? [] : input.args;
+      if (!Array.isArray(args) || args.length > 4 || args.some(v => v != null && !['string', 'number', 'boolean'].includes(typeof v))) {
+        return { ok: false, code: 'SYS_ARGS_INVALID', message: 'sys.args 只允许最多 4 个标量' };
+      }
+      return { ok: true, action: { type: 'sys', name, args: [...args] } };
     }
     default:
       return { ok: false, code: 'ACTION_TYPE_UNKNOWN', message: `未知动作类型：${String(type)}` };

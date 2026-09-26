@@ -306,6 +306,8 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
     saveGame();
     return true;
   }
+  // Agent 接口面：跳过拖拽直接丢弃（背包满腾格）——docs/agent-protocol.md
+  game.discardCard = discardOwnedCard;
 
   function showDiscardConfirm(name, fromSafe) {
     backpackOpen = false;

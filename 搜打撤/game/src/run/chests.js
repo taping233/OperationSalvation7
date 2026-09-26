@@ -228,6 +228,7 @@ import { turboMs } from '../agent/agent.turbo.js';
   function renderSearch() {
     const K = KINDS()[cur.kind];
     const tok = ++searchSeq;
+    globalThis.__probe?.('rs', `tok=${tok} t=${Date.now()} kind=${cur.kind}`);
     UI.showOverlay(`[[icon:archive]] 搜刮！${cur.isClass ? '职业·' : ''}${K.name} · 第 ${idx} / ${queue.length}`, `
       <p class="evt-sts-desc">${cur.isClass ? '黑色职业宝箱：只掉落<b>职业卡牌</b>' : '你俯身翻检箱子——灰尘、锈迹，还有别的东西。'}</p>
       <div class="pick-search">
@@ -237,13 +238,15 @@ import { turboMs } from '../agent/agent.turbo.js';
       </div>`, 'chest');
     SDT.Sound.sfx('pick');
     UI.refresh(G);
+    const delay = turboMs(SEARCH_MS);
+    globalThis.__probe?.('rt', `tok=${tok} seq=${searchSeq} t=${Date.now()} delay=${delay}`);
     setTimeout(() => {
+      globalThis.__probe?.('rv', `tok=${tok} seq=${searchSeq} cur=${!!cur} t=${Date.now()} delay=${delay}`);
       if (tok !== searchSeq || !cur) return;   // 已开下一个/已收尾 → 不再揭晓
       render();
       scheduleRevealSfx();
-    }, turboMs(SEARCH_MS));
+    }, delay);
   }
-
   // ---------- 开箱浮层：悬在当前画面上的紧凑面板（杀戮尖塔「搜刮!」式） ----------
   // 不再整屏接管：模态卡片直接浮在棋盘/结算画面上，逐卡揭晓后收下继续。
   const riOf = (card) => Math.max(0, SDT.Cards.RARITIES.indexOf(card.rarity));

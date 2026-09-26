@@ -62,7 +62,7 @@ for (;;) {
 | `ui` | `{ "type":"ui", "name":"evtChoice", "params":{ "i":"0" } }` | 点当前弹层按钮（事件选项/商店/宝箱/撤离整理/选角…） | `UI._acts[name](dataset)`（与点击同源） |
 | `move` | `{ "type":"move", "li":1, "idx":4 }` | 移动到相邻节点 | `moveTo(li, idx)`（引擎内校验合法性） |
 | `battle` | `{ "type":"battle", "name":"playCard", "args":["u1", 0] }` | 战斗命令 | `SDT.Battle.commands[name](...args)` |
-| `sys` | `{ "type":"sys", "name":"startGame" }` | 链路控制：`startGame`（标题起步）/ `reenter`（重开脚下格）/ `noop` | 会话入口 |
+| `sys` | `{ "type":"sys", "name":"startGame" }` | 链路控制：`startGame`（标题起步）/ `reenter`（重开脚下格）/ `noop` / `discardCard [卡名]`（**背包满腾格直接丢弃**，经 game.discardCard，绕过拖拽 UI） | 会话入口 |
 
 `act()` 返回 `{ ok:true, id }` 或 `{ ok:false, code, message }`——**非法动作不抛异常、不改状态**，可换动作重试。
 
@@ -73,7 +73,19 @@ for (;;) {
 - `playDirect [uid]`：跳过注能直接打出（注能态的正出口）
 - `endTurn []` / `flee []`；`pickChoice [i]` / `pickDiscover [i]`；`pickHandSelect [uid]` / `skipHandSelect []`
 - `selectDeckCard [uid]` / `confirmDeck []` / `cancelDeck []`（BOSS 编组）
-- `usePotion [uid]` / `useItem [uid]` / `openBag []` / `cancelPendingTarget []`
+- `usePotion [uid]` / `useItem [uid, 侧]`（侧=敌人下标或 "self"）/ `openBag []` / `cancelPendingTarget []`
+- `bagSlam []`：**背包砸击**（2 费 · 4 点固定伤 · 不吃手牌）→ 进入选目标态后 `resolveSlam [i]`，`cancelInteraction []` 退出
+- `resolveDart [i]`：血毒双镖第二镖（dartPending 态的出口）
+- `useEquipSkill [装备uid]`：**装备主动技能**（observe.battle.equipped 含 uid/used/passive）
+- 挂起态出口：`slamPending`/`dartPending`/`pendingItem` 在 observe 有布尔标记，actions 会自动回填目标选择与 cancel
+
+### 观察面补充（09-26 批）
+
+- `run.bagCap`：背包容量（与 ownedCards.length 对比判断是否满——满时 actions 给出 `sys:discardCard` 丢弃清单）
+- `battle.equipped`：`{uid, name, used, passive}`；`battle.ownItems`：背包战斗道具（useItem 的 uid 源）
+- `battle.potions`：药水快速栏；`battle.player.armor`：当前护甲
+- 弹层 `label` 上限 48→120 字符（事件选项的收益/风险在 label+detail 里）
+- 地图 `move` 无前进偏见：回走/回层是合法战术，顺序由价值分驱动；仅「刚离开的格子」防振荡
 
 ### 弹层动作怎么识别
 
