@@ -54,3 +54,9 @@ E2 hover/旧档04/05、E3真实结算/旧档/长局、E4异步实页、E5恢复�
 定时异常诊断：独审原bag单测10/10通过、未单独复现，但实际afterAll只restoreAllMocks，boot闭包保留250ms timeout→rAF。Friday核源码后批准仅该测试生命周期修复：main导入前可控fake计时器，按原0/280ms定量推进，结束清除剩余计时器并核0、finally还原；不runAllTimers、不压制未处理异常、不改boot。保留全部业务断言，补修与快照测试一起定向/独审后再交全量。
 
 15:38 补修交回：原B单写两测试，独审通过，全队停写。快照以合法version/onPlay操作数组替代非法扩展，前后schema/capability检查通过并保留全部隔离意图；bag验证window/global三类计时器受控，结束清零并还原，原10业务断言不变。15:37:36两文件11项全部通过、无未处理异常；首轮门禁红灯不因此作废，需完整重验。Friday已读两文件实际diff，新增两文件使本批总15文件，原生产变更未再修改；准备再次运行原门禁。
+
+## 最终本地落库结果
+
+2026-09-27 15:44（Asia/Shanghai）Friday 实核：15:40:39 启动第二轮原 pre-commit 全量，171 文件 / 1119 项全部通过，无未处理异常，Vitest 耗时227.57秒；完整日志 `.git/gate-full-test.log`。未绕过门禁，15文件已提交为 `8c73f88a008d2c8ef8b98af5cec69a08b3316b2a`（fix: reject unsupported card rules before battle payment）。首轮快照失败与teardown异常经上述补修及新完整门禁关闭。
+
+提交后 tracked/index 干净，原排除未跟踪内容保留；相对本地 origin/master ahead14/behind0，未fetch、未push，非服务器实时状态。本段随后单独提交验收记录，不改变已验代码。此记录更新RESULT中全量/本地提交待Friday的时间状态：E6代码、独审、定向、全量及本地落库完成；两个真实能力/guard模块受静态检查，不宣称整个解释器或整库规则已静态化/迁移完成。E2–E5积压及E6拒绝提示实页仍留E7，未build、未改玩家档，不自动启动E7。
