@@ -499,6 +499,7 @@ function swapCardCosts(uidA, uidB) {
     cardOverrides.set(uidB, { ...b.card, cost: costB });
     G.log(`[[icon:sparkles]] <b>交换费用</b>：【${esc(a.card.name)}】费用变为 <b>${costA}</b>，【${esc(b.card.name)}】费用变为 <b>${costB}</b>`, 'sys');
   }
+/** @returns {import('./battle.snapshot.types.js').BattleSnapshotInput} */
 function captureSnapshotInput() {
     const pTgt = pendingTargetOf();
     const pItem = pendingItemOf();
@@ -534,6 +535,7 @@ function snapshotSignature(input = captureSnapshotInput()) {
       stealthStrike, freeCast, cardOverrides, zeroFeeUntil, growth,
     });
   }
+/** @returns {import('./battle.snapshot.types.js').BattleSnapshot} */
 function getSnapshot() {
     const input = captureSnapshotInput();
     const sig = snapshotSignature(input);

@@ -1,5 +1,13 @@
+// @ts-check
 import * as Combat from './combat.js';
 
+/** @typedef {import('./battle.snapshot.types.js').SnapshotBattleCard} SnapshotBattleCard */
+/** @typedef {import('./battle.snapshot.types.js').SnapshotFoe} SnapshotFoe */
+/** @typedef {import('./battle.snapshot.types.js').PreviewActionInput} PreviewActionInput */
+/** @typedef {import('./battle.snapshot.types.js').PreviewResult} PreviewResult */
+/** @typedef {import('./battle.snapshot.types.js').PreviewDamageSpec} PreviewDamageSpec */
+
+/** @type {Readonly<Record<string, readonly [string, string, number, string, number]>>} */
 const SEMANTICS = Object.freeze({
   'starter-attack': ['武术', 'attack', 0, '攻(+0):造成等同于攻击力的伤害', 1],
   'tt7-sneak': ['武术', 'attack', -1, '攻(-1)', 1],
@@ -12,6 +20,7 @@ const SEMANTICS = Object.freeze({
   'tt7-meteorrain': ['武术', 'attack', -1, '攻(-1),触发2次', 2],
 });
 
+/** @param {unknown} value */
 function normalizeDesc(value) {
   return String(value || '').trim()
     .replace(/[（]/g, '(').replace(/[）]/g, ')').replace(/[：]/g, ':')
@@ -24,6 +33,7 @@ function normalizeDesc(value) {
 // 吸血、随机目标/随机段数、墓地/重施/延迟一律降级 unknown——宁可不给数字，不给错数字。
 // 与解释器（battle.resolution.js castSegment）共享语义口径：amount 与 card.dmg 由 schema 强制一致，
 // growth 由 cardContext.damageGrowth 通道承担（>0 时 previewAction 已降级 unknown）。
+/** @param {SnapshotBattleCard | null | undefined} card @returns {PreviewDamageSpec | null} */
 function structuredDamageSpec(card) {
   const operation = card?.rules?.triggers?.onPlay?.find(item => item && item.op === 'damage');
   if (!operation) return null;
@@ -35,8 +45,10 @@ function structuredDamageSpec(card) {
   // target 未声明时解释器按「倒下顺延战场首位」结算——预览按 retarget 式逐段转移处理
   const retarget = operation.retarget === 'livingFoes' || operation.target === undefined;
   const countSource = operation.hitCount ?? operation.hits?.count;
-  if (countSource !== undefined && (!Number.isInteger(countSource) || countSource < 1)) return { unknown: true };
-  const hits = Math.max(1, Math.floor(countSource || 1));
+  if (countSource !== undefined && typeof countSource !== 'number') return { unknown: true };
+  const numericCount = typeof countSource === 'number' ? countSource : undefined;
+  if (numericCount !== undefined && (!Number.isInteger(numericCount) || numericCount < 1)) return { unknown: true };
+  const hits = Math.max(1, Math.floor(numericCount || 1));
   if (operation.amount !== undefined) {
     return Number.isFinite(+operation.amount) ? { hits, retarget, amount: +operation.amount } : { unknown: true };
   }
@@ -44,15 +56,17 @@ function structuredDamageSpec(card) {
   return { hits, retarget };
 }
 
+/** @param {SnapshotBattleCard | null | undefined} card @returns {PreviewDamageSpec | null} */
 function semanticMatch(card) {
   const structured = structuredDamageSpec(card);
   if (structured) return structured;
-  const spec = card && SEMANTICS[card.id];
+  const spec = card?.id ? SEMANTICS[card.id] : undefined;
   if (!spec) return null;
   return card.type === spec[0] && card.dmgType === spec[1] && +card.dmg === spec[2]
     && normalizeDesc(card.desc) === spec[3] ? { hits: spec[4] } : null;
 }
 
+/** @param {SnapshotBattleCard | null | undefined} card */
 function cardRuleHint(card) {
   if (!card) return '';
   const operation = card.rules?.triggers?.onPlay?.find(item => item.op === 'damage' && item.retarget === 'livingFoes');
@@ -63,6 +77,7 @@ function cardRuleHint(card) {
     : `${operation.hitCount} 段；目标倒下后按战场顺序转移。`;
 }
 
+/** @param {SnapshotFoe} foe */
 function cloneTarget(foe) {
   return {
     hp: +foe.hp || 0,
@@ -71,16 +86,19 @@ function cloneTarget(foe) {
   };
 }
 
+/** @param {number} cost @param {readonly number[]} targets @param {string} reason @returns {PreviewResult} */
 function unknown(cost, targets, reason) {
   return Object.freeze({ legal: true, cost, targetIndexes: targets, confidence: 'unknown', damage: null,
     knownEffects: Object.freeze([]), unknownEffects: Object.freeze([]), reasons: Object.freeze([reason]) });
 }
 
+/** @param {number} cost @param {readonly number[]} targets @param {string} reason @returns {PreviewResult} */
 function illegal(cost, targets, reason) {
   return Object.freeze({ legal: false, cost, targetIndexes: targets, confidence: 'unknown', damage: null,
     knownEffects: Object.freeze([]), unknownEffects: Object.freeze([]), reasons: Object.freeze([reason]) });
 }
 
+/** @param {PreviewActionInput} input @returns {PreviewResult} */
 function previewAction({ snapshot, action, cardContext }) {
   const uid = action?.uid;
   const targetIndex = +action?.targetIndex;
@@ -104,7 +122,7 @@ function previewAction({ snapshot, action, cardContext }) {
   // 都不猜测段数和结算顺序；带 v2 条件/区间/增伤的结构化伤害降级 unknown（不猜数字）。
   const exactSpec = semanticMatch(card);
   if (!exactSpec) return unknown(cost, frozenTargets, '这张牌的伤害流程暂不支持预览');
-  if (exactSpec.unknown) return unknown(cost, frozenTargets, '这张牌带有条件/区间/随机伤害效果，暂不支持精确预览');
+  if (exactSpec.unknown === true) return unknown(cost, frozenTargets, '这张牌带有条件/区间/随机伤害效果，暂不支持精确预览');
   if (cardContext.damageGrowth > 0) return unknown(cost, frozenTargets, '本场成长会改变这张牌的伤害');
   if (!Combat.TYPE_NAME[card.dmgType] || (!Number.isFinite(+card.dmg) && exactSpec.amount === undefined)) {
     return unknown(cost, frozenTargets, '这张牌没有可预览的固定伤害流程');

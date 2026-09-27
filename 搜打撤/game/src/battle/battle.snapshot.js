@@ -1,7 +1,69 @@
 // Builds the immutable view model for battle rendering. All inputs are values
 // captured by the engine at call time; this module owns no runtime state.
+// @ts-check
+/** @typedef {import('./battle.snapshot.types.js').BattleSnapshotInput} BattleSnapshotInput */
+/** @typedef {import('./battle.snapshot.types.js').BattleSnapshot} BattleSnapshot */
+/** @typedef {import('./battle.snapshot.types.js').BattleCardInput} BattleCardInput */
+/** @typedef {import('./battle.snapshot.types.js').SnapshotBattleCard} SnapshotBattleCard */
+/** @typedef {import('./battle.snapshot.types.js').BattleCardValue} BattleCardValue */
+/** @typedef {import('./battle.snapshot.types.js').SnapshotCardValue} SnapshotCardValue */
+
 const freezeObject = value => value ? Object.freeze({ ...value }) : value;
 const statusOf = value => value ? Object.freeze({ ...value.status }) : null;
+
+// Card data supports recursive primitives/undefined, ordinary arrays, and plain-object enumerable own string data properties.
+// Exotic prototypes and cycles are rejected; this is not a general object-graph serializer.
+/**
+ * @overload
+ * @param {BattleCardInput | null | undefined} value
+ * @param {WeakSet<object>} [ancestors]
+ * @returns {SnapshotBattleCard | null | undefined}
+ */
+/**
+ * @overload
+ * @param {BattleCardValue | null | undefined} value
+ * @param {WeakSet<object>} [ancestors]
+ * @returns {SnapshotCardValue | null | undefined}
+ */
+/**
+ * @param {BattleCardValue} value
+ * @param {WeakSet<object>} [ancestors]
+ * @returns {SnapshotCardValue}
+ */
+function cloneCardData(value, ancestors = new WeakSet()) {
+  if (value === null || value === undefined || typeof value === 'string'
+    || typeof value === 'number' || typeof value === 'boolean') return value;
+  if (typeof value !== 'object') {
+    throw new TypeError(`Battle snapshot card data must be plain data; received ${typeof value}`);
+  }
+  if (ancestors.has(value)) throw new TypeError('Battle snapshot card data cannot contain cycles');
+
+  ancestors.add(value);
+  let copy;
+  if (Array.isArray(value)) {
+    copy = value.map(item => cloneCardData(item, ancestors));
+  } else {
+    const prototype = Object.getPrototypeOf(value);
+    if (prototype !== Object.prototype && prototype !== null) {
+      throw new TypeError('Battle snapshot card data must use plain objects and arrays');
+    }
+    copy = {};
+    for (const key of Object.keys(value)) {
+      const descriptor = Object.getOwnPropertyDescriptor(value, key);
+      if (!descriptor || !('value' in descriptor)) {
+        throw new TypeError('Battle snapshot card data cannot contain accessor properties');
+      }
+      Object.defineProperty(copy, key, {
+        value: cloneCardData(descriptor.value, ancestors),
+        enumerable: descriptor.enumerable,
+        configurable: true,
+        writable: true,
+      });
+    }
+  }
+  ancestors.delete(value);
+  return Object.freeze(copy);
+}
 
 // The cache key follows the same inputs as createBattleSnapshot. Walk the values
 // instead of relying on object identity: combat units and selection sets mutate
@@ -23,6 +85,10 @@ function createBattleSnapshotSignature(input, renderDependencies) {
   return signatureValue([input, renderDependencies]);
 }
 
+/**
+ * @param {BattleSnapshotInput} input
+ * @returns {BattleSnapshot}
+ */
 function createBattleSnapshot(input) {
   const {
     battleToken, mode, turn, energy, maxEnergy, busy, phase, actionQueueLength,
@@ -43,21 +109,35 @@ function createBattleSnapshot(input) {
   }));
   const readonlyInfusing = infusing ? Object.freeze({
     ...infusing,
-    card: freezeObject(infusing.card),
+    card: cloneCardData(infusing.card),
     picked: Object.freeze([...infusing.picked]),
   }) : null;
   const readonlyDiscovering = discovering ? Object.freeze({
     ...discovering,
-    options: Object.freeze(discovering.options.map(freezeObject)),
+    options: Object.freeze(discovering.options.map(card => cloneCardData(card))),
   }) : null;
-  const readonlyHandSelecting = handSelecting ? Object.freeze({ ...handSelecting }) : null;
+  /** @type {BattleSnapshot['handSelecting']} */
+  let readonlyHandSelecting = null;
+  if (handSelecting) {
+    /** @type {NonNullable<BattleSnapshot['handSelecting']>} */
+    const handSelectingCopy = {
+      ...handSelecting,
+      ...(Object.hasOwn(handSelecting, 'srcCard')
+        ? { srcCard: cloneCardData(handSelecting.srcCard) }
+        : {}),
+      ...(handSelecting.payment && Object.hasOwn(handSelecting.payment, 'card')
+        ? { payment: { ...handSelecting.payment, card: cloneCardData(handSelecting.payment.card) } }
+        : {}),
+    };
+    readonlyHandSelecting = Object.freeze(handSelectingCopy);
+  }
   const readonlyChoosing = choosing ? Object.freeze({ ...choosing, options: Object.freeze(choosing.options.slice()) }) : null;
   const deckSelection = selectingDeck ? Object.freeze({
     need: deckNeed,
     max: selDeckMax,
     starterCount: selShaN,
     selected: Object.freeze([...sel]),
-    cards: Object.freeze(selPool.map(entry => Object.freeze({ uid: entry.uid, card: freezeObject(entry.card) }))),
+    cards: Object.freeze(selPool.map(entry => Object.freeze({ uid: entry.uid, card: cloneCardData(entry.card) }))),
     boss: readonlyFoes[0] || null,
   }) : null;
   return Object.freeze({
@@ -76,12 +156,12 @@ function createBattleSnapshot(input) {
     discovering: readonlyDiscovering,
     handSelecting: readonlyHandSelecting,
     choosing: readonlyChoosing,
-    pendingTarget: pendingTarget ? Object.freeze({ ...pendingTarget, card: freezeObject(pendingTarget.card) }) : null,
+    pendingTarget: pendingTarget ? Object.freeze({ ...pendingTarget, card: cloneCardData(pendingTarget.card) }) : null,
     pendingHint, viewingGrave, viewingDeck, viewingBag, dreadShown, deckSelection,
     potionBar: potionBar ? Object.freeze(potionBar.map(freezeObject)) : null,
-    pendingItem: pendingItem ? Object.freeze({ ...pendingItem, card: freezeObject(pendingItem.card) }) : null,
+    pendingItem: pendingItem ? Object.freeze({ ...pendingItem, card: cloneCardData(pendingItem.card) }) : null,
     slamPending, dartPending,
-    equipped: Object.freeze(equipped.map(e => Object.freeze({ ...e, card: freezeObject(e.card) }))),
+    equipped: Object.freeze(equipped.map(e => Object.freeze({ ...e, card: cloneCardData(e.card) }))),
   });
 }
 
