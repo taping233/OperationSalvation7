@@ -17,6 +17,7 @@ const SDT = window.SDT;
 const UI = window.SDT.UI;
 import { esc } from '../core/shared.js';
 import { RunStorage, SLOT_COUNT } from '../hub/game.storage.js';
+import { validateRunSave } from '../hub/run-save-validation.js';
 import { commitBaseAndRun, readSettlementReceipt, recoverSlot, recoverSlotIfPending } from '../hub/recovery.commands.js';
 import { validatePendingExtraction } from '../hub/extraction.commands.js';
 import { createTerminalCommands } from '../hub/terminal.commands.js';
@@ -76,6 +77,22 @@ const numOr = (v, d) => { const n = +v; return Number.isFinite(n) ? n : d; };
 let lastSaveFailWarnAt = 0;           // 写档失败警示 30s 节流（迭代评审 09-20 G-P3）：成功落盘即复位
 let lastSaveConflictWarnAt = 0;
 let pendingBattleSettlement = null;
+// 只在同步装载期间收集原有保存调用；包括 enterLayer 间接触发的 saveGame。
+let loadPersistence = null;
+
+function recordLoadPersistence(target, reason, ok, code) {
+  if (!loadPersistence) return;
+  const attempt = { target, reason, ok: ok === true };
+  if (!attempt.ok && code) attempt.code = code;
+  loadPersistence.attempts.push(attempt);
+  loadPersistence.status = loadPersistence.attempts.some(a => !a.ok) ? 'failed' : 'succeeded';
+}
+
+function saveBaseForLoad(reason) {
+  const ok = SDT.Base.save();
+  recordLoadPersistence('base', reason, ok, 'BASE_SAVE_FAILED');
+  return ok;
+}
 
 function setBattleSettlementPending(slotId, runId) {
   pendingBattleSettlement = { slotId, runId, seed: game.seed, runToken: game.discoveredPairs };
@@ -180,6 +197,7 @@ function saveGame() {
     return false;
   }
   const ok = RunStorage.write(activeSlot, payload);
+  recordLoadPersistence('run', 'save_game', ok, RunStorage.lastWriteIssue(activeSlot) || 'RUN_SAVE_FAILED');
   if (!ok) {
     if (RunStorage.lastWriteIssue(activeSlot) === 'STALE_SLOT') {
       const now = Date.now();
@@ -212,7 +230,7 @@ function syncPlayTime() {
   if (delta > 0) {
     SDT.Base.data.stats.playSeconds = Math.max(0, +SDT.Base.data.stats.playSeconds || 0) + delta;
     game.elapsedSynced = now;
-    SDT.Base.save();
+    saveBaseForLoad('play_time_sync');
   }
 }
 
@@ -227,10 +245,13 @@ function clearAllSlots() { for (let i = 1; i <= SLOT_COUNT; i++) clearSlot(i); }
 function preflightRunMap(slot) {
   const identity = RunStorage.readIdentity(slot);
   if (identity.code === 'RECOVERY_REQUIRED') return { ...identity, preserveRun: true };
-  const s = RunStorage.readForLoad(slot);
+  const s = RunStorage.readForPreflight(slot);
   if (!s) {
-    return { ok:false, code:RunStorage.issue(slot)==='tooNew'?'RUN_TOO_NEW':'RUN_UNREADABLE', message:'对局存档无法读取', preserveRun:true };
+    const issue = RunStorage.issue(slot);
+    return { ok:false, code:issue==='tooNew'?'RUN_TOO_NEW':issue==='readFailed'?'STORAGE_READ_FAILED':'RUN_UNREADABLE', message:'对局存档无法读取', preserveRun:true };
   }
+  const structure = validateRunSave(s);
+  if (!structure.ok) return structure;
   if (s.pendingExtraction != null) {
     const pending = validatePendingExtraction(s.pendingExtraction);
     if (!pending.ok) return { ...pending, preserveRun: true };
@@ -243,19 +264,39 @@ function preflightRunMap(slot) {
 }
 
 function loadGame(slot) {
+  const persistence = { status: 'not_attempted', attempts: [] };
+  const previous = loadPersistence;
+  loadPersistence = persistence;
+  try {
+    const result = restoreGame(slot);
+    if (persistence.status === 'failed') {
+      UI.log(`[[icon:cross]] ${result.ok ? '对局已恢复，但恢复后的部分进度未保存' : '恢复过程中部分进度未保存'}，请勿将本次进入视为保存成功；请检查存储状态后重试保存`, 'warn');
+    }
+    return { ...result, persistence };
+  } finally {
+    loadPersistence = previous;
+  }
+}
+
+function restoreGame(slot) {
   const preflight=preflightRunMap(slot);
   if(!preflight.ok) {
-    if (preflight.code === 'RUN_UNREADABLE') UI.log('[[icon:cross]] 对局存档损坏（原数据已备份），无法读取', 'warn');
+    if (preflight.code === 'RUN_UNREADABLE') UI.log('[[icon:cross]] 对局存档无法读取，原档已保留', 'warn');
     else if (preflight.code === 'RUN_TOO_NEW') UI.log('[[icon:cross]] 对局存档来自更新版本的游戏，无法读取', 'warn');
     else UI.log(`[[icon:cross]] ${preflight.message}，原档已保留`, 'warn');
     return preflight;
   }
   const {run:s,plan}=preflight.value;
+  const accepted = RunStorage.acceptLoad(slot, s);
+  if (!accepted.ok) {
+    UI.log(`[[icon:cross]] ${accepted.message}，原档已保留`, 'warn');
+    return accepted;
+  }
   game.seed = Random.restore(s.rngState || s.seed);
   if (plan.source !== 'nest') installDerived(plan.layerData, plan.mapSeed, plan.generatorVersion, plan.layoutVersion, plan.routeVersion, plan.routePlan);
   SDT.Base.use(slot);   // 该档位的基地数据（仓库/熟练度/成就/卡背）
   const bi = SDT.Base.issue(slot);
-  if (bi === 'corrupt') UI.log('[[icon:cross]] 该档位基地数据损坏（原数据已备份），本次以空档案启动', 'warn');
+  if (bi === 'corrupt') UI.log('[[icon:cross]] 该档位基地数据损坏，原档已保留，本次以空档案启动', 'warn');
   else if (bi === 'tooNew') UI.log('[[icon:cross]] 该档位基地数据来自更新版本的游戏，已以空档案启动', 'warn');
   game.runActive = true;
   setLobby(false);      // 直接回到棋盘上的对局：恢复左侧栏
@@ -277,7 +318,7 @@ function loadGame(slot) {
       .concat((SDT.Base.data.stash || []).concat(SDT.Base.data.pocket || []).map(st => st.card));
     const abilityChanged = SDT.Cards.applyAbilityRename(copies);
     const duplicateChanged = SDT.Cards.applyDuplicateRenames(copies);
-    if (abilityChanged || duplicateChanged) SDT.Base.save();
+    if (abilityChanged || duplicateChanged) saveBaseForLoad('card_rename');
   }
   game.cardOrder = Array.isArray(s.cardOrder) ? s.cardOrder : [];
   game.usedPocket = Array.isArray(s.usedPocket) ? s.usedPocket : [];
@@ -305,7 +346,7 @@ function loadGame(slot) {
   // 旧存档只有本局 elapsed：首次读取时把它安全迁入累计游玩时间。
   if ((SDT.Base.data.stats.playSeconds || 0) < game.elapsed) {
     SDT.Base.data.stats.playSeconds = game.elapsed;
-    SDT.Base.save();
+    saveBaseForLoad('elapsed_migration');
   }
   game.elapsedSynced = game.elapsed;
   game.extractionPending = null;

@@ -39,7 +39,38 @@ const readCache = new Map();
 // 每个标签页记录最后加载/成功写入的原始串。普通写入前作乐观冲突检查，
 // 防止旧标签页在另一标签保存后继续递增 revision 并覆盖新状态。
 const writeBaseline = new Map();
-const publicRun = data => { const value = { ...data }; delete value._r2; return value; };
+// 装载会修改卡实例与地图节点；缓存必须保留原串对应的迁移结果。
+const publicRun = data => { const value = structuredClone(data); delete value._r2; return value; };
+const loadCandidates = new WeakMap();
+const loadFailure = (code, message) => ({ ok: false, code, message, preserveRun: true });
+
+function readRaw(index, raw) {
+  if (raw == null) { readCache.delete(index); delete issues[index]; return null; }
+  const hit = readCache.get(index);
+  if (hit && hit.raw === raw) { delete issues[index]; return publicRun(hit.data); }
+  readCache.delete(index);
+  let data;
+  try { data = JSON.parse(raw); } catch { return RunStorage._corrupt(index, raw); }
+  if (!data || typeof data !== 'object' || Array.isArray(data)) return RunStorage._corrupt(index, raw);
+  const v = Object.hasOwn(data, 'version') ? data.version : 0;
+  if (!Number.isInteger(v) || v < 0) return RunStorage._corrupt(index, raw);
+  if (v > SAVE_VERSION) {
+    issues[index] = 'tooNew';
+    console.warn(`[save] 档位 ${index} 存档版本(${v})新于当前游戏(${SAVE_VERSION})，拒绝读取`);
+    return null;
+  }
+  let mv = v;
+  while (mv < SAVE_VERSION) {
+    const m = MIGRATIONS[mv];
+    if (m) data = m(data);
+    mv++;
+    data.version = mv;
+  }
+  data = migrateRunCharacter(data);
+  readCache.set(index, { raw, data });
+  delete issues[index];
+  return publicRun(data);
+}
 
 const RunStorage = Object.freeze({
   key: RUN_KEY,
@@ -51,31 +82,30 @@ const RunStorage = Object.freeze({
   read(index) {
     let raw;   // 不做冗余初始化：try 内必赋值，catch 直接 return（下方 == null 判断兼容 undefined）
     try { raw = localStorage.getItem(RUN_KEY(index)); } catch { return null; }
-    if (raw == null) { readCache.delete(index); return null; }
-    const hit = readCache.get(index);
-    if (hit && hit.raw === raw) return publicRun(hit.data);
-    let data;
-    try { data = JSON.parse(raw); } catch { return this._corrupt(index, raw); }
-    if (!data || typeof data !== 'object') return this._corrupt(index, raw);
-    const v = +data.version || 0;
-    if (v > SAVE_VERSION) {
-      // 存档本身完好，只是来自更新的游戏版本：原样保留不碰，拒绝读取
-      issues[index] = 'tooNew';
-      console.warn(`[save] 档位 ${index} 存档版本(${v})新于当前游戏(${SAVE_VERSION})，拒绝读取`);
-      return null;
-    }
-    let mv = v;
-    while (mv < SAVE_VERSION) {
-      const m = MIGRATIONS[mv];
-      if (m) data = m(data);
-      mv++;
-      data.version = mv;
-    }
-    data = migrateRunCharacter(data);
-    readCache.set(index, { raw, data });
-    return publicRun(data);
+    return readRaw(index, raw);
   },
-  // 实际进入/恢复对局时调用；档位列表和事务探测只用 read()，不改变编辑基线。
+  // 菜单/装载共用预检读取；只记录候选原串，不授予旧运行态覆盖权限。
+  readForPreflight(index) {
+    let raw;
+    try { raw = localStorage.getItem(RUN_KEY(index)); }
+    catch { issues[index] = 'readFailed'; return null; }
+    const run = readRaw(index, raw);
+    if (run) loadCandidates.set(run, { index, raw });
+    return run;
+  },
+  // 全预检成功后，loadGame 在任何运行态副作用前采纳同一对象对应的原串。
+  acceptLoad(index, run) {
+    const candidate = loadCandidates.get(run);
+    if (!candidate || candidate.index !== index) return loadFailure('STALE_SLOT', '档位已更新，请重新载入');
+    let raw;
+    try { raw = localStorage.getItem(RUN_KEY(index)); }
+    catch { return loadFailure('STORAGE_READ_FAILED', '无法读取档位，请重试'); }
+    if (raw !== candidate.raw) return loadFailure('STALE_SLOT', '档位已更新，请重新载入');
+    writeBaseline.set(index, raw);
+    writeIssues.delete(index);
+    return { ok: true };
+  },
+  // 兼容既有显式读取调用（含空档基线）；生产恢复走预检/采纳两步。
   readForLoad(index) {
     try { writeBaseline.set(index, localStorage.getItem(RUN_KEY(index))); }
     catch { writeBaseline.delete(index); }
@@ -86,11 +116,12 @@ const RunStorage = Object.freeze({
   // 坏档处理：原串备份到 corrupt 键后返回 null（原键不动，由玩家决定是否覆盖重开）
   _corrupt(index, raw) {
     issues[index] = 'corrupt';
-    try { localStorage.setItem(CORRUPT_KEY(index), raw); } catch { /* 存储不可用 */ }
-    console.warn(`[save] 档位 ${index} 存档损坏，原串已备份到 ${CORRUPT_KEY(index)}`);
+    let backedUp = false;
+    try { localStorage.setItem(CORRUPT_KEY(index), raw); backedUp = true; } catch { /* 原键保留 */ }
+    console.warn(`[save] 档位 ${index} 存档损坏，${backedUp ? `原串已备份到 ${CORRUPT_KEY(index)}` : '备份失败，原档已保留'}`);
     return null;
   },
-  // 读档异常原因：null=正常；'corrupt'=坏档已备份；'tooNew'=版本过新已拒读
+  // 读档异常原因：null=正常；'corrupt'=坏档原键保留（备份尽力）；'tooNew'=版本过新已拒读
   issue(index) { return issues[index] || null; },
   // R6 只读身份窄口：不迁移、不写回、不为旧档创建 runId。
   // 领域模块用它关联同一探索中的永久提交；私有 _r2 不进入 publicRun。
