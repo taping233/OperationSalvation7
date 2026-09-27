@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "lib": ["esnext", "dom"],
+    "allowJs": true,
+    "checkJs": false,
+    "strict": false,
+    "skipLibCheck": true,
+    "noEmit": true
+  },
+  "files": [
+    "game/src/hub/battle-settlement.commands.js",
+    "game/src/hub/battle-settlement.commands.types.d.ts",
+    "tests/battle-settlement-types.fixture.ts"
+  ]
+}
