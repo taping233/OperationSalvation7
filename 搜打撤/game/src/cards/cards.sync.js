@@ -1,7 +1,7 @@
 /* 由 cards.js 拆出（2026-09-22 六文件重构批2）：启动期回填迁移与播种（ensure* / seedBatch / apply* / heroOf）。
  * 逐字搬迁，属性顺序=原文件顺序；在壳 cards.js 中展开装配为 SDT.Cards，键面与数据字节不变。 */
 const SDT = window.SDT;   // ESM 垫片（与 cards.js 同源，main.js 加载顺序保证已存在）
-import { TT7_KEY_V2, TT10_KEY, TT11_KEY, ITEM_RENAME_KEY, EVENTS_0919_KEY, RETIRE_TT10, RETIRE_TT11, CC_KEY, CLASSES } from './cards.consts.js';
+import { KEY, TT7_KEY_V2, TT10_KEY, TT11_KEY, ITEM_RENAME_KEY, EVENTS_0919_KEY, RETIRE_TT10, RETIRE_TT11, CC_KEY, CLASSES } from './cards.consts.js';
 import { Random } from '../core/random.js';
 import { DATA } from '../core/data-loader.js';
 import { validateCardRules } from './card-rules.schema.js';
@@ -97,6 +97,68 @@ function backfillStructuredRuleDefinitions({ markerKey, ids, definitions, domain
   }
 }
 export const syncSlice = {
+
+    // E8：只给完整匹配当前定版的三张治疗卡添加地图背包规则，不改旧副本或玩家编辑。
+    ensureE8FixedHealRules() {
+      const markerKey = 'sdt-cards-e8-fixed-heal-bag-rules-v1-seeded';
+      try {
+        if (localStorage.getItem(markerKey) !== null) return;
+
+        // all() 在读失败时可能降级并缓存 []；独立证明非空原库有效，避免把降级当成功。
+        // 空库/缺库保持未标记，不补种。热缓存也必须与原库一致，不能迁移未保存的修改。
+        const raw = localStorage.getItem(KEY);
+        if (raw == null) return;
+        const storedCards = JSON.parse(raw);
+        if (!Array.isArray(storedCards) || storedCards.length === 0) return;
+        if (storedCards.some(card => !card || typeof card !== 'object' || Array.isArray(card)
+          || typeof card.id !== 'string' || !card.id)) return;
+        if (new Set(storedCards.map(card => card.id)).size !== storedCards.length) return;
+        const sameSnapshot = (left, right) => {
+          if (left === right) return true;
+          if (!left || !right || typeof left !== 'object' || typeof right !== 'object') return false;
+          if (Array.isArray(left) !== Array.isArray(right)) return false;
+          if (Array.isArray(left) && left.length !== right.length) return false;
+          const keys = Object.keys(left);
+          return keys.length === Object.keys(right).length && keys.every(key =>
+            Object.prototype.hasOwnProperty.call(right, key) && sameSnapshot(left[key], right[key]));
+        };
+        const cards = SDT.Cards.all();
+        if (!sameSnapshot(cards, storedCards)) return;
+
+        // 数值与完整卡面取实际 TABLETOP 定义，不另存一份可漂移的数值表。
+        const sources = [
+          ['tt-jinchuangyao', SDT.Cards.TABLETOP10],
+          ['tt4-woodify', SDT.Cards.TABLETOP10],
+          ['starter-emergency-bandage', SDT.Cards.TABLETOP11],
+        ];
+        const definitions = new Map(sources.map(([id, source]) => [id, source.find(card => card.id === id)]));
+        if ([...definitions.values()].some(definition => !definition)) return;
+        let dirty = false;
+        const nextCards = cards.map(card => {
+          const definition = definitions.get(card.id);
+          if (!definition || Object.prototype.hasOwnProperty.call(card, 'rules')
+            || !sameSnapshot(card, definition)) return card;
+          const nextCard = {
+            ...card,
+            rules: { version: 1, bag: { use: [{ op: 'heal', amountField: 'heal' }] } },
+          };
+          const validation = validateCardRules(nextCard);
+          if (!validation.ok) throw new Error(`Invalid E8 fixed-heal rules for ${card.id}`);
+          dirty = true;
+          return nextCard;
+        });
+
+        // 构造/校验完成才单次保存，原 saveAll 继续负责拒绝并发库替换及损坏库写回。
+        // 不原地改缓存；保存 false/抛错都不盖章。盖章前复读确认没有异常替换库串。
+        if (dirty) {
+          if (!SDT.Cards.saveAll(nextCards)) return;
+          if (localStorage.getItem(KEY) !== JSON.stringify(nextCards)) return;
+        } else if (localStorage.getItem(KEY) !== raw) return;
+        localStorage.setItem(markerKey, '1');
+      } catch (error) {
+        console.error('[cards] E8 fixed-heal bag rule migration failed; marker was not written:', error);
+      }
+    },
 
     // 伤害类型词条回填：只补缺失值，绝不覆盖玩家已标注的 dmgType（每次启动运行）
     ensureDmgTypes() {

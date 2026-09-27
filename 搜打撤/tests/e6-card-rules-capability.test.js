@@ -7,7 +7,7 @@ window.SDT.Icons.TYPE_ART = window.SDT.Icons.TYPE_ART || {};
 await import('../game/src/cards/cards.js');
 const Cards = window.SDT.Cards;
 beforeAll(() => {
-  Cards.ensureSha(); Cards.ensureStarters(); Cards.ensureTabletop();
+  Cards.ensureStarters(); Cards.ensureSha(); Cards.ensureTabletop();
   Cards.ensureDmgTypes(); Cards.ensureEffectFields();
 });
 
@@ -89,7 +89,7 @@ describe('E6 battle-entry rule capability', () => {
     const results = cards.map(card => ({ id: card.id, result: inspectCardRuleCapability(card) }));
     expect(results.filter(entry => !entry.result.ok)).toEqual([]);
     expect({ total: cards.length, structured: results.filter(entry => entry.result.kind === 'supported').length,
-      legacy: results.filter(entry => entry.result.kind === 'legacy').length }).toEqual({ total: 272, structured: 68, legacy: 204 });
+      legacy: results.filter(entry => entry.result.kind === 'legacy').length }).toEqual({ total: 272, structured: 71, legacy: 201 });
     expect(Cards.CARDS_SYNC).toHaveLength(55);
     expect(Cards.CARDS_SYNC.every(card => inspectCardRuleCapability(card).kind === 'legacy')).toBe(true);
     const count = values => Object.fromEntries([...new Set(values)].sort().map(value => [value, values.filter(entry => entry === value).length]));
