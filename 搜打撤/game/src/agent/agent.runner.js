@@ -14,10 +14,47 @@ import { observe, settleSignature, bustSigCache, markUiFailure } from './agent.s
 import { isTurbo } from './agent.turbo.js';
 import { setDriver, battleTick, battleActionTick, battleEnd } from './agent.recorder.js';
 import { moveTo, reenterCell } from '../run/game.run.flow.js';
-import { startNewGame, game } from '../run/game.session.js';
+import { startNewGame, game, getActiveSlot } from '../run/game.session.js';
 
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 const isThenable = (v) => v && typeof v.then === 'function';
+// Promise 只留在内部；act 的受理结果仍可直接 JSON.stringify。
+const completions = new WeakMap();
+const commandContext = () => [getActiveSlot(), game.discoveredPairs, game.nestRunes,
+  game.runActive, game.nestActive];
+const sameContext = (context) => {
+  const current = commandContext();
+  return context.every((value, i) => value === current[i]);
+};
+const commandError = (id, error) => ({ ok: false, id, code: 'ACTION_THREW', message: String(error?.message || error) });
+function completedResult(value, id) {
+  if (value === false || value?.ok === false) {
+    return { ok: false, id, code: String(value?.code || 'ACTION_REJECTED'),
+      message: String(value?.message || '命令被引擎拒绝') };
+  }
+  return { ok: true, id }; // true / void 及旧命令的其他返回值保持兼容
+}
+function commandResult(value, id, action) {
+  if (!isThenable(value)) return completedResult(value, id);
+  const accepted = { ok: true, id, async: true, completed: false };
+  const completion = { active: true, context: commandContext(), promise: null };
+  // 当场绑定拒绝处理；即使只调用 act 而不调用 step，也没有裸 rejection。
+  completion.promise = Promise.resolve(value).then(value => {
+    // enterSlot 自身会在 await 后合法换档/换局。仅该真实入口可交回完成瞬间的凭据；
+    // 核目标档位与当前身份，不能把别的命令返回的同形对象当作切局授权。
+    const proof = value?.commandContext;
+    if (value?.ok === true && action?.type === 'ui' && action.name === 'enterSlot' && proof) {
+      const fields = ['slot', 'runToken', 'nestToken', 'runActive', 'nestActive'];
+      const next = fields.map(key => proof[key]);
+      if (fields.every(key => Object.hasOwn(proof, key)) && proof.slot === Number(action.params?.slot)
+        && sameContext(next)) completion.context = next;
+      else return { ok: false, id, code: 'CONTEXT_CHANGED', message: '进入档位的完成凭据已失效' };
+    }
+    return completedResult(value, id);
+  }, error => commandError(id, error));
+  completions.set(accepted, completion);
+  return accepted;
+}
 // 高精度时钟（Date.now 在 Windows 粒度 15.6ms，够不着 3ms quiet）
 const nowMs = () => (typeof performance !== 'undefined' && performance.now) ? performance.now() : Date.now();
 // 亚毫秒让位：Node 走 setImmediate（0.1ms 级），浏览器回退 setTimeout(0)
@@ -25,16 +62,53 @@ const defer = () => (typeof globalThis.setImmediate === 'function')
   ? new Promise(resolve => globalThis.setImmediate(resolve))
   : new Promise(resolve => setTimeout(resolve, 0));
 
+async function awaitCommand(accepted, options) {
+  const completion = completions.get(accepted);
+  if (!completion) return accepted;
+  const requested = options.commandTimeoutMs;
+  const timeoutMs = Number.isFinite(requested) && requested > 0 ? requested : 20000;
+  let timer;
+  try {
+    const result = await Promise.race([completion.promise, new Promise(resolve => {
+      timer = setTimeout(() => resolve({ ok: false, id: accepted.id, async: true, completed: false,
+        code: 'COMMAND_TIMEOUT', message: '命令仍未完成；自动驱动已停止，不能立即重派' }), timeoutMs);
+    })]);
+    if (!sameContext(completion.context)) return { ok: false, id: accepted.id, async: true,
+      completed: false, code: 'CONTEXT_CHANGED', message: '对局归属已改变，丢弃旧命令结果' };
+    return result;
+  } finally {
+    completion.active = false;
+    clearTimeout(timer);
+  }
+}
+
 function act(input) {
   const norm = normalizeAction(input);
   if (!norm.ok) return { ok: false, code: norm.code, message: norm.message };
   const action = norm.action;
   const id = actionId(action);
+  const context = commandContext();
+  const page = document.getElementById('ovBody')?.firstChild;
+  const title = document.getElementById('ovTitle')?.textContent;
+  const button = action.type === 'ui' ? findUiElement(action.name, action.params) : null;
+  const rememberFailure = (out) => {
+    if (!out.ok && sameContext(context) && page === document.getElementById('ovBody')?.firstChild
+      && title === document.getElementById('ovTitle')?.textContent
+      && (!button || button === findUiElement(action.name, action.params))
+      && (action.type === 'ui' || action.type === 'sys')) {
+      markUiFailure({ id, params: action.params || {} });
+    }
+  };
   try {
     const out = dispatch(action, id);
-    // ui/sys 被引擎拒绝 → 记失败键回观察面（同页面内策略绕开，换页自动失效）
-    if (!out.ok && (action.type === 'ui' || action.type === 'sys')) {
-      markUiFailure({ id, params: action.params || {} });
+    const completion = completions.get(out);
+    if (completion) {
+      completion.promise = completion.promise.then(result => {
+        if (completion.active && sameContext(completion.context)) rememberFailure(result);
+        return { ...result, async: true, completed: true };
+      });
+    } else {
+      rememberFailure(out);
     }
     return out;
   } catch (error) {
@@ -42,7 +116,7 @@ function act(input) {
     // 抛错同样记失败记忆（09-26 修复：漏记会让策略在同一钮上连点到熔断）并上报
     // console.error——批跑错误桶能抓到现场
     const msg = String(error?.message || error);
-    if (action.type === 'ui' || action.type === 'sys') markUiFailure({ id, params: action.params || {} });
+    rememberFailure({ ok: false });
     console.error(`[agent.act] ${id} 抛错: ${msg}`);
     return { ok: false, id, code: 'ACTION_THREW', message: msg };
   }
@@ -70,23 +144,23 @@ function dispatch(action, id) {
       if (fn) {
         // 与 ovBody 点击分发同参：回调拿按钮 dataset（photo-zoom 源按钮多传元素）
         const result = el.hasAttribute('data-photo-zoom-source') ? fn(el.dataset, el) : fn(el.dataset);
-        return { ok: true, id, async: isThenable(result) };
+        return commandResult(result, id, action);
       }
       if (typeof el.click === 'function') { el.click(); return { ok: true, id, via: 'click' }; }
       return { ok: false, id, code: 'UI_ACTION_UNHANDLED', message: `${id} 没有注册回调` };
     }
     case 'move': {
-      const ok = moveTo(action.li, action.idx);
-      return ok ? { ok: true, id } : { ok: false, id, code: 'MOVE_REJECTED', message: '目标不是合法相邻节点或当前不可移动' };
+      const out = commandResult(moveTo(action.li, action.idx), id);
+      return out.code === 'ACTION_REJECTED' ? { ...out, code: 'MOVE_REJECTED', message: '目标不是合法相邻节点或当前不可移动' } : out;
     }
     case 'battle': {
       const cmd = window.SDT?.Battle?.commands?.[action.name];
       if (typeof cmd !== 'function') return { ok: false, id, code: 'BATTLE_NOT_READY', message: '战斗模块未加载或命令不存在' };
       const result = cmd(...action.args);
-      return { ok: true, id, async: isThenable(result) };
+      return commandResult(result, id);
     }
     case 'sys': {
-      if (action.name === 'startGame') { startNewGame(); return { ok: true, id }; }
+      if (action.name === 'startGame') return commandResult(startNewGame(), id);
       if (action.name === 'reenter') {
         return reenterCell() ? { ok: true, id } : { ok: false, id, code: 'REENTER_REJECTED', message: '当前不可重开节点' };
       }
@@ -186,18 +260,34 @@ async function step(decide, options = {}) {
     ? { ok: true, stalled: false, obs: options.carryObs || null }
     : await waitSettle(options);
   const obs = first.obs || observe();
+  const context = commandContext();
+  const contextChanged = () => ({ obs: observe(), action: null, res: { ok: false, code: 'CONTEXT_CHANGED',
+    message: '决策期间对局归属已改变，未执行旧动作' }, done: false, stopReason: 'context-changed' });
   const t1 = prof ? nowMs() : 0;
   let decision;
   try {
     decision = await decide(obs);
   } catch (error) {
+    if (!sameContext(context)) return contextChanged();
     return { obs, action: null, res: null, error: String(error?.message || error), done: true };
   }
+  if (!sameContext(context)) return contextChanged();
   if (decision == null) return { obs, action: null, res: null, done: true };
   const t2 = prof ? nowMs() : 0;
   const before = settleSignature();
-  const res = act(decision);
+  const accepted = act(decision);
+  const completion = completions.get(accepted);
+  const res = completion ? await awaitCommand(accepted, options) : accepted;
+  const settledContext = completion?.context || commandContext();
+  const staleCommand = () => ({ obs: observe(), action: decision, id: res.id,
+    res: { ok: false, id: res.id, code: 'CONTEXT_CHANGED', message: '命令交棒期间对局归属已改变' },
+    done: false, stopReason: 'context-changed' });
   bustSigCache();   // 状态已被 act 改写：作废 before 写入的 TTL 缓存，首轮探测立即可见
+  if (res.code === 'COMMAND_TIMEOUT' || res.code === 'CONTEXT_CHANGED') {
+    return { obs: observe(), action: decision, id: res.id, res, done: false,
+      stopReason: res.code === 'COMMAND_TIMEOUT' ? 'command-timeout' : 'context-changed' };
+  }
+  if (!sameContext(settledContext)) return staleCommand();
   const isWaitAction = decision?.type === 'sys' && decision?.name === 'noop';
   if (res.ok && !isWaitAction) {
     const deadline = nowMs() + (isTurbo() ? 40 : 1500);
@@ -232,8 +322,10 @@ async function step(decide, options = {}) {
     }
   }
   const t3 = prof ? nowMs() : 0;
+  if (!sameContext(settledContext)) return staleCommand();
   const settled = res.ok ? await waitSettle(options) : { ok: true, stalled: false, obs };
   options.preStable = false;   // 单步有效：只作用于 idleExit 后的这一次尾部 settle
+  if (!sameContext(settledContext)) return staleCommand();
   if (prof) {
     prof.settle += t1 - t0;
     prof.decide += t2 - t1;
@@ -293,6 +385,13 @@ async function autoRun({ decide, maxSteps = 800, onStep, until, driver = 'auto',
         continue;
       }
       stepErrors = 0;
+      if (result.stopReason) {
+        trace.push({ step: i, id: result.id || null, ok: false, phase: result.obs.phase,
+          spin: 0, code: result.res?.code, completed: result.res?.completed });
+        onStep?.(result, i);
+        stopReason = result.stopReason;
+        break;
+      }
       options.preSettled = true;   // 首步之后：上一步尾部已 settle，跳过前置等待
       // 战斗内埋点喂食（09-26）：battle 相每步喂观察快照（受击/掉血/能量浪费），
       // 喝药与逃逸动作喂动作名（potions/fleeTurn）——noteBattle 落盘时随流水带出。

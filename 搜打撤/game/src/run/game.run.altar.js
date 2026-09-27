@@ -34,7 +34,7 @@ const emblemSrc = id => CLASS_EMBLEM_FILE[id]
 
 import { Sfx, _set_cardPageOpen } from '../hub/game.cardslib.js';
 import { Random, SeededRandomService } from '../core/random.js';
-import { ensureBattleReady, startBattle } from '../battle/battle-loader.js';
+import { captureBattleContext, ensureBattleReady, startBattle } from '../battle/battle-loader.js';
 import { FIRE_RESTORABLE, consumeCurrentCell, finishInstant, grantEventCard, nodeOpt, nodeShell, openPocketRestore, openShop, preloadAllNodeShellBgs, showRunTransition } from './game.run.scenes.js';
 import { RunStorage } from '../hub/game.storage.js';
 import { commitBaseAndRun, readSettlementReceipt, recoverSlot } from '../hub/recovery.commands.js';
@@ -391,10 +391,13 @@ export function openClassChoice(options = {}) {
     // 2026-09-19 留言 #16：开局发放的两张职业卡改走专门「启程 event」页——不再只靠
     // 日志静默入包，先展示卡面（获取并离开），再接启程过渡动画
     const grantedCards = [card, ...(card2 && card2.id !== card.id ? [card2] : [])].filter(Boolean);
-    showRunTransition({
+    const currentContext = captureBattleContext(game, getActiveSlot);
+    const transition = showRunTransition({
       tone: 'door', asset: 'scene-door-bg', eyebrow: 'EXPEDITION START',
       title: characterName(cl), detail: startLine, duration: 1600,
-    }).then(() => {
+    });
+    transition.then(completed => {
+      if (completed === false || !transition.isCurrent() || !currentContext()) return;
       game.state = 'modal';
       nodeShell({
         tone: 'event', icon: '[[icon:medal]]', title: `${characterName(cl)} · 启程补给`,
@@ -404,6 +407,7 @@ export function openClassChoice(options = {}) {
         foot: `<button class="ov-btn ok cls-grant-go" data-act="clsGrantGo"><svg class="svg-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h13M12 5.5 18.5 12 12 18.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> 获取并离开</button>`,
       });
       UI.act('clsGrantGo', () => {
+        if (!transition.isCurrent() || !currentContext()) return;
         UI.hideOverlay();
         game.state = 'idle';
         saveGame();

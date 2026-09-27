@@ -10,11 +10,9 @@
 // 外部脚本（浏览器 console / CDP evaluate）自驱循环
 SDT.Agent.setTurbo(true);
 for (;;) {
-  const obs = SDT.Agent.observe();          // 1. 观察
-  const action = decide(obs);               // 2. 决策（LLM / 规则），null = 停止
-  if (!action) break;
-  const res = SDT.Agent.act(action);        // 3. 执行
-  await SDT.Agent.waitSettle();             // 4. 等局面静止（战斗 busy 清零、动画落定）
+  // step 等待异步命令的真实结果，再等待局面静止。
+  const result = await SDT.Agent.step(decide, { commandTimeoutMs: 20000 });
+  if (result.done || result.stopReason || result.error) break;
 }
 ```
 
@@ -64,7 +62,17 @@ for (;;) {
 | `battle` | `{ "type":"battle", "name":"playCard", "args":["u1", 0] }` | 战斗命令 | `SDT.Battle.commands[name](...args)` |
 | `sys` | `{ "type":"sys", "name":"startGame" }` | 链路控制：`startGame`（标题起步）/ `reenter`（重开脚下格）/ `noop` / `discardCard [卡名]`（**背包满腾格直接丢弃**，经 game.discardCard，绕过拖拽 UI） | 会话入口 |
 
-`act()` 返回 `{ ok:true, id }` 或 `{ ok:false, code, message }`——**非法动作不抛异常、不改状态**，可换动作重试。
+`act()` 保持同步，返回可 JSON 序列化的结果：
+
+- 同步命令返回 `false` 或 `{ ok:false, code, message }` 时明确拒绝；结构化业务错误保留 code/message。
+- 同步命令返回 `true`、`void` 等旧返回值时保持兼容；异常转为 `ACTION_THREW`，不向调用方抛出。
+- Promise 命令立即返回 `{ ok:true, id, async:true, completed:false }`。这只表示受理，**不表示完成或已经持久化**；结果不包含 Promise。
+- `step()` 内部等待该次命令完成，最终 `res` 包含 `async:true, completed:true` 和真实的 `ok`。Promise 拒绝也归为失败；不能通过 `await act()` 或仅 `waitSettle()` 等待命令完成，应使用 `step()` / `autoRun()`。
+- 命令超过 `commandTimeoutMs`（默认 20000 毫秒）后返回 `COMMAND_TIMEOUT`，`completed:false`，`autoRun` 以 `command-timeout` 停止。超时不会取消底层命令，不应立即重派同一动作。
+- 异步决策或命令完成时会核对档位和对局身份；旧局结果以 `CONTEXT_CHANGED` / `context-changed` 停止，旧失败不会写入新页面的失败记忆。
+- `ui:enterSlot` 合法续档或进入基地会更换归属，因此由菜单在完成瞬间交回内部凭据；Agent 核对目标档位和当前身份后接受。该凭据不出现在公开结果中，其他命令不能借它跳过旧局校验。
+
+动作形状或路由校验失败不会执行命令。业务命令自身抛错或拒绝前可能已经产生部分副作用，返回失败不承诺自动回滚或可以无条件重试。
 
 ### 战斗命令速查（args）
 

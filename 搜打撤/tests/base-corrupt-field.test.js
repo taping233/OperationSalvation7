@@ -4,6 +4,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { createGameMenuController } from '../game/src/ui/game.menu.js';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };
+window.SDT.Icons ||= { img: () => '' };
 await import('../game/src/cards/cards.js');
 await import('../game/src/hub/base.js');
 
@@ -27,7 +28,7 @@ function setupMenu({ peek } = {}) {
       Meta: { ACHIEVEMENTS: [], isUnlocked: () => false },
       Icons: { img: () => '' },
     },
-    UI, game: { state: 'title' }, runtime: { resize() {}, openBaseHub: vi.fn(), showRunTransition: async () => {} },
+    UI, game: { state: 'title' }, runtime: { resize() {}, openBaseHub: vi.fn(), showRunTransition: () => Object.assign(Promise.resolve(true), { isCurrent: () => true }) },
     SLOT_COUNT: 5, esc: String, readSlot: () => null, loadGame: vi.fn(), clearSlot: vi.fn(),
     saveGame() {}, syncPlayTime() {}, clearSave() {}, clearAllSlots() {},
     getActiveSlot: () => null, setActiveSlot: vi.fn(), preflightRunMap: () => ({ ok: true }), hasRun: () => false,

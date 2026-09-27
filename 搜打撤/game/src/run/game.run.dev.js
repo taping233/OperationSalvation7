@@ -3,7 +3,7 @@ import { MAP, game, newRun, saveGame, scaledEnemy } from './game.session.js';
 import { buildEncounter, openChestsOnCell, openShop } from './game.run.scenes.js';
 import { openAltarRitual, openFireRest } from './game.run.altar.js';
 import { runEventDeck } from './game.run.flow.js';
-import { startBattle } from '../battle/battle-loader.js';
+import { captureBattleContext, startBattle } from '../battle/battle-loader.js';
 import { agentTabHTML, bindAgentTab, keysTabHTML, bindKeysTab } from '../agent/agent.console.js';
 import { dataPanelHTML, bindDataActions } from '../agent/agent.data.js';
 
@@ -13,9 +13,11 @@ const UI = window.SDT.UI;
 async function devForceBattle(isBoss) {
   if (game.battleActive || game.state === 'modal') { UI.log('[[icon:lock]] 当前状态无法直接开战，先回到棋盘', 'warn'); return; }
   if (!game.ownedCards?.length) { UI.log('[[icon:cards]] 还没有随身卡牌，先开一局再试', 'warn'); return; }
+  const currentContext = captureBattleContext(game);
   if (isBoss) {
     const b = MAP.altar.bosses[0];
-    await startBattle(game, scaledEnemy(b), { isBoss: true, returnTo: 'altar', name: b.name });
+    const started = await startBattle(game, scaledEnemy(b), { isBoss: true, returnTo: 'altar', name: b.name });
+    if (started === false || !currentContext()) return false;
     UI.log(`[[icon:tools]] 开发者：强制进入 BOSS 战【${esc(b.name)}】`, 'sys');
     const snap = SDT.Battle.getSnapshot();
     if (snap.deckSelection) {
@@ -31,8 +33,9 @@ async function devForceBattle(isBoss) {
     return;
   }
   const list = buildEncounter(game.layerIdx);
-  await startBattle(game, list, { isBoss: false, layer: game.layerIdx, name: list[0].name,
+  const started = await startBattle(game, list, { isBoss: false, layer: game.layerIdx, name: list[0].name,
     risk: list.risk, strategy: list.strategy });
+  if (started === false || !currentContext()) return false;
   UI.log('[[icon:tools]] 开发者：强制进入遭遇战', 'sys');
 }
 

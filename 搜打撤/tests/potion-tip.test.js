@@ -58,7 +58,7 @@ await new Promise(r => setTimeout(r, 0));
 
 describe('药水自绘文字提示栏', () => {
   it('药水无系统 title；悬停/按下显示提示条，移开/松手收起；敌方指向药水带拖拽用法', { timeout: 15_000 }, async () => {
-    const game = {
+    const game = Object.assign(window.SDT.game, {
       ownedCards: [
         { uid: 'tip-heal', card: { id: 'tip-heal', name: '回血药剂', type: '道具', desc: '回复 12 点生命。' } },
         { uid: 'tip-ice', card: { id: 'tip-ice', name: '冰冻药剂', type: '道具', desc: '造成 3 点固定伤害，附加冰冻。' } },
@@ -67,12 +67,15 @@ describe('药水自绘文字提示栏', () => {
       myClass: '侠客', characterId: null, state: 'idle', battleActive: false,
       log() {}, heal(n) { this.hp = Math.min(this.maxHp, this.hp + n); }, addItem() {},
       onBattleEnd() {},
-    };
+    });
+    expect(game).toBe(window.SDT.game);
     const foe = { id: 'infantry', name: '提示测试靶', hp: 40, maxHp: 40, atk: 1 };
     const oldAnimate = Element.prototype.animate;
     Element.prototype.animate = function () { return { onfinish: null, cancel() {} }; };
     // 战斗域按需加载（battle-loader）：BattleLoader.start 异步拉模块后开局
-    await window.SDT.BattleLoader.start(game, [foe], { isBoss: false, name: '提示测试' });
+    const started = await window.SDT.BattleLoader.start(game, [foe], { isBoss: false, name: '提示测试' });
+    expect(started).not.toBe(false);
+    expect(game.battleActive).toBe(true);
     await new Promise(r => setTimeout(r, 30));
 
     const potions = [...document.querySelectorAll('.bt-potion')];

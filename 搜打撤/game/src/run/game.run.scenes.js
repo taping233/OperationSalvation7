@@ -13,7 +13,7 @@ import { _set_cardPageOpen, cardHTML } from '../hub/game.cardslib.js';
 import { IMMEDIATE_SCENES, NODE_BG, PICKUP_BG, PRELOAD_SCENES, SCENES } from './game.run.data.js';
 import { Random } from '../core/random.js';
 import { createShopController } from './game.run.shop.js';
-import { startBattle } from '../battle/battle-loader.js';
+import { captureBattleContext, startBattle } from '../battle/battle-loader.js';
 import { setBagReturnHook } from '../hub/bag-return-hook.js';
 import { selectEncounterSpec } from './encounter-selector.js';
 import { turboMs } from '../agent/agent.turbo.js';
@@ -109,22 +109,27 @@ export function consumeCell(layerIdx = game.layerIdx, trackPos = game.trackPos) 
 export function consumeCurrentCell() { consumeCell(); }
 
 // 节点与战斗结算之间的短过场：复用现有场景美术，不引入额外资源或阻塞式页面。
+let transitionRequest = 0;
 export function showRunTransition({ tone = 'battle', asset = 'scene-battle-bg', eyebrow = 'AREA ENTERED', title, detail = '', duration = 900 }) {
   // 结束时必须恢复状态：战斗/节点流程下游会自行改状态，但「继续对局」路径
   // 过渡后无人收拾，曾导致 game.state 卡死在 modal、侧栏按钮永久禁用
   const prevState = game.state;
+  const currentContext = captureBattleContext(game);
+  const request = ++transitionRequest;
+  const isCurrent = () => currentContext() && request === transitionRequest;
   game.state = 'modal';
-  return new Promise(resolve => {
+  const transition = new Promise(resolve => {
     let done = false;
     let timer = null;
     const finish = () => {
       if (done) return;
       done = true;
       if (timer) clearTimeout(timer);
+      if (!isCurrent()) { resolve(false); return; }
       UI.hideOverlay();
       // 战斗 modal 态（Battle.restore 置位）不得降级为 idle，否则战斗界面丢失且移动锁死
       game.state = (prevState === 'modal' && !game.battleActive) ? 'idle' : prevState;
-      resolve();
+      resolve(true);
     };
     UI.showOverlay('', `
       <div class="scene flow-transition sc-${escAttr(tone)}" data-asset-key="${escAttr(asset)}" data-act="flowContinue">
@@ -139,6 +144,8 @@ export function showRunTransition({ tone = 'battle', asset = 'scene-battle-bg', 
     timer = setTimeout(finish, turboMs(duration));
     UI.refresh(game);
   });
+  // resolve 与消费者的 then/await 之间仍可能启动新过场；保留该次只读核验。
+  return Object.assign(transition, { isCurrent });
 }
 
 export function enterNode(kind, done) {
@@ -149,7 +156,8 @@ export function enterNode(kind, done) {
     emergencyExit: { tone: 'exit', asset: 'scene-extract-bg', eyebrow: 'EXTRACTION POINT', title: '紧急撤离点', detail: '撤离信标已经接通' },
     shop: { tone: 'shop', asset: 'scene-shop-bg', eyebrow: 'CARAVAN SIGNAL', title: '拾荒商队', detail: '交易频道已经开放' },
   };
-  return showRunTransition(transitions[kind] || { title: '进入节点' }).then(done);
+  const transition = showRunTransition(transitions[kind] || { title: '进入节点' });
+  return transition.then(current => current && transition.isCurrent() ? done() : false);
 }
 
 // 场景/即时效果结束后的收尾：事件连锁移动优先，否则回待机并存档

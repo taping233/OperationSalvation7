@@ -17,7 +17,7 @@ function setup(recoverSlotIfPending) {
   const controller = createGameMenuController({
     SDT: { Base: base, Cards: { applyAbilityRename: () => false, applyDuplicateRenames: () => false }, Sound: { music() {} },
       Meta: { ACHIEVEMENTS: [], isUnlocked: () => false }, Icons: { img: () => '' } },
-    UI, game: { state: 'title' }, runtime: { resize() {}, openBaseHub, showRunTransition: async () => {} },
+    UI, game: { state: 'title' }, runtime: { resize() {}, openBaseHub, showRunTransition: () => Object.assign(Promise.resolve(true), { isCurrent: () => true }) },
     SLOT_COUNT: 1, esc: String, readSlot: () => null, loadGame: vi.fn(), clearSlot,
     saveGame() {}, syncPlayTime() {}, clearSave() {}, clearAllSlots() {},
     getActiveSlot: () => null, setActiveSlot: vi.fn(), preflightRunMap, hasRun: () => false,

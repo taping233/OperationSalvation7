@@ -94,7 +94,7 @@ describe('R5-a real menu preflight gate',()=>{
     const openBaseHub=vi.fn(), logs=[];
     const UI={showOverlay(_title,html){document.body.innerHTML=html;},registerHelp(){},helpBtn(){return'';},act(name,fn){handlers[name]=fn;},log(m){logs.push(m);},hideOverlay(){},clearLog(){},hideScreen(){},showScreen(){},refresh(){}};
     const SDT={Base:base,Cards:{applyAbilityRename:()=>false,applyDuplicateRenames:()=>false},Sound:{music(){}},Meta:{ACHIEVEMENTS:[],isUnlocked:()=>false},Icons:{img:()=>''}};
-    const controller=createGameMenuController({SDT,UI,game:{state:'title'},runtime:{resize(){},openBaseHub,showRunTransition:async()=>{}},SLOT_COUNT:1,esc:String,
+    const controller=createGameMenuController({SDT,UI,game:{state:'title'},runtime:{resize(){},openBaseHub,showRunTransition:()=>Object.assign(Promise.resolve(true),{isCurrent:()=>true})},SLOT_COUNT:1,esc:String,
       readSlot:()=>({bad:true}),loadGame:vi.fn(),clearSlot(){},saveGame(){},syncPlayTime(){},clearSave(){},clearAllSlots(){},getActiveSlot:()=>null,setActiveSlot:vi.fn(),
       preflightRunMap:()=>({ok:false,code:'INVALID_MAP_SNAPSHOT',message:'路线损坏',preserveRun:true}),hasRun:()=>true,RunStorage:{has:()=>true,issue:()=>null},ensureBattleReady:async()=>{}});
     controller.startNewGame();
