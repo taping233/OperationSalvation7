@@ -48,12 +48,13 @@ describe('card rules schema (v2 merged)', () => {
     }
   });
 
-  it('validates the single supported bag use operation against card fields and item type', () => {
+  it('validates supported bag use operation lists against card fields and item type', () => {
     for (const card of [
       { id: 'bag-heal', type: '道具', heal: 4, rules: { version: 1, bag: { use: [{ op: 'heal', amountField: 'heal' }] } } },
       { id: 'bag-restore-three', type: '道具', rules: { version: 1, bag: { use: [{ op: 'restoreConsumed', amount: 3 }] } } },
       { id: 'bag-restore-dynamic', type: '道具', rules: { version: 1, bag: { use: [{ op: 'restoreConsumed', amount: 8 }] } } },
       { id: 'legacy-no-bag-rules', type: '道具' },
+      { id: 'bag-mixed', type: '道具', heal: 2, rules: { version: 1, bag: { use: [{ op: 'heal', amountField: 'heal' }, { op: 'restoreConsumed', amount: 3 }] } } },
     ]) {
       expect(validateCardRules(card), card.id).toEqual({ ok: true, errors: [], pending: [] });
     }
@@ -66,7 +67,6 @@ describe('card rules schema (v2 merged)', () => {
       [{ id: 'bag-heal-missing', type: '道具', rules: { version: 1, bag: { use: [{ op: 'heal', amountField: 'heal' }] } } }, 'rules.bag.use[0].amountField'],
       [{ id: 'bag-heal-extra', type: '道具', heal: 2, rules: { version: 1, bag: { use: [{ op: 'heal', amountField: 'heal', amount: 2 }] } } }, 'rules.bag.use[0]'],
       [{ id: 'bag-restore-fraction', type: '道具', rules: { version: 1, bag: { use: [{ op: 'restoreConsumed', amount: 1.5 }] } } }, 'rules.bag.use[0].amount'],
-      [{ id: 'bag-mixed', type: '道具', heal: 2, rules: { version: 1, bag: { use: [{ op: 'heal', amountField: 'heal' }, { op: 'restoreConsumed', amount: 3 }] } } }, 'rules.bag.use'],
       [{ id: 'bag-unknown-domain-field', type: '道具', rules: { version: 1, bag: { use: [{ op: 'restoreConsumed', amount: 3 }], trigger: 'onUse' } } }, 'rules.bag'],
     ];
     for (const [card, path] of cases) {

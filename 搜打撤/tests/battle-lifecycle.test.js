@@ -56,7 +56,7 @@ async function drain() {
 
 async function contaminateWithRealCards(game, isBoss) {
   start(game, isBoss);
-  BattleSession.commands.playCard('fee-rule', null);
+  BattleSession.commands.playCard('fee-rule', 'self');
   await drain();
   BattleSession.commands.playCard('armor-1', 'self');
   await drain();

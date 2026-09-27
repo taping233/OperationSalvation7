@@ -10,6 +10,7 @@ import { setBagReturnHook as _setBagReturnHook, takeBagReturnHook } from './bag-
 import { _set_cardPageOpen } from './game.cardslib.js';
 import { bagSlots } from './game.bag.bridge.js';
 import { bagDrag, resetBagDrag } from './game.bag.drag.js';
+import { useStructuredBagRule } from './game.bag.rules.js';
 bagSlots.showBackpack = showBackpack;
 bagSlots.closeBackpack = closeBackpack;
 bagSlots.moveStackOrder = moveStackOrder;
@@ -20,48 +21,6 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
   function cardHealAmount(card) {
     const m = /回复\s*(\d+)\s*点生命/.exec(card.desc || '');
     return m ? +m[1] : 0;
-  }
-
-  // 结构化背包用法只覆盖显式声明的单操作；该域存在时不再回退到描述/ID识别。
-  function useStructuredBagRule(card, ownedIndex) {
-    const bagRules = card.rules?.bag;
-    if (!bagRules || !Object.hasOwn(bagRules, 'use')) return false;
-    const operations = bagRules.use;
-    const operation = Array.isArray(operations) && operations.length === 1 ? operations[0] : null;
-    if (operation?.op === 'heal' && operation.amountField === 'heal') {
-      const heal = card.heal;
-      if (typeof heal !== 'number' || !Number.isFinite(heal) || heal <= 0) {
-        UI.log(`道具卡【${esc(card.name)}】的结构化治疗数值无效`, 'warn');
-        return true;
-      }
-      if (game.hp >= game.maxHp) { UI.log('生命值已满，暂时不需要使用', 'warn'); return true; }
-      game.ownedCards.splice(ownedIndex, 1);
-      UI.log(`使用道具卡【<b>${esc(card.name)}</b>】`, 'sys');
-      game.heal(heal);
-      saveGame();
-      showBackpack(true);
-      return true;
-    }
-    if (operation?.op === 'restoreConsumed' && Number.isInteger(operation.amount) && operation.amount > 0) {
-      if (!game.usedPocket.length) { UI.log('消耗口袋是空的，无需复原', 'warn'); return true; }
-      game.ownedCards.splice(ownedIndex, 1);
-      let count = 0;
-      while (game.usedPocket.length && count < operation.amount && usedSlots() < bagCap()) {
-        const pocketEntry = game.usedPocket[0];
-        game.ownedCards.push({ uid: newUid(), card: { ...pocketEntry.card } });
-        pocketEntry.count--;
-        if (pocketEntry.count <= 0) game.usedPocket.shift();
-        count++;
-      }
-      const leftCount = game.usedPocket.reduce((total, entry) => total + entry.count, 0);
-      UI.log(`[[icon:gem]] 使用【<b>${esc(card.name)}</b>】：复原了消耗口袋中的 <b>${count}</b> 张卡牌` +
-        (leftCount && usedSlots() >= bagCap() ? `（背包已满，剩 ${leftCount} 张留在口袋）` : ''), 'ok');
-      saveGame();
-      showBackpack(true);
-      return true;
-    }
-    UI.log(`道具卡【${esc(card.name)}】的结构化背包用法无效`, 'warn');
-    return true;
   }
 
   function pocketAdd(card) {
@@ -76,7 +35,7 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
     const card = game.ownedCards[i].card;
     if (card.type === '事件') { UI.log('[[icon:dice]] 事件卡只能在事件格中触发，无法在背包中使用（背包只记录触发历史）', 'warn'); return; }
     if (card.type !== '道具') { UI.log('只有道具卡可以直接使用', 'warn'); return; }
-    if (useStructuredBagRule(card, i)) return;
+    if (useStructuredBagRule(card, i, { UI, SDT, game, Random, newUid, saveGame, showBackpack, usedSlots, bagCap })) return;
     const desc = card.desc || '';
     // 能源结晶：就地复原消耗口袋中最多 3 张卡牌（2026-09-13 需求：背包满时不能复原出超容量的卡）
     if (card.id === 'tt-crystal' || /复活最多\s*3\s*张卡牌/.test(desc)) {

@@ -119,7 +119,7 @@ describe('E7 rule refusal reaches the real battle view', () => {
   });
   it('shows unsupported beginInfusion feedback before selecting fuel', async () => {
     const card = { id: 'e7-infuse', name: '注能拒绝', type: '法术', cost: 2, infuse: 1, desc: '',
-      rules: { version: 1, triggers: { onDraw: [{ op: 'coins', n: 7 }] } } };
+      rules: { version: 1, triggers: { onDraw: [unsupportedOp()] } } };
     expect(inspectCardRuleCapability(card).kind).toBe('unsupported');
     await start(card);
     const before = resources();

@@ -119,6 +119,13 @@ function unplayableReasonFor(card, mode, ctx) {
 // 战斗药水栏：需要拖/点到具体敌人身上的道具（冰冻药水/流血药水）；其余 null = 点击直接生效
 function itemTargetSideFor(card) {
   if (!card || card.type !== '道具') return null;
+  // M3 收编：结构化 bag.use 感知——单体诅咒/伤害 op 需要点选敌人（规则单源，desc 判定保留给未迁卡）
+  const useOps = card.rules?.bag?.use;
+  if (Array.isArray(useOps)) {
+    if (useOps.some(op => op && (op.op === 'curse' || op.op === 'damage') &&
+      op.target !== 'self' && op.target !== 'allEnemies')) return 'enemy';
+    return null;   // 结构化道具的目标语义完全由 rules 表达
+  }
   const desc = String(card.desc || '');
   if (/附加冰冻/.test(desc)) return 'enemy';
   if (/造成\s*\d+\s*点固定伤害，附加流血/.test(desc)) return 'enemy';

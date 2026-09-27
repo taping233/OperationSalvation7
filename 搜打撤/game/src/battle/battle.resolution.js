@@ -4,9 +4,20 @@ import { attackCue } from './battle.attack-cues.js';
 // 的限制卡池解析器（effect-steps.ctx.js 纯叶子模块，与文本路径 effect-steps 家族同一实现，
 // 避免两份池名词清单漂移）。
 import { parsePoolNoun } from './effect-steps.ctx.js';
+// M 批契约扩展执行件（M1，2026-09-27）：cleanse / draw.untilHandN / draw.handOps。
+// 实现体在 effect-steps.m1.js（新文件挂接，减小本文件 diff），本文件只保留注册点。
+import { resolveCleanseOperation, resolveDrawUntilHandN, resolveDrawHandOps } from './effect-steps.m1.js';
+// M 批契约扩展执行件第二批（M2，2026-09-27）：stealAtk/noDrawNext/extraTurn/execute/summon/
+// registerRule/damage.onKill/curse.source handMoves/armor.consumeEquip/atkDown 侧效。
+import {
+  resolveStealAtk, resolveNoDrawNext, resolveExtraTurn, resolveExecute, resolveSummon,
+  resolveRegisterRule, applyDamageOnKill, resolveConsumeEquip, applyAtkDown, countCurseKinds,
+  handMoveCurses, isLastHandCard, resolveFoeFight, resolveCopyRandom,
+} from './effect-steps.m2.js';
 
 // Schema and runtime support share the same complete-list boundary at every battle entry.
 import { assertCardRulesExecutable } from './battle.rule-guard.js';
+import { getHostedExecutionCard } from './battle.hosted.js';
 
 // B5 诅咒日志动词：逐字对齐文本路径 effect-steps.curse.js 的 run 文案（图标不在此表——
 // 统一取 combat.CURSE_META[kind].icon，保证与 combat.js 枚举单源）。括注部分为卡面语义解释，
@@ -19,6 +30,7 @@ const CURSE_VERBS = {
   abreak: n => `破甲 ${n} 回合（无法减免伤害——元素庇幕失效）`,
   healban: n => `禁疗 ${n} 回合（无法回复生命）`,
   burn: n => `被灼烧（${n} 回合内每回合结束受 1 点固定伤害，不叠加）`,
+  atkDown: n => `攻击力降低（${n} 回合后归还，扣减量见日志）`,
 };
 
 // B7 blessing 两型（schema BLESSING_KEYS 六键的运行时收口，语义与 combat.js BUFF_META 单源）：
@@ -31,7 +43,7 @@ function createBattleResolution(ports) {
     startSurge, getAllCards, isRandomObtainable, randomBattle, getDamageTypes, getDamageTypeMeta,
     fixedDamageType, hasCurse, getAliveFoes, getGrowth, addArmor, applyStatus, findCard, addTempCard, queueDiscover,
     splitClauses, applyTextEffects, registerTurnStart, registerBattle, castRandomSpells,
-    drawCards, grantSha, hitFoe, drawOf, isAOE, damagePlayer, getPlayerHp, countDrawnSpells,
+    drawCards, grantSha, hitFoe, drawOf, isAOE, damagePlayer, getPlayerHp, countDrawnSpells, getHandSize,
     // G3（A3 第三批）端口：addDeckCard/shuffleDeck 洗入牌库（deck.insert 文本路径同一底层）；
     // randomDiscoverCard 随机池/指定池单源抽卡（battle.selection-flow.js，pred 指定池与通用池
     // isRandomObtainable 口径都在其内部）；addCoins 战斗币（与 applyKillRewards/bag 同一 G.coins 计数）；
@@ -43,17 +55,38 @@ function createBattleResolution(ports) {
     addEnergy, addEnergyCap, addPlayerMaxHp,
     // B5 端口：combat 为引擎侧包装后的 combat 命名空间（与文本路径 effect-steps 同一份对象）——
     // addCurse 负责状态袋与 cursefx 彩闪、tickPoison 负责毒伤引爆、CURSES/CURSE_META 供随机池与图标单源。
-    combat } = ports;
+    combat,
+    // M2（2026-09-27）端口：偷取/禁抽/额外回合/持续规则旗标/随从位/价格与牌库定向抽取——
+    // 命令体与文本路径专支同一批引擎函数（engine 端口装配处透传，不新增引擎逻辑）。
+    markNoDrawNext, setExtraTurn, setBleedAmp, setMeleeCost1, setSpellCost1,
+    summonAlly, getPriceOfLastDrawn, deckDraw, getTurn, getPlayerSpellPower, setNextSpellTwice,
+  } = ports;
+  // M1（M 批契约扩展，2026-09-27）：effect-steps.m1.js 的注入端口收口——
+  // 全部来自本文件既有端口，不新增引擎侧装配点。
+  const m1Deps = { combat, getPlayerStatus, drawCards, grantSha, countDrawnSpells, findCard, log, esc,
+    onHandConsumed: ports.onHandConsumed };
+  // M2（M 批契约扩展第二批，2026-09-27）：effect-steps.m2.js 的注入端口收口。
+  const m2Deps = {
+    combat, getAliveFoes, findCard, addCoins, addArmor, log, esc,
+    sweepDead: ports.sweepDead,
+    markNoDrawNext, setExtraTurn, setBleedAmp, setMeleeCost1, setSpellCost1,
+    summonAlly, hitFoe, getTurn, getPlayerStatus, getPlayerSpellPower,
+    random: randomBattle,
+    addTempCard, setNextSpellTwice,
+    foeDealDamage: (attacker, target, amount) => combat.dealDamage(attacker, target, amount, 'attack'),
+  };
   // B1：伤害条件对象（schema CONDITION_KEYS 共用形状）。
   // 口径对照：foeHpBelow 以「血量 ≤ n」承接斩杀「对 9 血以下」（与 hpCap 同口径）；
   // foeHpHalf 以「血量 ≤ 上限一半」承接惩击 halfB；foeStatus 查目标身上的诅咒层；
-  // foeFullHp 以「本段伤害结算前当前满血」承接冷冻射线类「未曾受到过伤害」判定。
+  // foeFullHp 以「本段伤害结算前当前满血」承接冷冻射线类「未曾受到过伤害」判定；
+  // anyCurse（M2）以「目标身负任意诅咒」承接暗影射击类条件。
   function conditionMatches(cond, foe) {
     if (!cond || typeof cond !== 'object') return true;
     if (cond.foeHpBelow !== undefined && !(foe.hp <= cond.foeHpBelow)) return false;
     if (cond.foeHpHalf === true && !(foe.maxHp && foe.hp <= foe.maxHp / 2)) return false;
     if (cond.foeStatus !== undefined && !((foe.status?.[cond.foeStatus] || 0) > 0)) return false;
     if (cond.foeFullHp === true && Number.isFinite(foe.maxHp) && foe.hp < foe.maxHp) return false;
+    if (cond.anyCurse === true && !hasCurse(foe)) return false;
     return true;
   }
 
@@ -72,35 +105,50 @@ function createBattleResolution(ports) {
   // 单 op 内顺序：施加（extend 存在则整体改走「延长」语义）→ double 翻倍 → burst 引爆——
   // 与花鸩（先翻倍后引爆）、棘刺之地（先附加后引爆）的文本路径步序一致。
   // 演出：windup → 结算 → hit，与 damage 段（castSegment）同一节奏。
-  function* resolveCurseOperation(card, operation, preferredTarget) {
+  function* resolveCurseOperation(card, operation, preferredTarget, boundTargets) {
     const isStacking = kind => !!combat.CURSE_META[kind]?.stack;
     // 目标解析与 damage 段同口径：chosenEnemy 倒下顺延战场首位；randomEnemy 施放时掷一名存活敌人；
-    // self 指玩家自身（getPlayerStatus，不在 foes 里，windup 由 staged-playback 按 foeIdx<0 跳过）。
+    // self 指玩家自身（getPlayerStatus，不在 foes 里，windup 由 staged-playback 按 foeIdx<0 跳过）；
+    // bindTarget:'prevDamage'（M2，血毒双镖式段绑定）→ 目标沿用同一 onPlay 内前一 damage 段实际命中者。
     const pickTargets = () => {
       if (operation.target === 'allEnemies') return getAliveFoes();
       if (operation.target === 'randomEnemy') {
         const alive = getAliveFoes();
         return alive.length ? [alive[Math.floor(randomBattle() * alive.length)]] : [];
       }
+      if (operation.bindTarget === 'prevDamage') {
+        return (boundTargets || []).filter(foe => foe && !foe.dead);
+      }
       if (operation.target === 'self') return [getPlayerStatus()].filter(Boolean);
       return [preferredTarget && !preferredTarget.dead ? preferredTarget : getAliveFoes()[0]].filter(Boolean);
     };
-    // 施加量：叠层型取 stacks（bleed/poison，schema 必填）；计时型取 duration（schema 必填）。
-    // randomKinds 不携带 stacks/duration（schema 拒绝该组合）——抽中的叠层型固定 1 层；计时型
-    // 默认 1 回合；operation.duration 若存在则优先（schema 现禁此组合，代码向前兼容，键不静默丢弃）。
+    // 施加量：叠层型取 stacks（bleed/poison，具名施加时 schema 必填）；计时型取 duration（schema 必填）。
+    // randomKinds/source handMoves 不携带 stacks——抽中/扫描到的叠层型固定 1 层；计时型
+    // 默认 1 回合；operation.duration 若存在则优先（向前兼容，键不静默丢弃）。
     const amountFor = kind => isStacking(kind)
-      ? (operation.randomKinds === undefined ? operation.stacks : 1)
+      ? (operation.randomKinds !== undefined || operation.source !== undefined
+        ? 1
+        : operation.stacks)
       : (Number.isInteger(operation.duration) ? operation.duration : 1);
     const drawKinds = () => {
+      if (operation.source === 'handMoves') {
+        // M2：source:'handMoves'——直接消费扫描器逐卡解析出的层数/时长，不再把卡面值压成默认 1。
+        return handMoveCurses(m2Deps).map(entry => typeof entry === 'string'
+          ? { kind: entry, amount: amountFor(entry) } : entry);
+      }
       if (operation.randomKinds === undefined) return [{ kind: operation.curse, amount: amountFor(operation.curse) }];
       // 随机 n 种**不同**诅咒：池与顺序同 combat.CURSES；洗牌写法与文本路径 curse.randomKinds 逐字
       // 同款（.sort(() => r - 0.5)——分布有偏是已知债，为保持两路径掷骰序列一致不改）。
-      const pool = [...combat.CURSES].sort(() => randomBattle() - 0.5);
+      // M2：atkDown 需 amount 扣减量参数，不参与「各 1 层/1 回合」的随机施加，池中排除。
+      const pool = combat.CURSES.filter(k => k !== 'atkDown').sort(() => randomBattle() - 0.5);
       return pool.slice(0, operation.randomKinds).map(kind => ({ kind, amount: amountFor(kind) }));
     };
     // 数据健壮性：schema 已拦非法键，这里再滤一次未知诅咒名（防查表崩结算）。
     const kinds = drawKinds().filter(entry => combat.CURSE_META[entry.kind] && CURSE_VERBS[entry.kind]);
-    if (!kinds.length) return false;
+    if (!kinds.length) {
+      if (operation.source === 'handMoves') log(`[[icon:cross]] <b>${esc(card.name)}</b>：手牌中没有带诅咒的招式`, 'dim');
+      return false;
+    }
     const windupTargets = pickTargets();
     if (!windupTargets.length) return false;
     const type = getDamageTypeMeta()[card.dmgType] ? card.dmgType : fixedDamageType;
@@ -132,7 +180,7 @@ function createBattleResolution(ports) {
           }
         }
       }
-    } else if (operation.randomKinds !== undefined) {
+    } else if (operation.randomKinds !== undefined || operation.source === 'handMoves') {
       // randomKinds：各抽中的诅咒按 1 层 / 1 回合施加；日志与文本路径同款（一行汇总不逐种列名，
       // 层数与剩余回合由状态角标呈现）。免疫（龙巢 noCurseKeys）时 addCurse 返回 0，不计入。
       let applied = 0;
@@ -142,7 +190,9 @@ function createBattleResolution(ports) {
       if (applied > 0) {
         // 日志主语口径对齐文本路径：单体带尾随空格（<b>名</b> 附加…），「全体敌人」紧贴动词（全体敌人附加…）
         const subject = targets.length > 1 ? '全体敌人' : `${nameOf(targets[0])} `;
-        log(`[[icon:skull]] ${subject}附加了 ${kinds.length} 种随机诅咒`, 'sys');
+        const label = operation.source === 'handMoves'
+          ? `附加手牌招式的诅咒（${kinds.length} 种）` : `附加了 ${kinds.length} 种随机诅咒`;
+        log(`[[icon:skull]] ${subject}${label}`, 'sys');
       }
     } else {
       // 具名诅咒：逐目标 addCurse（叠层相加 / 计时取较大）；只对真正生效的目标记日志
@@ -185,6 +235,16 @@ function createBattleResolution(ports) {
         let total = 0;
         for (let i = 0; i < operation.burst; i++) total += combat.tickPoison(foe)?.dealt || 0;
         log(`[[icon:skull]] ${nameOf(foe)} 毒伤引爆 ${operation.burst} 次，共 <b>${total}</b> 点固定伤害（${+(foe.status?.poison || 0)} 层中毒保留）`, 'sys');
+      }
+    }
+    // —— M2：atkDown 侧效——挂诅咒后按 amount 扣攻并登记归还量（到期由回合管线归还）。
+    // 具名/randomKinds 两条施加路径都经此处（source handMoves 抽到 atkDown 时扣减量缺省 1）。
+    for (const { kind, atkAmount } of kinds) {
+      if (kind !== 'atkDown') continue;
+      const cut = Number.isInteger(atkAmount) ? atkAmount
+        : operation.amount !== undefined && Number.isInteger(operation.amount) ? operation.amount : 1;
+      for (const foe of targets) {
+        if ((foe.status?.atkDown || 0) > 0) applyAtkDown(foe, cut);
       }
     }
     yield { kind: 'hit', ...(cue ? { cue } : {}) };
@@ -236,7 +296,32 @@ function createBattleResolution(ports) {
   // dest×act and unconsumed filter are rejected by the complete-list capability guard.
   function resolveAcquireOperation(card, operation) {
     const myClass = typeof getMyClass === 'function' ? getMyClass() : null;
-    const pred = acquirePoolPred(operation.pool, myClass);
+    // M2：pool.kind '牌库底'——从牌库底发现（搜索大宝箱「探宝」专支同款；普通战斗无牌库降级随机）
+    if (operation.pool?.kind === '牌库底' && readState().mode === 'boss' && deckBottomCount()) {
+      const take = Math.min(operation.n, deckBottomCount());
+      const uids = takeDeckBottom(take);
+      const cards = uids.map(u => { const o = findCard(u); return o ? o.card : null; }).filter(Boolean);
+      if (cards.length) {
+        queueDiscover({ n: cards.length, explicit: cards, explicitUids: uids, deckBottom: true });
+        log(`[[icon:question]] <b>${esc(card.name)}</b>：翻开牌库底 ${cards.length} 张——选 1 张入手，其余放回牌库底`, 'loot');
+        return true;
+      }
+    }
+    // M1：filter 基础扩展——在池谓词上叠加 { type, cost, costMax } 约束（武装「抽 2 张装备牌」、
+    // ev19 箭系列式需求的第一批）。named 具体卡名直取不受 filter 影响（指定获取语义，
+    // 「获得 1 张『二次爆炸』」不存在再过滤）。filter 存在时随机抽卡走指定池口径
+    // （randomDiscoverCard 的 pred 分支，排除 生物/事件/资源/衍生）。
+    const basePred = acquirePoolPred(operation.pool, myClass);
+    const filter = operation.filter;
+    const filterPred = filter ? candidate => {
+      if (filter.type !== undefined && candidate.type !== filter.type) return false;
+      if (filter.cost !== undefined && (+candidate.cost || 0) !== filter.cost) return false;
+      if (filter.costMax !== undefined && (+candidate.cost || 0) > filter.costMax) return false;
+      if (Array.isArray(filter.exceptIds) && filter.exceptIds.includes(candidate.id)) return false;
+      return true;
+    } : null;
+    const pred = basePred && filterPred ? candidate => basePred(candidate) && filterPred(candidate)
+      : (filterPred || basePred);
     const dest = operation.dest || 'discover';
     const act = operation.act;
     // 面板日志的池名（文本路径 discover.pool 同款：名词去尾「的」+ 限制池括注）
@@ -370,8 +455,41 @@ function createBattleResolution(ports) {
   }
 
   function* resolveCardSteps(card, target, infused, fuelCost, uid) {
+    card = getHostedExecutionCard(card);
+    const registeredTriggers = card?._registeredTriggers;
+    if (registeredTriggers) {
+      assertCardRulesExecutable({ ...card, rules: { ...card.rules, triggers: registeredTriggers } });
+      card = { ...card };
+      delete card._registeredTriggers;
+    } else {
+      assertCardRulesExecutable(card);
+    }
 
-    assertCardRulesExecutable(card);
+    // 牧师浪掷风吟：固定宿主实现，直接按随机池置入至 6 张并只按新置入法术数回血。
+    // 原文分号会拆开手牌填充与回血句，旧文本步骤因此先泛化回复 heal 字段再漏算逐张系数；
+    // hosted adapter 提供定版卡面，仅此 ID 走此分支，不依赖可编辑描述执行。
+    if (card.rules?.battle?.hosted?.includes('priest')) {
+      let put = 0, spells = 0;
+      while ((typeof getHandSize === 'function' ? getHandSize() : 0) < 6) {
+        const candidate = randomDiscoverCard(null);
+        if (!candidate) break;
+        const before = typeof getHandSize === 'function' ? getHandSize() : 0;
+        addTempCard(candidate);
+        const after = typeof getHandSize === 'function' ? getHandSize() : 0;
+        if (after <= before) break;
+        put++;
+        if (candidate.type === '法术') spells++;
+      }
+      const healAmount = Math.max(0, Number(card.heal) || 0) * spells;
+      if (healAmount > 0) {
+        const healban = getPlayerStatus().status.healban || 0;
+        if (healban > 0) log(`[[icon:heart]] 禁疗中：浪掷风吟回复无效（还剩 ${healban} 回合）`, 'warn');
+        else { heal(healAmount); addFloat({ unit: 'self', text: '', cls: 'stk sticker-heal', warm: true }); }
+      }
+      const handSize = typeof getHandSize === 'function' ? getHandSize() : 0;
+      log(`[[icon:cards]] <b>${esc(card.name)}</b>：置入 ${put} 张随机卡牌（手牌 ${handSize}/6）${spells ? `，其中 ${spells} 张法术回复 ${healAmount} 血` : ''}`, 'loot');
+      return;
+    }
 
     // 血毒双镖（2026-09-16 留言「血毒双镖应该能选择两次目标」）：两段拆开——首段（攻+1 附加流血）
     // 随本牌目标结算；二段（攻+1 附加中毒）由 execPlay 收尾进入点选（interaction 'dart'），
@@ -380,6 +498,21 @@ function createBattleResolution(ports) {
     const hasStructuredOnPlay = card.rules?.triggers != null &&
       Object.prototype.hasOwnProperty.call(card.rules.triggers, 'onPlay');
     const structuredOnPlay = hasStructuredOnPlay ? card.rules.triggers.onPlay : [];
+    // M3（执行器收编轮）：装备域结构化抑制——卡带 rules.equip 时文本立即句/兜底/回合宿主
+    // 一律不再回放（equipment/registerEquip/runner 单路径承接），防止文本与结构化双结算
+    const hasStructuredEquip = card.rules != null && Object.prototype.hasOwnProperty.call(card.rules, 'equip');
+    const suppressText = hasStructuredOnPlay || hasStructuredEquip;
+    // M2 守卫（G13 落地后的新口径）：resolver 只消费 onPlay；其余时点容器（onTurnStart/
+    // onDraw/onConsume…）必须先经 battle.triggers.m2.js runner 登记管线（打出/穿戴时登记、
+    // 抽到/消耗时直调）。直接喂给 resolver 的卡若携带时点容器＝绕过登记管线＝静默不结算，
+    // 此处立即抛出（exec-play 打出路径会先登记再剥离后进入；runner 合成卡只带 onPlay）。
+    if (card.rules?.triggers != null) {
+      for (const triggerKey of Object.keys(card.rules.triggers)) {
+        if (triggerKey !== 'onPlay' && triggerKey !== 'duration') {
+          throw new TypeError(`Trigger '${triggerKey}' must be registered via battle.triggers.m2.js before resolution (card ${card.id || '<missing id>'})`);
+        }
+      }
+    }
     if (card.id === 'tt7-bloodpoison') desc = '攻（+1），附加流血。';
     // 江湖救急（2026-09-18 老板定版）：「随机直接给 3 张」才是本意——不走发现面板。
     // 随机池与发现同口径（isRandomObtainable），置入的临时卡在下个回合开始时消耗。
@@ -423,6 +556,8 @@ function createBattleResolution(ports) {
     let did = false;
     // B3：本次结算中入手的法术数（perSpellHeal 折算基数；普通战 grantSha 发初始攻击不计）
     let spellsGained = 0;
+    // M2：本次结算中最近一个 damage 段实际命中者（curse.bindTarget:'prevDamage' 段绑定）
+    let lastDamageTargets = [];
     const isDmgType = getDamageTypes().includes(card.type);
     let structuredHit = false;
     // —— 伤害（卡面伤害词条立即结算，不受沉默影响） ——
@@ -435,17 +570,74 @@ function createBattleResolution(ports) {
         // B7 的 blessing 与资源族同在循环 2（先伤害后增益，与文本路径步序一致）
         // The complete list has passed the shared schema/capability guard.
         if (operation.op !== 'damage') continue;
-        // B1：伤害来源三选一（schema 保证恰好一个）——v1 字段引用 / v2 字面量 / v2 区间。
+        // M3：pick:'new' 段不随主结算——延后进入点选（exec-play 尾部 beginDartStrike 泛化）
+        if (operation.pick === 'new') continue;
+        // M2：schedule:'nextTurn'/'nextTurnStart'——该段延迟到下回合开始结算（正午决战「下回合
+        // 开始时连开四枪」），走 delayed 管线 triggerOps 通道；本回合不产出任何伤害
+        if (operation.schedule !== undefined) {
+          addDelayed({ special: 'triggerOps', ops: [operation], cardName: card.name, srcCard: card, notBeforeTurn: getTurn() + 1 });
+          log(`[[icon:hourglass]] <b>回合开始时</b>：【${esc(card.name)}】延迟效果将在下个回合开始结算`, 'sys');
+          did = true;
+          continue;
+        }
+        // B1：伤害来源四选一（schema 保证恰好一个）——v1 字段引用 / v2 字面量 / v2 区间 /
+        // M2 perTargetPrice（锚定参照牌价格：气功波「抽 1 张牌，对全体敌人造成等同于其价格的固定伤害」）。
         // 回合成长（充能火球）按 uid 叠加；区间每次施放掷一次（含端点，与 dmg.direct 同口径）。
-        const sources = ['amountField', 'amount', 'range'].filter(field => operation[field] !== undefined);
+        const sources = ['amountField', 'amount', 'range', 'perTargetPrice'].filter(field => operation[field] !== undefined);
         const growth = (uid && getGrowth(uid)) || 0;
-        const baseDamage = sources[0] === 'amountField' ? +card[operation.amountField] + growth
+        let baseDamage = sources[0] === 'amountField' ? +card[operation.amountField] + growth
           : sources[0] === 'amount' ? operation.amount + growth
-          : rollRange(operation.range);
+          : sources[0] === 'range' ? rollRange(operation.range)
+          : getPriceOfLastDrawn();
+        // M2：perInfusedInHand——「本牌在手时每注能过 1 张卡牌，伤害 +N」（充能射线，infuseFuels 全局计数）
+        if (operation.perInfusedInHand !== undefined) {
+          const infusedCount = readState().infuseFuels;
+          if (infusedCount > 0) {
+            baseDamage += infusedCount * operation.perInfusedInHand;
+            log(`[[icon:crystal]] <b>${esc(card.name)}</b>：本局已注能 ${infusedCount} 张，伤害 +${infusedCount * operation.perInfusedInHand}`, 'sys');
+          }
+        }
+        // M2：infuseBonus——注能打出时伤害 +N（镭射「注能(1)：伤害+3」口径，infused 由 exec 层传入）
+        if (operation.infuseBonus !== undefined && infused) {
+          baseDamage += operation.infuseBonus;
+          log(`[[icon:fire]] <b>${esc(card.name)}</b>：注能加成，伤害 +${operation.infuseBonus}`, 'sys');
+        }
+        // M2：graveyard 接线——墓地中每有 1 张该类型牌伤害 +N（雷殛；普通战斗无墓地不生效）
+        if (operation.graveyard !== undefined) {
+          const cnt = readState().mode === 'boss'
+            ? readState().grave.filter(u => { const o = findCard(u); return o && o.card.type === operation.graveyard.type; }).length
+            : 0;
+          if (cnt > 0) {
+            baseDamage += cnt * operation.graveyard.perCard;
+            log(`[[icon:recycle]] 墓地增伤：墓地中有 ${cnt} 张【${esc(operation.graveyard.type)}】牌，伤害 +${cnt * operation.graveyard.perCard}`, 'sys');
+          }
+        }
+        // M2：spellPowerMul——受法伤加成翻倍（爆燃火球）：本段额外再叠 (M-1)×法伤加成
+        //（hitFoe→dealDamage 内部对法术伤害叠 1×，此处补齐倍率余量，总量 = 基础 + M×加成）
+        if (operation.spellPowerMul !== undefined) {
+          const power = getPlayerSpellPower() + (+getPlayerStatus().status?.spellUp || 0);
+          if (power > 0) {
+            baseDamage += power * (operation.spellPowerMul - 1);
+            log(`[[icon:crystal]] <b>${esc(card.name)}</b>：法伤加成 ×${operation.spellPowerMul}（额外 +${power * (operation.spellPowerMul - 1)}）`, 'sys');
+          }
+        }
         // B2：段数来源——v1 hitCount / v2 hits.count / v2 hits.range（每次施放掷一次）；
         // hits.perFoe 已由顶部守卫拦截（pending）。
-        const hitCount = operation.hitCount ?? operation.hits?.count
+      // B2：段数来源——v1 hitCount / v2 hits.count / v2 hits.range（每次施放掷一次）；
+      // M2：hits.perPlayedMoves——段数 = 本回合已打出的招式数（连续射击，结算后自增口径不含本牌）。
+      // hits.perFoe 已由顶部守卫拦截（pending）。
+      let hitCount;
+      if (operation.hits?.perPlayedMoves !== undefined) {
+        hitCount = Math.max(0, readState().playedMovesThisTurn);
+        if (hitCount > 0) {
+          log(`[[icon:swords]] <b>${esc(card.name)}</b>：本回合已打出 ${hitCount} 张招式，触发 ${hitCount} 次`, 'sys');
+        } else {
+          log(`[[icon:cross]] <b>${esc(card.name)}</b>：本回合还没有打出其他招式，不造成伤害`, 'dim');
+        }
+      } else {
+        hitCount = operation.hitCount ?? operation.hits?.count
           ?? (operation.hits?.range !== undefined ? rollRange(operation.hits.range) : 1);
+      }
         let preferred = target;
         const foesHit = [];
         let dealtTotal = 0;
@@ -512,8 +704,13 @@ function createBattleResolution(ports) {
         }
         // B2：recast:{on:'kill'}——本 op 击杀过敌人时再施放 N 次（镜像文本路径击杀连锁：
         // 余烬爆裂/饱和打击）。再施放段不做 cond/bonus 复判，按基础伤害结算。
-        if (operation.recast && operation.recast.on === 'kill' && foesHit.some(foe => foe.dead)) {
-          log(`[[icon:sparkles]] <b>${esc(card.name)}</b>：击杀敌人，再施放${operation.recast.times > 1 ? ` ${operation.recast.times} 次` : '一次'}`, 'sys');
+        // M2：recast.on 扩 'lastHand'——本牌为最后一张手牌时再施放 N 次（急行军/破釜沉舟族）。
+        const recastActive = operation.recast && (
+          (operation.recast.on === 'kill' && foesHit.some(foe => foe.dead)) ||
+          (operation.recast.on === 'lastHand' && isLastHandCard(uid, m2Deps))
+        );
+        if (recastActive) {
+          log(`[[icon:sparkles]] <b>${esc(card.name)}</b>：${operation.recast.on === 'kill' ? '击杀敌人' : '本牌是最后一张手牌'}，再施放${operation.recast.times > 1 ? ` ${operation.recast.times} 次` : '一次'}`, 'sys');
           for (let k = 0; k < operation.recast.times; k++) {
             const result = yield* castSegment(hitCount + k,
               operation.recast.times > 1 ? `（再施放第 ${k + 1} 次）` : '（再施放）', false);
@@ -521,6 +718,12 @@ function createBattleResolution(ports) {
             dealtTotal += result.dealt;
           }
         }
+        // M2：damage.onKill 结构化击杀奖励（闪金之锤 +币 / 破甲重斩 +甲）
+        if (operation.onKill) {
+          applyDamageOnKill(card, operation.onKill, foesHit.filter(foe => foe.dead).length, m2Deps);
+        }
+        // M2：段绑定记账——curse.bindTarget:'prevDamage' 沿用本段实际命中者
+        lastDamageTargets = [...foesHit];
         structuredHit = true;
         did = true;
       }
@@ -691,13 +894,62 @@ function createBattleResolution(ports) {
           continue;
         }
         // B5（A3 第二批）：结构化诅咒——7 诅咒 × target × randomKinds/double/burst/extend 全键在此消费
+        // M2：source handMoves / bindTarget prevDamage / atkDown（amount 扣攻）
+        // M3：pick:'new' 段延后到点选结算
         if (operation.op === 'curse') {
-          did = (yield* resolveCurseOperation(card, operation, target)) || did;
+          if (operation.pick === 'new') continue;
+          did = (yield* resolveCurseOperation(card, operation, target, lastDamageTargets)) || did;
+          continue;
+        }
+        // M3：foeFight——迫使其相互攻击（扰敌）；copyRandom——随机复制一张手牌（刀剑形态）
+        if (operation.op === 'foeFight') {
+          did = resolveFoeFight(card, operation, m2Deps) || did;
+          continue;
+        }
+        if (operation.op === 'copyRandom') {
+          did = resolveCopyRandom(card, m2Deps) || did;
+          continue;
+        }
+        // M2：stealAtk——偷取/夺取敌人攻击力（影噬/禁咒口径，enemy-phase 归还管线复用）
+        if (operation.op === 'stealAtk') {
+          const stealTarget = (operation.bindTarget === 'prevDamage' && lastDamageTargets.length)
+            ? lastDamageTargets[lastDamageTargets.length - 1]
+            : (target && !target.dead ? target : getAliveFoes()[0]);
+          did = resolveStealAtk(card, operation, stealTarget, m2Deps) || did;
+          continue;
+        }
+        // M2：noDrawNext / extraTurn / execute / summon / registerRule（键位已定族接线）
+        if (operation.op === 'noDrawNext') {
+          did = resolveNoDrawNext(card, operation, m2Deps) || did;
+          continue;
+        }
+        if (operation.op === 'extraTurn') {
+          did = resolveExtraTurn(card, operation, m2Deps) || did;
+          continue;
+        }
+        if (operation.op === 'execute') {
+          const execTarget = lastDamageTargets.length
+            ? lastDamageTargets[lastDamageTargets.length - 1]
+            : (target && !target.dead ? target : getAliveFoes()[0]);
+          did = resolveExecute(card, operation, execTarget, m2Deps) || did;
+          continue;
+        }
+        if (operation.op === 'summon') {
+          did = resolveSummon(card, operation, m2Deps) || did;
+          continue;
+        }
+        if (operation.op === 'registerRule') {
+          did = resolveRegisterRule(card, operation, m2Deps) || did;
           continue;
         }
         // G3（A3 第三批）：结构化获取（池谓词 parsePoolNoun 单源 / dest 三向 / act 组合门）
         if (operation.op === 'acquire') {
           did = resolveAcquireOperation(card, operation) || did;
+          continue;
+        }
+        // M1（M 批契约扩展，2026-09-27）：净化——清除自身全部诅咒（combat.purify 与文本路径同源）
+        if (operation.op === 'cleanse') {
+          did = resolveCleanseOperation(card, operation, m1Deps) || did;
           continue;
         }
         // G3（A3 第三批）：coins 获得金币——{op, n}，与 applyKillRewards/bag 同一 G.coins 计数
@@ -790,7 +1042,18 @@ function createBattleResolution(ports) {
         } else if (operation.op === 'armor') {
           // B3：护甲来源二选一（amountField/amount）；guard=true 叠加格挡（本回合所受伤害降为 1）；
           // decayAtTurnEnd=n 注册「下回合开始时 -n 点」延迟段（与坚盾文本路径同一条 delayed 管线）。
-          const amount = operation.amountField !== undefined ? +(card[operation.amountField] || 0) : +(operation.amount || 0);
+          // M2：priceOf:'discovered' 护甲锚定发现牌价格（挖宝）；consumeEquip 消耗手牌装备为代价（铸甲）。
+          if (operation.consumeEquip !== undefined && !resolveConsumeEquip(card, m2Deps)) {
+            // 付不出代价：整段无效（不白拿甲），与手牌代价「付不出即无效果」口径一致
+            continue;
+          }
+          let amount = operation.amountField !== undefined ? +(card[operation.amountField] || 0)
+            : operation.amount !== undefined ? +(operation.amount || 0)
+            : operation.priceOf !== undefined ? Math.max(0, getPriceOfLastDrawn())
+            : 0;
+          if (operation.priceOf !== undefined) {
+            log(`[[icon:flask]] 参照牌价格 ${amount} → 折算护甲`, 'sys');
+          }
           if (amount > 0) {
             addArmor(amount, operation.guard === true ? { guard: true } : undefined);
             log(`[[icon:plate]]获得 ${amount} 点护甲`, 'sys');
@@ -805,19 +1068,47 @@ function createBattleResolution(ports) {
             log(`[[icon:hourglass]] <b>回合开始时</b>：【${esc(card.name)}】护甲 -${operation.decayAtTurnEnd} 点（下个回合开始生效）`, 'sys');
           }
         } else {
-          // draw：v1 amountField 与 v2 字面量 amount 双源（amount 本批接线；
-          // untilHandN/handOps 仍属 B4，由顶部守卫拦截）
-          if (operation.amountField === undefined && operation.amount === undefined) {
+          // draw：五源选一（v1 amountField / v2 字面量 amount / M1 range 区间随机张数 /
+          // M1 untilHandN 抽到目标手牌数 / M2 perCurseKinds 按目标诅咒种类数）；
+          // M2 filter：牌库定向抽取（武装「从牌库中抽取 2 张装备牌」，deckDraw type 口径）；
+          // handOps 为抽牌前置手牌操作（实现体在 effect-steps.m1.js）。
+          if (operation.amountField === undefined && operation.amount === undefined &&
+              operation.range === undefined && operation.untilHandN === undefined &&
+              operation.perCurseKinds === undefined) {
             throw new TypeError(`Unsupported onPlay operation for card ${card.id || '<missing id>'}`);
           }
-          const amount = operation.amountField !== undefined ? +card[operation.amountField] : +(operation.amount || 0);
-          if (readState().mode === 'boss') {
-            const got = drawCards(amount);
-            if (typeof countDrawnSpells === 'function') spellsGained += countDrawnSpells();
-            log(`[[icon:cards]] <b>${esc(card.name)}</b>：抽了 ${got} 张牌`, 'sys');
+          if (operation.handOps !== undefined) yield* resolveDrawHandOps(card, operation.handOps, m1Deps);
+          if (operation.untilHandN !== undefined) {
+            spellsGained += resolveDrawUntilHandN(card, operation, m1Deps) || 0;
+          } else if (operation.filter !== undefined) {
+            // M2：牌库定向抽取——BOSS 战 deckDraw(type)，普通战无牌库降级为获得初始攻击
+            const want = operation.filter.type;
+            const got = readState().mode === 'boss' ? deckDraw({ n: operation.amount || 1, type: want }) : 0;
+            if (readState().mode === 'boss') {
+              log(`[[icon:cards]] <b>${esc(card.name)}</b>：从牌库抽取 ${got} 张【${esc(want)}】牌`, 'sys');
+            } else {
+              grantSha(operation.amount || 1);
+              log(`[[icon:cards]] <b>${esc(card.name)}</b>：普通战斗没有牌库，改为获得 ${operation.amount || 1} 张【初始攻击】`, 'sys');
+            }
           } else {
-            grantSha(amount);
-            log(`[[icon:cards]] <b>${esc(card.name)}</b>：获得 ${amount} 张【初始攻击】（普通战斗抽牌效果改为获得初始攻击）`, 'sys');
+            let amount = operation.amountField !== undefined ? +card[operation.amountField]
+              : operation.range !== undefined ? rollRange(operation.range)
+              : +(operation.amount || 0);
+            if (operation.perCurseKinds !== undefined) {
+              const anchor = lastDamageTargets.length ? lastDamageTargets[lastDamageTargets.length - 1]
+                : (target && !target.dead ? target : getAliveFoes()[0]);
+              const kinds = countCurseKinds(anchor, m2Deps);
+              amount = kinds;
+              log(`[[icon:cards]] <b>${esc(card.name)}</b>：目标身负 ${kinds} 种诅咒，抽 ${kinds} 张牌`, 'sys');
+            }
+            if (readState().mode === 'boss') {
+              const got = drawCards(amount);
+              if (typeof countDrawnSpells === 'function') spellsGained += countDrawnSpells();
+              log(`[[icon:cards]] <b>${esc(card.name)}</b>：抽了 ${got} 张牌`, 'sys');
+            } else {
+              grantSha(amount);
+              log(`[[icon:cards]] <b>${esc(card.name)}</b>：获得 ${amount} 张【初始攻击】（普通战斗抽牌效果改为获得初始攻击）`, 'sys');
+            }
           }
         }
         did = true;
@@ -826,7 +1117,8 @@ function createBattleResolution(ports) {
     // 法力奔涌（2026-09-10 需求 #37/#38）：「对随机敌人释放4个随机法术（这些随机法术默认已注能）」。
     // 识别加名称/ID 兜底——旧档背包里的快照克隆可能带着旧措辞描述，正则失配曾导致整卡无效果。
     const surgeM = desc.match(/对随机敌人释放\s*(\d+|四)\s*个随机法术/);
-    if (!hasStructuredOnPlay && (surgeM || card.id === 'cc-mana-surge' || /法力奔涌/.test(String(card.name || '')))) {
+    if (!suppressText && (surgeM || card.id === 'cc-mana-surge' ||
+        card.rules?.battle?.hosted?.includes('mana-surge') || /法力奔涌/.test(String(card.name || '')))) {
       startSurge(castRandomSpells(surgeM ? (surgeM[1] === '四' ? 4 : Math.max(1, +surgeM[1])) : 4, card.id));
       did = true;
     }
@@ -835,7 +1127,7 @@ function createBattleResolution(ports) {
     // 例外：神灯类「抉择：1° …；2° …」的编号续句（^\d° 开头）必须并回抉择主句，
     // 否则选项会被拆成独立子句抢先自动结算（2026-09-12 回归修复）
     const imm = [];
-    if (!hasStructuredOnPlay) parts.immediate.forEach(cl => {
+    if (!suppressText) parts.immediate.forEach(cl => {
       if (/^\s*\d\s*[°º]/.test(cl) && imm.length && /抉择[:：]/.test(imm[imm.length - 1])) imm[imm.length - 1] += '，' + cl;
       else imm.push(cl);
     });
@@ -851,20 +1143,22 @@ function createBattleResolution(ports) {
       drawn = drawn || res.drawn;
     }
     // 结构化词条兜底（描述未写明但制作坊标注了回复/护甲/抽卡字段时）——纯注能句未注能时同门跳过（第十二批）
-    if (!hasStructuredOnPlay && !(infuseLead && !infused) && !healed && !skillOnly && +(card.heal || 0) > 0) {
+    if (!suppressText && !(infuseLead && !infused) && !healed && !skillOnly && +(card.heal || 0) > 0) {
       const n = +(card.heal || 0);
       if ((getPlayerStatus().status.healban || 0) > 0) {
         log(`[[icon:heart]] 禁疗中：回复 ${n} 点生命无效（还剩 ${getPlayerStatus().status.healban} 回合）`, 'warn');
       } else { heal(n); addFloat({ unit: 'self', text: '', cls: 'stk sticker-heal', warm: true }); }
       did = true;
     }
-    if (!hasStructuredOnPlay && !(infuseLead && !infused) && !armored && !skillOnly && +(card.armor || 0) > 0) {
+    if (!suppressText && !(infuseLead && !infused) && !armored && !skillOnly && +(card.armor || 0) > 0) {
       addArmor(+(card.armor || 0));
       log(`[[icon:plate]]获得 ${+(card.armor || 0)} 点护甲`, 'sys');
       did = true;
     }
     // 卡面结构化抽卡字段兜底（描述未写「抽 N 张牌」时）——邪能护体 draw:3 依赖此门防未注能白嫖
-    if (!hasStructuredOnPlay && !(infuseLead && !infused) && !drawn && !skillOnly && drawOf(card) > 0) {
+    const hostedWarlockHandlesItsOwnDraw = card.rules?.battle?.hosted?.includes('warlock') === true;
+    if (!suppressText && !(infuseLead && !infused) && !drawn && !skillOnly &&
+        !hostedWarlockHandlesItsOwnDraw && drawOf(card) > 0) {
       const n = drawOf(card);
       if (readState().mode === 'boss') {
         const got = drawCards(n);
@@ -876,11 +1170,11 @@ function createBattleResolution(ports) {
       did = true;
     }
     // —— 「回合开始时」生效时刻词条 ——
-    if (!hasStructuredOnPlay && parts.turnStart.length) { registerTurnStart(card, parts.turnStart); did = true; }
+    if (!suppressText && parts.turnStart.length) { registerTurnStart(card, parts.turnStart); did = true; }
     // —— 「本局对战内」持续时间词条 ——
-    if (!hasStructuredOnPlay) parts.battle.forEach(cl => { did = registerBattle(card, cl, target) || did; });
+    if (!suppressText) parts.battle.forEach(cl => { did = registerBattle(card, cl, target) || did; });
     // 「被注能时」句在打出时不结算（splitClauses 已剥出，留给 resolveInfusedFuel）
-    if (!did && !skillOnly && !hasStructuredOnPlay) log(`[[icon:play]] <b>${esc(card.name)}</b>：该效果在 M1 后续实装（占位）`, 'dim');
+    if (!did && !skillOnly && !suppressText) log(`[[icon:play]] <b>${esc(card.name)}</b>：该效果在 M1 后续实装（占位）`, 'dim');
   
   }
 

@@ -173,7 +173,7 @@ describe('R3-a 可信伤害预览', () => {
     BattleSession.commands.flee();
   });
 
-  it.each(['cc-mana-surge', 'cc-cursed-blade'])(
+  it.each(['cc-mana-surge'])(
     '%s 的文本路径效果为 unknown，预览不执行效果', id => {
       const card = Cards.all().find(entry => entry.id === id);
       expect(card).toBeTruthy();
@@ -188,8 +188,8 @@ describe('R3-a 可信伤害预览', () => {
     },
   );
 
-  it.each(['cc-double-boom', 'tt7-whirlwind'])(
-    '%s 已随 A3 迁移为结构化 AOE：预览 exact 且数字与真实结算一致', async id => {
+  it.each(['cc-double-boom', 'tt7-whirlwind', 'cc-cursed-blade'])(
+    '%s 结构化伤害：预览 exact 且数字与真实结算一致', async id => {
       const card = Cards.all().find(entry => entry.id === id);
       expect(card).toBeTruthy();
       const { game, uid } = gameWith(card);
@@ -216,7 +216,9 @@ describe('R3-a 可信伤害预览', () => {
     expect(preview(setup.uid)).toMatchObject({ legal: false, damage: null, reasons: ['这张牌已不在当前手牌中'] });
     BattleSession.commands.flee();
 
-    const selfCard = { ...card, id: 'preview-self-card', desc: '获得 2 点护甲。', dmg: 0, dmgType: null };
+    const selfCard = { ...card, id: 'preview-self-card', desc: '获得 2 点护甲。', dmg: 0, dmgType: null,
+      rules: { version: 1, battle: { target: { side: 'self', area: false } },
+        triggers: { onPlay: [{ op: 'armor', amount: 2 }] } } };
     setup = gameWith(selfCard);
     restore(setup.game, setup.uid, { hp: 12 });
     expect(preview(setup.uid)).toMatchObject({ legal: false, damage: null, reasons: ['这张牌不能指定敌人'] });

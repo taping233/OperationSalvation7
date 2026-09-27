@@ -248,12 +248,13 @@ describe('英雄卡实打 · 牧师', () => {
     expect(seen(g, '洗入牌库'), slice(g)).toBe(true);
     expect(seen(g, '然后抽') || seen(g, '洗入后抽了 2 张牌'), slice(g)).toBe(true);
     // 洗混后立刻抽的 2 张应是禁咒（抽到时施放），而不是洗入前的旧牌
-    const castNow = g.logs.filter(l => l.includes('抽到时施放') && l.includes('禁咒'));
-    expect(castNow.length >= 2, `洗入后应立即施放 2 张禁咒：${slice(g)}`).toBe(true);
+    const castNow = g.logs.filter(l => l.includes('抽到时') && l.includes('禁咒'));
+    expect(castNow.length, `洗入后应立即施放且仅施放 2 张禁咒：${slice(g)}`).toBe(2);
+    expect(snap().drawPile).toHaveLength(2);
     // 回合推进抽干牌库：剩下 2 张禁咒也依次施放
     BattleSession.commands.endTurn();
     await nextTurn();
-    const castAll = g.logs.filter(l => l.includes('抽到时施放') && l.includes('禁咒'));
+    const castAll = g.logs.filter(l => l.includes('抽到时') && l.includes('禁咒'));
     for (const nm of ['禁咒I', '禁咒II', '禁咒III', '禁咒IV']) {
       expect(castAll.some(l => l.includes(nm)), `${nm} 应施放过（测试规则每回合抽99张、弃牌堆循环洗回会重复施放）：${g.logs.join('|').slice(-500)}`).toBe(true);
     }
@@ -269,7 +270,8 @@ describe('英雄卡实打 · 牧师', () => {
     expect(s.hand.length, `手牌应补到 6 张：${s.hand.length}`).toBe(6);
     await waitLog(() => /置入 \d+ 张随机卡牌/.test(slice(g)));
     expect(/置入 \d+ 张随机卡牌/.test(slice(g)), slice(g)).toBe(true);
-    expect(g.hp > 100, '置入法术应回复生命').toBe(true);
+    const insertedSpells = s.hand.filter(uid => viewApi.findCard(uid)?.card?.type === '法术').length;
+    expect(g.hp, '每张置入法术回复 3；没有置入法术时不回血').toBe(100 + insertedSpells * 3);
     BattleSession.commands.flee();
     await drain(20);
   });
@@ -371,7 +373,7 @@ describe('直接释放家族实打', () => {
     BattleSession.start(g, [foe()], { name: '药水' });
     await drain();
     mark(g);
-    BattleSession.commands.playCard(uidOf(g, ym), null);
+    BattleSession.commands.playCard(uidOf(g, ym), 'self');
     const s0 = await waitIdle();
     expect(Boolean(s0.discovering), '应进入发现面板').toBe(true);
     const picked = s0.discovering.options[0];

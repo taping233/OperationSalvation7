@@ -14,10 +14,13 @@ const RUNTIME_SURFACE = new Set([
   'battle/battle.runtime.interaction.js', 'battle/battle.runtime.effects.js',
   'battle/battle.runtime.presentation.js',
 ]);
+const EXECUTION_ADAPTERS = new Set(['battle/effect-steps.m1.js', 'battle/effect-steps.m2.js']);
 const RUNTIME_INNER = new Set([
   'battle/battle.engine.js', 'battle/battle.enemy-phase.js', 'battle/battle.selection-flow.js',
   'battle/battle.equipment.js', 'battle/battle.bag.js', 'battle/battle.lifecycle.js',
   'battle/battle.exec-play.js',
+  // M 批结算适配器拥有牌区操作与已登记触发器；不对视图开放状态访问。
+  ...EXECUTION_ADAPTERS, 'battle/battle.triggers.m2.js',
 ]);
 const RUNTIME_OWNERS = new Set(['battle/battle.core.js', ...RUNTIME_INNER]);
 const PURE_MODULES = new Set([
@@ -123,12 +126,14 @@ export function architectureViolations(graph) {
   for (const [name, module] of graph) {
     for (const { target, line } of module.dependencies) {
       if (RUNTIME_SURFACE.has(target) && !RUNTIME_OWNERS.has(name) && !RUNTIME_SURFACE.has(name)) {
-        violations.push(`${name}:${line}: 战斗运行时仅允许 battle.core 与状态属地模块（engine/enemy-phase/selection-flow/equipment/bag/lifecycle/exec-play）访问`);
+        violations.push(`${name}:${line}: 战斗运行时仅允许 battle.core 与已登记的状态属地、结算适配模块访问`);
       }
       if (VIEW_MODULES.has(name) && RUNTIME_INNER.has(target)) {
         violations.push(`${name}:${line}: 视图须通过 core 命令与快照访问战斗`);
       }
-      if (PURE_MODULES.has(name) && (RUNTIME_OWNERS.has(target) || RUNTIME_SURFACE.has(target) || VIEW_MODULES.has(target)
+      // resolution 仅可调用两件 M 批命令适配器；其余纯模块仍禁止进入运行态，视图也禁止调用适配器。
+      const effectCommand = name === 'battle/battle.resolution.js' && EXECUTION_ADAPTERS.has(target);
+      if (PURE_MODULES.has(name) && !effectCommand && (RUNTIME_OWNERS.has(target) || RUNTIME_SURFACE.has(target) || VIEW_MODULES.has(target)
         || target === 'core/sdt-facade.js' || FLOW_PREFIXES.some(prefix => target.startsWith(prefix)))) {
         violations.push(`${name}:${line}: 独立规则/快照模块不能反向依赖 ${target}`);
       }

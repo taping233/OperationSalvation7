@@ -10,6 +10,7 @@ import { emit as busEmit } from '../core/event-bus.js';
 import { clearFeedback } from './battle.feedback.js';
 import { shuffleCards } from './battle.deck.js';
 import { BATTLE_PHASES, createBattleState, transitionBattle } from './battle.state.js';
+import { getHostedExecutionCard } from './battle.hosted.js';
 import {
   battleState, G, foes, opts, mode, drawPile, hand, played, consumed, maxEnergy, pstat,
   busy, infusing, discovering, discoverQueue, choosing, selPool, sel, lastDeckSel,
@@ -36,6 +37,7 @@ const shuffle = shuffleCards;
 export function createBattleLifecycle({
   session, intentFor, cloneData, injectSealCards, applyNestRunes, applyVoidRune, drawCards,
   applyBattleStartPassives, isBattleStartEquip, isStarterAttack, requestBattleRender, alive, R,
+  resetTriggers, runBattleStartTriggers,
 }) {
   const { handSelectQueue, choiceQueue } = session;
   const RUN_RESTART_KEYS = [
@@ -174,9 +176,14 @@ export function createBattleLifecycle({
   function deckCapBonus(uids) {
     let bonus = 0;
     (G.ownedCards || []).forEach(o => {
-      if (!o.card || !isBattleStartEquip(o.card) || !(uids || sel).has(o.uid)) return;
-      const m = String(o.card.desc).match(/牌库上限\s*\+\s*(\d+)/);
-      if (m) bonus += +m[1];
+      const card = getHostedExecutionCard(o.card);
+      if (!card || !isBattleStartEquip(card) || !(uids || sel).has(o.uid)) return;
+      const declared = card.rules?.equip?.passive?.aura?.deckCap;
+      if (Number.isInteger(declared)) bonus += declared;
+      else {
+        const m = String(card.desc || '').match(/牌库上限\s*\+?\s*(\d+)/);
+        if (m) bonus += +m[1];
+      }
     });
     return bonus;
   }
@@ -255,7 +262,9 @@ export function createBattleLifecycle({
     resetBattleEntryState();
     transitionTo(BATTLE_PHASES.PLAYER);
     G.state = 'modal';
+    if (resetTriggers) resetTriggers();
     applyBattleStartPassives();
+    if (runBattleStartTriggers) runBattleStartTriggers();   // M2：结构化 onBattleStart（能力卡/迎装规则）
     // 普通战无法使用能力卡（2026-09-16 老板定版）：能力卡不进普通战手牌（对 BOSS 编组不受限）
     if (alive().length > 1) G.log('[[icon:question]] 以一敌多：伤害与群体卡都<b>拖到任意敌人身上</b>打出（群体自动命中全体）', 'sys');
     G.log(`[[icon:cards]] 普通战斗无需抽牌：随身 <b>${hand.length}</b> 张战斗卡直接可打出；道具/资源/事件卡不入手，能力卡只能收藏或编入 BOSS 战牌库 · 每回合固定 <b>${maxEnergy}</b> 费`, 'sys');
@@ -342,6 +351,7 @@ export function createBattleLifecycle({
       if (freezeRuneOn && target !== pstat) { const g = drawCards(2); G.log('[[icon:gem]] <b>冰冻符文</b>：冰冻 1 名角色，抽 ' + g + ' 张牌', 'ok'); }
     };
     applyBattleStartPassives();   // Q1：迷之匣替换/灵符抽牌/骷髅王剑/混沌之眼（持有即生效）
+    if (runBattleStartTriggers) runBattleStartTriggers();   // M2：结构化 onBattleStart（能力卡/迎装规则）
     requestBattleRender();
   }
 

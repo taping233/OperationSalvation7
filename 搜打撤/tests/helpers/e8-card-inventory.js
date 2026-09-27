@@ -52,7 +52,8 @@ function summarize(rows) {
 function rowsFor(cards, sources, stages, scope, verifiedEvidence = {}) {
   indexed(cards, scope);
   return cards.map(card => {
-    const definitions = sources.filter(source => source.id === card.id).map(({ id, ...source }) => source);
+    const definitions = sources.filter(source => source.id === card.id)
+      .map(source => Object.fromEntries(Object.entries(source).filter(([key]) => key !== 'id')));
     const sourceDefinitions = definitions.length ? { status: 'observed', references: definitions }
       : { status: 'unknown', references: [] };
     const row = {
@@ -127,7 +128,7 @@ export function buildCardInventory({ production, cardsSync, stages, sources, met
   return inventory;
 }
 
-export function compareMigrationInventories(before, after, approvedIds, expectedRules) {
+export function compareMigrationInventories(before, after, approvedIds, expectedRules, expectedRulesById, expectedFaceById = {}) {
   const previous = before.production.cards.map(row => row.card);
   const current = after.production.cards.map(row => row.card);
   const delta = describeStage('E8 approved migration', previous, current);
@@ -140,7 +141,13 @@ export function compareMigrationInventories(before, after, approvedIds, expected
   const changes = delta.changed.map(({ id, fields }) => {
     const oldCard = oldById.get(id);
     const nextCard = nextById.get(id);
-    if (oldCard.rules !== undefined || !equal(fields, ['rules']) || !equal(nextCard.rules, expectedRules)) {
+    // 期望规则表优先；值为 null 表示该卡 rules 内容由其批次测试守护，这里只锁「仅新增 rules 字段」。
+    const expected = expectedRulesById ? (id in expectedRulesById ? expectedRulesById[id] : expectedRules) : expectedRules;
+    const expectedFace = expectedFaceById[id] || {};
+    const expectedFields = ['rules', ...Object.keys(expectedFace)].sort();
+    if (oldCard.rules !== undefined || !equal(fields, expectedFields)
+      || Object.entries(expectedFace).some(([key, value]) => !equal(nextCard[key], value))
+      || (expected !== null && !equal(nextCard.rules, expected))) {
       throw new Error(`migration: ${id} changed beyond approved rules addition`);
     }
     return { id, fields, before: clone(oldCard), after: clone(nextCard) };

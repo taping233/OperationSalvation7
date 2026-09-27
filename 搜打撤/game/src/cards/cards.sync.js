@@ -61,7 +61,17 @@ function backfillStructuredRuleDefinitions({ markerKey, ids, definitions, domain
         nextRules[domain] = { ...(current || {}), ...(definition.rules[domain] || {}) };
       }
       nextCard.rules = nextRules;
-      if (JSON.stringify(card) !== JSON.stringify(nextCard)) dirty = true;
+      // M3 收编：运行时注入字段不参与深相等——ensureEffectFields 会给缺失的 dmg/heal/armor/draw
+      // 补 0 占位，这类注入值随运行顺序出现/消失，若参与 JSON 比较会让迁移器每轮误判 dirty。
+      // 结构性豁免：比较前把四字段的 0 值归一化剔除（非 0 真实字段仍参与比较）。
+      const normalizeForCompare = obj => {
+        const clone = JSON.parse(JSON.stringify(obj));
+        for (const field of ['dmg', 'heal', 'armor', 'draw']) {
+          if (clone[field] === 0) delete clone[field];
+        }
+        return clone;
+      };
+      if (JSON.stringify(normalizeForCompare(card)) !== JSON.stringify(normalizeForCompare(nextCard))) dirty = true;
       return nextCard;
     });
 

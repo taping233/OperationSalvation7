@@ -17,6 +17,7 @@ import {
   set$nextSpellTwice, set$drawPile, set$energy, set$maxEnergy, set$shaTransform,
   set$consumeFireballN, set$deathSave, set$hand, set$extraTurn, set$delayed, set$meleeCost1,
   set$spellCost1, set$surgeWaiter, set$sealUnlocked, set$discovering, set$battleState,
+  set$poisonLegacy, set$allSpellsInfused,
   set$interaction, set$busy, set$infusing, set$sealDone, set$playerCurseImmune, set$nestRunes,
   set$nestSyn,
   set$pendingHint, set$lastPersistAt, set$activeActionSignal, storeBattleSnapshot,
@@ -46,8 +47,10 @@ import './battle.feedback.js';
 import { createBattleSelectionFlow } from './battle.selection-flow.js';
 import { createBattleEquipment } from './battle.equipment.js';
 import { createBattleBag } from './battle.bag.js';
+import { getHostedExecutionCard } from './battle.hosted.js';
 import { createBattleLifecycle } from './battle.lifecycle.js';
 import { createBattleExecPlay } from './battle.exec-play.js';
+import { createTriggerRunner } from './battle.triggers.m2.js';
 
 /* —— 自 battle.core 壳迁入的共享引擎件（原 head/tail，按原文件顺序）—— */
 const executionSession = createBattleExecutionSession();
@@ -114,6 +117,16 @@ function drawCards(n) {
       const uid = drawPile.pop();
       const entry = findCard(uid);
       const parts = entry ? splitClauses(String(entry.card.desc || '')) : null;
+      // M2：结构化「抽到时」触发（rules.triggers.onDraw）——与文本抽到即施放同门：直接结算，不占手牌
+      if (entry?.card?.rules?.triggers?.onDraw?.length) {
+        discard.push(uid);
+        G.log(`[[icon:flask]] <b>抽到时</b>：【${esc(entry.card.name)}】触发效果`, 'sys');
+        triggersM2.fireDrawn(entry.card, alive()[0] || null);
+        got++;
+        sweepDead();
+        if (!alive().length) break;
+        continue;
+      }
       // 「抽到时施放」衍生牌（禁咒/天启剑系）：抽到即结算，不占手牌
       if (parts && parts.onDraw.length) {
         discard.push(uid);
@@ -217,6 +230,12 @@ function addTempCard(tpl) {
     // 置入手牌视同「抽到」（2026-09-11 英雄卡审计）：万剑归宗普通战分支走
     // grantStarterAttack→addTempCard，此前不进 lastDrawnUids，「直接释放其中武术」永远放 0 张
     lastDrawnUids.push(uid);
+    // M3：onAcquire 触发器（阿猫的礼物「发现或随机获取该牌时」）——获取即结算，防自递归
+    if (tpl?.rules?.triggers?.onAcquire?.length && !tpl._m2Acquiring) {
+      const acquiring = { ...tpl, _m2Acquiring: true };
+      granted[granted.length - 1].card = acquiring;
+      triggersM2.fireAcquire(acquiring, alive()[0] || null);
+    }
     return uid;
   }
 function addDeckCard(tpl) {
@@ -408,7 +427,11 @@ const applyTextEffects = createEffectExecutor({
     setDeathSave: n => { set$deathSave(n || 0); },
     queuePouchCast,
     registerGrowthCard: card => { if (card && card.name) growthNames.add(card.name); },
+    setAllSpellsInfused: v => { set$allSpellsInfused(!!v); },
+    setPoisonLegacy: v => { set$poisonLegacy(!!v); },
+    setPlayerCurseImmune: v => { set$playerCurseImmune(!!v); },
     unlockSeal: name => tryUnlockSeal(name),
+    checkElementSealProgress,
     randomAcquired: card => fireCatGift(card),
     handCurseSpecs,
     queueSwapCostDiscover,
@@ -449,6 +472,7 @@ const effCostOf = (card, uid) => {
       meleeCost1,
       lastPlayedType,
       playedMartialThisTurn,
+      playedMovesThisTurn,
       armor: pdef ? (pdef.armor || 0) : null,
       pocketDiscount,
       consumedSpellCount,
@@ -563,9 +587,9 @@ function cancelInteraction() {
     if (!clearTargetSession()) return;
     requestBattleRender();
   }
-function beginSpecialTargeting(kind, uid = null, card = null) {
+function beginSpecialTargeting(kind, uid = null, card = null, extra = null) {
     clearTargetSession();
-    set$interaction({ kind, uid, card, hint: '' });
+    set$interaction({ kind, uid, card, hint: '', ...(extra ? { extra } : {}) });
     requestBattleRender();
   }
 function beginCardTargeting(uid, card, targetIds, hint, fuelUids = []) {
@@ -587,7 +611,7 @@ function toggleDeckCard(uid) { return battleLifecycle.toggleDeckCard(uid); }
 function cancelDeckSelection() { return battleLifecycle.cancelDeckSelection(); }
 function beginBoss() { return battleLifecycle.beginBoss(); }
 function equipSkillText(card) { return equipment.equipSkillText(card); }
-function registerEquip(uid, card) { return equipment.registerEquip(uid, card); }
+  function registerEquip(uid, card) { return equipment.registerEquip(uid, getHostedExecutionCard(card)); }
 function equipCap() { return equipment.equipCap(); }
 function syncCurseCondEquips() { return equipment.syncCurseCondEquips(); }
 function useEquipSkill(uid) { return equipment.useEquipSkill(uid); }
@@ -596,14 +620,14 @@ function restoreConsumed(n) { return bag.restoreConsumed(n); }
 function itemUsability(card) { return bag.itemUsability(card); }
 function useItem(uid, side) { return bag.useItem(uid, side); }
 function bagSlam() { return bag.bagSlam(); }
-function beginDartStrike() { return bag.beginDartStrike(); }
+function beginDartStrike(extra) { return bag.beginDartStrike(extra); }
 function resolveDart(side) { return bag.resolveDart(side); }
 function resolveSlam(side) { return bag.resolveSlam(side); }
 function usePotion(uid) { return bag.usePotion(uid); }
 function openBag() { return bag.openBag(); }
 function closeBag() { return bag.closeBag(); }
 
-export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, intentFor, drawCards, resolveFoeDefeat, sweepDead, nestPhase, grantSha, findCard, infuseOf, effCostOf, swapCardCosts, restore, finish, cancelInteraction, flee, handCurseSpecs, getSnapshot, snapshotSignature, processDelayed, accrueGrowth, resolveCard, resolveCardWithFeedback, syncCurseCondEquips, useEquipSkill, applyKillRewards, start, toggleDeckCard, cancelDeckSelection, beginBoss, targetSide, unplayableReason, play, toggleInfusePick, cancelInfuse, beginInfuse, confirmInfuse, queueCardExecution, aegisBlocked, foeIdx, hitFoe, matchHandSelectKey, skipHandSelect, pickHandSelect, useItem, bagSlam, resolveDart, resolveSlam, addPlayerCurse, usePotion, openBag, closeBag, pickChoice, pickDiscover, playerTakeHit, frenzyCurse, elCurse };
+export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, intentFor, drawCards, resolveFoeDefeat, sweepDead, nestPhase, grantSha, findCard, infuseOf, effCostOf, swapCardCosts, restore, finish, cancelInteraction, flee, handCurseSpecs, getSnapshot, snapshotSignature, processDelayed, accrueGrowth, resolveCard, resolveCardWithFeedback, syncCurseCondEquips, useEquipSkill, applyKillRewards, start, fireTurnEndTriggers, addTempCard, fireConsumeTriggers, toggleDeckCard, cancelDeckSelection, beginBoss, targetSide, unplayableReason, play, toggleInfusePick, cancelInfuse, beginInfuse, confirmInfuse, queueCardExecution, aegisBlocked, foeIdx, hitFoe, matchHandSelectKey, skipHandSelect, pickHandSelect, useItem, bagSlam, resolveDart, resolveSlam, addPlayerCurse, usePotion, openBag, closeBag, pickChoice, pickDiscover, playerTakeHit, frenzyCurse, elCurse };
 
 /* —— 六段正文（原行 606-2479，逐字）—— */
   // ---------- 生效时刻 / 持续时间 / 生效条件（设计者 2026-09-02 定版） ----------
@@ -635,6 +659,9 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
   // 回合开始：结算延迟段（沉默中技能无效——一次性段被吞掉，重复段保留到下回合；
   // notBeforeTurn = 花开两面未选之门「两回合后」的定时刻；special = 江湖救急临时卡消耗）
   async function processDelayed(signal = activeActionSignal) {
+    // M2：结构化 onTurnStart 触发（登记卡 + 装备 focus 光环）——置于任何早退之前，
+    // 与 delayed 文本管线同一回合开始时点
+    triggersM2.fireTurnStart();
     if (!delayed.length) return;
     const silenced = (pstat.status.silence || 0) > 0;
     const keep = [];
@@ -663,6 +690,17 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
           if (nc > 0) keep.push(q);
         }
         continue;   // 保留与否自行管理
+      }
+      // M2：结构化延迟段（damage.schedule nextTurn/nextTurnStart）——沉默封印与非延迟口径一致
+      if (q.special === 'triggerOps') {
+        if (silenced) {
+          G.log(`[[icon:cross]] 沉默中：【${esc(q.cardName)}】的延迟效果无法生效`, 'warn');
+        } else {
+          // 合成卡携带原卡 dmgType/type（schema 卡面字段一致性），infuse 清零避免注能门误拦
+          const synthetic = { ...q.srcCard, desc: '', infuse: 0, rules: { version: 1, triggers: { onPlay: q.ops } } };
+          resolveCard(synthetic, alive()[0] || null, false, 0, 'm2-scheduled');
+        }
+        continue;   // 一次性
       }
       if (silenced) {
         G.log(`[[icon:cross]] 沉默中：【${esc(q.cardName)}】的回合开始效果无法生效`, 'warn');
@@ -711,6 +749,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
 
   // 「被注能时」条件效果：作为注能牺牲品被消耗时触发（未被使用，主效果不结算）
   function resolveInfusedFuel(card, target) {
+    card = getHostedExecutionCard(card);
     const parts = splitClauses(card.desc);
     if (!parts.onInfused.length) return false;
     if ((pstat.status.silence || 0) > 0) {
@@ -728,6 +767,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
   // fuelCost = 注能牺牲品费用合计，供「N 倍于被注能卡牌价格」类效果折算；uid = 成长/容器定位）
   const resolveCard = createBattleResolution({
     readState: () => ({ mode, playedMovesThisTurn, infuseFuels, grave }),
+    getHandSize: () => hand.length,
     getPlayerStatus: () => pstat,
     esc,
     log: (...args) => G.log(...args),
@@ -754,7 +794,13 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
       }
       return applied;
     },
-    findCard, addTempCard, queueDiscover: value => discoverQueue.push(value), splitClauses, applyTextEffects,
+    findCard, addTempCard, sweepDead,
+    onHandConsumed: (card, uid) => onHandConsumed(card, uid),
+    // M3：registerRule discoverPlus（黑暗形态「每当你发现卡牌时，增加 1 个可选项」）——
+    // 旗标经 pstat.status.discoverPlus，发现面板入队时统一 +1
+    queueDiscover: value => discoverQueue.push(
+      (pstat.status.discoverPlus || 0) > 0 ? { ...value, n: (+value.n || 1) + 1 } : value),
+    splitClauses, applyTextEffects,
     registerTurnStart, registerBattle, castRandomSpells, drawCards, grantSha, hitFoe,
     // G3（A3 第三批）：acquire 族端口——洗入牌库与洗混（deck.insert 文本路径同一底层）、
     // 随机池/指定池单源抽卡（selectionFlow.randomDiscoverCard 转发同一函数）、
@@ -789,6 +835,24 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     addArmor: (amount, opts) => {
       pdef.armor += amount;
       if (opts && opts.guard) pdef.guard = true;
+    },
+    // M2（2026-09-27）端口：偷取/禁抽/额外回合/持续规则旗标/随从位/价格与牌库定向抽取——
+    // markNoDrawNext/summonAlly/deckDraw/getPriceOfLastDrawn 均为既有引擎件（此处仅透传，
+    // 不新增引擎逻辑；getPriceOfLastDrawn 与上方 effect-steps deps 同口径）。
+    markNoDrawNext: () => { set$noDrawNext(true); },
+    setExtraTurn: v => set$extraTurn(!!v),
+    setBleedAmp: v => { pstat.status.bleedAmp = v ? 1 : 0; },
+    setMeleeCost1: v => set$meleeCost1(!!v),
+    setSpellCost1: v => set$spellCost1(!!v),
+    summonAlly,
+    deckDraw,
+    getTurn: () => turn,
+    getPlayerSpellPower: () => G.spellPower || 0,
+    setNextSpellTwice: v => set$nextSpellTwice(v || 0),
+    getPriceOfLastDrawn: () => {
+      const uid2 = lastDrawnUids[lastDrawnUids.length - 1];
+      const o2 = uid2 ? findCard(uid2) : null;
+      return o2 ? Math.max(0, +(o2.card.cost || 0)) : 0;
     },
   });
 
@@ -826,8 +890,21 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     }
   }
   function resolveCardWithFeedback(card, target, infused, fuelCost, uid, signal = activeActionSignal) {
-    return runStagedSteps(resolveCard.steps(card, target, infused, fuelCost, uid), signal);
+    return runStagedSteps(resolveCard.steps(getHostedExecutionCard(card), target, infused, fuelCost, uid), signal);
   }
+
+  // M2（2026-09-27）：结构化时点触发器 runner（七时点 + 容器级 duration）。
+  // ops 执行复用 resolveCard 合成卡全链路（schema/capability 门天然生效）；
+  // 登记点：execPlay 打出卡 / registerEquip 穿戴装备；触发点：回合管线/抽牌/受击/击杀/消耗。
+  const triggersM2 = createTriggerRunner({
+    resolveCard,
+    log: (...a) => G.log(...a),
+    esc,
+    getAliveFoes: alive,
+    addEnergy: amount => { set$energy(energy + (amount)); return energy; },
+  });
+  // M3：onFreezeDealt 宿主——我方攻击冰冻敌人后（combat.addCurse freeze 钩），装备/登记卡触发
+  Combat.COMBAT_HOOKS.onFreeze = target => { triggersM2.fireFreezeDealt(target); };
 
   // 法力奔涌的随机法术释放（2026-09-10 需求）：
   // 池子与「发现/随机获取」同口径（isRandomObtainable：排除 初始/职业/衍生/棱彩与 unrandom），
@@ -930,6 +1007,14 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
   }
   // 「消耗该牌时」触发（Q2 老板定向：注能牺牲与手选消耗都算「消耗」）
   function fireConsumeTriggers(card, target) {
+    card = getHostedExecutionCard(card);
+    // M3 收编：结构化 triggers.onConsume（或 rules.equip 域卡）单路径——不再回放 desc 消耗句
+    const structuredConsume = !!(card?.rules?.triggers && Object.prototype.hasOwnProperty.call(card.rules.triggers, 'onConsume'));
+    if (structuredConsume || card?.rules?.equip) {
+      triggersM2.fireConsume(card, target || (alive()[0] || null));
+      return;
+    }
+    triggersM2.fireConsume(card, target || (alive()[0] || null));
     (consumeTriggerTexts(card && card.desc)).forEach(text => {
       G.log(`[[icon:flask]] <b>消耗该牌时</b>：【${esc(card.name)}】${esc(text)}`, 'sys');
       applyTextEffects(card, text, target || (alive()[0] || null), {});
@@ -943,6 +1028,11 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     const got = mode === 'boss' ? drawCards(2) : (grantSha(2), 2);
     G.log(`[[icon:crystal]] <b>元素符印解锁</b>：法伤 +2${mode === 'boss' ? `，抽了 ${got} 张牌` : '，获得 2 张【初始攻击】'}`, 'ok');
   }
+  function checkElementSealProgress() {
+    const active = equipped.some(entry => entry?.card && (entry.card.id === 'tt3-element-seal' ||
+      entry.card.rules?.battle?.hosted?.includes('element-seal')));
+    if (active && infuseFuels >= 3 && !sealUnlocked) tryUnlockSeal('元素符印');
+  }
   // 击杀钩子（C1）：饮血剑 = 本局被动每杀 +1 攻；破甲重斩/闪金之锤 = 该卡自身击杀触发
   function applyKillRewards(card, kills) {
     if (kills <= 0) return;
@@ -951,6 +1041,8 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
       G.log(`[[icon:swords]] <b>饮血剑</b>：消灭 ${kills} 个敌人，攻击力 +${killAtkUp * kills}（当前加成 ${pstat.status.atkUp}）`, 'ok');
     }
     if (!card) return;
+    // M2：结构化 triggers.onKill（「击杀时」登记卡，如饮血剑规则化版本）
+    triggersM2.fireKill();
     const d = String(card.desc || '');
     const armorM = d.match(/击杀(?:敌人)?(?:时|则)?[^。；]*?\+\s*(\d+)\s*甲/);
     if (armorM) {
@@ -981,6 +1073,11 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     if (n) G.log(`[[icon:flask]] <b>${esc(cardName || '临时卡')}</b>：回合开始，消耗了 ${n} 张临时卡`, 'sys');
     return n;
   }
+  function* onHandConsumed(card) {
+    if (!card) return;
+    fireConsumeTriggers(card, alive()[0] || null);
+    if (consumeFireballN > 0) yield* consumeFireballSteps(consumeFireballN);
+  }
   // 法师锦囊容器（Q5 老板定向）：自带 1×3 空间——空时自动置入 3 张随机法术，打出时选 1 张直接施放
   function queuePouchCast(uid) {
     const entry = findCard(uid);
@@ -1008,7 +1105,9 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     if (!playedMartial) return;
     hand.forEach(h => {
       const o = findCard(h);
-      if (o && o.card.id === 'tt7-imitate' && !cardOverrides.has(h)) {
+      const original = G.ownedCards.find(entry => entry.uid === h)?.card || granted.find(entry => entry.uid === h)?.card || o?.card;
+      const mimic = original?.id === 'tt7-imitate' || original?.rules?.battle?.hosted?.includes('imitate');
+      if (o && mimic) {
         cardOverrides.set(h, { ...playedMartial, cost: 1 });
         G.log(`[[icon:recycle]] <b>${esc(o.card.name)}</b>：变为【${esc(playedMartial.name)}】的 1 费复制`, 'sys');
       }
@@ -1169,18 +1268,25 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     applyTextEffects, sweepDead, alive, finish, throwIfActionCancelled,
     processChoice, processDiscoverQueue, processHandSelect, randomDiscoverCard,
     addTempCard, fireCatGift, handSelectQueue,
+    // M2：结构化装备域（onEquip/battleStart/passive/skill ops）经 triggers runner 的合成卡执行
+    triggersM2,
   });
   const bag = createBattleBag({
     requestBattleRender, clearTargetSession, cancelInteraction, beginSpecialTargeting, interactionOf,
     queueBattleAction, runStagedSteps, singleTargetHitSteps, applyTextEffects, hitFoe,
     sweepDead, finish, alive, addTempCard, addDeckCard, fireCatGift, applyKillRewards,
-    throwIfActionCancelled, findCard,
+    throwIfActionCancelled, findCard, triggersM2,
+    addEnergy: amount => { set$energy(energy + (amount)); return energy; },
+    drawCards, grantSha, queueDiscover: value => discoverQueue.push(value), getTurn: () => turn,
   });
   const battleLifecycle = createBattleLifecycle({
     session: executionSession, intentFor, cloneData, injectSealCards, applyNestRunes, applyVoidRune,
     drawCards, applyBattleStartPassives: equipment.applyBattleStartPassives,
     isBattleStartEquip: equipment.isBattleStartEquip, isStarterAttack,
     requestBattleRender, alive, R,
+    // M2：战斗开始/重开时清空触发器登记（旧战卡对象不得跨战斗泄漏）
+    resetTriggers: () => triggersM2.reset(),
+    runBattleStartTriggers: () => triggersM2.fireBattleStart(),
   });
   const selectionFlow = createBattleSelectionFlow({
     session: executionSession,
@@ -1194,12 +1300,17 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     warnCardRuleRejection,
     requestBattleRender, findCard, matchHandSelectKey, fireConsumeTriggers, effCostOf,
     resolveInfusedFuel, runStagedSteps, consumeFireballSteps, resolveCardWithFeedback,
-    takeSurge, registerEquip, summonAlly, applyKillRewards, poisonRandomFoe, applyImitate,
+    takeSurge, registerEquip, summonAlly, applyKillRewards, poisonRandomFoe, applyImitate, checkElementSealProgress,
     beginDartStrike, sweepDead, finish, processChoice, processDiscoverQueue, queueBattleAction,
+    // M2：打出卡登记 triggers + onPlayCard 触发
+    triggersM2,
   });
   function queueCardExecution(uid, card, fuelUids, target, freeCost, requirementsPaid = false, paymentUids = [], onResolved = null) {
-    return execPlayFlow.queueCardExecution(uid, card, fuelUids, target, freeCost, requirementsPaid, paymentUids, onResolved);
+    return execPlayFlow.queueCardExecution(uid, getHostedExecutionCard(card), fuelUids, target, freeCost, requirementsPaid, paymentUids, onResolved);
   }
+
+  // M2：onTurnEnd 触发转发（enemy-phase 回合结束管线调用；triggersM2 为模块闭包件）
+  function fireTurnEndTriggers() { triggersM2.fireTurnEnd(); }
 
   // 敌人免伤判定（异能领主：偶数回合全免伤，破甲克制）
   function aegisBlocked(foe) {
@@ -1244,10 +1355,22 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     // 「对冰冻角色伤害 +N」（寒冰剑）：目标被冰冻时追加
     const frzM = card && String(card.desc || '').match(/对冰冻[^。]*?伤害\s*\+\s*(\d+)/);
     if (frzM && (foe.status.freeze || 0) > 0) amt += +frzM[1];
-    // 「触发的流血伤害翻倍」（飞身劈）：流血加成部分再叠一次
+    // M3：装备被动 cond.vsFreeze（寒冰剑「对冰冻角色伤害 +N」）——穿戴中即对任何攻击生效
+    for (const eq of equipped) {
+      const vsFreeze = eq?.card?.rules?.equip?.passive?.cond?.vsFreeze;
+      if (Number.isInteger(vsFreeze) && vsFreeze > 0 && (foe.status.freeze || 0) > 0) {
+        amt += vsFreeze;
+        G.log(`[[icon:crystal]] 【${esc(eq.card.name)}】对冰冻目标伤害 +${vsFreeze}`, 'sys');
+      }
+    }
+    // 「触发的流血伤害翻倍」（飞身劈）：流血加成部分再叠一次。
+    // M2：registerRule bleedAmp 旗标（pstat.status.bleedAmp）——结构化规则的同一翻倍口径
     if (card && /流血伤害翻倍/.test(String(card.desc || '')) && (foe.status.bleed || 0) > 0) {
       amt += foe.status.bleed;
       G.log(`[[icon:blood]] <b>流血伤害翻倍</b>：流血加成 ${foe.status.bleed} → ${foe.status.bleed * 2}`, 'sys');
+    } else if ((pstat.status.bleedAmp || 0) > 0 && (foe.status.bleed || 0) > 0) {
+      amt += foe.status.bleed;
+      G.log(`[[icon:blood]] <b>流血伤害翻倍</b>（持续规则）：流血加成 ${foe.status.bleed} → ${foe.status.bleed * 2}`, 'sys');
     }
     // 攻击强化祝福（atkUp）经 status 传入结算（此前 hitFoe 未带 status，攻击 blessings 未生效）；
     // spellUp 已并入 sp，传 statusForHit 防止二次叠加
@@ -1497,6 +1620,8 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     floats.push({ unit: 'self', text: '-' + r.dealt, cls: 'hurt' });
     if (r.dealt > 0) floats.push({ unit: 'self', text: '', cls: 'stk stk-late sticker-hurt' });
     G.log(`[[icon:demon]] <b>${esc(foe.name)}</b> 攻击：你受到 <b>${r.dealt}</b> 点攻击伤害（${G.hp}/${G.maxHp}）`, 'warn');
+    // M2：结构化 onDamaged 触发（登记卡「受到伤害时」）
+    if (r.dealt > 0) triggersM2.fireDamaged();
     return r.dealt;
   }
 

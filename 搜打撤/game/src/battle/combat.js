@@ -6,7 +6,7 @@
   // burn（灼烧）2026-09-08 定版：独立于中毒的计时诅咒——不叠加（重复施加只刷新剩余回合）、
   // 每回合结束时受到 1 点固定伤害（tickBurn 结算）
   const COMBAT_HOOKS = {};   // 战斗层钩子（冰冻符文等）
-const CURSES = ['bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban', 'burn'];
+const CURSES = ['bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban', 'burn', 'atkDown'];
   const CURSE_META = {
     bleed:   { name: '流血', icon: '[[icon:blood]]', stack: true,  desc: '每层使受到的攻击伤害 +1' },
     poison:  { name: '中毒', icon: '[[icon:skull]]', stack: true,  desc: '每层在回合结束时受到 1 点固定伤害' },
@@ -15,6 +15,9 @@ const CURSES = ['bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban', 'bu
     abreak:  { name: '破甲', icon: '[[icon:tools]]', stack: false, desc: '2 回合内无法减免伤害' },
     healban: { name: '禁疗', icon: '[[icon:heart]]', stack: false, desc: '2 回合内无法回复生命' },
     burn:    { name: '灼烧', icon: '[[icon:fire]]', stack: false, desc: '每回合结束时受到 1 点固定伤害（不叠加，重复施加刷新持续时间）' },
+    // M 批（2026-09-27）：攻击降低（割蚀「降低 2 攻，持续 3 回合」）——计时型共享回合钟；
+    // 扣减量由战斗层挂诅咒时记在 target._atkDownAmount，到期由回合管线归还（影噬偷取同款）
+    atkDown: { name: '攻击降低', icon: '[[icon:arrow]]', stack: false, desc: '持续期间攻击力降低，到期归还' },
   };
 
   // 祝福状态表（v0.20）：value=数值型（可叠加，本场战斗）；timed=计时型（共享回合钟递减）；

@@ -66,6 +66,20 @@ describe('AST 架构检查的识别与负面场景', () => {
     ]);
   });
 
+  it('M 批命令适配器仅供 resolver 装配，视图和快照仍不可调用', () => {
+    const graph = graphOf({
+      'battle/effect-steps.m1.js': "import './battle.runtime.piles.js';",
+      'battle/battle.runtime.piles.js': 'export const hand = [];',
+      'battle/battle.resolution.js': "import './effect-steps.m1.js';",
+      'battle/battle.snapshot.js': "import './effect-steps.m1.js';",
+      'battle/battle.view.js': "import './effect-steps.m1.js';",
+    });
+    const problems = architectureViolations(graph);
+    expect(problems).toHaveLength(2);
+    expect(problems.some(problem => problem.startsWith('battle/battle.snapshot.js:'))).toBe(true);
+    expect(problems.some(problem => problem.startsWith('battle/battle.view.js:'))).toBe(true);
+  });
+
   it('独立领域模块不能通过视图切片接入界面', () => {
     const graph = graphOf({
       'battle/battle.resolution.js': "import './battle.vfx.js';",

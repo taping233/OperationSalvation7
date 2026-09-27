@@ -50,6 +50,17 @@ import { KEY, TT2_KEY_V3, TT1_KEY_V6, TT4_KEY_V2, TT3_KEY_V5, TT5_KEY, TT6_KEY, 
 import { rulesSlice } from './cards.rules.js';
 import { dataSlice } from './cards.data.js';
 import { syncSlice } from './cards.sync.js';
+import { ensureM1OnplayRules } from './cards.sync.m1.js';
+import { ensureM2OnplayRules } from './cards.sync.m2.js';
+import { ensureM3OnplayRules } from './cards.sync.m3.js';
+import { ensureM4EquipRules } from './cards.sync.m4.js';
+import { ensureM5DelayedRules } from './cards.sync.m5.js';
+import { ensureM6BagRules } from './cards.sync.m6.js';
+import { ensureM7EquipRules } from './cards.sync.m7.js';
+import { ensureM8RuleBackfill } from './cards.sync.m8.js';
+import { ensureM9HostedRules } from './cards.sync.m9.js';
+import { ensureM10HostedEquipmentRules } from './cards.sync.m10.js';
+import { ensureM11HostedRules } from './cards.sync.m11.js';
 import { validateCardRules } from './card-rules.schema.js';
 
 let _cardsCacheRaw = null;
@@ -271,6 +282,17 @@ function assertValidCardRules(cards) {
       SDT.Cards.ensureA3CurseRules(); // A3 第二批：B5 诅咒族 8 张改结构化（curse op 接线后）
       SDT.Cards.ensureA3AcquireBlessingRules(); // A3 第三/四批：B6 获取 12 张+B7 增益能量 4 张
       SDT.Cards.ensureE8FixedHealRules(); // E8：严格匹配的三张定版治疗卡补齐地图背包规则
+      ensureM1OnplayRules(); // M 批 B-M1：D1 首批 4 张（初始攻击/穿刺/青龙偃月斩/圣光之源）改结构化（2026-09-27）
+      ensureM2OnplayRules(); // M 批 B-M1：D3 现集 16 张（箭系/混合目标放行等）改结构化（2026-09-27）
+      ensureM3OnplayRules();
+      ensureM4EquipRules();
+      ensureM5DelayedRules();
+      ensureM6BagRules();
+      ensureM7EquipRules();
+      ensureM8RuleBackfill();
+      ensureM9HostedRules();
+      ensureM10HostedEquipmentRules();
+      ensureM11HostedRules();
     },
 
     // 职业稀有度迁移（设计者 2026-09-04 定版）：老档里第七批职业卡（tt7- 前缀）

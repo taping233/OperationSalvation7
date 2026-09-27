@@ -1,11 +1,32 @@
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 import { assertInventoryComplete, buildCardInventory, compareMigrationInventories, describeStage, renderCardInventory } from './helpers/e8-card-inventory.js';
 import beforeInventory from '../docs/evidence/e8-card-migration-2026-09-27/catalog-before.json';
+import { readFileSync } from 'node:fs';
 
 const BOOT_ORDER = ['ensureStarters', 'ensureSha', 'ensureTabletop', 'ensureDmgTypes', 'ensureEffectFields'];
 const E6_ORDER = ['ensureSha', 'ensureStarters', 'ensureTabletop', 'ensureDmgTypes', 'ensureEffectFields'];
 const MIGRATED_IDS = ['starter-emergency-bandage', 'tt-jinchuangyao', 'tt4-woodify'];
 const HEAL_RULES = { version: 1, bag: { use: [{ op: 'heal', amountField: 'heal' }] } };
+// M 批（B-M1 现集，2026-09-27）：cards.sync.m1.js 4 张 + cards.sync.m2.js 16 张 onPlay 规则。
+// rules 内容由 tests/m1-data.test.js、tests/m2-data.test.js 守护；此处只锁「自 E8 before 以来仅新增 rules 字段」。
+const M_BATCH_ONPLAY_IDS = [
+  'starter-attack', 'tt3-skewer', 'tt8-dragonblade', 'tt7-livingwater',
+  'cc-chase-slash', 'cc-demon', 'cmtn28jv33wx', 'tt12-breakthrough', 'tt12-sporewall',
+  'tt2-comboarrow', 'tt2-forestarrow', 'tt2-piercearrow', 'tt2-swiftarrow', 'tt3-firm-barrier',
+  'tt3-flame-storm', 'tt3-nature-form', 'tt3-toxin', 'tt7-fullstrike', 'tt7-silence', 'tt7-throwblade',
+];
+const ALL_M_BATCH_IDS = [...readFileSync('docs/M-BATCH-MATRIX.md', 'utf8')
+  .matchAll(/^\| ([a-z][\w-]+) \|/gm)].map(match => match[1]).filter(id => id !== 'id');
+const APPROVED_IDS = [...MIGRATED_IDS, ...ALL_M_BATCH_IDS];
+const oldPetal = beforeInventory.production.cards.find(row => row.id === 'tt3-petal').card;
+const APPROVED_FACE_BY_ID = {
+  'tt3-noon-duel': { dmg: 2, dmgType: 'fixed' },
+  'tt3-petal': { desc: oldPetal.desc.replace('回复 3', '回复 2') },
+};
+const APPROVED_RULES_BY_ID = Object.fromEntries([
+  ...MIGRATED_IDS.map(id => [id, HEAL_RULES]),
+  ...ALL_M_BATCH_IDS.map(id => [id, null]),
+]);
 // Captured read-only at the beginning of the second window, not during the first export.
 const SYNC_SOURCE_SHA256 = 'd2f38387dd0c49ca90628aeea5334790286de906838b34e6c7aece0652511244';
 const BEFORE_SHA256 = { json: 'c8016a81a58add42b484b3f8045714d8bde01238896f07f1984bcd31038a7d07',
@@ -152,16 +173,18 @@ describe('E8 isolated production inventory', () => {
     expect(() => assertInventoryComplete(stageGap, boot)).toThrow('count imbalance');
   });
 
-  it('changes only the approved three IDs by adding exact bag-use rules, leaving every other full card untouched', () => {
-    const comparison = compareMigrationInventories(beforeInventory, inventory, MIGRATED_IDS, HEAL_RULES);
-    expect(comparison.changedIds).toEqual(MIGRATED_IDS);
+  it('changes only approved IDs (E8 bag heal + M batch onPlay) by adding rules, leaving every other full card untouched', () => {
+    const approvedIds = APPROVED_IDS;
+    expect(M_BATCH_ONPLAY_IDS.every(id => ALL_M_BATCH_IDS.includes(id))).toBe(true);
+    const comparison = compareMigrationInventories(beforeInventory, inventory, approvedIds, HEAL_RULES, APPROVED_RULES_BY_ID, APPROVED_FACE_BY_ID);
+    expect(comparison.changedIds.sort()).toEqual([...approvedIds].sort());
     const unexpected = clone(inventory);
     unexpected.production.cards.find(row => row.id === MIGRATED_IDS[0]).card.heal++;
-    expect(() => compareMigrationInventories(beforeInventory, unexpected, MIGRATED_IDS, HEAL_RULES))
+    expect(() => compareMigrationInventories(beforeInventory, unexpected, approvedIds, HEAL_RULES, APPROVED_RULES_BY_ID, APPROVED_FACE_BY_ID))
       .toThrow('changed beyond approved rules addition');
     const changedSync = clone(inventory);
     changedSync.cardsSync.cards[0].card.desc += 'changed';
-    expect(() => compareMigrationInventories(beforeInventory, changedSync, MIGRATED_IDS, HEAL_RULES))
+    expect(() => compareMigrationInventories(beforeInventory, changedSync, approvedIds, HEAL_RULES, APPROVED_RULES_BY_ID, APPROVED_FACE_BY_ID))
       .toThrow('CARDS_SYNC card fields changed');
   });
 
@@ -183,7 +206,7 @@ describe('E8 isolated production inventory', () => {
     output.metadata.phase = 'after';
     output.metadata.command = '$env:SDT_E8_WRITE_INVENTORY="after"; npx vitest run tests/e8-card-inventory.test.js --no-file-parallelism';
     assertInventoryComplete(output, boot);
-    output.checks.migration = compareMigrationInventories(beforeInventory, output, MIGRATED_IDS, HEAL_RULES);
+    output.checks.migration = compareMigrationInventories(beforeInventory, output, APPROVED_IDS, HEAL_RULES, APPROVED_RULES_BY_ID, APPROVED_FACE_BY_ID);
     const directory = resolve('docs/evidence/e8-card-migration-2026-09-27');
     const fileHash = path => createHash('sha256').update(readFileSync(path)).digest('hex');
     for (const extension of ['json', 'md']) {

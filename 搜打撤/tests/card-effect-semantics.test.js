@@ -89,17 +89,18 @@ describe('已知效果条目的真实战斗语义', () => {
     await drain();
   });
 
-  it('tt7-holyheal：注能费用 2 的燃料后回复 4 点生命', async () => {
+  it('tt7-holyheal：按燃料价格 3（费用 2）回复 6 点生命', async () => {
     const heal = card('tt7-holyheal');
     const fuel = card('cc-cursed-blade');
     expect(fuel.cost).toBe(2);
+    expect(fuel.value).toBe(3);
     const game = makeGame([heal, fuel]);
     game.hp = 50;
     BattleSession.start(game, [foe()], { isBoss: false });
     await drain();
     await infuseAndPlay(game, heal.id, [fuel.id], 'self');
-    expect(game.hp).toBe(54);
-    expect(game.logs.some(line => line.includes('牺牲品费用 2') && line.includes('回复 4 点生命'))).toBe(true);
+    expect(game.hp).toBe(56);
+    expect(game.logs.some(line => line.includes('回复 6 点生命'))).toBe(true);
     BattleSession.commands.flee();
     await drain();
   });

@@ -104,7 +104,7 @@ describe('破釜沉舟 + 毒爆', () => {
 
     await playOwned(g, lastStand(), 0);
     expect(snap().foes[0].hp).toBe(hp0 - 16);   // 2 × (3 + 攻5)，双段
-    expect(g.logs.some(l => l.includes('本牌是最后一张手牌，效果触发 2 次'))).toBe(true);
+    expect(g.logs.some(l => l.includes('本牌是最后一张手牌') && l.includes('再施放一次'))).toBe(true);
     expect(snap().energy).toBe(97);             // 双倍是效果翻倍，不是再扣一次费
   });
 

@@ -31,7 +31,7 @@ describe('E6 battle-entry rule capability', () => {
 
   it('does not equate schema-valid acquisition combinations and ignored filters with support', () => {
     for (const operation of [acquire({ dest: 'hand', act: 'play' }), acquire({ dest: 'deck', act: 'decay' }),
-      acquire({ dest: 'discover', act: 'noInfuse' }), acquire({ filter: {} })]) {
+      acquire({ dest: 'discover', act: 'noInfuse' }), acquire({ filter: { type: '法术' } })]) {
       const card = cardFor([{ op: 'coins', n: 5 }, operation]);
       expect(validateCardRules(card)).toEqual({ ok: true, errors: [], pending: [] });
       const before = JSON.stringify(card);
@@ -39,6 +39,7 @@ describe('E6 battle-entry rule capability', () => {
         issues: [expect.objectContaining({ cardId: card.id, path: expect.stringContaining('onPlay[1]') })] });
       expect(JSON.stringify(card)).toBe(before);
     }
+    expect(inspectCardRuleCapability(cardFor([acquire({ filter: {} })]))).toMatchObject({ kind: 'invalid', ok: false });
   });
 
   it('preserves every currently implemented acquire destination/action combination and default', () => {
@@ -52,16 +53,16 @@ describe('E6 battle-entry rule capability', () => {
   });
 
   it('reports all unsupported operations and triggers before any list is consumed', () => {
-    const card = cardFor([{ op: 'coins', n: 5 }, { op: 'extraTurn' }, acquire({ filter: {} })]);
+    const card = cardFor([{ op: 'coins', n: 5 }, acquire({ dest: 'hand', act: 'play' }), acquire({ filter: { type: '法术' } })]);
     card.rules.triggers.onDraw = [];
     const result = inspectCardRuleCapability(card);
     expect(result.kind).toBe('unsupported');
     expect(result.issues.map(issue => issue.path)).toEqual([
-      'rules.triggers.onDraw', 'rules.triggers.onPlay[1].op', 'rules.triggers.onPlay[2].filter',
+      'rules.triggers.onPlay[1].act', 'rules.triggers.onPlay[2].filter.type',
     ]);
   });
 
-  it('rejects pending parameters and equipment while preserving schema diagnostics', () => {
+  it('accepts migrated consumers while rejecting remaining unimplemented parameters', () => {
     const cases = [
       { id: 'damage', type: '法术', dmgType: 'spell', rules: { version: 1, battle: { target: { side: 'enemy', area: false } },
         triggers: { onPlay: [{ op: 'damage', amount: 2, target: 'chosenEnemy', schedule: 'nextTurn' }] } } },
@@ -70,13 +71,14 @@ describe('E6 battle-entry rule capability', () => {
     ];
     for (const card of cases) {
       expect(validateCardRules(card).ok, card.id).toBe(true);
-      expect(inspectCardRuleCapability(card), card.id).toMatchObject({ kind: 'unsupported', ok: false });
+      expect(inspectCardRuleCapability(card), card.id).toMatchObject({ kind: 'supported', ok: true });
     }
     for (const extra of [{ graveyard: { type: '法术', perCard: 1 } }, { hits: { perFoe: true } }]) {
       const card = structuredClone(cases[0]);
       card.rules.triggers.onPlay = [{ op: 'damage', amount: 2, target: 'chosenEnemy', ...extra }];
       expect(validateCardRules(card).ok, JSON.stringify(extra)).toBe(true);
-      expect(inspectCardRuleCapability(card)).toMatchObject({ kind: 'unsupported', ok: false });
+      expect(inspectCardRuleCapability(card)).toMatchObject(extra.graveyard
+        ? { kind: 'supported', ok: true } : { kind: 'unsupported', ok: false });
     }
     const handOps = structuredClone(cases[1]);
     handOps.rules.triggers.onPlay = [{ op: 'draw', amount: 1, handOps: [{ op: 'keepInHand' }] }];
@@ -89,7 +91,7 @@ describe('E6 battle-entry rule capability', () => {
     const results = cards.map(card => ({ id: card.id, result: inspectCardRuleCapability(card) }));
     expect(results.filter(entry => !entry.result.ok)).toEqual([]);
     expect({ total: cards.length, structured: results.filter(entry => entry.result.kind === 'supported').length,
-      legacy: results.filter(entry => entry.result.kind === 'legacy').length }).toEqual({ total: 272, structured: 71, legacy: 201 });
+      legacy: results.filter(entry => entry.result.kind === 'legacy').length }).toEqual({ total: 272, structured: 221, legacy: 51 });
     expect(Cards.CARDS_SYNC).toHaveLength(55);
     expect(Cards.CARDS_SYNC.every(card => inspectCardRuleCapability(card).kind === 'legacy')).toBe(true);
     const count = values => Object.fromEntries([...new Set(values)].sort().map(value => [value, values.filter(entry => entry === value).length]));

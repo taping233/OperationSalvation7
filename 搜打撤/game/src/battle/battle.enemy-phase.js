@@ -8,7 +8,8 @@ import * as Combat from './combat.js';
 import { waitForFeedback, waitMs } from './battle.feedback.js';
 import { demoMs } from './battle.pace.js';
 import { battleState, G, foes, mode, drawPile, hand, consumed, grave, energy, maxEnergy, turn, pdef, pstat, busy, infusing, discovering, handSelecting, choosing, interaction, noDrawNext, floats, cardAnims, playedMovesThisTurn, allies, extraTurn, timeRune, holyRune, fireballRuneOn, swiftRune, timeSpaceRune, timeSpaceUsed, set$noDrawNext, set$energy, set$extraTurn, set$interaction, set$turn, set$busy, set$timeSpaceUsed, set$playedMartialThisTurn, set$playedMovesThisTurn, set$lastPersistAt, clearTargetHint, transitionTo, cancelTargetingState } from './battle.runtime.js';
-import { processDelayed, accrueGrowth, resolveCardWithFeedback, syncCurseCondEquips, applyKillRewards, unplayableReason, queueCardExecution, foeIdx, addPlayerCurse, playerTakeHit, frenzyCurse, elCurse, requestBattleRender, R, alive, intentFor, drawCards, resolveFoeDefeat, sweepDead, nestPhase, grantSha, findCard, effCostOf, finish } from './battle.engine.js';
+import { processDelayed, accrueGrowth, resolveCardWithFeedback, syncCurseCondEquips, applyKillRewards, unplayableReason, queueCardExecution, foeIdx, addPlayerCurse, playerTakeHit, frenzyCurse, elCurse, requestBattleRender, R, alive, intentFor, drawCards, resolveFoeDefeat, sweepDead, nestPhase, grantSha, findCard, effCostOf, finish, fireTurnEndTriggers } from './battle.engine.js';
+import { restoreAtkDown } from './effect-steps.m2.js';
 
   // 敌方步进演出节拍在 vitest 环境归零（比照 battle.engine.js 的 SURGE_WAVE_MS 先例）：
   // 回归测试的等待辅助用固定次数 setTimeout(0) tick 当预算，其真实间隔平台相关
@@ -310,6 +311,10 @@ import { processDelayed, accrueGrowth, resolveCardWithFeedback, syncCurseCondEqu
       G.log(`[[icon:arrow]] <b>${esc(foe.name)}</b> 被偷取的攻击力归还（恢复至 ${foe.atk}）`, 'dim');
       delete foe._stealRestore;
     });
+    // M2：atkDown（攻击降低诅咒）到期归还——tickDurations 计时归零后按扣减量还原
+    foes.forEach(foe => { restoreAtkDown(foe); });
+    // M2：结构化 onTurnEnd 触发（登记卡「回合结束时」）
+    fireTurnEndTriggers();
     syncCurseCondEquips();   // 条件装备（深海印记类）随诅咒状态变化重新核算
     set$turn(turn + 1);
     foes.forEach(foe => { if (!foe.dead) foe.intent = intentFor(foe, turn); });

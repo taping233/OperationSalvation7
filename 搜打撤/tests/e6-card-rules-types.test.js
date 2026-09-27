@@ -62,7 +62,7 @@ describe('E6 strict production capability and battle guard type boundary', () =>
 
   it('rejects invalid operation, target, result branch, acquisition and warning port types', () => {
     const cases = [
-      [`const wrong: BattleOperationName = 'summon';`, 2322],
+      [`const wrong: BattleOperationName = 'unsupportedOperation';`, 2322],
       [`const wrong: OperationTarget = 'nearestEnemy';`, 2322],
       [`const wrong: AcquireDestination = 'bag';`, 2322],
       [`const wrong: AcquireAction = 'discard';`, 2322],

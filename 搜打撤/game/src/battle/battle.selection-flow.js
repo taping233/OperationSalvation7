@@ -283,7 +283,10 @@ export function createBattleSelectionFlow({
       const rest = deckBottomUids.filter(u => u !== pickedUid);
       if (rest.length) drawPile.unshift(...rest);
     }
-    if (act !== 'pouch') fireCatGift(card);   // 阿猫的礼物：从发现面板选中即触发（锦囊内旧牌不重触发）
+    const hasStructuredAcquire = Array.isArray(card.rules?.triggers?.onAcquire) &&
+      card.rules.triggers.onAcquire.length > 0;
+    // 结构化 onAcquire 在置入手牌的 addTempCard 内结算；跳过旧阿猫礼物回调，避免同次获取触发两遍。
+    if (act !== 'pouch' && !hasStructuredAcquire) fireCatGift(card);   // 锦囊内旧牌仍不走旧 gift 回调
     // 「直接施放 / 直接释放」类发现：选中即免费打出（2026-09-11 实机老板反馈修复：
     // 此前多敌场景会先置入手牌等玩家再拖选目标——与卡面「并直接释放」矛盾，且拖拽流程
     // 极易断裂成「卡躺在手牌像没释放」。现一律立即结算：默认首个存活敌人，群体卡自动覆盖全体）

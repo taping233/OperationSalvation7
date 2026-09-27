@@ -8,7 +8,7 @@ import { removeUid } from './battle.piles.js';
 import { targetSideFor } from './battle.rules.js';
 import { throwIfActionCancelled } from './battle.staged-playback.js';
 import { rejectUnsupportedCard } from './battle.rule-guard.js';
-import { G, foes, mode, hand, discard, played, consumed, grave, energy, delayed, cardAnims, freeCast, infuseFuels, consumeFireballN, allSpellsInfused, growthNames, killAtkUp, playerCurseImmune, arrowRune, nextSpellTwice, poisonOnSpell, playedMovesThisTurn, playedMartialThisTurn, activeActionSignal, battleState, set$hand, set$energy, set$infuseFuels, set$nextSpellTwice, set$killAtkUp, set$poisonOnSpell, set$poisonLegacy, set$playerCurseImmune, set$allSpellsInfused, set$lastPlayedType, set$playedMovesThisTurn, set$playedMartialThisTurn, set$activeActionSignal, set$handSelecting, nextActionSeq } from './battle.runtime.js';
+import { G, foes, mode, hand, discard, played, consumed, grave, energy, delayed, cardAnims, freeCast, infuseFuels, consumeFireballN, allSpellsInfused, growthNames, killAtkUp, playerCurseImmune, arrowRune, nextSpellTwice, poisonOnSpell, playedMovesThisTurn, playedMartialThisTurn, activeActionSignal, battleState, set$hand, set$energy, set$infuseFuels, set$nextSpellTwice, set$killAtkUp, set$poisonOnSpell, set$poisonLegacy, set$playerCurseImmune, set$allSpellsInfused, set$consumeFireballN, set$stealthStrike, set$lastPlayedType, set$playedMovesThisTurn, set$playedMartialThisTurn, set$activeActionSignal, set$handSelecting, nextActionSeq } from './battle.runtime.js';
 
 const R = () => SDT.MAP.rules;
 const alive = () => foes.filter(foe => !foe.dead);
@@ -17,12 +17,20 @@ export function createBattleExecPlay({
   warnCardRuleRejection = message => G.log(message, 'warn'),
   requestBattleRender, findCard, matchHandSelectKey, fireConsumeTriggers, effCostOf,
   resolveInfusedFuel, runStagedSteps, consumeFireballSteps, resolveCardWithFeedback,
-  takeSurge, registerEquip, summonAlly, applyKillRewards, poisonRandomFoe, applyImitate,
+  takeSurge, registerEquip, summonAlly, applyKillRewards, poisonRandomFoe, applyImitate, checkElementSealProgress,
   beginDartStrike, sweepDead, finish, processChoice, processDiscoverQueue, queueBattleAction,
+  triggersM2,
 }) {
   function queueCardExecution(uid, card, fuelUids, target, freeCost, requirementsPaid = false, paymentUids = [], onResolved = null) {
     if (rejectUnsupportedCard(card, { warn: warnCardRuleRejection })) return false;
     const handRequirement = card?.rules?.battle?.requirements?.find(rule => rule.kind === 'handCards');
+    // M3：infused 打出门（注能 N 后才能打出——felguard/raydragon 式卡面 infuse 门的规则表达）
+    const infusedGate = card?.rules?.battle?.requirements?.find(rule => rule.kind === 'infused');
+    if (infusedGate && !(fuelUids || []).length && !freeCost) {
+      G.log(`[[icon:cross]] 【${esc(card.name)}】需要先注能才能打出`, 'warn');
+      requestBattleRender();
+      return false;
+    }
     if (handRequirement && !requirementsPaid) {
       const excludedUids = [...new Set([uid, ...(fuelUids || [])])];
       const available = hand.filter(handUid => {
@@ -87,6 +95,17 @@ export function createBattleExecPlay({
       throwIfActionCancelled(signal);
     }
     freeCast.delete(uid);
+    // M2：剥离时点容器供 resolver（resolver 守卫：非 onPlay 容器必须经 triggers 登记管线；
+    // 登记在结算完成后以原卡进行——见下方 triggersM2.registerCard）。
+    // 原卡无 onPlay 容器时剥离后不保留 onPlay 键（空 triggers 合法）。
+    const resolverCard = (() => {
+      const t = card.rules?.triggers;
+      if (!t || !Object.keys(t).some(k => k !== 'onPlay' && k !== 'duration')) return card;
+      const stripped = Object.prototype.hasOwnProperty.call(t, 'onPlay') ? { onPlay: t.onPlay } : {};
+      // 保留已完成 preflight 所需的声明视图给 resolver 守卫；实际执行视图仍只带 onPlay，
+      // 非 onPlay 时点已经由 runner 登记，不能在 resolver 内再次运行。
+      return { ...card, _registeredTriggers: t, rules: { ...card.rules, triggers: stripped } };
+    })();
     const effCost = effCostOf(card, uid);
     if (effCost !== card.cost) G.log(`[[icon:sparkles]] <b>费用变化</b>：【${esc(card.name)}】按 <b>${effCost}</b> 费打出（原 ${card.cost} 费）`, 'sys');
     if (!freeCost) set$energy(energy - (effCost));
@@ -113,18 +132,19 @@ export function createBattleExecPlay({
       // Q2 老板定向：注能牺牲也算「消耗该牌时」触发（沉船宝盒/百炼青虹剑/矿工炸药/奥术残卷）
       if (o) fireConsumeTriggers(o.card, target);
       set$infuseFuels(infuseFuels + 1);   // 元素符印解锁计数
+      checkElementSealProgress();
       // 深渊降焰（降临者英雄）：每消耗 1 张卡牌，自动施放 1 次火球
       if (consumeFireballN > 0) await runStagedSteps(consumeFireballSteps(consumeFireballN), signal);
     }
     if (mode === 'boss') discard.push(uid);
     const fuelCostSum = fuelUids.reduce((a, f) => {
       const o = findCard(f);
-      return a + (o ? Math.max(0, +(o.card.cost || 0)) : 0);
+      return a + (o ? Math.max(0, +(SDT.Cards.sellPrice(o.card) || 0)) : 0);
     }, 0);
     // 深渊主宰·妲莉薇特「招式均已注能」（旧日再临）：可注能/必须注能的招式无需选燃料，直接按已注能结算
     const infusedBase = fuelUids.length > 0 || (allSpellsInfused && (card.type === '武术' || card.type === '法术'));
     const aliveBefore = alive().length;
-    await resolveCardWithFeedback(card, target, infusedBase, fuelCostSum, uid, signal);
+    await resolveCardWithFeedback(resolverCard, target, infusedBase, fuelCostSum, uid, signal);
     await takeSurge(signal);   // 法力奔涌：演出未完不结束本次出牌动作；终局会中止余下结算
     // 2026-09-09 老板 #9：装备卡打出即穿戴（角色信息区显示装备与限定技能按钮）
     if (card.type === '装备') registerEquip(uid, card);
@@ -135,25 +155,34 @@ export function createBattleExecPlay({
       const o = findCard(u);
       return o && /永远被保留在手牌中/.test(String(o.card.desc || ''));
     });
-    if (/最后一张手牌[^。；]*?触发\s*(\d+)?\s*次?/.test(String(card.desc || '')) && lastRealCard) {
+    const structuredLastHandRecast = card.rules?.triggers?.onPlay?.some(op =>
+      op?.op === 'damage' && op.recast?.on === 'lastHand');
+    if (!structuredLastHandRecast && /最后一张手牌[^。；]*?触发\s*(\d+)?\s*次?/.test(String(card.desc || '')) && lastRealCard) {
       G.log(`[[icon:cards]] <b>${esc(card.name)}</b>：本牌是最后一张手牌，效果触发 2 次`, 'sys');
-      await resolveCardWithFeedback(card, target, infusedBase, fuelCostSum, uid, signal);
+      await resolveCardWithFeedback(resolverCard, target, infusedBase, fuelCostSum, uid, signal);
       await takeSurge(signal);
     }
     // 「下一张法术施放 N 次」（元素风暴，注能打出时注册）：法术效果再跑一遍
     if (nextSpellTwice > 0 && card.type === '法术') {
       set$nextSpellTwice(0);
       G.log(`[[icon:sparkles]] <b>元素风暴</b>：这张法术额外施放 1 次`, 'sys');
-      await resolveCardWithFeedback(card, target, infusedBase, fuelCostSum, uid, signal);
+      await resolveCardWithFeedback(resolverCard, target, infusedBase, fuelCostSum, uid, signal);
       await takeSurge(signal);
     }
     // —— 2026-09-09 补实装：打出侧登记（成长/被动/击杀结算/手牌变形）——
-    if (/回合开始时[，,]?\s*本牌伤害\s*\+/.test(String(card.desc || '')) && card.name) growthNames.add(card.name);
-    if (/每消灭\s*1\s*个敌人[^。]*?\+\s*1\s*点?攻击力/.test(String(card.desc || ''))) set$killAtkUp(killAtkUp + 1);
-    if (/每当你使用一张法术牌[^。]*中毒/.test(String(card.desc || ''))) set$poisonOnSpell(true);
-    if (/死亡时[^。；]*中毒层数转移/.test(String(card.desc || ''))) set$poisonLegacy(true);
+    // M3 收编：卡已迁结构化规则（triggers/equip）时 desc 正则宿主一律抑制，runner/规则单路径
+    const hasStructuredRules = !!(card.rules?.triggers || card.rules?.equip);
+    const hosted = card.rules?.battle?.hosted || [];
+    if (!hasStructuredRules && ((/回合开始时[，,]?\s*本牌伤害\s*\+/.test(String(card.desc || '')) && card.name) ||
+        hosted.includes('charge-fireball'))) growthNames.add(card.name);
+    if (!hasStructuredRules && /每消灭\s*1\s*个敌人[^。]*?\+\s*1\s*点?攻击力/.test(String(card.desc || ''))) set$killAtkUp(killAtkUp + 1);
+    if (!hasStructuredRules && /每当你使用一张法术牌[^。]*中毒/.test(String(card.desc || ''))) set$poisonOnSpell(true);
+    if (!hasStructuredRules && (/死亡时[^。；]*中毒层数转移/.test(String(card.desc || '')) || hosted.includes('rot-seed'))) set$poisonLegacy(true);
+    if (!hasStructuredRules && hosted.includes('venom-staff')) set$poisonOnSpell(true);
+    if (!hasStructuredRules && hosted.includes('consume-fireball')) set$consumeFireballN(1);
+    if (!hasStructuredRules && hosted.includes('assassin')) set$stealthStrike(true);
     // 旧日再临（深渊主宰·妲莉薇特，2026-09-16 定版）：免疫诅咒 + 招式均已注能 + 召唤 4 名无攻血封印肢体
-    if (/免疫诅咒/.test(String(card.desc || ''))) {
+    if (!hasStructuredRules && /免疫诅咒/.test(String(card.desc || ''))) {
       set$playerCurseImmune(true);
       G.log('[[icon:shield]] <b>旧日再临</b>：诅咒无法侵染深渊主宰', 'ok');
     }
@@ -161,32 +190,49 @@ export function createBattleExecPlay({
     // 诅咒部分走 playerCurseImmune，下回合开始由 curseImmuneOff 还原（restore 记原值：
     // 深渊主宰的永久免疫在场时原值为 true，还原后仍免疫，不受本卡影响）。
     // 伤害部分由文本侧祝福·免疫伤害（buff.immune，n=1 回合）承担。
-    if (infusedBase && /免疫所有伤害和诅咒效果/.test(String(card.desc || ''))) {
+    if (!hasStructuredRules && infusedBase && /免疫所有伤害和诅咒效果/.test(String(card.desc || ''))) {
       const prior = playerCurseImmune;
       set$playerCurseImmune(true);
       delayed.push({ special: 'curseImmuneOff', restore: !!prior });
       G.log('[[icon:shield]] <b>邪能护体</b>：本回合免疫所有伤害与诅咒效果', 'ok');
     }
-    if (/均视为已注能|均已注能/.test(String(card.desc || ''))) {
+    if (!hasStructuredRules && /均视为已注能|均已注能/.test(String(card.desc || ''))) {
       set$allSpellsInfused(true);
       G.log('[[icon:sparkles]] <b>旧日再临</b>：所有可注能与必须注能的招式，均视为已注能', 'ok');
     }
-    if (/召唤\s*4\s*名封印肢体/.test(String(card.desc || ''))) {
+    if (!hasStructuredRules && /召唤\s*4\s*名封印肢体/.test(String(card.desc || ''))) {
       summonAlly('封印肢体', 0, 0, 4, true);
       G.log('[[icon:paw]] 四条<b>封印肢体</b>重现世间——如天国之门般无攻无血的场面物件', 'sys');
     }
     // 箭矢符文：你的「箭」释放 2 次（第二段免费用）
     if (arrowRune && (card.name === '箭' || card.id === 'token-arrow')) {
       G.log('[[icon:runner]] <b>箭矢符文</b>：箭再度释放', 'sys');
-      await resolveCardWithFeedback(card, target, infusedBase, fuelCostSum, uid, signal);
+      await resolveCardWithFeedback(resolverCard, target, infusedBase, fuelCostSum, uid, signal);
       await takeSurge(signal);
     }
     applyKillRewards(card, aliveBefore - alive().length);
     if (poisonOnSpell && card.type === '法术') poisonRandomFoe();
     // Q8 老板定向：不变应万变——打出武术后，手中所有「不变应万变」变为该武术的 1 费复制
     if (card.type === '武术') applyImitate(card);
+    // M3：triggers.replay 容器——整卡重跑 N 次（急行军/破釜沉舟「效果触发 2 次」规则化，
+    // on='lastHand' 时按末手判定；既有 desc 正则保留给未迁卡）
+    const replay = card.rules?.triggers?.replay;
+    if (replay && Number.isInteger(replay.times) && replay.times > 0 &&
+        (!replay.on || replay.on === 'lastHand') && lastRealCard) {
+      G.log(`[[icon:cards]] <b>${esc(card.name)}</b>：本牌是最后一张手牌，效果再触发 ${replay.times} 次`, 'sys');
+      for (let r = 0; r < replay.times; r++) {
+        await resolveCardWithFeedback(resolverCard, target, infusedBase, fuelCostSum, uid, signal);
+        await takeSurge(signal);
+      }
+    }
+    // M3：pick:'new' 段级重新点选（血毒双镖双目标）——主结算已跳过 pick 段，此处进入点选后结算
+    const pickOps = hasStructuredRules ? (card.rules?.triggers?.onPlay || []).filter(op => op && op.pick === 'new') : [];
+    if (pickOps.length && alive().length) {
+      beginDartStrike({ uid, card, ops: pickOps });
+    }
     // 「永远被保留在手牌中」（不朽斩）：打出后回到手牌，不进弃牌堆
-    if (/永远被保留在手牌中/.test(String(card.desc || ''))) {
+    // M3：rules.battle.keepInHand 结构化开关与 desc 正则单源
+    if (card.rules?.battle?.keepInHand === true || /永远被保留在手牌中/.test(String(card.desc || ''))) {
       const di = discard.lastIndexOf(uid); if (di >= 0) discard.splice(di, 1);
       const pi = played.lastIndexOf(uid); if (pi >= 0) played.splice(pi, 1);
       if (hand.length < R().battleHandMax) {
@@ -201,6 +247,13 @@ export function createBattleExecPlay({
     // 招式＝武术+法术（设计者 2026-09-10 定版）连续射击；追斩只数武术
     if (card.type === '武术' || card.type === '法术') set$playedMovesThisTurn(playedMovesThisTurn + 1);
     if (card.type === '武术') set$playedMartialThisTurn(playedMartialThisTurn + 1);
+    // M2：打出卡以原卡登记时点触发器（onTurnStart/onTurnEnd/onKill/onDamaged/onPlayCard…，
+    // 容器级 duration 控制持续次数）；登记后向已登记卡广播「打出牌时」。
+    // 本卡的时点容器已在结算前剥离（见 resolverCard），此后由 runner 按时点触发。
+    if (triggersM2) {
+      triggersM2.registerCard(card, uid, { battleStarted: true });
+      triggersM2.firePlayCard();
+    }
     if (card.id === 'tt7-bloodpoison') beginDartStrike();   // 二段点选（2026-09-16 留言「选择两次目标」）
     if (!alive().length) { finish(true); return false; }
     processChoice();

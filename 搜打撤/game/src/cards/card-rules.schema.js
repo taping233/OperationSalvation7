@@ -1,4 +1,42 @@
-const BATTLE_KEYS = new Set(['target', 'requirements', 'costModifiers']);
+// M3：keepInHand——打出后回手（不朽斩「永远被保留在手牌中」，exec-play 保留通道结构化）
+const BATTLE_KEYS = new Set(['target', 'requirements', 'costModifiers', 'keepInHand', 'hosted']);
+// Hosted names are executable integration points bound to stable card identities.
+export const HOSTED_CARD_RULES = Object.freeze({
+  'tt7-imitate': 'imitate', 'cc-mana-surge': 'mana-surge', 'cc-rot-seed': 'rot-seed',
+  'cmtn1lbhbqi4': 'charge-fireball', 'tt7-stratagem': 'pouch-container',
+  'tt2-pearlbox': 'pearl-container', 'tt2-venomstaff': 'venom-staff',
+  'tt3-element-seal': 'element-seal', 'tt3eq-mistbox': 'cost-swap',
+  'tt7-darkfort': 'dark-fort', 'tt7-naturestaff': 'nature-staff',
+  'tt8-demonslay': 'ranger-chain', 'tt8-heavensword': 'ranger-chain',
+  'tt8-abyss-sovereign': 'sovereign', 'tt8-hero-assassin': 'assassin',
+  'tt8-hero-descender': 'consume-fireball', 'tt8-hero-sealer': 'seal-chain',
+  'tt8-hero-summoner': 'gate-choices', 'tt8-hero-warrior': 'kill-transform',
+  'tt3-mystery-potion': 'mystery-potion', 'tt8-hero-guardian': 'guardian',
+  'tt8-hero-mage': 'mage', 'tt8-hero-priest': 'priest',
+  'tt8-hero-ranger': 'ranger', 'tt8-hero-sword': 'sword', 'tt8-hero-warlock': 'warlock',
+  'tt2-frostsword': 'frost-sword', 'tt3-crimson-pouch': 'crimson-pouch',
+  'tt3-fate-wheel': 'fate-wheel', 'tt3eq-boiler': 'boiler',
+  'tt3-azure-sword': 'azure-sword', 'tt3-chaos-eye': 'chaos-eye',
+  'tt3-immortal-blade': 'immortal-blade', 'tt3-master-staff': 'master-staff',
+  'tt3-silver-runesword': 'silver-runesword', 'tt3-sapper-bomb': 'sapper-bomb',
+  'tt3-wolf-bow': 'wolf-bow', 'tt3-reverse-bow': 'reverse-bow',
+  'tt3-twinwater-mail': 'twinwater-mail',
+  'cmtn1wnhhym': 'temporary-hand-cards', 'cmtn233trmeg': 'keep-self-in-hand',
+  'tt3-fatal-pierce': 'bleed-gated-armor-break', 'tt3-frostfall': 'choose-and-cast-melee',
+  'tt3-qi-wave': 'draw-and-price-damage', 'tt7-bloodpoison': 'double-target-poison-daggers',
+  'tt7-ghostblade': 'stealth-break-bonus', 'tt7-marchrush': 'last-hand-repeat-all',
+  'cc-poison-burst': 'burst-existing-poison', 'tt12-felguard': 'infused-immune-spell',
+  'tt12-freezeray': 'untouched-target-freeze', 'tt12-raydragon': 'infused-ray',
+  'tt3-magic-lamp': 'three-choice-lamp', 'tt7-holyheal': 'infused-price-heal',
+  'tt7-meteorstrong': 'infused-fireball-burst', 'tt3sp-bloodstorm': 'infused-repeating-lifesteal',
+  'tt3sp-flowerzhen': 'double-and-burst-poison', 'tt3sp-silverthorn': 'infused-damage-bonus',
+  'tt-token-color': 'class-ability-acquire', 'tt-medneedle': 'delayed-heal-item',
+  'tt7-arcanebolt': 'damage-and-draw', 'tt7-provoke': 'foe-fight-select',
+});
+export const HOSTED_BATTLE_RULES = new Set(Object.values(HOSTED_CARD_RULES));
+// M3：bag.use 支持的 op 集（战斗侧 battle.bag 结构化分派 + 地图侧 game.bag useStructuredBagRule）
+const BAG_SUPPORTED_OPS = new Set(['heal', 'restoreConsumed', 'energy', 'blessing', 'curse', 'draw', 'damage',
+  'execute', 'acquire', 'discover', 'flee']);
 const RULE_KEYS = new Set(['version', 'battle', 'triggers', 'base', 'bag', 'equip']);
 const TARGET_KEYS = new Set(['side', 'area']);
 const REQUIREMENT_KEYS = new Set(['kind', 'count', 'type']);
@@ -6,9 +44,13 @@ const COST_MODIFIER_KEYS = new Set(['kind', 'type', 'amount']);
 const BASE_KEYS = new Set(['material']);
 const BASE_MATERIAL_KEYS = new Set(['kind', 'amount']);
 const BAG_KEYS = new Set(['use']);
-// v2（G13 时点触发器）：onPlay 之外新增 5 个时点容器——键位先行（schema 放行），
-// 解释器（battle.resolution.js resolveCardSteps）遇到即 throw，防止静默错结算。
-const TRIGGER_KEYS = new Set(['onPlay', 'onTurnStart', 'onBattleStart', 'onConsume', 'onDraw', 'onKill']);
+// v2（G13 时点触发器）：onPlay 之外新增时点容器——键位先行（schema 放行），
+// 解释器（battle.triggers.m2.js runner）逐时点接线；未接线时点由 capability 收口。
+// M2（2026-09-27）七时点全量接线：onTurnStart/onTurnEnd/onBattleStart/onConsume/onDraw/
+// onKill/onDamaged/onPlayCard；容器级 duration = 该卡 trigger 持续 N 次触发后过期。
+const TRIGGER_KEYS = new Set(['onPlay', 'onTurnStart', 'onTurnEnd', 'onBattleStart', 'onConsume', 'onDraw',
+  'onKill', 'onDamaged', 'onPlayCard', 'onAcquire', 'onFreezeDealt', 'duration',
+  'replay']);
 // v2 onPlay 全量键白名单（逐键参数校验在各 op 分支内完成）。
 const ON_PLAY_OPERATION_KEYS = new Set([
   // v1
@@ -26,22 +68,49 @@ const ON_PLAY_OPERATION_KEYS = new Set([
   // v2 —— pending 操作族参数（G3/G4/G9/G11/G12/G14）
   'n', 'name', 'atk', 'hp', 'statless', 'taunt', 'cap', 'onKill', 'what', 'into', 'keepInHand', 'rule',
   'key', 'dest', 'act', 'filter',
+  // M 批契约扩展（M1，2026-09-27）：净化 op；draw 区间抽牌（随机张数）
+  'cleanse',
+  // M2（2026-09-27）：动态源/条件/奖励/新 op 参数键
+  'priceOf', 'perTargetPrice', 'perInfusedInHand', 'infuseBonus', 'spellPowerMul', 'perCurseKinds', 'perCurseStacks',
+  'consumeEquip', 'source', 'bindTarget', 'capTo',
+  // M3（2026-09-27）：pick:'new' 段级重新点选（血毒双镖）；execute.what 施放语义
+  'pick', 'what',
 ]);
 const DISCOVER_POOL_KEYS = new Set(['kind', 'cost']);
 const SUPPORTED_DAMAGE_TYPES = new Set(['attack', 'spell', 'fixed', 'true']);
 // v2 —— 各操作族允许键集（白名单内的组合约束在此逐键收口）
 const DAMAGE_ALLOWED_KEYS = new Set(['op', 'amountField', 'amount', 'range', 'target', 'hitCount', 'retarget',
-  'hits', 'cond', 'bonus', 'lifesteal', 'graveyard', 'recast', 'schedule']);
-const CURSE_ALLOWED_KEYS = new Set(['op', 'curse', 'stacks', 'duration', 'target', 'randomKinds', 'double', 'burst', 'extend']);
+  'hits', 'cond', 'bonus', 'lifesteal', 'graveyard', 'recast', 'schedule',
+  // M2：onKill 击杀奖励 / perInfusedInHand 手注能加伤 / infuseBonus 注能加伤 /
+  // spellPowerMul 法伤加成倍率 / perTargetPrice 伤害锚定参照牌价格
+  // M3：pick:'new' 段级重新点选（血毒双镖双目标）
+  'onKill', 'perInfusedInHand', 'infuseBonus', 'spellPowerMul', 'perTargetPrice', 'pick']);
+const CURSE_ALLOWED_KEYS = new Set(['op', 'curse', 'stacks', 'duration', 'target', 'randomKinds', 'double', 'burst', 'extend',
+  // M2：source 手牌招式诅咒聚合 / bindTarget 绑定前一 damage 段目标 / amount（atkDown 扣减量）
+  // M3：pick:'new' 段级重新点选
+  'source', 'bindTarget', 'amount', 'pick']);
 const HEAL_ALLOWED_KEYS = new Set(['op', 'amountField', 'amount', 'upTo', 'selfDamage', 'perFuelCost', 'perSpellHeal']);
-const ARMOR_ALLOWED_KEYS = new Set(['op', 'amountField', 'amount', 'guard', 'decayAtTurnEnd']);
-const DRAW_ALLOWED_KEYS = new Set(['op', 'amountField', 'amount', 'untilHandN', 'handOps']);
+const ARMOR_ALLOWED_KEYS = new Set(['op', 'amountField', 'amount', 'guard', 'decayAtTurnEnd',
+  // M2：priceOf 护甲锚定发现牌价格（挖宝）/ consumeEquip 消耗手牌装备为代价（铸甲）
+  'priceOf', 'consumeEquip']);
+// M1：draw 增加 range（随机张数区间，摸索「抽2-3张牌」）——与 amountField/amount/untilHandN 四选一
+// M2：perCurseKinds 按目标诅咒种类数抽牌 / filter 牌库定向抽取（deckDraw type）
+const DRAW_ALLOWED_KEYS = new Set(['op', 'amountField', 'amount', 'untilHandN', 'handOps', 'range', 'perCurseKinds', 'filter']);
+// M1：净化（Wave1 仅支持自身——卡面先例：治愈/净化箭/圣杖/白梅落影均为净化自身）
+const CLEANSE_ALLOWED_KEYS = new Set(['op', 'target']);
+// M2：偷取攻击（影噬「偷取至 1 点」/ 禁咒「夺取 1 点攻击力」）——amount 固定量 / capTo 压至阈值二选一
+const STEAL_ATK_ALLOWED_KEYS = new Set(['op', 'target', 'amount', 'capTo', 'duration', 'pick']);
+// M3：敌对敌互殴（扰敌「选择 2 名敌人，迫使其相互攻击一次」）/ 随机复制一张手牌（刀剑形态）
+const FOE_FIGHT_ALLOWED_KEYS = new Set(['op']);
+const COPY_RANDOM_ALLOWED_KEYS = new Set(['op']);
 const STATUS_ALLOWED_KEYS = new Set(['op', 'status', 'target', 'duration']);
 const DISCOVER_ALLOWED_KEYS = new Set(['op', 'count', 'pool', 'costDecayPerTurn']);
-// v2 —— G2 诅咒枚举（与 combat.js CURSES / CURSE_META 对齐）
-const CURSE_KEYS = new Set(['bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban', 'burn']);
+// v2 —— G2 诅咒枚举（与 combat.js CURSES / CURSE_META 对齐；M2 加 atkDown 攻击降低）
+const CURSE_KEYS = new Set(['bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban', 'burn', 'atkDown']);
 const STACKING_CURSE_KEYS = new Set(['bleed', 'poison']);
-const CONDITION_KEYS = new Set(['foeHpBelow', 'foeHpHalf', 'foeStatus', 'foeFullHp']);
+const CONDITION_KEYS = new Set(['foeHpBelow', 'foeHpHalf', 'foeStatus', 'foeFullHp',
+  // M2：目标身负任意诅咒（暗影射击「若对手处于诅咒状态」）
+  'anyCurse']);
 const DAMAGE_TARGET_KEYS = new Set(['chosenEnemy', 'allEnemies', 'randomEnemy']);
 const CURSE_TARGET_KEYS = new Set(['chosenEnemy', 'allEnemies', 'randomEnemy', 'self']);
 // v2 —— 键位已定的操作族（schema 放行 + 逐键校验）。解释器进度：acquire/blessing/
@@ -57,7 +126,7 @@ const PENDING_OP_ALLOWED_KEYS = new Map([
   ['energyCap', new Set(['op', 'n'])],
   ['maxHp', new Set(['op', 'n'])],
   ['deckCap', new Set(['op', 'n'])],
-  ['execute', new Set(['op', 'cap', 'count', 'onKill'])],
+  ['execute', new Set(['op', 'cap', 'count', 'onKill', 'perCurseKinds', 'perCurseStacks', 'what'])],
   ['summon', new Set(['op', 'name', 'atk', 'hp', 'count', 'statless', 'taunt'])],
   ['transform', new Set(['op', 'what', 'into', 'cost', 'keepInHand'])],
   ['registerRule', new Set(['op', 'rule'])],
@@ -65,12 +134,21 @@ const PENDING_OP_ALLOWED_KEYS = new Map([
   ['coins', new Set(['op', 'n'])],
 ]);
 const BLESSING_KEYS = new Set(['atkUp', 'spellUp', 'stealth', 'immune', 'dodge', 'reduce']);
-const REGISTER_RULE_KEYS = new Set(['consumeFireball', 'allSpellsInfused', 'growth']);
+// M1：acquire.filter 键位（type 卡牌类型 / cost 费用等于 / costMax 费用上限）。
+// 键位先行全部放行并逐键校验；解释器消费进度由 capability 表收口（Wave1 只消费
+// cost/costMax——type 过滤与池名词 parsePoolNoun 重叠，E6 回归锁定未消费 filter 必拒）。
+const ACQUIRE_FILTER_KEYS = new Set(['type', 'cost', 'costMax', 'exceptIds']);
+// M2：registerRule 持续规则旗标扩键（bleedAmp 流血伤害翻倍 / meleeCost1 所有武术 1 费 /
+// spellCost1 所有法术 1 费——消费点 combat/enemy-phase 流血结算与 battle.card-cost 既有旗标）
+const REGISTER_RULE_KEYS = new Set(['consumeFireball', 'allSpellsInfused', 'growth', 'bleedAmp', 'meleeCost1', 'spellCost1',
+  'discoverPlus', 'doubleNextSpell', 'poisonLegacy', 'playerCurseImmune', 'stealthStrike']);
 const HAND_OP_KEYS = new Set(['consumeHand', 'dumpHand', 'copyRandom', 'keepInHand', 'noInfuse']);
 // v2 —— G5 装备域（键位设计先行，全部 pending；消费点在 battle.equipment.js，A3 B9 落地）
 const EQUIP_KEYS = new Set(['onEquip', 'passive', 'battleStart', 'skill', 'container']);
 const EQUIP_PASSIVE_KEYS = new Set(['aura', 'cond']);
-const EQUIP_AURA_KEYS = new Set(['atk', 'spellPower']);
+const EQUIP_AURA_KEYS = new Set(['atk', 'spellPower', 'deckCap',
+  // M2：focus 专注——每回合开始额外获得 N 点能量（回合管线经 triggers runner 结算）
+  'focus']);
 const EQUIP_COND_KEYS = new Set(['hasCurse', 'vsFreeze']);
 const EQUIP_SKILL_KEYS = new Set(['oncePerBattle', 'ops']);
 const EQUIP_CONTAINER_KEYS = new Set(['slots', 'accepts']);
@@ -118,15 +196,23 @@ function validateCondition(record, path, error) {
   if (record.foeStatus !== undefined && !CURSE_KEYS.has(record.foeStatus)) {
     error(`${path}.foeStatus`, "must be one of 'bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban', 'burn'");
   }
+  if (record.anyCurse !== undefined && record.anyCurse !== true) {
+    error(`${path}.anyCurse`, 'must equal true when provided');
+  }
 }
 
 function validateDamageOperation(operation, card, path, error) {
   for (const key of Object.keys(operation)) {
     if (!DAMAGE_ALLOWED_KEYS.has(key)) error(`${path}.${key}`, 'is not accepted for damage operations');
   }
-  const sources = ['amountField', 'amount', 'range'].filter(field => operation[field] !== undefined);
+  // M2：perTargetPrice——伤害动态锚定参照牌价格（气功波「抽 1 张牌，对全体敌人造成等同于其价格的固定伤害」，
+  // 参照=同一 onPlay 中前一获取段入手的牌；engine getPriceOfLastDrawn 口径）
+  const sources = ['amountField', 'amount', 'range', 'perTargetPrice'].filter(field => operation[field] !== undefined);
   if (sources.length !== 1) {
-    error(path, "must specify exactly one damage source among 'amountField', 'amount', 'range'");
+    error(path, "must specify exactly one damage source among 'amountField', 'amount', 'range', 'perTargetPrice'");
+  }
+  if (operation.perTargetPrice !== undefined && operation.perTargetPrice !== true) {
+    error(`${path}.perTargetPrice`, 'must equal true when provided');
   }
   if (operation.amountField !== undefined) {
     if (operation.amountField !== 'dmg') {
@@ -163,9 +249,10 @@ function validateDamageOperation(operation, card, path, error) {
     error(`${path}.hitCount`, 'must be a positive integer');
   }
   if (hasHits) {
-    if (!isRecord(operation.hits) || !hasOnlyKeys(operation.hits, new Set(['count', 'range', 'perFoe'])) ||
-        ['count', 'range', 'perFoe'].filter(key => operation.hits[key] !== undefined).length !== 1) {
-      error(`${path}.hits`, "must specify exactly one of 'count', 'range', 'perFoe'");
+    // M2：hits.perPlayedMoves——段数动态源「本回合已打出的招式数」（连续射击）
+    if (!isRecord(operation.hits) || !hasOnlyKeys(operation.hits, new Set(['count', 'range', 'perFoe', 'perPlayedMoves'])) ||
+        ['count', 'range', 'perFoe', 'perPlayedMoves'].filter(key => operation.hits[key] !== undefined).length !== 1) {
+      error(`${path}.hits`, "must specify exactly one of 'count', 'range', 'perFoe', 'perPlayedMoves'");
     } else {
       if (operation.hits.count !== undefined && !isPositiveInteger(operation.hits.count)) {
         error(`${path}.hits.count`, 'must be a positive integer');
@@ -173,8 +260,15 @@ function validateDamageOperation(operation, card, path, error) {
       if (operation.hits.range !== undefined && !isRangePair(operation.hits.range)) {
         error(`${path}.hits.range`, 'must be a two-element [min, max] pair of nonnegative integers with min <= max');
       }
+      if (operation.hits.perPlayedMoves !== undefined && operation.hits.perPlayedMoves !== true) {
+        error(`${path}.hits.perPlayedMoves`, 'must equal true when provided');
+      }
       // perFoe（每人释放一次）语义落在 B2 后续批次，schema 先放行、解释器 throw
     }
+  }
+  // M3：pick:'new'——该段结算前重新点选目标（血毒双镖双目标）
+  if (operation.pick !== undefined && operation.pick !== 'new') {
+    error(`${path}.pick`, "must equal 'new' when provided");
   }
   if (operation.retarget !== undefined && operation.retarget !== 'livingFoes') {
     error(`${path}.retarget`, "must be 'livingFoes'");
@@ -216,14 +310,33 @@ function validateDamageOperation(operation, card, path, error) {
     }
   }
   if (operation.recast !== undefined) {
+    // M2：recast.on 扩 'lastHand'——本牌为最后一张手牌时再施放 N 次（急行军/破釜沉舟族）
     const recast = operation.recast;
     if (!isRecord(recast) || !hasOnlyKeys(recast, new Set(['on', 'times'])) ||
-        recast.on !== 'kill' || !isPositiveInteger(recast.times)) {
-      error(`${path}.recast`, "must specify { on: 'kill', times: positive integer }");
+        !['kill', 'lastHand'].includes(recast.on) || !isPositiveInteger(recast.times)) {
+      error(`${path}.recast`, "must specify { on: 'kill' | 'lastHand', times: positive integer }");
     }
   }
-  if (operation.schedule !== undefined && operation.schedule !== 'nextTurn') {
-    error(`${path}.schedule`, "must equal 'nextTurn'");
+  if (operation.schedule !== undefined && !['nextTurn', 'nextTurnStart'].includes(operation.schedule)) {
+    error(`${path}.schedule`, "must equal 'nextTurn' or 'nextTurnStart' (deferred to the next turn start)");
+  }
+  // —— M2 动态加成与奖励键 ——
+  if (operation.perInfusedInHand !== undefined && !isPositiveInteger(operation.perInfusedInHand)) {
+    error(`${path}.perInfusedInHand`, 'must be a positive integer');
+  }
+  if (operation.infuseBonus !== undefined && !isPositiveInteger(operation.infuseBonus)) {
+    error(`${path}.infuseBonus`, 'must be a positive integer');
+  }
+  if (operation.spellPowerMul !== undefined && (!Number.isInteger(operation.spellPowerMul) || operation.spellPowerMul < 2)) {
+    error(`${path}.spellPowerMul`, 'must be an integer >= 2');
+  }
+  if (operation.onKill !== undefined) {
+    const onKill = operation.onKill;
+    if (!isRecord(onKill) || !hasOnlyKeys(onKill, new Set(['coins', 'armor'])) || Object.keys(onKill).length === 0 ||
+        (onKill.coins !== undefined && !isPositiveInteger(onKill.coins)) ||
+        (onKill.armor !== undefined && !isPositiveInteger(onKill.armor))) {
+      error(`${path}.onKill`, "must be a non-empty object with positive integer 'coins' and/or 'armor'");
+    }
   }
 }
 
@@ -231,20 +344,42 @@ function validateCurseOperation(operation, path, error) {
   for (const key of Object.keys(operation)) {
     if (!CURSE_ALLOWED_KEYS.has(key)) error(`${path}.${key}`, 'is not accepted for curse operations');
   }
+  // M2：source:'handMoves'——聚合手牌中招式自带的全部诅咒（诅咒之刃），与具名/随机三选一
   const hasCurseKey = operation.curse !== undefined;
   const hasRandomKinds = operation.randomKinds !== undefined;
-  if (hasCurseKey === hasRandomKinds) {
-    error(path, "must specify exactly one of 'curse' (named curse) or 'randomKinds' (random curse kinds)");
+  const hasSource = operation.source !== undefined;
+  if ((+hasCurseKey) + (+hasRandomKinds) + (+hasSource) !== 1) {
+    error(path, "must specify exactly one of 'curse' (named curse), 'randomKinds' (random curse kinds), or 'source: handMoves'");
+  }
+  if (hasSource) {
+    if (operation.source !== 'handMoves') {
+      error(`${path}.source`, "must equal 'handMoves'");
+    }
+    if (operation.stacks !== undefined || operation.duration !== undefined) {
+      error(`${path}.source`, 'handMoves applies each curse at its face default; stacks/duration are not accepted');
+    }
+    if (operation.amount !== undefined) error(`${path}.amount`, 'is not accepted for handMoves');
   }
   if (hasCurseKey) {
     if (!CURSE_KEYS.has(operation.curse)) {
-      error(`${path}.curse`, "must be one of 'bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban', 'burn'");
+      error(`${path}.curse`, "must be one of 'bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban', 'burn', 'atkDown'");
     } else if (STACKING_CURSE_KEYS.has(operation.curse)) {
       if (!isPositiveInteger(operation.stacks)) {
         error(`${path}.stacks`, 'must be a positive integer for stacking curses (bleed/poison)');
       }
       if (operation.duration !== undefined) {
         error(`${path}.duration`, 'is not accepted for stacking curses (bleed/poison) — declare stacks instead');
+      }
+    } else if (operation.curse === 'atkDown') {
+      // M2：atkDown 计时型 + amount 扣减量必填（割蚀「降低 2 攻，持续 3 回合」）
+      if (!isPositiveInteger(operation.duration)) {
+        error(`${path}.duration`, 'must be a positive integer for atkDown');
+      }
+      if (!isPositiveInteger(operation.amount)) {
+        error(`${path}.amount`, 'must be a positive integer attack reduction for atkDown');
+      }
+      if (operation.stacks !== undefined) {
+        error(`${path}.stacks`, 'is not accepted for atkDown — declare duration and amount instead');
       }
     } else if (!isPositiveInteger(operation.duration)) {
       error(`${path}.duration`, 'must be a positive integer for timed curses');
@@ -260,7 +395,10 @@ function validateCurseOperation(operation, path, error) {
       error(`${path}.stacks`, 'randomKinds applies one stack of each drawn kind; stacks/duration are not accepted');
     }
   }
-  if (!CURSE_TARGET_KEYS.has(operation.target)) {
+  if (operation.pick !== undefined && operation.pick !== 'new') {
+    error(`${path}.pick`, "must equal 'new' when provided");
+  }
+  if (!hasSource && operation.bindTarget === undefined && !CURSE_TARGET_KEYS.has(operation.target)) {
     error(`${path}.target`, "must be 'chosenEnemy', 'allEnemies', 'randomEnemy', or 'self'");
   }
   if (operation.double !== undefined && operation.double !== true) {
@@ -296,7 +434,8 @@ function validateEffectOperation(operation, card, path, op, error) {
     if (operation.amount !== undefined) {
       if (!isPositiveInteger(operation.amount)) {
         error(`${path}.amount`, 'must be a positive integer');
-      } else if (typeof card?.heal === 'number' && Number.isFinite(card.heal) && Number(card.heal) !== operation.amount) {
+      } else if (typeof card?.heal === 'number' && Number.isFinite(card.heal) && Number(card.heal) !== operation.amount
+        && Number(card.heal) !== 0) {
         error(`${path}.amount`, `must equal card.heal (${card.heal}) when the field is declared`);
       }
     }
@@ -315,12 +454,18 @@ function validateEffectOperation(operation, card, path, op, error) {
     return;
   }
   if (op === 'armor') {
-    const sources = ['amountField', 'amount'].filter(field => operation[field] !== undefined);
+    const sources = ['amountField', 'amount', 'priceOf'].filter(field => operation[field] !== undefined);
     if (sources.length > 1) {
-      error(path, "must specify at most one of 'amountField', 'amount'");
+      error(path, "must specify at most one of 'amountField', 'amount', 'priceOf'");
     }
     if (sources.length === 0 && operation.guard === undefined) {
-      error(path, "must declare an amount (amountField/amount) or guard: true");
+      error(path, "must declare an amount (amountField/amount/priceOf) or guard: true");
+    }
+    if (operation.priceOf !== undefined && operation.priceOf !== 'discovered') {
+      error(`${path}.priceOf`, "must equal 'discovered' (armor equals the discovered card's price)");
+    }
+    if (operation.consumeEquip !== undefined && operation.consumeEquip !== true) {
+      error(`${path}.consumeEquip`, 'must equal true when provided');
     }
     if (operation.amountField !== undefined) {
       if (operation.amountField !== 'armor') {
@@ -333,7 +478,8 @@ function validateEffectOperation(operation, card, path, op, error) {
     if (operation.amount !== undefined) {
       if (!isPositiveInteger(operation.amount)) {
         error(`${path}.amount`, 'must be a positive integer');
-      } else if (typeof card?.armor === 'number' && Number.isFinite(card.armor) && Number(card.armor) !== operation.amount) {
+      } else if (typeof card?.armor === 'number' && Number.isFinite(card.armor) && Number(card.armor) !== operation.amount
+        && Number(card.armor) !== 0) {
         error(`${path}.amount`, `must equal card.armor (${card.armor}) when the field is declared`);
       }
     }
@@ -345,10 +491,22 @@ function validateEffectOperation(operation, card, path, op, error) {
     }
     return;
   }
-  // draw
-  const sources = ['amountField', 'amount', 'untilHandN'].filter(field => operation[field] !== undefined);
+  // draw：M1 起四源选一（amountField / amount / untilHandN / range 区间随机张数）
+  // M2：perCurseKinds 第五源——按目标身负诅咒种类数抽牌（深渊诅咒）；filter 牌库定向抽取
+  const sources = ['amountField', 'amount', 'untilHandN', 'range', 'perCurseKinds'].filter(field => operation[field] !== undefined);
   if (sources.length !== 1) {
-    error(path, "must specify exactly one source among 'amountField', 'amount', 'untilHandN'");
+    error(path, "must specify exactly one source among 'amountField', 'amount', 'untilHandN', 'range', 'perCurseKinds'");
+  }
+  if (operation.perCurseKinds !== undefined && operation.perCurseKinds !== true) {
+    error(`${path}.perCurseKinds`, 'must equal true when provided');
+  }
+  if (operation.filter !== undefined) {
+    // M2：draw.filter——牌库定向抽取（武装「从牌库中抽取 2 张装备牌」，deckDraw type 口径）
+    const drawFilter = operation.filter;
+    if (!isRecord(drawFilter) || !hasOnlyKeys(drawFilter, new Set(['type'])) || Object.keys(drawFilter).length === 0 ||
+        (drawFilter.type !== undefined && (typeof drawFilter.type !== 'string' || !drawFilter.type.trim()))) {
+      error(`${path}.filter`, "must be { type: non-empty card type }");
+    }
   }
   if (operation.amountField !== undefined) {
     if (operation.amountField !== 'draw') {
@@ -361,12 +519,16 @@ function validateEffectOperation(operation, card, path, op, error) {
   if (operation.amount !== undefined) {
     if (!isPositiveInteger(operation.amount)) {
       error(`${path}.amount`, 'must be a positive integer');
-    } else if (typeof card?.draw === 'number' && Number.isFinite(card.draw) && Number(card.draw) !== operation.amount) {
+    } else if (typeof card?.draw === 'number' && Number.isFinite(card.draw) && Number(card.draw) !== operation.amount
+        && Number(card.draw) !== 0) {
       error(`${path}.amount`, `must equal card.draw (${card.draw}) when the field is declared`);
     }
   }
   if (operation.untilHandN !== undefined && !isPositiveInteger(operation.untilHandN)) {
     error(`${path}.untilHandN`, 'must be a positive integer');
+  }
+  if (operation.range !== undefined && !isRangePair(operation.range)) {
+    error(`${path}.range`, 'must be a two-element [min, max] pair of nonnegative integers with min <= max');
   }
   if (operation.handOps !== undefined) {
     const handOps = operation.handOps;
@@ -393,8 +555,28 @@ function validatePendingOperation(operation, path, op, error) {
     if (operation.act !== undefined && !['play', 'playKeep', 'dup', 'zeroCost', 'decay', 'noInfuse'].includes(operation.act)) {
       error(`${path}.act`, "must be 'play', 'playKeep', 'dup', 'zeroCost', 'decay', or 'noInfuse'");
     }
-    if (operation.filter !== undefined && !isRecord(operation.filter)) {
-      error(`${path}.filter`, 'must be an object when provided');
+    if (operation.filter !== undefined) {
+      // M1：filter 基础扩展——在池谓词上叠加约束（类型 / 费用等于 / 费用上限）。
+      // 键位先行放行并逐键校验；消费进度由 capability 表收口（Wave1 只消费
+      // cost/costMax），未知键仍拒绝防静默不生效。
+      const filter = operation.filter;
+      if (!isRecord(filter) || !hasOnlyKeys(filter, ACQUIRE_FILTER_KEYS) || Object.keys(filter).length === 0) {
+        error(`${path}.filter`, `must be a non-empty object with keys among ${[...ACQUIRE_FILTER_KEYS].map(k => `'${k}'`).join(', ')}`);
+      } else {
+        if (filter.type !== undefined && (typeof filter.type !== 'string' || !filter.type.trim())) {
+          error(`${path}.filter.type`, 'must be a non-empty card type when provided');
+        }
+        if (filter.cost !== undefined && !isNonnegativeInteger(filter.cost)) {
+          error(`${path}.filter.cost`, 'must be a nonnegative integer');
+        }
+        if (filter.costMax !== undefined && !isNonnegativeInteger(filter.costMax)) {
+          error(`${path}.filter.costMax`, 'must be a nonnegative integer');
+        }
+        if (filter.exceptIds !== undefined && (!Array.isArray(filter.exceptIds) || !filter.exceptIds.length ||
+            filter.exceptIds.some(id => typeof id !== 'string' || !id.trim()))) {
+          error(`${path}.filter.exceptIds`, 'must be a non-empty array of card ids');
+        }
+      }
     }
     return;
   }
@@ -415,6 +597,10 @@ function validatePendingOperation(operation, path, op, error) {
     return;
   }
   if (op === 'execute') {
+    // M3：what——对选中目标施放指定攻击而非消灭（'fireball' 火球 / 'starterAttack' 初始攻击）
+    if (operation.what !== undefined && !['fireball', 'starterAttack'].includes(operation.what)) {
+      error(`${path}.what`, "must be 'fireball' or 'starterAttack'");
+    }
     if (operation.cap !== undefined) {
       const cap = operation.cap;
       if (!isRecord(cap) || !hasOnlyKeys(cap, new Set(['atk', 'maxHpBelow'])) || Object.keys(cap).length === 0 ||
@@ -425,6 +611,16 @@ function validatePendingOperation(operation, path, op, error) {
     }
     if (operation.count !== undefined && !isPositiveInteger(operation.count)) {
       error(`${path}.count`, 'must be a positive integer');
+    }
+    // M2：perCurseKinds——消灭数量动态锚定目标诅咒种类数（深渊诅咒同款计数口径）
+    if (operation.perCurseKinds !== undefined && operation.perCurseKinds !== true) {
+      error(`${path}.perCurseKinds`, 'must equal true when provided');
+    }
+    if (operation.perCurseStacks !== undefined && operation.perCurseStacks !== true) {
+      error(`${path}.perCurseStacks`, 'must equal true when provided');
+    }
+    if (operation.perCurseKinds === true && operation.perCurseStacks === true) {
+      error(path, 'perCurseKinds and perCurseStacks are mutually exclusive');
     }
     if (operation.onKill !== undefined && !isRecord(operation.onKill)) {
       error(`${path}.onKill`, 'must be an object when provided');
@@ -479,14 +675,57 @@ function validateOperation(operation, card, path, error) {
   }
   if (!hasOnlyKeys(operation, ON_PLAY_OPERATION_KEYS)) error(path, 'contains an unknown parameter');
   if (typeof operation.op !== 'string' ||
-      (!['damage', 'armor', 'heal', 'draw', 'status', 'discover', 'curse'].includes(operation.op) &&
+      (!['damage', 'armor', 'heal', 'draw', 'status', 'discover', 'curse', 'cleanse', 'stealAtk', 'noDrawNext',
+        'foeFight', 'copyRandom'].includes(operation.op) &&
         !PENDING_ONPLAY_OPS.has(operation.op))) {
     error(`${path}.op`, 'unknown onPlay operation');
     return;
   }
   if (operation.op === 'damage') validateDamageOperation(operation, card, path, error);
   else if (operation.op === 'curse') validateCurseOperation(operation, path, error);
-  else if (operation.op === 'status') {
+  else if (operation.op === 'cleanse') {
+    // M1：净化——Wave1 仅支持 target:'self'（清除自身全部诅咒；净化敌方无卡面需求）
+    for (const key of Object.keys(operation)) {
+      if (!CLEANSE_ALLOWED_KEYS.has(key)) error(`${path}.${key}`, 'is not accepted for cleanse operations');
+    }
+    if (operation.target !== 'self') {
+      error(`${path}.target`, "must be 'self' (cleanse only supports purifying yourself in wave 1)");
+    }
+  } else if (operation.op === 'stealAtk') {
+    // M2：偷取攻击——amount 固定夺取量 / capTo 压至阈值（影噬「偷取攻击力至 1 点」）二选一；
+    // duration 缺省 1（1 回合后归还，enemy-phase 既有偷取归还管线）
+    for (const key of Object.keys(operation)) {
+      if (!STEAL_ATK_ALLOWED_KEYS.has(key)) error(`${path}.${key}`, 'is not accepted for stealAtk operations');
+    }
+    const stealSources = ['amount', 'capTo'].filter(field => operation[field] !== undefined);
+    if (stealSources.length !== 1) {
+      error(path, "must specify exactly one of 'amount' (flat steal) or 'capTo' (reduce to threshold)");
+    }
+    if (operation.amount !== undefined && !isPositiveInteger(operation.amount)) {
+      error(`${path}.amount`, 'must be a positive integer');
+    }
+    if (operation.capTo !== undefined && !isNonnegativeInteger(operation.capTo)) {
+      error(`${path}.capTo`, 'must be a nonnegative integer');
+    }
+    if (operation.duration !== undefined && !isPositiveInteger(operation.duration)) {
+      error(`${path}.duration`, 'must be a positive integer');
+    }
+  } else if (operation.op === 'noDrawNext') {
+    // M2：下回合无法抽牌（破浪斩）——无参
+    for (const key of Object.keys(operation)) {
+      if (key !== 'op') error(`${path}.${key}`, 'is not accepted for noDrawNext operations');
+    }
+  } else if (operation.op === 'foeFight') {
+    // M3：敌对敌互殴（扰敌）——可选 count（默认 2 名敌人参战）
+    for (const key of Object.keys(operation)) {
+      if (!FOE_FIGHT_ALLOWED_KEYS.has(key)) error(`${path}.${key}`, 'is not accepted for foeFight operations');
+    }
+  } else if (operation.op === 'copyRandom') {
+    // M3：随机复制一张手牌（刀剑形态「回合开始时获得一张随机手牌的复制」）
+    for (const key of Object.keys(operation)) {
+      if (!COPY_RANDOM_ALLOWED_KEYS.has(key)) error(`${path}.${key}`, 'is not accepted for copyRandom operations');
+    }
+  } else if (operation.op === 'status') {
     for (const key of Object.keys(operation)) {
       if (!STATUS_ALLOWED_KEYS.has(key)) error(`${path}.${key}`, 'is not accepted for status operations');
     }
@@ -539,16 +778,18 @@ function validateEquipRules(equip, card, error) {
         const aura = passive.aura;
         if (!isRecord(aura) || !hasOnlyKeys(aura, EQUIP_AURA_KEYS) || Object.keys(aura).length === 0 ||
             (aura.atk !== undefined && !Number.isInteger(aura.atk)) ||
-            (aura.spellPower !== undefined && !Number.isInteger(aura.spellPower))) {
-          error('rules.equip.passive.aura', "must be a non-empty object with integer 'atk' and/or 'spellPower'");
+            (aura.spellPower !== undefined && !Number.isInteger(aura.spellPower)) ||
+            (aura.deckCap !== undefined && !Number.isInteger(aura.deckCap))) {
+          error('rules.equip.passive.aura', "must be a non-empty object with integer 'atk', 'spellPower', or 'deckCap'");
         }
       }
       if (passive.cond !== undefined) {
         const cond = passive.cond;
+        // M3：vsFreeze 数值化——对冰冻目标伤害加成量（寒冰剑「对冰冻角色伤害 +2」）
         if (!isRecord(cond) || !hasOnlyKeys(cond, EQUIP_COND_KEYS) || Object.keys(cond).length === 0 ||
             (cond.hasCurse !== undefined && cond.hasCurse !== true) ||
-            (cond.vsFreeze !== undefined && cond.vsFreeze !== true)) {
-          error('rules.equip.passive.cond', "must be a non-empty object with 'hasCurse: true' and/or 'vsFreeze: true'");
+            (cond.vsFreeze !== undefined && (!Number.isInteger(cond.vsFreeze) || cond.vsFreeze < 1))) {
+          error('rules.equip.passive.cond', "must be a non-empty object with 'hasCurse: true' and/or a positive integer 'vsFreeze' bonus");
         }
       }
     }
@@ -607,8 +848,22 @@ export function validateCardRules(card) {
     } else {
       if (!hasOnlyKeys(triggers, TRIGGER_KEYS)) error('rules.triggers', 'contains an unknown trigger');
       for (const triggerKey of Object.keys(triggers)) {
+        if (triggerKey === 'duration') {
+          // M2：容器级 duration——非 onPlay trigger 持续 N 次触发后过期（花瓣法阵「持续 3 回合」）
+          if (!isPositiveInteger(triggers.duration)) error('rules.triggers.duration', 'must be a positive integer');
+          continue;
+        }
+        if (triggerKey === 'replay') {
+          // M3：容器级 replay——打出后整卡重跑（急行军「效果触发 2 次」规则化）
+          const replay = triggers.replay;
+          if (!isRecord(replay) || !hasOnlyKeys(replay, new Set(['on', 'times'])) ||
+              !['lastHand'].includes(replay.on) || !isPositiveInteger(replay.times)) {
+            error('rules.triggers.replay', "must be { on: 'lastHand', times: positive integer }");
+          }
+          continue;
+        }
         if (triggerKey !== 'onPlay') {
-          // G13 时点触发器：op 形状先校验，运行时由 resolveCardSteps 守卫（pending throw）
+          // G13 时点触发器：op 形状先校验，运行时由 battle.triggers.m2.js runner 结算
           validateOperationArray(triggers[triggerKey], card, `rules.triggers.${triggerKey}`, error);
         }
       }
@@ -638,7 +893,7 @@ export function validateCardRules(card) {
           const curseKinds = new Set();
           operations.forEach((operation, index) => {
             if (!isRecord(operation)) return;
-            if (['heal', 'armor', 'draw'].includes(operation.op)) {
+            if (['heal', 'armor', 'draw', 'cleanse'].includes(operation.op)) {
               if (operationKinds.has(operation.op)) error(`rules.triggers.onPlay[${index}].op`, 'duplicate operation kind is unsupported');
               operationKinds.add(operation.op);
             }
@@ -657,19 +912,34 @@ export function validateCardRules(card) {
             error('rules.triggers.onPlay', 'field-anchored heal/armor/draw cannot be combined with v2 operations');
           }
           // —— 卡面字段一致性 ——
+          // 空 onPlay 明确声明「打出时无效果，其他触发点承接」；字段仍须由同卡
+          // onTurnStart/equip 等真实消费器声明，不能借空数组保留未消费的卡面字段。
           // 注能字段在任何结构化 onPlay 中都不允许保留（v1 约定延续：注能门由描述句承担）
           if (card?.infuse !== undefined && Number(card.infuse) !== 0) {
             error('rules.triggers.onPlay', 'onPlay cannot preserve card.infuse');
           }
-          const declaresField = (op, field) => operations.some(operation => isRecord(operation) && operation.op === op &&
-            (operation.amountField === field ||
-              (operation.amount !== undefined && typeof card?.[field] === 'number' && Number(card[field]) === operation.amount)));
+          // M3：动态源豁免——draw 的 range/perCurseKinds/untilHandN 也是「声明消费了卡面字段」的
+          // 合法形态（摸索「抽2-3张牌」/深渊诅咒「每有1种诅咒抽1张」），不再强制 amount 精确匹配
+          const otherTriggerOps = Object.entries(triggers).filter(([key]) => key !== 'onPlay')
+            .flatMap(([, value]) => Array.isArray(value) ? value : []);
+          const equip = rules.equip;
+          const equipOps = isRecord(equip) ? ['onEquip', 'battleStart'].flatMap(key =>
+            Array.isArray(equip[key]) ? equip[key] : []).concat(
+              isRecord(equip.skill) && Array.isArray(equip.skill.ops) ? equip.skill.ops : []) : [];
+          const declaringOperations = [...operations, ...otherTriggerOps, ...equipOps];
+          const declaresField = (op, field) => declaringOperations.some(operation => isRecord(operation) && (
+            (operation.op === op && (operation.amountField === field ||
+              (operation.amount !== undefined && typeof card?.[field] === 'number' && Number(card[field]) === operation.amount) ||
+              (field === 'draw' && (operation.range !== undefined || operation.perCurseKinds !== undefined ||
+                operation.untilHandN !== undefined)))) ||
+            (field === 'armor' && operation.op === 'damage' && operation.onKill?.armor === card?.armor)));
           for (const field of ['heal', 'armor', 'draw']) {
             if (card?.[field] !== undefined && Number(card[field]) !== 0 && !declaresField(field, field)) {
               error('rules.triggers.onPlay', `onPlay must declare card.${field}`);
             }
           }
-          if (!damageOperations.length && card?.dmg !== undefined && Number(card.dmg) !== 0) {
+          const hasDamageDeclaration = declaringOperations.some(operation => isRecord(operation) && operation.op === 'damage');
+          if (!hasDamageDeclaration && card?.dmg !== undefined && Number(card.dmg) !== 0) {
             error('rules.triggers.onPlay', 'onPlay without a damage operation cannot preserve card.dmg');
           }
           if (!damageOperations.length && card?.dmgType === 'attack' &&
@@ -680,11 +950,25 @@ export function validateCardRules(card) {
               (!SUPPORTED_DAMAGE_TYPES.has(card?.dmgType) || !['武术', '法术'].includes(card?.type))) {
             error('rules.triggers.onPlay', 'damage requires a supported dmgType and a damage-capable card type');
           }
-          // —— battle.target 交叉契约（v1 保留 + curse / randomEnemy 扩展）——
+          // —— battle.target 交叉契约（v1 保留 + curse / randomEnemy 扩展 + M1 混合放行）——
+          // M1 混合目标契约（孢子城墙/恶魔之力/坚冰结界式「敌方 op + 自身字面量效果 op」）：
+          // battle.target 按主体效果声明 side:'enemy'，自身域效果 op（heal/armor/draw 的字面量
+          // 源与 cleanse）在混排时免 side/area 强制——结算本就自指（heal/armor/draw/cleanse
+          // 恒作用于玩家自身），解释器无需分支。field-anchored 效果 op 不参与放行（沿用上方
+          // 「damage 不能与 heal/armor/draw 混排」的 v1/v2 口径）。
           const declaredTarget = rules.battle?.target;
+          const enemyDomainOps = operations.filter(operation => isRecord(operation) &&
+            (operation.op === 'damage' || operation.op === 'stealAtk' ||
+              (operation.op === 'curse' && operation.target !== 'self')));
+          const selfLiteralOps = operations.filter(operation => isRecord(operation) &&
+            (operation.op === 'cleanse' || operation.op === 'noDrawNext' || operation.op === 'extraTurn' ||
+              operation.op === 'registerRule' || operation.op === 'summon' ||
+              (['heal', 'armor', 'draw'].includes(operation.op) && operation.amountField === undefined)));
+          const mixedSelfEffects = declaredTarget?.side === 'enemy' && enemyDomainOps.length > 0 &&
+            selfLiteralOps.length > 0;
           for (const operation of operations) {
             if (!isRecord(operation)) continue;
-            if (operation.op === 'damage' || operation.op === 'curse') {
+            if (operation.op === 'damage' || operation.op === 'curse' || operation.op === 'stealAtk') {
               const operationTarget = operation.target;
               if (operationTarget === 'chosenEnemy' || operationTarget === 'randomEnemy') {
                 if (declaredTarget?.side !== 'enemy') error('rules.battle.target.side', `${operationTarget} requires side 'enemy'`);
@@ -699,8 +983,15 @@ export function validateCardRules(card) {
                 if (declaredTarget?.area !== false) error('rules.battle.target.area', 'self requires area false');
               }
             } else if (['heal', 'armor', 'draw'].includes(operation.op)) {
-              if (declaredTarget?.side !== 'self') error('rules.battle.target.side', `${operation.op} requires side 'self'`);
-              if (declaredTarget?.area !== false) error('rules.battle.target.area', `${operation.op} requires area false`);
+              if (!mixedSelfEffects) {
+                if (declaredTarget?.side !== 'self') error('rules.battle.target.side', `${operation.op} requires side 'self'`);
+                if (declaredTarget?.area !== false) error('rules.battle.target.area', `${operation.op} requires area false`);
+              }
+            } else if (operation.op === 'cleanse') {
+              if (!mixedSelfEffects) {
+                if (declaredTarget?.side !== 'self') error('rules.battle.target.side', 'cleanse requires side self');
+                if (declaredTarget?.area !== false) error('rules.battle.target.area', 'cleanse requires area false');
+              }
             } else if (operation.op === 'status') {
               if (declaredTarget?.side !== null) error('rules.battle.target.side', 'status requires side null');
               if (declaredTarget?.area !== true) error('rules.battle.target.area', 'status requires area true');
@@ -756,31 +1047,44 @@ export function validateCardRules(card) {
       if (!hasOnlyKeys(bag, BAG_KEYS)) error('rules.bag', 'contains an unknown field');
       if (!Object.hasOwn(bag, 'use')) {
         error('rules.bag.use', 'is required when rules.bag is declared');
-      } else if (!Array.isArray(bag.use)) {
-        error('rules.bag.use', 'expected a single-operation array');
-      } else if (bag.use.length !== 1) {
-        error('rules.bag.use', 'must contain exactly one operation');
+      } else if (!Array.isArray(bag.use) || bag.use.length === 0) {
+        error('rules.bag.use', 'expected a non-empty operation array');
       } else {
-        const operation = bag.use[0];
-        const path = 'rules.bag.use[0]';
-        if (!isRecord(operation)) {
-          error(path, 'expected an operation object');
-        } else if (operation.op === 'heal') {
-          if (!hasOnlyKeys(operation, new Set(['op', 'amountField']))) error(path, 'contains an unknown parameter');
-          if (operation.amountField !== 'heal') error(`${path}.amountField`, "must reference card field 'heal'");
-          if (card?.type !== '道具') error('rules.bag.use', "bag use requires card.type to equal '道具'");
-          if (typeof card?.heal !== 'number' || !Number.isFinite(card.heal) || card.heal <= 0) {
-            error(`${path}.amountField`, 'card.heal must be a finite positive number');
+        // M3：bag.use 扩为多操作数组（恢复药水=heal+energy），复用 onPlay op 校验；
+        // op 支持集由 capability 收口（战斗/地图双消费端按 op 语义各自承载）
+        const BAG_OP_KEYS = new Set(['op', 'target', 'amountField', 'amount', 'range', 'upTo', 'curse', 'stacks',
+          'duration', 'key', 'n', 'pool', 'dest', 'cap', 'count', 'perCurseKinds', 'what', 'schedule']);
+        bag.use.forEach((operation, index) => {
+          const path = `rules.bag.use[${index}]`;
+          if (!isRecord(operation)) {
+            error(path, 'expected an operation object');
+            return;
           }
-        } else if (operation.op === 'restoreConsumed') {
-          if (!hasOnlyKeys(operation, new Set(['op', 'amount']))) error(path, 'contains an unknown parameter');
-          if (card?.type !== '道具') error('rules.bag.use', "bag use requires card.type to equal '道具'");
-          if (!Number.isInteger(operation.amount) || operation.amount <= 0) {
+          if (typeof operation.op !== 'string' || !BAG_SUPPORTED_OPS.has(operation.op)) {
+            error(`${path}.op`, `unknown bag use operation (supported: ${[...BAG_SUPPORTED_OPS].join(', ')})`);
+            return;
+          }
+          for (const key of Object.keys(operation)) {
+            if (!BAG_OP_KEYS.has(key)) error(`${path}.${key}`, 'is not accepted for bag use operations');
+          }
+          if (operation.op === 'heal') {
+            if (operation.amountField !== undefined && operation.amountField !== 'heal') {
+              error(`${path}.amountField`, "must reference card field 'heal'");
+            }
+            // amountField 引用形态要求卡面字段存在（道具卡 heal 字段）
+            if (operation.amountField === 'heal' && operation.amount === undefined &&
+                (typeof card?.heal !== 'number' || !Number.isFinite(card.heal) || card.heal <= 0)) {
+              error(`${path}.amountField`, 'card.heal must be a finite positive number');
+            }
+            if (operation.amountField !== undefined && operation.amount !== undefined) {
+              error(path, "specify either amountField or amount, not both");
+            }
+          }
+          if (operation.op === 'restoreConsumed' && (!Number.isInteger(operation.amount) || operation.amount <= 0)) {
             error(`${path}.amount`, 'must be a positive integer');
           }
-        } else {
-          error(`${path}.op`, 'unknown bag use operation');
-        }
+        });
+        if (card?.type !== '道具') error('rules.bag.use', "bag use requires card.type to equal '道具'");
       }
     }
   }
@@ -794,6 +1098,22 @@ export function validateCardRules(card) {
   }
   const battle = rules.battle;
   if (!hasOnlyKeys(battle, BATTLE_KEYS)) error('rules.battle', 'contains an unknown field');
+
+  if (battle.hosted !== undefined) {
+    if (!Array.isArray(battle.hosted) || battle.hosted.length === 0) {
+      error('rules.battle.hosted', 'expected a non-empty array of hosted rule names');
+    } else {
+      const seenHosted = new Set();
+      battle.hosted.forEach((name, index) => {
+        if (typeof name !== 'string' || !HOSTED_BATTLE_RULES.has(name) || HOSTED_CARD_RULES[card?.id] !== name) {
+          error(`rules.battle.hosted[${index}]`, `unknown hosted rule '${String(name)}'`);
+        } else if (seenHosted.has(name)) {
+          error(`rules.battle.hosted[${index}]`, 'duplicate hosted rule name');
+        }
+        seenHosted.add(name);
+      });
+    }
+  }
 
   if (battle.target !== undefined) {
     const target = battle.target;
@@ -827,11 +1147,11 @@ export function validateCardRules(card) {
           if (seenKinds.has(requirement.kind)) error(`${path}.kind`, 'duplicate kind is unsupported');
           seenKinds.add(requirement.kind);
         }
-        if (!['unplayable', 'deckOnly', 'handCards'].includes(requirement.kind)) {
+        if (!['unplayable', 'deckOnly', 'handCards', 'infused'].includes(requirement.kind)) {
           error(`${path}.kind`, 'unknown requirement kind');
           return;
         }
-        if (requirement.kind === 'unplayable' || requirement.kind === 'deckOnly') {
+        if (requirement.kind === 'unplayable' || requirement.kind === 'deckOnly' || requirement.kind === 'infused') {
           if (Object.keys(requirement).some(key => key !== 'kind')) {
             error(path, `${requirement.kind} does not accept parameters`);
           }
@@ -868,8 +1188,17 @@ export function validateCardRules(card) {
         }
         // G8 扩充种类（typeCostRule / movesPlayedDiscount / handMorphZeroFee）按设计文档仅做键位设计，
         // 本波不进白名单：消费点 battle.card-cost.js 不在本波属地内，放行会造成静默不生效。
-        if (!['previousCardTypeFree', 'martialPlayedDiscount', 'armorZeroFree', 'consumedSpellDiscount'].includes(modifier.kind)) {
+        if (!['previousCardTypeFree', 'martialPlayedDiscount', 'armorZeroFree', 'consumedSpellDiscount',
+          'movesPlayedDiscount'].includes(modifier.kind)) {
           error(`${path}.kind`, 'unknown cost modifier kind');
+          return;
+        }
+        // M2：movesPlayedDiscount——「本回合每打出一张招式，本牌费用 -N」（消费点 battle.card-cost.js）
+        if (modifier.kind === 'movesPlayedDiscount') {
+          if (modifier.type !== undefined) error(`${path}.type`, 'is not accepted for this kind');
+          if (!Number.isInteger(modifier.amount) || modifier.amount < 1) {
+            error(`${path}.amount`, 'must be a positive integer');
+          }
           return;
         }
         if (modifier.kind === 'previousCardTypeFree') {

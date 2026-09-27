@@ -35,6 +35,12 @@ export function calculateEffectiveCardCost(card, uid, state) {
     if (martialDiscount) {
       return Math.max(0, (+card.cost || 0) - state.playedMartialThisTurn * (+martialDiscount.amount || 0));
     }
+    // M2（2026-09-27）：movesPlayedDiscount——「本回合每打出一张招式，本牌费用 -N」
+    //（招式＝武术+法术，与 playedMovesThisTurn 打出侧计数同口径）
+    const movesDiscount = modifiers.find(item => item.kind === 'movesPlayedDiscount');
+    if (movesDiscount) {
+      return Math.max(0, (+card.cost || 0) - (state.playedMovesThisTurn || 0) * (+movesDiscount.amount || 0));
+    }
     if (modifiers.some(item => item.kind === 'armorZeroFree') && state.armor === 0) return 0;
     const consumedDiscount = modifiers.find(item => item.kind === 'consumedSpellDiscount');
     if (consumedDiscount && state.consumedSpellCount > 0) {

@@ -213,7 +213,7 @@ describe('E8 migrated rules against recorded legacy outcomes', () => {
       expect(outcomes.slice(1)).toEqual([outcomes[0], outcomes[0], outcomes[0]]);
     }
   });
-  it.each(IDS)('%s preserves BOSS rejection and text-based battle bag behavior', async id => {
+  it.each(IDS)('%s preserves BOSS rejection and uses fields for structured battle bag behavior', async id => {
     for (const card of [oldCards.find(card => card.id === id), migratedCards.find(card => card.id === id)]) {
       const game = await start(card, { boss: true });
       const before = resources(game);
@@ -231,7 +231,7 @@ describe('E8 migrated rules against recorded legacy outcomes', () => {
       }
       const textProbe = await start({ ...card, heal: 77, desc: '回复 3 点生命。' }, { hand: false });
       BattleSession.commands.useItem('e8-card'); await idle();
-      expect(textProbe.healCalls).toEqual([3]);
+      expect(textProbe.healCalls).toEqual([card.rules ? 77 : 3]);
     }
   });
   it('does not rewrite an existing run copy when the catalogue gains rules', async () => {
@@ -262,7 +262,7 @@ describe('E8 conservative persistent backfill in isolated memory', () => {
     const save = vi.spyOn(cards, 'saveAll');
     cards.ensureE8FixedHealRules();
     expect(save).toHaveBeenCalledOnce(); expect(previous).toEqual(previousSnapshot);
-    expect(cards.all().map(({ rules, ...fields }) => fields)).toEqual(oldCards);
+    expect(cards.all().map(card => Object.fromEntries(Object.entries(card).filter(([key]) => key !== 'rules')))).toEqual(oldCards);
     expect(cards.all().every(card => card.rules?.bag?.use?.[0]?.op === 'heal')).toBe(true);
     expect(JSON.stringify(cards.CARDS_SYNC)).toBe(sync); expect(memory.getItem(MARKER)).toBe('1');
     const saved = memory.getItem(KEY); cards.ensureE8FixedHealRules();
@@ -325,8 +325,8 @@ describe('E8 conservative persistent backfill in isolated memory', () => {
     cards.ensureE8FixedHealRules(); expect(get(KEY)).toBe(raw); expect(get(MARKER)).toBeNull();
     expect(cards.all()).toEqual(oldCards);
   });
-  it.each([null, '[]', '{bad', '{}', '[null]', '[{"id":"same"},{"id":"same"}]'])
-    ('does not stamp an absent, empty, corrupt or ambiguous library: %s', async raw => {
+  it.each([null, '[]', '{bad', '{}', '[null]', '[{"id":"same"},{"id":"same"}]'])(
+    'does not stamp an absent, empty, corrupt or ambiguous library: %s', async raw => {
       const { cards, memory } = await isolatedLibrary(null);
       if (raw !== null) memory.setItem(KEY, raw);
       cards.ensureE8FixedHealRules(); expect(memory.getItem(MARKER)).toBeNull();

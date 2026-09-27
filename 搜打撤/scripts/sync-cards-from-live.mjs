@@ -48,6 +48,23 @@ const CARDS_MODULE_ORDER = [
   'cards.sync.js',         // syncSlice（依赖 consts/Random/DATA/schema/window.SDT）
   'cards.js',              // 壳：SDT.Cards 存取层 + ensureTabletop 播种链
 ];
+// cards.js 的 ensureTabletop 引用这些 import bindings。每个迁移模块拥有私有
+// MARKER/definitions 等同名常量，故逐模块 IIFE 隔离；只把被 cards.js 调用的函数
+// 作为全局桥接导出，模拟 ESM import，而不是把模块源码直接拼进同一词法作用域。
+const MIGRATION_MODULES = [
+  ['cards.sync.m1.js', 'ensureM1OnplayRules'],
+  ['cards.sync.m2.js', 'ensureM2OnplayRules'],
+  ['cards.sync.m3.js', 'ensureM3OnplayRules'],
+  ['cards.sync.m4.js', 'ensureM4EquipRules'],
+  ['cards.sync.m5.js', 'ensureM5DelayedRules'],
+  ['cards.sync.m6.js', 'ensureM6BagRules'],
+  ['cards.sync.m7.js', 'ensureM7EquipRules'],
+  ['cards.sync.m8.js', 'ensureM8RuleBackfill'],
+  ['cards.sync.m9.js', 'ensureM9HostedRules'],
+  ['cards.sync.m10.js', 'ensureM10HostedEquipmentRules'],
+  ['cards.sync.m11.js', 'ensureM11HostedRules'],
+];
+const CAPABILITY_MODULE = ['card-rules.capability.js', 'inspectCardRuleCapability'];
 
 function fail(message) { throw new Error(`[sync-cards] ${message}`); }
 function arg(name, argv) { const i = argv.indexOf(name); return i >= 0 ? argv[i + 1] : undefined; }
@@ -92,11 +109,25 @@ function stripModule(source, seenLines) {
 // 卡面渲染（cards.view.js）与 Random 等非数据依赖按「不渲染只取数据」口径补空实现。
 function sourceCardLibrary() {
   const seenLines = new Set();
-  const body = CARDS_MODULE_ORDER.map(name => {
+  const baseBody = CARDS_MODULE_ORDER.map(name => {
     const file = path.join(CARDS_DIR, name);
     if (!fs.existsSync(file)) fail(`卡库模块缺失: ${name}（六文件重构后的卡库真源在 game/src/cards/）`);
     return stripModule(fs.readFileSync(file, 'utf8'), seenLines);
-  }).join('\n;\n');
+  });
+  const migrationBody = MIGRATION_MODULES.map(([name, exportName]) => {
+    const file = path.join(CARDS_DIR, name);
+    if (!fs.existsSync(file)) fail(`迁移模块缺失: ${name}`);
+    const isolated = stripModule(fs.readFileSync(file, 'utf8'), new Set());
+    return `(() => {\n${isolated}\nglobalThis.${exportName} = ${exportName};\n})();`;
+  });
+  const [capabilityName, capabilityExport] = CAPABILITY_MODULE;
+  const capabilityFile = path.join(CARDS_DIR, capabilityName);
+  if (!fs.existsSync(capabilityFile)) fail(`卡牌规则能力模块缺失: ${capabilityName}`);
+  const capabilitySource = stripModule(fs.readFileSync(capabilityFile, 'utf8'), new Set());
+  const capabilityBody = `(() => {\n${capabilitySource}\nglobalThis.${capabilityExport} = ${capabilityExport};\n})();`;
+  // cards.js 壳初始化只声明/暴露 API；迁移仅在下方主动调用 ensureTabletop 时才运行。
+  // 因此 capability bridge 必须在调用 ensureTabletop 前建立。
+  const body = [...baseBody, capabilityBody, ...migrationBody].join('\n;\n');
   const sandbox = {
     console,
     window: { SDT: { Icons: { img: n => `[[icon:${n}]]`, TYPE_ART: {} } } },

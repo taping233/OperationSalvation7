@@ -146,7 +146,9 @@ describe('直接释放 / 直接施放类卡牌专项审计', () => {
   it('剑荡妖邪：手选的武术直接释放且不扣费', async () => {
     const frost = card('tt3-frostfall');
     if (!/直接释放/.test(frost.desc || '')) { console.log('（运行时版本无直接释放词条，跳过）'); return; }
-    const g = makeGame([frost, card('tt2-jianghu'), card('tt2-jianghu'), card('tt2-jianghu')], '侠客');
+    // 使用只有伤害的武术，避免江湖救急随机施放回能卡改变能量账目。
+    const strike = { id: 'direct-cast-strike', name: '直释测试斩', type: '武术', cost: 1, dmg: 1, dmgType: '物理', desc: '造成1点物理伤害' };
+    const g = makeGame([frost, strike, strike, strike], '侠客');
     BattleSession.start(g, [foeDef()], { isBoss: false, name: '直释审计' });
     await drain();
     const energyBefore = snap().energy;
@@ -160,7 +162,7 @@ describe('直接释放 / 直接施放类卡牌专项审计', () => {
       s = await drain();
     }
     const s2 = snap();
-    // 剑荡妖邪 2 费已扣；被释放的江湖救急（1 费）不应再扣
+    // 剑荡妖邪 2 费已扣；被直接释放的测试武术（1 费）不应再扣
     expect(s2.energy).toBe(energyBefore - 2);
     expect(s2.busy || s2.actionQueueLength > 0).toBe(false);
     endBattle(g);
