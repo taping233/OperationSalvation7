@@ -701,6 +701,12 @@ function createGameMenuController(deps) {
       const visible = document.getElementById('slotRestoreError');
       if (visible) { visible.hidden = false; visible.textContent = message; visible.tabIndex = -1; visible.focus(); }
     };
+    const returnToPicker = message => {
+      showTitle();
+      openSlotPicker();
+      restoreError(message);
+      return false;
+    };
     UI.act('newSlot', (d) => { if (!enteringSlot) launch(+d.slot, () => { SDT.Base.reset(+d.slot); runtime.openBaseHub('deploy'); }); });
     UI.act('enterSlot', async (d) => {
       if (enteringSlot) return false;
@@ -757,9 +763,7 @@ function createGameMenuController(deps) {
             const loaded = loadGame(slot);
             if (!loaded.ok) {
               RunStorage.issue(slot);
-              UI.log(`${loaded.message || '对局存档读取失败'}，原档已保留，已返回标题`, 'warn');
-              showTitle();
-              return false;
+              return returnToPicker(`${loaded.message || '对局存档读取失败'}；原档已保留，请重试进入该档位`);
             }
             return completed();
           }
@@ -774,9 +778,7 @@ function createGameMenuController(deps) {
           return completed();
         } catch {
           if (!currentContext() || (transition && !transition.isCurrent())) return false;
-          UI.log('[[icon:cross]] 进入档位失败，请重试；原档已保留', 'warn');
-          showTitle();
-          return false;
+          return returnToPicker('进入档位失败，请刷新页面后重试；原档已保留');
         } finally { enteringSlot = false; }
       });
     });

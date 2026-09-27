@@ -37,7 +37,7 @@ import {
 } from './battle.state.js';
 import { Random } from '../core/random.js';
 import * as Combat from './combat.js';
-import '../core/event-bus.js';
+import { emit as emitBattleEvent } from '../core/event-bus.js';
 import { calculateEffectiveCardCost, decayEffectiveCardCost, pocketSpellDiscountFor } from './battle.card-cost.js';
 import { calculateEnemyIntent } from './battle.intent.js';
 import { createBattleSnapshot, createBattleSnapshotSignature } from './battle.snapshot.js';
@@ -52,6 +52,13 @@ import { createBattleExecPlay } from './battle.exec-play.js';
 /* —— 自 battle.core 壳迁入的共享引擎件（原 head/tail，按原文件顺序）—— */
 const executionSession = createBattleExecutionSession();
 const { actionQueue, stagedDeathFx, handSelectQueue, choiceQueue } = executionSession;
+function warnCardRuleRejection(message) {
+  const battleToken = battleState.token;
+  G.log(message, 'warn');
+  // The full escaped rule diagnostic stays in the log; the view gets player copy.
+  const reason = message.startsWith('无法打出：规则格式非法') ? '规则格式非法' : '规则尚未支持';
+  emitBattleEvent('battle:rule-rejected', { battleToken, message: `无法打出：${reason}` });
+}
 /* P1-b 09-25 体检批 L 项：渲染请求按 rAF 合帧——同一帧内多次请求只渲染一次，
    语义保持「数据变更后下一帧画面必然最新」：flush 时取 getSnapshot() 的最新状态。
    无 rAF 环境（裸 node 冒烟等）退回同步渲染，保持旧行为。 */
@@ -1034,7 +1041,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     const entry = findCard(uid);
     if (!entry) return;
     const card = entry.card;
-    if (rejectUnsupportedCard(card, { warn: message => G.log(message, 'warn') })) return false;
+    if (rejectUnsupportedCard(card, { warn: warnCardRuleRejection })) return false;
     const why = unplayableReason(card);
     if (why) { G.log(`[[icon:cross]] 【${esc(card.name)}】无法打出：${why}`, 'warn'); return; }
     const effCost = effCostOf(card, uid);
@@ -1110,7 +1117,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     const entry = findCard(uid);
     if (!entry) return;
     const card = entry.card;
-    if (rejectUnsupportedCard(card, { warn: message => G.log(message, 'warn') })) return false;
+    if (rejectUnsupportedCard(card, { warn: warnCardRuleRejection })) return false;
     const infN = infuseOf(card);
     if (infN <= 0) return;
     const effCost = effCostOf(card, uid);
@@ -1184,6 +1191,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
 
   // —— 出牌结算长流程（queueCardExecution + execPlay）已拆出 battle.exec-play.js：工厂注入 + 一行转发 shim（具名导出面不变）——
   const execPlayFlow = createBattleExecPlay({
+    warnCardRuleRejection,
     requestBattleRender, findCard, matchHandSelectKey, fireConsumeTriggers, effCostOf,
     resolveInfusedFuel, runStagedSteps, consumeFireballSteps, resolveCardWithFeedback,
     takeSurge, registerEquip, summonAlly, applyKillRewards, poisonRandomFoe, applyImitate,

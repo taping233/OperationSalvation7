@@ -5,21 +5,27 @@ const deferred = () => {
   const promise = new Promise((yes, no) => { resolve = yes; reject = no; });
   return { promise, resolve, reject };
 };
-let game, UI, SDT, handlers, slot, gate, entered, battle, menu, scenes, saveGame, loadGame;
+let game, UI, SDT, handlers, slot, gate, entered, battle, menu, scenes, saveGame, loadGame, hasSavedRun, clickedAction;
 
 beforeEach(async () => {
   vi.resetModules(); vi.useFakeTimers();
-  document.body.innerHTML = '<div id="title"></div><div id="exitScr"></div><div id="ovBody"></div>';
+  document.body.innerHTML = '<div id="title"></div><div id="exitScr"></div><div id="overlay" hidden><div id="ovBody"></div></div>';
   localStorage.setItem('sdt-rmb-hint', '1');
   slot = 1; handlers = {}; gate = deferred(); entered = deferred();
+  hasSavedRun = true; clickedAction = null;
+  const overlay = document.getElementById('overlay');
+  overlay.addEventListener('click', event => {
+    const button = event.target.closest('button[data-act]');
+    if (button && !button.disabled) clickedAction = handlers[button.dataset.act]?.(button.dataset);
+  });
   game = { seed: 'same', discoveredPairs: new Set(), nestRunes: [], runActive: true,
     nestActive: false, layerIdx: 0, trackPos: 2, nestPos: 0, state: 'idle', ownedCards: [{}] };
   saveGame = vi.fn(); loadGame = vi.fn(() => ({ ok: true }));
   UI = { log: vi.fn(), refresh: vi.fn(), clearLog() {}, registerHelp() {}, helpBtn: () => '',
-    hideScreen() {}, showScreen() {}, act(name, fn) { handlers[name] = fn; },
-    hideOverlay: vi.fn(() => { document.getElementById('ovBody').innerHTML = ''; }),
-    showOverlay: vi.fn((_title, html) => { document.getElementById('ovBody').innerHTML = html; }),
-    el: { overlay: { hidden: true }, ovBody: document.getElementById('ovBody') } };
+    hideScreen(node) { node.hidden = true; }, showScreen(node) { node.hidden = false; }, act(name, fn) { handlers[name] = fn; },
+    hideOverlay: vi.fn(() => { overlay.hidden = true; document.getElementById('ovBody').innerHTML = ''; }),
+    showOverlay: vi.fn((_title, html) => { document.getElementById('ovBody').innerHTML = html; overlay.hidden = false; }),
+    el: { overlay, ovBody: document.getElementById('ovBody') } };
   const card = { id: 'test', name: 'test' };
   SDT = window.SDT = { game, UI, Sound: { music() {}, sfx() {} }, Icons: { img: () => '' },
     Art: { classArt: () => '', classFullArt: () => '', listSkins: () => [] },
@@ -50,7 +56,7 @@ beforeEach(async () => {
     runtime: { resize() {}, showRunTransition: scenes.showRunTransition, openBaseHub: vi.fn() },
     SLOT_COUNT: 1, esc: String, readSlot: () => null, loadGame, clearSlot() {}, saveGame,
     clearAllSlots() {}, getActiveSlot: () => slot, setActiveSlot: n => { slot = n; },
-    preflightRunMap: () => ({ ok: true }), RunStorage: { has: () => true, issue() {} }, ensureBattleReady });
+    preflightRunMap: () => ({ ok: true }), RunStorage: { has: () => hasSavedRun, issue() {} }, ensureBattleReady });
 });
 afterEach(() => { vi.useRealTimers(); vi.restoreAllMocks(); });
 
@@ -101,10 +107,14 @@ describe('E4 real async entry chains (render/storage ports stubbed)', () => {
   it.each(['resolve', 'reject'])('does not load or report an old slot after title exit (%s)', async outcome => {
     menu.startNewGame(); const request = handlers.enterSlot({ slot: 1 });
     handlers.flowContinue(); await entered.promise;
-    menu.showTitle(); UI.log.mockClear();
+    menu.showTitle(); UI.log.mockClear(); UI.showOverlay.mockClear();
+    const page = document.getElementById('ovBody').innerHTML;
     gate[outcome](new Error('offline')); expect(await request).toBe(false);
     expect(loadGame).not.toHaveBeenCalled(); expect(UI.log).not.toHaveBeenCalled();
     expect(game.state).toBe('title');
+    expect(UI.showOverlay).not.toHaveBeenCalled();
+    expect(document.getElementById('ovBody').innerHTML).toBe(page);
+    expect(document.getElementById('slotRestoreError')).toBeNull();
   });
 
   it('checks the real active slot after awaiting the loader', async () => {
@@ -123,11 +133,29 @@ describe('E4 real async entry chains (render/storage ports stubbed)', () => {
     handlers.flowContinue(); expect(await replacement).toBe(true);
   });
 
-  it('returns a current load failure to title without an unhandled rejection', async () => {
+  it.each(['module', 'load-result'])('shows a current %s failure in an actionable slot picker after clearing run ownership', async failure => {
     menu.startNewGame(); const request = handlers.enterSlot({ slot: 1 });
-    handlers.flowContinue(); await entered.promise; gate.reject(new Error('offline'));
-    expect(await request).toBe(false); expect(game.state).toBe('title');
-    expect(loadGame).not.toHaveBeenCalled();
+    handlers.flowContinue(); await entered.promise;
+    if (failure === 'module') gate.reject(new Error('offline'));
+    else { loadGame.mockReturnValueOnce({ ok: false, message: '测试路线恢复失败' }); gate.resolve(); }
+    expect(await request).toBe(false);
+    expect(game.runActive).toBe(false); expect(slot).toBeNull();
+    const alert = document.getElementById('slotRestoreError');
+    expect(alert).not.toBeNull();
+    expect(alert.hidden).toBe(false);
+    expect(game.state).toBe('modal');
+    expect(alert.textContent).toContain(failure === 'module' ? '进入档位失败，请刷新页面后重试' : '测试路线恢复失败');
+    expect(alert.textContent).toContain('原档已保留');
+    expect(document.getElementById('overlay').hidden).toBe(false);
+    const enterButton = document.querySelector('button[data-act="enterSlot"]');
+    expect(enterButton).not.toBeNull(); expect(enterButton.disabled).toBe(false);
+    if (failure === 'module') expect(loadGame).not.toHaveBeenCalled();
+    else expect(loadGame).toHaveBeenCalledExactlyOnceWith(1);
+    // Exercise the newly rendered button and its newly registered handler; no retry mock.
+    hasSavedRun = false;
+    enterButton.click(); handlers.flowContinue();
+    expect(await clickedAction).toMatchObject({ ok: true });
+    expect(slot).toBe(1);
   });
 
   it('dev boss failure does not inspect a missing battle or report success', async () => {

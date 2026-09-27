@@ -14,13 +14,14 @@ const R = () => SDT.MAP.rules;
 const alive = () => foes.filter(foe => !foe.dead);
 
 export function createBattleExecPlay({
+  warnCardRuleRejection = message => G.log(message, 'warn'),
   requestBattleRender, findCard, matchHandSelectKey, fireConsumeTriggers, effCostOf,
   resolveInfusedFuel, runStagedSteps, consumeFireballSteps, resolveCardWithFeedback,
   takeSurge, registerEquip, summonAlly, applyKillRewards, poisonRandomFoe, applyImitate,
   beginDartStrike, sweepDead, finish, processChoice, processDiscoverQueue, queueBattleAction,
 }) {
   function queueCardExecution(uid, card, fuelUids, target, freeCost, requirementsPaid = false, paymentUids = [], onResolved = null) {
-    if (rejectUnsupportedCard(card, { warn: message => G.log(message, 'warn') })) return false;
+    if (rejectUnsupportedCard(card, { warn: warnCardRuleRejection })) return false;
     const handRequirement = card?.rules?.battle?.requirements?.find(rule => rule.kind === 'handCards');
     if (handRequirement && !requirementsPaid) {
       const excludedUids = [...new Set([uid, ...(fuelUids || [])])];
@@ -56,7 +57,7 @@ export function createBattleExecPlay({
     try {
     throwIfActionCancelled(signal);
     // Recheck after queueing: rules may have changed before payment is committed.
-    if (rejectUnsupportedCard(card, { warn: message => G.log(message, 'warn') })) return false;
+    if (rejectUnsupportedCard(card, { warn: warnCardRuleRejection })) return false;
     const handRequirement = card?.rules?.battle?.requirements?.find(rule => rule.kind === 'handCards');
     if (handRequirement) {
       const excludedUids = new Set([uid, ...(fuelUids || [])]);

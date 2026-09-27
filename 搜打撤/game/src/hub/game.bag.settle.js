@@ -63,7 +63,9 @@ import { bagSlots } from './game.bag.bridge.js';
       UI.log('[[icon:cross]] 战后结算未保存，请重试；本场奖励不会重新发放', 'warn');
       game.state = settlement.slotId && win === true ? 'battleSettlement' : 'modal';
       UI.showOverlay('战后结算未完成', '<div class="ov-btns"><button class="ov-btn ok" data-act="battleSettleRetry">重试保存战后奖励</button></div>', 'discover');
-      UI.act('battleSettleRetry', () => onBattleEnd(opts, playedUids, win, consumedUids));
+      settlement.retryButton = UI.el?.ovBody?.querySelector('[data-act="battleSettleRetry"]');
+      settlement.retryAction = () => onBattleEnd(opts, playedUids, win, consumedUids);
+      UI.act('battleSettleRetry', settlement.retryAction);
       return false;
     };
     const run = async () => {
@@ -230,6 +232,15 @@ import { bagSlots } from './game.bag.bridge.js';
         }
 
         settlement.phase = 'done';
+        if (settlement.retryAction && UI._acts?.battleSettleRetry === settlement.retryAction) {
+          UI.act('battleSettleRetry', undefined);
+        }
+        if (settlement.retryButton && UI.el?.ovBody?.contains(settlement.retryButton)) {
+          // Only this settlement's layer; no delayed close may outlive the following teaching layer.
+          UI.hideOverlay({ immediate: true });
+        }
+        settlement.retryButton = null;
+        settlement.retryAction = null;
         UI.refresh(game);
         teachAmmoOnce();   // 首胜后一次性说明「卡牌是消耗品」
         return true;

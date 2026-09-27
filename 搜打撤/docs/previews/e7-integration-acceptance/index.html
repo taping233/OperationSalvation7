@@ -1,0 +1,18 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>E7 隔离存储守卫</title>
+<style>body{font:18px system-ui;background:#18212b;color:#eee;max-width:900px;margin:50px auto}button,a{padding:12px;margin:6px;color:inherit}button{background:#345}pre{white-space:pre-wrap}</style>
+<h1>E7 隔离存储守卫</h1><p>此页不加载游戏。首次必须为空；同批继续保留已有样本。</p>
+<pre id="status"></pre><button id="claim" disabled>确认空存储并登记本批</button>
+<p><a id="main" hidden href="/index.html?e7=1">打开真实主入口（E7 QA）</a></p>
+<button id="delay" disabled>预先布防 E4 模块延迟</button><button id="fail" disabled>预先布防 E4 单次模块失败</button><button id="release" disabled>解除模块注入</button>
+<script>
+const identity='e7-20260927-01a0e1da', key='e7-acceptance-owner';
+const out=document.getElementById('status'),claim=document.getElementById('claim');
+const snapshot=()=>({origin:location.origin,localKeys:Object.keys(localStorage),sessionKeys:Object.keys(sessionStorage),owner:localStorage.getItem(key)});
+function refresh(){const s=snapshot(),empty=s.localKeys.length===0&&s.sessionKeys.length===0,owned=s.owner===identity;
+out.textContent=JSON.stringify({...s,empty,owned},null,2);claim.disabled=location.origin!=='http://127.0.0.1:52971'||!empty;
+document.getElementById('main').hidden=!owned;for(const id of ['delay','fail','release'])document.getElementById(id).disabled=!owned;
+if(!empty&&!owned)out.textContent+='\n中止：存在非本批数据，未修改。';}
+claim.onclick=()=>{if(localStorage.length||sessionStorage.length)throw Error('存储不为空');localStorage.setItem(key,identity);refresh();fetch('/__e7__/evidence',{method:'POST',body:JSON.stringify({event:'empty-origin-claimed',snapshot:snapshot()})});};
+for(const mode of ['delay','fail','release'])document.getElementById(mode).onclick=async()=>{if(localStorage.getItem(key)!==identity)throw Error('非本批');out.textContent+='\n'+await(await fetch('/__e7__/module?mode='+mode)).text();};
+refresh();
+</script></html>

@@ -97,6 +97,24 @@ async function openAndFinishChest(onBattleEnd, opts) {
   return state.chestDone();
 }
 
+async function mountRealRetryOverlay() {
+  document.body.innerHTML = '<div id="overlay" hidden><div class="card"><h2 id="ovTitle"></h2><div id="ovBody"></div></div></div>';
+  window.SDT.Icons = { rich: value => value };
+  window.SDT.Sound = { sfx() {} };
+  const { overlayMethods } = await import('../game/src/ui/overlay.js');
+  const UI = window.SDT.UI;
+  Object.assign(UI, overlayMethods, {
+    el: { overlay: document.getElementById('overlay'), ovTitle: document.getElementById('ovTitle'), ovBody: document.getElementById('ovBody') },
+    _acts: {}, act(name, fn) { this._acts[name] = fn; },
+  });
+  let clicked;
+  UI.el.ovBody.addEventListener('click', event => {
+    const button = event.target.closest('[data-act]');
+    if (button) clicked = UI._acts[button.dataset.act]?.(button.dataset);
+  });
+  return { UI, retry() { UI.el.ovBody.querySelector('[data-act="battleSettleRetry"]').click(); return clicked; } };
+}
+
 describe('战后结算事务接线与失败重试', () => {
   it('过场失败后重试，不再次消耗已转入口袋的牌', async () => {
     const onBattleEnd = await bind();
@@ -279,6 +297,73 @@ describe('战后结算事务接线与失败重试', () => {
     expect(state.readReceipt).not.toHaveBeenCalled();
     expect(state.commands.createAttempt).not.toHaveBeenCalled();
     expect(state.commands.commitAttempt).not.toHaveBeenCalled();
+  });
+});
+
+describe('真实重试弹层的结算归属', () => {
+  const failed = { ok: false, code: 'SAVE_FAILED_PENDING_RECOVERY', message: 'pending' };
+  const opts = () => ({ isBoss: false, foeNames: ['敌人'] });
+
+  it('持续失败保留错误层，成功立即关闭自有层并解绑回调且不重复奖励', async () => {
+    const { UI, retry } = await mountRealRetryOverlay();
+    const onBattleEnd = await bind();
+    state.commitResponses = [failed, failed];
+    await openAndFinishChest(onBattleEnd, opts());
+    expect(UI.el.overlay.hidden).toBe(false);
+    expect(UI.el.ovBody.textContent).toContain('重试保存战后奖励');
+    await retry();
+    expect(UI.el.overlay.hidden).toBe(false);
+    expect(state.game.state).toBe('battleSettlement');
+    const oldRetry = UI._acts.battleSettleRetry;
+    await retry();
+    expect(UI.el.overlay.hidden).toBe(true);
+    expect(UI.el.ovBody.querySelector('[data-act="battleSettleRetry"]')).toBeNull();
+    expect(UI._acts.battleSettleRetry).toBeUndefined();
+    expect(state.game.state).toBe('idle');
+    expect(window.SDT.Base.data.eggBattles).toBe(1);
+    await oldRetry();
+    expect(state.commands.createAttempt).toHaveBeenCalledTimes(1);
+    expect(state.commands.commitAttempt).toHaveBeenCalledTimes(3);
+  });
+
+  it('首次成功教学不被重试层的210ms关闭尾巴清除', async () => {
+    const { UI, retry } = await mountRealRetryOverlay();
+    window.SDT.Base.data.ammoTaught = false;
+    state.commitResponses = [failed];
+    await openAndFinishChest(await bind(), opts());
+    await retry();
+    expect(UI._acts.battleSettleRetry).toBeUndefined();
+    expect(UI.el.ovTitle.textContent).toContain('卡牌是消耗品');
+    expect(UI.el.ovBody.querySelector('[data-act="ammoTeachOk"]')).not.toBeNull();
+    await new Promise(resolve => setTimeout(resolve, 250));
+    expect(UI.el.overlay.hidden).toBe(false);
+    expect(UI.el.ovBody.querySelector('[data-act="ammoTeachOk"]')).not.toBeNull();
+    expect(window.SDT.Base.save).toHaveBeenCalledTimes(1);
+  });
+
+  it.each(['own-callback', 'replacement-callback', 'new-run'])('异步成功不误关替代层（%s）', async scenario => {
+    const { UI, retry } = await mountRealRetryOverlay();
+    state.commitResponses = [failed];
+    await openAndFinishChest(await bind(), opts());
+    let resolveCommit;
+    state.commands.commitAttempt.mockImplementationOnce(() => new Promise(resolve => { resolveCommit = resolve; }));
+    const pending = retry();
+    expect(resolveCommit).toBeTypeOf('function');
+    UI.showOverlay('其他面板', '<button data-act="otherAction">其他操作</button>', 'discover');
+    const other = vi.fn(); UI.act('otherAction', other);
+    const replacement = vi.fn();
+    if (scenario !== 'own-callback') UI.act('battleSettleRetry', replacement);
+    if (scenario === 'new-run') {
+      state.game.discoveredPairs = new Set(); state.runId = 'new-run'; state.game.state = 'modal';
+    }
+    resolveCommit({ ok: true, replay: false, receipt: { runRevision: 3 } });
+    await pending;
+    expect(UI.el.overlay.hidden).toBe(false);
+    expect(UI.el.ovTitle.textContent).toBe('其他面板');
+    expect(UI.el.ovBody.querySelector('[data-act="otherAction"]')).not.toBeNull();
+    expect(UI._acts.otherAction).toBe(other);
+    expect(UI._acts.battleSettleRetry).toBe(scenario === 'own-callback' ? undefined : replacement);
+    if (scenario === 'new-run') expect(state.game.state).toBe('modal');
   });
 });
 

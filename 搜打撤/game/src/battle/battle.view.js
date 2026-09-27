@@ -8,6 +8,7 @@ import { esc } from '../core/shared.js';
 import { storeGet, storeSet } from '../core/storage.js';
 import { escAttr } from '../core/shared.js';
 import { Random } from '../core/random.js';
+import { on as onBattleEvent } from '../core/event-bus.js';
 import { groupHandCards } from './battle.hand.js';
 import { getPace, setPace } from './battle.pace.js';
 import { schedulePresentationMs } from './battle.clock.js';
@@ -19,6 +20,19 @@ import { mountHandLayer, updateHand, mountUnitLayer, updateUnits, setHandSuspend
 import { spawnFloats } from './battle.vfx.js';
 import { captureBattleView, animateBattleTransition } from './battle.anim.js';
 import { aim, aimPlayedAt, selectCardByClick, showCardBlockReason, startAim, cancelAim, canPreserveAim, resumeAimAfterRender, setClickSelectedUid } from './battle.aim.js';
+import { showThoughtBubble } from './battle.hover.js';
+
+// Subscribe once per module, never per render. A departed/older battle cannot
+// put its warning on a newly mounted stage, even while asynchronous work finishes.
+const unsubscribeRuleWarning = onBattleEvent('battle:rule-rejected', event => {
+  const overlay = UI.el.overlay;
+  const stage = UI.el.ovBody?.querySelector('.battle-stage.sts');
+  if (!SDT.game?.battleActive || !overlay?.isConnected || overlay.hidden || UI._lastMode !== 'battle'
+    || !stage?.isConnected || !overlay.contains(stage) || stage._battleToken !== event?.battleToken
+    || getSnapshot().battleToken !== event?.battleToken) return;
+  showThoughtBubble(event.message);
+});
+if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
 
 /* battle.view.js —— 战斗渲染：战场 DOM/手牌/指向施法箭头/拖拽预览 */
   const play = commands.playCard;

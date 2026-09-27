@@ -240,7 +240,19 @@ describe('Agent command result contract', () => {
     const result = await step(() => menu.action, { ...options });
     expect(menu.loadGame).toHaveBeenCalledOnce();
     expect(result.res.ok).toBe(false);
-    expect(fixture.game.state).toBe('title');
+    // showTitle clears the failed slot before reopening the picker, so the current
+    // runner discards that slot's completion; this is not an ACTION_REJECTED proof.
+    expect(result.res).toMatchObject({ code: 'CONTEXT_CHANGED', completed: false });
+    expect(fixture.game.state).toBe('modal');
+    expect(fixture.game.runActive).toBe(false);
+    expect(fixture.slot).toBeNull();
+    const error = document.getElementById('slotRestoreError');
+    expect(error).not.toBeNull();
+    expect(error.hidden).toBe(false);
+    expect(error.textContent).toContain('cannot load');
+    expect(error.textContent).toContain('原档已保留'); // Message only: storage is stubbed here.
+    expect(document.getElementById('overlay').style.display).not.toBe('none');
+    expect(document.querySelector('button[data-act="enterSlot"]')).not.toBeNull();
   });
 
   it('reports real enterSlot recovery rejection without attempting load', async () => {
