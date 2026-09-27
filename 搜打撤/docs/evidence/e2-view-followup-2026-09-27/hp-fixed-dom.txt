@@ -1,0 +1,51 @@
+- banner:
+  - text: E2 · 真实 BattleSession / BattleView 内存验收
+  - paragraph: 使用现行 RULES 和目录卡；不接玩家存档、奖励、背包与设置。占位美术；非自然玩家流程。
+  - button "BOSS 编组"
+  - button "注能样本"
+  - button "手牌选择样本"
+  - button "手牌支付样本"
+  - button "锅炉选牌样本"
+  - button "退出样本"
+  - button "记录当前证据" [active]
+  - status: 样本=select；能量=0；存储快照=未变化；记录 10 条（不代表期间无写入尝试）
+  - status: 最近点击=记录当前证据；坐标=0,0
+- heading [level=2]
+- text: 冬境街区 · 遭遇 第 1 回合
+- text: 你的行动
+- generic: 你的行动能量已耗尽，结束回合让敌人行动。
+- generic "你自己——治疗 / 净化 / 护盾 / 格挡类卡牌拖到这里打出":
+  - generic: ◆
+  - text: 未选择人物
+  - generic: 你
+  - generic: 50/50
+  - generic: "[[icon:swords]] 4"
+- generic "军威：每个回合结束时攻击力 +2":
+  - generic: "[[icon:arrow]] 攻击·回合末强化 · 5"
+  - generic: ◆
+  - generic: 肃清总督
+  - generic: "[[icon:swords]] 5"
+  - generic: "[[icon:arrow]] 军威"
+  - generic: 41/50
+- generic "能量：每回合固定 2 费":
+  - generic: ◆
+  - generic: "0"
+  - generic: /2
+- button "砸击" [disabled]: ◆ 砸击
+- button "初始攻击 · 1 费。费用 1 · 点击选中后点敌人，也可拖到敌人身上打出（悬停看完整描述）" [disabled]:
+  - generic: "1"
+  - generic: ◆
+  - generic: 初始攻击
+  - generic "同名卡 2 张堆叠为一叠": ×2
+  - generic: ◆
+- generic "战术操作":
+  - button "背包" [disabled]: ◆ 背包
+  - button "撤离（判负）": ◆ 撤离（判负）
+  - button "设置" [disabled]: ◆ 设置
+  - button "结束回合": ◆ 结束回合
+- generic: ◆ 遭遇战【肃清总督(5-50)】 · 风险E2 内存样本
+- generic: ◆ 普通战斗无需抽牌：随身 3 张战斗卡直接可打出；道具/资源/事件卡不入手，能力卡只能收藏或编入 BOSS 战牌库 · 每回合固定 2 费
+- generic: ◆ 剑荡妖邪 → 肃清总督：造成 9 点攻击伤害（攻击力 +4）
+- generic: ◆ 从手牌选择 1 张武术牌打出
+- generic: ◆ 跳过手牌选择，该效果未结算
+- generic "隔离证据（无存档值）"

@@ -651,6 +651,12 @@ import { cardRuleHint } from './battle.preview.js';
         foeSlots.set(key, rec);
       }
       const slot = rec.slot, parts = rec.parts, sig = rec.sig;
+      // Damage feedback stages hpBefore on this persistent node. An overlay can replace
+      // ovBody before queued hpAfter feedback finds the foe again, leaving the detached
+      // node stale while this signature still matches the authoritative snapshot.
+      // Reconcile the whole HP presentation when that node is mounted again.
+      const reattached = !slot.isConnected;
+      if (reattached) { sig.hpPct = null; sig.hpTxt = null; }
       const aff = f.affix && AFFIX_META[f.affix];
       const immune = aegisBlocked(f);
       slot.classList.toggle('is-boss', !!(ctx.isBoss || f.affix));
@@ -699,7 +705,7 @@ import { cardRuleHint } from './battle.preview.js';
         `<b>${esc(f.name)}</b>${f.dead ? ' <span class="bt-deadmark">[[icon:cross]]</span>' : ''}` +
         `<span class="sts-atkbadge"${f.affix === 'frenzy' ? ' data-term="frenzy"' : ''}>[[icon:swords]] ${f.atk}${f.affix === 'frenzy' ? '×2' : ''}</span>` +
         (aff ? `<span class="bt-affix" data-term="${f.affix}">${aff.icon} ${aff.name}</span>` : ''));
-      setUnitHP(parts, sig, f.hp, f.maxHp, !sig.init);
+      setUnitHP(parts, sig, f.hp, f.maxHp, reattached || !sig.init);
       setSection(parts.stats, sig, 'stats', immune ? '[[icon:crystal]] 庇幕免伤中' : '');
       setSection(parts.chips, sig, 'chips', curseChips(f.status, { compact: true }));
       sig.init = true;

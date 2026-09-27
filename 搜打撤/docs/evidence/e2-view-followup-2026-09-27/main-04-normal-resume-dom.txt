@@ -1,0 +1,52 @@
+- complementary:
+  - img "无"
+  - generic "已探明区域简图"
+  - generic: 行动 · 价值
+  - generic: "0"
+  - emphasis: /
+  - generic: "0"
+  - generic: 下一步 · 2 条路线
+  - generic: 下一层闸门在东方向 · 直线约 3 格 · 沿路搜集补给
+  - group "可前往的相邻节点":
+    - button "物资点（节点 2）":
+      - generic: 物资点
+      - generic: 搜寻卡牌与补给
+      - generic: ↗
+    - button "火堆（节点 4）":
+      - generic: 火堆
+      - generic: 恢复生命 · 复原消耗卡牌
+      - generic: ↗
+  - text: 点击路线或地图亮环前进
+  - generic: Space 选择 · X 确认 · B 背包
+- main:
+  - generic: 第1层 · 外围荒地
+  - generic: Layer 1 · Outer Wastes
+  - navigation "远征章节":
+    - generic: EXPEDITION / 01
+    - list:
+      - generic: "01"
+      - text: 第1层 · 外围荒地
+      - generic: "02"
+      - text: 第2层 · 风雪哨线
+      - generic: "03"
+      - text: 第3层 · 冻土遗迹
+      - generic: "04"
+      - text: 第4层 · 污染核心
+  - generic: "0"
+  - generic: "4"
+  - button:
+  - button:
+  - button:
+  - button:
+  - generic: 当前生命
+  - generic: 35/35
+  - button "背包 3/16":
+    - generic: 背包
+    - generic: 3/16
+  - generic "行动记录":
+    - button "▾ 行动记录"
+    - img "download"
+    - text: 已读取【档位 1】存档
+    - generic: —— 置身 第1层 · 外围荒地（外围入口）——
+    - img "archive"
+    - text: 已进入 档位 1（基地与进度独立保存到该档位）

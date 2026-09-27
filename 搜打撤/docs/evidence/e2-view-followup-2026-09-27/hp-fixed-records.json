@@ -1,0 +1,335 @@
+[
+  {
+    "at": "2026-09-27T05:15:47.072Z",
+    "reason": "ready",
+    "sample": null,
+    "mode": "normal",
+    "phase": "start",
+    "energy": 0,
+    "battleToken": 1,
+    "busy": false,
+    "actionQueueLength": 0,
+    "renderedFoes": [],
+    "foes": [],
+    "hand": [],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 38,
+    "baselineSha256": "9c2508455c380d5753f91ba75816f9f0cf574fa4766e700f112afadbc53db0c7",
+    "currentSha256": "9c2508455c380d5753f91ba75816f9f0cf574fa4766e700f112afadbc53db0c7"
+  },
+  {
+    "at": "2026-09-27T05:15:50.549Z",
+    "reason": "start:select",
+    "sample": "select",
+    "mode": "normal",
+    "phase": "player",
+    "energy": 2,
+    "battleToken": 2,
+    "busy": false,
+    "actionQueueLength": 0,
+    "renderedFoes": [],
+    "foes": [
+      {
+        "id": "boss_general",
+        "name": "肃清总督",
+        "hp": 50
+      }
+    ],
+    "hand": [
+      "e2-0",
+      "e2-1",
+      "e2-2"
+    ],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 38,
+    "baselineSha256": "9c2508455c380d5753f91ba75816f9f0cf574fa4766e700f112afadbc53db0c7",
+    "currentSha256": "9c2508455c380d5753f91ba75816f9f0cf574fa4766e700f112afadbc53db0c7"
+  },
+  {
+    "at": "2026-09-27T05:15:50.628Z",
+    "reason": "render",
+    "sample": "select",
+    "mode": "normal",
+    "phase": "player",
+    "energy": 2,
+    "battleToken": 2,
+    "busy": false,
+    "actionQueueLength": 0,
+    "renderedFoes": [
+      {
+        "index": "0",
+        "name": "肃清总督[[icon:swords]] 5[[icon:arrow]] 军威",
+        "hp": "50/50"
+      }
+    ],
+    "foes": [
+      {
+        "id": "boss_general",
+        "name": "肃清总督",
+        "hp": 50
+      }
+    ],
+    "hand": [
+      "e2-0",
+      "e2-1",
+      "e2-2"
+    ],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 38,
+    "baselineSha256": "9c2508455c380d5753f91ba75816f9f0cf574fa4766e700f112afadbc53db0c7",
+    "currentSha256": "9c2508455c380d5753f91ba75816f9f0cf574fa4766e700f112afadbc53db0c7"
+  },
+  {
+    "at": "2026-09-27T05:15:54.162Z",
+    "reason": "render",
+    "sample": "select",
+    "mode": "normal",
+    "phase": "resolving",
+    "energy": 0,
+    "battleToken": 2,
+    "busy": true,
+    "actionQueueLength": 0,
+    "renderedFoes": [
+      {
+        "index": "0",
+        "name": "肃清总督[[icon:swords]] 5[[icon:arrow]] 军威",
+        "hp": "50/50"
+      }
+    ],
+    "foes": [
+      {
+        "id": "boss_general",
+        "name": "肃清总督",
+        "hp": 50
+      }
+    ],
+    "hand": [
+      "e2-1",
+      "e2-2"
+    ],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 38,
+    "baselineSha256": "9c2508455c380d5753f91ba75816f9f0cf574fa4766e700f112afadbc53db0c7",
+    "currentSha256": "9c2508455c380d5753f91ba75816f9f0cf574fa4766e700f112afadbc53db0c7"
+  },
+  {
+    "at": "2026-09-27T05:15:54.294Z",
+    "reason": "render",
+    "sample": "select",
+    "mode": "normal",
+    "phase": "resolving",
+    "energy": 0,
+    "battleToken": 2,
+    "busy": true,
+    "actionQueueLength": 0,
+    "renderedFoes": [
+      {
+        "index": "0",
+        "name": "肃清总督[[icon:swords]] 5[[icon:arrow]] 军威",
+        "hp": "50/50"
+      }
+    ],
+    "foes": [
+      {
+        "id": "boss_general",
+        "name": "肃清总督",
+        "hp": 41
+      }
+    ],
+    "hand": [
+      "e2-1",
+      "e2-2"
+    ],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 38,
+    "baselineSha256": "9c2508455c380d5753f91ba75816f9f0cf574fa4766e700f112afadbc53db0c7",
+    "currentSha256": "9c2508455c380d5753f91ba75816f9f0cf574fa4766e700f112afadbc53db0c7"
+  },
+  {
+    "at": "2026-09-27T05:15:54.493Z",
+    "reason": "render",
+    "sample": "select",
+    "mode": "normal",
+    "phase": "resolving",
+    "energy": 0,
+    "battleToken": 2,
+    "busy": true,
+    "actionQueueLength": 0,
+    "renderedFoes": [],
+    "foes": [
+      {
+        "id": "boss_general",
+        "name": "肃清总督",
+        "hp": 41
+      }
+    ],
+    "hand": [
+      "e2-1",
+      "e2-2"
+    ],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": {
+      "act": "play",
+      "n": 1,
+      "srcCard": null,
+      "payment": null
+    },
+    "storageEqual": true,
+    "storageKeyCount": 38,
+    "baselineSha256": "9c2508455c380d5753f91ba75816f9f0cf574fa4766e700f112afadbc53db0c7",
+    "currentSha256": "9c2508455c380d5753f91ba75816f9f0cf574fa4766e700f112afadbc53db0c7"
+  },
+  {
+    "at": "2026-09-27T05:15:54.581Z",
+    "reason": "render",
+    "sample": "select",
+    "mode": "normal",
+    "phase": "player",
+    "energy": 0,
+    "battleToken": 2,
+    "busy": false,
+    "actionQueueLength": 0,
+    "renderedFoes": [],
+    "foes": [
+      {
+        "id": "boss_general",
+        "name": "肃清总督",
+        "hp": 41
+      }
+    ],
+    "hand": [
+      "e2-1",
+      "e2-2"
+    ],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": {
+      "act": "play",
+      "n": 1,
+      "srcCard": null,
+      "payment": null
+    },
+    "storageEqual": true,
+    "storageKeyCount": 38,
+    "baselineSha256": "9c2508455c380d5753f91ba75816f9f0cf574fa4766e700f112afadbc53db0c7",
+    "currentSha256": "9c2508455c380d5753f91ba75816f9f0cf574fa4766e700f112afadbc53db0c7"
+  },
+  {
+    "at": "2026-09-27T05:16:07.030Z",
+    "reason": "click:btPickHandSkip",
+    "sample": "select",
+    "mode": "normal",
+    "phase": "player",
+    "energy": 0,
+    "battleToken": 2,
+    "busy": false,
+    "actionQueueLength": 0,
+    "renderedFoes": [],
+    "foes": [
+      {
+        "id": "boss_general",
+        "name": "肃清总督",
+        "hp": 41
+      }
+    ],
+    "hand": [
+      "e2-1",
+      "e2-2"
+    ],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 38,
+    "baselineSha256": "9c2508455c380d5753f91ba75816f9f0cf574fa4766e700f112afadbc53db0c7",
+    "currentSha256": "9c2508455c380d5753f91ba75816f9f0cf574fa4766e700f112afadbc53db0c7"
+  },
+  {
+    "at": "2026-09-27T05:16:07.036Z",
+    "reason": "render",
+    "sample": "select",
+    "mode": "normal",
+    "phase": "player",
+    "energy": 0,
+    "battleToken": 2,
+    "busy": false,
+    "actionQueueLength": 0,
+    "renderedFoes": [
+      {
+        "index": "0",
+        "name": "肃清总督[[icon:swords]] 5[[icon:arrow]] 军威",
+        "hp": "41/50"
+      }
+    ],
+    "foes": [
+      {
+        "id": "boss_general",
+        "name": "肃清总督",
+        "hp": 41
+      }
+    ],
+    "hand": [
+      "e2-1",
+      "e2-2"
+    ],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 38,
+    "baselineSha256": "9c2508455c380d5753f91ba75816f9f0cf574fa4766e700f112afadbc53db0c7",
+    "currentSha256": "9c2508455c380d5753f91ba75816f9f0cf574fa4766e700f112afadbc53db0c7"
+  },
+  {
+    "at": "2026-09-27T05:16:15.876Z",
+    "reason": "manual-evidence",
+    "sample": "select",
+    "mode": "normal",
+    "phase": "player",
+    "energy": 0,
+    "battleToken": 2,
+    "busy": false,
+    "actionQueueLength": 0,
+    "renderedFoes": [
+      {
+        "index": "0",
+        "name": "肃清总督[[icon:swords]] 5[[icon:arrow]] 军威",
+        "hp": "41/50"
+      }
+    ],
+    "foes": [
+      {
+        "id": "boss_general",
+        "name": "肃清总督",
+        "hp": 41
+      }
+    ],
+    "hand": [
+      "e2-1",
+      "e2-2"
+    ],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 38,
+    "baselineSha256": "9c2508455c380d5753f91ba75816f9f0cf574fa4766e700f112afadbc53db0c7",
+    "currentSha256": "9c2508455c380d5753f91ba75816f9f0cf574fa4766e700f112afadbc53db0c7"
+  }
+]

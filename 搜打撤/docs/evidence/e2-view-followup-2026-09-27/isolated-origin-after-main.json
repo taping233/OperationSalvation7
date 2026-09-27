@@ -1,0 +1,23 @@
+[
+  {
+    "at": "2026-09-27T05:14:51.313Z",
+    "reason": "ready",
+    "sample": null,
+    "mode": "normal",
+    "phase": "start",
+    "energy": 0,
+    "battleToken": 1,
+    "busy": false,
+    "actionQueueLength": 0,
+    "renderedFoes": [],
+    "foes": [],
+    "hand": [],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 38,
+    "baselineSha256": "9c2508455c380d5753f91ba75816f9f0cf574fa4766e700f112afadbc53db0c7",
+    "currentSha256": "9c2508455c380d5753f91ba75816f9f0cf574fa4766e700f112afadbc53db0c7"
+  }
+]
