@@ -80,7 +80,7 @@ describe('battle resolution ports', () => {
   it('uses structured onPlay damage independently of description and skips legacy text damage', () => {
     const makeCard = desc => ({
       id: 'structured-simple', name: '结构伤害', type: '武术', dmg: 3, dmgType: 'fixed', desc,
-      rules: { version: 1, triggers: { onPlay: [{ op: 'damage', amountField: 'dmg', target: 'chosenEnemy' }] } },
+      rules: { version: 1, battle: { target: { side: 'enemy', area: false } }, triggers: { onPlay: [{ op: 'damage', amountField: 'dmg', target: 'chosenEnemy' }] } },
     });
     const outcomes = ['造成 99 点伤害并获得护甲。', '任意展示描述，不含战斗效果。'].map(desc => {
       const target = { hp: 20, maxHp: 20, dead: false, status: {} };
@@ -93,7 +93,7 @@ describe('battle resolution ports', () => {
     expect(outcomes.map(outcome => outcome.hitDescriptions)).toEqual([[''], ['']]);
   });
 
-  it('resolves chosenEnemy and allEnemies targets in operation order', () => {
+  it('resolves schema-valid allEnemies segments in operation order and rejects conflicting target declarations', () => {
     const first = { hp: 20, dead: false, status: {} };
     const second = { hp: 20, dead: false, status: {} };
     const callState = {
@@ -102,14 +102,23 @@ describe('battle resolution ports', () => {
     };
     const { resolver, events } = makeResolver(callState);
     resolver({
-      id: 'structured-area', type: '武术', dmg: 2, dmgType: 'fixed', desc: '展示文字',
-      rules: { version: 1, triggers: { onPlay: [
-        { op: 'damage', amountField: 'dmg', target: 'chosenEnemy' },
-        { op: 'damage', amountField: 'dmg', target: 'allEnemies' },
+      id: 'structured-area', type: '武术', dmgType: 'fixed', desc: '展示文字',
+      rules: { version: 1, battle: { target: { side: 'enemy', area: true } }, triggers: { onPlay: [
+        { op: 'damage', amount: 2, target: 'allEnemies' },
+        { op: 'damage', amount: 3, target: 'allEnemies' },
       ] } },
     }, first, false, 0, null);
-    expect(events.filter(event => event[0] === 'damage')).toEqual([['damage', 2], ['damage', 2], ['damage', 2]]);
-    expect(callState.hitFoes).toEqual([first, first, second]);
+    expect(events.filter(event => event[0] === 'damage')).toEqual([['damage', 2], ['damage', 2], ['damage', 3], ['damage', 3]]);
+    expect(callState.hitFoes).toEqual([first, second, first, second]);
+    const before = events.length;
+    expect(() => resolver({
+      id: 'conflicting-targets', type: '武术', dmgType: 'fixed',
+      rules: { version: 1, battle: { target: { side: 'enemy', area: false } }, triggers: { onPlay: [
+        { op: 'damage', amount: 2, target: 'chosenEnemy' },
+        { op: 'damage', amount: 3, target: 'allEnemies' },
+      ] } },
+    }, first, false, 0, null)).toThrow(/rules.battle.target.area/);
+    expect(events).toHaveLength(before);
   });
 
   it('keeps structured attack damage before the existing silence gate', () => {
@@ -120,7 +129,7 @@ describe('battle resolution ports', () => {
     });
     resolver({
       id: 'silent-structured-attack', type: '武术', dmg: 3, dmgType: 'attack', desc: '展示描述',
-      rules: { version: 1, triggers: { onPlay: [{ op: 'damage', amountField: 'dmg', target: 'chosenEnemy' }] } },
+      rules: { version: 1, battle: { target: { side: 'enemy', area: false } }, triggers: { onPlay: [{ op: 'damage', amountField: 'dmg', target: 'chosenEnemy' }] } },
     }, target, false, 0, null);
     expect(events.filter(event => ['damage', 'text'].includes(event[0]))).toEqual([['damage', 3]]);
     expect(events.some(event => event[0] === 'log' && String(event[1]).includes('沉默'))).toBe(true);
@@ -132,7 +141,7 @@ describe('battle resolution ports', () => {
       const { resolver, events } = makeResolver({ current: { mode: 'boss', playedMovesThisTurn: 0, infuseFuels: 0, grave: [] }, playerStatus: { status: {} }, target });
       resolver({
         id: 'structured-armor', type: '法术', armor: 4, desc,
-        rules: { version: 1, triggers: { onPlay: [{ op: 'armor', amountField: 'armor' }] } },
+        rules: { version: 1, battle: { target: { side: 'self', area: false } }, triggers: { onPlay: [{ op: 'armor', amountField: 'armor' }] } },
       }, target, false, 0, null);
       return events.filter(event => ['armor', 'text'].includes(event[0]));
     });
@@ -147,7 +156,7 @@ describe('battle resolution ports', () => {
     });
     resolver({
       id: 'silenced-structured-armor', type: '法术', armor: 4, desc: '获得护甲。',
-      rules: { version: 1, triggers: { onPlay: [{ op: 'armor', amountField: 'armor' }] } },
+      rules: { version: 1, battle: { target: { side: 'self', area: false } }, triggers: { onPlay: [{ op: 'armor', amountField: 'armor' }] } },
     }, target, false, 0, null);
     expect(events.some(event => event[0] === 'armor')).toBe(false);
     expect(events.some(event => event[0] === 'log' && String(event[1]).includes('沉默'))).toBe(true);
@@ -206,9 +215,14 @@ describe('battle resolution ports', () => {
     const structuredTarget = { hp: 20, dead: false, status: {} };
     const structured = makeResolver({ current: { mode: 'boss', playedMovesThisTurn: 0, infuseFuels: 0, grave: [] }, playerStatus: { status: {} }, target: structuredTarget });
     structured.resolver({
-      id: 'empty-onplay', type: '武术', dmg: 3, dmgType: 'fixed', desc: '造成文本伤害',
+      id: 'empty-onplay', type: '武术', dmg: 0, dmgType: 'fixed', desc: '造成文本伤害',
       rules: { version: 1, triggers: { onPlay: [] } },
     }, structuredTarget, false, 0, null);
+    expect(structured.events.filter(event => ['damage', 'text'].includes(event[0]))).toEqual([]);
+    expect(() => structured.resolver({
+      id: 'invalid-empty-onplay', type: '武术', dmg: 3, dmgType: 'fixed', desc: '造成文本伤害',
+      rules: { version: 1, triggers: { onPlay: [] } },
+    }, structuredTarget, false, 0, null)).toThrow(/cannot preserve card.dmg/);
     expect(structured.events.filter(event => ['damage', 'text'].includes(event[0]))).toEqual([]);
 
     const legacyTarget = { hp: 20, dead: false, status: {} };

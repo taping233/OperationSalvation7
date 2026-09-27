@@ -5,64 +5,8 @@ import { attackCue } from './battle.attack-cues.js';
 // 避免两份池名词清单漂移）。
 import { parsePoolNoun } from './effect-steps.ctx.js';
 
-// —— schema v2 键位先行守卫（A2，2026-09-25；B1-B3 接线后按 op 收口，2026-09-25）——
-// card-rules.schema.js v2 已放行泛化键（docs/card-rules-v2-taxonomy-2026-09-25.md §4/§5）。
-// B1/B2（damage：amount/range/cond/bonus/lifesteal/hits{count|range}/randomEnemy/recast）
-// 与 B3（heal：amount/upTo/selfDamage/perFuelCost/perSpellHeal；armor：amount/guard/decayAtTurnEnd）
-// 已接线并从 pending 集合拆除。仍在 pending 的 v2 键一旦出现在真实卡数据里必须在此
-// 炸出——否则 v1 结算路径会静默忽略这些键（如 damage + graveyard 只结算基础伤害），形成错结算。
-// B5（A3 第二批，2026-09-25）：curse 7 诅咒族接线（resolveCurseOperation）。仍不走结构化的诅咒面：
-// ①G13 时点触发器（禁咒系「抽到时施放」）——由下方 V2_PENDING_TRIGGER_KEYS 拦截（onDraw 等）；
-// ②手牌诅咒聚合（cc-cursed-blade）与死亡转移中毒（cc-rot-seed）——无对应 onPlay 键，保持文本路径（A1 §6 白名单）；
-// ③noDrawNext 等非 7 枚举 debuff——schema 层就不放行（DRAW_ALLOWED_KEYS 无此键），不属本批。
-// G3（A3 第三批，2026-09-25）：acquire 获取族（resolveAcquireOperation）与 coins 金币接线。
-// B7（A3 第三批，2026-09-25）：G4 增益·祝福·能量族接线——blessing 走 resolveBlessingOperation
-// （combat.addBlessing 同一状态袋），energy/energyCap/maxHp 走引擎资源命令，deckCap 为记录型
-// no-op（唯一消费点在开战前编组，见分支注释）；coins 归 G3（上批已接，本批不重复接）。
-const INTERPRETER_ONPLAY_OPS = new Set(['damage', 'heal', 'armor', 'draw', 'status', 'discover', 'curse', 'acquire', 'coins',
-  'blessing', 'energy', 'energyCap', 'maxHp', 'deckCap']);
-const V2_PENDING_TRIGGER_KEYS = new Set(['onTurnStart', 'onBattleStart', 'onConsume', 'onDraw', 'onKill']);
-// damage 仍 pending：graveyard（墓地增伤，B10 墓地域口径）、schedule（延迟段，需回合调度钩子，B2 尾）；
-// hits.perFoe（每人释放一段）同为 pending——嵌套在 hits 内，需单独探查。
-const PENDING_DAMAGE_KEYS = ['graveyard', 'schedule'];
-// draw 全部 v2 键属 B4（boss/普通战双口径必须结构化表达后才放行）。
-// B4 进度（2026-09-26 A3 收口）：amount 已接线（字面量抽牌），untilHandN/handOps 仍 pending
-const PENDING_DRAW_KEYS = ['untilHandN', 'handOps'];
-// curse 逐键收口（B5）：schema 放行的 9 键（op/curse/stacks/duration/target/randomKinds/double/burst/extend）
-// 已全部由 resolveCurseOperation 消费——无 pending。空集保留登记位：新增 curse 键必须先在此登记，
-// 否则解释器会静默忽略（错结算），违背本守卫的存在目的。
-const PENDING_CURSE_KEYS = [];
-// acquire 逐键收口（G3）：schema 放行的 6 键全部由 resolveAcquireOperation 消费——
-// n/pool/dest 无条件消费；act 按 dest×act 组合门放行（无既有机制承载的组合在分支内显式 throw，
-// 见 resolveAcquireOperation 注释）；filter 预留键接受但行为透传（本批最简实现，见分支内注释）。
-const PENDING_ACQUIRE_KEYS = [];
-// coins 逐键收口（G3）：{op, n} 两键全部消费——无 pending。
-const PENDING_COINS_KEYS = [];
-// B7 逐键收口：blessing 的 schema 4 键（op/key/stacks/duration）由 resolveBlessingOperation 全部消费，
-// 资源族 {op, n} 两键由各资源分支全部消费——无 pending。空集保留登记位：新增键必须先在此登记，
-// 否则解释器会静默忽略（错结算），违背本守卫的存在目的。
-const PENDING_BLESSING_KEYS = [];
-const PENDING_RESOURCE_KEYS = [];
-
-// B1-B3 已接线的 heal/armor v2 键不再 pending；draw 的 v2 键、damage 的残余键与 curse 的逐键清单在此收口。
-function pendingOperationKeys(operation) {
-  if (operation.op === 'damage') {
-    const keys = PENDING_DAMAGE_KEYS.filter(key => key in operation);
-    if (operation.hits != null && typeof operation.hits === 'object' && operation.hits.perFoe !== undefined) {
-      keys.push('hits.perFoe');
-    }
-    return keys;
-  }
-  if (operation.op === 'draw') return PENDING_DRAW_KEYS.filter(key => key in operation);
-  if (operation.op === 'curse') return PENDING_CURSE_KEYS.filter(key => key in operation);
-  if (operation.op === 'acquire') return PENDING_ACQUIRE_KEYS.filter(key => key in operation);
-  if (operation.op === 'coins') return PENDING_COINS_KEYS.filter(key => key in operation);
-  if (operation.op === 'blessing') return PENDING_BLESSING_KEYS.filter(key => key in operation);
-  if (['energy', 'energyCap', 'maxHp', 'deckCap'].includes(operation.op)) {
-    return PENDING_RESOURCE_KEYS.filter(key => key in operation);
-  }
-  return [];
-}
+// Schema and runtime support share the same complete-list boundary at every battle entry.
+import { assertCardRulesExecutable } from './battle.rule-guard.js';
 
 // B5 诅咒日志动词：逐字对齐文本路径 effect-steps.curse.js 的 run 文案（图标不在此表——
 // 统一取 combat.CURSE_META[kind].icon，保证与 combat.js 枚举单源）。括注部分为卡面语义解释，
@@ -81,26 +25,6 @@ const CURSE_VERBS = {
 // value 型叠层相加（addBlessing 第 4 参 turns>0 到期扣回）；timed 型取「剩余较大值」（n 即回合数）。
 const BLESSING_VALUE_KEYS = new Set(['atkUp', 'spellUp', 'reduce', 'dodge']);
 const BLESSING_TIMED_KEYS = new Set(['stealth', 'immune']);
-
-function assertStructuredRulesSupported(card) {
-  const triggers = card?.rules?.triggers;
-  if (triggers == null || typeof triggers !== 'object') return;
-  for (const key of Object.keys(triggers)) {
-    if (V2_PENDING_TRIGGER_KEYS.has(key)) {
-      throw new TypeError(`Unsupported rules.triggers.${key} for card ${card.id || '<missing id>'}: schema v2 键位先行，解释器分支未接线（迁移批 A3/B4-B11）`);
-    }
-  }
-  const operations = Array.isArray(triggers.onPlay) ? triggers.onPlay : [];
-  for (const operation of operations) {
-    if (!operation || typeof operation !== 'object') continue;
-    if (!INTERPRETER_ONPLAY_OPS.has(operation.op)) {
-      throw new TypeError(`Unsupported onPlay operation '${operation.op}' for card ${card.id || '<missing id>'}: schema v2 键位先行，解释器分支未接线（迁移批 A3/B4-B11）`);
-    }
-    for (const key of pendingOperationKeys(operation)) {
-      throw new TypeError(`Unsupported onPlay ${operation.op} parameter '${key}' for card ${card.id || '<missing id>'}: schema v2 键位先行，解释器分支未接线（迁移批 A3/B4-B11）`);
-    }
-  }
-}
 
 function createBattleResolution(ports) {
   const { readState, getPlayerStatus, esc, log, heal, addFloat, addDelayed, takeDeckBottom, deckBottomCount,
@@ -309,24 +233,12 @@ function createBattleResolution(ports) {
   //   deck：dup（×2 洗入）、zeroCost（洗入模板静态 cost:0——铁甲阵「费用均-1」同款改模板法，
   //         卡在牌库中无费用修饰状态，抽出即 0 费）、noInfuse（模板透传）；
   //         play/playKeep 同 hand 理由 pending；decay（逐回合 -1 费）对牌库中的卡无结算观测点——pending。
-  //   组合门在结算层显式 throw（schema 层不做 dest×act 组合校验，错数据必须炸出而非静默忽略——
-  //   与顶部 assertStructuredRulesSupported 同一设计哲学）。
-  // filter：schema 预留键，本批最简透传（接受键存在、行为上忽略）——卡池谓词已由 pool.kind 承载，
-  //   未来组合过滤（如 type+cost 复合、排除条件）落 G3 后续批时在此消费。
-  const ACQUIRE_ACTS_BY_DEST = {
-    hand: new Set(['dup', 'noInfuse']),
-    deck: new Set(['dup', 'zeroCost', 'noInfuse']),
-    discover: new Set(['play', 'playKeep', 'dup', 'zeroCost', 'decay']),
-  };
-
+  // dest×act and unconsumed filter are rejected by the complete-list capability guard.
   function resolveAcquireOperation(card, operation) {
     const myClass = typeof getMyClass === 'function' ? getMyClass() : null;
     const pred = acquirePoolPred(operation.pool, myClass);
     const dest = operation.dest || 'discover';
     const act = operation.act;
-    if (act !== undefined && !ACQUIRE_ACTS_BY_DEST[dest].has(act)) {
-      throw new TypeError(`Unsupported acquire act '${act}' for dest '${dest}' for card ${card.id || '<missing id>'}: 无既有机制承载（G3 后续批 pending）`);
-    }
     // 面板日志的池名（文本路径 discover.pool 同款：名词去尾「的」+ 限制池括注）
     const label = pred ? String(operation.pool.kind === 'moves' ? '招式' : operation.pool.kind).replace(/的$/, '') : '';
     const poolSuffix = pred ? `【${esc(label)}】（限制卡池）` : '';
@@ -459,7 +371,7 @@ function createBattleResolution(ports) {
 
   function* resolveCardSteps(card, target, infused, fuelCost, uid) {
 
-    assertStructuredRulesSupported(card);
+    assertCardRulesExecutable(card);
 
     // 血毒双镖（2026-09-16 留言「血毒双镖应该能选择两次目标」）：两段拆开——首段（攻+1 附加流血）
     // 随本牌目标结算；二段（攻+1 附加中毒）由 execPlay 收尾进入点选（interaction 'dart'），
@@ -521,17 +433,11 @@ function createBattleResolution(ports) {
         // curse 在循环 2（沉默门之后）由 resolveCurseOperation 结算——伤害先于诅咒（先伤害后诅咒）；
         // acquire/coins 同属循环 2（G3：获取/金币在沉默门后，沉默封印一切非攻击技能效果）；
         // B7 的 blessing 与资源族同在循环 2（先伤害后增益，与文本路径步序一致）
-        if (['heal', 'armor', 'draw', 'status', 'discover', 'curse', 'acquire', 'coins',
-          'blessing', 'energy', 'energyCap', 'maxHp', 'deckCap'].includes(operation.op)) continue;
-        if (operation.op !== 'damage' || (operation.amountField !== undefined && operation.amountField !== 'dmg')) {
-          throw new TypeError(`Unsupported onPlay operation for card ${card.id || '<missing id>'}`);
-        }
+        // The complete list has passed the shared schema/capability guard.
+        if (operation.op !== 'damage') continue;
         // B1：伤害来源三选一（schema 保证恰好一个）——v1 字段引用 / v2 字面量 / v2 区间。
         // 回合成长（充能火球）按 uid 叠加；区间每次施放掷一次（含端点，与 dmg.direct 同口径）。
         const sources = ['amountField', 'amount', 'range'].filter(field => operation[field] !== undefined);
-        if (sources.length !== 1) {
-          throw new TypeError(`Unsupported onPlay damage source for card ${card.id || '<missing id>'}`);
-        }
         const growth = (uid && getGrowth(uid)) || 0;
         const baseDamage = sources[0] === 'amountField' ? +card[operation.amountField] + growth
           : sources[0] === 'amount' ? operation.amount + growth

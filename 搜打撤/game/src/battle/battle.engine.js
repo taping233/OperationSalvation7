@@ -27,6 +27,7 @@ import { createEffectExecutor, splitEffectClauses, consumeTriggerTexts } from '.
 import { refillDrawPile, shuffleCards } from './battle.deck.js';
 import './battle.piles.js';
 import { isAreaEffect, targetSideFor, unplayableReasonFor, itemTargetSideFor } from './battle.rules.js';
+import { rejectUnsupportedCard } from './battle.rule-guard.js';
 
 import { createBattleExecutionSession } from './battle.execution-session.js';
 import { createBattleActionRunner } from './battle.action-runner.js';
@@ -1033,6 +1034,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     const entry = findCard(uid);
     if (!entry) return;
     const card = entry.card;
+    if (rejectUnsupportedCard(card, { warn: message => G.log(message, 'warn') })) return false;
     const why = unplayableReason(card);
     if (why) { G.log(`[[icon:cross]] 【${esc(card.name)}】无法打出：${why}`, 'warn'); return; }
     const effCost = effCostOf(card, uid);
@@ -1108,6 +1110,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     const entry = findCard(uid);
     if (!entry) return;
     const card = entry.card;
+    if (rejectUnsupportedCard(card, { warn: message => G.log(message, 'warn') })) return false;
     const infN = infuseOf(card);
     if (infN <= 0) return;
     const effCost = effCostOf(card, uid);

@@ -7,6 +7,7 @@ import { esc } from '../core/shared.js';
 import { removeUid } from './battle.piles.js';
 import { targetSideFor } from './battle.rules.js';
 import { throwIfActionCancelled } from './battle.staged-playback.js';
+import { rejectUnsupportedCard } from './battle.rule-guard.js';
 import { G, foes, mode, hand, discard, played, consumed, grave, energy, delayed, cardAnims, freeCast, infuseFuels, consumeFireballN, allSpellsInfused, growthNames, killAtkUp, playerCurseImmune, arrowRune, nextSpellTwice, poisonOnSpell, playedMovesThisTurn, playedMartialThisTurn, activeActionSignal, battleState, set$hand, set$energy, set$infuseFuels, set$nextSpellTwice, set$killAtkUp, set$poisonOnSpell, set$poisonLegacy, set$playerCurseImmune, set$allSpellsInfused, set$lastPlayedType, set$playedMovesThisTurn, set$playedMartialThisTurn, set$activeActionSignal, set$handSelecting, nextActionSeq } from './battle.runtime.js';
 
 const R = () => SDT.MAP.rules;
@@ -19,6 +20,7 @@ export function createBattleExecPlay({
   beginDartStrike, sweepDead, finish, processChoice, processDiscoverQueue, queueBattleAction,
 }) {
   function queueCardExecution(uid, card, fuelUids, target, freeCost, requirementsPaid = false, paymentUids = [], onResolved = null) {
+    if (rejectUnsupportedCard(card, { warn: message => G.log(message, 'warn') })) return false;
     const handRequirement = card?.rules?.battle?.requirements?.find(rule => rule.kind === 'handCards');
     if (handRequirement && !requirementsPaid) {
       const excludedUids = [...new Set([uid, ...(fuelUids || [])])];
@@ -53,6 +55,8 @@ export function createBattleExecPlay({
     set$activeActionSignal(signal);
     try {
     throwIfActionCancelled(signal);
+    // Recheck after queueing: rules may have changed before payment is committed.
+    if (rejectUnsupportedCard(card, { warn: message => G.log(message, 'warn') })) return false;
     const handRequirement = card?.rules?.battle?.requirements?.find(rule => rule.kind === 'handCards');
     if (handRequirement) {
       const excludedUids = new Set([uid, ...(fuelUids || [])]);

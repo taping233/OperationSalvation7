@@ -1,4 +1,6 @@
 import { describe, expect, it } from 'vitest';
+import { validateCardRules } from '../game/src/cards/card-rules.schema.js';
+import { inspectCardRuleCapability } from '../game/src/cards/card-rules.capability.js';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };
 window.SDT.Icons.TYPE_ART = {};
@@ -19,10 +21,14 @@ window.SDT.Cards.ensureEffectFields();
 
 describe('真实 BattleSession 快照卡牌隔离', () => {
   it('复用稳定快照，并在源卡嵌套规则变化后重新投影待选目标卡', () => {
+    const firstOperation = { op: 'damage', amountField: 'dmg', target: 'chosenEnemy' };
     const card = {
       id: 'snapshot-integration-probe', name: '快照集成探针', cost: 0,
       type: '武术', desc: '造成 1 点攻击伤害。', dmg: 1, dmgType: 'attack',
-      rules: { battle: { target: { side: 'enemy', area: false }, extension: { values: [1] } } },
+      rules: {
+        version: 1, battle: { target: { side: 'enemy', area: false } },
+        triggers: { onPlay: [firstOperation] },
+      },
     };
     const game = {
       ownedCards: [{ uid: 'snapshot-integration-probe', card, safe: false }],
@@ -35,22 +41,30 @@ describe('真实 BattleSession 快照卡牌隔离', () => {
     };
     const foe = { id: 'snapshot-integration-foe', name: '集成靶子', hp: 40, atk: 1 };
 
+    expect(validateCardRules(card)).toMatchObject({ ok: true, errors: [] });
+    expect(inspectCardRuleCapability(card)).toEqual({ kind: 'supported', ok: true });
     BattleSession.start(game, [foe], { isBoss: false, name: '快照卡牌隔离集成' });
     BattleSession.commands.playCard('snapshot-integration-probe', null);
     const first = BattleSession.getSnapshot();
 
     expect(first.pendingTarget?.card.id).toBe(card.id);
-    expect(Object.isFrozen(first.pendingTarget.card.rules.battle.extension.values)).toBe(true);
+    expect(Object.isFrozen(first.pendingTarget.card.rules.triggers.onPlay)).toBe(true);
+    expect(Object.isFrozen(first.pendingTarget.card.rules.triggers.onPlay[0])).toBe(true);
     expect(Object.isFrozen(card)).toBe(false);
-    expect(Object.isFrozen(card.rules.battle.extension.values)).toBe(false);
+    expect(Object.isFrozen(card.rules.triggers.onPlay)).toBe(false);
+    expect(Object.isFrozen(firstOperation)).toBe(false);
     expect(BattleSession.getSnapshot()).toBe(first);
 
-    card.rules.battle.extension.values.push(2);
+    const secondOperation = { ...firstOperation, hitCount: 2 };
+    card.rules.triggers.onPlay.push(secondOperation);
+    expect(validateCardRules(card)).toMatchObject({ ok: true, errors: [] });
+    expect(inspectCardRuleCapability(card)).toEqual({ kind: 'supported', ok: true });
     const refreshed = BattleSession.getSnapshot();
     expect(refreshed).not.toBe(first);
-    expect(first.pendingTarget.card.rules.battle.extension.values).toEqual([1]);
-    expect(refreshed.pendingTarget.card.rules.battle.extension.values).toEqual([1, 2]);
-    expect(Object.isFrozen(card.rules.battle.extension.values)).toBe(false);
+    expect(first.pendingTarget.card.rules.triggers.onPlay).toEqual([firstOperation]);
+    expect(refreshed.pendingTarget.card.rules.triggers.onPlay).toEqual([firstOperation, secondOperation]);
+    expect(Object.isFrozen(refreshed.pendingTarget.card.rules.triggers.onPlay)).toBe(true);
+    expect(Object.isFrozen(card.rules.triggers.onPlay)).toBe(false);
 
     BattleSession.commands.flee();
   });

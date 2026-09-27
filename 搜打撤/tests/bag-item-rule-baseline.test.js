@@ -18,9 +18,27 @@ window.fetch = globalThis.fetch = () => Promise.resolve({ ok: true, status: 200,
 
 let game, session, bag, elixir, crystal, sampleCard;
 beforeAll(async () => {
+  const timerNames = ['setTimeout', 'clearTimeout', 'setInterval', 'clearInterval',
+    'requestAnimationFrame', 'cancelAnimationFrame'];
+  vi.useFakeTimers({ toFake: timerNames });
+  // jsdom's window can retain a distinct timer wrapper from the fake global.
+  for (const name of timerNames) {
+    if (window[name] !== globalThis[name]) vi.spyOn(window, name).mockImplementation(globalThis[name]);
+  }
+  for (const surface of [globalThis, window]) {
+    const before = vi.getTimerCount();
+    const timeout = surface.setTimeout(() => {}, 1000);
+    const interval = surface.setInterval(() => {}, 1000);
+    const frame = surface.requestAnimationFrame(() => {});
+    expect(vi.getTimerCount()).toBe(before + 3);
+    surface.clearTimeout(timeout);
+    surface.clearInterval(interval);
+    surface.cancelAnimationFrame(frame);
+    expect(vi.getTimerCount()).toBe(before);
+  }
   await import('../game/src/main.js');
   document.dispatchEvent(new Event('DOMContentLoaded', { bubbles: true }));
-  await new Promise(r => setTimeout(r, 0));
+  await vi.advanceTimersByTimeAsync(0);
   session = await import('../game/src/run/game.session.js');
   bag = await import('../game/src/hub/game.bag.js');
   game = session.game;
@@ -29,7 +47,14 @@ beforeAll(async () => {
   sampleCard = window.SDT.Cards.all().find(c => c.type === '法术' || c.type === '攻击');
 });
 
-afterAll(() => { vi.restoreAllMocks(); });
+afterAll(() => {
+  try {
+    vi.clearAllTimers();
+    expect(vi.getTimerCount()).toBe(0);
+  } finally {
+    try { vi.useRealTimers(); } finally { vi.restoreAllMocks(); }
+  }
+});
 
 function setScenario({ hp = 20, maxHp = 100, ownedCards = [], usedPocket = [], inventory = [] } = {}) {
   Object.assign(game, {
@@ -50,7 +75,7 @@ async function useItem(cardId, uid) {
   const use = zoom.querySelector('[data-act="useDetailCard"]');
   expect(use).toBeTruthy();
   use.click();
-  await new Promise(r => setTimeout(r, 280));
+  await vi.advanceTimersByTimeAsync(280);
   return uid;
 }
 
