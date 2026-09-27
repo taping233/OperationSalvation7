@@ -1,0 +1,1408 @@
+[
+  {
+    "at": "2026-09-27T04:22:40.576Z",
+    "reason": "ready",
+    "sample": null,
+    "mode": "normal",
+    "phase": "start",
+    "energy": 0,
+    "foes": [],
+    "hand": [],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:22:45.068Z",
+    "reason": "start:infuse",
+    "sample": "infuse",
+    "mode": "normal",
+    "phase": "player",
+    "energy": 2,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 50
+      }
+    ],
+    "hand": [
+      "e2-0",
+      "e2-1",
+      "e2-2"
+    ],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:22:45.075Z",
+    "reason": "render",
+    "sample": "infuse",
+    "mode": "normal",
+    "phase": "player",
+    "energy": 2,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 50
+      }
+    ],
+    "hand": [
+      "e2-0",
+      "e2-1",
+      "e2-2"
+    ],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:22:49.442Z",
+    "reason": "click:btInfuseStart",
+    "sample": "infuse",
+    "mode": "normal",
+    "phase": "player",
+    "energy": 2,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 50
+      }
+    ],
+    "hand": [
+      "e2-0",
+      "e2-1",
+      "e2-2"
+    ],
+    "deck": null,
+    "infusing": {
+      "card": {
+        "id": "tt3sp-silverthorn",
+        "name": "镭射",
+        "frozen": true,
+        "rulesFrozen": null
+      },
+      "picked": []
+    },
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:22:49.448Z",
+    "reason": "render",
+    "sample": "infuse",
+    "mode": "normal",
+    "phase": "player",
+    "energy": 2,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 50
+      }
+    ],
+    "hand": [
+      "e2-0",
+      "e2-1",
+      "e2-2"
+    ],
+    "deck": null,
+    "infusing": {
+      "card": {
+        "id": "tt3sp-silverthorn",
+        "name": "镭射",
+        "frozen": true,
+        "rulesFrozen": null
+      },
+      "picked": []
+    },
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:23:26.470Z",
+    "reason": "click:btPlay",
+    "sample": "infuse",
+    "mode": "normal",
+    "phase": "player",
+    "energy": 2,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 50
+      }
+    ],
+    "hand": [
+      "e2-0",
+      "e2-1",
+      "e2-2"
+    ],
+    "deck": null,
+    "infusing": {
+      "card": {
+        "id": "tt3sp-silverthorn",
+        "name": "镭射",
+        "frozen": true,
+        "rulesFrozen": null
+      },
+      "picked": [
+        "e2-1"
+      ]
+    },
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:23:26.475Z",
+    "reason": "render",
+    "sample": "infuse",
+    "mode": "normal",
+    "phase": "player",
+    "energy": 2,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 50
+      }
+    ],
+    "hand": [
+      "e2-0",
+      "e2-1",
+      "e2-2"
+    ],
+    "deck": null,
+    "infusing": {
+      "card": {
+        "id": "tt3sp-silverthorn",
+        "name": "镭射",
+        "frozen": true,
+        "rulesFrozen": null
+      },
+      "picked": [
+        "e2-1"
+      ]
+    },
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:23:32.054Z",
+    "reason": "click:btInfuseGo",
+    "sample": "infuse",
+    "mode": "normal",
+    "phase": "resolving",
+    "energy": 1,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 50
+      }
+    ],
+    "hand": [
+      "e2-2"
+    ],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:23:32.064Z",
+    "reason": "render",
+    "sample": "infuse",
+    "mode": "normal",
+    "phase": "resolving",
+    "energy": 1,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 50
+      }
+    ],
+    "hand": [
+      "e2-2"
+    ],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:23:32.198Z",
+    "reason": "render",
+    "sample": "infuse",
+    "mode": "normal",
+    "phase": "resolving",
+    "energy": 1,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 42
+      }
+    ],
+    "hand": [
+      "e2-2"
+    ],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:23:32.418Z",
+    "reason": "render",
+    "sample": "infuse",
+    "mode": "normal",
+    "phase": "resolving",
+    "energy": 1,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 42
+      }
+    ],
+    "hand": [
+      "e2-2"
+    ],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:23:32.510Z",
+    "reason": "render",
+    "sample": "infuse",
+    "mode": "normal",
+    "phase": "player",
+    "energy": 1,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 42
+      }
+    ],
+    "hand": [
+      "e2-2"
+    ],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:23:51.562Z",
+    "reason": "manual-evidence",
+    "sample": "infuse",
+    "mode": "normal",
+    "phase": "player",
+    "energy": 1,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 42
+      }
+    ],
+    "hand": [
+      "e2-2"
+    ],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:24:08.509Z",
+    "reason": "battle-end",
+    "sample": "infuse",
+    "mode": "normal",
+    "phase": "player",
+    "energy": 1,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 42
+      }
+    ],
+    "hand": [],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:24:08.511Z",
+    "reason": "start:select",
+    "sample": "select",
+    "mode": "normal",
+    "phase": "player",
+    "energy": 2,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 50
+      }
+    ],
+    "hand": [
+      "e2-0",
+      "e2-1",
+      "e2-2"
+    ],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:24:08.520Z",
+    "reason": "render",
+    "sample": "select",
+    "mode": "normal",
+    "phase": "player",
+    "energy": 2,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 50
+      }
+    ],
+    "hand": [
+      "e2-0",
+      "e2-1",
+      "e2-2"
+    ],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:24:15.519Z",
+    "reason": "render",
+    "sample": "select",
+    "mode": "normal",
+    "phase": "resolving",
+    "energy": 0,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 50
+      }
+    ],
+    "hand": [
+      "e2-1",
+      "e2-2"
+    ],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:24:15.659Z",
+    "reason": "render",
+    "sample": "select",
+    "mode": "normal",
+    "phase": "resolving",
+    "energy": 0,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 41
+      }
+    ],
+    "hand": [
+      "e2-1",
+      "e2-2"
+    ],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:24:15.850Z",
+    "reason": "render",
+    "sample": "select",
+    "mode": "normal",
+    "phase": "resolving",
+    "energy": 0,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 41
+      }
+    ],
+    "hand": [
+      "e2-1",
+      "e2-2"
+    ],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": {
+      "act": "play",
+      "n": 1,
+      "srcCard": null,
+      "payment": null
+    },
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:24:15.939Z",
+    "reason": "render",
+    "sample": "select",
+    "mode": "normal",
+    "phase": "player",
+    "energy": 0,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 41
+      }
+    ],
+    "hand": [
+      "e2-1",
+      "e2-2"
+    ],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": {
+      "act": "play",
+      "n": 1,
+      "srcCard": null,
+      "payment": null
+    },
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:24:24.098Z",
+    "reason": "manual-evidence",
+    "sample": "select",
+    "mode": "normal",
+    "phase": "player",
+    "energy": 0,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 41
+      }
+    ],
+    "hand": [
+      "e2-1",
+      "e2-2"
+    ],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": {
+      "act": "play",
+      "n": 1,
+      "srcCard": null,
+      "payment": null
+    },
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:24:30.357Z",
+    "reason": "click:btPickHandSkip",
+    "sample": "select",
+    "mode": "normal",
+    "phase": "player",
+    "energy": 0,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 41
+      }
+    ],
+    "hand": [
+      "e2-1",
+      "e2-2"
+    ],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:24:30.366Z",
+    "reason": "render",
+    "sample": "select",
+    "mode": "normal",
+    "phase": "player",
+    "energy": 0,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 41
+      }
+    ],
+    "hand": [
+      "e2-1",
+      "e2-2"
+    ],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:24:39.807Z",
+    "reason": "battle-end",
+    "sample": "select",
+    "mode": "normal",
+    "phase": "player",
+    "energy": 0,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 41
+      }
+    ],
+    "hand": [],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:24:39.809Z",
+    "reason": "start:payment",
+    "sample": "payment",
+    "mode": "normal",
+    "phase": "player",
+    "energy": 2,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 50
+      }
+    ],
+    "hand": [
+      "e2-0",
+      "e2-1",
+      "e2-2"
+    ],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:24:39.814Z",
+    "reason": "render",
+    "sample": "payment",
+    "mode": "normal",
+    "phase": "player",
+    "energy": 2,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 50
+      }
+    ],
+    "hand": [
+      "e2-0",
+      "e2-1",
+      "e2-2"
+    ],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:24:43.649Z",
+    "reason": "render",
+    "sample": "payment",
+    "mode": "normal",
+    "phase": "player",
+    "energy": 2,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 50
+      }
+    ],
+    "hand": [
+      "e2-0",
+      "e2-1",
+      "e2-2"
+    ],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": {
+      "act": "payment",
+      "n": 2,
+      "srcCard": null,
+      "payment": {
+        "id": "tt7-thundergrudge",
+        "name": "快意恩仇",
+        "frozen": true,
+        "rulesFrozen": true
+      }
+    },
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:25:00.969Z",
+    "reason": "click:btPickHand",
+    "sample": "payment",
+    "mode": "normal",
+    "phase": "player",
+    "energy": 2,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 50
+      }
+    ],
+    "hand": [
+      "e2-0",
+      "e2-1",
+      "e2-2"
+    ],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": {
+      "act": "payment",
+      "n": 1,
+      "srcCard": null,
+      "payment": {
+        "id": "tt7-thundergrudge",
+        "name": "快意恩仇",
+        "frozen": true,
+        "rulesFrozen": true
+      }
+    },
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:25:00.975Z",
+    "reason": "render",
+    "sample": "payment",
+    "mode": "normal",
+    "phase": "player",
+    "energy": 2,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 50
+      }
+    ],
+    "hand": [
+      "e2-0",
+      "e2-1",
+      "e2-2"
+    ],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": {
+      "act": "payment",
+      "n": 1,
+      "srcCard": null,
+      "payment": {
+        "id": "tt7-thundergrudge",
+        "name": "快意恩仇",
+        "frozen": true,
+        "rulesFrozen": true
+      }
+    },
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:25:31.483Z",
+    "reason": "click:btPickHand",
+    "sample": "payment",
+    "mode": "normal",
+    "phase": "resolving",
+    "energy": 1,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 50
+      }
+    ],
+    "hand": [],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:25:31.488Z",
+    "reason": "render",
+    "sample": "payment",
+    "mode": "normal",
+    "phase": "resolving",
+    "energy": 1,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 50
+      }
+    ],
+    "hand": [],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:25:31.625Z",
+    "reason": "render",
+    "sample": "payment",
+    "mode": "normal",
+    "phase": "resolving",
+    "energy": 1,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 46
+      }
+    ],
+    "hand": [],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:25:31.756Z",
+    "reason": "render",
+    "sample": "payment",
+    "mode": "normal",
+    "phase": "resolving",
+    "energy": 1,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 42
+      }
+    ],
+    "hand": [],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:25:32.047Z",
+    "reason": "render",
+    "sample": "payment",
+    "mode": "normal",
+    "phase": "resolving",
+    "energy": 1,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 42
+      }
+    ],
+    "hand": [],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:25:32.270Z",
+    "reason": "render",
+    "sample": "payment",
+    "mode": "normal",
+    "phase": "player",
+    "energy": 1,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 38
+      }
+    ],
+    "hand": [],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:25:42.064Z",
+    "reason": "manual-evidence",
+    "sample": "payment",
+    "mode": "normal",
+    "phase": "player",
+    "energy": 1,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 38
+      }
+    ],
+    "hand": [],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:25:42.315Z",
+    "reason": "battle-end",
+    "sample": "payment",
+    "mode": "normal",
+    "phase": "player",
+    "energy": 1,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 38
+      }
+    ],
+    "hand": [],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:25:42.316Z",
+    "reason": "start:boiler",
+    "sample": "boiler",
+    "mode": "normal",
+    "phase": "player",
+    "energy": 2,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 50
+      }
+    ],
+    "hand": [
+      "e2-0",
+      "e2-1",
+      "e2-2"
+    ],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:25:42.322Z",
+    "reason": "render",
+    "sample": "boiler",
+    "mode": "normal",
+    "phase": "player",
+    "energy": 2,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 50
+      }
+    ],
+    "hand": [
+      "e2-0",
+      "e2-1",
+      "e2-2"
+    ],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:25:49.655Z",
+    "reason": "click:btInfuseStart",
+    "sample": "boiler",
+    "mode": "normal",
+    "phase": "player",
+    "energy": 2,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 50
+      }
+    ],
+    "hand": [
+      "e2-0",
+      "e2-1",
+      "e2-2"
+    ],
+    "deck": null,
+    "infusing": {
+      "card": {
+        "id": "tt3eq-boiler",
+        "name": "魔法锅炉",
+        "frozen": true,
+        "rulesFrozen": null
+      },
+      "picked": []
+    },
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:25:49.666Z",
+    "reason": "render",
+    "sample": "boiler",
+    "mode": "normal",
+    "phase": "player",
+    "energy": 2,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 50
+      }
+    ],
+    "hand": [
+      "e2-0",
+      "e2-1",
+      "e2-2"
+    ],
+    "deck": null,
+    "infusing": {
+      "card": {
+        "id": "tt3eq-boiler",
+        "name": "魔法锅炉",
+        "frozen": true,
+        "rulesFrozen": null
+      },
+      "picked": []
+    },
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:25:53.621Z",
+    "reason": "click:btInfuseDirect",
+    "sample": "boiler",
+    "mode": "normal",
+    "phase": "targeting",
+    "energy": 2,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 50
+      }
+    ],
+    "hand": [
+      "e2-0",
+      "e2-1",
+      "e2-2"
+    ],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:25:53.627Z",
+    "reason": "render",
+    "sample": "boiler",
+    "mode": "normal",
+    "phase": "targeting",
+    "energy": 2,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 50
+      }
+    ],
+    "hand": [
+      "e2-0",
+      "e2-1",
+      "e2-2"
+    ],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:25:57.704Z",
+    "reason": "render",
+    "sample": "boiler",
+    "mode": "normal",
+    "phase": "player",
+    "energy": 2,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 50
+      }
+    ],
+    "hand": [
+      "e2-1",
+      "e2-2"
+    ],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:26:05.746Z",
+    "reason": "click:btEquipSkill",
+    "sample": "boiler",
+    "mode": "normal",
+    "phase": "player",
+    "energy": 2,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 50
+      }
+    ],
+    "hand": [
+      "e2-1",
+      "e2-2"
+    ],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": {
+      "act": "consume",
+      "n": 2,
+      "srcCard": {
+        "id": "tt3eq-boiler",
+        "name": "魔法锅炉",
+        "frozen": true,
+        "rulesFrozen": null
+      },
+      "payment": null
+    },
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:26:05.749Z",
+    "reason": "render",
+    "sample": "boiler",
+    "mode": "normal",
+    "phase": "player",
+    "energy": 2,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 50
+      }
+    ],
+    "hand": [
+      "e2-1",
+      "e2-2"
+    ],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": {
+      "act": "consume",
+      "n": 2,
+      "srcCard": {
+        "id": "tt3eq-boiler",
+        "name": "魔法锅炉",
+        "frozen": true,
+        "rulesFrozen": null
+      },
+      "payment": null
+    },
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:26:16.097Z",
+    "reason": "click:btPickHand",
+    "sample": "boiler",
+    "mode": "normal",
+    "phase": "player",
+    "energy": 2,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 50
+      }
+    ],
+    "hand": [
+      "e2-2"
+    ],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": {
+      "act": "consume",
+      "n": 1,
+      "srcCard": {
+        "id": "tt3eq-boiler",
+        "name": "魔法锅炉",
+        "frozen": true,
+        "rulesFrozen": null
+      },
+      "payment": null
+    },
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:26:16.102Z",
+    "reason": "render",
+    "sample": "boiler",
+    "mode": "normal",
+    "phase": "player",
+    "energy": 2,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 50
+      }
+    ],
+    "hand": [
+      "e2-2"
+    ],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": {
+      "act": "consume",
+      "n": 1,
+      "srcCard": {
+        "id": "tt3eq-boiler",
+        "name": "魔法锅炉",
+        "frozen": true,
+        "rulesFrozen": null
+      },
+      "payment": null
+    },
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:26:26.080Z",
+    "reason": "click:btPickHand",
+    "sample": "boiler",
+    "mode": "normal",
+    "phase": "player",
+    "energy": 2,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 50
+      }
+    ],
+    "hand": [
+      "btsmujbgk9r0",
+      "btsmujbgk9r1",
+      "btsmujbgk9r2"
+    ],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:26:26.087Z",
+    "reason": "render",
+    "sample": "boiler",
+    "mode": "normal",
+    "phase": "player",
+    "energy": 2,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 50
+      }
+    ],
+    "hand": [
+      "btsmujbgk9r0",
+      "btsmujbgk9r1",
+      "btsmujbgk9r2"
+    ],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:26:39.991Z",
+    "reason": "battle-end",
+    "sample": "boiler",
+    "mode": "normal",
+    "phase": "player",
+    "energy": 2,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 50
+      }
+    ],
+    "hand": [],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  },
+  {
+    "at": "2026-09-27T04:26:39.993Z",
+    "reason": "exit",
+    "sample": "boiler",
+    "mode": "normal",
+    "phase": "player",
+    "energy": 2,
+    "foes": [
+      {
+        "name": "肃清总督",
+        "hp": 50
+      }
+    ],
+    "hand": [],
+    "deck": null,
+    "infusing": null,
+    "handSelecting": null,
+    "storageEqual": true,
+    "storageKeyCount": 42,
+    "baselineSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb",
+    "currentSha256": "475e234f6a4cc0a8a36fbda0db8bf28ac21f86605b4a20c7c4e9c887c144fddb"
+  }
+]

@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>E2 快照观察面隔离验收</title>
+<link rel="stylesheet" href="../../../game/css/base.css"><link rel="stylesheet" href="../../../game/css/overlays.css"><link rel="stylesheet" href="../../../game/css/battle.css">
+<style>body{margin:0;background:#111;color:#eee;font-family:system-ui}.qa-bar{position:relative;z-index:20;padding:12px;background:#171c22}.qa-bar button{margin:4px;padding:8px}.qa-bar output{display:block;color:#a9d9b2}#overlay{position:relative;inset:auto;display:block;min-height:650px}#overlay[hidden]{display:none}#overlay>.card{position:relative;inset:auto;transform:none;width:100%;max-width:none}#qaEvidence{white-space:pre-wrap;font:12px monospace;max-height:220px;overflow:auto}#qaTip{position:fixed;z-index:100;bottom:10px;right:10px;background:#26313c;padding:8px;max-width:350px}</style>
+</head><body>
+<header class="qa-bar"><b>E2 · 真实 BattleSession / BattleView 内存验收</b>
+<p>使用现行 RULES 和目录卡；不接玩家存档、奖励、背包与设置。占位美术；非自然玩家流程。</p>
+<button data-sample="boss">BOSS 编组</button><button data-sample="infuse">注能样本</button><button data-sample="select">手牌选择样本</button><button data-sample="payment">手牌支付样本</button><button data-sample="boiler">锅炉选牌样本</button><button id="qaReset">退出样本</button><button id="qaInspect">记录当前证据</button>
+<output id="qaState">加载中</output></header>
+<section id="overlay" hidden><div class="card"><h2 id="ovTitle"></h2><div id="ovBody"></div></div></section>
+<div id="qaTip" hidden></div><div id="log"></div><details><summary>隔离证据（无存档值）</summary><pre id="qaEvidence"></pre></details>
+<script type="module" src="../../../game/src/e2.snapshot.qa.js"></script>
+</body></html>
