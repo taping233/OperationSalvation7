@@ -1,7 +1,7 @@
 /* ═══════════════════════════════════════════════════════════════════
    基地主页美术升级（2026-09-24）——对标标题页 title-p0.css「09-24 美术升级」
    与选档页 page-slot-select.css 的定稿语言：
-     ① 冷青统一调色（壁纸分级/暗角视线归属）② #d9bb82 暖金装饰
+     ① 冷青统一调色（壁纸分级/暗角视线归属）② var(--gold-main) 暖金装饰
      （金线/端点光点/编号）③ 信息层级仪式感（档案编号行/资源章）
      ④ 四角密度（底部角饰线）⑤ 交互系统（hover/按压/焦点/三档节奏/入场）
    作用域：全部规则限定基地主页——主体挂 #overlay #hubMain；面板级入场挂
@@ -55,10 +55,10 @@
   animation: hubGemBreath 6s ease-in-out infinite alternate;
   filter: drop-shadow(0 0 4px #d9bb8238);
   background:
-    radial-gradient(2.6px 2.6px at 23px calc(100% - 9px), #ffe9b6 40%, transparent 75%),
+    radial-gradient(2.6px 2.6px at 23px calc(100% - 9px), var(--gold-bright) 40%, transparent 75%),
     linear-gradient(90deg, #d9bb82b3, transparent) 23px calc(100% - 9px) / 54px 1px no-repeat,
     linear-gradient(0deg, #d9bb82b3, transparent) 23px calc(100% - 27px) / 1px 18px no-repeat,
-    radial-gradient(2.6px 2.6px at calc(100% - 23px) calc(100% - 9px), #ffe9b6 40%, transparent 75%),
+    radial-gradient(2.6px 2.6px at calc(100% - 23px) calc(100% - 9px), var(--gold-bright) 40%, transparent 75%),
     linear-gradient(270deg, #d9bb82b3, transparent) calc(100% - 77px) calc(100% - 9px) / 54px 1px no-repeat,
     linear-gradient(0deg, #d9bb82b3, transparent) calc(100% - 23px) calc(100% - 27px) / 1px 18px no-repeat;
 }
@@ -69,10 +69,10 @@
   #overlay #hubMain::before {
     height: 13px; opacity: .4;
     background:
-      radial-gradient(2.6px 2.6px at 23px calc(100% - 5px), #ffe9b6 40%, transparent 75%),
+      radial-gradient(2.6px 2.6px at 23px calc(100% - 5px), var(--gold-bright) 40%, transparent 75%),
       linear-gradient(90deg, #d9bb82b3, transparent) 23px calc(100% - 5px) / 54px 1px no-repeat,
       linear-gradient(0deg, #d9bb82b3, transparent) 23px calc(100% - 13px) / 1px 8px no-repeat,
-      radial-gradient(2.6px 2.6px at calc(100% - 23px) calc(100% - 5px), #ffe9b6 40%, transparent 75%),
+      radial-gradient(2.6px 2.6px at calc(100% - 23px) calc(100% - 5px), var(--gold-bright) 40%, transparent 75%),
       linear-gradient(270deg, #d9bb82b3, transparent) calc(100% - 77px) calc(100% - 5px) / 54px 1px no-repeat,
       linear-gradient(0deg, #d9bb82b3, transparent) calc(100% - 23px) calc(100% - 13px) / 1px 8px no-repeat;
   }
@@ -96,7 +96,7 @@
 #overlay #hubMain .hub-head::before {
   content: ''; position: absolute; right: 8px; bottom: -3px; width: 5px; height: 5px;
   border-radius: 50%; pointer-events: none;
-  background: #ffe9b6;
+  background: var(--gold-bright);
   box-shadow: 0 0 10px #d9bb82d9, 0 0 22px #d9bb8255;
   animation: hubGemBreath 5s ease-in-out infinite alternate;
 }
@@ -193,14 +193,14 @@
 #overlay #hubMain .hub-tab:active { transform: translateX(2px) scale(.97); transition-duration: .08s; }
 /* 激活态：金线轨道 + 暖金微光 + 左缘端点光点呼吸 */
 #overlay #hubMain .hub-tab.on {
-  color: #f0e7d0; border-left-color: #d9bb82;
+  color: #f0e7d0; border-left-color: var(--gold-main);
   background: linear-gradient(90deg, rgba(217, 187, 130, .14), rgba(217, 187, 130, .035) 62%, transparent);
   text-shadow: 0 0 10px rgba(217, 187, 130, .22);
 }
 #overlay #hubMain .hub-tab.on::after {
   content: ''; position: absolute; left: -3.5px; top: 50%; width: 5px; height: 5px;
   margin-top: -2.5px; border-radius: 50%;
-  background: #ffe9b6; box-shadow: 0 0 8px 1px rgba(217, 187, 130, .7);
+  background: var(--gold-bright); box-shadow: 0 0 8px 1px rgba(217, 187, 130, .7);
   animation: hubGemBreath 5s ease-in-out infinite alternate;
 }
 
@@ -209,20 +209,20 @@
 /* W4a 简报卡：边框收进金族，眉题/主标题按档案语言提级 */
 #overlay #hubMain .deploy-mission { border-color: rgba(217, 187, 130, .26); }
 #overlay #hubMain .deploy-mission-copy .eyebrow,
-#overlay #hubMain .deploy-readiness-panel .eyebrow { color: #d9bb82; letter-spacing: 3px; }
+#overlay #hubMain .deploy-readiness-panel .eyebrow { color: var(--gold-main); letter-spacing: 3px; }
 #overlay #hubMain .deploy-mission-copy h3 {
   letter-spacing: 3px;
   text-shadow: 0 2px 18px rgba(3, 10, 16, .75), 0 0 4px rgba(217, 187, 130, .22);
 }
 #overlay #hubMain .deploy-mission-target {
-  border-left-color: #d9bb82; background: rgba(5, 13, 20, .66);
+  border-left-color: var(--gold-main); background: rgba(5, 13, 20, .66);
 }
 #overlay #hubMain .deploy-mission-target span { color: #93a9ad; }
 #overlay #hubMain .deploy-mission-target b { color: #efe0b6; }
 
-/* W4b 主 CTA（出发整备 / 研究所）：金渐变收口到 #d9bb82 族 + 三态反馈 */
+/* W4b 主 CTA（出发整备 / 研究所）：金渐变收口到 var(--gold-main) 族 + 三态反馈 */
 #overlay #hubMain .deploy-primary {
-  border-color: #d9bb82;
+  border-color: var(--gold-main);
   background: linear-gradient(135deg, #ddc089, #ab8a4e);
   box-shadow: inset 0 1px 0 rgba(255, 240, 205, .4), 0 8px 22px rgba(0, 0, 0, .3);
   transition: filter var(--hub-fast), transform var(--hub-fast), box-shadow var(--hub-fast),
@@ -248,7 +248,7 @@
   box-shadow: 0 0 14px rgba(217, 187, 130, .12);
 }
 
-/* W4c 行动模式卡：hover 抬升 + 激活态金线（#dfc28d → #d9bb82 同族 retint） */
+/* W4c 行动模式卡：hover 抬升 + 激活态金线（#dfc28d → var(--gold-main) 同族 retint） */
 #overlay #hubMain .mode-card {
   transition: border-color var(--hub-lift), background var(--hub-lift),
     box-shadow var(--hub-lift), transform var(--hub-lift);
@@ -259,14 +259,14 @@
 }
 #overlay #hubMain .mode-card:active { transform: translateY(0) scale(.985); transition-duration: .08s; }
 #overlay #hubMain .mode-card.on {
-  border-color: #d9bb82;
-  box-shadow: inset 3px 0 #d9bb82, 0 0 14px rgba(217, 187, 130, .12);
+  border-color: var(--gold-main);
+  box-shadow: inset 3px 0 var(--gold-main), 0 0 14px rgba(217, 187, 130, .12);
 }
 
 /* W4d 右栏准备面板：编号短金线化 + 状态章 retint 冷青绿 */
 #overlay #hubMain .deploy-readiness-panel { border-color: rgba(159, 183, 188, .24); }
 #overlay #hubMain .readiness-head > b { letter-spacing: 2px; }
-#overlay #hubMain .readiness-item i { color: #d9bb82; }
+#overlay #hubMain .readiness-item i { color: var(--gold-main); }
 #overlay #hubMain .brief-mode b { color: #efe0b6; }
 #overlay #hubMain .brief-status {
   border-color: rgba(143, 196, 178, .42); color: #bfe0cd;
@@ -333,12 +333,12 @@
 #overlay #hubMain :is(button, select, input, [role="button"]):focus-visible {
   outline: 1px solid #d9bb82cc;
   outline-offset: 2px;
-  box-shadow: 0 0 0 1px #071720, 0 0 12px rgba(217, 187, 130, .35);
+  box-shadow: 0 0 0 1px var(--bg-deep), 0 0 12px rgba(217, 187, 130, .35);
 }
 #overlay .card.page:has(#hubMain) .ov-x:focus-visible {
   outline: 1px solid #d9bb82cc;
   outline-offset: 2px;
-  box-shadow: 0 0 0 1px #071720, 0 0 12px rgba(217, 187, 130, .35);
+  box-shadow: 0 0 0 1px var(--bg-deep), 0 0 12px rgba(217, 187, 130, .35);
 }
 
 /* ═════════ T6 光标自查：button 默认 cursor 补 pointer（禁用态除外） ═════════ */
@@ -397,7 +397,7 @@
 }
 #overlay #hubMain .gate-scale i.lit {
   border-color: rgba(217, 187, 130, .8);
-  background: linear-gradient(180deg, #ffe9b6, #d9bb82 52%, #b8934c);
+  background: linear-gradient(180deg, var(--gold-bright), var(--gold-main) 52%, var(--gold-dim));
   box-shadow: 0 0 6px rgba(217, 187, 130, .45), inset 0 1px 0 rgba(255, 242, 207, .6);
   animation: hubKeyBreath 2.8s ease-in-out infinite alternate;
 }

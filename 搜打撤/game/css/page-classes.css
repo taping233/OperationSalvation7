@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════════════════════════════
    基地·人物页签美术升级（2026-09-24）——对标 page-hub.css / page-slot-select.css
-   定稿语言：① 冷青统一调色 ② #d9bb82 暖金装饰（金发丝线/端点光点/封条顶线/
+   定稿语言：① 冷青统一调色 ② var(--gold-main) 暖金装饰（金发丝线/端点光点/封条顶线/
    编号短线）③ 信息排版仪式感（层级分离/发丝分隔线）④ 交互三档节奏
    （fast .18s / lift .32s 弹性 / press .1s）+ hover/按压/焦点/出入场。
    作用域：全部规则限定人物页签内容区 #overlay #hubMain.hub-classes；
@@ -17,7 +17,7 @@
 #overlay #hubMain.hub-classes .class-command {
   position: relative;
   border-color: rgba(159, 183, 188, .2);
-  border-left-color: #d9bb82;
+  border-left-color: var(--gold-main);
 }
 /* C1a 下缘金发丝线（两端渐隐、中心提亮，同 hub-head W2a 语言） */
 #overlay #hubMain.hub-classes .class-command::after {
@@ -30,7 +30,7 @@
 #overlay #hubMain.hub-classes .class-command::before {
   content: ''; position: absolute; right: 10px; bottom: -3px; width: 5px; height: 5px;
   border-radius: 50%; pointer-events: none;
-  background: #ffe9b6;
+  background: var(--gold-bright);
   box-shadow: 0 0 10px #d9bb82d9, 0 0 22px #d9bb8255;
   animation: clsGemBreath 5s ease-in-out infinite alternate;
 }
@@ -39,7 +39,7 @@
 /* C1c 眉题：前置金短线（编号短线的仪式语言）+ 提色 */
 #overlay #hubMain.hub-classes .class-command .section-kicker {
   display: flex; align-items: center; gap: 8px;
-  color: #d9bb82;
+  color: var(--gold-main);
 }
 #overlay #hubMain.hub-classes .class-command .section-kicker::before {
   content: ''; display: block; width: 18px; height: 1px; flex: 0 0 auto;
@@ -116,7 +116,7 @@
 /* ═════════ C3 卡内信息层级：发丝分隔线 + 熟练度金头光点 ═════════ */
 
 /* C3a 眉题/人名/描述：层级分离（人名压暗投影保浅色立绘下的可读性） */
-#overlay #hubMain.hub-classes .class-dossier-kicker { color: #d9bb82; }
+#overlay #hubMain.hub-classes .class-dossier-kicker { color: var(--gold-main); }
 #overlay #hubMain.hub-classes .class-dossier h3 {
   text-shadow: 0 2px 14px rgba(3, 10, 16, .82), 0 0 3px rgba(217, 187, 130, .18);
 }
@@ -139,13 +139,13 @@
 }
 #overlay #hubMain.hub-classes .class-dossier .xp-bar i {
   position: relative;
-  background: linear-gradient(90deg, #8fb3b8, #d9bb82);
+  background: linear-gradient(90deg, #8fb3b8, var(--gold-main));
   box-shadow: 0 0 6px rgba(217, 187, 130, .28);
 }
 #overlay #hubMain.hub-classes .class-dossier.trained .xp-bar i::after {
   content: ''; position: absolute; right: -1px; top: 50%; width: 5px; height: 5px;
   margin-top: -2.5px; border-radius: 50%;
-  background: #ffe9b6;
+  background: var(--gold-bright);
   box-shadow: 0 0 8px 1px rgba(217, 187, 130, .65);
 }
 #overlay #hubMain.hub-classes .class-dossier .xp-txt { color: #a7b8bd; letter-spacing: .06em; }
@@ -166,7 +166,7 @@
 }
 /* 选中皮肤 = 金章（金渐变 + 内高光 + 微金晕，同 deploy-primary 收口语言） */
 #overlay #hubMain.hub-classes .class-skins .mini-btn.ok {
-  border-color: #d9bb82;
+  border-color: var(--gold-main);
   background: linear-gradient(160deg, #e0c58e, #c2a469);
   color: #1c3038;
   box-shadow: inset 0 1px 0 rgba(255, 240, 205, .5), 0 0 10px rgba(217, 187, 130, .22);

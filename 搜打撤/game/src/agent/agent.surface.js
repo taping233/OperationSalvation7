@@ -40,12 +40,21 @@ const textLabel = (el) => {
 function collectUiActions() {
   const out = [];
   const seen = new Set();
+  // 战斗视图残留过滤（09-26 死锁根因①）：战斗结束 finish() 只清状态不销毁 DOM，
+  // sts-* 战斗界面留在 ovBody 里——节点浮层一开，HUD 键（btPlay/btBag/btFlee…）混进
+  // 浮层动作面：点击被浮层挡住无效但 handler 存在恒 ok=true，失败保护全失效，
+  // LRU 翻完 HUD 后固定连点最后一键直到 spin 熔断（实测 43/44 弃局现场同构）。
+  // battle 相不过滤（战斗内弹层「返回战斗」等浮层键 + HUD 本来就是合法操作面）。
+  const battleActive = (() => {
+    try { return !!window.SDT?.game?.battleActive; } catch { return false; }
+  })();
   const scan = (root) => {
     if (!root) return;
     for (const el of root.querySelectorAll('[data-act]')) {
       const act = el.getAttribute('data-act');
       if (!act) continue;
       if (el.disabled === true || el.getAttribute('aria-disabled') === 'true' || el.classList.contains('off')) continue;
+      if (!battleActive && el.closest('.sts-topbar, .sts-hud, .sts-arena, .sts-hand, .sts-tactics')) continue;
       const params = {};
       for (const [key, value] of Object.entries(el.dataset)) {
         if (key !== 'act') params[key] = value;

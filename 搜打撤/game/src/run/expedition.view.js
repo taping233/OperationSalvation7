@@ -39,6 +39,7 @@ export function expeditionRoutes(game) {
     const cleared = !!game.visited?.[`${li},${idx}`] &&
       !door && !['entrance', 'emergencyExit', 'extraction', 'altar', 'boss'].includes(type);
     return [{ li, idx, baseName: routeName, name:routeName, icon, tone: cleared ? 'quiet' : tone,
+      door: !!(door && !door.reverse),   // W1-10：前进层间闸门卡给专属高亮钩子
       hint: cleared ? '已探索 · 可通行，物资不再刷新' : door?.reverse ? '返回上一片区域' : routeHint,
       cleared, selected: game.moveTarget?.li === li && game.moveTarget?.idx === idx }];
   });
@@ -60,6 +61,29 @@ export function expeditionObjective(game) {
   if (game.hp > 0 && game.hp / game.maxHp <= .25) return { tone: 'danger', text: '生命危急 · 留意火堆与治疗补给' };
   if (game.layerIdx === 2) return { tone: 'safe', text: '撤离已开放 · 找到信标，献祭 3 张卡牌' };
   if (game.layerIdx >= 3) return { tone: 'gold', text: game.bossKilled ? '首脑已击破 · 前往终局撤离点' : '最终区域 · 经祭坛挑战首脑' };
+  // W1-10（2026-09-27 R2）：闸门方向信号。此前目标文案零导航信息（评审三轮走查
+  // 「只见相邻类型」）。读层门派生数据算最近前进闸门的方位角+直线步数——纯信息
+  // 呈现：门节点本就随地图持久渲染（renderer PERSISTENT_TYPES），不给自动寻路、不揭迷雾。
+  const layer = game.layerData?.[game.layerIdx];
+  const gates = (layer?.doors || []).filter(d => !d.exit);
+  const pos = game.nodePos?.[game.layerIdx]?.[game.trackPos];
+  if (gates.length && pos) {
+    let best = null;
+    for (const d of gates) {
+      const p = game.nodePos[game.layerIdx][d.at];
+      if (!p) continue;
+      const dist = Math.hypot(p.x - pos.x, p.y - pos.y);
+      if (!best || dist < best.dist) best = { dist, dx: p.x - pos.x, dy: p.y - pos.y };
+    }
+    if (best) {
+      // 屏幕坐标 y 向下：atan2(dy, dx) 0=东、π/4=东南（顺时针），八方位取整。
+      // 实测对账修正过一次参数序反转（门在东南被报成北）——以 raw dx/dy 对拍为准。
+      const DIRS = ['东', '东南', '南', '西南', '西', '西北', '北', '东北'];
+      const dir = DIRS[((Math.round(Math.atan2(best.dy, best.dx) / (Math.PI / 4)) % 8) + 8) % 8];
+      const steps = Math.max(1, Math.round(best.dist / 120));   // 120 = game.session.map MAP_NODE_SPACING 同值
+      return { tone: 'gold', text: `下一层闸门在${dir}方向 · 直线约 ${steps} 格 · 沿路搜集补给` };
+    }
+  }
   return { tone: 'quiet', text: '搜集补给，寻找通往下一层的闸门' };
 }
 
@@ -87,9 +111,9 @@ export function renderExpeditionPanel(panel, game, iconHTML) {
   title.textContent = disabled ? '行动进行中' : `下一步 · ${routes.length} 条路线`;
   note.textContent = objective.text;
   note.dataset.tone = objective.tone;
-  options.innerHTML = routes.map(r => `<button type="button" class="route-option${r.selected ? ' selected' : ''}" data-route-index="${r.idx}" data-route-layer="${r.li}" data-tone="${r.tone}" aria-label="${esc(r.ariaLabel || `${r.name}（节点 ${r.idx + 1}）`)}" ${disabled ? 'disabled' : ''}>
+  options.innerHTML = routes.map(r => `<button type="button" class="route-option${r.selected ? ' selected' : ''}" data-route-index="${r.idx}" data-route-layer="${r.li}" data-tone="${r.tone}"${r.door ? ' data-door="1"' : ''} aria-label="${esc(r.ariaLabel || `${r.name}（节点 ${r.idx + 1}）`)}" ${disabled ? 'disabled' : ''}>
     <span class="route-icon" aria-hidden="true">${iconHTML(r.icon)}</span>
-    <span class="route-copy"><b>${esc(r.name)}${r.cleared ? ' · 已探索' : ''}</b><small>${esc(r.hint)}</small></span>
+    <span class="route-copy"><b>${esc(r.name)}</b><small>${esc(r.hint)}</small></span>
     <span class="route-arrow" aria-hidden="true">↗</span>
   </button>`).join('');
   if (!routes.length) options.innerHTML = '<span class="route-empty">当前没有相邻路线，请检查本节点的事件。</span>';

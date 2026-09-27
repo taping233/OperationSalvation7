@@ -7,6 +7,7 @@
  * ============================================================ */
 import { CHARACTERS, characterFor, characterName } from '../core/characters.js';
 import { esc, escAttr } from '../core/shared.js';
+import { assetUrl } from '../core/asset-url.js';
 import { MAP, MODES, curLayer, enterLayer, exitToTitle, game, getActiveSlot, newUid, saveGame, scaledEnemy } from './game.session.js';
 import { createExtractionCommands, validatePendingExtraction } from '../hub/extraction.commands.js';
 import { openBaseHub } from '../hub/game.hub.js';
@@ -19,6 +20,17 @@ const CLASS_STORY = {
   heixiang: '正面硬扛的战士，擅长叠护甲与施加流血。',
   xingyue: '擅长治疗与圣盾，用圣光法术守护自己。',
 };
+// 职业徽记（LEG-6a，0926 W1）：既有位图挂接，源件 .ui-art-loop-0925/nai-out/（只读引用）。
+// 出图文件名 dwu 对应 characters.js 的 changwuyu（常无欲，女巫帽徽记）。
+const CLASS_EMBLEM_FILE = {
+  wu: 'profession-emblem-wu.png',
+  changwuyu: 'profession-emblem-dwu.png',
+  baita: 'profession-emblem-baita.png',
+  heixiang: 'profession-emblem-heixiang.png',
+  xingyue: 'profession-emblem-xingyue.png',
+};
+const emblemSrc = id => CLASS_EMBLEM_FILE[id]
+  ? assetUrl(`assets/ui/emblems/${CLASS_EMBLEM_FILE[id]}`) : '';
 
 import { Sfx, _set_cardPageOpen } from '../hub/game.cardslib.js';
 import { Random, SeededRandomService } from '../core/random.js';
@@ -108,7 +120,10 @@ export function openClassChoice(options = {}) {
           <aside class="cls2-panel" style="--cls-color:${story ? story.color : '#69aec2'}" data-wm="${escAttr(story ? story.id : '')}">
             ${story ? `
               <div class="cls2-eyebrow">WINTER EXPEDITION · CLASS SELECT</div>
-              <h2 class="cls2-name">${esc(story.name)}</h2>
+              <div class="cls2-nameline">
+                ${emblemSrc(story.id) ? `<img class="cls2-crest" src="${emblemSrc(story.id)}" alt="" aria-hidden="true" decoding="async" draggable="false">` : ''}
+                <h2 class="cls2-name">${esc(story.name)}</h2>
+              </div>
               <div class="cls2-chips">
                 <span class="cls2-chip cls2-chip-role">${esc(story.rulesetId)}</span>
                 <span class="cls2-chip${sel ? ' cls2-chip-live' : ''}">${sel ? '本局人物' : '预览'}</span>
@@ -144,7 +159,7 @@ export function openClassChoice(options = {}) {
         </div>
         <div class="cls2-strip">${roster.map(({ cl, c }) => `
           <button class="cls2-face${cl === sel ? ' sel' : ''}" data-act="selClass" data-cls="${escAttr(cl)}" title="${escAttr(c.name)}" aria-pressed="${cl === sel ? 'true' : 'false'}">
-            ${SDT.Art.classArt(cl, true)}<b>${esc(c.name)}</b>
+            ${SDT.Art.classArt(cl, true)}${emblemSrc(c.id) ? `<img class="cls2-face-crest" src="${emblemSrc(c.id)}" alt="" aria-hidden="true" decoding="async" draggable="false">` : ''}<b>${esc(c.name)}</b>
           </button>`).join('')}</div>
         <button class="cls2-back" data-act="cls2Quit" title="${onCancel ? '返回出发整备' : '返回标题界面'}"><svg class="svg-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.5 5.5 4 12l6.5 6.5M4.6 12H20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <button class="cls2-confirm" data-act="pickClass" ${sel ? '' : 'disabled'} title="${sel ? '出发' : '请先选择角色'}" aria-label="${sel ? '出发' : '请先选择角色'}"><span>${sel ? '出发' : '选择角色后出发'}</span><svg class="svg-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12.5 10 18 19.5 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -743,6 +758,11 @@ export function resumeExtraction(pending) {
 
 export async function doExtract() {
   if (!game.runActive || game.pendingExtraction || extractionStarting) return false;
+  // 撤离前先落盘（09-27 撤离保存失败修复）：saveGame 只在部分节点结算时触发——
+  // 低血速通路线（跳宝箱、直奔撤离点）可全程零存档，begin 的 readCurrent 读到
+  // 不存在的 RUN_KEY 报「版本或结构无效」→ extractRetry 重试页每按一次都重复失败，
+  // 玩家被锁死在撤离页（agent 实测 V 底 8 局死锁）。撤离前写一次当前局面即消除
+  saveGame();
   extractionStarting = true;
   const startedFromSlot = getActiveSlot();
   const initialIdentity = startedFromSlot ? RunStorage.readIdentity(startedFromSlot) : null;

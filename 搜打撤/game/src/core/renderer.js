@@ -271,12 +271,15 @@ const SDT = window.SDT;
       const pulse = current && !reduced ? 1 + Math.sin((game.time || 0) * 3.4) * .06 : 1;
       ctx.save();
       ctx.globalAlpha = current || legal ? 1 : .38;
-      const color = current ? '#f3dfad' : NODE_TYPE_COLORS[n.def.type] || '#82b8d0';
+      // W1-10（2026-09-27 R2）：层间闸门金色化——门是层内唯一主线目标，此前与普通
+      // 节点同色（NEW M-1 并入 W1-10）。金色 = 全站「目标/通道」语义色。
+      const isDoor = game.doorKeys ? game.doorKeys.has(`${n.li},${n.idx}`) : false;
+      const color = current ? '#f3dfad' : isDoor ? (legal ? '#edcb8d' : '#c8ac74') : NODE_TYPE_COLORS[n.def.type] || '#82b8d0';
       // 消耗过的节点（2026-09-13 留言）：踩过一次的格子内容已取走，图标换成空白节点图标
-      const spent = walked && !current && !PERSISTENT_TYPES.has(n.def.type);
+      const spent = walked && !current && !PERSISTENT_TYPES.has(n.def.type) && !isDoor;
       ctx.translate(n.x, n.y); ctx.rotate(Math.PI / 4); ctx.scale(pulse, pulse);
       ctx.fillStyle = '#0a1b27'; ctx.fillRect(-n.r * .78, -n.r * .78, n.r * 1.56, n.r * 1.56);
-      ctx.strokeStyle = current ? '#f1d99c' : legal ? color : '#55717d'; ctx.lineWidth = (current ? 2.2 : legal ? 1.7 : 1) / z;
+      ctx.strokeStyle = current ? '#f1d99c' : isDoor ? '#e2c88f' : legal ? color : '#55717d'; ctx.lineWidth = (current ? 2.2 : isDoor && legal ? 2 : legal ? 1.7 : 1) / z;
       ctx.strokeRect(-n.r * .78, -n.r * .78, n.r * 1.56, n.r * 1.56);
       ctx.rotate(-Math.PI / 4); ctx.scale(1 / pulse, 1 / pulse); ctx.translate(-n.x, -n.y);
       drawTacticalIcon(ctx, spent ? 'blank' : n.def.type, n.x, n.y, Math.max(.8, n.r / 12), spent ? '#7d95a0' : color);
@@ -311,7 +314,7 @@ const SDT = window.SDT;
       if (!current && !legal && z < .65) continue;
       const p = game.cam.worldToScreen(n.x, n.y);
       if (p.x < 20 || p.x > game.cam.viewW - 20 || p.y < 60 || p.y > game.cam.viewH - 55) continue;
-      const door = game.layerData[n.li]?.doors?.some(d => d.at === n.idx);
+      const door = game.doorKeys ? game.doorKeys.has(`${n.li},${n.idx}`) : !!game.layerData[n.li]?.doors?.some(d => d.at === n.idx);
       const name = NODE_INFO[door ? 'door' : n.def.type]?.[0] || '安全节点';
       const label = `${current ? '当前位置 · ' : ''}${name}`;
       let w = labelWidthCache.get(label);
@@ -321,7 +324,7 @@ const SDT = window.SDT;
       occupied.push({x,y,w});
       ctx.fillStyle = current ? '#dfc28d' : '#0a1923e8';
       rrect(ctx, x, y, w, 27, 3); ctx.fill();
-      ctx.strokeStyle = current ? '#f5e2bc' : legal ? '#a49374' : '#45616e';
+      ctx.strokeStyle = current ? '#f5e2bc' : door ? '#d9bb82a6' : legal ? '#a49374' : '#45616e';
       ctx.lineWidth = 1; ctx.stroke();
       ctx.fillStyle = current ? '#122633' : '#e6eef1'; ctx.fillText(label, p.x, y + 13.5);
     }

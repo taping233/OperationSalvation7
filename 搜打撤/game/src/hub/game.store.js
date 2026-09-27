@@ -1,5 +1,11 @@
+// @ts-check
 import { sdtDefine } from '../core/sdt-facade.js';
 
+/** @typedef {import('./game.store.types.js').GameMap} GameMap */
+/** @typedef {import('./game.store.types.js').GameState} GameState */
+/** @typedef {import('./game.store.types.js').GameSnapshot} GameSnapshot */
+
+/** @param {GameMap} map @returns {GameState} */
 function createGameState(map) {
   return {
     map,
@@ -36,11 +42,13 @@ function createGameState(map) {
 }
 
 class GameStore {
+  /** @param {GameMap} map */
   constructor(map) {
     if (!map || !map.rules) throw new TypeError('GameStore 需要有效地图配置');
     this.state = createGameState(map);
   }
 
+  /** @returns {GameSnapshot} */
   getSnapshot() {
     const state = this.state;
     return Object.freeze({
@@ -48,24 +56,38 @@ class GameStore {
       toggles: Object.freeze({ ...state.toggles }),
       rings: freezeRows(state.rings),
       pos: Object.freeze({ ...state.pos }),
-      ownedCards: freezeRows(state.ownedCards),
+      ownedCards: freezeDataRows(state.ownedCards),
       cardOrder: Object.freeze(state.cardOrder.slice()),
-      usedPocket: freezeRows(state.usedPocket),
-      shopStock: freezeRows(state.shopStock),
+      usedPocket: freezeDataRows(state.usedPocket),
+      shopStock: freezeDataRows(state.shopStock),
+      ...(state.shopStocks ? { shopStocks: freezeDataValue(state.shopStocks) } : {}),
       inventory: freezeRows(state.inventory),
       discoveredPairs: Object.freeze([...state.discoveredPairs]),
     });
   }
 }
 
-// 快照只读保障（2026-09-11 架构批次 1）：集合元素逐行浅拷贝后冻结——
-// 视图改快照内嵌对象会 TypeError（ESM strict）而不是静默污染 state。
-// map / hover / moveTarget 等节点或第三方对象保持引用：地图节点
-// 的 visited 由渲染层就地标记，不属于快照只读范畴。
+// 一层行快照；适用于 inventory 这类目前只有标量字段的集合。
 function freezeRows(rows) {
   return Object.freeze((rows || []).map((row) => {
     return (row && typeof row === 'object') ? Object.freeze({ ...row }) : row;
   }));
+}
+
+// 卡牌、货架与消耗口袋包含嵌套纯数据，应逐层隔离；带原型对象保留引用。
+function freezeDataRows(rows) {
+  return Object.freeze((rows || []).map((row) => freezeDataValue(row)));
+}
+
+function freezeDataValue(value) {
+  if (!value || typeof value !== 'object') return value;
+  const prototype = Object.getPrototypeOf(value);
+  if (!Array.isArray(value) && prototype !== Object.prototype && prototype !== null) return value;
+
+  const copy = Array.isArray(value)
+    ? value.map(freezeDataValue)
+    : Object.fromEntries(Object.entries(value).map(([key, child]) => [key, freezeDataValue(child)]));
+  return Object.freeze(copy);
 }
 
 sdtDefine('GameStore', GameStore);

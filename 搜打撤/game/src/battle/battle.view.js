@@ -303,6 +303,17 @@ import { aim, aimPlayedAt, selectCardByClick, showCardBlockReason, startAim, can
       ? ({ boss_general: 'battle-boss-general', boss_orc: 'battle-boss-orc', boss_elem: 'battle-boss-element' }[foes[0] && foes[0].id] || 'battle-boss-general')
       : 'battle-normal';
     const combatState = combatStateCopy(snapshot);
+    // W3-02（2026-09-27 R2）：熟练度进度微条（轻做）——局内可见「距升级多近」。
+    // XP 模型=终局结算固定 +5（terminal.commands applyDeathOutcome），战斗中不改值，
+    // 本 chip 只读 Meta 现值做持续载体（每场战斗渲染时刷新）；结算页（W3-01）负责跳变。
+    const xpChipHTML = (() => {
+      const cls = SDT.game && SDT.game.myClass;
+      if (!cls || !SDT.Meta || typeof SDT.Meta.classSummary !== 'function') return '';
+      const s = SDT.Meta.classSummary(cls).find(c => c.cls === cls);
+      if (!s || s.maxed) return '';
+      const pct = s.need ? Math.min(100, Math.round(s.xp / s.need * 100)) : 0;
+      return `<span class="sts-xp-chip" title="熟练度进度 · 局末结算 +5 XP"><span class="sts-xp-bar" aria-hidden="true"><i style="width:${pct}%"></i></span>Lv.${s.lv} · ${s.xp}/${s.need} · 差 ${s.need - s.xp} 点</span>`;
+    })();
     // 战斗标题文字去掉（2026-09-13 留言）
     showBattleStage(`
       <div class="battle-stage sts phase-${escAttr(phase)}" data-phase="${escAttr(phase)}" data-asset-key="${battleAssetKey}" data-boss="${opts.isBoss ? '1' : '0'}">
@@ -311,7 +322,7 @@ import { aim, aimPlayedAt, selectCardByClick, showCardBlockReason, startAim, can
       <div class="sts-topbar">
         <div class="sts-encounter">
           <span class="sts-encounter-kicker">${opts.isBoss ? '冬核深处 · 首脑遭遇' : '冬境街区 · 遭遇'}</span>
-          <b>第 ${turn} 回合</b><span class="sts-phase-dot ${escAttr(combatState.tone)}"></span><span>${esc(combatState.label)}</span>
+          <b>第 ${turn} 回合</b><span class="sts-phase-dot ${escAttr(combatState.tone)}"></span><span>${esc(combatState.label)}</span>${xpChipHTML}
         </div>
         <div class="sts-hud-l">
           ${drawPileHTML}
@@ -344,7 +355,7 @@ import { aim, aimPlayedAt, selectCardByClick, showCardBlockReason, startAim, can
           <div class="sts-tactics-secondary">
             <button class="ov-btn ghost${mode === 'boss' ? ' dis' : ''}" data-act="btBag" ${busy || infusingNow ? 'disabled' : ''}
               ${mode === 'boss' ? 'title="BOSS 战为牌库制：道具与资源不参战，背包不可打开"' : 'title="打开战斗背包（B）"'}>[[icon:bag]] 背包</button>
-            <button class="ov-btn ghost${mode === 'boss' ? ' dis' : ''}" data-act="btFlee" ${busy || infusingNow ? 'disabled' : ''}
+            <button class="ov-btn ghost${mode === 'boss' ? ' dis' : ''}" data-act="btFlee" ${busy || infusingNow ? 'disabled' : ''} style="margin:0 12px"
               ${mode === 'boss' ? 'title="BOSS 战不可撤离——击败首脑或战败即终局"' : 'title="撤离将视为本局失败（安全格中的卡牌会抢运回基地，其余丢失）"'}>[[icon:runner]] 撤离（判负）</button>
             <button class="ov-btn ghost" data-act="btSettings" title="战斗设置（音频 / 震动）">[[icon:gear]] 设置</button>
           </div>
@@ -396,15 +407,29 @@ import { aim, aimPlayedAt, selectCardByClick, showCardBlockReason, startAim, can
         SDT.Sound.sfx('deny');
         return;
       }
-      // 撤离=判负不可逆：两步确认防误触（同设置弹窗危险钮模式，2.6 秒后自动还原）
+      // 撤离=判负不可逆：两步确认防误触（同设置弹窗危险钮模式，2.6 秒后自动还原）。
+      // W2-01（2026-09-27 R2）：arm 态此前只换文本——.arm 类全 css 无样式（评审实锤
+      // 「无色彩升级」），不可逆钮埋在低危排里第二击即判负，危险度必须映射到视觉
+      // 维度（透镜 #66）。battle.css 冻结、独立片 include 管线未通 → 模块级注入
+      // 样式表（head 内 .ov-btn.ghost.arm 规则，!important 压 winter 底式）；实测
+      // 异步环节可能剥 style 属性但不动 class，故样式挂类、内联仅作双保险。
       const btn = document.querySelector('#ovBody [data-act="btFlee"]');
       if (!btn || btn.dataset.confirm) { surrender(); return; }   // 玩法定版：主动撤离=本局失败（烟雾弹走 fleeBattle 豁免）
       const prev = btn.innerHTML;
+      const prevStyle = btn.getAttribute('style') || '';   // 模板自带的 margin:0 12px（危险钮间距分级）还原基准
       btn.dataset.confirm = '1';
       btn.innerHTML = SDT.Icons.rich('[[icon:runner]] 确认撤离？');
       btn.classList.add('arm');
+      Object.assign(btn.style, {
+        color: '#f6ddd6', background: '#61241f', borderColor: '#c96a5c',
+        boxShadow: '0 0 10px rgba(201,106,92,.45), inset 0 0 8px rgba(120,40,32,.5)',
+        transform: 'scale(1.07)',
+      });
       setTimeout(() => {
-        if (btn.isConnected) { delete btn.dataset.confirm; btn.classList.remove('arm'); btn.innerHTML = prev; }
+        if (btn.isConnected) {
+          delete btn.dataset.confirm; btn.classList.remove('arm'); btn.innerHTML = prev;
+          btn.setAttribute('style', prevStyle);
+        }
       }, 2600);
     });
     UI.act('btGrave', openGrave);
@@ -547,5 +572,20 @@ import { aim, aimPlayedAt, selectCardByClick, showCardBlockReason, startAim, can
   }));
 
 configureBattleRenderer(render);
+
+/* W2-01（2026-09-27 R2）：撤离 arm 态样式。battle.css 冻结、独立片 include 管线
+ * 未通 → 模块级向 head 注入一条规则（term-tips 的「模块执行时 DOM 已解析」同款
+ * 直接挂法）。!important 压 winter.css .ov-btn 底式；实测异步环节可能剥按钮的
+ * style 属性但不动 class，故视觉挂 .arm 类而非内联。 */
+/* W3-02（2026-09-27 R2）：熟练度进度微条样式（顶栏 sts-encounter 尾部）。
+ * 主色=暗金弱存在（不与回合信息争权重，透镜 #66 通道分权）；hairline 进度条。 */
+if (!document.getElementById('stsXpChipStyle')) {
+  document.head.insertAdjacentHTML('beforeend',
+    '<style id="stsXpChipStyle">.sts-xp-chip{display:inline-flex;align-items:center;gap:6px;margin-left:12px;padding:2px 9px;border:1px solid rgba(217,187,130,.3);border-radius:999px;background:rgba(10,20,28,.55);color:#cbb795;font-size:10.5px;letter-spacing:.5px;vertical-align:middle}.sts-xp-chip .sts-xp-bar{display:inline-block;width:52px;height:4px;border-radius:999px;background:#0b141c;overflow:hidden}.sts-xp-chip .sts-xp-bar i{display:block;height:100%;background:linear-gradient(90deg,#c9a25a,#ecd9ad)}</style>');
+}
+if (!document.getElementById('btFleeArmStyle')) {
+  document.head.insertAdjacentHTML('beforeend',
+    '<style id="btFleeArmStyle">.ov-btn.ghost.arm{color:#f6ddd6!important;background:#61241f!important;border-color:#c96a5c!important;box-shadow:0 0 10px rgba(201,106,92,.45),inset 0 0 8px rgba(120,40,32,.5)!important;transform:scale(1.07)!important}</style>');
+}
 
 export { render };

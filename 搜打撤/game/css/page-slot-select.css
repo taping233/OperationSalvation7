@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════════════════════════════
    选档页美术升级（2026-09-24）——对标标题页 title-p0.css「09-24 美术升级」定稿语言
-   手法：① 冷青统一调色（背景分级/暗角/视线归属）② #d9bb82 暖金装饰线与端点光点
+   手法：① 冷青统一调色（背景分级/暗角/视线归属）② var(--gold-main) 暖金装饰线与端点光点
          ③ 信息排版仪式感（SLOT 编号行、主/辅层级、装饰英文字距）④ 四角收束
    约束：全部规则限定在 .slot-page 作用域内，只覆盖不删除；动画仅 transform/opacity；
          面板关闭即随 #overlay[hidden] 停止。
@@ -33,13 +33,13 @@
   background: radial-gradient(circle at 38% 34%, rgba(240, 250, 252, .85), rgba(168, 214, 224, .26) 55%, transparent 72%);
 }
 
-/* ── W2 暖金装饰语言：页头分隔线（原银蓝 #b9c2e8 → #d9bb82 金线 + 端点光点呼吸） ── */
+/* ── W2 暖金装饰语言：页头分隔线（原银蓝 #b9c2e8 → var(--gold-main) 金线 + 端点光点呼吸） ── */
 .slot-page .slot-page-rule {
   background: linear-gradient(90deg, transparent, #d9bb82a1 26%, #d9bb82c4 50%, #d9bb82a1 74%, transparent);
   box-shadow: 0 0 6px #d9bb8233;
 }
 .slot-page .slot-page-rule::after {
-  background: #ffe9b6;
+  background: var(--gold-bright);
   box-shadow: 0 0 10px #d9bb82d9, 0 0 22px #d9bb8255;
   animation: slotGemBreath 5s ease-in-out infinite alternate;
 }
@@ -87,7 +87,7 @@
 .slot-page .slot-deck::before {
   left: clamp(22px, 3vw, 56px);
   background:
-    radial-gradient(2.6px 2.6px at 1px calc(100% - 1px), #ffe9b6 40%, transparent 75%),
+    radial-gradient(2.6px 2.6px at 1px calc(100% - 1px), var(--gold-bright) 40%, transparent 75%),
     linear-gradient(90deg, #d9bb82b3, transparent) left bottom / 100% 1px no-repeat,
     linear-gradient(0deg, #d9bb82b3, transparent) left bottom / 1px 100% no-repeat;
   filter: drop-shadow(0 0 4px #d9bb8238);
@@ -96,7 +96,7 @@
   right: clamp(22px, 3vw, 56px);
   transform: scaleX(-1);
   background:
-    radial-gradient(2.6px 2.6px at 1px calc(100% - 1px), #ffe9b6 40%, transparent 75%),
+    radial-gradient(2.6px 2.6px at 1px calc(100% - 1px), var(--gold-bright) 40%, transparent 75%),
     linear-gradient(90deg, #d9bb82b3, transparent) left bottom / 100% 1px no-repeat,
     linear-gradient(0deg, #d9bb82b3, transparent) left bottom / 1px 100% no-repeat;
   filter: drop-shadow(0 0 4px #d9bb8238);
@@ -226,7 +226,7 @@
 #overlay .slot-page .slot-page-help .help-btn:focus-visible {
   outline: 1px solid #d9bb82cc;
   outline-offset: 2px;
-  box-shadow: 0 0 0 1px #071720, 0 0 12px rgba(217, 187, 130, .35);
+  box-shadow: 0 0 0 1px var(--bg-deep), 0 0 12px rgba(217, 187, 130, .35);
 }
 #overlay .pg.slot-page .pg-back:focus-visible { border-color: rgba(217, 187, 130, .4); }
 

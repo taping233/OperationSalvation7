@@ -1,26 +1,57 @@
+/** @typedef {'prepared' | 'base-written' | 'run-written'} JournalPhase */
+/** @typedef {{ baseRaw: string | null, runRaw: string | null }} RawPair */
+/** @typedef {{ base: string, run: string, journal: string }} JournalKeys */
+/** @typedef {{ version: 1, txId: string, slotId: number, requestId: string, command: string, fingerprint: string, runId: string, expectedBaseRevision: number, expectedRunRevision: number, before: RawPair, after: RawPair, receipt: Record<string, unknown>, phase: JournalPhase }} Journal */
+/** @typedef {{ getItem(key: string): string | null, setItem(key: string, value: string): void, removeItem(key: string): void }} StoragePort */
+/** @typedef {{ ok: false, code: string, message: string, retryable: boolean, details?: unknown }} Failure */
+/** @template T @typedef {{ ok: true, value: T } | Failure} Result */
+/** @typedef {{ ok: true } | Failure} JournalValidationResult */
+/** @typedef {'after-journal' | 'after-base' | 'after-run' | 'before-cleanup' | 'recover-after-base' | 'recover-after-run'} Failpoint */
+/** @typedef {{ storage: StoragePort, keyFor(slotId: number): JournalKeys, onChanged?: (slotId: number) => void, failpoint?: (point: Failpoint) => void, validateJournal?: (journal: Journal, slotId: number) => JournalValidationResult }} CreateRecoverablePairOptions */
+
+/** @type {Set<JournalPhase>} */
 const PHASES = new Set(['prepared', 'base-written', 'run-written']);
+/** @param {string} code @param {string} message @param {boolean} [retryable=false] @param {unknown} [details] @returns {Failure} */
 const fail = (code, message, retryable = false, details) => ({ ok: false, code, message, retryable, ...(details ? { details } : {}) });
 
-function validJournal(journal, slotId) {
-  if (!journal || journal.version !== 1 || journal.slotId !== slotId ||
-      typeof journal.txId !== 'string' || typeof journal.requestId !== 'string' ||
-      typeof journal.command !== 'string' || typeof journal.fingerprint !== 'string' ||
-      typeof journal.runId !== 'string' || !Number.isInteger(journal.expectedBaseRevision) ||
-      !Number.isInteger(journal.expectedRunRevision) || journal.expectedBaseRevision < 0 || journal.expectedRunRevision < 0 ||
-      !PHASES.has(journal.phase) || !journal.before || typeof journal.before !== 'object' ||
-      !journal.after || typeof journal.after !== 'object' || !journal.receipt ||
-      typeof journal.receipt !== 'object' || Array.isArray(journal.receipt)) return false;
-  return ['baseRaw', 'runRaw'].every(key =>
-    (journal.before[key] === null || typeof journal.before[key] === 'string') &&
-    (journal.after[key] === null || typeof journal.after[key] === 'string'));
+/** @param {unknown} value @returns {value is JournalPhase} */
+function isJournalPhase(value) {
+  return typeof value === 'string' && PHASES.has(/** @type {JournalPhase} */ (value));
 }
 
+/** @param {unknown} value @returns {value is RawPair} */
+function isRawPair(value) {
+  if (!value || typeof value !== 'object') return false;
+  const pair = /** @type {Record<string, unknown>} */ (value);
+  return (pair.baseRaw === null || typeof pair.baseRaw === 'string') &&
+    (pair.runRaw === null || typeof pair.runRaw === 'string');
+}
+
+/** @param {unknown} journal @param {number} slotId @returns {journal is Journal} */
+function validJournal(journal, slotId) {
+  if (!journal || typeof journal !== 'object' || Array.isArray(journal)) return false;
+  const record = /** @type {Record<string, unknown>} */ (journal);
+  if (record.version !== 1 || record.slotId !== slotId ||
+      typeof record.txId !== 'string' || typeof record.requestId !== 'string' ||
+      typeof record.command !== 'string' || typeof record.fingerprint !== 'string' ||
+      typeof record.runId !== 'string' || typeof record.expectedBaseRevision !== 'number' ||
+      !Number.isInteger(record.expectedBaseRevision) || record.expectedBaseRevision < 0 ||
+      typeof record.expectedRunRevision !== 'number' || !Number.isInteger(record.expectedRunRevision) || record.expectedRunRevision < 0 ||
+      !isJournalPhase(record.phase) || !isRawPair(record.before) || !isRawPair(record.after) || !record.receipt ||
+      typeof record.receipt !== 'object' || Array.isArray(record.receipt)) return false;
+  return true;
+}
+
+/** @param {StoragePort} storage @param {string} key @param {string | null} raw */
 function writeRaw(storage, key, raw) {
   if (raw === null) storage.removeItem(key);
   else storage.setItem(key, raw);
 }
 
-export function createRecoverablePair({ storage, keyFor, onChanged = () => {}, failpoint = () => {}, validateJournal = () => ({ ok: true }) }) {
+/** @param {CreateRecoverablePairOptions} options */
+export function createRecoverablePair(options) {
+  const { storage, keyFor, onChanged = () => {}, failpoint = () => {}, validateJournal = () => ({ ok: true }) } = options;
+  /** @param {unknown} journal @param {number} slotId @returns {JournalValidationResult} */
   const validate = (journal, slotId) => {
     if (!validJournal(journal, slotId)) return fail('RECOVERY_BLOCKED', '恢复日志结构或版本无效', false, { slotId });
     try {
@@ -28,18 +59,22 @@ export function createRecoverablePair({ storage, keyFor, onChanged = () => {}, f
       return domain?.ok === true ? domain : (domain?.ok === false ? domain : fail('RECOVERY_BLOCKED', '恢复日志领域内容无效', false, { slotId }));
     } catch { return fail('RECOVERY_BLOCKED', '恢复日志领域校验异常', false, { slotId }); }
   };
+  /** @param {number} slotId @returns {Result<Journal | null>} */
   const readJournal = slotId => {
     let raw;
     try { raw = storage.getItem(keyFor(slotId).journal); }
     catch { return fail('STORAGE_READ_FAILED', '无法读取恢复日志', true, { slotId }); }
     if (raw === null) return { ok: true, value: null };
     try {
+      /** @type {unknown} */
       const value = JSON.parse(raw);
       const checked = validate(value, slotId);
-      return checked.ok ? { ok: true, value } : checked;
+      if (checked.ok === false) return checked;
+      return { ok: true, value: /** @type {Journal} */ (value) };
     } catch { return fail('RECOVERY_BLOCKED', '恢复日志无法解析', false, { slotId }); }
   };
 
+  /** @param {number} slotId @param {Journal} journal @returns {Result<{ keys: JournalKeys, current: RawPair }>} */
   const stateOf = (slotId, journal) => {
     const keys = keyFor(slotId);
     let current;
@@ -53,6 +88,7 @@ export function createRecoverablePair({ storage, keyFor, onChanged = () => {}, f
     return { ok: true, value: { keys, current } };
   };
 
+  /** @param {number} slotId @returns {Result<Record<string, unknown> | null>} */
   const recover = slotId => {
     const read = readJournal(slotId);
     if (!read.ok || !read.value) return read;
@@ -74,11 +110,12 @@ export function createRecoverablePair({ storage, keyFor, onChanged = () => {}, f
     } catch { return fail('SAVE_FAILED_PENDING_RECOVERY', '提交已开始，刷新后继续恢复', true, { slotId }); }
   };
 
+  /** @param {number} slotId @param {Journal} journal @returns {{ ok: true, value: Record<string, unknown>, revision: unknown } | Failure} */
   const commit = (slotId, journal) => {
     const valid = validate(journal, slotId);
-    if (!valid.ok) return { ...valid, code: 'INVALID_ARGUMENT', message: '事务日志参数无效' };
+    if (valid.ok === false) return { ...valid, code: 'INVALID_ARGUMENT', message: '事务日志参数无效' };
     const existing = readJournal(slotId);
-    if (!existing.ok) return existing;
+    if (existing.ok === false) return existing;
     if (existing.value) return fail('RECOVERY_REQUIRED', '该档位存在待恢复提交', true, { slotId });
     const keys = keyFor(slotId);
     let journalWritten = false;
@@ -87,7 +124,7 @@ export function createRecoverablePair({ storage, keyFor, onChanged = () => {}, f
       journalWritten = true;
       failpoint('after-journal');
       const checked = stateOf(slotId, journal);
-      if (!checked.ok) return checked;
+      if (checked.ok === false) return checked;
       writeRaw(storage, keys.base, journal.after.baseRaw);
       journal.phase = 'base-written'; storage.setItem(keys.journal, JSON.stringify(journal));
       failpoint('after-base');

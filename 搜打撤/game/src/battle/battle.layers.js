@@ -8,6 +8,39 @@ import { esc } from '../core/shared.js';
 import { escAttr } from '../core/shared.js';
 import { fanLayout } from './battle.hand.js';
 import { intentViewModel } from './battle.intents.js';
+import { storeGet, storeSet } from '../core/storage.js';
+/* W5-03（2026-09-27 R2）：首次意图图例样式（battle.css 冻结 → head 注入，W2-01 同款）。 */
+if (!document.getElementById('stsIntentLegendStyle')) {
+  document.head.insertAdjacentHTML('beforeend',
+    '<style id="stsIntentLegendStyle">.sts-intent-legend{position:absolute;top:52px;left:50%;transform:translateX(-50%);z-index:9;padding:8px 16px;border:1px solid rgba(217,187,130,.4);border-radius:999px;background:rgba(8,16,24,.92);color:#ecd9ad;font-size:12px;letter-spacing:.5px;pointer-events:none;white-space:nowrap;animation:stsLegendIn .4s cubic-bezier(.22,1,.36,1) both}@keyframes stsLegendIn{from{opacity:0;transform:translateX(-50%) translateY(-8px)}to{opacity:1;transform:translateX(-50%)}}</style>');
+}
+const unsetIntentLegendToken = Symbol('unset-intent-legend-token');
+let lastIsolatedIntentLegendToken = unsetIntentLegendToken;
+let lastPlayerIntentLegendToken = unsetIntentLegendToken;
+const INTENT_LEGEND_KEY = 'sdt-intent-legend';
+
+function showIntentLegend({ devSample, battleToken }) {
+  if (devSample) {
+    if (lastIsolatedIntentLegendToken === battleToken) return false;
+  } else {
+    if (lastPlayerIntentLegendToken === battleToken || storeGet(INTENT_LEGEND_KEY) === '1') return false;
+  }
+
+  const host = document.getElementById('overlay') || document.body;
+  if (!host || host.querySelector('.sts-intent-legend')) return false;
+  const legend = document.createElement('div');
+  legend.className = 'sts-intent-legend';
+  legend.textContent = '敌方意图 ⚔·数字 = 下回合将对你造成的伤害（冰晶=无法行动）';
+  host.appendChild(legend);
+  setTimeout(() => legend.remove(), 6000);
+
+  if (devSample) lastIsolatedIntentLegendToken = battleToken;
+  else {
+    lastPlayerIntentLegendToken = battleToken;
+    storeSet(INTENT_LEGEND_KEY, '1');
+  }
+  return true;
+}
 import { commands, getSnapshot, AFFIX_META, Combat, aegisBlocked, effCostOf, findCard, infuseOf, targetSide, unplayableReason, handCurseSpecs } from './battle.core.js';
   const play = commands.playCard;
   const resolveSlam = commands.resolveSlam;
@@ -495,6 +528,7 @@ import { cardRuleHint } from './battle.preview.js';
     if (sig.hpTxt !== txt) { sig.hpTxt = txt; parts.hpTxt.textContent = txt; }
   }
   function updateUnits(mounts, snapshot, ctx) {
+    ctx = { ...ctx, devSample: !!snapshot.opts?.devSample, battleToken: snapshot.battleToken };
     updateSelfUnit(snapshot, ctx);
     updateAllies(mounts.alliesMount, snapshot.allies || []);
     updateFoes(mounts.foesMount, snapshot.foes || [], ctx);
@@ -626,7 +660,9 @@ import { cardRuleHint } from './battle.preview.js';
       const pendingCard = ctx.pendingTarget && findCard(ctx.pendingTarget.uid);
       const clickCard = clickSelectedUid != null && findCard(clickSelectedUid);
       const cardTargetsEnemy = !!((pendingCard && targetSide(pendingCard.card) === 'enemy') || (clickCard && targetSide(clickCard.card) === 'enemy'));
-      setTargetable(slot, !!(cardTargetsEnemy || ctx.pendingItem || ctx.slamPending || ctx.dartPending) && !f.dead, `${f.name}，按 Enter 确认目标`);   // dartPending：血毒双镖二段点选也高亮（2026-09-17 留言）
+      // W5-06（2026-09-27 R2）：道具按目标侧过滤——自用道具不再高亮敌人（与 aim.js 同式）
+      const itemTargetsEnemy = !!(ctx.pendingItem && ctx.pendingItem.card && targetSide(ctx.pendingItem.card) === 'enemy');
+      setTargetable(slot, !!(cardTargetsEnemy || itemTargetsEnemy || ctx.slamPending || ctx.dartPending) && !f.dead, `${f.name}，按 Enter 确认目标`);   // dartPending：血毒双镖二段点选也高亮（2026-09-17 留言）
       slot.dataset.foeId = f.id || f.name;
       slot.dataset.eidx = idx;
       slot.style.setProperty('--foe-idle-phase', `${-(idx * 0.61)}s`);
@@ -652,6 +688,9 @@ import { cardRuleHint } from './battle.preview.js';
         setSection(parts.intent, sig, 'intent',
           intents.map(intent => `${intent.icon} ${esc(intent.label)}${intent.damage == null ? '' : ` · ${intent.damage}${intent.hits > 1 ? ` ×${intent.hits}（共${intent.totalDamage}）` : ''}`}${intent.bleedBonus ? ` · [[icon:blood]]流血 ${intent.bleedBonus} 层` : ''}`).join(' '));
         parts.intent.style.display = '';
+        // W5-03（2026-09-27 R2，B-4）：一次性解释图例；QA/devSample 与玩家偏好隔离。
+        try { showIntentLegend({ devSample: !!ctx.devSample, battleToken: ctx.battleToken }); }
+        catch { /* 页面销毁等 DOM 异常时不影响战斗渲染 */ }
       } else parts.intent.style.display = 'none';
       setSection(parts.fig, sig, 'fig', f.id && SDT.Art.has(f.id) ? SDT.Art.monsterArt(f.id) : SDT.Icons.img('slime'));
       // 敌方名牌两行化（迭代评审 09-20 美术岗）：名行右侧收敛攻击小徽（狂乱 ×2 并入），
@@ -679,4 +718,4 @@ import { cardRuleHint } from './battle.preview.js';
   }
 
 function setHandSuspended(v) { handSuspended = v; }   // 壳 render 分派改经 setter（ESM 导入绑定不可赋值，2026-09-22 批5 理顺点）
-export { handLayer, handSuspended, battleToken, mountHandLayer, updateHand, mountUnitLayer, updateUnits, setHandSuspended, HAND_PAGE_SIZE };
+export { handLayer, handSuspended, battleToken, mountHandLayer, updateHand, mountUnitLayer, updateUnits, setHandSuspended, showIntentLegend, HAND_PAGE_SIZE };

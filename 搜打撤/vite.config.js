@@ -232,10 +232,10 @@ export default defineConfig({
         // 大依赖各自成 chunk：主入口回到 500kB 以下，且库不升级时哈希稳定利于缓存。
         // three 分支删除（迭代评审 09-20 D-P3）：three 为死依赖已移除，规则永不命中徒增误导
         manualChunks(id) {
-          const normalized = id.split(path.sep).join('/');
+          const normalized = id.replace(/[\\/]/g, '/');
           // 卡牌定义与目录解析是稳定内容数据层：独立缓存，但仍是静态启动依赖，
           // perf-budget 的首屏总量会继续完整计入该 chunk。
-          if (/\/game\/src\/(?:cards\.(?:data|catalog|consts)|data-loader)\.js$/.test(normalized)) return 'game-card-catalog';
+          if (/\/game\/src\/(?:cards\/cards\.(?:data|catalog|consts)|core\/data-loader)\.js$/.test(normalized)) return 'game-card-catalog';
           if (/[\\/]node_modules[\\/](pixi\.js|@pixi)[\\/]/.test(id)) return 'vendor-render';
           if (/[\\/]node_modules[\\/]inkjs[\\/]/.test(id)) return 'vendor-narrative';
           if (/[\\/]node_modules[\\/](howler|motion)[\\/]/.test(id)) return 'vendor-runtime';

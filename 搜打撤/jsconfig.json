@@ -15,6 +15,10 @@
     "game/src/cards/mech-sentences.js",
     "game/src/run/encounter-selector.js",
     "game/src/cards/cards.consts.js",
-    "game/src/run/map-snapshot.js"
+    "game/src/run/map-snapshot.js",
+    "game/src/hub/game.store.js",
+    "game/src/hub/commands.shared.js",
+    "game/src/hub/recoverable-pair.js",
+    "tests/game-store-types.fixture.ts"
   ]
 }

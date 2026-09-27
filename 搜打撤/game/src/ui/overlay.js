@@ -238,7 +238,17 @@ export const overlayMethods = {
   closeTopOverlayByEsc() {
     if (this.el.overlay.hidden) return false;
     const mode = this._lastMode;
-    if (mode === 'battle') return false;   // 战斗中 Esc 只清瞄准，不退战斗
+    if (mode === 'battle') {
+      // 战斗结束残留页（09-26 agent 死锁修复）：finish() 不清 ovBody，战斗格无掉落
+      // 浮层时无「下一浮层覆盖」清理，战斗 DOM + overlay 开着卡死 agent（noop 死等
+      // wait-limit）。battleActive 已 false = 「Esc 不退战斗」语义失效，直接关恢复地图；
+      // 战斗进行中保持原语义（Esc 只清瞄准，不退战斗）
+      const battleStillOn = (() => {
+        try { return !!window.SDT?.game?.battleActive; } catch { return true; }
+      })();
+      if (!battleStillOn) { this.hideOverlay(); return true; }
+      return false;
+    }
     // 优先模拟页面上的「取消语义」按钮：宝箱「跳过」、环间门「留下」、商店「离开」等。
     // 图标关闭钮（背包 × / 卡池 ×）文本为空，按 data-act 与 aria-label/title 兜底匹配
     const cancelBtn = this._findCancelBtn();

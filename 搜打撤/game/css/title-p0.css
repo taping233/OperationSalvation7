@@ -259,7 +259,7 @@
   animation: veinBreath 5s ease-in-out infinite alternate -2.5s;
 }
 #title .ak-veins .d {
-  width: 5px; height: 5px; border-radius: 50%; background: #ffe9b6;
+  width: 5px; height: 5px; border-radius: 50%; background: var(--gold-bright);
   box-shadow: 0 0 8px 2px #d9bb8299, 0 0 20px 5px #d9bb8240;
   animation: veinBreath 5s ease-in-out infinite alternate;
 }

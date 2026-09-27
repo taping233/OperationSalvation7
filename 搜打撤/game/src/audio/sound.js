@@ -205,9 +205,9 @@ const battleBgm = new Howl({ src: [BATTLE_BGM_URL], loop: true, html5: false, pr
   const BATTLE_GAIN = {
     hit: 0.55, hurt: 0.55, parry: 0.4, curse: 0.35, heal: 0.45,
     chestShake: 0.5, chestBurst: 0.65, reveal: 0.45, legend: 0.55,
-    victory: 0.5, defeat: 0.5,
+    victory: 0.62, defeat: 0.5,   // W6-02：胜利 Accent 0.5→0.62（配合接线，击败时刻音频归位）
     draw: 0.45, shuffle: 0.5, card: 0.5,
-    cardSelect: 0.34, discard: 0.3, burn: 0.38, kill: 0.28, danger: 0.38,
+    cardSelect: 0.34, discard: 0.3, burn: 0.38, kill: 0.7, danger: 0.38,   // W6-02：kill 0.28→0.7 Accent 归位（原值低于普攻 hit 0.55 一半，倒挂）
     energyUp: 0.25, energyDown: 0.28, shieldUp: 0.22, shieldBreak: 0.48, armorBreak: 0.44,
     phase: 0.28, rarePlay: 0.42, curseEnd: 0.34,
     strike: 0.55,

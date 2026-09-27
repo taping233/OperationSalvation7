@@ -10,7 +10,7 @@ import { Random } from '../core/random.js';
 import { resolveWeights } from './agent.weights.js';
 
 const TARGET_KEY = /攻击|伤害|造成|消灭|击|刺|斩/;
-const PREFER_LABEL = /(开始|出发|继续|确认|完成|获取|带走|进入|领取|修复|治疗|休息|入库|整理|留下)/;
+const PREFER_LABEL = /(开始|出发|继续|确认|完成|获取|带走|进入|领取|修复|治疗|休息|入库|整理|留下|收下|全部收下)/;
 const AVOID_LABEL = /(放弃|离开对局|返回主菜单|退出|删除|清空)/;
 // 弹层「收口」动作：在同一弹层停留过久时优先点它，防止商店/背包等可选页无限流连
 const TERMINATORS = new Set([
@@ -35,18 +35,20 @@ const priceOf = (label) => {
 };
 
 // 事件选项期望分：按 label+detail 的收益/风险词与数值排序（低血时回复权重大）
-const eventScore = (label, hpRatio) => {
+// W（09-26 扩展）：词权重与低血档从字面量抽入 W.event，缺省=DEFAULT 逐值相等
+const eventScore = (label, hpRatio, W) => {
+  const w = W?.event || { gainScore: 15, lossScore: -18, upgradeScore: 12, quitScore: -25, lowHpRatio: 0.6 };
   const s = String(label || '');
   let score = 0;
   // 数值收益：+N 金币/生命/卡
-  for (const m of s.matchAll(/\+(\d+)/g)) score += +m[1] * (/[生命血]/.test(s) && hpRatio < 0.6 ? 4 : 1);
+  for (const m of s.matchAll(/\+(\d+)/g)) score += +m[1] * (/[生命血]/.test(s) && hpRatio < w.lowHpRatio ? 4 : 1);
   // 数值风险：-N（扣血最疼）
-  for (const m of s.matchAll(/-(\d+)/g)) score -= +m[1] * (/[生命血]/.test(s) ? (hpRatio < 0.6 ? 6 : 3) : 0.5);
-  if (/回复|恢复|治疗|回血/.test(s)) score += hpRatio < 0.6 ? 40 : 8;
-  if (/获得|得到|金币|卡牌|抽.{0,2}牌|免费|复制/.test(s)) score += 15;
-  if (/失去|扣除|丢弃|减少|随机|可能|概率|赌/.test(s)) score -= 18;
-  if (/生命上限|升级|强化/.test(s)) score += 12;
-  if (/离开|离开事件|放弃/.test(s)) score -= 25;
+  for (const m of s.matchAll(/-(\d+)/g)) score -= +m[1] * (/[生命血]/.test(s) ? (hpRatio < w.lowHpRatio ? 6 : 3) : 0.5);
+  if (/回复|恢复|治疗|回血/.test(s)) score += hpRatio < w.lowHpRatio ? 40 : 8;
+  if (/获得|得到|金币|卡牌|抽.{0,2}牌|免费|复制/.test(s)) score += w.gainScore;
+  if (/失去|扣除|丢弃|减少|随机|可能|概率|赌/.test(s)) score += w.lossScore;
+  if (/生命上限|升级|强化/.test(s)) score += w.upgradeScore;
+  if (/离开|离开事件|放弃/.test(s)) score += w.quitScore;
   return score;
 };
 
@@ -71,6 +73,7 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
   const W = resolveWeights();
   const tried = new Set();   // 本回合打过且无效果的出牌（防引擎静默拒绝导致死循环）
   const fledNodes = new Set();   // v3：战斗中撤退过的格子（地图低血不回头挑战，血线恢复解锁）
+  const doorUsed = new Set();    // 09-26：穿过的环间门（门对跳死锁修复，见浮层 goDoor 处）
   const recentUi = [];       // 最近执行过的 ui 动作键（跨面板 LRU，防 openHelp↔helpBack 之类互翻）
   // 上限必须 ≥ 最大单页动作数（研究所备战页 23 个）：否则早期键被挤出后又变「新鲜」，
   // 轮番取消已选项把 nestGo 永远饿死
@@ -118,15 +121,41 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
     if (b.deckSelection) {
       if (strategic && b.deckSelection.cards?.length) {
         // v3 编组按稀有度降序占坑（职业>传说>史诗>稀有>普通），选满才确认
+        // 09-26 扩展：加克制维度 W.deck.counterWeight（默认 0=排序与纯稀有度逐位一致）——
+        // counterScore 特征：多敌 AOE 卡加分、高血编组大伤卡加分（boss 19 战 3 胜的
+        // 选牌盲区：现在选牌根本不看敌方编组特征，ES 可通过 counterWeight 打开）
         if ((b.deckSelection.selected || []).length >= (b.deckSelection.need ?? 0)) {
           return find('confirmDeck') || null;
         }
+        const cw = W.deck.counterWeight;
+        // 09-27 根因修复：cards 的 entry 是 {uid, card} 结构（card 才是完整卡对象）——
+        // 旧代码直接读 entry.rarity/desc/dmg 全是 undefined → 稀有度排序自 v3 起从未
+        // 生效（恒等序=按背包原序选卡）、克制特征恒 0。统一解包后两维度才真正激活
+        const cardOf = (e) => e.card || e;
+        const counterScore = (c) => {
+          if (!cw) return 0;
+          const foes = (b.foes || []).filter(f => !f.dead);
+          const bossInfo = b.deckSelection?.boss || {};
+          const foeHp = foes.reduce((sum, f) => sum + (f.hp ?? 0), 0) + (foes.length ? 0 : (bossInfo.maxHp || 0));
+          const foeAtk = foes.reduce((m, f) => Math.max(m, f.atk ?? 0), 0) || (bossInfo.atk || 0);
+          const txt = `${c.name || ''}${c.desc || ''}`;
+          let s = 0;
+          // 敌方血厚 → 直伤/毒系卡优先；敌方攻高 → 护甲/回复卡优先；多敌 → AOE 优先
+          if (foeHp >= 60 && /斩|击|刺|箭|射线|弹|炎|火|毒|裂/.test(txt)) s += 2;
+          if (foeAtk >= 8 && /甲|盾|护|回复|治疗|药|汲取/.test(txt)) s += 2;
+          if (foes.length > 1 && /全体|所有敌人|每个敌/.test(c.desc || '')) s += 2;
+          return s;
+        };
         const order = b.deckSelection.cards.slice()
-          .sort((x, y) => rarityRank(y.rarity) - rarityRank(x.rarity));
-        for (const card of order) {
-          if (tried.has(`d:${card.uid}`)) continue;
-          const act = acts.find(a => a.name === 'selectDeckCard' && a.args?.[0] === card.uid);
-          if (act) { tried.add(`d:${card.uid}`); return act; }
+          .sort((x, y) => {
+            const cx = cardOf(x), cy = cardOf(y);
+            return (rarityRank(cy.rarity) + counterScore(cy) * cw) - (rarityRank(cx.rarity) + counterScore(cx) * cw);
+          });
+        for (const entry of order) {
+          const card = cardOf(entry);
+          if (tried.has(`d:${entry.uid}`)) continue;
+          const act = acts.find(a => a.name === 'selectDeckCard' && a.args?.[0] === entry.uid);
+          if (act) { tried.add(`d:${entry.uid}`); return act; }
         }
         return find('confirmDeck') || null;
       }
@@ -195,10 +224,13 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
     }
 
     // 残血/受致命威胁先喝药（v3：威胁线=预估受击 ≥ 60% 当前血，比 50% 血线更早保命）
-    let potionOk = b.player && b.player.maxHp && b.player.hp / b.player.maxHp < 0.5;
+    // 注意：血线判断在公共路径（v1 也走）——W 只许 strategic 消费（设计约束③：ES 调 W
+    // 不得污染冻结对照组），v1 恒用字面量 0.5
+    const potionHpLine = strategic ? W.battle.potionHpLine : 0.5;
+    let potionOk = b.player && b.player.maxHp && b.player.hp / b.player.maxHp < potionHpLine;
     if (!potionOk && strategic && b.player) {
       const inc = b.foes.filter(f => !f.dead).reduce((s, f) => s + intentDamage(f), 0);
-      potionOk = inc - (b.player.armor ?? 0) >= (b.player.hp ?? 0) * 0.6;
+      potionOk = inc - (b.player.armor ?? 0) >= (b.player.hp ?? 0) * W.battle.potionThreatRatio;
     }
     if (potionOk) {
       const potion = find('usePotion');
@@ -315,14 +347,14 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
         if (cost > e) continue;
         const gain = armorGainOf(c);
         if (gain <= 0) continue;
-        if (cost === 1 && incoming - armor <= 2) continue;
-        if (cost >= 2 && incoming - armor <= 6) continue;
+        if (cost === 1 && incoming - armor <= W.battle.armorGate1) continue;
+        if (cost >= 2 && incoming - armor <= W.battle.armorGate2) continue;
         if (gain > bestGain) { best = c; bestGain = gain; }
       }
       if (best) { const a = tryPlay(best); if (a) return a; }
     }
-    // 4) 常规出牌：性价比（攻效/费用）最高；v3 多敌时 AOE 卡加权 1.7×
-    const aoeBonus = (c) => (living.length > 1 && /全体|所有敌人|每个敌/.test(c.desc || '')) ? 1.7 : 1;
+    // 4) 常规出牌：性价比（攻效/费用）最高；v3 多敌时 AOE 卡加权（W.battle.aoeMultiplier）
+    const aoeBonus = (c) => (living.length > W.battle.aoeMinFoes && /全体|所有敌人|每个敌/.test(c.desc || '')) ? W.battle.aoeMultiplier : 1;
     const eff = (c) => (atk + (c.dmg ?? 0)) * aoeBonus(c) / Math.max(1, c.cost ?? 1);
     const ordered = hand.slice().sort((x, y) => eff(y) - eff(x));
     for (const c of ordered) {
@@ -332,7 +364,7 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
       if (a) return a;
     }
     // 4.5) 背包砸击：2 费 4 固定伤不吃手牌——手牌打空/卡手时的硬通货（省卡策略）
-    if (e >= 2 && !tried.has('slam') && acts.some(x => x.name === 'bagSlam')) {
+    if (e >= W.battle.slamMinEnergy && !tried.has('slam') && acts.some(x => x.name === 'bagSlam')) {
       const slam = acts.find(x => x.name === 'bagSlam');
       tried.add('slam');
       return slam;
@@ -370,6 +402,88 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
       else if (nodeSet.has(here)) { stallSteps += 1; lastDecisionNode = here; }
       else { nodeSet.add(here); stallSteps = 0; lastDecisionNode = here; }
     }
+    // R13 滞环出口梯度（09-26 seed77054 复现归因）：出口 door 的唯一入桥是已访格时，
+    // 桥走 seen 保底 2-5 分，环内格 4.5-7.5 分永远压着它——stallSteps>10 的既有解锁
+    // （door seen 豁免/forceProgress）全都够不着「不邻接当前位」的门，54/70/92 三局在
+    // 4-6 节点环转到 no-progress。滞环时对本层从出口做反向 BFS（出口=door/未锁撤离点），
+    // 按离门距离给候选梯度加成，把 agent 拉回桥→站上邻门格→进门破环。
+    // 只在滞环时构建与生效（正常局行为不变）；同层限定（回浅层门横跳教训走 crossBack 照旧）
+    let exitDist = null;
+    let exitMax = 0;
+    if (strategic && stallSteps > 10) {
+      try {
+        const lay = globalThis.window?.SDT?.game?.layerData?.[curLi]?.logical;
+        if (lay) {
+          const pred = (lay.map(() => []));
+          const targets = [];
+          let lockedExit = false;   // 本层撤离被 boss 锁（R14a 破局路径判据）
+          for (let i = 0; i < lay.length; i++) {
+            const ty = lay[i]?.def?.type;
+            if (ty === 'extraction' && !(obs.run?.bossKilled ?? false)) lockedExit = true;
+            if (ty === 'door' || ty === 'emergencyExit'
+              || (ty === 'extraction' && (obs.run?.bossKilled ?? false))) targets.push(i);
+            for (const [tl, ti] of lay[i]?.next || []) {
+              if (tl === curLi && ti != null) pred[ti].push(i);   // 同层反向边
+            }
+          }
+          const dist = new Map(targets.map(i => [i, 0]));
+          const queue = [...targets];
+          // R14a：撤离被 boss 锁时，破局路径=打 boss（92 复现：extraction -100 不进
+          // 目标集 → 梯度失效 → L4 环 277 步 no-progress）。boss 格纳入目标，
+          // 打赢后锁解除、targets 自然切回 extraction
+          if (lockedExit && !obs.run?.bossKilled) {
+            for (let i = 0; i < lay.length; i++) {
+              if (lay[i]?.def?.type === 'boss' && !dist.has(i)) { dist.set(i, 0); queue.push(i); }
+            }
+          }
+          while (queue.length) {
+            const u = queue.shift();
+            for (const p of pred[u]) {
+              if (!dist.has(p)) { dist.set(p, dist.get(u) + 1); queue.push(p); }
+            }
+          }
+          if (dist.size) {
+            exitDist = dist;
+            exitMax = Math.max(...dist.values());
+          }
+        }
+      } catch { exitDist = null; }   // 梯度是救济层，构建失败退回原行为
+    }
+    // R24 残血导航（09-27 原则修复②，全流程审计：残血 5 游走 60 步不会朝火堆走——
+    // 近视贪心只看邻格，没有「回血/撤离」的长程目标）。hp 不健康时对本层从
+    // 火堆/紧急撤离点做反向 BFS（同 exitDist 机制），梯度把策略拉向回血/撤离方向。
+    // 不要求滞环——残血滚动正是「顺路思维」在正常行走时造成的
+    let retreatDist = null;
+    let retreatMax = 0;
+    if (strategic && hpRatio < W.gate.retreatHp) {
+      try {
+        const lay = globalThis.window?.SDT?.game?.layerData?.[curLi]?.logical;
+        if (lay) {
+          const pred = lay.map(() => []);
+          const targets = [];
+          for (let i = 0; i < lay.length; i++) {
+            const ty = lay[i]?.def?.type;
+            if (ty === 'fire' || ty === 'emergencyExit'
+              || (ty === 'extraction' && (obs.run?.bossKilled ?? false))) targets.push(i);
+            for (const [tl, ti] of lay[i]?.next || []) {
+              if (tl === curLi && ti != null) pred[ti].push(i);
+            }
+          }
+          const dist = new Map(targets.map(i => [i, 0]));
+          const queue = [...targets];
+          while (queue.length) {
+            const u = queue.shift();
+            for (const p of pred[u]) {
+              if (!dist.has(p)) { dist.set(p, dist.get(u) + 1); queue.push(p); }
+            }
+          }
+          if (dist.size) {
+            retreatDist = dist;
+            retreatMax = Math.max(...dist.values());
+          }
+        }
+      } catch { retreatDist = null; }
+    }
     // ctx：2步前瞻时以「候选自身位置」为视角（curIdx/curLi/prevNode 替换），其余状态
     // （hp/stalled/fled/nodeSet）是全局的照用。null=当前站位（原语义，bit 级等价）
     const score = (a, ctx = null) => {
@@ -385,6 +499,20 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
       if (strategic && banPrev && a.li === cLi && a.idx === cPrev) return W.geo.ban;
       // 滞环状态（score 内统一声明：门禁解除/跨层放行/强推三处共用）
       const stalled = strategic && stallSteps > 10 && (ctx ? ctx.stallForLook !== false : true);
+      // R13 出口梯度在此计算（seen 提前返回之前！）——出桥是 seen 格，加成若挂 base 链
+      // 尾会被 407 行的 seen 短路吃掉（首版实测梯度全灭）。seen 返回与 base 返回两处统一 +exitGrad
+      let exitGrad = 0;
+      if (stalled && exitDist && a.li === curLi) {
+        const d = exitDist.get(a.idx);
+        if (d != null && Number.isFinite(d)) exitGrad = (exitMax - d + 1) * 6;
+      }
+      // R24 残血导航梯度：离本层火堆/紧急撤离越近加成越高（×10 强于 exitGrad——
+      // 残血时回血优先级高于出层），压过战斗格与已访格的分数，把路线拉向回血点
+      let retreatGrad = 0;
+      if (retreatDist && a.li === curLi) {
+        const d = retreatDist.get(a.idx);
+        if (d != null && Number.isFinite(d)) retreatGrad = (retreatMax - d + 1) * 10;
+      }
       // 已结算节点几乎零分：防在两个已清节点间来回横跳；前进方向给推进分。
       // 「本次出行站过的格子」也算见过——空格子（无 def）引擎永不写 visited，
       // 不并入会让 forceProgress 把它当无限新格反复推（09-26 实测两格舞）
@@ -397,6 +525,12 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
       // scdbg 实录 seed77004 血 14% 无药：门只邻节点9（fled=0），在 4→5→6→7→8
       // 已访格绕到 no-progress。stallSteps>10=本地证据「已无其它进展」，此时让位给推进。
       if (strategic && hpRatio < 0.7 && fledNodes.has(`${a.li}:${a.idx}`) && !stalled) return 0;
+      // 穿过的门降为 seen 级分（09-26 门对跳死锁修复）：goDoor 传送成功但门格 visited
+      // 永不落盘（踩上即弹浮层传送走）——门格在新层视角恒「未访」拿门高分，γ 前瞻再把
+      // 门对面的未访格分拉进 value，L1门↔L2入口反复横跳（seed88100 实录 123 步弃局）。
+      // 降为 seen 级并断 γ（见 value()）——破对跳同时保留回程可达（低血回 L1 火堆/撤离
+      // 是合法生存路线，-1000 级硬 ban 会把清图后的回撤路堵死）
+      if (strategic && doorUsed.has(`${a.li}:${a.idx}`)) return W.geo.seen + (a.idx > cIdx ? W.geo.seenFwd : 0);
       const t = (a.label || '').match(/（(\w+)）/)?.[1] || '';
       // seen 提前返回只对「层出口」破例（09-26 修根因③·二版）：
       // 一版让滞环时所有 seen 落完整打分——已清火堆/商店/宝箱因此拿到 85-95 分压过
@@ -406,9 +540,9 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
       const isExit = t === 'door' || t === 'extraction' || t === 'emergencyExit';
       if (seen && !(stalled && strategic && isExit)) {
         // strategic 读 W（可进化）；v1 对照保持字面量冻结
-        return strategic
+        return (strategic
           ? W.geo.seen + (a.idx > cIdx ? W.geo.seenFwd : 0)
-          : 2 + (a.idx > cIdx ? 3 : 0);
+          : 2 + (a.idx > cIdx ? 3 : 0)) + exitGrad;   // R13：seen 出口也要吃到梯度
       }
       let base = W.base.def;
       if (strategic) {
@@ -418,12 +552,24 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
         // 09-26 起分档与阈值全部读 W（见 agent.weights.js），DEFAULT 与原字面量逐值相等
         if (t === 'fire') base = hpRatio < W.gate.fire ? W.base.fireHi : W.base.fireLo;
         // v3：背包满时宝箱降分（收不进奖励白跑一趟）
-        else if (t === 'chest') base = ((obs.run?.used ?? 0) >= (obs.run?.bagCap ?? 99)) ? W.base.chestFull : W.base.chestOk;
+        else if (t === 'chest') {
+          base = ((obs.run?.used ?? 0) >= (obs.run?.bagCap ?? 99)) ? W.base.chestFull : W.base.chestOk;
+          // R18 攒卡优先（09-27 startCards 埋点：29% 场次开战卡<3 张——紧急撤离献 3 卡
+          // 的门槛卡死撤离选项）：卡不足时宝箱提分提前攒卡，保住 L3 撤离赎卡能力
+          if (strategic && (obs.run?.ownedCards || []).length < 3) base = W.base.chestLowCards;
+        }
         else if (t === 'event') base = W.base.event;
         else if (t === 'shop') base = hpRatio < W.gate.fire ? W.base.shopHi : W.base.shopLo;   // 低血商店=买药续航（2 币回 6 血固定位）
         // v3：撤退过的格子血线恢复前不回头（flee 保命后防原地重蹈）
         else if (t === 'battle') {
-          base = hpRatio >= W.gate.fire ? W.base.battleHi : hpRatio >= W.gate.battleMid ? W.base.battleMid : W.base.battleLo;
+          // R16 极低血规避（09-27 埋点解剖：败场 55% 战后 hp≤5、round 中位 1——残血
+          // 进场被一波带走）：hp ≤ battleCritical 时战斗格 0 分让位给任何替代路径；
+          // 无替代时 ranked[0] 仍保留被迫作战，不掐撤离路线
+          // R17 连续作战疲劳压分已试并毙（09-27：fought≥4 且 hp<50% 时战斗 -25 →
+          // 撤离 39% vs 46%、弃局 9% 爆——地图侧避战引发绕路连锁，残血滚动的改善
+          // 要在战斗内解决（喝药/护甲时机），地图侧别再试）
+          base = hpRatio <= W.gate.battleCritical ? W.base.battleCritical
+            : hpRatio >= W.gate.fire ? W.base.battleHi : hpRatio >= W.gate.battleMid ? W.base.battleMid : W.base.battleLo;
           if (hpRatio < W.gate.fled && fledNodes.has(`${a.li}:${a.idx}`)) base = W.base.battleFled;
         }
         else if (t === 'boss') base = hpRatio > W.gate.boss ? W.base.bossHi : W.base.bossLo;
@@ -472,7 +618,7 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
       // 回浅层恒罚（09-26）：滞环放行曾被实测造成门横跳；滞环出路=同层未访(forceProgress)+前进门
       const crossBack = a.li < cLi ? W.geo.crossBack : 0;
       const forceProgress = stalled && !a.visited && !(a.li === cLi && a.idx === cPrev) ? W.geo.forceProgress : 0;
-      return base + fwd - backtrack - crossBack + forceProgress;
+      return base + fwd - backtrack - crossBack + forceProgress + exitGrad + retreatGrad;
     };
     // v2 扫图判定：候选里还有未访的宝箱/事件（同层）
     const hasUnexplored = strategic && moves.some(m =>
@@ -491,6 +637,14 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
     const value = (a, ctx = null) => {
       const self = score(a, ctx);
       if (!(gamma > 0) || !Array.isArray(a.next) || !a.next.length) return self;
+      // 穿过的门断 γ（09-26 门对跳修复）：门自身 seen 低分仍会被门对面未访格的
+      // 高分通过 γ·max 拉成全场最高——穿过过的门不再吃前瞻加成，只值自身分
+      if (strategic && doorUsed.has(`${a.li}:${a.idx}`)) return self;
+      // 低血门断 γ（09-27 R18）：hp ≤ gate.doorNoLookHp 时所有门不吃前瞻——
+      // doorLow -150 被门对面未访格拉分抵消=残血深进 L4 全灭 22/22 的真机制；
+      // 断 γ 后门回归真实风险分，低血策略转向火堆/紧急撤离（本层或已过层）。
+      // 门格识别用 label 的（door）类型后缀（label 文本如「通往第2层（door）」不含门字）
+      if (strategic && /（door）/.test(a.label || '') && hpRatio <= W.gate.doorNoLookHp) return self;
       // 邻居视角：stallForLook=false → 邻居一律按常态打分（不继承本地滞环解锁）
       const at = { curIdx: a.idx, curLi: a.li, prevNode: ctx ? ctx.curIdx : curIdx, stallForLook: false };
       let best = -Infinity;
@@ -515,8 +669,15 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
     }
     const ranked = moves.slice().sort((x, y) => value(y) - value(x));
     if (globalThis.__scdbg && ranked.length) {
+      // 全图结构 dump（死锁归因用）：本层所有节点 type + visited + 邻接出边
+      try {
+        const G = globalThis.window?.SDT?.game;
+        const lay = G?.layerData?.[curLi]?.logical || [];
+        console.log('[scdbg-map]', `L${curLi}`,
+          lay.map((n, i) => `${i}:${n?.def?.type || '-'}${G.visited?.[`${curLi},${i}`] ? 'v' : ''}${(n?.next || []).length ? `>{${n.next.map(x => x[1]).join(',')}}` : ''}`).join(' '));
+      } catch { /* dump 失败不影响决策 */ }
       console.log('[scdbg]', `cur=${curLi}:${curIdx} hp=${(hpRatio * 100).toFixed(0)}% stalled=${stallSteps > 10} prev=${prevNode} streak=${backToPrevStreak} ban=${banPrev ? 1 : 0} |`,
-        ranked.map(m => `${m.id}=${value(m).toFixed(1)}(${score(m).toFixed(0)})${m.visited ? 'v' : ''}${fledNodes.has(`${m.li}:${m.idx}`) ? 'F' : ''}`).join(' '));
+        ranked.map(m => `${m.id}=${value(m).toFixed(1)}(${score(m).toFixed(0)})${m.visited ? 'v' : ''}${fledNodes.has(`${m.li}:${m.idx}`) ? 'F' : ''}[${m.label}]`).join(' '));
     }
     return ranked[0];
   };
@@ -543,8 +704,21 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
     const usable = (a) => !fail || a.id !== fail.id || JSON.stringify(a.params || {}) !== JSON.stringify(fail.params || {});
     const ui = acts.filter(a => a.type === 'ui' && usable(a));
     // 瞬态等待页根治（09-26）：面板只剩 meta 关闭键（closeOverlay/openHelp/helpBack）=
-    // 页面渲染未就绪或必选流程——点关闭必被拒且会自旋熔断，直接回 noop 慢等渲染到位
+    // 页面渲染未就绪或必选流程——点关闭必被拒且会自旋熔断，直接回 noop 慢等渲染到位。
+    // 例外（09-26 死锁修复③·战斗残留页）：战斗结束 ovBody 残留战斗 DOM + overlay 未关
+    // → phase 误判 overlay 且动作面只剩 closeOverlay，noop 死等到 wait-limit（实测
+    // V 底 29/40 局）。识别特征 = ovBody 内有 .sts-topbar（战斗渲染残留）：点一次
+    // closeOverlay 即脱困回地图；必选流程页 closeOverlay 被拒 → 失败记忆防连点，
+    // 回退 noop 等待原语义
     if (!ui.some(a => !/^(openHelp|helpBack|closeOverlay)$/.test(a.name))) {
+      const co = ui.find(a => a.name === 'closeOverlay');
+      const battleResidue = (() => {
+        try {
+          const body = document.getElementById('ovBody');
+          return !!(body && body.querySelector('.sts-topbar'));
+        } catch { return false; }
+      })();
+      if (co && battleResidue) return co;
       return { type: 'sys', name: 'noop' };
     }
     // 背包满腾格（09-26 断链修复①）：discardCard 是 sys 动作不在 ui 链里——满包按
@@ -572,12 +746,13 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
     const keyOf = (a) => `${a.id}:${JSON.stringify(a.params || {})}`;
     const hpRatio = obs.run?.maxHp ? (obs.run.hp ?? 0) / obs.run.maxHp : 1;
     // v3 经济留币：三层起且血不健康——保留 10 币作紧急撤离保证金，不再扫光
-    const reserve = (obs.run?.layer ?? 1) >= 3 && hpRatio < 0.6 ? 10 : 0;
+    // （09-26 扩展：三参入 W.shop；消费点全在 strategic 分支，v1 不受影响）
+    const reserve = (obs.run?.layer ?? 1) >= W.shop.reserveLayer && hpRatio < W.shop.reserveHpRatio ? W.shop.reserveCoins : 0;
     const affordable = (label) => priceOf(label) <= Math.max(0, (obs.run?.coins ?? 0) - reserve);
     // v3 货架类型加权：同价优先回复（低血时权重更高）与伤害卡
     const typeBonus = (label) => {
-      if (/(药|治疗|回复|生命)/.test(label)) return hpRatio < 0.7 ? 5 : 1;
-      if (/(攻击|伤害|射线|箭|斩|击)/.test(label)) return 2;
+      if (/(药|治疗|回复|生命)/.test(label)) return hpRatio < W.shop.healHpRatio ? W.shop.healScoreHi : W.shop.healScoreLo;
+      if (/(攻击|伤害|射线|箭|斩|击)/.test(label)) return W.shop.attackScore;
       return 0;
     };
     const freshPick = (list) => {
@@ -600,6 +775,26 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
     // 卡牌特写是盲巷：先关再继续（关闭机制本身是动作面里的 czClose）
     const zoomClose = ui.find(a => a.name === 'czClose');
     if (zoomClose) return zoomClose;
+    // 宝箱选卡优先（09-27 全流程审计：三选一宝箱的选卡按钮 chestPick 在 DOM 中排
+    // 在跳过按钮之后，freshPick 永远先点 chestSkip——实测 77004 一局 10 个宝箱全被
+    // 跳过，卡牌资源全弃→卡组薄→砸击 9 次。选卡是收益动作，优先于跳过）
+    const chestPick = ui.find(a => a.name === 'chestPick' && usable(a));
+    if (chestPick) return chestPick;
+    // 跳过的宝箱记入 nodeSet（09-27 盲区修复）：引擎对「跳过宝箱」不写 visited——
+    // 格子地图上仍是 chest（策略打分 chestOk 60 分），AI 会白走回头路再跳一次。
+    // 跳过时把当前格计入 nodeSet（seen 判定同源），此后按已清格 2 分处理
+    if (ui.some(a => a.name === 'chestSkip') && obs.run?.layer != null && obs.run?.node != null) {
+      (nodeSet ||= new Set()).add(`${obs.run.layer - 1}:${obs.run.node}`);
+    }
+    // 祭坛死锁修复（09-26）：背包卡<3 时引擎的 altarOn3 点了只写警告日志不开面板
+    // （按钮无 disabled），策略看到的面不变 → LRU 反复连点直到 spin 熔断（实测
+    // 77074 L3 祭坛 7 连点弃局）。卡不足时直接离开祭坛回地图；弃 3 激活的收益留给
+    // 卡充足的局。碎片兑换同理（碎片数字段不在 runBrief，无法判 ≥2，一并走离开）
+    if (strategic && ui.some(a => a.name === 'altarOn3' || a.name === 'altarFragHero')
+      && (obs.run?.ownedCards || []).length < 3) {
+      const leave = ui.find(a => a.name === 'altarLeave');
+      if (leave && usable(leave)) return leave;
+    }
     const stashList = ui.filter(a => a.name === 'exAll' || a.name === 'exSmart' || a.name === 'exFinish');
     const preferredList = ui.filter(a => !isMeta(a) && PREFER_LABEL.test(a.label || '') && !AVOID_LABEL.test(a.label || ''));
     const safeList = ui.filter(a => !isMeta(a) && !AVOID_LABEL.test(a.label || '') && !/^newSlot$/.test(a.name));
@@ -615,7 +810,7 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
         ? (() => {
             const pet = freshPick(ui.filter(a => a.name === 'depPet'));
             if (pet) return pet;
-            const budget = Math.max(1, (obs.run?.bagCap ?? 99) - 2);
+            const budget = Math.max(1, (obs.run?.bagCap ?? 99) - W.shop.deployReserve);
             if ((obs.run?.deck ?? 0) < budget) {
               const rank = new Map((obs.run?.stash || []).map(s => [s.name, rarityRank(s.rarity)]));
               const ordered = ui.filter(a => a.name === 'pickAdd')
@@ -627,7 +822,7 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
           })()
         : null)
       // v2 低血买药：商店里的回复类道具优先（2 币回 6 血固定位，卡名含药/治疗/生命）
-      || (strategic && hpRatio < 0.7
+      || (strategic && hpRatio < W.shop.healHpRatio
         ? freshPick(ui.filter(a => (a.name === 'buyCard' || a.name === 'buySha')
             && affordable(a.label) && priceOf(a.label) <= 4
             && /(药|治疗|回复|生命|血)/.test(a.label || '')))
@@ -650,8 +845,8 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
       // v2 事件按文案期望分选（收益/风险/回复权衡——低血回复优先）
       || (strategic && ui.some(a => a.name === 'evtChoice')
         ? freshPick(ui.filter(a => a.name === 'evtChoice')
-            .sort((x, y) => eventScore(y.label, obs.run?.maxHp ? (obs.run.hp ?? 0) / obs.run.maxHp : 1)
-              - eventScore(x.label, obs.run?.maxHp ? (obs.run.hp ?? 0) / obs.run.maxHp : 1)))
+            .sort((x, y) => eventScore(y.label, obs.run?.maxHp ? (obs.run.hp ?? 0) / obs.run.maxHp : 1, W)
+              - eventScore(x.label, obs.run?.maxHp ? (obs.run.hp ?? 0) / obs.run.maxHp : 1, W)))
         : null)
       // 同弹层停留超预算 → 收口动作优先（商店/背包不流连）
       || (overlaySteps > 8 ? ui.find(a => TERMINATORS.has(a.name)) : null)
@@ -664,6 +859,13 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
       || lruPick(ui);
     // 全部被排除/无可用动作 = 页面瞬态：回 noop 等渲染（失败动作被绕开后不再原地打转）
     if (!chosen) return { type: 'sys', name: 'noop' };
+    // 穿门记忆（09-26 死锁根因②·门对跳）：goDoor 传送成功但门格 visited 永不落盘
+    // （踩上即弹浮层传送走），门格在新层视角恒「未访」高分，γ 前瞻再把门对面的未访格
+    // 分拉进 value——实测 -182 分的回浅层门照样被选（seed88100 L1门↔L2入口 123 步
+    // alt2-cycle）。goDoor 时把门格计入 doorUsed（score 里 ban -1000，滞环解锁留出路）
+    if (chosen && chosen.name === 'goDoor' && obs.run?.layer != null && obs.run?.node != null) {
+      doorUsed.add(`${obs.run.layer - 1}:${obs.run.node}`);
+    }
     return chosen;
   };
 }

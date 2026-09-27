@@ -41,7 +41,8 @@
 <link rel="stylesheet" href="css/page-stash.css" />
 <link rel="stylesheet" href="css/page-shop.css" />
 <link rel="stylesheet" href="css/page-upgrade.css" />
-<link rel="stylesheet" href="css/page-settings.css" />
+    <link rel="stylesheet" href="css/page-settings.css" />
+    <link rel="stylesheet" href="css/page-datapage.css" />
 <link rel="stylesheet" href="css/page-cardslib.css" />
 <link rel="stylesheet" href="css/page-ach.css" />
 <link rel="stylesheet" href="css/page-cardforge.css" />
@@ -203,11 +204,18 @@
               </svg>
             </button>
           </div>
-          <!-- 顶部胶囊：快速参考 -->
-          <button class="ak-quickref" id="mGuide" title="操作快速参考">
-            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 5.5C6.5 4.4 9 4.5 12 6c3-1.5 5.5-1.6 8-.5v13c-2.5-1.1-5-1-8 .5-3-1.5-5.5-1.6-8-.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 6v13" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
-            <span>快速参考</span>
-          </button>
+          <!-- 顶部胶囊入口行（W1-11：手册 + 留言信箱并排；W1-07③：钮名与面板名统一为「远征手册」） -->
+          <div class="ak-pillrow">
+            <button class="ak-quickref" id="mGuide" title="远征手册">
+              <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 5.5C6.5 4.4 9 4.5 12 6c3-1.5 5.5-1.6 8-.5v13c-2.5-1.1-5-1-8 .5-3-1.5-5.5-1.6-8-.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 6v13" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+              <span>远征手册</span>
+            </button>
+            <!-- 留言信箱入口（W1-11：原唯一入口在设置页第 5 节，层级过深） -->
+            <button class="ak-quickref ak-inbox" id="mInbox" title="留言信箱">
+              <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M3 6.5h18v11H3z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m3.5 7 8.5 6 8.5-6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span>留言信箱</span>
+            </button>
+          </div>
           <!-- 右上：档案信息（最近游玩档位的真实数据） -->
           <div class="ak-user">
             <div class="ak-user-row">
@@ -239,11 +247,12 @@
             <span>已成功撤离 </span><b id="akExtracts">0</b><span> 次</span>
           </div>
           <!-- 右下开始探索（原 ak-bp 字牌与 ak-plus/ak-line1 装饰为 09-25 死代码清理删除：均被 expedition.css 恒久 display:none） -->
-          <button class="ak-start" id="mStart" title="开始探索">
+          <!-- W1-06（0926）：CTA 双名语义错位修正——主名与落地一致（选档→远征档案），全页 Archive 语法对齐 -->
+          <button class="ak-start" id="mStart" title="进入远征档案">
             <span class="st-row">
-              <span class="st-cn">开始探索</span>
+              <span class="st-cn">进入远征档案</span>
             </span>
-            <span class="st-en">EXPEDITION / 进入远征档案</span>
+            <span class="st-en">EXPEDITION ARCHIVE / 选档启程</span>
           </button>
           <!-- 雪花飘落特效层 -->
           <!-- 09-24 W2：25-36 中景补充、37-48 近景大颗（winter.css 定义，景深三层） -->
@@ -315,25 +324,53 @@
 </div>
 
 <script>
-  // 启动失败兜底（迭代评审 09-20 D-P3）：main.js 以 type=module 加载，404/解析失败不会触发
-  // window.onerror——3 秒后仍无 window.SDT 即显示重试提示条；资源加载错误（capture 阶段
-  // 可收到 <script>/<img> 的 error 事件）提前触发。正常启动不需要任何清理，提示条不出现。
+  // 启动失败兜底（迭代评审 09-20 D-P3；W5-02 0926 重做）：main.js 以 type=module 加载，
+  // 404/解析失败不会触发 window.onerror——轮询 window.SDT 代替裸 3s 计时：
+  //   3s 未就绪 → 中性「加载中」提示（不再引导清缓存）；
+  //   SDT 就绪（不论多晚）→ 撤销提示并停表（慢启动误报自愈，旧版永不移除）；
+  //   12s 仍未就绪 → 升级为失败条，附刷新指引与关闭钮。
   (function () {
-    var shown = false;
-    function showBootFail() {
-      if (shown) return;
-      shown = true;
-      var bar = document.createElement('div');
-      bar.textContent = '游戏加载失败——请检查网络后刷新页面重试；多次失败可尝试清除浏览器缓存';
-      bar.style.cssText = 'position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:9999;'
-        + 'padding:8px 18px;border-radius:6px;background:#3a1216;color:#ffd9d4;border:1px solid #a4524a;'
+    var bar = null;
+    var started = Date.now();
+    function makeBar(text, tone) {
+      var el = document.createElement('div');
+      el.textContent = text;
+      el.style.cssText = 'position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:9999;'
+        + 'padding:8px 18px;border-radius:6px;'
+        + (tone === 'fail'
+            ? 'background:#3a1216;color:#ffd9d4;border:1px solid #a4524a;'
+            : 'background:#12262f;color:#b2c4c9;border:1px solid #48667455;')
         + 'font:13px/1.6 system-ui,sans-serif;box-shadow:0 6px 18px rgba(0,0,0,.5)';
-      document.body.appendChild(bar);
+      document.body.appendChild(el);
+      return el;
     }
     window.addEventListener('error', function (e) {
-      if (e && e.target && (e.target.tagName === 'SCRIPT' || e.target.tagName === 'LINK')) showBootFail();
+      if (e && e.target && (e.target.tagName === 'SCRIPT' || e.target.tagName === 'LINK') && !bar) {
+        bar = makeBar('资源加载失败——请刷新页面重试', 'fail');
+      }
     }, true);
-    setTimeout(function () { if (!window.SDT) showBootFail(); }, 3000);
+    setInterval(function () {
+      if (window.SDT) {                     // 就绪即自愈：撤销误报条并停止看护
+        if (bar && bar.isConnected) bar.remove();
+        bar = null;
+        clearInterval(this);
+        return;
+      }
+      var elapsed = Date.now() - started;
+      if (!bar && elapsed >= 3000 && elapsed < 12000) {
+        bar = makeBar('资源加载中……首次启动需要预热美术素材，请稍候', 'wait');
+      } else if (elapsed >= 12000) {
+        if (bar && bar.isConnected) bar.remove();
+        bar = makeBar('加载失败——请刷新页面重试；多次失败可检查网络后重启浏览器', 'fail');
+        var close = document.createElement('button');
+        close.textContent = '×';
+        close.title = '收起提示';
+        close.style.cssText = 'margin-left:12px;background:none;border:0;color:inherit;font:inherit;cursor:pointer';
+        close.addEventListener('click', function () { bar.remove(); bar = null; });
+        bar.appendChild(close);
+        clearInterval(this);               // 失败条定格，不再轮询（仍可被上方 error 事件唤醒？不再需要）
+      }
+    }, 400);
   })();
 </script>
 <script type="module" src="./src/main.js"></script>

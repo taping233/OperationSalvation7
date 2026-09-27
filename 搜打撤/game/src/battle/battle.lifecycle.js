@@ -154,7 +154,19 @@ export function createBattleLifecycle({
     if (!busEmit('battle:end', opts, playedCopy, win, consumedCopy) && typeof G.onBattleEnd === 'function') {
       G.onBattleEnd(opts, playedCopy, win, consumedCopy);
     }
-    SDT.Agent?.recorder?.noteBattle?.(win);   // 跑局统计（不可订阅 battle:end——会吞 onBattleEnd 回退）
+    // 跑局统计（不可订阅 battle:end——会吞 onBattleEnd 回退）；ctx=死因解剖流水：
+    // 打的谁/层×节点/战后血量/回合（09-26：死亡局胜率 0.56 vs 撤离局 0.78，要定位到具体战斗）
+    // ①战斗内观测（09-26 批准）：round=战斗轮数；mode 三态展开 w 二值（win/lose/flee——
+    // 阵亡只发生在终局那场，其余 w=0 都是 flee）；nPlayed/nUsed=出牌/道具消耗数；
+    // deck=boss 编组选牌快照（②boss 选牌分析的观测面）
+    SDT.Agent?.recorder?.noteBattle?.(win, {
+      li: G.layerIdx, node: G.trackPos, foe: opts.foeNames?.join('+') || '', hp: G.hp, turn: G.turn,
+      round: battleState.round,
+      mode: win === true ? 'win' : win === false ? 'lose' : 'flee',
+      nPlayed: playedCopy.length,
+      nUsed: consumedCopy.length,
+      deck: opts.isBoss ? lastDeckSel.map(uid => G.ownedCards?.find(o => o.uid === uid)?.card?.name || uid) : null,
+    });
     set$battleRestartCheckpoint(null);
   }
 

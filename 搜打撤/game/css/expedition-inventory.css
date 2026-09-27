@@ -1,5 +1,5 @@
 /* Shared out-of-run surfaces: deep navy archive, generous spacing, readable capacity. */
-#overlay .hub, #overlay .bag-view, #overlay .cardlib-page, #overlay .settings-page { background:#081722; color:#e6eef1; min-height:100%; }
+#overlay .hub, #overlay .bag-view, #overlay .cardlib-page, #overlay .settings-page { background:var(--bg-deep2); color:#e6eef1; min-height:100%; }
 #overlay .hub-head, #overlay .bag-head, #overlay .cardlib-head, #overlay .pg-head { background:rgba(8,23,34,.96); border-bottom:1px solid rgba(223,194,141,.24); padding:18px 24px; }
 #overlay .hub-head h2, #overlay .bag-head h2, #overlay .pg-head h2 { color:#e6eef1; letter-spacing:.16em; }
 #overlay .hub-slot-label { color:#dfc28d; font:700 11px ui-monospace,monospace; letter-spacing:.12em; }
@@ -26,29 +26,28 @@
 #overlay .bag-view .set-h, #overlay .hub-page .set-h { color:#dfc28d; border-color:rgba(223,194,141,.22); }
 #overlay .stash-row, #overlay .ach-row, #overlay .coll-ms { background:#102735; border-color:rgba(182,211,214,.16); border-radius:2px; }
 #overlay .stash-row:hover, #overlay .ach-row:hover { background:#183b48; border-color:#dfc28d; }
-#overlay .stash-list, #overlay .stash-grid, #overlay .dep-list, #overlay .coll-room { scrollbar-color:#496977 #081722; }
+#overlay .stash-list, #overlay .stash-grid, #overlay .dep-list, #overlay .coll-room { scrollbar-color:#496977 var(--bg-deep2); }
 #overlay .ov-btn, #overlay .mini-btn { border-radius:2px; }
 #overlay .ov-btn.ok, #overlay .mini-btn.ok { background:#dfc28d; color:#0b202c; }
 #overlay .ov-btn.danger, #overlay .mini-btn.danger { background:#6f3539; border-color:#a96868; color:#ffe4df; }
 #overlay .hub-back, #overlay .bag-close, #overlay .pg-back { color:#b7cbd0; }
-@media (max-width:760px) { #overlay .hub-body { grid-template-columns:1fr; } #overlay .hub-tabs { flex-direction:row; overflow-x:auto; border-right:0; border-bottom:1px solid rgba(223,194,141,.18); padding:8px; } #overlay .hub-tab { min-width:110px; justify-content:center; border-left:0; border-bottom:3px solid transparent; } #overlay .hub-tab.on { border-left:0; border-bottom-color:#d9bb82; } #overlay .deploy-grid, #overlay .hub-two, #overlay .dep-body { grid-template-columns:1fr; } }
+@media (max-width:760px) { #overlay .hub-body { grid-template-columns:1fr; } #overlay .hub-tabs { flex-direction:row; overflow-x:auto; border-right:0; border-bottom:1px solid rgba(223,194,141,.18); padding:8px; } #overlay .hub-tab { min-width:110px; justify-content:center; border-left:0; border-bottom:3px solid transparent; } #overlay .hub-tab.on { border-left:0; border-bottom-color:var(--gold-main); } #overlay .deploy-grid, #overlay .hub-two, #overlay .dep-body { grid-template-columns:1fr; } }
 @media (max-height:760px) { #overlay .hub-head, #overlay .bag-head, #overlay .pg-head { padding:12px 18px; } #overlay .hub-page { padding-top:14px; padding-bottom:28px; } }
 
 /* 出征整备页：覆盖 winter.css 的浅纸卡片与旧按钮，保证 720px 高度仍能完成确认。 */
 #overlay #depMain { min-height:0; height:100%; box-sizing:border-box; padding:16px 22px 18px; background:
   linear-gradient(180deg,rgba(6,17,27,.92),rgba(5,14,23,.98)),
   url('../assets/scenes/winter-expedition/outskirts.webp') center/cover no-repeat; }
-#overlay #depMain .hub-head { flex-shrink:0; padding:12px 16px; border:1px solid rgba(223,194,141,.24); border-radius:2px; background:rgba(8,23,34,.94); }
+#overlay #depMain .hub-head { flex-shrink:0; padding:12px 16px 12px 96px; border:1px solid rgba(223,194,141,.24); border-radius:2px; background:rgba(8,23,34,.94); } /* W1-03：左让位 96px 给返回方钮 */
 #overlay #depMain .hub-head h2 { display:block; color:#e6eef1; font-size:clamp(18px,2vw,24px); }
 #overlay #depMain .dep-body { display:grid; grid-template-columns:minmax(0,1.15fr) minmax(360px,.85fr); gap:16px; flex:1; min-height:0; overflow:hidden; align-items:stretch; }
 #overlay #depMain .dep-body > .hub-card { display:flex; flex-direction:column; min-height:0; overflow:hidden; padding:14px; border:1px solid rgba(182,211,214,.18); border-radius:2px; background:rgba(13,34,47,.94); color:#e6eef1; box-shadow:0 14px 34px rgba(0,0,0,.2); }
 #overlay #depMain .dep-body > .hub-card > h3 { flex-shrink:0; margin:0 0 10px; padding-bottom:10px; border-bottom:1px solid rgba(223,194,141,.2); color:#e6eef1; }
-#overlay #depMain .dep-cards { flex:1 1 auto; min-height:0; max-height:none; overflow-y:auto; padding:4px 3px 8px; scrollbar-color:#496977 #081722; }
-#overlay #depMain .bag-grid { flex:1 1 auto; min-height:120px; overflow-y:auto; padding:9px; border-color:rgba(223,194,141,.38); border-radius:2px; scrollbar-color:#496977 #081722; }
-#overlay #depMain .dep-foot { flex-shrink:0; margin-top:12px; padding-top:12px; border-top:1px solid rgba(223,194,141,.2); }
-#overlay #depMain .dep-foot #btnDeploy { min-height:42px; padding:11px 18px; border:1px solid #dfc28d; border-radius:2px; background:linear-gradient(135deg,#f7e7bd,#d9bb82 58%,#c8a76b); color:#0b202c; box-shadow:0 6px 18px rgba(0,0,0,.24); font-weight:800; letter-spacing:.22em; } /* 09-25 P2：主确认金钮渐变统一定版配方 #f7e7bd→#d9bb82→#c8a76b */
+#overlay #depMain .dep-cards { flex:1 1 auto; min-height:0; max-height:none; overflow-y:auto; padding:4px 3px 8px; scrollbar-color:#496977 var(--bg-deep2); }
+#overlay #depMain .bag-grid { flex:1 1 auto; min-height:120px; overflow-y:auto; padding:9px; border-color:rgba(223,194,141,.38); border-radius:2px; scrollbar-color:#496977 var(--bg-deep2); }
+#overlay #depMain .dep-foot { flex-shrink:0; margin-top:12px; padding-top:12px; border-top:1px solid rgba(223,194,141,.2); justify-content:flex-end; } /* W1-03：返回件迁左上方钮后底部只余确认钮，靠右 */
+#overlay #depMain .dep-foot #btnDeploy { min-height:42px; padding:11px 18px; border:1px solid #dfc28d; border-radius:2px; background:linear-gradient(135deg,#f7e7bd,var(--gold-main) 58%,#c8a76b); color:#0b202c; box-shadow:0 6px 18px rgba(0,0,0,.24); font-weight:800; letter-spacing:.22em; } /* 09-25 P2：主确认金钮渐变统一定版配方 #f7e7bd→var(--gold-main)→#c8a76b */
 #overlay #depMain .dep-foot #btnDeploy:hover { background:linear-gradient(135deg,#f0d89d,#c19a5d); }
-#overlay #depMain .dep-back { border-radius:2px; }
 
 /* 基地其他页签：局部压过 winter.css 的浅纸文字，保持深海军蓝信息层级。 */
 #overlay .hub-page .hub-card { color:#e6eef1; background:rgba(13,34,47,.84); border-color:rgba(182,211,214,.16); }
@@ -89,7 +88,7 @@
 
 /* —— 仓库页卡面化（09-20 高级感改造批2）：文字行 → 卡面网格，卡面复用整备页同款
    cardHTML('sm')；点击行为不变（stashItem 弹窗）。命名避开旧 .stash-grid（bag 4×4 网格） —— */
-#overlay .hub-page .stash-scroll { max-height:46vh; overflow-y:auto; padding:2px 2px 6px; scrollbar-color:#496977 #081722; }
+#overlay .hub-page .stash-scroll { max-height:46vh; overflow-y:auto; padding:2px 2px 6px; scrollbar-color:#496977 var(--bg-deep2); }
 #overlay .hub-page .stash-cardgrid { display:grid; grid-template-columns:repeat(auto-fill, minmax(140px, 1fr)); gap:12px; }
 #overlay .hub-page .stash-cell { position:relative; padding:0; border:1px solid rgba(182,211,214,.22); border-radius:2px; background:#0c2230; cursor:pointer; transition:transform .14s, border-color .14s, box-shadow .14s; }
 #overlay .hub-page .stash-cell .hs-card { width:100%; height:auto; aspect-ratio:10/14; font-size:clamp(11px, .9vw, 13px); box-shadow:none; border-radius:0; }
@@ -132,7 +131,7 @@
 #overlay #hubMain .stash-empty::after {
   content:''; position:absolute; right:22px; top:50%; width:46px; height:64px;
   transform:translateY(-50%) rotate(6deg);
-  border:1px dashed rgba(194,212,211,.22); border-radius:3px;
+  border:1px dashed rgba(194,212,211,.22); border-radius: var(--radius-panel);
   box-shadow:inset 0 0 0 3px rgba(194,212,211,.04), inset 0 0 0 4px rgba(194,212,211,.11);
   pointer-events:none;
 }

@@ -545,3 +545,71 @@
   grid-template-columns: minmax(0, 240px);
   justify-content: center;
 }
+
+/* ═══ W2-05（2026-09-27 R2）：宝箱三档档位色带 ═══
+   类钩子 .tier-{kind} 由 chests.js markChestTier 挂（small/medium/large，弹层卡
+   节点跨次复用故先清后挂）；色语义沿用既有稀有度制式：古朴灰→稀有蓝→传说金。
+   三维度：标题底边线、标题字色、卡片描边（本文件的壳描边 !important 在后加载，
+   同权后赢，档位描边须同样 !important 才能压过）。boss/职业箱不挂类保持原制式。 */
+#overlay .card.chest.tier-small > h2 { border-bottom-color:#8fa3ab66 !important; color:#b9c6cc !important; }
+#overlay .card.chest.tier-medium > h2 { border-bottom-color:#5b9fd499 !important; color:#9ec7e8 !important; }
+#overlay .card.chest.tier-large > h2 { border-bottom-color:#d9bb82cc !important; color:#ecd9ad !important; }
+#overlay .card.chest.tier-small { border-color:#8fa3ab40 !important; }
+#overlay .card.chest.tier-medium { border-color:#5b9fd455 !important; }
+#overlay .card.chest.tier-large { border-color:#d9bb8299 !important; }
+
+/* ═══ W3-01（2026-09-27 R2，death.js 定向解冻批件）：终局 XP 行 ═══
+   口径对齐人物页签金条（hub.css .xp-bar 制式）：细条+百分比宽内条；
+   数据=Meta.classSummary 现读 − token.xpBefore 快照，零新增统计口径。 */
+.doom-xp { margin: 0 0 14px; padding: 12px 14px; border: 1px solid rgba(217, 187, 130, .28);
+  background: rgba(9, 18, 26, .55); border-radius: 4px; text-align: left; }
+.doom-xp-up { border-color: rgba(217, 187, 130, .55); box-shadow: 0 0 14px rgba(217, 187, 130, .12); }
+.doom-xp .doom-xp-h { margin: 0 0 8px; font-size: 12.5px; letter-spacing: .1em; color: #ecd9ad; }
+.doom-xp .doom-xp-bar { height: 8px; border-radius: 999px; background: #0b141c; overflow: hidden;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, .6); }
+.doom-xp .doom-xp-bar i { display: block; height: 100%; border-radius: 999px;
+  background: linear-gradient(90deg, #c9a25a, #ecd9ad); }
+.doom-xp .doom-xp-note { margin: 7px 0 0; font-size: 11.5px; color: #b8c6c9; line-height: 1.7; }
+.doom-xp .doom-xp-note b { color: #ecd9ad; }
+.doom-xp .doom-xp-note .gold { color: #ecd9ad; }
+
+/* ═══ W3-01/W3 预案（2026-09-27 R2）：结算页阶梯序列（A6×C1） ═══
+   面 B 终局页：.doom-panel 子元素按 --i/固定 delay 错峰（rise+fade）；
+   面 A 胜利搜刮页：.card.chest:has(.battle-banner) 作用域（LEG-6b 横幅=战斗胜利标记），
+   普通宝箱零影响。全部 transform/opacity 合成器通道；reduced-motion 直出终值；
+   动画纯呈现不阻塞点击（A6 可打断铁律）。 */
+@keyframes w3-rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes w3-flash-gold { 0% { filter: brightness(1.9); } 100% { filter: brightness(1); } }
+@keyframes w3-band { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+/* —— 面 B：终局页 —— */
+#overlay .doom-panel .doom-sub { animation: w3-rise .38s cubic-bezier(.22,1,.36,1) .08s both; }
+#overlay .doom-panel .doom-stats { animation: w3-rise .38s cubic-bezier(.22,1,.36,1) .16s both; }
+#overlay .doom-panel .doom-stat { animation: w3-rise .38s cubic-bezier(.22,1,.36,1) both;
+  animation-delay: calc(300ms + var(--i, 0) * 90ms); }
+#overlay .doom-panel .doom-xp { animation: w3-rise .38s cubic-bezier(.22,1,.36,1) .56s both; }
+#overlay .doom-panel .doom-xp-bar i { transform-origin: left; animation: w3-band .5s cubic-bezier(.22,1,.36,1) .72s both; }
+#overlay .doom-panel .doom-loot { animation: w3-rise .38s cubic-bezier(.22,1,.36,1) .64s both; }
+#overlay .doom-panel .doom-card { animation: w3-rise .34s cubic-bezier(.22,1,.36,1) both;
+  animation-delay: calc(720ms + var(--i, 0) * 70ms); }
+#overlay .doom-panel .doom-btns { animation: w3-rise .38s cubic-bezier(.22,1,.36,1) .82s both; }
+
+/* —— 面 A：战斗胜利搜刮页（作用域=带横幅的战斗胜利页；阶梯参数见 w3-r2-plan §1） —— */
+#overlay .card.chest:has(.battle-banner) .loot-manifest { animation: w3-rise .38s cubic-bezier(.22,1,.36,1) .12s both; }
+#overlay .card.chest:has(.battle-banner) .evt-sts-desc:not(.battle-loot-summary) { animation: w3-rise .38s cubic-bezier(.22,1,.36,1) .21s both; }
+#overlay .card.chest:has(.battle-banner) .evt-sts-desc.battle-loot-summary { animation: w3-rise .38s cubic-bezier(.22,1,.36,1) .3s both, w3-flash-gold .6s ease-out .3s both; }
+#overlay .card.chest:has(.battle-banner) .chest-reveal { animation: w3-rise .38s cubic-bezier(.22,1,.36,1) .39s both; }
+#overlay .card.chest:has(.battle-banner) .loot-footer-note,
+#overlay .card.chest:has(.battle-banner) .chest-ops { animation: w3-rise .38s cubic-bezier(.22,1,.36,1) .66s both; }
+/* .chest-warn 无 delay=直出（风险不娱乐化，预案 §1） */
+
+@media (prefers-reduced-motion: reduce) {
+  #overlay .doom-panel .doom-sub, #overlay .doom-panel .doom-stats, #overlay .doom-panel .doom-stat,
+  #overlay .doom-panel .doom-xp, #overlay .doom-panel .doom-xp-bar i, #overlay .doom-panel .doom-loot,
+  #overlay .doom-panel .doom-card, #overlay .doom-panel .doom-btns,
+  #overlay .card.chest:has(.battle-banner) .loot-manifest,
+  #overlay .card.chest:has(.battle-banner) .evt-sts-desc,
+  #overlay .card.chest:has(.battle-banner) .chest-reveal,
+  #overlay .card.chest:has(.battle-banner) .loot-footer-note,
+  #overlay .card.chest:has(.battle-banner) .chest-ops { animation: none; }
+}

@@ -9,9 +9,32 @@ import { schedulePresentation, schedulePresentationMs, waitHitStop } from './bat
 import { FEEDBACK_DELTA_MS, enqueueFeedback, feedbackClass, feedbackDelay, feedbackShakeDuration, waitMs } from './battle.feedback.js';
 import { play as playUnitFrames } from './battle.frames.js';
 import { assetUrl } from '../core/asset-url.js';
+import { storeGet } from '../core/storage.js';
 import { takeFloats } from './battle.core.js';
 const foeHurtTimers = new WeakMap();
 const shakeAnimations = new WeakMap();
+
+/* W5-01（2026-09-27 R2）：击败瞬间舞台震动+亮帧。现况只有单位本体 stsShake，
+ * 舞台级 Accent 缺位=「击败最后一个敌人」与普通重击同观感（透镜 #68 时刻）。
+ * 双门：设置页屏幕震动开关（sdt-reduce-shake，勾选='1'=关）+reduceMotion；
+ * WAAPI transform/filter 合成器通道，一次性 220/210ms 不与卡体 fx-victory 叠。 */
+if (!document.getElementById('stsFloatTierStyle')) {
+  document.head.insertAdjacentHTML('beforeend',
+    '<style id="stsFloatTierStyle">.sts-float.fx-finisher{font-size:38px;color:#ffd75e;text-shadow:0 0 10px rgba(255,180,60,.85),0 2px 4px rgba(0,0,0,.9)}.sts-float.critical{font-size:36px;color:#ff8a5e}.sts-float.heal{color:#61d69b}</style>');
+}
+function stageKillBeat() {
+  if (storeGet('sdt-reduce-shake') === '1') return;
+  if (SDT.Motion?.reduceMotion?.()) return;
+  const stage = document.querySelector('#overlay .battle-stage');
+  if (!stage || typeof stage.animate !== 'function') return;
+  const kf = [];
+  for (let i = 0; i <= 8; i++) {
+    const decay = 1 - i / 8;
+    kf.push({ transform: `translate(${(Math.sin(i * 2.7) * 8 * decay).toFixed(1)}px, ${(Math.cos(i * 3.3) * 5 * decay).toFixed(1)}px)` });
+  }
+  stage.animate(kf, { duration: 230, easing: 'linear' });
+  stage.animate([{ filter: 'brightness(1)' }, { filter: 'brightness(1.18)' }, { filter: 'brightness(1)' }], { duration: 210, easing: 'ease-out' });
+}
   // ---------- 战斗特效（v0.32.2）：伤害/受击飘字 + 受击抖动 + 红闪 ----------
   // 飘字挂在 #overlay 层而不是 ovBody——ovBody 每次渲染整块重建，飘字动画会被腰斩
   // baseDelay：等出牌飞行落点后再结算（杀戮尖塔式：牌到手伤害才跳）
@@ -187,11 +210,12 @@ const shakeAnimations = new WeakMap();
   }
   // NDamageNumVfx：伤害数字抛体——随机初速上抛 + 重力下坠 + 后半程淡出（WAAPI 预采样）。
   // 随机全部走种子随机服务（random.test 禁 Math.random），'fx' 流不进对局存档口径
-  function physicsFloat(span) {
+  // W5-04（2026-09-27 R2）：生命期 1.0-1.18s → 1.3-1.5s（评审实锤 <1s 读取不足）。
+  function physicsFloat(span, opts = {}) {
     const vx = Random.random('fx') * 180 - 90;
     const vy = -(500 + Random.random('fx') * 160);
     const g = 960;
-    const baseDur = 1000 + Random.random('fx') * 180;
+    const baseDur = (opts.longLife ? 1350 : 1000) + Random.random('fx') * 150;
     const dur = demoMs(baseDur);
     const N = 20, kf = [];
     for (let i = 0; i <= N; i++) {
@@ -280,13 +304,18 @@ const shakeAnimations = new WeakMap();
       const amt = parseInt(String(f.text).replace(/[^\d-]/g, ''), 10) || 0;
       const heavy = damage && amt >= 10;   // 重击：≥10 点——更大命中贴图 + 更猛抖动 + 顿帧
       const finisher = damage && feedbackClass(f).includes('fx-finisher');
-      const stopMs = (heavy || finisher) && !reduced ? 100 : 0;   // 全场顿帧一拍，2× 同步缩短
+      // W5-01（2026-09-27 R2）：击败拍——killBoom（engine.js:143 击杀 boom 贴纸浮字=击杀
+      // 唯一标记，实测 feedback.finisher 无人置位）触发舞台震动+亮帧+顿帧 120ms；
+      // finisher（终结一击伤害浮字）顿帧 100→140ms。轻<10 致死经 killBoom 同样吃到。
+      const killBoom = (f.cls || '').includes('sticker-boom');
+      const stopMs = (heavy || finisher) && !reduced ? (finisher ? 140 : 100) : killBoom && !reduced ? 120 : 0;
       const cue = f.cue;
       const cueSound = CUE_HIT_SOUND[cue?.hitSound];
       if (damage && cueSound) SDT.Sound.sfx(cueSound, cueSound === 'hit'
         ? { rateScale: heavy ? 1.18 : amt >= 5 ? 1.08 : 0.96 } : undefined);
       else if (damage) SDT.Sound.sfx('hit', { rateScale: heavy ? 1.18 : amt >= 5 ? 1.08 : 0.96 });
       if (f.shieldBreak) SDT.Sound.sfx('shieldBreak');
+      if ((finisher || killBoom) && !reduced) stageKillBeat();   // W5-01：击败瞬间舞台震动+亮帧（#68 时刻 Accent）
       // STS2 口径：hurt 骨骼/序列帧动画与抖动互斥——帧播上了就不抖；随从无帧集，不代播玩家动作。
       // 攻击动作（atk）改在卡牌起飞时播（见 animateBattleTransition），此处不再倒挂重播
       const framesPlayed = damage && !reduced && isSelf && playUnitFrames('hurt');
@@ -366,8 +395,8 @@ const shakeAnimations = new WeakMap();
       ov.appendChild(span);
       if (damage && !reduced && span.animate) {
         span.classList.add('phys');   // 抑制 CSS 上飘动画，走抛体
-        physicsFloat(span);
-        schedulePresentation(() => span.remove(), 1400);
+        physicsFloat(span, { longLife: finisher || amt >= 10 });   // W5-04：终结/重击跳字加长寿命
+        schedulePresentation(() => span.remove(), demoMs(1500));
       } else {
         span.addEventListener('animationend', () => span.remove(), { once: true });
         schedulePresentationMs(() => span.remove(), 1400);   // CSS 动画不按倍速缩短，兜底也保持原时长

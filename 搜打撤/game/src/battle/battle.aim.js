@@ -280,12 +280,15 @@ import { BATTLE_PHASES } from './battle.state.js';
     const selectedSide = entry && targetSide(entry.card);
     const pendingEntry = snapshot.pendingTarget && findCard(snapshot.pendingTarget.uid);
     const pendingSide = pendingEntry && targetSide(pendingEntry.card);
-    setTargetable(document.getElementById('btSelf'), selectedSide === 'self' || pendingSide === 'self', '自己，按 Enter 确认目标');
+    // W5-06（2026-09-27 R2）：道具按目标侧过滤——自用道具（回复类，targetSide!=='enemy'）
+    // 不再让全体敌人可点（高亮=攻击性误导，评审读码+W3 复核）；slam/dart 语义正确保留。
+    const pendingItemSide = snapshot.pendingItem && snapshot.pendingItem.card ? targetSide(snapshot.pendingItem.card) : null;
+    setTargetable(document.getElementById('btSelf'), selectedSide === 'self' || pendingSide === 'self' || pendingItemSide === 'self', '自己，按 Enter 确认目标');
     document.querySelectorAll('.bt-foe[data-eidx]').forEach(el => {
       clearFoePreview(el);
       const idx = +el.dataset.eidx;
       const foe = snapshot.foes[idx];
-      const targetable = !!(foe && !foe.dead && (selectedSide === 'enemy' || pendingSide === 'enemy' || snapshot.pendingItem || snapshot.slamPending || snapshot.dartPending));
+      const targetable = !!(foe && !foe.dead && (selectedSide === 'enemy' || pendingSide === 'enemy' || pendingItemSide === 'enemy' || snapshot.slamPending || snapshot.dartPending));
       setTargetable(el, targetable, `${foe?.name || '敌人'}，按 Enter 确认目标`);
       if (targetable && selectedSide === 'enemy' && el.matches(':hover, :focus')) {
         showFoePreview(el, idx, clickSelectedUid, entry.card, 'click');
@@ -361,6 +364,16 @@ import { BATTLE_PHASES } from './battle.state.js';
     if (need !== side && !(need == null && side === 'any')) {
       UI.log(`[[icon:cross]] 【${esc(entry.card.name)}】不能对这个目标使用`, 'warn');
       showThoughtBubble(`【${entry.card.name}】不能对这个目标使用`);
+      // W3-03（2026-09-27 R2）：误指反馈贴操作点——气泡挂在 #btSelf（英雄侧），
+      // 被点的敌人本身零反馈，紧张局里玩家感知不到「点错了哪里」（评审死亡局实录×4）。
+      // 呈现层追加：被点敌人红框+抖动一次；拒绝逻辑/log/气泡原样不动。
+      const foeEl = document.querySelector(`.bt-foe[data-eidx="${idx}"]`);
+      if (foeEl) {
+        foeEl.classList.remove('mis-target');
+        void foeEl.offsetWidth;
+        foeEl.classList.add('mis-target');
+        setTimeout(() => foeEl.classList.remove('mis-target'), 650);
+      }
       return true;
     }
     if (!clickTargetSession && pending) {
@@ -674,4 +687,11 @@ function setClickSelectedUid(v) {
   if (v == null) { cancelClickSelection(); return; }
   clickSelectedUid = v;
 }   // 壳 render 分派改经 setter（ESM 导入绑定不可赋值，2026-09-22 批5 理顺点）
+/* W3-03（2026-09-27 R2）：误指敌人红框抖动样式。battle.css 冻结 → 模块级注入
+ * head（battle.view.js btFleeArmStyle 同款直接挂法）；outline 不占布局，抖动
+ * 0.45s 一次性，类由拒绝分支挂/650ms 自摘。 */
+if (!document.getElementById('btMisTargetStyle')) {
+  document.head.insertAdjacentHTML('beforeend',
+    '<style id="btMisTargetStyle">@keyframes bt-mis-shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}45%{transform:translateX(5px)}70%{transform:translateX(-3px)}88%{transform:translateX(2px)}}.bt-foe.mis-target{animation:bt-mis-shake .45s cubic-bezier(.36,.07,.19,.97) both;outline:2px solid #d05b4b;outline-offset:3px;border-radius:6px;filter:drop-shadow(0 0 8px rgba(208,91,75,.65))!important}</style>');
+}
 export { aim, aimPlayedAt, clickSelectedUid, selectCardByClick, clickSelectedTarget, setTargetable, showCardBlockReason, startAim, cancelAim, canPreserveAim, resumeAimAfterRender, cancelClickSelection, setClickSelectedUid };

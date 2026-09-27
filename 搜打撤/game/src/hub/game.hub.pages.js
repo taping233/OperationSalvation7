@@ -6,6 +6,7 @@ const SDT = window.SDT;
 const UI = window.SDT.UI;
 import { characterFor, characterName } from '../core/characters.js';
 import { esc } from '../core/shared.js';
+import { assetUrl } from '../core/asset-url.js';
 import { MAP } from '../run/game.session.js';
 import { escAttr } from '../core/shared.js';
 import { game } from '../run/game.session.js';
@@ -67,6 +68,7 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
         <span class="so-en">SOLD OUT · NEXT CARAVAN SOON</span>
       </div>`;
     return `
+      <span class="section-kicker">TACTICAL SUPPLY // 03</span>
       <div class="hub-two">
         <section class="hub-card">
           <h3>[[icon:coin]] 远征补给商店</h3>
@@ -121,6 +123,9 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
         }).join('')
       : `<div class="stash-placeholder"><span class="sp-ico">[[icon:pocket]]</span><b>口袋是空的</b><span>对战消耗的卡牌有 1/3 概率随撤离回到这里</span></div>`;
     return `
+      <span class="section-kicker">CARD STORAGE // 02</span>
+      ${/* W2-03：三条经济线一行总览——卖卡/复原/升级的「币从哪来到哪去」页内可读（纯呈现，零数值改动） */''}
+      <p class="hint econ-line">[[icon:coin]] 卖卡 → <b>储备币</b>（商店消费，不进局）　·　[[icon:key]] 钥匙 → <b>复原</b>口袋卡牌　·　[[icon:bread]] 口粮 → <b>宠物升级</b>　·　[[icon:wood]] 木材 → <b>扩建</b>背包/仓库</p>
       <div class="hub-two">
         <section class="hub-card">
           <h3>[[icon:archive]] 卡牌仓库</h3>
@@ -176,9 +181,12 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
       </div>` : '';
     const hasEgg = B.data.stash.some(s => s.card.id === B.PET_EGG_ID);
     return `
-      <section class="hub-card" style="margin-top:14px">
+      <section class="hub-card pet-sec" style="margin-top:14px">
         <h3>[[icon:paw]] 宠物 <span class="set-tip">${owned.length} / ${B.PETS.length} 只 · 携带 1 只出战</span></h3>
-        <p class="ov-note" style="margin:0 0 6px">初始宠物「汪汪狗」自动获得；其余只能用<b>宠物蛋</b>（宝箱 0.7% 起掉落：每开箱未出 +3%、每打赢一场战斗再 +0.2%）+ 50 币在仓库孵化。宠物在「升级」页用口粮升级，携带不同宠物安全格数量不同。</p>
+        <div class="pet-sec-head">
+          <p class="ov-note" style="margin:0 0 6px">初始宠物「汪汪狗」自动获得；其余只能用<b>宠物蛋</b>（宝箱 0.7% 起掉落：每开箱未出 +3%、每打赢一场战斗再 +0.2%）+ 50 币在仓库孵化。宠物在「升级」页用口粮升级，携带不同宠物安全格数量不同。</p>
+          <img class="pet-egg-art" src="${assetUrl('assets/ui/emblems/pet-egg.png')}" alt="宠物蛋插画" decoding="async" draggable="false" loading="lazy">
+        </div>
         <div class="stash-list">${lockedRow}${rows}</div>
         ${hasEgg ? '<p class="hint ok-hint">[[icon:crystal]] 仓库里有宠物蛋——点击它进行孵化！</p>' : ''}
       </section>`;
@@ -443,6 +451,7 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
       </div>`;
     }).join('');
     return `
+      <span class="section-kicker">UPGRADE LAB // 04</span>
       <div class="hub-upgrade-layout">
         <section class="hub-card up-card">
           <h3>[[icon:bag]] 背包扩建</h3>
@@ -619,7 +628,7 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
       <section class="collection-command">
         <div class="collection-command-copy">
           <span class="section-kicker">ARCHIVE COLLECTION // 07</span>
-          <h3>收藏档案室</h3>
+          <h3>成就·收藏</h3>
           <p>卡背、成就与人物收藏分区归档。切换分类不会离开基地，也不会丢失当前浏览位置。</p>
           ${storyStrip}
         </div>

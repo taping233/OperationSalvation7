@@ -5,6 +5,7 @@ function createGameMenuController(deps) {
     SDT, UI, game, runtime, SLOT_COUNT, esc, readSlot, loadGame, clearSlot,
     saveGame, clearAllSlots, getActiveSlot, setActiveSlot, preflightRunMap,
     RunStorage, ensureBattleReady = async () => SDT.Battle, recoverSlotIfPending, terminalCommands,
+    openDataPage,   // W1-01：跑局数据页打开器（agent.data.js 经 deps 注入，本文件保持无静态导入）
   } = deps;
 
   // 存储安全封装（迭代评审 09-20 G-P2）：隐私模式/配额满时裸调 localStorage 会抛异常，
@@ -31,7 +32,23 @@ function createGameMenuController(deps) {
     bindTitleExtras();
     renderTitleStats();
     SDT.Sound.music('title');
+    maybeShowRmbHint();   // W1-11：右键留言一次性提示（首次到标题页展示）
     UI.refresh(game);
+  }
+
+  // W1-11：右键留言通道不可发现的补偿——首次进标题页弹一次性提示条。
+  // 独立 body 层（不触 #overlay）；localStorage 打标只弹一次；存储异常静默跳过
+  function maybeShowRmbHint() {
+    try {
+      if (storeGet('sdt-rmb-hint')) return;
+      storeSet('sdt-rmb-hint', '1');
+      const tip = document.createElement('div');
+      tip.className = 'rmb-hint-toast';
+      tip.textContent = '提示：任意界面点击右键，可以给制作者留言';
+      document.body.appendChild(tip);
+      setTimeout(() => tip.classList.add('out'), 5200);
+      setTimeout(() => tip.remove(), 5900);
+    } catch { /* localStorage 不可用就不提示 */ }
   }
 
   function hideTitle() { UI.hideScreen(document.getElementById('title')); }
@@ -44,6 +61,8 @@ function createGameMenuController(deps) {
     titleExtrasBound = true;
     document.getElementById('mGuide')?.addEventListener('click', openTitleGuide);
     document.getElementById('mAch')?.addEventListener('click', openTitleAchievements);
+    // W1-11：标题页留言信箱入口（fromTitle=true → 返回键回标题而非设置页）
+    document.getElementById('mInbox')?.addEventListener('click', () => openSuggestionInbox(true));
     const mute = document.getElementById('btnTitleMute');
     if (mute) {
       const syncMute = () => mute.classList.toggle('muted', !!SDT.Sound.muted);
@@ -105,7 +124,7 @@ function createGameMenuController(deps) {
         const tabName = { deploy: '出发', stash: '仓库', upgrade: '升级', classes: '人物', ach: '成就·收藏室' }[key] || key;
         return { id: 'hub-' + key, name: `基地 · ${tabName || '主页'}` };
       }
-      if (body && body.querySelector('#depMain')) return { id: 'depMain', name: '出征整备' };
+      if (body && body.querySelector('#depMain')) return { id: 'depMain', name: '出发整备' };
       if (body && body.querySelector('.sugin-page')) return { id: 'suginbox', name: '留言库' };
       if (body && body.querySelector('.clib-main')) return { id: 'cardlib', name: '卡牌库' };
       if (body && body.querySelector('.cdes-main')) return { id: 'cardforge', name: '制作坊' };
@@ -315,12 +334,15 @@ function createGameMenuController(deps) {
     box.innerHTML = SDT.Icons.rich(html);
   }
 
-  function openSuggestionInbox() {
+  // W1-11：fromTitle=true（标题页入口进入）时，返回键回标题而非设置页
+  let sugFromTitle = false;
+  function openSuggestionInbox(fromTitle = false) {
+    sugFromTitle = !!fromTitle;
     game.state = 'modal';
     UI.showOverlay('', `
       <div class="pg settings-page sugin-page">
         <!-- 09-23 留言：右下 BACK 取消，退出键改左上角，与主页退出键（ak-sq ak-exit）同款同位 -->
-        <button class="ak-sq ak-exit sugin-exit" data-act="sugBack" title="返回设置（Esc）" aria-label="返回设置">
+        <button class="ak-sq ak-exit sugin-exit" data-act="sugBack" title="${fromTitle ? '返回（Esc）' : '返回设置（Esc）'}" aria-label="${fromTitle ? '返回' : '返回设置'}">
           <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
             <path d="M9 4h9a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 18 20H9"
                   fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
@@ -331,7 +353,10 @@ function createGameMenuController(deps) {
         <header class="pg-head"><h2>[[icon:book]] 留言库</h2><span class="pg-spacer"></span></header>
         <div class="settings" id="sugBox"><p class="ov-empty">读取中…</p></div>
       </div>`, 'page');
-    UI.act('sugBack', () => openSettings());
+    UI.act('sugBack', () => {
+      if (sugFromTitle) { sugFromTitle = false; UI.hideOverlay(); game.state = 'title'; return; }
+      openSettings();
+    });
     UI.act('sugExport', d => {
       const entry = Array.isArray(sugCache) ? sugCache[+d.idx] : null; if (!entry) return;
       const btn = document.querySelector(`[data-act="sugExport"][data-idx="${+d.idx}"]`);
@@ -379,6 +404,7 @@ function createGameMenuController(deps) {
         </svg>
       </button>
       <div class="expedition-manual">
+        <span class="section-kicker">EXPEDITION MANUAL</span>
         <p class="manual-lead">从基地整备，沿相邻节点深入，打完战斗后把带回来的东西安全撤离。</p>
         <div class="manual-grid">
           <section class="manual-step"><span class="manual-index">01</span><div><h3>整备</h3><p>在基地选择玩法、挑选背包卡牌与宠物。初始攻击固定占用 1 格；仓库卡只有放入背包才会带进远征。</p></div></section>
@@ -386,7 +412,7 @@ function createGameMenuController(deps) {
           <section class="manual-step"><span class="manual-index">03</span><div><h3>战斗</h3><p>手牌按住拖向敌人或自己使用指向卡；没有目标的招式拖到敌我之间空地即可。留意费用与敌方意图，回合结束后敌人会行动。</p></div></section>
           <section class="manual-step"><span class="manual-index">04</span><div><h3>撤离</h3><p>抵达撤离节点并完成结算；安全格中的卡牌会由宠物运回基地，撤离失败时也会抢运安全格卡牌。倒下或放弃会丢失其他本局物资。</p></div></section>
         </div>
-        <div class="manual-controls"><span class="manual-control-key">Space / Enter</span><span>切换路线</span><span class="manual-control-key">Z</span><span>上条路线</span><span class="manual-control-key">X</span><span>确认节点</span><span class="manual-control-key">B</span><span>背包</span><span class="manual-control-key">G / F</span><span>全景 / 定位</span><span class="manual-control-key">Esc</span><span>关闭页面</span></div>
+        <div class="manual-controls"><span class="manual-control-key">Space / Enter</span><span>切换路线</span><span class="manual-control-key">Z</span><span>上条路线</span><span class="manual-control-key">X</span><span>确认节点</span><span class="manual-control-key">B</span><span>背包</span><span class="manual-control-key">G / F</span><span>全景 / 定位</span><span class="manual-control-key">Alt+1-9 / 0</span><span>快捷跳页（基地/卡牌库/留言/数据/设置）</span><span class="manual-control-key">Esc</span><span>关闭页面</span></div>
         <p class="manual-note">鼠标拖拽平移地图，滚轮缩放。地图只开放当前节点的相邻可通行路线；已探索节点的奖励不会重复刷新。</p>
       </div>`, true);
     UI.act('guideBack', () => {
@@ -622,6 +648,7 @@ function createGameMenuController(deps) {
         <button class="ak-sq ak-exit ak-back-tl" data-act="slotBack" aria-label="返回主菜单" title="返回主菜单（Esc）"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M9 4h9a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 18 20H9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M4 12h10M4 12l4-4M4 12l4 4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <!-- U6（2026-09-19 走查）：帮助「?」从孤悬左上挪进标题行，与标题同排 -->
         <header class="slot-page-head">
+          <span class="section-kicker">SELECT ARCHIVE</span>
           <span class="slot-page-en">选择存档</span>
           <i class="slot-page-rule"></i>
           <span class="slot-page-help">${UI.helpBtn('slots')}</span>
@@ -884,6 +911,55 @@ function createGameMenuController(deps) {
     // 网页版无法真正关闭程序：显示告别屏即可（存档已保留，可重新进入继续）
   }
 
+  // ---------- 跑局数据（W1-01：入口=设置页；W2-06：页头行+布局收敛） ----------
+  // agent.data.js 的 openDataPage 渲染 .pg hub 但无页头/返回件（原唯一进入=Alt+9，离开仅靠
+  // 隐式 Esc/点背景）。此处包装：
+  //   ① 注入全站统一 .ak-sq.ak-exit.ak-back-tl 返回键（点击=hideOverlay，等价 Esc 语义；
+  //      数据页不持有 game.state 无需复位），从设置页进入时返回键回设置页；
+  //   ② 注入 .data-pg-head 页头行（W2-06：返回件不再叠「总局数」KPI 卡，KPI 区下让位）；
+  //   ③ .data-tuned 类激活 page-datapage.css（导出/清空钮收敛正常尺寸右对齐）。
+  // 「清空记录」会整页重渲染——MutationObserver 防丢：ovBody 一有变动就补注。
+  function openDataPageUi(fromSettings = false) {
+    openDataPage();
+    const ovBody = UI.el && UI.el.ovBody;
+    if (!ovBody) return;
+    const inject = () => {
+      if (!UI.el.overlay || UI.el.overlay.hidden) return;
+      const pg = ovBody.querySelector('.pg');
+      if (!pg) return;
+      const fresh = !pg.classList.contains('data-tuned');
+      if (fresh) {
+        pg.classList.add('data-tuned');
+        const head = document.createElement('header');
+        head.className = 'pg-head data-pg-head';
+        let title = '跑局数据';
+        try { title = SDT.Icons.rich('[[icon:chart]] 跑局数据'); } catch { /* 图标宏失败退纯文字 */ }
+        head.innerHTML = `<span class="section-kicker">RUN DATA // 09</span><h2>${title}</h2><span class="pg-spacer"></span>`;
+        pg.prepend(head);
+      }
+      if (!pg.querySelector('.ak-back-tl')) {
+        const btn = document.createElement('button');
+        btn.className = 'ak-sq ak-exit ak-back-tl';
+        btn.title = '返回（Esc）';
+        btn.setAttribute('aria-label', '返回');
+        btn.innerHTML = '<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">'
+          + '<path d="M9 4h9a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 18 20H9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>'
+          + '<path d="M4 12h10M4 12l4-4M4 12l4 4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+        btn.addEventListener('click', () => {
+          UI.hideOverlay();
+          if (fromSettings) openSettings();   // 从设置页进来：返回键回设置页，而非落到标题
+        });
+        pg.prepend(btn);
+      }
+    };
+    inject();
+    const mo = new MutationObserver(() => {
+      if (!UI.el.overlay || UI.el.overlay.hidden) { mo.disconnect(); return; }
+      inject();
+    });
+    mo.observe(ovBody, { childList: true, subtree: false });
+  }
+
   // ---------- 设置（标题界面调用） ----------
   function openSettings() {
     const prev = game.state;
@@ -920,12 +996,19 @@ function createGameMenuController(deps) {
         <p class="hint">图标来自 game-icons.net —— Lorc、Delapouite、Carl Olsen、Caro Asercion（CC-BY 3.0，详见 assets/icons/game-icons/LICENSE-CC-BY-3.0.md）；音效来自 Kenney.nl（CC0）。</p>
         <h3 class="set-h">[[icon:book]] 留言库 <span class="set-en">SUGGESTION BOX</span></h3>
         <div class="btn-row"><button class="mini-btn" data-act="openInbox">查看历史留言</button></div>
+        <h3 class="set-h">[[icon:chart]] 跑局数据 <span class="set-en">RUN DATA</span></h3>
+        <!-- W1-01：数据页原唯一入口=Alt+9 不可发现，设置页加可见入口 -->
+        <div class="btn-row"><button class="mini-btn" data-act="openDataPageUi">查看跑局数据</button></div>
         <h3 class="set-h">危险区 <span class="set-en">DANGER ZONE</span></h3>
+        <!-- W1-08：三枚不可逆钮原同排等权——按危险度分级：低危两枚一排，清档独占一排加重 -->
         <div class="btn-row">
           <button class="mini-btn danger" data-act="wipeNotes">清空格子备注</button>
           <button class="mini-btn danger" data-act="wipeCards">清空卡牌库</button>
-          <button class="mini-btn danger" data-act="wipeSave">清空全部存档</button>
         </div>
+        <div class="btn-row danger-row">
+          <button class="mini-btn danger danger-max" data-act="wipeSave">清空全部存档</button>
+        </div>
+        <p class="hint">危险区操作均不可撤销：按钮需点击两次确认（首次点击变为「确认清空？」）。「清空全部存档」会删除全部五个档位的档案。</p>
         </div><!-- /.settings -->
       </div><!-- /.pg -->`, 'page');
     const sync = () => {
@@ -956,6 +1039,7 @@ function createGameMenuController(deps) {
       clearAllSlots(); UI.log('已清空全部五个档位的存档', 'warn');
     });
     UI.act('openInbox', openSuggestionInbox);
+    UI.act('openDataPageUi', () => openDataPageUi(true));
     UI.act('closeSettings', () => { UI.hideOverlay(); game.state = prev === 'modal' ? 'idle' : prev; });
     // 勾选即时生效并同步侧边栏
     document.getElementById('setIndex').addEventListener('change', (e) => { game.toggles.index = e.target.checked; sync(); });
@@ -1006,7 +1090,7 @@ function createGameMenuController(deps) {
     sfxVolEl.addEventListener('change', () => SDT.Sound.sfx('ding'));
   }
 
-  return Object.freeze({ setLobby, showTitle, startNewGame, exitToTitle, quitGame, openSettings, openLeaveMenu, openTitleGuide, openSuggestionInbox });
+  return Object.freeze({ setLobby, showTitle, startNewGame, exitToTitle, quitGame, openSettings, openLeaveMenu, openTitleGuide, openSuggestionInbox, openDataPageUi });
 }
 
 export { createGameMenuController };

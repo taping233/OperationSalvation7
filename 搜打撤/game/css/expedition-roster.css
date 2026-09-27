@@ -11,35 +11,35 @@
 #overlay .cls2-panel > * { position:relative; z-index:1; }
 #overlay .cls2-panel.cls2-preview { border-left:2px solid rgba(105,174,194,.42); }
 #overlay .cls2-eyebrow { color:rgba(117,185,202,.85); font:600 10px ui-monospace,monospace; letter-spacing:.34em; text-transform:uppercase; margin-bottom:18px; }
-#overlay .cls2-name { color:#f2f7f8 !important; font-size:clamp(42px,5vw,74px) !important; letter-spacing:clamp(8px,1.1vw,16px) !important; line-height:1.15; text-shadow:0 0 26px color-mix(in srgb,var(--cls-color,#69aec2) 45%,transparent); }
-#overlay .cls2-name::after { content:''; display:block; width:clamp(44px,4vw,72px); height:3px; margin-top:12px; background:var(--cls-color,#69aec2); box-shadow:0 0 12px color-mix(in srgb,var(--cls-color,#69aec2) 60%,transparent); }
+#overlay .cls2-name { color:#f2f7f8 !important; font-size:clamp(42px,5vw,74px) !important; letter-spacing:clamp(8px,1.1vw,16px) !important; line-height:1.15; text-shadow:0 0 26px color-mix(in srgb,var(--cls-color,var(--cyan-soft)) 45%,transparent); }
+#overlay .cls2-name::after { content:''; display:block; width:clamp(44px,4vw,72px); height:3px; margin-top:12px; background:var(--cls-color,var(--cyan-soft)); box-shadow:0 0 12px color-mix(in srgb,var(--cls-color,var(--cyan-soft)) 60%,transparent); }
 #overlay .cls2-chips { display:flex; gap:8px; margin:16px 0 0; }
 #overlay .cls2-chip { padding:4px 12px; border:1px solid rgba(155,194,202,.35); border-radius:2px; color:#aec6cd; font:600 11px ui-monospace,monospace; letter-spacing:.18em; }
-#overlay .cls2-chip-role { border-color:color-mix(in srgb,var(--cls-color,#69aec2) 65%,transparent); color:color-mix(in srgb,var(--cls-color,#69aec2) 82%,white); }
-#overlay .cls2-chip-live { background:color-mix(in srgb,var(--cls-color,#69aec2) 24%,transparent); border-color:var(--cls-color,#69aec2); color:#eef7f9; }
+#overlay .cls2-chip-role { border-color:color-mix(in srgb,var(--cls-color,var(--cyan-soft)) 65%,transparent); color:color-mix(in srgb,var(--cls-color,var(--cyan-soft)) 82%,white); }
+#overlay .cls2-chip-live { background:color-mix(in srgb,var(--cls-color,var(--cyan-soft)) 24%,transparent); border-color:var(--cls-color,var(--cyan-soft)); color:#eef7f9; }
 #overlay .cls2-level { display:flex; align-items:center; gap:20px; margin:30px 0 0; padding:18px 0 16px; border-top:1px solid rgba(155,194,202,.16); }
 #overlay .cls2-level-num { font:800 clamp(34px,3vw,46px)/1 ui-monospace,monospace; color:#f2f7f8; }
-#overlay .cls2-level-num i { display:block; font:700 10px ui-monospace,monospace; font-style:normal; letter-spacing:.3em; color:color-mix(in srgb,var(--cls-color,#69aec2) 85%,white); margin-bottom:4px; }
+#overlay .cls2-level-num i { display:block; font:700 10px ui-monospace,monospace; font-style:normal; letter-spacing:.3em; color:color-mix(in srgb,var(--cls-color,var(--cyan-soft)) 85%,white); margin-bottom:4px; }
 #overlay .cls2-level-meta { flex:1; min-width:0; }
 #overlay .cls2-xpbar { height:4px; border-radius:2px; background:rgba(155,194,202,.18); overflow:hidden; }
-#overlay .cls2-xpbar span { display:block; height:100%; border-radius:2px; background:linear-gradient(90deg,var(--cls-color,#69aec2),color-mix(in srgb,var(--cls-color,#69aec2) 55%,white)); box-shadow:0 0 10px color-mix(in srgb,var(--cls-color,#69aec2) 55%,transparent); }
+#overlay .cls2-xpbar span { display:block; height:100%; border-radius:2px; background:linear-gradient(90deg,var(--cls-color,var(--cyan-soft)),color-mix(in srgb,var(--cls-color,var(--cyan-soft)) 55%,white)); box-shadow:0 0 10px color-mix(in srgb,var(--cls-color,var(--cyan-soft)) 55%,transparent); }
 #overlay .cls2-xptext { margin-top:7px; color:#8faeb8; font:600 10px ui-monospace,monospace; letter-spacing:.14em; }
 #overlay .cls2-perk { margin-top:4px; color:#c8d8dc; font-size:11px; letter-spacing:.08em; }
 #overlay .cls2-palette { display:flex; gap:6px; margin:14px 0 0; }
-#overlay .cls2-palette i { flex:1; height:6px; border-radius:3px; opacity:.92; }
+#overlay .cls2-palette i { flex:1; height:6px; border-radius: var(--radius-panel); opacity:.92; }
 #overlay .cls2-stats { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:18px 0 0; }
-#overlay .cls2-stats > div { padding:12px 16px; background:rgba(9,26,38,.55); border:1px solid rgba(155,194,202,.18); border-left:2px solid var(--cls-color,#69aec2); }
+#overlay .cls2-stats > div { padding:12px 16px; background:rgba(9,26,38,.55); border:1px solid rgba(155,194,202,.18); border-left:2px solid var(--cls-color,var(--cyan-soft)); }
 #overlay .cls2-stats dt { color:#8faeb8; font:600 10px ui-monospace,monospace; letter-spacing:.22em; }
 #overlay .cls2-stats dd { margin:6px 0 0; color:#f2f7f8; font:800 22px/1 ui-monospace,monospace; }
 #overlay .cls2-stats dd i { margin-left:4px; font:600 10px ui-monospace,monospace; font-style:normal; color:#8faeb8; letter-spacing:.14em; }
-#overlay .cls2-story { max-width:390px; margin-top:18px; padding-left:14px; border-left:2px solid color-mix(in srgb,var(--cls-color,#69aec2) 55%,transparent); color:#c8d8dc; font-size:12.5px; line-height:2; }
+#overlay .cls2-story { max-width:390px; margin-top:18px; padding-left:14px; border-left:2px solid color-mix(in srgb,var(--cls-color,var(--cyan-soft)) 55%,transparent); color:#c8d8dc; font-size:12.5px; line-height:2; }
 #overlay .cls2-skins-wrap { margin-top:20px; }
 #overlay .cls2-sub { color:#8faeb8; font:600 10px ui-monospace,monospace; letter-spacing:.3em; }
 #overlay .cls2-sub i { font-style:normal; color:rgba(151,199,213,.5); }
 #overlay .cls2-skins { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
 #overlay .cls2-skin-btn { padding:7px 14px; border:1px solid rgba(155,194,202,.32); border-radius:2px; background:rgba(9,26,38,.5); color:#aec6cd; font:600 12px ui-monospace,monospace; letter-spacing:.1em; cursor:pointer; transition:border-color .15s,color .15s,background .15s; }
-#overlay .cls2-skin-btn:hover { border-color:color-mix(in srgb,var(--cls-color,#69aec2) 70%,transparent); color:#e6f2f5; }
-#overlay .cls2-skin-btn.sel { border-color:var(--cls-color,#69aec2); background:color-mix(in srgb,var(--cls-color,#69aec2) 22%,transparent); color:#f2f7f8; }
+#overlay .cls2-skin-btn:hover { border-color:color-mix(in srgb,var(--cls-color,var(--cyan-soft)) 70%,transparent); color:#e6f2f5; }
+#overlay .cls2-skin-btn.sel { border-color:var(--cls-color,var(--cyan-soft)); background:color-mix(in srgb,var(--cls-color,var(--cyan-soft)) 22%,transparent); color:#f2f7f8; }
 #overlay .cls2-pool-btn { margin-top:22px; border-radius:2px; }
 #overlay .cls2-pool-btn:disabled { opacity:.5; cursor:not-allowed; }
 /* 皮肤切换过渡（2026-09-19）：新立绘自右轻滑淡入+微模糊收焦，延伸层同步淡入 */
@@ -52,10 +52,23 @@
 #overlay .cls2-face b { padding:18px 0 6px; color:#e2edf0; letter-spacing:.18em; }
 #overlay .cls2-face.sel { border-color:#e2c88e; box-shadow:0 0 20px rgba(226,200,142,.3),inset 0 0 0 1px rgba(226,200,142,.55); }
 #overlay .cls2-face:focus-visible { outline:2px solid #79c4d7; outline-offset:3px; }
-#overlay .cls2-confirm { right:clamp(18px,3vw,42px); bottom:22px; width:clamp(190px,19vw,280px); height:58px; gap:14px; padding:0 20px; border-radius:2px; color:#0b202c; background:linear-gradient(115deg,#f7e7bd,#d9bb82 58%,#c8a76b); box-shadow:0 8px 26px rgba(0,0,0,.42); } /* 09-25 P2：主确认金钮渐变统一定版配方 #f7e7bd→#d9bb82→#c8a76b */
+/* ── 职业徽记（LEG-6a，0926 W1）：nai-out 五枚纹章 PNG 挂信息面板 + 底部人物卡。
+   出图为白底盘面（暗盾+金边），按「珐琅徽章」制式呈现：白底入圆角铭牌+金细边+暗投影，
+   白底读作章体而非贴图露底。源件只读引用 assets/ui/emblems/。 ── */
+#overlay .cls2-nameline { display:flex; align-items:center; gap:clamp(14px,1.5vw,24px); }
+#overlay .cls2-crest { flex:0 0 auto; width:clamp(60px,5.2vw,84px); aspect-ratio:1; object-fit:cover; border-radius:22%; border:1px solid rgba(221,184,118,.55); box-shadow:0 6px 18px rgba(0,0,0,.5),0 0 0 1px rgba(6,17,27,.65),inset 0 0 10px rgba(9,22,34,.25); }
+#overlay .cls2-face-crest { position:absolute; top:5px; right:5px; z-index:2; width:27%; height:auto; aspect-ratio:1; object-fit:cover; border-radius:22%; border:1px solid rgba(221,184,118,.6); box-shadow:0 2px 7px rgba(0,0,0,.55); pointer-events:none; }
+@media (max-width:600px) {
+  #overlay .cls2-crest { width:44px; }
+  #overlay .cls2-face-crest { display:none; } /* 46px 卡上角徽小于可读下限，窄窗只留面板徽 */
+}
+#overlay .cls2-confirm { right:clamp(18px,3vw,42px); bottom:22px; width:clamp(190px,19vw,280px); height:58px; gap:14px; padding:0 20px; border-radius:2px; color:#0b202c; background:linear-gradient(115deg,#f7e7bd,var(--gold-main) 58%,#c8a76b); box-shadow:0 8px 26px rgba(0,0,0,.42); } /* 09-25 P2：主确认金钮渐变统一定版配方 #f7e7bd→var(--gold-main)→#c8a76b */
 #overlay .cls2-confirm span { font-size:clamp(14px,1.25vw,18px); font-weight:800; letter-spacing:.1em; white-space:nowrap; }
 #overlay .cls2-confirm:disabled { color:#9a9d96; background:#26353b; border-color:#50636a; box-shadow:none; }
-#overlay .cls2-back { left:clamp(18px,3vw,42px); bottom:24px; border-radius:2px; }
+/* W1-03：返回件统一——cls2-back 从左下迁到左上，与全站 .ak-sq.ak-exit.ak-back-tl 同位同形（64×58@16,18，
+   发丝内框由 hub.css .cls2-back::after 提供）；面板顶部加让位，眉题不被钮压住 */
+#overlay .cls2-back { top:16px; left:18px; bottom:auto; width:64px; height:58px; border-radius:0; background:#2c3032f2; }
+#overlay .cls2-panel { padding-top:calc(clamp(40px,7vh,84px) + 52px); }
 
 @media (max-width:1100px) {
   #overlay .cls2-panel { width:48%; padding-left:28px; padding-right:28px; }
@@ -74,7 +87,7 @@
   #overlay .cls2-confirm { right:12px; bottom:18px; width:132px; height:50px; padding:0 9px; gap:5px; }
   #overlay .cls2-confirm span { font-size:12px; letter-spacing:.02em; }
   #overlay .cls2-confirm .svg-ic { width:20px; height:20px; }
-  #overlay .cls2-back { left:12px; bottom:18px; width:44px; height:44px; }
+  #overlay .cls2-back { top:10px; left:10px; width:52px; height:52px; }
 }
 @media (max-width:600px) {
   #overlay .cls2-panel { width:68%; padding:22px 14px 128px; }
@@ -100,15 +113,15 @@
 /* 批二氛围层 A（2026-09-20 老板拍板）：页面级主题色光斑 —— --cls-color 随角色渗入背景 */
 #overlay .pg.cls-pool-page { display:flex; flex-direction:column; color:#dfe9e8; background:
   linear-gradient(90deg,rgba(134,160,166,.05) 1px,transparent 1px) 0 0/32px 32px,
-  radial-gradient(ellipse at 84% 22%, color-mix(in srgb,var(--cls-color,#69aec2) 9%,transparent), transparent 52%),
+  radial-gradient(ellipse at 84% 22%, color-mix(in srgb,var(--cls-color,var(--cyan-soft)) 9%,transparent), transparent 52%),
   linear-gradient(180deg,rgba(7,23,32,.22),rgba(7,23,32,.22)),
   linear-gradient(125deg,#1b3645,#102431); }
 #overlay .pg.cls-pool-page .pg-head { position:relative; flex:0 0 auto; align-items:center; gap:24px; padding:18px 28px 16px; border-bottom:1px solid rgba(104,128,139,.26); background:linear-gradient(180deg,#14313f,#0d2330); }
-#overlay .pg.cls-pool-page .pg-head::after { content:''; position:absolute; left:0; right:0; bottom:-1px; height:1px; background:linear-gradient(90deg,var(--cls-color,#69aec2),rgba(216,188,134,.8) 46%,transparent 84%); opacity:.85; }
+#overlay .pg.cls-pool-page .pg-head::after { content:''; position:absolute; left:0; right:0; bottom:-1px; height:1px; background:linear-gradient(90deg,var(--cls-color,var(--cyan-soft)),rgba(216,188,134,.8) 46%,transparent 84%); opacity:.85; }
 #overlay .pg.cls-pool-page .pool-archive-title { flex:0 0 auto; }
-#overlay .pg.cls-pool-page .pool-archive-title .section-kicker { margin-bottom:5px; color:var(--cls-color,#69aec2); text-shadow:0 0 14px color-mix(in srgb,var(--cls-color,#69aec2),transparent 55%); }
-#overlay .card.page .pg.cls-pool-page .pool-archive-title h2 { display:block; margin:0; color:#f0ece0; font:400 clamp(21px,2vw,30px)/1.1 var(--serif); letter-spacing:4px; }
-#overlay .pg.cls-pool-page .pg-head .pool-head-badge { margin-left:auto; padding:7px 16px; border:1px solid color-mix(in srgb,var(--cls-color,#69aec2) 55%,transparent); color:color-mix(in srgb,var(--cls-color,#69aec2) 78%,white); font:700 11px "Cascadia Code",monospace; letter-spacing:.2em; }
+#overlay .pg.cls-pool-page .pool-archive-title .section-kicker { margin-bottom:5px; color:var(--cls-color,var(--cyan-soft)); text-shadow:0 0 14px color-mix(in srgb,var(--cls-color,var(--cyan-soft)),transparent 55%); }
+#overlay .card.page .pg.cls-pool-page .pool-archive-title h2 { display:block; margin:0; color:#f0ece0; font:400 clamp(21px,2vw,30px)/1.1 var(--font-display); letter-spacing:4px; }
+#overlay .pg.cls-pool-page .pg-head .pool-head-badge { margin-left:auto; padding:7px 16px; border:1px solid color-mix(in srgb,var(--cls-color,var(--cyan-soft)) 55%,transparent); color:color-mix(in srgb,var(--cls-color,var(--cyan-soft)) 78%,white); font:700 11px "Cascadia Code",monospace; letter-spacing:.2em; }
 #overlay .pg.cls-pool-page .pg-head .pool-head-badge b { margin-right:6px; font-size:15px; color:#f0ece0; }
 
 #overlay .pg.cls-pool-page .pool-main { position:relative; flex:1; min-height:0; display:flex; align-items:stretch; gap:24px; padding:20px 28px; background:transparent; }
@@ -116,14 +129,14 @@
    pool-side/pool-grid 均 relative 盖其上，水印只作氛围底 */
 #overlay .pg.cls-pool-page .pool-watermark { position:absolute; inset:0; z-index:0; display:flex; align-items:flex-end; justify-content:flex-end; overflow:hidden; pointer-events:none; }
 #overlay .pg.cls-pool-page .pool-watermark img { width:min(56%,620px); max-height:104%; object-fit:contain; object-position:right bottom; opacity:.17; filter:saturate(.8) brightness(1.05); mask-image:radial-gradient(ellipse at 72% 62%,#000 42%,transparent 74%); -webkit-mask-image:radial-gradient(ellipse at 72% 62%,#000 42%,transparent 74%); }
-#overlay .pg.cls-pool-page .pool-watermark::after { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 78% 66%, color-mix(in srgb,var(--cls-color,#69aec2) 15%,transparent), transparent 60%); }
-#overlay .pg.cls-pool-page .pool-side { position:relative; z-index:1; flex:0 0 300px; width:300px; min-width:0; display:flex; flex-direction:column; align-self:stretch; padding:26px 22px 18px; border:1px solid rgba(104,128,139,.3); border-radius:2px; background:linear-gradient(165deg,#163847,#0d2431); box-shadow:inset 4px 0 0 color-mix(in srgb,var(--cls-color,#69aec2),transparent 45%),0 9px 22px rgba(3,14,20,.45); overflow:hidden; }
+#overlay .pg.cls-pool-page .pool-watermark::after { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 78% 66%, color-mix(in srgb,var(--cls-color,var(--cyan-soft)) 15%,transparent), transparent 60%); }
+#overlay .pg.cls-pool-page .pool-side { position:relative; z-index:1; flex:0 0 300px; width:300px; min-width:0; display:flex; flex-direction:column; align-self:stretch; padding:26px 22px 18px; border:1px solid rgba(104,128,139,.3); border-radius:2px; background:linear-gradient(165deg,#163847,#0d2431); box-shadow:inset 4px 0 0 color-mix(in srgb,var(--cls-color,var(--cyan-soft)),transparent 45%),0 9px 22px rgba(3,14,20,.45); overflow:hidden; }
 #overlay .pg.cls-pool-page .pool-side::before { content:none; }
 /* 批三：预览栏档案卡化——pv-head 角色小节垫顶，获取规则 pv-rule 沉底，pv-body 是选中卡预览区
    P1-D2（2026-09-20 老板反馈"太挤"）：三段留白节奏拉开——头部下距/规则行上距/属性行间距 */
 #overlay .pg.cls-pool-page .pool-side .pv-head { flex:0 0 auto; margin-bottom:18px; padding-bottom:14px; border-bottom:1px solid rgba(104,128,139,.3); }
-#overlay .pg.cls-pool-page .pool-side .pv-kicker { display:block; margin-bottom:7px; color:color-mix(in srgb,var(--cls-color,#69aec2) 78%,white); font:700 9px "Cascadia Code",monospace; letter-spacing:.26em; }
-#overlay .pg.cls-pool-page .pool-side .pv-name { color:#f0ece0; font:400 26px/1.2 var(--serif); letter-spacing:4px; text-shadow:0 0 18px color-mix(in srgb,var(--cls-color,#69aec2) 35%,transparent); }
+#overlay .pg.cls-pool-page .pool-side .pv-kicker { display:block; margin-bottom:7px; color:color-mix(in srgb,var(--cls-color,var(--cyan-soft)) 78%,white); font:700 9px "Cascadia Code",monospace; letter-spacing:.26em; }
+#overlay .pg.cls-pool-page .pool-side .pv-name { color:#f0ece0; font:400 26px/1.2 var(--font-display); letter-spacing:4px; text-shadow:0 0 18px color-mix(in srgb,var(--cls-color,var(--cyan-soft)) 35%,transparent); }
 #overlay .pg.cls-pool-page .pool-side .pv-body { flex:0 0 auto; min-height:0; }
 #overlay .pg.cls-pool-page .pool-side .pv-rule { margin:auto 0 0; padding-top:16px; border-top:1px solid rgba(104,128,139,.24); color:#8faeb8; font-size:11.5px; line-height:1.75; }
 #overlay .pg.cls-pool-page .pool-side .pv-empty { color:#8fb0b6; }
@@ -145,7 +158,7 @@
 #overlay .pg.cls-pool-page .pool-grid { position:relative; z-index:1; flex:1; min-width:0; min-height:0; display:flex; flex-wrap:wrap; align-content:center; justify-content:center; align-content:safe center; justify-content:safe center; gap:26px 26px; padding:6px 6px; overflow:hidden; }
 #overlay .pg.cls-pool-page .pool-cell { position:relative; min-width:0; flex:1 0 236px; max-width:262px; }
 /* 卡底座主题色光晕（批二）：椭圆柔光垫在卡下，缓和绿框卡与深蓝底的冲突 */
-#overlay .pg.cls-pool-page .pool-cell::before { content:''; position:absolute; left:10%; right:10%; bottom:-4px; height:16px; border-radius:50%; background:color-mix(in srgb,var(--cls-color,#69aec2) 38%,transparent); filter:blur(12px); opacity:.4; z-index:0; pointer-events:none; }
+#overlay .pg.cls-pool-page .pool-cell::before { content:''; position:absolute; left:10%; right:10%; bottom:-4px; height:16px; border-radius:50%; background:color-mix(in srgb,var(--cls-color,var(--cyan-soft)) 38%,transparent); filter:blur(12px); opacity:.4; z-index:0; pointer-events:none; }
 #overlay .pg.cls-pool-page .pool-cell .hs-card { position:relative; z-index:1; width:100%; height:auto; font-size:clamp(14.2px,1.02vw,15px); }
 /* P1-C1 稀有度角标（2026-09-20 走查）：框色=职业、角标=稀有度，两套语义分道；
    棱彩走全息渐变边呼应卡面 rv-prism */
@@ -155,33 +168,33 @@
    卡面画窗统一内衬暗角把明度差压平，画风混装的割裂感收敛 */
 #overlay .pg.cls-pool-page .pool-cell .hsc-art { position:relative; }
 #overlay .pg.cls-pool-page .pool-cell .hsc-art::after { content:''; position:absolute; inset:0; box-shadow:inset 0 0 30px rgba(7,15,21,.42); pointer-events:none; }
-#overlay .pg.cls-pool-page .pool-card-button { position:relative; z-index:1; display:block; width:100%; padding:0; border:2px solid transparent; border-radius:2px; background:transparent; color:inherit; font:inherit; cursor:zoom-in; transition:transform .16s,border-color .16s,box-shadow .16s; box-shadow:0 0 0 1px color-mix(in srgb,var(--cls-color,#69aec2) 18%,transparent),0 4px 14px rgba(2,10,16,.35); } /* 09-25 P2：壳层圆角统一 2px（原 10px） */
+#overlay .pg.cls-pool-page .pool-card-button { position:relative; z-index:1; display:block; width:100%; padding:0; border:2px solid transparent; border-radius:2px; background:transparent; color:inherit; font:inherit; cursor:zoom-in; transition:transform .16s,border-color .16s,box-shadow .16s; box-shadow:0 0 0 1px color-mix(in srgb,var(--cls-color,var(--cyan-soft)) 18%,transparent),0 4px 14px rgba(2,10,16,.35); } /* 09-25 P2：壳层圆角统一 2px（原 10px） */
 /* 卡牌库影廊的 hover 放大旋转（cards.css scale 1.17）在此页过激，收敛为浮起+主题色描边 */
 #overlay .pg.cls-pool-page .pool-card-button.lib-cardwrap:hover,
 #overlay .pg.cls-pool-page .pool-card-button.lib-cardwrap:focus-visible { transform:none; filter:none; }
 #overlay .pg.cls-pool-page .pool-card-button:hover,
-#overlay .pg.cls-pool-page .pool-card-button:focus-visible { outline:0; border-color:color-mix(in srgb,var(--cls-color,#69aec2),transparent 18%); transform:translateY(-4px); box-shadow:0 10px 24px rgba(2,10,16,.6),0 0 12px color-mix(in srgb,var(--cls-color,#69aec2),transparent 62%); }
+#overlay .pg.cls-pool-page .pool-card-button:focus-visible { outline:0; border-color:color-mix(in srgb,var(--cls-color,var(--cyan-soft)),transparent 18%); transform:translateY(-4px); box-shadow:0 10px 24px rgba(2,10,16,.6),0 0 12px color-mix(in srgb,var(--cls-color,var(--cyan-soft)),transparent 62%); }
 #overlay .pg.cls-pool-page .pool-card-button.selected { border-color:#d8bc86; box-shadow:0 0 0 2px rgba(216,188,134,.2),0 0 16px rgba(216,188,134,.22),0 7px 18px rgba(2,10,16,.5); }
 
 #overlay .pg.cls-pool-page .cls-foot { flex:0 0 auto; display:flex; flex-wrap:wrap; align-items:center; gap:14px; min-height:66px; padding:14px 28px; border-top:1px solid rgba(104,128,139,.26); background:linear-gradient(180deg,#0f2733,#0b1f2a); }
 #overlay .pg.cls-pool-page .cls-foot .pool-pager { display:flex; align-items:center; gap:12px; margin-right:auto; font-size:13px; }
 /* 批三：分页钮与 ov-btn 同族制式（透明深底+主题色 hover），替代 hs-btn 深灰小钮 */
 #overlay .pg.cls-pool-page .cls-foot .pool-pager .hs-btn { min-height:38px; padding:0 18px; background:rgba(9,26,38,.6); border:1px solid rgba(104,128,139,.5); border-radius:1px; color:#c9d8db; letter-spacing:1px; transition:border-color .15s,color .15s; }
-#overlay .pg.cls-pool-page .cls-foot .pool-pager .hs-btn:hover:not(:disabled) { border-color:var(--cls-color,#69aec2); color:#f0ece0; }
+#overlay .pg.cls-pool-page .cls-foot .pool-pager .hs-btn:hover:not(:disabled) { border-color:var(--cls-color,var(--cyan-soft)); color:#f0ece0; }
 #overlay .pg.cls-pool-page .cls-foot .pool-pager .hs-btn:disabled { opacity:.35; }
 #overlay .pg.cls-pool-page .cls-foot .pool-pageinfo { min-width:150px; text-align:center; color:#b6c9ce; font-size:12.5px; letter-spacing:1px; }
-#overlay .pg.cls-pool-page .cls-foot .pool-pageinfo .pool-page-now { color:var(--cls-color,#69aec2); font-weight:700; }
+#overlay .pg.cls-pool-page .cls-foot .pool-pageinfo .pool-page-now { color:var(--cls-color,var(--cyan-soft)); font-weight:700; }
 #overlay .pg.cls-pool-page .cls-foot .ov-btn { min-height:44px; border-radius:1px; letter-spacing:2px; }
-#overlay .pg.cls-pool-page .cls-foot .ov-btn.ok { min-width:150px; background:color-mix(in srgb,#dfc691 86%,#38606e); border-color:color-mix(in srgb,#dfc691 86%,#38606e); color:#17323f; font-weight:500; letter-spacing:5px; box-shadow:0 0 0 1px color-mix(in srgb,var(--cls-color,#69aec2) 40%,transparent),0 0 16px color-mix(in srgb,var(--cls-color,#69aec2) 22%,transparent); }
+#overlay .pg.cls-pool-page .cls-foot .ov-btn.ok { min-width:150px; background:color-mix(in srgb,#dfc691 86%,#38606e); border-color:color-mix(in srgb,#dfc691 86%,#38606e); color:#17323f; font-weight:500; letter-spacing:5px; box-shadow:0 0 0 1px color-mix(in srgb,var(--cls-color,var(--cyan-soft)) 40%,transparent),0 0 16px color-mix(in srgb,var(--cls-color,var(--cyan-soft)) 22%,transparent); }
 #overlay .pg.cls-pool-page .cls-foot .ov-btn.ok:hover { background:color-mix(in srgb,#e9d9ae 86%,#38606e); border-color:color-mix(in srgb,#e9d9ae 86%,#38606e); }
 
 /* 批三：滚动条主题化（深色细轨+主题色 hover），替换系统默认浅色条 */
 #overlay .pg.cls-pool-page ::-webkit-scrollbar { width:9px; height:9px; }
 #overlay .pg.cls-pool-page ::-webkit-scrollbar-track { background:rgba(7,23,32,.5); }
-#overlay .pg.cls-pool-page ::-webkit-scrollbar-thumb { background:rgba(104,128,139,.42); border-radius:5px; }
-#overlay .pg.cls-pool-page ::-webkit-scrollbar-thumb:hover { background:color-mix(in srgb,var(--cls-color,#69aec2) 55%,#607c86); }
+#overlay .pg.cls-pool-page ::-webkit-scrollbar-thumb { background:rgba(104,128,139,.42); border-radius: var(--radius-panel); }
+#overlay .pg.cls-pool-page ::-webkit-scrollbar-thumb:hover { background:color-mix(in srgb,var(--cls-color,var(--cyan-soft)) 55%,#607c86); }
 /* 批三：右上关闭钮融入主题（hover 主题色） */
-#overlay .card.page:has(.cls-pool-page) .ov-x:hover { color:var(--cls-color,#69aec2); border-color:color-mix(in srgb,var(--cls-color,#69aec2) 60%,transparent); }
+#overlay .card.page:has(.cls-pool-page) .ov-x:hover { color:var(--cls-color,var(--cyan-soft)); border-color:color-mix(in srgb,var(--cls-color,var(--cyan-soft)) 60%,transparent); }
 /* P2-R2（2026-09-20 走查）：基地出发整备后进卡池页，hub 的背包浮钮仍悬浮在网格右下角
    遮挡卡格且与本页功能无关，弹层在场时隐藏（同 winter.css #sidebar 的 :has 先例） */
 body:has(#overlay .cls-pool-page) #bagBtnFloat { display:none; }

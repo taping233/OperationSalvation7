@@ -1,7 +1,7 @@
 /* ═══════════════════════════════════════════════════════════════════
    基地·成就·收藏室页签美术升级（2026-09-24）——对标 page-hub.css /
    page-upgrade.css / page-slot-select.css 定稿语言：
-     ① 冷青统一调色（面板分级/暗色档案底）② #d9bb82 暖金装饰
+     ① 冷青统一调色（面板分级/暗色档案底）② var(--gold-main) 暖金装饰
         （封条顶线/金短线/端点光点/角标编号/金量槽）③ 成就条目三态层级：
         未解锁（暗）→ 已领取（沉淀暖金）→ 可领取（最亮召唤金晕+呼吸）
      ④ 进度表达：金量槽流光 + 里程碑表格数字 ⑤ 交互三档节奏：
@@ -91,7 +91,7 @@
 #overlay #hubMain.hub-ach .hub-page > .hub-card > h3::after {
   content: ''; position: absolute; left: 0; bottom: -3px; width: 3px; height: 3px;
   border-radius: 50%; pointer-events: none;
-  background: #ffe9b6; box-shadow: 0 0 6px #d9bb8299;
+  background: var(--gold-bright); box-shadow: 0 0 6px #d9bb8299;
   animation: achGemBreath 5s ease-in-out infinite alternate;
 }
 @keyframes achGemBreath { from { opacity: .5; } to { opacity: 1; } }
@@ -112,10 +112,10 @@
 /* ═════════ W3 收藏档案室命令条：金标线索引 + 档案章数字（archive-command） ═════════ */
 
 #overlay #hubMain.hub-ach .collection-command {
-  border-color: rgba(176, 203, 208, .18); border-left-color: #d9bb82;
+  border-color: rgba(176, 203, 208, .18); border-left-color: var(--gold-main);
   background: linear-gradient(110deg, rgba(15, 37, 50, .96), rgba(8, 21, 31, .96));
 }
-#overlay #hubMain.hub-ach .collection-command .section-kicker { color: #d9bb82; }
+#overlay #hubMain.hub-ach .collection-command .section-kicker { color: var(--gold-main); }
 #overlay #hubMain.hub-ach .collection-command h3 {
   text-shadow: 0 2px 18px rgba(3, 10, 16, .7), 0 0 4px rgba(217, 187, 130, .2);
 }
@@ -151,7 +151,7 @@
 #overlay #hubMain.hub-ach .collection-tabs button.on::after {
   content: ''; position: absolute; left: 50%; bottom: 3px; width: 3px; height: 3px;
   margin-left: -1.5px; border-radius: 50%; pointer-events: none;
-  background: #ffe9b6; box-shadow: 0 0 7px 1px rgba(217, 187, 130, .65);
+  background: var(--gold-bright); box-shadow: 0 0 7px 1px rgba(217, 187, 130, .65);
   animation: achGemBreath 5s ease-in-out infinite alternate;
 }
 
@@ -181,7 +181,7 @@
 #overlay #hubMain.hub-ach .ach-row.done:has(.mini-btn.ok) {
   border-color: rgba(217, 187, 130, .62);
   background: linear-gradient(90deg, rgba(217, 187, 130, .12), rgba(217, 187, 130, .028) 46%, rgba(10, 22, 30, .6));
-  box-shadow: inset 2px 0 0 #d9bb82, 0 0 16px rgba(217, 187, 130, .12);
+  box-shadow: inset 2px 0 0 var(--gold-main), 0 0 16px rgba(217, 187, 130, .12);
 }
 #overlay #hubMain.hub-ach .ach-row.done:has(.mini-btn.ok)::after {
   content: ''; position: absolute; inset: 0; pointer-events: none;
@@ -191,7 +191,7 @@
 @keyframes achSummon { from { opacity: .35; } to { opacity: 1; } }
 #overlay #hubMain.hub-ach .ach-row.done:has(.mini-btn.ok):hover {
   border-color: rgba(217, 187, 130, .8);
-  box-shadow: inset 2px 0 0 #d9bb82, 0 0 20px rgba(217, 187, 130, .18);
+  box-shadow: inset 2px 0 0 var(--gold-main), 0 0 20px rgba(217, 187, 130, .18);
 }
 #overlay #hubMain.hub-ach .ach-row.done:has(.mini-btn.ok) .ach-ops .rw { color: #e8d7ae; }
 #overlay #hubMain.hub-ach .ach-row.done:has(.mini-btn.ok) .ach-ico {
@@ -232,7 +232,7 @@
 
 /* ═════════ W6 职业收藏室：金量槽流光 + 里程碑三态 + 收藏格金线 ═════════ */
 
-/* W6a 总进度金量槽：暗槽 + #d9bb82 金量（同 upgrade W3b）+ 缓慢流光 */
+/* W6a 总进度金量槽：暗槽 + var(--gold-main) 金量（同 upgrade W3b）+ 缓慢流光 */
 #overlay #hubMain.hub-ach .coll-room .base-bar {
   background: rgba(6, 15, 22, .92);
   border: 1px solid rgba(217, 187, 130, .24);
@@ -240,7 +240,7 @@
 }
 #overlay #hubMain.hub-ach .coll-room .base-bar i {
   position: relative; overflow: hidden;
-  background: linear-gradient(90deg, #8a6f42, #d9bb82 55%, #e8d3a4);
+  background: linear-gradient(90deg, #8a6f42, var(--gold-main) 55%, #e8d3a4);
   box-shadow: 0 0 8px rgba(217, 187, 130, .3);
 }
 #overlay #hubMain.hub-ach .coll-room .base-bar i::after {
@@ -278,7 +278,7 @@
 #overlay #hubMain.hub-ach .coll-ms.reach {
   border-color: rgba(217, 187, 130, .62);
   background: linear-gradient(90deg, rgba(217, 187, 130, .12), rgba(217, 187, 130, .028) 46%, rgba(10, 22, 30, .6));
-  box-shadow: inset 2px 0 0 #d9bb82, 0 0 16px rgba(217, 187, 130, .12);
+  box-shadow: inset 2px 0 0 var(--gold-main), 0 0 16px rgba(217, 187, 130, .12);
 }
 #overlay #hubMain.hub-ach .coll-ms.reach::after {
   content: ''; position: absolute; inset: 0; pointer-events: none;
@@ -287,7 +287,7 @@
 }
 #overlay #hubMain.hub-ach .coll-ms.reach:hover {
   border-color: rgba(217, 187, 130, .8);
-  box-shadow: inset 2px 0 0 #d9bb82, 0 0 20px rgba(217, 187, 130, .18);
+  box-shadow: inset 2px 0 0 var(--gold-main), 0 0 20px rgba(217, 187, 130, .18);
 }
 #overlay #hubMain.hub-ach .coll-ms.reach b { color: #f0e6cf; }
 
@@ -319,12 +319,12 @@
     box-shadow var(--ach-lift), background var(--ach-lift);
 }
 #overlay #hubMain.hub-ach .back-card:hover:not(.locked) {
-  border-color: #d9bb82;
+  border-color: var(--gold-main);
   box-shadow: 0 8px 20px rgba(2, 8, 14, .4), 0 0 12px rgba(217, 187, 130, .12);
 }
 /* 装备中：金边 + 常亮金晕（页内第二亮，仅次于可领取） */
 #overlay #hubMain.hub-ach .back-card.on {
-  border-color: #d9bb82;
+  border-color: var(--gold-main);
   box-shadow: inset 0 0 0 1px rgba(217, 187, 130, .25), 0 0 16px rgba(217, 187, 130, .18);
 }
 #overlay #hubMain.hub-ach .back-card.on b { color: #f0e6cf; }
@@ -335,7 +335,7 @@
 #overlay #hubMain.hub-ach :is(button, [role="button"]):focus-visible {
   outline: 1px solid #d9bb82cc;
   outline-offset: 2px;
-  box-shadow: 0 0 0 1px #071720, 0 0 12px rgba(217, 187, 130, .35);
+  box-shadow: 0 0 0 1px var(--bg-deep), 0 0 12px rgba(217, 187, 130, .35);
 }
 
 /* ═════════ T4 页签切入入场编排：仅 .page-in 首帧播放（页内操作重绘不重播，
@@ -411,7 +411,7 @@
 }
 #overlay #hubMain.hub-ach .collection-command .story-strip .ss-tag {
   flex: none; display: inline-flex; align-items: center; gap: 5px;
-  color: #d9bb82; letter-spacing: 1px;
+  color: var(--gold-main); letter-spacing: 1px;
   padding-right: 12px;
   background: linear-gradient(270deg, transparent, rgba(217, 187, 130, .4)) right center / 10px 1px no-repeat;
 }

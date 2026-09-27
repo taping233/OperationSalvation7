@@ -6,10 +6,9 @@
  * 「快捷键」页签（agent.console）读取展示，也可在此调整映射。
  * 输入焦点在文本框时自动让路（与 game.boot 的键位守卫同口径）。
  * ============================================================ */
-import { game, openSettings, openSuggestionInbox } from '../run/game.session.js';
+import { game, openSettings, openSuggestionInbox, openDataPageUi } from '../run/game.session.js';
 import { openBaseHub } from '../hub/game.hub.js';
 import { openCardLibrary } from '../hub/game.cardslib.js';
-import { openDataPage } from '../agent/agent.data.js';
 
 const busy = () => game.battleActive || game.nestActive;
 const inRun = () => game.runActive;
@@ -30,9 +29,9 @@ const PAGES = [
     can: () => !busy() && !inRun(),
     enter: () => openBaseHub(t.tab),
   })),
-  { key: '7', id: 'cardslib', name: '卡牌库·照相馆', can: () => !busy(), enter: () => openCardLibrary() },
+  { key: '7', id: 'cardslib', name: '照相馆', can: () => !busy(), enter: () => openCardLibrary() },   // W1-07④：一物一名（标题钮同名为照相馆）
   { key: '8', id: 'inbox', name: '留言信箱', can: () => !busy(), enter: () => openSuggestionInbox() },
-  { key: '9', id: 'data', name: '跑局数据', can: () => !busy(), enter: () => openDataPage() },
+  { key: '9', id: 'data', name: '跑局数据', can: () => !busy(), enter: () => openDataPageUi() },   // W1-01：走带返回件的包装器
   { key: '0', id: 'settings', name: '设置', can: () => !busy() && !inRun(), enter: () => openSettings() },
 ];
 

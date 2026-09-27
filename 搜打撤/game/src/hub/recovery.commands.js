@@ -1,7 +1,7 @@
 import './base.js';
 import { RUN_KEY, RunStorage, SAVE_VERSION } from './game.storage.js';
 import { createRecoverablePair } from './recoverable-pair.js';
-import { clone, fail, stable, validSlot } from './commands.shared.js';
+import { clone, fail, stable, successReceipt, validSlot } from './commands.shared.js';
 
 const Base = () => window.SDT.Base;
 
@@ -150,7 +150,7 @@ export function createRecoveryCommands({ storage = globalThis.localStorage, lock
       let nextBase, nextRun, output;
       try { nextBase = clone(prepared.afterBase); nextRun = prepared.afterRun === null ? null : clone(prepared.afterRun); output = clone(prepared.output ?? null); }
       catch { return fail('INVALID_ARGUMENT', '事务快照必须是可序列化纯数据'); }
-      const result = { ok: true, value: { requestId: context.requestId, command: prepared.command, baseRevision: baseRevision + 1, runRevision: runRevision + 1, runId: prepared.runId, output }, revision: baseRevision + 1 };
+      const result = successReceipt({ requestId: context.requestId, command: prepared.command, baseRevision: baseRevision + 1, runRevision: runRevision + 1, runId: prepared.runId, output }, baseRevision + 1);
       nextBase.version = baseVersion;
       nextBase._m01 = { revision: baseRevision + 1, requests: { ...currentBase._m01.requests, [requestKey]: { fingerprint, result } } };
       if (nextRun) { nextRun.version = runVersion; nextRun._r2 = { runId: prepared.runId, revision: runRevision + 1 }; }

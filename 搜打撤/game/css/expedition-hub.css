@@ -26,7 +26,7 @@
 #overlay .deploy-primary.nest-locked:hover { filter:none; transform:translateY(-1px); border-color:rgba(148,163,170,.5); }
 #overlay .deploy-primary.nest-locked .ic { filter:grayscale(1) brightness(1.5); }
 #overlay #btnNest.deploy-primary:not(.nest-locked) { border-color:rgba(159,183,188,.32); background:linear-gradient(135deg,rgba(36,58,74,.92),rgba(14,30,42,.94)); color:#e8d9a8; box-shadow:none; }
-#overlay #btnNest.deploy-primary:not(.nest-locked):hover { filter:none; transform:translateY(-1px); border-color:#d9bb82; color:#ffe9b6; box-shadow:0 0 10px rgba(217,187,130,.16); }
+#overlay #btnNest.deploy-primary:not(.nest-locked):hover { filter:none; transform:translateY(-1px); border-color:var(--gold-main); color:var(--gold-bright); box-shadow:0 0 10px rgba(217,187,130,.16); }
 #overlay #btnNest.deploy-primary:not(.nest-locked) .ic { filter:none; }
 /* 金底上的位图图标压成深色剪影（09-20 批1）：exit/lock 原图为青蓝调，直接放金底显脏 */
 #overlay .deploy-primary .ic { filter:brightness(.45) saturate(.9); }
@@ -82,13 +82,13 @@
 /* 人物档案与收藏档案：与基地的深青金属骨架共用视觉语言。 */
 #overlay .hub-classes .hub-page,
 #overlay .hub-ach .hub-page { max-width:1420px; margin:0 auto; width:100%; }
-.section-kicker { display:block; margin-bottom:8px; color:#d6bd7e; font:700 10px/1.2 "Cascadia Code",monospace; letter-spacing:.2em; }
+.section-kicker { display:block; margin-bottom:8px; color:var(--gold-main); font:700 10px/1.2 "Cascadia Code",monospace; letter-spacing:.2em; }
 .class-command,
 .collection-command { display:flex; align-items:flex-end; justify-content:space-between; gap:28px; margin-bottom:16px; padding:20px 24px; border:1px solid rgba(183,209,214,.2); border-left:3px solid #d5bb79; background:linear-gradient(110deg,rgba(17,40,52,.96),rgba(8,21,31,.96)); box-shadow:0 14px 30px rgba(0,0,0,.18); }
 .class-command-copy,
 .collection-command-copy { max-width:670px; }
 .class-command h3,
-.collection-command h3 { margin:0 0 7px; color:#f2ead8; font:400 clamp(25px,2.4vw,36px)/1.1 var(--serif); letter-spacing:5px; }
+.collection-command h3 { margin:0 0 7px; color:#f2ead8; font:400 clamp(25px,2.4vw,36px)/1.1 var(--font-display); letter-spacing:5px; }
 .class-command p,
 .collection-command p { margin:0; color:#aebfc3; font-size:13px; line-height:1.7; }
 .class-command-stats,
@@ -111,7 +111,7 @@
 .class-dossier-index { position:absolute; top:13px; right:13px; color:rgba(235,220,182,.72); font:700 11px "Cascadia Code",monospace; letter-spacing:2px; }
 .class-dossier-copy { position:absolute; left:0; right:0; bottom:0; padding:20px 18px 16px; }
 .class-dossier-kicker { color:#d6bd7e; font:700 9px "Cascadia Code",monospace; letter-spacing:.18em; }
-.class-dossier h3 { margin:5px 0 7px; color:#f2eee3; font:400 clamp(20px,1.8vw,29px)/1.1 var(--serif); letter-spacing:5px; }
+.class-dossier h3 { margin:5px 0 7px; color:#f2eee3; font:400 clamp(20px,1.8vw,29px)/1.1 var(--font-display); letter-spacing:5px; }
 .class-dossier p { min-height:3em; margin:0 0 12px; color:#b5c4c7; font-size:11px; line-height:1.55; }
 .class-dossier-meta { display:flex; align-items:center; justify-content:space-between; gap:8px; color:#c1d0d1; font-size:11px; }
 .class-dossier-meta b { color:#ead296; font:700 12px "Cascadia Code",monospace; }
@@ -225,3 +225,15 @@
   padding: 56px 16px 16px;
   background: linear-gradient(180deg, transparent, #0a1c27 40%);
 }
+
+/* W2-02（0926 W2 R1）：锁态深层内容收敛行——原主列锁钮+页底宝藏大门横条（锁态）不渲染，
+   钥匙进度聚合到右栏 MISSION BRIEF 末行；降透明+可点（gateInfo），与 01-04 行同构 */
+#overlay .deploy-readiness-panel .readiness-item.locked-gate { cursor: pointer; opacity: .78; border-bottom: 0; }
+#overlay .deploy-readiness-panel .readiness-item.locked-gate:hover { opacity: 1; }
+#overlay .deploy-readiness-panel .readiness-item.locked-gate span small { color: #7d949b; }
+#overlay .deploy-readiness-panel .readiness-item.locked-gate b { color: #9db4bd; }
+
+/* W4-04（0926 W4 R1）：双语 eyebrow 制式归一——.section-kicker 为唯一页面/节级制式。
+   存量色 #d6bd7e 归并主金 token（W4-01 体系）；整备页头 kicker 在 flex 头内独占一行 */
+.section-kicker { color: var(--gold-main); }
+#overlay #depMain .hub-head .dep-kicker { flex-basis: 100%; margin-bottom: -6px; }

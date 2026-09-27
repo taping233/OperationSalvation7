@@ -30,6 +30,22 @@ import { turboMs } from '../agent/agent.turbo.js';
     ? new URL('../../assets/scenes/scene-chest-class-anime-v1.webp', import.meta.url).href
     : (CHEST_ART[cur.kind] || CHEST_ART.medium);
 
+  // 战斗胜利车队横幅（LEG-6b，2026-09-26 W1 批件）：只挂在带 battleSummary 的战斗胜利
+  // 搜刮页顶部作正脸结算演出；普通宝箱/事件搜刮不挂。素材只读引用，不改结算语义。
+  const BATTLE_WIN_BANNER = new URL('../../assets/scenes/ui-loop-0925/rewards-convoy-success.webp', import.meta.url).href;
+
+  // W2-05（2026-09-27 R2）：档位色带钩子——弹层 .card.chest 挂 tier-{kind} 类，
+  // 视觉（标题底边线/描边/标题字色）在 css/expedition-rewards.css 按 小=古朴灰/
+  // 中=稀有蓝/大=传说金 分档；boss/职业箱不挂类保持现状。纯呈现，不改掉落语义。
+  const TIER_KINDS = new Set(['small', 'medium', 'large']);
+  function markChestTier(cur) {
+    const card = document.querySelector('#overlay .card.chest');
+    if (!card) return;
+    card.classList.remove('tier-small', 'tier-medium', 'tier-large');   // 弹层卡节点跨次复用，先清旧档位再挂（实测会累积）
+    if (!cur || !TIER_KINDS.has(cur.kind) || cur.isClass) return;
+    card.classList.add('tier-' + cur.kind);
+  }
+
   // 同一面板去重（2026-09-13 老板口径：同一个选择面板内不许重复）：
   // 除同 id 外，卡名相同的不同版本（如「冰冻药水」有法术/道具两张）在面板里
   // 看起来也是同一张牌，一并算重复。ids 同时喂给 cards.js 随机池排除
@@ -236,6 +252,11 @@ import { turboMs } from '../agent/agent.turbo.js';
         <span class="ps-ground"><i></i></span>
         <p class="ps-tip">正在搜索物资…</p>
       </div>`, 'chest');
+    markChestTier(cur);
+    // W6-01 事实更正（2026-09-27 R2）：battle.lifecycle.js:135 的三元式
+    // sfx(win===true?'victory':…) 本就在战斗结束播放胜利音——评审 rg 审计按字面
+    // 「sfx('victory')」检索漏掉了条件表达式。此处不再二次触发（会双响）。
+    // 音频面 Accent 缺口的真实修正=W6-02 音量归位（kill/victory 曲线）+W5-01 视觉拍。
     SDT.Sound.sfx('pick');
     UI.refresh(G);
     const delay = turboMs(SEARCH_MS);
@@ -261,7 +282,7 @@ import { turboMs } from '../agent/agent.turbo.js';
         : got ? '' : `data-act="chestTake1" data-i="${i}" title="点击拾取进背包"`;
       const tag = act ? 'button' : 'div';
       const buttonAttrs = act ? ` type="button" aria-label="${escAttr(`${got ? '已收取' : '收取卡牌'}：${card.name || '未命名卡牌'}`)}"` : '';
-      return `<${tag}${buttonAttrs} class="bt-card chest-fly rl-${riOf(card)}${cur.isClass ? ' cls-chest' : ''}${got ? ' got' : ''}" style="animation-delay:${i * 160}ms"
+      return `<${tag}${buttonAttrs} class="bt-card chest-fly rl-${riOf(card)}${cur.isClass ? ' cls-chest' : ''}${got ? ' got' : ''}" style="animation-delay:${(cur.battleSummary ? 480 : 0) + i * 160}ms"
         ${act}>
         ${SDT.Cards.cardHTML(card)}${got ? '<span class="chest-got-mark">已收</span>' : ''}
       </${tag}>`;
@@ -292,14 +313,18 @@ import { turboMs } from '../agent/agent.turbo.js';
       : cant > 0
       ? `<p class="chest-warn">[[icon:bag]] 背包已满（${G.usedSlots()}/${G.bagCap()} 格，珍珠盒扩格只收资源卡）——只能再收 <b>${canTake}</b> 张：可单点卡牌拾取，或按 B 打开背包把卡牌拖入安全格/存入珍珠盒腾出格子，或全部收下（放不下的 <b>${cant}</b> 张将散落）</p>`
       : '';
+    // W1-05（2026-09-27 R2，主代理定向解冻）：三选一补跳过出口——此前唯一离开
+    // 方式=必须点选一张（强迫获取，评审 D3 实测弹层下连点路线卡零反馈）。
+    // chestSkip 处理器本就无条件注册（币照收、卡散落、next()）；按钮文案含「离开」
+    // 命中 overlay 取消语义探测（_findCancelBtn），右上 × 随之自动亮出＝R1 W1-03
+    // 定版「弹层=.ov-x ×」出口制式（Esc/遮罩点击同路）。满包警示行不变。
     const ops = isPick
-      ? (pickNoFit
-        ? `<div class="scene-ops chest-ops"><button class="ov-btn" data-act="chestSkip">${cur.coins ? '只收金币并离开' : '放弃卡牌并离开'}</button></div>`
-        : '')   // 2026-09-15 老板：说明文字收敛——页脚一句已覆盖，不再重复提示
+      ? `<div class="scene-ops chest-ops"><button class="ov-btn" data-act="chestSkip">${cur.coins ? '只收金币并离开' : '放弃卡牌并离开'}</button></div>`
       // 2026-09-06 留言：全部收下移到右边，左侧加跳过（散落不要了）
       // 2026-09-09 老板定向：满包预检提示 + 单卡拾取（放不下的卡强收时散落，不再静默）
       : `<div class="scene-ops chest-ops"><button class="ov-btn" data-act="chestSkip">${cur.coins ? '只收金币并离开' : '放弃卡牌并离开'}</button><button class="ov-btn ok${cant > 0 ? ' warn' : ''}" data-act="chestTake">[[icon:archive]] 全部收下${cant > 0 ? `（${cant} 张放不下）` : cur.coins ? `（含 ${cur.coins} 币）` : ''}</button></div>`;
     UI.showOverlay(`[[icon:archive]] 搜刮！${cur.isClass ? '职业·' : ''}${K.name} · 第 ${idx} / ${queue.length}`, `
+      ${cur.battleSummary ? `<img class="battle-banner" src="${BATTLE_WIN_BANNER}" alt="" draggable="false">` : ''}
       <div class="loot-manifest"><div><span>FIELD SUPPLY / ${String(idx).padStart(2, '0')}</span><b>${isPick ? '选一件，继续前行。' : '发现补给，整理收获。'}</b></div><div class="loot-capacity"><small>背包占用</small><b>${G.usedSlots()} <em>/ ${G.bagCap()}</em></b></div></div>
       ${cur.isClass ? '<p class="evt-sts-desc cls-chest-note">黑色职业宝箱：只掉落<b>职业卡牌</b></p>' : ''}
       <p class="evt-sts-desc">${lootLine}</p>
@@ -308,6 +333,7 @@ import { turboMs } from '../agent/agent.turbo.js';
       <div class="chest-reveal"><img class="chest-prop opened" src="${chestArtOf(cur)}" alt="" draggable="false"></div>
       ${cur.cards.length ? `<div class="bt-hand${taken.size ? ' no-anim' : ''}" data-n="${cur.cards.length}">${cardsHTML}</div>` : '<p class="ov-empty">（卡牌库是空的，什么也没开出）</p>'}
       <div class="loot-footer-note">${isPick ? '点击一张收下 · 未收取的卡牌将散落' : '点击卡牌收下它，未收取的将在离开时散落'}</div>${ops}`, 'chest');
+    markChestTier(cur);
     UI.act('chestTake', takeAll);
     UI.act('chestTake1', (d) => {
       const card = cur.cards[+d.i];

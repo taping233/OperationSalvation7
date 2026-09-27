@@ -1,5 +1,5 @@
 /* Winter Conjecture — one art direction over the structural feature styles. */
-:root{--font-ui:'HarmonyOS Sans SC','HarmonyOS Sans','Noto Sans SC Sub','Microsoft YaHei',sans-serif;--ink:#101e27;--bg:#101e27;--desk1:#1c303c;--desk2:#132630;--panel:#192e39;--panel2:#233d49;--inset:#112530;--line:#3b5663;--line2:#6b828a;--txt:#e8eeea;--sub:#b2c4c9;--dim:#849da7;--amber:#ddb876;--amber-soft:#ecd2a3;--gold:#ddb876;--ok:#9bc5c0;--arcane:#b1a1c4;--cal:var(--font-ui);--sb-thumb:#5a7580;--sb-radius:4px}
+:root{--font-ui:'HarmonyOS Sans SC','HarmonyOS Sans','Noto Sans SC Sub','Microsoft YaHei',sans-serif;--ink:#101e27;--bg:#101e27;--desk1:#1c303c;--desk2:#132630;--panel:#192e39;--panel2:#233d49;--inset:#112530;--line:#3b5663;--line2:#6b828a;--txt:#e8eeea;--sub:#b2c4c9;--dim:#849da7;--amber:#ddb876;--amber-soft:#ecd2a3;--gold:#ddb876;--cyan-soft:#69aec2;--bg-deep:#071720;--bg-deep2:#081722;--ok:#9bc5c0;--arcane:#b1a1c4;--cal:var(--font-ui);--font-handwriting:'KaiTi','STKaiti','SimSun',serif;--sb-thumb:#5a7580;--sb-radius:4px}
 button,input,select,textarea{font-family:inherit}button{border-radius:1px;transition:background .16s,border-color .16s,transform .16s;cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:1px solid #d9bb82cc;outline-offset:2px}button:disabled{cursor:default;opacity:.45;filter:saturate(.55)}button:active:not(:disabled){transform:translateY(1px)}::selection{background:#cfb78266}::-webkit-scrollbar-thumb{background:var(--sb-thumb);border-color:#192e39;border-radius:var(--sb-radius)}
 #title{position:absolute;inset:0;background:#112330;isolation:isolate;display:block;overflow:hidden}#title[hidden]{display:none}#title .title-bg{position:absolute;inset:0;background:url('../assets/reconstruction/wallpaper-original.webp') center/cover;z-index:0}#title::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#0c1d264d,transparent 45%,#0b182bba),linear-gradient(0deg,#0e1c24bf,transparent 55%);z-index:1;pointer-events:none}.title-inner{position:absolute;inset:0;z-index:2;width:auto;padding:0;text-align:left}.title-heading{position:absolute;top:7%;left:0;width:clamp(430px,43vw,760px);transform:translateX(-8.1%)}.title-wordmark{display:block;width:100%;height:auto;user-select:none;filter:drop-shadow(0 3px 12px #07131bb3)}.title-kicker{font:9px/1.8 'Cascadia Code',monospace;letter-spacing:3px;color:#e8eeea;margin:0 0 12px}.cn-title{font-family:'Songti SC','SimSun',serif;font-size:clamp(40px,5.2vw,85px);font-weight:400;letter-spacing:8px;line-height:1.18;color:#f0f3e9;margin:0;text-shadow:0 3px 20px #182b34}.en-subtitle{font:11px var(--font-ui);letter-spacing:6px;margin-top:18px;color:#b9cbd0}
 /* —— AK 风格主页（明日方舟式排版：深灰黑铬件 + 荧光青绿点缀；壁纸与标题字保持原样） —— */
@@ -59,7 +59,7 @@ body.scene-battle-3d #sidebar,body.scene-battle-3d #layerBanner,body.scene-battl
 #btnTitleExit:hover{color:#ffffff;filter:drop-shadow(0 0 8px #d9bb8266)}
 /* #10 #32 快速参考：透明幽灵件（与静音按钮同风格） */
 .ak-quickref{gap:12px;padding:0 20px 0 16px;font-size:13px;letter-spacing:3px;background:none;border-color:transparent;transition:color .18s,border-color .18s,filter .18s}
-.ak-quickref svg{color:#d9bb82}
+.ak-quickref svg{color:var(--gold-main)}
 .ak-quickref:hover{background:none;border-color:#d9bb82cc;color:#fff;filter:drop-shadow(0 0 8px #d9bb8266)}
 .ak-quickref::before{display:none}
 /* #28 开始探索：SVG 饰纹加回来 */
@@ -89,7 +89,7 @@ body.page-opaque #sidebar{visibility:hidden}
 /* #45 #51 选档页/全屏弹层返回键：局内同款朱红退出键（#45 要求放回右上角）。
    #58 半透明玻璃质感（backdrop 透出底图）。2026-09-06 留言：按钮做小并与右边对齐；
    top:16 仍使 36px 钮中心对齐页头 ？ 帮助键中心（28/2+20≈34） */
-.pg.slot-page > .pg-close,#overlay.opaque .pg > .pg-close{top:16px;right:16px;left:auto;width:36px;height:36px;border-radius:8px;border:1px solid rgba(190,140,130,.4);
+.pg.slot-page > .pg-close,#overlay.opaque .pg > .pg-close{top:16px;right:16px;left:auto;width:36px;height:36px;border-radius: var(--radius-panel);border:1px solid rgba(190,140,130,.4);
   background:linear-gradient(160deg,rgba(150,45,40,.32) 0%,rgba(100,26,22,.4) 100%);color:#e9d8d3;
   -webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px);
   box-shadow:inset 0 1px 0 rgba(255,255,255,.15),0 2px 6px rgba(0,0,0,.3);
@@ -331,8 +331,8 @@ body.page-opaque #sidebar{visibility:hidden}
    注意：背景栈已被 expedition-inventory.css 的 #overlay #hubMain（09-20 批1提亮版）接管，
    此处 #hubMain 特异性较低仅为历史底稿，生效规则以 expedition-inventory.css 为准 —— */
 #hubMain{padding:22px 30px 26px}
-#hubMain .hub-head{padding:12px 12px 12px 16px;border-radius:10px;background:rgba(10,20,28,.55);border:1px solid #68808b55}
-#hubMain .hub-body{margin-top:14px;border-radius:10px}
+#hubMain .hub-head{padding:12px 12px 12px 16px;border-radius: var(--radius-panel);background:rgba(10,20,28,.55);border:1px solid #68808b55}
+#hubMain .hub-body{margin-top:14px;border-radius: var(--radius-panel)}
 
 /* —— 设置页：重排（行距/分组拉开）+ 色调与成就页统一（深蓝金） —— */
 .pg.settings-page{background:linear-gradient(125deg,#1b3645,#102431)}
@@ -341,7 +341,7 @@ body.page-opaque #sidebar{visibility:hidden}
   margin:30px 0 14px;padding-bottom:9px;border-bottom:1px solid #68808b66}
 .pg.settings-page .set-h:first-child{margin-top:8px}
 .pg.settings-page .set-h .set-en{margin-left:auto;font-size:10px;color:#9db4bd;letter-spacing:2px}
-.pg.settings-page .chk{font-size:14.5px;padding:9px 12px;border-radius:8px;background:#19344155;border:1px solid #48667433;margin-bottom:8px;transition:background .15s}
+.pg.settings-page .chk{font-size:14.5px;padding:9px 12px;border-radius: var(--radius-panel);background:#19344155;border:1px solid #48667433;margin-bottom:8px;transition:background .15s}
 .pg.settings-page .chk:hover{background:#19344188}
 .pg.settings-page .chk .set-en{margin-left:auto;font-size:10px;color:#9db4bd;letter-spacing:1.5px}
 .pg.settings-page .chk input{width:16px;height:16px}
@@ -353,7 +353,7 @@ body.page-opaque #sidebar{visibility:hidden}
 
 /* —— 制作坊：四周留空（内容不再贴边） —— */
 .pg.cdes{padding:20px 34px 26px}
-.pg.cdes .cdes-main{border-radius:10px;overflow:hidden;border:1px solid #68808b33}
+.pg.cdes .cdes-main{border-radius: var(--radius-panel);overflow:hidden;border:1px solid #68808b33}
 .pg.cdes .cdes-stage{border-bottom:1px solid #8fa5ad}
 
 /* —— 卡牌库：一行六张 + 卡面占比放大 + 立绘完整展示 —— */
@@ -366,7 +366,7 @@ body.page-opaque #sidebar{visibility:hidden}
 
 /* —— 局内行动日志（2026-09-07 复原：掷骰/体力/拾取文案的输出口 #log 曾整个缺失，UI.log 静默丢弃） —— */
 .log-panel{position:absolute;left:14px;bottom:calc(105px + 14px);width:330px;z-index:5;
-  background:rgba(10,13,17,.68);border:1px solid rgba(255,255,255,.09);border-radius:10px;
+  background:rgba(10,13,17,.68);border:1px solid rgba(255,255,255,.09);border-radius: var(--radius-panel);
   padding:8px 10px 6px}
 .log-panel #log{max-height:158px;overflow-y:auto;overscroll-behavior:contain}
 .log-panel .log-line{text-shadow:0 1px 2px rgba(0,0,0,.7)}
@@ -450,36 +450,36 @@ body.page-opaque #sidebar{visibility:hidden}
 #depMain{padding:22px 30px 26px;background:
   linear-gradient(180deg,rgba(9,18,26,.66),rgba(9,18,26,.8)),
   url('../assets/scenes/hub-wallpaper.webp') center/cover no-repeat fixed}
-#depMain .hub-head{padding:12px 12px 12px 16px;border-radius:10px;background:rgba(10,20,28,.55);border:1px solid #68808b55}
+#depMain .hub-head{padding:12px 12px 12px 16px;border-radius: var(--radius-panel);background:rgba(10,20,28,.55);border:1px solid #68808b55}
 
 /* —— 出征整备：图像化卡面网格（左）+ 背包格子（右），支持拖拽 —— */
 .dep-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:12px 10px;
   max-height:56vh;overflow-y:auto;padding:6px 4px 2px}
-.dep-card{position:relative;width:min-content;cursor:grab;border-radius:8px;transition:transform .14s,filter .14s}
+.dep-card{position:relative;width:min-content;cursor:grab;border-radius: var(--radius-panel);transition:transform .14s,filter .14s}
 .dep-card:active{cursor:grabbing}
 .dep-card:hover{transform:translateY(-3px)}
 .dep-card .hs-card{font-size:10px}
 .dep-card .dep-own{position:absolute;left:5px;bottom:5px;z-index:3;padding:1px 7px;border-radius:999px;
   background:rgba(30,28,22,.78);color:#efe9da;font-size:10px;letter-spacing:1px;pointer-events:none}
 .dep-card .dep-n{position:absolute;top:-7px;right:-7px;z-index:4;min-width:22px;height:22px;padding:0 6px;
-  border-radius:11px;background:#b8934c;border:1.5px solid #f0e2c0;color:#2c230f;font-size:12.5px;font-weight:800;
+  border-radius: var(--radius-panel);background:var(--gold-dim);border:1.5px solid #f0e2c0;color:#2c230f;font-size:12.5px;font-weight:800;
   display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(40,30,10,.4);pointer-events:none}
 .dep-card.picked{filter:drop-shadow(0 0 7px rgba(184,147,76,.55))}
-.dep-card.picked::after{content:'';position:absolute;inset:-2px;border:2px solid #b8934c;border-radius:9px;pointer-events:none}
+.dep-card.picked::after{content:'';position:absolute;inset:-2px;border:2px solid var(--gold-dim);border-radius: var(--radius-panel);pointer-events:none}
 /* 背包格：第 1 格固定初始攻击，其余空格虚线；拖入高亮 */
 .bag-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(86px,1fr));gap:9px;
-  padding:10px;border:1.5px dashed #9a9585;border-radius:10px;min-height:170px;align-items:start;transition:background .15s,border-color .15s}
-.bag-grid.drop-here{background:rgba(184,147,76,.14);border-color:#b8934c}
-.bag-cell{position:relative;aspect-ratio:10/14;border:1.5px dashed #b3af9f;border-radius:8px;overflow:visible}
+  padding:10px;border:1.5px dashed #9a9585;border-radius: var(--radius-panel);min-height:170px;align-items:start;transition:background .15s,border-color .15s}
+.bag-grid.drop-here{background:rgba(184,147,76,.14);border-color:var(--gold-dim)}
+.bag-cell{position:relative;aspect-ratio:10/14;border:1.5px dashed #b3af9f;border-radius: var(--radius-panel);overflow:visible}
 .bag-cell .hs-card{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:6.6px;margin:0}
 .bag-cell.empty{background:rgba(60,58,51,.05)}
 .bag-cell.fixed{border:1.5px solid #c2ad7f;background:rgba(184,147,76,.12)}
-.bag-cell.filled{border-style:solid;border-color:#8f8a78;cursor:pointer;border-radius:8px;overflow:visible;transition:transform .14s}
+.bag-cell.filled{border-style:solid;border-color:#8f8a78;cursor:pointer;border-radius: var(--radius-panel);overflow:visible;transition:transform .14s}
 .bag-cell.filled:hover{transform:translateY(-2px)}
 .bag-cell .dep-n{position:absolute;top:-8px;right:-8px;z-index:4;min-width:20px;height:20px;padding:0 5px;
-  border-radius:10px;background:#3c3a33;border:1.5px solid #d8cba4;color:#f0e2c0;font-size:11px;font-weight:800;
+  border-radius: var(--radius-panel);background:#3c3a33;border:1.5px solid #d8cba4;color:#f0e2c0;font-size:11px;font-weight:800;
   display:flex;align-items:center;justify-content:center;pointer-events:none}
-.bag-cell.fixed .dep-n{background:#b8934c;color:#2c230f;border-color:#f0e2c0}
+.bag-cell.fixed .dep-n{background:var(--gold-dim);color:#2c230f;border-color:#f0e2c0}
 .dep-cards .ov-empty{grid-column:1/-1;margin:6px 0}
 
 /* —— 留言 2026-09-10：背包格一多，「← 返回 / 确认出发」被挤出全屏页——
@@ -594,7 +594,7 @@ body:has(#overlay.opaque:not([hidden])) #sidebar{display:none!important}
    fixed 定位脱离左上按钮组；底部 105px 是下边栏，加回其上 */
 #topBtns #btnLocate{position:fixed;left:auto;top:auto;right:16px;bottom:calc(105px + 14px);z-index:8;
   border:1px solid #637c89;background:#142c38;box-shadow:none;color:#d8e2e6;
-  font-size:15px;padding:0;width:44px;height:44px;border-radius:3px;display:flex;align-items:center;justify-content:center}
+  font-size:15px;padding:0;width:44px;height:44px;border-radius: var(--radius-panel);display:flex;align-items:center;justify-content:center}
 #topBtns #btnLocate:hover{background:#1d3d4c;color:#fff}
 
 /* ═══════════ 留言批次 2026-09-07 晚（20:56-22:05 共 16 条） ═══════════ */
@@ -604,7 +604,7 @@ body:has(#overlay.opaque:not([hidden])) #sidebar{display:none!important}
 
 
 /* —— 留言库（设置页入口）：历史留言列表，待处理可删、已完成存档 —— */
-.sugin-row{border:1px solid #48667466;background:#19344155;border-radius:8px;padding:10px 14px;margin-bottom:8px}
+.sugin-row{border:1px solid #48667466;background:#19344155;border-radius: var(--radius-panel);padding:10px 14px;margin-bottom:8px}
 .sugin-row.done{opacity:.55}
 .sugin-top{display:flex;align-items:center;gap:10px;font-size:12px;color:#9db4bd}
 .sugin-mark{display:inline-flex;color:#d8c08f}
@@ -636,7 +636,7 @@ body:has(#overlay.opaque:not([hidden])) #sidebar{display:none!important}
 #overlay .pg.cdes .seg button:hover,
 #overlay .pg.cdes .mech-chip:hover{color:#2c2a33;border-color:#7d796b}
 #overlay .pg.cdes .seg button.on,
-#overlay .pg.cdes .mech-chip.on{color:#17303e;border-color:#b8934c;background:linear-gradient(180deg,#e9d9ae,#d8bc86);box-shadow:0 0 9px rgba(184,147,76,.35)}
+#overlay .pg.cdes .mech-chip.on{color:#17303e;border-color:var(--gold-dim);background:linear-gradient(180deg,#e9d9ae,#d8bc86);box-shadow:0 0 9px rgba(184,147,76,.35)}
 #overlay .pg.cdes .mech-chip.on em{background:#3c3a33;color:#f0ede3}
 #overlay .pg.cdes .cdes-sec > span{color:#3c3a33}
 #overlay .pg.cdes .cdes-sec > em{color:#8a8677}
@@ -657,7 +657,7 @@ body.page-covered #title *::after{animation-play-state:paused}
 
 /* ===== 美术预热进度条（2026-09-08：启动强制预热，首页显示原因与进度） ===== */
 #warmupTip{position:absolute;left:26px;bottom:118px;z-index:5;min-width:280px;max-width:360px;
-  padding:10px 14px 12px;border:1px solid #3a55606e;border-radius:10px;
+  padding:10px 14px 12px;border:1px solid #3a55606e;border-radius: var(--radius-panel);
   background:linear-gradient(160deg,#0d1a22ee,#0a141bee);backdrop-filter:blur(4px);
   color:#cfe3ea;font:12.5px/1.5 var(--font-ui);box-shadow:0 6px 22px #0007;
   transition:opacity .5s ease,transform .5s ease}
@@ -666,8 +666,8 @@ body.page-covered #title *::after{animation-play-state:paused}
 #warmupTip .warmup-spark{color:#9fd8ff;font-size:14px}
 #warmupTip .warmup-head b{color:#eaf6ff;font-variant-numeric:tabular-nums}
 #warmupTip .warmup-reason{margin-top:2px;color:#8fa9b3;font-size:11px;letter-spacing:.3px}
-#warmupTip .warmup-track{margin-top:7px;height:4px;border-radius:3px;background:#16242cd9;overflow:hidden}
-#warmupTip #warmupBar{height:100%;width:0;border-radius:3px;
+#warmupTip .warmup-track{margin-top:7px;height:4px;border-radius: var(--radius-panel);background:#16242cd9;overflow:hidden}
+#warmupTip #warmupBar{height:100%;width:0;border-radius: var(--radius-panel);
   background:linear-gradient(90deg,#4f9fcf,#9fd8ff);box-shadow:0 0 8px #9fd8ff66;
   transition:width .18s ease}
 
@@ -1131,13 +1131,13 @@ body,body *{font-family:'HarmonyOS Sans SC','HarmonyOS Sans','Noto Sans SC Sub',
 /* —— 开箱：单卡拾取 + 满包预检提示（2026-09-09 老板定向） —— */
 #overlay .card.chest .bt-card{cursor:pointer;position:relative}
 #overlay .card.chest button.bt-card{appearance:none;border:0;padding:0;background:transparent;color:inherit;font:inherit}
-#overlay .card.chest button.bt-card:focus-visible{outline:3px solid #efcd89;outline-offset:6px;border-radius:10px}
+#overlay .card.chest button.bt-card:focus-visible{outline:3px solid #efcd89;outline-offset:6px;border-radius: var(--radius-panel)}
 #overlay .card.chest .bt-card.got{cursor:default;opacity:.38;filter:grayscale(.7)}
 #overlay .card.chest .bt-card.got:hover{transform:none}
 .chest-got-mark{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-12deg);z-index:3;
-  padding:4px 14px;border:2px solid #cfe3cf;border-radius:6px;background:rgba(12,20,12,.82);
+  padding:4px 14px;border:2px solid #cfe3cf;border-radius: var(--radius-panel);background:rgba(12,20,12,.82);
   color:#d9efd9;font-size:15px;font-weight:800;letter-spacing:4px}
-.chest-warn{margin:10px 6px 0;padding:9px 14px;border:1px solid rgba(214,150,90,.55);border-radius:8px;
+.chest-warn{margin:10px 6px 0;padding:9px 14px;border:1px solid rgba(214,150,90,.55);border-radius: var(--radius-panel);
   background:linear-gradient(180deg,rgba(64,38,16,.92),rgba(38,22,10,.94));
   color:#f2d5ac;font-size:14px;line-height:1.5}
 .chest-warn b{color:#ffcf7d}
@@ -1287,7 +1287,7 @@ img[data-asset-key="card-wu-myriadswords"]{object-position:50% 40%!important}
 .manual-step p{margin:0;font-size:13.5px;line-height:1.95;color:#b6c9ce}
 .manual-step p b{color:#e5d4ae;font-weight:600}
 .manual-controls{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px 16px;margin:20px 0 14px;padding:14px 18px;background:#10283380;border:1px dashed #4c6a76}
-.manual-control-key{display:inline-block;padding:3px 10px;background:#0d2029;border:1px solid #607c86;border-bottom-width:2px;border-radius:4px;color:#d7c69e;font:12px/1.6 Consolas,monospace;letter-spacing:1px;white-space:nowrap}
+.manual-control-key{display:inline-block;padding:3px 10px;background:#0d2029;border:1px solid #607c86;border-bottom-width:2px;border-radius: var(--radius-panel);color:#d7c69e;font:12px/1.6 Consolas,monospace;letter-spacing:1px;white-space:nowrap}
 .manual-controls>span:not(.manual-control-key){color:#9db4bd;font-size:13px}
 .manual-note{margin:0;text-align:center;color:#8ba3ab;font-size:12.5px;letter-spacing:.5px}
 
@@ -1308,7 +1308,7 @@ img[data-asset-key="card-wu-myriadswords"]{object-position:50% 40%!important}
 #overlay .sc-shop .shop-slot{position:relative;border:0!important;background:linear-gradient(165deg,rgba(16,40,52,.92),rgba(10,26,36,.95))!important;border-radius:2px;padding:12px 10px 10px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:8px}
 #overlay .sc-shop .shop-slot.buy{cursor:pointer;transition:translate .16s ease,box-shadow .16s ease}
 #overlay .sc-shop .shop-slot.buy:hover{translate:0 -3px;box-shadow:0 12px 28px #05131a80}
-#overlay .sc-shop .shop-slot.buy:focus-visible{outline:1px solid #d9bb82cc;outline-offset:2px;box-shadow:0 0 0 1px #071720,0 0 12px rgba(217,187,130,.35)}
+#overlay .sc-shop .shop-slot.buy:focus-visible{outline:1px solid #d9bb82cc;outline-offset:2px;box-shadow:0 0 0 1px var(--bg-deep),0 0 12px rgba(217,187,130,.35)}
 #overlay .sc-shop .shop-slot.buy:active{translate:0 1px}
 /* 对齐 expedition-shop 定版：买不起=红价签提示+卡面压暗，货位本体不再整体压灰 */
 #overlay .sc-shop .shop-slot.buy[data-short]{opacity:1;filter:none}
@@ -1326,10 +1326,10 @@ img[data-asset-key="card-wu-myriadswords"]{object-position:50% 40%!important}
    方案：格子设 inline-size 容器，卡面 font-size=(格宽-2×角标带)/10 —— 10em×14em
    恰好铺满 10:14 格，任意列宽严格等比；flip-face 留 4.5cqw 角标带（略大于角标
    悬出的 .48em≈4.37cqw），费用/币值完整可见；数量角标移到右上。 */
-#overlay .bag-view .bag-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;padding:12px;border:1px solid rgba(182,211,214,.1);border-radius:4px;background:rgba(230,238,241,.015)}
+#overlay .bag-view .bag-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;padding:12px;border:1px solid rgba(182,211,214,.1);border-radius: var(--radius-panel);background:rgba(230,238,241,.015)}
 #overlay .bag-view .bag-grid.safe-grid{border-color:rgba(216,189,134,.18)}
 #overlay .bag-view .bag-grid.safe-grid .bag-slot.empty.safe-empty{border-color:rgba(216,189,134,.2);background:rgba(216,189,134,.03)}
-#overlay .bag-view .bag-slot{container-type:inline-size;aspect-ratio:10/14;padding:0;overflow:visible;border-radius:6px}
+#overlay .bag-view .bag-slot{container-type:inline-size;aspect-ratio:10/14;padding:0;overflow:visible;border-radius: var(--radius-panel)}
 #overlay .bag-view .bag-slot.empty{aspect-ratio:10/14;background:rgba(230,238,241,.02);border:1px dashed rgba(182,211,214,.14)}
 #overlay .bag-view .bag-slot.filled.card-slot{border:1px solid rgba(182,211,214,.2);background:#0d2029}
 #overlay .bag-view .bag-slot.filled.card-slot:hover{border-color:#d4b582}
@@ -1358,7 +1358,7 @@ img[data-asset-key="card-wu-myriadswords"]{object-position:50% 40%!important}
 /* 2026-09-13 复检：血条改细扁绿色长条（杀戮尖塔式）；09-25 微调——
    条高 12px 容纳数字不再上下溢出；掉血残影改白色系（原淡绿与主条同系，掉血量读不出） */
 #overlay .battle-stage.sts .sts-nameplate .bt-hpwrap{
-  height:12px!important;margin-top:5px;border-radius:3px!important;
+  height:12px!important;margin-top:5px;border-radius: var(--radius-panel)!important;
   background:rgba(0,0,0,.45)!important;
 }
 #overlay .battle-stage.sts .sts-nameplate .bt-hpwrap i.sts-hp-main{
@@ -1400,7 +1400,7 @@ body #overlay .battle-stage.sts .sts-me{bottom:-5vh!important}
    2026-09-15 同步背包 v2：格子容器化 + 卡面 cqw 等比满格（修黑边/变形，费用角标可见） */
 #overlay .card.battle-bag{background:rgba(10,16,22,.92)}
 #overlay .card.battle-bag .battle-bag-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
-#overlay .card.battle-bag .battle-bag-slot{position:relative;container-type:inline-size;aspect-ratio:10/14;border:1.5px solid rgba(182,211,214,.22);border-radius:6px;background:#0d2029;cursor:pointer;transition:border-color .12s, transform .12s}
+#overlay .card.battle-bag .battle-bag-slot{position:relative;container-type:inline-size;aspect-ratio:10/14;border:1.5px solid rgba(182,211,214,.22);border-radius: var(--radius-panel);background:#0d2029;cursor:pointer;transition:border-color .12s, transform .12s}
 #overlay .card.battle-bag .battle-bag-slot:hover{border-color:#d6ba7e;transform:translateY(-2px)}
 #overlay .card.battle-bag .battle-bag-slot.off{opacity:.45;filter:grayscale(.8);cursor:default}
 #overlay .card.battle-bag .battle-bag-slot .hs-card{margin:4.5cqw;width:calc(100% - 9cqw);height:calc(100% - 9cqw);font-size:calc((100cqw - 9cqw)/10);box-shadow:none}
@@ -1551,7 +1551,7 @@ body.reduce-motion #layerBanner { animation: none !important; }
 #overlay.fx-glass .card::before{display:none}
 #overlay.fx-glass .glass-panel{width:min(560px,92%);margin:0 auto;padding:22px 26px 18px;text-align:center;
   background:linear-gradient(180deg,rgba(24,32,40,.85),rgba(9,13,18,.9));
-  border:1px solid rgba(206,222,234,.22);border-radius:16px;
+  border:1px solid rgba(206,222,234,.22);border-radius: var(--radius-panel);
   box-shadow:0 30px 80px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.06);
   animation:glassIn .3s cubic-bezier(.22,1,.36,1)}
 #overlay.fx-glass .glass-panel .ov-note{color:#dbe6e8;font-size:14px;line-height:1.8;text-shadow:0 1px 2px #05090c}
@@ -1562,7 +1562,7 @@ body.reduce-motion #layerBanner { animation: none !important; }
 @keyframes glassIn{from{opacity:0;transform:translateY(20px) scale(.97)}}
 /* #29 卡牌特写备注区：lg 卡面下方固定一块备注描述（有备注亮色，无备注灰提示） */
 #cardZoom .cz-note{margin:12px auto 0;width:min(560px,86%);display:flex;gap:10px;align-items:flex-start;text-align:left;
-  padding:10px 14px;border-radius:12px;background:rgba(12,20,27,.82);
+  padding:10px 14px;border-radius: var(--radius-panel);background:rgba(12,20,27,.82);
   border:1px solid rgba(182,211,214,.18)}
 #cardZoom .cz-note.has{border-color:rgba(223,194,141,.45);box-shadow:inset 0 0 18px rgba(223,194,141,.06)}
 #cardZoom .cz-note-tag{flex:0 0 auto;display:inline-flex;align-items:center;gap:4px;color:#dfc28d;font-size:12px;letter-spacing:2px;font-weight:700;padding-top:2px}
@@ -1584,7 +1584,7 @@ body.reduce-motion #layerBanner { animation: none !important; }
    z-index 高于 overlay 压住全屏页）；标题页/基地/选人时由 UI.refresh 置 hidden */
 #bagBtnFloat{position:fixed;right:22px;bottom:210px;z-index:30;width:44px;height:58px;
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
-  background:#142c38d9;border:1px solid #637c89;border-radius:3px;color:#d8e2e6;cursor:pointer;
+  background:#142c38d9;border:1px solid #637c89;border-radius: var(--radius-panel);color:#d8e2e6;cursor:pointer;
   box-shadow:0 4px 14px rgba(0,0,0,.35);transition:background .15s,color .15s,border-color .15s}
 #bagBtnFloat:hover{background:#1d3d4c;color:#fff;border-color:#9fb6bf}
 #bagBtnFloat .bbf-label{font-size:10px;letter-spacing:2px}
@@ -1616,7 +1616,7 @@ body.cardlib-open #overlay .card-library-page .clib-main{background:
 
 /* #22 开发者控制台（Ctrl+L）面板 */
 .devc-grid{display:grid;gap:14px;margin:6px 0 14px}
-.devc-sec{padding:12px 14px;border:1px solid rgba(182,211,214,.2);border-radius:10px;background:rgba(10,18,24,.5);text-align:left}
+.devc-sec{padding:12px 14px;border:1px solid rgba(182,211,214,.2);border-radius: var(--radius-panel);background:rgba(10,18,24,.5);text-align:left}
 .devc-h{display:block;margin-bottom:8px;color:#dfc28d;font-size:12.5px;letter-spacing:2px}
 .devc-row{display:flex;flex-wrap:wrap;gap:8px}
 .devc-hits{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;max-height:180px;overflow:auto}
@@ -1626,14 +1626,14 @@ body.cardlib-open #overlay .card-library-page .clib-main{background:
 /* #17 「卡牌是消耗品」教学页：三分栏图解（卡面 → 流向节点），替代旧小字堆叠 */
 .ammo-teach{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:8px 0 14px}
 @media(max-width:1100px){.ammo-teach{grid-template-columns:1fr}}
-.ammo-teach .at-col{padding:14px 12px;border:1px solid rgba(206,222,234,.16);border-radius:12px;
+.ammo-teach .at-col{padding:14px 12px;border:1px solid rgba(206,222,234,.16);border-radius: var(--radius-panel);
   background:rgba(12,20,27,.6);text-align:center}
 .ammo-teach .at-flow{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:12px}
 .ammo-teach .at-card .hs-card{font-size:11px;transform:scale(.92)}
 .ammo-teach .at-arrow{font-size:22px;color:#dfc28d;text-shadow:0 0 12px rgba(223,194,141,.5)}
 .ammo-teach .at-dot{font-size:20px;color:#8ba1a8}
 .ammo-teach .at-node{display:inline-flex;flex-direction:column;align-items:center;gap:4px;padding:10px 12px;
-  border:1px solid rgba(223,194,141,.4);border-radius:10px;background:rgba(20,30,38,.8);color:#e6eef1}
+  border:1px solid rgba(223,194,141,.4);border-radius: var(--radius-panel);background:rgba(20,30,38,.8);color:#e6eef1}
 .ammo-teach .at-node.gone{border-color:rgba(214,120,96,.5)}
 .ammo-teach .at-ico svg,.ammo-teach .at-ico img{width:26px;height:26px}
 .ammo-teach .at-node b{font-size:12.5px;letter-spacing:1px}
@@ -1642,7 +1642,7 @@ body.cardlib-open #overlay .card-library-page .clib-main{background:
 
 /* #28 撤离整理页（result-pg）重做：背包区卡面网格 + 点卡入库 */
 #overlay .result-pg .ext-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(122px,1fr));gap:10px;padding:4px 0 8px}
-#overlay .result-pg .ext-card{position:relative;cursor:pointer;border:1px solid rgba(182,211,214,.2);border-radius:6px;
+#overlay .result-pg .ext-card{position:relative;cursor:pointer;border:1px solid rgba(182,211,214,.2);border-radius: var(--radius-panel);
   background:#0d2029;padding:4px;transition:border-color .12s,transform .12s}
 #overlay .result-pg .ext-card:hover{border-color:#d6ba7e;transform:translateY(-2px)}
 #overlay .result-pg .ext-card:focus-visible{outline:1px solid #d9bb82cc;outline-offset:2px}
@@ -1674,7 +1674,7 @@ body.cardlib-open #overlay .card-library-page .clib-main{background:
 #topBtns #btnHelp,#topBtns #btnMute{background:transparent!important;border-color:#637c8959!important;box-shadow:none!important}
 
 /* #7 横幅英文改金色衬线花体（原 Cascadia 9px 等宽） */
-#layerBanner .lb-en{font-family:'Segoe Script','Brush Script MT',cursive!important;font-size:13px!important;letter-spacing:2.5px!important;color:#d9bb82!important;text-shadow:0 1px 3px #000000a8!important}
+#layerBanner .lb-en{font-family:'Segoe Script','Brush Script MT',cursive!important;font-size:13px!important;letter-spacing:2.5px!important;color:var(--gold-main)!important;text-shadow:0 1px 3px #000000a8!important}
 
 /* #8 已知区域键已从 HTML 移除；背包浮动键放大并落到底部栏正上方（原 bottom:20 会被 105px 底部栏盖住），
    定位键同步上移让出重叠区 */
@@ -1717,7 +1717,7 @@ body.cardlib-open #overlay.closing{animation:ovFadeOut .2s ease forwards!importa
 #overlay .ak-back-tl:hover{border-color:#d9bb82cc;background:#383d3ff2;color:#fff}
 #overlay .ak-back-tl:active{transform:scale(.94);transition-duration:.08s}
 #overlay .ak-back-tl:focus-visible{outline:1px solid #d9bb82cc;outline-offset:2px;
-  box-shadow:0 0 0 1px #071720,0 0 12px rgba(217,187,130,.35)}
+  box-shadow:0 0 0 1px var(--bg-deep),0 0 12px rgba(217,187,130,.35)}
 /* 指南/成就宽卡：标题左对齐，需同样给左上返回键让位 */
 #overlay .card:has(.expedition-manual) #ovTitle,
 #overlay .card:has(.ach-list) #ovTitle { padding-left: 98px; }
@@ -1766,11 +1766,11 @@ body.cardlib-open #cardZoom.cz-photo .cz-hint{position:relative;z-index:4!import
  * ============================================================ */
 .devc-tabs { display: flex; gap: 6px; margin: 10px 0 4px; flex-wrap: wrap; }
 .devc-tabs .hs-btn.ok { outline: 1px solid rgba(217,187,130,.55); }
-.devc-pre { background: rgba(6,12,18,.72); border: 1px solid rgba(182,211,214,.16); border-radius: 8px;
+.devc-pre { background: rgba(6,12,18,.72); border: 1px solid rgba(182,211,214,.16); border-radius: var(--radius-panel);
   padding: 8px 10px; font-size: 11px; line-height: 1.5; white-space: pre-wrap; word-break: break-all;
   color: rgba(200,220,230,.86); text-align: left; }
 .devc-row kbd { display: inline-block; min-width: 20px; text-align: center; padding: 1px 5px;
-  border: 1px solid rgba(217,187,130,.4); border-radius: 5px; font-size: 11px; color: #e8cf9a;
+  border: 1px solid rgba(217,187,130,.4); border-radius: var(--radius-panel); font-size: 11px; color: #e8cf9a;
   background: rgba(20,28,36,.7); margin-right: 4px; }
 .dt-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 10px; margin-top: 8px; }
 .dt-grid .hub-card { text-align: left; }
@@ -1779,5 +1779,5 @@ body.cardlib-open #cardZoom.cz-photo .cz-hint{position:relative;z-index:4!import
 .dt-table th { color: rgba(217,187,130,.85); font-weight: 600; }
 .dt-bars { display: flex; flex-direction: column; gap: 5px; }
 .dt-bar-row { display: grid; grid-template-columns: 52px 1fr 34px; align-items: center; gap: 8px; font-size: 12px; }
-.dt-bar-row i { display: block; height: 10px; border-radius: 5px;
+.dt-bar-row i { display: block; height: 10px; border-radius: var(--radius-panel);
   background: linear-gradient(90deg, rgba(224,92,92,.9), rgba(224,92,92,.35)); min-width: 2px; }

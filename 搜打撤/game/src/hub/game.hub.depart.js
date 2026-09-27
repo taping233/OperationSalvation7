@@ -29,8 +29,9 @@ import { turboMs } from '../agent/agent.turbo.js';
             <div class="deploy-mission-target"><span>本局目标</span><b>${esc(m.name)}</b><small>${esc(m.ckpt)}</small></div>
             <button id="btnDeploy" class="deploy-primary" data-act="deploy">[[icon:exit]] 出发整备 <span>→</span></button>
             <button class="ov-btn" data-act="openPreparation" style="margin-top:10px">[[icon:flag]] 下一局目标与两套预设</button>
-            <button id="btnNest" class="deploy-primary${SDT.Base.data.nestUnlocked ? '' : ' nest-locked'}" data-act="nestDeploy" style="margin-top:10px"
-              title="${SDT.Base.data.nestUnlocked ? '第二地图：深入经典生命研究所，夺取符文与样本' : `第二地图：用 ${SDT.Base.KEY_NEEDED || 10} 把真实钥匙储备开启大门（现有 ${SDT.Base.data.keys || 0}）· 仓库钥匙卡「使用」可折入储备`}">${SDT.Base.data.nestUnlocked ? '[[icon:skull]] 研究所远征 <span>→</span>' : `[[icon:lock]] 经典生命研究所（钥匙 ${SDT.Base.data.keys || 0}/${SDT.Base.KEY_NEEDED || 10}）`}</button>
+            ${SDT.Base.data.nestUnlocked ? `<button id="btnNest" class="deploy-primary" data-act="nestDeploy" style="margin-top:10px"
+              title="第二地图：深入经典生命研究所，夺取符文与样本">[[icon:skull]] 研究所远征 <span>→</span></button>` : ''}
+            <!-- W2-02：锁态「经典生命研究所（钥匙 0/10）」不再占主列行动位——未解锁时收敛到右栏 MISSION BRIEF 末行 -->
           </div>
           <div class="deploy-mode-dock">
             <span class="dock-label">选择行动模式</span>
@@ -51,6 +52,9 @@ import { turboMs } from '../agent/agent.turbo.js';
             <div class="readiness-item"><i>02</i><span>携带容量</span><b>${B.bagCap()} 格背包 · 仓库 ${B.stashUsed()}/${B.stashCap()}</b></div>
             <div class="readiness-item"><i>03</i><span>保护与回收</span><b>${B.safeCap()} 格可用</b></div>
             <div class="readiness-item"><i>04</i><span>随身储备</span><b>开局 ${m.startCoins || 0} 币（储备币不进局） · ${B.data.rations} 口粮</b></div>
+            ${(!SDT.Base.data.nestUnlocked && !gateReady) ? `<div class="readiness-item locked-gate" data-act="gateInfo" role="button" tabindex="0"
+              title="集齐 ${B.KEY_NEEDED || 10} 把钥匙开启宝藏大门（特殊关卡制作中）· 钥匙在棋盘钥匙格与仓库钥匙卡获得">
+              <i>05</i><span>深层内容 · 经典生命研究所 / 宝藏大门 <small>（特殊关卡制作中）</small></span><b>[[icon:key]] ${keys}/${B.KEY_NEEDED || 10}</b></div>` : ''}
           </div>
           <div class="brief-pet">
             <span class="brief-pet-icon">[[icon:paw]]</span><span><small>随队宠物</small><b>${pet ? esc(pet.name) : '未携带'}</b></span>
@@ -59,17 +63,18 @@ import { turboMs } from '../agent/agent.turbo.js';
           <p class="deploy-tip">[[icon:map]] 进入整备后，可从仓库拖入本局携带卡牌；只有装入背包的卡牌才能在远征中使用。</p>
         </aside>
       </div>
-      <section class="hub-card gate-strip${gateReady ? ' gate-ready' : ' gate-locked'}" data-act="gateInfo" role="button" tabindex="0"
-        title="${gateReady ? '钥匙已集齐——宝藏大门虚位以待' : '集齐 10 把钥匙开启宝藏大门（特殊关卡）'}">
+      ${gateReady ? `<section class="hub-card gate-strip gate-ready" data-act="gateInfo" role="button" tabindex="0"
+        title="钥匙已集齐——宝藏大门虚位以待">
         <div class="gate-ico">${SDT.Art.gateIcon(gateReady)}</div>
         <div class="gate-txt">
           <b>宝藏大门</b>
-          <span>[[icon:key]] 钥匙 <b class="${gateReady ? 'gate-ok' : ''}">${keys}/${B.KEY_NEEDED || 10}</b> ·
-            ${gateReady ? '钥匙已集齐——特殊关卡制作中，敬请期待' : '集齐钥匙开启特殊关卡（关卡制作中）'}</span>
+          <span>[[icon:key]] 钥匙 <b class="gate-ok">${keys}/${B.KEY_NEEDED || 10}</b> ·
+            钥匙已集齐——特殊关卡制作中，敬请期待</span>
         </div>
-        <span class="gate-state">${gateReady ? '[[icon:sparkles]]' : ''}</span>
-        <span class="gate-scale" aria-hidden="true">${Array.from({ length: B.KEY_NEEDED || 10 }, (_, i) => `<i class="${i < keys ? 'lit' : ''}${gateReady ? ' all' : ''}"></i>`).join('')}</span>
-      </section>`;
+        <span class="gate-state">[[icon:sparkles]]</span>
+        <span class="gate-scale" aria-hidden="true">${Array.from({ length: B.KEY_NEEDED || 10 }, (_, i) => `<i class="lit all"></i>`).join('')}</span>
+      </section>` : ''}
+      <!-- W2-02：锁态宝藏大门横条不再渲染（原 1600 首屏外/1280 裁切）——钥匙进度收敛到右栏 05 行+顶部资源条徽章 -->`;
   }
 
   // ---------- 出征整备（点击「出发」后）：选择从仓库携带的卡牌 ----------
@@ -122,7 +127,7 @@ import { turboMs } from '../agent/agent.turbo.js';
     game.state = 'modal';
     _set_cardPageOpen(true);
     UI.registerHelp('deploy-prep', {
-      title: '出征整备说明',
+      title: '出发整备说明',
       html: `
         <p class="help-item"><b>携带规则</b>仓库卡牌留在左侧，点击卡面或拖到右侧背包才会带入；点击背包卡面可放大查看，拖回左侧即移除。</p>
         <p class="help-item"><b>初始攻击</b>「初始攻击」×${MAP.rules.starterSha} 默认在背包（固定携带，不可移除，不入库）。</p>
@@ -154,9 +159,18 @@ import { turboMs } from '../agent/agent.turbo.js';
     }).join('');
     UI.showOverlay('', `
       <div class="pg hub" id="depMain">
-        <!-- 2026-09-07 留言：右上「返回基地」叉号删掉，返回走左下「← 返回」按钮 -->
+        <!-- W1-03：返回件统一为左上 ak-back-tl 方钮（原底中「← 返回」与确认出发并排是全站五种返回制式之一） -->
+        <button class="ak-sq ak-exit ak-back-tl" data-act="depBack" title="返回基地（Esc）" aria-label="返回">
+          <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+            <path d="M9 4h9a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 18 20H9"
+                  fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M4 12h10M4 12l4-4M4 12l4 4"
+                  fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
         <header class="hub-head">
-          <h2>[[icon:bag]] 出征整备</h2>
+          <span class="section-kicker dep-kicker">DEPARTURE STAGING // 06</span>
+          <h2>[[icon:bag]] 出发整备</h2>
           ${UI.helpBtn('deploy-prep')}
           <span class="sub">玩法【${MODES[m].name}】 · 点卡面或拖拽带入背包</span>
           <span class="pg-spacer"></span>
@@ -167,16 +181,17 @@ import { turboMs } from '../agent/agent.turbo.js';
         </header>
         <div class="dep-body${deployJustOpened ? ' page-in' : ''}">
           <section class="hub-card">
-            <h3>[[icon:archive]] 携带卡牌</h3>
+            <h3>[[icon:archive]] 携带卡牌 <span class="set-tip">点击卡面或拖到右侧带入 · 「仓 ×N」=剩余可带数</span></h3>
             <div class="dep-cards" id="depPool">${deployPickRowsHTML()}</div>
           </section>
           <section class="hub-card">
             <h3>[[icon:bag]] 背包预览 <span class="set-tip">拖入卡牌即可携带</span></h3>
             ${petStrip ? `<div class="pet-strip"><span class="pet-strip-label">[[icon:paw]] 携带宠物</span>${petStrip}</div>` : ''}
+            <!-- W2-04：初始态引导——「初始攻击已默认携带、可直接出发」这一关键决定不再靠玩家自己读出 -->
+            <p class="hint bag-lead">「<b>初始攻击</b>」×${MAP.rules.starterSha} 已默认携带（固定）；首次出征可直接点「确认出发」，想自定义再从左侧把卡带入——只有装入背包的卡才能在对局使用。</p>
             <div class="bag-grid${full ? ' full' : ''}" id="depBag">${bagCells}</div>
             ${deployHint ? `<p class="hint warn-hint">${deployHint}</p>` : ''}
             <div class="dep-foot">
-              <button class="dep-back" data-act="depBack">← 返回</button>
               <button id="btnDeploy" data-act="confirmDeploy">[[icon:exit]] 确认出发</button>
             </div>
           </section>

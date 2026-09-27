@@ -117,3 +117,28 @@ export const hudMethods = {
 
   hideTooltip() { this.el.tooltip.hidden = true; },
 };
+
+/* W1-02（2026-09-27 R2）：全局浮动背包键反 inert 守卫。
+ * overlay.js `_isolateOverlayBackground`（冻结件，禁改）开任意弹层时会给
+ * #viewport 下 #overlay 的全部兄弟层挂 inert（排除名单仅 #sugLayer），
+ * #bagBtnFloat 正是兄弟层 → 战斗/商店/事件等弹层里按钮可见但被移出命中测试
+ * （elementFromPoint 跳过 inert 子树，W1-02 评审实锤）。
+ * 冻结件加不了排除名单 → 在此挂观察器对冲：inert 一出现立即解除。
+ * 时序坑（实测）：isolate 发生在弹层开启瞬间，此刻按钮尚未被 refresh 显示
+ * （hidden=true），若带「可见才解除」守卫会漏掉这次 inert 并残留——而按钮
+ * hidden 时解除 inert 无任何副作用（不可点不可焦），故无条件对冲最稳。
+ * 设计口径=index.html:170「对局中任何界面都可打开背包」；标题/基地等
+ * 非对局态按钮本就 hidden，不受影响。main.js 为 ESM defer 链，模块执行时
+ * DOM 已解析，直接挂（term-tips 同款）。 */
+const bagBtnEl = document.getElementById('bagBtnFloat');
+if (bagBtnEl) {
+  /* W1-02 第二刀：层叠补偿。战斗走 room-view 模式——overlays.css:356 把
+   * #overlay 提为 fixed z-100（普通弹层 z-20），浮键 winter.css:1585 的 z-30
+   * 被「战斗背包」整层盖住（解除 inert 仍打不到，实测 elementFromPoint 复核）。
+   * battle.css 已冻、index.html 是 R1 热点 → 按主代理批的「调用侧行内制式」
+   * 在此抬到 101：高于 room-view 100，语义仍是「对局中任何界面都可用」。 */
+  bagBtnEl.style.zIndex = '101';
+  new MutationObserver(() => {
+    if (bagBtnEl.inert) bagBtnEl.inert = false;
+  }).observe(bagBtnEl, { attributes: true, attributeFilter: ['inert'] });
+}

@@ -58,6 +58,11 @@ export function installDerived(layerData, mapSeed, generatorVersion = GENERATOR_
     };
   });
   game.geometryVersion = `${String(game.mapSeed)}:${game.generatorVersion}:${game.layoutVersion}`;
+  // W1-10（2026-09-27 R2）：门结点键集合（'li,idx'）。渲染器逐帧判定门节点
+  // 此前要 per-node 遍历 doors 数组（drawNodeLabels 的 .some），这里派生一次、
+  // 渲染侧 O(1) 查询（逐帧零分配纪律）。
+  game.doorKeys = new Set();
+  game.layerData.forEach((ld, li) => (ld.doors || []).forEach(d => game.doorKeys.add(li + ',' + d.at)));
   game.centerPos = [];
   game.nodes = [];                  // 扁平结点表（渲染与最近结点命中用）
   game.cellDefs = new Map();        // 'li,idx' → { def, x, y, li, idx }

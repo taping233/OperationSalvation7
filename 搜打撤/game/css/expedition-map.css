@@ -42,3 +42,42 @@ body.lobby #expeditionChapter, body.lobby #btnMapOverview, body.page-opaque #exp
   #layerBanner { top: 78px; }
 }
 @media(max-height: 700px) and (min-width: 851px) { #topBtns #btnLocate { bottom: calc(122px + 12px + 82px); } } /* 09-25：原 142px 为死值，与 expedition.css:463 !important 生效值同值（矮窗口档 122px 底栏） */
+
+/* ═══ W1-05（2026-09-27 R2）：宝箱弹层下的「假可点」路线卡降权 ═══
+   弹层开着时底部路线卡被状态守卫禁用（点了静默丢弃），但 hover 箭头/可点光标
+   仍在，诱骗玩家点击（透镜 #62「看上去不同，行为也要不同」）。
+   只作用域：地图上开着宝箱/搜刮弹层时（.card.chest），弹层关即恢复，零机制改动。
+   ——本单另一半「三选一缺跳过出口」须改 chests.js（冻结中），转主代理裁决。 */
+body:has(#overlay:not([hidden]) .card.chest) #routePanel .route-option {
+  opacity: .42;
+  pointer-events: none;
+  cursor: default;
+}
+body:has(#overlay:not([hidden]) .card.chest) #routePanel .route-option .route-arrow { display: none; }
+
+/* ═══ W1-04（2026-09-27 R2）：定位钮出屏修复——回归顶部钮簇文档流 ═══
+   实测（headless 1600×900，事件态）：#btnLocate fixed 渲染于 (205,-184)——
+   ui-scale 把 zoom 挂 html（STATE 已录的实测坑），html 成为 fixed 包含块后
+   winter.css:595/:1676 的 bottom:236px 被解析成离屏坐标，整钮不可见，
+   鼠标玩家的唯一镜头找回手段消失（F 键在但键位表只在手册里）。
+   修法=评审建议「排入顶部钮簇」：撤固定定位，回 #topBtns 文档流，
+   与 离开/手册/静音 同组（系统动作簇语义一致）。!important 压过
+   winter.css:1676 与 expedition.css:434/455 的 bottom !important
+   （本文件在 index.html 中于 winter/expedition 之后加载，同权后赢）。 */
+#topBtns #btnLocate {
+  position: static !important;
+  bottom: auto !important;
+  right: auto !important;
+  width: 40px;
+  height: 40px;
+}
+
+/* ═══ W1-10（2026-09-27 R2）：前进层间闸门路线卡金高亮 ═══
+   目标文案（expedition.view.js expeditionObjective）已带方位/步数信号，
+   路线卡侧同步：data-door="1"（前进闸门）金边+左金条，与普通卡区分；
+   折返门（reverse）不打标。全局「目标=金」语义与地图门节点金色化同批。 */
+#routePanel .route-option[data-door="1"] {
+  border-color: #d9bb82b3;
+  box-shadow: inset 3px 0 0 #d9bb82, 0 2px 12px rgba(217, 187, 130, .12);
+}
+#routePanel .route-option[data-door="1"] .route-arrow { color: #d9bb82; }

@@ -653,3 +653,13 @@
   border:1px solid rgba(217,187,130,.42);
   box-shadow:0 0 10px rgba(217,187,130,.22), inset 0 0 8px rgba(217,187,130,.16);
 }
+
+/* ═══ LEG-6b（2026-09-26 W1 批件）：结算车队横幅 ═══
+   挂接点：chests.js render()（带 battleSummary 的战斗胜利搜刮页顶部）+
+   game.session.death.js「撤离失败」终局页 doom-panel 顶部。
+   素材 assets/scenes/ui-loop-0925/rewards-convoy-{success,fail}.webp（1344×768）只读引用；
+   纯呈现带：裁中带取卡车主体，不接收指针、不改结算语义。 */
+.battle-banner { display:block; width:100%; height:clamp(110px, 15vw, 150px); object-fit:cover;
+  object-position:center 32%; border-radius:6px; border:1px solid #d8c08e59;
+  box-shadow:0 10px 30px #00000066; margin:0 0 14px; pointer-events:none; user-select:none; }
+#overlay .doom-panel .battle-banner { margin-bottom:16px; }

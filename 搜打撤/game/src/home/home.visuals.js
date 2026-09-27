@@ -99,7 +99,7 @@ export const M04_VISUAL_PACK = freeze({
       },
       {
         id: "preparation",
-        label: "出征整备",
+        label: "出发整备",
         grid: { x: 4, y: 4 },
         minHitSize: 44,
       },

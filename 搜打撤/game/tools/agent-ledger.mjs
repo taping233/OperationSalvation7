@@ -58,9 +58,15 @@ if (cmd === 'add') {
   if (!existsSync(LEDGER)) { console.log('[ledger] 空'); process.exit(0); }
   const rows = readFileSync(LEDGER, 'utf8').split('\n').filter(Boolean).map((l) => JSON.parse(l));
   const n = Number(argOf('n', '20'));
+  const tagFilter = argOf('tag');   // --tag smoke 只看冒烟/标记记录；默认过滤掉 smoke（正式视图）
+  const KNOWN = new Set(['promote', 'discard', 'hold', 'baseline']);
   for (const r of rows.slice(-n)) {
+    if (r.verdict && !KNOWN.has(r.verdict)) console.error(`⚠ ${r.exp} verdict="${r.verdict}" 不在口径枚举（promote/discard/hold/baseline）——查写入方`);
+    if (tagFilter) { if ((r.tag || '') !== tagFilter) continue; }
+    else if (r.tag === 'smoke') continue;   // 正式视图不显示冒烟记录
     const m = r.metrics ? `撤离${r.metrics.extract}% 均层${r.metrics.avgLayer} 弃${r.metrics.abandon} ${r.metrics.avgRunMs}ms` : '—';
-    console.log(`${r.ts.slice(5, 16)} ${String(r.exp).padEnd(6)} ${String(r.split).padEnd(8)} ${String(r.verdict).padEnd(9)} p=${r.p ?? '—'} ${m}  ${r.hypothesis}`);
+    const tag = r.tag ? ` [${r.tag}]` : '';
+    console.log(`${r.ts.slice(5, 16)} ${String(r.exp).padEnd(6)} ${String(r.split).padEnd(8)} ${String(r.verdict).padEnd(9)} p=${r.p ?? '—'} ${m}${tag}  ${r.hypothesis}`);
   }
 } else {
   console.error('用法: agent-ledger.mjs add|list ...');

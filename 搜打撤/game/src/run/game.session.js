@@ -21,6 +21,7 @@ import { commitBaseAndRun, readSettlementReceipt, recoverSlot, recoverSlotIfPend
 import { validatePendingExtraction } from '../hub/extraction.commands.js';
 import { createTerminalCommands } from '../hub/terminal.commands.js';
 import { createGameMenuController } from '../ui/game.menu.js';
+import { openDataPage } from '../agent/agent.data.js';   // W1-01：经 deps 注入 menu（menu 保持无静态导入）
 import { ensureBattleReady } from '../battle/battle-loader.js';
 import { Random } from '../core/random.js';
 import { GENERATOR_VERSION, LAYOUT_VERSION } from './map-generator.js';
@@ -324,8 +325,9 @@ const menuController = createGameMenuController({
   saveGame, syncPlayTime, clearSave, clearAllSlots,
   getActiveSlot: () => activeSlot, preflightRunMap,
   setActiveSlot: value => { activeSlot = value; },
+  openDataPage,
 });
-const { setLobby, showTitle, startNewGame, exitToTitle, quitGame, openSettings, openLeaveMenu, openTitleGuide, openSuggestionInbox } = menuController;
+const { setLobby, showTitle, startNewGame, exitToTitle, quitGame, openSettings, openLeaveMenu, openTitleGuide, openSuggestionInbox, openDataPageUi } = menuController;
 
 // ---------- 开局流程 ----------
 const newUid = () => 'o' + Date.now().toString(36) +
@@ -485,4 +487,4 @@ export { MODES, modeCfg, scaledEnemy } from './game.session.modes.js';
 export { bagCap, canAcceptCard, cardStacks, safeCap, safeUsed, usedSlots, gainCoins } from './game.session.bag.js';
 export { buildDerived } from './game.session.map.js';
 export { markSeen, renderMiniMap } from './game.session.board.js';
-export { clearSave, enterLayer, doDeath, exitToTitle, hasRun, loadGame, migrateOldSave, newRun, newUid, openLeaveMenu, openSettings, openSuggestionInbox, openTitleGuide, preflightRunMap, quitGame, saveGame, setLobby, showTitle, startNewGame, syncPlayTime };
+export { clearSave, enterLayer, doDeath, exitToTitle, hasRun, loadGame, migrateOldSave, newRun, newUid, openDataPageUi, openLeaveMenu, openSettings, openSuggestionInbox, openTitleGuide, preflightRunMap, quitGame, saveGame, setLobby, showTitle, startNewGame, syncPlayTime };

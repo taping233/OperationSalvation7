@@ -180,7 +180,12 @@ let hubCollectionView = 'backs';
       UI.log(`[[icon:coin]] 购入【<b>${esc(card.name)}</b>】×1 → 卡牌仓库（储备余 ${B.data.coins} 币）`, 'loot');
       renderHub();
     });
-    UI.act('hubTab', (d) => { hubTab = d.tab === 'home' ? 'deploy' : d.tab; renderHub(); });
+    UI.act('hubTab', (d) => {
+      const next = d.tab === 'home' ? 'deploy' : d.tab;
+      if (next !== hubTab) SDT.Sound.sfx('switch');   // W6-03：页签切换挂既有 switch 音（hub 最高频操作的静区补声）
+      hubTab = next;
+      renderHub();
+    });
     UI.act('hubCollectionView', (d) => {
       if (!['backs', 'achievements', 'classes'].includes(d.view)) return;
       hubCollectionView = d.view;
@@ -340,7 +345,7 @@ let hubCollectionView = 'backs';
     const T = {
       deploy: { title: '出发说明', items: [
         ['玩法选择', '出发后会随机空降到外圈入口，并从全部人物中自由选择 1 个本局人物（熟练度提供常驻加成）。'],
-        ['出征预报', '点击「出发」后会打开出征整备：选择要从仓库携带的卡牌——只有带上的卡才能在战斗中使用。撤离成功后也会出现整理界面，让你把背包战利品放回仓库。'],
+        ['出征预报', '点击「出发」后会打开出发整备：选择要从仓库携带的卡牌——只有带上的卡才能在战斗中使用。撤离成功后也会出现整理界面，让你把背包战利品放回仓库。'],
         ['宝藏大门', '在棋盘的钥匙格收集钥匙，集齐 ' + (SDT.Base.KEY_NEEDED || 10) + ' 把可开启特殊关卡（关卡制作中）。'],
       ] },
       shop: { title: '商店说明', items: [

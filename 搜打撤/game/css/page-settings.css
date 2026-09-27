@@ -2,7 +2,7 @@
    设置页 + 留言库子页美术升级（2026-09-24）——对标标题页 title-p0.css、
    选档页 page-slot-select.css、基地页 page-hub.css 的定稿语言：
      ① 冷青统一调色（页面分级底色/四角暗角/顶部淡金体积光）
-     ② #d9bb82 暖金装饰（页头发丝线+端点光点/分组前置金短线/行选中金轨）
+     ② var(--gold-main) 暖金装饰（页头发丝线+端点光点/分组前置金短线/行选中金轨）
      ③ 信息排版仪式感（恢复页名/分组主辅层级/留言档案卡封条）
      ④ 交互系统（hover/按压快按慢弹/:focus-visible 金线焦点环/三档节奏/出入场）
    作用域：全部规则限定 .pg.settings-page（留言库 .sugin-page 同时挂该类，
@@ -64,7 +64,7 @@
 #overlay .pg.settings-page .pg-head::before {
   content: ''; position: absolute; right: 20px; bottom: -3px; width: 5px; height: 5px;
   border-radius: 50%; pointer-events: none;
-  background: #ffe9b6;
+  background: var(--gold-bright);
   box-shadow: 0 0 10px #d9bb82d9, 0 0 22px #d9bb8255;
   animation: setGemBreath 5s ease-in-out infinite alternate;
 }
@@ -186,7 +186,7 @@
   box-shadow: inset 0 1px 0 rgba(255, 231, 184, .5), 0 0 8px rgba(217, 187, 130, .25);
 }
 .pg.settings-page .chk input[type="checkbox"]:active { transform: scale(.9); transition-duration: .08s; }
-.pg.settings-page input[type="range"] { accent-color: #d9bb82; cursor: pointer; }
+.pg.settings-page input[type="range"] { accent-color: var(--gold-main); cursor: pointer; }
 .pg.settings-page input[type="range"]:hover,
 .pg.settings-page input[type="range"]:active {
   filter: brightness(1.12) drop-shadow(0 0 4px rgba(217, 187, 130, .3));
@@ -194,7 +194,7 @@
 /* 拖动/聚焦滑条时数值跟着点亮（b 紧跟 input，兄弟选择器直达） */
 .pg.settings-page input[type="range"]:active + b,
 .pg.settings-page input[type="range"]:focus-visible + b {
-  color: #ffe9b6;
+  color: var(--gold-bright);
   text-shadow: 0 0 10px rgba(217, 187, 130, .5);
 }
 .pg.settings-page .chk.vol { padding: 12px 14px 12px 16px; }
@@ -225,7 +225,7 @@
 }
 .pg.settings-page select:active { border-color: rgba(217, 187, 130, .8); transition-duration: .08s; }
 .pg.settings-page select option { background: #0d1f2b; color: #dcebe9; }
-.pg.settings-page select option:checked { color: #d9bb82; }
+.pg.settings-page select option:checked { color: var(--gold-main); }
 
 /* S5d 说明文字：冷青灰小字 */
 .pg.settings-page .hint { color: #7e97a0; font-size: 12px; line-height: 1.9; margin: 12px 2px 4px; }
@@ -257,6 +257,21 @@
   color: #ffd9cf;
   box-shadow: 0 0 12px rgba(190, 84, 62, .32);
 }
+/* S6c（W1-08）危险区分级：低危两钮一排；「清空全部存档」独占一排+加重描边内晕，
+   与低危钮拉开视觉权重（不可逆代价悬殊不应同形同位；两步确认逻辑不变） */
+#overlay .pg.settings-page .btn-row.danger-row { margin-top: 12px; }
+#overlay .pg.settings-page .mini-btn.danger-max {
+  border-color: #a4432f;
+  background: linear-gradient(160deg, #5c221a, #38120c);
+  color: #ffc4b6;
+  box-shadow: inset 0 0 0 1px rgba(255, 122, 92, .22), 0 0 10px rgba(190, 84, 62, .14);
+}
+#overlay .pg.settings-page .mini-btn.danger-max:hover:not(:disabled) {
+  background: linear-gradient(160deg, #8a3a31, #55201a);
+  border-color: #e08a74;
+  color: #ffe2d9;
+  box-shadow: 0 0 16px rgba(190, 84, 62, .42);
+}
 /* 两步确认「已武装」态：暖红常亮（hover 也不回落），压过 overlays.css 的灰底 */
 #overlay .pg.settings-page .mini-btn.arm,
 #overlay .pg.settings-page .mini-btn.arm:hover {
@@ -268,7 +283,7 @@
 
 /* S6c 返回主按钮：暖金渐变收口（hub deploy-primary 语言） */
 #overlay .pg.settings-page .ov-btn.ok {
-  border-color: #d9bb82;
+  border-color: var(--gold-main);
   background: linear-gradient(135deg, #ddc089, #ab8a4e);
   color: #152e3b;
   min-width: 220px; letter-spacing: 6px;
@@ -352,7 +367,7 @@
   gap: 10px; padding-bottom: 8px;
   border-bottom: 1px dashed rgba(159, 183, 188, .16);
 }
-.pg.sugin-page .sugin-mark { color: #d9bb82; }
+.pg.sugin-page .sugin-mark { color: var(--gold-main); }
 .pg.sugin-page .sugin-row.done .sugin-mark { color: #9bbdb7; }
 .pg.sugin-page .sugin-time { color: #8fa5ad; font-variant-numeric: tabular-nums; letter-spacing: .5px; }
 .pg.sugin-page .sugin-page-name { color: #e2ecee; letter-spacing: 1.5px; }
@@ -367,7 +382,7 @@
   border-radius: 1px;
   color: #b9cbd0; font-size: 12px; line-height: 1.7;
 }
-.pg.sugin-page .sugin-detail b { color: #d9bb82; letter-spacing: .2em; font-size: 10px; margin-bottom: 2px; }
+.pg.sugin-page .sugin-detail b { color: var(--gold-main); letter-spacing: .2em; font-size: 10px; margin-bottom: 2px; }
 
 /* S7d 列表出入场：整体内容错峰上浮（sugBox 重渲染仅发生在打开/删除时） */
 .pg.settings-page .settings > * {
@@ -393,20 +408,20 @@
 #overlay .pg.settings-page :is(button, select, input):focus-visible {
   outline: 1px solid #d9bb82cc;
   outline-offset: 2px;
-  box-shadow: 0 0 0 1px #071720, 0 0 12px rgba(217, 187, 130, .35);
+  box-shadow: 0 0 0 1px var(--bg-deep), 0 0 12px rgba(217, 187, 130, .35);
 }
 /* 行内控件聚焦时，焦点环升级到整行（勾选框/滑条小控件不裸露小环） */
 #overlay .pg.settings-page .chk input:focus-visible { outline: none; box-shadow: none; }
 #overlay .pg.settings-page .chk:has(input:focus-visible) {
   outline: 1px solid #d9bb82cc;
   outline-offset: 2px;
-  box-shadow: 0 0 0 1px #071720, 0 0 12px rgba(217, 187, 130, .35);
+  box-shadow: 0 0 0 1px var(--bg-deep), 0 0 12px rgba(217, 187, 130, .35);
 }
 #overlay .sugin-page .sugin-exit:focus-visible,
 #overlay .card.page:has(.pg.settings-page) .ov-x:focus-visible {
   outline: 1px solid #d9bb82cc;
   outline-offset: 2px;
-  box-shadow: 0 0 0 1px #071720, 0 0 12px rgba(217, 187, 130, .35);
+  box-shadow: 0 0 0 1px var(--bg-deep), 0 0 12px rgba(217, 187, 130, .35);
 }
 
 /* ═════════ S9 光标自查 ═════════ */
@@ -447,4 +462,4 @@
   text-shadow: 0 0 12px rgba(217, 187, 130, .16);
 }
 .pg.settings-page .sugin-empty .se-text span { font-size: 12.5px; line-height: 1.8; color: #93a9ad; }
-.pg.settings-page .sugin-empty .se-text span b { color: #d9bb82; font-size: 12.5px; letter-spacing: 1px; }
+.pg.settings-page .sugin-empty .se-text span b { color: var(--gold-main); font-size: 12.5px; letter-spacing: 1px; }

@@ -4,7 +4,7 @@
 
 ## 目录结构（2026-09-23 域目录化）
 
-平铺布局已按功能域收进 8 个目录；架构守卫（`scripts/architecture-graph.mjs` + `tests/architecture-boundaries.test.js`）的分层判据与目录一致：
+平铺布局已按功能域收进目录；2026-09-25～26 新增 `agent/` 后共有 9 个功能域（另有生成目录）。架构守卫入口为 `scripts/architecture-graph.mjs` + `tests/architecture-boundaries.test.js`：
 
 | 目录 | 域 | 内容概览 |
 | --- | --- | --- |
@@ -16,6 +16,7 @@
 | `hub/` | 基地/局外 | 仓库、背包、存档、商店、整备、收藏、各类命令、照相馆呈现 |
 | `home/` | 首页/叙事 | 首页场景五件套、ink 叙事、剧情命令 |
 | `audio/` | 音频 | sound 策略/声景 |
+| `agent/` | 自动游玩与统计 | SDT.Agent 门面、局面观察、动作执行、策略/权重、LLM 适配器、跑局记录和数据页 |
 
 根层只保留装配与入口：`main.js`（唯一入口，导入顺序即启动顺序）、`boot-order.js`（顺序唯一事实源，条目为带域前缀的路径）、`game.boot.js`（跨功能接线）、`r7a.qa.js`（QA 入口）、`generated/`（生成物，不手改）。
 

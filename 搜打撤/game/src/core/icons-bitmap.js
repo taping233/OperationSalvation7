@@ -14,7 +14,10 @@ import { assetUrl } from './asset-url.js';
       console.error(`[SDT.Icons] missing bitmap: ${label}`);
     }
   }
-  function safe(name) { if (NAMES.has(name)) return name; reportMissing('icon', name); return 'question'; }
+  // W5-08（0926）：语义别名——chart/info 尚无专属位图，映射到现有位图消灭 missing bitmap
+  // 空缺（跑局数据页头/终局结算提示）；零新素材，后续专属图出图后在此改指向即可。
+  const ALIAS = { chart: 'archive', info: 'scroll' };
+  function safe(name) { name = ALIAS[name] || name; if (NAMES.has(name)) return name; reportMissing('icon', name); return 'question'; }
   function url(name) { return assetUrl(`${ROOT}${safe(name)}.png`); }
   function img(name, cls, alt) { const n=safe(name); return `<img class="ic${cls?' '+esc(cls):''}" src="${url(n)}" alt="${esc(alt||n)}" data-asset-key="icon-${esc(n)}" draggable="false" loading="eager" decoding="async">`; }
 

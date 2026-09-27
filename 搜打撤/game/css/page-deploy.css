@@ -1,7 +1,7 @@
 /* ═══════════════════════════════════════════════════════════════════
    出征整备页美术升级（2026-09-24）——对标 title-p0.css「09-24 美术升级」
    与 page-slot-select.css 定稿语言：① 冷青统一调色（壁纸透出/暗角视线归属）
-   ② #d9bb82 暖金装饰线与端点光点 ③ 信息排版层级（页头/双卡主次/出发按钮）
+   ② var(--gold-main) 暖金装饰线与端点光点 ③ 信息排版层级（页头/双卡主次/出发按钮）
    ④ 交互节奏三档变量 + 按压「快按慢弹」+ 金线焦点环 + 首开出入场编排
    约束：全部规则限定 #depMain（出征整备页根）作用域，只覆盖不删除；
          新增动画仅 transform/opacity；reduced-motion 由 winter.css 全局
@@ -37,14 +37,14 @@
   content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
   background:
     /* 左下角：端点光点 + 横短线 + 竖短线 */
-    radial-gradient(2.6px 2.6px at 1px calc(100% - 1px), #ffe9b6 40%, transparent 75%)
+    radial-gradient(2.6px 2.6px at 1px calc(100% - 1px), var(--gold-bright) 40%, transparent 75%)
       left 22px bottom 13px / 8px 8px no-repeat,
     linear-gradient(90deg, #d9bb82b3, transparent)
       left 22px bottom 13px / 52px 1px no-repeat,
     linear-gradient(0deg, #d9bb82b3, transparent)
       left 22px bottom 13px / 1px 16px no-repeat,
     /* 右下角（镜像） */
-    radial-gradient(2.6px 2.6px at calc(100% - 1px) calc(100% - 1px), #ffe9b6 40%, transparent 75%)
+    radial-gradient(2.6px 2.6px at calc(100% - 1px) calc(100% - 1px), var(--gold-bright) 40%, transparent 75%)
       right 22px bottom 13px / 8px 8px no-repeat,
     linear-gradient(270deg, #d9bb82b3, transparent)
       right 22px bottom 13px / 52px 1px no-repeat,
@@ -73,7 +73,7 @@
 #overlay #depMain .hub-head::before {
   content: ''; position: absolute; left: 14px; bottom: 1.5px; width: 4px; height: 4px;
   border-radius: 50%; pointer-events: none;
-  background: #ffe9b6;
+  background: var(--gold-bright);
   box-shadow: 0 0 8px 1px #d9bb82b3;
   animation: depGemBreath 5s ease-in-out infinite alternate;
 }
@@ -129,7 +129,7 @@
 #overlay #depMain .dep-body > .hub-card > h3::after {
   content: ''; position: absolute; left: 0; bottom: -2px; width: 3px; height: 3px;
   border-radius: 50%; pointer-events: none;
-  background: #ffe9b6; box-shadow: 0 0 6px #d9bb8299;
+  background: var(--gold-bright); box-shadow: 0 0 6px #d9bb8299;
 }
 /* h3 内说明小字（「拖入卡牌即可携带」）：降级为发丝线分隔的注记 */
 #overlay #depMain .dep-body > .hub-card > h3 .set-tip {
@@ -157,10 +157,10 @@
 /* 已带空（drained）：保持置灰不可拖感，压掉上面新加的 hover 反馈 */
 #overlay #depMain .dep-card.drained { cursor: default; }
 #overlay #depMain .dep-card.drained:hover { transform: none; filter: none; }
-/* 已选带入：金环 retint 到 #d9bb82（原 #b8934c 旧金） */
+/* 已选带入：金环 retint 到 var(--gold-main)（原 var(--gold-dim) 旧金） */
 #overlay #depMain .dep-card.picked { filter: drop-shadow(0 0 8px rgba(217, 187, 130, .45)); }
 #overlay #depMain .dep-card.picked::after {
-  border-color: #d9bb82;
+  border-color: var(--gold-main);
   box-shadow: 0 0 8px rgba(217, 187, 130, .35);
 }
 /* 「仓 ×N」余量徽标：冷青暗底 + 金描边细线 */
@@ -171,7 +171,7 @@
 }
 /* 已选张数角标：暖金 retint */
 #overlay #depMain .dep-card .dep-n {
-  background: #d9bb82; border-color: #ffe9b6; color: #1c1508;
+  background: var(--gold-main); border-color: var(--gold-bright); color: #1c1508;
   box-shadow: 0 2px 8px rgba(20, 12, 4, .45), 0 0 8px rgba(217, 187, 130, .4);
 }
 
@@ -181,22 +181,26 @@
   transition: background-color var(--dep-fast), border-color var(--dep-fast), box-shadow var(--dep-fast);
 }
 #overlay #depMain .bag-grid.drop-here {
-  background: rgba(217, 187, 130, .12); border-color: #d9bb82;
+  background: rgba(217, 187, 130, .12); border-color: var(--gold-main);
   box-shadow: inset 0 0 0 1px rgba(217, 187, 130, .35), 0 0 14px rgba(217, 187, 130, .15);
 }
 #overlay #depMain .bag-cell { border-radius: 2px; }
-/* 空格：旧米白虚线（#b3af9f 残留）→ 冷青虚线 */
+/* 空格：旧米白虚线（#b3af9f 残留）→ 冷青虚线；W2-04 再降对比——空格是留白不是格子，
+   高密度虚线框属低质量细节（#51），视觉主体让给已带卡与引导行 */
 #overlay #depMain .bag-cell.empty {
-  border-color: rgba(182, 211, 214, .22);
-  background: rgba(182, 211, 214, .03);
+  border-color: rgba(182, 211, 214, .12);
+  background: rgba(182, 211, 214, .015);
 }
+/* W2-04：初始态引导行——「初始攻击已默认携带、可直接出发」获得应有权重 */
+#overlay #depMain .bag-lead { flex-shrink: 0; margin: 0 0 10px; color: #b6c9ce; }
+#overlay #depMain .bag-lead b { color: #e5d4ae; }
 /* 固定格（初始攻击）：暖金镇纸 */
 #overlay #depMain .bag-cell.fixed {
   border-color: rgba(217, 187, 130, .65);
   background: rgba(217, 187, 130, .08);
 }
 #overlay #depMain .bag-cell.fixed .dep-n {
-  background: #d9bb82; color: #1c1508; border-color: #ffe9b6;
+  background: var(--gold-main); color: #1c1508; border-color: var(--gold-bright);
 }
 /* 已装入格 / 固定格（可点击查看详情）：hover 抬升 + 金边，按压缩放回弹 */
 #overlay #depMain .bag-cell.filled { border-color: rgba(182, 211, 214, .45); }
@@ -224,7 +228,7 @@
 
 /* ── W6 宠物携带条：标签金化、胶囊冷青底 + 金边，选中暖金点亮 ── */
 #overlay #depMain .pet-strip-label {
-  color: #d9bb82; font-size: 11.5px; letter-spacing: .18em; font-weight: 700;
+  color: var(--gold-main); font-size: 11.5px; letter-spacing: .18em; font-weight: 700;
 }
 #overlay #depMain .pet-chip {
   padding: 5px 12px; border-radius: 999px;
@@ -242,7 +246,7 @@
 }
 #overlay #depMain .pet-chip.on {
   background: linear-gradient(180deg, rgba(84, 62, 22, .92), rgba(48, 35, 13, .92));
-  border-color: #d9bb82; color: #f4e7c6;
+  border-color: var(--gold-main); color: #f4e7c6;
   box-shadow: 0 0 12px rgba(217, 187, 130, .28), inset 0 1px 0 rgba(255, 238, 200, .25);
 }
 #overlay #depMain .pet-chip:active {
@@ -275,7 +279,7 @@
 #overlay #depMain .dep-foot #btnDeploy {
   min-height: 44px; padding: 12px 18px;
   border: 1px solid #e8cf9e; border-radius: 2px;
-  background: linear-gradient(165deg, #eed9ab 0%, #d9bb82 48%, #bb9a60 100%);
+  background: linear-gradient(165deg, #eed9ab 0%, var(--gold-main) 48%, #bb9a60 100%);
   color: #152633; font-weight: 800; letter-spacing: .28em;
   box-shadow: inset 0 1px 0 rgba(255, 242, 207, .55), 0 6px 18px rgba(2, 8, 14, .35);
   transition: filter var(--dep-fast), box-shadow var(--dep-fast), transform var(--dep-fast);
@@ -304,7 +308,7 @@
 #overlay #depMain :is(.dep-card, .bag-cell[role="button"], .pet-chip, .dep-back, #btnDeploy, .help-btn):focus-visible {
   outline: 1px solid #d9bb82cc;
   outline-offset: 2px;
-  box-shadow: 0 0 0 1px #071720, 0 0 12px rgba(217, 187, 130, .35);
+  box-shadow: 0 0 0 1px var(--bg-deep), 0 0 12px rgba(217, 187, 130, .35);
 }
 
 /* ── T4 首开出入场编排（只挂 deployJustOpened 的 .page-in 首帧；
@@ -360,7 +364,7 @@
 #overlay #depMain .bag-cell.dep-target-hint { border-color: rgba(217, 187, 130, .4); }
 #overlay #depMain .bag-cell.dep-target-hint::after {
   content: ''; position: absolute; inset: -2px; z-index: 5; pointer-events: none;
-  border: 1.5px solid #d9bb82; border-radius: 3px;
+  border: 1.5px solid var(--gold-main); border-radius: var(--radius-panel);
   box-shadow: 0 0 12px rgba(217, 187, 130, .3), inset 0 0 8px rgba(217, 187, 130, .14);
   animation: depHintBreath 1.05s ease-in-out infinite alternate;
 }
@@ -375,8 +379,8 @@
 #overlay #depMain .dep-foot::before {
   content: ''; position: absolute; left: 12px; right: 12px; top: -11px; height: 8px; pointer-events: none;
   background:
-    radial-gradient(2.2px 2.2px at 4px 4px, #ffe9b6 40%, transparent 75%) no-repeat,
-    radial-gradient(2.2px 2.2px at calc(100% - 4px) 4px, #ffe9b6 40%, transparent 75%) no-repeat,
+    radial-gradient(2.2px 2.2px at 4px 4px, var(--gold-bright) 40%, transparent 75%) no-repeat,
+    radial-gradient(2.2px 2.2px at calc(100% - 4px) 4px, var(--gold-bright) 40%, transparent 75%) no-repeat,
     repeating-linear-gradient(90deg, rgba(217, 187, 130, .5) 0 7px, transparent 7px 14px);
   background-size: 8px 8px, 8px 8px, 100% 1px;
   background-position: 0 3px, 100% 3px, 0 3px;
@@ -385,7 +389,7 @@
 /* 撕开转场：transform/opacity only；reduced-motion 由 JS 跳过挂类，此处再兜底一层 */
 #overlay #depMain.dep-tearing::before {
   content: ''; position: absolute; left: -2%; right: -2%; top: 50%; height: 0; z-index: 50; pointer-events: none;
-  border-top: 2px dashed #ffe9b6;
+  border-top: 2px dashed var(--gold-bright);
   filter: drop-shadow(0 0 10px rgba(217, 187, 130, .65));
   transform-origin: 50% 50%;
   animation: depSeamSweep .52s cubic-bezier(.6, .05, .4, .95) forwards;

@@ -32,6 +32,7 @@ const Agent = Object.freeze({
   recorder: Object.freeze({
     recordRun: recorder.recordRun,
     noteBattle: recorder.noteBattle,
+    resetRunCounters: recorder.resetRunCounters,
     listRuns: recorder.listRuns,
     clearRuns: recorder.clearRuns,
     exportJSON: recorder.exportJSON,

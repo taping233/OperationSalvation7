@@ -11,6 +11,7 @@
 import { game, curLayer, bagCap, usedSlots } from '../run/game.session.js';
 import { collectUiActions, collectActionKeys, overlayBody, overlayVisible } from './agent.surface.js';
 import { actionId } from './agent.protocol.js';
+import { getBattleCount } from './agent.recorder.js';
 
 const withId = (action) => ({ ...action, id: actionId(action) });
 
@@ -98,7 +99,8 @@ function battleView(snap) {
       // 策略第一分支 selected>=need 判定不再拿原始 15 卡死
       need: Math.min(snap.deckSelection.need, (snap.deckSelection.cards || []).length),
       selected: [...(snap.deckSelection.selected || [])],
-      cards: (snap.deckSelection.cards || []).map(e => ({ uid: e.uid, name: e.card?.name || '', rarity: e.card?.rarity || '', type: e.card?.type || '' })),
+      boss: snap.deckSelection.boss ? { name: snap.deckSelection.boss.name || '', atk: snap.deckSelection.boss.atk ?? null, maxHp: snap.deckSelection.boss.maxHp ?? null } : null,
+      cards: (snap.deckSelection.cards || []).map(e => ({ uid: e.uid, name: e.card?.name || '', rarity: e.card?.rarity || '', type: e.card?.type || '', desc: e.card?.desc || '', dmg: e.card?.dmg ?? null })),
     } : null,
     potions: (snap.potionBar || []).map(p => ({ uid: p.uid, name: p.name || '', count: p.count ?? 1 })),
     // 装备：uid/主动技能状态（passive=纯被动，used=本回合已用）——主动技能 useEquipSkill(uid)
@@ -254,6 +256,7 @@ function runBrief() {
   if (!game.runActive && !game.battleActive && game.state === 'title') return null;
   return {
     active: !!game.runActive,
+    fought: getBattleCount(),   // 本局已战场数（09-27 R17 连续作战疲劳信号）
     mode: game.mode || null,
     hp: game.hp, maxHp: game.maxHp,
     coins: game.coins, atk: game.atk,

@@ -12,7 +12,7 @@ import { normalizeAction, actionId } from './agent.protocol.js';
 import { findUiElement, collectActionKeys, overlayVisible } from './agent.surface.js';
 import { observe, settleSignature, bustSigCache, markUiFailure } from './agent.state.js';
 import { isTurbo } from './agent.turbo.js';
-import { setDriver } from './agent.recorder.js';
+import { setDriver, battleTick, battleActionTick, battleEnd } from './agent.recorder.js';
 import { moveTo, reenterCell } from '../run/game.run.flow.js';
 import { startNewGame, game } from '../run/game.session.js';
 
@@ -274,6 +274,7 @@ async function autoRun({ decide, maxSteps = 800, onStep, until, driver = 'auto',
   let stepErrors = 0;                // 单步异常自愈：连续 5 次错误停局
   let failKey = '';                   // 连续同 id 失败熔断（瞬态页失败键无限重试的最后防线）
   let failCount = 0;
+  let prevBattleActive = false;       // 战斗内埋点：battleActive 下降沿检测（battleEnd 触发）
   let stopReason = 'max-steps';       // 熔断原因入记录（09-26：弃局死因必须可见）
   try {
     for (let i = 0; i < maxSteps; i++) {
@@ -293,6 +294,20 @@ async function autoRun({ decide, maxSteps = 800, onStep, until, driver = 'auto',
       }
       stepErrors = 0;
       options.preSettled = true;   // 首步之后：上一步尾部已 settle，跳过前置等待
+      // 战斗内埋点喂食（09-26）：battle 相每步喂观察快照（受击/掉血/能量浪费），
+      // 喝药与逃逸动作喂动作名（potions/fleeTurn）——noteBattle 落盘时随流水带出。
+      // battleActive 下降沿调 battleEnd() 重置累积器（不能用 turn 做 token——
+      // 每回合变化会把跨回合受击观测冲掉，首版实测 hits 恒 0）
+      if (result.obs.battle) {
+        battleTick(result.obs.battle);
+        if (result.action && (result.action.name === 'usePotion' || result.action.name === 'flee')) {
+          battleActionTick(result.action.name, result.obs.battle);
+        }
+        prevBattleActive = true;
+      } else if (prevBattleActive) {
+        battleEnd();
+        prevBattleActive = false;
+      }
       options.carryObs = result.obs;
       // 位置键含战斗回合：战斗内 game.turn 静止，跨回合的同一动作（如每回合 endTurn）
       // 不是空转，不能进同键熔断
@@ -354,15 +369,25 @@ async function autoRun({ decide, maxSteps = 800, onStep, until, driver = 'auto',
       if (battleStall >= 40) { stopReason = 'battle-stall'; break; }
       if (noProgressSteps > 60) { stopReason = 'no-progress'; break; }
       if (failCount >= 10) { stopReason = 'fail-spin'; break; }
-      // 二周期熔断：最近 8 步呈 X Y X Y X Y X Y 交替（A↔B 走位 / 走位↔弹层回环）即收口——
+      // 终局挂起（09-26 死锁修复④）：死亡/撤离结算页弹出（terminalPending 挂着等确认）
+      // = 对局已结束。策略不该再点页面按钮——retryTerminalDeath 会重开局且 death 记录
+      // 永不落盘（recordRun 只在结算确认时写），被兜底误记 abandon（实测 V 底 15 局）。
+      // 直接收口，死亡口径由 batch 兜底按 terminalPending.kind 纠正
+      if (result.obs.phase === 'settlement' || window.SDT?.game?.terminalPending) {
+        stopReason = 'terminal-pending'; break;
+      }
+      // 二周期熔断：最近 12 步呈 X Y X Y X Y… 交替（A↔B 走位 / 走位↔弹层回环）即收口——
       // 通用兜底，任何策略的残余振荡都不再烧满 maxSteps。排除战斗阶段
-      //（1 牌/回合的 endTurn 交替是合法节奏，战斗另有 battleStall 守卫）
-      if (trace.length >= 8 && i >= 7) {
-        const s = trace.slice(-8);
+      //（1 牌/回合的 endTurn 交替是合法节奏，战斗另有 battleStall 守卫）。
+      // 窗口 8→12（09-26 门对跳修复配套）：滞环解锁阈值 stallSteps>10 需要 10 次 map
+      // 决策才放行前进门（doorStall 26 分破环），8 步窗口会让解锁来不及生效的
+      // 「绕圈待解锁」局被误杀——12 步给解锁留出 2 步余量，真死循环多烧 4 步无害
+      if (trace.length >= 12 && i >= 11) {
+        const s = trace.slice(-12);
         if (s.every(t => t.phase !== 'battle')) {
           const k = s.map(t => `${t.id}|${t.phase}`);
-          const alt2 = k[0] === k[2] && k[0] === k[4] && k[0] === k[6]
-            && k[1] === k[3] && k[1] === k[5] && k[1] === k[7] && k[0] !== k[1];
+          const alt2 = [0, 2, 4, 6, 8, 10].every(j => k[j] === k[0])
+            && [1, 3, 5, 7, 9, 11].every(j => k[j] === k[1]) && k[0] !== k[1];
           if (alt2) { stopReason = 'alt2-cycle'; break; }
         }
       }

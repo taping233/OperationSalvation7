@@ -55,14 +55,14 @@ function feedbackTier(feedback = {}) {
   if (feedback.warm || (feedback.cls || '').includes('stk')) return 'routine';
   if ((feedback.cls || '').includes('block')) return 'impact';
   const amount = Math.abs(Number.parseInt(String(feedback.text || '').replace(/[^\d-]/g, ''), 10) || 0);
-  return feedback.finisher || feedback.critical || amount >= 10 ? 'finisher' : 'impact';
+  return feedback.critical || amount >= 10 ? 'finisher' : 'impact';
 }
 
 function feedbackClass(feedback = {}) {
   if (feedback.warm) return 'heal';
   const base = feedback.cls || (feedback.unit === 'self' ? 'hurt' : 'dmg');
   // 保留旧调用方只传 unit 时的精确返回值；带有事件元数据时才追加分级样式。
-  if (!feedback.cls && !feedback.critical && !feedback.finisher) return base;
+  if (!feedback.cls && !feedback.critical) return base;
   const tier = feedbackTier(feedback);
   return [base, `fx-${tier}`, feedback.critical ? 'critical' : ''].filter(Boolean).join(' ');
 }

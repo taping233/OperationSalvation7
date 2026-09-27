@@ -261,8 +261,8 @@
 #title .ak-set .c-ring { --home-icon-size: 104px; --home-glow: #b4cad171; }
 #title .ak-circle .c-cn {
   position: relative; grid-column: auto; grid-row: auto; align-self: auto;
-  margin: 0; color: #f4ead4; font: 700 24px/1.08 'KaiTi', 'STKaiti', 'SimSun', serif;
-  font-family: 'KaiTi', 'STKaiti', 'SimSun', serif !important;
+  margin: 0; color: #f4ead4; font: 700 24px/1.08 var(--font-handwriting);
+  font-family: var(--font-handwriting) !important;
   letter-spacing: 3px; text-shadow: 0 2px 5px #000, 0 0 15px #050d14, 0 -1px #fff7e04d;
 }
 #title .ak-circle .c-en {
@@ -299,8 +299,8 @@
   animation: homeEmblemFloat 7.4s ease-in-out infinite;
 }
 #title .ak-start .st-cn {
-  color: #ffe9b6; font: 700 34px/1.05 'KaiTi', 'STKaiti', 'SimSun', serif;
-  font-family: 'KaiTi', 'STKaiti', 'SimSun', serif !important;
+  color: var(--gold-bright); font: 700 34px/1.05 var(--font-handwriting);
+  font-family: var(--font-handwriting) !important;
   letter-spacing: 6px; text-shadow: 0 2px 7px #000, 0 0 16px #d5a65ba8;
   animation: homeGoldLetter 5.8s ease-in-out infinite alternate;
 }
@@ -349,9 +349,9 @@ body.lobby #logPanel, body.page-opaque #logPanel { display: none; }
 /* 头像尺寸统一由 winter.css 底栏重设计（118×118 出血版）定义，此处不再覆盖（2026-09-19） */
 /* 底栏背包按钮删除后（2026-09-19）：满载警示移到全局浮动背包键 */
 #bagBtnFloat.bag-full { box-shadow: 0 0 0 2px #ce8873, 0 4px 18px #030b1688; }
-#bagBtnFloat.bag-full::after { content: '满'; position: absolute; top: -6px; right: -6px; padding: 1px 6px; border-radius: 8px; background: #ce8873; color: #14212b; font: 700 10px/1.4 ui-monospace, monospace; }
+#bagBtnFloat.bag-full::after { content: '满'; position: absolute; top: -6px; right: -6px; padding: 1px 6px; border-radius: var(--radius-panel); background: #ce8873; color: #14212b; font: 700 10px/1.4 ui-monospace, monospace; }
 #sidebar #statsPanel { display: flex; justify-content: center; gap: 5px; border-right: 1px solid var(--exp-line); padding-right: 16px; }
-#sidebar #miniMap { width: 100%; height: auto; max-height: 66px; object-fit: contain; max-width: none; border-radius: 3px; background: #08131f80; } /* 09-25 P2：画布本征 560×112，原强制 height:66px 纵向拉伸 1.8 倍——改随宽等比 + 66px 封顶 contain */
+#sidebar #miniMap { width: 100%; height: auto; max-height: 66px; object-fit: contain; max-width: none; border-radius: var(--radius-panel); background: #08131f80; } /* 09-25 P2：画布本征 560×112，原强制 height:66px 纵向拉伸 1.8 倍——改随宽等比 + 66px 封顶 contain */
 #sidebar #statsPanel .stat-duo { display: flex; justify-content: space-between; gap: 5px; margin: 0; font-size: 10px; color: var(--exp-muted); }
 #sidebar .stat-duo b { font-size: 12px; color: var(--exp-text); }
 #sidebar .stat-duo label { font-size: 10px; }
@@ -371,7 +371,7 @@ body.lobby #logPanel, body.page-opaque #logPanel { display: none; }
   --route-accent: #b8c7ce;
   min-width: 145px; flex: 1 0 145px; display: flex; gap: 10px; align-items: center; padding: 9px 11px;
   text-align: left; background: #213946; border: 1px solid #687e8b80; border-left: 2px solid var(--route-accent);
-  color: var(--exp-text); border-radius: 3px; box-shadow: none;
+  color: var(--exp-text); border-radius: var(--radius-panel); box-shadow: none;
 }
 .route-option[data-tone="danger"] { --route-accent: #dd9684; }
 .route-option[data-tone="gold"] { --route-accent: #dfc28d; }

@@ -1,7 +1,7 @@
 /* ═══════════════════════════════════════════════════════════════════
    基地·仓库页签美术升级（2026-09-24）——对标 page-hub.css / page-deploy.css /
    page-slot-select.css 定稿语言：
-     ① 冷青统一调色（卡底分级/暗部层次）② #d9bb82 暖金装饰（封条顶线/
+     ① 冷青统一调色（卡底分级/暗部层次）② var(--gold-main) 暖金装饰（封条顶线/
         端点光点/金短线引导）③ 信息排版层级（卡题金标/发丝分隔/数值暖米金）
      ④ 交互三档节奏：hover 抬升 / :active 快按慢弹（lift 过冲曲线）/
         :focus-visible 金线焦点环（沿用 page-hub.css T2 全局环）+
@@ -57,7 +57,7 @@
 #overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .hub-card > h3::after {
   content: ''; position: absolute; left: 0; bottom: -3px; width: 3px; height: 3px;
   border-radius: 50%; pointer-events: none;
-  background: #ffe9b6; box-shadow: 0 0 6px #d9bb8299;
+  background: var(--gold-bright); box-shadow: 0 0 6px #d9bb8299;
 }
 /* h3 内计数小字（共 N 张 / N 只）：降级为发丝线分隔的注记（对标 page-deploy） */
 #overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .hub-card > h3 .set-tip {
@@ -77,14 +77,14 @@
   text-shadow: 0 0 8px rgba(217, 187, 130, .18);
 }
 
-/* W3b 容量槽：暗槽 + #d9bb82 金量（旧银灰填充 retint） */
+/* W3b 容量槽：暗槽 + var(--gold-main) 金量（旧银灰填充 retint） */
 #overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .base-bar {
   background: rgba(6, 15, 22, .92);
   border-color: rgba(217, 187, 130, .24);
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, .5);
 }
 #overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .base-bar i {
-  background: linear-gradient(90deg, #8a6f42, #d9bb82 55%, #e8d3a4);
+  background: linear-gradient(90deg, #8a6f42, var(--gold-main) 55%, #e8d3a4);
   box-shadow: 0 0 8px rgba(217, 187, 130, .3);
 }
 
@@ -93,10 +93,10 @@
 #overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .stash-scroll {
   overflow-x: hidden;
   padding: 4px 8px 8px 4px;
-  scrollbar-color: #3d5a68 #081722;
+  scrollbar-color: #3d5a68 var(--bg-deep2);
 }
 #overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .stash-list {
-  scrollbar-color: #3d5a68 #081722;
+  scrollbar-color: #3d5a68 var(--bg-deep2);
 }
 
 /* W3d 卡格封条顶线：默认极淡，hover / 可使用 / 已收藏点亮（对标选档页 W2d） */
@@ -127,7 +127,7 @@
   transition: transform var(--stx-press), border-color var(--stx-press), box-shadow var(--stx-press);
 }
 
-/* W3f 已收藏格：金环 + 内圈细金线（旧 #dfc28d retint 到 #d9bb82 族） */
+/* W3f 已收藏格：金环 + 内圈细金线（旧 #dfc28d retint 到 var(--gold-main) 族） */
 #overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .stash-cell.collected {
   border-color: rgba(217, 187, 130, .6);
   box-shadow: inset 0 0 0 1px rgba(217, 187, 130, .35), 0 0 12px rgba(217, 187, 130, .12);
@@ -146,7 +146,7 @@
   right: 2px;
 }
 
-/* W3h 「可使用」章：金渐变收口到 #d9bb82 族 + 字距 */
+/* W3h 「可使用」章：金渐变收口到 var(--gold-main) 族 + 字距 */
 #overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .stash-cell .cell-tag {
   background: linear-gradient(180deg, #e6cd9c, #c3a468);
   color: #1c1508; letter-spacing: 1.5px;
@@ -246,7 +246,7 @@
 #overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .pk-row.pet-row.on {
   border-color: rgba(217, 187, 130, .55);
   background: linear-gradient(90deg, rgba(217, 187, 130, .12), rgba(217, 187, 130, .03) 55%, transparent);
-  box-shadow: inset 2px 0 0 #d9bb82;
+  box-shadow: inset 2px 0 0 var(--gold-main);
 }
 /* 未孵化：虚线界弱化（透明度沿用原 locked 规则） */
 #overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .pk-row.pet-row.locked {
@@ -270,7 +270,7 @@
   color: #cfdde0;
 }
 
-/* ═════════ W8 金色行动钮（复原/携带）：retint 到 #d9bb82 族 ═════════ */
+/* ═════════ W8 金色行动钮（复原/携带）：retint 到 var(--gold-main) 族 ═════════ */
 
 #overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .mini-btn.ok:not(:disabled) {
   background: linear-gradient(180deg, #e0c493, #c9a86e);
