@@ -48,3 +48,9 @@ E2 真实 hover 与旧档 04/05、E3 真实结算/旧档/长局、E4 异步实�
 2026-09-27 15:00（Asia/Shanghai），Friday 核对实际实现、定向回归源码、RESULT 及实时工作区。团队七文件加本 PLAN 共八文件，单写归属一致；HEAD 仍 3d06b1e，index 空，原排除未跟踪项保留。本地 origin/master ahead 11 / behind 0，未 fetch、未 push。定向最终 7 文件中的 129 项通过，独审阻断项 0，全队停写；这些证据不等于全量或实页通过。
 
 接收补修结果：readForPreflight 用 WeakMap 绑定候选与精确原串，acceptLoad 仅在实际装载纯校验通过后采纳；读取失败/原串替换在副作用前拒绝。菜单合法预检和坏结构/地图/撤离拒绝均不授权旧局覆盖。进入原 pre-commit 全量及精确范围本地提交窗口，结果以后续记录为准。真实页面恢复提示及 E2–E4 积压实页继续未验。
+
+## 最终本地落库结果
+
+2026-09-27 15:05（Asia/Shanghai）Friday 实核：15:01:00 启动原 pre-commit 全量，168 个文件 / 1097 项全部通过，Vitest 耗时 235.13 秒，未绕过门禁，完整日志为 `.git/gate-full-test.log`。八文件已提交为 `92f6a742a4750f726186c2132e13949e30157eeb`（fix: validate run recovery and report persistence outcomes）。
+
+提交后 tracked/index 干净，原排除未跟踪内容全部保留；相对本地 origin/master ahead 12 / behind 0，未 fetch、未 push，非服务器实时状态。本段随后单独作验收记录提交，未改变所验代码。此结果更新 RESULT 的“全量门禁、本地提交由 Friday 接手”时间状态：E5 代码、独审、定向、全量与本地提交完成。真实页面恢复提示、E2 hover/旧档 04/05、E3 结算/旧档/长局及 E4 异步实页仍未验；未 build、未触碰玩家存档。本批不自动启动 E6。
