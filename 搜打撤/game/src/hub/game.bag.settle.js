@@ -56,6 +56,7 @@ import { bagSlots } from './game.bag.bridge.js';
       return identity.value.runId === settlement.runId;
     };
     if (!sameRun()) return false;
+
     if (settlement.promise) return settlement.promise;
     if (settlement.phase === 'done' || settlement.phase === 'chests') return;
     const retry = error => {
@@ -210,6 +211,7 @@ import { bagSlots } from './game.bag.bridge.js';
             const elapsedDelta = Math.max(0, (+game.elapsed || 0) - (+game.elapsedSynced || 0));
             const prepared = await battleSettlementCommands.createAttempt({
               slotId: settlement.slotId, node: settlement.node, afterRun, elapsedDelta,
+              victoryProgress: settlement.victoryProgress,
             });
             if (!sameRun()) return false;
             if (!prepared.ok) return retry(new Error(prepared.message || prepared.code));
@@ -222,7 +224,21 @@ import { bagSlots } from './game.bag.bridge.js';
           }
           const committed = await battleSettlementCommands.commitAttempt(settlement.attempt);
           if (!sameRun()) return false;
-          if (!committed.ok) return retry(new Error(committed.message || committed.code));
+          if (!committed.ok) {
+            if (settlement.victoryProgress) settlement.progressNeedsPublication = true;
+            return retry(new Error(committed.message || committed.code));
+          }
+          if (settlement.victoryProgress && !settlement.progressPublished &&
+              (!committed.replay || settlement.progressNeedsPublication)) {
+            settlement.progressPublished = true;
+            if (typeof SDT.Meta.publishBattleProgress === 'function') {
+              try {
+                SDT.Meta.publishBattleProgress(committed.receipt?.output?.progression?.levelUps || []);
+              } catch (error) {
+                console.error('[battle:progress] 战斗进度已保存，但升级/成就提示未完成', error);
+              }
+            }
+          }
           clearBattleSettlementPending(settlement.slotId, settlement.runId);
           game.elapsedSynced = settlement.elapsedCheckpoint;
           game.state = 'idle';
@@ -281,11 +297,20 @@ import { bagSlots } from './game.bag.bridge.js';
       game.bossKilled = true;
       UI.log('[[icon:exit]] 首脑已击破——第五层的<b>终局撤离点</b>已解锁，可无条件撤离', 'loot');
     }
-    // 击杀统计/经验：按击败的敌人数计（BOSS 逐个记名，供祭坛征服者成就）
+    // A slot-backed victory defers kill/XP progress into the recoverable Base+Run attempt.
+    // No-slot play retains the historical in-memory Meta path at this point in the flow.
     const foeNames = (opts.foeNames && opts.foeNames.length) ? opts.foeNames : [opts.name || '敌人'];
-    foeNames.forEach((n, i) => {
-      SDT.Meta.track('kill', { boss: !!opts.isBoss && i === 0, name: n, cls: game.myClass });
-    });
+    if (settlement.slotId && SDT.Base && SDT.Base.data) {
+      settlement.victoryProgress = {
+        foeNames: foeNames.slice(), isBoss: !!opts.isBoss, classId: game.myClass,
+        xpMultiplier: typeof SDT.Meta.xpMultiplier === 'function' ? SDT.Meta.xpMultiplier() : 1,
+      };
+    } else if (!settlement.progressRecorded) {
+      foeNames.forEach((name, index) => {
+        SDT.Meta.track('kill', { boss: !!opts.isBoss && index === 0, name, cls: game.myClass });
+      });
+      settlement.progressRecorded = true;
+    }
     // 事件奖励（如盗匪横行的中宝箱 ×2，开真宝箱）
     let eventChests = [];
     if (game.pendingEventLoot) {

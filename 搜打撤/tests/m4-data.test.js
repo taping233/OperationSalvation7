@@ -1,6 +1,6 @@
 /* M4 卡牌规则化数据迁移批 D6 锁定（2026-09-27）：cards.sync.m4.js ensureM4EquipRules。
  * B-M3 装备批派工 27 张，实迁 2 张（tt3-deep-diary / tt3-deep-seal，矩阵陷阱 T6 同草案同测）；
- * 跳过 25 张的逐卡原因见 docs/M4-D6-RESULT.md（本文件不为其立用例）。
+ * 跳过 25 张的逐卡原因见 docs/archive/card-migration-2026-09-27/M4-D6-RESULT.md（本文件不为其立用例）。
  * 每张迁的卡三条用例，锁定四件事：
  *   1) validateCardRules 通过；2) inspectCardRuleCapability supported；
  *   3) 回填函数对 canonical 卡生效（rules 与定义逐键一致、落库复读一致、marker 盖章）；

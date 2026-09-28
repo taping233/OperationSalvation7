@@ -1,5 +1,6 @@
 // @ts-check
 import { clone, fail, freezeDeep, validSlot } from './commands.shared.js';
+import { prepareBattleVictoryProgress } from './battle-victory-progress.js';
 
 /** @typedef {import('./battle-settlement.commands.types.js').BattleSettlementNode} BattleSettlementNode */
 /** @typedef {import('./battle-settlement.commands.types.js').BattleSettlementContext} BattleSettlementContext */
@@ -15,6 +16,7 @@ import { clone, fail, freezeDeep, validSlot } from './commands.shared.js';
 /** @typedef {import('./battle-settlement.commands.types.js').BattleSettlementReceiptLookup} BattleSettlementReceiptLookup */
 /** @typedef {import('./battle-settlement.commands.types.js').BattleSettlementAttemptResult} BattleSettlementAttemptResult */
 /** @typedef {import('./battle-settlement.commands.types.js').BattleSettlementCommitResult} BattleSettlementCommitResult */
+/** @typedef {import('./battle-settlement.commands.types.js').BattleVictoryProgressInput} BattleVictoryProgressInput */
 
 const COMMAND = 'battle.win';
 
@@ -145,7 +147,7 @@ export function createBattleSettlementCommands(options) {
     return prior;
   }
 
-  /** @param {{slotId:number,node:BattleSettlementNode,afterRun:BattleSettlementRunSnapshot,elapsedDelta:number}} input @returns {Promise<BattleSettlementAttemptResult>} */
+  /** @param {{slotId:number,node:BattleSettlementNode,afterRun:BattleSettlementRunSnapshot,elapsedDelta:number,victoryProgress?:BattleVictoryProgressInput}} input @returns {Promise<BattleSettlementAttemptResult>} */
   async function createAttempt(input) {
     const invalid = validateScope(input?.slotId, input?.node);
     if (invalid) return invalid;
@@ -196,12 +198,18 @@ export function createBattleSettlementCommands(options) {
       playSeconds: (Number.isFinite(oldSeconds) ? oldSeconds : 0) + elapsedDelta,
     };
     const eggBattles = (Number(baseSnapshot.eggBattles) || 0) + 1;
-    const afterBase = { ...baseSnapshot, stats: nextStats, eggBattles };
+    let afterBase = { ...baseSnapshot, stats: nextStats, eggBattles };
+    let progression;
+    if (input.victoryProgress) {
+      const result = prepareBattleVictoryProgress(afterBase, input.victoryProgress);
+      afterBase = result.afterBase;
+      progression = { levelUps: result.levelUps };
+    }
     const payload = payloadFor(node);
     /** @type {BattleSettlementAttempt} */
     const attempt = freezeDeep({
       context, command: COMMAND, runId: liveIdentity.value.runId, payload,
-      afterBase, afterRun: clone(snapshot), output: { eggBattles },
+      afterBase, afterRun: clone(snapshot), output: { eggBattles, ...(progression ? { progression } : {}) },
     });
     const finalIdentity = readIdentity(slotId);
     if (getActiveSlot() !== slotId || getBase().slot !== slotId) return fail('STALE_SLOT', '档位已切换，旧结算已取消');

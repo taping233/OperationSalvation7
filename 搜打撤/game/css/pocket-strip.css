@@ -6,7 +6,7 @@
  * 深青渐变底 / rgba(159,183,188,.26) 细边 / 2px 直角 / 左缘金标 / 金值 #ecd9ad / tabular-nums。
  * 位置：顶部居中、layerBanner 下方（top:76）。实页验证：底部被「下一步·路线」面板整幅
  * 占据（y≈765-900），状态条不可用；顶部居中在章节导航（左）与 resHud（右）之间为空位，
- * 横幅仅换层时瞬时出现属可接受遮挡。证据见 docs/zcode-dual-track-9h-20260927/art-evidence/。
+ * 横幅仅换层时瞬时出现属可接受遮挡。证据见 docs/archive/three-track-2026-09-27/art-evidence/。
  */
 
 #expPocketStrip {

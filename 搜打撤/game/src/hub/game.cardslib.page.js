@@ -246,7 +246,7 @@ function switchLibPage(page, all = libFiltered()) {
   libCardNodeById.get(target.id)?.scrollIntoView({ block: 'nearest' });
 }
 
-function setLibSelection(id, playSound = false) {
+function setLibSelection(id, playSound = false, refreshPreview = false) {
   const card = libCardById.get(id) || null;
   const selectionChanged = libSelectedId !== (card ? card.id : null);
   libSelectedId = card ? card.id : null;
@@ -263,7 +263,7 @@ function setLibSelection(id, playSound = false) {
   // 这里一次补挂数批可达数百 ms 且随收藏量增长）。翻看/键盘定位走 switchLibPage
   // 预挂目标页；网格后续补挂时 photoTileHTML 按 libSelectedId 自动带上选中态。
   const preview = document.getElementById('libPreview');
-  if (preview && selectionChanged) {
+  if (preview && (selectionChanged || refreshPreview)) {
     preview.innerHTML = libPreviewHTML(card);
     preview.classList.toggle('has-preview', !!card);
   }
@@ -336,7 +336,8 @@ function renderLibGrid() {
   }
   const active = document.getElementById('libActiveFilters');
   if (active) active.innerHTML = libActiveFiltersHTML();
-  setLibSelection(nextSelectedId);
+  // 筛选/排序可能改变当前卡在馆藏中的位置，即使选中 ID 不变也需刷新选片台导航状态。
+  setLibSelection(nextSelectedId, false, true);
   warmLibArt();
 }
 

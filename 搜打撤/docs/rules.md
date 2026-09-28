@@ -1,6 +1,6 @@
 # 现行游戏规则（v0.60.0）
 
-本文是玩家规则的唯一文档真源；跨模块数值的代码真源为 `src/rules.js`，地图几何由 `src/map-generator.js` 按种子生成（静态表在 `src/mapData.js`），卡牌数据在 `src/cards.js`。
+本文是玩家规则的唯一文档真源；跨模块数值的代码真源为 `game/src/core/rules.js`，地图几何由 `game/src/run/map-generator.js` 按种子生成（静态表在 `game/src/core/mapData.js`），卡牌数据在 `game/src/cards/cards.js`。路径均相对项目根目录。
 
 ## 1. 对局与地图
 

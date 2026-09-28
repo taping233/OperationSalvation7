@@ -1,5 +1,5 @@
 /* M3 卡牌规则化数据迁移批 D5 锁定（2026-09-27）：cards.sync.m3.js ensureM3OnplayRules。
- * B-M2 onPlay 扩展批 24 张（派单 33 张扣 9 跳过，跳过清单见 docs/M3-D5-RESULT.md）。
+ * B-M2 onPlay 扩展批 24 张（派单 33 张扣 9 跳过，跳过清单见 docs/archive/card-migration-2026-09-27/M3-D5-RESULT.md）。
  * 每张迁的卡三条用例，锁定三件事：
  *   1) validateCardRules 通过且 inspectCardRuleCapability supported（双门）；
  *   2) 回填函数对 canonical 卡生效（rules 与定义逐键一致、卡面不动、落库复读一致、marker 盖章）；

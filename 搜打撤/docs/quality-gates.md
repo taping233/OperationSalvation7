@@ -17,7 +17,7 @@ npm run build
 
 `npm test` 会按文件串行运行 Vitest，并使用 dot reporter。现有 `pretest` 生命周期保持不变，会先编译剧情并校验数据；`npm run build` 同样保留现有 `prebuild` 数据/剧情检查和 `postbuild` 性能预算检查。
 
-在可构建的干净工作区，可用 `npm run check:quality` 按语法、数据、类型、lint、测试、构建顺序执行完整本地质量门。该组合入口会运行测试和构建各自已有的生命周期钩子。工作区有其他会话半成品时，不运行包含 build 的组合入口，分别执行必要检查。`npm run typecheck` 汇总七个配置；selection 配置只检查战斗选牌工厂新增外部端口的 JSDoc 调用契约及正反编译 fixture；hand-selection 配置严格检查纯选牌/发现候选规则实现和状态/调用契约 fixture，不代表 runtime 状态接线、selection-flow、exec-play、view 或整个战斗域已严格检查。CI 在全量测试前执行语法、数据、类型和 lint 检查，提交钩子仍负责全量测试。
+在可构建的干净工作区，可用 `npm run check:quality` 按语法、数据、类型、lint、测试、构建顺序执行完整本地质量门。该组合入口会运行测试和构建各自已有的生命周期钩子。工作区有其他会话半成品时，不运行包含 build 的组合入口，分别执行必要检查。`npm run typecheck` 汇总七个配置；selection 配置只检查战斗选牌工厂新增外部端口的 JSDoc 调用契约及正反编译 fixture；hand-selection 配置严格检查纯手牌选牌规则、发现候选与状态 builder、独立发现流程实现及其类型 fixture。旧 `battle.selection-flow` 其余交互状态与 runtime/engine 接线不因此自动纳入严格覆盖，也不代表整个战斗域已严格检查。CI 在全量测试前执行语法、数据、类型和 lint 检查，提交钩子仍负责全量测试。
 
 ## 卡牌图鉴生成
 

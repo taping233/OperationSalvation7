@@ -2,7 +2,7 @@
  * effect-steps.m2.js —— M 批契约扩展执行件第二批（M2，2026-09-27）
  *
  * 承接结构化 onPlay 的块1新语义，注册点在 battle.resolution.js 结构化 op
- * 循环（schema/capability 已同步放行，规则口径见 docs/M-BATCH-CONTRACT-SPEC.md）：
+ * 循环（schema/capability 已同步放行，规则口径见 docs/cards/M-BATCH-CONTRACT-SPEC-2026-09-27.md）：
  *
  *   stealAtk / noDrawNext / extraTurn / execute / summon / registerRule 扩键
  *   damage.onKill 击杀奖励 / curse.source handMoves / armor.consumeEquip

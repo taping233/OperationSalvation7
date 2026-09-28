@@ -1,6 +1,6 @@
 # 音频系统说明
 
-`game/src/sound.js` 是 Vite 版音频入口，公开 `SDT.Sound` 接口：`sfx(name[, opts])` 播放短音效，`music(mode)` 切换标题、探索和战斗音乐，音量及静音设置独立控制。首次输入解锁 AudioContext 并启动音乐。
+`game/src/audio/sound.js` 是 Vite 版音频入口，公开 `SDT.Sound` 接口：`sfx(name[, opts])` 播放短音效，`music(mode)` 切换标题、探索和战斗音乐，音量及静音设置独立控制。首次输入解锁 AudioContext 并启动音乐。
 
 原有曲目按模式使用独立 Howl 实例。场景或曲目切换时，旧曲保持可闻并淡出 280ms，新曲淡入 420ms；淡出回调带曲目代次校验，防止快速切换时旧回调暂停当前曲。设置中关闭音乐和页面隐藏立即静音/暂停。音乐音量滑条同步当前曲目，包含战斗曲；战斗 ducking 将音乐降至目标音量的 45%。
 

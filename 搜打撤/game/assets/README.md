@@ -1,14 +1,7 @@
-# 素材目录（预留）
+# Vite 游戏素材目录
 
-当前 v0.1 渲染全部由代码程序化绘制，无需外部素材（保证离线双击即可运行）。
+本目录存放 Vite 版游戏的图片、字体和音频。是否在当前运行时被引用，应核对 `game/data/art-mapping.json`、`game/src/` 的加载路径与 `game/assets/asset-manifest.json`；仅凭文件存在或清单条目不能判断素材可删。
 
-## M3 计划接入的免费素材（CC0 公有领域，可商用）
+可编辑原稿与生成过程放在 `game/art-source/`；人物定稿时点的参考快照放在 `docs/character-bible/ref-images/`；设计比较图、历史截图和验收证据放在 `docs/previews/`、`docs/evidence/` 等目录。它们与本目录的运行素材用途不同。以上路径均相对项目根目录。
 
-- [Kenney Roguelike / Modern Interior 系列](https://kenney.nl/assets) — 俯视角瓦片、家具、宝箱、角色
-- [Micro Roguelike 8×8（itch.io）](https://kenney-assets.itch.io/micro-roguelike)
-- [社区扩展 Mini Roguelike（OpenGameArt）](https://opengameart.org/content/mini-roguelike-8x8-tiles)
-
-接入方式：把瓦片图集放入本目录，将 `renderer.js` 中的程序化绘制替换为 `drawImage` 即可；
-地图数据（`mapData.js` 的 ASCII 网格 + 实体层）无需改动。
-
-注意：Kenney 图集瓦片之间常有 1px 间距，导入 Tiled/引擎时需正确配置 spacing/margin。
+新素材应记录来源与授权；已有字体、音效和卡图的来源说明分别见本目录下的 `fonts/`、`sfx/` 和 `cards/items/`。替换或删除素材前，先检查实际引用、来源记录及对应的视觉回归。

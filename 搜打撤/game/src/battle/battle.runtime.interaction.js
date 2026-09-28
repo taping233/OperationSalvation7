@@ -1,6 +1,12 @@
 /* 玩家抉择、选牌与弹层的瞬时状态。由 battle.runtime.js 转发活绑定。 */
 /** @typedef {import('./battle.hand-selection.js').HandSelectionState} HandSelectionState */
-export let infusing = null, discovering = null, discoverQueue = [];
+/** @typedef {import('./battle.discover-state.js').DiscoveringState} DiscoveringState */
+/** @typedef {import('./battle.discover-state.js').DiscoverQueueJob} DiscoverQueueJob */
+export let infusing = null;
+/** @type {DiscoveringState} */
+export let discovering = null;
+/** @type {DiscoverQueueJob[]} */
+export let discoverQueue = [];
 /** @type {HandSelectionState} */
 export let handSelecting = null;
 export let choosing = null;
@@ -12,7 +18,9 @@ export let viewingBag = false;
 export let selPool = [], selShaN = 0, sel = new Set(), lastDeckSel = [], selectingDeck = false, selDeckMax = 15;
 
 export function set$infusing(v) { infusing = v; }
+/** @param {DiscoveringState} v */
 export function set$discovering(v) { discovering = v; }
+/** @param {DiscoverQueueJob[]} v */
 export function set$discoverQueue(v) { discoverQueue = v; }
 /** @param {HandSelectionState} v */
 export function set$handSelecting(v) { handSelecting = v; }

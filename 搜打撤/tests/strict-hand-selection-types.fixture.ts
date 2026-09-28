@@ -2,6 +2,8 @@ import { isHandPaymentCandidate, matchesHandSelectKey } from '../game/src/battle
 import type { HandSelectionState } from '../game/src/battle/battle.hand-selection.js';
 import { buildDiscoverPool, pickRandomDiscoverCandidate } from '../game/src/battle/battle.discover-candidates.js';
 import type { DiscoverCandidateCard } from '../game/src/battle/battle.discover-candidates.js';
+import { buildExplicitDiscoverState, buildPouchDiscoverState, buildRandomDiscoverState } from '../game/src/battle/battle.discover-state.js';
+import type { DiscoveringState, ExplicitDiscoverQueueJob } from '../game/src/battle/battle.discover-state.js';
 
 const paymentState: HandSelectionState = {
   act: 'payment',
@@ -68,3 +70,27 @@ buildDiscoverPool(discoverCatalog, { myClass: 'class-b', isRandomObtainable: (_c
 pickRandomDiscoverCandidate(discoverPool, () => '0.5');
 // @ts-expect-error `otherCls` is a boolean enable flag, not a class-name selector.
 buildDiscoverPool(discoverCatalog, { myClass: 'class-b', otherCls: 'class-a', isRandomObtainable: () => true });
+
+const explicitJob: ExplicitDiscoverQueueJob = {
+  n: 2,
+  explicit: discoverCatalog,
+  explicitUids: ['deck-a', 'deck-b'],
+  deckBottom: true,
+  tempUids: ['temp-ref'],
+  swapPair: ['swap-ref'],
+};
+const explicitState = buildExplicitDiscoverState(explicitJob);
+const explicitDeckUids: string[] = explicitState.deckBottomUids;
+const queuedState: DiscoveringState = explicitState;
+const randomState = buildRandomDiscoverState({ n: 2 }, discoverCatalog);
+const randomStateOptions: DiscoverCandidateCard[] = randomState.options;
+const pouchState = buildPouchDiscoverState(discoverCatalog, 'pouch-uid');
+const pouchAct: 'pouch' = pouchState.act;
+void explicitDeckUids;
+void queuedState;
+void randomStateOptions;
+void pouchAct;
+// @ts-expect-error Explicit discovery state requires its UID array, even when empty.
+const invalidExplicitState: import('../game/src/battle/battle.discover-state.js').ExplicitDiscoverState = { ...randomState, deckBottom: true };
+// @ts-expect-error Explicit candidates must be card records, not UIDs.
+buildExplicitDiscoverState({ n: 1, explicit: ['card-uid'] });

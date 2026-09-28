@@ -725,7 +725,7 @@ describe('A3 第二批（B5 诅咒族）：结构化 onPlay curse op', () => {
 });
 
 /* —— A3 第三批（G3 acquire 族，2026-09-25）：结构化 onPlay acquire/coins op ——
- * 语义真源 docs/card-rules-v2-taxonomy-2026-09-25.md §3「卡牌获取与牌库」25 张效果一句话 + G3 行。
+ * 语义真源 docs/cards/card-rules-v2-taxonomy-2026-09-25.md §3「卡牌获取与牌库」25 张效果一句话 + G3 行。
  * 池谓词复用 parsePoolNoun 语义（B6 定版）；dest 三向 hand|deck|discover（BOSS/普通战双口径：
  * 普通战无牌库 dest:'deck' 降级为直接获得，deckDraw/grantSha 先例口径）。 */
 describe('A3 第三批（G3 acquire 族）：结构化 onPlay acquire/coins op', () => {

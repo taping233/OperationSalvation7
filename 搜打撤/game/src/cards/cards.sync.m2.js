@@ -29,7 +29,7 @@
  *   tt3-toxin         1 层中毒，抽 1 → curse poison stacks:1 + draw amount:1；
  *   tt7-silence       沉默 1 回合，抽 1 → curse silence duration:1 + draw amount:1。
  *
- * 跳过 10 张（逐条原因见 docs/M2-D3-RESULT.md，此处仅摘要）：
+ * 跳过 10 张（逐条原因见 docs/archive/card-migration-2026-09-27/M2-D3-RESULT.md，此处仅摘要）：
  *   tt3-fatal-pierce（破甲在宿主受流血门条件生效，curse op 无 cond 键，迁后行为偏差）、
  *   tt7-ghostblade（cond.foeStatus 值域限七诅咒键，'stealth' 被 schema 拒——敌侧键
  *   status.stealth 已核实存在，卡在 schema 值域白名单，T5）、

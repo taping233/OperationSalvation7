@@ -3,7 +3,7 @@
  *
  * 承接结构化 onPlay 的三个 M 批新语义，注册点在 battle.resolution.js 的
  * 结构化 op 循环（schema/capability 已同步放行，规则数据口径见
- * docs/M-BATCH-CONTRACT-SPEC.md）：
+ * docs/cards/M-BATCH-CONTRACT-SPEC-2026-09-27.md）：
  *
  *   cleanse            净化（清除自身全部诅咒，combat.purify 与文本路径同源）
  *   draw.untilHandN    抽牌直到手牌达到 N 张（法力补给式）

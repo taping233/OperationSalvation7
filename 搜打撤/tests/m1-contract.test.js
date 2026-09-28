@@ -1,5 +1,5 @@
 // M1 契约扩展验收（2026-09-27 代理E）：新 op / 新字段 / 混合目标契约的能力门与实战结算。
-// 规格：docs/M-BATCH-CONTRACT-SPEC.md；实现：card-rules.schema.js、card-rules.capability.js、
+// 规格：docs/cards/M-BATCH-CONTRACT-SPEC-2026-09-27.md；实现：card-rules.schema.js、card-rules.capability.js、
 // battle.resolution.js 注册点 + effect-steps.m1.js 执行件。
 import { afterEach, beforeAll, describe, expect, it } from 'vitest';
 import { validateCardRules } from '../game/src/cards/card-rules.schema.js';

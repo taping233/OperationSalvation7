@@ -15,7 +15,7 @@
  *   tt3-deep-seal   深海印记「诅咒状态下，攻 +2，法伤 +2」→ 同款 rules（矩阵陷阱 T6：两卡
  *                   同草案同测，防漂移）。文本正则旧读法本就正确，迁移前后数值一致。
  *
- * 跳过 25 张（逐卡原因见 docs/M4-D6-RESULT.md，此处按缺口归组摘要）：
+ * 跳过 25 张（逐卡原因见 docs/archive/card-migration-2026-09-27/M4-D6-RESULT.md，此处按缺口归组摘要）：
  *   穿戴/光环双算 4 张（tt3-longsword / tt3-staff / tt3-grass-armor / tt3-silver-runesword /
  *   tt8-archdemon）——rules.equip 消费不抑制文本：hasStructuredOnPlay 只认 triggers.onPlay
  *   （battle.resolution.js），desc immediate 句（+1 攻 / 法伤+1 / 获得5点护甲 / 获得3张重斩…）

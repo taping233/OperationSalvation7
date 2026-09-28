@@ -5,7 +5,7 @@
   - schema 放行的 onPlay op 全集：damage / armor / heal / draw / status(仅 freeze+allEnemies) / discover / curse / acquire / blessing / energy / energyCap / maxHp / deckCap / coins（`game/src/cards/card-rules.schema.js:482-483,510-511`）；pending 键位已设计、解释器遇之 throw：execute / summon / transform / registerRule / extraTurn（`card-rules.schema.js:51-66`）。装备域 equip 全 pending（`card-rules.schema.js:71-76`），capability 对 rules.equip 一票否决（`game/src/cards/card-rules.capability.js:78-80`）。
   - 解释器已消费（HEAD `battle.resolution.js`）：curse double/burst/extend（:78,167-193）、damage lifesteal（:523）、recast on:'kill'（:532-536）、acquire/coins/blessing/energy/energyCap/maxHp/deckCap（:699-740）、heal perFuelCost（:797）、cond 四键 foeHpBelow/foeHpHalf/foeStatus/foeFullHp（:57-62）。
   - **HEAD 尚未消费**（capability 同步拒绝）：cleanse、draw.untilHandN、draw.handOps（HEAD `battle.resolution.js:809` 守卫拦截；`card-rules.capability.js:100-102` 拒绝）、damage.graveyard/schedule（`capability.js:100-102`）。**注意：工作区存在并行未提交 M1 扩展**（`battle.resolution.js` +43/-11，新增 `effect-steps.m1.js`）已接线 cleanse/untilHandN/handOps（工作区 `battle.resolution.js:7,723,833-839`）——本矩阵按 HEAD 口径将其计为「并行M1(在途)」，与「规格新增」区分。
-- 依赖契约取值：`现有能力` / `规格新增:<语义>`（等 `docs/M-BATCH-CONTRACT-SPEC.md`）/ `并行M1(在途)` / `混合实现`（schema+宿主命名分支）。
+- 依赖契约取值：`现有能力` / `规格新增:<语义>`（见 `docs/cards/M-BATCH-CONTRACT-SPEC-2026-09-27.md`）/ `并行M1(在途)` / `混合实现`（schema+宿主命名分支）。
 - 批次：B-M1 现集 / B-M2 onPlay 扩展 / B-M3 装备与trigger / B-M4 延迟持续形态 / B-M5 大招与大机制 / B-M6 bag道具。
 - 复杂度：S 纯数据 / M 需新 op 或参数 / L 需新 trigger/lifecycle / XL 混合实现或大机制。
 

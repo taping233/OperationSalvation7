@@ -1,12 +1,9 @@
 import { DATA } from '../core/data-loader.js';
 import { characterFor, characterName, migrateCharacterProgress } from '../core/characters.js';
 import { Random } from '../core/random.js';
+import { LEVEL_MAX, addXpToProgress, applyXpGain, xpForNext } from './meta-progression.js';
 
   const SDT = window.SDT;
-
-  const LEVEL_MAX = 10;
-  // 2026-09-09 需求 #5：升级速度随等级变慢（约 10 次通关满级），每级 +1 生命上限
-  const xpForNext = (lv) => 50 + (Math.max(1, lv) - 1) * 40;   // 升到 lv+1 所需经验
 
   const B = () => SDT.Base;
   // 职业熟练度迁移（2026-09-05 职业整合定版）：旧职业的熟练度并入新职业——
@@ -30,22 +27,6 @@ import { Random } from '../core/random.js';
   // 职业加成文本（出征时生效）：每级 +1 生命上限（2026-09-09 需求 #5）
   const perkText = (lv) => `生命上限 +${Math.max(0, (lv - 1) * 1)}`;
 
-  // M02 事务门面使用的纯规则：只改调用方提供的 draft，不保存、不播音效、不写 UI。
-  // 保持与 addXP 完全相同的等级上限和逐级扣经验口径。
-  function addXpToProgress(progress, amount) {
-    const before = { lv: Math.max(1, Number(progress && progress.lv) || 1), xp: Math.max(0, Number(progress && progress.xp) || 0) };
-    const after = { ...before };
-    const gain = Math.max(0, Number(amount) || 0);
-    if (after.lv < LEVEL_MAX && gain > 0) {
-      after.xp += gain;
-      while (after.lv < LEVEL_MAX && after.xp >= xpForNext(after.lv)) {
-        after.xp -= xpForNext(after.lv);
-        after.lv++;
-      }
-    }
-    return Object.freeze({ before: Object.freeze(before), after: Object.freeze(after), levelsGained: after.lv - before.lv });
-  }
-
   const collectionXpFor = card => card && card.type === '能力卡' ? 50 : 10;
 
   // 增加经验并处理升级；返回升级次数
@@ -53,17 +34,18 @@ import { Random } from '../core/random.js';
     if (!cls || amount <= 0) return 0;
     const d = clsData(cls);
     if (d.lv >= LEVEL_MAX) return 0;
-    d.xp += amount;
-    let ups = 0;
-    while (d.lv < LEVEL_MAX && d.xp >= xpForNext(d.lv)) {
-      d.xp -= xpForNext(d.lv);
-      d.lv++; ups++;
+    const gained = applyXpGain(d, amount);
+    gained.checkpoints.forEach(checkpoint => {
+      d.lv = checkpoint.lv;
+      d.xp = checkpoint.xp;
       B().save();
       if (SDT.Sound) SDT.Sound.sfx('levelup');
-      if (SDT.UI) SDT.UI.log(`[[icon:medal]] <b>${characterName(cls)}</b> 熟练度提升！现在是 <b>Lv.${d.lv}</b>（出征 ${perkText(d.lv)}）`, 'ok');
-    }
+      if (SDT.UI) SDT.UI.log(`[[icon:medal]] <b>${characterName(cls)}</b> 熟练度提升！现在是 <b>Lv.${checkpoint.lv}</b>（出征 ${perkText(checkpoint.lv)}）`, 'ok');
+    });
+    d.lv = gained.after.lv;
+    d.xp = gained.after.xp;
     B().save();
-    return ups;
+    return gained.levelsGained;
   }
 
   // ---------- 成就定义 ----------
@@ -298,6 +280,18 @@ import { Random } from '../core/random.js';
     return fresh;
   }
 
+  // A battle attempt has already committed XP and kill counts before presentation is published.
+  // Replayed receipts do not call this API, so these effects never grant progression themselves.
+  function publishBattleProgress(levelUps) {
+    (Array.isArray(levelUps) ? levelUps : []).forEach(entry => {
+      (Array.isArray(entry?.levels) ? entry.levels : []).forEach(level => {
+        if (SDT.Sound) SDT.Sound.sfx('levelup');
+        if (SDT.UI) SDT.UI.log(`[[icon:medal]] <b>${characterName(entry.classId)}</b> 熟练度提升！现在是 <b>Lv.${level}</b>（出征 ${perkText(level)}）`, 'ok');
+      });
+    });
+    checkUnlocks();
+  }
+
   // ---------- 事件埋点（经验计入本局所选职业 d.cls） ----------
   // type: kill / extract / death / action / stash
   function track(type, d) {
@@ -359,7 +353,7 @@ import { Random } from '../core/random.js';
     addXpToProgress, collectionXpFor,
     classList, classLv, classXP, addXP, classSummary,
     ACHIEVEMENTS, achById, isUnlocked, isClaimed, pendingAch, claim, checkUnlocks, syncBackUnlocks,
-    track, setXpMul,
+    track, setXpMul, xpMultiplier: xpMul, publishBattleProgress,
     // —— 职业收藏室（2026-09-09）——
     isCollectible, collectPool, collTotal, collProgress,
     COLL_MILESTONES, collMsById, collMsNeed, collMsReached, collRewardText,

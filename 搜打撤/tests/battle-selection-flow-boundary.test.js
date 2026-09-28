@@ -152,6 +152,26 @@ describe('battle selection flow ports', () => {
     expect(random01).not.toHaveBeenCalled();
   });
 
+  it('reads the current queue after runtime replaces it during a reset', () => {
+    const catalog = [
+      { id: 'replacement-1', name: '新局甲', type: '法术' },
+      { id: 'replacement-2', name: '新局乙', type: '法术' },
+      { id: 'replacement-3', name: '新局丙', type: '法术' },
+    ];
+    const flow = createFlow({
+      cards: { all: () => catalog, isRandomObtainable: () => true, sellPrice: () => 0 },
+      random01: vi.fn().mockReturnValueOnce(0.1).mockReturnValueOnce(0.5).mockReturnValueOnce(0.9),
+    });
+    const replacementQueue = [{ n: 1 }];
+    set$G({ myClass: '射击', log: vi.fn() });
+    set$discoverQueue(replacementQueue);
+
+    flow.processDiscoverQueue();
+
+    expect(discovering.options).toEqual(catalog);
+    expect(replacementQueue).toHaveLength(0);
+  });
+
   it('uses the injected deny port when a mandatory hand selection cannot be skipped', () => {
     const deny = vi.fn();
     const flow = createFlow({

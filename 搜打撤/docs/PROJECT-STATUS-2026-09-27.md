@@ -29,7 +29,7 @@
 
 ## 3. 未提交的 UI / 美术 / 体验大修
 
-主要证据：[大修终报](../../.ui-loop-0926/FINAL-REPORT.md)、[任务书](ui-experience-overhaul-brief-2026-09-26.md)及对应截图/议题记录。
+主要证据：[大修终报](../../.ui-loop-0926/FINAL-REPORT.md)、[任务书](archive/experience-2026-09-26/ui-experience-overhaul-brief-2026-09-26.md)及对应截图/议题记录。
 
 - 终报统计为 **47 项总计：39 closed、7 open 移交、1 gameplay 待定**。旧交接开头的“闭环 47 单”容易误读，本快照采用终报明细，不能写“47 项全部修复”。
 - 玩家可见改动包括局末熟练度成长与顶栏 XP、战斗击败反馈、闸门方位与定位、返回件和术语统一、金色 token 等值替换、启动误报处理、徽记等素材接入。
@@ -58,9 +58,9 @@
 | --- | --- |
 | 当前约束 | 根目录 `AGENTS.md`、用户最新指令 |
 | 当前状态 | 本快照 + 实时 `git status --short` / `git log -1` |
-| 历史提交与验收边界 | [原交接记录](NEXT-AI-HANDOFF-2026-09-20.md)，按时间和主题核对 |
+| 历史提交与验收边界 | [原交接记录](archive/handoffs/2026-09-20-to-27-vite-log.md)，按时间和主题核对 |
 | 模块边界 | [architecture.md](architecture.md)、`game/src/README.md`、`scripts/architecture-graph.mjs` |
-| 卡牌迁移 | [schema v2 规格](card-rules-v2-taxonomy-2026-09-25.md)、`cards.sync.js` 与解释器守卫 |
+| 卡牌迁移 | [schema v2 规格](cards/card-rules-v2-taxonomy-2026-09-25.md)、`cards.sync.js` 与解释器守卫 |
 | UI 大修 | `.ui-loop-0926/FINAL-REPORT.md`、议题单与 `SHOTS/w7/`；旧 STATE 进度表滞后 |
 | Agent | 接口协议、迭代手册、同轮输出数据；不得拿历史统计替代当前配对 |
 

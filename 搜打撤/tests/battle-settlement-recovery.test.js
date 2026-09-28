@@ -70,6 +70,7 @@ async function prepare(env, options = {}) {
   const afterRun = options.afterRun || makeAfterRun(env.RunStorage);
   const result = await env.commands.createAttempt({
     slotId, node: options.node || { ...node }, afterRun, elapsedDelta: options.elapsedDelta ?? 3,
+    ...(options.victoryProgress ? { victoryProgress: options.victoryProgress } : {}),
   });
   expect(result.ok).toBe(true);
   if (!result.ok || result.replay) throw new Error(`attempt preparation failed: ${result.code || 'receipt replay'}`);
@@ -158,6 +159,38 @@ describe('真实 Base/RunStorage 胜利结算恢复事务', () => {
       expect(await restored.commands.commitAttempt(attempt)).toMatchObject({ ok: true, replay: true });
       expect(rawSnapshot()).toEqual(receiptBeforeReplay);
       expect(restored.Base.data.eggBattles).toBe(1);
+    },
+  );
+
+  it.each(['after-journal', 'after-base', 'after-run', 'before-cleanup'])(
+    '胜利统计与多级XP在 %s 恢复后只提交一次', async phase => {
+      const env = await loadCommands({ failpoint: point => { if (point === phase) throw new Error(`cut:${phase}`); } });
+      env.Base.data.stats.kills = 0;
+      env.Base.data.stats.bossKills = [];
+      env.Base.data.characters.wu = { lv: 1, xp: 0 };
+      expect(env.Base.save()).toBe(true);
+      const progressInput = {
+        foeNames: ['首脑', '随行敌人', '随行敌人'], isBoss: true, classId: 'wu', xpMultiplier: 5,
+      };
+      const { attempt } = await prepare(env, { victoryProgress: progressInput });
+      expect(attempt.afterBase.stats).toMatchObject({ kills: 3, bossKills: ['首脑'] });
+      expect(attempt.afterBase.characters.wu).toEqual({ lv: 3, xp: 120 });
+      expect(env.Base.data.stats.kills).toBe(0);
+      expect(env.Base.data.characters.wu).toEqual({ lv: 1, xp: 0 });
+
+      expect(await env.commands.commitAttempt(attempt)).toMatchObject({ ok: false, code: 'SAVE_FAILED_PENDING_RECOVERY' });
+      expect(env.Base.data.stats.kills).toBe(0);
+      expect(env.Base.data.characters.wu).toEqual({ lv: 1, xp: 0 });
+      const restored = await resetAndReload();
+      expect((await restored.recovery.recoverSlot(slotId)).ok).toBe(true);
+      expect(restored.Base.data.stats).toMatchObject({ kills: 3, bossKills: ['首脑'] });
+      expect(restored.Base.data.characters.wu).toEqual({ lv: 3, xp: 120 });
+
+      const persisted = rawSnapshot();
+      expect(await restored.commands.commitAttempt(attempt)).toMatchObject({ ok: true, replay: true });
+      expect(rawSnapshot()).toEqual(persisted);
+      expect(restored.Base.data.stats.kills).toBe(3);
+      expect(restored.Base.data.characters.wu).toEqual({ lv: 3, xp: 120 });
     },
   );
 
@@ -307,6 +340,10 @@ describe('真实 Base/RunStorage 胜利结算恢复事务', () => {
     priorLocks = Object.getOwnPropertyDescriptor(navigator, 'locks');
     Object.defineProperty(navigator, 'locks', { configurable: true, value: locks });
     const env = await loadCommands({ initialize: true });
+    env.Base.data.characters.wu = { lv: 1, xp: 0 };
+    expect(env.Base.save()).toBe(true);
+    const killsBefore = env.Base.data.stats.kills;
+    const bossKillsBefore = [...env.Base.data.stats.bossKills];
     settleHarness.game = {
       state: 'idle', runActive: true, nestActive: false, seed: 'battle-run-seed',
       layerIdx: 0, trackPos: 1, ownedCards: [], visited: {}, discoveredPairs: new Set(),
@@ -353,7 +390,7 @@ describe('真实 Base/RunStorage 胜利结算恢复事务', () => {
       all: () => [{ id: 'legendary', name: '传说奖励', rarity: '传说' }],
       isRandomObtainable: () => true,
     };
-    window.SDT.Meta = { track: vi.fn() };
+    window.SDT.Meta = { track: vi.fn(), xpMultiplier: () => 1, publishBattleProgress: vi.fn() };
     window.SDT.Chests = {
       rollDrops: vi.fn(() => [{ kind: 'boss' }]), dropText: () => '首脑宝箱',
       open: vi.fn((_game, _drops, done) => { settleHarness.chestDone = done; }),
@@ -361,7 +398,7 @@ describe('真实 Base/RunStorage 胜利结算恢复事务', () => {
 
     const { bindBagMixins } = await import('../game/src/hub/game.bag.settle.js');
     bindBagMixins();
-    const opts = { isBoss: true, foeNames: ['首脑'] };
+    const opts = { isBoss: true, foeNames: ['首脑', '随行敌人'] };
     await settleHarness.game.onBattleEnd(opts, [], true, []);
     expect(settleHarness.chestDone).toBeTypeOf('function');
 
@@ -370,12 +407,23 @@ describe('真实 Base/RunStorage 胜利结算恢复事务', () => {
     failRunWrite.mockRestore();
     expect(env.RunStorage.readIdentity(slotId)).toMatchObject({ ok: false, code: 'RECOVERY_REQUIRED' });
     expect(JSON.parse(localStorage.getItem(baseKey)).eggBattles).toBe(1);
+    expect(env.Base.data.stats.kills).toBe(killsBefore);
+    expect(env.Base.data.stats.bossKills).toEqual(bossKillsBefore);
+    expect(env.Base.data.characters.wu).toEqual({ lv: 1, xp: 0 });
+    expect(window.SDT.Meta.track).not.toHaveBeenCalled();
+    expect(window.SDT.Meta.publishBattleProgress).not.toHaveBeenCalled();
     expect(JSON.parse(localStorage.getItem(runKey)).visited['0,1']).toBeUndefined();
 
     expect(await settleHarness.actions.battleSettleRetry()).toBe(true);
     expect(env.RunStorage.readIdentity(slotId).ok).toBe(true);
     expect(env.RunStorage.read(slotId)).toMatchObject({ visited: { '0,1': 1 }, ownedCards: [{ uid: 'boss-reward', card: { id: 'legendary' } }], rngState: { loot: 13, map: 41 } });
     expect(env.Base.data.eggBattles).toBe(1);
+    expect(env.Base.data.stats.kills).toBe(killsBefore + 2);
+    expect(env.Base.data.stats.bossKills).toEqual([...bossKillsBefore, '首脑']);
+    expect(env.Base.data.characters.wu).toEqual({ lv: 1, xp: 46 });
+    expect(window.SDT.Meta.track).not.toHaveBeenCalled();
+    expect(window.SDT.Meta.publishBattleProgress).toHaveBeenCalledTimes(1);
+    expect(window.SDT.Meta.publishBattleProgress).toHaveBeenCalledWith([]);
     expect(settleHarness.game.grantCard).toHaveBeenCalledTimes(1);
     expect(settleHarness.randomCalls).toBe(1);
     expect(settleHarness.payload).toHaveBeenCalledTimes(1);

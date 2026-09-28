@@ -13,15 +13,26 @@
  * ============================================================ */
 import { Random } from '../core/random.js';
 import { esc } from '../core/shared.js';
-import { MAP, game, clearSave, saveGame, syncPlayTime, exitToTitle } from './game.session.js';
+import { MAP, game, clearSave, saveGame, syncPlayTime, exitToTitle, getActiveSlot } from './game.session.js';
 import { UI } from '../ui/ui.js';
 import SDT, { sdtDefine } from '../core/sdt-facade.js';
+import { RunStorage } from '../hub/game.storage.js';
+import { commitBaseAndRun, readSettlementReceipt, recoverSlot } from '../hub/recovery.commands.js';
+import { createNestSettlementCommands } from '../hub/nest-settlement.commands.js';
 import { startBattle } from '../battle/battle-loader.js';
 import { rollRune, rollAttribute, RUNE_KINDS } from '../battle/runes.js';
 import { on as busOn } from '../core/event-bus.js';
 import { playLabEnding } from './lab.ending.js';
 
 const B = () => SDT.Base;
+const nestSettlementCommands = createNestSettlementCommands({
+  getActiveSlot,
+  getBase: () => SDT.Base,
+  getRunStorage: () => RunStorage,
+  getRecovery: () => ({ recoverSlot, readSettlementReceipt, commitBaseAndRun }),
+});
+let nestExtractInFlight = null;
+let pendingNestExtract = null;
 
 /* —— 直线 12 格（Item 17 同款定版思路：格子序列即地图）—— */
 const NEST_MAP = [
@@ -494,24 +505,129 @@ function computeLabScore(spentRunes) {
     total: killPts + bossPts + hpPts + cardPts + runePts + coinPts };
 }
 
+function sameNestExtractionView(pending) {
+  if (!pending || !game.nestActive || game.seed !== pending.seed || game.nestRunes !== pending.runesRef) return false;
+  if (getActiveSlot() !== pending.slotId) return false;
+  if (pending.slotId == null) return true;
+  const identity = RunStorage.readIdentity(pending.slotId);
+  // The committed afterRun:null intentionally removes this identity. A different live run means
+  // this async result belongs to an old view and must not clear or cover the new one.
+  return identity.ok ? identity.value.runId === pending.runId
+    : identity.code === 'INVALID_STATE' || identity.code === 'RECOVERY_REQUIRED';
+}
+
+function showNestExtractRetry(pending, message) {
+  if (!sameNestExtractionView(pending)) return;
+  game.state = 'modal';
+  UI.showOverlay('[[icon:cross]] 研究所撤离尚未保存', `
+    <p class="ov-note">符文与结算记录仍留在本次研究所进度中。存档未确认前不会清除对局；修复存储问题后可重试。</p>
+    <p class="ov-stats">${esc(message || '保存暂不可用')}</p>
+    <div class="ov-btns"><button class="ov-btn ok" data-act="nestExtractRetry">重试保存并撤离</button></div>`, true);
+  UI.act('nestExtractRetry', () => doNestExtract());
+  UI.refresh(game);
+}
+
+function captureNestExtraction() {
+  const slotId = getActiveSlot();
+  let runId = null;
+  if (slotId != null) {
+    const identity = RunStorage.readIdentity(slotId);
+    if (!identity.ok) return { ok: false, message: identity.message || '无法读取研究所进度身份' };
+    runId = identity.value.runId;
+  }
+  const elapsedNow = Math.max(0, Number(game.elapsed) || 0);
+  const elapsedSynced = Math.max(0, Number(game.elapsedSynced) || 0);
+  return {
+    ok: true,
+    value: {
+      slotId, runId, seed: game.seed, runesRef: game.nestRunes,
+      runes: (game.nestRunes || []).slice(),
+      score: computeLabScore(game.nestEquipped || []),
+      elapsedNow,
+      elapsedDelta: Math.max(0, elapsedNow - elapsedSynced),
+    },
+  };
+}
+
 function doNestExtract() {
-  syncPlayTime();
-  game.nestActive = false;
-  const spentRunes = game.nestEquipped || [];   // 最终 BOSS 战装备中的符文消耗——按价表折分后一并带回
-  const score = computeLabScore(spentRunes);
-  game.nestEquipped = [];
-  const Bn = B();
-  (game.nestRunes || []).forEach(r => Bn.data.runes.push(r));
-  game.nestRunes = [];
-  const st = Bn.data.stats;
-  st.labTotalScore = (st.labTotalScore || 0) + score.total;
-  st.labBestScore = Math.max(st.labBestScore || 0, score.total);
-  st.labRuns = (st.labRuns || 0) + 1;
-  Bn.save();
-  clearSave();   // 撤离完成：清除进行中对局档（下次从研究所备战重新出发）
-  SDT.Meta.checkUnlocks();
-  UI.log('[[icon:exit]] <b>研究所撤离成功！</b>符文与战利品已运回基地', 'ok');
-  playLabEnding(() => showLabSettlement(score, st));   // 09-24 方舟级通关演出 → 结算页收尾
+  if (!game.nestActive) return false;
+  if (nestExtractInFlight) return nestExtractInFlight;
+
+  if (!pendingNestExtract || !sameNestExtractionView(pendingNestExtract)) {
+    const captured = captureNestExtraction();
+    if (!captured.ok) {
+      UI.log(`[[icon:cross]] 研究所撤离未保存：${esc(captured.message)}；原进度已保留`, 'warn');
+      renderNestMap();
+      return false;
+    }
+    pendingNestExtract = captured.value;
+  }
+  const pending = pendingNestExtract;
+  const work = (async () => {
+    game.state = 'modal';
+    UI.showOverlay('[[icon:exit]] 正在整理研究所撤离', '<p class="ov-note">正在保存带回符文与研究所结算……</p>', true);
+    UI.refresh(game);
+
+    if (pending.slotId == null) {
+      // No selected slot has no durable run identity; preserve the legacy ephemeral-memory path.
+      syncPlayTime();
+      game.nestActive = false;
+      game.nestEquipped = [];
+      const base = B();
+      pending.runes.forEach(rune => base.data.runes.push(rune));
+      game.nestRunes = [];
+      const stats = base.data.stats;
+      stats.labTotalScore = (stats.labTotalScore || 0) + pending.score.total;
+      stats.labBestScore = Math.max(stats.labBestScore || 0, pending.score.total);
+      stats.labRuns = (stats.labRuns || 0) + 1;
+      base.save();
+      clearSave();
+    } else {
+      if (!sameNestExtractionView(pending)) return false;
+      const result = await nestSettlementCommands.settle({
+        slotId: pending.slotId,
+        runId: pending.runId,
+        runes: pending.runes,
+        score: pending.score.total,
+        elapsedDelta: pending.elapsedDelta,
+      });
+      if (!sameNestExtractionView(pending)) return false;
+      if (!result.ok) {
+        showNestExtractRetry(pending, result.message || result.code || '存档暂不可用');
+        return false;
+      }
+      if (!sameNestExtractionView(pending)) return false;
+      game.elapsedSynced = pending.elapsedNow;
+      game.nestActive = false;
+      game.nestEquipped = [];
+      game.nestRunes = [];
+    }
+
+    pendingNestExtract = null;
+    const stats = B().data.stats;
+    const settled = { slotId: pending.slotId, runId: pending.runId, seed: pending.seed };
+    const settledRunes = game.nestRunes;
+    SDT.Meta.checkUnlocks();
+    UI.log('[[icon:exit]] <b>研究所撤离成功！</b>符文与战利品已运回基地', 'ok');
+    playLabEnding(() => {
+      if (getActiveSlot() !== settled.slotId || game.seed !== settled.seed || game.nestActive ||
+          game.nestRunes !== settledRunes || game.state !== 'modal') return;
+      if (settled.slotId != null) {
+        const identity = RunStorage.readIdentity(settled.slotId);
+        if (identity.ok && identity.value.runId !== settled.runId) return;
+        if (!identity.ok && identity.code === 'RECOVERY_REQUIRED') return;
+      }
+      showLabSettlement(pending.score, stats);
+    });
+    return true;
+  })().catch(error => {
+    if (sameNestExtractionView(pending)) showNestExtractRetry(pending, error && error.message);
+    return false;
+  });
+  nestExtractInFlight = work;
+  return work.finally(() => {
+    if (nestExtractInFlight === work) nestExtractInFlight = null;
+  });
 }
 
 function showLabSettlement(s, st) {

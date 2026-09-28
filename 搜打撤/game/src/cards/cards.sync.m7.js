@@ -2,7 +2,7 @@
 /* M7 装备收编（2026-09-27）：仅迁当前 schema、capability 与运行时执行器均可完整消费的卡。
  * canonical 直接从 TABLETOP10/11 读取，按实际运行时定版深相等；不依赖旧 TABLETOP3 行。
  * rules.equip 是装备文本效果的单源开关，因此每张卡必须覆盖其当前 canonical 描述全部效果。
- * 其余复杂装备与阻塞原因见 docs/M7-RESULT.md。
+ * 其余复杂装备与阻塞原因见 docs/archive/card-migration-2026-09-27/M7-RESULT.md。
  */
 import { KEY } from './cards.consts.js';
 import { validateCardRules } from './card-rules.schema.js';

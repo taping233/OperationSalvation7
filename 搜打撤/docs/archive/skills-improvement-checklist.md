@@ -364,7 +364,7 @@
 **批次 9 管线/发布（条 34/35/37/38）✅**
 - 条 34：`assets/asset-manifest.json`（347 项，含授权字段）；`assets:audit` 扩展 Manifest drift 校验（unlisted/ghost/license-pending），当前全绿。
 - 条 35：`art-direction.md` 增「素材家族生产纪律」节；条 38：`development.md` 增「原型纪律」节。
-- 条 37：`docs/steam-asset-requirements.md` 占位规格清单。
+- 条 37：`docs/steam-asset-requirements.md` 占位规格清单，现归档于 `docs/archive/release-placeholder/steam-asset-requirements.md`。
 - 触发式未执行（维持登记）：条 28 手柄、条 33 ink 行 ID、条 36 itch butler（发布期）。
 
 ## 最终全量验证（2026-09-06）

@@ -1,6 +1,6 @@
 // @ts-check
 /* M5 卡牌规则化数据迁移批 D7（2026-09-27）：B-M4 延迟/持续/形态批（15 张中迁 6 跳 9，
- * 逐卡依据见 docs/M5-D7-RESULT.md；矩阵草案 docs/M-BATCH-MATRIX.md B-M4 行）。
+ * 逐卡依据见 docs/archive/card-migration-2026-09-27/M5-D7-RESULT.md；矩阵草案 docs/M-BATCH-MATRIX.md B-M4 行）。
  * definitions 内联手写，字段风格与 cards.sync.js ensureA3* / cards.sync.m1.js / m2.js 一致；
  * canonical 整卡取实际定版（TABLETOP10/11 + CARDS_SYNC，m1/m2 先例：不另存可漂移数值表）。
  *
@@ -29,7 +29,7 @@
  * （battle.resolution.js），空 onPlay 键即文本抑制标记（schema/capability 对空数组合法，
  * exec-play 剥离后结算为无操作）。禁咒卡面无 dmg/draw/heal 字段，空键合法。
  *
- * 跳过 9 张（逐条原因见 docs/M5-D7-RESULT.md，此处仅摘要）：
+ * 跳过 9 张（逐条原因见 docs/archive/card-migration-2026-09-27/M5-D7-RESULT.md，此处仅摘要）：
  *   tt7-swordimmortal 剑仙形态 / tt3-petal 花瓣法阵（纯 onTurnStart 卡的抑制键死锁：
  *               文本宿主与结构化 runner 会双结算——剑仙形态 immediate 句命中
  *               buff.swordForm 正则设永久旗标（enemy-phase 每回合抽 1）、花瓣 turnStart 句

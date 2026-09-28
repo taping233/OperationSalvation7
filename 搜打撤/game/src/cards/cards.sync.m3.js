@@ -42,7 +42,7 @@
  *                     基础段无条件 + 条件段 cond{anyCurse:true}（recast 仅 on kill/lastHand，
  *                     条件重施以「无条件段+条件段」等价表达——未诅咒 3 点 / 诅咒 6 点，与卡面一致）。
  *
- * 跳过 9 张（逐条原因见 docs/M3-D5-RESULT.md，此处仅摘要）：
+ * 跳过 9 张（逐条原因见 docs/archive/card-migration-2026-09-27/M3-D5-RESULT.md，此处仅摘要）：
  *   cmtn0pbkmnvc 流光照影（「每层诅咒释放一次初始攻击」需 execute 携带 what 键，键集无 what，
  *                execute 域语义是消灭低攻目标，与文本路径专支 release.curseLayers 错配）、
  *   tt7-goldencicada 金蝉脱壳（ensureEffectFields 按描述运行时注入 draw:3，存储卡与源表不可深相等，

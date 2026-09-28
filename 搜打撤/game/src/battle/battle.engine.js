@@ -23,6 +23,7 @@ import {
   set$pendingHint, set$lastPersistAt, set$activeActionSignal, storeBattleSnapshot,
   clearTargetHint, applyRuneFlag, nextTmpSeq, cancelTargetingState,
 } from './battle.runtime.js';
+import { buildPouchDiscoverState } from './battle.discover-state.js';
 import { esc, clone as cloneData } from '../core/shared.js';
 import { createEffectExecutor, splitEffectClauses, consumeTriggerTexts } from './battle.effects.js';
 import { refillDrawPile, shuffleCards } from './battle.deck.js';
@@ -1014,7 +1015,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
       }
     }
     if (!entry.card._pouch.length) { G.log('[[icon:question]] 锦囊是空的——背包中存入法术后才能生效', 'dim'); return; }
-    set$discovering({ options: entry.card._pouch.slice(), n: 1, act: 'pouch', pouchUid: uid, pred: null });
+    set$discovering(buildPouchDiscoverState(entry.card._pouch.slice(), uid));
     requestBattleRender();
   }
   // 不变应万变（Q8 老板定向）：「在手牌中时，本牌变为打出的上一张武术牌的1费复制」——

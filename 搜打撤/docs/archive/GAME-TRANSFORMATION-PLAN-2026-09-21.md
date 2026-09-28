@@ -465,29 +465,29 @@ Friday 可承担上述岗位的分析、方案、代码与资产制作协作。�
 
 ## 15. 证据索引
 
-以下为本次读取的主要来源，定位供后续执行者复核；文件可能随其他任务继续变化。
+以下为本次读取的主要来源。带“旧路径”的代码/工作树位置是 09-21 的定位，源码后续已拆分；旧位置保留为文本记录，不作为当前可打开链接。接手须按现行架构重新定位。
 
 | 编号 | 来源 | 主要支持内容 |
 |---|---|---|
-| S01 | [交接记录](D:/素材/代号柒/搜打撤/docs/NEXT-AI-HANDOFF-2026-09-20.md) | 主线、半成品、项目规则与验收背景 |
-| S02 | [现行规则文档](D:/素材/代号柒/搜打撤/docs/rules.md) | 玩法意图；数值须与代码核对 |
-| S03 | [基地页签与功能](D:/素材/代号柒/搜打撤/game/src/game.hub.js:16) | 现有六类页签和操作 |
-| S04 | [收藏转换](D:/素材/代号柒/搜打撤/game/src/game.hub.js:811) | 消耗实物、首次记录、重复经验 |
-| S05 | [基地数据与迁移](D:/素材/代号柒/搜打撤/game/src/base.js:10) | schema、资源、收藏、宠物与档位 |
-| S06 | [成长与收藏](D:/素材/代号柒/搜打撤/game/src/meta.js:7) | 等级上限、成长与里程碑 |
-| S07 | [旧带入限制](D:/素材/代号柒/搜打撤/game/src/game.session.js:590) | 当前实现禁止职业卡带入，与老板规则冲突；仅作现状证据，不能作新设计依据 |
-| S08 | [死亡结算](D:/素材/代号柒/搜打撤/game/src/game.session.js:114)、[主动放弃](D:/素材/代号柒/搜打撤/game/src/game.menu.js:635) | 损失、安全格与来源差异 |
-| S09 | [成功撤离](D:/素材/代号柒/搜打撤/game/src/game.run.altar.js:716) | 口袋留存、整理入库、解锁与统计 |
-| S10 | [地图生成](D:/素材/代号柒/搜打撤/game/src/map-generator.js:1)、[规则数值](D:/素材/代号柒/搜打撤/game/src/rules.js:1) | 当前四层规模与容量配置 |
-| S11 | [龙巢](D:/素材/代号柒/搜打撤/game/src/game.nest.js:1) | 第二玩法、线性节点与解锁 |
-| S12 | [人物权威库](D:/素材/代号柒/搜打撤/docs/character-bible/README.md)、[角色数据](D:/素材/代号柒/搜打撤/game/src/characters.js:1) | 五人物身份、定稿与未定稿边界 |
-| S13 | [皮肤映射](D:/素材/代号柒/搜打撤/game/src/art.js:198) | 已有皮肤与会话级选择 |
-| S14 | [序列帧播放器](D:/素材/代号柒/搜打撤/game/src/battle.frames.js:7)、[战斗速度](D:/素材/代号柒/搜打撤/game/src/battle.pace.js:1) | 现有动画路线、帧上限、倍率 |
-| S15 | [叙事桥接](D:/素材/代号柒/搜打撤/game/src/narrative.js:1) | Ink 现有覆盖与回退 |
-| S16 | [基础视觉变量](D:/素材/代号柒/搜打撤/game/css/base.css:1)、[卡牌库](D:/素材/代号柒/搜打撤/game/src/game.cardslib.js:430) | 既有视觉体系与影廊 |
-| S17 | [依赖锁](D:/素材/代号柒/搜打撤/package-lock.json)、[桌面配置](D:/素材/代号柒/搜打撤/desktop-app/package.json)、[桌面入口](D:/素材/代号柒/搜打撤/desktop-app/main.js:1) | Pixi 7.4.3、Electron 既有交付基础 |
-| S18 | [存档契约](D:/素材/代号柒/搜打撤/docs/save-format.md) | 五档、地图版本与迁移要求 |
-| S19 | [历史模拟评审](D:/素材/代号柒/搜打撤/docs/multi-agent-review-changelog-2026-09-20.md) | 仅作为提案线索，不能整体记为已实施 |
-| S20 | [隔离修复](C:/Users/太平/.codex/worktrees/836c/代号柒/搜打撤/game/src/effect-steps.js:1488)、[对应测试](C:/Users/太平/.codex/worktrees/836c/代号柒/搜打撤/tests/message-batch-0917.test.js:101) | 完整试玩任务报告的双镖问题；原目录合入状态另核对 |
+| S01 | [交接记录](handoffs/2026-09-20-to-27-vite-log.md) | 主线、半成品、项目规则与验收背景 |
+| S02 | 现行规则文档（旧路径：`D:/素材/代号柒/搜打撤/docs/rules.md`） | 玩法意图；数值须与代码核对 |
+| S03 | 基地页签与功能（旧路径：`D:/素材/代号柒/搜打撤/game/src/game.hub.js:16`） | 现有六类页签和操作 |
+| S04 | 收藏转换（旧路径：`D:/素材/代号柒/搜打撤/game/src/game.hub.js:811`） | 消耗实物、首次记录、重复经验 |
+| S05 | 基地数据与迁移（旧路径：`D:/素材/代号柒/搜打撤/game/src/base.js:10`） | schema、资源、收藏、宠物与档位 |
+| S06 | 成长与收藏（旧路径：`D:/素材/代号柒/搜打撤/game/src/meta.js:7`） | 等级上限、成长与里程碑 |
+| S07 | 旧带入限制（旧路径：`D:/素材/代号柒/搜打撤/game/src/game.session.js:590`） | 当前实现禁止职业卡带入，与老板规则冲突；仅作现状证据，不能作新设计依据 |
+| S08 | 死亡结算（旧路径：`D:/素材/代号柒/搜打撤/game/src/game.session.js:114`）、主动放弃（旧路径：`D:/素材/代号柒/搜打撤/game/src/game.menu.js:635`） | 损失、安全格与来源差异 |
+| S09 | 成功撤离（旧路径：`D:/素材/代号柒/搜打撤/game/src/game.run.altar.js:716`） | 口袋留存、整理入库、解锁与统计 |
+| S10 | 地图生成（旧路径：`D:/素材/代号柒/搜打撤/game/src/map-generator.js:1`）、规则数值（旧路径：`D:/素材/代号柒/搜打撤/game/src/rules.js:1`） | 当前四层规模与容量配置 |
+| S11 | 龙巢（旧路径：`D:/素材/代号柒/搜打撤/game/src/game.nest.js:1`） | 第二玩法、线性节点与解锁 |
+| S12 | 人物权威库（旧路径：`D:/素材/代号柒/搜打撤/docs/character-bible/README.md`）、角色数据（旧路径：`D:/素材/代号柒/搜打撤/game/src/characters.js:1`） | 五人物身份、定稿与未定稿边界 |
+| S13 | 皮肤映射（旧路径：`D:/素材/代号柒/搜打撤/game/src/art.js:198`） | 已有皮肤与会话级选择 |
+| S14 | 序列帧播放器（旧路径：`D:/素材/代号柒/搜打撤/game/src/battle.frames.js:7`）、战斗速度（旧路径：`D:/素材/代号柒/搜打撤/game/src/battle.pace.js:1`） | 现有动画路线、帧上限、倍率 |
+| S15 | 叙事桥接（旧路径：`D:/素材/代号柒/搜打撤/game/src/narrative.js:1`） | Ink 现有覆盖与回退 |
+| S16 | 基础视觉变量（旧路径：`D:/素材/代号柒/搜打撤/game/css/base.css:1`）、卡牌库（旧路径：`D:/素材/代号柒/搜打撤/game/src/game.cardslib.js:430`） | 既有视觉体系与影廊 |
+| S17 | 依赖锁（旧路径：`D:/素材/代号柒/搜打撤/package-lock.json`）、桌面配置（旧路径：`D:/素材/代号柒/搜打撤/desktop-app/package.json`）、桌面入口（旧路径：`D:/素材/代号柒/搜打撤/desktop-app/main.js:1`） | Pixi 7.4.3、Electron 既有交付基础 |
+| S18 | 存档契约（旧路径：`D:/素材/代号柒/搜打撤/docs/save-format.md`） | 五档、地图版本与迁移要求 |
+| S19 | 历史模拟评审（旧路径：`D:/素材/代号柒/搜打撤/docs/multi-agent-review-changelog-2026-09-20.md`） | 仅作为提案线索，不能整体记为已实施 |
+| S20 | 隔离修复（旧路径：`C:/Users/太平/.codex/worktrees/836c/代号柒/搜打撤/game/src/effect-steps.js:1488`）、对应测试（旧路径：`C:/Users/太平/.codex/worktrees/836c/代号柒/搜打撤/tests/message-batch-0917.test.js:101`） | 完整试玩任务报告的双镖问题；原目录合入状态另核对 |
 
 **本文的下一步用途：老板选择或调整改造方向后，按第 12 章逐包派发。先交付完整的体验样板，再决定扩展规模；每轮都保留明确的玩家可感知成果。**

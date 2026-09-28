@@ -4,7 +4,7 @@ import { G, foes, hand, drawPile, consumed, cardAnims, handSelecting, choosing, 
 import { esc } from '../core/shared.js';
 import { splitEffectClauses as splitClauses } from './battle.effects.js';
 import { isHandPaymentCandidate, matchesHandSelectKey } from './battle.hand-selection.js';
-import { buildDiscoverPool, pickRandomDiscoverCandidate } from './battle.discover-candidates.js';
+import { createBattleDiscoverFlow } from './battle.discover-flow.js';
 
 /** @typedef {import('./battle.snapshot.types.js').BattleCardInput & { rarity?: string, cls?: string, _pouch?: import('./battle.snapshot.types.js').BattleCardInput[] }} SelectionCard */
 /** @typedef {{ all: () => SelectionCard[], isRandomObtainable: (card: SelectionCard) => boolean, sellPrice: (card: SelectionCard) => number }} SelectionCardsPort */
@@ -20,23 +20,42 @@ export function createBattleSelectionFlow({
 }) {
   const { handSelectQueue, choiceQueue } = session;
   const alive = () => foes.filter(foe => !foe.dead);
-
-  function randomDiscoverCard(pred, rarity, otherCls) {
-    // 2026-09-08：限制卡池（pred）优先——限定池只排除 生物/事件/衍生，
-    // 职业/棱彩/传说特例卡按池子规则可被指定获取；无 pred 走通用随机池
-    // （isRandomObtainable：排除 初始/职业/能力卡/生物/棱彩/unrandom）。
-    // 2026-09-09 留言 #7：对局（战斗）内的发现/随机获取一律不出现资源卡——
-    // 资源（木材/钱币/钥匙类）只在地图侧宝箱、商店、事件产出。
-    // 2026-09-10 撤离测试：BOSS 战道具不可打出（"道具卡只能在普通战斗中使用"），
-    // 发现池却在 BOSS 战掉道具卡，入手即死牌（刀剑形态还会复制它）。
-    // 2026-09-13 留言：通用随机发现池不出现道具（战斗内道具入口只剩药水栏/背包）。
-    // pred 指定池（药水魔法「发现药水」/迷之匣「发现招式」等）不受此限——专属发现按卡面效果走。
-    const pool = buildDiscoverPool(cards.all(), {
-      myClass: G?.myClass, pred, rarity, otherCls: !!otherCls,
+  const discoverFlow = createBattleDiscoverFlow({
+    cards: {
+      all: () => cards.all(),
       isRandomObtainable: card => cards.isRandomObtainable(card),
-    });
-    return pickRandomDiscoverCandidate(pool, random01);
-  }
+      sellPrice: card => cards.sellPrice(card),
+      findByUid: uid => findCard(uid),
+      addTempCard,
+      queueCardExecution,
+      fireCatGift,
+    },
+    interaction: {
+      getJobs: () => discoverQueue,
+      get: () => discovering,
+      set: set$discovering,
+      requestRender: requestBattleRender,
+    },
+    random: { next: random01 },
+    battle: {
+      currentClass: () => G?.myClass,
+      firstAliveTarget: () => alive()[0] || null,
+      hasAliveFoes: () => alive().length > 0,
+      sweepDead,
+      finishVictory: () => finish(true),
+    },
+    effects: {
+      returnToDeckBottom: uids => drawPile.unshift(...uids),
+      addArmor: amount => { pdef.armor += amount; return pdef.armor; },
+      setCardOverride: (uid, card) => cardOverrides.set(uid, card),
+      enqueueDelayed: effect => delayed.push(effect),
+      swapCardCosts,
+    },
+    output: { log: (message, kind) => G.log(message, kind) },
+  });
+  const randomDiscoverCard = (...args) => discoverFlow.randomDiscoverCard(...args);
+  const processDiscoverQueue = () => discoverFlow.processDiscoverQueue();
+  const pickDiscover = index => discoverFlow.pickDiscover(index);
 
   // —— 手牌选卡（2026-09-06 #24/#25）：「选择 N 张手牌中的 X 施放/消耗」通用执行 ——
   function processHandSelect() {
@@ -224,156 +243,6 @@ export function createBattleSelectionFlow({
       requestBattleRender();
     }
   }
-  function processDiscoverQueue() {
-    if (discovering || !discoverQueue.length) return;
-    const job = discoverQueue.shift();
-    const options = [];
-    const taken = new Set();
-    const names = new Set();   // 同名不同版（如「流血药水」道具/道具两张）算重复（2026-09-13 老板口径）
-    // 旧任务格式兼容：rarity / otherCls 换算成谓词
-    const legacyPred = job.rarity ? (c => c.rarity === job.rarity)
-      : job.otherCls ? (c => c.rarity === '职业' && c.cls && c.cls !== G.myClass)
-      : null;
-    const structuredPool = job.pool;
-    const structuredPred = structuredPool?.kind === 'moves'
-      ? card => card.type === '武术' && (structuredPool.cost === undefined || (+card.cost || 0) === structuredPool.cost)
-      : null;
-    if (structuredPool && !structuredPred) {
-      G.log(`[[icon:cross]] 无法发现：不支持的结构化卡池「${esc(structuredPool.kind || '未知')}」`, 'warn');
-      return;
-    }
-    const pred = job.pred || structuredPred || legacyPred;
-    // 显式候选（探宝·牌库底）：三张就是给定的真实卡牌，不走随机池
-    if (job.explicit && job.explicit.length) {
-      set$discovering({ options: job.explicit.slice(0, 3), n: job.n, rarity: job.rarity, pred: job.pred, act: job.act || null,
-        priceArmor: !!job.priceArmor, pouchUid: job.pouchUid || null, consumeTempAtTurn: !!job.consumeTempAtTurn, tempUids: job.tempUids || [],
-        swapPair: job.swapPair || null, deckBottom: !!job.deckBottom, deckBottomUids: job.explicitUids || [],
-        zeroCost: !!job.zeroCost, decayEachTurn: !!job.decayEachTurn,
-        costDecayPerTurn: job.costDecayPerTurn, sourceCardId: job.sourceCardId || null, pool: structuredPool || null });
-      requestBattleRender();
-      return;
-    }
-    // 内建筛选条件在本次面板内稳定：一次取目录、一次构建有序池，然后仍按原索引
-    // 独立抽取并对同 ID/同名候选重抽。外部 job.pred 可能有副作用或改变目录，继续
-    // 经 randomDiscoverCard 逐次读取目录和筛选，保留原调用次数与观察顺序。
-    const batchPool = job.pred ? null : buildDiscoverPool(cards.all(), {
-      myClass: G?.myClass, pred, rarity: job.rarity,
-      otherCls: !!(!job.pred && !job.rarity && job.otherCls),
-      isRandomObtainable: card => cards.isRandomObtainable(card),
-    });
-    const drawCandidate = () => batchPool
-      ? pickRandomDiscoverCandidate(batchPool, random01)
-      : randomDiscoverCard(pred, job.rarity, !job.pred && !job.rarity ? job.otherCls : null);
-    // 2026-09-09 留言 #9：三张候选不得重复——抽到已选中的就重抽，
-    // 池子不足三张时有多少展示多少（原实现撞重直接跳过，经常只剩一两张可选）
-    // 2026-09-13 老板口径：同一个选择面板内不许重复——同名不同版也一并重抽
-    const clash = (c) => !!c && (taken.has(c.id) || names.has(c.name));
-    for (let i = 0; i < 3 && options.length < 3; i++) {
-      let c = drawCandidate();
-      let guard = 0;
-      while (clash(c) && guard++ < 40) {
-        c = drawCandidate();
-      }
-      if (c && !clash(c)) { taken.add(c.id); names.add(c.name); options.push(c); }
-    }
-    if (!options.length) { G.log('（没有符合条件的卡牌可发现）', 'dim'); return; }
-    set$discovering({ options, n: job.n, rarity: job.rarity, pred: job.pred, act: job.act || null,
-      priceArmor: !!job.priceArmor, pouchUid: job.pouchUid || null, consumeTempAtTurn: !!job.consumeTempAtTurn, tempUids: job.tempUids || [],
-      swapPair: job.swapPair || null, zeroCost: !!job.zeroCost, decayEachTurn: !!job.decayEachTurn,
-      costDecayPerTurn: job.costDecayPerTurn, sourceCardId: job.sourceCardId || null, pool: structuredPool || null });
-    requestBattleRender();
-  }
-
-  function pickDiscover(i) {
-    if (!discovering) return;
-    const card = discovering.options[+i];
-    if (!card) return;
-    const { n, rarity, pred, act, options, priceArmor, pouchUid, consumeTempAtTurn, tempUids, swapPair,
-      deckBottom, deckBottomUids, zeroCost, decayEachTurn, costDecayPerTurn, sourceCardId, pool } = discovering;
-    set$discovering(null);
-    // 探宝·牌库底：未选中的候选按原顺序放回牌库底（数组头部 = 底）
-    if (deckBottom && deckBottomUids.length) {
-      const pickedUid = deckBottomUids[+i] != null ? deckBottomUids[+i] : null;
-      const rest = deckBottomUids.filter(u => u !== pickedUid);
-      if (rest.length) drawPile.unshift(...rest);
-    }
-    const hasStructuredAcquire = Array.isArray(card.rules?.triggers?.onAcquire) &&
-      card.rules.triggers.onAcquire.length > 0;
-    // 结构化 onAcquire 在置入手牌的 addTempCard 内结算；跳过旧阿猫礼物回调，避免同次获取触发两遍。
-    if (act !== 'pouch' && !hasStructuredAcquire) fireCatGift(card);   // 锦囊内旧牌仍不走旧 gift 回调
-    // 「直接施放 / 直接释放」类发现：选中即免费打出（2026-09-11 实机老板反馈修复：
-    // 此前多敌场景会先置入手牌等玩家再拖选目标——与卡面「并直接释放」矛盾，且拖拽流程
-    // 极易断裂成「卡躺在手牌像没释放」。现一律立即结算：默认首个存活敌人，群体卡自动覆盖全体）
-    if (act === 'play' || act === 'potion') {
-      const uid = addTempCard(card);
-      G.log(`[[icon:question]] 发现：【<b>${esc(card.name)}</b>】并直接施放（免费用 · 战斗内临时卡，战后消散）`, 'loot');
-      queueCardExecution(uid, findCard(uid).card, [], alive()[0] || null, true);
-    } else if (act === 'playKeep') {
-      // 永恒绽放：施放 1 张，其余两张入手
-      const uid = addTempCard(card);
-      G.log(`[[icon:question]] 发现：【<b>${esc(card.name)}</b>】并直接施放（战斗内临时卡，战后消散）`, 'loot');
-      queueCardExecution(uid, findCard(uid).card, [], alive()[0] || null, true);
-      options.filter(o => o.id !== card.id).forEach(o => {
-        addTempCard(o);
-        G.log(`[[icon:cards]] 其余的【<b>${esc(o.name)}</b>】置入手牌`, 'loot');
-      });
-    } else if (act === 'pouch') {
-      // 法师锦囊：从锦囊里选 1 张施放（从锦囊移除，其余留存）
-      const pouchEntry = pouchUid && findCard(pouchUid);
-      if (pouchEntry && Array.isArray(pouchEntry.card._pouch)) {
-        const pi = pouchEntry.card._pouch.findIndex(c => c.id === card.id);
-        if (pi >= 0) pouchEntry.card._pouch.splice(pi, 1);
-      }
-      const uid = addTempCard(card);
-      G.log(`[[icon:question]] <b>法师锦囊</b>：施放其中的【<b>${esc(card.name)}</b>】（锦囊余 ${pouchEntry && Array.isArray(pouchEntry.card._pouch) ? pouchEntry.card._pouch.length : 0} 张）`, 'loot');
-      queueCardExecution(uid, findCard(uid).card, [], alive()[0] || null, true);
-    } else if (act === 'dup') {
-      // 二刀流（2026-09-10 需求）：「发现一张武术卡并额外获得1张复制」——本体+复制共 2 张入手
-      addTempCard(card);
-      addTempCard(card);
-      G.log(`[[icon:question]] 发现：【<b>${esc(card.name)}</b>】并额外获得 1 张复制（×2 置入手牌 · 战斗内临时卡，战后消散）`, 'loot');
-    } else {
-      const uid = addTempCard(card);
-      G.log(`[[icon:question]] 发现：【<b>${esc(card.name)}</b>】置入手牌（战斗内临时卡，战后消散）`, 'loot');
-      // 挖宝：「获得等同于其价格的护甲」按发现卡售价折算（2026-09-09 补实装）
-      if (priceArmor) {
-        const price = cards.sellPrice(card);
-        pdef.armor += price;
-        G.log(`[[icon:plate]] <b>挖宝</b>：【${esc(card.name)}】价格 ${price} → 获得 ${price} 点护甲（当前 ${pdef.armor}）`, 'sys');
-      }
-      // 江湖救急：置入的临时卡在回合开始时消耗（C9）
-      if (consumeTempAtTurn) tempUids.push(uid);
-      // 迷之匣：发现的招式记入待换费对（两张到齐后交换费用）
-      if (swapPair) swapPair.push(uid);
-      // 第十二批（2026-09-23）：魔法新发现「使其变为0费」/ 高端研发「回合开始时使其-1费」
-      if (zeroCost) {
-        cardOverrides.set(uid, { ...card, cost: 0, _baseCost: card.cost });
-        G.log(`[[icon:bolt]] 发现：【<b>${esc(card.name)}</b>】费用变为 0`, 'loot');
-      }
-      if (costDecayPerTurn > 0) {
-        delayed.push({ special: 'ruleCostDecay', uid, sourceCardId, amount: costDecayPerTurn });
-        G.log(`[[icon:hourglass]] 发现：【<b>${esc(card.name)}</b>】每回合开始费用 -${costDecayPerTurn}`, 'sys');
-      } else if (decayEachTurn) {
-        delayed.push({ special: 'costDecay', uid });
-        G.log(`[[icon:hourglass]] 发现：【<b>${esc(card.name)}</b>】每回合开始费用 -1`, 'sys');
-      }
-    }
-    sweepDead();
-    if (!alive().length) { finish(true); return; }
-    if (n > 1) discoverQueue.unshift({ n: n - 1, rarity, pred, act, priceArmor, pouchUid, consumeTempAtTurn, tempUids, swapPair, zeroCost, decayEachTurn,
-      costDecayPerTurn, sourceCardId, pool });
-    else if (consumeTempAtTurn && tempUids.length) {
-      delayed.push({ special: 'consumeTemps', uids: [...tempUids], cardName: '江湖救急' });
-      G.log(`[[icon:hourglass]] <b>江湖救急</b>：置入的 ${tempUids.length} 张临时卡将在下个回合开始时消耗`, 'sys');
-    } else if (swapPair && swapPair.length >= 2) {
-      swapCardCosts(swapPair[0], swapPair[1]);   // 迷之匣：两张发现完毕，交换费用
-    }
-    // （2026-09-23 lint 批次：此处原有一份与上方 2461 行重复的「江湖救急」else-if——设计者 v0.53.3
-    // 快照插入迷之匣分支时留下的复制残tail，永不执行，已删；行为零变化）
-    processDiscoverQueue();
-    requestBattleRender();
-  }
-
   return {
     randomDiscoverCard, matchHandSelectKey: matchesHandSelectKey, processHandSelect, skipHandSelect, pickHandSelect,
     processChoice, pickChoice, processDiscoverQueue, pickDiscover,

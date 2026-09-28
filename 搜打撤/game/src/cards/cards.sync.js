@@ -952,7 +952,7 @@ export const syncSlice = {
     },
 
     // A3 卡牌规则迁移第一批（2026-09-25 老板令开工）：B1 纯伤害 / B2 多段与重复 /
-    // B3 治疗护甲吸血，共 23 张文本路径/专支卡改结构化 rules（docs/card-rules-v2-taxonomy-2026-09-25.md
+    // B3 治疗护甲吸血，共 23 张文本路径/专支卡改结构化 rules（docs/cards/card-rules-v2-taxonomy-2026-09-25.md
     // §3 逐卡表筛选；解释器 v2 分支已接线——battle.resolution.js castSegment 段生成器）。
     // definitions 内联手写（cc-* 纯实机卡与 tt7-ironcharge 无代码常量定义，定版在
     // cards-sync.json——生成物勿手改，故统一走 ensure 回填而非卡表内联）。

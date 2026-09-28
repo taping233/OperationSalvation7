@@ -1,5 +1,5 @@
 // M3 执行器收编轮验收（2026-09-27 代理E）：装备文本抑制 / bag.use 药水扩展 / schema 键位补集。
-// 规格：docs/M-BATCH-CONTRACT-SPEC.md（M3 状态标注）。
+// 规格：docs/cards/M-BATCH-CONTRACT-SPEC-2026-09-27.md（M3 状态标注）。
 import { afterEach, beforeAll, describe, expect, it } from 'vitest';
 import { validateCardRules } from '../game/src/cards/card-rules.schema.js';
 import { inspectCardRuleCapability } from '../game/src/cards/card-rules.capability.js';

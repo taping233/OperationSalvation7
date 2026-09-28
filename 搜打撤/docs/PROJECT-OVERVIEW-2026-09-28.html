@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>搜打撤 · 项目近况总览 2026-09-28</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0b0f17; color: #dce3ed;
+    font-family: "HarmonyOS Sans SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+    padding: 28px 34px 40px; font-size: 14px; line-height: 1.55;
+  }
+  .wrap { max-width: 1660px; margin: 0 auto; }
+  header { display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap; border-bottom: 1px solid #232c3d; padding-bottom: 14px; margin-bottom: 20px; }
+  h1 { font-size: 26px; letter-spacing: 1px; color: #f2f6fc; }
+  h1 .accent { color: #5ec8d8; }
+  .sub { color: #7d8ba1; font-size: 13px; }
+  .badge { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 12px; border: 1px solid #2c3b52; background: #121a28; color: #9fb4d0; }
+  .badge.amber { border-color: #6e5320; background: #241c0d; color: #e8b64c; }
+  .badge.green { border-color: #1f5c38; background: #0e2016; color: #52d489; }
+  .badge.red { border-color: #6e2c2c; background: #220f0f; color: #f27b7b; }
+  h2 { font-size: 17px; color: #eaf1f9; margin: 26px 0 12px; padding-left: 10px; border-left: 3px solid #5ec8d8; }
+  h2 .note { font-size: 12px; color: #7d8ba1; font-weight: normal; margin-left: 10px; }
+
+  /* KPI */
+  .kpis { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+  .kpi { background: linear-gradient(160deg, #131b2a 0%, #0f1522 100%); border: 1px solid #232c3d; border-radius: 10px; padding: 12px 14px; }
+  .kpi .v { font-size: 21px; font-weight: 700; color: #f2f6fc; font-family: Consolas, monospace; }
+  .kpi .v small { font-size: 12px; color: #7d8ba1; font-weight: 400; }
+  .kpi .k { font-size: 12px; color: #7d8ba1; margin-top: 3px; }
+
+  /* timeline */
+  .timeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .tl-card { background: #101724; border: 1px solid #232c3d; border-radius: 10px; padding: 12px 14px; position: relative; }
+  .tl-card .date { font-family: Consolas, monospace; color: #5ec8d8; font-size: 12px; font-weight: 700; }
+  .tl-card .t { color: #f2f6fc; font-weight: 700; margin: 3px 0 4px; font-size: 14px; }
+  .tl-card .d { color: #94a3ba; font-size: 12.5px; }
+  .tl-card.hot { border-color: #6e5320; background: linear-gradient(160deg, #1d1810, #12141c); }
+  .tl-card.hot .date { color: #e8b64c; }
+
+  /* two-col */
+  .cols { display: grid; grid-template-columns: 560px 1fr; gap: 18px; align-items: start; }
+
+  /* arch layers */
+  .arch { background: #101724; border: 1px solid #232c3d; border-radius: 10px; padding: 16px; }
+  .layer { border-radius: 8px; padding: 10px 12px; margin-bottom: 0; border: 1px solid; }
+  .layer .lt { font-weight: 700; font-size: 13px; display: flex; justify-content: space-between; }
+  .layer .lt .en { color: #7d8ba1; font-weight: 400; font-size: 11px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 7px; }
+  .chip { font-family: Consolas, monospace; font-size: 11px; padding: 2px 8px; border-radius: 4px; background: rgba(255,255,255,.06); }
+  .arrow { text-align: center; color: #55647e; font-size: 13px; line-height: 1.1; padding: 3px 0; }
+  .l1 { border-color: #2a5a46; background: #0e1d17; } .l1 .lt { color: #52d489; } .l1 .chip { color: #a8e6c3; }
+  .l2 { border-color: #274a68; background: #0e1822; } .l2 .lt { color: #6db3e8; } .l2 .chip { color: #aecff0; }
+  .l3 { border-color: #5a4d22; background: #1c1810; } .l3 .lt { color: #e8b64c; } .l3 .chip { color: #efd79a; }
+  .l4 { border-color: #553555; background: #191019; } .l4 .lt { color: #d98ad9; } .l4 .chip { color: #ecc2ec; }
+  .lside { border-color: #2c3b52; background: #0f1420; margin-top: 10px; } .lside .lt { color: #9fb4d0; } .lside .chip { color: #b9c8de; }
+  .arch .fn { color: #7d8ba1; font-size: 11.5px; margin-top: 10px; }
+
+  /* treemap */
+  .tm-panel { background: #101724; border: 1px solid #232c3d; border-radius: 10px; padding: 16px; }
+  #treemap { width: 100%; height: 400px; position: relative; }
+  .tm-cell { position: absolute; border: 1px solid #0b0f17; border-radius: 4px; overflow: hidden; padding: 6px 8px; display: flex; flex-direction: column; }
+  .tm-cell .n { font-weight: 700; font-size: 13px; }
+  .tm-cell .m { font-family: Consolas, monospace; font-size: 11px; opacity: .85; margin-top: 2px; }
+  .tm-legend { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; font-size: 12px; color: #94a3ba; }
+  .tm-legend .sw { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 4px; vertical-align: -1px; }
+
+  /* charts */
+  .charts { display: grid; grid-template-columns: 1fr 470px; gap: 18px; align-items: start; }
+  .panel { background: #101724; border: 1px solid #232c3d; border-radius: 10px; padding: 16px; }
+  .panel .pt { font-weight: 700; color: #eaf1f9; margin-bottom: 8px; font-size: 14px; }
+  .panel .pd { color: #7d8ba1; font-size: 12px; margin-top: 6px; }
+
+  /* commits */
+  table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  th { text-align: left; color: #7d8ba1; font-weight: 600; padding: 6px 10px; border-bottom: 1px solid #232c3d; font-size: 12px; }
+  td { padding: 5px 10px; border-bottom: 1px solid #1a2230; }
+  td.hash { font-family: Consolas, monospace; color: #5ec8d8; white-space: nowrap; }
+  td.date { font-family: Consolas, monospace; color: #7d8ba1; white-space: nowrap; }
+  .tag { display: inline-block; min-width: 62px; text-align: center; border-radius: 4px; font-size: 11px; padding: 1px 0; font-family: Consolas, monospace; }
+  .tag.refactor { background: #12253d; color: #6db3e8; }
+  .tag.docs { background: #1a2230; color: #94a3ba; }
+  .tag.fix { background: #2a1414; color: #f27b7b; }
+  .tag.feat { background: #10241a; color: #52d489; }
+  .tag.chore { background: #241c0d; color: #e8b64c; }
+  .tag.test { background: #20142a; color: #c08ae0; }
+  tr.new td { background: rgba(232,182,76,.05); }
+  tr.new td.msg::after { content: "← 第6轮·未提交"; color: #e8b64c; font-size: 11px; margin-left: 8px; }
+
+  /* inventory */
+  details { background: #101724; border: 1px solid #232c3d; border-radius: 10px; padding: 12px 16px; margin-top: 12px; }
+  summary { cursor: pointer; font-weight: 700; color: #eaf1f9; }
+  details[open] summary { margin-bottom: 10px; }
+  .inv-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .inv-domain { border: 1px solid #1c2739; border-radius: 8px; padding: 10px 12px; }
+  .inv-domain .ih { color: #5ec8d8; font-weight: 700; font-size: 13px; font-family: Consolas, monospace; }
+  .inv-domain .ih span { color: #7d8ba1; font-weight: 400; font-size: 11.5px; margin-left: 8px; }
+  .inv-domain ul { list-style: none; margin-top: 6px; }
+  .inv-domain li { font-family: Consolas, monospace; font-size: 11.5px; color: #aebbd0; display: flex; justify-content: space-between; padding: 1.5px 0; }
+  .inv-domain li span { color: #5d6b83; }
+
+  /* workspace */
+  .ws { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .ws ul { list-style: none; }
+  .ws li { padding: 5px 0 5px 20px; position: relative; color: #b7c3d6; font-size: 13px; border-bottom: 1px dashed #1a2230; }
+  .ws li::before { content: "▸"; position: absolute; left: 2px; color: #5ec8d8; }
+  .ws li.warn::before { content: "⚑"; color: #e8b64c; }
+  footer { margin-top: 26px; color: #55647e; font-size: 12px; text-align: center; border-top: 1px solid #232c3d; padding-top: 12px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>搜打撤 <span class="accent">·</span> 项目近况总览</h1>
+  <span class="badge amber">v0.60.0 冬日远征体验改造</span>
+  <span class="badge">HEAD 2cef754 · 2026-09-28 16:39</span>
+  <span class="badge">master ahead 14 / behind 0（未 fetch）</span>
+  <span class="sub">核对时间 2026-09-28 晚 · 仅 Vite 线，Godot/Unity/EXE 冻结</span>
+</header>
+
+<h2>关键指标</h2>
+<div class="kpis">
+  <div class="kpi"><div class="v">244<small> 文件</small> / 48,053<small> 行</small></div><div class="k">前端源码（11 功能域 + 根入口）</div></div>
+  <div class="kpi"><div class="v">1,833<small> 用例</small></div><div class="k">全量测试 · 226 文件全绿（第 6 轮）</div></div>
+  <div class="kpi"><div class="v">300.8<small> / 310 KiB</small></div><div class="k">首屏 JS gzip（第 5 轮产物实测）</div></div>
+  <div class="kpi"><div class="v">7<small> 套</small></div><div class="k">严格 typecheck 配置全过 · lint 0 错</div></div>
+  <div class="kpi"><div class="v">+161<small> 用例/天</small></div><div class="k">今日测试增长 1672 → 1833</div></div>
+  <div class="kpi"><div class="v">56<small> 项</small></div><div class="k">工作区未提交（25 改 + 31 未跟踪）</div></div>
+</div>
+
+<h2>近期大事记 <span class="note">09-22 → 09-28，高亮为今日主线</span></h2>
+<div class="timeline">
+  <div class="tl-card"><div class="date">09-22</div><div class="t">src 目录化重构</div><div class="d">8 功能域 + 守卫目录制（e527fec），142 文件 / 798 用例全绿——测试基数一周翻倍。</div></div>
+  <div class="tl-card"><div class="date">09-23</div><div class="t">STS2 源码解包参考系</div><div class="d">杀戮尖塔2 v0.107.1 反编译 3425 个 .cs 落盘（578卡/260能力），作为战斗机制对标。</div></div>
+  <div class="tl-card"><div class="date">09-25</div><div class="t">纵深战役 · A卡牌规则化</div><div class="d">schema v2 + 解释器守卫（A2），B1-B7 键位全通累计 47/181 张；N1 双闭环等 bug 清账。</div></div>
+  <div class="tl-card"><div class="date">09-27</div><div class="t">E 批工程线 E2-E8</div><div class="d">快照/结算/异步/存档/规则门/集成验收/背包规则七切片落库（6f55166）。</div></div>
+  <div class="tl-card"><div class="date">09-27 深夜</div><div class="t">M 批卡牌规则迁移</div><div class="d">150 张目标卡全落地（791b2c2）：生产卡库 272 张中 221 张有可执行 rules，51 张约定排除。</div></div>
+  <div class="tl-card"><div class="date">09-28 凌晨</div><div class="t">三线协作 9h 收官</div><div class="d">代码/体验/美术三线交付：口袋状态条、价值档位、火堆提示、章节风险徽标；基线 be589a2。</div></div>
+  <div class="tl-card hot"><div class="date">09-28 白天</div><div class="t">重构马拉松 第 1–5 轮</div><div class="d">Luna 三并行切片 × 主代理集成：持久化边界→整备控制器→出征事务→手牌纯规则→发现候选池。测试 1672→1820。</div></div>
+  <div class="tl-card hot"><div class="date">09-28 17:26</div><div class="t">第 6 轮收尾 · 暂停</div><div class="d">胜利进度 journal 化 + 研究所撤离事务，1833 用例绿；老板指令：验证收尾后暂停，不提交。</div></div>
+</div>
+
+<h2>代码结构与分层 <span class="note">左：架构分层（自上而下装配方向）· 右：功能域面积 = 代码行数</span></h2>
+<div class="cols">
+  <div class="arch">
+    <div class="layer l1">
+      <div class="lt">规则 / 纯数据 <span class="en">PURE_MODULES · 无浏览器依赖</span></div>
+      <div class="chips"><span class="chip">card-rules.schema</span><span class="chip">rule-config</span><span class="chip">card-rarity</span><span class="chip">battle.hand-selection</span><span class="chip">battle.discover-candidates</span><span class="chip">meta-progression</span><span class="chip">cards.data</span></div>
+    </div>
+    <div class="arrow">▼</div>
+    <div class="layer l2">
+      <div class="lt">领域状态与命令 <span class="en">草稿事务 · 失败不替换状态</span></div>
+      <div class="chips"><span class="chip">battle.engine</span><span class="chip">battle.resolution</span><span class="chip">base-state / mutation / economy</span><span class="chip">base-progression.commands</span><span class="chip">battle-settlement.commands</span><span class="chip">nest-settlement.commands</span><span class="chip">meta.js</span></div>
+    </div>
+    <div class="arrow">▼</div>
+    <div class="layer l3">
+      <div class="lt">应用流程 <span class="en">端口装配 · 不反向依赖视图</span></div>
+      <div class="chips"><span class="chip">battle.selection-flow</span><span class="chip">game.run.flow</span><span class="chip">game.session</span><span class="chip">prepareDeparture → newRun</span><span class="chip">battle-victory-progress</span></div>
+    </div>
+    <div class="arrow">▼</div>
+    <div class="layer l4">
+      <div class="lt">视图与浏览器装配 <span class="en">Canvas / DOM / 事件</span></div>
+      <div class="chips"><span class="chip">battle.view</span><span class="chip">game.hub.pages</span><span class="chip">game.menu / ui / overlay</span><span class="chip">home.scene</span><span class="chip">pocket-strip</span><span class="chip">game.boot</span></div>
+    </div>
+    <div class="layer lside">
+      <div class="lt">旁挂系统 <span class="en">独立域</span></div>
+      <div class="chips"><span class="chip">agent/ SDT.Agent 自动游玩×13文件</span><span class="chip">audio/ 采样音效×3</span><span class="chip">core/ renderer·art·camera×28</span><span class="chip">generated/ 清单×3</span></div>
+    </div>
+    <div class="fn">守卫：静态依赖图 225 模块无环、架构违规 0；纯模块禁浏览器/runtime 边（architecture-boundaries 测试）。</div>
+  </div>
+  <div class="tm-panel">
+    <div id="treemap"></div>
+    <div class="tm-legend" id="tm-legend"></div>
+    <div class="pd" style="margin-top:8px">悬停色块查看明细。battle 域一家占 31%，是当前最大战场：第 4/5/6 轮重构全部落在战斗选牌、发现候选与结算链。</div>
+  </div>
+</div>
+
+<h2>质量趋势 <span class="note">每个提交点 = 提交钩子全量门禁实测</span></h2>
+<div class="charts">
+  <div class="panel">
+    <div class="pt">全量测试用例数 · 09-28 一日六轮</div>
+    <svg id="trend" width="100%" height="240" viewBox="0 0 700 240" preserveAspectRatio="xMidYMid meet"></svg>
+    <div class="pd">基线 be589a2（204 文件/1672）→ 第 5 轮 662e3cf（223 文件/1820）→ 第 6 轮全量 226 文件/1833。每轮提交钩子跑全量约 5 分钟，另有干净目录独立生产构建与预算门禁。</div>
+  </div>
+  <div class="panel">
+    <div class="pt">今日落地的六轮重构切片</div>
+    <table style="font-size:12px">
+      <tr><td class="hash">96950de</td><td>R1 持久化边界 · 模块装配 · 类型 strict · 规则冻结源</td></tr>
+      <tr><td class="hash">9a51054</td><td>R2 整备控制器 · 研究所命令收敛 · 照相馆查询索引</td></tr>
+      <tr><td class="hash">f4c5838</td><td>R3 出征单事务 · 战斗选牌解耦（去 window.SDT）</td></tr>
+      <tr><td class="hash">74bf80f</td><td>R4 手牌选择纯规则 · 宠物蛋保底写入口</td></tr>
+      <tr><td class="hash">662e3cf</td><td>R5 发现候选纯模块 · elapsed 命令（目录读 83→1 次）</td></tr>
+      <tr class="new"><td class="hash" style="color:#e8b64c">工作区</td><td>R6 胜利进度 journal 化 · 研究所撤离事务（未提交）</td></tr>
+    </table>
+  </div>
+</div>
+
+<h2>提交流水 <span class="note">近 30 条 · 第 6 轮改动在 2cef754 之上未提交</span></h2>
+<div class="panel" id="commits"></div>
+
+<h2>前端代码全清单 <span class="note">244 个源文件按域分组，点开查看 · 行数为 wc -l 实测</span></h2>
+<div id="inventory"></div>
+
+<h2>工作区现状与待办</h2>
+<div class="ws">
+  <div class="panel">
+    <div class="pt">未提交（等待老板拍板）</div>
+    <ul>
+      <li class="warn"><b>第 6 轮切片改动 25 个已跟踪文件</b>：胜利进度纯模块（meta-progression / battle-victory-progress）、nest-settlement.commands、发现状态提取、4 个测试与 9 份文档——全量 1833 用例已绿，未提交、未构建。</li>
+      <li>未跟踪 31 项：六个独立构建产物目录（round3/4/5、final、photo-lazy 等，各 85.51 MiB）、审计文档（PARALLEL-ASSET-AUDIT / DOCUMENT-ARCHIVE-AUDIT）、验收证据截图、.exp-observe 临时观察目录。</li>
+      <li>体验线遗留：exSmart 真屏、eps-pop 自然对局触发、章节窄列换行、排版第二批未验。</li>
+      <li>本地 ahead 14 未推送；未 fetch，远端状态未核实。</li>
+    </ul>
+  </div>
+  <div class="panel">
+    <div class="pt">已知工程债（重构路线登记在案）</div>
+    <ul>
+      <li><code>Base.data</code> 仍是兼容可变接口：局内口袋清理、eggPity、战斗计数等直写路径未收口。</li>
+      <li>M 批 58 张 hosted 卡仍走文本执行器，不能称全部脱离文本解析。</li>
+      <li>battle.runtime 整体未纳入严格类型；下一轮候选=缩窄 interaction 的发现队列类型边界。</li>
+      <li>未验：全鼠标/拖拽流程、多尺寸矩阵、实机帧率、研究所完整实页通关、第 6 轮生产构建包体。</li>
+      <li>呈现不一致待拍板：撤离打包屏文案"消耗口袋自动回收"与实际 1/3 保留概率不符（属动效会话文件，只登记未改）。</li>
+    </ul>
+  </div>
+</div>
+
+<footer>数据来源：git log / git status / wc -l 实测 + docs/PROJECT-MEMORY-2026-09-28.md + docs/REFACTOR-2026-09-28.md · 生成于 2026-09-28 · Friday</footer>
+</div>
+
+<script>
+window.CODE_INVENTORY = {"agent": [["agent.policy.js", 872], ["agent.runner.js", 529], ["agent.state.js", 382], ["agent.recorder.js", 190], ["agent.llm.js", 180], ["agent.surface.js", 118], ["agent.console.js", 116], ["agent.weights.js", 114], ["agent.data.js", 107], ["agent.stats.js", 95], ["agent.protocol.js", 93], ["agent.js", 52], ["agent.turbo.js", 27]], "audio": [["sound.js", 594], ["sound.scape.js", 101], ["sound.policy.js", 35]], "battle": [["battle.engine.js", 1569], ["battle.resolution.js", 1190], ["battle.layers.js", 728], ["battle.aim.js", 697], ["battle.view.js", 634], ["battle.frames.js", 518], ["combat.js", 513], ["battle.vfx.js", 454], ["battle.enemy-phase.js", 438], ["battle.core.js", 424], ["battle.bag.js", 391], ["effect-steps.m2.js", 365], ["effect-steps.kills.js", 363], ["battle.lifecycle.js", 362], ["effect-steps.damage.js", 340], ["battle.exec-play.js", 280], ["battle.anim.js", 277], ["battle.snapshot.types.d.ts", 253], ["battle.selection-flow.js", 250], ["battle.discover-flow.js", 243], ["effect-steps.curse.js", 234], ["battle.equipment.js", 217], ["battle.snapshot.js", 211], ["effect-verbs.js", 199], ["battle.preview.js", 192], ["battle.overlays.js", 182], ["effect-steps.recovery.js", 164], ["effect-steps.audit.js", 154], ["battle.triggers.m2.js", 140], ["battle.rules.js", 135], ["battle.card-inspection.js", 122], ["runes.js", 113], ["battle.runtime.effects.js", 112], ["effect-steps.m1.js", 112], ["battle.staged-playback.js", 110], ["effect-steps.js", 109], ["effect-steps.deck.js", 107], ["battle.discover-state.js", 105], ["effect-steps.gates.js", 99], ["battle.runtime.session.js", 95], ["battle.clock.js", 92], ["effect-steps.ctx.js", 92], ["battle.feedback.js", 91], ["battle.hover.js", 90], ["effect-steps.rules.js", 82], ["battle.hand-selection.js", 76], ["battle.target-session.js", 76], ["battle.actions.js", 73], ["battle-loader.js", 68], ["battle.effects.js", 66], ["battle.card-cost.js", 63], ["battle.state.js", 58], ["battle.runtime.piles.js", 54], ["battle.action-runner.js", 53], ["battle.runtime.interaction.js", 50], ["battle.discover-candidates.js", 48], ["battle.hand.js", 48], ["effect-steps.tail.js", 42], ["battle.rule-guard.js", 34], ["battle.execution-session.js", 33], ["battle.piles.js", 31], ["battle.piles.view.js", 31], ["battle.animation.js", 30], ["battle.hosted.js", 30], ["battle.intents.js", 29], ["battle.pace.js", 27], ["battle.runtime.presentation.js", 26], ["battle.attack-cues.js", 20], ["battle.intent.js", 20], ["battle.deck.js", 18], ["hand-cost-patterns.js", 16], ["hosted-catalog-index.js", 12], ["battle.runtime.js", 8]], "cards": [["card-rules.schema.js", 1226], ["cards.sync.js", 1096], ["cards.data.js", 738], ["cards.rules.js", 347], ["cards.js", 305], ["cards.sync.m3.js", 273], ["cards.sync.m5.js", 267], ["cards.sync.m2.js", 232], ["card-rules.capability.js", 227], ["cards.sync.m6.js", 192], ["cards.sync.m4.js", 184], ["cards.sync.m1.js", 166], ["cards.sync.m9.js", 154], ["cards.view.js", 145], ["cards.sync.m7.js", 128], ["cards.sync.m8.js", 120], ["cards.sync.m11.js", 98], ["cards.sync.m10.js", 97], ["card-photo-notes.js", 58], ["mech-sentences.js", 53], ["cards.consts.js", 46], ["cards.catalog.js", 40], ["card-rarity.js", 28], ["card-rules.capability.types.d.ts", 27], ["card-render-context.js", 22]], "core": [["renderer.js", 605], ["art.js", 574], ["renderer.icons.js", 288], ["camera.js", 160], ["diagnostics.local.js", 133], ["icons-bitmap.js", 121], ["rule-config.js", 119], ["motion.js", 75], ["input.js", 70], ["random.js", 67], ["render-scheduler.js", 65], ["renderer.primitives.js", 65], ["event-bus.js", 64], ["motion-primitives.js", 56], ["map-reveals.js", 46], ["characters.js", 45], ["data-loader.js", 38], ["random-core.js", 36], ["rules.js", 35], ["mapData.js", 34], ["renderer.fx.js", 34], ["shared.js", 30], ["notes.js", 29], ["performance-budgets.js", 27], ["sdt-facade.js", 22], ["node-info.js", 19], ["storage.js", 15], ["asset-url.js", 14]], "experience": [["pocket-strip.js", 152]], "generated": [["art-manifest.js", 489], ["thumb-manifest.js", 331], ["narrative-events.js", 2]], "home": [["home.scene.js", 616], ["home.visuals.js", 330], ["home.commands.js", 178], ["story.last-lamp.js", 110], ["narrative.js", 76], ["home.presenter.js", 39], ["home.catalog.js", 34], ["story.commands.js", 32]], "hub": [["game.bag.js", 721], ["game.hub.pages.js", 649], ["game.cardslib.page.js", 640], ["base.js", 623], ["game.hub.js", 385], ["game.cardslib.designer.js", 373], ["meta.js", 364], ["game.bag.settle.js", 359], ["game.hub.depart.js", 348], ["extraction.commands.js", 304], ["battle-settlement.commands.js", 261], ["collection.commands.js", 227], ["game.notes.js", 225], ["game.bag.drag.js", 195], ["nest-settlement.commands.js", 186], ["game.storage.js", 184], ["recovery.commands.js", 178], ["game.store.types.d.ts", 152], ["battle-settlement.commands.types.d.ts", 151], ["recoverable-pair.js", 146], ["game.hub.preparation.js", 140], ["terminal.commands.js", 138], ["preparation.commands.js", 136], ["base.commands.js", 127], ["base-state.js", 111], ["game.cardslib.photo-fps.js", 95], ["game.store.js", 95], ["game.cardslib.js", 94], ["run-save-validation.js", 91], ["versioned-slot-reader.js", 82], ["base-economy.js", 76], ["game.bag.rules.js", 70], ["preparation.view.js", 67], ["base-departure.commands.js", 63], ["battle-victory-progress.js", 57], ["base-progression.commands.js", 55], ["game.cardslib.art-warm.js", 52], ["meta-progression.js", 49], ["game.cardslib.common.js", 48], ["base-mutation.js", 41], ["base-elapsed.commands.js", 40], ["commands.shared.js", 40], ["game.cardslib.photo-props.js", 40], ["base-pet-egg.commands.js", 38], ["preparation.sources.js", 24], ["photo-studio-presentation.js", 18], ["bag-return-hook.js", 12], ["game.hub.bridge.js", 7], ["game.bag.bridge.js", 5]], "run": [["game.run.altar.js", 958], ["game.run.flow.js", 844], ["game.nest.js", 653], ["game.session.js", 557], ["game.run.shop.js", 442], ["chests.js", 425], ["game.run.scenes.js", 345], ["map-generator.js", 287], ["map-snapshot.js", 179], ["game.run.dev.js", 176], ["game.session.death.js", 166], ["game.session.bag.js", 126], ["game.session.board.js", 108], ["expedition.view.js", 103], ["game.session.map.js", 95], ["lab.ending.js", 94], ["map-graph.js", 81], ["game.session.kernel.js", 74], ["encounter-selector.js", 51], ["extraction-preview.js", 51], ["game.run.data.js", 46], ["encounter-meta.js", 35], ["game.session.modes.js", 27], ["layeredMap.js", 24], ["game.run.js", 22], ["game.session.browser.js", 9]], "ui": [["game.menu.js", 1124], ["ui.js", 470], ["overlay.js", 350], ["hud.js", 147], ["cinematics.js", 127], ["term-tips.js", 122], ["feedback.local.js", 90], ["route-overlay.js", 77], ["quick-nav.js", 73], ["ui-scale.js", 59]]};
+
+// ---------- treemap ----------
+(function () {
+  const domains = [
+    ["battle", 14787, 73, "#2f6f9f"], ["hub", 8582, 49, "#3a7ec2"], ["cards", 6269, 25, "#7a5fb5"],
+    ["run", 5978, 26, "#3f9d7a"], ["core", 2886, 28, "#b5853a"], ["agent", 2875, 13, "#c25f7a"],
+    ["ui", 2639, 10, "#9f4fa8"], ["home", 1415, 8, "#5f8a4a"], ["generated", 822, 3, "#6b7a8f"],
+    ["audio", 730, 3, "#a86a3f"], ["experience", 152, 1, "#4a9aa0"], ["根入口 boot/boot/main", 918, 5, "#5d6b83"]
+  ];
+  const inv = window.CODE_INVENTORY || {};
+  const tip = d => {
+    const files = (inv[d[0]] || []).map(f => f[0] + "  " + f[1]).join("\n");
+    return d[0] + " · " + d[2] + " 文件 / " + d[1].toLocaleString() + " 行\n" + files;
+  };
+  function treemap(items, x, y, w, h, out) {
+    if (!items.length) return;
+    if (items.length === 1) { out.push({ d: items[0], x, y, w, h }); return; }
+    const total = items.reduce((s, i) => s + i[1], 0);
+    let acc = 0, i = 0;
+    do { acc += items[i][1]; i++; } while (i < items.length - 1 && acc < total / 2);
+    const frac = acc / total;
+    if (w >= h) { treemap(items.slice(0, i), x, y, w * frac, h, out); treemap(items.slice(i), x + w * frac, y, w * (1 - frac), h, out); }
+    else { treemap(items.slice(0, i), x, y, w, h * frac, out); treemap(items.slice(i), x, y + h * frac, w, h * (1 - frac), out); }
+  }
+  const host = document.getElementById("treemap");
+  const W = host.clientWidth, H = host.clientHeight, out = [];
+  treemap(domains.slice().sort((a, b) => b[1] - a[1]), 0, 0, W, H, out);
+  out.forEach(c => {
+    const el = document.createElement("div");
+    el.className = "tm-cell";
+    el.style.cssText = "left:" + c.x + "px;top:" + c.y + "px;width:" + (c.w - 2) + "px;height:" + (c.h - 2) + "px;background:" + c.d[2] + "33;border-color:" + c.d[2];
+    el.title = tip(c.d);
+    el.innerHTML = c.w > 90 && c.h > 44
+      ? '<div class="n">' + c.d[0] + '</div><div class="m">' + c.d[1].toLocaleString() + " 行 · " + c.d[2] + " 文件</div>"
+      : (c.w > 60 ? '<div class="m">' + c.d[0] + "</div>" : "");
+    host.appendChild(el);
+  });
+  document.getElementById("tm-legend").innerHTML = domains
+    .slice().sort((a, b) => b[1] - a[1])
+    .map(d => '<span><span class="sw" style="background:' + d[2] + '"></span>' + d[0] + " " + (d[1] / 48053 * 100).toFixed(1) + "%</span>").join(" · ");
+})();
+
+// ---------- trend ----------
+(function () {
+  const pts = [["基线 be589a2", 1672, "204 文件"], ["R1 96950de", 1751, "211"], ["R2 9a51054", 1769, "214"], ["R3 f4c5838", 1784, "217"], ["R4 74bf80f", 1803, "220"], ["R5 662e3cf", 1820, "223"], ["R6 全量", 1833, "226"]];
+  const svg = document.getElementById("trend");
+  const X0 = 60, X1 = 660, Y0 = 200, Y1 = 30, V0 = 1620, V1 = 1870;
+  const px = i => X0 + (X1 - X0) * i / (pts.length - 1);
+  const py = v => Y0 - (Y0 - Y1) * (v - V0) / (V1 - V0);
+  let s = "";
+  for (let v = 1650; v <= 1850; v += 50) s += '<line x1="' + X0 + '" y1="' + py(v) + '" x2="' + X1 + '" y2="' + py(v) + '" stroke="#1a2230"/><text x="' + (X0 - 8) + '" y="' + (py(v) + 4) + '" fill="#5d6b83" font-size="11" text-anchor="end">' + v + "</text>";
+  s += '<polyline points="' + pts.map((p, i) => px(i) + "," + py(p[1])).join(" ") + '" fill="none" stroke="#5ec8d8" stroke-width="2.5"/>';
+  pts.forEach((p, i) => {
+    s += '<circle cx="' + px(i) + '" cy="' + py(p[1]) + '" r="4.5" fill="#0b0f17" stroke="#5ec8d8" stroke-width="2"/>';
+    s += '<text x="' + px(i) + '" y="' + (py(p[1]) - 12) + '" fill="#f2f6fc" font-size="12" font-weight="700" text-anchor="middle">' + p[1] + "</text>";
+    s += '<text x="' + px(i) + '" y="' + (Y0 + 18) + '" fill="#7d8ba1" font-size="10.5" text-anchor="middle">' + p[0].split(" ")[0] + "</text>";
+    s += '<text x="' + px(i) + '" y="' + (Y0 + 33) + '" fill="#55647e" font-size="10" text-anchor="middle">' + p[2] + " 文件</text>";
+  });
+  svg.innerHTML = s;
+})();
+
+// ---------- commits ----------
+(function () {
+  const raw = [
+    ["2cef754", "09-28 16:39", "docs", "docs(vite): record discovery and elapsed verification"],
+    ["662e3cf", "09-28 16:29", "refactor", "refactor(vite): batch discovery queries and own elapsed updates"],
+    ["e6836fc", "09-28 14:51", "docs", "docs(vite): record hand selection and pet egg verification"],
+    ["74bf80f", "09-28 14:40", "refactor", "refactor(vite): unify hand selection rules and pet egg state"],
+    ["d443b0e", "09-28 14:01", "docs", "docs(vite): record departure and selection verification"],
+    ["f4c5838", "09-28 13:52", "refactor", "refactor(vite): consolidate departure state and selection ports"],
+    ["86644ca", "09-28 13:13", "docs", "docs(vite): record code quality iteration verification"],
+    ["9a51054", "09-28 13:05", "refactor", "refactor(vite): improve feature boundaries and catalog queries"],
+    ["96950de", "09-28 12:29", "refactor", "refactor(vite): isolate transactions, lazy features, and strict contracts"],
+    ["be589a2", "09-28 11:26", "chore", "chore(vite): consolidate verified gameplay and presentation baseline"],
+    ["9fb155a", "09-28 10:34", "docs", "docs: record verified September 28 delivery"],
+    ["f03be53", "09-28 10:27", "fix", "fix(run): restore chest interactions and refine class selection"],
+    ["791b2c2", "09-27 23:45", "feat", "feat(cards): complete M batch rule migration"],
+    ["a8e91e6", "09-27 18:50", "docs", "docs: add parallel engineering inventory reports"],
+    ["6f55166", "09-27 18:12", "docs", "docs: record E8 full gate and local commit"],
+    ["4425ad4", "09-27 18:07", "feat", "feat(cards): migrate E8 fixed-heal backpack rules and inventory"],
+    ["7c8e383", "09-27 17:10", "docs", "docs: record E7 acceptance and local commit"],
+    ["eeffe5e", "09-27 17:05", "fix", "fix: surface entry and battle failures and close settled retry dialogs"],
+    ["7cf5b6c", "09-27 15:45", "docs", "docs: record E6 full-suite acceptance and commit"],
+    ["8c73f88", "09-27 15:40", "fix", "fix: reject unsupported card rules before battle payment"],
+    ["e8a169b", "09-27 15:05", "docs", "docs: record E5 full-suite acceptance and commit"],
+    ["92f6a74", "09-27 15:00", "fix", "fix: validate run recovery and report persistence outcomes"],
+    ["3d06b1e", "09-27 14:32", "docs", "docs: record E4 full-suite acceptance and commit"],
+    ["98fed06", "09-27 14:28", "fix", "fix: isolate stale async entries and report command results"],
+    ["cbeee02", "09-27 13:49", "docs", "docs: record unified E2 and E3 acceptance gates"],
+    ["86edf14", "09-27 13:45", "fix", "fix: persist battle victory through recoverable settlement"],
+    ["9749013", "09-27 13:40", "fix", "fix: restore enemy HP after battle overlay remount"],
+    ["480e1f6", "09-27 12:40", "test", "test: record E2 isolated view acceptance and display blocker"],
+    ["1f18250", "09-27 11:56", "docs", "docs: record E2 full-suite and isolated view evidence"],
+    ["c9affb8", "09-27 11:50", "fix", "fix: isolate battle snapshot cards and check preview contracts"]
+  ];
+  document.getElementById("commits").innerHTML = "<table><tr><th>提交</th><th>时间</th><th>类型</th><th>说明</th></tr>" +
+    raw.map(c => '<tr><td class="hash">' + c[0] + '</td><td class="date">' + c[1] + '</td><td><span class="tag ' + c[2] + '">' + c[2] + '</span></td><td class="msg">' + c[3] + "</td></tr>").join("") + "</table>";
+})();
+
+// ---------- inventory ----------
+(function () {
+  const order = ["根入口", "battle", "hub", "cards", "run", "core", "agent", "ui", "home", "audio", "experience", "generated"];
+  const meta = { "根入口": [5, 918], battle: [73, 14787], hub: [49, 8582], cards: [25, 6269], run: [26, 5978], core: [28, 2886], agent: [13, 2875], ui: [10, 2639], home: [8, 1415], audio: [3, 730], experience: [1, 152], generated: [3, 822] };
+  const inv = window.CODE_INVENTORY || {};
+  const lines = ["boot-order.js", "game.boot.js", "main.js", "e2.snapshot.qa.js", "r7a.qa.js"];
+  const all = Object.assign({}, inv);
+  all["根入口"] = lines.map(l => [l, "—"]);
+  document.getElementById("inventory").innerHTML =
+    '<details><summary>展开 244 个源文件完整清单（按功能域分组）</summary><div class="inv-grid">' +
+    order.map(d => {
+      const m = meta[d] || ["?", "?"];
+      const list = (all[d] || []).slice().sort((a, b) => (typeof b[1] === "number" ? b[1] : 0) - (typeof a[1] === "number" ? a[1] : 0));
+      return '<div class="inv-domain"><div class="ih">' + d + '<span>' + m[0] + " 文件 · " + m[1].toLocaleString() + " 行</span></div><ul>" +
+        list.map(f => "<li>" + f[0] + "<span>" + f[1] + "</span></li>").join("") + "</ul></div>";
+    }).join("") + "</div></details>";
+})();
+</script>
+</body>
+</html>

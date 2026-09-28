@@ -19,13 +19,29 @@ export type BattleSettlementPayload = {
   readonly encounterId: string | null;
 };
 
+export type BattleVictoryProgressInput = {
+  readonly foeNames: readonly string[];
+  readonly isBoss: boolean;
+  readonly classId: string;
+  readonly xpMultiplier: number;
+};
+
+export type BattleVictoryProgressOutput = {
+  readonly levelUps: readonly { readonly classId: string; readonly levels: readonly number[] }[];
+};
+
+export type BattleSettlementOutput = {
+  readonly eggBattles: number;
+  readonly progression?: BattleVictoryProgressOutput;
+};
+
 export type BattleSettlementReceipt = {
   readonly requestId: string;
   readonly command: 'battle.win';
   readonly baseRevision: number;
   readonly runRevision: number;
   readonly runId: string;
-  readonly output: { readonly eggBattles: number };
+  readonly output: BattleSettlementOutput;
 };
 
 export type BattleSettlementRunSnapshot = {
@@ -50,7 +66,7 @@ export type BattleSettlementAttempt = {
   readonly payload: BattleSettlementPayload;
   readonly afterBase: BattleSettlementBaseSnapshot;
   readonly afterRun: BattleSettlementRunSnapshot;
-  readonly output: { readonly eggBattles: number };
+  readonly output: BattleSettlementOutput;
 };
 
 export type BattleSettlementFailure = {
@@ -110,7 +126,7 @@ export type BattleSettlementRecoveryPort = {
       readonly payload: BattleSettlementPayload;
       readonly afterBase: BattleSettlementBaseSnapshot;
       readonly afterRun: BattleSettlementRunSnapshot;
-      readonly output: { readonly eggBattles: number };
+      readonly output: BattleSettlementOutput;
     },
   ): Promise<BattleSettlementResult<BattleSettlementReceipt>>;
 };
@@ -122,6 +138,7 @@ export type BattleSettlementCommands = {
     readonly node: BattleSettlementNode;
     readonly afterRun: BattleSettlementRunSnapshot;
     readonly elapsedDelta: number;
+    readonly victoryProgress?: BattleVictoryProgressInput;
   }): Promise<BattleSettlementAttemptResult>;
   commitAttempt(attempt: BattleSettlementAttempt): Promise<BattleSettlementCommitResult>;
 };

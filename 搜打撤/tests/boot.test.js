@@ -144,9 +144,32 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     expect(document.querySelector('.lib-grid')).not.toBeNull();
     expect(document.querySelector('#libPreview .studio-preview-frame')).not.toBeNull();
     const sort = document.getElementById('libSort');
+    // 选中一张换序后会移动位置的卡，确保筛选台在 ID 不变时仍重算序号和导航状态。
+    const cards = window.SDT.Cards.all();
+    const byId = new Map(cards.map(card => [card.id, card]));
+    const rarityOrder = [...document.querySelectorAll('#libGrid .lib-cardwrap')].map(node => node.dataset.card);
+    const nameOrder = [...rarityOrder].sort((a, b) => String(byId.get(a)?.name || '').localeCompare(String(byId.get(b)?.name || ''), 'zh'));
+    const selectedId = rarityOrder.find((id, i) => nameOrder.indexOf(id) !== i);
+    expect(selectedId).toBeTruthy();
+    const selectedNode = document.querySelector(`#libGrid .lib-cardwrap[data-card="${selectedId}"]`);
+    selectedNode.focus();
+    const oldPosition = document.querySelector('#libPreview .pv-pos').textContent;
     sort.value = 'name';
     sort.dispatchEvent(new Event('input', { bubbles: true }));
     expect(sort.value).toBe('name');
+    expect(document.querySelector('#libPreview .pv-pos').textContent).not.toBe(oldPosition);
+    expect(document.querySelector('#libPreview .pv-pos').textContent).toBe(`${nameOrder.indexOf(selectedId) + 1} / ${nameOrder.length}`);
+
+    search.value = byId.get(selectedId).name;
+    search.dispatchEvent(new Event('input', { bubbles: true }));
+    await new Promise(r => setTimeout(r, 150));
+    const selectedTile = document.querySelector(`#libGrid .lib-cardwrap[data-card="${selectedId}"]`);
+    const selectedIndex = Number(selectedTile.closest('.lib-item').dataset.i);
+    const filteredCount = Number(document.getElementById('libResultCount').textContent);
+    expect(document.querySelector('#libPreview .pv-pos').textContent).toBe(`${selectedIndex + 1} / ${filteredCount}`);
+    expect(document.querySelector('#libPreview [data-act="libPrev"]').disabled).toBe(selectedIndex === 0);
+    expect(document.querySelector('#libPreview [data-act="libNext"]').disabled).toBe(selectedIndex === filteredCount - 1);
+    document.querySelector('[data-act="libClearFilter"]').click();
     window.SDT.Sound.sfx = originalSfx;
   });
 

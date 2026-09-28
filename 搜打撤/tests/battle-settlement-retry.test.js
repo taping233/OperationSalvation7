@@ -77,7 +77,7 @@ beforeEach(() => {
     },
     Base: { slot: 1, data: { eggBattles: 0, ammoTaught: true }, save: vi.fn(() => true), isSha: () => false },
     Cards: { SHA: { id: 'starter-attack' }, all: () => [{ id: 'legend', rarity: '传说' }], isRandomObtainable: () => true, cardHTML: () => '' },
-    Meta: { track: vi.fn() },
+    Meta: { track: vi.fn(), xpMultiplier: () => 1, publishBattleProgress: vi.fn() },
     Chests: {
       rollDrops: vi.fn(() => [{ kind: 'small' }]), dropText: () => '小宝箱',
       open: vi.fn((_game, _drops, done) => { state.chestDone = done; }),

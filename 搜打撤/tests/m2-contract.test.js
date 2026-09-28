@@ -1,5 +1,5 @@
 // M2 契约扩展验收（2026-09-27 代理E）：块1 onPlay 剩余扩展 + 块2 triggers/lifecycle/装备域。
-// 规格：docs/M-BATCH-CONTRACT-SPEC.md（M2 状态标注）；实现：schema/capability/m2 执行件/
+// 规格：docs/cards/M-BATCH-CONTRACT-SPEC-2026-09-27.md（M2 状态标注）；实现：schema/capability/m2 执行件/
 // battle.triggers.m2.js runner/engine 挂点/equipment/card-cost/enemy-phase。
 import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
 import { validateCardRules } from '../game/src/cards/card-rules.schema.js';

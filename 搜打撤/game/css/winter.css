@@ -1146,7 +1146,7 @@ body,body *{font-family:'HarmonyOS Sans SC','HarmonyOS Sans','Noto Sans SC Sub',
 #overlay .card.chest .bt-hand.no-anim .chest-fly{animation:none}
 
 /* ============================================================
-   v3 卡牌定调（2026-09-12 老板拍板，docs/redesign/card-design-v3.html）：
+   v3 卡牌定调（2026-09-12 老板拍板，docs/previews/redesign-legacy/card-design-v3.html）：
    框色=职业（金属渐变包边）· 卡名丝带=稀有度 · 费用蓝晶球浮角 ·
    类型铭牌压插画下缘 · 深底描述面板。全部 em 随卡缩放，战斗/牌库/商店共用。
    ============================================================ */
