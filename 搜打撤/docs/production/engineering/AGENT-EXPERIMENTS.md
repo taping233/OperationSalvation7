@@ -23,7 +23,16 @@ npx vite-node game/tools/agent-batch.mjs --runs 100 --policy strategic --seed-ba
 node game/tools/agent-compare.mjs output/agent-exp-rN-candidate/runs.jsonl output/agent-exp-rN-champion/runs.jsonl
 ```
 
-保留 selfcheck 和 compare 原始输出。若实验使用 weights、mode、probe、额外 flags 或 LLM，记录中完整展开，不能省略成“同上”。
+保留 selfcheck 和 compare 原始输出。若实验使用 weights、mode、probe、额外 flags 或 LLM，记录中完整展开，不能省略成“同上”。正式 V 集使用与 T 集不同的 seed 底；以下 PowerShell 示例展示 V 集的记录方式：
+
+```powershell
+npx vite-node game/tools/agent-batch.mjs --runs 100 --policy strategic --seed-base 88001 --weights output/weights-rN.json --out output/agent-exp-rN-v-candidate
+npx vite-node game/tools/agent-batch.mjs --runs 100 --policy strategic --seed-base 88001 --out output/agent-exp-rN-v-champion
+node game/tools/agent-compare.mjs output/agent-exp-rN-v-candidate/runs.jsonl output/agent-exp-rN-v-champion/runs.jsonl | Tee-Object -FilePath output/agent-exp-rN-v-compare.txt
+node game/tools/agent-ledger.mjs add --exp rN --split verify --verify output/agent-exp-rN-v-candidate --compare output/agent-exp-rN-v-compare.txt --hypothesis "预先声明的一变量假设" --verdict promote
+```
+
+最后一行只有在 compare 的机器结果允许晋级时才能写入；否则记录 `hold` 或 `discard` 及原因。
 
 ## 配对与结果判定
 
@@ -31,8 +40,12 @@ node game/tools/agent-compare.mjs output/agent-exp-rN-candidate/runs.jsonl outpu
 - 对照与候选固定游戏模式、seed、驱动、步数/超时、代码运行环境及实验 flags；每轮只改预先声明的一个策略操作点/变量。若修复正确性缺陷，作为根因修复记录，和策略收益实验分开解释。
 - 保留逐 seed 原始结果，以 `agent-compare.mjs` 的配对符号检验和业务指标作为判定证据；同时报告撤离/通关、均层、带出价值、死亡/弃局及子群指标。不能仅凭裸均值或总分判定。
 - 按现行 playbook 与比较工具，弃局率超过 5% 或超时率超过 5% 分别构成硬否决；超时是卡死/慢死螺旋故障，须与策略性弃局分开统计。T 集 p<0.05 且方向有利才进入 V 集。V 必须换验收 seed 底并同样配对；只有通过 V 才 promote。早停/判毙、hold、baseline 都写清依据。多指标冲突、pairing 不足或统计检验无法计算时结论记 hold/不可判，不挑有利指标。
-- 台账现有字段与 verdict 枚举见 `agent-ledger.mjs`：`promote`、`discard`、`hold`、`baseline`。每条 ledger 记录应能回链到本页要求的代码状态、命令、两侧跑次产物和 compare 输出；台账摘要不能替代原始数据。
+- 台账 verdict 枚举见 `agent-ledger.mjs`：`promote`、`discard`、`hold`、`baseline`。新记录附 T/V 产物路径与 SHA-256、所选 split 的 provenance、compare 报告 hash 和机器判决。`promote` 必须指定 `--split verify`、`--verify` 与 `--compare`；compare 的 `promotionAllowed=true`、`provenanceStatus=verified` 且 challenger 的 runs/summary hash 与 V 产物一致，否则拒绝追加。台账摘要不能替代原始数据。
 
-## 尚未由现有工具自动保证
+## 工具现行保证与仍需人工记录的部分
 
-当前 batch/compare/ledger 提供跑局数据、seed 配对、统计比较和人工台账入口；本页要求的 dirty tree 快照、权重内容 hash、环境完整清单及产物校验值需要实验者记录，不能声称工具会自动采集。配对检验适用于同 seed 的逐局比较，不自动解决反复检验/多指标选择、样本分布变化或 LLM 服务漂移；这些需通过 T/V 隔离、预先声明判据、固定模型版本并保留原始产物控制。
+新批跑的 `summary.meta.provenance` 自动记录 HEAD、分支、dirty 标志、Vite 相关代码差异及未跟踪源码内容的指纹、运行期间是否变化、Node/系统/依赖锁 hash、批跑参数、权重来源与解析后内容 hash。它不保存原始 diff、命令行、环境变量或密钥。Git 或锁文件不可用时显式留空，对照工具拒绝据此晋级。代码指纹只覆盖工具声明的 Vite 代码、数据、测试和配置路径，并非整个仓库的可恢复快照。
+
+`agent-compare.mjs` 继续展示历史跑次的统计结果，同时把旧 summary 标为“历史未验证”。新跑次只有代码指纹、运行环境、实验参数一致，`probeUi=false`，两侧 seed 完整且唯一并 100% 配对，才可能输出 `promotionAllowed=true`；它会追加一行 `[agent-compare-result]` JSON 供台账读取。候选与对照可有预先声明的 policy、driver 或权重差异。`promote` 仍须基于独立 V 集，比较工具本身不知道某一 seed 底是否曾用于 T 集。
+
+实验者仍须保存完整命令、可恢复的 dirty tree 补丁或快照、T/V seed 分配、原始 compare 文本和失败产物，并说明预先声明的单变量假设。工具不自动解决反复检验、多指标选择、样本分布变化或 LLM 服务漂移；这些由实验计划、固定模型版本和人工审阅控制。

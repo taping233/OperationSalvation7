@@ -1,0 +1,20 @@
+实验证据：已验证
+策略：challenger greedy / greedy / weights e843b62e6b417ce29d7559ebb63bca2960af58433b0450a310d107eb777f45be
+策略：champion   greedy / greedy / weights e843b62e6b417ce29d7559ebb63bca2960af58433b0450a310d107eb777f45be
+配对局数 1（seed 99001..）
+胜负: challenger 赢 0 · 输 0 · 平 1
+符号检验双侧 p = 1.0000  →  不显著
+
+指标        challenger   champion
+撤离率        0.0%         0.0%
+均层         0.00         0.00
+弃局率        100.0%       100.0%
+超时率        0.0%         0.0%
+均价值        0.00         0.00
+
+outcome 转移（champion→challenger）:
+  abandon→abandon: 1
+
+
+判决: 毙 —— 弃局率 >5% 硬约束违规（不看 p 值）
+[agent-compare-result] {"schemaVersion":1,"verdict":"discard","promotionAllowed":false,"provenanceStatus":"verified","reasons":[],"pValue":1,"wins":0,"losses":0,"ties":1,"pairs":1,"pairRate":100,"challenger":{"policy":"greedy","driver":"greedy","weightsSha256":"e843b62e6b417ce29d7559ebb63bca2960af58433b0450a310d107eb777f45be","runsSha256":"da8b99f76e2ffb4f9c862b43ac09c21cbb95255113b1909312c6f8c7f543a92d","summarySha256":"2cac74960c76ceaf0cc6fe0e4c66b62ee9a5cae07636a5cf7e093874ff254f25"},"champion":{"policy":"greedy","driver":"greedy","weightsSha256":"e843b62e6b417ce29d7559ebb63bca2960af58433b0450a310d107eb777f45be","runsSha256":"3bf4b6ce5161d14e3210b9adce17c6dd26dd954cbec4b151446c489bacca70ae","summarySha256":"1027c9cf47787d4e9a993bfd2504d5983e29af04d15d81b8948df8f54f003fa2"}}

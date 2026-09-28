@@ -6,6 +6,8 @@
 
 [Agent 输出逐项快照](agent-output-inventory-2026-09-28.tsv)列出本机 `output/` 的 250 个实验子目录和 67 个根文件；背景与保留理由见[项目文件夹盘点](../PROJECT-FOLDER-INVENTORY-2026-09-28.md)。`output/` 被 Git 忽略，快照中的路径只在对应本机现场核实过。
 
+[Agent 实验溯源链路烟测](agent-provenance-smoke-2026-09-28/README.md)保存两侧逐局/汇总、compare 原文和隔离台账；只用于验证代码指纹、配对与晋级门。
+
 [低成本优化与验证记录](LOW-COST-OPTIMIZATIONS-2026-09-28.md)记录照相馆选片台修复、当前窗口实页、隔离构建预算、字体许可边界及研究所未验证项。
 
 [第六轮隔离生产构建日志](refactor-2026-09-28/round6-isolated-build.log)保留前置数据校验、Vite 转换与 postbuild 预算的完整输出；该产物目录已在收尾时清理。

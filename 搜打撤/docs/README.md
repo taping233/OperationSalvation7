@@ -2,6 +2,8 @@
 
 本目录同时保存现行说明、带时间的工作记录、测试证据和设计预览。接手开发先读[项目入口](../README.md)与[状态入口](STATUS.md)，再核对实时 `git status --short` 与 `git log -1`；带日期的记录只说明当时的工作树与验证边界。
 
+制作目标与执行入口见[制作资料总览](production/README.md)；分层验收与当前浏览器性能的带时间证据分别见[验收记录](ACCEPTANCE-FAST-GATE-RESULT-2026-09-28.md)和[实页性能记录](VITE-IAB-PERFORMANCE-2026-09-28.md)。
+
 ## 现行说明
 
 | 用途 | 入口 |

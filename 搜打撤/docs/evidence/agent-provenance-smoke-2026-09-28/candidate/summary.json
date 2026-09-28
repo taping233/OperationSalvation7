@@ -1,0 +1,153 @@
+{
+  "total": 1,
+  "overall": {
+    "runs": 1,
+    "outcomes": {
+      "clear": 0,
+      "extract": 0,
+      "death": 0,
+      "abandon": 1
+    },
+    "clearRate": 0,
+    "extractRate": 0,
+    "deathRate": 0,
+    "surviveRate": 0,
+    "avgLayer": 0,
+    "avgTurns": 0,
+    "avgDurationSec": 0,
+    "avgCarriedValue": 0,
+    "maxCarriedValue": 0,
+    "battles": {
+      "fought": 0,
+      "won": 0
+    },
+    "battleWinRate": 0
+  },
+  "deathByLayer": {},
+  "deathBucket": {},
+  "topCards": [],
+  "byClass": {
+    "—": {
+      "runs": 1,
+      "outcomes": {
+        "clear": 0,
+        "extract": 0,
+        "death": 0,
+        "abandon": 1
+      },
+      "clearRate": 0,
+      "extractRate": 0,
+      "deathRate": 0,
+      "surviveRate": 0,
+      "avgLayer": 0,
+      "avgTurns": 0,
+      "avgDurationSec": 0,
+      "avgCarriedValue": 0,
+      "maxCarriedValue": 0,
+      "battles": {
+        "fought": 0,
+        "won": 0
+      },
+      "battleWinRate": 0
+    }
+  },
+  "byMode": {
+    "standard": {
+      "runs": 1,
+      "outcomes": {
+        "clear": 0,
+        "extract": 0,
+        "death": 0,
+        "abandon": 1
+      },
+      "clearRate": 0,
+      "extractRate": 0,
+      "deathRate": 0,
+      "surviveRate": 0,
+      "avgLayer": 0,
+      "avgTurns": 0,
+      "avgDurationSec": 0,
+      "avgCarriedValue": 0,
+      "maxCarriedValue": 0,
+      "battles": {
+        "fought": 0,
+        "won": 0
+      },
+      "battleWinRate": 0
+    }
+  },
+  "byDriver": {
+    "greedy": {
+      "runs": 1,
+      "outcomes": {
+        "clear": 0,
+        "extract": 0,
+        "death": 0,
+        "abandon": 1
+      },
+      "clearRate": 0,
+      "extractRate": 0,
+      "deathRate": 0,
+      "surviveRate": 0,
+      "avgLayer": 0,
+      "avgTurns": 0,
+      "avgDurationSec": 0,
+      "avgCarriedValue": 0,
+      "maxCarriedValue": 0,
+      "battles": {
+        "fought": 0,
+        "won": 0
+      },
+      "battleWinRate": 0
+    }
+  },
+  "meta": {
+    "policy": "greedy",
+    "driver": "greedy",
+    "runs": 1,
+    "mode": "standard",
+    "seedBase": 99001,
+    "generatedAt": "2026-09-28T14:36:43.629Z",
+    "avgRunMs": 88,
+    "avgStepMs": 44,
+    "errRuns": 0,
+    "errTotal": 0,
+    "jsdomNoiseRuns": 0,
+    "slowStepRuns": 0,
+    "timeoutRuns": 0,
+    "provenance": {
+      "schemaVersion": 1,
+      "code": {
+        "head": "2cef75485c91e205bc493351b9d1983f16621be2",
+        "branch": null,
+        "dirty": true,
+        "fingerprint": "b837f1243df4d2b4a4fd9378899b5ffeafc8952bc53fe9bc3526afd53c22ae13",
+        "changedDuringRun": false
+      },
+      "runtime": {
+        "node": "v24.13.0",
+        "platform": "win32",
+        "arch": "x64",
+        "lockSha256": "5ffee07729dacc1f56f4be3325a53dbe5a177eada38247cf265cd42eaaa9ce82"
+      },
+      "config": {
+        "policy": "greedy",
+        "mode": "standard",
+        "seedBase": 99001,
+        "runs": 1,
+        "maxSteps": 2,
+        "timeoutMs": 5000,
+        "slowStepMs": 1000,
+        "probeUi": false,
+        "profile": false,
+        "selfcheck": false,
+        "debugSteps": 0,
+        "scdbg": false
+      },
+      "weights": {
+        "source": "default",
+        "sha256": "e843b62e6b417ce29d7559ebb63bca2960af58433b0450a310d107eb777f45be"
+      }
+    }
+  }
+}

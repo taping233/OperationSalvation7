@@ -43,6 +43,7 @@ npm run perf
 
 ## 文档导航
 
+- [制作资料总入口（章程、GDD、视觉、工程、迭代与验收）](docs/production/README.md)
 - [项目状态入口](docs/STATUS.md)
 - [文档分类与归档审阅](docs/README.md)
 - [项目记忆快照（2026-09-28 上午）](docs/PROJECT-MEMORY-2026-09-28.md)
