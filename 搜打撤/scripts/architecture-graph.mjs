@@ -29,7 +29,7 @@ const PURE_MODULES = new Set([
   'cards/card-rarity.js', 'cards/card-render-context.js',
   'core/rule-config.js', 'hub/base-state.js', 'hub/base-mutation.js',
   'hub/base-economy.js', 'hub/base-progression.commands.js',
-  'battle/battle.card-inspection.js', 'battle/hosted-catalog-index.js',
+  'battle/battle.card-inspection.js', 'battle/battle.hand-selection.js', 'battle/hosted-catalog-index.js',
 ]);
 // These feature domains use explicit runtime ports and must stay importable without the browser facade.
 const BROWSER_ISOLATED_MODULES = new Set(['battle/battle.selection-flow.js']);

@@ -46,6 +46,7 @@ import { createBattleSnapshot, createBattleSnapshotSignature } from './battle.sn
 import { createBattleResolution } from './battle.resolution.js';
 import './battle.feedback.js';
 import { createBattleSelectionFlow } from './battle.selection-flow.js';
+import { matchesHandSelectKey as matchHandSelectKey } from './battle.hand-selection.js';
 import { createBattleEquipment } from './battle.equipment.js';
 import { createBattleBag } from './battle.bag.js';
 import { getHostedExecutionCard } from './battle.hosted.js';
@@ -1223,7 +1224,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
   // —— 出牌结算长流程（queueCardExecution + execPlay）已拆出 battle.exec-play.js：工厂注入 + 一行转发 shim（具名导出面不变）——
   const execPlayFlow = createBattleExecPlay({
     warnCardRuleRejection,
-    requestBattleRender, findCard, matchHandSelectKey, fireConsumeTriggers, effCostOf,
+    requestBattleRender, findCard, fireConsumeTriggers, effCostOf,
     resolveInfusedFuel, runStagedSteps, consumeFireballSteps, resolveCardWithFeedback,
     takeSurge, registerEquip, summonAlly, applyKillRewards, poisonRandomFoe, applyImitate, checkElementSealProgress,
     beginDartStrike, sweepDead, finish, processChoice, processDiscoverQueue, queueBattleAction,
@@ -1355,7 +1356,6 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
   }
 
   function randomDiscoverCard(pred, rarity, otherCls) { return selectionFlow.randomDiscoverCard(pred, rarity, otherCls); }
-  function matchHandSelectKey(card, key) { return selectionFlow.matchHandSelectKey(card, key); }
   function processHandSelect() { return selectionFlow.processHandSelect(); }
   function skipHandSelect() { return selectionFlow.skipHandSelect(); }
   function pickHandSelect(uid) { return selectionFlow.pickHandSelect(uid); }

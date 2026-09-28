@@ -3,6 +3,7 @@
 import { G, foes, hand, drawPile, consumed, cardAnims, handSelecting, choosing, discovering, discoverQueue, zeroFeeUntil, turn, delayed, pdef, cardOverrides, set$handSelecting, set$choosing, set$discovering, set$hand } from './battle.runtime.js';
 import { esc } from '../core/shared.js';
 import { splitEffectClauses as splitClauses } from './battle.effects.js';
+import { isHandPaymentCandidate, matchesHandSelectKey } from './battle.hand-selection.js';
 
 /** @typedef {import('./battle.snapshot.types.js').BattleCardInput & { rarity?: string, cls?: string, _pouch?: import('./battle.snapshot.types.js').BattleCardInput[] }} SelectionCard */
 /** @typedef {{ all: () => SelectionCard[], isRandomObtainable: (card: SelectionCard) => boolean, sellPrice: (card: SelectionCard) => number }} SelectionCardsPort */
@@ -45,17 +46,11 @@ export function createBattleSelectionFlow({
   }
 
   // —— 手牌选卡（2026-09-06 #24/#25）：「选择 N 张手牌中的 X 施放/消耗」通用执行 ——
-  // 「杀/初始攻击」按卡名匹配（2026-09-09 定版：效果文本统一写作「初始攻击」，卡池无「杀」类型）
-  function matchHandSelectKey(card, key) {
-    if (!key || key === '牌') return true;
-    if (key === '杀' || key === '初始攻击') return /^(杀|初始攻击)$/.test(card.name || '');
-    return card.type === key;
-  }
   function processHandSelect() {
     if (handSelecting || !handSelectQueue.length) return;
     const job = handSelectQueue.shift();
     // 空池预检：手牌中没有符合条件的卡时直接跳过（防「选择手牌」弹窗死锁，2026-09-09）
-    const matched = hand.filter(uid => { const o = findCard(uid); return o && matchHandSelectKey(o.card, job.type); }).length;
+    const matched = hand.filter(uid => { const o = findCard(uid); return o && matchesHandSelectKey(o.card, job.type); }).length;
     if (!matched) {
       G.log(`[[icon:cards]] 手牌中没有${job.type ? `「${esc(job.type)}」` : ''}卡牌可选，该效果跳过`, 'warn');
       processHandSelect();
@@ -99,8 +94,13 @@ export function createBattleSelectionFlow({
     if (handSelecting.act === 'payment') {
       const selectedUids = handSelecting.selectedUids || [];
       const excludedUids = handSelecting.excludedUids || [];
-      if (!hand.includes(uid) || excludedUids.includes(uid) || selectedUids.includes(uid) ||
-          !matchHandSelectKey(entry.card, handSelecting.type)) return;
+      const handUids = new Set(hand);
+      const excludedUidSet = new Set(excludedUids);
+      const selectedUidSet = new Set(selectedUids);
+      if (!isHandPaymentCandidate({
+        uid, handUids, card: entry.card, type: handSelecting.type,
+        excludedUids: excludedUidSet, selectedUids: selectedUidSet,
+      })) return;
       const nextSelected = [...selectedUids, uid];
       const remaining = Math.max(0, (+handSelecting.n || 1) - 1);
       if (remaining > 0) {
@@ -110,12 +110,18 @@ export function createBattleSelectionFlow({
       }
       const { uid: cardUid, card, fuelUids, target, freeCost, onResolved } = handSelecting.payment || {};
       const payment = nextSelected;
-      const valid = card && hand.includes(cardUid) && payment.length ===
+      const seenPaymentUids = new Set();
+      const valid = card && handUids.has(cardUid) && payment.length ===
         card.rules?.battle?.requirements?.find(rule => rule.kind === 'handCards')?.count &&
         payment.every(paymentUid => {
           const current = findCard(paymentUid);
-          return hand.includes(paymentUid) && !excludedUids.includes(paymentUid) && current &&
-            matchHandSelectKey(current.card, handSelecting.type);
+          const candidate = isHandPaymentCandidate({
+            uid: paymentUid, handUids, card: current?.card,
+            type: handSelecting.type, excludedUids: excludedUidSet,
+            selectedUids: seenPaymentUids,
+          });
+          if (candidate) seenPaymentUids.add(paymentUid);
+          return candidate;
         });
       set$handSelecting(null);
       if (!valid) {
@@ -365,7 +371,7 @@ export function createBattleSelectionFlow({
   }
 
   return {
-    randomDiscoverCard, matchHandSelectKey, processHandSelect, skipHandSelect, pickHandSelect,
+    randomDiscoverCard, matchHandSelectKey: matchesHandSelectKey, processHandSelect, skipHandSelect, pickHandSelect,
     processChoice, pickChoice, processDiscoverQueue, pickDiscover,
   };
 }

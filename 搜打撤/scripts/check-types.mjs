@@ -10,6 +10,7 @@ const configs = [
   'jsconfig.strict-foundations.json',
   // Checks only the new selection-flow external ports via its fixture; its legacy runtime body is not strict-checked.
   'jsconfig.strict-selection.json',
+  'jsconfig.strict-hand-selection.json',
 ];
 
 let failed = false;

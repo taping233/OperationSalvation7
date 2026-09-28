@@ -7,16 +7,28 @@ const DEFAULT_RULE_CONFIG = {
   base: { stashStart: 25, stashMax: 100, stashUpgradeWood: 2, stashUpgradeSlots: 3, stashRuneSlotCost: 2, stashRuneSlotFrom: 50 },
   growth: { playerMaxHp: 30, playerAtk: 4 },
   extraction: { pocketKeepChance: 1 / 3 },
-  rewards: { beastLegendaryChance: 0.3 },
+  rewards: {
+    beastLegendaryChance: 0.3,
+    petEggBaseChance: 0.007,
+    petEggMissBonus: 0.03,
+    petEggBattleBonus: 0.002,
+  },
 };
 
+/** @param {unknown} value @returns {value is Record<string, unknown>} */
 const isRecord = value => value !== null && typeof value === 'object' && !Array.isArray(value);
 
+/**
+ * Validate an unknown rule object without assuming the input shape.
+ * @param {unknown} config
+ * @returns {{ ok: boolean, errors: string[] }}
+ */
 function validateRuleConfig(config) {
   const errors = [];
   if (!isRecord(config)) return { ok: false, errors: ['rules: expected an object'] };
 
-  const group = (name) => {
+  /** @param {string} name @returns {Record<string, unknown>} */
+  const group = name => {
     const value = config[name];
     if (!isRecord(value)) {
       errors.push(`${name}: expected an object`);
@@ -24,6 +36,13 @@ function validateRuleConfig(config) {
     }
     return value;
   };
+  /**
+   * @param {Record<string, unknown>} values
+   * @param {string} groupName
+   * @param {string} key
+   * @param {{ min?: number, max?: number, integer?: boolean }} [options]
+   * @returns {unknown}
+   */
   const number = (values, groupName, key, { min = 0, max = Infinity, integer = false } = {}) => {
     const value = values[key];
     const path = `${groupName}.${key}`;
@@ -56,8 +75,8 @@ function validateRuleConfig(config) {
   const safeMax = number(backpack, 'backpack', 'safeMax', { integer: true });
   number(backpack, 'backpack', 'upgradeWood', { min: 1, integer: true });
   number(backpack, 'backpack', 'safeUpgradeRations', { min: 1, integer: true });
-  if (Number.isFinite(bagStart) && Number.isFinite(bagMax) && bagMax < bagStart) errors.push('backpack.max: must be >= backpack.start');
-  if (Number.isFinite(safeStart) && Number.isFinite(safeMax) && safeMax < safeStart) errors.push('backpack.safeMax: must be >= backpack.safeStart');
+  if (typeof bagStart === 'number' && Number.isFinite(bagStart) && typeof bagMax === 'number' && Number.isFinite(bagMax) && bagMax < bagStart) errors.push('backpack.max: must be >= backpack.start');
+  if (typeof safeStart === 'number' && Number.isFinite(safeStart) && typeof safeMax === 'number' && Number.isFinite(safeMax) && safeMax < safeStart) errors.push('backpack.safeMax: must be >= backpack.safeStart');
 
   const base = group('base');
   const stashStart = number(base, 'base', 'stashStart', { min: 1, integer: true });
@@ -66,7 +85,7 @@ function validateRuleConfig(config) {
   number(base, 'base', 'stashUpgradeWood', { min: 1, integer: true });
   number(base, 'base', 'stashUpgradeSlots', { min: 1, integer: true });
   number(base, 'base', 'stashRuneSlotCost', { integer: true });
-  if (Number.isFinite(stashStart) && Number.isFinite(stashMax) && stashMax < stashStart) errors.push('base.stashMax: must be >= base.stashStart');
+  if (typeof stashStart === 'number' && Number.isFinite(stashStart) && typeof stashMax === 'number' && Number.isFinite(stashMax) && stashMax < stashStart) errors.push('base.stashMax: must be >= base.stashStart');
 
   const growth = group('growth');
   number(growth, 'growth', 'playerMaxHp', { min: 1, integer: true });
@@ -76,10 +95,14 @@ function validateRuleConfig(config) {
   number(extraction, 'extraction', 'pocketKeepChance', { max: 1 });
   const rewards = group('rewards');
   number(rewards, 'rewards', 'beastLegendaryChance', { max: 1 });
+  number(rewards, 'rewards', 'petEggBaseChance', { max: 1 });
+  number(rewards, 'rewards', 'petEggMissBonus', { max: 1 });
+  number(rewards, 'rewards', 'petEggBattleBonus', { max: 1 });
 
   return { ok: errors.length === 0, errors };
 }
 
+/** @template T @param {T} value @returns {T} */
 function deepFreeze(value) {
   if (value && typeof value === 'object' && !Object.isFrozen(value)) {
     Object.values(value).forEach(deepFreeze);

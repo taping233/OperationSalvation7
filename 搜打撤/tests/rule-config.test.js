@@ -11,11 +11,14 @@ const setPath = (value, path, next) => {
 };
 
 describe('pure rule configuration', () => {
-  it('exports deeply frozen gameplay defaults including the two probability rules', () => {
+  it('exports deeply frozen gameplay defaults including probability rules', () => {
     expect(Object.isFrozen(RULE_CONFIG)).toBe(true);
     for (const group of Object.values(RULE_CONFIG)) expect(Object.isFrozen(group)).toBe(true);
     expect(RULE_CONFIG.extraction.pocketKeepChance).toBeCloseTo(1 / 3);
     expect(RULE_CONFIG.rewards.beastLegendaryChance).toBe(0.3);
+    expect(RULE_CONFIG.rewards.petEggBaseChance).toBe(0.007);
+    expect(RULE_CONFIG.rewards.petEggMissBonus).toBe(0.03);
+    expect(RULE_CONFIG.rewards.petEggBattleBonus).toBe(0.002);
     expect(validateRuleConfig(RULE_CONFIG)).toEqual({ ok: true, errors: [] });
   });
 
@@ -31,6 +34,8 @@ describe('pure rule configuration', () => {
     ['extraction.pocketKeepChance', -0.01], ['extraction.pocketKeepChance', 1.01],
     ['extraction.pocketKeepChance', Number.NaN], ['rewards.beastLegendaryChance', Infinity],
     ['rewards.beastLegendaryChance', '0.3'],
+    ['rewards.petEggBaseChance', -0.01], ['rewards.petEggBaseChance', 1.01],
+    ['rewards.petEggMissBonus', '0.03'], ['rewards.petEggBattleBonus', Infinity],
   ])('rejects an out-of-range value at %s', (path, value) => {
     const result = validateRuleConfig(setPath(copy(), path, value));
     expect(result.ok).toBe(false);

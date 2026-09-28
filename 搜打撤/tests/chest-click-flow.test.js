@@ -61,7 +61,12 @@ describe('宝箱点击链路', () => {
         sellPrice: () => 1,
         cardHTML: () => '<div class="hs-card">测试卡</div>',
       },
-      Base: { data: { eggPity: 0, eggBattles: 0 }, save: vi.fn(), bagCap: () => 10, isSha: () => false },
+      Base: {
+        data: { eggPity: 0, eggBattles: 0 }, save: vi.fn(),
+        petEggDropChance: () => 0,
+        recordPetEggChestResult: vi.fn(),
+        bagCap: () => 10, isSha: () => false,
+      },
       Sound: { sfx: vi.fn() },
       Icons: { rich: (html) => html },
     };
@@ -77,5 +82,7 @@ describe('宝箱点击链路', () => {
     ovBody.querySelector('[data-act="chestTake"]').click();
     expect(game.state).toBe('idle');
     expect(overlay.hidden).toBe(true);
+    expect(window.SDT.Base.recordPetEggChestResult).toHaveBeenCalledTimes(1);
+    expect(window.SDT.Base.recordPetEggChestResult).toHaveBeenCalledWith({ eggGranted: false });
   });
 });

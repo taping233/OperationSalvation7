@@ -11,7 +11,8 @@ import {
   battleRestartCheckpoint, set$energy, set$interaction, set$viewingGrave, set$viewingDeck,
   set$pendingHint, bindBattleRenderer, showDread, takeBattleFloats, takeBattleCardAnims,
 } from './battle.runtime.js';
-import { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, drawCards, sweepDead, findCard, infuseOf, effCostOf, restore, finish, cancelInteraction, flee, handCurseSpecs, getSnapshot, useEquipSkill, start, toggleDeckCard, cancelDeckSelection, beginBoss, targetSide, unplayableReason, play, toggleInfusePick, cancelInfuse, beginInfuse, confirmInfuse, aegisBlocked, hitFoe, matchHandSelectKey, skipHandSelect, pickHandSelect, useItem, bagSlam, resolveDart, resolveSlam, usePotion, openBag, closeBag, pickChoice, pickDiscover } from './battle.engine.js';
+import { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, drawCards, sweepDead, findCard, infuseOf, effCostOf, restore, finish, cancelInteraction, flee, handCurseSpecs, getSnapshot, useEquipSkill, start, toggleDeckCard, cancelDeckSelection, beginBoss, targetSide, unplayableReason, play, toggleInfusePick, cancelInfuse, beginInfuse, confirmInfuse, aegisBlocked, hitFoe, skipHandSelect, pickHandSelect, useItem, bagSlam, resolveDart, resolveSlam, usePotion, openBag, closeBag, pickChoice, pickDiscover } from './battle.engine.js';
+import { matchesHandSelectKey as matchHandSelectKey } from './battle.hand-selection.js';
 import { endTurn, surrender } from './battle.enemy-phase.js';
 /* battle.core.js —— 战斗逻辑：牌库/出牌结算/词条时点/回合流转（渲染由注入的视图完成） */
 // 祝福挂上反馈钩（音频 P2#6）：addBlessing 生效即响，敌我通用——敌人强化同样是可听信息

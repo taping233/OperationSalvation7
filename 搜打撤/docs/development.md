@@ -27,7 +27,7 @@ CI 在 master 的 push 和 pull request 上依次运行 `check:syntax`、`valida
 - 事件叙事优先修改 `narrative/events.ink`；不要手改 `src/generated/narrative-events.js`，它会在开发、测试和构建前自动重新生成。
 - 领域逻辑不直接操作 DOM；视图不直接修改其他模块的私有状态。
 - 基地购买、拆包、领奖使用 `Base.purchase/openCardPack/grantReward`；复合命令在一个草稿中准备并只持久化一次。不要在 UI 先扣资源、再调用入库、最后忽略保存结果。
-- `npm run typecheck` 汇总六个配置；结算、战斗快照、基础事务、随机工具、卡牌稀有度/渲染上下文及基地离场命令采用严格检查。第六个 selection 配置只编译战斗选牌工厂的新增外部端口调用契约与正反例，不严格检查该工厂的内部战斗运行态。一次临时全体 `@ts-check` 探测发现 163 项内部类型诊断，主要来自旧运行态状态和回调；解决这些真实边界前，不将 selection-flow 实现计作 strict 覆盖。类型检查按边界覆盖，不表示全项目已开启 strict。新端口应补具体 JSDoc 和编译正反例，不能用忽略诊断代替契约。
+- `npm run typecheck` 汇总七个配置；结算、战斗快照、基础事务、随机工具、卡牌稀有度/渲染上下文、基地离场及宠物蛋命令采用严格检查。第六个 selection 配置只编译战斗选牌工厂的新增外部端口调用契约与正反例，不严格检查该工厂的内部战斗运行态。第七个 hand-selection 配置严格检查纯候选/支付规则实现和选牌状态契约 fixture；runtime 的状态接线与 selection-flow、exec-play、view 消费处不因此自动计入严格覆盖。一次临时全体 `@ts-check` 探测发现 163 项内部类型诊断，主要来自旧运行态状态和回调；解决这些真实边界前，不将 selection-flow 实现计作 strict 覆盖。类型检查按边界覆盖，不表示全项目已开启 strict。新端口应补具体 JSDoc 和编译正反例，不能用忽略诊断代替契约。
 - 样式按页面职责放入 `css/base.css`、`cards.css`、`overlays.css`、`hub.css`、`battle.css` 或 `scenes.css`；主题覆盖文件保持在这些基础样式之后加载。
 - 存档字段或键名如需变化，先添加迁移与固定旧档测试。
 - 生成物写入已忽略目录，不提交 `dist`、`desktop-app/game`、性能输出或截图。

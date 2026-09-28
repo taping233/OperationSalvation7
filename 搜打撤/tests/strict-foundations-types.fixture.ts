@@ -6,6 +6,7 @@ import { createBaseProgressionCommands } from '../game/src/hub/base-progression.
 import { isHeroLine, rarityOf } from '../game/src/cards/card-rarity.js';
 import { createCardRenderContext } from '../game/src/cards/card-render-context.js';
 import { createBaseDepartureCommands } from '../game/src/hub/base-departure.commands.js';
+import { createBasePetEggCommands } from '../game/src/hub/base-pet-egg.commands.js';
 
 const seed: number = hashSeed(undefined);
 const step: { state: number; value: number } = nextRandom(seed);
@@ -132,3 +133,19 @@ createBaseDepartureCommands({ read: () => ({ stash: [{ card: { id: 'missing-name
 // @ts-expect-error Callers must narrow the discriminated save result before consuming cards.
 const unsafeDepartureCards = departureResult.cards;
 void unsafeDepartureCards;
+
+const petEggCommands = createBasePetEggCommands({
+  read: () => ({ eggPity: 2, eggBattles: 3 }),
+  persistPity: next => next >= 0,
+});
+const eggChance: number = petEggCommands.petEggDropChance();
+const eggRecord = petEggCommands.recordPetEggChestResult({ eggGranted: false });
+const nextEggPity: number = eggRecord.eggPity;
+const eggWasPersisted: boolean = eggRecord.persisted;
+void eggChance;
+void nextEggPity;
+void eggWasPersisted;
+// @ts-expect-error Chest outcome must be a boolean.
+petEggCommands.recordPetEggChestResult({ eggGranted: 'yes' });
+// @ts-expect-error The persistence port must report whether the write succeeded.
+createBasePetEggCommands({ read: () => ({}), persistPity: () => 'saved' });

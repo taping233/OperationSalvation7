@@ -9,6 +9,7 @@ import { commitBaseMutation } from './base-mutation.js';
 import { createBaseEconomy } from './base-economy.js';
 import { createBaseProgressionCommands } from './base-progression.commands.js';
 import { createBaseDepartureCommands } from './base-departure.commands.js';
+import { createBasePetEggCommands } from './base-pet-egg.commands.js';
 
   const SLOT_KEY = (i) => 'sdt-base-v2-slot' + i;
   const LEGACY_KEY = 'sdt-base-v1';   // 旧版全局基地（v0.20 及之前），启动时迁移
@@ -166,6 +167,23 @@ import { createBaseDepartureCommands } from './base-departure.commands.js';
     const result = commitBaseMutation(data, prepare, save);
     return result.ok ? result.value : failure;
   }
+
+  // Pet-egg pity keeps its historical chest contract: a failed durable write
+  // still advances this one in-memory field while the already-rolled reward
+  // proceeds. This is explicitly not an atomic save and does not weaken mutate.
+  function persistEggPity(next) {
+    if (!slot) {
+      data.eggPity = next;
+      return false;
+    }
+    const saved = mutate(draft => { draft.eggPity = next; return true; }, false);
+    if (saved === true) return true;
+    // Legacy chests changed Base.data before calling save(); keep only that
+    // narrow in-memory fallback. Protected/too-new storage is never rewritten.
+    data.eggPity = next;
+    return false;
+  }
+  const petEggCommands = createBasePetEggCommands({ read: () => data, persistPity: persistEggPity });
 
   // 重开档位：基地回到初始状态（覆盖开新档 / 空档开新档时调用）
   // 新档案仓库预置 5 张随机卡牌（按稀有度权重抽取，不重复），让第一局就有牌可带
@@ -570,6 +588,7 @@ import { createBaseDepartureCommands } from './base-departure.commands.js';
     ...createBaseEconomy({ read: () => data, mutate, appendCards, room: stashRoom }),
     ...progressionCommands,
     ...departureCommands,
+    ...petEggCommands,
     SLOT_KEY, LEGACY_KEY,
     migrateLegacy, use, save, reset, peek, wipe, hasSlot,
     issue, CORRUPT_KEY, BASE_VERSION,

@@ -14,7 +14,8 @@ import { getPace, setPace } from './battle.pace.js';
 import { schedulePresentationMs } from './battle.clock.js';
 import { renderCombatPiles } from './battle.piles.view.js';
 import { attach as attachUnitFrames, hide as hideUnitFrames, cacheStats as frameCacheStats } from './battle.frames.js';
-import { BattleSession, commands, configureBattleRenderer, getSnapshot, R, effCostOf, findCard, markDreadShown, pileTip, refillDrawPile, takeCardAnims, unplayableReason, matchHandSelectKey } from './battle.core.js';
+import { isHandPaymentCandidate, matchesHandSelectKey } from './battle.hand-selection.js';
+import { BattleSession, commands, configureBattleRenderer, getSnapshot, R, effCostOf, findCard, markDreadShown, pileTip, refillDrawPile, takeCardAnims, unplayableReason } from './battle.core.js';
 import { renderDeckSelection, renderGrave, renderBattleBag, renderDeckPileView } from './battle.overlays.js';
 import { mountHandLayer, updateHand, mountUnitLayer, updateUnits, setHandSuspended, HAND_PAGE_SIZE } from './battle.layers.js';
 import { spawnFloats } from './battle.vfx.js';
@@ -227,11 +228,17 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
       setHandSuspended(true);
       // 2026-09-06 #24/#25：从手牌选择卡牌施放/消耗的通用弹层
       const isPayment = handSelecting.act === 'payment';
-      const unavailable = isPayment
-        ? new Set([...(handSelecting.excludedUids || []), ...(handSelecting.selectedUids || [])])
-        : null;
-      const pool = hand.map(findCard).filter(o => o && matchHandSelectKey(o.card, handSelecting.type)
-        && (!unavailable || !unavailable.has(o.uid)));
+      const handUids = isPayment ? new Set(hand) : null;
+      const excludedUids = isPayment ? new Set(handSelecting.excludedUids || []) : null;
+      const selectedUids = isPayment ? new Set(handSelecting.selectedUids || []) : null;
+      const pool = hand.map(findCard).filter(o => {
+        if (!o) return false;
+        if (!isPayment) return matchesHandSelectKey(o.card, handSelecting.type);
+        return isHandPaymentCandidate({
+          uid: o.uid, handUids, card: o.card, type: handSelecting.type,
+          excludedUids, selectedUids,
+        });
+      });
       const optsHTML = pool.map(o => `
         <div class="bt-card" data-act="btPickHand" data-uid="${o.uid}" title="点击选择">
           ${SDT.Cards.cardHTML(o.card, 'sm')}

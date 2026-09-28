@@ -8,6 +8,7 @@ import { removeUid } from './battle.piles.js';
 import { targetSideFor } from './battle.rules.js';
 import { throwIfActionCancelled } from './battle.staged-playback.js';
 import { rejectUnsupportedCard } from './battle.rule-guard.js';
+import { isHandPaymentCandidate } from './battle.hand-selection.js';
 import { G, foes, mode, hand, discard, played, consumed, grave, energy, delayed, cardAnims, freeCast, infuseFuels, consumeFireballN, allSpellsInfused, growthNames, killAtkUp, playerCurseImmune, arrowRune, nextSpellTwice, poisonOnSpell, playedMovesThisTurn, playedMartialThisTurn, activeActionSignal, battleState, set$hand, set$energy, set$infuseFuels, set$nextSpellTwice, set$killAtkUp, set$poisonOnSpell, set$poisonLegacy, set$playerCurseImmune, set$allSpellsInfused, set$consumeFireballN, set$stealthStrike, set$lastPlayedType, set$playedMovesThisTurn, set$playedMartialThisTurn, set$activeActionSignal, set$handSelecting, nextActionSeq } from './battle.runtime.js';
 
 const R = () => SDT.MAP.rules;
@@ -15,7 +16,7 @@ const alive = () => foes.filter(foe => !foe.dead);
 
 export function createBattleExecPlay({
   warnCardRuleRejection = message => G.log(message, 'warn'),
-  requestBattleRender, findCard, matchHandSelectKey, fireConsumeTriggers, effCostOf,
+  requestBattleRender, findCard, fireConsumeTriggers, effCostOf,
   resolveInfusedFuel, runStagedSteps, consumeFireballSteps, resolveCardWithFeedback,
   takeSurge, registerEquip, summonAlly, applyKillRewards, poisonRandomFoe, applyImitate, checkElementSealProgress,
   beginDartStrike, sweepDead, finish, processChoice, processDiscoverQueue, queueBattleAction,
@@ -33,10 +34,15 @@ export function createBattleExecPlay({
     }
     if (handRequirement && !requirementsPaid) {
       const excludedUids = [...new Set([uid, ...(fuelUids || [])])];
+      const handUids = new Set(hand);
+      const excludedUidSet = new Set(excludedUids);
+      const selectedUids = new Set();
       const available = hand.filter(handUid => {
-        if (excludedUids.includes(handUid)) return false;
         const entry = findCard(handUid);
-        return entry && matchHandSelectKey(entry.card, handRequirement.type);
+        return entry && isHandPaymentCandidate({
+          uid: handUid, handUids, card: entry.card, type: handRequirement.type,
+          excludedUids: excludedUidSet, selectedUids,
+        });
       });
       if (available.length < handRequirement.count) {
         G.log(`[[icon:cross]] 【${esc(card.name)}】无法打出：手牌支付不足，需要 ${handRequirement.count} 张${handRequirement.type ? `「${esc(handRequirement.type)}」` : ''}，现有 ${available.length} 张`, 'warn');
@@ -68,13 +74,18 @@ export function createBattleExecPlay({
     if (rejectUnsupportedCard(card, { warn: warnCardRuleRejection })) return false;
     const handRequirement = card?.rules?.battle?.requirements?.find(rule => rule.kind === 'handCards');
     if (handRequirement) {
+      const handUids = new Set(hand);
       const excludedUids = new Set([uid, ...(fuelUids || [])]);
+      const acceptedPaymentUids = new Set();
       const validPayment = paymentUids.length === handRequirement.count &&
-        new Set(paymentUids).size === paymentUids.length &&
         paymentUids.every(paymentUid => {
-          if (excludedUids.has(paymentUid) || !hand.includes(paymentUid)) return false;
           const entry = findCard(paymentUid);
-          return entry && matchHandSelectKey(entry.card, handRequirement.type);
+          const candidate = isHandPaymentCandidate({
+            uid: paymentUid, handUids, card: entry?.card, type: handRequirement.type,
+            excludedUids, selectedUids: acceptedPaymentUids,
+          });
+          if (candidate) acceptedPaymentUids.add(paymentUid);
+          return candidate;
         });
       if (!validPayment) {
         G.log(`[[icon:cross]] 【${esc(card.name)}】手牌支付未完成，本次打出已取消`, 'warn');

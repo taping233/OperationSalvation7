@@ -102,23 +102,19 @@ import { turboMs } from '../agent/agent.turbo.js';
       seen.add(card);
       c.cards.push(card);
     }
-    // 宠物蛋（2026-09-09 需求 #2）：0.7% 基础爆率 + 两路保底——
-    //   ① 每次开箱未出蛋 +3% 累进、出蛋归零（2026-09-19 老板定向）；
-    //   ② 每打赢一场战斗永久 +0.2%（2026-09-19 晚老板拍板，战斗计数存基地档位跨局累计）。
-    const pityN = (SDT.Base.data.eggPity || 0) + 1;
-    const eggRate = 0.007 + 0.03 * (pityN - 1) + 0.002 * (SDT.Base.data.eggBattles || 0);
+    // 宠物蛋软保底集中由 Base 持有；仍只消耗原来这一枚 loot 随机数。
+    const eggRate = SDT.Base.petEggDropChance();
+    let eggGranted = false;
     if (Random.random('loot') < eggRate) {
       const egg = (SDT.Cards.all() || []).find(x => x.id === 'pet-egg');
       if (egg && !seen.dup(egg)) {
         seen.add(egg); c.cards.push(egg); c.eggHit = true;
-        SDT.Base.data.eggPity = 0;
-      } else {
-        SDT.Base.data.eggPity = pityN;   // 面板重复等异常未实际出蛋：保底照常累计
+        eggGranted = true;
       }
-    } else {
-      SDT.Base.data.eggPity = pityN;
     }
-    SDT.Base.save();
+    // Write failure retains the legacy in-memory pity step and does not reroll
+    // or revoke this chest's already determined reward.
+    SDT.Base.recordPetEggChestResult({ eggGranted });
     // —— 宝箱保底（2026-09-09 试玩反馈；设计者定版权重 60:28:9:3 不动）——
     // 中宝箱（3 选 1）整包全古朴的概率约 21.6%，体验很差：保底至少 1 张「稀有」+；
     // 大宝箱 / 首脑宝箱保底至少 1 张「史诗」+。未达标就重掷最后一张（目标档内挑卡，

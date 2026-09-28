@@ -20,6 +20,7 @@
     "game/src/hub/base-economy.js",
     "game/src/hub/base-progression.commands.js",
     "game/src/hub/base-departure.commands.js",
+    "game/src/hub/base-pet-egg.commands.js",
     "tests/strict-foundations-types.fixture.ts"
   ]
 }
