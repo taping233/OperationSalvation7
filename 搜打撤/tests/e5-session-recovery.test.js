@@ -57,6 +57,15 @@ function trackRunWrites(failFirst = false) {
   return writes;
 }
 
+function trackBaseWrites(slot = 1) {
+  const set = Storage.prototype.setItem, writes = vi.fn();
+  vi.spyOn(Storage.prototype, 'setItem').mockImplementation(function (key, value) {
+    if (key === Base.SLOT_KEY(slot)) writes(key, value);
+    return set.call(this, key, value);
+  });
+  return writes;
+}
+
 beforeEach(() => {
   localStorage.clear();
   for (let slot = 1; slot <= 5; slot++) RunStorage.remove(slot);
@@ -95,12 +104,12 @@ describe('E5 real session recovery and persistence results', () => {
   it('records the two existing Base saves without adding writes', () => {
     writeRun({ elapsed: 7 });
     vi.spyOn(window.SDT.Cards, 'applyAbilityRename').mockReturnValue(true);
-    const baseSave = vi.spyOn(Base, 'save');
+    const baseWrite = trackBaseWrites();
     expect(session.loadGame(1).persistence).toEqual({ status: 'succeeded', attempts: [
       { target: 'base', reason: 'card_rename', ok: true },
       { target: 'base', reason: 'elapsed_migration', ok: true },
     ] });
-    expect(baseSave).toHaveBeenCalledTimes(2);
+    expect(baseWrite).toHaveBeenCalledTimes(2);
   });
 
   it('reports real Base write failure while preserving usable restored gameplay', () => {
@@ -139,12 +148,12 @@ describe('E5 real session recovery and persistence results', () => {
   it('includes battle-triggered syncPlayTime and run save without duplicate calls', () => {
     writeRun({ battle: { legacy: true } });
     window.SDT.Battle.restore.mockImplementation(() => { session.game.elapsed = 4; return true; });
-    const baseSave = vi.spyOn(Base, 'save'), runWrite = trackRunWrites();
+    const baseWrite = trackBaseWrites(), runWrite = trackRunWrites();
     expect(session.loadGame(1).persistence).toEqual({ status: 'succeeded', attempts: [
       { target: 'base', reason: 'play_time_sync', ok: true },
       { target: 'run', reason: 'save_game', ok: true },
     ] });
-    expect(baseSave).toHaveBeenCalledTimes(1); expect(runWrite).toHaveBeenCalledTimes(1);
+    expect(baseWrite).toHaveBeenCalledTimes(1); expect(runWrite).toHaveBeenCalledTimes(1);
   });
 
   it('does not claim a run write when the existing saveGame guard rejects it', () => {

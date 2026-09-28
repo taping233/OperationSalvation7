@@ -1,17 +1,19 @@
 // @vitest-environment node
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { createBattleSelectionFlow } from '../game/src/battle/battle.selection-flow.js';
-import { pdef, set$choosing, set$discovering, set$G, set$handSelecting, set$pdef } from '../game/src/battle/battle.runtime.js';
+import { discovering, pdef, set$choosing, set$discoverQueue, set$discovering, set$G, set$handSelecting, set$pdef } from '../game/src/battle/battle.runtime.js';
 
-function createFlow({ cards, random01 = () => 0, deny = () => {} }) {
+function createFlow({ cards, random01 = () => 0, deny = () => {}, requestBattleRender = () => {} }) {
   return createBattleSelectionFlow({
     cards, random01, deny, throwIfActionCancelled: () => {},
     session: { handSelectQueue: [], choiceQueue: [] },
+    requestBattleRender,
   });
 }
 
 afterEach(() => {
   set$discovering(null);
+  set$discoverQueue([]);
   set$G(null);
   set$pdef(null);
   set$handSelecting(null);
@@ -47,6 +49,106 @@ describe('battle selection flow ports', () => {
     });
 
     expect(flow.randomDiscoverCard(null, '不存在')).toBeNull();
+    expect(random01).not.toHaveBeenCalled();
+  });
+
+  it('builds one ordered pool for an entire built-in panel without changing draw or reroll order', () => {
+    const catalog = [
+      { id: 'same-1', name: '同名', type: '法术', rarity: '稀有' },
+      { id: 'same-2', name: '同名', type: '法术', rarity: '稀有' },
+      { id: 'other-1', name: '乙牌', type: '法术', rarity: '稀有' },
+      { id: 'other-2', name: '丙牌', type: '法术', rarity: '稀有' },
+    ];
+    const all = vi.fn(() => catalog);
+    const isRandomObtainable = vi.fn(() => true);
+    const random01 = vi.fn()
+      .mockReturnValueOnce(0.01) // 同名（第一版）
+      .mockReturnValueOnce(0.26) // 同名（第二版），重抽
+      .mockReturnValueOnce(0.51) // 乙牌
+      .mockReturnValueOnce(0.76); // 丙牌
+    const flow = createFlow({ cards: { all, isRandomObtainable, sellPrice: () => 0 }, random01 });
+    set$G({ myClass: '射击', log: vi.fn() });
+    set$discoverQueue([{ n: 1 }]);
+
+    flow.processDiscoverQueue();
+
+    expect(discovering.options).toEqual([catalog[0], catalog[2], catalog[3]]);
+    expect(discovering.options[0]).toBe(catalog[0]);
+    expect(all).toHaveBeenCalledTimes(1);
+    expect(isRandomObtainable).toHaveBeenCalledTimes(catalog.length);
+    expect(random01).toHaveBeenCalledTimes(4);
+  });
+
+  it('keeps the 40-reroll limit while reusing a single-card built-in pool', () => {
+    const card = { id: 'only', name: '唯一牌', type: '法术', rarity: '稀有' };
+    const all = vi.fn(() => [card]);
+    const random01 = vi.fn(() => 0.5);
+    const flow = createFlow({
+      cards: { all, isRandomObtainable: () => true, sellPrice: () => 0 }, random01,
+    });
+    set$G({ myClass: '射击', log: vi.fn() });
+    set$discoverQueue([{ n: 1, rarity: '稀有' }]);
+
+    flow.processDiscoverQueue();
+
+    expect(discovering.options).toEqual([card]);
+    expect(all).toHaveBeenCalledTimes(1);
+    // 首张一抽；后两槽各首抽一次并最多重抽 40 次。
+    expect(random01).toHaveBeenCalledTimes(83);
+  });
+
+  it('reads an empty built-in catalog once and still consumes no random value', () => {
+    const all = vi.fn(() => []);
+    const random01 = vi.fn(() => 0.5);
+    const log = vi.fn();
+    const flow = createFlow({ cards: { all, isRandomObtainable: () => true, sellPrice: () => 0 }, random01 });
+    set$G({ myClass: '射击', log });
+    set$discoverQueue([{ n: 1 }]);
+
+    flow.processDiscoverQueue();
+
+    expect(all).toHaveBeenCalledTimes(1);
+    expect(random01).not.toHaveBeenCalled();
+    expect(discovering).toBeNull();
+    expect(log).toHaveBeenCalledWith('（没有符合条件的卡牌可发现）', 'dim');
+  });
+
+  it('keeps custom predicate discovery on the per-draw fresh-catalog path', () => {
+    const cardsInCatalog = [
+      { id: 'a', name: '甲', type: '法术', rarity: '稀有' },
+      { id: 'b', name: '乙', type: '法术', rarity: '稀有' },
+      { id: 'c', name: '丙', type: '法术', rarity: '稀有' },
+    ];
+    const all = vi.fn(() => cardsInCatalog);
+    const pred = vi.fn(() => true);
+    const random01 = vi.fn()
+      .mockReturnValueOnce(0.1)
+      .mockReturnValueOnce(0.5)
+      .mockReturnValueOnce(0.9);
+    const flow = createFlow({ cards: { all, isRandomObtainable: () => true, sellPrice: () => 0 }, random01 });
+    set$G({ myClass: '射击', log: vi.fn() });
+    set$discoverQueue([{ n: 1, pred, rarity: '不存在', pool: { kind: 'moves', cost: 999 } }]);
+
+    flow.processDiscoverQueue();
+
+    expect(all).toHaveBeenCalledTimes(3);
+    expect(pred).toHaveBeenCalledTimes(cardsInCatalog.length * 3);
+    expect(random01).toHaveBeenCalledTimes(3);
+    expect(discovering.options).toEqual(cardsInCatalog);
+  });
+
+  it('does not query the catalog or random stream for explicit options', () => {
+    const all = vi.fn(() => []);
+    const random01 = vi.fn(() => 0);
+    const explicit = [{ id: 'provided', name: '给定卡', type: '法术' }];
+    const flow = createFlow({ cards: { all, isRandomObtainable: () => true, sellPrice: () => 0 }, random01 });
+    set$G({ myClass: '射击', log: vi.fn() });
+    set$discoverQueue([{ n: 1, explicit }]);
+
+    flow.processDiscoverQueue();
+
+    expect(discovering.options).toEqual(explicit);
+    expect(all).not.toHaveBeenCalled();
     expect(random01).not.toHaveBeenCalled();
   });
 

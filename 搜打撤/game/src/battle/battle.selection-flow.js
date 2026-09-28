@@ -4,6 +4,7 @@ import { G, foes, hand, drawPile, consumed, cardAnims, handSelecting, choosing, 
 import { esc } from '../core/shared.js';
 import { splitEffectClauses as splitClauses } from './battle.effects.js';
 import { isHandPaymentCandidate, matchesHandSelectKey } from './battle.hand-selection.js';
+import { buildDiscoverPool, pickRandomDiscoverCandidate } from './battle.discover-candidates.js';
 
 /** @typedef {import('./battle.snapshot.types.js').BattleCardInput & { rarity?: string, cls?: string, _pouch?: import('./battle.snapshot.types.js').BattleCardInput[] }} SelectionCard */
 /** @typedef {{ all: () => SelectionCard[], isRandomObtainable: (card: SelectionCard) => boolean, sellPrice: (card: SelectionCard) => number }} SelectionCardsPort */
@@ -30,19 +31,11 @@ export function createBattleSelectionFlow({
     // 发现池却在 BOSS 战掉道具卡，入手即死牌（刀剑形态还会复制它）。
     // 2026-09-13 留言：通用随机发现池不出现道具（战斗内道具入口只剩药水栏/背包）。
     // pred 指定池（药水魔法「发现药水」/迷之匣「发现招式」等）不受此限——专属发现按卡面效果走。
-    const typeBan = (t => t === '道具');
-    let pool;
-    if (pred) {
-      pool = cards.all().filter(c => c.rarity !== '衍生' && !['生物', '事件', '资源'].includes(c.type) && pred(c));
-    } else {
-      pool = cards.all().filter(c =>
-        c.rarity !== '衍生' && c.type !== '资源' && !typeBan(c.type) && cards.isRandomObtainable(c) &&
-        (!rarity || c.rarity === rarity) &&
-        (!otherCls || (c.cls && c.cls !== G.myClass)) ||
-        (otherCls && c.rarity === '职业' && c.cls && c.cls !== G.myClass));
-    }
-    if (!pool.length) return null;
-    return pool[Math.floor(random01() * pool.length)];
+    const pool = buildDiscoverPool(cards.all(), {
+      myClass: G?.myClass, pred, rarity, otherCls: !!otherCls,
+      isRandomObtainable: card => cards.isRandomObtainable(card),
+    });
+    return pickRandomDiscoverCandidate(pool, random01);
   }
 
   // —— 手牌选卡（2026-09-06 #24/#25）：「选择 N 张手牌中的 X 施放/消耗」通用执行 ——
@@ -260,15 +253,26 @@ export function createBattleSelectionFlow({
       requestBattleRender();
       return;
     }
+    // 内建筛选条件在本次面板内稳定：一次取目录、一次构建有序池，然后仍按原索引
+    // 独立抽取并对同 ID/同名候选重抽。外部 job.pred 可能有副作用或改变目录，继续
+    // 经 randomDiscoverCard 逐次读取目录和筛选，保留原调用次数与观察顺序。
+    const batchPool = job.pred ? null : buildDiscoverPool(cards.all(), {
+      myClass: G?.myClass, pred, rarity: job.rarity,
+      otherCls: !!(!job.pred && !job.rarity && job.otherCls),
+      isRandomObtainable: card => cards.isRandomObtainable(card),
+    });
+    const drawCandidate = () => batchPool
+      ? pickRandomDiscoverCandidate(batchPool, random01)
+      : randomDiscoverCard(pred, job.rarity, !job.pred && !job.rarity ? job.otherCls : null);
     // 2026-09-09 留言 #9：三张候选不得重复——抽到已选中的就重抽，
     // 池子不足三张时有多少展示多少（原实现撞重直接跳过，经常只剩一两张可选）
     // 2026-09-13 老板口径：同一个选择面板内不许重复——同名不同版也一并重抽
     const clash = (c) => !!c && (taken.has(c.id) || names.has(c.name));
     for (let i = 0; i < 3 && options.length < 3; i++) {
-      let c = randomDiscoverCard(pred, job.rarity, !job.pred && !job.rarity ? job.otherCls : null);
+      let c = drawCandidate();
       let guard = 0;
       while (clash(c) && guard++ < 40) {
-        c = randomDiscoverCard(pred, job.rarity, !job.pred && !job.rarity ? job.otherCls : null);
+        c = drawCandidate();
       }
       if (c && !clash(c)) { taken.add(c.id); names.add(c.name); options.push(c); }
     }

@@ -89,7 +89,10 @@ function recordLoadPersistence(target, reason, ok, code) {
 }
 
 function saveBaseForLoad(reason) {
-  const ok = SDT.Base.save();
+  return recordBaseSaveForLoad(reason, SDT.Base.save());
+}
+
+function recordBaseSaveForLoad(reason, ok) {
   recordLoadPersistence('base', reason, ok, 'BASE_SAVE_FAILED');
   return ok;
 }
@@ -224,14 +227,10 @@ function saveGame() {
 }
 function syncPlayTime() {
   if (!activeSlot || !SDT.Base.slot) return;
-  const now = Math.max(0, +game.elapsed || 0);
-  const prev = Math.max(0, +game.elapsedSynced || 0);
-  const delta = Math.max(0, now - prev);
-  if (delta > 0) {
-    SDT.Base.data.stats.playSeconds = Math.max(0, +SDT.Base.data.stats.playSeconds || 0) + delta;
-    game.elapsedSynced = now;
-    saveBaseForLoad('play_time_sync');
-  }
+  const result = SDT.Base.syncPlayTime(game.elapsed, game.elapsedSynced);
+  if (!result.changed) return;
+  game.elapsedSynced = result.checkpoint;
+  recordBaseSaveForLoad('play_time_sync', result.persisted);
 }
 
 // 删除某档位：对局进度 + 基地一起清空（该档位回到未创建状态）
@@ -343,12 +342,10 @@ function restoreGame(slot) {
   game.elapsed = s.elapsed || 0;
   game.altarItemSacrificed = !!s.altarItemSacrificed;   // 祭坛道具献祭一次性锁（旧档无字段 → false）
   game.shopStocks = (s.shopStocks && typeof s.shopStocks === 'object') ? s.shopStocks : {};
-  // 旧存档只有本局 elapsed：首次读取时把它安全迁入累计游玩时间。
-  if ((SDT.Base.data.stats.playSeconds || 0) < game.elapsed) {
-    SDT.Base.data.stats.playSeconds = game.elapsed;
-    saveBaseForLoad('elapsed_migration');
-  }
-  game.elapsedSynced = game.elapsed;
+  // 旧存档只有本局 elapsed：首次读取时按 max 语义迁入累计游玩时间。
+  const elapsedMigration = SDT.Base.migrateElapsed(game.elapsed);
+  if (elapsedMigration.changed) recordBaseSaveForLoad('elapsed_migration', elapsedMigration.persisted);
+  game.elapsedSynced = elapsedMigration.checkpoint;
   game.extractionPending = null;
   game.terminalPending = null;
   game.pendingExtraction = s.pendingExtraction || null;

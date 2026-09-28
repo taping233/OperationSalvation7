@@ -7,6 +7,7 @@ import { isHeroLine, rarityOf } from '../game/src/cards/card-rarity.js';
 import { createCardRenderContext } from '../game/src/cards/card-render-context.js';
 import { createBaseDepartureCommands } from '../game/src/hub/base-departure.commands.js';
 import { createBasePetEggCommands } from '../game/src/hub/base-pet-egg.commands.js';
+import { createBaseElapsedCommands } from '../game/src/hub/base-elapsed.commands.js';
 
 const seed: number = hashSeed(undefined);
 const step: { state: number; value: number } = nextRandom(seed);
@@ -149,3 +150,31 @@ void eggWasPersisted;
 petEggCommands.recordPetEggChestResult({ eggGranted: 'yes' });
 // @ts-expect-error The persistence port must report whether the write succeeded.
 createBasePetEggCommands({ read: () => ({}), persistPity: () => 'saved' });
+
+const elapsedState = { stats: { playSeconds: 25 } };
+const elapsedCommands = createBaseElapsedCommands({
+  read: () => elapsedState,
+  persistPlaySeconds: next => next >= 0,
+});
+const elapsedSync = elapsedCommands.syncPlayTime(10, 5);
+if (elapsedSync.changed) {
+  const syncDelta: number = elapsedSync.delta;
+  const syncPersisted: boolean = elapsedSync.persisted;
+  void syncDelta;
+  void syncPersisted;
+} else {
+  const noChangeDelta: 0 = elapsedSync.delta;
+  void noChangeDelta;
+  // @ts-expect-error No-op sync results do not represent a persistence attempt.
+  elapsedSync.persisted;
+}
+const elapsedMigration = elapsedCommands.migrateElapsed(30);
+if (elapsedMigration.changed) {
+  const migrationPersisted: boolean = elapsedMigration.persisted;
+  void migrationPersisted;
+} else {
+  const unchangedCheckpoint: number = elapsedMigration.checkpoint;
+  void unchangedCheckpoint;
+}
+// @ts-expect-error Play-time persistence must report boolean success.
+createBaseElapsedCommands({ read: () => ({ stats: {} }), persistPlaySeconds: () => 'saved' });

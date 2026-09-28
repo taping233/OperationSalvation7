@@ -64,11 +64,13 @@ describe('AST 架构检查的识别与负面场景', () => {
     const graph = graphOf({
       'battle/battle.runtime.js': 'export const state = {};',
       'battle/battle.resolution.js': "import './battle.runtime.js'; const state = window['SDT'];",
+      'battle/battle.discover-candidates.js': "import './battle.runtime.js'; const state = window.SDT;",
       'battle/battle.snapshot.js': "const comment = 'window.SDT'; export function read(value) { return value; }",
     });
     const problems = architectureViolations(graph);
     expect(problems.some(x => x.includes('全局浏览器对象 window:1'))).toBe(true);
     expect(problems.some(x => x.includes('反向依赖 battle/battle.runtime.js'))).toBe(true);
+    expect(problems.some(x => x.startsWith('battle/battle.discover-candidates.js:'))).toBe(true);
     expect(problems.some(x => x.startsWith('battle/battle.snapshot.js:'))).toBe(false);
   });
 

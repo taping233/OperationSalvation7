@@ -21,6 +21,7 @@
     "game/src/hub/base-progression.commands.js",
     "game/src/hub/base-departure.commands.js",
     "game/src/hub/base-pet-egg.commands.js",
+    "game/src/hub/base-elapsed.commands.js",
     "tests/strict-foundations-types.fixture.ts"
   ]
 }

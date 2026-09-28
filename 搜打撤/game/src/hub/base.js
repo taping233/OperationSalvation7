@@ -10,6 +10,7 @@ import { createBaseEconomy } from './base-economy.js';
 import { createBaseProgressionCommands } from './base-progression.commands.js';
 import { createBaseDepartureCommands } from './base-departure.commands.js';
 import { createBasePetEggCommands } from './base-pet-egg.commands.js';
+import { createBaseElapsedCommands } from './base-elapsed.commands.js';
 
   const SLOT_KEY = (i) => 'sdt-base-v2-slot' + i;
   const LEGACY_KEY = 'sdt-base-v1';   // 旧版全局基地（v0.20 及之前），启动时迁移
@@ -160,6 +161,15 @@ import { createBasePetEggCommands } from './base-pet-egg.commands.js';
       return false;
     }
   }
+
+  // 普通游玩时间保持旧checkpoint策略：先推进Base内存，再尝试保存；失败由
+  // 命令结果显式标记，后续Base保存可落盘该值。此操作不属于跨档journal原子事务。
+  function persistPlaySeconds(next) {
+    data.stats.playSeconds = next;
+    if (!slot) return false;
+    return save();
+  }
+  const elapsedCommands = createBaseElapsedCommands({ read: () => data, persistPlaySeconds });
 
   // 旧同步接口保留返回口径；所有资源变更先在草稿上完成，保存失败不污染运行态。
   function mutate(prepare, failure = false) {
@@ -589,6 +599,7 @@ import { createBasePetEggCommands } from './base-pet-egg.commands.js';
     ...progressionCommands,
     ...departureCommands,
     ...petEggCommands,
+    ...elapsedCommands,
     SLOT_KEY, LEGACY_KEY,
     migrateLegacy, use, save, reset, peek, wipe, hasSlot,
     issue, CORRUPT_KEY, BASE_VERSION,
