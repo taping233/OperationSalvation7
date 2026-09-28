@@ -1,4 +1,5 @@
 import { esc } from '../core/shared.js';
+import { reduceMotion } from '../core/motion.js';
 import { descRich } from '../cards/cards.view.js';
 import { photoMountFor } from '../hub/photo-studio-presentation.js';
 import { overlayMethods } from './overlay.js';
@@ -174,7 +175,7 @@ import { hudMethods } from './hud.js';
       </div>` : '';
       const el = document.createElement('div');
       el.id = 'cardZoom';
-      const reducedMotion = photoMode && !!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+      const reducedMotion = photoMode && reduceMotion();   // 权威口径：媒体查询+设置开关（core/motion.js，带缓存）
       if (photoMode) {
         el.classList.add('cz-photo');
         // Reserve the same artwork ratio before the full-resolution image decodes.

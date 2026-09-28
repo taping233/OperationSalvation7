@@ -24,7 +24,8 @@ function download(filename, text, mime) {
   document.body.appendChild(a);
   a.click();
   a.remove();
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
+  // 10s 兜底回收（原 1s）：Firefox/杀软扫描/大 CSV 场景下 revoke 早于下载落盘会静默失败
+  setTimeout(() => URL.revokeObjectURL(url), 10000);
 }
 
 function summaryCard(k, v, tone = '') {

@@ -1,4 +1,10 @@
-/* Seeded four-layer map generator. Emits plain data for session and renderer. */
+/* Seeded four-layer map generator. Emits plain data for session and renderer.
+ * RNG 核心（hashSeed + sfc32 步进）2026-09-28 起委托 core/random-core.js 唯一实现
+ * （nextRandom 位等价抽取，序列逐位不变）；零守卫 ||0x9e3779b9 与无流名盐是
+ * 本域初始态策略，保留在本地。改随机序列=破坏地图可复现契约，须同步快照测试。
+ * 必须保持零门面依赖：random-core 刻意不触 sdt-facade，本文件被测试在
+ * 「整体替换 window.SDT 之前」静态导入时不得提前触发门面求值。 */
+import { hashSeed, nextRandom } from '../core/random-core.js';
 const TARGETS = [7, 12, 17, 17];   // L1=7：2026-09-13 首层流程改短恒定七格；L2=12：2026-09-16 Item 17——L2 总格上限 = L3 配置总量（4+3+2+1+1+1）
 const WIDTHS = [4, 6, 9, 8];   // L2 宽 6：spine 11 格 + 生长 1 = 12，与 TARGETS[1]=12 配套（Item 17）   // L1 宽 4：与 TARGETS[0]=7 保持 spine 配套（2×(width-1)+1=7），坐标数才不会溢出目标格数
 const ROW_MIN = -3;
@@ -10,12 +16,8 @@ const LAYOUT_VERSION = 9;   // v9：2026-09-19 关卡审查——L3 紧急撤离
                             // 既有定版约束，结构性最少 4 个，放宽到 ≤4）
 const MAX_ATTEMPTS = 8;
 
-function hashSeed(value) { const text = String(value); let hash = 2166136261;
-  for (let i = 0; i < text.length; i++) { hash ^= text.charCodeAt(i); hash = Math.imul(hash, 16777619); }
-  return hash >>> 0; }
-function rng(seed) { let state = hashSeed(seed) || 0x9e3779b9; return () => { state = (state + 0x6D2B79F5) >>> 0;
-  let value = state; value = Math.imul(value ^ (value >>> 15), value | 1); value ^= value + Math.imul(value ^ (value >>> 7), value | 61);
-  return ((value ^ (value >>> 14)) >>> 0) / 0x100000000; }; }
+function rng(seed) { let state = hashSeed(seed) || 0x9e3779b9;
+  return () => { const step = nextRandom(state); state = step.state; return step.value; }; }
 const pick = (random, values) => values[Math.floor(random() * values.length)];
 const key = (x, row) => `${x},${row}`;
 const adjacent = (a, b) => Math.abs(a.x - b.x) + Math.abs(a.row - b.row) === 1;

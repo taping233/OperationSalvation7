@@ -74,6 +74,9 @@ const CURSES = ['bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban', 'bu
   // 结算一次伤害。attacker/target 可为任意带 hp/atk/spellPower/status/defense 的对象
   function dealDamage(attacker, target, amount, type) {
     type = type || TYPES.ATTACK;
+    // 数值兜底（2026-09-28 审计）：同文件 addCurse/addBlessing 同款防线——上游未 coerce
+    // 的字段传入 NaN 时按 0 结算，否则 raw/dealt 全线 NaN、浮字与日志显示「NaN 点伤害」
+    if (!Number.isFinite(+amount)) amount = 0;
     ensureStatus(target);
     const r = { type, raw: amount, bonus: 0, atkPart: 0, spellPart: 0,
                 bleedBonus: 0, absorbed: 0, dealt: 0, overkill: 0, log: [] };

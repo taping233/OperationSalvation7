@@ -174,11 +174,12 @@ export function finishInstant() {
 // 搜索物资（2026-09-09 老板 #3）：收获不再直接蹦出来——先演一段搜索（提灯扫过 + 进度条填充），
 // 约 0.95s 后揭晓收获大字与「继续」按钮，给拾取一个过程感
 const PICKUP_SEARCH_MS = 950;
-export function openPickupPage(kind, gain, onDone) {
+export function openPickupPage(kind, gain, onDone, skipSearch = false) {
   const f = SCENES[kind];
   // 来源页恢复（迭代评审 09-20 C-P1）：背包盖开再关后重放本页——搜索动画与揭晓重来，
   // 但 onDone 只会经 pickupGo 触发一次，奖励不再因关背包被吞（此前发奖仅 pickupGo 一个入口）
-  setBagReturnHook(() => openPickupPage(kind, gain, onDone));
+  // 体验线切片5（2026-09-28，评估#9）：重入场景跳过搜索重放——核对背包再回来不该重等 0.95s
+  setBagReturnHook(() => openPickupPage(kind, gain, onDone, true));
   nodeShell({ tone: 'pickup', asset: PICKUP_BG[kind], icon: f.icon, title: f.title,
     sub: pick(f.lines),
     body: `<div class="pick-search">
@@ -188,14 +189,16 @@ export function openPickupPage(kind, gain, onDone) {
       </div>` });
   SDT.Sound.sfx('pick');
   const main = UI.el.ovBody.querySelector('.node-main');
-  setTimeout(() => {
+  const reveal = () => {
     if (!main || !main.isConnected) return;   // 页面已被换掉/关掉就不再揭晓
     main.innerHTML = `<p class="gain-big">${gain}</p>
       <button class="evt-opt ok" data-act="pickupGo"><b>获取并离开</b></button>`;
     SDT.Sound.sfx('gain');
     const go = main.querySelector('[data-act="pickupGo"]');
     if (go) go.focus({ preventScroll: true });
-  }, turboMs(PICKUP_SEARCH_MS));
+  };
+  if (skipSearch) { reveal(); return; }
+  setTimeout(reveal, turboMs(PICKUP_SEARCH_MS));
   UI.act('pickupGo', () => { setBagReturnHook(null); UI.hideOverlay(); onDone(); });
 }
 
@@ -312,7 +315,9 @@ export function openPocketRestore(picks, done, opts = {}) {
       : `<p class="ov-empty">（消耗口袋里没有可复原的卡牌${blockedN ? `——另有 ${blockedN} 张道具/装备不可在此复原` : ''}）</p>`;
     nodeShell({
       tone: opts.tone || 'fire', icon: opts.icon || '[[icon:fire]]', title: opts.title || '营火休整',
-      sub: (opts.sub != null ? opts.sub : `还可从消耗口袋中复原 <b>${left}</b> 张（最多 ${picks} 张）· 点击卡牌复原`) +
+      sub: (opts.sub != null ? opts.sub : `还可从消耗口袋中复原 <b>${left}</b> 张（最多 ${picks} 张）· 点击卡牌复原` +
+        // 体验线切片2（2026-09-28）：复原的机会成本可见——不复原的消耗卡撤离时每张仅 1/3 幸存
+        ` · <span class="eps-fate">复原=撤离全额带回，否则每张仅 1/3 幸存</span>`) +
         (blockedN ? ` · 道具/装备共 ${blockedN} 张不可复原` : ''),
       body: `<div class="bt-hand fire-restore-hand">${cardsHTML}</div>`,
       foot: `<button class="ov-btn ok fire-done-btn" data-act="fireDone"><svg class="ic svg-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h13M12 5.5 18.5 12 12 18.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> 继续旅程</button>`,

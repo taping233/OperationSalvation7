@@ -288,16 +288,27 @@ import { turboMs } from '../agent/agent.turbo.js';
         : got ? '' : `data-act="chestTake1" data-i="${i}" title="点击拾取进背包"`;
       const tag = act ? 'button' : 'div';
       const buttonAttrs = act ? ` type="button" aria-label="${escAttr(`${got ? '已收取' : '收取卡牌'}：${card.name || '未命名卡牌'}`)}"` : '';
+      // 体验线切片4（2026-09-28，源自 PoE loot filter 多通道编码模式）：
+      // 收购价币标按 S/A/B/C 档着色——不读文字扫一眼即知档次（色档规则信息编码=体验线，色值美术线可调）
+      const sp = SDT.Cards.sellPrice(card);
+      const tier = sp >= 6 ? 'S' : sp >= 3 ? 'A' : sp >= 2 ? 'B' : 'C';
       return `<${tag}${buttonAttrs} class="bt-card chest-fly rl-${riOf(card)}${cur.isClass ? ' cls-chest' : ''}${got ? ' got' : ''}" style="animation-delay:${(cur.battleSummary ? 480 : 0) + i * 160}ms"
         ${act}>
-        ${SDT.Cards.cardHTML(card)}${got ? '<span class="chest-got-mark">已收</span>' : ''}
+        ${SDT.Cards.cardHTML(card)}<span class="eps-card-val eps-val-${tier}" title="商店收购价 · 档位 ${tier}">[[icon:coin]]${sp}</span>${got ? '<span class="chest-got-mark">已收</span>' : ''}
       </${tag}>`;
     }).join('');
-    const lootLine = isPick
+    // 体验线切片2（2026-09-28）：搜刮时刻点亮弹药经济——卡牌的消耗命运在拾取时可见
+    // （ fate 行挂在两个分支共用的尾部，中宝箱 3 选 1 同样显示；
+    //   职业宝箱的卡打出后直接消散、不进消耗口袋（开局教学第二格口径），命运文案分支）
+    const fateLine = cur.isClass
+      ? ` · <span class="eps-fate">职业卡打出即消散（不进消耗口袋）</span>`
+      : ` · <span class="eps-fate">打出即散失 · 撤离每张 [[icon:pocket]] 1/3 带回</span>`;
+    const lootLine = (isPick
       ? `从随机 <b>${cur.cards.length}</b> 张卡牌中选择 <b>1</b> 张 · 另含 [[icon:coin]] <b>${cur.coins}</b> 币`
       : `开出 <b>${cur.cards.length}</b> 张卡牌${cur.coins ? ` · [[icon:coin]] <b>${cur.coins}</b> 币` : ''}` +
         (cur.tokenHit ? ' · <b class="gold">[[icon:sparkles]] 员工通行证B！</b>' : '') +
-        (cur.eggHit ? ' · <b class="gold">[[icon:paw]] 宠物蛋！</b>' : '');
+        (cur.eggHit ? ' · <b class="gold">[[icon:paw]] 宠物蛋！</b>' : '')) +
+      fateLine;
     // 容量预检（2026-09-09 老板定向）：全部收下放不下时先提示清理背包——
     // 同名并入不占格；逐张模拟占格（基础格任意卡 / 珍珠盒扩格仅资源卡），算出放不下的张数
     const rest = cur.cards.filter((c, i) => !taken.has(i));

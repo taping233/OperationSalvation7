@@ -1,4 +1,4 @@
-import SDT from './sdt-facade.js';
+import SDT, { sdtDefine } from './sdt-facade.js';
 /* ============================================================
  * input.js —— 动作映射层（input-systems：玩法读动作，不读裸键）
  *
@@ -65,6 +65,6 @@ function reset() {
   bindings = loadBindings();
 }
 
-SDT.Input = Object.freeze({ actionFor, rebind, reset, get bindings() { return bindings; }, DEFAULT_BINDINGS });
+sdtDefine('Input', Object.freeze({ actionFor, rebind, reset, get bindings() { return bindings; }, DEFAULT_BINDINGS }));
 
 export { actionFor };

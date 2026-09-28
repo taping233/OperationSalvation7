@@ -663,3 +663,20 @@
   object-position:center 32%; border-radius:6px; border:1px solid #d8c08e59;
   box-shadow:0 10px 30px #00000066; margin:0 0 14px; pointer-events:none; user-select:none; }
 #overlay .doom-panel .battle-banner { margin-bottom:16px; }
+
+/* ═══ 战斗单位入场（2026-09-27 二轮动效）═══
+   .bt-entrance 由 battle.view.js showBattleStage 仅在场次首建时挂上（_battleToken 守卫，
+   出牌重建走复用路径绝不重播）；单位由 battle.layers 差分层挂载，插入即播。
+   敌方从右滑入错峰、我方/随从从左滑入；只动 transform/opacity（合成器通道）。 */
+.bt-entrance .sts-foe .sts-figure { animation: btUnitInFoe .52s cubic-bezier(.22,1,.36,1) backwards; }
+.bt-entrance #btSelf .sts-figure { animation: btUnitInSelf .52s cubic-bezier(.22,1,.36,1) backwards; }
+.bt-entrance .sts-ally .sts-figure { animation: btUnitInSelf .52s cubic-bezier(.22,1,.36,1) .12s backwards; }
+.bt-entrance .sts-foe:nth-child(2) .sts-figure { animation-delay: .1s; }
+.bt-entrance .sts-foe:nth-child(3) .sts-figure { animation-delay: .2s; }
+.bt-entrance .sts-foe:nth-child(4) .sts-figure { animation-delay: .3s; }
+@keyframes btUnitInFoe { from { opacity: 0; transform: translateX(42px) translateY(8px); } }
+@keyframes btUnitInSelf { from { opacity: 0; transform: translateX(-38px) translateY(8px); } }
+body.reduce-motion .bt-entrance .sts-figure { animation: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  .bt-entrance .sts-figure { animation: none !important; }
+}

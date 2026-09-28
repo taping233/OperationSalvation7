@@ -1,16 +1,9 @@
 import { sdtDefine } from './sdt-facade.js';
+import { hashSeed, nextRandom } from './random-core.js';
+// hashSeed/nextRandom 的实现与口径注释在 random-core.js（零依赖件）；
+// 此处转发导出维持既有 import 面（map-rng-bit-equivalence 等测试直引本文件）。
 const UINT32_RANGE = 0x100000000;
 const STEP = 0x6D2B79F5;
-
-function hashSeed(value) {
-  const text = String(value);
-  let hash = 2166136261;
-  for (let i = 0; i < text.length; i++) {
-    hash ^= text.charCodeAt(i);
-    hash = Math.imul(hash, 16777619);
-  }
-  return hash >>> 0;
-}
 
 function normalizeSeed(seed) {
   return typeof seed === 'number' && Number.isFinite(seed) ? seed >>> 0 : hashSeed(seed);
@@ -37,12 +30,9 @@ class SeededRandomService {
     const key = String(stream);
     let state = this.streams[key];
     if (state === undefined) state = hashSeed(`${this.seed}:${key}`);
-    state = (state + STEP) >>> 0;
-    this.streams[key] = state;
-    let value = state;
-    value = Math.imul(value ^ (value >>> 15), value | 1);
-    value ^= value + Math.imul(value ^ (value >>> 7), value | 61);
-    return ((value ^ (value >>> 14)) >>> 0) / UINT32_RANGE;
+    const step = nextRandom(state);
+    this.streams[key] = step.state;
+    return step.value;
   }
 
   snapshot() { return { seed: this.seed, streams: { ...this.streams } }; }
@@ -77,4 +67,4 @@ const Random = Object.freeze({
 
 sdtDefine('Random', Random);
 
-export { Random, SeededRandomService, generateSeed, setRandomService };
+export { Random, SeededRandomService, generateSeed, hashSeed, nextRandom, setRandomService };

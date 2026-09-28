@@ -112,13 +112,39 @@ async function chatComplete(config, messages, signal) {
 }
 
 const MAX_RETRIES = 3;
+// LLM 单次调用墙钟上限：端点挂起/网络黑洞时不拖死 step/autoRun（此前命令段有
+// COMMAND_TIMEOUT，决策段无任何上限）。可用 options.timeoutMs 覆盖（测试用）。
+const DECIDE_TIMEOUT_MS = 30000;
+
+// 组合取消源：调用方 signal（stopRun 链）+ 墙钟超时 → 单一 fetch signal。
+// 不用 AbortSignal.any（Chromium 116+，高于项目 105 基线），手动桥接。
+function abortableFetchSignal(signal, timeoutMs) {
+  const controller = new AbortController();
+  const onOuterAbort = () => controller.abort();
+  if (signal) {
+    if (signal.aborted) controller.abort();
+    else signal.addEventListener('abort', onOuterAbort, { once: true });
+  }
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  return {
+    signal: controller.signal,
+    settled: () => controller.signal.aborted,
+    timedOut: () => controller.signal.aborted && !(signal && signal.aborted),
+    cleanup() { clearTimeout(timer); if (signal) signal.removeEventListener('abort', onOuterAbort); },
+  };
+}
 
 // decide 函数：供 SDT.Agent.autoRun({ decide: SDT.Agent.llm.decide() })
+// 第二参 extras 为 runner 递下的可选句柄（extras.signal = 本局取消信号）；
+// 旧调用方（单参闭包）不受影响。
 function decide(options = {}) {
   const fallback = greedyPolicy(options.greedy || {});
-  return async (obs) => {
+  const timeoutMs = Number.isFinite(options.timeoutMs) && options.timeoutMs > 0 ? options.timeoutMs : DECIDE_TIMEOUT_MS;
+  return async (obs, extras = null) => {
     const config = loadConfig();
     if (!config.apiKey || !config.model) return fallback(obs);   // 未配置：退化贪心，链路不断
+    const outerSignal = extras?.signal || null;
+    if (outerSignal && outerSignal.aborted) return fallback(obs);   // 已请求停止：不再发起调用
     const messages = [
       { role: 'system', content: SYSTEM_PROMPT },
       { role: 'user', content: buildUserMessage(obs, null) },
@@ -126,11 +152,18 @@ function decide(options = {}) {
     let lastError = '';
     for (let attempt = 0; attempt < MAX_RETRIES; attempt++) {
       let text;
+      const link = abortableFetchSignal(outerSignal, timeoutMs);
       try {
-        text = await chatComplete(config, messages);
+        text = await chatComplete(config, messages, link.signal);
       } catch (error) {
-        lastError = `调用失败：${String(error?.message || error)}`;
+        // 取消/超时与网络失败同途退化贪心：stopRun 场景下 autoRun 循环随即检查
+        // runCancelled 收口；超时场景保持本局可继续（与网络失败同口径）。
+        lastError = link.timedOut() ? `调用超时（>${timeoutMs}ms）`
+          : link.settled() ? '调用已取消（stopRun）'
+          : `调用失败：${String(error?.message || error)}`;
         break;   // 网络/接口层失败重试无益，直接退化
+      } finally {
+        link.cleanup();
       }
       const parsed = parseActionReply(text);
       const norm = parsed.ok ? normalizeAction(parsed.raw) : { ok: false, code: parsed.code, message: parsed.message };

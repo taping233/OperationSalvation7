@@ -7,7 +7,8 @@
 
 /** 深拷贝：调用方保证输入为 JSON 安全数据；返回类型沿用该输入类型。 */
 /** @template T @param {T} value @returns {T} */
-export const clone = value => JSON.parse(JSON.stringify(value));
+// clone 权威已下沉 core/shared.js（battle 域可用），此处转发保持命令家族 import 面不变
+export { clone } from '../core/shared.js';
 
 /** 命令失败结果；details 仅在传入时附带，省略时结果对象不含该键。 */
 /** @param {string} code @param {string} message @param {boolean} [retryable=false] @param {unknown} [details] @returns {{ ok: false, code: string, message: string, retryable: boolean, details?: unknown }} */

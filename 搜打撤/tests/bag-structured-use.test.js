@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 const state = vi.hoisted(() => ({ game: null, ui: null, saveGame: vi.fn(), uid: 0 }));
 
-vi.mock('../game/src/core/shared.js', () => ({ esc: value => String(value), escAttr: value => String(value) }));
+vi.mock('../game/src/core/shared.js', () => ({ clone: value => (value == null ? value : JSON.parse(JSON.stringify(value))), esc: value => String(value), escAttr: value => String(value) }));
 vi.mock('../game/src/run/game.session.js', () => ({
   MAP: { items: { rations: 'rations', wood: 'wood' } },
   bagCap: () => state.game.cap,

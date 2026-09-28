@@ -350,6 +350,11 @@ body.lobby #logPanel, body.page-opaque #logPanel { display: none; }
 /* 底栏背包按钮删除后（2026-09-19）：满载警示移到全局浮动背包键 */
 #bagBtnFloat.bag-full { box-shadow: 0 0 0 2px #ce8873, 0 4px 18px #030b1688; }
 #bagBtnFloat.bag-full::after { content: '满'; position: absolute; top: -6px; right: -6px; padding: 1px 6px; border-radius: var(--radius-panel); background: #ce8873; color: #14212b; font: 700 10px/1.4 ui-monospace, monospace; }
+/* 满载呼吸（2026-09-27 二轮动效）：transform 合成器通道常驻动画；减动效停 */
+#bagBtnFloat.bag-full { animation: bagFullBreath 2.2s ease-in-out infinite; }
+@keyframes bagFullBreath { 50% { transform: scale(1.055); } }
+body.reduce-motion #bagBtnFloat.bag-full { animation: none; }
+@media (prefers-reduced-motion: reduce) { #bagBtnFloat.bag-full { animation: none; } }
 #sidebar #statsPanel { display: flex; justify-content: center; gap: 5px; border-right: 1px solid var(--exp-line); padding-right: 16px; }
 #sidebar #miniMap { width: 100%; height: auto; max-height: 66px; object-fit: contain; max-width: none; border-radius: var(--radius-panel); background: #08131f80; } /* 09-25 P2：画布本征 560×112，原强制 height:66px 纵向拉伸 1.8 倍——改随宽等比 + 66px 封顶 contain */
 #sidebar #statsPanel .stat-duo { display: flex; justify-content: space-between; gap: 5px; margin: 0; font-size: 10px; color: var(--exp-muted); }

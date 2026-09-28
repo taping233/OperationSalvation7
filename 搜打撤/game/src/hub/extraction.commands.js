@@ -263,6 +263,10 @@ export function createExtractionCommands({
       inFlight.set(key, attempt);
     }
     const receipt = await commitAttempt(attempt);
+    // 失败时保留 inFlight（2026-09-28 复核审计C1后确认为设计契约）：attempt 是
+    // 中断事务的恢复令牌——after-base/after-run 注入失败后，重试复用同一 attempt
+    // 经 recovery 日志续放，receipt 重放保证不重复入库（见 extraction-recovery
+    // 「receipt重放不重复卡牌」用例）。若删条目重建，会把已部分应用的事务再算一遍。
     if (!receipt.ok) return receipt;
     applyAttempt(attempt);
     inFlight.delete(key);
@@ -289,7 +293,7 @@ export function createExtractionCommands({
     }
     if (attempt.command !== 'extractFinish') return fail('REQUEST_PENDING', '上一项整理正在重试，请稍后再操作', true);
     const receipt = await commitAttempt(attempt);
-    if (!receipt.ok) return receipt;
+    if (!receipt.ok) return receipt;   // 同 updateCards：保留 attempt 供日志续放
     applyAttempt(attempt);
     inFlight.delete(key);
     return { ok: true, value: receipt.value, replayed: !!receipt.replayed };

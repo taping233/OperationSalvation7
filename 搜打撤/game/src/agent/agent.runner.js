@@ -266,7 +266,7 @@ async function step(decide, options = {}) {
   const t1 = prof ? nowMs() : 0;
   let decision;
   try {
-    decision = await decide(obs);
+    decision = await decide(obs, { signal: runAbort?.signal });
   } catch (error) {
     if (!sameContext(context)) return contextChanged();
     return { obs, action: null, res: null, error: String(error?.message || error), done: true };
@@ -341,7 +341,14 @@ async function step(decide, options = {}) {
 // 空转熔断：同一动作（含参数）连打且局面不动达到阈值即收口；另加同位置长驻守卫，
 // 防 czClose↔inspectStack 之类二周期（id 交替、同 id 计数抓不到）。
 let runCancelled = false;
-function stopRun() { runCancelled = true; }
+// stopRun 同时打断在途 decide（2026-09-28 代码线）：LLM 端点挂起时旧实现只能等请求
+// 自然结束（含 ≤3 次重试），「停止」形同虚设。autoRun 持有本局取消控制器，step 把
+// signal 作为 decide 的第二参递下（decide 契约：可选 extras，旧闭包忽略即兼容）。
+let runAbort = null;
+function stopRun() {
+  runCancelled = true;
+  try { runAbort?.abort(); } catch { /* 控制器已关闭 */ }
+}
 
 // waitLimit：noop 等待门改墙钟（09-26 弃局根因②）。旧口径是步数 60——turbo 下 noop 步进
 // 仅 ~2.5ms，60 步窗口只有 ~150ms，而法力奔涌 surgeSleep(850ms×多发) 等引擎内裸定时器
@@ -349,10 +356,21 @@ function stopRun() { runCancelled = true; }
 // 墙钟 4000ms 覆盖 4 发奔涌（3.4s）+余量；真死锁仍由它收口（30s 单局硬上限兜底）。
 const WAIT_LIMIT_MS = 4000;
 
-async function autoRun({ decide, maxSteps = 800, onStep, until, driver = 'auto', spinLimit = 6, stayLimit = 500, waitLimitMs = WAIT_LIMIT_MS, ...options }) {
+async function autoRun({ decide, maxSteps = 800, onStep, until, driver = 'auto', spinLimit = 6, stayLimit = 500, waitLimitMs = WAIT_LIMIT_MS, runTimeoutMs = Infinity, ...options }) {
+  // 重入守卫（复核建议）：runAbort 非空=上一局尚未收口。公开门面可被外部同时驱动，
+  // 第二局会把首局的 runCancelled 复位、stopRun 只能停最后一局——直接拒绝并如实上报。
+  if (runAbort) {
+    const trace = [];
+    trace.stopReason = 'already-running';
+    return trace;
+  }
   const trace = [];
   const previousDriver = setDriver(driver);
   runCancelled = false;
+  runAbort = new AbortController();
+  // 局级墙钟（2026-09-28 代码线，选入生效）：maxSteps 对 LLM 慢决策不构成时间上限，
+  // 控制台等交互驱动方传 runTimeoutMs 兜底；批跑自带 race，无需此参。
+  const runDeadlineMs = Number.isFinite(runTimeoutMs) && runTimeoutMs > 0 ? nowMs() + runTimeoutMs : Infinity;
   let seenRunActive = false;
   let spinKey = '';
   let spinCount = 0;
@@ -371,6 +389,7 @@ async function autoRun({ decide, maxSteps = 800, onStep, until, driver = 'auto',
   try {
     for (let i = 0; i < maxSteps; i++) {
       if (runCancelled) { stopReason = 'cancelled'; break; }
+      if (nowMs() >= runDeadlineMs) { stopReason = 'run-timeout'; break; }
       let result;
       try {
         result = await step(decide, options);
@@ -461,6 +480,9 @@ async function autoRun({ decide, maxSteps = 800, onStep, until, driver = 'auto',
         if (result.id === failKey) failCount += 1; else { failKey = result.id; failCount = 1; }
       } else { failKey = ''; failCount = 0; }
       if (result.error) { stopReason = 'step-exception'; break; }
+      // 取消优先于自然收口（复核建议）：stopRun 落在本步 done 时归因 cancelled，
+      // 不冒充 decide-null（trace 死因可见性）
+      if (runCancelled) { stopReason = 'cancelled'; break; }
       if (result.done) { stopReason = 'decide-null'; break; }
       if (until?.(result)) { stopReason = 'until'; break; }
       if (!isWait && spinCount >= spinLimit) { stopReason = 'spin'; break; }
@@ -498,6 +520,7 @@ async function autoRun({ decide, maxSteps = 800, onStep, until, driver = 'auto',
     }
   } finally {
     setDriver(previousDriver);   // 驱动标签只在本局生效，收口还原为 human
+    runAbort = null;             // 本局取消控制器随局销毁，stopRun 不误伤下一局
   }
   trace.stopReason = stopReason;
   return trace;

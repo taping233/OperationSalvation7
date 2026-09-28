@@ -1,5 +1,6 @@
 import { Random } from '../core/random.js';
 import { esc } from '../core/shared.js';
+import { hopPoint, decayOsc, ease } from '../core/motion-primitives.js';
 
 let openBackpack;
 export function configureShopRuntime({ openBag }) {
@@ -142,6 +143,97 @@ function createShopController({
     }
   }
 
+  // 买中 carry 演出（2026-09-27 动效补全）：卡面从货位弧线飞进页头「背包」钮，钮体弹性接收。
+  // onetake 形制：节拍不换场、东西被带走——货位瞬变 sold 的同时卡面被「接走」。
+  // 纯时间函数预采样进 WAAPI（hopPoint 弧线 / decayOsc 接收弹），不阻塞购买结算，失败静默。
+  function bagPop(bag) {
+    if (!bag || typeof bag.animate !== 'function') return;
+    const M = 10, pkf = [];
+    for (let i = 0; i <= M; i++) {
+      const t = (i / M) * 0.42;
+      pkf.push({ transform: `scale(${(1 + decayOsc(t, 0, { amp: 0.16, decay: 9, freq: 13 })).toFixed(3)})`, offset: i / M });
+    }
+    bag.animate(pkf, { duration: 420, easing: 'linear' });
+  }
+  // 从屏幕矩形 flyEl 出发弧线飞向背包钮；返回飞行时长（ms）。node 已定位到视口坐标。
+  function flyRectToBag(a, node) {
+    const bag = document.querySelector('.shop-pg .shop-bag-btn');
+    if (!bag || !a.width || !a.height) return 0;
+    const b = bag.getBoundingClientRect();
+    if (!b.width) return 0;
+    const dx = (b.left + b.width / 2) - (a.left + a.width / 2);
+    const dy = (b.top + b.height / 2) - (a.top + a.height / 2);
+    const N = 14, DUR = 560, kf = [];
+    for (let i = 0; i <= N; i++) {
+      const u = i / N;
+      const pt = hopPoint(u, { x: 0, y: 0 }, { x: dx, y: dy }, { height: Math.min(170, Math.abs(dx) * 0.28 + 80), curve: ease.smoother });
+      kf.push({
+        transform: `translate(${pt.x.toFixed(1)}px,${pt.y.toFixed(1)}px) scale(${(1 - 0.78 * u).toFixed(3)}) rotate(${(u * 9).toFixed(1)}deg)`,
+        opacity: u < 0.85 ? 1 : Math.max(0, 1 - (u - 0.85) / 0.15),
+        offset: u,
+      });
+    }
+    node.animate(kf, { duration: DUR, easing: 'linear', fill: 'forwards' }).onfinish = () => {
+      node.remove();
+      bagPop(bag);   // 背包钮弹性接收：scale = 1 + decayOsc（一次过冲回稳）
+    };
+    setTimeout(() => node.remove(), DUR + 200);   // 兜底清理
+    return DUR;
+  }
+  function flyCardToBag(slotEl) {
+    try {
+      if (SDT.Motion?.reduceMotion?.()) return;
+      const card = slotEl?.querySelector('.hs-card, .shop-card-mystery');
+      if (!card || typeof card.animate !== 'function') return;
+      const a = card.getBoundingClientRect();
+      const fly = card.cloneNode(true);
+      fly.style.cssText = `position:fixed;left:${a.left}px;top:${a.top}px;width:${a.width}px;height:${a.height}px;margin:0;z-index:9999;pointer-events:none;`;
+      document.body.appendChild(fly);
+      flyRectToBag(a, fly);
+    } catch { /* 演出失败不影响购买结算 */ }
+  }
+  // 神秘货箱 reveal-first（2026-09-27 二轮动效）：？牌先塌缩→原位亮出真卡面（停一拍）→再飞背包。
+  // 结算照旧同步完成，只有货位重绘被推迟到演出收尾（done 回调）；任何失败都立刻 done 兜底。
+  function revealMysteryThenFly(slotEl, card, done) {
+    let finished = false;
+    const finish = () => { if (!finished) { finished = true; done(); } };
+    try {
+      const tile = slotEl?.querySelector('.shop-card-mystery');
+      if (!tile || typeof tile.animate !== 'function' || SDT.Motion?.reduceMotion?.()) { finish(); return; }
+      const a = tile.getBoundingClientRect();
+      if (!a.width) { finish(); return; }
+      // 1) ？牌原地塌缩（scaleX→0，240ms）
+      const flip = tile.cloneNode(true);
+      flip.style.cssText = `position:fixed;left:${a.left}px;top:${a.top}px;width:${a.width}px;height:${a.height}px;margin:0;z-index:9999;pointer-events:none;`;
+      document.body.appendChild(flip);
+      flip.animate([{ transform: 'scaleX(1)' }, { transform: 'scaleX(0)' }], { duration: 240, easing: 'ease-in', fill: 'forwards' }).onfinish = () => {
+        flip.remove();
+        // 2) 真卡面从塌缩点弹出（132×180 sm 卡，同战斗 surge-fly 制式）
+        const reveal = document.createElement('div');
+        reveal.style.cssText = `position:fixed;left:${a.left + a.width / 2 - 66}px;top:${a.top + a.height / 2 - 90}px;width:132px;height:180px;margin:0;z-index:9999;pointer-events:none;`;
+        reveal.innerHTML = SDT.Cards.cardHTML ? SDT.Cards.cardHTML(card, 'sm') : esc(card.name || '');
+        document.body.appendChild(reveal);
+        reveal.animate([
+          { transform: 'scale(.4)', opacity: 0 },
+          { transform: 'scale(1)', opacity: 1 },
+        ], { duration: 320, easing: 'cubic-bezier(.2,.9,.35,1.18)', fill: 'forwards' });
+        // 3) 停一拍让人看清开出了什么，再飞背包；结束后才放行货位重绘
+        setTimeout(() => {
+          const rect = reveal.getBoundingClientRect();
+          const dur = flyRectToBag(rect, reveal);
+          setTimeout(finish, dur + 60);
+        }, 720);
+      };
+      setTimeout(finish, 2600);   // 全链路兜底：动画事件丢失也能收尾
+    } catch { finish(); }
+  }
+  // 购买 carry 分派：神秘货箱走 reveal 序列（货位重绘推迟），普通购买立即飞+重绘
+  function playBuyCarry(slotEl, slot, done) {
+    if (slot?.mystery && slotEl?.querySelector('.shop-card-mystery')) { revealMysteryThenFly(slotEl, slot.card, done); return; }
+    flyCardToBag(slotEl);
+    done();
+  }
+
   function renderShop() {
     shopPage = 'main';
     const slots = game.shopStock.map(slotHTML).join('');
@@ -237,7 +329,9 @@ function createShopController({
     const pairs = [['resCards', game.ownedCards.length], ['resCoins', game.coins], ['resCap', `${usedSlots()}/${bagCap()}`]];
     for (const [id, val] of pairs) {
       const node = document.getElementById(id);
-      if (node) node.textContent = val;
+      if (!node) continue;
+      if (node.textContent !== String(val) && typeof UI.popNum === 'function') UI.popNum(node);   // 数值变化弹跳（口径同 HUD popNum）
+      node.textContent = val;
     }
   }
   // 货位是 div：补了 button 语义后键盘也要能买（Enter/Space），整页只绑一次
@@ -285,7 +379,7 @@ function createShopController({
       SDT.Sound.sfx('gain');
       UI.log(`[[icon:bag]] 购买卡牌【<b>${esc(slot.card.name)}</b>】（- ${slot.price} 币，剩 ${game.coins}）`, 'coin');
       saveGame();
-      refreshShopSlot(+data.i);
+      playBuyCarry(document.querySelectorAll('.shop-board-grid .shop-slot')[+data.i], slot, () => refreshShopSlot(+data.i));
     });
     UI.act('buySha', data => {
       const slot = game.shopStock[+data.i];
@@ -313,7 +407,7 @@ function createShopController({
       SDT.Sound.sfx('gain');
       UI.log(`[[icon:bag]] 补充初始攻击 ×1（- ${slot.price} 币，剩 ${game.coins} · 本站还可补 ${slot.shaReplenish} 张）`, 'coin');
       saveGame();
-      refreshShopSlot(+data.i);
+      playBuyCarry(document.querySelectorAll('.shop-board-grid .shop-slot')[+data.i], slot, () => refreshShopSlot(+data.i));
     });
     UI.act('sellCard', data => {
       const index = game.ownedCards.findIndex(owned => owned.uid === data.uid);

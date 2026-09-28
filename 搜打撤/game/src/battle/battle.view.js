@@ -122,6 +122,23 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     if (liveNode) liveNode.replaceWith(replacement);
     else stage.querySelector(before).before(replacement);
   }
+  // 熟练度 XP 条（2026-09-27 二轮动效）：条体随渲染整块重建，CSS transition 活不过重建——
+  // 改用 WAAPI 从上一场次的宽度 scaleX 推到当前值（transform 合成器通道，origin 已是左侧）。
+  let lastXpPct = null;
+  function animateXpChip(body) {
+    const fill = body.querySelector('.sts-xp-bar i');
+    if (!fill) return;
+    const cur = parseFloat(fill.style.width) || 0;
+    try {
+      if (lastXpPct != null && Math.abs(cur - lastXpPct) > 0.4 && typeof fill.animate === 'function'
+        && !SDT.Motion?.reduceMotion?.()) {
+        fill.animate(
+          [{ transform: `scaleX(${Math.max(0, Math.min(1, lastXpPct / 100)).toFixed(3)})` }, { transform: 'scaleX(1)' }],
+          { duration: 600, easing: 'cubic-bezier(.22,1,.36,1)' });
+      }
+    } catch { /* 演出失败不影响渲染 */ }
+    lastXpPct = cur;
+  }
   function showBattleStage(html, token) {
     const body = UI.el.ovBody;
     const stage = body.firstElementChild;
@@ -133,6 +150,8 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
       const fresh = body.firstElementChild;
       fresh._battleToken = token;
       fresh._battleTemplate = fresh.cloneNode(true);
+      fresh.classList.add('bt-entrance');   // 单位入场演出只挂场次首建；复用渲染绝不再带（令牌守卫）
+      animateXpChip(body);
       return;
     }
     const template = document.createElement('template');
@@ -145,6 +164,8 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
       const fresh = body.firstElementChild;
       fresh._battleToken = token;
       fresh._battleTemplate = fresh.cloneNode(true);
+      fresh.classList.add('bt-entrance');
+      animateXpChip(body);
       return;
     }
     if (stage.dataset.phase !== next.dataset.phase) {
@@ -166,6 +187,7 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     syncBattleSlot(stage, previous, next, '.bt-slam-btn');
     syncBattleSlot(stage, previous, next, '.sts-tactics');
     stage._battleTemplate = next;
+    animateXpChip(body);
   }
   function render(snapshot = getSnapshot()) {
     const prevView = captureBattleView();   // 重建前的手牌/牌堆位：供飞行与归位动画取样

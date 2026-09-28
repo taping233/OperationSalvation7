@@ -1,4 +1,4 @@
-import SDT from './sdt-facade.js';
+import SDT, { sdtDefine } from './sdt-facade.js';
 import { animate } from 'motion/mini';
 import '../../css/combat-feedback.css';
 
@@ -70,6 +70,6 @@ function hit(element, self = false) {
   return true;
 }
 
-SDT.Motion = Object.freeze({ pop, overlayIn, hit, reduceMotion, refreshReduceMotion });
+sdtDefine('Motion', Object.freeze({ pop, overlayIn, hit, reduceMotion, refreshReduceMotion }));
 
 export { hit, overlayIn, pop, reduceMotion, refreshReduceMotion, resolveReducedMotion };

@@ -8,7 +8,7 @@
 import SDT from '../core/sdt-facade.js';
 import { characterName } from '../core/characters.js';
 import { termKeyFor } from '../ui/term-tips.js';
-import { esc } from '../core/shared.js';
+import { esc, escAttr } from '../core/shared.js';
 
 // 描述富文本（v3 定调）：数字 Georgia 加大·金、术语冰蓝、句首「XX：」式关键字金。
 // 顺序固定：先转义 → 关键字 → 术语 → 数字（正则均不含数字，不会互相污染标签）。
@@ -69,8 +69,7 @@ export function cardHTML(c, cls, opts) {
 }
 
 function buildCardHTML(c, cls, opts) {
-  const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-  const escAttr = (s) => esc(s).replace(/"/g, '&quot;');
+  // 2026-09-28 代码线：体内同名局部 esc/escAttr（3 字符/缺单引号）已删，统一走顶层 core/shared 满配版
   const hideCost = !!(opts && opts.hideCost) && SDT.Cards.NO_COST_TYPES.includes(c.type);
   const costBase = (opts && opts.costOverride && opts.costOverride.base != null) ? +opts.costOverride.base : (c.cost || 0);
   const costMod = (opts && opts.costOverride && +opts.costOverride.v !== costBase)

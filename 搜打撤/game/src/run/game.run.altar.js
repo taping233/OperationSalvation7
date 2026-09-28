@@ -419,7 +419,8 @@ export function openDoorModal(door, cellDef) {
   UI.act('goDoor', () => {
     UI.hideOverlay();
     UI.log(`穿过隔离闸门 → <b>${target.name}</b>`, 'sys');
-    enterLayer(door.toLayer, door.arriveAt);
+    // 穿门换层走镜头补间（2026-09-27 二轮动效）：壁纸交叉溶解 + 相机滑入新环，不再硬切
+    enterLayer(door.toLayer, door.arriveAt, { glideCam: true });
   });
   UI.act('doorShop', () => openShop('door:' + door.pair));
   UI.refresh(game);

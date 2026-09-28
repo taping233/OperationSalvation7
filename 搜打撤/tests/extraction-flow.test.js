@@ -10,7 +10,7 @@ vi.mock('../game/src/run/game.session.js', () => ({
   scaledEnemy: vi.fn(), syncPlayTime: vi.fn(),
 }));
 vi.mock('../game/src/core/characters.js', () => ({ CHARACTERS: [], characterFor: () => null, characterName: () => '' }));
-vi.mock('../game/src/core/shared.js', () => ({ esc: String, escAttr: String }));
+vi.mock('../game/src/core/shared.js', () => ({ clone: value => (value == null ? value : JSON.parse(JSON.stringify(value))), esc: String, escAttr: String }));
 vi.mock('../game/src/audio/sound.js', () => ({ tone: vi.fn() }));
 vi.mock('../game/src/hub/game.hub.js', () => ({ openBaseHub: (...args) => altarState.openBaseHub(...args) }));
 vi.mock('../game/src/hub/game.cardslib.js', () => ({ Sfx: { tick: vi.fn(), ding: vi.fn() }, _set_cardPageOpen: vi.fn(), cardHTML: c => c.name }));

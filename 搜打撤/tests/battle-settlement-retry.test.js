@@ -31,7 +31,7 @@ vi.mock('../game/src/run/game.run.js', () => ({ showRunTransition: (...args) => 
 vi.mock('../game/src/hub/game.bag.bridge.js', () => ({ bagSlots: { closeBackpack: vi.fn(), pocketAdd: vi.fn() } }));
 vi.mock('../game/src/core/event-bus.js', () => ({ on: vi.fn() }));
 vi.mock('../game/src/core/random.js', () => ({ Random: { random: (...args) => state.random(...args) } }));
-vi.mock('../game/src/core/shared.js', () => ({ esc: String }));
+vi.mock('../game/src/core/shared.js', () => ({ clone: value => (value == null ? value : JSON.parse(JSON.stringify(value))), esc: String }));
 
 beforeEach(() => {
   vi.resetModules();

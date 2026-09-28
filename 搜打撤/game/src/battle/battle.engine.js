@@ -23,7 +23,7 @@ import {
   set$pendingHint, set$lastPersistAt, set$activeActionSignal, storeBattleSnapshot,
   clearTargetHint, applyRuneFlag, nextTmpSeq, cancelTargetingState,
 } from './battle.runtime.js';
-import { esc } from '../core/shared.js';
+import { esc, clone as cloneData } from '../core/shared.js';
 import { createEffectExecutor, splitEffectClauses, consumeTriggerTexts } from './battle.effects.js';
 import { refillDrawPile, shuffleCards } from './battle.deck.js';
 import './battle.piles.js';
@@ -90,7 +90,6 @@ const interactionOf = (kind) => (interaction && interaction.kind === kind ? inte
 const pendingTargetOf = () => { const i = interactionOf('card'); return i ? { uid: i.uid, card: i.card } : null; };
 const pendingItemOf = () => { const i = interactionOf('item'); return i ? { uid: i.uid, card: i.card } : null; };
 const KILL_CHEER = ['漂亮！', '好剑！', '干净利落！'];
-const cloneData = value => value == null ? value : JSON.parse(JSON.stringify(value));
 function cardIdentity(card) {
     if (card && card.id) return `id:${card.id}`;
     return `legacy:${card?.name || ''}|${card?.type || ''}|${card?.desc || ''}`;
@@ -140,7 +139,8 @@ function drawCards(n) {
         continue;
       }
       // 灰烬符文：手牌满 9 张时，放不下的招式直接释放（2026-09-16 Item 定版）
-      if (ashRune && hand.length >= 9 && ['武术', '法术'].includes(entry.card.type)) {
+      // entry 可为 null（uid 无法解析，同函数 118/150 行口径）：2026-09-28 审计补漏
+      if (ashRune && hand.length >= 9 && entry && ['武术', '法术'].includes(entry.card.type)) {
         G.log('[[icon:fire]] <b>灰烬符文</b>：手牌已满，直接释放【' + esc(entry.card.name) + '】', 'sys');
         resolveCard(entry.card, alive()[0] || null, false, 0);
         got++;
@@ -445,7 +445,7 @@ function repairLegacyTT7Card(card) {
     card.dmg = definition.dmg;
     card.dmgType = definition.dmgType;
     if (JSON.stringify(card.rules) !== JSON.stringify(definition.rules))
-      card.rules = JSON.parse(JSON.stringify(definition.rules));
+      card.rules = cloneData(definition.rules);
     return card;
   }
 const findCard = (uid) => {
@@ -1393,7 +1393,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
         loss = Math.max(0, amt);
       } else {
         const shadow = { id: foe.id, status: Object.assign({}, foe.status),
-          defense: JSON.parse(JSON.stringify(foe.defense || { shield: 0, armor: 0, guard: false })) };
+          defense: cloneData(foe.defense || { shield: 0, armor: 0, guard: false }) };
         const probe = Combat.dealDamage({ atk: G.atk, spellPower: sp, status: statusForHit }, shadow, amt, type);
         loss = abreakOn ? Math.max(0, probe.dealt) : (probe.dealt >= 8 ? 2 : (probe.dealt >= 1 ? 1 : 0));
       }

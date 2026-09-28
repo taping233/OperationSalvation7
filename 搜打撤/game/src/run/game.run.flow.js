@@ -62,7 +62,8 @@ export function moveTo(toLi, toIdx) {
     markSeen(toLi, toIdx);
     // 商店是唯一按「离开房间」消耗的节点；其余节点在奖励/事件实际结算完成时自行写入。
     if (current?.def?.type === 'shop') consumeCell(fromLi, fromIdx);
-    if (game.cam?.frameMode === 'routes') game.cam.frameExploration(game);
+    // 到达取景走镜头补间（2026-09-27 动效补全：原为硬切瞬跳）；减动效/急速档直接贴合
+    if (game.cam?.frameMode === 'routes') game.cam.frameExploration(game, false, { glide: !moveUsesReducedMotion() && !isTurbo() });
     game.hop = 0;
     game.moveTarget = null;
     game.turn++;

@@ -1,7 +1,9 @@
+import { esc as escRaw } from '../core/shared.js';
 import { previewDeployment } from './preparation.commands.js';
 import { getSources } from './preparation.sources.js';
 
-const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+// 空值容错（?? ''）是本域展示策略，叠在 core/shared.js 权威转义之上
+const esc = value => escRaw(value ?? '');
 
 const optionList = (items, selected, emptyLabel) => `<option value="">${esc(emptyLabel)}</option>${(items || []).map(item => `<option value="${esc(item.id)}"${item.id === selected ? ' selected' : ''}>${esc(item.name || item.id)}</option>`).join('')}`;
 const statusText = item => item.status === 'ready' ? `已有 ${item.availableCount}` : item.status === 'forbidden' ? '职业卡禁带' : `缺 ${Math.max(0, item.requestedCount - item.availableCount)}`;

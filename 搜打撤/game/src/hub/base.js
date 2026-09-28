@@ -3,13 +3,13 @@ import { migrateCharacterProgress } from '../core/characters.js';
 
 import { Random } from '../core/random.js';
 import { DATA } from '../core/data-loader.js';
+import { txPending } from './game.storage.js';
+import { createVersionedSlotReader } from './versioned-slot-reader.js';
 
   const SLOT_KEY = (i) => 'sdt-base-v2-slot' + i;
   const LEGACY_KEY = 'sdt-base-v1';   // 旧版全局基地（v0.20 及之前），启动时迁移
   // 坏档备份键：解析失败时原串转存于此（基地是跨局数据，损坏比对局档更严重）
   const CORRUPT_KEY = (i) => 'sdt-base-' + i + '-corrupt';
-  const TX_KEY = (i) => 'sdt-tx-v1-slot' + i;
-  const txPending = (i) => { try { return localStorage.getItem(TX_KEY(i)) !== null; } catch { return true; } };
   // 基地 schema 版本：破坏性变更时 +1 并在 BASE_MIGRATIONS 补纯函数迁移
   const BASE_VERSION = 2;
   const BASE_MIGRATIONS = {
@@ -40,7 +40,7 @@ import { DATA } from '../core/data-loader.js';
   const ownedPets = () => Object.keys(data.pets || {});
   // 当前携带的宠物（出发后各效果按此生效）；没有宠物时返回 null
   const carriedPet = () => petById(data.petSel) || null;
-  const issues = {};   // 档位 -> 'corrupt' | 'tooNew'，供 UI 查询
+  // 读档异常（档位 -> 'corrupt' | 'tooNew'）由 reader 统一维护，供 UI 查询
   const rules = () => window.SDT.MAP.rules;
   // 基地成长接音（迭代评审 09-20）：升级成功=levelup；base.js 无 UI/Sound 静态导入，
   // 循 window.SDT 晚读惯例（同 :41 MAP），失败分支不播 deny（调用层 UI 已有 deny 职责）
@@ -160,51 +160,34 @@ import { DATA } from '../core/data-loader.js';
     return migrateCharacterProgress(d);
   }
 
-  // peek 指纹缓存（同 game.storage readCache 思路，2026-09-08 性能）：选档页每次打开
+  // peek 指纹缓存（2026-09-08 性能，管线现居 versioned-slot-reader.js）：选档页每次打开
   // peek×5，基地档含全量卡牌/收藏数据，逐槽 JSON.parse 不便宜。raw 串指纹失配自动
   // 重解析，绕过 write 直写 localStorage（旧代码/另一标签页）也不会读到脏缓存。
-  const peekCache = new Map();
+  // 2026-09-28 代码线收敛：管线骨架（缓存/版本门/迁移/坏档备份）上移到
+  // versioned-slot-reader.js，这里只注入基地档历史语义（宽松版本解析、放行数组顶层、
+  // 直返引用供 adopt 就地规范化）；issue 标记随之改按 run 侧语义在可读路径清除，
+  // 修复「坏档被外部修复后 issue 粘滞、阻塞 save」的旧缺陷。
   // 标签页所见的基地原始串。普通 save 以原始串做乐观并发检查，
   // 避免旧内存状态把另一标签页已保存的进度覆盖。
   const writeBaseline = new Map();
   // 选档页确认为空的基地槽快照；newSlot/reset 时防止基于过期空槽判断清空新档。
   const emptySlotObservation = new Map();
 
+  const reader = createVersionedSlotReader({
+    logTag: '[base]',
+    maxVersion: BASE_VERSION,
+    migrations: BASE_MIGRATIONS,
+    corruptKeyFor: CORRUPT_KEY,
+    versionOf: (d) => +d.version || 0,
+    rejectArrays: false,
+  });
+
   function parseRaw(i) {
     let raw;   // 不做冗余初始化：try 内必赋值，catch 直接 return（下方 == null 判断兼容 undefined）
     try { raw = localStorage.getItem(SLOT_KEY(i)); } catch { return null; }
-    if (raw == null) { peekCache.delete(i); delete issues[i]; return null; }
-    const hit = peekCache.get(i);
-    if (hit && hit.raw === raw) return hit.parsed;
-    let s;
-    try { s = JSON.parse(raw); }
-    catch { return _corrupt(i, raw); }
-    if (!s || typeof s !== 'object') return _corrupt(i, raw);
-    const v = +s.version || 0;
-    if (v > BASE_VERSION) {
-      // 存档完好但来自更新的版本：原样保留不碰，拒绝读取
-      issues[i] = 'tooNew';
-      console.warn(`[base] 档位 ${i} 基地版本(${v})新于当前游戏(${BASE_VERSION})，拒绝读取`);
-      return null;
-    }
-    let mv = v;
-    while (mv < BASE_VERSION) {
-      const m = BASE_MIGRATIONS[mv];
-      if (m) s = m(s);
-      mv++;
-      s.version = mv;
-    }
-    peekCache.set(i, { raw, parsed: s });
-    return s;
+    return reader.parse(i, raw);
   }
-  // 坏档处理：原串备份到 corrupt 键后返回 null（原键不动，玩家决定是否覆盖重开）
-  function _corrupt(i, raw) {
-    issues[i] = 'corrupt';
-    try { localStorage.setItem(CORRUPT_KEY(i), raw); } catch { /* 存储不可用 */ }
-    console.warn(`[base] 档位 ${i} 基地数据损坏，原串已备份到 ${CORRUPT_KEY(i)}`);
-    return null;
-  }
-  function issue(i) { return issues[i] || null; }
+  function issue(i) { return reader.issue(i); }
 
   // 启动迁移：旧全局基地 → 每一个已有对局存档的档位（都没有则给档位 1）
   function migrateLegacy(existingSlots) {
@@ -264,8 +247,8 @@ import { DATA } from '../core/data-loader.js';
       writeBaseline.set(slot, raw);
       data.version = BASE_VERSION;
       data._m01 = next._m01;
-      peekCache.set(slot, { raw, parsed: next });
-      delete issues[slot];
+      reader.poke(slot, raw, next);
+      reader.clearIssue(slot);
       saveWarned = false;
       try { localStorage.removeItem(CORRUPT_KEY(slot)); } catch { /* 无关紧要 */ }
       return true;
@@ -292,7 +275,7 @@ import { DATA } from '../core/data-loader.js';
       }
     } catch { return false; }
     slot = s;
-    delete issues[s]; // reset 是玩家明确的新开档动作，允许覆盖先前不可读档。
+    reader.clearIssue(s); // reset 是玩家明确的新开档动作，允许覆盖先前不可读档。
     data = def();
     ensureStarterPet();
     seedStarterStash();
@@ -357,14 +340,14 @@ import { DATA } from '../core/data-loader.js';
     const raw = JSON.stringify(normalized);
     localStorage.setItem(SLOT_KEY(i), raw);
     writeBaseline.set(i, raw);
-    peekCache.set(i, { raw, parsed: normalized });
-    delete issues[i];
+    reader.poke(i, raw, normalized);
+    reader.clearIssue(i);
     try { localStorage.removeItem(CORRUPT_KEY(i)); } catch { /* 无关紧要 */ }
     if (slot === i) data = normalized;
     return normalized;
   }
   function _refreshExternal(i) {
-    peekCache.delete(i);
+    reader.invalidate(i);
     const raw = parseRaw(i);
     try { writeBaseline.set(i, localStorage.getItem(SLOT_KEY(i))); } catch { writeBaseline.delete(i); }
     if (raw && slot === i) data = adopt(raw);

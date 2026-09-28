@@ -10,10 +10,9 @@
 /** @typedef {{ storage: StoragePort, keyFor(slotId: number): JournalKeys, onChanged?: (slotId: number) => void, failpoint?: (point: Failpoint) => void, validateJournal?: (journal: Journal, slotId: number) => JournalValidationResult }} CreateRecoverablePairOptions */
 
 /** @type {Set<JournalPhase>} */
-const PHASES = new Set(['prepared', 'base-written', 'run-written']);
-/** @param {string} code @param {string} message @param {boolean} [retryable=false] @param {unknown} [details] @returns {Failure} */
-const fail = (code, message, retryable = false, details) => ({ ok: false, code, message, retryable, ...(details ? { details } : {}) });
+import { fail } from './commands.shared.js';
 
+const PHASES = new Set(['prepared', 'base-written', 'run-written']);
 /** @param {unknown} value @returns {value is JournalPhase} */
 function isJournalPhase(value) {
   return typeof value === 'string' && PHASES.has(/** @type {JournalPhase} */ (value));

@@ -1,4 +1,5 @@
 import { migrateRunCharacter } from '../core/characters.js';
+import { createVersionedSlotReader } from './versioned-slot-reader.js';
 const SLOT_COUNT = 5;
 const RUN_KEY = index => `sdt-save-v2-slot${index}`;
 const OLD_SAVE_KEY = 'sdt-save-v1';
@@ -27,49 +28,37 @@ const MIGRATIONS = {
   // 1→2：「杀」id 统一改名（只动 id 值等于 builtin-sha 的节点，其它 id 值不受影响）。
   1: d => { renameCardIds(d); return d; },
 };
-// 读档异常原因（index -> 'corrupt' | 'tooNew'），供 UI 查询展示
-const issues = {};
+// 读档异常原因存于 reader（index -> 'corrupt' | 'tooNew' | 'readFailed'），供 UI 查询展示
 const writeIssues = new Map();
 
 // 2026-09-07 留言：点「开始探索」会卡一下 = openSlotPicker 同步 readSlot×5 + Base.peek×5
-// 全量 JSON.parse。对局存档大（ownedCards/eventLog），这里缓存解析结果。
-// 缓存值带原始串指纹：localStorage 被绕过 write 直写（旧版代码/另一标签页/测试）
-// 后指纹失配自动重解析，不会读到脏缓存；省的是昂贵的 parse+迁移，getItem 照常执行。
-const readCache = new Map();
-// 每个标签页记录最后加载/成功写入的原始串。普通写入前作乐观冲突检查，
-// 防止旧标签页在另一标签保存后继续递增 revision 并覆盖新状态。
+// 全量 JSON.parse。对局存档大（ownedCards/eventLog），指纹缓存在 reader 内统一维护：
+// 原始串被绕过 write 直写（旧版代码/另一标签页/测试）后指纹失配自动重解析，不会读到
+// 脏缓存；省的是昂贵的 parse+迁移，getItem 照常执行。
 const writeBaseline = new Map();
 // 装载会修改卡实例与地图节点；缓存必须保留原串对应的迁移结果。
 const publicRun = data => { const value = structuredClone(data); delete value._r2; return value; };
 const loadCandidates = new WeakMap();
 const loadFailure = (code, message) => ({ ok: false, code, message, preserveRun: true });
 
+// 版本化读取管线唯一实现在 versioned-slot-reader.js；这里只注入对局档语义：
+// E5 严格版本口径、拒数组顶层、迁移后 migrateRunCharacter 兜底、出口克隆隐藏 _r2。
+const reader = createVersionedSlotReader({
+  logTag: '[save]',
+  maxVersion: SAVE_VERSION,
+  migrations: MIGRATIONS,
+  corruptKeyFor: CORRUPT_KEY,
+  versionOf: (d) => {
+    const v = Object.hasOwn(d, 'version') ? d.version : 0;
+    return Number.isInteger(v) && v >= 0 ? v : NaN;
+  },
+  rejectArrays: true,
+  postMigrate: migrateRunCharacter,
+  toPublic: publicRun,
+});
+
 function readRaw(index, raw) {
-  if (raw == null) { readCache.delete(index); delete issues[index]; return null; }
-  const hit = readCache.get(index);
-  if (hit && hit.raw === raw) { delete issues[index]; return publicRun(hit.data); }
-  readCache.delete(index);
-  let data;
-  try { data = JSON.parse(raw); } catch { return RunStorage._corrupt(index, raw); }
-  if (!data || typeof data !== 'object' || Array.isArray(data)) return RunStorage._corrupt(index, raw);
-  const v = Object.hasOwn(data, 'version') ? data.version : 0;
-  if (!Number.isInteger(v) || v < 0) return RunStorage._corrupt(index, raw);
-  if (v > SAVE_VERSION) {
-    issues[index] = 'tooNew';
-    console.warn(`[save] 档位 ${index} 存档版本(${v})新于当前游戏(${SAVE_VERSION})，拒绝读取`);
-    return null;
-  }
-  let mv = v;
-  while (mv < SAVE_VERSION) {
-    const m = MIGRATIONS[mv];
-    if (m) data = m(data);
-    mv++;
-    data.version = mv;
-  }
-  data = migrateRunCharacter(data);
-  readCache.set(index, { raw, data });
-  delete issues[index];
-  return publicRun(data);
+  return reader.parse(index, raw);
 }
 
 const RunStorage = Object.freeze({
@@ -88,7 +77,7 @@ const RunStorage = Object.freeze({
   readForPreflight(index) {
     let raw;
     try { raw = localStorage.getItem(RUN_KEY(index)); }
-    catch { issues[index] = 'readFailed'; return null; }
+    catch { reader.markIssue(index, 'readFailed'); return null; }
     const run = readRaw(index, raw);
     if (run) loadCandidates.set(run, { index, raw });
     return run;
@@ -114,15 +103,9 @@ const RunStorage = Object.freeze({
   },
   lastWriteIssue(index) { return writeIssues.get(index) || null; },
   // 坏档处理：原串备份到 corrupt 键后返回 null（原键不动，由玩家决定是否覆盖重开）
-  _corrupt(index, raw) {
-    issues[index] = 'corrupt';
-    let backedUp = false;
-    try { localStorage.setItem(CORRUPT_KEY(index), raw); backedUp = true; } catch { /* 原键保留 */ }
-    console.warn(`[save] 档位 ${index} 存档损坏，${backedUp ? `原串已备份到 ${CORRUPT_KEY(index)}` : '备份失败，原档已保留'}`);
-    return null;
-  },
+  _corrupt(index, raw) { return reader.markCorrupt(index, raw); },
   // 读档异常原因：null=正常；'corrupt'=坏档原键保留（备份尽力）；'tooNew'=版本过新已拒读
-  issue(index) { return issues[index] || null; },
+  issue(index) { return reader.issue(index); },
   // R6 只读身份窄口：不迁移、不写回、不为旧档创建 runId。
   // 领域模块用它关联同一探索中的永久提交；私有 _r2 不进入 publicRun。
   readIdentity(index) {
@@ -163,8 +146,7 @@ const RunStorage = Object.freeze({
       localStorage.setItem(RUN_KEY(index), nextRaw);
       writeBaseline.set(index, nextRaw);
       writeIssues.delete(index);
-      readCache.delete(index);
-      delete issues[index];
+      reader.invalidate(index);
       try { localStorage.removeItem(CORRUPT_KEY(index)); } catch { /* 无关紧要 */ }
       return true;
     } catch { writeIssues.set(index, 'STORAGE'); return false; }
@@ -175,15 +157,13 @@ const RunStorage = Object.freeze({
       localStorage.removeItem(RUN_KEY(index));
       localStorage.removeItem(CORRUPT_KEY(index));
     } catch { writeIssues.set(index, 'STORAGE'); return false; }
-    readCache.delete(index);
+    reader.invalidate(index);
     writeBaseline.delete(index);
     writeIssues.delete(index);
-    delete issues[index];
     return true;
   },
   _invalidate(index) {
-    readCache.delete(index);
-    delete issues[index];
+    reader.invalidate(index);
     writeIssues.delete(index);
     // 仅事务恢复会调用此入口；恢复已按事务 revision 校验并提交，
     // 因而本标签可将后续写入基线推进到事务后的持久状态。
@@ -195,10 +175,10 @@ const RunStorage = Object.freeze({
       if (old && txPending(1)) return false;
       if (old && !localStorage.getItem(RUN_KEY(1))) localStorage.setItem(RUN_KEY(1), old);
       localStorage.removeItem(OLD_SAVE_KEY);
-      readCache.clear();
+      reader.invalidateAll();
       return true;
     } catch { return false; }
   },
 });
 
-export { OLD_SAVE_KEY, RUN_KEY, RunStorage, SAVE_VERSION, SLOT_COUNT };
+export { OLD_SAVE_KEY, RUN_KEY, RunStorage, SAVE_VERSION, SLOT_COUNT, TX_KEY, txPending };

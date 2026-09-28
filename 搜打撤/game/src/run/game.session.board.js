@@ -2,6 +2,7 @@
  * markSeen 揭开当前节点与相邻节点；renderMiniMap 事件驱动重绘（markSeen/换层/窗口变化），
  * 不逐帧渲染。只依赖内核（game），被开局/读档流程与 game.boot 消费。 */
 import { game } from './game.session.kernel.js';
+import { noteReveal } from '../core/map-reveals.js';
 
 // 战争迷雾可见集：到达节点 = 该节点 + 其相邻节点变为可见（走过的路径天然保留在 seen 里）
 export function markSeen(li, idx) {
@@ -9,10 +10,16 @@ export function markSeen(li, idx) {
   const ld = game.layerData?.[li];
   const cur = ld?.logical?.[idx];
   if (!cur) return;
+  // 差分记录本次新揭开的节点（读档重标不重播揭示演出），供地图 popIn 揭示动画采样
+  const fresh = [];
+  if (game.seen[li + ',' + idx] !== 1) fresh.push(li + ',' + idx);
   game.seen[li + ',' + idx] = 1;
   for (const [nl, ni] of (cur.next || [])) {
-    if (nl === li) game.seen[nl + ',' + ni] = 1;
+    if (nl !== li) continue;
+    if (game.seen[nl + ',' + ni] !== 1) fresh.push(nl + ',' + ni);
+    game.seen[nl + ',' + ni] = 1;
   }
+  if (fresh.length) fresh.forEach(key => noteReveal(key, game.time || 0));
   renderMiniMap();   // 底栏简图只在解锁新区域时重绘，平时保持原样（2026-09-09 老板定向）
 }
 

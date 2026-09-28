@@ -154,6 +154,11 @@ export const overlayMethods = {
       if (!this.el.overlay.hidden && this.el.ovBody.contains(host)) host.classList.remove('bg-loading');
     };
     probe.onload = done;
+    // 404/离线时 onload 永不触发：onerror 摘除「正在进入…」提示，失败 URL 不进
+    // _bgReady——资产热修后下次打开仍会重新探测（2026-09-28 代码线修复）
+    probe.onerror = () => {
+      if (!this.el.overlay.hidden && this.el.ovBody.contains(host)) host.classList.remove('bg-loading');
+    };
     if (probe.complete && probe.naturalWidth > 0) { done(); return; }
     host.classList.add('bg-loading');
     probe.src = url;

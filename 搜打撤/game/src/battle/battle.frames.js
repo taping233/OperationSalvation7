@@ -272,9 +272,9 @@ function setTexture(tex) {
   if (cur) cur.dirty = true;
 }
 
-function layout() {
+function layout(preRead) {
   if (!cur || !cur.fig || !cur.fig.isConnected) return;
-  const r = uiRect(cur.fig);   // 布局口径：sprite 坐标是 Pixi stage 布局值
+  const r = preRead || uiRect(cur.fig);   // 布局口径：sprite 坐标是 Pixi stage 布局值；调用方已读时可传入复用
   if (r.width <= 0) return;
   const lr = cur.lastRect;
   if (!lr || r.left !== lr[0] || r.top !== lr[1] || r.width !== lr[2] || r.height !== lr[3]) {
@@ -359,7 +359,7 @@ function tickLoop() {
     const r = uiRect(cur.fig);   // 与 lastRect（布局口径）同尺比较
     const lr = cur.lastRect;
     if (!lr || r.left !== lr[0] || r.top !== lr[1] || r.width !== lr[2] || r.height !== lr[3]) {
-      layout();
+      layout(r);
       wakeRenderer();   // DOM 位移中（抖动/沉浮）持续跟随渲染
     }
   }

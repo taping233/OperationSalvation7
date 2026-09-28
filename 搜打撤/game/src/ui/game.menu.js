@@ -1,5 +1,6 @@
 import { appendLocalFeedback, downloadFeedbackRecord, readLocalFeedback, removeLocalFeedback } from './feedback.local.js';
 import { captureBattleContext, invalidateBattleContext } from '../battle/battle-loader.js';
+import { storeGet, storeSet } from '../core/storage.js';
 /* 标题、选档、离开与设置页面流程。只通过注入端口调用会话能力。 */
 function createGameMenuController(deps) {
   const {
@@ -10,9 +11,8 @@ function createGameMenuController(deps) {
   } = deps;
 
   // 存储安全封装（迭代评审 09-20 G-P2）：隐私模式/配额满时裸调 localStorage 会抛异常，
-  // 设置页曾直接死按钮。本文件经 deps 注入、无静态导入，工具就地定义
-  const storeGet = (key, fallback = null) => { try { return localStorage.getItem(key) ?? fallback; } catch { return fallback; } };
-  const storeSet = (key, val) => { try { localStorage.setItem(key, val); return true; } catch { return false; } };
+  // 设置页曾直接死按钮。2026-09-28 代码线：本地逐字副本删除，改用 core/storage.js
+  // 权威实现（会话能力仍走 deps 注入，此处只是通用工具）
 
   // ---------- 标题界面 ----------
   // lobby = 非对局界面（标题/退出屏/基地）：隐藏左侧栏，画面更聚焦
@@ -941,6 +941,10 @@ function createGameMenuController(deps) {
   //   ② 注入 .data-pg-head 页头行（W2-06：返回件不再叠「总局数」KPI 卡，KPI 区下让位）；
   //   ③ .data-tuned 类激活 page-datapage.css（导出/清空钮收敛正常尺寸右对齐）。
   // 「清空记录」会整页重渲染——MutationObserver 防丢：ovBody 一有变动就补注。
+  // 全仓只保有一个活观察器；inject 带 .doom-stats 内容校验——台面上的 .pg 确为
+  // 跑局数据页才注入。旧实现只认 .pg：设置→数据→返回键回设置页时，hideOverlay 的
+  // 210ms 淡出期间观察器仍活着，设置页一换上就被误注数据页页头（2026-09-28 修复）。
+  let dataPageMo = null;
   function openDataPageUi(fromSettings = false) {
     openDataPage();
     const ovBody = UI.el && UI.el.ovBody;
@@ -948,7 +952,7 @@ function createGameMenuController(deps) {
     const inject = () => {
       if (!UI.el.overlay || UI.el.overlay.hidden) return;
       const pg = ovBody.querySelector('.pg');
-      if (!pg) return;
+      if (!pg || !pg.querySelector('.doom-stats')) return;
       const fresh = !pg.classList.contains('data-tuned');
       if (fresh) {
         pg.classList.add('data-tuned');
@@ -975,10 +979,12 @@ function createGameMenuController(deps) {
       }
     };
     inject();
+    if (dataPageMo) dataPageMo.disconnect();
     const mo = new MutationObserver(() => {
-      if (!UI.el.overlay || UI.el.overlay.hidden) { mo.disconnect(); return; }
+      if (!UI.el.overlay || UI.el.overlay.hidden) { mo.disconnect(); if (dataPageMo === mo) dataPageMo = null; return; }
       inject();
     });
+    dataPageMo = mo;
     mo.observe(ovBody, { childList: true, subtree: false });
   }
 

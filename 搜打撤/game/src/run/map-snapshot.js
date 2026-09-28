@@ -1,4 +1,5 @@
 // @ts-check
+import { clone } from '../core/shared.js';
 /**
  * 校验结果的失败分支（判别联合的 ok:false 侧，ok 字面量 false 保证 if(!x.ok) 能收窄）。
  * @typedef {{ok:false, code:string, message:string, preserveRun:true, details?:Record<string, any>}} SnapshotFail
@@ -20,7 +21,6 @@ const fail = (code, message, details) => ({ ok:false, code, message, preserveRun
 const plainObject = value => !!value && typeof value === 'object' && !Array.isArray(value) && (Object.getPrototypeOf(value) === Object.prototype || Object.getPrototypeOf(value) === null);
 const int = value => Number.isInteger(value);
 const scalarSeed = value => typeof value === 'string' || (typeof value === 'number' && Number.isFinite(value));
-const clone = value => JSON.parse(JSON.stringify(value));
 const exactKeys = (value, keys) => plainObject(value) && Object.keys(value).length===keys.length && keys.every(k=>Object.hasOwn(value,k));
 const pureJson = value => value===null || typeof value==='string' || typeof value==='boolean' || (typeof value==='number'&&Number.isFinite(value)) ||
   (Array.isArray(value)&&value.every(pureJson)) || (plainObject(value)&&Object.entries(value).every(([k,v])=>!['__proto__','prototype','constructor'].includes(k)&&pureJson(v)));

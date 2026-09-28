@@ -44,12 +44,25 @@ export const cinematicsMethods = {
   _cardGetShowing: false,
   showCardReward(card, reason) {
     if (!card) return;
-    this._cardGetQueue.push({ card, reason });
+    // 对局归属快照（2026-09-28 代码线）：演出队列自驱与场景解耦，多张连发时玩家
+    // 中途「回主菜单/回基地」会让剩余卡盖在新界面上并吞掉首次点击。入队记快照，
+    // 出队校验，已换局则整队作废。
+    const context = { runActive: !!(SDT.game && SDT.game.runActive) };
+    this._cardGetQueue.push({ card, reason, context });
     if (this._cardGetShowing) return;
     this._cardGetShowing = true;
     const showNext = () => {
       const next = this._cardGetQueue.shift();
       if (!next) { this._cardGetShowing = false; return; }
+      if ((!!(SDT.game && SDT.game.runActive)) !== next.context.runActive) {
+        // 逐条校验（复核建议）：只丢与旧局绑定的条目；队列里若还有归属当前局的
+        // 合法卡（后续 showCardReward 追加），继续播放而不是整队丢弃
+        const current = !!(SDT.game && SDT.game.runActive);
+        this._cardGetQueue = this._cardGetQueue.filter(e => e.context.runActive === current);
+        if (this._cardGetQueue.length) { showNext(); return; }
+        this._cardGetShowing = false;
+        return;
+      }
       const legendary = next.card.rarity === '传说';
       const el = document.createElement('div');
       el.id = 'cardGet';

@@ -1,8 +1,8 @@
 import { validateGeneratedMap } from '../run/map-generator.js';
+import { clone } from '../core/shared.js';
 
 export const ROUTE_VERSION = 'r5-routes-v1';
 const BLOCKED = new Set(['entrance','door','fire','shop','extraction','altar','boss','emergencyExit']);
-const clone = value => JSON.parse(JSON.stringify(value));
 const fail = (layerData, reason) => ({ ok:true, value:{ layerData:clone(layerData), routeVersion:ROUTE_VERSION,
   routePlan:{ layerIndex:1, status:'fallback', fallbackReason:reason }, status:'fallback' } });
 

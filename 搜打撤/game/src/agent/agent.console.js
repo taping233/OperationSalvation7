@@ -26,9 +26,10 @@ function runWith(policyName) {
   statusLine(`自动跑局中（${policyName}）……`);
   A.autoRun({
     decide, driver: policyName, maxSteps: 3000,
+    runTimeoutMs: 30 * 60 * 1000,   // 局级墙钟（2026-09-28 代码线）：交互驱动无人盯守时的最后防线
     onStep: (r) => statusLine(`自动跑局中（${policyName}）· 第 ${r.obs.turn} 回合 · ${r.obs.phase} · HP ${r.obs.run?.hp ?? '—'}`),
   })
-    .then(trace => statusLine(`跑局结束：${trace.length} 步（记录见「数据」页签）`))
+    .then(trace => statusLine(`跑局结束：${trace.stopReason || ''} ${trace.length} 步（记录见「数据」页签）`))
     .catch(e => statusLine(`跑局异常：${String(e?.message || e)}`))
     .finally(() => { running = false; });
 }

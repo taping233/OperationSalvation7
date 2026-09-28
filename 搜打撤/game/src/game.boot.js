@@ -19,6 +19,8 @@ import { storeGet, storeSet } from './core/storage.js';
 import { renderMiniMap } from './run/game.session.js';
 import './agent/agent.js';   // SDT.Agent 接口链（observe/act/step）：随启动挂载，供外部决策端驱动
 import './ui/quick-nav.js';  // 全页面快捷进入键（Alt+数字系，非法状态拒绝并提示）
+import { startPocketStrip } from './experience/pocket-strip.js';   // 体验线「随身口袋」状态条（2026-09-28 代码线接线）
+startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，此处显式调用表达装配契约
 
   configureGameRuntime({ openClassChoice, openBaseHub, rebuildNotes, resize: () => resize(), showRunTransition, syncDevVisibility, resumeExtraction });
   configureShopRuntime({ openBag: (onReturn) => {

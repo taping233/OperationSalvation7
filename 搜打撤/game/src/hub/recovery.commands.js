@@ -1,5 +1,5 @@
 import './base.js';
-import { RUN_KEY, RunStorage, SAVE_VERSION } from './game.storage.js';
+import { RUN_KEY, RunStorage, SAVE_VERSION, TX_KEY } from './game.storage.js';
 import { createRecoverablePair } from './recoverable-pair.js';
 import { clone, fail, stable, successReceipt, validSlot } from './commands.shared.js';
 
@@ -18,7 +18,7 @@ function parseVersioned(raw, maxVersion, label) {
 
 export function createRecoveryCommands({ storage = globalThis.localStorage, lockManager = globalThis.navigator?.locks, failpoint,
   baseApi = Base(), runStore = RunStorage, keyFactory = null, baseVersion = baseApi.BASE_VERSION, runVersion = SAVE_VERSION } = {}) {
-  const keys = keyFactory || (slotId => ({ base: baseApi.SLOT_KEY(slotId), run: RUN_KEY(slotId), journal: `sdt-tx-v1-slot${slotId}` }));
+  const keys = keyFactory || (slotId => ({ base: baseApi.SLOT_KEY(slotId), run: RUN_KEY(slotId), journal: TX_KEY(slotId) }));
   const validateJournal = journal => {
     const parse = (raw, maxVersion, label, nullable = true) => {
       if (raw === null) return nullable ? { ok: true, value: null } : fail('RECOVERY_BLOCKED', `${label}不可为空`);

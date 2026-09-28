@@ -43,8 +43,11 @@ export const hudMethods = {
     const pct = Math.max(0, game.hp / game.maxHp);
     const hpKey = `${game.hp}/${game.maxHp}`;
     if (this._lastHpKey !== hpKey) {
+      const firstHpSet = this._lastHpKey == null;   // 首帧直贴：进场不从 0% 播过渡（口径同战斗血条 instant）
       this._lastHpKey = hpKey;
+      if (firstHpSet) { this.el.hpBar.style.transition = 'none'; }
       this.el.hpBar.style.width = (pct * 100).toFixed(1) + '%';
+      if (firstHpSet) { void this.el.hpBar.offsetWidth; this.el.hpBar.style.transition = ''; }
       this.el.hpBar.style.background = pct > 0.5 ? 'linear-gradient(90deg,#2f6f9f,#55a4d6)'
         : pct > 0.25 ? 'linear-gradient(90deg,#b08238,#d4a44e)' : 'linear-gradient(90deg,#b8453a,#d97a52)';
       this.el.hpBarWrap.classList.toggle('low', pct <= 0.25 && game.hp > 0);

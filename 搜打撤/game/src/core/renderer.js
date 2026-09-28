@@ -1,6 +1,9 @@
 
 import { circle, font, hash2, mixHex, rrect, shade } from './renderer.primitives.js';
 import { drawTacticalIcon } from './renderer.icons.js';
+import { revealProgress } from './map-reveals.js';
+import { ease } from './motion-primitives.js';
+import { renderScheduler } from './render-scheduler.js';
 import { NODE_INFO } from './node-info.js';
 const SDT = window.SDT;
   const TAU = Math.PI * 2;
@@ -49,6 +52,23 @@ const SDT = window.SDT;
   }
   let backdropCanvas = null;               // 壁纸合成层（尺寸/层或就绪状态变化时重建）
   const backdropKey = { w: 0, h: 0, ready: false, li: -1 };
+  // 换层溶解状态：snap=旧层烘焙画布引用（重建不销毁旧对象，直接留用），t0=起播时刻
+  const backdropFade = { snap: null, t0: 0 };
+  const BACKDROP_FADE_MS = 480;
+  let backdropFadeDriving = false;
+  function driveBackdropFade() {
+    if (backdropFadeDriving || typeof requestAnimationFrame !== 'function') return;
+    backdropFadeDriving = true;
+    const tick = (now) => {
+      if (backdropFade.snap && now - backdropFade.t0 < BACKDROP_FADE_MS + 60) {
+        renderScheduler.invalidate();
+        requestAnimationFrame(tick);
+      } else {
+        backdropFadeDriving = false;
+      }
+    };
+    requestAnimationFrame(tick);
+  }
   // 拖拽窗口防抖（迭代评审 09-20 D-P2）：拖拽时视口尺寸逐帧变化，原逻辑每帧全屏重烘焙
   // 底图（5 渐变+3 填充，10ms 级长帧连发）。尺寸连续变化期间直接复用旧底，由绘制端
   // drawImage 按目标尺寸拉伸铺满；停止 ~150ms 后置空强制重烘焙一次。
@@ -74,6 +94,14 @@ const SDT = window.SDT;
     }
     if (backdropCanvas && backdropKey.w === cam.viewW && backdropKey.h === cam.viewH &&
         backdropKey.ready === ready && backdropKey.li === li) return backdropCanvas;
+    // 换层交叉溶解（2026-09-27 二轮动效）：层变化重建前把旧壁纸快照留下，draw 里叠画淡出——
+    // 原为逐层硬切（全游戏最大的场景切换零过渡）。减动效直接切。
+    if (backdropCanvas && backdropKey.ready && backdropKey.li !== li &&
+        !(typeof document !== 'undefined' && document.body?.classList.contains('reduce-motion'))) {
+      backdropFade.snap = backdropCanvas;
+      backdropFade.t0 = performance.now();
+      driveBackdropFade();
+    }
     backdropKey.w = cam.viewW; backdropKey.h = cam.viewH; backdropKey.ready = ready; backdropKey.li = li;
     const c = document.createElement('canvas');
     c.width = Math.max(1, Math.round(cam.viewW * (window.devicePixelRatio || 1)));
@@ -269,19 +297,24 @@ const SDT = window.SDT;
       const legal = g.legalKeys.has(`${n.li},${n.idx}`);
       const walked = !!game.visited?.[`${n.li},${n.idx}`];
       const pulse = current && !reduced ? 1 + Math.sin((game.time || 0) * 3.4) * .06 : 1;
+      // 迷雾揭示 popIn（2026-09-27 动效补全）：新揭开节点按 spring 进度放大+淡入
+      const rv = !reduced ? revealProgress(`${n.li},${n.idx}`, game.time || 0) : 1;
+      const rvS = rv < 1 ? 0.55 + 0.45 * rv : 1;
+      const rvA = rv < 1 ? Math.min(1, rv * 1.4) : 1;
+      const s = pulse * rvS;
       ctx.save();
-      ctx.globalAlpha = current || legal ? 1 : .38;
+      ctx.globalAlpha = (current || legal ? 1 : .38) * rvA;
       // W1-10（2026-09-27 R2）：层间闸门金色化——门是层内唯一主线目标，此前与普通
       // 节点同色（NEW M-1 并入 W1-10）。金色 = 全站「目标/通道」语义色。
       const isDoor = game.doorKeys ? game.doorKeys.has(`${n.li},${n.idx}`) : false;
       const color = current ? '#f3dfad' : isDoor ? (legal ? '#edcb8d' : '#c8ac74') : NODE_TYPE_COLORS[n.def.type] || '#82b8d0';
       // 消耗过的节点（2026-09-13 留言）：踩过一次的格子内容已取走，图标换成空白节点图标
       const spent = walked && !current && !PERSISTENT_TYPES.has(n.def.type) && !isDoor;
-      ctx.translate(n.x, n.y); ctx.rotate(Math.PI / 4); ctx.scale(pulse, pulse);
+      ctx.translate(n.x, n.y); ctx.rotate(Math.PI / 4); ctx.scale(s, s);
       ctx.fillStyle = '#0a1b27'; ctx.fillRect(-n.r * .78, -n.r * .78, n.r * 1.56, n.r * 1.56);
       ctx.strokeStyle = current ? '#f1d99c' : isDoor ? '#e2c88f' : legal ? color : '#55717d'; ctx.lineWidth = (current ? 2.2 : isDoor && legal ? 2 : legal ? 1.7 : 1) / z;
       ctx.strokeRect(-n.r * .78, -n.r * .78, n.r * 1.56, n.r * 1.56);
-      ctx.rotate(-Math.PI / 4); ctx.scale(1 / pulse, 1 / pulse); ctx.translate(-n.x, -n.y);
+      ctx.rotate(-Math.PI / 4); ctx.scale(1 / s, 1 / s); ctx.translate(-n.x, -n.y);
       drawTacticalIcon(ctx, spent ? 'blank' : n.def.type, n.x, n.y, Math.max(.8, n.r / 12), spent ? '#7d95a0' : color);
       if (walked && !current) {
         ctx.fillStyle = '#8ec5b4';
@@ -401,12 +434,15 @@ const SDT = window.SDT;
     // 只画当前层的入口（2026-09-10 留言 #21：固定取第 1 层会在其他层画出幽灵脉冲环）
     const l1 = game.layerData[game.layerIdx] || game.layerData[0];
     const layerPos = game.nodePos[game.layerIdx] || game.nodePos[0];
-    const pulse = 0.5;
+    // 入口环复活为真呼吸（2026-09-27 动效补全；原 pulse 恒 0.5 只剩静态圆）：
+    // 半径随 game.time 正弦起伏；空闲地图零绘制时冻结相位（口径同 drawIcons 当前节点脉冲）
+    const reduced = typeof document !== 'undefined' && document.body?.classList.contains('reduce-motion');
+    const pulse = reduced ? 0.5 : 0.5 + Math.sin((game.time || 0) * 2.6) * 0.34;
     ctx.save();
     ctx.strokeStyle = 'rgba(90,162,134,0.85)';
     ctx.lineWidth = 2 / cam.zoom;
     for (const idx of l1.entrances) {
-      ctx.globalAlpha = idx === game.trackPos ? 1 : 0.16;
+      ctx.globalAlpha = (idx === game.trackPos ? 1 : 0.16) * (0.55 + 0.45 * pulse);
       const p = layerPos[idx];
       ctx.beginPath();
       ctx.arc(p.x, p.y, NODE_R + 4 + pulse * 5, 0, TAU);
@@ -443,7 +479,10 @@ const SDT = window.SDT;
   }
   function drawNodeArrow(ctx, game, p) {
     const z = game.cam.zoom;
-    const bounce = 0;
+    // 复活注释承诺的「上下浮动」（2026-09-27 动效补全；原 bounce 恒 0 箭头钉死）：
+    // 0→6 屏幕像素往复，除以 zoom 折算成世界位移保持屏占比一致；减动效停浮
+    const reduced = typeof document !== 'undefined' && document.body?.classList.contains('reduce-motion');
+    const bounce = reduced ? 0 : (Math.sin((game.time || 0) * 4.4) * .5 + .5) * 6 / z;
     const y = p.y - nodeRadius(p) - 14 - bounce;
     ctx.save();
     ctx.translate(p.x, y);
@@ -517,6 +556,16 @@ const SDT = window.SDT;
     // 局内按层使用壁纸（L1/L2 废墟 / L3 红骑士 / L4 白机械 / L5 黑机械）；缓存按视口+层重建，
     // 暗色纱层与中央光晕已一并烘焙进该缓存画布（省每帧 2 次渐变构建+全屏填充）。
     ctx.drawImage(ensureBackdrop(cam, game.layerIdx), 0, 0, cam.viewW, cam.viewH);
+    // 换层溶解：旧层壁纸叠在新层上淡出（snap 画布同视口尺寸，直接铺）
+    if (backdropFade.snap) {
+      const u = Math.min(1, (performance.now() - backdropFade.t0) / BACKDROP_FADE_MS);
+      if (u >= 1) backdropFade.snap = null;
+      else {
+        ctx.globalAlpha = 1 - ease.smoother(u);
+        ctx.drawImage(backdropFade.snap, 0, 0, cam.viewW, cam.viewH);
+        ctx.globalAlpha = 1;
+      }
+    }
     const sx = 0, sy = 0;
     ctx.save();
     ctx.translate(cam.viewW / 2 + sx, cam.viewH / 2 + sy);

@@ -1,4 +1,4 @@
-import SDT from './sdt-facade.js';
+import SDT, { sdtDefine } from './sdt-facade.js';
 import { characterFor, CHARACTERS } from './characters.js';
 
   'use strict';
@@ -6,6 +6,7 @@ import { assetUrl } from './asset-url.js';
 import { DATA } from './data-loader.js';
 import ART_MANIFEST from '../generated/art-manifest.js';
 import THUMB_MANIFEST from '../generated/thumb-manifest.js';
+import { esc } from './shared.js';
 import { PERFORMANCE_BUDGETS } from './performance-budgets.js';
 
   
@@ -41,7 +42,6 @@ import { PERFORMANCE_BUDGETS } from './performance-budgets.js';
   const EQUIP_CARD_ART = new Set(DATA.art.equipCardArt);
   const ITEM_ART = Object.freeze({ ...DATA.art.itemArt });
   const missingKeys = new Set();
-  const esc = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 
   function reportMissing(kind, key) {
     const label = `${kind}:${String(key || '(empty)')}`;
@@ -268,7 +268,7 @@ function characterArt(value, full=false, useDefault=false) {
  return `<span role="img" aria-label="${c.name}" class="roster-portrait ${full?'art-full':'art-portrait'}" style="background-image:url('${rosterUrl}');background-size:${1672/width*100}% 100%;background-position:${position}% center;--portrait-ratio:${width}/941;--roster-size:${1672/width*100}% 100%;--roster-position:${position}% center"></span>`;
 }
 
-  SDT.Art = {
+  sdtDefine('Art', {
     // 提前预载/解码位图（传 <img> 同款最终 URL），翻页/切页前调用可消掉首帧解码卡顿。
     // opts.retain（默认 true）：把解码位图钉进预热池；CSS 背景图传 false——浏览器对
     // CSS background 有自己的图片缓存，JS 持引用帮不到它，只会白占内存。
@@ -569,6 +569,6 @@ function characterArt(value, full=false, useDefault=false) {
       cards: Object.freeze(Array.from(CARD_FAMILIES, id => `cards/${id}.webp`))
     }),
     missingKeys
-  };
+  });
 
 export { ROOT, SDT, esc, missingKeys, reportMissing, SKIN_FULL_ART, setActiveSkin, hydrateSelectedSkins };

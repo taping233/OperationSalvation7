@@ -4,7 +4,7 @@ import map from '../game/data/map.json';
 window.SDT={UI:{log(){},showOverlay(){},act(){},refresh(){},hideOverlay(){},el:{ovBody:{querySelector(){return null;}}}},Sound:{sfx(){}},Art:{monsterArt(){return'';}},Chests:{}};
 const game={layerIdx:1,state:'idle'}; let values=[],started=null;
 vi.mock('../game/src/run/game.session.js',()=>({MAP:{...map,rollCount:([a])=>a},game,bagCap:()=>9,newUid:()=>'',pick:a=>a[0],saveGame(){},scaledEnemy:x=>x,usedSlots:()=>0}));
-vi.mock('../game/src/core/shared.js',()=>({esc:String,escAttr:String}));
+vi.mock('../game/src/core/shared.js',()=>({ clone: value => (value == null ? value : JSON.parse(JSON.stringify(value))), esc:String,escAttr:String}));
 vi.mock('../game/src/audio/sound.js',()=>({tone(){}}));
 vi.mock('../game/src/hub/game.cardslib.js',()=>({Sfx:{tick(){}},_set_cardPageOpen(){},cardHTML(){return'';}}));
 vi.mock('../game/src/run/game.run.data.js',()=>({IMMEDIATE_SCENES:new Set(),NODE_BG:{},PICKUP_BG:{},PRELOAD_SCENES:{},SCENES:{},SCENE_META:{}}));

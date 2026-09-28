@@ -1,0 +1,107 @@
+/* pocket-strip.css —— 「随身口袋」状态条（美术 UI 线独占维护）
+ * 接管记录：v1 功能样式由体验线建（00:2x），按 EXP-ART-001 交接，00:4x 起本文件唯一写入者=美术 UI 线。
+ * DOM/类名契约归体验线 pocket-strip.js（#expPocketStrip / .eps-cell / .eps-num / .eps-lab /
+ * .eps-warn / .eps-pop / .eps-hint，hidden 控显隐）；本文件只做表现，不含业务判定。
+ * 视觉语言：page-expedition-hud.css W5「冷青档案章 + 金色值」家族——
+ * 深青渐变底 / rgba(159,183,188,.26) 细边 / 2px 直角 / 左缘金标 / 金值 #ecd9ad / tabular-nums。
+ * 位置：顶部居中、layerBanner 下方（top:76）。实页验证：底部被「下一步·路线」面板整幅
+ * 占据（y≈765-900），状态条不可用；顶部居中在章节导航（左）与 resHud（右）之间为空位，
+ * 横幅仅换层时瞬时出现属可接受遮挡。证据见 docs/zcode-dual-track-9h-20260927/art-evidence/。
+ */
+
+#expPocketStrip {
+  position: fixed;
+  top: 92px;                 /* layerBanner 底缘 84px（实测）+ 8px 间隙 */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 25;               /* 沿用体验线分层结论：#overlay 常规 z-20、弹层背板 z-100；实测战斗背包弹层（z-20 级）之上条仍可见=信息动线加分 */
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  padding: 0 12px;
+  pointer-events: none;      /* 纯展示，装饰层绝不拦截点击 */
+  user-select: none;
+  font-family: inherit;
+  background: linear-gradient(180deg, rgba(9, 22, 33, .88), rgba(6, 16, 25, .92));
+  border: 1px solid rgba(159, 183, 188, .26);
+  border-radius: 2px;
+  /* 左缘金标 = 「带出价值」主章语言（呼应 #resHud .res-gold / 入口牌金条） */
+  box-shadow: inset 2px 0 0 rgba(217, 187, 130, .5),
+              inset 0 1px 0 rgba(214, 232, 235, .06),
+              0 2px 8px rgba(2, 8, 14, .35);
+  /* 注：不使用 backdrop-filter——常驻层只走合成器，避免持续重绘 */
+}
+
+#expPocketStrip[hidden] { display: none; }
+
+.eps-cell {
+  position: relative;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 7px;
+  padding: 7px 14px 8px;
+  white-space: nowrap;
+}
+.eps-cell + .eps-cell { border-left: 1px solid rgba(159, 183, 188, .14); }
+
+.eps-num {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  color: #dfe9ec;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .02em;
+}
+.eps-lab {
+  font-style: normal;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #86a0a6;
+}
+
+/* 带出预估：全条核心读数，金色加提亮（主题「带出去才作数」的落点） */
+.eps-forecast .eps-num { color: #f2e3ba; text-shadow: 0 0 10px rgba(217, 187, 130, .28); }
+.eps-forecast .eps-lab { color: #b9a06b; }
+
+/* 随身币：金色值语义（同 #resHud .res-gold b） */
+.eps-coins .eps-num { color: #ecd9ad; text-shadow: 0 0 8px rgba(217, 187, 130, .2); }
+
+/* 规则提示行：金发丝分隔（对应金条语言），弱化为档案注记
+   色彩合规：#8fa6ad 在最坏底（亮画布透出 12% alpha，实测底 rgb(32,43,52)）下对比 5.6:1 ≥4.5（原 #6d848b 仅 3.67 不达标，02:2x 实测修正） */
+.eps-hint {
+  font-style: normal;
+  font-size: 10.5px;
+  letter-spacing: .06em;
+  color: #8fa6ad;
+  border-left: 1px solid rgba(217, 187, 130, .28);
+  margin-left: 2px;
+  padding-left: 12px;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* ── 注意/警示态（判定在 js：pocket>0=复原机会；coins>0 且 layer≥3=离局清零） ── */
+/* 通用注意：琥珀（消耗袋有卡 = 机会语义，非危险） */
+.eps-cell.eps-warn .eps-num { color: #e8b054; text-shadow: 0 0 8px rgba(232, 176, 84, .22); }
+.eps-cell.eps-warn .eps-lab { color: #c9a054; }
+/* 币格警示恒为危险红（离局清零语义，压过机会琥珀）+ ⚠ 前缀 */
+.eps-coins.eps-warn .eps-num { color: #ff8d7e; text-shadow: 0 0 8px rgba(255, 107, 94, .25); }
+.eps-coins.eps-warn .eps-lab { color: #ff8d7e; }
+.eps-coins.eps-warn .eps-lab::before { content: '⚠ '; letter-spacing: 0; }
+
+/* ── 回执脉冲：js 加 .eps-pop（消耗袋入卡），沿游戏「快按慢弹」位移微动语言 ── */
+.eps-cell.eps-pop { animation: eps-pop .22s cubic-bezier(.2, .8, .3, 1); }
+@keyframes eps-pop {
+  0% { transform: translateY(0); }
+  35% { transform: translateY(-2px); filter: brightness(1.3); }
+  100% { transform: translateY(0); filter: brightness(1); }
+}
+
+@media (max-width: 1100px) {
+  .eps-hint { display: none; }
+}
+
+/* ── 减少动态效果：脉冲改静止，信息不丢 ── */
+@media (prefers-reduced-motion: reduce) {
+  .eps-cell.eps-pop { animation: none; }
+}

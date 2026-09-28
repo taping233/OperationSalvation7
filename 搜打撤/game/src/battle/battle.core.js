@@ -340,7 +340,7 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
         G.log('[[icon:heart]] 开发者：生命已回满', 'sys');
         break;
       case 'freezeAll':
-        alive().forEach(f => Combat.addBlessing(f, 'freeze', 2));
+        alive().forEach(f => Combat.addCurse(f, 'freeze', 2));   // 09-25 走查新账：freeze 在 CURSES 表，addBlessing 静默无效
         G.log('[[icon:crystal]] 开发者：所有敌人被冰冻 2 回合', 'sys');
         break;
       case 'damageAll': {

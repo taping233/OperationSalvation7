@@ -1,6 +1,20 @@
+// @vitest-environment node
+// node 环境（2026-09-28 代码线）：decide 现在给 fetch 传 AbortSignal 做真取消，
+// undici fetch 拒收 jsdom realm 的 AbortSignal（品牌校验 TypeError），故整体迁到
+// realm 一致的 node 环境；localStorage 用最小桩承接配置读写。
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { createServer } from 'node:http';
 import { decide, parseActionReply, saveConfig, loadConfig } from '../game/src/agent/agent.llm.js';
+
+const localStorageStub = () => {
+  const store = new Map();
+  globalThis.localStorage = {
+    getItem: (k) => store.get(k) ?? null,
+    setItem: (k, v) => store.set(k, v),
+    removeItem: (k) => store.delete(k),
+  };
+};
+localStorageStub();
 
 // ---------- 回复解析容错 ----------
 describe('LLM 回复解析', () => {

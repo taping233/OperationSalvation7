@@ -1,4 +1,5 @@
 /* 一场战斗的核心状态与执行生命周期。由 battle.runtime.js 转发活绑定。 */
+import { clone } from '../core/shared.js';
 import { createBattleState, transitionBattle, cancelTargeting } from './battle.state.js';
 import * as Combat from './combat.js';
 
@@ -59,7 +60,7 @@ export function clearActionSignals() { activeActionSignal = null; surgeWaiter = 
 // 读档·会话核心字段回填（restore 前段逐字搬迁；defaultMaxEnergy 由调用点以 R().battleEnergy 解析）。
 export function restoreBattleSession(nextGame, data, defaultMaxEnergy) {
   G = nextGame;
-  opts = JSON.parse(JSON.stringify(data.opts));
+  opts = clone(data.opts);
   mode = data.mode === 'boss' ? 'boss' : 'normal';
   turn = +data.turn || 1;
   maxEnergy = +data.maxEnergy || defaultMaxEnergy;
@@ -76,7 +77,7 @@ export function restoreBattleCombatants(data, intentFor) {
       affix: f.affix || null, affixName: f.affixName || null, behavior: f.behavior || null, dead: !!f.dead,
       status: { ...(f.status || {}) },
       defense: { shield: 0, armor: 0, guard: false, ...(f.defense || {}) },
-      intent: f.intent ? JSON.parse(JSON.stringify(f.intent)) : null,
+      intent: f.intent ? clone(f.intent) : null,
     };
     Combat.ensureStatus(foe);
     if (!foe.intent) foe.intent = intentFor(foe, turn);

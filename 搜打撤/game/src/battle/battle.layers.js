@@ -59,11 +59,12 @@ import { cardRuleHint } from './battle.preview.js';
       if (e.defaultPrevented || !UI.el.ovBody?.querySelector('.battle-stage')) return;
       const snap = getSnapshot();
       const pending = snap.pendingTarget || snap.pendingItem || snap.slamPending || snap.dartPending;
-      if (aim || clickSelectedUid != null || pending) {
+      if (aim || clickSelectedUid != null || pending || snap.infusing) {
         e.preventDefault(); e.stopPropagation();
         if (aim) cancelAim();
         if (clickSelectedUid != null) cancelClickSelection();
         if (pending) cancelPendingTarget();
+        if (snap.infusing) commands.cancelInfusion();   // 注能态 Esc 取消（09-25 三批走查：原唯一入口是注能条按钮）
       }
       return;
     }

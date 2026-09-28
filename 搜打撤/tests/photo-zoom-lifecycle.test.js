@@ -90,12 +90,33 @@ describe('照片弹层收回生命周期', () => {
     expect(document.activeElement).toBe(opener);
   });
   it('减少动态效果偏好下立即关闭且恢复背景操作', () => {
+    // 走权威判定（core/motion.js）的真实用户路径：设置页写入 sdt-reduce-motion +
+    // refreshReduceMotion()。旧实现只读 matchMedia、无视该设置开关（2026-09-28 修复）。
+    localStorage.setItem('sdt-reduce-motion', '1');
+    SDT.Motion.refreshReduceMotion();
+    try {
+      const zoom = openPhoto();
+      zoom.querySelector('.cz-close').click();
+      expect(zoom.isConnected).toBe(false);
+      expect(UI.el.overlay.inert).toBe(false);
+      expect(document.activeElement).toBe(opener);
+    } finally {
+      localStorage.removeItem('sdt-reduce-motion');
+      SDT.Motion.refreshReduceMotion();   // 偏好复位，不泄漏进后续用例
+    }
+  });
+  it('系统 prefers-reduced-motion（无设置开关）同样立即关闭', () => {
+    // 媒体查询分支的独立钉（复核建议）：权威口径 = 设置开关 || 媒体查询
     vi.stubGlobal('matchMedia', () => ({ matches: true }));
-    const zoom = openPhoto();
-    zoom.querySelector('.cz-close').click();
-    expect(zoom.isConnected).toBe(false);
-    expect(UI.el.overlay.inert).toBe(false);
-    expect(document.activeElement).toBe(opener);
+    SDT.Motion.refreshReduceMotion();
+    try {
+      const zoom = openPhoto();
+      zoom.querySelector('.cz-close').click();
+      expect(zoom.isConnected).toBe(false);
+    } finally {
+      vi.unstubAllGlobals();
+      SDT.Motion.refreshReduceMotion();
+    }
   });
   it.each(['.cz-photo-layout', '.cz-photo-main', '.cz-photo-info', '.cz-hint', '.cz-backdrop'])('点击照片外的 %s 可收回', selector => {
     const zoom = openPhoto();

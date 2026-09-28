@@ -5,6 +5,7 @@ import { KEY, TT7_KEY_V2, TT10_KEY, TT11_KEY, ITEM_RENAME_KEY, EVENTS_0919_KEY, 
 import { Random } from '../core/random.js';
 import { DATA } from '../core/data-loader.js';
 import { validateCardRules } from './card-rules.schema.js';
+import { clone } from '../core/shared.js';
 // 历史批次 key 可能独立重播；即使 live-sync 已标记，也不能写回旧语义或复活退役卡。
 // 同 id 以定版字段为准，定版未携带的 art 等仓库元数据继续取历史快照。
 const cardsSyncById = new Map(DATA.cardsSync.cards.map(card => [card.id, card]));
@@ -65,11 +66,11 @@ function backfillStructuredRuleDefinitions({ markerKey, ids, definitions, domain
       // 补 0 占位，这类注入值随运行顺序出现/消失，若参与 JSON 比较会让迁移器每轮误判 dirty。
       // 结构性豁免：比较前把四字段的 0 值归一化剔除（非 0 真实字段仍参与比较）。
       const normalizeForCompare = obj => {
-        const clone = JSON.parse(JSON.stringify(obj));
+        const copy = clone(obj);   // 权威深拷贝（core/shared.js，2026-09-28 收敛时修复局部绑定）
         for (const field of ['dmg', 'heal', 'armor', 'draw']) {
-          if (clone[field] === 0) delete clone[field];
+          if (copy[field] === 0) delete copy[field];
         }
-        return clone;
+        return copy;
       };
       if (JSON.stringify(normalizeForCompare(card)) !== JSON.stringify(normalizeForCompare(nextCard))) dirty = true;
       return nextCard;
@@ -280,17 +281,24 @@ export const syncSlice = {
     seedBatch(list, markerKey, replacePrefix) {
       try {
         if (localStorage.getItem(markerKey)) return;
+        // 批内内存合并、整批一次落盘（2026-09-28 审计B#6）：原实现每卡一次
+        // 「全库序列化+setItem」，首批数百卡=数百次全库写，首启秒级卡顿。
+        const cards = SDT.Cards.all();
+        let changed = false;
         list.forEach(c => {
-          const cards = SDT.Cards.all();
           if (replacePrefix && String(c.id || '').startsWith(replacePrefix) &&
               cards.some(x => x.id === c.id)) {
-            SDT.Cards.upsert({ ...c });
+            const i = cards.findIndex(x => x.id === c.id);
+            cards[i] = { ...c };   // 旧识别：用最新数据覆盖（原 upsert 按 id 覆盖口径）
+            changed = true;
             return;
           }
           if (!cards.some(x => x.id === c.id || x.name === c.name)) {
-            SDT.Cards.upsert({ ...c });
+            cards.push({ ...c });
+            changed = true;
           }
         });
+        if (changed && !SDT.Cards.saveAll(cards)) SDT.Cards.saveAll(cards);   // 与 upsert 同款失败重放一次
         localStorage.setItem(markerKey, '1');
       } catch { /* 隐私模式等场景静默跳过 */ }
     },

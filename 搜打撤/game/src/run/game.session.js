@@ -530,7 +530,7 @@ function newRun(mode, picks, options = {}) {
 }
 
 // ---------- 进层 ----------
-function enterLayer(li, atIdx) {
+function enterLayer(li, atIdx, opts = null) {
   const safeLayer = clampIndex(li, game.layerData?.length || 1, 0);
   const layer = game.layerData?.[safeLayer];
   const safeIdx = layer?.logical?.[atIdx]
@@ -546,7 +546,9 @@ function enterLayer(li, atIdx) {
   game.state = 'idle';
   if (cam) {
     // Focus on the currently available choices; unexplored map bounds no longer shrink them.
-    const fitted = cam.frameExploration?.(game);
+    // 取景默认同步落定（开局/读档/测试都依赖同步终态）；穿门换层经 opts.glideCam 走镜头补间
+    // （2026-09-27 二轮动效：换层不再硬切；glideTo 内部自处理减动效/无 rAF 退化）
+    const fitted = cam.frameExploration?.(game, false, opts?.glideCam ? { glide: true } : null);
     if (!fitted) { cam.cx = game.pos.x; cam.cy = game.pos.y; cam.clamp(); }
   }
   const f = curLayer();

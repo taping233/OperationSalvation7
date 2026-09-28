@@ -1,3 +1,5 @@
+import { clone } from '../core/shared.js';
+
 const STORY_ID = 'last-lamp';
 const ENDINGS = Object.freeze(['open_beacon', 'shaded_marker']);
 const CHOICES = Object.freeze({ 1: ['continue'], 2: ['continue'], 3: ENDINGS });
@@ -6,7 +8,6 @@ const MEMENTOS = Object.freeze({
   shaded_marker: 'last_lamp_shaded_marker',
 });
 
-const clone = value => JSON.parse(JSON.stringify(value));
 const fail = (code, message, details) => ({ ok: false, code, message, retryable: false, ...(details ? { details } : {}) });
 function makeLastLampEventInstanceId(runId, layerIdx, trackPos) {
   if (typeof runId !== 'string' || !runId || !Number.isInteger(layerIdx) || layerIdx < 0 || !Number.isInteger(trackPos) || trackPos < 0) return null;

@@ -189,6 +189,9 @@ import { turboMs } from '../agent/agent.turbo.js';
             ${petStrip ? `<div class="pet-strip"><span class="pet-strip-label">[[icon:paw]] 携带宠物</span>${petStrip}</div>` : ''}
             <!-- W2-04：初始态引导——「初始攻击已默认携带、可直接出发」这一关键决定不再靠玩家自己读出 -->
             <p class="hint bag-lead">「<b>初始攻击</b>」×${MAP.rules.starterSha} 已默认携带（固定）；首次出征可直接点「确认出发」，想自定义再从左侧把卡带入——只有装入背包的卡才能在对局使用。</p>
+            ${pickedNames.length === 0
+              ? '<p class="hint warn-hint">[[icon:info]] 当前只带初始攻击出征——卡牌是对局的主要输出手段，空手出战会明显吃力，建议从左侧把卡牌带入背包。</p>'
+              : (slots < B.bagCap() ? `<p class="hint">背包还有 <b>${B.bagCap() - slots}</b> 格空位——卡牌越多对局越稳，量力而行。</p>` : '')}
             <div class="bag-grid${full ? ' full' : ''}" id="depBag">${bagCells}</div>
             ${deployHint ? `<p class="hint warn-hint">${deployHint}</p>` : ''}
             <div class="dep-foot">

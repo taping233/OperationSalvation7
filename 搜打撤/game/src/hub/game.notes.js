@@ -22,9 +22,11 @@ import { game } from '../run/game.session.js';
         if (loc) data[k.slice(0, bar + 1) + loc.li + ',' + loc.idx] = data[k];
         delete data[k];   // 匹配成功则换键；匹配失败的悬空旧键随迁移一并清理
       });
-      localStorage.setItem('sdt-notes-node-migrated', '1');
+      // 迁移标记/回写失败不炸调用链：标记失败=下次重复迁移（幂等）；回写失败=内存态照常
+      try { localStorage.setItem('sdt-notes-node-migrated', '1'); } catch { /* 存储不可用 */ }
     }
-    if (Object.keys(data).length) localStorage.setItem('sdt-cell-notes-v1', JSON.stringify(data));
+    try { if (Object.keys(data).length) localStorage.setItem('sdt-cell-notes-v1', JSON.stringify(data)); }
+    catch { /* 配额满：写盘失败不抛，noteMap 照常更新 */ }
     game.noteMap = new Map(Object.entries(data));
   }
 
@@ -70,13 +72,19 @@ import { game } from '../run/game.session.js';
       </div>`);
     UI.act('saveNote', () => {
       const ta = document.getElementById('ovNote');
-      SDT.Notes.set(MAP.boardId, li, idx, ta ? ta.value : '');
+      const saved = SDT.Notes.set(MAP.boardId, li, idx, ta ? ta.value : '');
+      if (saved === false) {
+        // 存储不可写：弹层与输入原样保留，不让用户内容无声丢失
+        UI.log('备注保存失败（存储空间可能已满），内容仍留在输入框', 'warn');
+        return;
+      }
       rebuildNotes();
       UI.hideOverlay(); game.state = 'idle';
       UI.log('已保存结点备注', 'ok');
     });
     UI.act('clearNote', () => {
-      SDT.Notes.set(MAP.boardId, li, idx, '');
+      const cleared = SDT.Notes.set(MAP.boardId, li, idx, '');
+      if (cleared === false) { UI.log('清空失败（存储不可写）', 'warn'); return; }
       rebuildNotes();
       UI.hideOverlay(); game.state = 'idle';
       UI.log('已清空结点备注', 'dim');
@@ -144,14 +152,16 @@ import { game } from '../run/game.session.js';
       try {
         const parsed = JSON.parse(ta.value);
         const cells = Array.isArray(parsed) ? parsed : parsed.cells;
+        let failed = 0;   // 配额中断的写入不再被当成功上报（复核建议）
+        const trySet = (...args) => { if (SDT.Notes.set(...args) === false) failed++; };
         if (Array.isArray(cells)) {
           for (const c of cells) {
             // v3：li/idx 结点坐标；v2：x/y 旧格子坐标（自动映射到结点）
             if (Number.isFinite(c.li) && Number.isFinite(c.idx)) {
-              SDT.Notes.set(MAP.boardId, c.li, c.idx, c.note || '');
+              trySet(MAP.boardId, c.li, c.idx, c.note || '');
             } else {
               const loc = legacyGridToNode(c.x, c.y);
-              if (loc) SDT.Notes.set(MAP.boardId, loc.li, loc.idx, c.note || '');
+              if (loc) trySet(MAP.boardId, loc.li, loc.idx, c.note || '');
             }
           }
         } else {
@@ -159,12 +169,13 @@ import { game } from '../run/game.session.js';
             const [bid, coord] = k.split('|');
             const comma = coord.indexOf(',');
             const a = +coord.slice(0, comma), b = +coord.slice(comma + 1);
-            SDT.Notes.set(bid, a, b, String(v));
+            trySet(bid, a, b, String(v));
           }
         }
         rebuildNotes();
         UI.hideOverlay(); game.state = 'idle';
-        UI.log('结点备注导入完成', 'ok');
+        if (failed) UI.log(`结点备注导入完成，但 ${failed} 条写入失败（存储空间可能已满）`, 'warn');
+        else UI.log('结点备注导入完成', 'ok');
       } catch (err) { UI.log('导入失败：JSON 格式不对（' + err.message + '）', 'warn'); }
     });
     UI.act('closeTools', () => { UI.hideOverlay(); game.state = 'idle'; });
