@@ -26,8 +26,10 @@ const RUNTIME_OWNERS = new Set(['battle/battle.core.js', ...RUNTIME_INNER]);
 const PURE_MODULES = new Set([
   'battle/battle.card-cost.js', 'battle/battle.intent.js', 'battle/battle.resolution.js',
   'battle/battle.snapshot.js', 'cards/cards.catalog.js',
+  'cards/card-rarity.js', 'cards/card-render-context.js',
   'core/rule-config.js', 'hub/base-state.js', 'hub/base-mutation.js',
-  'hub/base-economy.js', 'battle/battle.card-inspection.js', 'battle/hosted-catalog-index.js',
+  'hub/base-economy.js', 'hub/base-progression.commands.js',
+  'battle/battle.card-inspection.js', 'battle/hosted-catalog-index.js',
 ]);
 const SESSION_KERNEL = 'run/game.session.kernel.js';
 const SESSION_BROWSER = 'run/game.session.browser.js';

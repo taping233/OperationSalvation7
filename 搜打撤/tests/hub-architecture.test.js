@@ -22,6 +22,7 @@ const importedModules = (code) => [...code.matchAll(/^import\s+(?:\{[^}]*\}\s+fr
 const SHELL = source('hub/game.hub.js');
 const DEPART = source('hub/game.hub.depart.js');
 const PAGES = source('hub/game.hub.pages.js');
+const PREPARATION = source('hub/game.hub.preparation.js');
 const BRIDGE = source('hub/game.hub.bridge.js');
 
 describe('基地模块分层（批3 拆分）', () => {
@@ -70,8 +71,17 @@ describe('基地模块分层（批3 拆分）', () => {
     expect(DEPART).toContain('let deployPick = null;');
     expect(DEPART).toContain('function setDeployPick(');
     expect(SHELL).not.toContain('let deployPick');
-    expect(SHELL).toContain('setDeployPick({})');
+    expect(SHELL).toContain('applyPicks: setDeployPick');
+    expect(PREPARATION).toContain('navigation.applyPicks(picks)');
     expect(PAGES).toContain('function hubAchHTML(hubCollectionView)');
     expect(SHELL).toContain('hubAchHTML(hubCollectionView)');
+  });
+
+  it('整备控制器收口命令与视图集成，基地壳只保留窄导航/数据端口', () => {
+    expect(SHELL).toContain("import { createHubPreparationFeature } from './game.hub.preparation.js'");
+    expect(SHELL).not.toContain("from './preparation.commands.js'");
+    expect(SHELL).not.toContain("from './preparation.view.js'");
+    expect(PREPARATION).toContain('function createHubPreparationFeature({ data, view, navigation, reportError, formatError, requestId })');
+    expect(PREPARATION).toContain('return Object.freeze({ open, dispose, returnToBase })');
   });
 });

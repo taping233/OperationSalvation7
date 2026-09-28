@@ -7,6 +7,7 @@ import { txPending } from './game.storage.js';
 import { createVersionedSlotReader } from './versioned-slot-reader.js';
 import { commitBaseMutation } from './base-mutation.js';
 import { createBaseEconomy } from './base-economy.js';
+import { createBaseProgressionCommands } from './base-progression.commands.js';
 
   const SLOT_KEY = (i) => 'sdt-base-v2-slot' + i;
   const LEGACY_KEY = 'sdt-base-v1';   // 旧版全局基地（v0.20 及之前），启动时迁移
@@ -544,6 +545,11 @@ import { createBaseEconomy } from './base-economy.js';
   // ---------- 宝藏大门 ----------
   // 钥匙计数：真实钥匙储备 + 仓库里的钥匙类卡牌（「一串钥匙」= 2 把，其余钥匙 = 1 把）
   const KEY_NEEDED = 10;
+  const progressionCommands = createBaseProgressionCommands({
+    read: () => data,
+    mutate,
+    keyNeeded: KEY_NEEDED,
+  });
   // 钥匙计数（迭代评审 09-20 B-P1）：数量读 desc 的「×N」标记——「三把钥匙」「两把钥匙」
   // 改名后按卡名/「一串」识别只计 1，与卡面「钥匙 ×3」矛盾；与 materialAmount 同款解析，
   // 无 ×N 标记（「一把钥匙」）按 1 计；中文数词不参与解析（×N 只认数字，无 NaN 静默路径）
@@ -560,6 +566,7 @@ import { createBaseEconomy } from './base-economy.js';
 
   sdtDefine('Base', {
     ...createBaseEconomy({ read: () => data, mutate, appendCards, room: stashRoom }),
+    ...progressionCommands,
     SLOT_KEY, LEGACY_KEY,
     migrateLegacy, use, save, reset, peek, wipe, hasSlot,
     issue, CORRUPT_KEY, BASE_VERSION,

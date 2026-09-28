@@ -71,18 +71,18 @@ let uidSeq = 0;
 const nuid = () => 'nst' + Date.now().toString(36) + (uidSeq++);
 const ri = (n) => Math.floor(Random.random('nest') * n);
 
-/* —— 旧解锁入口（原「一图击败首脑撤离后解锁」）。09-24 老板定版改纯钥匙门槛后已无调用方，
- *    保留待批准删除；开门逻辑移入 openNestPrep。 —— */
+/* —— 兼容旧解锁入口（原「一图击败首脑撤离后解锁」）。09-24 定版后保留零钥匙调用语义。 —— */
 export function unlockNest() {
-  const Bn = B();
-  if (!Bn.data.nestUnlocked) {
-    Bn.data.nestUnlocked = true;
-    Bn.save();
-    UI.log('[[icon:door]] 大门开启——基地解锁了新的远征目标', 'loot');
-    // legend 琶音错峰 ~350ms（迭代评审 09-20 音频岗）：撤离时刻 victory 采样正在响，
-    // 叠放会糊；battle 采样路径无 delay 参数，只能外置 setTimeout
-    setTimeout(() => { if (SDT.Sound) SDT.Sound.sfx('legend'); }, 350);
+  const result = B().unlockNestLegacy();
+  if (!result.ok) {
+    UI.log('[[icon:cross]] 研究所解锁未保存，请稍后重试', 'warn');
+    return;
   }
+  if (result.alreadyUnlocked) return;
+  UI.log('[[icon:door]] 大门开启——基地解锁了新的远征目标', 'loot');
+  // legend 琶音错峰 ~350ms（迭代评审 09-20 音频岗）：撤离时刻 victory 采样正在响，
+  // 叠放会糊；battle 采样路径无 delay 参数，只能外置 setTimeout
+  setTimeout(() => { if (SDT.Sound) SDT.Sound.sfx('legend'); }, 350);
 }
 
 /* —— 备战：牌盒 10 张 + 符文槽 3 —— */
@@ -106,9 +106,18 @@ export function openNestPrep() {
         <button class="ov-btn" data-act="labBack">暂不进入</button>
       </div>`, true);
     UI.act('labOpen', () => {
-      Bn.data.keys -= need;
-      Bn.data.nestUnlocked = true;
-      Bn.save();
+      const result = Bn.unlockNestGate();
+      if (!result.ok) {
+        if (result.code === 'INSUFFICIENT_KEYS') {
+          UI.log(`[[icon:lock]] 钥匙不足：开门需要 <b>${result.need}</b> 把钥匙（现有 ${result.available}）`, 'warn');
+        } else if (result.code === 'INVALID_STATE') UI.log('[[icon:cross]] 基地钥匙数据异常，未扣除钥匙；请返回基地检查存档', 'warn');
+        else UI.log('[[icon:cross]] 研究所开门未能保存，钥匙未扣除，请稍后重试', 'warn');
+        return;
+      }
+      if (result.alreadyUnlocked) {
+        enterNestPrep();
+        return;
+      }
       UI.log('[[icon:key]] 钥匙转动，锈门轰然开启——<b>经典生命研究所</b>向你敞开', 'loot');
       setTimeout(() => { if (SDT.Sound) SDT.Sound.sfx('legend'); }, 350);
       enterNestPrep();

@@ -4,6 +4,7 @@ const SDT = window.SDT;   // ESM 垫片（与 cards.js 同源，main.js 加载�
 import { CLASSES } from './cards.consts.js';
 import { Random } from '../core/random.js';
 import { DATA } from '../core/data-loader.js';
+import { isHeroLine, rarityOf } from './card-rarity.js';
 
 let fixedCardIdSet;
 function fixedCardIds() {
@@ -249,12 +250,7 @@ export const rulesSlice = {
     //   能力卡与其衍生牌（tokenOf 指向能力卡）为「棱彩」（渐变棱彩，见 cardHTML 的 rv-prism 类）；
     //   其余衍生物（tokenOf 指向创造者）与其创造者稀有度相同。
     rarityOf(card) {
-      if (SDT.Cards.isHeroLine(card)) return '棱彩';
-      if (card.rarity === '衍生' && card.tokenOf) {
-        const src = SDT.Cards.all().find(c => c.id === card.tokenOf);
-        if (src) return SDT.Cards.rarityOf(src);
-      }
-      return card.rarity;
+      return rarityOf(card, id => SDT.Cards.all().find(c => c.id === id));
     },
 
     // 能力卡系判定：能力卡本体（hero: true）或其衍生牌（tokenOf 指向能力卡）。
@@ -263,13 +259,7 @@ export const rulesSlice = {
     // 能力卡系判定：能力卡本体（hero: true）或其衍生牌（tokenOf 指向能力卡）。
     // 棱彩稀有度随英雄身份推导——衍生牌无需手改稀有度即可继承棱彩展示。
     isHeroLine(card) {
-      if (!card) return false;
-      if (card.hero) return true;
-      if (card.tokenOf) {
-        const src = SDT.Cards.all().find(c => c.id === card.tokenOf);
-        if (src && src.hero) return true;
-      }
-      return false;
+      return isHeroLine(card, id => SDT.Cards.all().find(c => c.id === id));
     },
 
     // 商店收购价：币值 [[icon:coin]] 优先；无币值的可出售卡按稀有度半价（至少 1 币）

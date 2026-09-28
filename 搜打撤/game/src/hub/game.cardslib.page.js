@@ -8,6 +8,7 @@ const SDT = window.SDT;
 const UI = window.SDT.UI;
 import { esc, escAttr } from '../core/shared.js';
 import { descRich } from '../cards/cards.view.js';
+import { createCardRenderContext } from '../cards/card-render-context.js';
 import { game } from '../run/game.session.js';
 import { characterName } from '../core/characters.js';
 import { PHOTO_NOTE_PLACEHOLDER, photoNoteFor, savePhotoNote, exportNotes } from '../cards/card-photo-notes.js';
@@ -26,10 +27,20 @@ const TYPES = SDT.Cards.TYPES;
 const DMG_TYPES = SDT.Cards.DMG_TYPES;
 let cardPagePrevState = null;  // 打开库/制作坊前的游戏状态（从标题界面打开时关回 'title'）
 let lastSavedId = null;        // 刚保存的卡，库中高亮
+let libCatalog = [];           // 此次照相馆数据刷新使用的浅数组快照
 let libCards = [];             // 库页面缓存（悬停预览用）
 let libFilter = { tab: '全部', rar: '全部', cls: '全部', q: '', sort: 'rarity' };
 let libSelectedId = null;     // 照相馆选片台当前陈列卡
 let libEditMode = false;      // 开发者工具与日常浏览分离，避免每张卡常驻危险操作
+let libRenderContext = null;
+
+function refreshLibRenderContext(catalog) {
+  libRenderContext = createCardRenderContext(catalog);
+}
+
+function libRarityOf(card) {
+  return libRenderContext ? libRenderContext.rarityOf(card) : SDT.Cards.rarityOf(card);
+}
 
 // 切片装配：探针只读卡页开关；制作坊经工厂注入开关访问器与开/关页回调，壳↔切片零回环
 configurePhotoFps({ isCardPageOpen: () => cardPageOpen });
@@ -63,14 +74,14 @@ function libFiltered() {
   _libFilteredCache = libCards.filter(c =>
     (libFilter.tab === '全部' || c.type === libFilter.tab) &&
     // 稀有度按有效稀有度筛选（2026-09-04 定版：棱彩已实装进卡牌库——能力卡与其衍生牌 rarityOf 推导为「棱彩」，可经下拉筛选）
-    (libFilter.rar === '全部' || SDT.Cards.rarityOf(c) === libFilter.rar) &&
+    (libFilter.rar === '全部' || libRarityOf(c) === libFilter.rar) &&
     (libFilter.cls === '全部' || (libFilter.cls === '通用' ? !c.cls : c.cls === libFilter.cls)) &&
     (!q || (_libSearchText.get(c) || '').includes(q))
   ).sort((a, b) => {
     const nameCmp = String(a.name).localeCompare(b.name, 'zh');
     if (libFilter.sort === 'name') return nameCmp;
     if (libFilter.sort === 'cost') return (a.cost - b.cost) || nameCmp;
-    return (RARITIES.indexOf(SDT.Cards.rarityOf(b)) - RARITIES.indexOf(SDT.Cards.rarityOf(a))) ||
+    return (RARITIES.indexOf(libRarityOf(b)) - RARITIES.indexOf(libRarityOf(a))) ||
       String(a.type).localeCompare(b.type, 'zh') || nameCmp;
   });
   _libFilteredKey = key;
@@ -110,7 +121,7 @@ function libPreviewHTML(c) {
   const list = libFiltered();
   const idx = list.findIndex(x => x.id === c.id);
   const pos = idx >= 0 ? `${idx + 1} / ${list.length}` : '';
-  const rarity = SDT.Cards.rarityOf(c);
+  const rarity = libRarityOf(c);
   const rarityIndex = Math.max(0, RARITIES.indexOf(rarity));
   const mount = photoMountFor(rarity);
   return `<div class="studio-preview-frame"><span class="studio-photo-paper studio-preview-paper rv${rarityIndex}" data-photo-mount="${mount.kind}">
@@ -141,7 +152,7 @@ function libActiveFiltersHTML() {
 }
 
 function photoTileHTML(c, index, motionIndex = index) {
-  const rarity = SDT.Cards.rarityOf(c);
+  const rarity = libRarityOf(c);
   const rarityIndex = Math.max(0, RARITIES.indexOf(rarity));
   const mount = photoMountFor(rarity);
   const art = (SDT.Art && SDT.Art.cardIcon && SDT.Art.cardIcon(c, { ...LIB_ART, defer: true })) ||
@@ -370,7 +381,11 @@ function renderCardLibrary() {
   // CSS 侧规则见 cards.css 的 body.cardlib-open 段
   document.body.classList.add('cardlib-open');
   // 员工通行证A是碎片合成材料（特殊收藏品），不进卡牌库（2026-09-16 留言「在卡牌库中删除员工通行证a」）
-  libCards = SDT.Cards.all().filter(c => c.id !== 'tt-token-color');
+  // Catalog membership/order and rarity lookups share one shallow snapshot for
+  // this page refresh. Designer saves/imports reopen through this function.
+  libCatalog = SDT.Cards.all().slice();
+  refreshLibRenderContext(libCatalog);
+  libCards = libCatalog.filter(c => c.id !== 'tt-token-color');
   _libSearchText = new WeakMap(libCards.map(c => [c, `${c.name || ''}\n${c.desc || ''}`.toLowerCase()]));
   libCardById = new Map(libCards.map(card => [card.id, card]));
   // 库内容刷新即失效筛选缓存：防止卡牌增删/改卡后命中旧缓存
@@ -604,6 +619,8 @@ function closeLibPage() {
   clearTimeout(libSearchTimer);
   libSearchTimer = null;
   resetLibArtWarmup();
+  libRenderContext = null;
+  libCatalog = [];
   libCardNodeById.clear();
   UI.hideOverlay();
   // 摘 cardlib-open 必须等淡出（210ms）结束：提前摘会让 #overlay * 的禁动画规则

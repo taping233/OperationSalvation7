@@ -10,7 +10,9 @@ const PERFORMANCE_BUDGETS = Object.freeze({
   // 为 A3 迁移等后续批次预留增长空间。startupPreload/retainedImage* 为运行时策略，不在本次范围。
   packagedDuplicateBytesMax: 904 * 1024,
   entryGzipBytesMax: 270 * 1024,
-  initialJsGzipBytesMax: 290 * 1024,
+  // 09-28 老板允许代码迭代时小幅增加预算。96950de 生产实测首屏 299.3 KiB；
+  // 上限调整为 310 KiB，保留 10.7 KiB 余量，避免仅为压包引入复杂装配。
+  initialJsGzipBytesMax: 310 * 1024,
   // 09-25 实测（CI run 36121460624 生产构建）：battle feature chunk gzip 102.1 KiB，
   // b3846cf 卡库三发现批增量顶破 102.0 旧预算后按同日口径重定。
   featureChunkGzipBytesMax: 104 * 1024,

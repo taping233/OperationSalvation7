@@ -11,8 +11,7 @@ import { getCollection, selectSkin } from './collection.commands.js';
 import { createHomeCommands } from '../home/home.commands.js';
 import { presentHome, homeErrorMessage } from '../home/home.presenter.js';
 import { getM04VisualPack } from '../home/home.visuals.js';
-import { createPreparationCommands, getPreparation, previewDeployment } from './preparation.commands.js';
-import { buildPreparationViewModel, mountPreparationView } from './preparation.view.js';
+import { createHubPreparationFeature } from './game.hub.preparation.js';
 import '../../css/preparation.css';
 import { slots, homeRequestId } from './game.hub.bridge.js';
 import { hubDeployHTML, openDepartPrep, deployPick, setDeployPick } from './game.hub.depart.js';
@@ -25,15 +24,41 @@ const homeCommands = createHomeCommands({
   getCollection: snapshot => getCollection(snapshot, SDT.Cards),
 });
 let homeController = null;
-let preparationController = null;
 let homeSceneRequest = 0;
 const disposeHome = () => { homeController?.dispose(); homeController = null; };
-const disposePreparation = () => { preparationController?.dispose(); preparationController = null; };
-const preparationCommands = createPreparationCommands({ readBase, readBaseReceipt, commitBase });
+let preparationFeature = null;
+const disposePreparation = () => preparationFeature?.dispose();
 
 // 基地当前页签（原为隐式全局，ESM 严格模式下必须显式声明）
 let hubTab = 'deploy';
 let hubCollectionView = 'backs';
+preparationFeature = createHubPreparationFeature({
+  data: {
+    readBase,
+    readBaseReceipt,
+    commitBase,
+    slotId: () => SDT.Base.slot,
+    cardCatalog: () => SDT.Cards.all(),
+    characters: () => CHARACTERS.map(character => ({ id: character.id, name: character.name })),
+    pets: () => SDT.Base.PETS || [],
+    bagCapacity: () => SDT.Base.bagCap(),
+  },
+  view: {
+    openPanel: () => {
+      UI.showOverlay('', '<div class="preparation-shell"><button class="ov-btn" data-act="preparationBack">← 返回基地出发页</button><div id="preparationRoot"></div></div>', 'page');
+      UI.act('preparationBack', () => preparationFeature.returnToBase());
+      return document.getElementById('preparationRoot');
+    },
+  },
+  navigation: {
+    returnToBase: () => { hubTab = 'deploy'; renderHub(); },
+    applyPicks: setDeployPick,
+    openDeparture: () => { disposeHome(); openDepartPrep(); },
+  },
+  reportError: message => UI.log(message, 'warn'),
+  formatError: homeErrorMessage,
+  requestId: homeRequestId,
+});
   function openBaseHub(tab) {
     disposePreparation();
     game.state = 'modal';
@@ -200,7 +225,15 @@ let hubCollectionView = 'backs';
       UI.log(result.value.assetFallback ? '皮肤选择已保存；当前素材缺失，暂用默认立绘。' : '人物皮肤已保存。', result.value.assetFallback ? 'warn' : 'ok');
       renderHub();
     });
-    UI.act('selMode', (d) => { B.data.selMode = d.mode; B.save(); renderHub(); });
+    UI.act('selMode', (d) => {
+      const result = B.selectMode(d.mode);
+      if (!result.ok) {
+        UI.log(result.code === 'INVALID_MODE' ? '玩法选项无效，未保存。' : '玩法保存失败，请稍后重试。', 'warn');
+        renderHub();
+        return;
+      }
+      renderHub();
+    });
     UI.act('nestDeploy', () => { SDT.Nest.openNestPrep(); });
     UI.act('deploy', () => { openDepartPrep(); });
     UI.act('gateInfo', () => {
@@ -282,61 +315,9 @@ let hubCollectionView = 'backs';
     UI.act('closeBase', closeBase);
   }
 
-  function preparationModel(snapshot, error = '') {
-    const state = getPreparation(snapshot);
-    const cards = SDT.Cards.all();
-    const pets = (SDT.Base.PETS || []).map(pet => ({ id: pet.id, name: pet.name }));
-    const characterOptions = CHARACTERS.map(character => ({ id: character.id, name: character.name }));
-    return buildPreparationViewModel({ baseSnapshot: snapshot, preparation: state, cardCatalog: cards, characters: characterOptions, pets, catalogVersion: 'm06-v1', bagCapacity: SDT.Base.bagCap(), error });
-  }
-
   function openPreparationPanel() {
-    disposeHome(); disposePreparation();
-    const current = readBase(SDT.Base.slot);
-    if (!current.ok) { UI.log(homeErrorMessage(current), 'warn'); return; }
-    UI.showOverlay('', '<div class="preparation-shell"><button class="ov-btn" data-act="preparationBack">← 返回基地出发页</button><div id="preparationRoot"></div></div>', 'page');
-    UI.act('preparationBack', () => { hubTab = 'deploy'; renderHub(); });
-    const root = document.getElementById('preparationRoot');
-    const repaint = (error = '') => {
-      const fresh = readBase(SDT.Base.slot);
-      if (fresh.ok) preparationController?.update(preparationModel(fresh.value, error));
-      return fresh;
-    };
-    preparationController = mountPreparationView(root, {
-      model: preparationModel(current.value),
-      onIntent: async ({ type, payload }) => {
-        const fresh = readBase(SDT.Base.slot);
-        if (!fresh.ok) { repaint(homeErrorMessage(fresh)); return; }
-        const context = { slotId: SDT.Base.slot, requestId: homeRequestId(`prep-${type}`), expectedRevision: fresh.revision };
-        const state = getPreparation(fresh.value);
-        const preset = state.presets.find(item => item.id === payload.presetId);
-        let result = null;
-        if (type === 'goal-add' || type === 'goal-remove') {
-          const tracked = type === 'goal-add' ? [...state.tracked, payload.targetId] : state.tracked.filter(id => id !== payload.targetId);
-          result = await preparationCommands.setTrackedGoals(context, { targetIds: tracked.filter(Boolean) });
-        } else if (type === 'preset-field' && preset) {
-          result = await preparationCommands.savePreset(context, { ...preset, presetId: preset.id, [payload.field]: payload.value });
-        } else if ((type === 'preset-pick-add' || type === 'preset-pick-remove') && preset) {
-          const existing = preset.picks.filter(item => item.card.cardId !== payload.cardId);
-          const picks = type === 'preset-pick-add' && payload.cardId ? existing.concat({ card: { cardId: payload.cardId }, count: payload.count }) : existing;
-          result = await preparationCommands.savePreset(context, { ...preset, presetId: preset.id, picks });
-        } else if (type === 'preset-preview') {
-          repaint(); return;
-        } else if (type === 'preset-apply' && preset) {
-          const preview = previewDeployment({ baseSnapshot: fresh.value, preset, cardCatalog: SDT.Cards.all(), characters: CHARACTERS, pets: SDT.Base.PETS || [], bagCapacity: SDT.Base.bagCap() });
-          if (!preview.canStart) { repaint('库存或资格已变化，预设无法应用。'); return; }
-          setDeployPick({});
-          for (const item of preview.resolvedPicks.filter(item => item.status === 'ready' && item.appliedCount === item.requestedCount)) {
-            const stack = fresh.value.stash.find(entry => entry.card?.id === item.card.cardId);
-            if (stack) deployPick[stack.card.name] = item.appliedCount;
-          }
-          disposePreparation(); openDepartPrep(); return;
-        } else if (type === 'preset-start' && preset) {
-          result = await preparationCommands.startDeployment(context, { presetId: preset.id, mode: 'standard', expectedRunRevision: 0 });
-        }
-        repaint(result?.ok ? '' : (result?.message || '操作失败'));
-      },
-    });
+    disposeHome();
+    preparationFeature.open();
   }
 
   // —— 基地各页签的 ? 帮助主题（说明文字统一收进二级界面，不在页面直铺） ——

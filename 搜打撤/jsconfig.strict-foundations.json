@@ -16,6 +16,7 @@
     "game/src/core/shared.js",
     "game/src/hub/base-mutation.js",
     "game/src/hub/base-economy.js",
+    "game/src/hub/base-progression.commands.js",
     "tests/strict-foundations-types.fixture.ts"
   ]
 }
