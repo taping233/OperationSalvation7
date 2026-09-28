@@ -1,13 +1,17 @@
 /* battle.selection-flow.js —— 战斗内选牌、抉择与发现队列。
  * 弹层状态来自 battle.runtime.js；引擎只注入卡牌执行与战斗收尾操作。 */
-const SDT = window.SDT;
 import { G, foes, hand, drawPile, consumed, cardAnims, handSelecting, choosing, discovering, discoverQueue, zeroFeeUntil, turn, delayed, pdef, cardOverrides, set$handSelecting, set$choosing, set$discovering, set$hand } from './battle.runtime.js';
 import { esc } from '../core/shared.js';
-import { Random } from '../core/random.js';
 import { splitEffectClauses as splitClauses } from './battle.effects.js';
-import { throwIfActionCancelled } from './battle.staged-playback.js';
 
+/** @typedef {import('./battle.snapshot.types.js').BattleCardInput & { rarity?: string, cls?: string, _pouch?: import('./battle.snapshot.types.js').BattleCardInput[] }} SelectionCard */
+/** @typedef {{ all: () => SelectionCard[], isRandomObtainable: (card: SelectionCard) => boolean, sellPrice: (card: SelectionCard) => number }} SelectionCardsPort */
+
+/**
+ * @param {{ cards: SelectionCardsPort, deny: () => void, random01: () => number, throwIfActionCancelled: (signal: AbortSignal | undefined) => void, session: { handSelectQueue: unknown[], choiceQueue: unknown[] }, [key: string]: unknown }} ports
+ */
 export function createBattleSelectionFlow({
+  cards, deny, random01, throwIfActionCancelled,
   session, requestBattleRender, findCard, addTempCard, queueBattleAction,
   runStagedSteps, applyTextEffects, queueCardExecution, fireConsumeTriggers,
   fireCatGift, swapCardCosts, sweepDead, finish,
@@ -28,16 +32,16 @@ export function createBattleSelectionFlow({
     const typeBan = (t => t === '道具');
     let pool;
     if (pred) {
-      pool = SDT.Cards.all().filter(c => c.rarity !== '衍生' && !['生物', '事件', '资源'].includes(c.type) && pred(c));
+      pool = cards.all().filter(c => c.rarity !== '衍生' && !['生物', '事件', '资源'].includes(c.type) && pred(c));
     } else {
-      pool = SDT.Cards.all().filter(c =>
-        c.rarity !== '衍生' && c.type !== '资源' && !typeBan(c.type) && SDT.Cards.isRandomObtainable(c) &&
+      pool = cards.all().filter(c =>
+        c.rarity !== '衍生' && c.type !== '资源' && !typeBan(c.type) && cards.isRandomObtainable(c) &&
         (!rarity || c.rarity === rarity) &&
         (!otherCls || (c.cls && c.cls !== G.myClass)) ||
         (otherCls && c.rarity === '职业' && c.cls && c.cls !== G.myClass));
     }
     if (!pool.length) return null;
-    return pool[Math.floor(Random.random('battle') * pool.length)];
+    return pool[Math.floor(random01() * pool.length)];
   }
 
   // —— 手牌选卡（2026-09-06 #24/#25）：「选择 N 张手牌中的 X 施放/消耗」通用执行 ——
@@ -66,7 +70,7 @@ export function createBattleSelectionFlow({
   }
   function skipHandSelect() {
     if (!handSelecting) return;
-    if (handSelecting.mandatory) { SDT.Sound.sfx('deny'); return; }
+    if (handSelecting.mandatory) { deny(); return; }
     set$handSelecting(null);
     G.log('[[icon:cards]] 跳过手牌选择，该效果未结算', 'warn');
     processHandSelect();
@@ -178,7 +182,7 @@ export function createBattleSelectionFlow({
     // 选项若指名一张生物/门类卡（如 末日浩劫之门 / 天国之门）：
     // 把它的「回合开始时」效果注册为每回合重复的持续效果（门是场面物件）
     const quoted = text.match(/[‘“「]([^\s，。；‘’“”「」]+)[’”」]/);
-    const ref = quoted && SDT.Cards.all().find(c => c.name === quoted[1]);
+    const ref = quoted && cards.all().find(c => c.name === quoted[1]);
     if (ref && ref.type === '生物') {
       const parts = splitClauses(String(ref.desc || ''));
       if (parts.turnStart.length) {
@@ -207,7 +211,7 @@ export function createBattleSelectionFlow({
       if (job.secondDoor && job.options.length === 2) {
         const otherText = job.options[+i === 0 ? 1 : 0];
         const q2 = otherText.match(/[‘“「]([^\s，。；‘’“”「」]+)[’”」]/);
-        const ref2 = q2 && SDT.Cards.all().find(c => c.name === q2[1]);
+        const ref2 = q2 && cards.all().find(c => c.name === q2[1]);
         if (ref2 && ref2.type === '生物') {
           const parts2 = splitClauses(String(ref2.desc || ''));
           parts2.turnStart.forEach(it => delayed.push({ text: it.text, cardName: ref2.name, repeat: true, notBeforeTurn: turn + 2 }));
@@ -323,7 +327,7 @@ export function createBattleSelectionFlow({
       G.log(`[[icon:question]] 发现：【<b>${esc(card.name)}</b>】置入手牌（战斗内临时卡，战后消散）`, 'loot');
       // 挖宝：「获得等同于其价格的护甲」按发现卡售价折算（2026-09-09 补实装）
       if (priceArmor) {
-        const price = SDT.Cards.sellPrice(card);
+        const price = cards.sellPrice(card);
         pdef.armor += price;
         G.log(`[[icon:plate]] <b>挖宝</b>：【${esc(card.name)}】价格 ${price} → 获得 ${price} 点护甲（当前 ${pdef.armor}）`, 'sys');
       }

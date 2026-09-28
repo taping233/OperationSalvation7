@@ -34,6 +34,72 @@ describe('R5-a real session persistence',()=>{
     expect(session.loadGame(slot).ok).toBe(true); expect(session.game.routePlan).toEqual(plan);
   });
 
+  it('正式newRun把仓库带入与口袋清理合并为一次Base写入', () => {
+    const slot = 7; window.SDT.Base.use(slot); session._set_active_slot(slot);
+    const base = window.SDT.Base;
+    const selected = { id: 'deploy-card', name: '攻击卡', rarity: '稀有' };
+    const secondSelected = { id: 'deploy-guard', name: '防御卡', rarity: '古朴' };
+    base.data.stash = [
+      { card: selected, count: 2 },
+      { card: secondSelected, count: 3 },
+    ];
+    base.data.pocket = [{ card: { id: 'spent', name: '消耗卡' }, count: 1 }];
+    const originalSetItem = Storage.prototype.setItem;
+    let baseWrites = 0;
+    Storage.prototype.setItem = function(key, value) {
+      if (key === base.SLOT_KEY(slot)) baseWrites++;
+      return originalSetItem.call(this, key, value);
+    };
+
+    try {
+      expect(session.newRun('standard', { 攻击卡: 1, 防御卡: 2 }, { skipClassChoice: true })).toBeUndefined();
+      expect(baseWrites).toBe(1);
+      expect(base.data.stash).toEqual([
+        { card: selected, count: 1 },
+        { card: secondSelected, count: 1 },
+      ]);
+      expect(base.data.pocket).toEqual([]);
+      expect(session.game.ownedCards.filter(card => card.card.id?.startsWith('deploy-')).map(card => card.card.name))
+        .toEqual(['攻击卡', '防御卡', '防御卡']);
+    } finally {
+      Storage.prototype.setItem = originalSetItem;
+    }
+  });
+
+  it('Base真实写盘失败时出征不初始化run、不消费随机流且不丢库存', () => {
+    const slot = 8; window.SDT.Base.use(slot); session._set_active_slot(slot);
+    const base = window.SDT.Base;
+    base.data.stash = [{ card: { id: 'deploy-card', name: '攻击卡', rarity: '稀有' }, count: 2 }];
+    const cardStack = base.data.stash[0];
+    base.data.pocket = [{ card: { id: 'spent', name: '消耗卡' }, count: 1 }];
+    const beforeBase = structuredClone(base.data);
+    const beforeBaseRaw = localStorage.getItem(base.SLOT_KEY(slot));
+    const beforeRandom = Random.snapshot();
+    const before = {
+      seed: session.game.seed,
+      mapSeed: session.game.mapSeed,
+      layerData: session.game.layerData,
+      ownedCards: session.game.ownedCards,
+      runActive: session.game.runActive,
+    };
+    const originalSetItem = Storage.prototype.setItem;
+    Storage.prototype.setItem = function(key, value) {
+      if (key === base.SLOT_KEY(slot)) throw new Error('test storage failure');
+      return originalSetItem.call(this, key, value);
+    };
+
+    try {
+      expect(session.newRun('standard', { [cardStack.card.name]: 1 }, { skipClassChoice: true })).toBe(false);
+      expect(Random.snapshot()).toEqual(beforeRandom);
+      expect(session.game).toMatchObject(before);
+      expect(base.data).toEqual(beforeBase);
+      expect(localStorage.getItem(base.SLOT_KEY(slot))).toBe(beforeBaseRaw);
+      expect(localStorage.getItem(RunStorage.key(slot))).toBeNull();
+    } finally {
+      Storage.prototype.setItem = originalSetItem;
+    }
+  });
+
   it('saveGame写canonical snapshot，loadGame恢复原拓扑与位置',()=>{
     const slot=5, seed='session-route';
     window.SDT.Base.use(slot); session._set_active_slot(slot);

@@ -47,6 +47,7 @@
 - `battle.card-inspection.js`：卡实例查找、费用上下文、手牌诅咒与费用交换，通过 cards、curseMeta、readState 三个端口访问引擎；保留原 engine 导出，不创建第二份运行态。`hosted-catalog-index.js` 按原来源顺序建立一次索引，保持重复 ID 首项优先。
 - `battle.runtime.js` 是五个运行态子模块（session/piles/interaction/effects/presentation）的兼容重导出入口，保留活绑定；修改 reset/restore/finish 必须核对真实属地与会话边界，不能建立第二份状态副本。
 - `battle.engine.js` 装配 `battle.execution-session.js`（取消与代次）、`battle.action-runner.js`（串行动作队列）、`battle.staged-playback.js`（逐拍播放）；旧回调须校验战斗 token 和执行会话 generation。选择、装备、背包、生命周期、出牌执行分别委派给 `battle.selection-flow/equipment/bag/lifecycle/exec-play.js`。
+- `battle.selection-flow.js` 管理战斗内手牌选择、发现和抉择队列；卡库查询、拒绝音效、随机源与取消检查由 `battle.engine.js` 通过窄端口装配。模块不捕获 `window.SDT`，也不静态依赖连接 UI 等待的 `battle.staged-playback.js`；战斗状态仍读取 `battle.runtime.js` 活绑定，因此这是浏览器边界解耦，不是纯状态模块。
 - `cards/card-rules.schema.js` 的 schema v2 是增量契约，`rules.version` 仍为 1；A3 已迁移 damage/heal/armor、curse、acquire、blessing/energy 等批次，未支持的操作或参数由解释器 pending 守卫拒绝。schema 接受形状不等于全部效果已经接线。
 - `battle.resolution.js`：完整单卡结算，显式接收当前状态查询与伤害、抽牌、回复、护甲、延迟效果等命名端口；引擎负责适配现有运行时。模块本身不读取全局状态，不直接修改运行时字段。
 - `battle.snapshot.js`：按输入值构造视图快照；引擎负责收集输入和维护签名缓存。保留原有快照字段和复制/冻结层级，不宣称任意嵌套对象都已深冻结。
@@ -61,11 +62,11 @@
 
 模块之间不得直接修改另一模块的私有变量；需要跨模块行为时应暴露命名命令、只读快照或一次性配置接口。
 
-基地持久化分为 `base-state.js`（默认状态和旧档归一化）、`base-mutation.js`（同步草稿与提交结果）、`base-economy.js`（购买、拆包、领奖命令）、`base-progression.commands.js`（模式选择与研究所钥匙门禁）、`base.js`（活动槽、存储保护与兼容接口）。写盘失败不替换当前状态；未改变分支保持引用，兼容旧收藏流程持有的卡堆。研究所门禁按整数钥匙储备校验并只扣一次；旧 `game.nest.js` 无费用解锁入口保留兼容语义。跨基地/对局的结算仍使用原 journal/requestId 协议。其他旧流程仍有直接写 `Base.data` 后保存的路径，不能把这次收敛理解为整个存档层已不可变。
+基地持久化分为 `base-state.js`（默认状态和旧档归一化）、`base-mutation.js`（同步草稿与提交结果）、`base-economy.js`（购买、拆包、领奖命令）、`base-progression.commands.js`（模式选择与研究所钥匙门禁）、`base-departure.commands.js`（一次准备命令中扣除出征卡并清理消耗口袋）、`base.js`（活动槽、存储保护与兼容接口）。写盘失败不替换当前状态；未改变分支保持引用，兼容旧收藏流程持有的卡堆。研究所门禁按整数钥匙储备校验并只扣一次；旧 `game.nest.js` 无费用解锁入口保留兼容语义。出征命令提交 Base 后 `game.session.newRun()` 才创建新局；Base 与 Run 使用不同存储，不能把这个单边事务称为跨存储原子提交。跨基地/对局的结算仍使用原 journal/requestId 协议。其他旧流程仍有直接写 `Base.data` 后保存的路径，不能把这次收敛理解为整个存档层已不可变。
 
 `core/rule-config.js` 是只读共享规则来源，包含容量、战斗上限、撤离保留比例和兽王奖励概率；校验真实的字段范围和同组容量顺序。预估和实际结算读取同一常量，随机抽取仍留在原调用位置。
 
-`Base.selectMode()` 与 `Base.unlockNestGate()` 是模式偏好和研究所门禁的事务写入口；对应 UI 不再直接写这两个 `Base.data` 字段。此约束只覆盖这两个字段，局内口袋、eggPity、战斗计数等兼容路径仍需逐步迁移。严格检查按目录/能力增量启用；全局 `jsconfig.json` 尚未整体改为 `strict`。
+`Base.selectMode()` 与 `Base.unlockNestGate()` 是模式偏好和研究所门禁的事务写入口；对应 UI 不再直接写这两个 `Base.data` 字段。此约束只覆盖这些已迁移字段，其他旧流程仍需逐步收敛。严格检查按目录/能力增量启用；全局 `jsconfig.json` 尚未整体改为 `strict`。`battle.selection-flow.js` 的独立严格配置只验证新建的 `cards`、`deny`、`random01` 和取消检查端口契约；该模块对既有 `battle.runtime.js` 活绑定的内部访问尚未纳入严格实现检查，不能与 `card-rarity.js`、`card-render-context.js`、`base-departure.commands.js` 的源文件严格检查混为一谈。
 
 ## 质量检查与文档生成
 

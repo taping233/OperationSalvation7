@@ -14,9 +14,12 @@
   "files": [
     "game/src/core/random-core.js",
     "game/src/core/shared.js",
+    "game/src/cards/card-rarity.js",
+    "game/src/cards/card-render-context.js",
     "game/src/hub/base-mutation.js",
     "game/src/hub/base-economy.js",
     "game/src/hub/base-progression.commands.js",
+    "game/src/hub/base-departure.commands.js",
     "tests/strict-foundations-types.fixture.ts"
   ]
 }

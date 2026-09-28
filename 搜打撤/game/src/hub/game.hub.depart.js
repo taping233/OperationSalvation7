@@ -313,8 +313,14 @@ import { turboMs } from '../agent/agent.turbo.js';
         requestClassChoice({
           onCancel: () => renderDepartPrep(),
           beforeConfirm: () => {
+            const started = newRun(mode, picks, { skipClassChoice: true });
+            if (started === false) {
+              deployHint = '[[icon:cross]] 基地出征整备未保存，请重试；当前没有开始新局。';
+              renderDepartPrep();
+              return false;
+            }
             deployPick = null;
-            newRun(mode, picks, { skipClassChoice: true });
+            return true;
           },
         });
       };

@@ -337,7 +337,7 @@ export function openClassChoice(options = {}) {
   UI.act('pickClass', () => {
     if (!sel) return;
     const cl = sel;
-    if (beforeConfirm) beforeConfirm();
+    if (beforeConfirm && beforeConfirm() === false) return;
     game.myClass = cl;
     game.characterId = characterFor(cl).id;
     game.classCard = null;

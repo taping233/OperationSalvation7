@@ -49,7 +49,6 @@ describe('顶层门面快照漂移守卫', () => {
       'battle/battle.hover.js',
       'battle/battle.lifecycle.js',
       'battle/battle.overlays.js',
-      'battle/battle.selection-flow.js',
       'battle/battle.vfx.js',
       'cards/cards.js',
       'cards/cards.rules.js',

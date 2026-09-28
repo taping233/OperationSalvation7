@@ -31,6 +31,11 @@ const PURE_MODULES = new Set([
   'hub/base-economy.js', 'hub/base-progression.commands.js',
   'battle/battle.card-inspection.js', 'battle/hosted-catalog-index.js',
 ]);
+// These feature domains use explicit runtime ports and must stay importable without the browser facade.
+const BROWSER_ISOLATED_MODULES = new Set(['battle/battle.selection-flow.js']);
+const BROWSER_ISOLATION_FORBIDDEN_IMPORTS = new Map([
+  ['battle/battle.selection-flow.js', new Set(['battle/battle.staged-playback.js'])],
+]);
 const SESSION_KERNEL = 'run/game.session.kernel.js';
 const SESSION_BROWSER = 'run/game.session.browser.js';
 const VIEW_MODULES = new Set([
@@ -51,8 +56,12 @@ const LAZY_PAGE_ENTRIES = new Map([
 export function deadGuardKeys(sources) {
   const dead = [];
   for (const key of [...RUNTIME_OWNERS, ...PURE_MODULES, ...VIEW_MODULES, ...PROTECTED_TARGETS,
-    ...LAZY_PAGE_ENTRIES.keys(), ...LAZY_PAGE_ENTRIES.values()]) {
+    ...BROWSER_ISOLATED_MODULES, ...LAZY_PAGE_ENTRIES.keys(), ...LAZY_PAGE_ENTRIES.values()]) {
     if (!sources.has(key)) dead.push(key);
+  }
+  for (const [source, targets] of BROWSER_ISOLATION_FORBIDDEN_IMPORTS) {
+    if (!sources.has(source)) dead.push(source);
+    for (const target of targets) if (!sources.has(target)) dead.push(target);
   }
   for (const prefix of FLOW_PREFIXES) {
     if (![...sources.keys()].some(name => name.startsWith(prefix))) dead.push(prefix);
@@ -158,9 +167,18 @@ export function architectureViolations(graph) {
         || target === 'core/sdt-facade.js' || FLOW_PREFIXES.some(prefix => target.startsWith(prefix)))) {
         violations.push(`${name}:${line}: 独立规则/快照模块不能反向依赖 ${target}`);
       }
+      if (BROWSER_ISOLATED_MODULES.has(name) && target === 'core/sdt-facade.js') {
+        violations.push(`${name}:${line}: 显式端口模块不能依赖 SDT 浏览器门面`);
+      }
+      if (BROWSER_ISOLATION_FORBIDDEN_IMPORTS.get(name)?.has(target)) {
+        violations.push(`${name}:${line}: 无浏览器选牌域不能依赖 ${target}`);
+      }
     }
     if (PURE_MODULES.has(name) && module.browserGlobals.length) {
       violations.push(`${name}: 独立规则/快照模块不能读取全局浏览器对象 ${module.browserGlobals.join(', ')}`);
+    }
+    if (BROWSER_ISOLATED_MODULES.has(name) && module.browserGlobals.length) {
+      violations.push(`${name}: 显式端口模块不能读取全局浏览器对象 ${module.browserGlobals.join(', ')}`);
     }
     if (name === SESSION_KERNEL && module.browserGlobals.length) {
       violations.push(`${name}: 会话内核必须通过注入端口访问浏览器 ${module.browserGlobals.join(', ')}`);

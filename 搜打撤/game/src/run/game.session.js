@@ -433,31 +433,14 @@ function grantStarterSha() {
   // 2026-09-16 留言：初始不发火球（火球改为衍生稀有度）
 }
 
-// 把出发准备页选择的仓库卡牌带入背包（picks: 卡名 => 张数）
-// 2026-09-09 修复需求 #8：此前只把卡从仓库移除、从未放进对局背包——带入的卡凭空消失
-// 需求 #6：职业卡不能带入（带出后留在仓库，只能收藏/出售）
-function applyDeployPicks(picks) {
-  const B = SDT.Base;
-  let loaded = 0;
-  Object.keys(picks || {}).forEach(name => {
-    const n = Math.max(0, Math.floor(+picks[name] || 0));
-    if (n <= 0) return;
-    const stack = B.data.stash.find(x => x.card.name === name);
-    if (!stack) return;
-    if (stack.card.rarity === '职业') {
-      UI.log(`[[icon:cross]] 职业卡【${esc(name)}】无法带入对局（带出后留在仓库）`, 'warn');
-      return;
-    }
-    const taken = B.takeStashCards(name, n);
-    for (let i = 0; i < taken; i++) {
-      game.ownedCards.push({ uid: newUid(), card: { ...stack.card }, brought: 1 });
-    }
-    loaded += taken;
-  });
-  if (loaded) UI.log(`[[icon:archive]] 从基地仓库携带 <b>${loaded}</b> 张卡牌出征`, 'loot');
-}
-
 function newRun(mode, picks, options = {}) {
+  // Base 仓库出征卡与消耗口袋同属一次出征准备，必须在初始化局内状态或抽随机数前落盘。
+  // run 存档仍沿用既有生命周期；这里不宣称 Base 与 run 两个存储原子提交。
+  const departure = SDT.Base.prepareDeparture(picks);
+  if (!departure?.ok) {
+    UI.log('[[icon:cross]] 基地出征整备未保存，请重试；当前没有开始新局', 'warn');
+    return false;
+  }
   terminalGeneration++;
   game.seed = Random.reseed();
   game.mapSeed = game.seed;
@@ -504,12 +487,20 @@ function newRun(mode, picks, options = {}) {
   UI.log('点击相邻节点前进，落脚触发事件；层间闸门通往更深区域，终层可完成撤离', 'sys');
   grantStarterSha();
   UI.log(`[[icon:cards]] 随身携带初始牌【<b>初始攻击</b>】×${MAP.rules.starterSha}（不可入库 / 安全格）`, 'sys');   // 2026-09-16 留言「初始不给火球」：欢迎语去掉火球（已不再发放）
-  applyDeployPicks(picks);    // 出发准备页选择的仓库卡牌
+  let loaded = 0;
+  for (const stack of departure.cards) {
+    for (let i = 0; i < stack.count; i++) {
+      game.ownedCards.push({ uid: newUid(), card: { ...stack.card }, brought: 1 });
+    }
+    loaded += stack.count;
+  }
+  for (const name of departure.rejectedClassNames) {
+    UI.log(`[[icon:cross]] 职业卡【${esc(name)}】无法带入对局（带出后留在仓库）`, 'warn');
+  }
+  if (loaded) UI.log(`[[icon:archive]] 从基地仓库携带 <b>${loaded}</b> 张卡牌出征`, 'loot');
   // 需求 #1：下一次出发后，基地消耗口袋清空（未复原的卡牌随之消散）
-  if (SDT.Base.data.pocket.length) {
-    UI.log(`[[icon:pocket]] 出发整理：基地消耗口袋已清空（${SDT.Base.data.pocket.reduce((a, b) => a + b.count, 0)} 张未复原的卡牌消散了）`, 'dim');
-    SDT.Base.data.pocket = [];
-    SDT.Base.save();
+  if (departure.pocketCleared) {
+    UI.log(`[[icon:pocket]] 出发整理：基地消耗口袋已清空（${departure.dispersedPocketCount} 张未复原的卡牌消散了）`, 'dim');
   }
   // 需求 #4：携带宠物「汪汪狗」的生命上限 +5
   const pet = SDT.Base.carriedPet ? SDT.Base.carriedPet() : null;

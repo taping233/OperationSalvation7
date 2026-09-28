@@ -3,6 +3,9 @@ import { clone, esc, escAttr } from '../game/src/core/shared.js';
 import { commitBaseMutation } from '../game/src/hub/base-mutation.js';
 import { createBaseEconomy } from '../game/src/hub/base-economy.js';
 import { createBaseProgressionCommands } from '../game/src/hub/base-progression.commands.js';
+import { isHeroLine, rarityOf } from '../game/src/cards/card-rarity.js';
+import { createCardRenderContext } from '../game/src/cards/card-render-context.js';
+import { createBaseDepartureCommands } from '../game/src/hub/base-departure.commands.js';
 
 const seed: number = hashSeed(undefined);
 const step: { state: number; value: number } = nextRandom(seed);
@@ -84,3 +87,48 @@ if (gateResult.ok && !gateResult.alreadyUnlocked) {
 progression.selectMode('casual');
 // @ts-expect-error The persistence port must report boolean success.
 createBaseProgressionCommands({ read: () => progressionState, mutate: () => 'saved', keyNeeded: 10 });
+
+const sparseToken = { tokenOf: 'missing', rarity: '衍生' };
+const unresolvedRarity: string | undefined = rarityOf(sparseToken, _id => undefined);
+const nullableHeroCheck: boolean = isHeroLine(null, _id => undefined);
+const cardRenderContext = createCardRenderContext([
+  null,
+  { id: 'creator', rarity: '稀有' },
+  sparseToken,
+]);
+const inheritedRarity: string | undefined = cardRenderContext.rarityOf(sparseToken);
+void unresolvedRarity;
+void nullableHeroCheck;
+void inheritedRarity;
+// @ts-expect-error Card lookups are keyed by stable string ids and return card-like records.
+rarityOf({ rarity: '衍生', tokenOf: 'creator' }, _id => 42);
+// @ts-expect-error Rarity must be a string when present.
+rarityOf({ rarity: 42 }, _id => undefined);
+// @ts-expect-error A context card must be non-null; null entries are filtered from catalogs.
+cardRenderContext.rarityOf(null);
+// @ts-expect-error The render context is an immutable lookup snapshot.
+cardRenderContext.rarityOf = () => '古朴';
+
+const departureState = {
+  stash: [{ card: { id: 'card-1', name: '试探招式', rarity: '稀有', type: '武术' }, count: 2 }],
+  pocket: [],
+};
+const departureCommands = createBaseDepartureCommands({
+  read: () => departureState,
+  mutate: (prepare, _failure) => prepare(structuredClone(departureState)),
+});
+const departureResult = departureCommands.prepareDeparture({ '试探招式': 1 });
+if (departureResult.ok) {
+  const cardName: string = departureResult.cards[0]?.card.name;
+  const pocketWasCleared: boolean = departureResult.pocketCleared;
+  void cardName;
+  void pocketWasCleared;
+} else {
+  const saveError: 'save' = departureResult.why;
+  void saveError;
+}
+// @ts-expect-error A card stack must provide the card name consumed by departure selection.
+createBaseDepartureCommands({ read: () => ({ stash: [{ card: { id: 'missing-name' }, count: 1 }] }), mutate: (prepare, failure) => failure });
+// @ts-expect-error Callers must narrow the discriminated save result before consuming cards.
+const unsafeDepartureCards = departureResult.cards;
+void unsafeDepartureCards;

@@ -72,6 +72,27 @@ describe('AST 架构检查的识别与负面场景', () => {
     expect(problems.some(x => x.startsWith('battle/battle.snapshot.js:'))).toBe(false);
   });
 
+  it('选牌域必须通过装配端口访问服务，不能重新读取浏览器门面', () => {
+    const graph = graphOf({
+      'battle/battle.selection-flow.js': "import '../core/sdt-facade.js'; const cards = window.SDT.Cards;",
+      'core/sdt-facade.js': 'export const SDT = {};',
+    });
+    const problems = architectureViolations(graph);
+    expect(problems).toHaveLength(2);
+    expect(problems.some(problem => problem.includes('不能依赖 SDT 浏览器门面'))).toBe(true);
+    expect(problems.some(problem => problem.includes('不能读取全局浏览器对象'))).toBe(true);
+  });
+
+  it('选牌域不能重新静态导入带 UI 等待的整段播放模块', () => {
+    const graph = graphOf({
+      'battle/battle.selection-flow.js': "import './battle.staged-playback.js';",
+      'battle/battle.staged-playback.js': 'export const wait = () => {};',
+    });
+    expect(architectureViolations(graph)).toEqual([
+      'battle/battle.selection-flow.js:1: 无浏览器选牌域不能依赖 battle/battle.staged-playback.js',
+    ]);
+  });
+
   it('纯模块不能反向依赖流程域目录（hub/run）', () => {
     const graph = graphOf({
       'battle/battle.resolution.js': "import '../hub/game.bag.js';",

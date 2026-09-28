@@ -1206,6 +1206,14 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     runBattleStartTriggers: () => triggersM2.fireBattleStart(),
   });
   const selectionFlow = createBattleSelectionFlow({
+    cards: {
+      all: () => SDT.Cards.all(),
+      isRandomObtainable: card => SDT.Cards.isRandomObtainable(card),
+      sellPrice: card => SDT.Cards.sellPrice(card),
+    },
+    deny: () => SDT.Sound.sfx('deny'),
+    random01: () => Random.random('battle'),
+    throwIfActionCancelled,
     session: executionSession,
     requestBattleRender, findCard, addTempCard, queueBattleAction,
     runStagedSteps, applyTextEffects, queueCardExecution, fireConsumeTriggers,

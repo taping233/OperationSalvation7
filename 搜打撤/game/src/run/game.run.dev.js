@@ -48,8 +48,8 @@ const DEV_NODE_LABEL = {
 function devEnsureRun() {
   if (game.battleActive) { UI.log('[[icon:lock]] 战斗进行中——先打完或退出战斗再跳节点', 'warn'); return false; }
   if (game.runActive) return true;
+  if (newRun('standard') === false) return false;
   document.getElementById('title').hidden = true;
-  newRun('standard');
   // 节点测试绕过了正常的选人流程；补齐一个真实角色，避免战斗 HUD 落入“未选择人物”。
   game.characterId = 'heixiang';
   game.myClass = '战士';
