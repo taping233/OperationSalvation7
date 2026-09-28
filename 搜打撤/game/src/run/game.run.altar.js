@@ -7,7 +7,6 @@
  * ============================================================ */
 import { CHARACTERS, characterFor, characterName } from '../core/characters.js';
 import { esc, escAttr } from '../core/shared.js';
-import { assetUrl } from '../core/asset-url.js';
 import { MAP, MODES, curLayer, enterLayer, exitToTitle, game, getActiveSlot, newUid, saveGame, scaledEnemy } from './game.session.js';
 import { createExtractionCommands, validatePendingExtraction } from '../hub/extraction.commands.js';
 import { openBaseHub } from '../hub/game.hub.js';
@@ -20,18 +19,6 @@ const CLASS_STORY = {
   heixiang: '正面硬扛的战士，擅长叠护甲与施加流血。',
   xingyue: '擅长治疗与圣盾，用圣光法术守护自己。',
 };
-// 职业徽记（LEG-6a，0926 W1）：既有位图挂接，源件 .ui-art-loop-0925/nai-out/（只读引用）。
-// 出图文件名 dwu 对应 characters.js 的 changwuyu（常无欲，女巫帽徽记）。
-const CLASS_EMBLEM_FILE = {
-  wu: 'profession-emblem-wu.png',
-  changwuyu: 'profession-emblem-dwu.png',
-  baita: 'profession-emblem-baita.png',
-  heixiang: 'profession-emblem-heixiang.png',
-  xingyue: 'profession-emblem-xingyue.png',
-};
-const emblemSrc = id => CLASS_EMBLEM_FILE[id]
-  ? assetUrl(`assets/ui/emblems/${CLASS_EMBLEM_FILE[id]}`) : '';
-
 import { Sfx, _set_cardPageOpen } from '../hub/game.cardslib.js';
 import { Random, SeededRandomService } from '../core/random.js';
 import { captureBattleContext, ensureBattleReady, startBattle } from '../battle/battle-loader.js';
@@ -121,7 +108,6 @@ export function openClassChoice(options = {}) {
             ${story ? `
               <div class="cls2-eyebrow">WINTER EXPEDITION · CLASS SELECT</div>
               <div class="cls2-nameline">
-                ${emblemSrc(story.id) ? `<img class="cls2-crest" src="${emblemSrc(story.id)}" alt="" aria-hidden="true" decoding="async" draggable="false">` : ''}
                 <h2 class="cls2-name">${esc(story.name)}</h2>
               </div>
               <div class="cls2-chips">
@@ -159,7 +145,7 @@ export function openClassChoice(options = {}) {
         </div>
         <div class="cls2-strip">${roster.map(({ cl, c }) => `
           <button class="cls2-face${cl === sel ? ' sel' : ''}" data-act="selClass" data-cls="${escAttr(cl)}" title="${escAttr(c.name)}" aria-pressed="${cl === sel ? 'true' : 'false'}">
-            ${SDT.Art.classArt(cl, true)}${emblemSrc(c.id) ? `<img class="cls2-face-crest" src="${emblemSrc(c.id)}" alt="" aria-hidden="true" decoding="async" draggable="false">` : ''}<b>${esc(c.name)}</b>
+            ${SDT.Art.classArt(cl, true)}<b>${esc(c.name)}</b>
           </button>`).join('')}</div>
         <button class="cls2-back" data-act="cls2Quit" title="${onCancel ? '返回出发整备' : '返回标题界面'}"><svg class="svg-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.5 5.5 4 12l6.5 6.5M4.6 12H20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <button class="cls2-confirm" data-act="pickClass" ${sel ? '' : 'disabled'} title="${sel ? '出发' : '请先选择角色'}" aria-label="${sel ? '出发' : '请先选择角色'}"><span>${sel ? '出发' : '选择角色后出发'}</span><svg class="svg-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12.5 10 18 19.5 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -247,7 +233,6 @@ export function openClassChoice(options = {}) {
           <span class="pool-head-badge"><b>${pool.length}</b>CARDS</span>
         </header>
         <div class="pool-main">
-          <div class="pool-watermark" aria-hidden="true">${sel ? SDT.Art.classFullArt(sel) : ''}</div>
           <aside class="pool-side">
             <div class="pv-head">
               <span class="pv-kicker">CHARACTER ARCHIVE</span>

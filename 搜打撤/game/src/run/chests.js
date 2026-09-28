@@ -1,7 +1,7 @@
 import { sdtDefine } from '../core/sdt-facade.js';
 
 import { Random } from '../core/random.js';
-import { escAttr } from '../core/shared.js';
+import { esc, escAttr } from '../core/shared.js';
 import { turboMs } from '../agent/agent.turbo.js';
 
   const SDT = window.SDT;
@@ -247,11 +247,11 @@ import { turboMs } from '../agent/agent.turbo.js';
     globalThis.__probe?.('rs', `tok=${tok} t=${Date.now()} kind=${cur.kind}`);
     UI.showOverlay(`[[icon:archive]] 搜刮！${cur.isClass ? '职业·' : ''}${K.name} · 第 ${idx} / ${queue.length}`, `
       <p class="evt-sts-desc">${cur.isClass ? '黑色职业宝箱：只掉落<b>职业卡牌</b>' : '你俯身翻检箱子——灰尘、锈迹，还有别的东西。'}</p>
-      <div class="pick-search">
+      <button type="button" class="pick-search" data-eps-search data-act="chestReveal" title="点击立即揭晓" style="appearance:none;border:0;background:transparent;color:inherit;font:inherit;width:100%;cursor:pointer">
         <img class="chest-prop ps-chest" src="${chestArtOf(cur)}" alt="" draggable="false">
         <span class="ps-ground"><i></i></span>
-        <p class="ps-tip">正在搜索物资…</p>
-      </div>`, 'chest');
+        <span class="ps-tip">正在搜索物资…（点击立即揭晓）</span>
+      </button>`, 'chest');
     markChestTier(cur);
     // W6-01 事实更正（2026-09-27 R2）：battle.lifecycle.js:135 的三元式
     // sfx(win===true?'victory':…) 本就在战斗结束播放胜利音——评审 rg 审计按字面
@@ -260,7 +260,13 @@ import { turboMs } from '../agent/agent.turbo.js';
     SDT.Sound.sfx('pick');
     UI.refresh(G);
     const delay = turboMs(SEARCH_MS);
-    globalThis.__probe?.('rt', `tok=${tok} seq=${searchSeq} t=${Date.now()} delay=${delay}`);
+    // 体验线切片5（2026-09-28，评估#8）：搜索阶段点击立即揭晓——连开多箱的节奏死点消除；
+    // searchSeq 代次保护防串台，揭晓后浮层重绘、监听随之失效
+    UI.act('chestReveal', () => {
+      if (tok !== searchSeq || !cur) return;
+      render();
+      scheduleRevealSfx();
+    });
     setTimeout(() => {
       globalThis.__probe?.('rv', `tok=${tok} seq=${searchSeq} cur=${!!cur} t=${Date.now()} delay=${delay}`);
       if (tok !== searchSeq || !cur) return;   // 已开下一个/已收尾 → 不再揭晓
@@ -308,10 +314,19 @@ import { turboMs } from '../agent/agent.turbo.js';
         else cant++;
       });
     }
+    // 体验线切片4（2026-09-28，源自 Tarkov value-per-slot 心智模型）：满包时给出"最低价已装卡"参照，
+    // 让"值不值得为战利品让路"变成一眼对比（替换操作仍走背包/商店，这里只给判断依据）
+    const cheapestOwned = (G.ownedCards || [])
+      .filter(o => o.card && !(SDT.Base.isSha ? SDT.Base.isSha(o.card) : false))
+      .map(o => ({ name: o.card.name, price: SDT.Cards.sellPrice(o.card) }))
+      .sort((a, b) => a.price - b.price)[0];
+    const cheapHint = cheapestOwned
+      ? ` 背包最低价：「${esc(cheapestOwned.name)}」[[icon:coin]]<b>${cheapestOwned.price}</b> 币——新卡值不止这个价就值得让路`
+      : '';
     const warnLine = pickNoFit
       ? `<p class="chest-warn">[[icon:bag]] 背包已满（${G.usedSlots()}/${G.bagCap()} 格）——选中的卡收不下：按 B 打开背包腾出格子再选，或只收${cur.coins ? `${cur.coins} 币` : '卡牌散落'}离开</p>`
       : cant > 0
-      ? `<p class="chest-warn">[[icon:bag]] 背包已满（${G.usedSlots()}/${G.bagCap()} 格，珍珠盒扩格只收资源卡）——只能再收 <b>${canTake}</b> 张：可单点卡牌拾取，或按 B 打开背包把卡牌拖入安全格/存入珍珠盒腾出格子，或全部收下（放不下的 <b>${cant}</b> 张将散落）</p>`
+      ? `<p class="chest-warn">[[icon:bag]] 背包已满（${G.usedSlots()}/${G.bagCap()} 格，珍珠盒扩格只收资源卡）——只能再收 <b>${canTake}</b> 张：可单点卡牌拾取，或按 B 打开背包把卡牌拖入安全格/存入珍珠盒腾出格子，或全部收下（放不下的 <b>${cant}</b> 张将散落）。${cheapHint}</p>`
       : '';
     // W1-05（2026-09-27 R2，主代理定向解冻）：三选一补跳过出口——此前唯一离开
     // 方式=必须点选一张（强迫获取，评审 D3 实测弹层下连点路线卡零反馈）。

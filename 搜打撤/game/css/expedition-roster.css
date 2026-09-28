@@ -1,8 +1,6 @@
 /* 远征选角：人物预览优先，确认按钮只负责提交当前选择。 */
 #overlay .card.page:has(.cls2-page) { background:#07151f; border:0; }
-#overlay .cls2-page { isolation:isolate; background:
-  radial-gradient(ellipse at 68% 42%,rgba(71,117,137,.22),transparent 42%),
-  linear-gradient(180deg,#0a1b27,#06111b); color:#e6eef1; }
+#overlay .cls2-page { isolation:isolate; background:#08151f; color:#e6eef1; }
 #overlay .cls2-stage { min-height:0; }
 #overlay .cls2-fullart { width:76%; background:radial-gradient(ellipse at 62% 46%,rgba(80,137,158,.25),transparent 61%); }
 /* ── 左侧信息面板 2.0（2026-09-19 老板令重设计）：主题色注入 + 分层留白 + 数据感排版 ── */
@@ -52,16 +50,7 @@
 #overlay .cls2-face b { padding:18px 0 6px; color:#e2edf0; letter-spacing:.18em; }
 #overlay .cls2-face.sel { border-color:#e2c88e; box-shadow:0 0 20px rgba(226,200,142,.3),inset 0 0 0 1px rgba(226,200,142,.55); }
 #overlay .cls2-face:focus-visible { outline:2px solid #79c4d7; outline-offset:3px; }
-/* ── 职业徽记（LEG-6a，0926 W1）：nai-out 五枚纹章 PNG 挂信息面板 + 底部人物卡。
-   出图为白底盘面（暗盾+金边），按「珐琅徽章」制式呈现：白底入圆角铭牌+金细边+暗投影，
-   白底读作章体而非贴图露底。源件只读引用 assets/ui/emblems/。 ── */
-#overlay .cls2-nameline { display:flex; align-items:center; gap:clamp(14px,1.5vw,24px); }
-#overlay .cls2-crest { flex:0 0 auto; width:clamp(60px,5.2vw,84px); aspect-ratio:1; object-fit:cover; border-radius:22%; border:1px solid rgba(221,184,118,.55); box-shadow:0 6px 18px rgba(0,0,0,.5),0 0 0 1px rgba(6,17,27,.65),inset 0 0 10px rgba(9,22,34,.25); }
-#overlay .cls2-face-crest { position:absolute; top:5px; right:5px; z-index:2; width:27%; height:auto; aspect-ratio:1; object-fit:cover; border-radius:22%; border:1px solid rgba(221,184,118,.6); box-shadow:0 2px 7px rgba(0,0,0,.55); pointer-events:none; }
-@media (max-width:600px) {
-  #overlay .cls2-crest { width:44px; }
-  #overlay .cls2-face-crest { display:none; } /* 46px 卡上角徽小于可读下限，窄窗只留面板徽 */
-}
+#overlay .cls2-nameline { display:flex; align-items:center; }
 #overlay .cls2-confirm { right:clamp(18px,3vw,42px); bottom:22px; width:clamp(190px,19vw,280px); height:58px; gap:14px; padding:0 20px; border-radius:2px; color:#0b202c; background:linear-gradient(115deg,#f7e7bd,var(--gold-main) 58%,#c8a76b); box-shadow:0 8px 26px rgba(0,0,0,.42); } /* 09-25 P2：主确认金钮渐变统一定版配方 #f7e7bd→var(--gold-main)→#c8a76b */
 #overlay .cls2-confirm span { font-size:clamp(14px,1.25vw,18px); font-weight:800; letter-spacing:.1em; white-space:nowrap; }
 #overlay .cls2-confirm:disabled { color:#9a9d96; background:#26353b; border-color:#50636a; box-shadow:none; }
@@ -111,11 +100,7 @@
    注意：pool-card-button 上保留 lib-cardwrap 类名——card-v3.css 的卡面尺寸链依赖它。 */
 #overlay .card.page:has(.cls-pool-page) { width:100%; height:100%; max-width:none; max-height:none; border:1px solid rgba(194,212,211,.22); background:#0a1c27; box-shadow:0 28px 80px rgba(0,0,0,.5); }
 /* 批二氛围层 A（2026-09-20 老板拍板）：页面级主题色光斑 —— --cls-color 随角色渗入背景 */
-#overlay .pg.cls-pool-page { display:flex; flex-direction:column; color:#dfe9e8; background:
-  linear-gradient(90deg,rgba(134,160,166,.05) 1px,transparent 1px) 0 0/32px 32px,
-  radial-gradient(ellipse at 84% 22%, color-mix(in srgb,var(--cls-color,var(--cyan-soft)) 9%,transparent), transparent 52%),
-  linear-gradient(180deg,rgba(7,23,32,.22),rgba(7,23,32,.22)),
-  linear-gradient(125deg,#1b3645,#102431); }
+#overlay .pg.cls-pool-page { display:flex; flex-direction:column; color:#dfe9e8; background:linear-gradient(145deg,#10232e,#091720 68%); }
 #overlay .pg.cls-pool-page .pg-head { position:relative; flex:0 0 auto; align-items:center; gap:24px; padding:18px 28px 16px; border-bottom:1px solid rgba(104,128,139,.26); background:linear-gradient(180deg,#14313f,#0d2330); }
 #overlay .pg.cls-pool-page .pg-head::after { content:''; position:absolute; left:0; right:0; bottom:-1px; height:1px; background:linear-gradient(90deg,var(--cls-color,var(--cyan-soft)),rgba(216,188,134,.8) 46%,transparent 84%); opacity:.85; }
 #overlay .pg.cls-pool-page .pool-archive-title { flex:0 0 auto; }
@@ -125,11 +110,6 @@
 #overlay .pg.cls-pool-page .pg-head .pool-head-badge b { margin-right:6px; font-size:15px; color:#f0ece0; }
 
 #overlay .pg.cls-pool-page .pool-main { position:relative; flex:1; min-height:0; display:flex; align-items:stretch; gap:24px; padding:20px 28px; background:transparent; }
-/* 角色立绘水印（批二 A）：右半区垫 classFullArt 大立绘，低透明+径向 mask 融边，主题色光斑罩；
-   pool-side/pool-grid 均 relative 盖其上，水印只作氛围底 */
-#overlay .pg.cls-pool-page .pool-watermark { position:absolute; inset:0; z-index:0; display:flex; align-items:flex-end; justify-content:flex-end; overflow:hidden; pointer-events:none; }
-#overlay .pg.cls-pool-page .pool-watermark img { width:min(56%,620px); max-height:104%; object-fit:contain; object-position:right bottom; opacity:.17; filter:saturate(.8) brightness(1.05); mask-image:radial-gradient(ellipse at 72% 62%,#000 42%,transparent 74%); -webkit-mask-image:radial-gradient(ellipse at 72% 62%,#000 42%,transparent 74%); }
-#overlay .pg.cls-pool-page .pool-watermark::after { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 78% 66%, color-mix(in srgb,var(--cls-color,var(--cyan-soft)) 15%,transparent), transparent 60%); }
 #overlay .pg.cls-pool-page .pool-side { position:relative; z-index:1; flex:0 0 300px; width:300px; min-width:0; display:flex; flex-direction:column; align-self:stretch; padding:26px 22px 18px; border:1px solid rgba(104,128,139,.3); border-radius:2px; background:linear-gradient(165deg,#163847,#0d2431); box-shadow:inset 4px 0 0 color-mix(in srgb,var(--cls-color,var(--cyan-soft)),transparent 45%),0 9px 22px rgba(3,14,20,.45); overflow:hidden; }
 #overlay .pg.cls-pool-page .pool-side::before { content:none; }
 /* 批三：预览栏档案卡化——pv-head 角色小节垫顶，获取规则 pv-rule 沉底，pv-body 是选中卡预览区
@@ -221,4 +201,61 @@ body:has(#overlay .cls-pool-page) #bagBtnFloat { display:none; }
   #overlay .pg.cls-pool-page .pool-side .pv-body .hs-card.lg { font-size:19.6px; margin:0 auto; }
   #overlay .pg.cls-pool-page .pool-side .pv-row { padding:5px 10px; }
   #overlay .pg.cls-pool-page .pool-side .pv-rule { line-height:1.6; }
+}
+
+/* 2026-09-28 选角与角色卡池整理：纯色舞台让角色立绘和可选项成为视觉焦点。 */
+#overlay .cls2-stage { background:#87989d; }
+#overlay .cls2-fullart { width:72%; background:none; mix-blend-mode:multiply; }
+#overlay .cls2-fullart img.art-figure-back { display:none; }
+#overlay .cls2-fullart img.art-figure { filter:brightness(1.12); }
+#overlay .cls2-panel { width:min(46%,580px); background:linear-gradient(90deg,rgba(5,15,22,.98) 58%,rgba(5,15,22,.88) 84%,transparent); }
+#overlay .cls2-panel::after { content:none; }
+#overlay .cls2-eyebrow { display:flex; align-items:center; gap:10px; letter-spacing:.22em; }
+#overlay .cls2-eyebrow::before { content:''; width:22px; height:1px; background:var(--cls-color,var(--cyan-soft)); }
+#overlay .cls2-name { text-shadow:0 8px 28px rgba(0,0,0,.55); }
+#overlay .cls2-strip { left:clamp(130px,12vw,190px); right:clamp(300px,23vw,360px); bottom:18px; justify-content:flex-start; gap:12px; padding:0; }
+#overlay .cls2-face { position:relative; flex:0 0 clamp(76px,7vw,104px); width:clamp(76px,7vw,104px); height:clamp(108px,10vw,146px); overflow:hidden; border:1px solid rgba(157,184,193,.28); border-radius:8px; background:#10232d; box-shadow:0 8px 22px rgba(0,0,0,.3); transition:transform .18s,border-color .18s,box-shadow .18s; }
+#overlay .cls2-face:hover { transform:translateY(-4px); border-color:rgba(178,209,216,.72); }
+#overlay .cls2-face.sel { border-color:#e2c88e; box-shadow:0 0 0 2px rgba(226,200,142,.17),0 12px 28px rgba(0,0,0,.5); }
+#overlay .cls2-face img { inset:0; width:100%; height:100%; object-fit:cover; object-position:center 24%; opacity:.88; }
+#overlay .cls2-face::after { content:''; position:absolute; inset:35% 0 0; background:linear-gradient(180deg,transparent,rgba(4,13,19,.94)); pointer-events:none; }
+#overlay .cls2-face b { z-index:1; padding:0 4px 10px; color:#f1f4f2; font-size:12px; letter-spacing:.08em; text-shadow:0 2px 8px #000; }
+#overlay .card.page:has(.cls-pool-page) { border:1px solid rgba(157,184,193,.17); border-radius:14px; background:#0b1b25; box-shadow:0 28px 80px rgba(0,0,0,.55); overflow:hidden; }
+#overlay .pg.cls-pool-page .pg-head { padding:20px 30px; border-color:rgba(157,184,193,.14); background:#10232d; }
+#overlay .pg.cls-pool-page .pg-head::after { height:2px; opacity:.65; }
+#overlay .pg.cls-pool-page .pool-archive-title .section-kicker { letter-spacing:.15em; }
+#overlay .pg.cls-pool-page .pool-archive-title h2 { letter-spacing:2px; }
+#overlay .pg.cls-pool-page .pg-head .pool-head-badge { padding:7px 12px; border-radius:999px; background:rgba(255,255,255,.035); }
+#overlay .pg.cls-pool-page .pool-main { gap:20px; padding:20px 24px; }
+#overlay .pg.cls-pool-page .pool-side { flex-basis:270px; width:270px; align-self:flex-start; padding:22px 18px; border-color:rgba(157,184,193,.17); border-radius:10px; background:#10232d; box-shadow:none; }
+#overlay .pg.cls-pool-page .pool-side .pv-head { margin-bottom:14px; padding-bottom:12px; }
+#overlay .pg.cls-pool-page .pool-side .pv-name { letter-spacing:2px; }
+#overlay .pg.cls-pool-page .pool-side .pv-row { border-color:rgba(157,184,193,.14); border-radius:6px; background:rgba(4,15,22,.46); }
+#overlay .pg.cls-pool-page .pool-side .pv-rule { color:#a7bbc0; }
+#overlay .pg.cls-pool-page .pool-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); align-content:start; justify-content:stretch; gap:18px; padding:8px; overflow-y:auto; }
+#overlay .pg.cls-pool-page .pool-cell { width:100%; max-width:none; }
+#overlay .pg.cls-pool-page .pool-cell::before { opacity:.22; }
+#overlay .pg.cls-pool-page .pool-cell .pool-rarity-tag { top:8px; right:8px; padding:5px 9px; border-radius:999px; background:rgba(8,22,30,.92); letter-spacing:.12em; }
+#overlay .pg.cls-pool-page .pool-card-button { border-radius:9px; box-shadow:0 0 0 1px rgba(158,190,198,.14),0 8px 18px rgba(2,10,16,.32); overflow:hidden; }
+#overlay .pg.cls-pool-page .pool-card-button:hover,
+#overlay .pg.cls-pool-page .pool-card-button:focus-visible { border-color:color-mix(in srgb,var(--cls-color,var(--cyan-soft)),transparent 15%); transform:translateY(-3px); }
+#overlay .pg.cls-pool-page .pool-card-button.selected { border-color:#d8bc86; }
+#overlay .pg.cls-pool-page .pool-card-button .hsc-art::after { box-shadow:inset 0 0 24px rgba(7,15,21,.2); }
+#overlay .pg.cls-pool-page .cls-foot { min-height:70px; padding:12px 24px; border-color:rgba(157,184,193,.14); background:#10232d; }
+#overlay .pg.cls-pool-page .cls-foot .ov-btn,
+#overlay .pg.cls-pool-page .cls-foot .pool-pager .hs-btn { border-radius:7px; }
+
+@media (max-width:1100px) {
+  #overlay .cls2-strip { left:130px; right:270px; gap:8px; }
+  #overlay .cls2-face { flex-basis:68px; width:68px; height:94px; }
+  #overlay .pg.cls-pool-page .pool-side { flex-basis:240px; width:240px; }
+  #overlay .pg.cls-pool-page .pool-grid { grid-template-columns:repeat(4,minmax(0,1fr)); }
+}
+@media (max-width:760px) {
+  #overlay .cls2-strip { left:12px; right:112px; bottom:12px; gap:6px; }
+  #overlay .cls2-face { flex-basis:48px; width:48px; height:68px; }
+  #overlay .cls2-face b { font-size:9px; padding-bottom:5px; }
+  #overlay .pg.cls-pool-page .pool-main { gap:12px; padding:12px; }
+  #overlay .pg.cls-pool-page .pool-side { max-height:300px; }
+  #overlay .pg.cls-pool-page .pool-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
 }

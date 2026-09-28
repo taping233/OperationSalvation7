@@ -1,7 +1,7 @@
 
 import { circle, font, hash2, mixHex, rrect, shade } from './renderer.primitives.js';
 import { drawTacticalIcon } from './renderer.icons.js';
-import { NODE_INFO } from '../run/expedition.view.js';
+import { NODE_INFO } from './node-info.js';
 const SDT = window.SDT;
   const TAU = Math.PI * 2;
   const T0 = SDT.MAP.tile;   // 缩放基准单位（特效 / 棋子尺寸用）

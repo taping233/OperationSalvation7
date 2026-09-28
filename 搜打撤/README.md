@@ -2,7 +2,7 @@
 
 四层相邻节点探索与卡牌战斗结合的单机搜打撤游戏。当前包版本为 v0.60.0「冬日远征体验改造」；开发范围仅为 Vite 网页版，Godot、Unity 和桌面 EXE 冻结。
 
-近期更新、未提交改动及验证边界见 [2026-09-27 项目状态快照](docs/PROJECT-STATUS-2026-09-27.md)。快照是带时间的记录，接手时仍需核对实时工作区。
+近期更新、未提交改动及验证边界见 [2026-09-28 凌晨项目记忆](docs/PROJECT-MEMORY-2026-09-28.md)。记录是带时间的快照，接手时仍需核对实时工作区。
 
 ## 快速开始
 
@@ -40,7 +40,8 @@ npm run perf
 
 ## 文档导航
 
-- [当前项目状态快照（2026-09-27）](docs/PROJECT-STATUS-2026-09-27.md)
+- [当前项目记忆（2026-09-28 凌晨）](docs/PROJECT-MEMORY-2026-09-28.md)
+- [历史项目状态快照（2026-09-27）](docs/PROJECT-STATUS-2026-09-27.md)
 - [历史交接记录](docs/NEXT-AI-HANDOFF-2026-09-20.md)
 - [Agent 接口协议](docs/agent-protocol.md)
 - [Agent 策略迭代手册](docs/agent-iteration-playbook.md)
