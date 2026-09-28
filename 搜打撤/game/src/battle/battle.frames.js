@@ -26,6 +26,7 @@ const GEO_TUNE = 1.02;                     // 人物等高对齐静态立绘的�
 const SEQ_MS = { idle: 2900, 'atk-wind': 320, 'atk-hit': 280, hurt: 420, cast: 800 };
 const ACTIONS = Object.keys(SEQ_MS);
 const MAX_PROBE = 5;                       // 追加帧探测上限：<动作>-1 .. <动作>-5
+const LOAD_BATCH = 3;                      // 限制同时解码的纹理数，仍按候选顺序登记帧
 const POLL_MS = 200;                       // 静止期 rect 轮询间隔
 // 播放语义：atk = 起手连命中；cast / hurt 单段；idle 常驻循环
 const ACT_SEQS = {
@@ -196,6 +197,8 @@ function ensureApp() {
 
 function loadSet(role) {
   if (texSets.has(role)) return texSets.get(role);
+  const perfProbeStarted = import.meta.env.DEV && new URLSearchParams(location.search).has('perfProbe')
+    ? performance.now() : 0;
   const p = (async () => {
     const rt = await ensureApp();
     if (!rt) return null;
@@ -206,7 +209,7 @@ function loadSet(role) {
     const set = new Map();
     const boxes = new Map();
     const urls = [];
-    for (const name of candidateNames()) {
+    const loadCandidate = async name => {
       const url = assetUrl(`assets/portraits/frames/${role}/${name}.webp`);
       // 包围盒测量走独立 fetch（与 Assets.load 同 URL 命中缓存）：不依赖 Pixi 纹理内部
       // 结构拿位图，v8 的 source.resource 在部分环境下不可用，拿不到会让全部 box 为空、
@@ -220,10 +223,18 @@ function loadSet(role) {
       })().catch(() => null);
       try {
         const tex = await Assets.load(url);
-        set.set(name, tex);
-        boxes.set(name, await boxP);
-        urls.push(url);
-      } catch { /* 探测：没这帧就跳过 */ }
+        return { name, url, tex, box: await boxP };
+      } catch { return null; } // 探测：没这帧就跳过
+    };
+    const candidates = candidateNames();
+    for (let i = 0; i < candidates.length; i += LOAD_BATCH) {
+      const batch = await Promise.all(candidates.slice(i, i + LOAD_BATCH).map(loadCandidate));
+      for (const entry of batch) {
+        if (!entry) continue;
+        set.set(entry.name, entry.tex);
+        boxes.set(entry.name, entry.box);
+        urls.push(entry.url);
+      }
     }
     // 每动作的实际帧序列 = 候选名里加载成功的按序集合
     const seqs = new Map();
@@ -240,6 +251,13 @@ function loadSet(role) {
     }
     return { set, seqs, urls, boxes };
   })().catch(() => null);
+  if (perfProbeStarted) p.then(result => {
+    const ended = performance.now();
+    try { performance.measure('sdt:battle-frames-' + role, { start: perfProbeStarted, end: ended }); }
+    catch { /* 老浏览器不支持 start/end 对象时只输出控制台测量。 */ }
+    console.info('[vite-perf-frames]', JSON.stringify({ role, durationMs: +(ended - perfProbeStarted).toFixed(1),
+      frames: result?.set.size || 0, ready: !!result }));
+  });
   texSets.set(role, p);
   return p;
 }

@@ -1,29 +1,26 @@
 #!/bin/sh
 # ============================================================================
-# pre-commit —— 提交前全量测试门禁（仓库 D:\素材\代号柒，项目 搜打撤/）
+# pre-commit —— 日常快速验收；公共边界与阶段收尾仍用完整门禁
 #
 # 【为什么选 pre-commit 而不是 pre-push】
 #   1. 本次事故形态是「提交时没跑测试，红灯用例进主干」，卡在提交瞬间最直接；
 #   2. pre-commit 只检查本次暂存区，判定精确；pre-push 要还原整个推送范围
 #      （新分支 / 多提交 / 删分支等），口径复杂，且发现问题时为时已晚；
-#   3. 远端 GitHub 已有 "Full test suite" 必需状态检查（根 .github/workflows/ci.yml）
-#      作为最后一道防线，本地在提交侧补齐缺口即形成两层防护；
+#   3. 远端 CI 仍运行完整测试；本地快速门检查静态契约和邻近测试，
+#      高风险路径自动回退全量，避免普通小改每次都等待整个套件；
 #   4. 演示与日常验证不接触任何远端，风险最小。
-#   代价：命中门禁路径的提交要等约 3.5 分钟（814 用例）；未命中的提交零开销。
+#   完整门禁仍在 CI、公共架构变更和阶段收尾执行。
 #
-# 【触发口径】git diff --cached（本次提交的暂存改动）命中以下任一路径即跑全量：
-#       搜打撤/game/src/**   搜打撤/game/data/**   搜打撤/tests/**
-#   新增 / 修改 / 删除 / 改名均算命中；其余一切改动（docs、图片、css、scripts、
-#   配置等）直接放行不跑测试 —— 轻提交不被拖慢。
+# 【触发口径】默认调用 scripts/acceptance-gate.mjs，按暂存路径选择定向
+#   或全量；源码、数据、测试、工具、剧情和配置纳入，纯文档/样式/图片
+#   不运行 Vitest，仍须按改动类型做实页或素材验收。
 #
-# 【测试命令】与远端 CI 完全一致，纯本地执行、不依赖外网/代理：
-#       cwd=搜打撤 下  node node_modules/vitest/vitest.mjs run --no-file-parallelism
-#   完整输出同时写入：<git-dir>/gate-full-test.log（结束时打印具体路径）。
-#   失败时本钩子会从 vitest 输出中提取失败用例名并列出，然后以非 0 退出阻断提交。
+# 【强制全量】FORCE_FULL_TESTS=1 保留旧全量路径与 gate-full-test.log。
+#   默认快速路径会直接输出执行的检查和选择理由；失败时阻断提交。
 #
 # 【绕过口】（明知故犯才用）
 #       git commit --no-verify ...          # 标准绕过，整个钩子不执行
-#       SKIP_FULL_TESTS=1 git commit ...    # 环境变量绕过
+#       SKIP_FULL_TESTS=1 git commit ...    # 兼容旧环境变量，绕过本地门禁
 #       （cmd 下： set SKIP_FULL_TESTS=1 && git commit ...）
 #
 # 【环境】Windows + 中文路径；Git Bash / cmd 双壳均可（Git for Windows 对带
@@ -34,7 +31,7 @@
 
 # 绕过口：环境变量
 if [ -n "$SKIP_FULL_TESTS" ]; then
-  echo "[gate] SKIP_FULL_TESTS set -> full test suite SKIPPED, commit is UNVERIFIED."
+  echo "[gate] SKIP_FULL_TESTS set -> local gate SKIPPED, commit is UNVERIFIED."
   exit 0
 fi
 
@@ -42,18 +39,23 @@ fi
 TOP=$(git rev-parse --show-toplevel) || { echo "[gate] FATAL: git rev-parse failed"; exit 1; }
 cd "$TOP" || { echo "[gate] FATAL: cd $TOP failed"; exit 1; }
 
+# 普通提交先走定向门；旧全量逻辑只供明确强制时使用。
+if [ -z "$FORCE_FULL_TESTS" ]; then
+  ( cd 搜打撤 && node scripts/acceptance-gate.mjs --staged --run )
+  exit $?
+fi
+
 STAGED=$(git -c core.quotepath=false diff --cached --name-only --no-renames) \
   || { echo "[gate] FATAL: git diff --cached failed"; exit 1; }
 [ -z "$STAGED" ] && exit 0
 
-GATED=$(printf '%s\n' "$STAGED" | grep -E '^搜打撤/(game/src|game/data|tests)/' || true)
+GATED="$STAGED"
 if [ -z "$GATED" ]; then
-  echo "[gate] OK: staged changes do not touch gated paths (搜打撤/game/src|game/data|tests)."
-  echo "[gate] Full test suite skipped."
+  echo "[gate] OK: no staged changes for forced full suite."
   exit 0
 fi
 
-echo "[gate] Staged changes TOUCH gated paths -> running full test suite (~3.5 min, local, no network):"
+echo "[gate] FORCE_FULL_TESTS set -> running full suite for staged changes:"
 printf '%s\n' "$GATED" | sed 's/^/[gate]   - /'
 
 GITDIR=$(git rev-parse --absolute-git-dir) \

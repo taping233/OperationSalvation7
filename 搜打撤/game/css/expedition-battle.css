@@ -12,9 +12,16 @@
 /* 2026-09-13 留言：底部黑底压缩——压暗段下移到 85% 线，70~85% 露出战场背景 */
 /* 2026-09-13 老板口令：背景图 16:9 零余量无法滑动，改为在 67% 脚线处加一层前景地板平面
    （暖沥青调半透明、顶缘 1.2% 软过渡），人与怪踩在平面上，原路面 86% 内容透出保留 */
+#overlay .battle-stage.sts[data-boss="0"] .battle-stage-shade { position:absolute; inset:0; pointer-events:none; }
 #overlay .battle-stage.sts .battle-stage-shade { z-index:0; background:
+  radial-gradient(ellipse 35% 36% at 76% 61%,rgba(205,124,70,.3),transparent 75%),
   linear-gradient(180deg,rgba(0,0,0,0) 65.8%,rgba(52,41,32,.5) 67.3%,rgba(42,33,26,.68) 76%,rgba(30,24,19,.8) 100%),
   linear-gradient(180deg,rgba(5,10,16,.58),rgba(7,13,19,.08) 28%,rgba(5,8,13,.14) 70%,rgba(5,8,13,.34) 85%,rgba(4,7,11,.88)); }
+#overlay .battle-stage.sts[data-boss="0"] .sts-foes::before {
+  content:''; position:absolute; z-index:-1; pointer-events:none;
+  left:-5%; right:-5%; bottom:6%; height:74%;
+  background:radial-gradient(ellipse 68% 58% at 50% 76%,rgba(221,143,75,.28),rgba(93,49,33,.12) 60%,transparent 100%);
+}
 #overlay .battle-stage.sts > *:not(.battle-stage-shade):not(.sts-ambient) { position:relative; z-index:1; }   /* 09-25：排除氛围尘层（battle.css absolute + inset:0，被强改 relative 后尘点从顶部飘出裁剪区） */
 /* 2026-09-18 留言「药水栏还是不能用」根因：上行的通配 z-index:1 让 .bt-potions 与场景层
    .sts-arena 同层且 DOM 靠前——透明的场景画布把顶栏点击全部吃掉（看得见点不着）。
@@ -47,6 +54,7 @@
 /* 09-25：意图胶囊改锚名牌上缘（bottom 64px ≈ 名牌高约 50px + winter 悬挂 6px + 8px 间距）——
    原顶:-42px 挂在含整幅立绘的槽位顶，立绘不可见时胶囊悬空在半空 */
 #overlay .battle-stage.sts .sts-intent { top:auto; bottom:64px; color:#ffe8bf; border-color:rgba(231,193,117,.62); background:rgba(20,15,16,.9); box-shadow:0 0 16px rgba(196,133,86,.16); }
+#overlay .battle-stage.sts[data-boss="0"] .sts-intent { font-size:13px; font-weight:700; }
 #overlay .battle-stage.sts .sts-hp i { background:linear-gradient(90deg,#d26c68,#f0b276); }
 
 /* 2026-09-13 留言：HUD 渐变底前半全透明（85% 舞台高度≈自身 50% 处才渐深），去掉原 69% 处 border-top 细线 */
@@ -175,3 +183,7 @@
 #overlay .battle-stage[data-phase="targeting"] .sts-unit.can-target { opacity:1; z-index:8; outline:3px solid #ffe7a1; outline-offset:7px; border-radius:18px; background:radial-gradient(ellipse at center,rgba(255,221,128,.24),transparent 68%); box-shadow:0 0 0 2px rgba(69,43,13,.75),0 0 28px rgba(255,210,104,.72); }
 #overlay .battle-stage[data-phase="targeting"] .sts-unit.can-target .sts-figure { filter:drop-shadow(0 0 5px #fff) drop-shadow(0 0 18px #ffc84d) drop-shadow(0 0 32px rgba(255,153,0,.9)); }
 #overlay .battle-stage[data-phase="targeting"] .sts-unit.can-target::after { content:'可选目标'; position:absolute; left:50%; top:6px; transform:translateX(-50%); white-space:nowrap; padding:4px 10px; border:2px solid #ffe7a1; border-radius:999px; color:#2a1905; background:#ffd76f; font-size:11px; font-weight:900; letter-spacing:1px; box-shadow:0 2px 0 rgba(69,43,13,.85),0 0 18px rgba(255,205,91,.8); pointer-events:none; }
+/* 点选卡牌后舞台仍处于 player 阶段，直接依据可选目标类展示目标轮廓。 */
+#overlay .battle-stage.sts[data-boss="0"] .sts-foe.can-target .sts-figure {
+  filter:drop-shadow(0 0 6px rgba(255,241,197,.82)) drop-shadow(0 0 14px rgba(231,165,79,.5));
+}

@@ -670,6 +670,11 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
     }
     rebuildNotes();
     showTitle();          // 开机进入《代号7》标题界面
+    if (import.meta.env.DEV && new URLSearchParams(location.search).has('perfProbe')) {
+      import('./core/perf-probe.local.js')
+        .then(({ installPerfProbe }) => installPerfProbe({ SDT, game, canvas, renderScheduler }))
+        .catch(error => console.warn('[vite-perf] 探针加载失败', error));
+    }
     // 空闲预热基地壁纸（376KB webp）：老板高频进基地，首次进入时不再付解码卡帧
     const warmHubWallpaper = () => {
       const im = new Image();

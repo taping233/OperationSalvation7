@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// setup-commit-gate.mjs —— 一次性挂载「提交前全量测试门禁」（commit gate）。
+// setup-commit-gate.mjs —— 一次性挂载提交前分层验收门禁。
 //
 // 用法（Git Bash 或 cmd 均可，在仓库任意位置执行）：
 //     node 搜打撤/scripts/setup-commit-gate.mjs
@@ -32,6 +32,16 @@ const top = execFileSync('git', ['rev-parse', '--show-toplevel'], {
   cwd: here,
   encoding: 'utf8',
 }).trim();
+const gitDir = resolve(top, execFileSync('git', ['rev-parse', '--absolute-git-dir'], {
+  cwd: here, encoding: 'utf8',
+}).trim());
+const commonDir = resolve(top, execFileSync('git', ['rev-parse', '--git-common-dir'], {
+  cwd: here, encoding: 'utf8',
+}).trim());
+if (gitDir !== commonDir) {
+  console.error('[gate] FATAL: core.hooksPath is shared by worktrees; install from the primary checkout only.');
+  process.exit(1);
+}
 const hooksPathValue = hooksDir.replace(/\\/g, '/');
 if (!hooksPathValue.replace(/\\/g, '/').startsWith(top.replace(/\\/g, '/'))) {
   console.error(`[gate] FATAL: hooks dir not inside repo: ${hooksPathValue} (top=${top})`);
@@ -49,5 +59,5 @@ const readBack = execFileSync('git', ['config', '--get', 'core.hooksPath'], {
   encoding: 'utf8',
 }).trim();
 console.log(`[gate] core.hooksPath -> ${readBack}`);
-console.log('[gate] commit gate installed: pre-commit will run the full test suite');
-console.log('[gate] when staged changes touch 搜打撤/game/src, 搜打撤/game/data or 搜打撤/tests.');
+console.log('[gate] commit gate installed: pre-commit selects quick or full checks by staged paths.');
+console.log('[gate] Full suite remains available for broad changes, CI and phase closeout.');

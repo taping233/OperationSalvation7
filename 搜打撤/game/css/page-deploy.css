@@ -16,11 +16,11 @@
   --dep-press: .09s ease-out;
 }
 
-/* ── W1 页面底：换用本页远征壁纸并透出（原 .92 罩层压成死黑），纳入冷青系 ── */
+/* ── W1 页面底：整备桌地图承托卡牌选择，冷青罩层维持文字与控件对比 ── */
 #overlay #depMain {
   background:
-    linear-gradient(180deg, rgba(7, 18, 27, .56) 0%, rgba(6, 16, 25, .74) 46%, rgba(5, 14, 23, .85) 100%),
-    url('../assets/scenes/winter-expedition/outskirts.webp') center / cover no-repeat;
+    linear-gradient(180deg, rgba(7, 18, 27, .56) 0%, rgba(6, 16, 25, .74) 46%, rgba(5, 14, 23, .78) 100%),
+    url('../assets/scenes/ui-loop-0925/prep-desk.webp') center / cover no-repeat;
 }
 
 /* W1b 冷青雾光垫层（对标选档页 W1b）：给大面积暗部一点空间层次 */
@@ -135,7 +135,7 @@
 #overlay #depMain .dep-body > .hub-card > h3 .set-tip {
   margin-left: 10px; padding-left: 10px;
   border-left: 1px solid rgba(159, 183, 188, .22);
-  font-size: 10.5px; font-weight: 400; letter-spacing: .18em; color: #7e969c;
+  font-size: 11.5px; font-weight: 400; letter-spacing: .12em; color: #a5bbc0;
 }
 
 /* 容量告警提示：暗底上提亮一档，保持警示可读 */
@@ -148,7 +148,27 @@
 #overlay #depMain .dep-card:hover { transform: translateY(-3px); }
 #overlay #depMain .dep-card:not(.picked):not(.drained):hover {
   filter: brightness(1.06) drop-shadow(0 8px 12px rgba(2, 10, 16, .45));
+  box-shadow: 0 0 0 1px rgba(141, 220, 222, .72), 0 0 14px rgba(91, 188, 200, .28);
 }
+/* Magic Card 试验：只在可带卡的外缘显示跟随指针的冷青光，不盖住卡面。 */
+#overlay #depMain .dep-card:not(.picked):not(.drained)::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  z-index: 2;
+  padding: 2px;
+  border-radius: var(--radius-panel);
+  background: radial-gradient(130px circle at var(--dep-spot-x, 50%) var(--dep-spot-y, 50%),
+    rgba(159, 237, 234, 1), rgba(88, 168, 177, .6) 43%, transparent 78%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  filter: drop-shadow(0 0 5px rgba(124, 224, 226, .4));
+  opacity: 0;
+  transition: opacity var(--dep-fast);
+}
+#overlay #depMain .dep-card:not(.picked):not(.drained):hover::before { opacity: 1; }
 /* 快按慢弹：按下 .09s 缩放，松手沿 lift 过冲曲线回位 */
 #overlay #depMain .dep-card:active {
   transform: translateY(-1px) scale(.96);
@@ -188,11 +208,16 @@
 /* 空格：旧米白虚线（#b3af9f 残留）→ 冷青虚线；W2-04 再降对比——空格是留白不是格子，
    高密度虚线框属低质量细节（#51），视觉主体让给已带卡与引导行 */
 #overlay #depMain .bag-cell.empty {
+  aspect-ratio: 10 / 8;
   border-color: rgba(182, 211, 214, .12);
   background: rgba(182, 211, 214, .015);
 }
+/* 高窗让卡牌与背包按内容收束，露出整备桌；矮窗保留满高滚动空间。 */
+@media (min-width: 901px) and (min-height: 820px) {
+  #overlay #depMain .dep-body { align-items: start; }
+}
 /* W2-04：初始态引导行——「初始攻击已默认携带、可直接出发」获得应有权重 */
-#overlay #depMain .bag-lead { flex-shrink: 0; margin: 0 0 10px; color: #b6c9ce; }
+#overlay #depMain .bag-lead { flex-shrink: 0; margin: 0 0 10px; color: #b6c9ce; font-size: 12.5px; line-height: 1.55; }
 #overlay #depMain .bag-lead b { color: #e5d4ae; }
 /* 固定格（初始攻击）：暖金镇纸 */
 #overlay #depMain .bag-cell.fixed {
@@ -334,7 +359,7 @@
    ═══════════════════════════════════════════════════════════════════ */
 
 /* ── B1 卡宽变量统一：卡池 128px / 背包 96px（覆盖 winter 456/542 的 118/104） ── */
-#overlay #depMain { --dep-card-w: 128px; --dep-bag-w: 96px; }
+#overlay #depMain { --dep-card-w: clamp(128px, 9.6vw, 144px); --dep-bag-w: 96px; }
 #overlay #depMain .dep-cards {
   grid-template-columns: repeat(auto-fill, minmax(var(--dep-card-w), 1fr));
 }

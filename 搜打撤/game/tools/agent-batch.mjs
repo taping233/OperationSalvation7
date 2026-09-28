@@ -13,6 +13,9 @@ import { mkdirSync, writeFileSync, appendFileSync, readFileSync } from 'node:fs'
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { JSDOM, VirtualConsole } from 'jsdom';
+import {
+  attachRunProvenance, captureCodeState, createRunProvenance, hashWeightOverride,
+} from './agent-run-provenance.mjs';
 
 // ---------- CLI ----------
 // VITEST 演出口径（09-26 均耗时⑦）：仅 4 处消费点，全是演出时长——
@@ -307,10 +310,14 @@ const SLOW_STEP_MS = (parseFloat(argOf('slow-step', '1000')) || 1000);
 // 权重向量覆盖（09-26 架构升级）：--weights 传 evolve 产物的 JSON 文件路径，或直接传
 // 内联 JSON 对象串——读入后注入 globalThis.__SDT_AGENT_WEIGHTS（agent.weights.resolveWeights 消费）
 const WEIGHTS = argOf('weights', '');
+const WEIGHTS_SOURCE = WEIGHTS ? (WEIGHTS.trim().startsWith('{') ? 'inline' : 'file') : 'default';
+let WEIGHTS_OVERRIDE = null;
 if (WEIGHTS) {
   const raw = WEIGHTS.trim().startsWith('{') ? WEIGHTS : readFileSync(resolve(WEIGHTS), 'utf8');
-  globalThis.__SDT_AGENT_WEIGHTS = JSON.parse(raw);
+  WEIGHTS_OVERRIDE = JSON.parse(raw);
+  globalThis.__SDT_AGENT_WEIGHTS = WEIGHTS_OVERRIDE;
 }
+const WEIGHTS_SHA256 = WEIGHTS ? hashWeightOverride(WEIGHTS_OVERRIDE) : null;
 // 分相计时探针（--profile 开）：runner.step 内 settle/decide/act/tail 四段累计
 const PROFILE = argOf('profile', '0') === '1';
 if (PROFILE) globalThis.__stepProf = { settle: 0, decide: 0, act: 0, tail: 0, steps: 0, sigMs: 0, sigCalls: 0, obsMs: 0, obsCalls: 0, actLoopSigMs: 0, actLoopCalls: 0, wsSigMs: 0, wsSigCalls: 0, deferMs: 0, actChanged: 0, actDeadline: 0, actIdleExit: 0, wsResets: 0, wsIters: 0, wsOk: 0, wsWaitKeys: 0, wsTimeout: 0, wsDurMs: 0, wsBlockModal: 0, wsBlockKeys: 0 };
@@ -323,7 +330,8 @@ globalThis.__probe = (tag, msg) => { try { appendFileSync(PROBE_LOG, `[${tag}] $
 // console——桥到 probe.log 后死锁复盘不用再猜错误码。去 HTML 标签只留文本。
 // **默认关闭（--probe-ui 1 开）**：appendFileSync 同步 I/O 拖慢时序会混沌放大路径
 // 分歧（实测撤离率 46%→29% 级别的崩坏）——诊断跑批才开，正式统计跑批必须关
-if (argOf('probe-ui', '0') === '1' && window.SDT?.UI?.log) {
+const PROBE_UI = argOf('probe-ui', '0') === '1';
+if (PROBE_UI && window.SDT?.UI?.log) {
   const origLog = window.SDT.UI.log.bind(window.SDT.UI);
   window.SDT.UI.log = (html, cls) => {
     globalThis.__probe('uilog', String(html).replace(/<[^>]*>/g, '').slice(0, 200));
@@ -334,7 +342,7 @@ if (argOf('probe-ui', '0') === '1' && window.SDT?.UI?.log) {
 // 撤离 begin 读 RUN_KEY 报 INVALID_STATE（null）= 键不存在，找出谁删的/谁该写没写。
 // 劫持 Storage.prototype（实例方法赋值在 jsdom 不生效，首版实测探针零输出）
 try {
-  if (argOf('probe-ui', '0') !== '1') throw 0;   // 与 UI.log 桥同开关：正式统计跑批默认关
+  if (!PROBE_UI) throw 0;   // 与 UI.log 桥同开关：正式统计跑批默认关
   const lsProto = Object.getPrototypeOf(window.localStorage);
   const _setItem = lsProto.setItem;
   const _removeItem = lsProto.removeItem;
@@ -478,6 +486,7 @@ const runOne = async (i) => {
   return record;
 };
 
+const provenanceStart = captureCodeState(ROOT);
 for (let i = 0; i < RUNS; i++) records.push(await runOne(i));
 
 // ---------- 漂移哨兵（--selfcheck 1，09-26 老板拍板）----------
@@ -485,7 +494,8 @@ for (let i = 0; i < RUNS; i++) records.push(await runOne(i));
 // 结果层稳定、轨迹步数会漂 ±2 步。哨兵把"漂移是否有数"从人肉比对变机器自检：
 // 同 seed 复跑局1，四元组（outcome/层/行动/价值）必须全同（配对统计只消费结果层）；
 // 步数漂移只告警不失败。结果层漂移 = 配对前提受损，exit 1 拒出数据。
-if (argOf('selfcheck', '0') === '1') {
+const SELFCHECK = argOf('selfcheck', '0') === '1';
+if (SELFCHECK) {
   console.log('[selfcheck] 复跑局1（同 seed）比对确定性……');
   const orig = records[0];
   const rerun = await runOne(0);
@@ -502,6 +512,7 @@ if (argOf('selfcheck', '0') === '1') {
 }
 
 // ---------- 落盘 ----------
+const provenanceEnd = captureCodeState(ROOT);
 mkdirSync(OUT_DIR, { recursive: true });
 const jsonl = records.map(r => JSON.stringify(r)).join('\n') + '\n';
 writeFileSync(resolve(OUT_DIR, 'runs.jsonl'), jsonl, 'utf8');
@@ -519,6 +530,26 @@ summary.meta = {
   // stopReason==='timeout' 区分——evolve fitness / compare 判决都不再把它混进弃局率。
   timeoutRuns: records.filter(r => r.stopReason === 'timeout').length,
 };
+attachRunProvenance(summary, createRunProvenance({
+  startCode: provenanceStart,
+  endCode: provenanceEnd,
+  projectRoot: ROOT,
+  config: {
+    policy: POLICY,
+    mode: MODE,
+    seedBase: SEED_BASE,
+    runs: RUNS,
+    maxSteps: MAX_STEPS,
+    timeoutMs: RUN_TIMEOUT_MS,
+    slowStepMs: SLOW_STEP_MS,
+    probeUi: PROBE_UI,
+    profile: PROFILE,
+    selfcheck: SELFCHECK,
+    debugSteps: DEBUG_STEPS,
+    scdbg: SCDBG,
+  },
+  weights: { source: WEIGHTS_SOURCE, sha256: WEIGHTS_SHA256 },
+}));
 writeFileSync(resolve(OUT_DIR, 'summary.json'), JSON.stringify(summary, null, 2), 'utf8');
 if (PROFILE && globalThis.__stepProf) {
   const p = globalThis.__stepProf;

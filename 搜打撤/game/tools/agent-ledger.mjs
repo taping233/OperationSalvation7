@@ -18,6 +18,7 @@
  *   verdict    promote（上位）| discard（早停丢弃）| hold（进验收集待判）| baseline（基线登记）
  * ============================================================ */
 import { readFileSync, appendFileSync, existsSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
 
 const LEDGER = resolve(process.cwd(), 'output/agent-ledger.jsonl');
@@ -26,19 +27,64 @@ const argOf = (name, dflt = '') => {
   const i = rest.indexOf(`--${name}`);
   return i >= 0 && rest[i + 1] ? rest[i + 1] : dflt;
 };
+const hasArg = name => rest.includes(`--${name}`);
+const hashFile = path => existsSync(path)
+  ? createHash('sha256').update(readFileSync(path)).digest('hex') : null;
+const loadArtifact = dir => {
+  if (!dir) return null;
+  const summaryPath = resolve(dir, 'summary.json');
+  const runsPath = resolve(dir, 'runs.jsonl');
+  const summary = existsSync(summaryPath) ? JSON.parse(readFileSync(summaryPath, 'utf8')) : null;
+  return {
+    summary,
+    ref: {
+      dir,
+      summary: existsSync(summaryPath) ? summaryPath : null,
+      summarySha256: hashFile(summaryPath),
+      runs: existsSync(runsPath) ? runsPath : null,
+      runsSha256: hashFile(runsPath),
+    },
+  };
+};
+const loadCompare = path => {
+  if (!path) return null;
+  const abs = resolve(path);
+  if (!existsSync(abs)) throw new Error(`compare 记录不存在：${path}`);
+  const lines = readFileSync(abs, 'utf8').split(/\r?\n/);
+  const resultLine = lines.findLast(line => line.startsWith('[agent-compare-result] '));
+  return {
+    ref: { path: abs, sha256: hashFile(abs) },
+    result: resultLine ? JSON.parse(resultLine.slice('[agent-compare-result] '.length)) : null,
+  };
+};
 
 if (cmd === 'add') {
-  const summaryPath = argOf('tuning') && existsSync(resolve(argOf('tuning'), 'summary.json'))
-    ? resolve(argOf('tuning'), 'summary.json')
-    : (argOf('verify') && existsSync(resolve(argOf('verify'), 'summary.json'))
-      ? resolve(argOf('verify'), 'summary.json') : '');
-  const summary = summaryPath ? JSON.parse(readFileSync(summaryPath, 'utf8')) : null;
+  const tuning = loadArtifact(argOf('tuning'));
+  const verify = loadArtifact(argOf('verify'));
+  const split = argOf('split', 'tuning');
+  if (!['tuning', 'verify'].includes(split)) throw new Error(`split 必须为 tuning 或 verify：${split}`);
+  const selected = split === 'verify' ? verify : tuning;
+  if (hasArg('split') && selected && !selected.summary) throw new Error(`${split} 缺少 summary.json`);
+  const summary = selected?.summary ?? (hasArg('split') ? null : (tuning?.summary ?? verify?.summary ?? null));
+  const compare = loadCompare(argOf('compare'));
+  const verdict = argOf('verdict', 'hold');
+  if (!['promote', 'discard', 'hold', 'baseline'].includes(verdict)) throw new Error(`未知 verdict：${verdict}`);
+  if (verdict === 'promote') {
+    const result = compare?.result;
+    if (split !== 'verify' || !verify?.summary || !verify.ref.runsSha256 ||
+        result?.schemaVersion !== 1 || result.promotionAllowed !== true ||
+        result.provenanceStatus !== 'verified' ||
+        result.challenger?.runsSha256 !== verify.ref.runsSha256 ||
+        result.challenger?.summarySha256 !== verify.ref.summarySha256) {
+      throw new Error('晋级必须使用 V 集及已验证的 compare 记录，且 challenger 产物 hash 须匹配 --verify');
+    }
+  }
   const rec = {
     ts: new Date().toISOString(),
     exp: argOf('exp'),
     hypothesis: argOf('hypothesis'),
-    seedBase: argOf('seed-base') ? Number(argOf('seed-base')) : null,
-    split: argOf('split', 'tuning'),
+    seedBase: summary?.meta?.seedBase ?? (argOf('seed-base') ? Number(argOf('seed-base')) : null),
+    split,
     policy: summary?.meta?.policy ?? argOf('policy', 'strategic'),
     runs: summary?.meta?.runs ?? null,
     metrics: summary ? {
@@ -48,9 +94,12 @@ if (cmd === 'add') {
       avgLayer: summary.overall.avgLayer,
       avgRunMs: summary.meta.avgRunMs,
     } : null,
-    p: argOf('p') ? Number(argOf('p')) : null,
-    verdict: argOf('verdict', 'hold'),
+    p: compare?.result?.pValue ?? (argOf('p') ? Number(argOf('p')) : null),
+    verdict,
     note: argOf('note'),
+    artifacts: { tuning: tuning?.ref ?? null, verify: verify?.ref ?? null, compare: compare?.ref ?? null },
+    provenance: summary?.meta?.provenance ?? null,
+    compareResult: compare?.result ?? null,
   };
   appendFileSync(LEDGER, JSON.stringify(rec) + '\n');
   console.log(`[ledger] 已记 ${rec.exp} (${rec.split}/${rec.verdict}) → ${LEDGER}`);

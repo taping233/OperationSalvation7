@@ -21,7 +21,7 @@ describe('基地出发与选角回流回归', () => {
     expect(hub).toContain('const started = newRun(mode, picks, { skipClassChoice: true })');
     expect(hub).toContain('if (started === false) {');
     expect(hub).toContain("deployHint = '[[icon:cross]] 基地出征整备未保存，请重试；当前没有开始新局。'");
-    expect(hub.indexOf('if (started === false)')).toBeLessThan(hub.indexOf('deployPick = null;\n            return true;'));
+    expect(hub).toMatch(/if \(started === false\) \{[\s\S]*?return false;\s*\}\s*deployPick = null;\s*return true;/);
     expect(altar).toContain('if (beforeConfirm && beforeConfirm() === false) return;');
     expect(altar.indexOf('beforeConfirm() === false')).toBeLessThan(altar.indexOf('const card = SDT.Cards.randomClassCard(cl)'));
   });

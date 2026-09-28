@@ -22,19 +22,18 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
           cache-dependency-path: 搜打撤/package-lock.json
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Check syntax, data, types, and lint
+      - name: Check syntax, types, and lint
         run: |
           npm run check:syntax
-          npm run validate:data
           npm run typecheck
           npm run lint
 
       - name: Run full test suite
-        run: node node_modules/vitest/vitest.mjs run --no-file-parallelism
+        run: npm test

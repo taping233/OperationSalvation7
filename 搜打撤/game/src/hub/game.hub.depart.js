@@ -267,6 +267,15 @@ import { turboMs } from '../agent/agent.turbo.js';
     const pool = document.getElementById('depPool');
     const bag = document.getElementById('depBag');
     if (pool && bag) {
+      if (!window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches) {
+        pool.addEventListener('pointermove', (e) => {
+          const card = e.target.closest?.('.dep-card:not(.picked):not(.drained)');
+          if (!card || !pool.contains(card)) return;
+          const rect = card.getBoundingClientRect();
+          card.style.setProperty('--dep-spot-x', `${e.clientX - rect.left}px`);
+          card.style.setProperty('--dep-spot-y', `${e.clientY - rect.top}px`);
+        });
+      }
       const activateOnKey = (e) => {
         const target = e.target.closest?.('[role="button"][data-act]');
         if (!target || (e.key !== 'Enter' && e.key !== ' ')) return;

@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { parse } from 'acorn';
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const sourceRoots = ['game/src', 'scripts'];
+const sourceRoots = ['game/src', 'game/tools', 'scripts'];
 const sourceExtensions = new Set(['.js', '.mjs', '.cjs']);
 const skippedDirectories = new Set([
   'node_modules', 'generated', 'vendor', 'vendors', 'third_party', 'third-party',

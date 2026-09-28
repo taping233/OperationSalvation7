@@ -22,7 +22,7 @@
 - `configureGameRuntime()`：由启动模块注入界面跳转，避免 `game.session` 反向依赖页面模块。
 - `game.session.browser.js`：只由 `game.boot.js` 调用 `createGameCanvas(document)`；canvas、ctx 和日志端口注入 session kernel。kernel 可在无 DOM 的 Node 环境导入，尚保留 MAP/FX 的兼容门面依赖。
 - `configureCardNavigation()`：由基地模块注入卡牌页面关闭与刷新行为。
-- `RenderScheduler`：统一控制活动 60 FPS、空闲 30 FPS和遮罩暂停。
+- `RenderScheduler`：活动状态目标 120 FPS；静态地图仅在状态失效或活动切换时绘制，主循环保留约 4 Hz 状态巡检；全屏遮罩暂停地图绘制。目标值不等于当前设备上的实测交付帧率。
 
 ## 功能分工
 

@@ -37,6 +37,8 @@
     radial-gradient(1100px 300px at 50% -80px, rgba(217, 187, 130, .10), transparent 70%),
     radial-gradient(ellipse 120% 92% at 50% 26%, #23404f 0%, #1b3644 36%, #122836 66%, #0b1a25 100%);
 }
+/* 游戏整体缩放到 85% 时，设置列仍需留足实际阅读与操作宽度。 */
+#overlay .pg.settings-page:not(.sugin-page) .settings { max-width: 1020px; }
 
 /* S1b 四角暗角：视线收向中央设置列（对标选档页 W1c；pointer-events none 不挡交互） */
 .pg.settings-page::after {
@@ -98,7 +100,7 @@
 .pg.settings-page .set-h {
   position: relative; gap: 10px;
   margin: 34px 0 12px; padding: 0 0 10px;
-  font-size: 14.5px; letter-spacing: 3.5px; color: #f0e7d0;
+  font-size: 16px; letter-spacing: 2.8px; color: #f0e7d0;
   border-bottom: 1px solid rgba(217, 187, 130, .14);
   text-shadow: 0 0 14px rgba(8, 22, 32, .8), 0 0 3px rgba(217, 187, 130, .16);
 }
@@ -114,7 +116,7 @@
 }
 .pg.settings-page .set-h:first-child { margin-top: 10px; }
 .pg.settings-page .set-h .ic { filter: brightness(1.08) drop-shadow(0 0 3px rgba(217, 187, 130, .2)); }
-.pg.settings-page .set-h .set-en { margin-left: auto; font-size: 10px; color: #7e97a0; letter-spacing: 2.4px; }
+.pg.settings-page .set-h .set-en { margin-left: auto; font-size: 11.5px; color: #a5bbc0; letter-spacing: 1.6px; }
 
 /* 危险区分组转暖红警示（仅主设置页的最后一个分组） */
 .pg.settings-page:not(.sugin-page) .set-h:last-of-type { color: #e9b4a6; text-shadow: 0 0 14px rgba(20, 10, 8, .6); }
@@ -130,7 +132,8 @@
 
 .pg.settings-page .chk {
   position: relative;
-  font-size: 14px; padding: 10px 14px 10px 16px; border-radius: 2px;
+  font-size: 16px; line-height: 1.4; min-height: 52px; box-sizing: border-box;
+  padding: 12px 16px; border-radius: 2px;
   background: rgba(25, 52, 65, .38);
   border: 1px solid rgba(72, 102, 116, .28);
   margin-bottom: 6px;
@@ -156,7 +159,7 @@
   content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
   background: linear-gradient(180deg, transparent, rgba(217, 187, 130, .55), transparent);
 }
-.pg.settings-page .chk .set-en { margin-left: auto; padding-left: 12px; font-size: 10px; color: #7e97a0; letter-spacing: 1.8px; }
+.pg.settings-page .chk .set-en { margin-left: auto; padding-left: 12px; font-size: 11.5px; color: #a5bbc0; letter-spacing: 1.2px; }
 
 /* 包 span 的行（音乐来源/音量）：EN 右缘对齐与其他行一致 */
 .pg.settings-page .chk > span:first-child { flex: 1; display: flex; align-items: center; gap: 6px; min-width: 0; }
@@ -186,7 +189,7 @@
   box-shadow: inset 0 1px 0 rgba(255, 231, 184, .5), 0 0 8px rgba(217, 187, 130, .25);
 }
 .pg.settings-page .chk input[type="checkbox"]:active { transform: scale(.9); transition-duration: .08s; }
-.pg.settings-page input[type="range"] { accent-color: var(--gold-main); cursor: pointer; }
+.pg.settings-page input[type="range"] { accent-color: var(--gold-main); cursor: pointer; min-height: 28px; }
 .pg.settings-page input[type="range"]:hover,
 .pg.settings-page input[type="range"]:active {
   filter: brightness(1.12) drop-shadow(0 0 4px rgba(217, 187, 130, .3));
@@ -228,7 +231,7 @@
 .pg.settings-page select option:checked { color: var(--gold-main); }
 
 /* S5d 说明文字：冷青灰小字 */
-.pg.settings-page .hint { color: #7e97a0; font-size: 12px; line-height: 1.9; margin: 12px 2px 4px; }
+.pg.settings-page .hint { color: #a5bbc0; font-size: 13.5px; line-height: 1.7; margin: 12px 2px 4px; }
 .pg.settings-page .ov-empty { color: #8fa5ad; }
 
 /* ═════════ S6 按钮体系：hover 金边上浮 / 按压快按慢弹 / 危险暖红 ═════════ */

@@ -26,7 +26,9 @@ const pixi = vi.hoisted(() => {
       this.position = { set() {} };
     }
   }
-  return { unloaded, loaded, sprites, idleTexture, extraTexture, emptyTexture, Application, Sprite, unloadGate: null, finishUnload: null, idleEnabled: true };
+  return { unloaded, loaded, sprites, idleTexture, extraTexture, emptyTexture, Application, Sprite,
+    unloadGate: null, finishUnload: null, loadGate: null, finishLoad: null,
+    idleEnabled: true, loadDelayMs: 0, inFlight: 0, maxInFlight: 0 };
 });
 
 vi.mock('pixi.js', () => ({
@@ -36,9 +38,15 @@ vi.mock('pixi.js', () => ({
   Assets: {
     load: async url => {
       pixi.loaded.push(url);
-      if (url.includes('/idle.webp') && pixi.idleEnabled) return pixi.idleTexture;
-      if (url.includes('/atk-wind.webp')) return pixi.extraTexture;
-      throw new Error('missing test frame');
+      pixi.inFlight += 1;
+      pixi.maxInFlight = Math.max(pixi.maxInFlight, pixi.inFlight);
+      try {
+        if (pixi.loadGate) await pixi.loadGate;
+        if (pixi.loadDelayMs) await new Promise(resolve => setTimeout(resolve, pixi.loadDelayMs));
+        if (url.includes('/idle.webp') && pixi.idleEnabled) return pixi.idleTexture;
+        if (url.includes('/atk-wind.webp')) return pixi.extraTexture;
+        throw new Error('missing test frame');
+      } finally { pixi.inFlight -= 1; }
     },
     unload: async url => {
       pixi.unloaded.push(url);
@@ -55,7 +63,12 @@ describe('battle frame lifecycle', () => {
     pixi.loaded.length = 0;
     pixi.unloadGate = null;
     pixi.finishUnload = null;
+    pixi.loadGate = null;
+    pixi.finishLoad = null;
     pixi.idleEnabled = true;
+    pixi.loadDelayMs = 0;
+    pixi.inFlight = 0;
+    pixi.maxInFlight = 0;
     document.body.innerHTML = '<div id="overlay"><div id="ovBody"><div class="battle-stage sts"><div id="btSelf"><div class="sts-figure"><img /></div></div></div></div><div id="unitFrames"></div></div>';
     document.querySelector('#btSelf img').setAttribute('src', '/assets/portraits/battle/changwuyu.webp');
   });
@@ -114,6 +127,37 @@ describe('battle frame lifecycle', () => {
     hide();
     expect(sprite.texture).toBe(pixi.emptyTexture);
     expect(cacheStats()).toEqual({ roles: 0, roleNames: [] });
+  });
+
+  it('bounds simultaneous frame loads while preserving a usable idle frame', async () => {
+    hide();
+    pixi.loadDelayMs = 1;
+    const body = document.getElementById('ovBody');
+    await attach(body);
+    expect(pixi.maxInFlight).toBeGreaterThan(1);
+    expect(pixi.maxInFlight).toBeLessThanOrEqual(3);
+    expect(pixi.sprites.at(-1).texture).toBe(pixi.idleTexture);
+    hide();
+  });
+
+  it('waits for pending frame batches to unload before a new attach', async () => {
+    hide();
+    const body = document.getElementById('ovBody');
+    pixi.loadGate = new Promise(resolve => { pixi.finishLoad = resolve; });
+    const firstAttach = attach(body);
+    await vi.waitFor(() => expect(pixi.inFlight).toBe(3));
+    hide();
+    const secondAttach = attach(body);
+    const loadsWhileBlocked = pixi.loaded.length;
+    await Promise.resolve();
+    expect(pixi.loaded).toHaveLength(loadsWhileBlocked);
+    pixi.finishLoad();
+    pixi.loadGate = null;
+    await firstAttach;
+    await secondAttach;
+    expect(pixi.unloaded).toContainEqual(expect.stringContaining('/changwuyu/idle.webp'));
+    expect(pixi.sprites.at(-1).texture).toBe(pixi.idleTexture);
+    hide();
   });
 
   // —— 首进场不闪（a59e2ff 回归钉，老板 09-20 实机「首次进场闪一下」）——

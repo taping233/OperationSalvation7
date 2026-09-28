@@ -302,6 +302,28 @@
 #overlay #hubMain.hub-ach .coll-group-head b { color: #eee8d8; }
 #overlay #hubMain.hub-ach .coll-group-head .dim { color: #86a0a6; letter-spacing: .03em; }
 
+/* 五份人物档案各有身份与真实收藏计数，空槽仍只表示未知卡牌。 */
+#overlay #hubMain.hub-ach .coll-room .coll-group {
+  margin-top: 18px; padding: 14px 16px 18px;
+  border: 1px solid rgba(159, 183, 188, .18); border-left: 3px solid var(--role-accent, #d9bb82);
+  background: linear-gradient(180deg, rgba(15, 35, 47, .88), rgba(8, 22, 32, .9));
+}
+#overlay #hubMain.hub-ach .coll-room .coll-group-head {
+  display: grid; grid-template-columns: minmax(110px, auto) minmax(0, 1fr) auto;
+  align-items: center; gap: 16px; margin: 0 0 12px; padding-bottom: 11px;
+  border-bottom: 1px solid rgba(159, 183, 188, .2);
+}
+#overlay #hubMain.hub-ach .coll-room .coll-group-identity { display: flex; align-items: baseline; gap: 10px; }
+#overlay #hubMain.hub-ach .coll-room .coll-group-identity b { font-size: 21px; letter-spacing: 2px; }
+#overlay #hubMain.hub-ach .coll-room .coll-group-identity b::before { background: var(--role-accent, #d9bb82); }
+#overlay #hubMain.hub-ach .coll-room .coll-group-identity small { color: var(--role-accent, #d9bb82); font-size: 12px; }
+#overlay #hubMain.hub-ach .coll-room .coll-group-head .dim { color: #b2c4c8; font-size: 13px; line-height: 1.5; }
+#overlay #hubMain.hub-ach .coll-room .coll-group-count {
+  color: #f1e6c9; font-size: 22px; line-height: 1; font-variant-numeric: tabular-nums;
+}
+#overlay #hubMain.hub-ach .coll-room .coll-group-count small { color: #a7bdc1; font-size: 12px; font-weight: 500; }
+#overlay #hubMain.hub-ach .coll-room .coll-slot.off { width: 70px; height: 96px; }
+
 /* W6d 已收藏格：hover 金线点亮 + 金晕（卡牌本体不动；位移/按压沿用 page-hub W5c） */
 #overlay #hubMain.hub-ach .coll-slot.on {
   transition: transform var(--ach-lift), border-color var(--ach-lift), box-shadow var(--ach-lift);
@@ -329,6 +351,20 @@
 }
 #overlay #hubMain.hub-ach .back-card.on b { color: #f0e6cf; }
 #overlay #hubMain.hub-ach .back-card:active:not(.locked) { transform: translateY(0) scale(.98); transition-duration: .08s; }
+
+/* 卡背本体优先：宽窗四枚一排，第二排自然居中，不改变解锁与装备语义。 */
+@media (min-width: 1101px) {
+  #overlay #hubMain.hub-ach .collection-panel .back-grid {
+    width: 100%; max-width: 1000px; margin-inline: auto;
+    justify-content: center; gap: 18px;
+  }
+  #overlay #hubMain.hub-ach .collection-panel .back-card {
+    flex: 0 0 220px; width: 220px; min-height: 260px; padding: 16px 14px; gap: 9px;
+  }
+  #overlay #hubMain.hub-ach .collection-panel .back-thumb { width: 100px; height: 140px; }
+  #overlay #hubMain.hub-ach .collection-panel .back-card b { font-size: 15.5px; }
+  #overlay #hubMain.hub-ach .collection-panel .back-card .dim { font-size: 12px; line-height: 1.45; }
+}
 
 /* ═════════ T2 焦点态：键盘导航金线焦点环（与 page-hub.css T2 同语言，
    双保险写死在本作用域内） ═════════ */

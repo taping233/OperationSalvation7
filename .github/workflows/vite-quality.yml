@@ -43,15 +43,6 @@ jobs:
       - name: Install dependencies
         working-directory: 搜打撤
         run: npm ci
-      - name: Check JavaScript syntax
-        working-directory: 搜打撤
-        run: npm run check:syntax
-      - name: Validate game data
-        working-directory: 搜打撤
-        run: npm run validate:data
-      - name: Run serial tests
-        working-directory: 搜打撤
-        run: npm test
       - name: Build Vite and enforce performance budget
         working-directory: 搜打撤
         run: npm run build

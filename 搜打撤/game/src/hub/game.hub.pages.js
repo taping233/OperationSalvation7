@@ -541,13 +541,17 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
     const groups = SDT.Cards.CLASSES.map(cls => {
       const pool = M.collectPool().filter(c => c.cls === cls);
       const gotN = pool.filter(c => B.isCollected(c)).length;
+      const accent = characterFor(cls)?.color || '#d9bb82';
       const slots = pool.map(c => B.isCollected(c)
         ? `<button class="coll-slot on" data-act="collZoom" data-id="${escAttr(c.id)}"
              title="${escAttr(c.name)} · 已收藏 · 点击查看">${SDT.Cards.cardHTML(c, 'sm')}</button>`
         : '<div class="coll-slot off" title="尚未收藏"><span>？</span></div>').join('');
-      return `<div class="coll-group">
-        <div class="coll-group-head"><b>${esc(characterName(cls))}</b>
-          <span class="dim">${gotN} / ${pool.length} 张 · 收藏职业卡 +10 经验 · 能力卡 +50 经验</span></div>
+      return `<div class="coll-group" style="--role-accent:${escAttr(accent)}">
+        <div class="coll-group-head">
+          <span class="coll-group-identity"><b>${esc(characterName(cls))}</b><small>${esc(cls)}</small></span>
+          <span class="dim">收藏职业卡 +10 经验 · 能力卡 +50 经验</span>
+          <strong class="coll-group-count">${gotN}<small> / ${pool.length} 张</small></strong>
+        </div>
         <div class="coll-cards">${slots}</div>
       </div>`;
     }).join('');

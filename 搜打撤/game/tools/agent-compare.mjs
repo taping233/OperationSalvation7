@@ -16,6 +16,9 @@
  *   其余 → 不显著，丢弃假设（早停，省算力）
  * ============================================================ */
 import { readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { dirname, resolve } from 'node:path';
+import { inspectComparisonProvenance } from './agent-compare-provenance.mjs';
 
 const [challengerPath, championPath] = process.argv.slice(2);
 if (!challengerPath || !championPath) {
@@ -26,6 +29,16 @@ if (!challengerPath || !championPath) {
 const load = (p) => readFileSync(p, 'utf8').split('\n').filter(Boolean).map((l) => JSON.parse(l));
 const challenger = load(challengerPath);
 const champion = load(championPath);
+const loadSummary = runsPath => {
+  try { return JSON.parse(readFileSync(resolve(dirname(runsPath), 'summary.json'), 'utf8')); }
+  catch { return null; }
+};
+const sha256File = filePath => {
+  try { return createHash('sha256').update(readFileSync(filePath)).digest('hex'); }
+  catch { return null; }
+};
+const challengerSummary = loadSummary(challengerPath);
+const championSummary = loadSummary(championPath);
 
 // ---------- 对齐校验（09-26 补）：配对前提靠人肉纪律是隐患，这里把违规变显式警告 ----------
 // seed 重复会静默吃样本（Map 取后一条）；两侧 runs 数不等会悄悄缩小有效 n——都该让人看见
@@ -54,6 +67,12 @@ if (!pairs.length) {
 }
 const pairRate = (pairs.length / Math.min(challenger.length, champion.length)) * 100;
 if (pairRate < 100) console.error(`⚠ 配对率 ${pairRate.toFixed(1)}%（${pairs.length}/${Math.min(challenger.length, champion.length)}）——有局没配上，先查两侧 --seed-base/--runs 是否一致`);
+const provenance = inspectComparisonProvenance({ challengerSummary, championSummary,
+  challengerRuns: challenger, championRuns: champion });
+console.log(`实验证据：${provenance.status === 'verified' ? '已验证' : provenance.status === 'legacy' ? '历史未验证' : '校验失败'}`);
+console.log(`策略：challenger ${provenance.sides.challenger.policy} / ${provenance.sides.challenger.driver} / weights ${provenance.sides.challenger.weightsSha256}`);
+console.log(`策略：champion   ${provenance.sides.champion.policy} / ${provenance.sides.champion.driver} / weights ${provenance.sides.champion.weightsSha256}`);
+for (const reason of provenance.reasons) console.log(`证据门：${reason}`);
 
 // 局面价值标量：撤离/通关 > 死得深 > 死得浅 > 弃局 > 超时（超时=卡死故障，09-26 起严格垫底）
 const VALUE = { clear: 4, extract: 3, death: 2, abandon: 0 };
@@ -135,9 +154,51 @@ const canFlip = (() => {
 
 // 方法论判决
 console.log('');
-if (timeoutRate > 5) console.log('判决: 毙 —— 超时率 >5%（卡死/慢死螺旋故障，先查因再谈策略，09-26 硬约束）');
-else if (abandonRate > 5) console.log('判决: 毙 —— 弃局率 >5% 硬约束违规（不看 p 值）');
-else if (p < 0.05 && win > loss) console.log('判决: 通过 —— 显著更优，可挑战 champion（需过 V 验收集）');
-else if (p < 0.05 && loss > win) console.log('判决: 毙 —— 显著更劣');
-else if (canFlip) console.log(`判决: 证据不足 —— ${remainder} 局平局若全部倒向 challenger 可达显著（p 会 <0.05），可加跑再判；现样本不下结论`);
-else console.log('判决: 不显著 —— 假设丢弃（早停，不升级到验收集；加跑也无法翻盘，属终局性否定）');
+let verdict;
+let judgment;
+if (!provenance.eligible) {
+  verdict = provenance.status === 'legacy' ? 'unverified' : 'blocked';
+  judgment = `${provenance.status === 'legacy' ? '历史未验证，不可晋级' : '不可晋级'} —— ${provenance.reasons.join('；')}`;
+} else if (timeoutRate > 5) {
+  verdict = 'discard';
+  judgment = '毙 —— 超时率 >5%（卡死/慢死螺旋故障，先查因再谈策略，09-26 硬约束）';
+} else if (abandonRate > 5) {
+  verdict = 'discard';
+  judgment = '毙 —— 弃局率 >5% 硬约束违规（不看 p 值）';
+} else if (p < 0.05 && win > loss) {
+  verdict = 'promote';
+  judgment = '通过 —— 显著更优，可挑战 champion（需过 V 验收集）';
+} else if (p < 0.05 && loss > win) {
+  verdict = 'discard';
+  judgment = '毙 —— 显著更劣';
+} else if (canFlip) {
+  verdict = 'hold';
+  judgment = `证据不足 —— ${remainder} 局平局若全部倒向 challenger 可达显著（p 会 <0.05），可加跑再判；现样本不下结论`;
+} else {
+  verdict = 'discard';
+  judgment = '不显著 —— 假设丢弃（早停，不升级到验收集；加跑也无法翻盘，属终局性否定）';
+}
+console.log(`判决: ${judgment}`);
+console.log('[agent-compare-result] ' + JSON.stringify({
+  schemaVersion: 1,
+  verdict,
+  promotionAllowed: provenance.eligible && verdict === 'promote',
+  provenanceStatus: provenance.status,
+  reasons: provenance.reasons,
+  pValue: +p.toFixed(6),
+  wins: win,
+  losses: loss,
+  ties: tie,
+  pairs: pairs.length,
+  pairRate: provenance.pairRate,
+  challenger: {
+    ...provenance.sides.challenger,
+    runsSha256: sha256File(challengerPath),
+    summarySha256: sha256File(resolve(dirname(challengerPath), 'summary.json')),
+  },
+  champion: {
+    ...provenance.sides.champion,
+    runsSha256: sha256File(championPath),
+    summarySha256: sha256File(resolve(dirname(championPath), 'summary.json')),
+  },
+}));
