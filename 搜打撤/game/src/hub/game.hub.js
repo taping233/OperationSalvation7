@@ -162,20 +162,20 @@ let hubCollectionView = 'backs';
       const g = HUB_SHOP_GOODS[+d.i];
       if (!g) return;
       const B = SDT.Base;
-      if (B.data.coins < g.price) { UI.log('[[icon:coin]] 储备币不足，无法购买', 'warn'); return; }
-      B.data.coins -= g.price;
+      const card = g.material ? null : hubShopGoodsCard(g);
+      const result = B.purchase({ price: g.price, material: g.material, card });
+      if (!result.ok) {
+        UI.log(result.why === 'poor' ? '[[icon:coin]] 储备币不足，无法购买'
+          : result.why === 'full' ? '[[icon:archive]] 仓库已满，无法入库'
+            : result.msg || '商品暂不可购买', 'warn');
+        return;
+      }
       if (g.material) {
-        B.data[g.material] = (B.data[g.material] || 0) + 1;
-        B.save();
         Sfx.ding();
         UI.log(`[[icon:coin]] 购入<b>${esc(g.name)}</b> ×1 → 基地物资（${esc(g.name)} ${B.data[g.material]} · 储备余 ${B.data.coins} 币）`, 'loot');
         renderHub();
         return;
       }
-      const card = hubShopGoodsCard(g);
-      if (!card) { B.data.coins += g.price; return; }
-      if (B.stashRoom() <= 0) { B.data.coins += g.price; UI.log('[[icon:archive]] 仓库已满，无法入库', 'warn'); return; }
-      B.depositCards([{ card: { ...card }, count: 1 }]);
       Sfx.ding();
       UI.log(`[[icon:coin]] 购入【<b>${esc(card.name)}</b>】×1 → 卡牌仓库（储备余 ${B.data.coins} 币）`, 'loot');
       renderHub();
@@ -264,7 +264,7 @@ let hubCollectionView = 'backs';
         return;
       }
       if (B2.backSel() === d.id) return;
-      B2.setBack(d.id);
+      if (!B2.setBack(d.id)) return;
       const bd = (SDT.Cards.CARD_BACKS || []).find(b => b.id === d.id);
       Sfx.ding();
       UI.log(`[[icon:cards]] 已装备卡背【<b>${bd ? bd.name : d.id}</b>】——背包翻面与牌库堆即刻生效`, 'ok');

@@ -9,9 +9,11 @@
  * 服务态（命名流/快照/恢复）在 random.js；改这里=改全局随机序列，
  * 必须同步 tests/map-rng-bit-equivalence.test.js 与地图快照契约。
  * ============================================================ */
+// @ts-check
 const UINT32_RANGE = 0x100000000;
 const STEP = 0x6D2B79F5;
 
+/** @param {unknown} value @returns {number} */
 function hashSeed(value) {
   const text = String(value);
   let hash = 2166136261;
@@ -22,6 +24,7 @@ function hashSeed(value) {
   return hash >>> 0;
 }
 
+/** @param {number} state @returns {{ state: number, value: number }} */
 function nextRandom(state) {
   const s = (state + STEP) >>> 0;
   let value = s;

@@ -26,7 +26,11 @@ const RUNTIME_OWNERS = new Set(['battle/battle.core.js', ...RUNTIME_INNER]);
 const PURE_MODULES = new Set([
   'battle/battle.card-cost.js', 'battle/battle.intent.js', 'battle/battle.resolution.js',
   'battle/battle.snapshot.js', 'cards/cards.catalog.js',
+  'core/rule-config.js', 'hub/base-state.js', 'hub/base-mutation.js',
+  'hub/base-economy.js', 'battle/battle.card-inspection.js', 'battle/hosted-catalog-index.js',
 ]);
+const SESSION_KERNEL = 'run/game.session.kernel.js';
+const SESSION_BROWSER = 'run/game.session.browser.js';
 const VIEW_MODULES = new Set([
   'battle/battle.view.js', 'battle/battle.overlays.js', 'battle/battle.layers.js',
   'battle/battle.vfx.js', 'battle/battle.anim.js', 'battle/battle.aim.js',
@@ -35,12 +39,17 @@ const VIEW_MODULES = new Set([
 // 流程域（基地/局外 + 局内流程）——纯规则/快照模块不得反向依赖。
 const FLOW_PREFIXES = ['hub/', 'run/'];
 // 规则里作为“依赖目标”写死的路径，同样纳入防失效自检。
-const PROTECTED_TARGETS = new Set([...RUNTIME_SURFACE, 'core/sdt-facade.js']);
+const PROTECTED_TARGETS = new Set([...RUNTIME_SURFACE, 'core/sdt-facade.js', SESSION_KERNEL, SESSION_BROWSER]);
+// 照相馆页面是大块首屏外模块，只允许轻门面动态加载；防止新增静态边把页面拉回首屏。
+const LAZY_PAGE_ENTRIES = new Map([
+  ['hub/game.cardslib.page.js', 'hub/game.cardslib.js'],
+]);
 
 // 防再发自检：返回在真实源码树中零命中的判据键；非空即守卫腐化，守卫测试必须红。
 export function deadGuardKeys(sources) {
   const dead = [];
-  for (const key of [...RUNTIME_OWNERS, ...PURE_MODULES, ...VIEW_MODULES, ...PROTECTED_TARGETS]) {
+  for (const key of [...RUNTIME_OWNERS, ...PURE_MODULES, ...VIEW_MODULES, ...PROTECTED_TARGETS,
+    ...LAZY_PAGE_ENTRIES.keys(), ...LAZY_PAGE_ENTRIES.values()]) {
     if (!sources.has(key)) dead.push(key);
   }
   for (const prefix of FLOW_PREFIXES) {
@@ -124,7 +133,17 @@ export function assertAcyclic(graph) {
 export function architectureViolations(graph) {
   const violations = [];
   for (const [name, module] of graph) {
-    for (const { target, line } of module.dependencies) {
+    for (const { target, line, kind } of module.dependencies) {
+      const lazyEntry = LAZY_PAGE_ENTRIES.get(target);
+      if (lazyEntry && (name !== lazyEntry || kind !== 'dynamic')) {
+        violations.push(`${name}:${line}: ${target} 只能由 ${lazyEntry} 动态加载`);
+      }
+      if (target === SESSION_BROWSER && name !== 'game.boot.js') {
+        violations.push(`${name}:${line}: 会话浏览器适配器只能由启动层装配`);
+      }
+      if (name === SESSION_KERNEL && (target.startsWith('ui/') || VIEW_MODULES.has(target))) {
+        violations.push(`${name}:${line}: 会话内核不得依赖视图 ${target}`);
+      }
       if (RUNTIME_SURFACE.has(target) && !RUNTIME_OWNERS.has(name) && !RUNTIME_SURFACE.has(name)) {
         violations.push(`${name}:${line}: 战斗运行时仅允许 battle.core 与已登记的状态属地、结算适配模块访问`);
       }
@@ -140,6 +159,9 @@ export function architectureViolations(graph) {
     }
     if (PURE_MODULES.has(name) && module.browserGlobals.length) {
       violations.push(`${name}: 独立规则/快照模块不能读取全局浏览器对象 ${module.browserGlobals.join(', ')}`);
+    }
+    if (name === SESSION_KERNEL && module.browserGlobals.length) {
+      violations.push(`${name}: 会话内核必须通过注入端口访问浏览器 ${module.browserGlobals.join(', ')}`);
     }
   }
   return violations;

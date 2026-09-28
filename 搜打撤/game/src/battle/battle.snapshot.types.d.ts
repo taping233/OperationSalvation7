@@ -55,7 +55,7 @@ export type BattleCardInput = {
   name?: string;
   type?: string;
   cost?: number;
-  dmg?: number;
+  dmg?: number | null;
   dmgType?: string;
   desc?: string;
   rules?: BattleCardRules;
@@ -67,7 +67,7 @@ export type SnapshotBattleCard = {
   readonly name?: string;
   readonly type?: string;
   readonly cost?: number;
-  readonly dmg?: number;
+  readonly dmg?: number | null;
   readonly dmgType?: string;
   readonly desc?: string;
   readonly rules?: SnapshotCardRules;
@@ -106,11 +106,11 @@ export type BattleSnapshotInput = {
   drawPile: string[];
   discard: string[];
   grave: string[];
-  infusing: ({ uid: string; card: BattleCardInput; picked: Set<string>; [key: string]: unknown }) | null;
+  infusing: ({ uid: string; card?: BattleCardInput | null; picked: Set<string>; [key: string]: unknown }) | null;
   discovering: ({ options: BattleCardInput[]; [key: string]: unknown }) | null;
   handSelecting: ({ srcCard?: BattleCardInput | null; payment?: ({ card?: BattleCardInput | null; [key: string]: unknown }) | null; [key: string]: unknown }) | null;
   choosing: ({ options: unknown[]; [key: string]: unknown }) | null;
-  pendingTarget: ({ uid: string; card: BattleCardInput; [key: string]: unknown }) | null;
+  pendingTarget: ({ uid: string; card?: BattleCardInput | null; [key: string]: unknown }) | null;
   pendingHint: string | null;
   viewingGrave: boolean;
   viewingDeck: boolean;
@@ -121,18 +121,30 @@ export type BattleSnapshotInput = {
   selDeckMax: number;
   selShaN: number;
   sel: Set<string>;
-  selPool: { uid: string; card: BattleCardInput; [key: string]: unknown }[];
+  selPool: { uid: string; card?: BattleCardInput | null; [key: string]: unknown }[];
   potionBar: { uid: string; name: string; count: number; desc: string; aim: string | null; usable: boolean; why: string; [key: string]: unknown }[] | null;
-  pendingItem: ({ uid: string; card: BattleCardInput; [key: string]: unknown }) | null;
+  pendingItem: ({ uid: string; card?: BattleCardInput | null; [key: string]: unknown }) | null;
   slamPending: boolean;
   dartPending: boolean;
-  equipped: { uid: string; card: BattleCardInput; name: string; desc: string; skill: string; used: boolean; [key: string]: unknown }[];
+  equipped: { uid: string; card?: BattleCardInput | null; name: string; desc: string; skill: string; used: boolean; [key: string]: unknown }[];
 };
 
 export type SnapshotDefense = Readonly<Record<string, unknown>> & { readonly shield?: number; readonly armor?: number; readonly guard?: boolean };
 export type SnapshotStatus = Readonly<Record<string, unknown>> & { readonly dodge?: number };
-export type SnapshotAllyInput = { hp: number | null; maxHp: number | null; [key: string]: unknown };
-export type SnapshotAlly = { readonly hp: number | null; readonly maxHp: number | null; readonly [key: string]: unknown };
+export type SnapshotAllyInput = {
+  hp: number | null;
+  maxHp: number | null;
+  status?: Record<string, unknown> | null;
+  defense?: ({ [key: string]: unknown } & { shield?: number; armor?: number; guard?: boolean }) | null;
+  [key: string]: unknown;
+};
+export type SnapshotAlly = {
+  readonly hp: number | null;
+  readonly maxHp: number | null;
+  readonly status: SnapshotStatus;
+  readonly defense: SnapshotDefense | null | undefined;
+  readonly [key: string]: unknown;
+};
 export type SnapshotHandSelecting = {
   readonly srcCard?: SnapshotBattleCard | null;
   /** The payment wrapper is shallow-cloned but mutable; other nested values keep their references. Its card projection is recursively readonly. */
@@ -147,8 +159,8 @@ export type SnapshotFoe = {
   readonly protected?: boolean;
   readonly affix?: string;
   readonly status: SnapshotStatus | null;
-  readonly defense: SnapshotDefense | null;
-  readonly intent: Readonly<Record<string, unknown>> | null;
+  readonly defense: SnapshotDefense | null | undefined;
+  readonly intent: Readonly<Record<string, unknown>> | null | undefined;
   readonly [key: string]: unknown;
 };
 
@@ -171,22 +183,22 @@ export type BattleSnapshot = {
   readonly drawPile: readonly string[];
   readonly discard: readonly string[];
   readonly grave: readonly string[];
-  readonly infusing: ({ readonly uid: string; readonly card: SnapshotBattleCard | null; readonly picked: readonly string[]; readonly [key: string]: unknown }) | null;
+  readonly infusing: ({ readonly uid: string; readonly card: SnapshotBattleCard | null | undefined; readonly picked: readonly string[]; readonly [key: string]: unknown }) | null;
   readonly discovering: ({ readonly options: readonly SnapshotBattleCard[]; readonly [key: string]: unknown }) | null;
   readonly handSelecting: SnapshotHandSelecting | null;
   readonly choosing: ({ readonly options: readonly unknown[]; readonly [key: string]: unknown }) | null;
-  readonly pendingTarget: ({ readonly uid: string; readonly card: SnapshotBattleCard | null; readonly [key: string]: unknown }) | null;
+  readonly pendingTarget: ({ readonly uid: string; readonly card: SnapshotBattleCard | null | undefined; readonly [key: string]: unknown }) | null;
   readonly pendingHint: string | null;
   readonly viewingGrave: boolean;
   readonly viewingDeck: boolean;
   readonly viewingBag: boolean;
   readonly dreadShown: boolean;
-  readonly deckSelection: ({ readonly need: number; readonly max: number; readonly starterCount: number; readonly selected: readonly string[]; readonly cards: readonly { readonly uid: string; readonly card: SnapshotBattleCard; }[]; readonly boss: SnapshotFoe | null }) | null;
+  readonly deckSelection: ({ readonly need: number; readonly max: number; readonly starterCount: number; readonly selected: readonly string[]; readonly cards: readonly { readonly uid: string; readonly card: SnapshotBattleCard | null | undefined; }[]; readonly boss: SnapshotFoe | null }) | null;
   readonly potionBar: readonly { readonly uid: string; readonly name: string; readonly count: number; readonly desc: string; readonly aim: string | null; readonly usable: boolean; readonly why: string; readonly [key: string]: unknown }[] | null;
-  readonly pendingItem: ({ readonly uid: string; readonly card: SnapshotBattleCard | null; readonly [key: string]: unknown }) | null;
+  readonly pendingItem: ({ readonly uid: string; readonly card: SnapshotBattleCard | null | undefined; readonly [key: string]: unknown }) | null;
   readonly slamPending: boolean;
   readonly dartPending: boolean;
-  readonly equipped: readonly { readonly uid: string; readonly card: SnapshotBattleCard | null; readonly name: string; readonly desc: string; readonly skill: string; readonly used: boolean; readonly [key: string]: unknown }[];
+  readonly equipped: readonly { readonly uid: string; readonly card: SnapshotBattleCard | null | undefined; readonly name: string; readonly desc: string; readonly skill: string; readonly used: boolean; readonly [key: string]: unknown }[];
 };
 
 export type PreviewActionInput = {

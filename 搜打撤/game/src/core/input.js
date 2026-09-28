@@ -1,4 +1,4 @@
-import SDT, { sdtDefine } from './sdt-facade.js';
+import { sdtDefine } from './sdt-facade.js';
 /* ============================================================
  * input.js —— 动作映射层（input-systems：玩法读动作，不读裸键）
  *

@@ -8,6 +8,7 @@
 npm run dev
 npm run narrative:compile
 npm test
+npm run typecheck
 npm run build
 node game/selftest.js
 node scripts/check-version.cjs
@@ -15,14 +16,18 @@ npm run perf
 npm run assets:audit
 ```
 
+CI 在 master 的 push 和 pull request 上依次运行 `check:syntax`、`validate:data`、`typecheck`、`lint`，再运行完整 Vitest。依赖方向与按需加载边界可定向运行 `npx vitest run --no-file-parallelism tests/architecture-boundaries.test.js tests/contracts.test.js`；照相馆页面 `game.cardslib.page.js` 只允许由轻门面 `game.cardslib.js` 动态加载。
+
 桌面开发态不能直接读取 `game`：原生 `app://` 不解析 `howler` 等裸模块导入。`desktop-app` 的 `prestart` 会先运行 Vite 构建，再从 `desktop-app/game` 加载，避免入口模块失败后首页按钮全部失效。桌面启动和发布统一使用 `desktop-app/node_modules/electron` 的运行时；`prestart` / `predist` 会先检查文件与版本。
 
 ## 修改约定
 
-- 规则数值优先修改 `src/rules.js`，地图格子和卡牌数据使用各自数据文件。
+- 跨模块规则数值优先修改 `game/src/core/rule-config.js`，由 `core/rules.js` 提供兼容门面；地图格子和卡牌数据使用各自数据文件。概率和容量校验须通过 `tests/rule-config.test.js`，不得让预估和实际结算各维护一份常量。
 - 新模块必须保持单向 ESM 依赖，并在契约测试中通过循环图检查。
 - 事件叙事优先修改 `narrative/events.ink`；不要手改 `src/generated/narrative-events.js`，它会在开发、测试和构建前自动重新生成。
 - 领域逻辑不直接操作 DOM；视图不直接修改其他模块的私有状态。
+- 基地购买、拆包、领奖使用 `Base.purchase/openCardPack/grantReward`；复合命令在一个草稿中准备并只持久化一次。不要在 UI 先扣资源、再调用入库、最后忽略保存结果。
+- `npm run typecheck` 汇总五个检查项目；结算、战斗快照、基础事务与随机工具采用严格检查。它是分区覆盖，不表示全项目已开启 strict。新端口应补具体 JSDoc 和编译正反例，不能用忽略诊断代替契约。
 - 样式按页面职责放入 `css/base.css`、`cards.css`、`overlays.css`、`hub.css`、`battle.css` 或 `scenes.css`；主题覆盖文件保持在这些基础样式之后加载。
 - 存档字段或键名如需变化，先添加迁移与固定旧档测试。
 - 生成物写入已忽略目录，不提交 `dist`、`desktop-app/game`、性能输出或截图。

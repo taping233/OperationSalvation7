@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { RULE_CONFIG } from '../game/src/core/rule-config.js';
 import { isExtractNode, previewExtraction } from '../game/src/run/extraction-preview.js';
 
 // CODE-002 带出预估口径钉（2026-09-28 代码线）：口径唯一权威是
@@ -33,7 +34,7 @@ describe('extraction-preview 带出预估', () => {
     const out = previewExtraction(game, baseApi);
     expect(out.bagTotal).toBe(2);          // 初始攻击不入库，不计带出
     expect(out.pocketTotal).toBe(3);
-    expect(out.expectedKept).toBeCloseTo(1);   // 3 × 1/3
+    expect(out.expectedKept).toBeCloseTo(3 * RULE_CONFIG.extraction.pocketKeepChance);
     expect(out.coins).toBe(12);
     expect(out.layerIdx).toBe(1);
   });

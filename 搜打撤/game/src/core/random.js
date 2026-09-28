@@ -2,9 +2,6 @@ import { sdtDefine } from './sdt-facade.js';
 import { hashSeed, nextRandom } from './random-core.js';
 // hashSeed/nextRandom 的实现与口径注释在 random-core.js（零依赖件）；
 // 此处转发导出维持既有 import 面（map-rng-bit-equivalence 等测试直引本文件）。
-const UINT32_RANGE = 0x100000000;
-const STEP = 0x6D2B79F5;
-
 function normalizeSeed(seed) {
   return typeof seed === 'number' && Number.isFinite(seed) ? seed >>> 0 : hashSeed(seed);
 }

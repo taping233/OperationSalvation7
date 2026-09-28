@@ -152,7 +152,6 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
             return (rarityRank(cy.rarity) + counterScore(cy) * cw) - (rarityRank(cx.rarity) + counterScore(cx) * cw);
           });
         for (const entry of order) {
-          const card = cardOf(entry);
           if (tried.has(`d:${entry.uid}`)) continue;
           const act = acts.find(a => a.name === 'selectDeckCard' && a.args?.[0] === entry.uid);
           if (act) { tried.add(`d:${entry.uid}`); return act; }

@@ -83,10 +83,54 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     expect(title.hidden).toBe(false);
   });
 
+  it('照相馆动态载入可被快捷切页或真实 Escape 取消并恢复来源页状态', async () => {
+    const cardsLib = await import('../game/src/hub/game.cardslib.js');
+    const { game } = await import('../game/src/run/game.session.js');
+    expect(document.getElementById('overlay').hidden).toBe(true);
+
+    window.dispatchEvent(new KeyboardEvent('keydown', { key: '1', altKey: true, bubbles: true }));
+    await waitFor(() => document.getElementById('hubMain'));
+    expect(game.state).toBe('modal');
+    window.dispatchEvent(new KeyboardEvent('keydown', { key: '7', altKey: true, bubbles: true }));
+    expect(cardsLib.cardPageLoading).toBe(true);
+    window.dispatchEvent(new KeyboardEvent('keydown', { key: '2', altKey: true, bubbles: true }));
+    expect(cardsLib.cardPageLoading).toBe(false);
+    expect(cardsLib.cardPageOpen).toBe(true);
+    expect(document.getElementById('hubMain')).not.toBeNull();
+
+    window.dispatchEvent(new KeyboardEvent('keydown', { key: '7', altKey: true, bubbles: true }));
+    expect(cardsLib.cardPageLoading).toBe(true);
+    window.dispatchEvent(new KeyboardEvent('keydown', { key: '7', altKey: true, bubbles: true }));
+    expect(cardsLib.cardPageLoading).toBe(true);
+    window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+    expect(cardsLib.cardPageLoading).toBe(false);
+    expect(cardsLib.cardPageOpen).toBe(true);
+    expect(game.state).toBe('modal');
+    await new Promise(r => setTimeout(r, 30));
+    expect(document.querySelector('.card-library-page')).toBeNull();
+    document.querySelector('#hubMain [data-act="closeBase"]')?.click();
+    await waitFor(() => game.state === 'title');
+    await waitFor(() => document.getElementById('overlay').hidden);
+
+    document.getElementById('btnCardLib').click();
+    expect(cardsLib.cardPageLoading).toBe(true);
+    expect(game.state).toBe('title');
+    document.getElementById('btnCardLib').click();
+    expect(cardsLib.cardPageLoading).toBe(true);
+    window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+    expect(cardsLib.cardPageLoading).toBe(false);
+    expect(cardsLib.cardPageOpen).toBe(false);
+    expect(game.state).toBe('title');
+    await new Promise(r => setTimeout(r, 30));
+    expect(document.querySelector('.card-library-page')).toBeNull();
+    expect(document.getElementById('overlay').hidden).toBe(true);
+  });
+
   it('卡牌档案馆可打开、筛选、清空与排序', { timeout: 15_000 }, async () => {
     const originalSfx = window.SDT.Sound.sfx;
     window.SDT.Sound.sfx = () => {};
     document.getElementById('btnCardLib').click();
+    await waitFor(() => document.querySelector('.card-library-page'));
     const page = document.querySelector('.card-library-page');
     expect(page).not.toBeNull();
     expect(document.getElementById('libResultCount')).not.toBeNull();

@@ -1,4 +1,4 @@
-import SDT, { sdtDefine } from './sdt-facade.js';
+import { sdtDefine } from './sdt-facade.js';
 import { animate } from 'motion/mini';
 import '../../css/combat-feedback.css';
 

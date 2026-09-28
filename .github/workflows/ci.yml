@@ -29,5 +29,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Check syntax, data, types, and lint
+        run: |
+          npm run check:syntax
+          npm run validate:data
+          npm run typecheck
+          npm run lint
+
       - name: Run full test suite
         run: node node_modules/vitest/vitest.mjs run --no-file-parallelism

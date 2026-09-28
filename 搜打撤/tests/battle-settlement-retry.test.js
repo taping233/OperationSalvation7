@@ -61,7 +61,7 @@ beforeEach(() => {
   state.commands = {
     readReceipt: (...args) => state.readReceipt(...args),
     createAttempt: vi.fn(async input => ({ ok: true, replay: false, attempt: Object.freeze({ id: 'attempt-1', ...input }) })),
-    commitAttempt: vi.fn(async attempt => {
+    commitAttempt: vi.fn(async () => {
       const result = state.commitResponses.shift() || { ok: true, replay: false, receipt: { runRevision: 3 } };
       if (result.ok && !state.commitApplied) {
         window.SDT.Base.data.eggBattles += 1;
@@ -116,6 +116,28 @@ async function mountRealRetryOverlay() {
 }
 
 describe('战后结算事务接线与失败重试', () => {
+  it('巨兽额外传说奖励使用规则概率且只消费原有loot骰', async () => {
+    const { RULE_CONFIG } = await import('../game/src/core/rule-config.js');
+    state.random = vi.fn().mockReturnValueOnce(RULE_CONFIG.rewards.beastLegendaryChance - 0.001).mockReturnValueOnce(0);
+    const onBattleEnd = await bind();
+    await openAndFinishChest(onBattleEnd, { isBoss: false, foeNames: ['荒渊巨兽'], encounterId: 'elite:beast' });
+
+    expect(state.random).toHaveBeenNthCalledWith(1, 'loot');
+    expect(state.random).toHaveBeenNthCalledWith(2, 'loot');
+    expect(state.game.grantCard).toHaveBeenCalledTimes(1);
+  });
+
+  it('巨兽概率边界使用严格小于比较，恰等阈值时不发额外卡', async () => {
+    const { RULE_CONFIG } = await import('../game/src/core/rule-config.js');
+    state.random = vi.fn().mockReturnValue(RULE_CONFIG.rewards.beastLegendaryChance);
+    const onBattleEnd = await bind();
+    await openAndFinishChest(onBattleEnd, { isBoss: false, foeNames: ['荒渊巨兽'], encounterId: 'elite:beast' });
+
+    expect(state.random).toHaveBeenCalledTimes(1);
+    expect(state.random).toHaveBeenCalledWith('loot');
+    expect(state.game.grantCard).not.toHaveBeenCalled();
+  });
+
   it('过场失败后重试，不再次消耗已转入口袋的牌', async () => {
     const onBattleEnd = await bind();
     state.game.ownedCards.push({ uid: 'played-1', card: { id: 'played', name: '已打出的牌', rarity: '古朴' } });

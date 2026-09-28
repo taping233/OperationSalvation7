@@ -1,4 +1,5 @@
 import { clone, fail } from './commands.shared.js';
+import { RULE_CONFIG } from '../core/rule-config.js';
 
 function validStack(stack) {
   return !!stack && typeof stack === 'object' && !Array.isArray(stack) &&
@@ -56,7 +57,7 @@ function calculateBaseAndPending({ game, runId, random, baseSnapshot, baseApi, c
     const count = stack.count || 1;
     totalPocketCount += count;
     for (let i = 0; i < count; i++) {
-      if (random() < 1 / 3) stackInto(keptPocket, { card: stack.card, count: 1 });
+      if (random() < RULE_CONFIG.extraction.pocketKeepChance) stackInto(keptPocket, { card: stack.card, count: 1 });
       else lostPocketCount++;
     }
   });

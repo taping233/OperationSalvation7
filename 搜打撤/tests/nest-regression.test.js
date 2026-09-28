@@ -25,7 +25,7 @@ window.SDT.MAP = { rules: { battleEnergy: 2, battleHandMax: 99, bossDeckSize: 10
 await import('../game/src/cards/cards.js');
 await import('../game/src/ui/ui.js');            // UI.init 需要的 overlay 骨架
 await import('../game/src/hub/base.js');          // SDT.Base（boot-order 同款绑定）
-await import('../game/src/run/game.session.js');
+const { configureGameRuntime } = await import('../game/src/run/game.session.js');
 await import('../game/src/run/game.nest.js');
 const { BattleSession, configureBattleRenderer } = await import('../game/src/battle/battle.core.js');
 configureBattleRenderer(() => {});
@@ -41,6 +41,7 @@ beforeAll(() => {
   UI.refresh = () => {};
   UI.act = () => {};
   UI.log = (m) => { (window.__uiLog = window.__uiLog || []).push(String(m).replace(/\[\[[^\]]+\]\]/g, '')); };
+  configureGameRuntime({ log: (...args) => UI.log(...args) });
   C.ensureSha(); C.ensureStarters(); C.ensureTabletop(); C.ensureDmgTypes(); C.ensureEffectFields();
   const B = window.SDT.Base;
   B.data.nestUnlocked = true;

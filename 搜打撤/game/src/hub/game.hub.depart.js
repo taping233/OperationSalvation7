@@ -72,7 +72,7 @@ import { turboMs } from '../agent/agent.turbo.js';
             钥匙已集齐——特殊关卡制作中，敬请期待</span>
         </div>
         <span class="gate-state">[[icon:sparkles]]</span>
-        <span class="gate-scale" aria-hidden="true">${Array.from({ length: B.KEY_NEEDED || 10 }, (_, i) => `<i class="lit all"></i>`).join('')}</span>
+        <span class="gate-scale" aria-hidden="true">${Array.from({ length: B.KEY_NEEDED || 10 }, () => `<i class="lit all"></i>`).join('')}</span>
       </section>` : ''}
       <!-- W2-02：锁态宝藏大门横条不再渲染（原 1600 首屏外/1280 裁切）——钥匙进度收敛到右栏 05 行+顶部资源条徽章 -->`;
   }

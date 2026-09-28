@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "lib": ["ESNext", "DOM"],
+    "allowJs": true,
+    "checkJs": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "types": []
+  },
+  "files": [
+    "game/src/core/random-core.js",
+    "game/src/core/shared.js",
+    "game/src/hub/base-mutation.js",
+    "game/src/hub/base-economy.js",
+    "tests/strict-foundations-types.fixture.ts"
+  ]
+}

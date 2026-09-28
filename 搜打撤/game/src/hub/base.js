@@ -1,10 +1,12 @@
 import { sdtDefine } from '../core/sdt-facade.js';
-import { migrateCharacterProgress } from '../core/characters.js';
+import { createBaseState as def, normalizeBaseState as adopt } from './base-state.js';
 
 import { Random } from '../core/random.js';
 import { DATA } from '../core/data-loader.js';
 import { txPending } from './game.storage.js';
 import { createVersionedSlotReader } from './versioned-slot-reader.js';
+import { commitBaseMutation } from './base-mutation.js';
+import { createBaseEconomy } from './base-economy.js';
 
   const SLOT_KEY = (i) => 'sdt-base-v2-slot' + i;
   const LEGACY_KEY = 'sdt-base-v1';   // 旧版全局基地（v0.20 及之前），启动时迁移
@@ -49,116 +51,8 @@ import { createVersionedSlotReader } from './versioned-slot-reader.js';
   const isSha = (card) => !!card && (card.id === 'starter-attack' ||
     (card.id === undefined && card.name === '初始攻击'));
 
-  // 初始基地：新档案从零开始，资源全靠对局搬回与成就奖励
-  function def() {
-    return {
-      wood: 0, rations: 0,
-      keys: 0,        // 真实钥匙储备（仓库钥匙材料卡「使用」后折入；宝藏大门计数）
-      bagUp: 0, safeUp: 0,
-      stashUp: 0,     // 仓库扩建等级（每次 +3 张容量）
-      coins: 0,       // 储备币：卖出仓库物品所得（Item 18：只用于孵蛋/建设，不进局）
-      nestUnlocked: false,   // 经典生命研究所：钥匙开门（消耗 KEY_NEEDED 把真实储备）后永久通行
-      runes: [],      // 仓库符文 [{kind,name,rarity,attrs,desc}]（每块占 1 仓库格）
-      nestBagUp: 0,   // 符文背包升级次数（10 + n 格，上限 25）
-      eggPity: 0,     // 宠物蛋软保底：连续未出蛋的开箱次数（出蛋归零，2026-09-19 老板定向）
-      stash: [],      // 卡牌仓库 [{card, count}]——出发时自选携带；「初始攻击」不可入库
-      pocket: [],     // 基地消耗口袋 [{card, count}]，用钥匙复原后才回仓库
-      pets: {},       // 已拥有宠物 [宠物id] => { lv, ts }（宠物蛋孵化；初始宠物汪汪狗自动获得）
-      petSel: null,   // 当前携带的宠物 id（出发携带效果 / 安全格数量随之变化）
-      collection: {}, // 收藏图鉴 [卡牌id] => { name, rarity, ts }（[[icon:sparkles]]收藏中的物品）
-      // ---- 局外成长（v0.9 职业熟练度与成就） ----
-      selMode: 'standard',    // 上次出发的玩法（standard / elite；旧档残留的 casual 读取时回落 standard）
-      classes: {},            // [职业名] => { lv, xp }（与卡牌库职业表同源）
-      stats: {
-        nestBossKills: [], reviveKills: 0, turnMovesMax: 0, battleEquipsMax: 0,
-        extracts: 0, deaths: 0, kills: 0, actions: 0,
-        playSeconds: 0,      // 该档累计实际对局时间；旧档由默认值安全补齐
-        bossKills: [],        // 击败过的 BOSS 名
-        bestRunCoins: 0, stashTotal: 0,
-      },
-      achClaimed: {},         // [成就id] => true（已领奖）
-      // ---- 职业收藏室（2026-09-09）：收藏里程碑领奖记录 + 收藏经验结算标记 ----
-      collClaimed: {},        // [收藏里程碑id] => true（每个一次性奖励只能领一次）
-      collXp: {},             // [卡牌id] => true（收藏经验已结算，取消重藏不重复发放）
-      // ---- 卡背（v0.21）：backs 解锁表 + backSel 当前装备；默认卡背恒解锁 ----
-      backs: { classic: true },
-      backSel: 'classic',
-      // ---- 模块化基地字段（M01 v1） ----
-      // 旧收藏、职业经验与仓库仍保留在原字段；这里不复制其真源。
-      home: { owned: {}, placements: [], displays: [] },
-      appearance: { characterSkins: {}, selectedSkins: {} },
-      goals: { tracked: [], presets: {} },
-      story: { flags: {}, outcomes: {} },
-      // M01 内部提交元数据；领域模块通过 readBase/commitBase 使用，不直接修改。
-      _m01: { revision: 0, requests: {} },
-    };
-  }
-
   let slot = null;      // 当前游玩的档位（1..5）；标题界面未选档时为 null
   let data = def();
-
-  // 深合并默认值：老存档缺字段时补齐（不覆盖已有进度）
-  function mergeDef(dst, src) {
-    Object.keys(src).forEach(k => {
-      if (dst[k] === undefined) dst[k] = src[k];
-      else if (src[k] && typeof src[k] === 'object' && !Array.isArray(src[k]) &&
-               dst[k] && typeof dst[k] === 'object' && !Array.isArray(dst[k])) {
-        mergeDef(dst[k], src[k]);
-      }
-    });
-    return dst;
-  }
-
-  // 字段级类型兜底（2026-09-24 F1，口径同对局档读取的字段级默认值兜底）：
-  // JSON 合法但容器字段被写坏（字符串/数字/null/数组）时弃用原值回落默认并 console.warn
-  // 留痕，不让 adopt/peek 在严格模式下抛 TypeError 卡死选档页；缺字段（undefined）
-  // 不算损坏，仍由 mergeDef 补齐默认。
-  const isPlainObj = (v) => !!v && typeof v === 'object' && !Array.isArray(v);
-  function normalizeObjField(d, key, fallback) {
-    const v = d[key];
-    if (v === undefined || isPlainObj(v)) return;
-    console.warn(`[base] 存档字段 ${key} 类型损坏（${v === null ? 'null' : Array.isArray(v) ? 'array' : typeof v}），已回落默认值`);
-    d[key] = fallback;
-  }
-
-  // 把原始 JSON 补齐为完整基地数据（读取 / 概览共用）
-  function adopt(raw) {
-    const d = Object.assign(def(), raw, {
-      stash: Array.isArray(raw.stash) ? raw.stash : [],
-      pocket: Array.isArray(raw.pocket) ? raw.pocket : [],
-      collection: (raw.collection && typeof raw.collection === 'object') ? raw.collection : {},
-      collClaimed: (raw.collClaimed && typeof raw.collClaimed === 'object') ? raw.collClaimed : {},
-      collXp: (raw.collXp && typeof raw.collXp === 'object') ? raw.collXp : {},
-    });
-    // F1（2026-09-24）：容器字段类型兜底。stats/characters/classes/pets/home 等在
-    // peek/use/终局提交全链路被解引用或赋属性，写坏即 TypeError（JSON 语法坏已有
-    // corrupt 备份口径，这里补齐「JSON 合法但字段类型坏」的缺口：可读、可渲染、不写回）。
-    normalizeObjField(d, 'stats', def().stats);
-    normalizeObjField(d, 'characters', {});
-    normalizeObjField(d, 'classes', {});
-    normalizeObjField(d, 'pets', {});
-    normalizeObjField(d, 'home', def().home);
-    normalizeObjField(d, 'appearance', def().appearance);
-    normalizeObjField(d, 'goals', def().goals);
-    normalizeObjField(d, 'story', def().story);
-    normalizeObjField(d, 'achClaimed', {});
-    mergeDef(d, def());
-    if (!Array.isArray(d.stats.bossKills)) d.stats.bossKills = [];
-    if (!Array.isArray(d.stats.nestBossKills)) d.stats.nestBossKills = [];
-    if (typeof d.stats.reviveKills !== 'number') d.stats.reviveKills = 0;
-    if (typeof d.stats.turnMovesMax !== 'number') d.stats.turnMovesMax = 0;
-    if (typeof d.stats.battleEquipsMax !== 'number') d.stats.battleEquipsMax = 0;
-    if (!Array.isArray(d.runes)) d.runes = [];
-    if (typeof d.nestBagUp !== 'number') d.nestBagUp = 0;
-    if (typeof d.nestUnlocked !== 'boolean') d.nestUnlocked = false;
-    if (!d.backs || typeof d.backs !== 'object') d.backs = { classic: true };
-    d.backs.classic = true;   // 默认卡背永远可用
-    if (!d.backSel || !d.backs[d.backSel]) d.backSel = 'classic';
-    if (!d._m01 || typeof d._m01 !== 'object') d._m01 = { revision: 0, requests: {} };
-    if (!Number.isInteger(d._m01.revision) || d._m01.revision < 0) d._m01.revision = 0;
-    if (!d._m01.requests || typeof d._m01.requests !== 'object' || Array.isArray(d._m01.requests)) d._m01.requests = {};
-    return migrateCharacterProgress(d);
-  }
 
   // peek 指纹缓存（2026-09-08 性能，管线现居 versioned-slot-reader.js）：选档页每次打开
   // peek×5，基地档含全量卡牌/收藏数据，逐槽 JSON.parse 不便宜。raw 串指纹失配自动
@@ -225,7 +119,7 @@ import { createVersionedSlotReader } from './versioned-slot-reader.js';
   // 写失败警示去重（迭代评审 09-20 G-P1）：失败连击只提示一次，成功即复位——
   // 玩家腾出存储空间后的下一次失败会立即再报（有「已恢复」信号）
   let saveWarned = false;
-  function save() {
+  function save(candidate = data) {
     if (!slot) return true;   // 未选档不落盘（标题界面的数据只读）
     if (txPending(slot)) return false;
     // 损坏档／未来版本只允许显式 reset 覆盖，普通旧流程不得把兜底默认值写回原键。
@@ -239,12 +133,13 @@ import { createVersionedSlotReader } from './versioned-slot-reader.js';
         }
         return false;
       }
-      const revision = ((data._m01 && data._m01.revision) || 0) + 1;
-      const next = { ...data, version: BASE_VERSION,
-        _m01: { ...(data._m01 || {}), revision, requests: { ...((data._m01 && data._m01.requests) || {}) } } };
+      const revision = ((candidate._m01 && candidate._m01.revision) || 0) + 1;
+      const next = { ...candidate, version: BASE_VERSION,
+        _m01: { ...(candidate._m01 || {}), revision, requests: { ...((candidate._m01 && candidate._m01.requests) || {}) } } };
       const raw = JSON.stringify(next);
       localStorage.setItem(SLOT_KEY(slot), raw);
       writeBaseline.set(slot, raw);
+      data = candidate;
       data.version = BASE_VERSION;
       data._m01 = next._m01;
       reader.poke(slot, raw, next);
@@ -261,6 +156,13 @@ import { createVersionedSlotReader } from './versioned-slot-reader.js';
       }
       return false;
     }
+  }
+
+  // 旧同步接口保留返回口径；所有资源变更先在草稿上完成，保存失败不污染运行态。
+  function mutate(prepare, failure = false) {
+    if (!slot) return failure;
+    const result = commitBaseMutation(data, prepare, save);
+    return result.ok ? result.value : failure;
   }
 
   // 重开档位：基地回到初始状态（覆盖开新档 / 空档开新档时调用）
@@ -361,17 +263,12 @@ import { createVersionedSlotReader } from './versioned-slot-reader.js';
   // ---------- 卡背（v0.21） ----------
   const isBackUnlocked = (id) => !!(data.backs && data.backs[id]);
   function unlockBack(id) {
-    if (!data.backs) data.backs = {};
-    if (data.backs[id]) return false;
-    data.backs[id] = true;
-    save();
-    return true;
+    if (data.backs?.[id]) return false;
+    return mutate(draft => { (draft.backs ||= {})[id] = true; return true; });
   }
   function setBack(id) {
     if (!isBackUnlocked(id)) return false;
-    data.backSel = id;
-    save();
-    return true;
+    return mutate(draft => { draft.backSel = id; return true; });
   }
   // 当前装备的卡背 id（异常时回退默认）
   const backSel = () => (isBackUnlocked(data.backSel) ? data.backSel : 'classic');
@@ -398,38 +295,44 @@ import { createVersionedSlotReader } from './versioned-slot-reader.js';
   const canUpgradePet = (id) => !!data.pets[id] && petLevel(id) < PET_LEVEL_MAX &&
     data.rations >= petUpCost(id);
   const canUpgradeStash = () => stashCap() < rules().stashMax &&
-    data.wood >= rules().stashUpgradeWood;
+    data.wood >= rules().stashUpgradeWood &&
+    (stashCap() < (rules().stashRuneSlotFrom || 50) ||
+      (data.runes || []).length >= (rules().stashRuneSlotCost || 2));
 
   function upgradeBag() {
     if (!canUpgradeBag()) return false;
-    data.wood -= rules().bagUpgradeWood;
-    data.bagUp++;
-    save();
-    sfxLevelup();
-    return true;
+    const ok = mutate(draft => {
+      draft.wood -= rules().bagUpgradeWood;
+      draft.bagUp++;
+      return true;
+    });
+    if (ok) sfxLevelup();
+    return ok;
   }
 
   function upgradePet(id) {
     if (!canUpgradePet(id)) return false;
-    data.rations -= petUpCost(id);
-    data.pets[id].lv = petLevel(id) + 1;
-    save();
-    sfxLevelup();
-    return true;
+    const ok = mutate(draft => {
+      draft.rations -= petUpCost(id);
+      draft.pets[id].lv = petLevel(id) + 1;
+      return true;
+    });
+    if (ok) sfxLevelup();
+    return ok;
   }
 
   function upgradeStash() {
     if (!canUpgradeStash()) return false;
-    data.wood -= rules().stashUpgradeWood;
-    // Item 17：仓库 50 格以后，每格额外消耗 2 符文（龙巢产出）
-    if (stashCap() >= (rules().stashRuneSlotFrom || 50)) {
-      if ((data.runes || []).length < (rules().stashRuneSlotCost || 2)) return false;
-      data.runes.splice(0, rules().stashRuneSlotCost || 2);
-    }
-    data.stashUp++;
-    save();
-    sfxLevelup();
-    return true;
+    const ok = mutate(draft => {
+      draft.wood -= rules().stashUpgradeWood;
+      if (stashCap() >= (rules().stashRuneSlotFrom || 50)) {
+        draft.runes.splice(0, rules().stashRuneSlotCost || 2);
+      }
+      draft.stashUp++;
+      return true;
+    });
+    if (ok) sfxLevelup();
+    return ok;
   }
 
   // 龙巢：符文背包升级（2 符文 + 5 币升级 1 格，10 → 25）
@@ -437,28 +340,37 @@ import { createVersionedSlotReader } from './versioned-slot-reader.js';
   function canUpgradeNestBag() { return nestBagCap() < 25 && (data.runes || []).length >= 2 && data.coins >= 5; }
   function upgradeNestBag() {
     if (!canUpgradeNestBag()) return false;
-    data.runes.splice(0, 2);
-    data.coins -= 5;
-    data.nestBagUp = (data.nestBagUp || 0) + 1;
-    save();
-    sfxLevelup();
-    return true;
+    const ok = mutate(draft => {
+      draft.runes.splice(0, 2);
+      draft.coins -= 5;
+      draft.nestBagUp = (draft.nestBagUp || 0) + 1;
+      return true;
+    });
+    if (ok) sfxLevelup();
+    return ok;
   }
 
   // ---------- 运回结算 ----------
   // 物资入库：只收木材/口粮（基地升级资源），其余物资按撤离战利品计分不落库
   function deposit(items) {
-    (items || []).forEach(it => {
-      if (it.name === '木材') data.wood += it.count || 1;
-      else if (it.name === '口粮') data.rations += it.count || 1;
+    return mutate(draft => {
+      (items || []).forEach(it => {
+        if (it.name === '木材') draft.wood += it.count || 1;
+        else if (it.name === '口粮') draft.rations += it.count || 1;
+      });
+      return true;
     });
-    save();
   }
 
   // 卡牌入库（同名堆叠）。toPocket = true 时进基地消耗口袋（待钥匙复原）。
   // 「初始攻击」不进卡牌仓库；需求 #6：职业卡与初始牌不进消耗口袋（撤离回收时直接消散）。
   function depositCards(cards, toPocket) {
-    const list = toPocket ? data.pocket : data.stash;
+    return mutate(draft => { appendCards(draft, cards, toPocket); return true; });
+  }
+
+  // 只操作给定草稿，复原等复合操作不会嵌套落盘。
+  function appendCards(draft, cards, toPocket) {
+    const list = toPocket ? draft.pocket : draft.stash;
     (cards || []).forEach(c => {
       if (isSha(c.card)) return;
       if (toPocket && c.card.rarity === '职业') return;
@@ -466,7 +378,6 @@ import { createVersionedSlotReader } from './versioned-slot-reader.js';
       if (stack) stack.count += c.count || 1;
       else list.push({ card: { ...c.card }, count: c.count || 1 });
     });
-    save();
   }
 
   // ---------- 消耗口袋复原（需求 #1/#11）：在仓库中使用钥匙，按稀有度计价 ----------
@@ -485,27 +396,25 @@ import { createVersionedSlotReader } from './versioned-slot-reader.js';
     const stack = data.pocket[i];
     if (!stack) return false;
     if (isSha(stack.card)) {
-      data.pocket.splice(i, 1);   // 「初始攻击」每局自动带 5 张，无需保存
-      save();
-      return 'sha';
+      return mutate(draft => { draft.pocket.splice(i, 1); return 'sha'; });
     }
     const cost = pocketKeyCost(stack);
     if ((data.keys || 0) < cost) return { why: 'nokey', cost };
     const room = stashRoom();
     if (room < (stack.count || 1)) return 'full';
-    data.pocket.splice(i, 1);
-    data.keys -= cost;
-    depositCards([stack]);
-    return true;
+    return mutate(draft => {
+      const [restored] = draft.pocket.splice(i, 1);
+      draft.keys -= cost;
+      appendCards(draft, [restored], false);
+      return true;
+    });
   }
 
   // ---------- 宠物操作（需求 #2/#4）----------
   // 携带宠物：出发携带效果与安全格数量随之切换
   function setPet(id) {
     if (!data.pets[id]) return false;
-    data.petSel = id;
-    save();
-    return true;
+    return mutate(draft => { draft.petSel = id; return true; });
   }
   // 孵化：仓库中的 1 张宠物蛋 + 50 币 → 随机获得 1 只未拥有的宠物
   function hatchPet() {
@@ -515,14 +424,15 @@ import { createVersionedSlotReader } from './versioned-slot-reader.js';
     const unowned = PETS.filter(p => !data.pets[p.id]);
     if (!unowned.length) return { ok: false, why: 'all' };
     const pet = unowned[Math.floor(Random.random('pet') * unowned.length)];
-    const stack = data.stash[i];
-    stack.count -= 1;
-    if (stack.count <= 0) data.stash.splice(i, 1);
-    data.coins -= HATCH_COST;
-    data.pets[pet.id] = { lv: 1, ts: Date.now() };
-    if (!data.petSel) data.petSel = pet.id;
-    save();
-    return { ok: true, pet };
+    return mutate(draft => {
+      const stack = draft.stash[i];
+      stack.count -= 1;
+      if (stack.count <= 0) draft.stash.splice(i, 1);
+      draft.coins -= HATCH_COST;
+      draft.pets[pet.id] = { lv: 1, ts: Date.now() };
+      if (!draft.petSel) draft.petSel = pet.id;
+      return { ok: true, pet };
+    }, { ok: false, why: 'save' });
   }
 
   // 按名从仓库取出 n 张（出发准备页选择携带时用）；返回实际取出的张数
@@ -531,10 +441,11 @@ import { createVersionedSlotReader } from './versioned-slot-reader.js';
     if (i < 0 || n <= 0) return 0;
     const stack = data.stash[i];
     const take = Math.min(n, stack.count || 0);
-    stack.count -= take;
-    if (stack.count <= 0) data.stash.splice(i, 1);
-    save();
-    return take;
+    return mutate(draft => {
+      draft.stash[i].count -= take;
+      if (draft.stash[i].count <= 0) draft.stash.splice(i, 1);
+      return take;
+    }, 0);
   }
 
   // ---------- 仓库物品操作：卖出 / 收藏 ----------
@@ -587,14 +498,15 @@ import { createVersionedSlotReader } from './versioned-slot-reader.js';
     if (!info) return { ok: false, why: 'notmaterial' };
     const per = materialAmount(stack.card);
     const qty = all ? (stack.count || 1) : 1;
-    stack.count -= qty;
-    if (stack.count <= 0) data.stash.splice(i, 1);
     const total = per * qty;
-    if (info.kind === 'keys') data.keys = (data.keys || 0) + total;
-    else data[info.kind] += total;
-    save();
-    return { ok: true, qty, total, label: info.label,
-      msg: `[[icon:${info.icon}]] 使用【<b>${name}</b>】×${qty}，折入<b>${info.label} ×${total}</b>` };
+    return mutate(draft => {
+      draft.stash[i].count -= qty;
+      if (draft.stash[i].count <= 0) draft.stash.splice(i, 1);
+      if (info.kind === 'keys') draft.keys = (draft.keys || 0) + total;
+      else draft[info.kind] += total;
+      return { ok: true, qty, total, label: info.label,
+        msg: `[[icon:${info.icon}]] 使用【<b>${name}</b>】×${qty}，折入<b>${info.label} ×${total}</b>` };
+    }, { ok: false, why: 'save', msg: '基地存档未保存，请重新载入后重试' });
   }
 
   // 卖出仓库中某卡牌堆的 n 张（[[icon:sparkles]]收藏中的堆受保护，需先取消收藏；
@@ -607,25 +519,25 @@ import { createVersionedSlotReader } from './versioned-slot-reader.js';
     if (materialInfo(stack.card)) return { ok: false, why: 'material' };
     const price = window.SDT.Cards.sellPrice(stack.card);
     const qty = Math.min(Math.max(1, n || 1), stack.count || 1);
-    stack.count -= qty;
-    if (stack.count <= 0) data.stash.splice(i, 1);
-    data.coins += price * qty;
-    save();
-    return { ok: true, qty, coins: price * qty,
-      msg: `[[icon:coin]] 卖出【<b>${name}</b>】×${qty}，+ ${price * qty} 币（储备 ${data.coins}）` };
+    return mutate(draft => {
+      draft.stash[i].count -= qty;
+      if (draft.stash[i].count <= 0) draft.stash.splice(i, 1);
+      draft.coins += price * qty;
+      return { ok: true, qty, coins: price * qty,
+        msg: `[[icon:coin]] 卖出【<b>${name}</b>】×${qty}，+ ${price * qty} 币（储备 ${draft.coins}）` };
+    }, { ok: false, why: 'save', msg: '基地存档未保存，请重新载入后重试' });
   }
 
   // 收藏 / 取消收藏（图鉴记录 = [[icon:sparkles]]标记本身；收藏中的堆不可卖出）
   function collectToggle(card) {
     if (!card || !card.id) return false;
     if (data.collection[card.id]) {
-      delete data.collection[card.id];
-      save();
-      return false;   // 现在未收藏
+      return mutate(draft => { delete draft.collection[card.id]; return false; }, null);
     }
-    data.collection[card.id] = { name: card.name, rarity: card.rarity || '?', ts: Date.now() };
-    save();
-    return true;      // 现在已收藏
+    return mutate(draft => {
+      draft.collection[card.id] = { name: card.name, rarity: card.rarity || '?', ts: Date.now() };
+      return true;
+    }, null); // null=保存失败；false 仍只表示成功取消收藏。
   }
   const isCollected = (card) => !!card && !!card.id && !!data.collection[card.id];
 
@@ -647,6 +559,7 @@ import { createVersionedSlotReader } from './versioned-slot-reader.js';
   }, 0);
 
   sdtDefine('Base', {
+    ...createBaseEconomy({ read: () => data, mutate, appendCards, room: stashRoom }),
     SLOT_KEY, LEGACY_KEY,
     migrateLegacy, use, save, reset, peek, wipe, hasSlot,
     issue, CORRUPT_KEY, BASE_VERSION,

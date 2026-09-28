@@ -8,11 +8,43 @@
 /** @typedef {import('./battle.snapshot.types.js').BattleCardValue} BattleCardValue */
 /** @typedef {import('./battle.snapshot.types.js').SnapshotCardValue} SnapshotCardValue */
 
-const freezeObject = value => value ? Object.freeze({ ...value }) : value;
-const statusOf = value => value ? Object.freeze({ ...value.status }) : null;
+/**
+ * @template {object} T
+ * @overload
+ * @param {T} value
+ * @returns {Readonly<T>}
+ */
+/**
+ * @template {object} T
+ * @overload
+ * @param {T | null} value
+ * @returns {Readonly<T> | null}
+ */
+/**
+ * @template {object} T
+ * @overload
+ * @param {T | undefined} value
+ * @returns {Readonly<T> | undefined}
+ */
+/**
+ * @template {object} T
+ * @overload
+ * @param {T | null | undefined} value
+ * @returns {Readonly<T> | null | undefined}
+ */
+/** @param {object | null | undefined} value @returns {Readonly<object> | null | undefined} */
+function freezeObject(value) { return value ? Object.freeze({ ...value }) : value; }
+/** @param {{ status?: Record<string, unknown> | null }} value @returns {Readonly<Record<string, unknown>>} */
+const statusOf = value => Object.freeze({ ...value.status });
 
 // Card data supports recursive primitives/undefined, ordinary arrays, and plain-object enumerable own string data properties.
 // Exotic prototypes and cycles are rejected; this is not a general object-graph serializer.
+/**
+ * @overload
+ * @param {BattleCardInput} value
+ * @param {WeakSet<object>} [ancestors]
+ * @returns {SnapshotBattleCard}
+ */
 /**
  * @overload
  * @param {BattleCardInput | null | undefined} value
@@ -21,14 +53,20 @@ const statusOf = value => value ? Object.freeze({ ...value.status }) : null;
  */
 /**
  * @overload
+ * @param {BattleCardValue} value
+ * @param {WeakSet<object>} [ancestors]
+ * @returns {SnapshotCardValue}
+ */
+/**
+ * @overload
  * @param {BattleCardValue | null | undefined} value
  * @param {WeakSet<object>} [ancestors]
  * @returns {SnapshotCardValue | null | undefined}
  */
 /**
- * @param {BattleCardValue} value
+ * @param {BattleCardInput | BattleCardValue | null | undefined} value
  * @param {WeakSet<object>} [ancestors]
- * @returns {SnapshotCardValue}
+ * @returns {SnapshotBattleCard | SnapshotCardValue | null | undefined}
  */
 function cloneCardData(value, ancestors = new WeakSet()) {
   if (value === null || value === undefined || typeof value === 'string'
@@ -68,6 +106,7 @@ function cloneCardData(value, ancestors = new WeakSet()) {
 // The cache key follows the same inputs as createBattleSnapshot. Walk the values
 // instead of relying on object identity: combat units and selection sets mutate
 // in place between renders.
+/** @param {unknown} value @param {WeakSet<object>} [ancestors] @returns {string} */
 function signatureValue(value, ancestors = new WeakSet()) {
   if (value === null || typeof value !== 'object') return `${typeof value}:${JSON.stringify(String(value))}`;
   if (ancestors.has(value)) return 'circular';
@@ -76,11 +115,15 @@ function signatureValue(value, ancestors = new WeakSet()) {
   if (Array.isArray(value)) result = `array:[${value.map(item => signatureValue(item, ancestors)).join(',')}]`;
   else if (value instanceof Set) result = `set:[${[...value].map(item => signatureValue(item, ancestors)).join(',')}]`;
   else if (value instanceof Map) result = `map:[${[...value].map(([key, item]) => `${signatureValue(key, ancestors)}=${signatureValue(item, ancestors)}`).join(',')}]`;
-  else result = `object:{${Object.keys(value).sort().map(key => `${JSON.stringify(key)}=${signatureValue(value[key], ancestors)}`).join(',')}}`;
+  else {
+    const record = /** @type {Record<string, unknown>} */ (value);
+    result = `object:{${Object.keys(record).sort().map(key => `${JSON.stringify(key)}=${signatureValue(record[key], ancestors)}`).join(',')}}`;
+  }
   ancestors.delete(value);
   return result;
 }
 
+/** @param {BattleSnapshotInput} input @param {unknown} renderDependencies @returns {string} */
 function createBattleSnapshotSignature(input, renderDependencies) {
   return signatureValue([input, renderDependencies]);
 }
@@ -158,7 +201,7 @@ function createBattleSnapshot(input) {
     choosing: readonlyChoosing,
     pendingTarget: pendingTarget ? Object.freeze({ ...pendingTarget, card: cloneCardData(pendingTarget.card) }) : null,
     pendingHint, viewingGrave, viewingDeck, viewingBag, dreadShown, deckSelection,
-    potionBar: potionBar ? Object.freeze(potionBar.map(freezeObject)) : null,
+    potionBar: potionBar ? Object.freeze(potionBar.map(entry => freezeObject(entry))) : null,
     pendingItem: pendingItem ? Object.freeze({ ...pendingItem, card: cloneCardData(pendingItem.card) }) : null,
     slamPending, dartPending,
     equipped: Object.freeze(equipped.map(e => Object.freeze({ ...e, card: cloneCardData(e.card) }))),

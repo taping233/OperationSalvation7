@@ -281,13 +281,13 @@ describe('真实 Base/RunStorage 胜利结算恢复事务', () => {
     });
     const mutableNode = { ...node };
     const mutableRun = makeAfterRun(env.RunStorage);
-    let elapsedDelta = 3;
-    const pending = commands.createAttempt({ slotId, node: mutableNode, afterRun: mutableRun, elapsedDelta });
+    const mutableInput = { slotId, node: mutableNode, afterRun: mutableRun, elapsedDelta: 3 };
+    const pending = commands.createAttempt(mutableInput);
     mutableNode.trackPos = 7;
     mutableRun.visited['0,1'] = 0;
     mutableRun.ownedCards.push({ uid: 'late', card: { id: 'late', name: '迟到写入' } });
     mutableRun.rngState.loot = 900;
-    elapsedDelta = 80;
+    mutableInput.elapsedDelta = 80;
     await releaseRecovery();
     const created = await pending;
     expect(created.ok).toBe(true);

@@ -45,7 +45,7 @@ describe('角色卡池与收购台交互契约', () => {
 });
 
 describe('照相馆陈列交互', () => {
-  const library = src('game/src/hub/game.cardslib.js');
+  const library = src('game/src/hub/game.cardslib.page.js');
   const index = src('game/index.html');
   const css = src('game/css/expedition-library.css');
   const ui = src('game/src/ui/ui.js');

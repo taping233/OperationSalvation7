@@ -4,6 +4,8 @@
 
 近期更新、未提交改动及验证边界见 [2026-09-28 凌晨项目记忆](docs/PROJECT-MEMORY-2026-09-28.md)。记录是带时间的快照，接手时仍需核对实时工作区。
 
+本轮工程重构的计划、实现与验收证据见 [2026-09-28 重构执行记录](docs/REFACTOR-2026-09-28.md)。
+
 ## 快速开始
 
 Vite 网页版开发调试在本目录运行：
@@ -23,6 +25,7 @@ npm run dev
 
 ```powershell
 npm test
+npm run typecheck
 node game/selftest.js
 node scripts/check-version.cjs
 npm run build

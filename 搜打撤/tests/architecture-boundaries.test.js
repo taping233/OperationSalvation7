@@ -5,6 +5,22 @@ import { analyzeModule, buildModuleGraph, assertAcyclic, architectureViolations,
 const graphOf = files => buildModuleGraph(new Map(Object.entries(files)));
 
 describe('AST 架构检查的识别与负面场景', () => {
+  it('会话内核不能重新接入 DOM 或浏览器适配器', () => {
+    const graph = graphOf({
+      'run/game.session.kernel.js': "import './game.session.browser.js'; const el = document.getElementById('game');",
+      'run/game.session.browser.js': 'export const adapter = true;',
+    });
+    expect(architectureViolations(graph)).toHaveLength(2);
+  });
+
+  it('基地模型与规则配置不得反向读取存储、门面或全局浏览器', () => {
+    const graph = graphOf({
+      'hub/base-state.js': "import './base.js';",
+      'hub/base.js': 'export const base = {};',
+      'core/rule-config.js': 'export const rules = window.SDT.RULES;',
+    });
+    expect(architectureViolations(graph)).toHaveLength(2);
+  });
   it('识别静态导入、重导出、动态字面量与嵌套目录，不误判注释', () => {
     const graph = graphOf({
       'entry.js': "import './nested/item.js'; export { value } from './other.js'; import(`./lazy.js`); // import './ghost.js'",
@@ -89,6 +105,30 @@ describe('AST 架构检查的识别与负面场景', () => {
       'battle/battle.resolution.js:1: 独立规则/快照模块不能反向依赖 battle/battle.vfx.js',
     ]);
   });
+
+  it.each([
+    ['hub/game.cardslib.js', "import './game.cardslib.page.js';", 'static'],
+    ['hub/game.cardslib.js', "export { open } from './game.cardslib.page.js';", 'reexport'],
+    ['hub/game.hub.js', "import('./game.cardslib.page.js');", 'wrong dynamic entry'],
+  ])('照相馆页面仅允许轻门面动态加载（%s, %s）', (source, statement) => {
+    const graph = graphOf({
+      [source]: statement,
+      'hub/game.cardslib.js': source === 'hub/game.cardslib.js' ? statement : 'export const shell = true;',
+      'hub/game.cardslib.page.js': 'export const open = true;',
+      ...(source === 'hub/game.hub.js' ? { 'hub/game.hub.js': statement } : {}),
+    });
+    expect(architectureViolations(graph)).toContain(
+      `${source}:1: hub/game.cardslib.page.js 只能由 hub/game.cardslib.js 动态加载`,
+    );
+  });
+
+  it('照相馆轻门面的动态入口合法', () => {
+    const graph = graphOf({
+      'hub/game.cardslib.js': "import('./game.cardslib.page.js');",
+      'hub/game.cardslib.page.js': 'export const open = true;',
+    });
+    expect(architectureViolations(graph)).toEqual([]);
+  });
 });
 
 describe('当前源码的架构边界', () => {
@@ -107,5 +147,11 @@ describe('当前源码的架构边界', () => {
     const renamed = new Map(sources);
     renamed.delete('battle/battle.snapshot.js');
     expect(deadGuardKeys(renamed)).toContain('battle/battle.snapshot.js');
+    renamed.set('battle/battle.snapshot.js', sources.get('battle/battle.snapshot.js'));
+    renamed.delete('hub/game.cardslib.page.js');
+    expect(deadGuardKeys(renamed)).toContain('hub/game.cardslib.page.js');
+    renamed.set('hub/game.cardslib.page.js', sources.get('hub/game.cardslib.page.js'));
+    renamed.delete('hub/game.cardslib.js');
+    expect(deadGuardKeys(renamed)).toContain('hub/game.cardslib.js');
   });
 });

@@ -28,6 +28,9 @@ function normalizeDesc(value) {
     .replace(/\s+/g, '').replace(/[。.]+$/g, '');
 }
 
+/** @type {Record<string, string>} */
+const DAMAGE_TYPE_NAMES = Combat.TYPE_NAME;
+
 // B1/B2（2026-09-25）：结构化 damage op → 预览规格。纯字面量/字段伤害（amount/amountField）
 // 加确定段数（hitCount/hits.count）可精确预演；条件（cond）、增伤（bonus）、区间（range）、
 // 吸血、随机目标/随机段数、墓地/重施/延迟一律降级 unknown——宁可不给数字，不给错数字。
@@ -50,9 +53,10 @@ function structuredDamageSpec(card) {
   if (numericCount !== undefined && (!Number.isInteger(numericCount) || numericCount < 1)) return { unknown: true };
   const hits = Math.max(1, Math.floor(numericCount || 1));
   if (operation.amount !== undefined) {
-    return Number.isFinite(+operation.amount) ? { hits, retarget, amount: +operation.amount } : { unknown: true };
+    const amount = Number(operation.amount);
+    return Number.isFinite(amount) ? { hits, retarget, amount } : { unknown: true };
   }
-  if (operation.amountField === 'dmg' && !Number.isFinite(+card.dmg)) return { unknown: true };
+  if (operation.amountField === 'dmg' && !Number.isFinite(Number(card?.dmg))) return { unknown: true };
   return { hits, retarget };
 }
 
@@ -62,7 +66,8 @@ function semanticMatch(card) {
   if (structured) return structured;
   const spec = card?.id ? SEMANTICS[card.id] : undefined;
   if (!spec) return null;
-  return card.type === spec[0] && card.dmgType === spec[1] && +card.dmg === spec[2]
+  if (!card) return null;
+  return card.type === spec[0] && card.dmgType === spec[1] && Number(card.dmg) === spec[2]
     && normalizeDesc(card.desc) === spec[3] ? { hits: spec[4] } : null;
 }
 
@@ -123,8 +128,11 @@ function previewAction({ snapshot, action, cardContext }) {
   const exactSpec = semanticMatch(card);
   if (!exactSpec) return unknown(cost, frozenTargets, '这张牌的伤害流程暂不支持预览');
   if (exactSpec.unknown === true) return unknown(cost, frozenTargets, '这张牌带有条件/区间/随机伤害效果，暂不支持精确预览');
-  if (cardContext.damageGrowth > 0) return unknown(cost, frozenTargets, '本场成长会改变这张牌的伤害');
-  if (!Combat.TYPE_NAME[card.dmgType] || (!Number.isFinite(+card.dmg) && exactSpec.amount === undefined)) {
+  const dmgType = card.dmgType;
+  const cardDamage = Number(card.dmg);
+  const damageGrowth = Number(cardContext.damageGrowth) || 0;
+  if (damageGrowth > 0) return unknown(cost, frozenTargets, '本场成长会改变这张牌的伤害');
+  if (!dmgType || !DAMAGE_TYPE_NAMES[dmgType] || (!Number.isFinite(cardDamage) && exactSpec.amount === undefined)) {
     return unknown(cost, frozenTargets, '这张牌没有可预览的固定伤害流程');
   }
 
@@ -139,15 +147,19 @@ function previewAction({ snapshot, action, cardContext }) {
   const shieldBefore = target.defense.shield;
   const armorBefore = target.defense.armor;
   const dodgeBefore = +(target.status.dodge || 0);
+  /** @type {number[]} */
   const hits = [];
+  /** @type {number[]} */
   const targetIndexesByHit = [];
+  /** @type {number[]} */
   const defeatedTargetIndexes = [];
+  /** @type {string[]} */
   const logs = [];
   if (cardContext.targetProtected || cardContext.aegisBlocked) {
     for (let i = 0; i < hitsPlanned; i++) { hits.push(0); targetIndexesByHit.push(targetIndex); }
   } else {
     const attacker = { atk: +(snapshot.player?.atk || 0), spellPower: +(snapshot.player?.spellPower || 0), status: { ...(snapshot.pstat?.status || {}) } };
-    const amount = (exactSpec.amount ?? (+card.dmg || 0)) + (+cardContext.damageGrowth || 0);
+    const amount = (exactSpec.amount ?? (cardDamage || 0)) + damageGrowth;
     let currentIndex = targetIndex;
     for (let i = 0; i < hitsPlanned; i++) {
       if (!exactSpec.retarget && target.hp <= 0) break;
@@ -156,7 +168,7 @@ function previewAction({ snapshot, action, cardContext }) {
       if (hitIndex < 0 || !targetsByIndex[hitIndex]) break;
       const hitTarget = targetsByIndex[hitIndex];
       const hpBeforeHit = hitTarget.hp;
-      const result = Combat.dealDamage(attacker, hitTarget, amount, card.dmgType);
+      const result = Combat.dealDamage(attacker, hitTarget, amount, dmgType);
       hits.push(result.dealt);
       targetIndexesByHit.push(hitIndex);
       if (hpBeforeHit > 0 && hitTarget.hp <= 0) defeatedTargetIndexes.push(hitIndex);
@@ -167,7 +179,7 @@ function previewAction({ snapshot, action, cardContext }) {
   const total = hits.reduce((sum, value) => sum + value, 0);
   return Object.freeze({
     legal: true, cost, targetIndexes: frozenTargets, confidence: 'exact',
-    damage: Object.freeze({ type: card.dmgType, hits: Object.freeze(hits), targetIndexesByHit: Object.freeze(targetIndexesByHit),
+    damage: Object.freeze({ type: dmgType, hits: Object.freeze(hits), targetIndexesByHit: Object.freeze(targetIndexesByHit),
       defeatedTargetIndexes: Object.freeze(defeatedTargetIndexes), total, hpBefore, hpAfter: target.hp,
       lethal: hpBefore > 0 && target.hp <= 0, shieldBefore, shieldAfter: target.defense.shield,
       armorBefore, armorAfter: target.defense.armor, dodgeBefore, dodgeAfter: +(target.status.dodge || 0),

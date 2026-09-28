@@ -39,7 +39,8 @@ import {
 import { Random } from '../core/random.js';
 import * as Combat from './combat.js';
 import { emit as emitBattleEvent } from '../core/event-bus.js';
-import { calculateEffectiveCardCost, decayEffectiveCardCost, pocketSpellDiscountFor } from './battle.card-cost.js';
+import { decayEffectiveCardCost } from './battle.card-cost.js';
+import { createBattleCardInspection } from './battle.card-inspection.js';
 import { calculateEnemyIntent } from './battle.intent.js';
 import { createBattleSnapshot, createBattleSnapshotSignature } from './battle.snapshot.js';
 import { createBattleResolution } from './battle.resolution.js';
@@ -97,6 +98,16 @@ function cardIdentity(card) {
 const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!card.id && card.name === '初始攻击'));
 const R = () => SDT.MAP.rules;
 const alive = () => foes.filter(f => !f.dead);
+const cardInspection = createBattleCardInspection({
+    cards: SDT.Cards,
+    curseMeta: Combat.CURSE_META,
+    readState: () => ({
+      game: G, granted, hand, consumed, discoverQueue, cardOverrides,
+      unlimitedRune, zeroFeeUntil, turn, pstat, spellCost1, meleeCost1,
+      lastPlayedType, playedMartialThisTurn, playedMovesThisTurn, pdef,
+    }),
+  });
+const { findCard, drawOf, infuseOf, effCostOf, handCurseSpecs, queueSwapCostDiscover, swapCardCosts } = cardInspection;
 function intentFor(def, round) {
     return calculateEnemyIntent(def, round, pstat && pstat.status);
   }
@@ -436,101 +447,7 @@ const applyTextEffects = createEffectExecutor({
     handCurseSpecs,
     queueSwapCostDiscover,
   });
-function repairLegacyTT7Card(card) {
-    if (!card || !['tt7-thundergrudge', 'tt7-meteorrain'].includes(card.id)) return card;
-    // Active battle snapshots may retain old card clones. The canonical card catalog
-    // remains the sole source for their gameplay fields and structured rule contract.
-    const definition = SDT.Cards.TABLETOP10?.find(entry => entry.id === card.id);
-    if (!definition?.rules) return card;
-    card.dmg = definition.dmg;
-    card.dmgType = definition.dmgType;
-    if (JSON.stringify(card.rules) !== JSON.stringify(definition.rules))
-      card.rules = cloneData(definition.rules);
-    return card;
-  }
-const findCard = (uid) => {
-    const ov = cardOverrides.get(uid);
-    if (ov) return { uid, card: repairLegacyTT7Card(ov) };
-    const entry = G.ownedCards.find(o => o.uid === uid) || granted.find(o => o.uid === uid) || null;
-    if (entry) repairLegacyTT7Card(entry.card);
-    return entry;
-  };
-const drawOf = (card) => +(card.draw || 0) || SDT.Cards.deriveDraw(card) || 0;
-const infuseOf = (card) => card._noInfuse ? 0 : (+(card.infuse || 0) || SDT.Cards.deriveInfuse(card) || 0);
-const effCostOf = (card, uid) => {
-    // 仅后备能源类描述需要读取消耗口袋；常规求费不扫描消耗区。
-    const pocketDiscount = pocketSpellDiscountFor(card);
-    const consumedSpellCount = pocketDiscount
-      ? consumed.filter(u => { const o = findCard(u); return o && o.card.type === '法术'; }).length
-      : 0;
-    return calculateEffectiveCardCost(card, uid, {
-      unlimitedRune,
-      zeroFeeTurn: uid ? zeroFeeUntil.get(uid) : undefined,
-      turn,
-      cosmosForm: pstat && pstat.status && pstat.status.cosmosForm,
-      spellCost1,
-      meleeCost1,
-      lastPlayedType,
-      playedMartialThisTurn,
-      playedMovesThisTurn,
-      armor: pdef ? (pdef.armor || 0) : null,
-      pocketDiscount,
-      consumedSpellCount,
-    });
-  };
 const isAOE = isAreaEffect;
-const CURSE_SCAN = [
-    { key: 'bleed',   re: /(?:附加|施加)\s*(?:(\d+)\s*层?)?\s*流血/, def: 1 },
-    { key: 'poison',  re: /(?:附加|施加)\s*(?:(\d+)\s*层)?\s*中毒/, def: 1 },
-    { key: 'burn',    re: /(?:附加|施加|攻击并)\s*(?:\d+\s*层?\s*)?灼烧/, def: 1 },
-    { key: 'freeze',  re: /附加冰冻|冰冻所有|冰冻\s*(?:\d+|[一两二三四五])?\s*名|冻结/, def: 1 },
-    { key: 'silence', re: /沉默/, def: 1 },
-    { key: 'abreak',  re: /破甲/, def: 2 },
-    { key: 'healban', re: /禁疗/, def: 2 },
-  ];
-function curseSpecsOfDesc(desc) {
-    desc = String(desc || '');
-    const out = [];
-    CURSE_SCAN.forEach(({ key, re, def }) => {
-      const m = desc.match(re);
-      if (m) out.push({ key, n: Math.max(1, +(m[1] || def) || def) });
-    });
-    return out;
-  }
-function handCurseSpecs() {
-    const merged = new Map();
-    hand.forEach(u => {
-      const o = findCard(u);
-      const c = o && o.card;
-      if (!c || !['武术', '法术'].includes(c.type)) return;
-      curseSpecsOfDesc(c.desc).forEach(s => {
-        const stack = Combat.CURSE_META[s.key] && Combat.CURSE_META[s.key].stack;
-        merged.set(s.key, stack ? (merged.get(s.key) || 0) + s.n : Math.max(merged.get(s.key) || 0, s.n));
-      });
-    });
-    return [...merged.entries()].map(([key, n]) => ({ key, n }));
-  }
-function queueSwapCostDiscover() {
-    const pool = SDT.Cards.all().filter(c => ['武术', '法术'].includes(c.type) && SDT.Cards.isRandomObtainable(c));
-    if (pool.length < 2) {
-      G.log('[[icon:cross]] <b>迷之匣</b>：卡牌库中没有足够的随机招式可供发现', 'warn');
-      return;
-    }
-    const pair = [];
-    const pred = c => ['武术', '法术'].includes(c.type);
-    discoverQueue.push({ n: 1, pred, act: 'swapCost', swapPair: pair });
-    discoverQueue.push({ n: 1, pred, act: 'swapCost', swapPair: pair });
-    G.log('[[icon:question]] <b>迷之匣</b>：发现两张随机招式——它们打出前会交换费用', 'sys');
-  }
-function swapCardCosts(uidA, uidB) {
-    const a = findCard(uidA), b = findCard(uidB);
-    if (!a || !b) return;
-    const costA = Math.max(0, +(b.card.cost || 0));
-    const costB = Math.max(0, +(a.card.cost || 0));
-    cardOverrides.set(uidA, { ...a.card, cost: costA });
-    cardOverrides.set(uidB, { ...b.card, cost: costB });
-    G.log(`[[icon:sparkles]] <b>交换费用</b>：【${esc(a.card.name)}】费用变为 <b>${costA}</b>，【${esc(b.card.name)}】费用变为 <b>${costB}</b>`, 'sys');
-  }
 /** @returns {import('./battle.snapshot.types.js').BattleSnapshotInput} */
 function captureSnapshotInput() {
     const pTgt = pendingTargetOf();

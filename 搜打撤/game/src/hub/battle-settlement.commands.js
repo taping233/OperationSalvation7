@@ -83,7 +83,7 @@ export function createBattleSettlementCommands(options) {
     catch { return fail('STORAGE_READ_FAILED', '无法读取基地结算快照', true); }
     if (!value) return fail('STORAGE_READ_FAILED', '无法读取基地结算快照', false, { issue: getBase().issue(slotId) });
     const revision = value._m01?.revision;
-    if (!Number.isInteger(revision) || revision < 0) return fail('RECOVERY_BLOCKED', '基地事务版本不可用');
+    if (typeof revision !== 'number' || !Number.isInteger(revision) || revision < 0) return fail('RECOVERY_BLOCKED', '基地事务版本不可用');
     return { ok: true, value: /** @type {BattleSettlementBaseSnapshot} */ (clone(value)), revision };
   }
 

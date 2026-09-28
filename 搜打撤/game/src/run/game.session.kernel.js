@@ -1,19 +1,20 @@
 /* ============================================================
  * game.session.kernel.js —— 会话内核（自 game.session.js 拆出，2026-09-25）
  *
- * 全会话共享的最底层状态与工具：运行时钩子（反向注入 run 页面入口）、
- * GameStore/game 单例、主画布与相机活绑定、通用小工具。
+ * 全会话共享的最底层状态与工具：运行时钩子（反向注入页面入口）、
+ * GameStore/game 单例、由启动层注入的主画布与日志端口、相机活绑定和通用小工具。
  * 只被其他 game.session.* 模块与 game.session.js 依赖，自身不依赖任何会话模块。
  * 对外仍统一从 game.session.js 具名导出，本模块导出面是会话内部属地。
  * ============================================================ */
-/* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
-const SDT = window.SDT;
-const UI = window.SDT.UI;
+import SDT, { sdtDefine } from '../core/sdt-facade.js';
+import '../core/mapData.js';
 import { GameStore } from '../hub/game.store.js';
 import { Random } from '../core/random.js';
 
+// main.js 在本模块前装配 MAP/FX；sdt-facade 在 Node 中也提供同一 ESM 门面，
+// 让会话内核可在没有 window/document 的环境下单独加载。
 export const MAP = SDT.MAP;
-export const FX = SDT.FX; // 顿帧反馈（hitStop；2D 飘字/脉冲/震屏已废弃，见 renderer.fx.js）
+export const FX = SDT.FX || null; // standalone Node kernel 没有渲染层时为空；游戏启动顺序中为真实 FX。
 
 // ---------- 运行时钩子（基地出发整备/选角页等 run 页面入口反向注入） ----------
 export const runtime = {
@@ -24,10 +25,16 @@ export const runtime = {
   showRunTransition: async () => {},
   syncDevVisibility: () => {},
   resumeExtraction: () => ({ ok: false, code: 'EXTRACTION_UNAVAILABLE', message: '撤离整理界面尚未就绪' }),
+  log: () => {},
 };
 
 export function configureGameRuntime(hooks) {
-  Object.assign(runtime, hooks || {});
+  const ports = hooks || {};
+  const { canvas: nextCanvas, ctx: nextContext, log, ...runtimeHooks } = ports;
+  Object.assign(runtime, runtimeHooks);
+  if (nextCanvas !== undefined) canvas = nextCanvas;
+  if (nextContext !== undefined) ctx = nextContext;
+  if (typeof log === 'function') runtime.log = log;
 }
 // 供基地出发整备在确认带入卡牌后打开选角页；通过运行时注入保持 session 不反向依赖 run 模块。
 export function requestClassChoice(options) {
@@ -53,15 +60,13 @@ export const weighted = (arr) => {
   return arr[0];
 };
 game.curLayer = curLayer;
-game.log = (m, c) => UI.log(m, c);
+game.log = (...args) => runtime.log(...args);
 game.debug = {}; // 调试入口由 game.run.dev.js 等开发工具填充
-SDT.game = game;
+sdtDefine('game', game);
 
-// ---------- 主画布与相机（活绑定：渲染侧经 _set_cam/_set_dpr 回写） ----------
-export const canvas = document.getElementById('game');
-// alpha:false——每帧都会整屏铺背景，不透明画布可让合成器跳过透明混合。
-// 不启用 desynchronized：本机混合显卡 A/B 中它会让交换链吞吐明显下降。
-export const ctx = canvas.getContext('2d', { alpha: false });
+// ---------- 主画布由 browser adapter 注入；相机由渲染侧经活绑定回写 ----------
+export let canvas = null;
+export let ctx = null;
 export let cam;
 export let dpr = 1;
 

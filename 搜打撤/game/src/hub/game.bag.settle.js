@@ -4,6 +4,7 @@
 const SDT = window.SDT;
 const UI = window.SDT.UI;
 import { esc } from '../core/shared.js';
+import { RULE_CONFIG } from '../core/rule-config.js';
 import { clearBattleSettlementPending, createRunSavePayload, doDeath, game, getActiveSlot, saveGame, setBattleSettlementPending } from '../run/game.session.js';
 import { RunStorage } from './game.storage.js';
 import { createBattleSettlementCommands } from './battle-settlement.commands.js';
@@ -187,7 +188,7 @@ import { bagSlots } from './game.bag.bridge.js';
           }
           let legends = 0;
           if (opts.isBoss && win === true) legends = 1;
-          if (slewDragon && win === true && Random.random('loot') < 0.3) legends += 1;
+          if (slewDragon && win === true && Random.random('loot') < RULE_CONFIG.rewards.beastLegendaryChance) legends += 1;
           if (legends > 0) UI.log('[[icon:trophy]] 首脑宝库开启：额外奖励 <b>1 张传说卡</b>！', 'loot');
           for (let i = 0; i < legends; i++) {
             const pool = SDT.Cards.all().filter(c => c.rarity === '传说' && SDT.Cards.isRandomObtainable(c));

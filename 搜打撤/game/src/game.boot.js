@@ -12,7 +12,7 @@ import { openBaseHub } from './hub/game.hub.js';
 import { bindBagMixins, showBackpack, setBagReturnHook } from './hub/game.bag.js';
 import { configureShopRuntime } from './run/game.run.shop.js';
 import { bindNotesMixins, initDevMode, openCellEditor, rebuildNotes, showClearOverlay, showExportOverlay, showImportOverlay, syncDevVisibility } from './hub/game.notes.js';
-import { cardPageOpen, closeCardPageTop, openCardDesigner, openCardLibrary } from './hub/game.cardslib.js';
+import { cardPageOpen, cardPageLoading, closeCardPageTop, openCardDesigner, openCardLibrary } from './hub/game.cardslib.js';
 import { renderScheduler } from './core/render-scheduler.js';
 import { nodeHitRadius } from './core/camera.js';
 import { storeGet, storeSet } from './core/storage.js';
@@ -20,9 +20,14 @@ import { renderMiniMap } from './run/game.session.js';
 import './agent/agent.js';   // SDT.Agent 接口链（observe/act/step）：随启动挂载，供外部决策端驱动
 import './ui/quick-nav.js';  // 全页面快捷进入键（Alt+数字系，非法状态拒绝并提示）
 import { startPocketStrip } from './experience/pocket-strip.js';   // 体验线「随身口袋」状态条（2026-09-28 代码线接线）
+import { createGameCanvas } from './run/game.session.browser.js';
 startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，此处显式调用表达装配契约
 
-  configureGameRuntime({ openClassChoice, openBaseHub, rebuildNotes, resize: () => resize(), showRunTransition, syncDevVisibility, resumeExtraction });
+  configureGameRuntime({
+    ...createGameCanvas(document),
+    log: (message, kind) => UI.log(message, kind),
+    openClassChoice, openBaseHub, rebuildNotes, resize: () => resize(), showRunTransition, syncDevVisibility, resumeExtraction,
+  });
   configureShopRuntime({ openBag: (onReturn) => {
     setBagReturnHook(onReturn);
     showBackpack(true);
@@ -144,6 +149,12 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
         e.preventDefault();
         return;
       }
+      if (e.key === 'Escape' && cardPageLoading) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        closeCardPageTop();
+        return;
+      }
       const tag = e.target && e.target.tagName;
       if (tag === 'TEXTAREA' || tag === 'INPUT' || tag === 'SELECT' || e.target?.isContentEditable) return;
       // Native buttons own Space/Enter. Do not let map shortcuts swallow keyboard activation.
@@ -243,7 +254,7 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
     // 卡牌大页面：Esc 关闭 / 点击深色背景关闭
     // （用 click 而非 mousedown 关背景，保证关闭前 mouseup 仍处于 modal 态，不会误触格子编辑）
     window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && cardPageOpen && !UI.el.overlay.hidden) closeCardPageTop();
+      if (e.key === 'Escape' && !e.defaultPrevented && cardPageOpen && !cardPageLoading && !UI.el.overlay.hidden) closeCardPageTop();
     });
     UI.el.overlay.addEventListener('click', (e) => {
       if (e.target === UI.el.overlay && cardPageOpen) closeCardPageTop();

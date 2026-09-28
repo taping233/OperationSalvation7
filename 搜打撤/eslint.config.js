@@ -134,6 +134,8 @@ const browserGlobals = {
   Response: 'readonly',
   Headers: 'readonly',
   AbortController: 'readonly',
+  AbortSignal: 'readonly',
+  TextEncoder: 'readonly',
   WebSocket: 'readonly',
   Worker: 'readonly',
   Image: 'readonly',

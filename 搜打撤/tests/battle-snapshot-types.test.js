@@ -16,7 +16,7 @@ function checkInMemory(source) {
     [path.resolve(configPath), JSON.stringify({
       compilerOptions: {
         target: 'ESNext', module: 'ESNext', moduleResolution: 'Bundler', lib: ['ESNext', 'DOM'],
-        allowJs: true, checkJs: false, strict: false, skipLibCheck: true, noEmit: true,
+        allowJs: true, checkJs: false, strict: true, skipLibCheck: true, noEmit: true,
       },
       files: [snapshotPath, previewPath, virtualPath],
     })],
@@ -53,6 +53,7 @@ const validSource = `
   import { previewAction } from '../game/src/battle/battle.preview.js';
   import type { BattleSnapshotInput } from '../game/src/battle/battle.snapshot.types.js';
   import type { PreviewActionInput } from '../game/src/battle/battle.snapshot.types.js';
+  import type { SnapshotBattleCard } from '../game/src/battle/battle.snapshot.types.js';
   const card = { id: 'starter-attack', name: '初始攻击', type: '武术', cost: 1, dmg: 0,
     dmgType: 'attack', desc: '攻(+0):造成等同于攻击力的伤害',
     rules: { triggers: { onPlay: [{ op: 'damage', amountField: 'dmg', extra: { tags: ['fixture'] } }] } } };
@@ -72,6 +73,23 @@ const validSource = `
   const action: PreviewActionInput['action'] = { kind: 'play-card', uid: 'u1', targetIndex: 0 };
   const context = { card, targetIndexes: [0], legal: true, effectiveCost: 1, damageGrowth: 0 };
   const result = previewAction({ snapshot, action, cardContext: context });
+  const compatibleInput = createBattleSnapshot({ ...input,
+    infusing: { uid: 'legacy-infuse', picked: new Set() },
+    pendingTarget: { uid: 'legacy-target' },
+    selPool: [{ uid: 'legacy-deck' }],
+    pendingItem: { uid: 'legacy-item' },
+    equipped: [{ uid: 'legacy-equipped', name: '', desc: '', skill: '', used: false }],
+  });
+  const optionalInfusingCard: SnapshotBattleCard | null | undefined = compatibleInput.infusing?.card;
+  const optionalTargetCard: SnapshotBattleCard | null | undefined = compatibleInput.pendingTarget?.card;
+  const optionalDeckCard: SnapshotBattleCard | null | undefined = compatibleInput.deckSelection?.cards[0].card;
+  const optionalItemCard: SnapshotBattleCard | null | undefined = compatibleInput.pendingItem?.card;
+  const optionalEquippedCard: SnapshotBattleCard | null | undefined = compatibleInput.equipped[0].card;
+  void optionalInfusingCard;
+  void optionalTargetCard;
+  void optionalDeckCard;
+  void optionalItemCard;
+  void optionalEquippedCard;
   const operationName: string | undefined = snapshot.pendingTarget?.card?.rules?.triggers?.onPlay?.[0].op;
   type IsAny<T> = 0 extends (1 & T) ? true : false;
   function requireTyped<T>(value: T & (IsAny<T> extends true ? never : unknown)): void { void value; }

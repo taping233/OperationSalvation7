@@ -2,6 +2,27 @@ import { describe, expect, it } from 'vitest';
 import { createBattleSnapshot } from '../game/src/battle/battle.snapshot.js';
 
 describe('battle snapshot builder', () => {
+  it('preserves absent and explicit null cards in optional battle projections', () => {
+    const snapshot = createBattleSnapshot({
+      battleToken: 1, mode: 'normal', turn: 1, energy: 1, maxEnergy: 1, busy: false,
+      phase: 'player', actionQueueLength: 0, opts: null, player: null, pdef: null, pstat: null,
+      foes: [], allies: [], hand: [], drawPile: [], discard: [], grave: [],
+      infusing: { uid: 'infuse', picked: new Set() }, discovering: null,
+      handSelecting: null, choosing: null, pendingTarget: { uid: 'target', card: null }, pendingHint: null,
+      viewingGrave: false, viewingDeck: false, viewingBag: false, dreadShown: false,
+      selectingDeck: true, deckNeed: 1, selDeckMax: 1, selShaN: 0, sel: new Set(),
+      selPool: [{ uid: 'deck' }], potionBar: null,
+      pendingItem: { uid: 'item' }, slamPending: false, dartPending: false,
+      equipped: [{ uid: 'equipped', name: '', desc: '', skill: '', used: false }],
+    });
+
+    expect(snapshot.infusing).toHaveProperty('card', undefined);
+    expect(snapshot.pendingTarget).toHaveProperty('card', null);
+    expect(snapshot.deckSelection.cards[0]).toHaveProperty('card', undefined);
+    expect(snapshot.pendingItem).toHaveProperty('card', undefined);
+    expect(snapshot.equipped[0]).toHaveProperty('card', undefined);
+  });
+
   it('isolates nested state and freezes collections without mutating source values', () => {
     const foe = { hp: 4, status: { bleed: 2 }, defense: { armor: 1 }, intent: { type: 'attack' } };
     const hand = ['a'];

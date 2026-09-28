@@ -125,7 +125,7 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
     return `
       <span class="section-kicker">CARD STORAGE // 02</span>
       ${/* W2-03：三条经济线一行总览——卖卡/复原/升级的「币从哪来到哪去」页内可读（纯呈现，零数值改动） */''}
-      <p class="hint econ-line">[[icon:coin]] 卖卡 → <b>储备币</b>（商店消费，不进局）　·　[[icon:key]] 钥匙 → <b>复原</b>口袋卡牌　·　[[icon:bread]] 口粮 → <b>宠物升级</b>　·　[[icon:wood]] 木材 → <b>扩建</b>背包/仓库</p>
+      <p class="hint econ-line">[[icon:coin]] 卖卡 → <b>储备币</b>（商店消费，不进局）\u3000·\u3000[[icon:key]] 钥匙 → <b>复原</b>口袋卡牌\u3000·\u3000[[icon:bread]] 口粮 → <b>宠物升级</b>\u3000·\u3000[[icon:wood]] 木材 → <b>扩建</b>背包/仓库</p>
       <div class="hub-two">
         <section class="hub-card">
           <h3>[[icon:archive]] 卡牌仓库</h3>
@@ -221,6 +221,7 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
           SDT.Meta.checkUnlocks();
         } else if (r.why === 'poor') UI.log('[[icon:coin]] 储备币不足 50，无法孵化（卖出仓库卡牌攒币）', 'warn');
         else if (r.why === 'all') UI.log('[[icon:paw]] 已经集齐全部宠物了', 'dim');
+        else if (r.why === 'save') UI.log('基地存档未保存，宠物蛋与储备币均未消耗', 'warn');
         else UI.log('[[icon:crystal]] 仓库里没有宠物蛋了', 'warn');
         hubBridge.renderHub();
       });
@@ -323,10 +324,8 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
       for (let k = 0; k < 5; k++) {
         cards.push({ card: { ...pool[Math.floor(Random.random('loot') * pool.length)] }, count: 1 });
       }
-      const si = B.data.stash.indexOf(s);
-      if (si >= 0) { s.count--; if (s.count <= 0) B.data.stash.splice(si, 1); }
-      B.depositCards(cards);
-      B.save();
+      const result = B.openCardPack(s.card.id, cards);
+      if (!result.ok) { UI.log(result.msg || '卡包已变化，请重新打开仓库', 'warn'); return; }
       UI.log(`[[icon:cards]] <b>经济卡包</b>：拆开获得 5 张随机卡牌（入卡牌仓库）`, 'loot');
       hubBridge.renderHub();
     };
@@ -367,6 +366,7 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
     });
     UI.act('collToggle', () => {
       const now = B.collectToggle(s.card);
+      if (now === null) { UI.log('基地存档未保存，收藏状态未改变', 'warn'); return; }
       Sfx.ding();
       // 经验结算必须最先：checkUnlocks → syncCollXp 会把已收藏的职业卡回填为
       // 「已结算」，若先于 onCollect 执行，首次收藏的 +10 就被吃掉了

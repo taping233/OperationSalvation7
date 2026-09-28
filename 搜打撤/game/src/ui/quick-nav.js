@@ -8,7 +8,7 @@
  * ============================================================ */
 import { game, openSettings, openSuggestionInbox, openDataPageUi } from '../run/game.session.js';
 import { openBaseHub } from '../hub/game.hub.js';
-import { openCardLibrary } from '../hub/game.cardslib.js';
+import { openCardLibrary, cancelPendingCardPageOpen } from '../hub/game.cardslib.js';
 
 const busy = () => game.battleActive || game.nestActive;
 const inRun = () => game.runActive;
@@ -46,6 +46,7 @@ function jump(id) {
     UI()?.log(`[[icon:lock]] 快捷进入【${page.name}】在当前状态不可用（战斗/对局中受保护）`, 'warn');
     return false;
   }
+  if (page.id !== 'cardslib') cancelPendingCardPageOpen();
   try {
     page.enter();
     return true;

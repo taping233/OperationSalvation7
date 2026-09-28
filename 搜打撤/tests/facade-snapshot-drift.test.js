@@ -16,7 +16,7 @@ const walk = (dir) => {
   for (const e of readdir(resolve(process.cwd(), ROOT, dir))) {
     if (e.startsWith('.')) continue;   // .githooks 等非源码条目
     const p = resolve(process.cwd(), ROOT, dir, e);
-    let isDir = false;
+    let isDir;
     try { isDir = statDir(p).isDirectory(); } catch { continue; }
     if (isDir) out.push(...walk(`${dir}/${e}`));
     else if (e.endsWith('.js')) out.push(`${dir}/${e}`.replace(/^\.\//, ''));
@@ -61,7 +61,7 @@ describe('顶层门面快照漂移守卫', () => {
       'hub/game.bag.settle.js',
       'hub/game.cardslib.common.js',
       'hub/game.cardslib.designer.js',
-      'hub/game.cardslib.js',
+      'hub/game.cardslib.page.js',
       'hub/game.hub.js',
       'hub/game.hub.pages.js',
       'hub/game.notes.js',
@@ -69,7 +69,6 @@ describe('顶层门面快照漂移守卫', () => {
       'run/game.run.scenes.js',
       'run/game.session.bag.js',
       'run/game.session.death.js',
-      'run/game.session.kernel.js',
       'run/game.session.modes.js',
       'ui/cinematics.js',
       'ui/overlay.js',

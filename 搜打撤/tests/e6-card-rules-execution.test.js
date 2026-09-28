@@ -204,7 +204,7 @@ describe('E6 complete-list and pre-payment executable rule boundaries', () => {
 
   it('keeps a no-rules text card executable', async () => {
     const card = { id: 'e6-legacy', name: '旧文本卡', type: '法术', cost: 1, desc: '获得 4 枚金币。' };
-    const game = await startGame(card);
+    await startGame(card);
     const beforeEnergy = runtime.energy;
     BattleSession.commands.playCard('e6-0');
     await waitForIdle();

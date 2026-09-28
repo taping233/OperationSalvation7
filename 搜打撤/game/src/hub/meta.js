@@ -180,12 +180,8 @@ import { Random } from '../core/random.js';
     if (cards.length && SDT.Base.stashRoom() < cards.reduce((a, c) => a + (c.count || 1), 0)) {
       return { ok: false, why: 'full', msg: '仓库容量不足——先卖出或扩建卡牌仓库再来领取' };
     }
-    B().data.collClaimed[id] = true;
-    if (m.reward.wood) B().data.wood += m.reward.wood;
-    if (m.reward.rations) B().data.rations += m.reward.rations;
-    if (m.reward.keys) B().data.keys = (B().data.keys || 0) + m.reward.keys;
-    if (cards.length) B().depositCards(cards);
-    B().save();
+    const result = B().grantReward({ kind: 'collection', id, reward: m.reward, cards });
+    if (!result.ok) return result;
     const msg = `[[icon:sparkles]] 领取职业收藏奖励【收藏 ${collMsNeed(m)} 张】：${collRewardText(m)}`;
     if (SDT.UI) SDT.UI.log(msg, 'loot');
     return { ok: true, msg };
@@ -268,13 +264,8 @@ import { Random } from '../core/random.js';
     if (cards.length && SDT.Base.stashRoom() < 1) {
       return { ok: false, why: 'full', msg: '仓库容量不足——先卖出或扩建卡牌仓库再来领取' };
     }
-    B().data.achClaimed[id] = true;
-    B().data.wood += a.reward.wood || 0;
-    B().data.rations += a.reward.rations || 0;
-    if (a.reward.keys) B().data.keys = (B().data.keys || 0) + a.reward.keys;
-    if (cards.length) B().depositCards(cards);
-    if (a.back) B().unlockBack(a.back);   // 卡背奖励：随成就领取解锁（v0.21）
-    B().save();
+    const result = B().grantReward({ kind: 'achievement', id, reward: a.reward, cards, back: a.back });
+    if (!result.ok) return result;
     const parts = [];
     if (a.reward.wood) parts.push(`[[icon:wood]] 木材 ×${a.reward.wood}`);
     if (a.reward.rations) parts.push(`[[icon:bread]] 口粮 ×${a.reward.rations}`);

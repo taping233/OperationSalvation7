@@ -3,6 +3,7 @@ import { HOSTED_CARD_RULES, validateCardRules } from '../game/src/cards/card-rul
 import { inspectCardRuleCapability } from '../game/src/cards/card-rules.capability.js';
 import { resolveRegisterRule } from '../game/src/battle/effect-steps.m2.js';
 import { getHostedExecutionCard } from '../game/src/battle/battle.hosted.js';
+import { buildFirstSourceCardIndex } from '../game/src/battle/hosted-catalog-index.js';
 
 const hostedCards = Object.entries(HOSTED_CARD_RULES);
 
@@ -30,6 +31,38 @@ describe('M hosted battle contract', () => {
     expect(getHostedExecutionCard({
       id: 'tt8-hero-priest', desc: '纯展示文本', rules: { version: 1, battle: { hosted: ['warlock'] } },
     }).desc).toBe('纯展示文本');
+  });
+
+  it('builds a first-source-wins index when catalogs repeat an ID', () => {
+    const preferred = { id: 'duplicate', desc: 'first catalog' };
+    const later = { id: 'duplicate', desc: 'later catalog' };
+    const laterSameCatalog = { id: 'duplicate', desc: 'later row' };
+    const index = buildFirstSourceCardIndex([
+      [preferred], [later, laterSameCatalog], [null, {}, { id: 'other' }],
+    ]);
+
+    expect(index.get('duplicate')).toBe(preferred);
+    expect(index.get('other')).toEqual({ id: 'other' });
+    expect(buildFirstSourceCardIndex([[later, laterSameCatalog]]).get('duplicate')).toBe(later);
+  });
+
+  it('keeps canonical M-batch execution text for every registered hosted ID', () => {
+    for (const [id, hostedName] of hostedCards) {
+      const savedCard = {
+        id,
+        desc: '玩家存档改写的文字',
+        rules: { version: 1, battle: { hosted: [hostedName] } },
+      };
+      const executionCard = getHostedExecutionCard(savedCard);
+      expect(executionCard.desc, id).toBeTypeOf('string');
+      expect(executionCard.desc, id).not.toBe('玩家存档改写的文字');
+      expect(savedCard.desc, id).toBe('玩家存档改写的文字');
+    }
+  });
+
+  it('returns unknown IDs unchanged', () => {
+    const unknown = { id: 'not-a-hosted-card', desc: '存档文字', rules: { version: 1, battle: { hosted: ['priest'] } } };
+    expect(getHostedExecutionCard(unknown)).toBe(unknown);
   });
 
   it('dispatches newly registered legacy flags to their live runtime ports', () => {
