@@ -14,14 +14,20 @@ export function invalidateBattleContext(game) {
 }
 
 export function captureBattleContext(game, getSlot = () => window.SDT?.Base?.slot) {
+  // window 不存在 = 宿主环境已拆除（如测试 teardown 后挂起定时器仍触发），上下文必然失效；
+  // 谓词安全返回 false 而非抛 ReferenceError。浏览器内此分支不可达，行为逐字不变。
+  if (typeof window === "undefined") return () => false;
   const version = contextVersions.get(game) || 0;
   const registeredGame = window.SDT?.game;
   const slot = getSlot();
   const keys = ['seed', 'discoveredPairs', 'nestRunes', 'runActive', 'nestActive', 'layerIdx', 'trackPos', 'nestPos'];
   const values = keys.map(key => game[key]);
-  return () => (contextVersions.get(game) || 0) === version &&
-    (!registeredGame || registeredGame === game) && window.SDT?.game === registeredGame && getSlot() === slot &&
-    keys.every((key, index) => game[key] === values[index]);
+  return () => {
+    if (typeof window === "undefined") return false;
+    return (contextVersions.get(game) || 0) === version &&
+      (!registeredGame || registeredGame === game) && window.SDT?.game === registeredGame && getSlot() === slot &&
+      keys.every((key, index) => game[key] === values[index]);
+  };
 }
 
 async function ensureBattleReady() {
