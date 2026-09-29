@@ -407,6 +407,10 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
   let loopFrame = 0, idleLoopTimer = 0;
 
   function requestLoopFrame() {
+    // 输入法/环境守卫（nightshift U15）：测试环境拆除后 idle 链（scheduleNextLoop 的
+    // 250ms setTimeout）仍会触发本函数，node 无 requestAnimationFrame 直接裸引即炸
+    // unhandled 并污染同 worker 用例（批次⑥全量实锤）。与 U1/U5-a 守卫同构。
+    if (typeof requestAnimationFrame !== "function") return;
     if (idleLoopTimer) {
       clearTimeout(idleLoopTimer);
       idleLoopTimer = 0;
