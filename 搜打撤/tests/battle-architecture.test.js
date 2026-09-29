@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { createActionQueue } from '../game/src/battle/battle.actions.js';
-import { createAnimationController } from '../game/src/battle/battle.animation.js';
+import { createAnimationController } from '../game/src/battle/battle.animation-waiter.js';
 import { groupHandCards, fanLayout } from '../game/src/battle/battle.hand.js';
 import { assertUniqueZones, moveUid, zoneForUid } from '../game/src/battle/battle.piles.js';
-import { intentSummary, intentViewModel } from '../game/src/battle/battle.intents.js';
+import { intentSummary, intentViewModel } from '../game/src/battle/battle.intent.view.js';
 import { actionFeedback, feedbackClass, feedbackDelay } from '../game/src/battle/battle.feedback.js';
 import { renderCombatPiles } from '../game/src/battle/battle.piles.view.js';
 import { BATTLE_PHASES, beginTargeting, cancelTargeting, createBattleState, transitionBattle } from '../game/src/battle/battle.state.js';

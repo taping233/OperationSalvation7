@@ -26,10 +26,8 @@ function createBattleState(seed = {}) {
     token: ++battleSeq,   // 战斗实例令牌：视图层常驻节点（手牌/单位区）跨渲染复用与换场重置的依据
     phase: BATTLE_PHASES.START,
     round: 1,
-    energy: 0,
-    maxEnergy: 0,
-    interaction: { mode: 'idle', cardUid: null, targetIds: [], hoveredTargetId: null, invalidReason: '' },
-    actionQueue: [],
+    // energy/maxEnergy/interaction/actionQueue 曾在此占位但全仓无读者（真实 energy 与
+    // interaction 均为 runtime 独立全局）——治理批次 1 移除，勿再回填。
     ...seed,
   };
 }

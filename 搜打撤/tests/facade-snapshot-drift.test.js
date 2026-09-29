@@ -41,7 +41,7 @@ describe('顶层门面快照漂移守卫', () => {
     console.log('[facade-snapshot] actual =', JSON.stringify(found));
     expect(found).toEqual([
       'battle/battle.aim.js',
-      'battle/battle.anim.js',
+      'battle/battle.anim.view.js',
       'battle/battle.bag.js',
       'battle/battle.enemy-phase.js',
       'battle/battle.engine.js',

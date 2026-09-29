@@ -28,7 +28,7 @@ import { esc, clone as cloneData } from '../core/shared.js';
 import { createEffectExecutor, splitEffectClauses, consumeTriggerTexts } from './battle.effects.js';
 import { refillDrawPile, shuffleCards } from './battle.deck.js';
 import './battle.piles.js';
-import { isAreaEffect, targetSideFor, unplayableReasonFor, itemTargetSideFor } from './battle.rules.js';
+import { isAreaEffect, targetSideFor, unplayableReasonFor, itemTargetSideFor } from './battle.target-rules.js';
 import { rejectUnsupportedCard } from './battle.rule-guard.js';
 
 import { createBattleExecutionSession } from './battle.execution-session.js';
@@ -42,7 +42,7 @@ import * as Combat from './combat.js';
 import { emit as emitBattleEvent } from '../core/event-bus.js';
 import { decayEffectiveCardCost } from './battle.card-cost.js';
 import { createBattleCardInspection } from './battle.card-inspection.js';
-import { calculateEnemyIntent } from './battle.intent.js';
+import { calculateEnemyIntent } from './battle.enemy-intent.js';
 import { createBattleSnapshot, createBattleSnapshotSignature } from './battle.snapshot.js';
 import { createBattleResolution } from './battle.resolution.js';
 import './battle.feedback.js';

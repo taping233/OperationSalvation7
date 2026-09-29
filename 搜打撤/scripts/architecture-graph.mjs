@@ -24,7 +24,7 @@ const RUNTIME_INNER = new Set([
 ]);
 const RUNTIME_OWNERS = new Set(['battle/battle.core.js', ...RUNTIME_INNER]);
 const PURE_MODULES = new Set([
-  'battle/battle.card-cost.js', 'battle/battle.intent.js', 'battle/battle.resolution.js',
+  'battle/battle.card-cost.js', 'battle/battle.enemy-intent.js', 'battle/battle.resolution.js',
   'battle/battle.snapshot.js', 'cards/cards.catalog.js',
   'cards/card-rarity.js', 'cards/card-render-context.js',
   'core/rule-config.js', 'hub/base-state.js', 'hub/base-mutation.js',
@@ -41,7 +41,7 @@ const SESSION_KERNEL = 'run/game.session.kernel.js';
 const SESSION_BROWSER = 'run/game.session.browser.js';
 const VIEW_MODULES = new Set([
   'battle/battle.view.js', 'battle/battle.overlays.js', 'battle/battle.layers.js',
-  'battle/battle.vfx.js', 'battle/battle.anim.js', 'battle/battle.aim.js',
+  'battle/battle.vfx.js', 'battle/battle.anim.view.js', 'battle/battle.aim.js',
   'battle/battle.hover.js', 'battle/battle.frames.js', 'battle/battle.piles.view.js',
 ]);
 // 流程域（基地/局外 + 局内流程）——纯规则/快照模块不得反向依赖。

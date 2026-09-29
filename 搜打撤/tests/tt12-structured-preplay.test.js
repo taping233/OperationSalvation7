@@ -1,6 +1,6 @@
 import { afterAll, describe, expect, it } from 'vitest';
 import { calculateEffectiveCardCost, pocketSpellDiscountFor } from '../game/src/battle/battle.card-cost.js';
-import { isAreaEffect, targetSideFor } from '../game/src/battle/battle.rules.js';
+import { isAreaEffect, targetSideFor } from '../game/src/battle/battle.target-rules.js';
 import { validateCardRules } from '../game/src/cards/card-rules.schema.js';
 import { KEY as CARDS_KEY, TT12_KEY } from '../game/src/cards/cards.consts.js';
 

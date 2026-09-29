@@ -7,7 +7,7 @@ import { characterName } from '../core/characters.js';
 import { esc } from '../core/shared.js';
 import { escAttr } from '../core/shared.js';
 import { fanLayout } from './battle.hand.js';
-import { intentViewModel } from './battle.intents.js';
+import { intentViewModel } from './battle.intent.view.js';
 import { storeGet, storeSet } from '../core/storage.js';
 /* W5-03（2026-09-27 R2）：首次意图图例样式（battle.css 冻结 → head 注入，W2-01 同款）。 */
 if (!document.getElementById('stsIntentLegendStyle')) {
@@ -48,7 +48,7 @@ import { commands, getSnapshot, AFFIX_META, Combat, aegisBlocked, effCostOf, fin
   const useItemCmd = commands.useItem;
   const cancelPendingTarget = commands.cancelPendingTarget;
   const HAND_PAGE_SIZE = 9;   // 2026-09-16 老板：每栏最多 9 张（原 battle.view 渲染段，随 updateHand 的 handIndex 落位迁入——批5）
-import { animateSafe } from './battle.anim.js';
+import { animateSafe } from './battle.anim.view.js';
 import { schedulePresentationMs } from './battle.clock.js';
 import { aim, clickSelectedUid, selectCardByClick, clickSelectedTarget, setTargetable, startAim, cancelAim, cancelClickSelection } from './battle.aim.js';
 import { showFoePreview, clearFoePreview } from './battle.hover.js';

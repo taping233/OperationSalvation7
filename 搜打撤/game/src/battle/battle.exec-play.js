@@ -5,7 +5,7 @@
 const SDT = window.SDT;
 import { esc } from '../core/shared.js';
 import { removeUid } from './battle.piles.js';
-import { targetSideFor } from './battle.rules.js';
+import { targetSideFor } from './battle.target-rules.js';
 import { throwIfActionCancelled } from './battle.staged-playback.js';
 import { rejectUnsupportedCard } from './battle.rule-guard.js';
 import { isHandPaymentCandidate } from './battle.hand-selection.js';

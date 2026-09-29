@@ -24,7 +24,7 @@ describe('核心卡牌交互的键盘与读屏契约', () => {
   it('战斗手牌提供 button 语义和 Enter/Space 操作', () => {
     // 2026-09-22 battle.view 拆片：断言串随片走，壳+六片拼接后仍断言「战斗源码含 X」
     const battle = ['battle/battle.view.js', 'battle/battle.overlays.js', 'battle/battle.layers.js', 'battle/battle.vfx.js',
-      'battle/battle.anim.js', 'battle/battle.aim.js', 'battle/battle.hover.js']
+      'battle/battle.anim.view.js', 'battle/battle.aim.js', 'battle/battle.hover.js']
       .map((f) => source(f)).join('\n');
     expect(battle).toContain("rec.card.setAttribute('role', 'button')");
     expect(battle).toContain('rec.card.tabIndex = 0');

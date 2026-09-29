@@ -5,7 +5,7 @@
  * 法伤+1 / 可注能与必须注能的招式均视为已注能；打出时 5 张封印单卡早已消耗，
  * 并召唤 4 名无攻血封印肢体（同天国之门口径，不自动攻击、不替主人承伤）。 */
 import { describe, it, expect, beforeAll } from 'vitest';
-import { unplayableReasonFor } from '../game/src/battle/battle.rules.js';
+import { unplayableReasonFor } from '../game/src/battle/battle.target-rules.js';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };
 window.SDT.Icons.TYPE_ART = {};

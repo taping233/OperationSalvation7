@@ -142,7 +142,7 @@ describe('架构守护（2026-09-11 批次 1）', () => {
 
   it('核心机制层不访问 DOM', () => {
     const core = ['battle/battle.core.js', 'battle/battle.runtime.js', 'battle/battle.engine.js', 'battle/battle.enemy-phase.js',
-      'battle/battle.effects.js', 'battle/battle.deck.js', 'battle/battle.rules.js',
+      'battle/battle.effects.js', 'battle/battle.deck.js', 'battle/battle.target-rules.js',
       'battle/battle.state.js', 'battle/battle.piles.js', 'hub/game.store.js', 'hub/game.storage.js', 'cards/cards.js',
       'core/rules.js', 'hub/meta.js', 'hub/base.js', 'core/random.js', 'core/mapData.js', 'run/map-graph.js',
       'cards/mech-sentences.js', 'core/characters.js', 'core/shared.js', 'core/asset-url.js', 'core/sdt-facade.js'];

@@ -28,7 +28,7 @@ const GAME_PARTS = ['game.session.js', 'game.menu.js', 'game.run.data.js', 'game
   'game.notes.js', 'game.cardslib.js', 'game.boot.js'];
 const BATTLE_PARTS = ['battle.core.js', 'battle.runtime.js', 'battle.engine.js', 'battle.enemy-phase.js',
   'battle.view.js', 'battle.overlays.js', 'battle.layers.js',
-  'battle.vfx.js', 'battle.anim.js', 'battle.aim.js', 'battle.hover.js'];
+  'battle.vfx.js', 'battle.anim.view.js', 'battle.aim.js', 'battle.hover.js'];
 const src = (p) => {
   if (p === 'game.js') return GAME_PARTS.map(f => fs.readFileSync(path.join(HERE, 'src', f), 'utf8')).join('\n');
   if (p === 'battle.js') return BATTLE_PARTS.map(f => fs.readFileSync(path.join(HERE, 'src', f), 'utf8')).join('\n');

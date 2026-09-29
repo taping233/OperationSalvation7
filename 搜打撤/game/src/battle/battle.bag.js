@@ -4,7 +4,7 @@ const SDT = window.SDT;
 import { esc } from '../core/shared.js';
 import { Random } from '../core/random.js';
 import * as Combat from './combat.js';
-import { itemTargetSideFor } from './battle.rules.js';
+import { itemTargetSideFor } from './battle.target-rules.js';
 import { getHostedExecutionCard } from './battle.hosted.js';
 import { G, foes, mode, energy, busy, infusing, discovering, choosing, handSelecting, viewingGrave, selectingDeck, viewingBag, pstat, floats, consumed, hand, cardAnims, delayed, set$energy, set$viewingBag } from './battle.runtime.js';
 

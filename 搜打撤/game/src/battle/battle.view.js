@@ -19,7 +19,7 @@ import { BattleSession, commands, configureBattleRenderer, getSnapshot, R, effCo
 import { renderDeckSelection, renderGrave, renderBattleBag, renderDeckPileView } from './battle.overlays.js';
 import { mountHandLayer, updateHand, mountUnitLayer, updateUnits, setHandSuspended, HAND_PAGE_SIZE } from './battle.layers.js';
 import { spawnFloats } from './battle.vfx.js';
-import { captureBattleView, animateBattleTransition } from './battle.anim.js';
+import { captureBattleView, animateBattleTransition } from './battle.anim.view.js';
 import { aim, aimPlayedAt, selectCardByClick, showCardBlockReason, startAim, cancelAim, canPreserveAim, resumeAimAfterRender, setClickSelectedUid } from './battle.aim.js';
 import { showThoughtBubble } from './battle.hover.js';
 
