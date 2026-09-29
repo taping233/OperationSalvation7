@@ -14,7 +14,7 @@
     "postbuild": "node scripts/perf-budget.cjs",
     "preview": "vite preview",
     "pretest": "npm run narrative:compile && node scripts/validate-data.mjs",
-    "test": "vitest run --no-file-parallelism --reporter=dot",
+    "test": "vitest run --reporter=dot",
     "test:target": "node scripts/acceptance-gate.mjs --target-tests",
     "check:staged": "node scripts/acceptance-gate.mjs --staged --run",
     "check:staged:plan": "node scripts/acceptance-gate.mjs --staged --plan",

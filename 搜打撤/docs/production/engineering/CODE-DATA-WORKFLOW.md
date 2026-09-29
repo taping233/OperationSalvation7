@@ -29,8 +29,8 @@
 
 ### 验证与 CI 边界
 
-- 默认定向验证。按改动选择 `check:syntax`、`validate:data`、`typecheck`、`lint`、相关 Vitest、浏览器实页或图片复核。CSS、文案和图片变化应看真实页面/图片。全量 `npx vitest run --no-file-parallelism` 用于收尾落库或公共架构变化；共享工作区有他人半成品时禁止 build。
-- `.github/workflows/ci.yml`：master push 与 PR 触发；Node 22，`npm ci`、语法/类型/lint，再由 `npm test` 的 pretest 编译剧情、校验数据并执行串行全量 Vitest；该 workflow 没有构建步骤。
+- 默认定向验证。按改动选择 `check:syntax`、`validate:data`、`typecheck`、`lint`、相关 Vitest、浏览器实页或图片复核。CSS、文案和图片变化应看真实页面/图片。全量 `npx vitest run`（默认并行；2026-09-29 实测解除旧串行规则：234 文件/1888 用例 304.5s→约 55s，连续 4 次全绿）用于收尾落库或公共架构变化；共享工作区有他人半成品时禁止 build。
+- `.github/workflows/ci.yml`：master push 与 PR 触发；Node 22，`npm ci`、语法/类型/lint，再由 `npm test` 的 pretest 编译剧情、校验数据并执行全量 Vitest；该 workflow 没有构建步骤。
 - `.github/workflows/vite-quality.yml`：master push 与 PR 按 Vite 路径过滤触发；Node 22，`npm ci` 与 `npm run build`（prebuild 处理剧情/数据，postbuild 检查性能预算），不重复全量测试。配置只说明预期流水线，是否实际运行/通过须查对应 Actions 记录。
 - 本地质量门脚本和覆盖限制见[质量门](../../quality-gates.md)。构建成功、静态测试或 Agent 模拟均不单独代表实页完整验收。
 

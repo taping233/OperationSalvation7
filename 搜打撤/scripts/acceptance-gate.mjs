@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Fast, explicitly partial local gate. CI and phase closeout keep the full suite.
-import { execFileSync, spawnSync } from 'node:child_process';
+import { execFileSync, spawn, spawnSync } from 'node:child_process';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import { analyzeModule } from './architecture-graph.mjs';
@@ -210,6 +210,33 @@ function runNode(args, label) {
   if (result.status !== 0) throw new Error(label + ' 失败（exit ' + result.status + '）');
 }
 
+function runNodeCaptured(args, label) {
+  return new Promise(resolve => {
+    const child = spawn(process.execPath, args, { cwd: PROJECT_ROOT, stdio: ['ignore', 'pipe', 'pipe'] });
+    let output = '';
+    child.stdout.on('data', chunk => { output += chunk.toString('utf8'); });
+    child.stderr.on('data', chunk => { output += chunk.toString('utf8'); });
+    child.on('error', error => resolve({ label, ok: false, output: String(error) }));
+    child.on('close', code => resolve({ label, ok: code === 0, output }));
+  });
+}
+
+async function runStaticChecks() {
+  process.stdout.write('[gate] 静态检查并行：语法 / 数据 / 类型 / ESLint\n');
+  const results = await Promise.all([
+    runNodeCaptured(['scripts/check-syntax.mjs'], '语法检查'),
+    runNodeCaptured(['scripts/validate-data.mjs'], '内容数据检查'),
+    runNodeCaptured(['scripts/check-types.mjs'], '类型契约检查'),
+    runNodeCaptured(['node_modules/eslint/bin/eslint.js', 'game/src', 'tests', 'scripts/acceptance-gate.mjs'], 'ESLint'),
+  ]);
+  for (const result of results) {
+    process.stdout.write('[gate] ' + result.label + '：' + (result.ok ? 'OK' : 'FAIL') + '\n');
+    if (result.output.trim()) process.stdout.write(result.output + '\n');
+  }
+  const failed = results.filter(result => !result.ok);
+  if (failed.length) throw new Error(failed.map(result => result.label).join('、') + ' 失败');
+}
+
 function printPlan(plan) {
   process.stdout.write('[gate] 模式：' + plan.mode + '\n');
   for (const p of plan.paths) process.stdout.write('[gate] 变更：' + p + '\n');
@@ -217,7 +244,7 @@ function printPlan(plan) {
   for (const test of plan.tests) process.stdout.write('[gate] 测试：' + test + '\n');
 }
 
-function main() {
+async function main() {
   const args = process.argv.slice(2);
   if (args[0] === '--target-tests') {
     const tests = args.slice(1).map(toProjectPath);
@@ -226,8 +253,7 @@ function main() {
       if (!test.startsWith('tests/') || !test.endsWith('.test.js')
         || !existsSync(path.join(PROJECT_ROOT, test))) throw new Error('无效测试文件：' + test);
     }
-    runNode(['node_modules/vitest/vitest.mjs', 'run', ...tests,
-      '--no-file-parallelism', '--reporter=dot'], '指定 Vitest');
+    runNode(['node_modules/vitest/vitest.mjs', 'run', ...tests, '--reporter=dot'], '指定 Vitest');
     return;
   }
   const pathIndex = args.indexOf('--paths');
@@ -253,12 +279,9 @@ function main() {
   if (!args.includes('--run') || plan.mode === 'skip') return;
   runNode(['scripts/compile-narrative.mjs'], '剧情编译');
   if (staged) stagedChanges();
-  runNode(['scripts/check-syntax.mjs'], '语法检查');
-  runNode(['scripts/validate-data.mjs'], '内容数据检查');
-  runNode(['scripts/check-types.mjs'], '类型契约检查');
-  runNode(['node_modules/eslint/bin/eslint.js', 'game/src', 'tests', 'scripts/acceptance-gate.mjs'], 'ESLint');
+  await runStaticChecks();
   const testArgs = ['node_modules/vitest/vitest.mjs', 'run',
-    ...(plan.mode === 'quick' ? plan.tests : []), '--no-file-parallelism', '--reporter=dot', '--silent'];
+    ...(plan.mode === 'quick' ? plan.tests : []), '--reporter=dot', '--silent'];
   runNode(testArgs, plan.mode === 'quick' ? '定向 Vitest（完整测试留给 CI/阶段收尾）' : '全量 Vitest');
   if (staged) stagedChanges();
   process.stdout.write('[gate] PASS：' + plan.mode + ' 验收完成\n');
