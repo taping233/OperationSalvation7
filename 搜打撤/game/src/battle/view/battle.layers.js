@@ -57,6 +57,8 @@ import { cardRuleHint } from './battle.preview.js';
   // 数字键选牌 / Esc 取消（原在 aim 片：需读手牌层 handLayer，随迁本片解 aim↔layers 环——2026-09-22 批5）
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
+      // 输入法组合中（keyCode 229）：Esc 是取消拼音组合，不是取消瞄准/点选/注能
+      if (e.isComposing || e.keyCode === 229) return;
       if (e.defaultPrevented || !UI.el.ovBody?.querySelector('.battle-stage')) return;
       const snap = getSnapshot();
       const pending = snap.pendingTarget || snap.pendingItem || snap.slamPending || snap.dartPending;
