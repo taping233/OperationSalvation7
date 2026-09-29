@@ -512,7 +512,9 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     // 分步同步断言在全量并发负载下有竞态缝（01:14 批次②全量实锤一例））
     search.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
     expect(cardsLib.cardPageOpen).toBe(false);
-    await waitFor(() => !document.querySelector('.card-library-page') && overlay.hidden, 3000);
+    // 15000ms 窗口：waitFor 绿跑时条件成立即返回（零成本），仅真卡死才等满——
+    // 全量并发负载下本文件单测可慢 3-5 倍，3000ms 曾两次假红（批次②/③实锤）
+    await waitFor(() => !document.querySelector('.card-library-page') && overlay.hidden, 15000);
     expect(overlay.hidden).toBe(true);
 
     // 加载态分支（boot.js 152）同族守卫：组合态 Esc 不强关、不打断加载
