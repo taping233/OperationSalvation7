@@ -5,6 +5,9 @@ const RUN_KEY = index => `sdt-save-v2-slot${index}`;
 const OLD_SAVE_KEY = 'sdt-save-v1';
 // 坏档备份键：读档解析失败时原串转存于此，避免被下一次 write 无声覆盖
 const CORRUPT_KEY = index => `sdt-run-${index}-corrupt`;
+// 上一版好档备份键：write 覆盖主档前尽力转存原串（写基线只防并发不防逻辑坏档，
+// 序列化成功但内容错时唯一好档会直接丢失）。尽力而为，备份失败绝不阻断主写。
+const PREV_KEY = index => `sdt-run-${index}-prev`;
 const TX_KEY = index => `sdt-tx-v1-slot${index}`;
 const txPending = index => { try { return localStorage.getItem(TX_KEY(index)) !== null; } catch { return true; } };
 let runIdNonce = 0;
@@ -143,6 +146,8 @@ const RunStorage = Object.freeze({
       const identity = persistedIdentity || value?._r2 || { runId: newRunId(index), revision: -1 };
       const nextIdentity = { runId: identity.runId, revision: Math.max(-1, Number(identity.revision) || 0) + 1 };
       const nextRaw = JSON.stringify({ ...value, _r2: nextIdentity, version: SAVE_VERSION });
+      // 覆盖前把当前好档原串转存 prev 键（尽力而为：失败不影响本次主写）
+      if (currentRaw) { try { localStorage.setItem(PREV_KEY(index), currentRaw); } catch { /* 尽力而为 */ } }
       localStorage.setItem(RUN_KEY(index), nextRaw);
       writeBaseline.set(index, nextRaw);
       writeIssues.delete(index);
@@ -156,6 +161,7 @@ const RunStorage = Object.freeze({
     try {
       localStorage.removeItem(RUN_KEY(index));
       localStorage.removeItem(CORRUPT_KEY(index));
+      try { localStorage.removeItem(PREV_KEY(index)); } catch { /* 尽力而为，不悬挂 */ }
     } catch { writeIssues.set(index, 'STORAGE'); return false; }
     reader.invalidate(index);
     writeBaseline.delete(index);

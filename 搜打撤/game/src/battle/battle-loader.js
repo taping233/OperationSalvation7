@@ -31,11 +31,19 @@ export function captureBattleContext(game, getSlot = () => window.SDT?.Base?.slo
 }
 
 async function ensureBattleReady() {
+  // window 不存在 = 宿主环境已拆除（如测试 teardown 后挂起的调用仍触发）。
+  // 与 captureBattleContext（9d7b871）同一定式：给出可预期的失败而非裸 window
+  // 的 ReferenceError。本函数为 async，throw 即 rejection，调用方
+  // （startBattle try / 选角页 .catch / 菜单外层 try）均有捕获姿势。
+  // 浏览器内此分支不可达，行为逐字不变。
+  if (typeof window === "undefined") throw new Error('战斗模块加载失败：宿主环境已拆除（window 不存在）');
   const ready = window.SDT?.Battle;
   if (ready?.start && ready?.restore) return ready;
   if (!battlePromise) {
     performance.mark?.('sdt:battle-load-start');
     battlePromise = import('./view/battle.view.js').then(() => {
+      // 动态 import 期间环境被拆除：注册结果不可读，同样给可读 Error 而非裸引用。
+      if (typeof window === "undefined") throw new Error('战斗模块加载失败：宿主环境已拆除（window 不存在）');
       const battle = window.SDT?.Battle;
       if (!battle?.start || !battle?.restore) throw new Error('战斗模块加载后未注册 SDT.Battle');
       performance.mark?.('sdt:battle-load-end');

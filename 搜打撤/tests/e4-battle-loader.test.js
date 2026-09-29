@@ -121,3 +121,30 @@ describe('E4 battle lazy-load request ownership', () => {
     expect(battle.start).toHaveBeenCalledExactlyOnceWith(game, ['retry'], {});
   });
 });
+
+// U5-a 守卫（2026-09-29 夜班）：宿主环境拆除后 ensure 路径必须给可预期失败（reject
+// 携带可读 Error），而非裸 window 引用的 ReferenceError（对齐 9d7b871 的谓词守卫定式）。
+describe('E4 battle-loader ensure survives torn-down host', () => {
+  afterEach(() => { vi.unstubAllGlobals(); });
+
+  it('rejects with a readable Error (not a bare window ReferenceError) when window is gone', async () => {
+    vi.stubGlobal('window', undefined);
+    const { ensureBattleReady } = await import('../game/src/battle/battle-loader.js');
+    const outcome = await ensureBattleReady().then(() => 'resolved', error => error);
+    expect(outcome).toBeInstanceOf(Error);
+    expect(outcome.name).not.toBe('ReferenceError');
+    expect(outcome.message).toContain('宿主环境已拆除');
+  });
+
+  it('rejects with a readable Error when the host is torn down during the dynamic import', async () => {
+    vi.doMock('../game/src/battle/view/battle.view.js', async () => {
+      vi.stubGlobal('window', undefined); // 模块装载完成的瞬间宿主被拆（teardown 时序）
+      return {};
+    });
+    const { ensureBattleReady } = await import('../game/src/battle/battle-loader.js');
+    const outcome = await ensureBattleReady().then(() => 'resolved', error => error);
+    expect(outcome).toBeInstanceOf(Error);
+    expect(outcome.name).not.toBe('ReferenceError');
+    expect(outcome.message).toContain('宿主环境已拆除');
+  });
+});

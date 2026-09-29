@@ -87,6 +87,26 @@ describe('固定旧档兼容样本', () => {
     expect(RunStorage.read(5).hp).toBe(26);
   });
 
+  it('prev 备份键：覆盖前转存上一版原串；首次写入不产生；remove 一并清理', () => {
+    // 首次写入（无旧档）：主档落盘但不产生 prev
+    expect(RunStorage.write(2, { hp: 1 })).toBe(true);
+    const first = localStorage.getItem(RunStorage.key(2));
+    expect(first).not.toBeNull();
+    expect(localStorage.getItem('sdt-run-2-prev')).toBeNull();
+    // 第二次覆盖：prev = 上一版完整原串（含身份盖章，逐字未动）
+    expect(RunStorage.write(2, { hp: 2 })).toBe(true);
+    const second = localStorage.getItem(RunStorage.key(2));
+    expect(second).not.toBe(first);
+    expect(localStorage.getItem('sdt-run-2-prev')).toBe(first);
+    // 再次覆盖：prev 滚动为最近的旧版（新旧交替的中间版）
+    expect(RunStorage.write(2, { hp: 3 })).toBe(true);
+    expect(localStorage.getItem('sdt-run-2-prev')).toBe(second);
+    // 删除档位：prev 一并删除，不悬挂
+    expect(RunStorage.remove(2)).toBe(true);
+    expect(localStorage.getItem(RunStorage.key(2))).toBeNull();
+    expect(localStorage.getItem('sdt-run-2-prev')).toBeNull();
+  });
+
   it('无编辑基线时也拒绝覆盖另一标签刚创建的对局', () => {
     const latest = JSON.stringify({ version: RunStorage.SAVE_VERSION, hp: 27,
       _r2: { runId: 'new-slot-run', revision: 0 } });
