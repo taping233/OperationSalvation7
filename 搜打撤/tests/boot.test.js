@@ -507,10 +507,12 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     expect(cardsLib.cardPageOpen).toBe(true);
     expect(document.querySelector('.card-library-page')).not.toBeNull();
 
-    // ② 非组合态普通 Esc：照常关闭（非 IME 场景行为不变；关闭带收场动画，用条件等待）
+    // ② 非组合态普通 Esc：照常关闭（非 IME 场景行为不变；关闭带收场动画，用条件等待。
+    // overlay.hidden 必须并入 waitFor 条件——「大页 DOM 消失」与「overlay 收尾」非同拍，
+    // 分步同步断言在全量并发负载下有竞态缝（01:14 批次②全量实锤一例））
     search.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
     expect(cardsLib.cardPageOpen).toBe(false);
-    await waitFor(() => !document.querySelector('.card-library-page'), 3000);
+    await waitFor(() => !document.querySelector('.card-library-page') && overlay.hidden, 3000);
     expect(overlay.hidden).toBe(true);
 
     // 加载态分支（boot.js 152）同族守卫：组合态 Esc 不强关、不打断加载
