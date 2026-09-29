@@ -13,15 +13,11 @@ export let freeCast = new Set();
 export function set$drawPile(v) { drawPile = v; }
 export function set$hand(v) { hand = v; }
 export function set$discard(v) { discard = v; }
-export function set$granted(v) { granted = v; }
-export function set$played(v) { played = v; }
 export function set$consumed(v) { consumed = v; }
 export function set$grave(v) { grave = v; }
 export function set$delayed(v) { delayed = v; }
 export function set$noDrawNext(v) { noDrawNext = v; }
 export function set$lastDrawnUids(v) { lastDrawnUids = v; }
-export function set$zeroFeeUntil(v) { zeroFeeUntil = v; }
-export function set$cardOverrides(v) { cardOverrides = v; }
 export function set$equipped(v) { equipped = v; }
 export function set$freeCast(v) { freeCast = v; }
 

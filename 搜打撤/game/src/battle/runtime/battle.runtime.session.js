@@ -33,7 +33,6 @@ export function set$pstat(v) { pstat = v; }
 export function set$allies(v) { allies = v; }
 export function set$battleRestartCheckpoint(v) { battleRestartCheckpoint = v; }
 export function set$restoringRestartCheckpoint(v) { restoringRestartCheckpoint = v; }
-export function set$tmpSeq(v) { tmpSeq = v; }
 export function set$activeActionSignal(v) { activeActionSignal = v; }
 export function set$surgeWaiter(v) { surgeWaiter = v; }
 export function set$lastPersistAt(v) { lastPersistAt = v; }

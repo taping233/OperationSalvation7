@@ -76,6 +76,25 @@ function extractSetters(src) {
   return new Set([...src.matchAll(/^export function set\$(\w+)/gm)].map(m => m[1]));
 }
 
+// 09-29 knip C 类批豁免（老板批删）：这些字段的 set$ 写入口全仓零调用（生产+测试+动态
+// 拼接三重确认），已删除。字段本身保留——写入走文件内赋值（如 resetRuneFlags）或引用
+// 变异（push/pop 等不经 setter 的通道）。新字段默认仍须带 setter，列入本清单要有据。
+const SETTER_EXEMPT = new Set([
+  // effects：growthNames/growth/timeRune/arrowRune/unyieldRune/ashRune/unlimitedRune/
+  // holyRune/fireballRuneOn/freezeRuneOn/swiftRune/timeSpaceRune/armorMul（13，resetRuneFlags 内写入）
+  'growthNames', 'growth', 'timeRune', 'arrowRune', 'unyieldRune', 'ashRune',
+  'unlimitedRune', 'holyRune', 'fireballRuneOn', 'freezeRuneOn', 'swiftRune',
+  'timeSpaceRune', 'armorMul',
+  // piles：granted/played/zeroFeeUntil/cardOverrides（4，引用变异+存档回填写）
+  'granted', 'played', 'zeroFeeUntil', 'cardOverrides',
+  // presentation：renderBattle/floats/cardAnims/presentationActionSeq/dreadShown/
+  // snapCache/snapSig（7，view 侧引用变异）
+  'renderBattle', 'floats', 'cardAnims', 'presentationActionSeq', 'dreadShown',
+  'snapCache', 'snapSig',
+  // session：tmpSeq（1）
+  'tmpSeq',
+]);
+
 describe('战斗运行态字段完整性守卫', () => {
   it('runtime 五片 export let 集合与白名单逐字一致', () => {
     for (const [file, expected] of Object.entries(WHITELIST)) {
@@ -85,11 +104,11 @@ describe('战斗运行态字段完整性守卫', () => {
     }
   });
 
-  it('每个 runtime 可变全局都有对应的 set$ 写入口', () => {
+  it('每个 runtime 可变全局都有对应的 set$ 写入口（豁免清单除外）', () => {
     for (const [file, names] of Object.entries(WHITELIST)) {
       const src = readFileSync(resolve(BATTLE_DIR, file), 'utf8');
       const setters = extractSetters(src);
-      const missing = names.filter(n => !setters.has(n));
+      const missing = names.filter(n => !setters.has(n) && !SETTER_EXEMPT.has(n));
       expect(missing, `${file} 缺少 set$ 写入口的字段`).toEqual([]);
     }
   });
