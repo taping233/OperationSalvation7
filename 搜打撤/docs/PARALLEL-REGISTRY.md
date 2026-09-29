@@ -9,14 +9,14 @@
 
 | 会话/来源 | 属地（文件/端口/工作树） | 事项 | 登记时间 | 状态 |
 |---|---|---|---|---|
-| （他会在途，勿动）未知会话 | game/css/expedition-library.css、game/src/hub/game.cardslib.page.js | 两文件新 M，未登记，疑似照相馆/cardslib 线开工 | 09-29 深夜发现 | 在途 |
+| Friday（照相馆性能专项会话） | game/css/expedition-library.css、game/src/hub/game.cardslib.page.js、docs/PHOTOLIB-PERF-TASK-2026-09-29.md、docs/evidence/photolib-perf-task-2026-09-29/、worktree .photolib-acc（2bcfc23+上述两文件）、端口 8137（隔离验收服）、8138（工作树源码服，已污染勿用） | 照相馆性能专项二期：壳常驻+IO 窗口化重构，等老板 8137 验收 | 09-29 晚 | 在途 |
+
 
 ## 无主物品（只记录勿动，等认领/处置）
 
 | 物品 | 现象 | 发现时间 | 备注 |
 |---|---|---|---|
 | `搜打撤/package-lock.json` | 已修改未提交（M），改动者不明 | 09-29 深夜 | 疑似某会话依赖变更在途；认领前不还原不提交 |
-| `搜打撤/docs/PHOTOLIB-PERF-TASK-2026-09-29.md` + `evidence/photolib-perf-task-2026-09-29/` | 未跟踪新文件（照相馆性能任务书+证据） | 09-29 深夜 | 疑似并行会话在途产物；勿动勿覆盖 |
 
 ## 近期已释放（保留最近 10 条，更早删除）
 
@@ -24,3 +24,4 @@
 |---|---|---|---|
 | Friday（记忆v2会话） | 根 AGENTS.md、docs/README.md、本文件、docs/PENDING.md、docs/PARALLEL-DISPATCH-PLAYBOOK.md、docs/STATUS.md、记忆 MEMORY/ARCHIVE | 工作流标准化七项+落库双提交（0bac1f3+643434f） | 09-29 深夜，已完成 |
 | Friday（同上） | game/src 6 文件+tests/run-architecture+knip.json、docs/STATUS+PENDING | knip A 类死代码清理双提交（20c4e25+041fd65） | 09-29 深夜，已完成 |
+| Friday（同上） | ui/terminal-settlement.js 新建、death/menu/battle.resolution、evidence/jscpd-2026-09-29/、STATUS+PENDING #12 | jscpd 档一收敛双提交（506ccea+落档） | 09-29 深夜，已完成 |
