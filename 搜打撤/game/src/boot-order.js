@@ -20,4 +20,3 @@ const BOOT_ORDER = [
 ];
 
 export { BOOT_ORDER };
-export default BOOT_ORDER;

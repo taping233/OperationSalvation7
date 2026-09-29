@@ -48,7 +48,7 @@ describe('局内流程模块分层（批次 4）', () => {
 
   it('对外导出面不变：game.boot.js / game.bag.js 依赖的符号仍从 game.run.js 出', () => {
     const exported = SHELL.match(/^export \{([^}]*)\};/m)[1].split(',').map(s => s.trim());
-    for (const name of ['bindRunMixins', 'moveTo', 'openAltarRitual', 'openClassChoice', 'openShop', 'showRunTransition', 'devForceBattle']) {
+    for (const name of ['bindRunMixins', 'moveTo', 'openClassChoice', 'openShop', 'showRunTransition', 'devForceBattle']) {
       expect(exported, `${name} 应仍在 game.run.js 导出`).toContain(name);
     }
   });

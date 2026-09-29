@@ -48,5 +48,4 @@ const Agent = Object.freeze({
 
 sdtDefine('Agent', Agent);
 
-export default Agent;
 export { observe, act, step, autoRun, waitSettle, isTurbo, setTurbo };

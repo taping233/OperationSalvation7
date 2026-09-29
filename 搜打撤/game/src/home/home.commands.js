@@ -175,4 +175,3 @@ const defaultCommands = createHomeCommands({ readBase, readBaseReceipt, commitBa
 export const buyFurniture = (...args) => defaultCommands.buyFurniture(...args);
 export const saveLayout = (...args) => defaultCommands.saveLayout(...args);
 export const setDisplay = (...args) => defaultCommands.setDisplay(...args);
-export const getHomeForSlot = (...args) => defaultCommands.getHome(...args);
