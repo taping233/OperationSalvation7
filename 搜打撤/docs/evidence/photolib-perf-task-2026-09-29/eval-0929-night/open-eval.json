@@ -1,0 +1,171 @@
+{
+  "summary": {
+    "capturedAt": "2026-09-29T13:16:52.673Z",
+    "baseUrl": "http://localhost:8137/",
+    "rounds": 5,
+    "cold": {
+      "round": 1,
+      "cold": true,
+      "importMs": 5.2,
+      "syncMs": 0.6,
+      "firstFrameMs": 500,
+      "items": 271,
+      "state": "modal",
+      "loafCount": 4,
+      "loafMax": 581.7,
+      "loafScripts": [
+        [
+          "DOMWindow.onDOMContentLoaded",
+          221.8
+        ],
+        [
+          "http://localhost:8137/src/main.js?t=1790685095276",
+          167.8
+        ]
+      ],
+      "ltCount": 1,
+      "stateAfterClose": "title",
+      "cardlibOpenClass": false,
+      "photoFpsLogs": [
+        "[photo-fps]{\"label\":\"render-sync\",\"ms\":121.5,\"photos\":271}"
+      ]
+    },
+    "warmMedian": {
+      "syncMs": 0,
+      "firstFrameMs": 59.9
+    },
+    "warmLoafCountMax": 10
+  },
+  "rounds": [
+    {
+      "round": 1,
+      "cold": true,
+      "importMs": 5.2,
+      "syncMs": 0.6,
+      "firstFrameMs": 500,
+      "items": 271,
+      "state": "modal",
+      "loafCount": 4,
+      "loafMax": 581.7,
+      "loafScripts": [
+        [
+          "DOMWindow.onDOMContentLoaded",
+          221.8
+        ],
+        [
+          "http://localhost:8137/src/main.js?t=1790685095276",
+          167.8
+        ]
+      ],
+      "ltCount": 1,
+      "stateAfterClose": "title",
+      "cardlibOpenClass": false,
+      "photoFpsLogs": [
+        "[photo-fps]{\"label\":\"render-sync\",\"ms\":121.5,\"photos\":271}"
+      ]
+    },
+    {
+      "round": 2,
+      "cold": false,
+      "importMs": 0.6,
+      "syncMs": 0,
+      "firstFrameMs": 892.4,
+      "items": 271,
+      "state": "modal",
+      "loafCount": 10,
+      "loafMax": 968.1,
+      "loafScripts": [
+        [
+          "import.then",
+          122.8
+        ],
+        [
+          "import.then",
+          38.1
+        ],
+        [
+          "TimerHandler:setTimeout",
+          11.5
+        ]
+      ],
+      "ltCount": 0,
+      "stateAfterClose": "title",
+      "cardlibOpenClass": false,
+      "photoFpsLogs": [
+        "[photo-fps]{\"label\":\"render-sync\",\"ms\":37.6,\"photos\":271}"
+      ]
+    },
+    {
+      "round": 3,
+      "cold": false,
+      "importMs": 0.4,
+      "syncMs": 0.1,
+      "firstFrameMs": 59.9,
+      "items": 271,
+      "state": "modal",
+      "loafCount": 2,
+      "loafMax": 57.1,
+      "loafScripts": [
+        [
+          "import.then",
+          24.1
+        ],
+        [
+          "FrameRequestCallback",
+          8.6
+        ]
+      ],
+      "ltCount": 0,
+      "stateAfterClose": "title",
+      "cardlibOpenClass": false,
+      "photoFpsLogs": [
+        "[photo-fps]{\"label\":\"render-sync\",\"ms\":23.3,\"photos\":271}"
+      ]
+    },
+    {
+      "round": 4,
+      "cold": false,
+      "importMs": 0.3,
+      "syncMs": 0,
+      "firstFrameMs": 57,
+      "items": 271,
+      "state": "modal",
+      "loafCount": 1,
+      "loafMax": 51.8,
+      "loafScripts": [
+        [
+          "import.then",
+          26.5
+        ],
+        [
+          "FrameRequestCallback",
+          10.4
+        ]
+      ],
+      "ltCount": 0,
+      "stateAfterClose": "title",
+      "cardlibOpenClass": false,
+      "photoFpsLogs": [
+        "[photo-fps]{\"label\":\"render-sync\",\"ms\":26.1,\"photos\":271}"
+      ]
+    },
+    {
+      "round": 5,
+      "cold": false,
+      "importMs": 3,
+      "syncMs": 0,
+      "firstFrameMs": 47.1,
+      "items": 271,
+      "state": "modal",
+      "loafCount": 0,
+      "loafMax": 0,
+      "loafScripts": [],
+      "ltCount": 0,
+      "stateAfterClose": "title",
+      "cardlibOpenClass": false,
+      "photoFpsLogs": [
+        "[photo-fps]{\"label\":\"render-sync\",\"ms\":18.7,\"photos\":271}"
+      ]
+    }
+  ]
+}

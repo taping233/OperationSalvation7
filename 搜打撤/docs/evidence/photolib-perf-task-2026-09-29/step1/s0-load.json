@@ -1,0 +1,35 @@
+{
+  "scenario": "load",
+  "capturedAt": "2026-09-29T10:07:14.701Z",
+  "bootState": {
+    "ms": 0.2,
+    "phase": "title"
+  },
+  "browser": {
+    "gpu": {
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "vendor": "Google Inc. (NVIDIA)"
+    },
+    "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36 Edg/154.0.0.0"
+  },
+  "navigation": {
+    "responseEndMs": 19,
+    "domInteractiveMs": 400.1,
+    "domContentLoadedMs": 1301.1,
+    "loadEventMs": 1750.5
+  },
+  "paint": [
+    [
+      "first-paint",
+      1312
+    ],
+    [
+      "first-contentful-paint",
+      1312
+    ]
+  ],
+  "battleModuleLoadsMs": [],
+  "battleFrameLoads": [],
+  "resourceCount": 240,
+  "resourceTransferKiB": 34733.36
+}

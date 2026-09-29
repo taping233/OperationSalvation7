@@ -1,0 +1,112 @@
+{
+  "scenario": "photo-scroll",
+  "conditions": {
+    "page": "照相馆·目录连续滚动（线性滚完全程，沿途窗口挂载追批）",
+    "photos": 30,
+    "catalogCount": 271,
+    "scroll": {
+      "scrollHeight": 2755,
+      "clientHeight": 751,
+      "maxScroll": 2004
+    },
+    "mountedAfterScroll": 271
+  },
+  "rounds": [
+    {
+      "mode": "scroll",
+      "viewport": {
+        "cssWidth": 1894,
+        "cssHeight": 987,
+        "bufferWidth": 1894,
+        "bufferHeight": 987,
+        "dpr": 1
+      },
+      "phaseBefore": "overlay",
+      "phaseAfter": "overlay",
+      "frames": 129,
+      "rafHz": 21.5,
+      "rafMedianMs": 41.8,
+      "rafP95Ms": 83.3,
+      "rafMaxMs": 124.8,
+      "slowOver20msPercent": 96.12,
+      "drawWrapped": true,
+      "drawCalls": 0,
+      "drawMedianMs": null,
+      "drawP95Ms": null,
+      "drawMaxMs": null,
+      "longTasks": 0,
+      "longTaskMaxMs": null,
+      "longAnimationFrameCount": 31,
+      "longAnimationFrameMaxMs": 129.4,
+      "heapUsedMiB": 32.68,
+      "heapDeltaMiB": 0.55,
+      "visibility": "visible",
+      "cdpHeapUsedMiB": 12.85,
+      "cdpNodes": 9597
+    },
+    {
+      "mode": "scroll",
+      "viewport": {
+        "cssWidth": 1894,
+        "cssHeight": 987,
+        "bufferWidth": 1894,
+        "bufferHeight": 987,
+        "dpr": 1
+      },
+      "phaseBefore": "overlay",
+      "phaseAfter": "overlay",
+      "frames": 141,
+      "rafHz": 23.5,
+      "rafMedianMs": 41.7,
+      "rafP95Ms": 55.6,
+      "rafMaxMs": 97.3,
+      "slowOver20msPercent": 100,
+      "drawWrapped": true,
+      "drawCalls": 0,
+      "drawMedianMs": null,
+      "drawP95Ms": null,
+      "drawMaxMs": null,
+      "longTasks": 0,
+      "longTaskMaxMs": null,
+      "longAnimationFrameCount": 16,
+      "longAnimationFrameMaxMs": 78.4,
+      "heapUsedMiB": 32.94,
+      "heapDeltaMiB": 0.16,
+      "visibility": "visible",
+      "cdpHeapUsedMiB": 13.1,
+      "cdpNodes": 11451
+    },
+    {
+      "mode": "scroll",
+      "viewport": {
+        "cssWidth": 1894,
+        "cssHeight": 987,
+        "bufferWidth": 1894,
+        "bufferHeight": 987,
+        "dpr": 1
+      },
+      "phaseBefore": "overlay",
+      "phaseAfter": "overlay",
+      "frames": 130,
+      "rafHz": 21.67,
+      "rafMedianMs": 41.8,
+      "rafP95Ms": 62.4,
+      "rafMaxMs": 83.4,
+      "slowOver20msPercent": 100,
+      "drawWrapped": true,
+      "drawCalls": 0,
+      "drawMedianMs": null,
+      "drawP95Ms": null,
+      "drawMaxMs": null,
+      "longTasks": 0,
+      "longTaskMaxMs": null,
+      "longAnimationFrameCount": 23,
+      "longAnimationFrameMaxMs": 97.9,
+      "heapUsedMiB": 33.01,
+      "heapDeltaMiB": 0.07,
+      "visibility": "visible",
+      "cdpHeapUsedMiB": 12.42,
+      "cdpNodes": 11883
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "frames": 609,
+  "med": 17.3,
+  "p95": 29.8,
+  "loafCount": 10,
+  "loafMax": 675.6,
+  "ltCount": 2,
+  "ltMax": 88,
+  "previewRebuilds": 0,
+  "topLoafs": [
+    {
+      "d": 675.6,
+      "render": 0,
+      "styleLayout": 0,
+      "scripts": [
+        "TimerHandler:setTimeout:18"
+      ]
+    },
+    {
+      "d": 660.8,
+      "render": 0,
+      "styleLayout": 0,
+      "scripts": [
+        "TimerHandler:setTimeout:6",
+        "TimerHandler:setTimeout:6",
+        "TimerHandler:setTimeout:6"
+      ]
+    },
+    {
+      "d": 367.6,
+      "render": 0,
+      "styleLayout": 0,
+      "scripts": [
+        "import.then:123"
+      ]
+    },
+    {
+      "d": 279.1,
+      "render": 0,
+      "styleLayout": 0,
+      "scripts": []
+    },
+    {
+      "d": 132.6,
+      "render": 0,
+      "styleLayout": 0,
+      "scripts": []
+    }
+  ]
+}

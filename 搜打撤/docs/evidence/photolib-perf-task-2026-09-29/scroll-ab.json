@@ -1,0 +1,27 @@
+{
+  "base": {
+    "median": 55.6,
+    "rounds": [
+      {
+        "med": 55.6,
+        "p95": 97.2,
+        "frames": 53
+      }
+    ]
+  },
+  "nofilter": {
+    "error": true
+  },
+  "noshadow": {
+    "error": true
+  },
+  "nooverlay": {
+    "error": true
+  },
+  "noimg": {
+    "error": true
+  },
+  "alllayer": {
+    "error": true
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "diag": {
+    "varOnGrid": "321px",
+    "firstTileH": 323,
+    "farTileComputedCIS": null,
+    "mounted": 30
+  },
+  "items": 271,
+  "gridW": 1341,
+  "gridH": 751,
+  "cols": 4,
+  "rowHeight": 340,
+  "heightMin": 320,
+  "heightMax": 323,
+  "hist": {
+    "320": 97,
+    "321": 105,
+    "322": 31,
+    "323": 38
+  },
+  "captionHeights": [
+    57
+  ],
+  "scrollHeight": 23084
+}

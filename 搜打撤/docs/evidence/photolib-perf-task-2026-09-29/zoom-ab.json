@@ -1,0 +1,24 @@
+{
+ "with-blur": {
+  "opened": true,
+  "loafCount": 0,
+  "loafMax": 0,
+  "loafRenderMax": 0,
+  "ltCount": 0,
+  "ltMax": 0,
+  "med": null,
+  "p95": null,
+  "worstEarlyFrame": null
+ },
+ "no-blur": {
+  "opened": true,
+  "loafCount": 0,
+  "loafMax": 0,
+  "loafRenderMax": 0,
+  "ltCount": 0,
+  "ltMax": 0,
+  "med": null,
+  "p95": null,
+  "worstEarlyFrame": null
+ }
+}

@@ -1,0 +1,68 @@
+{
+  "base": {
+    "degraded": false,
+    "tickError": null,
+    "frames": 58,
+    "med": 48.6,
+    "p95": 333.4,
+    "loafCount": 28,
+    "loafMax": 1697.7,
+    "mounted": 230,
+    "scrollHeight": 19702
+  },
+  "nofilter": {
+    "degraded": true,
+    "tickError": null,
+    "frames": 95,
+    "med": 62.4,
+    "p95": 90.3,
+    "loafCount": 54,
+    "loafMax": 102.4,
+    "mounted": 90,
+    "scrollHeight": 7834
+  },
+  "noshadow": {
+    "degraded": true,
+    "tickError": null,
+    "frames": 0,
+    "med": null,
+    "p95": null,
+    "loafCount": 0,
+    "loafMax": 0,
+    "mounted": 10,
+    "scrollHeight": 1047
+  },
+  "nooverlay": {
+    "degraded": true,
+    "tickError": null,
+    "frames": 0,
+    "med": null,
+    "p95": null,
+    "loafCount": 0,
+    "loafMax": 0,
+    "mounted": 10,
+    "scrollHeight": 1047
+  },
+  "noimg": {
+    "degraded": true,
+    "tickError": null,
+    "frames": 0,
+    "med": null,
+    "p95": null,
+    "loafCount": 0,
+    "loafMax": 0,
+    "mounted": 10,
+    "scrollHeight": 1047
+  },
+  "alllayer": {
+    "degraded": true,
+    "tickError": null,
+    "frames": 0,
+    "med": null,
+    "p95": null,
+    "loafCount": 0,
+    "loafMax": 0,
+    "mounted": 10,
+    "scrollHeight": 1047
+  }
+}

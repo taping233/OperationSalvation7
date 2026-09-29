@@ -1,0 +1,66 @@
+{
+  "capturedAt": "2026-09-29T09:39:00.423Z",
+  "baseUrl": "http://localhost:5330/",
+  "rounds": 3,
+  "durationMs": 6000,
+  "browser": {
+    "gpu": {
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "vendor": "Google Inc. (NVIDIA)"
+    },
+    "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36 Edg/154.0.0.0"
+  },
+  "worktree": "D:/素材/代号柒/搜打撤",
+  "scenarios": [
+    {
+      "scenario": "photo-catalog",
+      "conditions": {
+        "page": "照相馆·目录静止（首屏窗口挂载）",
+        "photos": 24,
+        "catalogCount": 271
+      },
+      "rounds": 3,
+      "rafMedianMs": 6.9,
+      "rafP95Ms": 7.1,
+      "rafMaxMs": 83.3,
+      "rafHz": 78.67,
+      "drawCalls": 0,
+      "drawMedianMs": null,
+      "drawP95Ms": null,
+      "longTasks": 0,
+      "longTaskMaxMs": null,
+      "loafCount": 0,
+      "loafMaxMs": 2048.2,
+      "heapUsedMiB": 12.54,
+      "slowOver20msPercent": 0.12
+    },
+    {
+      "scenario": "photo-scroll",
+      "conditions": {
+        "page": "照相馆·目录连续滚动（线性滚完全程，沿途窗口挂载追批）",
+        "photos": 24,
+        "catalogCount": 271,
+        "scroll": {
+          "scrollHeight": 2094,
+          "clientHeight": 751,
+          "maxScroll": 1343
+        },
+        "mountedAfterScroll": 271
+      },
+      "rounds": 3,
+      "rafMedianMs": 41.7,
+      "rafP95Ms": 69.4,
+      "rafMaxMs": 97.2,
+      "rafHz": 21.5,
+      "drawCalls": 0,
+      "drawMedianMs": null,
+      "drawP95Ms": null,
+      "longTasks": 0,
+      "longTaskMaxMs": 90,
+      "loafCount": 30,
+      "loafMaxMs": 122.5,
+      "heapUsedMiB": 13.05,
+      "slowOver20msPercent": 99.21
+    }
+  ]
+}

@@ -1,0 +1,146 @@
+{
+  "summary": {
+    "capturedAt": "2026-09-29T09:51:38.984Z",
+    "baseUrl": "http://localhost:5332/",
+    "rounds": 5,
+    "cold": {
+      "round": 1,
+      "cold": true,
+      "importMs": 0.9,
+      "syncMs": 0.6,
+      "firstFrameMs": 391.6,
+      "items": 24,
+      "state": "modal",
+      "loafCount": 3,
+      "loafMax": 991.6,
+      "loafScripts": [],
+      "ltCount": 2,
+      "stateAfterClose": "title",
+      "cardlibOpenClass": false,
+      "photoFpsLogs": [
+        "[photo-fps]{\"label\":\"render-sync\",\"ms\":121.7,\"photos\":24}"
+      ]
+    },
+    "warmMedian": {
+      "syncMs": 0,
+      "firstFrameMs": 44.2
+    },
+    "warmLoafCountMax": 11
+  },
+  "rounds": [
+    {
+      "round": 1,
+      "cold": true,
+      "importMs": 0.9,
+      "syncMs": 0.6,
+      "firstFrameMs": 391.6,
+      "items": 24,
+      "state": "modal",
+      "loafCount": 3,
+      "loafMax": 991.6,
+      "loafScripts": [],
+      "ltCount": 2,
+      "stateAfterClose": "title",
+      "cardlibOpenClass": false,
+      "photoFpsLogs": [
+        "[photo-fps]{\"label\":\"render-sync\",\"ms\":121.7,\"photos\":24}"
+      ]
+    },
+    {
+      "round": 2,
+      "cold": false,
+      "importMs": 0.3,
+      "syncMs": 0,
+      "firstFrameMs": 1285.8,
+      "items": 24,
+      "state": "modal",
+      "loafCount": 11,
+      "loafMax": 2016.9,
+      "loafScripts": [
+        [
+          "DOMWindow.onDOMContentLoaded",
+          203.3
+        ],
+        [
+          "http://localhost:5332/src/main.js",
+          130.4
+        ],
+        [
+          "import.then",
+          124.6
+        ]
+      ],
+      "ltCount": 0,
+      "stateAfterClose": "title",
+      "cardlibOpenClass": false,
+      "photoFpsLogs": [
+        "[photo-fps]{\"label\":\"render-sync\",\"ms\":23.5,\"photos\":24}",
+        "[photo-fps]{\"label\":\"open\",\"fps\":6,\"frameP95\":1094.8,\"frameMax\":1094.8,\"over8ms\":6,\"over20ms\":5,\"longTasks\":0,\"longTaskMax\":0,\"longAnimationFrames\":[{\"duration\":651.5,\"renderMs\":47.6,\"layoutMs\":42.1,\"scripts\":[[\"http://localhost:5332/src/main.js\",130.4],[\"DOMWindow.onDOMContentLoaded\",203.3]]},{\"duration\":145.7,\"renderMs\":4,\"layoutMs\":3.6,\"scripts\":[]},{\"duration\":236.8,\"renderMs\":0.6,\"layoutMs\":0.4,\"scripts\":[]},{\"duration\":2016.9,\"renderMs\":12.6,\"layoutMs\":11.6,\"scripts\":[[\"TimerHandler:setTimeout\",10.8],[\"import.then\",24.2]]},{\"duration\":139.8,\"renderMs\":3.1,\"layoutMs\":2.6,\"scripts\":[]}],\"slowFrames\":[[1095,1094.8],[1261,166.5],[1331,69.5],[1414,76.4],[1477,62.5]],\"frames\":9,\"visible\":\"visible\"}"
+      ]
+    },
+    {
+      "round": 3,
+      "cold": false,
+      "importMs": 1.2,
+      "syncMs": 0,
+      "firstFrameMs": 36.3,
+      "items": 24,
+      "state": "modal",
+      "loafCount": 2,
+      "loafMax": 77.3,
+      "loafScripts": [
+        [
+          "TimerHandler:setTimeout",
+          6.5
+        ]
+      ],
+      "ltCount": 0,
+      "stateAfterClose": "title",
+      "cardlibOpenClass": false,
+      "photoFpsLogs": [
+        "[photo-fps]{\"label\":\"render-sync\",\"ms\":12.7,\"photos\":24}"
+      ]
+    },
+    {
+      "round": 4,
+      "cold": false,
+      "importMs": 0.3,
+      "syncMs": 0,
+      "firstFrameMs": 32.4,
+      "items": 24,
+      "state": "modal",
+      "loafCount": 0,
+      "loafMax": 0,
+      "loafScripts": [],
+      "ltCount": 0,
+      "stateAfterClose": "title",
+      "cardlibOpenClass": false,
+      "photoFpsLogs": [
+        "[photo-fps]{\"label\":\"render-sync\",\"ms\":15.2,\"photos\":24}"
+      ]
+    },
+    {
+      "round": 5,
+      "cold": false,
+      "importMs": 0.4,
+      "syncMs": 0,
+      "firstFrameMs": 44.2,
+      "items": 24,
+      "state": "modal",
+      "loafCount": 2,
+      "loafMax": 68.2,
+      "loafScripts": [
+        [
+          "TimerHandler:setTimeout",
+          8.4
+        ]
+      ],
+      "ltCount": 0,
+      "stateAfterClose": "title",
+      "cardlibOpenClass": false,
+      "photoFpsLogs": [
+        "[photo-fps]{\"label\":\"render-sync\",\"ms\":18,\"photos\":24}"
+      ]
+    }
+  ]
+}

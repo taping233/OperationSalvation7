@@ -10,7 +10,7 @@
 
 | 会话/来源 | 属地（文件/端口/工作树） | 事项 | 登记时间 | 状态 |
 |---|---|---|---|---|
-| Friday（照相馆性能专项会话） | game/css/expedition-library.css、game/src/hub/game.cardslib.page.js、docs/PHOTOLIB-PERF-TASK-2026-09-29.md、docs/evidence/photolib-perf-task-2026-09-29/、worktree .photolib-acc（2bcfc23+上述两文件）、端口 8137（隔离验收服）、8138（工作树源码服，已污染勿用） | 照相馆性能专项二期：壳常驻+IO 窗口化重构，等老板 8137 验收 | 09-29 晚 | 在途 |
+| Friday（照相馆性能专项会话） | ~~game/css/expedition-library.css、game/css/winter.css、game/src/hub/game.cardslib.page.js~~（已随 d2c0d0a 落库）、worktree .photolib-acc（待处置）、~~端口 8137/8138/5333~~（已杀净） | 照相馆性能专项三期：实机验收通过并已落库（d2c0d0a）；仅余隔离工作树处置待拍板 | 09-29 深夜 | 已落库，余 worktree 待拍板 |
 
 
 ## 无主物品（只记录勿动，等认领/处置）
@@ -23,6 +23,7 @@
 
 | 会话/来源 | 属地 | 事项 | 时段 |
 |---|---|---|---|
+| Friday（架构检查+体系降本会话） | game/src/README.md、docs/architecture.md、tests/docs-consistency.test.js、scripts/handoff-brief.mjs、scripts/doc-retirement-candidates.mjs、package.json、根 AGENTS.md、记忆 MEMORY.md | 架构对齐（experience/ 域补记）+体系降本五项（文档守卫/接手简报/TTL 清单/速览瘦身/小额免登），代码批 d2c0d0a+docs 批本提交 | 09-29 深夜，已完成 |
 | Friday（记忆v2会话） | 根 AGENTS.md、docs/README.md、本文件、docs/PENDING.md、docs/PARALLEL-DISPATCH-PLAYBOOK.md、docs/STATUS.md、记忆 MEMORY/ARCHIVE | 工作流标准化七项+落库双提交（0bac1f3+643434f） | 09-29 深夜，已完成 |
 | Friday（同上） | game/src 6 文件+tests/run-architecture+knip.json、docs/STATUS+PENDING | knip A 类死代码清理双提交（20c4e25+041fd65） | 09-29 深夜，已完成 |
 | Friday（同上） | ui/terminal-settlement.js 新建、death/menu/battle.resolution、evidence/jscpd-2026-09-29/、STATUS+PENDING #12 | jscpd 档一收敛双提交（506ccea+落档） | 09-29 深夜，已完成 |

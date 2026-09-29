@@ -1,0 +1,151 @@
+{
+  "summary": {
+    "capturedAt": "2026-09-29T11:17:06.002Z",
+    "baseUrl": "http://localhost:5330/?photoFps=1",
+    "rounds": 5,
+    "cold": {
+      "round": 1,
+      "cold": true,
+      "importMs": 0.7,
+      "syncMs": 0.5,
+      "firstFrameMs": 519.2,
+      "items": 20,
+      "state": "modal",
+      "loafCount": 4,
+      "loafMax": 655,
+      "loafScripts": [
+        [
+          "http://localhost:5330/@vite/client",
+          6.3
+        ]
+      ],
+      "ltCount": 3,
+      "stateAfterClose": "title",
+      "cardlibOpenClass": false,
+      "photoFpsLogs": [
+        "[photo-fps]{\"label\":\"render-sync\",\"ms\":127.9,\"photos\":10}"
+      ]
+    },
+    "warmMedian": {
+      "syncMs": 0.1,
+      "firstFrameMs": 33.4
+    },
+    "warmLoafCountMax": 13
+  },
+  "rounds": [
+    {
+      "round": 1,
+      "cold": true,
+      "importMs": 0.7,
+      "syncMs": 0.5,
+      "firstFrameMs": 519.2,
+      "items": 20,
+      "state": "modal",
+      "loafCount": 4,
+      "loafMax": 655,
+      "loafScripts": [
+        [
+          "http://localhost:5330/@vite/client",
+          6.3
+        ]
+      ],
+      "ltCount": 3,
+      "stateAfterClose": "title",
+      "cardlibOpenClass": false,
+      "photoFpsLogs": [
+        "[photo-fps]{\"label\":\"render-sync\",\"ms\":127.9,\"photos\":10}"
+      ]
+    },
+    {
+      "round": 2,
+      "cold": false,
+      "importMs": 0.7,
+      "syncMs": 0.1,
+      "firstFrameMs": 1632.1,
+      "items": 20,
+      "state": "modal",
+      "loafCount": 13,
+      "loafMax": 1478,
+      "loafScripts": [
+        [
+          "DOMWindow.onDOMContentLoaded",
+          250.5
+        ],
+        [
+          "http://localhost:5330/src/main.js",
+          234
+        ],
+        [
+          "import.then",
+          131.2
+        ]
+      ],
+      "ltCount": 0,
+      "stateAfterClose": "title",
+      "cardlibOpenClass": false,
+      "photoFpsLogs": [
+        "[photo-fps]{\"label\":\"render-sync\",\"ms\":27.1,\"photos\":10}",
+        "[photo-fps]{\"label\":\"open\",\"fps\":1.2,\"frameP95\":1125,\"frameMax\":1125,\"over8ms\":2,\"over20ms\":2,\"longTasks\":0,\"longTaskMax\":0,\"longAnimationFrames\":[{\"duration\":597.3,\"renderMs\":8.2,\"layoutMs\":6.4,\"scripts\":[[\"http://localhost:5330/src/main.js\",234],[\"DOMWindow.onDOMContentLoaded\",250.5]]},{\"duration\":314.1,\"renderMs\":33.5,\"layoutMs\":28.6,\"scripts\":[[\"import.then\",131.2]]}],\"slowFrames\":[[479,479.4],[1604,1125]],\"frames\":2,\"visible\":\"visible\"}"
+      ]
+    },
+    {
+      "round": 3,
+      "cold": false,
+      "importMs": 0.4,
+      "syncMs": 0,
+      "firstFrameMs": 33.4,
+      "items": 20,
+      "state": "modal",
+      "loafCount": 0,
+      "loafMax": 0,
+      "loafScripts": [],
+      "ltCount": 0,
+      "stateAfterClose": "title",
+      "cardlibOpenClass": false,
+      "photoFpsLogs": [
+        "[photo-fps]{\"label\":\"render-sync\",\"ms\":14.9,\"photos\":10}"
+      ]
+    },
+    {
+      "round": 4,
+      "cold": false,
+      "importMs": 0.6,
+      "syncMs": 0.1,
+      "firstFrameMs": 30.7,
+      "items": 20,
+      "state": "modal",
+      "loafCount": 0,
+      "loafMax": 0,
+      "loafScripts": [],
+      "ltCount": 0,
+      "stateAfterClose": "title",
+      "cardlibOpenClass": false,
+      "photoFpsLogs": [
+        "[photo-fps]{\"label\":\"render-sync\",\"ms\":16.2,\"photos\":10}"
+      ]
+    },
+    {
+      "round": 5,
+      "cold": false,
+      "importMs": 0.3,
+      "syncMs": 0.1,
+      "firstFrameMs": 33.2,
+      "items": 20,
+      "state": "modal",
+      "loafCount": 3,
+      "loafMax": 90,
+      "loafScripts": [
+        [
+          "TimerHandler:setTimeout",
+          10.7
+        ]
+      ],
+      "ltCount": 0,
+      "stateAfterClose": "title",
+      "cardlibOpenClass": false,
+      "photoFpsLogs": [
+        "[photo-fps]{\"label\":\"render-sync\",\"ms\":14.9,\"photos\":10}"
+      ]
+    }
+  ]
+}

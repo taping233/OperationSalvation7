@@ -1,0 +1,39 @@
+{
+  "capturedAt": "2026-09-29 深夜",
+  "environment": "ZCode 内置浏览器（IAB，viewport 1280×720），隔离验收服 http://localhost:8137/（worktree .photolib-acc = 2bcfc23 + 照相馆专项两文件，二期壳常驻版），?photoFps=1 口径",
+  "note": "老板指示改用内部浏览器后补测；与外部 Edge 探针口径差异见各节",
+  "openPath": {
+    "rounds": [
+      { "round": 1, "cold": true, "importMs": 5, "syncMs": 0.2, "firstFrameMs": 11.9, "items": 0, "mounted": 0, "state": "title", "loafCount": 5, "loafMax": 150, "loafScripts": [["import.then", 105], ["FrameRequestCallback", 10]], "ltCount": 2, "stateAfterClose": "title", "note": "首次开门=异步初始化路径：同步段≈0，网格构建发生在开门后 LoAF（150ms）里，双 rAF 内 DOM 未就绪" },
+      { "round": 2, "cold": false, "importMs": 0.5, "syncMs": 0, "firstFrameMs": 63.5, "items": 271, "mounted": 15, "state": "modal", "loafCount": 0, "loafMax": 0, "ltCount": 0 },
+      { "round": 3, "cold": false, "importMs": 0.2, "syncMs": 0, "firstFrameMs": 57.3, "items": 271, "mounted": 15, "state": "modal", "loafCount": 0, "loafMax": 0, "ltCount": 0 },
+      { "round": 4, "cold": false, "importMs": 0.2, "syncMs": 0.1, "firstFrameMs": 59, "items": 271, "mounted": 15, "state": "modal", "loafCount": 0, "loafMax": 0, "ltCount": 0 },
+      { "round": 5, "cold": false, "importMs": 0.3, "syncMs": 0, "firstFrameMs": 52.4, "items": 271, "mounted": 15, "state": "modal", "loafCount": 0, "loafMax": 0, "ltCount": 0 }
+    ],
+    "headline": "热重开首帧 52~63ms、零 LoAF 零 LT；历史记录的「首次重开 1.3~1.8s 尖峰」在本次 IAB 环境未复现"
+  },
+  "scroll": {
+    "drive": "滚轮式步进 scrollTop+=60 @16ms + 合成 mouseover/mousemove（网格 35%,50%），10 段 × ~1.8s ≈ 15s，全程滚到底",
+    "stepsPerSeg": [86, 85, 86, 103, 100, 107, 107, 107, 107, 107],
+    "summary": {
+      "frames": 995, "med": 17, "p95": 26.5, "p99": 34.5, "max": 132.1,
+      "loafCount": 3, "loafMax": 132.4,
+      "topLoafs": [
+        { "d": 132.4, "render": 0, "scripts": [], "styleLayout": 0 },
+        { "d": 59.7, "render": 0, "scripts": [], "styleLayout": 0 },
+        { "d": 55.9, "render": 0, "scripts": [], "styleLayout": 0 }
+      ],
+      "ltCount": 1, "previewRebuilds": 0,
+      "mountedFinal": 30, "scrollTop": 22022, "scrollHeight": 22540
+    },
+    "headline": "中位 17ms（60Hz 节拍满帧）、P95 26.5ms；LoAF 全部 render/styleLayout=0（合成器侧，脚本 0 贡献）；滚到底仅挂 30 张（窗口化健康）"
+  },
+  "idle": { "frames": 285, "med": 7, "p95": 7.2, "max": 30.7, "headline": "静止目录满帧" },
+  "externalEdgeSameNight": {
+    "ledger": { "photo-scroll": { "med": 7, "p95": 13.9 }, "photo-catalog": { "med": 6.9, "p95": 7.1 }, "note": "无头账本 5330 自起隔离服，3 轮中位，LT 0，堆 ~12.8MiB" },
+    "headedMouse1": { "frames": 609, "med": 17.3, "p95": 29.8, "loafCount": 10, "loafMax": 675.6, "ltCount": 2, "previewRebuilds": 0, "note": "有头真 Edge + 合成鼠标；675ms LoAF 为合成器侧（scripts 仅 setTimeout/import.then）" },
+    "headedMouse0": { "frames": 405, "med": 30.7, "p95": 32.1, "loafCount": 0, "ltCount": 0, "note": "有头无鼠标对照：LoAF 0，帧节拍坐 ~31ms（驱动节拍底噪，轮次方差大）" },
+    "cdpRealInput": { "frames": 986, "med": 7, "p95": 34.9, "max": 159.8, "previewRebuilds": 44, "mounted": 47, "note": "CDP 真实鼠标滚轮（trusted 输入，真 :hover）——真 hover 链 8s 内触发 44 次预览重建；timeline 归因未采到数据（trace-probe 骨架缺口）" },
+    "evidenceNote": "本次复测覆盖了旧 human-scroll-headed-mouse1.json/mouse0.json 原始文件（新数据已移入本目录；旧一轮的数字留底在 PHOTOLIB-PERF-TASK-2026-09-29.md 8.2/8.3 表格）"
+  }
+}

@@ -6,7 +6,7 @@
 
 `index.html` 只加载 `src/main.js`。所有源码均为 ESM；`main.js` 负责确定初始化顺序，模块自身使用显式 `import` 描述依赖。
 
-源码按功能域分目录（2026-09-23 目录化；2026-09-29 战斗域治理后 `battle/` 内部分五目录 `core/`（装配/引擎/结算/快照）、`effects/`（效果流水线）、`runtime/`（运行态）、`view/`（渲染）、`bag/`（牌堆/卡费），装载器与符文在 `battle/` 根）：`core/`（底座：随机/规则/输入/渲染/事件/数据/诊断/门面）、`ui/`（全局 UI 与控制器）、`battle/`（战斗全域，含 effect-steps 效果流水线与 combat 伤害）、`cards/`（卡库数据/同步/规则/schema/视图）、`run/`（局内流程与对局地图）、`hub/`（基地/局外：仓库/背包/存档/商店/整备/命令）、`home/`（首页/叙事）、`audio/`（音频）、`agent/`（自动游玩与统计）；根层只留装配与入口（`main.js`、`boot-order.js`、`game.boot.js`、`r7a.qa.js`）和 `generated/`。分层判据与目录一致，详见 `game/src/README.md`。
+源码按功能域分目录（2026-09-23 目录化；2026-09-29 战斗域治理后 `battle/` 内部分五目录 `core/`（装配/引擎/结算/快照）、`effects/`（效果流水线）、`runtime/`（运行态）、`view/`（渲染）、`bag/`（牌堆/卡费），装载器与符文在 `battle/` 根）：`core/`（底座：随机/规则/输入/渲染/事件/数据/诊断/门面）、`ui/`（全局 UI 与控制器）、`experience/`（体验线：随身口袋常驻状态条与章节层级风险徽标）、`battle/`（战斗全域，含 effect-steps 效果流水线与 combat 伤害）、`cards/`（卡库数据/同步/规则/schema/视图）、`run/`（局内流程与对局地图）、`hub/`（基地/局外：仓库/背包/存档/商店/整备/命令）、`home/`（首页/叙事）、`audio/`（音频）、`agent/`（自动游玩与统计）；根层只留装配与入口（`main.js`、`boot-order.js`、`game.boot.js`、`r7a.qa.js`）和 `generated/`。分层判据与目录一致，详见 `game/src/README.md`。
 
 分层从底向上为：规则/数据与纯工具 → 状态和领域逻辑 → 功能视图 → 启动接线；高层依赖低层。核心状态模块不得反向导入 `boot`、`run`、`hub`、`notes` 或具体视图。`tests/contracts.test.js` 通过 AST 依赖图拒绝循环依赖，覆盖子目录、重导出与动态字面量 import。
 
