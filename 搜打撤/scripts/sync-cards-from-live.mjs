@@ -65,6 +65,12 @@ const MIGRATION_MODULES = [
   ['cards.sync.m11.js', 'ensureM11HostedRules'],
 ];
 const CAPABILITY_MODULE = ['card-rules.capability.js', 'inspectCardRuleCapability'];
+// 2026-09-29 沙箱失真修复：cards.sync.js 的 backfillStructuredRuleDefinitions 依赖
+// core/shared.js 的 clone（深拷贝唯一权威，2026-09-28 收敛）。剥 import 后沙箱缺该
+// 绑定 → 迁移链每轮在 normalizeForCompare 处 ReferenceError（stderr 刷「clone is not
+// defined」+ marker 永不写入）。core/shared.js 零依赖、生产最先加载，此处同序把真源
+// 纳入拼接首部（非复制实现、非 stub），与生产同一份 clone。
+const SHARED_CORE_FILE = path.join(ROOT, 'game', 'src', 'core', 'shared.js');
 // 2026-09-29 重构新增的共享模块：M 批回填骨架工厂 + 定版卡面刷新器。
 // 被 cards.js（ensureCanonicalFaceRefresh）与各 cards.sync.m*.js（createRuleBackfiller）
 // 以裸名引用，剥 import 后须进共享词法作用域（与 baseBody 同层，先于迁移 IIFE）。
@@ -113,6 +119,8 @@ function stripModule(source, seenLines) {
 // 卡面渲染（cards.view.js）与 Random 等非数据依赖按「不渲染只取数据」口径补空实现。
 function sourceCardLibrary() {
   const seenLines = new Set();
+  if (!fs.existsSync(SHARED_CORE_FILE)) fail('共享垫片缺失: game/src/core/shared.js（clone 深拷贝唯一权威）');
+  const sharedCoreBody = stripModule(fs.readFileSync(SHARED_CORE_FILE, 'utf8'), seenLines);
   const baseBody = CARDS_MODULE_ORDER.map(name => {
     const file = path.join(CARDS_DIR, name);
     if (!fs.existsSync(file)) fail(`卡库模块缺失: ${name}（六文件重构后的卡库真源在 game/src/cards/）`);
@@ -136,7 +144,7 @@ function sourceCardLibrary() {
   });
   // cards.js 壳初始化只声明/暴露 API；迁移仅在下方主动调用 ensureTabletop 时才运行。
   // 因此 capability bridge 必须在调用 ensureTabletop 前建立。
-  const body = [...baseBody, ...sharedBody, capabilityBody, ...migrationBody].join('\n;\n');
+  const body = [sharedCoreBody, ...baseBody, ...sharedBody, capabilityBody, ...migrationBody].join('\n;\n');
   const sandbox = {
     console,
     window: { SDT: { Icons: { img: n => `[[icon:${n}]]`, TYPE_ART: {} } } },

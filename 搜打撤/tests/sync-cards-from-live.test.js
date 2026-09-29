@@ -13,6 +13,18 @@ describe('sync-cards-from-live 源码有效卡库（六文件沙箱）', () => {
     expect(lib.length, '现役卡库口径约 272 张，沙箱播种链应等量建出').toBeGreaterThan(250);
     expect(lib.some(c => c.id === 'tt8-hero-descender'), '能力卡（充能火山）应在源码有效卡库').toBe(true);
     expect(lib.some(c => c.id === 'tt3-garnet-marble'), '资源卡（石榴弹珠）应在源码有效卡库').toBe(true);
+    // 结构化规则迁移正面证据（2026-09-29 U2）：沙箱曾缺 core/shared.js 的 clone 绑定，
+    // backfillStructuredRuleDefinitions 每轮 ReferenceError 失败、静默无产物。此处锁定
+    // 迁移真实生效：TT10 onPlay 回填（tt3-bandage）与基地材料回填（tt3-wood-bundle）
+    // 的 rules 产物必须落在沙箱建出的卡上（与生产同一份 clone 的迁移链跑通）。
+    expect(
+      lib.some(c => c.id === 'tt3-bandage' && c.rules?.triggers?.onPlay?.length),
+      'TT10 onPlay 迁移应在沙箱真实生效（clone 同源后 marker 链跑通）',
+    ).toBe(true);
+    expect(
+      lib.some(c => c.id === 'tt3-wood-bundle' && c.rules?.base?.material?.kind === 'wood'),
+      'TT10 基地材料规则迁移应在沙箱真实生效',
+    ).toBe(true);
   });
 
   it('diff 对齐口径：完全一致的输入零差异', () => {
