@@ -27,7 +27,7 @@ await import('../game/src/ui/ui.js');            // UI.init 需要的 overlay �
 await import('../game/src/hub/base.js');          // SDT.Base（boot-order 同款绑定）
 const { configureGameRuntime } = await import('../game/src/run/game.session.js');
 await import('../game/src/run/game.nest.js');
-const { BattleSession, configureBattleRenderer } = await import('../game/src/battle/battle.core.js');
+const { BattleSession, configureBattleRenderer } = await import('../game/src/battle/core/battle.core.js');
 configureBattleRenderer(() => {});
 window.SDT.Nest.bindBattleStart(BattleSession.start);
 const C = window.SDT.Cards;

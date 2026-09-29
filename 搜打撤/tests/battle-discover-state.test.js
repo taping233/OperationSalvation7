@@ -4,7 +4,7 @@ import {
   buildExplicitDiscoverState,
   buildPouchDiscoverState,
   buildRandomDiscoverState,
-} from '../game/src/battle/battle.discover-state.js';
+} from '../game/src/battle/effects/battle.discover-state.js';
 
 describe('pure discovery state builders', () => {
   it('slices explicit options while preserving deck and effect tracking references', () => {

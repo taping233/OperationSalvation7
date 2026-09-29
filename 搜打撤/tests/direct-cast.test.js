@@ -12,7 +12,7 @@
  *   9 阿波罗的礼物——穿戴后发现面板出现「直接施放」（discoverCastable），castDiscover 免费打出
  * 判定口径：不崩、不悬挂、关键日志存在、能量账目符合「免费用」语义。 */
 import { describe, it, expect, beforeAll } from 'vitest';
-import { targetSideFor } from '../game/src/battle/battle.target-rules.js';
+import { targetSideFor } from '../game/src/battle/effects/battle.target-rules.js';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };
 window.SDT.Icons.TYPE_ART = {};
@@ -22,7 +22,7 @@ window.SDT.MAP = {
   items: { rations: { name: '口粮' }, wood: { name: '木材' } },
 };
 await import('../game/src/cards/cards.js');
-const { BattleSession } = await import('../game/src/battle/battle.core.js');
+const { BattleSession } = await import('../game/src/battle/core/battle.core.js');
 
 const C = window.SDT.Cards;
 

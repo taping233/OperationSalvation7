@@ -59,10 +59,10 @@ describe('职业整合数据迁移冒烟', () => {
     }
   });
   it('生物图鉴入卡库且不可随机/打出', async () => {
-    await import('../game/src/battle/battle.target-rules.js');
+    await import('../game/src/battle/effects/battle.target-rules.js');
     const foe = Cards.all().find(c => c.type === '生物');
     expect(foe).toBeTruthy();
-    const { unplayableReasonFor } = await import('../game/src/battle/battle.target-rules.js');
+    const { unplayableReasonFor } = await import('../game/src/battle/effects/battle.target-rules.js');
     expect(unplayableReasonFor(foe, 'boss')).toMatch(/图鉴/);
   });
 });

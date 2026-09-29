@@ -13,8 +13,8 @@
  *   条件必不满足 → 警告清单（人工复核，句式引自 hand-cost-patterns.js 单一登记点）；
  *   无前置条件的卡零效果 → 硬失败（堵死「描述改成解析不出动词的死卡静默入库」的入口）。 */
 import { describe, it, expect, beforeAll } from 'vitest';
-import { targetSideFor, unplayableReasonFor } from '../game/src/battle/battle.target-rules.js';
-import { HAND_COST_PATTERNS } from '../game/src/battle/hand-cost-patterns.js';
+import { targetSideFor, unplayableReasonFor } from '../game/src/battle/effects/battle.target-rules.js';
+import { HAND_COST_PATTERNS } from '../game/src/battle/effects/hand-cost-patterns.js';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };
 window.SDT.Icons.TYPE_ART = {};
@@ -24,7 +24,7 @@ window.SDT.MAP = {
   items: { rations: { name: '口粮' }, wood: { name: '木材' } },
 };
 await import('../game/src/cards/cards.js');
-const { BattleSession, viewApi } = await import('../game/src/battle/battle.core.js');
+const { BattleSession, viewApi } = await import('../game/src/battle/core/battle.core.js');
 
 const C = window.SDT.Cards;
 

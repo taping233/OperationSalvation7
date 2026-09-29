@@ -10,7 +10,7 @@ window.SDT.MAP = {
   items: { rations: { name: '口粮' }, wood: { name: '木材' } },
 };
 await import('../game/src/cards/cards.js');
-const { BattleSession } = await import('../game/src/battle/battle.core.js');
+const { BattleSession } = await import('../game/src/battle/core/battle.core.js');
 const Cards = window.SDT.Cards;
 
 beforeAll(() => {
@@ -96,7 +96,7 @@ describe('tt7-frozenight structured onPlay in real BattleSession', () => {
   });
 
   it('freezes each living enemy once for the declared duration, independent of desc', async () => {
-    const runtime = await import('../game/src/battle/battle.runtime.js');
+    const runtime = await import('../game/src/battle/runtime/battle.runtime.js');
     const results = [];
     for (const desc of ['冰冻所有敌人，持续 1 回合。', '改写后的展示文案。']) {
       const { state, logs } = await startAndPlay(desc, [foe('正常敌人'), foe('免疫目标'), foe('已死亡')], () => {
@@ -118,7 +118,7 @@ describe('tt7-frozenight structured onPlay in real BattleSession', () => {
   });
 
   it('does not freeze enemies while the player is silenced', async () => {
-    const runtime = await import('../game/src/battle/battle.runtime.js');
+    const runtime = await import('../game/src/battle/runtime/battle.runtime.js');
     const second = await startAndPlay('描述含有冰冻所有敌人，持续 1 回合。', [foe('沉默时的敌人')], () => {
       runtime.set$pstat({ ...runtime.pstat, status: { ...runtime.pstat.status, silence: 1 } });
     });

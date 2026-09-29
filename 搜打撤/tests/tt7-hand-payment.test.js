@@ -9,8 +9,8 @@ window.SDT.MAP = {
   items: { rations: { name: '口粮' }, wood: { name: '木材' } },
 };
 await import('../game/src/cards/cards.js');
-const { BattleSession, viewApi, matchHandSelectKey } = await import('../game/src/battle/battle.core.js');
-const { set$handSelecting } = await import('../game/src/battle/battle.runtime.js');
+const { BattleSession, viewApi, matchHandSelectKey } = await import('../game/src/battle/core/battle.core.js');
+const { set$handSelecting } = await import('../game/src/battle/runtime/battle.runtime.js');
 const Cards = window.SDT.Cards;
 
 beforeAll(() => {

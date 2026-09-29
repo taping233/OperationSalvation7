@@ -4,7 +4,7 @@ window.SDT=window.SDT||{Icons:{img:()=>''}}; window.SDT.Icons.TYPE_ART={};
 window.SDT.Sound={music(){},sfx(){},setDucked(){},setBoss(){}};
 window.SDT.MAP={rules:{battleEnergy:2,battleHandMax:10,bossDeckSize:10,starterSha:0,battleStartDraw:5,battleTurnDraw:1,diceSides:6},items:{rations:{name:'口粮'},wood:{name:'木材'}}};
 await import('../game/src/cards/cards.js');
-const {BattleSession}=await import('../game/src/battle/battle.core.js');
+const {BattleSession}=await import('../game/src/battle/core/battle.core.js');
 const {Random,SeededRandomService}=await import('../game/src/core/random.js');
 const C=window.SDT.Cards;
 beforeAll(()=>{C.ensureSha();C.ensureDmgTypes();});

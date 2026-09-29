@@ -14,7 +14,7 @@ window.SDT.MAP = {
 };
 
 await import('../game/src/cards/cards.js');
-const { BattleSession } = await import('../game/src/battle/battle.core.js');
+const { BattleSession } = await import('../game/src/battle/core/battle.core.js');
 const { validateCardRules } = await import('../game/src/cards/card-rules.schema.js');
 const Cards = window.SDT.Cards;
 

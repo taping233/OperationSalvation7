@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { createBattleCardInspection } from '../game/src/battle/battle.card-inspection.js';
+import { createBattleCardInspection } from '../game/src/battle/effects/battle.card-inspection.js';
 
 function setup() {
   const canonicalRules = { damage: { amount: 4 } };

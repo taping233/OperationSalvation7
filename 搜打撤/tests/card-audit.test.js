@@ -13,7 +13,7 @@ window.SDT = window.SDT || { Icons: { img: () => '' } };
 window.SDT.Icons = window.SDT.Icons || { img: () => '' };
 window.SDT.Icons.TYPE_ART = {};
 await import('../game/src/cards/cards.js');
-import { createEffectExecutor, splitEffectClauses, parsePoolNoun } from '../game/src/battle/battle.effects.js';
+import { createEffectExecutor, splitEffectClauses, parsePoolNoun } from '../game/src/battle/effects/battle.effects.js';
 
 const C = window.SDT.Cards;
 

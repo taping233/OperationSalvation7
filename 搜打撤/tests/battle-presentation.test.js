@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it } from 'vitest';
-import { clearFeedback, enqueueFeedback, feedbackShakeDuration, waitForFeedback } from '../game/src/battle/battle.feedback.js';
-import { setPace } from '../game/src/battle/battle.pace.js';
+import { clearFeedback, enqueueFeedback, feedbackShakeDuration, waitForFeedback } from '../game/src/battle/view/battle.feedback.js';
+import { setPace } from '../game/src/battle/runtime/battle.pace.js';
 
 describe('battle presentation queue', () => {
   afterEach(() => clearFeedback());

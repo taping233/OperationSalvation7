@@ -3,7 +3,7 @@ import {
   feedbackClass,
   feedbackDelay,
   feedbackTier,
-} from '../game/src/battle/battle.feedback.js';
+} from '../game/src/battle/view/battle.feedback.js';
 import { resolveReducedMotion } from '../game/src/core/motion.js';
 
 describe('战斗反馈节奏', () => {

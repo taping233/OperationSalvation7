@@ -11,7 +11,7 @@ window.SDT.MAP = {
 };
 
 await import('../game/src/cards/cards.js');
-const { BattleSession } = await import('../game/src/battle/battle.core.js');
+const { BattleSession } = await import('../game/src/battle/core/battle.core.js');
 
 window.SDT.Cards.ensureSha();
 window.SDT.Cards.ensureStarters();

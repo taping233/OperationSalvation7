@@ -1,9 +1,9 @@
-import { isHandPaymentCandidate, matchesHandSelectKey } from '../game/src/battle/battle.hand-selection.js';
-import type { HandSelectionState } from '../game/src/battle/battle.hand-selection.js';
-import { buildDiscoverPool, pickRandomDiscoverCandidate } from '../game/src/battle/battle.discover-candidates.js';
-import type { DiscoverCandidateCard } from '../game/src/battle/battle.discover-candidates.js';
-import { buildExplicitDiscoverState, buildPouchDiscoverState, buildRandomDiscoverState } from '../game/src/battle/battle.discover-state.js';
-import type { DiscoveringState, ExplicitDiscoverQueueJob } from '../game/src/battle/battle.discover-state.js';
+import { isHandPaymentCandidate, matchesHandSelectKey } from '../game/src/battle/core/battle.hand-selection.js';
+import type { HandSelectionState } from '../game/src/battle/core/battle.hand-selection.js';
+import { buildDiscoverPool, pickRandomDiscoverCandidate } from '../game/src/battle/effects/battle.discover-candidates.js';
+import type { DiscoverCandidateCard } from '../game/src/battle/effects/battle.discover-candidates.js';
+import { buildExplicitDiscoverState, buildPouchDiscoverState, buildRandomDiscoverState } from '../game/src/battle/effects/battle.discover-state.js';
+import type { DiscoveringState, ExplicitDiscoverQueueJob } from '../game/src/battle/effects/battle.discover-state.js';
 
 const paymentState: HandSelectionState = {
   act: 'payment',
@@ -91,6 +91,6 @@ void queuedState;
 void randomStateOptions;
 void pouchAct;
 // @ts-expect-error Explicit discovery state requires its UID array, even when empty.
-const invalidExplicitState: import('../game/src/battle/battle.discover-state.js').ExplicitDiscoverState = { ...randomState, deckBottom: true };
+const invalidExplicitState: import('../game/src/battle/effects/battle.discover-state.js').ExplicitDiscoverState = { ...randomState, deckBottom: true };
 // @ts-expect-error Explicit candidates must be card records, not UIDs.
 buildExplicitDiscoverState({ n: 1, explicit: ['card-uid'] });

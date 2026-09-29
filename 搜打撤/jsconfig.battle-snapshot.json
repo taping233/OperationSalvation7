@@ -11,8 +11,8 @@
     "noEmit": true
   },
   "files": [
-    "game/src/battle/battle.snapshot.js",
-    "game/src/battle/battle.preview.js",
+    "game/src/battle/runtime/battle.snapshot.js",
+    "game/src/battle/view/battle.preview.js",
     "tests/battle-snapshot-types.fixture.ts"
   ]
 }

@@ -31,7 +31,7 @@ describe('顶层门面快照漂移守卫', () => {
   it('含顶层 window.SDT 解引用的模块 = 已知清单（新增须自觉）', () => {
     const found = walk('.').filter(rel => {
       // onetake 未提交属地文件不纳入本守卫（另有归属）
-      if (['battle/battle.core.js', 'battle/battle.layers.js', 'battle/battle.view.js',
+      if (['battle/core/battle.core.js', 'battle/view/battle.layers.js', 'battle/view/battle.view.js',
         'core/camera.js', 'core/renderer.js', 'hub/game.hub.depart.js',
         'run/game.run.altar.js', 'run/game.run.flow.js', 'run/game.run.shop.js',
         'run/game.session.board.js', 'run/game.session.js', 'ui/hud.js'].includes(rel)) return false;
@@ -40,16 +40,16 @@ describe('顶层门面快照漂移守卫', () => {
     // 清单失配时打印实际清单（console 可见），便于核对后更新基线
     console.log('[facade-snapshot] actual =', JSON.stringify(found));
     expect(found).toEqual([
-      'battle/battle.aim.js',
-      'battle/battle.anim.view.js',
-      'battle/battle.bag.js',
-      'battle/battle.enemy-phase.js',
-      'battle/battle.engine.js',
-      'battle/battle.exec-play.js',
-      'battle/battle.hover.js',
-      'battle/battle.lifecycle.js',
-      'battle/battle.overlays.js',
-      'battle/battle.vfx.js',
+      'battle/bag/battle.bag.js',
+      'battle/core/battle.enemy-phase.js',
+      'battle/core/battle.engine.js',
+      'battle/core/battle.exec-play.js',
+      'battle/core/battle.lifecycle.js',
+      'battle/view/battle.aim.js',
+      'battle/view/battle.anim.view.js',
+      'battle/view/battle.hover.js',
+      'battle/view/battle.overlays.js',
+      'battle/view/battle.vfx.js',
       'cards/cards.js',
       'cards/cards.rules.js',
       'cards/cards.sync.js',

@@ -12,7 +12,7 @@ window.SDT.MAP = {
 };
 await import('../game/src/cards/cards.js');
 const { Random } = await import('../game/src/core/random.js');
-const { BattleSession } = await import('../game/src/battle/battle.core.js');
+const { BattleSession } = await import('../game/src/battle/core/battle.core.js');
 
 const C = window.SDT.Cards;
 

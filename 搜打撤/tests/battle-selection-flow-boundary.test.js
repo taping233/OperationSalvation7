@@ -1,7 +1,7 @@
 // @vitest-environment node
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { createBattleSelectionFlow } from '../game/src/battle/battle.selection-flow.js';
-import { discovering, pdef, set$choosing, set$discoverQueue, set$discovering, set$G, set$handSelecting, set$pdef } from '../game/src/battle/battle.runtime.js';
+import { createBattleSelectionFlow } from '../game/src/battle/core/battle.selection-flow.js';
+import { discovering, pdef, set$choosing, set$discoverQueue, set$discovering, set$G, set$handSelecting, set$pdef } from '../game/src/battle/runtime/battle.runtime.js';
 
 function createFlow({ cards, random01 = () => 0, deny = () => {}, requestBattleRender = () => {} }) {
   return createBattleSelectionFlow({

@@ -37,9 +37,9 @@ window.SDT = {
 };
 
 await import('../game/src/cards/cards.js');
-const { BattleSession } = await import('../game/src/battle/battle.core.js');
-await import('../game/src/battle/battle.view.js');
-const { waitForFeedback, clearFeedback } = await import('../game/src/battle/battle.feedback.js');
+const { BattleSession } = await import('../game/src/battle/core/battle.core.js');
+await import('../game/src/battle/view/battle.view.js');
+const { waitForFeedback, clearFeedback } = await import('../game/src/battle/view/battle.feedback.js');
 
 function makeFixture() {
   return {

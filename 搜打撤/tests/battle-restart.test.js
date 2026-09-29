@@ -8,7 +8,7 @@ window.SDT.MAP = {
   items: { rations: { name: '口粮' }, wood: { name: '木材' } },
 };
 await import('../game/src/cards/cards.js');
-const { BattleSession } = await import('../game/src/battle/battle.core.js');
+const { BattleSession } = await import('../game/src/battle/core/battle.core.js');
 
 const starter = window.SDT.Cards.all().find(card => card.id === 'starter-attack') || {
   id: 'starter-attack', name: '初始攻击', cost: 1, type: '武术', desc: '造成攻击伤害。', dmg: 0, dmgType: 'attack',

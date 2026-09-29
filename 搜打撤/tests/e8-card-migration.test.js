@@ -18,8 +18,8 @@ window.SDT.MAP = { rules: { battleEnergy: 9, battleHandMax: 99, bossDeckSize: 15
   starterSha: 0, battleStartDraw: 5, battleTurnDraw: 1, diceSides: 6 }, items: {} };
 await import('../game/src/cards/cards.js');
 const Cards = window.SDT.Cards;
-const { BattleSession } = await import('../game/src/battle/battle.core.js');
-const runtime = await import('../game/src/battle/battle.runtime.js');
+const { BattleSession } = await import('../game/src/battle/core/battle.core.js');
+const runtime = await import('../game/src/battle/runtime/battle.runtime.js');
 let activeGame;
 const tick = () => new Promise(resolve => setTimeout(resolve, 5));
 async function idle() {

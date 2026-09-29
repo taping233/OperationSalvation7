@@ -1,7 +1,7 @@
 import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
 import { validateCardRules } from '../game/src/cards/card-rules.schema.js';
-import * as runtime from '../game/src/battle/battle.runtime.js';
-import { assertCardRulesExecutable, rejectUnsupportedCard } from '../game/src/battle/battle.rule-guard.js';
+import * as runtime from '../game/src/battle/runtime/battle.runtime.js';
+import { assertCardRulesExecutable, rejectUnsupportedCard } from '../game/src/battle/effects/battle.rule-guard.js';
 
 window.SDT = window.SDT || {};
 window.SDT.Icons = { ...window.SDT.Icons, img: () => '', TYPE_ART: {} };
@@ -11,9 +11,9 @@ window.SDT.MAP = {
   items: { rations: { name: '口粮' }, wood: { name: '木材' } },
 };
 await import('../game/src/cards/cards.js');
-const { BattleSession } = await import('../game/src/battle/battle.core.js');
-const engine = await import('../game/src/battle/battle.engine.js');
-const { createBattleExecPlay } = await import('../game/src/battle/battle.exec-play.js');
+const { BattleSession } = await import('../game/src/battle/core/battle.core.js');
+const engine = await import('../game/src/battle/core/battle.engine.js');
+const { createBattleExecPlay } = await import('../game/src/battle/core/battle.exec-play.js');
 const Cards = window.SDT.Cards;
 let activeGame;
 

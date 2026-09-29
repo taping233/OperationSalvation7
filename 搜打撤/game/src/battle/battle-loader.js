@@ -29,7 +29,7 @@ async function ensureBattleReady() {
   if (ready?.start && ready?.restore) return ready;
   if (!battlePromise) {
     performance.mark?.('sdt:battle-load-start');
-    battlePromise = import('./battle.view.js').then(() => {
+    battlePromise = import('./view/battle.view.js').then(() => {
       const battle = window.SDT?.Battle;
       if (!battle?.start || !battle?.restore) throw new Error('战斗模块加载后未注册 SDT.Battle');
       performance.mark?.('sdt:battle-load-end');

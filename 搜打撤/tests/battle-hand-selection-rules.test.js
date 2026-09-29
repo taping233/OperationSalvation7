@@ -1,6 +1,6 @@
 // @vitest-environment node
 import { describe, expect, it } from 'vitest';
-import { isHandPaymentCandidate, matchesHandSelectKey } from '../game/src/battle/battle.hand-selection.js';
+import { isHandPaymentCandidate, matchesHandSelectKey } from '../game/src/battle/core/battle.hand-selection.js';
 
 describe('pure hand-selection rules', () => {
   it('preserves wildcard and initial-attack key matching', () => {

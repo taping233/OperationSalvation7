@@ -12,6 +12,6 @@
   },
   "files": [
     "game/src/cards/card-rules.capability.js",
-    "game/src/battle/battle.rule-guard.js"
+    "game/src/battle/effects/battle.rule-guard.js"
   ]
 }

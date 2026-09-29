@@ -20,7 +20,7 @@ import './core/input.js';
 import './core/event-bus.js';   // 模块间事件总线（批次 5）：须早于战斗/背包的订阅方
 import './core/notes.js';
 import './cards/cards.js';
-import './battle/combat.js';
+import './battle/core/combat.js';
 import './hub/base.js';
 import './hub/meta.js';
 import './core/render-scheduler.js';

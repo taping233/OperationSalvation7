@@ -43,7 +43,7 @@ const briefDesc = (desc) => {
 let battleFindCard = null;
 function warmBattleLookups() {
   if (battleFindCard) return;
-  import('../battle/battle.core.js')
+  import('../battle/core/battle.core.js')
     .then(m => { battleFindCard = m.findCard; })
     .catch(() => { /* 战斗未就绪：下一观察周期再试 */ });
 }

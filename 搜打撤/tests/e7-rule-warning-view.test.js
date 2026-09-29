@@ -26,12 +26,12 @@ window.SDT = {
   MAP: { rules: { battleEnergy: 9, battleHandMax: 99, bossDeckSize: 15, starterSha: 0, battleStartDraw: 5, battleTurnDraw: 1, diceSides: 6 }, items: {} },
 };
 await import('../game/src/cards/cards.js');
-const { BattleSession } = await import('../game/src/battle/battle.core.js');
-const engine = await import('../game/src/battle/battle.engine.js');
-const runtime = await import('../game/src/battle/battle.runtime.js');
-const { render } = await import('../game/src/battle/battle.view.js');
-const { clearThoughtBubble } = await import('../game/src/battle/battle.hover.js');
-const { clearFeedback } = await import('../game/src/battle/battle.feedback.js');
+const { BattleSession } = await import('../game/src/battle/core/battle.core.js');
+const engine = await import('../game/src/battle/core/battle.engine.js');
+const runtime = await import('../game/src/battle/runtime/battle.runtime.js');
+const { render } = await import('../game/src/battle/view/battle.view.js');
+const { clearThoughtBubble } = await import('../game/src/battle/view/battle.hover.js');
+const { clearFeedback } = await import('../game/src/battle/view/battle.feedback.js');
 const Bus = (await import('../game/src/core/event-bus.js')).default;
 const originalRaf = window.requestAnimationFrame;
 const originalAnimate = window.Element.prototype.animate;

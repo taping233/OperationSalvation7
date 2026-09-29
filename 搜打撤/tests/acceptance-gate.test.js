@@ -11,7 +11,7 @@ describe('分层验收选择', () => {
   });
 
   it('纯战斗规则改动带直接测试与架构哨兵，不扩成启动全链', () => {
-    const plan = planForPaths(['game/src/battle/battle.hand-selection.js']);
+    const plan = planForPaths(['game/src/battle/core/battle.hand-selection.js']);
     expect(plan.mode).toBe('quick');
     expect(plan.tests).toContain('tests/battle-hand-selection-rules.test.js');
     expect(plan.tests).toContain('tests/contracts.test.js');

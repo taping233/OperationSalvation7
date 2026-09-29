@@ -1,6 +1,6 @@
 // Contract-only check: exercise the factory's declared external ports. The legacy body and
 // imported battle runtime state are intentionally outside this narrow strict config.
-import { createBattleSelectionFlow } from '../game/src/battle/battle.selection-flow.js';
+import { createBattleSelectionFlow } from '../game/src/battle/core/battle.selection-flow.js';
 type SelectionCards = Parameters<typeof createBattleSelectionFlow>[0]['cards'];
 type SelectionCard = Parameters<SelectionCards['isRandomObtainable']>[0];
 const cards: SelectionCards = {

@@ -1,5 +1,5 @@
 import { afterEach, beforeAll, describe, expect, it } from 'vitest';
-import { hand } from '../game/src/battle/battle.runtime.piles.js';
+import { hand } from '../game/src/battle/runtime/battle.runtime.piles.js';
 
 window.SDT = window.SDT || {};
 window.SDT.Icons = { img: () => '', TYPE_ART: {} };
@@ -8,8 +8,8 @@ window.SDT.MAP = { rules: { battleEnergy: 99, battleHandMax: 99, bossDeckSize: 1
   starterSha: 0, battleStartDraw: 5, battleTurnDraw: 1, diceSides: 6 },
   items: { rations: { name: '口粮' }, wood: { name: '木材' } } };
 await import('../game/src/cards/cards.js');
-const { BattleSession } = await import('../game/src/battle/battle.core.js');
-const engine = await import('../game/src/battle/battle.engine.js');
+const { BattleSession } = await import('../game/src/battle/core/battle.core.js');
+const engine = await import('../game/src/battle/core/battle.engine.js');
 const Cards = window.SDT.Cards;
 let active;
 const tick = () => new Promise(resolve => setTimeout(resolve, 10));

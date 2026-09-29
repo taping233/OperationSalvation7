@@ -51,9 +51,9 @@ for (const id of DATA.cardsSync.retire) catalog.delete(id);
 const cards = structuredClone([...catalog.values()]);
 sdtDefine('Cards', { ...dataSlice, ...rulesSlice, all: () => cards, cardHTML, cardBackHTML,
   CARD_BACKS: [{ id: 'classic', name: '行囊粗布', icon: 'cards', from: '默认卡背' }] });
-const { BattleSession } = await import('./battle/battle.core.js');
+const { BattleSession } = await import('./battle/core/battle.core.js');
 session = BattleSession;
-await import('./battle/battle.view.js');
+await import('./battle/view/battle.view.js');
 function inspect(reason) {
   if (!session) return;
   const s = session.getSnapshot(), now = storageSnapshot();

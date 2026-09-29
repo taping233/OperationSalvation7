@@ -1,12 +1,12 @@
 import { describe, expect, it } from 'vitest';
-import { createActionQueue } from '../game/src/battle/battle.actions.js';
-import { createAnimationController } from '../game/src/battle/battle.animation-waiter.js';
-import { groupHandCards, fanLayout } from '../game/src/battle/battle.hand.js';
-import { assertUniqueZones, moveUid, zoneForUid } from '../game/src/battle/battle.piles.js';
-import { intentSummary, intentViewModel } from '../game/src/battle/battle.intent.view.js';
-import { actionFeedback, feedbackClass, feedbackDelay } from '../game/src/battle/battle.feedback.js';
-import { renderCombatPiles } from '../game/src/battle/battle.piles.view.js';
-import { BATTLE_PHASES, beginTargeting, cancelTargeting, createBattleState, transitionBattle } from '../game/src/battle/battle.state.js';
+import { createActionQueue } from '../game/src/battle/core/battle.actions.js';
+import { createAnimationController } from '../game/src/battle/view/battle.animation-waiter.js';
+import { groupHandCards, fanLayout } from '../game/src/battle/core/battle.hand.js';
+import { assertUniqueZones, moveUid, zoneForUid } from '../game/src/battle/bag/battle.piles.js';
+import { intentSummary, intentViewModel } from '../game/src/battle/view/battle.intent.view.js';
+import { actionFeedback, feedbackClass, feedbackDelay } from '../game/src/battle/view/battle.feedback.js';
+import { renderCombatPiles } from '../game/src/battle/view/battle.piles.view.js';
+import { BATTLE_PHASES, beginTargeting, cancelTargeting, createBattleState, transitionBattle } from '../game/src/battle/runtime/battle.state.js';
 
 describe('battle architecture foundation', () => {
   it('uses an explicit phase and makes targeting cancellation idempotent', () => {
@@ -75,7 +75,7 @@ describe('battle architecture foundation', () => {
   });
 
   it('keeps same-stat timed buffs on independent expiry clocks', async () => {
-    const combat = await import('../game/src/battle/combat.js');
+    const combat = await import('../game/src/battle/core/combat.js');
     const target = { status: {} };
     combat.addBlessing(target, 'atkUp', 2, 1);
     combat.addBlessing(target, 'atkUp', 3, 3);

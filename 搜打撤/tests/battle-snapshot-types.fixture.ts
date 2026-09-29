@@ -1,5 +1,5 @@
-import { createBattleSnapshot } from '../game/src/battle/battle.snapshot.js';
-import { previewAction } from '../game/src/battle/battle.preview.js';
+import { createBattleSnapshot } from '../game/src/battle/runtime/battle.snapshot.js';
+import { previewAction } from '../game/src/battle/view/battle.preview.js';
 import type { BattleSnapshotInput, PreviewActionInput } from '../game/src/battle/battle.snapshot.types.js';
 
 const card = {

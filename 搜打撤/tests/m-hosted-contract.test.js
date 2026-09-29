@@ -1,9 +1,9 @@
 import { describe, expect, it, vi } from 'vitest';
 import { HOSTED_CARD_RULES, validateCardRules } from '../game/src/cards/card-rules.schema.js';
 import { inspectCardRuleCapability } from '../game/src/cards/card-rules.capability.js';
-import { resolveRegisterRule } from '../game/src/battle/effect-steps.m2.js';
-import { getHostedExecutionCard } from '../game/src/battle/battle.hosted.js';
-import { buildFirstSourceCardIndex } from '../game/src/battle/hosted-catalog-index.js';
+import { resolveRegisterRule } from '../game/src/battle/effects/effect-steps.m2.js';
+import { getHostedExecutionCard } from '../game/src/battle/effects/battle.hosted.js';
+import { buildFirstSourceCardIndex } from '../game/src/battle/effects/hosted-catalog-index.js';
 
 const hostedCards = Object.entries(HOSTED_CARD_RULES);
 

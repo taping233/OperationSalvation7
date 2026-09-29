@@ -3,8 +3,8 @@
 import { afterEach, beforeAll, describe, expect, it } from 'vitest';
 import { validateCardRules } from '../game/src/cards/card-rules.schema.js';
 import { inspectCardRuleCapability } from '../game/src/cards/card-rules.capability.js';
-import { hand, foes, energy, pstat, set$pstat } from '../game/src/battle/battle.runtime.js';
-import { createTriggerRunner } from '../game/src/battle/battle.triggers.m2.js';
+import { hand, foes, energy, pstat, set$pstat } from '../game/src/battle/runtime/battle.runtime.js';
+import { createTriggerRunner } from '../game/src/battle/effects/battle.triggers.m2.js';
 
 window.SDT = window.SDT || {};
 window.SDT.Icons = window.SDT.Icons || { img: () => '' };
@@ -15,8 +15,8 @@ window.SDT.MAP = {
   items: { rations: { name: '口粮' }, wood: { name: '木材' } },
 };
 await import('../game/src/cards/cards.js');
-const { BattleSession } = await import('../game/src/battle/battle.core.js');
-const engine = await import('../game/src/battle/battle.engine.js');
+const { BattleSession } = await import('../game/src/battle/core/battle.core.js');
+const engine = await import('../game/src/battle/core/battle.engine.js');
 const Cards = window.SDT.Cards;
 
 beforeAll(() => {

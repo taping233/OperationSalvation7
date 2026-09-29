@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { createBattleResolution } from '../game/src/battle/battle.resolution.js';
-import * as Combat from '../game/src/battle/combat.js';
+import { createBattleResolution } from '../game/src/battle/core/battle.resolution.js';
+import * as Combat from '../game/src/battle/core/combat.js';
 
 function makeResolver(state) {
   const events = [];

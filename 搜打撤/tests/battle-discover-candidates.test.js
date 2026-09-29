@@ -1,6 +1,6 @@
 // @vitest-environment node
 import { describe, expect, it, vi } from 'vitest';
-import { buildDiscoverPool, pickRandomDiscoverCandidate } from '../game/src/battle/battle.discover-candidates.js';
+import { buildDiscoverPool, pickRandomDiscoverCandidate } from '../game/src/battle/effects/battle.discover-candidates.js';
 
 describe('pure battle discovery candidates', () => {
   it('preserves specified-pool exclusions, catalog order, and original card identity', () => {

@@ -12,10 +12,10 @@
     "types": []
   },
   "files": [
-    "game/src/battle/battle.discover-flow.js",
-    "game/src/battle/battle.discover-state.js",
-    "game/src/battle/battle.discover-candidates.js",
-    "game/src/battle/battle.hand-selection.js",
+    "game/src/battle/effects/battle.discover-flow.js",
+    "game/src/battle/effects/battle.discover-state.js",
+    "game/src/battle/effects/battle.discover-candidates.js",
+    "game/src/battle/core/battle.hand-selection.js",
     "tests/strict-hand-selection-types.fixture.ts"
   ]
 }

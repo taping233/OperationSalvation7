@@ -9,7 +9,7 @@ window.SDT.MAP = {
 };
 
 await import('../game/src/cards/cards.js');
-const { BattleSession, viewApi } = await import('../game/src/battle/battle.core.js');
+const { BattleSession, viewApi } = await import('../game/src/battle/core/battle.core.js');
 const Cards = window.SDT.Cards;
 
 beforeAll(() => {

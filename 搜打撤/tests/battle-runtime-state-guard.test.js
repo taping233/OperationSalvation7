@@ -17,23 +17,23 @@ const BATTLE_DIR = resolve(process.cwd(), 'game/src/battle/');
 
 // 显式白名单：文件名 -> export let 名单。顺序不敏感，集合必须逐字一致。
 const WHITELIST = {
-  'battle.runtime.session.js': [
+  'runtime/battle.runtime.session.js': [
     'battleState', 'G', 'foes', 'opts', 'mode', 'energy', 'maxEnergy', 'turn',
     'pdef', 'pstat', 'busy', 'allies', 'battleRestartCheckpoint',
     'restoringRestartCheckpoint', 'tmpSeq', 'activeActionSignal', 'surgeWaiter',
     'lastPersistAt',
   ],
-  'battle.runtime.piles.js': [
+  'runtime/battle.runtime.piles.js': [
     'drawPile', 'hand', 'discard', 'granted', 'played', 'consumed', 'grave',
     'delayed', 'noDrawNext', 'lastDrawnUids', 'zeroFeeUntil', 'cardOverrides',
     'equipped', 'freeCast',
   ],
-  'battle.runtime.interaction.js': [
+  'runtime/battle.runtime.interaction.js': [
     'infusing', 'discovering', 'discoverQueue', 'handSelecting', 'choosing',
     'interaction', 'pendingHint', 'viewingGrave', 'viewingDeck', 'viewingBag',
     'selPool', 'selShaN', 'sel', 'lastDeckSel', 'selectingDeck', 'selDeckMax',
   ],
-  'battle.runtime.effects.js': [
+  'runtime/battle.runtime.effects.js': [
     'stealthStrike', 'nextSpellTwice', 'spellCost1', 'meleeCost1',
     'shaTransform', 'consumeFireballN', 'lastPlayedType',
     'playedMartialThisTurn', 'playedMovesThisTurn', 'growthNames', 'growth',
@@ -44,7 +44,7 @@ const WHITELIST = {
     'timeSpaceUsed', 'armorMul', 'sealDone', 'playerCurseImmune',
     'allSpellsInfused',
   ],
-  'battle.runtime.presentation.js': [
+  'runtime/battle.runtime.presentation.js': [
     'renderBattle', 'floats', 'cardAnims', 'presentationActionSeq',
     'dreadShown', 'snapCache', 'snapSig',
   ],

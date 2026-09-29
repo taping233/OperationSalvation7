@@ -10,7 +10,7 @@ window.SDT.MAP = {
   items: { rations: { name: '口粮' }, wood: { name: '木材' } },
 };
 await import('../game/src/cards/cards.js');
-const { BattleSession } = await import('../game/src/battle/battle.core.js');
+const { BattleSession } = await import('../game/src/battle/core/battle.core.js');
 const C = window.SDT.Cards;
 
 beforeAll(() => {
@@ -58,8 +58,8 @@ describe('2026-09-20 晚间留言卡牌数据', () => {
   it('物资格、药水说明、能力提示与手牌翻页提醒均有界面守卫', () => {
     const flow = readFileSync(resolve(process.cwd(), 'game/src/run/game.run.flow.js'), 'utf8');
     // 2026-09-22 battle.view 拆片：断言串（bt-hand-page 在 render 分派段）壳+六片拼接读
-    const battleView = ['battle/battle.view.js', 'battle/battle.overlays.js', 'battle/battle.layers.js', 'battle/battle.vfx.js',
-      'battle/battle.anim.view.js', 'battle/battle.aim.js', 'battle/battle.hover.js']
+    const battleView = ['battle/view/battle.view.js', 'battle/view/battle.overlays.js', 'battle/view/battle.layers.js', 'battle/view/battle.vfx.js',
+      'battle/view/battle.anim.view.js', 'battle/view/battle.aim.js', 'battle/view/battle.hover.js']
       .map((f) => readFileSync(resolve(process.cwd(), 'game/src', f), 'utf8')).join('\n');
     const battleCss = readFileSync(resolve(process.cwd(), 'game/css/battle.css'), 'utf8');
     expect(flow).toContain("asset: 'scene-event-airdrop'");

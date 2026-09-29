@@ -1,6 +1,6 @@
 import { afterEach, beforeAll, describe, expect, it } from 'vitest';
 import { validateCardRules } from '../game/src/cards/card-rules.schema.js';
-import { pstat, set$pstat } from '../game/src/battle/battle.runtime.js';
+import { pstat, set$pstat } from '../game/src/battle/runtime/battle.runtime.js';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };
 window.SDT.Icons = window.SDT.Icons || { img: () => '' };
@@ -11,7 +11,7 @@ window.SDT.MAP = {
   items: { rations: { name: '口粮' }, wood: { name: '木材' } },
 };
 await import('../game/src/cards/cards.js');
-const { BattleSession } = await import('../game/src/battle/battle.core.js');
+const { BattleSession } = await import('../game/src/battle/core/battle.core.js');
 const Cards = window.SDT.Cards;
 
 beforeAll(() => {

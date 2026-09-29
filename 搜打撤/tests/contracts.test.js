@@ -3,7 +3,7 @@ import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { basename, join, resolve } from 'node:path';
 import { RULES } from '../game/src/core/rules.js';
 import '../game/src/core/mapData.js';
-import { createEffectExecutor, splitEffectClauses } from '../game/src/battle/battle.effects.js';
+import { createEffectExecutor, splitEffectClauses } from '../game/src/battle/effects/battle.effects.js';
 import { RunStorage } from '../game/src/hub/game.storage.js';
 import { GameStore } from '../game/src/hub/game.store.js';
 import { BOOT_ORDER } from '../game/src/boot-order.js';
@@ -121,7 +121,7 @@ describe('ESM 依赖方向', () => {
   });
 
   it('battle.core 不访问 DOM 或反向导入战斗视图', () => {
-    const source = readFileSync(resolve(process.cwd(), 'game/src/battle/battle.core.js'), 'utf8');
+    const source = readFileSync(resolve(process.cwd(), 'game/src/battle/core/battle.core.js'), 'utf8');
     expect(source).not.toMatch(/from\s+['"][^'"]*battle\.view\.js['"]|\bUI\.|document\./);
   });
 });
@@ -141,9 +141,9 @@ describe('架构守护（2026-09-11 批次 1）', () => {
   });
 
   it('核心机制层不访问 DOM', () => {
-    const core = ['battle/battle.core.js', 'battle/battle.runtime.js', 'battle/battle.engine.js', 'battle/battle.enemy-phase.js',
-      'battle/battle.effects.js', 'battle/battle.deck.js', 'battle/battle.target-rules.js',
-      'battle/battle.state.js', 'battle/battle.piles.js', 'hub/game.store.js', 'hub/game.storage.js', 'cards/cards.js',
+    const core = ['battle/core/battle.core.js', 'battle/runtime/battle.runtime.js', 'battle/core/battle.engine.js', 'battle/core/battle.enemy-phase.js',
+      'battle/effects/battle.effects.js', 'battle/bag/battle.deck.js', 'battle/effects/battle.target-rules.js',
+      'battle/runtime/battle.state.js', 'battle/bag/battle.piles.js', 'hub/game.store.js', 'hub/game.storage.js', 'cards/cards.js',
       'core/rules.js', 'hub/meta.js', 'hub/base.js', 'core/random.js', 'core/mapData.js', 'run/map-graph.js',
       'cards/mech-sentences.js', 'core/characters.js', 'core/shared.js', 'core/asset-url.js', 'core/sdt-facade.js'];
     const offenders = [];

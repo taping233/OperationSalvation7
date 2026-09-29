@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { resolveExecute, resolveFoeFight } from '../game/src/battle/effect-steps.m2.js';
-import { resolveDrawHandOps } from '../game/src/battle/effect-steps.m1.js';
-import { set$hand, set$consumed, consumed } from '../game/src/battle/battle.runtime.piles.js';
+import { resolveExecute, resolveFoeFight } from '../game/src/battle/effects/effect-steps.m2.js';
+import { resolveDrawHandOps } from '../game/src/battle/effects/effect-steps.m1.js';
+import { set$hand, set$consumed, consumed } from '../game/src/battle/runtime/battle.runtime.piles.js';
 
 const card = { id: 'source', name: '测试', type: '武术' };
 function deps(foes) {

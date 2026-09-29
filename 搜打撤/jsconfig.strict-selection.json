@@ -12,7 +12,7 @@
     "types": []
   },
   "files": [
-    "game/src/battle/battle.selection-flow.js",
+    "game/src/battle/core/battle.selection-flow.js",
     "tests/strict-selection-types.fixture.ts"
   ]
 }

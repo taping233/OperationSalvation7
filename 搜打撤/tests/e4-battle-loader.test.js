@@ -15,7 +15,7 @@ beforeEach(() => {
   battle = { start: vi.fn(() => true), restore: vi.fn() };
   UI = { log: vi.fn(), refresh: vi.fn() };
   window.SDT = { game, UI };
-  vi.doMock('../game/src/battle/battle.view.js', async () => {
+  vi.doMock('../game/src/battle/view/battle.view.js', async () => {
     loadCount++;
     entered.resolve();
     await gate.promise;
@@ -116,7 +116,7 @@ describe('E4 battle lazy-load request ownership', () => {
     expect(game.state).toBe('idle');
     expect(UI.log).toHaveBeenCalledOnce();
     // Replace only the failed module transport; retain the real loader's promise state.
-    vi.doMock('../game/src/battle/battle.view.js', () => { window.SDT.Battle = battle; return {}; });
+    vi.doMock('../game/src/battle/view/battle.view.js', () => { window.SDT.Battle = battle; return {}; });
     expect(await startBattle(game, ['retry'], {})).toBe(true);
     expect(battle.start).toHaveBeenCalledExactlyOnceWith(game, ['retry'], {});
   });

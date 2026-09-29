@@ -1,5 +1,5 @@
 import { afterAll, afterEach, beforeAll, describe, expect, it } from 'vitest';
-import { decayEffectiveCardCost } from '../game/src/battle/battle.card-cost.js';
+import { decayEffectiveCardCost } from '../game/src/battle/effects/battle.card-cost.js';
 import { validateCardRules } from '../game/src/cards/card-rules.schema.js';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };
@@ -11,7 +11,7 @@ window.SDT.MAP = {
 };
 
 await import('../game/src/cards/cards.js');
-const { BattleSession, viewApi } = await import('../game/src/battle/battle.core.js');
+const { BattleSession, viewApi } = await import('../game/src/battle/core/battle.core.js');
 const Cards = window.SDT.Cards;
 const DISCOVER_RULES_KEY = 'sdt-cards-tt12-discover-v1-seeded';
 let originalCards = null;

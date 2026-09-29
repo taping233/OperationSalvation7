@@ -5,8 +5,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const projectRoot = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
-const snapshotPath = path.join(projectRoot, 'game/src/battle/battle.snapshot.js');
-const previewPath = path.join(projectRoot, 'game/src/battle/battle.preview.js');
+const snapshotPath = path.join(projectRoot, 'game/src/battle/runtime/battle.snapshot.js');
+const previewPath = path.join(projectRoot, 'game/src/battle/view/battle.preview.js');
 
 function checkInMemory(source) {
   const virtualPath = path.join(projectRoot, 'tests/__battle-snapshot-contract-memory__.ts');
@@ -49,8 +49,8 @@ function checkInMemory(source) {
 }
 
 const validSource = `
-  import { createBattleSnapshot } from '../game/src/battle/battle.snapshot.js';
-  import { previewAction } from '../game/src/battle/battle.preview.js';
+  import { createBattleSnapshot } from '../game/src/battle/runtime/battle.snapshot.js';
+  import { previewAction } from '../game/src/battle/view/battle.preview.js';
   import type { BattleSnapshotInput } from '../game/src/battle/battle.snapshot.types.js';
   import type { PreviewActionInput } from '../game/src/battle/battle.snapshot.types.js';
   import type { SnapshotBattleCard } from '../game/src/battle/battle.snapshot.types.js';
@@ -117,7 +117,7 @@ describe('battle snapshot TypeScript contract', () => {
       { source: `${validSource}\n createBattleSnapshot({ ...input, foes: [{ hp: 8, dead: false, status: { dodge: 'many' }, defense: { shield: 0 } }] });`, code: 2322 },
       { source: `${validSource}\n const readonlyCard = snapshot.pendingTarget?.card;\n if (readonlyCard?.rules?.triggers?.onPlay) readonlyCard.rules.triggers.onPlay[0].op = 'mutation';`, code: 2540 },
       { source: `${validSource}\n const readonlyCard = snapshot.pendingTarget?.card;\n if (readonlyCard?.rules?.triggers?.onPlay) readonlyCard.rules.triggers.onPlay.push({ op: 'damage' });`, code: 2339 },
-      { source: `import { previewAction } from '../game/src/battle/battle.preview.js';
+      { source: `import { previewAction } from '../game/src/battle/view/battle.preview.js';
         previewAction({ snapshot: { foes: [{ hp: 'bad', dead: false, status: null, defense: null, intent: null }], player: null, pstat: null },
           action: { kind: 'play-card', uid: 'u', targetIndex: 0 }, cardContext: { card: null, targetIndexes: [] } });`, code: 2322 },
     ];

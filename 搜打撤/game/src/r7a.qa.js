@@ -8,8 +8,8 @@ const UI={el:{overlay,ovBody,ovTitle},_lastMode:'battle',showOverlay(title,html,
 ovBody.addEventListener('click',e=>{const el=e.target.closest('[data-act]');if(el&&actions.has(el.dataset.act))actions.get(el.dataset.act)({...el.dataset});});
 window.SDT={UI,Icons:{img:()=>'<span aria-hidden="true">◆</span>',rich,TYPE_ART:{}},Sound:{music(){},sfx(){},setDucked(){},setBoss(){},setMusicMuted(){},setSfxMuted(){},musicMuted:false,sfxMuted:false},Art:{has:()=>false,monsterArt:()=>'<span>敌</span>',classArt:()=>'',cutoutFigures(){},decodeIn(){},warm(){},collectCardAssets:()=>[]},Meta:{track(){}},MAP:{rules:{battleEnergy:2,battleHandMax:10,bossDeckSize:10,starterSha:0,battleStartDraw:5,battleTurnDraw:1,diceSides:6},items:{rations:{name:'口粮'},wood:{name:'木材'}}}};
 await import('./cards/cards.js');
-const {BattleSession}=await import('./battle/battle.core.js');
-await import('./battle/battle.view.js');
+const {BattleSession}=await import('./battle/core/battle.core.js');
+await import('./battle/view/battle.view.js');
 const {resolveEncounterGroup}=await import('./run/encounter-selector.js');
 const map=await fetch(new URL('../data/map.json',import.meta.url)).then(r=>r.json());
 let fixture=null;

@@ -9,40 +9,40 @@ const JS_FILE = /\.(?:js|mjs)$/;
 // deadGuardKeys 自检“每个键至少命中一个真实文件”，防止目录再改名时规则死、测试绿。
 // 战斗运行时的完整表面：兼容壳 + 各属地状态模块——视图/纯模块一律不得直读。
 const RUNTIME_SURFACE = new Set([
-  'battle/battle.runtime.js',
-  'battle/battle.runtime.session.js', 'battle/battle.runtime.piles.js',
-  'battle/battle.runtime.interaction.js', 'battle/battle.runtime.effects.js',
-  'battle/battle.runtime.presentation.js',
+  'battle/runtime/battle.runtime.js',
+  'battle/runtime/battle.runtime.session.js', 'battle/runtime/battle.runtime.piles.js',
+  'battle/runtime/battle.runtime.interaction.js', 'battle/runtime/battle.runtime.effects.js',
+  'battle/runtime/battle.runtime.presentation.js',
 ]);
-const EXECUTION_ADAPTERS = new Set(['battle/effect-steps.m1.js', 'battle/effect-steps.m2.js']);
+const EXECUTION_ADAPTERS = new Set(['battle/effects/effect-steps.m1.js', 'battle/effects/effect-steps.m2.js']);
 const RUNTIME_INNER = new Set([
-  'battle/battle.engine.js', 'battle/battle.enemy-phase.js', 'battle/battle.selection-flow.js',
-  'battle/battle.equipment.js', 'battle/battle.bag.js', 'battle/battle.lifecycle.js',
-  'battle/battle.exec-play.js',
+  'battle/core/battle.engine.js', 'battle/core/battle.enemy-phase.js', 'battle/core/battle.selection-flow.js',
+  'battle/bag/battle.equipment.js', 'battle/bag/battle.bag.js', 'battle/core/battle.lifecycle.js',
+  'battle/core/battle.exec-play.js',
   // M 批结算适配器拥有牌区操作与已登记触发器；不对视图开放状态访问。
-  ...EXECUTION_ADAPTERS, 'battle/battle.triggers.m2.js',
+  ...EXECUTION_ADAPTERS, 'battle/effects/battle.triggers.m2.js',
 ]);
-const RUNTIME_OWNERS = new Set(['battle/battle.core.js', ...RUNTIME_INNER]);
+const RUNTIME_OWNERS = new Set(['battle/core/battle.core.js', ...RUNTIME_INNER]);
 const PURE_MODULES = new Set([
-  'battle/battle.card-cost.js', 'battle/battle.enemy-intent.js', 'battle/battle.resolution.js',
-  'battle/battle.snapshot.js', 'cards/cards.catalog.js',
+  'battle/effects/battle.card-cost.js', 'battle/core/battle.enemy-intent.js', 'battle/core/battle.resolution.js',
+  'battle/runtime/battle.snapshot.js', 'cards/cards.catalog.js',
   'cards/card-rarity.js', 'cards/card-render-context.js',
   'core/rule-config.js', 'hub/base-state.js', 'hub/base-mutation.js',
   'hub/base-economy.js', 'hub/base-progression.commands.js',
-  'battle/battle.card-inspection.js', 'battle/battle.hand-selection.js',
-  'battle/battle.discover-candidates.js', 'battle/hosted-catalog-index.js',
+  'battle/effects/battle.card-inspection.js', 'battle/core/battle.hand-selection.js',
+  'battle/effects/battle.discover-candidates.js', 'battle/effects/hosted-catalog-index.js',
 ]);
 // These feature domains use explicit runtime ports and must stay importable without the browser facade.
-const BROWSER_ISOLATED_MODULES = new Set(['battle/battle.selection-flow.js']);
+const BROWSER_ISOLATED_MODULES = new Set(['battle/core/battle.selection-flow.js']);
 const BROWSER_ISOLATION_FORBIDDEN_IMPORTS = new Map([
-  ['battle/battle.selection-flow.js', new Set(['battle/battle.staged-playback.js'])],
+  ['battle/core/battle.selection-flow.js', new Set(['battle/runtime/battle.staged-playback.js'])],
 ]);
 const SESSION_KERNEL = 'run/game.session.kernel.js';
 const SESSION_BROWSER = 'run/game.session.browser.js';
 const VIEW_MODULES = new Set([
-  'battle/battle.view.js', 'battle/battle.overlays.js', 'battle/battle.layers.js',
-  'battle/battle.vfx.js', 'battle/battle.anim.view.js', 'battle/battle.aim.js',
-  'battle/battle.hover.js', 'battle/battle.frames.js', 'battle/battle.piles.view.js',
+  'battle/view/battle.view.js', 'battle/view/battle.overlays.js', 'battle/view/battle.layers.js',
+  'battle/view/battle.vfx.js', 'battle/view/battle.anim.view.js', 'battle/view/battle.aim.js',
+  'battle/view/battle.hover.js', 'battle/view/battle.frames.js', 'battle/view/battle.piles.view.js',
 ]);
 // 流程域（基地/局外 + 局内流程）——纯规则/快照模块不得反向依赖。
 const FLOW_PREFIXES = ['hub/', 'run/'];
@@ -163,7 +163,7 @@ export function architectureViolations(graph) {
         violations.push(`${name}:${line}: 视图须通过 core 命令与快照访问战斗`);
       }
       // resolution 仅可调用两件 M 批命令适配器；其余纯模块仍禁止进入运行态，视图也禁止调用适配器。
-      const effectCommand = name === 'battle/battle.resolution.js' && EXECUTION_ADAPTERS.has(target);
+      const effectCommand = name === 'battle/core/battle.resolution.js' && EXECUTION_ADAPTERS.has(target);
       if (PURE_MODULES.has(name) && !effectCommand && (RUNTIME_OWNERS.has(target) || RUNTIME_SURFACE.has(target) || VIEW_MODULES.has(target)
         || target === 'core/sdt-facade.js' || FLOW_PREFIXES.some(prefix => target.startsWith(prefix)))) {
         violations.push(`${name}:${line}: 独立规则/快照模块不能反向依赖 ${target}`);

@@ -7,7 +7,7 @@ beforeEach(async () => {
   document.body.innerHTML = '<div id="overlay"></div>';
   window.SDT = { UI: {} };
   vi.useFakeTimers();
-  ({ showIntentLegend } = await import('../game/src/battle/battle.layers.js'));
+  ({ showIntentLegend } = await import('../game/src/battle/view/battle.layers.js'));
 });
 
 afterEach(() => {

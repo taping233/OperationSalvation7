@@ -21,14 +21,14 @@ const HERE = path.dirname(fileURLToPath(import.meta.url));
 // game.run.* 为架构批次 4 拆出的局内流程模块（scenes→altar→flow），与壳合并扫描；
 // 2026-09-22 六文件重构批1-5 拆出的切片一并并入（effect-steps/cards/hub/bag/battle.view 各片）
 const GAME_PARTS = ['game.session.js', 'game.menu.js', 'game.run.data.js', 'game.run.js', 'game.run.scenes.js', 'game.run.altar.js', 'game.run.flow.js',
-  'effect-steps.ctx.js', 'effect-steps.gates.js', 'effect-steps.curse.js', 'effect-steps.damage.js', 'effect-steps.recovery.js', 'effect-steps.kills.js', 'effect-steps.deck.js', 'effect-steps.rules.js', 'effect-steps.audit.js', 'effect-steps.tail.js',
+  'battle/effects/effect-steps.ctx.js', 'battle/effects/effect-steps.gates.js', 'battle/effects/effect-steps.curse.js', 'battle/effects/effect-steps.damage.js', 'battle/effects/effect-steps.recovery.js', 'battle/effects/effect-steps.kills.js', 'battle/effects/effect-steps.deck.js', 'battle/effects/effect-steps.rules.js', 'battle/effects/effect-steps.audit.js', 'battle/effects/effect-steps.tail.js',
   'cards.consts.js', 'cards.rules.js', 'cards.data.js', 'cards.sync.js',
   'game.hub.js', 'game.hub.depart.js', 'game.hub.pages.js', 'game.hub.bridge.js',
   'game.bag.js', 'game.bag.drag.js', 'game.bag.settle.js', 'game.bag.bridge.js',
   'game.notes.js', 'game.cardslib.js', 'game.boot.js'];
-const BATTLE_PARTS = ['battle.core.js', 'battle.runtime.js', 'battle.engine.js', 'battle.enemy-phase.js',
-  'battle.view.js', 'battle.overlays.js', 'battle.layers.js',
-  'battle.vfx.js', 'battle.anim.view.js', 'battle.aim.js', 'battle.hover.js'];
+const BATTLE_PARTS = ['battle/core/battle.core.js', 'battle/runtime/battle.runtime.js', 'battle/core/battle.engine.js', 'battle/core/battle.enemy-phase.js',
+  'battle/view/battle.view.js', 'battle/view/battle.overlays.js', 'battle/view/battle.layers.js',
+  'battle/view/battle.vfx.js', 'battle/view/battle.anim.view.js', 'battle/view/battle.aim.js', 'battle/view/battle.hover.js'];
 const src = (p) => {
   if (p === 'game.js') return GAME_PARTS.map(f => fs.readFileSync(path.join(HERE, 'src', f), 'utf8')).join('\n');
   if (p === 'battle.js') return BATTLE_PARTS.map(f => fs.readFileSync(path.join(HERE, 'src', f), 'utf8')).join('\n');

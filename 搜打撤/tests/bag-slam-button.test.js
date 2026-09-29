@@ -14,7 +14,7 @@ window.SDT.MAP = {
   items: { rations: { name: '口粮' }, wood: { name: '木材' } },
 };
 await import('../game/src/cards/cards.js');
-const { BattleSession, commands, viewApi } = await import('../game/src/battle/battle.core.js');
+const { BattleSession, commands, viewApi } = await import('../game/src/battle/core/battle.core.js');
 
 const C = window.SDT.Cards;
 

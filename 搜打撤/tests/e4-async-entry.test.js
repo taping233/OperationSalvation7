@@ -36,7 +36,7 @@ beforeEach(async () => {
     Base: { slot: 1, peek: () => ({}), use(n) { this.slot = n; }, issue: () => null,
       data: { stash: [], pocket: [] }, save() {} } };
   battle = { start: vi.fn(() => true), restore: vi.fn(), getSnapshot: vi.fn(() => ({})) };
-  vi.doMock('../game/src/battle/battle.view.js', async () => {
+  vi.doMock('../game/src/battle/view/battle.view.js', async () => {
     entered.resolve(); await gate.promise; SDT.Battle = battle; return {};
   });
   vi.doMock('../game/src/run/game.session.js', () => ({ game,

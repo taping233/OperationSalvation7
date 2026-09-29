@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { previewAction } from '../game/src/battle/battle.preview.js';
+import { previewAction } from '../game/src/battle/view/battle.preview.js';
 
 function preview(card, damageGrowth) {
   return previewAction({

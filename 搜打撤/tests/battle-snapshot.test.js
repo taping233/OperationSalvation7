@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { createBattleSnapshot } from '../game/src/battle/battle.snapshot.js';
+import { createBattleSnapshot } from '../game/src/battle/runtime/battle.snapshot.js';
 
 describe('battle snapshot builder', () => {
   it('preserves absent and explicit null cards in optional battle projections', () => {

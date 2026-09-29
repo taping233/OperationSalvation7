@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 
 const projectRoot = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const configPath = path.join(projectRoot, 'jsconfig.card-rules.json');
-const productionFiles = ['game/src/cards/card-rules.capability.js', 'game/src/battle/battle.rule-guard.js'];
+const productionFiles = ['game/src/cards/card-rules.capability.js', 'game/src/battle/effects/battle.rule-guard.js'];
 
 function diagnosticsFor(source, overrides = []) {
   const fixturePath = path.join(projectRoot, 'tests/__e6-card-rules-memory__.ts');
@@ -38,7 +38,7 @@ function diagnosticsFor(source, overrides = []) {
 
 const valid = `
 import { inspectCardRuleCapability } from '../game/src/cards/card-rules.capability.js';
-import { assertCardRulesExecutable, rejectUnsupportedCard } from '../game/src/battle/battle.rule-guard.js';
+import { assertCardRulesExecutable, rejectUnsupportedCard } from '../game/src/battle/effects/battle.rule-guard.js';
 import type { BattleOperationName, OperationTarget, CardRuleCapability, AcquireDestination, AcquireAction } from '../game/src/cards/card-rules.capability.types.js';
 const operation: BattleOperationName = 'acquire';
 const target: OperationTarget = 'allEnemies';
