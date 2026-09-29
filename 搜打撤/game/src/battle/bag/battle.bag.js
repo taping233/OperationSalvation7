@@ -52,6 +52,10 @@ export function createBattleBag({
     if (!entry) return;
     if (busy || infusing || discovering || choosing || handSelecting) return;
     const card = getHostedExecutionCard(entry.card);
+    // G-1（2026-09-29 夜班）：入口复检可用性——视图层拦截（药水栏 .off / BOSS 战背包拒开）之外的
+    // agent 命令通道（useItem 直达引擎）不再绕过 BOSS 战禁逃等口径，三条使用通道同闸。
+    const usability = itemUsability(card);
+    if (!usability.usable) { G.log(`[[icon:lock]] 【${esc(card.name)}】${usability.why}，道具未消耗`, 'dim'); return; }
     const desc = String(card.desc || '');
     if (Array.isArray(card.rules?.bag?.use)) {
       useBattleEffectItem({ ...entry, card }, side);

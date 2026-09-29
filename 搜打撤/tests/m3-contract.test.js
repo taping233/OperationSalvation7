@@ -45,7 +45,7 @@ async function waitForIdle(timeoutMs = 5000) {
   throw new Error('M3 BattleSession 动作未在时限内收敛');
 }
 
-async function startGame(cards, foesArg) {
+async function startGame(cards, foesArg, startOpts = {}) {
   const logs = [];
   const game = {
     ownedCards: cards.map(card => ({ uid: `m3-${uidSequence++}`, card, safe: false })),
@@ -56,7 +56,7 @@ async function startGame(cards, foesArg) {
     addItem() {}, onBattleEnd() {},
   };
   activeGame = game;
-  BattleSession.start(game, foesArg, { isBoss: false, name: 'M3 执行器收编验收' });
+  BattleSession.start(game, foesArg, { isBoss: false, name: 'M3 执行器收编验收', ...startOpts });
   await waitForIdle();
   return game;
 }
@@ -207,6 +207,35 @@ describe('M3 gap-2: bag.use potion expansion', () => {
     };
     assertSchema(smoke);
     assertSupported(smoke);
+  });
+
+  it('G-1: useItem rejects flee item in boss mode (no finish, no consumption)', async () => {
+    const smoke = {
+      id: 'm3-smoke-boss', name: '规则烟雾弹', cost: 0, type: '道具', desc: '',
+      rules: { version: 1, bag: { use: [{ op: 'flee' }] } },
+    };
+    // nest:true 跳过编组直开 BOSS 战（mode='boss'）
+    const game = await startGame([smoke], [foe('smoke-boss')], { isBoss: true, nest: true });
+    const entry = game.ownedCards.find(item => item.card.id === 'm3-smoke-boss');
+    engine.useItem(entry.uid, null);   // 与 agent 命令通道同一引擎入口
+    await waitForIdle();
+    expect(game.battleActive).toBe(true);   // finish 未触发：战斗未结束
+    expect(game.ownedCards.some(o => o.uid === entry.uid)).toBe(true);   // 道具未消耗
+    expect(game.logs.some(line => line.includes('BOSS 战中无法逃跑'))).toBe(true);
+    await finishBattle();
+  });
+
+  it('G-1 regression anchor: same flee item still ends battle outside boss (consumed via finish(null))', async () => {
+    const smoke = {
+      id: 'm3-smoke-normal', name: '规则烟雾弹', cost: 0, type: '道具', desc: '',
+      rules: { version: 1, bag: { use: [{ op: 'flee' }] } },
+    };
+    const game = await startGame([smoke], [foe('smoke-normal')]);
+    const entry = game.ownedCards.find(item => item.card.id === 'm3-smoke-normal');
+    engine.useItem(entry.uid, null);
+    await waitForIdle();
+    expect(game.battleActive).toBe(false);   // 逃跑语义 finish(null)，战斗正常终局
+    expect(game.ownedCards.some(o => o.uid === entry.uid)).toBe(false);   // 道具已消耗
   });
 
   it('defers scheduled bag ops to turn start (medneedle style)', async () => {

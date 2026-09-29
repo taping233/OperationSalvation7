@@ -417,6 +417,7 @@ function createShopController({
         UI.log(`卡牌【${esc(owned.card.name)}】不可出售`, 'warn');
         return;
       }
+      if (owned.stored) return;   // 珍珠盒存放中的卡不可出售（G-2，2026-09-29 夜班：与收购台渲染过滤同口径，直调 act 不再放行）
       const price = SDT.Cards.sellPrice(owned.card);
       game.ownedCards.splice(index, 1);
       game.coins += price;
