@@ -8,6 +8,8 @@ import { hand, consumed, foes, allies, equipped, pstat, set$pstat, set$hand,
   set$infuseFuels, set$playedMovesThisTurn, set$extraTurn, set$noDrawNext, set$meleeCost1, set$consumed } from '../game/src/battle/runtime/battle.runtime.js';
 import { createTriggerRunner } from '../game/src/battle/effects/battle.triggers.m2.js';
 import { resolveStealAtk, restoreAtkDown, countCurseKinds } from '../game/src/battle/effects/effect-steps.m2.js';
+import { calculateEnemyIntent } from '../game/src/battle/core/battle.enemy-intent.js';
+import { intentViewModel } from '../game/src/battle/view/battle.intent.view.js';
 
 window.SDT = window.SDT || {};
 window.SDT.Icons = window.SDT.Icons || { img: () => '' };
@@ -458,5 +460,27 @@ describe('M2 unit helpers', () => {
     expect(target.atk).toBe(0);
     expect(target._stealRestore).toBe(2);
     expect(logs.join()).toContain('偷取');
+  });
+});
+
+describe('U12 意图角标与实伤一致（2026-09-29 夜班 F2）', () => {
+  it('玩家回合内挂 atkDown 后，渲染口径意图显示值与 playerTakeHit 实伤一致', async () => {
+    const card = { id: 'u12-atkdown-intent', name: '割蚀·意图验收', cost: 0, type: '法术', desc: '降低 2 攻持续 3 回合',
+      ...R(ENEMY_ONE, [{ op: 'curse', curse: 'atkDown', amount: 2, duration: 3, target: 'chosenEnemy' }]) };
+    const game = await startGame([card, filler()], [foe('u12intent', 1000, 5)]);
+    // 渲染层表达式照抄 battle.layers.js updateFoes：快照 foe + 快照 turn/pstat 现算（U12-b 方案①）
+    const display = snap => intentViewModel(calculateEnemyIntent(snap.foes[0], snap.turn, snap.pstat?.status))[0];
+    expect(display(BattleSession.getSnapshot()).damage).toBe(5);   // 削攻前预告 5
+    await playCard(game, card, 0);                                  // 玩家回合内削攻 5→3
+    expect(foes[0].atk).toBe(3);
+    const after = BattleSession.getSnapshot();
+    expect(after.foes[0].intent.damage).toBe(5);   // foe.intent 快照契约不变（仍为回合末值）
+    const shown = display(after).damage;           // 修复前此处仍显示 5（stale）
+    expect(shown).toBe(3);
+    // 实伤走公共入口 playerTakeHit；玩家无护甲/护盾/格挡/流血时 dealt 应与角标一致
+    expect(after.pdef.armor).toBe(0);
+    expect(after.pdef.shield).toBe(0);
+    const dealt = engine.playerTakeHit({ atk: foes[0].atk, name: 'u12靶子' });
+    expect(dealt).toBe(shown);
   });
 });

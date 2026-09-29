@@ -14,6 +14,11 @@ export function calculateEnemyIntent(def, round, playerStatus) {
   if (def.evenAttack && ((round || 1) % 2 === 1)) {
     return { kind, icon: '[[icon:crystal]]', label: '蓄力·下回合行动', damage: null, hits: 1 };
   }
+  // noFirstAttack：首回合蓄力不攻击，与行动判定同源（enemy-phase.js「foe.noFirstAttack && turn === 1」
+  // 的「第一回合蓄力，不会攻击」）——此前意图模型缺此分支，巢穴龙首回合显示攻击预告、实际蓄力不动。
+  if (def.noFirstAttack && (round || 1) === 1) {
+    return { kind, icon: '[[icon:crystal]]', label: '蓄力·首回合不攻击', damage: null, hits: 1 };
+  }
   const bleed = (playerStatus && playerStatus.bleed) || 0;
   const atk = Math.max(0, def.atk || 0);
   return { kind, icon: meta[0], label: meta[1], damage: atk + bleed, hits, bleedBonus: bleed };

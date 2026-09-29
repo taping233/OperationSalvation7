@@ -101,4 +101,24 @@ describe('四层种子化地图生成器', () => {
       }
     }
   });
+
+  it('U12-d/F4 兜底：注入恒败生成器时外层重试 24 轮 × 8 次后 throw 清晰信息', () => {
+    let calls = 0;
+    const fail = () => { calls++; throw new Error('候选网格无法扩展到目标节点数'); };
+    expect(() => generateLayeredMap('u12-always-fail', fail))
+      .toThrow(/外层兜底 24 轮 × 8 次.*候选网格无法扩展到目标节点数/);
+    expect(calls).toBe(24 * 8);
+  });
+
+  it('U12-d/F4 兜底：质量门连败后换种子重试成功，产物合法且子流不污染正常种子', () => {
+    const valid = generateLayeredMap('u12-retry-valid').layers;   // 预生成一份合法层（默认生成器）
+    expect(validateGeneratedMap(valid).ok).toBe(true);
+    let calls = 0;
+    const flaky = () => (calls++ < 10 ? [] : valid);   // 前 10 次注入空层（quality 报「必须生成四层」），第 11 次成功
+    const map = generateLayeredMap('u12-flaky', flaky);
+    expect(calls).toBe(11);
+    expect(map.seed).toBe('u12-flaky');
+    expect(validateGeneratedMap(map.layers).ok).toBe(true);
+    expect(map.layers).toBe(valid);   // 成功即返回该候选，不做二次加工
+  });
 });

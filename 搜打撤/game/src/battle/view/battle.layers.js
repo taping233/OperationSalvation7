@@ -7,6 +7,7 @@ import { characterName } from '../../core/characters.js';
 import { esc } from '../../core/shared.js';
 import { escAttr } from '../../core/shared.js';
 import { fanLayout } from '../core/battle.hand.js';
+import { calculateEnemyIntent } from '../core/battle.enemy-intent.js';
 import { intentViewModel } from './battle.intent.view.js';
 import { storeGet, storeSet } from '../../core/storage.js';
 /* W5-03（2026-09-27 R2）：首次意图图例样式（battle.css 冻结 → head 注入，W2-01 同款）。 */
@@ -527,7 +528,8 @@ import { cardRuleHint } from './battle.preview.js';
     if (sig.hpTxt !== txt) { sig.hpTxt = txt; parts.hpTxt.textContent = txt; }
   }
   function updateUnits(mounts, snapshot, ctx) {
-    ctx = { ...ctx, devSample: !!snapshot.opts?.devSample, battleToken: snapshot.battleToken };
+    ctx = { ...ctx, devSample: !!snapshot.opts?.devSample, battleToken: snapshot.battleToken,
+      turn: snapshot.turn || 1, playerStatus: snapshot.pstat?.status || null };
     updateSelfUnit(snapshot, ctx);
     updateAllies(mounts.alliesMount, snapshot.allies || []);
     updateFoes(mounts.foesMount, snapshot.foes || [], ctx);
@@ -686,7 +688,10 @@ import { cardRuleHint } from './battle.preview.js';
       slot.classList.toggle('fx-burning', !f.dead && f.status && (f.status.burn || 0) > 0);
       const intents = frozen
         ? [{ icon: '[[icon:crystal]]', label: '冰冻·无法行动', damage: null, kind: 'frozen' }]
-        : intentViewModel(f.intent);
+        // 意图伤害渲染时现算（U12-b/2026-09-29 夜班 F2）：foe.intent 仍是回合末快照
+        // （快照序列化/读档/AI 顾问消费契约不动），角标按实时 foe.atk+玩家流血重算——
+        // 玩家回合内挂 atkDown 后显示值与 playerTakeHit 实伤一致（STS2 RefreshIntents 的渲染层等价）。
+        : intentViewModel(calculateEnemyIntent(f, ctx.turn || 1, ctx.playerStatus));
       // 迭代评审 09-20：意图详情并入气泡常驻文本（原生 title 已随手牌侧停用，交互口径统一）；
       // 实算伤害外带窄位流血角标「流血 N 层」；气泡允许两行折行（battle.css .sts-intent）
       if (!f.dead && intents.length) {

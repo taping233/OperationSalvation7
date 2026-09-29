@@ -15,6 +15,12 @@ const LAYOUT_VERSION = 9;   // v9：2026-09-19 关卡审查——L3 紧急撤离
                             // v6：2026-09-13 老板——每层事件格 ≤3（第 3 层 17 格受战斗≤4+搜刮≤4 的
                             // 既有定版约束，结构性最少 4 个，放宽到 ≤4）
 const MAX_ATTEMPTS = 8;
+// F4 兜底（2026-09-29 夜班）：质量门 8 连败或 makeLayer「候选网格无法扩展」原本直接对调用方
+// 硬 throw（layeredMap/route-overlay 均无 catch）。现外层换种子续试 FALLBACK_ROUNDS 轮
+//（每轮仍 MAX_ATTEMPTS 次，最终失败才 throw 清晰信息）；生成算法内部零改动。
+// 第 0 轮子流名保持 `${seed}:attempt:N` 原样——常态成功路径的随机序列逐位不变，重开图一致性不受影响；
+// 只有原本必 throw 的场景才会落入 retry 轮的新子流。
+const FALLBACK_ROUNDS = 24;
 
 function rng(seed) { let state = hashSeed(seed) || 0x9e3779b9;
   return () => { const step = nextRandom(state); state = step.state; return step.value; }; }
@@ -280,8 +286,19 @@ function build(seed) { const layers = TARGETS.map((target, li) => makeLayer(li, 
   for (let li = 0; li < 3; li++) { const from = layers[li].nodes[layers[li].exit]; const to = layers[li + 1].nodes[layers[li + 1].entry];
     addEdge(from, to); layers[li].doors = [{ pair: `p${li + 1}`, at: from.idx, toLayer: li + 1, arriveAt: to.idx, exit: false }]; }
   layers[3].doors = []; return layers; }
-export function generateLayeredMap(seed = 0) { let lastIssues = [];
-  for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) { const layers = build(`${seed}:attempt:${attempt}`); const result = quality(layers); if (result.ok)
-    return { seed, generatorVersion: GENERATOR_VERSION, layoutVersion: LAYOUT_VERSION, layers }; lastIssues = result.issues; }
-  throw new Error(`地图生成失败：${MAX_ATTEMPTS} 次候选均未通过质量校验（${lastIssues.join('；')}）`); }
+export function generateLayeredMap(seed = 0, buildImpl = build) {
+  let lastIssues = []; let lastNote = '';
+  for (let round = 0; round < FALLBACK_ROUNDS; round++) {
+    const base = round === 0 ? seed : `${seed}:retry:${round}`;
+    for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
+      let layers;
+      try { layers = buildImpl(`${base}:attempt:${attempt}`); }
+      catch (error) { lastNote = (error && error.message) || String(error); continue; }   // makeLayer 扩展失败也计入兜底（原为直接上抛）
+      const result = quality(layers);
+      if (result.ok) return { seed, generatorVersion: GENERATOR_VERSION, layoutVersion: LAYOUT_VERSION, layers };
+      lastIssues = result.issues;
+    }
+  }
+  throw new Error(`地图生成失败：外层兜底 ${FALLBACK_ROUNDS} 轮 × ${MAX_ATTEMPTS} 次候选仍未通过质量校验（最后一轮：${lastNote || lastIssues.join('；')}）`);
+}
 export { quality as validateGeneratedMap, GENERATOR_VERSION, LAYOUT_VERSION };

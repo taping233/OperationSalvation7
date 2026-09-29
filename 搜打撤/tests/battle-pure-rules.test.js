@@ -141,4 +141,14 @@ describe('纯敌方意图：蓄力与实际攻击预告', () => {
       kind: 'orc_boss', icon: '[[icon:tools]]', label: '双击并施加诅咒', damage: 4, hits: 2, bleedBonus: 4,
     });
   });
+
+  it('U12-a/F1：noFirstAttack 敌人首回合蓄力预告（巢穴龙），第二回合起正常攻击', () => {
+    const foe = { behavior: 'strike', atk: 7, noFirstAttack: true };
+    expect(calculateEnemyIntent(foe, 1, { bleed: 0 })).toEqual({
+      kind: 'strike', icon: '[[icon:crystal]]', label: '蓄力·首回合不攻击', damage: null, hits: 1,
+    });
+    expect(calculateEnemyIntent(foe, 2, { bleed: 2 })).toEqual({
+      kind: 'strike', icon: '[[icon:swords]]', label: '攻击', damage: 9, hits: 1, bleedBonus: 2,
+    });
+  });
 });
