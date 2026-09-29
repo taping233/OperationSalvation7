@@ -39,6 +39,7 @@ export function createBattleSelectionFlow({
     random: { next: random01 },
     battle: {
       currentClass: () => G?.myClass,
+      battleActive: () => !!G?.battleActive,   // D-4（2026-09-29 U7）：discover-flow 终局入口守卫接线
       firstAliveTarget: () => alive()[0] || null,
       hasAliveFoes: () => alive().length > 0,
       sweepDead,

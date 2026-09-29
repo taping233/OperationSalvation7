@@ -219,7 +219,7 @@ describe('battle selection flow ports', () => {
       fireCatGift: vi.fn(), addTempCard: () => 'temp-1', sweepDead: vi.fn(), finish: vi.fn(),
       requestBattleRender: vi.fn(),
     });
-    set$G({ log });
+    set$G({ battleActive: true, log });   // U7/D-4 守卫接线后 pickDiscover 需要 active 战斗（2026-09-29）
     set$pdef({ armor: 0 });
     set$discovering({
       options: [card], n: 1, rarity: null, pred: null, act: null, priceArmor: true,
@@ -232,5 +232,59 @@ describe('battle selection flow ports', () => {
 
     expect(sellPrice).toHaveBeenCalledWith(card);
     expect(pdef.armor).toBe(5);
+  });
+
+  // —— U7/D-4（2026-09-29）：pickDiscover 终局入口守卫——战斗已结束则静默拒绝落牌 ——
+  it('silently rejects a stale pickDiscover after the battle has finished (no temp card, no queue)', () => {
+    const card = { id: 'late', name: '终局后来牌', type: '法术' };
+    const addTempCard = vi.fn(() => 'temp-late');
+    const queueCardExecution = vi.fn();
+    const log = vi.fn();
+    const flow = createBattleSelectionFlow({
+      cards: { all: () => [], isRandomObtainable: () => true, sellPrice: () => 0 },
+      deny: vi.fn(), random01: vi.fn(() => 0), throwIfActionCancelled: () => {},
+      session: { handSelectQueue: [], choiceQueue: [] },
+      fireCatGift: vi.fn(), addTempCard, queueCardExecution, sweepDead: vi.fn(), finish: vi.fn(),
+      requestBattleRender: vi.fn(),
+    });
+    set$G({ battleActive: false, log });   // finish() 之后 G.battleActive=false 的实况
+    set$discovering({
+      options: [card], n: 1, rarity: null, pred: null, act: null, priceArmor: false,
+      pouchUid: null, consumeTempAtTurn: false, tempUids: [], swapPair: null,
+      deckBottom: false, deckBottomUids: [], zeroCost: false, decayEachTurn: false,
+      costDecayPerTurn: 0, sourceCardId: null, pool: [],
+    });
+
+    flow.pickDiscover(0);
+
+    expect(addTempCard).not.toHaveBeenCalled();
+    expect(queueCardExecution).not.toHaveBeenCalled();
+    expect(log).not.toHaveBeenCalled();   // 静默：无「发现」等任何落牌日志
+  });
+
+  it('keeps the normal pickDiscover path intact while the battle is active (guard zero-impact)', () => {
+    const card = { id: 'live', name: '战斗中牌', type: '法术' };
+    const addTempCard = vi.fn(() => 'temp-live');
+    const finish = vi.fn();
+    const flow = createBattleSelectionFlow({
+      cards: { all: () => [], isRandomObtainable: () => true, sellPrice: () => 0 },
+      deny: vi.fn(), random01: vi.fn(() => 0), throwIfActionCancelled: () => {},
+      session: { handSelectQueue: [], choiceQueue: [] },
+      fireCatGift: vi.fn(), addTempCard, sweepDead: vi.fn(), finish,
+      requestBattleRender: vi.fn(),
+    });
+    set$G({ battleActive: true, log: vi.fn() });
+    set$discovering({
+      options: [card], n: 1, rarity: null, pred: null, act: null, priceArmor: false,
+      pouchUid: null, consumeTempAtTurn: false, tempUids: [], swapPair: null,
+      deckBottom: false, deckBottomUids: [], zeroCost: false, decayEachTurn: false,
+      costDecayPerTurn: 0, sourceCardId: null, pool: [],
+    });
+
+    flow.pickDiscover(0);
+
+    expect(addTempCard).toHaveBeenCalledTimes(1);   // 照常置入临时卡
+    expect(addTempCard).toHaveBeenCalledWith(card);
+    expect(finish).toHaveBeenCalledWith(true);     // 走完收尾（无存活敌人→胜利），证明守卫未拦截正常路径
   });
 });

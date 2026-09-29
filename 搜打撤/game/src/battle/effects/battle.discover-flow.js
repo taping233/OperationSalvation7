@@ -32,7 +32,7 @@ import {
  * }} cards
  * @property {{ getJobs: () => DiscoverQueueJob[], get: () => DiscoveringState, set: (state: DiscoveringState) => void, requestRender: () => void }} interaction
  * @property {{ next: () => number }} random
- * @property {{ currentClass: () => string | null | undefined, firstAliveTarget: () => unknown, hasAliveFoes: () => boolean, sweepDead: () => void, finishVictory: () => void }} battle
+ * @property {{ currentClass: () => string | null | undefined, battleActive?: () => boolean, firstAliveTarget: () => unknown, hasAliveFoes: () => boolean, sweepDead: () => void, finishVictory: () => void }} battle
  * @property {{ returnToDeckBottom: (uids: string[]) => void, addArmor: (amount: number) => number, setCardOverride: (uid: string, card: DiscoverCard) => void, enqueueDelayed: (effect: DiscoverDelayedEffect) => void, swapCardCosts: (firstUid: string, secondUid: string) => void, removeOwnedCard?: (uid: string) => void }} effects
  * @property {{ log: (message: string, kind?: string) => void }} output
  */
@@ -130,6 +130,10 @@ export function createBattleDiscoverFlow(ports) {
 
   /** @param {number | string} index */
   function pickDiscover(index) {
+    // D-4（2026-09-29 U7）：终局入口守卫——STS2 CardSelectCmd 的 IsEnding 同位。战斗已收尾
+    // （finish 后 stale 回调 / agent 自动选牌竞态）时静默拒绝，不再向拆空的战场加临时牌并入队
+    // 出牌；口径同 battle.engine.js 请求时守卫（!G?.battleActive）。可选端口未接线时行为不变。
+    if (battle.battleActive && !battle.battleActive()) return;
     const state = interaction.get();
     if (!state) return;
     const card = state.options[+index];
