@@ -6,6 +6,7 @@
 const SDT = window.SDT;
 const UI = window.SDT.UI;
 import { esc } from '../core/shared.js';
+import { runTerminalSettlement } from '../ui/terminal-settlement.js';
 import { characterName } from '../core/characters.js';
 
 // 终局失败车队横幅（LEG-6b，2026-09-26 W1 批件）：挂「撤离失败」终局页顶部作正脸
@@ -127,39 +128,12 @@ export function createDeathSettlement({
       UI.refresh(game);
       return true;
     };
-    const showRetry = message => {
-      if (!current()) return;
-      token.busy = false;
-      token.promise = null;
-      UI.showOverlay('[[icon:cross]] 终局结算未保存', `<p class="ov-note">${esc(message || '基地与对局尚未完成结算，原对局仍保留。')}</p><button class="ov-btn ok" data-act="retryTerminalDeath">重试结算</button>`);
-      UI.act('retryTerminalDeath', () => { if (current() && !token.busy) return run(); });
-      UI.refresh(game);
-    };
-    const run = async () => {
-      if (!current() || token.busy) return false;
-      token.busy = true;
-      token.promise = (async () => {
-        try {
-          if (token.ephemeral) {
-            const projected = terminalCommands.projectEphemeral({ command: 'run.death', cards: token.cards, deathClass: token.deathClass });
-            return finish(projected.levelsGained);
-          }
-          if (!token.attempt) {
-            const created = await terminalCommands.createAttempt({ slotId: token.slotId, command: 'run.death', cards: token.cards, deathClass: token.deathClass });
-            if (!current()) return false;
-            if (!created.ok) { showRetry(created.message); return false; }
-            if (created.replay) return finish(created.receipt?.output?.levelsGained || 0);
-            token.attempt = created.attempt;
-          }
-          const committed = await terminalCommands.commitAttempt(token.attempt);
-          if (!current()) return false;
-          if (!committed.ok) { showRetry(committed.message); return false; }
-          return finish(committed.receipt?.output?.levelsGained || 0);
-        } catch (error) { showRetry(error && error.message); return false; }
-      })();
-      return token.promise;
-    };
-    return run();
+    return runTerminalSettlement({
+      token, current, game, UI, finish,
+      command: 'run.death', retryAct: 'retryTerminalDeath',
+      slotId: token.slotId, extraPayload: { deathClass: token.deathClass },
+      terminalCommands,
+    });
   }
 
   return { doDeath };

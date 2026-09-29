@@ -1,5 +1,6 @@
 import { appendLocalFeedback, downloadFeedbackRecord, readLocalFeedback, removeLocalFeedback } from './feedback.local.js';
 import { captureBattleContext, invalidateBattleContext } from '../battle/battle-loader.js';
+import { runTerminalSettlement } from './terminal-settlement.js';
 import { storeGet, storeSet } from '../core/storage.js';
 /* 标题、选档、离开与设置页面流程。只通过注入端口调用会话能力。 */
 function createGameMenuController(deps) {
@@ -884,40 +885,11 @@ function createGameMenuController(deps) {
       UI.refresh(game);
       return true;
     };
-    const showRetry = message => {
-      if (!current()) return;
-      token.busy = false;
-      token.promise = null;
-      UI.showOverlay('[[icon:cross]] 终局结算未保存', `<p class="ov-note">${esc(message || '基地与对局尚未完成结算，原对局仍保留。')}</p><button class="ov-btn ok" data-act="retryAbandon">重试结算</button>`);
-      UI.act('retryAbandon', () => { if (current() && !token.busy) return run(); });
-      UI.refresh(game);
-    };
-    const run = async () => {
-      if (!current() || token.busy) return false;
-      token.busy = true;
-      token.promise = (async () => {
-        try {
-          if (token.ephemeral) {
-            terminalCommands.projectEphemeral({ command: 'run.abandon', cards: token.cards });
-            return finish();
-          }
-          if (!terminalCommands) { showRetry('终局安全提交服务不可用'); return false; }
-          if (!token.attempt) {
-            const created = await terminalCommands.createAttempt({ slotId, command: 'run.abandon', cards: token.cards });
-            if (!current()) return false;
-            if (!created.ok) { showRetry(created.message); return false; }
-            if (created.replay) return finish();
-            token.attempt = created.attempt;
-          }
-          const committed = await terminalCommands.commitAttempt(token.attempt);
-          if (!current()) return false;
-          if (!committed.ok) { showRetry(committed.message); return false; }
-          return finish();
-        } catch (error) { showRetry(error && error.message); return false; }
-      })();
-      return token.promise;
-    };
-    return run();
+    return runTerminalSettlement({
+      token, current, game, UI, finish: () => finish(),
+      command: 'run.abandon', retryAct: 'retryAbandon',
+      slotId, terminalCommands,
+    });
   }
 
   function quitGame() {

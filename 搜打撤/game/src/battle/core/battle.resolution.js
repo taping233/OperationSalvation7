@@ -61,6 +61,17 @@ function createBattleResolution(ports) {
     markNoDrawNext, setExtraTurn, setBleedAmp, setMeleeCost1, setSpellCost1,
     summonAlly, getPriceOfLastDrawn, deckDraw, getTurn, getPlayerSpellPower, setNextSpellTwice,
   } = ports;
+  // 吸血/回复等量生命公共体（09-29 jscpd 收敛批，PENDING #12 档一）：
+  // 结构化路径 operation.lifesteal 与文本路径「回复等量生命」同语义，统一禁疗判定与演出。
+  const applyLifesteal = total => {
+    if ((getPlayerStatus().status.healban || 0) > 0) {
+      log(`[[icon:heart]] 禁疗中：吸血回复无效（还剩 ${getPlayerStatus().status.healban} 回合）`, 'warn');
+      return;
+    }
+    heal(total);
+    addFloat({ unit: 'self', text: '', cls: 'stk sticker-heal', warm: true });
+    log(`[[icon:heart]] 吸血：回复 ${total} 点生命`, 'ok');
+  };
   // M1（M 批契约扩展，2026-09-27）：effect-steps.m1.js 的注入端口收口——
   // 全部来自本文件既有端口，不新增引擎侧装配点。
   const m1Deps = { combat, getPlayerStatus, drawCards, grantSha, countDrawnSpells, findCard, log, esc,
@@ -695,15 +706,7 @@ function createBattleResolution(ports) {
           if (operation.retarget !== 'livingFoes' && operation.target === 'chosenEnemy' && preferred.dead) break;
         }
         // B3：吸血——按本 op 实际造成的伤害回复，走 healban 门（与文本路径吸血同口径）。
-        if (operation.lifesteal === true && dealtTotal > 0) {
-          if ((getPlayerStatus().status.healban || 0) > 0) {
-            log(`[[icon:heart]] 禁疗中：吸血回复无效（还剩 ${getPlayerStatus().status.healban} 回合）`, 'warn');
-          } else {
-            heal(dealtTotal);
-            addFloat({ unit: 'self', text: '', cls: 'stk sticker-heal', warm: true });
-            log(`[[icon:heart]] 吸血：回复 ${dealtTotal} 点生命`, 'ok');
-          }
-        }
+        if (operation.lifesteal === true && dealtTotal > 0) applyLifesteal(dealtTotal);
         // B2：recast:{on:'kill'}——本 op 击杀过敌人时再施放 N 次（镜像文本路径击杀连锁：
         // 余烬爆裂/饱和打击）。再施放段不做 cond/bonus 复判，按基础伤害结算。
         // M2：recast.on 扩 'lastHand'——本牌为最后一张手牌时再施放 N 次（急行军/破釜沉舟族）。
@@ -823,15 +826,7 @@ function createBattleResolution(ports) {
         if (hitThisSegment) yield { kind: 'hit', segment: i + 1, ...(cue ? { cue } : {}) };
       }
       // 吸血：回复等量生命（嗜血刃/噬血术/血蝠风暴）
-      if (/回复等量生命/.test(desc) && dealtTotal > 0) {
-        if ((getPlayerStatus().status.healban || 0) > 0) {
-          log(`[[icon:heart]] 禁疗中：吸血回复无效（还剩 ${getPlayerStatus().status.healban} 回合）`, 'warn');
-        } else {
-          heal(dealtTotal);
-          addFloat({ unit: 'self', text: '', cls: 'stk sticker-heal', warm: true });
-          log(`[[icon:heart]] 吸血：回复 ${dealtTotal} 点生命`, 'ok');
-        }
-      }
+      if (/回复等量生命/.test(desc) && dealtTotal > 0) applyLifesteal(dealtTotal);
       // 条件额外施放（暗影射击：对手处于诅咒状态，额外施放 1 次）
       const sm = desc.match(/若[^。]*?诅咒[^。]*?额外施放\s*(\d+)\s*次/);
       if (sm) {
