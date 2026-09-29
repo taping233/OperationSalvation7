@@ -10,10 +10,10 @@ import {
   viewingDeck, viewingBag, floats, cardAnims, dreadShown, spellCost1, meleeCost1, shaTransform,
   consumeFireballN, lastDrawnUids, lastPlayedType, playedMartialThisTurn, playedMovesThisTurn,
   selPool, selShaN, sel, selectingDeck, selDeckMax, allies, growthNames, growth, infuseFuels,
-  sealUnlocked, deathSave, killAtkUp, poisonLegacy, nestRunes, nestSyn, unyieldRune, ashRune,
+  sealUnlocked, deathSave, killAtkUp, nestRunes, nestSyn, unyieldRune,
   unlimitedRune, holyRune, armorMul, sealDone, playerCurseImmune, zeroFeeUntil, cardOverrides,
   equipped, freeCast, activeActionSignal, surgeWaiter, lastPersistAt, snapCache,
-  snapSig, set$lastDrawnUids, set$noDrawNext, set$stealthStrike,
+  snapSig, set$noDrawNext, set$stealthStrike,
   set$nextSpellTwice, set$drawPile, set$energy, set$maxEnergy, set$shaTransform,
   set$consumeFireballN, set$deathSave, set$hand, set$extraTurn, set$delayed, set$meleeCost1,
   set$spellCost1, set$surgeWaiter, set$sealUnlocked, set$discovering, set$battleState,
@@ -26,14 +26,14 @@ import {
 import { buildPouchDiscoverState } from '../effects/battle.discover-state.js';
 import { esc, clone as cloneData } from '../../core/shared.js';
 import { createEffectExecutor, splitEffectClauses, consumeTriggerTexts } from '../effects/battle.effects.js';
-import { refillDrawPile, shuffleCards } from '../bag/battle.deck.js';
+import { shuffleCards } from '../bag/battle.deck.js';
 import '../bag/battle.piles.js';
 import { isAreaEffect, targetSideFor, unplayableReasonFor, itemTargetSideFor } from '../effects/battle.target-rules.js';
 import { rejectUnsupportedCard } from '../effects/battle.rule-guard.js';
 
 import { createBattleExecutionSession } from '../runtime/battle.execution-session.js';
 import { createBattleActionRunner } from '../runtime/battle.action-runner.js';
-import { STAGED_BOSS_DEFEAT, actionCancellationError, createStagedPlayback, throwIfActionCancelled } from '../runtime/battle.staged-playback.js';
+import { actionCancellationError, createStagedPlayback, throwIfActionCancelled } from '../runtime/battle.staged-playback.js';
 import {
   BATTLE_PHASES, beginTargeting,
 } from '../runtime/battle.state.js';
@@ -45,6 +45,8 @@ import { createBattleCardInspection } from '../effects/battle.card-inspection.js
 import { calculateEnemyIntent } from './battle.enemy-intent.js';
 import { createBattleSnapshot, createBattleSnapshotSignature } from '../runtime/battle.snapshot.js';
 import { createBattleResolution } from './battle.resolution.js';
+import { createBattleFoeLifecycle } from './battle.foe-lifecycle.js';
+import { createBattleDraw } from './battle.draw.js';
 import '../view/battle.feedback.js';
 import { createBattleSelectionFlow } from './battle.selection-flow.js';
 import { matchesHandSelectKey as matchHandSelectKey } from './battle.hand-selection.js';
@@ -92,7 +94,6 @@ const requestBattleRender = () => {
 const interactionOf = (kind) => (interaction && interaction.kind === kind ? interaction : null);
 const pendingTargetOf = () => { const i = interactionOf('card'); return i ? { uid: i.uid, card: i.card } : null; };
 const pendingItemOf = () => { const i = interactionOf('item'); return i ? { uid: i.uid, card: i.card } : null; };
-const KILL_CHEER = ['漂亮！', '好剑！', '干净利落！'];
 function cardIdentity(card) {
     if (card && card.id) return `id:${card.id}`;
     return `legacy:${card?.name || ''}|${card?.type || ''}|${card?.desc || ''}`;
@@ -110,215 +111,23 @@ const cardInspection = createBattleCardInspection({
     }),
   });
 const { findCard, drawOf, infuseOf, effCostOf, handCurseSpecs, queueSwapCostDiscover, swapCardCosts } = cardInspection;
+/* 治理批次 3：敌方生命周期簇与抽牌/发牌/自动出牌簇迁至 battle.foe-lifecycle.js / battle.draw.js。
+ * 此处装配端口；resolveCard/applyTextEffects/triggersM2 为下方晚定义常量，以惰性包装传入。 */
+const { resolveFoeDefeat, sweepDead, nestPhase } = createBattleFoeLifecycle({
+  alive, foeIdx, finish, executionSession, stagedDeathFx,
+});
+const { drawCards, deckDraw, addTempCard, addDeckCard, grantSha, releaseHandMatches, autoPlayHandType } = createBattleDraw({
+  R, alive, findCard, sweepDead,
+  applyTextEffects: (...args) => applyTextEffects(...args),
+  resolveCard: (...args) => resolveCard(...args),
+  fireDrawn: (...args) => triggersM2.fireDrawn(...args),
+  fireAcquire: (...args) => triggersM2.fireAcquire(...args),
+  checkSealTransformation, queueCardExecution, requestBattleRender,
+});
 function intentFor(def, round) {
     return calculateEnemyIntent(def, round, pstat && pstat.status);
   }
 const shuffle = shuffleCards;
-function drawCards(n) {
-    let got = 0;
-    let drawnToHand = 0;   // 真正入手张数（抽到即施放/灰烬符文直接释放的不占手牌，不计入）
-    set$lastDrawnUids([]);
-    while (n-- > 0) {
-      if (!drawPile.length && discard.length) {
-        const recycled = refillDrawPile(drawPile, discard);
-        SDT.Sound.sfx('shuffle');   // 洗牌音（P1#5）：弃牌堆洗回牌库
-        G.log(`[[icon:recycle]] 弃牌堆 ${recycled} 张洗回牌库（墓地不参与洗回）`, 'dim');
-      }
-      if (!drawPile.length) break;
-      if (hand.length >= R().battleHandMax) break;
-      const uid = drawPile.pop();
-      const entry = findCard(uid);
-      const parts = entry ? splitClauses(String(entry.card.desc || '')) : null;
-      // M2：结构化「抽到时」触发（rules.triggers.onDraw）——与文本抽到即施放同门：直接结算，不占手牌
-      if (entry?.card?.rules?.triggers?.onDraw?.length) {
-        discard.push(uid);
-        G.log(`[[icon:flask]] <b>抽到时</b>：【${esc(entry.card.name)}】触发效果`, 'sys');
-        triggersM2.fireDrawn(entry.card, alive()[0] || null);
-        got++;
-        sweepDead();
-        if (!alive().length) break;
-        continue;
-      }
-      // 「抽到时施放」衍生牌（禁咒/天启剑系）：抽到即结算，不占手牌
-      if (parts && parts.onDraw.length) {
-        discard.push(uid);
-        parts.onDraw.forEach(text => {
-          G.log(`[[icon:flask]] <b>抽到时施放</b>：【${esc(entry.card.name)}】${esc(text)}`, 'sys');
-          applyTextEffects(entry.card, text, alive()[0] || null);
-        });
-        got++;
-        sweepDead();
-        if (!alive().length) break;
-        continue;
-      }
-      // 灰烬符文：手牌满 9 张时，放不下的招式直接释放（2026-09-16 Item 定版）
-      // entry 可为 null（uid 无法解析，同函数 118/150 行口径）：2026-09-28 审计补漏
-      if (ashRune && hand.length >= 9 && entry && ['武术', '法术'].includes(entry.card.type)) {
-        G.log('[[icon:fire]] <b>灰烬符文</b>：手牌已满，直接释放【' + esc(entry.card.name) + '】', 'sys');
-        resolveCard(entry.card, alive()[0] || null, false, 0);
-        got++;
-        continue;
-      }
-      hand.push(uid);
-      lastDrawnUids.push(uid);
-      cardAnims.push({ kind: 'draw', uid, name: entry ? entry.card.name : '' });
-      got++;
-      drawnToHand++;
-    }
-    // 抽牌反馈音（P1#5）：一批抽牌只播一声，连抽不叠音
-    if (drawnToHand > 0 && SDT.Sound) SDT.Sound.sfx('draw');
-    checkSealTransformation();   // 受缚之残影：每批抽牌后检查手牌是否集齐 5 张封印之牌
-    return got;
-  }
-function resolveFoeDefeat(foe, cause = '被击倒') {
-    if (!foe || foe.dead || foe.hp > 0) return false;
-    foe.dead = true;
-    G.log(`[[icon:skull]] <b>${esc(foe.name)}</b> ${cause}！（剩 ${alive().length} 个敌人）`, 'ok');
-    floats.push({ unit: foeIdx(foe), text: '', cls: 'stk sticker-boom' });
-    floats.push({ unit: 'self', text: KILL_CHEER[Math.floor(Random.random('battle') * KILL_CHEER.length)], cls: 'stk stk-late stk-cheer' });
-    // 固定死亡触发顺序：复活替代死亡 → 遗产转移 → 同回合复活击杀 → 首脑胜利。
-    if (nestRevive(foe)) return false;
-    transferPoisonLegacy(foe);
-    nestKillCheck(foe);
-    if (executionSession.stagedResolutionDepth > 0) stagedDeathFx.add(foe);
-    if (foe.boss) {
-      // 立刻截断本卡余句，但保留致命一击的反馈，待演出后再清场胜利。
-      if (executionSession.stagedResolutionDepth > 0) throw STAGED_BOSS_DEFEAT;
-      const signal = activeActionSignal;
-      finish(true);
-      // 首脑死亡会清空动作队列；立即打断当前同步结算，避免胜利后仍继续执行卡牌余句。
-      throwIfActionCancelled(signal);
-    }
-    return true;
-  }
-function sweepDead() {
-    foes.forEach(f => resolveFoeDefeat(f));
-  }
-function transferPoisonLegacy(deadFoe) {
-    if (!poisonLegacy || !deadFoe.status || !(deadFoe.status.poison > 0)) return;
-    const next = alive().filter(f => f !== deadFoe)[0];
-    const stacks = deadFoe.status.poison;
-    if (!next) return;
-    deadFoe.status.poison = 0;
-    Combat.addCurse(next, 'poison', stacks);
-    G.log(`[[icon:skull]] <b>腐化之种</b>：<b>${esc(deadFoe.name)}</b> 的 ${stacks} 层中毒转移给 <b>${esc(next.name)}</b>（当前 ${next.status.poison} 层）`, 'sys');
-  }
-function nestRevive(foe) {
-    if (!foe.revive || foe.revived) return false;
-    foe.revived = true;
-    foe.dead = false;
-    foe.maxHp = foe.revive.hearts;
-    foe.hp = foe.revive.hearts;
-    foe.atk = foe.revive.atk;
-    foe.status = {};
-    foe.reviveTurn = turn;
-    G.log('[[icon:fire]] <b>完全形态·元素领主</b>：死亡不是终结——以 8 攻 8 心复活（诅咒尽散）。借过！', 'warn');
-    return true;
-  }
-function nestKillCheck(foe) {
-    if (foe.revived && foe.reviveTurn === turn && SDT.Meta) {
-      SDT.Meta.track('reviveKill', {});
-      G.log('[[icon:trophy]] <b>借过</b>——复活体被当场送走！', 'ok');
-    }
-  }
-function nestPhase(foe) {
-    const frac = foe.hp / foe.maxHp;
-    const ph = frac <= 1 / 3 ? 3 : frac <= 2 / 3 ? 2 : 1;
-    if (ph === (foe.phase || 1)) return;
-    foe.phase = ph;
-    if (ph === 3) {
-      const dumped = hand.splice(0, hand.length);
-      dumped.forEach(u => discard.push(u));
-      foe.stunned = true;
-      G.log('[[icon:fire]] <b>远古龙尊</b> 狂怒：你的手牌全部被震落！且下个回合蓄力', 'warn');
-    } else {
-      G.log(`[[icon:fire]] <b>远古龙尊</b> 进入第 ${ph} 阶段`, 'warn');
-    }
-  }
-function addTempCard(tpl) {
-    const uid = 'bts' + Date.now().toString(36) + nextTmpSeq();
-    granted.push({ uid, card: { ...tpl } });
-    hand.push(uid);
-    cardAnims.push({ kind: 'draw', uid, name: tpl.name || '' });
-    // 置入手牌视同「抽到」（2026-09-11 英雄卡审计）：万剑归宗普通战分支走
-    // grantStarterAttack→addTempCard，此前不进 lastDrawnUids，「直接释放其中武术」永远放 0 张
-    lastDrawnUids.push(uid);
-    // M3：onAcquire 触发器（阿猫的礼物「发现或随机获取该牌时」）——获取即结算，防自递归
-    if (tpl?.rules?.triggers?.onAcquire?.length && !tpl._m2Acquiring) {
-      const acquiring = { ...tpl, _m2Acquiring: true };
-      granted[granted.length - 1].card = acquiring;
-      triggersM2.fireAcquire(acquiring, alive()[0] || null);
-    }
-    return uid;
-  }
-function addDeckCard(tpl) {
-    const uid = 'btd' + Date.now().toString(36) + nextTmpSeq();
-    granted.push({ uid, card: { ...tpl } });
-    drawPile.push(uid);
-    cardAnims.push({ kind: 'shuffle', name: tpl.name || '' });   // 洗入牌动画事件（2026-09-11 需求）
-    return uid;
-  }
-function grantSha(n) {
-    // 普通战的抽牌替代也必须开始新的一批，不能把开场砸击或上次获得的牌算入「其中」。
-    set$lastDrawnUids([]);
-    const lib = (typeof SDT.Cards.all === 'function' ? SDT.Cards.all() : []);
-    // 「杀化为X」战斗规则生效时，发放的初始攻击同样以目标卡形态出现
-    const base = (shaTransform && lib.find(c => c.name === shaTransform)) ||
-      lib.find(c => c.id === SDT.Cards.SHA.id) || SDT.Cards.SHA;
-    for (let i = 0; i < n; i++) addTempCard(base);
-  }
-function deckDraw({ n, type }) {
-    let moved = 0;
-    if (mode === 'boss') {
-      const rest = [];
-      while (drawPile.length && moved < n) {
-        const uid = drawPile.pop();
-        const o = findCard(uid);
-        if (o && o.card.type === type && hand.length < R().battleHandMax) {
-          hand.push(uid);
-          moved++;
-          lastDrawnUids.push(uid);
-          cardAnims.push({ kind: 'draw', uid, name: o.card.name });
-        }
-        else rest.push(uid);
-      }
-      drawPile.push(...rest);
-    }
-    while (moved < n) {
-      const pool = SDT.Cards.all().filter(c => c.type === type && c.rarity !== '衍生' && !['生物', '事件'].includes(c.type));
-      if (!pool.length) break;
-      addTempCard(pool[Math.floor(Random.random('battle') * pool.length)]);
-      moved++;
-    }
-    if (moved) G.log(`[[icon:cards]] ${mode === 'boss' ? '从牌库' : '（普通战斗无牌库，改为直接获得）'}抽取 ${moved} 张【${esc(type)}】牌`, 'sys');
-    return moved;
-  }
-function releaseHandMatches(key, drawEach, max) {
-    const re = key === '杀' ? /^(杀|初始攻击)$/ : new RegExp(key);
-    let released = 0;
-    for (const uid of hand.slice()) {
-      if (!alive().length) break;
-      if (max && released >= max) break;
-      const o = findCard(uid);
-      if (!o || o.card.type === '生物' || !re.test(o.card.name || '')) continue;
-      queueCardExecution(uid, o.card, [], alive()[0] || null, true, false, [],
-        drawEach ? () => { drawCards(drawEach); requestBattleRender(); } : null);
-      released++;
-    }
-    return released;
-  }
-function autoPlayHandType(type) {
-    let played = 0;
-    for (const uid of lastDrawnUids.slice()) {
-      if (!alive().length) break;
-      if (!hand.includes(uid)) continue;
-      const o = findCard(uid);
-      if (!o || o.card.type !== type) continue;
-      queueCardExecution(uid, o.card, [], alive()[0] || null, true);
-      played++;
-    }
-    return played;
-  }
   // 玩家自伤/受伤入口（文本路径 dmg.negHp 与结构化 heal.selfDamage 共用；黑暗吊坠死亡保险在此生效）
   function damagePlayer(n) {
     // 黑暗吊坠死亡保险：致死伤害被挡下，该回合无敌（C11）

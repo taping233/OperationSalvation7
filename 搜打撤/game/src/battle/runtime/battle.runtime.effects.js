@@ -110,3 +110,16 @@ export function applyRuneFlag(kind) {
   if (kind === 'fireball') fireballRuneOn = true;
   if (kind === 'spacetime') timeSpaceRune = true;
 }
+
+/* 开战/终局「战斗作用域旗标」整组清零（治理批次 4a：lifecycle resetBattleExtras 中
+ * effects 属地的 14 个散 set$ 收敛为域内一个入口；符文旗经 resetRuneFlags 一并清）。
+ * 字段集与守卫测试白名单的 effects 片一致——新增跨战清零字段请同步此函数。 */
+export function resetBattleEffectFlags() {
+  growthNames = new Set(); growth = {};
+  infuseFuels = 0; sealUnlocked = false; extraTurn = false; deathSave = 0;
+  killAtkUp = 0; poisonOnSpell = false; poisonLegacy = false;
+  sealDone = false; playerCurseImmune = false; allSpellsInfused = false;
+  playedMartialThisTurn = 0;   // 追斩计数跨战不残留
+  playedMovesThisTurn = 0;     // 连续射击计数跨战不残留
+  resetRuneFlags();
+}

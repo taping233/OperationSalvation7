@@ -1,6 +1,6 @@
 /* 战斗表现时钟：同一节奏下等待、清理和顿帧暂停共享生命周期。 */
 import { demoMs } from './battle.pace.js';
-import { isTurbo } from '../../agent/agent.turbo.js';
+import { isTurbo } from '../../core/turbo.js';
 import { setPaused as setUnitFramesPaused } from '../view/battle.frames.js';
 
 let pauseDepth = 0;

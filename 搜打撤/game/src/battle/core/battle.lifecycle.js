@@ -17,17 +17,16 @@ import {
   selectingDeck, selDeckMax, freezeRuneOn, equipped, battleRestartCheckpoint,
   restoringRestartCheckpoint, set$G, set$opts, set$foes,
   set$mode, set$hand, set$drawPile,
-  set$allies, set$growth, set$growthNames, set$infuseFuels, set$sealUnlocked,
-  set$extraTurn, set$deathSave, set$killAtkUp, set$poisonOnSpell, set$poisonLegacy,
+  set$allies,
   set$discoverQueue, set$interaction, set$pendingHint, set$selectingDeck, set$sel, set$selPool,
   set$selShaN, set$busy, set$battleState, set$battleRestartCheckpoint,
-  set$restoringRestartCheckpoint, set$sealDone, set$playerCurseImmune, set$allSpellsInfused,
-  set$freeCast, set$equipped, set$playedMartialThisTurn, set$playedMovesThisTurn,
+  set$restoringRestartCheckpoint,
+  set$freeCast, set$equipped,
   set$selDeckMax, set$lastDeckSel,
   clearBattlePresentation, resetBattlePresentation, showDread, hideDread, clearBattlePiles,
   restoreBattlePiles, restorePilesBookkeeping, resetPilesCarryover, resetCastOverrides,
   clearBattlePopups, closeBattleViews, restoreEffectState, restoreEffectRules, resetCostFlags,
-  resetRuneFlags,
+  resetBattleEffectFlags,
   transitionTo, clearActionSignals, restoreBattleSession, restoreBattleCombatants,
   resetBattlePlayerState,
 } from '../runtime/battle.runtime.js';
@@ -284,16 +283,12 @@ export function createBattleLifecycle({
 
   // —— 新增战斗规则变量统一清零（begin/beginBoss/finish 共用）——
   function resetBattleExtras() {
-    set$allies([]); set$growthNames(new Set()); set$growth({});
-    set$infuseFuels(0); set$sealUnlocked(false); set$extraTurn(false); set$deathSave(0);
-    set$killAtkUp(0); set$poisonOnSpell(false); set$poisonLegacy(false); resetCastOverrides();
-    set$sealDone(false); set$playerCurseImmune(false); set$allSpellsInfused(false);
-    resetRuneFlags();
+    set$allies([]);
+    resetBattleEffectFlags();   // effects 属地旗标+符文旗整组清零（治理批次 4a 收敛）
+    resetCastOverrides();
     set$interaction(null);
     set$freeCast(new Set());
     set$equipped([]);
-    set$playedMartialThisTurn(0);   // 追斩计数跨战不残留
-    set$playedMovesThisTurn(0);     // 连续射击计数跨战不残留
   }
 
   // ---------- BOSS战：编组牌库 ----------

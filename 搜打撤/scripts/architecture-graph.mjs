@@ -18,7 +18,7 @@ const EXECUTION_ADAPTERS = new Set(['battle/effects/effect-steps.m1.js', 'battle
 const RUNTIME_INNER = new Set([
   'battle/core/battle.engine.js', 'battle/core/battle.enemy-phase.js', 'battle/core/battle.selection-flow.js',
   'battle/bag/battle.equipment.js', 'battle/bag/battle.bag.js', 'battle/core/battle.lifecycle.js',
-  'battle/core/battle.exec-play.js',
+  'battle/core/battle.exec-play.js', 'battle/core/battle.draw.js', 'battle/core/battle.foe-lifecycle.js',
   // M 批结算适配器拥有牌区操作与已登记触发器；不对视图开放状态访问。
   ...EXECUTION_ADAPTERS, 'battle/effects/battle.triggers.m2.js',
 ]);
