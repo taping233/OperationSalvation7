@@ -304,7 +304,12 @@ export function resolveCopyRandom(card, deps) {
     deps.log(`[[icon:cross]] <b>${deps.esc(card.name)}</b>：手牌是空的，没有可复制的牌`, 'dim');
     return false;
   }
-  const uid = hand[Math.floor((deps.random || Math.random)() * hand.length)];
+  // 守卫（2026-09-29 U4）：随机一律走注入的 battle 种子流（生产装配 battle.resolution m2Deps.random
+  // → engine randomBattle）。漏注入即种子复现性破坏，结算期直接炸出，不留 Math.random 静默退化口。
+  if (typeof deps.random !== 'function') {
+    throw new Error('resolveCopyRandom: deps.random 未注入——战斗随机必须走 battle 种子流，禁止裸 Math.random 退化');
+  }
+  const uid = hand[Math.floor(deps.random() * hand.length)];
   const entry = uid && deps.findCard(uid);
   if (!entry) return false;
   deps.addTempCard({ ...entry.card });

@@ -27,6 +27,17 @@ export function createVersionedSlotReader({
   const cache = new Map();                 // index -> { raw, value }
   const issues = Object.create(null);      // index -> 'corrupt' | 'tooNew' | ...
 
+  // 迁移链完整性装载校验（守卫 2026-09-29 U4）：1..maxVersion-1 任一档缺函数即在装配期显式
+  // 炸出（STS2 MigrationPathGapException 思想：迁移表完整性是硬约束）。否则未来 maxVersion+1
+  // 而忘补迁移函数时，旧档会在下方迁移循环沿缺口被静默跳级盖章（损档无告警）。
+  // 0 号键不在校验范围：两侧迁移表按约定不设 0 号键——v0 = 未显式版本老档，0→1 仅盖章
+  // （见 game.storage.js / base.js 各自 MIGRATIONS 注释）。
+  for (let v = 1; v < maxVersion; v++) {
+    if (typeof migrations[v] !== 'function') {
+      throw new Error(`${logTag} 迁移表断链：缺少 ${v}→${v + 1} 迁移函数（maxVersion=${maxVersion}），拒绝装载，须补齐 migrations 后启动`);
+    }
+  }
+
   function clearIssue(index) { delete issues[index]; }
   function markIssue(index, kind) { issues[index] = kind; }
   function issue(index) { return issues[index] || null; }
@@ -62,6 +73,8 @@ export function createVersionedSlotReader({
     }
     let mv = v;
     while (mv < maxVersion) {
+      // 缺函数只可能发生在 mv=0（v0 老档盖章步）或负 v（base 宽松口径）：1..maxVersion-1
+      // 的键位完整性已由上方装载校验兜死，此处不会静默跳级。
       const m = migrations[mv];
       if (m) data = m(data);
       mv++;
