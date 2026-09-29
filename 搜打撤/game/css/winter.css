@@ -546,7 +546,10 @@ body:has(#overlay.opaque:not([hidden])) #sidebar{display:none!important}
 
 /* —— 卡牌放大特写（背包卡面点击）：背景虚化压暗 + 缩放弹出/收回 —— */
 #cardZoom{position:fixed;inset:0;z-index:400;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;cursor:pointer}
-#cardZoom .cz-backdrop{position:absolute;inset:0;background:rgba(6,10,14,.66);backdrop-filter:blur(9px);animation:czFade .34s ease both}
+/* 09-29 三期：去全屏毛玻璃——zoom-ab A/B 实测（8138 纯净树）：带 blur 点击放大
+   LoAF 10 个/最大 973.4ms、帧 P95 774.9ms；去后 LoAF 2/54.8ms、P95 7.1ms。
+   暗色幕布保留并加深补偿（.66→.78，聚焦效果不变），毛玻璃如需回归须连同 czFade 动画一起重设计。 */
+#cardZoom .cz-backdrop{position:absolute;inset:0;background:rgba(6,10,14,.78);animation:czFade .34s ease both}
 #cardZoom .cz-card{position:relative;z-index:1;animation:czIn .24s cubic-bezier(.2,1.3,.4,1) both}
 /* FLIP 入场（2026-09-12 留言）：从来源卡位置/尺寸放大到居中，禁 czIn 改走 transform+opacity 过渡 */
 #cardZoom .cz-card.cz-flip{animation:none;transition:transform .38s cubic-bezier(.22,.61,.36,1),opacity .3s ease}

@@ -24,7 +24,9 @@
 #overlay .card-library-page .library-head { flex-shrink:0; }
 #overlay .card-library-page .clib-tabs { background:none; padding:0; border:0; flex-shrink:0; max-height:none; }
 #overlay .card-library-page .lib-grid { grid-template-columns:repeat(5,minmax(0,1fr))!important; gap:0!important; padding:6px 6px 22px!important; align-content:start; scrollbar-color:#365666 #081722; scrollbar-width:thin; }
-#overlay .card-library-page .lib-item { border:0; border-right:1px solid rgba(182,211,214,.2); border-bottom:1px solid rgba(182,211,214,.2); padding:22px 12px; contain-intrinsic-size:auto 344px; }
+/* 09-29 三期消歧：本行的 contain-intrinsic-size:auto 344px 恒被下方 body.cardlib-open
+   口径与 .photo-studio-v3 口径压住（历史遗留），删除后占位高度统一走 :558 的 --lib-tile-h 实测值 */
+#overlay .card-library-page .lib-item { border:0; border-right:1px solid rgba(182,211,214,.2); border-bottom:1px solid rgba(182,211,214,.2); padding:22px 12px; }
 #overlay .card-library-page .lib-item:nth-child(5n) { border-right:0; }
 #overlay .card-library-page .lib-cardwrap { padding:0; border:0; background:none; width:100%; }
 #overlay .card-library-page .hs-btn { background:#142d3c; border:1px solid #819aa340; border-radius:2px; color:#bfd0d5; box-shadow:none; }
@@ -204,14 +206,19 @@ body.cardlib-open #overlay .card-library-page .lib-grid {
    padding 10px 是必需的裁剪余量：lib-item 带 content-visibility:auto（滚动性能），
    自带 paint 裁剪，卡格无内边距时浮球一出卡缘就被切（老板 09-13 留言：费用和价格被裁切）。 */
 body.cardlib-open #overlay .card-library-page .lib-item {
-  border:0!important; padding:12px 12px 0!important; gap:0!important; position:relative!important;
-  contain-intrinsic-size:auto 300px!important;
-  transition:transform .26s cubic-bezier(.22,1,.36,1)!important; }
+  border:0!important; padding:12px 12px 0!important; gap:0!important; position:relative!important; }
+/* 09-29 三期消歧：上块原带 contain-intrinsic-size:auto 300px!important 与
+   transition .26s!important——前者恒压住 .photo-studio-v3 口径的 --lib-tile-h 实测占位
+   （二期二刀意图被 !important 意外失效），后者恒输给下方 .18s；均删除。 */
 /* 抬升做在卡格上（不是卡面）：操作抽屉是它的兄弟节点，这样抽屉跟着卡面一起动，不会错位。
-   悬停时临时关掉 content-visibility（=关掉它自带的 paint 裁剪），让 46px 的悬停辉光
-   不被卡格边界硬切；一次只放开一格，滚动性能不受影响。 */
+   悬停放开 content-visibility（=关掉 paint 裁剪）让 46px 辉光不被卡格边界硬切，
+   但 09-29 三期起带 120ms 延迟：滚动扫过（每格停留 <120ms）不再反复开关裁剪，
+   每格一次重栅格化只发生在「停留悬停」时——与 JS 侧预览 90ms 去抖同一语义。
+   移开时走 :563 的 0s 无延迟立即收回裁剪。transition 离散属性 delay 兼容 Chromium 105+；
+   不支持的环境退化为立即放开（=旧行为），安全。 */
 body.cardlib-open #overlay .card-library-page .lib-item:hover {
-  transform:translateY(-9px)!important; z-index:5; content-visibility:visible!important; }
+  transform:translateY(-9px)!important; z-index:5; content-visibility:visible!important;
+  transition:transform .18s ease, content-visibility 0s .12s!important; }
 body.cardlib-open #overlay .card-library-page .lib-cardwrap {
   width:100%!important; padding:0!important; background:transparent!important; border:0!important;
   color:inherit!important; font:inherit!important; text-align:inherit!important; cursor:pointer!important;
@@ -553,16 +560,28 @@ body.cardlib-open #overlay .photo-studio-v3 .lib-item {
      跳过态占位由 contain-intrinsic-size 给足（单格高约 270~430px 随视宽浮动，进视口即用真实高度；
      09-25：360px 大于实际瓦片高致滚动条跳动，压至 270px） */
   content-visibility:auto;
-  contain-intrinsic-size:auto 270px;
+  /* 09-29 二刀：占位高度吃 --lib-tile-h（syncLibTileIntrinsicSize 喂实测瓦片高，
+     271 张全距仅 320~323px）。09-29 二期起壳自带等高，此占位主要兜底非壳态。 */
+  contain-intrinsic-size:auto var(--lib-tile-h, 270px);
+  /* 09-29 二期不再整瓦片层化：will-change 移到下方 :not(.lib-ph)——壳常驻后已挂载
+     瓦片只有视口附近几十张，合成层数量有界。全量 271 层在真实环境（Electron/核显/
+     系统缩放）会打爆层预算退化回逐帧重栅格化：账本无头满帧率但老板实机仍卡的根因。 */
   contain:layout style;
-  transition:transform .18s ease!important;
+  /* 09-29 三期：本行不再声明 transition——非 hover 态真源是 page-cardslib.css T1a
+     （transform var(--lib-lift)!important，文件序在后恒赢）；cv 无过渡声明=移开离散立即
+     收回裁剪（预期行为）。进入的 .12s 延迟写在上方 .card-library-page 口径 hover 规则
+     （特异性 (1,4,1) 高于 T1a，hover 态恒赢）。 */
 }
-body.cardlib-open #overlay .photo-studio-v3 .lib-item:hover {
-  z-index:4;
-  transform:translateY(-3px)!important;
-}
-/* 窗口挂载哨兵：占一格高的透明条，接近视口触发追加下一批（game.cardslib.js libMountMore） */
-body.cardlib-open #overlay .photo-studio-v3 .lib-mount-sentinel { height:1px; }
+/* 09-29 二期：合成层只给已挂载瓦片，占位壳不占层预算 */
+body.cardlib-open #overlay .photo-studio-v3 .lib-item:not(.lib-ph) { will-change:transform; }
+/* 占位壳：与瓦片等高的空格子（高度吃 --lib-tile-h 实测值），内容由 IO 就近注入/卸出
+   （game.cardslib.page.js mountLibTile/unmountLibTile） */
+body.cardlib-open #overlay .photo-studio-v3 .lib-item.lib-ph { height:var(--lib-tile-h, 321px); pointer-events:none; }
+/* 09-29 三期消歧：原此处另有 .photo-studio-v3 .lib-item:hover（z-index:4 / translateY(-3px)），
+   两项恒输给上方 .card-library-page 口径 hover 规则（z-index:5!important、-9px!important 特异性更高），
+   删除后悬停生效值不变（z=5、-9px）。 */
+/* 09-29 三期删除 .lib-mount-sentinel 死规则：二期壳常驻重构后哨兵机制已从 JS 退场，
+   DOM 无此元素（原注释指向的 libMountMore 已不存在） */
 body.cardlib-open #overlay .photo-studio-v3 .lib-cardwrap.studio-photo {
   width:100%!important;
   min-width:0!important;

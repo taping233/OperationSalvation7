@@ -9,7 +9,6 @@
  * 零读者；assets/icons/ 下 battle.png/chest.png 等 NAI 位图随之
  * 成为孤儿资产，处置另议（见 docs/PENDING.md）。
  * ============================================================ */
-import { circle } from './renderer.primitives.js';
 
 const TAU = Math.PI * 2;
 const NO_DASH = [];   // 还原实线（空点划常量，复用避免逐帧分配）

@@ -1,6 +1,6 @@
 # 性能基准
 
-当前 Vite 网页版性能事实以 [全场景账本 PERF-LEDGER-2026-09-29](PERF-LEDGER-2026-09-29.md) 为准（19 场景×3 轮中位数、热点清单，`node scripts/perf-ledger-capture.mjs` 一条命令复跑）；2026-09-28 的当前窗口基线与战斗帧加载前后对照见 [Vite 实页性能记录](archive/records-2026-09-28/VITE-IAB-PERFORMANCE-2026-09-28.md)。下面的自动基准和旧实测使用 Electron 窗口，测量环境与实页记录不同；120 FPS 仍是努力目标，不从旧结果或单页样本宣称整游戏达标。
+当前 Vite 网页版性能事实以 [全场景账本 PERF-LEDGER-2026-09-29](PERF-LEDGER-2026-09-29.md) 为准（19 场景×3 轮中位数、热点清单，`node scripts/perf-ledger-capture.mjs` 一条命令复跑）；照相馆目录滚动热点已于 2026-09-29 当晚清零（photo-scroll rAF 中位 41.7→6.9ms，三刀修复与归因五连测见 [照相馆性能专项](PHOTOLIB-PERF-TASK-2026-09-29.md)，复测口径与账本一致）；2026-09-28 的当前窗口基线与战斗帧加载前后对照见 [Vite 实页性能记录](archive/records-2026-09-28/VITE-IAB-PERFORMANCE-2026-09-28.md)。下面的自动基准和旧实测使用 Electron 窗口，测量环境与实页记录不同；120 FPS 仍是努力目标，不从旧结果或单页样本宣称整游戏达标。
 
 ## 基准方法
 

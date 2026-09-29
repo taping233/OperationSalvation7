@@ -23,6 +23,8 @@
     "lint": "eslint game/src tests scripts/acceptance-gate.mjs",
     "check:quality": "npm run check:syntax && npm run validate:data && npm run typecheck && npm run lint && npm test && npm run build",
     "test:watch": "vitest",
+    "handoff": "node scripts/handoff-brief.mjs",
+    "docs:retire": "node scripts/doc-retirement-candidates.mjs",
     "perf": "node scripts/perf-benchmark.cjs",
     "perf:soak": "node scripts/perf-benchmark.cjs --soak",
     "perf:budget": "node scripts/perf-budget.cjs",

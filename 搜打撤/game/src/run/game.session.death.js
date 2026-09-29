@@ -5,7 +5,6 @@
  * 本模块不 import 任何 game.session.* 模块。 */
 const SDT = window.SDT;
 const UI = window.SDT.UI;
-import { esc } from '../core/shared.js';
 import { runTerminalSettlement } from '../ui/terminal-settlement.js';
 import { characterName } from '../core/characters.js';
 
