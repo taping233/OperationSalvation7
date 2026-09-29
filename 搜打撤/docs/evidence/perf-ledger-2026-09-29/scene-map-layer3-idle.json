@@ -1,0 +1,112 @@
+{
+  "scenario": "map-layer3-idle",
+  "conditions": {
+    "page": "地图第 3 层·稳态（事件驱动静态帧）",
+    "run": {
+      "layer": 3,
+      "node": 0,
+      "class": "侠客",
+      "characterId": "wu",
+      "hp": 13,
+      "maxHp": 35
+    }
+  },
+  "rounds": [
+    {
+      "mode": "idle",
+      "viewport": {
+        "cssWidth": 1890,
+        "cssHeight": 855.5,
+        "bufferWidth": 1890,
+        "bufferHeight": 855,
+        "dpr": 1
+      },
+      "phaseBefore": "map",
+      "phaseAfter": "map",
+      "frames": 990,
+      "rafHz": 165,
+      "rafMedianMs": 6.1,
+      "rafP95Ms": 6.2,
+      "rafMaxMs": 6.4,
+      "slowOver20msPercent": 0,
+      "drawWrapped": true,
+      "drawCalls": 88,
+      "drawMedianMs": 0.4,
+      "drawP95Ms": 0.8,
+      "drawMaxMs": 2,
+      "longTasks": 0,
+      "longTaskMaxMs": null,
+      "longAnimationFrameCount": 0,
+      "longAnimationFrameMaxMs": null,
+      "heapUsedMiB": 49.04,
+      "heapDeltaMiB": 0.59,
+      "visibility": "visible",
+      "cdpHeapUsedMiB": 23.03,
+      "cdpNodes": 4005
+    },
+    {
+      "mode": "idle",
+      "viewport": {
+        "cssWidth": 1890,
+        "cssHeight": 855.5,
+        "bufferWidth": 1890,
+        "bufferHeight": 855,
+        "dpr": 1
+      },
+      "phaseBefore": "map",
+      "phaseAfter": "map",
+      "frames": 990,
+      "rafHz": 165,
+      "rafMedianMs": 6.1,
+      "rafP95Ms": 6.2,
+      "rafMaxMs": 6.4,
+      "slowOver20msPercent": 0,
+      "drawWrapped": true,
+      "drawCalls": 1,
+      "drawMedianMs": 0.3,
+      "drawP95Ms": 0.3,
+      "drawMaxMs": 0.3,
+      "longTasks": 0,
+      "longTaskMaxMs": null,
+      "longAnimationFrameCount": 0,
+      "longAnimationFrameMaxMs": null,
+      "heapUsedMiB": 46.89,
+      "heapDeltaMiB": -2.15,
+      "visibility": "visible",
+      "cdpHeapUsedMiB": 21.81,
+      "cdpNodes": 2131
+    },
+    {
+      "mode": "idle",
+      "viewport": {
+        "cssWidth": 1890,
+        "cssHeight": 855.5,
+        "bufferWidth": 1890,
+        "bufferHeight": 855,
+        "dpr": 1
+      },
+      "phaseBefore": "map",
+      "phaseAfter": "map",
+      "frames": 990,
+      "rafHz": 165,
+      "rafMedianMs": 6.1,
+      "rafP95Ms": 6.2,
+      "rafMaxMs": 6.4,
+      "slowOver20msPercent": 0,
+      "drawWrapped": true,
+      "drawCalls": 1,
+      "drawMedianMs": 0.3,
+      "drawP95Ms": 0.3,
+      "drawMaxMs": 0.3,
+      "longTasks": 0,
+      "longTaskMaxMs": null,
+      "longAnimationFrameCount": 0,
+      "longAnimationFrameMaxMs": null,
+      "heapUsedMiB": 47.19,
+      "heapDeltaMiB": 0.3,
+      "visibility": "visible",
+      "cdpHeapUsedMiB": 22.06,
+      "cdpNodes": 2131
+    }
+  ]
+}

@@ -12,29 +12,19 @@ import { KEY } from '../game/src/cards/cards.consts.js';
 import { validateCardRules } from '../game/src/cards/card-rules.schema.js';
 import { inspectCardRuleCapability } from '../game/src/cards/card-rules.capability.js';
 import { ensureM6BagRules } from '../game/src/cards/cards.sync.m6.js';
+import { dataSlice } from '../game/src/cards/cards.data.js';
 
 const MARKER = 'sdt-cards-m6-bag-rules-v1-seeded';
 
-// canonical 夹具：逐字照抄 cards.data.js TABLETOP10 / TABLETOP11 定版行。其中 tt3sp-doom /
-// tt-token-gold 在 TABLETOP10 是 cards-sync 字符串引用，此处写 resolveCardCatalog 解析后的
-// 定版真身（game/data/cards-sync.json 同 id 行）；若源表日后漂移，回填器按深相等保守跳过，不会写脏。
-const TABLETOP10 = [
-  { id: 'tt3-blue-potion', name: '恢复药水', cost: 0, rarity: '稀有', type: '道具', desc: '回复 5 点生命，回复1点能量。', dmg: 0, heal: 5, value: 2 },
-  { id: 'tt3-demon-potion', name: '法力药水', cost: 0, rarity: '稀有', type: '道具', desc: '法伤 +2。持续 1 回合。', dmg: 0, value: 2 },
-  { id: 'tt3-houyi-potion', name: '狂暴药水', cost: 0, rarity: '稀有', type: '道具', desc: '获得 2 点攻击力。持续 1 回合。', dmg: 0, value: 3 },
-  { id: 'tt3-iceheart-potion', name: '冰冻药水', cost: 0, rarity: '稀有', type: '道具', desc: '附加冰冻，持续 1 回合。', dmg: 0, value: 3 },
-  { id: 'tt3-mind-potion', name: '精神药水', cost: 0, rarity: '稀有', type: '道具', desc: '抽 2 张牌。', dmg: 0, draw: 2, value: 3 },
-  { id: 'tt3-mixed-potion', name: '流血药水', cost: 0, rarity: '稀有', type: '道具', desc: '造成 2 点固定伤害，附加流血。', dmg: 0, value: 2 },
-  { id: 'tt3-python-potion', name: '火焰药水', cost: 0, rarity: '稀有', type: '道具', desc: '对所有敌人造成2点法伤', dmg: 0, value: 3 },
-  { id: 'tt3-turnabout-potion', name: '剧毒药水', cost: 0, rarity: '稀有', type: '道具', desc: '对所有敌人附加1层中毒。', dmg: 0, value: 3 },
-  { id: 'tt3sp-doom', name: 'TNT', cost: 0, rarity: '史诗', type: '道具', desc: '消灭 2 名 攻击力5点及以下小怪', dmg: 0, value: 4, sellable: false },
-  { id: 'tt-token-gold', name: '员工通行证B', cost: 0, rarity: '史诗', type: '道具', desc: '随机获取 1 张传说卡（不含棱彩卡）。', dmg: 0, value: 4 },
-  { id: 'tt4-shine-token', name: '员工通行证C', cost: 0, rarity: '史诗', type: '道具', desc: '发现 1 张传说卡。', dmg: 0, value: 4 },
-  { id: 'tt4-smoke-bomb', name: '烟雾弹', cost: 0, rarity: '稀有', type: '道具', desc: '非 BOSS 战逃跑一次。', dmg: 0, value: 3 },
-];
-const TABLETOP11 = [
-  { id: 'cmtmvq6ss84l', name: '员工通行证A', cost: 0, rarity: '衍生', type: '道具', dmg: 0, desc: '获取本职业的能力卡', value: 8, sellable: false },
-];
+// canonical 夹具（2026-09-29 镜像收编）：原「逐字照抄 TABLETOP10/11 定版行」改为按本批 id
+// 取 dataSlice 真源行（tt3sp-doom / tt-token-gold 在 TABLETOP10 是 cards-sync 字符串引用，
+// resolveCardCatalog 解析后的对象即定版真身）；卡面字段值不再手抄，真源漂移时以真源为准。
+const M6_IDS = ['tt3-blue-potion', 'tt3-demon-potion', 'tt3-houyi-potion', 'tt3-iceheart-potion',
+  'tt3-mind-potion', 'tt3-mixed-potion', 'tt3-python-potion', 'tt3-turnabout-potion',
+  'tt3sp-doom', 'cmtmvq6ss84l', 'tt-token-gold', 'tt4-shine-token', 'tt4-smoke-bomb'];
+const rowsById = (table, ids) => table.filter(card => card?.id && ids.includes(card.id));
+const TABLETOP10 = rowsById(dataSlice.TABLETOP10, M6_IDS);
+const TABLETOP11 = rowsById(dataSlice.TABLETOP11, M6_IDS);
 
 // 期望回填结果：version:1 / rules.bag.use 有序 ops，逐字对齐 cards.sync.m6.js definitions。
 const EXPECTED_RULES = {

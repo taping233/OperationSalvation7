@@ -14,44 +14,25 @@ import { KEY } from '../game/src/cards/cards.consts.js';
 import { validateCardRules } from '../game/src/cards/card-rules.schema.js';
 import { inspectCardRuleCapability } from '../game/src/cards/card-rules.capability.js';
 import { ensureM3OnplayRules } from '../game/src/cards/cards.sync.m3.js';
+import { dataSlice } from '../game/src/cards/cards.data.js';
+import cardsSyncData from '../game/data/cards-sync.json';
 
 const MARKER = 'sdt-cards-m3-onplay-rules-v3-seeded';
 
-// canonical 夹具：逐字照抄定版源行（CARDS_SYNC=game/data/cards-sync.json 实机覆盖批次；
-// TABLETOP10/11/12=cards.data.js 定版表；同 id 多表引用取「最后写入的定版」，与 catalog-after
-// 实测逐卡深相等）。若源表日后漂移，回填器按深相等保守跳过，不会写脏。
-const CARDS_SYNC = [
-  { cost: 2, desc: '攻（+3），附加手牌中的招式所具有的全部诅咒效果。', dmg: 3, dmgType: 'attack', id: 'cc-cursed-blade', name: '诅咒之刃', rarity: '稀有', type: '武术', value: 3 },
-  { cost: 2, desc: '攻（+3）；若本牌为最后一张手牌，效果触发 2 次。', dmg: 3, dmgType: 'attack', id: 'cc-last-stand', name: '破釜沉舟', rarity: '稀有', type: '武术', value: 3 },
-  { cost: 1, desc: '本回合每打出一张其他招式，造成2点固定伤害（触发次数＝本回合已打出的招式数）。', dmg: 2, dmgType: 'fixed', id: 'cc-rapid-fire', name: '连续射击', rarity: '史诗', type: '武术', value: 3 },
-  { cost: 1, desc: '回复 5 点生命，净化自身', dmg: 0, heal: 5, id: 'tt3-holy-water', name: '治愈', rarity: '古朴', type: '法术', value: 2 },
-];
-const TABLETOP10 = [
-  { id: 'tt2-jianghu', name: '江湖救急', cost: 1, rarity: '史诗', type: '武术', desc: '发现 1 张其它职业的卡牌并直接施放。', dmg: 0, value: 4 },
-  { id: 'tt2-turtlearmor', name: '铸甲', cost: 1, rarity: '稀有', type: '武术', desc: '消耗1 张装备牌，+10甲。', dmg: 0, armor: 10, value: 3 },
-  { id: 'tt3-dig-treasure', name: '挖宝', cost: 1, rarity: '古朴', type: '武术', desc: '从牌库底发现 1 张牌，并获得等同于其价格的护甲。', dmg: 0, value: 2 },
-  { id: 'tt3-fly-arrowhawk', name: '飞身劈', cost: 2, rarity: '稀有', type: '武术', desc: '攻（+3），触发的流血伤害翻倍。', dmg: 3, dmgType: 'attack', value: 3 },
-  { id: 'tt3-purify-arrow', name: '净化箭', cost: 1, rarity: '古朴', type: '武术', desc: '攻（-1），净化自身。', dmg: -1, dmgType: 'attack', value: 2 },
-  { id: 'tt3sp-shadowbug', name: '影噬', cost: 1, rarity: '稀有', type: '武术', desc: '本回合偷取 1 名敌人的攻击力至1点。', dmg: 0, value: 3 },
-  { id: 'tt3wu-shike', name: '割蚀', cost: 1, rarity: '古朴', type: '武术', desc: '降低 1 名敌人 2 攻，持续3回合；附加流血。', dmg: 0, value: 2 },
-  { id: 'tt7-armup', cls: '战士', name: '武装', cost: 1, rarity: '职业', type: '武术', desc: '从牌库中抽取 2 张装备牌。', dmg: 0, value: 3, unrandom: true },
-  { id: 'cmtn1epgt20j', name: '灵能召唤', cost: 1, rarity: '稀有', type: '法术', desc: '发现一张注能卡，使其无需注能', value: 3 },
-  { id: 'tt7-bladebloom', cls: '法师', name: '永恒绽放', cost: 2, rarity: '职业', type: '法术', desc: '发现并直接施放 1 张牌，获取剩下两张。', dmg: 0, value: 3, unrandom: true },
-  { id: 'tt7-burnharvest', cls: '降临者', name: '爆燃火球', cost: 1, rarity: '职业', type: '法术', desc: '5′，受法伤加成翻倍；', dmg: 5, dmgType: 'spell', value: 3, unrandom: true },
-  { id: 'tt7-recruit', cls: '法师', name: '征召', cost: 2, rarity: '职业', type: '法术', desc: '召唤步兵（4-4） ×2为你抵挡伤害并自动战斗。', dmg: 0, value: 3, unrandom: true },
-  { id: 'tt3sp-devour', cls: '牧师', name: '吞噬', cost: 1, rarity: '职业', type: '法术', desc: '消灭 1 名 攻击力4 点及以下小怪。', dmg: 0, value: 3, unrandom: true },
-  { id: 'tt3sp-magicoil', name: '药水魔法', cost: 1, rarity: '稀有', type: '法术', desc: '发现1瓶药水并直接释放', dmg: 0, value: 3 },
-  { id: 'tt3sp-shadowshot', cls: '降临者', name: '暗影射击', cost: 1, rarity: '职业', type: '法术', desc: '3′，若对手处于诅咒状态，额外施放 1 次。', dmg: 3, dmgType: 'spell', unrandom: true },
-  { id: 'tt3-thunderblast', name: '雷殛', cost: 2, rarity: '传说', type: '法术', desc: '造成7点法术伤害；墓地中每有1 张法术牌，伤害+1。', dmg: 7, dmgType: 'spell', value: 5 },
-];
-const TABLETOP11 = [
-  { id: 'cmtn0xt0zr7', name: '闪金之锤', cost: 1, rarity: '衍生', type: '武术', dmg: 5, dmgType: 'fixed', desc: '造成5点固定伤害，若击杀敌人，+2币。', value: 3, sellable: false },
-  { id: 'cmtn1p9vb5au', cls: '法师', name: '千变万化', cost: 2, rarity: '职业', type: '法术', dmg: 0, desc: '发现一种形态并释放', value: 3, sellable: false, unrandom: true },
-  { id: 'tt7-maxsupply', cls: '法师', name: '法力补给', cost: 1, rarity: '职业', type: '法术', dmg: 0, desc: '抽牌，直到有 4 张手牌。', value: 3, sellable: false },
-];
-const TABLETOP12 = [
-  { id: 'tt12-chargeray', name: '充能射线', cost: 1, rarity: '稀有', type: '法术', dmg: 5, dmgType: 'spell', desc: '造成5点法伤，本牌在你手牌中时每注能过1张卡牌，伤害+2' },
-];
+// canonical 夹具（2026-09-29 镜像收编）：原「逐字照抄定版源行」改为按本批 id 取真源行——
+// CARDS_SYNC=game/data/cards-sync.json 实机覆盖批次；TABLETOP10/11/12=cards.data.js 定版表；
+// 同 id 多表引用取「最后写入的定版」（与 catalog-after 实测一致）。卡面字段值不再手抄，
+// 真源漂移时以真源为准（深相等守卫按真源判定，不会写脏）。
+const M3_IDS = ['cc-cursed-blade', 'cc-last-stand', 'cc-rapid-fire', 'tt3-holy-water',
+  'tt2-jianghu', 'tt2-turtlearmor', 'tt3-dig-treasure', 'tt3-fly-arrowhawk', 'tt3-purify-arrow',
+  'tt3sp-shadowbug', 'tt3wu-shike', 'tt7-armup', 'cmtn1epgt20j', 'tt7-bladebloom',
+  'tt7-burnharvest', 'tt7-recruit', 'tt3sp-devour', 'tt3sp-magicoil', 'tt3sp-shadowshot',
+  'tt3-thunderblast', 'cmtn0xt0zr7', 'cmtn1p9vb5au', 'tt7-maxsupply', 'tt12-chargeray'];
+const rowsById = (table, ids) => table.filter(card => card?.id && ids.includes(card.id));
+const CARDS_SYNC = rowsById(cardsSyncData.cards, M3_IDS);
+const TABLETOP10 = rowsById(dataSlice.TABLETOP10, M3_IDS);
+const TABLETOP11 = rowsById(dataSlice.TABLETOP11, M3_IDS);
+const TABLETOP12 = rowsById(dataSlice.TABLETOP12, M3_IDS);
 
 // 期望回填结果：version:1 / onPlay 有序 ops，字段风格与 ensureA3* / m1 / m2 定义一致。
 const EXPECTED_RULES = {

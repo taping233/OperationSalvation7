@@ -49,7 +49,7 @@ describe('M batch production boot', () => {
       const fields = Object.keys({ ...previous, ...current }).filter(key =>
         JSON.stringify(previous[key]) !== JSON.stringify(current[key]));
       const allowed = previous.id === 'tt3-noon-duel' ? ['rules', 'dmg', 'dmgType']
-        : previous.id === 'tt3-petal' ? ['rules', 'desc'] : ['rules'];
+        : previous.id === 'tt3-petal' ? ['rules', 'desc', 'heal'] : ['rules'];
       expect(fields.filter(key => !allowed.includes(key)), previous.id).toEqual([]);
       if (excludedIds.includes(previous.id)) expect(current).toEqual(previous);
     }

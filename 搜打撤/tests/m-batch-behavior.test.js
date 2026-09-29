@@ -77,14 +77,14 @@ describe('production rules execute independently of display descriptions', () =>
     expect(engine.findCard('mb-0').card.cost).toBe(1);
   });
 
-  it('petal heals exactly two on each of the next three turn starts', async () => {
+  it('petal heals exactly three on each of the next three turn starts', async () => {
     await start([canonical('tt3-petal'), canonical('starter-attack')]);
     await play(0);
     const hp = active.hp;
     for (let count = 1; count <= 4; count++) {
       await engine.processDelayed();
       await idle();
-      expect(active.hp).toBe(hp + Math.min(count, 3) * 2);
+      expect(active.hp).toBe(hp + Math.min(count, 3) * 3);
     }
   });
 

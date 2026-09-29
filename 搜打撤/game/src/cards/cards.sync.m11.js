@@ -1,8 +1,12 @@
 // @ts-check
 // M11：M 批剩余普通卡的命名 hosted 声明；执行文本由 battle.hosted 固定 canonical identity adapter 提供。
-import { KEY } from './cards.consts.js';
-import { validateCardRules } from './card-rules.schema.js';
-import { inspectCardRuleCapability } from './card-rules.capability.js';
+//
+// 2026-09-29 重构：入口骨架收敛到 cards.sync.backfiller.js createRuleBackfiller（canonical
+// 走 canonicalOrder 优先级扫描形态，原 canonicalCard 函数同语义）；迁移数据行为不变
+// （m11-data.test.js 守护）。
+import { createRuleBackfiller } from './cards.sync.backfiller.js';
+
+export const M11_MARKER_KEY = 'sdt-cards-m11-hosted-rules-v1-seeded';
 
 export const M11_HOSTED_BY_ID = Object.freeze({
   'cmtn1wnhhym': 'temporary-hand-cards',
@@ -28,71 +32,20 @@ export const M11_HOSTED_BY_ID = Object.freeze({
   'tt-medneedle': 'delayed-heal-item',
   'tt7-arcanebolt': 'damage-and-draw',
 });
-const MARKER = 'sdt-cards-m11-hosted-rules-v1-seeded';
+
+// tt-token-color 是 bag.use 特例（员工通行证：直授职业能力，非 hosted 声明），其余为命名 hosted。
 const definitions = new Map(Object.entries(M11_HOSTED_BY_ID).map(([id, hosted]) =>
   [id, id === 'tt-token-color'
     ? { rules: { version: 1, bag: { use: [{ op: 'acquire', pool: { kind: 'classAbility' } }] } } }
     : { rules: { version: 1, battle: { hosted: [hosted] } } }]));
 
-function canonicalCard(library, id) {
-  for (const tableName of ['CARDS_SYNC', 'TABLETOP12', 'TABLETOP11', 'TABLETOP10', 'TABLETOP7']) {
-    const found = library[tableName]?.find?.(card => card?.id === id);
-    if (found) return found;
-  }
-  return null;
-}
-function sameSnapshot(left, right) {
-  if (left === right) return true;
-  if (!left || !right || typeof left !== 'object' || typeof right !== 'object') return false;
-  if (Array.isArray(left) !== Array.isArray(right)) return false;
-  if (Array.isArray(left) && left.length !== right.length) return false;
-  const keys = Object.keys(left);
-  return keys.length === Object.keys(right).length && keys.every(key =>
-    Object.prototype.hasOwnProperty.call(right, key) && sameSnapshot(left[key], right[key]));
-}
+// 优先实机同步，其次最新 TABLETOP 定版；从源定义取 canonical，不读玩家当前卡面。
+//（原 canonicalCard 扫描顺序逐字保留，现为工厂 canonicalOrder 形态。）
+const CANONICAL_ORDER = ['CARDS_SYNC', 'TABLETOP12', 'TABLETOP11', 'TABLETOP10', 'TABLETOP7'];
 
-/** M11 保守回填入口；仅绑定固定卡 ID 和同名宿主声明。 */
-export function ensureM11HostedRules(deps = {}) {
-  const storage = deps.storage !== undefined ? deps.storage
-    : (typeof localStorage !== 'undefined' ? localStorage : null);
-  const library = deps.library !== undefined ? deps.library
-    : (typeof window !== 'undefined' ? window.SDT?.Cards : null);
-  const storeKey = deps.storeKey ?? KEY;
-  try {
-    if (!storage || !library || storage.getItem(MARKER) === '1') return;
-    const raw = storage.getItem(storeKey);
-    if (raw == null) return;
-    const stored = JSON.parse(raw);
-    if (!Array.isArray(stored) || !stored.length || stored.some(card => !card || typeof card !== 'object'
-      || Array.isArray(card) || typeof card.id !== 'string' || !card.id)) return;
-    if (new Set(stored.map(card => card.id)).size !== stored.length || !sameSnapshot(library.all(), stored)) return;
-    const canonical = new Map();
-    for (const id of definitions.keys()) {
-      const found = canonicalCard(library, id);
-      if (!found) return;
-      canonical.set(id, found);
-    }
-    const foundIds = new Set();
-    let dirty = false;
-    const next = library.all().map(card => {
-      const definition = definitions.get(card.id);
-      if (!definition) return card;
-      foundIds.add(card.id);
-      if (Object.prototype.hasOwnProperty.call(card, 'rules') || !sameSnapshot(card, canonical.get(card.id))) return card;
-      const migrated = { ...card, rules: definition.rules };
-      const validation = validateCardRules(migrated);
-      if (!validation.ok) throw new Error(`M11 schema rejected ${card.id}: ${validation.errors.map(e => `${e.path}: ${e.message}`).join('; ')}`);
-      const capability = inspectCardRuleCapability(migrated);
-      if (!capability.ok) throw new Error(`M11 capability rejected ${card.id}: ${capability.issues.map(e => `${e.path}: ${e.message}`).join('; ')}`);
-      dirty = true;
-      return migrated;
-    });
-    if (foundIds.size !== definitions.size) return;
-    if (dirty) {
-      if (!library.saveAll(next) || storage.getItem(storeKey) !== JSON.stringify(next)) return;
-    } else if (storage.getItem(storeKey) !== raw) return;
-    storage.setItem(MARKER, '1');
-  } catch (error) {
-    console.error('[cards] M11 hosted migration failed; marker was not written:', error?.message ?? error);
-  }
-}
+export const ensureM11HostedRules = createRuleBackfiller({
+  label: 'M11',
+  markerKey: M11_MARKER_KEY,
+  definitions,
+  canonicalOrder: CANONICAL_ORDER,
+});

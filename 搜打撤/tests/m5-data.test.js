@@ -13,20 +13,16 @@ import { KEY } from '../game/src/cards/cards.consts.js';
 import { validateCardRules } from '../game/src/cards/card-rules.schema.js';
 import { inspectCardRuleCapability } from '../game/src/cards/card-rules.capability.js';
 import { ensureM5DelayedRules } from '../game/src/cards/cards.sync.m5.js';
+import { dataSlice } from '../game/src/cards/cards.data.js';
 
 const MARKER = 'sdt-cards-m5-delayed-rules-v1-seeded';
 
-// canonical 夹具：逐字照抄 cards.data.js TABLETOP10 定版行与 game/data/cards-sync.json 定版
-// 条目（禁咒 I-IV 的 CARDS_SYNC 行与 TABLETOP10 行逐字一致；若源表日后漂移，回填器按
-// 深相等保守跳过，不会写脏）。
-const TABLETOP10 = [
-  { id: 'tt3-wave-slash', name: '破浪斩', cost: 1, rarity: '稀有', type: '武术', desc: '攻（+3），下回合无法抽牌。', dmg: 3, dmgType: 'attack', value: 2 },
-  { id: 'tt3-noon-duel', name: '正午决战', cost: 1, rarity: '史诗', type: '武术', desc: '下回合开始时，连开四枪！（每枪造成2点固定伤害）。', dmg: 0, value: 3 },
-  { id: 'tt8-curse1', name: '禁咒I', cost: 0, rarity: '衍生', type: '法术', cls: '牧师', tokenOf: 'tt8-hero-warlock', unrandom: true, desc: '抽到时施放：夺取 1 点攻击力。', value: 5 },
-  { id: 'tt8-curse2', name: '禁咒II', cost: 0, rarity: '衍生', type: '法术', cls: '牧师', tokenOf: 'tt8-hero-warlock', unrandom: true, desc: '抽到时施放：冰冻。', value: 5 },
-  { id: 'tt8-curse3', name: '禁咒III', cost: 0, rarity: '衍生', type: '法术', cls: '牧师', tokenOf: 'tt8-hero-warlock', unrandom: true, desc: '抽到时施放：中毒，流血。', value: 5 },
-  { id: 'tt8-curse4', name: '禁咒IV', cost: 0, rarity: '衍生', type: '法术', cls: '牧师', tokenOf: 'tt8-hero-warlock', unrandom: true, desc: '抽到时施放：沉默 1 回合。', value: 5 },
-];
+// canonical 夹具（2026-09-29 镜像收编）：原「逐字照抄 TABLETOP10 定版行」改为按本批 id 取
+// dataSlice 真源行；禁咒 I-IV 定版真身在 cards-sync.json（cards.js 装配为 CARDS_SYNC 表，
+// m2 cc-chase-slash 先例），此处与原夹具同法从 TABLETOP10 真源行派生。卡面字段值不再手抄，
+// 真源漂移时以真源为准（深相等守卫按真源判定，不会写脏）。
+const M5_IDS = ['tt3-wave-slash', 'tt3-noon-duel', 'tt8-curse1', 'tt8-curse2', 'tt8-curse3', 'tt8-curse4'];
+const TABLETOP10 = dataSlice.TABLETOP10.filter(card => card?.id && M5_IDS.includes(card.id));
 // 禁咒 I-IV 定版真身在 cards-sync.json（cards.js 装配为 CARDS_SYNC 表，m2 cc-chase-slash 先例）。
 const CARDS_SYNC = TABLETOP10.filter(card => card.id.startsWith('tt8-curse')).map(card => ({ ...card }));
 
@@ -71,7 +67,7 @@ const EXPECTED_RULES = {
 
 // 定版卡面改写（A3 canonicalFieldsById 先例，回填时以描述定版值覆盖卡面）：
 //   noon-duel：dmg:0→2、补 dmgType:'fixed'（与「每枪造成2点固定伤害」对齐）；
-//   petal：最新裁决保留 heal:2；m8 回迁同步修正文案为回复 2。
+//   petal：09-29 裁决 heal:3（M8 收编；旧档卡面由 cards.sync.face-refresh.js 幂等刷新）。
 const EXPECTED_FACE_OVERRIDES = {
   'tt3-noon-duel': { dmg: 2, dmgType: 'fixed' },
 };
@@ -239,8 +235,8 @@ describe('M5 数据迁移批 D7：跳过卡的契约缺口锁定', () => {
         triggers: { onTurnStart: [{ op: 'draw', amountField: 'draw' }], onPlay: [] } } });
   });
 
-  it('tt3-petal 花瓣法阵：按卡面 heal:2 执行三次回合开始效果，空 onPlay 通过双门', () => {
-    supported({ id: 'tt3-petal', type: '法术', dmg: 0, draw: 1, heal: 2,
+  it('tt3-petal 花瓣法阵：按卡面 heal:3 执行三次回合开始效果，空 onPlay 通过双门', () => {
+    supported({ id: 'tt3-petal', type: '法术', dmg: 0, draw: 1, heal: 3,
       rules: { version: 1, battle: { target: { side: 'self', area: false } },
         triggers: { onTurnStart: [{ op: 'draw', amountField: 'draw' }, { op: 'heal', amountField: 'heal' }], duration: 3, onPlay: [] } } });
   });

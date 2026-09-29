@@ -1,0 +1,107 @@
+{
+  "scenario": "map-layer2-pan",
+  "conditions": {
+    "page": "地图第 2 层·受控平移（正弦扰动机位）",
+    "run": {
+      "layer": 2
+    }
+  },
+  "rounds": [
+    {
+      "mode": "pan",
+      "viewport": {
+        "cssWidth": 1890,
+        "cssHeight": 855.5,
+        "bufferWidth": 1890,
+        "bufferHeight": 855,
+        "dpr": 1
+      },
+      "phaseBefore": "map",
+      "phaseAfter": "map",
+      "frames": 990,
+      "rafHz": 165,
+      "rafMedianMs": 6.1,
+      "rafP95Ms": 6.2,
+      "rafMaxMs": 6.3,
+      "slowOver20msPercent": 0,
+      "drawWrapped": true,
+      "drawCalls": 991,
+      "drawMedianMs": 0.2,
+      "drawP95Ms": 0.4,
+      "drawMaxMs": 0.6,
+      "longTasks": 0,
+      "longTaskMaxMs": null,
+      "longAnimationFrameCount": 0,
+      "longAnimationFrameMaxMs": null,
+      "heapUsedMiB": 45.82,
+      "heapDeltaMiB": -0.18,
+      "visibility": "visible",
+      "cdpHeapUsedMiB": 21.07,
+      "cdpNodes": 2092
+    },
+    {
+      "mode": "pan",
+      "viewport": {
+        "cssWidth": 1890,
+        "cssHeight": 855.5,
+        "bufferWidth": 1890,
+        "bufferHeight": 855,
+        "dpr": 1
+      },
+      "phaseBefore": "map",
+      "phaseAfter": "map",
+      "frames": 990,
+      "rafHz": 165,
+      "rafMedianMs": 6.1,
+      "rafP95Ms": 6.2,
+      "rafMaxMs": 6.3,
+      "slowOver20msPercent": 0,
+      "drawWrapped": true,
+      "drawCalls": 991,
+      "drawMedianMs": 0.2,
+      "drawP95Ms": 0.3,
+      "drawMaxMs": 0.5,
+      "longTasks": 0,
+      "longTaskMaxMs": null,
+      "longAnimationFrameCount": 0,
+      "longAnimationFrameMaxMs": null,
+      "heapUsedMiB": 45.9,
+      "heapDeltaMiB": 0.07,
+      "visibility": "visible",
+      "cdpHeapUsedMiB": 21.15,
+      "cdpNodes": 2092
+    },
+    {
+      "mode": "pan",
+      "viewport": {
+        "cssWidth": 1890,
+        "cssHeight": 855.5,
+        "bufferWidth": 1890,
+        "bufferHeight": 855,
+        "dpr": 1
+      },
+      "phaseBefore": "map",
+      "phaseAfter": "map",
+      "frames": 990,
+      "rafHz": 165,
+      "rafMedianMs": 6.1,
+      "rafP95Ms": 6.2,
+      "rafMaxMs": 6.2,
+      "slowOver20msPercent": 0,
+      "drawWrapped": true,
+      "drawCalls": 991,
+      "drawMedianMs": 0.2,
+      "drawP95Ms": 0.4,
+      "drawMaxMs": 0.6,
+      "longTasks": 0,
+      "longTaskMaxMs": null,
+      "longAnimationFrameCount": 0,
+      "longAnimationFrameMaxMs": null,
+      "heapUsedMiB": 45.87,
+      "heapDeltaMiB": -0.03,
+      "visibility": "visible",
+      "cdpHeapUsedMiB": 21.14,
+      "cdpNodes": 2092
+    }
+  ]
+}

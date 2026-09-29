@@ -12,38 +12,25 @@ import { KEY } from '../game/src/cards/cards.consts.js';
 import { validateCardRules } from '../game/src/cards/card-rules.schema.js';
 import { inspectCardRuleCapability } from '../game/src/cards/card-rules.capability.js';
 import { ensureM2OnplayRules } from '../game/src/cards/cards.sync.m2.js';
+import { dataSlice } from '../game/src/cards/cards.data.js';
+import cardsSyncData from '../game/data/cards-sync.json';
 
 const MARKER = 'sdt-cards-m2-onplay-rules-v1-seeded';
 
-// canonical 夹具：逐字照抄 cards.data.js TABLETOP7/10/11/12 定版行与 game/data/cards-sync.json
-// （cc-chase-slash 定版真身在 cards-sync，cards.js 装配为 CARDS_SYNC 表；若源表日后漂移，
-// 回填器按深相等保守跳过，不会写脏）。
-const CARDS_SYNC = [
-  { id: 'cc-chase-slash', name: '追斩', cost: 2, rarity: '稀有', type: '武术', dmg: 0, dmgType: 'attack', desc: '攻（+0），本回合每打出一张其他武术，费用-1。', value: 2 },
-];
-const TABLETOP7 = [
-  { id: 'cc-demon', name: '恶魔之力', cost: 1, rarity: '职业', type: '法术', cls: '牧师', unrandom: true, dmg: 4, dmgType: 'spell', desc: '4′，损失 2 点生命。', value: 3 },
-];
-const TABLETOP10 = [
-  { id: 'tt2-swiftarrow', name: '迅疾箭', cost: 1, rarity: '古朴', type: '武术', desc: '攻（-1），抽 1 张牌。', dmg: -1, dmgType: 'attack', draw: 1, value: 2 },
-  { id: 'tt2-comboarrow', name: '连击箭', cost: 1, rarity: '古朴', type: '武术', desc: '攻（-1）；如果你打出的上一张牌是武术牌，本牌变为0费。', dmg: -1, dmgType: 'attack', value: 2 },
-  { id: 'tt2-piercearrow', name: '破甲箭', cost: 1, rarity: '古朴', type: '武术', desc: '攻（-1），获得 3 点护甲。', dmg: -1, dmgType: 'attack', armor: 3, value: 2 },
-  { id: 'tt2-forestarrow', name: '绿化箭', cost: 1, rarity: '古朴', type: '武术', desc: '攻（-1），+3 甲。', dmg: -1, dmgType: 'attack', armor: 3, value: 2 },
-  { id: 'tt3-toxin', name: '毒药', cost: 0, rarity: '古朴', type: '法术', desc: '附加 1 层中毒。抽 1 张牌。', dmg: 0, draw: 1, value: 2 },
-  { id: 'tt3-nature-form', name: '自然形态', cost: 2, rarity: '稀有', type: '法术', desc: '本局战斗中，能量上限 +1。', dmg: 0, value: 3 },
-  { id: 'tt3-firm-barrier', cls: '法师', name: '坚冰结界', cost: 0, rarity: '职业', type: '法术', desc: '延长 1 名角色的冰冻 1 回合，抽1张牌。', dmg: 0, draw: 1, value: 3, unrandom: true },
-  { id: 'tt7-throwblade', cls: '侠客', name: '飞刃偷袭', cost: 0, rarity: '职业', type: '武术', desc: '攻（-3），附加流血，抽 1 张牌。', dmg: -3, dmgType: 'attack', draw: 1, value: 3, unrandom: true },
-  { id: 'tt7-silence', cls: '牧师', name: '禁言术', cost: 0, rarity: '职业', type: '法术', desc: '沉默 1 名角色 1 回合，抽 1 张牌。', dmg: 0, draw: 1, value: 3, unrandom: true },
-  { id: 'tt7-fullstrike', cls: '战士', name: '全力一击', cost: 2, rarity: '职业', type: '武术', desc: '攻（+5），抽 1 张牌。', dmg: 5, dmgType: 'attack', draw: 1, value: 2, unrandom: true },
-];
-const TABLETOP11 = [
-  { id: 'cmtn28jv33wx', name: '搜索大宝箱', cost: 0, rarity: '衍生', type: '法术', dmg: 0, desc: '随机获取3张卡牌', value: 3, sellable: false },
-  { id: 'tt3-flame-storm', cls: '降临者', name: '风暴火球', cost: 2, rarity: '职业', type: '法术', dmg: 4, dmgType: 'spell', desc: '对全体敌人每人释放1次火球。', value: 3, sellable: false, unrandom: true },
-];
-const TABLETOP12 = [
-  { id: 'tt12-sporewall', name: '孢子城墙', cost: 1, rarity: '古朴', type: '法术', armor: 6, desc: '对一名敌人附加2层中毒，自己获得6点护甲' },
-  { id: 'tt12-breakthrough', name: '突破进展', cost: 1, rarity: '稀有', type: '法术', desc: '随机获取1张0费，一张1费，一张2费招式' },
-];
+// canonical 夹具（2026-09-29 镜像收编）：原「逐字照抄定版行」改为按本批 id 取真源行——
+// TABLETOP7/10/11/12 取 dataSlice，cc-chase-slash 定版真身取 cards-sync.json（cards.js
+// 装配为 CARDS_SYNC 表）；resolveCardCatalog 数组混有字符串别名元素，按 id 过滤。
+// 卡面字段值不再手抄，真源漂移时以真源为准（深相等守卫按真源判定，不会写脏）。
+const M2_IDS = ['cc-chase-slash', 'tt2-comboarrow', 'tt2-forestarrow', 'tt2-piercearrow',
+  'tt2-swiftarrow', 'tt7-fullstrike', 'tt7-throwblade', 'cc-demon', 'cmtn28jv33wx',
+  'tt12-breakthrough', 'tt12-sporewall', 'tt3-firm-barrier', 'tt3-flame-storm',
+  'tt3-nature-form', 'tt3-toxin', 'tt7-silence'];
+const rowsById = (table, ids) => table.filter(card => card?.id && ids.includes(card.id));
+const CARDS_SYNC = rowsById(cardsSyncData.cards, M2_IDS);
+const TABLETOP7 = rowsById(dataSlice.TABLETOP7, M2_IDS);
+const TABLETOP10 = rowsById(dataSlice.TABLETOP10, M2_IDS);
+const TABLETOP11 = rowsById(dataSlice.TABLETOP11, M2_IDS);
+const TABLETOP12 = rowsById(dataSlice.TABLETOP12, M2_IDS);
 
 // 期望回填结果：version:1 / onPlay 有序 ops，字段风格与 ensureA3* / ensureM1 定义一致。
 // 混合目标卡（敌方主体 + 自身域字面量效果 op）走 M1 混合放行：battle.target 声明敌方主体。

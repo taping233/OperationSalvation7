@@ -14,15 +14,15 @@ import { KEY } from '../game/src/cards/cards.consts.js';
 import { validateCardRules } from '../game/src/cards/card-rules.schema.js';
 import { inspectCardRuleCapability } from '../game/src/cards/card-rules.capability.js';
 import { ensureM4EquipRules } from '../game/src/cards/cards.sync.m4.js';
+import { dataSlice } from '../game/src/cards/cards.data.js';
 
 const MARKER = 'sdt-cards-m4-equip-rules-v1-seeded';
 
-// canonical 夹具：逐字照抄 cards.data.js TABLETOP10 定版行（两卡的 TABLETOP3 旧行——深解印记/
-// 深衍日记——已被 TABLETOP10 定版覆盖；若源表日后漂移，回填器按深相等保守跳过，不会写脏）。
-const TABLETOP10 = [
-  { id: 'tt3-deep-seal', name: '深海印记', cost: 0, rarity: '稀有', type: '装备', desc: '诅咒状态下，攻 +2，法伤 +2。', dmg: 0, dmgType: 'attack' },
-  { id: 'tt3-deep-diary', name: '深海咒印', cost: 0, rarity: '史诗', type: '装备', desc: '自身处于诅咒状态时，获得 2 点攻击力且法伤 +2。', dmg: 0, value: 4 },
-];
+// canonical 夹具（2026-09-29 镜像收编）：原「逐字照抄 cards.data.js TABLETOP10 定版行」改为
+// 按本批 id 取真源行（两卡的 TABLETOP3 旧行已被 TABLETOP10 覆盖）；卡面字段值不再手抄，
+// 真源漂移时以真源为准（深相等守卫按真源判定，不会写脏）。
+const M4_IDS = ['tt3-deep-seal', 'tt3-deep-diary'];
+const TABLETOP10 = dataSlice.TABLETOP10.filter(card => card?.id && M4_IDS.includes(card.id));
 
 // 期望回填结果：version:1 / 纯 equip 域（无 battle/triggers）。cond.hasCurse 条件被动 +
 // aura 双数值——由 syncCurseCondEquips 动态核算（rules 分支短路 desc 文本旧读法）。

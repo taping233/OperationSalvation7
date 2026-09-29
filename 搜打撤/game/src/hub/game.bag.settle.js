@@ -131,8 +131,7 @@ import { bagSlots } from './game.bag.bridge.js';
     const teachAmmoOnce = () => {
       const B = SDT.Base;
       if (!B || !B.data || B.data.ammoTaught) return;
-      B.data.ammoTaught = true;
-      if (getActiveSlot()) B.save();
+      B.markAmmoTaught();   // 2026-09-29 收敛：内存推进+尝试保存的旧语义移入 Base 命令
       game.state = 'modal';
       const shaCard = SDT.Cards.all().find(c => c.id === SDT.Cards.SHA.id) || SDT.Cards.SHA;
       UI.showOverlay('[[icon:cards]] 卡牌是消耗品', `
@@ -180,8 +179,9 @@ import { bagSlots } from './game.bag.bridge.js';
         const slewDragon = !opts.isBoss && (opts.foeNames || []).some(n => String(n).includes('巨兽'));
         if (!settlement.rewardsApplied) {
           // 宠物蛋保底计数和完成节点都进入 afterBase/afterRun，不先写任一存档。
+          // 无档位胜利的计数（2026-09-29 收敛）经宠物蛋命令走内存推进+尝试保存的旧语义。
           if (win === true && !settlement.slotId && SDT.Base && SDT.Base.data) {
-            SDT.Base.data.eggBattles = (SDT.Base.data.eggBattles || 0) + 1;
+            SDT.Base.recordEggBattle();
           }
           if (win === true) {
             game.visited = game.visited || {};

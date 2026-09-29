@@ -1,7 +1,7 @@
 import { DATA } from '../core/data-loader.js';
 import { characterFor, characterName, migrateCharacterProgress } from '../core/characters.js';
 import { Random } from '../core/random.js';
-import { LEVEL_MAX, addXpToProgress, applyXpGain, xpForNext } from './meta-progression.js';
+import { LEVEL_MAX, addXpToProgress, xpForNext } from './meta-progression.js';
 
   const SDT = window.SDT;
 
@@ -29,23 +29,16 @@ import { LEVEL_MAX, addXpToProgress, applyXpGain, xpForNext } from './meta-progr
 
   const collectionXpFor = card => card && card.type === '能力卡' ? 50 : 10;
 
-  // 增加经验并处理升级；返回升级次数
+  // 增加经验并处理升级；返回升级次数。
+  // 2026-09-29 直写收敛：熟练度推进改走 Base.addClassXp 命令（草稿准备→保存成功才提交；
+  // 局内旧 checkpoint 语义由命令端口保留），此处只编排升级播报。
   function addXP(cls, amount) {
-    if (!cls || amount <= 0) return 0;
-    const d = clsData(cls);
-    if (d.lv >= LEVEL_MAX) return 0;
-    const gained = applyXpGain(d, amount);
-    gained.checkpoints.forEach(checkpoint => {
-      d.lv = checkpoint.lv;
-      d.xp = checkpoint.xp;
-      B().save();
+    const result = B().addClassXp(cls, amount);
+    result.checkpoints.forEach(checkpoint => {
       if (SDT.Sound) SDT.Sound.sfx('levelup');
       if (SDT.UI) SDT.UI.log(`[[icon:medal]] <b>${characterName(cls)}</b> 熟练度提升！现在是 <b>Lv.${checkpoint.lv}</b>（出征 ${perkText(checkpoint.lv)}）`, 'ok');
     });
-    d.lv = gained.after.lv;
-    d.xp = gained.after.xp;
-    B().save();
-    return gained.levelsGained;
+    return result.levelsGained;
   }
 
   // ---------- 成就定义 ----------
@@ -174,8 +167,7 @@ import { LEVEL_MAX, addXpToProgress, applyXpGain, xpForNext } from './meta-progr
   // 收藏进度（data.collection）仍只在首次收藏时登记（见 game.hub collCollectOne）。
   function onCollect(card, now) {
     if (!now || !isCollectible(card)) return null;
-    const d = B().data;
-    if (!d.collXp) d.collXp = {};
+    B().ensureCollXp();
     const amount = card.type === '能力卡' ? 50 : 10;
     const ups = addXP(card.cls, amount);
     if (SDT.UI) {
@@ -188,16 +180,16 @@ import { LEVEL_MAX, addXpToProgress, applyXpGain, xpForNext } from './meta-progr
 
   // 老档回填：本特性上线前已收藏的职业卡按已结算处理（旧版收藏动作即时发过 +10），
   // 能力卡的 +50 为新增——不回填，已收藏的能力卡再次收藏时补结算一次。
+  // 2026-09-29 直写收敛：待回填 id 先按当前档只读计算，再经 Base.markCollXpSettled 落库。
   function syncCollXp() {
     const d = B().data;
-    if (!d.collXp || typeof d.collXp !== 'object') d.collXp = {};
-    let dirty = false;
-    Object.keys(d.collection || {}).forEach(id => {
-      if (d.collXp[id]) return;
+    const collXp = d.collXp && typeof d.collXp === 'object' ? d.collXp : {};
+    const pending = Object.keys(d.collection || {}).filter(id => {
+      if (collXp[id]) return false;
       const card = collectPool().find(c => c.id === id);
-      if (card && card.rarity === '职业') { d.collXp[id] = true; dirty = true; }
+      return !!card && card.rarity === '职业';
     });
-    if (dirty) B().save();
+    if (pending.length) B().markCollXpSettled(pending);
   }
 
   // 播报去重按档位隔离（迭代评审 09-20 C-P3）：_seen 此前挂在模块级 ACHIEVEMENTS/
@@ -294,42 +286,17 @@ import { LEVEL_MAX, addXpToProgress, applyXpGain, xpForNext } from './meta-progr
 
   // ---------- 事件埋点（经验计入本局所选职业 d.cls） ----------
   // type: kill / extract / death / action / stash
+  // 2026-09-29 直写收敛：统计与经验一次草稿内完成（Base.recordMetaEvent），
+  // 升级播报沿用原 addXP 的检查点循环；保存失败的内存推进由命令端口负责。
   function track(type, d) {
     d = d || {};
-    const s = B().data.stats;
-    let changed = true;
-    switch (type) {
-      case 'turnMoves':
-        if ((d.n || 0) > (s.turnMovesMax || 0)) s.turnMovesMax = d.n;
-        break;
-      case 'battleEquips':
-        if ((d.n || 0) > (s.battleEquipsMax || 0)) s.battleEquipsMax = d.n;
-        break;
-      case 'reviveKill':
-        s.reviveKills = (s.reviveKills || 0) + 1;
-        break;
-      case 'kill':
-        if (d.boss) {
-          if (!s.bossKills.includes(d.name)) s.bossKills.push(d.name);
-          s.kills++;
-          addXP(d.cls, Math.round(40 * xpMul()));
-        } else {
-          s.kills++;
-          addXP(d.cls, Math.round(6 * xpMul()));
-        }
-        break;
-      // （extract/death 两 case 已删：全仓无 track('extract'/'death') 调用方的孤儿副本，
-      //   2026-09-25 老板批准的休眠代码清理。统计如需恢复请随调用点一并加回。）
-      case 'action':
-        s.actions++;
-        break;
-      case 'stash':
-        s.stashTotal += d.count || 0;
-        break;
-      default:
-        changed = false;
+    const result = B().recordMetaEvent(type, d, xpMul);
+    if (result.changed && result.gained) {
+      result.gained.checkpoints.forEach(checkpoint => {
+        if (SDT.Sound) SDT.Sound.sfx('levelup');
+        if (SDT.UI) SDT.UI.log(`[[icon:medal]] <b>${characterName(d.cls)}</b> 熟练度提升！现在是 <b>Lv.${checkpoint.lv}</b>（出征 ${perkText(checkpoint.lv)}）`, 'ok');
+      });
     }
-    if (changed) B().save();
     checkUnlocks();
   }
 

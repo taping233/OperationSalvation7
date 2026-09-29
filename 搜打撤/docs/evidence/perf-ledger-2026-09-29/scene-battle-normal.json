@@ -1,0 +1,130 @@
+{
+  "scenario": "battle-normal",
+  "conditions": {
+    "page": "普通战斗·战场静止（不出牌）",
+    "foes": [
+      {
+        "name": "反抗组织拾荒者",
+        "hp": 3,
+        "maxHp": 3
+      },
+      {
+        "name": "反抗组织拾荒者",
+        "hp": 3,
+        "maxHp": 3
+      },
+      {
+        "name": "反抗组织拾荒者",
+        "hp": 3,
+        "maxHp": 3
+      }
+    ],
+    "hand": 7,
+    "turn": 1,
+    "run": {
+      "layer": 1,
+      "class": "侠客",
+      "characterId": "wu",
+      "hp": 35,
+      "maxHp": 35
+    }
+  },
+  "rounds": [
+    {
+      "mode": "idle",
+      "viewport": {
+        "cssWidth": 1890,
+        "cssHeight": 855.5,
+        "bufferWidth": 1890,
+        "bufferHeight": 855,
+        "dpr": 1
+      },
+      "phaseBefore": "battle",
+      "phaseAfter": "battle",
+      "frames": 990,
+      "rafHz": 165,
+      "rafMedianMs": 6.1,
+      "rafP95Ms": 6.2,
+      "rafMaxMs": 7.1,
+      "slowOver20msPercent": 0,
+      "drawWrapped": true,
+      "drawCalls": 0,
+      "drawMedianMs": null,
+      "drawP95Ms": null,
+      "drawMaxMs": null,
+      "longTasks": 0,
+      "longTaskMaxMs": null,
+      "longAnimationFrameCount": 0,
+      "longAnimationFrameMaxMs": null,
+      "heapUsedMiB": 44.94,
+      "heapDeltaMiB": 0.56,
+      "visibility": "visible",
+      "cdpHeapUsedMiB": 20.05,
+      "cdpNodes": 2994
+    },
+    {
+      "mode": "idle",
+      "viewport": {
+        "cssWidth": 1890,
+        "cssHeight": 855.5,
+        "bufferWidth": 1890,
+        "bufferHeight": 855,
+        "dpr": 1
+      },
+      "phaseBefore": "battle",
+      "phaseAfter": "battle",
+      "frames": 990,
+      "rafHz": 165,
+      "rafMedianMs": 6.1,
+      "rafP95Ms": 6.2,
+      "rafMaxMs": 6.4,
+      "slowOver20msPercent": 0,
+      "drawWrapped": true,
+      "drawCalls": 0,
+      "drawMedianMs": null,
+      "drawP95Ms": null,
+      "drawMaxMs": null,
+      "longTasks": 0,
+      "longTaskMaxMs": null,
+      "longAnimationFrameCount": 0,
+      "longAnimationFrameMaxMs": null,
+      "heapUsedMiB": 44.31,
+      "heapDeltaMiB": -0.63,
+      "visibility": "visible",
+      "cdpHeapUsedMiB": 19.43,
+      "cdpNodes": 2107
+    },
+    {
+      "mode": "idle",
+      "viewport": {
+        "cssWidth": 1890,
+        "cssHeight": 855.5,
+        "bufferWidth": 1890,
+        "bufferHeight": 855,
+        "dpr": 1
+      },
+      "phaseBefore": "battle",
+      "phaseAfter": "battle",
+      "frames": 990,
+      "rafHz": 165,
+      "rafMedianMs": 6.1,
+      "rafP95Ms": 6.2,
+      "rafMaxMs": 6.4,
+      "slowOver20msPercent": 0,
+      "drawWrapped": true,
+      "drawCalls": 0,
+      "drawMedianMs": null,
+      "drawP95Ms": null,
+      "drawMaxMs": null,
+      "longTasks": 0,
+      "longTaskMaxMs": null,
+      "longAnimationFrameCount": 0,
+      "longAnimationFrameMaxMs": null,
+      "heapUsedMiB": 44.47,
+      "heapDeltaMiB": 0.16,
+      "visibility": "visible",
+      "cdpHeapUsedMiB": 19.6,
+      "cdpNodes": 2406
+    }
+  ]
+}

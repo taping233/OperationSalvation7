@@ -58,6 +58,7 @@ import { ensureM5DelayedRules } from './cards.sync.m5.js';
 import { ensureM6BagRules } from './cards.sync.m6.js';
 import { ensureM7EquipRules } from './cards.sync.m7.js';
 import { ensureM8RuleBackfill } from './cards.sync.m8.js';
+import { ensureCanonicalFaceRefresh } from './cards.sync.face-refresh.js';
 import { ensureM9HostedRules } from './cards.sync.m9.js';
 import { ensureM10HostedEquipmentRules } from './cards.sync.m10.js';
 import { ensureM11HostedRules } from './cards.sync.m11.js';
@@ -290,6 +291,7 @@ function assertValidCardRules(cards) {
       ensureM6BagRules();
       ensureM7EquipRules();
       ensureM8RuleBackfill();
+      ensureCanonicalFaceRefresh(); // 定版卡面刷新（注册表 cards.sync.face-refresh.js）：花瓣法阵 09-29 heal:3 等旧档幂等重刷
       ensureM9HostedRules();
       ensureM10HostedEquipmentRules();
       ensureM11HostedRules();

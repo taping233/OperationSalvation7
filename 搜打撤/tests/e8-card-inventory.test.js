@@ -18,10 +18,10 @@ const M_BATCH_ONPLAY_IDS = [
 const ALL_M_BATCH_IDS = [...readFileSync('docs/M-BATCH-MATRIX.md', 'utf8')
   .matchAll(/^\| ([a-z][\w-]+) \|/gm)].map(match => match[1]).filter(id => id !== 'id');
 const APPROVED_IDS = [...MIGRATED_IDS, ...ALL_M_BATCH_IDS];
-const oldPetal = beforeInventory.production.cards.find(row => row.id === 'tt3-petal').card;
 const APPROVED_FACE_BY_ID = {
   'tt3-noon-duel': { dmg: 2, dmgType: 'fixed' },
-  'tt3-petal': { desc: oldPetal.desc.replace('回复 3', '回复 2') },
+  // 2026-09-29 老板裁决：花瓣法阵 heal 2→3，desc「回复 3」与 before 快照一致故仅 heal 差异。
+  'tt3-petal': { heal: 3 },
 };
 const APPROVED_RULES_BY_ID = Object.fromEntries([
   ...MIGRATED_IDS.map(id => [id, HEAL_RULES]),

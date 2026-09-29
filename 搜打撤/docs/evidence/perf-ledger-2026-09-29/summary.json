@@ -1,0 +1,480 @@
+{
+  "capturedAt": "2026-09-28T20:23:26.326Z",
+  "baseUrl": "http://localhost:5330/",
+  "rounds": 3,
+  "durationMs": 6000,
+  "browser": {
+    "gpu": {
+      "renderer": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "vendor": "Google Inc. (Intel)"
+    },
+    "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36 Edg/154.0.0.0"
+  },
+  "worktree": "D:/素材/代号柒/.perf-wt-b/搜打撤",
+  "scenarios": [
+    {
+      "scenario": "battle-normal",
+      "conditions": {
+        "page": "普通战斗·战场静止（不出牌）",
+        "foes": [
+          {
+            "name": "反抗组织拾荒者",
+            "hp": 3,
+            "maxHp": 3
+          },
+          {
+            "name": "反抗组织拾荒者",
+            "hp": 3,
+            "maxHp": 3
+          },
+          {
+            "name": "反抗组织拾荒者",
+            "hp": 3,
+            "maxHp": 3
+          }
+        ],
+        "hand": 7,
+        "turn": 1,
+        "run": {
+          "layer": 1,
+          "class": "侠客",
+          "characterId": "wu",
+          "hp": 35,
+          "maxHp": 35
+        }
+      },
+      "rounds": 3,
+      "rafMedianMs": 6.1,
+      "rafP95Ms": 6.2,
+      "rafMaxMs": 6.4,
+      "rafHz": 165,
+      "drawCalls": 0,
+      "drawMedianMs": null,
+      "drawP95Ms": null,
+      "longTasks": 0,
+      "longTaskMaxMs": null,
+      "loafCount": 0,
+      "loafMaxMs": null,
+      "heapUsedMiB": 19.6,
+      "slowOver20msPercent": 0
+    },
+    {
+      "scenario": "hub-ach",
+      "conditions": {
+        "page": "基地·ach",
+        "slot": 5,
+        "note": "空档案基地"
+      },
+      "rounds": 3,
+      "rafMedianMs": 6.1,
+      "rafP95Ms": 6.2,
+      "rafMaxMs": 6.4,
+      "rafHz": 165,
+      "drawCalls": 0,
+      "drawMedianMs": null,
+      "drawP95Ms": null,
+      "longTasks": 0,
+      "longTaskMaxMs": null,
+      "loafCount": 0,
+      "loafMaxMs": 72.6,
+      "heapUsedMiB": 12.77,
+      "slowOver20msPercent": 0
+    },
+    {
+      "scenario": "hub-classes",
+      "conditions": {
+        "page": "基地·classes",
+        "slot": 5,
+        "note": "空档案基地"
+      },
+      "rounds": 3,
+      "rafMedianMs": 6.1,
+      "rafP95Ms": 6.2,
+      "rafMaxMs": 6.3,
+      "rafHz": 165,
+      "drawCalls": 0,
+      "drawMedianMs": null,
+      "drawP95Ms": null,
+      "longTasks": 0,
+      "longTaskMaxMs": null,
+      "loafCount": 0,
+      "loafMaxMs": null,
+      "heapUsedMiB": 12.6,
+      "slowOver20msPercent": 0
+    },
+    {
+      "scenario": "hub-deploy",
+      "conditions": {
+        "page": "基地·deploy",
+        "slot": 5,
+        "note": "空档案基地"
+      },
+      "rounds": 3,
+      "rafMedianMs": 6.1,
+      "rafP95Ms": 6.2,
+      "rafMaxMs": 12,
+      "rafHz": 164.83,
+      "drawCalls": 0,
+      "drawMedianMs": null,
+      "drawP95Ms": null,
+      "longTasks": 0,
+      "longTaskMaxMs": null,
+      "loafCount": 0,
+      "loafMaxMs": 77.3,
+      "heapUsedMiB": 12.61,
+      "slowOver20msPercent": 0
+    },
+    {
+      "scenario": "hub-shop",
+      "conditions": {
+        "page": "基地·shop",
+        "slot": 5,
+        "note": "空档案基地"
+      },
+      "rounds": 3,
+      "rafMedianMs": 6.1,
+      "rafP95Ms": 6.2,
+      "rafMaxMs": 6.4,
+      "rafHz": 165,
+      "drawCalls": 0,
+      "drawMedianMs": null,
+      "drawP95Ms": null,
+      "longTasks": 0,
+      "longTaskMaxMs": null,
+      "loafCount": 0,
+      "loafMaxMs": null,
+      "heapUsedMiB": 12.54,
+      "slowOver20msPercent": 0
+    },
+    {
+      "scenario": "hub-stash",
+      "conditions": {
+        "page": "基地·stash",
+        "slot": 5,
+        "note": "空档案基地"
+      },
+      "rounds": 3,
+      "rafMedianMs": 6.1,
+      "rafP95Ms": 6.2,
+      "rafMaxMs": 6.4,
+      "rafHz": 165,
+      "drawCalls": 0,
+      "drawMedianMs": null,
+      "drawP95Ms": null,
+      "longTasks": 0,
+      "longTaskMaxMs": null,
+      "loafCount": 0,
+      "loafMaxMs": 157.2,
+      "heapUsedMiB": 12.75,
+      "slowOver20msPercent": 0
+    },
+    {
+      "scenario": "hub-upgrade",
+      "conditions": {
+        "page": "基地·upgrade",
+        "slot": 5,
+        "note": "空档案基地"
+      },
+      "rounds": 3,
+      "rafMedianMs": 6.1,
+      "rafP95Ms": 6.2,
+      "rafMaxMs": 6.4,
+      "rafHz": 165,
+      "drawCalls": 0,
+      "drawMedianMs": null,
+      "drawP95Ms": null,
+      "longTasks": 0,
+      "longTaskMaxMs": null,
+      "loafCount": 0,
+      "loafMaxMs": null,
+      "heapUsedMiB": 12.72,
+      "slowOver20msPercent": 0
+    },
+    {
+      "scenario": "map-layer1-idle",
+      "conditions": {
+        "page": "地图第 1 层·稳态（事件驱动静态帧）",
+        "run": {
+          "layer": 1,
+          "node": 0,
+          "class": "侠客",
+          "characterId": "wu",
+          "hp": 35,
+          "maxHp": 35
+        }
+      },
+      "rounds": 3,
+      "rafMedianMs": 6.1,
+      "rafP95Ms": 6.2,
+      "rafMaxMs": 6.4,
+      "rafHz": 165,
+      "drawCalls": 1,
+      "drawMedianMs": 0.2,
+      "drawP95Ms": 0.2,
+      "longTasks": 0,
+      "longTaskMaxMs": null,
+      "loafCount": 0,
+      "loafMaxMs": null,
+      "heapUsedMiB": 17.22,
+      "slowOver20msPercent": 0
+    },
+    {
+      "scenario": "map-layer1-pan",
+      "conditions": {
+        "page": "地图第 1 层·受控平移（正弦扰动机位）",
+        "run": {
+          "layer": 1
+        }
+      },
+      "rounds": 3,
+      "rafMedianMs": 6.1,
+      "rafP95Ms": 6.2,
+      "rafMaxMs": 6.4,
+      "rafHz": 165,
+      "drawCalls": 991,
+      "drawMedianMs": 0.2,
+      "drawP95Ms": 0.4,
+      "longTasks": 0,
+      "longTaskMaxMs": null,
+      "loafCount": 0,
+      "loafMaxMs": null,
+      "heapUsedMiB": 17.13,
+      "slowOver20msPercent": 0
+    },
+    {
+      "scenario": "map-layer2-idle",
+      "conditions": {
+        "page": "地图第 2 层·稳态（事件驱动静态帧）",
+        "run": {
+          "layer": 2,
+          "node": 0,
+          "class": "侠客",
+          "characterId": "wu",
+          "hp": 30,
+          "maxHp": 35
+        }
+      },
+      "rounds": 3,
+      "rafMedianMs": 6.1,
+      "rafP95Ms": 6.2,
+      "rafMaxMs": 6.4,
+      "rafHz": 165,
+      "drawCalls": 1,
+      "drawMedianMs": 0.4,
+      "drawP95Ms": 0.4,
+      "longTasks": 0,
+      "longTaskMaxMs": null,
+      "loafCount": 0,
+      "loafMaxMs": null,
+      "heapUsedMiB": 21.07,
+      "slowOver20msPercent": 0
+    },
+    {
+      "scenario": "map-layer2-pan",
+      "conditions": {
+        "page": "地图第 2 层·受控平移（正弦扰动机位）",
+        "run": {
+          "layer": 2
+        }
+      },
+      "rounds": 3,
+      "rafMedianMs": 6.1,
+      "rafP95Ms": 6.2,
+      "rafMaxMs": 6.3,
+      "rafHz": 165,
+      "drawCalls": 991,
+      "drawMedianMs": 0.2,
+      "drawP95Ms": 0.4,
+      "longTasks": 0,
+      "longTaskMaxMs": null,
+      "loafCount": 0,
+      "loafMaxMs": null,
+      "heapUsedMiB": 21.14,
+      "slowOver20msPercent": 0
+    },
+    {
+      "scenario": "map-layer3-idle",
+      "conditions": {
+        "page": "地图第 3 层·稳态（事件驱动静态帧）",
+        "run": {
+          "layer": 3,
+          "node": 0,
+          "class": "侠客",
+          "characterId": "wu",
+          "hp": 13,
+          "maxHp": 35
+        }
+      },
+      "rounds": 3,
+      "rafMedianMs": 6.1,
+      "rafP95Ms": 6.2,
+      "rafMaxMs": 6.4,
+      "rafHz": 165,
+      "drawCalls": 1,
+      "drawMedianMs": 0.3,
+      "drawP95Ms": 0.3,
+      "longTasks": 0,
+      "longTaskMaxMs": null,
+      "loafCount": 0,
+      "loafMaxMs": null,
+      "heapUsedMiB": 22.06,
+      "slowOver20msPercent": 0
+    },
+    {
+      "scenario": "map-layer3-pan",
+      "conditions": {
+        "page": "地图第 3 层·受控平移（正弦扰动机位）",
+        "run": {
+          "layer": 3
+        }
+      },
+      "rounds": 3,
+      "rafMedianMs": 6.1,
+      "rafP95Ms": 6.2,
+      "rafMaxMs": 6.5,
+      "rafHz": 165,
+      "drawCalls": 991,
+      "drawMedianMs": 0.2,
+      "drawP95Ms": 0.4,
+      "longTasks": 0,
+      "longTaskMaxMs": null,
+      "loafCount": 0,
+      "loafMaxMs": null,
+      "heapUsedMiB": 22.09,
+      "slowOver20msPercent": 0
+    },
+    {
+      "scenario": "photo-catalog",
+      "conditions": {
+        "page": "照相馆·目录静止（首屏窗口挂载）",
+        "photos": 24,
+        "catalogCount": 271
+      },
+      "rounds": 3,
+      "rafMedianMs": 6.1,
+      "rafP95Ms": 6.2,
+      "rafMaxMs": 7.2,
+      "rafHz": 165,
+      "drawCalls": 0,
+      "drawMedianMs": null,
+      "drawP95Ms": null,
+      "longTasks": 0,
+      "longTaskMaxMs": null,
+      "loafCount": 0,
+      "loafMaxMs": 138.3,
+      "heapUsedMiB": 13.29,
+      "slowOver20msPercent": 0
+    },
+    {
+      "scenario": "photo-scroll",
+      "conditions": {
+        "page": "照相馆·目录连续滚动（线性滚完全程，沿途窗口挂载追批）",
+        "photos": 24,
+        "catalogCount": 271,
+        "scroll": {
+          "scrollHeight": 2094,
+          "clientHeight": 751,
+          "maxScroll": 1343
+        },
+        "mountedAfterScroll": 271
+      },
+      "rounds": 3,
+      "rafMedianMs": 48.4,
+      "rafP95Ms": 66.6,
+      "rafMaxMs": 97,
+      "rafHz": 20.5,
+      "drawCalls": 0,
+      "drawMedianMs": null,
+      "drawP95Ms": null,
+      "longTasks": 0,
+      "longTaskMaxMs": 57,
+      "loafCount": 47,
+      "loafMaxMs": 78.2,
+      "heapUsedMiB": 13.63,
+      "slowOver20msPercent": 99.2
+    },
+    {
+      "scenario": "prep",
+      "conditions": {
+        "page": "出发整备页",
+        "slot": 5
+      },
+      "rounds": 3,
+      "rafMedianMs": 6.1,
+      "rafP95Ms": 6.2,
+      "rafMaxMs": 6.7,
+      "rafHz": 165,
+      "drawCalls": 0,
+      "drawMedianMs": null,
+      "drawP95Ms": null,
+      "longTasks": 0,
+      "longTaskMaxMs": null,
+      "loafCount": 0,
+      "loafMaxMs": 58.5,
+      "heapUsedMiB": 12.95,
+      "slowOver20msPercent": 0
+    },
+    {
+      "scenario": "settings",
+      "conditions": {
+        "page": "设置页"
+      },
+      "rounds": 3,
+      "rafMedianMs": 6.1,
+      "rafP95Ms": 6.2,
+      "rafMaxMs": 11.8,
+      "rafHz": 164.83,
+      "drawCalls": 0,
+      "drawMedianMs": null,
+      "drawP95Ms": null,
+      "longTasks": 0,
+      "longTaskMaxMs": null,
+      "loafCount": 0,
+      "loafMaxMs": null,
+      "heapUsedMiB": 13.43,
+      "slowOver20msPercent": 0
+    },
+    {
+      "scenario": "slotSelect",
+      "conditions": {
+        "page": "选档页",
+        "note": "五档位卡片页（全部空档案）"
+      },
+      "rounds": 3,
+      "rafMedianMs": 6.1,
+      "rafP95Ms": 12.2,
+      "rafMaxMs": 36.3,
+      "rafHz": 131.67,
+      "drawCalls": 0,
+      "drawMedianMs": null,
+      "drawP95Ms": null,
+      "longTasks": 0,
+      "longTaskMaxMs": null,
+      "loafCount": 0,
+      "loafMaxMs": 175.5,
+      "heapUsedMiB": 12.23,
+      "slowOver20msPercent": 0.13
+    },
+    {
+      "scenario": "title",
+      "conditions": {
+        "page": "标题页",
+        "note": "boot 完成后的静止标题画面"
+      },
+      "rounds": 3,
+      "rafMedianMs": 6.1,
+      "rafP95Ms": 6.2,
+      "rafMaxMs": 24.3,
+      "rafHz": 147,
+      "drawCalls": 0,
+      "drawMedianMs": null,
+      "drawP95Ms": null,
+      "longTasks": 0,
+      "longTaskMaxMs": null,
+      "loafCount": 0,
+      "loafMaxMs": 366.3,
+      "heapUsedMiB": 12.12,
+      "slowOver20msPercent": 0.24
+    }
+  ]
+}

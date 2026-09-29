@@ -52,7 +52,7 @@ function mountSlotMenu({ savedRun = true, loadOk = true, recovery } = {}) {
   });
   Object.assign(window.SDT, {
     Sound: { sfx() {}, music() {} },
-    Base: { data: { stash: [], pocket: [] }, peek: () => ({ stats: {} }), use() {}, issue() {} },
+    Base: { data: { stash: [], pocket: [] }, peek: () => ({ stats: {} }), use() {}, issue() {}, applyStoredCardRenames: () => false },
     Meta: { ACHIEVEMENTS: [] },
     Cards: { applyAbilityRename: () => false, applyDuplicateRenames: () => false },
   });

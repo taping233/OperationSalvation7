@@ -236,3 +236,71 @@ bag 结构化消费器现状（实读）：`game/src/hub/game.bag.js:26` useStru
 
 - 本矩阵 150 张 = 武术 38 + 法术 48 + 装备 36 + 能力卡 12 + 道具 16（类型统计与 legacy-201-scratch.json 的非排除子集一致）。
 - 与 `docs/M-BATCH-EXCLUSIONS.md` 51 张按 id 求并 = 201，与 legacy-201-scratch.json 全量逐 id 相等、无重复、无遗漏（校验脚本输出见交付报告）。
+
+## 七、2026-09-29 m3-m6 甄别（Friday · HEAD `47001e3`）
+
+> **结论先行：B-M3~M6 共 86 张已在库全部接线**（m4~m11 数据批于 commit `791b2c2` "feat(cards): complete M batch rule migration" 落库，`cards.js:285-295` ensure 链 m1~m11 全部在链）。本轮甄别 **0 张新增接线、0 张需老板拍板、0 张玩家可见行为缺口**。矩阵头部「能力现状」是 `a8e91e6` 时的过时快照（T12 capability 漂移已消除），B-M3~M6 各行状态以本小节为权威（2026-09-29 · HEAD `47001e3`）；因 86 张均为「既往批次已接线」而非本轮接线，行内批次列不做逐行改写。
+
+### 甄别方法（一切以源码为准）
+
+`cards.js` ensure 链实读（m1~m11 全部 import+调用）→ 86 张逐卡定位回填载体 → `tests/m-batch-production.test.js` 生产闸门实测：150/150 目标卡有 rules、legacy 恰为 51 张排除卡、272 张逐卡过 schema+capability 双门（missing=[]）。
+
+### A 类（可安全接线＝已接线落库，86/86）
+
+**B-M3 装备 32 张**
+
+| 载体 | 形态 | 卡 |
+|---|---|---|
+| m4 结构化 equip | passive.cond+aura | tt3-deep-diary 深海咒印、tt3-deep-seal 深海印记（T6 同草案同批） |
+| m7 结构化 equip/trigger | 14 张 | tt3-longsword 长剑、tt3-staff 法杖、tt3-light-mail 急速跑鞋、tt3-holy-staff 圣杖、tt12-raygun 射线枪、tt2-treasuremap 寻宝图、tt2-wreck 沉船宝盒、tt3-blooddrinker 饮血剑、tt3-grass-armor 草甲、tt3-master-staff 大法师之杖、tt3-twinwater-mail 冰甲、tt7-arcanescroll 奥术残卷、tt7-talisman 灵符、tt8-archdemon 天启诛魔剑 |
+| m9 hosted | 5 张 | tt3-element-seal=element-seal、tt2-venomstaff=venom-staff、tt3eq-mistbox=cost-swap、tt7-darkfort=dark-fort、tt7-naturestaff=nature-staff |
+| m10 hosted | 11 张 | tt2-frostsword=frost-sword、tt3-crimson-pouch=crimson-pouch、tt3-fate-wheel=fate-wheel、tt3eq-boiler=boiler、tt3-azure-sword=azure-sword、tt3-chaos-eye=chaos-eye、tt3-immortal-blade=immortal-blade、tt3-sapper-bomb=sapper-bomb、tt3-silver-runesword=silver-runesword、tt3-wolf-bow=wolf-bow、tt3-reverse-bow=reverse-bow |
+
+**B-M4 延迟持续 19 张**
+
+| 载体 | 形态 | 卡 |
+|---|---|---|
+| m5 结构化 delayed/onDraw | 6 张 | tt3-noon-duel 正午决战、tt3-wave-slash 破浪斩、tt8-curse1~4 禁咒 I-IV |
+| m8 结构化 triggers/registerRule | 5 张 | cmtn2jc142dj 刀剑形态、cmtn1r10xnl1 黑暗形态（discoverPlus）、tt3-petal 花瓣法阵（老板裁决 heal:2 定版）、tt7-elementstorm 元素风暴（doubleNextSpell）、tt7-swordimmortal 剑仙形态 |
+| m7 结构化 onAcquire | 1 张 | tt2-apollo 阿猫的礼物 |
+| m11 hosted | 5 张 | cmtn1wnhhym=temporary-hand-cards、cmtn233trmeg=keep-self-in-hand、tt3-frostfall=choose-and-cast-melee、tt3-magic-lamp=three-choice-lamp、tt7-provoke=foe-fight-select |
+| m9 hosted | 2 张 | cc-rot-seed=rot-seed、cmtn1lbhbqi4=charge-fireball |
+
+**B-M5 大招 18 张**
+
+| 载体 | 形态 | 卡 |
+|---|---|---|
+| m9 结构化 registerRule | 1 张 | tt5-galaxy-voyage 银河之旅（registerRule meleeCost1） |
+| m9 hosted | 17 张 | tt7-imitate=imitate、cc-mana-surge=mana-surge、tt7-stratagem=pouch-container、tt8-demonslay=ranger-chain、tt8-heavensword=ranger-chain、tt8-abyss-sovereign=sovereign、tt8-hero-assassin=assassin、tt8-hero-descender=consume-fireball、tt8-hero-guardian=guardian、tt8-hero-mage=mage、tt8-hero-priest=priest、tt8-hero-ranger=ranger、tt8-hero-sealer=seal-chain、tt8-hero-summoner=gate-choices、tt8-hero-sword=sword、tt8-hero-warlock=warlock、tt8-hero-warrior=kill-transform |
+
+**B-M6 bag 道具 17 张**
+
+| 载体 | 形态 | 卡 |
+|---|---|---|
+| m6 结构化 bag.use | 13 张 | tt3-blue-potion、tt3-demon-potion、tt3-houyi-potion、tt3-iceheart-potion、tt3-mind-potion、tt3-mixed-potion、tt3-python-potion、tt3-turnabout-potion、tt3sp-doom TNT、cmtmvq6ss84l 员工通行证A（直授）、tt-token-gold 员工通行证B、tt4-shine-token 员工通行证C、tt4-smoke-bomb 烟雾弹 |
+| m9 hosted | 2 张 | tt2-pearlbox=pearl-container、tt3-mystery-potion=mystery-potion |
+| m11 hosted | 2 张 | tt-token-color=class-ability-acquire、tt-medneedle=delayed-heal-item |
+
+### B 类（需老板拍板）
+
+**无。** 原 5 项设计裁决（`docs/cards/M-BATCH-DECISIONS-2026-09-27.md`）逐条对照实现，均已落库：
+
+| # | 卡 | 裁决 | 实现证据（2026-09-29 实读） |
+|---|---|---|---|
+| 1 | tt8-heavensword 天启剑 | 按现状保持，截断不实装 | m9 ranger-chain hosted；m-batch-behavior 绿 |
+| 2 | tt8-demonslay 诛魔剑 | 覆盖武器留白不实装 | 同上 ranger-chain 链 |
+| 3 | tt3-element-seal 元素符印 | 改持续监听 | `battle.engine.js:953` 每次注能检查 `infuseFuels>=3 && !sealUnlocked` |
+| 4 | tt3-mystery-potion 神秘药水 | 回合开始变形为设计意图 | effect-steps `summon.morphRandom`（回合开始变 0 费）+ m9 hosted 三分随机段 |
+| 5 | tt7-imitate 不变应万变-改 | 持续重变形 | `battle.engine.js applyImitate` 每打出一张武术即重变形；m-batch-behavior「imitate follows each newly played martial card」绿 |
+
+### C 类（本轮不动）
+
+**行为缺口：无。** 登记在案的「结构化纯化尾巴」（契约规格 ⏸ 项，宿主/hosted 路线已等价覆盖玩家行为，且纯结构化键位未在契约规格定版——按「没有规格不许自造键位」不动，留后续批）：`pick:'new'` 点选编排（tt7-bloodpoison，B-M2）、`acquire.untilHandN`（tt8-hero-priest 现走 hosted priest）、hand/deck 直发 play 通道、`onPlayCardFilter`、`deckCapBonus` desc 兜底移除（现为 rules 优先+desc 兜底，`battle.lifecycle.js:176-189`）、bag.use `escape/transform` 键位提案。
+
+### 陷阱清单 T1-T12 复核（2026-09-29）
+
+T1 已裁已落（DECISIONS #1）；T2 范围外（B-M1，m11 hosted untouched-target-freeze 按近似落库）；T3 已收编（deckCapBonus rules 优先、desc 仅无 rules 卡兜底）；T4/T5 范围外（B-M1，m11 hosted 承载）；T6 同批同草案（m4）；T7 hosted priest 承载；T8 双「员工通行证A」未合并（cmtmvq6ss84l=m6、tt-token-color=m11 分线接线）；T9 已消除（medneedle=m11 delayed-heal-item 落地，非死卡）；T10 范围外（B-M1 starter-attack 已迁，识别链回归在 m1/m-batch 测试内）；T11 口径维持（注能门不进 rules）；T12 已消除（capability 双门 272/272 过）。
+
+### 等价验证（2026-09-29 定向）
+
+22 文件：m1/m2/m3-contract、m1~m11-data、m7-battle、m-batch-production、m-batch-behavior、card-rules-schema、e6-card-rules-execution、structured-onplay-battle、a3-battle-rules、battle-resolution = **536 通过 / 1 skip（既有）/ 0 失败**。交接时记录的 4 条「预期红」（m5-data 3 + schema bag-mixed 1）已在落库前翻转，现为绿。

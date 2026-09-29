@@ -3,7 +3,7 @@ import { createGameMenuController } from '../game/src/ui/game.menu.js';
 
 function setup(recoverSlotIfPending) {
   const handlers = {};
-  const base = { peek: () => ({}), use: vi.fn(), save: vi.fn(), data: { stash: [], pocket: [] }, issue: () => null, reset: vi.fn() };
+  const base = { peek: () => ({}), use: vi.fn(), save: vi.fn(), data: { stash: [], pocket: [] }, issue: () => null, reset: vi.fn(), applyStoredCardRenames: vi.fn(() => false) };
   const openBaseHub = vi.fn();
   const runStore = { has: vi.fn(() => false), issue: () => null };
   const preflightRunMap = vi.fn(() => ({ ok: true }));

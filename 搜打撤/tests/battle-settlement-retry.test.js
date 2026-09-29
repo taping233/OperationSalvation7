@@ -75,7 +75,16 @@ beforeEach(() => {
       hideOverlay: vi.fn(), showOverlay: vi.fn(), refresh: vi.fn(), log: vi.fn(),
       act: (name, fn) => { state.actions[name] = fn; },
     },
-    Base: { slot: 1, data: { eggBattles: 0, ammoTaught: true }, save: vi.fn(() => true), isSha: () => false },
+    Base: {
+      slot: 1, data: { eggBattles: 0, ammoTaught: true }, save: vi.fn(() => true), isSha: () => false,
+      // 2026-09-29 直写收敛后 game.bag.settle 改调的两个 Base 命令（镜像真实门面旧语义）：
+      markAmmoTaught: vi.fn(function () { const B = window.SDT.Base; B.data.ammoTaught = true; return B.save(); }),
+      recordEggBattle: vi.fn(function () {
+        const B = window.SDT.Base;
+        B.data.eggBattles = (B.data.eggBattles || 0) + 1;
+        return { eggBattles: B.data.eggBattles, persisted: false };
+      }),
+    },
     Cards: { SHA: { id: 'starter-attack' }, all: () => [{ id: 'legend', rarity: '传说' }], isRandomObtainable: () => true, cardHTML: () => '' },
     Meta: { track: vi.fn(), xpMultiplier: () => 1, publishBattleProgress: vi.fn() },
     Chests: {

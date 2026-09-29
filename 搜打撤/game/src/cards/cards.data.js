@@ -690,7 +690,7 @@ export const dataSlice = {
       { id: "tt3-flame-storm", cls: "降临者", name: "风暴火球", cost: 2, rarity: "职业", type: "法术", dmg: 4, dmgType: "spell", desc: "对全体敌人每人释放1次火球。", value: 3, sellable: false, unrandom: true },
       "tt3-fireball", // 衍生牌（2026-09-16 留言「初始不给火球，把火球设定成衍生」）：不再每局携带；unrandom 双保险——不进发现/随机/商店池
       { id: "tt3-nuke-ray", cls: "降临者", name: "致命射线", cost: 2, rarity: "职业", type: "法术", dmg: 8, dmgType: "spell", desc: "造成8点法术伤害，对其附加3种随机诅咒", value: 3, sellable: false, unrandom: true },
-      { id: "tt3-petal", cls: "牧师", name: "花瓣法阵", cost: 1, rarity: "职业", type: "法术", dmg: 0, draw: 1, heal: 2, desc: "回合开始时额外抽1张牌并回复 3 点生命，持续 3 回合。", value: 3, sellable: false, unrandom: true },
+      { id: "tt3-petal", cls: "牧师", name: "花瓣法阵", cost: 1, rarity: "职业", type: "法术", dmg: 0, draw: 1, heal: 3, desc: "回合开始时额外抽1张牌并回复 3 点生命，持续 3 回合。", value: 3, sellable: false, unrandom: true },
       "tt6-goldhammer",
       { id: "tt8-hero-assassin", cls: "侠客", hero: true, name: "白梅落影·妄", cost: 2, rarity: "稀有", type: "能力卡", dmg: 0, desc: "遁入虚空：净化自身，潜行 2 回合；破隐一击伤害翻倍。", value: 8, unrandom: true },
       { id: "tt8-hero-sword", cls: "侠客", hero: true, name: "无量仙剑·云风", cost: 2, rarity: "稀有", type: "能力卡", dmg: 0, draw: 5, desc: "万剑归宗：抽 5 张牌，直接释放其中武术。", value: 8, unrandom: true },

@@ -1,0 +1,42 @@
+{
+  "scenario": "photo-catalog",
+  "conditions": {
+    "page": "照相馆·目录静止（首屏窗口挂载）",
+    "photos": 24,
+    "catalogCount": 271
+  },
+  "rounds": [
+    {
+      "mode": "idle",
+      "viewport": {
+        "cssWidth": 1890,
+        "cssHeight": 985,
+        "bufferWidth": 1890,
+        "bufferHeight": 985,
+        "dpr": 1
+      },
+      "phaseBefore": "overlay",
+      "phaseAfter": "overlay",
+      "frames": 224,
+      "rafHz": 112,
+      "rafMedianMs": 6.1,
+      "rafP95Ms": 6.2,
+      "rafMaxMs": 266.7,
+      "slowOver20msPercent": 1.79,
+      "drawWrapped": true,
+      "drawCalls": 0,
+      "drawMedianMs": null,
+      "drawP95Ms": null,
+      "drawMaxMs": null,
+      "longTasks": 0,
+      "longTaskMaxMs": null,
+      "longAnimationFrameCount": 7,
+      "longAnimationFrameMaxMs": 490,
+      "heapUsedMiB": 33.16,
+      "heapDeltaMiB": 0.05,
+      "visibility": "visible",
+      "cdpHeapUsedMiB": 12.87,
+      "cdpNodes": 2408
+    }
+  ]
+}

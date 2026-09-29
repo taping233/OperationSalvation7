@@ -65,6 +65,10 @@ const MIGRATION_MODULES = [
   ['cards.sync.m11.js', 'ensureM11HostedRules'],
 ];
 const CAPABILITY_MODULE = ['card-rules.capability.js', 'inspectCardRuleCapability'];
+// 2026-09-29 重构新增的共享模块：M 批回填骨架工厂 + 定版卡面刷新器。
+// 被 cards.js（ensureCanonicalFaceRefresh）与各 cards.sync.m*.js（createRuleBackfiller）
+// 以裸名引用，剥 import 后须进共享词法作用域（与 baseBody 同层，先于迁移 IIFE）。
+const SHARED_MODULES = ['cards.sync.backfiller.js', 'cards.sync.face-refresh.js'];
 
 function fail(message) { throw new Error(`[sync-cards] ${message}`); }
 function arg(name, argv) { const i = argv.indexOf(name); return i >= 0 ? argv[i + 1] : undefined; }
@@ -125,9 +129,14 @@ function sourceCardLibrary() {
   if (!fs.existsSync(capabilityFile)) fail(`卡牌规则能力模块缺失: ${capabilityName}`);
   const capabilitySource = stripModule(fs.readFileSync(capabilityFile, 'utf8'), new Set());
   const capabilityBody = `(() => {\n${capabilitySource}\nglobalThis.${capabilityExport} = ${capabilityExport};\n})();`;
+  const sharedBody = SHARED_MODULES.map(name => {
+    const file = path.join(CARDS_DIR, name);
+    if (!fs.existsSync(file)) fail(`卡库共享模块缺失: ${name}`);
+    return stripModule(fs.readFileSync(file, 'utf8'), seenLines);
+  });
   // cards.js 壳初始化只声明/暴露 API；迁移仅在下方主动调用 ensureTabletop 时才运行。
   // 因此 capability bridge 必须在调用 ensureTabletop 前建立。
-  const body = [...baseBody, capabilityBody, ...migrationBody].join('\n;\n');
+  const body = [...baseBody, ...sharedBody, capabilityBody, ...migrationBody].join('\n;\n');
   const sandbox = {
     console,
     window: { SDT: { Icons: { img: n => `[[icon:${n}]]`, TYPE_ART: {} } } },

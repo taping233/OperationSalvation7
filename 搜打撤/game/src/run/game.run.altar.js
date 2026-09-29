@@ -729,7 +729,7 @@ export function openEmergencyModal() {
 }
 
 // 撤离成功 → 「整理入库」交互：把背包中的物品放回仓库（不入库的会丢失）。
-// 「初始攻击」为初始牌不可入库；木材/口粮自动入库；消耗口袋自动回收。
+// 「初始攻击」为初始牌不可入库；木材/口粮自动入库；消耗口袋逐张 1/3 概率保留（散失的不复原）。
 let extractLeft = null;   // 待整理的卡牌堆 [{card, count}]（撤离整理页暂存）
 let extractionStarting = false;
 let extractViewRevision = 0;
@@ -818,6 +818,14 @@ function renderExtractStash() {
   const otherN = game.inventory.filter(i => i.name !== '木材' && i.name !== '口粮')
     .reduce((a, b) => a + b.count, 0);
   const room = B.stashRoom();
+  // EXP-003（2026-09-29）：消耗口袋行如实展示 1/3 逐张结算结果（保留数/散失数来自撤离掷骰快照）
+  const pocketPending = game.pendingExtraction;
+  const pocketTotal = pocketPending && Number.isInteger(pocketPending.totalPocketCount) ? pocketPending.totalPocketCount : null;
+  const pocketNote = pocketTotal == null
+    ? '每张仅 1/3 概率带回（进基地口袋，钥匙可复原）'
+    : (pocketTotal > 0
+      ? `每张 1/3 概率保留 · 带回 ${pocketTotal - (pocketPending.lostPocketCount || 0)} 张（基地可复原）· 散失 ${pocketPending.lostPocketCount || 0} 张`
+      : '本局没有消耗卡 · 每张仅 1/3 概率带回');
   // 2026-09-19 留言 #28：整理页重做——背包卡牌区从文字行改为点卡即入库的卡面网格
   const rows = `<div class="ext-cards">${extractLeft.map((s, i) => {
     const fits = s.count <= Math.max(0, room);
@@ -840,7 +848,7 @@ function renderExtractStash() {
     title: '整理入库说明',
     html: `
       <p class="help-item"><b>背包卡牌</b>点击「入库」放回仓库；仓库容量不足时无法入库，未入库的卡牌将在撤离中丢失。</p>
-      <p class="help-item"><b>自动入库</b>木材/口粮自动入库（纯资源没有丢弃的意义）；消耗口袋自动回收（基地/火堆可复原）；「初始攻击」不可入库（每局自动携带）。</p>
+      <p class="help-item"><b>自动入库</b>木材/口粮自动入库（纯资源没有丢弃的意义）；消耗口袋逐张结算，每张仅 1/3 概率带回——保留的进基地口袋（用钥匙复原），未带回的散失；「初始攻击」不可入库（每局自动携带）。</p>
       <p class="help-item"><b>仓库容量</b>可在基地「升级」页用 [[icon:wood]] 木材×${MAP.rules.stashUpgradeWood} 扩建 +${MAP.rules.stashUpgradeSlots} 张；仓库里的卡牌下次出发时可以携带。</p>`,
     back: () => renderExtractStash(),
   });
@@ -867,7 +875,7 @@ function renderExtractStash() {
           <div class="pk-row"><span>[[icon:wood]] 木材 ×<b>${woodN}</b></span><span class="dim">已入库（扩建背包/仓库用）</span></div>
           <div class="pk-row"><span>[[icon:bread]] 口粮 ×<b>${ratN}</b></span><span class="dim">已入库（升级安全格用）</span></div>
           ${otherN ? `<div class="pk-row"><span>[[icon:bag]] 其余物资 ×<b>${otherN}</b></span><span class="dim">未能带出 · 价值已计入本局得分</span></div>` : ''}
-          <div class="pk-row"><span>[[icon:pocket]] 消耗口袋</span><span class="dim">已自动回收（基地可复原）</span></div>
+          <div class="pk-row"><span>[[icon:pocket]] 消耗口袋</span><span class="dim">${pocketNote}</span></div>
           ${extractLeft.length ? `<button class="ov-btn ok" data-act="exAll" ${room > 0 && totalLeft <= room ? '' : 'disabled'}
             style="width:100%">[[icon:archive]] 全部入库（${Math.min(totalLeft, room)}/${totalLeft} 张可入）</button>` : ''}
           <div class="dep-foot" style="margin-top:10px">

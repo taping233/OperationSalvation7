@@ -11,6 +11,7 @@ import { createBaseProgressionCommands } from './base-progression.commands.js';
 import { createBaseDepartureCommands } from './base-departure.commands.js';
 import { createBasePetEggCommands } from './base-pet-egg.commands.js';
 import { createBaseElapsedCommands } from './base-elapsed.commands.js';
+import { createBaseMetaCommands } from './base-meta.commands.js';
 
   const SLOT_KEY = (i) => 'sdt-base-v2-slot' + i;
   const LEGACY_KEY = 'sdt-base-v1';   // 旧版全局基地（v0.20 及之前），启动时迁移
@@ -193,7 +194,57 @@ import { createBaseElapsedCommands } from './base-elapsed.commands.js';
     data.eggPity = next;
     return false;
   }
-  const petEggCommands = createBasePetEggCommands({ read: () => data, persistPity: persistEggPity });
+  // 宠物蛋战斗计数（2026-09-29 收敛）：无档位胜利的原直写路径移入命令层，
+  // 沿用保底计数同款旧语义——先内存推进，落盘失败不回滚（persisted:false）。
+  function persistEggBattles(next) {
+    if (!slot) {
+      data.eggBattles = next;
+      return false;
+    }
+    const saved = mutate(draft => { draft.eggBattles = next; return true; }, false);
+    if (saved === true) return true;
+    data.eggBattles = next;
+    return false;
+  }
+  const petEggCommands = createBasePetEggCommands({ read: () => data, persistPity: persistEggPity, persistBattles: persistEggBattles });
+
+  // Meta 进度端口（2026-09-29 收敛）：战斗统计/熟练度/收藏回填的规则在草稿上准备，
+  // 保存成功才替换运行态；失败时同一规则在运行态补应用一次（仅内存推进，persisted:false）。
+  // 局内/战斗中调用频繁，与 elapsed/pet-egg 同属 checkpoint 旧语义家族。
+  function persistMetaProgress(prepare) {
+    if (!slot) return { value: prepare(data), persisted: false };
+    const result = commitBaseMutation(data, prepare, save);
+    if (result.ok) return { value: result.value, persisted: true };
+    return { value: prepare(data), persisted: false };
+  }
+  const metaCommands = createBaseMetaCommands({ read: () => data, persistProgress: persistMetaProgress });
+
+  // 「卡牌是消耗品」一次性教学旗（2026-09-29 收敛，原 game.bag.settle teachAmmoOnce 直写）。
+  // 旧语义：先内存推进再尝试保存——保存失败重试层依赖旗子只弹一次，故不做严格事务。
+  function markAmmoTaught() {
+    data.ammoTaught = true;
+    if (!slot) return false;
+    return save();
+  }
+
+  // 仓库收藏经验的容器兜底（原 meta.js onCollect 直改 data.collXp；仅内存初始化，
+  // 持久化随下一次命令保存，同 ensureStarterPet 惯例）。
+  function ensureCollXp() {
+    if (!data.collXp || typeof data.collXp !== 'object') data.collXp = {};
+  }
+
+  // 术语迁移（2026-09-29 收敛，原 game.menu launch 直改仓库/口袋卡对象后保存）：
+  // 能力卡更名与重复名修复逐字应用到仓库/口袋副本。旧语义=先内存后保存；
+  // 迁移幂等，保存失败下次进档自动重跑。
+  function applyStoredCardRenames() {
+    const cards = (data.stash || []).concat(data.pocket || []).map(st => st.card);
+    // 与原 game.menu 写法同口径：两个改名函数都要执行（不能短路），任一有改动才保存
+    const abilityChanged = window.SDT.Cards.applyAbilityRename(cards);
+    const duplicateChanged = window.SDT.Cards.applyDuplicateRenames(cards);
+    const changed = abilityChanged || duplicateChanged;
+    if (changed) save();
+    return !!changed;
+  }
 
   // 重开档位：基地回到初始状态（覆盖开新档 / 空档开新档时调用）
   // 新档案仓库预置 5 张随机卡牌（按稀有度权重抽取，不重复），让第一局就有牌可带
@@ -600,6 +651,8 @@ import { createBaseElapsedCommands } from './base-elapsed.commands.js';
     ...departureCommands,
     ...petEggCommands,
     ...elapsedCommands,
+    ...metaCommands,
+    markAmmoTaught, ensureCollXp, applyStoredCardRenames,
     SLOT_KEY, LEGACY_KEY,
     migrateLegacy, use, save, reset, peek, wipe, hasSlot,
     issue, CORRUPT_KEY, BASE_VERSION,

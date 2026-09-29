@@ -1,0 +1,1361 @@
+{
+  "layersMeasured": [
+    1,
+    3
+  ],
+  "battleNormal": 1,
+  "boss": false,
+  "events": [
+    {
+      "at": "drive-L1",
+      "stoppedAt": "map-idle",
+      "steps": 2,
+      "ok": true,
+      "driveEvents": [
+        {
+          "ov": "?",
+          "node": 0,
+          "acts": [
+            "clsSkin",
+            "clsSkin",
+            "clsSkin",
+            "clsSkin"
+          ]
+        },
+        {
+          "ov": "?",
+          "node": 0,
+          "acts": [
+            "clsGrantGo",
+            "closeOverlay"
+          ]
+        },
+        {
+          "took": "closeOverlay",
+          "ok": true
+        }
+      ]
+    },
+    {
+      "at": "drive-L2",
+      "stoppedAt": "battle",
+      "steps": 3,
+      "ok": true,
+      "driveEvents": [
+        {
+          "ov": "搜刮！密封物资箱 · 第 1 / 1",
+          "node": 1,
+          "acts": [
+            "chestPick",
+            "chestPick",
+            "chestPick",
+            "chestSkip"
+          ]
+        },
+        {
+          "took": "chestSkip",
+          "ok": true
+        }
+      ]
+    },
+    {
+      "at": "drive-L3",
+      "stoppedAt": "map-idle",
+      "steps": 36,
+      "ok": true,
+      "driveEvents": [
+        {
+          "fight": {
+            "ended": true,
+            "steps": 2,
+            "phase": "overlay"
+          }
+        },
+        {
+          "ov": "搜刮！密封物资箱 · 第 1 / 1",
+          "node": 4,
+          "acts": [
+            "chestPick",
+            "chestPick",
+            "chestPick",
+            "chestSkip"
+          ]
+        },
+        {
+          "took": "chestSkip",
+          "ok": true
+        },
+        {
+          "ov": "?",
+          "node": 5,
+          "acts": [
+            "openHelp",
+            "shopOpenBag",
+            "buyCard",
+            "buyCard"
+          ]
+        },
+        {
+          "took": "closeShop",
+          "ok": true
+        },
+        {
+          "ov": "?",
+          "node": 6,
+          "acts": [
+            "goDoor",
+            "closeOverlay"
+          ]
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "fight": {
+            "ended": true,
+            "steps": 14,
+            "phase": "overlay"
+          }
+        },
+        {
+          "ov": "搜刮！小型物资箱 · 第 1 / 1",
+          "node": 1,
+          "acts": [
+            "chestTake1",
+            "chestSkip",
+            "chestTake",
+            "closeOverlay"
+          ]
+        },
+        {
+          "took": "chestSkip",
+          "ok": true
+        },
+        {
+          "ov": "?",
+          "node": 2,
+          "acts": [
+            "resPick0",
+            "resPick1",
+            "resSkip",
+            "closeOverlay"
+          ]
+        },
+        {
+          "fight": {
+            "ended": true,
+            "steps": 1,
+            "phase": "map"
+          }
+        },
+        {
+          "ov": "?",
+          "node": 6,
+          "acts": [
+            "goDoor",
+            "closeOverlay"
+          ]
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "fight": {
+            "ended": true,
+            "steps": 2,
+            "phase": "map"
+          }
+        },
+        {
+          "ov": "搜刮！密封物资箱 · 第 1 / 1",
+          "node": 4,
+          "acts": [
+            "chestPick",
+            "chestPick",
+            "chestPick",
+            "chestSkip"
+          ]
+        },
+        {
+          "took": "chestSkip",
+          "ok": true
+        },
+        {
+          "ov": "?",
+          "node": 5,
+          "acts": [
+            "fireDone",
+            "closeOverlay"
+          ]
+        },
+        {
+          "fight": {
+            "ended": true,
+            "steps": 1,
+            "phase": "map"
+          }
+        },
+        {
+          "ov": "搜刮！小型物资箱 · 第 1 / 1",
+          "node": 7,
+          "acts": [
+            "chestTake1",
+            "chestSkip",
+            "chestTake",
+            "closeOverlay"
+          ]
+        },
+        {
+          "took": "chestSkip",
+          "ok": true
+        },
+        {
+          "ov": "?",
+          "node": 8,
+          "acts": [
+            "lastLampFinish",
+            "closeOverlay"
+          ]
+        },
+        {
+          "ov": "?",
+          "node": 9,
+          "acts": [
+            "openHelp",
+            "shopOpenBag",
+            "buyCard",
+            "buyCard"
+          ]
+        },
+        {
+          "took": "closeShop",
+          "ok": true
+        },
+        {
+          "ov": "?",
+          "node": 10,
+          "acts": [
+            "goDoor",
+            "closeOverlay"
+          ]
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        }
+      ]
+    },
+    {
+      "at": "drive-L4",
+      "ok": false,
+      "driveEvents": [
+        {
+          "ov": "?",
+          "node": 1,
+          "acts": [
+            "evtChoice",
+            "closeOverlay"
+          ]
+        },
+        {
+          "ov": "?",
+          "node": 2,
+          "acts": [
+            "resPick0",
+            "resPick1",
+            "resSkip",
+            "closeOverlay"
+          ]
+        },
+        {
+          "ov": "?",
+          "node": 3,
+          "acts": [
+            "evtNext",
+            "closeOverlay"
+          ]
+        },
+        {
+          "ov": "?",
+          "node": 3,
+          "acts": [
+            "fireDone",
+            "closeOverlay"
+          ]
+        },
+        {
+          "ov": "?",
+          "node": 10,
+          "acts": [
+            "goDoor",
+            "closeOverlay"
+          ]
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "ov": "?",
+          "node": 10,
+          "acts": [
+            "goDoor",
+            "closeOverlay"
+          ]
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "ov": "?",
+          "node": 10,
+          "acts": [
+            "goDoor",
+            "closeOverlay"
+          ]
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "ov": "?",
+          "node": 10,
+          "acts": [
+            "goDoor",
+            "closeOverlay"
+          ]
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "ov": "?",
+          "node": 10,
+          "acts": [
+            "goDoor",
+            "closeOverlay"
+          ]
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "ov": "?",
+          "node": 10,
+          "acts": [
+            "goDoor",
+            "closeOverlay"
+          ]
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "ov": "?",
+          "node": 10,
+          "acts": [
+            "goDoor",
+            "closeOverlay"
+          ]
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "ov": "?",
+          "node": 10,
+          "acts": [
+            "goDoor",
+            "closeOverlay"
+          ]
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "ov": "?",
+          "node": 10,
+          "acts": [
+            "goDoor",
+            "closeOverlay"
+          ]
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "ov": "?",
+          "node": 10,
+          "acts": [
+            "goDoor",
+            "closeOverlay"
+          ]
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "ov": "?",
+          "node": 10,
+          "acts": [
+            "goDoor",
+            "closeOverlay"
+          ]
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "ov": "?",
+          "node": 10,
+          "acts": [
+            "goDoor",
+            "closeOverlay"
+          ]
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "ov": "?",
+          "node": 10,
+          "acts": [
+            "goDoor",
+            "closeOverlay"
+          ]
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "ov": "?",
+          "node": 10,
+          "acts": [
+            "goDoor",
+            "closeOverlay"
+          ]
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "ov": "?",
+          "node": 10,
+          "acts": [
+            "goDoor",
+            "closeOverlay"
+          ]
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "ov": "?",
+          "node": 10,
+          "acts": [
+            "goDoor",
+            "closeOverlay"
+          ]
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "ov": "?",
+          "node": 10,
+          "acts": [
+            "goDoor",
+            "closeOverlay"
+          ]
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "ov": "?",
+          "node": 10,
+          "acts": [
+            "goDoor",
+            "closeOverlay"
+          ]
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "ov": "?",
+          "node": 10,
+          "acts": [
+            "goDoor",
+            "closeOverlay"
+          ]
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "ov": "?",
+          "node": 10,
+          "acts": [
+            "goDoor",
+            "closeOverlay"
+          ]
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "ov": "?",
+          "node": 10,
+          "acts": [
+            "goDoor",
+            "closeOverlay"
+          ]
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "ov": "?",
+          "node": 10,
+          "acts": [
+            "goDoor",
+            "closeOverlay"
+          ]
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "ov": "?",
+          "node": 10,
+          "acts": [
+            "goDoor",
+            "closeOverlay"
+          ]
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "ov": "?",
+          "node": 10,
+          "acts": [
+            "goDoor",
+            "closeOverlay"
+          ]
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "ov": "?",
+          "node": 10,
+          "acts": [
+            "goDoor",
+            "closeOverlay"
+          ]
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "ov": "?",
+          "node": 10,
+          "acts": [
+            "goDoor",
+            "closeOverlay"
+          ]
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        },
+        {
+          "took": "goDoor",
+          "ok": true
+        }
+      ]
+    },
+    {
+      "at": "boss-walk-1",
+      "ok": false
+    },
+    {
+      "at": "boss-walk-2",
+      "ok": false
+    },
+    {
+      "at": "boss-walk-3",
+      "ok": false
+    }
+  ],
+  "lastRun": {
+    "active": true,
+    "fought": 6,
+    "mode": "standard",
+    "hp": 13,
+    "maxHp": 35,
+    "coins": 7,
+    "atk": 4,
+    "turn": 416,
+    "layer": 3,
+    "node": 0,
+    "class": "侠客",
+    "characterId": "wu",
+    "bossKilled": false,
+    "state": "idle",
+    "bagCap": 16,
+    "used": 2,
+    "deck": 2,
+    "nodeVisited": false,
+    "inventory": [],
+    "ownedCards": [
+      {
+        "uid": "omulowx0bjotmd",
+        "name": "快意恩仇",
+        "type": "武术",
+        "rarity": "职业",
+        "safe": false,
+        "sellable": false
+      },
+      {
+        "uid": "omuloybhttinju",
+        "name": "口粮",
+        "type": "资源",
+        "rarity": "稀有",
+        "safe": false,
+        "sellable": false
+      }
+    ],
+    "stash": [
+      {
+        "name": "血箭",
+        "rarity": "古朴",
+        "type": "武术"
+      },
+      {
+        "name": "冷冻射线",
+        "rarity": "稀有",
+        "type": "法术"
+      },
+      {
+        "name": "闪电链",
+        "rarity": "古朴",
+        "type": "法术"
+      },
+      {
+        "name": "违禁烟火",
+        "rarity": "古朴",
+        "type": "法术"
+      },
+      {
+        "name": "正午决战",
+        "rarity": "史诗",
+        "type": "武术"
+      }
+    ]
+  }
+}

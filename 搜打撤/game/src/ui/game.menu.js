@@ -673,11 +673,9 @@ function createGameMenuController(deps) {
       UI.clearLog();
       setActiveSlot(slot);
       SDT.Base.use(slot);
-      // 能力卡术语迁移（原「英雄卡」类型，2026-09-08 定版）：基地仓库/口袋副本同步更名
-      const storedCards = (SDT.Base.data.stash || []).concat(SDT.Base.data.pocket || []).map(st => st.card);
-      const abilityChanged = SDT.Cards.applyAbilityRename(storedCards);
-      const duplicateChanged = SDT.Cards.applyDuplicateRenames(storedCards);
-      if (abilityChanged || duplicateChanged) SDT.Base.save();
+      // 能力卡术语迁移（原「英雄卡」类型，2026-09-08 定版）：仓库/口袋副本同步更名
+      // 2026-09-29 收敛：直改 Base.data 后保存的迁移块移入 Base.applyStoredCardRenames
+      SDT.Base.applyStoredCardRenames();
       const bi = SDT.Base.issue(slot);
       if (bi === 'corrupt') UI.log('[[icon:cross]] 该档位基地数据损坏（原数据已备份），本次以空档案启动', 'warn');
       else if (bi === 'tooNew') UI.log('[[icon:cross]] 该档位基地数据来自更新版本的游戏，已以空档案启动', 'warn');

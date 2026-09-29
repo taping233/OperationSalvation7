@@ -34,7 +34,7 @@ beforeEach(async () => {
     Cards: { classPool: () => [card], randomClassCard: () => card, cardHTML: () => 'test card',
       applyAbilityRename: () => false, applyDuplicateRenames: () => false },
     Base: { slot: 1, peek: () => ({}), use(n) { this.slot = n; }, issue: () => null,
-      data: { stash: [], pocket: [] }, save() {} } };
+      data: { stash: [], pocket: [] }, save() {}, applyStoredCardRenames: () => false } };
   battle = { start: vi.fn(() => true), restore: vi.fn(), getSnapshot: vi.fn(() => ({})) };
   vi.doMock('../game/src/battle/view/battle.view.js', async () => {
     entered.resolve(); await gate.promise; SDT.Battle = battle; return {};

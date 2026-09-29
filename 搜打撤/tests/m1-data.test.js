@@ -12,19 +12,17 @@ import { KEY } from '../game/src/cards/cards.consts.js';
 import { validateCardRules } from '../game/src/cards/card-rules.schema.js';
 import { inspectCardRuleCapability } from '../game/src/cards/card-rules.capability.js';
 import { ensureM1OnplayRules } from '../game/src/cards/cards.sync.m1.js';
+import { dataSlice } from '../game/src/cards/cards.data.js';
 
 const MARKER = 'sdt-cards-m1-onplay-rules-v1-seeded';
 
-// canonical 夹具：逐字照抄 cards.data.js TABLETOP10 / TABLETOP11 定版行（这 4 个 id 均不在
-// cards-sync，TABLETOP 内联对象即定版真身；若源表日后漂移，回填器按深相等保守跳过，不会写脏）。
-const TABLETOP10 = [
-  { id: 'starter-attack', name: '初始攻击', cost: 1, rarity: '初始', type: '武术', desc: '攻（+0）：造成等同于攻击力的伤害。', dmg: 0, dmgType: 'attack', value: 1 },
-  { id: 'tt3-skewer', name: '穿刺', cost: 1, rarity: '古朴', type: '武术', desc: '攻（+2），附加破甲，持续 1 回合。', dmg: 2, dmgType: 'attack', value: 3 },
-  { id: 'tt8-dragonblade', cls: '战士', hero: true, tokenOf: 'tt8-hero-warrior', name: '青龙偃月斩', cost: 2, rarity: '衍生', type: '武术', desc: '攻+6，附加破甲与 1 层流血。', dmg: 6, dmgType: 'attack', value: 8, unrandom: true },
-];
-const TABLETOP11 = [
-  { id: 'tt7-livingwater', cls: '牧师', name: '圣光之源', cost: 2, rarity: '职业', type: '法术', dmg: 0, draw: 5, desc: '抽 5 张牌。', value: 3, sellable: false },
-];
+// canonical 夹具（2026-09-29 镜像收编）：原「逐字照抄 cards.data.js 定版行」改为按本批 id
+// 取 dataSlice 真源行（resolveCardCatalog 解析后的数组混有字符串别名元素，按 id 过滤）——
+// 卡面字段值不再手抄，真源漂移时以真源为准（深相等守卫按真源判定，不会写脏）。
+const M1_IDS = ['starter-attack', 'tt3-skewer', 'tt8-dragonblade', 'tt7-livingwater'];
+const rowsById = table => table.filter(card => card?.id && M1_IDS.includes(card.id));
+const TABLETOP10 = rowsById(dataSlice.TABLETOP10);
+const TABLETOP11 = rowsById(dataSlice.TABLETOP11);
 
 // 期望回填结果：version:1 / onPlay 有序 ops，字段风格与 ensureA3* 定义一致。
 const EXPECTED_RULES = {

@@ -605,7 +605,7 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
     const pkN = game.usedPocket.reduce((a, b) => a + b.count, 0);
     const pocketHTML = game.usedPocket.length
       ? game.usedPocket.map(p => `
-          <div class="pk-card" title="${escAttr(p.card.name)}${p.count > 1 ? ` ×${p.count}` : ''} · ${p.card.cost}费 · 本局无法使用（基地/火堆可复原）">
+          <div class="pk-card" title="${escAttr(p.card.name)}${p.count > 1 ? ` ×${p.count}` : ''} · ${p.card.cost}费 · 本局无法使用（火堆可复原；撤离每张仅 1/3 概率带回基地）">
             ${SDT.Cards.cardHTML(p.card, 'sm')}
             ${p.count > 1 ? `<span class="bt-count">×${p.count}</span>` : ''}
             <span class="pk-tag">无法使用</span>
@@ -617,7 +617,7 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
       html: `
         <p class="help-item"><b>背包格</b>物资与卡牌混占格数（同名堆叠只占 1 格）。双击卡牌翻面看卡背；按住拖动整理顺序，拖入右侧安全格即存入。</p>
         <p class="help-item"><b>安全格</b>由宠物阿七看守：撤离失败或放弃对局时，只有安全格里的卡牌会被抢运回基地，其余全部丢失。容量在基地「升级」页用口粮升级。</p>
-        <p class="help-item"><b>消耗口袋</b>对小怪用过的卡、注能消耗的卡会进到这里：本局无法再用，容量无限。基地可免费复原；火堆每次休整可复原 2 张；道具「能源结晶」可就地复原 3 张。</p>
+        <p class="help-item"><b>消耗口袋</b>对小怪用过的卡、注能消耗的卡会进到这里：本局无法再用，容量无限。撤离时每张仅 1/3 概率带回基地口袋（用钥匙复原）；局内火堆每次休整可复原 2 张；道具「能源结晶」可就地复原 3 张。</p>
         <p class="help-item"><b>丢弃</b>把卡牌拖到背包页面外的空地可申请丢弃 1 张——丢弃的牌无法取回，请谨慎操作。</p>`,
       back: () => showBackpack(true),
     });
