@@ -257,9 +257,12 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
     if (!hand.includes(uid)) illegalReason = '这张牌已不在当前手牌中';
     else if ((battleState.phase !== BATTLE_PHASES.PLAYER && !matchingTargeting) || busy) illegalReason = '当前不能打出卡牌';
     else if (infusing || discovering || choosing || viewingGrave || viewingDeck) illegalReason = '请先完成当前操作';
-    else if (unplayableReason(card)) illegalReason = `当前无法打出：${unplayableReason(card)}`;
-    else if (need !== 'enemy') illegalReason = '这张牌不能指定敌人';
-    else if (target.dead) illegalReason = '该目标已经倒下';
+    else {
+      const why = unplayableReason(card);
+      if (why) illegalReason = `当前无法打出：${why}`;
+      else if (need !== 'enemy') illegalReason = '这张牌不能指定敌人';
+      else if (target.dead) illegalReason = '该目标已经倒下';
+    }
     const isFreeCast = freeCast.has(uid);
     const playCheckCost = effCostOf(card, uid);
     const effectiveCost = isFreeCast ? 0 : playCheckCost;

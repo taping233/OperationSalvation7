@@ -396,7 +396,7 @@ function stageKillBeat() {
       if (damage && !reduced && span.animate) {
         span.classList.add('phys');   // 抑制 CSS 上飘动画，走抛体
         physicsFloat(span, { longLife: finisher || amt >= 10 });   // W5-04：终结/重击跳字加长寿命
-        schedulePresentation(() => span.remove(), demoMs(1500));
+        schedulePresentation(() => span.remove(), 1500);   // clock 已内置 demoMs，外层再换算会把 2× 档清理时长压到 1/4
       } else {
         span.addEventListener('animationend', () => span.remove(), { once: true });
         schedulePresentationMs(() => span.remove(), 1400);   // CSS 动画不按倍速缩短，兜底也保持原时长
@@ -407,6 +407,7 @@ function stageKillBeat() {
       const gap = Math.max(0, due - previousDue);
       previousDue = Math.max(previousDue, due);
       enqueueFeedback(async signal => {
+        if (!body.isConnected) return;   // 弹层重建已换 ovBody：旧节点全零矩形，残余反馈直接丢弃（防错位闪现在左上角）
         const isSelf = f.unit === 'self';
         const allyI = isSelf ? null : (/^ally:(\d+)$/.exec(String(f.unit)) || [])[1];
         const fig = isSelf

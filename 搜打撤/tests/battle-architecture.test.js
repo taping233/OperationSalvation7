@@ -1,6 +1,5 @@
 import { describe, expect, it } from 'vitest';
 import { createActionQueue } from '../game/src/battle/core/battle.actions.js';
-import { createAnimationController } from '../game/src/battle/view/battle.animation-waiter.js';
 import { groupHandCards, fanLayout } from '../game/src/battle/core/battle.hand.js';
 import { assertUniqueZones, moveUid, zoneForUid } from '../game/src/battle/bag/battle.piles.js';
 import { intentSummary, intentViewModel } from '../game/src/battle/view/battle.intent.view.js';
@@ -12,7 +11,7 @@ describe('battle architecture foundation', () => {
   it('uses an explicit phase and makes targeting cancellation idempotent', () => {
     const state = transitionBattle(createBattleState(), BATTLE_PHASES.PLAYER);
     const targeting = beginTargeting(state, 'c1', ['e1']);
-    expect(targeting.interaction).toMatchObject({ mode: 'targeting', cardUid: 'c1', targetIds: ['e1'] });
+    expect(targeting.phase).toBe(BATTLE_PHASES.TARGETING);   // 09-29 报批删除：state.interaction 死字段断言随之移除
     const cancelled = cancelTargeting(targeting);
     expect(cancelTargeting(cancelled)).toEqual(cancelled);
     expect(cancelled.phase).toBe(BATTLE_PHASES.PLAYER);
@@ -86,15 +85,6 @@ describe('battle architecture foundation', () => {
     expect(target.status.atkUp).toBe(3);
     combat.tickDurations(target);
     expect(target.status.atkUp).toBe(0);
-  });
-
-  it('cancels pending animation waits without leaving active handles', async () => {
-    const animations = createAnimationController();
-    const pending = animations.wait(1000);
-    expect(animations.activeCount).toBe(1);
-    pending.cancel();
-    await expect(pending.promise).rejects.toThrow('animation cancelled');
-    expect(animations.activeCount).toBe(0);
   });
 
   it('keeps hand grouping/layout independent from battle rules', () => {

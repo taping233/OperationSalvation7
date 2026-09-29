@@ -8,6 +8,14 @@
   ],
   "known": [
     {
+      "id": "tt3sp-shadowbug",
+      "clause": "本回合偷取 1 名敌人的攻击力至1点",
+      "reason": {
+        "kind": "audit_context",
+        "detail": "影噬已由 M3 结构化 stealAtk 收编（cards.sync.m3 挂 rules.triggers.onPlay）；2026-09-29 报批删除文本死路径 dmg.stealAtk 后文本管线不再识别该句，归还链路由 message-fixes 端到端断言锁定。"
+      }
+    },
+    {
       "id": "tt3sp-silverthorn",
       "clause": "注能(1)：伤害+3",
       "reason": {

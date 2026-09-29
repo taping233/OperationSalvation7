@@ -9,7 +9,7 @@ import { targetSideFor } from '../effects/battle.target-rules.js';
 import { throwIfActionCancelled } from '../runtime/battle.staged-playback.js';
 import { rejectUnsupportedCard } from '../effects/battle.rule-guard.js';
 import { isHandPaymentCandidate } from './battle.hand-selection.js';
-import { G, foes, mode, hand, discard, played, consumed, grave, energy, delayed, cardAnims, freeCast, infuseFuels, consumeFireballN, allSpellsInfused, growthNames, killAtkUp, playerCurseImmune, arrowRune, nextSpellTwice, poisonOnSpell, playedMovesThisTurn, playedMartialThisTurn, activeActionSignal, battleState, set$hand, set$energy, set$infuseFuels, set$nextSpellTwice, set$killAtkUp, set$poisonOnSpell, set$poisonLegacy, set$playerCurseImmune, set$allSpellsInfused, set$consumeFireballN, set$stealthStrike, set$lastPlayedType, set$playedMovesThisTurn, set$playedMartialThisTurn, set$activeActionSignal, set$handSelecting, nextActionSeq } from '../runtime/battle.runtime.js';
+import { G, foes, mode, hand, discard, played, consumed, grave, energy, delayed, cardAnims, freeCast, infuseFuels, consumeFireballN, allSpellsInfused, growthNames, killAtkUp, playerCurseImmune, arrowRune, nextSpellTwice, poisonOnSpell, playedMovesThisTurn, playedMartialThisTurn, activeActionSignal, battleState, effectiveHandMax, set$hand, set$energy, set$infuseFuels, set$nextSpellTwice, set$killAtkUp, set$poisonOnSpell, set$poisonLegacy, set$playerCurseImmune, set$allSpellsInfused, set$consumeFireballN, set$stealthStrike, set$lastPlayedType, set$playedMovesThisTurn, set$playedMartialThisTurn, set$activeActionSignal, set$handSelecting, nextActionSeq } from '../runtime/battle.runtime.js';
 
 const R = () => SDT.MAP.rules;
 const alive = () => foes.filter(foe => !foe.dead);
@@ -59,7 +59,8 @@ export function createBattleExecPlay({
     if (handRequirement && requirementsPaid && paymentUids.length !== handRequirement.count) return false;
     const battleToken = battleState.token;
     const receipt = Object.freeze({ battleToken, actionSeq: nextActionSeq() });
-    queueBattleAction(async signal => {
+    // 返回动作 promise：调用方（如极速符文回环）可 await 出牌完成
+    return queueBattleAction(async signal => {
       const resolved = await execPlay(uid, card, fuelUids, target, freeCost, signal, receipt, paymentUids);
       throwIfActionCancelled(signal);
       if (resolved && onResolved && G?.battleActive) onResolved();
@@ -119,7 +120,7 @@ export function createBattleExecPlay({
     })();
     const effCost = effCostOf(card, uid);
     if (effCost !== card.cost) G.log(`[[icon:sparkles]] <b>费用变化</b>：【${esc(card.name)}】按 <b>${effCost}</b> 费打出（原 ${card.cost} 费）`, 'sys');
-    if (!freeCost) set$energy(energy - (effCost));
+    if (!freeCost) set$energy(Math.max(0, energy - effCost));   // 队列等待期费用可能上涨，钳 0 防负能量泄漏到结算
     played.push(uid);
     SDT.Sound.sfx('card');
     removeUid(hand, uid);
@@ -168,10 +169,14 @@ export function createBattleExecPlay({
     });
     const structuredLastHandRecast = card.rules?.triggers?.onPlay?.some(op =>
       op?.op === 'damage' && op.recast?.on === 'lastHand');
-    if (!structuredLastHandRecast && /最后一张手牌[^。；]*?触发\s*(\d+)?\s*次?/.test(String(card.desc || '')) && lastRealCard) {
-      G.log(`[[icon:cards]] <b>${esc(card.name)}</b>：本牌是最后一张手牌，效果触发 2 次`, 'sys');
-      await resolveCardWithFeedback(resolverCard, target, infusedBase, fuelCostSum, uid, signal);
-      await takeSurge(signal);
+    const lastHandRecastMatch = String(card.desc || '').match(/最后一张手牌[^。；]*?触发\s*(\d+)?\s*次?/);
+    if (!structuredLastHandRecast && lastHandRecastMatch && lastRealCard) {
+      const recastTimes = lastHandRecastMatch[1] ? +lastHandRecastMatch[1] : 2;   // 未写次数（中文数字）按 2 次
+      G.log(`[[icon:cards]] <b>${esc(card.name)}</b>：本牌是最后一张手牌，效果触发 ${recastTimes} 次`, 'sys');
+      for (let r = 0; r < recastTimes - 1; r++) {   // 本卡主结算已跑 1 次，此处补足 N 次
+        await resolveCardWithFeedback(resolverCard, target, infusedBase, fuelCostSum, uid, signal);
+        await takeSurge(signal);
+      }
     }
     // 「下一张法术施放 N 次」（元素风暴，注能打出时注册）：法术效果再跑一遍
     if (nextSpellTwice > 0 && card.type === '法术') {
@@ -246,16 +251,20 @@ export function createBattleExecPlay({
     if (card.rules?.battle?.keepInHand === true || /永远被保留在手牌中/.test(String(card.desc || ''))) {
       const di = discard.lastIndexOf(uid); if (di >= 0) discard.splice(di, 1);
       const pi = played.lastIndexOf(uid); if (pi >= 0) played.splice(pi, 1);
-      if (hand.length < R().battleHandMax) {
+      if (hand.length < effectiveHandMax(R().battleHandMax)) {
         hand.push(uid);
         cardAnims.push({ kind: 'draw', uid, name: card.name });
         G.log(`[[icon:cards]] 【${esc(card.name)}】保留在手牌中（无法用于注能）`, 'sys');
+      } else {
+        // 手牌满不能弃置回手：uid 已从 discard/played 移除，不兜底会从所有牌区消失
+        discard.push(uid);
+        G.log(`[[icon:cards]] 手牌已满，【${esc(card.name)}】回到弃牌堆`, 'sys');
       }
     }
     sweepDead();
     set$lastPlayedType(card.type);   // 供「上一张牌是武术→0费」类条件费用判定
     // 打出侧计数（结算后自增——「其他招式/其他武术」不含正在打出的本牌）：
-    // 招式＝武术+法术（设计者 2026-09-10 定版）连续射击；追斩只数武术
+    // 招式＝武术+法术（设计者 2026-09-10 定版，2026-09-29 复核维持）连续射击；追斩只数武术
     if (card.type === '武术' || card.type === '法术') set$playedMovesThisTurn(playedMovesThisTurn + 1);
     if (card.type === '武术') set$playedMartialThisTurn(playedMartialThisTurn + 1);
     // M2：打出卡以原卡登记时点触发器（onTurnStart/onTurnEnd/onKill/onDamaged/onPlayCard…，

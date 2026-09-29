@@ -33,7 +33,7 @@ import {
  * @property {{ getJobs: () => DiscoverQueueJob[], get: () => DiscoveringState, set: (state: DiscoveringState) => void, requestRender: () => void }} interaction
  * @property {{ next: () => number }} random
  * @property {{ currentClass: () => string | null | undefined, firstAliveTarget: () => unknown, hasAliveFoes: () => boolean, sweepDead: () => void, finishVictory: () => void }} battle
- * @property {{ returnToDeckBottom: (uids: string[]) => void, addArmor: (amount: number) => number, setCardOverride: (uid: string, card: DiscoverCard) => void, enqueueDelayed: (effect: DiscoverDelayedEffect) => void, swapCardCosts: (firstUid: string, secondUid: string) => void }} effects
+ * @property {{ returnToDeckBottom: (uids: string[]) => void, addArmor: (amount: number) => number, setCardOverride: (uid: string, card: DiscoverCard) => void, enqueueDelayed: (effect: DiscoverDelayedEffect) => void, swapCardCosts: (firstUid: string, secondUid: string) => void, removeOwnedCard?: (uid: string) => void }} effects
  * @property {{ log: (message: string, kind?: string) => void }} output
  */
 
@@ -188,6 +188,7 @@ export function createBattleDiscoverFlow(ports) {
         const pouchIndex = pouch.findIndex(pouchCard => pouchCard.id === card.id);
         if (pouchIndex >= 0) pouch.splice(pouchIndex, 1);
       }
+      if (card.pouchUid && effects.removeOwnedCard) effects.removeOwnedCard(String(card.pouchUid));   // 09-29 双向同步：施放即消耗背包母本
       const uid = cards.addTempCard(card);
       output.log(`[[icon:question]] <b>法师锦囊</b>：施放其中的【<b>${esc(card.name)}</b>】（锦囊余 ${pouchEntry && Array.isArray(pouchEntry.card._pouch) ? pouchEntry.card._pouch.length : 0} 张）`, 'loot');
       const entry = cards.findByUid(uid);

@@ -20,7 +20,7 @@ const HERE = path.dirname(fileURLToPath(import.meta.url));
 
 // game.run.* 为架构批次 4 拆出的局内流程模块（scenes→altar→flow），与壳合并扫描；
 // 2026-09-22 六文件重构批1-5 拆出的切片一并并入（effect-steps/cards/hub/bag/battle.view 各片）
-const GAME_PARTS = ['game.session.js', 'game.menu.js', 'game.run.data.js', 'game.run.js', 'game.run.scenes.js', 'game.run.altar.js', 'game.run.flow.js',
+const GAME_PARTS = ['run/game.session.js', 'game.menu.js', 'game.run.data.js', 'game.run.js', 'game.run.scenes.js', 'game.run.altar.js', 'game.run.flow.js',
   'battle/effects/effect-steps.ctx.js', 'battle/effects/effect-steps.gates.js', 'battle/effects/effect-steps.curse.js', 'battle/effects/effect-steps.damage.js', 'battle/effects/effect-steps.recovery.js', 'battle/effects/effect-steps.kills.js', 'battle/effects/effect-steps.deck.js', 'battle/effects/effect-steps.rules.js', 'battle/effects/effect-steps.audit.js', 'battle/effects/effect-steps.tail.js',
   'cards.consts.js', 'cards.rules.js', 'cards.data.js', 'cards.sync.js',
   'game.hub.js', 'game.hub.depart.js', 'game.hub.pages.js', 'game.hub.bridge.js',

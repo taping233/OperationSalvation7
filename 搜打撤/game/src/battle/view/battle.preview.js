@@ -62,11 +62,11 @@ function structuredDamageSpec(card) {
 
 /** @param {SnapshotBattleCard | null | undefined} card @returns {PreviewDamageSpec | null} */
 function semanticMatch(card) {
+  if (!card) return null;
   const structured = structuredDamageSpec(card);
   if (structured) return structured;
-  const spec = card?.id ? SEMANTICS[card.id] : undefined;
+  const spec = card.id ? SEMANTICS[card.id] : undefined;
   if (!spec) return null;
-  if (!card) return null;
   return card.type === spec[0] && card.dmgType === spec[1] && Number(card.dmg) === spec[2]
     && normalizeDesc(card.desc) === spec[3] ? { hits: spec[4] } : null;
 }

@@ -36,7 +36,7 @@ const shuffle = shuffleCards;
 export function createBattleLifecycle({
   session, intentFor, cloneData, injectSealCards, applyNestRunes, applyVoidRune, drawCards,
   applyBattleStartPassives, isBattleStartEquip, isStarterAttack, requestBattleRender, alive, R,
-  resetTriggers, runBattleStartTriggers,
+  resetTriggers, runBattleStartTriggers, triggersM2,
 }) {
   const { handSelectQueue, choiceQueue } = session;
   const RUN_RESTART_KEYS = [
@@ -54,7 +54,7 @@ export function createBattleLifecycle({
 
   function flee() {
     if (busy || infusing || discovering || choosing) return;
-    SDT.Sound.sfx('flee');
+    // 撤退音由 finish(null) 统一播（win===false→'flee'），此处不再预播免得双声
     G.log('[[icon:runner]] 你撤出了战斗（打出过的卡照常结算）', 'sys');
     finish(null);
   }
@@ -103,7 +103,7 @@ export function createBattleLifecycle({
     G.battleActive = true;
     G.state = 'modal';
     if (SDT.Sound) SDT.Sound.setDucked(true);
-    SDT.Sound.setBoss?.(true);   // BOSS 读档恢复：紧张垫同步（音频 P2#12）
+    SDT.Sound.setBoss?.(!!data.opts.isBoss);   // 读档恢复：紧张垫按存档战斗类型同步（音频 P2#12；旧格式普通战不再误抬垫）
     SDT.Sound.music('battle');
     if (data.deckSelect) {
       prepareDeckSelection();   // BOSS 战退出在编组阶段：重开编组（还没实际开打，无进度损失）
@@ -138,7 +138,7 @@ export function createBattleLifecycle({
     clearBattlePiles(); set$hand([]);
     clearBattlePresentation();
     set$sel(new Set());
-    set$discoverQueue([]); clearBattlePopups(); clearBattlePresentation();
+    set$discoverQueue([]); clearBattlePopups();
     handSelectQueue.length = 0;
     choiceQueue.length = 0; resetCostFlags();
     resetPilesCarryover();
@@ -333,6 +333,7 @@ export function createBattleLifecycle({
     resetBattleEntryState();
     transitionTo(BATTLE_PHASES.PLAYER);
     G.state = 'modal';
+    if (resetTriggers) resetTriggers();   // 与 beginNormal 对齐：上一场战斗的 M2 触发登记不得跨战斗泄漏
     G.log(opts.nest
       ? `[[icon:cards]] <b>牌盒即牌库</b>：${drawPile.length} 张 · 开局抽 ${R().battleStartDraw} · 每回合开始抽 ${R().battleTurnDraw} · 每回合固定 <b>${maxEnergy}</b> 费`
       : `[[icon:cards]] 牌库编成：自选 ${sel.size} 张非道具卡 + 初始攻击 ×${shas.length} = <b>${drawPile.length}</b> 张 ·
@@ -341,8 +342,11 @@ export function createBattleLifecycle({
     applyNestRunes();    // 龙巢符文：羁绊与符文效果开战结算
     drawCards(R().battleStartDraw);
     applyVoidRune();     // 虚空符文：开局抽牌后复制 0 费招式
-    // 龙巢：黑暗元素每回合开始切换 2 种免疫诅咒（对全体系诅咒生效，冰冻除外）
+    // 龙巢：黑暗元素每回合开始切换 2 种免疫诅咒（对全体系诅咒生效，冰冻除外）。
+    // 冰冻符文与 M2 onFreezeDealt 触发合并挂载——此前整句覆写会把 engine 模块级挂的
+    // M2 转发挤掉，首次 BOSS 战起冰冻触发器（如双水之甲）在 BOSS 及之后所有战斗失效。
     COMBAT_HOOKS.onFreeze = (target) => {
+      if (triggersM2) triggersM2.fireFreezeDealt(target);
       if (freezeRuneOn && target !== pstat) { const g = drawCards(2); G.log('[[icon:gem]] <b>冰冻符文</b>：冰冻 1 名角色，抽 ' + g + ' 张牌', 'ok'); }
     };
     applyBattleStartPassives();   // Q1：迷之匣替换/灵符抽牌/骷髅王剑/混沌之眼（持有即生效）

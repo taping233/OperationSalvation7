@@ -21,7 +21,8 @@ export function killsSteps(s) {
           if (cap != null) {
             targets = getAlive().filter(f => !f.dead && (f.affix ? false : true) && (f.atk || 0) <= cap).slice(0, n);
           } else {
-            targets = getAlive().filter(f => !f.dead && f.hp > 0 && f.hp < (f.maxHp || f.hp)).slice(0, n);
+            // 无门槛分支同样排除词缀 BOSS（卡面「消灭受伤敌人（非 BOSS）」；对齐上方门槛分支）
+            targets = getAlive().filter(f => !f.dead && (f.affix ? false : true) && f.hp > 0 && f.hp < (f.maxHp || f.hp)).slice(0, n);
           }
           let killed = 0;
           for (const f of targets) {
@@ -48,18 +49,27 @@ export function killsSteps(s) {
         },
       },
       {
-        id: 'dmg.taunt', gate: 'fresh', label: '扰敌：迫使前两名敌人相互攻击',
+        id: 'dmg.taunt', gate: 'fresh', label: '扰敌：迫使两名敌人相互攻击（点选目标为锚）',
         when: (ctx) => /迫使其?相互攻击/.test(ctx.desc) ? true : null,
         run: paced(function* (ctx) {
-          const ts = getAlive().slice(0, 2);
-          if (ts.length === 2) {
-            yield { kind: 'windup', targets: [ts[1]] };
-            if (ts[1].dead) return;
-            const r = hitFoe(ctx, ts[1], 0, combat.TYPES.ATTACK, { atk: ts[0].atk });
-            log(`[[icon:swords]] <b>扰敌</b>：${esc(ts[0].name)} 被迫攻击 ${esc(ts[1].name)}，造成 ${r.dealt} 点伤害`, 'sys');
-            ctx.did = true;
-            yield { kind: 'hit' };
+          // 卡面「选择 2 名敌人，迫使其相互攻击一次」：玩家拖拽指定的敌人是锚，另一名存活敌为对手；
+          // 双向互殴对齐结构化 resolveFoeFight（旧实现只打单方向且无视点选目标）
+          const a = (ctx.curseTarget && !ctx.curseTarget.dead) ? ctx.curseTarget : getAlive()[0];
+          const b = getAlive().filter(f => f !== a)[0];
+          if (!a || !b) {
+            log(`[[icon:cross]] <b>${esc(ctx.card.name)}</b>：场上敌人不足两名，无法互相攻击`, 'dim');
+            return;
           }
+          yield { kind: 'windup', targets: [b] };
+          const ra = b.dead ? { dealt: 0 } : hitFoe(ctx, b, 0, combat.TYPES.ATTACK, { atk: a.atk });
+          log(`[[icon:swords]] <b>扰敌</b>：${esc(a.name)} 被迫攻击 ${esc(b.name)}，造成 ${ra.dealt} 点伤害`, 'sys');
+          ctx.did = true;
+          yield { kind: 'hit' };
+          if (b.dead) return;
+          yield { kind: 'windup', targets: [a] };
+          const rb = a.dead ? { dealt: 0 } : hitFoe(ctx, a, 0, combat.TYPES.ATTACK, { atk: b.atk });
+          log(`[[icon:swords]] <b>扰敌</b>：${esc(b.name)} 被迫反击 ${esc(a.name)}，造成 ${rb.dealt} 点伤害`, 'sys');
+          yield { kind: 'hit' };
         }),
       },
       {
@@ -201,19 +211,6 @@ export function killsSteps(s) {
         },
       },
       {
-        id: 'hand.tokenPass', gate: 'fresh', label: '获得员工通行证A/B（战后消散）',
-        when: (ctx) => /获得\s*1\s*张员工通行证B或员工通行证A/.test(ctx.desc) ? true : null,
-        run: (ctx) => {
-          const pool = allCards().filter(c => c.id === 'tt-token-gold' || c.id === 'tt-token-color');
-          if (pool.length) {
-            const got = pool[Math.floor(random01() * pool.length)];
-            addTempCard(got);
-            log(`[[icon:sparkles]] 获得【<b>${esc(got.name)}</b>】（令牌，战后消散）`, 'loot');
-            ctx.did = true;
-          }
-        },
-      },
-      {
         id: 'misc.flee', gate: 'fresh', label: '非 BOSS 战逃跑一次（烟雾弹）',
         when: (ctx) => (/逃跑一次|非 BOSS 战逃跑/.test(ctx.desc) && typeof fleeBattle === 'function') ? true : null,
         run: (ctx) => { fleeBattle(); ctx.did = true; },
@@ -245,16 +242,6 @@ export function killsSteps(s) {
         run: (ctx, m) => {
           const kind = (m[2] === '杀' || m[2] === '初始攻击') ? '杀' : m[2];
           deckDraw({ n: +m[1], type: kind });
-          ctx.did = true;
-        },
-      },
-      {
-        id: 'heal.allies', gate: 'fresh', label: '治疗所有队友（银河幻境）',
-        when: (ctx) => /治疗所有队友|治疗全体/.test(ctx.desc) ? true : null,
-        run: (ctx) => {
-          heal(3);
-          pushFloat({ unit: 'self', text: '', cls: 'stk sticker-heal', warm: true });
-          log(`[[icon:heart]] 治疗所有队友：回复 <b>3</b> 点生命`, 'ok');
           ctx.did = true;
         },
       },

@@ -16,7 +16,9 @@ const { BattleSession } = await import('../game/src/battle/core/battle.core.js')
 const C = window.SDT.Cards;
 
 it('偷取的攻击力在一个回合结束后归还活着的敌人', async () => {
-  const g = makeGame([{ id: 'steal-test', name: '影噬', cost: 0, type: '武术', desc: '本回合偷取1名敌人的攻击力至1点。' }]);
+  // 09-29 报批删除：影噬文本死路径已移除（实卡 M3 起结构化 stealAtk），用例改挂结构化规则继续锁归还链路
+  const g = makeGame([{ id: 'steal-test', name: '影噬', cost: 0, type: '武术', desc: '本回合偷取1名敌人的攻击力至1点。',
+    rules: { version: 1, battle: { target: { side: 'enemy', area: false } }, triggers: { onPlay: [{ op: 'stealAtk', capTo: 1, target: 'chosenEnemy' }] } } }]);
   BattleSession.start(g, [{ ...foeDef(), atk: 7 }], { isBoss: false });
   await drain();
   BattleSession.commands.playCard(g.ownedCards[0].uid, 0);

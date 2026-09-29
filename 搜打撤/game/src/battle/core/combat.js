@@ -173,7 +173,7 @@ const CURSES = ['bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban', 'bu
   function clearBleed(target) { ensureStatus(target); target.status.bleed = 0; return 0; }
 
   // —— 诅咒状态通用（设计者 2026-09-02 定版，规则见文件头）——
-  // 挂诅咒：bleed/poison 按层叠加（n 可为负做减层）；计时类取「剩余较大值」不叠加
+  // 挂诅咒：bleed/poison 按层叠加（n≤0/NaN 经下方兜底钳为 1 层，不支持负数减层）；计时类取「剩余较大值」不叠加
   function addCurse(target, key, n) {
     if (!CURSE_META[key]) return 0;
     // 龙巢：黑暗元素的轮换诅咒免疫（noCurseKeys 由战斗层每回合重掷）

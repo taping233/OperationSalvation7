@@ -221,12 +221,15 @@ const applyTextEffects = createEffectExecutor({
     dumpHand: () => {
       const uids = hand.slice();
       set$hand([]);
+      const cards = [];
       uids.forEach(u => {
         consumed.push(u);
         if (mode === 'boss') grave.push(u);
         const o = findCard(u);
+        if (o) cards.push(o.card);
         cardAnims.push({ kind: 'dump', uid: u, name: o ? o.card.name : '' });
       });
+      cards.forEach(c => fireConsumeTriggers(c, null));   // 09-29 老板拍板：批量消耗也算逐张「消耗该牌时」
       return uids.length;
     },
     // —— 2026-09-09 机制审计补实装端口（Q1-Q8 老板定向批次）——
@@ -234,7 +237,7 @@ const applyTextEffects = createEffectExecutor({
     getPriceOfLastDrawn: () => {
       const uid = lastDrawnUids[lastDrawnUids.length - 1];
       const o = uid && findCard(uid);
-      return o ? SDT.Cards.sellPrice(o.card) : 0;
+      return o ? Math.max(0, +(o.card.cost || 0)) : 0;   // 09-29 老板拍板：价格统一按费用（原 sellPrice 卖价口径废弃）
     },
     dealAoeFixed: n => {
       alive().slice().forEach(t => {   // 本模块函数名是 alive（此前误写 getAlive，气功波价格伤害一触发即崩）
@@ -742,7 +745,6 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
       triggersM2.fireConsume(card, target || (alive()[0] || null));
       return;
     }
-    triggersM2.fireConsume(card, target || (alive()[0] || null));
     (consumeTriggerTexts(card && card.desc)).forEach(text => {
       G.log(`[[icon:flask]] <b>消耗该牌时</b>：【${esc(card.name)}】${esc(text)}`, 'sys');
       applyTextEffects(card, text, target || (alive()[0] || null), {});
@@ -806,26 +808,25 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     fireConsumeTriggers(card, alive()[0] || null);
     if (consumeFireballN > 0) yield* consumeFireballSteps(consumeFireballN);
   }
-  // 法师锦囊容器（Q5 老板定向）：自带 1×3 空间——空时自动置入 3 张随机法术，打出时选 1 张直接施放
+  // 法师锦囊容器（Q5 老板定向）：自带 1×3 空间——打出时选 1 张直接施放
   function queuePouchCast(uid) {
     const entry = findCard(uid);
     if (!entry) return;
-    // 2026-09-16 定版：锦囊里的法术由玩家在背包中提前存入（pouchOf 标记），
-    // 开战时读入 _pouch；锦囊为空则无效果（不再自动填充随机法术）
+    // 2026-09-16 定版：锦囊里的法术由玩家在背包中提前存入（pouchOf 标记）。
+    // 09-29 老板拍板双向同步：每次打出都按背包 pouchOf 现状重建镜像（不再仅空时一次性载入）；
+    // 战斗中施放会删背包母本（discover-flow），战斗中背包变动（拆包/用道具）也反映到下次施放。
     if (!Array.isArray(entry.card._pouch)) entry.card._pouch = [];
-    if (!entry.card._pouch.length) {
-      (G.ownedCards || []).forEach(o => {
-        if (o.pouchOf === 'tt7-stratagem' && o.card && o.card.type === '法术') {
-          entry.card._pouch.push({ ...o.card });
-        }
-      });
-      if (entry.card._pouch.length) {
-        G.log(`[[icon:cards]] <b>法师锦囊</b>：从背包 pouch 载入 ${entry.card._pouch.length} 张法术`, 'sys');
-      }
+    entry.card._pouch = (G.ownedCards || [])
+      .filter(o => o.pouchOf === 'tt7-stratagem' && o.card && o.card.type === '法术')
+      .map(o => ({ ...o.card, pouchUid: o.uid }));
+    if (entry.card._pouch.length) {
+      G.log(`[[icon:cards]] <b>法师锦囊</b>：从背包 pouch 载入 ${entry.card._pouch.length} 张法术`, 'sys');
+      set$discovering(buildPouchDiscoverState(entry.card._pouch.slice(), uid));
+      requestBattleRender();
+    } else {
+      entry.card._pouch.length = 0;
+      G.log('[[icon:question]] 锦囊是空的——背包中存入法术后才能生效', 'dim');
     }
-    if (!entry.card._pouch.length) { G.log('[[icon:question]] 锦囊是空的——背包中存入法术后才能生效', 'dim'); return; }
-    set$discovering(buildPouchDiscoverState(entry.card._pouch.slice(), uid));
-    requestBattleRender();
   }
   // 不变应万变（Q8 老板定向）：「在手牌中时，本牌变为打出的上一张武术牌的1费复制」——
   // 战斗内替身（findCard 优先读 overrides），不污染背包原卡；战斗结束随 reset 清空
@@ -939,7 +940,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
   function cancelInfuse() { set$infusing(null); requestBattleRender(); }
   // 需求 #15：注能入口——卡面上的「注能」角标触发（打出本体不再强制注能）
   function beginInfuse(uid) {
-    if (busy || infusing || discovering || choosing || viewingGrave || viewingDeck) return;
+    if (busy || infusing || discovering || choosing || handSelecting || viewingGrave || viewingDeck) return;
     if (!hand.includes(uid)) return;
     const entry = findCard(uid);
     if (!entry) return;
@@ -1015,6 +1016,8 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     // M2：战斗开始/重开时清空触发器登记（旧战卡对象不得跨战斗泄漏）
     resetTriggers: () => triggersM2.reset(),
     runBattleStartTriggers: () => triggersM2.fireBattleStart(),
+    // M2：beginBoss 合并挂载 COMBAT_HOOKS.onFreeze 时保留 onFreezeDealt 转发
+    triggersM2,
   });
   const selectionFlow = createBattleSelectionFlow({
     cards: {

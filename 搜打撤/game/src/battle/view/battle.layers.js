@@ -126,7 +126,6 @@ import { cardRuleHint } from './battle.preview.js';
   //   - 卡面内容按序列化签名 diff，内容没变不重写 innerHTML（图片不重载、悬停态不闪）。
   let handLayer = null;
   const handSlots = new Map();   // key -> { slot, card, sig, rect, isNew }
-  let handSuspended = false;     // 墓地/背包/发现等战斗中弹层接管期间 = true（手牌被摘下但战斗未结束）
   let battleToken = null;        // 战斗实例令牌（snapshot.battleToken）：换场重置常驻层的唯一依据
 
   function handSlotKey(g) {
@@ -245,7 +244,6 @@ import { cardRuleHint } from './battle.preview.js';
       handSlots.clear();
     }
     battleToken = token;
-    handSuspended = false;
     // 2026-09-19 留言 #19/#7：不再挂原生 title（系统白底黑字提示框）——描述就在卡面上，
     // 黑框 tooltip（UI.showTooltip）也已全局停用
     mount.replaceWith(handLayer);
@@ -381,7 +379,7 @@ import { cardRuleHint } from './battle.preview.js';
             { transform: `translate(${dx * 0.18}px,${dy * 0.18}px) rotate(3deg) scale(1.04)`, opacity: 1, offset: 0.72 },
             { transform: 'translate(0px,0px) rotate(0deg) scale(1)', opacity: 1 },
           ], { duration: 900, delay: drawIdx++ * 300, easing: 'cubic-bezier(.2,.8,.3,1)', fill: 'backwards', composite: 'add' });
-          flightMs = Math.max(flightMs, 900 + drawIdx * 300);
+          flightMs = Math.max(flightMs, 900 + (drawIdx - 1) * 300);   // drawIdx 已自增：末张 delay=(n-1)×300，旧式多算一档
         }
       } else if (rec.rect) {
         const dx = rec.rect.left + rec.rect.width / 2 - (r.left + r.width / 2);
@@ -724,5 +722,4 @@ import { cardRuleHint } from './battle.preview.js';
     });
   }
 
-function setHandSuspended(v) { handSuspended = v; }   // 壳 render 分派改经 setter（ESM 导入绑定不可赋值，2026-09-22 批5 理顺点）
-export { handLayer, handSuspended, battleToken, mountHandLayer, updateHand, mountUnitLayer, updateUnits, setHandSuspended, showIntentLegend, HAND_PAGE_SIZE };
+export { handLayer, battleToken, mountHandLayer, updateHand, mountUnitLayer, updateUnits, showIntentLegend, HAND_PAGE_SIZE };

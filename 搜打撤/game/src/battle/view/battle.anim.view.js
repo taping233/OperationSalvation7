@@ -150,12 +150,21 @@ import { schedulePresentationMs } from '../runtime/battle.clock.js';
     drawn.forEach(u => played.delete(u));   // 打出又回手（不朽斩）：同帧两事件抵消不演
     if (events.some(ev => ev.kind === 'burn')) SDT.Sound.sfx('burn');   // 同帧多张消耗卡合并为一次燃烧提示
     // —— 牌库图标动画（2026-09-11 需求，约 1.5s）：抽牌脉冲 / 洗入旋光 ——
+    // 重播辅助：1.6s 内同类二次触发要摘类+reflow 再挂（类已挂时 add 无效=动画不重播），
+    // 并清旧定时器（否则旧 timer 到点摘类截断新一轮）
     const pileEl = body.querySelector('.sts-hud-l .bt-pile');
     if (pileEl) {
-      if (drawn.size) { pileEl.classList.add('pile-pulse'); schedulePresentationMs(() => pileEl.classList.remove('pile-pulse'), 1600); }
+      const pileAnimTimers = { 'pile-pulse': 0, 'pile-shuffle': 0 };
+      const replayPileClass = (cls, ms) => {
+        if (pileAnimTimers[cls]) clearTimeout(pileAnimTimers[cls]);
+        pileEl.classList.remove(cls);
+        void pileEl.offsetWidth;
+        pileEl.classList.add(cls);
+        pileAnimTimers[cls] = schedulePresentationMs(() => pileEl.classList.remove(cls), ms);
+      };
+      if (drawn.size) replayPileClass('pile-pulse', 1600);
       if (shuffles.length) {
-        pileEl.classList.add('pile-shuffle');
-        schedulePresentationMs(() => pileEl.classList.remove('pile-shuffle'), 1600 + shuffles.length * 250);
+        replayPileClass('pile-shuffle', 1600 + shuffles.length * 250);
         // 洗入牌动画：卡背从手牌区中央飞向牌库图标，旋入消失
         const pileR = uiRect(pileEl);
         shuffles.forEach((ev, i) => {

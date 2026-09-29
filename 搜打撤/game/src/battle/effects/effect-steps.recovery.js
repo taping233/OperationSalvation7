@@ -18,8 +18,8 @@ export function recoverySteps(s) {
       },
       {
         id: 'heal.restoreConsumed', gate: 'always', label: '战斗内复原/复活消耗卡',
-        when: (ctx) => ctx.desc.match(/(?:复原|复活)\s*(?:最多)?\s*(\d+)?\s*张/),
-        run: (ctx, m) => { const c = restoreConsumed(+(m[1] || 1)); if (c) ctx.did = true; },
+        when: (ctx) => ctx.desc.match(/(?:复原|复活)\s*(?:最多)?\s*(\d+|[一二两三四五])?\s*张/),
+        run: (ctx, m) => { const c = restoreConsumed(m[1] ? num(m[1]) : 1); if (c) ctx.did = true; },
       },
       {
         id: 'hand.selectFamily', gate: 'fresh', label: '手选家族：选牌施放 / 复制 / 消耗+尾段',
@@ -33,9 +33,9 @@ export function recoverySteps(s) {
         },
         run: (ctx, m) => {
           if (m.kind === 'play') {
-            // 与旧实现同一张受限映射：这里「四/五」历史上就落回 1，保持行为不变
-            const N23 = { '一': 1, '两': 2, '二': 2, '三': 3 };
-            const n = N23[m.m[1]] || +m.m[1] || 1;
+            // 与预检共享同一张中文数字表（HAND_COST_SELECT_RE 允许一~五，此前本地表缺四/五
+            // 会落回 1：预检要求 4 张在手、执行只排 1 张）
+            const n = num(m.m[1]) || 1;
             queueHandSelect({ n, type: m.m[2] === '牌' ? null : m.m[2], act: 'play' });
             log(`[[icon:cards]] 从手牌选择 <b>${n}</b> 张${m.m[2] && m.m[2] !== '牌' ? m.m[2] : ''}牌打出`, 'sys');
             ctx.did = true;
@@ -131,8 +131,8 @@ export function recoverySteps(s) {
           let n = m.perCurseDraw ? +m.perCurseDraw[1] : +m.dm[1];
           if (m.perCurseDraw && ctx.curseTarget) {
             const kinds = combat.CURSES.filter(k => (ctx.curseTarget.status[k] || 0) > 0).length;
-            n *= Math.max(1, kinds);
-            log(`[[icon:skull]] 目标身上有 ${kinds} 种诅咒，抽牌量放大`, 'sys');
+            n *= kinds;   // 09-29 老板拍板：0 种诅咒时不抽（原 Math.max(1,kinds) 按 1 种兜底）
+            if (kinds > 0) log(`[[icon:skull]] 目标身上有 ${kinds} 种诅咒，抽牌量放大`, 'sys');
           }
           if (getMode() === 'boss') {
             const got = drawCards(n);

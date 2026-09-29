@@ -17,7 +17,7 @@ import { attach as attachUnitFrames, hide as hideUnitFrames, cacheStats as frame
 import { isHandPaymentCandidate, matchesHandSelectKey } from '../core/battle.hand-selection.js';
 import { BattleSession, commands, configureBattleRenderer, getSnapshot, R, effCostOf, findCard, markDreadShown, pileTip, refillDrawPile, takeCardAnims, unplayableReason } from '../core/battle.core.js';
 import { renderDeckSelection, renderGrave, renderBattleBag, renderDeckPileView } from './battle.overlays.js';
-import { mountHandLayer, updateHand, mountUnitLayer, updateUnits, setHandSuspended, HAND_PAGE_SIZE } from './battle.layers.js';
+import { mountHandLayer, updateHand, mountUnitLayer, updateUnits, HAND_PAGE_SIZE } from './battle.layers.js';
 import { spawnFloats } from './battle.vfx.js';
 import { captureBattleView, animateBattleTransition } from './battle.anim.view.js';
 import { aim, aimPlayedAt, selectCardByClick, showCardBlockReason, startAim, cancelAim, canPreserveAim, resumeAimAfterRender, setClickSelectedUid } from './battle.aim.js';
@@ -191,7 +191,11 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     animateXpChip(body);
   }
   function render(snapshot = getSnapshot()) {
-    const prevView = captureBattleView();   // 重建前的手牌/牌堆位：供飞行与归位动画取样
+    // 出牌/抽牌动画事件提前取样：无事件时跳过 prevView 采样（整手牌 outerHTML 序列化+逐张布局读
+    // 只被飞行动画消费，能量/角标等高频渲染纯浪费）。两个消费点（updateHand/animateBattleTransition）
+    // 对 prev 均空值安全。
+    const animEvents = takeCardAnims();
+    const prevView = animEvents.length ? captureBattleView() : null;   // 重建前的手牌/牌堆位：供飞行与归位动画取样
     const preserveAim = !!aim && canPreserveAim(snapshot);
     if (snapshot.phase !== 'player' || snapshot.busy || snapshot.pendingItem || snapshot.slamPending || snapshot.dartPending) setClickSelectedUid(null);
     const {
@@ -206,12 +210,11 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     // 销毁，不藏会浮在弹层之上（09-12 实机：背包弹层上残留玩家序列帧立绘）——
     // 卸下 sprite 恢复静态立绘，关闭弹层走主渲染 attach 自动恢复
     if (viewingGrave || viewingBag || choosing || handSelecting || discovering) hideUnitFrames();
-    if (deckSelection) { setHandSuspended(false); renderDeckSelection(snapshot); return; }   // 战前编组：允许下次挂载时重置手牌层
-    if (viewingGrave) { setHandSuspended(true); renderGrave(snapshot); return; }
-    if (viewingDeck) { setHandSuspended(true); renderDeckPileView(snapshot); return; }
-    if (viewingBag) { setHandSuspended(true); renderBattleBag(snapshot); return; }
+    if (deckSelection) { renderDeckSelection(snapshot); return; }   // 战前编组：允许下次挂载时重置手牌层
+    if (viewingGrave) { renderGrave(snapshot); return; }
+    if (viewingDeck) { renderDeckPileView(snapshot); return; }
+    if (viewingBag) { renderBattleBag(snapshot); return; }
     if (choosing) {
-      setHandSuspended(true);   // 抉择/选牌/发现都是战斗中弹层：手牌层摘下挂起，回来继续用
       // 2026-09-08 抉择面板：人工 N 选一（复用发现面板的弹层交互）
       const choiceHTML = choosing.options.map((text, i) => `
         <button class="ov-btn choice-opt" data-act="btChoicePick" data-i="${i}">
@@ -225,7 +228,6 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
       return;
     }
     if (handSelecting) {
-      setHandSuspended(true);
       // 2026-09-06 #24/#25：从手牌选择卡牌施放/消耗的通用弹层
       const isPayment = handSelecting.act === 'payment';
       const handUids = isPayment ? new Set(hand) : null;
@@ -260,7 +262,6 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
       return;
     }
     if (discovering) {
-      setHandSuspended(true);
       const optsHTML = discovering.options.map((c, i) => `
         <div class="bt-card" data-act="btDiscover" data-i="${i}" title="${escAttr(`${c.name}${c.desc ? '：' + c.desc : ''}——点击置入手牌`)}">
           ${SDT.Cards.cardHTML(c, 'sm')}
@@ -519,15 +520,23 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
       }
       stageEl.prepend(ambient);
     }
+    // —— 药水栏/砸击绑定：节点跨渲染保留（syncBattleSlot 差分命中即复用旧节点），dataset 标记
+    // 去重防监听器无界累积（此前每次 render 重挂，几十次渲染=同节点 N 套闭包）——
     body.querySelectorAll('.bt-potion[data-potion-aim="1"]').forEach(el => {
+      if (el.dataset.aimBound) return;
+      el.dataset.aimBound = '1';
       el.addEventListener('pointerdown', (e) => { if (e.button === 0) startAim(e, el, 'potion'); });
     });
     // 砸击拖动释放（09-20 老板）：按住砸击按钮拖到敌人身上松手=结算；轻点仍走 btSlam 点选流
     body.querySelectorAll('.bt-slam-btn').forEach(el => {
+      if (el.dataset.aimBound) return;
+      el.dataset.aimBound = '1';
       el.addEventListener('pointerdown', (e) => { if (e.button === 0) startAim(e, el, 'slam'); });
     });
     // 药水栏点击直接使用兜底（2026-09-16 留言 #11：普通战药水栏点不动）
     body.querySelectorAll('.bt-potion:not([data-potion-aim="1"]):not(.off)').forEach(el => {
+      if (el.dataset.useBound) return;
+      el.dataset.useBound = '1';
       el.addEventListener('pointerdown', (e) => {
         if (e.button !== 0) return;
         const uid = el.dataset.uid;
@@ -546,12 +555,16 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
       };
       const hidePotionTip = () => { potionTip.hidden = true; };
       body.querySelectorAll('.bt-potion').forEach(el => {
-        const p = potions[Number(el.dataset.potionIdx)];
-        if (!p) return;
-        el.addEventListener('mouseenter', () => showPotionTip(p));
+        if (el.dataset.tipBound) return;
+        el.dataset.tipBound = '1';
+        // p 惰性现取：potions 数组每渲染重建，去重后的常驻闭包若绑定时就捕获会拿旧数据
+        const potionAt = () => potions[Number(el.dataset.potionIdx)];
+        el.addEventListener('mouseenter', () => { const p = potionAt(); if (p) showPotionTip(p); });
         el.addEventListener('mouseleave', hidePotionTip);
         el.addEventListener('pointerdown', (e) => {
           if (e.button !== 0 && e.pointerType === 'mouse') return;
+          const p = potionAt();
+          if (!p) return;
           showPotionTip(p);
           document.addEventListener('pointerup', hidePotionTip, { once: true });
           document.addEventListener('pointercancel', hidePotionTip, { once: true });
@@ -565,10 +578,8 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     // 不再随渲染重复挂——点击时读 getSnapshot() 实时态，避免闭包过期
     // 指向拖拽的 pointerdown 已在常驻槽位创建时绑定（见 updateHand），不再随渲染重复挂
     // 人物去纸色背景，像模型一样站在场景里（art.js 内按图缓存，二次渲染零成本）
-    // 手牌常驻层挂载 + 差分更新（批次A）：出牌动画事件只取一次，常驻层与克隆飞行共用
-    const animEvents = takeCardAnims();
-    // 单位区常驻层挂载 + 差分更新（批次B）：玩家/随从/敌人节点跨渲染复用（须在手牌层之前，
-    // 复用其 handSuspended 判定「战斗中弹层挂起 vs 战斗已收尾」）
+    // 手牌常驻层挂载 + 差分更新（批次A）：出牌动画事件已在 render 开头取样，常驻层与克隆飞行共用
+    // 单位区常驻层挂载 + 差分更新（批次B）：玩家/随从/敌人节点跨渲染复用（须在手牌层之前挂载）
     const unitMounts = mountUnitLayer(body, snapshot.battleToken);
     if (unitMounts) updateUnits(unitMounts, snapshot, { isBoss: opts.isBoss, pendingTarget, pendingItem, slamPending, dartPending });
     if (SDT.Art.cutoutFigures) SDT.Art.cutoutFigures(body);

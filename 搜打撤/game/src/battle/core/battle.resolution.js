@@ -392,8 +392,10 @@ function createBattleResolution(ports) {
     for (let k = 0; k < operation.n; k++) {
       const c = drawOne();
       if (!c) break;
-      addTempCard(decorate(c));
-      if (act === 'dup') addTempCard({ ...c });
+      // dup 复制体同样基于 decorate 后的模板（与 deck 路径对齐）：否则 zeroCost/noInfuse 修饰只在首张生效
+      const tpl = decorate(c);
+      addTempCard(tpl);
+      if (act === 'dup') addTempCard({ ...tpl });
       gained.push(c.name);
     }
     if (gained.length) {
@@ -678,7 +680,7 @@ function createBattleResolution(ports) {
                 log(`[[icon:arrow]] <b>${esc(foe.name)}</b> 满足增伤条件，伤害增加（${before} → ${foeDamage}）`, 'sys');
               }
             }
-            dealt += hitFoe(foe, damageCard, foeDamage, type, label, hitCount > 1 ? segment + 1 : null);
+            dealt += hitFoe(foe, damageCard, foeDamage, type, label);
             foesHit.push(foe);
             hitThisSegment = true;
           }
@@ -718,9 +720,10 @@ function createBattleResolution(ports) {
             dealtTotal += result.dealt;
           }
         }
-        // M2：damage.onKill 结构化击杀奖励（闪金之锤 +币 / 破甲重斩 +甲）
+        // M2：damage.onKill 结构化击杀奖励（闪金之锤 +币 / 破甲重斩 +甲）。
+        // foesHit 按命中段累加，多段打同一敌人会重复计数——按「击杀只数」去重结算
         if (operation.onKill) {
-          applyDamageOnKill(card, operation.onKill, foesHit.filter(foe => foe.dead).length, m2Deps);
+          applyDamageOnKill(card, operation.onKill, new Set(foesHit.filter(foe => foe.dead)).size, m2Deps);
         }
         // M2：段绑定记账——curse.bindTarget:'prevDamage' 沿用本段实际命中者
         lastDamageTargets = [...foesHit];
@@ -813,7 +816,7 @@ function createBattleResolution(ports) {
               foeDmg += +pierceB[1];
               if (i === 0) log(`[[icon:blood]] <b>${esc(foe.name)}</b> 处于流血状态，伤害 +${pierceB[1]}`, 'sys');
             }
-            dealtTotal += hitFoe(foe, card, foeDmg, type, times > 1 ? `（第 ${i + 1} 段）` : '', times > 1 ? i + 1 : null);
+            dealtTotal += hitFoe(foe, card, foeDmg, type, times > 1 ? `（第 ${i + 1} 段）` : '');
             hitThisSegment = true;
           }
         }
@@ -842,7 +845,7 @@ function createBattleResolution(ports) {
             yield { kind: 'windup', targets: [next], ...(cue ? { cue } : {}) };
             next = preferred && !preferred.dead ? preferred : getAliveFoes()[0];
             if (!next) break;
-            hitFoe(next, card, dmgVal, type, `（额外施放第 ${k + 1} 次）`, k + 1);
+            hitFoe(next, card, dmgVal, type, `（额外施放第 ${k + 1} 次）`);
             yield { kind: 'hit', segment: k + 1, ...(cue ? { cue } : {}) };
             preferred = next;
             cast++;

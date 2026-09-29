@@ -237,8 +237,8 @@ describe('直接释放 / 直接施放类卡牌专项审计', () => {
     await drain();
     await waitLog(() => logsJoin(g).includes('锦囊是空的'));
     expect(logsJoin(g)).toContain('锦囊是空的');
-    // 模拟背包预存法术（往 _pouch 火球）
-    g.ownedCards[0].card._pouch = [{ ...card('tt3-fireball') }];
+    // 模拟背包预存法术（09-29 双向同步：背包 pouchOf 母本即镜像源，不再直写 _pouch）
+    g.ownedCards[1].pouchOf = 'tt7-stratagem';
     // 再打一次：从预存法术选 1 释放
     BattleSession.commands.playCard(g.ownedCards[0].uid, 0);
     await drain();

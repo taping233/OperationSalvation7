@@ -43,14 +43,13 @@ function transitionBattle(state, phase) {
   return { ...state, phase };
 }
 
+// eslint-disable-next-line no-unused-vars -- 签名保留 cardUid/targetIds：engine.beginCardTargeting 与架构测试仍传实参，指向态实际由 runtime interaction 承载
 function beginTargeting(state, cardUid, targetIds = []) {
-  const next = transitionBattle(state, BATTLE_PHASES.TARGETING);
-  return { ...next, interaction: { mode: 'targeting', cardUid, targetIds: [...targetIds], hoveredTargetId: null, invalidReason: '' } };
+  return transitionBattle(state, BATTLE_PHASES.TARGETING);   // 09-29 报批删除：state.interaction 死字段（全仓零读者，指向态走 runtime interaction）
 }
 
 function cancelTargeting(state) {
-  const next = state.phase === BATTLE_PHASES.TARGETING ? transitionBattle(state, BATTLE_PHASES.PLAYER) : state;
-  return { ...next, interaction: { mode: 'idle', cardUid: null, targetIds: [], hoveredTargetId: null, invalidReason: '' } };
+  return state.phase === BATTLE_PHASES.TARGETING ? transitionBattle(state, BATTLE_PHASES.PLAYER) : state;
 }
 
 export { ALLOWED_TRANSITIONS, BATTLE_PHASES, beginTargeting, cancelTargeting, canTransition, createBattleState, transitionBattle };

@@ -41,8 +41,6 @@ function waitPresentationMs(ms, signal) {
   });
 }
 
-function waitPresentation(ms, signal) { return waitPresentationMs(demoMs(ms), signal); }
-
 function waitHitStop(ms, signal) {
   if (isTestRuntime() || isTurbo() || !(ms > 0)) return Promise.resolve();
   const release = pausePresentation();
@@ -89,4 +87,4 @@ function pausePresentation() {
   };
 }
 
-export { pausePresentation, schedulePresentation, schedulePresentationMs, waitHitStop, waitPresentation, waitPresentationMs };
+export { pausePresentation, schedulePresentation, schedulePresentationMs, waitHitStop, waitPresentationMs };

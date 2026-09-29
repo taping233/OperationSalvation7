@@ -114,6 +114,7 @@ export function createBattleBag({
     if (!Array.isArray(ops) || !ops.length) return false;
     const chosen = side != null ? foes[+side] : null;
     const target = chosen && !chosen.dead ? chosen : (alive()[0] || null);
+    const aliveBefore = alive().length;   // 击杀奖励总账基数（对齐 resolveDart：饮血剑 per-kill 增益）
     const index = G.ownedCards.findIndex(item => item.uid === entry.uid);
     if (index < 0) return true;
     G.ownedCards.splice(index, 1);
@@ -131,7 +132,7 @@ export function createBattleBag({
       }
       if (op.op === 'flee') {
         G.log('[[icon:runner]] 逃出了战斗（非 BOSS 战道具）', 'ok');
-        finish(false);
+        finish(null);   // 逃跑语义=null（烟雾弹）；false 是战败会走死亡结算直接终局
         return true;
       }
       if (op.op === 'heal') {
@@ -189,6 +190,7 @@ export function createBattleBag({
           act: op.act, sourceCardId: card.id });
       }
     }
+    applyKillRewards(null, aliveBefore - alive().length);
     sweepDead();
     if (!alive().length) finish(true);
     requestBattleRender();
@@ -328,6 +330,7 @@ export function createBattleBag({
     clearTargetSession();
     queueBattleAction(async signal => {
       throwIfActionCancelled(signal);
+      const aliveBefore = alive().length;   // 击杀奖励总账（砸击击杀也计饮血剑，对齐 resolveDart）
       const struck = await runStagedSteps(singleTargetHitSteps(t, () => {
         if (energy < 2) {
           G.log('[[icon:bolt]] 背包砸击取消：结算时能量已不足，未扣除能量', 'warn');
@@ -343,6 +346,7 @@ export function createBattleBag({
           text: r.dealt > 0 ? '-' + r.dealt : '护盾破碎', cls: r.dealt > 0 ? 'dmg' : 'block',
           shieldBreak, hpBefore, hpAfter: t.hp, maxHp: t.maxHp });
         G.log(`[[icon:bag]] <b>背包砸击</b>砸向 ${esc(t.name)}：造成 <b>${r.dealt}</b> 点固定伤害（-2 能量）`, 'sys');
+        applyKillRewards(null, aliveBefore - alive().length);
         sweepDead();
       }), signal);
       if (!struck) return;

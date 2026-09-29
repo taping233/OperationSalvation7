@@ -48,7 +48,9 @@ function sweepDead() {
   }
 function transferPoisonLegacy(deadFoe) {
     if (!poisonLegacy || !deadFoe.status || !(deadFoe.status.poison > 0)) return;
-    const next = alive().filter(f => f !== deadFoe)[0];
+    // hp>0 过滤：AOE 双杀时 sweepDead 逐个清尸，后一个死者此刻尚未置 dead、仍在 alive() 里，
+    // 遗产转给它只会随其立即倒下而湮灭
+    const next = alive().filter(f => f !== deadFoe && f.hp > 0)[0];
     const stacks = deadFoe.status.poison;
     if (!next) return;
     deadFoe.status.poison = 0;

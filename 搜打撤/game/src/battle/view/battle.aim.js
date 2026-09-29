@@ -369,10 +369,11 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
       // 呈现层追加：被点敌人红框+抖动一次；拒绝逻辑/log/气泡原样不动。
       const foeEl = document.querySelector(`.bt-foe[data-eidx="${idx}"]`);
       if (foeEl) {
+        if (foeEl._misTimer) clearTimeout(foeEl._misTimer);   // 旧 timer 先清：650ms 内重抖不被上一轮腰斩
         foeEl.classList.remove('mis-target');
         void foeEl.offsetWidth;
         foeEl.classList.add('mis-target');
-        setTimeout(() => foeEl.classList.remove('mis-target'), 650);
+        foeEl._misTimer = setTimeout(() => { foeEl.classList.remove('mis-target'); foeEl._misTimer = 0; }, 650);
       }
       return true;
     }
@@ -499,75 +500,86 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     if (a && a.raf) cancelAnimationFrame(a.raf);
     if (a && a.stage) a.stage.classList.remove('drop-any');
   }
+  // 高回报率鼠标（125-1000Hz）合帧：pointermove 只采样坐标，命中检测/布局读/箭头重绘
+  // 每显示帧一次——原先逐事件全跑，高回报率设备上每秒数百次强制布局+全屏清屏。
+  let aimMoveFrame = 0;
   function moveAim(e) {
     if (!aim || e.pointerId !== aim.pointerId) return;
     aim.lastX = e.clientX;
     aim.lastY = e.clientY;
     if (!aim.moved && Math.hypot(e.clientX - aim.sx, e.clientY - aim.sy) < 6) return;
     aim.moved = true;
-    const vr = aim.vr;   // 重绘后由 resumeAimAfterRender 更新；移动时复用以免频繁读布局
-    if (e.clientY <= cancelZoneY()) aim.hasLeftCancel = true;   // STS2 _hasLeftCardCancelZoneOnce
+    if (!aimMoveFrame) aimMoveFrame = requestAnimationFrame(aimPointerFrame);
+  }
+  function aimPointerFrame() {
+    aimMoveFrame = 0;
+    const a = aim;
+    if (!a) return;
+    const eX = a.lastX, eY = a.lastY;
+    const vr = a.vr;   // 重绘后由 resumeAimAfterRender 更新；帧内复用以免频繁读布局
+    if (eY <= cancelZoneY()) a.hasLeftCancel = true;   // STS2 _hasLeftCardCancelZoneOnce
     // 指针视口位移 → 卡牌 transform（布局值）：过 UiScale 换算，zoom≠1 才能跟手
     const zNow = uiScale();
-    aim.tgt.x = (e.clientX - aim.sx) / zNow;
-    aim.tgt.y = (e.clientY - aim.sy) / zNow;
+    a.tgt.x = (eX - a.sx) / zNow;
+    a.tgt.y = (eY - a.sy) / zNow;
 
     let nearEnemy = null;
-    if (aim.follow) {
-      if (aim.side === 'enemy') {
-        nearEnemy = enemyNearAt(e.clientX, e.clientY, aim,
-          aim.mode === 'target' ? ENEMY_AIM_EXIT_PX : ENEMY_AIM_ENTER_PX);
-        if (aim.mode === 'drag' && nearEnemy) {
-          aim.mode = 'target';
-          enterDock(aim);
-        } else if (aim.mode === 'target' && !nearEnemy) {
-          aim.mode = 'drag';
-          aim.dock = null;
-          aim.dockAnchor = null;
+    if (a.follow) {
+      if (a.side === 'enemy') {
+        nearEnemy = enemyNearAt(eX, eY, a,
+          a.mode === 'target' ? ENEMY_AIM_EXIT_PX : ENEMY_AIM_ENTER_PX);
+        if (a.mode === 'drag' && nearEnemy) {
+          a.mode = 'target';
+          enterDock(a);
+        } else if (a.mode === 'target' && !nearEnemy) {
+          a.mode = 'drag';
+          a.dock = null;
+          a.dockAnchor = null;
           aimArrowRemove();
         }
-      } else if (aim.mode === 'drag' && e.clientY < aim.playY) {
-        if (aim.side === 'self') {
-          aim.mode = 'target';
-          enterDock(aim);
+      } else if (a.mode === 'drag' && eY < a.playY) {
+        if (a.side === 'self') {
+          a.mode = 'target';
+          enterDock(a);
         } else {
-          aim.mode = 'multi';   // 未指向卡：战场亮环示意可落牌
-          if (aim.stage) aim.stage.classList.add('drop-any');
+          a.mode = 'multi';   // 未指向卡：战场亮环示意可落牌
+          if (a.stage) a.stage.classList.add('drop-any');
         }
-      } else if (aim.mode === 'multi' && e.clientY >= aim.playY) {
-        aim.mode = 'drag';
-        if (aim.stage) aim.stage.classList.remove('drop-any');
+      } else if (a.mode === 'multi' && eY >= a.playY) {
+        a.mode = 'drag';
+        if (a.stage) a.stage.classList.remove('drop-any');
       }
       // 底部取消区：瞄准/指示态拖入即取消（STS2 exitEarly = IsCardInCancelZone）
-      if (aim.side !== 'enemy' && aim.mode !== 'drag' && aim.hasLeftCancel && e.clientY > cancelZoneY()) { cancelAim(); return; }
+      if (a.side !== 'enemy' && a.mode !== 'drag' && a.hasLeftCancel && eY > cancelZoneY()) { cancelAim(); return; }
     }
 
     // 悬停检测：瞄准态（含药水全程）高亮目标；drag 态 STS2 无悬停反馈
-    const targeting = !aim.follow || aim.mode === 'target' || aim.mode === 'clickTarget';
-    const hit = aim.follow && aim.side === 'enemy'
-      ? (aim.mode === 'target' ? nearEnemy : null)
-      : (targeting ? aimHoverAt(e.clientX, e.clientY, aim.targetSession) : null);
-    if (aim.playBlockedReason && aim.mode !== 'drag' && !aim.reasonShown) {
-      showThoughtBubble(aim.playBlockedReason, true);
-      aim.reasonShown = true;
+    const targeting = !a.follow || a.mode === 'target' || a.mode === 'clickTarget';
+    const hit = a.follow && a.side === 'enemy'
+      ? (a.mode === 'target' ? nearEnemy : null)
+      : (targeting ? aimHoverAt(eX, eY, a.targetSession) : null);
+    if (a.playBlockedReason && a.mode !== 'drag' && !a.reasonShown) {
+      showThoughtBubble(a.playBlockedReason, true);
+      a.reasonShown = true;
     }
-    aim.targetSession.setHover(hit);
+    a.targetSession.setHover(hit);
 
     // 箭头：药水自拎起位画向指针；指向卡瞄准态自停靠位画向指针（STS2 NTargetingArrow）
-    if (!aim.follow || aim.mode === 'target' || aim.mode === 'clickTarget') {
-      const from = aim.follow ? aim.dockAnchor : { x: aim.ax, y: aim.ay };
-      let tx = e.clientX - vr.left, ty = e.clientY - vr.top;
+    if (!a.follow || a.mode === 'target' || a.mode === 'clickTarget') {
+      const from = a.follow ? a.dockAnchor : { x: a.ax, y: a.ay };
+      let tx = eX - vr.left, ty = eY - vr.top;
       if (hit) {
         const hr = (hit.kind === 'enemy' ? hit.el.querySelector('.sts-figure') : hit.el).getBoundingClientRect();
         tx = hr.left + hr.width / 2 - vr.left;
         ty = hr.top + hr.height / 2 - vr.top;
       }
-      aimArrowUpdate(from.x, from.y, tx, ty, AIM_COLOR[hit ? hit.kind : aim.side], vr);
+      aimArrowUpdate(from.x, from.y, tx, ty, AIM_COLOR[hit ? hit.kind : a.side], vr);
     }
     advanceAimFollow(performance.now()); // rAF 挂起兜底；真实耗时只计算一次
   }
   // 拆监听+恢复卡牌+清箭头/指示（打出与取消共用）
   function finishAim(a) {
+    if (aimMoveFrame) { cancelAnimationFrame(aimMoveFrame); aimMoveFrame = 0; }
     window.removeEventListener('pointermove', moveAim, true);
     window.removeEventListener('pointerup', endAim, true);
     window.removeEventListener('pointercancel', onAimPointerCancel, true);
@@ -684,8 +696,10 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
   function onAimPointerCancel(e) { if (aim && e.pointerId === aim.pointerId) cancelAim(); }
 
 function setClickSelectedUid(v) {
-  if (v == null) { cancelClickSelection(); return; }
-  clickSelectedUid = v;
+  // 仅作清除口（壳 render 在阶段切换时调用）；直接赋非 null 不会建 clickTargetSession，
+  // 会被 syncClickTargetPreviews 立刻清掉——选中态只能经 clickSelectedTarget 流程建立
+  if (v != null) return;
+  cancelClickSelection();
 }   // 壳 render 分派改经 setter（ESM 导入绑定不可赋值，2026-09-22 批5 理顺点）
 /* W3-03（2026-09-27 R2）：误指敌人红框抖动样式。battle.css 冻结 → 模块级注入
  * head（battle.view.js btFleeArmStyle 同款直接挂法）；outline 不占布局，抖动

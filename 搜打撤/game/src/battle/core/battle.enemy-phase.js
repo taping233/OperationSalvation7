@@ -8,7 +8,7 @@ import * as Combat from './combat.js';
 import { waitForFeedback, waitMs } from '../view/battle.feedback.js';
 import { demoMs } from '../runtime/battle.pace.js';
 import { battleState, G, foes, mode, drawPile, hand, consumed, grave, energy, maxEnergy, turn, pdef, pstat, busy, infusing, discovering, handSelecting, choosing, interaction, noDrawNext, floats, cardAnims, playedMovesThisTurn, allies, extraTurn, timeRune, holyRune, fireballRuneOn, swiftRune, timeSpaceRune, timeSpaceUsed, set$noDrawNext, set$energy, set$extraTurn, set$interaction, set$turn, set$busy, set$timeSpaceUsed, set$playedMartialThisTurn, set$playedMovesThisTurn, set$lastPersistAt, clearTargetHint, transitionTo, cancelTargetingState } from '../runtime/battle.runtime.js';
-import { processDelayed, accrueGrowth, resolveCardWithFeedback, syncCurseCondEquips, applyKillRewards, unplayableReason, queueCardExecution, foeIdx, addPlayerCurse, playerTakeHit, frenzyCurse, elCurse, requestBattleRender, R, alive, intentFor, drawCards, resolveFoeDefeat, sweepDead, nestPhase, grantSha, findCard, effCostOf, finish, fireTurnEndTriggers } from './battle.engine.js';
+import { processDelayed, accrueGrowth, resolveCardWithFeedback, syncCurseCondEquips, applyKillRewards, unplayableReason, queueCardExecution, foeIdx, addPlayerCurse, playerTakeHit, frenzyCurse, elCurse, requestBattleRender, R, alive, intentFor, drawCards, resolveFoeDefeat, sweepDead, nestPhase, grantSha, findCard, effCostOf, finish, fireTurnEndTriggers, fireConsumeTriggers } from './battle.engine.js';
 import { restoreAtkDown } from '../effects/effect-steps.m2.js';
 
   // 敌方步进演出节拍在 vitest 环境归零（比照 battle.engine.js 的 SURGE_WAVE_MS 先例）：
@@ -68,6 +68,11 @@ import { restoreAtkDown } from '../effects/effect-steps.m2.js';
     set$turn(turn + 1);
     foes.forEach(foe => { if (!foe.dead) foe.intent = intentFor(foe, turn); });
     set$energy(maxEnergy);
+    // 额外回合=新回合：打出计数清零（对齐 afterEnemies 新回合口径，追斩/连续射击按本回合计）；
+    // 回合成长同步累积（老板 2026-09-29 拍板：额外回合吃回合成长——充能火球等「回合开始时本牌伤害+1」照常 +1）
+    set$playedMartialThisTurn(0);
+    set$playedMovesThisTurn(0);
+    accrueGrowth();
     if ((pstat.status.natureForm || 0) > 0) set$energy(energy + 1);
     if ((pstat.status.swordForm || 0) > 0) {
       if (mode === 'boss') { const got = drawCards(1); G.log(`[[icon:sword]] <b>剑仙形态</b>：额外抽了 ${got} 张牌`, 'ok'); }
@@ -216,6 +221,7 @@ import { restoreAtkDown } from '../effects/effect-steps.m2.js';
             consumed.push(vu);
             grave.push(vu);
             G.log(`[[icon:skull]] <b>${esc(foe.name)}</b> 消耗了你手牌中的【${esc(vo ? vo.card.name : '?')}】`, 'warn');
+            if (vo) fireConsumeTriggers(vo.card, null);   // 09-29 老板拍板：被敌方消耗也算「消耗该牌时」
           }
           if (dealt > 0 && foe.phases) {
             const ph = foe.phase || 1;
@@ -339,8 +345,9 @@ import { restoreAtkDown } from '../effects/effect-steps.m2.js';
     // —— 龙巢：远古龙尊阶段检定 / 时空符文 / 火球符文 ——
     foes.forEach(f => { if (!f.dead && f.phases) nestPhase(f); });
     foes.forEach(f => {
-      if (!f.dead || !f.rotateImmune) return;
-      const keys = ['bleed', 'poison', 'silence', 'abreak', 'healban', 'burn', 'freeze'];
+      // 只重掷活着的轮换免疫单位（写反会让免疫永不生效、尸体反被赋键）
+      if (f.dead || !f.rotateImmune) return;
+      const keys = ['bleed', 'poison', 'silence', 'abreak', 'healban', 'burn'];   // 09-29 老板拍板：冰冻除外（与 lifecycle 注释对齐，原含 freeze）
       const picked = [];
       while (picked.length < 2) {
         const k = keys[Math.floor(Random.random('battle') * keys.length)];

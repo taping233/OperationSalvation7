@@ -44,6 +44,7 @@ function scanHandMoveCurses(deps) {
   for (const uid of hand) {
     const o = deps.findCard(uid);
     const card = o && o.card;
+    // 招式＝武术+法术（2026-09-29 复核维持 09-10 定版）
     if (!card || !['武术', '法术'].includes(card.type)) continue;
     const curses = (card.rules?.triggers?.onPlay || []).filter(op => op?.op === 'curse' && typeof op.curse === 'string');
     if (curses.length) {
@@ -107,7 +108,9 @@ export function resolveStealAtk(card, operation, preferredTarget, deps) {
     return true;
   }
   t._stealRestore = (t._stealRestore || 0) + stolen;
-  t._stealRestoreTurn = deps.getTurn() + duration - 1;
+  // 归还门在 enemy-phase 回合末管线（turn > _stealRestoreTurn）——duration=1（影噬「本回合偷取」缺省）
+  // 须当回合末归还，故 -2；旧文本路径 ctx.turn 恒 undefined、经 || 0 恰好同为当回合末归还
+  t._stealRestoreTurn = deps.getTurn() + duration - 2;
   deps.combat.addBlessing(deps.getPlayerStatus(), 'atkUp', stolen, duration);
   deps.log(`[[icon:arrow]] <b>${deps.esc(card.name)}</b>：偷取 <b>${deps.esc(t.name)}</b> ${stolen} 点攻击力（${duration} 回合后归还）`, 'sys');
   return true;
@@ -233,14 +236,15 @@ export function restoreAtkDown(foe) {
  */
 export function resolveExecute(card, operation, preferredTarget, deps) {
   const cap = operation.cap || {};
-  const matches = foe => (cap.atk === undefined || (foe.atk || 0) <= cap.atk) &&
+  // 词缀 BOSS 豁免（对齐文本轨 kill.minions 门槛分支；m6 数据注释「含 BOSS 排除」）
+  const matches = foe => (foe.affix ? false : true) &&
+    (cap.atk === undefined || (foe.atk || 0) <= cap.atk) &&
     (cap.maxHpBelow === undefined || (foe.maxHp || 0) < cap.maxHpBelow);
   let targets = deps.getAliveFoes().filter(matches);
+  const anchor = preferredTarget && !preferredTarget.dead ? preferredTarget : targets[0];
   if (operation.perCurseKinds === true || operation.perCurseStacks === true) {
-    const anchor = preferredTarget && !preferredTarget.dead ? preferredTarget : targets[0];
     targets = anchor ? [anchor] : [];
   }
-  const anchor = preferredTarget && !preferredTarget.dead ? preferredTarget : targets[0];
   const count = operation.perCurseStacks === true
     ? deps.combat.CURSES.reduce((sum, key) => sum + Math.max(0, +(anchor?.status?.[key] || 0)), 0)
     : operation.perCurseKinds === true ? countCurseKinds(anchor, deps) : (operation.count ?? 1);

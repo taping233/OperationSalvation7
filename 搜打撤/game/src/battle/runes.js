@@ -75,20 +75,21 @@ export function rollRune(random, opts) {
   return { kind: kind.id, name: kind.name, rarity: o.rarity || kind.rarity, attrs, desc: kind.desc };
 }
 
-/** 属性羁绊判定：attrs = 槽内符文属性的去重集合。 */
+/** 属性羁绊判定：attrs = 槽内符文属性的去重集合（3 段一律初值 false，只由 evaluateSlots
+ *  按同属性 ≥3 升位——旧写法初值=1 段判定值，standalone 导出会出现 water3===water1 的错误语义）。 */
 export function synergyOf(distinctAttrs) {
   const set = new Set(distinctAttrs || []);
   return {
     water1: set.has('水'),
-    water3: set.has('水'),      // 3水需要 3 个水属性符文（槽上限 3 = 全水）
+    water3: false,
     fire1: set.has('火'),
-    fire3: set.has('火'),
+    fire3: false,
     grass1: set.has('草'),
-    grass3: set.has('草'),
+    grass3: false,
     light1: set.has('光'),
-    light3: set.has('光'),
+    light3: false,
     dark1: set.has('暗'),
-    dark3: set.has('暗'),
+    dark3: false,
     full: set.size >= 3,
   };
 }

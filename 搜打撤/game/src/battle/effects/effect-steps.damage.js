@@ -138,24 +138,6 @@ export function damageSteps(s) {
         },
       },
       {
-        id: 'dmg.stealAtk', gate: 'fresh', label: '偷取攻击至 1 点（影噬）',
-        when: (ctx) => /偷取[^。]*?攻击/.test(ctx.desc) ? true : null,
-        run: (ctx) => {
-          const t = ctx.curseTarget;
-          if (t && !t.dead && (t.atk || 0) > 1) {
-            const stolen = t.atk - 1;
-            t.atk = 1;
-            t._stealRestore = (t._stealRestore || 0) + stolen;
-            t._stealRestoreTurn = ctx.turn;
-            t._stealRestoreTurn = ctx.turn;
-            t._stealRestoreTurn = ctx.turn;
-            combat.addBlessing(ctx.pstat, 'atkUp', stolen, 1);
-            log(`[[icon:arrow]] <b>偷取攻击</b>：<b>${esc(t.name)}</b> 的攻击力被压到 1，你获得攻击力 +${stolen}（各自 1 回合后还原）`, 'sys');
-            ctx.did = true;
-          }
-        },
-      },
-      {
         id: 'curse.extendFreeze', gate: 'fresh', label: '延长冰冻（坚冰结界）',
         when: (ctx) => ctx.desc.match(/延长[^。]*?冰冻[^。]*?(\d+)\s*回合/),
         run: (ctx, m) => {
@@ -221,17 +203,21 @@ export function damageSteps(s) {
         when: (ctx) => ctx.desc.match(/获得\s*(?:(\d+)|一)?\s*张?随机的?[‘“「]?(箭矢?|火球|药水|招式|初始攻击|杀)[’”」]?/),
         run: (ctx, m) => {
           const key = m[2] === '箭矢' ? '箭' : m[2];
+          const count = m[1] ? +m[1] : 1;   // 消费数量捕获组（旧实现恒 1 张，未来「获得 2 张」会少给）
           const pool = allCards().filter(c => c.rarity !== '衍生' && !['生物', '事件'].includes(c.type) &&
             (key === '杀' ? (c.id === 'starter-attack' || c.name === '杀' || c.name === '初始攻击')
               : key === '招式' ? c.type === '武术'
               : String(c.name || '').includes(key)));
           // 2026-09-13：卡库没有「箭」——回落到战斗令牌模板（天狼长弓的箭矢来源）
-          const c = pool.length ? pool[Math.floor(random01() * pool.length)] : (key === '箭' ? ARROW_TOKEN : null);
-          if (c) {
+          let got = 0;
+          for (let i = 0; i < count; i++) {
+            const c = pool.length ? pool[Math.floor(random01() * pool.length)] : (key === '箭' ? ARROW_TOKEN : null);
+            if (!c) { log(`[[icon:question]] 找不到随机的「${esc(key)}」（占位）`, 'warn'); break; }
             addTempCard({ ...c, cost: 0, _baseCost: c.cost || 0 });
             log(`[[icon:cards]] 获得【<b>${esc(c.name)}</b>】，其费用已变为 0`, 'loot');
-          } else log(`[[icon:question]] 找不到随机的「${esc(key)}」（占位）`, 'warn');
-          ctx.did = true;
+            got++;
+          }
+          if (got) ctx.did = true;
         },
       },
       {

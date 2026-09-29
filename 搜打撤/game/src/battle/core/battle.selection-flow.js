@@ -50,6 +50,14 @@ export function createBattleSelectionFlow({
       setCardOverride: (uid, card) => cardOverrides.set(uid, card),
       enqueueDelayed: effect => delayed.push(effect),
       swapCardCosts,
+      removeOwnedCard: uid => {   // 09-29 锦囊双向同步：施放即消耗背包母本（存档收尾自然持久化）
+        const list = G.ownedCards || [];
+        const i = list.findIndex(o => o.uid === uid);
+        if (i >= 0) {
+          const gone = list.splice(i, 1)[0];
+          G.log(`[[icon:flask]] <b>法师锦囊</b>：背包中的【${esc(gone?.card?.name || '?')}】母本已随之消耗`, 'sys');
+        }
+      },
     },
     output: { log: (message, kind) => G.log(message, kind) },
   });

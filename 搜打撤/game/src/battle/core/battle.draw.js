@@ -6,7 +6,7 @@
  */
 import { refillDrawPile } from '../bag/battle.deck.js';
 import { G, mode, hand, granted, drawPile, discard, lastDrawnUids, cardAnims,
-  ashRune, shaTransform, nextTmpSeq,
+  ashRune, shaTransform, nextTmpSeq, effectiveHandMax,
   set$lastDrawnUids } from '../runtime/battle.runtime.js';
 import { splitEffectClauses } from '../effects/battle.effects.js';
 import { esc } from '../../core/shared.js';
@@ -34,10 +34,24 @@ function drawCards(n) {
         G.log(`[[icon:recycle]] 弃牌堆 ${recycled} 张洗回牌库（墓地不参与洗回）`, 'dim');
       }
       if (!drawPile.length) break;
-      if (hand.length >= R().battleHandMax) break;
       const uid = drawPile.pop();
       const entry = findCard(uid);
       const parts = entry ? splitEffectClauses(String(entry.card.desc || '')) : null;
+      // 手牌满：灰烬符文「放不下的招式直接释放」（2026-09-16 定版）——直释不占手牌，继续抽；
+      // 其余情况把牌放回库顶并停止抽牌（与旧版 pop 前 break 等价：库序不变）。
+      // 上限门必须在 pop 之后判——旧写法 pop 前 break 且直释阈值硬编码 9 与上限 8 差一张，
+      // 两条路径互相打架：上限永远先触发，灰烬符文整条效果失效。
+      // entry 可为 null（uid 无法解析，同函数 118/150 行口径）：2026-09-28 审计补漏
+      if (hand.length >= effectiveHandMax(R().battleHandMax)) {
+        if (ashRune && entry && ['武术', '法术'].includes(entry.card.type)) {
+          G.log('[[icon:fire]] <b>灰烬符文</b>：手牌已满，直接释放【' + esc(entry.card.name) + '】', 'sys');
+          resolveCard(entry.card, alive()[0] || null, false, 0);
+          got++;
+          continue;
+        }
+        drawPile.push(uid);
+        break;
+      }
       // M2：结构化「抽到时」触发（rules.triggers.onDraw）——与文本抽到即施放同门：直接结算，不占手牌
       if (entry?.card?.rules?.triggers?.onDraw?.length) {
         discard.push(uid);
@@ -60,14 +74,7 @@ function drawCards(n) {
         if (!alive().length) break;
         continue;
       }
-      // 灰烬符文：手牌满 9 张时，放不下的招式直接释放（2026-09-16 Item 定版）
-      // entry 可为 null（uid 无法解析，同函数 118/150 行口径）：2026-09-28 审计补漏
-      if (ashRune && hand.length >= 9 && entry && ['武术', '法术'].includes(entry.card.type)) {
-        G.log('[[icon:fire]] <b>灰烬符文</b>：手牌已满，直接释放【' + esc(entry.card.name) + '】', 'sys');
-        resolveCard(entry.card, alive()[0] || null, false, 0);
-        got++;
-        continue;
-      }
+      // 灰烬直释已并入上方手牌满判定（阈值与上限门同源）——此处仅剩正常入手
       hand.push(uid);
       lastDrawnUids.push(uid);
       cardAnims.push({ kind: 'draw', uid, name: entry ? entry.card.name : '' });
@@ -118,7 +125,7 @@ function deckDraw({ n, type }) {
       while (drawPile.length && moved < n) {
         const uid = drawPile.pop();
         const o = findCard(uid);
-        if (o && o.card.type === type && hand.length < R().battleHandMax) {
+        if (o && o.card.type === type && hand.length < effectiveHandMax(R().battleHandMax)) {
           hand.push(uid);
           moved++;
           lastDrawnUids.push(uid);
@@ -126,10 +133,11 @@ function deckDraw({ n, type }) {
         }
         else rest.push(uid);
       }
-      drawPile.push(...rest);
+      // rest 按 pop 序（顶→底）累积，直接 push 会把相对顺序翻转（原顶牌沉底）；reverse 归位
+      drawPile.push(...rest.reverse());
     }
+    const pool = SDT.Cards.all().filter(c => c.type === type && c.rarity !== '衍生' && !['生物', '事件'].includes(c.type));
     while (moved < n) {
-      const pool = SDT.Cards.all().filter(c => c.type === type && c.rarity !== '衍生' && !['生物', '事件'].includes(c.type));
       if (!pool.length) break;
       addTempCard(pool[Math.floor(Random.random('battle') * pool.length)]);
       moved++;

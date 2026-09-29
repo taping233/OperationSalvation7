@@ -1,8 +1,9 @@
 /* ============================================================
  * battle.triggers.m2.js —— 结构化时点触发器 runner（M2，2026-09-27）
  *
- * 承接 rules.triggers 的七个时点容器（onTurnStart/onTurnEnd/onBattleStart/
- * onConsume/onDraw/onKill/onDamaged/onPlayCard）与容器级 duration（持续 N 次）。
+ * 承接 rules.triggers 的时点容器与容器级 duration（持续 N 次）。
+ * 登记型 8 时点（TRIGGER_POINTS）：onTurnStart/onTurnEnd/onBattleStart/onKill/
+ * onDamaged/onPlayCard/onFreezeDealt/onAcquire；onDraw/onConsume 为直调不登记。
  *
  * 设计（对齐文本路径既有宿主）：
  *   - 打出卡 / 穿戴装备时 registerCard 登记（exec-play / battle.equipment.js 挂点）；

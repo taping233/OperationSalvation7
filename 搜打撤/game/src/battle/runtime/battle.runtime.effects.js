@@ -71,6 +71,11 @@ export function set$sealDone(v) { sealDone = v; }
 export function set$playerCurseImmune(v) { playerCurseImmune = v; }
 export function set$allSpellsInfused(v) { allSpellsInfused = v; }
 
+/* 有效手牌上限：灰烬符文（runes.js 定版「你的手牌上限为 9，手牌中放不下的招式会直接释放」）
+ * 挂上时为 9，否则用规则配置的 battleHandMax。消费点：drawCards 上限门/灰烬直释阈值、
+ * deckDraw 手牌余量、keepInHand 回手——四点必须同源，否则上限与直释阈值互相打架。 */
+export function effectiveHandMax(ruleHandMax) { return ashRune ? 9 : ruleHandMax; }
+
 /* —— 域内聚合接口（2026-09-25 状态袋打薄第 3 批）：散 set$Xxx 调用收敛到本域 ——
  * 只聚「整组重置/整段回填/按 kind 写旗」点；规则中途回写（打出侧登记、消耗触发等）
  * 条件与日志交织，保持散调，不做伪聚合。 */
