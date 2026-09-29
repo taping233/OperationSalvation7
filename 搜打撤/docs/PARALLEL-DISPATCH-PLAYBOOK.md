@@ -15,6 +15,14 @@
 - 主线 node_modules 有 vite/vitest、**无 puppeteer**；`git worktree remove` 对中文目录报 `Invalid argument`，手动删 + `git worktree prune` 可解。
 - 实机观察用**隔离副本**（HMR 整页刷新会杀实机会话）：`.exp-observe` 式纯副本 + 手动同步改文件；junction 跨根会让 Vite 解析失败；改副本内文件也触发重启，跑局前冻结编辑。
 
+## 上下文打包（repomix）
+
+- 给子代理喂大上下文用 repomix（已全局安装，`repomix --version` 验证）：
+  `repomix --include "game/src/battle/**" --style xml --output <产物路径>`（battle 域约 850KB 实测）
+- 产物给子代理当只读知识包，**不进 git**（写 .tmp 或系统临时目录）；属地纪律不变——
+  子代理仍只改任务书属地内的文件，打包只是省它逐文件 rg 的探查成本。
+- 全仓打包前先剔除 evidence/报告类目录（`--ignore`），避免把带日期记录喂进上下文。
+
 ## 协作纪律
 
 - 跨域协作用**编号请求协议**（EXP/CODE/ART-xxx）：各线各记各文件、保存窗口预告、联合验证窗口（先例：`docs/zcode-dual-track-9h-20260927/` 三文件制）。

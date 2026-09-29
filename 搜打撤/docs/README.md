@@ -19,6 +19,7 @@
 | 音频 | [音频系统](audio-system.md) | — |
 | Agent 接口 / 策略 | [接口协议](agent-protocol.md)、[策略迭代手册](agent-iteration-playbook.md) | — |
 | 并行会话 / 派工 | [热点登记](PARALLEL-REGISTRY.md)、[待拍板台账](PENDING.md)、[派工手册](PARALLEL-DISPATCH-PLAYBOOK.md) | — |
+| 特性规格 / 流程 | [特性规格流程](SPEC-PROCESS.md)（spec→plan→tasks）、[UI Token 体系提案](UI-TOKEN-SYSTEM-PROPOSAL.md)（下次大修参照） | — |
 | 叙事 / 事件 | [设计入口](design.md)、`narrative/events.ink` | [游戏全书](game-compendium.md)（生成物，不手改） |
 | 文档增删 / 归档 | [状态入口](STATUS.md) | [归档审阅与执行记录](DOCUMENT-ARCHIVE-AUDIT-2026-09-28.md)（移动或删除前必读） |
 

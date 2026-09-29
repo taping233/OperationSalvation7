@@ -7,6 +7,8 @@
 
 ## 活跃登记
 
+| Friday（记忆v2会话） | docs/SPEC-PROCESS.md、docs/UI-TOKEN-SYSTEM-PROPOSAL.md、docs/README.md、docs/PARALLEL-DISPATCH-PLAYBOOK.md | GitHub 调研三项落地（repomix+spec 流程+UI token 方案），本批提交后销账 | 09-29 深夜 | 在途 |
+
 | 会话/来源 | 属地（文件/端口/工作树） | 事项 | 登记时间 | 状态 |
 |---|---|---|---|---|
 | Friday（照相馆性能专项会话） | game/css/expedition-library.css、game/src/hub/game.cardslib.page.js、docs/PHOTOLIB-PERF-TASK-2026-09-29.md、docs/evidence/photolib-perf-task-2026-09-29/、worktree .photolib-acc（2bcfc23+上述两文件）、端口 8137（隔离验收服）、8138（工作树源码服，已污染勿用） | 照相馆性能专项二期：壳常驻+IO 窗口化重构，等老板 8137 验收 | 09-29 晚 | 在途 |
