@@ -7,7 +7,6 @@
 
 ## 活跃登记
 
-| Friday（记忆v2会话） | docs/SPEC-PROCESS.md、docs/UI-TOKEN-SYSTEM-PROPOSAL.md、docs/README.md、docs/PARALLEL-DISPATCH-PLAYBOOK.md | GitHub 调研三项落地（repomix+spec 流程+UI token 方案），本批提交后销账 | 09-29 深夜 | 在途 |
 
 | 会话/来源 | 属地（文件/端口/工作树） | 事项 | 登记时间 | 状态 |
 |---|---|---|---|---|
@@ -27,3 +26,4 @@
 | Friday（记忆v2会话） | 根 AGENTS.md、docs/README.md、本文件、docs/PENDING.md、docs/PARALLEL-DISPATCH-PLAYBOOK.md、docs/STATUS.md、记忆 MEMORY/ARCHIVE | 工作流标准化七项+落库双提交（0bac1f3+643434f） | 09-29 深夜，已完成 |
 | Friday（同上） | game/src 6 文件+tests/run-architecture+knip.json、docs/STATUS+PENDING | knip A 类死代码清理双提交（20c4e25+041fd65） | 09-29 深夜，已完成 |
 | Friday（同上） | ui/terminal-settlement.js 新建、death/menu/battle.resolution、evidence/jscpd-2026-09-29/、STATUS+PENDING #12 | jscpd 档一收敛双提交（506ccea+落档） | 09-29 深夜，已完成 |
+| Friday（同上） | SPEC-PROCESS/UI-TOKEN-SYSTEM-PROPOSAL 新建、README 路由、派工手册 repomix 节 | GitHub 调研三项落地（5b3aef7） | 09-29 深夜，已完成 |
