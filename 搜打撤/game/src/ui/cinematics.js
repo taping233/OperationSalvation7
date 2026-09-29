@@ -52,6 +52,8 @@ export const cinematicsMethods = {
     if (this._cardGetShowing) return;
     this._cardGetShowing = true;
     const showNext = () => {
+      // 测试环境拆除后定时器仍触发（发卡队列 close 后 100ms 续棒定时器）：document 已删时安全短路；浏览器内不可达，行为逐字不变。
+      if (typeof document === "undefined") return;
       const next = this._cardGetQueue.shift();
       if (!next) { this._cardGetShowing = false; return; }
       if ((!!(SDT.game && SDT.game.runActive)) !== next.context.runActive) {

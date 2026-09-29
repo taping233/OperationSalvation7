@@ -268,26 +268,36 @@ import { bagSlots } from './game.bag.bridge.js';
     if (win !== true) {   // 撤退：不发宝箱、不发事件奖励
       game.pendingEventLoot = null;
       // 2026-09-07 留言：撤退要有文案和动画——复用启程过渡（撤离点场景）
-      if (settlement.phase === 'pocket') await showRunTransition({
-        tone: 'exit', asset: 'scene-extract-bg',
-        eyebrow: 'TACTICAL RETREAT', title: '全身而退',
-        detail: opts.isBoss ? '你撤出了 BOSS战 · 已结算的战利品完好保存' : '撤出战斗 · 打出过的卡照常结算',
-        duration: 1050,
-      });
+      if (settlement.phase === 'pocket') {
+        const shown = await showRunTransition({
+          tone: 'exit', asset: 'scene-extract-bg',
+          eyebrow: 'TACTICAL RETREAT', title: '全身而退',
+          detail: opts.isBoss ? '你撤出了 BOSS战 · 已结算的战利品完好保存' : '撤出战斗 · 打出过的卡照常结算',
+          duration: 1050,
+        });
+        // M1（U10 2026-09-29）：resolve(false)=过场非当前（被新过场顶替/上下文失效/测试环境拆除），
+        // 屏幕已易主——静默终止本续流，不再 UI.log/续结算（teardown 后此处续流摸 document 抛错的根因）。
+        // showRunTransition 契约上 resolve 值严格为布尔（scenes.js 仅 resolve(false)/resolve(true)），故用 === false 精判。
+        if (shown === false) return false;
+      }
       if (!sameRun()) return false;
       if (settlement.phase === 'pocket') UI.log('[[icon:runner]] ' + (opts.isBoss ? '你撤出了 BOSS战' : '你撤出了战斗（打出过的卡照常结算）'), 'sys');
       settlement.phase = 'saving';
       settle();
       return;
     }
-    if (settlement.phase === 'pocket') await showRunTransition({
-      tone: opts.isBoss ? 'altar' : 'battle',
-      asset: 'scene-battle-bg',
-      eyebrow: opts.isBoss ? 'TARGET ELIMINATED' : 'AREA SECURED',
-      title: opts.isBoss ? '首脑已击破' : '战斗胜利',
-      detail: opts.isBoss ? '污染反应正在消退 · 准备整理战利品' : '威胁解除 · 正在回收战利品',
-      duration: opts.isBoss ? 1350 : 1050,
-    });
+    if (settlement.phase === 'pocket') {
+      const shown = await showRunTransition({
+        tone: opts.isBoss ? 'altar' : 'battle',
+        asset: 'scene-battle-bg',
+        eyebrow: opts.isBoss ? 'TARGET ELIMINATED' : 'AREA SECURED',
+        title: opts.isBoss ? '首脑已击破' : '战斗胜利',
+        detail: opts.isBoss ? '污染反应正在消退 · 准备整理战利品' : '威胁解除 · 正在回收战利品',
+        duration: opts.isBoss ? 1350 : 1050,
+      });
+      // M1（U10 2026-09-29）：同撤退路径——非当前过场后静默终止，原实现会继续 UI.log 摸 document。
+      if (shown === false) return false;
+    }
     if (!sameRun()) return false;
     if (settlement.phase === 'pocket') settlement.phase = 'transitioned';
     if (settlement.phase === 'transitioned') {

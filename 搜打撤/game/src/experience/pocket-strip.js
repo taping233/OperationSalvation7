@@ -88,6 +88,8 @@ function setCell(el, key, text) {
 }
 
 function tick() {
+  // 测试环境拆除后定时器仍触发（600ms 永久 interval 无清理通道）：window 已删时安全短路；浏览器内不可达，行为逐字不变。
+  if (typeof window === "undefined") return;
   const SDT = window.SDT;
   const game = SDT && SDT.game;
   if (!game) return;

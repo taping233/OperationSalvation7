@@ -713,7 +713,8 @@ function closeLibPage() {
   // 摘 cardlib-open 必须等淡出（210ms）结束：提前摘会让 #overlay * 的禁动画规则
   // 集体解除、未关闭的几百张卡同时重播入场动画（09-23 留言「退出照相馆莫名闪烁」根因）；
   // 期间若重新打开照相馆（cardPageOpen 翻真）则跳过，避免摘掉新会话的类
-  setTimeout(() => { if (!cardPageOpen) document.body.classList.remove('cardlib-open'); }, 240);
+  // 测试环境拆除后定时器仍触发（240ms 淡出摘类定时器无清理通道）：document 已删时安全短路；浏览器内不可达，行为逐字不变。
+  setTimeout(() => { if (typeof document === "undefined") return; if (!cardPageOpen) document.body.classList.remove('cardlib-open'); }, 240);
   game.state = cardPagePrevState || 'idle';   // 从标题界面打开则回到标题，其余维持原 'idle' 行为
   cardPagePrevState = null;
   UI.refresh(game);

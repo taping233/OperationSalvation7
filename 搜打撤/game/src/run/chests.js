@@ -387,6 +387,8 @@ import { turboMs } from '../agent/agent.turbo.js';
   function scheduleRevealSfx() {
     (cur.cards || []).forEach((c, i) => {
       setTimeout(() => {
+        // 测试环境拆除后定时器仍触发（逐卡揭晓音效定时器无清理通道）：document 已删时安全短路；浏览器内不可达，行为逐字不变。
+        if (typeof document === "undefined") return;
         const hand = document.querySelector('.bt-hand');
         if (!hand) return;
         SDT.Sound.sfx('reveal');
