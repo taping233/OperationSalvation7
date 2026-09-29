@@ -9,7 +9,6 @@
 
 | 会话/来源 | 属地（文件/端口/工作树） | 事项 | 登记时间 | 状态 |
 |---|---|---|---|---|
-| Friday（记忆v2会话） | docs/STATUS.md、记忆 MEMORY/ARCHIVE | 工作流七项落库双提交+落档 | 09-29 深夜 | 在途 |
 | （他会在途，勿动）未知会话 | game/css/expedition-library.css、game/src/hub/game.cardslib.page.js | 两文件新 M，未登记，疑似照相馆/cardslib 线开工 | 09-29 深夜发现 | 在途 |
 
 ## 无主物品（只记录勿动，等认领/处置）
@@ -23,4 +22,4 @@
 
 | 会话/来源 | 属地 | 事项 | 时段 |
 |---|---|---|---|
-| Friday（记忆v2会话） | 根 AGENTS.md、docs/README.md、本文件、docs/PENDING.md、docs/PARALLEL-DISPATCH-PLAYBOOK.md、记忆 MEMORY.md | 工作流标准化七项落地 | 09-29 深夜，已完成 |
+| Friday（记忆v2会话） | 根 AGENTS.md、docs/README.md、本文件、docs/PENDING.md、docs/PARALLEL-DISPATCH-PLAYBOOK.md、docs/STATUS.md、记忆 MEMORY/ARCHIVE | 工作流标准化七项+落库双提交（0bac1f3+643434f） | 09-29 深夜，已完成 |
