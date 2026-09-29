@@ -18,6 +18,7 @@
 | UI / 美术 / 素材 | [人物参考](character-bible/README.md)、[界面美术指南入口](UI-ART-OVERHAUL-GUIDE.md)、[运行素材说明](../game/assets/README.md) | [验收截图](evidence/game-shots/)、[预览页面](previews/README.md) |
 | 音频 | [音频系统](audio-system.md) | — |
 | Agent 接口 / 策略 | [接口协议](agent-protocol.md)、[策略迭代手册](agent-iteration-playbook.md) | — |
+| 并行会话 / 派工 | [热点登记](PARALLEL-REGISTRY.md)、[待拍板台账](PENDING.md)、[派工手册](PARALLEL-DISPATCH-PLAYBOOK.md) | — |
 | 叙事 / 事件 | [设计入口](design.md)、`narrative/events.ink` | [游戏全书](game-compendium.md)（生成物，不手改） |
 | 文档增删 / 归档 | [状态入口](STATUS.md) | [归档审阅与执行记录](DOCUMENT-ARCHIVE-AUDIT-2026-09-28.md)（移动或删除前必读） |
 
@@ -28,6 +29,7 @@
 | 玩法与设计 | [设计入口](design.md)、[现行规则](rules.md)、[术语](terminology.md)、[后续路线图](roadmap.md)、[版本记录](changelog.md) |
 | 工程与质量 | [架构](architecture.md)、[开发指南](development.md)、[存档契约](save-format.md)、[质量门](quality-gates.md)、[性能方法与历史基准](performance.md)、[音频系统](audio-system.md) |
 | Agent | [接口协议](agent-protocol.md)、[策略迭代手册](agent-iteration-playbook.md) |
+| 协作流程 | [热点登记](PARALLEL-REGISTRY.md)（改共享文件/长任务先登记）、[待拍板台账](PENDING.md)（挂账唯一真源）、[并行派工手册](PARALLEL-DISPATCH-PLAYBOOK.md) |
 | 美术与素材 | [人物参考](character-bible/README.md)、[界面美术指南入口](UI-ART-OVERHAUL-GUIDE.md)、[运行素材说明](../game/assets/README.md) |
 | 生成数据手册 | [游戏全书](game-compendium.md)：由 `scripts/generate-compendium.mjs` 生成，保留原路径，不手改 |
 | 卡牌规格 | [规格与决策入口](cards/README.md)；[迁移矩阵](M-BATCH-MATRIX.md)和[排除清单](M-BATCH-EXCLUSIONS.md)因测试固定路径留在根目录 |
