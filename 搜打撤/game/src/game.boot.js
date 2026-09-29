@@ -150,6 +150,8 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
         return;
       }
       if (e.key === 'Escape' && cardPageLoading) {
+        // 输入法组合中（keyCode 229）：Esc 是取消拼音组合，不是关浮层
+        if (e.isComposing || e.keyCode === 229) return;
         e.preventDefault();
         e.stopImmediatePropagation();
         closeCardPageTop();
@@ -254,6 +256,8 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
     // 卡牌大页面：Esc 关闭 / 点击深色背景关闭
     // （用 click 而非 mousedown 关背景，保证关闭前 mouseup 仍处于 modal 态，不会误触格子编辑）
     window.addEventListener('keydown', (e) => {
+      // 输入法组合中（keyCode 229）：Esc 是取消拼音组合，不是关大页
+      if (e.isComposing || e.keyCode === 229) return;
       if (e.key === 'Escape' && !e.defaultPrevented && cardPageOpen && !cardPageLoading && !UI.el.overlay.hidden) closeCardPageTop();
     });
     UI.el.overlay.addEventListener('click', (e) => {

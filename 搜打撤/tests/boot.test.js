@@ -475,4 +475,55 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     document.getElementById('overlay')?.setAttribute('hidden', '');
     game.state = 'title';
   });
+
+  // IME 家族守卫（game.boot.js 两处 Esc 分支）：中文输入法组合态按 Esc 是取消候选词，
+  // 不得误关卡牌大页 / 不得打断加载态强关逻辑。定式对齐 ui.js:79。
+  it('卡牌大页 Esc 关闭与加载态强关：输入法组合态（isComposing / keyCode 229）不误触', { timeout: 15_000 }, async () => {
+    const cardsLib = await import('../game/src/hub/game.cardslib.js');
+    const { game } = await import('../game/src/run/game.session.js');
+    game.state = 'title';
+    const overlay = document.getElementById('overlay');
+
+    // 大页打开（btnCardLib → 加载完成 → cardPageOpen 且 overlay 可见）
+    document.getElementById('btnCardLib').click();
+    await waitFor(() => document.querySelector('.card-library-page'), 15000);
+    expect(cardsLib.cardPageOpen).toBe(true);
+    expect(cardsLib.cardPageLoading).toBe(false);
+    expect(overlay.hidden).toBe(false);
+
+    // 玩家真实漏网链：焦点在卡牌库搜索框（INPUT）里打中文，按 Esc 取候选词。
+    // 焦点守卫（boot.js:158）令 moveCancel 不触发，Esc 只由大页关闭分支（boot.js:257）响应。
+    const search = document.getElementById('cardSearch');
+    expect(search).not.toBeNull();
+    search.focus();
+
+    // ① 组合态 Esc（isComposing=true）：大页不关
+    search.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, isComposing: true }));
+    expect(cardsLib.cardPageOpen).toBe(true);
+    expect(document.querySelector('.card-library-page')).not.toBeNull();
+
+    // ③ keyCode=229 合成：同样不关
+    search.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, keyCode: 229 }));
+    expect(cardsLib.cardPageOpen).toBe(true);
+    expect(document.querySelector('.card-library-page')).not.toBeNull();
+
+    // ② 非组合态普通 Esc：照常关闭（非 IME 场景行为不变；关闭带收场动画，用条件等待）
+    search.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+    expect(cardsLib.cardPageOpen).toBe(false);
+    await waitFor(() => !document.querySelector('.card-library-page'), 3000);
+    expect(overlay.hidden).toBe(true);
+
+    // 加载态分支（boot.js 152）同族守卫：组合态 Esc 不强关、不打断加载
+    document.getElementById('btnCardLib').click();
+    expect(cardsLib.cardPageLoading).toBe(true);
+    window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, isComposing: true }));
+    window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, keyCode: 229 }));
+    expect(cardsLib.cardPageLoading).toBe(true);
+    expect(cardsLib.cardPageOpen).toBe(true);
+    // 非组合态照旧强关（现状语义保持）
+    window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+    expect(cardsLib.cardPageLoading).toBe(false);
+    expect(cardsLib.cardPageOpen).toBe(false);
+    await waitFor(() => !document.querySelector('.card-library-page') && overlay.hidden, 3000);
+  });
 });
