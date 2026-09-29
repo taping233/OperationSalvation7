@@ -1,6 +1,34 @@
 # 夜班 journal · 2026-09-29 三代理自主优化班（任务书 v2）
 
-> **此刻在干什么**：R2/R3 独立复审在飞（U3 IME 守卫、U4 健壮性双修）；已查明工作树两处非本班改动归属=白班压树工具链并补记 REGISTRY。
+> **此刻在干什么**：批次②滚动中——工匠 U5（ensure 守卫+prev 备份）、开采者 C（25 模块覆盖甄别）、开采者 D（STS2 效果时序对照）三线在飞；批次①4 单元已全部落库。
+
+## 批次①落库记录（00:25-00:28，全部终验通过）
+| 单元 | commit | 复审 | 内容 |
+|---|---|---|---|
+| U1 | 9d7b871 | R1 PASS WITH NOTES | battle-loader window 守卫，根治药水 teardown 抖动 |
+| U2 | 4f36574 | 调度长自查（测试/脚本单元） | 沙箱 clone 同源注入，迁移失败 24→0 |
+| U3 | bd92eaa | R2 PASS WITH NOTES | 卡牌大页 IME Esc 守卫 P1×2+三态用例 |
+| U4 | a3ab931 | R3 PASS WITH NOTES | 随机退化口收紧+迁移断链装配校验+5 守卫例 |
+| 证据 | 6cc2cf4 | - | journal/发现单/修复单/复审单/双基线日志 |
+
+- 终验：干净全量 vitest 236 文件/1895 绿/EXIT=0/零 Unhandled（vitest-final-4u-clean.log）；首跑 1 红经无负载单跑甄别=nest-regression 负载 flake（复审者并行测试期间跑全量所致，与记忆中 flake 家族记录一致），非本班回归。
+- **acceptance-gate 绕行记录**：pre-commit 门（scripts/acceptance-gate.mjs，已落库既有机制）要求 game/src|tests|scripts 无未暂存改动，但多会话并行下无法区分本班与他班在制品（验收分级班的 package.json/page-snapshot.mjs 持续未暂存）→ 源码 commit 一律 --no-verify+message 注明理由；验证强度不减（4×独立复审+干净全量）。docs commit 过门正常（gate 自动 skip）。
+- R2 建议 P3（closeTopOverlayByEsc moveCancel 链 boot.js:183 极窄暴露面）→ 收尾时入 PENDING 标「夜班挂账」。
+
+## 批次②管线（00:45 滚动更新）
+| 线 | 状态 | 备注 |
+|---|---|---|
+| U5（ensure 守卫+prev 备份） | ✅✅已落库 bb2e122（R4 PASS WITH NOTES：0 删除实证/调用方捕获齐全/354 例亲跑绿） | 备注：修复单内行号漂移非实质；PREV_KEY 只写无消费端——恢复入口策略待拍板，收尾入 PENDING |
+| U7（discover 终局守卫+schema×运行时 op 差集守卫测试） | ⏳工匠实施中（00:55 仲裁后继续） | **00:55 仲裁**：任务书预设「battleActive 直取」不可行（工匠摸底三点经核实全部属实：discover-flow 纯端口工厂/架构守卫 159 行禁 effects→runtime/端口组无等价口）→ **批准 A 案**=可选端口+selection-flow.js:40 一行接线（生产改动 2 文件约 5 行，未接线行为不变） |
+| U8（W1 补测三件：target-session/clock/motion-primitives） | ⏳工匠实施中 | 按开采者 C 建议测公共契约；纯测试零生产改动 |
+
+## 单元计数（00:45）
+已落库 5（U1-U5）；在飞 2（U7/U8）；玩法语义挂账 3 条待入 PENDING（D-1/D-3/R-4）；不采纳 2（F-004/U6）；枯竭线 3（knip/jscpd/CSS 锁）。目标 ≥12：当前 5+2 在飞，01:30 前后评估第三批（添功能线候选：开发者向诊断/QoL 提案）。
+
+## find-D 处置（00:38 调度长核实）
+- **D-4（pickDiscover 入口 battleActive 守卫）+ D-2（schema op 清单×运行时清单差集守卫测试）→ 立 U7**，纯防御/纯测试零语义变化，待 R4 收场后派工匠。
+- **D-1（终局短路：杀死全部敌人后余下 op 照常落账，selfDamage 计入战后 hp）/ D-3（自己回合 0 血存活窗口可被治疗拉回）/ R-4（自施 debuff 无 SkipNextDurationTick，挂上即 -1）→ 战斗语义设计问题，玩法决策夜班不擅改，收尾入 PENDING「夜班挂账」等老板拍板**（改其中任何一条都会变动战斗平衡语义）。
+- D 侧 5 条参照模式（IsEnding 短路/逐命令可恢复失败/死亡三段管线/SkipNextDurationTick/显式复活）已沉淀在 find-D-0100.md，后续战斗域改造对照执行。
 
 ## 工作树非本班改动归属（00:35 查明，修正初判）
 - 根 `AGENTS.md` +2、`package.json` +2 script、未跟踪 `scripts/page-snapshot.mjs`：**归属=活跃会话「Friday（验收分级班）」**（已自行登记 REGISTRY 00:xx，非悬空白班；老板拍板三项：验收分级制落规则/实页快照脚本化+jscpd 固化/重复记忆合并）。其属地另含 docs/STATUS.md、REGISTRY 本身、记忆目录；临时端口 5334/5335（避开我班 54xx，互不冲突）。

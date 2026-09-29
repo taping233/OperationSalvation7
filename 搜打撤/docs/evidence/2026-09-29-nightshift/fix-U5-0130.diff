@@ -1,0 +1,121 @@
+diff --git a/搜打撤/game/src/battle/battle-loader.js b/搜打撤/game/src/battle/battle-loader.js
+index ecfb462..cfb921f 100644
+--- a/搜打撤/game/src/battle/battle-loader.js
++++ b/搜打撤/game/src/battle/battle-loader.js
+@@ -31,11 +31,19 @@ export function captureBattleContext(game, getSlot = () => window.SDT?.Base?.slo
+ }
+ 
+ async function ensureBattleReady() {
++  // window 不存在 = 宿主环境已拆除（如测试 teardown 后挂起的调用仍触发）。
++  // 与 captureBattleContext（9d7b871）同一定式：给出可预期的失败而非裸 window
++  // 的 ReferenceError。本函数为 async，throw 即 rejection，调用方
++  // （startBattle try / 选角页 .catch / 菜单外层 try）均有捕获姿势。
++  // 浏览器内此分支不可达，行为逐字不变。
++  if (typeof window === "undefined") throw new Error('战斗模块加载失败：宿主环境已拆除（window 不存在）');
+   const ready = window.SDT?.Battle;
+   if (ready?.start && ready?.restore) return ready;
+   if (!battlePromise) {
+     performance.mark?.('sdt:battle-load-start');
+     battlePromise = import('./view/battle.view.js').then(() => {
++      // 动态 import 期间环境被拆除：注册结果不可读，同样给可读 Error 而非裸引用。
++      if (typeof window === "undefined") throw new Error('战斗模块加载失败：宿主环境已拆除（window 不存在）');
+       const battle = window.SDT?.Battle;
+       if (!battle?.start || !battle?.restore) throw new Error('战斗模块加载后未注册 SDT.Battle');
+       performance.mark?.('sdt:battle-load-end');
+diff --git a/搜打撤/game/src/hub/game.storage.js b/搜打撤/game/src/hub/game.storage.js
+index 0110f12..efba7a8 100644
+--- a/搜打撤/game/src/hub/game.storage.js
++++ b/搜打撤/game/src/hub/game.storage.js
+@@ -5,6 +5,9 @@ const RUN_KEY = index => `sdt-save-v2-slot${index}`;
+ const OLD_SAVE_KEY = 'sdt-save-v1';
+ // 坏档备份键：读档解析失败时原串转存于此，避免被下一次 write 无声覆盖
+ const CORRUPT_KEY = index => `sdt-run-${index}-corrupt`;
++// 上一版好档备份键：write 覆盖主档前尽力转存原串（写基线只防并发不防逻辑坏档，
++// 序列化成功但内容错时唯一好档会直接丢失）。尽力而为，备份失败绝不阻断主写。
++const PREV_KEY = index => `sdt-run-${index}-prev`;
+ const TX_KEY = index => `sdt-tx-v1-slot${index}`;
+ const txPending = index => { try { return localStorage.getItem(TX_KEY(index)) !== null; } catch { return true; } };
+ let runIdNonce = 0;
+@@ -143,6 +146,8 @@ const RunStorage = Object.freeze({
+       const identity = persistedIdentity || value?._r2 || { runId: newRunId(index), revision: -1 };
+       const nextIdentity = { runId: identity.runId, revision: Math.max(-1, Number(identity.revision) || 0) + 1 };
+       const nextRaw = JSON.stringify({ ...value, _r2: nextIdentity, version: SAVE_VERSION });
++      // 覆盖前把当前好档原串转存 prev 键（尽力而为：失败不影响本次主写）
++      if (currentRaw) { try { localStorage.setItem(PREV_KEY(index), currentRaw); } catch { /* 尽力而为 */ } }
+       localStorage.setItem(RUN_KEY(index), nextRaw);
+       writeBaseline.set(index, nextRaw);
+       writeIssues.delete(index);
+@@ -156,6 +161,7 @@ const RunStorage = Object.freeze({
+     try {
+       localStorage.removeItem(RUN_KEY(index));
+       localStorage.removeItem(CORRUPT_KEY(index));
++      try { localStorage.removeItem(PREV_KEY(index)); } catch { /* 尽力而为，不悬挂 */ }
+     } catch { writeIssues.set(index, 'STORAGE'); return false; }
+     reader.invalidate(index);
+     writeBaseline.delete(index);
+diff --git a/搜打撤/tests/e4-battle-loader.test.js b/搜打撤/tests/e4-battle-loader.test.js
+index d7f7205..af09fa1 100644
+--- a/搜打撤/tests/e4-battle-loader.test.js
++++ b/搜打撤/tests/e4-battle-loader.test.js
+@@ -121,3 +121,30 @@ describe('E4 battle lazy-load request ownership', () => {
+     expect(battle.start).toHaveBeenCalledExactlyOnceWith(game, ['retry'], {});
+   });
+ });
++
++// U5-a 守卫（2026-09-29 夜班）：宿主环境拆除后 ensure 路径必须给可预期失败（reject
++// 携带可读 Error），而非裸 window 引用的 ReferenceError（对齐 9d7b871 的谓词守卫定式）。
++describe('E4 battle-loader ensure survives torn-down host', () => {
++  afterEach(() => { vi.unstubAllGlobals(); });
++
++  it('rejects with a readable Error (not a bare window ReferenceError) when window is gone', async () => {
++    vi.stubGlobal('window', undefined);
++    const { ensureBattleReady } = await import('../game/src/battle/battle-loader.js');
++    const outcome = await ensureBattleReady().then(() => 'resolved', error => error);
++    expect(outcome).toBeInstanceOf(Error);
++    expect(outcome.name).not.toBe('ReferenceError');
++    expect(outcome.message).toContain('宿主环境已拆除');
++  });
++
++  it('rejects with a readable Error when the host is torn down during the dynamic import', async () => {
++    vi.doMock('../game/src/battle/view/battle.view.js', async () => {
++      vi.stubGlobal('window', undefined); // 模块装载完成的瞬间宿主被拆（teardown 时序）
++      return {};
++    });
++    const { ensureBattleReady } = await import('../game/src/battle/battle-loader.js');
++    const outcome = await ensureBattleReady().then(() => 'resolved', error => error);
++    expect(outcome).toBeInstanceOf(Error);
++    expect(outcome.name).not.toBe('ReferenceError');
++    expect(outcome.message).toContain('宿主环境已拆除');
++  });
++});
+diff --git a/搜打撤/tests/save-compat.test.js b/搜打撤/tests/save-compat.test.js
+index 2e3ebf2..74238a2 100644
+--- a/搜打撤/tests/save-compat.test.js
++++ b/搜打撤/tests/save-compat.test.js
+@@ -87,6 +87,26 @@ describe('固定旧档兼容样本', () => {
+     expect(RunStorage.read(5).hp).toBe(26);
+   });
+ 
++  it('prev 备份键：覆盖前转存上一版原串；首次写入不产生；remove 一并清理', () => {
++    // 首次写入（无旧档）：主档落盘但不产生 prev
++    expect(RunStorage.write(2, { hp: 1 })).toBe(true);
++    const first = localStorage.getItem(RunStorage.key(2));
++    expect(first).not.toBeNull();
++    expect(localStorage.getItem('sdt-run-2-prev')).toBeNull();
++    // 第二次覆盖：prev = 上一版完整原串（含身份盖章，逐字未动）
++    expect(RunStorage.write(2, { hp: 2 })).toBe(true);
++    const second = localStorage.getItem(RunStorage.key(2));
++    expect(second).not.toBe(first);
++    expect(localStorage.getItem('sdt-run-2-prev')).toBe(first);
++    // 再次覆盖：prev 滚动为最近的旧版（新旧交替的中间版）
++    expect(RunStorage.write(2, { hp: 3 })).toBe(true);
++    expect(localStorage.getItem('sdt-run-2-prev')).toBe(second);
++    // 删除档位：prev 一并删除，不悬挂
++    expect(RunStorage.remove(2)).toBe(true);
++    expect(localStorage.getItem(RunStorage.key(2))).toBeNull();
++    expect(localStorage.getItem('sdt-run-2-prev')).toBeNull();
++  });
++
+   it('无编辑基线时也拒绝覆盖另一标签刚创建的对局', () => {
+     const latest = JSON.stringify({ version: RunStorage.SAVE_VERSION, hp: 27,
+       _r2: { runId: 'new-slot-run', revision: 0 } });
