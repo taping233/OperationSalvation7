@@ -20,4 +20,4 @@
 | 8 | 工作树未跟踪杂项去留：`.codex/`、`.ui-art-loop-0925/`、`项目近况-2026-09-29/` | 09-29 | git status | 认领或报批删 |
 | 9 | 照相馆 `?libPerfDiag` DEV 诊断钩子（game.cardslib.page.js）去留：保留=可随时复跑滚动归因五连测，删=一句话即清 | 09-29 | docs/PHOTOLIB-PERF-TASK-2026-09-29.md 遗留3 | 生产构建零开销 |
 | 10 | `game/src/e2.snapshot.qa.js` 删留单议（E2 验收宿主遗产，E 批已归档；knip A 类批其余项已执行销账：renderer.icons 位图管线 289→57 行、getHomeForSlot、openAltarRitual re-export、三个无人 default+matchBlank 死导出词、run-architecture 断言清单腐坏项同步修正；dev-shims 改判误报=dev.html importmap 依赖） | 09-29 深夜 | knip 首跑甄别（09-29 深夜会话） | 其余已执行，本条仅剩 e2.snapshot |
-| 11 | knip C 类结论已实锤：runtime `set$`×25 **生产+测试+动态拼接三重确认全零读者**，可整批删；但须连 `battle-runtime-state-guard.test` 白名单（90 export 总数锁）同步改，防守卫红。删除待老板点头 | 09-29 深夜 | 同上（python 词边界甄别+ugrep `$` 锚点坑已绕） | 甄别完成，删除待批 |
+| ~~11~~ | **已执行销账（09-29 深夜，老板批「删除c类」）**：set$×25 定义行全删（effects 13/piles 4/presentation 7/session 1），守卫测试 2 增 SETTER_EXEMPT 豁免清单（25 字段+写入通道注释）；白名单 90 let 不动（字段活，写入走文件内赋值/引用变异）；守卫+facade+architecture 定向 17/17 绿，knip 残留 set$=0，全量仅负载 flake 定向复绿 | 09-29 深夜 | 同上（python 词边界甄别+ugrep `$` 锚点坑已绕） | 完结 |
