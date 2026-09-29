@@ -146,10 +146,35 @@
 
 ## 8. 后续项目文件夹盘点
 
-18:48 起又核对了 Vite 各层目录、被忽略的 `output/`、六份构建、截图、备份、根部原图/研究现场及全部 Git 未提交项；结果与未动理由集中在[项目文件夹与未提交现场盘点](PROJECT-FOLDER-INVENTORY-2026-09-28.md)，250 个实验目录和 67 个根文件见[逐项快照](evidence/agent-output-inventory-2026-09-28.tsv)。这次没有新增移动或删除，六份构建与空 `.exp-observe/` 的占用边界保持第 7 节结论。
+18:48 起又核对了 Vite 各层目录、被忽略的 `output/`、六份构建、截图、备份、根部原图/研究现场及全部 Git 未提交项；结果与未动理由集中在[项目文件夹与未提交现场盘点](archive/records-2026-09-28/PROJECT-FOLDER-INVENTORY-2026-09-28.md)，250 个实验目录和 67 个根文件见[逐项快照](evidence/agent-output-inventory-2026-09-28.tsv)。这次没有新增移动或删除，六份构建与空 `.exp-observe/` 的占用边界保持第 7 节结论。
 
 ## 9. 已结题构建的后续精简
 
-老板 19 时后授权精简无用或已结题输出。六份 09-28 构建先完成本机去重归档和逐文件校验，随后移除五份旧实验目录，保留最新 `round5/` 与默认 `game/`。完整路径、归档哈希和恢复步骤见[实验构建精简记录](BUILD-OUTPUT-CLEANUP-2026-09-28.md)。第 5、7、8 节描述的是此前时点的保留状态；Agent `output/`、截图与原始素材尚未删减。
+老板 19 时后授权精简无用或已结题输出。六份 09-28 构建先完成本机去重归档和逐文件校验，随后移除五份旧实验目录，保留最新 `round5/` 与默认 `game/`。完整路径、归档哈希和恢复步骤见[实验构建精简记录](archive/records-2026-09-28/BUILD-OUTPUT-CLEANUP-2026-09-28.md)。第 5、7、8 节描述的是此前时点的保留状态；Agent `output/`、截图与原始素材尚未删减。
 
-20:17 统一收尾时，已确认同一归档覆盖 `round5/` 的 946 件文件并移除该原目录；默认 `desktop-app/game/` 仍在。隔离生产构建的原目录与日志处置也记在[精简记录](BUILD-OUTPUT-CLEANUP-2026-09-28.md)和[低成本优化证据](evidence/LOW-COST-OPTIMIZATIONS-2026-09-28.md)。
+20:17 统一收尾时，已确认同一归档覆盖 `round5/` 的 946 件文件并移除该原目录；默认 `desktop-app/game/` 仍在。隔离生产构建的原目录与日志处置也记在[精简记录](archive/records-2026-09-28/BUILD-OUTPUT-CLEANUP-2026-09-28.md)和[低成本优化证据](evidence/LOW-COST-OPTIMIZATIONS-2026-09-28.md)。
+
+## 10. 09-29 清理批：过时表述与大目录重审（2026-09-29 14:43 +08:00）
+
+老板批准后执行，核对时 HEAD `9e5a4ad`，相对本地 `origin/master` 引用无 ahead/behind（未 fetch）：
+
+| 项目 | 结果 |
+| --- | --- |
+| `.ui-loop-0926/` 瘦身 | 删除 `RESEARCH/`(362M)、`SHOTS/`(283M)、`DOC/`(45M) 三个大件；顶层 11 份报告 md 迁入[循环报告目录](archive/ui-loop-2026-09-26/)留底并登记归档索引。目录仅剩 `package.json`/`package-lock.json`（12K，未批准处置，原地保留）。第 5、7 节对该目录「暂缓删除/保留」的描述自此点起被本节取代。 |
+| `.perf-wt-b/` 摘除 | 09-29 验收提速用的 git worktree，HEAD `47001e3` 已并入 master 且无未提交改动；`git worktree remove` 因目录含中文名报 Invalid argument，改手动删除目录 + `git worktree prune`，注册已摘除（回收 268M）。 |
+| `.cards-consolidation-2026-09-29.patch` 删除 | 对应 0959124 已落库并推送，128K 备份补丁失去保留意义（此前记忆挂「删除待报批」，本次获批）。 |
+
+`.ui-art-loop-0925/`（NAI 生图来源）、`搜打撤/game/shots/`（旧走查引用）、`.codex/`、`AGENTS.md.bak-*` 仍按第 5 节裁决保留；老板在重审提问中明确选择对前两者「删大件留报告」仅限 `.ui-loop-0926`，不波及 `.ui-art-loop-0925` 与 `game/shots/`。
+
+### §10 补记：同日午后清尾批（2026-09-29 15:4x +08:00，老板逐项批复）
+
+上文「保留」结论中被老板重审改判的部分，以本节为准：
+
+| 项目 | 结果 |
+| --- | --- |
+| docs 根层带日期记录归档 | `PROJECT-STATUS-2026-09-27.md`、`PROJECT-MEMORY-2026-09-28.md` 迁入 `archive/status/`（即第 4 节方案落地）；其余 10 份 09-28 单篇（重构执行/验收改造/实页性能/构建精简/文件夹盘点/美术改进/两份并行盘点/概览页 html+png）迁入 `archive/records-2026-09-28/`。现行文档中的引用链接已同步更新。 |
+| `game/shots/` | 29 个走查截图整体迁入 `evidence/game-shots/` 并随本次提交入库；引用它的现行文档路径已更新。第 5 节「暂不列为删除对象」的保留理由（走查引用）由迁移满足。 |
+| 小件删除 | `AGENTS.md.bak-20260927`（与现行差 18 行，git 历史可查）、`.codex/` 两份 config 备份（`config.toml` 本体保留）、`.ui-loop-0926/` 残壳（package 两件）经老板批准删除。 |
+| 维持保留 | `.ui-art-loop-0925/`（生图来源）、`output/`、`_backups/`、`项目近况-2026-09-29/`（当日交付物）本轮不动。 |
+| 现行依据留根 | `PERF-LEDGER-2026-09-29.md`（性能）、`BASE-DIRECT-WRITE-AUDIT-2026-09-29.md`（存档直写红线）与本记录留 docs 根层作为现行依据；[文档导航](README.md)新增「按改动找文档」路由表。 |
+| 架构文档对齐 | [architecture.md](architecture.md) 与 `game/src/README.md` 补齐 09-29 战斗域五目录口径，平铺模块名的位置映射已注明。 |

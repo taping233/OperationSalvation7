@@ -59,7 +59,7 @@
 
 ### 改动与整理入口
 
-- [意图图例隔离](../../../game/src/battle/battle.layers.js)：复用现有 UI 安全存储与 devSample，会话令牌使用常量空间；保留既有样式/文案/目标高亮。
+- [意图图例隔离](../../../game/src/battle/view/battle.layers.js)：复用现有 UI 安全存储与 devSample，会话令牌使用常量空间；保留既有样式/文案/目标高亮。
 - [恢复器实际接口及输入校验](../../../game/src/hub/recoverable-pair.js)、[检查范围](../../../jsconfig.json)：内联声明清楚表达现有模块边界，没有另加运行包装层。
 - [图例回归](../../../tests/intent-legend-isolation.test.js)、[恢复器类型回归](../../../tests/recoverable-pair-types.test.js)、[数组日志保留现场回归](../../../tests/recoverable-pair-contract.test.js)。
 - [快照类型诊断修正](../../../tests/game-store-types.test.js)、[命令类型诊断修正](../../../tests/commands-shared-contract.test.js)：补齐漏掉的语法诊断，保留第一批有效的真实类型检查证据。

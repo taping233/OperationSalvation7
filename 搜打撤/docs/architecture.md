@@ -1,12 +1,12 @@
 # 架构与模块接口
 
-> 2026-09-27 按当前源码补充战斗拆分、Agent 域与样式入口。已提交/在途范围及验收状态见 [项目状态快照](PROJECT-STATUS-2026-09-27.md)；本文描述接口，不表示当前整库已通过验收。
+> 2026-09-27 按当前源码补充战斗拆分、Agent 域与样式入口。已提交/在途范围及验收状态见 [项目状态快照](archive/status/PROJECT-STATUS-2026-09-27.md)；本文描述接口，不表示当前整库已通过验收。
 
 ## 入口与依赖方向
 
 `index.html` 只加载 `src/main.js`。所有源码均为 ESM；`main.js` 负责确定初始化顺序，模块自身使用显式 `import` 描述依赖。
 
-源码按功能域分目录（2026-09-23 目录化）：`core/`（底座：随机/规则/输入/渲染/事件/数据/诊断/门面）、`ui/`（全局 UI 与控制器）、`battle/`（战斗全域，含 effect-steps 效果流水线与 combat 伤害）、`cards/`（卡库数据/同步/规则/schema/视图）、`run/`（局内流程与对局地图）、`hub/`（基地/局外：仓库/背包/存档/商店/整备/命令）、`home/`（首页/叙事）、`audio/`（音频）；根层只留装配与入口（`main.js`、`boot-order.js`、`game.boot.js`、`r7a.qa.js`）和 `generated/`。分层判据与目录一致，详见 `game/src/README.md`。
+源码按功能域分目录（2026-09-23 目录化；2026-09-29 战斗域治理后 `battle/` 内部分五目录 `core/`（装配/引擎/结算/快照）、`effects/`（效果流水线）、`runtime/`（运行态）、`view/`（渲染）、`bag/`（牌堆/卡费），装载器与符文在 `battle/` 根）：`core/`（底座：随机/规则/输入/渲染/事件/数据/诊断/门面）、`ui/`（全局 UI 与控制器）、`battle/`（战斗全域，含 effect-steps 效果流水线与 combat 伤害）、`cards/`（卡库数据/同步/规则/schema/视图）、`run/`（局内流程与对局地图）、`hub/`（基地/局外：仓库/背包/存档/商店/整备/命令）、`home/`（首页/叙事）、`audio/`（音频）、`agent/`（自动游玩与统计）；根层只留装配与入口（`main.js`、`boot-order.js`、`game.boot.js`、`r7a.qa.js`）和 `generated/`。分层判据与目录一致，详见 `game/src/README.md`。
 
 分层从底向上为：规则/数据与纯工具 → 状态和领域逻辑 → 功能视图 → 启动接线；高层依赖低层。核心状态模块不得反向导入 `boot`、`run`、`hub`、`notes` 或具体视图。`tests/contracts.test.js` 通过 AST 依赖图拒绝循环依赖，覆盖子目录、重导出与动态字面量 import。
 
@@ -40,6 +40,8 @@
 - TT10/TT11 内联历史快照须与同步数据保持一致，由 `tests/cards-sync-snapshot-guard.test.js` 守卫；卡牌效果审计例外与回归入口见 `docs/quality-gates.md`。
 - `cards.catalog.js`：按稳定 id 解析 TT10/TT11 的定版引用，定版字段优先，历史独有元数据随后补齐；缺失 id、重复 id、继续内联定版条目均明确失败。其他批次保持原数据入口。
 - `cards/card-rarity.js`：英雄线与衍生牌稀有度的纯规则实现，由调用方注入按 ID 查找。Cards 门面继续用 `Array.find` 保持原数组首项优先；`card-render-context.js` 在照相馆一次浅目录快照中构造 first-ID 索引，筛选、排序和各延迟挂载批次共用该快照，页面数据刷新后重建，关闭时释放索引。
+> 战斗模块路径说明（09-29 治理后）：下文模块清单的职责描述仍有效，但平铺文件名已按五目录归位——`battle.core.js` 等装配/引擎/结算/快照在 `battle/core/`，`battle.effects.js` 与 `effect-steps.*` 在 `battle/effects/`，`battle.runtime` 运行态在 `battle/runtime/`，`battle.view` 与渲染六片在 `battle/view/`，`battle.deck` 等牌堆/卡费在 `battle/bag/`。实际路径以 `game/src/README.md` 与现场为准。
+
 - `battle.core.js`：战斗装配与命令门面（批6 拆分：状态在 `battle.runtime.js`、回合环引擎在 `battle.engine.js`、敌方阶段在 `battle.enemy-phase.js`）；不访问 DOM，也不依赖战斗视图。BOSS 编组和墓地页面同样由快照驱动。
 - `battle.effects.js` + `effect-steps.js`（有序步骤表本体，拆片 `effect-steps.<节>.js` 按原序 concat——顺序即语义）：文本时点解析与效果执行器；执行器只通过显式端口改变战斗状态，不访问 DOM。
 - `battle.deck.js` / `battle.rules.js`：可独立测试的洗牌、回收、目标判定和出牌限制。

@@ -2,7 +2,7 @@
 
 核对时间：2026-09-28 18:48 +08:00。只盘点和整理 `搜打撤` Vite 主线及仓库根与其直接相关的资料；Godot、Unity、EXE 线冻结。盘点时 `master` HEAD 为 `2cef754`，相对**本地** `origin/master` ahead 14 / behind 0；未 fetch，远端实时状态未核实。其他会话的源码、测试、`REFACTOR-2026-09-28.md` 和实验构建仍在工作树中，本页不把它们当作可清理旧稿。
 
-下表数量是在新增本页和 TSV 清单前取得。统计按文件长度求和，单位为 MiB；不是磁盘实际占用或可回收量。目录遍历不进入 junction 和嵌入 Git 的 `.git`，另列其体量。时间与引用判断均是本机此时的快照。已执行的 113 件文档迁移及 `.exp-observe` 内容清理见[上一轮归档记录](DOCUMENT-ARCHIVE-AUDIT-2026-09-28.md)，这里不重复迁移。
+下表数量是在新增本页和 TSV 清单前取得。统计按文件长度求和，单位为 MiB；不是磁盘实际占用或可回收量。目录遍历不进入 junction 和嵌入 Git 的 `.git`，另列其体量。时间与引用判断均是本机此时的快照。已执行的 113 件文档迁移及 `.exp-observe` 内容清理见[上一轮归档记录](../../DOCUMENT-ARCHIVE-AUDIT-2026-09-28.md)，这里不重复迁移。
 
 ## 目录分层与体量
 
@@ -23,9 +23,9 @@
 
 | 位置 | 核实结果 | 处置 |
 | --- | --- | --- |
-| `output/` | 250 个实验子目录、67 个根文件；目录内 2,704 件、约 200.15 MiB。根层包括 45 行 `agent-ledger.jsonl`、日志、权重、`bench-defer.mjs` 和 `compare-policies.cjs`。`game/tools/agent-batch.mjs`、`agent-evolve.mjs`、`agent-ledger.mjs` 默认读写 `output/`。在 `docs/`、`game/tools/`、`tests/`、`scripts/` 的文本中，只找到 6 个子目录的精确路径提及；其余没有精确路径提及不等于实验结果无用。69 组相同 SHA-256 内容的冗余文件长度约 0.79 MiB，多为不同跑次的 trace。 | 原位保留；新增[逐项本机清单](evidence/agent-output-inventory-2026-09-28.tsv)，列出全部 317 个根项的类型、件数、字节、最后修改时间和显式路径提及数。清单是快照，不是删除名单。 |
+| `output/` | 250 个实验子目录、67 个根文件；目录内 2,704 件、约 200.15 MiB。根层包括 45 行 `agent-ledger.jsonl`、日志、权重、`bench-defer.mjs` 和 `compare-policies.cjs`。`game/tools/agent-batch.mjs`、`agent-evolve.mjs`、`agent-ledger.mjs` 默认读写 `output/`。在 `docs/`、`game/tools/`、`tests/`、`scripts/` 的文本中，只找到 6 个子目录的精确路径提及；其余没有精确路径提及不等于实验结果无用。69 组相同 SHA-256 内容的冗余文件长度约 0.79 MiB，多为不同跑次的 trace。 | 原位保留；新增[逐项本机清单](../../evidence/agent-output-inventory-2026-09-28.tsv)，列出全部 317 个根项的类型、件数、字节、最后修改时间和显式路径提及数。清单是快照，不是删除名单。 |
 | `desktop-app/` | 默认 `game/` 为 09-25 旧产物，`scripts/asset-audit.cjs` 与预算脚本默认读取；六份 09-28 构建各约 85.5 MiB，被[重构记录](REFACTOR-2026-09-28.md)逐轮引用。七份构建跨目录有 908 组相同 SHA-256 文件，重复内容按文件长度合计约 506.13 MiB；独有内容约 92.20 MiB。这些数值不证明任一构建可替代另一份。 | 六份 09-28 构建的归属与验收尚未交清，全部原位保留；不在脏共享工作区构建。 |
-| `game/shots/` | 29 张 PNG、33.90 MiB；29 个文件名均见[09-25 走查记录](archive/live-walkthrough-2026-09-25-three-batch.md)等文档；目录内无相同 SHA-256 文件。 | 原位保留，路径用于复查走查过程。 |
+| `game/shots/` | 29 张 PNG、33.90 MiB；29 个文件名均见[09-25 走查记录](../live-walkthrough-2026-09-25-three-batch.md)等文档；目录内无相同 SHA-256 文件。 | 原位保留，路径用于复查走查过程。 |
 | `_backups/` | 23 件、12.58 MiB；与当前 `game/assets/` 逐字节相同的只有 2 件，另 21 件内容不同。两个相同文件也带有替换前语义。 | 保留原始素材备份，不凭哈希删除。 |
 | `.ui-art-loop-0925/nai-out/` | 17 套 `payload.json`、PNG、ZIP；每个 ZIP 都含与同名 PNG 字节一致的图像，另有生成请求信息。 | 保留提示词、种子和交付来源；未做许可/来源最终核查。 |
 | `.ui-loop-0926/` | `FINAL-REPORT.md`、`ISSUES.md`、`DOC/`、`RESEARCH/`、`SHOTS/` 共同组成 UI/体验大修原始证据；`RESEARCH/benchmarks/repos/` 内有 Mindustry 与 Shattered Pixel Dungeon 两个嵌入 Git 仓库。 | 保留原现场；移动会影响历史路径与第三方仓库，需要先清楚归属、许可和隐私。 |
@@ -44,7 +44,7 @@
 | 测试 | 11 件修改、3 件新增（发现状态、胜利进度、研究所结算）。 | 对应重构验证现场；不移动、不重新解释旧测试数字。 |
 | 其他未跟踪资料 | 六份构建共 5,675 件；`game/shots/` 29 件；仓库根 `.ui-art-loop-0925/` 51 件、`.ui-loop-0926/` 被 Git 展开的 572 件、`.codex/` 3 件、`AGENTS.md.bak-*` 1 件、根 `package*.json` 2 件。`docs/PARALLEL-ASSET-AUDIT-2026-09-28.md` 与项目概览图/页等也属于上述 131 件文档新项。 | 依用途保留；`.codex` 和根配置不改，其他会话证据不占用。 |
 
-首次盘点时新增逐项 `output` 清单和本页，建立了忽略产物与未提交成果的可追溯入口。上一轮已做的 113 件文档迁移继续保留；截至首次盘点结束没有新增移动或删除，因为待处理大目录各有固定路径、原始证据或在途归属。已核实的六份构建和空 `.exp-observe/` 当时仍是[上一轮审阅表](DOCUMENT-ARCHIVE-AUDIT-2026-09-28.md)中的后续清理项。根层 `README.md` 仍列有本机当前未见的 `图片/`、`图片成果/`、`工具/`，它描述工作区整体而非只描述 Vite，须由对应资料所有者核对后修订。
+首次盘点时新增逐项 `output` 清单和本页，建立了忽略产物与未提交成果的可追溯入口。上一轮已做的 113 件文档迁移继续保留；截至首次盘点结束没有新增移动或删除，因为待处理大目录各有固定路径、原始证据或在途归属。已核实的六份构建和空 `.exp-observe/` 当时仍是[上一轮审阅表](../../DOCUMENT-ARCHIVE-AUDIT-2026-09-28.md)中的后续清理项。根层 `README.md` 仍列有本机当前未见的 `图片/`、`图片成果/`、`工具/`，它描述工作区整体而非只描述 Vite，须由对应资料所有者核对后修订。
 
 ### 后续精简（19:16 +08:00）
 

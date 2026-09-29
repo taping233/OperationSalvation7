@@ -2,9 +2,7 @@
 
 四层相邻节点探索与卡牌战斗结合的单机搜打撤游戏。当前包版本为 v0.60.0「冬日远征体验改造」；开发范围仅为 Vite 网页版，Godot、Unity 和桌面 EXE 冻结。
 
-接手先看[项目状态入口](docs/STATUS.md)并核对实时工作区。09-28 上午的更新和当时验证边界见 [项目记忆快照](docs/PROJECT-MEMORY-2026-09-28.md)；文档分层与归档执行记录见[文档导航](docs/README.md)。
-
-本轮工程重构的计划、实现与验收证据见 [2026-09-28 重构执行记录](docs/REFACTOR-2026-09-28.md)。
+接手先看[项目状态入口](docs/STATUS.md)并核对实时工作区；要改哪一块该看哪份文档，见[文档导航](docs/README.md)的「按改动找文档」路由表。带日期的历史快照与批次记录都在 [docs/archive/](docs/archive/README.md)，只代表当时时点。
 
 ## 快速开始
 
@@ -45,9 +43,9 @@ npm run perf
 
 - [制作资料总入口（章程、GDD、视觉、工程、迭代与验收）](docs/production/README.md)
 - [项目状态入口](docs/STATUS.md)
-- [文档分类与归档审阅](docs/README.md)
-- [项目记忆快照（2026-09-28 上午）](docs/PROJECT-MEMORY-2026-09-28.md)
-- [历史项目状态快照（2026-09-27）](docs/PROJECT-STATUS-2026-09-27.md)
+- [文档导航（含按改动找文档路由表）](docs/README.md)
+- [项目记忆快照（2026-09-28 上午，已归档）](docs/archive/status/PROJECT-MEMORY-2026-09-28.md)
+- [历史项目状态快照（2026-09-27，已归档）](docs/archive/status/PROJECT-STATUS-2026-09-27.md)
 - [历史交接记录（09-20 至 09-27）](docs/archive/handoffs/2026-09-20-to-27-vite-log.md)
 - [Agent 接口协议](docs/agent-protocol.md)
 - [Agent 策略迭代手册](docs/agent-iteration-playbook.md)

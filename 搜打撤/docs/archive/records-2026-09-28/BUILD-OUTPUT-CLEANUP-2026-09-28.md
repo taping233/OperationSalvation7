@@ -35,4 +35,4 @@
 
 ## 20:17 收尾追加
 
-老板授权统一提交和清理多余产物后，已核对归档中最新 `game-code-quality-20260928-round5/` 的 946 件 / 89,668,844 字节与原目录逐件 SHA-256、长度和路径相同，随后移除该未跟踪构建目录。`desktop-app/game/` 仍保留供默认脚本读取。上文“`round5/` 原位保留”是 19:16 的执行状态，当前以本节为准。另一个隔离验证快照 `_tmp-round6-validation-snapshot/` 在[构建日志](evidence/refactor-2026-09-28/round6-isolated-build.log)留证、预览服务停止后移除；其产物未纳入上面的六份归档，不再作为可打开目录保留。
+老板授权统一提交和清理多余产物后，已核对归档中最新 `game-code-quality-20260928-round5/` 的 946 件 / 89,668,844 字节与原目录逐件 SHA-256、长度和路径相同，随后移除该未跟踪构建目录。`desktop-app/game/` 仍保留供默认脚本读取。上文“`round5/` 原位保留”是 19:16 的执行状态，当前以本节为准。另一个隔离验证快照 `_tmp-round6-validation-snapshot/` 在[构建日志](../../evidence/refactor-2026-09-28/round6-isolated-build.log)留证、预览服务停止后移除；其产物未纳入上面的六份归档，不再作为可打开目录保留。

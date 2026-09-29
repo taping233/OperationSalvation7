@@ -1,0 +1,25 @@
+# LOG — 主代理决策与事件日志（追加式）
+
+- 2026-09-26 开工：读任务书定稿；git status 核对一致（HEAD dd5ac7f）；识别并行未提交划线（见 STATE.md）。
+- 2026-09-26 起服：5173-5176 为历史残留 Vite 实例（HTTP 探测确认为本游戏），不杀不用；专属实例起 5180。
+- 2026-09-26 chain-test PASS: A区禁碰=6项, 主目的锚="「让玩家实机中看到、摸到的体验变好——一切决策冲突时以此裁决」"
+- 2026-09-26 中断根因排查：两次 MCP 调用被取消均与 tab.cua.keypress 相关——封禁 cua，交互改 DOM click；合成 KeyboardEvent 进不了游戏输入层，浮层关闭走 .ak-back-tl。已记 STATE.md。
+- 2026-09-26 老板指示：杀掉不用的旧端口 → 5173-5176 四进程已 taskkill，只留 5180。
+- 2026-09-26 老板指示：挂半小时自动拉起 → cron automation-fd54b6a3（每 30 分钟巡检 LOG/STATE 新鲜度，停滞即以主代理身份续推；额度停机与任务完结除外）。
+- 2026-09-26 冒烟完成：11 页基线截图 + 性能采样落 SHOTS/PERF-BASELINE.md（134-165 FPS、零 longtask、≤40MB）；开发者模式已关回。
+- 2026-09-26 交接文档核对：并行会话在途工作=agent 域速度/异常/策略四轮（与禁碰清单一致）；turbo 开关触过的共享文件中仅 battle.lifecycle.js 与 ui/overlay.js 仍处未提交状态，均入禁碰。
+- 2026-09-26 阶段一开工：文档化+基准调研两代理先行派发；理论波×2 因依赖书章节，等抽书代理完成后补派。
+- 2026-09-27 00:39 巡检：三在途代理均活跃产出——抽书 OCR 644/645 页+TOC.md 已落（内嵌书签导出，offset 经 110 页回归校准=书页/PDF索引0基-31，35章）；基准卡 A组 4 游戏已出（StS2/SPD/Mindustry/Downfall）；文档化 shots 采集中。无停滞，不干预。
+- 2026-09-27 00:52 验收：基准调研完成（22卡/5文件，RUBRIC 索引22行 ready）。抽验 BM-StS2/BM-Arknights：三要素齐、适配点绑真实模块文件、Top5 合理（结算页编排/出牌实体化队列/错峰揭晓/方舟浮窗信息分级/回合横幅+双层血条）。验收通过。
+- 2026-09-27 01:0x 验收：抽书完成——TOC 35章全+offset校准；LENSES 113卡/#1-#112+∞，457 条问题原文照录，6 卡图像目验；RUBRIC 波次映射全填实际章节页段。「机偶」确认任务书自创词，按第15章互动循环+#63反馈/#64多汁执行。三项技术性越界（paddle模型副本/astor安装/_ocr_tmp）入 APPROVAL-QUEUE。
+- 2026-09-27 01:0x 派发：理论波×2（theory-A/theory-B，独立起草理解书草稿，实机走局记录情绪节点）。在途=文档化+理论×2=3并发。
+- 2026-09-27 01:1x 验收：文档化完成。抽验：44截图时间戳新鲜、LEG条目证据/来源/判据齐、根目录误建DOC已自清。关键环境事实：子代理IAB不可用→puppeteer-core+Edge headless 为标准路线（shot.cjs 留存）；已给理论波A/B发纠偏提示。
+- 2026-09-27 01:5x 理论波A交付：结算后置=核心差异（撤离才结算）；兴趣曲线=高开→战斗长平台塌陷→小峰→冷收；最塌陷点=战斗胜利零反馈仪式。待B稿对照定稿。
+- 2026-09-27 02:0x 理论波B交付；主代理对照两稿定稿 GAME-UNDERSTANDING.md v1（分歧裁决三笔：塌陷点=同病根两病灶；难度=可感度问题；支柱合并为5）。阶段一闭环。
+- 2026-09-27 02:0x W1 开波：评审员×1（透镜=头脑中的界面/简单化与可用性）+修理工×2（R1基地全局热点index.html/base.css；R2地图事件战斗热点battle view各片）。预先批件两笔：LEG-6a（职业徽记+宠物蛋挂接，R1）、LEG-6b（结算横幅挂接，R2）；overlay.js/lifecycle.js 冻结相关修法明令绕行。
+- 2026-09-27 02:3x 抽验 LEG-6a：before(02:03)/after(02:12) 时间戳链完整，diff +24/+8 行与描述吻合，徽记 6 文件落位，判定真实完成（verifying 待评审复核）。
+- 2026-09-27 02:3x 现场仲裁：git 复核发现并行会话新增 5 个未提交文件（chests/game.session.death/agent.state/altar/battle.css），全部入冻结；battle.css 判为争议热点，R2 被令改走独立 css 片；已 SendMessage 通知 R2。
+- 2026-09-27 02:3x R1 完成预热后待命（W1-nn 未出）；评审员仍在走查（截图 53+张）。
+- 2026-09-27 02:4x 归因更正：02:3x 判定的「并行新增 M」中 chests.js(+5)/game.session.death.js(+5)/battle.css(+10,行653起) 实为 R2 的 LEG-6b 批件改动（R2 逐 hunk 自证零外来叠加）；真实新增并行痕迹=agent.state.js（开工快照无此 M）。altar.js 的并行 hunk（doExtract saveGame :743+）为 R1 编辑时在场所见，维持并行所有判断。02:3x 冻结令全部保留（并行会话确认活跃，保守隔离；R2 后续战斗样式走 css/battle-w1.css 独立片）。LEG-6b 现状 verifying（4截图+双页探针+15用例过）。
+- 2026-09-27 08:0x 收官：W7 七靶位全过+曲线对照落终报第六节；包络末端规则满足（issue 终态仅 closed/open 移交/gameplay，零 fixing/verifying 悬挂）；巡检 cron 删除；终报+交接文档落盘。任务完结。
+- 2026-09-27 08:2x 老板令清理冗余，四类全批执行：A 审查残留（.tmp-ui-review/.ui-audit-0925×2/.rv-*.review-*/_mine*.patch；.ui-art-loop-0925 只删元数据与裁剪件、nai-out 51 文件经校验 45 个无游戏副本属待挂素材整体保留，目录 209M→47M）；B OCR 临时（_ocr_tmp 4.8M+D:\paddle_ocr_models 18M）；C 冗余代码（battle.feedback.js finisher 死字段读取 2 处清除+26 战斗用例绿；删 tests/tmp-pool.test.js 草稿）；D docs 归档 26 份完工过程文档移入 docs/archive/（顶层 57→31，长期与在途文档未动）。记忆：14 条完结条目移 ARCHIVE.md，新增 0926 大修条目。删除留痕 REMOVED-2026-09-27.md。5180 dev server 保留待验收。

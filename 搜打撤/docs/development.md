@@ -16,7 +16,7 @@ npm run perf
 npm run assets:audit
 ```
 
-`npm run perf` 仍是启动 Electron 窗口的历史自动基准。当前 Vite 网页版实页比较使用 Codex 内置浏览器当前窗口，在开发地址加 `?perfProbe=1` 后进入普通远征地图，按页面探针测静止/受控平移并记录三轮条件；方法和首次有限范围结果见 [Vite 内置浏览器性能记录](VITE-IAB-PERFORMANCE-2026-09-28.md)。此探针仅在开发模式且带参数时出现，不能用它的受控平移 drawHz 代替真实移动状态的交付帧率。
+`npm run perf` 仍是启动 Electron 窗口的历史自动基准。当前 Vite 网页版性能以 [全场景账本 PERF-LEDGER-2026-09-29](PERF-LEDGER-2026-09-29.md) 为准（`node scripts/perf-ledger-capture.mjs` 复跑）；开发地址加 `?perfProbe=1` 的页面探针方法与首次有限范围结果见 [Vite 内置浏览器性能记录](archive/records-2026-09-28/VITE-IAB-PERFORMANCE-2026-09-28.md)，探针仅在开发模式且带参数时出现，不能用它的受控平移 drawHz 代替真实移动状态的交付帧率。
 
 CI 在 master 的 push 和 pull request 上依次运行 `check:syntax`、`typecheck`、`lint`，再经 `npm test` 的 pretest 编译剧情与校验数据后运行完整 Vitest；Vite 路径变更另由构建 workflow 检查产物预算。日常定向入口和提交快速门见[质量门](quality-gates.md)。依赖方向与按需加载边界可定向运行 `npm run test:target -- tests/architecture-boundaries.test.js tests/contracts.test.js`；照相馆页面 `game.cardslib.page.js` 只允许由轻门面 `game.cardslib.js` 动态加载。
 
