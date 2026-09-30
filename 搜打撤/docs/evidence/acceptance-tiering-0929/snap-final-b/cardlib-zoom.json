@@ -1,0 +1,147 @@
+{
+ "bodyClass": "lobby cardlib-open page-covered page-opaque",
+ "sels": {
+  "#cardZoom": [
+   {
+    "identity": null,
+    "cls": "cz-photo",
+    "props": {
+     "display": "flex",
+     "position": "fixed",
+     "order": "0",
+     "z-index": "400",
+     "width": "1470.59px",
+     "height": "735.294px",
+     "min-height": "0px",
+     "aspect-ratio": "auto",
+     "padding": "28px 24px 22px",
+     "margin": "0px",
+     "border-top-width": "0px",
+     "border-top-color": "rgb(232, 238, 234)",
+     "border-top-left-radius": "0px",
+     "background-image": "none",
+     "background-color": "rgba(0, 0, 0, 0)",
+     "box-shadow": "none",
+     "clip-path": "none",
+     "color": "rgb(232, 238, 234)",
+     "font-weight": "400",
+     "letter-spacing": "normal",
+     "text-shadow": "none",
+     "content-visibility": "visible",
+     "contain-intrinsic-size": "none",
+     "object-position": "50% 50%",
+     "top": "0px",
+     "left": "0px",
+     "bottom": "0px"
+    }
+   }
+  ],
+  "#cardZoom .cz-photo-paper": [
+   {
+    "identity": null,
+    "cls": "cz-photo-paper",
+    "props": {
+     "display": "flex",
+     "position": "relative",
+     "order": "0",
+     "z-index": "auto",
+     "width": "540.993px",
+     "height": "497.794px",
+     "min-height": "auto",
+     "aspect-ratio": "auto",
+     "padding": "53px",
+     "margin": "0px",
+     "border-top-width": "0px",
+     "border-top-color": "rgb(232, 238, 234)",
+     "border-top-left-radius": "0px",
+     "background-image": "linear-gradient(135deg, rgba(255, 248, 223, 0.19), rgba(0, 0, 0, 0) 58%), linear-gradient(color(srgb 0.901961 0.894118 0.87451 / 0.88), color(srgb 0.901961 0.894118 0.87451 / 0.88)), url(\"http://localhost:5334/assets/ui/photo-studio/paper-grain.png\"), none",
+     "background-color": "rgb(230, 228, 223)",
+     "box-shadow": "rgba(255, 247, 223, 0.6) 0px 1px 0px 0px inset, rgb(185, 176, 153) 0px 2px 0px 0px, rgb(102, 96, 77) 1px 8px 0px 0px, rgba(0, 0, 0, 0.6) 2px 24px 40px 0px",
+     "clip-path": "none",
+     "color": "rgb(232, 238, 234)",
+     "font-weight": "400",
+     "letter-spacing": "normal",
+     "text-shadow": "none",
+     "content-visibility": "visible",
+     "contain-intrinsic-size": "none",
+     "object-position": "50% 50%",
+     "top": "0px",
+     "left": "0px",
+     "bottom": "0px"
+    }
+   }
+  ],
+  "#cardZoom .cz-photo-main": [
+   {
+    "identity": null,
+    "cls": "cz-photo-main",
+    "props": {
+     "display": "grid",
+     "position": "static",
+     "order": "0",
+     "z-index": "auto",
+     "width": "773.493px",
+     "height": "497.794px",
+     "min-height": "0px",
+     "aspect-ratio": "auto",
+     "padding": "0px",
+     "margin": "0px",
+     "border-top-width": "0px",
+     "border-top-color": "rgb(232, 238, 234)",
+     "border-top-left-radius": "0px",
+     "background-image": "none",
+     "background-color": "rgba(0, 0, 0, 0)",
+     "box-shadow": "none",
+     "clip-path": "none",
+     "color": "rgb(232, 238, 234)",
+     "font-weight": "400",
+     "letter-spacing": "normal",
+     "text-shadow": "none",
+     "content-visibility": "visible",
+     "contain-intrinsic-size": "none",
+     "object-position": "50% 50%",
+     "top": "auto",
+     "left": "auto",
+     "bottom": "auto"
+    }
+   }
+  ],
+  "#cardZoom .hs-card": [],
+  "#cardZoom .hsc-art": [],
+  ".studio-preview-paper": [
+   {
+    "identity": null,
+    "cls": "studio-photo-paper studio-preview-paper rv7",
+    "props": {
+     "display": "block",
+     "position": "relative",
+     "order": "0",
+     "z-index": "auto",
+     "width": "357.721px",
+     "height": "326.268px",
+     "min-height": "auto",
+     "aspect-ratio": "auto",
+     "padding": "4px",
+     "margin": "0px",
+     "border-top-width": "28.2353px",
+     "border-top-color": "rgba(0, 0, 0, 0)",
+     "border-top-left-radius": "0px",
+     "background-image": "linear-gradient(135deg, rgba(255, 248, 223, 0.19), rgba(0, 0, 0, 0) 58%), linear-gradient(color(srgb 0.901961 0.894118 0.87451 / 0.88), color(srgb 0.901961 0.894118 0.87451 / 0.88)), url(\"http://localhost:5334/assets/ui/photo-studio/paper-grain.png\"), none",
+     "background-color": "rgb(230, 228, 223)",
+     "box-shadow": "rgba(255, 247, 223, 0.6) 0px 1px 0px 0px inset, rgb(185, 176, 153) 0px 2px 0px 0px, rgb(102, 96, 77) 1px 8px 0px 0px, rgba(0, 0, 0, 0.6) 2px 18px 24px 0px",
+     "clip-path": "none",
+     "color": "rgb(159, 181, 187)",
+     "font-weight": "400",
+     "letter-spacing": "normal",
+     "text-shadow": "none",
+     "content-visibility": "visible",
+     "contain-intrinsic-size": "none",
+     "object-position": "50% 50%",
+     "top": "0px",
+     "left": "0px",
+     "bottom": "0px"
+    }
+   }
+  ]
+ }
+}

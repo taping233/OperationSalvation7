@@ -32,7 +32,9 @@
     "sfx:gen": "node game/scripts/jsfxr-generate.cjs",
     "cards:sync": "node scripts/sync-cards-from-live.mjs",
     "validate:data": "node scripts/validate-data.mjs",
-    "docs:compendium": "vitest run tests/compendium.test.js"
+    "docs:compendium": "vitest run tests/compendium.test.js",
+    "page-snapshot": "node scripts/page-snapshot.mjs",
+    "jscpd:baseline": "jscpd --reporters json --output node_modules/.cache/jscpd game/css game/src scripts"
   },
   "devDependencies": {
     "acorn": "^8.14.0",
