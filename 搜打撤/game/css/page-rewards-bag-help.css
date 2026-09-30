@@ -23,13 +23,10 @@
    新增动画仅 transform/opacity（reduced-motion 由 winter.css 全局兜底）。
    ═══════════════════════════════════════════════════════════════════ */
 
-/* ── T0 统一节奏变量：fast=色彩/光晕/小位移，lift=回弹过冲（快按慢弹），press=按下快进 ── */
+/* ── T0 统一节奏变量：fast=色彩/光晕/小位移，lift=回弹过冲（快按慢弹），press=按下快进 ──
+   （09-29 合并：两段声明逐字相同，分组选择器级联恒等） */
 #overlay .card.chest,
-#overlay .card.bag-page {
-  --rbh-fast: .18s cubic-bezier(.33, 1, .68, 1);
-  --rbh-lift: .32s cubic-bezier(.3, 1.4, .45, 1);
-  --rbh-press: .09s ease-out;
-}
+#overlay .card.bag-page,
 #title .ak-quickref,
 #overlay .card:has(.expedition-manual),
 #overlay .card:has(.help-body) {

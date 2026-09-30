@@ -1,0 +1,3235 @@
+{
+  "duplicates": [
+    {
+      "firstFile": {
+        "end": 52,
+        "endLoc": {
+          "column": 3,
+          "line": 52,
+          "position": 2794
+        },
+        "name": "card-v3.css",
+        "start": 41,
+        "startLoc": {
+          "column": 0,
+          "line": 41,
+          "position": 2374
+        }
+      },
+      "format": "css",
+      "fragment": ".hs-card::before{\n  content:''!important;\n  position:absolute!important;\n  inset:.26em!important;\n  z-index:0!important;\n  pointer-events:none!important;\n  border:.09em solid rgba(0,0,0,.55)!important;\n  border-radius:.46em!important;\n  background:linear-gradient(176deg,#2e343c 0%,#1b2027 58%,#232932 100%)!important;\n  box-shadow:inset 0 0 0 1px rgba(255,255,255,.06),inset 0 .25em .6em rgba(0,0,0,.5)!important;\n}\n/* 卡名丝带：稀有度色，左右微凸出卡缘 */",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 12,
+      "secondFile": {
+        "end": 1167,
+        "endLoc": {
+          "column": 3,
+          "line": 1167,
+          "position": 95552
+        },
+        "name": "winter.css",
+        "start": 1156,
+        "startLoc": {
+          "column": 0,
+          "line": 1156,
+          "position": 95132
+        }
+      },
+      "tokens": 150
+    },
+    {
+      "firstFile": {
+        "end": 164,
+        "endLoc": {
+          "column": 3,
+          "line": 164,
+          "position": 9066
+        },
+        "name": "card-v3.css",
+        "start": 80,
+        "startLoc": {
+          "column": 70,
+          "line": 80,
+          "position": 4408
+        }
+      },
+      "format": "css",
+      "fragment": "  background:none!important;color:#000!important;-webkit-text-stroke:0!important;\n}\n/* 插画窗：职业色描边 + 深色下沉 */\n.hs-card .hsc-art{\n  border:.16em solid var(--cf3)!important;\n  border-radius:.42em!important;\n  background:radial-gradient(circle at 50% 42%,var(--type-art1),#0d1116 84%)!important;\n  box-shadow:inset 0 0 0 .1em rgba(0,0,0,.55),inset 0 0 1em rgba(0,0,0,.62),0 1px 0 rgba(255,255,255,.14)!important;\n}\n/* 类型铭牌：金属小牌压插画下缘，职业色描边 */\n.hs-card .hsc-type{\n  margin:-.62em auto .12em!important;\n  padding:.16em .84em!important;\n  z-index:5!important;\n  color:#dfe5ea!important;\n  background:linear-gradient(180deg,#4b5361 0%,#2b323d 85%)!important;\n  border:.09em solid var(--cf3)!important;\n  border-radius:.24em!important;\n  letter-spacing:.16em!important;\n  box-shadow:0 .16em .22em rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.24)!important;\n}\n/* 描述面板：深底，护住文字可读性 */\n.hs-card .hsc-desc{\n  color:#c9d3da!important;\n  background:linear-gradient(180deg,#141a21 0%,#0e1319 100%)!important;\n  border:1px solid rgba(0,0,0,.75)!important;\n  border-radius:.32em!important;\n  box-shadow:inset 0 .18em .5em rgba(0,0,0,.6),0 1px 0 rgba(255,255,255,.1)!important;\n}\n/* 费用蓝晶球：浮出左上角，白环+深色外圈 */\n.hs-card .hsc-cost{\n  top:-.55em!important;left:-.55em!important;width:2.4em!important;height:2.4em!important;\n  color:#ffffff!important;font-weight:800!important;\n  border:.13em solid rgba(255,255,255,.85)!important;\n  background:radial-gradient(circle at 34% 28%,#f4fcff 0%,#b8e3f6 30%,#57a4cc 62%,#2a6188 86%,#17384f 100%)!important;\n  box-shadow:0 0 0 .16em #0b141b,0 .16em .3em rgba(0,0,0,.6),inset 0 -.18em .3em rgba(0,0,0,.45),inset 0 .12em .2em rgba(255,255,255,.6)!important;\n  text-shadow:0 1px 1px rgba(10,30,45,.8)!important;\n}\n/* 费用变化（战斗内降费绿/升费红）保持语义色，仅换晶球质感 */\n.hs-card .hsc-cost.cost-mod.mod-down{\n  background:radial-gradient(circle at 34% 28%,#d8f5e0 0%,#6fcf8f 45%,#1d5c35 100%)!important;\n}\n.hs-card .hsc-cost.cost-mod.mod-up{\n  background:radial-gradient(circle at 34% 28%,#ffd9cf 0%,#e07a5f 45%,#7c2418 100%)!important;\n}\n/* 伤害红玉（左下角）与币值金币（右下角）：与费用球同一晶体质感 */\n.hs-card .hsc-dmg{\n  width:2.3em!important;height:2.3em!important;bottom:-.5em!important;left:-.55em!important;\n  border-radius:50%!important;clip-path:none!important;\n  border:.13em solid rgba(255,255,255,.85)!important;\n  background:radial-gradient(circle at 34% 28%,#ffcdb8 0%,#f08a68 30%,#c14e35 62%,#7e2a18 100%)!important;\n  box-shadow:0 0 0 .16em #0b141b,0 .16em .3em rgba(0,0,0,.6),inset 0 -.18em .3em rgba(0,0,0,.4),inset 0 .1em .2em rgba(255,255,255,.45)!important;\n  justify-content:center!important;padding-bottom:0!important;\n}\n.hs-card .hsc-val{\n  background:radial-gradient(circle at 34% 28%,#ffe9b8 0%,#e2b25f 45%,#9a6b1f 100%)!important;\n  box-shadow:0 0 0 .16em #0b141b,0 .16em .3em rgba(0,0,0,.6),inset 0 -.18em .3em rgba(0,0,0,.35),inset 0 .1em .2em rgba(255,255,255,.5)!important;\n}\n/* 稀有度宝石在 v3 里由丝带承担，取消底部钻石 */\n.hs-card .hsc-gem{display:none!important}\n/* 描述富文本（v3）：数字 Georgia 加大·金 / 术语冰蓝 / 句首关键字金 */\n.hs-card .hsc-desc .d-num{font-family:Georgia,'Times New Roman',serif!important;font-size:1.22em!important;font-weight:600!important;color:#ecc985!important;line-height:1!important}\n.hs-card .hsc-desc .d-kw{color:#d8b878!important;font-weight:700!important;font-style:normal!important}\n.hs-card .hsc-desc .d-term{color:#8fd0e8!important;font-style:normal!important}\n\n/* ============================================================\n   v3.1 卡面插画比例统一（2026-09-12 老板改口拍板：全场景统一横版，\n   对齐杀戮尖塔2官方口径——card_portraits 875 张实测 384×291 = 1.32 横）\n   三比例（战斗/商店 ~1.5 横、牌库 flex 撑满 ~0.8、紧凑卡 5.8em）\n   收敛为一条：.hsc-art 一律 aspect-ratio 384/291，高度随宽推导。\n   卡体高度改随内容（10/14 固定框不再写死，文字区随内容伸缩）。\n   覆盖：战斗手牌/商店/开箱奖励/牌库网格/悬停预览/背包/图鉴/制作坊/hub\n   —— 全部走 .hs-card 同一结构，em 随卡缩放。\n   ============================================================ */\n.hs-card{height:auto!important}\n#overlay .lib-cardwrap .hs-card{aspect-ratio:auto!important;height:auto!important}\n.hs-card .hsc-art,\n#overlay .lib-cardwrap .hsc-art,\n.hs-card.lib .hsc-art{\n  height:auto!important;\n  min-height:0!important;\n  flex:0 0 auto!important;\n  aspect-ratio:384/291!important;\n}\n/* v3.3 悬浮球裁剪修复：费用/币值/伤害球负偏移浮出卡缘（~0.55em+外环 ≈8px），",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 85,
+      "secondFile": {
+        "end": 1249,
+        "endLoc": {
+          "column": 3,
+          "line": 1249,
+          "position": 100193
+        },
+        "name": "winter.css",
+        "start": 1165,
+        "startLoc": {
+          "column": 84,
+          "line": 1165,
+          "position": 95535
+        }
+      },
+      "tokens": 1931
+    },
+    {
+      "firstFile": {
+        "end": 182,
+        "endLoc": {
+          "column": 3,
+          "line": 182,
+          "position": 10559
+        },
+        "name": "card-v3.css",
+        "start": 171,
+        "startLoc": {
+          "column": 46,
+          "line": 171,
+          "position": 9755
+        }
+      },
+      "format": "css",
+      "fragment": "#overlay .card-library-page .lib-item{margin:0}\n\n/* v3.2 逐卡构图修正（2026-09-12 老板批准）：主体偏离 1.32 裁切窗的卡面用 object-position 拉回，\n   不换图；data-asset-key 由 art.js 写在 img 上，选择器与卡面文件一一对应。 */\nimg[data-asset-key=\"card-equip-tt3-light-mail\"]{object-position:80% 50%!important}\nimg[data-asset-key=\"card-equip-tt3-holy-staff\"]{object-position:50% 25%!important}\nimg[data-asset-key=\"card-equip-tt2-venomstaff\"]{object-position:50% 22%!important}\nimg[data-asset-key=\"card-martial-tt3-skewer\"]{object-position:65% 60%!important}\nimg[data-asset-key=\"card-martial-cmtn1i64j7y7\"]{object-position:50% 35%!important}\nimg[data-asset-key=\"card-martial-cmtn1wnhhym\"]{object-position:50% 60%!important}\nimg[data-asset-key=\"card-wu-myriadswords\"]{object-position:50% 40%!important}\n/* 迭代评审批次（09-20 美术岗 P1）：构图异常存量补丁——细火线居中/船压顶部/剑修灰底占比小，",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 12,
+      "secondFile": {
+        "end": 1262,
+        "endLoc": {
+          "column": 3,
+          "line": 1262,
+          "position": 101159
+        },
+        "name": "winter.css",
+        "start": 1250,
+        "startLoc": {
+          "column": 43,
+          "line": 1250,
+          "position": 100354
+        }
+      },
+      "tokens": 280
+    },
+    {
+      "firstFile": {
+        "end": 614,
+        "endLoc": {
+          "column": 5,
+          "line": 614,
+          "position": 36613
+        },
+        "name": "expedition-library.css",
+        "start": 607,
+        "startLoc": {
+          "column": 19,
+          "line": 607,
+          "position": 36346
+        }
+      },
+      "format": "css",
+      "fragment": "  padding:6px 6px 6px;\n  border:1px solid var(--studio-paper-edge);\n  border-radius:2px;\n  background:\n    linear-gradient(102deg,rgba(255,252,240,.2),transparent 26% 74%,rgba(92,78,56,.12)),\n    linear-gradient(145deg,var(--studio-paper-light),var(--studio-paper));\n  box-shadow:\n    0 2px 0 rgba(96,86,70,.42),",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 8,
+      "secondFile": {
+        "end": 1887,
+        "endLoc": {
+          "column": 14,
+          "line": 1887,
+          "position": 88144
+        },
+        "name": "expedition-library.css",
+        "start": 1881,
+        "startLoc": {
+          "column": 22,
+          "line": 1881,
+          "position": 87882
+        }
+      },
+      "tokens": 98
+    },
+    {
+      "firstFile": {
+        "end": 614,
+        "endLoc": {
+          "column": 27,
+          "line": 614,
+          "position": 36635
+        },
+        "name": "expedition-library.css",
+        "start": 609,
+        "startLoc": {
+          "column": 19,
+          "line": 609,
+          "position": 36414
+        }
+      },
+      "format": "css",
+      "fragment": "  border-radius:2px;\n  background:\n    linear-gradient(102deg,rgba(255,252,240,.2),transparent 26% 74%,rgba(92,78,56,.12)),\n    linear-gradient(145deg,var(--studio-paper-light),var(--studio-paper));\n  box-shadow:\n    0 2px 0 rgba(96,86,70,.42),",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 6,
+      "secondFile": {
+        "end": 801,
+        "endLoc": {
+          "column": 27,
+          "line": 801,
+          "position": 44203
+        },
+        "name": "expedition-library.css",
+        "start": 796,
+        "startLoc": {
+          "column": 43,
+          "line": 796,
+          "position": 43982
+        }
+      },
+      "tokens": 86
+    },
+    {
+      "firstFile": {
+        "end": 1436,
+        "endLoc": {
+          "column": 1,
+          "line": 1436,
+          "position": 69459
+        },
+        "name": "expedition-library.css",
+        "start": 1428,
+        "startLoc": {
+          "column": 15,
+          "line": 1428,
+          "position": 69281
+        }
+      },
+      "format": "css",
+      "fragment": "  color:#68430f;\n  background:none;\n  -webkit-background-clip:border-box;\n  background-clip:border-box;\n  text-shadow:none!important;\n  filter:none;\n  font-weight:700;\n  letter-spacing:.02em;\n}",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 9,
+      "secondFile": {
+        "end": 1449,
+        "endLoc": {
+          "column": 1,
+          "line": 1449,
+          "position": 70002
+        },
+        "name": "expedition-library.css",
+        "start": 1441,
+        "startLoc": {
+          "column": 15,
+          "line": 1441,
+          "position": 69824
+        }
+      },
+      "tokens": 51
+    },
+    {
+      "firstFile": {
+        "end": 85,
+        "endLoc": {
+          "column": 22,
+          "line": 85,
+          "position": 5362
+        },
+        "name": "page-ach.css",
+        "start": 80,
+        "startLoc": {
+          "column": 38,
+          "line": 80,
+          "position": 5208
+        }
+      },
+      "format": "css",
+      "fragment": "#overlay #hubMain.hub-ach .hub-page > .hub-card > h3 {\n  position: relative;\n  color: #eef4f4; letter-spacing: .18em;\n  text-shadow: 0 0 12px rgba(3, 10, 16, .6);\n}\n#overlay #hubMain.hub-ach .hub-page > .hub-card > h3::before {",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 6,
+      "secondFile": {
+        "end": 51,
+        "endLoc": {
+          "column": 23,
+          "line": 51,
+          "position": 3463
+        },
+        "name": "page-stash.css",
+        "start": 46,
+        "startLoc": {
+          "column": 72,
+          "line": 46,
+          "position": 3313
+        }
+      },
+      "tokens": 52
+    },
+    {
+      "firstFile": {
+        "end": 85,
+        "endLoc": {
+          "column": 22,
+          "line": 85,
+          "position": 5362
+        },
+        "name": "page-ach.css",
+        "start": 80,
+        "startLoc": {
+          "column": 38,
+          "line": 80,
+          "position": 5208
+        }
+      },
+      "format": "css",
+      "fragment": "#overlay #hubMain.hub-ach .hub-page > .hub-card > h3 {\n  position: relative;\n  color: #eef4f4; letter-spacing: .18em;\n  text-shadow: 0 0 12px rgba(3, 10, 16, .6);\n}\n#overlay #hubMain.hub-ach .hub-page > .hub-card > h3::before {",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 6,
+      "secondFile": {
+        "end": 72,
+        "endLoc": {
+          "column": 22,
+          "line": 72,
+          "position": 4599
+        },
+        "name": "page-upgrade.css",
+        "start": 67,
+        "startLoc": {
+          "column": 30,
+          "line": 67,
+          "position": 4450
+        }
+      },
+      "tokens": 52
+    },
+    {
+      "firstFile": {
+        "end": 91,
+        "endLoc": {
+          "column": 10,
+          "line": 91,
+          "position": 5624
+        },
+        "name": "page-ach.css",
+        "start": 85,
+        "startLoc": {
+          "column": 36,
+          "line": 85,
+          "position": 5376
+        }
+      },
+      "format": "css",
+      "fragment": "#overlay #hubMain.hub-ach .hub-page > .hub-card > h3::before {\n  content: ''; display: inline-block; width: 14px; height: 1px; margin-right: 9px;\n  vertical-align: .34em;\n  background: linear-gradient(90deg, transparent, #d9bb82b3);\n  box-shadow: 0 0 5px #d9bb8255;\n}\n#overlay #hubMain.hub-ach .hub-page > .hub-card > h3::after {",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 7,
+      "secondFile": {
+        "end": 129,
+        "endLoc": {
+          "column": 10,
+          "line": 129,
+          "position": 7103
+        },
+        "name": "page-deploy.css",
+        "start": 123,
+        "startLoc": {
+          "column": 28,
+          "line": 123,
+          "position": 6855
+        }
+      },
+      "tokens": 76
+    },
+    {
+      "firstFile": {
+        "end": 91,
+        "endLoc": {
+          "column": 22,
+          "line": 91,
+          "position": 5636
+        },
+        "name": "page-ach.css",
+        "start": 85,
+        "startLoc": {
+          "column": 38,
+          "line": 85,
+          "position": 5378
+        }
+      },
+      "format": "css",
+      "fragment": "#overlay #hubMain.hub-ach .hub-page > .hub-card > h3::before {\n  content: ''; display: inline-block; width: 14px; height: 1px; margin-right: 9px;\n  vertical-align: .34em;\n  background: linear-gradient(90deg, transparent, #d9bb82b3);\n  box-shadow: 0 0 5px #d9bb8255;\n}\n#overlay #hubMain.hub-ach .hub-page > .hub-card > h3::after {",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 7,
+      "secondFile": {
+        "end": 58,
+        "endLoc": {
+          "column": 22,
+          "line": 58,
+          "position": 3591
+        },
+        "name": "page-shop.css",
+        "start": 52,
+        "startLoc": {
+          "column": 27,
+          "line": 52,
+          "position": 3333
+        }
+      },
+      "tokens": 79
+    },
+    {
+      "firstFile": {
+        "end": 91,
+        "endLoc": {
+          "column": 22,
+          "line": 91,
+          "position": 5636
+        },
+        "name": "page-ach.css",
+        "start": 85,
+        "startLoc": {
+          "column": 38,
+          "line": 85,
+          "position": 5378
+        }
+      },
+      "format": "css",
+      "fragment": "#overlay #hubMain.hub-ach .hub-page > .hub-card > h3::before {\n  content: ''; display: inline-block; width: 14px; height: 1px; margin-right: 9px;\n  vertical-align: .34em;\n  background: linear-gradient(90deg, transparent, #d9bb82b3);\n  box-shadow: 0 0 5px #d9bb8255;\n}\n#overlay #hubMain.hub-ach .hub-page > .hub-card > h3::after {",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 7,
+      "secondFile": {
+        "end": 57,
+        "endLoc": {
+          "column": 23,
+          "line": 57,
+          "position": 3765
+        },
+        "name": "page-stash.css",
+        "start": 51,
+        "startLoc": {
+          "column": 72,
+          "line": 51,
+          "position": 3512
+        }
+      },
+      "tokens": 79
+    },
+    {
+      "firstFile": {
+        "end": 91,
+        "endLoc": {
+          "column": 22,
+          "line": 91,
+          "position": 5636
+        },
+        "name": "page-ach.css",
+        "start": 85,
+        "startLoc": {
+          "column": 38,
+          "line": 85,
+          "position": 5378
+        }
+      },
+      "format": "css",
+      "fragment": "#overlay #hubMain.hub-ach .hub-page > .hub-card > h3::before {\n  content: ''; display: inline-block; width: 14px; height: 1px; margin-right: 9px;\n  vertical-align: .34em;\n  background: linear-gradient(90deg, transparent, #d9bb82b3);\n  box-shadow: 0 0 5px #d9bb8255;\n}\n#overlay #hubMain.hub-ach .hub-page > .hub-card > h3::after {",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 7,
+      "secondFile": {
+        "end": 78,
+        "endLoc": {
+          "column": 22,
+          "line": 78,
+          "position": 4859
+        },
+        "name": "page-upgrade.css",
+        "start": 72,
+        "startLoc": {
+          "column": 30,
+          "line": 72,
+          "position": 4607
+        }
+      },
+      "tokens": 79
+    },
+    {
+      "firstFile": {
+        "end": 107,
+        "endLoc": {
+          "column": 22,
+          "line": 107,
+          "position": 6489
+        },
+        "name": "page-ach.css",
+        "start": 102,
+        "startLoc": {
+          "column": 38,
+          "line": 102,
+          "position": 6264
+        }
+      },
+      "format": "css",
+      "fragment": "#overlay #hubMain.hub-ach .hub-page > .hub-card > h3 .set-tip {\n  margin-left: 10px; padding-left: 10px;\n  border-left: 1px solid rgba(159, 183, 188, .22);\n  font-size: 10.5px; font-weight: 400; letter-spacing: .14em; color: #7e969c;\n}\n#overlay #hubMain.hub-ach .hub-page > .hub-card > h3 .set-tip b { color: #cfdde0; }",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 6,
+      "secondFile": {
+        "end": 94,
+        "endLoc": {
+          "column": 22,
+          "line": 94,
+          "position": 5692
+        },
+        "name": "page-upgrade.css",
+        "start": 89,
+        "startLoc": {
+          "column": 30,
+          "line": 89,
+          "position": 5472
+        }
+      },
+      "tokens": 79
+    },
+    {
+      "firstFile": {
+        "end": 186,
+        "endLoc": {
+          "column": 27,
+          "line": 186,
+          "position": 10746
+        },
+        "name": "page-ach.css",
+        "start": 181,
+        "startLoc": {
+          "column": 58,
+          "line": 181,
+          "position": 10470
+        }
+      },
+      "format": "css",
+      "fragment": "#overlay #hubMain.hub-ach .ach-row.done:has(.mini-btn.ok) {\n  border-color: rgba(217, 187, 130, .62);\n  background: linear-gradient(90deg, rgba(217, 187, 130, .12), rgba(217, 187, 130, .028) 46%, rgba(10, 22, 30, .6));\n  box-shadow: inset 2px 0 0 var(--gold-main), 0 0 16px rgba(217, 187, 130, .12);\n}\n#overlay #hubMain.hub-ach .ach-row.done:has(.mini-btn.ok)::after {",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 6,
+      "secondFile": {
+        "end": 283,
+        "endLoc": {
+          "column": 27,
+          "line": 283,
+          "position": 15793
+        },
+        "name": "page-ach.css",
+        "start": 278,
+        "startLoc": {
+          "column": 41,
+          "line": 278,
+          "position": 15517
+        }
+      },
+      "tokens": 109
+    },
+    {
+      "firstFile": {
+        "end": 191,
+        "endLoc": {
+          "column": 1,
+          "line": 191,
+          "position": 11011
+        },
+        "name": "page-ach.css",
+        "start": 186,
+        "startLoc": {
+          "column": 57,
+          "line": 186,
+          "position": 10776
+        }
+      },
+      "format": "css",
+      "fragment": "#overlay #hubMain.hub-ach .ach-row.done:has(.mini-btn.ok)::after {\n  content: ''; position: absolute; inset: 0; pointer-events: none;\n  box-shadow: 0 0 22px rgba(217, 187, 130, .16), inset 0 0 26px rgba(217, 187, 130, .05);\n  animation: achSummon 2.6s ease-in-out infinite alternate;\n}\n@keyframes achSummon { from { opacity: .35; } to { opacity: 1; } }",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 6,
+      "secondFile": {
+        "end": 288,
+        "endLoc": {
+          "column": 1,
+          "line": 288,
+          "position": 16041
+        },
+        "name": "page-ach.css",
+        "start": 283,
+        "startLoc": {
+          "column": 40,
+          "line": 283,
+          "position": 15806
+        }
+      },
+      "tokens": 73
+    },
+    {
+      "firstFile": {
+        "end": 241,
+        "endLoc": {
+          "column": 22,
+          "line": 241,
+          "position": 13662
+        },
+        "name": "page-ach.css",
+        "start": 236,
+        "startLoc": {
+          "column": 37,
+          "line": 236,
+          "position": 13490
+        }
+      },
+      "format": "css",
+      "fragment": "#overlay #hubMain.hub-ach .coll-room .base-bar {\n  background: rgba(6, 15, 22, .92);\n  border: 1px solid rgba(217, 187, 130, .24);\n  box-shadow: inset 0 1px 2px rgba(0, 0, 0, .5);\n}\n#overlay #hubMain.hub-ach .coll-room .base-bar i {",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 6,
+      "secondFile": {
+        "end": 111,
+        "endLoc": {
+          "column": 22,
+          "line": 111,
+          "position": 6493
+        },
+        "name": "page-upgrade.css",
+        "start": 106,
+        "startLoc": {
+          "column": 39,
+          "line": 106,
+          "position": 6326
+        }
+      },
+      "tokens": 66
+    },
+    {
+      "firstFile": {
+        "end": 246,
+        "endLoc": {
+          "column": 22,
+          "line": 246,
+          "position": 13885
+        },
+        "name": "page-ach.css",
+        "start": 241,
+        "startLoc": {
+          "column": 37,
+          "line": 241,
+          "position": 13677
+        }
+      },
+      "format": "css",
+      "fragment": "#overlay #hubMain.hub-ach .coll-room .base-bar i {\n  position: relative; overflow: hidden;\n  background: linear-gradient(90deg, #8a6f42, var(--gold-main) 55%, #e8d3a4);\n  box-shadow: 0 0 8px rgba(217, 187, 130, .3);\n}\n#overlay #hubMain.hub-ach .coll-room .base-bar i::after {",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 6,
+      "secondFile": {
+        "end": 116,
+        "endLoc": {
+          "column": 22,
+          "line": 116,
+          "position": 6713
+        },
+        "name": "page-upgrade.css",
+        "start": 111,
+        "startLoc": {
+          "column": 39,
+          "line": 111,
+          "position": 6510
+        }
+      },
+      "tokens": 70
+    },
+    {
+      "firstFile": {
+        "end": 251,
+        "endLoc": {
+          "column": 12,
+          "line": 251,
+          "position": 14159
+        },
+        "name": "page-ach.css",
+        "start": 246,
+        "startLoc": {
+          "column": 37,
+          "line": 246,
+          "position": 13900
+        }
+      },
+      "format": "css",
+      "fragment": "#overlay #hubMain.hub-ach .coll-room .base-bar i::after {\n  content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 40%;\n  pointer-events: none;\n  background: linear-gradient(90deg, transparent, rgba(255, 242, 207, .34), transparent);\n  transform: translateX(-120%);\n  animation: achSweep 3.8s ease-in-out infinite;",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 6,
+      "secondFile": {
+        "end": 121,
+        "endLoc": {
+          "column": 12,
+          "line": 121,
+          "position": 6984
+        },
+        "name": "page-upgrade.css",
+        "start": 116,
+        "startLoc": {
+          "column": 39,
+          "line": 116,
+          "position": 6730
+        }
+      },
+      "tokens": 77
+    },
+    {
+      "firstFile": {
+        "end": 377,
+        "endLoc": {
+          "column": 3,
+          "line": 377,
+          "position": 21009
+        },
+        "name": "page-ach.css",
+        "start": 371,
+        "startLoc": {
+          "column": 53,
+          "line": 371,
+          "position": 20849
+        }
+      },
+      "format": "css",
+      "fragment": "#overlay #hubMain.hub-ach :is(button, [role=\"button\"]):focus-visible {\n  outline: 1px solid #d9bb82cc;\n  outline-offset: 2px;\n  box-shadow: 0 0 0 1px var(--bg-deep), 0 0 12px rgba(217, 187, 130, .35);\n}\n\n/* ═════════ T4 页签切入入场编排：仅 .page-in 首帧播放（页内操作重绘不重播，",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 7,
+      "secondFile": {
+        "end": 339,
+        "endLoc": {
+          "column": 3,
+          "line": 339,
+          "position": 17312
+        },
+        "name": "page-deploy.css",
+        "start": 333,
+        "startLoc": {
+          "column": 102,
+          "line": 333,
+          "position": 17152
+        }
+      },
+      "tokens": 58
+    },
+    {
+      "firstFile": {
+        "end": 377,
+        "endLoc": {
+          "column": 32,
+          "line": 377,
+          "position": 21038
+        },
+        "name": "page-ach.css",
+        "start": 371,
+        "startLoc": {
+          "column": 54,
+          "line": 371,
+          "position": 20850
+        }
+      },
+      "format": "css",
+      "fragment": "#overlay #hubMain.hub-ach :is(button, [role=\"button\"]):focus-visible {\n  outline: 1px solid #d9bb82cc;\n  outline-offset: 2px;\n  box-shadow: 0 0 0 1px var(--bg-deep), 0 0 12px rgba(217, 187, 130, .35);\n}\n\n/* ═════════ T4 页签切入入场编排：仅 .page-in 首帧播放（页内操作重绘不重播，",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 7,
+      "secondFile": {
+        "end": 344,
+        "endLoc": {
+          "column": 32,
+          "line": 344,
+          "position": 18112
+        },
+        "name": "page-hub.css",
+        "start": 338,
+        "startLoc": {
+          "column": 39,
+          "line": 338,
+          "position": 17930
+        }
+      },
+      "tokens": 68
+    },
+    {
+      "firstFile": {
+        "end": 377,
+        "endLoc": {
+          "column": 3,
+          "line": 377,
+          "position": 21009
+        },
+        "name": "page-ach.css",
+        "start": 371,
+        "startLoc": {
+          "column": 53,
+          "line": 371,
+          "position": 20849
+        }
+      },
+      "format": "css",
+      "fragment": "#overlay #hubMain.hub-ach :is(button, [role=\"button\"]):focus-visible {\n  outline: 1px solid #d9bb82cc;\n  outline-offset: 2px;\n  box-shadow: 0 0 0 1px var(--bg-deep), 0 0 12px rgba(217, 187, 130, .35);\n}\n\n/* ═════════ T4 页签切入入场编排：仅 .page-in 首帧播放（页内操作重绘不重播，",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 7,
+      "secondFile": {
+        "end": 416,
+        "endLoc": {
+          "column": 3,
+          "line": 416,
+          "position": 21562
+        },
+        "name": "page-settings.css",
+        "start": 411,
+        "startLoc": {
+          "column": 52,
+          "line": 411,
+          "position": 21404
+        }
+      },
+      "tokens": 58
+    },
+    {
+      "firstFile": {
+        "end": 377,
+        "endLoc": {
+          "column": 95,
+          "line": 377,
+          "position": 21101
+        },
+        "name": "page-ach.css",
+        "start": 371,
+        "startLoc": {
+          "column": 26,
+          "line": 371,
+          "position": 20822
+        }
+      },
+      "format": "css",
+      "fragment": "#overlay #hubMain.hub-ach :is(button, [role=\"button\"]):focus-visible {\n  outline: 1px solid #d9bb82cc;\n  outline-offset: 2px;\n  box-shadow: 0 0 0 1px var(--bg-deep), 0 0 12px rgba(217, 187, 130, .35);\n}\n\n/* ═════════ T4 页签切入入场编排：仅 .page-in 首帧播放（页内操作重绘不重播，",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 7,
+      "secondFile": {
+        "end": 213,
+        "endLoc": {
+          "column": 95,
+          "line": 213,
+          "position": 11990
+        },
+        "name": "page-shop.css",
+        "start": 207,
+        "startLoc": {
+          "column": 27,
+          "line": 207,
+          "position": 11711
+        }
+      },
+      "tokens": 108
+    },
+    {
+      "firstFile": {
+        "end": 377,
+        "endLoc": {
+          "column": 95,
+          "line": 377,
+          "position": 21101
+        },
+        "name": "page-ach.css",
+        "start": 371,
+        "startLoc": {
+          "column": 26,
+          "line": 371,
+          "position": 20822
+        }
+      },
+      "format": "css",
+      "fragment": "#overlay #hubMain.hub-ach :is(button, [role=\"button\"]):focus-visible {\n  outline: 1px solid #d9bb82cc;\n  outline-offset: 2px;\n  box-shadow: 0 0 0 1px var(--bg-deep), 0 0 12px rgba(217, 187, 130, .35);\n}\n\n/* ═════════ T4 页签切入入场编排：仅 .page-in 首帧播放（页内操作重绘不重播，",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 7,
+      "secondFile": {
+        "end": 224,
+        "endLoc": {
+          "column": 95,
+          "line": 224,
+          "position": 12038
+        },
+        "name": "page-upgrade.css",
+        "start": 218,
+        "startLoc": {
+          "column": 30,
+          "line": 218,
+          "position": 11765
+        }
+      },
+      "tokens": 108
+    },
+    {
+      "firstFile": {
+        "end": 421,
+        "endLoc": {
+          "column": 22,
+          "line": 421,
+          "position": 24273
+        },
+        "name": "page-ach.css",
+        "start": 415,
+        "startLoc": {
+          "column": 20,
+          "line": 415,
+          "position": 24017
+        }
+      },
+      "format": "css",
+      "fragment": "@keyframes achRowIn {\n  from { opacity: 0; transform: translateY(8px); }\n  to { opacity: 1; transform: none; }\n}\n\n/* ═════════ T6 光标自查：button 默认 cursor 补 pointer（禁用态除外） ═════════ */\n#overlay #hubMain.hub-ach button:not(:disabled) { cursor: pointer; }",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 7,
+      "secondFile": {
+        "end": 236,
+        "endLoc": {
+          "column": 22,
+          "line": 236,
+          "position": 13312
+        },
+        "name": "page-shop.css",
+        "start": 230,
+        "startLoc": {
+          "column": 22,
+          "line": 230,
+          "position": 13056
+        }
+      },
+      "tokens": 100
+    },
+    {
+      "firstFile": {
+        "end": 421,
+        "endLoc": {
+          "column": 22,
+          "line": 421,
+          "position": 24273
+        },
+        "name": "page-ach.css",
+        "start": 415,
+        "startLoc": {
+          "column": 20,
+          "line": 415,
+          "position": 24017
+        }
+      },
+      "format": "css",
+      "fragment": "@keyframes achRowIn {\n  from { opacity: 0; transform: translateY(8px); }\n  to { opacity: 1; transform: none; }\n}\n\n/* ═════════ T6 光标自查：button 默认 cursor 补 pointer（禁用态除外） ═════════ */\n#overlay #hubMain.hub-ach button:not(:disabled) { cursor: pointer; }",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 7,
+      "secondFile": {
+        "end": 249,
+        "endLoc": {
+          "column": 22,
+          "line": 249,
+          "position": 13666
+        },
+        "name": "page-upgrade.css",
+        "start": 243,
+        "startLoc": {
+          "column": 20,
+          "line": 243,
+          "position": 13416
+        }
+      },
+      "tokens": 100
+    },
+    {
+      "firstFile": {
+        "end": 164,
+        "endLoc": {
+          "column": 1,
+          "line": 164,
+          "position": 8889
+        },
+        "name": "page-battle-ui.css",
+        "start": 157,
+        "startLoc": {
+          "column": 83,
+          "line": 157,
+          "position": 8691
+        }
+      },
+      "format": "css",
+      "fragment": "#overlay .battle-stage.sts .sts-tactics .ov-btn.ghost:hover:not(:disabled):not(.dis) {\n  filter: none;\n  color: #f2f6f5;\n  border-color: rgba(217, 187, 130, .62);\n  background: rgba(12, 28, 40, .88);\n  box-shadow: 0 0 10px rgba(217, 187, 130, .16);\n  transform: translateY(-1px);\n}",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 8,
+      "secondFile": {
+        "end": 251,
+        "endLoc": {
+          "column": 1,
+          "line": 251,
+          "position": 12986
+        },
+        "name": "page-battle-ui.css",
+        "start": 244,
+        "startLoc": {
+          "column": 64,
+          "line": 244,
+          "position": 12788
+        }
+      },
+      "tokens": 71
+    },
+    {
+      "firstFile": {
+        "end": 225,
+        "endLoc": {
+          "column": 3,
+          "line": 225,
+          "position": 12486
+        },
+        "name": "page-cardforge.css",
+        "start": 220,
+        "startLoc": {
+          "column": 27,
+          "line": 220,
+          "position": 12341
+        }
+      },
+      "format": "css",
+      "fragment": "#overlay .pg.cdes .pg-close:focus-visible {\n  outline: 1px solid #d9bb82cc;\n  outline-offset: 2px;\n  box-shadow: 0 0 0 1px #071720, 0 0 12px rgba(217, 187, 130, .35);\n}\n/* T2a-补 金色 CTA 的焦点环保留键面内高光，不整套换 box-shadow */",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 6,
+      "secondFile": {
+        "end": 231,
+        "endLoc": {
+          "column": 3,
+          "line": 231,
+          "position": 12470
+        },
+        "name": "page-events.css",
+        "start": 225,
+        "startLoc": {
+          "column": 39,
+          "line": 225,
+          "position": 12324
+        }
+      },
+      "tokens": 51
+    },
+    {
+      "firstFile": {
+        "end": 225,
+        "endLoc": {
+          "column": 3,
+          "line": 225,
+          "position": 12486
+        },
+        "name": "page-cardforge.css",
+        "start": 220,
+        "startLoc": {
+          "column": 27,
+          "line": 220,
+          "position": 12341
+        }
+      },
+      "format": "css",
+      "fragment": "#overlay .pg.cdes .pg-close:focus-visible {\n  outline: 1px solid #d9bb82cc;\n  outline-offset: 2px;\n  box-shadow: 0 0 0 1px #071720, 0 0 12px rgba(217, 187, 130, .35);\n}\n/* T2a-补 金色 CTA 的焦点环保留键面内高光，不整套换 box-shadow */",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 6,
+      "secondFile": {
+        "end": 266,
+        "endLoc": {
+          "column": 3,
+          "line": 266,
+          "position": 13651
+        },
+        "name": "page-expedition-hud.css",
+        "start": 261,
+        "startLoc": {
+          "column": 21,
+          "line": 261,
+          "position": 13506
+        }
+      },
+      "tokens": 51
+    },
+    {
+      "firstFile": {
+        "end": 29,
+        "endLoc": {
+          "column": 3,
+          "line": 29,
+          "position": 2050
+        },
+        "name": "page-classes.css",
+        "start": 24,
+        "startLoc": {
+          "column": 56,
+          "line": 24,
+          "position": 1848
+        }
+      },
+      "format": "css",
+      "fragment": "  content: ''; position: absolute; left: 12px; right: 12px; bottom: -1px; height: 1px;\n  pointer-events: none;\n  background: linear-gradient(90deg, transparent, #d9bb82a1 18%, #d9bb82c4 50%, #d9bb82a1 82%, transparent);\n  box-shadow: 0 0 6px #d9bb8233;\n}\n/* C1b 右端光点呼吸（金线的\"封蜡\"） */",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 6,
+      "secondFile": {
+        "end": 95,
+        "endLoc": {
+          "column": 3,
+          "line": 95,
+          "position": 5723
+        },
+        "name": "page-hub.css",
+        "start": 90,
+        "startLoc": {
+          "column": 56,
+          "line": 90,
+          "position": 5521
+        }
+      },
+      "tokens": 62
+    },
+    {
+      "firstFile": {
+        "end": 18,
+        "endLoc": {
+          "column": 13,
+          "line": 18,
+          "position": 1177
+        },
+        "name": "page-datapage.css",
+        "start": 12,
+        "startLoc": {
+          "column": 30,
+          "line": 12,
+          "position": 923
+        }
+      },
+      "format": "css",
+      "fragment": "#overlay .pg.data-tuned .data-pg-head h2 {\n  display: block; position: relative; margin: 0;\n  padding-left: 14px;\n  font-size: clamp(17px, 1.7vw, 21px); letter-spacing: 6px; color: #f2f6f5;\n  text-shadow: 0 0 16px rgba(8, 22, 32, .8), 0 0 3px rgba(217, 187, 130, .28);\n}\n#overlay .pg.data-tuned .data-pg-head h2::before {",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 7,
+      "secondFile": {
+        "end": 83,
+        "endLoc": {
+          "column": 13,
+          "line": 83,
+          "position": 4840
+        },
+        "name": "page-settings.css",
+        "start": 77,
+        "startLoc": {
+          "column": 28,
+          "line": 77,
+          "position": 4580
+        }
+      },
+      "tokens": 94
+    },
+    {
+      "firstFile": {
+        "end": 23,
+        "endLoc": {
+          "column": 1,
+          "line": 23,
+          "position": 1438
+        },
+        "name": "page-datapage.css",
+        "start": 18,
+        "startLoc": {
+          "column": 32,
+          "line": 18,
+          "position": 1196
+        }
+      },
+      "format": "css",
+      "fragment": "#overlay .pg.data-tuned .data-pg-head h2::before {\n  content: ''; position: absolute; left: 0; top: 50%; width: 2px; height: 16px;\n  transform: translateY(-50%);\n  background: linear-gradient(180deg, transparent, #d9bb82cc, transparent);\n  box-shadow: 1px 0 6px #d9bb8240;\n}",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 6,
+      "secondFile": {
+        "end": 115,
+        "endLoc": {
+          "column": 1,
+          "line": 115,
+          "position": 6690
+        },
+        "name": "page-hub.css",
+        "start": 110,
+        "startLoc": {
+          "column": 22,
+          "line": 110,
+          "position": 6448
+        }
+      },
+      "tokens": 73
+    },
+    {
+      "firstFile": {
+        "end": 24,
+        "endLoc": {
+          "column": 13,
+          "line": 24,
+          "position": 1452
+        },
+        "name": "page-datapage.css",
+        "start": 18,
+        "startLoc": {
+          "column": 30,
+          "line": 18,
+          "position": 1194
+        }
+      },
+      "format": "css",
+      "fragment": "#overlay .pg.data-tuned .data-pg-head h2::before {\n  content: ''; position: absolute; left: 0; top: 50%; width: 2px; height: 16px;\n  transform: translateY(-50%);\n  background: linear-gradient(180deg, transparent, #d9bb82cc, transparent);\n  box-shadow: 1px 0 6px #d9bb8240;\n}\n#overlay .pg.data-tuned .data-pg-head h2 .ic { filter: brightness(1.08) drop-shadow(0 0 4px rgba(217, 187, 130, .22)); }",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 7,
+      "secondFile": {
+        "end": 89,
+        "endLoc": {
+          "column": 13,
+          "line": 89,
+          "position": 5119
+        },
+        "name": "page-settings.css",
+        "start": 83,
+        "startLoc": {
+          "column": 28,
+          "line": 83,
+          "position": 4855
+        }
+      },
+      "tokens": 79
+    },
+    {
+      "firstFile": {
+        "end": 102,
+        "endLoc": {
+          "column": 10,
+          "line": 102,
+          "position": 5840
+        },
+        "name": "page-deploy.css",
+        "start": 96,
+        "startLoc": {
+          "column": 28,
+          "line": 96,
+          "position": 5573
+        }
+      },
+      "format": "css",
+      "fragment": "#overlay #depMain .dep-body > .hub-card {\n  position: relative;\n  border-color: rgba(182, 211, 214, .2);\n  background: linear-gradient(180deg, rgba(14, 36, 50, .93), rgba(10, 27, 39, .95));\n  box-shadow: 0 14px 34px rgba(2, 8, 14, .35), inset 0 1px 0 rgba(214, 232, 235, .05);\n}\n#overlay #depMain .dep-body > .hub-card:last-child {",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 7,
+      "secondFile": {
+        "end": 33,
+        "endLoc": {
+          "column": 10,
+          "line": 33,
+          "position": 2306
+        },
+        "name": "page-shop.css",
+        "start": 27,
+        "startLoc": {
+          "column": 36,
+          "line": 27,
+          "position": 2039
+        }
+      },
+      "tokens": 102
+    },
+    {
+      "firstFile": {
+        "end": 231,
+        "endLoc": {
+          "column": 30,
+          "line": 231,
+          "position": 12497
+        },
+        "name": "page-events.css",
+        "start": 225,
+        "startLoc": {
+          "column": 27,
+          "line": 225,
+          "position": 12312
+        }
+      },
+      "format": "css",
+      "fragment": "#overlay .card.scene .scene-ops .ov-btn:focus-visible {\n  outline: 1px solid #d9bb82cc;\n  outline-offset: 2px;\n  box-shadow: 0 0 0 1px #071720, 0 0 12px rgba(217, 187, 130, .35);\n}\n\n/* ═════════ T6 光标自查 ═════════",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 7,
+      "secondFile": {
+        "end": 213,
+        "endLoc": {
+          "column": 30,
+          "line": 213,
+          "position": 11211
+        },
+        "name": "page-rewards-bag-help.css",
+        "start": 207,
+        "startLoc": {
+          "column": 27,
+          "line": 207,
+          "position": 11026
+        }
+      },
+      "tokens": 66
+    },
+    {
+      "firstFile": {
+        "end": 231,
+        "endLoc": {
+          "column": 30,
+          "line": 231,
+          "position": 12497
+        },
+        "name": "page-events.css",
+        "start": 225,
+        "startLoc": {
+          "column": 35,
+          "line": 225,
+          "position": 12320
+        }
+      },
+      "format": "css",
+      "fragment": "#overlay .card.scene .scene-ops .ov-btn:focus-visible {\n  outline: 1px solid #d9bb82cc;\n  outline-offset: 2px;\n  box-shadow: 0 0 0 1px #071720, 0 0 12px rgba(217, 187, 130, .35);\n}\n\n/* ═════════ T6 光标自查 ═════════",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 7,
+      "secondFile": {
+        "end": 377,
+        "endLoc": {
+          "column": 30,
+          "line": 377,
+          "position": 18966
+        },
+        "name": "page-rewards-bag-help.css",
+        "start": 371,
+        "startLoc": {
+          "column": 39,
+          "line": 371,
+          "position": 18789
+        }
+      },
+      "tokens": 62
+    },
+    {
+      "firstFile": {
+        "end": 231,
+        "endLoc": {
+          "column": 31,
+          "line": 231,
+          "position": 12498
+        },
+        "name": "page-events.css",
+        "start": 225,
+        "startLoc": {
+          "column": 32,
+          "line": 225,
+          "position": 12317
+        }
+      },
+      "format": "css",
+      "fragment": "#overlay .card.scene .scene-ops .ov-btn:focus-visible {\n  outline: 1px solid #d9bb82cc;\n  outline-offset: 2px;\n  box-shadow: 0 0 0 1px #071720, 0 0 12px rgba(217, 187, 130, .35);\n}\n\n/* ═════════ T6 光标自查 ═════════",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 7,
+      "secondFile": {
+        "end": 532,
+        "endLoc": {
+          "column": 31,
+          "line": 532,
+          "position": 27251
+        },
+        "name": "page-rewards-bag-help.css",
+        "start": 526,
+        "startLoc": {
+          "column": 31,
+          "line": 526,
+          "position": 27070
+        }
+      },
+      "tokens": 65
+    },
+    {
+      "firstFile": {
+        "end": 172,
+        "endLoc": {
+          "column": 2,
+          "line": 172,
+          "position": 9500
+        },
+        "name": "page-hub.css",
+        "start": 167,
+        "startLoc": {
+          "column": 32,
+          "line": 167,
+          "position": 9337
+        }
+      },
+      "format": "css",
+      "fragment": "#overlay .card.page:has(#hubMain) .ov-x:hover {\n  color: #f2f6f5; border-color: rgba(217, 187, 130, .55); background: rgba(10, 24, 34, .75);\n  box-shadow: 0 0 10px rgba(217, 187, 130, .15);\n}\n\n/* ═════════ W3 左侧页签栏：金线轨道 + 端点光点 ═════════ */",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 6,
+      "secondFile": {
+        "end": 316,
+        "endLoc": {
+          "column": 1,
+          "line": 316,
+          "position": 16611
+        },
+        "name": "page-settings.css",
+        "start": 312,
+        "startLoc": {
+          "column": 41,
+          "line": 312,
+          "position": 16446
+        }
+      },
+      "tokens": 64
+    },
+    {
+      "firstFile": {
+        "end": 344,
+        "endLoc": {
+          "column": 31,
+          "line": 344,
+          "position": 18111
+        },
+        "name": "page-hub.css",
+        "start": 338,
+        "startLoc": {
+          "column": 32,
+          "line": 338,
+          "position": 17923
+        }
+      },
+      "format": "css",
+      "fragment": "#overlay .card.page:has(#hubMain) .ov-x:focus-visible {\n  outline: 1px solid #d9bb82cc;\n  outline-offset: 2px;\n  box-shadow: 0 0 0 1px var(--bg-deep), 0 0 12px rgba(217, 187, 130, .35);\n}\n\n/* ═════════ T6 光标自查：button 默认 cursor 补 pointer（禁用态除外） ═════════ */",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 7,
+      "secondFile": {
+        "end": 430,
+        "endLoc": {
+          "column": 31,
+          "line": 430,
+          "position": 22231
+        },
+        "name": "page-settings.css",
+        "start": 424,
+        "startLoc": {
+          "column": 41,
+          "line": 424,
+          "position": 22037
+        }
+      },
+      "tokens": 72
+    },
+    {
+      "firstFile": {
+        "end": 33,
+        "endLoc": {
+          "column": 1,
+          "line": 33,
+          "position": 2672
+        },
+        "name": "page-rewards-bag-help.css",
+        "start": 28,
+        "startLoc": {
+          "column": 24,
+          "line": 28,
+          "position": 2538
+        }
+      },
+      "format": "css",
+      "fragment": "#overlay .card.bag-page {\n  --rbh-fast: .18s cubic-bezier(.33, 1, .68, 1);\n  --rbh-lift: .32s cubic-bezier(.3, 1.4, .45, 1);\n  --rbh-press: .09s ease-out;\n}\n#title .ak-quickref,",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 6,
+      "secondFile": {
+        "end": 41,
+        "endLoc": {
+          "column": 2,
+          "line": 41,
+          "position": 2899
+        },
+        "name": "page-rewards-bag-help.css",
+        "start": 35,
+        "startLoc": {
+          "column": 31,
+          "line": 35,
+          "position": 2763
+        }
+      },
+      "tokens": 63
+    },
+    {
+      "firstFile": {
+        "end": 213,
+        "endLoc": {
+          "column": 64,
+          "line": 213,
+          "position": 11245
+        },
+        "name": "page-rewards-bag-help.css",
+        "start": 208,
+        "startLoc": {
+          "column": 22,
+          "line": 208,
+          "position": 11077
+        }
+      },
+      "format": "css",
+      "fragment": "  outline: 1px solid #d9bb82cc;\n  outline-offset: 2px;\n  box-shadow: 0 0 0 1px #071720, 0 0 12px rgba(217, 187, 130, .35);\n}\n\n/* ═══════════════════ 域二 · 远征中背包（.card.bag-page，B 键） ═══════════════════ */",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 6,
+      "secondFile": {
+        "end": 377,
+        "endLoc": {
+          "column": 64,
+          "line": 377,
+          "position": 19000
+        },
+        "name": "page-rewards-bag-help.css",
+        "start": 372,
+        "startLoc": {
+          "column": 22,
+          "line": 372,
+          "position": 18832
+        }
+      },
+      "tokens": 61
+    },
+    {
+      "firstFile": {
+        "end": 332,
+        "endLoc": {
+          "column": 4,
+          "line": 332,
+          "position": 16982
+        },
+        "name": "page-rewards-bag-help.css",
+        "start": 325,
+        "startLoc": {
+          "column": 34,
+          "line": 325,
+          "position": 16816
+        }
+      },
+      "format": "css",
+      "fragment": "#overlay .card.bag-page .bag-slot .stack-count {\n  background: rgba(7, 19, 29, .92);\n  border-color: rgba(217, 187, 130, .55);\n  color: #ecd9ad;\n  box-shadow: 0 0 6px rgba(217, 187, 130, .16);\n}\n\n/* W5 消耗口袋卡：红色「无法使用」标签保留警示语义，纸面 retint 冷青 */",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 8,
+      "secondFile": {
+        "end": 143,
+        "endLoc": {
+          "column": 4,
+          "line": 143,
+          "position": 8359
+        },
+        "name": "page-stash.css",
+        "start": 137,
+        "startLoc": {
+          "column": 84,
+          "line": 137,
+          "position": 8194
+        }
+      },
+      "tokens": 64
+    },
+    {
+      "firstFile": {
+        "end": 93,
+        "endLoc": {
+          "column": 41,
+          "line": 93,
+          "position": 4956
+        },
+        "name": "page-slot-select.css",
+        "start": 88,
+        "startLoc": {
+          "column": 29,
+          "line": 88,
+          "position": 4625
+        }
+      },
+      "format": "css",
+      "fragment": "  left: clamp(22px, 3vw, 56px);\n  background:\n    radial-gradient(2.6px 2.6px at 1px calc(100% - 1px), var(--gold-bright) 40%, transparent 75%),\n    linear-gradient(90deg, #d9bb82b3, transparent) left bottom / 100% 1px no-repeat,\n    linear-gradient(0deg, #d9bb82b3, transparent) left bottom / 1px 100% no-repeat;\n  filter: drop-shadow(0 0 4px #d9bb8238);",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 6,
+      "secondFile": {
+        "end": 102,
+        "endLoc": {
+          "column": 41,
+          "line": 102,
+          "position": 5380
+        },
+        "name": "page-slot-select.css",
+        "start": 97,
+        "startLoc": {
+          "column": 22,
+          "line": 97,
+          "position": 5049
+        }
+      },
+      "tokens": 100
+    },
+    {
+      "firstFile": {
+        "end": 130,
+        "endLoc": {
+          "column": 2,
+          "line": 130,
+          "position": 7685
+        },
+        "name": "page-stash.css",
+        "start": 124,
+        "startLoc": {
+          "column": 78,
+          "line": 124,
+          "position": 7480
+        }
+      },
+      "format": "css",
+      "fragment": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .stash-cell:active {\n  transform: translateY(-2px) scale(.96);\n  border-color: rgba(217, 187, 130, .7);\n  transition: transform var(--stx-press), border-color var(--stx-press), box-shadow var(--stx-press);\n}\n\n/* W3f 已收藏格：金环 + 内圈细金线（旧 #dfc28d retint 到 var(--gold-main) 族） */",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 7,
+      "secondFile": {
+        "end": 225,
+        "endLoc": {
+          "column": 1,
+          "line": 225,
+          "position": 12509
+        },
+        "name": "page-stash.css",
+        "start": 220,
+        "startLoc": {
+          "column": 81,
+          "line": 220,
+          "position": 12306
+        }
+      },
+      "tokens": 72
+    },
+    {
+      "firstFile": {
+        "end": 251,
+        "endLoc": {
+          "column": 12,
+          "line": 251,
+          "position": 14001
+        },
+        "name": "page-stash.css",
+        "start": 246,
+        "startLoc": {
+          "column": 72,
+          "line": 246,
+          "position": 13771
+        }
+      },
+      "format": "css",
+      "fragment": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .pk-row.pet-row.on {\n  border-color: rgba(217, 187, 130, .55);\n  background: linear-gradient(90deg, rgba(217, 187, 130, .12), rgba(217, 187, 130, .03) 55%, transparent);\n  box-shadow: inset 2px 0 0 var(--gold-main);\n}\n/* 未孵化：虚线界弱化（透明度沿用原 locked 规则） */",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 6,
+      "secondFile": {
+        "end": 177,
+        "endLoc": {
+          "column": 12,
+          "line": 177,
+          "position": 9722
+        },
+        "name": "page-upgrade.css",
+        "start": 172,
+        "startLoc": {
+          "column": 30,
+          "line": 172,
+          "position": 9492
+        }
+      },
+      "tokens": 89
+    },
+    {
+      "firstFile": {
+        "end": 639,
+        "endLoc": {
+          "column": 3,
+          "line": 639,
+          "position": 49092
+        },
+        "name": "scenes.css",
+        "start": 634,
+        "startLoc": {
+          "column": 124,
+          "line": 634,
+          "position": 48824
+        }
+      },
+      "format": "css",
+      "fragment": "  .battle-stage[data-asset-key=\"battle-boss-element\"] { background-image:url('../assets/scenes/battle-normal-anime-v2.webp'); }\n\n  #overlay .scene[data-asset-key=\"scene-event-cobbler\"] { background-image:url('../assets/scenes/event-cmtn7qttxqo4.webp'); }\n  #overlay .node-pg[data-asset-key=\"scene-event-cobbler\"] { background-image:url('../assets/scenes/event-cmtn7qttxqo4.webp'); }\n\n  #overlay :is(.scene,.node-pg)[data-asset-key=\"scene-event-vital\"] { background-image:url('../assets/scenes/event-ev19-vital.webp'); }",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 6,
+      "secondFile": {
+        "end": 657,
+        "endLoc": {
+          "column": 127,
+          "line": 657,
+          "position": 51301
+        },
+        "name": "scenes.css",
+        "start": 654,
+        "startLoc": {
+          "column": 134,
+          "line": 654,
+          "position": 51040
+        }
+      },
+      "tokens": 52
+    },
+    {
+      "firstFile": {
+        "end": 429,
+        "endLoc": {
+          "column": 37,
+          "line": 429,
+          "position": 24651
+        },
+        "name": "agent\\agent.policy.js",
+        "start": 422,
+        "startLoc": {
+          "column": 30,
+          "line": 422,
+          "position": 24271
+        }
+      },
+      "format": "javascript",
+      "fragment": "            if (ty === 'door' || ty === 'emergencyExit'\n              || (ty === 'extraction' && (obs.run?.bossKilled ?? false))) targets.push(i);\n            for (const [tl, ti] of lay[i]?.next || []) {\n              if (tl === curLi && ti != null) pred[ti].push(i);   // 同层反向边\n            }\n          }\n          const dist = new Map(targets.map(i => [i, 0]));\n          const queue = [...targets];",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 8,
+      "secondFile": {
+        "end": 472,
+        "endLoc": {
+          "column": 37,
+          "line": 472,
+          "position": 26782
+        },
+        "name": "agent\\agent.policy.js",
+        "start": 465,
+        "startLoc": {
+          "column": 30,
+          "line": 465,
+          "position": 26423
+        }
+      },
+      "tokens": 98
+    },
+    {
+      "firstFile": {
+        "end": 444,
+        "endLoc": {
+          "column": 26,
+          "line": 444,
+          "position": 25391
+        },
+        "name": "agent\\agent.policy.js",
+        "start": 438,
+        "startLoc": {
+          "column": 10,
+          "line": 438,
+          "position": 25159
+        }
+      },
+      "format": "javascript",
+      "fragment": "          while (queue.length) {\n            const u = queue.shift();\n            for (const p of pred[u]) {\n              if (!dist.has(p)) { dist.set(p, dist.get(u) + 1); queue.push(p); }\n            }\n          }\n          if (dist.size) {",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 7,
+      "secondFile": {
+        "end": 479,
+        "endLoc": {
+          "column": 26,
+          "line": 479,
+          "position": 27025
+        },
+        "name": "agent\\agent.policy.js",
+        "start": 473,
+        "startLoc": {
+          "column": 10,
+          "line": 473,
+          "position": 26793
+        }
+      },
+      "tokens": 71
+    },
+    {
+      "firstFile": {
+        "end": 76,
+        "endLoc": {
+          "column": 43,
+          "line": 76,
+          "position": 5615
+        },
+        "name": "battle\\core\\battle.enemy-phase.js",
+        "start": 67,
+        "startLoc": {
+          "column": 23,
+          "line": 67,
+          "position": 5054
+        }
+      },
+      "format": "javascript",
+      "fragment": "    set$extraTurn(false);\n    set$turn(turn + 1);\n    foes.forEach(foe => { if (!foe.dead) foe.intent = intentFor(foe, turn); });\n    set$energy(maxEnergy);\n    // 额外回合=新回合：打出计数清零（对齐 afterEnemies 新回合口径，追斩/连续射击按本回合计）；\n    // 回合成长同步累积（老板 2026-09-29 拍板：额外回合吃回合成长——充能火球等「回合开始时本牌伤害+1」照常 +1）\n    set$playedMartialThisTurn(0);\n    set$playedMovesThisTurn(0);\n    accrueGrowth();\n    if ((pstat.status.natureForm || 0) > 0) set$energy(energy + 1);",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 10,
+      "secondFile": {
+        "end": 332,
+        "endLoc": {
+          "column": 43,
+          "line": 332,
+          "position": 19544
+        },
+        "name": "battle\\core\\battle.enemy-phase.js",
+        "start": 324,
+        "startLoc": {
+          "column": 24,
+          "line": 324,
+          "position": 19006
+        }
+      },
+      "tokens": 70
+    },
+    {
+      "firstFile": {
+        "end": 391,
+        "endLoc": {
+          "column": 50,
+          "line": 391,
+          "position": 22581
+        },
+        "name": "battle\\core\\battle.enemy-phase.js",
+        "start": 385,
+        "startLoc": {
+          "column": 61,
+          "line": 385,
+          "position": 22382
+        }
+      },
+      "format": "javascript",
+      "fragment": "      if (!await awaitBattleFeedback(stillEnemyPhase)) return;\n    }\n    if (!stillEnemyPhase()) return;\n    if (G.hp <= 0) { finish(false); return; }\n    sweepDead();\n    if (!stillEnemyPhase()) return;\n    if (!alive().length) { finish(true); return; }",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 7,
+      "secondFile": {
+        "end": 403,
+        "endLoc": {
+          "column": 50,
+          "line": 403,
+          "position": 22980
+        },
+        "name": "battle\\core\\battle.enemy-phase.js",
+        "start": 397,
+        "startLoc": {
+          "column": 17,
+          "line": 397,
+          "position": 22781
+        }
+      },
+      "tokens": 59
+    },
+    {
+      "firstFile": {
+        "end": 129,
+        "endLoc": {
+          "column": 7,
+          "line": 129,
+          "position": 9526
+        },
+        "name": "battle\\core\\battle.resolution.js",
+        "start": 120,
+        "startLoc": {
+          "column": 63,
+          "line": 120,
+          "position": 8861
+        }
+      },
+      "format": "javascript",
+      "fragment": "    const isStacking = kind => !!combat.CURSE_META[kind]?.stack;\n    // 目标解析与 damage 段同口径：chosenEnemy 倒下顺延战场首位；randomEnemy 施放时掷一名存活敌人；\n    // self 指玩家自身（getPlayerStatus，不在 foes 里，windup 由 staged-playback 按 foeIdx<0 跳过）；\n    // bindTarget:'prevDamage'（M2，血毒双镖式段绑定）→ 目标沿用同一 onPlay 内前一 damage 段实际命中者。\n    const pickTargets = () => {\n      if (operation.target === 'allEnemies') return getAliveFoes();\n      if (operation.target === 'randomEnemy') {\n        const alive = getAliveFoes();\n        return alive.length ? [alive[Math.floor(randomBattle() * alive.length)]] : [];\n      }",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 10,
+      "secondFile": {
+        "end": 664,
+        "endLoc": {
+          "column": 11,
+          "line": 664,
+          "position": 46494
+        },
+        "name": "battle\\core\\battle.resolution.js",
+        "start": 656,
+        "startLoc": {
+          "column": 26,
+          "line": 656,
+          "position": 45972
+        }
+      },
+      "tokens": 64
+    },
+    {
+      "firstFile": {
+        "end": 317,
+        "endLoc": {
+          "column": 149,
+          "line": 317,
+          "position": 23527
+        },
+        "name": "battle\\core\\battle.resolution.js",
+        "start": 312,
+        "startLoc": {
+          "column": 39,
+          "line": 312,
+          "position": 23085
+        }
+      },
+      "format": "javascript",
+      "fragment": "      const take = Math.min(operation.n, deckBottomCount());\n      const uids = takeDeckBottom(take);\n      const cards = uids.map(u => { const o = findCard(u); return o ? o.card : null; }).filter(Boolean);\n      if (cards.length) {\n        queueDiscover({ n: cards.length, explicit: cards, explicitUids: uids, deckBottom: true });\n        log(`[[icon:question]] <b>${esc(card.name)}</b>：翻开牌库底 ${cards.length} 张——选 1 张入手，其余放回牌库底`, 'loot');",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 6,
+      "secondFile": {
+        "end": 554,
+        "endLoc": {
+          "column": 149,
+          "line": 554,
+          "position": 38665
+        },
+        "name": "battle\\core\\battle.resolution.js",
+        "start": 549,
+        "startLoc": {
+          "column": 29,
+          "line": 549,
+          "position": 38193
+        }
+      },
+      "tokens": 97
+    },
+    {
+      "firstFile": {
+        "end": 388,
+        "endLoc": {
+          "column": 132,
+          "line": 388,
+          "position": 27832
+        },
+        "name": "battle\\core\\battle.resolution.js",
+        "start": 383,
+        "startLoc": {
+          "column": 8,
+          "line": 383,
+          "position": 27540
+        }
+      },
+      "format": "javascript",
+      "fragment": "        gained.push(c.name);\n      }\n      if (gained.length) {\n        const counts = {};\n        gained.forEach(name => { counts[name] = (counts[name] || 0) + 1; });\n        const detail = Object.keys(counts).map(name => `【${esc(name)}】×${counts[name] * (act === 'dup' ? 2 : 1)}`).join('、');",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 6,
+      "secondFile": {
+        "end": 415,
+        "endLoc": {
+          "column": 130,
+          "line": 415,
+          "position": 29094
+        },
+        "name": "battle\\core\\battle.resolution.js",
+        "start": 410,
+        "startLoc": {
+          "column": 6,
+          "line": 410,
+          "position": 28812
+        }
+      },
+      "tokens": 91
+    },
+    {
+      "firstFile": {
+        "end": 24,
+        "endLoc": {
+          "column": 11,
+          "line": 24,
+          "position": 1468
+        },
+        "name": "battle\\effects\\effect-steps.damage.js",
+        "start": 19,
+        "startLoc": {
+          "column": 10,
+          "line": 19,
+          "position": 1177
+        }
+      },
+      "format": "javascript",
+      "fragment": "      let target = preferred && !preferred.dead ? preferred : getAlive().find(foe => foe && !foe.dead);\n      if (!target) {\n        log(`[[icon:cross]] <b>${esc(ctx.card.name)}</b>：第 ${i + 1}/${count} 段未施放，场上已无可攻击的敌人`, 'dim');\n        break;\n      }\n      const cue = attackCue(type);",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 6,
+      "secondFile": {
+        "end": 31,
+        "endLoc": {
+          "column": 11,
+          "line": 31,
+          "position": 1867
+        },
+        "name": "battle\\effects\\effect-steps.damage.js",
+        "start": 26,
+        "startLoc": {
+          "column": 6,
+          "line": 26,
+          "position": 1576
+        }
+      },
+      "tokens": 59
+    },
+    {
+      "firstFile": {
+        "end": 643,
+        "endLoc": {
+          "column": 30,
+          "line": 643,
+          "position": 39308
+        },
+        "name": "battle\\view\\battle.layers.js",
+        "start": 638,
+        "startLoc": {
+          "column": 42,
+          "line": 638,
+          "position": 38976
+        }
+      },
+      "format": "javascript",
+      "fragment": "        slot.addEventListener('mouseenter', () => {\n          if (clickSelectedUid == null || slot.classList.contains('dead')) return;\n          const entry = findCard(clickSelectedUid);\n          if (entry && targetSide(entry.card) === 'enemy') showFoePreview(slot, +slot.dataset.eidx, clickSelectedUid, entry.card, 'click');\n        });\n        slot.addEventListener('mouseleave', () => { if (!slot.matches(':focus')) clearFoePreview(slot); });",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 6,
+      "secondFile": {
+        "end": 649,
+        "endLoc": {
+          "column": 30,
+          "line": 649,
+          "position": 39758
+        },
+        "name": "battle\\view\\battle.layers.js",
+        "start": 644,
+        "startLoc": {
+          "column": 39,
+          "line": 644,
+          "position": 39426
+        }
+      },
+      "tokens": 70
+    },
+    {
+      "firstFile": {
+        "end": 64,
+        "endLoc": {
+          "column": 7,
+          "line": 64,
+          "position": 5121
+        },
+        "name": "battle\\view\\battle.overlays.js",
+        "start": 59,
+        "startLoc": {
+          "column": 32,
+          "line": 59,
+          "position": 4784
+        }
+      },
+      "format": "javascript",
+      "fragment": "    const cards = snapshot.grave.map(findCard).filter(Boolean);\n    const byType = {};\n    cards.forEach(entry => { byType[entry.card.type] = (byType[entry.card.type] || 0) + 1; });\n    const statLine = Object.keys(byType).length\n      ? Object.entries(byType).sort((a, b) => b[1] - a[1]).map(([type, count]) => `${esc(type)} <b>${count}</b>`).join(' · ')\n      : '（墓地还是空的——注能等效果消耗的牌会进入这里）';",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 6,
+      "secondFile": {
+        "end": 95,
+        "endLoc": {
+          "column": 7,
+          "line": 95,
+          "position": 7420
+        },
+        "name": "battle\\view\\battle.overlays.js",
+        "start": 90,
+        "startLoc": {
+          "column": 35,
+          "line": 90,
+          "position": 7083
+        }
+      },
+      "tokens": 114
+    },
+    {
+      "firstFile": {
+        "end": 76,
+        "endLoc": {
+          "column": 123,
+          "line": 76,
+          "position": 5945
+        },
+        "name": "battle\\view\\battle.overlays.js",
+        "start": 64,
+        "startLoc": {
+          "column": 82,
+          "line": 64,
+          "position": 5196
+        }
+      },
+      "format": "javascript",
+      "fragment": "      : '（墓地还是空的——注能等效果消耗的牌会进入这里）';\n    const byName = new Map();\n    cards.forEach(entry => {\n      const key = cardIdentityKey(entry.card);\n      if (!byName.has(key)) byName.set(key, { card: entry.card, count: 0 });\n      byName.get(key).count++;\n    });\n    const listHTML = [...byName.values()].map(stack => `\n      <div class=\"bt-gy-row\" title=\"${escAttr(stack.card.desc || '')}\">\n        <span>[[icon:cards]] <b>${esc(stack.card.name)}</b>${stack.count > 1 ? ` ×${stack.count}` : ''}</span>\n        <span class=\"bt-gy-meta\">${esc(stack.card.type)} · ${stack.card.cost}费 · ${esc(stack.card.rarity || '')}</span>\n      </div>`).join('');\n    UI.showOverlay(`${snapshot.opts.isBoss ? '[[icon:demon]] BOSS战' : '[[icon:swords]] 遭遇战'} · 第 ${snapshot.turn} 回合 · [[icon:skull]] 墓地`, `",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 13,
+      "secondFile": {
+        "end": 107,
+        "endLoc": {
+          "column": 123,
+          "line": 107,
+          "position": 8232
+        },
+        "name": "battle\\view\\battle.overlays.js",
+        "start": 95,
+        "startLoc": {
+          "column": 70,
+          "line": 95,
+          "position": 7483
+        }
+      },
+      "tokens": 170
+    },
+    {
+      "firstFile": {
+        "end": 101,
+        "endLoc": {
+          "column": 8,
+          "line": 101,
+          "position": 5805
+        },
+        "name": "battle\\view\\battle.preview.js",
+        "start": 96,
+        "startLoc": {
+          "column": 36,
+          "line": 96,
+          "position": 5500
+        }
+      },
+      "format": "javascript",
+      "fragment": "  return Object.freeze({ legal: true, cost, targetIndexes: targets, confidence: 'unknown', damage: null,\n    knownEffects: Object.freeze([]), unknownEffects: Object.freeze([]), reasons: Object.freeze([reason]) });\n}\n\n/** @param {number} cost @param {readonly number[]} targets @param {string} reason @returns {PreviewResult} */\nfunction illegal(cost, targets, reason) {",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 6,
+      "secondFile": {
+        "end": 107,
+        "endLoc": {
+          "column": 8,
+          "line": 107,
+          "position": 6137
+        },
+        "name": "battle\\view\\battle.preview.js",
+        "start": 102,
+        "startLoc": {
+          "column": 37,
+          "line": 102,
+          "position": 5877
+        }
+      },
+      "tokens": 50
+    },
+    {
+      "firstFile": {
+        "end": 157,
+        "endLoc": {
+          "column": 5,
+          "line": 157,
+          "position": 10112
+        },
+        "name": "battle\\view\\battle.view.js",
+        "start": 149,
+        "startLoc": {
+          "column": 17,
+          "line": 149,
+          "position": 9752
+        }
+      },
+      "format": "javascript",
+      "fragment": "    if (!canReuse) {\n      UI.showOverlay('', html, 'battle');\n      const fresh = body.firstElementChild;\n      fresh._battleToken = token;\n      fresh._battleTemplate = fresh.cloneNode(true);\n      fresh.classList.add('bt-entrance');   // 单位入场演出只挂场次首建；复用渲染绝不再带（令牌守卫）\n      animateXpChip(body);\n      return;\n    }",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 9,
+      "secondFile": {
+        "end": 171,
+        "endLoc": {
+          "column": 5,
+          "line": 171,
+          "position": 10800
+        },
+        "name": "battle\\view\\battle.view.js",
+        "start": 163,
+        "startLoc": {
+          "column": 100,
+          "line": 163,
+          "position": 10527
+        }
+      },
+      "tokens": 54
+    },
+    {
+      "firstFile": {
+        "end": 31,
+        "endLoc": {
+          "column": 47,
+          "line": 31,
+          "position": 2332
+        },
+        "name": "cards\\card-rules.schema.js",
+        "start": 24,
+        "startLoc": {
+          "column": 2,
+          "line": 24,
+          "position": 1695
+        }
+      },
+      "format": "javascript",
+      "fragment": "  'cmtn1wnhhym': 'temporary-hand-cards', 'cmtn233trmeg': 'keep-self-in-hand',\n  'tt3-fatal-pierce': 'bleed-gated-armor-break', 'tt3-frostfall': 'choose-and-cast-melee',\n  'tt3-qi-wave': 'draw-and-price-damage', 'tt7-bloodpoison': 'double-target-poison-daggers',\n  'tt7-ghostblade': 'stealth-break-bonus', 'tt7-marchrush': 'last-hand-repeat-all',\n  'cc-poison-burst': 'burst-existing-poison', 'tt12-felguard': 'infused-immune-spell',\n  'tt12-freezeray': 'untouched-target-freeze', 'tt12-raydragon': 'infused-ray',\n  'tt3-magic-lamp': 'three-choice-lamp', 'tt7-holyheal': 'infused-price-heal',\n  'tt7-meteorstrong': 'infused-fireball-burst', 'tt3sp-bloodstorm': 'infused-repeating-lifesteal',",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 8,
+      "secondFile": {
+        "end": 26,
+        "endLoc": {
+          "column": 47,
+          "line": 26,
+          "position": 1234
+        },
+        "name": "cards\\cards.sync.m11.js",
+        "start": 12,
+        "startLoc": {
+          "column": 2,
+          "line": 12,
+          "position": 583
+        }
+      },
+      "tokens": 60
+    },
+    {
+      "firstFile": {
+        "end": 23,
+        "endLoc": {
+          "column": 1,
+          "line": 23,
+          "position": 1537
+        },
+        "name": "cards\\cards.sync.backfiller.js",
+        "start": 15,
+        "startLoc": {
+          "column": 42,
+          "line": 15,
+          "position": 1066
+        }
+      },
+      "format": "javascript",
+      "fragment": "export function sameSnapshot(left, right) {\n  if (left === right) return true;\n  if (!left || !right || typeof left !== 'object' || typeof right !== 'object') return false;\n  if (Array.isArray(left) !== Array.isArray(right)) return false;\n  if (Array.isArray(left) && left.length !== right.length) return false;\n  const keys = Object.keys(left);\n  return keys.length === Object.keys(right).length && keys.every(key =>\n    Object.prototype.hasOwnProperty.call(right, key) && sameSnapshot(left[key], right[key]));\n}",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 9,
+      "secondFile": {
+        "end": 135,
+        "endLoc": {
+          "column": 9,
+          "line": 135,
+          "position": 7128
+        },
+        "name": "cards\\cards.sync.js",
+        "start": 127,
+        "startLoc": {
+          "column": 46,
+          "line": 127,
+          "position": 6593
+        }
+      },
+      "tokens": 128
+    },
+    {
+      "firstFile": {
+        "end": 81,
+        "endLoc": {
+          "column": 88,
+          "line": 81,
+          "position": 4424
+        },
+        "name": "cards\\cards.sync.backfiller.js",
+        "start": 75,
+        "startLoc": {
+          "column": 42,
+          "line": 75,
+          "position": 4031
+        }
+      },
+      "format": "javascript",
+      "fragment": "      const raw = storage.getItem(storeKey);\n      if (raw == null) return;\n      const storedCards = JSON.parse(raw);\n      if (!Array.isArray(storedCards) || storedCards.length === 0) return;\n      if (storedCards.some(card => !card || typeof card !== 'object' || Array.isArray(card)\n        || typeof card.id !== 'string' || !card.id)) return;\n      if (new Set(storedCards.map(card => card.id)).size !== storedCards.length) return;",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 7,
+      "secondFile": {
+        "end": 126,
+        "endLoc": {
+          "column": 90,
+          "line": 126,
+          "position": 6546
+        },
+        "name": "cards\\cards.sync.js",
+        "start": 120,
+        "startLoc": {
+          "column": 44,
+          "line": 120,
+          "position": 6141
+        }
+      },
+      "tokens": 101
+    },
+    {
+      "firstFile": {
+        "end": 440,
+        "endLoc": {
+          "column": 29,
+          "line": 440,
+          "position": 22963
+        },
+        "name": "cards\\cards.sync.js",
+        "start": 435,
+        "startLoc": {
+          "column": 28,
+          "line": 435,
+          "position": 22698
+        }
+      },
+      "format": "javascript",
+      "fragment": "        SDT.Cards.TABLETOP10.map(canonicalTabletopSnapshot).filter(Boolean).forEach(d => {\n          const i = cards.findIndex(c => c.id === d.id);\n          if (i >= 0) cards[i] = { ...d }; else cards.push({ ...d });\n        });\n        SDT.Cards.saveAll(cards);\n        localStorage.setItem(TT10_KEY, '1');",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 6,
+      "secondFile": {
+        "end": 574,
+        "endLoc": {
+          "column": 29,
+          "line": 574,
+          "position": 29478
+        },
+        "name": "cards\\cards.sync.js",
+        "start": 569,
+        "startLoc": {
+          "column": 28,
+          "line": 569,
+          "position": 29213
+        }
+      },
+      "tokens": 77
+    },
+    {
+      "firstFile": {
+        "end": 440,
+        "endLoc": {
+          "column": 29,
+          "line": 440,
+          "position": 22963
+        },
+        "name": "cards\\cards.sync.js",
+        "start": 435,
+        "startLoc": {
+          "column": 75,
+          "line": 435,
+          "position": 22745
+        }
+      },
+      "format": "javascript",
+      "fragment": "        SDT.Cards.TABLETOP10.map(canonicalTabletopSnapshot).filter(Boolean).forEach(d => {\n          const i = cards.findIndex(c => c.id === d.id);\n          if (i >= 0) cards[i] = { ...d }; else cards.push({ ...d });\n        });\n        SDT.Cards.saveAll(cards);\n        localStorage.setItem(TT10_KEY, '1');",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 6,
+      "secondFile": {
+        "end": 595,
+        "endLoc": {
+          "column": 29,
+          "line": 595,
+          "position": 30557
+        },
+        "name": "cards\\cards.sync.js",
+        "start": 590,
+        "startLoc": {
+          "column": 23,
+          "line": 590,
+          "position": 30339
+        }
+      },
+      "tokens": 67
+    },
+    {
+      "firstFile": {
+        "end": 478,
+        "endLoc": {
+          "column": 8,
+          "line": 478,
+          "position": 24618
+        },
+        "name": "cards\\cards.sync.js",
+        "start": 473,
+        "startLoc": {
+          "column": 49,
+          "line": 473,
+          "position": 24421
+        }
+      },
+      "format": "javascript",
+      "fragment": "      const ids = ['tt3-bandage', 'tt3-hold-fast'];\n      const definitions = new Map(\n        SDT.Cards.TABLETOP10\n          .filter(card => ids.includes(card.id) && card.rules?.triggers?.onPlay)\n          .map(card => [card.id, card]),\n      );",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 6,
+      "secondFile": {
+        "end": 496,
+        "endLoc": {
+          "column": 8,
+          "line": 496,
+          "position": 25290
+        },
+        "name": "cards\\cards.sync.js",
+        "start": 491,
+        "startLoc": {
+          "column": 69,
+          "line": 491,
+          "position": 25093
+        }
+      },
+      "tokens": 51
+    },
+    {
+      "firstFile": {
+        "end": 478,
+        "endLoc": {
+          "column": 8,
+          "line": 478,
+          "position": 24618
+        },
+        "name": "cards\\cards.sync.js",
+        "start": 473,
+        "startLoc": {
+          "column": 49,
+          "line": 473,
+          "position": 24421
+        }
+      },
+      "format": "javascript",
+      "fragment": "      const ids = ['tt3-bandage', 'tt3-hold-fast'];\n      const definitions = new Map(\n        SDT.Cards.TABLETOP10\n          .filter(card => ids.includes(card.id) && card.rules?.triggers?.onPlay)\n          .map(card => [card.id, card]),\n      );",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 6,
+      "secondFile": {
+        "end": 515,
+        "endLoc": {
+          "column": 8,
+          "line": 515,
+          "position": 25925
+        },
+        "name": "cards\\cards.sync.js",
+        "start": 510,
+        "startLoc": {
+          "column": 35,
+          "line": 510,
+          "position": 25728
+        }
+      },
+      "tokens": 51
+    },
+    {
+      "firstFile": {
+        "end": 498,
+        "endLoc": {
+          "column": 18,
+          "line": 498,
+          "position": 25351
+        },
+        "name": "cards\\cards.sync.js",
+        "start": 492,
+        "startLoc": {
+          "column": 6,
+          "line": 492,
+          "position": 25102
+        }
+      },
+      "format": "javascript",
+      "fragment": "      const definitions = new Map(\n        SDT.Cards.TABLETOP10\n          .filter(card => ids.includes(card.id) && card.rules?.triggers?.onPlay)\n          .map(card => [card.id, card]),\n      );\n      backfillStructuredRuleDefinitions({\n        markerKey: 'sdt-cards-tt7-multihit-v1-seeded',",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 7,
+      "secondFile": {
+        "end": 517,
+        "endLoc": {
+          "column": 18,
+          "line": 517,
+          "position": 25986
+        },
+        "name": "cards\\cards.sync.js",
+        "start": 511,
+        "startLoc": {
+          "column": 6,
+          "line": 511,
+          "position": 25737
+        }
+      },
+      "tokens": 54
+    },
+    {
+      "firstFile": {
+        "end": 636,
+        "endLoc": {
+          "column": 18,
+          "line": 636,
+          "position": 32193
+        },
+        "name": "cards\\cards.sync.js",
+        "start": 629,
+        "startLoc": {
+          "column": 57,
+          "line": 629,
+          "position": 31935
+        }
+      },
+      "format": "javascript",
+      "fragment": "      const ids = ['tt12-barriermend', 'tt12-firecracker'];\n      const definitions = new Map(\n        SDT.Cards.TABLETOP12\n          .filter(card => ids.includes(card.id) && card.rules?.triggers?.onPlay)\n          .map(card => [card.id, card]),\n      );\n      backfillStructuredRuleDefinitions({\n        markerKey: 'sdt-cards-tt12-onplay-v1-seeded',",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 8,
+      "secondFile": {
+        "end": 651,
+        "endLoc": {
+          "column": 18,
+          "line": 651,
+          "position": 32707
+        },
+        "name": "cards\\cards.sync.js",
+        "start": 644,
+        "startLoc": {
+          "column": 34,
+          "line": 644,
+          "position": 32449
+        }
+      },
+      "tokens": 56
+    },
+    {
+      "firstFile": {
+        "end": 32,
+        "endLoc": {
+          "column": 5,
+          "line": 32,
+          "position": 2518
+        },
+        "name": "cards\\cards.sync.m1.js",
+        "start": 27,
+        "startLoc": {
+          "column": 66,
+          "line": 27,
+          "position": 2303
+        }
+      },
+      "format": "javascript",
+      "fragment": "export const M1_MARKER_KEY = 'sdt-cards-m1-onplay-rules-v1-seeded';\n\nconst R = (battle, onPlay) => ({ rules: { version: 1, battle, triggers: { onPlay } } });\nconst ENEMY_ONE = { target: { side: 'enemy', area: false } };\nconst SELF = { target: { side: 'self', area: false } };\nconst dmgOne = () => R(ENEMY_ONE, [{ op: 'damage', amountField: 'dmg', target: 'chosenEnemy' }]);",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 6,
+      "secondFile": {
+        "end": 69,
+        "endLoc": {
+          "column": 5,
+          "line": 69,
+          "position": 6749
+        },
+        "name": "cards\\cards.sync.m3.js",
+        "start": 64,
+        "startLoc": {
+          "column": 66,
+          "line": 64,
+          "position": 6534
+        }
+      },
+      "tokens": 65
+    },
+    {
+      "firstFile": {
+        "end": 50,
+        "endLoc": {
+          "column": 20,
+          "line": 50,
+          "position": 2765
+        },
+        "name": "core\\art.js",
+        "start": 43,
+        "startLoc": {
+          "column": 56,
+          "line": 43,
+          "position": 2548
+        }
+      },
+      "format": "javascript",
+      "fragment": "  const ITEM_ART = Object.freeze({ ...DATA.art.itemArt });\n  const missingKeys = new Set();\n\n  function reportMissing(kind, key) {\n    const label = `${kind}:${String(key || '(empty)')}`;\n    if (!missingKeys.has(label)) {\n      missingKeys.add(label);\n      console.error(`[SDT.Art] missing asset mapping: ${label}`);",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 8,
+      "secondFile": {
+        "end": 14,
+        "endLoc": {
+          "column": 20,
+          "line": 14,
+          "position": 800
+        },
+        "name": "core\\icons-bitmap.js",
+        "start": 8,
+        "startLoc": {
+          "column": 401,
+          "line": 8,
+          "position": 584
+        }
+      },
+      "tokens": 54
+    },
+    {
+      "firstFile": {
+        "end": 409,
+        "endLoc": {
+          "column": 92,
+          "line": 409,
+          "position": 23522
+        },
+        "name": "core\\art.js",
+        "start": 393,
+        "startLoc": {
+          "column": 44,
+          "line": 393,
+          "position": 22799
+        }
+      },
+      "format": "javascript",
+      "fragment": "        if (u && !seen.has(u) && !warmedUrls.has(u)) { seen.add(u); list.push(u); }\n      }\n      // 进度总数 = 待加载 + 已预热（调用方传去重前全量，done/grand 口径一致）\n      const grand = (urls || []).length;\n      let done = grand - list.length;   // 已预热过的先计入完成\n      if (onProgress && grand) onProgress(done, grand);\n      let i = 0;\n      return new Promise((resolve) => {\n        const scheduleNext = () => {\n          const run = () => {\n            if (document.body?.classList.contains('cardlib-open')) {\n              setTimeout(scheduleNext, 160);\n              return;\n            }\n            next();\n          };\n          if (typeof requestIdleCallback === 'function') requestIdleCallback(run, { timeout: 400 });",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 17,
+      "secondFile": {
+        "end": 456,
+        "endLoc": {
+          "column": 92,
+          "line": 456,
+          "position": 25409
+        },
+        "name": "core\\art.js",
+        "start": 441,
+        "startLoc": {
+          "column": 48,
+          "line": 441,
+          "position": 24827
+        }
+      },
+      "tokens": 129
+    },
+    {
+      "firstFile": {
+        "end": 265,
+        "endLoc": {
+          "column": 23,
+          "line": 265,
+          "position": 9722
+        },
+        "name": "generated\\art-manifest.js",
+        "start": 3,
+        "startLoc": {
+          "column": 0,
+          "line": 3,
+          "position": 207
+        }
+      },
+      "format": "javascript",
+      "fragment": "export default [\n  \"cards/bound-shadow.webp\",\n  \"cards/consumable.webp\",\n  \"cards/creature-cmtn6ulm4boj.webp\",\n  \"cards/creature-cmtn79743r2n.webp\",\n  \"cards/creature-cmtn7err0a7.webp\",\n  \"cards/creature-tt8-curseimmune.webp\",\n  \"cards/creature-tt8-energycap.webp\",\n  \"cards/creature-tt8-healplus.webp\",\n  \"cards/creature-tt8-nofocus.webp\",\n  \"cards/curse-drain.webp\",\n  \"cards/curse-freeze.webp\",\n  \"cards/curse-silence.webp\",\n  \"cards/curse-venom.webp\",\n  \"cards/dark-eclipse.webp\",\n  \"cards/equip-tt12-raygun.webp\",\n  \"cards/equip-tt2-apollo.webp\",\n  \"cards/equip-tt2-frostsword.webp\",\n  \"cards/equip-tt2-pearlbox.webp\",\n  \"cards/equip-tt2-treasuremap.webp\",\n  \"cards/equip-tt2-venomstaff.webp\",\n  \"cards/equip-tt2-wreck.webp\",\n  \"cards/equip-tt3-azure-sword.webp\",\n  \"cards/equip-tt3-blooddrinker.webp\",\n  \"cards/equip-tt3-chaos-eye.webp\",\n  \"cards/equip-tt3-crimson-pouch.webp\",\n  \"cards/equip-tt3-deep-diary.webp\",\n  \"cards/equip-tt3-deep-seal.webp\",\n  \"cards/equip-tt3-element-seal.webp\",\n  \"cards/equip-tt3-fate-wheel.webp\",\n  \"cards/equip-tt3-grass-armor.webp\",\n  \"cards/equip-tt3-holy-staff.webp\",\n  \"cards/equip-tt3-immortal-blade.webp\",\n  \"cards/equip-tt3-light-mail.webp\",\n  \"cards/equip-tt3-longsword.webp\",\n  \"cards/equip-tt3-master-staff.webp\",\n  \"cards/equip-tt3-reverse-bow.webp\",\n  \"cards/equip-tt3-sapper-bomb.webp\",\n  \"cards/equip-tt3-silver-runesword.webp\",\n  \"cards/equip-tt3-staff.webp\",\n  \"cards/equip-tt3-twinwater-mail.webp\",\n  \"cards/equip-tt3-wolf-bow.webp\",\n  \"cards/equip-tt3eq-boiler.webp\",\n  \"cards/equip-tt3eq-mistbox.webp\",\n  \"cards/equip-tt7-arcanescroll.webp\",\n  \"cards/equip-tt7-darkfort.webp\",\n  \"cards/equip-tt7-naturestaff.webp\",\n  \"cards/equip-tt7-talisman.webp\",\n  \"cards/equip-tt8-archdemon.webp\",\n  \"cards/equip-tt8-demonslay.webp\",\n  \"cards/equip-tt8-heavensword.webp\",\n  \"cards/equipment-armor.webp\",\n  \"cards/equipment-utility.webp\",\n  \"cards/equipment-weapon.webp\",\n  \"cards/event.webp\",\n  \"cards/expedition-starters/basic-attack.webp\",\n  \"cards/expedition-starters/fireball.webp\",\n  \"cards/expedition-starters/pierce.webp\",\n  \"cards/expedition-starters/rations.webp\",\n  \"cards/expedition-starters/staff.webp\",\n  \"cards/healing.webp\",\n  \"cards/hero-abysssovereign.webp\",\n  \"cards/hero-descend.webp\",\n  \"cards/hero-forbidden.webp\",\n  \"cards/hero-mage.webp\",\n  \"cards/hero-priest.webp\",\n  \"cards/hero-sacredrain.webp\",\n  \"cards/hero-sacredsword.webp\",\n  \"cards/hero-summoner.webp\",\n  \"cards/hero-sword.webp\",\n  \"cards/hero-volcano.webp\",\n  \"cards/hero-warrior.webp\",\n  \"cards/hero.webp\",\n  \"cards/items/builtin-fuyuanyao.webp\",\n  \"cards/items/cmtmvq6ss84l.webp\",\n  \"cards/items/starter-emergency-bandage.webp\",\n  \"cards/items/tt-crystal.webp\",\n  \"cards/items/tt-jinchuangyao.webp\",\n  \"cards/items/tt-medneedle.webp\",\n  \"cards/items/tt-token-gold.webp\",\n  \"cards/items/tt3-blue-potion.webp\",\n  \"cards/items/tt3-demon-potion.webp\",\n  \"cards/items/tt3-houyi-potion.webp\",\n  \"cards/items/tt3-iceheart-potion.webp\",\n  \"cards/items/tt3-mind-potion.webp\",\n  \"cards/items/tt3-mixed-potion.webp\",\n  \"cards/items/tt3-mystery-potion.webp\",\n  \"cards/items/tt3-python-potion.webp\",\n  \"cards/items/tt3-savior-elixir.webp\",\n  \"cards/items/tt3-turnabout-potion.webp\",\n  \"cards/items/tt3sp-doom.webp\",\n  \"cards/items/tt4-shine-token.webp\",\n  \"cards/items/tt4-smoke-bomb.webp\",\n  \"cards/items/tt4-woodify.webp\",\n  \"cards/lore-raving.webp\",\n  \"cards/martial-cc-chase-slash.webp\",\n  \"cards/martial-cc-cursed-blade.webp\",\n  \"cards/martial-cc-dual-wield.webp\",\n  \"cards/martial-cc-last-stand.webp\",\n  \"cards/martial-cc-rapid-fire.webp\",\n  \"cards/martial-cc-unmoved.webp\",\n  \"cards/martial-cmtn0pbkmnvc.webp\",\n  \"cards/martial-cmtn0xt0zr7.webp\",\n  \"cards/martial-cmtn1i64j7y7.webp\",\n  \"cards/martial-cmtn1wnhhym.webp\",\n  \"cards/martial-cmtn233trmeg.webp\",\n  \"cards/martial-cmtn2jc142dj.webp\",\n  \"cards/martial-melee.webp\",\n  \"cards/martial-ranged.webp\",\n  \"cards/martial-tt2-block.webp\",\n  \"cards/martial-tt2-bloodblade.webp\",\n  \"cards/martial-tt2-comboarrow.webp\",\n  \"cards/martial-tt2-forestarrow.webp\",\n  \"cards/martial-tt2-jianghu.webp\",\n  \"cards/martial-tt2-piercearrow.webp\",\n  \"cards/martial-tt2-shoot.webp\",\n  \"cards/martial-tt2-swiftarrow.webp\",\n  \"cards/martial-tt2-turtlearmor.webp\",\n  \"cards/martial-tt3-armor-rush.webp\",\n  \"cards/martial-tt3-arrow-rain.webp\",\n  \"cards/martial-tt3-bandage.webp\",\n  \"cards/martial-tt3-blood-arrow.webp\",\n  \"cards/martial-tt3-dig-treasure.webp\",\n  \"cards/martial-tt3-double-shot.webp\",\n  \"cards/martial-tt3-execute.webp\",\n  \"cards/martial-tt3-fatal-pierce.webp\",\n  \"cards/martial-tt3-flux-slash.webp\",\n  \"cards/martial-tt3-fly-arrowhawk.webp\",\n  \"cards/martial-tt3-frost-slash.webp\",\n  \"cards/martial-tt3-frostfall.webp\",\n  \"cards/martial-tt3-hold-fast.webp\",\n  \"cards/martial-tt3-life-arrow.webp\",\n  \"cards/martial-tt3-noon-duel.webp\",\n  \"cards/martial-tt3-purify-arrow.webp\",\n  \"cards/martial-tt3-qi-wave.webp\",\n  \"cards/martial-tt3-reshot.webp\",\n  \"cards/martial-tt3-skewer.webp\",\n  \"cards/martial-tt3-venom-arrow.webp\",\n  \"cards/martial-tt3-wave-slash.webp\",\n  \"cards/martial-tt3sp-shadowbug.webp\",\n  \"cards/martial-tt3wu-shike.webp\",\n  \"cards/martial-tt7-armup.webp\",\n  \"cards/martial-tt7-bloodpoison.webp\",\n  \"cards/martial-tt7-bulwark.webp\",\n  \"cards/martial-tt7-demonbreaker.webp\",\n  \"cards/martial-tt7-fullstrike.webp\",\n  \"cards/martial-tt7-ghostblade.webp\",\n  \"cards/martial-tt7-goldencicada.webp\",\n  \"cards/martial-tt7-imitate.webp\",\n  \"cards/martial-tt7-ironcharge.webp\",\n  \"cards/martial-tt7-ironphalanx.webp\",\n  \"cards/martial-tt7-marchrush.webp\",\n  \"cards/martial-tt7-meteorrain.webp\",\n  \"cards/martial-tt7-sneak.webp\",\n  \"cards/martial-tt7-stealth.webp\",\n  \"cards/martial-tt7-swordimmortal.webp\",\n  \"cards/martial-tt7-throwblade.webp\",\n  \"cards/martial-tt7-thundergrudge.webp\",\n  \"cards/martial-tt7-whirlwind.webp\",\n  \"cards/martial-tt8-dragonblade.webp\",\n  \"cards/resource-key.webp\",\n  \"cards/resource-material.webp\",\n  \"cards/resource-valuables.webp\",\n  \"cards/resources/coin-copper.webp\",\n  \"cards/resources/coin-gold.webp\",\n  \"cards/resources/coin-silver.webp\",\n  \"cards/resources/diamond.webp\",\n  \"cards/resources/econpack.webp\",\n  \"cards/resources/garnet-marble.webp\",\n  \"cards/resources/key-one.webp\",\n  \"cards/resources/key.webp\",\n  \"cards/resources/keys-bunch.webp\",\n  \"cards/resources/pet-egg.webp\",\n  \"cards/resources/ration-double.webp\",\n  \"cards/resources/ration-std.webp\",\n  \"cards/resources/ration.webp\",\n  \"cards/resources/wood-bundle.webp\",\n  \"cards/resources/wood-lots.webp\",\n  \"cards/resources/wood.webp\",\n  \"cards/spell-cc-demon.webp\",\n  \"cards/spell-cc-double-boom.webp\",\n  \"cards/spell-cc-ember-burst.webp\",\n  \"cards/spell-cc-lava-blast.webp\",\n  \"cards/spell-cc-mana-surge.webp\",\n  \"cards/spell-cc-poison-burst.webp\",\n  \"cards/spell-cc-rot-seed.webp\",\n  \"cards/spell-cmtn125e1nk0.webp\",\n  \"cards/spell-cmtn1epgt20j.webp\",\n  \"cards/spell-cmtn1gfhczzj.webp\",\n  \"cards/spell-cmtn1lbhbqi4.webp\",\n  \"cards/spell-cmtn1ntxzoc4.webp\",\n  \"cards/spell-cmtn1p9vb5au.webp\",\n  \"cards/spell-cmtn1r10xnl1.webp\",\n  \"cards/spell-cmtn28jv33wx.webp\",\n  \"cards/spell-cmtna0nb1yxt.webp\",\n  \"cards/spell-tt12-backupcell.webp\",\n  \"cards/spell-tt12-barriermend.webp\",\n  \"cards/spell-tt12-basicdev.webp\",\n  \"cards/spell-tt12-breakthrough.webp\",\n  \"cards/spell-tt12-chargeray.webp\",\n  \"cards/spell-tt12-elemburst.webp\",\n  \"cards/spell-tt12-felguard.webp\",\n  \"cards/spell-tt12-firecracker.webp\",\n  \"cards/spell-tt12-freezeray.webp\",\n  \"cards/spell-tt12-hitechrd.webp\",\n  \"cards/spell-tt12-infectray.webp\",\n  \"cards/spell-tt12-magicfind.webp\",\n  \"cards/spell-tt12-raydragon.webp\",\n  \"cards/spell-tt12-saturate.webp\",\n  \"cards/spell-tt12-sporewall.webp\",\n  \"cards/spell-tt12-unstableray.webp\",\n  \"cards/spell-tt3-chain-lightning.webp\",\n  \"cards/spell-tt3-fireball.webp\",\n  \"cards/spell-tt3-firm-barrier.webp\",\n  \"cards/spell-tt3-flame-storm.webp\",\n  \"cards/spell-tt3-grope.webp\",\n  \"cards/spell-tt3-holy-shield.webp\",\n  \"cards/spell-tt3-holy-water.webp\",\n  \"cards/spell-tt3-ice-spike.webp\",\n  \"cards/spell-tt3-magic-lamp.webp\",\n  \"cards/spell-tt3-nature-form.webp\",\n  \"cards/spell-tt3-nuke-ray.webp\",\n  \"cards/spell-tt3-petal.webp\",\n  \"cards/spell-tt3-thornfield.webp\",\n  \"cards/spell-tt3-thunderblast.webp\",\n  \"cards/spell-tt3-toxin.webp\",\n  \"cards/spell-tt3-treasure-hunt.webp\",\n  \"cards/spell-tt3sp-bloodstorm.webp\",\n  \"cards/spell-tt3sp-devour.webp\",\n  \"cards/spell-tt3sp-dodge.webp\",\n  \"cards/spell-tt3sp-flowerzhen.webp\",\n  \"cards/spell-tt3sp-magicoil.webp\",\n  \"cards/spell-tt3sp-shadowshot.webp\",\n  \"cards/spell-tt3sp-silverthorn.webp\",\n  \"cards/spell-tt5-galaxy-voyage.webp\",\n  \"cards/spell-tt7-abysscurse.webp\",\n  \"cards/spell-tt7-arcanebolt.webp\",\n  \"cards/spell-tt7-bladebloom.webp\",\n  \"cards/spell-tt7-bloodpotion.webp\",\n  \"cards/spell-tt7-burnharvest.webp\",\n  \"cards/spell-tt7-elementstorm.webp\",\n  \"cards/spell-tt7-energize.webp\",\n  \"cards/spell-tt7-frozenight.webp\",\n  \"cards/spell-tt7-holyglow.webp\",\n  \"cards/spell-tt7-holyheal.webp\",\n  \"cards/spell-tt7-livingwater.webp\",\n  \"cards/spell-tt7-maxsupply.webp\",\n  \"cards/spell-tt7-meteorstrong.webp\",\n  \"cards/spell-tt7-provoke.webp\",\n  \"cards/spell-tt7-recruit.webp\",\n  \"cards/spell-tt7-silence.webp\",\n  \"cards/spell-tt7-smite.webp\",\n  \"cards/spell-tt7-stratagem.webp\",\n  \"cards/spell-tt7-twinfireball.webp\",\n  \"cards/spell-tt8-curse1.webp\",\n  \"cards/spell-tt8-curse2.webp\",\n  \"cards/spell-tt8-curse3.webp\",\n  \"cards/spell-tt8-curse4.webp\",\n  \"cards/spell.webp\",\n  \"cards/unknown.webp\",\n  \"cards/wu-heavensword.webp\",\n  \"cards/wu-myriadswords.webp\",\n  \"cards/wu-void.webp\",",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 263,
+      "secondFile": {
+        "end": 265,
+        "endLoc": {
+          "column": 23,
+          "line": 265,
+          "position": 9721
+        },
+        "name": "generated\\thumb-manifest.js",
+        "start": 3,
+        "startLoc": {
+          "column": 0,
+          "line": 3,
+          "position": 206
+        }
+      },
+      "tokens": 527
+    },
+    {
+      "firstFile": {
+        "end": 35,
+        "endLoc": {
+          "column": 17,
+          "line": 35,
+          "position": 1330
+        },
+        "name": "home\\narrative.js",
+        "start": 25,
+        "startLoc": {
+          "column": 11,
+          "line": 25,
+          "position": 871
+        }
+      },
+      "format": "javascript",
+      "fragment": "  if (!knot) return null;\n  // Ink 解释器只服务 10 张专属事件卡，不应进入每次启动都解析的首屏依赖图。\n  // 与编译后的故事一起按需加载；失败时返回 null，由事件页沿用卡面描述/default 结算。\n  let Story, storyContent;\n  try {\n    [{ Story }, { default: storyContent }] = await Promise.all([\n      import('inkjs'),\n      import('../generated/narrative-events.js'),\n    ]);\n  } catch (error) {\n    console.warn('[narrative] Ink 叙事模块加载失败，回退卡面事件', error);",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 11,
+      "secondFile": {
+        "end": 59,
+        "endLoc": {
+          "column": 17,
+          "line": 59,
+          "position": 2101
+        },
+        "name": "home\\narrative.js",
+        "start": 52,
+        "startLoc": {
+          "column": 37,
+          "line": 52,
+          "position": 1874
+        }
+      },
+      "tokens": 52
+    },
+    {
+      "firstFile": {
+        "end": 46,
+        "endLoc": {
+          "column": 5,
+          "line": 46,
+          "position": 1750
+        },
+        "name": "home\\narrative.js",
+        "start": 39,
+        "startLoc": {
+          "column": 29,
+          "line": 39,
+          "position": 1494
+        }
+      },
+      "format": "javascript",
+      "fragment": "  story.ChoosePathString(knot);\n  const intro = story.ContinueMaximally().trim();\n  const choices = story.currentChoices.map((choice, index) => ({\n    ...parseChoice(choice.text),\n    choose() {\n      story.ChooseChoiceIndex(index);\n      return story.ContinueMaximally().trim();\n    },",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 8,
+      "secondFile": {
+        "end": 68,
+        "endLoc": {
+          "column": 5,
+          "line": 68,
+          "position": 2542
+        },
+        "name": "home\\narrative.js",
+        "start": 64,
+        "startLoc": {
+          "column": 54,
+          "line": 64,
+          "position": 2296
+        }
+      },
+      "tokens": 63
+    },
+    {
+      "firstFile": {
+        "end": 132,
+        "endLoc": {
+          "column": 9,
+          "line": 132,
+          "position": 7817
+        },
+        "name": "hub\\battle-settlement.commands.js",
+        "start": 122,
+        "startLoc": {
+          "column": 79,
+          "line": 122,
+          "position": 7259
+        }
+      },
+      "format": "javascript",
+      "fragment": "    catch { return fail('INVALID_ARGUMENT', '战斗节点身份无法序列化'); }\n    const startingIdentity = readIdentity(slotId);\n    if (startingIdentity.ok === false) {\n      if (startingIdentity.code !== 'RECOVERY_REQUIRED') return startingIdentity;\n      const recovered = await recover(slotId);\n      return recovered || fail('RETRY_REQUIRED', '存档已恢复，请重新确认本场结算');\n    }\n    const recovered = await recover(slotId);\n    if (recovered) return recovered;\n    if (getActiveSlot() !== slotId || getBase().slot !== slotId) return fail('STALE_SLOT', '档位已切换，旧结算已取消');\n    const currentIdentity = readIdentity(slotId);",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 11,
+      "secondFile": {
+        "end": 176,
+        "endLoc": {
+          "column": 9,
+          "line": 176,
+          "position": 10689
+        },
+        "name": "hub\\battle-settlement.commands.js",
+        "start": 164,
+        "startLoc": {
+          "column": 106,
+          "line": 164,
+          "position": 10021
+        }
+      },
+      "tokens": 92
+    },
+    {
+      "firstFile": {
+        "end": 260,
+        "endLoc": {
+          "column": 134,
+          "line": 260,
+          "position": 14770
+        },
+        "name": "hub\\extraction.commands.js",
+        "start": 251,
+        "startLoc": {
+          "column": 84,
+          "line": 251,
+          "position": 14166
+        }
+      },
+      "format": "javascript",
+      "fragment": "      return { ok: true, value: game.pendingExtraction, count: attempt.attempt.count, ephemeral: true };\n    }\n    if (expectedSlotId !== slotId) return fail('STALE_SLOT', '档位已切换，撤离整理请求已取消');\n    if (expectedRunId !== game.pendingExtraction?.runId) return fail('STALE_RUN', '当前整理页已过期，请重新载入撤离整理');\n    const key = `${slotId}:${expectedRunId}`;\n    let attempt = inFlight.get(key);\n    if (!attempt) {\n      const current = await readPending(slotId);\n      if (!current.ok) return current;\n      if (current.pending.runId !== expectedRunId) return fail('STALE_RUN', '当前整理页已过期，请重新载入撤离整理');",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 10,
+      "secondFile": {
+        "end": 290,
+        "endLoc": {
+          "column": 134,
+          "line": 290,
+          "position": 16601
+        },
+        "name": "hub\\extraction.commands.js",
+        "start": 281,
+        "startLoc": {
+          "column": 78,
+          "line": 281,
+          "position": 15997
+        }
+      },
+      "tokens": 101
+    },
+    {
+      "firstFile": {
+        "end": 101,
+        "endLoc": {
+          "column": 60,
+          "line": 101,
+          "position": 5273
+        },
+        "name": "hub\\game.bag.js",
+        "start": 96,
+        "startLoc": {
+          "column": 94,
+          "line": 96,
+          "position": 4907
+        }
+      },
+      "format": "javascript",
+      "fragment": "      const pool = SDT.Cards.all().filter(c => c.rarity === '传说' && c.rarity !== '棱彩' && SDT.Cards.isRandomObtainable(c));\n      if (!pool.length) { UI.log('卡牌库中没有可获得的传说卡', 'warn'); return; }\n      game.ownedCards.splice(i, 1);\n      const got = pool[Math.floor(Random.random('loot') * pool.length)];\n      game.ownedCards.push({ uid: newUid(), card: { ...got } });\n      UI.log(`[[icon:sparkles]] 使用【<b>${esc(card.name)}</b>】：获得传说卡【<b>${esc(got.name)}</b>】`, 'loot');",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 6,
+      "secondFile": {
+        "end": 127,
+        "endLoc": {
+          "column": 60,
+          "line": 127,
+          "position": 6919
+        },
+        "name": "hub\\game.bag.js",
+        "start": 122,
+        "startLoc": {
+          "column": 69,
+          "line": 122,
+          "position": 6553
+        }
+      },
+      "tokens": 97
+    },
+    {
+      "firstFile": {
+        "end": 363,
+        "endLoc": {
+          "column": 9,
+          "line": 363,
+          "position": 19850
+        },
+        "name": "hub\\game.bag.js",
+        "start": 357,
+        "startLoc": {
+          "column": 35,
+          "line": 357,
+          "position": 19649
+        }
+      },
+      "format": "javascript",
+      "fragment": "        if (x.pouchOf !== POUCH_ID || !x.card) return;\n        if (!map.has(x.card.name)) map.set(x.card.name, { card: x.card, count: 0 });\n        map.get(x.card.name).count++;\n      });\n      return [...map.values()];\n    };\n    const bagSpellStacks = () => cardStacks(false).filter(st => st.card.type === '法术' && !st.card.cls);",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 7,
+      "secondFile": {
+        "end": 425,
+        "endLoc": {
+          "column": 9,
+          "line": 425,
+          "position": 23565
+        },
+        "name": "hub\\game.bag.js",
+        "start": 419,
+        "startLoc": {
+          "column": 35,
+          "line": 419,
+          "position": 23364
+        }
+      },
+      "tokens": 75
+    },
+    {
+      "firstFile": {
+        "end": 616,
+        "endLoc": {
+          "column": 5,
+          "line": 616,
+          "position": 37480
+        },
+        "name": "hub\\game.cardslib.page.js",
+        "start": 611,
+        "startLoc": {
+          "column": 68,
+          "line": 611,
+          "position": 37274
+        }
+      },
+      "format": "javascript",
+      "fragment": "      btn.dataset.confirm = '1'; btn.textContent = '确认删除？'; btn.classList.add('arm');\n      setTimeout(() => {\n        if (btn.isConnected) { delete btn.dataset.confirm; btn.textContent = '删除'; btn.classList.remove('arm'); }\n      }, 2600);\n      return;\n    }",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 6,
+      "secondFile": {
+        "end": 380,
+        "endLoc": {
+          "column": 7,
+          "line": 380,
+          "position": 22238
+        },
+        "name": "ui\\game.menu.js",
+        "start": 375,
+        "startLoc": {
+          "column": 67,
+          "line": 375,
+          "position": 22022
+        }
+      },
+      "tokens": 54
+    },
+    {
+      "firstFile": {
+        "end": 913,
+        "endLoc": {
+          "column": 9,
+          "line": 913,
+          "position": 55823
+        },
+        "name": "run\\game.run.altar.js",
+        "start": 908,
+        "startLoc": {
+          "column": 130,
+          "line": 908,
+          "position": 55520
+        }
+      },
+      "format": "javascript",
+      "fragment": "    if (saved.count) { Sfx.ding(); UI.log(`[[icon:archive]] 全部入库：<b>${saved.count}</b> 张已放入仓库（仓库余 ${B.stashRoom()} 格）`, 'loot'); }\n    extractLeft = saved.value.remainingCards.map(stack => ({ card: { ...stack.card }, count: stack.count }));\n    renderExtractStash();\n  });\n  // 智能整理（2026-09-16 留言 #27）：一键入库，数量在仓库空格内、优先价值最高的卡牌\n  UI.act('exSmart', async () => {",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 6,
+      "secondFile": {
+        "end": 930,
+        "endLoc": {
+          "column": 9,
+          "line": 930,
+          "position": 56780
+        },
+        "name": "run\\game.run.altar.js",
+        "start": 926,
+        "startLoc": {
+          "column": 131,
+          "line": 926,
+          "position": 56594
+        }
+      },
+      "tokens": 54
+    },
+    {
+      "firstFile": {
+        "end": 468,
+        "endLoc": {
+          "column": 39,
+          "line": 468,
+          "position": 22993
+        },
+        "name": "perf-ledger-capture.mjs",
+        "start": 461,
+        "startLoc": {
+          "column": 10,
+          "line": 461,
+          "position": 22650
+        }
+      },
+      "format": "javascript",
+      "fragment": "          for (let q = 0; q < 40; q++) {\n            const s = window.SDT.Battle?.getSnapshot?.();\n            if (s && !s.busy && !s.deckSelection) break;\n            await new Promise(r => setTimeout(r, 250));\n          }\n          await new Promise(r => setTimeout(r, 1200));\n          await A.setTurbo(false);\n          return { ok: true, stoppedAt: 'battle', steps: i, events, battle: battleInfo(), run: runInfo() };",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 8,
+      "secondFile": {
+        "end": 560,
+        "endLoc": {
+          "column": 39,
+          "line": 560,
+          "position": 27244
+        },
+        "name": "perf-ledger-capture.mjs",
+        "start": 553,
+        "startLoc": {
+          "column": 10,
+          "line": 553,
+          "position": 26901
+        }
+      },
+      "tokens": 90
+    },
+    {
+      "firstFile": {
+        "end": 522,
+        "endLoc": {
+          "column": 62,
+          "line": 522,
+          "position": 25618
+        },
+        "name": "perf-ledger-capture.mjs",
+        "start": 504,
+        "startLoc": {
+          "column": 8,
+          "line": 504,
+          "position": 24722
+        }
+      },
+      "format": "javascript",
+      "fragment": "        continue;\n      }\n      if (obs.phase === 'hub' || obs.phase === 'settlement') {\n        // 对局已终结（死亡/撤离/结算）：结算页交给贪心点完，回基地后重新出发\n        if (obs.phase === 'settlement') {\n          await A.step(A.policies.greedy(), { commandTimeoutMs: 20000 });\n          continue;\n        }\n        events.push({ redeploy: true });\n        await A.act({ type: 'ui', name: 'hubTab', params: { tab: 'deploy' } });\n        await new Promise(r => setTimeout(r, 500));\n        await A.act({ type: 'ui', name: 'deploy' });\n        await new Promise(r => setTimeout(r, 700));\n        await A.act({ type: 'ui', name: 'confirmDeploy' });\n        await new Promise(r => setTimeout(r, 1500));\n        continue;\n      }\n      const r = await A.step(A.policies.greedy(), { commandTimeoutMs: 20000 });\n      if (r.error) { events.push({ error: r.error }); break; }",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 19,
+      "secondFile": {
+        "end": 587,
+        "endLoc": {
+          "column": 62,
+          "line": 587,
+          "position": 28675
+        },
+        "name": "perf-ledger-capture.mjs",
+        "start": 573,
+        "startLoc": {
+          "column": 8,
+          "line": 573,
+          "position": 27917
+        }
+      },
+      "tokens": 208
+    },
+    {
+      "firstFile": {
+        "end": 129,
+        "endLoc": {
+          "column": 3,
+          "line": 129,
+          "position": 5120
+        },
+        "name": "vectorize_node_icons.py",
+        "start": 122,
+        "startLoc": {
+          "column": 60,
+          "line": 122,
+          "position": 4929
+        }
+      },
+      "format": "python",
+      "fragment": "    epsilon = max(0.7, cv2.arcLength(contour, True) * 0.0022)\n    points = cv2.approxPolyDP(contour, epsilon, True).reshape(-1, 2)\n    if len(points) < 3:\n        return \"\"\n    return \"M\" + \"L\".join(f\"{int(x)} {int(y)}\" for x, y in points) + \"Z\"\n\n\ndef trace_svg(rgb: np.ndarray, mask: np.ndarray, title: str) -> str:",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 8,
+      "secondFile": {
+        "end": 53,
+        "endLoc": {
+          "column": 3,
+          "line": 53,
+          "position": 1823
+        },
+        "name": "vectorize_winter_ui.py",
+        "start": 46,
+        "startLoc": {
+          "column": 61,
+          "line": 46,
+          "position": 1632
+        }
+      },
+      "tokens": 50
+    },
+    {
+      "firstFile": {
+        "end": 144,
+        "endLoc": {
+          "column": 17,
+          "line": 144,
+          "position": 6037
+        },
+        "name": "vectorize_node_icons.py",
+        "start": 139,
+        "startLoc": {
+          "column": 26,
+          "line": 139,
+          "position": 5757
+        }
+      },
+      "format": "python",
+      "fragment": "        layer = (remapped == index).astype(np.uint8) * 255\n        layer = cv2.morphologyEx(layer, cv2.MORPH_CLOSE, np.ones((3, 3), np.uint8))\n        contours, hierarchy = cv2.findContours(layer, cv2.RETR_CCOMP, cv2.CHAIN_APPROX_SIMPLE)\n        if hierarchy is None:\n            continue\n        hierarchy = hierarchy[0]",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 6,
+      "secondFile": {
+        "end": 72,
+        "endLoc": {
+          "column": 11,
+          "line": 72,
+          "position": 2817
+        },
+        "name": "vectorize_winter_ui.py",
+        "start": 67,
+        "startLoc": {
+          "column": 24,
+          "line": 67,
+          "position": 2543
+        }
+      },
+      "tokens": 64
+    }
+  ],
+  "statistics": {
+    "detectionDate": "2026-09-29T15:01:33.904Z",
+    "formats": {
+      "css": {
+        "clones": 45,
+        "duplicatedLines": 389,
+        "duplicatedTokens": 5500,
+        "lines": 15965,
+        "newClones": 0,
+        "newDuplicatedLines": 0,
+        "percentage": 2.4365800187911053,
+        "percentageTokens": 1.4516469594594594,
+        "sources": 42,
+        "tokens": 378880
+      },
+      "javascript": {
+        "clones": 36,
+        "duplicatedLines": 549,
+        "duplicatedTokens": 3373,
+        "lines": 50346,
+        "newClones": 0,
+        "newDuplicatedLines": 0,
+        "percentage": 1.0904540579191992,
+        "percentageTokens": 0.7559051588902336,
+        "sources": 259,
+        "tokens": 446220
+      },
+      "markdown": {
+        "clones": 0,
+        "duplicatedLines": 0,
+        "duplicatedTokens": 0,
+        "lines": 41,
+        "newClones": 0,
+        "newDuplicatedLines": 0,
+        "percentage": 0.0,
+        "percentageTokens": 0.0,
+        "sources": 1,
+        "tokens": 1032
+      },
+      "python": {
+        "clones": 2,
+        "duplicatedLines": 14,
+        "duplicatedTokens": 114,
+        "lines": 647,
+        "newClones": 0,
+        "newDuplicatedLines": 0,
+        "percentage": 2.1638330757341575,
+        "percentageTokens": 1.0376843255051884,
+        "sources": 6,
+        "tokens": 10986
+      },
+      "typescript": {
+        "clones": 0,
+        "duplicatedLines": 0,
+        "duplicatedTokens": 0,
+        "lines": 583,
+        "newClones": 0,
+        "newDuplicatedLines": 0,
+        "percentage": 0.0,
+        "percentageTokens": 0.0,
+        "sources": 4,
+        "tokens": 4320
+      }
+    },
+    "total": {
+      "clones": 83,
+      "duplicatedLines": 952,
+      "duplicatedTokens": 8987,
+      "lines": 67582,
+      "newClones": 0,
+      "newDuplicatedLines": 0,
+      "percentage": 1.4086591104140156,
+      "percentageTokens": 1.0680525481378307,
+      "sources": 312,
+      "tokens": 841438
+    }
+  }
+}
