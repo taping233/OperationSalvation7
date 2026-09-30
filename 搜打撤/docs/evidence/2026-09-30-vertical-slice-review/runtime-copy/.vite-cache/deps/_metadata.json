@@ -1,0 +1,37 @@
+{
+  "hash": "510789d0",
+  "configHash": "f0d7f4c4",
+  "lockfileHash": "02a7c32d",
+  "browserHash": "adbfee34",
+  "optimized": {
+    "howler": {
+      "src": "../../../../../../node_modules/howler/dist/howler.js",
+      "file": "howler.js",
+      "fileHash": "886dc577",
+      "needsInterop": true
+    },
+    "inkjs": {
+      "src": "../../../../../../node_modules/inkjs/dist/ink.mjs",
+      "file": "inkjs.js",
+      "fileHash": "e6495c08",
+      "needsInterop": false
+    },
+    "motion/mini": {
+      "src": "../../../../../../node_modules/motion/dist/es/mini.mjs",
+      "file": "motion_mini.js",
+      "fileHash": "0ead765d",
+      "needsInterop": false
+    },
+    "pixi.js": {
+      "src": "../../../../../../node_modules/pixi.js/lib/index.mjs",
+      "file": "pixi__js.js",
+      "fileHash": "b5966c96",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-G3PMV62Z": {
+      "file": "chunk-G3PMV62Z.js"
+    }
+  }
+}

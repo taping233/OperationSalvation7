@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "lib": ["ESNext", "DOM"],
+    "allowJs": true,
+    "checkJs": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "types": []
+  },
+  "files": [
+    "game/src/core/random-core.js",
+    "game/src/core/shared.js",
+    "game/src/cards/card-rarity.js",
+    "game/src/cards/card-render-context.js",
+    "game/src/hub/base-mutation.js",
+    "game/src/hub/base-economy.js",
+    "game/src/hub/base-progression.commands.js",
+    "game/src/hub/base-departure.commands.js",
+    "game/src/hub/base-pet-egg.commands.js",
+    "game/src/hub/base-elapsed.commands.js",
+    "tests/strict-foundations-types.fixture.ts"
+  ]
+}

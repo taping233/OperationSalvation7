@@ -1,0 +1,10 @@
+{
+  "fixtureOnly": true,
+  "actualKinds": [
+    "missing-relative-link"
+  ],
+  "actualMissingLinks": 1,
+  "currentTestClaimsNoBrokenLinks": true,
+  "file": "tests/workflow-cli-integration.test.js",
+  "line": 24
+}

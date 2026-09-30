@@ -1,0 +1,15 @@
+{
+  "servicePort": 5386,
+  "localLinksChecked": 19,
+  "missing": [],
+  "gameTests": "not run; read-only review",
+  "files": [
+    "review.md",
+    "README.md",
+    "luna-report.md",
+    "primary-review.md"
+  ],
+  "build": "not run",
+  "verifiedAt": "2026-09-30T22:25:03.7624728+08:00",
+  "remainingListeners": 0
+}

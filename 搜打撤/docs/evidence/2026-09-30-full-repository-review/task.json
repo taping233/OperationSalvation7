@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "full-repository-review",
+  "date": "2026-09-30",
+  "owner": "Friday",
+  "goal": "对搜打撤 Vite 主线作一次有覆盖记录的并行分模块深审，确认可复现问题、测试盲区和审查限制，不修改被审代码。",
+  "paths": [
+    "game/src",
+    "game/data",
+    "game/css",
+    "game/tools",
+    "game/*.html",
+    "scripts",
+    "tests",
+    "narrative",
+    "Vite/测试/类型/CI配置"
+  ],
+  "doneWhen": [
+    "冻结并记录当前主线源码基线、未提交归属与排除范围",
+    "运行代码和工程代码逐文件分配并登记审阅深度，未深入部分明确列出",
+    "3个子代理与主代理按互不交叉证据属地完成模块审查",
+    "可行动发现由主代理核对实时源及证据，严重问题做最小复现；推测与已知台账另列",
+    "交付按优先级的问题清单、覆盖矩阵、验证记录与未核验项；释放自有资源"
+  ],
+  "stage": "partial",
+  "checks": [],
+  "unverified": [
+    "2026-10-01 老板指示：Codex 侧网络中断，会话全部暂停，本任务按 partial 归档；doneWhen 五项均未确认",
+    "冻结基线、覆盖清单与子代理证据保持 docs/evidence/2026-09-30-full-repository-review/ 原样，未继续深审；恢复需重新登记开工"
+  ],
+  "updatedAt": "2026-09-30T16:21:33.576Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": false,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

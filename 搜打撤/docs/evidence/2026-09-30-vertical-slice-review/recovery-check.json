@@ -1,0 +1,29 @@
+{
+  "server": {
+    "execSession": 32904,
+    "port": 5386,
+    "pid": 37780
+  },
+  "displayedLayer": 3,
+  "exactRouteKnown": false,
+  "continueButtonPresent": true,
+  "displayedAchievement": "猎手",
+  "slot": 1,
+  "checkedAt": "2026-09-30T22:42:51.4469103+08:00",
+  "origin": "http://127.0.0.1:5386/",
+  "displayedSavedAt": "09-30 22:11",
+  "displayedClass": "侠客",
+  "seedKnown": false,
+  "continueClicked": false,
+  "displayedPlaytimeMinutes": 59,
+  "inProgress": true,
+  "conclusion": "原档存在；为何未找到信标尚未定性，不将寻路假设认定为游戏缺陷",
+  "generatorProbe": {
+    "sampleCount": 100,
+    "snapshot": "runtime-copy/game/src/run/map-generator.js",
+    "seeds": "0..99",
+    "doesNotIdentifyActualRun": true,
+    "generationFailures": 0,
+    "thirdFloorMissingSignal": 0
+  }
+}

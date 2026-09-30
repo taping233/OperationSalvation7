@@ -1,0 +1,47 @@
+== HEAD ==
+fd38468 docs(vite): journal 补收官后延伸——拍板三项实施记录+reset 误选恢复说明
+368933d docs(vite): 验收分级制+实页快照脚本+jscpd 口径落库（验收分级班压树代落，老板拍板三项）
+62f9aff style(vite): CSS 骨架重复收敛落库（CSS 精修班压树代落）——winter 删陈旧副本 107 行+--rbh 合并，原班 A/B+全量复核
+
+== 工作树 ==
+M ../AGENTS.md
+ M docs/PARALLEL-DISPATCH-PLAYBOOK.md
+ M docs/PARALLEL-REGISTRY.md
+ M docs/PENDING.md
+ M docs/README.md
+ M docs/STATUS.md
+ M docs/development.md
+ M docs/quality-gates.md
+ M docs/roadmap.md
+ M package-lock.json
+?? ../.codex/
+?? ../.photolib-acc/
+?? ../.ui-art-loop-0925/
+?? docs/evidence/2026-09-30-dual-client-workflow/
+?? scripts/iab-drive.mjs
+?? ../项目近况-2026-09-29/
+
+== 并行热点（活跃 2 条，真源 docs/PARALLEL-REGISTRY.md）==
+- [待验收/待处置；未入 HEAD] scripts/iab-drive.mjs（未跟踪）｜IAB 起手式草稿；来源与 PENDING #21 对齐。历史导入检查不等于实页验收，仍缺内置桥端到端复验；本轮不认领或修改脚本
+- [已落库，余 worktree 待拍板] ~~game/css/expedition-library.css、game/css/winter.css、game/src/hub/game.cardslib.page.js~~（已随 d2c0d0a 落库）、worktree .photolib-acc（待处置）、~~端口 8137/8138/5333~~（已杀净）｜照相馆性能专项三期：实机验收通过并已落库（d2c0d0a）；仅余隔离工作树处置待拍板
+
+== 无主物品（勿动，2 条）==
+- `搜打撤/package-lock.json`：已修改未提交（M），改动者不明
+- node.exe ×2（PID 21272/22356）：监听 5200（主线 Vite 端口）/5321，REGISTRY 无登记
+
+== 待拍板活账（15 条，真源 docs/PENDING.md）==
+- 1 `docs/evidence/` 内 perf-probe-photo、perf-probe-run 两目录（53K）已入库仍 tracke…
+- 2 战斗右键弹反馈浮层做否（历史挂账功能）
+- 3 死图 7 张待批删（卡面重出审计豁免之外）
+- 4 三份 PARALLEL 盘点文档未跟踪，处置方式
+- 5 photo-nail 待处置
+- 6 martial-builtin-sha 死图待批删
+- 7 僵尸 Vite：`.exp-observe/` 5199 端口（PID 21256，09-25 起）杀否
+- 8 工作树/未跟踪杂项去留：`.codex/`、`.photolib-acc/`、`.ui-art-loop-0925/`、`项目近况-2026…
+- 9 照相馆 `?libPerfDiag` DEV 诊断钩子（game.cardslib.page.js）去留：保留=可随时复跑滚动归因五连测，删…
+- 10 `game/src/e2.snapshot.qa.js` 删留单议（E2 验收宿主遗产，E 批已归档；knip A 类批其余项已执行销账：r…
+- 13 照相馆照片在 Vite 主线 dev 服全黑：页面相对路径 `assets/thumbs/*.webp` 解析到 `/game/assets…
+- 16 自施 debuff 首 tick 语义仍待定：当前挂上后同回合末递减，STS2 跳过首 tick（find-D-0100 R-4）
+- 19 终局短路深化：文本路径句内多动词不做句内中断（单 immediate 句内步级不查全灭守卫），修复单已披露（fix-U16-0500）——要…
+- 20 finish(false)→terminalPending 异步窗口内 beforeunload 可把 run 级负 hp 写入存档（旧语义…
+- 21 `scripts/iab-drive.mjs`（ZCode 专用草稿，未跟踪）处置方式

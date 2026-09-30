@@ -1,0 +1,301 @@
+{
+  "owner": "battle_cards",
+  "baseline": "fd38468 frozen snapshot including authorized prior uncommitted fixes",
+  "confirmed": [
+    {
+      "id": "BC-01",
+      "priority": "P2",
+      "title": "极速符文使结束回合停在同一玩家回合",
+      "file": "game/src/battle/core/battle.enemy-phase.js",
+      "start": 40,
+      "end": 47,
+      "trigger": "龙巢装备极速符文，结束回合时最左手牌可支付且合法，场上仍有敌人。",
+      "expected": "自动打出一张最左手牌后继续玩家回合结束与敌方阶段，最后进入下一回合。",
+      "actual": "endTurn 入队打牌后直接 return，action-runner finally 把 resolving 恢复 player，没有继续结束回合；turn 和 HP 均保持。再次点击会继续释放下一张。",
+      "impact": "回合结束命令失效；毒伤、敌方攻击、状态时钟均被延迟，玩家可反复点击同回合出牌。",
+      "contract": "game/src/battle/runes.js:23 极速符文“回合结束时打出最左边的手牌”。",
+      "call_chain": [
+        "BattleSession.commands.endTurn",
+        "battle.enemy-phase.endTurn swiftRune branch",
+        "battle.engine.queueCardExecution → battle.exec-play.queueCardExecution",
+        "battle.action-runner queue completion → phase player (missing continuation)"
+      ],
+      "evidence": "repro.log SWIFT {\"turn\":1,\"hp\":100,\"phase\":\"player\",...,\"played\":[\"rev-1\"]}",
+      "repro_test": "swift rune endTurn returns to same player turn without an enemy phase",
+      "repro_limits": "复现用运行态 applyRuneFlag 设置极速旗标，隔离 endTurn 同一生产函数；生产旗标由龙巢 applyNestRunes 写入。未做龙巢完整浏览器流程。",
+      "absolute_file": "D:/素材/代号柒/搜打撤/game/src/battle/core/battle.enemy-phase.js",
+      "status": "confirmed",
+      "evidence_file": "D:/素材/代号柒/搜打撤/docs/evidence/2026-09-30-full-repository-review/battle_cards/repro.log",
+      "repro_file": "D:/素材/代号柒/搜打撤/docs/evidence/2026-09-30-full-repository-review/battle_cards/battle.repro.test.js"
+    },
+    {
+      "id": "BC-02",
+      "priority": "P2",
+      "title": "灰烬满手直接释放后真实卡 UID 从全部牌区消失",
+      "file": "game/src/battle/core/battle.draw.js",
+      "start": 46,
+      "end": 50,
+      "trigger": "BOSS/龙巢装备灰烬符文，手牌已有 9 张，再抽到普通武术/法术。",
+      "expected": "溢出牌直接释放，并按 BOSS 已打出卡进入弃牌堆，可参与后续洗回。",
+      "actual": "pop 牌库 UID 后只 resolveCard，再 continue；未加入 hand/discard/grave/played/consumed，真实 UID 丢失。",
+      "impact": "溢出直释放变成战斗内永久移除，牌库循环与已打出簿记遗漏。",
+      "contract": "runes.js:35 灰烬仅声明“放不下的招式会直接释放”；exec-play.js:163 普通打出在 boss 模式 discard.push(uid)。",
+      "call_chain": [
+        "afterEnemies / structured draw → battle.engine.drawCards",
+        "battle.draw.drawCards pop drawPile",
+        "ashRune full-hand branch → resolveCard",
+        "continue without pile/bookkeeping move"
+      ],
+      "evidence": "repro.log ASH {\"uid\":\"rev-12\",\"locations\":[],\"foeHp\":999}",
+      "repro_test": "ash overflow cast removes its UID from every pile",
+      "repro_limits": "用实际 beginBoss 建立战斗，再设置 9 张手牌和 1 张库顶实现明确可达满手条件；未做视觉验收。",
+      "absolute_file": "D:/素材/代号柒/搜打撤/game/src/battle/core/battle.draw.js",
+      "status": "confirmed",
+      "evidence_file": "D:/素材/代号柒/搜打撤/docs/evidence/2026-09-30-full-repository-review/battle_cards/repro.log",
+      "repro_file": "D:/素材/代号柒/搜打撤/docs/evidence/2026-09-30-full-repository-review/battle_cards/battle.repro.test.js"
+    },
+    {
+      "id": "BC-03",
+      "priority": "P2",
+      "title": "BOSS 武装检索不足时凭空生成随机装备",
+      "file": "game/src/battle/core/battle.draw.js",
+      "start": 139,
+      "end": 143,
+      "trigger": "BOSS 打出武装，从牌库抽 2 张装备，但牌库中只有普通武术（或少于 2 张装备）。",
+      "expected": "只移动牌库中实际可抽的装备，不足时少抽或不抽。",
+      "actual": "deckDraw 搜遍库后仍执行全卡库 pool + addTempCard，补足两张随机装备。",
+      "impact": "没有编入套牌的装备被凭空生成；还可绕过装备稀有度/职业随机池限制，并可能超过手牌上限。",
+      "contract": "cards.data.js:597 武装“从牌库中抽取 2 张装备牌”；cards.sync.m3.js:106 → draw filter.type 装备。",
+      "call_chain": [
+        "commands.playCard(武装)",
+        "execPlay → resolveCardSteps draw.filter",
+        "battle.resolution.js:1103 → deckDraw({n:2,type:装备})",
+        "battle.draw.deckDraw searches boss pile then unconditional random pool fallback"
+      ],
+      "evidence": "repro.log ARMUP created 2 random equipment, original plain card remains in deck; granted.length=2",
+      "repro_test": "boss targeted draw generates unrelated random equipment when none is in deck",
+      "repro_limits": "随机装备名称随 RNG 不同；问题断言为生成 2 张套牌外装备，不依赖具体名称。",
+      "absolute_file": "D:/素材/代号柒/搜打撤/game/src/battle/core/battle.draw.js",
+      "status": "confirmed",
+      "evidence_file": "D:/素材/代号柒/搜打撤/docs/evidence/2026-09-30-full-repository-review/battle_cards/repro.log",
+      "repro_file": "D:/素材/代号柒/搜打撤/docs/evidence/2026-09-30-full-repository-review/battle_cards/battle.repro.test.js"
+    },
+    {
+      "id": "BC-04",
+      "priority": "P2",
+      "title": "挖宝护甲按前次抽牌而不是本次发现牌计算",
+      "file": "game/src/battle/core/battle.resolution.js",
+      "start": 1055,
+      "end": 1063,
+      "trigger": "BOSS 打出挖宝，牌库底待发现牌费用非零，lastDrawnUids 为空或是另一张牌。",
+      "expected": "玩家选取本次发现牌后，获得其价格（现行费用口径）对应护甲。",
+      "actual": "acquire 只是排队发现；armor.priceOf 在选牌之前即时调用 getPriceOfLastDrawn，取得之前抽牌费用。发现状态也未设置 priceArmor，因此 pickDiscover 不会补发。",
+      "impact": "卡面护甲遗漏或数值取错，常见新开/未抽状态得到 0 护甲。",
+      "contract": "cards.sync.m3.js:89-94 acquire(1,牌库底,discover) 后 armor priceOf:discovered；schema.js:465 声明 armor equals discovered price。",
+      "call_chain": [
+        "commands.playCard(挖宝)",
+        "resolveAcquireOperation → takeDeckBottom → queueDiscover",
+        "resolveCardSteps armor.priceOf → getPriceOfLastDrawn (old lastDrawnUids)",
+        "processDiscoverQueue → pickDiscover → addTempCard without priceArmor"
+      ],
+      "evidence": "repro.log TREASURE {\"price\":9,\"before\":0,\"after\":0,\"discovered\":[\"loot\"]}",
+      "repro_test": "treasure armor reads a previous drawn card rather than the discovered bottom card",
+      "repro_limits": "cost=9 用于清楚区分价格与 0；相同代码对任意非零费用适用。没有依赖卖价推定费用语义。",
+      "absolute_file": "D:/素材/代号柒/搜打撤/game/src/battle/core/battle.resolution.js",
+      "status": "confirmed",
+      "evidence_file": "D:/素材/代号柒/搜打撤/docs/evidence/2026-09-30-full-repository-review/battle_cards/repro.log",
+      "repro_file": "D:/素材/代号柒/搜打撤/docs/evidence/2026-09-30-full-repository-review/battle_cards/battle.repro.test.js"
+    },
+    {
+      "id": "BC-05",
+      "priority": "P2",
+      "title": "搜索大宝箱的旧 ID 分支覆盖现行规则并继续多开随机发现",
+      "file": "game/src/battle/core/battle.resolution.js",
+      "start": 548,
+      "end": 556,
+      "trigger": "BOSS 使用搜索大宝箱，牌库至少有 3 张牌。",
+      "expected": "现行 canonical 卡面和 M2 规则均为“随机获取 3 张卡牌”→ acquire n:3 dest:hand。若仍保留旧探宝底牌三选一语义，也应只选择 1 次。",
+      "actual": "固定 ID 分支先移走 3 张真实底牌并开启三选一，传 n:cards.length=3；选 1 后把剩余真实牌放回，discover-flow 用 n-1 又排队 2 次随机发现。",
+      "impact": "structured 当前规则被绕过；底牌来源和获取方式均错，旧分支自身也混淆候选数量与选择次数。",
+      "contract": "cards.data.js:682 canonical 搜索大宝箱“随机获取3张卡牌”；cards.sync.m2.js:77 acquire(3,随机,hand)。旧分支注释545-547另称选1张，均与实际不一致。",
+      "call_chain": [
+        "commands.playCard(搜索大宝箱)",
+        "resolveCardSteps fixed-id branch before hasStructuredOnPlay execution",
+        "queueDiscover n:3 explicit deckBottom",
+        "pickDiscover returns 2 originals to bottom, addTempCard clone",
+        "battle.discover-flow.js:237 → unshift n:2 random job"
+      ],
+      "evidence": "repro.log CHEST first bottom1/bottom2/bottom3; remaining=2; second panel random candidates; remaining originals back in deck",
+      "repro_test": "deck-bottom chest queues two additional random discoveries after choosing one of three",
+      "repro_limits": "现行 canonical 与历史注释冲突单独披露；这里不擅自选择玩法口径，任何一种现有口径下都不符合。",
+      "absolute_file": "D:/素材/代号柒/搜打撤/game/src/battle/core/battle.resolution.js",
+      "status": "confirmed",
+      "evidence_file": "D:/素材/代号柒/搜打撤/docs/evidence/2026-09-30-full-repository-review/battle_cards/repro.log",
+      "repro_file": "D:/素材/代号柒/搜打撤/docs/evidence/2026-09-30-full-repository-review/battle_cards/battle.repro.test.js"
+    },
+    {
+      "id": "BC-06",
+      "priority": "P2",
+      "title": "正午决战到期合成卡丢失目标契约，延迟攻击每回合报错",
+      "file": "game/src/battle/core/battle.engine.js",
+      "start": 430,
+      "end": 438,
+      "trigger": "打出 canonical 正午决战，然后结束回合到第 2 回合开始。",
+      "expected": "执行已预约的 4×2 固定伤害，移除一次性延迟任务。",
+      "actual": "processDelayed 用 rules:{version:1,triggers:{onPlay:q.ops}} 丢弃原 battle.target；chosenEnemy 校验立即抛 TypeError。敌方序列 error recovery 还原 player，敌 HP 未减，延迟任务保留。q.ops 还保留 schedule，目标契约修复后仍需移除 schedule 才能执行而非再预约。",
+      "impact": "整张延迟牌失效，后续回合可重复错误且阻断 processDelayed 后剩余开始回合效果/抽牌。",
+      "contract": "cards.sync.m5.js:75-87 正午决战下回合四枪；battle.resolution.js:607-611 schedule 预约；schema requires chosenEnemy side enemy/area false。",
+      "call_chain": [
+        "commands.playCard(正午决战)",
+        "resolveCardSteps schedule → delayed triggerOps notBeforeTurn 2",
+        "endTurn → afterEnemies → processDelayed",
+        "synthetic missing battle.target → resolveCard → assertCardRulesExecutable throws",
+        "recoverAutoPhaseError transitions back to player"
+      ],
+      "evidence": "repro.log NOON before=1000 after=1000 turn=2 delayed notBeforeTurn=2；stderr TypeError chosenEnemy requires side enemy / area false",
+      "repro_test": "noon duel next-turn synthetic loses required battle target and fails validation",
+      "repro_limits": "缺目标契约为本次实证失败；保留 schedule 导致再次预约是源码确认的二级修复风险，未另改代码或做替代契约实验。",
+      "absolute_file": "D:/素材/代号柒/搜打撤/game/src/battle/core/battle.engine.js",
+      "status": "confirmed",
+      "evidence_file": "D:/素材/代号柒/搜打撤/docs/evidence/2026-09-30-full-repository-review/battle_cards/repro.log",
+      "repro_file": "D:/素材/代号柒/搜打撤/docs/evidence/2026-09-30-full-repository-review/battle_cards/battle.repro.test.js"
+    },
+    {
+      "id": "BC-07",
+      "priority": "P2",
+      "title": "黑暗形态把多一个候选项改成多一次获得",
+      "file": "game/src/battle/core/battle.engine.js",
+      "start": 534,
+      "end": 537,
+      "trigger": "打出黑暗形态，再打出一次发现卡（复现用江湖救急）。",
+      "expected": "同一次发现提供 4 个候选项，选择 1 张。",
+      "actual": "queueDiscover 给 job.n+1（选择/获得次数），build panel 仍固定最多 3 个 options，pickDiscover 后再创建下一次发现。",
+      "impact": "选择空间没有增加，却多获得/施放一张卡，改变卡牌资源与强度。",
+      "contract": "canonical 黑暗形态 desc“本局对战中，每当你发现卡牌时，增加1个可选项”；m8 discoverPlus。",
+      "call_chain": [
+        "commands.playCard(黑暗形态)",
+        "resolveRegisterRule discoverPlus sets pstat.status",
+        "commands.playCard(discovery) → resolution queueDiscover wrapper n+1",
+        "discover-flow builds fixed 3 candidates",
+        "pickDiscover interprets n as remaining selection count"
+      ],
+      "evidence": "repro.log DARK {\"desc\":\"本局对战中，每当你发现卡牌时，增加1个可选项\",\"options\":3,\"n\":2}",
+      "repro_test": "dark form raises discovery count instead of option count",
+      "repro_limits": "复现为 canonical 迁移规则，无自定义发现语义。",
+      "absolute_file": "D:/素材/代号柒/搜打撤/game/src/battle/core/battle.engine.js",
+      "status": "confirmed",
+      "evidence_file": "D:/素材/代号柒/搜打撤/docs/evidence/2026-09-30-full-repository-review/battle_cards/repro.log",
+      "repro_file": "D:/素材/代号柒/搜打撤/docs/evidence/2026-09-30-full-repository-review/battle_cards/battle.repro.test.js"
+    },
+    {
+      "id": "BC-08",
+      "priority": "P2",
+      "title": "连续射击的精确预览忽略动态段数",
+      "file": "game/src/battle/view/battle.preview.js",
+      "start": 43,
+      "end": 54,
+      "trigger": "本回合先打出 2 张招式，然后悬停/选中连续射击查看伤害预览。",
+      "expected": "计算本回合已出招式数，显示 4 点伤害，或者降级无法精算。",
+      "actual": "structuredDamageSpec 未将 hits.perPlayedMoves 视为不稳定，也未读取计数；默认 hits=1，confidence exact 显示 2，真实结算 hits=2、伤害 4。",
+      "impact": "玩家依据被标为精确的错误击杀/伤害数字作决策；同函数还须复核其他新数值键和多 damage op 的支持边界。",
+      "contract": "连续射击 canonical desc 触发次数=本回合已打出招式数；resolution.js:663-676 动态段数。",
+      "call_chain": [
+        "battle.hover.showFoePreview",
+        "core.getPreviewContext → snapshot context",
+        "previewAction → structuredDamageSpec → hits default 1 → exact result",
+        "actual execPlay → resolveCardSteps hits.perPlayedMoves"
+      ],
+      "evidence": "repro.log PREVIEW {\"confidence\":\"exact\",\"preview\":2,\"actual\":4,...}",
+      "repro_test": "rapid fire preview claims exact single-hit damage although runtime uses played-move count",
+      "repro_limits": "本发现仅确认连续射击；其他 modifiers/multiple op 为复核范围提示，未计独立缺陷。",
+      "absolute_file": "D:/素材/代号柒/搜打撤/game/src/battle/view/battle.preview.js",
+      "status": "confirmed",
+      "evidence_file": "D:/素材/代号柒/搜打撤/docs/evidence/2026-09-30-full-repository-review/battle_cards/repro.log",
+      "repro_file": "D:/素材/代号柒/搜打撤/docs/evidence/2026-09-30-full-repository-review/battle_cards/battle.repro.test.js"
+    },
+    {
+      "id": "BC-09",
+      "priority": "P2",
+      "title": "战斗通行证消耗后没有发牌或开启发现",
+      "file": "game/src/battle/bag/battle.bag.js",
+      "start": 192,
+      "end": 200,
+      "trigger": "普通战斗从道具栏/战斗背包使用员工通行证 B（同结构路由还涉及 A/C）。",
+      "expected": "按通行证 B 的 legendary acquire 获得一张符合要求的卡；发现类 C 应打开合法面板。",
+      "actual": "useStructuredBattleBag 删除母本，只 queueDiscover({pool:{kind:legendary}})，之后没有调用 processDiscoverQueue，render 不会消费 queue。即使后续出牌推动 queue，discover-flow 仅接受 structured pool.kind moves，legendary/classAbility 会被拒。",
+      "impact": "通行证被永久消耗而没有奖励，生产普通战斗可直接遇到。",
+      "contract": "cards.sync.m6.js:67 B acquire legendary；battle.discover-flow.js:95-99 rejects non-moves structured pool。",
+      "call_chain": [
+        "commands.usePotion/useItem",
+        "battle.bag.useItem rules.bag.use → useBattleEffectItem action queue",
+        "useStructuredBattleBag removes G.ownedCards entry",
+        "acquire only enqueues discovery job; no drain/gain",
+        "later processDiscoverQueue structuredPool unsupported"
+      ],
+      "evidence": "repro.log TOKEN only token-spare owned; discovering=null; granted=0; queue retains n1,pool.legendary,source tt-token-gold",
+      "repro_test": "battle employee token is consumed but its discovery queue is never opened or granted",
+      "repro_limits": "B 已实证，A/C 共用路由按源码指出，未另跑三张同类测试；地图道具路径由其他代理审阅。",
+      "absolute_file": "D:/素材/代号柒/搜打撤/game/src/battle/bag/battle.bag.js",
+      "status": "confirmed",
+      "evidence_file": "D:/素材/代号柒/搜打撤/docs/evidence/2026-09-30-full-repository-review/battle_cards/repro.log",
+      "repro_file": "D:/素材/代号柒/搜打撤/docs/evidence/2026-09-30-full-repository-review/battle_cards/battle.repro.test.js"
+    },
+    {
+      "id": "BC-10",
+      "priority": "P2",
+      "title": "规则化饮血剑遗漏多杀和非卡牌击杀",
+      "file": "game/src/battle/core/battle.engine.js",
+      "start": 777,
+      "end": 779,
+      "trigger": "穿戴规则化饮血剑，再以 AOE 杀 2 个敌人，或砸击/毒伤等 null source 杀敌。",
+      "expected": "每消灭 1 个敌人攻击力+1；两杀+2，之后第三杀累计+3。",
+      "actual": "applyKillRewards(card,kills) 对 null card 提前 return，使 runner 无法收到非卡击杀；非空 card 只 fireKill 一次，不按 kills 次触发。M7 抑制旧 killAtkUp 文本宿主，所以也没有旧计数补偿。",
+      "impact": "饮血剑规则化后在群伤、砸击、道具、毒杀等常见路径少给或完全漏给奖励。",
+      "contract": "canonical 饮血剑“本局对战内，每消灭1个敌人，+1点攻击力”；cards.sync.m7.js:38 onKill blessing atkUp1。",
+      "call_chain": [
+        "commands.playCard(饮血剑) → execPlay registerCard onKill",
+        "commands.playCard(AOE) → applyKillRewards(card,2) → fireKill once",
+        "commands.bagSlam → resolveSlam → applyKillRewards(null,kills)",
+        "null source early return before trigger runner"
+      ],
+      "evidence": "repro.log BLOODDRINKER dead=[true,true,true,false], afterTwo=1, afterNullKill=1",
+      "repro_test": "blooddrinker structured kill trigger fires once for two kills and not at all for null-source kills",
+      "repro_limits": "真实 AOE 双杀加砸击第三杀已执行；AOE 为通过生产 schema/capability 的最小合成 1 点 fixed 卡。",
+      "absolute_file": "D:/素材/代号柒/搜打撤/game/src/battle/core/battle.engine.js",
+      "status": "confirmed",
+      "evidence_file": "D:/素材/代号柒/搜打撤/docs/evidence/2026-09-30-full-repository-review/battle_cards/repro.log",
+      "repro_file": "D:/素材/代号柒/搜打撤/docs/evidence/2026-09-30-full-repository-review/battle_cards/battle.repro.test.js"
+    }
+  ],
+  "known": [
+    {
+      "id": "PENDING-16",
+      "status": "known-awaiting-decision",
+      "note": "自施 debuff 首 tick 语义保留现行实现，非本次新发现。"
+    },
+    {
+      "id": "PENDING-19",
+      "status": "known-awaiting-decision",
+      "note": "文本同句多动词终局短路与遗留 dmg 字段深化已挂账；未将其重新算入本次发现。"
+    },
+    {
+      "id": "PENDING-20",
+      "status": "known-cross-domain",
+      "note": "finish(false)→terminalPending 保存负 HP 窗口归 hub/run；这里确认死亡入口，不重复报告或改台账。"
+    }
+  ],
+  "unconfirmed": [
+    {
+      "id": "BC-U01",
+      "note": "queueBattleAction 未返回 promise 与 exec-play 注释不符；本次未确认现行调用方依赖 await 的实际损害，不计缺陷。"
+    },
+    {
+      "id": "BC-U02",
+      "note": "旧战斗档 restore 对触发登记/高级巢穴标志的保留需专门旧档矩阵；现行 serialize 仅存入场检查点，未把旧路径疑点计作已确认回归。"
+    },
+    {
+      "id": "BC-U03",
+      "note": "perFuelCost 仍用 sellPrice，而最新 getPriceOfLastDrawn 用费用；需对齐当前价格决策原文，暂不单报。"
+    }
+  ]
+}

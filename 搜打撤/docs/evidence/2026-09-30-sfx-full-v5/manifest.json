@@ -1,0 +1,2062 @@
+{
+  "name": "冬境原创音效 v5",
+  "version": 1,
+  "sample_rate": 48000,
+  "cue_count": 109,
+  "file_count": 210,
+  "legacy_key_count": 50,
+  "legacy_aliases": {
+    "parry": "parry",
+    "card": "card",
+    "curse": "curse",
+    "pick": "pick",
+    "confirm": "confirm",
+    "error": "error",
+    "hurt": "hurt",
+    "chestShake": "chestShake",
+    "defeat": "defeat",
+    "energyDown": "energyDown",
+    "open": "open",
+    "legend": "legend",
+    "danger": "danger",
+    "victory": "victory",
+    "strike": "strike",
+    "heal": "heal",
+    "reveal": "reveal",
+    "switch": "switch",
+    "shieldBreak": "shieldBreak",
+    "gain": "gain",
+    "buffUp": "buffUp",
+    "hit": "hit",
+    "rarePlay": "rarePlay",
+    "curseEnd": "curseEnd",
+    "shuffle": "shuffle",
+    "armorBreak": "armorBreak",
+    "foeLunge": "foeLunge",
+    "energyUp": "energyUp",
+    "click": "click",
+    "cardSelect": "cardSelect",
+    "deny": "deny",
+    "buffDown": "buffDown",
+    "levelup": "levelup",
+    "burn": "burn",
+    "drop": "drop",
+    "coin": "coin",
+    "kill": "kill",
+    "shieldUp": "shieldUp",
+    "draw": "draw",
+    "flee": "flee",
+    "shutter": "shutter",
+    "chestBurst": "chestBurst",
+    "hover": "hover",
+    "close": "close",
+    "discard": "discard",
+    "ding": "ding",
+    "scene": "eventEnter",
+    "turnSelf": "phaseSelf",
+    "turnFoe": "phaseFoe",
+    "phase": {
+      "self": "phaseSelf",
+      "foe": "phaseFoe",
+      "default": "phaseSelf"
+    }
+  },
+  "cues": {
+    "click": {
+      "label": "按钮点击",
+      "group": "ui",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/ui/click-01.wav",
+          "runtime": "runtime/ui/click-01.ogg"
+        },
+        {
+          "master": "masters/ui/click-02.wav",
+          "runtime": "runtime/ui/click-02.ogg"
+        },
+        {
+          "master": "masters/ui/click-03.wav",
+          "runtime": "runtime/ui/click-03.ogg"
+        }
+      ],
+      "variation_correlations": [
+        -0.0918,
+        0.0089
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "hover": {
+      "label": "悬停",
+      "group": "ui",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/ui/hover-01.wav",
+          "runtime": "runtime/ui/hover-01.ogg"
+        },
+        {
+          "master": "masters/ui/hover-02.wav",
+          "runtime": "runtime/ui/hover-02.ogg"
+        },
+        {
+          "master": "masters/ui/hover-03.wav",
+          "runtime": "runtime/ui/hover-03.ogg"
+        }
+      ],
+      "variation_correlations": [
+        0.147,
+        -0.1461
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "switch": {
+      "label": "切页",
+      "group": "ui",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/ui/switch-01.wav",
+          "runtime": "runtime/ui/switch-01.ogg"
+        },
+        {
+          "master": "masters/ui/switch-02.wav",
+          "runtime": "runtime/ui/switch-02.ogg"
+        }
+      ],
+      "variation_correlations": [
+        -0.0434
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "open": {
+      "label": "界面打开",
+      "group": "ui",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/ui/open-01.wav",
+          "runtime": "runtime/ui/open-01.ogg"
+        },
+        {
+          "master": "masters/ui/open-02.wav",
+          "runtime": "runtime/ui/open-02.ogg"
+        }
+      ],
+      "variation_correlations": [
+        0.0058
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "close": {
+      "label": "界面关闭",
+      "group": "ui",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/ui/close-01.wav",
+          "runtime": "runtime/ui/close-01.ogg"
+        },
+        {
+          "master": "masters/ui/close-02.wav",
+          "runtime": "runtime/ui/close-02.ogg"
+        }
+      ],
+      "variation_correlations": [
+        0.0164
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "confirm": {
+      "label": "操作确认",
+      "group": "ui",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/ui/confirm-01.wav",
+          "runtime": "runtime/ui/confirm-01.ogg"
+        },
+        {
+          "master": "masters/ui/confirm-02.wav",
+          "runtime": "runtime/ui/confirm-02.ogg"
+        }
+      ],
+      "variation_correlations": [
+        0.0606
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "deny": {
+      "label": "操作拒绝",
+      "group": "ui",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/ui/deny-01.wav",
+          "runtime": "runtime/ui/deny-01.ogg"
+        },
+        {
+          "master": "masters/ui/deny-02.wav",
+          "runtime": "runtime/ui/deny-02.ogg"
+        }
+      ],
+      "variation_correlations": [
+        0.0455
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "error": {
+      "label": "错误提示",
+      "group": "ui",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/ui/error-01.wav",
+          "runtime": "runtime/ui/error-01.ogg"
+        },
+        {
+          "master": "masters/ui/error-02.wav",
+          "runtime": "runtime/ui/error-02.ogg"
+        }
+      ],
+      "variation_correlations": [
+        0.1437
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "pick": {
+      "label": "物品拿起",
+      "group": "ui",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/ui/pick-01.wav",
+          "runtime": "runtime/ui/pick-01.ogg"
+        },
+        {
+          "master": "masters/ui/pick-02.wav",
+          "runtime": "runtime/ui/pick-02.ogg"
+        },
+        {
+          "master": "masters/ui/pick-03.wav",
+          "runtime": "runtime/ui/pick-03.ogg"
+        }
+      ],
+      "variation_correlations": [
+        -0.0196,
+        0.1764
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "drop": {
+      "label": "物品放下",
+      "group": "ui",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/ui/drop-01.wav",
+          "runtime": "runtime/ui/drop-01.ogg"
+        },
+        {
+          "master": "masters/ui/drop-02.wav",
+          "runtime": "runtime/ui/drop-02.ogg"
+        },
+        {
+          "master": "masters/ui/drop-03.wav",
+          "runtime": "runtime/ui/drop-03.ogg"
+        }
+      ],
+      "variation_correlations": [
+        0.2062,
+        -0.0534
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "gain": {
+      "label": "获得物品",
+      "group": "ui",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/ui/gain-01.wav",
+          "runtime": "runtime/ui/gain-01.ogg"
+        },
+        {
+          "master": "masters/ui/gain-02.wav",
+          "runtime": "runtime/ui/gain-02.ogg"
+        }
+      ],
+      "variation_correlations": [
+        -0.0016
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "coin": {
+      "label": "货币变化",
+      "group": "ui",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/ui/coin-01.wav",
+          "runtime": "runtime/ui/coin-01.ogg"
+        },
+        {
+          "master": "masters/ui/coin-02.wav",
+          "runtime": "runtime/ui/coin-02.ogg"
+        },
+        {
+          "master": "masters/ui/coin-03.wav",
+          "runtime": "runtime/ui/coin-03.ogg"
+        }
+      ],
+      "variation_correlations": [
+        -0.0236,
+        -0.0722
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "ding": {
+      "label": "普通奖励",
+      "group": "ui",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/ui/ding-01.wav",
+          "runtime": "runtime/ui/ding-01.ogg"
+        },
+        {
+          "master": "masters/ui/ding-02.wav",
+          "runtime": "runtime/ui/ding-02.ogg"
+        }
+      ],
+      "variation_correlations": [
+        -0.1377
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "card": {
+      "label": "出牌",
+      "group": "cards",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/cards/card-01.wav",
+          "runtime": "runtime/cards/card-01.ogg"
+        },
+        {
+          "master": "masters/cards/card-02.wav",
+          "runtime": "runtime/cards/card-02.ogg"
+        },
+        {
+          "master": "masters/cards/card-03.wav",
+          "runtime": "runtime/cards/card-03.ogg"
+        }
+      ],
+      "variation_correlations": [
+        -0.2069,
+        -0.0695
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "cardSelect": {
+      "label": "选卡",
+      "group": "cards",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/cards/cardSelect-01.wav",
+          "runtime": "runtime/cards/cardSelect-01.ogg"
+        },
+        {
+          "master": "masters/cards/cardSelect-02.wav",
+          "runtime": "runtime/cards/cardSelect-02.ogg"
+        },
+        {
+          "master": "masters/cards/cardSelect-03.wav",
+          "runtime": "runtime/cards/cardSelect-03.ogg"
+        }
+      ],
+      "variation_correlations": [
+        0.2136,
+        -0.0187
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "draw": {
+      "label": "抽牌",
+      "group": "cards",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/cards/draw-01.wav",
+          "runtime": "runtime/cards/draw-01.ogg"
+        },
+        {
+          "master": "masters/cards/draw-02.wav",
+          "runtime": "runtime/cards/draw-02.ogg"
+        },
+        {
+          "master": "masters/cards/draw-03.wav",
+          "runtime": "runtime/cards/draw-03.ogg"
+        },
+        {
+          "master": "masters/cards/draw-04.wav",
+          "runtime": "runtime/cards/draw-04.ogg"
+        }
+      ],
+      "variation_correlations": [
+        -0.0607,
+        0.1388,
+        -0.0529
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "shuffle": {
+      "label": "洗牌",
+      "group": "cards",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/cards/shuffle-01.wav",
+          "runtime": "runtime/cards/shuffle-01.ogg"
+        },
+        {
+          "master": "masters/cards/shuffle-02.wav",
+          "runtime": "runtime/cards/shuffle-02.ogg"
+        }
+      ],
+      "variation_correlations": [
+        0.0301
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "discard": {
+      "label": "弃牌",
+      "group": "cards",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/cards/discard-01.wav",
+          "runtime": "runtime/cards/discard-01.ogg"
+        },
+        {
+          "master": "masters/cards/discard-02.wav",
+          "runtime": "runtime/cards/discard-02.ogg"
+        },
+        {
+          "master": "masters/cards/discard-03.wav",
+          "runtime": "runtime/cards/discard-03.ogg"
+        }
+      ],
+      "variation_correlations": [
+        -0.0465,
+        -0.1497
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "burn": {
+      "label": "消耗焚毁",
+      "group": "cards",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/cards/burn-01.wav",
+          "runtime": "runtime/cards/burn-01.ogg"
+        },
+        {
+          "master": "masters/cards/burn-02.wav",
+          "runtime": "runtime/cards/burn-02.ogg"
+        }
+      ],
+      "variation_correlations": [
+        -0.0341
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "rarePlay": {
+      "label": "高稀有牌使用",
+      "group": "cards",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/cards/rarePlay-01.wav",
+          "runtime": "runtime/cards/rarePlay-01.ogg"
+        },
+        {
+          "master": "masters/cards/rarePlay-02.wav",
+          "runtime": "runtime/cards/rarePlay-02.ogg"
+        }
+      ],
+      "variation_correlations": [
+        0.0306
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "hit": {
+      "label": "攻击命中",
+      "group": "combat",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/combat/hit-01.wav",
+          "runtime": "runtime/combat/hit-01.ogg"
+        },
+        {
+          "master": "masters/combat/hit-02.wav",
+          "runtime": "runtime/combat/hit-02.ogg"
+        },
+        {
+          "master": "masters/combat/hit-03.wav",
+          "runtime": "runtime/combat/hit-03.ogg"
+        },
+        {
+          "master": "masters/combat/hit-04.wav",
+          "runtime": "runtime/combat/hit-04.ogg"
+        }
+      ],
+      "variation_correlations": [
+        -0.0826,
+        -0.0895,
+        -0.2945
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "hurt": {
+      "label": "玩家受伤",
+      "group": "combat",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/combat/hurt-01.wav",
+          "runtime": "runtime/combat/hurt-01.ogg"
+        },
+        {
+          "master": "masters/combat/hurt-02.wav",
+          "runtime": "runtime/combat/hurt-02.ogg"
+        },
+        {
+          "master": "masters/combat/hurt-03.wav",
+          "runtime": "runtime/combat/hurt-03.ogg"
+        }
+      ],
+      "variation_correlations": [
+        -0.0026,
+        -0.115
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "strike": {
+      "label": "技能伤害",
+      "group": "combat",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/combat/strike-01.wav",
+          "runtime": "runtime/combat/strike-01.ogg"
+        },
+        {
+          "master": "masters/combat/strike-02.wav",
+          "runtime": "runtime/combat/strike-02.ogg"
+        },
+        {
+          "master": "masters/combat/strike-03.wav",
+          "runtime": "runtime/combat/strike-03.ogg"
+        }
+      ],
+      "variation_correlations": [
+        -0.0345,
+        0.1001
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "parry": {
+      "label": "格挡",
+      "group": "combat",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/combat/parry-01.wav",
+          "runtime": "runtime/combat/parry-01.ogg"
+        },
+        {
+          "master": "masters/combat/parry-02.wav",
+          "runtime": "runtime/combat/parry-02.ogg"
+        },
+        {
+          "master": "masters/combat/parry-03.wav",
+          "runtime": "runtime/combat/parry-03.ogg"
+        }
+      ],
+      "variation_correlations": [
+        -0.0714,
+        0.2571
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "kill": {
+      "label": "击杀",
+      "group": "combat",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/combat/kill-01.wav",
+          "runtime": "runtime/combat/kill-01.ogg"
+        },
+        {
+          "master": "masters/combat/kill-02.wav",
+          "runtime": "runtime/combat/kill-02.ogg"
+        },
+        {
+          "master": "masters/combat/kill-03.wav",
+          "runtime": "runtime/combat/kill-03.ogg"
+        }
+      ],
+      "variation_correlations": [
+        0.0053,
+        -0.222
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "danger": {
+      "label": "危险提示",
+      "group": "combat",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/combat/danger-01.wav",
+          "runtime": "runtime/combat/danger-01.ogg"
+        },
+        {
+          "master": "masters/combat/danger-02.wav",
+          "runtime": "runtime/combat/danger-02.ogg"
+        }
+      ],
+      "variation_correlations": [
+        0.1576
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "energyUp": {
+      "label": "能量增加",
+      "group": "combat",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/combat/energyUp-01.wav",
+          "runtime": "runtime/combat/energyUp-01.ogg"
+        },
+        {
+          "master": "masters/combat/energyUp-02.wav",
+          "runtime": "runtime/combat/energyUp-02.ogg"
+        }
+      ],
+      "variation_correlations": [
+        -0.0306
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "energyDown": {
+      "label": "能量消耗",
+      "group": "combat",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/combat/energyDown-01.wav",
+          "runtime": "runtime/combat/energyDown-01.ogg"
+        },
+        {
+          "master": "masters/combat/energyDown-02.wav",
+          "runtime": "runtime/combat/energyDown-02.ogg"
+        }
+      ],
+      "variation_correlations": [
+        0.0861
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "shieldUp": {
+      "label": "护盾增加",
+      "group": "combat",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/combat/shieldUp-01.wav",
+          "runtime": "runtime/combat/shieldUp-01.ogg"
+        },
+        {
+          "master": "masters/combat/shieldUp-02.wav",
+          "runtime": "runtime/combat/shieldUp-02.ogg"
+        }
+      ],
+      "variation_correlations": [
+        -0.013
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "shieldBreak": {
+      "label": "护盾破碎",
+      "group": "combat",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/combat/shieldBreak-01.wav",
+          "runtime": "runtime/combat/shieldBreak-01.ogg"
+        },
+        {
+          "master": "masters/combat/shieldBreak-02.wav",
+          "runtime": "runtime/combat/shieldBreak-02.ogg"
+        }
+      ],
+      "variation_correlations": [
+        0.0045
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "armorBreak": {
+      "label": "破甲",
+      "group": "combat",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/combat/armorBreak-01.wav",
+          "runtime": "runtime/combat/armorBreak-01.ogg"
+        },
+        {
+          "master": "masters/combat/armorBreak-02.wav",
+          "runtime": "runtime/combat/armorBreak-02.ogg"
+        }
+      ],
+      "variation_correlations": [
+        0.1292
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "phaseSelf": {
+      "label": "玩家回合",
+      "group": "combat",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/combat/phaseSelf-01.wav",
+          "runtime": "runtime/combat/phaseSelf-01.ogg"
+        },
+        {
+          "master": "masters/combat/phaseSelf-02.wav",
+          "runtime": "runtime/combat/phaseSelf-02.ogg"
+        }
+      ],
+      "variation_correlations": [
+        0.0116
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "phaseFoe": {
+      "label": "敌方回合",
+      "group": "combat",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/combat/phaseFoe-01.wav",
+          "runtime": "runtime/combat/phaseFoe-01.ogg"
+        },
+        {
+          "master": "masters/combat/phaseFoe-02.wav",
+          "runtime": "runtime/combat/phaseFoe-02.ogg"
+        }
+      ],
+      "variation_correlations": [
+        0.0148
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "foeLunge": {
+      "label": "敌人攻击前摇",
+      "group": "combat",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/combat/foeLunge-01.wav",
+          "runtime": "runtime/combat/foeLunge-01.ogg"
+        },
+        {
+          "master": "masters/combat/foeLunge-02.wav",
+          "runtime": "runtime/combat/foeLunge-02.ogg"
+        },
+        {
+          "master": "masters/combat/foeLunge-03.wav",
+          "runtime": "runtime/combat/foeLunge-03.ogg"
+        }
+      ],
+      "variation_correlations": [
+        -0.0115,
+        -0.0405
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "buffUp": {
+      "label": "增益获得",
+      "group": "combat",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/combat/buffUp-01.wav",
+          "runtime": "runtime/combat/buffUp-01.ogg"
+        },
+        {
+          "master": "masters/combat/buffUp-02.wav",
+          "runtime": "runtime/combat/buffUp-02.ogg"
+        }
+      ],
+      "variation_correlations": [
+        0.1311
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "buffDown": {
+      "label": "增益到期",
+      "group": "combat",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/combat/buffDown-01.wav",
+          "runtime": "runtime/combat/buffDown-01.ogg"
+        },
+        {
+          "master": "masters/combat/buffDown-02.wav",
+          "runtime": "runtime/combat/buffDown-02.ogg"
+        }
+      ],
+      "variation_correlations": [
+        -0.0695
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "curse": {
+      "label": "诅咒施加",
+      "group": "combat",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/combat/curse-01.wav",
+          "runtime": "runtime/combat/curse-01.ogg"
+        },
+        {
+          "master": "masters/combat/curse-02.wav",
+          "runtime": "runtime/combat/curse-02.ogg"
+        }
+      ],
+      "variation_correlations": [
+        0.1006
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "curseEnd": {
+      "label": "诅咒解除",
+      "group": "combat",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/combat/curseEnd-01.wav",
+          "runtime": "runtime/combat/curseEnd-01.ogg"
+        },
+        {
+          "master": "masters/combat/curseEnd-02.wav",
+          "runtime": "runtime/combat/curseEnd-02.ogg"
+        }
+      ],
+      "variation_correlations": [
+        0.0607
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "heal": {
+      "label": "治疗",
+      "group": "combat",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/combat/heal-01.wav",
+          "runtime": "runtime/combat/heal-01.ogg"
+        },
+        {
+          "master": "masters/combat/heal-02.wav",
+          "runtime": "runtime/combat/heal-02.ogg"
+        }
+      ],
+      "variation_correlations": [
+        0.0536
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "chestShake": {
+      "label": "宝箱摇动",
+      "group": "rewards",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/rewards/chestShake-01.wav",
+          "runtime": "runtime/rewards/chestShake-01.ogg"
+        },
+        {
+          "master": "masters/rewards/chestShake-02.wav",
+          "runtime": "runtime/rewards/chestShake-02.ogg"
+        },
+        {
+          "master": "masters/rewards/chestShake-03.wav",
+          "runtime": "runtime/rewards/chestShake-03.ogg"
+        }
+      ],
+      "variation_correlations": [
+        -0.0235,
+        0.0329
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "chestBurst": {
+      "label": "宝箱开启",
+      "group": "rewards",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/rewards/chestBurst-01.wav",
+          "runtime": "runtime/rewards/chestBurst-01.ogg"
+        },
+        {
+          "master": "masters/rewards/chestBurst-02.wav",
+          "runtime": "runtime/rewards/chestBurst-02.ogg"
+        }
+      ],
+      "variation_correlations": [
+        -0.0402
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "reveal": {
+      "label": "卡牌揭晓",
+      "group": "rewards",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/rewards/reveal-01.wav",
+          "runtime": "runtime/rewards/reveal-01.ogg"
+        },
+        {
+          "master": "masters/rewards/reveal-02.wav",
+          "runtime": "runtime/rewards/reveal-02.ogg"
+        },
+        {
+          "master": "masters/rewards/reveal-03.wav",
+          "runtime": "runtime/rewards/reveal-03.ogg"
+        }
+      ],
+      "variation_correlations": [
+        0.0499,
+        -0.1467
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "legend": {
+      "label": "传说揭晓",
+      "group": "rewards",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/rewards/legend-01.wav",
+          "runtime": "runtime/rewards/legend-01.ogg"
+        },
+        {
+          "master": "masters/rewards/legend-02.wav",
+          "runtime": "runtime/rewards/legend-02.ogg"
+        }
+      ],
+      "variation_correlations": [
+        -0.0387
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "victory": {
+      "label": "普通战斗胜利",
+      "group": "rewards",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/rewards/victory-01.wav",
+          "runtime": "runtime/rewards/victory-01.ogg"
+        },
+        {
+          "master": "masters/rewards/victory-02.wav",
+          "runtime": "runtime/rewards/victory-02.ogg"
+        }
+      ],
+      "variation_correlations": [
+        0.0394
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "defeat": {
+      "label": "普通战斗失败",
+      "group": "rewards",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/rewards/defeat-01.wav",
+          "runtime": "runtime/rewards/defeat-01.ogg"
+        },
+        {
+          "master": "masters/rewards/defeat-02.wav",
+          "runtime": "runtime/rewards/defeat-02.ogg"
+        }
+      ],
+      "variation_correlations": [
+        -0.0151
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "flee": {
+      "label": "战斗逃离",
+      "group": "rewards",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/rewards/flee-01.wav",
+          "runtime": "runtime/rewards/flee-01.ogg"
+        },
+        {
+          "master": "masters/rewards/flee-02.wav",
+          "runtime": "runtime/rewards/flee-02.ogg"
+        }
+      ],
+      "variation_correlations": [
+        0.0079
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "levelup": {
+      "label": "熟练度升级",
+      "group": "rewards",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/rewards/levelup-01.wav",
+          "runtime": "runtime/rewards/levelup-01.ogg"
+        },
+        {
+          "master": "masters/rewards/levelup-02.wav",
+          "runtime": "runtime/rewards/levelup-02.ogg"
+        }
+      ],
+      "variation_correlations": [
+        0.0058
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "shutter": {
+      "label": "照相馆快门",
+      "group": "rewards",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/rewards/shutter-01.wav",
+          "runtime": "runtime/rewards/shutter-01.ogg"
+        },
+        {
+          "master": "masters/rewards/shutter-02.wav",
+          "runtime": "runtime/rewards/shutter-02.ogg"
+        },
+        {
+          "master": "masters/rewards/shutter-03.wav",
+          "runtime": "runtime/rewards/shutter-03.ogg"
+        }
+      ],
+      "variation_correlations": [
+        -0.0664,
+        0.0918
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "eventEnter": {
+      "label": "进入普通事件",
+      "group": "nodes",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/nodes/eventEnter-01.wav",
+          "runtime": "runtime/nodes/eventEnter-01.ogg"
+        },
+        {
+          "master": "masters/nodes/eventEnter-02.wav",
+          "runtime": "runtime/nodes/eventEnter-02.ogg"
+        }
+      ],
+      "variation_correlations": [
+        -0.0844
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "bossReveal": {
+      "label": "首脑登场",
+      "group": "nodes",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/nodes/bossReveal-01.wav",
+          "runtime": "runtime/nodes/bossReveal-01.ogg"
+        },
+        {
+          "master": "masters/nodes/bossReveal-02.wav",
+          "runtime": "runtime/nodes/bossReveal-02.ogg"
+        }
+      ],
+      "variation_correlations": [
+        0.0016
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "battleEnter": {
+      "label": "进入战斗",
+      "group": "nodes",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/nodes/battleEnter-01.wav",
+          "runtime": "runtime/nodes/battleEnter-01.ogg"
+        },
+        {
+          "master": "masters/nodes/battleEnter-02.wav",
+          "runtime": "runtime/nodes/battleEnter-02.ogg"
+        }
+      ],
+      "variation_correlations": [
+        0.1026
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "shopEnter": {
+      "label": "进入补给站",
+      "group": "nodes",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/nodes/shopEnter-01.wav",
+          "runtime": "runtime/nodes/shopEnter-01.ogg"
+        }
+      ],
+      "variation_correlations": [],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "fireEnter": {
+      "label": "进入营火",
+      "group": "nodes",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/nodes/fireEnter-01.wav",
+          "runtime": "runtime/nodes/fireEnter-01.ogg"
+        }
+      ],
+      "variation_correlations": [],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "altarEnter": {
+      "label": "进入祭坛",
+      "group": "nodes",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/nodes/altarEnter-01.wav",
+          "runtime": "runtime/nodes/altarEnter-01.ogg"
+        }
+      ],
+      "variation_correlations": [],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "doorEnter": {
+      "label": "抵达层间门",
+      "group": "nodes",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/nodes/doorEnter-01.wav",
+          "runtime": "runtime/nodes/doorEnter-01.ogg"
+        }
+      ],
+      "variation_correlations": [],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "layerEnter": {
+      "label": "进入下一层",
+      "group": "nodes",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/nodes/layerEnter-01.wav",
+          "runtime": "runtime/nodes/layerEnter-01.ogg"
+        }
+      ],
+      "variation_correlations": [],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "extractionEnter": {
+      "label": "进入撤离点",
+      "group": "nodes",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/nodes/extractionEnter-01.wav",
+          "runtime": "runtime/nodes/extractionEnter-01.ogg"
+        }
+      ],
+      "variation_correlations": [],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "safeEnter": {
+      "label": "进入安全地带",
+      "group": "nodes",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/nodes/safeEnter-01.wav",
+          "runtime": "runtime/nodes/safeEnter-01.ogg"
+        }
+      ],
+      "variation_correlations": [],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "eventDanger": {
+      "label": "进入危险事件",
+      "group": "nodes",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/nodes/eventDanger-01.wav",
+          "runtime": "runtime/nodes/eventDanger-01.ogg"
+        }
+      ],
+      "variation_correlations": [],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "eventSafe": {
+      "label": "进入援助事件",
+      "group": "nodes",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/nodes/eventSafe-01.wav",
+          "runtime": "runtime/nodes/eventSafe-01.ogg"
+        }
+      ],
+      "variation_correlations": [],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "eventClue": {
+      "label": "发现事件线索",
+      "group": "nodes",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/nodes/eventClue-01.wav",
+          "runtime": "runtime/nodes/eventClue-01.ogg"
+        }
+      ],
+      "variation_correlations": [],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "eventComplete": {
+      "label": "事件完成",
+      "group": "nodes",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/nodes/eventComplete-01.wav",
+          "runtime": "runtime/nodes/eventComplete-01.ogg"
+        }
+      ],
+      "variation_correlations": [],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "prepReady": {
+      "label": "出征整备完成",
+      "group": "nodes",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/nodes/prepReady-01.wav",
+          "runtime": "runtime/nodes/prepReady-01.ogg"
+        }
+      ],
+      "variation_correlations": [],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "deployStart": {
+      "label": "远征启程",
+      "group": "nodes",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/nodes/deployStart-01.wav",
+          "runtime": "runtime/nodes/deployStart-01.ogg"
+        }
+      ],
+      "variation_correlations": [],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "searchStart": {
+      "label": "搜索物资",
+      "group": "exploration",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/exploration/searchStart-01.wav",
+          "runtime": "runtime/exploration/searchStart-01.ogg"
+        },
+        {
+          "master": "masters/exploration/searchStart-02.wav",
+          "runtime": "runtime/exploration/searchStart-02.ogg"
+        }
+      ],
+      "variation_correlations": [
+        -0.0187
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "searchReveal": {
+      "label": "搜索结果揭晓",
+      "group": "exploration",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/exploration/searchReveal-01.wav",
+          "runtime": "runtime/exploration/searchReveal-01.ogg"
+        },
+        {
+          "master": "masters/exploration/searchReveal-02.wav",
+          "runtime": "runtime/exploration/searchReveal-02.ogg"
+        }
+      ],
+      "variation_correlations": [
+        -0.022
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "altarOffer": {
+      "label": "祭坛献祭",
+      "group": "exploration",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/exploration/altarOffer-01.wav",
+          "runtime": "runtime/exploration/altarOffer-01.ogg"
+        }
+      ],
+      "variation_correlations": [],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "altarActivate": {
+      "label": "祭坛激活",
+      "group": "exploration",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/exploration/altarActivate-01.wav",
+          "runtime": "runtime/exploration/altarActivate-01.ogg"
+        }
+      ],
+      "variation_correlations": [],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "altarReward": {
+      "label": "祭坛回赠",
+      "group": "exploration",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/exploration/altarReward-01.wav",
+          "runtime": "runtime/exploration/altarReward-01.ogg"
+        }
+      ],
+      "variation_correlations": [],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "runeExchange": {
+      "label": "碎片兑换",
+      "group": "exploration",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/exploration/runeExchange-01.wav",
+          "runtime": "runtime/exploration/runeExchange-01.ogg"
+        }
+      ],
+      "variation_correlations": [],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "extractionConfirm": {
+      "label": "确认撤离",
+      "group": "exploration",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/exploration/extractionConfirm-01.wav",
+          "runtime": "runtime/exploration/extractionConfirm-01.ogg"
+        }
+      ],
+      "variation_correlations": [],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "extractionSuccess": {
+      "label": "成功撤离",
+      "group": "exploration",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/exploration/extractionSuccess-01.wav",
+          "runtime": "runtime/exploration/extractionSuccess-01.ogg"
+        }
+      ],
+      "variation_correlations": [],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "extractionFail": {
+      "label": "撤离失败",
+      "group": "exploration",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/exploration/extractionFail-01.wav",
+          "runtime": "runtime/exploration/extractionFail-01.ogg"
+        }
+      ],
+      "variation_correlations": [],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "bossVictory": {
+      "label": "首脑战胜利",
+      "group": "exploration",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/exploration/bossVictory-01.wav",
+          "runtime": "runtime/exploration/bossVictory-01.ogg"
+        }
+      ],
+      "variation_correlations": [],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "runClear": {
+      "label": "主线通关",
+      "group": "exploration",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/exploration/runClear-01.wav",
+          "runtime": "runtime/exploration/runClear-01.ogg"
+        }
+      ],
+      "variation_correlations": [],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "stashDeposit": {
+      "label": "战利品入库",
+      "group": "exploration",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/exploration/stashDeposit-01.wav",
+          "runtime": "runtime/exploration/stashDeposit-01.ogg"
+        },
+        {
+          "master": "masters/exploration/stashDeposit-02.wav",
+          "runtime": "runtime/exploration/stashDeposit-02.ogg"
+        }
+      ],
+      "variation_correlations": [
+        -0.0784
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "cardRestore": {
+      "label": "卡牌复原",
+      "group": "exploration",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/exploration/cardRestore-01.wav",
+          "runtime": "runtime/exploration/cardRestore-01.ogg"
+        },
+        {
+          "master": "masters/exploration/cardRestore-02.wav",
+          "runtime": "runtime/exploration/cardRestore-02.ogg"
+        }
+      ],
+      "variation_correlations": [
+        -0.0565
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "safeStore": {
+      "label": "存入安全格",
+      "group": "exploration",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/exploration/safeStore-01.wav",
+          "runtime": "runtime/exploration/safeStore-01.ogg"
+        },
+        {
+          "master": "masters/exploration/safeStore-02.wav",
+          "runtime": "runtime/exploration/safeStore-02.ogg"
+        }
+      ],
+      "variation_correlations": [
+        -0.0688
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "safeRetrieve": {
+      "label": "取出安全格",
+      "group": "exploration",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/exploration/safeRetrieve-01.wav",
+          "runtime": "runtime/exploration/safeRetrieve-01.ogg"
+        },
+        {
+          "master": "masters/exploration/safeRetrieve-02.wav",
+          "runtime": "runtime/exploration/safeRetrieve-02.ogg"
+        }
+      ],
+      "variation_correlations": [
+        -0.0412
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "tradeBuy": {
+      "label": "买入",
+      "group": "exploration",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/exploration/tradeBuy-01.wav",
+          "runtime": "runtime/exploration/tradeBuy-01.ogg"
+        },
+        {
+          "master": "masters/exploration/tradeBuy-02.wav",
+          "runtime": "runtime/exploration/tradeBuy-02.ogg"
+        }
+      ],
+      "variation_correlations": [
+        -0.0093
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "tradeSell": {
+      "label": "卖出",
+      "group": "exploration",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/exploration/tradeSell-01.wav",
+          "runtime": "runtime/exploration/tradeSell-01.ogg"
+        },
+        {
+          "master": "masters/exploration/tradeSell-02.wav",
+          "runtime": "runtime/exploration/tradeSell-02.ogg"
+        }
+      ],
+      "variation_correlations": [
+        0.1323
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "blackMarketWin": {
+      "label": "黑市开奖成功",
+      "group": "exploration",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/exploration/blackMarketWin-01.wav",
+          "runtime": "runtime/exploration/blackMarketWin-01.ogg"
+        }
+      ],
+      "variation_correlations": [],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "blackMarketLose": {
+      "label": "黑市开奖失败",
+      "group": "exploration",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/exploration/blackMarketLose-01.wav",
+          "runtime": "runtime/exploration/blackMarketLose-01.ogg"
+        }
+      ],
+      "variation_correlations": [],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "recodeStart": {
+      "label": "故障重编开始",
+      "group": "exploration",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/exploration/recodeStart-01.wav",
+          "runtime": "runtime/exploration/recodeStart-01.ogg"
+        }
+      ],
+      "variation_correlations": [],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "recodeComplete": {
+      "label": "故障重编完成",
+      "group": "exploration",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/exploration/recodeComplete-01.wav",
+          "runtime": "runtime/exploration/recodeComplete-01.ogg"
+        }
+      ],
+      "variation_correlations": [],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "storyClue": {
+      "label": "引路灯线索",
+      "group": "exploration",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/exploration/storyClue-01.wav",
+          "runtime": "runtime/exploration/storyClue-01.ogg"
+        }
+      ],
+      "variation_correlations": [],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "storyComplete": {
+      "label": "引路灯故事完成",
+      "group": "exploration",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/exploration/storyComplete-01.wav",
+          "runtime": "runtime/exploration/storyComplete-01.ogg"
+        }
+      ],
+      "variation_correlations": [],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "achievementUnlock": {
+      "label": "成就解锁",
+      "group": "growth",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/growth/achievementUnlock-01.wav",
+          "runtime": "runtime/growth/achievementUnlock-01.ogg"
+        },
+        {
+          "master": "masters/growth/achievementUnlock-02.wav",
+          "runtime": "runtime/growth/achievementUnlock-02.ogg"
+        }
+      ],
+      "variation_correlations": [
+        -0.0792
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "collectionUnlock": {
+      "label": "收藏解锁",
+      "group": "growth",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/growth/collectionUnlock-01.wav",
+          "runtime": "runtime/growth/collectionUnlock-01.ogg"
+        },
+        {
+          "master": "masters/growth/collectionUnlock-02.wav",
+          "runtime": "runtime/growth/collectionUnlock-02.ogg"
+        }
+      ],
+      "variation_correlations": [
+        0.0229
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "characterSelect": {
+      "label": "角色确认",
+      "group": "growth",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/growth/characterSelect-01.wav",
+          "runtime": "runtime/growth/characterSelect-01.ogg"
+        },
+        {
+          "master": "masters/growth/characterSelect-02.wav",
+          "runtime": "runtime/growth/characterSelect-02.ogg"
+        }
+      ],
+      "variation_correlations": [
+        -0.0112
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "eggHatch": {
+      "label": "宠物孵化",
+      "group": "growth",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/growth/eggHatch-01.wav",
+          "runtime": "runtime/growth/eggHatch-01.ogg"
+        }
+      ],
+      "variation_correlations": [],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "petRescue": {
+      "label": "宠物抢运",
+      "group": "growth",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/growth/petRescue-01.wav",
+          "runtime": "runtime/growth/petRescue-01.ogg"
+        }
+      ],
+      "variation_correlations": [],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "attackSlash": {
+      "label": "斩击",
+      "group": "attacks",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/attacks/attackSlash-01.wav",
+          "runtime": "runtime/attacks/attackSlash-01.ogg"
+        },
+        {
+          "master": "masters/attacks/attackSlash-02.wav",
+          "runtime": "runtime/attacks/attackSlash-02.ogg"
+        },
+        {
+          "master": "masters/attacks/attackSlash-03.wav",
+          "runtime": "runtime/attacks/attackSlash-03.ogg"
+        }
+      ],
+      "variation_correlations": [
+        -0.1298,
+        0.1387
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "attackBlunt": {
+      "label": "钝击",
+      "group": "attacks",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/attacks/attackBlunt-01.wav",
+          "runtime": "runtime/attacks/attackBlunt-01.ogg"
+        },
+        {
+          "master": "masters/attacks/attackBlunt-02.wav",
+          "runtime": "runtime/attacks/attackBlunt-02.ogg"
+        },
+        {
+          "master": "masters/attacks/attackBlunt-03.wav",
+          "runtime": "runtime/attacks/attackBlunt-03.ogg"
+        }
+      ],
+      "variation_correlations": [
+        0.0976,
+        0.1624
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "attackPierce": {
+      "label": "穿刺",
+      "group": "attacks",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/attacks/attackPierce-01.wav",
+          "runtime": "runtime/attacks/attackPierce-01.ogg"
+        },
+        {
+          "master": "masters/attacks/attackPierce-02.wav",
+          "runtime": "runtime/attacks/attackPierce-02.ogg"
+        },
+        {
+          "master": "masters/attacks/attackPierce-03.wav",
+          "runtime": "runtime/attacks/attackPierce-03.ogg"
+        }
+      ],
+      "variation_correlations": [
+        -0.1832,
+        -0.0474
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "attackArrow": {
+      "label": "箭矢",
+      "group": "attacks",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/attacks/attackArrow-01.wav",
+          "runtime": "runtime/attacks/attackArrow-01.ogg"
+        },
+        {
+          "master": "masters/attacks/attackArrow-02.wav",
+          "runtime": "runtime/attacks/attackArrow-02.ogg"
+        },
+        {
+          "master": "masters/attacks/attackArrow-03.wav",
+          "runtime": "runtime/attacks/attackArrow-03.ogg"
+        }
+      ],
+      "variation_correlations": [
+        -0.1527,
+        -0.0153
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "attackFire": {
+      "label": "火焰攻击",
+      "group": "attacks",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/attacks/attackFire-01.wav",
+          "runtime": "runtime/attacks/attackFire-01.ogg"
+        },
+        {
+          "master": "masters/attacks/attackFire-02.wav",
+          "runtime": "runtime/attacks/attackFire-02.ogg"
+        },
+        {
+          "master": "masters/attacks/attackFire-03.wav",
+          "runtime": "runtime/attacks/attackFire-03.ogg"
+        }
+      ],
+      "variation_correlations": [
+        -0.0204,
+        -0.0231
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "attackIce": {
+      "label": "冰霜攻击",
+      "group": "attacks",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/attacks/attackIce-01.wav",
+          "runtime": "runtime/attacks/attackIce-01.ogg"
+        },
+        {
+          "master": "masters/attacks/attackIce-02.wav",
+          "runtime": "runtime/attacks/attackIce-02.ogg"
+        },
+        {
+          "master": "masters/attacks/attackIce-03.wav",
+          "runtime": "runtime/attacks/attackIce-03.ogg"
+        }
+      ],
+      "variation_correlations": [
+        0.086,
+        -0.1501
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "attackLightning": {
+      "label": "雷电攻击",
+      "group": "attacks",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/attacks/attackLightning-01.wav",
+          "runtime": "runtime/attacks/attackLightning-01.ogg"
+        },
+        {
+          "master": "masters/attacks/attackLightning-02.wav",
+          "runtime": "runtime/attacks/attackLightning-02.ogg"
+        },
+        {
+          "master": "masters/attacks/attackLightning-03.wav",
+          "runtime": "runtime/attacks/attackLightning-03.ogg"
+        }
+      ],
+      "variation_correlations": [
+        0.0247,
+        0.125
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "attackPsychic": {
+      "label": "异能攻击",
+      "group": "attacks",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/attacks/attackPsychic-01.wav",
+          "runtime": "runtime/attacks/attackPsychic-01.ogg"
+        },
+        {
+          "master": "masters/attacks/attackPsychic-02.wav",
+          "runtime": "runtime/attacks/attackPsychic-02.ogg"
+        },
+        {
+          "master": "masters/attacks/attackPsychic-03.wav",
+          "runtime": "runtime/attacks/attackPsychic-03.ogg"
+        }
+      ],
+      "variation_correlations": [
+        0.1056,
+        -0.1041
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "attackPoison": {
+      "label": "毒伤",
+      "group": "attacks",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/attacks/attackPoison-01.wav",
+          "runtime": "runtime/attacks/attackPoison-01.ogg"
+        },
+        {
+          "master": "masters/attacks/attackPoison-02.wav",
+          "runtime": "runtime/attacks/attackPoison-02.ogg"
+        },
+        {
+          "master": "masters/attacks/attackPoison-03.wav",
+          "runtime": "runtime/attacks/attackPoison-03.ogg"
+        }
+      ],
+      "variation_correlations": [
+        -0.0791,
+        -0.1436
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "attackBossHeavy": {
+      "label": "首脑重击",
+      "group": "attacks",
+      "loop": false,
+      "variants": [
+        {
+          "master": "masters/attacks/attackBossHeavy-01.wav",
+          "runtime": "runtime/attacks/attackBossHeavy-01.ogg"
+        },
+        {
+          "master": "masters/attacks/attackBossHeavy-02.wav",
+          "runtime": "runtime/attacks/attackBossHeavy-02.ogg"
+        }
+      ],
+      "variation_correlations": [
+        -0.1505
+      ],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "windSnowLoop": {
+      "label": "风雪环境",
+      "group": "ambient",
+      "loop": true,
+      "variants": [
+        {
+          "master": "masters/ambient/windSnowLoop-01.wav",
+          "runtime": "runtime/ambient/windSnowLoop-01.ogg"
+        }
+      ],
+      "variation_correlations": [],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "wastelandWindLoop": {
+      "label": "荒地环境",
+      "group": "ambient",
+      "loop": true,
+      "variants": [
+        {
+          "master": "masters/ambient/wastelandWindLoop-01.wav",
+          "runtime": "runtime/ambient/wastelandWindLoop-01.ogg"
+        }
+      ],
+      "variation_correlations": [],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "ruinsAirLoop": {
+      "label": "遗迹环境",
+      "group": "ambient",
+      "loop": true,
+      "variants": [
+        {
+          "master": "masters/ambient/ruinsAirLoop-01.wav",
+          "runtime": "runtime/ambient/ruinsAirLoop-01.ogg"
+        }
+      ],
+      "variation_correlations": [],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "pollutionDroneLoop": {
+      "label": "污染核心环境",
+      "group": "ambient",
+      "loop": true,
+      "variants": [
+        {
+          "master": "masters/ambient/pollutionDroneLoop-01.wav",
+          "runtime": "runtime/ambient/pollutionDroneLoop-01.ogg"
+        }
+      ],
+      "variation_correlations": [],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "fireLoop": {
+      "label": "营火持续声",
+      "group": "ambient",
+      "loop": true,
+      "variants": [
+        {
+          "master": "masters/ambient/fireLoop-01.wav",
+          "runtime": "runtime/ambient/fireLoop-01.ogg"
+        }
+      ],
+      "variation_correlations": [],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "altarHumLoop": {
+      "label": "祭坛持续声",
+      "group": "ambient",
+      "loop": true,
+      "variants": [
+        {
+          "master": "masters/ambient/altarHumLoop-01.wav",
+          "runtime": "runtime/ambient/altarHumLoop-01.ogg"
+        }
+      ],
+      "variation_correlations": [],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    },
+    "extractionBeaconLoop": {
+      "label": "撤离信标",
+      "group": "ambient",
+      "loop": true,
+      "variants": [
+        {
+          "master": "masters/ambient/extractionBeaconLoop-01.wav",
+          "runtime": "runtime/ambient/extractionBeaconLoop-01.ogg"
+        }
+      ],
+      "variation_correlations": [],
+      "calibration": "Preserve file gain; do not peak-normalize again"
+    }
+  },
+  "scope": "Assets prepared; runtime hooks not modified",
+  "source": "New independent synthesis using abstract broad-band statistics; no imported Arknights audio samples"
+}

@@ -1,0 +1,598 @@
+{
+  "sampleRate": 48000,
+  "cues": [
+    {
+      "id": "click",
+      "layers": [
+        {
+          "source": "uisfx__mechanical__press.ogg",
+          "offset": 0,
+          "peakDb": -12,
+          "original": {
+            "rate": 48000,
+            "channels": 1,
+            "seconds": 0.16320833333333334,
+            "decodedPeakDb": -7.474541970665395
+          },
+          "trimStartSeconds": 0.0,
+          "trimEndSeconds": 0.11791666666666667,
+          "trimPolicy": "peak-relative -50.46 dB threshold; 3 ms attack margin; source tail margin",
+          "highpassHz": 28,
+          "highpassOrder": 2,
+          "fadeInSeconds": 0.002,
+          "fadeOutSeconds": 0.018,
+          "linearGain": 0.5587988297780389,
+          "editedSeconds": 0.11791666666666667
+        }
+      ],
+      "finalGain": 0.7943282347242816,
+      "targetPeakDb": -14,
+      "decodedPeak": 0.2007770836353302,
+      "decodedPeakDb": -13.945717167018808,
+      "decodedRmsDb": -30.092547849403076,
+      "clippedSamples": 0,
+      "durationSeconds": 0.11791666666666667,
+      "rate": 48000,
+      "channels": 2,
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "vorbis",
+            "sample_rate": "48000",
+            "channels": 2
+          }
+        ],
+        "format": {
+          "duration": "0.117917"
+        }
+      },
+      "sha256": "b2dd22afdcfe7f647c629130a8b0eae3bee68cb525a6fcab2f49fdaf41910374",
+      "encoder": "libvorbis q=6, 48000 Hz, stereo",
+      "bytes": 5951
+    },
+    {
+      "id": "confirm",
+      "layers": [
+        {
+          "source": "uisfx__studio__check.ogg",
+          "offset": 0,
+          "peakDb": -12,
+          "original": {
+            "rate": 48000,
+            "channels": 1,
+            "seconds": 0.291125,
+            "decodedPeakDb": -7.714019200711276
+          },
+          "trimStartSeconds": 0.0,
+          "trimEndSeconds": 0.2163125,
+          "trimPolicy": "peak-relative -50.46 dB threshold; 3 ms attack margin; source tail margin",
+          "highpassHz": 28,
+          "highpassOrder": 2,
+          "fadeInSeconds": 0.002,
+          "fadeOutSeconds": 0.018,
+          "linearGain": 0.6093109348795949,
+          "editedSeconds": 0.2163125
+        }
+      ],
+      "finalGain": 1.0,
+      "targetPeakDb": -12,
+      "decodedPeak": 0.2523276209831238,
+      "decodedPeakDb": -11.96070413872376,
+      "decodedRmsDb": -25.252383906089165,
+      "clippedSamples": 0,
+      "durationSeconds": 0.2163125,
+      "rate": 48000,
+      "channels": 2,
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "vorbis",
+            "sample_rate": "48000",
+            "channels": 2
+          }
+        ],
+        "format": {
+          "duration": "0.216313"
+        }
+      },
+      "sha256": "42c75e7f55d4f420b05a0ab854601c2b10d91a1d5e261c954f5e2fed761283f3",
+      "encoder": "libvorbis q=6, 48000 Hz, stereo",
+      "bytes": 7601
+    },
+    {
+      "id": "card",
+      "layers": [
+        {
+          "source": "casino-audio__card-slide-4.ogg",
+          "offset": 0,
+          "peakDb": -9,
+          "original": {
+            "rate": 44100,
+            "channels": 2,
+            "seconds": 0.4594104308390023,
+            "decodedPeakDb": -1.6614504861628097
+          },
+          "trimStartSeconds": 0.0,
+          "trimEndSeconds": 0.45941666666666664,
+          "trimPolicy": "peak-relative -50.46 dB threshold; 3 ms attack margin; source tail margin",
+          "highpassHz": 28,
+          "highpassOrder": 2,
+          "fadeInSeconds": 0.002,
+          "fadeOutSeconds": 0.018,
+          "linearGain": 0.4340983664327078,
+          "editedSeconds": 0.45941666666666664
+        },
+        {
+          "source": "casino-audio__card-place-2.ogg",
+          "offset": 0.31,
+          "peakDb": -16,
+          "original": {
+            "rate": 44100,
+            "channels": 2,
+            "seconds": 0.45938775510204083,
+            "decodedPeakDb": -1.7916901670508278
+          },
+          "trimStartSeconds": 0.0,
+          "trimEndSeconds": 0.410125,
+          "trimPolicy": "peak-relative -50.46 dB threshold; 3 ms attack margin; source tail margin",
+          "highpassHz": 28,
+          "highpassOrder": 2,
+          "fadeInSeconds": 0.002,
+          "fadeOutSeconds": 0.018,
+          "linearGain": 0.1977231689212899,
+          "editedSeconds": 0.410125
+        }
+      ],
+      "finalGain": 0.8912509381337456,
+      "targetPeakDb": -10,
+      "decodedPeak": 0.3142983019351959,
+      "decodedPeakDb": -10.053159306898301,
+      "decodedRmsDb": -37.73108350701652,
+      "clippedSamples": 0,
+      "durationSeconds": 0.720125,
+      "rate": 48000,
+      "channels": 2,
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "vorbis",
+            "sample_rate": "48000",
+            "channels": 2
+          }
+        ],
+        "format": {
+          "duration": "0.720125"
+        }
+      },
+      "sha256": "28f9d706162f9242504abb768f10a0d19a842543b82deaeef7ccab77c19fae92",
+      "encoder": "libvorbis q=6, 48000 Hz, stereo",
+      "bytes": 16866
+    },
+    {
+      "id": "attackSlash",
+      "layers": [
+        {
+          "source": "rpg-audio__knifeSlice2.ogg",
+          "offset": 0,
+          "peakDb": -9,
+          "original": {
+            "rate": 48000,
+            "channels": 2,
+            "seconds": 0.5687916666666667,
+            "decodedPeakDb": 0.6327494361234711
+          },
+          "trimStartSeconds": 0.009166666666666667,
+          "trimEndSeconds": 0.505375,
+          "trimPolicy": "peak-relative -50.46 dB threshold; 3 ms attack margin; source tail margin",
+          "highpassHz": 28,
+          "highpassOrder": 2,
+          "fadeInSeconds": 0.002,
+          "fadeOutSeconds": 0.018,
+          "linearGain": 0.33024041071717014,
+          "editedSeconds": 0.4962083333333333
+        },
+        {
+          "source": "impact-sounds__impactPunch_medium_002.ogg",
+          "offset": 0.16,
+          "peakDb": -16,
+          "original": {
+            "rate": 44100,
+            "channels": 2,
+            "seconds": 0.54140589569161,
+            "decodedPeakDb": -0.8497295026128526
+          },
+          "trimStartSeconds": 0.0,
+          "trimEndSeconds": 0.3900625,
+          "trimPolicy": "peak-relative -50.46 dB threshold; 3 ms attack margin; source tail margin",
+          "highpassHz": 28,
+          "highpassOrder": 2,
+          "fadeInSeconds": 0.002,
+          "fadeOutSeconds": 0.018,
+          "linearGain": 0.21047603168070653,
+          "editedSeconds": 0.3900625
+        }
+      ],
+      "finalGain": 0.9857343324479994,
+      "targetPeakDb": -9,
+      "decodedPeak": 0.3450423777103424,
+      "decodedPeakDb": -9.242551241958209,
+      "decodedRmsDb": -27.63336846821577,
+      "clippedSamples": 0,
+      "durationSeconds": 0.5500625,
+      "rate": 48000,
+      "channels": 2,
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "vorbis",
+            "sample_rate": "48000",
+            "channels": 2
+          }
+        ],
+        "format": {
+          "duration": "0.550063"
+        }
+      },
+      "sha256": "f63b1b91255199d98c9714a9247b94afaf29be1e9cc480de13f75308a1e0f105",
+      "encoder": "libvorbis q=6, 48000 Hz, stereo",
+      "bytes": 14970
+    },
+    {
+      "id": "parry",
+      "layers": [
+        {
+          "source": "impact-sounds__impactMetal_medium_002.ogg",
+          "offset": 0,
+          "peakDb": -9,
+          "original": {
+            "rate": 44100,
+            "channels": 2,
+            "seconds": 0.11913832199546485,
+            "decodedPeakDb": -1.093770114261688
+          },
+          "trimStartSeconds": 0.0,
+          "trimEndSeconds": 0.11914583333333334,
+          "trimPolicy": "peak-relative -50.46 dB threshold; 3 ms attack margin; source tail margin",
+          "highpassHz": 28,
+          "highpassOrder": 2,
+          "fadeInSeconds": 0.002,
+          "fadeOutSeconds": 0.018,
+          "linearGain": 0.6800594308819311,
+          "editedSeconds": 0.11914583333333334
+        }
+      ],
+      "finalGain": 1.0,
+      "targetPeakDb": -9,
+      "decodedPeak": 0.35850077867507935,
+      "decodedPeakDb": -8.910197933850696,
+      "decodedRmsDb": -26.67691677240949,
+      "clippedSamples": 0,
+      "durationSeconds": 0.11914583333333334,
+      "rate": 48000,
+      "channels": 2,
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "vorbis",
+            "sample_rate": "48000",
+            "channels": 2
+          }
+        ],
+        "format": {
+          "duration": "0.119146"
+        }
+      },
+      "sha256": "ebce0311447a035e4ef63160a73aeac84356caa3d5b99c85e6c6130572bf1079",
+      "encoder": "libvorbis q=6, 48000 Hz, stereo",
+      "bytes": 5529
+    },
+    {
+      "id": "shieldBreak",
+      "layers": [
+        {
+          "source": "sci-fi-sounds__explosionCrunch_003.ogg",
+          "offset": 0,
+          "peakDb": -9,
+          "maxSeconds": 1.25,
+          "original": {
+            "rate": 44100,
+            "channels": 1,
+            "seconds": 1.5534013605442176,
+            "decodedPeakDb": -0.9797803831770459
+          },
+          "trimStartSeconds": 0.0,
+          "trimEndSeconds": 1.25,
+          "trimPolicy": "peak-relative -50.46 dB threshold; 3 ms attack margin; source tail margin",
+          "highpassHz": 28,
+          "highpassOrder": 2,
+          "fadeInSeconds": 0.002,
+          "fadeOutSeconds": 0.018,
+          "linearGain": 0.46889127184149054,
+          "editedSeconds": 1.25
+        },
+        {
+          "source": "impact-sounds__impactGlass_heavy_003.ogg",
+          "offset": 0.018,
+          "peakDb": -13,
+          "original": {
+            "rate": 44100,
+            "channels": 2,
+            "seconds": 0.1715419501133787,
+            "decodedPeakDb": -0.9258665377389342
+          },
+          "trimStartSeconds": 0.0,
+          "trimEndSeconds": 0.1715625,
+          "trimPolicy": "peak-relative -50.46 dB threshold; 3 ms attack margin; source tail margin",
+          "highpassHz": 28,
+          "highpassOrder": 2,
+          "fadeInSeconds": 0.002,
+          "fadeOutSeconds": 0.018,
+          "linearGain": 0.36554829335199907,
+          "editedSeconds": 0.1715625
+        }
+      ],
+      "finalGain": 0.7823355831899634,
+      "targetPeakDb": -9,
+      "decodedPeak": 0.3518591523170471,
+      "decodedPeakDb": -9.072622958411458,
+      "decodedRmsDb": -24.329580315513702,
+      "clippedSamples": 0,
+      "durationSeconds": 1.25,
+      "rate": 48000,
+      "channels": 2,
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "vorbis",
+            "sample_rate": "48000",
+            "channels": 2
+          }
+        ],
+        "format": {
+          "duration": "1.250000"
+        }
+      },
+      "sha256": "d35db0734ddf67a149a9e8336567ca92dc625036e008633f11f14b4a8f7fcb36",
+      "encoder": "libvorbis q=6, 48000 Hz, stereo",
+      "bytes": 26070
+    },
+    {
+      "id": "heal",
+      "layers": [
+        {
+          "source": "sci-fi-sounds__forceField_003.ogg",
+          "offset": 0,
+          "peakDb": -9,
+          "original": {
+            "rate": 44100,
+            "channels": 1,
+            "seconds": 0.9559410430839003,
+            "decodedPeakDb": -0.9169783583673055
+          },
+          "trimStartSeconds": 0.0,
+          "trimEndSeconds": 0.8003333333333333,
+          "trimPolicy": "peak-relative -50.46 dB threshold; 3 ms attack margin; source tail margin",
+          "highpassHz": 28,
+          "highpassOrder": 2,
+          "fadeInSeconds": 0.002,
+          "fadeOutSeconds": 0.018,
+          "linearGain": 0.3728455819896617,
+          "editedSeconds": 0.8003333333333333
+        }
+      ],
+      "finalGain": 0.8912509381337456,
+      "targetPeakDb": -10,
+      "decodedPeak": 0.32219070196151733,
+      "decodedPeakDb": -9.837739939083244,
+      "decodedRmsDb": -20.27474346018376,
+      "clippedSamples": 0,
+      "durationSeconds": 0.8003333333333333,
+      "rate": 48000,
+      "channels": 2,
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "vorbis",
+            "sample_rate": "48000",
+            "channels": 2
+          }
+        ],
+        "format": {
+          "duration": "0.800333"
+        }
+      },
+      "sha256": "2e714f820e1b4e9da33c26f033e971cb6ad8bfda92d42c76543d6d6de1897242",
+      "encoder": "libvorbis q=6, 48000 Hz, stereo",
+      "bytes": 15622
+    },
+    {
+      "id": "eventEnter",
+      "layers": [
+        {
+          "source": "sci-fi-sounds__doorOpen_001.ogg",
+          "offset": 0,
+          "peakDb": -9,
+          "original": {
+            "rate": 44100,
+            "channels": 1,
+            "seconds": 0.52859410430839,
+            "decodedPeakDb": -0.9548496123539116
+          },
+          "trimStartSeconds": 0.0,
+          "trimEndSeconds": 0.5286041666666667,
+          "trimPolicy": "peak-relative -50.46 dB threshold; 3 ms attack margin; source tail margin",
+          "highpassHz": 28,
+          "highpassOrder": 2,
+          "fadeInSeconds": 0.002,
+          "fadeOutSeconds": 0.018,
+          "linearGain": 0.3593886781864846,
+          "editedSeconds": 0.5286041666666667
+        }
+      ],
+      "finalGain": 0.8912509381337456,
+      "targetPeakDb": -10,
+      "decodedPeak": 0.3328809440135956,
+      "decodedPeakDb": -9.554221312017374,
+      "decodedRmsDb": -25.477550712350027,
+      "clippedSamples": 0,
+      "durationSeconds": 0.5286041666666667,
+      "rate": 48000,
+      "channels": 2,
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "vorbis",
+            "sample_rate": "48000",
+            "channels": 2
+          }
+        ],
+        "format": {
+          "duration": "0.528604"
+        }
+      },
+      "sha256": "f994697d1dc303e0b4b5745b9c4092d4e41f2a95bf7367456b38f4af2f023d13",
+      "encoder": "libvorbis q=6, 48000 Hz, stereo",
+      "bytes": 15409
+    },
+    {
+      "id": "chestBurst",
+      "layers": [
+        {
+          "source": "rpg-audio__metalLatch.ogg",
+          "offset": 0,
+          "peakDb": -11,
+          "original": {
+            "rate": 48000,
+            "channels": 2,
+            "seconds": 0.2613333333333333,
+            "decodedPeakDb": 1.6153268370795737
+          },
+          "trimStartSeconds": 0.0,
+          "trimEndSeconds": 0.24629166666666666,
+          "trimPolicy": "peak-relative -50.46 dB threshold; 3 ms attack margin; source tail margin",
+          "highpassHz": 28,
+          "highpassOrder": 2,
+          "fadeInSeconds": 0.002,
+          "fadeOutSeconds": 0.018,
+          "linearGain": 0.23461823405902454,
+          "editedSeconds": 0.24629166666666666
+        },
+        {
+          "source": "rpg-audio__handleCoins2.ogg",
+          "offset": 0.13,
+          "peakDb": -13,
+          "original": {
+            "rate": 48000,
+            "channels": 2,
+            "seconds": 0.33820833333333333,
+            "decodedPeakDb": -10.695261079257888
+          },
+          "trimStartSeconds": 0.0,
+          "trimEndSeconds": 0.33820833333333333,
+          "trimPolicy": "peak-relative -50.46 dB threshold; 3 ms attack margin; source tail margin",
+          "highpassHz": 28,
+          "highpassOrder": 2,
+          "fadeInSeconds": 0.002,
+          "fadeOutSeconds": 0.018,
+          "linearGain": 0.7669126452975683,
+          "editedSeconds": 0.33820833333333333
+        }
+      ],
+      "finalGain": 1.1220184543019636,
+      "targetPeakDb": -10,
+      "decodedPeak": 0.3189190626144409,
+      "decodedPeakDb": -9.926390421583625,
+      "decodedRmsDb": -32.64143615993878,
+      "clippedSamples": 0,
+      "durationSeconds": 0.46820833333333334,
+      "rate": 48000,
+      "channels": 2,
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "vorbis",
+            "sample_rate": "48000",
+            "channels": 2
+          }
+        ],
+        "format": {
+          "duration": "0.468208"
+        }
+      },
+      "sha256": "9e5bc4e0f08610b90799f4312db91224d7968981c6a55f5f45e4e2d344fa4be2",
+      "encoder": "libvorbis q=6, 48000 Hz, stereo",
+      "bytes": 18444
+    },
+    {
+      "id": "bossReveal",
+      "layers": [
+        {
+          "source": "sci-fi-sounds__lowFrequency_explosion_001.ogg",
+          "offset": 0,
+          "peakDb": -9,
+          "tailSeconds": 0.12,
+          "original": {
+            "rate": 44100,
+            "channels": 2,
+            "seconds": 1.000045351473923,
+            "decodedPeakDb": -0.8318197175503768
+          },
+          "trimStartSeconds": 0.0,
+          "trimEndSeconds": 1.0000625,
+          "trimPolicy": "peak-relative -50.46 dB threshold; 3 ms attack margin; source tail margin",
+          "highpassHz": 28,
+          "highpassOrder": 2,
+          "fadeInSeconds": 0.002,
+          "fadeOutSeconds": 0.018,
+          "linearGain": 0.3509956503586041,
+          "editedSeconds": 1.0000625
+        }
+      ],
+      "finalGain": 1.0,
+      "targetPeakDb": -9,
+      "decodedPeak": 0.35441502928733826,
+      "decodedPeakDb": -9.009757394921198,
+      "decodedRmsDb": -25.101453048659753,
+      "clippedSamples": 0,
+      "durationSeconds": 1.0000625,
+      "rate": 48000,
+      "channels": 2,
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "vorbis",
+            "sample_rate": "48000",
+            "channels": 2
+          }
+        ],
+        "format": {
+          "duration": "1.000063"
+        }
+      },
+      "sha256": "cd131729c5fbbdc19e5da29c4aa42ae4b9aade7cdb7f11002bad2f1528ffb39f",
+      "encoder": "libvorbis q=6, 48000 Hz, stereo",
+      "bytes": 8995
+    }
+  ],
+  "validation": "Technical decoding, rate, channel count, finite samples and clipping only; no human listening acceptance."
+}

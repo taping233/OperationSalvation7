@@ -1,0 +1,210 @@
+{
+  "schemaVersion": 1,
+  "owner": "infrastructure",
+  "findings": [
+    {
+      "id": "INFRA-01",
+      "priority": 1,
+      "file": "game/src/core/icons-bitmap.js",
+      "line": 63,
+      "endLine": 63,
+      "title": "图标水合重新把转义文本解析为HTML",
+      "status": "confirmed-isolated-fixture",
+      "source": "tracked-freeze-source",
+      "trigger": "自定义卡牌名称/备注含HTML字符并包含可匹配的emoji或[[icon:]]；初次渲染已esc转义。",
+      "expected": "用户文本仍为文本，只把图标标记转换为受控img。",
+      "actual": "hydrate读取textNode.nodeValue后直接赋span.innerHTML；夹具的已转义<img ...> 🎒变成真实img，并保留onerror。",
+      "impact": "破坏原有文本边界，名称/备注可以改变DOM与布局、插入事件属性；应先转义文本或只以DOM节点替换图标。",
+      "callChain": [
+        "cards.view.js:134 esc(c.name)",
+        "icons-bitmap.js:78-100 MutationObserver",
+        "icons-bitmap.js:63 hydrate"
+      ],
+      "reproduction": {
+        "command": "node docs/evidence/2026-09-30-full-repository-review/infrastructure/repro.mjs",
+        "script": "infrastructure/repro.mjs",
+        "result": "infrastructure/repro-results.json",
+        "resultKey": "hydrate"
+      },
+      "limitation": "已确认HTML重解释；jsdom以合成error事件确认事件属性可执行。未在真实浏览器复现自动error执行，也未读取任何真实存储。"
+    },
+    {
+      "id": "INFRA-02",
+      "priority": 2,
+      "file": "game/src/agent/agent.console.js",
+      "line": 111,
+      "endLine": 111,
+      "title": "快捷键页签成功跳转后关闭刚打开的页面",
+      "status": "confirmed-isolated-fixture",
+      "source": "tracked-freeze-source",
+      "trigger": "开发者控制台→快捷键页签→合法页面的进入按钮（如设置、基地）。",
+      "expected": "目标页面保持打开并保留新页面动作。",
+      "actual": "jump同步page.enter开新页后bindKeysTab调用UI.hideOverlay，立即清掉新页_acts，210ms后隐藏并清空新页。",
+      "impact": "控制台的点击直达入口失效；开页前关闭旧层或让目标入口接管。",
+      "callChain": [
+        "agent.console.js:bindKeysTab",
+        "ui/quick-nav.js:jump",
+        "page.enter",
+        "ui/overlay.js:hideOverlay"
+      ],
+      "reproduction": {
+        "command": "node docs/evidence/2026-09-30-full-repository-review/infrastructure/repro.mjs",
+        "script": "infrastructure/repro.mjs",
+        "result": "infrastructure/repro-results.json",
+        "resultKey": "quickNav"
+      },
+      "limitation": "使用实际jump/bindKeysTab/hideOverlay；目标openSettings入口以标准DOM页夹具替代，不是浏览器验收。"
+    },
+    {
+      "id": "INFRA-03",
+      "priority": 2,
+      "file": "game/src/agent/agent.runner.js",
+      "line": 368,
+      "endLine": 368,
+      "title": "autoRun把新driver当成旧driver进行还原",
+      "status": "confirmed-isolated-fixture",
+      "source": "tracked-freeze-source",
+      "trigger": "driver原为human，运行greedy/auto一局后，继续人工游戏。",
+      "expected": "finally恢复调用前的human。",
+      "actual": "setDriver(driver)返回刚写入的driver；previousDriver成为greedy，finally setDriver(previousDriver)仍greedy。",
+      "impact": "后续人工终局记录被标为AI驱动，按驱动统计失真；应先读取getDriver再设置。",
+      "callChain": [
+        "agent.recorder.js:26 setDriver返回当前值",
+        "agent.runner.js:368",
+        "agent.runner.js:522 finally"
+      ],
+      "reproduction": {
+        "command": "node docs/evidence/2026-09-30-full-repository-review/infrastructure/repro.mjs",
+        "script": "infrastructure/repro.mjs",
+        "result": "infrastructure/repro-results.json",
+        "resultKey": "driverRestore"
+      },
+      "limitation": "实际recorder+autoRun在独占fixture运行；不读取真实跑局记录。"
+    },
+    {
+      "id": "INFRA-04",
+      "priority": 2,
+      "file": "game/tools/agent-batch.mjs",
+      "line": 301,
+      "endLine": 301,
+      "title": "配置完整的llm批跑仍选择greedy工厂",
+      "status": "confirmed-isolated-fixture",
+      "source": "tracked-freeze-source",
+      "trigger": "提供合法LLM配置后使用--policy llm。",
+      "expected": "选择Agent.llm.decide()作为决策工厂，模型调用实际发生。",
+      "actual": "Agent.policies没有llm；policyFactory=Agent.policies[POLICY]||Agent.policies.greedy，因此走greedy，但记录policy/driver为llm。",
+      "impact": "批跑产生误标的LLM实验数据；配置fail-fast只挡未配置，不能保证LLM真的参与。",
+      "callChain": [
+        "agent.js:policies和llm独立门面",
+        "agent-batch.mjs:LLM配置检查",
+        "agent-batch.mjs:301 policyFactory",
+        "runOne.decide"
+      ],
+      "reproduction": {
+        "command": "node docs/evidence/2026-09-30-full-repository-review/infrastructure/repro.mjs",
+        "script": "infrastructure/repro.mjs",
+        "result": "infrastructure/repro-results.json",
+        "resultKey": "llmFactory"
+      },
+      "limitation": "真源工厂选择语句在桩门面执行，greedyCalls=1/llmCalls=0；未使用API密钥或发请求。"
+    },
+    {
+      "id": "INFRA-05",
+      "priority": 2,
+      "file": "game/tools/agent-batch.mjs",
+      "line": 429,
+      "endLine": 429,
+      "title": "单局超时后未停止和等待旧autoRun收口",
+      "status": "confirmed-isolated-fixture",
+      "source": "tracked-freeze-source",
+      "trigger": "某局autoRun决策/命令仍挂起时RUN_TIMEOUT_MS先到。",
+      "expected": "请求取消并等待旧驱动安全结束，再清局与开启下一局。",
+      "actual": "Promise.race只拒绝runOne外层；catch后直接cleanup，下局立即再autoRun；真runner仍持有runAbort，返回already-running。",
+      "impact": "超时会污染后续局的执行与统计；旧任务也可能在清局后继续操作新现场。",
+      "callChain": [
+        "agent-batch.mjs:runOne Promise.race",
+        "runOne catch→cleanup",
+        "主循环下一runOne",
+        "agent.runner.js:autoRun重入守卫"
+      ],
+      "reproduction": {
+        "command": "node docs/evidence/2026-09-30-full-repository-review/infrastructure/repro.mjs",
+        "script": "infrastructure/repro.mjs",
+        "result": "infrastructure/repro-results.json",
+        "resultKey": "batchTimeout"
+      },
+      "limitation": "实际autoRun慢决策夹具：第一局timeout、第二局already-running、stopCalls=0。未跑完整游戏批次。"
+    },
+    {
+      "id": "INFRA-06",
+      "priority": 1,
+      "file": "scripts/perf-ledger-capture.mjs",
+      "line": 103,
+      "endLine": 105,
+      "title": "旧外部CDP工具按端口终止未确认归属的进程",
+      "status": "confirmed-isolated-fixture",
+      "source": "tracked-freeze-source",
+      "trigger": "旧脚本startEdge时CDP_PORT（默认5331）被其他会话或无主进程监听。",
+      "expected": "报告占用并停止，或只终止本次创建且身份确认的进程。",
+      "actual": "netstat挑出监听PID后直接taskkill /T /F，没有核对可执行文件、独占档案、创建时间或本会话PID。",
+      "impact": "手动运行旧工具可能强制杀死其他服务及整棵进程树。此工具已非当前内置浏览器授权路线，不能用于本轮验收。",
+      "callChain": [
+        "startEdge",
+        "killStaleAutomationEdge",
+        "netstat按CDP_PORT筛PID",
+        "taskkill /T /F"
+      ],
+      "reproduction": {
+        "command": "node docs/evidence/2026-09-30-full-repository-review/infrastructure/repro.mjs",
+        "script": "infrastructure/repro.mjs",
+        "result": "infrastructure/repro-results.json",
+        "resultKey": "portCleanup"
+      },
+      "limitation": "纯execFileSync桩返回无关监听PID并记录所选taskkill命令；绝未枚举、启动或终止真实进程。旧外部Edge/CDP工具，不是现行路线。"
+    },
+    {
+      "id": "INFRA-07",
+      "priority": 2,
+      "file": "game/src/game.boot.js",
+      "line": 88,
+      "endLine": 89,
+      "title": "自动镜头运动期间用up时刻相机解释down坐标",
+      "status": "confirmed-isolated-fixture",
+      "source": "tracked-freeze-source",
+      "trigger": "到达节点后的460ms取景glide尚在运行、地图已idle时，按住下一节点后原地松开。",
+      "expected": "保存pointerdown命中节点/世界坐标，按该点击意图移动。",
+      "actual": "downPos仅存client坐标；pointerup使用当时cam.screenToWorld。真Camera+bindInput夹具零指针位移下，从down指向节点1变成移动节点2。",
+      "impact": "快速点击或按住时可能错走另一路线；8px拖拽阈值无效，因为是相机在移动。",
+      "callChain": [
+        "game.run.flow.js:66 frameExploration({glide:true})",
+        "resolveCell返回idle",
+        "game.boot.js:54保存屏幕坐标",
+        "game.boot.js:88 pointerup逆变换"
+      ],
+      "reproduction": {
+        "command": "node docs/evidence/2026-09-30-full-repository-review/infrastructure/repro.mjs",
+        "script": "infrastructure/repro.mjs",
+        "result": "infrastructure/repro-results.json",
+        "resultKey": "cameraClick"
+      },
+      "limitation": "真实Camera.glideTo、bindInput与pickNode在独占jsdom夹具运行，合法节点选择结果已记录；未浏览器实测。"
+    }
+  ],
+  "unresolved": [
+    {
+      "file": "game/src/audio/sound.js",
+      "range": "syncBgm inactive/loading branch",
+      "question": "切离战斗时battleBgm尚在loading且playing=false，后续load完成是否保留PCM/队列播放；仅静态疑点，未真实Howler异步复现，不计确认发现。"
+    },
+    {
+      "file": "game/tools/agent-compare.mjs",
+      "range": "138-145",
+      "question": "minDetect从k=0遍历左尾，n足够大即返回k=0，却作为最少胜场输出；未独占统计夹具核验，不计本次确认发现。"
+    },
+    {
+      "file": "scripts/perf-ledger-capture.mjs",
+      "range": "710-711",
+      "question": "evalJson(JSON.stringify(...))返回字符串而按对象检查隔离字段；旧外部工具未运行，仅静态缺口，不作为现行验收路线。"
+    }
+  ]
+}

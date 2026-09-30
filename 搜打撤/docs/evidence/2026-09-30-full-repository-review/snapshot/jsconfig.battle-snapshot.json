@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "lib": ["esnext", "dom"],
+    "allowJs": true,
+    "checkJs": false,
+    "strict": true,
+    "skipLibCheck": true,
+    "noEmit": true
+  },
+  "files": [
+    "game/src/battle/runtime/battle.snapshot.js",
+    "game/src/battle/view/battle.preview.js",
+    "tests/battle-snapshot-types.fixture.ts"
+  ]
+}

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- 爆/击杀贴纸（替代 💥）：橙黄爆炸星芒 + 米白圆心，配色近 --fx-hit -->
+  <path d="M32 3 L36.5 18.5 L49.5 8.5 L43.5 23.5 L61 27 L45 33.5 L53 47.5 L38.5 40.5 L36.5 58 L28.5 43 L14.5 52.5 L22 37.5 L3.5 34.5 L20.5 28.5 L10 13.5 L26 21 Z"
+        fill="#ffb34d" stroke="#8a4a12" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="31" cy="30" r="9.5" fill="#fff4d6" stroke="#8a4a12" stroke-width="2.5"/>
+  <path d="M26 26 C27.5 23.5 30.5 23 32.5 24.5" fill="none" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round"/>
+</svg>

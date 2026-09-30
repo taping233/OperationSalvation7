@@ -1,0 +1,101 @@
+[
+  {
+    "Path": "C:\\Users\\太平\\.codex\\AGENTS.md",
+    "Backup": "C:\\Users\\太平\\.codex\\AGENTS.md.bak-dual-workflow-20260930-165111-511",
+    "BeforeHash": "9AEA8F91FFEAD281875F3BC71ECB589CE527AD53CE83B52A0F8517EEF9E6D696",
+    "AfterHash": "9CDAB467E0C24ABF7F405AB30172E187554DFBF3C8AA7535E3B038172180F48F",
+    "BeforeBytes": 1187,
+    "AfterBytes": 1489,
+    "Verified": true
+  },
+  {
+    "Path": "C:\\Users\\太平\\.zcode\\AGENTS.md",
+    "Backup": "C:\\Users\\太平\\.zcode\\AGENTS.md.bak-dual-workflow-20260930-165111-511",
+    "BeforeHash": "E2CBADDE457D37FEAF262756836D05B2FF0C3854250B94BD2E7CF4208DCE09C8",
+    "AfterHash": "4D1DAB547780FF057DC5BAF042394E66A062E5D45A154506F2E7A7274CF72D2F",
+    "BeforeBytes": 2680,
+    "AfterBytes": 3597,
+    "Verified": true
+  },
+  {
+    "Path": "C:\\Users\\太平\\.codex\\memories\\memory_summary.md",
+    "Backup": "C:\\Users\\太平\\.codex\\memories\\memory_summary.md.bak-dual-workflow-20260930-165111-511",
+    "BeforeHash": "871D21294FBD71A8E8E13AE2508C377B41EC5311F974F25C5AD29EFAD646E2AE",
+    "AfterHash": "EF82D5CCEADB8C419E19F5D87DBCAE063BD0D93C4049473E969F98BB2D37D329",
+    "BeforeBytes": 7924,
+    "AfterBytes": 8438,
+    "Verified": true
+  },
+  {
+    "Path": "C:\\Users\\太平\\.codex\\memories\\MEMORY.md",
+    "Backup": "C:\\Users\\太平\\.codex\\memories\\MEMORY.md.bak-dual-workflow-20260930-165111-511",
+    "BeforeHash": "C399948B9A09553A4FDD8AE2642A61D7E87683DCF8B6B3D82851FFBCD28B01D4",
+    "AfterHash": "B4C1BC14923EC51E25417E59FEFF7F9AF917CB7062231BEFC5891B131630ED77",
+    "BeforeBytes": 149000,
+    "AfterBytes": 150160,
+    "Verified": true
+  },
+  {
+    "Path": "C:\\Users\\太平\\.zcode\\cli\\memories\\projects\\project-9f3e184c77472436\\memory\\MEMORY.md",
+    "Backup": "C:\\Users\\太平\\.zcode\\cli\\memories\\projects\\project-9f3e184c77472436\\memory\\MEMORY.md.bak-dual-workflow-20260930-165111-511",
+    "BeforeHash": "A51799847E93036C941FFBDC4BC3B014D373216F3E1CD75001F237BE4D57087B",
+    "AfterHash": "0956681177C40D5CB01CDD93C4AAF9D355CEC6AFC3052BE7BF44F4B01C22B16B",
+    "BeforeBytes": 11477,
+    "AfterBytes": 11554,
+    "Verified": true
+  },
+  {
+    "Path": "C:\\Users\\太平\\.zcode\\cli\\memories\\projects\\project-9f3e184c77472436\\memory\\parallel-session-coordination.md",
+    "Backup": "C:\\Users\\太平\\.zcode\\cli\\memories\\projects\\project-9f3e184c77472436\\memory\\parallel-session-coordination.md.bak-dual-workflow-20260930-165111-511",
+    "BeforeHash": "AB8FA7064854ED07AB329FF8761E1F25040DF0F4B840866FC18019DDD22CC828",
+    "AfterHash": "6DD1B4FE77C6AF7FB6E5FA489423C316F4B4DF8EAC60160209397A15AAE2462C",
+    "BeforeBytes": 2771,
+    "AfterBytes": 3328,
+    "Verified": true
+  },
+  {
+    "Path": "C:\\Users\\太平\\.zcode\\cli\\memories\\projects\\project-9f3e184c77472436\\memory\\no-delete-without-approval.md",
+    "Backup": "C:\\Users\\太平\\.zcode\\cli\\memories\\projects\\project-9f3e184c77472436\\memory\\no-delete-without-approval.md.bak-dual-workflow-20260930-165111-511",
+    "BeforeHash": "121E7932F87EDD1DB5BA9786360E8DDE8BA64D2466E27F26432E339D33F0DB65",
+    "AfterHash": "DB9735836B4B9CCB0C513B8F680C74BD6088E74CC7D4EC08A85BAA5716A297BF",
+    "BeforeBytes": 3273,
+    "AfterBytes": 3805,
+    "Verified": true
+  },
+  {
+    "Path": "C:\\Users\\太平\\.zcode\\cli\\memories\\projects\\project-9f3e184c77472436\\memory\\speed-first-delivery.md",
+    "Backup": "C:\\Users\\太平\\.zcode\\cli\\memories\\projects\\project-9f3e184c77472436\\memory\\speed-first-delivery.md.bak-dual-workflow-20260930-165111-511",
+    "BeforeHash": "CC7CD2CCFE8CDC4784C8BBC1FEA477DA7DA2F75AE5B7CAD52C26A9ECA03E9C2B",
+    "AfterHash": "1657F3751AA7F8BE68EF61BBEE18C1DCBF274C021697E388438A9E5394F7FCD7",
+    "BeforeBytes": 1916,
+    "AfterBytes": 2512,
+    "Verified": true
+  },
+  {
+    "Path": "C:\\Users\\太平\\.zcode\\cli\\memories\\projects\\project-9f3e184c77472436\\memory\\acceptance-tiering.md",
+    "Backup": "C:\\Users\\太平\\.zcode\\cli\\memories\\projects\\project-9f3e184c77472436\\memory\\acceptance-tiering.md.bak-dual-workflow-20260930-165111-511",
+    "BeforeHash": "39ED0C64021223402596DA770E879DF2AFF02E95A6A082D1027B137589D3A52E",
+    "AfterHash": "FCD7FED046D8C2A7B4B41830FA9E210F0409A6399ECD03F71DCEA7D06D021A43",
+    "BeforeBytes": 2094,
+    "AfterBytes": 2584,
+    "Verified": true
+  },
+  {
+    "Path": "C:\\Users\\太平\\.zcode\\cli\\memories\\projects\\project-9f3e184c77472436\\memory\\soudache-iab-verify-quirks.md",
+    "Backup": "C:\\Users\\太平\\.zcode\\cli\\memories\\projects\\project-9f3e184c77472436\\memory\\soudache-iab-verify-quirks.md.bak-dual-workflow-20260930-165111-511",
+    "BeforeHash": "33575639CF6BCDEFD7CA635BB3B0D88A80AE4925F5B39F9390959AD3D77643F0",
+    "AfterHash": "BD1F8C70195E61EEA13B07EC82F90399491B222411F06AD71185F77EE752ECB3",
+    "BeforeBytes": 5834,
+    "AfterBytes": 6319,
+    "Verified": true
+  },
+  {
+    "Path": "C:\\Users\\太平\\.zcode\\cli\\memories\\projects\\project-9f3e184c77472436\\memory\\soudache-iab-testing-quirks-v2.md",
+    "Backup": "C:\\Users\\太平\\.zcode\\cli\\memories\\projects\\project-9f3e184c77472436\\memory\\soudache-iab-testing-quirks-v2.md.bak-dual-workflow-20260930-165111-511",
+    "BeforeHash": "2BDD56E91892E22D882CD6125E48A4EBD8E812B17FD5794E0071E5A12B6884A2",
+    "AfterHash": "FEB7CBEAB1ACCEC388AACF4354D73DADC8F486C9A8FAB071D3457BF3DB7C0DFF",
+    "BeforeBytes": 7957,
+    "AfterBytes": 8516,
+    "Verified": true
+  }
+]

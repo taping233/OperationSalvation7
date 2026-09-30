@@ -1,0 +1,50 @@
+/* 玩家抉择、选牌与弹层的瞬时状态。由 battle.runtime.js 转发活绑定。 */
+/** @typedef {import('../core/battle.hand-selection.js').HandSelectionState} HandSelectionState */
+/** @typedef {import('../effects/battle.discover-state.js').DiscoveringState} DiscoveringState */
+/** @typedef {import('../effects/battle.discover-state.js').DiscoverQueueJob} DiscoverQueueJob */
+export let infusing = null;
+/** @type {DiscoveringState} */
+export let discovering = null;
+/** @type {DiscoverQueueJob[]} */
+export let discoverQueue = [];
+/** @type {HandSelectionState} */
+export let handSelecting = null;
+export let choosing = null;
+export let interaction = null;
+export let pendingHint = '';
+export let viewingGrave = false;
+export let viewingDeck = false;
+export let viewingBag = false;
+export let selPool = [], selShaN = 0, sel = new Set(), lastDeckSel = [], selectingDeck = false, selDeckMax = 15;
+
+export function set$infusing(v) { infusing = v; }
+/** @param {DiscoveringState} v */
+export function set$discovering(v) { discovering = v; }
+/** @param {DiscoverQueueJob[]} v */
+export function set$discoverQueue(v) { discoverQueue = v; }
+/** @param {HandSelectionState} v */
+export function set$handSelecting(v) { handSelecting = v; }
+export function set$choosing(v) { choosing = v; }
+export function set$interaction(v) { interaction = v; }
+export function set$pendingHint(v) { pendingHint = v; }
+export function set$viewingGrave(v) { viewingGrave = v; }
+export function set$viewingDeck(v) { viewingDeck = v; }
+export function set$viewingBag(v) { viewingBag = v; }
+export function set$selPool(v) { selPool = v; }
+export function set$selShaN(v) { selShaN = v; }
+export function set$sel(v) { sel = v; }
+export function set$lastDeckSel(v) { lastDeckSel = v; }
+export function set$selectingDeck(v) { selectingDeck = v; }
+export function set$selDeckMax(v) { selDeckMax = v; }
+
+/* —— 域内聚合接口（2026-09-25 状态袋打薄第 2 批）：散 set$Xxx 调用收敛到本域 ——
+ * 只聚「整组重置/成对清理」点；弹层状态机推进（selection-flow 等）与单点开关保持散调。 */
+export function clearBattlePopups() {
+  infusing = null; discovering = null; handSelecting = null; choosing = null; interaction = null;
+}
+export function closeBattleViews() {
+  viewingGrave = false; viewingDeck = false; viewingBag = false; selectingDeck = false;
+}
+export function clearTargetHint() {
+  interaction = null; pendingHint = '';
+}

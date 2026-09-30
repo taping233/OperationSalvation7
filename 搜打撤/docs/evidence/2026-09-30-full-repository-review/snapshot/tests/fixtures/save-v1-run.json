@@ -1,0 +1,19 @@
+{
+  "layerIdx": 1,
+  "trackPos": 7,
+  "hp": 19,
+  "maxHp": 30,
+  "coins": 23,
+  "turn": 14,
+  "atk": 6,
+  "mode": "elite",
+  "myClass": "战士",
+  "inventory": [{ "id": "wood", "name": "木材", "n": 2 }],
+  "ownedCards": [{ "uid": "legacy-card-1", "card": { "id": "builtin-sha", "name": "初始攻击", "type": "武术", "cost": 1 } }],
+  "cardOrder": ["初始攻击"],
+  "usedPocket": [],
+  "eventLog": ["旧档仍在进行"],
+  "discovered": ["outer:door:1"],
+  "diceHistory": [4, 2, 6],
+  "elapsed": 321
+}

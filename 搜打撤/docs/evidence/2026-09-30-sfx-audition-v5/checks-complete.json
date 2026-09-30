@@ -1,0 +1,54 @@
+{
+  "new_sounds": [
+    {
+      "file": "03-ui-click.wav",
+      "label": "点击",
+      "seconds": 0.25,
+      "true_peak_dbfs": -10.46
+    },
+    {
+      "file": "04-card-play.wav",
+      "label": "出牌",
+      "seconds": 0.59,
+      "true_peak_dbfs": -7.78
+    },
+    {
+      "file": "05-boss-reveal.wav",
+      "label": "首脑登场",
+      "seconds": 1.98,
+      "true_peak_dbfs": -6.29
+    }
+  ],
+  "accepted_sounds_reused": [
+    "01-event-enter.wav",
+    "02-attack-impact.wav"
+  ],
+  "montage_seconds": 20.89,
+  "markers": [
+    {
+      "label": "点击",
+      "start_s": 0.5,
+      "repeats": 3
+    },
+    {
+      "label": "出牌",
+      "start_s": 3.2,
+      "repeats": 3
+    },
+    {
+      "label": "命中",
+      "start_s": 6.92,
+      "repeats": 3
+    },
+    {
+      "label": "进入事件",
+      "start_s": 10.79,
+      "repeats": 2
+    },
+    {
+      "label": "首脑登场",
+      "start_s": 15.38,
+      "repeats": 2
+    }
+  ]
+}

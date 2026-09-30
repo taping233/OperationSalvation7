@@ -1,0 +1,8 @@
+{
+  "cells": [
+    "Friday（Codex 流程工具与归档，WF-workflow-tools）",
+    "scripts/workflow.mjs、scripts/workflow-ledger.mjs、scripts/workflow-status.mjs、scripts/workflow-evidence.mjs、scripts/workflow-archive.mjs、scripts/handoff-brief.mjs；tests/workflow-tools.test.js、tests/docs-consistency.test.js；README.md、docs/README.md、docs/WORKFLOW-TOOLS.md、docs/SPEC-PROCESS.md、docs/production/management/ITERATION-BOARD.md、docs/production/management/NEXT-CYCLE-TECH-PLAN.md、docs/archive/README.md、docs/archive/workflow-2026-09-30/、docs/archive/workflow-routing-2026-09-30/、docs/evidence/2026-09-30-workflow-tools/；REGISTRY 本轮两行归属处理",
+    "完成未提交，编辑占用释放，未提交文件仍归本会话；工具/台账预览应用/四份原文哈希已核验；两名子代理只读复核已集成；完整门受 HEAD 既有 ENEMY_ONE lint 阻断，全量 QA 超时定向复核通过，完整失败记录保留；最终定向/限制见 docs/evidence/2026-09-30-workflow-tools/README.md；无服务/build/提交/推送",
+    "09-30，老板确认原重叠会话关闭，本会话统一实施；收官"
+  ]
+}

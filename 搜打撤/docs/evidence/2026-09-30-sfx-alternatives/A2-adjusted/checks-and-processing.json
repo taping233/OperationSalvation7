@@ -1,0 +1,189 @@
+{
+  "source_derivative": true,
+  "changes": [
+    {
+      "id": "click",
+      "base": "docs\\evidence\\2026-09-30-sfx-alternatives\\A-arknights\\processed-wav\\click.wav",
+      "pitch_semitones": -0.65,
+      "tempo": 1.08,
+      "high_shelf_db": -0.6,
+      "release_ms": 18,
+      "ffmpeg_filter": "rubberband=tempo=1.08:pitch=0.963150620:transients=crisp:detector=percussive:phase=laminar:window=short:smoothing=off:formant=preserved:pitchq=quality:channels=together",
+      "source_seconds": 0.219854,
+      "seconds": 0.200896,
+      "decoded_peak_dbfs": -13.928,
+      "true_peak_dbfs": -13.728,
+      "decode": "pass"
+    },
+    {
+      "id": "confirm",
+      "base": "docs\\evidence\\2026-09-30-sfx-alternatives\\A-arknights\\processed-wav\\confirm.wav",
+      "pitch_semitones": 0.45,
+      "tempo": 1.05,
+      "high_shelf_db": -0.3,
+      "release_ms": 24,
+      "ffmpeg_filter": "rubberband=tempo=1.05:pitch=1.026333784:transients=crisp:detector=percussive:phase=laminar:window=short:smoothing=off:formant=preserved:pitchq=quality:channels=together",
+      "source_seconds": 0.218312,
+      "seconds": 0.20525,
+      "decoded_peak_dbfs": -11.451,
+      "true_peak_dbfs": -11.212,
+      "decode": "pass"
+    },
+    {
+      "id": "card",
+      "base": "docs\\evidence\\2026-09-30-sfx-alternatives\\A-arknights\\processed-wav\\card.wav",
+      "pitch_semitones": -0.4,
+      "tempo": 1.09,
+      "high_shelf_db": -0.7,
+      "release_ms": 34,
+      "ffmpeg_filter": "rubberband=tempo=1.09:pitch=0.977159968:transients=crisp:detector=percussive:phase=laminar:window=short:smoothing=off:formant=preserved:pitchq=quality:channels=together",
+      "source_seconds": 0.75,
+      "seconds": 0.685417,
+      "decoded_peak_dbfs": -12.758,
+      "true_peak_dbfs": -12.317,
+      "decode": "pass"
+    },
+    {
+      "id": "attackSlash",
+      "base": "docs\\evidence\\2026-09-30-sfx-alternatives\\A-arknights\\processed-wav\\attackSlash.wav",
+      "pitch_semitones": -0.8,
+      "tempo": 1.04,
+      "high_shelf_db": -0.8,
+      "release_ms": 40,
+      "ffmpeg_filter": "rubberband=tempo=1.04:pitch=0.954841604:transients=crisp:detector=percussive:phase=laminar:window=short:smoothing=off:formant=preserved:pitchq=quality:channels=together",
+      "source_seconds": 1.018083,
+      "seconds": 0.97625,
+      "decoded_peak_dbfs": -9.019,
+      "true_peak_dbfs": -9.01,
+      "decode": "pass"
+    },
+    {
+      "id": "parry",
+      "base": "docs\\evidence\\2026-09-30-sfx-alternatives\\A-arknights\\processed-wav\\parry.wav",
+      "pitch_semitones": -0.9,
+      "tempo": 1.05,
+      "high_shelf_db": -1.0,
+      "release_ms": 50,
+      "ffmpeg_filter": "rubberband=tempo=1.05:pitch=0.949342121:transients=crisp:detector=percussive:phase=laminar:window=short:smoothing=off:formant=preserved:pitchq=quality:channels=together",
+      "source_seconds": 0.75875,
+      "seconds": 0.742667,
+      "decoded_peak_dbfs": -9.261,
+      "true_peak_dbfs": -9.256,
+      "decode": "pass"
+    },
+    {
+      "id": "shieldBreak",
+      "base": "docs\\evidence\\2026-09-30-sfx-alternatives\\A-arknights\\processed-wav\\shieldBreak.wav",
+      "pitch_semitones": -0.45,
+      "tempo": 1.08,
+      "high_shelf_db": -1.3,
+      "release_ms": 54,
+      "ffmpeg_filter": "rubberband=tempo=1.08:pitch=0.974341891:transients=crisp:detector=percussive:phase=laminar:window=short:smoothing=off:formant=preserved:pitchq=quality:channels=together",
+      "source_seconds": 1.083229,
+      "seconds": 1.000333,
+      "decoded_peak_dbfs": -8.831,
+      "true_peak_dbfs": -8.664,
+      "decode": "pass"
+    },
+    {
+      "id": "heal",
+      "base": "docs\\evidence\\2026-09-30-sfx-alternatives\\A-arknights\\processed-wav\\heal.wav",
+      "pitch_semitones": 0.5,
+      "tempo": 0.98,
+      "high_shelf_db": -0.4,
+      "release_ms": 44,
+      "ffmpeg_filter": "rubberband=tempo=0.98:pitch=1.029302237:transients=mixed:detector=compound:phase=laminar:window=short:smoothing=off:formant=preserved:pitchq=quality:channels=together",
+      "source_seconds": 0.768083,
+      "seconds": 0.781083,
+      "decoded_peak_dbfs": -10.961,
+      "true_peak_dbfs": -10.813,
+      "decode": "pass"
+    },
+    {
+      "id": "eventEnter",
+      "base": "docs\\evidence\\2026-09-30-sfx-alternatives\\A-arknights\\processed-wav\\eventEnter.wav",
+      "pitch_semitones": -0.55,
+      "tempo": 1.04,
+      "high_shelf_db": -0.6,
+      "release_ms": 60,
+      "ffmpeg_filter": "rubberband=tempo=1.04:pitch=0.968730095:transients=mixed:detector=compound:phase=laminar:window=short:smoothing=off:formant=preserved:pitchq=quality:channels=together",
+      "source_seconds": 1.257771,
+      "seconds": 1.209396,
+      "decoded_peak_dbfs": -11.164,
+      "true_peak_dbfs": -11.159,
+      "decode": "pass"
+    },
+    {
+      "id": "chestBurst",
+      "base": "docs\\evidence\\2026-09-30-sfx-alternatives\\A-arknights\\processed-wav\\chestBurst.wav",
+      "pitch_semitones": 0.35,
+      "tempo": 1.08,
+      "high_shelf_db": -0.4,
+      "release_ms": 42,
+      "ffmpeg_filter": "rubberband=tempo=1.08:pitch=1.020422536:transients=crisp:detector=percussive:phase=laminar:window=short:smoothing=off:formant=preserved:pitchq=quality:channels=together",
+      "source_seconds": 0.672188,
+      "seconds": 0.619729,
+      "decoded_peak_dbfs": -10.273,
+      "true_peak_dbfs": -9.107,
+      "decode": "pass"
+    },
+    {
+      "id": "bossReveal",
+      "base": "docs\\evidence\\2026-09-30-sfx-alternatives\\A-arknights\\processed-wav\\bossReveal.wav",
+      "pitch_semitones": -0.8,
+      "tempo": 0.97,
+      "high_shelf_db": -0.9,
+      "release_ms": 65,
+      "ffmpeg_filter": "rubberband=tempo=0.97:pitch=0.954841604:transients=mixed:detector=compound:phase=laminar:window=short:smoothing=off:formant=preserved:pitchq=quality:channels=together",
+      "source_seconds": 1.376229,
+      "seconds": 1.418792,
+      "decoded_peak_dbfs": -10.215,
+      "true_peak_dbfs": -9.99,
+      "decode": "pass"
+    }
+  ],
+  "preview_markers": [
+    {
+      "id": "click",
+      "start_s": 0.5
+    },
+    {
+      "id": "confirm",
+      "start_s": 1.251
+    },
+    {
+      "id": "card",
+      "start_s": 2.006
+    },
+    {
+      "id": "attackSlash",
+      "start_s": 3.242
+    },
+    {
+      "id": "parry",
+      "start_s": 4.768
+    },
+    {
+      "id": "shieldBreak",
+      "start_s": 6.06
+    },
+    {
+      "id": "heal",
+      "start_s": 7.611
+    },
+    {
+      "id": "eventEnter",
+      "start_s": 8.942
+    },
+    {
+      "id": "chestBurst",
+      "start_s": 10.701
+    },
+    {
+      "id": "bossReveal",
+      "start_s": 11.871
+    }
+  ],
+  "synthetic_layers": false,
+  "added_reverb": false
+}

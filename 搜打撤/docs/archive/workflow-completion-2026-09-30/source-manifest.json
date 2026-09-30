@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "at": "2026-09-30T10:44:38.3854956Z",
+  "method": "copy-original-before-revision",
+  "items": [
+    {
+      "source": "scripts/page-snapshot.mjs",
+      "target": "docs/archive/workflow-completion-2026-09-30/originals/scripts/page-snapshot.mjs",
+      "sha256": "403591bb0fb193d76994fdabb5f1847c421639ef36a25e2fd1cc3c3a44e9d9ba",
+      "replacedBy": "docs/WORKFLOW-TOOLS.md"
+    },
+    {
+      "source": "../AGENTS.md",
+      "target": "docs/archive/workflow-completion-2026-09-30/originals/AGENTS.md",
+      "sha256": "64de3328036ec86faca20cbc7eeb9ac63d120dc6dc9de44c9467f20db8fb0ed1",
+      "replacedBy": "docs/WORKFLOW-TOOLS.md"
+    }
+  ]
+}

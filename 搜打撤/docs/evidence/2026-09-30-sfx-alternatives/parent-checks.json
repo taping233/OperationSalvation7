@@ -1,0 +1,260 @@
+[
+  {
+    "pack": "arknights",
+    "count": 10,
+    "records": [
+      {
+        "id": "click",
+        "seconds": 0.2172,
+        "peak_dbfs": -14.08,
+        "decode": "pass",
+        "http": "audio/ogg 200",
+        "bytes": 9578
+      },
+      {
+        "id": "confirm",
+        "seconds": 0.2156,
+        "peak_dbfs": -11.68,
+        "decode": "pass",
+        "http": "audio/ogg 200",
+        "bytes": 10196
+      },
+      {
+        "id": "card",
+        "seconds": 0.7473,
+        "peak_dbfs": -12.1,
+        "decode": "pass",
+        "http": "audio/ogg 200",
+        "bytes": 17849
+      },
+      {
+        "id": "attackSlash",
+        "seconds": 1.0181,
+        "peak_dbfs": -8.51,
+        "decode": "pass",
+        "http": "audio/ogg 200",
+        "bytes": 18119
+      },
+      {
+        "id": "parry",
+        "seconds": 0.7561,
+        "peak_dbfs": -9.66,
+        "decode": "pass",
+        "http": "audio/ogg 200",
+        "bytes": 16435
+      },
+      {
+        "id": "shieldBreak",
+        "seconds": 1.0832,
+        "peak_dbfs": -8.97,
+        "decode": "pass",
+        "http": "audio/ogg 200",
+        "bytes": 25459
+      },
+      {
+        "id": "heal",
+        "seconds": 0.7654,
+        "peak_dbfs": -11.26,
+        "decode": "pass",
+        "http": "audio/ogg 200",
+        "bytes": 15944
+      },
+      {
+        "id": "eventEnter",
+        "seconds": 1.2578,
+        "peak_dbfs": -10.94,
+        "decode": "pass",
+        "http": "audio/ogg 200",
+        "bytes": 24779
+      },
+      {
+        "id": "chestBurst",
+        "seconds": 0.6695,
+        "peak_dbfs": -10.12,
+        "decode": "pass",
+        "http": "audio/ogg 200",
+        "bytes": 23105
+      },
+      {
+        "id": "bossReveal",
+        "seconds": 1.3762,
+        "peak_dbfs": -10.03,
+        "decode": "pass",
+        "http": "audio/ogg 200",
+        "bytes": 35284
+      }
+    ]
+  },
+  {
+    "pack": "cc0-ui",
+    "count": 10,
+    "records": [
+      {
+        "id": "click",
+        "seconds": 0.1153,
+        "peak_dbfs": -13.95,
+        "decode": "pass",
+        "http": "audio/ogg 200",
+        "bytes": 5951
+      },
+      {
+        "id": "confirm",
+        "seconds": 0.2136,
+        "peak_dbfs": -11.96,
+        "decode": "pass",
+        "http": "audio/ogg 200",
+        "bytes": 7601
+      },
+      {
+        "id": "card",
+        "seconds": 0.74,
+        "peak_dbfs": -10.05,
+        "decode": "pass",
+        "http": "audio/ogg 200",
+        "bytes": 16866
+      },
+      {
+        "id": "attackSlash",
+        "seconds": 0.5474,
+        "peak_dbfs": -9.24,
+        "decode": "pass",
+        "http": "audio/ogg 200",
+        "bytes": 14970
+      },
+      {
+        "id": "parry",
+        "seconds": 0.1165,
+        "peak_dbfs": -8.91,
+        "decode": "pass",
+        "http": "audio/ogg 200",
+        "bytes": 5529
+      },
+      {
+        "id": "shieldBreak",
+        "seconds": 1.25,
+        "peak_dbfs": -9.07,
+        "decode": "pass",
+        "http": "audio/ogg 200",
+        "bytes": 26070
+      },
+      {
+        "id": "heal",
+        "seconds": 0.7977,
+        "peak_dbfs": -9.84,
+        "decode": "pass",
+        "http": "audio/ogg 200",
+        "bytes": 15622
+      },
+      {
+        "id": "eventEnter",
+        "seconds": 0.5259,
+        "peak_dbfs": -9.55,
+        "decode": "pass",
+        "http": "audio/ogg 200",
+        "bytes": 15409
+      },
+      {
+        "id": "chestBurst",
+        "seconds": 0.4655,
+        "peak_dbfs": -9.93,
+        "decode": "pass",
+        "http": "audio/ogg 200",
+        "bytes": 18444
+      },
+      {
+        "id": "bossReveal",
+        "seconds": 0.9974,
+        "peak_dbfs": -9.01,
+        "decode": "pass",
+        "http": "audio/ogg 200",
+        "bytes": 8995
+      }
+    ]
+  },
+  {
+    "pack": "cc0-action",
+    "count": 10,
+    "records": [
+      {
+        "id": "click",
+        "seconds": 0.1623,
+        "peak_dbfs": -14.19,
+        "decode": "pass",
+        "http": "audio/ogg 200",
+        "bytes": 6609
+      },
+      {
+        "id": "confirm",
+        "seconds": 0.4842,
+        "peak_dbfs": -11.79,
+        "decode": "pass",
+        "http": "audio/ogg 200",
+        "bytes": 11638
+      },
+      {
+        "id": "card",
+        "seconds": 0.7445,
+        "peak_dbfs": -12.23,
+        "decode": "pass",
+        "http": "audio/ogg 200",
+        "bytes": 13263
+      },
+      {
+        "id": "attackSlash",
+        "seconds": 0.5273,
+        "peak_dbfs": -7.32,
+        "decode": "pass",
+        "http": "audio/ogg 200",
+        "bytes": 13402
+      },
+      {
+        "id": "parry",
+        "seconds": 0.4238,
+        "peak_dbfs": -7.9,
+        "decode": "pass",
+        "http": "audio/ogg 200",
+        "bytes": 10619
+      },
+      {
+        "id": "shieldBreak",
+        "seconds": 0.4197,
+        "peak_dbfs": -8.27,
+        "decode": "pass",
+        "http": "audio/ogg 200",
+        "bytes": 10454
+      },
+      {
+        "id": "heal",
+        "seconds": 1.0219,
+        "peak_dbfs": -10.1,
+        "decode": "pass",
+        "http": "audio/ogg 200",
+        "bytes": 19076
+      },
+      {
+        "id": "eventEnter",
+        "seconds": 1.135,
+        "peak_dbfs": -9.89,
+        "decode": "pass",
+        "http": "audio/ogg 200",
+        "bytes": 18789
+      },
+      {
+        "id": "chestBurst",
+        "seconds": 1.325,
+        "peak_dbfs": -9.3,
+        "decode": "pass",
+        "http": "audio/ogg 200",
+        "bytes": 26086
+      },
+      {
+        "id": "bossReveal",
+        "seconds": 1.415,
+        "peak_dbfs": -8.36,
+        "decode": "pass",
+        "http": "audio/ogg 200",
+        "bytes": 28568
+      }
+    ]
+  }
+]

@@ -1,0 +1,2673 @@
+/* Archive view: large cards, stable filter rail, no white surfaces. */
+#overlay .card-library-page { background:#081722; color:#e6eef1; min-height:100%; overflow:auto; }
+#overlay .card-library-page .library-head { display:grid; grid-template-columns:minmax(0,1fr) auto auto; grid-template-areas:'title count close' 'tools tools tools'; gap:10px 18px; align-items:center; padding:22px 28px; background:#081722; border-bottom:1px solid rgba(223,194,141,.24); }
+#overlay .card-library-page .clib-count { grid-area:count; }
+#overlay .card-library-page .library-tools { grid-area:tools; display:flex; align-items:center; gap:10px; }
+#overlay .card-library-page .library-tools .clib-search { flex:1; min-width:180px; }
+#overlay .card-library-page .clib-search, #overlay .card-library-page .pg-select { background:#102735; color:#e6eef1; border:1px solid rgba(182,211,214,.24); border-radius:2px; min-height:36px; padding:0 10px; }
+#overlay .clib-main { display:grid; grid-template-columns:190px minmax(0,1fr); gap:22px; align-items:start; padding:24px 28px 40px; }
+#overlay .library-select { width:100%; }
+#overlay .library-preview { min-height:90px; padding:12px 0 0; text-align:center; color:#9fb5bb; }
+#overlay .library-preview.has-preview { min-height:280px; }
+#overlay .lib-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:18px; align-items:start; }
+#overlay .lib-item { display:flex; flex-direction:column; gap:8px; min-width:0; }
+#overlay .card-library-page .lib-item,#overlay .photo-studio-v3 .lib-item { cursor:pointer; }
+#overlay .lib-cardwrap { display:flex; justify-content:center; padding:8px; background:rgba(16,39,53,.55); border:1px solid rgba(182,211,214,.14); border-radius:3px; cursor:zoom-in; }
+#overlay .lib-cardwrap:hover { border-color:#dfc28d; background:#143342; }
+#overlay .clib-empty { grid-column:1/-1; min-height:300px; display:grid; place-content:center; justify-items:center; color:#9fb5bb; border:1px dashed rgba(182,211,214,.2); background:rgba(16,39,53,.35); }
+#overlay .clib-empty-icon { color:#dfc28d; font-size:32px; margin-bottom:10px; }
+@media (max-width:900px) { #overlay .card-library-page .library-head { grid-template-columns:minmax(0,1fr) auto auto; } #overlay .clib-main { grid-template-columns:150px minmax(0,1fr); padding:18px; } #overlay .lib-grid { grid-template-columns:repeat(auto-fill,minmax(128px,1fr)); gap:12px; } }
+@media (max-width:620px) { #overlay .card-library-page .library-head { grid-template-columns:1fr auto; grid-template-areas:'title close' 'count count' 'tools tools'; } #overlay .card-library-page .library-tools { flex-wrap:wrap; } #overlay .card-library-page .library-head .clib-search { flex-basis:100%; } #overlay .clib-main { grid-template-columns:1fr; } #overlay .library-preview { display:none; } }
+
+/* Override the former compact paper catalogue, within the archive only. */
+#overlay .card-library-page .clib-main { background:#081722!important; overflow:hidden; align-items:stretch; padding:20px 20px 36px; grid-template-columns:160px minmax(0,1fr); }
+#overlay .card-library-page .library-head { flex-shrink:0; }
+#overlay .card-library-page .clib-tabs { background:none; padding:0; border:0; flex-shrink:0; max-height:none; }
+#overlay .card-library-page .lib-grid { grid-template-columns:repeat(5,minmax(0,1fr))!important; gap:0!important; padding:6px 6px 22px!important; align-content:start; scrollbar-color:#365666 #081722; scrollbar-width:thin; }
+/* 09-29 三期消歧：本行的 contain-intrinsic-size:auto 344px 恒被下方 body.cardlib-open
+   口径与 .photo-studio-v3 口径压住（历史遗留），删除后占位高度统一走 :558 的 --lib-tile-h 实测值 */
+#overlay .card-library-page .lib-item { border:0; border-right:1px solid rgba(182,211,214,.2); border-bottom:1px solid rgba(182,211,214,.2); padding:22px 12px; }
+#overlay .card-library-page .lib-item:nth-child(5n) { border-right:0; }
+#overlay .card-library-page .lib-cardwrap { padding:0; border:0; background:none; width:100%; }
+#overlay .card-library-page .hs-btn { background:#142d3c; border:1px solid #819aa340; border-radius:2px; color:#bfd0d5; box-shadow:none; }
+#overlay .card-library-page .hs-btn.gold { background:#dfc28d; color:#102733; }
+#overlay .card-library-page .hs-btn.danger { color:#ce9992; background:transparent; }
+@media(max-width:900px) {
+  #overlay .card-library-page .lib-grid { grid-template-columns:repeat(5,minmax(0,1fr))!important; gap:0!important; }
+  #overlay .card-library-page .clib-main { padding:16px; }
+  #overlay .card-library-page .library-preview { display:none; }
+}
+/* ============ 档案馆动画与彩蛋（2026-09-13 留言）============
+   留言：「给卡牌库多加一些动画和彩蛋，不要全部用一个主色调，适当使用第二和第三个色调」。
+   主色仍是档案金 #dfc28d；第二色=青玉 #5fc9c0（筛选导航/输入焦点），
+   第三色=紫晶 #c79bff（空态/危险操作/全息彩蛋）。
+   本段全部规则都带 body.cardlib-open 前缀 + !important：cards.css 的牌库去动画禁令是
+   (1,1,2) 的 !important，只有更高优先级才能逐条豁免；豁免原则沿用 09-08 定调——
+   只放 transform/opacity（合成器线程），filter/drop-shadow 类重绘仍然全禁。 */
+body.cardlib-open #overlay .card-library-page { --lib-c1:#dfc28d; --lib-c2:#d8b57e; --lib-c3:#c79bff; }
+
+/* 主色仍是档案金 #dfc28d；第二色原为青玉（2026-09-19 影廊改造：跟随照相馆主题回归金铜系），
+   第三色=紫晶 #c79bff（空态/危险操作/全息彩蛋）。 */
+body.cardlib-open #overlay .card-library-page .type-tab.on {
+  border-color:var(--lib-c2)!important; background:rgba(95,201,192,.13)!important;
+  box-shadow:inset 3px 0 var(--lib-c2)!important; }
+body.cardlib-open #overlay .card-library-page .type-tab.on em { color:var(--lib-c2)!important; }
+body.cardlib-open #overlay .card-library-page .type-tab:not(.on):hover { background:rgba(95,201,192,.09)!important; color:#dff1f0!important; }
+body.cardlib-open #overlay .card-library-page .clib-count b:last-of-type { color:var(--lib-c2)!important; }
+body.cardlib-open #overlay .card-library-page .clib-search:focus,
+body.cardlib-open #overlay .card-library-page .pg-select:focus {
+  border-color:var(--lib-c2)!important; box-shadow:0 0 0 2px rgba(95,201,192,.20)!important; outline:none!important; }
+body.cardlib-open #overlay .card-library-page .hs-btn:hover { border-color:var(--lib-c2)!important; transform:translateY(-1px)!important; }
+body.cardlib-open #overlay .card-library-page .hs-btn.gold:hover { box-shadow:0 0 14px rgba(223,194,141,.42)!important; transform:translateY(-1px)!important; }
+
+/* 第三色调：空态图标、危险操作悬停、关闭按钮悬停 */
+body.cardlib-open #overlay .card-library-page .clib-empty-icon { color:var(--lib-c3)!important; }
+body.cardlib-open #overlay .card-library-page .hs-btn.danger:hover { color:var(--lib-c3)!important; border-color:rgba(199,155,255,.62)!important; }
+
+/* 控件过渡复位（被去动画禁令一并停用，这里按元素逐个开回来，仍只跑颜色/位移） */
+body.cardlib-open #overlay .card-library-page .hs-btn,
+body.cardlib-open #overlay .card-library-page .type-tab,
+body.cardlib-open #overlay .card-library-page .clib-search,
+body.cardlib-open #overlay .card-library-page .pg-select {
+  transition:background-color .16s ease, border-color .16s ease, color .16s ease,
+    box-shadow .16s ease, transform .12s ease!important; }
+
+/* 入场：卡格错峰上浮。只放前 24 格（首屏 5 列约 5 行），越界卡不跑动画 */
+@keyframes libItemIn { from { opacity:0; transform:translateY(14px) scale(.97); } }
+body.cardlib-open #overlay .card-library-page .lib-item:nth-child(-n+24) {
+  animation:libItemIn .38s cubic-bezier(.22,1,.36,1) backwards!important;
+  animation-delay:calc(var(--i,0) * 26ms)!important; }
+/* 每次重绘（换筛选/搜索）卡格整体淡入，给「列表换了」一个即时反馈 */
+@keyframes libGridIn { from { opacity:0; } }
+body.cardlib-open #overlay .card-library-page .lib-grid { animation:libGridIn .2s ease!important; }
+
+/* 命中数脉冲：只在数字真的变化时由 renderLibGrid 挂 .bump */
+@keyframes libCountBump { 0% { transform:scale(1); } 34% { transform:scale(1.55); color:var(--lib-c2); } 100% { transform:scale(1); } }
+body.cardlib-open #overlay .card-library-page .clib-count b.bump {
+  display:inline-block; animation:libCountBump .44s cubic-bezier(.22,1.4,.36,1)!important; }
+
+/* 卡面悬停光泽：只动 opacity（伪元素斜向扫光），不做滤镜重绘 */
+body.cardlib-open #overlay .card-library-page .lib-cardwrap { position:relative; }
+body.cardlib-open #overlay .card-library-page .lib-cardwrap::after {
+  content:''; position:absolute; inset:0; pointer-events:none; opacity:0; border-radius:inherit;
+  background:linear-gradient(120deg, transparent 33%, rgba(223,194,141,.17) 46%, rgba(216,181,126,.19) 56%, transparent 68%);
+  transition:opacity .18s ease!important; }
+body.cardlib-open #overlay .card-library-page .lib-cardwrap:hover::after { opacity:1; }
+
+/* 彩蛋 2：稀有度筛到「棱彩」→ 首屏卡面依次过一道幻彩扫光（libHoloEgg 挂 .lib-holo，2300ms 后摘） */
+@keyframes libHoloSweep {
+  0% { opacity:0; transform:translateX(-130%) skewX(-18deg); }
+  16% { opacity:.92; }
+  100% { opacity:0; transform:translateX(150%) skewX(-18deg); } }
+body.cardlib-open #overlay .lib-grid.lib-holo .lib-cardwrap { overflow:hidden; }
+body.cardlib-open #overlay .lib-grid.lib-holo .lib-item:nth-child(-n+24) .lib-cardwrap::before {
+  content:''; position:absolute; top:-12%; bottom:-12%; left:0; width:40%; pointer-events:none; opacity:0;
+  background:linear-gradient(105deg, transparent, rgba(199,155,255,.58), rgba(95,201,192,.52), transparent);
+  animation:libHoloSweep .95s ease-in-out!important;
+  animation-delay:calc(var(--i,0) * 40ms)!important; }
+
+/* 空态图标：常驻缓浮（空页面上唯一在动的东西，克制） */
+@keyframes libFloat { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-7px); } }
+body.cardlib-open #overlay .card-library-page .clib-empty-icon { animation:libFloat 3.2s ease-in-out infinite!important; }
+
+@media(max-width:620px) {
+  #overlay .card-library-page { overflow:auto; }
+  #overlay .card-library-page .clib-main { display:flex; flex-direction:column; overflow:visible; }
+  #overlay .card-library-page .lib-grid { grid-template-columns:repeat(2,minmax(0,1fr))!important; overflow:visible; }
+  #overlay .card-library-page .lib-item { border-right:1px solid rgba(182,211,214,.2); }
+  #overlay .card-library-page .lib-item:nth-child(5n) { border-right:1px solid rgba(182,211,214,.2); }
+  #overlay .card-library-page .lib-item:nth-child(2n) { border-right:0; }
+}
+
+/* ============ 画廊版重设计（2026-09-13 留言：卡牌库要更高级）============
+   诊断：旧版像后台管理表格——1px 网格线、灰底按钮挂在每张卡下面、深蓝底饱和度硬。
+   改法：换成「私人档案展廊」——取消网格线与灰按钮，卡面各自悬浮在大留白上，
+   用细金线、字距和明暗层次做秩序感；操作按钮收进卡底的操作抽屉，悬停才出现。
+   三色调口径不变：金=主体，青玉=交互反馈，紫晶=空态/危险。
+   全部规则沿用 body.cardlib-open 前缀 + !important 压过牌库去动画禁令。 */
+body.cardlib-open #overlay .card-library-page {
+  --lib-bg:#070c12; --lib-line:rgba(223,194,141,.13); --lib-line2:rgba(255,255,255,.07);
+  --lib-txt:#e9eff2; --lib-dim:#78878f; --lib-dim2:#5d6a71;
+  background:
+    radial-gradient(130% 72% at 50% -12%, rgba(223,194,141,.075), transparent 60%),
+    radial-gradient(96% 66% at 102% 100%, rgba(95,201,192,.10), transparent 62%),
+    radial-gradient(78% 58% at -8% 92%, rgba(199,155,255,.075), transparent 60%),
+    var(--lib-bg)!important;
+  color:var(--lib-txt)!important; }
+
+/* ---- 展头：海报式排版，标题吃字距，计数当展品编号 ---- */
+body.cardlib-open #overlay .card-library-page .library-head {
+  grid-template-columns:minmax(0,1fr) auto auto!important;
+  grid-template-areas:'title count close' 'tools tools tools'!important;
+  gap:16px 26px!important; padding:30px 46px 22px!important;
+  background:transparent!important; border-bottom:1px solid var(--lib-line)!important; align-items:end!important; }
+body.cardlib-open #overlay .card-library-page .clib-count {
+  color:var(--lib-dim2)!important; font-size:10.5px!important; letter-spacing:.2em!important; white-space:nowrap; }
+body.cardlib-open #overlay .card-library-page .clib-count b {
+  color:var(--lib-txt)!important; font:700 16px ui-monospace,monospace!important; letter-spacing:0!important; }
+/* 藏品总数=白，当前命中数=青玉：筛选结果一眼分辨（第二色调的常驻落点） */
+body.cardlib-open #overlay .card-library-page .clib-count b:last-of-type { color:var(--lib-c2)!important; }
+body.cardlib-open #overlay .card-library-page .clib-count b.bump { color:var(--lib-c2)!important; }
+
+/* ---- 工具条：无填充线框，聚焦时青玉点亮 ---- */
+/* ---- 工具条：不透明深底 + 青玉焦点。
+   底色必须不透明：Chrome 的原生下拉弹层底跟着 select 走，透明底会把弹层渲染成
+   白底浅字（老板 09-13 留言：稀有度/职业那儿白底白字看不清）；option 再单独写死底色，
+   免得被页面级 background:transparent 归一化规则清掉。color-scheme:dark 让弹层与
+   滚动条一起走深色，双保险。 ---- */
+body.cardlib-open #overlay .card-library-page .clib-search,
+body.cardlib-open #overlay .card-library-page .pg-select {
+  background:#0d1922!important; color:#eaf2f5!important;
+  border:1px solid rgba(255,255,255,.10)!important; border-radius:9px!important;
+  min-height:38px!important; letter-spacing:.05em!important;
+  color-scheme:dark!important; }
+body.cardlib-open #overlay .card-library-page .pg-select option {
+  background:#0d1922!important; color:#eaf2f5!important; }
+body.cardlib-open #overlay .card-library-page .clib-search::placeholder { color:var(--lib-dim2)!important; }
+body.cardlib-open #overlay .card-library-page .clib-search:focus,
+body.cardlib-open #overlay .card-library-page .pg-select:focus {
+  border-color:rgba(95,201,192,.6)!important; background:#0f2129!important;
+  box-shadow:0 0 0 3px rgba(95,201,192,.14)!important; }
+/* 稀有度=青玉 / 职业=紫晶：两个筛选下拉各带一条左侧色条，第二三色调常驻可见 */
+body.cardlib-open #overlay .card-library-page #libRar { border-left:2px solid rgba(95,201,192,.62)!important; }
+body.cardlib-open #overlay .card-library-page #libCls { border-left:2px solid rgba(199,155,255,.62)!important; }
+body.cardlib-open #overlay .card-library-page .hs-btn {
+  background:transparent!important; border:1px solid var(--lib-line2)!important; color:#cbd6db!important;
+  border-radius:9px!important; font-size:12px!important; letter-spacing:.1em!important; }
+body.cardlib-open #overlay .card-library-page .hs-btn.gold {
+  background:linear-gradient(180deg,#e8cd9d,#c7a56c)!important; color:#161e25!important;
+  border-color:transparent!important; font-weight:700!important;
+  box-shadow:0 6px 22px rgba(223,194,141,.20), inset 0 1px 0 rgba(255,255,255,.55)!important; }
+body.cardlib-open #overlay .card-library-page .hs-btn.danger { color:#9aa8ae!important; }
+
+/* ---- 主体：侧栏去盒子，选中项改金色竖线指示 ---- */
+/* 2026-09-19 留言 #10：原 background:transparent!important 压制声明已摘除（让位 winter 尾部亮色光晕），布局参数不动 */
+body.cardlib-open #overlay .card-library-page .clib-main {
+  grid-template-columns:172px minmax(0,1fr)!important;
+  gap:38px!important; padding:28px 46px 52px!important; }
+body.cardlib-open #overlay .card-library-page .library-preview {
+  flex:0 0 auto!important; margin:auto 0 4px!important; padding:14px 0 0!important;
+  border-top:1px solid rgba(95,201,192,.3)!important; }
+body.cardlib-open #overlay .card-library-page .library-preview .pv-empty { color:rgba(199,155,255,.55)!important; }
+body.cardlib-open #overlay .card-library-page .library-preview .pv-hint b { color:var(--lib-c2)!important; }
+/* 展柜高度随卡面实际尺寸走（旧版写死 min-height:280px 才把侧栏撑破） */
+body.cardlib-open #overlay .card-library-page .library-preview.has-preview { min-height:0!important; }
+body.cardlib-open #overlay .card-library-page .library-preview .pv-hint {
+  margin:9px 0 0!important; font-size:10px!important; line-height:1.6!important;
+  letter-spacing:.05em!important; min-height:0!important; }
+
+/* ---- 展廊网格：取消网格线，卡面各自悬浮，六列固定（老板 09-12 口径）---- */
+body.cardlib-open #overlay .card-library-page .lib-grid {
+  grid-template-columns:repeat(6,minmax(0,1fr))!important;
+  gap:48px 26px!important; padding:2px 2px 44px!important; align-content:start; }
+/* 卡格底部预留 38px 展签位：抽屉走常规流（不是绝对定位浮层）才稳定可点，
+   空间常驻所以悬停弹出时不推挤整行；卡面与展签之间留 10px，让卡面四角的
+   费用/伤害/币值浮球（负偏移浮出卡缘 ~8px）有落脚处，不被展签压住。
+   padding 10px 是必需的裁剪余量：lib-item 带 content-visibility:auto（滚动性能），
+   自带 paint 裁剪，卡格无内边距时浮球一出卡缘就被切（老板 09-13 留言：费用和价格被裁切）。 */
+body.cardlib-open #overlay .card-library-page .lib-item {
+  border:0!important; padding:12px 12px 0!important; gap:0!important; position:relative!important; }
+/* 09-29 三期消歧：上块原带 contain-intrinsic-size:auto 300px!important 与
+   transition .26s!important——前者恒压住 .photo-studio-v3 口径的 --lib-tile-h 实测占位
+   （二期二刀意图被 !important 意外失效），后者恒输给下方 .18s；均删除。 */
+/* 抬升做在卡格上（不是卡面）：操作抽屉是它的兄弟节点，这样抽屉跟着卡面一起动，不会错位。
+   悬停放开 content-visibility（=关掉 paint 裁剪）让 46px 辉光不被卡格边界硬切，
+   但 09-29 三期起带 120ms 延迟：滚动扫过（每格停留 <120ms）不再反复开关裁剪，
+   每格一次重栅格化只发生在「停留悬停」时——与 JS 侧预览 90ms 去抖同一语义。
+   移开时走 :563 的 0s 无延迟立即收回裁剪。transition 离散属性 delay 兼容 Chromium 105+；
+   不支持的环境退化为立即放开（=旧行为），安全。 */
+body.cardlib-open #overlay .card-library-page .lib-item:hover {
+  transform:translateY(-9px)!important; z-index:5; content-visibility:visible!important;
+  transition:transform .18s ease, content-visibility 0s .12s!important; }
+body.cardlib-open #overlay .card-library-page .lib-cardwrap {
+  width:100%!important; padding:0!important; background:transparent!important; border:0!important;
+  color:inherit!important; font:inherit!important; text-align:inherit!important; cursor:pointer!important;
+  border-radius:9px!important;
+  transition:box-shadow .26s cubic-bezier(.22,1,.36,1)!important; }
+body.cardlib-open #overlay .card-library-page .lib-cardwrap:focus-visible {
+  outline:3px solid #efcd89!important; outline-offset:5px!important;
+  box-shadow:0 0 0 7px rgba(239,205,137,.2)!important; }
+body.cardlib-open #overlay .card-library-page .lib-item:hover .lib-cardwrap {
+  box-shadow:0 26px 46px rgba(0,0,0,.62), 0 0 0 1px rgba(223,194,141,.45), 0 0 30px rgba(223,194,141,.12)!important; }
+/* 关掉 cards.css 里给旧版留的通用悬停放大：缩放会让操作抽屉与卡面错位，抬升改由卡格承担 */
+body.cardlib-open #overlay .card-library-page .lib-cardwrap:hover { transform:none!important; }
+
+/* ---- 空态与响应式收尾 ---- */
+body.cardlib-open #overlay .card-library-page .clib-empty {
+  border:1px dashed var(--lib-line)!important; background:rgba(255,255,255,.012)!important;
+  color:var(--lib-dim)!important; letter-spacing:.1em!important; }
+@media(max-width:1280px) {
+  body.cardlib-open #overlay .card-library-page .lib-grid { grid-template-columns:repeat(5,minmax(0,1fr))!important; }
+  body.cardlib-open #overlay .card-library-page .clib-main,
+  body.cardlib-open #overlay .card-library-page .library-head { padding-left:30px!important; padding-right:30px!important; }
+}
+@media(max-width:900px) {
+  body.cardlib-open #overlay .card-library-page .lib-grid { grid-template-columns:repeat(4,minmax(0,1fr))!important; gap:26px 18px!important; }
+  body.cardlib-open #overlay .card-library-page .clib-main { grid-template-columns:150px minmax(0,1fr)!important; gap:24px!important; }
+}
+@media(max-width:620px) {
+  body.cardlib-open #overlay .card-library-page .lib-grid { grid-template-columns:repeat(2,minmax(0,1fr))!important; }
+  body.cardlib-open #overlay .card-library-page .clib-main { padding:18px!important; }
+}
+
+/* ============ 照相馆 4.0：深夜影廊（2026-09-19 影廊改造）============
+   口径（老板拍板）：主题钉死照相馆，从「廉价冲印墙」升格为「深夜影廊」。
+   材质语言：酒红绒布墙 + 胡桃木 + 黄铜件 + 象牙白相纸 + 暖白看片灯。
+   删：塑料图钉/卷角/磨损斑/3D 倾斜（廉价拟物四件套）；
+   留：照片悬挂隐喻、按 id 稳定的微倾与落影、全部动效彩蛋（09-13 点名要的）。
+   青色 #18d1ff 全系退役 → 黄铜金 #d4af7a；背景先走酒红渐变占位，生图墙纸到位后替换。 */
+body.cardlib-open #overlay .photo-studio-v3 {
+  --studio-gold:#d4af7a;
+  --studio-gold-soft:#ecd9b0;
+  --studio-ice:#8fd4e8;
+  --studio-panel:#1d1512;
+  --studio-control:#251b14;
+  --studio-control-hi:#2e2218;
+  --studio-text:#f2ede4;
+  --studio-muted:#a99e8f;
+  --studio-line:rgba(212,175,122,.18);
+  --studio-paper:#e7dece;
+  --studio-paper-light:#f0e9dc;
+  --studio-paper-edge:rgba(104,87,64,.38);
+  --studio-wall:#170f0d;
+  --studio-brass-hi:#f0d9a8;
+  --studio-brass:#c9a468;
+  --studio-brass-lo:#8a6a3c;
+  --studio-velvet:#5a1c24;
+  /* 正文保持无衬线；馆名、照片名称和索引标题按老板新要求恢复宋体层级。 */
+  --font-ui:'HarmonyOS Sans SC','HarmonyOS Sans','Noto Sans SC Sub','Noto Sans SC',sans-serif;
+  --serif:'Noto Serif SC','Source Han Serif SC','Songti SC','SimSun','STSong',serif;
+  font-family:var(--font-ui)!important;
+  display:flex!important;
+  flex-direction:column!important;
+  min-height:100%!important;
+  overflow:hidden!important;
+  color:var(--studio-text)!important;
+  background:
+    radial-gradient(110% 60% at 50% -10%, rgba(255,216,170,.10), transparent 56%),
+    radial-gradient(120% 80% at 50% 112%, rgba(90,28,36,.42), transparent 60%),
+    linear-gradient(180deg,#1b0e10,#210f12 52%,#140a0b)!important;
+}
+
+body.cardlib-open #overlay .photo-studio-v3 .library-head {
+  flex:0 0 auto!important;
+  display:grid!important;
+  grid-template-columns:minmax(220px,1fr) auto auto!important;
+  grid-template-areas:'title count close' 'tools tools tools'!important;
+  gap:9px 18px!important;
+  padding:14px clamp(18px,2.2vw,34px) 12px!important;
+  align-items:center!important;
+  border-bottom:1px solid rgba(212,175,122,.22)!important;
+  /* 门头牌匾图（sign.webp）随 09-23「彩带去掉」拍板移除：cover 窄带裁出的杂色横条 */
+  background:linear-gradient(180deg,#221412,#180d0b)!important;
+  box-shadow:inset 0 -1px rgba(212,175,122,.10),0 4px 14px rgba(0,0,0,.5);
+}
+body.cardlib-open #overlay .photo-studio-v3 .clib-count {
+  grid-area:count;
+  display:flex;
+  align-items:baseline;
+  gap:10px;
+  padding:6px 12px;
+  border-left:1px solid rgba(212,175,122,.2);
+  color:#9a8d7c!important;
+  white-space:nowrap;
+}
+body.cardlib-open #overlay .photo-studio-v3 .clib-count small { font-size:9px; letter-spacing:.08em; }
+/* 卷宗口径（批次四）：「第 07 卷」金色卷号领衔，馆藏/陈列跟后 */
+body.cardlib-open #overlay .photo-studio-v3 .clib-count small:first-child {
+  color:var(--studio-gold)!important;
+  letter-spacing:.22em;
+  margin-right:2px;
+}
+body.cardlib-open #overlay .photo-studio-v3 .clib-count b {
+  color:var(--studio-gold-soft)!important;
+  font:700 16px/1 var(--font-ui)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .clib-count i { display:none; }
+body.cardlib-open #overlay .photo-studio-v3 .library-head>.pg-close {
+  grid-area:close;
+  position:static!important;
+  width:40px!important;
+  height:40px!important;
+  border-radius:2px!important;
+  border-color:rgba(212,175,122,.24)!important;
+  color:var(--studio-muted)!important;
+  background:rgba(29,21,18,.6)!important;
+  box-shadow:0 2px 6px rgba(0,0,0,.3)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .library-head>.pg-close .ic,
+body.cardlib-open #overlay .photo-studio-v3 .library-head>.pg-close .ic img {
+  display:block;
+  width:15px!important;
+  height:15px!important;
+  object-fit:contain;
+}
+body.cardlib-open #overlay .photo-studio-v3 .library-tools {
+  grid-area:tools;
+  display:flex;
+  align-items:stretch;
+  gap:8px;
+  min-width:0;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-search {
+  flex:1;
+  min-width:180px;
+  display:grid;
+  border:1px solid rgba(212,175,122,.22);
+  border-radius:2px;
+  background:var(--studio-control);
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-search .clib-search {
+  width:100%;
+  min-height:40px!important;
+  padding:0 13px!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  color:var(--studio-text)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-search .clib-search::placeholder { color:#b2a38f!important; }
+body.cardlib-open #overlay .photo-studio-v3 .studio-search:focus-within {
+  border-color:#d9bb82;
+  box-shadow:0 0 0 2px rgba(217,187,130,.24);
+}
+body.cardlib-open #overlay .photo-studio-v3 .library-tools>.pg-select,
+body.cardlib-open #overlay .photo-studio-v3 .library-tools>.hs-btn {
+  min-height:40px!important;
+  border-color:rgba(212,175,122,.22)!important;
+  color:#e8dfd0!important;
+  background:var(--studio-control)!important;
+  box-shadow:0 2px 5px rgba(20,10,6,.3)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .library-tools>.pg-select:hover,
+body.cardlib-open #overlay .photo-studio-v3 .library-tools>.hs-btn:hover {
+  border-color:rgba(212,175,122,.6)!important;
+  background:var(--studio-control-hi)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-edit-toggle.on {
+  border-color:var(--studio-gold)!important;
+  color:#241708!important;
+  background:linear-gradient(180deg,var(--studio-brass-hi),var(--studio-brass))!important;
+}
+
+body.cardlib-open #overlay .photo-studio-v3 .studio-filterbar {
+  flex:0 0 auto;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto auto;
+  gap:9px;
+  align-items:center;
+  padding:8px clamp(18px,2.2vw,34px);
+  border-top:1px solid rgba(212,175,122,.09);
+  border-bottom:1px solid rgba(212,175,122,.08);
+  background:var(--studio-panel);
+  box-shadow:inset 0 1px rgba(255,255,255,.05),inset 0 -1px rgba(0,0,0,.4);
+}
+body.cardlib-open #overlay .photo-studio-v3 .clib-tabs {
+  display:flex;
+  gap:4px;
+  min-width:0;
+  overflow-x:auto;
+  padding:1px 0;
+  scrollbar-width:thin;
+}
+body.cardlib-open #overlay .photo-studio-v3 .type-tab {
+  flex:0 0 auto;
+  min-height:37px;
+  display:grid;
+  grid-template-columns:auto auto;
+  align-items:center;
+  gap:6px;
+  padding:6px 9px;
+  border:1px solid transparent;
+  border-radius:2px;
+  background:transparent;
+  color:var(--studio-muted);
+}
+/* 页签图标随 09-23「先撤图标只留文字+计数」拍板移除，待图标重绘批落库后统一挂回 */
+body.cardlib-open #overlay .photo-studio-v3 .type-tab em {
+  color:#6b5f50;
+  font:700 10px var(--font-ui);
+  font-style:normal;
+}
+/* 选中页签：金色线框（不再用实底色块），金字金计数 */
+body.cardlib-open #overlay .photo-studio-v3 .type-tab.on {
+  color:var(--studio-gold-soft);
+  border-color:rgba(212,175,122,.62);
+  background:rgba(212,175,122,.10);
+  box-shadow:inset 0 0 0 1px rgba(212,175,122,.16),0 2px 8px rgba(0,0,0,.3);
+}
+body.cardlib-open #overlay .photo-studio-v3 .type-tab.on em { color:var(--studio-gold); }
+body.cardlib-open #overlay .photo-studio-v3 .library-advanced { position:relative; }
+body.cardlib-open #overlay .photo-studio-v3 .library-advanced summary,
+body.cardlib-open #overlay .photo-studio-v3 .studio-clear {
+  min-height:37px;
+  display:flex;
+  align-items:center;
+  padding:0 11px;
+  border:1px solid rgba(212,175,122,.22);
+  border-radius:2px;
+  background:var(--studio-control);
+  color:var(--studio-muted);
+  font:600 11px var(--font-ui);
+  white-space:nowrap;
+}
+body.cardlib-open #overlay .photo-studio-v3 .library-advanced>div {
+  position:absolute;
+  z-index:20;
+  top:calc(100% + 6px);
+  right:0;
+  width:230px;
+  display:grid;
+  gap:7px;
+  padding:10px;
+  border:1px solid rgba(212,175,122,.24);
+  background:var(--studio-control);
+  color:#e8dfd0;
+  box-shadow:0 16px 36px rgba(0,0,0,.55);
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-clear { color:#6b5f50; }
+body.cardlib-open #overlay .photo-studio-v3 .studio-active-filters {
+  flex:0 0 auto;
+  min-height:29px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  padding:3px clamp(18px,2.2vw,34px);
+  color:#9a8d7c;
+  font-size:10px;
+  border-bottom:1px solid rgba(212,175,122,.1);
+  background:rgba(23,15,13,.8);
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-active-filters:empty { display:none; }
+body.cardlib-open #overlay .photo-studio-v3 .studio-active-filters button {
+  padding:3px 8px;
+  border:1px solid rgba(212,175,122,.4);
+  border-radius:999px;
+  background:var(--studio-control);
+  color:var(--studio-gold-soft);
+}
+
+body.cardlib-open #overlay .photo-studio-v3 .clib-main {
+  position:relative;
+  flex:1;
+  min-height:0;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) 286px!important;
+  gap:clamp(18px,2vw,28px)!important;
+  padding:14px clamp(18px,2vw,34px) 22px!important;
+  overflow:hidden!important;
+  align-items:stretch!important;
+  /* 酒红绒布墙：cover 条带只有约 69% 图高，定位 bottom 露出图底的金挂画线与木护墙板
+     （顶部射灯区被裁，由 lib-grid 的 CSS 锥光补），渐变做加载兜底与暗化层 */
+  background:
+    linear-gradient(180deg, rgba(23,10,9,.38), rgba(23,10,9,.26) 40%, rgba(16,7,6,.46)),
+    radial-gradient(90% 42% at 46% -6%, rgba(255,214,168,.10), transparent 58%),
+    url('../assets/ui/photo-studio/wall.webp') center bottom/cover no-repeat,
+    radial-gradient(130% 90% at 50% 30%, rgba(90,28,36,.5), transparent 72%),
+    linear-gradient(180deg,#241114 0%,#1b0d0f 52%,#120908 100%)!important;
+  border-top:1px solid rgba(0,0,0,.7);
+  box-shadow:inset 0 18px 40px rgba(0,0,0,.3),inset 0 -28px 50px rgba(0,0,0,.35);
+}
+/* 网格底部渐隐（贴在墙面上、不随卡格滚动）：视口底探头的下一排相纸融进"灯光渐暗处"，
+   悬停抬升的卡格 z-index:4 在其上，拿起的照片不会被渐暗吃掉 */
+body.cardlib-open #overlay .photo-studio-v3 .clib-main::after {
+  content:'';
+  position:absolute;
+  z-index:3;
+  left:0;
+  right:0;
+  bottom:0;
+  height:64px;
+  pointer-events:none;
+  background:linear-gradient(180deg, transparent, rgba(12,5,4,.85));
+}
+body.cardlib-open #overlay .photo-studio-v3 .lib-grid {
+  min-height:0;
+  min-width:0;
+  overflow-x:hidden;
+  overscroll-behavior:none;
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:32px 26px!important;
+  padding:20px 12px 42px!important;
+  align-content:start;
+  /* 影廊射灯：沿四列各一束静态锥光打向照片（背景画在容器上不随内容滚动，灯"钉在墙上"）；
+     首层=光衰减（顶部暖亮→36% 消失，09-23 ⑥）；尾部一道宽暗角收底。纯静态渐变 */
+  background:
+    linear-gradient(180deg, rgba(255,218,168,.055), transparent 36%),
+    radial-gradient(150px 480px at 12.5% -30px, rgba(255,218,168,.165), transparent 74%),
+    radial-gradient(150px 480px at 37.5% -30px, rgba(255,218,168,.165), transparent 74%),
+    radial-gradient(150px 480px at 62.5% -30px, rgba(255,218,168,.165), transparent 74%),
+    radial-gradient(150px 480px at 87.5% -30px, rgba(255,218,168,.165), transparent 74%),
+    radial-gradient(ellipse at 74% 44%, rgba(0,0,0,.1), transparent 32%);
+}
+body.cardlib-open #overlay .photo-studio-v3.studio-index-layout {
+  overflow:hidden!important;
+  overscroll-behavior:none;
+}
+body.cardlib-open #overlay .photo-studio-v3 .lib-grid.is-empty {
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  place-items:center;
+}
+body.cardlib-open #overlay .photo-studio-v3 .lib-item {
+  min-width:0;
+  position:relative!important;
+  padding:15px 3px 6px!important;
+  border:0!important;
+  /* 09-24 全量渲染曾因行轨拿跳过态错误高度摘掉 content-visibility；改窗口挂载后恢复，
+     跳过态占位由 contain-intrinsic-size 给足（单格高约 270~430px 随视宽浮动，进视口即用真实高度；
+     09-25：360px 大于实际瓦片高致滚动条跳动，压至 270px） */
+  content-visibility:auto;
+  /* 09-29 二刀：占位高度吃 --lib-tile-h（syncLibTileIntrinsicSize 喂实测瓦片高，
+     271 张全距仅 320~323px）。09-29 二期起壳自带等高，此占位主要兜底非壳态。 */
+  contain-intrinsic-size:auto var(--lib-tile-h, 270px);
+  /* 09-29 二期不再整瓦片层化：will-change 移到下方 :not(.lib-ph)——壳常驻后已挂载
+     瓦片只有视口附近几十张，合成层数量有界。全量 271 层在真实环境（Electron/核显/
+     系统缩放）会打爆层预算退化回逐帧重栅格化：账本无头满帧率但老板实机仍卡的根因。 */
+  contain:layout style;
+  /* 09-29 三期：本行不再声明 transition——非 hover 态真源是 page-cardslib.css T1a
+     （transform var(--lib-lift)!important，文件序在后恒赢）；cv 无过渡声明=移开离散立即
+     收回裁剪（预期行为）。进入的 .12s 延迟写在上方 .card-library-page 口径 hover 规则
+     （特异性 (1,4,1) 高于 T1a，hover 态恒赢）。 */
+}
+/* 09-29 二期：合成层只给已挂载瓦片，占位壳不占层预算 */
+body.cardlib-open #overlay .photo-studio-v3 .lib-item:not(.lib-ph) { will-change:transform; }
+/* 占位壳：与瓦片等高的空格子（高度吃 --lib-tile-h 实测值），内容由 IO 就近注入/卸出
+   （game.cardslib.page.js mountLibTile/unmountLibTile） */
+body.cardlib-open #overlay .photo-studio-v3 .lib-item.lib-ph { height:var(--lib-tile-h, 321px); pointer-events:none; }
+/* 09-29 三期消歧：原此处另有 .photo-studio-v3 .lib-item:hover（z-index:4 / translateY(-3px)），
+   两项恒输给上方 .card-library-page 口径 hover 规则（z-index:5!important、-9px!important 特异性更高），
+   删除后悬停生效值不变（z=5、-9px）。 */
+/* 09-29 三期删除 .lib-mount-sentinel 死规则：二期壳常驻重构后哨兵机制已从 JS 退场，
+   DOM 无此元素（原注释指向的 libMountMore 已不存在） */
+body.cardlib-open #overlay .photo-studio-v3 .lib-cardwrap.studio-photo {
+  width:100%!important;
+  min-width:0!important;
+  display:block;
+  padding:0!important;
+  border:0!important;
+  border-radius:2px!important;
+  background:transparent!important;
+  color:inherit!important;
+  text-align:left!important;
+  box-shadow:none!important;
+  transform:none!important;
+  /* 黄铜放大镜光标：照相馆翻看照片的手势语言（静态 data-uri，热点对准镜头中心） */
+  cursor:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'><circle cx='13' cy='13' r='8' fill='rgba(24,14,8,.3)' stroke='%23ecd5a4' stroke-width='2.4'/><line x1='19.2' y1='19.2' x2='27' y2='27' stroke='%23c9a468' stroke-width='3.6' stroke-linecap='round'/></svg>") 13 13, pointer!important;
+}
+/* 相纸：象牙白卡纸。实体感三件套——纸边厚度硬阴影、非均匀表面反光、随卡微 3D 侧倾；
+   悬挂件=黄铜相片夹（顶部金属条），替代塑料图钉。
+   白边走暖象牙（冲印相纸的米黄调，非冷白） */
+body.cardlib-open #overlay .photo-studio-v3 .studio-photo-paper {
+  position:relative;
+  display:block;
+  min-width:0;
+  padding:6px 6px 6px;
+  border:1px solid var(--studio-paper-edge);
+  border-radius:2px;
+  background:
+    linear-gradient(102deg,rgba(255,252,240,.2),transparent 26% 74%,rgba(92,78,56,.12)),
+    linear-gradient(145deg,var(--studio-paper-light),var(--studio-paper));
+  box-shadow:
+    0 2px 0 rgba(96,86,70,.42),
+    0 4px 0 rgba(38,30,22,.22),
+    var(--photo-shadow-x,0) var(--photo-shadow-y,16px) var(--photo-shadow-blur,28px) rgba(10,4,3,.46),
+    inset 1px 1px 0 rgba(255,255,255,.6);
+  transition:border-color .16s ease,box-shadow .16s ease;
+}
+/* 黄铜相片夹：顶部居中一条金属横夹，影廊的"挂相"方式 */
+body.cardlib-open #overlay .photo-studio-v3 .studio-photo-paper::before {
+  content:'';
+  position:absolute;
+  z-index:4;
+  top:-7px;
+  left:50%;
+  width:46px;
+  height:13px;
+  transform:translateX(-50%);
+  border-radius:3px;
+  background:linear-gradient(180deg,var(--studio-brass-hi) 0%,var(--studio-brass) 46%,var(--studio-brass-lo) 82%,#6b4f2a 100%);
+  box-shadow:0 2px 4px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.65);
+}
+/* 纸纹颗粒（09-23 ⑤）：::after 复用为 grain 层——程序生成 128px 无缝噪点，
+   multiply 低透明度铺满整卡（照片上=银盐颗粒，白边上=纸纤维，主题吻合） */
+body.cardlib-open #overlay .photo-studio-v3 .studio-photo-art {
+  position:relative;
+  display:block;
+  overflow:hidden;
+  aspect-ratio:4/3;
+  border:1px solid rgba(48,44,38,.74);
+  background:radial-gradient(ellipse at 50% 38%,#26221e,#14100d 82%);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.1),inset 0 0 12px rgba(10,4,2,.16);
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-photo-art::before,
+body.cardlib-open #overlay .photo-studio-v3 .studio-photo-art::after {
+  content:'';
+  position:absolute;
+  z-index:2;
+  inset:0;
+  pointer-events:none;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-photo-art::before {
+  box-shadow:inset 0 0 7px rgba(8,4,3,.16),inset 0 -9px 13px rgba(10,6,4,.06);
+}
+/* 冲印质感：暖纱+暗角罩层（::after，静态一次绘制）。轻做口径——不改变卡面画风定版，
+   只把高饱和原画往"银盐冲印"方向拢半步（09-23 暗卡提亮：暗角 .2→.12） */
+body.cardlib-open #overlay .photo-studio-v3 .studio-photo-art::after {
+  background:
+    linear-gradient(180deg, rgba(255,234,196,.06), transparent 32%),
+    radial-gradient(ellipse at 50% 42%, transparent 62%, rgba(62,42,24,.12));
+}
+/* 暗卡提亮（09-23 批次，曝光回调）：静态滤镜一次绘制、无 transition/animation；
+   brightness 曾到 1.14 老板嫌曝光过亮 → 回调 1.03，只保轻微提亮不吃高光 */
+body.cardlib-open #overlay .photo-studio-v3 .studio-photo-art img {
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  filter:sepia(.04) saturate(1.04) contrast(1.05) brightness(1.03);
+}
+/* 费用铜币已随 09-23「照片不是卡牌」拍板移除（费用数据在选片台文字行） */
+/* 白边下部：只有名字居中——照片墙上一张照片 = 画 + 一行名字 */
+body.cardlib-open #overlay .photo-studio-v3 .studio-photo-caption {
+  position:relative;
+  display:grid;
+  gap:4px;
+  min-width:0;
+  padding:8px 5px 6px;
+  text-align:center;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-photo-caption b {
+  overflow:hidden;
+  color:#2b241d;
+  font:700 17px/1.35 var(--serif);
+  letter-spacing:.02em;
+  white-space:normal;
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-photo-caption small {
+  overflow:hidden;
+  color:#5d5042;
+  font:600 12px/1.2 var(--font-ui);
+  letter-spacing:.06em;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+/* 类型小字/稀有度馆印/瓦片编号已随 09-23「照片墙上只有画+名字」拍板移除 */
+/* 悬停：照片从墙上抬起（整卡上浮+落影加深），静态无 3D 变形 */
+body.cardlib-open #overlay .photo-studio-v3 .lib-item:hover .studio-photo-paper {
+  box-shadow:
+    0 2px 0 rgba(96,86,70,.6),
+    0 4px 0 rgba(38,30,22,.3),
+    var(--photo-shadow-x,0) calc(var(--photo-shadow-y,16px) + 4px) calc(var(--photo-shadow-blur,28px) + 6px) rgba(10,4,3,.6),
+    inset 1px 1px 0 rgba(255,255,255,.6),
+    0 0 0 1px rgba(212,175,122,.5);
+}
+/* 选中=射灯打亮：金线框+暖光晕（静态样式，不碰 09-08 禁动画） */
+body.cardlib-open #overlay .photo-studio-v3 .lib-item.selected .studio-photo-paper {
+  border-color:var(--studio-gold);
+  box-shadow:0 13px 18px rgba(0,0,0,.5),0 0 0 2px rgba(212,175,122,.42),0 0 22px rgba(255,214,168,.32);
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-photo:focus-visible {
+  outline:2px dashed #c3d8d4!important;
+  outline-offset:2px!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-load-more {
+  grid-column:1/-1;
+  justify-self:center;
+  min-width:180px;
+  min-height:42px;
+  margin:4px 0 8px;
+  padding:0 18px;
+  border:1px solid rgba(212,175,122,.45);
+  border-radius:2px;
+  color:var(--studio-gold-soft);
+  background:rgba(29,21,18,.82);
+  font:600 11px var(--font-ui);
+  letter-spacing:.08em;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-load-more b { color:var(--studio-gold-soft); }
+body.cardlib-open #overlay .photo-studio-v3 .clib-empty {
+  grid-column:1/-1;
+  width:min(480px,90%);
+  padding:42px 20px!important;
+  border:1px dashed rgba(212,175,122,.35)!important;
+  /* 空态=照相馆静物插画（相机与油灯等着照片），暗化层保文字 */
+  background:
+    linear-gradient(180deg, rgba(18,9,8,.52), rgba(14,7,6,.72)),
+    url('../assets/ui/photo-studio/empty.webp') center/cover no-repeat,
+    rgba(18,9,8,.9)!important;
+  color:var(--studio-muted)!important;
+  text-align:center;
+}
+
+body.cardlib-open #overlay .photo-studio-v3 .library-inspector {
+  min-height:0;
+  overflow-y:auto;
+  padding:14px;
+  border:1px solid rgba(212,175,122,.3);
+  /* 选片台台面：desk 生图按高撑满后竖条带，定位 top 让绒布桌沿与油灯黄铜落在面板上部
+     （「选片台」标题正后方），暗化自上而下加重保中下部文字可读 */
+  background:
+    linear-gradient(180deg, rgba(24,13,11,.46), rgba(18,9,8,.64) 42%, rgba(14,7,6,.86)),
+    url('../assets/ui/photo-studio/desk.webp') center top/cover no-repeat,
+    linear-gradient(165deg,#221512,#150c0a)!important;
+  box-shadow:0 18px 36px rgba(0,0,0,.24);
+  scrollbar-width:thin;
+}
+/* 选片台牌匾（09-23 出图落地）：木牌匾托底替代裸文字+金线，与页眉金翼同批装饰件 */
+body.cardlib-open #overlay .photo-studio-v3 .studio-inspector-head {
+  display:flex;
+  justify-content:center;
+  padding:0 0 10px;
+  border-bottom:1px solid rgba(212,175,122,.16);
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-inspector-head b {
+  display:inline-block;
+  padding:11px 30px;
+  background:url('../assets/ui/photo-studio/plaque.webp') no-repeat center/100% 100%;
+  color:#f0d9a8;
+  font:700 15px var(--serif);
+  letter-spacing:4px;
+  text-shadow:0 1px 3px rgba(0,0,0,.8);
+}
+body.cardlib-open #overlay .photo-studio-v3 .library-preview {
+  margin:0!important;
+  padding:14px 0 0!important;
+  border:0!important;
+  text-align:left!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-frame {
+  display:flex;
+  justify-content:center;
+  padding:4px 10px 12px;
+}
+/* 选片台上是一张放大照片（09-23 拍板：v3 战斗卡框退出这一页）——相纸语言与墙面瓦片同源 */
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-paper {
+  display:block;
+  width:100%;
+  max-width:240px;
+  margin:0 auto;
+  padding:7px 7px 12px;
+  border:1px solid var(--studio-paper-edge);
+  background:
+    linear-gradient(102deg,rgba(255,252,240,.2),transparent 26% 74%,rgba(92,78,56,.12)),
+    linear-gradient(145deg,var(--studio-paper-light),var(--studio-paper));
+  box-shadow:
+    0 2px 0 rgba(96,86,70,.6),
+    0 5px 0 rgba(38,30,22,.3),
+    0 18px 30px rgba(10,4,3,.55),
+    inset 1px 1px 0 rgba(255,255,255,.6);
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-paper .studio-photo-art { font-size:15px; }
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-copy {
+  padding:11px 4px 0;
+  border-top:1px solid rgba(212,175,122,.16);
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-copy h3 {
+  margin:0 0 7px!important;
+  color:var(--studio-text);
+  font:400 20px var(--serif);
+  letter-spacing:3px;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-copy .pv-hint {
+  margin:0!important;
+  min-height:0!important;
+  color:#ababab!important;
+  font-size:11px!important;
+  line-height:1.7!important;
+  text-align:left;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-zoom {
+  width:100%;
+  min-height:40px;
+  margin-top:12px;
+  border:1px solid rgba(212,175,122,.5);
+  border-radius:2px;
+  background:linear-gradient(180deg,rgba(212,175,122,.14),rgba(37,27,20,.6));
+  color:var(--studio-gold-soft);
+  font:700 11px var(--font-ui);
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-edit-actions {
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:7px;
+  margin-top:8px;
+  padding-top:8px;
+  border-top:1px dashed rgba(199,155,255,.22);
+}
+
+#cardZoom .cz-close {
+  position:absolute;
+  z-index:6;
+  top:max(18px,env(safe-area-inset-top));
+  right:max(18px,env(safe-area-inset-right));
+  width:44px;
+  height:44px;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(221,232,235,.32);
+  border-radius:50%;
+  color:#edf4f5;
+  background:rgba(8,18,25,.82);
+  box-shadow:0 8px 24px rgba(0,0,0,.35);
+  cursor:pointer;
+}
+/* ============ 影廊批次三：大图弹层归队（看片灯箱）============
+   #cardZoom 是全局组件（战斗/背包共用），本段全部 body.cardlib-open 前缀 scoped，
+   其他入口的冷蓝灯箱不受影响。语言：暗房暖黑 + 照片背后一圈灯箱金晕 + 黄铜关闭钮。 */
+body.cardlib-open #cardZoom .cz-backdrop {
+  background:
+    radial-gradient(110% 62% at 50% -12%, rgba(255,216,170,.10), transparent 56%),
+    radial-gradient(120% 78% at 50% 114%, rgba(90,28,36,.38), transparent 62%),
+    rgba(16,8,6,.84);
+}
+body.cardlib-open #cardZoom .cz-card .hs-card {
+  box-shadow:
+    0 26px 84px rgba(0,0,0,.72),
+    0 0 72px rgba(212,175,122,.30),
+    0 0 0 1px rgba(212,175,122,.28)!important;
+}
+body.cardlib-open #cardZoom .cz-close {
+  border-color:rgba(212,175,122,.45);
+  color:var(--studio-gold-soft,#ecd9b0);
+  background:rgba(29,21,18,.82);
+}
+/* cross 是 PNG 位图（颜色烧死在图里），卡牌库内用静态染色链染成黄铜金 */
+body.cardlib-open #cardZoom .cz-close .ic {
+  filter:grayscale(1) brightness(1.55) sepia(1) saturate(2.6) hue-rotate(-8deg);
+}
+body.cardlib-open #cardZoom .cz-hint {
+  color:#b3a58c;
+  letter-spacing:2.4px;
+}
+/* 快门白闪（批次四，09-20 老板反馈收敛）：从全屏近纯白降到中心轻微曝光感，
+   峰值合成透明度 ~0.4 且快速向边缘衰减，只动 opacity。
+   cz-flash span 是 ui.js 无条件渲染的，其他入口无本段样式=透明无感 */
+@keyframes czFlash { 0% { opacity:0; } 14% { opacity:.85; } 100% { opacity:0; } }
+body.cardlib-open #cardZoom .cz-flash {
+  position:absolute;
+  inset:0;
+  z-index:5;
+  pointer-events:none;
+  background:radial-gradient(circle at 50% 40%, rgba(255,244,214,.45), rgba(255,238,204,.24) 32%, transparent 60%);
+  animation:czFlash .42s ease-out .05s 1 both;
+}
+/* 长按大图 600ms 看底片（批次四彩蛋）：负片是一次性 class 切换（cz-neg，ui.js 挂），
+   非逐帧 filter 动画，不碰性能铁律 */
+body.cardlib-open #cardZoom.cz-neg .cz-card .hsc-art img {
+  filter:invert(1) hue-rotate(180deg) sepia(.12);
+}
+/* 背签存档章（批次四）：有馆方记录的背签右下角盖一枚斜红章（纯装饰，不挡输入） */
+body.cardlib-open #cardZoom .cz-note.has {
+  position:relative;
+}
+body.cardlib-open #cardZoom .cz-note.has::after {
+  content:'存档';
+  position:absolute;
+  right:16px;
+  bottom:12px;
+  width:44px;
+  height:44px;
+  display:grid;
+  place-items:center;
+  border:2px solid rgba(174,54,44,.55);
+  border-radius:50%;
+  color:rgba(174,54,44,.66);
+  font:700 12px/1 var(--serif);
+  letter-spacing:3px;
+  text-indent:3px;
+  transform:rotate(-9deg);
+  box-shadow:inset 0 0 0 1.5px rgba(174,54,44,.3);
+  pointer-events:none;
+}
+#cardZoom .cz-close:hover,
+#cardZoom .cz-close:focus-visible {
+  color:#f4e3c2;
+  border-color:rgba(212,175,122,.7);
+  outline:2px solid rgba(212,175,122,.8);
+  outline-offset:3px;
+}
+/* 背签相纸视觉：editable（卡牌库可编辑背签）恒有相纸底——空内容也要看得见输入区
+   （09-20 老板反馈「备注功能消失」：曾把视觉错捆在 has=有内容上，空备注整块隐身）；
+   has 另承载存档章（跟随真实内容，见下方 ::after） */
+#cardZoom .cz-note.has,
+#cardZoom .cz-note.editable {
+  width:min(620px,90%)!important;
+  box-sizing:border-box;
+  display:block!important;
+  padding:13px 18px 15px!important;
+  border:1px solid rgba(91,77,50,.72)!important;
+  border-radius:2px!important;
+  /* 背签=生图相纸背面（金线框+角花），暗化极轻保证手写体文字可读 */
+  background:
+    linear-gradient(180deg, rgba(236,232,224,.35), rgba(216,210,198,.5)),
+    url('../assets/ui/photo-studio/back.webp') center/cover no-repeat,
+    linear-gradient(165deg,rgba(231,224,198,.98),rgba(183,177,155,.98))!important;
+  color:#302c25!important;
+  box-shadow:0 14px 32px rgba(0,0,0,.48),inset 0 0 22px rgba(88,71,43,.08)!important;
+  transform:rotate(-.35deg);
+}
+#cardZoom .cz-note.has .cz-note-tag,
+#cardZoom .cz-note.editable .cz-note-tag {
+  display:flex;
+  padding:0 0 7px!important;
+  margin:0 0 7px;
+  border-bottom:1px solid rgba(91,77,50,.24);
+  color:#75592f!important;
+  font-size:12px!important;
+  letter-spacing:.18em!important;
+}
+#cardZoom .cz-note.editable {
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr);
+  gap:8px!important;
+  cursor:text;
+}
+#cardZoom .cz-note-input {
+  width:100%;
+  min-height:88px;
+  box-sizing:border-box;
+  resize:vertical;
+  padding:10px 12px;
+  border:1px dashed rgba(91,77,50,.36);
+  border-radius:2px;
+  background:rgba(255,252,238,.28);
+  color:#302c25;
+  outline:none;
+  font:16px/1.75 var(--font-ui); /* 09-25 小字场景弃 serif：栈尾 SimSun 点阵化发虚 */
+}
+#cardZoom .cz-note-input:focus {
+  border-style:solid;
+  border-color:rgba(117,89,47,.75);
+  background:rgba(255,252,238,.46);
+  box-shadow:0 0 0 3px rgba(117,89,47,.1);
+}
+#cardZoom .cz-note-status {
+  justify-self:end;
+  color:rgba(70,62,48,.58);
+  font:10px/1.2 var(--font-ui);
+  letter-spacing:.12em;
+}
+
+/* ---- 旧版段落（档案馆/画廊版）遗留青色规则缝隙收编：同名属性后者胜，逐点覆盖 ---- */
+body.cardlib-open #overlay .photo-studio-v3 .library-head > .pg-close:hover {
+  color:var(--studio-gold-soft)!important; border-color:rgba(212,175,122,.55)!important;
+  background:rgba(212,175,122,.1)!important; }
+body.cardlib-open #overlay .photo-studio-v3 .clib-search:focus,
+body.cardlib-open #overlay .photo-studio-v3 .pg-select:focus {
+  border-color:#d9bb82!important; background-color:#243734!important;
+  box-shadow:0 0 0 2px rgba(217,187,130,.24)!important;
+  outline:2px solid #d9bb82cc!important; outline-offset:2px!important; }
+body.cardlib-open #overlay .photo-studio-v3 #libRar,
+body.cardlib-open #overlay .photo-studio-v3 #libCls { border-left:2px solid rgba(212,175,122,.36)!important; }
+
+@media(max-width:1100px) {
+  body.cardlib-open #overlay .photo-studio-v3 .clib-main {
+    grid-template-columns:minmax(0,1fr)!important;
+  }
+  body.cardlib-open #overlay .photo-studio-v3 .library-inspector { display:none; }
+}
+@media(max-width:820px) {
+  body.cardlib-open #overlay .photo-studio-v3 .library-head {
+    grid-template-columns:minmax(0,1fr) auto!important;
+    grid-template-areas:'title close' 'count count' 'tools tools'!important;
+  }
+  body.cardlib-open #overlay .photo-studio-v3 .clib-count {
+    justify-self:start;
+    border-left:0;
+    padding-left:0;
+    gap:6px;
+  }
+  body.cardlib-open #overlay .photo-studio-v3 .studio-filterbar {
+    grid-template-columns:minmax(0,1fr) auto;
+  }
+  body.cardlib-open #overlay .photo-studio-v3 .clib-tabs { grid-column:1/-1; }
+  body.cardlib-open #overlay .photo-studio-v3 .lib-grid {
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  }
+}
+@media(max-width:600px) {
+  body.cardlib-open #overlay .photo-studio-v3 .library-head {
+    padding:12px 16px 10px!important;
+  }
+  body.cardlib-open #overlay .photo-studio-v3 .library-tools { flex-wrap:wrap; }
+  body.cardlib-open #overlay .photo-studio-v3 .studio-search { flex-basis:100%; }
+  body.cardlib-open #overlay .photo-studio-v3 .library-tools>.pg-select { flex:1; }
+  body.cardlib-open #overlay .photo-studio-v3 .studio-filterbar { padding:7px 16px; }
+  body.cardlib-open #overlay .photo-studio-v3 .clib-main { padding:10px 12px 14px!important; }
+  body.cardlib-open #overlay .photo-studio-v3 .lib-grid {
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    gap:6px 4px!important;
+    padding:8px 4px!important;
+  }
+  body.cardlib-open #overlay .photo-studio-v3 .lib-item { padding:8px 1px 2px!important; }
+  body.cardlib-open #overlay .photo-studio-v3 .studio-photo-caption b { font-size:12px; }
+  #cardZoom .cz-close { top:12px; right:12px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  body.cardlib-open #overlay .photo-studio-v3 .lib-item,
+  body.cardlib-open #overlay .photo-studio-v3 .studio-photo-paper { transition:none!important; }
+}
+/* ============ 照相馆 4.3：信息层级与工具行质感（2026-09-23 批）============
+   ①选片台分组排版+按钮贴底稳重心 ②搜索放大镜/下拉定制箭头 ④费用=冰蓝冷色锚点
+   ⑤相纸 grain 层 ⑦页签内衬。全部纯 CSS，grain 图=程序生成 paper-grain.png。 */
+/* —— ① 选片台：费用锚点 + 类型/稀有度 chip + 词条行分组 —— */
+body.cardlib-open #overlay .photo-studio-v3 .library-inspector {
+  display:flex;
+  flex-direction:column;
+}
+body.cardlib-open #overlay .photo-studio-v3 .library-preview {
+  flex:1 1 auto;
+  min-height:0;
+  display:flex;
+  flex-direction:column;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-copy {
+  flex:1 1 auto;
+  display:flex;
+  flex-direction:column;
+}
+body.cardlib-open #overlay .photo-studio-v3 .pv-meta {
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:6px;
+  margin:0!important;
+}
+/* ④ 冷色锚点：全页唯一冰蓝——费用数字（炉石蓝水晶的同位角色） */
+body.cardlib-open #overlay .photo-studio-v3 .pv-cost {
+  font:700 13px/1 var(--font-ui);
+  letter-spacing:.04em;
+  color:var(--studio-ice);
+}
+body.cardlib-open #overlay .photo-studio-v3 .pv-chip {
+  padding:1.5px 7px;
+  border:1px solid rgba(212,175,122,.28);
+  border-radius:2px;
+  background:rgba(29,21,18,.66);
+  color:#c9bfae;
+  font-size:10.5px;
+  letter-spacing:.04em;
+}
+body.cardlib-open #overlay .photo-studio-v3 .pv-terms {
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:7px;
+  margin:8px 0 0;
+  color:#ababab;
+  font-size:11px;
+  line-height:1.5;
+}
+body.cardlib-open #overlay .photo-studio-v3 .pv-terms b { font-weight:700; }
+body.cardlib-open #overlay .photo-studio-v3 .pv-terms .dmg-num { color:#e08a7d; }
+body.cardlib-open #overlay .photo-studio-v3 .pv-terms i {
+  display:inline-block;
+  width:1px;
+  height:10px;
+  background:rgba(212,175,122,.3);
+}
+/* 按钮贴底：文字重心压住右栏下半的空 */
+body.cardlib-open #overlay .photo-studio-v3 .studio-zoom { margin-top:auto; }
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-copy .studio-edit-actions { margin-top:10px; }
+/* —— ② 工具行：搜索放大镜（纯 CSS 画）+ 下拉自绘箭头 —— */
+body.cardlib-open #overlay .photo-studio-v3 .studio-search { position:relative; }
+body.cardlib-open #overlay .photo-studio-v3 .studio-search::before {
+  content:'';
+  position:absolute;
+  left:13px;
+  top:50%;
+  width:10px;
+  height:10px;
+  margin-top:-6px;
+  border:1.5px solid #8a7d6a;
+  border-radius:50%;
+  pointer-events:none;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-search::after {
+  content:'';
+  position:absolute;
+  left:23px;
+  top:50%;
+  width:6px;
+  height:1.5px;
+  background:#8a7d6a;
+  transform:rotate(45deg);
+  transform-origin:left center;
+  pointer-events:none;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-search .clib-search { padding-left:34px!important; }
+body.cardlib-open #overlay .photo-studio-v3 .library-tools>.pg-select {
+  appearance:none!important;
+  -webkit-appearance:none!important;
+  padding-right:26px!important;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23d4af7a' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E")!important;
+  background-repeat:no-repeat!important;
+  background-position:right 10px center!important;
+}
+/* —— ⑦ 页签区浅内衬：把文字页签"框"进结构里 —— */
+body.cardlib-open #overlay .photo-studio-v3 .clib-tabs {
+  background:rgba(255,250,238,.03);
+  border:1px solid rgba(212,175,122,.1);
+  border-radius:2px;
+  padding:2px;
+}
+/* —— ⑤ 纸纹 grain：::after 复用，multiply 低透明（照片=银盐颗粒/白边=纸纤维）—— */
+body.cardlib-open #overlay .photo-studio-v3 .studio-photo-paper::after {
+  content:'';
+  position:absolute;
+  z-index:3;
+  inset:0;
+  border-radius:2px;
+  background:url('../assets/ui/photo-studio/paper-grain.png') repeat;
+  background-size:128px;
+  mix-blend-mode:multiply;
+  opacity:.32;
+  pointer-events:none;
+}
+/* ============ 照相馆 4.2：留白与选片台填满（2026-09-23 零新增美术批次）============
+   老板令：界面太挤、两侧要留空白（先出预览认可 56px 档）；选片台大片空白要填内容。
+   仅 ≥901px 生效——窄屏沿用既有响应式 padding（1280 档 30px / 900 档 18px 不动）。 */
+@media(min-width:901px) {
+  body.cardlib-open #overlay .photo-studio-v3 .library-head,
+  body.cardlib-open #overlay .photo-studio-v3 .studio-filterbar,
+  body.cardlib-open #overlay .photo-studio-v3 .studio-active-filters,
+  body.cardlib-open #overlay .photo-studio-v3 .clib-main {
+    padding-left:128px!important;
+    padding-right:128px!important;
+  }
+  body.cardlib-open #overlay .photo-studio-v3 .lib-grid { padding-left:4px!important; padding-right:4px!important; }
+}
+/* 选片台填满（E）：效果全文 + 藏品编号 + 备注预览——数据全部现成（c.desc/photoNo/photoNoteFor） */
+body.cardlib-open #overlay .photo-studio-v3 .library-inspector { overflow-y:auto; scrollbar-width:thin; }
+/* 选片台描述富文本（09-23：与卡面 descRich 同款三色——数字 Georgia 金 / 行首关键词金 / 术语冰蓝；
+   data-term 词条由 term-tips 全局委托弹触摸讲解，与战斗内一致） */
+body.cardlib-open #overlay .photo-studio-v3 .pv-desc .d-num {
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:1.18em;
+  font-weight:600;
+  color:#ecc985;
+}
+body.cardlib-open #overlay .photo-studio-v3 .pv-desc .d-kw {
+  color:#d8b878;
+  font-weight:700;
+  font-style:normal;
+}
+body.cardlib-open #overlay .photo-studio-v3 .pv-desc .d-term {
+  color:#8fd0e8;
+  font-style:normal;
+}
+body.cardlib-open #overlay .photo-studio-v3 .pv-desc .d-term[data-term] {
+  cursor:help;
+  border-bottom:1px dotted rgba(143,208,232,.45);
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-copy .pv-no {
+  margin:8px 0 0;
+  color:#b7a996;
+  font:600 12px/1.4 var(--font-ui);
+  letter-spacing:.12em;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-copy .pv-note {
+  margin:9px 0 0;
+  padding:8px 10px;
+  border:1px dashed rgba(212,175,122,.35);
+  background:rgba(212,175,122,.07);
+  color:#e7dcc4;
+  font:400 12px/1.6 var(--font-ui); /* 09-25 12px 小字弃 serif：栈尾 SimSun 点阵化发虚 */
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-copy .pv-note b {
+  display:block;
+  margin-bottom:3px;
+  color:var(--studio-gold);
+  font:700 9px/1.4 var(--font-ui);
+  letter-spacing:.28em;
+}
+/* ============ 照相馆 4.4：筛选提级 + 选片台导航 + 等级装饰（2026-09-23 批）============
+   ②高级筛选提级平铺 ①选片台翻看导航/标签体系/实底主按钮 类型徽章恢复
+   工具按钮主次 ⑩回顶 稀有度夹子分档（CSS 换色，零素材）。 */
+/* —— ② 筛选栏平铺：稀有度/人物两下拉直接可见，弃 details 折叠 —— */
+body.cardlib-open #overlay .photo-studio-v3 .advanced-row {
+  display:flex;
+  gap:6px;
+  min-width:0;
+}
+body.cardlib-open #overlay .photo-studio-v3 .advanced-row .pg-select {
+  appearance:none!important;
+  -webkit-appearance:none!important;
+  min-height:33px;
+  padding:0 24px 0 9px!important;
+  border:1px solid rgba(212,175,122,.22);
+  border-radius:2px;
+  background:var(--studio-control)!important;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23d4af7a' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E")!important;
+  background-repeat:no-repeat!important;
+  background-position:right 8px center!important;
+  color:#e8dfd0;
+  font-size:11.5px;
+  box-shadow:0 2px 5px rgba(20,10,6,.3);
+}
+body.cardlib-open #overlay .photo-studio-v3 .advanced-row .pg-select:hover {
+  border-color:rgba(212,175,122,.6);
+}
+/* —— ① 选片台：标签/值两层 —— */
+body.cardlib-open #overlay .photo-studio-v3 .pv-label {
+  color:#8a7d6a;
+  font-size:10px;
+  letter-spacing:.14em;
+}
+body.cardlib-open #overlay .photo-studio-v3 .pv-meta { gap:7px; }
+/* —— 翻看导航：上一片 / 位置 / 下一片（主按钮上方一行） —— */
+body.cardlib-open #overlay .photo-studio-v3 .pv-nav {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  margin-top:12px;
+}
+body.cardlib-open #overlay .photo-studio-v3 .pv-navbtn {
+  flex:1;
+  min-height:38px;
+  border:1px solid rgba(212,175,122,.3);
+  border-radius:2px;
+  background:rgba(29,21,18,.55);
+  color:var(--studio-gold-soft);
+  font:600 13px var(--font-ui);
+  letter-spacing:.06em;
+}
+body.cardlib-open #overlay .photo-studio-v3 .pv-navbtn:hover:not(:disabled) {
+  border-color:#d9bb82;
+  background:#243734;
+  color:#e4efec;
+}
+body.cardlib-open #overlay .photo-studio-v3 .pv-navbtn:disabled {
+  opacity:1;
+  color:#a99d8b;
+  border-color:rgba(169,157,139,.28);
+  background:rgba(20,15,12,.72);
+  box-shadow:none;
+  cursor:not-allowed;
+}
+body.cardlib-open #overlay .photo-studio-v3 .pv-pos {
+  flex:0 0 auto;
+  color:var(--studio-muted);
+  font:600 10.5px var(--font-ui);
+  letter-spacing:.1em;
+  font-variant-numeric:tabular-nums;
+}
+/* —— 主操作实底黄铜：全页唯一实底按钮 —— */
+body.cardlib-open #overlay .photo-studio-v3 .studio-zoom {
+  width:100%;
+  min-height:42px;
+  margin-top:8px;
+  border:1px solid var(--studio-brass-lo);
+  border-radius:2px;
+  background:linear-gradient(180deg,var(--studio-brass-hi),var(--studio-brass) 55%,var(--studio-brass-lo))!important;
+  color:#241708!important;
+  font:800 12.5px var(--font-ui)!important;
+  letter-spacing:.12em;
+  box-shadow:0 3px 8px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.5);
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-zoom:hover {
+  filter:brightness(1.06);
+}
+/* 编号降权：小字靠边，不与效果文案抢 */
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-copy .pv-no { opacity:1; }
+/* —— 类型徽章恢复（瓦片名字下方，09-23「起码保留类型标注」） —— */
+body.cardlib-open #overlay .photo-studio-v3 .type-badge {
+  justify-self:center;
+  display:inline-block;
+  padding:1px 8px;
+  border:1px solid rgba(117,89,47,.55);
+  border-radius:999px;
+  background:rgba(255,252,238,.5);
+  color:#6a5c48;
+  font:600 10px/1.5 var(--font-ui);
+  letter-spacing:.12em;
+  white-space:nowrap;
+}
+/* —— 工具按钮主次：导出/编辑退幽灵（金底只留给激活态与选片台主按钮） —— */
+body.cardlib-open #overlay .photo-studio-v3 .library-tools>.hs-btn {
+  background:rgba(29,21,18,.35)!important;
+  border-color:rgba(212,175,122,.25)!important;
+  color:#cfc4b2!important;
+  box-shadow:none!important;
+  font-weight:600;
+}
+body.cardlib-open #overlay .photo-studio-v3 .library-tools>.hs-btn:hover {
+  background:rgba(46,34,24,.7)!important;
+  border-color:rgba(212,175,122,.55)!important;
+  color:var(--studio-gold-soft)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .library-tools>.studio-edit-toggle.on {
+  background:linear-gradient(180deg,var(--studio-brass-hi),var(--studio-brass))!important;
+  color:#241708!important;
+  border-color:var(--studio-brass-lo)!important;
+}
+/* ============ 照相馆 4.5：区域补框（2026-09-23 A-F 清单收口，全纯 CSS）============
+   A 卡墙外框（双线+四角 L 角标）/ B 标题下衬线 / E7 计数铭牌 / E8 筛选栏两端收头
+   E5 相纸内衬金线 / F 名字压印。 */
+/* A 卡墙外框：内缘金双线（在原投影列表上追加，暗部保留） */
+body.cardlib-open #overlay .photo-studio-v3 .clib-main {
+  box-shadow:
+    inset 0 18px 40px rgba(0,0,0,.3),
+    inset 0 -28px 50px rgba(0,0,0,.35),
+    inset 0 0 0 1px rgba(212,175,122,.2),
+    inset 0 0 0 4px rgba(0,0,0,0),
+    inset 0 0 0 5px rgba(212,175,122,.1)!important;
+}
+/* A 四角 L 角标：::before 八笔线性渐变画四角（::after 已被底部渐隐占用） */
+body.cardlib-open #overlay .photo-studio-v3 .clib-main::before {
+  content:'';
+  position:absolute;
+  inset:9px;
+  z-index:3;
+  pointer-events:none;
+  opacity:.55;
+  background:
+    linear-gradient(#d4af7a,#d4af7a) left top/16px 1.5px no-repeat,
+    linear-gradient(#d4af7a,#d4af7a) left top/1.5px 16px no-repeat,
+    linear-gradient(#d4af7a,#d4af7a) right top/16px 1.5px no-repeat,
+    linear-gradient(#d4af7a,#d4af7a) right top/1.5px 16px no-repeat,
+    linear-gradient(#d4af7a,#d4af7a) left bottom/16px 1.5px no-repeat,
+    linear-gradient(#d4af7a,#d4af7a) left bottom/1.5px 16px no-repeat,
+    linear-gradient(#d4af7a,#d4af7a) right bottom/16px 1.5px no-repeat,
+    linear-gradient(#d4af7a,#d4af7a) right bottom/1.5px 16px no-repeat;
+}
+/* E7 计数铭牌：馆藏/陈列从裸文字升为金边暗底小铭牌 */
+body.cardlib-open #overlay .photo-studio-v3 .clib-count {
+  background:rgba(29,21,18,.6);
+  border:1px solid rgba(212,175,122,.3)!important;
+  border-radius:2px;
+  padding:6px 14px!important;
+  box-shadow:0 2px 6px rgba(0,0,0,.4),inset 0 1px rgba(255,255,255,.05);
+}
+/* E8 筛选栏两端收头：左右各一条金竖线（box-shadow 追加不掀原投影） */
+body.cardlib-open #overlay .photo-studio-v3 .studio-filterbar {
+  box-shadow:inset 0 1px rgba(255,255,255,.05),inset 0 -1px rgba(0,0,0,.4),
+    inset 1px 0 0 rgba(212,175,122,.38),inset -1px 0 0 rgba(212,175,122,.38)!important;
+}
+/* E5 相纸内衬金线：outline 内缩圈（独立属性，不被 hover/选中态的 box-shadow 覆盖） */
+body.cardlib-open #overlay .photo-studio-v3 .studio-photo-paper {
+  outline:1px solid rgba(212,175,122,.42);
+  outline-offset:-3px;
+}
+/* F 名字压印：白纸上凸字（纸面反向高光） */
+body.cardlib-open #overlay .photo-studio-v3 .studio-photo-caption b {
+  text-shadow:0 1px 0 rgba(255,255,255,.55);
+}
+/* ============ 照相馆 4.6：选片台字号 + 顶部收敛 + 稀有度特殊名 + 相角贴（09-23）============ */
+/* 选片台整体提字号（老板：字太小）——标签/chip/词条/描述/编号/备注/导航/主按钮全线 +1.5~2px */
+body.cardlib-open #overlay .photo-studio-v3 .pv-label { font-size:12.5px; }
+body.cardlib-open #overlay .photo-studio-v3 .pv-cost { font-size:18px; }
+body.cardlib-open #overlay .photo-studio-v3 .pv-chip {
+  padding:2px 8px;
+  font-size:12.5px;
+  letter-spacing:.05em;
+}
+body.cardlib-open #overlay .photo-studio-v3 .pv-terms { font-size:13px; }
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-copy .pv-note { font-size:13px; }
+body.cardlib-open #overlay .photo-studio-v3 .pv-navbtn { min-height:38px; font-size:13px; }
+body.cardlib-open #overlay .photo-studio-v3 .pv-pos { font-size:12px; }
+body.cardlib-open #overlay .photo-studio-v3 .studio-zoom { min-height:46px; font-size:14px; }
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-copy .pv-hint { font-size:12.5px!important; }
+/* 顶部收敛：下拉组加内衬底板，与左侧页签区形成对称两组（不再是散控件） */
+body.cardlib-open #overlay .photo-studio-v3 .advanced-row {
+  background:rgba(255,250,238,.03);
+  border:1px solid rgba(212,175,122,.1);
+  border-radius:2px;
+  padding:2px;
+}
+/* 传说/棱彩照片名称保持纸面深色墨字，稀有度仍由夹子与角饰表达。 */
+body.cardlib-open #overlay .photo-studio-v3 .rv4 .studio-photo-caption b,
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-paper.rv4 .studio-photo-caption b {
+  color:#68430f;
+  background:none;
+  -webkit-background-clip:border-box;
+  background-clip:border-box;
+  text-shadow:none!important;
+  filter:none;
+  font-weight:700;
+  letter-spacing:.02em;
+}
+body.cardlib-open #overlay .photo-studio-v3 .rv7 .studio-photo-caption b,
+body.cardlib-open #overlay .photo-studio-v3 .rv-prism .studio-photo-caption b,
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-paper.rv7 .studio-photo-caption b,
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-paper.rv-prism .studio-photo-caption b {
+  color:#49304e;
+  background:none;
+  -webkit-background-clip:border-box;
+  background-clip:border-box;
+  text-shadow:none!important;
+  filter:none;
+  font-weight:700;
+  letter-spacing:.02em;
+}
+/* ============ 照相馆 4.7：炉石细节第三轮（09-23 老板令三点自查落地）============ */
+/* ① 插画窗画框感：微圆角 + 内衬金双线（炉石画窗对位） */
+body.cardlib-open #overlay .photo-studio-v3 .studio-photo-art {
+  border-radius:3px;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.12),
+    inset 0 0 0 2px rgba(212,175,122,.16),
+    inset 0 0 9px rgba(10,4,2,.1);
+}
+/* ② 控件高光顶线：页签/下拉/按钮上缘 1px 亮线（立体感）；选中态 border 优先级更高不受影响 */
+body.cardlib-open #overlay .photo-studio-v3 .type-tab,
+body.cardlib-open #overlay .photo-studio-v3 .advanced-row .pg-select,
+body.cardlib-open #overlay .photo-studio-v3 .library-tools>.pg-select,
+body.cardlib-open #overlay .photo-studio-v3 .library-tools>.hs-btn,
+body.cardlib-open #overlay .photo-studio-v3 .pv-navbtn {
+  border-top-color:rgba(255,240,210,.42);
+}
+/* ③ 计数/页签数字 tabular 对齐：跳数不抖 */
+body.cardlib-open #overlay .photo-studio-v3 .clib-count b,
+body.cardlib-open #overlay .photo-studio-v3 .type-tab em,
+body.cardlib-open #overlay .photo-studio-v3 .pv-pos {
+  font-variant-numeric:tabular-nums;
+}
+
+/* 照相馆 4.8：让展墙退后、选中照片成为画面主角。 */
+@media(min-width:1101px) {
+  body.cardlib-open #overlay .photo-studio-v3 .library-tools {
+    width:min(100%,760px);
+    justify-self:end;
+  }
+  body.cardlib-open #overlay .photo-studio-v3 .studio-search { max-width:360px; }
+  body.cardlib-open #overlay .photo-studio-v3 .studio-search .clib-search { min-height:38px!important; }
+  body.cardlib-open #overlay .photo-studio-v3 .library-tools>.pg-select,
+  body.cardlib-open #overlay .photo-studio-v3 .library-tools>.hs-btn { min-height:38px!important; }
+  body.cardlib-open #overlay .photo-studio-v3 .studio-filterbar {
+    min-height:48px;
+    padding-top:4px!important;
+    padding-bottom:4px!important;
+  }
+  body.cardlib-open #overlay .photo-studio-v3 .clib-main {
+    grid-template-columns:minmax(0,1fr) clamp(390px,33vw,580px)!important;
+    gap:clamp(16px,1.25vw,24px)!important;
+    padding-top:12px!important;
+    padding-bottom:16px!important;
+  }
+  body.cardlib-open #overlay .photo-studio-v3 .lib-grid {
+    gap:22px 18px!important;
+    padding-top:16px!important;
+    padding-bottom:36px!important;
+  }
+  body.cardlib-open #overlay .photo-studio-v3 .studio-preview-paper { max-width:none; }
+  body.cardlib-open #overlay .photo-studio-v3 .library-head {
+    border-bottom-color:rgba(212,175,122,.13)!important;
+    box-shadow:inset 0 -1px rgba(212,175,122,.05),0 2px 8px rgba(0,0,0,.3)!important;
+  }
+  body.cardlib-open #overlay .photo-studio-v3 .studio-filterbar {
+    border-top-color:rgba(212,175,122,.10);
+    border-bottom-color:rgba(212,175,122,.10);
+    box-shadow:inset 0 1px rgba(255,255,255,.025),inset 0 -1px rgba(0,0,0,.24)!important;
+  }
+  body.cardlib-open #overlay .photo-studio-v3 .library-head,
+  body.cardlib-open #overlay .photo-studio-v3 .studio-filterbar,
+  body.cardlib-open #overlay .photo-studio-v3 .studio-active-filters,
+  body.cardlib-open #overlay .photo-studio-v3 .clib-main {
+    padding-left:64px!important;
+    padding-right:64px!important;
+  }
+}
+body.cardlib-open #overlay .photo-studio-v3 .type-tab.on {
+  border-color:transparent!important;
+  background:rgba(212,175,122,.055)!important;
+  box-shadow:inset 0 -2px 0 rgba(212,175,122,.8)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .type-tab {
+  color:#b8ac9b;
+  font:600 12px var(--font-ui);
+}
+body.cardlib-open #overlay .photo-studio-v3 .type-tab em { color:#938575; }
+body.cardlib-open #overlay .photo-studio-v3 .advanced-row {
+  border-color:transparent;
+  background:transparent;
+  padding:0;
+}
+body.cardlib-open #overlay .photo-studio-v3 #libRar,
+body.cardlib-open #overlay .photo-studio-v3 #libCls,
+body.cardlib-open #overlay .photo-studio-v3 #libSort {
+  border-left:1px solid rgba(212,175,122,.22)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .clib-main {
+  box-shadow:inset 0 12px 26px rgba(0,0,0,.28),
+    inset 0 -20px 34px rgba(0,0,0,.3),
+    inset 0 0 0 1px rgba(212,175,122,.08)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .clib-main::before { opacity:.25; }
+body.cardlib-open #overlay .photo-studio-v3 .studio-photo-paper::after { opacity:.13; }
+body.cardlib-open #overlay .photo-studio-v3 .studio-photo-art {
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),
+    inset 0 0 0 2px rgba(212,175,122,.13),
+    inset 0 0 10px rgba(10,4,2,.12);
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-photo-art img {
+  filter:none;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-paper .studio-photo-art img { filter:none; }
+body.cardlib-open #overlay .photo-studio-v3 .type-badge {
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  color:#766c5f;
+  font-size:10px;
+  letter-spacing:.08em;
+}
+body.cardlib-open #overlay .photo-studio-v3 .lib-item.selected .studio-photo-paper {
+  border-color:rgba(212,175,122,.72);
+  box-shadow:0 2px 0 rgba(96,86,70,.6),0 4px 0 rgba(38,30,22,.3),
+    0 17px 24px rgba(10,4,3,.6),0 0 0 1px rgba(212,175,122,.8);
+}
+body.cardlib-open #overlay .photo-studio-v3 .library-inspector {
+  position:relative;
+  background:radial-gradient(ellipse 78% 43% at 50% 27%,rgba(255,222,172,.055),transparent 82%),
+    linear-gradient(180deg,rgba(24,13,11,.48),rgba(18,9,8,.7) 46%,rgba(14,7,6,.88)),
+    url('../assets/ui/photo-studio/desk.webp') center top/cover no-repeat,
+    linear-gradient(165deg,#221512,#150c0a)!important;
+  border-color:rgba(212,175,122,.22);
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-inspector-head {
+  padding-bottom:5px;
+  border-bottom-color:rgba(212,175,122,.09);
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-inspector-head b {
+  padding:6px 18px;
+  font-size:12px;
+  letter-spacing:3px;
+}
+body.cardlib-open #overlay .photo-studio-v3 .library-preview { padding-top:8px!important; }
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-frame { padding:2px 4px 9px; }
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-paper {
+  padding:7px 8px 8px;
+  box-shadow:0 2px 0 rgba(96,86,70,.42),0 4px 0 rgba(38,30,22,.22),
+    0 14px 28px rgba(10,4,3,.42),
+    inset 1px 1px 0 rgba(255,255,255,.6);
+  animation:studioPhotoSettle .22s ease-out both;
+}
+body.cardlib-open #overlay .photo-studio-v3 .library-preview,
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-copy {
+  flex:0 0 auto;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-zoom {
+  margin-top:10px!important;
+  border-color:rgba(212,175,122,.3);
+  background:linear-gradient(180deg,rgba(67,45,31,.9),rgba(30,20,16,.95))!important;
+  color:#e1c394!important;
+  box-shadow:0 2px 5px rgba(0,0,0,.24),inset 0 1px rgba(255,255,255,.05);
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-zoom:hover,
+body.cardlib-open #overlay .photo-studio-v3 .studio-zoom:focus-visible {
+  border-color:rgba(230,195,137,.72);
+  background:linear-gradient(180deg,rgba(91,62,41,.96),rgba(39,26,20,.98))!important;
+  color:#f0d7ab!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-zoom:focus-visible {
+  outline:2px solid rgba(230,195,137,.6);
+  outline-offset:2px;
+}
+@keyframes studioPhotoSettle {
+  from { opacity:.75; transform:translateY(6px); }
+  to { opacity:1; transform:none; }
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-paper .studio-photo-caption {
+  padding:12px 8px 8px;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-paper .studio-photo-caption b {
+  display:block;
+  min-height:0;
+  overflow:visible;
+  overflow-wrap:anywhere;
+  -webkit-line-clamp:unset;
+  -webkit-box-orient:initial;
+  font-size:24px;
+  line-height:1.3;
+  letter-spacing:.02em;
+  color:#2b241d;
+  text-shadow:none;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-copy {
+  padding-top:14px;
+  border-top-color:rgba(212,175,122,.08);
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-copy .pv-desc {
+  display:block;
+  margin:10px 0 0;
+  overflow:visible;
+  overflow-wrap:anywhere;
+  -webkit-line-clamp:unset;
+  -webkit-box-orient:initial;
+  font-size:16px;
+  line-height:1.65;
+  color:#e5dbc9;
+}
+body.cardlib-open #overlay .photo-studio-v3 .pv-terms {
+  margin-top:10px;
+  font-size:13px;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-copy .pv-no {
+  margin-top:8px;
+  color:#b7a996;
+  font-size:12px;
+  opacity:1;
+}
+body.cardlib-open #overlay .photo-studio-v3 .pv-nav { margin-top:12px; }
+@media(min-width:1101px) and (max-width:1399px) {
+  body.cardlib-open #overlay .photo-studio-v3 .studio-photo-caption small { font-size:11.5px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  body.cardlib-open #overlay .photo-studio-v3 .lib-item,
+  body.cardlib-open #overlay .photo-studio-v3 .studio-photo-paper {
+    transition:none!important;
+    animation:none!important;
+  }
+}
+@media(max-width:1100px) {
+  body.cardlib-open #overlay .photo-studio-v3 .library-inspector { display:none!important; }
+}
+/* 照相馆控件状态收口：只覆盖本页，维持相纸与暖棕底色。 */
+body.cardlib-open #overlay .photo-studio-v3 .studio-search,
+body.cardlib-open #overlay .photo-studio-v3 .studio-clear,
+body.cardlib-open #overlay .photo-studio-v3 .type-tab,
+body.cardlib-open #overlay .photo-studio-v3 .advanced-row .pg-select,
+body.cardlib-open #overlay .photo-studio-v3 .library-tools>.pg-select,
+body.cardlib-open #overlay .photo-studio-v3 .library-tools>.hs-btn,
+body.cardlib-open #overlay .photo-studio-v3 .pv-navbtn,
+body.cardlib-open #overlay .photo-studio-v3 .library-head>.pg-close,
+body.cardlib-open #overlay .photo-studio-v3 .studio-zoom {
+  border-radius:2px!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-search .clib-search,
+body.cardlib-open #overlay .photo-studio-v3 .library-tools>.pg-select,
+body.cardlib-open #overlay .photo-studio-v3 .library-tools>.hs-btn,
+body.cardlib-open #overlay .photo-studio-v3 .studio-clear,
+body.cardlib-open #overlay .photo-studio-v3 .type-tab {
+  min-height:40px!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-search .clib-search,
+body.cardlib-open #overlay .photo-studio-v3 .library-tools>.pg-select,
+body.cardlib-open #overlay .photo-studio-v3 .advanced-row .pg-select,
+body.cardlib-open #overlay .photo-studio-v3 .studio-clear,
+body.cardlib-open #overlay .photo-studio-v3 .type-tab,
+body.cardlib-open #overlay .photo-studio-v3 .library-tools>.hs-btn,
+body.cardlib-open #overlay .photo-studio-v3 .pv-navbtn {
+  font-size:13px!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-search .clib-search {
+  padding-right:12px!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .library-tools>.pg-select,
+body.cardlib-open #overlay .photo-studio-v3 .advanced-row .pg-select {
+  padding-right:34px!important;
+  padding-left:10px!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-clear {
+  padding:0 11px;
+  color:#c9bdad;
+  background:var(--studio-control);
+}
+body.cardlib-open #overlay .photo-studio-v3 .type-tab {
+  padding:6px 10px;
+  color:#c9bdad!important;
+  border-color:rgba(212,175,122,.18)!important;
+  background:rgba(29,21,18,.42)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .pv-navbtn { min-height:38px!important; }
+body.cardlib-open #overlay .photo-studio-v3 .type-tab:not(.on):hover,
+body.cardlib-open #overlay .photo-studio-v3 .studio-clear:hover,
+body.cardlib-open #overlay .photo-studio-v3 .advanced-row .pg-select:hover,
+body.cardlib-open #overlay .photo-studio-v3 .library-tools>.pg-select:hover,
+body.cardlib-open #overlay .photo-studio-v3 .library-tools>.hs-btn:hover,
+body.cardlib-open #overlay .photo-studio-v3 .library-head>.pg-close:hover,
+body.cardlib-open #overlay .photo-studio-v3 .pv-navbtn:hover:not(:disabled),
+body.cardlib-open #overlay .photo-studio-v3 .studio-zoom:hover {
+  border-color:#d9bb82!important;
+  background-color:#243734!important;
+  color:#e4efec!important;
+  box-shadow:0 1px 4px rgba(0,0,0,.28)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .type-tab:not(.on):hover,
+body.cardlib-open #overlay .photo-studio-v3 .library-tools>.hs-btn:hover {
+  transform:none!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .type-tab.on,
+body.cardlib-open #overlay .photo-studio-v3 .type-tab.on:hover {
+  color:#f0e4cf!important;
+  border-color:transparent!important;
+  background:rgba(217,187,130,.10)!important;
+  box-shadow:inset 0 -2px 0 #d9bb82!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .type-tab.on em { color:#ecd9b0!important; }
+body.cardlib-open #overlay .photo-studio-v3 .studio-search:focus-within {
+  border-color:#d9bb82!important;
+  outline:2px solid #d9bb82cc!important;
+  outline-offset:2px!important;
+  box-shadow:0 0 0 2px rgba(217,187,130,.22)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-search .clib-search:focus-visible {
+  outline:2px solid #d9bb82cc!important;
+  outline-offset:-3px!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .pg-close:focus-visible,
+body.cardlib-open #overlay .photo-studio-v3 .studio-clear:focus-visible,
+body.cardlib-open #overlay .photo-studio-v3 .advanced-row .pg-select:focus-visible,
+body.cardlib-open #overlay .photo-studio-v3 .library-tools>.pg-select:focus-visible,
+body.cardlib-open #overlay .photo-studio-v3 .library-tools>.hs-btn:focus-visible,
+body.cardlib-open #overlay .photo-studio-v3 .pv-navbtn:focus-visible,
+body.cardlib-open #overlay .photo-studio-v3 .studio-zoom:focus-visible {
+  outline:2px solid #d9bb82cc!important;
+  outline-offset:2px!important;
+  border-color:#d9bb82!important;
+  box-shadow:0 0 0 2px rgba(217,187,130,.22)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .type-tab:focus-visible {
+  outline:2px solid #d9bb82cc!important;
+  outline-offset:-3px!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-clear:active,
+body.cardlib-open #overlay .photo-studio-v3 .type-tab:not(.on):active,
+body.cardlib-open #overlay .photo-studio-v3 .library-head>.pg-close:active,
+body.cardlib-open #overlay .photo-studio-v3 .pv-navbtn:active:not(:disabled),
+body.cardlib-open #overlay .photo-studio-v3 .studio-zoom:active,
+body.cardlib-open #overlay .photo-studio-v3 .library-tools>.hs-btn:active:not(:disabled) {
+  transform:none!important;
+  color:#e4efec!important;
+  border-color:#d9bb82!important;
+  background-color:#1b2e2b!important;
+  box-shadow:inset 0 2px 4px rgba(0,0,0,.45)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-zoom:hover { filter:none!important; }
+body.cardlib-open #overlay .photo-studio-v3 .pv-navbtn:disabled,
+body.cardlib-open #overlay .photo-studio-v3 .pv-navbtn:disabled:hover,
+body.cardlib-open #overlay .photo-studio-v3 .pv-navbtn:disabled:active {
+  opacity:1!important;
+  cursor:not-allowed!important;
+  color:#a99d8b!important;
+  border-color:rgba(169,157,139,.28)!important;
+  background:rgba(20,15,12,.72)!important;
+  box-shadow:none!important;
+  transform:none!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .lib-item.selected .studio-photo-paper,
+body.cardlib-open #overlay .photo-studio-v3 .lib-cardwrap[aria-current="true"] .studio-photo-paper {
+  border-color:#d9bb82!important;
+  outline:2px solid #d9bb82!important;
+  outline-offset:2px!important;
+  box-shadow:0 0 0 1px rgba(14,8,7,.98),0 13px 18px rgba(0,0,0,.5),
+    0 0 5px rgba(217,187,130,.28)!important;
+}
+@media(max-width:600px) {
+  body.cardlib-open #overlay .photo-studio-v3 .studio-search .clib-search,
+  body.cardlib-open #overlay .photo-studio-v3 .library-tools>.pg-select,
+  body.cardlib-open #overlay .photo-studio-v3 .studio-clear,
+  body.cardlib-open #overlay .photo-studio-v3 .type-tab,
+  body.cardlib-open #overlay .photo-studio-v3 .advanced-row .pg-select {
+    min-height:48px!important;
+  }
+  body.cardlib-open #overlay .photo-studio-v3 .advanced-row { flex-wrap:wrap; }
+  body.cardlib-open #overlay .photo-studio-v3 .advanced-row .pg-select {
+    flex:1 1 135px;
+    min-width:0;
+  }
+}
+
+/* 第五步：照片模式专用背签灯箱；默认战斗/背包 cardHTML 弹层不受影响。 */
+body.cardlib-open #cardZoom.cz-photo {
+  --font-ui:'HarmonyOS Sans SC','HarmonyOS Sans','Noto Sans SC Sub','Noto Sans SC',sans-serif;
+  --serif:'Noto Serif SC','Source Han Serif SC','Songti SC','SimSun','STSong',serif;
+  --studio-paper:#e7dece;
+  --studio-paper-light:#f0e9dc;
+  --studio-paper-edge:rgba(104,87,64,.38);
+  font-family:var(--font-ui);
+  cursor:default;
+  gap:12px;
+  padding:28px 24px 22px;
+  box-sizing:border-box;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-close {
+  border-radius:2px;
+  border-color:rgba(217,187,130,.38);
+  color:#ecd9b0;
+  background:rgba(29,39,36,.92);
+}
+body.cardlib-open #cardZoom.cz-photo .cz-close .ic {
+  filter:grayscale(1) brightness(1.35) sepia(.18) saturate(.7) hue-rotate(125deg);
+}
+body.cardlib-open #cardZoom.cz-photo .cz-close:hover,
+body.cardlib-open #cardZoom.cz-photo .cz-close:focus-visible {
+  border-color:#d9bb82;
+  color:#e4efec;
+  outline:2px solid #d9bb82cc;
+  outline-offset:3px;
+  background:#243734;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-backdrop {
+  background:
+    radial-gradient(110% 62% at 50% -12%,rgba(255,216,170,.045),transparent 56%),
+    radial-gradient(120% 78% at 50% 114%,rgba(90,28,36,.24),transparent 62%),
+    rgba(16,8,6,.86);
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-layout {
+  position:relative;
+  z-index:1;
+  display:grid;
+  grid-template-columns:minmax(0,1.7fr) minmax(300px,.8fr);
+  align-items:center;
+  gap:26px;
+  width:min(1600px,94vw);
+  max-height:calc(100vh - 92px);
+  min-height:0;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-main {
+  min-width:0;
+  min-height:0;
+  display:grid;
+  place-items:center;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-paper {
+  box-sizing:border-box;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+  max-width:100%;
+  max-height:calc(100vh - 110px);
+  padding:14px 14px 10px;
+  border:1px solid var(--studio-paper-edge);
+  border-radius:2px;
+  background:
+    linear-gradient(102deg,rgba(255,252,240,.2),transparent 26% 74%,rgba(92,78,56,.12)),
+    linear-gradient(145deg,var(--studio-paper-light),var(--studio-paper));
+  box-shadow:0 18px 54px rgba(0,0,0,.58),0 3px 8px rgba(0,0,0,.25);
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-image {
+  display:grid;
+  place-items:center;
+  min-width:0;
+  max-width:min(100%,900px);
+  max-height:calc(100vh - 150px);
+  position:relative;
+  z-index:1;
+  transition:transform .38s cubic-bezier(.22,.61,.36,1),opacity .3s ease;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-image.cz-flip {
+  animation:none;
+  transition:transform .38s cubic-bezier(.22,.61,.36,1),opacity .3s ease;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-image img {
+  display:block;
+  width:auto!important;
+  height:auto!important;
+  max-width:100%!important;
+  max-height:calc(100vh - 150px)!important;
+  object-fit:contain!important;
+  border-radius:0;
+  box-shadow:none;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-caption {
+  display:none;
+  max-width:100%;
+  color:#342a20;
+  font:700 15px/1.35 var(--serif);
+  text-align:center;
+  overflow-wrap:anywhere;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-info {
+  box-sizing:border-box;
+  min-width:0;
+  max-height:calc(100vh - 104px);
+  overflow:auto;
+  overscroll-behavior:contain;
+  padding:24px 22px;
+  border:1px solid rgba(194,157,103,.24);
+  border-radius:2px;
+  color:#e5dbc9;
+  background:linear-gradient(145deg,rgba(48,34,26,.96),rgba(27,20,17,.97));
+  box-shadow:inset 0 0 0 1px rgba(255,239,209,.035),0 16px 44px rgba(0,0,0,.38);
+  scrollbar-color:#75604a #241b17;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-title {
+  margin:0 0 18px;
+  color:#f1e5d0;
+  font:700 26px/1.25 var(--serif);
+  overflow-wrap:anywhere;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-details {
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px 8px;
+  margin:0 0 18px;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-detail {
+  display:flex;
+  gap:7px;
+  align-items:baseline;
+  padding:5px 8px;
+  border:1px solid rgba(194,157,103,.15);
+  border-radius:2px;
+  background:rgba(12,9,8,.28);
+  font-size:13px;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-detail span { color:#b8a991; }
+body.cardlib-open #cardZoom.cz-photo .cz-photo-detail b { color:#f0dfbf; font-size:15px; }
+body.cardlib-open #cardZoom.cz-photo .cz-photo-rules {
+  margin:0 0 16px;
+  color:#e5dbc9;
+  font-size:16px;
+  line-height:1.65;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-rules .d-kw { color:#d9b875; }
+body.cardlib-open #cardZoom.cz-photo .cz-photo-rules [data-term] { color:#9bc9c5; }
+body.cardlib-open #cardZoom.cz-photo .cz-note.has,
+body.cardlib-open #cardZoom.cz-photo .cz-note.editable {
+  width:100%!important;
+  max-width:100%;
+  margin:0!important;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-note.has,
+body.cardlib-open #cardZoom.cz-photo .cz-note.editable {
+  background:
+    linear-gradient(180deg,rgba(236,232,224,.62),rgba(216,210,198,.70)),
+    url('../assets/ui/photo-studio/back.webp') center/cover no-repeat,
+    linear-gradient(165deg,rgba(231,224,198,.98),rgba(183,177,155,.98))!important;
+  box-shadow:0 8px 22px rgba(0,0,0,.3),inset 0 0 16px rgba(88,71,43,.06)!important;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-note.has::after {
+  top:10px;
+  right:12px;
+  bottom:auto;
+  width:34px;
+  height:34px;
+  border-width:1px;
+  font-size:10px;
+  box-shadow:inset 0 0 0 1px rgba(174,54,44,.24);
+}
+body.cardlib-open #cardZoom.cz-photo .cz-note.editable .cz-note-tag { padding-right:44px!important; }
+body.cardlib-open #cardZoom.cz-photo .cz-note-status {
+  color:#554938;
+  font-size:12px;
+  font-weight:700;
+  opacity:1;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-note-input { min-height:76px; }
+body.cardlib-open #cardZoom.cz-photo .cz-note-input::placeholder { color:#786f60; opacity:1; }
+body.cardlib-open #cardZoom.cz-photo.cz-neg .cz-photo-image img {
+  filter:invert(1) hue-rotate(180deg) sepia(.12);
+}
+/* 照片的整框 FLIP 由 ui.js 设置来源；默认战斗/背包仍使用 czOut。 */
+body.cardlib-open #cardZoom.cz-photo .cz-photo-paper {
+  transform-origin:center;
+  transition:transform var(--cz-photo-motion-ms,420ms) cubic-bezier(.22,.72,.22,1),
+    opacity var(--cz-photo-motion-ms,420ms) ease;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-info {
+  transition:opacity 260ms ease var(--cz-photo-info-delay,80ms),
+    transform 360ms cubic-bezier(.22,.72,.22,1) var(--cz-photo-info-delay,80ms);
+}
+body.cardlib-open #cardZoom.cz-photo.cz-photo-entering .cz-photo-paper {
+  transform:var(--cz-photo-from-transform,scale(.92));
+  opacity:.25;
+}
+body.cardlib-open #cardZoom.cz-photo.cz-photo-entering .cz-photo-info {
+  opacity:0;
+  transform:translateX(14px);
+}
+body.cardlib-open #cardZoom.cz-photo.cz-photo-closing-to-source .cz-photo-paper {
+  transform:var(--cz-photo-to-transform,scale(.92));
+  opacity:.15;
+}
+body.cardlib-open #cardZoom.cz-photo.cz-photo-closing-fallback .cz-photo-paper {
+  transform:translateY(16px) scale(.94);
+  opacity:0;
+}
+body.cardlib-open #cardZoom.cz-photo.cz-photo-closing .cz-photo-info {
+  opacity:0;
+  transform:translateX(10px);
+  transition-delay:0ms;
+  transition-duration:180ms;
+}
+body.cardlib-open #cardZoom.cz-photo:is(.cz-out,.cz-photo-closing) .cz-backdrop {
+  animation:czFadeOut var(--cz-photo-close-ms,320ms) ease both;
+}
+body.cardlib-open #cardZoom.cz-photo.cz-photo-closing :is(.cz-hint,.cz-close) {
+  opacity:0;
+  transition:opacity 140ms ease;
+}
+body.cardlib-open #cardZoom.cz-photo.cz-out :is(.cz-photo-layout,.cz-photo-paper,.cz-photo-info,.cz-note) {
+  animation:none;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-flash { display:none; }
+body.cardlib-open #cardZoom.cz-photo.cz-photo-reduced :is(.cz-photo-paper,.cz-photo-info) {
+  transition:none;
+}
+@media(max-width:760px) {
+  body.cardlib-open #cardZoom.cz-photo { padding:58px 12px 34px; }
+  body.cardlib-open #cardZoom.cz-photo .cz-photo-layout {
+    grid-template-columns:minmax(0,1fr);
+    align-content:start;
+    align-items:start;
+    gap:14px;
+    width:min(720px,100%);
+    max-height:calc(100vh - 94px);
+    overflow:auto;
+    overscroll-behavior:contain;
+  }
+  body.cardlib-open #cardZoom.cz-photo .cz-photo-paper { max-height:none; padding:9px 9px 7px; }
+  body.cardlib-open #cardZoom.cz-photo .cz-photo-image { max-height:56vh; }
+  body.cardlib-open #cardZoom.cz-photo .cz-photo-image img { max-height:56vh!important; }
+  body.cardlib-open #cardZoom.cz-photo .cz-photo-info { max-height:none; padding:17px 15px; overflow:visible; }
+  body.cardlib-open #cardZoom.cz-photo .cz-photo-title { font-size:22px; margin-bottom:12px; }
+  body.cardlib-open #cardZoom.cz-photo .cz-photo-details { margin-bottom:12px; }
+  body.cardlib-open #cardZoom.cz-photo .cz-photo-rules { font-size:15px; }
+}
+
+/* 统一观看链：展墙的相纸、选片台的装裱与特写的完整工艺框。 */
+body.cardlib-open #overlay .photo-studio-v3 {
+  --studio-control:#1c2822;
+  --studio-control-hi:#293b31;
+  --studio-accent:#a6beb0;
+  --studio-text:#eee7d8;
+  --studio-muted:#b7b4a7;
+  background:linear-gradient(150deg,#1d211b,#101913)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .library-head {
+  background:linear-gradient(180deg,rgba(23,28,23,.94),rgba(17,24,20,.96)),
+    url('../assets/ui/photo-studio/leather-archive-v1.png') center/480px!important;
+  border-bottom-color:rgba(195,174,130,.32)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-filterbar {
+  background:#17211c!important;
+  border-bottom:1px solid rgba(195,174,130,.22)!important;
+  box-shadow:inset 0 1px rgba(235,226,201,.035),0 6px 15px rgba(0,0,0,.16);
+}
+body.cardlib-open #overlay .photo-studio-v3 .clib-main {
+  background:radial-gradient(ellipse at 42% 0,rgba(186,164,116,.055),transparent 60%),
+    linear-gradient(180deg,rgba(10,18,14,.81),rgba(9,15,12,.91)),
+    url('../assets/ui/photo-studio/leather-archive-v1.png') center/640px!important;
+  box-shadow:inset 0 12px 30px rgba(0,0,0,.24)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .clib-main::before { opacity:.1; }
+body.cardlib-open #overlay .photo-studio-v3 .clib-main::after {
+  display:none;
+  background:linear-gradient(transparent,#101912);
+  height:34px;
+}
+body.cardlib-open #overlay .photo-studio-v3 .lib-grid {
+  background:radial-gradient(ellipse at 50% 0,rgba(222,203,154,.035),transparent 70%);
+}
+body.cardlib-open #overlay .photo-studio-v3 .library-inspector,
+body.cardlib-open #cardZoom.cz-photo .cz-photo-info {
+  position:relative;
+  border:1px solid rgba(190,165,116,.42);
+  border-radius:4px;
+  background:linear-gradient(155deg,rgba(28,42,33,.86),rgba(14,25,18,.92)),
+    url('../assets/ui/photo-studio/leather-archive-v1.png') center/420px!important;
+  box-shadow:inset 0 0 0 4px rgba(6,12,8,.5),inset 0 0 0 5px rgba(198,176,130,.14),
+    0 16px 36px rgba(0,0,0,.34);
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-inspector-head {
+  padding:2px 0 12px;
+  border-bottom-color:rgba(195,174,130,.2);
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-inspector-head b {
+  padding:4px 20px;
+  background:none;
+  color:#d8c6a2;
+  font:600 15px/1.5 var(--font-ui);
+  letter-spacing:.22em;
+  text-shadow:0 1px 1px #060c08;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-inspector-head b::before,
+body.cardlib-open #overlay .photo-studio-v3 .studio-inspector-head b::after {
+  content:'◆';
+  display:inline-block;
+  margin:0 12px;
+  font-size:6px;
+  color:#ab976f;
+  vertical-align:middle;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-paper {
+  border:16px solid transparent;
+  border-image:url('../assets/ui/photo-studio/frame-atelier-v1.png') 170 stretch;
+  padding:3px 3px 0;
+  box-shadow:0 12px 22px rgba(0,0,0,.38);
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-paper .studio-photo-caption {
+  padding:8px 3px 7px;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-preview-paper .studio-photo-caption b {
+  font-size:22px;
+  line-height:1.3;
+}
+body.cardlib-open #overlay .photo-studio-v3 :is(.studio-search .clib-search,.library-tools>.pg-select,.advanced-row .pg-select,.studio-clear,.type-tab,.library-tools>.hs-btn,.pv-navbtn) {
+  font-size:15px!important;
+  line-height:1.35!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .type-tab {
+  padding:8px 12px;
+  border-color:transparent!important;
+  background:transparent!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .type-tab em { font-size:11px; opacity:.82; }
+body.cardlib-open #overlay .photo-studio-v3 .type-tab.on {
+  color:#efe8d5!important;
+  background:linear-gradient(180deg,rgba(165,196,176,.1),rgba(165,196,176,.035))!important;
+  box-shadow:inset 0 -2px #a6beb0!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 :is(.studio-search,.pg-select,.studio-clear,.pv-navbtn) {
+  border-color:rgba(190,180,150,.28)!important;
+  background-color:#1b2821!important;
+  color:#dedccc!important;
+  box-shadow:inset 0 1px 0 rgba(241,230,199,.045)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-active-filters {
+  background:#18231c;
+  color:#c0c5b8;
+  font-size:13px;
+}
+body.cardlib-open #overlay .photo-studio-v3 .pg-select option {
+  background:#17231c;
+  color:#eee7d8;
+  font-size:15px;
+}
+body.cardlib-open #overlay .photo-studio-v3 .clib-empty {
+  border-color:rgba(195,174,130,.3)!important;
+  background:linear-gradient(180deg,rgba(12,24,17,.64),rgba(9,18,13,.87)),
+    url('../assets/ui/photo-studio/empty.webp') center/cover no-repeat!important;
+  color:var(--studio-text)!important;
+  font-size:16px;
+  line-height:1.7;
+}
+body.cardlib-open #overlay .photo-studio-v3 :is(.studio-load-more,.clib-empty .hs-btn) {
+  min-height:46px;
+  padding:10px 18px;
+  border:1px solid rgba(190,180,150,.35)!important;
+  background:var(--studio-control)!important;
+  color:var(--studio-text)!important;
+  font:500 15px/1.4 var(--font-ui)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 :is(.studio-clear,.pg-select,.pv-navbtn,.studio-load-more,.clib-empty .hs-btn):hover:not(:disabled) {
+  border-color:var(--studio-accent)!important;
+  background:var(--studio-control-hi)!important;
+  color:#eee7d8!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .type-tab:not(.on):hover {
+  background:rgba(166,190,176,.08)!important;
+  color:#eee7d8!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .type-tab.on,
+body.cardlib-open #overlay .photo-studio-v3 .type-tab.on:hover {
+  border-color:transparent!important;
+  background:linear-gradient(180deg,rgba(165,196,176,.1),rgba(165,196,176,.035))!important;
+  box-shadow:inset 0 -2px var(--studio-accent)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 :is(.studio-clear,.pv-navbtn,.studio-load-more,.clib-empty .hs-btn):active:not(:disabled) {
+  background:#142018!important;
+  box-shadow:inset 0 2px 4px rgba(0,0,0,.45)!important;
+  transform:none!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 :is(.studio-load-more,.clib-empty .hs-btn):focus-visible {
+  outline:2px solid var(--studio-accent)!important;
+  outline-offset:3px;
+}
+body.cardlib-open #overlay .photo-studio-v3 .pv-navbtn:disabled,
+body.cardlib-open #overlay .photo-studio-v3 .pv-navbtn:disabled:hover,
+body.cardlib-open #overlay .photo-studio-v3 .pv-navbtn:disabled:active {
+  background:#17201a!important;
+  color:#9da699!important;
+  border-color:#465046!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .pv-meta,
+body.cardlib-open #overlay .photo-studio-v3 .pv-terms { font-size:14px; line-height:1.55; }
+body.cardlib-open #overlay .photo-studio-v3 .pv-no {
+  margin:10px 0;
+  color:#b9b5a4;
+  font-size:12px;
+  letter-spacing:.1em;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-zoom {
+  min-height:46px;
+  font-size:15px!important;
+  letter-spacing:.08em;
+  color:#e8d7b4!important;
+  border:1px solid rgba(199,169,113,.56)!important;
+  background:linear-gradient(180deg,#413a2c,#2f2b21)!important;
+  box-shadow:inset 0 1px rgba(248,224,176,.12),0 3px 8px rgba(0,0,0,.2)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .library-head>.pg-close,
+body.cardlib-open #cardZoom.cz-photo .cz-close {
+  border:1px solid rgba(178,155,108,.6)!important;
+  background:linear-gradient(150deg,#393d2e,#1e2a21)!important;
+  box-shadow:inset 0 0 0 3px rgba(8,17,11,.42),inset 0 0 0 4px rgba(202,183,139,.12),
+    0 3px 8px rgba(0,0,0,.25)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .library-head>.pg-close .ic,
+body.cardlib-open #cardZoom.cz-photo .cz-close .ic {
+  filter:grayscale(1) brightness(1.35) sepia(.6);
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-zoom:hover {
+  background:linear-gradient(180deg,#524835,#3d3528)!important;
+  border-color:#cfb47c!important;
+  box-shadow:inset 0 1px rgba(248,224,176,.2),0 3px 8px rgba(0,0,0,.25)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-zoom:active {
+  background:#302b20!important;
+  box-shadow:inset 0 2px 5px rgba(0,0,0,.5)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .library-head>.pg-close:hover,
+body.cardlib-open #cardZoom.cz-photo .cz-close:hover {
+  background:linear-gradient(150deg,#47503b,#2b3b2f)!important;
+  border-color:#c6b084!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .library-head>.pg-close:active,
+body.cardlib-open #cardZoom.cz-photo .cz-close:active {
+  background:#1c281e!important;
+  box-shadow:inset 0 2px 5px rgba(0,0,0,.5)!important;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-backdrop {
+  background:radial-gradient(ellipse at 35% 30%,rgba(51,47,32,.22),transparent 60%),rgba(6,12,9,.9);
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-layout { gap:clamp(24px,3vw,52px); }
+body.cardlib-open #cardZoom.cz-photo .cz-hint {
+  color:#c0c1ad;
+  font:400 13px/1.5 var(--font-ui);
+  letter-spacing:.08em;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-paper {
+  border:34px solid transparent;
+  border-image:url('../assets/ui/photo-studio/frame-atelier-v1.png') 170 stretch;
+  width:min(100%,calc((100vh - 190px) * var(--cz-photo-ratio,1) + 82px));
+  padding:7px;
+  gap:0;
+  max-height:calc(100vh - 104px);
+  background:#e7dece;
+  box-shadow:0 28px 70px rgba(0,0,0,.56);
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-image {
+  width:100%;
+  min-height:0;
+  aspect-ratio:var(--cz-photo-ratio,1);
+  max-height:calc(100vh - 190px)!important;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-image img {
+  width:100%!important;
+  height:100%!important;
+  max-height:100%!important;
+  min-height:0;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-title {
+  padding-bottom:16px;
+  margin-bottom:16px;
+  border-bottom:1px solid rgba(198,176,130,.25);
+  font-size:26px;
+  line-height:1.4;
+  color:#f0e6cc;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-index {
+  margin:0 0 10px;
+  color:#b9b396;
+  font:500 12px/1.5 var(--font-ui);
+  letter-spacing:.14em;
+  font-variant-numeric:tabular-nums;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-detail {
+  border:0;
+  border-right:1px solid rgba(198,176,130,.24);
+  padding:0 12px 0 0;
+  background:none;
+  font-size:14px;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-detail:last-child { border-right:0; }
+body.cardlib-open #cardZoom.cz-photo .cz-photo-detail span { color:#b9bba8; }
+body.cardlib-open #cardZoom.cz-photo .cz-photo-rules { line-height:1.85; }
+body.cardlib-open #cardZoom.cz-photo .cz-note.editable {
+  transform:rotate(-.15deg);
+  border:16px solid transparent!important;
+  border-image:url('../assets/ui/photo-studio/note-atelier-v1.png') 140 fill stretch!important;
+  padding:9px 11px!important;
+  background:#eee6d4!important;
+  box-shadow:0 3px 0 rgba(99,85,54,.4),0 8px 18px rgba(0,0,0,.35)!important;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-note-input {
+  border:0;
+  border-bottom:1px dashed rgba(87,83,57,.4);
+  border-radius:0;
+  padding:8px 2px;
+  background:rgba(255,254,241,.18);
+  color:#39372b;
+  line-height:1.8;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-note-input:focus-visible {
+  outline:2px solid #536d59;
+  outline-offset:3px;
+  border-bottom-color:transparent;
+  box-shadow:none;
+  background:rgba(255,254,241,.35);
+}
+body.cardlib-open #cardZoom.cz-photo .cz-note-status {
+  font-size:12px;
+  font-weight:500;
+  letter-spacing:.06em;
+}
+body.cardlib-open #cardZoom.cz-photo .cz-note.has::after {
+  top:0;
+  right:2px;
+  color:rgba(140,63,43,.72);
+  border-color:rgba(140,63,43,.52);
+}
+body.cardlib-open #overlay .photo-studio-v3 .pv-note {
+  padding:10px 12px;
+  border-left:2px solid #ac9770;
+  background:rgba(224,213,183,.065);
+  color:#ddd5bf;
+  font-size:14px;
+  line-height:1.7;
+}
+@media(min-width:1101px) and (max-width:1399px) {
+  body.cardlib-open #overlay .photo-studio-v3 .studio-filterbar { flex-wrap:wrap; gap:8px; }
+  body.cardlib-open #overlay .photo-studio-v3 .clib-tabs { flex:1 1 650px; }
+  body.cardlib-open #overlay .photo-studio-v3 .advanced-row { margin-left:auto; }
+}
+@media(max-width:760px) {
+  body.cardlib-open #cardZoom.cz-photo .cz-photo-paper {
+    border-width:23px;
+    padding:4px;
+    width:min(100%,calc(52vh * var(--cz-photo-ratio,1) + 54px));
+  }
+  body.cardlib-open #cardZoom.cz-photo .cz-photo-image { max-height:52vh!important; }
+  body.cardlib-open #cardZoom.cz-photo .cz-photo-layout { gap:16px; }
+  body.cardlib-open #overlay .photo-studio-v3 .type-tab { padding:8px 10px; }
+  body.cardlib-open #cardZoom.cz-photo .cz-photo-title { font-size:23px; }
+  body.cardlib-open #cardZoom.cz-photo .cz-photo-info { padding:20px 17px; }
+}
+@media(max-width:600px) {
+  body.cardlib-open #overlay .photo-studio-v3 .clib-count {
+    font-size:11px;
+    padding:5px 7px;
+  }
+}
+@media(prefers-reduced-motion:reduce) {
+  body.cardlib-open #cardZoom.cz-photo :is(.cz-photo-paper,.cz-photo-info) { transition:none!important; }
+}
+
+/* 馆藏索引：检索与展墙共用一列，选片台独立；不再把筛选塞进页眉。 */
+body.cardlib-open #overlay .photo-studio-v3.studio-index-layout .library-head {
+  grid-template-columns:44px minmax(0,1fr) auto!important;
+  grid-template-areas:'close tools count'!important;
+  min-height:82px;
+  gap:20px!important;
+  padding-top:14px!important;
+  padding-bottom:14px!important;
+}
+body.cardlib-open #overlay .studio-index-layout .clib-count {
+  gap:8px;
+  border:0!important;
+  background:none!important;
+  box-shadow:none!important;
+  padding:0 12px;
+}
+body.cardlib-open #overlay .studio-index-layout .clib-count small {
+  font-size:13px!important;
+  color:#b8b2a0!important; /* 09-25 提亮档：实底 #17211c 上 ≥4.5:1 */
+  letter-spacing:.03em!important;
+}
+body.cardlib-open #overlay .studio-index-layout .clib-count b { font-size:23px!important; font-weight:500!important; }
+body.cardlib-open #overlay .studio-index-layout .library-tools { width:auto; justify-self:end; flex-wrap:wrap; }
+body.cardlib-open #overlay .studio-index-layout .library-tools:empty { display:none; }
+body.cardlib-open #overlay .studio-index-layout .studio-catalog {
+  min-width:0;
+  min-height:0;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-catalog .lib-grid {
+  flex:1;
+  min-height:0;
+  width:100%;
+  box-sizing:border-box;
+  overflow-y:auto; /* 09-24 口头改回上下滚动浏览 */
+  padding-top:12px!important;
+  row-gap:18px!important; /* 09-24 留言：上下两列照片挤在一起，行间拉开 */
+}
+body.cardlib-open #overlay .studio-index-layout .studio-page-nav {
+  flex:0 0 auto;
+  justify-content:center;
+  gap:12px;
+  margin:14px 8px 4px; /* 09-24 留言：照片与翻页键之间留距离 */
+  padding:0 4px;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-page-nav[hidden] { display:none!important; }
+body.cardlib-open #overlay .studio-index-layout .studio-page-nav .pv-pos { min-width:150px; text-align:center; }
+@keyframes libPhotoPageIn { from { opacity:0; transform:translateX(var(--lib-page-enter-x,14px)) scale(.985); } }
+body.cardlib-open #overlay .photo-studio-v3.studio-index-layout .lib-grid > .lib-item {
+  animation:libPhotoPageIn .18s ease-out both!important;
+  animation-delay:calc(var(--i,0) * 8ms)!important;
+}
+/* 09-24 改回上下滚动浏览：不开入场动画（库页滚动不做整墙入场重播）。
+   不在此处再压 content-visibility——:711 的 auto（窗口挂载后恢复）负责跳过态，
+   09-25 实测这里遗留的 visible!important 会把 auto 整体压制，滚动预热失效。 */
+body.cardlib-open #overlay .photo-studio-v3.studio-index-layout .lib-grid > .lib-item {
+  animation:none!important;
+}
+body.cardlib-open #overlay .photo-studio-v3.studio-index-layout .lib-grid.lib-page-next { --lib-page-enter-x:14px; }
+body.cardlib-open #overlay .photo-studio-v3.studio-index-layout .lib-grid.lib-page-previous { --lib-page-enter-x:-14px; }
+@media(prefers-reduced-motion:reduce) {
+  body.cardlib-open #overlay .photo-studio-v3.studio-index-layout .lib-grid > .lib-item { animation:none!important; }
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-info {
+  transition:opacity 180ms ease,transform 180ms cubic-bezier(.22,.72,.22,1)!important;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-catalog .studio-filterbar {
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+  gap:8px; /* 09-24 留言：压缩照相馆上方空间，给照片区让位 */
+  padding:16px 20px 18px!important;
+  border:3px solid #8a7650!important;
+  border-radius:3px;
+  background:linear-gradient(120deg,rgba(255,255,245,.26),transparent 56%),#dbd6c5!important;
+  outline:1px solid #bcaa7d;
+  outline-offset:-2px;
+  box-shadow:inset 0 0 0 3px #e7ddc3,inset 0 0 0 4px #aa9b78,0 3px 0 #403a29,0 7px 16px rgba(0,0,0,.35)!important;
+  color:#343e34;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-index-heading {
+  display:flex;
+  align-items:center;
+  gap:14px;
+  min-height:22px;
+  color:#535b4a;
+  font:500 13px/1.4 var(--font-ui);
+  letter-spacing:.08em;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-index-heading>span:first-child {
+  padding-left:10px;
+  border-left:3px solid #7f7451;
+  font-weight:700;
+  font-family:var(--serif)!important;
+  font-size:16px;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-index-heading .lib-show { font-size:12px; letter-spacing:0; }
+body.cardlib-open #overlay .studio-index-layout .studio-index-heading .lib-show[hidden] { display:none!important; }
+body.cardlib-open #overlay .studio-index-layout .studio-index-heading .studio-clear {
+  margin-left:auto;
+  min-height:28px!important;
+  padding:2px 0 2px 12px;
+  border:0!important;
+  border-left:1px solid #b8b09a!important;
+  background:none!important;
+  box-shadow:none!important;
+  color:#54634e!important;
+  font:500 13px/1.5 var(--font-ui)!important;
+  letter-spacing:0;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-index-heading .studio-clear:hover { color:#1c412e!important; text-decoration:underline; text-underline-offset:3px; }
+body.cardlib-open #overlay .studio-index-layout .studio-catalog .clib-tabs {
+  flex:0 0 auto;
+  gap:4px;
+  padding:0 0 5px;
+  border-bottom:1px solid #bcb49e;
+  scrollbar-color:#8c967e transparent;
+  scrollbar-width:thin;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-catalog .type-tab {
+  min-height:32px!important;
+  gap:6px;
+  padding:7px 10px;
+  border:1px solid transparent!important;
+  color:#4f594b!important;
+  font:500 15px/1.4 var(--font-ui)!important;
+  letter-spacing:0!important;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-catalog .type-tab em { color:#69715e!important; font:400 11px/1 var(--font-ui); font-variant-numeric:tabular-nums; opacity:1; }
+body.cardlib-open #overlay .studio-index-layout .studio-catalog .type-tab:not(.on):hover { background:#c9ccba!important; color:#283e2d!important; }
+body.cardlib-open #overlay .studio-index-layout .studio-catalog .type-tab.on,
+body.cardlib-open #overlay .studio-index-layout .studio-catalog .type-tab.on:hover {
+  border-color:#475a41!important;
+  color:#faf3de!important;
+  background:linear-gradient(180deg,#56674d,#3d503c)!important;
+  box-shadow:inset 0 1px rgba(247,236,203,.2),0 2px 3px rgba(74,74,49,.17)!important;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-catalog .type-tab.on em { color:#d6dfc8!important; }
+body.cardlib-open #overlay .studio-index-layout .studio-search-row {
+  display:grid;
+  grid-template-columns:minmax(170px,1.7fr) minmax(136px,1fr) minmax(122px,1fr) minmax(112px,.85fr);
+  gap:12px;
+  min-width:0;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-field { display:grid; gap:6px; min-width:0; }
+body.cardlib-open #overlay .studio-index-layout .studio-field-label { color:#525e48; font:500 14px/1.4 var(--font-ui); letter-spacing:.03em; }
+body.cardlib-open #overlay .studio-index-layout .studio-field .studio-search,
+body.cardlib-open #overlay .studio-index-layout .studio-select-shell {
+  position:relative;
+  display:block;
+  min-width:0;
+  width:100%;
+  max-width:none;
+  box-sizing:border-box;
+  border:1px solid #a5ad97!important;
+  border-radius:2px!important;
+  background:#eeeede!important;
+  box-shadow:inset 0 1px 3px rgba(91,97,70,.09),0 1px rgba(255,255,244,.5)!important;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-field .pg-select,
+body.cardlib-open #overlay .studio-index-layout .studio-field .clib-search {
+  display:block;
+  appearance:none!important;
+  -webkit-appearance:none!important;
+  box-sizing:border-box;
+  width:100%!important;
+  min-width:0!important;
+  max-width:none!important;
+  height:42px!important;
+  min-height:42px!important;
+  padding:0 32px 0 12px!important;
+  border:0!important;
+  border-radius:2px!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  color:#2e4131!important;
+  font:500 15px/1.4 var(--font-ui)!important;
+  letter-spacing:0!important;
+  text-shadow:none!important;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-field .clib-search { padding-left:34px!important; padding-right:10px!important; }
+body.cardlib-open #overlay .studio-index-layout .studio-field .clib-search::placeholder { color:#727c65!important; font-weight:400; }
+body.cardlib-open #overlay .studio-index-layout .studio-field .pg-select option { background:#eeeede; color:#2e4131; }
+body.cardlib-open #overlay .studio-index-layout .studio-select-shell::after {
+  content:'';
+  position:absolute;
+  right:13px;
+  top:16px;
+  width:6px;
+  height:6px;
+  border-right:1.5px solid #667452;
+  border-bottom:1.5px solid #667452;
+  transform:rotate(45deg);
+  pointer-events:none;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-search::before {
+  content:'';
+  position:absolute;
+  left:12px;
+  top:14px;
+  width:9px;
+  height:9px;
+  border:1.5px solid #7b876b;
+  border-radius:50%;
+  pointer-events:none;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-search::after { content:''; position:absolute; left:21px; top:24px; width:5px; height:1.5px; background:#7b876b; transform:rotate(45deg); pointer-events:none; }
+body.cardlib-open #overlay .studio-index-layout .studio-field :is(.studio-search,.studio-select-shell):hover { border-color:#687f5a!important; }
+body.cardlib-open #overlay .studio-index-layout .studio-field :is(.studio-search,.studio-select-shell):focus-within { outline:2px solid #5f7753!important; outline-offset:2px!important; box-shadow:none!important; }
+body.cardlib-open #overlay .studio-index-layout .studio-field :is(.pg-select,.clib-search):focus-visible { outline:none!important; }
+body.cardlib-open #overlay .studio-index-layout .studio-catalog .studio-active-filters {
+  flex-wrap:wrap;
+  min-height:0;
+  padding:0!important;
+  border:0;
+  background:none;
+  color:#616950;
+  font-size:13px;
+}
+body.cardlib-open #overlay .studio-index-layout .studio-catalog .studio-active-filters button { max-width:100%; overflow-wrap:anywhere; padding:4px 9px; border:1px solid #a6af95; border-radius:2px; background:#ced5be; color:#344a33; font:500 13px/1.5 var(--font-ui); }
+body.cardlib-open #overlay .studio-index-layout .studio-catalog .studio-active-filters button:focus-visible { outline:2px solid #536d45; outline-offset:2px; }
+body.cardlib-open #overlay .studio-index-layout .studio-photo-caption b { font-family:var(--serif)!important; font-weight:700; letter-spacing:.015em; line-height:1.45; width:fit-content; max-width:100%; margin-inline:auto; }
+body.cardlib-open #overlay .studio-index-layout .pv-desc { font-weight:400; letter-spacing:0; line-height:1.8; }
+body.cardlib-open #overlay .studio-index-layout .studio-inspector-head b { font-family:var(--serif)!important; font-size:17px; }
+body.cardlib-open #cardZoom.cz-photo .cz-photo-title,
+body.cardlib-open #cardZoom.cz-photo .cz-photo-title span { font-family:var(--serif)!important; }
+/* 照相馆稀有度字色：相纸用深墨，暗色背签用亮墨，保留静态棱彩与金字。 */
+body.cardlib-open :is(.photo-studio-v3,#cardZoom.cz-photo) [data-studio-rarity] { --rarity-ink:#485344; --rarity-bright:#cbd5c3; }
+body.cardlib-open :is(.photo-studio-v3,#cardZoom.cz-photo) [data-studio-rarity="稀有"] { --rarity-ink:#245b98; --rarity-bright:#8dbff2; }
+body.cardlib-open :is(.photo-studio-v3,#cardZoom.cz-photo) [data-studio-rarity="史诗"] { --rarity-ink:#793a9f; --rarity-bright:#cda0ef; }
+body.cardlib-open :is(.photo-studio-v3,#cardZoom.cz-photo) [data-studio-rarity="传说"] { --rarity-ink:#946111; --rarity-bright:#efc76d; }
+body.cardlib-open :is(.photo-studio-v3,#cardZoom.cz-photo) [data-studio-rarity="衍生"] { --rarity-ink:#1a7564; --rarity-bright:#7ed4bd; }
+body.cardlib-open :is(.photo-studio-v3,#cardZoom.cz-photo) [data-studio-rarity="职业"] { --rarity-ink:#a02e32; --rarity-bright:#ed9897; }
+body.cardlib-open :is(.photo-studio-v3,#cardZoom.cz-photo) [data-studio-rarity="棱彩"] { --rarity-ink:#78377c; --rarity-bright:#e8b4e7; }
+body.cardlib-open #overlay .photo-studio-v3 .studio-photo-caption b[data-studio-rarity] { color:var(--rarity-ink)!important; }
+body.cardlib-open #overlay .photo-studio-v3 .pv-chip[data-studio-rarity],
+body.cardlib-open #cardZoom.cz-photo [data-studio-rarity] { color:var(--rarity-bright)!important; }
+body.cardlib-open #overlay .photo-studio-v3 .studio-photo-caption b[data-studio-rarity="传说"] {
+  background:linear-gradient(180deg,#5c3d08 8%,#8a5c12 42%,#b47c1e 52%,#4a2e06 90%)!important; /* 09-25 低段压深保高光：原中段 #b47c1e 在浅相纸 ≈2.9:1 发飘 */
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-photo-caption b[data-studio-rarity="棱彩"] {
+  background:linear-gradient(100deg,#aa3468,#8c4eb0 28%,#286ca0 53%,#287957 75%,#966714)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .pv-chip[data-studio-rarity="棱彩"],
+body.cardlib-open #cardZoom.cz-photo [data-studio-rarity="棱彩"] {
+  background:linear-gradient(100deg,#f2a9cd,#c4a6fa 28%,#9ccdf6 53%,#a7dfbc 75%,#efce8b)!important;
+}
+body.cardlib-open #overlay .photo-studio-v3 .studio-photo-caption b:is([data-studio-rarity="传说"],[data-studio-rarity="棱彩"]),
+body.cardlib-open #overlay .photo-studio-v3 .pv-chip[data-studio-rarity="棱彩"],
+body.cardlib-open #cardZoom.cz-photo [data-studio-rarity="棱彩"] {
+  -webkit-background-clip:text!important;
+  background-clip:text!important;
+  -webkit-text-fill-color:transparent;
+  text-shadow:none!important;
+}
+@media(max-width:1100px) {
+  body.cardlib-open #overlay .studio-index-layout .clib-main { grid-template-columns:minmax(0,1fr)!important; }
+}
+@media(max-width:760px) {
+  body.cardlib-open #overlay .photo-studio-v3.studio-index-layout .library-head { min-height:66px; gap:10px!important; padding:10px 18px!important; }
+  body.cardlib-open #overlay .studio-index-layout .clib-main { padding:10px 14px 14px!important; }
+  body.cardlib-open #overlay .studio-index-layout .studio-catalog .studio-filterbar { padding:12px 13px 14px!important; gap:9px; }
+  body.cardlib-open #overlay .studio-index-layout .studio-search-row { grid-template-columns:repeat(3,minmax(0,1fr)); gap:9px; }
+  body.cardlib-open #overlay .studio-index-layout .studio-query { grid-column:1/-1; }
+  body.cardlib-open #overlay .studio-index-layout .studio-field .pg-select { font-size:14px!important; padding-left:8px!important; padding-right:23px!important; }
+  body.cardlib-open #overlay .studio-index-layout .studio-select-shell::after { right:10px; }
+  body.cardlib-open #overlay .studio-index-layout .clib-count { padding:0; gap:5px; }
+  body.cardlib-open #overlay .studio-index-layout .clib-count b { font-size:20px!important; }
+  body.cardlib-open #overlay .studio-index-layout .library-tools:not(:empty) { grid-column:1/-1; grid-row:2; justify-self:start; }
+}

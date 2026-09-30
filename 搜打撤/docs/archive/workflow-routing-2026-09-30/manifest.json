@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "at": "2026-09-30T09:58:43.170Z",
+  "task": "workflow-routing-2026-09-30",
+  "method": "copy-original-before-revision",
+  "items": [
+    {
+      "source": "docs/README.md",
+      "target": "docs/archive/workflow-routing-2026-09-30/originals/docs/README.md",
+      "sha256": "e7fabc2dc2076ef3368a4bc380a0ce9690869b2dc7b4d9153b336a543a4c60d5",
+      "replacedBy": "docs/WORKFLOW-TOOLS.md"
+    },
+    {
+      "source": "docs/production/management/NEXT-CYCLE-TECH-PLAN.md",
+      "target": "docs/archive/workflow-routing-2026-09-30/originals/docs/production/management/NEXT-CYCLE-TECH-PLAN.md",
+      "sha256": "de96fad4802108c396a80bdab06f4336a34ee2bd645c81cece2e2d285231cf99",
+      "replacedBy": "docs/WORKFLOW-TOOLS.md"
+    }
+  ],
+  "limits": [
+    "原文保持字节，内部相对链接仍以 source 原位置解释",
+    "本命令未修改源文件；替代状态由负责人核实并在现行入口注明"
+  ]
+}

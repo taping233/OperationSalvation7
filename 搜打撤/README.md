@@ -52,6 +52,7 @@ npm run perf
 - [现行游戏规则](docs/rules.md)
 - [架构与模块接口](docs/architecture.md)
 - [开发指南](docs/development.md)
+- [流程工具与归档办法](docs/WORKFLOW-TOOLS.md)（接手提示、复用检索、台账预览写入、验收证据）
 - [存档兼容契约](docs/save-format.md)
 - [性能基准](docs/performance.md)
 - [设计入口](docs/design.md)

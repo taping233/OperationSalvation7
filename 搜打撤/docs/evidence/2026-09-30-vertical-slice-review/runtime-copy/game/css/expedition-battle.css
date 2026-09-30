@@ -1,0 +1,189 @@
+/* 冬境战斗舞台：只负责层级、可读性和反馈，不接触战斗规则。 */
+#overlay .card.battle > h2 { position:relative; z-index:20; min-height:34px; color:#f0eadc; background:rgba(8,12,18,.86); border-color:rgba(196,215,226,.2); }
+#overlay .battle-stage.sts {
+  isolation:isolate; color:#eee9df; background-color:#1a120c;
+  /* 2026-09-13 留言批次十一：分层合成背景——近景地板层叠在远景酒馆墙层下部，二次元暖调 */
+  background-image:linear-gradient(180deg,rgba(30,20,8,.05),rgba(16,10,5,.16)),url('../assets/scenes/battle-street-amber-anime-v1.webp');
+  /* 2026-09-13 老板供图（即梦 2560×2558 方图）替换：cover 后垂直余量 559px，底部对齐让斑马地板落地 */
+  background-position:center bottom; background-size:cover;
+}
+#overlay .battle-stage.sts[data-boss="1"] { background-image:linear-gradient(180deg,rgba(30,14,8,.1),rgba(12,6,4,.2)),url('../assets/scenes/battle-street-amber-anime-v1.webp'); }
+:where(#overlay) .battle-stage.sts::after { content:''; position:absolute; inset:0; z-index:-1; pointer-events:none; opacity:.22; background:radial-gradient(circle at 50% 42%,rgba(183,216,230,.18),transparent 42%),linear-gradient(90deg,rgba(30,58,72,.16),transparent 45%,rgba(78,38,55,.2)); }   /* 09-25：#overlay 改 :where() 降特异性，让 battle.css 的首脑 [data-asset-key]::after 差分 tint 能压过本条 */
+/* 2026-09-13 留言：底部黑底压缩——压暗段下移到 85% 线，70~85% 露出战场背景 */
+/* 2026-09-13 老板口令：背景图 16:9 零余量无法滑动，改为在 67% 脚线处加一层前景地板平面
+   （暖沥青调半透明、顶缘 1.2% 软过渡），人与怪踩在平面上，原路面 86% 内容透出保留 */
+#overlay .battle-stage.sts[data-boss="0"] .battle-stage-shade { position:absolute; inset:0; pointer-events:none; }
+#overlay .battle-stage.sts .battle-stage-shade { z-index:0; background:
+  radial-gradient(ellipse 35% 36% at 76% 61%,rgba(205,124,70,.3),transparent 75%),
+  linear-gradient(180deg,rgba(0,0,0,0) 65.8%,rgba(52,41,32,.5) 67.3%,rgba(42,33,26,.68) 76%,rgba(30,24,19,.8) 100%),
+  linear-gradient(180deg,rgba(5,10,16,.58),rgba(7,13,19,.08) 28%,rgba(5,8,13,.14) 70%,rgba(5,8,13,.34) 85%,rgba(4,7,11,.88)); }
+#overlay .battle-stage.sts[data-boss="0"] .sts-foes::before {
+  content:''; position:absolute; z-index:-1; pointer-events:none;
+  left:-5%; right:-5%; bottom:6%; height:74%;
+  background:radial-gradient(ellipse 68% 58% at 50% 76%,rgba(221,143,75,.28),rgba(93,49,33,.12) 60%,transparent 100%);
+}
+#overlay .battle-stage.sts > *:not(.battle-stage-shade):not(.sts-ambient) { position:relative; z-index:1; }   /* 09-25：排除氛围尘层（battle.css absolute + inset:0，被强改 relative 后尘点从顶部飘出裁剪区） */
+/* 2026-09-18 留言「药水栏还是不能用」根因：上行的通配 z-index:1 让 .bt-potions 与场景层
+   .sts-arena 同层且 DOM 靠前——透明的场景画布把顶栏点击全部吃掉（看得见点不着）。
+   药水栏整体抬到场景之上：容器继续穿透点击，chip 本体可点。 */
+#overlay .battle-stage.sts > .bt-potions { position:absolute; z-index:7; pointer-events:none; }
+#overlay .battle-stage.sts > .bt-potions .bt-potion { pointer-events:auto; }
+
+#overlay .battle-stage.sts .sts-topbar { flex:0 0 auto; min-height:48px; display:flex; align-items:center; gap:12px; padding:7px clamp(12px,2vw,28px); background:rgba(8,13,20,.76); border-bottom:1px solid rgba(200,220,228,.18); box-shadow:0 4px 18px rgba(0,0,0,.24); }
+.sts-encounter { display:flex; align-items:baseline; gap:9px; min-width:clamp(180px,25vw,310px); letter-spacing:.5px; }
+.sts-encounter-kicker { color:#b9cfda; font-size:10px; letter-spacing:2px; text-transform:uppercase; }
+.sts-encounter b { color:#fff2cf; font-size:14px; }
+.sts-encounter > span:last-child { color:#d7d2c8; font-size:12px; }
+.sts-phase-dot { width:7px; height:7px; flex:0 0 7px; border-radius:50%; color:#a8d8b4; background:#a8d8b4; box-shadow:0 0 9px currentColor; }   /* 09-25：补 color，辉光 currentColor 不再吃继承灰白 */
+.sts-phase-dot.foe { color:#df8e83; background:#df8e83; }
+.sts-phase-dot.focus { color:#e5c887; background:#e5c887; }
+.sts-phase-dot.warn { color:#e4a172; background:#e4a172; }
+#overlay .battle-stage.sts .sts-hud-l { margin-left:auto; }
+#overlay .battle-stage.sts .sts-hud-r { gap:6px; }
+#overlay .battle-stage.sts .sts-hud-r .ov-btn { min-height:31px; padding:5px 9px; border-color:rgba(203,215,218,.3); background:rgba(12,18,24,.72); font-size:11px; }
+#overlay .battle-stage.sts .sts-hud-r [data-act="btEnd"] { border-color:rgba(227,199,126,.72); color:#ffe5a4; box-shadow:0 0 12px rgba(227,199,126,.12); }
+#overlay .battle-stage.sts .sts-hud-r [data-act="btFlee"] { color:#d7958c; border-color:rgba(190,105,99,.34); font-size:10px; }
+
+.sts-arena { min-height:clamp(270px,45vh,610px); }
+.sts-arena-caption { position:absolute; top:clamp(12px,2vh,24px); left:50%; transform:translateX(-50%); z-index:4; display:flex; align-items:center; gap:10px; max-width:min(90%,620px); padding:7px 14px; border:1px solid rgba(204,220,220,.22); border-radius:999px; background:rgba(8,14,20,.64); box-shadow:0 5px 18px rgba(0,0,0,.18); pointer-events:none; }
+.sts-arena-caption b { color:#f2dfb1; font-size:12px; white-space:nowrap; }
+.sts-arena-caption span { color:#bac5c7; font-size:11px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+#overlay .battle-stage.sts .sts-me, #overlay .battle-stage.sts .sts-foes, #overlay .battle-stage.sts .sts-allies { bottom:clamp(5%,3vh,9%); }
+#overlay .battle-stage.sts .sts-foes { gap:clamp(10px,1.4vw,24px); }
+#overlay .battle-stage.sts .sts-foe:not(.dead) .sts-nameplate { border-color:rgba(218,167,151,.42); background:linear-gradient(180deg,rgba(30,16,21,.7),rgba(8,10,14,.9)); }
+/* 09-25：意图胶囊改锚名牌上缘（bottom 64px ≈ 名牌高约 50px + winter 悬挂 6px + 8px 间距）——
+   原顶:-42px 挂在含整幅立绘的槽位顶，立绘不可见时胶囊悬空在半空 */
+#overlay .battle-stage.sts .sts-intent { top:auto; bottom:64px; color:#ffe8bf; border-color:rgba(231,193,117,.62); background:rgba(20,15,16,.9); box-shadow:0 0 16px rgba(196,133,86,.16); }
+#overlay .battle-stage.sts[data-boss="0"] .sts-intent { font-size:13px; font-weight:700; }
+#overlay .battle-stage.sts .sts-hp i { background:linear-gradient(90deg,#d26c68,#f0b276); }
+
+/* 2026-09-13 留言：HUD 渐变底前半全透明（85% 舞台高度≈自身 50% 处才渐深），去掉原 69% 处 border-top 细线 */
+#overlay .battle-stage.sts .sts-hud { min-height:clamp(174px,24vh,230px); padding:6px clamp(10px,2vw,28px) 10px; gap:clamp(8px,1.3vw,18px); background:linear-gradient(180deg,rgba(3,8,13,0),rgba(3,8,13,0) 50%,rgba(3,7,12,.6) 74%,rgba(3,6,10,.94)); }
+#overlay .battle-stage.sts .sts-hand { min-height:180px; padding-top:28px; }
+#overlay .battle-stage.sts .sts-energy-wrap { margin-left:0; margin-right:clamp(4px,1vw,16px); }
+#overlay .battle-stage.sts .sts-energy { border-color:rgba(214,197,145,.68); box-shadow:0 0 24px rgba(192,161,94,.3),inset 0 -8px 14px rgba(0,0,0,.75); }
+#overlay .battle-stage.sts .bt-hand-page { border-color:rgba(190,208,216,.45); background:rgba(16,27,35,.9); }
+
+@media (max-width:900px) {
+  #overlay .battle-stage.sts .sts-topbar { flex-wrap:wrap; padding:6px 10px; }
+  .sts-encounter { min-width:100%; order:0; }
+  #overlay .battle-stage.sts .sts-hud-l { margin-left:0; }
+  #overlay .battle-stage.sts .sts-hud-r { margin-left:auto; }
+  .sts-arena-caption { top:10px; }
+}
+@media (max-height:760px) {
+  /* 矮窗档去掉 min-width 闸：档内 min-height 值均被下方 !important 契约压制，
+     实际延伸到窄窗的只有 topbar padding-block:4px（良性收紧） */
+  #overlay .battle-stage.sts .sts-topbar { min-height:42px; padding-block:4px; }
+  .sts-arena { min-height:clamp(220px,40vh,430px); }
+  #overlay .battle-stage.sts .sts-hud { min-height:155px; }
+  #overlay .battle-stage.sts .sts-hand { min-height:155px; }
+}
+@media (prefers-reduced-motion:reduce) {
+  #overlay .battle-stage.sts *, #overlay .battle-stage.sts *::before, #overlay .battle-stage.sts *::after { animation-duration:.001ms!important; animation-iteration-count:1!important; transition-duration:.001ms!important; }
+}
+@media (max-width:560px) {
+  .sts-encounter-kicker, .sts-encounter > span:last-child { display:none; }
+  .sts-arena-caption { max-width:94%; }
+  .sts-arena-caption span { max-width:44vw; }
+  #overlay .battle-stage.sts .sts-hud-r .ov-btn { padding-inline:6px; }
+  #overlay .battle-stage.sts .sts-hud-r [data-act="btFlee"] { width:28px; overflow:hidden; text-indent:-999px; position:relative; }
+  #overlay .battle-stage.sts .sts-hud-r [data-act="btFlee"]::after { content:'×'; position:absolute; inset:0; text-indent:0; display:grid; place-items:center; }
+}
+
+/* winter.css contains legacy calibration rules with !important. These are the
+   final battle-stage contract and intentionally win because this sheet is last. */
+#overlay .battle-stage.sts { position:relative!important; display:flex!important; flex-direction:column!important; min-height:0!important; height:100%!important; }
+#overlay .battle-stage.sts .sts-arena { flex:1 1 auto!important; min-height:clamp(120px,18vh,240px)!important; height:auto!important; overflow:visible!important; }
+#overlay .battle-stage.sts .sts-unit { bottom:clamp(3%,2.5vh,6%)!important; }
+#overlay .battle-stage.sts .sts-me { bottom:60px!important; }
+#overlay .battle-stage.sts .sts-foes { bottom:60px!important; }
+#overlay .battle-stage.sts .sts-allies { bottom:60px!important; }
+#overlay .battle-stage.sts .sts-nameplate { position:static!important; transform:none!important; }
+#overlay .battle-stage.sts .sts-hud { flex:0 0 240px!important; min-height:240px!important; height:240px!important; overflow:visible!important; }
+#overlay .battle-stage.sts .sts-hand { display:block!important; flex:1 1 auto!important; width:100%!important; max-width:none!important; min-width:0!important; min-height:220px!important; height:220px!important; overflow:visible!important; }
+#overlay .battle-stage.sts .sts-hand .bt-slot { bottom:18px!important; }
+#overlay .battle-stage.sts .sts-hand .bt-slot .bt-card { min-width:0; }
+@media (max-height:760px) and (min-width:901px) {
+  #overlay .battle-stage.sts .sts-hud { flex-basis:270px!important; min-height:270px!important; height:270px!important; }
+  #overlay .battle-stage.sts .sts-hand { min-height:250px!important; height:250px!important; padding-top:12px!important; }
+  #overlay .battle-stage.sts .sts-hand .bt-slot { bottom:10px!important; width:10em; font-size:15px; }
+  #overlay .battle-stage.sts .sts-hand[data-readable="true"] .bt-card.compact .hsc-desc { display:block; font-size:11px; line-height:1.25; }
+  #overlay .battle-stage.sts .sts-hand[data-readable="true"] .bt-card.compact .hsc-desc > span:not(.bt-rulehint) { -webkit-line-clamp:3; }
+  #overlay .battle-stage.sts .sts-hand .bt-slot:hover .bt-card:not(.off):not(.aim-lift) { transform:translateY(-8px) scale(1.02); }
+  /* 目标选择时把选中牌收进左侧手牌区，避免盖住敌人血条；transform 不触发布局重排。 */
+}
+@media (max-width:900px) {
+  #overlay .battle-stage.sts .sts-hud { flex-basis:230px!important; min-height:230px!important; height:230px!important; }
+}
+@media (max-width:560px) {
+  #overlay .battle-stage.sts .sts-hud { flex-basis:205px!important; min-height:205px!important; height:205px!important; }
+  #overlay .battle-stage.sts .sts-hand { min-height:175px!important; height:175px!important; }
+  #overlay .battle-stage.sts .sts-hand .bt-slot { bottom:18px!important; }
+}
+
+/* 主舞台布局：顶栏信息、中央对峙、底部战术台三段职责明确。 */
+#overlay .battle-stage.sts .sts-topbar { min-height:54px; }
+#overlay .battle-stage.sts .sts-topbar .sts-hud-r:empty { display:none; }
+#overlay .battle-stage.sts .sts-arena { min-height:clamp(250px,calc(100vh - 355px),600px); overflow:hidden; }
+#overlay .battle-stage.sts .sts-arena::before { content:'我方'; position:absolute; left:clamp(4%,6vw,7%); bottom:calc(clamp(5%,3vh,9%) + 188px); color:rgba(199,220,218,.85); text-shadow:0 1px 2px rgba(0,0,0,.8); font-size:10px; letter-spacing:2px; }
+#overlay .battle-stage.sts .sts-arena::after { content:'敌方意图'; position:absolute; right:clamp(5%,7vw,9%); bottom:calc(clamp(5%,3vh,9%) + 188px); padding:4px 12px; border:1px solid rgba(231,193,117,.3); border-radius:999px; background:rgba(7,18,26,.62); color:rgba(231,192,145,.92); text-shadow:none; font-size:10px; letter-spacing:2px; }
+#overlay .battle-stage.sts .sts-arena-caption { top:18px; }
+#overlay .battle-stage.sts .sts-me .sts-figure img, #overlay .battle-stage.sts .sts-foe .sts-figure img, #overlay .battle-stage.sts .sts-ally .sts-figure img { background:transparent!important; mix-blend-mode:normal; }
+/* 09-25 二波 C 组：双方立绘接地影——drop-shadow 沿立绘 alpha 轮廓落到底面 */
+#overlay .battle-stage.sts .sts-me .sts-figure img, #overlay .battle-stage.sts .sts-foe .sts-figure img, #overlay .battle-stage.sts .sts-ally .sts-figure img { filter:drop-shadow(0 18px 22px rgba(0,0,0,.45)); }
+#overlay .battle-stage.sts .sts-figure { background:transparent!important; }
+/* 09-25 二波 C 组：手牌区深色渐变托盘 + 顶部金线（inset hairline），托出"战术台"层次 */
+#overlay .battle-stage.sts .sts-hand { background:linear-gradient(180deg,rgba(6,12,18,0),rgba(6,12,18,.36) 26%,rgba(5,10,16,.78) 100%); box-shadow:inset 0 1px 0 rgba(217,187,130,.42); }
+#overlay .battle-stage.sts .sts-me, #overlay .battle-stage.sts .sts-foes, #overlay .battle-stage.sts .sts-allies { bottom:clamp(5%,3vh,9%); }
+#overlay .battle-stage.sts .sts-hud { display:grid; grid-template-columns:auto minmax(0,1fr) auto; align-items:end; min-height:clamp(168px,23vh,220px); }
+#overlay .battle-stage.sts .sts-energy-wrap { grid-column:1; grid-row:1; }
+#overlay .battle-stage.sts .sts-hand { grid-column:2; grid-row:1; min-width:0; width:auto; }
+/* 09-25：本钮已与砸击按钮同收 .sts-hand-tools（battle.css，flex 横排）——原同格钉位
+   margin-left:4px 会把分栏钮直接压在砸击钮身上（z-index 8 盖 6，挡住砸击图），规则删除 */
+.sts-tactics { grid-column:3; grid-row:1; display:flex; flex-direction:column; align-items:stretch; justify-content:flex-end; gap:9px; min-width:148px; padding:0 0 8px 8px; }
+.sts-tactics-secondary { display:flex; flex-wrap:wrap; justify-content:flex-end; gap:5px; }
+.sts-tactics-secondary .ov-btn { padding:5px 7px!important; font-size:10px!important; }
+#overlay .battle-stage.sts .sts-end-turn { width:100%; min-height:42px; border-color:rgba(232,201,127,.85); color:#fff0bd; background:linear-gradient(135deg,rgba(103,81,37,.94),rgba(51,42,26,.96)); font-size:14px; letter-spacing:1px; box-shadow:0 5px 16px rgba(0,0,0,.28); }
+#overlay .battle-stage.sts .sts-end-turn:disabled { opacity:.5; }
+@media (max-width:900px) {
+  #overlay .battle-stage.sts .sts-hud { grid-template-columns:auto minmax(0,1fr); }
+  .sts-tactics { grid-column:1 / -1; grid-row:2; flex-direction:row; align-items:center; padding:0; min-width:0; }
+  .sts-tactics-secondary { justify-content:flex-start; }
+  #overlay .battle-stage.sts .sts-end-turn { width:auto; margin-left:auto; padding-inline:20px; }
+}
+@media (max-width:560px) {
+  #overlay .battle-stage.sts .sts-hud { grid-template-columns:58px minmax(0,1fr); padding-inline:6px; }
+  #overlay .battle-stage.sts .sts-energy { width:56px; height:56px; }
+  #overlay .battle-stage.sts .sts-energy b { font-size:22px; }
+  #overlay .battle-stage.sts .sts-energy .ic { display:none; }
+  #overlay .battle-stage.sts .sts-hand { min-height:142px; }
+  .sts-tactics { gap:5px; }
+  .sts-tactics-secondary .ov-btn { padding:5px!important; font-size:10px!important; }
+  #overlay .battle-stage.sts .sts-end-turn { min-height:36px; padding-inline:10px; font-size:12px; }
+}
+
+#overlay .sts-hand .bt-card.click-selected { outline:2px solid #efcd89; outline-offset:3px; box-shadow:0 0 20px #e9c47a55; }
+@media (max-height:760px) and (min-width:901px) {
+  #overlay .battle-stage.sts .sts-hand .bt-slot:has(.bt-card.click-selected) { z-index:40!important; }
+  #overlay .battle-stage.sts .sts-hand .bt-card.click-selected { transform:translate(max(-330px,-28vw),-8px) scale(1.02); z-index:30; }
+  body #overlay .battle-stage.sts .sts-hand .bt-slot:hover .bt-card.click-selected:not(.off):not(.aim-lift) { transform:translate(max(-330px,-28vw),-8px) scale(1.02)!important; }
+}
+#overlay .sts-hand .bt-card.click-selected::after { content:'选择目标 · Esc 取消'; position:absolute; bottom:4px; left:4px; right:4px; padding:4px 0; color:#112735; background:#dfc28d; font-size:10px; text-align:center; pointer-events:none; }
+
+/* 战斗全屏边界：不继承通用弹窗的居中/动画位移，顶部牌堆和底部战术台始终留在视口内。 */
+#overlay.room-view:has(.card.battle) { align-items:stretch; overflow:hidden; }
+#overlay.room-view .card.battle { position:fixed; inset:0; width:auto; height:auto; min-width:0; min-height:0; transform:none!important; }
+#overlay.room-view .card.battle #ovBody { width:100%; height:100%; min-width:0; min-height:0; overflow:hidden; }
+#overlay.room-view .card.battle #ovBody > .battle-stage.sts { width:100%!important; max-width:none; height:100%!important; min-height:0!important; overflow:hidden; }
+#overlay .battle-stage.sts .sts-topbar { top:max(0px,env(safe-area-inset-top))!important; padding-left:max(clamp(12px,2vw,28px),env(safe-area-inset-left)); padding-right:max(clamp(12px,2vw,28px),env(safe-area-inset-right)); }
+
+/* 选目标时建立明确的“合法目标/其他单位”层级，避免与单位常驻蓝光混淆。 */
+#overlay .battle-stage[data-phase="targeting"] .sts-unit:not(.can-target) { opacity:.38; filter:grayscale(.6) saturate(.55); }
+#overlay .battle-stage[data-phase="targeting"] .sts-unit.can-target { opacity:1; z-index:8; outline:3px solid #ffe7a1; outline-offset:7px; border-radius:18px; background:radial-gradient(ellipse at center,rgba(255,221,128,.24),transparent 68%); box-shadow:0 0 0 2px rgba(69,43,13,.75),0 0 28px rgba(255,210,104,.72); }
+#overlay .battle-stage[data-phase="targeting"] .sts-unit.can-target .sts-figure { filter:drop-shadow(0 0 5px #fff) drop-shadow(0 0 18px #ffc84d) drop-shadow(0 0 32px rgba(255,153,0,.9)); }
+#overlay .battle-stage[data-phase="targeting"] .sts-unit.can-target::after { content:'可选目标'; position:absolute; left:50%; top:6px; transform:translateX(-50%); white-space:nowrap; padding:4px 10px; border:2px solid #ffe7a1; border-radius:999px; color:#2a1905; background:#ffd76f; font-size:11px; font-weight:900; letter-spacing:1px; box-shadow:0 2px 0 rgba(69,43,13,.85),0 0 18px rgba(255,205,91,.8); pointer-events:none; }
+/* 点选卡牌后舞台仍处于 player 阶段，直接依据可选目标类展示目标轮廓。 */
+#overlay .battle-stage.sts[data-boss="0"] .sts-foe.can-target .sts-figure {
+  filter:drop-shadow(0 0 6px rgba(255,241,197,.82)) drop-shadow(0 0 14px rgba(231,165,79,.5));
+}

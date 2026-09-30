@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": false,
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "types": []
+  },
+  "files": [
+    "game/src/cards/card-rules.capability.js",
+    "game/src/battle/effects/battle.rule-guard.js"
+  ]
+}

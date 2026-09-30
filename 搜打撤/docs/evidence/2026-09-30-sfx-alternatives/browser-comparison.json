@@ -1,0 +1,27 @@
+{
+  "url": "http://127.0.0.1:5391/sfx-audition.html?set=alternatives&pack=arknights",
+  "input": "Codex built-in browser locator clicks, V key and stop",
+  "checks": [
+    {
+      "error": null,
+      "pack": "A · 方舟轻调",
+      "readyState": 4,
+      "src": "http://127.0.0.1:5391/assets/sfx/alternatives/arknights/card.ogg",
+      "title": "出牌"
+    },
+    {
+      "error": null,
+      "pack": "B · 冷感界面",
+      "readyState": 4,
+      "src": "http://127.0.0.1:5391/assets/sfx/alternatives/cc0-ui/card.ogg",
+      "title": "出牌"
+    },
+    {
+      "error": null,
+      "pack": "C · 动作材质",
+      "readyState": 4,
+      "src": "http://127.0.0.1:5391/assets/sfx/alternatives/cc0-action/card.ogg",
+      "title": "出牌"
+    }
+  ]
+}

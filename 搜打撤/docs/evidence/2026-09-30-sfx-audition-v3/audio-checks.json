@@ -1,0 +1,108 @@
+{
+  "source": "Deterministic procedural synthesis; no imported audio samples",
+  "sounds": [
+    {
+      "file": "01-ui-click.wav",
+      "label": "按钮点击",
+      "description": "短干电子触点，紧凑、微颗粒，无铃音。",
+      "duration_s": 0.22,
+      "channels": 2,
+      "sample_rate": 48000,
+      "format": "WAV PCM_24",
+      "peak_dbfs": -11.0,
+      "true_peak_dbfs_4x": -10.98,
+      "rms_dbfs": -31.51,
+      "tail_peak_dbfs": -138.47,
+      "dc_offset": -2.7591272285490325e-05,
+      "sha256": "3049c39088572559636bcab14d14d90b4e9354d357fdea7b40b36612108dc6e6"
+    },
+    {
+      "file": "02-card-play.wav",
+      "label": "出牌",
+      "description": "滤波滑动与数字落点，克制的确认感。",
+      "duration_s": 0.4,
+      "channels": 2,
+      "sample_rate": 48000,
+      "format": "WAV PCM_24",
+      "peak_dbfs": -9.5,
+      "true_peak_dbfs_4x": -9.47,
+      "rms_dbfs": -28.56,
+      "tail_peak_dbfs": -132.45,
+      "dc_offset": -2.590508200228214e-05,
+      "sha256": "06e22ec9ce9c3c70f6eeda8c71ca9598a8efc7b57c772d93c2e63c892c41e088"
+    },
+    {
+      "file": "03-attack-impact.wav",
+      "label": "攻击命中",
+      "description": "中频冲击与短粗糙层，保留力度而压低低频重量。",
+      "duration_s": 0.59,
+      "channels": 2,
+      "sample_rate": 48000,
+      "format": "WAV PCM_24",
+      "peak_dbfs": -8.0,
+      "true_peak_dbfs_4x": -7.97,
+      "rms_dbfs": -29.49,
+      "tail_peak_dbfs": -138.47,
+      "dc_offset": 2.5861144150044286e-05,
+      "sha256": "407a16be4b6b17a0ef2e19cdb2c2fc819571b04437e8a5ffca1aaebc2ffdbab4"
+    },
+    {
+      "file": "04-event-enter.wav",
+      "label": "进入事件",
+      "description": "短扫描、信号落点、暗色空间；无上行旋律。",
+      "duration_s": 1.46,
+      "channels": 2,
+      "sample_rate": 48000,
+      "format": "WAV PCM_24",
+      "peak_dbfs": -10.0,
+      "true_peak_dbfs_4x": -9.99,
+      "rms_dbfs": -29.16,
+      "tail_peak_dbfs": -94.12,
+      "dc_offset": 2.0598720538017414e-06,
+      "sha256": "f9894fba2ea2d5208a3ae1a99a5ff8bad4a7a6f74aa7a80fd6ac27ffcdff0570"
+    },
+    {
+      "file": "05-boss-reveal.wav",
+      "label": "首脑登场",
+      "description": "蓄势信号与暗色共鸣，紧张但不使用大片重击。",
+      "duration_s": 1.85,
+      "channels": 2,
+      "sample_rate": 48000,
+      "format": "WAV PCM_24",
+      "peak_dbfs": -8.5,
+      "true_peak_dbfs_4x": -8.48,
+      "rms_dbfs": -29.25,
+      "tail_peak_dbfs": -111.63,
+      "dc_offset": -2.138517998360299e-09,
+      "sha256": "81a1812756371aae365b95743875eae07fed87449a7ed6c1799ba7bbecbd83a6"
+    }
+  ],
+  "montage_markers": [
+    {
+      "label": "按钮点击",
+      "start_s": 0.45,
+      "repeats": 3
+    },
+    {
+      "label": "出牌",
+      "start_s": 3.1,
+      "repeats": 3
+    },
+    {
+      "label": "攻击命中",
+      "start_s": 6.29,
+      "repeats": 3
+    },
+    {
+      "label": "进入事件",
+      "start_s": 10.05,
+      "repeats": 2
+    },
+    {
+      "label": "首脑登场",
+      "start_s": 14.58,
+      "repeats": 2
+    }
+  ],
+  "montage_duration_s": 19.89
+}

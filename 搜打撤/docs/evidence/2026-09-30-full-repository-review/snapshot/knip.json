@@ -1,0 +1,18 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "entry": [
+    "game/index.html",
+    "game/tools/**/*.{js,mjs,cjs}",
+    "scripts/**/*.{js,mjs,cjs}",
+    "game/scripts/**/*.{js,cjs,mjs}"
+  ],
+  "ignore": [
+    "desktop-app/**",
+    "docs/**",
+    "game/dev-shims/**",
+    "game/selftest.js",
+    "tests/*.fixture.ts",
+    "vite.e7.config.js"
+  ],
+  "ignoreExportsUsedInFile": true
+}

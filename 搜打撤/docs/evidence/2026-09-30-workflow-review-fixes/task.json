@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "id": "workflow-review-fixes",
+  "date": "2026-09-30",
+  "owner": "Friday",
+  "goal": "逐项修复开发流程审查确认的五个问题",
+  "paths": [
+    "scripts/workflow-staged.mjs",
+    "scripts/workflow-task.mjs",
+    "scripts/workflow-evidence.mjs",
+    "scripts/workflow-dependencies.mjs",
+    "scripts/workflow.mjs",
+    "scripts/acceptance-gate.mjs",
+    "tests/workflow-staged.test.js",
+    "tests/workflow-task.test.js",
+    "tests/workflow-dependencies.test.js",
+    "tests/acceptance-gate.test.js",
+    "docs/production/management/ITERATION-BOARD.md",
+    "docs/production/management/DECISIONS.md",
+    "docs/SPEC-PROCESS.md",
+    "docs/WORKFLOW-TOOLS.md"
+  ],
+  "doneWhen": [
+    "真实CLI在隔离Git视图内运行且源index/工作树不变",
+    "隔离成功报告可收官而skip不冒充通过",
+    "核心目录路径明确触发完整门",
+    "现行状态规范对齐唯一任务记录",
+    "定向关联输入受监控而无关音效不误伤，未知动态输入保守回退"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "逐项相关测试：隔离10项、报告协议32项、核心路径16项、文档3项、依赖范围26项均通过；真实定向闭包37文件不含音效源码；自有lint/diff检查通过",
+      "result": "passed"
+    },
+    {
+      "kind": "report",
+      "report": "docs/evidence/2026-09-30-workflow-review-fixes/2026-09-30T15-35-43.102Z-99ce69a3.json",
+      "result": "passed",
+      "sha256": "b84a6f5ff6ff227b4019cf60832513945ffed6764bd910f70012311f5692f651",
+      "verification": "recorded-result-only-not-current-freshness"
+    },
+    {
+      "kind": "report",
+      "report": "docs/evidence/2026-09-30-workflow-review-fixes/2026-09-30T15-41-09.895Z-f4bd14d8.json",
+      "result": "failed",
+      "sha256": "919de7a90fbf007693d1f75df76474aa6cbb77db5dce1de57ebe452f5b9bb6a5",
+      "verification": "recorded-result-only-not-current-freshness"
+    }
+  ],
+  "unverified": [
+    "整体主线完整门未全绿：boot.test超时、hub-flow-regression断言、m7-battle随机获取断言，3失败/2086通过/2跳过；不在本次五项范围，游戏域存在其他会话M，未覆盖或修改这些文件"
+  ],
+  "updatedAt": "2026-09-30T15:58:46.403Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

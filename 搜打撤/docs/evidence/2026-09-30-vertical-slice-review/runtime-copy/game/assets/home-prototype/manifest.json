@@ -1,0 +1,17 @@
+{
+  "version": "m04-prototype-1",
+  "status": "direction-sample",
+  "warning": "M04-a 原创几何占位，仅供布局和接入验证，不是最终美术。",
+  "referenceViewport": { "width": 1920, "height": 1080 },
+  "projection": { "type": "dimetric", "origin": [960, 252], "cell": [112, 56] },
+  "assets": [
+    { "id": "home-room-back-proto", "file": "room-back.svg", "size": [1920, 1080], "pivot": [0.5, 1], "layer": "room-back" },
+    { "id": "home-room-foreground-proto", "file": "room-foreground.svg", "size": [1920, 1080], "pivot": [0.5, 1], "layer": "foreground" },
+    { "id": "home-furniture-display-cabinet-proto", "file": "display-cabinet.svg", "size": [320, 300], "pivot": [0.5, 0.94], "layer": "floor-object", "furnitureId": "display-cabinet", "footprint": [2, 1] },
+    { "id": "home-furniture-work-table-proto", "file": "work-table.svg", "size": [320, 220], "pivot": [0.5, 0.92], "layer": "floor-object", "furnitureId": "work-table", "footprint": [2, 1] },
+    { "id": "home-furniture-chair-proto", "file": "chair.svg", "size": [180, 210], "pivot": [0.5, 0.92], "layer": "floor-object", "furnitureId": "chair", "footprint": [1, 1] },
+    { "id": "home-furniture-table-lamp-proto", "file": "table-lamp.svg", "size": [120, 170], "pivot": [0.5, 0.96], "layer": "floor-object", "furnitureId": "table-lamp", "footprint": [1, 1], "support": "table" },
+    { "id": "home-furniture-woven-rug-proto", "file": "woven-rug.svg", "size": [430, 220], "pivot": [0.5, 0.5], "layer": "floor-underlay", "furnitureId": "woven-rug", "footprint": [3, 2] },
+    { "id": "home-furniture-wall-decoration-proto", "file": "wall-decoration.svg", "size": [260, 180], "pivot": [0.5, 1], "layer": "wall-decor", "furnitureId": "wall-decoration", "footprint": [2, 1] }
+  ]
+}

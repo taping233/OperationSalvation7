@@ -1,0 +1,6 @@
+{
+  "goal": "将日常流程压成定任务、改动、相关验收、收官，减少重复记账与无效重验",
+  "paths": ["scripts/workflow.mjs", "scripts/workflow-evidence.mjs", "scripts/workflow-task.mjs", "scripts/workflow-status.mjs", "scripts/handoff-brief.mjs", "scripts/acceptance-gate.mjs", "tests/workflow-scope.test.js", "tests/workflow-task.test.js", "tests/workflow-handoff.test.js", "tests/acceptance-gate.test.js", "docs/WORKFLOW-TOOLS.md", "docs/STATUS.md", "docs/SPEC-PROCESS.md", "docs/quality-gates.md", "docs/README.md"],
+  "doneWhen": ["仅状态台账变化不使通过的代码证据失效", "任务执行状态只维护在task.json，摘要从记录生成", "按任务接手只列相关信息并注明省略数量"],
+  "stage": "doing"
+}

@@ -1,0 +1,30 @@
+/* ============================================================
+ * page-datapage.css —— 跑局数据页布局收敛（W2-06，0926 W2 R1）
+ * 数据页 markup 由 agent.data.js 生成（agent.** 冻结），布局整理
+ * 由 game.menu.js openDataPageUi 注入 .data-tuned 类激活本片：
+ *   ① .data-pg-head 页头行：返回件（绝对位 top16/left18）不再叠
+ *      「总局数」KPI 卡——页头从 96px 起让位，KPI 区由页头行自然下推；
+ *   ② 导出/清空钮收敛：原 .ov-btns 两列 grid 让低频导出钮各占半屏
+ *      （796px）——改 flex 右对齐、宽度随内容。
+ * ============================================================ */
+#overlay .pg.data-tuned .data-pg-head { padding-top: 58px; padding-left: 96px; }
+/* cards.css 对 .card.page h2 一刀切 display:none——页名恢复沿用 page-settings S2c 同款先例 */
+#overlay .pg.data-tuned .data-pg-head h2 {
+  display: block; position: relative; margin: 0;
+  padding-left: 14px;
+  font-size: clamp(17px, 1.7vw, 21px); letter-spacing: 6px; color: #f2f6f5;
+  text-shadow: 0 0 16px rgba(8, 22, 32, .8), 0 0 3px rgba(217, 187, 130, .28);
+}
+#overlay .pg.data-tuned .data-pg-head h2::before {
+  content: ''; position: absolute; left: 0; top: 50%; width: 2px; height: 16px;
+  transform: translateY(-50%);
+  background: linear-gradient(180deg, transparent, #d9bb82cc, transparent);
+  box-shadow: 1px 0 6px #d9bb8240;
+}
+#overlay .pg.data-tuned .data-pg-head h2 .ic { filter: brightness(1.08) drop-shadow(0 0 4px rgba(217, 187, 130, .22)); }
+#overlay .pg.data-tuned .data-pg-head h2 { margin: 0; font-size: 20px; }
+#overlay .pg.data-tuned .data-pg-head .pg-spacer { flex: 1; }
+#overlay .pg.data-tuned .ov-btns { display: flex; justify-content: flex-end; }
+#overlay .pg.data-tuned .ov-btns .ov-btn { flex: 0 0 auto; min-width: 150px; }
+/* W4-04：数据页页头双语节标（R1 自补） */
+#overlay .pg.data-tuned .data-pg-head .section-kicker { align-self: center; margin-right: 10px; letter-spacing: .2em; }

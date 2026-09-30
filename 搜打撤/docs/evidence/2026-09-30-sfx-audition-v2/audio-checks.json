@@ -1,0 +1,108 @@
+{
+  "source": "Deterministic procedural synthesis; no imported audio samples",
+  "sounds": [
+    {
+      "file": "01-ui-click.wav",
+      "label": "按钮点击",
+      "description": "短小弹性触点，柔和亮音，无写实锁扣。",
+      "duration_s": 0.2,
+      "channels": 2,
+      "sample_rate": 48000,
+      "format": "WAV PCM_24",
+      "peak_dbfs": -11.0,
+      "true_peak_dbfs_4x": -10.99,
+      "rms_dbfs": -26.36,
+      "tail_peak_dbfs": -79.78,
+      "dc_offset": 5.5941405395666755e-05,
+      "sha256": "80616a45c24627e6e19f92895d9315533540485941cda01c8125f54f1caa54f5"
+    },
+    {
+      "file": "02-card-play.wav",
+      "label": "出牌",
+      "description": "轻拂、弹性落点与微弱晶亮泛音。",
+      "duration_s": 0.46,
+      "channels": 2,
+      "sample_rate": 48000,
+      "format": "WAV PCM_24",
+      "peak_dbfs": -9.0,
+      "true_peak_dbfs_4x": -8.99,
+      "rms_dbfs": -24.63,
+      "tail_peak_dbfs": -81.05,
+      "dc_offset": 0.0002056171523704045,
+      "sha256": "31ac0807b2c8094a3fd9782b9a00b35beeaea1d9b73c0f1fd6a1f38390b3a44f"
+    },
+    {
+      "file": "03-attack-impact.wav",
+      "label": "攻击命中",
+      "description": "轻量弹性冲击与短闪光感，削弱写实低频。",
+      "duration_s": 0.57,
+      "channels": 2,
+      "sample_rate": 48000,
+      "format": "WAV PCM_24",
+      "peak_dbfs": -7.5,
+      "true_peak_dbfs_4x": -7.49,
+      "rms_dbfs": -25.15,
+      "tail_peak_dbfs": -98.39,
+      "dc_offset": 3.2763124296539706e-05,
+      "sha256": "42197573c856c798045e7df7ea89413b8b2393c9a2411ffc939dc029649e5b56"
+    },
+    {
+      "file": "04-event-enter.wav",
+      "label": "进入事件",
+      "description": "疏朗上行共鸣，轻微神秘与好奇。",
+      "duration_s": 1.4,
+      "channels": 2,
+      "sample_rate": 48000,
+      "format": "WAV PCM_24",
+      "peak_dbfs": -9.0,
+      "true_peak_dbfs_4x": -8.99,
+      "rms_dbfs": -23.3,
+      "tail_peak_dbfs": -69.19,
+      "dc_offset": 4.332021233581361e-05,
+      "sha256": "4848ecfe1867cb2b2c1dfd1c7a342a7b1ab64b30c7486fe46d21b4c3121254a9"
+    },
+    {
+      "file": "05-boss-reveal.wav",
+      "label": "首脑登场",
+      "description": "短蓄势与幻想小和弦，保留挑战感而减轻压迫。",
+      "duration_s": 1.9,
+      "channels": 2,
+      "sample_rate": 48000,
+      "format": "WAV PCM_24",
+      "peak_dbfs": -7.5,
+      "true_peak_dbfs_4x": -7.49,
+      "rms_dbfs": -26.0,
+      "tail_peak_dbfs": -91.43,
+      "dc_offset": 2.913019048017368e-05,
+      "sha256": "586e3f19a98c80541cacf2506d60f9f782a08d662aa6648749a36a02caf04c29"
+    }
+  ],
+  "montage_markers": [
+    {
+      "label": "按钮点击",
+      "start_s": 0.45,
+      "repeats": 3
+    },
+    {
+      "label": "出牌",
+      "start_s": 3.04,
+      "repeats": 3
+    },
+    {
+      "label": "攻击命中",
+      "start_s": 6.41,
+      "repeats": 3
+    },
+    {
+      "label": "进入事件",
+      "start_s": 10.11,
+      "repeats": 2
+    },
+    {
+      "label": "首脑登场",
+      "start_s": 14.52,
+      "repeats": 2
+    }
+  ],
+  "montage_duration_s": 19.93
+}

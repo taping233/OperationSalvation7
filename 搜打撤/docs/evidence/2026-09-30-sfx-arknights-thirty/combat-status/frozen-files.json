@@ -1,0 +1,284 @@
+{
+  "created_at": "2026-09-30T22:56:34.622258+08:00",
+  "baseline": "fd38468",
+  "count_cues": 10,
+  "count_ogg": 20,
+  "human_audition": false,
+  "files": [
+    {
+      "path": "搜打撤/docs/evidence/2026-09-30-sfx-arknights-thirty/combat-status/armorBreak-base.wav",
+      "bytes": 406616,
+      "sha256": "dd74df90d2a0c534927c9cda09173e31267e62202b51e3bf4716898fa77e30db"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-09-30-sfx-arknights-thirty/combat-status/armorBreak.wav",
+      "bytes": 387254,
+      "sha256": "0e9e9c1468a069dd0cbb4e401bece8268aa88e0bd87d09b24473eb5e38316cc5"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-09-30-sfx-arknights-thirty/combat-status/buffDown-base.wav",
+      "bytes": 263366,
+      "sha256": "c9ae651c92900f8d7c9ea02311cf0d95223f5194c9c3aa7bb909b77b37940676"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-09-30-sfx-arknights-thirty/combat-status/buffDown.wav",
+      "bytes": 253238,
+      "sha256": "90a943a4abf4e5ad5077ce5b4b9498ea920354f91027b72e0ac53c5ce06cab0f"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-09-30-sfx-arknights-thirty/combat-status/buffUp-base.wav",
+      "bytes": 596246,
+      "sha256": "01093d1b48aee49bc338a45e8670cf3cc5a1fd9f72729925b152ca98c1dda010"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-09-30-sfx-arknights-thirty/combat-status/buffUp.wav",
+      "bytes": 578882,
+      "sha256": "b6a109313d6e1bf642bfe98fba1ef3a4d349b5a1f107f6f84cb20478247b6c20"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-09-30-sfx-arknights-thirty/combat-status/cues.json",
+      "bytes": 6445,
+      "sha256": "1243634868c876d7892b7bda50efe8740b81a72ec4237aca8c03bfc5b7d5dbfd"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-09-30-sfx-arknights-thirty/combat-status/curse-base.wav",
+      "bytes": 848558,
+      "sha256": "1b18ad78e31dbda80ead3d2c0fc699da59e95e359f313f4a46ccb326e44266ce"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-09-30-sfx-arknights-thirty/combat-status/curse.wav",
+      "bytes": 831920,
+      "sha256": "0925e8b87a5ad4d3a54decfa881297c3ae64539860d572cc1e21595fb1c12910"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-09-30-sfx-arknights-thirty/combat-status/curseEnd-base.wav",
+      "bytes": 969656,
+      "sha256": "13a135c618dfe7d462aad7e63c68cb6566f78f41325de2decc9a4a1e855a0b27"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-09-30-sfx-arknights-thirty/combat-status/curseEnd.wav",
+      "bytes": 932366,
+      "sha256": "d13ab6bdd75cb6253a7283965e15cca456a83dd067b87a08eafbe1e75ca9c516"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-09-30-sfx-arknights-thirty/combat-status/energyDown-base.wav",
+      "bytes": 279104,
+      "sha256": "bdbe787974d17238ddf1f5565ba035a216791dc97d2ccb88a0040ebb59bc44ec"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-09-30-sfx-arknights-thirty/combat-status/energyDown.wav",
+      "bytes": 268370,
+      "sha256": "c07dfe0404b09aa81ba7bea7900fb1ecc478e5f926b0540b3a36b09e45b81063"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-09-30-sfx-arknights-thirty/combat-status/energyUp-base.wav",
+      "bytes": 276914,
+      "sha256": "597a2140b6c67346e1b60cf47d7217fd133833f10a9691157c1ac4c5c7890456"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-09-30-sfx-arknights-thirty/combat-status/energyUp.wav",
+      "bytes": 268850,
+      "sha256": "7a56b05ba65cab480c5d4367b6e5cd805505c087876c6cc23cf9e2fc1fcf3657"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-09-30-sfx-arknights-thirty/combat-status/hurt-base.wav",
+      "bytes": 325070,
+      "sha256": "93afe919787df5e0cec780652b21fcf4e13091ff414300498c19705fdbbcea56"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-09-30-sfx-arknights-thirty/combat-status/hurt.wav",
+      "bytes": 312566,
+      "sha256": "6ae34106307357115237d40e691df0e38b4660f256097fc9c64f60f64a73afda"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-09-30-sfx-arknights-thirty/combat-status/kill-base.wav",
+      "bytes": 441542,
+      "sha256": "36ef72a4f48f85f264f3a2555ed24afbf5d94319360f0aac7d5a12e2191b7425"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-09-30-sfx-arknights-thirty/combat-status/kill.wav",
+      "bytes": 428684,
+      "sha256": "27c76975fd66daeaeda7d516ee7b826c41a4cd1a32f45957c62fda4eb2c4271f"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-09-30-sfx-arknights-thirty/combat-status/make_combat_status.py",
+      "bytes": 5381,
+      "sha256": "f92a39088f8f3c1d9d29ad92243f22be4b516706d07770632861e542b22649c2"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-09-30-sfx-arknights-thirty/combat-status/processing-checks.json",
+      "bytes": 11805,
+      "sha256": "cb79f502badf64fe39365b7f94c09e21edba48b39b8e793f75e153a548f814a4"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-09-30-sfx-arknights-thirty/combat-status/README.md",
+      "bytes": 2813,
+      "sha256": "12a2ba8ecfac524536cf6a6fe32c136846c6520292aa97eb904de1e3f416306d"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-09-30-sfx-arknights-thirty/combat-status/shieldUp-base.wav",
+      "bytes": 356774,
+      "sha256": "a606faa2ccdf66250ebd0e07fa7c642097f7e91faf7aa6ecf5d2a9a57059f6d0"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-09-30-sfx-arknights-thirty/combat-status/shieldUp.wav",
+      "bytes": 343052,
+      "sha256": "db0ea0d2140ee913cb911e531b2cdfca3765e83df7949d41b7a28647124461c4"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-09-30-sfx-arknights-thirty/combat-status/source-probe.json",
+      "bytes": 3616,
+      "sha256": "b0a60ac4ef83365f60b252268b756c46de23e61aebcb0cb4f60465648fb7f7ef"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-09-30-sfx-arknights-thirty/combat-status/sources/b_char_addshield.wav",
+      "bytes": 126074,
+      "sha256": "eab370fa7b96b53f73f22b71da609784c2df18354012ef25484672f611afeb8a"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-09-30-sfx-arknights-thirty/combat-status/sources/b_char_atkboost.wav",
+      "bytes": 373568,
+      "sha256": "c870fb27f51fb1bf74e4710075603fac0a879a0b8ac80071db94bdd21bb29404"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-09-30-sfx-arknights-thirty/combat-status/sources/b_char_battery.wav",
+      "bytes": 84970,
+      "sha256": "1d372439f55b8009496b8d4cb4a344c7319dbc0c3661454a7dc26ed2f31cad31"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-09-30-sfx-arknights-thirty/combat-status/sources/b_char_boostclose.wav",
+      "bytes": 161328,
+      "sha256": "6d75caa514cb2fff8c98829f854466e8d7cac20267423ff34af10d1feaa3c84e"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-09-30-sfx-arknights-thirty/combat-status/sources/b_char_cursedoll.wav",
+      "bytes": 262628,
+      "sha256": "7aba9ea6497b7ad73c5760378ea06af9f8941ee2c090d9d8a98bc6cc916986a0"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-09-30-sfx-arknights-thirty/combat-status/sources/b_char_darkharm.wav",
+      "bytes": 100898,
+      "sha256": "cb37b252ac9762a71afe2412f300ab2d266a1b4ac5c693b270126e3ba7248f34"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-09-30-sfx-arknights-thirty/combat-status/sources/b_char_dead.wav",
+      "bytes": 342140,
+      "sha256": "3b1700a1fdbe7d0355df4892c325e8492c4f7e9e09b7274f880f009a80533279"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-09-30-sfx-arknights-thirty/combat-status/sources/b_char_emp_2.wav",
+      "bytes": 662364,
+      "sha256": "e1bcd15c178c4934883a06ef91f0126331c198cf70b0249e7794f6ee6a317d2a"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-09-30-sfx-arknights-thirty/combat-status/sources/b_char_energyharm.wav",
+      "bytes": 85506,
+      "sha256": "5b224601a97f20a47b3cd8d8133a9604dc4580e45ccf3bfdcf2c626020dcaddc"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-09-30-sfx-arknights-thirty/combat-status/sources/b_char_rockexplo.wav",
+      "bytes": 133474,
+      "sha256": "23245cfd941a94857dae53bb6eee3174e2002c1ddc7ecc3abe97fc9239ac9cd2"
+    },
+    {
+      "path": "搜打撤/game/assets/sfx/alternatives/arknights-expansion/combat-status/armorBreak-base.ogg",
+      "bytes": 27983,
+      "sha256": "8ea3c0085073c6f57151ff3e6c78f706d9989a6dbddecbc67e35b9368e876aad"
+    },
+    {
+      "path": "搜打撤/game/assets/sfx/alternatives/arknights-expansion/combat-status/armorBreak.ogg",
+      "bytes": 25741,
+      "sha256": "38db83e858161ca2b105f62b0c8e490837af224c69f1d2402ceff603845f15fb"
+    },
+    {
+      "path": "搜打撤/game/assets/sfx/alternatives/arknights-expansion/combat-status/buffDown-base.ogg",
+      "bytes": 24150,
+      "sha256": "d6f02f040f4fddbf9070ec6cf24b9b52e545409f42f02a71231a289fe69fbf21"
+    },
+    {
+      "path": "搜打撤/game/assets/sfx/alternatives/arknights-expansion/combat-status/buffDown.ogg",
+      "bytes": 23404,
+      "sha256": "5423ec6ddc83e373a333c167f0bc12f0d1f9a9dedd0b5955087923bd549fc45d"
+    },
+    {
+      "path": "搜打撤/game/assets/sfx/alternatives/arknights-expansion/combat-status/buffUp-base.ogg",
+      "bytes": 45976,
+      "sha256": "61fbc95d908183170b50ac278622f8630c7f9d5822f524b248ddd91276ed3ae3"
+    },
+    {
+      "path": "搜打撤/game/assets/sfx/alternatives/arknights-expansion/combat-status/buffUp.ogg",
+      "bytes": 44185,
+      "sha256": "fac3bf69ca0a43af3512181375034986e154aa7ba4f13ba0ba53722e65c9e881"
+    },
+    {
+      "path": "搜打撤/game/assets/sfx/alternatives/arknights-expansion/combat-status/curse-base.ogg",
+      "bytes": 48660,
+      "sha256": "f1d1844ab09c73dfaf179235a447d2cc43f2aceea2d05cc2bf2d17dbec2e6762"
+    },
+    {
+      "path": "搜打撤/game/assets/sfx/alternatives/arknights-expansion/combat-status/curse.ogg",
+      "bytes": 46144,
+      "sha256": "8704c80671d29a276721689dee6e02cf5fb606bfdbf336213a79c3f83ee1997c"
+    },
+    {
+      "path": "搜打撤/game/assets/sfx/alternatives/arknights-expansion/combat-status/curseEnd-base.ogg",
+      "bytes": 68667,
+      "sha256": "f0823fefea97cab6a0a7d475748e6352d8ceb04ee968bf01c6080339959630f1"
+    },
+    {
+      "path": "搜打撤/game/assets/sfx/alternatives/arknights-expansion/combat-status/curseEnd.ogg",
+      "bytes": 63505,
+      "sha256": "0ce2fee7aeaf24e888fcdadc326ab385ee4a0084060e0b46268efaa54587779e"
+    },
+    {
+      "path": "搜打撤/game/assets/sfx/alternatives/arknights-expansion/combat-status/energyDown-base.ogg",
+      "bytes": 20457,
+      "sha256": "f7a08c0319c7aa85b74683fc45dc41b3dde32a476a588a639c97331ccf92ad6e"
+    },
+    {
+      "path": "搜打撤/game/assets/sfx/alternatives/arknights-expansion/combat-status/energyDown.ogg",
+      "bytes": 19480,
+      "sha256": "6a0437c1b3915737ea91fbb96162b55c0441fe7b42d156bdc5014ed146100011"
+    },
+    {
+      "path": "搜打撤/game/assets/sfx/alternatives/arknights-expansion/combat-status/energyUp-base.ogg",
+      "bytes": 23065,
+      "sha256": "9b5fd560ce15459fd0ccef6fff5541a080cd8b286308d19ed60aafb92ed4da3b"
+    },
+    {
+      "path": "搜打撤/game/assets/sfx/alternatives/arknights-expansion/combat-status/energyUp.ogg",
+      "bytes": 22128,
+      "sha256": "dca06df8ae7daca658f9d7bccf5d92055b0b8ac184ca2844d5cb1f83631dfb28"
+    },
+    {
+      "path": "搜打撤/game/assets/sfx/alternatives/arknights-expansion/combat-status/hurt-base.ogg",
+      "bytes": 24595,
+      "sha256": "cf5d014dbe1228b60d83d9baf1ef9103c7f1a071073f2dd1095721e300eda433"
+    },
+    {
+      "path": "搜打撤/game/assets/sfx/alternatives/arknights-expansion/combat-status/hurt.ogg",
+      "bytes": 22484,
+      "sha256": "3430081d8daae0053cde0da971c723ce2fd85e533cd74c2b6d82b19d7ca63f34"
+    },
+    {
+      "path": "搜打撤/game/assets/sfx/alternatives/arknights-expansion/combat-status/kill-base.ogg",
+      "bytes": 32823,
+      "sha256": "421f86fc37f99cb89cb8c6e75cdd09368dc00a15b01683ea4c27ae95a5b133d9"
+    },
+    {
+      "path": "搜打撤/game/assets/sfx/alternatives/arknights-expansion/combat-status/kill.ogg",
+      "bytes": 31741,
+      "sha256": "696c6e3f757d1b63e2b74d6e7964bdfb6f581c32eff6385a2a216d1c52cabc22"
+    },
+    {
+      "path": "搜打撤/game/assets/sfx/alternatives/arknights-expansion/combat-status/shieldUp-base.ogg",
+      "bytes": 23909,
+      "sha256": "76f0e75553e65a883726835c1dd1fdddd50b33ca6063a408d9e9f065c00214d2"
+    },
+    {
+      "path": "搜打撤/game/assets/sfx/alternatives/arknights-expansion/combat-status/shieldUp.ogg",
+      "bytes": 22927,
+      "sha256": "d9dbf9136a466f7a20c0c823141550beb3d3ea1ea7c462aed5447b13f41372c2"
+    }
+  ]
+}

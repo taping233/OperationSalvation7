@@ -1,0 +1,66 @@
+ M ../AGENTS.md
+ M README.md
+ M docs/PARALLEL-DISPATCH-PLAYBOOK.md
+ M docs/PARALLEL-REGISTRY.md
+ M docs/PENDING.md
+ M docs/README.md
+ M docs/SPEC-PROCESS.md
+ M docs/STATUS.md
+ M docs/agent-protocol.md
+ M docs/archive/README.md
+ M docs/development.md
+ M docs/production/engineering/MAKER-HANDBOOK.md
+ M docs/production/management/ITERATION-BOARD.md
+ M docs/production/management/NEXT-CYCLE-TECH-PLAN.md
+ M docs/production/qa/ACCEPTANCE-MATRIX.md
+ M docs/quality-gates.md
+ M docs/roadmap.md
+ M package-lock.json
+ M package.json
+ M scripts/handoff-brief.mjs
+ M scripts/page-snapshot.mjs
+ M tests/docs-consistency.test.js
+ M tests/m-batch-behavior.test.js
+ M tests/r7a-qa-live.test.js
+ M tests/u18-negative-hp-death.test.js
+?? ../.codex/
+?? ../.photolib-acc/
+?? ../.ui-art-loop-0925/
+?? docs/WORKFLOW-TOOLS.md
+?? docs/archive/workflow-2026-09-30/
+?? docs/archive/workflow-completion-2026-09-30/
+?? docs/archive/workflow-routing-2026-09-30/
+?? docs/evidence/2026-09-30-arknights-sfx-reference/
+?? docs/evidence/2026-09-30-dual-client-workflow/
+?? docs/evidence/2026-09-30-sfx-audition-v1/
+?? docs/evidence/2026-09-30-sfx-audition-v2/
+?? docs/evidence/2026-09-30-sfx-audition-v3/
+?? docs/evidence/2026-09-30-sfx-audition-v4/
+?? docs/evidence/2026-09-30-sfx-audition-v5/
+?? docs/evidence/2026-09-30-sfx-full-v5/
+?? docs/evidence/2026-09-30-sfx-listening-page/
+?? docs/evidence/2026-09-30-sfx-v6-ten/
+?? docs/evidence/2026-09-30-vertical-slice-review/
+?? docs/evidence/2026-09-30-workflow-completion/
+?? docs/evidence/2026-09-30-workflow-tools/
+?? game/assets/sfx/winter-v5/
+?? game/css/sfx-audition.css
+?? game/sfx-audition.html
+?? game/src/audio/sfx-audition.js
+?? scripts/iab-drive.mjs
+?? scripts/index-validation.mjs
+?? scripts/workflow-archive.mjs
+?? scripts/workflow-browser.mjs
+?? scripts/workflow-evidence.mjs
+?? scripts/workflow-ledger.mjs
+?? scripts/workflow-memory.mjs
+?? scripts/workflow-staged.mjs
+?? scripts/workflow-status.mjs
+?? scripts/workflow.mjs
+?? tests/workflow-browser.test.js
+?? tests/workflow-cli-integration.test.js
+?? tests/workflow-index.test.js
+?? tests/workflow-memory.test.js
+?? tests/workflow-staged.test.js
+?? tests/workflow-tools.test.js
+?? ../项目近况-2026-09-29/

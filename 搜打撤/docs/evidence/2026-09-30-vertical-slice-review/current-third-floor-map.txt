@@ -1,0 +1,64 @@
+# Third-floor visible map snapshot
+
+Captured: 2026-09-30 14:01 UTC (22:01 Asia/Shanghai), during live play. Source: `http://127.0.0.1:5386/` (isolated runtime copy, title `升格会的冬日猜想 v0.60.0`), Codex in-app browser IAB tab ID `1`, viewport 1280×720. Screenshot was captured by `tab.getScreenshot()` and is available in the CUA conversation only; the documented CUA surface exposes screenshot bytes and `nodeRepl.emitImage`, but no documented filesystem save API, so no local screenshot path is claimed. Action log was collapsed in the visible UI to keep the current map unobscured. No code or game state APIs were called.
+
+## Full accessible UI state (after collapsing the action log)
+
+```text
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5386/
+ 1 container app
+  2 container sidebar
+  3 image 无
+  4 container statsPanel
+  5 image Description: 已探明区域简图, ID: miniMap
+  6 text 行动 · 价值
+  7 text 27
+  8 text /
+  9 text 0
+ 10 container routePanel
+  11 text 下一步 · 2 条路线 撤离已开放 · 找到信标，献祭 3 张卡牌
+  12 container 可前往的相邻节点
+  13 button 入口（节点 1）
+  14 text 入口
+  15 text 已建立的行进路线
+  16 button 物资格（节点 3）
+  17 text 物资格
+  18 text 已探索 · 可通行，物资不再刷新
+  19 text 点击路线或地图亮环前进 Space 选择 · X 确认 · B 背包
+ 20 container viewport
+ 21 image game
+ 22 container Description: 远征章节, ID: expeditionChapter
+ 23 text EXPEDITION / 03
+ 24 content list
+ 25 container
+ 26 text 01 第1层 · 外围荒地
+ 27 container
+ 28 text 02 第2层 · 风雪哨线
+ 29 container
+ 30 text 03 第3层 · 冻土遗迹
+ 31 container
+ 32 text 04 第4层 · 污染核心 极高危 · 精英 10%
+ 33 container resHud
+ 34 text 0
+ 35 text 4
+ 36 container topBtns
+ 37 button btnLocate
+ 38 button btnHome
+ 39 button btnHelp
+ 40 button btnMute
+ 41 container
+ 42 text 当前生命
+ 43 container hpText
+ 44 text 32 /38
+ 45 button 背包 14/16, ID: bagBtnFloat
+ 46 text 背包
+ 47 text 14/16
+ 48 container Description: 行动记录, ID: logPanel
+ 49 button ▸ 行动记录, ID: logToggle
+ 50 text ▸
+ 51 text 行动记录
+```
+
+## Screenshot reading
+
+The current node is an already-resolved unknown event close to the layer entrance; accessible route text offers the established entrance path and an already-explored resource node. The screenshot shows an entrance marker above-left and the current event lower-left; the evacuation beacon is not visible from this current node. After the parent's static-navigation hint, continue along existing deeper routes once, within a short bound. This snapshot documents the visible UI only and does not establish that a beacon is absent from the rest of the layer.

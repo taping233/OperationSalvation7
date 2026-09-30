@@ -1,0 +1,68 @@
+{
+  "scope": "world_ui",
+  "source": "snapshot (frozen audit input)",
+  "confirmed": [
+    {
+      "id": "WORLD-001", "priority": 2, "status": "confirmed", "title": "拾取页从背包返回后，领取按钮未注册动作",
+      "file": "game/src/run/game.run.scenes.js", "start": 200, "end": 202,
+      "trigger": "对局进入金币/木材/口粮/钥匙拾取页，按 B 打开背包，再关闭背包。",
+      "expected": "来源拾取页立即恢复并允许领取一次奖励。",
+      "actual": "skipSearch 分支 reveal 后直接 return，跳过 UI.act('pickupGo')；closeBackpack 的 hideOverlay 已清空动作表，恢复页虽有领取按钮却没有处理器。",
+      "impact": "拾取流程无法正常结束，奖励无法领取；同页继续开关背包也不恢复动作。",
+      "callChain": ["runInstant → openPickupPage", "showBackpack → closeBackpack (game.bag.js:233)", "UI.hideOverlay → this._acts = {} (overlay.js:189)", "takeBagReturnHook → openPickupPage(..., true)", "reveal → early return → pickupGo handler missing"],
+      "evidence": ["world_ui/repro.test.js: pickup page restored from bag", "world_ui/repro.log: 5/5 passed"],
+      "reproBoundary": "调用快照实际 scenes、overlay 与返回钩子；session/卡牌展示用夹具。背包关闭非宝箱分支按实际源码镜像，未声称完整背包 UI 集成或浏览器实测。"
+    },
+    {
+      "id": "WORLD-002", "priority": 2, "status": "confirmed", "title": "火堆可借背包返回绕开节点消耗并重复领取收益",
+      "file": "game/src/run/game.run.altar.js", "start": 45, "end": 61,
+      "trigger": "进入未消耗火堆后，不按继续旅程，按 B 打开/关闭背包，点击脚下节点重新进入火堆。",
+      "expected": "背包返回保留本次火堆的复原进度，同一火堆只回复一次生命并掷一次职业卡。",
+      "actual": "openFireRest 先回复10生命并掷职业卡，visited 仅在 openPocketRestore 的 done 中设置；复原页没有 bag return hook，关闭背包回 idle，可再次 resolveCell 重进并再次发奖。",
+      "impact": "同一火堆无限回血且能重复抽取职业卡；最后按继续旅程后重复收益正常落盘。",
+      "callChain": ["resolveCell → runInstant('fire') → openFireRest → game.heal/随机发职业卡", "openPocketRestore (scenes.js:301) 未登记背包来源钩子", "showBackpack → closeBackpack → no hook → game.state='idle'", "reenterCell → resolveCell → visited absent → openFireRest again", "fireDone → consumeCurrentCell → saveGame"],
+      "evidence": ["world_ui/repro.test.js: fire rewards can be repeatedly granted", "world_ui/repro.log: 5/5 passed", "实测夹具 hp 1→11→21→31，ownedCards 0→1→2→3；fireDone 后 saved visited=1/hp=31/cards=3"],
+      "reproBoundary": "快照实际 altar/scenes/flow/overlay；夹具把火堆职业卡概率设为1以确定性展示重复发卡，生产概率按MAP规则，重复回血不依赖概率。背包关闭镜像边界同 WORLD-001。"
+    },
+    {
+      "id": "WORLD-003", "priority": 2, "status": "confirmed", "title": "事件二级选卡页开关背包会丢失已支付的奖励",
+      "file": "game/src/run/game.run.flow.js", "start": 523, "end": 547,
+      "trigger": "装备征用令事件选择支付3币进入三选一（尤其满包需腾格时），按B打开/关闭背包。",
+      "expected": "关背包回到同一选卡页，保留已付款和候选卡；腾出空间后可领取。",
+      "actual": "evtChoice 先清原返回钩子并消费事件格；openEventQuartermaster 扣3币后进入 openEventCardChoice，该二级页未登记新的返回钩子。closeBackpack 回idle，候选闭包丢失；重进节点因visited=1无法再领取。",
+      "impact": "玩家损失3币并永久丢失本节点奖励；药摊等复用 openEventCardChoice 的免费奖励页也有相同来源丢失。",
+      "callChain": ["runEventDeck → triggerEventCard → evtChoice", "setBagReturnHook(null) + consumeCurrentCell (flow.js:468-470)", "openEventQuartermaster → spendEventCoins(3) → openEventCardChoice", "showBackpack → closeBackpack → takeBagReturnHook=null → idle", "reenterCell → visited guard → finishInstant → saveGame"],
+      "evidence": ["world_ui/repro.test.js: quartermaster consumes a node and payment", "world_ui/repro.log: 5/5 passed", "调用真实 runEventDeck/evtChoice，9币→6币，visited=1，返包和重入后ownedCards=0，最终save保留6币/visited=1"],
+      "reproBoundary": "卡库中注入1张实际id ev19-quartermaster 与3件装备以固定事件选择；实际事件业务函数与真实overlay/返回钩子。未遍历全部二级事件，黑市/重编台来源风险只列扩展待验。"
+    },
+    {
+      "id": "WORLD-004", "priority": 2, "status": "confirmed", "title": "设置中的留言库入口把dataset误当来源布尔值",
+      "file": "game/src/ui/game.menu.js", "start": 1039, "end": 1039,
+      "trigger": "设置页点击查看历史留言，再点击返回。",
+      "expected": "从设置进入的留言库返回设置页。",
+      "actual": "UI.act 直接注册 openSuggestionInbox，UI点击委托会传 DOMStringMap；函数将这个对象作 fromTitle，!!object 恒true，因此 sugBack 走标题分支。",
+      "impact": "设置→留言库导航来源丢失，返回直接关闭浮层并置title，设置页内容未恢复。",
+      "callChain": ["UI.init ovBody click → fn(btn.dataset) (ui.js:45-48)", "UI.act('openInbox', openSuggestionInbox)", "openSuggestionInbox(fromTitle) → sugFromTitle=!!fromTitle (menu.js:342-343)", "sugBack → title branch (menu.js:360)"],
+      "evidence": ["world_ui/repro.test.js: settings inbox receives the action dataset", "world_ui/repro.log: 5/5 passed"],
+      "reproBoundary": "实际 createGameMenuController 与 overlay，传实际DOM按钮dataset，调用同一动作分发；未调用 UI.init 全局监听。"
+    },
+    {
+      "id": "WORLD-005", "priority": 3, "status": "confirmed", "title": "启动兜底clearInterval传Window导致失败提示反复重建",
+      "file": "game/index.html", "start": 373, "end": 373,
+      "trigger": "页面模块未就绪超过12秒，点击加载失败提示上的收起按钮。",
+      "expected": "失败条定格且关闭后保持关闭；成功启动后停止轮询。",
+      "actual": "浏览器setInterval回调的this是Window，clearInterval(this)没有清除该interval；后续每400ms重新删除/创建失败条，关闭400ms后再次出现。358行成功分支也无法停表。",
+      "impact": "兜底提示无法稳定关闭且持续重建DOM；正常启动后仍保留永久400ms轮询。",
+      "callChain": ["index.html inline boot guard → setInterval", "elapsed>=12000 → makeBar → clearInterval(this)", "close click → bar=null", "next 400ms tick → elapsed>=12000 → makeBar again"],
+      "evidence": ["world_ui/repro.test.js: boot-failure notice reappears after dismissal", "world_ui/repro.log: 5/5 passed"],
+      "reproBoundary": "从冻结index.html原样读取inline script并在独立jsdom执行；fake timer回调显式绑定Window以匹配浏览器timer规范。未运行外部/headless浏览器或真实网络失败验收。"
+    }
+  ],
+  "suspected": [
+    { "id": "WORLD-S01", "file": "game/src/run/chests.js", "start": 206, "note": "open(opts.resourceOnly)局部K未传入rollContents，rollContents却从chestKind spec读resourceOnly；runInstant(chest)声明true失效。resource节点与chest节点现行设计拆分，未找到足够当前契约证明chest必须只资源，因此不列确诊玩法Bug。" },
+    { "id": "WORLD-S02", "file": "game/src/run/game.nest.js", "start": 266, "note": "next按钮处理未更新nestPos，startNestBattle/nestBattleEnd按旧当前格判BOSS与奖励；符文/卡牌部分获取缺容量与即时落盘守卫。BASE-DIRECT-WRITE-AUDIT明确研究所冻结，公开入口制作中，未验证玩家生产可达，不列活跃P1。" },
+    { "id": "WORLD-S03", "file": "game/src/run/game.run.scenes.js", "start": 331, "note": "复原容量只看usedSlots>=bagCap，与grantEventCard/canReceiveCard的叠放和珍珠盒限制不同；未结合所有现行复原特例定性。" }
+  ],
+  "known": ["上轮F1-F4修复已在快照中，未重复报。", "PENDING #13 照相馆开发服路径、#19/#20战斗终局、roadmap moveCancel IME由根代理统一列known。", "game.nest.js/相关lab.ending为冻结研究所遗留链，读审限制已单列。"],
+  "validation": { "command": "node node_modules/vitest/vitest.mjs run --config docs/evidence/2026-09-30-full-repository-review/world_ui/repro.config.mjs --reporter=verbose", "tests": 5, "passed": 5, "browser": "not performed by this worker" }
+}

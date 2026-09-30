@@ -1,0 +1,6395 @@
+{
+  "owner": "battle_cards",
+  "date": "2026-09-30",
+  "baseline": "../snapshot; existing source coverage/findings unchanged",
+  "scope": "snapshot/tests recursively, basename contains battle/card/effect/m-batch, excludes basename starts workflow",
+  "files_count": 70,
+  "kind_counts": {
+    "executable-test": 64,
+    "type-fixture": 2,
+    "data-fixture": 2,
+    "test-support": 2
+  },
+  "depth_counts": {
+    "systematic": 8,
+    "deep": 19,
+    "static-only": 43
+  },
+  "method": "只读源码 + Acorn AST 全扫描，重点人工审阅；未执行或重跑任何测试、未修改游戏/既有tests。",
+  "ast_limits": "403个字面量it/test调用声明不是Vitest运行用例总数；不展开it.each/循环生成/模板字符串case，不完成导入别名/跨函数数据流，vi.fn数量不等于核心逻辑mock数量。",
+  "important_gaps": [
+    {
+      "id": "TQ-01",
+      "priority": "P2",
+      "related": [
+        "BC-03"
+      ],
+      "title": "牌库定向检索缺少“无匹配/不足/满手”生产测试",
+      "sources": [
+        {
+          "file": "tests/card-audit.test.js",
+          "line": 85
+        },
+        {
+          "file": "tests/battle-all-cards.test.js",
+          "line": 82
+        },
+        {
+          "file": "tests/m-batch-production.test.js",
+          "line": 38
+        }
+      ],
+      "why_missed": "card-audit 的 deckDraw 端口仅记录 n/type 并恒返回 n，不运行真实 drawPile/随机 fallback；全卡 smoke 的指纹把能量变化和源牌离手视为效果，又给极高容量/能量；M批 production 仅证明规则存在和双门通过。没有把武装 + 有限真实牌库库存联起来。",
+      "improve": "用 canonical 武装 + 实际 BattleSession BOSS 编组。分别测试 0/1/2 张真实装备、其余牌顺序保留、满手时不凭空增卡。断言 moved UID 都来自原 drawPile，granted 不增加；普通战降级另测，避免把普通战政策套到 BOSS。",
+      "evidence": "上轮 repro.log ARMUP 已实证，没有重新运行。",
+      "validation_level": "人工复核源码与已有证据；未实施测试"
+    },
+    {
+      "id": "TQ-02",
+      "priority": "P2",
+      "related": [
+        "BC-04"
+      ],
+      "title": "挖宝测试人为造 priceArmor=true，跳过真实规则 producer",
+      "sources": [
+        {
+          "file": "tests/battle-selection-flow-boundary.test.js",
+          "line": 210
+        },
+        {
+          "file": "tests/battle-selection-flow-boundary.test.js",
+          "line": 224
+        },
+        {
+          "file": "tests/battle-all-cards.test.js",
+          "line": 84
+        }
+      ],
+      "why_missed": "发现边界测试直接 set$discovering(...priceArmor:true) 并把 sellPrice stub 为 5，只证明 picker 消费该旗正确；实际 structured 挖宝并未产生此旗，armor.priceOf 在选择之前拿旧 lastDrawnUids。全卡 smoke 不断言具体甲量，扣费/离手足够通过。",
+      "improve": "以 canonical 挖宝从 commands.playCard 开始，底牌真实 UID/非零费用与 previous lastDrawnUids 费用不同；选牌前后分别验甲、发现来源和队列。覆盖 lastDrawn 为空与不同价格两种，确保真正根据本次发现牌定价。现行价格决策需从 docs 对齐，不复用 sellPrice stub 自动作为需求。",
+      "evidence": "上轮 TREASURE 发现非零价格卡后甲=0；本次未重跑。",
+      "validation_level": "人工逐用例检查 picker 边界与 smoke 的观测定义"
+    },
+    {
+      "id": "TQ-03",
+      "priority": "P2",
+      "related": [
+        "BC-06"
+      ],
+      "title": "延迟牌只验创建/拒绝，没有到期执行闭环",
+      "sources": [
+        {
+          "file": "tests/battle-resolution.test.js",
+          "line": 276
+        },
+        {
+          "file": "tests/battle-resolution.test.js",
+          "line": 288
+        },
+        {
+          "file": "tests/battle-resolution.test.js",
+          "line": 301
+        },
+        {
+          "file": "tests/battle-all-cards.test.js",
+          "line": 136
+        }
+      ],
+      "why_missed": "resolver 旧 pending 守卫卡缺 rules.battle.target，chosenEnemy 本来就 schema-invalid；宽泛 toThrow(TypeError) 会因目标错误保持绿色，不能证明 schedule 尚未接线。全卡 smoke 出牌后只等队列 idle，没有 endTurn 到期，预约时支付/离手足够算有效果。",
+      "improve": "先 assert validateCardRules 和 inspectCapability 对正午 canonical 合法；用 commands.playCard → commands.endTurn 的真实流程，验当回合不打、下一回合四枪 HP 差 8、再下一回合不重复、delayed 清空、后续抽牌/回合开始效果仍执行。监测 console.error，失败不能仅因 busy 解锁而判通过。仍 unsupported 的守卫应断言具体 issue path/原因，并使用其余字段合法的卡。",
+      "evidence": "上轮 NOON 日志精确报目标契约错误且 HP未变；未新增产品缺陷。",
+      "validation_level": "人工复核 makeResolver 与旧 guard 片段；58 个 resolver case 未逐例全审"
+    },
+    {
+      "id": "TQ-04",
+      "priority": "P2",
+      "related": [
+        "BC-09"
+      ],
+      "title": "道具全卡审计把“已消耗”视为成功，未验证奖励",
+      "sources": [
+        {
+          "file": "tests/battle-all-cards.test.js",
+          "line": 193
+        },
+        {
+          "file": "tests/battle-all-cards.test.js",
+          "line": 201
+        },
+        {
+          "file": "tests/battle-all-cards.test.js",
+          "line": 202
+        },
+        {
+          "file": "tests/battle-all-cards.test.js",
+          "line": 67
+        }
+      ],
+      "why_missed": "道具审计只有 !consumed && fingerprint不变 才记录零效果。通行证已经从 ownedCards 删除，因此无奖、未开的 discoverQueue 也通过；drain 只看 snapshot.discovering/choosing/handSelecting 和 busy，未验证后台 discoverQueue 的完成语义。结构迁移验证可放行 bag pool，却没有生产 bag→discover 分派闭环。",
+      "improve": "以实际普通战 commands.usePotion/useItem 测 A/B/C；A/B 必须增加正确能力/传说奖励（母本仅消耗一次），C 必须先出合法发现面板再获得符合池的卡。断言 queue 收敛、modal 可操作、没有未支持池日志；不要让“母本消失”单独满足效果断言。地图使用应由相关分片补同样的奖励约束。",
+      "evidence": "上轮 TOKEN 确认母本删掉、granted=0、discovering=null而queue滞留；未重跑。",
+      "validation_level": "人工完整阅读全卡审计"
+    },
+    {
+      "id": "TQ-05",
+      "priority": "P2",
+      "related": [
+        "BC-10"
+      ],
+      "title": "饮血剑测试直接调用一次奖励端口，绕过真正杀敌与来源路由",
+      "sources": [
+        {
+          "file": "tests/m7-battle.test.js",
+          "line": 64
+        },
+        {
+          "file": "tests/m7-battle.test.js",
+          "line": 71
+        }
+      ],
+      "why_missed": "先真实装备后 applyKillRewards(nonNullProbe,1)，只能查一杀注册不双算。没有伤害导致敌人死亡、没有 kills>1、没有 card=null 的砸击/毒伤来源，恰好避开两处现行错误分支。",
+      "improve": "保留现有注册去重单位检查，另外用真实指令使四敌中两敌被一张 AOE 击杀，断言+2攻；再砸击第三敌断言累计+3，另补毒伤/道具终局（按确定来源取最小集）。无需mock fireKill/applyKillRewards；保持一名存活敌，先能观测奖励，再独立测最后一杀终局。",
+      "evidence": "上轮 BLOODDRINKER 真实AOE双杀+砸击第三杀仍仅+1；未重跑。",
+      "validation_level": "人工完整阅读M7测试与复用真实复现"
+    },
+    {
+      "id": "TQ-06",
+      "priority": "P2",
+      "related": [
+        "BC-01",
+        "BC-02",
+        "BC-05",
+        "BC-07",
+        "BC-08"
+      ],
+      "title": "组合状态、真实 UID 归属及预览与执行一致性缺口",
+      "sources": [
+        {
+          "file": "tests/battle-discover-state.test.js",
+          "line": 10
+        },
+        {
+          "file": "tests/battle-preview-amount.test.js",
+          "line": 17
+        },
+        {
+          "file": "tests/battle-all-cards.test.js",
+          "line": 24
+        }
+      ],
+      "why_missed": "builder/金额兼容测试只运行纯函数，不连接 producer→consumer 或 preview→真实执行；全卡 smoke 是每张新局、超大手牌/能量，没有 rune 满手/回合结束/多次发现/多张先行出牌组合。",
+      "improve": "分别添加极速“自动出一张后进入敌阶段”、灰烬满9后真实UID进弃牌并可洗回、宝箱当前定版完整链、黑暗形态候选4而次数1、连续射击0/1/2前置招式的预览与实打对照。优先复用已有本轮repro转为修复后预期，不能原样保留缺陷断言。",
+      "evidence": "复用上轮SWIFT/ASH/CHEST/DARK/PREVIEW，不新增产品问题。",
+      "validation_level": "针对组合盲区的改进清单，未逐case证明全仓绝无相似覆盖"
+    }
+  ],
+  "files": [
+    {
+      "file": "tests/a3-battle-rules.test.js",
+      "lines": 421,
+      "sha256": "8cea4c0eba2d4fabb13ad6d9935949be3e2b220caa6c69e60413302e7f6be960",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [
+        {
+          "line": 8,
+          "left": "window.SDT"
+        },
+        {
+          "line": 9,
+          "left": "window.SDT.Icons.TYPE_ART"
+        },
+        {
+          "line": 10,
+          "left": "window.SDT.Sound"
+        },
+        {
+          "line": 11,
+          "left": "window.SDT.MAP"
+        },
+        {
+          "line": 217,
+          "left": "game.hp"
+        },
+        {
+          "line": 419,
+          "left": "game.battleActive"
+        }
+      ],
+      "depth": "systematic",
+      "category": "production-session-test",
+      "entry_observation": "静态观察到生产BattleSession调用；未人工深读的文件不能据此证明所有case真实闭环",
+      "review_note": "真实Cards启动+BattleSession入口；AST索引20字面量case，人工重点setup/canonical规则shape与测试标题；未逐case审全420行。未找到五项重点组合的正向完整链。",
+      "production_imports": [
+        {
+          "line": 16,
+          "source": "../game/src/cards/cards.js"
+        },
+        {
+          "line": 17,
+          "source": "../game/src/battle/core/battle.core.js"
+        },
+        {
+          "line": 18,
+          "source": "../game/src/cards/card-rules.schema.js"
+        }
+      ],
+      "case_declaration_count": 20,
+      "mock_sites": [],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 100,
+          "name": "23 张卡全部带结构化 rules 且 validateCardRules 通过"
+        },
+        {
+          "line": 109,
+          "name": "B5 诅咒族 8 张终态 rules 在位且通过 schema"
+        },
+        {
+          "line": 121,
+          "name": "B6/B7 共 16 张终态 rules 在位且通过 schema"
+        },
+        {
+          "line": 137,
+          "name": "v2 键形状抽检（cond 门/区间/条件增伤/recast/吸血/护甲衰减/格挡）"
+        },
+        {
+          "line": 151,
+          "name": "斩杀：9 血以上无效果，9 血及以下造成 9 点真实伤害"
+        },
+        {
+          "line": 173,
+          "name": "惩击：基础 10 点全额，半血靶加成 50% 至 15 点"
+        },
+        {
+          "line": 200,
+          "name": "连射：固定 2 点触发 3 段"
+        },
+        {
+          "line": 213,
+          "name": "噬血术：造成 3 点并回复等量生命（吸血走禁疗门）"
+        },
+        {
+          "line": 229,
+          "name": "坚盾：获得 8 点护甲并注册回合衰减 4 点的延迟段"
+        },
+        {
+          "line": 242,
+          "name": "不变应万变：guard 降伤旗与 4 点护甲同时到位"
+        },
+        {
+          "line": 255,
+          "name": "二次爆炸：对全体敌人各造成 3 点法术伤害"
+        },
+        {
+          "line": 270,
+          "name": "毒箭：伤害后附加 1 层中毒，与文本路径同一状态袋"
+        },
+        {
+          "line": 282,
+          "name": "霜月斩：冰冻与禁疗双诅咒各持续 1 回合"
+        },
+        {
+          "line": 295,
+          "name": "棘刺之地：全体各 2 层中毒并立即引爆 1 次毒伤"
+        },
+        {
+          "line": 311,
+          "name": "致命射线：8 点法伤后附加恰好 3 种随机诅咒"
+        },
+        {
+          "line": 326,
+          "name": "聚能：获得 1 点能量"
+        },
+        {
+          "line": 338,
+          "name": "潜匿：抽 1 张并进入潜行 1 回合（blessing+draw 组合）"
+        },
+        {
+          "line": 352,
+          "name": "铁甲阵（BOSS 战口径）：10 护甲+5 张随机卡洗入牌库"
+        },
+        {
+          "line": 367,
+          "name": "熔岩爆破：9 点伤害并获得指定卡「二次爆炸」入手"
+        },
+        {
+          "line": 392,
+          "name": "毒箭式 damage+curse 复合：结构化中毒恰为 2 层、伤害段先行、文本句不复算"
+        }
+      ],
+      "main_call_index": [
+        "Cards.ensureSha",
+        "Cards.ensureStarters",
+        "Cards.ensureTabletop",
+        "Cards.ensureDmgTypes",
+        "Cards.ensureEffectFields",
+        "Cards.all",
+        "BattleSession.getSnapshot",
+        "BattleSession.commands.selectDeckCard",
+        "BattleSession.commands.confirmDeck",
+        "BattleSession.commands.pickDiscover",
+        "BattleSession.commands.pickChoice",
+        "BattleSession.commands.skipHandSelect",
+        "validateCardRules",
+        "BattleSession.start",
+        "BattleSession.commands.playCard",
+        "endBattleSafe",
+        "BattleSession.commands.dev"
+      ],
+      "gap_links": [],
+      "limitations": "重点入口/替身/关联case与全文件AST索引审阅，未逐case深读。"
+    },
+    {
+      "file": "tests/battle-all-cards.test.js",
+      "lines": 272,
+      "sha256": "8b3329b77c2b4a4699a1c19684f546110ae720334b88e401b9dc9980a95b6b0f",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [
+        {
+          "line": 19,
+          "left": "window.SDT"
+        },
+        {
+          "line": 20,
+          "left": "window.SDT.Icons.TYPE_ART"
+        },
+        {
+          "line": 21,
+          "left": "window.SDT.Sound"
+        },
+        {
+          "line": 22,
+          "left": "window.SDT.MAP"
+        }
+      ],
+      "depth": "deep",
+      "category": "production-session-test",
+      "entry_observation": "静态观察到生产BattleSession调用；未人工深读的文件不能据此证明所有case真实闭环",
+      "review_note": "真实生产 BattleSession + canonical boot，核心出牌不mock；Sound/Icons/G宿主为替身。完整阅读271行；oracle把扣费/离手算效果、道具消耗算成功，未推进所有时点。TQ-01/02/03/04/06。",
+      "production_imports": [
+        {
+          "line": 16,
+          "source": "../game/src/battle/effects/battle.target-rules.js"
+        },
+        {
+          "line": 17,
+          "source": "../game/src/battle/effects/hand-cost-patterns.js"
+        },
+        {
+          "line": 26,
+          "source": "../game/src/cards/cards.js"
+        },
+        {
+          "line": 27,
+          "source": "../game/src/battle/core/battle.core.js"
+        }
+      ],
+      "case_declaration_count": 1,
+      "mock_sites": [],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 254,
+          "name": "每张卡都能在真实战斗中打出/使用且不崩不卡死"
+        }
+      ],
+      "main_call_index": [
+        "BattleSession.getSnapshot",
+        "BattleSession.commands.pickDiscover",
+        "BattleSession.commands.pickChoice",
+        "BattleSession.commands.skipHandSelect",
+        "unplayableReasonFor",
+        "BattleSession.commands.selectInfusion",
+        "BattleSession.commands.confirmInfusion",
+        "BattleSession.commands.playCard",
+        "r.problem.startsWith",
+        "BattleSession.commands.flee",
+        "BattleSession.start",
+        "endBattle",
+        "BattleSession.commands.usePotion",
+        "BattleSession.commands.selectDeckCard",
+        "BattleSession.commands.confirmDeck",
+        "playInBattle"
+      ],
+      "gap_links": [
+        "TQ-01",
+        "TQ-02",
+        "TQ-03",
+        "TQ-04",
+        "TQ-06"
+      ],
+      "limitations": "完整阅读测试的fixture/setup/动作与oracle；本轮未执行测试，不代表已有结果重新验证。"
+    },
+    {
+      "file": "tests/battle-architecture.test.js",
+      "lines": 154,
+      "sha256": "32aa2a1b49b1185c269c7731f433ec5b32404101cec104b5f2fa5ec8dc4e029b",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [],
+      "depth": "static-only",
+      "category": "unit-or-boundary-test",
+      "entry_observation": "静态观察到生产模块import/工厂或纯函数调用；运行边界须按人工备注理解",
+      "review_note": "已完成AST导入、case、替身/源码读取与主要调用静态扫描；8个生产import，12个字面量case声明。未人工逐case检查断言和传递数据流，不声称端到端覆盖。",
+      "production_imports": [
+        {
+          "line": 2,
+          "source": "../game/src/battle/core/battle.actions.js"
+        },
+        {
+          "line": 3,
+          "source": "../game/src/battle/core/battle.hand.js"
+        },
+        {
+          "line": 4,
+          "source": "../game/src/battle/bag/battle.piles.js"
+        },
+        {
+          "line": 5,
+          "source": "../game/src/battle/view/battle.intent.view.js"
+        },
+        {
+          "line": 6,
+          "source": "../game/src/battle/view/battle.feedback.js"
+        },
+        {
+          "line": 7,
+          "source": "../game/src/battle/view/battle.piles.view.js"
+        },
+        {
+          "line": 8,
+          "source": "../game/src/battle/runtime/battle.state.js"
+        },
+        {
+          "line": 77,
+          "source": "../game/src/battle/core/combat.js"
+        }
+      ],
+      "case_declaration_count": 12,
+      "mock_sites": [],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 11,
+          "name": "uses an explicit phase and makes targeting cancellation idempotent"
+        },
+        {
+          "line": 20,
+          "name": "serializes actions and waits for each action to finish"
+        },
+        {
+          "line": 30,
+          "name": "keeps the action chain locked until a nested action has finished"
+        },
+        {
+          "line": 53,
+          "name": "aborts the running action and rejects queued actions when the battle ends"
+        },
+        {
+          "line": 65,
+          "name": "resolves every idle waiter after the queue becomes idle"
+        },
+        {
+          "line": 76,
+          "name": "keeps same-stat timed buffs on independent expiry clocks"
+        },
+        {
+          "line": 90,
+          "name": "keeps hand grouping/layout independent from battle rules"
+        },
+        {
+          "line": 114,
+          "name": "does not merge different card ids just because their visible text matches"
+        },
+        {
+          "line": 122,
+          "name": "moves card UIDs through zones without duplicates"
+        },
+        {
+          "line": 130,
+          "name": "normalizes one or multiple enemy intents for the view"
+        },
+        {
+          "line": 137,
+          "name": "keeps combat feedback timing deterministic per unit"
+        },
+        {
+          "line": 147,
+          "name": "renders combat pile badges without owning pile state"
+        }
+      ],
+      "main_call_index": [
+        "transitionBattle",
+        "createBattleState",
+        "createActionQueue",
+        "Promise.resolve",
+        ".resolves.toEqual",
+        ".resolves.toBe",
+        "groupHandCards",
+        "assertUniqueZones"
+      ],
+      "gap_links": [],
+      "limitations": "AST或fixture结构层；未逐case深审，若无人工备注不能判断stub是否遮住关键逻辑。"
+    },
+    {
+      "file": "tests/battle-card-inspection.test.js",
+      "lines": 108,
+      "sha256": "bfe6ccd38df99f8b19609f726d0faaf49f1167f1bc0916e50b4bc15bcd45a1ae",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [],
+      "depth": "static-only",
+      "category": "unit-or-boundary-test",
+      "entry_observation": "静态观察到生产模块import/工厂或纯函数调用；运行边界须按人工备注理解",
+      "review_note": "已完成AST导入、case、替身/源码读取与主要调用静态扫描；1个生产import，3个字面量case声明。未人工逐case检查断言和传递数据流，不声称端到端覆盖。",
+      "production_imports": [
+        {
+          "line": 2,
+          "source": "../game/src/battle/effects/battle.card-inspection.js"
+        }
+      ],
+      "case_declaration_count": 3,
+      "mock_sites": [
+        {
+          "line": 22,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        }
+      ],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 62,
+          "name": "按 UID 顺序查找并从定版数据修复旧克隆"
+        },
+        {
+          "line": 74,
+          "name": "读取派生抽牌、注能与带出法术折扣费用"
+        },
+        {
+          "line": 88,
+          "name": "聚合手牌诅咒并保留费用交换发现队列语义"
+        }
+      ],
+      "main_call_index": [
+        "createBattleCardInspection",
+        "inspection.findCard",
+        "inspection.drawOf",
+        "inspection.infuseOf",
+        "inspection.effCostOf",
+        "inspection.handCurseSpecs",
+        "inspection.queueSwapCostDiscover",
+        "inspection.swapCardCosts"
+      ],
+      "gap_links": [],
+      "limitations": "AST或fixture结构层；未逐case深审，若无人工备注不能判断stub是否遮住关键逻辑。"
+    },
+    {
+      "file": "tests/battle-discover-candidates.test.js",
+      "lines": 59,
+      "sha256": "2e11c92228568552ac46580ab97c541d0e3d030e243779772e0e88e41dbfd062",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [],
+      "depth": "deep",
+      "category": "unit-or-boundary-test",
+      "entry_observation": "静态观察到生产模块import/工厂或纯函数调用；运行边界须按人工备注理解",
+      "review_note": "真实纯pool builder；谓词/RNG为注入stub合理，用例测序/过滤/空池，不测生产bag pool名称翻译与drain。",
+      "production_imports": [
+        {
+          "line": 3,
+          "source": "../game/src/battle/effects/battle.discover-candidates.js"
+        }
+      ],
+      "case_declaration_count": 3,
+      "mock_sites": [
+        {
+          "line": 15,
+          "callee": "vi.fn",
+          "snippet": "vi.fn(card => card.id === 'valid' || card.id === 'rejected')"
+        },
+        {
+          "line": 45,
+          "callee": "vi.fn",
+          "snippet": "vi.fn(() => true)"
+        },
+        {
+          "line": 51,
+          "callee": "vi.fn",
+          "snippet": "vi.fn(() => 0.5)"
+        }
+      ],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 6,
+          "name": "preserves specified-pool exclusions, catalog order, and original card identity"
+        },
+        {
+          "line": 25,
+          "name": "preserves general filters and the other-class fallback precedence"
+        },
+        {
+          "line": 40,
+          "name": "keeps per-build custom predicate calls and does not consume randomness for an empty pool"
+        }
+      ],
+      "main_call_index": [
+        "predicate.mock.calls.map"
+      ],
+      "gap_links": [],
+      "limitations": "完整阅读测试的fixture/setup/动作与oracle；本轮未执行测试，不代表已有结果重新验证。"
+    },
+    {
+      "file": "tests/battle-discover-state.test.js",
+      "lines": 49,
+      "sha256": "1e2b64eeadc6e83df5decc547979b76532f841996325fefda718070fd7d8c6d3",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [],
+      "depth": "deep",
+      "category": "unit-or-boundary-test",
+      "entry_observation": "静态观察到生产模块import/工厂或纯函数调用；运行边界须按人工备注理解",
+      "review_note": "真实纯builder；验证引用/字段形状、slice3与n透传，未验证deckBottom选择次数或状态producer。",
+      "production_imports": [
+        {
+          "line": 3,
+          "source": "../game/src/battle/effects/battle.discover-state.js"
+        }
+      ],
+      "case_declaration_count": 3,
+      "mock_sites": [],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 10,
+          "name": "slices explicit options while preserving deck and effect tracking references"
+        },
+        {
+          "line": 29,
+          "name": "keeps random state free of deck-bottom fields and uses real default tracking arrays"
+        },
+        {
+          "line": 41,
+          "name": "builds the minimal pouch state without inventing queue metadata"
+        }
+      ],
+      "main_call_index": [],
+      "gap_links": [
+        "TQ-06"
+      ],
+      "limitations": "完整阅读测试的fixture/setup/动作与oracle；本轮未执行测试，不代表已有结果重新验证。"
+    },
+    {
+      "file": "tests/battle-engine-facade.test.js",
+      "lines": 36,
+      "sha256": "b5288e2a3fb8355579055c871facdf6e7263a0b36dd48b9b46211d23a96424d1",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [],
+      "depth": "deep",
+      "category": "structural-contract",
+      "entry_observation": "静态观察到生产模块import/工厂或纯函数调用；运行边界须按人工备注理解",
+      "review_note": "import真实 engine，但只比较导出名/数量；结构守卫而非实现/行为测试。",
+      "production_imports": [
+        {
+          "line": 9,
+          "source": "../game/src/battle/core/battle.engine.js"
+        }
+      ],
+      "case_declaration_count": 2,
+      "mock_sites": [],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 28,
+          "name": "具名导出集合与基线逐字一致（增删须显式更新本清单）"
+        },
+        {
+          "line": 32,
+          "name": "基线数量 = 64"
+        }
+      ],
+      "main_call_index": [],
+      "gap_links": [],
+      "limitations": "完整阅读测试的fixture/setup/动作与oracle；本轮未执行测试，不代表已有结果重新验证。"
+    },
+    {
+      "file": "tests/battle-esc-ime-guard.test.js",
+      "lines": 80,
+      "sha256": "ecec71db210ae282bbca395dee35fdef90416529868a5374ae51fc00ddb4291d",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [
+        {
+          "line": 38,
+          "left": "window.SDT"
+        },
+        {
+          "line": 40,
+          "left": "window.SDT.UI.el"
+        }
+      ],
+      "depth": "static-only",
+      "category": "unit-or-boundary-test",
+      "entry_observation": "静态观察到生产模块import/工厂或纯函数调用；运行边界须按人工备注理解",
+      "review_note": "已完成AST导入、case、替身/源码读取与主要调用静态扫描；2个生产import，4个字面量case声明。未人工逐case检查断言和传递数据流，不声称端到端覆盖。",
+      "production_imports": [
+        {
+          "line": 41,
+          "source": "../game/src/battle/core/battle.core.js"
+        },
+        {
+          "line": 43,
+          "source": "../game/src/battle/view/battle.layers.js"
+        }
+      ],
+      "case_declaration_count": 4,
+      "mock_sites": [
+        {
+          "line": 9,
+          "callee": "vi.mock",
+          "snippet": "vi.mock('../game/src/battle/core/battle.core.js', async (importOriginal) => {\n  const actual = await importOriginal();\n  return {\n    ...actual,\n    getSnapshot"
+        },
+        {
+          "line": 13,
+          "callee": "vi.fn",
+          "snippet": "vi.fn(() => ({\n      battleToken: 'u13-esc-ime',\n      pendingTarget: null, pendingItem: null, slamPending: null, dartPending: null, infusing: null,\n    }))"
+        },
+        {
+          "line": 17,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 17,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        }
+      ],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 47,
+          "name": "组合态（isComposing）Esc 不取消点选/瞄准态，也不 preventDefault"
+        },
+        {
+          "line": 56,
+          "name": "组合态（keyCode 229）Esc 不取消点选/瞄准态"
+        },
+        {
+          "line": 64,
+          "name": "非组合态 Esc 照常取消点选并 preventDefault（现状保持）"
+        },
+        {
+          "line": 72,
+          "name": "非组合态且无待决状态时 Esc 不误触发取消（现状保持）"
+        }
+      ],
+      "main_call_index": [
+        "vi.mock",
+        "core.getSnapshot.mockReturnValue"
+      ],
+      "gap_links": [],
+      "limitations": "AST或fixture结构层；未逐case深审，若无人工备注不能判断stub是否遮住关键逻辑。"
+    },
+    {
+      "file": "tests/battle-frames-lifecycle.test.js",
+      "lines": 200,
+      "sha256": "9f13a288d4fcea8327f7c29e2a4ddb157a26b35290e468b94d005f06d0be3147",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [],
+      "depth": "static-only",
+      "category": "unit-or-boundary-test",
+      "entry_observation": "静态观察到生产模块import/工厂或纯函数调用；运行边界须按人工备注理解",
+      "review_note": "已完成AST导入、case、替身/源码读取与主要调用静态扫描；1个生产import，7个字面量case声明。未人工逐case检查断言和传递数据流，不声称端到端覆盖。",
+      "production_imports": [
+        {
+          "line": 58,
+          "source": "../game/src/battle/view/battle.frames.js"
+        }
+      ],
+      "case_declaration_count": 7,
+      "mock_sites": [
+        {
+          "line": 34,
+          "callee": "vi.mock",
+          "snippet": "vi.mock('pixi.js', () => ({\r\n  Application: pixi.Application,\r\n  Sprite: pixi.Sprite,\r\n  Texture: { EMPTY: pixi.emptyTexture },\r\n  Assets: {\r\n    load: async ur"
+        }
+      ],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 76,
+          "name": "rejects a late resource callback after hide or overlay replacement"
+        },
+        {
+          "line": 89,
+          "name": "unloads the active frame texture set on hide and allows a later battle to reload it"
+        },
+        {
+          "line": 112,
+          "name": "unloads partial loads when idle is missing and clears a sprite even after the cache is empty"
+        },
+        {
+          "line": 132,
+          "name": "bounds simultaneous frame loads while preserving a usable idle frame"
+        },
+        {
+          "line": 143,
+          "name": "waits for pending frame batches to unload before a new attach"
+        },
+        {
+          "line": 167,
+          "name": "hides the static portrait synchronously on first attach, before async texture loading"
+        },
+        {
+          "line": 185,
+          "name": "restores the static portrait when no playable frame set exists (fallback, no permanent blank)"
+        }
+      ],
+      "main_call_index": [
+        "document.createElement",
+        "vi.mock",
+        "isLiveBattleFigure",
+        "Promise.resolve"
+      ],
+      "gap_links": [],
+      "limitations": "AST或fixture结构层；未逐case深审，若无人工备注不能判断stub是否遮住关键逻辑。"
+    },
+    {
+      "file": "tests/battle-hand-selection-rules.test.js",
+      "lines": 33,
+      "sha256": "a6c0563ac988e78c6ad50c18e7e955cb2c559a0940f310a4eff31e6319ff63b3",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [],
+      "depth": "static-only",
+      "category": "unit-or-boundary-test",
+      "entry_observation": "静态观察到生产模块import/工厂或纯函数调用；运行边界须按人工备注理解",
+      "review_note": "已完成AST导入、case、替身/源码读取与主要调用静态扫描；1个生产import，3个字面量case声明。未人工逐case检查断言和传递数据流，不声称端到端覆盖。",
+      "production_imports": [
+        {
+          "line": 3,
+          "source": "../game/src/battle/core/battle.hand-selection.js"
+        }
+      ],
+      "case_declaration_count": 3,
+      "mock_sites": [],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 6,
+          "name": "preserves wildcard and initial-attack key matching"
+        },
+        {
+          "line": 13,
+          "name": "requires a live card entry even when the key is a wildcard"
+        },
+        {
+          "line": 22,
+          "name": "requires current hand membership, a matching type, and no exclusions or prior selection"
+        }
+      ],
+      "main_call_index": [],
+      "gap_links": [],
+      "limitations": "AST或fixture结构层；未逐case深审，若无人工备注不能判断stub是否遮住关键逻辑。"
+    },
+    {
+      "file": "tests/battle-lifecycle.test.js",
+      "lines": 104,
+      "sha256": "1ba7766611954ecad6f1547e259f6fed3036fd4a04c8775947345eb47158432d",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [
+        {
+          "line": 3,
+          "left": "window.SDT"
+        },
+        {
+          "line": 4,
+          "left": "window.SDT.Icons.TYPE_ART"
+        },
+        {
+          "line": 5,
+          "left": "window.SDT.Sound"
+        },
+        {
+          "line": 6,
+          "left": "window.SDT.MAP"
+        }
+      ],
+      "depth": "deep",
+      "category": "production-session-test",
+      "entry_observation": "静态观察到生产BattleSession调用；未人工深读的文件不能据此证明所有case真实闭环",
+      "review_note": "真实canonical费用规则与实际 commands.start/play/flee跨战，断言能量/甲/费用重置；强行为锚但只污染两种状态。",
+      "production_imports": [
+        {
+          "line": 10,
+          "source": "../game/src/cards/cards.js"
+        },
+        {
+          "line": 11,
+          "source": "../game/src/battle/core/battle.core.js"
+        }
+      ],
+      "case_declaration_count": 2,
+      "mock_sites": [],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 77,
+          "name": "Boss → 普通战重置真实出牌造成的费用规则、能量与护甲"
+        },
+        {
+          "line": 88,
+          "name": "普通战 → Boss → 再开普通战隔离上一战真实费用规则与护甲状态"
+        }
+      ],
+      "main_call_index": [
+        "window.SDT.Cards.ensureSha",
+        "window.SDT.Cards.ensureStarters",
+        "window.SDT.Cards.ensureTabletop",
+        "window.SDT.Cards.ensureDmgTypes",
+        "window.SDT.Cards.ensureEffectFields",
+        "window.SDT.Cards.all",
+        "BattleSession.start",
+        "BattleSession.getSnapshot",
+        "start",
+        "BattleSession.commands.playCard",
+        "contaminateWithRealCards",
+        "BattleSession.commands.setPendingHint",
+        "BattleSession.commands.flee",
+        "expectFreshBattle"
+      ],
+      "gap_links": [],
+      "limitations": "完整阅读测试的fixture/setup/动作与oracle；本轮未执行测试，不代表已有结果重新验证。"
+    },
+    {
+      "file": "tests/battle-modules.test.js",
+      "lines": 78,
+      "sha256": "bf6dccc93f59a16e0042c110fca84f6277dc40afd9846164283557ef3e58704e",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [],
+      "depth": "deep",
+      "category": "unit-or-boundary-test",
+      "entry_observation": "静态观察到生产模块import/工厂或纯函数调用；运行边界须按人工备注理解",
+      "review_note": "已完成AST导入、case、替身/源码读取与主要调用静态扫描；3个生产import，5个字面量case声明。未人工逐case检查断言和传递数据流，不声称端到端覆盖。",
+      "production_imports": [
+        {
+          "line": 2,
+          "source": "../game/src/battle/bag/battle.deck.js"
+        },
+        {
+          "line": 3,
+          "source": "../game/src/battle/effects/battle.target-rules.js"
+        },
+        {
+          "line": 4,
+          "source": "../game/src/battle/effects/battle.effects.js"
+        }
+      ],
+      "case_declaration_count": 5,
+      "mock_sites": [],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 7,
+          "name": "只在抽牌堆为空时回收弃牌堆"
+        },
+        {
+          "line": 21,
+          "name": "把群体、伤害和自疗卡分配到正确目标侧"
+        },
+        {
+          "line": 34,
+          "name": "按普通战斗与 BOSS 战限制卡牌"
+        },
+        {
+          "line": 62,
+          "name": "「冰冻所有敌人」对全体存活敌人施加冰冻（无指定目标也能全体生效）"
+        },
+        {
+          "line": 70,
+          "name": "「冰冻所有敌人，持续 1 回合」同样全体生效且带持续回合"
+        }
+      ],
+      "main_call_index": [
+        "unplayableReasonFor",
+        "createEffectExecutor"
+      ],
+      "gap_links": [],
+      "limitations": "完整阅读测试的fixture/setup/动作与oracle；本轮未执行测试，不代表已有结果重新验证。"
+    },
+    {
+      "file": "tests/battle-pace.test.js",
+      "lines": 44,
+      "sha256": "5f2a282539be26047478353a10e72df0355f4585a7445d2b3b4336acd7eed055",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [],
+      "depth": "static-only",
+      "category": "unit-or-boundary-test",
+      "entry_observation": "静态观察到生产模块import/工厂或纯函数调用；运行边界须按人工备注理解",
+      "review_note": "已完成AST导入、case、替身/源码读取与主要调用静态扫描；1个生产import，5个字面量case声明。未人工逐case检查断言和传递数据流，不声称端到端覆盖。",
+      "production_imports": [
+        {
+          "line": 4,
+          "source": "../game/src/battle/runtime/battle.pace.js"
+        }
+      ],
+      "case_declaration_count": 5,
+      "mock_sites": [],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 12,
+          "name": "默认 1×：时长原样透传"
+        },
+        {
+          "line": 18,
+          "name": "2×：时长减半，敌方步进 420→210"
+        },
+        {
+          "line": 26,
+          "name": "80ms 下限：防定时器过密与动画闪跳"
+        },
+        {
+          "line": 32,
+          "name": "非法档位拒绝（不破坏当前倍率）"
+        },
+        {
+          "line": 39,
+          "name": "倍率持久化到 localStorage，重读生效"
+        }
+      ],
+      "main_call_index": [],
+      "gap_links": [],
+      "limitations": "AST或fixture结构层；未逐case深审，若无人工备注不能判断stub是否遮住关键逻辑。"
+    },
+    {
+      "file": "tests/battle-presentation.test.js",
+      "lines": 39,
+      "sha256": "f9a9bb997f035b294e0c2a98eb30e6e551ccfe7b4bdd26ff3d916153ac545af8",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [],
+      "depth": "static-only",
+      "category": "unit-or-boundary-test",
+      "entry_observation": "静态观察到生产模块import/工厂或纯函数调用；运行边界须按人工备注理解",
+      "review_note": "已完成AST导入、case、替身/源码读取与主要调用静态扫描；2个生产import，3个字面量case声明。未人工逐case检查断言和传递数据流，不声称端到端覆盖。",
+      "production_imports": [
+        {
+          "line": 2,
+          "source": "../game/src/battle/view/battle.feedback.js"
+        },
+        {
+          "line": 3,
+          "source": "../game/src/battle/runtime/battle.pace.js"
+        }
+      ],
+      "case_declaration_count": 3,
+      "mock_sites": [],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 8,
+          "name": "plays hit feedback in enqueue order and resolves only after the queue drains"
+        },
+        {
+          "line": 18,
+          "name": "drops stale feedback after the battle queue is cleared"
+        },
+        {
+          "line": 28,
+          "name": "keeps each multi-hit shake inside its scaled beat interval"
+        }
+      ],
+      "main_call_index": [
+        "Promise.resolve"
+      ],
+      "gap_links": [],
+      "limitations": "AST或fixture结构层；未逐case深审，若无人工备注不能判断stub是否遮住关键逻辑。"
+    },
+    {
+      "file": "tests/battle-preview-amount.test.js",
+      "lines": 43,
+      "sha256": "c8a181a542b28dae173f864822ecada7814cca0cd32eb0021285f3ad3e1b2cf4",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [],
+      "depth": "deep",
+      "category": "unit-or-boundary-test",
+      "entry_observation": "静态观察到生产模块import/工厂或纯函数调用；运行边界须按人工备注理解",
+      "review_note": "真实 previewAction 纯函数，但人工snapshot/context，且例子故意不走schema。只验null/NaN兼容，未把动态段数预览与执行比较。",
+      "production_imports": [
+        {
+          "line": 2,
+          "source": "../game/src/battle/view/battle.preview.js"
+        }
+      ],
+      "case_declaration_count": 3,
+      "mock_sites": [],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 16,
+          "name": "treats a null structured amount as zero damage"
+        },
+        {
+          "line": 25,
+          "name": "normalizes non-finite growth to zero before computing exact damage"
+        },
+        {
+          "line": 34,
+          "name": "keeps null card damage equivalent to zero for amountField previews"
+        }
+      ],
+      "main_call_index": [],
+      "gap_links": [
+        "TQ-06"
+      ],
+      "limitations": "完整阅读测试的fixture/setup/动作与oracle；本轮未执行测试，不代表已有结果重新验证。"
+    },
+    {
+      "file": "tests/battle-pure-rules.test.js",
+      "lines": 155,
+      "sha256": "12d8786eb5e646e186fc57e4000eecc73dbf5c8687f975531d4fb2eddc0ec7b0",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [],
+      "depth": "static-only",
+      "category": "unit-or-boundary-test",
+      "entry_observation": "静态观察到生产模块import/工厂或纯函数调用；运行边界须按人工备注理解",
+      "review_note": "已完成AST导入、case、替身/源码读取与主要调用静态扫描；3个生产import，12个字面量case声明。未人工逐case检查断言和传递数据流，不声称端到端覆盖。",
+      "production_imports": [
+        {
+          "line": 2,
+          "source": "../game/src/battle/effects/battle.card-cost.js"
+        },
+        {
+          "line": 3,
+          "source": "../game/src/battle/effects/battle.target-rules.js"
+        },
+        {
+          "line": 4,
+          "source": "../game/src/battle/core/battle.enemy-intent.js"
+        }
+      ],
+      "case_declaration_count": 12,
+      "mock_sites": [],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 22,
+          "name": "无限符文优先于限时零费与形态折扣，且仅折扣战斗内获得的招式"
+        },
+        {
+          "line": 29,
+          "name": "零费有效期含截止回合，过期后恢复原费；零费高于宇宙形态"
+        },
+        {
+          "line": 35,
+          "name": "宇宙形态、法术单费、武术单费按既有顺序压过文本折扣"
+        },
+        {
+          "line": 45,
+          "name": "上一张武术可归零；追斩按其他武术数折扣并封底为零"
+        },
+        {
+          "line": 52,
+          "name": "两种无护甲描述都在护甲为零时减费，护甲存在时保留费用"
+        },
+        {
+          "line": 63,
+          "name": "后备能源只按消耗口袋法术数折扣并最低为零；无匹配牌时原样回传费用"
+        },
+        {
+          "line": 74,
+          "name": "结构化费用不受描述改写影响，并保留全局费用优先级"
+        },
+        {
+          "line": 94,
+          "name": "结构化 requirements 控制禁用、牌库限制和手牌代价，改写描述不改变合法性"
+        },
+        {
+          "line": 111,
+          "name": "结构化 target 提供目标侧和群体范围，描述改写不改变两者"
+        },
+        {
+          "line": 129,
+          "name": "偶数回合敌人奇数回合蓄力，下一回合按攻击力和流血预告伤害"
+        },
+        {
+          "line": 139,
+          "name": "狂乱敌人的双击预告保持原样，伤害不低于玩家流血加成"
+        },
+        {
+          "line": 145,
+          "name": "U12-a/F1：noFirstAttack 敌人首回合蓄力预告（巢穴龙），第二回合起正常攻击"
+        }
+      ],
+      "main_call_index": [
+        "unplayableReasonFor",
+        "handCards.slice"
+      ],
+      "gap_links": [],
+      "limitations": "AST或fixture结构层；未逐case深审，若无人工备注不能判断stub是否遮住关键逻辑。"
+    },
+    {
+      "file": "tests/battle-resolution.test.js",
+      "lines": 1118,
+      "sha256": "21c31108b47aef40eeaa2fb9899b028c276ccbea0c28bbd5e0a2068aed09a043",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [],
+      "depth": "systematic",
+      "category": "unit-or-boundary-test",
+      "entry_observation": "静态观察到生产模块import/工厂或纯函数调用；运行边界须按人工备注理解",
+      "review_note": "真实resolver工厂，但hitFoe/drawCards/queueDiscover/牌堆/费用/死亡多数端口只记events。人工重点1-190、276-303；AST扫描全文件58字面量case。TQ-03宽泛异常错误因由。",
+      "production_imports": [
+        {
+          "line": 2,
+          "source": "../game/src/battle/core/battle.resolution.js"
+        },
+        {
+          "line": 3,
+          "source": "../game/src/battle/core/combat.js"
+        }
+      ],
+      "case_declaration_count": 58,
+      "mock_sites": [],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 81,
+          "name": "uses structured onPlay damage independently of description and skips legacy text damage"
+        },
+        {
+          "line": 97,
+          "name": "resolves schema-valid allEnemies segments in operation order and rejects conflicting target declarations"
+        },
+        {
+          "line": 125,
+          "name": "keeps structured attack damage before the existing silence gate"
+        },
+        {
+          "line": 139,
+          "name": "resolves structured armor once after silence and independently of description"
+        },
+        {
+          "line": 152,
+          "name": "does not resolve structured armor before or during the silence gate"
+        },
+        {
+          "line": 166,
+          "name": "runs heal then armor in declared order and preserves the healban log"
+        },
+        {
+          "line": 182,
+          "name": "uses boss draw and ordinary grantSha semantics in declared order"
+        },
+        {
+          "line": 202,
+          "name": "suppresses all structured heal, armor, and draw operations under silence"
+        },
+        {
+          "line": 215,
+          "name": "treats empty onPlay as no immediate effect and keeps undeclared legacy behavior"
+        },
+        {
+          "line": 235,
+          "name": "preserves damage-before-text order"
+        },
+        {
+          "line": 244,
+          "name": "reads rebound runtime values on the next cast"
+        },
+        {
+          "line": 257,
+          "name": "reads player status again after text effects before the structured heal fallback"
+        },
+        {
+          "line": 269,
+          "name": "sends structured armor through the armor command after text effects"
+        },
+        {
+          "line": 276,
+          "name": "throws on schema v2 keys the interpreter has not wired yet (guard against silent mis-resolution)"
+        },
+        {
+          "line": 305,
+          "name": "resolves literal, conditional, and bonus damage from v2 keys (B1)"
+        },
+        {
+          "line": 351,
+          "name": "resolves percent bonus, range rolls, random targets, and multi-hit counts (B1/B2)"
+        },
+        {
+          "line": 403,
+          "name": "recasts a damage operation once per kill (B2) and keeps lifesteal off the healban-free path (B3)"
+        },
+        {
+          "line": 449,
+          "name": "resolves heal upTo, selfDamage, perFuelCost, and perSpellHeal sources (B3)"
+        },
+        {
+          "line": 503,
+          "name": "resolves armor amount, guard, and decayAtTurnEnd from v2 keys (B3)"
+        },
+        {
+          "line": 565,
+          "name": "bleed：按 stacks 叠加施加，文本句跳过不双算（正/反）"
+        },
+        {
+          "line": 577,
+          "name": "poison：allEnemies 全体各施加（正），玩家自身不受影响（反）"
+        },
+        {
+          "line": 585,
+          "name": "freeze：duration 施加（正）；已冻结取较大不缩短不叠加（反）"
+        },
+        {
+          "line": 596,
+          "name": "silence：施加 N 回合（正）；玩家沉默时整段封印（反）"
+        },
+        {
+          "line": 607,
+          "name": "abreak：全体施加（正）；无存活目标时不施放不报错（反）"
+        },
+        {
+          "line": 621,
+          "name": "healban：target self 挂给玩家（正），敌人不受影响（反）"
+        },
+        {
+          "line": 630,
+          "name": "burn：randomEnemy 施放时随机一名存活敌人（正）；重复施加不叠加（反）"
+        },
+        {
+          "line": 643,
+          "name": "damage+curse 复合：按 onPlay 数组顺序先伤害后诅咒，文本句不复算"
+        },
+        {
+          "line": 663,
+          "name": "randomKinds：随机 n 种不同诅咒各 1 层/1 回合（正）；超出池长截断（反）"
+        },
+        {
+          "line": 676,
+          "name": "double：中毒层数翻倍（正）；计时诅咒没有层数只记日志（反）"
+        },
+        {
+          "line": 688,
+          "name": "burst：按当前层数引爆 n 次（正）；无中毒引爆 0 点（反）"
+        },
+        {
+          "line": 703,
+          "name": "extend：已有冰冻延长 n 回合（正）；未冰冻目标不被 duration 白嫖（反）"
+        },
+        {
+          "line": 715,
+          "name": "守卫：curse op 已放行，G13 时点触发器仍逐键抛出"
+        },
+        {
+          "line": 749,
+          "name": "守卫摘除：acquire 与 coins 不再被 PENDING 守卫抛出，其余 pending op 仍抛出"
+        },
+        {
+          "line": 758,
+          "name": "dest 缺省 discover：queueDiscover 收到 n/pred 面板任务（实打）"
+        },
+        {
+          "line": 772,
+          "name": "dest:'hand'：n 多张直发置入手牌，同名可重复（三重火球语义，实打）"
+        },
+        {
+          "line": 780,
+          "name": "dest:'deck'：BOSS 战洗入牌库并洗混（实打）"
+        },
+        {
+          "line": 788,
+          "name": "dest:'deck' 普通战双口径：无牌库降级为直接置入手牌（deckDraw/grantSha 先例）"
+        },
+        {
+          "line": 797,
+          "name": "pool:{kind:'moves', cost} v1 形状兼容 + 未识别 kind 走通用随机池"
+        },
+        {
+          "line": 810,
+          "name": "act:'dup' 手牌本体+复制 ×2 置手；act:'noInfuse' 透传 _noInfuse（灵能召唤先例）"
+        },
+        {
+          "line": 820,
+          "name": "dest:'discover' 面板 act/费用修饰透传（play/zeroCost），面板外 pending 组合炸出"
+        },
+        {
+          "line": 854,
+          "name": "池空兜底：dim 日志不炸结算；coins：获得 N 币入账（实打）"
+        },
+        {
+          "line": 899,
+          "name": "blessing atkUp：stacks 叠层入状态袋（正），desc 攻击句不双算；duration 走到期扣回（组合）"
+        },
+        {
+          "line": 914,
+          "name": "blessing spellUp：法伤加成叠加相加并读「当前加成」（正；反例口径：不取较大）"
+        },
+        {
+          "line": 922,
+          "name": "blessing stealth：duration 定回合数（正）；已有更长潜行取较大不缩短（反）"
+        },
+        {
+          "line": 933,
+          "name": "blessing immune：免疫 N 回合（正）；timed 型 stacks 兜底按回合数解释（组合）"
+        },
+        {
+          "line": 944,
+          "name": "blessing dodge：按层计数本回合有效（正）；显式 duration 覆盖本回合缺省（组合）"
+        },
+        {
+          "line": 957,
+          "name": "blessing reduce：每次受伤 -N 本场（正）；带 duration 时挂到期扣回（组合）"
+        },
+        {
+          "line": 969,
+          "name": "energy：+n 入当前能量（正）；沉默封印整段（反）"
+        },
+        {
+          "line": 982,
+          "name": "energyCap：上限 +n 且当前能量同加（引擎命令口径），日志带每回合费用（正）；沉默（反）"
+        },
+        {
+          "line": 994,
+          "name": "maxHp：上限 +n 同时回复 n（回血口径与引擎 addPlayerMaxHp 命令一致）（正）；沉默（反）"
+        },
+        {
+          "line": 1006,
+          "name": "deckCap：BOSS 战注明编组阶段生效不追溯（正口径）；普通战注明无牌库（反口径）——均无状态变更"
+        },
+        {
+          "line": 1016,
+          "name": "damage + blessing 复合：按 onPlay 数组顺序先伤害后增益（循环 1 → 沉默门 → 循环 2）"
+        },
+        {
+          "line": 1033,
+          "name": "blessing：沉默封印整段（反）——循环 2 在沉默门后，状态袋与日志均不产生"
+        },
+        {
+          "line": 1041,
+          "name": "守卫：B7 五 op 已放行不再抛错；summon 等 pending 族仍逐 op 抛出"
+        },
+        {
+          "line": 1070,
+          "name": "U16 终局守卫①：致死段全灭后，余下 heal.selfDamage 不落账（旧语义照常扣血）"
+        },
+        {
+          "line": 1079,
+          "name": "U16 终局守卫②：全灭后余下 coins 不落账（旧语义照常加币）"
+        },
+        {
+          "line": 1089,
+          "name": "U16 终局守卫③回归锚：未全灭时余下 op 照常结算（两敌只打倒其一）"
+        },
+        {
+          "line": 1105,
+          "name": "U16 终局守卫④：文本路径前句致死全灭后，余下立即句与 heal 字段兜底均不再结算"
+        }
+      ],
+      "main_call_index": [
+        "createBattleResolution",
+        "Promise.resolve",
+        "resolver",
+        "resolve",
+        "structured.resolver",
+        "legacy.resolver",
+        "literal.resolver",
+        "capped.resolver",
+        "wounded.resolver",
+        "bleeding.resolver",
+        "clean.resolver",
+        "half.resolver",
+        "ranged.resolver",
+        "multi.resolver.steps",
+        "rolled.resolver",
+        "random.resolver",
+        "low.resolver",
+        "high.resolver",
+        "selfhurt.resolver",
+        "fueled.resolver",
+        "spells.resolver",
+        "guarded.resolver",
+        "guardOnly.resolver",
+        "decaying.resolver",
+        "silenced.resolver",
+        "state.resolver.steps",
+        "state.resolver",
+        "fresh.resolver",
+        "longer.resolver",
+        "cast.resolver",
+        "empty.resolver.steps",
+        "again.resolver",
+        "wide.resolver",
+        "timed.resolver",
+        "frozen.resolver",
+        "ok.resolver",
+        "pending.resolver",
+        "generic.resolver",
+        "infuseFree.resolver",
+        "play.resolver",
+        "play.events.filter",
+        "zero.resolver",
+        "deckZero.resolver",
+        "pendingHand.resolver",
+        "pendingDeck.resolver",
+        "pendingDiscoverNoInfuse.resolver",
+        "empty.resolver",
+        "coins.resolver",
+        "stacked.resolver",
+        "lasting.resolver",
+        "boss.resolver",
+        "normal.resolver"
+      ],
+      "gap_links": [
+        "TQ-03"
+      ],
+      "limitations": "重点入口/替身/关联case与全文件AST索引审阅，未逐case深读。"
+    },
+    {
+      "file": "tests/battle-restart.test.js",
+      "lines": 51,
+      "sha256": "f8a290a18c5578c646599e4c1cfa32856e80ea000df02d1177bfa6e7d2809b09",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [
+        {
+          "line": 3,
+          "left": "window.SDT"
+        },
+        {
+          "line": 4,
+          "left": "window.SDT.Icons.TYPE_ART"
+        },
+        {
+          "line": 5,
+          "left": "window.SDT.Sound"
+        },
+        {
+          "line": 6,
+          "left": "window.SDT.MAP"
+        },
+        {
+          "line": 35,
+          "left": "game.hp"
+        },
+        {
+          "line": 36,
+          "left": "game.coins"
+        },
+        {
+          "line": 37,
+          "left": "game.ownedCards[0].safe"
+        }
+      ],
+      "depth": "deep",
+      "category": "production-session-test",
+      "entry_observation": "静态观察到生产BattleSession调用；未人工深读的文件不能据此证明所有case真实闭环",
+      "review_note": "真实serialize/restore生产入口；人工污染对局值后回填。只验普通局入场快照，没有完整旧档/高级nest状态矩阵。",
+      "production_imports": [
+        {
+          "line": 10,
+          "source": "../game/src/cards/cards.js"
+        },
+        {
+          "line": 11,
+          "source": "../game/src/battle/core/battle.core.js"
+        }
+      ],
+      "case_declaration_count": 1,
+      "mock_sites": [],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 29,
+          "name": "restores run state and rebuilds turn one instead of resuming a partial battle"
+        }
+      ],
+      "main_call_index": [
+        "window.SDT.Cards.all",
+        "BattleSession.start",
+        "BattleSession.serialize",
+        "BattleSession.restore",
+        "BattleSession.getSnapshot",
+        "BattleSession.commands.flee"
+      ],
+      "gap_links": [],
+      "limitations": "完整阅读测试的fixture/setup/动作与oracle；本轮未执行测试，不代表已有结果重新验证。"
+    },
+    {
+      "file": "tests/battle-runtime-state-guard.test.js",
+      "lines": 121,
+      "sha256": "9ab7b908d8fd71b52776c176a6d5c9dd3306937b419470126ebde6bd90828375",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [],
+      "depth": "deep",
+      "category": "structural-contract",
+      "entry_observation": "源码/资源读取或结构比较入口",
+      "review_note": "readFileSync+regex声明白名单90/setter豁免；自身明确不管字段值/语义。不能代替reset/restore调用行为。",
+      "production_imports": [],
+      "case_declaration_count": 3,
+      "mock_sites": [],
+      "source_read_sites": [
+        {
+          "line": 101,
+          "snippet": "readFileSync(resolve(BATTLE_DIR, file), 'utf8')"
+        },
+        {
+          "line": 109,
+          "snippet": "readFileSync(resolve(BATTLE_DIR, file), 'utf8')"
+        }
+      ],
+      "case_index": [
+        {
+          "line": 99,
+          "name": "runtime 五片 export let 集合与白名单逐字一致"
+        },
+        {
+          "line": 107,
+          "name": "每个 runtime 可变全局都有对应的 set$ 写入口（豁免清单除外）"
+        },
+        {
+          "line": 116,
+          "name": "白名单总数 = 90（改动即红灯，防止静默增减）"
+        }
+      ],
+      "main_call_index": [
+        "resolve",
+        "readFileSync"
+      ],
+      "gap_links": [],
+      "limitations": "完整阅读测试的fixture/setup/动作与oracle；本轮未执行测试，不代表已有结果重新验证。"
+    },
+    {
+      "file": "tests/battle-selection-flow-boundary.test.js",
+      "lines": 291,
+      "sha256": "8ad5d87216a8616c9625edcf4a989fcaa49791feb1aae7d9eb5601d812e6cc30",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [],
+      "depth": "deep",
+      "category": "unit-or-boundary-test",
+      "entry_observation": "静态观察到生产模块import/工厂或纯函数调用；运行边界须按人工备注理解",
+      "review_note": "真实 selection/discover工厂，但queueBattleAction/runStagedSteps/发牌/价格/终局皆注入；priceArmor用例人工构造state，验证consumer不是挖宝producer。完整290行。",
+      "production_imports": [
+        {
+          "line": 3,
+          "source": "../game/src/battle/core/battle.selection-flow.js"
+        },
+        {
+          "line": 4,
+          "source": "../game/src/battle/runtime/battle.runtime.js"
+        }
+      ],
+      "case_declaration_count": 13,
+      "mock_sites": [
+        {
+          "line": 30,
+          "callee": "vi.fn",
+          "snippet": "vi.fn(() => [first, second])"
+        },
+        {
+          "line": 31,
+          "callee": "vi.fn",
+          "snippet": "vi.fn(() => true)"
+        },
+        {
+          "line": 32,
+          "callee": "vi.fn",
+          "snippet": "vi.fn(() => 0.99)"
+        },
+        {
+          "line": 34,
+          "callee": "vi.fn",
+          "snippet": "vi.fn(() => 0)"
+        },
+        {
+          "line": 45,
+          "callee": "vi.fn",
+          "snippet": "vi.fn(() => 0.5)"
+        },
+        {
+          "line": 62,
+          "callee": "vi.fn",
+          "snippet": "vi.fn(() => catalog)"
+        },
+        {
+          "line": 63,
+          "callee": "vi.fn",
+          "snippet": "vi.fn(() => true)"
+        },
+        {
+          "line": 64,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 70,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 84,
+          "callee": "vi.fn",
+          "snippet": "vi.fn(() => [card])"
+        },
+        {
+          "line": 85,
+          "callee": "vi.fn",
+          "snippet": "vi.fn(() => 0.5)"
+        },
+        {
+          "line": 89,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 101,
+          "callee": "vi.fn",
+          "snippet": "vi.fn(() => [])"
+        },
+        {
+          "line": 102,
+          "callee": "vi.fn",
+          "snippet": "vi.fn(() => 0.5)"
+        },
+        {
+          "line": 103,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 122,
+          "callee": "vi.fn",
+          "snippet": "vi.fn(() => cardsInCatalog)"
+        },
+        {
+          "line": 123,
+          "callee": "vi.fn",
+          "snippet": "vi.fn(() => true)"
+        },
+        {
+          "line": 124,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 129,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 141,
+          "callee": "vi.fn",
+          "snippet": "vi.fn(() => [])"
+        },
+        {
+          "line": 142,
+          "callee": "vi.fn",
+          "snippet": "vi.fn(() => 0)"
+        },
+        {
+          "line": 145,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 163,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 166,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 176,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 189,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 192,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 192,
+          "callee": "vi.fn",
+          "snippet": "vi.fn(() => 0)"
+        },
+        {
+          "line": 194,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 196,
+          "callee": "vi.fn",
+          "snippet": "vi.fn(async () => {})"
+        },
+        {
+          "line": 197,
+          "callee": "vi.fn",
+          "snippet": "vi.fn(() => [])"
+        },
+        {
+          "line": 198,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 198,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 200,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 212,
+          "callee": "vi.fn",
+          "snippet": "vi.fn(() => 5)"
+        },
+        {
+          "line": 213,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 216,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 216,
+          "callee": "vi.fn",
+          "snippet": "vi.fn(() => 0)"
+        },
+        {
+          "line": 219,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 219,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 219,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 220,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 240,
+          "callee": "vi.fn",
+          "snippet": "vi.fn(() => 'temp-late')"
+        },
+        {
+          "line": 241,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 242,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 245,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 245,
+          "callee": "vi.fn",
+          "snippet": "vi.fn(() => 0)"
+        },
+        {
+          "line": 247,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 247,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 247,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 248,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 267,
+          "callee": "vi.fn",
+          "snippet": "vi.fn(() => 'temp-live')"
+        },
+        {
+          "line": 268,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 271,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 271,
+          "callee": "vi.fn",
+          "snippet": "vi.fn(() => 0)"
+        },
+        {
+          "line": 273,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 273,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 274,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 276,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        }
+      ],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 24,
+          "name": "imports and constructs without browser globals, and random discovery uses injected catalog and RNG"
+        },
+        {
+          "line": 44,
+          "name": "does not consume battle randomness for an empty candidate pool"
+        },
+        {
+          "line": 55,
+          "name": "builds one ordered pool for an entire built-in panel without changing draw or reroll order"
+        },
+        {
+          "line": 82,
+          "name": "keeps the 40-reroll limit while reusing a single-card built-in pool"
+        },
+        {
+          "line": 100,
+          "name": "reads an empty built-in catalog once and still consumes no random value"
+        },
+        {
+          "line": 116,
+          "name": "keeps custom predicate discovery on the per-draw fresh-catalog path"
+        },
+        {
+          "line": 140,
+          "name": "does not query the catalog or random stream for explicit options"
+        },
+        {
+          "line": 155,
+          "name": "reads the current queue after runtime replaces it during a reset"
+        },
+        {
+          "line": 175,
+          "name": "uses the injected deny port when a mandatory hand selection cannot be skipped"
+        },
+        {
+          "line": 187,
+          "name": "forwards an absent action signal to the injected cancellation check"
+        },
+        {
+          "line": 210,
+          "name": "routes price armor through the injected card pricing port"
+        },
+        {
+          "line": 238,
+          "name": "silently rejects a stale pickDiscover after the battle has finished (no temp card, no queue)"
+        },
+        {
+          "line": 265,
+          "name": "keeps the normal pickDiscover path intact while the battle is active (guard zero-impact)"
+        }
+      ],
+      "main_call_index": [
+        "createBattleSelectionFlow",
+        "createFlow",
+        ".mockReturnValueOnce"
+      ],
+      "gap_links": [
+        "TQ-02"
+      ],
+      "limitations": "完整阅读测试的fixture/setup/动作与oracle；本轮未执行测试，不代表已有结果重新验证。"
+    },
+    {
+      "file": "tests/battle-settlement-recovery.test.js",
+      "lines": 434,
+      "sha256": "429b7b92abb01b9b3c6036294b0c3b9cd2eb4bb2069e97f20e9c77bf18092a99",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [
+        {
+          "line": 14,
+          "left": "window.SDT"
+        },
+        {
+          "line": 97,
+          "left": "window.SDT"
+        },
+        {
+          "line": 347,
+          "left": "settleHarness.game"
+        },
+        {
+          "line": 384,
+          "left": "window.SDT.UI"
+        },
+        {
+          "line": 388,
+          "left": "window.SDT.Base.data.ammoTaught"
+        },
+        {
+          "line": 389,
+          "left": "window.SDT.Cards"
+        },
+        {
+          "line": 393,
+          "left": "window.SDT.Meta"
+        },
+        {
+          "line": 394,
+          "left": "window.SDT.Chests"
+        }
+      ],
+      "depth": "static-only",
+      "category": "unit-or-boundary-test",
+      "entry_observation": "静态观察到生产模块import/工厂或纯函数调用；运行边界须按人工备注理解",
+      "review_note": "已完成AST导入、case、替身/源码读取与主要调用静态扫描；7个生产import，9个字面量case声明。未人工逐case检查断言和传递数据流，不声称端到端覆盖。",
+      "production_imports": [
+        {
+          "line": 15,
+          "source": "../game/src/cards/cards.js"
+        },
+        {
+          "line": 16,
+          "source": "../game/src/hub/base.js"
+        },
+        {
+          "line": 18,
+          "source": "../game/src/hub/game.storage.js"
+        },
+        {
+          "line": 19,
+          "source": "../game/src/hub/recovery.commands.js"
+        },
+        {
+          "line": 23,
+          "source": "../game/src/hub/battle-settlement.commands.js"
+        },
+        {
+          "line": 310,
+          "source": "../game/src/hub/battle-settlement.commands.js"
+        },
+        {
+          "line": 399,
+          "source": "../game/src/hub/game.bag.settle.js"
+        }
+      ],
+      "case_declaration_count": 9,
+      "mock_sites": [
+        {
+          "line": 86,
+          "callee": "vi.spyOn",
+          "snippet": "vi.spyOn(Storage.prototype, method)"
+        },
+        {
+          "line": 351,
+          "callee": "vi.fn",
+          "snippet": "vi.fn(card => settleHarness.game.ownedCards.push({ uid: 'boss-reward', card }))"
+        },
+        {
+          "line": 352,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 357,
+          "callee": "vi.fn",
+          "snippet": "vi.fn(() => {\n      const persisted = env.RunStorage.read(slotId);\n      return {\n        ...persisted,\n        seed: settleHarness.game.seed,\n        layerIdx:"
+        },
+        {
+          "line": 371,
+          "callee": "vi.doMock",
+          "snippet": "vi.doMock('../game/src/run/game.session.js', () => ({\n      game: settleHarness.game,\n      createRunSavePayload: () => settleHarness.payload(),\n      getActive"
+        },
+        {
+          "line": 375,
+          "callee": "vi.fn",
+          "snippet": "vi.fn(() => true)"
+        },
+        {
+          "line": 376,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 376,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 377,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 377,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 377,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 377,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 377,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 379,
+          "callee": "vi.doMock",
+          "snippet": "vi.doMock('../game/src/run/game.run.js', () => ({ showRunTransition: vi.fn(async () => {}) }))"
+        },
+        {
+          "line": 379,
+          "callee": "vi.fn",
+          "snippet": "vi.fn(async () => {})"
+        },
+        {
+          "line": 380,
+          "callee": "vi.doMock",
+          "snippet": "vi.doMock('../game/src/core/event-bus.js', () => ({ on: vi.fn() }))"
+        },
+        {
+          "line": 380,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 381,
+          "callee": "vi.doMock",
+          "snippet": "vi.doMock('../game/src/core/random.js', () => ({ Random: { random: vi.fn(() => { settleHarness.randomCalls++; return 0; }) } }))"
+        },
+        {
+          "line": 381,
+          "callee": "vi.fn",
+          "snippet": "vi.fn(() => { settleHarness.randomCalls++; return 0; })"
+        },
+        {
+          "line": 382,
+          "callee": "vi.doMock",
+          "snippet": "vi.doMock('../game/src/core/shared.js', () => ({ esc: String }))"
+        },
+        {
+          "line": 383,
+          "callee": "vi.doMock",
+          "snippet": "vi.doMock('../game/src/hub/game.bag.bridge.js', () => ({ bagSlots: { closeBackpack: vi.fn(), pocketAdd: vi.fn() } }))"
+        },
+        {
+          "line": 383,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 383,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 385,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 385,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 385,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 385,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 393,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 393,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 395,
+          "callee": "vi.fn",
+          "snippet": "vi.fn(() => [{ kind: 'boss' }])"
+        },
+        {
+          "line": 396,
+          "callee": "vi.fn",
+          "snippet": "vi.fn((_game, _drops, done) => { settleHarness.chestDone = done; })"
+        }
+      ],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 115,
+          "name": "恢复日志写入前失败保持原始双存档不变"
+        },
+        {
+          "line": 197,
+          "name": "真实journal cleanup删除失败后重建恢复且不重复增加永久计数"
+        },
+        {
+          "line": 215,
+          "name": "成功后同步Base内存与两种写入baseline，重复receipt不产生新写入"
+        },
+        {
+          "line": 232,
+          "name": "同requestId但节点业务payload不同会冲突；坏日志保留双存档现场"
+        },
+        {
+          "line": 250,
+          "name": "遇到日志之外的第三值时阻断恢复并保留基地、对局与日志"
+        },
+        {
+          "line": 266,
+          "name": "陈旧run/base revision、切档和同槽新run都会拒绝attempt"
+        },
+        {
+          "line": 293,
+          "name": "Web Locks不可用时拒绝且不更改存档"
+        },
+        {
+          "line": 301,
+          "name": "等待recover期间修改原node/afterRun不改变首次捕获的attempt"
+        },
+        {
+          "line": 337,
+          "name": "真实battle settle在journal待恢复时允许同attempt重试，不重复投奖励"
+        }
+      ],
+      "main_call_index": [
+        "Promise.resolve",
+        "createRecoveryCommands",
+        "createBattleSettlementCommands",
+        "env.commands.createAttempt",
+        ".mockImplementation",
+        "vi.spyOn",
+        "vi.doUnmock",
+        "resolve",
+        "commands.createAttempt",
+        "mutableRun.ownedCards.push",
+        "created.attempt.afterRun.ownedCards.some",
+        "settleHarness.game.ownedCards.push",
+        "settleHarness.game.onBattleEnd",
+        "failRunWrite.mockRestore"
+      ],
+      "gap_links": [],
+      "limitations": "AST或fixture结构层；未逐case深审，若无人工备注不能判断stub是否遮住关键逻辑。"
+    },
+    {
+      "file": "tests/battle-settlement-retry.test.js",
+      "lines": 472,
+      "sha256": "da98a1ee0a68a1e1202f34b165f567a81b3423fd4b8629de62d16d071617ff71",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [
+        {
+          "line": 42,
+          "left": "state.game"
+        },
+        {
+          "line": 67,
+          "left": "window.SDT.Base.data.eggBattles"
+        },
+        {
+          "line": 73,
+          "left": "window.SDT"
+        },
+        {
+          "line": 111,
+          "left": "window.SDT.Icons"
+        },
+        {
+          "line": 112,
+          "left": "window.SDT.Sound"
+        },
+        {
+          "line": 218,
+          "left": "state.game.ownedCards"
+        },
+        {
+          "line": 259,
+          "left": "state.game.seed"
+        },
+        {
+          "line": 260,
+          "left": "state.game.discoveredPairs"
+        },
+        {
+          "line": 261,
+          "left": "state.game.ownedCards"
+        },
+        {
+          "line": 263,
+          "left": "state.game.state"
+        },
+        {
+          "line": 288,
+          "left": "window.SDT.Base.data.ammoTaught"
+        },
+        {
+          "line": 326,
+          "left": "state.game.nestActive"
+        },
+        {
+          "line": 362,
+          "left": "window.SDT.Base.data.ammoTaught"
+        },
+        {
+          "line": 388,
+          "left": "state.game.discoveredPairs"
+        },
+        {
+          "line": 388,
+          "left": "state.game.state"
+        },
+        {
+          "line": 424,
+          "left": "window.SDT"
+        },
+        {
+          "line": 432,
+          "left": "window.SDT.Meta"
+        },
+        {
+          "line": 433,
+          "left": "window.SDT.Nest"
+        },
+        {
+          "line": 441,
+          "left": "session.game.runActive"
+        },
+        {
+          "line": 442,
+          "left": "session.game.nestActive"
+        },
+        {
+          "line": 443,
+          "left": "session.game.state"
+        },
+        {
+          "line": 444,
+          "left": "session.game.elapsed"
+        },
+        {
+          "line": 445,
+          "left": "session.game.elapsedSynced"
+        },
+        {
+          "line": 458,
+          "left": "session.game.elapsed"
+        },
+        {
+          "line": 459,
+          "left": "session.game.ownedCards"
+        }
+      ],
+      "depth": "static-only",
+      "category": "unit-or-boundary-test",
+      "entry_observation": "静态观察到生产模块import/工厂或纯函数调用；运行边界须按人工备注理解",
+      "review_note": "已完成AST导入、case、替身/源码读取与主要调用静态扫描；11个生产import，14个字面量case声明。未人工逐case检查断言和传递数据流，不声称端到端覆盖。",
+      "production_imports": [
+        {
+          "line": 98,
+          "source": "../game/src/hub/game.bag.settle.js"
+        },
+        {
+          "line": 113,
+          "source": "../game/src/ui/overlay.js"
+        },
+        {
+          "line": 129,
+          "source": "../game/src/core/rule-config.js"
+        },
+        {
+          "line": 140,
+          "source": "../game/src/core/rule-config.js"
+        },
+        {
+          "line": 158,
+          "source": "../game/src/hub/game.bag.bridge.js"
+        },
+        {
+          "line": 319,
+          "source": "../game/src/run/game.session.js"
+        },
+        {
+          "line": 428,
+          "source": "../game/src/cards/cards.js"
+        },
+        {
+          "line": 429,
+          "source": "../game/src/ui/ui.js"
+        },
+        {
+          "line": 430,
+          "source": "../game/src/hub/base.js"
+        },
+        {
+          "line": 434,
+          "source": "../game/src/run/game.session.js"
+        },
+        {
+          "line": 435,
+          "source": "../game/src/hub/game.storage.js"
+        }
+      ],
+      "case_declaration_count": 14,
+      "mock_sites": [
+        {
+          "line": 9,
+          "callee": "vi.mock",
+          "snippet": "vi.mock('../game/src/run/game.session.js', () => ({\n  game: state.game,\n  saveGame: (...args) => state.saveGame(...args),\n  createRunSavePayload: (...args) => s"
+        },
+        {
+          "line": 16,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 16,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 16,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 16,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 16,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 18,
+          "callee": "vi.mock",
+          "snippet": "vi.mock('../game/src/hub/game.storage.js', () => ({ RunStorage: {\n  readIdentity: () => ({ ok: true, value: { runId: state.runId, revision: 2 } }),\n} }))"
+        },
+        {
+          "line": 21,
+          "callee": "vi.mock",
+          "snippet": "vi.mock('../game/src/hub/battle-settlement.commands.js', () => ({\n  createBattleSettlementCommands: options => {\n    state.commandOptions = options;\n    return "
+        },
+        {
+          "line": 27,
+          "callee": "vi.mock",
+          "snippet": "vi.mock('../game/src/hub/recovery.commands.js', () => ({\n  commitBaseAndRun: vi.fn(), readSettlementReceipt: vi.fn(), recoverSlot: vi.fn(),\n}))"
+        },
+        {
+          "line": 28,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 28,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 28,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 30,
+          "callee": "vi.mock",
+          "snippet": "vi.mock('../game/src/run/game.run.js', () => ({ showRunTransition: (...args) => state.transition(...args) }))"
+        },
+        {
+          "line": 31,
+          "callee": "vi.mock",
+          "snippet": "vi.mock('../game/src/hub/game.bag.bridge.js', () => ({ bagSlots: { closeBackpack: vi.fn(), pocketAdd: vi.fn() } }))"
+        },
+        {
+          "line": 31,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 31,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 32,
+          "callee": "vi.mock",
+          "snippet": "vi.mock('../game/src/core/event-bus.js', () => ({ on: vi.fn() }))"
+        },
+        {
+          "line": 32,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 33,
+          "callee": "vi.mock",
+          "snippet": "vi.mock('../game/src/core/random.js', () => ({ Random: { random: (...args) => state.random(...args) } }))"
+        },
+        {
+          "line": 34,
+          "callee": "vi.mock",
+          "snippet": "vi.mock('../game/src/core/shared.js', () => ({ clone: value => (value == null ? value : JSON.parse(JSON.stringify(value))), esc: String }))"
+        },
+        {
+          "line": 47,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 47,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 49,
+          "callee": "vi.fn",
+          "snippet": "vi.fn(() => true)"
+        },
+        {
+          "line": 50,
+          "callee": "vi.fn",
+          "snippet": "vi.fn(() => ({\n    layerIdx: state.game.layerIdx, trackPos: state.game.trackPos, visited: { ...state.game.visited }, elapsed: state.game.elapsed,\n  }))"
+        },
+        {
+          "line": 53,
+          "callee": "vi.fn",
+          "snippet": "vi.fn(async () => {})"
+        },
+        {
+          "line": 55,
+          "callee": "vi.fn",
+          "snippet": "vi.fn((slotId, runId) => { state.pending = { slotId, runId }; })"
+        },
+        {
+          "line": 56,
+          "callee": "vi.fn",
+          "snippet": "vi.fn(() => { state.pending = null; })"
+        },
+        {
+          "line": 59,
+          "callee": "vi.fn",
+          "snippet": "vi.fn(() => 0.5)"
+        },
+        {
+          "line": 60,
+          "callee": "vi.fn",
+          "snippet": "vi.fn(async () => ({ ok: true, replay: false, value: null }))"
+        },
+        {
+          "line": 63,
+          "callee": "vi.fn",
+          "snippet": "vi.fn(async input => ({ ok: true, replay: false, attempt: Object.freeze({ id: 'attempt-1', ...input }) }))"
+        },
+        {
+          "line": 64,
+          "callee": "vi.fn",
+          "snippet": "vi.fn(async () => {\n      const result = state.commitResponses.shift() || { ok: true, replay: false, receipt: { runRevision: 3 } };\n      if (result.ok && !stat"
+        },
+        {
+          "line": 75,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 75,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 75,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 75,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 79,
+          "callee": "vi.fn",
+          "snippet": "vi.fn(() => true)"
+        },
+        {
+          "line": 81,
+          "callee": "vi.fn",
+          "snippet": "vi.fn(function () { const B = window.SDT.Base; B.data.ammoTaught = true; return B.save(); })"
+        },
+        {
+          "line": 82,
+          "callee": "vi.fn",
+          "snippet": "vi.fn(function () {\n        const B = window.SDT.Base;\n        B.data.eggBattles = (B.data.eggBattles || 0) + 1;\n        return { eggBattles: B.data.eggBattles,"
+        },
+        {
+          "line": 89,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 89,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 91,
+          "callee": "vi.fn",
+          "snippet": "vi.fn(() => [{ kind: 'small' }])"
+        },
+        {
+          "line": 92,
+          "callee": "vi.fn",
+          "snippet": "vi.fn((_game, _drops, done) => { state.chestDone = done; })"
+        },
+        {
+          "line": 130,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 141,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 384,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 385,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        }
+      ],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 128,
+          "name": "巨兽额外传说奖励使用规则概率且只消费原有loot骰"
+        },
+        {
+          "line": 139,
+          "name": "巨兽概率边界使用严格小于比较，恰等阈值时不发额外卡"
+        },
+        {
+          "line": 150,
+          "name": "过场失败后重试，不再次消耗已转入口袋的牌"
+        },
+        {
+          "line": 167,
+          "name": "重复通知与事务失败重试复用固定attempt，不重复发奖励、重开宝箱或增计数"
+        },
+        {
+          "line": 214,
+          "name": "允许同一局背包整理替换ownedCards数组后继续提交"
+        },
+        {
+          "line": 224,
+          "name": "新节点已存在收据时在奖励与过场前停止，不投影旧结果"
+        },
+        {
+          "line": 238,
+          "name": "读取收据等待期间锁住战斗操作，切档后旧失败不弹新局重试面板"
+        },
+        {
+          "line": 251,
+          "name": "提交等待期间同槽开启新局后，旧失败不改变新局状态或显示重试面板"
+        },
+        {
+          "line": 270,
+          "name": "无档位胜利保留内存行为，撤退仍走普通保存且不创建胜利事务"
+        },
+        {
+          "line": 286,
+          "name": "教学保存仅在事务成功后执行，失败重试不重复奖励"
+        },
+        {
+          "line": 317,
+          "name": "死亡与龙巢战斗仍绕过普通战后事务"
+        },
+        {
+          "line": 338,
+          "name": "持续失败保留错误层，成功立即关闭自有层并解绑回调且不重复奖励"
+        },
+        {
+          "line": 360,
+          "name": "首次成功教学不被重试层的210ms关闭尾巴清除"
+        },
+        {
+          "line": 402,
+          "name": "payload构造不写盘，pending事务阻断普通saveGame直到清除"
+        }
+      ],
+      "main_call_index": [
+        "vi.mock",
+        "onBattleEnd",
+        ".mockReturnValueOnce",
+        ".mockReturnValue",
+        "state.game.ownedCards.push",
+        "state.transition.mockRejectedValueOnce",
+        "state.transition.mockImplementationOnce",
+        "state.game.ownedCards.filter",
+        "state.readReceipt.mockResolvedValueOnce",
+        "state.readReceipt.mockImplementationOnce",
+        "state.commands.commitAttempt.mockImplementationOnce",
+        "state.saveGame.mockClear",
+        "window.SDT.Base.save.mockReturnValue",
+        "resolveCommit",
+        "vi.doUnmock",
+        "session.createRunSavePayload",
+        "session.setBattleSettlementPending",
+        "session.game.ownedCards.filter",
+        "session.clearBattleSettlementPending"
+      ],
+      "gap_links": [],
+      "limitations": "AST或fixture结构层；未逐case深审，若无人工备注不能判断stub是否遮住关键逻辑。"
+    },
+    {
+      "file": "tests/battle-settlement-types.fixture.ts",
+      "lines": 104,
+      "sha256": "539bb60e9f581e956a51c42ca290819dc9ecdcf90b1a0d9165e7787529eebdec",
+      "kind": "type-fixture",
+      "parsed": "not-js",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [],
+      "depth": "static-only",
+      "category": "type-fixture",
+      "entry_observation": "AST/fixture/脚本入口静态索引，未证明运行行为",
+      "review_note": "类型fixture声明只作编译输入，非执行用例；未逐字段深审。",
+      "production_imports": [],
+      "case_declaration_count": 0,
+      "mock_sites": [],
+      "source_read_sites": [],
+      "case_index": [],
+      "main_call_index": [],
+      "gap_links": [],
+      "limitations": "AST或fixture结构层；未逐case深审，若无人工备注不能判断stub是否遮住关键逻辑。"
+    },
+    {
+      "file": "tests/battle-settlement-types.test.js",
+      "lines": 79,
+      "sha256": "97c7467364080942338ad271909b0ff7d90eb3c0b690a63bad34706d9f979ea1",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [],
+      "depth": "deep",
+      "category": "type-contract",
+      "entry_observation": "真实TypeScript编译API（类型契约，不运行业务）",
+      "review_note": "真正TypeScript API编译生产command/receipt契约，多种负例code断言；末两路径字符串断言附属，不是主要oracle。",
+      "production_imports": [],
+      "case_declaration_count": 2,
+      "mock_sites": [],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 44,
+          "name": "checks the production command and typed attempt/receipt results"
+        },
+        {
+          "line": 51,
+          "name": "rejects malformed nodes, attempt identities, afterRun snapshots, and unchecked results"
+        }
+      ],
+      "main_call_index": [
+        "path.resolve"
+      ],
+      "gap_links": [],
+      "limitations": "完整阅读测试的fixture/setup/动作与oracle；本轮未执行测试，不代表已有结果重新验证。"
+    },
+    {
+      "file": "tests/battle-snapshot-integration.test.js",
+      "lines": 72,
+      "sha256": "9cc11142d156bb9d3ff0089b57ed9fa7cb2227d0a33f36a8b58a04610938fdb5",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [
+        {
+          "line": 5,
+          "left": "window.SDT"
+        },
+        {
+          "line": 6,
+          "left": "window.SDT.Icons.TYPE_ART"
+        },
+        {
+          "line": 7,
+          "left": "window.SDT.Sound"
+        },
+        {
+          "line": 8,
+          "left": "window.SDT.MAP"
+        }
+      ],
+      "depth": "deep",
+      "category": "production-session-test",
+      "entry_observation": "静态观察到生产BattleSession调用；未人工深读的文件不能据此证明所有case真实闭环",
+      "review_note": "真实BattleSession目标交互与源卡嵌套变异，正负schema/capability已校验，证明缓存失效/只读隔离；不是伤害预览端到端。",
+      "production_imports": [
+        {
+          "line": 2,
+          "source": "../game/src/cards/card-rules.schema.js"
+        },
+        {
+          "line": 3,
+          "source": "../game/src/cards/card-rules.capability.js"
+        },
+        {
+          "line": 13,
+          "source": "../game/src/cards/cards.js"
+        },
+        {
+          "line": 14,
+          "source": "../game/src/battle/core/battle.core.js"
+        }
+      ],
+      "case_declaration_count": 1,
+      "mock_sites": [],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 23,
+          "name": "复用稳定快照，并在源卡嵌套规则变化后重新投影待选目标卡"
+        }
+      ],
+      "main_call_index": [
+        "window.SDT.Cards.ensureSha",
+        "window.SDT.Cards.ensureStarters",
+        "window.SDT.Cards.ensureTabletop",
+        "window.SDT.Cards.ensureDmgTypes",
+        "window.SDT.Cards.ensureEffectFields",
+        "validateCardRules",
+        "inspectCardRuleCapability",
+        "BattleSession.start",
+        "BattleSession.commands.playCard",
+        "BattleSession.getSnapshot",
+        "BattleSession.commands.flee"
+      ],
+      "gap_links": [],
+      "limitations": "完整阅读测试的fixture/setup/动作与oracle；本轮未执行测试，不代表已有结果重新验证。"
+    },
+    {
+      "file": "tests/battle-snapshot-types.fixture.ts",
+      "lines": 39,
+      "sha256": "ab2d6fc6aeb13b98ca8209f2246137d3b4b2b73dd0aa854e4bf45fc4e04359f0",
+      "kind": "type-fixture",
+      "parsed": "not-js",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [],
+      "depth": "static-only",
+      "category": "type-fixture",
+      "entry_observation": "AST/fixture/脚本入口静态索引，未证明运行行为",
+      "review_note": "类型fixture声明只作编译输入，非执行用例；未逐字段深审。",
+      "production_imports": [],
+      "case_declaration_count": 0,
+      "mock_sites": [],
+      "source_read_sites": [],
+      "case_index": [],
+      "main_call_index": [],
+      "gap_links": [],
+      "limitations": "AST或fixture结构层；未逐case深审，若无人工备注不能判断stub是否遮住关键逻辑。"
+    },
+    {
+      "file": "tests/battle-snapshot-types.test.js",
+      "lines": 130,
+      "sha256": "8e3db9832dbaa4ae6a0899a5e59be9323e37d7ab90f61ab2c8620082dedb11ba",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [],
+      "depth": "deep",
+      "category": "type-contract",
+      "entry_observation": "真实TypeScript编译API（类型契约，不运行业务）",
+      "review_note": "真正TypeScript API编译生产snapshot/preview输入、负例诊断，非纯源码字符串测试；属类型契约，未运行玩法。",
+      "production_imports": [],
+      "case_declaration_count": 2,
+      "mock_sites": [],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 109,
+          "name": "type-checks real production imports and keeps their results typed"
+        },
+        {
+          "line": 114,
+          "name": "rejects invalid builder input, nested snapshot card writes, and malformed preview snapshots"
+        }
+      ],
+      "main_call_index": [
+        "path.resolve"
+      ],
+      "gap_links": [],
+      "limitations": "完整阅读测试的fixture/setup/动作与oracle；本轮未执行测试，不代表已有结果重新验证。"
+    },
+    {
+      "file": "tests/battle-snapshot.test.js",
+      "lines": 158,
+      "sha256": "0bb331eb151381bbfba32884cc4486db9187daf2c3046e70787f68ab95550713",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [],
+      "depth": "static-only",
+      "category": "unit-or-boundary-test",
+      "entry_observation": "静态观察到生产模块import/工厂或纯函数调用；运行边界须按人工备注理解",
+      "review_note": "已完成AST导入、case、替身/源码读取与主要调用静态扫描；1个生产import，3个字面量case声明。未人工逐case检查断言和传递数据流，不声称端到端覆盖。",
+      "production_imports": [
+        {
+          "line": 2,
+          "source": "../game/src/battle/runtime/battle.snapshot.js"
+        }
+      ],
+      "case_declaration_count": 3,
+      "mock_sites": [],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 5,
+          "name": "preserves absent and explicit null cards in optional battle projections"
+        },
+        {
+          "line": 26,
+          "name": "isolates nested state and freezes collections without mutating source values"
+        },
+        {
+          "line": 56,
+          "name": "deeply isolates and freezes every card-bearing projection while preserving undefined"
+        }
+      ],
+      "main_call_index": [
+        "createBattleSnapshot"
+      ],
+      "gap_links": [],
+      "limitations": "AST或fixture结构层；未逐case深审，若无人工备注不能判断stub是否遮住关键逻辑。"
+    },
+    {
+      "file": "tests/battle-victory-progress.test.js",
+      "lines": 45,
+      "sha256": "957934984a372177ad151c8c3064691a83a9ac50eb86347a396cc76cf9a775ee",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [],
+      "depth": "static-only",
+      "category": "unit-or-boundary-test",
+      "entry_observation": "静态观察到生产模块import/工厂或纯函数调用；运行边界须按人工备注理解",
+      "review_note": "已完成AST导入、case、替身/源码读取与主要调用静态扫描；2个生产import，3个字面量case声明。未人工逐case检查断言和传递数据流，不声称端到端覆盖。",
+      "production_imports": [
+        {
+          "line": 3,
+          "source": "../game/src/hub/battle-victory-progress.js"
+        },
+        {
+          "line": 4,
+          "source": "../game/src/hub/meta-progression.js"
+        }
+      ],
+      "case_declaration_count": 3,
+      "mock_sites": [],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 7,
+          "name": "keeps kill/Boss dedupe and sequential multi-level XP rules on a detached snapshot"
+        },
+        {
+          "line": 28,
+          "name": "uses the existing curve, max level, and public normalized progress helper"
+        },
+        {
+          "line": 35,
+          "name": "preserves per-enemy XP rounding and does not grant XP without a selected class"
+        }
+      ],
+      "main_call_index": [
+        "prepareBattleVictoryProgress"
+      ],
+      "gap_links": [],
+      "limitations": "AST或fixture结构层；未逐case深审，若无人工备注不能判断stub是否遮住关键逻辑。"
+    },
+    {
+      "file": "tests/card-art-coverage.test.js",
+      "lines": 113,
+      "sha256": "8420e9275ac0f311b6854200bc369750a91e62a51e3174c32d5f2f03c0690d22",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [
+        {
+          "line": 22,
+          "left": "window.SDT"
+        },
+        {
+          "line": 23,
+          "left": "window.SDT.Icons.TYPE_ART"
+        }
+      ],
+      "depth": "static-only",
+      "category": "structural-contract",
+      "entry_observation": "静态观察到生产模块import/工厂或纯函数调用；运行边界须按人工备注理解",
+      "review_note": "已完成AST导入、case、替身/源码读取与主要调用静态扫描；1个生产import，3个字面量case声明。未人工逐case检查断言和传递数据流，不声称端到端覆盖。",
+      "production_imports": [
+        {
+          "line": 24,
+          "source": "../game/src/cards/cards.js"
+        }
+      ],
+      "case_declaration_count": 3,
+      "mock_sites": [],
+      "source_read_sites": [
+        {
+          "line": 91,
+          "snippet": "readFileSync(path.join(ROOT, 'game', 'data', 'art-mapping.json'), 'utf8')"
+        }
+      ],
+      "case_index": [
+        {
+          "line": 73,
+          "name": "三族专属图文件的 id 必须存在于现役卡库（或已知死图白名单）"
+        },
+        {
+          "line": 99,
+          "name": "LANDMARK_ART 登记的每张卡都有对应专属图文件"
+        },
+        {
+          "line": 104,
+          "name": "LANDMARK_ART 的 id 都能在现役卡库找到（防登记时又用旧 id）"
+        }
+      ],
+      "main_call_index": [
+        "path.resolve",
+        "allCards.map",
+        "name.startsWith",
+        "readFileSync"
+      ],
+      "gap_links": [],
+      "limitations": "AST或fixture结构层；未逐case深审，若无人工备注不能判断stub是否遮住关键逻辑。"
+    },
+    {
+      "file": "tests/card-audit.test.js",
+      "lines": 222,
+      "sha256": "811f2d8bb826153655b2e76cd3531a1dfa0a86dcfa62249308feb3bd737b00ab",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [
+        {
+          "line": 10,
+          "left": "window.SDT"
+        },
+        {
+          "line": 13,
+          "left": "window.SDT.Icons"
+        },
+        {
+          "line": 14,
+          "left": "window.SDT.Icons.TYPE_ART"
+        }
+      ],
+      "depth": "deep",
+      "category": "unit-or-boundary-test",
+      "entry_observation": "静态观察到生产模块import/工厂或纯函数调用；运行边界须按人工备注理解",
+      "review_note": "真实文本parser，但 FakeCombat、deckDraw、随机/牌堆/手牌/价格等替身，无实际 engine。辨句覆盖有价值，不能证明当前规则生产语义。完整221行。",
+      "production_imports": [
+        {
+          "line": 15,
+          "source": "../game/src/cards/cards.js"
+        },
+        {
+          "line": 16,
+          "source": "../game/src/battle/effects/battle.effects.js"
+        }
+      ],
+      "case_declaration_count": 5,
+      "mock_sites": [],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 158,
+          "name": "未识别项必须是有明确原因的已知例外"
+        },
+        {
+          "line": 169,
+          "name": "发现新增未知句式时比较器必须拒绝"
+        },
+        {
+          "line": 183,
+          "name": "不得存在「一打就崩」的描述（此前 getPlayerHp 等端口缺失）"
+        },
+        {
+          "line": 190,
+          "name": "draw/heal/armor/infuse 字段必须在描述中有依据"
+        },
+        {
+          "line": 218,
+          "name": "通用随机池非空"
+        }
+      ],
+      "main_call_index": [
+        "createEffectExecutor"
+      ],
+      "gap_links": [
+        "TQ-01"
+      ],
+      "limitations": "完整阅读测试的fixture/setup/动作与oracle；本轮未执行测试，不代表已有结果重新验证。"
+    },
+    {
+      "file": "tests/card-effect-semantics.test.js",
+      "lines": 122,
+      "sha256": "c6a3ac763306f2e55e067cb42440d4f6cafe3fe9f891964be89eade7c94bdc38",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [
+        {
+          "line": 3,
+          "left": "window.SDT"
+        },
+        {
+          "line": 4,
+          "left": "window.SDT.Icons.TYPE_ART"
+        },
+        {
+          "line": 5,
+          "left": "window.SDT.Sound"
+        },
+        {
+          "line": 6,
+          "left": "window.SDT.MAP"
+        },
+        {
+          "line": 98,
+          "left": "game.hp"
+        }
+      ],
+      "depth": "deep",
+      "category": "production-session-test",
+      "entry_observation": "静态观察到生产BattleSession调用；未人工深读的文件不能据此证明所有case真实闭环",
+      "review_note": "真实注能指令→实际敌HP/玩家HP断言，三例强于smoke；只覆盖镭射/圣光治愈/星陨。燃料价格例明确锁value3而cost2的现有口径，勿擅自据费用改需求。",
+      "production_imports": [
+        {
+          "line": 10,
+          "source": "../game/src/cards/cards.js"
+        },
+        {
+          "line": 11,
+          "source": "../game/src/battle/core/battle.core.js"
+        }
+      ],
+      "case_declaration_count": 3,
+      "mock_sites": [],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 79,
+          "name": "tt3sp-silverthorn：注能后法术伤害从 5 增至 8"
+        },
+        {
+          "line": 92,
+          "name": "tt7-holyheal：按燃料价格 3（费用 2）回复 6 点生命"
+        },
+        {
+          "line": 108,
+          "name": "tt7-meteorstrong：注能两张后施放三次火球，共造成 12 点法伤"
+        }
+      ],
+      "main_call_index": [
+        "BattleSession.getSnapshot",
+        "BattleSession.commands.pickDiscover",
+        "BattleSession.commands.pickChoice",
+        "BattleSession.commands.skipHandSelect",
+        "game.ownedCards.find",
+        "BattleSession.commands.playCard",
+        "BattleSession.commands.selectInfusion",
+        "BattleSession.commands.confirmInfusion",
+        "BattleSession.start",
+        "BattleSession.commands.flee"
+      ],
+      "gap_links": [],
+      "limitations": "完整阅读测试的fixture/setup/动作与oracle；本轮未执行测试，不代表已有结果重新验证。"
+    },
+    {
+      "file": "tests/card-library-lazy-boundary.test.js",
+      "lines": 90,
+      "sha256": "f7247c6725863c5fa85d28c0e49ed0dbbed80f5af3a32c1c66fcca1506d0e340",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [
+        {
+          "line": 47,
+          "left": "harness.game.state"
+        }
+      ],
+      "depth": "static-only",
+      "category": "mixed-source-contract",
+      "entry_observation": "静态观察到生产模块import/工厂或纯函数调用；运行边界须按人工备注理解",
+      "review_note": "已完成AST导入、case、替身/源码读取与主要调用静态扫描；1个生产import，2个字面量case声明。未人工逐case检查断言和传递数据流，不声称端到端覆盖。",
+      "production_imports": [
+        {
+          "line": 69,
+          "source": "../game/src/hub/game.cardslib.js"
+        }
+      ],
+      "case_declaration_count": 2,
+      "mock_sites": [
+        {
+          "line": 49,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 51,
+          "callee": "vi.doMock",
+          "snippet": "vi.doMock('../game/src/run/game.session.js', () => ({ game: harness.game }))"
+        },
+        {
+          "line": 52,
+          "callee": "vi.doMock",
+          "snippet": "vi.doMock('../game/src/hub/game.cardslib.common.js', () => {\n      const common = {\n        CARD_DESIGNER_WRITES_ENABLED: false,\n        Sfx: {}, cardHTML: () ="
+        },
+        {
+          "line": 63,
+          "callee": "vi.doMock",
+          "snippet": "vi.doMock('../game/src/hub/game.cardslib.page.js', async () => {\n      await harness.pageGate;\n      return { openCardLibrary: harness.openLibrary, openCardDesi"
+        },
+        {
+          "line": 65,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        }
+      ],
+      "source_read_sites": [
+        {
+          "line": 5,
+          "snippet": "readFileSync(resolve(process.cwd(), relative), 'utf8')"
+        }
+      ],
+      "case_index": [
+        {
+          "line": 16,
+          "name": "启动门面只静态依赖共享层，页面实现由用户入口动态装载"
+        },
+        {
+          "line": 30,
+          "name": "关闭或切换页面会废弃仍在等待页面模块的打开请求"
+        }
+      ],
+      "main_call_index": [
+        "readFileSync",
+        "resolve",
+        "harness.resolvePage",
+        "vi.doUnmock"
+      ],
+      "gap_links": [],
+      "limitations": "AST或fixture结构层；未逐case深审，若无人工备注不能判断stub是否遮住关键逻辑。"
+    },
+    {
+      "file": "tests/card-notes-coverage.test.js",
+      "lines": 74,
+      "sha256": "d2e053a4b4c3fefe3dec7c9c8a711bb954869ac4aa6b0a8f16f73fad91a7acc4",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [
+        {
+          "line": 14,
+          "left": "window.SDT"
+        },
+        {
+          "line": 15,
+          "left": "window.SDT.Icons.TYPE_ART"
+        }
+      ],
+      "depth": "static-only",
+      "category": "structural-contract",
+      "entry_observation": "静态观察到生产模块import/工厂或纯函数调用；运行边界须按人工备注理解",
+      "review_note": "已完成AST导入、case、替身/源码读取与主要调用静态扫描；3个生产import，4个字面量case声明。未人工逐case检查断言和传递数据流，不声称端到端覆盖。",
+      "production_imports": [
+        {
+          "line": 16,
+          "source": "../game/src/cards/cards.js"
+        },
+        {
+          "line": 18,
+          "source": "../game/src/cards/card-photo-notes.js"
+        },
+        {
+          "line": 62,
+          "source": "../game/src/cards/card-photo-notes.js"
+        }
+      ],
+      "case_declaration_count": 4,
+      "mock_sites": [],
+      "source_read_sites": [
+        {
+          "line": 21,
+          "snippet": "readFileSync(path.join(ROOT, 'game', 'data', 'card-notes.json'), 'utf8')"
+        }
+      ],
+      "case_index": [
+        {
+          "line": 32,
+          "name": "备注条目的 id 都能在现役卡库找到（退役/改名的死条目 = 红灯）"
+        },
+        {
+          "line": 41,
+          "name": "文案非空且不超过 60 字"
+        },
+        {
+          "line": 48,
+          "name": "全库无重复文案"
+        },
+        {
+          "line": 61,
+          "name": "默认读底稿；localStorage 手写优先；清空手写回落底稿"
+        }
+      ],
+      "main_call_index": [
+        "path.resolve",
+        "readFileSync",
+        "allCards.map"
+      ],
+      "gap_links": [],
+      "limitations": "AST或fixture结构层；未逐case深审，若无人工备注不能判断stub是否遮住关键逻辑。"
+    },
+    {
+      "file": "tests/card-photo-notes.test.js",
+      "lines": 62,
+      "sha256": "e4205db7b551a3abcca671a5a2b8383b4cd9622ed9ffbedfb030093a8e69ce03",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [],
+      "depth": "static-only",
+      "category": "unit-or-boundary-test",
+      "entry_observation": "静态观察到生产模块import/工厂或纯函数调用；运行边界须按人工备注理解",
+      "review_note": "已完成AST导入、case、替身/源码读取与主要调用静态扫描；3个生产import，4个字面量case声明。未人工逐case检查断言和传递数据流，不声称端到端覆盖。",
+      "production_imports": [
+        {
+          "line": 2,
+          "source": "../game/src/cards/card-photo-notes.js"
+        },
+        {
+          "line": 19,
+          "source": "../game/src/cards/card-photo-notes.js"
+        },
+        {
+          "line": 41,
+          "source": "../game/src/cards/card-photo-notes.js"
+        }
+      ],
+      "case_declaration_count": 4,
+      "mock_sites": [
+        {
+          "line": 13,
+          "callee": "vi.doMock",
+          "snippet": "vi.doMock('../game/data/card-notes.json', () => ({\n      default: { version: 1, _comment: 'isolated empty fixture', notes: {} },\n    }))"
+        },
+        {
+          "line": 35,
+          "callee": "vi.doMock",
+          "snippet": "vi.doMock('../game/data/card-notes.json', () => ({\n      default: { version: 1, _comment: 'isolated fixture', notes: { 'pet-egg': 'fixture 底稿' } },\n    }))"
+        }
+      ],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 5,
+          "name": "非底稿卡且未手写时返回空值，不沿用旧 note 字段"
+        },
+        {
+          "line": 10,
+          "name": "底稿为空时，未手写卡和清空手写后都返回空值"
+        },
+        {
+          "line": 32,
+          "name": "有底稿时默认展示底稿，手写优先且清空后回落底稿"
+        },
+        {
+          "line": 54,
+          "name": "不同卡牌的备注互不覆盖"
+        }
+      ],
+      "main_call_index": [
+        "vi.doUnmock"
+      ],
+      "gap_links": [],
+      "limitations": "AST或fixture结构层；未逐case深审，若无人工备注不能判断stub是否遮住关键逻辑。"
+    },
+    {
+      "file": "tests/card-render-context.test.js",
+      "lines": 65,
+      "sha256": "21333869b847d40d22eb92d0c852da742af43eead5034593d9b189e857cce9ab",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [],
+      "depth": "static-only",
+      "category": "unit-or-boundary-test",
+      "entry_observation": "静态观察到生产模块import/工厂或纯函数调用；运行边界须按人工备注理解",
+      "review_note": "已完成AST导入、case、替身/源码读取与主要调用静态扫描；2个生产import，3个字面量case声明。未人工逐case检查断言和传递数据流，不声称端到端覆盖。",
+      "production_imports": [
+        {
+          "line": 2,
+          "source": "../game/src/cards/card-render-context.js"
+        },
+        {
+          "line": 3,
+          "source": "../game/src/cards/card-rarity.js"
+        }
+      ],
+      "case_declaration_count": 3,
+      "mock_sites": [],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 8,
+          "name": "keeps first-match ID semantics and shares rarity rules with the Cards facade"
+        },
+        {
+          "line": 20,
+          "name": "uses a fresh first-ID snapshot after catalog edits"
+        },
+        {
+          "line": 33,
+          "name": "replaces repeated catalog scans with one index build per 271-card render batch"
+        }
+      ],
+      "main_call_index": [
+        "createCardRenderContext"
+      ],
+      "gap_links": [],
+      "limitations": "AST或fixture结构层；未逐case深审，若无人工备注不能判断stub是否遮住关键逻辑。"
+    },
+    {
+      "file": "tests/card-rules-bag-boundary.test.js",
+      "lines": 43,
+      "sha256": "c95d1a5d8c8745724af2e2667830f4a31d94a0ebc5f7149067857c84ec5cf27b",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [
+        {
+          "line": 4,
+          "left": "window.SDT"
+        }
+      ],
+      "depth": "static-only",
+      "category": "unit-or-boundary-test",
+      "entry_observation": "静态观察到生产模块import/工厂或纯函数调用；运行边界须按人工备注理解",
+      "review_note": "已完成AST导入、case、替身/源码读取与主要调用静态扫描；2个生产import，1个字面量case声明。未人工逐case检查断言和传递数据流，不声称端到端覆盖。",
+      "production_imports": [
+        {
+          "line": 2,
+          "source": "../game/src/cards/cards.consts.js"
+        },
+        {
+          "line": 5,
+          "source": "../game/src/cards/cards.js"
+        }
+      ],
+      "case_declaration_count": 1,
+      "mock_sites": [],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 18,
+          "name": "persists valid bag rules through saveAll/upsert and rejects invalid rules at both boundaries"
+        }
+      ],
+      "main_call_index": [
+        "Cards.clearAll",
+        "Cards.saveAll",
+        "Cards.all",
+        "Cards.upsert"
+      ],
+      "gap_links": [],
+      "limitations": "AST或fixture结构层；未逐case深审，若无人工备注不能判断stub是否遮住关键逻辑。"
+    },
+    {
+      "file": "tests/card-rules-schema.test.js",
+      "lines": 358,
+      "sha256": "110cea8869aa91a9caa13a18ac04b08b7d898419a4545ed423a3f0555cc683db",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [],
+      "depth": "static-only",
+      "category": "structural-contract",
+      "entry_observation": "静态观察到生产模块import/工厂或纯函数调用；运行边界须按人工备注理解",
+      "review_note": "已完成AST导入、case、替身/源码读取与主要调用静态扫描；1个生产import，16个字面量case声明。未人工逐case检查断言和传递数据流，不声称端到端覆盖。",
+      "production_imports": [
+        {
+          "line": 2,
+          "source": "../game/src/cards/card-rules.schema.js"
+        }
+      ],
+      "case_declaration_count": 16,
+      "mock_sites": [],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 5,
+          "name": "accepts an in-memory supported battle contract"
+        },
+        {
+          "line": 28,
+          "name": "accepts base material rules only for resource cards"
+        },
+        {
+          "line": 38,
+          "name": "reports base material fields, kinds, parameters, and card type with id and path"
+        },
+        {
+          "line": 51,
+          "name": "validates supported bag use operation lists against card fields and item type"
+        },
+        {
+          "line": 77,
+          "name": "reports the card id and path for unsupported versions, kinds, parameters, and references"
+        },
+        {
+          "line": 99,
+          "name": "accepts an empty onPlay list as an explicit no-effect declaration"
+        },
+        {
+          "line": 106,
+          "name": "validates damage operations and rejects unknown triggers, operations, and parameters"
+        },
+        {
+          "line": 132,
+          "name": "validates structured multi-hit, retargeting, and negative attack modifiers"
+        },
+        {
+          "line": 153,
+          "name": "accepts a single armor operation and rejects invalid or mixed onPlay operations"
+        },
+        {
+          "line": 185,
+          "name": "accepts ordered heal/armor/draw operations and rejects duplicate or unsupported combinations"
+        },
+        {
+          "line": 212,
+          "name": "rejects unsupported damage types, negative damage, and extra card effects"
+        },
+        {
+          "line": 230,
+          "name": "enforces cross-domain agreement between onPlay targets and battle targets"
+        },
+        {
+          "line": 257,
+          "name": "rejects amountField references that the current runtime does not read"
+        },
+        {
+          "line": 275,
+          "name": "rejects repeated kinds within requirements and cost modifiers"
+        },
+        {
+          "line": 296,
+          "name": "accepts v2 generalized damage, curse, pending, trigger, and equip shapes"
+        },
+        {
+          "line": 323,
+          "name": "rejects v2 shapes that violate per-key parameter constraints"
+        }
+      ],
+      "main_call_index": [
+        "validateCardRules"
+      ],
+      "gap_links": [],
+      "limitations": "AST或fixture结构层；未逐case深审，若无人工备注不能判断stub是否遮住关键逻辑。"
+    },
+    {
+      "file": "tests/cards-catalog.test.js",
+      "lines": 53,
+      "sha256": "1e82a5aae9d976fd6af7c8af7d886d0b59f4728fcf90f1590016bb831e55496d",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [],
+      "depth": "static-only",
+      "category": "structural-contract",
+      "entry_observation": "静态观察到生产模块import/工厂或纯函数调用；运行边界须按人工备注理解",
+      "review_note": "已完成AST导入、case、替身/源码读取与主要调用静态扫描；2个生产import，5个字面量case声明。未人工逐case检查断言和传递数据流，不声称端到端覆盖。",
+      "production_imports": [
+        {
+          "line": 2,
+          "source": "../game/src/core/data-loader.js"
+        },
+        {
+          "line": 3,
+          "source": "../game/src/cards/cards.catalog.js"
+        }
+      ],
+      "case_declaration_count": 5,
+      "mock_sites": [],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 8,
+          "name": "uses canonical fields and preserves snapshot-only metadata"
+        },
+        {
+          "line": 20,
+          "name": "leaves rows without a sync definition unchanged"
+        },
+        {
+          "line": 25,
+          "name": "fails clearly for missing references and duplicate ids"
+        },
+        {
+          "line": 38,
+          "name": "fails when the canonical source itself has duplicate or missing ids"
+        },
+        {
+          "line": 43,
+          "name": "rejects a metadata value that would otherwise shadow a canonical field"
+        }
+      ],
+      "main_call_index": [
+        "resolveCardCatalog"
+      ],
+      "gap_links": [],
+      "limitations": "AST或fixture结构层；未逐case深审，若无人工备注不能判断stub是否遮住关键逻辑。"
+    },
+    {
+      "file": "tests/cards-random-pool-guard.test.js",
+      "lines": 44,
+      "sha256": "62c3e8fb31797920342aeef6c90340f14556679ca72b7d226788470cfd5ec800",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [
+        {
+          "line": 8,
+          "left": "window.SDT"
+        },
+        {
+          "line": 9,
+          "left": "window.SDT.Icons.TYPE_ART"
+        }
+      ],
+      "depth": "static-only",
+      "category": "unit-or-boundary-test",
+      "entry_observation": "静态观察到生产模块import/工厂或纯函数调用；运行边界须按人工备注理解",
+      "review_note": "已完成AST导入、case、替身/源码读取与主要调用静态扫描；1个生产import，3个字面量case声明。未人工逐case检查断言和传递数据流，不声称端到端覆盖。",
+      "production_imports": [
+        {
+          "line": 10,
+          "source": "../game/src/cards/cards.js"
+        }
+      ],
+      "case_declaration_count": 3,
+      "mock_sites": [],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 23,
+          "name": "播种链终态 unrandom 在位，不进随机/发现/掉落池"
+        },
+        {
+          "line": 30,
+          "name": "老板拍板的卖价与可出售资格同步在位"
+        },
+        {
+          "line": 36,
+          "name": "unrandom 被抹掉时幂等补回（定版升版重播防退回）"
+        }
+      ],
+      "main_call_index": [
+        "Cards.ensureStarters",
+        "Cards.ensureSha",
+        "Cards.ensureTabletop",
+        "Cards.ensureDmgTypes",
+        "Cards.ensureEffectFields",
+        "Cards.all",
+        "Cards.isRandomObtainable",
+        "Cards.isSellable",
+        "Cards.ensureRandomPoolFixes"
+      ],
+      "gap_links": [],
+      "limitations": "AST或fixture结构层；未逐case深审，若无人工备注不能判断stub是否遮住关键逻辑。"
+    },
+    {
+      "file": "tests/cards-replay.test.js",
+      "lines": 61,
+      "sha256": "7fe2f91ecf42185d7c6e2e4b7b747e608c596c7f6c1363f4f43531f7f1887eb2",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [
+        {
+          "line": 5,
+          "left": "window.SDT"
+        }
+      ],
+      "depth": "static-only",
+      "category": "unit-or-boundary-test",
+      "entry_observation": "静态观察到生产模块import/工厂或纯函数调用；运行边界须按人工备注理解",
+      "review_note": "已完成AST导入、case、替身/源码读取与主要调用静态扫描；3个生产import，0个字面量case声明。未人工逐case检查断言和传递数据流，不声称端到端覆盖。",
+      "production_imports": [
+        {
+          "line": 2,
+          "source": "../game/src/core/data-loader.js"
+        },
+        {
+          "line": 3,
+          "source": "../game/src/cards/cards.consts.js"
+        },
+        {
+          "line": 6,
+          "source": "../game/src/cards/cards.js"
+        }
+      ],
+      "case_declaration_count": 0,
+      "mock_sites": [],
+      "source_read_sites": [],
+      "case_index": [],
+      "main_call_index": [
+        "Cards.all",
+        "Cards.saveAll",
+        "Cards.method",
+        "replayed.find",
+        "replayed.some"
+      ],
+      "gap_links": [],
+      "limitations": "AST或fixture结构层；未逐case深审，若无人工备注不能判断stub是否遮住关键逻辑。"
+    },
+    {
+      "file": "tests/cards-rules-runtime-boundary.test.js",
+      "lines": 89,
+      "sha256": "632331b4a8165c042c48c70272248fdea2f181d3bf45203f32c1e92c5bfbb45b",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [
+        {
+          "line": 5,
+          "left": "window.SDT"
+        }
+      ],
+      "depth": "static-only",
+      "category": "unit-or-boundary-test",
+      "entry_observation": "静态观察到生产模块import/工厂或纯函数调用；运行边界须按人工备注理解",
+      "review_note": "已完成AST导入、case、替身/源码读取与主要调用静态扫描；3个生产import，4个字面量case声明。未人工逐case检查断言和传递数据流，不声称端到端覆盖。",
+      "production_imports": [
+        {
+          "line": 2,
+          "source": "../game/src/cards/card-rules.schema.js"
+        },
+        {
+          "line": 3,
+          "source": "../game/src/cards/cards.consts.js"
+        },
+        {
+          "line": 6,
+          "source": "../game/src/cards/cards.js"
+        }
+      ],
+      "case_declaration_count": 4,
+      "mock_sites": [
+        {
+          "line": 74,
+          "callee": "vi.spyOn",
+          "snippet": "vi.spyOn(Storage.prototype, 'setItem')"
+        },
+        {
+          "line": 78,
+          "callee": "vi.spyOn",
+          "snippet": "vi.spyOn(console, 'error')"
+        }
+      ],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 20,
+          "name": "载入含无效规则的旧档时报告卡牌 id/path，并保留原存档而不缓存为空库"
+        },
+        {
+          "line": 31,
+          "name": "拒绝无效 saveAll/upsert，且恢复被原地修改过的缓存到最后一次有效存档"
+        },
+        {
+          "line": 50,
+          "name": "允许兼容的无 rules 卡和通过 schema 的结构化规则卡写入及载入"
+        },
+        {
+          "line": 64,
+          "name": "localStorage 写入失败时恢复 last-good 缓存，不暴露失败候选值"
+        }
+      ],
+      "main_call_index": [
+        "Cards.clearAll",
+        "Cards.all",
+        "Cards.saveAll",
+        "Cards.upsert",
+        "validateCardRules",
+        ".mockImplementation",
+        "vi.spyOn"
+      ],
+      "gap_links": [],
+      "limitations": "AST或fixture结构层；未逐case深审，若无人工备注不能判断stub是否遮住关键逻辑。"
+    },
+    {
+      "file": "tests/cards-storage-guard.test.js",
+      "lines": 90,
+      "sha256": "239d82229d1eccac540ff15e242a3edebe6020f0844a4b71161caa5b7b8c1fcd",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [
+        {
+          "line": 8,
+          "left": "window.SDT"
+        }
+      ],
+      "depth": "static-only",
+      "category": "unit-or-boundary-test",
+      "entry_observation": "静态观察到生产模块import/工厂或纯函数调用；运行边界须按人工备注理解",
+      "review_note": "已完成AST导入、case、替身/源码读取与主要调用静态扫描；2个生产import，7个字面量case声明。未人工逐case检查断言和传递数据流，不声称端到端覆盖。",
+      "production_imports": [
+        {
+          "line": 6,
+          "source": "../game/src/cards/cards.consts.js"
+        },
+        {
+          "line": 9,
+          "source": "../game/src/cards/cards.js"
+        }
+      ],
+      "case_declaration_count": 7,
+      "mock_sites": [
+        {
+          "line": 21,
+          "callee": "vi.spyOn",
+          "snippet": "vi.spyOn(console, 'warn')"
+        },
+        {
+          "line": 34,
+          "callee": "vi.spyOn",
+          "snippet": "vi.spyOn(console, 'warn')"
+        },
+        {
+          "line": 43,
+          "callee": "vi.spyOn",
+          "snippet": "vi.spyOn(console, 'warn')"
+        },
+        {
+          "line": 62,
+          "callee": "vi.spyOn",
+          "snippet": "vi.spyOn(console, 'warn')"
+        },
+        {
+          "line": 76,
+          "callee": "vi.spyOn",
+          "snippet": "vi.spyOn(console, 'warn')"
+        }
+      ],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 18,
+          "name": "库串解析失败：原串备份到 corrupt 键、原键不动，自动写回（含播种）被禁止"
+        },
+        {
+          "line": 32,
+          "name": "JSON 合法但不是数组同样备份 + 降级，不在读取时抛 TypeError"
+        },
+        {
+          "line": 41,
+          "name": "损坏降级后可用 clearAll（清空卡牌库）恢复可写，备份键保留供追查"
+        },
+        {
+          "line": 53,
+          "name": "空库指纹口径：KEY 缺失与 [] 视为同一状态，全新环境播种不被误判冲突"
+        },
+        {
+          "line": 58,
+          "name": "旧缓存页写回不回滚另一标签页刚播入的批次（放弃写回 + 缓存失效自愈）"
+        },
+        {
+          "line": 73,
+          "name": "upsert 并发失配时重放到最新库之上：不丢本次写入也不回滚他人批次"
+        },
+        {
+          "line": 83,
+          "name": "单标签正常流程不受并发校验影响：连续写回全部成功"
+        }
+      ],
+      "main_call_index": [
+        "Cards.clearAll",
+        ".mockImplementation",
+        "vi.spyOn",
+        "Cards.all",
+        "Cards.upsert",
+        "Cards.saveAll",
+        "warns.mock.calls.some"
+      ],
+      "gap_links": [],
+      "limitations": "AST或fixture结构层；未逐case深审，若无人工备注不能判断stub是否遮住关键逻辑。"
+    },
+    {
+      "file": "tests/cards-sync-snapshot-guard.test.js",
+      "lines": 75,
+      "sha256": "5c35416119961d38c4f72d5a4fd3a21ec2a63581b349ce0897f9b0a19e4aeeed",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [
+        {
+          "line": 8,
+          "left": "window.SDT"
+        }
+      ],
+      "depth": "static-only",
+      "category": "structural-contract",
+      "entry_observation": "静态观察到生产模块import/工厂或纯函数调用；运行边界须按人工备注理解",
+      "review_note": "已完成AST导入、case、替身/源码读取与主要调用静态扫描；1个生产import，1个字面量case声明。未人工逐case检查断言和传递数据流，不声称端到端覆盖。",
+      "production_imports": [
+        {
+          "line": 9,
+          "source": "../game/src/cards/cards.js"
+        }
+      ],
+      "case_declaration_count": 1,
+      "mock_sites": [],
+      "source_read_sites": [
+        {
+          "line": 13,
+          "snippet": "readFileSync(path.resolve(process.cwd(), 'game/src/cards/cards.data.js'), 'utf8')"
+        }
+      ],
+      "case_index": [
+        {
+          "line": 68,
+          "name": "保留受缚之残影与满电动力锤回归锚"
+        }
+      ],
+      "main_call_index": [
+        "readFileSync",
+        "path.resolve",
+        "Cards.TABLETOP11.find"
+      ],
+      "gap_links": [],
+      "limitations": "AST或fixture结构层；未逐case深审，若无人工备注不能判断stub是否遮住关键逻辑。"
+    },
+    {
+      "file": "tests/cards.test.js",
+      "lines": 116,
+      "sha256": "7d3c78a37bde8787e0d3a4363e0babf504cb6bd8944b9354de8b4f662ad4722d",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [
+        {
+          "line": 3,
+          "left": "window.SDT"
+        },
+        {
+          "line": 34,
+          "left": "window.SDT.Icons"
+        },
+        {
+          "line": 35,
+          "left": "window.SDT.Icons.TYPE_ART"
+        },
+        {
+          "line": 108,
+          "left": "window.SDT.Icons"
+        },
+        {
+          "line": 109,
+          "left": "window.SDT.Icons.TYPE_ART"
+        }
+      ],
+      "depth": "static-only",
+      "category": "unit-or-boundary-test",
+      "entry_observation": "静态观察到生产模块import/工厂或纯函数调用；运行边界须按人工备注理解",
+      "review_note": "已完成AST导入、case、替身/源码读取与主要调用静态扫描；2个生产import，21个字面量case声明。未人工逐case检查断言和传递数据流，不声称端到端覆盖。",
+      "production_imports": [
+        {
+          "line": 4,
+          "source": "../game/src/cards/cards.js"
+        },
+        {
+          "line": 5,
+          "source": "../game/src/core/art.js"
+        }
+      ],
+      "case_declaration_count": 21,
+      "mock_sites": [],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 16,
+          "name": "deriveDraw 抽 2 张牌"
+        },
+        {
+          "line": 17,
+          "name": "deriveDraw 优先已标注"
+        },
+        {
+          "line": 18,
+          "name": "deriveDraw 无词条"
+        },
+        {
+          "line": 19,
+          "name": "deriveInfuse 注能(2)"
+        },
+        {
+          "line": 20,
+          "name": "deriveInfuse 注能（2）全角"
+        },
+        {
+          "line": 21,
+          "name": "deriveInfuse 注能(小)=1"
+        },
+        {
+          "line": 22,
+          "name": "deriveInfuse 无词条"
+        },
+        {
+          "line": 23,
+          "name": "deriveHeal 回复 6 点生命"
+        },
+        {
+          "line": 24,
+          "name": "deriveHeal +4 血"
+        },
+        {
+          "line": 25,
+          "name": "deriveHeal 优先结构化词条"
+        },
+        {
+          "line": 26,
+          "name": "deriveArmor 获得 5 点护甲"
+        },
+        {
+          "line": 27,
+          "name": "deriveArmor +3 甲"
+        },
+        {
+          "line": 28,
+          "name": "deriveArmor 优先结构化词条"
+        },
+        {
+          "line": 37,
+          "name": "卡面显示回复词条角标"
+        },
+        {
+          "line": 39,
+          "name": "卡面显示护甲词条角标"
+        },
+        {
+          "line": 44,
+          "name": "固定卡按稳定 id 保持历史可出售清单，不随描述改写"
+        },
+        {
+          "line": 52,
+          "name": "显式资格优先，非定版旧自定义卡保留描述兼容"
+        },
+        {
+          "line": 60,
+          "name": "收购价优先使用币值，且不读取描述"
+        },
+        {
+          "line": 66,
+          "name": "按稳定 id 改名并合并旧内置金疮药"
+        },
+        {
+          "line": 93,
+          "name": "仅按稳定 ID 给后定义版本追加「-改」，且可重复执行"
+        },
+        {
+          "line": 111,
+          "name": "稳定 id 使用对应透明道具素材"
+        }
+      ],
+      "main_call_index": [
+        "Cards.deriveDraw",
+        "Cards.deriveInfuse",
+        "Cards.deriveHeal",
+        "Cards.deriveArmor",
+        "Cards.cardHTML",
+        "Cards.isSellable",
+        "Cards.sellPrice",
+        "Cards.all",
+        "Cards.saveAll",
+        "Cards.ensureItemRenames",
+        "Cards.applyDuplicateRenames"
+      ],
+      "gap_links": [],
+      "limitations": "AST或fixture结构层；未逐case深审，若无人工备注不能判断stub是否遮住关键逻辑。"
+    },
+    {
+      "file": "tests/cov-battle-clock.test.js",
+      "lines": 212,
+      "sha256": "12007caf217a945bd039cdd38284d0bf8fcfe793661f432e7849c3f3a8dc7621",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [],
+      "depth": "static-only",
+      "category": "unit-or-boundary-test",
+      "entry_observation": "静态观察到生产模块import/工厂或纯函数调用；运行边界须按人工备注理解",
+      "review_note": "已完成AST导入、case、替身/源码读取与主要调用静态扫描；3个生产import，15个字面量case声明。未人工逐case检查断言和传递数据流，不声称端到端覆盖。",
+      "production_imports": [
+        {
+          "line": 9,
+          "source": "../game/src/battle/runtime/battle.clock.js"
+        },
+        {
+          "line": 16,
+          "source": "../game/src/battle/runtime/battle.pace.js"
+        },
+        {
+          "line": 17,
+          "source": "../game/src/core/turbo.js"
+        }
+      ],
+      "case_declaration_count": 15,
+      "mock_sites": [
+        {
+          "line": 74,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 83,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 92,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 99,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        }
+      ],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 35,
+          "name": "按毫秒真实等待：未到点不结算，到点结算"
+        },
+        {
+          "line": 46,
+          "name": "非正时长立即结算，不挂定时器"
+        },
+        {
+          "line": 52,
+          "name": "测试运行时旁路：VITEST=true 时不挂定时器立即结算"
+        },
+        {
+          "line": 58,
+          "name": "abort 后以 signal.reason 原因拒绝，事前已中止同样拒绝"
+        },
+        {
+          "line": 73,
+          "name": "回调到点执行一次"
+        },
+        {
+          "line": 82,
+          "name": "80ms 下限：短时长也至少等 demoMs 下限"
+        },
+        {
+          "line": 91,
+          "name": "schedulePresentationMs 按原始毫秒直排，不经 80ms 下限"
+        },
+        {
+          "line": 98,
+          "name": "返回取消函数：取消后回调不再执行"
+        },
+        {
+          "line": 109,
+          "name": "暂停期间等待冻结，恢复后续跑至结算"
+        },
+        {
+          "line": 121,
+          "name": "恢复句柄可重复调用（幂等），释放后新等待正常计时"
+        },
+        {
+          "line": 138,
+          "name": "先行暂停：暂停期间新建的等待不启动，恢复后才开始计时"
+        },
+        {
+          "line": 152,
+          "name": "嵌套暂停：外层释放前不恢复"
+        },
+        {
+          "line": 168,
+          "name": "顿帧窗口内并发等待被冻结，窗口结束自动恢复后续跑"
+        },
+        {
+          "line": 184,
+          "name": "嵌套顿帧共享暂停生命周期：两窗都结束才恢复"
+        },
+        {
+          "line": 199,
+          "name": "abort 立即打断顿帧并解除暂停"
+        }
+      ],
+      "main_call_index": [],
+      "gap_links": [],
+      "limitations": "AST或fixture结构层；未逐case深审，若无人工备注不能判断stub是否遮住关键逻辑。"
+    },
+    {
+      "file": "tests/custom-cards.test.js",
+      "lines": 77,
+      "sha256": "a0c5f6c018a3719fb6e223989af5dddaa40b8a36aa80b2c0d01b81b5ed44ccec",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [
+        {
+          "line": 5,
+          "left": "window.SDT"
+        },
+        {
+          "line": 6,
+          "left": "window.SDT.Icons.TYPE_ART"
+        },
+        {
+          "line": 7,
+          "left": "window.SDT.Sound"
+        },
+        {
+          "line": 8,
+          "left": "window.SDT.MAP"
+        }
+      ],
+      "depth": "static-only",
+      "category": "structural-contract",
+      "entry_observation": "静态观察到生产模块import/工厂或纯函数调用；运行边界须按人工备注理解",
+      "review_note": "已完成AST导入、case、替身/源码读取与主要调用静态扫描；1个生产import，4个字面量case声明。未人工逐case检查断言和传递数据流，不声称端到端覆盖。",
+      "production_imports": [
+        {
+          "line": 12,
+          "source": "../game/src/cards/cards.js"
+        }
+      ],
+      "case_declaration_count": 4,
+      "mock_sites": [],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 34,
+          "name": "全部新卡存在、字段正确、每张 id 在库中恰好一份"
+        },
+        {
+          "line": 50,
+          "name": "迷之匣已改版为主动技能（旧开战被动移除；2026-09-16 留言措辞变更）"
+        },
+        {
+          "line": 61,
+          "name": "全库 id 无重复"
+        },
+        {
+          "line": 67,
+          "name": "随机池归属：衍生 token 不进池，其余新卡可随机获取"
+        }
+      ],
+      "main_call_index": [],
+      "gap_links": [],
+      "limitations": "AST或fixture结构层；未逐case深审，若无人工备注不能判断stub是否遮住关键逻辑。"
+    },
+    {
+      "file": "tests/e4-battle-loader.test.js",
+      "lines": 151,
+      "sha256": "42d7d4760e15e0a1d17ed822488e1aff415cdb0e90ab25c235e2b7bffdcbc058",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [
+        {
+          "line": 13,
+          "left": "game"
+        },
+        {
+          "line": 17,
+          "left": "window.SDT"
+        },
+        {
+          "line": 22,
+          "left": "window.SDT.Battle"
+        },
+        {
+          "line": 42,
+          "left": "game.state"
+        },
+        {
+          "line": 42,
+          "left": "game.runActive"
+        },
+        {
+          "line": 43,
+          "left": "game.discoveredPairs"
+        },
+        {
+          "line": 44,
+          "left": "game.nestRunes"
+        },
+        {
+          "line": 48,
+          "left": "window.SDT.game"
+        },
+        {
+          "line": 77,
+          "left": "window.SDT.game"
+        },
+        {
+          "line": 100,
+          "left": "game.discoveredPairs"
+        },
+        {
+          "line": 100,
+          "left": "game.state"
+        },
+        {
+          "line": 119,
+          "left": "window.SDT.Battle"
+        }
+      ],
+      "depth": "static-only",
+      "category": "unit-or-boundary-test",
+      "entry_observation": "静态观察到生产模块import/工厂或纯函数调用；运行边界须按人工备注理解",
+      "review_note": "已完成AST导入、case、替身/源码读取与主要调用静态扫描；9个生产import，8个字面量case声明。未人工逐case检查断言和传递数据流，不声称端到端覆盖。",
+      "production_imports": [
+        {
+          "line": 30,
+          "source": "../game/src/battle/battle-loader.js"
+        },
+        {
+          "line": 50,
+          "source": "../game/src/battle/battle-loader.js"
+        },
+        {
+          "line": 64,
+          "source": "../game/src/battle/battle-loader.js"
+        },
+        {
+          "line": 76,
+          "source": "../game/src/battle/battle-loader.js"
+        },
+        {
+          "line": 85,
+          "source": "../game/src/battle/battle-loader.js"
+        },
+        {
+          "line": 97,
+          "source": "../game/src/battle/battle-loader.js"
+        },
+        {
+          "line": 111,
+          "source": "../game/src/battle/battle-loader.js"
+        },
+        {
+          "line": 132,
+          "source": "../game/src/battle/battle-loader.js"
+        },
+        {
+          "line": 144,
+          "source": "../game/src/battle/battle-loader.js"
+        }
+      ],
+      "case_declaration_count": 8,
+      "mock_sites": [
+        {
+          "line": 15,
+          "callee": "vi.fn",
+          "snippet": "vi.fn(() => true)"
+        },
+        {
+          "line": 15,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 16,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 16,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 18,
+          "callee": "vi.doMock",
+          "snippet": "vi.doMock('../game/src/battle/view/battle.view.js', async () => {\r\n    loadCount++;\r\n    entered.resolve();\r\n    await gate.promise;\r\n    window.SDT.Battle = ba"
+        },
+        {
+          "line": 96,
+          "callee": "vi.spyOn",
+          "snippet": "vi.spyOn(console, 'error')"
+        },
+        {
+          "line": 110,
+          "callee": "vi.spyOn",
+          "snippet": "vi.spyOn(console, 'error')"
+        },
+        {
+          "line": 119,
+          "callee": "vi.doMock",
+          "snippet": "vi.doMock('../game/src/battle/view/battle.view.js', () => { window.SDT.Battle = battle; return {}; })"
+        },
+        {
+          "line": 140,
+          "callee": "vi.doMock",
+          "snippet": "vi.doMock('../game/src/battle/view/battle.view.js', async () => {\r\n      vi.stubGlobal('window', undefined); // 模块装载完成的瞬间宿主被拆（teardown 时序）\r\n      return {};\r\n  "
+        }
+      ],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 29,
+          "name": "shares a prefetched module with the current request"
+        },
+        {
+          "line": 63,
+          "name": "only starts the latest request without cancelling its shared import"
+        },
+        {
+          "line": 75,
+          "name": "does not start a request already belonging to a replaced game"
+        },
+        {
+          "line": 84,
+          "name": "invalidation survives a title exit followed by the same in-memory flags"
+        },
+        {
+          "line": 95,
+          "name": "does not log or clear new-page state when an old import rejects"
+        },
+        {
+          "line": 109,
+          "name": "reports a current failure and permits the next interaction to retry"
+        },
+        {
+          "line": 130,
+          "name": "rejects with a readable Error (not a bare window ReferenceError) when window is gone"
+        },
+        {
+          "line": 139,
+          "name": "rejects with a readable Error when the host is torn down during the dynamic import"
+        }
+      ],
+      "main_call_index": [
+        "entered.resolve",
+        "ensureBattleReady",
+        "startBattle",
+        "gate.resolve",
+        "invalidateBattleContext",
+        ".mockImplementation",
+        "vi.spyOn"
+      ],
+      "gap_links": [],
+      "limitations": "AST或fixture结构层；未逐case深审，若无人工备注不能判断stub是否遮住关键逻辑。"
+    },
+    {
+      "file": "tests/e6-card-rules-capability.test.js",
+      "lines": 104,
+      "sha256": "25cc39b1b6f6a9e5b377eb8bbea890eb603c8bcf1aee515faafc98ca82458109",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [
+        {
+          "line": 5,
+          "left": "window.SDT"
+        },
+        {
+          "line": 6,
+          "left": "window.SDT.Icons.TYPE_ART"
+        }
+      ],
+      "depth": "static-only",
+      "category": "unit-or-boundary-test",
+      "entry_observation": "静态观察到生产模块import/工厂或纯函数调用；运行边界须按人工备注理解",
+      "review_note": "已完成AST导入、case、替身/源码读取与主要调用静态扫描；3个生产import，6个字面量case声明。未人工逐case检查断言和传递数据流，不声称端到端覆盖。",
+      "production_imports": [
+        {
+          "line": 2,
+          "source": "../game/src/cards/card-rules.schema.js"
+        },
+        {
+          "line": 3,
+          "source": "../game/src/cards/card-rules.capability.js"
+        },
+        {
+          "line": 7,
+          "source": "../game/src/cards/cards.js"
+        }
+      ],
+      "case_declaration_count": 6,
+      "mock_sites": [],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 18,
+          "name": "distinguishes legacy objects from invalid external input without requiring card-face fields"
+        },
+        {
+          "line": 32,
+          "name": "does not equate schema-valid acquisition combinations and ignored filters with support"
+        },
+        {
+          "line": 45,
+          "name": "preserves every currently implemented acquire destination/action combination and default"
+        },
+        {
+          "line": 55,
+          "name": "reports all unsupported operations and triggers before any list is consumed"
+        },
+        {
+          "line": 65,
+          "name": "accepts migrated consumers while rejecting remaining unimplemented parameters"
+        },
+        {
+          "line": 89,
+          "name": "checks the actual seeded production catalogue and original synchronization source separately"
+        }
+      ],
+      "main_call_index": [
+        "Cards.ensureStarters",
+        "Cards.ensureSha",
+        "Cards.ensureTabletop",
+        "Cards.ensureDmgTypes",
+        "Cards.ensureEffectFields",
+        "inspectCardRuleCapability",
+        "validateCardRules",
+        "Cards.all",
+        "Cards.CARDS_SYNC.every"
+      ],
+      "gap_links": [],
+      "limitations": "AST或fixture结构层；未逐case深审，若无人工备注不能判断stub是否遮住关键逻辑。"
+    },
+    {
+      "file": "tests/e6-card-rules-execution.test.js",
+      "lines": 215,
+      "sha256": "6623fd52074b53fa16d99dc5042f8da717578da241e6b928bd1cc3a3bb59c2d8",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [
+        {
+          "line": 6,
+          "left": "window.SDT"
+        },
+        {
+          "line": 7,
+          "left": "window.SDT.Icons"
+        },
+        {
+          "line": 8,
+          "left": "window.SDT.Sound"
+        },
+        {
+          "line": 9,
+          "left": "window.SDT.MAP"
+        }
+      ],
+      "depth": "systematic",
+      "category": "production-session-test",
+      "entry_observation": "静态观察到生产BattleSession调用；未人工深读的文件不能据此证明所有case真实闭环",
+      "review_note": "setup真实BattleSession/engine；部分execPlay工厂端口vi.fn用于unsupported付款原子拒绝。人工1-75及入口/mocks索引；未逐6case审全。",
+      "production_imports": [
+        {
+          "line": 2,
+          "source": "../game/src/cards/card-rules.schema.js"
+        },
+        {
+          "line": 3,
+          "source": "../game/src/battle/runtime/battle.runtime.js"
+        },
+        {
+          "line": 4,
+          "source": "../game/src/battle/effects/battle.rule-guard.js"
+        },
+        {
+          "line": 13,
+          "source": "../game/src/cards/cards.js"
+        },
+        {
+          "line": 14,
+          "source": "../game/src/battle/core/battle.core.js"
+        },
+        {
+          "line": 15,
+          "source": "../game/src/battle/core/battle.engine.js"
+        },
+        {
+          "line": 16,
+          "source": "../game/src/battle/core/battle.exec-play.js"
+        }
+      ],
+      "case_declaration_count": 6,
+      "mock_sites": [
+        {
+          "line": 81,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 169,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 170,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        }
+      ],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 80,
+          "name": "rejects malformed external input and makes rule issues safe for the visible HTML log"
+        },
+        {
+          "line": 107,
+          "name": "rejects an unconsumed acquire filter before coins or obtained cards"
+        },
+        {
+          "line": 116,
+          "name": "rejects before opening mandatory hand payment selection"
+        },
+        {
+          "line": 128,
+          "name": "returns false from the real command for unsupported execution without cost"
+        },
+        {
+          "line": 192,
+          "name": "preserves supported operation order and resolves only once after name and description rewrites"
+        },
+        {
+          "line": 205,
+          "name": "keeps a no-rules text card executable"
+        }
+      ],
+      "main_call_index": [
+        "Cards.ensureSha",
+        "Cards.ensureStarters",
+        "Cards.ensureTabletop",
+        "Cards.ensureDmgTypes",
+        "Cards.ensureEffectFields",
+        "BattleSession.getSnapshot",
+        "BattleSession.start",
+        "BattleSession.commands.flee",
+        "validateCardRules",
+        "assertCardRulesExecutable",
+        "assertSchema",
+        "startGame",
+        "engine.resolveCard.steps",
+        "engine.resolveCard",
+        "engine.queueCardExecution",
+        "BattleSession.commands.playCard",
+        "BattleSession.commands.command",
+        "createBattleExecPlay"
+      ],
+      "gap_links": [],
+      "limitations": "重点入口/替身/关联case与全文件AST索引审阅，未逐case深读。"
+    },
+    {
+      "file": "tests/e6-card-rules-types.test.js",
+      "lines": 92,
+      "sha256": "87cd7897585ec2ce7699254fe817f8778f44b3d0702a19a5acfc8f6943569ddb",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [],
+      "depth": "systematic",
+      "category": "type-contract",
+      "entry_observation": "真实TypeScript编译API（类型契约，不运行业务）",
+      "review_note": "编译真实生产capability/guard并内存注入错误实现，明显强于只看@ts-check文本；人工类型诊断/负例路径重点，未逐表达式穷举。",
+      "production_imports": [],
+      "case_declaration_count": 3,
+      "mock_sites": [],
+      "source_read_sites": [
+        {
+          "line": 14,
+          "snippet": "readFileSync(configPath, 'utf8')"
+        },
+        {
+          "line": 56,
+          "snippet": "readFileSync(configPath, 'utf8')"
+        },
+        {
+          "line": 59,
+          "snippet": "readFileSync(path.join(projectRoot, file), 'utf8')"
+        },
+        {
+          "line": 79,
+          "snippet": "readFileSync(path.join(projectRoot, productionFiles[0]), 'utf8')"
+        },
+        {
+          "line": 86,
+          "snippet": "readFileSync(path.join(projectRoot, productionFiles[1]), 'utf8')"
+        }
+      ],
+      "case_index": [
+        {
+          "line": 55,
+          "name": "checks both actual production roots plus a valid unknown-input consumer"
+        },
+        {
+          "line": 63,
+          "name": "rejects invalid operation, target, result branch, acquisition and warning port types"
+        },
+        {
+          "line": 78,
+          "name": "proves production table and adapter implementations are checked, not only the fixture"
+        }
+      ],
+      "main_call_index": [
+        "readFileSync",
+        "path.resolve"
+      ],
+      "gap_links": [],
+      "limitations": "重点入口/替身/关联case与全文件AST索引审阅，未逐case深读。"
+    },
+    {
+      "file": "tests/e8-card-inventory.test.js",
+      "lines": 227,
+      "sha256": "d4a0f05493c47f3eae0deb5499460022b3a84032c389c6e0b91b3493fb9b2c0f",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [],
+      "depth": "systematic",
+      "category": "structural-contract",
+      "entry_observation": "静态观察到生产模块import/工厂或纯函数调用；运行边界须按人工备注理解",
+      "review_note": "真实启动规则库与审计catalog helper，导出分类/ID字段守卫；并调用Git/读证据，归结构证据质量，不是卡效果验收。只读标题/关键定义/AST。",
+      "production_imports": [
+        {
+          "line": 78,
+          "source": "../game/src/cards/cards.js"
+        },
+        {
+          "line": 79,
+          "source": "../game/src/cards/cards.data.js"
+        }
+      ],
+      "case_declaration_count": 4,
+      "mock_sites": [],
+      "source_read_sites": [
+        {
+          "line": 18,
+          "snippet": "readFileSync('docs/M-BATCH-MATRIX.md', 'utf8')"
+        },
+        {
+          "line": 211,
+          "snippet": "readFileSync(path)"
+        }
+      ],
+      "case_index": [
+        {
+          "line": 141,
+          "name": "exports every initialized card and the separate immutable CARDS_SYNC source with complete classifications"
+        },
+        {
+          "line": 158,
+          "name": "fails on duplicate/missing IDs, omitted entries, counts and missing classifications"
+        },
+        {
+          "line": 176,
+          "name": "changes only approved IDs (E8 bag heal + M batch onPlay) by adding rules, leaving every other full card untouched"
+        },
+        {
+          "line": 191,
+          "name": "accepts only an explicit after generation selector; before evidence is frozen"
+        }
+      ],
+      "main_call_index": [
+        "readFileSync",
+        "Cards.all",
+        "Cards.name",
+        "assertInventoryComplete",
+        "resolve",
+        "createHash"
+      ],
+      "gap_links": [],
+      "limitations": "重点入口/替身/关联case与全文件AST索引审阅，未逐case深读。"
+    },
+    {
+      "file": "tests/e8-card-migration.test.js",
+      "lines": 400,
+      "sha256": "f0ff50cc28efdf3eb31fd6307f5f7dca038950e187ee5d5e795ca23af0b07475",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [
+        {
+          "line": 14,
+          "left": "window.SDT"
+        },
+        {
+          "line": 15,
+          "left": "window.SDT.Icons"
+        },
+        {
+          "line": 16,
+          "left": "window.SDT.Sound"
+        },
+        {
+          "line": 17,
+          "left": "window.SDT.MAP"
+        }
+      ],
+      "depth": "systematic",
+      "category": "production-session-test",
+      "entry_observation": "静态观察到生产BattleSession调用；未人工深读的文件不能据此证明所有case真实闭环",
+      "review_note": "真实catalog迁移与部分real map/battle入口；若干UI/资产/事件模块mock用于隔离，存储失败/并发spy有具体契约价值；只审入口、替身、case索引，399行未逐case。",
+      "production_imports": [
+        {
+          "line": 19,
+          "source": "../game/src/cards/cards.js"
+        },
+        {
+          "line": 21,
+          "source": "../game/src/battle/core/battle.core.js"
+        },
+        {
+          "line": 22,
+          "source": "../game/src/battle/runtime/battle.runtime.js"
+        },
+        {
+          "line": 147,
+          "source": "../game/src/hub/game.bag.js"
+        },
+        {
+          "line": 148,
+          "source": "../game/src/run/game.run.scenes.js"
+        },
+        {
+          "line": 254,
+          "source": "../game/src/cards/cards.js"
+        }
+      ],
+      "case_declaration_count": 12,
+      "mock_sites": [
+        {
+          "line": 126,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 133,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 133,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 133,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 134,
+          "callee": "vi.fn",
+          "snippet": "vi.fn()"
+        },
+        {
+          "line": 136,
+          "callee": "vi.doMock",
+          "snippet": "vi.doMock('../game/src/run/game.session.js', () => ({\r\n    MAP: window.SDT.MAP, game: mapGame, bagCap: () => 6, safeCap: () => 0,\r\n    safeUsed: () => 0, usedSl"
+        },
+        {
+          "line": 143,
+          "callee": "vi.doMock",
+          "snippet": "vi.doMock('../game/src/hub/game.cardslib.js', () => ({ _set_cardPageOpen() {}, cardHTML: () => '' }))"
+        },
+        {
+          "line": 144,
+          "callee": "vi.doMock",
+          "snippet": "vi.doMock('../game/src/hub/game.bag.drag.js', () => ({ bagDrag: null, resetBagDrag() {} }))"
+        },
+        {
+          "line": 145,
+          "callee": "vi.doMock",
+          "snippet": "vi.doMock('../game/src/hub/game.bag.settle.js', () => ({ bindBagMixins() {} }))"
+        },
+        {
+          "line": 146,
+          "callee": "vi.doMock",
+          "snippet": "vi.doMock('../game/src/hub/game.bag.bridge.js', () => ({ bagSlots: { bindBagDrag() {} } }))"
+        },
+        {
+          "line": 262,
+          "callee": "vi.spyOn",
+          "snippet": "vi.spyOn(cards, 'saveAll')"
+        },
+        {
+          "line": 278,
+          "callee": "vi.spyOn",
+          "snippet": "vi.spyOn(cards, 'saveAll')"
+        },
+        {
+          "line": 296,
+          "callee": "vi.spyOn",
+          "snippet": "vi.spyOn(cards, 'saveAll')"
+        },
+        {
+          "line": 297,
+          "callee": "vi.spyOn",
+          "snippet": "vi.spyOn(cards, 'saveAll')"
+        },
+        {
+          "line": 299,
+          "callee": "vi.spyOn",
+          "snippet": "vi.spyOn(memory, 'setItem')"
+        },
+        {
+          "line": 309,
+          "callee": "vi.spyOn",
+          "snippet": "vi.spyOn(cards, 'saveAll')"
+        },
+        {
+          "line": 310,
+          "callee": "vi.spyOn",
+          "snippet": "vi.spyOn(memory, 'setItem')"
+        },
+        {
+          "line": 322,
+          "callee": "vi.spyOn",
+          "snippet": "vi.spyOn(memory, 'getItem')"
+        },
+        {
+          "line": 339,
+          "callee": "vi.spyOn",
+          "snippet": "vi.spyOn(cards, 'saveAll')"
+        },
+        {
+          "line": 354,
+          "callee": "vi.spyOn",
+          "snippet": "vi.spyOn(cards, 'saveAll')"
+        },
+        {
+          "line": 370,
+          "callee": "vi.spyOn",
+          "snippet": "vi.spyOn(memory, 'getItem')"
+        },
+        {
+          "line": 381,
+          "callee": "vi.spyOn",
+          "snippet": "vi.spyOn(cards, 'saveAll')"
+        },
+        {
+          "line": 386,
+          "callee": "vi.spyOn",
+          "snippet": "vi.spyOn(memory, 'getItem')"
+        }
+      ],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 111,
+          "name": "keeps the actual STARTERS two-point bandage and an existing run copy legacy"
+        },
+        {
+          "line": 177,
+          "name": "retains actual STARTERS and pre-existing run two-point copies in the real map bag"
+        },
+        {
+          "line": 237,
+          "name": "does not rewrite an existing run copy when the catalogue gains rules"
+        },
+        {
+          "line": 258,
+          "name": "adds only three rules, saves once, leaves sync and existing object references untouched"
+        },
+        {
+          "line": 271,
+          "name": "ignores key order but preserves extra fields, edited metadata, old values and existing rules"
+        },
+        {
+          "line": 286,
+          "name": "does not reseed missing cards or replace an actual two-point STARTERS copy"
+        },
+        {
+          "line": 307,
+          "name": "retries marker failure without another card save"
+        },
+        {
+          "line": 335,
+          "name": "preserves external replacement when original saveAll sees a concurrent change"
+        },
+        {
+          "line": 345,
+          "name": "does not repair later imported legacy data once any marker exists"
+        },
+        {
+          "line": 350,
+          "name": "will not bless a hot cache that differs from externally replaced storage"
+        },
+        {
+          "line": 358,
+          "name": "will not mark a previously degraded corrupt cache after storage is replaced"
+        },
+        {
+          "line": 365,
+          "name": "does not mark when the all-skipped library changes during its final check"
+        }
+      ],
+      "main_call_index": [
+        "BattleSession.getSnapshot",
+        "BattleSession.commands.flee",
+        "BattleSession.start",
+        "BattleSession.commands.confirmDeck",
+        "start",
+        "BattleSession.commands.playCard",
+        "runtime.played.filter",
+        "BattleSession.commands.useItem",
+        "Cards.STARTERS.find",
+        "mapGame.ownedCards.filter",
+        "mapGame.ownedCards.push",
+        "mapSaves.mockClear",
+        "mapUI.acts.inspectStack",
+        "Cards.ensureStarters",
+        "Cards.ensureSha",
+        "Cards.ensureTabletop",
+        "Cards.ensureDmgTypes",
+        "Cards.ensureEffectFields",
+        "Cards.all",
+        "migratedCards.entries",
+        "oldCards.find",
+        "migratedCards.find",
+        "Cards.ensureE8FixedHealRules",
+        "vi.spyOn",
+        "oldCards.map",
+        ".mockReturnValue",
+        ".mockImplementation",
+        "markerWrite.mockRestore",
+        "readSpy.mockRestore"
+      ],
+      "gap_links": [],
+      "limitations": "重点入口/替身/关联case与全文件AST索引审阅，未逐case深读。"
+    },
+    {
+      "file": "tests/effect-verbs.test.js",
+      "lines": 150,
+      "sha256": "b0bb71a4161f907dbae4d66cb5e2bb1d41421462d433dd885ed070179fa9e291",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [
+        {
+          "line": 16,
+          "left": "window.SDT"
+        },
+        {
+          "line": 17,
+          "left": "window.SDT.Icons"
+        },
+        {
+          "line": 18,
+          "left": "window.SDT.Icons.TYPE_ART"
+        }
+      ],
+      "depth": "static-only",
+      "category": "unit-or-boundary-test",
+      "entry_observation": "静态观察到生产模块import/工厂或纯函数调用；运行边界须按人工备注理解",
+      "review_note": "已完成AST导入、case、替身/源码读取与主要调用静态扫描；3个生产import，8个字面量case声明。未人工逐case检查断言和传递数据流，不声称端到端覆盖。",
+      "production_imports": [
+        {
+          "line": 13,
+          "source": "../game/src/battle/effects/battle.effects.js"
+        },
+        {
+          "line": 14,
+          "source": "../game/src/battle/effects/effect-verbs.js"
+        },
+        {
+          "line": 19,
+          "source": "../game/src/cards/cards.js"
+        }
+      ],
+      "case_declaration_count": 8,
+      "mock_sites": [],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 70,
+          "name": "注册表卫生：id 唯一、pattern 为正则、label 可读、留白显式登记"
+        },
+        {
+          "line": 89,
+          "name": "覆盖度：全卡库每一句有效果的描述都被注册表认识（未实装文案会红）"
+        },
+        {
+          "line": 96,
+          "name": "覆盖度不是靠宽泛正则糊过去的：风味句不进覆盖范围"
+        },
+        {
+          "line": 102,
+          "name": "识别面冻结：ELSEWHERE 是执行器原「识别补丁」白名单的等价搬家"
+        },
+        {
+          "line": 115,
+          "name": "牌面有效果、执行器没结算、注册表也不认识 → 记录一条"
+        },
+        {
+          "line": 126,
+          "name": "已实装句式不报警，重复出现只累计次数"
+        },
+        {
+          "line": 136,
+          "name": "纯风味句不报警（避免噪音淹掉真正的未识别）"
+        },
+        {
+          "line": 142,
+          "name": "外部层实装的句式不报警（识别补丁仍生效）"
+        }
+      ],
+      "main_call_index": [
+        "createEffectExecutor"
+      ],
+      "gap_links": [],
+      "limitations": "AST或fixture结构层；未逐case深审，若无人工备注不能判断stub是否遮住关键逻辑。"
+    },
+    {
+      "file": "tests/fixtures/card-effect-audit-known.json",
+      "lines": 116,
+      "sha256": "c2adaa0d9de51ee6442f57914c9073b94d311d171010f3e77a8b57643a845217",
+      "kind": "data-fixture",
+      "parsed": "json-ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [],
+      "topKeys": [
+        "allowMissingCardIds",
+        "known"
+      ],
+      "depth": "static-only",
+      "category": "data-fixture",
+      "entry_observation": "AST/fixture/脚本入口静态索引，未证明运行行为",
+      "review_note": "明确unsupported/audit_context豁免、允许缺卡ID；JSON解析及前32行审阅，不能作对应效果通过的证据。",
+      "production_imports": [],
+      "case_declaration_count": 0,
+      "mock_sites": [],
+      "source_read_sites": [],
+      "case_index": [],
+      "main_call_index": [],
+      "gap_links": [],
+      "limitations": "AST或fixture结构层；未逐case深审，若无人工备注不能判断stub是否遮住关键逻辑。"
+    },
+    {
+      "file": "tests/fixtures/effect-elsewhere-frozen.json",
+      "lines": 138,
+      "sha256": "958b472a1331a5d4bdc4489d25466093139c23ac66a3dd7204a51836aab84cd1",
+      "kind": "data-fixture",
+      "parsed": "json-ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [],
+      "topKeys": [
+        "provenance",
+        "entries"
+      ],
+      "depth": "static-only",
+      "category": "data-fixture",
+      "entry_observation": "AST/fixture/脚本入口静态索引，未证明运行行为",
+      "review_note": "历史正则认领基线；JSON解析及前25行阅读，不运行效果。不得把matches认领解释为当前所有条目实装正确。",
+      "production_imports": [],
+      "case_declaration_count": 0,
+      "mock_sites": [],
+      "source_read_sites": [],
+      "case_index": [],
+      "main_call_index": [],
+      "gap_links": [],
+      "limitations": "AST或fixture结构层；未逐case深审，若无人工备注不能判断stub是否遮住关键逻辑。"
+    },
+    {
+      "file": "tests/helpers/card-effect-audit.js",
+      "lines": 13,
+      "sha256": "e74ed5f2c66aba8be5515c1b39f05d2819e6cbab9a34b84172abbca68cdc13da",
+      "kind": "test-support",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [],
+      "depth": "deep",
+      "category": "test-support",
+      "entry_observation": "AST/fixture/脚本入口静态索引，未证明运行行为",
+      "review_note": "比较精确[id,clause]未知/失效基线，完整12行；有负例配合card-audit防基线放水，但不证明“被识别”效果真落账。",
+      "production_imports": [],
+      "case_declaration_count": 0,
+      "mock_sites": [],
+      "source_read_sites": [],
+      "case_index": [],
+      "main_call_index": [],
+      "gap_links": [],
+      "limitations": "完整阅读测试的fixture/setup/动作与oracle；本轮未执行测试，不代表已有结果重新验证。"
+    },
+    {
+      "file": "tests/helpers/e8-card-inventory.js",
+      "lines": 196,
+      "sha256": "8d5d0d2fed5659dbacb642c6ac8288c407caa3b2b314f767062669dfd2f504e7",
+      "kind": "test-support",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [],
+      "depth": "systematic",
+      "category": "test-support",
+      "entry_observation": "AST/fixture/脚本入口静态索引，未证明运行行为",
+      "review_note": "真实schema/capability、源分类和stage差分helper；只读1-90及imports，consumer状态默认unknown是诚实边界，未深审195行全部输出校验。",
+      "production_imports": [],
+      "case_declaration_count": 0,
+      "mock_sites": [],
+      "source_read_sites": [],
+      "case_index": [],
+      "main_call_index": [],
+      "gap_links": [],
+      "limitations": "重点入口/替身/关联case与全文件AST索引审阅，未逐case深读。"
+    },
+    {
+      "file": "tests/hero-cards.test.js",
+      "lines": 411,
+      "sha256": "cd1c55ed144a16ab86e926a2341ebe44ef810fe10d564a14bc190845f37c3288",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [
+        {
+          "line": 10,
+          "left": "window.SDT"
+        },
+        {
+          "line": 11,
+          "left": "window.SDT.Icons.TYPE_ART"
+        },
+        {
+          "line": 12,
+          "left": "window.SDT.Sound"
+        },
+        {
+          "line": 13,
+          "left": "window.SDT.MAP"
+        }
+      ],
+      "depth": "static-only",
+      "category": "production-session-test",
+      "entry_observation": "静态观察到生产BattleSession调用；未人工深读的文件不能据此证明所有case真实闭环",
+      "review_note": "已完成AST导入、case、替身/源码读取与主要调用静态扫描；2个生产import，11个字面量case声明。未人工逐case检查断言和传递数据流，不声称端到端覆盖。",
+      "production_imports": [
+        {
+          "line": 17,
+          "source": "../game/src/cards/cards.js"
+        },
+        {
+          "line": 18,
+          "source": "../game/src/battle/core/battle.core.js"
+        }
+      ],
+      "case_declaration_count": 11,
+      "mock_sites": [],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 135,
+          "name": "白梅落影·妄：净化+潜行2回合；破隐一击伤害翻倍且攻击后破除"
+        },
+        {
+          "line": 158,
+          "name": "无量仙剑·云风（BOSS战）：抽牌并直接释放其中武术"
+        },
+        {
+          "line": 181,
+          "name": "天剑诛魔·云阳（BOSS战）：断念把天启剑与诛魔剑洗入牌库，抽到时触发"
+        },
+        {
+          "line": 201,
+          "name": "圣剑化身：能量上限 +1、装备上限 +1"
+        },
+        {
+          "line": 228,
+          "name": "青龙化身：初始攻击化为青龙偃月斩并被直接释放"
+        },
+        {
+          "line": 242,
+          "name": "禁术解放（BOSS战）：四张禁咒洗入牌库，洗混后「然后抽 2 张」"
+        },
+        {
+          "line": 265,
+          "name": "浪掷风吟：置入随机卡牌直至手牌6张，每置入1张法术回复3血"
+        },
+        {
+          "line": 281,
+          "name": "明灯千里·孔明：法伤 +1，回合开始时发现 1 张卡牌"
+        },
+        {
+          "line": 297,
+          "name": "神话终章·雷修斯：元素潮汐抉择两扇门，两回合后开启未选的门"
+        },
+        {
+          "line": 349,
+          "name": "剑荡妖邪：选择手牌中 1 张武术卡直接释放"
+        },
+        {
+          "line": 369,
+          "name": "药水魔法：发现 1 瓶药水并真正直接释放（不得只置入手牌）"
+        }
+      ],
+      "main_call_index": [
+        "BattleSession.getSnapshot",
+        "BattleSession.commands.pickDiscover",
+        "BattleSession.commands.skipHandSelect",
+        "BattleSession.commands.pickChoice",
+        "BattleSession.start",
+        "BattleSession.commands.selectDeckCard",
+        "BattleSession.commands.confirmDeck",
+        "g.ownedCards.find",
+        "startBoss",
+        "BattleSession.commands.playCard",
+        "BattleSession.commands.flee",
+        "BattleSession.commands.endTurn",
+        "BattleSession.commands.pickHandSelect"
+      ],
+      "gap_links": [],
+      "limitations": "AST或fixture结构层；未逐case深审，若无人工备注不能判断stub是否遮住关键逻辑。"
+    },
+    {
+      "file": "tests/m-batch-behavior.test.js",
+      "lines": 115,
+      "sha256": "1dcb8ec0b6060a97bea981e1ee62bf53b117c5b3177d49a225734599284566fb",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [
+        {
+          "line": 5,
+          "left": "window.SDT"
+        },
+        {
+          "line": 6,
+          "left": "window.SDT.Icons"
+        },
+        {
+          "line": 7,
+          "left": "window.SDT.Sound"
+        },
+        {
+          "line": 8,
+          "left": "window.SDT.MAP"
+        }
+      ],
+      "depth": "deep",
+      "category": "production-session-test",
+      "entry_observation": "静态观察到生产BattleSession调用；未人工深读的文件不能据此证明所有case真实闭环",
+      "review_note": "真实 BattleSession；4卡语义例；花瓣调用 processDelayed 而非 endTurn，不能替代周期路由验证；牧师 Cards.all 被限池，仍真消费。完整114行。",
+      "production_imports": [
+        {
+          "line": 2,
+          "source": "../game/src/battle/runtime/battle.runtime.piles.js"
+        },
+        {
+          "line": 3,
+          "source": "../game/src/core/random.js"
+        },
+        {
+          "line": 11,
+          "source": "../game/src/cards/cards.js"
+        },
+        {
+          "line": 12,
+          "source": "../game/src/battle/core/battle.core.js"
+        },
+        {
+          "line": 13,
+          "source": "../game/src/battle/core/battle.engine.js"
+        }
+      ],
+      "case_declaration_count": 4,
+      "mock_sites": [
+        {
+          "line": 100,
+          "callee": "vi.spyOn",
+          "snippet": "vi.spyOn(Cards, 'all')"
+        }
+      ],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 66,
+          "name": "galaxy sets subsequent martial cost to one"
+        },
+        {
+          "line": 72,
+          "name": "imitate follows each newly played martial card"
+        },
+        {
+          "line": 81,
+          "name": "petal heals exactly three on each of the next three turn starts"
+        },
+        {
+          "line": 92,
+          "name": "priest inserts random cards up to six and heals only for the inserted spells"
+        }
+      ],
+      "main_call_index": [
+        "BattleSession.getSnapshot",
+        "Cards.name",
+        "Cards.all",
+        "BattleSession.start",
+        "BattleSession.commands.selectDeckCard",
+        "BattleSession.commands.confirmDeck",
+        "BattleSession.commands.playCard",
+        "BattleSession.commands.flee",
+        "start",
+        "play",
+        "engine.effCostOf",
+        "engine.findCard",
+        "engine.processDelayed",
+        "Cards.isRandomObtainable",
+        ".mockReturnValue",
+        "vi.spyOn",
+        "catalog.mockRestore"
+      ],
+      "gap_links": [],
+      "limitations": "完整阅读测试的fixture/setup/动作与oracle；本轮未执行测试，不代表已有结果重新验证。"
+    },
+    {
+      "file": "tests/m-batch-production.test.js",
+      "lines": 66,
+      "sha256": "3caf062d79d866e55ac9ed9a10800c8bb4898fb8cb071a8748a49335e93e538c",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [],
+      "depth": "deep",
+      "category": "structural-contract",
+      "entry_observation": "静态观察到生产模块import/工厂或纯函数调用；运行边界须按人工备注理解",
+      "review_note": "真实启动/规则回填；in-memory localStorage 合理隔离，docs矩阵和旧catalog是契约基线；仅全表shape/字段变更/幂等，无运行效果链。",
+      "production_imports": [
+        {
+          "line": 3,
+          "source": "../game/src/cards/card-rules.schema.js"
+        },
+        {
+          "line": 4,
+          "source": "../game/src/cards/card-rules.capability.js"
+        },
+        {
+          "line": 21,
+          "source": "../game/src/cards/cards.js"
+        }
+      ],
+      "case_declaration_count": 3,
+      "mock_sites": [],
+      "source_read_sites": [
+        {
+          "line": 7,
+          "snippet": "readFileSync('docs/M-BATCH-MATRIX.md', 'utf8')"
+        },
+        {
+          "line": 9,
+          "snippet": "readFileSync('docs/M-BATCH-EXCLUSIONS.md', 'utf8')"
+        }
+      ],
+      "case_index": [
+        {
+          "line": 29,
+          "name": "covers the agreed 150-card target and leaves exactly the 51 exclusions legacy"
+        },
+        {
+          "line": 44,
+          "name": "preserves every original ID and only changes explicitly migrated fields"
+        },
+        {
+          "line": 58,
+          "name": "repeated production initialization preserves every migrated rule"
+        }
+      ],
+      "main_call_index": [
+        "readFileSync",
+        "Cards.name",
+        "Cards.all",
+        "validateCardRules",
+        "inspectCardRuleCapability",
+        "Cards.ensureTabletop",
+        "Cards.ensureDmgTypes",
+        "Cards.ensureEffectFields"
+      ],
+      "gap_links": [
+        "TQ-01"
+      ],
+      "limitations": "完整阅读测试的fixture/setup/动作与oracle；本轮未执行测试，不代表已有结果重新验证。"
+    },
+    {
+      "file": "tests/m7-battle.test.js",
+      "lines": 99,
+      "sha256": "fc9f932b02f0a3ca66292d834b33d8333f5a775b7b0ec96bb45011dbdc19f5ad",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [
+        {
+          "line": 4,
+          "left": "window.SDT"
+        },
+        {
+          "line": 5,
+          "left": "window.SDT.Icons.TYPE_ART"
+        },
+        {
+          "line": 6,
+          "left": "window.SDT.Sound"
+        },
+        {
+          "line": 7,
+          "left": "window.SDT.MAP"
+        }
+      ],
+      "depth": "deep",
+      "category": "production-session-test",
+      "entry_observation": "静态观察到生产BattleSession调用；未人工深读的文件不能据此证明所有case真实闭环",
+      "review_note": "真实装配入口；触发测试直接调用 applyKillRewards(...,1) / fireConsumeTriggers，未走真实击杀/消耗指令。完整98行，TQ-05。",
+      "production_imports": [
+        {
+          "line": 2,
+          "source": "../game/src/cards/cards.sync.m7.js"
+        },
+        {
+          "line": 12,
+          "source": "../game/src/cards/cards.js"
+        },
+        {
+          "line": 13,
+          "source": "../game/src/battle/core/battle.core.js"
+        },
+        {
+          "line": 14,
+          "source": "../game/src/battle/core/battle.engine.js"
+        }
+      ],
+      "case_declaration_count": 3,
+      "mock_sites": [],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 64,
+          "name": "饮血剑：装备后击杀只增加 1 点攻击，旧文本 kill flag 不重复登记"
+        },
+        {
+          "line": 78,
+          "name": "沉船宝盒：消耗触发只走结构化获取，精确获得两张临时卡"
+        },
+        {
+          "line": 89,
+          "name": "奥术残卷：消耗触发只抽三张，不再回放描述文本"
+        }
+      ],
+      "main_call_index": [
+        "Cards.ensureSha",
+        "Cards.ensureStarters",
+        "Cards.ensureTabletop",
+        "Cards.ensureDmgTypes",
+        "Cards.ensureEffectFields",
+        "Cards.all",
+        "ownedCards.map",
+        "BattleSession.getSnapshot",
+        "BattleSession.commands.flee",
+        "BattleSession.start",
+        "BattleSession.commands.playCard",
+        "endBattle"
+      ],
+      "gap_links": [
+        "TQ-05"
+      ],
+      "limitations": "完整阅读测试的fixture/setup/动作与oracle；本轮未执行测试，不代表已有结果重新验证。"
+    },
+    {
+      "file": "tests/r7a-battle-orders.test.js",
+      "lines": 49,
+      "sha256": "8686a86018a3409a529633bea9f2546ac2734a2ea0d3129528a476ebd57e2cb4",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [
+        {
+          "line": 3,
+          "left": "window.SDT"
+        },
+        {
+          "line": 3,
+          "left": "window.SDT.Icons.TYPE_ART"
+        },
+        {
+          "line": 4,
+          "left": "window.SDT.Sound"
+        },
+        {
+          "line": 5,
+          "left": "window.SDT.MAP"
+        }
+      ],
+      "depth": "static-only",
+      "category": "production-session-test",
+      "entry_observation": "静态观察到生产BattleSession调用；未人工深读的文件不能据此证明所有case真实闭环",
+      "review_note": "已完成AST导入、case、替身/源码读取与主要调用静态扫描；3个生产import，4个字面量case声明。未人工逐case检查断言和传递数据流，不声称端到端覆盖。",
+      "production_imports": [
+        {
+          "line": 6,
+          "source": "../game/src/cards/cards.js"
+        },
+        {
+          "line": 7,
+          "source": "../game/src/battle/core/battle.core.js"
+        },
+        {
+          "line": 8,
+          "source": "../game/src/core/random.js"
+        }
+      ],
+      "case_declaration_count": 4,
+      "mock_sites": [],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 21,
+          "name": "L2 low-hp removal costs 5 hp while pressing cavalry costs 10 hp"
+        },
+        {
+          "line": 25,
+          "name": "L4 fire-first and grass-first produce real hp/status differences"
+        },
+        {
+          "line": 30,
+          "name": "L4 dealt=0 with an explicit initial-defense fixture adds neither burn nor curse"
+        },
+        {
+          "line": 43,
+          "name": "restart checkpoint preserves ordered enemy defs and encounter opts"
+        }
+      ],
+      "main_call_index": [
+        "BattleSession.getSnapshot",
+        "BattleSession.start",
+        "BattleSession.commands.playCard",
+        "BattleSession.commands.endTurn",
+        "BattleSession.serialize",
+        "play",
+        "BattleSession.commands.flee",
+        "BattleSession.restore"
+      ],
+      "gap_links": [],
+      "limitations": "AST或fixture结构层；未逐case深审，若无人工备注不能判断stub是否遮住关键逻辑。"
+    },
+    {
+      "file": "tests/structured-onplay-battle.test.js",
+      "lines": 222,
+      "sha256": "2007b2ab8657e2d892710732f44c184da778253f692ddcb54bad6cc5b8732dfb",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [
+        {
+          "line": 5,
+          "left": "window.SDT"
+        },
+        {
+          "line": 6,
+          "left": "window.SDT.Icons"
+        },
+        {
+          "line": 7,
+          "left": "window.SDT.Icons.TYPE_ART"
+        },
+        {
+          "line": 8,
+          "left": "window.SDT.Sound"
+        },
+        {
+          "line": 9,
+          "left": "window.SDT.MAP"
+        },
+        {
+          "line": 199,
+          "left": "game.hp"
+        }
+      ],
+      "depth": "systematic",
+      "category": "production-session-test",
+      "entry_observation": "静态观察到生产BattleSession调用；未人工深读的文件不能据此证明所有case真实闭环",
+      "review_note": "生产BattleSession commands且合成卡先schema合法校验，Sound/Icons为边界替身；人工setup1-85与AST8case，未逐case全读。",
+      "production_imports": [
+        {
+          "line": 2,
+          "source": "../game/src/cards/card-rules.schema.js"
+        },
+        {
+          "line": 3,
+          "source": "../game/src/battle/runtime/battle.runtime.js"
+        },
+        {
+          "line": 13,
+          "source": "../game/src/cards/cards.js"
+        },
+        {
+          "line": 14,
+          "source": "../game/src/battle/core/battle.core.js"
+        }
+      ],
+      "case_declaration_count": 8,
+      "mock_sites": [],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 110,
+          "name": "keeps single-target fixed damage unchanged when desc is rewritten, without text double damage"
+        },
+        {
+          "line": 121,
+          "name": "damages every enemy once for allEnemies across desc rewrites"
+        },
+        {
+          "line": 135,
+          "name": "retargets each structured segment after a kill without reading desc"
+        },
+        {
+          "line": 150,
+          "name": "uses a negative attack modifier for every structured hit"
+        },
+        {
+          "line": 164,
+          "name": "adds armor exactly once after desc rewrites and ignores old text armor"
+        },
+        {
+          "line": 175,
+          "name": "keeps damage under silence and suppresses armor in a live battle"
+        },
+        {
+          "line": 192,
+          "name": "resolves heal then armor once, regardless of rewritten desc"
+        },
+        {
+          "line": 209,
+          "name": "resolves armor then ordinary draw in order with one structural effect log each"
+        }
+      ],
+      "main_call_index": [
+        "Cards.ensureSha",
+        "Cards.ensureStarters",
+        "Cards.ensureTabletop",
+        "Cards.ensureDmgTypes",
+        "Cards.ensureEffectFields",
+        "BattleSession.getSnapshot",
+        "BattleSession.start",
+        "game.ownedCards.find",
+        "validateCardRules",
+        "BattleSession.commands.playCard",
+        "BattleSession.commands.flee",
+        "finishBattle",
+        "startGame",
+        "playCard"
+      ],
+      "gap_links": [],
+      "limitations": "重点入口/替身/关联case与全文件AST索引审阅，未逐case深读。"
+    },
+    {
+      "file": "tests/sync-cards-from-live.test.js",
+      "lines": 86,
+      "sha256": "a344f55b4ba7504f8735b0250ac3c3f8ad1ad401d24fb5954c1fa0ff181a7670",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [],
+      "depth": "static-only",
+      "category": "unit-or-boundary-test",
+      "entry_observation": "AST/fixture/脚本入口静态索引，未证明运行行为",
+      "review_note": "已完成AST导入、case、替身/源码读取与主要调用静态扫描；0个生产import，7个字面量case声明。未人工逐case检查断言和传递数据流，不声称端到端覆盖。",
+      "production_imports": [],
+      "case_declaration_count": 7,
+      "mock_sites": [],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 11,
+          "name": "沙箱求值建出完整现役卡库，关键卡在位"
+        },
+        {
+          "line": 30,
+          "name": "diff 对齐口径：完全一致的输入零差异"
+        },
+        {
+          "line": 42,
+          "name": "prev 中未变化条目全部保留（纯实机卡 + 源码定义的共享 id 覆盖条目）"
+        },
+        {
+          "line": 53,
+          "name": "本轮覆盖同 id 时不堆积重复，取本轮新值"
+        },
+        {
+          "line": 61,
+          "name": "退役名单条目不保留"
+        },
+        {
+          "line": 67,
+          "name": "无 id 的 prev 条目不进覆盖批次（与播种 upsert 语义对齐）"
+        },
+        {
+          "line": 75,
+          "name": "剥 import / export 块 / export 前缀，重复 SDT 声明去重"
+        }
+      ],
+      "main_call_index": [],
+      "gap_links": [],
+      "limitations": "AST或fixture结构层；未逐case深审，若无人工备注不能判断stub是否遮住关键逻辑。"
+    },
+    {
+      "file": "tests/tt12-hitechrd-battle-baseline.test.js",
+      "lines": 150,
+      "sha256": "945f6c5b0fe277ccef6a61eaa80fecc7d48583088e869609d88c71d645097f83",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [
+        {
+          "line": 3,
+          "left": "window.SDT"
+        },
+        {
+          "line": 4,
+          "left": "window.SDT.Icons.TYPE_ART"
+        },
+        {
+          "line": 5,
+          "left": "window.SDT.Sound"
+        },
+        {
+          "line": 6,
+          "left": "window.SDT.MAP"
+        }
+      ],
+      "depth": "static-only",
+      "category": "production-session-test",
+      "entry_observation": "静态观察到生产BattleSession调用；未人工深读的文件不能据此证明所有case真实闭环",
+      "review_note": "已完成AST导入、case、替身/源码读取与主要调用静态扫描；2个生产import，1个字面量case声明。未人工逐case检查断言和传递数据流，不声称端到端覆盖。",
+      "production_imports": [
+        {
+          "line": 11,
+          "source": "../game/src/cards/cards.js"
+        },
+        {
+          "line": 12,
+          "source": "../game/src/battle/core/battle.core.js"
+        }
+      ],
+      "case_declaration_count": 1,
+      "mock_sites": [],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 89,
+          "name": "discovers a real 2-cost martial card, decays its effective cost, and reproduces restart-on-read behavior"
+        }
+      ],
+      "main_call_index": [
+        "Cards.ensureSha",
+        "Cards.ensureStarters",
+        "Cards.ensureTabletop",
+        "Cards.ensureDmgTypes",
+        "Cards.ensureEffectFields",
+        "BattleSession.getSnapshot",
+        "BattleSession.commands.pickDiscover",
+        "BattleSession.commands.pickChoice",
+        "BattleSession.commands.skipHandSelect",
+        "BattleSession.commands.flee",
+        "finishBattle",
+        "Cards.all",
+        "BattleSession.start",
+        "game.ownedCards.map",
+        "BattleSession.commands.playCard",
+        "BattleSession.commands.endTurn",
+        "BattleSession.serialize",
+        "save.run.ownedCards.map",
+        "BattleSession.restore",
+        "game.ownedCards.some"
+      ],
+      "gap_links": [],
+      "limitations": "AST或fixture结构层；未逐case深审，若无人工备注不能判断stub是否遮住关键逻辑。"
+    },
+    {
+      "file": "tests/tt12-structured-battle.test.js",
+      "lines": 178,
+      "sha256": "43fb51dfb68972162c305596f9f4ebd047218891ee131280c7de4c9ae08ced87",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [
+        {
+          "line": 3,
+          "left": "window.SDT"
+        },
+        {
+          "line": 4,
+          "left": "window.SDT.Icons.TYPE_ART"
+        },
+        {
+          "line": 5,
+          "left": "window.SDT.Sound"
+        },
+        {
+          "line": 6,
+          "left": "window.SDT.MAP"
+        }
+      ],
+      "depth": "static-only",
+      "category": "production-session-test",
+      "entry_observation": "静态观察到生产BattleSession调用；未人工深读的文件不能据此证明所有case真实闭环",
+      "review_note": "已完成AST导入、case、替身/源码读取与主要调用静态扫描；2个生产import，3个字面量case声明。未人工逐case检查断言和传递数据流，不声称端到端覆盖。",
+      "production_imports": [
+        {
+          "line": 11,
+          "source": "../game/src/cards/cards.js"
+        },
+        {
+          "line": 12,
+          "source": "../game/src/battle/core/battle.core.js"
+        }
+      ],
+      "case_declaration_count": 3,
+      "mock_sites": [],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 65,
+          "name": "从现役卡库取屏障修复规则；零护甲免费自选自身，护甲存在时仍扣 1 费"
+        },
+        {
+          "line": 108,
+          "name": "后备能源按真实消耗口袋快照折费，并在改写描述后直接打出"
+        },
+        {
+          "line": 151,
+          "name": "违禁烟火从现役卡库取得结构化规则；改写描述后仍选敌方目标并对全体造成一次固定伤害"
+        }
+      ],
+      "main_call_index": [
+        "Cards.ensureSha",
+        "Cards.ensureStarters",
+        "Cards.ensureTabletop",
+        "Cards.ensureDmgTypes",
+        "Cards.ensureEffectFields",
+        "Cards.all",
+        "BattleSession.getSnapshot",
+        "BattleSession.commands.pickDiscover",
+        "BattleSession.commands.pickChoice",
+        "BattleSession.commands.skipHandSelect",
+        "BattleSession.start",
+        "BattleSession.commands.playCard",
+        "BattleSession.commands.flee",
+        "BattleSession.commands.selectInfusion",
+        "BattleSession.commands.confirmInfusion"
+      ],
+      "gap_links": [],
+      "limitations": "AST或fixture结构层；未逐case深审，若无人工备注不能判断stub是否遮住关键逻辑。"
+    },
+    {
+      "file": "tests/tt3-effect-baseline.test.js",
+      "lines": 335,
+      "sha256": "d5e69e743d8a1a97df7692344c451eadfffcbc0f315bd2ef6b324adbf9594280",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [
+        {
+          "line": 5,
+          "left": "window.SDT"
+        },
+        {
+          "line": 6,
+          "left": "window.SDT.Icons.TYPE_ART"
+        },
+        {
+          "line": 7,
+          "left": "window.SDT.Sound"
+        },
+        {
+          "line": 8,
+          "left": "window.SDT.MAP"
+        },
+        {
+          "line": 117,
+          "left": "game.onBattleEnd"
+        },
+        {
+          "line": 117,
+          "left": "game.lastBattleEnd"
+        },
+        {
+          "line": 184,
+          "left": "window.SDT.MAP.rules.bossDeckSize"
+        },
+        {
+          "line": 185,
+          "left": "window.SDT.MAP.rules.battleStartDraw"
+        },
+        {
+          "line": 193,
+          "left": "game.ownedCards"
+        },
+        {
+          "line": 223,
+          "left": "window.SDT.MAP.rules.bossDeckSize"
+        },
+        {
+          "line": 224,
+          "left": "window.SDT.MAP.rules.battleStartDraw"
+        }
+      ],
+      "depth": "static-only",
+      "category": "production-session-test",
+      "entry_observation": "静态观察到生产BattleSession调用；未人工深读的文件不能据此证明所有case真实闭环",
+      "review_note": "已完成AST导入、case、替身/源码读取与主要调用静态扫描；4个生产import，8个字面量case声明。未人工逐case检查断言和传递数据流，不声称端到端覆盖。",
+      "production_imports": [
+        {
+          "line": 2,
+          "source": "../game/src/cards/cards.consts.js"
+        },
+        {
+          "line": 3,
+          "source": "../game/src/cards/card-rules.schema.js"
+        },
+        {
+          "line": 13,
+          "source": "../game/src/cards/cards.js"
+        },
+        {
+          "line": 14,
+          "source": "../game/src/battle/core/battle.core.js"
+        }
+      ],
+      "case_declaration_count": 8,
+      "mock_sites": [
+        {
+          "line": 244,
+          "callee": "vi.spyOn",
+          "snippet": "vi.spyOn(Cards, 'saveAll')"
+        },
+        {
+          "line": 274,
+          "callee": "vi.spyOn",
+          "snippet": "vi.spyOn(console, 'error')"
+        },
+        {
+          "line": 311,
+          "callee": "vi.spyOn",
+          "snippet": "vi.spyOn(console, 'error')"
+        },
+        {
+          "line": 312,
+          "callee": "vi.spyOn",
+          "snippet": "vi.spyOn(Cards, 'saveAll')"
+        }
+      ],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 113,
+          "name": "吞噬击杀最后一名小怪后结束战斗并清除 busy"
+        },
+        {
+          "line": 129,
+          "name": "定版 onPlay 声明旧操作顺序；描述改写后仍按字段结算且不重复"
+        },
+        {
+          "line": 154,
+          "name": "普通遭遇战中包扎回复 3 血并获得 3 甲，坚守获得 5 甲"
+        },
+        {
+          "line": 169,
+          "name": "沉默会封锁包扎的回复/护甲与坚守的护甲/抽牌"
+        },
+        {
+          "line": 181,
+          "name": "BOSS 战坚守按 armor→draw 顺序结算并从剩余牌库补 1 张"
+        },
+        {
+          "line": 228,
+          "name": "marker 已存在但整卡同步覆盖丢失规则时仍会修复，只填定版规则引用的缺失数值"
+        },
+        {
+          "line": 271,
+          "name": "无效旧规则记录 card id/path 且保留原存档、不写 marker"
+        },
+        {
+          "line": 302,
+          "name": "saveAll 抛出存储异常时记录错误且不写 marker"
+        }
+      ],
+      "main_call_index": [
+        "Cards.ensureSha",
+        "Cards.ensureStarters",
+        "Cards.ensureTabletop",
+        "Cards.ensureDmgTypes",
+        "Cards.ensureEffectFields",
+        "Cards.TABLETOP10.find",
+        "BattleSession.getSnapshot",
+        "BattleSession.commands.pickDiscover",
+        "BattleSession.commands.pickChoice",
+        "BattleSession.commands.skipHandSelect",
+        "BattleSession.start",
+        "BattleSession.commands.playCard",
+        "BattleSession.commands.flee",
+        "BattleSession.restore",
+        "playNormal",
+        "playSilenced",
+        "BattleSession.commands.selectDeckCard",
+        "BattleSession.commands.confirmDeck",
+        "ownedCards.some",
+        "Cards.all",
+        "previousCards.map",
+        "Cards.saveAll",
+        "vi.spyOn",
+        "Cards.ensureTT10OnPlayRules",
+        "validateCardRules",
+        "save.mockRestore",
+        ".mockImplementation",
+        "Cards.clearAll",
+        "errors.mockRestore"
+      ],
+      "gap_links": [],
+      "limitations": "AST或fixture结构层；未逐case深审，若无人工备注不能判断stub是否遮住关键逻辑。"
+    },
+    {
+      "file": "tests/tt7-frozenight-structured-battle.test.js",
+      "lines": 130,
+      "sha256": "1b95ec00086f21d6fadfb3d51548bb58d5108f71367a1cb5cfd1e760e0aec503",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [
+        {
+          "line": 4,
+          "left": "window.SDT"
+        },
+        {
+          "line": 5,
+          "left": "window.SDT.Icons"
+        },
+        {
+          "line": 6,
+          "left": "window.SDT.Icons.TYPE_ART"
+        },
+        {
+          "line": 7,
+          "left": "window.SDT.Sound"
+        },
+        {
+          "line": 8,
+          "left": "window.SDT.MAP"
+        }
+      ],
+      "depth": "static-only",
+      "category": "production-session-test",
+      "entry_observation": "静态观察到生产BattleSession调用；未人工深读的文件不能据此证明所有case真实闭环",
+      "review_note": "已完成AST导入、case、替身/源码读取与主要调用静态扫描；5个生产import，3个字面量case声明。未人工逐case检查断言和传递数据流，不声称端到端覆盖。",
+      "production_imports": [
+        {
+          "line": 2,
+          "source": "../game/src/cards/card-rules.schema.js"
+        },
+        {
+          "line": 12,
+          "source": "../game/src/cards/cards.js"
+        },
+        {
+          "line": 13,
+          "source": "../game/src/battle/core/battle.core.js"
+        },
+        {
+          "line": 99,
+          "source": "../game/src/battle/runtime/battle.runtime.js"
+        },
+        {
+          "line": 121,
+          "source": "../game/src/battle/runtime/battle.runtime.js"
+        }
+      ],
+      "case_declaration_count": 3,
+      "mock_sites": [],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 80,
+          "name": "backfills the frozenight rule onto the legacy card found in Cards.all()"
+        },
+        {
+          "line": 98,
+          "name": "freezes each living enemy once for the declared duration, independent of desc"
+        },
+        {
+          "line": 120,
+          "name": "does not freeze enemies while the player is silenced"
+        }
+      ],
+      "main_call_index": [
+        "Cards.ensureSha",
+        "Cards.ensureStarters",
+        "Cards.ensureTabletop",
+        "Cards.ensureDmgTypes",
+        "Cards.ensureEffectFields",
+        "BattleSession.getSnapshot",
+        "validateCardRules",
+        "BattleSession.start",
+        "BattleSession.commands.playCard",
+        "BattleSession.commands.flee",
+        "Cards.all",
+        "Cards.saveAll",
+        "Cards.ensureTT7StatusRules",
+        "startAndPlay",
+        "finishBattle"
+      ],
+      "gap_links": [],
+      "limitations": "AST或fixture结构层；未逐case深审，若无人工备注不能判断stub是否遮住关键逻辑。"
+    },
+    {
+      "file": "tests/vite-card-chunk.test.js",
+      "lines": 40,
+      "sha256": "80886457871a2745b0d5a8a3d1154fbc657940c61c1395b6dfd71131ea67a915",
+      "kind": "executable-test",
+      "parsed": "ok",
+      "essentialHostSubstitutions": [],
+      "literalAssignments": [],
+      "depth": "static-only",
+      "category": "structural-contract",
+      "entry_observation": "AST/fixture/脚本入口静态索引，未证明运行行为",
+      "review_note": "已完成AST导入、case、替身/源码读取与主要调用静态扫描；0个生产import，3个字面量case声明。未人工逐case检查断言和传递数据流，不声称端到端覆盖。",
+      "production_imports": [],
+      "case_declaration_count": 3,
+      "mock_sites": [],
+      "source_read_sites": [],
+      "case_index": [
+        {
+          "line": 12,
+          "name": "puts the current card catalog and data loader files in their shared chunk"
+        },
+        {
+          "line": 23,
+          "name": "accepts POSIX and Windows paths without capturing adjacent modules"
+        },
+        {
+          "line": 32,
+          "name": "preserves the existing vendor chunk assignments"
+        }
+      ],
+      "main_call_index": [],
+      "gap_links": [],
+      "limitations": "AST或fixture结构层；未逐case深审，若无人工备注不能判断stub是否遮住关键逻辑。"
+    }
+  ],
+  "known": [
+    "本轮不新增产品缺陷；仅说明上轮BC组合为何漏测。",
+    "UI/GPU/真实浏览器输入与全量CI覆盖不在此审阅范围。",
+    "m2-contract等文件名不匹配明确分配规则，未扩范围；不能断言整个tests目录无其余相似测试。"
+  ]
+}

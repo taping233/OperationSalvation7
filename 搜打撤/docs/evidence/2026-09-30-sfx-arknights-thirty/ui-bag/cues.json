@@ -1,0 +1,162 @@
+[
+  {
+    "id": "cardSelect",
+    "label": "选卡",
+    "group": "cards",
+    "note": "短促标记声",
+    "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_ui/b_ui_mark.wav",
+    "source_sha256": "5fb019f3b0a51ac77d2646147166309de38a9632a70055fd85fa43c2f4c82eb8",
+    "base": {
+      "src": "./assets/sfx/alternatives/arknights-expansion/ui-bag/cardSelect-base.ogg",
+      "seconds": 0.733083
+    },
+    "adjusted": {
+      "src": "./assets/sfx/alternatives/arknights-expansion/ui-bag/cardSelect.ogg",
+      "seconds": 0.704792
+    }
+  },
+  {
+    "id": "draw",
+    "label": "抽牌",
+    "group": "cards",
+    "note": "纸页抽动",
+    "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_paper1.wav",
+    "source_sha256": "be6909f305e87b9ea16e792e8c8aca23b2e36cd9f6e8d60b4f9338b3d90a0943",
+    "base": {
+      "src": "./assets/sfx/alternatives/arknights-expansion/ui-bag/draw-base.ogg",
+      "seconds": 1.077125
+    },
+    "adjusted": {
+      "src": "./assets/sfx/alternatives/arknights-expansion/ui-bag/draw.ogg",
+      "seconds": 1.025833
+    }
+  },
+  {
+    "id": "discard",
+    "label": "弃牌",
+    "group": "cards",
+    "note": "纸页落下",
+    "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_paper2.wav",
+    "source_sha256": "6694e91262f6c036117832d5ac98ca38ca34bec6c2241f91b909d7ee3ebc2623",
+    "base": {
+      "src": "./assets/sfx/alternatives/arknights-expansion/ui-bag/discard-base.ogg",
+      "seconds": 0.926937
+    },
+    "adjusted": {
+      "src": "./assets/sfx/alternatives/arknights-expansion/ui-bag/discard.ogg",
+      "seconds": 0.874313
+    }
+  },
+  {
+    "id": "pick",
+    "label": "物品拿起",
+    "group": "ui",
+    "note": "布料挪动",
+    "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_clothmovement.wav",
+    "source_sha256": "ec19e709b4adb191e0c2dc8179301b01cd27c3a2ba8329b6ae7069618191afe7",
+    "base": {
+      "src": "./assets/sfx/alternatives/arknights-expansion/ui-bag/pick-base.ogg",
+      "seconds": 1.069146
+    },
+    "adjusted": {
+      "src": "./assets/sfx/alternatives/arknights-expansion/ui-bag/pick.ogg",
+      "seconds": 1.018229
+    }
+  },
+  {
+    "id": "coin",
+    "label": "金币",
+    "group": "rewards",
+    "note": "金币碰响",
+    "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_coin.wav",
+    "source_sha256": "558e1ee8dfa622644de764d8abbc1a210b7b0a0d1fde807a46c5760b787702be",
+    "base": {
+      "src": "./assets/sfx/alternatives/arknights-expansion/ui-bag/coin-base.ogg",
+      "seconds": 0.68
+    },
+    "adjusted": {
+      "src": "./assets/sfx/alternatives/arknights-expansion/ui-bag/coin.ogg",
+      "seconds": 0.616688
+    }
+  },
+  {
+    "id": "reveal",
+    "label": "奖励揭晓",
+    "group": "rewards",
+    "note": "短促亮音",
+    "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_ui/b_ui_getcast.wav",
+    "source_sha256": "8307c0ac7e1248b251f3121fefd3782d134d3474857206d25e3e63d700ccd8c5",
+    "base": {
+      "src": "./assets/sfx/alternatives/arknights-expansion/ui-bag/reveal-base.ogg",
+      "seconds": 0.404083
+    },
+    "adjusted": {
+      "src": "./assets/sfx/alternatives/arknights-expansion/ui-bag/reveal.ogg",
+      "seconds": 0.388437
+    }
+  },
+  {
+    "id": "legend",
+    "label": "高稀有奖励",
+    "group": "rewards",
+    "note": "星级亮音",
+    "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_ui/b_ui_star.wav",
+    "source_sha256": "62acbb9aabc121b6ae0f5567f514bad9b936c5ee4207eee0bd5526fe8a1bbf5c",
+    "base": {
+      "src": "./assets/sfx/alternatives/arknights-expansion/ui-bag/legend-base.ogg",
+      "seconds": 0.306271
+    },
+    "adjusted": {
+      "src": "./assets/sfx/alternatives/arknights-expansion/ui-bag/legend.ogg",
+      "seconds": 0.297271
+    }
+  },
+  {
+    "id": "victory",
+    "label": "战斗胜利",
+    "group": "combat",
+    "note": "胜利提示",
+    "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_ui/b_ui_win.wav",
+    "source_sha256": "2f6dc6481d90c96a1695c09288b6d29ecc207fec07f8793f61efbdcae4ac8c61",
+    "base": {
+      "src": "./assets/sfx/alternatives/arknights-expansion/ui-bag/victory-base.ogg",
+      "seconds": 1.876833
+    },
+    "adjusted": {
+      "src": "./assets/sfx/alternatives/arknights-expansion/ui-bag/victory.ogg",
+      "seconds": 1.822167
+    }
+  },
+  {
+    "id": "defeat",
+    "label": "战斗失败",
+    "group": "combat",
+    "note": "失败提示",
+    "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_ui/b_ui_lose.wav",
+    "source_sha256": "34160eb3c3b2698df9e7afdf736a65357f74f7793715617d883015c1e02b0966",
+    "base": {
+      "src": "./assets/sfx/alternatives/arknights-expansion/ui-bag/defeat-base.ogg",
+      "seconds": 1.902833
+    },
+    "adjusted": {
+      "src": "./assets/sfx/alternatives/arknights-expansion/ui-bag/defeat.ogg",
+      "seconds": 1.865521
+    }
+  },
+  {
+    "id": "flee",
+    "label": "逃离",
+    "group": "combat",
+    "note": "急促撤离提示",
+    "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_char/b_char_escape.wav",
+    "source_sha256": "05be8ce0c9d98f7e6b3c44a750d7ecdf1725ef1fadddb29ce84cfd43d4045a2b",
+    "base": {
+      "src": "./assets/sfx/alternatives/arknights-expansion/ui-bag/flee-base.ogg",
+      "seconds": 0.887333
+    },
+    "adjusted": {
+      "src": "./assets/sfx/alternatives/arknights-expansion/ui-bag/flee.ogg",
+      "seconds": 0.836958
+    }
+  }
+]

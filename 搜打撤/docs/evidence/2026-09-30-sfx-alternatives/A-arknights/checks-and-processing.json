@@ -1,0 +1,489 @@
+{
+  "version": "A",
+  "source_derivative": true,
+  "license_fact": "Arknights audio/recordings; no project-use authorization established. Repository code licenses do not establish rights to game audio.",
+  "listening": "No human listening verification claimed; technical format/decode/finite/clipping checks only.",
+  "files": [
+    {
+      "id": "click",
+      "source": {
+        "file": "ui-recorded-click.wav",
+        "repository": "https://github.com/Cromemadnd/ArknightsUI-React-Template",
+        "branch": "main",
+        "source_path": "public/click.wav",
+        "source_url": "https://raw.githubusercontent.com/Cromemadnd/ArknightsUI-React-Template/main/public/click.wav",
+        "github_blob_sha": "aa2c263beda06830b706ba6216c98e60a8000111",
+        "sha256": "11a1b24a924134691c0edc95c46c80354f4019d59b52e8df97db3b54d1f594ad",
+        "bytes": 50470,
+        "local_source_file": "docs/evidence/2026-09-30-sfx-alternatives/A-arknights/originals/ui-recorded-click.wav"
+      },
+      "source_seconds": 0.262313,
+      "source_file_sha256": "11a1b24a924134691c0edc95c46c80354f4019d59b52e8df97db3b54d1f594ad",
+      "processing": {
+        "trim_start_s": 0.036667,
+        "trim_end_s": 0.256521,
+        "filters": "1st-order highpass 25 Hz; 1st-order lowpass 17500 Hz",
+        "gain_db": 1.5526,
+        "peak_target_dbfs": -14.0,
+        "fade_in_ms": 2,
+        "fade_out_ms": 8,
+        "resample_hz": 48000,
+        "channels": 2,
+        "pitch_change": false,
+        "synthetic_layers": false,
+        "reverb_added": false
+      },
+      "ogg": {
+        "path": "game/assets/sfx/alternatives/arknights/click.ogg",
+        "seconds": 0.217188,
+        "sample_rate": 48000,
+        "channels": 2,
+        "codec": "vorbis",
+        "quality": 6,
+        "sha256": "bb6c50adc72d73d72976216d76a190543ccb2902aac83ad7f58f3a7e6ee81f1e",
+        "decoded_peak_dbfs": -14.085,
+        "finite": true,
+        "clipped_samples": 0,
+        "decode": "pass"
+      }
+    },
+    {
+      "id": "confirm",
+      "source": {
+        "file": "ui-home-button.wav",
+        "repository": "https://github.com/misaka10843/arknights-h5",
+        "branch": "master",
+        "source_path": "voice/button.wav",
+        "source_url": "https://raw.githubusercontent.com/misaka10843/arknights-h5/master/voice/button.wav",
+        "github_blob_sha": "8ab6928d492c8010609d7051b99c0dbe4e373f41",
+        "sha256": "f1379a849fff5d804bdf18aa4a1a9aeda685c928f347dffaf35b9f760b909bdb",
+        "bytes": 38884,
+        "local_source_file": "docs/evidence/2026-09-30-sfx-alternatives/A-arknights/originals/ui-home-button.wav"
+      },
+      "source_seconds": 0.220188,
+      "source_file_sha256": "f1379a849fff5d804bdf18aa4a1a9aeda685c928f347dffaf35b9f760b909bdb",
+      "processing": {
+        "trim_start_s": 0.0,
+        "trim_end_s": 0.218312,
+        "filters": "1st-order highpass 25 Hz; 1st-order lowpass 17500 Hz",
+        "gain_db": -7.4383,
+        "peak_target_dbfs": -11.5,
+        "fade_in_ms": 2,
+        "fade_out_ms": 8,
+        "resample_hz": 48000,
+        "channels": 2,
+        "pitch_change": false,
+        "synthetic_layers": false,
+        "reverb_added": false
+      },
+      "ogg": {
+        "path": "game/assets/sfx/alternatives/arknights/confirm.ogg",
+        "seconds": 0.215646,
+        "sample_rate": 48000,
+        "channels": 2,
+        "codec": "vorbis",
+        "quality": 6,
+        "sha256": "c50574814a90af85417c354eddee95b64e1a367bca125f1410897ad0eb850bf2",
+        "decoded_peak_dbfs": -11.6816,
+        "finite": true,
+        "clipped_samples": 0,
+        "decode": "pass"
+      }
+    },
+    {
+      "id": "card",
+      "source": {
+        "file": "d_avg_shufflecards.wav",
+        "source_path": "avg/d_avg_shufflecards.wav",
+        "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_shufflecards.wav",
+        "github_blob_sha": "82db27ebc08c5de7799a83640521dfdc66f93167",
+        "sha256": "b518c179879c467b2fd41e95d12dbea890a1a588be49f42f5ae09e5a278022fb",
+        "bytes": 655048,
+        "decoded_duration_s": 3.411,
+        "decoded_peak_dbfs": -9.94,
+        "decode": "pass",
+        "local_source_file": "docs/evidence/2026-09-30-arknights-sfx-reference/d_avg_shufflecards.wav"
+      },
+      "source_seconds": 3.411479,
+      "source_file_sha256": "b518c179879c467b2fd41e95d12dbea890a1a588be49f42f5ae09e5a278022fb",
+      "processing": {
+        "trim_start_s": 0.284646,
+        "trim_end_s": 1.034646,
+        "filters": "1st-order highpass 25 Hz; 1st-order lowpass 17500 Hz",
+        "gain_db": 0.7086,
+        "peak_target_dbfs": -12.0,
+        "fade_in_ms": 2,
+        "fade_out_ms": 8,
+        "resample_hz": 48000,
+        "channels": 2,
+        "pitch_change": false,
+        "synthetic_layers": false,
+        "reverb_added": false
+      },
+      "ogg": {
+        "path": "game/assets/sfx/alternatives/arknights/card.ogg",
+        "seconds": 0.747333,
+        "sample_rate": 48000,
+        "channels": 2,
+        "codec": "vorbis",
+        "quality": 6,
+        "sha256": "dc05d1ae87d00a9b6d0549046be00938aa937b72bc4eb06ee981668eba7fd7ae",
+        "decoded_peak_dbfs": -12.103,
+        "finite": true,
+        "clipped_samples": 0,
+        "decode": "pass"
+      }
+    },
+    {
+      "id": "attackSlash",
+      "source": {
+        "file": "p_atk_blade_n.mp3",
+        "url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/player/p_atk/p_atk_blade_n.mp3",
+        "bytes": 11720,
+        "local_source_file": "docs/evidence/2026-09-30-sfx-v6-ten/references/p_atk_blade_n.mp3"
+      },
+      "source_seconds": 1.392292,
+      "source_file_sha256": "8a2982d82460294afccd22b381d48e8b9e5ed08f1a83c8af465cb0aae13643a0",
+      "processing": {
+        "trim_start_s": 0.009625,
+        "trim_end_s": 1.027708,
+        "filters": "1st-order highpass 25 Hz; 1st-order lowpass 17500 Hz",
+        "gain_db": -5.2546,
+        "peak_target_dbfs": -8.5,
+        "fade_in_ms": 2,
+        "fade_out_ms": 8,
+        "resample_hz": 48000,
+        "channels": 2,
+        "pitch_change": false,
+        "synthetic_layers": false,
+        "reverb_added": false
+      },
+      "ogg": {
+        "path": "game/assets/sfx/alternatives/arknights/attackSlash.ogg",
+        "seconds": 1.018083,
+        "sample_rate": 48000,
+        "channels": 2,
+        "codec": "vorbis",
+        "quality": 6,
+        "sha256": "385d08dfbee83f5090cd880ba45cc08eb7ca880b820a52b465a13ca3be039619",
+        "decoded_peak_dbfs": -8.5068,
+        "finite": true,
+        "clipped_samples": 0,
+        "decode": "pass"
+      }
+    },
+    {
+      "id": "parry",
+      "source": {
+        "file": "p_imp_blackshield_n.mp3",
+        "url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/player/p_imp/p_imp_blackshield_n.mp3",
+        "bytes": 6705,
+        "local_source_file": "docs/evidence/2026-09-30-sfx-v6-ten/references/p_imp_blackshield_n.mp3"
+      },
+      "source_seconds": 0.75875,
+      "source_file_sha256": "8abbfcf06bfcb3bfad8dd8dad8c2bc94c73773b252664f03b0de10ea481eec8c",
+      "processing": {
+        "trim_start_s": 0.0,
+        "trim_end_s": 0.75875,
+        "filters": "1st-order highpass 25 Hz; 1st-order lowpass 17500 Hz",
+        "gain_db": -6.0443,
+        "peak_target_dbfs": -9.5,
+        "fade_in_ms": 2,
+        "fade_out_ms": 8,
+        "resample_hz": 48000,
+        "channels": 2,
+        "pitch_change": false,
+        "synthetic_layers": false,
+        "reverb_added": false
+      },
+      "ogg": {
+        "path": "game/assets/sfx/alternatives/arknights/parry.ogg",
+        "seconds": 0.756083,
+        "sample_rate": 48000,
+        "channels": 2,
+        "codec": "vorbis",
+        "quality": 6,
+        "sha256": "6a4c18f711cafcdba169f3a9049f26016e425023cc34304a8f7751492dca795a",
+        "decoded_peak_dbfs": -9.6588,
+        "finite": true,
+        "clipped_samples": 0,
+        "decode": "pass"
+      }
+    },
+    {
+      "id": "shieldBreak",
+      "source": {
+        "file": "d_avg_glass_break.wav",
+        "repository": "https://github.com/PseudoMon/arknights-audio",
+        "branch": "global-server-voices",
+        "source_path": "avg/d_avg_glass_break.wav",
+        "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_glass_break.wav",
+        "github_blob_sha": "4a229e43aa8ef7f5ba688f3aa2acb2455d0bf07a",
+        "sha256": "1c69c44feec07a8570820f9e810861ce32e9b0c6c38d6d3acecfe3f843760f3c",
+        "bytes": 281196,
+        "local_source_file": "docs/evidence/2026-09-30-sfx-alternatives/A-arknights/originals/d_avg_glass_break.wav"
+      },
+      "source_seconds": 1.593833,
+      "source_file_sha256": "1c69c44feec07a8570820f9e810861ce32e9b0c6c38d6d3acecfe3f843760f3c",
+      "processing": {
+        "trim_start_s": 0.001583,
+        "trim_end_s": 1.084812,
+        "filters": "1st-order highpass 25 Hz; 1st-order lowpass 17500 Hz",
+        "gain_db": -9.475,
+        "peak_target_dbfs": -9.0,
+        "fade_in_ms": 2,
+        "fade_out_ms": 8,
+        "resample_hz": 48000,
+        "channels": 2,
+        "pitch_change": false,
+        "synthetic_layers": false,
+        "reverb_added": false
+      },
+      "ogg": {
+        "path": "game/assets/sfx/alternatives/arknights/shieldBreak.ogg",
+        "seconds": 1.083229,
+        "sample_rate": 48000,
+        "channels": 2,
+        "codec": "vorbis",
+        "quality": 6,
+        "sha256": "30bc5b15170d2497b6bac731503a2a11cd1df289dc346d41ea393a62adf0889c",
+        "decoded_peak_dbfs": -8.974,
+        "finite": true,
+        "clipped_samples": 0,
+        "decode": "pass"
+      }
+    },
+    {
+      "id": "heal",
+      "source": {
+        "file": "p_atk_heal_n.mp3",
+        "url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/player/p_atk/p_atk_heal_n.mp3",
+        "bytes": 10049,
+        "local_source_file": "docs/evidence/2026-09-30-sfx-v6-ten/references/p_atk_heal_n.mp3"
+      },
+      "source_seconds": 1.199479,
+      "source_file_sha256": "b9e0b9799fa399191e877105525595996b4c57912d85f43c9b3589e981342bd0",
+      "processing": {
+        "trim_start_s": 0.0,
+        "trim_end_s": 0.768083,
+        "filters": "1st-order highpass 25 Hz; 1st-order lowpass 17500 Hz",
+        "gain_db": 8.3906,
+        "peak_target_dbfs": -11.0,
+        "fade_in_ms": 2,
+        "fade_out_ms": 8,
+        "resample_hz": 48000,
+        "channels": 2,
+        "pitch_change": false,
+        "synthetic_layers": false,
+        "reverb_added": false
+      },
+      "ogg": {
+        "path": "game/assets/sfx/alternatives/arknights/heal.ogg",
+        "seconds": 0.765417,
+        "sample_rate": 48000,
+        "channels": 2,
+        "codec": "vorbis",
+        "quality": 6,
+        "sha256": "46f3ad2b87e5fcf8df4d3a8ebb50094cfbc1fe182ab94182b101eec3197b7dc2",
+        "decoded_peak_dbfs": -11.2626,
+        "finite": true,
+        "clipped_samples": 0,
+        "decode": "pass"
+      }
+    },
+    {
+      "id": "eventEnter",
+      "source": {
+        "file": "b_ui_whoosh.wav",
+        "source_path": "battle/b_ui/b_ui_whoosh.wav",
+        "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_ui/b_ui_whoosh.wav",
+        "github_blob_sha": "55b98dbd0a1a3cb040088f172616d52a2ed29115",
+        "sha256": "56e699d2220c4580dfe1d5143d8593540dd8ce6a25c428cfef2df4ecac75ed35",
+        "bytes": 221912,
+        "decoded_duration_s": 1.258,
+        "decoded_peak_dbfs": -5.23,
+        "decode": "pass",
+        "local_source_file": "docs/evidence/2026-09-30-arknights-sfx-reference/b_ui_whoosh.wav"
+      },
+      "source_seconds": 1.257771,
+      "source_file_sha256": "56e699d2220c4580dfe1d5143d8593540dd8ce6a25c428cfef2df4ecac75ed35",
+      "processing": {
+        "trim_start_s": 0.0,
+        "trim_end_s": 1.257771,
+        "filters": "1st-order highpass 25 Hz; 1st-order lowpass 17500 Hz",
+        "gain_db": -5.6962,
+        "peak_target_dbfs": -11.0,
+        "fade_in_ms": 2,
+        "fade_out_ms": 8,
+        "resample_hz": 48000,
+        "channels": 2,
+        "pitch_change": false,
+        "synthetic_layers": false,
+        "reverb_added": false
+      },
+      "ogg": {
+        "path": "game/assets/sfx/alternatives/arknights/eventEnter.ogg",
+        "seconds": 1.257771,
+        "sample_rate": 48000,
+        "channels": 2,
+        "codec": "vorbis",
+        "quality": 6,
+        "sha256": "7e4346219c3c7957704cf9ca02d604e2c8eb231da682157b0b6f053002f03a39",
+        "decoded_peak_dbfs": -10.9439,
+        "finite": true,
+        "clipped_samples": 0,
+        "decode": "pass"
+      }
+    },
+    {
+      "id": "chestBurst",
+      "source": {
+        "file": "b_ui_rewardappear.wav",
+        "source_path": "battle/b_ui/b_ui_rewardappear.wav",
+        "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_ui/b_ui_rewardappear.wav",
+        "github_blob_sha": "f8f0b0269d66a24009703b429a73e4979feb178a",
+        "sha256": "03109ef89170577407410f6fb8e12cda7c89f9e60fd794eab130abbfd16b1cf4",
+        "bytes": 135740,
+        "decoded_duration_s": 0.707,
+        "decoded_peak_dbfs": -16.72,
+        "decode": "pass",
+        "local_source_file": "docs/evidence/2026-09-30-arknights-sfx-reference/b_ui_rewardappear.wav"
+      },
+      "source_seconds": 0.70675,
+      "source_file_sha256": "03109ef89170577407410f6fb8e12cda7c89f9e60fd794eab130abbfd16b1cf4",
+      "processing": {
+        "trim_start_s": 0.005292,
+        "trim_end_s": 0.677479,
+        "filters": "1st-order highpass 25 Hz; 1st-order lowpass 17500 Hz",
+        "gain_db": 7.5502,
+        "peak_target_dbfs": -10.0,
+        "fade_in_ms": 2,
+        "fade_out_ms": 8,
+        "resample_hz": 48000,
+        "channels": 2,
+        "pitch_change": false,
+        "synthetic_layers": false,
+        "reverb_added": false
+      },
+      "ogg": {
+        "path": "game/assets/sfx/alternatives/arknights/chestBurst.ogg",
+        "seconds": 0.669521,
+        "sample_rate": 48000,
+        "channels": 2,
+        "codec": "vorbis",
+        "quality": 6,
+        "sha256": "0436f6e6f86361236798cbe7a3c9d8a69d4e211518f956bfa1189972bca29dce",
+        "decoded_peak_dbfs": -10.1173,
+        "finite": true,
+        "clipped_samples": 0,
+        "decode": "pass"
+      }
+    },
+    {
+      "id": "bossReveal",
+      "source": {
+        "file": "b_ui_alarmenter.wav",
+        "source_path": "battle/b_ui/b_ui_alarmenter.wav",
+        "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_ui/b_ui_alarmenter.wav",
+        "github_blob_sha": "b2ce98321dbb29733681d32ea855e4bbbefb1564",
+        "sha256": "20914352c86018d10df00272e8e8d35163cd5b86fb3ed64feae9721c29a4b8e1",
+        "bytes": 245240,
+        "decoded_duration_s": 1.39,
+        "decoded_peak_dbfs": -10.38,
+        "decode": "pass",
+        "local_source_file": "docs/evidence/2026-09-30-arknights-sfx-reference/b_ui_alarmenter.wav"
+      },
+      "source_seconds": 1.39,
+      "source_file_sha256": "20914352c86018d10df00272e8e8d35163cd5b86fb3ed64feae9721c29a4b8e1",
+      "processing": {
+        "trim_start_s": 0.004583,
+        "trim_end_s": 1.380812,
+        "filters": "1st-order highpass 25 Hz; 1st-order lowpass 17500 Hz",
+        "gain_db": 0.6686,
+        "peak_target_dbfs": -10.0,
+        "fade_in_ms": 2,
+        "fade_out_ms": 8,
+        "resample_hz": 48000,
+        "channels": 2,
+        "pitch_change": false,
+        "synthetic_layers": false,
+        "reverb_added": false
+      },
+      "ogg": {
+        "path": "game/assets/sfx/alternatives/arknights/bossReveal.ogg",
+        "seconds": 1.376229,
+        "sample_rate": 48000,
+        "channels": 2,
+        "codec": "vorbis",
+        "quality": 6,
+        "sha256": "ab75ef6089d6062cfe9bf3e2b971fc629320b4cd781fbdb4aac0974ba39b3eb8",
+        "decoded_peak_dbfs": -10.0295,
+        "finite": true,
+        "clipped_samples": 0,
+        "decode": "pass"
+      }
+    }
+  ],
+  "preview_markers": [
+    {
+      "id": "click",
+      "label": "点击",
+      "start_s": 0.35,
+      "seconds": 0.217188
+    },
+    {
+      "id": "confirm",
+      "label": "确认候选",
+      "start_s": 1.117188,
+      "seconds": 0.215646
+    },
+    {
+      "id": "card",
+      "label": "出牌",
+      "start_s": 1.882834,
+      "seconds": 0.747333
+    },
+    {
+      "id": "attackSlash",
+      "label": "刀刃攻击",
+      "start_s": 3.180167,
+      "seconds": 1.018083
+    },
+    {
+      "id": "parry",
+      "label": "格挡候选",
+      "start_s": 4.74825,
+      "seconds": 0.756083
+    },
+    {
+      "id": "shieldBreak",
+      "label": "破盾候选",
+      "start_s": 6.054333,
+      "seconds": 1.083229
+    },
+    {
+      "id": "heal",
+      "label": "治疗",
+      "start_s": 7.687562,
+      "seconds": 0.765417
+    },
+    {
+      "id": "eventEnter",
+      "label": "事件进入",
+      "start_s": 9.002979,
+      "seconds": 1.257771
+    },
+    {
+      "id": "chestBurst",
+      "label": "开箱奖励候选",
+      "start_s": 10.81075,
+      "seconds": 0.669521
+    },
+    {
+      "id": "bossReveal",
+      "label": "Boss 登场候选",
+      "start_s": 12.030271,
+      "seconds": 1.376229
+    }
+  ]
+}

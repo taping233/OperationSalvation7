@@ -1,0 +1,11 @@
+{
+  "stage": "complete-uncommitted",
+  "doneWhenConfirmed": true,
+  "checks": [
+    {"kind":"report","report":"docs/evidence/2026-09-30-lean-workflow/2026-09-30T13-57-55.758Z-80d9f8a9.json","result":"passed"},
+    {"kind":"manual","description":"metadata-invariant-probe.json实际更新唯一任务记录：代码/文档/环境指纹不变，只有状态指纹变化；满足状态不使代码证据失效条件","result":"passed"},
+    {"kind":"manual","description":"handoff-focused.txt为12行，相关变更与省略数量明确；docs-check.json现行43文件306链接无现行问题；流程脚本路径选择为quick直接测试","result":"passed"},
+    {"kind":"report","report":"docs/evidence/2026-09-30-lean-workflow/2026-09-30T14-02-17.310Z-6983b3e4.json","result":"unverified"}
+  ],
+  "unverified": ["完整门255文件/2071项通过、2跳过，但期间音效会话修改自己的CSS/JS，不能将该报告当作源码稳定的全量缓存；本轮自有直接契约59项报告运行稳定，后续代码差异仅音效会话，不复跑其范围"]
+}

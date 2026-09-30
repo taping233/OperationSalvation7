@@ -1,0 +1,18 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://localhost:5386/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: localhost:5386/
+	1 container question 出发整备说明, ID: overlay
+		2 container
+			3 button Description: 关闭, ID: ovCloseX
+			4 heading question 出发整备说明, Value: 2, ID: ovTitle
+				5 image question
+				6 text  出发整备说明
+			7 container ovBody
+				8 text 携带规则
+				9 text 仓库卡牌留在左侧，点击卡面或拖到右侧背包才会带入；点击背包卡面可放大查看，拖回左侧即移除。
+				10 text 初始攻击
+				11 text 「初始攻击」×5 默认在背包（固定携带，不可移除，不入库）。
+				12 text 格数
+				13 text 背包格数 = 卡牌种类数 + 初始攻击；背包容量可在基地「升级」页用木材扩建。
+				14 button ↩ 返回
+
+The focused UI element is 14 button ↩ 返回

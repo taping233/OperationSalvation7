@@ -1,0 +1,391 @@
+{
+  "source_repository": "https://github.com/PseudoMon/arknights-audio",
+  "source_branch": "global-server-voices",
+  "scope": "10 distinct existing Arknights source files; A2-derived audition alternatives only",
+  "rights": "Game audio derivatives; no project distribution permission or original authorship claimed",
+  "human_audition": false,
+  "original_game_triggers_verified": false,
+  "original_bytes_verified_by_github_blob_sha": true,
+  "files": [
+    {
+      "id": "cardSelect",
+      "source_seconds": 0.777521,
+      "source_sha256": "5fb019f3b0a51ac77d2646147166309de38a9632a70055fd85fa43c2f4c82eb8",
+      "crop_seconds": [
+        0.028979,
+        0.764729
+      ],
+      "pitch_semitones": -0.4,
+      "tempo": 1.04,
+      "upper_shelf_db": -0.6,
+      "release_ms": 35,
+      "peak_target_dbfs": -11,
+      "filter": "rubberband=tempo=1.04:pitch=0.977159968:transients=crisp:detector=percussive:phase=laminar:window=short:smoothing=off:formant=preserved:pitchq=quality:channels=together",
+      "checks": {
+        "base": {
+          "seconds": 0.733083,
+          "peak_dbfs": -11.29,
+          "true_peak_dbfs": -11.284,
+          "decode": "pass"
+        },
+        "adjusted": {
+          "seconds": 0.704792,
+          "peak_dbfs": -11.198,
+          "true_peak_dbfs": -10.934,
+          "decode": "pass"
+        }
+      },
+      "source_path": "battle/b_ui/b_ui_mark.wav",
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_ui/b_ui_mark.wav",
+      "github_blob_sha": "5b78a8684b7b42b7125a9eb8a5b0215a417bee71",
+      "source_bytes": 137196,
+      "percussive": true,
+      "label": "选卡",
+      "group": "cards",
+      "original_game_trigger": "not verified",
+      "human_audition": false
+    },
+    {
+      "id": "draw",
+      "source_seconds": 1.085479,
+      "source_sha256": "be6909f305e87b9ea16e792e8c8aca23b2e36cd9f6e8d60b4f9338b3d90a0943",
+      "crop_seconds": [
+        0.008354,
+        1.085479
+      ],
+      "pitch_semitones": -0.3,
+      "tempo": 1.05,
+      "upper_shelf_db": -0.6,
+      "release_ms": 40,
+      "peak_target_dbfs": -11,
+      "filter": "rubberband=tempo=1.05:pitch=0.982820599:transients=crisp:detector=percussive:phase=laminar:window=short:smoothing=off:formant=preserved:pitchq=quality:channels=together",
+      "checks": {
+        "base": {
+          "seconds": 1.077125,
+          "peak_dbfs": -11.195,
+          "true_peak_dbfs": -10.949,
+          "decode": "pass"
+        },
+        "adjusted": {
+          "seconds": 1.025833,
+          "peak_dbfs": -11.293,
+          "true_peak_dbfs": -10.945,
+          "decode": "pass"
+        }
+      },
+      "source_path": "avg/d_avg_paper1.wav",
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_paper1.wav",
+      "github_blob_sha": "f67a3ade5607c232dc2b0ceebc0b7137a2d77b67",
+      "source_bytes": 208456,
+      "percussive": true,
+      "label": "抽牌",
+      "group": "cards",
+      "original_game_trigger": "not verified",
+      "human_audition": false
+    },
+    {
+      "id": "discard",
+      "source_seconds": 0.950333,
+      "source_sha256": "6694e91262f6c036117832d5ac98ca38ca34bec6c2241f91b909d7ee3ebc2623",
+      "crop_seconds": [
+        0.0,
+        0.929604
+      ],
+      "pitch_semitones": -0.4,
+      "tempo": 1.06,
+      "upper_shelf_db": -0.7,
+      "release_ms": 45,
+      "peak_target_dbfs": -11,
+      "filter": "rubberband=tempo=1.06:pitch=0.977159968:transients=crisp:detector=percussive:phase=laminar:window=short:smoothing=off:formant=preserved:pitchq=quality:channels=together",
+      "checks": {
+        "base": {
+          "seconds": 0.926937,
+          "peak_dbfs": -11.148,
+          "true_peak_dbfs": -11.134,
+          "decode": "pass"
+        },
+        "adjusted": {
+          "seconds": 0.874313,
+          "peak_dbfs": -11.817,
+          "true_peak_dbfs": -11.811,
+          "decode": "pass"
+        }
+      },
+      "source_path": "avg/d_avg_paper2.wav",
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_paper2.wav",
+      "github_blob_sha": "0d68efc022b8326b2c9526a3d7c87bde8cf0176d",
+      "source_bytes": 182508,
+      "percussive": true,
+      "label": "弃牌",
+      "group": "cards",
+      "original_game_trigger": "not verified",
+      "human_audition": false
+    },
+    {
+      "id": "pick",
+      "source_seconds": 1.077333,
+      "source_sha256": "ec19e709b4adb191e0c2dc8179301b01cd27c3a2ba8329b6ae7069618191afe7",
+      "crop_seconds": [
+        0.0,
+        1.069146
+      ],
+      "pitch_semitones": -0.3,
+      "tempo": 1.05,
+      "upper_shelf_db": -0.7,
+      "release_ms": 40,
+      "peak_target_dbfs": -11,
+      "filter": "rubberband=tempo=1.05:pitch=0.982820599:transients=crisp:detector=percussive:phase=laminar:window=short:smoothing=off:formant=preserved:pitchq=quality:channels=together",
+      "checks": {
+        "base": {
+          "seconds": 1.069146,
+          "peak_dbfs": -11.069,
+          "true_peak_dbfs": -11.063,
+          "decode": "pass"
+        },
+        "adjusted": {
+          "seconds": 1.018229,
+          "peak_dbfs": -11.436,
+          "true_peak_dbfs": -11.43,
+          "decode": "pass"
+        }
+      },
+      "source_path": "avg/d_avg_clothmovement.wav",
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_clothmovement.wav",
+      "github_blob_sha": "8edba7a1430fa7858efeff2bd94340a64e3c62a6",
+      "source_bytes": 206892,
+      "percussive": true,
+      "label": "物品拿起",
+      "group": "ui",
+      "original_game_trigger": "not verified",
+      "human_audition": false
+    },
+    {
+      "id": "coin",
+      "source_seconds": 0.682667,
+      "source_sha256": "558e1ee8dfa622644de764d8abbc1a210b7b0a0d1fde807a46c5760b787702be",
+      "crop_seconds": [
+        0.0,
+        0.682667
+      ],
+      "pitch_semitones": -0.2,
+      "tempo": 1.04,
+      "upper_shelf_db": -0.5,
+      "release_ms": 35,
+      "peak_target_dbfs": -11,
+      "filter": "rubberband=tempo=1.04:pitch=0.988514020:transients=crisp:detector=percussive:phase=laminar:window=short:smoothing=off:formant=preserved:pitchq=quality:channels=together",
+      "checks": {
+        "base": {
+          "seconds": 0.68,
+          "peak_dbfs": -11.253,
+          "true_peak_dbfs": -10.861,
+          "decode": "pass"
+        },
+        "adjusted": {
+          "seconds": 0.616688,
+          "peak_dbfs": -10.998,
+          "true_peak_dbfs": -10.62,
+          "decode": "pass"
+        }
+      },
+      "source_path": "avg/d_avg_coin.wav",
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_coin.wav",
+      "github_blob_sha": "14837250f7e8389dd923a3e2a0bdffc7d3291be6",
+      "source_bytes": 131116,
+      "percussive": true,
+      "label": "金币",
+      "group": "rewards",
+      "original_game_trigger": "not verified",
+      "human_audition": false
+    },
+    {
+      "id": "reveal",
+      "source_seconds": 0.40675,
+      "source_sha256": "8307c0ac7e1248b251f3121fefd3782d134d3474857206d25e3e63d700ccd8c5",
+      "crop_seconds": [
+        0.0,
+        0.40675
+      ],
+      "pitch_semitones": -0.4,
+      "tempo": 1.04,
+      "upper_shelf_db": -0.6,
+      "release_ms": 40,
+      "peak_target_dbfs": -11,
+      "filter": "rubberband=tempo=1.04:pitch=0.977159968:transients=mixed:detector=compound:phase=laminar:window=short:smoothing=off:formant=preserved:pitchq=quality:channels=together",
+      "checks": {
+        "base": {
+          "seconds": 0.404083,
+          "peak_dbfs": -11.182,
+          "true_peak_dbfs": -10.097,
+          "decode": "pass"
+        },
+        "adjusted": {
+          "seconds": 0.388437,
+          "peak_dbfs": -11.236,
+          "true_peak_dbfs": -11.23,
+          "decode": "pass"
+        }
+      },
+      "source_path": "battle/b_ui/b_ui_getcast.wav",
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_ui/b_ui_getcast.wav",
+      "github_blob_sha": "8d9ab063494d9b2889c16e860f7dd7add44cc8de",
+      "source_bytes": 71792,
+      "percussive": false,
+      "label": "奖励揭晓",
+      "group": "rewards",
+      "original_game_trigger": "not verified",
+      "human_audition": false
+    },
+    {
+      "id": "legend",
+      "source_seconds": 0.315083,
+      "source_sha256": "62acbb9aabc121b6ae0f5567f514bad9b936c5ee4207eee0bd5526fe8a1bbf5c",
+      "crop_seconds": [
+        0.006146,
+        0.315083
+      ],
+      "pitch_semitones": -0.3,
+      "tempo": 1.03,
+      "upper_shelf_db": -0.5,
+      "release_ms": 45,
+      "peak_target_dbfs": -11,
+      "filter": "rubberband=tempo=1.03:pitch=0.982820599:transients=mixed:detector=compound:phase=laminar:window=short:smoothing=off:formant=preserved:pitchq=quality:channels=together",
+      "checks": {
+        "base": {
+          "seconds": 0.306271,
+          "peak_dbfs": -10.949,
+          "true_peak_dbfs": -10.943,
+          "decode": "pass"
+        },
+        "adjusted": {
+          "seconds": 0.297271,
+          "peak_dbfs": -10.925,
+          "true_peak_dbfs": -10.79,
+          "decode": "pass"
+        }
+      },
+      "source_path": "battle/b_ui/b_ui_star.wav",
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_ui/b_ui_star.wav",
+      "github_blob_sha": "6fdc6b74ec3cb12d971a71611769825931d422fe",
+      "source_bytes": 60540,
+      "percussive": false,
+      "label": "高稀有奖励",
+      "group": "rewards",
+      "original_game_trigger": "not verified",
+      "human_audition": false
+    },
+    {
+      "id": "victory",
+      "source_seconds": 2.288146,
+      "source_sha256": "2f6dc6481d90c96a1695c09288b6d29ecc207fec07f8793f61efbdcae4ac8c61",
+      "crop_seconds": [
+        0.0,
+        1.876833
+      ],
+      "pitch_semitones": -0.4,
+      "tempo": 1.03,
+      "upper_shelf_db": -0.6,
+      "release_ms": 55,
+      "peak_target_dbfs": -11,
+      "filter": "rubberband=tempo=1.03:pitch=0.977159968:transients=mixed:detector=compound:phase=laminar:window=short:smoothing=off:formant=preserved:pitchq=quality:channels=together",
+      "checks": {
+        "base": {
+          "seconds": 1.876833,
+          "peak_dbfs": -11.132,
+          "true_peak_dbfs": -11.125,
+          "decode": "pass"
+        },
+        "adjusted": {
+          "seconds": 1.822167,
+          "peak_dbfs": -11.446,
+          "true_peak_dbfs": -11.41,
+          "decode": "pass"
+        }
+      },
+      "source_path": "battle/b_ui/b_ui_win.wav",
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_ui/b_ui_win.wav",
+      "github_blob_sha": "876278519952bd6563d6412409390b34d9d6af15",
+      "source_bytes": 403672,
+      "percussive": false,
+      "label": "战斗胜利",
+      "group": "combat",
+      "original_game_trigger": "not verified",
+      "human_audition": false
+    },
+    {
+      "id": "defeat",
+      "source_seconds": 2.292208,
+      "source_sha256": "34160eb3c3b2698df9e7afdf736a65357f74f7793715617d883015c1e02b0966",
+      "crop_seconds": [
+        0.0,
+        1.902833
+      ],
+      "pitch_semitones": -0.5,
+      "tempo": 1.02,
+      "upper_shelf_db": -0.7,
+      "release_ms": 55,
+      "peak_target_dbfs": -11,
+      "filter": "rubberband=tempo=1.02:pitch=0.971531941:transients=mixed:detector=compound:phase=laminar:window=short:smoothing=off:formant=preserved:pitchq=quality:channels=together",
+      "checks": {
+        "base": {
+          "seconds": 1.902833,
+          "peak_dbfs": -11.148,
+          "true_peak_dbfs": -11.04,
+          "decode": "pass"
+        },
+        "adjusted": {
+          "seconds": 1.865521,
+          "peak_dbfs": -10.551,
+          "true_peak_dbfs": -10.526,
+          "decode": "pass"
+        }
+      },
+      "source_path": "battle/b_ui/b_ui_lose.wav",
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_ui/b_ui_lose.wav",
+      "github_blob_sha": "39b6d5b191210110833c11b25ac9115d13bd9e94",
+      "source_bytes": 404388,
+      "percussive": false,
+      "label": "战斗失败",
+      "group": "combat",
+      "original_game_trigger": "not verified",
+      "human_audition": false
+    },
+    {
+      "id": "flee",
+      "source_seconds": 1.425979,
+      "source_sha256": "05be8ce0c9d98f7e6b3c44a750d7ecdf1725ef1fadddb29ce84cfd43d4045a2b",
+      "crop_seconds": [
+        0.0,
+        0.89
+      ],
+      "pitch_semitones": -0.4,
+      "tempo": 1.06,
+      "upper_shelf_db": -0.6,
+      "release_ms": 40,
+      "peak_target_dbfs": -11,
+      "filter": "rubberband=tempo=1.06:pitch=0.977159968:transients=crisp:detector=percussive:phase=laminar:window=short:smoothing=off:formant=preserved:pitchq=quality:channels=together",
+      "checks": {
+        "base": {
+          "seconds": 0.887333,
+          "peak_dbfs": -10.975,
+          "true_peak_dbfs": -10.864,
+          "decode": "pass"
+        },
+        "adjusted": {
+          "seconds": 0.836958,
+          "peak_dbfs": -11.066,
+          "true_peak_dbfs": -10.761,
+          "decode": "pass"
+        }
+      },
+      "source_path": "battle/b_char/b_char_escape.wav",
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_char/b_char_escape.wav",
+      "github_blob_sha": "c07d98df4ea1b109126f958f2544b2a132c9cac5",
+      "source_bytes": 125814,
+      "percussive": true,
+      "label": "逃离",
+      "group": "combat",
+      "original_game_trigger": "not verified",
+      "human_audition": false
+    }
+  ]
+}

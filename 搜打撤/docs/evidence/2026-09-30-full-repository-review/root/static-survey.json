@@ -1,0 +1,3643 @@
+[
+  {
+    "file": "game/data/achievements.json",
+    "lines": 282,
+    "bytes": 5840,
+    "functions": [],
+    "riskAnchors": [],
+    "json": {
+      "kind": "object",
+      "keys": [
+        "achievements",
+        "collectionMilestones"
+      ],
+      "items": null
+    }
+  },
+  {
+    "file": "game/data/art-mapping.json",
+    "lines": 345,
+    "bytes": 9267,
+    "functions": [],
+    "riskAnchors": [],
+    "json": {
+      "kind": "object",
+      "keys": [
+        "cardArtOverrides",
+        "cardArtRevisions",
+        "classIds",
+        "monsterIds",
+        "cardFamilies",
+        "resourceArt",
+        "heroCardArt",
+        "spellCardArt",
+        "martialCardArt",
+        "creatureCardArt",
+        "equipCardArt",
+        "eventCardArt",
+        "itemArt"
+      ],
+      "items": null
+    }
+  },
+  {
+    "file": "game/data/card-notes.json",
+    "lines": 5,
+    "bytes": 379,
+    "functions": [],
+    "riskAnchors": [],
+    "json": {
+      "kind": "object",
+      "keys": [
+        "version",
+        "_comment",
+        "notes"
+      ],
+      "items": null
+    }
+  },
+  {
+    "file": "game/data/map.json",
+    "lines": 519,
+    "bytes": 9780,
+    "functions": [],
+    "riskAnchors": [],
+    "json": {
+      "kind": "object",
+      "keys": [
+        "version",
+        "boardId",
+        "boardName",
+        "cols",
+        "rows",
+        "tile",
+        "items",
+        "chestTable",
+        "eventEnemies",
+        "randomEvents",
+        "monsters",
+        "encounters",
+        "enemyPool",
+        "chestKinds",
+        "layerChests",
+        "centerColor",
+        "altar"
+      ],
+      "items": null
+    }
+  },
+  {
+    "file": "game/data/pets.json",
+    "lines": 15,
+    "bytes": 1089,
+    "functions": [],
+    "riskAnchors": [],
+    "json": {
+      "kind": "object",
+      "keys": [
+        "eggId",
+        "hatchCost",
+        "levelMax",
+        "upCosts",
+        "list"
+      ],
+      "items": null
+    }
+  },
+  {
+    "file": "game/data/scenes.json",
+    "lines": 357,
+    "bytes": 11008,
+    "functions": [],
+    "riskAnchors": [],
+    "json": {
+      "kind": "object",
+      "keys": [
+        "scenes",
+        "sceneMeta",
+        "eventSceneMeta",
+        "nodeBg",
+        "pickupBg",
+        "classStory"
+      ],
+      "items": null
+    }
+  },
+  {
+    "file": "game/selftest.js",
+    "lines": 93,
+    "bytes": 7879,
+    "functions": [],
+    "riskAnchors": []
+  },
+  {
+    "file": "game/src/hub/bag-return-hook.js",
+    "lines": 13,
+    "bytes": 762,
+    "functions": [
+      {
+        "name": "setBagReturnHook",
+        "line": 9,
+        "async": false
+      },
+      {
+        "name": "takeBagReturnHook",
+        "line": 12,
+        "async": false
+      }
+    ],
+    "riskAnchors": []
+  },
+  {
+    "file": "game/src/hub/base-departure.commands.js",
+    "lines": 64,
+    "bytes": 2934,
+    "functions": [
+      {
+        "name": "prepareDeparture",
+        "line": 11,
+        "async": false
+      },
+      {
+        "name": "createBaseDepartureCommands",
+        "line": 9,
+        "async": false
+      }
+    ],
+    "riskAnchors": [
+      {
+        "name": "mutate",
+        "line": 44
+      }
+    ]
+  },
+  {
+    "file": "game/src/hub/base-economy.js",
+    "lines": 77,
+    "bytes": 4555,
+    "functions": [
+      {
+        "name": "purchase",
+        "line": 27,
+        "async": false
+      },
+      {
+        "name": "openCardPack",
+        "line": 42,
+        "async": false
+      },
+      {
+        "name": "grantReward",
+        "line": 58,
+        "async": false
+      },
+      {
+        "name": "createBaseEconomy",
+        "line": 22,
+        "async": false
+      }
+    ],
+    "riskAnchors": [
+      {
+        "name": "appendCards",
+        "line": 36
+      },
+      {
+        "name": "mutate",
+        "line": 33
+      },
+      {
+        "name": "appendCards",
+        "line": 52
+      },
+      {
+        "name": "mutate",
+        "line": 48
+      },
+      {
+        "name": "appendCards",
+        "line": 69
+      },
+      {
+        "name": "mutate",
+        "line": 64
+      }
+    ]
+  },
+  {
+    "file": "game/src/hub/base-elapsed.commands.js",
+    "lines": 41,
+    "bytes": 2044,
+    "functions": [
+      {
+        "name": "syncPlayTime",
+        "line": 19,
+        "async": false
+      },
+      {
+        "name": "migrateElapsed",
+        "line": 31,
+        "async": false
+      },
+      {
+        "name": "createBaseElapsedCommands",
+        "line": 17,
+        "async": false
+      }
+    ],
+    "riskAnchors": []
+  },
+  {
+    "file": "game/src/hub/base-meta.commands.js",
+    "lines": 141,
+    "bytes": 6780,
+    "functions": [
+      {
+        "name": "applyClassXp",
+        "line": 24,
+        "async": false
+      },
+      {
+        "name": "recordEvent",
+        "line": 62,
+        "async": false
+      },
+      {
+        "name": "addClassXp",
+        "line": 111,
+        "async": false
+      },
+      {
+        "name": "markCollXpSettled",
+        "line": 126,
+        "async": false
+      },
+      {
+        "name": "createBaseMetaCommands",
+        "line": 51,
+        "async": false
+      }
+    ],
+    "riskAnchors": []
+  },
+  {
+    "file": "game/src/hub/base-mutation.js",
+    "lines": 42,
+    "bytes": 1915,
+    "functions": [
+      {
+        "name": "retainUnchanged",
+        "line": 7,
+        "async": false
+      },
+      {
+        "name": "commitBaseMutation",
+        "line": 31,
+        "async": false
+      }
+    ],
+    "riskAnchors": []
+  },
+  {
+    "file": "game/src/hub/base-pet-egg.commands.js",
+    "lines": 53,
+    "bytes": 2291,
+    "functions": [
+      {
+        "name": "petEggDropChance",
+        "line": 17,
+        "async": false
+      },
+      {
+        "name": "recordPetEggChestResult",
+        "line": 31,
+        "async": false
+      },
+      {
+        "name": "recordEggBattle",
+        "line": 45,
+        "async": false
+      },
+      {
+        "name": "createBasePetEggCommands",
+        "line": 15,
+        "async": false
+      }
+    ],
+    "riskAnchors": []
+  },
+  {
+    "file": "game/src/hub/base-progression.commands.js",
+    "lines": 56,
+    "bytes": 2327,
+    "functions": [
+      {
+        "name": "selectMode",
+        "line": 15,
+        "async": false
+      },
+      {
+        "name": "unlockNestGate",
+        "line": 25,
+        "async": false
+      },
+      {
+        "name": "unlockNestLegacy",
+        "line": 46,
+        "async": false
+      },
+      {
+        "name": "createBaseProgressionCommands",
+        "line": 10,
+        "async": false
+      }
+    ],
+    "riskAnchors": [
+      {
+        "name": "mutate",
+        "line": 18
+      },
+      {
+        "name": "mutate",
+        "line": 35
+      },
+      {
+        "name": "mutate",
+        "line": 48
+      }
+    ]
+  },
+  {
+    "file": "game/src/hub/base-state.js",
+    "lines": 112,
+    "bytes": 6793,
+    "functions": [
+      {
+        "name": "createBaseState",
+        "line": 5,
+        "async": false
+      },
+      {
+        "name": "mergeDef",
+        "line": 50,
+        "async": false
+      },
+      {
+        "name": "normalizeObjField",
+        "line": 66,
+        "async": false
+      },
+      {
+        "name": "normalizeBaseState",
+        "line": 74,
+        "async": false
+      }
+    ],
+    "riskAnchors": []
+  },
+  {
+    "file": "game/src/hub/base.commands.js",
+    "lines": 128,
+    "bytes": 6224,
+    "functions": [
+      {
+        "name": "validateContext",
+        "line": 6,
+        "async": false
+      },
+      {
+        "name": "readBase",
+        "line": 13,
+        "async": false
+      },
+      {
+        "name": "readBaseReceipt",
+        "line": 31,
+        "async": false
+      },
+      {
+        "name": "commitBase",
+        "line": 51,
+        "async": true
+      }
+    ],
+    "riskAnchors": [
+      {
+        "name": "base._readForCommit",
+        "line": 16
+      },
+      {
+        "name": "Base()._readForCommit",
+        "line": 37
+      },
+      {
+        "name": "base._readForCommit",
+        "line": 63
+      },
+      {
+        "name": "base._writeCommitted",
+        "line": 111
+      }
+    ]
+  },
+  {
+    "file": "game/src/hub/base.js",
+    "lines": 677,
+    "bytes": 32678,
+    "functions": [
+      {
+        "name": "parseRaw",
+        "line": 84,
+        "async": false
+      },
+      {
+        "name": "issue",
+        "line": 89,
+        "async": false
+      },
+      {
+        "name": "migrateLegacy",
+        "line": 92,
+        "async": false
+      },
+      {
+        "name": "use",
+        "line": 107,
+        "async": false
+      },
+      {
+        "name": "ensureStarterPet",
+        "line": 118,
+        "async": false
+      },
+      {
+        "name": "save",
+        "line": 127,
+        "async": false
+      },
+      {
+        "name": "persistPlaySeconds",
+        "line": 168,
+        "async": false
+      },
+      {
+        "name": "mutate",
+        "line": 176,
+        "async": false
+      },
+      {
+        "name": "persistEggPity",
+        "line": 185,
+        "async": false
+      },
+      {
+        "name": "persistEggBattles",
+        "line": 199,
+        "async": false
+      },
+      {
+        "name": "persistMetaProgress",
+        "line": 214,
+        "async": false
+      },
+      {
+        "name": "markAmmoTaught",
+        "line": 224,
+        "async": false
+      },
+      {
+        "name": "ensureCollXp",
+        "line": 232,
+        "async": false
+      },
+      {
+        "name": "applyStoredCardRenames",
+        "line": 239,
+        "async": false
+      },
+      {
+        "name": "reset",
+        "line": 251,
+        "async": false
+      },
+      {
+        "name": "seedStarterStash",
+        "line": 270,
+        "async": false
+      },
+      {
+        "name": "peek",
+        "line": 304,
+        "async": false
+      },
+      {
+        "name": "_readForCommit",
+        "line": 315,
+        "async": false
+      },
+      {
+        "name": "_writeCommitted",
+        "line": 319,
+        "async": false
+      },
+      {
+        "name": "_refreshExternal",
+        "line": 332,
+        "async": false
+      },
+      {
+        "name": "wipe",
+        "line": 341,
+        "async": false
+      },
+      {
+        "name": "unlockBack",
+        "line": 346,
+        "async": false
+      },
+      {
+        "name": "setBack",
+        "line": 350,
+        "async": false
+      },
+      {
+        "name": "upgradeBag",
+        "line": 383,
+        "async": false
+      },
+      {
+        "name": "upgradePet",
+        "line": 394,
+        "async": false
+      },
+      {
+        "name": "upgradeStash",
+        "line": 405,
+        "async": false
+      },
+      {
+        "name": "nestBagCap",
+        "line": 420,
+        "async": false
+      },
+      {
+        "name": "canUpgradeNestBag",
+        "line": 421,
+        "async": false
+      },
+      {
+        "name": "upgradeNestBag",
+        "line": 422,
+        "async": false
+      },
+      {
+        "name": "deposit",
+        "line": 436,
+        "async": false
+      },
+      {
+        "name": "depositCards",
+        "line": 448,
+        "async": false
+      },
+      {
+        "name": "appendCards",
+        "line": 453,
+        "async": false
+      },
+      {
+        "name": "restore",
+        "line": 476,
+        "async": false
+      },
+      {
+        "name": "setPet",
+        "line": 496,
+        "async": false
+      },
+      {
+        "name": "hatchPet",
+        "line": 501,
+        "async": false
+      },
+      {
+        "name": "takeStashCards",
+        "line": 520,
+        "async": false
+      },
+      {
+        "name": "useStashMaterial",
+        "line": 574,
+        "async": false
+      },
+      {
+        "name": "sellStashCards",
+        "line": 595,
+        "async": false
+      },
+      {
+        "name": "collectToggle",
+        "line": 613,
+        "async": false
+      }
+    ],
+    "riskAnchors": [
+      {
+        "name": "localStorage.removeItem",
+        "line": 101
+      },
+      {
+        "name": "writeBaseline.set",
+        "line": 109
+      },
+      {
+        "name": "writeBaseline.set",
+        "line": 110
+      },
+      {
+        "name": "writeBaseline.has",
+        "line": 134
+      },
+      {
+        "name": "writeBaseline.get",
+        "line": 134
+      },
+      {
+        "name": "writeBaseline.set",
+        "line": 146
+      },
+      {
+        "name": "localStorage.removeItem",
+        "line": 153
+      },
+      {
+        "name": "save",
+        "line": 171
+      },
+      {
+        "name": "commitBaseMutation",
+        "line": 178
+      },
+      {
+        "name": "mutate",
+        "line": 190
+      },
+      {
+        "name": "mutate",
+        "line": 204
+      },
+      {
+        "name": "commitBaseMutation",
+        "line": 216
+      },
+      {
+        "name": "save",
+        "line": 227
+      },
+      {
+        "name": "save",
+        "line": 245
+      },
+      {
+        "name": "save",
+        "line": 265
+      },
+      {
+        "name": "writeBaseline.set",
+        "line": 325
+      },
+      {
+        "name": "localStorage.removeItem",
+        "line": 328
+      },
+      {
+        "name": "writeBaseline.set",
+        "line": 335
+      },
+      {
+        "name": "writeBaseline.delete",
+        "line": 335
+      },
+      {
+        "name": "localStorage.removeItem",
+        "line": 341
+      },
+      {
+        "name": "mutate",
+        "line": 348
+      },
+      {
+        "name": "mutate",
+        "line": 352
+      },
+      {
+        "name": "mutate",
+        "line": 385
+      },
+      {
+        "name": "mutate",
+        "line": 396
+      },
+      {
+        "name": "mutate",
+        "line": 407
+      },
+      {
+        "name": "mutate",
+        "line": 424
+      },
+      {
+        "name": "mutate",
+        "line": 437
+      },
+      {
+        "name": "appendCards",
+        "line": 449
+      },
+      {
+        "name": "mutate",
+        "line": 449
+      },
+      {
+        "name": "mutate",
+        "line": 480
+      },
+      {
+        "name": "appendCards",
+        "line": 489
+      },
+      {
+        "name": "mutate",
+        "line": 486
+      },
+      {
+        "name": "mutate",
+        "line": 498
+      },
+      {
+        "name": "mutate",
+        "line": 508
+      },
+      {
+        "name": "mutate",
+        "line": 525
+      },
+      {
+        "name": "mutate",
+        "line": 583
+      },
+      {
+        "name": "mutate",
+        "line": 603
+      },
+      {
+        "name": "mutate",
+        "line": 616
+      },
+      {
+        "name": "mutate",
+        "line": 618
+      }
+    ]
+  },
+  {
+    "file": "game/src/hub/battle-settlement.commands.js",
+    "lines": 262,
+    "bytes": 16478,
+    "functions": [
+      {
+        "name": "isRecord",
+        "line": 24,
+        "async": false
+      },
+      {
+        "name": "validateNode",
+        "line": 27,
+        "async": false
+      },
+      {
+        "name": "nodeKey",
+        "line": 37,
+        "async": false
+      },
+      {
+        "name": "requestId",
+        "line": 40,
+        "async": false
+      },
+      {
+        "name": "payloadFor",
+        "line": 43,
+        "async": false
+      },
+      {
+        "name": "validateScope",
+        "line": 60,
+        "async": false
+      },
+      {
+        "name": "recover",
+        "line": 70,
+        "async": true
+      },
+      {
+        "name": "readIdentity",
+        "line": 76,
+        "async": false
+      },
+      {
+        "name": "readBase",
+        "line": 82,
+        "async": false
+      },
+      {
+        "name": "lookup",
+        "line": 94,
+        "async": true
+      },
+      {
+        "name": "readReceipt",
+        "line": 116,
+        "async": true
+      },
+      {
+        "name": "createAttempt",
+        "line": 151,
+        "async": true
+      },
+      {
+        "name": "commitAttempt",
+        "line": 225,
+        "async": true
+      },
+      {
+        "name": "createBattleSettlementCommands",
+        "line": 53,
+        "async": false
+      }
+    ],
+    "riskAnchors": [
+      {
+        "name": "getBase()._readForCommit",
+        "line": 84
+      },
+      {
+        "name": "getRecovery().commitBaseAndRun",
+        "line": 248
+      }
+    ]
+  },
+  {
+    "file": "game/src/hub/battle-settlement.commands.types.d.ts",
+    "lines": 152,
+    "bytes": 5411,
+    "functions": [],
+    "riskAnchors": [],
+    "typeDeclaration": true
+  },
+  {
+    "file": "game/src/hub/battle-victory-progress.js",
+    "lines": 58,
+    "bytes": 2960,
+    "functions": [
+      {
+        "name": "prepareBattleVictoryProgress",
+        "line": 21,
+        "async": false
+      }
+    ],
+    "riskAnchors": []
+  },
+  {
+    "file": "game/src/hub/collection.commands.js",
+    "lines": 228,
+    "bytes": 11070,
+    "functions": [
+      {
+        "name": "getCollection",
+        "line": 21,
+        "async": false
+      },
+      {
+        "name": "skinIdsFor",
+        "line": 53,
+        "async": false
+      },
+      {
+        "name": "getCharacter",
+        "line": 60,
+        "async": false
+      },
+      {
+        "name": "unwrapCommit",
+        "line": 89,
+        "async": false
+      },
+      {
+        "name": "convert",
+        "line": 103,
+        "async": true
+      },
+      {
+        "name": "select",
+        "line": 167,
+        "async": true
+      },
+      {
+        "name": "createCollectionCommands",
+        "line": 94,
+        "async": false
+      }
+    ],
+    "riskAnchors": [
+      {
+        "name": "unwrapCommit",
+        "line": 111
+      },
+      {
+        "name": "io.commitBase",
+        "line": 153
+      },
+      {
+        "name": "unwrapCommit",
+        "line": 164
+      },
+      {
+        "name": "unwrapCommit",
+        "line": 177
+      },
+      {
+        "name": "io.commitBase",
+        "line": 204
+      },
+      {
+        "name": "unwrapCommit",
+        "line": 212
+      }
+    ]
+  },
+  {
+    "file": "game/src/hub/commands.shared.js",
+    "lines": 41,
+    "bytes": 2782,
+    "functions": [
+      {
+        "name": "freezeDeep",
+        "line": 36,
+        "async": false
+      }
+    ],
+    "riskAnchors": []
+  },
+  {
+    "file": "game/src/hub/extraction.commands.js",
+    "lines": 305,
+    "bytes": 17320,
+    "functions": [
+      {
+        "name": "validStack",
+        "line": 4,
+        "async": false
+      },
+      {
+        "name": "validatePendingExtraction",
+        "line": 10,
+        "async": false
+      },
+      {
+        "name": "addXp",
+        "line": 42,
+        "async": false
+      },
+      {
+        "name": "calculateBaseAndPending",
+        "line": 52,
+        "async": false
+      },
+      {
+        "name": "begin",
+        "line": 175,
+        "async": true
+      },
+      {
+        "name": "prepareCardAttempt",
+        "line": 214,
+        "async": false
+      },
+      {
+        "name": "updateCards",
+        "line": 240,
+        "async": true
+      },
+      {
+        "name": "finish",
+        "line": 277,
+        "async": true
+      },
+      {
+        "name": "createExtractionCommands",
+        "line": 98,
+        "async": false
+      }
+    ],
+    "riskAnchors": [
+      {
+        "name": "baseApi._readForCommit",
+        "line": 121
+      },
+      {
+        "name": "baseApi._readForCommit",
+        "line": 141
+      },
+      {
+        "name": "recovery.commitBaseAndRun",
+        "line": 146
+      },
+      {
+        "name": "commitAttempt",
+        "line": 207
+      },
+      {
+        "name": "commitAttempt",
+        "line": 266
+      },
+      {
+        "name": "commitAttempt",
+        "line": 296
+      }
+    ]
+  },
+  {
+    "file": "game/src/hub/game.bag.bridge.js",
+    "lines": 6,
+    "bytes": 514,
+    "functions": [],
+    "riskAnchors": []
+  },
+  {
+    "file": "game/src/hub/game.bag.drag.js",
+    "lines": 196,
+    "bytes": 9505,
+    "functions": [
+      {
+        "name": "bindBagDrag",
+        "line": 14,
+        "async": false
+      },
+      {
+        "name": "makeBagGhost",
+        "line": 81,
+        "async": false
+      },
+      {
+        "name": "bagDropTarget",
+        "line": 92,
+        "async": false
+      },
+      {
+        "name": "clearBagDropMark",
+        "line": 107,
+        "async": false
+      },
+      {
+        "name": "onBagDragMove",
+        "line": 111,
+        "async": false
+      },
+      {
+        "name": "onBagDragUp",
+        "line": 135,
+        "async": false
+      },
+      {
+        "name": "resetBagDrag",
+        "line": 192,
+        "async": false
+      }
+    ],
+    "riskAnchors": [
+      {
+        "name": "c.classList.remove",
+        "line": 31
+      },
+      {
+        "name": "document.body.appendChild",
+        "line": 87
+      },
+      {
+        "name": "bagDropMarked.classList.remove",
+        "line": 108
+      },
+      {
+        "name": "window.removeEventListener",
+        "line": 136
+      },
+      {
+        "name": "el.classList.remove",
+        "line": 139
+      },
+      {
+        "name": "d.cell.classList.remove",
+        "line": 143
+      },
+      {
+        "name": "d.ghost.remove",
+        "line": 144
+      },
+      {
+        "name": "saveGame",
+        "line": 175
+      },
+      {
+        "name": "saveGame",
+        "line": 187
+      }
+    ]
+  },
+  {
+    "file": "game/src/hub/game.bag.js",
+    "lines": 722,
+    "bytes": 41732,
+    "functions": [
+      {
+        "name": "cardHealAmount",
+        "line": 21,
+        "async": false
+      },
+      {
+        "name": "pocketAdd",
+        "line": 26,
+        "async": false
+      },
+      {
+        "name": "useOwnedCard",
+        "line": 32,
+        "async": false
+      },
+      {
+        "name": "moveStackSafe",
+        "line": 179,
+        "async": false
+      },
+      {
+        "name": "syncCardOrder",
+        "line": 209,
+        "async": false
+      },
+      {
+        "name": "sortStacksByOrder",
+        "line": 218,
+        "async": false
+      },
+      {
+        "name": "moveStackOrder",
+        "line": 225,
+        "async": false
+      },
+      {
+        "name": "closeBackpack",
+        "line": 233,
+        "async": false
+      },
+      {
+        "name": "discardOwnedCard",
+        "line": 255,
+        "async": false
+      },
+      {
+        "name": "showDiscardConfirm",
+        "line": 271,
+        "async": false
+      },
+      {
+        "name": "showBagCardDetail",
+        "line": 288,
+        "async": false
+      },
+      {
+        "name": "openPouchStore",
+        "line": 348,
+        "async": false
+      },
+      {
+        "name": "openPearlStore",
+        "line": 409,
+        "async": false
+      },
+      {
+        "name": "rarityRank",
+        "line": 483,
+        "async": false
+      },
+      {
+        "name": "typeRank",
+        "line": 487,
+        "async": false
+      },
+      {
+        "name": "sortBagBy",
+        "line": 491,
+        "async": false
+      },
+      {
+        "name": "showBackpack",
+        "line": 506,
+        "async": false
+      },
+      {
+        "name": "setBagReturnHook",
+        "line": 719,
+        "async": false
+      }
+    ],
+    "riskAnchors": [
+      {
+        "name": "/回复\\s*(\\d+)\\s*点生命/.exec",
+        "line": 22
+      },
+      {
+        "name": "saveGame",
+        "line": 73
+      },
+      {
+        "name": "saveGame",
+        "line": 103
+      },
+      {
+        "name": "saveGame",
+        "line": 115
+      },
+      {
+        "name": "saveGame",
+        "line": 129
+      },
+      {
+        "name": "saveGame",
+        "line": 164
+      },
+      {
+        "name": "saveGame",
+        "line": 174
+      },
+      {
+        "name": "saveGame",
+        "line": 265
+      },
+      {
+        "name": "UI.act",
+        "line": 283
+      },
+      {
+        "name": "UI.act",
+        "line": 284
+      },
+      {
+        "name": "UI.act",
+        "line": 313
+      },
+      {
+        "name": "saveGame",
+        "line": 324
+      },
+      {
+        "name": "UI.act",
+        "line": 314
+      },
+      {
+        "name": "saveGame",
+        "line": 336
+      },
+      {
+        "name": "UI.act",
+        "line": 327
+      },
+      {
+        "name": "UI.act",
+        "line": 339
+      },
+      {
+        "name": "UI.act",
+        "line": 340
+      },
+      {
+        "name": "UI.act",
+        "line": 341
+      },
+      {
+        "name": "UI.act",
+        "line": 342
+      },
+      {
+        "name": "UI.act",
+        "line": 343
+      },
+      {
+        "name": "saveGame",
+        "line": 391
+      },
+      {
+        "name": "UI.act",
+        "line": 385
+      },
+      {
+        "name": "saveGame",
+        "line": 399
+      },
+      {
+        "name": "UI.act",
+        "line": 394
+      },
+      {
+        "name": "UI.act",
+        "line": 402
+      },
+      {
+        "name": "saveGame",
+        "line": 458
+      },
+      {
+        "name": "UI.act",
+        "line": 447
+      },
+      {
+        "name": "saveGame",
+        "line": 473
+      },
+      {
+        "name": "UI.act",
+        "line": 461
+      },
+      {
+        "name": "UI.act",
+        "line": 476
+      },
+      {
+        "name": "saveGame",
+        "line": 502
+      },
+      {
+        "name": "bagDrag.ghost.remove",
+        "line": 547
+      },
+      {
+        "name": "bagDrag.cell.classList.remove",
+        "line": 548
+      },
+      {
+        "name": "UI.act",
+        "line": 688
+      },
+      {
+        "name": "UI.act",
+        "line": 693
+      },
+      {
+        "name": "UI.act",
+        "line": 700
+      },
+      {
+        "name": "UI.act",
+        "line": 701
+      },
+      {
+        "name": "UI.act",
+        "line": 702
+      },
+      {
+        "name": "UI.act",
+        "line": 666
+      },
+      {
+        "name": "UI.act",
+        "line": 707
+      },
+      {
+        "name": "UI.act",
+        "line": 708
+      },
+      {
+        "name": "UI.act",
+        "line": 709
+      }
+    ]
+  },
+  {
+    "file": "game/src/hub/game.bag.rules.js",
+    "lines": 71,
+    "bytes": 3302,
+    "functions": [
+      {
+        "name": "useStructuredBagRule",
+        "line": 7,
+        "async": false
+      }
+    ],
+    "riskAnchors": [
+      {
+        "name": "saveGame",
+        "line": 64
+      }
+    ]
+  },
+  {
+    "file": "game/src/hub/game.bag.settle.js",
+    "lines": 370,
+    "bytes": 20904,
+    "functions": [
+      {
+        "name": "bindBagMixins",
+        "line": 22,
+        "async": false
+      }
+    ],
+    "riskAnchors": [
+      {
+        "name": "UI.act",
+        "line": 70
+      },
+      {
+        "name": "saveGame",
+        "line": 168
+      },
+      {
+        "name": "UI.act",
+        "line": 165
+      },
+      {
+        "name": "createRunSavePayload",
+        "line": 208
+      },
+      {
+        "name": "battleSettlementCommands.commitAttempt",
+        "line": 225
+      },
+      {
+        "name": "saveGame",
+        "line": 248
+      },
+      {
+        "name": "UI.act",
+        "line": 253
+      },
+      {
+        "name": "async () => {\n        if (!sameRun()) return false;\n        // 战后保底传说（2026-09-09 玩法定版）：首脑必得 1 张，荒渊额外掉落概率不变。\n        const slewDragon = !opts.isBoss && (opts.foeNames || []).some(n => String(n).includes('巨兽'));\n        if (!settlement.rewardsApplied) {\n          // 宠物蛋保底计数和完成节点都进入 afterBase/afterRun，不先写任一存档。\n          // 无档位胜利的计数（2026-09-29 收敛）经宠物蛋命令走内存推进+尝试保存的旧语义。\n          if (win === true && !settlement.slotId && SDT.Base && SDT.Base.data) {\n            SDT.Base.recordEggBattle();\n          }\n          if (win === true) {\n            game.visited = game.visited || {};\n            game.visited[settlement.node.layerIdx + ',' + settlement.node.trackPos] = 1;\n          }\n          let legends = 0;\n          if (opts.isBoss && win === true) legends = 1;\n          if (slewDragon && win === true && Random.random('loot') < RULE_CONFIG.rewards.beastLegendaryChance) legends += 1;\n          if (legends > 0) UI.log('[[icon:trophy]] 首脑宝库开启：额外奖励 <b>1 张传说卡</b>！', 'loot');\n          for (let i = 0; i < legends; i++) {\n            const pool = SDT.Cards.all().filter(c => c.rarity === '传说' && SDT.Cards.isRandomObtainable(c));\n            const card = pool.length ? pool[Math.floor(Random.random('loot') * pool.length)] : null;\n            if (card) game.grantCard(card);\n          }\n          settlement.rewardsApplied = true;\n        }\n        settlement.phase = 'saving';\n\n        if (win === true && settlement.slotId && SDT.Base && SDT.Base.data) {\n          game.state = 'battleSettlement';\n          settlement.savingRunToken = game.discoveredPairs;\n          setBattleSettlementPending(settlement.slotId, settlement.runId);\n          if (!settlement.attempt) {\n            const afterRun = createRunSavePayload();\n            if (!afterRun) return retry(new Error('路线快照校验失败'));\n            settlement.elapsedCheckpoint = afterRun.elapsed;\n            const elapsedDelta = Math.max(0, (+game.elapsed || 0) - (+game.elapsedSynced || 0));\n            const prepared = await battleSettlementCommands.createAttempt({\n              slotId: settlement.slotId, node: settlement.node, afterRun, elapsedDelta,\n              victoryProgress: settlement.victoryProgress,\n            });\n            if (!sameRun()) return false;\n            if (!prepared.ok) return retry(new Error(prepared.message || prepared.code));\n            if (prepared.replay) {\n              settlement.phase = 'done';\n              UI.log('[[icon:cross]] 本节点结算已由另一个会话完成，请重新载入当前档位', 'warn');\n              return false;\n            }\n            settlement.attempt = prepared.attempt;\n          }\n          const committed = await battleSettlementCommands.commitAttempt(settlement.attempt);\n          if (!sameRun()) return false;\n          if (!committed.ok) {\n            if (settlement.victoryProgress) settlement.progressNeedsPublication = true;\n            return retry(new Error(committed.message || committed.code));\n          }\n          if (settlement.victoryProgress && !settlement.progressPublished &&\n              (!committed.replay || settlement.progressNeedsPublication)) {\n            settlement.progressPublished = true;\n            if (typeof SDT.Meta.publishBattleProgress === 'function') {\n              try {\n                SDT.Meta.publishBattleProgress(committed.receipt?.output?.progression?.levelUps || []);\n              } catch (error) {\n                console.error('[battle:progress] 战斗进度已保存，但升级/成就提示未完成', error);\n              }\n            }\n          }\n          clearBattleSettlementPending(settlement.slotId, settlement.runId);\n          game.elapsedSynced = settlement.elapsedCheckpoint;\n          game.state = 'idle';\n        } else {\n          // 无档位胜利和非胜利仍保留原有内存/普通保存语义，不创建永久结算键。\n          game.state = 'idle';\n          if (saveGame() === false && getActiveSlot()) return retry();\n        }\n\n        settlement.phase = 'done';\n        if (settlement.retryAction && UI._acts?.battleSettleRetry === settlement.retryAction) {\n          UI.act('battleSettleRetry', undefined);\n        }\n        if (settlement.retryButton && UI.el?.ovBody?.contains(settlement.retryButton)) {\n          // Only this settlement's layer; no delayed close may outlive the following teaching layer.\n          UI.hideOverlay({ immediate: true });\n        }\n        settlement.retryButton = null;\n        settlement.retryAction = null;\n        UI.refresh(game);\n        teachAmmoOnce();   // 首胜后一次性说明「卡牌是消耗品」\n        return true;\n      }",
+        "line": 176
+      },
+      {
+        "name": "(async () => {\n        if (!sameRun()) return false;\n        // 战后保底传说（2026-09-09 玩法定版）：首脑必得 1 张，荒渊额外掉落概率不变。\n        const slewDragon = !opts.isBoss && (opts.foeNames || []).some(n => String(n).includes('巨兽'));\n        if (!settlement.rewardsApplied) {\n          // 宠物蛋保底计数和完成节点都进入 afterBase/afterRun，不先写任一存档。\n          // 无档位胜利的计数（2026-09-29 收敛）经宠物蛋命令走内存推进+尝试保存的旧语义。\n          if (win === true && !settlement.slotId && SDT.Base && SDT.Base.data) {\n            SDT.Base.recordEggBattle();\n          }\n          if (win === true) {\n            game.visited = game.visited || {};\n            game.visited[settlement.node.layerIdx + ',' + settlement.node.trackPos] = 1;\n          }\n          let legends = 0;\n          if (opts.isBoss && win === true) legends = 1;\n          if (slewDragon && win === true && Random.random('loot') < RULE_CONFIG.rewards.beastLegendaryChance) legends += 1;\n          if (legends > 0) UI.log('[[icon:trophy]] 首脑宝库开启：额外奖励 <b>1 张传说卡</b>！', 'loot');\n          for (let i = 0; i < legends; i++) {\n            const pool = SDT.Cards.all().filter(c => c.rarity === '传说' && SDT.Cards.isRandomObtainable(c));\n            const card = pool.length ? pool[Math.floor(Random.random('loot') * pool.length)] : null;\n            if (card) game.grantCard(card);\n          }\n          settlement.rewardsApplied = true;\n        }\n        settlement.phase = 'saving';\n\n        if (win === true && settlement.slotId && SDT.Base && SDT.Base.data) {\n          game.state = 'battleSettlement';\n          settlement.savingRunToken = game.discoveredPairs;\n          setBattleSettlementPending(settlement.slotId, settlement.runId);\n          if (!settlement.attempt) {\n            const afterRun = createRunSavePayload();\n            if (!afterRun) return retry(new Error('路线快照校验失败'));\n            settlement.elapsedCheckpoint = afterRun.elapsed;\n            const elapsedDelta = Math.max(0, (+game.elapsed || 0) - (+game.elapsedSynced || 0));\n            const prepared = await battleSettlementCommands.createAttempt({\n              slotId: settlement.slotId, node: settlement.node, afterRun, elapsedDelta,\n              victoryProgress: settlement.victoryProgress,\n            });\n            if (!sameRun()) return false;\n            if (!prepared.ok) return retry(new Error(prepared.message || prepared.code));\n            if (prepared.replay) {\n              settlement.phase = 'done';\n              UI.log('[[icon:cross]] 本节点结算已由另一个会话完成，请重新载入当前档位', 'warn');\n              return false;\n            }\n            settlement.attempt = prepared.attempt;\n          }\n          const committed = await battleSettlementCommands.commitAttempt(settlement.attempt);\n          if (!sameRun()) return false;\n          if (!committed.ok) {\n            if (settlement.victoryProgress) settlement.progressNeedsPublication = true;\n            return retry(new Error(committed.message || committed.code));\n          }\n          if (settlement.victoryProgress && !settlement.progressPublished &&\n              (!committed.replay || settlement.progressNeedsPublication)) {\n            settlement.progressPublished = true;\n            if (typeof SDT.Meta.publishBattleProgress === 'function') {\n              try {\n                SDT.Meta.publishBattleProgress(committed.receipt?.output?.progression?.levelUps || []);\n              } catch (error) {\n                console.error('[battle:progress] 战斗进度已保存，但升级/成就提示未完成', error);\n              }\n            }\n          }\n          clearBattleSettlementPending(settlement.slotId, settlement.runId);\n          game.elapsedSynced = settlement.elapsedCheckpoint;\n          game.state = 'idle';\n        } else {\n          // 无档位胜利和非胜利仍保留原有内存/普通保存语义，不创建永久结算键。\n          game.state = 'idle';\n          if (saveGame() === false && getActiveSlot()) return retry();\n        }\n\n        settlement.phase = 'done';\n        if (settlement.retryAction && UI._acts?.battleSettleRetry === settlement.retryAction) {\n          UI.act('battleSettleRetry', undefined);\n        }\n        if (settlement.retryButton && UI.el?.ovBody?.contains(settlement.retryButton)) {\n          // Only this settlement's layer; no delayed close may outlive the following teaching layer.\n          UI.hideOverlay({ immediate: true });\n        }\n        settlement.retryButton = null;\n        settlement.retryAction = null;\n        UI.refresh(game);\n        teachAmmoOnce();   // 首胜后一次性说明「卡牌是消耗品」\n        return true;\n      })().catch",
+        "line": 176
+      },
+      {
+        "name": "(async () => {\n        if (!sameRun()) return false;\n        // 战后保底传说（2026-09-09 玩法定版）：首脑必得 1 张，荒渊额外掉落概率不变。\n        const slewDragon = !opts.isBoss && (opts.foeNames || []).some(n => String(n).includes('巨兽'));\n        if (!settlement.rewardsApplied) {\n          // 宠物蛋保底计数和完成节点都进入 afterBase/afterRun，不先写任一存档。\n          // 无档位胜利的计数（2026-09-29 收敛）经宠物蛋命令走内存推进+尝试保存的旧语义。\n          if (win === true && !settlement.slotId && SDT.Base && SDT.Base.data) {\n            SDT.Base.recordEggBattle();\n          }\n          if (win === true) {\n            game.visited = game.visited || {};\n            game.visited[settlement.node.layerIdx + ',' + settlement.node.trackPos] = 1;\n          }\n          let legends = 0;\n          if (opts.isBoss && win === true) legends = 1;\n          if (slewDragon && win === true && Random.random('loot') < RULE_CONFIG.rewards.beastLegendaryChance) legends += 1;\n          if (legends > 0) UI.log('[[icon:trophy]] 首脑宝库开启：额外奖励 <b>1 张传说卡</b>！', 'loot');\n          for (let i = 0; i < legends; i++) {\n            const pool = SDT.Cards.all().filter(c => c.rarity === '传说' && SDT.Cards.isRandomObtainable(c));\n            const card = pool.length ? pool[Math.floor(Random.random('loot') * pool.length)] : null;\n            if (card) game.grantCard(card);\n          }\n          settlement.rewardsApplied = true;\n        }\n        settlement.phase = 'saving';\n\n        if (win === true && settlement.slotId && SDT.Base && SDT.Base.data) {\n          game.state = 'battleSettlement';\n          settlement.savingRunToken = game.discoveredPairs;\n          setBattleSettlementPending(settlement.slotId, settlement.runId);\n          if (!settlement.attempt) {\n            const afterRun = createRunSavePayload();\n            if (!afterRun) return retry(new Error('路线快照校验失败'));\n            settlement.elapsedCheckpoint = afterRun.elapsed;\n            const elapsedDelta = Math.max(0, (+game.elapsed || 0) - (+game.elapsedSynced || 0));\n            const prepared = await battleSettlementCommands.createAttempt({\n              slotId: settlement.slotId, node: settlement.node, afterRun, elapsedDelta,\n              victoryProgress: settlement.victoryProgress,\n            });\n            if (!sameRun()) return false;\n            if (!prepared.ok) return retry(new Error(prepared.message || prepared.code));\n            if (prepared.replay) {\n              settlement.phase = 'done';\n              UI.log('[[icon:cross]] 本节点结算已由另一个会话完成，请重新载入当前档位', 'warn');\n              return false;\n            }\n            settlement.attempt = prepared.attempt;\n          }\n          const committed = await battleSettlementCommands.commitAttempt(settlement.attempt);\n          if (!sameRun()) return false;\n          if (!committed.ok) {\n            if (settlement.victoryProgress) settlement.progressNeedsPublication = true;\n            return retry(new Error(committed.message || committed.code));\n          }\n          if (settlement.victoryProgress && !settlement.progressPublished &&\n              (!committed.replay || settlement.progressNeedsPublication)) {\n            settlement.progressPublished = true;\n            if (typeof SDT.Meta.publishBattleProgress === 'function') {\n              try {\n                SDT.Meta.publishBattleProgress(committed.receipt?.output?.progression?.levelUps || []);\n              } catch (error) {\n                console.error('[battle:progress] 战斗进度已保存，但升级/成就提示未完成', error);\n              }\n            }\n          }\n          clearBattleSettlementPending(settlement.slotId, settlement.runId);\n          game.elapsedSynced = settlement.elapsedCheckpoint;\n          game.state = 'idle';\n        } else {\n          // 无档位胜利和非胜利仍保留原有内存/普通保存语义，不创建永久结算键。\n          game.state = 'idle';\n          if (saveGame() === false && getActiveSlot()) return retry();\n        }\n\n        settlement.phase = 'done';\n        if (settlement.retryAction && UI._acts?.battleSettleRetry === settlement.retryAction) {\n          UI.act('battleSettleRetry', undefined);\n        }\n        if (settlement.retryButton && UI.el?.ovBody?.contains(settlement.retryButton)) {\n          // Only this settlement's layer; no delayed close may outlive the following teaching layer.\n          UI.hideOverlay({ immediate: true });\n        }\n        settlement.retryButton = null;\n        settlement.retryAction = null;\n        UI.refresh(game);\n        teachAmmoOnce();   // 首胜后一次性说明「卡牌是消耗品」\n        return true;\n      })().catch(error => sameRun() ? retry(error) : false).finally",
+        "line": 176
+      }
+    ]
+  },
+  {
+    "file": "game/src/hub/game.cardslib.art-warm.js",
+    "lines": 53,
+    "bytes": 2221,
+    "functions": [
+      {
+        "name": "decodeLibImage",
+        "line": 9,
+        "async": false
+      },
+      {
+        "name": "warmLibArt",
+        "line": 18,
+        "async": false
+      },
+      {
+        "name": "resetLibArtWarmup",
+        "line": 48,
+        "async": false
+      }
+    ],
+    "riskAnchors": []
+  },
+  {
+    "file": "game/src/hub/game.cardslib.common.js",
+    "lines": 49,
+    "bytes": 2088,
+    "functions": [
+      {
+        "name": "setCardPageOpen",
+        "line": 7,
+        "async": false
+      },
+      {
+        "name": "configureCardPageClosers",
+        "line": 11,
+        "async": false
+      },
+      {
+        "name": "configurePendingCardPageEntry",
+        "line": 15,
+        "async": false
+      },
+      {
+        "name": "closeCardPageTop",
+        "line": 16,
+        "async": false
+      },
+      {
+        "name": "configureCardNavigation",
+        "line": 44,
+        "async": false
+      }
+    ],
+    "riskAnchors": []
+  },
+  {
+    "file": "game/src/hub/game.cardslib.designer.js",
+    "lines": 374,
+    "bytes": 22625,
+    "functions": [
+      {
+        "name": "mechToggle",
+        "line": 22,
+        "async": false
+      },
+      {
+        "name": "openCardDesigner",
+        "line": 35,
+        "async": false
+      },
+      {
+        "name": "mechChipsHTML",
+        "line": 78,
+        "async": false
+      },
+      {
+        "name": "mechSyncUI",
+        "line": 92,
+        "async": false
+      },
+      {
+        "name": "renderDesigner",
+        "line": 102,
+        "async": false
+      },
+      {
+        "name": "syncDesignerForm",
+        "line": 231,
+        "async": false
+      },
+      {
+        "name": "updateDesignerPreview",
+        "line": 253,
+        "async": false
+      },
+      {
+        "name": "bindDesignerTilt",
+        "line": 259,
+        "async": false
+      },
+      {
+        "name": "saveDraftCard",
+        "line": 263,
+        "async": false
+      },
+      {
+        "name": "closeDesigner",
+        "line": 299,
+        "async": false
+      },
+      {
+        "name": "showCardsExportOverlay",
+        "line": 304,
+        "async": false
+      },
+      {
+        "name": "showCardsImportOverlay",
+        "line": 330,
+        "async": false
+      },
+      {
+        "name": "createCardDesigner",
+        "line": 16,
+        "async": false
+      }
+    ],
+    "riskAnchors": [
+      {
+        "name": "UI.act",
+        "line": 206
+      },
+      {
+        "name": "UI.act",
+        "line": 214
+      },
+      {
+        "name": "UI.act",
+        "line": 215
+      },
+      {
+        "name": "UI.act",
+        "line": 221
+      },
+      {
+        "name": "UI.act",
+        "line": 222
+      },
+      {
+        "name": "UI.act",
+        "line": 223
+      },
+      {
+        "name": "UI.act",
+        "line": 224
+      },
+      {
+        "name": "UI.act",
+        "line": 225
+      },
+      {
+        "name": "UI.act",
+        "line": 226
+      },
+      {
+        "name": "UI.act",
+        "line": 227
+      },
+      {
+        "name": "UI.act",
+        "line": 228
+      },
+      {
+        "name": "SDT.Cards.saveAll",
+        "line": 291
+      },
+      {
+        "name": "deps.setLastSavedId",
+        "line": 292
+      },
+      {
+        "name": "navigator.clipboard.writeText",
+        "line": 316
+      },
+      {
+        "name": "UI.act",
+        "line": 315
+      },
+      {
+        "name": "UI.act",
+        "line": 319
+      },
+      {
+        "name": "UI.act",
+        "line": 327
+      },
+      {
+        "name": "UI.act",
+        "line": 340
+      },
+      {
+        "name": "UI.act",
+        "line": 369
+      }
+    ]
+  },
+  {
+    "file": "game/src/hub/game.cardslib.js",
+    "lines": 95,
+    "bytes": 3203,
+    "functions": [
+      {
+        "name": "cancelPendingPageEntry",
+        "line": 14,
+        "async": false
+      },
+      {
+        "name": "loadPageModule",
+        "line": 26,
+        "async": false
+      },
+      {
+        "name": "enterPage",
+        "line": 38,
+        "async": false
+      },
+      {
+        "name": "openCardLibrary",
+        "line": 75,
+        "async": false
+      },
+      {
+        "name": "openCardDesigner",
+        "line": 76,
+        "async": false
+      },
+      {
+        "name": "closeCardPageTop",
+        "line": 78,
+        "async": false
+      }
+    ],
+    "riskAnchors": [
+      {
+        "name": "loadPageModule().then",
+        "line": 53
+      },
+      {
+        "name": "loadPageModule().then((page) => {\n    if (request !== pageRequest) return;\n    const pending = pendingPageEntry;\n    const currentOverlay = document.getElementById('overlay');\n    if (!pending || pending.request !== request || game.state !== pending.originState ||\n        currentOverlay?.hidden !== pending.originOverlayHidden || currentOverlay?.innerHTML !== pending.originOverlayHTML) {\n      cancelPendingPageEntry();\n      return false;\n    }\n    pendingPageEntry = null;\n    cardPageLoading = false;\n    return page[method](...args);\n  }).catch",
+        "line": 53
+      }
+    ]
+  },
+  {
+    "file": "game/src/hub/game.cardslib.page.js",
+    "lines": 729,
+    "bytes": 42637,
+    "functions": [
+      {
+        "name": "refreshLibRenderContext",
+        "line": 59,
+        "async": false
+      },
+      {
+        "name": "libRarityOf",
+        "line": 63,
+        "async": false
+      },
+      {
+        "name": "openCardLibrary",
+        "line": 81,
+        "async": false
+      },
+      {
+        "name": "libFiltered",
+        "line": 92,
+        "async": false
+      },
+      {
+        "name": "libPreviewHTML",
+        "line": 125,
+        "async": false
+      },
+      {
+        "name": "libActiveFiltersHTML",
+        "line": 167,
+        "async": false
+      },
+      {
+        "name": "photoTileInnerHTML",
+        "line": 180,
+        "async": false
+      },
+      {
+        "name": "photoTileHTML",
+        "line": 195,
+        "async": false
+      },
+      {
+        "name": "libShellHTML",
+        "line": 200,
+        "async": false
+      },
+      {
+        "name": "libGridContentsHTML",
+        "line": 205,
+        "async": false
+      },
+      {
+        "name": "libGridHTML",
+        "line": 221,
+        "async": false
+      },
+      {
+        "name": "stopLibTileObserver",
+        "line": 231,
+        "async": false
+      },
+      {
+        "name": "observeLibTiles",
+        "line": 236,
+        "async": false
+      },
+      {
+        "name": "mountLibTile",
+        "line": 251,
+        "async": false
+      },
+      {
+        "name": "unmountLibTile",
+        "line": 264,
+        "async": false
+      },
+      {
+        "name": "ensureLibTileMounted",
+        "line": 278,
+        "async": false
+      },
+      {
+        "name": "claimMountedTiles",
+        "line": 288,
+        "async": false
+      },
+      {
+        "name": "rebuildLibNodeMap",
+        "line": 302,
+        "async": false
+      },
+      {
+        "name": "syncLibTileIntrinsicSize",
+        "line": 311,
+        "async": false
+      },
+      {
+        "name": "switchLibPage",
+        "line": 320,
+        "async": false
+      },
+      {
+        "name": "setLibSelection",
+        "line": 332,
+        "async": false
+      },
+      {
+        "name": "bindLibGridNavigation",
+        "line": 358,
+        "async": false
+      },
+      {
+        "name": "renderLibGrid",
+        "line": 389,
+        "async": false
+      },
+      {
+        "name": "syncLibFilterUI",
+        "line": 430,
+        "async": false
+      },
+      {
+        "name": "libWaveEgg",
+        "line": 446,
+        "async": false
+      },
+      {
+        "name": "libHoloEgg",
+        "line": 455,
+        "async": false
+      },
+      {
+        "name": "renderCardLibrary",
+        "line": 463,
+        "async": false
+      },
+      {
+        "name": "closeLibPage",
+        "line": 700,
+        "async": false
+      }
+    ],
+    "riskAnchors": [
+      {
+        "name": "document.head.appendChild",
+        "line": 27
+      },
+      {
+        "name": "filters.map(([key, label]) => `<button type=\"button\" data-act=\"libRemoveFilter\" data-filter=\"${key}\" aria-label=\"移除筛选：${escAttr(label)}\">${esc(label)} <span aria-hidden=\"true\">×</span></button>`).join",
+        "line": 176
+      },
+      {
+        "name": "photoTileInnerHTML",
+        "line": 196
+      },
+      {
+        "name": "photoTileInnerHTML",
+        "line": 255
+      },
+      {
+        "name": "shell.classList.remove",
+        "line": 256
+      },
+      {
+        "name": "previousCard?.closest('.lib-item')?.classList.remove",
+        "line": 340
+      },
+      {
+        "name": "resultCount.classList.remove",
+        "line": 404
+      },
+      {
+        "name": "grid.classList.remove",
+        "line": 452
+      },
+      {
+        "name": "setTimeout",
+        "line": 452
+      },
+      {
+        "name": "grid.classList.remove",
+        "line": 460
+      },
+      {
+        "name": "setTimeout",
+        "line": 460
+      },
+      {
+        "name": "UI.act",
+        "line": 536
+      },
+      {
+        "name": "UI.act",
+        "line": 537
+      },
+      {
+        "name": "UI.act",
+        "line": 540
+      },
+      {
+        "name": "UI.act",
+        "line": 541
+      },
+      {
+        "name": "UI.act",
+        "line": 542
+      },
+      {
+        "name": "UI.act",
+        "line": 549
+      },
+      {
+        "name": "UI.act",
+        "line": 560
+      },
+      {
+        "name": "UI.act",
+        "line": 561
+      },
+      {
+        "name": "UI.act",
+        "line": 562
+      },
+      {
+        "name": "savePhotoNote",
+        "line": 593
+      },
+      {
+        "name": "UI.act",
+        "line": 567
+      },
+      {
+        "name": "btn.classList.remove",
+        "line": 613
+      },
+      {
+        "name": "setTimeout",
+        "line": 612
+      },
+      {
+        "name": "SDT.Cards.remove",
+        "line": 618
+      },
+      {
+        "name": "UI.act",
+        "line": 607
+      },
+      {
+        "name": "UI.act",
+        "line": 623
+      },
+      {
+        "name": "UI.act",
+        "line": 624
+      },
+      {
+        "name": "setTimeout",
+        "line": 633
+      },
+      {
+        "name": "UI.act",
+        "line": 627
+      },
+      {
+        "name": "setTimeout",
+        "line": 641
+      },
+      {
+        "name": "setTimeout",
+        "line": 654
+      },
+      {
+        "name": "setTimeout",
+        "line": 678
+      },
+      {
+        "name": "document.body.classList.remove",
+        "line": 717
+      },
+      {
+        "name": "setTimeout",
+        "line": 717
+      }
+    ]
+  },
+  {
+    "file": "game/src/hub/game.cardslib.photo-fps.js",
+    "lines": 96,
+    "bytes": 3938,
+    "functions": [
+      {
+        "name": "configurePhotoFps",
+        "line": 7,
+        "async": false
+      },
+      {
+        "name": "stopPhotoFpsProbe",
+        "line": 16,
+        "async": false
+      },
+      {
+        "name": "samplePhotoFps",
+        "line": 24,
+        "async": false
+      },
+      {
+        "name": "clearPhotoFpsSettledTimer",
+        "line": 76,
+        "async": false
+      },
+      {
+        "name": "scheduleSettledPhotoFps",
+        "line": 81,
+        "async": false
+      }
+    ],
+    "riskAnchors": [
+      {
+        "name": "setTimeout",
+        "line": 84
+      }
+    ]
+  },
+  {
+    "file": "game/src/hub/game.cardslib.photo-props.js",
+    "lines": 41,
+    "bytes": 1950,
+    "functions": [
+      {
+        "name": "photoUnit",
+        "line": 12,
+        "async": false
+      },
+      {
+        "name": "photoStyle",
+        "line": 22,
+        "async": false
+      },
+      {
+        "name": "photoNo",
+        "line": 36,
+        "async": false
+      }
+    ],
+    "riskAnchors": []
+  },
+  {
+    "file": "game/src/hub/game.hub.bridge.js",
+    "lines": 8,
+    "bytes": 609,
+    "functions": [],
+    "riskAnchors": []
+  },
+  {
+    "file": "game/src/hub/game.hub.depart.js",
+    "lines": 358,
+    "bytes": 22212,
+    "functions": [
+      {
+        "name": "hubDeployHTML",
+        "line": 14,
+        "async": false
+      },
+      {
+        "name": "setDeployPick",
+        "line": 84,
+        "async": false
+      },
+      {
+        "name": "openDepartPrep",
+        "line": 88,
+        "async": false
+      },
+      {
+        "name": "deployPickRowsHTML",
+        "line": 97,
+        "async": false
+      },
+      {
+        "name": "renderDepartPrep",
+        "line": 122,
+        "async": false
+      },
+      {
+        "name": "deploySlotsUsed",
+        "line": 349,
+        "async": false
+      }
+    ],
+    "riskAnchors": [
+      {
+        "name": "UI.act",
+        "line": 238
+      },
+      {
+        "name": "UI.act",
+        "line": 239
+      },
+      {
+        "name": "UI.act",
+        "line": 241
+      },
+      {
+        "name": "UI.act",
+        "line": 261
+      },
+      {
+        "name": "UI.act",
+        "line": 249
+      },
+      {
+        "name": "bag.classList.remove",
+        "line": 302
+      },
+      {
+        "name": "bag.classList.remove",
+        "line": 305
+      },
+      {
+        "name": "setTimeout",
+        "line": 342
+      },
+      {
+        "name": "UI.act",
+        "line": 316
+      },
+      {
+        "name": "UI.act",
+        "line": 345
+      }
+    ]
+  },
+  {
+    "file": "game/src/hub/game.hub.js",
+    "lines": 386,
+    "bytes": 20947,
+    "functions": [
+      {
+        "name": "openBaseHub",
+        "line": 62,
+        "async": false
+      },
+      {
+        "name": "readHomeView",
+        "line": 74,
+        "async": false
+      },
+      {
+        "name": "renderHomeScene",
+        "line": 80,
+        "async": false
+      },
+      {
+        "name": "renderHub",
+        "line": 134,
+        "async": false
+      },
+      {
+        "name": "openPreparationPanel",
+        "line": 318,
+        "async": false
+      },
+      {
+        "name": "registerHubHelp",
+        "line": 324,
+        "async": false
+      },
+      {
+        "name": "closeBase",
+        "line": 368,
+        "async": false
+      }
+    ],
+    "riskAnchors": [
+      {
+        "name": "UI.act",
+        "line": 49
+      },
+      {
+        "name": "SDT.Art.hydrateSelectedSkins",
+        "line": 69
+      },
+      {
+        "name": "homeCommands.saveLayout",
+        "line": 117
+      },
+      {
+        "name": "import('../home/home.scene.js').then",
+        "line": 94
+      },
+      {
+        "name": "import('../home/home.scene.js').then(({ mountHome }) => {\r\n      if (request !== homeSceneRequest || !host.isConnected) return;\r\n      homeController = mountHome({\r\n      host, view: read.value, assets: {\r\n        ...visualPack,\r\n        characterHTML: characterId => SDT.Art.classArt(characterFor(characterId)?.rulesetId || characterId),\r\n        characterLabel: characterId => characterName(characterId),\r\n        cardHTML: cardId => {\r\n          const card = SDT.Cards.all().find(item => item.id === cardId);\r\n          return card ? SDT.Cards.cardHTML(card, 'sm') : '';\r\n        },\r\n      },\r\n      onIntent: async intent => {\r\n        if (request !== homeSceneRequest) return null;\r\n        if (intent.type === 'close') { closeBase(); return { ok: true }; }\r\n        if (intent.type === 'openPanel') {\r\n          hubTab = ({ collection: 'ach', characters: 'classes', pets: 'stash' }[intent.panel] || intent.panel);\r\n          renderHub(); return { ok: true };\r\n        }\r\n        if (intent.type === 'previewPlacement') return { ok: true, value: intent.placement };\r\n        const context = { slotId: SDT.Base.slot, requestId: homeRequestId(intent.type), expectedRevision: intent.expectedRevision };\r\n        let result;\r\n        if (intent.type === 'buyFurniture') result = await homeCommands.buyFurniture(context, intent);\r\n        else if (intent.type === 'submitLayout') result = await homeCommands.saveLayout(context, intent);\r\n        else if (intent.type === 'selectDisplay') result = await homeCommands.setDisplay(context, intent);\r\n        else return { ok: false, code: 'INVALID_ARGUMENT', message: '未知基地操作' };\r\n        if (result.ok) {\r\n          if (request === homeSceneRequest) refresh();\r\n        } else result = { ...result, message: homeErrorMessage(result) };\r\n        return result;\r\n      },\r\n      });\r\n    }).catch",
+        "line": 94
+      },
+      {
+        "name": "UI.act",
+        "line": 186
+      },
+      {
+        "name": "UI.act",
+        "line": 208
+      },
+      {
+        "name": "UI.act",
+        "line": 214
+      },
+      {
+        "name": "UI.act",
+        "line": 219
+      },
+      {
+        "name": "UI.act",
+        "line": 220
+      },
+      {
+        "name": "UI.act",
+        "line": 228
+      },
+      {
+        "name": "UI.act",
+        "line": 237
+      },
+      {
+        "name": "UI.act",
+        "line": 238
+      },
+      {
+        "name": "UI.act",
+        "line": 239
+      },
+      {
+        "name": "UI.act",
+        "line": 248
+      },
+      {
+        "name": "UI.act",
+        "line": 255
+      },
+      {
+        "name": "UI.act",
+        "line": 256
+      },
+      {
+        "name": "UI.act",
+        "line": 264
+      },
+      {
+        "name": "UI.act",
+        "line": 271
+      },
+      {
+        "name": "UI.act",
+        "line": 277
+      },
+      {
+        "name": "UI.act",
+        "line": 278
+      },
+      {
+        "name": "UI.act",
+        "line": 279
+      },
+      {
+        "name": "UI.act",
+        "line": 288
+      },
+      {
+        "name": "UI.act",
+        "line": 292
+      },
+      {
+        "name": "UI.act",
+        "line": 306
+      },
+      {
+        "name": "UI.act",
+        "line": 311
+      },
+      {
+        "name": "UI.act",
+        "line": 315
+      }
+    ]
+  },
+  {
+    "file": "game/src/hub/game.hub.pages.js",
+    "lines": 654,
+    "bytes": 44383,
+    "functions": [
+      {
+        "name": "hubShopHTML",
+        "line": 40,
+        "async": false
+      },
+      {
+        "name": "hubStashHTML",
+        "line": 87,
+        "async": false
+      },
+      {
+        "name": "hubPetsHTML",
+        "line": 157,
+        "async": false
+      },
+      {
+        "name": "openStashItem",
+        "line": 196,
+        "async": false
+      },
+      {
+        "name": "openRawItem",
+        "line": 410,
+        "async": false
+      },
+      {
+        "name": "hubUpgradeHTML",
+        "line": 426,
+        "async": false
+      },
+      {
+        "name": "hubClassesHTML",
+        "line": 480,
+        "async": false
+      },
+      {
+        "name": "collRoomHTML",
+        "line": 524,
+        "async": false
+      },
+      {
+        "name": "hubAchHTML",
+        "line": 569,
+        "async": false
+      }
+    ],
+    "riskAnchors": [
+      {
+        "name": "UI.act",
+        "line": 216
+      },
+      {
+        "name": "UI.act",
+        "line": 228
+      },
+      {
+        "name": "UI.act",
+        "line": 263
+      },
+      {
+        "name": "UI.act",
+        "line": 264
+      },
+      {
+        "name": "UI.act",
+        "line": 266
+      },
+      {
+        "name": "UI.act",
+        "line": 270
+      },
+      {
+        "name": "UI.act",
+        "line": 273
+      },
+      {
+        "name": "UI.act",
+        "line": 286
+      },
+      {
+        "name": "UI.act",
+        "line": 287
+      },
+      {
+        "name": "UI.act",
+        "line": 332
+      },
+      {
+        "name": "UI.act",
+        "line": 348
+      },
+      {
+        "name": "UI.act",
+        "line": 363
+      },
+      {
+        "name": "UI.act",
+        "line": 367
+      },
+      {
+        "name": "UI.act",
+        "line": 387
+      },
+      {
+        "name": "UI.act",
+        "line": 399
+      },
+      {
+        "name": "UI.act",
+        "line": 406
+      },
+      {
+        "name": "UI.act",
+        "line": 422
+      }
+    ]
+  },
+  {
+    "file": "game/src/hub/game.hub.preparation.js",
+    "lines": 141,
+    "bytes": 5486,
+    "functions": [
+      {
+        "name": "dispose",
+        "line": 22,
+        "async": false
+      },
+      {
+        "name": "makeModel",
+        "line": 29,
+        "async": false
+      },
+      {
+        "name": "open",
+        "line": 42,
+        "async": false
+      },
+      {
+        "name": "returnToBase",
+        "line": 130,
+        "async": false
+      },
+      {
+        "name": "createHubPreparationFeature",
+        "line": 8,
+        "async": false
+      }
+    ],
+    "riskAnchors": [
+      {
+        "name": "commands.savePreset",
+        "line": 88
+      },
+      {
+        "name": "commands.savePreset",
+        "line": 94
+      }
+    ]
+  },
+  {
+    "file": "game/src/hub/game.notes.js",
+    "lines": 226,
+    "bytes": 10926,
+    "functions": [
+      {
+        "name": "rebuildNotes",
+        "line": 7,
+        "async": false
+      },
+      {
+        "name": "legacyGridToNode",
+        "line": 34,
+        "async": false
+      },
+      {
+        "name": "openCellEditor",
+        "line": 43,
+        "async": false
+      },
+      {
+        "name": "exportNotes",
+        "line": 95,
+        "async": false
+      },
+      {
+        "name": "showExportOverlay",
+        "line": 113,
+        "async": false
+      },
+      {
+        "name": "showImportOverlay",
+        "line": 140,
+        "async": false
+      },
+      {
+        "name": "showClearOverlay",
+        "line": 184,
+        "async": false
+      },
+      {
+        "name": "bindNotesMixins",
+        "line": 208,
+        "async": false
+      },
+      {
+        "name": "syncDevVisibility",
+        "line": 214,
+        "async": false
+      },
+      {
+        "name": "initDevMode",
+        "line": 220,
+        "async": false
+      }
+    ],
+    "riskAnchors": [
+      {
+        "name": "UI.act",
+        "line": 73
+      },
+      {
+        "name": "UI.act",
+        "line": 85
+      },
+      {
+        "name": "UI.act",
+        "line": 92
+      },
+      {
+        "name": "navigator.clipboard.writeText",
+        "line": 126
+      },
+      {
+        "name": "UI.act",
+        "line": 125
+      },
+      {
+        "name": "UI.act",
+        "line": 129
+      },
+      {
+        "name": "UI.act",
+        "line": 137
+      },
+      {
+        "name": "UI.act",
+        "line": 150
+      },
+      {
+        "name": "UI.act",
+        "line": 181
+      },
+      {
+        "name": "UI.act",
+        "line": 193
+      },
+      {
+        "name": "UI.act",
+        "line": 199
+      }
+    ]
+  },
+  {
+    "file": "game/src/hub/game.storage.js",
+    "lines": 233,
+    "bytes": 13671,
+    "functions": [
+      {
+        "name": "readRaw",
+        "line": 64,
+        "async": false
+      },
+      {
+        "name": "readRun",
+        "line": 77,
+        "async": false
+      }
+    ],
+    "riskAnchors": [
+      {
+        "name": "writeBaseline.set",
+        "line": 131
+      },
+      {
+        "name": "writeIssues.delete",
+        "line": 132
+      },
+      {
+        "name": "writeBaseline.set",
+        "line": 138
+      },
+      {
+        "name": "writeBaseline.delete",
+        "line": 139
+      },
+      {
+        "name": "writeIssues.delete",
+        "line": 140
+      },
+      {
+        "name": "writeIssues.get",
+        "line": 143
+      },
+      {
+        "name": "writeIssues.set",
+        "line": 167
+      },
+      {
+        "name": "writeBaseline.has",
+        "line": 169
+      },
+      {
+        "name": "writeBaseline.get",
+        "line": 170
+      },
+      {
+        "name": "writeIssues.set",
+        "line": 172
+      },
+      {
+        "name": "writeIssues.set",
+        "line": 178
+      },
+      {
+        "name": "localStorage.removeItem",
+        "line": 188
+      },
+      {
+        "name": "writeBaseline.set",
+        "line": 190
+      },
+      {
+        "name": "writeIssues.delete",
+        "line": 191
+      },
+      {
+        "name": "localStorage.removeItem",
+        "line": 193
+      },
+      {
+        "name": "writeIssues.set",
+        "line": 195
+      },
+      {
+        "name": "localStorage.removeItem",
+        "line": 200
+      },
+      {
+        "name": "localStorage.removeItem",
+        "line": 201
+      },
+      {
+        "name": "localStorage.removeItem",
+        "line": 202
+      },
+      {
+        "name": "writeIssues.set",
+        "line": 203
+      },
+      {
+        "name": "writeBaseline.delete",
+        "line": 205
+      },
+      {
+        "name": "writeIssues.delete",
+        "line": 206
+      },
+      {
+        "name": "writeIssues.delete",
+        "line": 211
+      },
+      {
+        "name": "writeBaseline.set",
+        "line": 215
+      },
+      {
+        "name": "writeBaseline.delete",
+        "line": 216
+      },
+      {
+        "name": "localStorage.removeItem",
+        "line": 218
+      },
+      {
+        "name": "localStorage.removeItem",
+        "line": 225
+      }
+    ]
+  },
+  {
+    "file": "game/src/hub/game.store.js",
+    "lines": 96,
+    "bytes": 2918,
+    "functions": [
+      {
+        "name": "createGameState",
+        "line": 9,
+        "async": false
+      },
+      {
+        "name": "freezeRows",
+        "line": 71,
+        "async": false
+      },
+      {
+        "name": "freezeDataRows",
+        "line": 78,
+        "async": false
+      },
+      {
+        "name": "freezeDataValue",
+        "line": 82,
+        "async": false
+      }
+    ],
+    "riskAnchors": []
+  },
+  {
+    "file": "game/src/hub/game.store.types.d.ts",
+    "lines": 153,
+    "bytes": 3699,
+    "functions": [],
+    "riskAnchors": [],
+    "typeDeclaration": true
+  },
+  {
+    "file": "game/src/hub/meta-progression.js",
+    "lines": 50,
+    "bytes": 1870,
+    "functions": [
+      {
+        "name": "applyXpGain",
+        "line": 15,
+        "async": false
+      },
+      {
+        "name": "addXpToProgress",
+        "line": 40,
+        "async": false
+      }
+    ],
+    "riskAnchors": []
+  },
+  {
+    "file": "game/src/hub/meta.js",
+    "lines": 332,
+    "bytes": 17240,
+    "functions": [
+      {
+        "name": "addXP",
+        "line": 35,
+        "async": false
+      },
+      {
+        "name": "collRewardText",
+        "line": 123,
+        "async": false
+      },
+      {
+        "name": "claimColl",
+        "line": 135,
+        "async": false
+      },
+      {
+        "name": "onCollect",
+        "line": 168,
+        "async": false
+      },
+      {
+        "name": "syncCollXp",
+        "line": 184,
+        "async": false
+      },
+      {
+        "name": "checkCollMilestones",
+        "line": 206,
+        "async": false
+      },
+      {
+        "name": "claim",
+        "line": 230,
+        "async": false
+      },
+      {
+        "name": "syncBackUnlocks",
+        "line": 258,
+        "async": false
+      },
+      {
+        "name": "checkUnlocks",
+        "line": 263,
+        "async": false
+      },
+      {
+        "name": "publishBattleProgress",
+        "line": 277,
+        "async": false
+      },
+      {
+        "name": "track",
+        "line": 291,
+        "async": false
+      },
+      {
+        "name": "setXpMul",
+        "line": 306,
+        "async": false
+      },
+      {
+        "name": "classSummary",
+        "line": 309,
+        "async": false
+      }
+    ],
+    "riskAnchors": []
+  },
+  {
+    "file": "game/src/hub/nest-settlement.commands.js",
+    "lines": 187,
+    "bytes": 9761,
+    "functions": [
+      {
+        "name": "createAttempt",
+        "line": 39,
+        "async": true
+      },
+      {
+        "name": "commitAttempt",
+        "line": 122,
+        "async": true
+      },
+      {
+        "name": "settle",
+        "line": 157,
+        "async": true
+      },
+      {
+        "name": "createNestSettlementCommands",
+        "line": 27,
+        "async": false
+      }
+    ],
+    "riskAnchors": [
+      {
+        "name": "base._readForCommit",
+        "line": 65
+      },
+      {
+        "name": "base._readForCommit",
+        "line": 82
+      },
+      {
+        "name": "getBase()._readForCommit",
+        "line": 136
+      },
+      {
+        "name": "recovery.commitBaseAndRun",
+        "line": 144
+      },
+      {
+        "name": "commitAttempt",
+        "line": 174
+      },
+      {
+        "name": "async () => {\n      let attempt = attempts.get(key);\n      if (!attempt) {\n        const created = await createAttempt(snapshot);\n        if (!created.ok) return created;\n        if ('replay' in created.value) return { ok: /** @type {true} */ (true), value: created.value };\n        attempt = created.value;\n        attempts.set(key, attempt);\n      }\n      const result = await commitAttempt(attempt);\n      if (result.ok || ['STALE_SLOT', 'STALE_RUN', 'STALE_REVISION'].includes(result.code)) {\n        attempts.delete(key);\n      }\n      return result;\n    }",
+        "line": 165
+      }
+    ]
+  },
+  {
+    "file": "game/src/hub/photo-studio-presentation.js",
+    "lines": 19,
+    "bytes": 770,
+    "functions": [
+      {
+        "name": "photoMountFor",
+        "line": 14,
+        "async": false
+      }
+    ],
+    "riskAnchors": []
+  },
+  {
+    "file": "game/src/hub/preparation.commands.js",
+    "lines": 137,
+    "bytes": 9005,
+    "functions": [
+      {
+        "name": "cardRef",
+        "line": 10,
+        "async": false
+      },
+      {
+        "name": "normalizePicks",
+        "line": 18,
+        "async": false
+      },
+      {
+        "name": "normalizedGoals",
+        "line": 32,
+        "async": false
+      },
+      {
+        "name": "normalizedPresets",
+        "line": 37,
+        "async": false
+      },
+      {
+        "name": "getPreparation",
+        "line": 46,
+        "async": false
+      },
+      {
+        "name": "catalogMap",
+        "line": 50,
+        "async": false
+      },
+      {
+        "name": "stashCount",
+        "line": 51,
+        "async": false
+      },
+      {
+        "name": "previewDeployment",
+        "line": 59,
+        "async": false
+      },
+      {
+        "name": "createPreparationCommands",
+        "line": 88,
+        "async": false
+      }
+    ],
+    "riskAnchors": [
+      {
+        "name": "mutate",
+        "line": 96
+      },
+      {
+        "name": "port.commitBase",
+        "line": 97
+      },
+      {
+        "name": "commitGoals",
+        "line": 105
+      },
+      {
+        "name": "commitGoals",
+        "line": 115
+      }
+    ]
+  },
+  {
+    "file": "game/src/hub/preparation.sources.js",
+    "lines": 25,
+    "bytes": 2206,
+    "functions": [
+      {
+        "name": "isRandomObtainableShape",
+        "line": 10,
+        "async": false
+      },
+      {
+        "name": "getSources",
+        "line": 14,
+        "async": false
+      }
+    ],
+    "riskAnchors": []
+  },
+  {
+    "file": "game/src/hub/preparation.view.js",
+    "lines": 68,
+    "bytes": 7459,
+    "functions": [
+      {
+        "name": "renderPreset",
+        "line": 11,
+        "async": false
+      },
+      {
+        "name": "render",
+        "line": 24,
+        "async": false
+      },
+      {
+        "name": "buildPreparationViewModel",
+        "line": 34,
+        "async": false
+      },
+      {
+        "name": "mountPreparationView",
+        "line": 49,
+        "async": false
+      }
+    ],
+    "riskAnchors": [
+      {
+        "name": "preset.picks.map(pick => { const hit = preview?.resolvedPicks?.find(item => item.card.cardId === pick.card.cardId && (item.card.variantKey || '') === (pick.card.variantKey || '')); return `<div class=\"prep-pick ${esc(hit?.status || '')}\"><span><b>${esc(hit?.name || pick.name || pick.card.cardId)}</b> ×${pick.count}</span><small>${hit ? esc(statusText(hit)) : '尚未预览'}</small><button data-action=\"preset-pick-remove\" data-card-id=\"${esc(pick.card.cardId)}\" aria-label=\"移除 ${esc(hit?.name || pick.card.cardId)}\">移除</button></div>`; }).join",
+        "line": 16
+      },
+      {
+        "name": "(model.goals || []).map(goal => `<article><div><b>${esc(goal.name || goal.id)}</b><p>${esc(goal.sourceLabel || '来源未确认')}</p></div><button data-action=\"goal-remove\" data-target-id=\"${esc(goal.id)}\">取消追踪</button></article>`).join",
+        "line": 28
+      },
+      {
+        "name": "root.removeEventListener",
+        "line": 66
+      },
+      {
+        "name": "root.removeEventListener",
+        "line": 66
+      }
+    ]
+  },
+  {
+    "file": "game/src/hub/recoverable-pair.js",
+    "lines": 147,
+    "bytes": 8591,
+    "functions": [
+      {
+        "name": "isJournalPhase",
+        "line": 17,
+        "async": false
+      },
+      {
+        "name": "isRawPair",
+        "line": 22,
+        "async": false
+      },
+      {
+        "name": "validJournal",
+        "line": 30,
+        "async": false
+      },
+      {
+        "name": "writeRaw",
+        "line": 45,
+        "async": false
+      },
+      {
+        "name": "createRecoverablePair",
+        "line": 51,
+        "async": false
+      }
+    ],
+    "riskAnchors": [
+      {
+        "name": "storage.removeItem",
+        "line": 46
+      },
+      {
+        "name": "writeRaw",
+        "line": 99
+      },
+      {
+        "name": "writeRaw",
+        "line": 101
+      },
+      {
+        "name": "storage.removeItem",
+        "line": 106
+      },
+      {
+        "name": "writeRaw",
+        "line": 127
+      },
+      {
+        "name": "writeRaw",
+        "line": 130
+      },
+      {
+        "name": "storage.removeItem",
+        "line": 135
+      }
+    ]
+  },
+  {
+    "file": "game/src/hub/recovery.commands.js",
+    "lines": 179,
+    "bytes": 12035,
+    "functions": [
+      {
+        "name": "parseVersioned",
+        "line": 8,
+        "async": false
+      },
+      {
+        "name": "createRecoveryCommands",
+        "line": 19,
+        "async": false
+      }
+    ],
+    "riskAnchors": [
+      {
+        "name": "baseApi._readForCommit",
+        "line": 104
+      },
+      {
+        "name": "baseApi._readForCommit",
+        "line": 129
+      },
+      {
+        "name": "runStore.write",
+        "line": 141
+      },
+      {
+        "name": "pair.commit",
+        "line": 167
+      }
+    ]
+  },
+  {
+    "file": "game/src/hub/run-save-validation.js",
+    "lines": 92,
+    "bytes": 4228,
+    "functions": [
+      {
+        "name": "arrayField",
+        "line": 6,
+        "async": false
+      },
+      {
+        "name": "runFields",
+        "line": 23,
+        "async": false
+      },
+      {
+        "name": "battleFields",
+        "line": 49,
+        "async": false
+      },
+      {
+        "name": "validateRunSave",
+        "line": 88,
+        "async": false
+      }
+    ],
+    "riskAnchors": []
+  },
+  {
+    "file": "game/src/hub/terminal.commands.js",
+    "lines": 139,
+    "bytes": 7366,
+    "functions": [
+      {
+        "name": "applyCards",
+        "line": 5,
+        "async": false
+      },
+      {
+        "name": "applyDeathOutcome",
+        "line": 19,
+        "async": false
+      },
+      {
+        "name": "projectEphemeral",
+        "line": 36,
+        "async": false
+      },
+      {
+        "name": "createAttempt",
+        "line": 44,
+        "async": true
+      },
+      {
+        "name": "commitAttempt",
+        "line": 106,
+        "async": true
+      },
+      {
+        "name": "createTerminalCommands",
+        "line": 33,
+        "async": false
+      }
+    ],
+    "riskAnchors": [
+      {
+        "name": "base._readForCommit",
+        "line": 69
+      },
+      {
+        "name": "recovery.commitBaseAndRun",
+        "line": 129
+      }
+    ]
+  },
+  {
+    "file": "game/src/hub/versioned-slot-reader.js",
+    "lines": 96,
+    "bytes": 5599,
+    "functions": [
+      {
+        "name": "clearIssue",
+        "line": 41,
+        "async": false
+      },
+      {
+        "name": "markIssue",
+        "line": 42,
+        "async": false
+      },
+      {
+        "name": "issue",
+        "line": 43,
+        "async": false
+      },
+      {
+        "name": "markCorrupt",
+        "line": 47,
+        "async": false
+      },
+      {
+        "name": "parse",
+        "line": 58,
+        "async": false
+      },
+      {
+        "name": "poke",
+        "line": 90,
+        "async": false
+      },
+      {
+        "name": "invalidate",
+        "line": 91,
+        "async": false
+      },
+      {
+        "name": "invalidateAll",
+        "line": 92,
+        "async": false
+      },
+      {
+        "name": "createVersionedSlotReader",
+        "line": 17,
+        "async": false
+      }
+    ],
+    "riskAnchors": []
+  },
+  {
+    "file": "game/src/run/game.session.bag.js",
+    "lines": 127,
+    "bytes": 6172,
+    "functions": [
+      {
+        "name": "cardStacks",
+        "line": 33,
+        "async": false
+      },
+      {
+        "name": "usedSlots",
+        "line": 54,
+        "async": false
+      },
+      {
+        "name": "safeUsed",
+        "line": 55,
+        "async": false
+      },
+      {
+        "name": "assertZones",
+        "line": 58,
+        "async": false
+      },
+      {
+        "name": "gainCoins",
+        "line": 101,
+        "async": false
+      },
+      {
+        "name": "refreshCardClones",
+        "line": 111,
+        "async": false
+      }
+    ],
+    "riskAnchors": []
+  },
+  {
+    "file": "game/src/run/game.session.board.js",
+    "lines": 109,
+    "bytes": 5355,
+    "functions": [
+      {
+        "name": "markSeen",
+        "line": 8,
+        "async": false
+      },
+      {
+        "name": "renderMiniMap",
+        "line": 34,
+        "async": false
+      }
+    ],
+    "riskAnchors": []
+  },
+  {
+    "file": "game/src/run/game.session.browser.js",
+    "lines": 10,
+    "bytes": 540,
+    "functions": [
+      {
+        "name": "createGameCanvas",
+        "line": 3,
+        "async": false
+      }
+    ],
+    "riskAnchors": []
+  },
+  {
+    "file": "game/src/run/game.session.death.js",
+    "lines": 140,
+    "bytes": 9121,
+    "functions": [
+      {
+        "name": "doDeath",
+        "line": 43,
+        "async": false
+      },
+      {
+        "name": "createDeathSettlement",
+        "line": 15,
+        "async": false
+      }
+    ],
+    "riskAnchors": [
+      {
+        "name": "token.saved.reduce",
+        "line": 87
+      },
+      {
+        "name": "token.saved.slice",
+        "line": 120
+      },
+      {
+        "name": "token.saved.slice(0, 6).map",
+        "line": 120
+      },
+      {
+        "name": "token.saved.slice(0, 6).map((s, i) =>\n                `<span class=\"doom-card\" style=\"--i:${i}\">${SDT.Cards.cardHTML(s.card, 'sm')}</span>`).join",
+        "line": 120
+      },
+      {
+        "name": "UI.act",
+        "line": 125
+      },
+      {
+        "name": "UI.act",
+        "line": 126
+      }
+    ]
+  },
+  {
+    "file": "game/src/run/game.session.js",
+    "lines": 560,
+    "bytes": 31076,
+    "functions": [
+      {
+        "name": "canReceiveCard",
+        "line": 65,
+        "async": false
+      },
+      {
+        "name": "recordLoadPersistence",
+        "line": 83,
+        "async": false
+      },
+      {
+        "name": "saveBaseForLoad",
+        "line": 91,
+        "async": false
+      },
+      {
+        "name": "recordBaseSaveForLoad",
+        "line": 95,
+        "async": false
+      },
+      {
+        "name": "setBattleSettlementPending",
+        "line": 100,
+        "async": false
+      },
+      {
+        "name": "clearBattleSettlementPending",
+        "line": 104,
+        "async": false
+      },
+      {
+        "name": "blocksSaveForPendingBattleSettlement",
+        "line": 108,
+        "async": false
+      },
+      {
+        "name": "readSlot",
+        "line": 129,
+        "async": false
+      },
+      {
+        "name": "migrateOldSave",
+        "line": 133,
+        "async": false
+      },
+      {
+        "name": "createRunSavePayload",
+        "line": 139,
+        "async": false
+      },
+      {
+        "name": "saveGame",
+        "line": 189,
+        "async": false
+      },
+      {
+        "name": "syncPlayTime",
+        "line": 228,
+        "async": false
+      },
+      {
+        "name": "clearSlot",
+        "line": 237,
+        "async": false
+      },
+      {
+        "name": "clearSave",
+        "line": 241,
+        "async": false
+      },
+      {
+        "name": "clearAllSlots",
+        "line": 242,
+        "async": false
+      },
+      {
+        "name": "preflightRunMap",
+        "line": 244,
+        "async": false
+      },
+      {
+        "name": "loadGame",
+        "line": 267,
+        "async": false
+      },
+      {
+        "name": "restoreGame",
+        "line": 282,
+        "async": false
+      },
+      {
+        "name": "grantStarterSha",
+        "line": 415,
+        "async": false
+      },
+      {
+        "name": "newRun",
+        "line": 435,
+        "async": false
+      },
+      {
+        "name": "enterLayer",
+        "line": 523,
+        "async": false
+      }
+    ],
+    "riskAnchors": [
+      {
+        "name": "SDT.Base.save",
+        "line": 92
+      },
+      {
+        "name": "recordBaseSaveForLoad",
+        "line": 92
+      },
+      {
+        "name": "blocksSaveForPendingBattleSettlement",
+        "line": 191
+      },
+      {
+        "name": "createRunSavePayload",
+        "line": 197
+      },
+      {
+        "name": "RunStorage.write",
+        "line": 202
+      },
+      {
+        "name": "RunStorage.lastWriteIssue",
+        "line": 203
+      },
+      {
+        "name": "RunStorage.lastWriteIssue",
+        "line": 205
+      },
+      {
+        "name": "recordBaseSaveForLoad",
+        "line": 233
+      },
+      {
+        "name": "RunStorage.remove",
+        "line": 238
+      },
+      {
+        "name": "RunStorage.remove",
+        "line": 241
+      },
+      {
+        "name": "RunStorage.readForPreflight",
+        "line": 247
+      },
+      {
+        "name": "validateRunSave",
+        "line": 252
+      },
+      {
+        "name": "saveBaseForLoad",
+        "line": 322
+      },
+      {
+        "name": "recordBaseSaveForLoad",
+        "line": 349
+      },
+      {
+        "name": "saveGame",
+        "line": 377
+      },
+      {
+        "name": "saveGame",
+        "line": 392
+      },
+      {
+        "name": "saveGame",
+        "line": 548
+      }
+    ]
+  },
+  {
+    "file": "game/src/run/game.session.kernel.js",
+    "lines": 75,
+    "bytes": 3445,
+    "functions": [
+      {
+        "name": "configureGameRuntime",
+        "line": 31,
+        "async": false
+      },
+      {
+        "name": "requestClassChoice",
+        "line": 40,
+        "async": false
+      }
+    ],
+    "riskAnchors": []
+  },
+  {
+    "file": "game/src/run/game.session.map.js",
+    "lines": 96,
+    "bytes": 5157,
+    "functions": [
+      {
+        "name": "clampIndex",
+        "line": 18,
+        "async": false
+      },
+      {
+        "name": "installDerived",
+        "line": 23,
+        "async": false
+      },
+      {
+        "name": "buildDerived",
+        "line": 86,
+        "async": false
+      },
+      {
+        "name": "buildNewRunDerived",
+        "line": 90,
+        "async": false
+      }
+    ],
+    "riskAnchors": []
+  },
+  {
+    "file": "game/src/run/game.session.modes.js",
+    "lines": 28,
+    "bytes": 1591,
+    "functions": [],
+    "riskAnchors": []
+  },
+  {
+    "file": "game/version.json",
+    "lines": 4,
+    "bytes": 26,
+    "functions": [],
+    "riskAnchors": [],
+    "json": {
+      "kind": "object",
+      "keys": [
+        "version"
+      ],
+      "items": null
+    }
+  }
+]

@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "at": "2026-09-30T10:26:55.089Z",
+  "task": "workflow-completion-2026-09-30",
+  "method": "copy-original-before-revision",
+  "items": [
+    {
+      "source": "docs/production/qa/ACCEPTANCE-MATRIX.md",
+      "target": "docs/archive/workflow-completion-2026-09-30/originals/docs/production/qa/ACCEPTANCE-MATRIX.md",
+      "sha256": "21084123a023b1617f479f1ff05fd790ad72f2284dba112b8c35b9a483ed6115",
+      "replacedBy": "docs/WORKFLOW-TOOLS.md"
+    },
+    {
+      "source": "docs/production/engineering/MAKER-HANDBOOK.md",
+      "target": "docs/archive/workflow-completion-2026-09-30/originals/docs/production/engineering/MAKER-HANDBOOK.md",
+      "sha256": "39d23cbc584ee93b039fb0caf7cecf0cd93b50eb875e63bb900e227e47935006",
+      "replacedBy": "docs/WORKFLOW-TOOLS.md"
+    },
+    {
+      "source": "docs/agent-protocol.md",
+      "target": "docs/archive/workflow-completion-2026-09-30/originals/docs/agent-protocol.md",
+      "sha256": "67d6b9f98d18eaf7f19727a0fa518d95a959b6bcc3a161a3403a02afd6a9f0a5",
+      "replacedBy": "docs/WORKFLOW-TOOLS.md"
+    },
+    {
+      "source": "docs/quality-gates.md",
+      "target": "docs/archive/workflow-completion-2026-09-30/originals/docs/quality-gates.md",
+      "sha256": "9cd5c8dbf0f9c9647065fca3f23bfb06d6b511ed155cbbce148e05c6787da2ca",
+      "replacedBy": "docs/WORKFLOW-TOOLS.md"
+    },
+    {
+      "source": "docs/README.md",
+      "target": "docs/archive/workflow-completion-2026-09-30/originals/docs/README.md",
+      "sha256": "87ba4d361dd6f7017959e937e2b7e1e8f62edbe40498badf7ded500d069d2cb0",
+      "replacedBy": "docs/WORKFLOW-TOOLS.md"
+    },
+    {
+      "source": "docs/WORKFLOW-TOOLS.md",
+      "target": "docs/archive/workflow-completion-2026-09-30/originals/docs/WORKFLOW-TOOLS.md",
+      "sha256": "ed6bbf88acb03f44e4dbc782a2a2e1ffdbf094d1ac464727c7037dee0540f52a",
+      "replacedBy": "docs/WORKFLOW-TOOLS.md"
+    }
+  ],
+  "limits": [
+    "原文保持字节，内部相对链接仍以 source 原位置解释",
+    "本命令未修改源文件；替代状态由负责人核实并在现行入口注明"
+  ]
+}

@@ -1,0 +1,174 @@
+{
+  "repository": "https://github.com/PseudoMon/arknights-audio",
+  "branch": "global-server-voices",
+  "originals_unchanged": true,
+  "purpose": "Reference only; not licensed game assets",
+  "files": [
+    {
+      "file": "b_ui_whoosh.wav",
+      "source_path": "battle/b_ui/b_ui_whoosh.wav",
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_ui/b_ui_whoosh.wav",
+      "github_blob_sha": "55b98dbd0a1a3cb040088f172616d52a2ed29115",
+      "sha256": "56e699d2220c4580dfe1d5143d8593540dd8ce6a25c428cfef2df4ecac75ed35",
+      "bytes": 221912,
+      "decoded_duration_s": 1.258,
+      "decoded_peak_dbfs": -5.23,
+      "decode": "pass"
+    },
+    {
+      "file": "b_ui_mark.wav",
+      "source_path": "battle/b_ui/b_ui_mark.wav",
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_ui/b_ui_mark.wav",
+      "github_blob_sha": "5b78a8684b7b42b7125a9eb8a5b0215a417bee71",
+      "sha256": "5fb019f3b0a51ac77d2646147166309de38a9632a70055fd85fa43c2f4c82eb8",
+      "bytes": 137196,
+      "decoded_duration_s": 0.778,
+      "decoded_peak_dbfs": -2.93,
+      "decode": "pass"
+    },
+    {
+      "file": "b_ui_alarmenter.wav",
+      "source_path": "battle/b_ui/b_ui_alarmenter.wav",
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_ui/b_ui_alarmenter.wav",
+      "github_blob_sha": "b2ce98321dbb29733681d32ea855e4bbbefb1564",
+      "sha256": "20914352c86018d10df00272e8e8d35163cd5b86fb3ed64feae9721c29a4b8e1",
+      "bytes": 245240,
+      "decoded_duration_s": 1.39,
+      "decoded_peak_dbfs": -10.38,
+      "decode": "pass"
+    },
+    {
+      "file": "b_ui_rewardappear.wav",
+      "source_path": "battle/b_ui/b_ui_rewardappear.wav",
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_ui/b_ui_rewardappear.wav",
+      "github_blob_sha": "f8f0b0269d66a24009703b429a73e4979feb178a",
+      "sha256": "03109ef89170577407410f6fb8e12cda7c89f9e60fd794eab130abbfd16b1cf4",
+      "bytes": 135740,
+      "decoded_duration_s": 0.707,
+      "decoded_peak_dbfs": -16.72,
+      "decode": "pass"
+    },
+    {
+      "file": "b_ui_getcast.wav",
+      "source_path": "battle/b_ui/b_ui_getcast.wav",
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_ui/b_ui_getcast.wav",
+      "github_blob_sha": "8d9ab063494d9b2889c16e860f7dd7add44cc8de",
+      "sha256": "8307c0ac7e1248b251f3121fefd3782d134d3474857206d25e3e63d700ccd8c5",
+      "bytes": 71792,
+      "decoded_duration_s": 0.407,
+      "decoded_peak_dbfs": -15.8,
+      "decode": "pass"
+    },
+    {
+      "file": "b_char_atkboost.wav",
+      "source_path": "battle/b_char/b_char_atkboost.wav",
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_char/b_char_atkboost.wav",
+      "github_blob_sha": "52b953de0e6cdcda303352fd39011f6e0fe11d30",
+      "sha256": "c870fb27f51fb1bf74e4710075603fac0a879a0b8ac80071db94bdd21bb29404",
+      "bytes": 373568,
+      "decoded_duration_s": 2.118,
+      "decoded_peak_dbfs": 0.01,
+      "decode": "pass"
+    },
+    {
+      "file": "b_char_dead.wav",
+      "source_path": "battle/b_char/b_char_dead.wav",
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_char/b_char_dead.wav",
+      "github_blob_sha": "e64513dacf94ab633f0b445a56888fed34ff9f90",
+      "sha256": "3b1700a1fdbe7d0355df4892c325e8492c4f7e9e09b7274f880f009a80533279",
+      "bytes": 342140,
+      "decoded_duration_s": 1.939,
+      "decoded_peak_dbfs": -1.74,
+      "decode": "pass"
+    },
+    {
+      "file": "d_avg_button.wav",
+      "source_path": "avg/d_avg_button.wav",
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_button.wav",
+      "github_blob_sha": "1b17656d8b359b72d79b91a04a96083a3e60e587",
+      "sha256": "0e692fad8e305e679d91039cb119f8c098c4f0d06e92f020391aa09707680f03",
+      "bytes": 52916,
+      "decoded_duration_s": 0.275,
+      "decoded_peak_dbfs": -0.0,
+      "decode": "pass"
+    },
+    {
+      "file": "d_avg_shufflecards.wav",
+      "source_path": "avg/d_avg_shufflecards.wav",
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_shufflecards.wav",
+      "github_blob_sha": "82db27ebc08c5de7799a83640521dfdc66f93167",
+      "sha256": "b518c179879c467b2fd41e95d12dbea890a1a588be49f42f5ae09e5a278022fb",
+      "bytes": 655048,
+      "decoded_duration_s": 3.411,
+      "decoded_peak_dbfs": -9.94,
+      "decode": "pass"
+    },
+    {
+      "file": "d_gen_transmissionget.wav",
+      "source_path": "avg/d_gen_transmissionget.wav",
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_gen_transmissionget.wav",
+      "github_blob_sha": "50eced9e8cbb96b8b7c06404265bd39f1e9da335",
+      "sha256": "b470f40fbdb8f9c0b9d60866529dcf1ad2d55cdf30ecd92f5fa5bd78d08a74bd",
+      "bytes": 292584,
+      "decoded_duration_s": 1.658,
+      "decoded_peak_dbfs": -9.9,
+      "decode": "pass"
+    }
+  ],
+  "preview": {
+    "duration_s": 22.441,
+    "markers": [
+      {
+        "file": "b_ui_whoosh.wav",
+        "start_s": 0.5,
+        "excerpt_duration_s": 1.258
+      },
+      {
+        "file": "b_ui_mark.wav",
+        "start_s": 2.558,
+        "excerpt_duration_s": 0.778
+      },
+      {
+        "file": "b_ui_alarmenter.wav",
+        "start_s": 4.135,
+        "excerpt_duration_s": 1.39
+      },
+      {
+        "file": "b_ui_rewardappear.wav",
+        "start_s": 6.325,
+        "excerpt_duration_s": 0.707
+      },
+      {
+        "file": "b_ui_getcast.wav",
+        "start_s": 7.832,
+        "excerpt_duration_s": 0.407
+      },
+      {
+        "file": "b_char_atkboost.wav",
+        "start_s": 9.039,
+        "excerpt_duration_s": 2.118
+      },
+      {
+        "file": "b_char_dead.wav",
+        "start_s": 11.956,
+        "excerpt_duration_s": 1.939
+      },
+      {
+        "file": "d_avg_button.wav",
+        "start_s": 14.696,
+        "excerpt_duration_s": 0.275
+      },
+      {
+        "file": "d_avg_shufflecards.wav",
+        "start_s": 15.771,
+        "excerpt_duration_s": 3.411
+      },
+      {
+        "file": "d_gen_transmissionget.wav",
+        "start_s": 19.982,
+        "excerpt_duration_s": 1.658
+      }
+    ],
+    "note": "At most first four seconds each; preview-only peak adjustment and edge fades"
+  }
+}

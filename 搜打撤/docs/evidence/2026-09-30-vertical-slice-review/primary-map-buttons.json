@@ -1,0 +1,46 @@
+[
+  {
+    "attributes": [
+      [
+        "id",
+        "btnLocate"
+      ]
+    ],
+    "id": "btnLocate",
+    "visibleText": ""
+  },
+  {
+    "attributes": [
+      [
+        "id",
+        "btnHome"
+      ],
+      [
+        "class",
+        "exit-btn"
+      ]
+    ],
+    "id": "btnHome",
+    "visibleText": ""
+  },
+  {
+    "attributes": [
+      [
+        "id",
+        "btnHelp"
+      ]
+    ],
+    "id": "btnHelp",
+    "visibleText": ""
+  },
+  {
+    "attributes": [
+      [
+        "id",
+        "btnMute"
+      ]
+    ],
+    "id": "btnMute",
+    "visibleText": ""
+  }
+]

@@ -1,0 +1,25 @@
+{
+  "kind": "state-only-invariant-probe",
+  "at": "2026-09-30T14:11:49.595Z",
+  "operation": "update-own-task-record",
+  "file": "docs/evidence/2026-09-30-lean-workflow/task.json",
+  "before": {
+    "code": "92434fc44d21c40d9b4d1c6720abafab6ca73c3b30efb26603e6a6271cc65405",
+    "docs": "61f669238137bd90f314f56c18c69b18a89cf522e1df40cb1d8082b046ea61d2",
+    "state": "70550330c62f29e8c072e6bd74f56285456c579ade0fced216d78c01f62a6b55",
+    "environment": "cb19a2702594371cdaedd1acd02db9cbb36cc292d4d25fec80fece9265c06538"
+  },
+  "after": {
+    "code": "92434fc44d21c40d9b4d1c6720abafab6ca73c3b30efb26603e6a6271cc65405",
+    "docs": "61f669238137bd90f314f56c18c69b18a89cf522e1df40cb1d8082b046ea61d2",
+    "state": "fd7a548fcb5839ff8fa7afa55ab228e742c999f719c11a77e000bc4dfbf7499e",
+    "environment": "cb19a2702594371cdaedd1acd02db9cbb36cc292d4d25fec80fece9265c06538"
+  },
+  "unchanged": {
+    "code": true,
+    "docs": true,
+    "state": false,
+    "environment": true
+  },
+  "stateOnlyChanged": true
+}

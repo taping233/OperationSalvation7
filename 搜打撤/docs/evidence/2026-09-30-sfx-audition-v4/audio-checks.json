@@ -1,0 +1,108 @@
+{
+  "source": "Deterministic procedural synthesis; no imported audio samples",
+  "sounds": [
+    {
+      "file": "01-ui-click.wav",
+      "label": "按钮点击",
+      "description": "原创双触点确认；微颗粒、短中频触感。",
+      "duration_s": 0.26,
+      "channels": 2,
+      "sample_rate": 48000,
+      "format": "WAV PCM_24",
+      "peak_dbfs": -9.5,
+      "true_peak_dbfs_4x": -9.39,
+      "rms_dbfs": -31.63,
+      "tail_peak_dbfs": -138.47,
+      "dc_offset": -3.0456196803313034e-05,
+      "sha256": "07ac7cc556d124a6b9ce1be9b78ba24c98d028b3b32c7c1c3122298a7262cce3"
+    },
+    {
+      "file": "02-card-play.wav",
+      "label": "出牌",
+      "description": "原创分段滑移、短扣合和细小尾音。",
+      "duration_s": 0.56,
+      "channels": 2,
+      "sample_rate": 48000,
+      "format": "WAV PCM_24",
+      "peak_dbfs": -8.0,
+      "true_peak_dbfs_4x": -7.97,
+      "rms_dbfs": -30.11,
+      "tail_peak_dbfs": -138.47,
+      "dc_offset": 1.0091015359475499e-05,
+      "sha256": "4daf790f1007d425236c5b6299d54f37c5177bee0514c33205119f87020baaa2"
+    },
+    {
+      "file": "03-attack-impact.wav",
+      "label": "攻击命中",
+      "description": "原创合成弹性冲击、微碎屑、短回弹。",
+      "duration_s": 0.69,
+      "channels": 2,
+      "sample_rate": 48000,
+      "format": "WAV PCM_24",
+      "peak_dbfs": -6.8,
+      "true_peak_dbfs_4x": -6.79,
+      "rms_dbfs": -27.58,
+      "tail_peak_dbfs": -138.47,
+      "dc_offset": 1.7559915277117117e-05,
+      "sha256": "f04001a525087b55eb4da67b04e80480fe4afe0dd81eef6f174bd1e501788a56"
+    },
+    {
+      "file": "04-event-enter.wav",
+      "label": "进入事件",
+      "description": "原创三段断续扫描、双信号触点、冷色残响。",
+      "duration_s": 1.45,
+      "channels": 2,
+      "sample_rate": 48000,
+      "format": "WAV PCM_24",
+      "peak_dbfs": -8.5,
+      "true_peak_dbfs_4x": -8.47,
+      "rms_dbfs": -24.98,
+      "tail_peak_dbfs": -89.69,
+      "dc_offset": 8.959254656714954e-07,
+      "sha256": "11abe6ed1659bfdbdf1e25e4fc77598788632e1df9c0487da175e513ece28759"
+    },
+    {
+      "file": "05-boss-reveal.wav",
+      "label": "首脑登场",
+      "description": "原创三段递进封印声与暗色场域。",
+      "duration_s": 1.93,
+      "channels": 2,
+      "sample_rate": 48000,
+      "format": "WAV PCM_24",
+      "peak_dbfs": -7.5,
+      "true_peak_dbfs_4x": -7.49,
+      "rms_dbfs": -25.98,
+      "tail_peak_dbfs": -108.93,
+      "dc_offset": 2.8306730927992773e-05,
+      "sha256": "dc7ef22d6c95f8a4d73b2961e4ed52080a42aa695dcbc8b8b0479b4b17b9a007"
+    }
+  ],
+  "montage_markers": [
+    {
+      "label": "按钮点击",
+      "start_s": 0.45,
+      "repeats": 3
+    },
+    {
+      "label": "出牌",
+      "start_s": 3.22,
+      "repeats": 3
+    },
+    {
+      "label": "攻击命中",
+      "start_s": 6.89,
+      "repeats": 3
+    },
+    {
+      "label": "进入事件",
+      "start_s": 10.95,
+      "repeats": 2
+    },
+    {
+      "label": "首脑登场",
+      "start_s": 15.46,
+      "repeats": 2
+    }
+  ],
+  "montage_duration_s": 20.93
+}

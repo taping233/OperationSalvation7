@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "id": "lean-workflow",
+  "date": "2026-09-30",
+  "owner": "Friday",
+  "goal": "将日常流程压成定任务、改动、相关验收、收官，减少重复记账与无效重验",
+  "paths": [
+    "scripts/workflow.mjs",
+    "scripts/workflow-evidence.mjs",
+    "scripts/workflow-task.mjs",
+    "scripts/workflow-status.mjs",
+    "scripts/handoff-brief.mjs",
+    "scripts/acceptance-gate.mjs",
+    "tests/workflow-scope.test.js",
+    "tests/workflow-task.test.js",
+    "tests/workflow-handoff.test.js",
+    "tests/acceptance-gate.test.js",
+    "docs/WORKFLOW-TOOLS.md",
+    "docs/STATUS.md",
+    "docs/SPEC-PROCESS.md",
+    "docs/quality-gates.md",
+    "docs/README.md"
+  ],
+  "doneWhen": [
+    "仅状态台账变化不使通过的代码证据失效",
+    "任务执行状态只维护在task.json，摘要从记录生成",
+    "按任务接手只列相关信息并注明省略数量"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "report",
+      "report": "docs/evidence/2026-09-30-lean-workflow/2026-09-30T13-57-55.758Z-80d9f8a9.json",
+      "result": "passed",
+      "sha256": "a4813a411f010fccfe82ba521e7f4fe46320d13a1064d8376ea191cf40b02875",
+      "verification": "recorded-result-only-not-current-freshness"
+    },
+    {
+      "kind": "manual",
+      "description": "metadata-invariant-probe.json实际更新唯一任务记录：代码/文档/环境指纹不变，只有状态指纹变化；满足状态不使代码证据失效条件",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "handoff-focused.txt为12行，相关变更与省略数量明确；docs-check.json现行43文件306链接无现行问题；流程脚本路径选择为quick直接测试",
+      "result": "passed"
+    },
+    {
+      "kind": "report",
+      "report": "docs/evidence/2026-09-30-lean-workflow/2026-09-30T14-02-17.310Z-6983b3e4.json",
+      "result": "unverified",
+      "sha256": "b6e84da390e93ebeeea799356b2ed14d4b566d3236e026e1106c872500148707",
+      "verification": "recorded-result-only-not-current-freshness"
+    }
+  ],
+  "unverified": [
+    "完整门255文件/2071项通过、2跳过，但期间音效会话修改自己的CSS/JS，不能将该报告当作源码稳定的全量缓存；本轮自有直接契约59项报告运行稳定，后续代码差异仅音效会话，不复跑其范围"
+  ],
+  "updatedAt": "2026-09-30T14:15:56.563Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

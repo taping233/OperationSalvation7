@@ -1,0 +1,14 @@
+{
+  "platform": "Codex In-app Browser",
+  "url": "http://127.0.0.1:5342/",
+  "inputKind": "native-click",
+  "scope": "主菜单→空档5→基地→整备→人物出发→补给→地图→刷新→继续对局",
+  "unverified": [
+    "第四层实玩",
+    "真实玩家旧档",
+    "实页损坏注入",
+    "全局逐行审计"
+  ],
+  "dom": "- complementary:\n  - img \"无\"\n  - generic \"已探明区域简图\"\n  - generic: 行动 · 价值\n  - generic: \"0\"\n  - emphasis: /\n  - generic: \"0\"\n  - generic: 下一步 · 1 条路线\n  - generic: 下一层闸门在东北方向 · 直线约 4 格 · 沿路搜集补给\n  - group \"可前往的相邻节点\":\n    - button \"遭遇战（节点 2）\":\n      - generic: 遭遇战\n      - generic: 准备迎敌 · 胜利后搜刮\n      - generic: ↗\n  - text: 点击路线或地图亮环前进\n  - generic: Space 选择 · X 确认 · B 背包\n- main:\n  - generic: 第1层 · 外围荒地\n  - generic: Layer 1 · Outer Wastes\n  - navigation \"远征章节\":\n    - generic: EXPEDITION / 01\n    - list:\n      - generic: \"01\"\n      - text: 第1层 · 外围荒地\n      - generic: \"02\"\n      - text: 第2层 · 风雪哨线\n      - generic: 常规\n      - generic: \"03\"\n      - text: 第3层 · 冻土遗迹\n      - generic: 高危 · 精英 3%\n      - generic: \"04\"\n      - text: 第4层 · 污染核心\n      - generic: 极高危 · 精英 10%\n  - generic: \"0\"\n  - generic: \"4\"\n  - button:\n  - button:\n  - button:\n  - button:\n  - generic: 当前生命\n  - generic: 35/35\n  - button \"背包 3/16\":\n    - generic: 背包\n    - generic: 3/16\n  - generic \"行动记录\":\n    - button \"▾ 行动记录\"\n    - img \"download\"\n    - text: 已读取【档位 5】存档\n    - generic: —— 置身 第1层 · 外围荒地（外围入口）——\n    - img \"archive\"\n    - text: 已进入 档位 5（基地与进度独立保存到该档位）\n- generic: 3/16\n- generic: 背包\n- generic: \"0\"\n- generic: 消耗袋\n- generic: \"0\"\n- generic: 随身币·暂无离局点\n- generic: \"2\"\n- generic: 带出预估·张\n- generic: 格=种类数 · 预估按张数 · 消耗卡撤离每张 1/3 概率带回（火堆可复原）",
+  "logs": []
+}

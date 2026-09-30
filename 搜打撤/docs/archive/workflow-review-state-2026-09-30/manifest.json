@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "at": "2026-09-30T15:19:56.597Z",
+  "task": "workflow-review-state-2026-09-30",
+  "method": "copy-original-before-revision",
+  "items": [
+    {
+      "source": "docs/production/management/ITERATION-BOARD.md",
+      "target": "docs/archive/workflow-review-state-2026-09-30/originals/docs/production/management/ITERATION-BOARD.md",
+      "sha256": "b9030800aedfdecab862d3d82e4543b655156224773e0ff84998b435e59912db",
+      "replacedBy": "docs/WORKFLOW-TOOLS.md"
+    },
+    {
+      "source": "docs/production/management/DECISIONS.md",
+      "target": "docs/archive/workflow-review-state-2026-09-30/originals/docs/production/management/DECISIONS.md",
+      "sha256": "5c0c38a28fca3ba0fabb2fa4825368aebe6a031715c5e0fbb56be0131a5e77a0",
+      "replacedBy": "docs/WORKFLOW-TOOLS.md"
+    }
+  ],
+  "limits": [
+    "原文保持字节，内部相对链接仍以 source 原位置解释",
+    "本命令未修改源文件；替代状态由负责人核实并在现行入口注明"
+  ]
+}

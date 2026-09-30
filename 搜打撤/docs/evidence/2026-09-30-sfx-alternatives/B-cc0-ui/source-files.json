@@ -1,0 +1,144 @@
+[
+  {
+    "key": "uisfx__mechanical__press.ogg",
+    "pack": "uisfx-mechanical",
+    "sourceUrl": "https://raw.githubusercontent.com/romainsimon/uisfx/9950fe66f993a6660dab9c2651dcbcd899ffd83b/packages/uisfx/sounds/mechanical/press.ogg",
+    "repositoryCommit": "9950fe66f993a6660dab9c2651dcbcd899ffd83b",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://raw.githubusercontent.com/romainsimon/uisfx/9950fe66f993a6660dab9c2651dcbcd899ffd83b/LICENSE-AUDIO",
+    "licenseFile": "UI-SFX-LICENSE-AUDIO.txt",
+    "sha256": "c8f9c636200cd23de8a2faed5cc78bb3736851b9151e392984300a31e6ba9138",
+    "upstreamCreation": "Existing procedurally generated audio files; no upstream recipes or code executed here."
+  },
+  {
+    "key": "uisfx__studio__check.ogg",
+    "pack": "uisfx-studio",
+    "sourceUrl": "https://raw.githubusercontent.com/romainsimon/uisfx/9950fe66f993a6660dab9c2651dcbcd899ffd83b/packages/uisfx/sounds/studio/check.ogg",
+    "repositoryCommit": "9950fe66f993a6660dab9c2651dcbcd899ffd83b",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://raw.githubusercontent.com/romainsimon/uisfx/9950fe66f993a6660dab9c2651dcbcd899ffd83b/LICENSE-AUDIO",
+    "licenseFile": "UI-SFX-LICENSE-AUDIO.txt",
+    "sha256": "45734a4fd1fee1973623041f47b165271fcbd3aa51a7b3c08db8534f721c3562",
+    "upstreamCreation": "Existing procedurally generated audio files; no upstream recipes or code executed here."
+  },
+  {
+    "key": "casino-audio__card-slide-4.ogg",
+    "pack": "casino-audio",
+    "packPage": "https://kenney.nl/assets/casino-audio",
+    "sourceUrl": "https://kenney.nl/media/pages/assets/casino-audio/2472606a04-1721639069/kenney_casino-audio.zip",
+    "archiveEntry": "Audio/card-slide-4.ogg",
+    "license": "CC0-1.0",
+    "licenseFile": "casino-audio-License.txt",
+    "sha256": "b9c82bcdbe6b7d00a06e2546bd2683a9ab082ca5fd090a42882f33eddd925b7f"
+  },
+  {
+    "key": "casino-audio__card-place-2.ogg",
+    "pack": "casino-audio",
+    "packPage": "https://kenney.nl/assets/casino-audio",
+    "sourceUrl": "https://kenney.nl/media/pages/assets/casino-audio/2472606a04-1721639069/kenney_casino-audio.zip",
+    "archiveEntry": "Audio/card-place-2.ogg",
+    "license": "CC0-1.0",
+    "licenseFile": "casino-audio-License.txt",
+    "sha256": "903d5050718595e87864dd755643b476ab1a5533080dcc2dddc72570d33ba9f8"
+  },
+  {
+    "key": "rpg-audio__knifeSlice2.ogg",
+    "pack": "rpg-audio",
+    "packPage": "https://kenney.nl/assets/rpg-audio",
+    "sourceUrl": "https://kenney.nl/media/pages/assets/rpg-audio/8e99002d76-1677590336/kenney_rpg-audio.zip",
+    "archiveEntry": "Audio/knifeSlice2.ogg",
+    "license": "CC0-1.0",
+    "licenseFile": "rpg-audio-License.txt",
+    "sha256": "6c2064d0ef988d1ec3d56868e823ea8823a5cac00f2742560052633529407def"
+  },
+  {
+    "key": "rpg-audio__metalLatch.ogg",
+    "pack": "rpg-audio",
+    "packPage": "https://kenney.nl/assets/rpg-audio",
+    "sourceUrl": "https://kenney.nl/media/pages/assets/rpg-audio/8e99002d76-1677590336/kenney_rpg-audio.zip",
+    "archiveEntry": "Audio/metalLatch.ogg",
+    "license": "CC0-1.0",
+    "licenseFile": "rpg-audio-License.txt",
+    "sha256": "ba9ba60b172b3ebc131a940f25793cd2e207aca7af73dc80d637277f060f1708"
+  },
+  {
+    "key": "rpg-audio__handleCoins2.ogg",
+    "pack": "rpg-audio",
+    "packPage": "https://kenney.nl/assets/rpg-audio",
+    "sourceUrl": "https://kenney.nl/media/pages/assets/rpg-audio/8e99002d76-1677590336/kenney_rpg-audio.zip",
+    "archiveEntry": "Audio/handleCoins2.ogg",
+    "license": "CC0-1.0",
+    "licenseFile": "rpg-audio-License.txt",
+    "sha256": "4b857968d64f9ac9336a10ffac6694d7547e1f01566ad6857b30bc8db3ee6c32"
+  },
+  {
+    "key": "impact-sounds__impactMetal_medium_002.ogg",
+    "pack": "impact-sounds",
+    "packPage": "https://kenney.nl/assets/impact-sounds",
+    "sourceUrl": "https://kenney.nl/media/pages/assets/impact-sounds/87b4ddecda-1677589768/kenney_impact-sounds.zip",
+    "archiveEntry": "Audio/impactMetal_medium_002.ogg",
+    "license": "CC0-1.0",
+    "licenseFile": "impact-sounds-License.txt",
+    "sha256": "7e89ce2ca0dbda95ea2b78d4b50791cab35c10d20e9f5ccd45dd0b00e99ff548"
+  },
+  {
+    "key": "impact-sounds__impactGlass_heavy_003.ogg",
+    "pack": "impact-sounds",
+    "packPage": "https://kenney.nl/assets/impact-sounds",
+    "sourceUrl": "https://kenney.nl/media/pages/assets/impact-sounds/87b4ddecda-1677589768/kenney_impact-sounds.zip",
+    "archiveEntry": "Audio/impactGlass_heavy_003.ogg",
+    "license": "CC0-1.0",
+    "licenseFile": "impact-sounds-License.txt",
+    "sha256": "aed07b154f24410c17e5262bbef832842fb275d41fe297f721af7501d0e9c23a"
+  },
+  {
+    "key": "impact-sounds__impactPunch_medium_002.ogg",
+    "pack": "impact-sounds",
+    "packPage": "https://kenney.nl/assets/impact-sounds",
+    "sourceUrl": "https://kenney.nl/media/pages/assets/impact-sounds/87b4ddecda-1677589768/kenney_impact-sounds.zip",
+    "archiveEntry": "Audio/impactPunch_medium_002.ogg",
+    "license": "CC0-1.0",
+    "licenseFile": "impact-sounds-License.txt",
+    "sha256": "6492f9ccbc8d24dcef607bb1b48790b7870961474561f7fe5601e1c73a3018ef"
+  },
+  {
+    "key": "sci-fi-sounds__explosionCrunch_003.ogg",
+    "pack": "sci-fi-sounds",
+    "packPage": "https://kenney.nl/assets/sci-fi-sounds",
+    "sourceUrl": "https://kenney.nl/media/pages/assets/sci-fi-sounds/6b296f9ecf-1677589334/kenney_sci-fi-sounds.zip",
+    "archiveEntry": "Audio/explosionCrunch_003.ogg",
+    "license": "CC0-1.0",
+    "licenseFile": "sci-fi-sounds-License.txt",
+    "sha256": "8c7197bb3a1c504690319c3abe0e62a5423ee246dd70caab57963d0b7aa8144f"
+  },
+  {
+    "key": "sci-fi-sounds__forceField_003.ogg",
+    "pack": "sci-fi-sounds",
+    "packPage": "https://kenney.nl/assets/sci-fi-sounds",
+    "sourceUrl": "https://kenney.nl/media/pages/assets/sci-fi-sounds/6b296f9ecf-1677589334/kenney_sci-fi-sounds.zip",
+    "archiveEntry": "Audio/forceField_003.ogg",
+    "license": "CC0-1.0",
+    "licenseFile": "sci-fi-sounds-License.txt",
+    "sha256": "15e3fe971ffd3415e5ab641d3a4d043fb31f6712b0956315b524ba29c3889cda"
+  },
+  {
+    "key": "sci-fi-sounds__doorOpen_001.ogg",
+    "pack": "sci-fi-sounds",
+    "packPage": "https://kenney.nl/assets/sci-fi-sounds",
+    "sourceUrl": "https://kenney.nl/media/pages/assets/sci-fi-sounds/6b296f9ecf-1677589334/kenney_sci-fi-sounds.zip",
+    "archiveEntry": "Audio/doorOpen_001.ogg",
+    "license": "CC0-1.0",
+    "licenseFile": "sci-fi-sounds-License.txt",
+    "sha256": "8c204ca94eb722d3af95f29221f4551938ca3c217fda32c14dabe2cf6a9c782b"
+  },
+  {
+    "key": "sci-fi-sounds__lowFrequency_explosion_001.ogg",
+    "pack": "sci-fi-sounds",
+    "packPage": "https://kenney.nl/assets/sci-fi-sounds",
+    "sourceUrl": "https://kenney.nl/media/pages/assets/sci-fi-sounds/6b296f9ecf-1677589334/kenney_sci-fi-sounds.zip",
+    "archiveEntry": "Audio/lowFrequency_explosion_001.ogg",
+    "license": "CC0-1.0",
+    "licenseFile": "sci-fi-sounds-License.txt",
+    "sha256": "cdda50600a4928f2f1b8371224d53c171ac799c1cf2c30b11999508985250b3b"
+  }
+]

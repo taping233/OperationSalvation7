@@ -1,0 +1,148 @@
+{
+  "sounds": [
+    {
+      "id": "click",
+      "label": "按钮点击",
+      "seconds": 0.23,
+      "true_peak_dbfs": -9.68,
+      "active_spectral_centroid_hz": 889,
+      "active_spectral_flatness": 0.0002,
+      "format": "48kHz stereo PCM_24",
+      "note": "短、干、贴近操作"
+    },
+    {
+      "id": "confirm",
+      "label": "操作确认",
+      "seconds": 0.48,
+      "true_peak_dbfs": -10.19,
+      "active_spectral_centroid_hz": 557,
+      "active_spectral_flatness": 0.0,
+      "format": "48kHz stereo PCM_24",
+      "note": "两段回应，有明确收束"
+    },
+    {
+      "id": "card",
+      "label": "出牌",
+      "seconds": 0.66,
+      "true_peak_dbfs": -8.19,
+      "active_spectral_centroid_hz": 2674,
+      "active_spectral_flatness": 0.0014,
+      "format": "48kHz stereo PCM_24",
+      "note": "纸张滑移，再落桌"
+    },
+    {
+      "id": "attackSlash",
+      "label": "斩击命中",
+      "seconds": 0.77,
+      "true_peak_dbfs": -6.06,
+      "active_spectral_centroid_hz": 734,
+      "active_spectral_flatness": 0.0002,
+      "format": "48kHz stereo PCM_24",
+      "note": "先挥刃，后命中"
+    },
+    {
+      "id": "parry",
+      "label": "金属格挡",
+      "seconds": 0.86,
+      "true_peak_dbfs": -8.49,
+      "active_spectral_centroid_hz": 512,
+      "active_spectral_flatness": 0.0,
+      "format": "48kHz stereo PCM_24",
+      "note": "截住攻击，留短余振"
+    },
+    {
+      "id": "shieldBreak",
+      "label": "护盾崩裂",
+      "seconds": 0.98,
+      "true_peak_dbfs": -8.2,
+      "active_spectral_centroid_hz": 2737,
+      "active_spectral_flatness": 0.0001,
+      "format": "48kHz stereo PCM_24",
+      "note": "先崩裂，再散成碎片"
+    },
+    {
+      "id": "heal",
+      "label": "治疗恢复",
+      "seconds": 1.22,
+      "true_peak_dbfs": -9.99,
+      "active_spectral_centroid_hz": 1368,
+      "active_spectral_flatness": 0.0002,
+      "format": "48kHz stereo PCM_24",
+      "note": "气流展开，平缓恢复"
+    },
+    {
+      "id": "eventEnter",
+      "label": "进入事件",
+      "seconds": 1.72,
+      "true_peak_dbfs": -8.69,
+      "active_spectral_centroid_hz": 262,
+      "active_spectral_flatness": 0.0,
+      "format": "48kHz stereo PCM_24",
+      "note": "空间打开，信息接入"
+    },
+    {
+      "id": "chestBurst",
+      "label": "宝箱开启",
+      "seconds": 1.4,
+      "true_peak_dbfs": -7.96,
+      "active_spectral_centroid_hz": 438,
+      "active_spectral_flatness": 0.0,
+      "format": "48kHz stereo PCM_24",
+      "note": "解锁、掀盖、奖励"
+    },
+    {
+      "id": "bossReveal",
+      "label": "首脑登场",
+      "seconds": 2.55,
+      "true_peak_dbfs": -6.79,
+      "active_spectral_centroid_hz": 156,
+      "active_spectral_flatness": 0.0,
+      "format": "48kHz stereo PCM_24",
+      "note": "预告、蓄势、到来"
+    }
+  ],
+  "preview_seconds": 17.87,
+  "markers": [
+    {
+      "label": "按钮点击",
+      "start_s": 0.5
+    },
+    {
+      "label": "操作确认",
+      "start_s": 1.38
+    },
+    {
+      "label": "出牌",
+      "start_s": 2.51
+    },
+    {
+      "label": "斩击命中",
+      "start_s": 3.82
+    },
+    {
+      "label": "金属格挡",
+      "start_s": 5.24
+    },
+    {
+      "label": "护盾崩裂",
+      "start_s": 6.75
+    },
+    {
+      "label": "治疗恢复",
+      "start_s": 8.38
+    },
+    {
+      "label": "进入事件",
+      "start_s": 10.25
+    },
+    {
+      "label": "宝箱开启",
+      "start_s": 12.62
+    },
+    {
+      "label": "首脑登场",
+      "start_s": 14.67
+    }
+  ],
+  "note": "Technical checks only; recognition and style need user audition"
+}

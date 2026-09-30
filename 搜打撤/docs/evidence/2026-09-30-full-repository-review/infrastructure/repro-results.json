@@ -1,0 +1,55 @@
+{
+  "fixtureOnly": true,
+  "liveBrowserUsed": false,
+  "realConfigRead": false,
+  "results": {
+    "cameraClick": {
+      "nodeUnderPointerAtDown": 1,
+      "selectedNodeAtUp": 2,
+      "physicalPointerMovementPx": 0,
+      "cameraGlideWhileIdle": true
+    },
+    "hydrate": {
+      "escapedInput": "<img id=\"injected\" src=\"missing\" onerror=\"window.auditInjected = true\"> 🎒",
+      "renderedHtml": "<img id=\"injected\" src=\"missing\" onerror=\"window.auditInjected = true\"> <img class=\"ic\" src=\"assets/ui/icons/bag.png\" alt=\"bag\" data-asset-key=\"icon-bag\" draggable=\"false\" loading=\"eager\" decoding=\"async\">",
+      "eventHandlerExecuted": true
+    },
+    "quickNav": {
+      "openedSettings": true,
+      "hiddenAfterClick": true,
+      "remainingActions": []
+    },
+    "driverRestore": {
+      "prior": "human",
+      "requested": "greedy",
+      "after": "greedy"
+    },
+    "llmFactory": {
+      "policy": "llm",
+      "configured": true,
+      "greedyCalls": 1,
+      "llmCalls": 0
+    },
+    "batchTimeout": {
+      "firstStopReason": "timeout",
+      "nextStopReason": "already-running",
+      "stopCalls": 0,
+      "cleanupCalls": 2
+    },
+    "portCleanup": {
+      "fixtureProcess": "unrelated listener 424242",
+      "commandsRecordedOnly": [
+        {
+          "command": "taskkill",
+          "args": [
+            "/pid",
+            "424242",
+            "/T",
+            "/F"
+          ]
+        }
+      ],
+      "identityQueryBeforeKill": false
+    }
+  }
+}

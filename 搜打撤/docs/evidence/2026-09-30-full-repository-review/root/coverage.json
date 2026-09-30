@@ -1,0 +1,1067 @@
+{
+  "owner": "root",
+  "files": [
+    {
+      "file": "game/data/achievements.json",
+      "owner": "root",
+      "depth": "systematic",
+      "snapshotSha256": "feda8996c2f7827f75d3b14769aff4feb3530acfe113f51a3a6fe8d2246de13c",
+      "lines": 282,
+      "review": "全文件JSON解析/结构索引；与现行消费者、数据门及引用核对，未逐条验证素材视觉或所有数值平衡。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/data/art-mapping.json",
+      "owner": "root",
+      "depth": "systematic",
+      "snapshotSha256": "c344115face1cb32ffc9e9d964ec27014cde1ec6ecf58ed337d91d9139d1378d",
+      "lines": 345,
+      "review": "全文件JSON解析/结构索引；与现行消费者、数据门及引用核对，未逐条验证素材视觉或所有数值平衡。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/data/card-notes.json",
+      "owner": "root",
+      "depth": "systematic",
+      "snapshotSha256": "61019fea1f1a74da04a93772b2aa51430b4a2480f6d1331c6ff3c3064f334df4",
+      "lines": 5,
+      "review": "全文件JSON解析/结构索引；与现行消费者、数据门及引用核对，未逐条验证素材视觉或所有数值平衡。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/data/map.json",
+      "owner": "root",
+      "depth": "systematic",
+      "snapshotSha256": "eb2d7147fcd422c06c64d09824a508a6272c166ba034802663087ed3b4dfdcb8",
+      "lines": 519,
+      "review": "全文件JSON解析/结构索引；与现行消费者、数据门及引用核对，未逐条验证素材视觉或所有数值平衡。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/data/pets.json",
+      "owner": "root",
+      "depth": "systematic",
+      "snapshotSha256": "3f9b1a714e1a6643b802a73cba270b92f9188ce307615251396177276894a20f",
+      "lines": 15,
+      "review": "全文件JSON解析/结构索引；与现行消费者、数据门及引用核对，未逐条验证素材视觉或所有数值平衡。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/data/scenes.json",
+      "owner": "root",
+      "depth": "systematic",
+      "snapshotSha256": "db4b986d110bae604a1ffefb99365040a0393c356b2dd7d4baf5ccac4db3bcf6",
+      "lines": 357,
+      "review": "全文件JSON解析/结构索引；与现行消费者、数据门及引用核对，未逐条验证素材视觉或所有数值平衡。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/selftest.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "8dd313c19ba790a0484ad2cdef6696bd692bc977b7fcb6c6627c307cfd091041",
+      "lines": 93,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/bag-return-hook.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "855b5c061bbf2c3aa57a4e2ba2f98849da3e2e8d98e7d17afee7c06c0081e9c9",
+      "lines": 13,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/base-departure.commands.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "bbe418b489490e7bf8ce90d0bfbc1dc5279ec504684a0283ed2e31ade2ffe72b",
+      "lines": 64,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/base-economy.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "d39b7920f233156b9c036d33e700fc61222e2eb103e83799f76b7c0d0316f21d",
+      "lines": 77,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/base-elapsed.commands.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "6b47872c47a2ec728025745a0e356dee9ef9e98b6a7a81ca9250b87c1180b514",
+      "lines": 41,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/base-meta.commands.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "43c53e3edf5d48dabb979e3c94d36788d17acfd3a5e74fc058ee5d898af0476a",
+      "lines": 141,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/base-mutation.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "88601f7a606e91275a692e929d96697b80ad88512b4ccf53b0a4ced14e6050f6",
+      "lines": 42,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/base-pet-egg.commands.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "928030288f3dac56c674de73e6f190a4158bf05c0b1962cc441152237c93ba7c",
+      "lines": 53,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/base-progression.commands.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "80c520a6179c650bab60315face2c0f52894a4622e5c92a83100b185ef9e4cbf",
+      "lines": 56,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/base-state.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "b8c3d762bee24980c2e50830165b5810e8e5b93bb1c65cf79df8cb624eb71d43",
+      "lines": 112,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/base.commands.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "b7bed97ec524345f308249f4d9791bafbae6fb25f2dfee025150d69792a700e6",
+      "lines": 128,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/base.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "075e2840baffcffff20175f3807fe7d41fdadcbf8e5732884e384085d41db1fe",
+      "lines": 677,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/battle-settlement.commands.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "7360ebd06f139c8e43510c1cd9d9556471f6532185c265618df8603fa289584e",
+      "lines": 262,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/battle-settlement.commands.types.d.ts",
+      "owner": "root",
+      "depth": "static-only",
+      "snapshotSha256": "269bd17f625fb6a47d834a054c1ddc735d681ecc71f87ac0e83117955b299fb2",
+      "lines": 152,
+      "review": "类型/版本/冻结写入口静态核对；未宣称冻结制作坊运行或依赖语义全验。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/battle-victory-progress.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "042797a9cf64528b6d29b2afbf6e302bf345df6093474899993a066c6b4b1ac9",
+      "lines": 58,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/collection.commands.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "f0077d56f5f2e0a117e64163e62f5559371e824750f51edb8d85471a3bf0f6b0",
+      "lines": 228,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/commands.shared.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "6100ca4b1f3624e49fd0c27a2b21373baeb462f50d1d84f13a85e3d6438ca88b",
+      "lines": 41,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/extraction.commands.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "de12dd3792a3f617ca925d001854c161f52fe7dc6080e7cad7f0310ce97b64e0",
+      "lines": 305,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/game.bag.bridge.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "cb117388a75f9e47d9803da31be7912dae443c586abbd6dcec096491061c6cf5",
+      "lines": 6,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/game.bag.drag.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "c54a793fc218c10fc18d11d2a5bcfd441695ed1054054b67282be73ae098dfd1",
+      "lines": 196,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/game.bag.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "cb410aaa84f3d392b8d13bcbf9059dcf19aa17b152c02a75b118e237fef25a6e",
+      "lines": 722,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/game.bag.rules.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "22f2044ce50d75fdef9a5826a4e4239eae8555555232f6a258f2c7c8198ec260",
+      "lines": 71,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/game.bag.settle.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "7b2d0b64d68f025a90ca9f33f5488f20cbe4e37fb7e8916047e95c5690f91ce1",
+      "lines": 370,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/game.cardslib.art-warm.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "bf00339bbed44a1d817b3a0839cdd5a3d3cdefd21bb4f54f406856fef7facd39",
+      "lines": 53,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/game.cardslib.common.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "19b8077345f7ebec10413d3b17057d9082c6215be3c659c8bdd985079298fece",
+      "lines": 49,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/game.cardslib.designer.js",
+      "owner": "root",
+      "depth": "static-only",
+      "snapshotSha256": "7991adb7c1a8e3de3266eec87b503491e6d9b65f27ca358685ebbba6f64b8cb5",
+      "lines": 374,
+      "review": "类型/版本/冻结写入口静态核对；未宣称冻结制作坊运行或依赖语义全验。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/game.cardslib.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "f1748ece01b870c41b2c9336287c4c2bb7617c2fdee9288276912b5cc54a650b",
+      "lines": 95,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/game.cardslib.page.js",
+      "owner": "root",
+      "depth": "systematic",
+      "snapshotSha256": "0b7e5facf81c417aeec9160ad3287c8c7bdd4d966b0a83420baa5ea7c15a5570",
+      "lines": 729,
+      "review": "全函数AST/风险入口索引与专项片段审阅，追页面生命周期、资源/字段消费者和副作用；呈现模板与全部交互组合未逐行全验。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/game.cardslib.photo-fps.js",
+      "owner": "root",
+      "depth": "systematic",
+      "snapshotSha256": "f088d8a2da767bb6491274dc9f2f8b6e6845743887fe1fee5bb1c035a854a500",
+      "lines": 96,
+      "review": "全函数AST/风险入口索引与专项片段审阅，追页面生命周期、资源/字段消费者和副作用；呈现模板与全部交互组合未逐行全验。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/game.cardslib.photo-props.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "f9e59c92f27ec7ab58c124b098f85a1ab98b9ae71421781bf520330375b4141a",
+      "lines": 41,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/game.hub.bridge.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "47c71b9495041258141c454370cca19bafe5a748f4fb2207a66705cc56e0abf0",
+      "lines": 8,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/game.hub.depart.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "89cf312ccea8610995a7cd19d0f3f28db882a5679ca07b32463d3abcbbc62dc9",
+      "lines": 358,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/game.hub.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "409d791383a1bf56310970dcbd56923fcab6c9741ef465a3af103bc739e3a319",
+      "lines": 386,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/game.hub.pages.js",
+      "owner": "root",
+      "depth": "systematic",
+      "snapshotSha256": "648ce07a04fc826e6fc2d54b669582706b457b7a46d5c31fecb7172f5939671a",
+      "lines": 654,
+      "review": "全函数AST/风险入口索引与专项片段审阅，追页面生命周期、资源/字段消费者和副作用；呈现模板与全部交互组合未逐行全验。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/game.hub.preparation.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "93260000aa62c12f4f51b5024dffe7b0e186fb20be355fbd885d92ca29f3a599",
+      "lines": 141,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/game.notes.js",
+      "owner": "root",
+      "depth": "systematic",
+      "snapshotSha256": "df0f8a3d9d80544ed46edfb161b81ba1b2ff3c783d2a2d71e3acde5e51ecd171",
+      "lines": 226,
+      "review": "全函数AST/风险入口索引与专项片段审阅，追页面生命周期、资源/字段消费者和副作用；呈现模板与全部交互组合未逐行全验。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/game.storage.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "4e9426fa9ec40988d90132305247295192eb7e7b4c24480151bbc4107e35f37c",
+      "lines": 233,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/game.store.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "824895256677e840582a43fe7ffdfc1bfa1a82dafb74da441d0ed8048f12df5a",
+      "lines": 96,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/game.store.types.d.ts",
+      "owner": "root",
+      "depth": "static-only",
+      "snapshotSha256": "ee02928575bd391b7223c94154bdc98e46c1786bbfad0280dece74930627dad5",
+      "lines": 153,
+      "review": "类型/版本/冻结写入口静态核对；未宣称冻结制作坊运行或依赖语义全验。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/meta-progression.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "b3033c3466f95142eaa221a2e2c28e2e38695d0a65d82cb15b9c3818d88d0de0",
+      "lines": 50,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/meta.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "f5e15267559dd5f88bd4b08a0f71251fbb91dbb84a79f02753013313862e630b",
+      "lines": 332,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/nest-settlement.commands.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "d9f56f2e54d19584d7b1fc713417205f75bf522d3539c1c4a0ea89088857ab63",
+      "lines": 187,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/photo-studio-presentation.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "b93af0e7507faa7e70bc0b4b0c13f7b2acee17b9a37620a3135192a228e750a5",
+      "lines": 19,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/preparation.commands.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "5f3733e503ad0a7465f4c61b4cac96ddb20ee9943039f72fff9b6782a99e802e",
+      "lines": 137,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/preparation.sources.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "b45078fb2c166ef0b0f502c7065e09ecbda5a84dd4736b37e3d539c7d67ffd3a",
+      "lines": 25,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/preparation.view.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "8fb5deb1dd49dfc471c7166c84ac72498fcd7089e6f2ad88c038704a1614a15f",
+      "lines": 68,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/recoverable-pair.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "b817a01f7961dda2eafb83e65f2fb7cde7836fc96b93a2bd119bc3bbb29bf8fd",
+      "lines": 147,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/recovery.commands.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "457ad8aee4756b7f85a31f22dbb7ec7fee24498be629e273b976c687fd327dac",
+      "lines": 179,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/run-save-validation.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "fd55bfffa0ea4c1b229a49bf9205522c82e5a4159fab8312d27ebc174daea4e9",
+      "lines": 92,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/terminal.commands.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "d0aceac2317893b092233bb3a13bf346eeb6528da2b10b30a9290f85ed2b9229",
+      "lines": 139,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/hub/versioned-slot-reader.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "4ca1a14dff44561122a48178deb3f43a4a33a8758e1de976c147dcb6094b689e",
+      "lines": 96,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/run/game.session.bag.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "655a936af21410617d6e7d7306cf283fda6119e9688c92f15c075530b5685b2b",
+      "lines": 127,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/run/game.session.board.js",
+      "owner": "root",
+      "depth": "systematic",
+      "snapshotSha256": "558f0d92456c383e4bcb0834d02185266ff316615a3ec8ef49ad5ee46f5927f9",
+      "lines": 109,
+      "review": "全函数AST/风险入口索引与专项片段审阅，追页面生命周期、资源/字段消费者和副作用；呈现模板与全部交互组合未逐行全验。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/run/game.session.browser.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "6990f34b05c0b1fe119723999171b6713c69b868d3fcb58d6b7f10bc57b7d34c",
+      "lines": 10,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/run/game.session.death.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "13dd9ee9e6222152ec71affa887a8093e5e171fc3ebad933239b4eacf92f2409",
+      "lines": 140,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/run/game.session.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "ceb05ee094cd9ac076e185f830478b2e0f0b641f1adf8d56160da0f54a1fc300",
+      "lines": 560,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/run/game.session.kernel.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "21fbc21de90762a2fdd4e57d5f2dff03bd0af4dc8e01cce7d9890728e0b455d4",
+      "lines": 75,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/run/game.session.map.js",
+      "owner": "root",
+      "depth": "systematic",
+      "snapshotSha256": "47452660d3e100cfc726989be28eefea8953e0acb84a0c02ae234c1f0c958035",
+      "lines": 96,
+      "review": "全函数AST/风险入口索引与专项片段审阅，追页面生命周期、资源/字段消费者和副作用；呈现模板与全部交互组合未逐行全验。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/src/run/game.session.modes.js",
+      "owner": "root",
+      "depth": "deep",
+      "snapshotSha256": "97bdd16eefa10e6b3e9144299f9920f62cafc15ab117ec2c3f55f05da33fb2a7",
+      "lines": 28,
+      "review": "模块逻辑阅读并追保存/状态/归属/容量/失败/幂等/装配消费者；上轮已完整读取且指纹未变的存档链复用有效源码与测试证据，新增容量/容器/预设疑点用实际模块复现。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    },
+    {
+      "file": "game/version.json",
+      "owner": "root",
+      "depth": "static-only",
+      "snapshotSha256": "94665dfeec69a32b128efa8162829561b99873d5bddd2fd79116ed1189aa5316",
+      "lines": 4,
+      "review": "全文件JSON解析/结构索引；与现行消费者、数据门及引用核对，未逐条验证素材视觉或所有数值平衡。",
+      "limitations": [
+        "审查不是所有分支实测；本轮未操作浏览器/玩家档，也未构建。"
+      ],
+      "evidence": [
+        "root/static-survey.json",
+        "root/repro.log",
+        "上一轮 mainline-review-fixes 完整门（仅基线参考）"
+      ]
+    }
+  ],
+  "counts": {
+    "deep": 50,
+    "systematic": 12,
+    "static-only": 4,
+    "not-reviewed": 0
+  }
+}

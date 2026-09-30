@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "at": "2026-09-30T13:20:24.693Z",
+  "task": "lean-workflow-2026-09-30",
+  "method": "copy-original-before-revision",
+  "items": [
+    {
+      "source": "docs/STATUS.md",
+      "target": "docs/archive/lean-workflow-2026-09-30/originals/docs/STATUS.md",
+      "sha256": "6122e26050d8033e6c79e4afab370e67f4b49cd3e75c6e6a57ed9389b8a8e2cb",
+      "replacedBy": "docs/WORKFLOW-TOOLS.md"
+    },
+    {
+      "source": "docs/WORKFLOW-TOOLS.md",
+      "target": "docs/archive/lean-workflow-2026-09-30/originals/docs/WORKFLOW-TOOLS.md",
+      "sha256": "bb2a2926baa67423a38cfa0aa4109af74ec90f5ab379c4921c40011878104bf0",
+      "replacedBy": "docs/WORKFLOW-TOOLS.md"
+    },
+    {
+      "source": "docs/SPEC-PROCESS.md",
+      "target": "docs/archive/lean-workflow-2026-09-30/originals/docs/SPEC-PROCESS.md",
+      "sha256": "422586f92dfdc05a55d6d9434327c0f94c3e8fd792421f8921639fa8c19fd050",
+      "replacedBy": "docs/WORKFLOW-TOOLS.md"
+    },
+    {
+      "source": "docs/README.md",
+      "target": "docs/archive/lean-workflow-2026-09-30/originals/docs/README.md",
+      "sha256": "148664e1bed4086fc80e35b00dc8043d0332ea3c1a321297d9292491de59cd44",
+      "replacedBy": "docs/WORKFLOW-TOOLS.md"
+    },
+    {
+      "source": "docs/quality-gates.md",
+      "target": "docs/archive/lean-workflow-2026-09-30/originals/docs/quality-gates.md",
+      "sha256": "d878e9147383c34609fee1b474b4733510ceec57f35e2234ac2a82da4bf84ead",
+      "replacedBy": "docs/WORKFLOW-TOOLS.md"
+    }
+  ],
+  "limits": [
+    "原文保持字节，内部相对链接仍以 source 原位置解释",
+    "本命令未修改源文件；替代状态由负责人核实并在现行入口注明"
+  ]
+}

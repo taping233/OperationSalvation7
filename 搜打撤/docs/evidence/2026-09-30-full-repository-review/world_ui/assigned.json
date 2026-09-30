@@ -1,0 +1,3305 @@
+[
+  {
+    "file": "README.md",
+    "owner": "root",
+    "category": "contract-document",
+    "tracked": true,
+    "sha256": "36ecb2b13e3f5b484909e82ef1ec1293052f4c8d3499614a2395053ecccec651",
+    "bytes": 3172,
+    "lines": 63
+  },
+  {
+    "file": "docs/BASE-DIRECT-WRITE-AUDIT-2026-09-29.md",
+    "owner": "root",
+    "category": "contract-document",
+    "tracked": true,
+    "sha256": "712f8e6134f3c056ab486613b37c2e831ad174efb38767c313e17c61e4cfde1e",
+    "bytes": 11402,
+    "lines": 100
+  },
+  {
+    "file": "docs/M-BATCH-EXCLUSIONS.md",
+    "owner": "root",
+    "category": "contract-document",
+    "tracked": true,
+    "sha256": "8f0f5d3f42a43546b08e2a5d35f1d89c385b64702d0944bf53fff0aba0042909",
+    "bytes": 9729,
+    "lines": 90
+  },
+  {
+    "file": "docs/M-BATCH-MATRIX.md",
+    "owner": "root",
+    "category": "contract-document",
+    "tracked": true,
+    "sha256": "6bfb6a9ea27af72f8b61818f314d70f49eb8b45ca1869dc661fd1aa53e642546",
+    "bytes": 51712,
+    "lines": 307
+  },
+  {
+    "file": "docs/README.md",
+    "owner": "root",
+    "category": "contract-document",
+    "tracked": true,
+    "sha256": "d5deb64f0b20a89bdb2364dbf9d42e00afc0b90d037217149a1024ab872121d1",
+    "bytes": 10946,
+    "lines": 98
+  },
+  {
+    "file": "docs/agent-protocol.md",
+    "owner": "root",
+    "category": "contract-document",
+    "tracked": true,
+    "sha256": "c4eaa226f7b8328bb74047a38088b21d4153248100130e09bef74d56d9cc9063",
+    "bytes": 10378,
+    "lines": 161
+  },
+  {
+    "file": "docs/architecture.md",
+    "owner": "root",
+    "category": "contract-document",
+    "tracked": true,
+    "sha256": "ed03c773c80ff6c3a22b005b13a370529af3159e74bc74b98e482a7413396c35",
+    "bytes": 17330,
+    "lines": 79
+  },
+  {
+    "file": "docs/audio-system.md",
+    "owner": "root",
+    "category": "contract-document",
+    "tracked": true,
+    "sha256": "8ca3e93bed129f8e4bbc61f8fe00bea9ee2c6dc47d110abc73b0e69b887004ef",
+    "bytes": 2023,
+    "lines": 14
+  },
+  {
+    "file": "docs/cards/README.md",
+    "owner": "root",
+    "category": "contract-document",
+    "tracked": true,
+    "sha256": "0554d4f4abcae5404fb470cf7331af2c67ccd61da5bbe8136fc9c568041258d8",
+    "bytes": 680,
+    "lines": 11
+  },
+  {
+    "file": "docs/development.md",
+    "owner": "root",
+    "category": "contract-document",
+    "tracked": true,
+    "sha256": "b99051cae532aed4377925e8ffe7d061f348e03043c063c0963a865f8ec14e76",
+    "bytes": 6043,
+    "lines": 54
+  },
+  {
+    "file": "docs/quality-gates.md",
+    "owner": "root",
+    "category": "contract-document",
+    "tracked": true,
+    "sha256": "dc7c56650130e23c507f159ca411e798036006396683d5bbe218c63e375d00df",
+    "bytes": 10558,
+    "lines": 77
+  },
+  {
+    "file": "docs/rules.md",
+    "owner": "root",
+    "category": "contract-document",
+    "tracked": true,
+    "sha256": "f38a14fd2f9ba3beff92518c1125402ba2f1d1548768ed43b5a22206f2066f9a",
+    "bytes": 7958,
+    "lines": 64
+  },
+  {
+    "file": "docs/save-format.md",
+    "owner": "root",
+    "category": "contract-document",
+    "tracked": true,
+    "sha256": "f9f0005e4563e30bf57275944899ae5b471facf220c05358cf282abc95eab72e",
+    "bytes": 8528,
+    "lines": 77
+  },
+  {
+    "file": "game/css/base.css",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "9eb35d5e541b243b76bfe1b2de75254009914135131fad0758164972a1bb09f4",
+    "bytes": 27604,
+    "lines": 414
+  },
+  {
+    "file": "game/css/battle.css",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "3e1c8d734781d55b8003bdb9eb946f4307b8a0dba3b133c5dc13817c5cc1529f",
+    "bytes": 51661,
+    "lines": 683
+  },
+  {
+    "file": "game/css/card-v3.css",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "8e3798847433d2316ff430c0c71abce6664934416d7e73f7dd096ddc997c0c57",
+    "bytes": 12518,
+    "lines": 206
+  },
+  {
+    "file": "game/css/cards.css",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "429d5e0209643d3d74839e9a636e2e8a12c72db5ae5b374e2b389feb4b23a56f",
+    "bytes": 26120,
+    "lines": 359
+  },
+  {
+    "file": "game/css/combat-feedback.css",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "90157af53f476b7f558afb4c05d00e887e8224d5217d475fcaa519dd23722476",
+    "bytes": 1262,
+    "lines": 25
+  },
+  {
+    "file": "game/css/expedition-battle.css",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "00820b720e062888c1eb18b4c65a844b68eb893178900551abc27c3a8f473f1c",
+    "bytes": 19253,
+    "lines": 190
+  },
+  {
+    "file": "game/css/expedition-hub.css",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "723a1b368db69194cbb2492ab8499a0b77c4584fc94cdf700702040692a9731f",
+    "bytes": 21390,
+    "lines": 240
+  },
+  {
+    "file": "game/css/expedition-inventory.css",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "c81993fc77c90cc5e3524cc9fc0c8fa347fe91438b2ad624b4e2d0168b59dec7",
+    "bytes": 19036,
+    "lines": 191
+  },
+  {
+    "file": "game/css/expedition-library.css",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "6cd8d53c9c674bb13988ec6194e9a350eee2d6f1c12ed5ba8bf62e3fe83ac5e0",
+    "bytes": 122462,
+    "lines": 2674
+  },
+  {
+    "file": "game/css/expedition-map.css",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "ff144fa8660d83a71d6ebc1ca82c9c7160eced75cdaf834da3314df592e90e9e",
+    "bytes": 6879,
+    "lines": 84
+  },
+  {
+    "file": "game/css/expedition-rewards.css",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "1504f9555b55dd5d8ec0ccbc7b65a4006456e56ff8f17508ad0568df0d1f087c",
+    "bytes": 9670,
+    "lines": 116
+  },
+  {
+    "file": "game/css/expedition-roster.css",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "3ddda20c5c82cd55da634d2ea758b7b6983b6a8c00e3cff55160a8e187075546",
+    "bytes": 28560,
+    "lines": 262
+  },
+  {
+    "file": "game/css/expedition-shop.css",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "13c20f58c17d4173654beed7ab6a4974204b5b5232858f6a3757627155aa6ff5",
+    "bytes": 18077,
+    "lines": 243
+  },
+  {
+    "file": "game/css/expedition.css",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "f6508eac220cc45e60c429a7393881566dc1a70d403e37cb8cb4a925429e03e8",
+    "bytes": 28910,
+    "lines": 493
+  },
+  {
+    "file": "game/css/experience-loot.css",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "ffaa906170f26ee4b2c18df8bd5caad7f5723cb4d51c09696c8c3f7081de69dc",
+    "bytes": 4105,
+    "lines": 92
+  },
+  {
+    "file": "game/css/home-scene.css",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "e3e3eb8e75fb2e070ab428ef4dcf646f4b13755ea4a4a495766e048d7d499493",
+    "bytes": 6690,
+    "lines": 2
+  },
+  {
+    "file": "game/css/hub.css",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "688091448d196fcbfa30efb10f10f3bf1e4d014efe4ec8b646c136e50f523a0b",
+    "bytes": 24320,
+    "lines": 306
+  },
+  {
+    "file": "game/css/lab-ending.css",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "4e394830598c02659fe272bb504bb5cf8e7f8ee02c2346e83951c1750d950e4f",
+    "bytes": 5853,
+    "lines": 92
+  },
+  {
+    "file": "game/css/overlays.css",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "f845b9b7a19949064e024a2ec33e118599bffe1e93018b0d4e4c145719df0838",
+    "bytes": 40533,
+    "lines": 546
+  },
+  {
+    "file": "game/css/page-ach.css",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "9c0d4c093593104cb7b3e6717e5b294ac2ee5ac532b03ba689b55c30586ff394",
+    "bytes": 28340,
+    "lines": 486
+  },
+  {
+    "file": "game/css/page-battle-ui.css",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "2af778b08618f5bec5ce0059a043105c86a7f7341a73b4aa4add145a13282608",
+    "bytes": 16200,
+    "lines": 305
+  },
+  {
+    "file": "game/css/page-cardforge.css",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "0ae5387f4c9bdeba52f736bb2bf93b36a073de76985f5c5f450ef5efae5a6842",
+    "bytes": 15189,
+    "lines": 286
+  },
+  {
+    "file": "game/css/page-cardslib.css",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "42c5483a5c46633c410ab2fa02df40ba4f806481e84b8933973344be4332c85c",
+    "bytes": 14406,
+    "lines": 253
+  },
+  {
+    "file": "game/css/page-classes.css",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "8f7f412fdd314fd330f9f5f3134f93d296f525179f711bb158022df4297de07c",
+    "bytes": 11069,
+    "lines": 212
+  },
+  {
+    "file": "game/css/page-datapage.css",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "cd19ba334fb1bb386d5b7ddf271599ac07e250ff2eda946c20f3c9a718c30ee4",
+    "bytes": 2030,
+    "lines": 31
+  },
+  {
+    "file": "game/css/page-deploy.css",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "5b07ba1a878cb1e864f5e582a6bacdf015d6bbea1ec870d643dc2c3df27c5006",
+    "bytes": 23389,
+    "lines": 451
+  },
+  {
+    "file": "game/css/page-events.css",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "1baf3b4d193d107ccd96d67d839699f7b66789aa919203c2a581e7bcbc3bcbd6",
+    "bytes": 12940,
+    "lines": 237
+  },
+  {
+    "file": "game/css/page-expedition-hud.css",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "9c4933bfb5c3b79f54d66d844838ef5b9f729c3cc3d5c418fd544ba892b73eed",
+    "bytes": 14148,
+    "lines": 273
+  },
+  {
+    "file": "game/css/page-hub.css",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "bcc3483ba76d0f0aa635bfab9edda6122d18e9895c2206a45d4a939893ff1719",
+    "bytes": 21518,
+    "lines": 406
+  },
+  {
+    "file": "game/css/page-rewards-bag-help.css",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "c192bf5ce0632ed986637acfe2a1da649bea5aa0bdbb3253a294ccb9095684d6",
+    "bytes": 40878,
+    "lines": 733
+  },
+  {
+    "file": "game/css/page-settings.css",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "babeac24acd26fd915f3de3785c5e78102132814f250f786d5de548fbb60e182",
+    "bytes": 24426,
+    "lines": 469
+  },
+  {
+    "file": "game/css/page-shop.css",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "86a7df4ce69c0a42cc9b50fb5ccf5765976055eac3141f4d2485670006b5beb3",
+    "bytes": 20035,
+    "lines": 350
+  },
+  {
+    "file": "game/css/page-slot-select.css",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "890a746ad2566fa65f32395a98f8a729b0f95238ffab8054c82628b9d6e0ccec",
+    "bytes": 17257,
+    "lines": 350
+  },
+  {
+    "file": "game/css/page-stash.css",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "65f9abae8ba1cde52a8cca0dc7d276b51f9684a8f2fb925b3875302b74c21bca",
+    "bytes": 19756,
+    "lines": 361
+  },
+  {
+    "file": "game/css/page-upgrade.css",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "8caef993b803399f45a3830b5e204e06e2633f3d1b27226e01f399c116841884",
+    "bytes": 14767,
+    "lines": 266
+  },
+  {
+    "file": "game/css/photo-studio-craft.css",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "6c70c15d72c159a10f256dd5cbded5080107848eabc82b0e16a13dae0576c248",
+    "bytes": 10179,
+    "lines": 194
+  },
+  {
+    "file": "game/css/photo-studio-mounts.css",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "0b2af0289d7bdebf3db8aa7764bca54fd02d312cca189bd8555b4a971511c187",
+    "bytes": 6728,
+    "lines": 119
+  },
+  {
+    "file": "game/css/pocket-strip.css",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "1a9c662718a4fa58e2d5010217b9b66ff67c9086120a27d7bd10e0a1bd1a8c9a",
+    "bytes": 4692,
+    "lines": 108
+  },
+  {
+    "file": "game/css/preparation.css",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "e3a41a537fce727dcdf209f428d7c33ac2d87483dcb3ce15084fc3c180866bcd",
+    "bytes": 7115,
+    "lines": 91
+  },
+  {
+    "file": "game/css/scenes.css",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "ea832d0aec9caddf8b602dd882ee13acc09c6512be89c5a3c34f15dc951ed338",
+    "bytes": 51303,
+    "lines": 658
+  },
+  {
+    "file": "game/css/title-p0.css",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "3a725507b7a892119a5f950f5275fa1219f3b8c95368c360bc5704ddbc346195",
+    "bytes": 11186,
+    "lines": 296
+  },
+  {
+    "file": "game/css/ui-scale.css",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "757508be23d0442d1d9837b9a8a85726469c291fae7547761a00ef617fbb5227",
+    "bytes": 2450,
+    "lines": 66
+  },
+  {
+    "file": "game/css/winter.css",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "f8c70a311027b102522a232d49be301b11c1cc356adf8d5b63e42e1aebda1fa9",
+    "bytes": 137296,
+    "lines": 1683
+  },
+  {
+    "file": "game/dev.html",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "d52fe522108a81b144942b82bafa0d71cfda8045d3805febd18b378392fabcd5",
+    "bytes": 18705,
+    "lines": 305
+  },
+  {
+    "file": "game/index.html",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "3c107be2311ce62b72b9d74a991369a1c5f9ab58e10fef3594cddea7262e6237",
+    "bytes": 24391,
+    "lines": 381
+  },
+  {
+    "file": "game/src/README.md",
+    "owner": "root",
+    "category": "contract-document",
+    "tracked": true,
+    "sha256": "b38790a52c967f439b084e9017278412f8b29ddca119eb266b58826b75f14687",
+    "bytes": 4127,
+    "lines": 42
+  },
+  {
+    "file": "game/src/experience/pocket-strip.js",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "8bb0cc27209ab814fa273d26b3457121543a1e4b99b3d2bc2a962c27a79bbd67",
+    "bytes": 7924,
+    "lines": 155
+  },
+  {
+    "file": "game/src/home/home.catalog.js",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "a0722309d6cdcec0e95f3a2c79b8cca3480a4482a468a000f491c75f7171b869",
+    "bytes": 2536,
+    "lines": 35
+  },
+  {
+    "file": "game/src/home/home.commands.js",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "e36ea8c36851c7b80047ef4374392f61a4184acb42782ab92ac93b5311fd9714",
+    "bytes": 10564,
+    "lines": 178
+  },
+  {
+    "file": "game/src/home/home.presenter.js",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "885923c89a44c237010830dbd037602c5bae1552fec40f65a03d30efc8066b88",
+    "bytes": 1577,
+    "lines": 40
+  },
+  {
+    "file": "game/src/home/home.scene.js",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "abbbd5aaabc4afae047302bc2e7bd62858fbc7a6386b1505e60b46dcbe957604",
+    "bytes": 22027,
+    "lines": 617
+  },
+  {
+    "file": "game/src/home/home.visuals.js",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "d2b08f30fabf9a98c1f2760dbe72de47586b1a6206b679418578098b3f759e1b",
+    "bytes": 8795,
+    "lines": 331
+  },
+  {
+    "file": "game/src/home/narrative.js",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "de497a1dd57cccaeeb7da97af2d27a6c84ea3a6eb11cc435110003e52e9647f2",
+    "bytes": 2775,
+    "lines": 77
+  },
+  {
+    "file": "game/src/home/story.commands.js",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "7f7e4c8220f85e686eb43a8c929cee3462c866c8584b210009a0cb7fc1fe8022",
+    "bytes": 1437,
+    "lines": 33
+  },
+  {
+    "file": "game/src/home/story.last-lamp.js",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "a6fc108087c51fe019ef1fa55a18bfeb7d101d9df0e5f8e6c783b688f6362994",
+    "bytes": 6549,
+    "lines": 111
+  },
+  {
+    "file": "game/src/run/chests.js",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "5c087a8e44cabb28b883cae73132fbd8467e90817e04e7b6e4d369ffbab51668",
+    "bytes": 25809,
+    "lines": 428
+  },
+  {
+    "file": "game/src/run/encounter-meta.js",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "a94baf84f82704dfe3e99b70e8550e16fc709465e9eb8d3e49835aae4e46ec72",
+    "bytes": 1964,
+    "lines": 36
+  },
+  {
+    "file": "game/src/run/encounter-selector.js",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "a7533515ede020fdb82a5dbf488dea9d411224b329239897085d1f45d8855398",
+    "bytes": 3591,
+    "lines": 52
+  },
+  {
+    "file": "game/src/run/expedition.view.js",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "49a5e5e8d8c696d4cda8955f426e8d730d8e15c0271d353bb261f80ad2f883fd",
+    "bytes": 7231,
+    "lines": 104
+  },
+  {
+    "file": "game/src/run/extraction-preview.js",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "0e486fdbe0f7e72cdb10e8bdfe763712aa4d879feed9c2cb61779f55ff043441",
+    "bytes": 2427,
+    "lines": 52
+  },
+  {
+    "file": "game/src/run/game.nest.js",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "78fc6570b04dd04ae800142d4b98ca81fd75b17019d400fbbd90663b70bb45d9",
+    "bytes": 35737,
+    "lines": 654
+  },
+  {
+    "file": "game/src/run/game.run.altar.js",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "fcbd39030181e018d9abd7cf88ec5eff67fced073084ec78efeb1e4f5e8a0046",
+    "bytes": 59275,
+    "lines": 967
+  },
+  {
+    "file": "game/src/run/game.run.data.js",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "1094fd186fbf65d674e9c2ba9652ea60f576ac8654bfb41dd6f043b0dbf02197",
+    "bytes": 3323,
+    "lines": 47
+  },
+  {
+    "file": "game/src/run/game.run.dev.js",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "47ca24edd9556730fea694b04edebfcae871b4ca000ecd58476b80199bf8abf8",
+    "bytes": 9721,
+    "lines": 177
+  },
+  {
+    "file": "game/src/run/game.run.flow.js",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "fff55434c0f6752482d415870cc0daa06720dc094887ebefc7458c318779398b",
+    "bytes": 45203,
+    "lines": 845
+  },
+  {
+    "file": "game/src/run/game.run.js",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "07d973d47b0e89e5fcb406e8b38f0fc811a18b29c6e2c19b408adc8c653702f5",
+    "bytes": 1149,
+    "lines": 23
+  },
+  {
+    "file": "game/src/run/game.run.scenes.js",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "ec0f447b06eb2fdb4abcfa1c9fb80457134bd8b04aad522f697845abb143b3f7",
+    "bytes": 18868,
+    "lines": 346
+  },
+  {
+    "file": "game/src/run/game.run.shop.js",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "60bbce02add251d78d4f7e865a9d73a64f3372b7936a57aba7b048346d4cf2bd",
+    "bytes": 26238,
+    "lines": 444
+  },
+  {
+    "file": "game/src/run/lab.ending.js",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "29dc8f581753d8075ae3468503cbf4f923c785730c6f04cc825533311fff9659",
+    "bytes": 3983,
+    "lines": 95
+  },
+  {
+    "file": "game/src/run/layeredMap.js",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "679e59f0cf4fb2c264ecf0838a1eda9b83ab315ed31b054b32f4816d5c18cd35",
+    "bytes": 1574,
+    "lines": 25
+  },
+  {
+    "file": "game/src/run/map-generator.js",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "091c65fb971fcd618e897b5fe812117e6783b7fb7ff667f1d767564460cad5ec",
+    "bytes": 22922,
+    "lines": 305
+  },
+  {
+    "file": "game/src/run/map-graph.js",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "8a10c1e835b0c6705738b14025958b96a6285078c91f59d1477657008fc06832",
+    "bytes": 3782,
+    "lines": 82
+  },
+  {
+    "file": "game/src/run/map-snapshot.js",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "3cbf6fbdcbf3537cfc7c15a53a47a50d9baa52b69b26b76b989b5e0716c2658a",
+    "bytes": 14868,
+    "lines": 180
+  },
+  {
+    "file": "game/src/ui/cinematics.js",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "cead9a9ab9338b8e3de1c20a12c6ee58388fada1b15d8384e76f50790ee9d8cb",
+    "bytes": 6147,
+    "lines": 130
+  },
+  {
+    "file": "game/src/ui/feedback.local.js",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "30fe859c07db972c5463a1804f0b922022e12a29845c1b2d8c2a74b8c749ef8a",
+    "bytes": 4966,
+    "lines": 91
+  },
+  {
+    "file": "game/src/ui/game.menu.js",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "485ac191b3e377a9acf346f75aed12ec8dc0ab7ec926a8fa144c0722006b0866",
+    "bytes": 67256,
+    "lines": 1095
+  },
+  {
+    "file": "game/src/ui/hud.js",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "bdd685001dc34514729264ba55cc709ceeed984c9d9c3cefda983f115e0c93f1",
+    "bytes": 8047,
+    "lines": 150
+  },
+  {
+    "file": "game/src/ui/overlay.js",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "20893ee4f421a9ee35f166fcc930d2d8abde383a7649987a9ec5793672e40dcd",
+    "bytes": 20340,
+    "lines": 351
+  },
+  {
+    "file": "game/src/ui/quick-nav.js",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "440eb0c6e3899afbd50372dca6c41c191d29ff792a1291b2c0d96cfd111df947",
+    "bytes": 3099,
+    "lines": 74
+  },
+  {
+    "file": "game/src/ui/route-overlay.js",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "11f424666eb8c2ee4f4102540217a4fa5a118cbcdc8d0b98d4cfc075f8058599",
+    "bytes": 4402,
+    "lines": 78
+  },
+  {
+    "file": "game/src/ui/term-tips.js",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "adf8eb9347f3656bb0368f1bf5547e9f91db299f144053ee56b8f645f1b2e12a",
+    "bytes": 8313,
+    "lines": 123
+  },
+  {
+    "file": "game/src/ui/terminal-settlement.js",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "c4c551ee636dc13f15f4665f9dc53f8a4c45b74205c98c30df3ac50490ee811f",
+    "bytes": 2634,
+    "lines": 49
+  },
+  {
+    "file": "game/src/ui/ui-scale.js",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "d41f906c554f8c3ed3634d13a866d6f443b079345b886c66a99ab56579c75ebc",
+    "bytes": 3130,
+    "lines": 60
+  },
+  {
+    "file": "game/src/ui/ui.js",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "c6d639877e06cfb04a1aa7e8b4349e6228850ccda3134c8b0bb88f693a10177a",
+    "bytes": 25953,
+    "lines": 471
+  },
+  {
+    "file": "narrative/events.ink",
+    "owner": "world_ui",
+    "category": "review-target",
+    "tracked": true,
+    "sha256": "9e88d67aab77d691e4499f70206608f074cd64229b634d16ac185e445cf7a7ef",
+    "bytes": 5784,
+    "lines": 93
+  },
+  {
+    "file": "tests/a3-battle-rules.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "8cea4c0eba2d4fabb13ad6d9935949be3e2b220caa6c69e60413302e7f6be960",
+    "bytes": 20992,
+    "lines": 421
+  },
+  {
+    "file": "tests/abyss-sovereign.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "b2f8077ddd311ac4ac5c02c7da3ee717ca14b2d2ac80267510415cea290f9b93",
+    "bytes": 10173,
+    "lines": 200
+  },
+  {
+    "file": "tests/acceptance-gate.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "cacc76c42976e933937d2037e051ae0f3726c3a629dda02cecbdcd3517a0ace4",
+    "bytes": 5353,
+    "lines": 111
+  },
+  {
+    "file": "tests/agent-command-results.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "cc47773a31c7cbbfea74fbb1a22ec68dd041568edbc616496be3c46b19547d11",
+    "bytes": 15489,
+    "lines": 315
+  },
+  {
+    "file": "tests/agent-compare-provenance.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "7e45431b96e9aa724c7c320417ac4d2a1d233b9a1948887d92d7a014fc8e9ab7",
+    "bytes": 3409,
+    "lines": 79
+  },
+  {
+    "file": "tests/agent-llm-abort.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "dba3ddd42770215bdd56776b9cb59e3ba41024d204a0c53672932307be519a1c",
+    "bytes": 3814,
+    "lines": 79
+  },
+  {
+    "file": "tests/agent-llm.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "e1406ff29adbd30a290674441fd510f40c3275bfe57f91c0dc5c779e72eb8a3b",
+    "bytes": 4810,
+    "lines": 113
+  },
+  {
+    "file": "tests/agent-recorder.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "d74fbf77b26eb02b43b0ce49f66b52c2fce585173c46060b9bb3489313955080",
+    "bytes": 4159,
+    "lines": 93
+  },
+  {
+    "file": "tests/agent-run-provenance.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "05ad8048a2e39b755bab06ef29527b6496010c38dff40c41787d9a7d2b1b518e",
+    "bytes": 4101,
+    "lines": 83
+  },
+  {
+    "file": "tests/agent-runner-abort.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "4174a8eb7aa8c2345995f75ffa5531fff67bfed1070e94be645c4c3ebe379772",
+    "bytes": 4117,
+    "lines": 82
+  },
+  {
+    "file": "tests/architecture-boundaries.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "cb0a2017b4facd145cd777f8229f2434822fe50c6e37e857deba93eafa6add58",
+    "bytes": 9579,
+    "lines": 181
+  },
+  {
+    "file": "tests/bag-architecture.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "4860630d59b7b9fb2d94dd79a5c1e9eece099763e0ce24c8781f1fc3316b6d42",
+    "bytes": 4182,
+    "lines": 73
+  },
+  {
+    "file": "tests/bag-item-rule-baseline.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "9a9c11a6ae3e3b3fea7e47d32fe00ed069b07d56499d9b132181d116cc021f48",
+    "bytes": 9521,
+    "lines": 208
+  },
+  {
+    "file": "tests/bag-return-hook.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "6dd05ae3b24fca4bc4a361b11f23dccf21db666936785e6fcc3a115f06d3bf2d",
+    "bytes": 1238,
+    "lines": 31
+  },
+  {
+    "file": "tests/bag-slam-button.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "549ece200bfc236f549615946f431f5802e92f86295a3b570cc13f3db3d6f58a",
+    "bytes": 5049,
+    "lines": 120
+  },
+  {
+    "file": "tests/bag-structured-rule-migration.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "1aba52cb44b33d7ef7548fa954e7f9337442ace13303017bce565607abf07bf6",
+    "bytes": 10328,
+    "lines": 210
+  },
+  {
+    "file": "tests/bag-structured-use.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "fb90b244d6492d8762bb0e02103144a707fa8ab6131e86955bc827308965d860",
+    "bytes": 5658,
+    "lines": 124
+  },
+  {
+    "file": "tests/base-corrupt-field.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "f5bea4786cbb7d77de1130f05eba651951c747b07cae74c1cbd7ae904017c77e",
+    "bytes": 6055,
+    "lines": 115
+  },
+  {
+    "file": "tests/base-departure.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "5546cf683b7c2b3155aeab65cfcd090f4303d0df0a73cdef5906c2dcee260f01",
+    "bytes": 3243,
+    "lines": 79
+  },
+  {
+    "file": "tests/base-direct-write-convergence.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "beca7fba58b9113e21a582eb6f481137a5ac8c96064e5be67027ded5ea9eda44",
+    "bytes": 9662,
+    "lines": 218
+  },
+  {
+    "file": "tests/base-elapsed.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "0c0cc0145440f1d6440e58271c8f7aa05c628908fa38378a9fc72a82c3b96cd8",
+    "bytes": 3949,
+    "lines": 91
+  },
+  {
+    "file": "tests/base-key-count.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "656964adccbd1d2f433a39fd35571f5b631175d9d364371100e5b44eacc3eab6",
+    "bytes": 2815,
+    "lines": 64
+  },
+  {
+    "file": "tests/base-material-rule-baseline.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "f111aa0960bc015774f9cbd9b32a467c9ab76aad97095670c2aecef780010c1d",
+    "bytes": 4975,
+    "lines": 115
+  },
+  {
+    "file": "tests/base-meta.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "1cee5a320383e5f80b1c9e99f217fb673bbda4f5baeceaa1d89af590fc08d3ab",
+    "bytes": 2995,
+    "lines": 84
+  },
+  {
+    "file": "tests/base-mutation-types.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "7a3e06e726cc7ced0c530a685afa0e55b0d35b16322af2353fa914dd273625a7",
+    "bytes": 3967,
+    "lines": 91
+  },
+  {
+    "file": "tests/base-mutation.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "225514cd0c16013200461fea85157cce9aac5f556f190d1a590ea866143dcde5",
+    "bytes": 9575,
+    "lines": 227
+  },
+  {
+    "file": "tests/base-pet-egg.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "79fd8dd6d054bea2964f40bceeac47a7f27c37fb544d97e15f2f8feb3d3a8bc2",
+    "bytes": 3406,
+    "lines": 85
+  },
+  {
+    "file": "tests/base-progression-commands.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "cb78e2a68b097e819c34877f4a14b34698a245733dfdbcea7d62932875328aa5",
+    "bytes": 3452,
+    "lines": 88
+  },
+  {
+    "file": "tests/base-sticky-issue-fix.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "fbeff48a7475bc3264254b1329eaa49fc4c908d029e70b1c83e1e6571d51e933",
+    "bytes": 1826,
+    "lines": 40
+  },
+  {
+    "file": "tests/battle-all-cards.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "8b3329b77c2b4a4699a1c19684f546110ae720334b88e401b9dc9980a95b6b0f",
+    "bytes": 13653,
+    "lines": 272
+  },
+  {
+    "file": "tests/battle-architecture.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "32aa2a1b49b1185c269c7731f433ec5b32404101cec104b5f2fa5ec8dc4e029b",
+    "bytes": 7679,
+    "lines": 154
+  },
+  {
+    "file": "tests/battle-card-inspection.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "bfe6ccd38df99f8b19609f726d0faaf49f1167f1bc0916e50b4bc15bcd45a1ae",
+    "bytes": 4559,
+    "lines": 108
+  },
+  {
+    "file": "tests/battle-discover-candidates.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "2e11c92228568552ac46580ab97c541d0e3d030e243779772e0e88e41dbfd062",
+    "bytes": 2722,
+    "lines": 59
+  },
+  {
+    "file": "tests/battle-discover-state.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "1e2b64eeadc6e83df5decc547979b76532f841996325fefda718070fd7d8c6d3",
+    "bytes": 1917,
+    "lines": 49
+  },
+  {
+    "file": "tests/battle-engine-facade.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "b5288e2a3fb8355579055c871facdf6e7263a0b36dd48b9b46211d23a96424d1",
+    "bytes": 1969,
+    "lines": 36
+  },
+  {
+    "file": "tests/battle-esc-ime-guard.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "ecec71db210ae282bbca395dee35fdef90416529868a5374ae51fc00ddb4291d",
+    "bytes": 3659,
+    "lines": 80
+  },
+  {
+    "file": "tests/battle-frames-lifecycle.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "9f13a288d4fcea8327f7c29e2a4ddb157a26b35290e468b94d005f06d0be3147",
+    "bytes": 8800,
+    "lines": 200
+  },
+  {
+    "file": "tests/battle-hand-selection-rules.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "a6c0563ac988e78c6ad50c18e7e955cb2c559a0940f310a4eff31e6319ff63b3",
+    "bytes": 1677,
+    "lines": 33
+  },
+  {
+    "file": "tests/battle-lifecycle.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "1ba7766611954ecad6f1547e259f6fed3036fd4a04c8775947345eb47158432d",
+    "bytes": 4571,
+    "lines": 104
+  },
+  {
+    "file": "tests/battle-modules.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "bf6dccc93f59a16e0042c110fca84f6277dc40afd9846164283557ef3e58704e",
+    "bytes": 4571,
+    "lines": 78
+  },
+  {
+    "file": "tests/battle-pace.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "5f2a282539be26047478353a10e72df0355f4585a7445d2b3b4336acd7eed055",
+    "bytes": 1373,
+    "lines": 44
+  },
+  {
+    "file": "tests/battle-presentation.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "f9a9bb997f035b294e0c2a98eb30e6e551ccfe7b4bdd26ff3d916153ac545af8",
+    "bytes": 1286,
+    "lines": 39
+  },
+  {
+    "file": "tests/battle-preview-amount.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "c8a181a542b28dae173f864822ecada7814cca0cd32eb0021285f3ad3e1b2cf4",
+    "bytes": 1720,
+    "lines": 43
+  },
+  {
+    "file": "tests/battle-pure-rules.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "12d8786eb5e646e186fc57e4000eecc73dbf5c8687f975531d4fb2eddc0ec7b0",
+    "bytes": 8689,
+    "lines": 155
+  },
+  {
+    "file": "tests/battle-resolution.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "21c31108b47aef40eeaa2fb9899b028c276ccbea0c28bbd5e0a2068aed09a043",
+    "bytes": 76450,
+    "lines": 1118
+  },
+  {
+    "file": "tests/battle-restart.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "f8a290a18c5578c646599e4c1cfa32856e80ea000df02d1177bfa6e7d2809b09",
+    "bytes": 2371,
+    "lines": 51
+  },
+  {
+    "file": "tests/battle-runtime-state-guard.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "9ab7b908d8fd71b52776c176a6d5c9dd3306937b419470126ebde6bd90828375",
+    "bytes": 6001,
+    "lines": 121
+  },
+  {
+    "file": "tests/battle-selection-flow-boundary.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "8ad5d87216a8616c9625edcf4a989fcaa49791feb1aae7d9eb5601d812e6cc30",
+    "bytes": 12829,
+    "lines": 291
+  },
+  {
+    "file": "tests/battle-settlement-recovery.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "429b7b92abb01b9b3c6036294b0c3b9cd2eb4bb2069e97f20e9c77bf18092a99",
+    "bytes": 21836,
+    "lines": 434
+  },
+  {
+    "file": "tests/battle-settlement-retry.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "da98a1ee0a68a1e1202f34b165f567a81b3423fd4b8629de62d16d071617ff71",
+    "bytes": 24213,
+    "lines": 472
+  },
+  {
+    "file": "tests/battle-settlement-types.fixture.ts",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "539bb60e9f581e956a51c42ca290819dc9ecdcf90b1a0d9165e7787529eebdec",
+    "bytes": 4966,
+    "lines": 104
+  },
+  {
+    "file": "tests/battle-settlement-types.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "97c7467364080942338ad271909b0ff7d90eb3c0b690a63bad34706d9f979ea1",
+    "bytes": 3655,
+    "lines": 79
+  },
+  {
+    "file": "tests/battle-snapshot-integration.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "9cc11142d156bb9d3ff0089b57ed9fa7cb2227d0a33f36a8b58a04610938fdb5",
+    "bytes": 3762,
+    "lines": 72
+  },
+  {
+    "file": "tests/battle-snapshot-types.fixture.ts",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "ab2d6fc6aeb13b98ca8209f2246137d3b4b2b73dd0aa854e4bf45fc4e04359f0",
+    "bytes": 2001,
+    "lines": 39
+  },
+  {
+    "file": "tests/battle-snapshot-types.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "8e3db9832dbaa4ae6a0899a5e59be9323e37d7ab90f61ab2c8620082dedb11ba",
+    "bytes": 7800,
+    "lines": 130
+  },
+  {
+    "file": "tests/battle-snapshot.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "0bb331eb151381bbfba32884cc4486db9187daf2c3046e70787f68ab95550713",
+    "bytes": 8137,
+    "lines": 158
+  },
+  {
+    "file": "tests/battle-victory-progress.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "957934984a372177ad151c8c3064691a83a9ac50eb86347a396cc76cf9a775ee",
+    "bytes": 2005,
+    "lines": 45
+  },
+  {
+    "file": "tests/boot.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "d0d13b6c55bcd79400a6e0f960fba6578cc8af422c421b108e94d8a1e7a52410",
+    "bytes": 30766,
+    "lines": 534
+  },
+  {
+    "file": "tests/boss-equip-select.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "055f4750181f5e5e52a540095be8cee59dd1ea83e2f66d22b6fdcde118efc35f",
+    "bytes": 5407,
+    "lines": 123
+  },
+  {
+    "file": "tests/camera-interaction.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "d3a8149c409d2d95866ba4b428da17bb61867ccb78c94336d085d2ab6e8fb7ca",
+    "bytes": 2385,
+    "lines": 57
+  },
+  {
+    "file": "tests/card-art-coverage.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "8420e9275ac0f311b6854200bc369750a91e62a51e3174c32d5f2f03c0690d22",
+    "bytes": 6055,
+    "lines": 113
+  },
+  {
+    "file": "tests/card-audit.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "811f2d8bb826153655b2e76cd3531a1dfa0a86dcfa62249308feb3bd737b00ab",
+    "bytes": 13288,
+    "lines": 222
+  },
+  {
+    "file": "tests/card-effect-semantics.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "c6a3ac763306f2e55e067cb42440d4f6cafe3fe9f891964be89eade7c94bdc38",
+    "bytes": 5057,
+    "lines": 122
+  },
+  {
+    "file": "tests/card-library-lazy-boundary.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "f7247c6725863c5fa85d28c0e49ed0dbbed80f5af3a32c1c66fcca1506d0e340",
+    "bytes": 4006,
+    "lines": 90
+  },
+  {
+    "file": "tests/card-notes-coverage.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "d2e053a4b4c3fefe3dec7c9c8a711bb954869ac4aa6b0a8f16f73fad91a7acc4",
+    "bytes": 3036,
+    "lines": 74
+  },
+  {
+    "file": "tests/card-photo-notes.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "e4205db7b551a3abcca671a5a2b8383b4cd9622ed9ffbedfb030093a8e69ce03",
+    "bytes": 2628,
+    "lines": 62
+  },
+  {
+    "file": "tests/card-render-context.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "21333869b847d40d22eb92d0c852da742af43eead5034593d9b189e857cce9ab",
+    "bytes": 2978,
+    "lines": 65
+  },
+  {
+    "file": "tests/card-rules-bag-boundary.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "c95d1a5d8c8745724af2e2667830f4a31d94a0ebc5f7149067857c84ec5cf27b",
+    "bytes": 1913,
+    "lines": 43
+  },
+  {
+    "file": "tests/card-rules-schema.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "110cea8869aa91a9caa13a18ac04b08b7d898419a4545ed423a3f0555cc683db",
+    "bytes": 20076,
+    "lines": 358
+  },
+  {
+    "file": "tests/cards-catalog.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "1e82a5aae9d976fd6af7c8af7d886d0b59f4728fcf90f1590016bb831e55496d",
+    "bytes": 2373,
+    "lines": 53
+  },
+  {
+    "file": "tests/cards-random-pool-guard.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "62c3e8fb31797920342aeef6c90340f14556679ca72b7d226788470cfd5ec800",
+    "bytes": 2136,
+    "lines": 44
+  },
+  {
+    "file": "tests/cards-replay.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "7fe2f91ecf42185d7c6e2e4b7b747e608c596c7f6c1363f4f43531f7f1887eb2",
+    "bytes": 3014,
+    "lines": 61
+  },
+  {
+    "file": "tests/cards-rules-runtime-boundary.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "632331b4a8165c042c48c70272248fdea2f181d3bf45203f32c1e92c5bfbb45b",
+    "bytes": 3821,
+    "lines": 89
+  },
+  {
+    "file": "tests/cards-storage-guard.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "239d82229d1eccac540ff15e242a3edebe6020f0844a4b71161caa5b7b8c1fcd",
+    "bytes": 5006,
+    "lines": 90
+  },
+  {
+    "file": "tests/cards-sync-snapshot-guard.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "5c35416119961d38c4f72d5a4fd3a21ec2a63581b349ce0897f9b0a19e4aeeed",
+    "bytes": 3351,
+    "lines": 75
+  },
+  {
+    "file": "tests/cards.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "7d3c78a37bde8787e0d3a4363e0babf504cb6bd8944b9354de8b4f662ad4722d",
+    "bytes": 5938,
+    "lines": 116
+  },
+  {
+    "file": "tests/cell-notes-quota.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "643b27f69ede1a058834365e36a02e38a6ff2897e6cd4ceafebe83ad9dbe74c9",
+    "bytes": 1527,
+    "lines": 43
+  },
+  {
+    "file": "tests/characters.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "de982c4c1dae427d4c295b2771e43a6b03f00e6b0b6e29f82f749219a5f21267",
+    "bytes": 1841,
+    "lines": 36
+  },
+  {
+    "file": "tests/chase-slash.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "bbf10a0989e302fe906e0f70648cce11cfe25f6e1cb21bb42436cff8136374e6",
+    "bytes": 5502,
+    "lines": 137
+  },
+  {
+    "file": "tests/chest-click-flow.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "1252f73cff07bb49c3985a3cd6105063dadf1a0265177fa9174fb36b1d2c9e37",
+    "bytes": 3267,
+    "lines": 89
+  },
+  {
+    "file": "tests/class-consolidation.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "268bd0499985e8b4d94b5dbc25a8b35c5b2726bbe99567c362b1d986b0b8ebb3",
+    "bytes": 4356,
+    "lines": 78
+  },
+  {
+    "file": "tests/collection-room.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "9759f239eaf57834c24dfddafed456f0312d7f827aa4819b6e867b8534ce3a75",
+    "bytes": 10310,
+    "lines": 222
+  },
+  {
+    "file": "tests/combat-feedback.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "44213721179937199d8a8f80e42cd9fa198a82d1375337c4b605ae03d650fa12",
+    "bytes": 1538,
+    "lines": 32
+  },
+  {
+    "file": "tests/combat.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "b15ea9ff2fd0d6349cdd4f0060aa24a8492dc8b1848f4e132fafa0ab8a1dcd71",
+    "bytes": 460,
+    "lines": 13
+  },
+  {
+    "file": "tests/commands-shared-contract.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "b62b3e9c2032b9f603a038762f62ff5cf16ec1cf653affc4083801ca8818d890",
+    "bytes": 4823,
+    "lines": 107
+  },
+  {
+    "file": "tests/compendium.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "240611b2bca8ef777d0874105d5c6319c3f834b67554b6c59713be3583714f0f",
+    "bytes": 2772,
+    "lines": 63
+  },
+  {
+    "file": "tests/contracts.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "e5a7138d1e0481cf6fd0ded9421cdb616423a662fbac5a7211cce8a4fdc0403f",
+    "bytes": 10850,
+    "lines": 216
+  },
+  {
+    "file": "tests/cov-battle-clock.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "12007caf217a945bd039cdd38284d0bf8fcfe793661f432e7849c3f3a8dc7621",
+    "bytes": 8452,
+    "lines": 212
+  },
+  {
+    "file": "tests/cov-motion-primitives.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "06a4712f170c70b2df0fb4b1387924525874941fa59d19651334c9d11f90e501",
+    "bytes": 7252,
+    "lines": 186
+  },
+  {
+    "file": "tests/cov-target-session.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "cae847b771321a263ec409ef61da79c5988b1328f27a303d1912a83dda87ebf6",
+    "bytes": 8732,
+    "lines": 197
+  },
+  {
+    "file": "tests/cursed-blade.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "b8bcb7d4f211c1cd1334c71941e5ae3d8853d517d8364cad669631776a52903c",
+    "bytes": 6237,
+    "lines": 132
+  },
+  {
+    "file": "tests/custom-cards.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "a0c5f6c018a3719fb6e223989af5dddaa40b8a36aa80b2c0d01b81b5ed44ccec",
+    "bytes": 3459,
+    "lines": 77
+  },
+  {
+    "file": "tests/departure-class-confirmation.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "3aa421e51dbd94f57698bdf15c3fa4a06fc14b40f21725c2efef8f26cb9c7ac8",
+    "bytes": 3210,
+    "lines": 67
+  },
+  {
+    "file": "tests/diagnostics.local.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "f0908a774ada079f1c840d6dbacd39145cd2d66b34d4a9a6efad055167dd8e20",
+    "bytes": 6257,
+    "lines": 116
+  },
+  {
+    "file": "tests/direct-cast.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "8bc3669959adb35366206a84e0760793d90d447ad0af5f981ac6390d2ec9d074",
+    "bytes": 15691,
+    "lines": 292
+  },
+  {
+    "file": "tests/docs-consistency.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "20bce923b6852656b0715cbfc37f4b86a8c1bb15f41019a741b5df81c03fc752",
+    "bytes": 4396,
+    "lines": 83
+  },
+  {
+    "file": "tests/dual-wield.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "9182ab0b56642751c401099caa9dcc861f2504a6edbc5f0d235c32de7eca2281",
+    "bytes": 4400,
+    "lines": 97
+  },
+  {
+    "file": "tests/e2-view-hp.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "3f5e0140d1ee7d1f402ab4918e8fc358e2759c332d7927b5a036536d760abb4c",
+    "bytes": 4834,
+    "lines": 131
+  },
+  {
+    "file": "tests/e4-async-entry.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "b8387cb7fa768b90d152b9c8c99065def7d9c327847d4d8fee55d149f75ddf61",
+    "bytes": 12161,
+    "lines": 192
+  },
+  {
+    "file": "tests/e4-battle-loader.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "42d7d4760e15e0a1d17ed822488e1aff415cdb0e90ab25c235e2b7bffdcbc058",
+    "bytes": 6927,
+    "lines": 151
+  },
+  {
+    "file": "tests/e5-save-validation.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "a44e37b1a37d392b897a6e6f3d428a252fa53c7937d63e82de8c8fe8f7c47576",
+    "bytes": 10189,
+    "lines": 196
+  },
+  {
+    "file": "tests/e5-session-recovery.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "4fe195487dc61e9d53b4e96c127d843f73f7be2288f877d97dd6ccd731a56890",
+    "bytes": 18743,
+    "lines": 368
+  },
+  {
+    "file": "tests/e6-card-rules-capability.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "25cc39b1b6f6a9e5b377eb8bbea890eb603c8bcf1aee515faafc98ca82458109",
+    "bytes": 6518,
+    "lines": 104
+  },
+  {
+    "file": "tests/e6-card-rules-execution.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "6623fd52074b53fa16d99dc5042f8da717578da241e6b928bd1cc3a3bb59c2d8",
+    "bytes": 10378,
+    "lines": 215
+  },
+  {
+    "file": "tests/e6-card-rules-types.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "87cd7897585ec2ce7699254fe817f8778f44b3d0702a19a5acfc8f6943569ddb",
+    "bytes": 5216,
+    "lines": 92
+  },
+  {
+    "file": "tests/e7-rule-warning-view.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "6bc5a894076c0fa58fcd193c488a6d0bd5c985b79c60eea8db77593dcf9b3d84",
+    "bytes": 11357,
+    "lines": 204
+  },
+  {
+    "file": "tests/e8-card-inventory.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "d4a0f05493c47f3eae0deb5499460022b3a84032c389c6e0b91b3493fb9b2c0f",
+    "bytes": 14724,
+    "lines": 227
+  },
+  {
+    "file": "tests/e8-card-migration.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "f0ff50cc28efdf3eb31fd6307f5f7dca038950e187ee5d5e795ca23af0b07475",
+    "bytes": 22777,
+    "lines": 400
+  },
+  {
+    "file": "tests/effect-verbs.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "b0bb71a4161f907dbae4d66cb5e2bb1d41421462d433dd885ed070179fa9e291",
+    "bytes": 7960,
+    "lines": 150
+  },
+  {
+    "file": "tests/ember-burst-rot-seed.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "37e45db925ec239d952dc1f35b62a4c50465606e16c0ee17c13ee1ccaac77541",
+    "bytes": 7285,
+    "lines": 154
+  },
+  {
+    "file": "tests/encounter-count.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "b2e78c00aebc75aeaa4269b05a7a62d8caaea05f44e72db6ea146838d6388015",
+    "bytes": 2182,
+    "lines": 50
+  },
+  {
+    "file": "tests/encounter-meta.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "1b3d6148dd24a3eb25566a28cc9b1936fe090ad9a87ba1c31fa6d7bc43086d5b",
+    "bytes": 1826,
+    "lines": 42
+  },
+  {
+    "file": "tests/esc-semantics.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "f8a9a74f84b2351c446c7941f86a4a765f0346338064524c4413796203385f63",
+    "bytes": 2317,
+    "lines": 45
+  },
+  {
+    "file": "tests/event-bus.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "b07cfec694353f67aed8d2bdc45c110ac3a88160bbfe9dfcd0cd29aff49cabd7",
+    "bytes": 2540,
+    "lines": 76
+  },
+  {
+    "file": "tests/events-0919.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "c321f0a4b8e4159116b6bcf841454080704a8a91f4d53e3f850470d99f51bcf0",
+    "bytes": 2068,
+    "lines": 48
+  },
+  {
+    "file": "tests/exp003-extraction-pocket-copy.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "55947723873b2f4fa87f28ab6129c286887c6f4b3b317d99af9dc20a6a0e3ce1",
+    "bytes": 2744,
+    "lines": 49
+  },
+  {
+    "file": "tests/expedition-view.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "e9f19547f250e815b302d92fe10caa47db9f0d1aae2015b3caa5cc9e41d2706a",
+    "bytes": 5336,
+    "lines": 113
+  },
+  {
+    "file": "tests/extraction-flow.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "1c7c780bce5a98558e4dcd3989bb34a54c058f6b535f315e488f0ec472732794",
+    "bytes": 6201,
+    "lines": 118
+  },
+  {
+    "file": "tests/extraction-preview.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "4b42c40bf17e843ed0ed111301671b8da3661a04533746777ad7cd3ce5c23138",
+    "bytes": 2288,
+    "lines": 59
+  },
+  {
+    "file": "tests/extraction-recovery-ui.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "a323514b8e6e4b14d12ea68be14411578df7cc2e2549ce6aed673feba2265afd",
+    "bytes": 5955,
+    "lines": 101
+  },
+  {
+    "file": "tests/extraction-recovery.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "1a978c223501360095b781a6d489c718e22bb46da26800be57a386a3e3d55c7b",
+    "bytes": 8370,
+    "lines": 156
+  },
+  {
+    "file": "tests/extraction-session-resume.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "68d80a7c3f30e8ff22f7ab395b23e9844886575c56a5662ea2e1f207848aa38a",
+    "bytes": 6114,
+    "lines": 137
+  },
+  {
+    "file": "tests/extraction-settlement.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "efbfb3333a4b783732bc29b937d9e10c037e778c32191e3c7013ccb02a9ea687",
+    "bytes": 6073,
+    "lines": 111
+  },
+  {
+    "file": "tests/facade-snapshot-drift.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "85fb6e3fef749babd7d41820020b500e6d985b62e990957e9d59a96ba77544bf",
+    "bytes": 3374,
+    "lines": 77
+  },
+  {
+    "file": "tests/fixtures/base-v1.json",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "08e238573801fc98b0555de3b80e1b02be33650a3ec22a7baa0b2ada200294c2",
+    "bytes": 427,
+    "lines": 13
+  },
+  {
+    "file": "tests/fixtures/card-effect-audit-known.json",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "c2adaa0d9de51ee6442f57914c9073b94d311d171010f3e77a8b57643a845217",
+    "bytes": 4226,
+    "lines": 116
+  },
+  {
+    "file": "tests/fixtures/effect-elsewhere-frozen.json",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "958b472a1331a5d4bdc4489d25466093139c23ac66a3dd7204a51836aab84cd1",
+    "bytes": 3134,
+    "lines": 138
+  },
+  {
+    "file": "tests/fixtures/save-v1-run.json",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "8a9eaf1fd98fbf916ebb4bb6096912170ac85b17ce608c281ea8f4480022e5ad",
+    "bytes": 511,
+    "lines": 20
+  },
+  {
+    "file": "tests/fixtures/save-v2-slot2-run.json",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "4d0ecb9b3f1704b014e51895dd4197dccaeca28abffce7a073baa30218a69d8a",
+    "bytes": 403,
+    "lines": 21
+  },
+  {
+    "file": "tests/game-hub-preparation-feature.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "bf32c29e8477e0d3b9e6ce281bf87a557b64fc4597ede68d697abb7b9d110898",
+    "bytes": 6190,
+    "lines": 140
+  },
+  {
+    "file": "tests/game-session-browser-boundary.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "efc6c936a114d3d4acc641770cab7e39b67b36a5ac8178c83087d52bde898b6f",
+    "bytes": 1239,
+    "lines": 29
+  },
+  {
+    "file": "tests/game-session-elapsed.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "9f8beaeabe7a576f79bee8e38e4bcd1e1a7f704fb8511341296b72eb5c7e15ec",
+    "bytes": 2930,
+    "lines": 78
+  },
+  {
+    "file": "tests/game-store-snapshot.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "8a4577f694d057f62ec1a44707f183e6430bd5ec0893309f67985bac289f357d",
+    "bytes": 2382,
+    "lines": 44
+  },
+  {
+    "file": "tests/game-store-types.fixture.ts",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "646c23715bec7b601990d8dd5e2a74cc3a00cdcadead36d7cd4bd2c3b55e8753",
+    "bytes": 1210,
+    "lines": 35
+  },
+  {
+    "file": "tests/game-store-types.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "8cd9b3432760cd56e19d7100dd13126f8f54cbccc495222c3ba86e83fa8d9506",
+    "bytes": 4778,
+    "lines": 98
+  },
+  {
+    "file": "tests/hand-cost-patterns.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "7ac2dd4446860175964da46135939d5b0c751aa9fe5fb14677df72fcc49a37b5",
+    "bytes": 1847,
+    "lines": 31
+  },
+  {
+    "file": "tests/helpers/card-effect-audit.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "e74ed5f2c66aba8be5515c1b39f05d2819e6cbab9a34b84172abbca68cdc13da",
+    "bytes": 571,
+    "lines": 13
+  },
+  {
+    "file": "tests/helpers/e8-card-inventory.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "8d5d0d2fed5659dbacb642c6ac8288c407caa3b2b314f767062669dfd2f504e7",
+    "bytes": 11975,
+    "lines": 196
+  },
+  {
+    "file": "tests/hero-cards.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "cd1c55ed144a16ab86e926a2341ebe44ef810fe10d564a14bc190845f37c3288",
+    "bytes": 21146,
+    "lines": 411
+  },
+  {
+    "file": "tests/home-async-lifecycle.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "0e70a07fb7214c1c7488d4eaf75e4478f3fa2df8b44dcd22eb8714fac01c704b",
+    "bytes": 7022,
+    "lines": 143
+  },
+  {
+    "file": "tests/hub-architecture.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "519ab16cf703f5f7d121da137fbcaa502314e2373c2f6583bba3acb07f77e72c",
+    "bytes": 5317,
+    "lines": 88
+  },
+  {
+    "file": "tests/hub-flow-regression.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "26bc9e4f1c8021b8820a71d5429fe45a99ef0f3b0b87385cf5ce3b6ef605e692",
+    "bytes": 2866,
+    "lines": 46
+  },
+  {
+    "file": "tests/hub-versioned-slot-reader.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "08dec97e3f3f99e582254f393200433e5f0ee93f8c234193f9cb3b4e453f2cf4",
+    "bytes": 5554,
+    "lines": 146
+  },
+  {
+    "file": "tests/intent-legend-isolation.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "fc257bcb08f8898e1ea88c2920ebd0b1d7f55b3b6a165885e77330ed6cfb626c",
+    "bytes": 3478,
+    "lines": 70
+  },
+  {
+    "file": "tests/item15-18-fixes.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "bb92e8764112f02a647f71b3850451d07b7c8bb8a8f123fe1dd7ac24818ef419",
+    "bytes": 5016,
+    "lines": 97
+  },
+  {
+    "file": "tests/last-stand-poison-burst.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "16fdc3929ca736e9d4c99dc986b78f46a8e809cfdaad01426eb8a98b122fa1e0",
+    "bytes": 6434,
+    "lines": 139
+  },
+  {
+    "file": "tests/lava-blast.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "479ba343873f243ad95f7a3d9249094c8e38099ccd3d2bbb4fff0a73889b967e",
+    "bytes": 5638,
+    "lines": 129
+  },
+  {
+    "file": "tests/layered-map-generator.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "d4bc7723d6b7ff1c8ab4823940304ac27ee58474c0fb78de32ceaea278d6771c",
+    "bytes": 7129,
+    "lines": 125
+  },
+  {
+    "file": "tests/m-batch-behavior.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "1dcb8ec0b6060a97bea981e1ee62bf53b117c5b3177d49a225734599284566fb",
+    "bytes": 5371,
+    "lines": 115
+  },
+  {
+    "file": "tests/m-batch-production.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "3caf062d79d866e55ac9ed9a10800c8bb4898fb8cb071a8748a49335e93e538c",
+    "bytes": 3342,
+    "lines": 66
+  },
+  {
+    "file": "tests/m-execute-consume.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "c8216e76ba156121fe0079006c75af4754cc7961528730effa4dffa2ff779d85",
+    "bytes": 3117,
+    "lines": 62
+  },
+  {
+    "file": "tests/m-hosted-contract.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "cf7a23e5ed3e051dad1fcf1f8fccc0f2f891e081b73aa06fc07fe2c5672d6f76",
+    "bytes": 4447,
+    "lines": 90
+  },
+  {
+    "file": "tests/m01-base-commit.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "0b2aacfe841427735774b5ba6819319a421612bb0891a0d5abc0e70f029426ac",
+    "bytes": 8383,
+    "lines": 167
+  },
+  {
+    "file": "tests/m02-collection-commands.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "b45c95ea9f6e630ae020d27a09b6b01f04bf36510cbbd021302f91a4a0e99a51",
+    "bytes": 7272,
+    "lines": 146
+  },
+  {
+    "file": "tests/m03-home.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "72e9ea3f409ef232cf06f5e1b3874024da3b1681fa8bd8f57308046ac0461fe5",
+    "bytes": 8889,
+    "lines": 136
+  },
+  {
+    "file": "tests/m04-preview-contract.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "39ca2341f5ac1f87e999ac1ccebb55e0525e390fa748356aaeb4862cc03b141d",
+    "bytes": 733,
+    "lines": 17
+  },
+  {
+    "file": "tests/m04-visual-pack.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "013ef7bb7decad9396dcdccad669668377f3b566bf8a84f32ae96de4585dcb52",
+    "bytes": 2858,
+    "lines": 83
+  },
+  {
+    "file": "tests/m05-home-presenter.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "844e4ade8f32ff95c1495c243957283f1553fbf3f7f1baa64490f1d239d2b547",
+    "bytes": 2326,
+    "lines": 47
+  },
+  {
+    "file": "tests/m05-home-scene.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "088d545d055d41788b35efabd9ad7b99a37dc2297e4e12da6e0eb297a3c415b3",
+    "bytes": 14399,
+    "lines": 465
+  },
+  {
+    "file": "tests/m06-preparation.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "d15350763b984b1ede49cb4ea1f399e7b51a6c7b4ab1f5fd57515b8b7d3d7b28",
+    "bytes": 5766,
+    "lines": 72
+  },
+  {
+    "file": "tests/m06-sources-view.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "5ee425cc72006a03347f01056b64df72852744e6f34964c0c478f23b601af49a",
+    "bytes": 3370,
+    "lines": 43
+  },
+  {
+    "file": "tests/m1-contract.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "bd1a7cfb5e61ae319d1d62f83158038d2acab9052640328036408f2febd92f8e",
+    "bytes": 22264,
+    "lines": 421
+  },
+  {
+    "file": "tests/m1-data.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "76b2a520d7805cc396b92babe15e81c84515e2156173ff0c0adb23516c4cf0d4",
+    "bytes": 9446,
+    "lines": 191
+  },
+  {
+    "file": "tests/m10-data.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "acc2624b3301cf006c9cbd0a0f1038138e151e03057fb318a72613cc0da531cb",
+    "bytes": 4413,
+    "lines": 99
+  },
+  {
+    "file": "tests/m11-data.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "0d172e753e376e45bc35cf5b81847049e961f582a0e293c6224ee51119178244",
+    "bytes": 3378,
+    "lines": 77
+  },
+  {
+    "file": "tests/m2-contract.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "c5336defb503bf4c35ca379b689f9e383acb2a63dee72807a7265ed0f45e311a",
+    "bytes": 25405,
+    "lines": 487
+  },
+  {
+    "file": "tests/m2-data.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "24bf6d3dbe2e308af7a6e5b550f0f500fe7cf1ee5331504c5ddfc72403f79106",
+    "bytes": 12609,
+    "lines": 290
+  },
+  {
+    "file": "tests/m3-contract.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "dd610cbb0108256d0e914156d27efcee888ae596126d6646bd43c982d335b3fe",
+    "bytes": 22706,
+    "lines": 481
+  },
+  {
+    "file": "tests/m3-data.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "a9c22c1a0147a44159fbe20a011632269f6bf694e7d88cdc14642f919f470793",
+    "bytes": 16240,
+    "lines": 374
+  },
+  {
+    "file": "tests/m4-data.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "f21021390433afdb0a2eebc7ee77bb4fb0d09ecd4fb908c7d9481d1e43078161",
+    "bytes": 8855,
+    "lines": 177
+  },
+  {
+    "file": "tests/m5-data.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "2a400d074627c86a46b294f126a0f64173da7cc39985f130bdd52597f9acfb07",
+    "bytes": 14826,
+    "lines": 278
+  },
+  {
+    "file": "tests/m6-data.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "c9141953208065832205b0721008f67a071125c51a477441148f4dbe30660ce1",
+    "bytes": 11308,
+    "lines": 204
+  },
+  {
+    "file": "tests/m7-battle.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "fc9f932b02f0a3ca66292d834b33d8333f5a775b7b0ec96bb45011dbdc19f5ad",
+    "bytes": 4107,
+    "lines": 99
+  },
+  {
+    "file": "tests/m7-data.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "f7d4d692a755fbc6dd4c2801fde85298af58777b452c907a3608e0ddfa400d73",
+    "bytes": 8428,
+    "lines": 133
+  },
+  {
+    "file": "tests/m8-data.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "2f9312e439732e54e63644cafc88000417a8d36e40f552ec22dd03225f6c162a",
+    "bytes": 8320,
+    "lines": 151
+  },
+  {
+    "file": "tests/m9-data.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "106f1ff4168bc8cd364a2faa178c98b71fbd9b69bc210301dd525080f880153c",
+    "bytes": 3483,
+    "lines": 81
+  },
+  {
+    "file": "tests/mana-surge.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "fed22c9b770653c518cf9855666d6f32612226b1b65561f762dc2c90135b336a",
+    "bytes": 5740,
+    "lines": 122
+  },
+  {
+    "file": "tests/map-connectivity.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "2c9c48c07c694e716fae0d922c57bd9dad37d0eba7ad13e8a0a13b7dc5c6608e",
+    "bytes": 1672,
+    "lines": 50
+  },
+  {
+    "file": "tests/map-rng-bit-equivalence.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "4ecfd460fe8c48b301a603c707e6d3f409cfa516e9dc54f4057abcc55fe1af99",
+    "bytes": 3535,
+    "lines": 82
+  },
+  {
+    "file": "tests/mech-sentences.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "4accbe87c0b4601184c4c6eb3c1d947314ac89dca70a7178bf661b62aa6b1937",
+    "bytes": 3039,
+    "lines": 70
+  },
+  {
+    "file": "tests/menu-recovery-entry.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "a6f6b1b8121a530407ae9d7222678e5d817e5dd68b83dfd49f62aca4a9c9583a",
+    "bytes": 3670,
+    "lines": 74
+  },
+  {
+    "file": "tests/message-batch-0917.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "c39c67010e1014d95d1627ee0457a4f5672ae2d0dfde5141e52365af30489266",
+    "bytes": 8946,
+    "lines": 186
+  },
+  {
+    "file": "tests/message-batch-0920-late.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "f549002f42364bb6e0e217ed6b26a65109b7e5d67f71a1cbaa5859f7beb65009",
+    "bytes": 6679,
+    "lines": 125
+  },
+  {
+    "file": "tests/message-fixes.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "076a3ce15a0453a9d53aacd2ddf541cbced64b447bfa69872cd3ca7d68e4dc73",
+    "bytes": 6489,
+    "lines": 144
+  },
+  {
+    "file": "tests/mistbox.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "d38e84fa18eadf8898dd0500b765203c3413cb7af2a8abda97795651b35c06e2",
+    "bytes": 4913,
+    "lines": 113
+  },
+  {
+    "file": "tests/multi-hit-retarget.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "20343ef87134e9aeb9f20504287f22fbae52cc7d4415d574e4eb15a478806e96",
+    "bytes": 3759,
+    "lines": 74
+  },
+  {
+    "file": "tests/n1-infuse-uid-toggle.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "7a9599826e90523f5a4cfac04f8bcb0254dd089db1be5455ddc07c67ab1c4718",
+    "bytes": 6095,
+    "lines": 112
+  },
+  {
+    "file": "tests/narrative-coverage.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "ae5bcbc50563d0888012987d22d62d1ebb9de2059fe3c54a7c79eb12d17f4922",
+    "bytes": 2166,
+    "lines": 52
+  },
+  {
+    "file": "tests/narrative.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "169a8322c97e98b5624fb28ba7ed87c5221d83e36f87c0e01c9f8f7b272e111a",
+    "bytes": 1883,
+    "lines": 38
+  },
+  {
+    "file": "tests/nest-hearts.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "71c0a00ae9deb94132fd50c98f871e856839d9d08a3c0ebeda45605470090bd2",
+    "bytes": 3602,
+    "lines": 61
+  },
+  {
+    "file": "tests/nest-regression.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "281cc03b52c41259ffe6346a8f78e8df8e189475b6f3b22f940ec84b55f41dcd",
+    "bytes": 8427,
+    "lines": 163
+  },
+  {
+    "file": "tests/nest-runemaster.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "3c59fb1bec83a89b98da9136a3b62579180ceec4b1e99e56e6d7e9f0babe3f2c",
+    "bytes": 1624,
+    "lines": 35
+  },
+  {
+    "file": "tests/nest-settlement-transaction.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "53d5aff3699eeb8c4db802ba1c3df979990e12146189407e5c479dc91f6d1d9e",
+    "bytes": 7136,
+    "lines": 147
+  },
+  {
+    "file": "tests/nightshift-u10-settle-transition.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "b5de9aa0101ee1323a1f31342cbeeac549c0aae0fb1bdbe087180b01abfca151",
+    "bytes": 4919,
+    "lines": 103
+  },
+  {
+    "file": "tests/nightshift-u10-teardown-guards.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "1a0230f97eccf19ab0275bd6d78f72a08f362d5a92caaa511cafc00dee59600c",
+    "bytes": 6724,
+    "lines": 125
+  },
+  {
+    "file": "tests/node-retrigger.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "8a17568cbc50ae76d16d6949821214c1ff428bbb8c47a685bab7941f9306ae13",
+    "bytes": 11465,
+    "lines": 222
+  },
+  {
+    "file": "tests/overlay-dialog.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "d235f9b2723d200b9b58226c9e1b65ebf4b6017f86e722804e9df79b56d2e97f",
+    "bytes": 3960,
+    "lines": 96
+  },
+  {
+    "file": "tests/perf-probe-summary.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "ec08be159b410e893d999d7d4fa2d4325456d21b44d15379b67502550a8c361b",
+    "bytes": 1036,
+    "lines": 26
+  },
+  {
+    "file": "tests/pet-egg-chest.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "6c4dfbc04a8770454dec5db0c4df8d3541017e47fcb557a9143564eb40a3f1a0",
+    "bytes": 2913,
+    "lines": 74
+  },
+  {
+    "file": "tests/photo-studio-presentation.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "239352a4d4df5d3bd90e637ffe03b08b6d0cf4dd36743581d4b5f351534a0d42",
+    "bytes": 1121,
+    "lines": 30
+  },
+  {
+    "file": "tests/photo-zoom-lifecycle.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "4134ecbc8edae7aa6bac89ebb3bdcc3b85a725e25ba996dee6434deaa7a281c2",
+    "bytes": 6671,
+    "lines": 140
+  },
+  {
+    "file": "tests/playthrough-bot.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "3f96696f623d8addf7ec7166e2a9129eccc50daa483d76a5ce661afca5d1a321",
+    "bytes": 6705,
+    "lines": 105
+  },
+  {
+    "file": "tests/potion-tip.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "d933838d30b2906d1d5c436be66f0f82b949667fd88097cf24f882b70e86a19a",
+    "bytes": 6512,
+    "lines": 118
+  },
+  {
+    "file": "tests/premium-ui-pages.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "86485b0a77bc2a8635d986beb744acde92eee771fba3f9d757526ee6a9473002",
+    "bytes": 5246,
+    "lines": 105
+  },
+  {
+    "file": "tests/r2a-commands.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "55ab8cb2ec5363be7a506acf3063c4bca00fa588f48ba4776ceec2d8f791902e",
+    "bytes": 9720,
+    "lines": 149
+  },
+  {
+    "file": "tests/r2a-recovery.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "8e49b2088f6bef59a40e2a2deed7a48ab9f96bb91aa1c96d86b222ff9c1796a4",
+    "bytes": 6325,
+    "lines": 100
+  },
+  {
+    "file": "tests/r3-0-command-guards.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "c1aa92bd82282946a49c7715a36155cfd852ca0e663cdf632ff804aa19e7e9fe",
+    "bytes": 7258,
+    "lines": 171
+  },
+  {
+    "file": "tests/r3-a-preview.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "d758942128cf1bd026a84a6dcb94174fb15edfc8388615c18cce841b46a0fb33",
+    "bytes": 16314,
+    "lines": 314
+  },
+  {
+    "file": "tests/r3-b-action-boundary.repro.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "6840addb04d4cd5b8b8edc671630090e5b2cc178b00278fb03357e347b8d190b",
+    "bytes": 7231,
+    "lines": 159
+  },
+  {
+    "file": "tests/r5a-map-snapshot.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "ce1fd3cbc2f73ebc66334f203d01fa711b4dc6c9193316c21549b9ff59745cee",
+    "bytes": 4975,
+    "lines": 67
+  },
+  {
+    "file": "tests/r5a-session-menu.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "e18b3585de8f01380741d78ddeaaf1704c7f46a326bbaa96c17a4a210f3e4bc5",
+    "bytes": 10814,
+    "lines": 174
+  },
+  {
+    "file": "tests/r5b-dev-info.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "5315d3072d130d9d486f5906aa0dfdec051cc6fcf4bcdddd5be741be203e721a",
+    "bytes": 632,
+    "lines": 13
+  },
+  {
+    "file": "tests/r5b-route-overlay.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "c311d69935550f6849b471216fc98553ed5f31824f551e75b393bc99fbf55089",
+    "bytes": 2514,
+    "lines": 40
+  },
+  {
+    "file": "tests/r6-story-flow.repro.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "74330e49471bdc501736269bb4299a828a240ad6d90bfbbcd1aebbf5d6327df2",
+    "bytes": 7364,
+    "lines": 151
+  },
+  {
+    "file": "tests/r6-story.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "253549f4028f8196adea96579ea5e684ae30a0c6a6093243755c788800f0fe0f",
+    "bytes": 8946,
+    "lines": 134
+  },
+  {
+    "file": "tests/r7a-battle-orders.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "8686a86018a3409a529633bea9f2546ac2734a2ea0d3129528a476ebd57e2cb4",
+    "bytes": 4938,
+    "lines": 49
+  },
+  {
+    "file": "tests/r7a-encounter-selector.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "0d61226e18ddf0b4e40f6dcae7f0bd5ed8c8b575311bfc633f4c0e3277560dc4",
+    "bytes": 2335,
+    "lines": 36
+  },
+  {
+    "file": "tests/r7a-qa-host.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "4e6f98e1ef3f1a0f55cce2c603d495ded43a3779950ccb38fdda16e1466e008d",
+    "bytes": 904,
+    "lines": 16
+  },
+  {
+    "file": "tests/r7a-qa-live.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "f65d5b31234ab30d01000febe08c3e989b997ed64d6d52e5575d85cdeb39fb9c",
+    "bytes": 2266,
+    "lines": 25
+  },
+  {
+    "file": "tests/r7a-scenes-integration.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "b9dd8b0607d19e53685f9b6bdbe4ea69cc7a71cb667effb4b079ad2737f53f89",
+    "bytes": 2185,
+    "lines": 29
+  },
+  {
+    "file": "tests/r7b-feedback.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "9a4051763252c89a278b283dbc84e843377933c4bc8baca7603b52096d94347b",
+    "bytes": 13386,
+    "lines": 166
+  },
+  {
+    "file": "tests/random.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "1eec14ffbc9307cadbe6e988f91a4345353012662537f7598fc0e26148811388",
+    "bytes": 2412,
+    "lines": 54
+  },
+  {
+    "file": "tests/rapid-fire.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "599ef13b43e0b1eb1c1b61946efc2bdf4e1cad5351faec9a06e5f5c2812704e2",
+    "bytes": 6969,
+    "lines": 163
+  },
+  {
+    "file": "tests/recoverable-pair-contract.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "97c673c9f7f1124a813c011bf6378c29467496f8ab26dc5e4996b8ee6f2be954",
+    "bytes": 1539,
+    "lines": 34
+  },
+  {
+    "file": "tests/recoverable-pair-types.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "63900fb33932f75b555248a2e33ca9aa7f92e7da8266ada9b05e2d8c8c234548",
+    "bytes": 6793,
+    "lines": 128
+  },
+  {
+    "file": "tests/render-scheduler.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "d7ca392b7bde0bef627f168faeb30334bf3d0d416791a7bced142aceb0c7d903",
+    "bytes": 2030,
+    "lines": 50
+  },
+  {
+    "file": "tests/rule-config.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "16001dbda52f5a28cae6bc24d989942c465b39f0e928734dde28f59be827d54f",
+    "bytes": 3478,
+    "lines": 67
+  },
+  {
+    "file": "tests/run-architecture.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "2666aec250bf4f5484043aacbfcde8a9cc3034ed70da4663742c47dd1ec174f3",
+    "bytes": 5592,
+    "lines": 100
+  },
+  {
+    "file": "tests/save-compat.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "207e7d1e6ede242594f0d83eb56299a323caf2a764ab1262de1e327000c1fbbe",
+    "bytes": 9571,
+    "lines": 199
+  },
+  {
+    "file": "tests/save-prev-fallback.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "abf516494c20b3c8cae0c135128b27380b204e2d099de66f7daf3612b0ca8eae",
+    "bytes": 7642,
+    "lines": 142
+  },
+  {
+    "file": "tests/schema-op-coverage.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "5fcab5dfa77d5bb0229e24608c463d30f67923d0187a8536c0b954ba67c9b571",
+    "bytes": 6744,
+    "lines": 118
+  },
+  {
+    "file": "tests/shop-sell-stored-guard.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "a162ea9e856dd032d03ef8a23235c6b80911c1d2c9827a2a387e88fb06cb9cbb",
+    "bytes": 3168,
+    "lines": 70
+  },
+  {
+    "file": "tests/sound-policy.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "2cce10c47165d56215d0dd25ed1bf3fbf81d28afc254b3f86f4296a4faeb524b",
+    "bytes": 1919,
+    "lines": 42
+  },
+  {
+    "file": "tests/soundscape.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "3023ce71485332b9cbf1e231eddae8db19d5f43cd47edbf62d4690cb9c8c7bc1",
+    "bytes": 3285,
+    "lines": 61
+  },
+  {
+    "file": "tests/strict-foundations-types.fixture.ts",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "b2285ea8e20055114aaae6152fd2319a27fa2ab80e13955e12d715545ba972e2",
+    "bytes": 7269,
+    "lines": 181
+  },
+  {
+    "file": "tests/strict-hand-selection-types.fixture.ts",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "af5784438253caee61bdf6908b7ceff62ee7d4dd876a7dfddbd7da932e3cf5cc",
+    "bytes": 4253,
+    "lines": 97
+  },
+  {
+    "file": "tests/strict-selection-types.fixture.ts",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "baa33d77fd19ad27b20f120d6f6347856187af1babbf4371b56119a7543242e7",
+    "bytes": 2633,
+    "lines": 42
+  },
+  {
+    "file": "tests/structured-onplay-battle.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "2007b2ab8657e2d892710732f44c184da778253f692ddcb54bad6cc5b8732dfb",
+    "bytes": 10683,
+    "lines": 222
+  },
+  {
+    "file": "tests/suggestions-store.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "5a98687875c374348c0322439c3cff286ea46afb63b32c710173d5ede0bb8435",
+    "bytes": 993,
+    "lines": 22
+  },
+  {
+    "file": "tests/sync-cards-from-live.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "a344f55b4ba7504f8735b0250ac3c3f8ad1ad401d24fb5954c1fa0ff181a7670",
+    "bytes": 4577,
+    "lines": 86
+  },
+  {
+    "file": "tests/terminal-death.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "40d9cbe3bf36e45a5b93f884fc59db451a2495ec0b36dc3299a3aeadedbbf65a",
+    "bytes": 6712,
+    "lines": 140
+  },
+  {
+    "file": "tests/terminal-persistence.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "42d30837da042f98a181a460ad828f4d75581d892bcfe1c0524a4738b3e94b6b",
+    "bytes": 6379,
+    "lines": 129
+  },
+  {
+    "file": "tests/terminal-recovery-matrix.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "774908b613c8ccb0af192e358f71b6d9800852344caeb740d4c42b79de423c2e",
+    "bytes": 9170,
+    "lines": 188
+  },
+  {
+    "file": "tests/terminal-settlement.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "b46ce24305afb91f68784b5e32deccd4c359914b65119d80b29e37c8ae60f934",
+    "bytes": 1980,
+    "lines": 52
+  },
+  {
+    "file": "tests/tt1-material-structured.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "b362ebc4833d6399d815b69e4d5d86946f030fdf71dc50d7f5cc3c1b56190871",
+    "bytes": 1799,
+    "lines": 42
+  },
+  {
+    "file": "tests/tt12-hitechrd-battle-baseline.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "945f6c5b0fe277ccef6a61eaa80fecc7d48583088e869609d88c71d645097f83",
+    "bytes": 6576,
+    "lines": 150
+  },
+  {
+    "file": "tests/tt12-hitechrd-structured.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "31291f2224fb02e10879612d66e57ef0cd36b467e80134bd01dc320e720f496e",
+    "bytes": 8773,
+    "lines": 191
+  },
+  {
+    "file": "tests/tt12-structured-battle.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "43fb51dfb68972162c305596f9f4ebd047218891ee131280c7de4c9ae08ced87",
+    "bytes": 7806,
+    "lines": 178
+  },
+  {
+    "file": "tests/tt12-structured-preplay.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "550a6369a10819250099ffd3319d23c047391c2a1be2b23863203ce096e71d59",
+    "bytes": 7525,
+    "lines": 152
+  },
+  {
+    "file": "tests/tt3-effect-baseline.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "d5e69e743d8a1a97df7692344c451eadfffcbc0f315bd2ef6b324adbf9594280",
+    "bytes": 14761,
+    "lines": 335
+  },
+  {
+    "file": "tests/tt3-material-structured.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "f01744aacb7e7b46ef6c9bc8212583f34f0faf6338ce01cb949e0f0cadd8d231",
+    "bytes": 4455,
+    "lines": 100
+  },
+  {
+    "file": "tests/tt7-frozenight-structured-battle.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "1b95ec00086f21d6fadfb3d51548bb58d5108f71367a1cb5cfd1e760e0aec503",
+    "bytes": 5896,
+    "lines": 130
+  },
+  {
+    "file": "tests/tt7-hand-payment.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "88e8a491b1dbb4df1cdc86b9158dfe9a87adcf562fb2904c3ad4e43e4410fb85",
+    "bytes": 10537,
+    "lines": 196
+  },
+  {
+    "file": "tests/tt7-sneak-structured.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "8e304712e1e8a730685adadea0df2f03835828ef791daa2040e4ac94ba248f31",
+    "bytes": 4357,
+    "lines": 100
+  },
+  {
+    "file": "tests/u18-negative-hp-death.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "0212b65f2d5028376fa273ab136595258cd7ca9189a756eec53ce1d0f1446628",
+    "bytes": 7264,
+    "lines": 149
+  },
+  {
+    "file": "tests/u4-nightshift-guards.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "bd0c2ceb4a6e423584defb31e5549617a7ffa7f365f31994be7c9a75b7a67adb",
+    "bytes": 3405,
+    "lines": 76
+  },
+  {
+    "file": "tests/ui-accessibility-regression.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "8cfffcaa44ed5fa7f61a350fc625f6bfaf8ac792ceebedb3daeeafb137f5e86d",
+    "bytes": 1839,
+    "lines": 35
+  },
+  {
+    "file": "tests/ui-scale.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "1274cc97ab9b2d692c83a36b677e5032d7541ea3a01f10a37bad7b536fbe0cf8",
+    "bytes": 1603,
+    "lines": 41
+  },
+  {
+    "file": "tests/vite-card-chunk.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": true,
+    "sha256": "80886457871a2745b0d5a8a3d1154fbc657940c61c1395b6dfd71131ea67a915",
+    "bytes": 1954,
+    "lines": 40
+  },
+  {
+    "file": "tests/workflow-browser.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": false,
+    "sha256": "1c9e7893345e21d59f3c13d162990ef938182530245fb4aaeb184132d6f35fff",
+    "bytes": 8707,
+    "lines": 141
+  },
+  {
+    "file": "tests/workflow-cli-integration.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": false,
+    "sha256": "2494a1774da6ef84d4318ee90514bbac3158a8425b9cd96001ca5222935d6c86",
+    "bytes": 2935,
+    "lines": 49
+  },
+  {
+    "file": "tests/workflow-handoff.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": false,
+    "sha256": "98b12e190254c96201367f90e99bb3adcd096215a8297546eab1a467ac1e5ffd",
+    "bytes": 8436,
+    "lines": 125
+  },
+  {
+    "file": "tests/workflow-index.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": false,
+    "sha256": "c12aac7bb19d7319136df68b97c2141cc12ffb0335280cd4f287e9ac94989b44",
+    "bytes": 4211,
+    "lines": 72
+  },
+  {
+    "file": "tests/workflow-memory.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": false,
+    "sha256": "6735b0e5d5734acad96ba623fd1e15f1ca29f630e4b7e5be10a85c78514d3348",
+    "bytes": 6644,
+    "lines": 123
+  },
+  {
+    "file": "tests/workflow-scope.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": false,
+    "sha256": "25d6c2a903ec6ce469b6de4809c558bdbea22344a13f5e6fbfd6590e95170efe",
+    "bytes": 8674,
+    "lines": 127
+  },
+  {
+    "file": "tests/workflow-staged.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": false,
+    "sha256": "b1f50361fdb5350641b910d4458bc09762a249d86691b2d0cc62b5c4616dbc93",
+    "bytes": 10302,
+    "lines": 149
+  },
+  {
+    "file": "tests/workflow-task.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": false,
+    "sha256": "d4f5028099428d5e1280e137b54047f3db5e3dc16dab262b84ad9952ca80699e",
+    "bytes": 7299,
+    "lines": 111
+  },
+  {
+    "file": "tests/workflow-tools.test.js",
+    "owner": "root",
+    "category": "test-or-fixture",
+    "tracked": false,
+    "sha256": "9d40abb1171b3ddab685e3a87948a36bbf0d107131ed443fef2e7948097ccad1",
+    "bytes": 12825,
+    "lines": 186
+  },
+  {
+    "file": "_repo/AGENTS.md",
+    "owner": "infrastructure",
+    "category": "contract-document",
+    "tracked": true,
+    "sha256": "e3e5a95d6227bbb3519efae5da2685cce936bd7b86d2e1096552be8cf3c9fab1",
+    "bytes": 3925,
+    "lines": 27
+  }
+]

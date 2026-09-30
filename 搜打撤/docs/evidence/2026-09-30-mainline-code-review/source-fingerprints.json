@@ -1,0 +1,66 @@
+[
+  {
+    "path": "game/src/hub/game.storage.js",
+    "sha256": "87D7B24861B2FBE1AD080FA34449A89CF952A86B1C1DEC3BA0AA2F3E6F7E1273"
+  },
+  {
+    "path": "game/src/hub/versioned-slot-reader.js",
+    "sha256": "4CA1A14DFF44561122A48178DEB3F43A4A33A8758E1DE976C147DCB6094B689E"
+  },
+  {
+    "path": "game/src/hub/recoverable-pair.js",
+    "sha256": "B817A01F7961DDA2EAFB83E65F2FB7CDE7836FC96B93A2BD119BC3BBB29BF8FD"
+  },
+  {
+    "path": "game/src/hub/recovery.commands.js",
+    "sha256": "457AD8AEE4756B7F85A31F22DBB7EC7FEE24498BE629E273B976C687FD327DAC"
+  },
+  {
+    "path": "game/src/hub/extraction.commands.js",
+    "sha256": "DE12DD3792A3F617CA925D001854C161F52FE7DC6080E7CAD7F0310CE97B64E0"
+  },
+  {
+    "path": "game/src/hub/terminal.commands.js",
+    "sha256": "D0ACEAC2317893B092233BB3A13BF346EEB6528DA2B10B30A9290F85ED2B9229"
+  },
+  {
+    "path": "game/src/hub/battle-settlement.commands.js",
+    "sha256": "7360EBD06F139C8E43510C1CD9D9556471F6532185C265618DF8603FA289584E"
+  },
+  {
+    "path": "game/src/hub/game.bag.settle.js",
+    "sha256": "7B2D0B64D68F025A90CA9F33F5488F20CBE4E37FB7E8916047E95C5690F91CE1"
+  },
+  {
+    "path": "game/src/hub/base-departure.commands.js",
+    "sha256": "BBE418B489490E7BF8CE90D0BFBC1DC5279EC504684A0283ED2E31ADE2FFE72B"
+  },
+  {
+    "path": "game/src/run/game.session.js",
+    "sha256": "FA9AB1599F31134264EC29C933D49B8B9FC7E9856D32FEEC3868C0651F3DBF56"
+  },
+  {
+    "path": "game/src/run/map-snapshot.js",
+    "sha256": "3CBF6FBDCBF3537CFC7C15A53A47A50D9BAA52B69B26B76B989B5E0716C2658A"
+  },
+  {
+    "path": "game/src/run/chests.js",
+    "sha256": "5C087A8E44CABB28B883CAE73132FBD8467E90817E04E7B6E4D369FFBAB51668"
+  },
+  {
+    "path": "game/src/run/game.run.scenes.js",
+    "sha256": "EC0F447B06EB2FDB4ABCFA1C9FB80457134BD8B04AAD522F697845ABB143B3F7"
+  },
+  {
+    "path": "game/src/battle/core/battle.lifecycle.js",
+    "sha256": "5D20F9E5BC4AE629E27644E942877A3F6BB61FD618BFF175B62694ACBD8A20CD"
+  },
+  {
+    "path": "game/src/battle/core/battle.enemy-phase.js",
+    "sha256": "A5A5E8E06B222707B19BB9916244236D3A0495B9B941A6607C490D704C7BB641"
+  },
+  {
+    "path": "game/src/battle/runtime/battle.execution-session.js",
+    "sha256": "AAF29D7CF135C43A377E3DD5DA08707DC1DE9DB33D83CC049F39B05F2006153D"
+  }
+]

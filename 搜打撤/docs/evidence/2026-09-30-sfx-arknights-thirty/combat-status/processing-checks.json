@@ -1,0 +1,331 @@
+{
+  "repository": "https://github.com/PseudoMon/arknights-audio",
+  "branch": "global-server-voices",
+  "count": 10,
+  "unique_source_count": 10,
+  "originals_unchanged": true,
+  "human_audition": false,
+  "rights": "Repository describes educational use; no project redistribution/commercial licence verified.",
+  "records": [
+    {
+      "id": "hurt",
+      "source_seconds": 1.143479,
+      "source_sha256": "cb37b252ac9762a71afe2412f300ab2d266a1b4ac5c693b270126e3ba7248f34",
+      "crop_seconds": [
+        0.014917,
+        1.143479
+      ],
+      "pitch_semitones": -0.5,
+      "tempo": 1.04,
+      "upper_shelf_db": -0.8,
+      "release_ms": 35,
+      "peak_target_dbfs": -10,
+      "filter": "rubberband=tempo=1.04:pitch=0.971531941:transients=crisp:detector=percussive:phase=laminar:window=short:smoothing=off:formant=preserved:pitchq=quality:channels=together",
+      "checks": {
+        "base": {
+          "seconds": 1.128562,
+          "peak_dbfs": -10.037,
+          "true_peak_dbfs": -9.983,
+          "decode": "pass"
+        },
+        "adjusted": {
+          "seconds": 1.085146,
+          "peak_dbfs": -9.967,
+          "true_peak_dbfs": -9.878,
+          "decode": "pass"
+        }
+      },
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_char/b_char_darkharm.wav",
+      "source_file": "b_char_darkharm.wav",
+      "original_trigger_verified": false
+    },
+    {
+      "id": "kill",
+      "source_seconds": 1.939333,
+      "source_sha256": "3b1700a1fdbe7d0355df4892c325e8492c4f7e9e09b7274f880f009a80533279",
+      "crop_seconds": [
+        0.02125,
+        1.554229
+      ],
+      "pitch_semitones": -0.5,
+      "tempo": 1.03,
+      "upper_shelf_db": -0.5,
+      "release_ms": 40,
+      "peak_target_dbfs": -9.5,
+      "filter": "rubberband=tempo=1.03:pitch=0.971531941:transients=crisp:detector=percussive:phase=laminar:window=short:smoothing=off:formant=preserved:pitchq=quality:channels=together",
+      "checks": {
+        "base": {
+          "seconds": 1.532979,
+          "peak_dbfs": -9.438,
+          "true_peak_dbfs": -9.433,
+          "decode": "pass"
+        },
+        "adjusted": {
+          "seconds": 1.488333,
+          "peak_dbfs": -9.517,
+          "true_peak_dbfs": -9.508,
+          "decode": "pass"
+        }
+      },
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_char/b_char_dead.wav",
+      "source_file": "b_char_dead.wav",
+      "original_trigger_verified": false
+    },
+    {
+      "id": "shieldUp",
+      "source_seconds": 1.428917,
+      "source_sha256": "eab370fa7b96b53f73f22b71da609784c2df18354012ef25484672f611afeb8a",
+      "crop_seconds": [
+        0.0,
+        1.238646
+      ],
+      "pitch_semitones": -0.25,
+      "tempo": 1.04,
+      "upper_shelf_db": -0.8,
+      "release_ms": 35,
+      "peak_target_dbfs": -11.5,
+      "filter": "rubberband=tempo=1.04:pitch=0.985663199:transients=crisp:detector=percussive:phase=laminar:window=short:smoothing=off:formant=preserved:pitchq=quality:channels=together",
+      "checks": {
+        "base": {
+          "seconds": 1.238646,
+          "peak_dbfs": -11.675,
+          "true_peak_dbfs": -11.67,
+          "decode": "pass"
+        },
+        "adjusted": {
+          "seconds": 1.191,
+          "peak_dbfs": -11.911,
+          "true_peak_dbfs": -11.7,
+          "decode": "pass"
+        }
+      },
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_char/b_char_addshield.wav",
+      "source_file": "b_char_addshield.wav",
+      "original_trigger_verified": false
+    },
+    {
+      "id": "armorBreak",
+      "source_seconds": 1.512812,
+      "source_sha256": "23245cfd941a94857dae53bb6eee3174e2002c1ddc7ecc3abe97fc9239ac9cd2",
+      "crop_seconds": [
+        0.0,
+        1.411708
+      ],
+      "pitch_semitones": -0.5,
+      "tempo": 1.05,
+      "upper_shelf_db": -1,
+      "release_ms": 40,
+      "peak_target_dbfs": -10,
+      "filter": "rubberband=tempo=1.05:pitch=0.971531941:transients=crisp:detector=percussive:phase=laminar:window=short:smoothing=off:formant=preserved:pitchq=quality:channels=together",
+      "checks": {
+        "base": {
+          "seconds": 1.411708,
+          "peak_dbfs": -10.124,
+          "true_peak_dbfs": -9.794,
+          "decode": "pass"
+        },
+        "adjusted": {
+          "seconds": 1.344479,
+          "peak_dbfs": -10.028,
+          "true_peak_dbfs": -10.003,
+          "decode": "pass"
+        }
+      },
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_char/b_char_rockexplo.wav",
+      "source_file": "b_char_rockexplo.wav",
+      "original_trigger_verified": false
+    },
+    {
+      "id": "energyUp",
+      "source_seconds": 0.962896,
+      "source_sha256": "1d372439f55b8009496b8d4cb4a344c7319dbc0c3661454a7dc26ed2f31cad31",
+      "crop_seconds": [
+        0.001542,
+        0.962896
+      ],
+      "pitch_semitones": 0.25,
+      "tempo": 1.03,
+      "upper_shelf_db": -0.5,
+      "release_ms": 40,
+      "peak_target_dbfs": -11.5,
+      "filter": "rubberband=tempo=1.03:pitch=1.014545335:transients=crisp:detector=percussive:phase=laminar:window=short:smoothing=off:formant=preserved:pitchq=quality:channels=together",
+      "checks": {
+        "base": {
+          "seconds": 0.958688,
+          "peak_dbfs": -11.621,
+          "true_peak_dbfs": -11.616,
+          "decode": "pass"
+        },
+        "adjusted": {
+          "seconds": 0.930688,
+          "peak_dbfs": -11.835,
+          "true_peak_dbfs": -11.532,
+          "decode": "pass"
+        }
+      },
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_char/b_char_battery.wav",
+      "source_file": "b_char_battery.wav",
+      "original_trigger_verified": false
+    },
+    {
+      "id": "energyDown",
+      "source_seconds": 0.968958,
+      "source_sha256": "5b224601a97f20a47b3cd8d8133a9604dc4580e45ccf3bfdcf2c626020dcaddc",
+      "crop_seconds": [
+        0.0,
+        0.968958
+      ],
+      "pitch_semitones": -0.25,
+      "tempo": 1.04,
+      "upper_shelf_db": -0.8,
+      "release_ms": 35,
+      "peak_target_dbfs": -12,
+      "filter": "rubberband=tempo=1.04:pitch=0.985663199:transients=crisp:detector=percussive:phase=laminar:window=short:smoothing=off:formant=preserved:pitchq=quality:channels=together",
+      "checks": {
+        "base": {
+          "seconds": 0.966292,
+          "peak_dbfs": -11.907,
+          "true_peak_dbfs": -11.901,
+          "decode": "pass"
+        },
+        "adjusted": {
+          "seconds": 0.929021,
+          "peak_dbfs": -12.289,
+          "true_peak_dbfs": -12.212,
+          "decode": "pass"
+        }
+      },
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_char/b_char_energyharm.wav",
+      "source_file": "b_char_energyharm.wav",
+      "original_trigger_verified": false
+    },
+    {
+      "id": "buffUp",
+      "source_seconds": 2.1175,
+      "source_sha256": "c870fb27f51fb1bf74e4710075603fac0a879a0b8ac80071db94bdd21bb29404",
+      "crop_seconds": [
+        0.0,
+        2.070146
+      ],
+      "pitch_semitones": 0.25,
+      "tempo": 1.03,
+      "upper_shelf_db": -0.6,
+      "release_ms": 40,
+      "peak_target_dbfs": -11.5,
+      "filter": "rubberband=tempo=1.03:pitch=1.014545335:transients=crisp:detector=percussive:phase=laminar:window=short:smoothing=off:formant=preserved:pitchq=quality:channels=together",
+      "checks": {
+        "base": {
+          "seconds": 2.070146,
+          "peak_dbfs": -11.498,
+          "true_peak_dbfs": -11.382,
+          "decode": "pass"
+        },
+        "adjusted": {
+          "seconds": 2.009854,
+          "peak_dbfs": -11.758,
+          "true_peak_dbfs": -11.696,
+          "decode": "pass"
+        }
+      },
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_char/b_char_atkboost.wav",
+      "source_file": "b_char_atkboost.wav",
+      "original_trigger_verified": false
+    },
+    {
+      "id": "buffDown",
+      "source_seconds": 0.914312,
+      "source_sha256": "6d75caa514cb2fff8c98829f854466e8d7cac20267423ff34af10d1feaa3c84e",
+      "crop_seconds": [
+        0.0,
+        0.914312
+      ],
+      "pitch_semitones": -0.25,
+      "tempo": 1.04,
+      "upper_shelf_db": -0.8,
+      "release_ms": 40,
+      "peak_target_dbfs": -12,
+      "filter": "rubberband=tempo=1.04:pitch=0.985663199:transients=crisp:detector=percussive:phase=laminar:window=short:smoothing=off:formant=preserved:pitchq=quality:channels=together",
+      "checks": {
+        "base": {
+          "seconds": 0.911646,
+          "peak_dbfs": -11.954,
+          "true_peak_dbfs": -11.948,
+          "decode": "pass"
+        },
+        "adjusted": {
+          "seconds": 0.876479,
+          "peak_dbfs": -11.917,
+          "true_peak_dbfs": -11.911,
+          "decode": "pass"
+        }
+      },
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_char/b_char_boostclose.wav",
+      "source_file": "b_char_boostclose.wav",
+      "original_trigger_verified": false
+    },
+    {
+      "id": "curse",
+      "source_seconds": 2.977146,
+      "source_sha256": "7aba9ea6497b7ad73c5760378ea06af9f8941ee2c090d9d8a98bc6cc916986a0",
+      "crop_seconds": [
+        0.0,
+        2.946229
+      ],
+      "pitch_semitones": -0.5,
+      "tempo": 1.02,
+      "upper_shelf_db": -0.9,
+      "release_ms": 45,
+      "peak_target_dbfs": -11,
+      "filter": "rubberband=tempo=1.02:pitch=0.971531941:transients=crisp:detector=percussive:phase=laminar:window=short:smoothing=off:formant=preserved:pitchq=quality:channels=together",
+      "checks": {
+        "base": {
+          "seconds": 2.946229,
+          "peak_dbfs": -11.262,
+          "true_peak_dbfs": -11.245,
+          "decode": "pass"
+        },
+        "adjusted": {
+          "seconds": 2.888458,
+          "peak_dbfs": -11.216,
+          "true_peak_dbfs": -11.201,
+          "decode": "pass"
+        }
+      },
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_char/b_char_cursedoll.wav",
+      "source_file": "b_char_cursedoll.wav",
+      "original_trigger_verified": false
+    },
+    {
+      "id": "curseEnd",
+      "source_seconds": 3.754667,
+      "source_sha256": "e1bcd15c178c4934883a06ef91f0126331c198cf70b0249e7794f6ee6a317d2a",
+      "crop_seconds": [
+        0.0,
+        3.366708
+      ],
+      "pitch_semitones": -0.25,
+      "tempo": 1.04,
+      "upper_shelf_db": -0.8,
+      "release_ms": 40,
+      "peak_target_dbfs": -12,
+      "filter": "rubberband=tempo=1.04:pitch=0.985663199:transients=crisp:detector=percussive:phase=laminar:window=short:smoothing=off:formant=preserved:pitchq=quality:channels=together",
+      "checks": {
+        "base": {
+          "seconds": 3.366708,
+          "peak_dbfs": -12.344,
+          "true_peak_dbfs": -12.33,
+          "decode": "pass"
+        },
+        "adjusted": {
+          "seconds": 3.237229,
+          "peak_dbfs": -12.092,
+          "true_peak_dbfs": -11.97,
+          "decode": "pass"
+        }
+      },
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_char/b_char_emp_2.wav",
+      "source_file": "b_char_emp_2.wav",
+      "original_trigger_verified": false
+    }
+  ]
+}

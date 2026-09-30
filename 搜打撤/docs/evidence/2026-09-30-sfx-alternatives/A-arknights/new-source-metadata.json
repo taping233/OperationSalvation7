@@ -1,0 +1,401 @@
+{
+  "files": [
+    {
+      "file": "ui-recorded-click.wav",
+      "repository": "https://github.com/Cromemadnd/ArknightsUI-React-Template",
+      "branch": "main",
+      "source_path": "public/click.wav",
+      "source_url": "https://raw.githubusercontent.com/Cromemadnd/ArknightsUI-React-Template/main/public/click.wav",
+      "github_blob_sha": "aa2c263beda06830b706ba6216c98e60a8000111",
+      "sha256": "11a1b24a924134691c0edc95c46c80354f4019d59b52e8df97db3b54d1f594ad",
+      "bytes": 50470
+    },
+    {
+      "file": "ui-home-button.wav",
+      "repository": "https://github.com/misaka10843/arknights-h5",
+      "branch": "master",
+      "source_path": "voice/button.wav",
+      "source_url": "https://raw.githubusercontent.com/misaka10843/arknights-h5/master/voice/button.wav",
+      "github_blob_sha": "8ab6928d492c8010609d7051b99c0dbe4e373f41",
+      "sha256": "f1379a849fff5d804bdf18aa4a1a9aeda685c928f347dffaf35b9f760b909bdb",
+      "bytes": 38884
+    },
+    {
+      "file": "d_avg_glass_break.wav",
+      "repository": "https://github.com/PseudoMon/arknights-audio",
+      "branch": "global-server-voices",
+      "source_path": "avg/d_avg_glass_break.wav",
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_glass_break.wav",
+      "github_blob_sha": "4a229e43aa8ef7f5ba688f3aa2acb2455d0bf07a",
+      "sha256": "1c69c44feec07a8570820f9e810861ce32e9b0c6c38d6d3acecfe3f843760f3c",
+      "bytes": 281196
+    }
+  ],
+  "contexts": [
+    {
+      "url": "https://raw.githubusercontent.com/Cromemadnd/ArknightsUI-React-Template/main/src/App.tsx",
+      "excerpts": [
+        {
+          "line": 22,
+          "text": "import { ChangeIcon, HideIcon, LevelIcon } from \"./components/Icons.tsx\";"
+        },
+        {
+          "line": 23,
+          "text": ""
+        },
+        {
+          "line": 24,
+          "text": "const bgm = new Audio(\"./bgm.mp3\");"
+        },
+        {
+          "line": 25,
+          "text": "bgm.loop = true;"
+        },
+        {
+          "line": 26,
+          "text": ""
+        },
+        {
+          "line": 27,
+          "text": "function App() {"
+        }
+      ]
+    },
+    {
+      "url": "https://raw.githubusercontent.com/Cromemadnd/ArknightsUI-React-Template/main/src/components/Buttons.tsx",
+      "excerpts": [
+        {
+          "line": 3,
+          "text": ""
+        },
+        {
+          "line": 4,
+          "text": "// eslint-disable-next-line react-refresh/only-export-components"
+        },
+        {
+          "line": 5,
+          "text": "export const clickSound = new Audio(\"./click.wav\");"
+        },
+        {
+          "line": 6,
+          "text": ""
+        },
+        {
+          "line": 7,
+          "text": "export function BaseButton({"
+        },
+        {
+          "line": 8,
+          "text": "  children,"
+        },
+        {
+          "line": 26,
+          "text": "      ref={ref}"
+        },
+        {
+          "line": 27,
+          "text": "      onClick={(event) => {"
+        },
+        {
+          "line": 28,
+          "text": "        clickSound.currentTime = 0;"
+        },
+        {
+          "line": 29,
+          "text": "        clickSound.play();"
+        },
+        {
+          "line": 30,
+          "text": ""
+        },
+        {
+          "line": 31,
+          "text": "        if (onClick !== undefined) {"
+        },
+        {
+          "line": 32,
+          "text": "          onClick(event);"
+        }
+      ]
+    },
+    {
+      "url": "https://raw.githubusercontent.com/Cromemadnd/ArknightsUI-React-Template/main/README.md",
+      "excerpts": [
+        {
+          "line": 1,
+          "text": "# Arknights UI React Template"
+        },
+        {
+          "line": 2,
+          "text": ""
+        },
+        {
+          "line": 3,
+          "text": "### 本项目仅作学习与练习用途，与《明日方舟》游戏本体无关联，版权归鹰角网络所有。若有侵权，请联系本人删除。"
+        },
+        {
+          "line": 4,
+          "text": ""
+        },
+        {
+          "line": 5,
+          "text": "![预览图](./preview.png)"
+        },
+        {
+          "line": 6,
+          "text": ""
+        },
+        {
+          "line": 68,
+          "text": "均来自[PRTS.wiki](https://prts.wiki)。"
+        },
+        {
+          "line": 69,
+          "text": ""
+        },
+        {
+          "line": 70,
+          "text": "### 按键点击音效"
+        },
+        {
+          "line": 71,
+          "text": ""
+        },
+        {
+          "line": 72,
+          "text": "来自游戏录制。"
+        },
+        {
+          "line": 73,
+          "text": ""
+        },
+        {
+          "line": 74,
+          "text": "### 助理立绘"
+        },
+        {
+          "line": 75,
+          "text": ""
+        },
+        {
+          "line": 76,
+          "text": "本人使用[Tensor.Art](https://tusiart.com/)生成，不持有版权。"
+        }
+      ]
+    },
+    {
+      "url": "https://raw.githubusercontent.com/misaka10843/arknights-h5/master/index.html",
+      "excerpts": [
+        {
+          "line": 45,
+          "text": ""
+        },
+        {
+          "line": 46,
+          "text": "\t\tfunction autoPlay() {"
+        },
+        {
+          "line": 47,
+          "text": "            var myAuto = document.getElementById('yinxiao');"
+        },
+        {
+          "line": 48,
+          "text": "            myAuto.play();"
+        },
+        {
+          "line": 49,
+          "text": "\t\t\ttipsshow();"
+        },
+        {
+          "line": 50,
+          "text": "        }"
+        },
+        {
+          "line": 59,
+          "text": "\t\tfunction tipshide(){"
+        },
+        {
+          "line": 60,
+          "text": "\t\t\t$('#errortips').removeClass(\"show\").addClass('hide');"
+        },
+        {
+          "line": 61,
+          "text": "\t\t\tvar myAuto = document.getElementById('yinxiao');"
+        },
+        {
+          "line": 62,
+          "text": "            myAuto.play();"
+        },
+        {
+          "line": 63,
+          "text": "\t\t}"
+        },
+        {
+          "line": 64,
+          "text": "\t\tfunction friendshow(){"
+        },
+        {
+          "line": 65,
+          "text": "\t\t\t$('#friend').removeClass(\"hide\").addClass('show');"
+        },
+        {
+          "line": 66,
+          "text": "\t\t\tvar myAuto = document.getElementById('yinxiao');"
+        },
+        {
+          "line": 67,
+          "text": "            myAuto.play();"
+        },
+        {
+          "line": 68,
+          "text": "\t\t\t"
+        },
+        {
+          "line": 69,
+          "text": "\t\t}"
+        },
+        {
+          "line": 71,
+          "text": "\t\tfunction friendhide(){"
+        },
+        {
+          "line": 72,
+          "text": "\t\t\t$('#friend').removeClass(\"show\").addClass('hide');"
+        },
+        {
+          "line": 73,
+          "text": "\t\t\tvar myAuto = document.getElementById('yinxiao');"
+        },
+        {
+          "line": 74,
+          "text": "            myAuto.play();"
+        },
+        {
+          "line": 75,
+          "text": "\t\t}"
+        },
+        {
+          "line": 76,
+          "text": ""
+        },
+        {
+          "line": 81,
+          "text": "\t\tfunction chrometipshide(){"
+        },
+        {
+          "line": 82,
+          "text": "\t\t\t$('#chromeerrortips').removeClass(\"show\").addClass('hide');"
+        },
+        {
+          "line": 83,
+          "text": "\t\t\tvar myAuto = document.getElementById('yinxiao');"
+        },
+        {
+          "line": 84,
+          "text": "\t\t    myAuto.play();"
+        },
+        {
+          "line": 85,
+          "text": "\t\t\tvar bgmplay = document.getElementById('bgm');"
+        },
+        {
+          "line": 86,
+          "text": "\t\t\tbgmplay.play();"
+        },
+        {
+          "line": 186,
+          "text": "\t  -- License: MIT"
+        },
+        {
+          "line": 187,
+          "text": "\t  -->"
+        },
+        {
+          "line": 188,
+          "text": "\t<audio src=\"./voice/bg.mp3\" id=\"bgm\" controls=\"controls\" hidden=\"true\" loop autoplay></audio>"
+        },
+        {
+          "line": 189,
+          "text": "\t<audio src=\"./voice/button.wav\" id=\"yinxiao\" controls=\"controls\" hidden=\"true\"></audio>"
+        },
+        {
+          "line": 190,
+          "text": "\t<audio src=\"./voice/amiya-2.mp3\" id=\"yuyin\" controls=\"controls\" hidden=\"true\"></audio>"
+        },
+        {
+          "line": 191,
+          "text": "\t<audio src=\"./voice/ui_error.wav\" id=\"error\" controls=\"controls\" hidden=\"true\"></audio>"
+        },
+        {
+          "line": 192,
+          "text": "\t<div class=\"loader-layer\" id=\"loader-layer\">"
+        },
+        {
+          "line": 193,
+          "text": "\t\t<div class=\"loader\" id=\"loader\">"
+        },
+        {
+          "line": 194,
+          "text": "\t\t\t<div class=\"bar\">"
+        }
+      ]
+    },
+    {
+      "url": "https://raw.githubusercontent.com/misaka10843/arknights-h5/master/README.md",
+      "excerpts": [
+        {
+          "line": 4,
+          "text": ""
+        },
+        {
+          "line": 5,
+          "text": "## 修改内容(￣▽￣)／"
+        },
+        {
+          "line": 6,
+          "text": "大致修改了加载界面，添加了按钮点击音效，<br>"
+        },
+        {
+          "line": 7,
+          "text": "语音框淡出淡入，添加语音<br>"
+        },
+        {
+          "line": 8,
+          "text": "修改立绘为阿米娅精二<br>"
+        },
+        {
+          "line": 9,
+          "text": "添加按钮点击后显示“功能正在制作 错误号-0”的弹窗<br>"
+        },
+        {
+          "line": 69,
+          "text": "如果你实现了新的功能，欢迎 PR！"
+        },
+        {
+          "line": 70,
+          "text": ""
+        },
+        {
+          "line": 71,
+          "text": "## 版权相关"
+        },
+        {
+          "line": 72,
+          "text": "界面贴图素材都是游戏逆向出来的，仅供学习使用，请勿商用。"
+        },
+        {
+          "line": 73,
+          "text": ""
+        },
+        {
+          "line": 74,
+          "text": "## License"
+        },
+        {
+          "line": 75,
+          "text": "© [Mashiro](https://github.com/mashirozx/), Released under the [MIT](https://github.com/mashirozx/arknights-ui/blob/master/LICENSE) License."
+        }
+      ]
+    }
+  ]
+}

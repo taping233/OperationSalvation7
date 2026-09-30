@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "lib": ["ESNext", "DOM"],
+    "allowJs": true,
+    "checkJs": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "types": []
+  },
+  "files": [
+    "game/src/battle/effects/battle.discover-flow.js",
+    "game/src/battle/effects/battle.discover-state.js",
+    "game/src/battle/effects/battle.discover-candidates.js",
+    "game/src/battle/core/battle.hand-selection.js",
+    "tests/strict-hand-selection-types.fixture.ts"
+  ]
+}

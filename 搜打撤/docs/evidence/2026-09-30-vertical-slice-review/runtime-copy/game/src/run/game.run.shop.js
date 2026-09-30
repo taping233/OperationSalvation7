@@ -1,0 +1,443 @@
+import { Random } from '../core/random.js';
+import { esc } from '../core/shared.js';
+import { hopPoint, decayOsc, ease } from '../core/motion-primitives.js';
+
+let openBackpack;
+export function configureShopRuntime({ openBag }) {
+  openBackpack = openBag;
+}
+
+let shopOnClose = null;
+let shopNotice = '';
+let shopPage = 'main';   // 'main' | 'sell'：从背包返回时回到离开前的那一页
+
+function createShopController({
+  UI,
+  SDT,
+  game,
+  bagCap,
+  cardHTML,
+  newUid,
+  saveGame,
+  setCardPageOpen,
+  usedSlots,
+}) {
+  function generateShopStock() {
+    const lib = SDT.Cards.all().filter(card => card.rarity !== '衍生' && !card.unrandom && card.id !== 'tt-token-color');   // 员工通行证A是碎片合成材料，不上架（2026-09-17 留言口径同卡牌库）
+    // 稀有度权重与宝箱爆率同源（2026-09-08 定版：古朴60/稀有28/史诗9/传说3），
+    // 档内挑卡走 pickOfRarity（类型均分，道具 ×0.7）
+    const weights = SDT.Cards.SHOP_WEIGHTS;
+    const total = Object.values(weights).reduce((sum, weight) => sum + weight, 0);
+    const pickWeightedRarity = () => {
+      let roll = Random.random('shop') * total;
+      for (const [rarity, weight] of Object.entries(weights)) {
+        roll -= weight;
+        if (roll <= 0) return rarity;
+      }
+      return '古朴';
+    };
+    // 2026-09-13 留言：同一面板不允许刷出同样的卡牌（同名不同版也算重复）
+    const panelTaken = new Set();
+    const pickRandomCard = (taken) => {
+      for (let tries = 0; tries < 50; tries++) {
+        const card = SDT.Cards.pickOfRarity(pickWeightedRarity());
+        if (card && !(taken && taken.has(card.name))) return card;
+      }
+      const fallback = lib.filter(c => !(taken && taken.has(c.name)));
+      return fallback.length ? fallback[Math.floor(Random.random('shop') * fallback.length)] : null;
+    };
+
+    const slots = [];
+    // 招财猫（需求 #4，2026-09-09）：携带时商店第一格的卡牌免费
+    const catFree = !!(SDT.Base.carriedPet && SDT.Base.carriedPet()?.effect?.shopFree);
+    for (let i = 0; i < 6; i++) {
+      const card = pickRandomCard(panelTaken);
+      if (card) panelTaken.add(card.name);
+      slots.push(card
+        ? { card, price: (catFree && i === 0) ? 0 : (SDT.Cards.PRICE[card.rarity] || 2), sold: false, free: catFree && i === 0 }
+        : { empty: true, label: '卡牌库无货' });
+    }
+    // 初始牌槽位已移除：杀/火球为初始牌，不上架（2026-09-06）；神秘货箱特殊栏位仍可能刷出
+    // 固定栏位（2026-09-10 需求）：2 币回 6 血，替代原金疮药（3 币回 10 血）；
+    // 2026-09-12 老板拍板：桃与能量饮料完全重复，删桃，栏位改用能量饮料（同为 0 费回 6 血、币值 2）
+    const healSlot = lib.find(card => card.id === 'tt4-woodify') ||
+      SDT.Cards.all().find(card => card.id === 'tt4-woodify');
+    slots.push({ card: healSlot, price: 2, sold: false });
+    // 初始攻击补充位（2026-09-08 老板定版）：固定栏位，1 币 1 张，每次到站最多补 5 张
+    slots.push({ card: { ...SDT.Cards.SHA }, price: 1, sold: false, shaReplenish: 5 });
+    const mysteryCard = (() => {
+      // 神秘货箱同样不与面板重复（2026-09-13 留言口径）
+      for (let tries = 0; tries < 50; tries++) {
+        const card = lib[Math.floor(Random.random('shop') * lib.length)];
+        if (card && !panelTaken.has(card.name)) return card;
+      }
+      return null;
+    })();
+    if (mysteryCard) panelTaken.add(mysteryCard.name);
+    slots.push(mysteryCard
+      ? { card: mysteryCard, price: 3, sold: false, mystery: true }
+      : { empty: true, label: '卡牌库无货' });
+    return slots;
+  }
+
+  function openShop(stockKey, onClose) {
+    if (typeof stockKey !== 'string') { onClose = stockKey; stockKey = ''; }   // 兼容旧调用（debug/回调直调）
+    if (!['idle', 'moving', 'modal'].includes(game.state)) return;
+    game.state = 'modal';
+    setCardPageOpen(false);
+    // D-1 防重刷（2026-09-19 审计）：货架按 shopKey 持久——同一家店（商店格 / 门旁商队）
+    // 本局内重复进入不再重 roll、售出状态保留（此前每次 openShop 全量重掷，门旁商店可无限
+    // 免费刷货）。货架表随对局存档落盘，刷新/读档同样不可刷。空 key（debug 直调）保持旧行为。
+    if (stockKey) {
+      game.shopStocks = game.shopStocks || {};
+      if (!game.shopStocks[stockKey]) game.shopStocks[stockKey] = generateShopStock();
+      game.shopStock = game.shopStocks[stockKey];
+    } else {
+      game.shopStock = generateShopStock();
+    }
+    shopNotice = '';
+    shopOnClose = onClose || null;
+    renderShop();
+  }
+
+  // 货位渲染：卡面 + 右上角价格角标（U7，2026-09-19 走查：原底部独立价签存在感弱，
+  // 与「点击货位直接购买」引导割裂——价签改挂卡面右上、买不起红化，一眼可读）
+  function slotHTML(slot, index) {
+    if (slot.empty) return `<div class="shop-slot"><div class="shop-empty">${slot.label || '无货'}</div></div>`;
+    if (slot.sold) {
+      // 神秘货箱开出后亮出卡面（2026-09-09 留言 #6：买完随机卡要马上告诉玩家是什么）
+      if (slot.mystery && slot.card) return `<div class="shop-slot">${cardHTML(slot.card)}
+        <span class="shop-slotnote">[[icon:dice]] 神秘货箱开出</span></div>`;
+      return '<div class="shop-slot sold"><div class="shop-empty">已售出</div></div>';
+    }
+    const afford = game.coins >= slot.price;
+    const priceTag = `<span class="shop-price${afford ? '' : ' short'}">${slot.free ? '[[icon:paw]] 免费' : `[[icon:coin]] ${slot.price}`}</span>`;
+    const shortAttr = afford ? '' : ' data-short="1"';
+    // 2026-09-13：货位是 div，Tab 走不到、读屏也读不出价格——补 button 语义（Enter/Space 由 bindShopKeys 触发）
+    const buyAttrs = (act, label) => `class="shop-slot buy" data-act="${act}" data-i="${index}"${shortAttr} role="button" tabindex="0" aria-label="${esc(label)}" title="${afford ? '点击购买' : '币不够'}"`;
+    if (slot.shaReplenish != null) {
+      if (slot.shaReplenish <= 0) return '<div class="shop-slot sold"><div class="shop-empty">初始攻击已补满</div></div>';
+      // 本站剩余张数并进角标副行（原独立备注行已并入）
+      return `<div ${buyAttrs('buySha', `补充初始攻击，${slot.price} 币，本站余 ${slot.shaReplenish} 张`)}>${cardHTML(slot.card)}
+        <span class="shop-price${afford ? '' : ' short'}">[[icon:coin]] ${slot.price}<em>余 ${slot.shaReplenish}</em></span>
+      </div>`;
+    }
+    if (slot.mystery) {
+      // 问号卡面（2026-09-13 留言）：未购买时用「？」卡面占位，买完才亮出真卡
+      // 09-25 A 组：crystal→dice（骰子感配套，虚线边+骰点底纹在 page-shop.css W6f）
+      return `<div ${buyAttrs('buyCard', `购买神秘货箱，开出随机卡牌，${slot.price} 币`)}><div class="shop-card-mystery">[[icon:dice]]<b>？</b><span>随机卡牌</span></div>${priceTag}</div>`;
+    }
+    return `<div ${buyAttrs('buyCard', `购买「${slot.card.name}」，${slot.price} 币`)}>${cardHTML(slot.card)}${priceTag}</div>`;
+  }
+
+  // 买不起/装不下时的货位即时反馈（2026-09-19 留言 #1：点了没反应像"买不了"）：
+  // 货位抖一下 + 顶栏提示条说明原因
+  function denySlotFeedback(index, reason) {
+    shopNotice = reason;
+    refreshShopSlot(index);
+    const el = document.querySelectorAll('.shop-board-grid .shop-slot')[index];
+    if (el) {
+      el.classList.remove('shop-deny');
+      void el.offsetWidth;
+      el.classList.add('shop-deny');
+    }
+  }
+
+  // 买中 carry 演出（2026-09-27 动效补全）：卡面从货位弧线飞进页头「背包」钮，钮体弹性接收。
+  // onetake 形制：节拍不换场、东西被带走——货位瞬变 sold 的同时卡面被「接走」。
+  // 纯时间函数预采样进 WAAPI（hopPoint 弧线 / decayOsc 接收弹），不阻塞购买结算，失败静默。
+  function bagPop(bag) {
+    if (!bag || typeof bag.animate !== 'function') return;
+    const M = 10, pkf = [];
+    for (let i = 0; i <= M; i++) {
+      const t = (i / M) * 0.42;
+      pkf.push({ transform: `scale(${(1 + decayOsc(t, 0, { amp: 0.16, decay: 9, freq: 13 })).toFixed(3)})`, offset: i / M });
+    }
+    bag.animate(pkf, { duration: 420, easing: 'linear' });
+  }
+  // 从屏幕矩形 flyEl 出发弧线飞向背包钮；返回飞行时长（ms）。node 已定位到视口坐标。
+  function flyRectToBag(a, node) {
+    const bag = document.querySelector('.shop-pg .shop-bag-btn');
+    if (!bag || !a.width || !a.height) return 0;
+    const b = bag.getBoundingClientRect();
+    if (!b.width) return 0;
+    const dx = (b.left + b.width / 2) - (a.left + a.width / 2);
+    const dy = (b.top + b.height / 2) - (a.top + a.height / 2);
+    const N = 14, DUR = 560, kf = [];
+    for (let i = 0; i <= N; i++) {
+      const u = i / N;
+      const pt = hopPoint(u, { x: 0, y: 0 }, { x: dx, y: dy }, { height: Math.min(170, Math.abs(dx) * 0.28 + 80), curve: ease.smoother });
+      kf.push({
+        transform: `translate(${pt.x.toFixed(1)}px,${pt.y.toFixed(1)}px) scale(${(1 - 0.78 * u).toFixed(3)}) rotate(${(u * 9).toFixed(1)}deg)`,
+        opacity: u < 0.85 ? 1 : Math.max(0, 1 - (u - 0.85) / 0.15),
+        offset: u,
+      });
+    }
+    node.animate(kf, { duration: DUR, easing: 'linear', fill: 'forwards' }).onfinish = () => {
+      node.remove();
+      bagPop(bag);   // 背包钮弹性接收：scale = 1 + decayOsc（一次过冲回稳）
+    };
+    setTimeout(() => node.remove(), DUR + 200);   // 兜底清理
+    return DUR;
+  }
+  function flyCardToBag(slotEl) {
+    try {
+      if (SDT.Motion?.reduceMotion?.()) return;
+      const card = slotEl?.querySelector('.hs-card, .shop-card-mystery');
+      if (!card || typeof card.animate !== 'function') return;
+      const a = card.getBoundingClientRect();
+      const fly = card.cloneNode(true);
+      fly.style.cssText = `position:fixed;left:${a.left}px;top:${a.top}px;width:${a.width}px;height:${a.height}px;margin:0;z-index:9999;pointer-events:none;`;
+      document.body.appendChild(fly);
+      flyRectToBag(a, fly);
+    } catch { /* 演出失败不影响购买结算 */ }
+  }
+  // 神秘货箱 reveal-first（2026-09-27 二轮动效）：？牌先塌缩→原位亮出真卡面（停一拍）→再飞背包。
+  // 结算照旧同步完成，只有货位重绘被推迟到演出收尾（done 回调）；任何失败都立刻 done 兜底。
+  function revealMysteryThenFly(slotEl, card, done) {
+    let finished = false;
+    const finish = () => { if (!finished) { finished = true; done(); } };
+    try {
+      const tile = slotEl?.querySelector('.shop-card-mystery');
+      if (!tile || typeof tile.animate !== 'function' || SDT.Motion?.reduceMotion?.()) { finish(); return; }
+      const a = tile.getBoundingClientRect();
+      if (!a.width) { finish(); return; }
+      // 1) ？牌原地塌缩（scaleX→0，240ms）
+      const flip = tile.cloneNode(true);
+      flip.style.cssText = `position:fixed;left:${a.left}px;top:${a.top}px;width:${a.width}px;height:${a.height}px;margin:0;z-index:9999;pointer-events:none;`;
+      document.body.appendChild(flip);
+      flip.animate([{ transform: 'scaleX(1)' }, { transform: 'scaleX(0)' }], { duration: 240, easing: 'ease-in', fill: 'forwards' }).onfinish = () => {
+        flip.remove();
+        // 2) 真卡面从塌缩点弹出（132×180 sm 卡，同战斗 surge-fly 制式）
+        const reveal = document.createElement('div');
+        reveal.style.cssText = `position:fixed;left:${a.left + a.width / 2 - 66}px;top:${a.top + a.height / 2 - 90}px;width:132px;height:180px;margin:0;z-index:9999;pointer-events:none;`;
+        reveal.innerHTML = SDT.Cards.cardHTML ? SDT.Cards.cardHTML(card, 'sm') : esc(card.name || '');
+        document.body.appendChild(reveal);
+        reveal.animate([
+          { transform: 'scale(.4)', opacity: 0 },
+          { transform: 'scale(1)', opacity: 1 },
+        ], { duration: 320, easing: 'cubic-bezier(.2,.9,.35,1.18)', fill: 'forwards' });
+        // 3) 停一拍让人看清开出了什么，再飞背包；结束后才放行货位重绘
+        setTimeout(() => {
+          const rect = reveal.getBoundingClientRect();
+          const dur = flyRectToBag(rect, reveal);
+          setTimeout(finish, dur + 60);
+        }, 720);
+      };
+      setTimeout(finish, 2600);   // 全链路兜底：动画事件丢失也能收尾
+    } catch { finish(); }
+  }
+  // 购买 carry 分派：神秘货箱走 reveal 序列（货位重绘推迟），普通购买立即飞+重绘
+  function playBuyCarry(slotEl, slot, done) {
+    if (slot?.mystery && slotEl?.querySelector('.shop-card-mystery')) { revealMysteryThenFly(slotEl, slot.card, done); return; }
+    flyCardToBag(slotEl);
+    done();
+  }
+
+  function renderShop() {
+    shopPage = 'main';
+    const slots = game.shopStock.map(slotHTML).join('');
+    const sellableCount = game.ownedCards.filter(owned => SDT.Cards.isSellable(owned.card)).length;
+    UI.registerHelp('shop', {
+      title: '商店说明',
+      html: `
+        <p class="help-item"><b>进货</b>商队每次靠站随机卸货：6 张随机卡 + 能量饮料（2 币，回 6 血） + 初始攻击补充（1 币/张，每站最多 5 张）+ 1 个「神秘货箱」栏位（3 币，买到随机卡牌）。</p>
+        <p class="help-item"><b>卖牌处</b>货板右下角的鎏金圆牌：点进收购台挑卡卖掉。默认所有卡牌不可出售；只有带「可出售」备注的卡才能卖，收购价 = 卡面币值。</p>`,
+      back: renderShop,
+    });
+    UI.showOverlay('', `
+      <div class="pg shop-pg node-pg sc-shop" data-asset-key="scene-shop-bg">
+        <header class="pg-head">
+          <div class="shop-heading"><span class="shop-kicker">TACTICAL SUPPLY // 07</span><h2>[[icon:bag]] 冬境战术补给站 ${UI.helpBtn('shop')}</h2></div>
+          <button class="shop-bag-btn" data-act="shopOpenBag" title="打开背包整理卡牌">[[icon:bag]] 背包</button>
+          <div class="shop-resources" data-act="shopOpenBag" title="点击打开背包" aria-label="远征资源（点击打开背包）"><span class="shop-resource"><small>持有卡牌</small><b id="resCards">${game.ownedCards.length}</b><em>张</em></span><span class="shop-resource coin"><small>当前金币</small><b id="resCoins">${game.coins}</b><em>币</em></span><span class="shop-resource"><small>背包容量</small><b id="resCap">${usedSlots()}/${bagCap()}</b><em>格</em></span></div>
+        </header>
+          <div class="shop-toolbar"><div><b>补给清单</b><span>六个随机货位 · 能量饮料 · 初始攻击补充 · 神秘货箱</span></div><span class="shop-live" id="shopLive" aria-live="polite">${shopNotice || '点击货位即可直接购买（价签＝价格） · 随身币不随撤离带回，离局前记得花掉'}</span></div>
+        <div class="shop-board" aria-label="商店商品">
+          <div class="shop-board-grid">
+            ${slots}
+            <button class="shop-sellpost" data-act="openSell" title="打开收购台，挑卡卖掉">
+              <span class="sellpost-index">ACQ // 08</span>
+              <span class="sellpost-coin">[[icon:cards]]</span>
+              <span class="sellpost-copy"><span class="sellpost-name">收购台</span><span class="sellpost-hint">${sellableCount ? `已识别 ${sellableCount} 张可出售卡` : '当前没有可出售卡牌'}</span></span>
+              <span class="sellpost-enter">进入 →</span>
+            </button>
+          </div>
+        </div>
+        <button class="shop-back" data-act="closeShop">[[icon:arrow]] 离开补给站</button>
+      </div>`, 'page');
+    registerShopActs();
+    UI.refresh(game);
+  }
+
+  // 卖牌处二级界面：收购台（2026-09-10 留言 #23：只列出可以卖的牌，不再把不可卖的也铺出来置灰）
+  function renderSellPage() {
+    shopPage = 'sell';
+    const sellableOwned = game.ownedCards.filter(owned => SDT.Cards.isSellable(owned.card) && !owned.stored);   // 珍珠盒中存放的资源卡不在此列出（2026-09-10 #29）
+    const total = sellableOwned.length;
+    const totalValue = sellableOwned.reduce((sum, owned) => sum + SDT.Cards.sellPrice(owned.card), 0);
+    const rows = sellableOwned.map(owned => `
+      <div class="bag-card sell-item">
+        ${cardHTML(owned.card, 'sm')}
+        <div class="sell-item-offer"><span>商队估值</span><b>+${SDT.Cards.sellPrice(owned.card)} 币</b></div>
+        <button class="mini-btn ok" data-act="sellCard" data-uid="${owned.uid}">确认卖出</button>
+      </div>`).join('');
+    const ownedAll = game.ownedCards.length;
+    const grid = total
+      ? `<div class="shop-sell">${rows}</div>`
+      : `<p class="shop-sell-empty">背包里没有可以卖的卡牌（持有 ${ownedAll} 张）——只有带「可出售」备注的卡（货币卡等）商店才收。</p>`;
+    UI.registerHelp('shopSell', {
+      title: '卖牌处说明',
+      html: `<p class="help-item"><b>收购规则</b>这里只显示可以卖的牌；默认卡牌不可出售，只有带「可出售」备注的卡（货币/宝石类等）才能卖给商店，收购价 = 卡面币值。</p>`,
+      back: renderSellPage,
+    });
+    UI.showOverlay('', `
+      <div class="pg shop-pg node-pg sc-shop" data-asset-key="scene-shop-bg">
+        <header class="pg-head">
+          <div class="shop-heading"><span class="shop-kicker">ACQUISITION DESK // 08</span><h2>[[icon:cards]] 收购台 ${UI.helpBtn('shopSell')}</h2><p>只收带有“可出售”备注的卡牌，其他卡不会出现在这里。</p></div>
+          <button class="shop-bag-btn" data-act="shopOpenBag" title="打开背包整理卡牌">[[icon:bag]] 背包</button>
+          <div class="shop-resources"><span class="shop-resource coin"><small>当前金币</small><b>${game.coins}</b><em>币</em></span><span class="shop-resource"><small>可出售</small><b>${total}</b><em>张</em></span></div>
+        </header>
+        <div class="shop-board sell-board">
+          <div class="sell-desk">
+            <aside class="sell-ledger">
+              <span class="sell-ledger-kicker">MERCHANT LEDGER</span>
+              <h3>商队收购单</h3>
+              <div class="sell-ledger-total"><small>本页可换取</small><b>${totalValue}</b><span>币</span></div>
+              <dl><div><dt>持有卡牌</dt><dd>${ownedAll} 张</dd></div><div><dt>符合条件</dt><dd>${total} 张</dd></div><div><dt>当前金币</dt><dd>${game.coins} 币</dd></div></dl>
+              <div class="sell-ledger-rule"><b>收购规则</b><p>仅识别带“可出售”备注的货币与宝石类卡牌。点击“确认卖出”后立即成交，价格等于卡面币值。</p></div>
+            </aside>
+            <section class="sell-catalog" aria-label="可出售卡牌">
+              <div class="sell-catalog-head"><div><span>APPRAISAL LIST</span><h3>待估物清单</h3></div><b>${total} 件</b></div>
+              ${grid}
+            </section>
+          </div>
+        </div>
+        <button class="shop-back" data-act="backShop">[[icon:arrow]] 返回商店</button>
+      </div>`, 'page');
+    registerShopActs();
+    UI.refresh(game);
+  }
+
+  // 购买后只重绘该货位 + 顶栏数字（配合留言 #33：整页入场动画只在页面切换时重播）
+  function refreshShopSlot(index) {
+    const slots = document.querySelectorAll('.shop-board-grid .shop-slot');
+    const el = slots[index];
+    if (el) el.outerHTML = slotHTML(game.shopStock[index], index);
+    const live = document.getElementById('shopLive');
+    if (live) live.textContent = shopNotice || '';
+    const pairs = [['resCards', game.ownedCards.length], ['resCoins', game.coins], ['resCap', `${usedSlots()}/${bagCap()}`]];
+    for (const [id, val] of pairs) {
+      const node = document.getElementById(id);
+      if (!node) continue;
+      if (node.textContent !== String(val) && typeof UI.popNum === 'function') UI.popNum(node);   // 数值变化弹跳（口径同 HUD popNum）
+      node.textContent = val;
+    }
+  }
+  // 货位是 div：补了 button 语义后键盘也要能买（Enter/Space），整页只绑一次
+  let shopKeysBound = false;
+  function bindShopKeys() {
+    if (shopKeysBound || !UI.el || !UI.el.ovBody) return;
+    shopKeysBound = true;
+    UI.el.ovBody.addEventListener('keydown', e => {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      const el = e.target.closest && e.target.closest('.shop-slot.buy[data-act], .shop-sellpost[data-act], .shop-bag-btn[data-act]');
+      if (!el) return;
+      e.preventDefault();
+      el.click();
+    });
+  }
+  function registerShopActs() {
+    bindShopKeys();
+    UI.act('shopOpenBag', () => {
+      // 关闭背包后回到商店当前页（主商店/收购台），不再踢回地图
+      openBackpack(() => { game.state = 'modal'; (shopPage === 'sell' ? renderSellPage : renderShop)(); });
+      // 战斗背包接口 SDT.Battle.commands.openBag 只在战斗内可用，非战斗态直接调会抛
+      // TypeError（实测：reading 'isBoss'）；showBackpack 是它的通用外壳，战斗中会自己转过去。
+    });
+    UI.act('buyCard', data => {
+      const slot = game.shopStock[+data.i];
+      if (!slot || slot.sold || slot.empty) return;
+      if (game.coins < slot.price) {
+        UI.log('币不够，买不起', 'warn');
+        SDT.Sound.sfx('error');
+        denySlotFeedback(+data.i, `币不够——这张要 ${slot.price} 币，身上只有 ${game.coins} 币`);
+        return;
+      }
+      if (game.canReceiveCard
+        ? !game.canReceiveCard(slot.card)
+        : (!game.ownedCards.some(owned => owned.card.name === slot.card.name) && !game.canAcceptCard(slot.card))) {
+        UI.log(`[[icon:bag]] 背包已满（${usedSlots()}/${bagCap()} 格，同名卡最多叠 3 张——初始攻击/火球 5 张），买不下这张卡`, 'warn');
+        SDT.Sound.sfx('error');
+        denySlotFeedback(+data.i, `背包装不下（${usedSlots()}/${bagCap()} 格）`);
+        return;
+      }
+      game.coins -= slot.price;
+      slot.sold = true;
+      game.ownedCards.push({ uid: newUid(), card: { ...slot.card } });
+      shopNotice = `已购入「${slot.card.name}」 · 剩余 ${game.coins} 币`;
+      SDT.Sound.sfx('gain');
+      UI.log(`[[icon:bag]] 购买卡牌【<b>${esc(slot.card.name)}</b>】（- ${slot.price} 币，剩 ${game.coins}）`, 'coin');
+      saveGame();
+      playBuyCarry(document.querySelectorAll('.shop-board-grid .shop-slot')[+data.i], slot, () => refreshShopSlot(+data.i));
+    });
+    UI.act('buySha', data => {
+      const slot = game.shopStock[+data.i];
+      if (!slot || slot.shaReplenish == null || slot.shaReplenish <= 0) return;
+      if (game.coins < slot.price) {
+        UI.log('币不够，买不起', 'warn');
+        SDT.Sound.sfx('error');
+        denySlotFeedback(+data.i, `币不够——补一张初始攻击要 ${slot.price} 币，身上只有 ${game.coins} 币`);
+        return;
+      }
+      // 2026-09-17 留言「商店现在每次只卖3张初始攻击」：补充位只受背包容量约束（同名堆叠
+      // 不设 5 张上限——上限曾随背包存量吃掉可买数量，观感即「只卖 N 张」）。
+      // 2026-09-19 审计 P2-7：改走 canReceiveCard 统一口径——堆未满并入不占格、堆满或
+      // 满包拒买；旧判定「满包但有同名就放行」会在堆也满时把第 6 张推出容量外
+      if (!game.canReceiveCard(slot.card)) {
+        UI.log(`[[icon:bag]] 背包已满（${usedSlots()}/${bagCap()} 格，初始攻击同名最多叠 5 张），补充不了`, 'warn');
+        SDT.Sound.sfx('error');
+        denySlotFeedback(+data.i, `补不了——背包已满（${usedSlots()}/${bagCap()} 格，初始攻击同名最多叠 5 张）`);
+        return;
+      }
+      game.coins -= slot.price;
+      slot.shaReplenish--;
+      game.ownedCards.push({ uid: newUid(), card: { ...slot.card } });
+      shopNotice = `已补充初始攻击 ×1 · 剩余 ${game.coins} 币`;
+      SDT.Sound.sfx('gain');
+      UI.log(`[[icon:bag]] 补充初始攻击 ×1（- ${slot.price} 币，剩 ${game.coins} · 本站还可补 ${slot.shaReplenish} 张）`, 'coin');
+      saveGame();
+      playBuyCarry(document.querySelectorAll('.shop-board-grid .shop-slot')[+data.i], slot, () => refreshShopSlot(+data.i));
+    });
+    UI.act('sellCard', data => {
+      const index = game.ownedCards.findIndex(owned => owned.uid === data.uid);
+      if (index < 0) return;
+      const owned = game.ownedCards[index];
+      if (!SDT.Cards.isSellable(owned.card)) {
+        UI.log(`卡牌【${esc(owned.card.name)}】不可出售`, 'warn');
+        return;
+      }
+      if (owned.stored) return;   // 珍珠盒存放中的卡不可出售（G-2，2026-09-29 夜班：与收购台渲染过滤同口径，直调 act 不再放行）
+      const price = SDT.Cards.sellPrice(owned.card);
+      game.ownedCards.splice(index, 1);
+      game.coins += price;
+      shopNotice = `已出售「${owned.card.name}」 · 当前 ${game.coins} 币`;
+      UI.log(`[[icon:coin]] 出售卡牌【<b>${esc(owned.card.name)}</b>】（+ ${price} 币，现有 ${game.coins}）`, 'coin');
+      saveGame();
+      renderSellPage();
+    });
+    UI.act('openSell', renderSellPage);
+    UI.act('backShop', renderShop);
+    UI.act('closeShop', () => {
+      UI.hideOverlay();
+      game.state = 'idle';
+      const cb = shopOnClose; shopOnClose = null;
+      // 2026-09-06 #20：商队逛完回到节点选择界面（环间门 / 祭坛入口）
+      if (cb) cb(); else UI.refresh(game);
+    });
+  }
+
+  return { generateShopStock, openShop };
+}
+
+export { createShopController };

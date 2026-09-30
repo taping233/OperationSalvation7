@@ -1,0 +1,52 @@
+[
+  {
+    "id": "click",
+    "status": 200,
+    "bytes": 8519
+  },
+  {
+    "id": "confirm",
+    "status": 200,
+    "bytes": 10168
+  },
+  {
+    "id": "card",
+    "status": 200,
+    "bytes": 16661
+  },
+  {
+    "id": "attackSlash",
+    "status": 200,
+    "bytes": 17509
+  },
+  {
+    "id": "parry",
+    "status": 200,
+    "bytes": 16116
+  },
+  {
+    "id": "shieldBreak",
+    "status": 200,
+    "bytes": 24379
+  },
+  {
+    "id": "heal",
+    "status": 200,
+    "bytes": 16701
+  },
+  {
+    "id": "eventEnter",
+    "status": 200,
+    "bytes": 23791
+  },
+  {
+    "id": "chestBurst",
+    "status": 200,
+    "bytes": 18710
+  },
+  {
+    "id": "bossReveal",
+    "status": 200,
+    "bytes": 35444
+  }
+]

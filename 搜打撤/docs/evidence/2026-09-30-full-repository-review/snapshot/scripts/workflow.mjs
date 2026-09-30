@@ -1,0 +1,147 @@
+#!/usr/bin/env node
+import { parseArgs } from 'node:util';
+import { fileURLToPath } from 'node:url';
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
+import { applyLedger, planLedger, readLedger } from './workflow-ledger.mjs';
+import { archivePlan, snapshot } from './workflow-archive.mjs';
+import { checkArguments, fingerprint, freshness, runCheck } from './workflow-evidence.mjs';
+import { findExisting, formatHandoff, handoff } from './workflow-status.mjs';
+import { applyTask, planTask, readTask, summarizeTasks } from './workflow-task.mjs';
+import { discoverMemory } from './workflow-memory.mjs';
+import { importBrowserEvidence, writeBrowserComparison } from './workflow-browser.mjs';
+
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const HELP = `项目流程工具（无依赖安装，不提交/推送/启服/build）
+  status [--task <编号>] [--paths <逗号分隔路径>] [--json]
+                                          按任务接手，默认短摘要
+  task <start|update|close> --task <编号> --owner <负责人> --input <JSON>
+       [--date YYYY-MM-DD] [--apply --expect absent|SHA256]
+                                          唯一执行记录；默认预览
+  task <read|summary> [--task <编号>]       从 task.json 只读生成状态
+  memory [--home <目录>] [--codex-home <目录>] [--zcode-home <目录>]
+                                          只读发现当前项目记忆索引，不倾倒正文
+  docs                                    检查现行流程链接/重复/明确冲突候选
+  browser import --input <内置快照JSON> --task <编号>
+  browser compare --before <快照JSON> --after <快照JSON> --task <编号>
+                                          保存内置浏览器证据，不启动浏览器
+  staged --task <编号> [--plan]             隔离验证真实 Git index，不混入未暂存内容
+  find --query <关键词> [--history]        开工前查现有代码/工具/规范；历史单独检索
+  ledger <registry|pending> list           唯一台账 + SHA256
+  ledger <registry|pending> <add|update|close> --key <编号> --input <JSON文件>
+         [--owner <负责人>] [--apply --expect <SHA256>]
+                                          默认预览；JSON 为 {"cells":[...]}
+  verify --task <编号> <--tests <逗号分隔路径>|--paths <逗号分隔路径>|--full|--suite>
+         [--date YYYY-MM-DD] [--plan]       复用现有验收门；运行时自动记录证据
+  evidence --input <报告JSON>              校验证据指纹是否仍匹配，不自动免验
+  archive plan                            重复正文/冲突措辞的只读复核候选
+  archive snapshot --task <批次> --paths <逗号分隔现行Markdown路径>
+         [--replaced-by <现行入口>]        留存原文与哈希，不移动/删除源文件
+  --suite 仅全量 Vitest；--full 为现有完整本地门，两者均不含实页/build。
+  所有命令支持 --json；写台账前仍需确认归属。`;
+
+function list(value) {
+  if (!value) return undefined;
+  const result = value.split(',').map(item => item.trim());
+  if (result.some(item => !item)) throw new Error('逗号分隔路径不得有空项');
+  return result;
+}
+
+async function main() {
+  const { values, positionals } = parseArgs({ allowPositionals: true, options: {
+    json: { type: 'boolean' }, help: { type: 'boolean' }, history: { type: 'boolean' }, apply: { type: 'boolean' },
+    full: { type: 'boolean' }, suite: { type: 'boolean' }, plan: { type: 'boolean' }, query: { type: 'string' }, key: { type: 'string' },
+    owner: { type: 'string' }, input: { type: 'string' }, expect: { type: 'string' }, task: { type: 'string' },
+    tests: { type: 'string' }, paths: { type: 'string' }, date: { type: 'string' }, 'replaced-by': { type: 'string' },
+    home: { type: 'string' }, 'codex-home': { type: 'string' }, 'zcode-home': { type: 'string' },
+    before: { type: 'string' }, after: { type: 'string' },
+  } });
+  if (values.help || !positionals.length) {
+    process.stdout.write(values.json ? JSON.stringify({ ok: true, help: HELP }) + '\n' : HELP + '\n');
+    return;
+  }
+  let result;
+  const [command, kind, action] = positionals;
+  const date = values.date ?? new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Shanghai', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
+  if (command === 'status') {
+    result = handoff(root, { task: values.task, paths: list(values.paths) });
+    if (!values.json) { process.stdout.write(formatHandoff(result) + '\n'); return; }
+  } else if (command === 'task') {
+    if (kind === 'summary') result = summarizeTasks(root, { id: values.task, owner: values.owner });
+    else {
+      if (!values.task) throw new Error('任务操作必须给 --task');
+      let taskDate = date;
+      if (!values.date && kind !== 'start') {
+        const matches = summarizeTasks(root, { id: values.task }).tasks;
+        if (matches.length !== 1) throw new Error('任务不存在或编号不唯一，提供明确 --date');
+        taskDate = matches[0].task.date;
+      }
+      if (kind === 'read') result = readTask(root, { id: values.task, date: taskDate });
+      else {
+        if (!values.input || !values.owner) throw new Error('任务写操作需要 --input 与 --owner');
+        const input = JSON.parse(readFileSync(values.input, 'utf8'));
+        const plan = planTask(root, { action: kind, id: values.task, date: taskDate, owner: values.owner, input });
+        if (values.apply) result = applyTask(root, plan, values.expect);
+        else { const { content, ...preview } = plan; result = { ...preview, dryRun: true, bytes: Buffer.byteLength(content) }; }
+      }
+    }
+  }
+  else if (command === 'memory') result = discoverMemory(root, { home: values.home, codexHome: values['codex-home'], zcodeHome: values['zcode-home'] });
+  else if (command === 'docs') {
+    const { validateDocumentation } = await import('./index-validation.mjs');
+    result = validateDocumentation(root);
+  } else if (command === 'browser' && kind === 'import') result = importBrowserEvidence(root, { input: values.input, task: values.task, date });
+  else if (command === 'browser' && kind === 'compare') result = writeBrowserComparison(root, { before: values.before, after: values.after, task: values.task, date });
+  else if (command === 'staged') {
+    const { stagedPlan, runStaged } = await import('./workflow-staged.mjs');
+    result = values.plan ? stagedPlan(root) : await runStaged(root, { task: values.task, date, json: values.json });
+    // Index entries remain in the on-disk receipt/internal plan; do not flood CLI consumers.
+    const completePlan = values.plan ? result : result.plan;
+    if (completePlan?.entries) {
+      const { entries, ...summary } = completePlan;
+      const bounded = { ...summary, indexEntryCount: entries.length };
+      if (values.plan) result = bounded;
+      else result.plan = bounded;
+    }
+    if (!values.plan) process.exitCode = result.exitCode === 0 ? 0 : 1;
+  }
+  else if (command === 'find') result = findExisting(root, values.query, 20, values.history);
+  else if (command === 'ledger') {
+    if (action === 'list') result = readLedger(root, kind);
+    else {
+      if (!values.input) throw new Error('必须提供 --input JSON 文件');
+      const { cells } = JSON.parse(readFileSync(values.input, 'utf8'));
+      const plan = planLedger(root, { kind, action, key: values.key, owner: values.owner, cells });
+      if (values.apply) result = applyLedger(root, plan, values.expect);
+      else { const { content, ...preview } = plan; result = { ...preview, dryRun: true, bytes: Buffer.byteLength(content) }; }
+    }
+  } else if (command === 'verify') {
+    const options = { task: values.task, tests: list(values.tests), paths: list(values.paths), full: values.full, suite: values.suite,
+      json: values.json, date };
+    if (values.plan) result = { dryRun: true, command: [process.execPath, ...checkArguments(options)],
+      limits: ['显式定向列表由负责人选择；--paths 交由现有门计算，不替代质量门的人工分类'] };
+    else {
+      result = await runCheck(root, options);
+      process.exitCode = result.exitCode === 0 ? 0 : 1;
+    }
+  } else if (command === 'evidence') {
+    if (!values.input) throw new Error('必须提供 --input 报告 JSON');
+    const report = JSON.parse(readFileSync(values.input, 'utf8'));
+    if (!report.log || path.isAbsolute(report.log) || report.log.split(/[\\/]/).includes('..')
+      || !report.log.startsWith('docs/evidence/')) throw new Error('报告日志须位于项目 docs/evidence');
+    const { hash } = await import('./workflow-ledger.mjs');
+    if (hash(readFileSync(path.join(root, report.log))) !== report.logSha256) throw new Error('证据日志哈希不匹配');
+    result = freshness(report, fingerprint(root, { documents: report.after?.documents ?? false }));
+  } else if (command === 'archive' && kind === 'plan') result = archivePlan(root);
+  else if (command === 'archive' && kind === 'snapshot') result = snapshot(root, values.task, list(values.paths) ?? [], values['replaced-by']);
+  else throw new Error('未知命令，使用 --help');
+  process.stdout.write(JSON.stringify({ ok: true, ...result }, null, values.json ? 0 : 2) + '\n');
+}
+
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  main().catch(error => {
+    const message = JSON.stringify({ ok: false, error: error.message });
+    (process.argv.includes('--json') ? process.stdout : process.stderr).write(message + '\n');
+    process.exitCode = 1;
+  });
+}

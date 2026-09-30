@@ -1,0 +1,490 @@
+{
+  "new_count": 30,
+  "total_cues": 40,
+  "old_ten_referenced_unchanged": true,
+  "unique_source_urls": 30,
+  "unique_source_sha256": 30,
+  "old_sources_reused": 0,
+  "files": [
+    {
+      "id": "cardSelect",
+      "kind": "base",
+      "seconds": 0.733083,
+      "peak_dbfs": -11.29,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "cardSelect",
+      "kind": "adjusted",
+      "seconds": 0.704792,
+      "peak_dbfs": -11.198,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "draw",
+      "kind": "base",
+      "seconds": 1.077125,
+      "peak_dbfs": -11.195,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "draw",
+      "kind": "adjusted",
+      "seconds": 1.025833,
+      "peak_dbfs": -11.293,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "discard",
+      "kind": "base",
+      "seconds": 0.926937,
+      "peak_dbfs": -11.148,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "discard",
+      "kind": "adjusted",
+      "seconds": 0.874313,
+      "peak_dbfs": -11.817,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "pick",
+      "kind": "base",
+      "seconds": 1.069146,
+      "peak_dbfs": -11.069,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "pick",
+      "kind": "adjusted",
+      "seconds": 1.018229,
+      "peak_dbfs": -11.436,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "coin",
+      "kind": "base",
+      "seconds": 0.68,
+      "peak_dbfs": -11.253,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "coin",
+      "kind": "adjusted",
+      "seconds": 0.616688,
+      "peak_dbfs": -10.998,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "reveal",
+      "kind": "base",
+      "seconds": 0.404083,
+      "peak_dbfs": -11.182,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "reveal",
+      "kind": "adjusted",
+      "seconds": 0.388437,
+      "peak_dbfs": -11.236,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "legend",
+      "kind": "base",
+      "seconds": 0.306271,
+      "peak_dbfs": -10.949,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "legend",
+      "kind": "adjusted",
+      "seconds": 0.297271,
+      "peak_dbfs": -10.925,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "victory",
+      "kind": "base",
+      "seconds": 1.876833,
+      "peak_dbfs": -11.132,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "victory",
+      "kind": "adjusted",
+      "seconds": 1.822167,
+      "peak_dbfs": -11.446,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "defeat",
+      "kind": "base",
+      "seconds": 1.902833,
+      "peak_dbfs": -11.148,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "defeat",
+      "kind": "adjusted",
+      "seconds": 1.865521,
+      "peak_dbfs": -10.551,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "flee",
+      "kind": "base",
+      "seconds": 0.887333,
+      "peak_dbfs": -10.975,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "flee",
+      "kind": "adjusted",
+      "seconds": 0.836958,
+      "peak_dbfs": -11.066,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "hurt",
+      "kind": "base",
+      "seconds": 1.128562,
+      "peak_dbfs": -10.037,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "hurt",
+      "kind": "adjusted",
+      "seconds": 1.085146,
+      "peak_dbfs": -9.967,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "kill",
+      "kind": "base",
+      "seconds": 1.532979,
+      "peak_dbfs": -9.438,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "kill",
+      "kind": "adjusted",
+      "seconds": 1.488333,
+      "peak_dbfs": -9.517,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "shieldUp",
+      "kind": "base",
+      "seconds": 1.238646,
+      "peak_dbfs": -11.675,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "shieldUp",
+      "kind": "adjusted",
+      "seconds": 1.191,
+      "peak_dbfs": -11.911,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "armorBreak",
+      "kind": "base",
+      "seconds": 1.411708,
+      "peak_dbfs": -10.124,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "armorBreak",
+      "kind": "adjusted",
+      "seconds": 1.344479,
+      "peak_dbfs": -10.028,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "energyUp",
+      "kind": "base",
+      "seconds": 0.958688,
+      "peak_dbfs": -11.621,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "energyUp",
+      "kind": "adjusted",
+      "seconds": 0.930688,
+      "peak_dbfs": -11.835,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "energyDown",
+      "kind": "base",
+      "seconds": 0.966292,
+      "peak_dbfs": -11.907,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "energyDown",
+      "kind": "adjusted",
+      "seconds": 0.929021,
+      "peak_dbfs": -12.289,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "buffUp",
+      "kind": "base",
+      "seconds": 2.070146,
+      "peak_dbfs": -11.498,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "buffUp",
+      "kind": "adjusted",
+      "seconds": 2.009854,
+      "peak_dbfs": -11.758,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "buffDown",
+      "kind": "base",
+      "seconds": 0.911646,
+      "peak_dbfs": -11.954,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "buffDown",
+      "kind": "adjusted",
+      "seconds": 0.876479,
+      "peak_dbfs": -11.917,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "curse",
+      "kind": "base",
+      "seconds": 2.946229,
+      "peak_dbfs": -11.262,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "curse",
+      "kind": "adjusted",
+      "seconds": 2.888458,
+      "peak_dbfs": -11.216,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "curseEnd",
+      "kind": "base",
+      "seconds": 3.366708,
+      "peak_dbfs": -12.344,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "curseEnd",
+      "kind": "adjusted",
+      "seconds": 3.237229,
+      "peak_dbfs": -12.092,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "danger",
+      "kind": "base",
+      "seconds": 1.095292,
+      "peak_dbfs": -12.11,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "danger",
+      "kind": "adjusted",
+      "seconds": 1.053167,
+      "peak_dbfs": -12.089,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "fireEnter",
+      "kind": "base",
+      "seconds": 1.16,
+      "peak_dbfs": -14.357,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "fireEnter",
+      "kind": "adjusted",
+      "seconds": 1.13725,
+      "peak_dbfs": -14.278,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "altarEnter",
+      "kind": "base",
+      "seconds": 2.085187,
+      "peak_dbfs": -11.961,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "altarEnter",
+      "kind": "adjusted",
+      "seconds": 2.024458,
+      "peak_dbfs": -12.736,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "altarActivate",
+      "kind": "base",
+      "seconds": 2.52925,
+      "peak_dbfs": -11.004,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "altarActivate",
+      "kind": "adjusted",
+      "seconds": 2.431979,
+      "peak_dbfs": -11.037,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "doorEnter",
+      "kind": "base",
+      "seconds": 0.975625,
+      "peak_dbfs": -12.986,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "doorEnter",
+      "kind": "adjusted",
+      "seconds": 0.929042,
+      "peak_dbfs": -13.111,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "shopEnter",
+      "kind": "base",
+      "seconds": 1.755167,
+      "peak_dbfs": -13.364,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "shopEnter",
+      "kind": "adjusted",
+      "seconds": 1.671583,
+      "peak_dbfs": -12.98,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "extractionEnter",
+      "kind": "base",
+      "seconds": 1.632146,
+      "peak_dbfs": -12.045,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "extractionEnter",
+      "kind": "adjusted",
+      "seconds": 1.569375,
+      "peak_dbfs": -12.557,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "extractionSuccess",
+      "kind": "base",
+      "seconds": 4.029792,
+      "peak_dbfs": -11.011,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "extractionSuccess",
+      "kind": "adjusted",
+      "seconds": 3.950771,
+      "peak_dbfs": -11.093,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "extractionFail",
+      "kind": "base",
+      "seconds": 3.048354,
+      "peak_dbfs": -12.191,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "extractionFail",
+      "kind": "adjusted",
+      "seconds": 2.988583,
+      "peak_dbfs": -12.163,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "levelup",
+      "kind": "base",
+      "seconds": 1.999521,
+      "peak_dbfs": -12.1,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    },
+    {
+      "id": "levelup",
+      "kind": "adjusted",
+      "seconds": 1.941292,
+      "peak_dbfs": -11.617,
+      "decode": "pass",
+      "http": "200 audio/ogg"
+    }
+  ]
+}

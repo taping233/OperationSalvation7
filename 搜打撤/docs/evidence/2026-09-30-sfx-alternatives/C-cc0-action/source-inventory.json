@@ -1,0 +1,2246 @@
+[
+  {
+    "slug": "starninjas-swords",
+    "pageUrl": "https://opengameart.org/content/20-sword-sound-effects-attacks-and-clashes",
+    "license": "CC0-1.0",
+    "downloads": [
+      {
+        "url": "https://opengameart.org/sites/default/files/sword_-_starninjas_1.zip",
+        "archive": "materials\\starninjas-swords-0.zip",
+        "sha256": "87a1fe1cfeee5f282fe06a7a9c25ab9ebf24b7674fe19171b7f2762dffb628c1",
+        "files": [
+          {
+            "archivePath": "sword - StarNinjas/sword.4.ogg",
+            "localPath": "materials\\starninjas-swords\\sword - StarNinjas\\sword.4.ogg",
+            "bytes": 12874,
+            "seconds": 0.5811,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sword - StarNinjas/sword.5.ogg",
+            "localPath": "materials\\starninjas-swords\\sword - StarNinjas\\sword.5.ogg",
+            "bytes": 17934,
+            "seconds": 1.0645,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sword - StarNinjas/sword.6.ogg",
+            "localPath": "materials\\starninjas-swords\\sword - StarNinjas\\sword.6.ogg",
+            "bytes": 11653,
+            "seconds": 0.5439,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sword - StarNinjas/sword.1.ogg",
+            "localPath": "materials\\starninjas-swords\\sword - StarNinjas\\sword.1.ogg",
+            "bytes": 17794,
+            "seconds": 0.9669,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sword - StarNinjas/sword.2.ogg",
+            "localPath": "materials\\starninjas-swords\\sword - StarNinjas\\sword.2.ogg",
+            "bytes": 19102,
+            "seconds": 1.0785,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sword - StarNinjas/sword.3.ogg",
+            "localPath": "materials\\starninjas-swords\\sword - StarNinjas\\sword.3.ogg",
+            "bytes": 13071,
+            "seconds": 0.6229,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sword - StarNinjas/sword.7.ogg",
+            "localPath": "materials\\starninjas-swords\\sword - StarNinjas\\sword.7.ogg",
+            "bytes": 13635,
+            "seconds": 0.7652,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sword - StarNinjas/sword.8.ogg",
+            "localPath": "materials\\starninjas-swords\\sword - StarNinjas\\sword.8.ogg",
+            "bytes": 15612,
+            "seconds": 0.9636,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sword - StarNinjas/sword.10.ogg",
+            "localPath": "materials\\starninjas-swords\\sword - StarNinjas\\sword.10.ogg",
+            "bytes": 18606,
+            "seconds": 1.1378,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sword - StarNinjas/sword.9.ogg",
+            "localPath": "materials\\starninjas-swords\\sword - StarNinjas\\sword.9.ogg",
+            "bytes": 23180,
+            "seconds": 1.3833,
+            "rate": 44100,
+            "channels": 2
+          }
+        ]
+      },
+      {
+        "url": "https://opengameart.org/sites/default/files/sword_clash_-_starninjas_0.zip",
+        "archive": "materials\\starninjas-swords-1.zip",
+        "sha256": "f363c80ea1627548d336370750651b0d2d092978148ecfb3642717c2efb54b6b",
+        "files": [
+          {
+            "archivePath": "sword_clash.10.ogg",
+            "localPath": "materials\\starninjas-swords\\sword_clash.10.ogg",
+            "bytes": 14339,
+            "seconds": 0.8475,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sword_clash.1.ogg",
+            "localPath": "materials\\starninjas-swords\\sword_clash.1.ogg",
+            "bytes": 16491,
+            "seconds": 1.0333,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sword_clash.2.ogg",
+            "localPath": "materials\\starninjas-swords\\sword_clash.2.ogg",
+            "bytes": 13951,
+            "seconds": 0.8011,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sword_clash.3.ogg",
+            "localPath": "materials\\starninjas-swords\\sword_clash.3.ogg",
+            "bytes": 15421,
+            "seconds": 0.9288,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sword_clash.4.ogg",
+            "localPath": "materials\\starninjas-swords\\sword_clash.4.ogg",
+            "bytes": 15545,
+            "seconds": 0.9172,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sword_clash.5.ogg",
+            "localPath": "materials\\starninjas-swords\\sword_clash.5.ogg",
+            "bytes": 12225,
+            "seconds": 0.6618,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sword_clash.6.ogg",
+            "localPath": "materials\\starninjas-swords\\sword_clash.6.ogg",
+            "bytes": 20300,
+            "seconds": 1.3235,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sword_clash.7.ogg",
+            "localPath": "materials\\starninjas-swords\\sword_clash.7.ogg",
+            "bytes": 18481,
+            "seconds": 1.1726,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sword_clash.8.ogg",
+            "localPath": "materials\\starninjas-swords\\sword_clash.8.ogg",
+            "bytes": 16417,
+            "seconds": 1.0217,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sword_clash.9.ogg",
+            "localPath": "materials\\starninjas-swords\\sword_clash.9.ogg",
+            "bytes": 17005,
+            "seconds": 1.0913,
+            "rate": 44100,
+            "channels": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "vehicle-tinysized",
+    "pageUrl": "https://opengameart.org/content/fantasy-sound-effects-tinysized-sfx",
+    "license": "CC0-1.0",
+    "downloads": [
+      {
+        "url": "https://opengameart.org/sites/default/files/tinysized.zip",
+        "archive": "materials\\vehicle-tinysized-0.zip",
+        "sha256": "7f00e2b1dae15e68db0e1d6096767f03755e9e7c247128afc3e935e63774d7db",
+        "files": [
+          {
+            "archivePath": "sfx-cc0/apple-cut-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\apple-cut-01.wav",
+            "bytes": 100928,
+            "seconds": 0.5712,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/apple-cut-02.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\apple-cut-02.wav",
+            "bytes": 105904,
+            "seconds": 0.5994,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/apple-cut-03.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\apple-cut-03.wav",
+            "bytes": 88172,
+            "seconds": 0.4988,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/arrow-feathers-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\arrow-feathers-01.wav",
+            "bytes": 94728,
+            "seconds": 0.536,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/arrow-grab-from-quiver-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\arrow-grab-from-quiver-01.wav",
+            "bytes": 110224,
+            "seconds": 0.6239,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/arrow-grab-from-quiver-02.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\arrow-grab-from-quiver-02.wav",
+            "bytes": 217268,
+            "seconds": 1.2307,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/arrow-return-to-quiver-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\arrow-return-to-quiver-01.wav",
+            "bytes": 128224,
+            "seconds": 0.7259,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/arrow-return-to-quiver-02.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\arrow-return-to-quiver-02.wav",
+            "bytes": 92220,
+            "seconds": 0.5218,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/book-page-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\book-page-01.wav",
+            "bytes": 264500,
+            "seconds": 1.4984,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/book-page-02.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\book-page-02.wav",
+            "bytes": 129416,
+            "seconds": 0.7327,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/boots-leather-jump-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\boots-leather-jump-01.wav",
+            "bytes": 87644,
+            "seconds": 0.4959,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/boots-leather-step-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\boots-leather-step-01.wav",
+            "bytes": 119756,
+            "seconds": 0.6779,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/bottle-clay-uncork-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\bottle-clay-uncork-01.wav",
+            "bytes": 64644,
+            "seconds": 0.3655,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/bottle-glass-cork-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\bottle-glass-cork-01.wav",
+            "bytes": 86460,
+            "seconds": 0.4891,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/bottle-glass-cork-twist-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\bottle-glass-cork-twist-01.wav",
+            "bytes": 110320,
+            "seconds": 0.6244,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/bottle-glass-uncork-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\bottle-glass-uncork-01.wav",
+            "bytes": 84628,
+            "seconds": 0.4788,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/bottle-pills-shake-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\bottle-pills-shake-01.wav",
+            "bytes": 49436,
+            "seconds": 0.2793,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/bottle-pills-shake-02.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\bottle-pills-shake-02.wav",
+            "bytes": 47476,
+            "seconds": 0.2681,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/bottle-plastic-lid-screw-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\bottle-plastic-lid-screw-01.wav",
+            "bytes": 204632,
+            "seconds": 1.159,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/bottle-plastic-lid-unscrew-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\bottle-plastic-lid-unscrew-01.wav",
+            "bytes": 221860,
+            "seconds": 1.2567,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/chimes-wood-rattle.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\chimes-wood-rattle.wav",
+            "bytes": 16842970,
+            "seconds": 95.4805,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/cloth-pouch-shake-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\cloth-pouch-shake-01.wav",
+            "bytes": 84740,
+            "seconds": 0.4794,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/cloth-pouch-shake-02.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\cloth-pouch-shake-02.wav",
+            "bytes": 80064,
+            "seconds": 0.4529,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/coin-spin-fall-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\coin-spin-fall-01.wav",
+            "bytes": 253292,
+            "seconds": 1.4349,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/coinflip-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\coinflip-01.wav",
+            "bytes": 62308,
+            "seconds": 0.3522,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/coins-shake-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\coins-shake-01.wav",
+            "bytes": 209788,
+            "seconds": 1.1883,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/compressed-air-spray-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\compressed-air-spray-01.wav",
+            "bytes": 102096,
+            "seconds": 0.5778,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/compressed-air-spray-02.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\compressed-air-spray-02.wav",
+            "bytes": 352896,
+            "seconds": 1.9995,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/cover-paper-tear-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\cover-paper-tear-01.wav",
+            "bytes": 222828,
+            "seconds": 1.2622,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/cover-paper-tear-02.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\cover-paper-tear-02.wav",
+            "bytes": 244816,
+            "seconds": 1.3868,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/drawer-close-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\drawer-close-01.wav",
+            "bytes": 127096,
+            "seconds": 0.7195,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/drawer-open-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\drawer-open-01.wav",
+            "bytes": 283856,
+            "seconds": 1.6082,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/floor-creak-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\floor-creak-01.wav",
+            "bytes": 114480,
+            "seconds": 0.648,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/handcuffs-metal-lock-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\handcuffs-metal-lock-01.wav",
+            "bytes": 106128,
+            "seconds": 0.6006,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/handcuffs-metal-lock-02.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\handcuffs-metal-lock-02.wav",
+            "bytes": 140284,
+            "seconds": 0.7943,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/handcuffs-metal-open-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\handcuffs-metal-open-01.wav",
+            "bytes": 166584,
+            "seconds": 0.9434,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/handsaw-knife-scrape-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\handsaw-knife-scrape-01.wav",
+            "bytes": 135948,
+            "seconds": 0.7697,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/handsaw-knife-scrape-02.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\handsaw-knife-scrape-02.wav",
+            "bytes": 85820,
+            "seconds": 0.4855,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/handsaw-sawing-wood-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\handsaw-sawing-wood-01.wav",
+            "bytes": 1136964,
+            "seconds": 6.4444,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/keyhole-lockbox-insert-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\keyhole-lockbox-insert-01.wav",
+            "bytes": 154324,
+            "seconds": 0.8739,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/keyhole-lockbox-remove-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\keyhole-lockbox-remove-01.wav",
+            "bytes": 134464,
+            "seconds": 0.7613,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/keyhole-lockbox-turn-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\keyhole-lockbox-turn-01.wav",
+            "bytes": 163040,
+            "seconds": 0.9233,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/knife-sheathe-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\knife-sheathe-01.wav",
+            "bytes": 109560,
+            "seconds": 0.6201,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/knife-unsheathe-02.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\knife-unsheathe-02.wav",
+            "bytes": 84340,
+            "seconds": 0.4771,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/lighter-light-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\lighter-light-01.wav",
+            "bytes": 57500,
+            "seconds": 0.325,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/match-light-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\match-light-01.wav",
+            "bytes": 134040,
+            "seconds": 0.7589,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/metal-fork-scrape-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\metal-fork-scrape-01.wav",
+            "bytes": 248672,
+            "seconds": 1.4087,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/metal-fork-scrape-02.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\metal-fork-scrape-02.wav",
+            "bytes": 155176,
+            "seconds": 0.8787,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/metal-hammer-hit-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\metal-hammer-hit-01.wav",
+            "bytes": 359092,
+            "seconds": 2.0347,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/metal-hammer-hit-02.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\metal-hammer-hit-02.wav",
+            "bytes": 282664,
+            "seconds": 1.6014,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/metal-knife-scrape-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\metal-knife-scrape-01.wav",
+            "bytes": 402920,
+            "seconds": 2.2831,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/metal-knife-scrape-02.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\metal-knife-scrape-02.wav",
+            "bytes": 444920,
+            "seconds": 2.5212,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/metal-knife-scrape-03.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\metal-knife-scrape-03.wav",
+            "bytes": 211924,
+            "seconds": 1.2004,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/mud-steps-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\mud-steps-01.wav",
+            "bytes": 747204,
+            "seconds": 4.2349,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/mud-steps-02.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\mud-steps-02.wav",
+            "bytes": 425312,
+            "seconds": 2.4101,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/mud-steps-03.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\mud-steps-03.wav",
+            "bytes": 230348,
+            "seconds": 1.3048,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/mud-steps-04.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\mud-steps-04.wav",
+            "bytes": 241968,
+            "seconds": 1.3707,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/mud-steps-05.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\mud-steps-05.wav",
+            "bytes": 208624,
+            "seconds": 1.1817,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/paralyzer-discharge-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\paralyzer-discharge-01.wav",
+            "bytes": 162428,
+            "seconds": 0.9198,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/paralyzer-discharge-02.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\paralyzer-discharge-02.wav",
+            "bytes": 472766,
+            "seconds": 1.3394,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/plastic-bag-drop-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\plastic-bag-drop-01.wav",
+            "bytes": 88676,
+            "seconds": 0.5017,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/plastic-bag-drop-02.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\plastic-bag-drop-02.wav",
+            "bytes": 97716,
+            "seconds": 0.5529,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/plastic-bag-pickup-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\plastic-bag-pickup-01.wav",
+            "bytes": 122208,
+            "seconds": 0.6918,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/plastic-bag-pickup-02.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\plastic-bag-pickup-02.wav",
+            "bytes": 129528,
+            "seconds": 0.7333,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/quiver-leather-squeeze-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\quiver-leather-squeeze-01.wav",
+            "bytes": 80384,
+            "seconds": 0.4547,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/quiver-leather-squeeze-02.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\quiver-leather-squeeze-02.wav",
+            "bytes": 241096,
+            "seconds": 1.3658,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/scissors-close-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\scissors-close-01.wav",
+            "bytes": 31964,
+            "seconds": 0.1802,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/seax-sheathe-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\seax-sheathe-01.wav",
+            "bytes": 72920,
+            "seconds": 0.4124,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/seax-sheathe-02.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\seax-sheathe-02.wav",
+            "bytes": 175552,
+            "seconds": 0.9942,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/seax-unsheathe-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\seax-unsheathe-01.wav",
+            "bytes": 88156,
+            "seconds": 0.4988,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/seax-unsheathe-02.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\seax-unsheathe-02.wav",
+            "bytes": 90328,
+            "seconds": 0.5111,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/sheath-squeeze-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\sheath-squeeze-01.wav",
+            "bytes": 154336,
+            "seconds": 0.8739,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/soil-steps-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\soil-steps-01.wav",
+            "bytes": 222004,
+            "seconds": 1.2575,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/sword-clash-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\sword-clash-01.wav",
+            "bytes": 235684,
+            "seconds": 1.3351,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/sword-clash-02.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\sword-clash-02.wav",
+            "bytes": 228264,
+            "seconds": 1.293,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/sword-clash-03.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\sword-clash-03.wav",
+            "bytes": 140932,
+            "seconds": 0.7979,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/sword-clash-04.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\sword-clash-04.wav",
+            "bytes": 233876,
+            "seconds": 1.3248,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/sword-clash-05.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\sword-clash-05.wav",
+            "bytes": 134740,
+            "seconds": 0.7628,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/tin-whistle-whoosh-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\tin-whistle-whoosh-01.wav",
+            "bytes": 84716,
+            "seconds": 0.4793,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/tin-whistle-whoosh-02.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\tin-whistle-whoosh-02.wav",
+            "bytes": 87304,
+            "seconds": 0.4939,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/tube-plastic-whoosh-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\tube-plastic-whoosh-01.wav",
+            "bytes": 59568,
+            "seconds": 0.3367,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/tube-plastic-whoosh-02.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\tube-plastic-whoosh-02.wav",
+            "bytes": 70876,
+            "seconds": 0.4008,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/vial-glass-close-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\vial-glass-close-01.wav",
+            "bytes": 87952,
+            "seconds": 0.4976,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/vial-glass-open-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\vial-glass-open-01.wav",
+            "bytes": 62232,
+            "seconds": 0.3518,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/vial-glass-uncork-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\vial-glass-uncork-01.wav",
+            "bytes": 88504,
+            "seconds": 0.5007,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/water-drop-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\water-drop-01.wav",
+            "bytes": 61264,
+            "seconds": 0.3463,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/water-drop-02.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\water-drop-02.wav",
+            "bytes": 70376,
+            "seconds": 0.398,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/water-drop-03.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\water-drop-03.wav",
+            "bytes": 104780,
+            "seconds": 0.593,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/water-pour-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\water-pour-01.wav",
+            "bytes": 284216,
+            "seconds": 1.6102,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/water-vial-fill-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\water-vial-fill-01.wav",
+            "bytes": 404364,
+            "seconds": 2.2913,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/wood-bowl-spoon-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\wood-bowl-spoon-01.wav",
+            "bytes": 282460,
+            "seconds": 0.8001,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/wood-bowl-spoon-02.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\wood-bowl-spoon-02.wav",
+            "bytes": 105564,
+            "seconds": 0.5974,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/wood-bowl-spoon-03.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\wood-bowl-spoon-03.wav",
+            "bytes": 123224,
+            "seconds": 0.6976,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/wood-bowl-spoon-04.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\wood-bowl-spoon-04.wav",
+            "bytes": 104448,
+            "seconds": 0.5911,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/wood-twigs-break-01.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\wood-twigs-break-01.wav",
+            "bytes": 70476,
+            "seconds": 0.3985,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "sfx-cc0/wood-twigs-break-02.wav",
+            "localPath": "materials\\vehicle-tinysized\\sfx-cc0\\wood-twigs-break-02.wav",
+            "bytes": 134704,
+            "seconds": 0.7626,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "preview.ogg",
+            "localPath": "materials\\vehicle-tinysized\\preview.ogg",
+            "bytes": 1353518,
+            "seconds": 169.4241,
+            "rate": 44100,
+            "channels": 2
+          },
+          {
+            "archivePath": "readme.txt",
+            "localPath": "materials\\vehicle-tinysized\\readme.txt",
+            "bytes": 194
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "rubberduck-rpg",
+    "pageUrl": "https://opengameart.org/content/80-cc0-rpg-sfx",
+    "license": "CC0-1.0",
+    "downloads": [
+      {
+        "url": "https://opengameart.org/sites/default/files/80-CC0-RPG-SFX_0.zip",
+        "archive": "materials\\rubberduck-rpg-0.zip",
+        "sha256": "1c2f06ff4e8563b5b8b745b23cf213c1474142a69bb82bd8f5e10d9b3f7a7bbd",
+        "files": [
+          {
+            "archivePath": "blade_01.ogg",
+            "localPath": "materials\\rubberduck-rpg\\blade_01.ogg",
+            "bytes": 15142,
+            "seconds": 0.2909,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "blade_02.ogg",
+            "localPath": "materials\\rubberduck-rpg\\blade_02.ogg",
+            "bytes": 17776,
+            "seconds": 0.3134,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "blade_03.ogg",
+            "localPath": "materials\\rubberduck-rpg\\blade_03.ogg",
+            "bytes": 15184,
+            "seconds": 0.3959,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "book_01.ogg",
+            "localPath": "materials\\rubberduck-rpg\\book_01.ogg",
+            "bytes": 34237,
+            "seconds": 0.7228,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "book_02.ogg",
+            "localPath": "materials\\rubberduck-rpg\\book_02.ogg",
+            "bytes": 36858,
+            "seconds": 0.8849,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "book_03.ogg",
+            "localPath": "materials\\rubberduck-rpg\\book_03.ogg",
+            "bytes": 60390,
+            "seconds": 1.2153,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "book_04.ogg",
+            "localPath": "materials\\rubberduck-rpg\\book_04.ogg",
+            "bytes": 44092,
+            "seconds": 1.1517,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "chain_01.ogg",
+            "localPath": "materials\\rubberduck-rpg\\chain_01.ogg",
+            "bytes": 23007,
+            "seconds": 0.5063,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "chain_02.ogg",
+            "localPath": "materials\\rubberduck-rpg\\chain_02.ogg",
+            "bytes": 18783,
+            "seconds": 0.4922,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "chain_03.ogg",
+            "localPath": "materials\\rubberduck-rpg\\chain_03.ogg",
+            "bytes": 36494,
+            "seconds": 0.927,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "creature_die_01.ogg",
+            "localPath": "materials\\rubberduck-rpg\\creature_die_01.ogg",
+            "bytes": 15883,
+            "seconds": 1.0598,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "creature_hurt_01.ogg",
+            "localPath": "materials\\rubberduck-rpg\\creature_hurt_01.ogg",
+            "bytes": 17185,
+            "seconds": 0.6213,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "creature_hurt_02.ogg",
+            "localPath": "materials\\rubberduck-rpg\\creature_hurt_02.ogg",
+            "bytes": 20959,
+            "seconds": 0.6777,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "creature_misc_01.ogg",
+            "localPath": "materials\\rubberduck-rpg\\creature_misc_01.ogg",
+            "bytes": 16406,
+            "seconds": 0.2554,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "creature_misc_02.ogg",
+            "localPath": "materials\\rubberduck-rpg\\creature_misc_02.ogg",
+            "bytes": 7729,
+            "seconds": 0.1891,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "creature_misc_03.ogg",
+            "localPath": "materials\\rubberduck-rpg\\creature_misc_03.ogg",
+            "bytes": 29846,
+            "seconds": 0.6368,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "creature_misc_04.ogg",
+            "localPath": "materials\\rubberduck-rpg\\creature_misc_04.ogg",
+            "bytes": 24456,
+            "seconds": 0.5494,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "creature_misc_05.ogg",
+            "localPath": "materials\\rubberduck-rpg\\creature_misc_05.ogg",
+            "bytes": 15804,
+            "seconds": 0.6005,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "creature_misc_06.ogg",
+            "localPath": "materials\\rubberduck-rpg\\creature_misc_06.ogg",
+            "bytes": 23008,
+            "seconds": 0.4178,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "creature_misc_07.ogg",
+            "localPath": "materials\\rubberduck-rpg\\creature_misc_07.ogg",
+            "bytes": 15789,
+            "seconds": 0.3492,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "creature_misc_08.ogg",
+            "localPath": "materials\\rubberduck-rpg\\creature_misc_08.ogg",
+            "bytes": 16889,
+            "seconds": 0.4607,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "creature_monster_01.ogg",
+            "localPath": "materials\\rubberduck-rpg\\creature_monster_01.ogg",
+            "bytes": 12446,
+            "seconds": 0.2581,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "creature_monster_02.ogg",
+            "localPath": "materials\\rubberduck-rpg\\creature_monster_02.ogg",
+            "bytes": 16920,
+            "seconds": 0.2362,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "creature_monster_03.ogg",
+            "localPath": "materials\\rubberduck-rpg\\creature_monster_03.ogg",
+            "bytes": 21818,
+            "seconds": 0.9907,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "creature_monster_04.ogg",
+            "localPath": "materials\\rubberduck-rpg\\creature_monster_04.ogg",
+            "bytes": 19153,
+            "seconds": 0.7206,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "creature_roar_01.ogg",
+            "localPath": "materials\\rubberduck-rpg\\creature_roar_01.ogg",
+            "bytes": 15061,
+            "seconds": 0.6398,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "creature_roar_02.ogg",
+            "localPath": "materials\\rubberduck-rpg\\creature_roar_02.ogg",
+            "bytes": 22480,
+            "seconds": 1.0427,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "creature_roar_03.ogg",
+            "localPath": "materials\\rubberduck-rpg\\creature_roar_03.ogg",
+            "bytes": 23375,
+            "seconds": 1.1628,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "creature_slime_01.ogg",
+            "localPath": "materials\\rubberduck-rpg\\creature_slime_01.ogg",
+            "bytes": 35353,
+            "seconds": 0.6724,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "creature_slime_02.ogg",
+            "localPath": "materials\\rubberduck-rpg\\creature_slime_02.ogg",
+            "bytes": 35232,
+            "seconds": 0.7412,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "creature_slime_03.ogg",
+            "localPath": "materials\\rubberduck-rpg\\creature_slime_03.ogg",
+            "bytes": 27560,
+            "seconds": 0.4816,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "creature_slime_04.ogg",
+            "localPath": "materials\\rubberduck-rpg\\creature_slime_04.ogg",
+            "bytes": 35702,
+            "seconds": 0.6248,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "item_coins_01.ogg",
+            "localPath": "materials\\rubberduck-rpg\\item_coins_01.ogg",
+            "bytes": 18985,
+            "seconds": 0.4063,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "item_coins_02.ogg",
+            "localPath": "materials\\rubberduck-rpg\\item_coins_02.ogg",
+            "bytes": 31942,
+            "seconds": 0.616,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "item_coins_03.ogg",
+            "localPath": "materials\\rubberduck-rpg\\item_coins_03.ogg",
+            "bytes": 24878,
+            "seconds": 0.4824,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "item_coins_04.ogg",
+            "localPath": "materials\\rubberduck-rpg\\item_coins_04.ogg",
+            "bytes": 70846,
+            "seconds": 1.6098,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "item_gem_01.ogg",
+            "localPath": "materials\\rubberduck-rpg\\item_gem_01.ogg",
+            "bytes": 14690,
+            "seconds": 0.2469,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "item_gem_02.ogg",
+            "localPath": "materials\\rubberduck-rpg\\item_gem_02.ogg",
+            "bytes": 9058,
+            "seconds": 0.1996,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "item_gem_03.ogg",
+            "localPath": "materials\\rubberduck-rpg\\item_gem_03.ogg",
+            "bytes": 11885,
+            "seconds": 0.288,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "item_gem_04.ogg",
+            "localPath": "materials\\rubberduck-rpg\\item_gem_04.ogg",
+            "bytes": 28423,
+            "seconds": 0.5922,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "item_misc_01.ogg",
+            "localPath": "materials\\rubberduck-rpg\\item_misc_01.ogg",
+            "bytes": 22242,
+            "seconds": 0.4077,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "item_misc_02.ogg",
+            "localPath": "materials\\rubberduck-rpg\\item_misc_02.ogg",
+            "bytes": 22460,
+            "seconds": 0.4379,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "item_misc_03.ogg",
+            "localPath": "materials\\rubberduck-rpg\\item_misc_03.ogg",
+            "bytes": 19638,
+            "seconds": 0.3414,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "item_misc_04.ogg",
+            "localPath": "materials\\rubberduck-rpg\\item_misc_04.ogg",
+            "bytes": 13457,
+            "seconds": 0.383,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "item_misc_05.ogg",
+            "localPath": "materials\\rubberduck-rpg\\item_misc_05.ogg",
+            "bytes": 15531,
+            "seconds": 0.393,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "item_misc_06.ogg",
+            "localPath": "materials\\rubberduck-rpg\\item_misc_06.ogg",
+            "bytes": 29391,
+            "seconds": 0.7156,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "item_stone_01.ogg",
+            "localPath": "materials\\rubberduck-rpg\\item_stone_01.ogg",
+            "bytes": 34170,
+            "seconds": 0.7347,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "item_stone_02.ogg",
+            "localPath": "materials\\rubberduck-rpg\\item_stone_02.ogg",
+            "bytes": 15303,
+            "seconds": 0.2981,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "item_stone_03.ogg",
+            "localPath": "materials\\rubberduck-rpg\\item_stone_03.ogg",
+            "bytes": 24923,
+            "seconds": 0.3931,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "item_stone_04.ogg",
+            "localPath": "materials\\rubberduck-rpg\\item_stone_04.ogg",
+            "bytes": 17029,
+            "seconds": 0.2981,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "item_wood_01.ogg",
+            "localPath": "materials\\rubberduck-rpg\\item_wood_01.ogg",
+            "bytes": 22789,
+            "seconds": 0.5422,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "item_wood_02.ogg",
+            "localPath": "materials\\rubberduck-rpg\\item_wood_02.ogg",
+            "bytes": 13988,
+            "seconds": 0.2635,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "item_wood_03.ogg",
+            "localPath": "materials\\rubberduck-rpg\\item_wood_03.ogg",
+            "bytes": 18291,
+            "seconds": 0.3258,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "lock_01.ogg",
+            "localPath": "materials\\rubberduck-rpg\\lock_01.ogg",
+            "bytes": 17452,
+            "seconds": 0.4111,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "lock_02.ogg",
+            "localPath": "materials\\rubberduck-rpg\\lock_02.ogg",
+            "bytes": 15553,
+            "seconds": 0.3973,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "lock_03.ogg",
+            "localPath": "materials\\rubberduck-rpg\\lock_03.ogg",
+            "bytes": 18168,
+            "seconds": 0.3402,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "metal_01.ogg",
+            "localPath": "materials\\rubberduck-rpg\\metal_01.ogg",
+            "bytes": 25403,
+            "seconds": 0.5759,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "metal_02.ogg",
+            "localPath": "materials\\rubberduck-rpg\\metal_02.ogg",
+            "bytes": 26586,
+            "seconds": 0.5643,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "metal_03.ogg",
+            "localPath": "materials\\rubberduck-rpg\\metal_03.ogg",
+            "bytes": 18753,
+            "seconds": 0.4261,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "misc_01.ogg",
+            "localPath": "materials\\rubberduck-rpg\\misc_01.ogg",
+            "bytes": 12521,
+            "seconds": 0.3418,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "misc_02.ogg",
+            "localPath": "materials\\rubberduck-rpg\\misc_02.ogg",
+            "bytes": 19851,
+            "seconds": 0.5434,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "misc_03.ogg",
+            "localPath": "materials\\rubberduck-rpg\\misc_03.ogg",
+            "bytes": 12875,
+            "seconds": 0.2373,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "spell_01.ogg",
+            "localPath": "materials\\rubberduck-rpg\\spell_01.ogg",
+            "bytes": 29121,
+            "seconds": 0.633,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "spell_02.ogg",
+            "localPath": "materials\\rubberduck-rpg\\spell_02.ogg",
+            "bytes": 25118,
+            "seconds": 0.5464,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "spell_fire_01.ogg",
+            "localPath": "materials\\rubberduck-rpg\\spell_fire_01.ogg",
+            "bytes": 39482,
+            "seconds": 1.0572,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "spell_fire_02.ogg",
+            "localPath": "materials\\rubberduck-rpg\\spell_fire_02.ogg",
+            "bytes": 33115,
+            "seconds": 1.0721,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "spell_fire_03.ogg",
+            "localPath": "materials\\rubberduck-rpg\\spell_fire_03.ogg",
+            "bytes": 71801,
+            "seconds": 1.9268,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "spell_fire_04.ogg",
+            "localPath": "materials\\rubberduck-rpg\\spell_fire_04.ogg",
+            "bytes": 59036,
+            "seconds": 1.5949,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "spell_fire_05.ogg",
+            "localPath": "materials\\rubberduck-rpg\\spell_fire_05.ogg",
+            "bytes": 54658,
+            "seconds": 1.2448,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "spell_fire_06.ogg",
+            "localPath": "materials\\rubberduck-rpg\\spell_fire_06.ogg",
+            "bytes": 53074,
+            "seconds": 1.0047,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "spell_fire_07.ogg",
+            "localPath": "materials\\rubberduck-rpg\\spell_fire_07.ogg",
+            "bytes": 24862,
+            "seconds": 0.6513,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "stones_01.ogg",
+            "localPath": "materials\\rubberduck-rpg\\stones_01.ogg",
+            "bytes": 27110,
+            "seconds": 0.6808,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "stones_02.ogg",
+            "localPath": "materials\\rubberduck-rpg\\stones_02.ogg",
+            "bytes": 35982,
+            "seconds": 0.7774,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "stones_03.ogg",
+            "localPath": "materials\\rubberduck-rpg\\stones_03.ogg",
+            "bytes": 41046,
+            "seconds": 1.1995,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "stones_04.ogg",
+            "localPath": "materials\\rubberduck-rpg\\stones_04.ogg",
+            "bytes": 20176,
+            "seconds": 0.3834,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "wood_01.ogg",
+            "localPath": "materials\\rubberduck-rpg\\wood_01.ogg",
+            "bytes": 13512,
+            "seconds": 0.2393,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "wood_02.ogg",
+            "localPath": "materials\\rubberduck-rpg\\wood_02.ogg",
+            "bytes": 10311,
+            "seconds": 0.1883,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "wood_03.ogg",
+            "localPath": "materials\\rubberduck-rpg\\wood_03.ogg",
+            "bytes": 14089,
+            "seconds": 0.2981,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "wood_04.ogg",
+            "localPath": "materials\\rubberduck-rpg\\wood_04.ogg",
+            "bytes": 20667,
+            "seconds": 0.6488,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "wood_05.ogg",
+            "localPath": "materials\\rubberduck-rpg\\wood_05.ogg",
+            "bytes": 14208,
+            "seconds": 0.3878,
+            "rate": 48000,
+            "channels": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "rubberduck-breaks",
+    "pageUrl": "https://opengameart.org/content/75-cc0-breaking-falling-hit-sfx",
+    "license": "CC0-1.0",
+    "downloads": [
+      {
+        "url": "https://opengameart.org/sites/default/files/sfx_breaking_and_falling.zip",
+        "archive": "materials\\rubberduck-breaks-0.zip",
+        "sha256": "e6ee04d91c5f4d30cfda1260d2c9d1faf96fda36319287215fbd07bcb1a80451",
+        "files": [
+          {
+            "archivePath": "bfh1_breaking_01.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_breaking_01.ogg",
+            "bytes": 48222,
+            "seconds": 1.0634,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_breaking_02.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_breaking_02.ogg",
+            "bytes": 21954,
+            "seconds": 0.5418,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_breaking_03.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_breaking_03.ogg",
+            "bytes": 19730,
+            "seconds": 0.6122,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_falling_01.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_falling_01.ogg",
+            "bytes": 48286,
+            "seconds": 1.0687,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_falling_02.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_falling_02.ogg",
+            "bytes": 45614,
+            "seconds": 1.0439,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_falling_03.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_falling_03.ogg",
+            "bytes": 39014,
+            "seconds": 0.8124,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_falling_04.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_falling_04.ogg",
+            "bytes": 49591,
+            "seconds": 1.4893,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_falling_05.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_falling_05.ogg",
+            "bytes": 31488,
+            "seconds": 0.9268,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_falling_06.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_falling_06.ogg",
+            "bytes": 27461,
+            "seconds": 0.6262,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_falling_07.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_falling_07.ogg",
+            "bytes": 44299,
+            "seconds": 1.1118,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_glass_breaking_01.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_glass_breaking_01.ogg",
+            "bytes": 27455,
+            "seconds": 0.7608,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_glass_breaking_02.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_glass_breaking_02.ogg",
+            "bytes": 20727,
+            "seconds": 0.3884,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_glass_breaking_03.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_glass_breaking_03.ogg",
+            "bytes": 31276,
+            "seconds": 0.7758,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_glass_breaking_04.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_glass_breaking_04.ogg",
+            "bytes": 32779,
+            "seconds": 0.7627,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_glass_breaking_05.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_glass_breaking_05.ogg",
+            "bytes": 21425,
+            "seconds": 0.4382,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_glass_breaking_06.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_glass_breaking_06.ogg",
+            "bytes": 36433,
+            "seconds": 0.9158,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_glass_falling_01.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_glass_falling_01.ogg",
+            "bytes": 20124,
+            "seconds": 0.4307,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_glass_falling_02.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_glass_falling_02.ogg",
+            "bytes": 39114,
+            "seconds": 0.8248,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_glass_falling_03.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_glass_falling_03.ogg",
+            "bytes": 25853,
+            "seconds": 0.5535,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_glass_falling_04.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_glass_falling_04.ogg",
+            "bytes": 29033,
+            "seconds": 0.5893,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_glass_hit_01.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_glass_hit_01.ogg",
+            "bytes": 11267,
+            "seconds": 0.3021,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_glass_hit_02.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_glass_hit_02.ogg",
+            "bytes": 14091,
+            "seconds": 0.3326,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_hit_01.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_hit_01.ogg",
+            "bytes": 28246,
+            "seconds": 0.7293,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_hit_02.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_hit_02.ogg",
+            "bytes": 30619,
+            "seconds": 0.7974,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_hit_03.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_hit_03.ogg",
+            "bytes": 19171,
+            "seconds": 0.485,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_hit_04.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_hit_04.ogg",
+            "bytes": 16929,
+            "seconds": 0.4973,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_hit_05.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_hit_05.ogg",
+            "bytes": 8330,
+            "seconds": 0.2761,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_hit_06.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_hit_06.ogg",
+            "bytes": 16231,
+            "seconds": 0.595,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_hit_07.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_hit_07.ogg",
+            "bytes": 21880,
+            "seconds": 0.4564,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_hit_08.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_hit_08.ogg",
+            "bytes": 19704,
+            "seconds": 0.3905,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_hit_09.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_hit_09.ogg",
+            "bytes": 10881,
+            "seconds": 0.2617,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_hit_10.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_hit_10.ogg",
+            "bytes": 13017,
+            "seconds": 0.3029,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_hit_11.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_hit_11.ogg",
+            "bytes": 10651,
+            "seconds": 0.3019,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_hit_12.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_hit_12.ogg",
+            "bytes": 24811,
+            "seconds": 0.5115,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_hit_13.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_hit_13.ogg",
+            "bytes": 15630,
+            "seconds": 0.377,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_metal_falling_01.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_metal_falling_01.ogg",
+            "bytes": 42021,
+            "seconds": 1.1603,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_metal_falling_02.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_metal_falling_02.ogg",
+            "bytes": 31167,
+            "seconds": 0.7405,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_metal_falling_03.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_metal_falling_03.ogg",
+            "bytes": 13766,
+            "seconds": 0.4199,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_metal_falling_04.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_metal_falling_04.ogg",
+            "bytes": 14609,
+            "seconds": 0.43,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_metal_falling_05.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_metal_falling_05.ogg",
+            "bytes": 17013,
+            "seconds": 0.4032,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_metal_hit_01.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_metal_hit_01.ogg",
+            "bytes": 11820,
+            "seconds": 0.2379,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_metal_hit_02.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_metal_hit_02.ogg",
+            "bytes": 23524,
+            "seconds": 0.5499,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_metal_hit_03.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_metal_hit_03.ogg",
+            "bytes": 16778,
+            "seconds": 0.4601,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_metal_hit_04.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_metal_hit_04.ogg",
+            "bytes": 13131,
+            "seconds": 0.4063,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_metal_hit_05.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_metal_hit_05.ogg",
+            "bytes": 15916,
+            "seconds": 0.33,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_metal_hit_06.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_metal_hit_06.ogg",
+            "bytes": 18001,
+            "seconds": 0.3713,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_misc_01.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_misc_01.ogg",
+            "bytes": 23824,
+            "seconds": 0.5182,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_misc_02.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_misc_02.ogg",
+            "bytes": 28709,
+            "seconds": 0.9346,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_misc_03.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_misc_03.ogg",
+            "bytes": 22266,
+            "seconds": 0.4153,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_misc_04.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_misc_04.ogg",
+            "bytes": 12814,
+            "seconds": 0.2577,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_misc_05.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_misc_05.ogg",
+            "bytes": 13658,
+            "seconds": 0.2381,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_misc_06.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_misc_06.ogg",
+            "bytes": 41746,
+            "seconds": 0.9896,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_misc_07.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_misc_07.ogg",
+            "bytes": 30071,
+            "seconds": 0.7288,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_rock_breaking_01.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_rock_breaking_01.ogg",
+            "bytes": 30092,
+            "seconds": 1.1465,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_rock_breaking_02.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_rock_breaking_02.ogg",
+            "bytes": 45809,
+            "seconds": 0.8646,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_rock_breaking_03.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_rock_breaking_03.ogg",
+            "bytes": 26580,
+            "seconds": 0.4555,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_rock_falling_01.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_rock_falling_01.ogg",
+            "bytes": 36250,
+            "seconds": 0.9165,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_rock_falling_02.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_rock_falling_02.ogg",
+            "bytes": 18412,
+            "seconds": 0.5057,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_rock_falling_03.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_rock_falling_03.ogg",
+            "bytes": 40966,
+            "seconds": 0.8508,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_rock_falling_04.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_rock_falling_04.ogg",
+            "bytes": 15560,
+            "seconds": 0.3203,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_rock_falling_05.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_rock_falling_05.ogg",
+            "bytes": 19534,
+            "seconds": 0.5647,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_rock_falling_06.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_rock_falling_06.ogg",
+            "bytes": 12935,
+            "seconds": 0.4644,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_rock_falling_07.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_rock_falling_07.ogg",
+            "bytes": 17452,
+            "seconds": 0.3521,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_rock_falling_08.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_rock_falling_08.ogg",
+            "bytes": 19708,
+            "seconds": 0.3929,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_rock_falling_09.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_rock_falling_09.ogg",
+            "bytes": 30700,
+            "seconds": 0.6846,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_rock_hit_01.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_rock_hit_01.ogg",
+            "bytes": 7792,
+            "seconds": 0.1093,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_wood_breaking_01.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_wood_breaking_01.ogg",
+            "bytes": 13577,
+            "seconds": 0.298,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_wood_breaking_02.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_wood_breaking_02.ogg",
+            "bytes": 13262,
+            "seconds": 0.2486,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_wood_breaking_03.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_wood_breaking_03.ogg",
+            "bytes": 17119,
+            "seconds": 0.4872,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_wood_breaking_04.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_wood_breaking_04.ogg",
+            "bytes": 17223,
+            "seconds": 0.32,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_wood_falling_01.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_wood_falling_01.ogg",
+            "bytes": 33543,
+            "seconds": 0.697,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_wood_falling_02.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_wood_falling_02.ogg",
+            "bytes": 19812,
+            "seconds": 0.4496,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_wood_hit_01.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_wood_hit_01.ogg",
+            "bytes": 11603,
+            "seconds": 0.2476,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_wood_hit_02.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_wood_hit_02.ogg",
+            "bytes": 13514,
+            "seconds": 0.2815,
+            "rate": 48000,
+            "channels": 2
+          },
+          {
+            "archivePath": "bfh1_wood_hit_03.ogg",
+            "localPath": "materials\\rubberduck-breaks\\bfh1_wood_hit_03.ogg",
+            "bytes": 14848,
+            "seconds": 0.4031,
+            "rate": 48000,
+            "channels": 2
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,519 @@
+{
+  "schemaVersion": 1,
+  "task": "workflow-review-fixes",
+  "kind": "automated-local-check",
+  "command": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "scripts/acceptance-gate.mjs",
+    "--target-tests",
+    "tests/workflow-dependencies.test.js",
+    "tests/workflow-scope.test.js",
+    "tests/workflow-tools.test.js"
+  ],
+  "cwd": "D:\\素材\\代号柒\\搜打撤",
+  "startedAt": "2026-09-30T15:35:43.228Z",
+  "endedAt": "2026-09-30T15:35:48.791Z",
+  "head": "fd38468ea6025fa616ba8bfa0a0cdd466ee7617a",
+  "statusBefore": "M ../AGENTS.md\n M README.md\n M docs/PARALLEL-DISPATCH-PLAYBOOK.md\n M docs/PARALLEL-REGISTRY.md\n M docs/PENDING.md\n M docs/README.md\n M docs/SPEC-PROCESS.md\n M docs/STATUS.md\n M docs/agent-protocol.md\n M docs/archive/README.md\n M docs/development.md\n M docs/production/engineering/MAKER-HANDBOOK.md\n M docs/production/management/DECISIONS.md\n M docs/production/management/ITERATION-BOARD.md\n M docs/production/management/NEXT-CYCLE-TECH-PLAN.md\n M docs/production/qa/ACCEPTANCE-MATRIX.md\n M docs/quality-gates.md\n M docs/roadmap.md\n M game/src/audio/sound.js\n M game/src/audio/sound.policy.js\n M game/src/hub/game.storage.js\n M game/src/run/game.session.js\n M game/src/ui/overlay.js\n M package-lock.json\n M package.json\n M scripts/acceptance-gate.mjs\n M scripts/handoff-brief.mjs\n M scripts/page-snapshot.mjs\n M tests/acceptance-gate.test.js\n M tests/docs-consistency.test.js\n M tests/e5-session-recovery.test.js\n M tests/m-batch-behavior.test.js\n M tests/r7a-qa-live.test.js\n M tests/save-compat.test.js\n M tests/save-prev-fallback.test.js\n M tests/terminal-recovery-matrix.test.js\n M tests/u18-negative-hp-death.test.js\n?? ../.codex/\n?? ../.photolib-acc/\n?? ../.ui-art-loop-0925/\n?? docs/WORKFLOW-TOOLS.md\n?? docs/archive/lean-workflow-2026-09-30/\n?? docs/archive/workflow-2026-09-30/\n?? docs/archive/workflow-completion-2026-09-30/\n?? docs/archive/workflow-review-state-2026-09-30/\n?? docs/archive/workflow-routing-2026-09-30/\n?? docs/evidence/2026-09-30-arknights-sfx-reference/\n?? docs/evidence/2026-09-30-dual-client-workflow/\n?? docs/evidence/2026-09-30-full-repository-review/\n?? docs/evidence/2026-09-30-lean-workflow/\n?? docs/evidence/2026-09-30-mainline-code-review/\n?? docs/evidence/2026-09-30-mainline-review-fixes/\n?? docs/evidence/2026-09-30-sfx-alternatives/\n?? docs/evidence/2026-09-30-sfx-arknights-thirty/\n?? docs/evidence/2026-09-30-sfx-audition-v1/\n?? docs/evidence/2026-09-30-sfx-audition-v2/\n?? docs/evidence/2026-09-30-sfx-audition-v3/\n?? docs/evidence/2026-09-30-sfx-audition-v4/\n?? docs/evidence/2026-09-30-sfx-audition-v5/\n?? docs/evidence/2026-09-30-sfx-full-v5/\n?? docs/evidence/2026-09-30-sfx-listening-page/\n?? docs/evidence/2026-09-30-sfx-v6-ten/\n?? docs/evidence/2026-09-30-vertical-slice-review/\n?? docs/evidence/2026-09-30-workflow-completion/\n?? docs/evidence/2026-09-30-workflow-review-fixes/\n?? docs/evidence/2026-09-30-workflow-tools/\n?? game/assets/sfx/alternatives/\n?? game/assets/sfx/winter-v5/\n?? game/assets/sfx/winter-v6-ten/\n?? game/css/sfx-audition.css\n?? game/sfx-audition.html\n?? game/src/audio/sfx-audition.js\n?? game/src/audio/sound.bank.js\n?? scripts/iab-drive.mjs\n?? scripts/index-validation.mjs\n?? scripts/workflow-archive.mjs\n?? scripts/workflow-browser.mjs\n?? scripts/workflow-dependencies.mjs\n?? scripts/workflow-evidence.mjs\n?? scripts/workflow-ledger.mjs\n?? scripts/workflow-memory.mjs\n?? scripts/workflow-staged.mjs\n?? scripts/workflow-status.mjs\n?? scripts/workflow-task.mjs\n?? scripts/workflow.mjs\n?? tests/workflow-browser.test.js\n?? tests/workflow-cli-integration.test.js\n?? tests/workflow-dependencies.test.js\n?? tests/workflow-handoff.test.js\n?? tests/workflow-index.test.js\n?? tests/workflow-memory.test.js\n?? tests/workflow-scope.test.js\n?? tests/workflow-staged.test.js\n?? tests/workflow-task.test.js\n?? tests/workflow-tools.test.js\n?? ../项目近况-2026-09-29/",
+  "statusAfter": "M ../AGENTS.md\n M README.md\n M docs/PARALLEL-DISPATCH-PLAYBOOK.md\n M docs/PARALLEL-REGISTRY.md\n M docs/PENDING.md\n M docs/README.md\n M docs/SPEC-PROCESS.md\n M docs/STATUS.md\n M docs/agent-protocol.md\n M docs/archive/README.md\n M docs/development.md\n M docs/production/engineering/MAKER-HANDBOOK.md\n M docs/production/management/DECISIONS.md\n M docs/production/management/ITERATION-BOARD.md\n M docs/production/management/NEXT-CYCLE-TECH-PLAN.md\n M docs/production/qa/ACCEPTANCE-MATRIX.md\n M docs/quality-gates.md\n M docs/roadmap.md\n M game/src/audio/sound.js\n M game/src/audio/sound.policy.js\n M game/src/hub/game.storage.js\n M game/src/run/game.session.js\n M game/src/ui/overlay.js\n M package-lock.json\n M package.json\n M scripts/acceptance-gate.mjs\n M scripts/handoff-brief.mjs\n M scripts/page-snapshot.mjs\n M tests/acceptance-gate.test.js\n M tests/docs-consistency.test.js\n M tests/e5-session-recovery.test.js\n M tests/m-batch-behavior.test.js\n M tests/r7a-qa-live.test.js\n M tests/save-compat.test.js\n M tests/save-prev-fallback.test.js\n M tests/terminal-recovery-matrix.test.js\n M tests/u18-negative-hp-death.test.js\n?? ../.codex/\n?? ../.photolib-acc/\n?? ../.ui-art-loop-0925/\n?? docs/WORKFLOW-TOOLS.md\n?? docs/archive/lean-workflow-2026-09-30/\n?? docs/archive/workflow-2026-09-30/\n?? docs/archive/workflow-completion-2026-09-30/\n?? docs/archive/workflow-review-state-2026-09-30/\n?? docs/archive/workflow-routing-2026-09-30/\n?? docs/evidence/2026-09-30-arknights-sfx-reference/\n?? docs/evidence/2026-09-30-dual-client-workflow/\n?? docs/evidence/2026-09-30-full-repository-review/\n?? docs/evidence/2026-09-30-lean-workflow/\n?? docs/evidence/2026-09-30-mainline-code-review/\n?? docs/evidence/2026-09-30-mainline-review-fixes/\n?? docs/evidence/2026-09-30-sfx-alternatives/\n?? docs/evidence/2026-09-30-sfx-arknights-thirty/\n?? docs/evidence/2026-09-30-sfx-audition-v1/\n?? docs/evidence/2026-09-30-sfx-audition-v2/\n?? docs/evidence/2026-09-30-sfx-audition-v3/\n?? docs/evidence/2026-09-30-sfx-audition-v4/\n?? docs/evidence/2026-09-30-sfx-audition-v5/\n?? docs/evidence/2026-09-30-sfx-full-v5/\n?? docs/evidence/2026-09-30-sfx-listening-page/\n?? docs/evidence/2026-09-30-sfx-v6-ten/\n?? docs/evidence/2026-09-30-vertical-slice-review/\n?? docs/evidence/2026-09-30-workflow-completion/\n?? docs/evidence/2026-09-30-workflow-review-fixes/\n?? docs/evidence/2026-09-30-workflow-tools/\n?? game/assets/sfx/alternatives/\n?? game/assets/sfx/winter-v5/\n?? game/assets/sfx/winter-v6-ten/\n?? game/css/sfx-audition.css\n?? game/sfx-audition.html\n?? game/src/audio/sfx-audition.js\n?? game/src/audio/sound.bank.js\n?? scripts/iab-drive.mjs\n?? scripts/index-validation.mjs\n?? scripts/workflow-archive.mjs\n?? scripts/workflow-browser.mjs\n?? scripts/workflow-dependencies.mjs\n?? scripts/workflow-evidence.mjs\n?? scripts/workflow-ledger.mjs\n?? scripts/workflow-memory.mjs\n?? scripts/workflow-staged.mjs\n?? scripts/workflow-status.mjs\n?? scripts/workflow-task.mjs\n?? scripts/workflow.mjs\n?? tests/workflow-browser.test.js\n?? tests/workflow-cli-integration.test.js\n?? tests/workflow-dependencies.test.js\n?? tests/workflow-handoff.test.js\n?? tests/workflow-index.test.js\n?? tests/workflow-memory.test.js\n?? tests/workflow-scope.test.js\n?? tests/workflow-staged.test.js\n?? tests/workflow-task.test.js\n?? tests/workflow-tools.test.js\n?? ../项目近况-2026-09-29/",
+  "before": {
+    "sha256": "e031089aade586ddeb10cf94b68b9a542ed10e28b03f5cc8fc7af942dca5f920",
+    "manifest": [
+      {
+        "file": "docs/PARALLEL-REGISTRY.md",
+        "sha256": "0cd5a8b163b17e0a885464d3794ef2b6ecf11e1edd6c648022164d2498d09458"
+      },
+      {
+        "file": "docs/PENDING.md",
+        "sha256": "37e8cf4fd89cbeae1564929aff7fa83baf4b228e05701ec3002a1a528c1c46fa"
+      },
+      {
+        "file": "docs/STATUS.md",
+        "sha256": "19a7d521b20bc2639d4aca9f4c6ea6aaea649b7cd1b0ff4758acde485ef4c791"
+      },
+      {
+        "file": "docs/WORKFLOW-TOOLS.md",
+        "sha256": "c6403ff6b46e3a5744a3ff4f20d056dc0834a72f519d0a47e07925ea4ccef7e5"
+      },
+      {
+        "file": "docs/evidence/2026-09-30-full-repository-review/task.json",
+        "sha256": "f82d8b3c741f6ce0adc44cbf7fb1b97baf35058678c2bac8ce01c76f2caf89c7"
+      },
+      {
+        "file": "docs/evidence/2026-09-30-lean-workflow/task.json",
+        "sha256": "fb10db8484d2015531c6f50d1142e56d40b78114f3c470810f54d0cec377b00f"
+      },
+      {
+        "file": "docs/production/management/ITERATION-BOARD.md",
+        "sha256": "cf23235499c242aaabca09bd57277f05106fb9ff32d2bd694b334d7821f64b1f"
+      },
+      {
+        "file": "docs/quality-gates.md",
+        "sha256": "dc7c56650130e23c507f159ca411e798036006396683d5bbe218c63e375d00df"
+      },
+      {
+        "file": "docs/roadmap.md",
+        "sha256": "1b0463d09a4298b9064d096a092f6c1bd0a393194629c72e4cef3defa7d4b1e3"
+      },
+      {
+        "file": "eslint.config.js",
+        "sha256": "a00084c92b23a9c7aefb5416f324ee11526cc90901dc69a441517c874dcd02fb"
+      },
+      {
+        "file": "jsconfig.battle-settlement.json",
+        "sha256": "ff9c6acca637b6583dc514e35f0870e8c39aa903f758919364ca3a10c4478f03"
+      },
+      {
+        "file": "jsconfig.battle-snapshot.json",
+        "sha256": "3fb7f26a7982e73c077b006c059b9a565b4353689ad04e0e634ebbe1b46a35c2"
+      },
+      {
+        "file": "jsconfig.card-rules.json",
+        "sha256": "426fb5f7c2781a1cf9427f29d326bea7e47cde4cd9338b99b3d178593632230d"
+      },
+      {
+        "file": "jsconfig.json",
+        "sha256": "3f2e1bd99ddc0cb8eb95ef70a7818e56fbcc687a8970d4615d6319396dbc2da1"
+      },
+      {
+        "file": "jsconfig.strict-foundations.json",
+        "sha256": "7d2f1e714dc03b4a67604a3928a5d1172c5214c6fce00443bacf4e56c6668c90"
+      },
+      {
+        "file": "jsconfig.strict-hand-selection.json",
+        "sha256": "4a4b2d33af7297b95a05976e5bc81aaf0baf3e64e3b8313516013994fbf11ba0"
+      },
+      {
+        "file": "jsconfig.strict-selection.json",
+        "sha256": "a141c4996d7ed5630a222e882738c6bf22c5473527a3c9e53e82686a8bd88f98"
+      },
+      {
+        "file": "package-lock.json",
+        "sha256": "5ffee07729dacc1f56f4be3325a53dbe5a177eada38247cf265cd42eaaa9ce82"
+      },
+      {
+        "file": "package.json",
+        "sha256": "787b82105e6744a374524ee2000b053aed77526955265c0a68073f134057f98e"
+      },
+      {
+        "file": "scripts/acceptance-gate.mjs",
+        "sha256": "3122466b36c43745b31b191d85b55f0c6221a523d5e96562b6d7737a014eef49"
+      },
+      {
+        "file": "scripts/architecture-graph.mjs",
+        "sha256": "5a326f52415297c1ca072f2e55256a0e77e4d36f770a0967f290254c50662e08"
+      },
+      {
+        "file": "scripts/index-validation.mjs",
+        "sha256": "06f346b0c512afeabde11457f793db587cece7db73e0788c3dc4d3d95b6aa460"
+      },
+      {
+        "file": "scripts/page-snapshot.mjs",
+        "sha256": "0f5c7131fcc6666c1b412be8bb7ca6fab28ab1333dfa2cad4f655329be11db98"
+      },
+      {
+        "file": "scripts/workflow-archive.mjs",
+        "sha256": "abc0de0d012b9020004eab49b3ca0fb0e89c1ad3c274640d2e41e51b1396c632"
+      },
+      {
+        "file": "scripts/workflow-browser.mjs",
+        "sha256": "329ccf7dbb83ae1862e0858354b8d27d0bf6f66552bfef86cb24776858eacbbc"
+      },
+      {
+        "file": "scripts/workflow-dependencies.mjs",
+        "sha256": "5215341e59942642da77303bde087f924ce5780844ca725ad06f7957b62163fd"
+      },
+      {
+        "file": "scripts/workflow-evidence.mjs",
+        "sha256": "b4c692ca7a558852b6de198733e321abb458a84908b4c4f3686f42d4db6cb075"
+      },
+      {
+        "file": "scripts/workflow-ledger.mjs",
+        "sha256": "d40494004382bb65b0dc7652f6d3804ac25eddb14f8f687b82e2e8cb0c38ab9e"
+      },
+      {
+        "file": "scripts/workflow-memory.mjs",
+        "sha256": "f646a279fde919bffd72be63c95064117ede712378ef6dce406b6a1d5e8242cc"
+      },
+      {
+        "file": "scripts/workflow-staged.mjs",
+        "sha256": "c5ba9f91cc386ae1b839c2071e3dfd283bb48959fbcdc5b73cb960125b5cc03f"
+      },
+      {
+        "file": "scripts/workflow-status.mjs",
+        "sha256": "6d7c1a81fc9e28cee6bb0850e66d11fcce5fb73766037e34be16294ef6e522ce"
+      },
+      {
+        "file": "scripts/workflow-task.mjs",
+        "sha256": "72c3d813eb09079cc8e4bd71537dd018bf293374683ffc77a44ea147787278b2"
+      },
+      {
+        "file": "scripts/workflow.mjs",
+        "sha256": "9ba1cba98a091fbe6765d2d880bed4f8eb9b5a98e4e6ceb107afe9e3a5db8920"
+      },
+      {
+        "file": "tests/workflow-dependencies.test.js",
+        "sha256": "78ee2bfa6f09c81243ff94c22b49cbdbaf23306bcc658bf7e094f6c0f07259e2"
+      },
+      {
+        "file": "tests/workflow-scope.test.js",
+        "sha256": "25d6c2a903ec6ce469b6de4809c558bdbea22344a13f5e6fbfd6590e95170efe"
+      },
+      {
+        "file": "tests/workflow-tools.test.js",
+        "sha256": "9d40abb1171b3ddab685e3a87948a36bbf0d107131ed443fef2e7948097ccad1"
+      },
+      {
+        "file": "vite.config.js",
+        "sha256": "a2213384885924a532af92b08afaeed7091568a13dc912a7ca4dc6883e26dfba"
+      }
+    ],
+    "environment": {
+      "node": "v24.13.0",
+      "platform": "win32",
+      "arch": "x64",
+      "dependencies": {
+        "vitest": "3.2.7",
+        "vite": "6.4.3",
+        "typescript": "7.0.2",
+        "eslint": "10.11.0",
+        "jsdom": "25.0.1",
+        "acorn": "8.18.0",
+        "acorn-walk": "8.3.5"
+      },
+      "ci": null,
+      "nodeOptions": null,
+      "forceFullTests": null
+    },
+    "documents": false,
+    "selection": {
+      "mode": "targeted",
+      "roots": [
+        "tests/workflow-dependencies.test.js",
+        "tests/workflow-scope.test.js",
+        "tests/workflow-tools.test.js"
+      ],
+      "files": [
+        "docs/PARALLEL-REGISTRY.md",
+        "docs/PENDING.md",
+        "docs/STATUS.md",
+        "docs/WORKFLOW-TOOLS.md",
+        "docs/production/management/ITERATION-BOARD.md",
+        "docs/quality-gates.md",
+        "docs/roadmap.md",
+        "scripts/acceptance-gate.mjs",
+        "scripts/architecture-graph.mjs",
+        "scripts/index-validation.mjs",
+        "scripts/page-snapshot.mjs",
+        "scripts/workflow-archive.mjs",
+        "scripts/workflow-browser.mjs",
+        "scripts/workflow-dependencies.mjs",
+        "scripts/workflow-evidence.mjs",
+        "scripts/workflow-ledger.mjs",
+        "scripts/workflow-memory.mjs",
+        "scripts/workflow-staged.mjs",
+        "scripts/workflow-status.mjs",
+        "scripts/workflow-task.mjs",
+        "scripts/workflow.mjs",
+        "tests/workflow-dependencies.test.js",
+        "tests/workflow-scope.test.js",
+        "tests/workflow-tools.test.js"
+      ],
+      "reason": "静态依赖闭包；流程黑盒测试包含项目流程工具与显式输入"
+    },
+    "groups": {
+      "code": "7baab585c8e26b0f994d221cc07267e3699555cac1da34c9777cf670214ddc61",
+      "docs": "43ebaf85e9309f78ca37e18a0ba95d46e8ed459c0611f84cd0d02728b163f4bd",
+      "state": "e423a76d1c8fd18318fbdafe1276866a2b2a29ebe4884dd9695dce2ebe515d74",
+      "environment": "da6f31010c53724968c66b86f4cfe1b81636353e0053ba3b873adccbf793fcd4"
+    },
+    "limits": [
+      "未监控图片/声音、node_modules 字节、浏览器与机器负载；匹配只表示候选证据，不自动免验"
+    ]
+  },
+  "after": {
+    "sha256": "e031089aade586ddeb10cf94b68b9a542ed10e28b03f5cc8fc7af942dca5f920",
+    "manifest": [
+      {
+        "file": "docs/PARALLEL-REGISTRY.md",
+        "sha256": "0cd5a8b163b17e0a885464d3794ef2b6ecf11e1edd6c648022164d2498d09458"
+      },
+      {
+        "file": "docs/PENDING.md",
+        "sha256": "37e8cf4fd89cbeae1564929aff7fa83baf4b228e05701ec3002a1a528c1c46fa"
+      },
+      {
+        "file": "docs/STATUS.md",
+        "sha256": "19a7d521b20bc2639d4aca9f4c6ea6aaea649b7cd1b0ff4758acde485ef4c791"
+      },
+      {
+        "file": "docs/WORKFLOW-TOOLS.md",
+        "sha256": "c6403ff6b46e3a5744a3ff4f20d056dc0834a72f519d0a47e07925ea4ccef7e5"
+      },
+      {
+        "file": "docs/evidence/2026-09-30-full-repository-review/task.json",
+        "sha256": "f82d8b3c741f6ce0adc44cbf7fb1b97baf35058678c2bac8ce01c76f2caf89c7"
+      },
+      {
+        "file": "docs/evidence/2026-09-30-lean-workflow/task.json",
+        "sha256": "fb10db8484d2015531c6f50d1142e56d40b78114f3c470810f54d0cec377b00f"
+      },
+      {
+        "file": "docs/production/management/ITERATION-BOARD.md",
+        "sha256": "cf23235499c242aaabca09bd57277f05106fb9ff32d2bd694b334d7821f64b1f"
+      },
+      {
+        "file": "docs/quality-gates.md",
+        "sha256": "dc7c56650130e23c507f159ca411e798036006396683d5bbe218c63e375d00df"
+      },
+      {
+        "file": "docs/roadmap.md",
+        "sha256": "1b0463d09a4298b9064d096a092f6c1bd0a393194629c72e4cef3defa7d4b1e3"
+      },
+      {
+        "file": "eslint.config.js",
+        "sha256": "a00084c92b23a9c7aefb5416f324ee11526cc90901dc69a441517c874dcd02fb"
+      },
+      {
+        "file": "jsconfig.battle-settlement.json",
+        "sha256": "ff9c6acca637b6583dc514e35f0870e8c39aa903f758919364ca3a10c4478f03"
+      },
+      {
+        "file": "jsconfig.battle-snapshot.json",
+        "sha256": "3fb7f26a7982e73c077b006c059b9a565b4353689ad04e0e634ebbe1b46a35c2"
+      },
+      {
+        "file": "jsconfig.card-rules.json",
+        "sha256": "426fb5f7c2781a1cf9427f29d326bea7e47cde4cd9338b99b3d178593632230d"
+      },
+      {
+        "file": "jsconfig.json",
+        "sha256": "3f2e1bd99ddc0cb8eb95ef70a7818e56fbcc687a8970d4615d6319396dbc2da1"
+      },
+      {
+        "file": "jsconfig.strict-foundations.json",
+        "sha256": "7d2f1e714dc03b4a67604a3928a5d1172c5214c6fce00443bacf4e56c6668c90"
+      },
+      {
+        "file": "jsconfig.strict-hand-selection.json",
+        "sha256": "4a4b2d33af7297b95a05976e5bc81aaf0baf3e64e3b8313516013994fbf11ba0"
+      },
+      {
+        "file": "jsconfig.strict-selection.json",
+        "sha256": "a141c4996d7ed5630a222e882738c6bf22c5473527a3c9e53e82686a8bd88f98"
+      },
+      {
+        "file": "package-lock.json",
+        "sha256": "5ffee07729dacc1f56f4be3325a53dbe5a177eada38247cf265cd42eaaa9ce82"
+      },
+      {
+        "file": "package.json",
+        "sha256": "787b82105e6744a374524ee2000b053aed77526955265c0a68073f134057f98e"
+      },
+      {
+        "file": "scripts/acceptance-gate.mjs",
+        "sha256": "3122466b36c43745b31b191d85b55f0c6221a523d5e96562b6d7737a014eef49"
+      },
+      {
+        "file": "scripts/architecture-graph.mjs",
+        "sha256": "5a326f52415297c1ca072f2e55256a0e77e4d36f770a0967f290254c50662e08"
+      },
+      {
+        "file": "scripts/index-validation.mjs",
+        "sha256": "06f346b0c512afeabde11457f793db587cece7db73e0788c3dc4d3d95b6aa460"
+      },
+      {
+        "file": "scripts/page-snapshot.mjs",
+        "sha256": "0f5c7131fcc6666c1b412be8bb7ca6fab28ab1333dfa2cad4f655329be11db98"
+      },
+      {
+        "file": "scripts/workflow-archive.mjs",
+        "sha256": "abc0de0d012b9020004eab49b3ca0fb0e89c1ad3c274640d2e41e51b1396c632"
+      },
+      {
+        "file": "scripts/workflow-browser.mjs",
+        "sha256": "329ccf7dbb83ae1862e0858354b8d27d0bf6f66552bfef86cb24776858eacbbc"
+      },
+      {
+        "file": "scripts/workflow-dependencies.mjs",
+        "sha256": "5215341e59942642da77303bde087f924ce5780844ca725ad06f7957b62163fd"
+      },
+      {
+        "file": "scripts/workflow-evidence.mjs",
+        "sha256": "b4c692ca7a558852b6de198733e321abb458a84908b4c4f3686f42d4db6cb075"
+      },
+      {
+        "file": "scripts/workflow-ledger.mjs",
+        "sha256": "d40494004382bb65b0dc7652f6d3804ac25eddb14f8f687b82e2e8cb0c38ab9e"
+      },
+      {
+        "file": "scripts/workflow-memory.mjs",
+        "sha256": "f646a279fde919bffd72be63c95064117ede712378ef6dce406b6a1d5e8242cc"
+      },
+      {
+        "file": "scripts/workflow-staged.mjs",
+        "sha256": "c5ba9f91cc386ae1b839c2071e3dfd283bb48959fbcdc5b73cb960125b5cc03f"
+      },
+      {
+        "file": "scripts/workflow-status.mjs",
+        "sha256": "6d7c1a81fc9e28cee6bb0850e66d11fcce5fb73766037e34be16294ef6e522ce"
+      },
+      {
+        "file": "scripts/workflow-task.mjs",
+        "sha256": "72c3d813eb09079cc8e4bd71537dd018bf293374683ffc77a44ea147787278b2"
+      },
+      {
+        "file": "scripts/workflow.mjs",
+        "sha256": "9ba1cba98a091fbe6765d2d880bed4f8eb9b5a98e4e6ceb107afe9e3a5db8920"
+      },
+      {
+        "file": "tests/workflow-dependencies.test.js",
+        "sha256": "78ee2bfa6f09c81243ff94c22b49cbdbaf23306bcc658bf7e094f6c0f07259e2"
+      },
+      {
+        "file": "tests/workflow-scope.test.js",
+        "sha256": "25d6c2a903ec6ce469b6de4809c558bdbea22344a13f5e6fbfd6590e95170efe"
+      },
+      {
+        "file": "tests/workflow-tools.test.js",
+        "sha256": "9d40abb1171b3ddab685e3a87948a36bbf0d107131ed443fef2e7948097ccad1"
+      },
+      {
+        "file": "vite.config.js",
+        "sha256": "a2213384885924a532af92b08afaeed7091568a13dc912a7ca4dc6883e26dfba"
+      }
+    ],
+    "environment": {
+      "node": "v24.13.0",
+      "platform": "win32",
+      "arch": "x64",
+      "dependencies": {
+        "vitest": "3.2.7",
+        "vite": "6.4.3",
+        "typescript": "7.0.2",
+        "eslint": "10.11.0",
+        "jsdom": "25.0.1",
+        "acorn": "8.18.0",
+        "acorn-walk": "8.3.5"
+      },
+      "ci": null,
+      "nodeOptions": null,
+      "forceFullTests": null
+    },
+    "documents": false,
+    "selection": {
+      "mode": "targeted",
+      "roots": [
+        "tests/workflow-dependencies.test.js",
+        "tests/workflow-scope.test.js",
+        "tests/workflow-tools.test.js"
+      ],
+      "files": [
+        "docs/PARALLEL-REGISTRY.md",
+        "docs/PENDING.md",
+        "docs/STATUS.md",
+        "docs/WORKFLOW-TOOLS.md",
+        "docs/production/management/ITERATION-BOARD.md",
+        "docs/quality-gates.md",
+        "docs/roadmap.md",
+        "scripts/acceptance-gate.mjs",
+        "scripts/architecture-graph.mjs",
+        "scripts/index-validation.mjs",
+        "scripts/page-snapshot.mjs",
+        "scripts/workflow-archive.mjs",
+        "scripts/workflow-browser.mjs",
+        "scripts/workflow-dependencies.mjs",
+        "scripts/workflow-evidence.mjs",
+        "scripts/workflow-ledger.mjs",
+        "scripts/workflow-memory.mjs",
+        "scripts/workflow-staged.mjs",
+        "scripts/workflow-status.mjs",
+        "scripts/workflow-task.mjs",
+        "scripts/workflow.mjs",
+        "tests/workflow-dependencies.test.js",
+        "tests/workflow-scope.test.js",
+        "tests/workflow-tools.test.js"
+      ],
+      "reason": "静态依赖闭包；流程黑盒测试包含项目流程工具与显式输入"
+    },
+    "groups": {
+      "code": "7baab585c8e26b0f994d221cc07267e3699555cac1da34c9777cf670214ddc61",
+      "docs": "43ebaf85e9309f78ca37e18a0ba95d46e8ed459c0611f84cd0d02728b163f4bd",
+      "state": "e423a76d1c8fd18318fbdafe1276866a2b2a29ebe4884dd9695dce2ebe515d74",
+      "environment": "da6f31010c53724968c66b86f4cfe1b81636353e0053ba3b873adccbf793fcd4"
+    },
+    "limits": [
+      "未监控图片/声音、node_modules 字节、浏览器与机器负载；匹配只表示候选证据，不自动免验"
+    ]
+  },
+  "exitCode": 0,
+  "signal": null,
+  "error": null,
+  "validation": {
+    "mode": "targeted",
+    "executed": true,
+    "tests": [
+      "tests/workflow-dependencies.test.js",
+      "tests/workflow-scope.test.js",
+      "tests/workflow-tools.test.js"
+    ]
+  },
+  "outcome": "passed",
+  "log": "docs/evidence/2026-09-30-workflow-review-fixes/2026-09-30T15-35-43.102Z-99ce69a3.log",
+  "logSha256": "bdf086b72e1c59ef8b7e10b190853e1c54f7108ecd440a81c0ca534d4381d389",
+  "limits": [
+    "仅本命令覆盖范围；没有 build、实页、真实 hover、玩家存档或远端 CI 验收",
+    "未监控图片/声音、node_modules 字节、浏览器与机器负载；匹配只表示候选证据，不自动免验"
+  ],
+  "freshness": {
+    "eligibleForReview": true,
+    "codeEligibleForReview": true,
+    "result": "candidate",
+    "parts": {
+      "code": {
+        "before": "7baab585c8e26b0f994d221cc07267e3699555cac1da34c9777cf670214ddc61",
+        "after": "7baab585c8e26b0f994d221cc07267e3699555cac1da34c9777cf670214ddc61",
+        "current": "7baab585c8e26b0f994d221cc07267e3699555cac1da34c9777cf670214ddc61",
+        "covered": true,
+        "changedDuringCheck": false,
+        "changedSinceCheck": false,
+        "status": "candidate",
+        "eligibleForReview": true
+      },
+      "docs": {
+        "before": "43ebaf85e9309f78ca37e18a0ba95d46e8ed459c0611f84cd0d02728b163f4bd",
+        "after": "43ebaf85e9309f78ca37e18a0ba95d46e8ed459c0611f84cd0d02728b163f4bd",
+        "current": "43ebaf85e9309f78ca37e18a0ba95d46e8ed459c0611f84cd0d02728b163f4bd",
+        "covered": true,
+        "changedDuringCheck": false,
+        "changedSinceCheck": false,
+        "status": "candidate",
+        "eligibleForReview": true
+      },
+      "state": {
+        "before": "e423a76d1c8fd18318fbdafe1276866a2b2a29ebe4884dd9695dce2ebe515d74",
+        "after": "e423a76d1c8fd18318fbdafe1276866a2b2a29ebe4884dd9695dce2ebe515d74",
+        "current": "e423a76d1c8fd18318fbdafe1276866a2b2a29ebe4884dd9695dce2ebe515d74",
+        "covered": true,
+        "changedDuringCheck": false,
+        "changedSinceCheck": false,
+        "status": "candidate",
+        "eligibleForReview": true
+      },
+      "environment": {
+        "before": "da6f31010c53724968c66b86f4cfe1b81636353e0053ba3b873adccbf793fcd4",
+        "after": "da6f31010c53724968c66b86f4cfe1b81636353e0053ba3b873adccbf793fcd4",
+        "current": "da6f31010c53724968c66b86f4cfe1b81636353e0053ba3b873adccbf793fcd4",
+        "covered": true,
+        "changedDuringCheck": false,
+        "changedSinceCheck": false,
+        "status": "candidate",
+        "eligibleForReview": true
+      }
+    },
+    "recheck": [],
+    "limits": [
+      "未监控图片/声音、node_modules 字节、浏览器与机器负载；匹配只表示候选证据，不自动免验"
+    ]
+  }
+}

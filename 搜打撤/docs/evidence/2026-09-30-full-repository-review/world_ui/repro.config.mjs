@@ -1,0 +1,1 @@
+export default { test: { environment: 'jsdom', include: ['docs/evidence/2026-09-30-full-repository-review/world_ui/repro.test.js'], globals: true, pool: 'forks', maxWorkers: 1, minWorkers: 1 }, cacheDir: 'docs/evidence/2026-09-30-full-repository-review/world_ui/.vite-cache' };

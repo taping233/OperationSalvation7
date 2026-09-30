@@ -1,0 +1,2806 @@
+{
+  "schemaVersion": 1,
+  "owner": "infrastructure",
+  "kind": "bounded-test-quality-review",
+  "baselineHead": "fd38468ea6025fa616ba8bfa0a0cdd466ee7617a",
+  "selected": 32,
+  "depthCounts": {
+    "deep": 11,
+    "systematic": 0,
+    "static-only": 21,
+    "not-reviewed": 0
+  },
+  "executedTests": false,
+  "files": [
+    {
+      "file": "tests/acceptance-gate.test.js",
+      "depth": "deep",
+      "readScope": "全文阅读并定向核对被测生产入口、断言和mock边界",
+      "assessment": "实际planForPaths/parseStagedStatus、两条无参数失败CLI。覆盖定向/全量升级/样式skip。将compare CLI映射到纯provenance测试而非实际compare逻辑；未覆盖所有配置变化分类或真实staged完整质量门。",
+      "source": "modified-working-tree-test-not-in-HEAD",
+      "lines": 111,
+      "imports": [
+        {
+          "source": "node:child_process",
+          "line": 1
+        },
+        {
+          "source": "node:path",
+          "line": 2
+        },
+        {
+          "source": "vitest",
+          "line": 3
+        },
+        {
+          "source": "../scripts/acceptance-gate.mjs",
+          "line": 4
+        }
+      ],
+      "testDeclarations": [
+        {
+          "name": "测试文件小改只运行该测试",
+          "line": 7
+        },
+        {
+          "name": "纯战斗规则改动带直接测试与架构哨兵，不扩成启动全链",
+          "line": 13
+        },
+        {
+          "name": "卡牌稀有度规则改动选中直接契约测试",
+          "line": 22
+        },
+        {
+          "name": "数据与公共规则改动回退完整测试",
+          "line": 28
+        },
+        {
+          "name": "已映射的 Agent 工具只运行对应定向测试",
+          "line": 37
+        },
+        {
+          "name": "已有直接契约的流程工具走快门，未知脚本仍全量",
+          "line": 50
+        },
+        {
+          "name": "没有直接覆盖测试的 Agent 工具和其他 game/tools 改动回退完整测试",
+          "line": 59
+        },
+        {
+          "name": "暂存快照的忽略文件扫描包含 game/tools",
+          "line": 67
+        },
+        {
+          "name": "没有可确认测试的源码改动回退完整测试",
+          "line": 71
+        },
+        {
+          "name": "纯样式修改不冒充 Vitest 验收",
+          "line": 75
+        },
+        {
+          "name": "Windows 绝对路径仍映射到项目内测试",
+          "line": 80
+        },
+        {
+          "name": "命令行缺少 --paths 参数值时明确失败",
+          "line": 86
+        },
+        {
+          "name": "test:target 不给测试文件时拒绝退化为全量",
+          "line": 94
+        },
+        {
+          "name": "Git 零字节状态按状态与路径成对读取，不能吞掉删除项",
+          "line": 102
+        }
+      ],
+      "assertionSyntaxCount": 80,
+      "mocks": [],
+      "fixtureOperations": [
+        {
+          "operation": "spawnSync",
+          "line": 87
+        },
+        {
+          "operation": "spawnSync",
+          "line": 95
+        }
+      ]
+    },
+    {
+      "file": "tests/agent-command-results.test.js",
+      "depth": "deep",
+      "readScope": "全文阅读并定向核对被测生产入口、断言和mock边界",
+      "assessment": "实际act/step/autoRun与真实菜单注册，session、持久化/加载/渲染端口为桩。异步受理/完成、拒绝、context凭据、迟到失败、commandTimeout覆盖有价值；存档保留断言仅文案，已在注释承认；不覆盖batch外层墙钟。",
+      "source": "tracked-freeze-test",
+      "lines": 315,
+      "imports": [
+        {
+          "source": "vitest",
+          "line": 1
+        },
+        {
+          "source": "../game/src/agent/agent.runner.js",
+          "dynamic": true,
+          "line": 11
+        },
+        {
+          "source": "../game/src/agent/agent.state.js",
+          "dynamic": true,
+          "line": 12
+        },
+        {
+          "source": "../game/src/agent/agent.turbo.js",
+          "dynamic": true,
+          "line": 13
+        },
+        {
+          "source": "../game/src/battle/core/battle.core.js",
+          "dynamic": true,
+          "line": 14
+        },
+        {
+          "source": "../game/src/ui/game.menu.js",
+          "dynamic": true,
+          "line": 15
+        }
+      ],
+      "testDeclarations": [
+        {
+          "name": "rejects explicit false from a real registered UI callback",
+          "line": 77
+        },
+        {
+          "name": "preserves a structured business rejection",
+          "line": 82
+        },
+        {
+          "name": "preserves the real BattleSession cancellation void contract",
+          "line": 87
+        },
+        {
+          "name": "accepts legacy synchronous result %s",
+          "line": 92
+        },
+        {
+          "name": "it.each",
+          "line": 92
+        },
+        {
+          "name": "turns synchronous exceptions into a serializable failure",
+          "line": 99
+        },
+        {
+          "name": "keeps synchronous move rejection routing",
+          "line": 105
+        },
+        {
+          "name": "allows a synchronous command to change its own run ownership",
+          "line": 109
+        },
+        {
+          "name": "returns only serializable acceptance from act and handles an unawaited rejection",
+          "line": 120
+        },
+        {
+          "name": "waits for the registered asynchronous callback before settling the step",
+          "line": 133
+        },
+        {
+          "name": "reports asynchronous %s as a completed failure",
+          "line": 153
+        },
+        {
+          "name": "it.each",
+          "line": 153
+        },
+        {
+          "name": "stops autoRun after a timeout and ignores the late failure without retrying",
+          "line": 163
+        },
+        {
+          "name": "does not execute a pending decision after %s",
+          "line": 179
+        },
+        {
+          "name": "it.each",
+          "line": 179
+        },
+        {
+          "name": "discards old-run completion %s without failure-memory writes",
+          "line": 197
+        },
+        {
+          "name": "it.each",
+          "line": 197
+        },
+        {
+          "name": "does not write an old-page rejection over the new-page failure",
+          "line": 212
+        },
+        {
+          "name": "accepts real enterSlot completion (saved run = %s) and strips its ownership proof",
+          "line": 225
+        },
+        {
+          "name": "it.each",
+          "line": 225
+        },
+        {
+          "name": "reports real enterSlot load failure without claiming completion success",
+          "line": 238
+        },
+        {
+          "name": "reports real enterSlot recovery rejection without attempting load",
+          "line": 258
+        },
+        {
+          "name": "rejects a real enterSlot proof if another run replaces it before delivery",
+          "line": 265
+        },
+        {
+          "name": "does not accept ownership proofs from other commands",
+          "line": 280
+        },
+        {
+          "name": "rejects an enterSlot proof for a different requested slot",
+          "line": 291
+        },
+        {
+          "name": "stops if an external run replaces the command during settle handoff",
+          "line": 304
+        }
+      ],
+      "assertionSyntaxCount": 120,
+      "mocks": [
+        {
+          "operation": "vi.mock",
+          "line": 4,
+          "target": "../game/src/run/game.session.js"
+        },
+        {
+          "operation": "vi.mock",
+          "line": 8,
+          "target": "../game/src/run/game.run.flow.js"
+        },
+        {
+          "operation": "vi.spyOn(...).mockImplementation",
+          "line": 100,
+          "target": null
+        },
+        {
+          "operation": "vi.spyOn",
+          "line": 100,
+          "target": null
+        }
+      ],
+      "fixtureOperations": []
+    },
+    {
+      "file": "tests/agent-compare-provenance.test.js",
+      "depth": "deep",
+      "readScope": "全文阅读并定向核对被测生产入口、断言和mock边界",
+      "assessment": "实际inspectComparisonProvenance纯函数，summary/runs人为对象；覆盖代码/环境/配置/重复seed/legacy门。未运行agent-compare CLI、score/符号检验/晋级判决及ledger真实入口。",
+      "source": "tracked-freeze-test",
+      "lines": 79,
+      "imports": [
+        {
+          "source": "vitest",
+          "line": 1
+        },
+        {
+          "source": "../game/tools/agent-compare-provenance.mjs",
+          "line": 2
+        }
+      ],
+      "testDeclarations": [
+        {
+          "name": "allows a same-code paired run whose planned policy, driver, and weights differ",
+          "line": 24
+        },
+        {
+          "name": "blocks different code, changed-during-run, runtime, config, and enabled probe",
+          "line": 36
+        },
+        {
+          "name": "blocks incomplete, null-seed, or duplicate-seed pairs",
+          "line": 53
+        },
+        {
+          "name": "keeps legacy summaries readable but marks them as non-promotable",
+          "line": 67
+        }
+      ],
+      "assertionSyntaxCount": 22,
+      "mocks": [],
+      "fixtureOperations": []
+    },
+    {
+      "file": "tests/agent-llm-abort.test.js",
+      "depth": "deep",
+      "readScope": "全文阅读并定向核对被测生产入口、断言和mock边界",
+      "assessment": "实际decide，fetch与localStorage为桩，Node同realm；取消前/中途/墙钟超时覆盖。fetch桩主动遵守AbortSignal；不证明忽略signal端点的挂起，也不证明batch策略接线。",
+      "source": "tracked-freeze-test",
+      "lines": 79,
+      "imports": [
+        {
+          "source": "vitest",
+          "line": 6
+        },
+        {
+          "source": "../game/src/agent/agent.llm.js",
+          "dynamic": true,
+          "line": 8
+        }
+      ],
+      "testDeclarations": [
+        {
+          "name": "正常路径：fetch 收到信号、返回动作 JSON",
+          "line": 25
+        },
+        {
+          "name": "外部 signal 已 abort：不再发起 fetch，直接退化",
+          "line": 38
+        },
+        {
+          "name": "stopRun 外部 signal 中途 abort：在途 fetch 收到中止，decide 退化不挂死",
+          "line": 47
+        },
+        {
+          "name": "墙钟超时：fetch 永不返回时按时退化，fetch 信号被中止",
+          "line": 65
+        }
+      ],
+      "assertionSyntaxCount": 26,
+      "mocks": [
+        {
+          "operation": "vi.stubGlobal",
+          "line": 16,
+          "target": "localStorage"
+        },
+        {
+          "operation": "vi.stubGlobal",
+          "line": 29,
+          "target": "fetch"
+        },
+        {
+          "operation": "vi.stubGlobal",
+          "line": 40,
+          "target": "fetch"
+        },
+        {
+          "operation": "vi.stubGlobal",
+          "line": 53,
+          "target": "fetch"
+        },
+        {
+          "operation": "vi.stubGlobal",
+          "line": 67,
+          "target": "fetch"
+        }
+      ],
+      "fixtureOperations": []
+    },
+    {
+      "file": "tests/agent-llm.test.js",
+      "depth": "deep",
+      "readScope": "全文阅读并定向核对被测生产入口、断言和mock边界",
+      "assessment": "实际llm.decide和127.0.0.1随机端口HTTP服务；独占Map配置。回复解析/重试/5xx覆盖，不经过batch策略工厂，漏INFRA04。未清理SDT_AGENT_BASE_URL/API_KEY/MODEL环境覆盖；局外真实环境可能改写fixture路由。",
+      "source": "tracked-freeze-test",
+      "lines": 113,
+      "imports": [
+        {
+          "source": "vitest",
+          "line": 5
+        },
+        {
+          "source": "node:http",
+          "line": 6
+        },
+        {
+          "source": "../game/src/agent/agent.llm.js",
+          "line": 7
+        }
+      ],
+      "testDeclarations": [
+        {
+          "name": "直给 JSON / 代码块围栏 / 内嵌大括号都能取到动作",
+          "line": 21
+        },
+        {
+          "name": "纯文本回复判为不可解析",
+          "line": 28
+        },
+        {
+          "name": "配置读写落到 localStorage 且不丢字段",
+          "line": 69
+        },
+        {
+          "name": "合法动作直接返回协议动作",
+          "line": 76
+        },
+        {
+          "name": "垃圾回复带错误重试，第二次拿到合法动作",
+          "line": 86
+        },
+        {
+          "name": "接口 5xx 不卡死：退化为贪心动作",
+          "line": 95
+        },
+        {
+          "name": "回复动作不在清单内时重试后退化（非法形状被协议拒绝）",
+          "line": 105
+        }
+      ],
+      "assertionSyntaxCount": 36,
+      "mocks": [],
+      "fixtureOperations": [
+        {
+          "operation": "createServer",
+          "line": 51
+        }
+      ]
+    },
+    {
+      "file": "tests/agent-recorder.test.js",
+      "depth": "deep",
+      "readScope": "全文阅读并定向核对被测生产入口、断言和mock边界",
+      "assessment": "实际recordRun/聚合/CSV；卡牌价值与游戏为桩。测试在beforeEach setDriver(human)，标签用例也手动还原human；没有autoRun前后getDriver断言，漏INFRA03。",
+      "source": "tracked-freeze-test",
+      "lines": 93,
+      "imports": [
+        {
+          "source": "vitest",
+          "line": 1
+        },
+        {
+          "source": "../game/src/agent/agent.recorder.js",
+          "line": 2
+        },
+        {
+          "source": "../game/src/agent/agent.stats.js",
+          "line": 3
+        }
+      ],
+      "testDeclarations": [
+        {
+          "name": "死亡局记录含结局/死因/层/行动/战斗/带出卡牌价值",
+          "line": 19
+        },
+        {
+          "name": "战斗计数逐局清零，环形缓冲按序追加",
+          "line": 38
+        },
+        {
+          "name": "驱动标签进记录",
+          "line": 48
+        },
+        {
+          "name": "率与均值按记录字段算：通关率/撤离率/死亡率/带出价值/战斗胜率",
+          "line": 64
+        },
+        {
+          "name": "死亡层分布 / 高价值卡 / 切分对比",
+          "line": 74
+        },
+        {
+          "name": "导出 JSON/CSV 可解析、字段对齐",
+          "line": 83
+        }
+      ],
+      "assertionSyntaxCount": 44,
+      "mocks": [],
+      "fixtureOperations": []
+    },
+    {
+      "file": "tests/agent-run-provenance.test.js",
+      "depth": "deep",
+      "readScope": "全文阅读并定向核对被测生产入口、断言和mock边界",
+      "assessment": "实际指纹/附加provenance；Git/文件读取注入桩，Z:/missing-project验证未知lock。覆盖指纹变化和Git不可用，不证明真实Git pathspec范围完整或批跑产物真实策略。",
+      "source": "tracked-freeze-test",
+      "lines": 83,
+      "imports": [
+        {
+          "source": "vitest",
+          "line": 1
+        },
+        {
+          "source": "../game/src/agent/agent.weights.js",
+          "line": 2
+        },
+        {
+          "source": "../game/tools/agent-run-provenance.mjs",
+          "line": 3
+        }
+      ],
+      "testDeclarations": [
+        {
+          "name": "adds provenance without changing legacy summary fields",
+          "line": 8
+        },
+        {
+          "name": "changes the dirty fingerprint when tracked code changes",
+          "line": 32
+        },
+        {
+          "name": "includes untracked code contents in the dirty fingerprint",
+          "line": 54
+        },
+        {
+          "name": "returns unknown Git provenance instead of throwing when Git is unavailable",
+          "line": 79
+        }
+      ],
+      "assertionSyntaxCount": 22,
+      "mocks": [],
+      "fixtureOperations": []
+    },
+    {
+      "file": "tests/agent-runner-abort.test.js",
+      "depth": "deep",
+      "readScope": "全文阅读并定向核对被测生产入口、断言和mock边界",
+      "assessment": "实际runner/state；session/flow为桩。覆盖signal取消、局间控制器重建、runTimeoutMs及already-running；未调用agent-batch外层race/cleanup，漏INFRA05。停止用例不证明所有下游命令无副作用。",
+      "source": "tracked-freeze-test",
+      "lines": 82,
+      "imports": [
+        {
+          "source": "vitest",
+          "line": 1
+        },
+        {
+          "source": "../game/src/agent/agent.runner.js",
+          "dynamic": true,
+          "line": 13
+        },
+        {
+          "source": "../game/src/agent/agent.turbo.js",
+          "dynamic": true,
+          "line": 14
+        },
+        {
+          "source": "../game/src/agent/agent.state.js",
+          "dynamic": true,
+          "line": 15
+        }
+      ],
+      "testDeclarations": [
+        {
+          "name": "stopRun 中止本局 signal，autoRun 以 cancelled 收口",
+          "line": 33
+        },
+        {
+          "name": "上一局的 stopRun 不影响新一局的 signal（控制器随局重建）",
+          "line": 48
+        },
+        {
+          "name": "runTimeoutMs 局级墙钟：超时以 run-timeout 收口",
+          "line": 59
+        },
+        {
+          "name": "重入守卫：上一局未收口时第二局以 already-running 拒绝",
+          "line": 67
+        }
+      ],
+      "assertionSyntaxCount": 22,
+      "mocks": [
+        {
+          "operation": "vi.mock",
+          "line": 6,
+          "target": "../game/src/run/game.session.js"
+        },
+        {
+          "operation": "vi.mock",
+          "line": 10,
+          "target": "../game/src/run/game.run.flow.js"
+        }
+      ],
+      "fixtureOperations": []
+    },
+    {
+      "file": "tests/architecture-boundaries.test.js",
+      "depth": "static-only",
+      "readScope": "仅机械AST索引；未逐条审查断言语义或fixture生命周期",
+      "assessment": "尚未进行断言与生产行为的语义核对；索引不证明测试有效性。",
+      "source": "tracked-freeze-test",
+      "lines": 181,
+      "imports": [
+        {
+          "source": "vitest",
+          "line": 1
+        },
+        {
+          "source": "node:path",
+          "line": 2
+        },
+        {
+          "source": "../scripts/architecture-graph.mjs",
+          "line": 3
+        }
+      ],
+      "testDeclarations": [
+        {
+          "name": "会话内核不能重新接入 DOM 或浏览器适配器",
+          "line": 8
+        },
+        {
+          "name": "基地模型与规则配置不得反向读取存储、门面或全局浏览器",
+          "line": 16
+        },
+        {
+          "name": "识别静态导入、重导出、动态字面量与嵌套目录，不误判注释",
+          "line": 24
+        },
+        {
+          "name": "能定位经动态导入与重导出形成的环",
+          "line": 37
+        },
+        {
+          "name": "无法分析的动态路径与缺失源码不能悄悄略过",
+          "line": 42
+        },
+        {
+          "name": "数据和 npm 导入不伪装成项目 JS 模块",
+          "line": 47
+        },
+        {
+          "name": "允许既有状态装配模块读取 runtime，禁止视图旁路",
+          "line": 52
+        },
+        {
+          "name": "纯模块不能借全局门面或反向 import 访问运行时，说明文字不误报",
+          "line": 63
+        },
+        {
+          "name": "选牌域必须通过装配端口访问服务，不能重新读取浏览器门面",
+          "line": 77
+        },
+        {
+          "name": "选牌域不能重新静态导入带 UI 等待的整段播放模块",
+          "line": 88
+        },
+        {
+          "name": "纯模块不能反向依赖流程域目录（hub/run）",
+          "line": 98
+        },
+        {
+          "name": "M 批命令适配器仅供 resolver 装配，视图和快照仍不可调用",
+          "line": 108
+        },
+        {
+          "name": "独立领域模块不能通过视图切片接入界面",
+          "line": 122
+        },
+        {
+          "name": "照相馆页面仅允许轻门面动态加载（%s, %s）",
+          "line": 132
+        },
+        {
+          "name": "it.each",
+          "line": 132
+        },
+        {
+          "name": "照相馆轻门面的动态入口合法",
+          "line": 148
+        },
+        {
+          "name": "战斗状态访问与独立规则模块遵循允许方向",
+          "line": 161
+        },
+        {
+          "name": "守卫判据键自检：每个键必须命中真实文件，杜绝规则死、测试绿",
+          "line": 165
+        },
+        {
+          "name": "自检本身能红：文件改名（或删除）会让对应判据键被判死",
+          "line": 169
+        }
+      ],
+      "assertionSyntaxCount": 62,
+      "mocks": [],
+      "fixtureOperations": []
+    },
+    {
+      "file": "tests/boot.test.js",
+      "depth": "static-only",
+      "readScope": "仅机械AST索引；未逐条审查断言语义或fixture生命周期",
+      "assessment": "尚未进行断言与生产行为的语义核对；索引不证明测试有效性。",
+      "source": "tracked-freeze-test",
+      "lines": 534,
+      "imports": [
+        {
+          "source": "vitest",
+          "line": 5
+        },
+        {
+          "source": "node:fs",
+          "line": 50
+        },
+        {
+          "source": "node:path",
+          "line": 51
+        },
+        {
+          "source": "../game/src/main.js",
+          "dynamic": true,
+          "line": 62
+        },
+        {
+          "source": "../game/src/hub/game.cardslib.js",
+          "dynamic": true,
+          "line": 87
+        },
+        {
+          "source": "../game/src/run/game.session.js",
+          "dynamic": true,
+          "line": 88
+        },
+        {
+          "source": "../game/src/cards/card-photo-notes.js",
+          "dynamic": true,
+          "line": 214
+        },
+        {
+          "source": "../game/src/battle/battle-loader.js",
+          "dynamic": true,
+          "line": 273
+        },
+        {
+          "source": "../game/src/run/game.session.js",
+          "dynamic": true,
+          "line": 285
+        },
+        {
+          "source": "../game/src/run/game.run.js",
+          "dynamic": true,
+          "line": 286
+        },
+        {
+          "source": "../game/src/run/game.session.js",
+          "dynamic": true,
+          "line": 322
+        },
+        {
+          "source": "../game/src/run/game.run.js",
+          "dynamic": true,
+          "line": 323
+        },
+        {
+          "source": "../game/src/run/game.session.js",
+          "dynamic": true,
+          "line": 359
+        },
+        {
+          "source": "../game/src/run/game.run.js",
+          "dynamic": true,
+          "line": 360
+        },
+        {
+          "source": "../game/src/run/game.session.js",
+          "dynamic": true,
+          "line": 385
+        },
+        {
+          "source": "../game/src/hub/game.cardslib.js",
+          "dynamic": true,
+          "line": 482
+        },
+        {
+          "source": "../game/src/run/game.session.js",
+          "dynamic": true,
+          "line": 483
+        }
+      ],
+      "testDeclarations": [
+        {
+          "name": "启动完成后 body 挂上 lobby 类（局内控件在标题页隐藏）",
+          "line": 77
+        },
+        {
+          "name": "标题封面处于显示状态",
+          "line": 80
+        },
+        {
+          "name": "照相馆动态载入可被快捷切页或真实 Escape 取消并恢复来源页状态",
+          "line": 86
+        },
+        {
+          "name": "卡牌档案馆可打开、筛选、清空与排序",
+          "line": 129
+        },
+        {
+          "name": "照相馆以照片背签打开，默认大图仍用卡牌面且保留 footer 委托",
+          "line": 176
+        },
+        {
+          "name": "开始游戏 / 设置 / 退出按钮已绑定监听（可点击响应）",
+          "line": 255
+        },
+        {
+          "name": "跨文件 mixin 已延迟绑定（TDZ 回归点）",
+          "line": 262
+        },
+        {
+          "name": "核心模块已发布，战斗域按需加载后发布",
+          "line": 269
+        },
+        {
+          "name": "运行时按 mapSeed 重建局部几何，并以稳定节点提交移动事务",
+          "line": 284
+        },
+        {
+          "name": "非 reduced-motion 的 fake rAF 移动最终只提交一次",
+          "line": 321
+        },
+        {
+          "name": "第一层 door 确认后进入第二层，终层仍保留 extraction",
+          "line": 358
+        },
+        {
+          "name": "enterLayer 将入口与可走分支一起构图，隐藏节点不占据画面",
+          "line": 384
+        },
+        {
+          "name": "战斗指向卡支持点击选中、Esc取消与目标结算",
+          "line": 408
+        },
+        {
+          "name": "唯一敌人时指向卡点击直接打出（STS2 TryWebClickPlay 口径）",
+          "line": 451
+        },
+        {
+          "name": "卡牌大页 Esc 关闭与加载态强关：输入法组合态（isComposing / keyCode 229）不误触",
+          "line": 481
+        }
+      ],
+      "assertionSyntaxCount": 262,
+      "mocks": [],
+      "fixtureOperations": []
+    },
+    {
+      "file": "tests/camera-interaction.test.js",
+      "depth": "static-only",
+      "readScope": "仅机械AST索引；未逐条审查断言语义或fixture生命周期",
+      "assessment": "尚未进行断言与生产行为的语义核对；索引不证明测试有效性。",
+      "source": "tracked-freeze-test",
+      "lines": 57,
+      "imports": [
+        {
+          "source": "vitest",
+          "line": 1
+        },
+        {
+          "source": "../game/src/core/camera.js",
+          "dynamic": true,
+          "line": 5
+        }
+      ],
+      "testDeclarations": [
+        {
+          "name": "screen/world 转换互为逆运算",
+          "line": 8
+        },
+        {
+          "name": "fitLayer 使用当前层 bounds，而不是固定全景坐标",
+          "line": 17
+        },
+        {
+          "name": "探索构图只使用当前合法分支，远处隐藏节点不稀释构图",
+          "line": 26
+        },
+        {
+          "name": "zoom=%s 时命中半径至少覆盖节点圆盘与最小屏幕尺寸",
+          "line": 48
+        },
+        {
+          "name": "it.each",
+          "line": 48
+        }
+      ],
+      "assertionSyntaxCount": 32,
+      "mocks": [],
+      "fixtureOperations": []
+    },
+    {
+      "file": "tests/contracts.test.js",
+      "depth": "static-only",
+      "readScope": "仅机械AST索引；未逐条审查断言语义或fixture生命周期",
+      "assessment": "尚未进行断言与生产行为的语义核对；索引不证明测试有效性。",
+      "source": "tracked-freeze-test",
+      "lines": 216,
+      "imports": [
+        {
+          "source": "vitest",
+          "line": 1
+        },
+        {
+          "source": "node:fs",
+          "line": 2
+        },
+        {
+          "source": "node:path",
+          "line": 3
+        },
+        {
+          "source": "../game/src/core/rules.js",
+          "line": 4
+        },
+        {
+          "source": "../game/src/core/mapData.js",
+          "line": 5
+        },
+        {
+          "source": "../game/src/battle/effects/battle.effects.js",
+          "line": 6
+        },
+        {
+          "source": "../game/src/hub/game.storage.js",
+          "line": 7
+        },
+        {
+          "source": "../game/src/hub/game.store.js",
+          "line": 8
+        },
+        {
+          "source": "../game/src/boot-order.js",
+          "line": 9
+        },
+        {
+          "source": "../scripts/architecture-graph.mjs",
+          "line": 10
+        }
+      ],
+      "testDeclarations": [
+        {
+          "name": "关键玩法数值保持冻结且与现行规则一致",
+          "line": 13
+        },
+        {
+          "name": "效果文本按立即、回合开始、整场和被注能时分类",
+          "line": 36
+        },
+        {
+          "name": "限定技能句独立成桶（装备打出只穿戴，技能由按钮发动）",
+          "line": 47
+        },
+        {
+          "name": "效果执行器只通过端口修改战斗状态",
+          "line": 53
+        },
+        {
+          "name": "GameStore 提供稳定的可读快照，且不暴露可变集合",
+          "line": 83
+        },
+        {
+          "name": "v1 迁入空的档位 1，并保留已有 v2 数据",
+          "line": 98
+        },
+        {
+          "name": "src 模块不存在循环依赖",
+          "line": 112
+        },
+        {
+          "name": "game.session 不反向导入页面功能模块",
+          "line": 118
+        },
+        {
+          "name": "battle.core 不访问 DOM 或反向导入战斗视图",
+          "line": 123
+        },
+        {
+          "name": "window.SDT 只允许在 sdt-facade.js 初始化",
+          "line": 137
+        },
+        {
+          "name": "核心机制层不访问 DOM",
+          "line": 143
+        },
+        {
+          "name": "数据模块 cards.js 不生成 HTML（卡面渲染已外迁 cards.view.js）",
+          "line": 158
+        },
+        {
+          "name": "实机卡库批次数据外置到 game/data/cards-sync.json（批次 6）",
+          "line": 163
+        },
+        {
+          "name": "桌面开发态只加载 Vite 构建产物，不直接加载含裸模块导入的源码",
+          "line": 180
+        },
+        {
+          "name": "首页监听在 DOMContentLoaded 的易失败初始化链之前绑定",
+          "line": 189
+        },
+        {
+          "name": "双击启动器会先刷新构建产物，避免桌面端长期运行旧前端",
+          "line": 197
+        },
+        {
+          "name": "main.js 副作用导入顺序与 boot-order.js 的 BOOT_ORDER 逐项一致（批次 5）",
+          "line": 205
+        }
+      ],
+      "assertionSyntaxCount": 96,
+      "mocks": [],
+      "fixtureOperations": []
+    },
+    {
+      "file": "tests/cov-motion-primitives.test.js",
+      "depth": "static-only",
+      "readScope": "仅机械AST索引；未逐条审查断言语义或fixture生命周期",
+      "assessment": "尚未进行断言与生产行为的语义核对；索引不证明测试有效性。",
+      "source": "tracked-freeze-test",
+      "lines": 186,
+      "imports": [
+        {
+          "source": "vitest",
+          "line": 5
+        },
+        {
+          "source": "../game/src/core/motion-primitives.js",
+          "line": 6
+        }
+      ],
+      "testDeclarations": [
+        {
+          "name": "区间内恒等，区间外钳到 0/1",
+          "line": 13
+        },
+        {
+          "name": "全部曲线端点精确：f(0)=0、f(1)=1",
+          "line": 25
+        },
+        {
+          "name": "全部曲线输出有界 [0,1] 且单调不减",
+          "line": 32
+        },
+        {
+          "name": "对称 S（smooth/smoother/cubicInOut）：中点过半且 f(u)+f(1-u)=1",
+          "line": 45
+        },
+        {
+          "name": "out 系（cubicOut/quintOut）快起缓收：中点已走过半程",
+          "line": 54
+        },
+        {
+          "name": "t≤0 返回 0（受力前静止）",
+          "line": 62
+        },
+        {
+          "name": "默认参数：欠阻尼过冲后回稳，采样有界且收敛到 1",
+          "line": 68
+        },
+        {
+          "name": "收敛时长与 settleMs 联动：2× settle 后 |1-f| 低于 eps",
+          "line": 82
+        },
+        {
+          "name": "阻尼比参数钳制：极端 zeta 不产生 NaN",
+          "line": 91
+        },
+        {
+          "name": "确定性：同参数恒同结果（无随机无状态）",
+          "line": 98
+        },
+        {
+          "name": "回归锚：omega=18、zeta=.62 → 351ms（源码注释「约 0.35s 收敛」）",
+          "line": 105
+        },
+        {
+          "name": "结果为正整数毫秒",
+          "line": 109
+        },
+        {
+          "name": "单调性：eps 越松越短、omega/zeta 越大越快收敛",
+          "line": 117
+        },
+        {
+          "name": "端点落地：u=0 得 from、u=1 得 to（拱高项归零）",
+          "line": 128
+        },
+        {
+          "name": "进度钳制：越界 u 兜到两端",
+          "line": 133
+        },
+        {
+          "name": "默认参数中点为拱顶：x 过半、y 抬升一个 height",
+          "line": 138
+        },
+        {
+          "name": "height=0 退化为直线插值",
+          "line": 142
+        },
+        {
+          "name": "水平分量沿曲线单调前进",
+          "line": 146
+        },
+        {
+          "name": "静置期（t≤t0）恒为 0",
+          "line": 157
+        },
+        {
+          "name": "受力后有界衰减：|v| ≤ amp·e^(-decay·dt) 且最终趋零",
+          "line": 162
+        },
+        {
+          "name": "amp 线性缩放、确定性",
+          "line": 179
+        }
+      ],
+      "assertionSyntaxCount": 94,
+      "mocks": [],
+      "fixtureOperations": []
+    },
+    {
+      "file": "tests/diagnostics.local.test.js",
+      "depth": "static-only",
+      "readScope": "仅机械AST索引；未逐条审查断言语义或fixture生命周期",
+      "assessment": "尚未进行断言与生产行为的语义核对；索引不证明测试有效性。",
+      "source": "tracked-freeze-test",
+      "lines": 116,
+      "imports": [
+        {
+          "source": "vitest",
+          "line": 1
+        },
+        {
+          "source": "../game/src/core/diagnostics.local.js",
+          "line": 2
+        },
+        {
+          "source": "../game/src/core/event-bus.js",
+          "line": 3
+        },
+        {
+          "source": "../game/src/ui/feedback.local.js",
+          "line": 4
+        },
+        {
+          "source": "../game/src/core/event-bus.js",
+          "dynamic": true,
+          "line": 74
+        },
+        {
+          "source": "../game/src/core/event-bus.js",
+          "dynamic": true,
+          "line": 75
+        }
+      ],
+      "testDeclarations": [
+        {
+          "name": "只记录有限来源、错误类型、代码和时间，不保存消息或堆栈",
+          "line": 20
+        },
+        {
+          "name": "name getter 抛错或时间非法时记录仍不抛出",
+          "line": 33
+        },
+        {
+          "name": "全局 error 与 unhandledrejection 都进入本地记录，且拒绝值不序列化",
+          "line": 41
+        },
+        {
+          "name": "包装 console.error 保留原调用，只从 Error 取白名单类型",
+          "line": 54
+        },
+        {
+          "name": "Bus 同步与异步订阅异常都会记录来源，同时保留原控制台日志",
+          "line": 72
+        },
+        {
+          "name": "存储写入失败时导出仍包含内存摘要，且不会重复同一诊断",
+          "line": 84
+        },
+        {
+          "name": "记录数量有上限，导出只追加安全摘要且无诊断时兼容旧格式",
+          "line": 96
+        }
+      ],
+      "assertionSyntaxCount": 56,
+      "mocks": [
+        {
+          "operation": "vi.spyOn(...).mockImplementation",
+          "line": 73,
+          "target": null
+        },
+        {
+          "operation": "vi.spyOn",
+          "line": 73,
+          "target": null
+        }
+      ],
+      "fixtureOperations": []
+    },
+    {
+      "file": "tests/docs-consistency.test.js",
+      "depth": "static-only",
+      "readScope": "仅机械AST索引；未逐条审查断言语义或fixture生命周期",
+      "assessment": "尚未进行断言与生产行为的语义核对；索引不证明测试有效性。",
+      "source": "modified-working-tree-test-not-in-HEAD",
+      "lines": 83,
+      "imports": [
+        {
+          "source": "vitest",
+          "line": 1
+        },
+        {
+          "source": "node:fs",
+          "line": 2
+        },
+        {
+          "source": "node:path",
+          "line": 3
+        },
+        {
+          "source": "node:url",
+          "line": 4
+        },
+        {
+          "source": "node:crypto",
+          "line": 5
+        }
+      ],
+      "testDeclarations": [
+        {
+          "name": "流程工具现行入口与归档索引的链接可达，快照原文不追改",
+          "line": 37
+        },
+        {
+          "name": "src/README 域表与 game/src 顶层目录一一对应（generated 除外，正文单列）",
+          "line": 60
+        },
+        {
+          "name": "现行文档（docs 根）的相对链接无死链",
+          "line": 70
+        }
+      ],
+      "assertionSyntaxCount": 18,
+      "mocks": [],
+      "fixtureOperations": []
+    },
+    {
+      "file": "tests/hub-architecture.test.js",
+      "depth": "static-only",
+      "readScope": "仅机械AST索引；未逐条审查断言语义或fixture生命周期",
+      "assessment": "尚未进行断言与生产行为的语义核对；索引不证明测试有效性。",
+      "source": "tracked-freeze-test",
+      "lines": 88,
+      "imports": [
+        {
+          "source": "vitest",
+          "line": 15
+        },
+        {
+          "source": "node:fs",
+          "line": 16
+        },
+        {
+          "source": "node:path",
+          "line": 17
+        }
+      ],
+      "testDeclarations": [
+        {
+          "name": "壳只做装配：被拆走的入口不在 game.hub.js 定义，行数不上浮",
+          "line": 29
+        },
+        {
+          "name": "对外导出面不变：五件套仍从 game.hub.js 出（deployPick 经转出）",
+          "line": 40
+        },
+        {
+          "name": "依赖单向：切片与桥不得 import 壳；壳装配三件套",
+          "line": 48
+        },
+        {
+          "name": "重绘回环只经桥：切片用 hubBridge 别名（防局部 slots 遮蔽），壳完成 slots 注册",
+          "line": 57
+        },
+        {
+          "name": "共享态单一归属：deployPick 在 depart 带 setter；hubAchHTML 形参注入",
+          "line": 70
+        },
+        {
+          "name": "整备控制器收口命令与视图集成，基地壳只保留窄导航/数据端口",
+          "line": 80
+        }
+      ],
+      "assertionSyntaxCount": 54,
+      "mocks": [],
+      "fixtureOperations": []
+    },
+    {
+      "file": "tests/perf-probe-summary.test.js",
+      "depth": "static-only",
+      "readScope": "仅机械AST索引；未逐条审查断言语义或fixture生命周期",
+      "assessment": "尚未进行断言与生产行为的语义核对；索引不证明测试有效性。",
+      "source": "tracked-freeze-test",
+      "lines": 26,
+      "imports": [
+        {
+          "source": "vitest",
+          "line": 1
+        },
+        {
+          "source": "../game/src/core/perf-probe.local.js",
+          "line": 2
+        }
+      ],
+      "testDeclarations": [
+        {
+          "name": "分别报告 rAF 帧间隔、同步绘制耗时和长任务",
+          "line": 5
+        },
+        {
+          "name": "空闲零绘制保留 null 耗时，不伪造为零毫秒绘制",
+          "line": 17
+        }
+      ],
+      "assertionSyntaxCount": 16,
+      "mocks": [],
+      "fixtureOperations": []
+    },
+    {
+      "file": "tests/random.test.js",
+      "depth": "static-only",
+      "readScope": "仅机械AST索引；未逐条审查断言语义或fixture生命周期",
+      "assessment": "尚未进行断言与生产行为的语义核对；索引不证明测试有效性。",
+      "source": "tracked-freeze-test",
+      "lines": 54,
+      "imports": [
+        {
+          "source": "node:fs",
+          "line": 1
+        },
+        {
+          "source": "node:path",
+          "line": 2
+        },
+        {
+          "source": "vitest",
+          "line": 3
+        },
+        {
+          "source": "../game/src/core/random.js",
+          "line": 4
+        }
+      ],
+      "testDeclarations": [
+        {
+          "name": "同 seed、同命名流产生相同序列",
+          "line": 7
+        },
+        {
+          "name": "命名流互不干扰",
+          "line": 14
+        },
+        {
+          "name": "快照恢复后从准确位置继续",
+          "line": 22
+        },
+        {
+          "name": "允许注入实现完整契约的随机数服务",
+          "line": 33
+        },
+        {
+          "name": "源码不再绕过随机数服务，且对局存档包含 seed 与流状态",
+          "line": 40
+        }
+      ],
+      "assertionSyntaxCount": 21,
+      "mocks": [],
+      "fixtureOperations": []
+    },
+    {
+      "file": "tests/render-scheduler.test.js",
+      "depth": "static-only",
+      "readScope": "仅机械AST索引；未逐条审查断言语义或fixture生命周期",
+      "assessment": "尚未进行断言与生产行为的语义核对；索引不证明测试有效性。",
+      "source": "tracked-freeze-test",
+      "lines": 50,
+      "imports": [
+        {
+          "source": "vitest",
+          "line": 1
+        },
+        {
+          "source": "../game/src/core/render-scheduler.js",
+          "line": 2
+        }
+      ],
+      "testDeclarations": [
+        {
+          "name": "空闲只在失效时绘制，活动状态允许 120 FPS",
+          "line": 5
+        },
+        {
+          "name": "被不透明页面覆盖时不绘制",
+          "line": 19
+        },
+        {
+          "name": "失效时唤醒外层主循环，解除回图与输入的巡检延迟",
+          "line": 25
+        },
+        {
+          "name": "按绝对 deadline 推进，高刷新屏上不因晚到帧持续漂移",
+          "line": 37
+        }
+      ],
+      "assertionSyntaxCount": 34,
+      "mocks": [],
+      "fixtureOperations": []
+    },
+    {
+      "file": "tests/run-architecture.test.js",
+      "depth": "static-only",
+      "readScope": "仅机械AST索引；未逐条审查断言语义或fixture生命周期",
+      "assessment": "尚未进行断言与生产行为的语义核对；索引不证明测试有效性。",
+      "source": "tracked-freeze-test",
+      "lines": 100,
+      "imports": [
+        {
+          "source": "vitest",
+          "line": 10
+        },
+        {
+          "source": "node:fs",
+          "line": 11
+        },
+        {
+          "source": "node:path",
+          "line": 12
+        }
+      ],
+      "testDeclarations": [
+        {
+          "name": "满包拒绝新卡，只允许普通背包已有未满堆合并",
+          "line": 22
+        },
+        {
+          "name": "壳只做装配：不再定义任何被拆走的流程入口",
+          "line": 40
+        },
+        {
+          "name": "对外导出面不变：game.boot.js / game.bag.js 依赖的符号仍从 game.run.js 出",
+          "line": 49
+        },
+        {
+          "name": "依赖方向单向：scenes 不依赖上层，altar 不依赖 flow，flow 可依赖两者",
+          "line": 56
+        },
+        {
+          "name": "三层各自导出下游需要的入口，且每个入口只定义一次",
+          "line": 70
+        },
+        {
+          "name": "发卡不再走 game.grantCard 全局属性，兼容挂载只在壳里保留一处",
+          "line": 90
+        }
+      ],
+      "assertionSyntaxCount": 54,
+      "mocks": [],
+      "fixtureOperations": []
+    },
+    {
+      "file": "tests/sound-policy.test.js",
+      "depth": "static-only",
+      "readScope": "仅机械AST索引；未逐条审查断言语义或fixture生命周期",
+      "assessment": "尚未进行断言与生产行为的语义核对；索引不证明测试有效性。",
+      "source": "tracked-freeze-test",
+      "lines": 42,
+      "imports": [
+        {
+          "source": "vitest",
+          "line": 1
+        },
+        {
+          "source": "../game/src/audio/sound.policy.js",
+          "line": 2
+        }
+      ],
+      "testDeclarations": [
+        {
+          "name": "限制点击、悬停和场景音效的重复触发，其他战斗音效不节流",
+          "line": 5
+        },
+        {
+          "name": "时间倒退时不会让节流永久锁死",
+          "line": 15
+        },
+        {
+          "name": "抑制密集操作声，同时保留同帧的关键战斗提示",
+          "line": 23
+        },
+        {
+          "name": "注册每个新增 cue 的冷却窗口",
+          "line": 34
+        }
+      ],
+      "assertionSyntaxCount": 38,
+      "mocks": [],
+      "fixtureOperations": []
+    },
+    {
+      "file": "tests/soundscape.test.js",
+      "depth": "static-only",
+      "readScope": "仅机械AST索引；未逐条审查断言语义或fixture生命周期",
+      "assessment": "尚未进行断言与生产行为的语义核对；索引不证明测试有效性。",
+      "source": "tracked-freeze-test",
+      "lines": 61,
+      "imports": [
+        {
+          "source": "vitest",
+          "line": 1
+        },
+        {
+          "source": "../game/src/audio/sound.scape.js",
+          "line": 2
+        }
+      ],
+      "testDeclarations": [
+        {
+          "name": "切换 title/board/battle 只保留当前层，销毁时停止并断开全部节点",
+          "line": 20
+        },
+        {
+          "name": "压力层随战斗压力平滑抬升，首脑态锁定最高压力",
+          "line": 44
+        }
+      ],
+      "assertionSyntaxCount": 46,
+      "mocks": [],
+      "fixtureOperations": []
+    },
+    {
+      "file": "tests/ui-scale.test.js",
+      "depth": "static-only",
+      "readScope": "仅机械AST索引；未逐条审查断言语义或fixture生命周期",
+      "assessment": "尚未进行断言与生产行为的语义核对；索引不证明测试有效性。",
+      "source": "tracked-freeze-test",
+      "lines": 41,
+      "imports": [
+        {
+          "source": "vitest",
+          "line": 1
+        },
+        {
+          "source": "../game/src/ui/ui-scale.js",
+          "line": 2
+        }
+      ],
+      "testDeclarations": [
+        {
+          "name": "小窗 %sx%s 不低于可读性下限",
+          "line": 5
+        },
+        {
+          "name": "it.each",
+          "line": 5
+        },
+        {
+          "name": "基准尺寸保持 1，避免改动 1920x1080 的既有效果",
+          "line": 13
+        },
+        {
+          "name": "大于基准时仍按原策略放大，额外宽高由布局展开",
+          "line": 17
+        },
+        {
+          "name": "无效视口尺寸回退到 1，避免写入 NaN/Infinity",
+          "line": 22
+        },
+        {
+          "name": "只在触发缩放下限时挂小窗可读性护栏",
+          "line": 27
+        }
+      ],
+      "assertionSyntaxCount": 20,
+      "mocks": [],
+      "fixtureOperations": []
+    },
+    {
+      "file": "tests/workflow-browser.test.js",
+      "depth": "static-only",
+      "readScope": "仅机械AST索引；未逐条审查断言语义或fixture生命周期",
+      "assessment": "尚未进行断言与生产行为的语义核对；索引不证明测试有效性。",
+      "source": "completed-untracked-workflow-test-not-in-HEAD",
+      "lines": 141,
+      "imports": [
+        {
+          "source": "node:fs",
+          "line": 1
+        },
+        {
+          "source": "node:os",
+          "line": 2
+        },
+        {
+          "source": "node:path",
+          "line": 3
+        },
+        {
+          "source": "jsdom",
+          "line": 4
+        },
+        {
+          "source": "vitest",
+          "line": 5
+        },
+        {
+          "source": "../scripts/workflow-browser.mjs",
+          "line": 6
+        }
+      ],
+      "testDeclarations": [
+        {
+          "name": "采集只读 DOM，不访问存储，不派发事件，不改变 viewport",
+          "line": 37
+        },
+        {
+          "name": "同名节点按稳定身份配对，重排不会出现假差异",
+          "line": 50
+        },
+        {
+          "name": "未配对、同名身份重复和两侧空选择器不当通过",
+          "line": 59
+        },
+        {
+          "name": "origin、场景、viewport 不一致直接记 inconclusive，不跨窗口作比较",
+          "line": 67
+        },
+        {
+          "name": "拒绝外部平台、外部浏览器、缺平台标记以及未声明的附加存储字段",
+          "line": 75
+        },
+        {
+          "name": "区分真实输入、合成事件、hover 来源与未知 console 覆盖",
+          "line": 86
+        },
+        {
+          "name": "证据导入保留原始字节，每次生成唯一文件，并输出有来源哈希的对比报告",
+          "line": 98
+        },
+        {
+          "name": "拒绝任务路径逃逸、错误日期、截图逃逸和缺失引用，不写目标外文件",
+          "line": 109
+        },
+        {
+          "name": "截图明确引用现有任务证据，保留证据种类而不声称验证通过",
+          "line": 122
+        },
+        {
+          "name": "拒绝证据目录通过 junction 指到项目其他位置或项目外",
+          "line": 133
+        }
+      ],
+      "assertionSyntaxCount": 60,
+      "mocks": [],
+      "fixtureOperations": [
+        {
+          "operation": "mkdtempSync",
+          "line": 12
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 26
+        },
+        {
+          "operation": "rmSync",
+          "line": 32
+        },
+        {
+          "operation": "mkdirSync",
+          "line": 125
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 126
+        },
+        {
+          "operation": "mkdirSync",
+          "line": 135
+        }
+      ]
+    },
+    {
+      "file": "tests/workflow-cli-integration.test.js",
+      "depth": "deep",
+      "readScope": "全文阅读并定向核对被测生产入口、断言和mock边界",
+      "assessment": "实际CLI help/docs/staged --plan及项目fingerprint；staged只读当前index。坏链接断言使用不存在的broken-link kind，生产实际为missing-relative-link；可造绿。npm脚本字符串断言不证明apply/verify/staged执行联通。",
+      "source": "completed-untracked-workflow-test-not-in-HEAD",
+      "lines": 49,
+      "imports": [
+        {
+          "source": "node:child_process",
+          "line": 1
+        },
+        {
+          "source": "node:fs",
+          "line": 2
+        },
+        {
+          "source": "node:path",
+          "line": 3
+        },
+        {
+          "source": "node:url",
+          "line": 4
+        },
+        {
+          "source": "vitest",
+          "line": 5
+        },
+        {
+          "source": "../scripts/workflow-evidence.mjs",
+          "dynamic": true,
+          "line": 27
+        }
+      ],
+      "testDeclarations": [
+        {
+          "name": "帮助完整暴露记忆、浏览器、隔离与文档能力，旧命令不再启外部浏览器",
+          "line": 10
+        },
+        {
+          "name": "实际文档索引可从统一命令返回有界、带来源的JSON",
+          "line": 20
+        },
+        {
+          "name": "七份类型配置确实纳入证据指纹",
+          "line": 26
+        },
+        {
+          "name": "暂存计划命令返回边界与数量，不倾倒整个仓库index",
+          "line": 33
+        },
+        {
+          "name": "npm工作流入口只连接项目脚本，不改变依赖或跳过原门禁",
+          "line": 42
+        }
+      ],
+      "assertionSyntaxCount": 34,
+      "mocks": [],
+      "fixtureOperations": [
+        {
+          "operation": "execFileSync",
+          "line": 11
+        },
+        {
+          "operation": "execFileSync",
+          "line": 14
+        },
+        {
+          "operation": "spawnSync",
+          "line": 16
+        },
+        {
+          "operation": "execFileSync",
+          "line": 21
+        },
+        {
+          "operation": "execFileSync",
+          "line": 34
+        }
+      ]
+    },
+    {
+      "file": "tests/workflow-handoff.test.js",
+      "depth": "static-only",
+      "readScope": "仅机械AST索引；未逐条审查断言语义或fixture生命周期",
+      "assessment": "尚未进行断言与生产行为的语义核对；索引不证明测试有效性。",
+      "source": "completed-untracked-workflow-test-not-in-HEAD",
+      "lines": 125,
+      "imports": [
+        {
+          "source": "node:child_process",
+          "line": 1
+        },
+        {
+          "source": "node:fs",
+          "line": 2
+        },
+        {
+          "source": "node:os",
+          "line": 3
+        },
+        {
+          "source": "node:path",
+          "line": 4
+        },
+        {
+          "source": "vitest",
+          "line": 5
+        },
+        {
+          "source": "../scripts/workflow-status.mjs",
+          "line": 6
+        }
+      ],
+      "testDeclarations": [
+        {
+          "name": "任务 id 与登记 WF-id 同向，目录边界不包含 cards2，JSON 明确省略",
+          "line": 48
+        },
+        {
+          "name": "缺任务记录明确 not-found，不随意回退最近任务或展示其他域 Git",
+          "line": 61
+        },
+        {
+          "name": "嵌套仓库、Windows 分隔符、中文、空格及改名前路径正确保留",
+          "line": 70
+        },
+        {
+          "name": "人读摘要保持短，不输出全部工作树、记忆 JSON、历史整账或日志",
+          "line": 80
+        },
+        {
+          "name": "摘要严格只读，不修改 index、台账或任务记录；范围逃逸拒绝",
+          "line": 93
+        },
+        {
+          "name": "重复任务 id 明确 ambiguous，小元数据无效/过大记录只统计跳过",
+          "line": 103
+        },
+        {
+          "name": "定向保留本任务活账引用提交疑点，其他任务未确认提交只计省略",
+          "line": 116
+        }
+      ],
+      "assertionSyntaxCount": 74,
+      "mocks": [],
+      "fixtureOperations": [
+        {
+          "operation": "mkdirSync",
+          "line": 10
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 11
+        },
+        {
+          "operation": "execFileSync",
+          "line": 13
+        },
+        {
+          "operation": "mkdtempSync",
+          "line": 15
+        },
+        {
+          "operation": "mkdirSync",
+          "line": 18
+        },
+        {
+          "operation": "rmSync",
+          "line": 43
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 119
+        }
+      ]
+    },
+    {
+      "file": "tests/workflow-index.test.js",
+      "depth": "static-only",
+      "readScope": "仅机械AST索引；未逐条审查断言语义或fixture生命周期",
+      "assessment": "尚未进行断言与生产行为的语义核对；索引不证明测试有效性。",
+      "source": "completed-untracked-workflow-test-not-in-HEAD",
+      "lines": 72,
+      "imports": [
+        {
+          "source": "node:fs",
+          "line": 1
+        },
+        {
+          "source": "node:os",
+          "line": 2
+        },
+        {
+          "source": "node:path",
+          "line": 3
+        },
+        {
+          "source": "vitest",
+          "line": 4
+        },
+        {
+          "source": "../scripts/index-validation.mjs",
+          "line": 5
+        }
+      ],
+      "testDeclarations": [
+        {
+          "name": "相对链接按来源目录解析，忽略外部和锚点，保留行号",
+          "line": 27
+        },
+        {
+          "name": "跳过历史存放目录和代码块，检查 production 与根规则",
+          "line": 35
+        },
+        {
+          "name": "日期历史段只报告历史候选，禁止自动提交不误报",
+          "line": 46
+        },
+        {
+          "name": "同正文只提示职责，未分类文档不会伪装成现行规则",
+          "line": 55
+        },
+        {
+          "name": "新双端口径及否定旧提交规则不报旧规则疑点",
+          "line": 64
+        }
+      ],
+      "assertionSyntaxCount": 25,
+      "mocks": [],
+      "fixtureOperations": [
+        {
+          "operation": "mkdtempSync",
+          "line": 9
+        },
+        {
+          "operation": "mkdirSync",
+          "line": 12
+        },
+        {
+          "operation": "mkdirSync",
+          "line": 16
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 17
+        },
+        {
+          "operation": "rmSync",
+          "line": 22
+        }
+      ]
+    },
+    {
+      "file": "tests/workflow-memory.test.js",
+      "depth": "static-only",
+      "readScope": "仅机械AST索引；未逐条审查断言语义或fixture生命周期",
+      "assessment": "尚未进行断言与生产行为的语义核对；索引不证明测试有效性。",
+      "source": "completed-untracked-workflow-test-not-in-HEAD",
+      "lines": 123,
+      "imports": [
+        {
+          "source": "node:fs",
+          "line": 1
+        },
+        {
+          "source": "node:os",
+          "line": 2
+        },
+        {
+          "source": "node:path",
+          "line": 3
+        },
+        {
+          "source": "vitest",
+          "line": 4
+        },
+        {
+          "source": "../scripts/workflow-memory.mjs",
+          "line": 5
+        }
+      ],
+      "testDeclarations": [
+        {
+          "name": "换机从 USERPROFILE 发现，不依赖固定用户与 project 哈希",
+          "line": 29
+        },
+        {
+          "name": "显式 home 优先，而 CODEX_HOME 可独立配置",
+          "line": 42
+        },
+        {
+          "name": "完整路径边界排除邻居项目；Windows 路径大小写和分隔符可匹配",
+          "line": 52
+        },
+        {
+          "name": "两个精确匹配不猜测最新 hash，不自动选中",
+          "line": 58
+        },
+        {
+          "name": "无精确匹配返回候选原因，旧迁移库不能误判成当前库",
+          "line": 69
+        },
+        {
+          "name": "项目 JSON 仅识别白名单完整路径字段，名称不能冒充项目身份",
+          "line": 80
+        },
+        {
+          "name": "从游戏子目录向上找仓库，索引只读16KB且不读取引用正文",
+          "line": 89
+        },
+        {
+          "name": "存在不可读项目索引时不能宣称其他唯一命中已唯一确认",
+          "line": 103
+        },
+        {
+          "name": "超过目录上限时不把已见的唯一命中当作唯一库",
+          "line": 113
+        }
+      ],
+      "assertionSyntaxCount": 68,
+      "mocks": [],
+      "fixtureOperations": [
+        {
+          "operation": "mkdtempSync",
+          "line": 9
+        },
+        {
+          "operation": "mkdirSync",
+          "line": 14
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 15
+        },
+        {
+          "operation": "rmSync",
+          "line": 24
+        },
+        {
+          "operation": "mkdirSync",
+          "line": 92
+        },
+        {
+          "operation": "mkdirSync",
+          "line": 93
+        },
+        {
+          "operation": "mkdirSync",
+          "line": 107
+        }
+      ]
+    },
+    {
+      "file": "tests/workflow-scope.test.js",
+      "depth": "deep",
+      "readScope": "全文阅读并定向核对被测生产入口、断言和mock边界",
+      "assessment": "实际fingerprint/freshness和独占目录字节变化；覆盖state/docs/code/env/失败/过程中变化/旧schema。不运行runCheck，只人工制造exitCode/环境报告，因此不证明实际命令产出、日志hash或真实已安装依赖字节。",
+      "source": "completed-untracked-workflow-test-not-in-HEAD",
+      "lines": 127,
+      "imports": [
+        {
+          "source": "node:child_process",
+          "line": 1
+        },
+        {
+          "source": "node:fs",
+          "line": 2
+        },
+        {
+          "source": "node:os",
+          "line": 3
+        },
+        {
+          "source": "node:path",
+          "line": 4
+        },
+        {
+          "source": "vitest",
+          "line": 5
+        },
+        {
+          "source": "../scripts/workflow-evidence.mjs",
+          "line": 6
+        }
+      ],
+      "testDeclarations": [
+        {
+          "name": "三份明确台账与唯一目录 task.json 的变化不使代码候选失效",
+          "line": 33
+        },
+        {
+          "name": "规则、roadmap、迭代办法和归档文档变化只要求文档重核",
+          "line": 47
+        },
+        {
+          "name": "代码和工程配置变化仍使代码证据失效",
+          "line": 59
+        },
+        {
+          "name": "环境变化独立显示，不能使用旧代码证据",
+          "line": 68
+        },
+        {
+          "name": "失败、信号中断与指纹采集失败不能成为候选",
+          "line": 76
+        },
+        {
+          "name": "检查过程中代码变化不能被结束时指纹匹配掩盖，台账变化仅廉价重核",
+          "line": 85
+        },
+        {
+          "name": "代码定向报告不假装覆盖规则文档，历史日志不会影响候选",
+          "line": 99
+        },
+        {
+          "name": "不能靠缺失当前文档范围将已覆盖文档降级为通过",
+          "line": 108
+        },
+        {
+          "name": "schema 1 原报告可由 manifest/环境重新分组，无manifest旧报告保守整体比较",
+          "line": 114
+        }
+      ],
+      "assertionSyntaxCount": 100,
+      "mocks": [],
+      "fixtureOperations": [
+        {
+          "operation": "mkdtempSync",
+          "line": 10
+        },
+        {
+          "operation": "mkdirSync",
+          "line": 11
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 12
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 13
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 14
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 15
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 16
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 17
+        },
+        {
+          "operation": "rmSync",
+          "line": 25
+        },
+        {
+          "operation": "execFileSync",
+          "line": 26
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 37
+        },
+        {
+          "operation": "mkdirSync",
+          "line": 48
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 49
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 52
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 62
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 87
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 93
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 101
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 102
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 116
+        }
+      ]
+    },
+    {
+      "file": "tests/workflow-staged.test.js",
+      "depth": "deep",
+      "readScope": "全文阅读并定向核对被测生产入口、断言和mock边界",
+      "assessment": "实际runStaged/stagedPlan、独占mkdtemp Git仓库和fixture gate；测试隔离index字节、忽略工作树、依赖守卫、symlink/gitlink、信号、快照变异、index变化、skip。fake acceptance gate故意替代生产质量门，passed仅证明隔离机制，不能称完整Vite门通过。清理由独占前缀/路径检查约束，等待activeCases防超时后过早删除；不运行真实主仓index变更。",
+      "source": "completed-untracked-workflow-test-not-in-HEAD",
+      "lines": 149,
+      "imports": [
+        {
+          "source": "node:child_process",
+          "line": 1
+        },
+        {
+          "source": "node:fs",
+          "line": 2
+        },
+        {
+          "source": "node:os",
+          "line": 3
+        },
+        {
+          "source": "node:path",
+          "line": 4
+        },
+        {
+          "source": "vitest",
+          "line": 5
+        },
+        {
+          "source": "../scripts/workflow-staged.mjs",
+          "line": 6
+        }
+      ],
+      "testDeclarations": [
+        {
+          "name": "只导出暂存字节，排除不同的工作树和未跟踪文件，源 index 没有副作用",
+          "line": 60
+        },
+        {
+          "name": "删除与重命名包含在计划中，保守使用现有 gate 全量路径",
+          "line": 77
+        },
+        {
+          "name": "锁不匹配或额外安装包阻断，不安装、不将失败写成通过",
+          "line": 93
+        },
+        {
+          "name": "拒绝 symlink 与 gitlink index 项",
+          "line": 101
+        },
+        {
+          "name": "失败命令与检查改写快照均不冒充通过",
+          "line": 109
+        },
+        {
+          "name": "运行期间 index 改动使结果失效，保留别人新 index",
+          "line": 117
+        },
+        {
+          "name": "文档路径 skip 明确未运行检查，不标通过",
+          "line": 126
+        },
+        {
+          "name": "检查被信号终止也返回失败退出码",
+          "line": 133
+        },
+        {
+          "name": "依赖版本证据不符阻断，即使工作树锁看起来相符",
+          "line": 138
+        }
+      ],
+      "assertionSyntaxCount": 64,
+      "mocks": [],
+      "fixtureOperations": [
+        {
+          "operation": "execFileSync",
+          "line": 18
+        },
+        {
+          "operation": "mkdtempSync",
+          "line": 20
+        },
+        {
+          "operation": "mkdirSync",
+          "line": 24
+        },
+        {
+          "operation": "mkdirSync",
+          "line": 25
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 26
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 27
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 28
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 29
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 30
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 31
+        },
+        {
+          "operation": "rmSync",
+          "line": 53
+        },
+        {
+          "operation": "execFileSync",
+          "line": 54
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 62
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 63
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 64
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 66
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 79
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 80
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 81
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 94
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 95
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 110
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 112
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 120
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 121
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 127
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 134
+        },
+        {
+          "operation": "mkdirSync",
+          "line": 140
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 141
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 142
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 143
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 145
+        }
+      ]
+    },
+    {
+      "file": "tests/workflow-task.test.js",
+      "depth": "static-only",
+      "readScope": "仅机械AST索引；未逐条审查断言语义或fixture生命周期",
+      "assessment": "尚未进行断言与生产行为的语义核对；索引不证明测试有效性。",
+      "source": "completed-untracked-workflow-test-not-in-HEAD",
+      "lines": 111,
+      "imports": [
+        {
+          "source": "node:fs",
+          "line": 1
+        },
+        {
+          "source": "node:os",
+          "line": 2
+        },
+        {
+          "source": "node:path",
+          "line": 3
+        },
+        {
+          "source": "vitest",
+          "line": 4
+        },
+        {
+          "source": "../scripts/workflow-task.mjs",
+          "line": 5
+        }
+      ],
+      "testDeclarations": [
+        {
+          "name": "start默认只预览，显式apply新建，不产生台账副本",
+          "line": 27
+        },
+        {
+          "name": "拒绝负责人冒用、身份或路径越界、更新直接终态",
+          "line": 38
+        },
+        {
+          "name": "并发内容变化拒写，别人的锁不删除",
+          "line": 47
+        },
+        {
+          "name": "close必须声明检查与未验证项，完成是负责人手工判断并保留未提交",
+          "line": 59
+        },
+        {
+          "name": "passed报告核实退出码/信号/错误/稳定指纹，不将exit0自动等同完成",
+          "line": 72
+        },
+        {
+          "name": "summary从记录生成并筛负责人；首次计划不能覆盖随后出现的任务",
+          "line": 88
+        },
+        {
+          "name": "状态变化不否定代码报告；预览后报告变化拒绝落账",
+          "line": 98
+        }
+      ],
+      "assertionSyntaxCount": 58,
+      "mocks": [],
+      "fixtureOperations": [
+        {
+          "operation": "mkdtempSync",
+          "line": 9
+        },
+        {
+          "operation": "rmSync",
+          "line": 22
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 51
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 55
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 79
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 82
+        },
+        {
+          "operation": "mkdirSync",
+          "line": 95
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 104
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 106
+        }
+      ]
+    },
+    {
+      "file": "tests/workflow-tools.test.js",
+      "depth": "static-only",
+      "readScope": "仅机械AST索引；未逐条审查断言语义或fixture生命周期",
+      "assessment": "尚未进行断言与生产行为的语义核对；索引不证明测试有效性。",
+      "source": "completed-untracked-workflow-test-not-in-HEAD",
+      "lines": 186,
+      "imports": [
+        {
+          "source": "node:child_process",
+          "line": 1
+        },
+        {
+          "source": "node:fs",
+          "line": 2
+        },
+        {
+          "source": "node:os",
+          "line": 3
+        },
+        {
+          "source": "node:path",
+          "line": 4
+        },
+        {
+          "source": "node:url",
+          "line": 5
+        },
+        {
+          "source": "vitest",
+          "line": 6
+        },
+        {
+          "source": "../scripts/workflow-ledger.mjs",
+          "line": 7
+        },
+        {
+          "source": "../scripts/workflow-evidence.mjs",
+          "line": 8
+        },
+        {
+          "source": "../scripts/workflow-archive.mjs",
+          "line": 9
+        },
+        {
+          "source": "../scripts/workflow-status.mjs",
+          "line": 10
+        }
+      ],
+      "testDeclarations": [
+        {
+          "name": "预览不写，应用只改自有行，并保留中文/其他会话与 CRLF",
+          "line": 31
+        },
+        {
+          "name": "其他人改过台账就拒绝写，不留下锁或覆盖新内容",
+          "line": 44
+        },
+        {
+          "name": "拒绝无版本写入、错误负责人、重复 ID、表格注入和未知台账",
+          "line": 54
+        },
+        {
+          "name": "明确收官后移入历史表，保留相邻活账；已关闭编号不能重新登记",
+          "line": 65
+        },
+        {
+          "name": "待拍板收官保留编号与明确结果，编号不可变更",
+          "line": 75
+        },
+        {
+          "name": "已有工具锁时不删别人的锁、不写目标",
+          "line": 85
+        },
+        {
+          "name": "文档变化可保留候选；源码/新增测试变化使旧证据失效",
+          "line": 97
+        },
+        {
+          "name": "失败、信号中断、过程中改动都不能成为可复用候选",
+          "line": 115
+        },
+        {
+          "name": "必须明确验证范围，显式定向不会退化成全量",
+          "line": 122
+        },
+        {
+          "name": "交接来源的会话 UUID 和 SHA256 不能误认作 Git 提交",
+          "line": 131
+        },
+        {
+          "name": "命中现有工具与冲突措辞，历史内容需显式查；检测同正文仍不删除",
+          "line": 135
+        },
+        {
+          "name": "归档保留原文和哈希，不改源，不覆盖历史，不接受路径逃逸",
+          "line": 153
+        },
+        {
+          "name": "在其他工作目录也能发现项目，JSON 为单个可解析对象",
+          "line": 168
+        },
+        {
+          "name": "错误 JSON 与非零退出，预览验收不启动子进程",
+          "line": 177
+        }
+      ],
+      "assertionSyntaxCount": 110,
+      "mocks": [],
+      "fixtureOperations": [
+        {
+          "operation": "mkdtempSync",
+          "line": 16
+        },
+        {
+          "operation": "mkdirSync",
+          "line": 18
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 19
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 20
+        },
+        {
+          "operation": "rmSync",
+          "line": 26
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 49
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 89
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 101
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 104
+        },
+        {
+          "operation": "mkdirSync",
+          "line": 107
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 108
+        },
+        {
+          "operation": "mkdirSync",
+          "line": 111
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 112
+        },
+        {
+          "operation": "mkdirSync",
+          "line": 137
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 138
+        },
+        {
+          "operation": "mkdirSync",
+          "line": 139
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 140
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 141
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 142
+        },
+        {
+          "operation": "writeFileSync",
+          "line": 143
+        },
+        {
+          "operation": "execFileSync",
+          "line": 169
+        },
+        {
+          "operation": "execFileSync",
+          "line": 171
+        },
+        {
+          "operation": "execFileSync",
+          "line": 173
+        },
+        {
+          "operation": "spawnSync",
+          "line": 178
+        },
+        {
+          "operation": "execFileSync",
+          "line": 181
+        }
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "id": "TEST-INFRA-01",
+      "priority": 2,
+      "file": "tests/workflow-cli-integration.test.js",
+      "line": 24,
+      "status": "confirmed-static-contract-mismatch",
+      "title": "坏链接断言检查不存在的诊断kind",
+      "evidence": "该断言筛kind===broken-link；生产scripts/index-validation.mjs输出missing-relative-link，因而即使坏链接存在也不会命中。",
+      "recommendation": "断言生产诊断的实际kind，并在独占文档fixture中注入缺失链接证明红灯。"
+    },
+    {
+      "id": "TEST-INFRA-02",
+      "priority": 2,
+      "file": "tests/agent-llm.test.js",
+      "line": 64,
+      "status": "confirmed-static-isolation-gap",
+      "title": "真实HTTP测试未隔离环境变量配置优先级",
+      "evidence": "saveConfig写入本地fixture端点；实际loadConfig优先SDT_AGENT_BASE_URL/API_KEY/MODEL。用例没有stubEnv/删除并还原这些变量；不能保证带配置环境仍只访问127.0.0.1。",
+      "recommendation": "在用例setup显式隔离三项SDT_AGENT_*变量并在teardown恢复；捕获目标路由，断言只使用本地fixture。"
+    },
+    {
+      "id": "TEST-GAP-INFRA03",
+      "priority": 2,
+      "file": "tests/agent-recorder.test.js",
+      "line": 15,
+      "status": "coverage-gap-associated-confirmed-product-finding",
+      "finding": "INFRA-03",
+      "title": "人工setDriver复位遮住autoRun标签恢复缺陷",
+      "evidence": "beforeEach及驱动标签用例都手动复位human；没有同时调用真实autoRun/getDriver并检查finally后的前值。",
+      "recommendation": "保持真实recorder，分别在decide-null/cancelled/exception结束后核对原driver及后续人工recordRun标签。"
+    },
+    {
+      "id": "TEST-GAP-INFRA04",
+      "priority": 2,
+      "file": "tests/agent-llm.test.js",
+      "line": 76,
+      "status": "coverage-gap-associated-confirmed-product-finding",
+      "finding": "INFRA-04",
+      "title": "适配器端到端不覆盖批跑入口选择LLM",
+      "evidence": "所有网络用例直接decide()(obs)；batch没有被导入或调用，configured llm实际走greedy的路由仍可全绿。",
+      "recommendation": "对实际batch策略选择接缝测configured llm、缺配置拒绝、greedy三个分支，并断言LLM工厂/请求实际被调用。"
+    },
+    {
+      "id": "TEST-GAP-INFRA05",
+      "priority": 2,
+      "file": "tests/agent-runner-abort.test.js",
+      "line": 59,
+      "status": "coverage-gap-associated-confirmed-product-finding",
+      "finding": "INFRA-05",
+      "title": "runner墙钟与command超时不覆盖batch外层race取消/收口",
+      "evidence": "这里验证runner.runTimeoutMs与already-running；agent-command-results验证commandTimeoutMs。两者都没有调用batch的runOne→外层Promise.race→cleanup→下一局。",
+      "recommendation": "延迟真实autoRun决策跨过batch墙钟，检查stopRun/等待收口发生在cleanup之前，且下一局能启动、迟到动作不能写新局。"
+    },
+    {
+      "id": "TEST-GAP-COMPARE",
+      "priority": 2,
+      "file": "tests/acceptance-gate.test.js",
+      "line": 38,
+      "status": "coverage-gap",
+      "title": "compare主CLI定向门只选provenance纯函数测试",
+      "evidence": "expect(compare.tests)固定为agent-compare-provenance.test.js；该文件只import inspectComparisonProvenance，不执行compare的score/binomTail/minDetect或晋级判决。",
+      "recommendation": "补无外部数据的compare CLI fixture，覆盖胜/负/平、边界p值/硬约束、legacy/verified判决，再将该实际契约纳入映射。"
+    }
+  ],
+  "excluded": [
+    "battle/card/effect/m-batch行为测试由另一分片负责；没有重复审查。",
+    "未列出的其他测试不在本次工程测试选择范围，未审。"
+  ],
+  "limits": [
+    "没有重跑测试、全量/实际工具、真实Git index写入、真实LLM网络或浏览器。",
+    "static-only仅机械AST索引，断言语义未审；deep也不等于每条断言在所有环境均被证明有效。",
+    "两项测试本身缺口来自静态生产契约对照，未新开实验；INFRA03/04/05沿用既有已确认源码复现。",
+    "workflow新增未跟踪测试及acceptance/docs-consistency工作树修改不是已入HEAD主线。"
+  ]
+}

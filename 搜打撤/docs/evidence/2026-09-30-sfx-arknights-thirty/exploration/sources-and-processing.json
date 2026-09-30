@@ -1,0 +1,372 @@
+[
+  {
+    "id": "danger",
+    "source_seconds": 1.095292,
+    "source_sha256": "827efb49cbaaaab07faf5390758b6bc8b95ae4678618cd1e2613caf0dd930bde",
+    "crop_seconds": [
+      0.0,
+      1.095292
+    ],
+    "pitch_semitones": -0.45,
+    "tempo": 1.04,
+    "upper_shelf_db": -0.8,
+    "release_ms": 40,
+    "peak_target_dbfs": -12,
+    "filter": "rubberband=tempo=1.04:pitch=0.974341891:transients=mixed:detector=compound:phase=laminar:window=short:smoothing=off:formant=preserved:pitchq=quality:channels=together",
+    "checks": {
+      "base": {
+        "seconds": 1.095292,
+        "peak_dbfs": -12.11,
+        "true_peak_dbfs": -11.982,
+        "decode": "pass"
+      },
+      "adjusted": {
+        "seconds": 1.053167,
+        "peak_dbfs": -12.089,
+        "true_peak_dbfs": -12.01,
+        "decode": "pass"
+      }
+    },
+    "source": {
+      "file": "b_ui_dooralarm.wav",
+      "source_path": "battle/b_ui/b_ui_dooralarm.wav",
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_ui/b_ui_dooralarm.wav",
+      "git_blob_sha": "7c260f46317c698ecd3a68e6cc07dddb618ee0d0",
+      "source_sha256": "827efb49cbaaaab07faf5390758b6bc8b95ae4678618cd1e2613caf0dd930bde",
+      "bytes": 193252
+    }
+  },
+  {
+    "id": "fireEnter",
+    "source_seconds": 6.052854,
+    "source_sha256": "d1dded1d077ba70d97f30f02c05fe8e94a957e8a478288017a025911f1e38982",
+    "crop_seconds": [
+      2.882708,
+      4.042708
+    ],
+    "pitch_semitones": -0.25,
+    "tempo": 1.02,
+    "upper_shelf_db": -0.5,
+    "release_ms": 35,
+    "peak_target_dbfs": -14,
+    "filter": "rubberband=tempo=1.02:pitch=0.985663199:transients=crisp:detector=percussive:phase=laminar:window=short:smoothing=off:formant=preserved:pitchq=quality:channels=together",
+    "checks": {
+      "base": {
+        "seconds": 1.16,
+        "peak_dbfs": -14.357,
+        "true_peak_dbfs": -14.241,
+        "decode": "pass"
+      },
+      "adjusted": {
+        "seconds": 1.13725,
+        "peak_dbfs": -14.278,
+        "true_peak_dbfs": -14.094,
+        "decode": "pass"
+      }
+    },
+    "source": {
+      "file": "d_avg_woodcracle.wav",
+      "source_path": "avg/d_avg_woodcracle.wav",
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_woodcracle.wav",
+      "git_blob_sha": "463819c440b4daff2359ce276532626206cadc2f",
+      "source_sha256": "d1dded1d077ba70d97f30f02c05fe8e94a957e8a478288017a025911f1e38982",
+      "bytes": 1162192
+    }
+  },
+  {
+    "id": "altarEnter",
+    "source_seconds": 2.256271,
+    "source_sha256": "079aa34b7cae1fc1ec776a3d9a8c253613aa5b176573892549ec790af0ef094e",
+    "crop_seconds": [
+      0.016458,
+      2.101646
+    ],
+    "pitch_semitones": -0.55,
+    "tempo": 1.03,
+    "upper_shelf_db": -0.8,
+    "release_ms": 55,
+    "peak_target_dbfs": -12,
+    "filter": "rubberband=tempo=1.03:pitch=0.968730095:transients=crisp:detector=percussive:phase=laminar:window=short:smoothing=off:formant=preserved:pitchq=quality:channels=together",
+    "checks": {
+      "base": {
+        "seconds": 2.085187,
+        "peak_dbfs": -11.961,
+        "true_peak_dbfs": -11.956,
+        "decode": "pass"
+      },
+      "adjusted": {
+        "seconds": 2.024458,
+        "peak_dbfs": -12.736,
+        "true_peak_dbfs": -12.658,
+        "decode": "pass"
+      }
+    },
+    "source": {
+      "file": "d_avg_slbellbtl.wav",
+      "source_path": "avg/d_avg_slbellbtl.wav",
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_slbellbtl.wav",
+      "git_blob_sha": "1ed1f745137e968b648dad8b6437c4c25cb3e51c",
+      "source_sha256": "079aa34b7cae1fc1ec776a3d9a8c253613aa5b176573892549ec790af0ef094e",
+      "bytes": 433248
+    }
+  },
+  {
+    "id": "altarActivate",
+    "source_seconds": 2.617812,
+    "source_sha256": "a35addd8395cdfbcf51d0c5fd958c2b47a3928458a6eb1e3a50b8a12455cd007",
+    "crop_seconds": [
+      0.047646,
+      2.576896
+    ],
+    "pitch_semitones": -0.6,
+    "tempo": 1.04,
+    "upper_shelf_db": -0.7,
+    "release_ms": 50,
+    "peak_target_dbfs": -11,
+    "filter": "rubberband=tempo=1.04:pitch=0.965936329:transients=mixed:detector=compound:phase=laminar:window=short:smoothing=off:formant=preserved:pitchq=quality:channels=together",
+    "checks": {
+      "base": {
+        "seconds": 2.52925,
+        "peak_dbfs": -11.004,
+        "true_peak_dbfs": -10.999,
+        "decode": "pass"
+      },
+      "adjusted": {
+        "seconds": 2.431979,
+        "peak_dbfs": -11.037,
+        "true_peak_dbfs": -11.031,
+        "decode": "pass"
+      }
+    },
+    "source": {
+      "file": "d_avg_activation.wav",
+      "source_path": "avg/d_avg_activation.wav",
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_activation.wav",
+      "git_blob_sha": "cad5cfe86a2b27534d3f895f472d4ce6d20d4cf8",
+      "source_sha256": "a35addd8395cdfbcf51d0c5fd958c2b47a3928458a6eb1e3a50b8a12455cd007",
+      "bytes": 461824
+    }
+  },
+  {
+    "id": "doorEnter",
+    "source_seconds": 1.420104,
+    "source_sha256": "6fb4c207e0f364fcc8f34e6e4f011995b8cd64fe8e1639fbe909dc22314e7e35",
+    "crop_seconds": [
+      0.0,
+      0.978292
+    ],
+    "pitch_semitones": -0.3,
+    "tempo": 1.05,
+    "upper_shelf_db": -0.5,
+    "release_ms": 35,
+    "peak_target_dbfs": -13,
+    "filter": "rubberband=tempo=1.05:pitch=0.982820599:transients=crisp:detector=percussive:phase=laminar:window=short:smoothing=off:formant=preserved:pitchq=quality:channels=together",
+    "checks": {
+      "base": {
+        "seconds": 0.975625,
+        "peak_dbfs": -12.986,
+        "true_peak_dbfs": -12.962,
+        "decode": "pass"
+      },
+      "adjusted": {
+        "seconds": 0.929042,
+        "peak_dbfs": -13.111,
+        "true_peak_dbfs": -13.073,
+        "decode": "pass"
+      }
+    },
+    "source": {
+      "file": "d_gen_dooropenquite.wav",
+      "source_path": "avg/d_gen_dooropenquite.wav",
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_gen_dooropenquite.wav",
+      "git_blob_sha": "6b4dede8ea1ca5440390a977f30779d97c68ccf8",
+      "source_sha256": "6fb4c207e0f364fcc8f34e6e4f011995b8cd64fe8e1639fbe909dc22314e7e35",
+      "bytes": 250548
+    }
+  },
+  {
+    "id": "shopEnter",
+    "source_seconds": 1.813333,
+    "source_sha256": "4fd90b1c951c17e50afb62eb4885c79c625b27b75d91e80e39f443fcd89f2724",
+    "crop_seconds": [
+      0.014333,
+      1.7695
+    ],
+    "pitch_semitones": 0.3,
+    "tempo": 1.05,
+    "upper_shelf_db": -0.6,
+    "release_ms": 35,
+    "peak_target_dbfs": -13,
+    "filter": "rubberband=tempo=1.05:pitch=1.017479692:transients=crisp:detector=percussive:phase=laminar:window=short:smoothing=off:formant=preserved:pitchq=quality:channels=together",
+    "checks": {
+      "base": {
+        "seconds": 1.755167,
+        "peak_dbfs": -13.364,
+        "true_peak_dbfs": -12.882,
+        "decode": "pass"
+      },
+      "adjusted": {
+        "seconds": 1.671583,
+        "peak_dbfs": -12.98,
+        "true_peak_dbfs": -12.974,
+        "decode": "pass"
+      }
+    },
+    "source": {
+      "file": "d_avg_doorbell.wav",
+      "source_path": "avg/d_avg_doorbell.wav",
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_doorbell.wav",
+      "git_blob_sha": "646e96c2f7b69658b4be8c8b6c6dbb9c72b9632f",
+      "source_sha256": "4fd90b1c951c17e50afb62eb4885c79c625b27b75d91e80e39f443fcd89f2724",
+      "bytes": 348204
+    }
+  },
+  {
+    "id": "extractionEnter",
+    "source_seconds": 1.658396,
+    "source_sha256": "b470f40fbdb8f9c0b9d60866529dcf1ad2d55cdf30ecd92f5fa5bd78d08a74bd",
+    "crop_seconds": [
+      0.0,
+      1.632146
+    ],
+    "pitch_semitones": -0.45,
+    "tempo": 1.04,
+    "upper_shelf_db": -0.6,
+    "release_ms": 45,
+    "peak_target_dbfs": -12,
+    "filter": "rubberband=tempo=1.04:pitch=0.974341891:transients=mixed:detector=compound:phase=laminar:window=short:smoothing=off:formant=preserved:pitchq=quality:channels=together",
+    "checks": {
+      "base": {
+        "seconds": 1.632146,
+        "peak_dbfs": -12.045,
+        "true_peak_dbfs": -12.031,
+        "decode": "pass"
+      },
+      "adjusted": {
+        "seconds": 1.569375,
+        "peak_dbfs": -12.557,
+        "true_peak_dbfs": -12.492,
+        "decode": "pass"
+      }
+    },
+    "source": {
+      "file": "d_gen_transmissionget.wav",
+      "source_path": "avg/d_gen_transmissionget.wav",
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_gen_transmissionget.wav",
+      "git_blob_sha": "50eced9e8cbb96b8b7c06404265bd39f1e9da335",
+      "source_sha256": "b470f40fbdb8f9c0b9d60866529dcf1ad2d55cdf30ecd92f5fa5bd78d08a74bd",
+      "bytes": 292584
+    }
+  },
+  {
+    "id": "extractionSuccess",
+    "source_seconds": 4.179479,
+    "source_sha256": "f204f618c098bf29f24ed9ca0b1b49d6be3fe176f102deeea49d14c6511bf220",
+    "crop_seconds": [
+      0.076854,
+      4.106646
+    ],
+    "pitch_semitones": 0.25,
+    "tempo": 1.02,
+    "upper_shelf_db": -0.4,
+    "release_ms": 50,
+    "peak_target_dbfs": -11,
+    "filter": "rubberband=tempo=1.02:pitch=1.014545335:transients=mixed:detector=compound:phase=laminar:window=short:smoothing=off:formant=preserved:pitchq=quality:channels=together",
+    "checks": {
+      "base": {
+        "seconds": 4.029792,
+        "peak_dbfs": -11.011,
+        "true_peak_dbfs": -10.966,
+        "decode": "pass"
+      },
+      "adjusted": {
+        "seconds": 3.950771,
+        "peak_dbfs": -11.093,
+        "true_peak_dbfs": -11.056,
+        "decode": "pass"
+      }
+    },
+    "source": {
+      "file": "b_ui_act3funwin.wav",
+      "source_path": "battle/b_ui/b_ui_act3funwin.wav",
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_ui/b_ui_act3funwin.wav",
+      "git_blob_sha": "4bcb3838f77a7d44bf09957a41a7ec798f0bf0d9",
+      "source_sha256": "f204f618c098bf29f24ed9ca0b1b49d6be3fe176f102deeea49d14c6511bf220",
+      "bytes": 737304
+    }
+  },
+  {
+    "id": "extractionFail",
+    "source_seconds": 3.26625,
+    "source_sha256": "25e100e24de54b93ee0869bbd481c14f5dc71ecbf0ad79492ddddbc070cd5d38",
+    "crop_seconds": [
+      0.0,
+      3.048354
+    ],
+    "pitch_semitones": -0.35,
+    "tempo": 1.02,
+    "upper_shelf_db": -0.7,
+    "release_ms": 50,
+    "peak_target_dbfs": -12,
+    "filter": "rubberband=tempo=1.02:pitch=0.979986196:transients=mixed:detector=compound:phase=laminar:window=short:smoothing=off:formant=preserved:pitchq=quality:channels=together",
+    "checks": {
+      "base": {
+        "seconds": 3.048354,
+        "peak_dbfs": -12.191,
+        "true_peak_dbfs": -12.09,
+        "decode": "pass"
+      },
+      "adjusted": {
+        "seconds": 2.988583,
+        "peak_dbfs": -12.163,
+        "true_peak_dbfs": -12.134,
+        "decode": "pass"
+      }
+    },
+    "source": {
+      "file": "b_ui_act3funfail.wav",
+      "source_path": "battle/b_ui/b_ui_act3funfail.wav",
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_ui/b_ui_act3funfail.wav",
+      "git_blob_sha": "ad1fde721c85e04bd6f508f299cf07c2e7a00468",
+      "source_sha256": "25e100e24de54b93ee0869bbd481c14f5dc71ecbf0ad79492ddddbc070cd5d38",
+      "bytes": 576208
+    }
+  },
+  {
+    "id": "levelup",
+    "source_seconds": 2.117042,
+    "source_sha256": "6421cfdcecd58461ec33353823af8db839aef41a0c0d7afc4df2428fe7b7960e",
+    "crop_seconds": [
+      0.003542,
+      2.003062
+    ],
+    "pitch_semitones": 0.35,
+    "tempo": 1.03,
+    "upper_shelf_db": -0.5,
+    "release_ms": 45,
+    "peak_target_dbfs": -11.5,
+    "filter": "rubberband=tempo=1.03:pitch=1.020422536:transients=crisp:detector=percussive:phase=laminar:window=short:smoothing=off:formant=preserved:pitchq=quality:channels=together",
+    "checks": {
+      "base": {
+        "seconds": 1.999521,
+        "peak_dbfs": -12.1,
+        "true_peak_dbfs": -12.043,
+        "decode": "pass"
+      },
+      "adjusted": {
+        "seconds": 1.941292,
+        "peak_dbfs": -11.617,
+        "true_peak_dbfs": -11.561,
+        "decode": "pass"
+      }
+    },
+    "source": {
+      "file": "b_char_tactboost.wav",
+      "source_path": "battle/b_char/b_char_tactboost.wav",
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_char/b_char_tactboost.wav",
+      "git_blob_sha": "8a7c93e7cb96791bb91d3d53e956bf2e47f98c8f",
+      "source_sha256": "6421cfdcecd58461ec33353823af8db839aef41a0c0d7afc4df2428fe7b7960e",
+      "bytes": 373488
+    }
+  }
+]

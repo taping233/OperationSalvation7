@@ -1,0 +1,79 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://localhost:5386/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: localhost:5386/
+	1 container app
+		2 container sidebar
+			3 image 无
+			4 container statsPanel
+				5 image Description: 已探明区域简图, ID: miniMap
+				6 text 行动 · 价值
+				7 text 0
+				8 text /
+				9 text 0
+			10 container routePanel
+				11 text 下一步 · 2 条路线 下一层闸门在东方向 · 直线约 3 格 · 沿路搜集补给
+				12 container 可前往的相邻节点
+					13 button 遭遇战 · 路线1（节点 2）
+						14 text 遭遇战 · 路线1
+						15 text 准备迎敌 · 胜利后搜刮
+					16 button 遭遇战 · 路线2（节点 6）
+						17 text 遭遇战 · 路线2
+						18 text 准备迎敌 · 胜利后搜刮
+				19 text 点击路线或地图亮环前进 Space 选择 · X 确认 · B 背包
+		20 container viewport
+			21 image game
+			22 container Description: 远征章节, ID: expeditionChapter
+				23 text EXPEDITION / 01
+				24 content list
+					25 container
+						26 text 01 第1层 · 外围荒地
+					27 container
+						28 text 02 第2层 · 风雪哨线 常规
+					29 container
+						30 text 03 第3层 · 冻土遗迹 高危 · 精英 3%
+					31 container
+						32 text 04 第4层 · 污染核心 极高危 · 精英 10%
+			33 container resHud
+				34 text 0
+				35 text 4
+			36 container topBtns
+				37 button btnLocate
+				38 button btnHome
+				39 button btnHelp
+				40 button btnMute
+				41 container
+					42 text 当前生命
+					43 container hpText
+						44 text 35 /35
+			45 button 背包 5/16, ID: bagBtnFloat
+				46 text 背包
+				47 text 5/16
+			48 container Description: 行动记录, ID: logPanel
+				49 button ▾ 行动记录, ID: logToggle
+					50 text ▾ 
+					51 text 行动记录
+				52 container log
+					53 container
+						54 image archive
+						55 text  获得角色卡【 鬼魅之刃 】（无）·第 2 张职业卡已入包
+					56 container
+						57 image archive
+						58 text  获得角色卡【 金蝉脱壳 】（无）
+					59 container
+						60 image medal
+						61 text  本局角色： 无
+					62 container
+						63 text —— 置身  第1层 · 外围荒地 （外围入口）——
+					64 container
+						65 image paw
+						66 text  携带宠物 「汪汪狗」 ：生命上限 +5（35）
+					67 container
+						68 image archive
+						69 text  从基地仓库携带  2  张卡牌出征
+					70 container
+						71 image cards
+						72 text  随身携带初始牌【 初始攻击 】×5（不可入库 / 安全格）
+					73 text 点击相邻节点前进，落脚触发事件；层间闸门通往更深区域，终层可完成撤离
+					74 container
+						75 text 欢迎来到 代号7 ：本次玩法【 标准搜打撤 】——规则无修正
+
+The focused UI element is 0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: localhost:5386/

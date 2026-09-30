@@ -1,14 +1,14 @@
 # 特性规格流程（SPEC-PROCESS）
 
-> 2026-09-29 引入，形制取自 [github/spec-kit](https://github.com/github/spec-kit)（139k⭐）与 [BMAD-METHOD](https://github.com/bmadcode/BMAD-METHOD)（54k⭐），按本项目实际裁剪。
+> 文档状态：现行规范。2026-09-29 引入，09-30 对齐分级验收与授权；修改前原文见[归档索引](archive/workflow-2026-09-30/README.md)。形制参考 [github/spec-kit](https://github.com/github/spec-kit) 与 [BMAD-METHOD](https://github.com/bmadcode/BMAD-METHOD)，按本项目实际裁剪。
 > **定位**：补「老板口头需求 → 直接开干」之间的规格层。**不是每个活都走**——见下方触发阈值。
 
 ## 触发阈值（分级）
 
 | 活的大小 | 走法 |
 |---|---|
-| 新建系统 / 跨域改动 / 多会话战役 | **走本流程**（spec → plan → tasks） |
-| 单文件修复 / 文案 / 样式微调 | 直改，遵守 AGENTS.md 约束即可 |
+| 玩法新规则 / 存档契约 / 跨域接口尚不明确 | 一页规格说明行为、保持契约、完成标准和待定项；明确后实施 |
+| 单文件修复 / 文案 / 样式微调 / 目标明确的工具改动 | 简洁任务说明够用，直改并验相关范围，遵守 AGENTS.md |
 | 玩法决策类 | 先 PENDING 拍板，拍板后按上两行分流 |
 
 ## 五阶段（宪法一次定，spec→converge 每特性）
@@ -16,7 +16,7 @@
 ### 0. 宪法（Constitution）——**已有，不重建**
 
 spec-kit 的 constitution = 项目级不变量。本项目现成等价物，规格阶段**只引用不重写**：
-根 AGENTS.md 七条约束 + `docs/quality-gates.md`（验收门）+ 性能三铁律 + 直写红线（BASE-DIRECT-WRITE-AUDIT）。
+根 AGENTS.md + `docs/quality-gates.md`（验收门）+ 性能三铁律 + 直写红线（BASE-DIRECT-WRITE-AUDIT）。
 若未来要新增项目级不变量，改 AGENTS.md，不在 spec 里私设。
 
 ### 1. specify 规格 → `docs/specs/YYYY-MM-DD-<feature>.md`
@@ -25,7 +25,7 @@ spec-kit 的 constitution = 项目级不变量。本项目现成等价物，规�
 
 ```markdown
 # 特性规格：<名称>
-**分支/战役**：<标识> · **创建**：<日期> · **状态**：Draft | 已拍板 | 实施中 | 已收敛
+**标识**：<任务编号> · **创建**：<日期> · **需求状态**：Draft | 已确认 | 已替代
 **输入**：老板原话/留言信箱条目（尽量原文引用）
 
 ## 用户场景与测试（必填）
@@ -45,12 +45,12 @@ spec-kit 的 constitution = 项目级不变量。本项目现成等价物，规�
 ## 假设与待拍板：<不确定项 → 同步登记 docs/PENDING.md，链接回来>
 ```
 
-**纪律**：规格里的每个待拍板项即时进 PENDING；规格被老板拍板后状态改「已拍板」，此后规格是绑定权威——实施偏离必须留 Ruling 记录（见派工手册）。
+**纪律**：确需拍板的事项即时进PENDING，已授权的不重复挂账；规格被老板确认后需求状态改「已确认」，此后实施偏离须留Ruling。需求状态不代替task.json的执行阶段。
 
 ### 2. plan 技术方案 → 同文件追加 `## 技术方案`
 
-- 动哪些域/文件（五目录口径核对）、依赖方向、架构守卫影响、是否新增静态依赖边；
-- 复用盘点：先查有没有等价实现（`rg` + MEMORY 对应条目），防止重造。
+- 动哪些域/文件（按现行架构核对）、依赖方向、架构守卫影响、是否新增静态依赖边；
+- 复用盘点：先查已有代码、工具与规范，再按需查历史（`rg` 或[流程工具](WORKFLOW-TOOLS.md)的 find）。方案写明复用什么、为何仍需新增；记忆只作经验依据。
 
 ### 3. tasks 任务分解 → 同文件追加 `## 任务清单`
 
@@ -60,12 +60,12 @@ spec-kit 的 constitution = 项目级不变量。本项目现成等价物，规�
 
 ### 4. implement 实现
 
-按现有纪律执行：定向→全量→实页三级验收、双提交落库、REGISTRY 登记、Ruling 留痕。
+按[质量门](quality-gates.md)选择与改动相称的验收；共享文件/长任务登记 REGISTRY，实施偏离规格须留 Ruling。验收与提交分开，提交须老板明确授权，不要求固定“双提交”。自动记录命令与证据可用[流程工具](WORKFLOW-TOOLS.md)，不替代实页和负责人判断。
 
 ### 5. converge 收敛
 
 特性收官：对照「成功标准」逐条打勾；验收证据入 `docs/evidence/<日期>-<任务>/`；
-MEMORY 战役条目完结流转；spec 文档状态改「已收敛」留档。
+持久任务执行状态只维护在 `docs/evidence/<日期>-<任务>/task.json`，规格仅保留需求/方案/拆分；REGISTRY维护占用，PENDING维护待拍板，STATUS和记忆不抄进度。小修当次交付记录即可。确认doneWhen即收官，新发现另列候选；被替代原文按[归档办法](WORKFLOW-TOOLS.md#归档与替代)保留来源与替代入口。
 
 ## 与派工的关系
 

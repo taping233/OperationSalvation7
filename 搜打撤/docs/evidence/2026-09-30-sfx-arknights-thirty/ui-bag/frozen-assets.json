@@ -1,0 +1,108 @@
+{
+  "frozen": true,
+  "count": 20,
+  "cue_count": 10,
+  "unique_source_count": 10,
+  "assets": [
+    {
+      "file": "cardSelect-base.ogg",
+      "bytes": 24154,
+      "sha256": "425bf015d0dece0f6fee15b62c01f1c80954a78dfbbaaaa619c32d38203e710a"
+    },
+    {
+      "file": "cardSelect.ogg",
+      "bytes": 21462,
+      "sha256": "338f737b58161cd3a776920d3f851cd833d66ea18f8e50038ed233c3ab2766cb"
+    },
+    {
+      "file": "coin-base.ogg",
+      "bytes": 25106,
+      "sha256": "9e73989acf3e3cbaccf66a714c852b1a651efdf40deda9b0f1c0d8a73eca31ef"
+    },
+    {
+      "file": "coin.ogg",
+      "bytes": 21892,
+      "sha256": "92f98b4f998de718ce4503692d271d850a3c268b85bf2f6cc2246de2c5161896"
+    },
+    {
+      "file": "defeat-base.ogg",
+      "bytes": 42908,
+      "sha256": "b48ad55c2d3becb66c8b399779e2dd3065800c60d1a15d4b908177baf29972ae"
+    },
+    {
+      "file": "defeat.ogg",
+      "bytes": 42461,
+      "sha256": "cc77d6798cb2e82c70fb7cdddd8cf7fe711d05bb94ea9351e2c8290fa1e449c5"
+    },
+    {
+      "file": "discard-base.ogg",
+      "bytes": 23536,
+      "sha256": "3eaafd00504203d4fad728e4a3731da506cf9ba832c1faaf5200ce74fb2a4259"
+    },
+    {
+      "file": "discard.ogg",
+      "bytes": 20312,
+      "sha256": "4101215c340f829f339563a5dba0747c12aa86e17a9ab020d42f3244d818b20f"
+    },
+    {
+      "file": "draw-base.ogg",
+      "bytes": 27983,
+      "sha256": "c19958207977dd6be602b9e3ee1bb233f7deb8459d5fb18920ea77079282819b"
+    },
+    {
+      "file": "draw.ogg",
+      "bytes": 23414,
+      "sha256": "bd440e01809f99148f928c8ca04b5763c682b67f7404941b46cc07f57ba84595"
+    },
+    {
+      "file": "flee-base.ogg",
+      "bytes": 17749,
+      "sha256": "4d33e5d324f783bd72acda74744c9e08fac2188d521103e37a8c44c4b25b4f3f"
+    },
+    {
+      "file": "flee.ogg",
+      "bytes": 17234,
+      "sha256": "13353bbd5d8b4120052cd1a3d6231d18b1d9c12c98b5453f75c2598d58be4bdf"
+    },
+    {
+      "file": "legend-base.ogg",
+      "bytes": 16735,
+      "sha256": "dd87aa45ef1fc4da52c4a1df1b67643d1a72bf8b3ebebc08d7b93043524507c1"
+    },
+    {
+      "file": "legend.ogg",
+      "bytes": 14564,
+      "sha256": "709fe615735f2a58ae44c0b8de417e31d2949b0b8b4fc79847abfc5b8db4df22"
+    },
+    {
+      "file": "pick-base.ogg",
+      "bytes": 23850,
+      "sha256": "02743b17bfb68db4f92e9858357c44844ab206958946608107fb614f372a50c4"
+    },
+    {
+      "file": "pick.ogg",
+      "bytes": 23301,
+      "sha256": "ba0e443dc27c5d622b1714d33d9c2118b068a276964e01dab90a6e9c4bca67ab"
+    },
+    {
+      "file": "reveal-base.ogg",
+      "bytes": 13641,
+      "sha256": "c2df072df44ef6cc816e6fd1dbb4ffff14bac76507c1fa88b017bb7155909f95"
+    },
+    {
+      "file": "reveal.ogg",
+      "bytes": 11341,
+      "sha256": "99ac041279f749ce1005609256703d863df8a17d2b0440eca817ff1db8c5cb8c"
+    },
+    {
+      "file": "victory-base.ogg",
+      "bytes": 46127,
+      "sha256": "9a483f07915c5428e054c7c888a1e7934e35ff5f76bf02774d69a245a65ada18"
+    },
+    {
+      "file": "victory.ogg",
+      "bytes": 44860,
+      "sha256": "2f72867703ea1969b50f81f23d64004fd2242d8ef4fd91274d4d9ac44c5b315c"
+    }
+  ]
+}
