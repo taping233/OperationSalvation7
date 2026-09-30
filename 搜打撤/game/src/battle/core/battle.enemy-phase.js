@@ -105,27 +105,32 @@ import { restoreAtkDown } from '../effects/effect-steps.m2.js';
 
   async function resolvePlayerEndTurn(enemyToken, stillEnemyPhase) {
     // —— 玩家回合结束：中毒 / 灼烧结算 ——
+    // U18：去钳位，负血保留真实值——tickPoison/tickBurn 内部把 hp 钳 0 并把超出量记入
+    // r.overkill（combat.js 属地不动），此处按 overkill 累计还原；死亡仍由下方既有 hp<=0 检查收口。
     const pref = { hp: G.hp, defense: pdef, status: pstat.status };
+    let playerOverkill = 0;
     // 时光符文：回合结束效果触发 2 次（中毒/灼烧结算双倍）
     const tickPasses = timeRune ? 2 : 1;
     for (let pass = 0; pass < tickPasses; pass++) {
       const p1 = Combat.tickPoison(pref);
       if (p1?.dealt > 0) {
-        G.hp = Math.max(0, pref.hp);
+        G.hp = pref.hp - (p1.overkill || 0);
+        playerOverkill += p1.overkill || 0;
         floats.push({ unit: 'self', text: '-' + p1.dealt, cls: 'hurt' });
-        G.log(`[[icon:skull]] 中毒结算：你受到 <b>${p1.dealt}</b> 点固定伤害（${G.hp}/${G.maxHp}）`, 'warn');
+        G.log(`[[icon:skull]] 中毒结算：你受到 <b>${p1.dealt}</b> 点固定伤害（${Math.max(0, G.hp)}/${G.maxHp}）`, 'warn');
         if (!await awaitBattleFeedback(stillEnemyPhase)) return;
       }
       const b1 = Combat.tickBurn(pref);
       if (b1?.dealt > 0) {
-        G.hp = Math.max(0, pref.hp);
+        G.hp = pref.hp - (b1.overkill || 0);
+        playerOverkill += b1.overkill || 0;
         floats.push({ unit: 'self', text: '-' + b1.dealt, cls: 'hurt' });
-        G.log(`[[icon:fire]] 灼烧结算：你受到 <b>${b1.dealt}</b> 点固定伤害（${G.hp}/${G.maxHp}）`, 'warn');
+        G.log(`[[icon:fire]] 灼烧结算：你受到 <b>${b1.dealt}</b> 点固定伤害（${Math.max(0, G.hp)}/${G.maxHp}）`, 'warn');
         if (!await awaitBattleFeedback(stillEnemyPhase)) return;
       }
     }
     // 计时状态不在玩家阶段递减——共享回合钟统一在每回合结束（afterEnemies 末尾）递减
-    G.hp = Math.max(0, pref.hp);
+    G.hp = pref.hp - playerOverkill;   // U18：还原真实负血（毒/灼致死走下方既有 finish(false) 检查）
     requestBattleRender();
     if (G.hp <= 0) { set$busy(false); finish(false); return; }
     // —— 随从自动攻击（Q4 老板定向：步兵等为你自动战斗；无攻血场面物件不参与）——

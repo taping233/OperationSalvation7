@@ -40,6 +40,8 @@ export const hudMethods = {
     }
 
     // 人物：血条 + 经济 + 背包格数
+    // U18：负血不外显——数据层保留真实值（含 hpKey 缓存键），展示层统一 max(0,hp)
+    const dispHp = Math.max(0, game.hp);
     const pct = Math.max(0, game.hp / game.maxHp);
     const hpKey = `${game.hp}/${game.maxHp}`;
     if (this._lastHpKey !== hpKey) {
@@ -51,7 +53,7 @@ export const hudMethods = {
       this.el.hpBar.style.background = pct > 0.5 ? 'linear-gradient(90deg,#2f6f9f,#55a4d6)'
         : pct > 0.25 ? 'linear-gradient(90deg,#b08238,#d4a44e)' : 'linear-gradient(90deg,#b8453a,#d97a52)';
       this.el.hpBarWrap.classList.toggle('low', pct <= 0.25 && game.hp > 0);
-      this.el.hpText.innerHTML = `${game.hp}<span class="hp-rest">/${game.maxHp}</span>`;
+      this.el.hpText.innerHTML = `${dispHp}<span class="hp-rest">/${game.maxHp}</span>`;
     }
     if (this._lastCoins !== game.coins) {
       this.el.charCoins.textContent = game.coins;

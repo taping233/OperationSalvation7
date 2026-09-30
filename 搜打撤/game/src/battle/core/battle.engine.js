@@ -129,6 +129,9 @@ function intentFor(def, round) {
   }
 const shuffle = shuffleCards;
   // 玩家自伤/受伤入口（文本路径 dmg.negHp 与结构化 heal.selfDamage 共用；黑暗吊坠死亡保险在此生效）
+  // U18（2026-09-30 老板拍板 PENDING #15，对齐 STS2 IsAlive=hp>0）：受伤不再钳 0（hp 可为负）；
+  // 伤害致 hp<=0 即时死亡判定——免死钩 deathSave 先拦（一次致死拦一次，逻辑逐字保留），
+  // 未获救则走 finish(false) 战败流程（自己回合自伤致死同样触发）；敌方回合既有 finish(false) 路径保留不动。
   function damagePlayer(n) {
     // 黑暗吊坠死亡保险：致死伤害被挡下，该回合无敌（C11）
     if (n > 0 && G.hp - n <= 0 && deathSave > 0) {
@@ -137,10 +140,11 @@ const shuffle = shuffleCards;
       G.log(`[[icon:sparkles]] <b>致命一击被挡下！</b>（死亡保险剩余 ${deathSave} 次，本回合无敌）`, 'ok');
       return;
     }
-    G.hp = Math.max(0, G.hp - n);
+    G.hp = G.hp - n;   // U18：去钳位，负血保留真实值（展示层统一 max(0,hp)）
     if (n > 0 && unyieldRune) { const g = drawCards(1); G.log('[[icon:cards]] <b>不屈符文</b>：受到伤害，抽 ' + g + ' 张牌', 'sys'); }
     floats.push({ unit: 'self', text: '-' + n, cls: 'hurt' });
-    G.log(`[[icon:blood]] 受到 <b>${n}</b> 点伤害（${G.hp}/${G.maxHp}）`, 'warn');
+    G.log(`[[icon:blood]] 受到 <b>${n}</b> 点伤害（${Math.max(0, G.hp)}/${G.maxHp}）`, 'warn');
+    if (n > 0 && G.hp <= 0) finish(false);   // U18：即时死亡（死了即死，无治疗复活）
   }
 // 诅咒施加视觉差分（P1）：包装 addCurse——卡牌文本路径与结构化路径（battle.resolution.js curse op）
 // 对敌方施加诅咒时推 cursefx 彩闪（玩家自身中诅咒不闪，仍走日志+角标）。两端口共用同一份对象，
@@ -1352,12 +1356,14 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
       G.log(`[[icon:sparkles]] <b>致命一击被挡下！</b>（死亡保险剩余 ${deathSave} 次，本回合无敌）`, 'ok');
       return 0;
     }
-    G.hp = Math.max(0, playerRef.hp);
+    // U18：去钳位，负血保留真实值；死亡判定由敌方回合既有 G.hp<=0 检查收口（finish(false) 路径保留不动）。
+    // dealDamage 内部把 target.hp 钳 0 并把超出量记入 r.overkill（combat.js 属地不动）——此处还原真实负血。
+    G.hp = playerRef.hp - (r.overkill || 0);
     SDT.Sound.sfx('hurt');
     // 敌方阶段已在命中前等待前摇，受击数字与实际扣血同拍出现。
     floats.push({ unit: 'self', text: '-' + r.dealt, cls: 'hurt' });
     if (r.dealt > 0) floats.push({ unit: 'self', text: '', cls: 'stk stk-late sticker-hurt' });
-    G.log(`[[icon:demon]] <b>${esc(foe.name)}</b> 攻击：你受到 <b>${r.dealt}</b> 点攻击伤害（${G.hp}/${G.maxHp}）`, 'warn');
+    G.log(`[[icon:demon]] <b>${esc(foe.name)}</b> 攻击：你受到 <b>${r.dealt}</b> 点攻击伤害（${Math.max(0, G.hp)}/${G.maxHp}）`, 'warn');
     // M2：结构化 onDamaged 触发（登记卡「受到伤害时」）
     if (r.dealt > 0) triggersM2.fireDamaged();
     return r.dealt;
