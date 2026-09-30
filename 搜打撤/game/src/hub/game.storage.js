@@ -7,6 +7,7 @@ const OLD_SAVE_KEY = 'sdt-save-v1';
 const CORRUPT_KEY = index => `sdt-run-${index}-corrupt`;
 // 上一版好档备份键：write 覆盖主档前尽力转存原串（写基线只防并发不防逻辑坏档，
 // 序列化成功但内容错时唯一好档会直接丢失）。尽力而为，备份失败绝不阻断主写。
+// U17 读侧（2026-09-30 老板拍板）：主档读取失败时经 prev 回退自愈，见 readRun。
 const PREV_KEY = index => `sdt-run-${index}-prev`;
 const TX_KEY = index => `sdt-tx-v1-slot${index}`;
 const txPending = index => { try { return localStorage.getItem(TX_KEY(index)) !== null; } catch { return true; } };
@@ -61,7 +62,40 @@ const reader = createVersionedSlotReader({
 });
 
 function readRaw(index, raw) {
-  return reader.parse(index, raw);
+  return readRun(index, raw).run;
+}
+
+// U17 读档失败自动回退（2026-09-30 老板拍板）：主键解析/形状失败（issue=corrupt）
+// 时读 prev 备份，用与主键完全相同的校验链（parse→形状→版本门→迁移）校验；有效则把
+// prev 原串逐字节写回主档自愈——不经 write()：不涨 revision、不重盖章，_r2 身份原样
+// 保真——并经既有诊断通道（console.warn '[save]'）记一条。返回生效原串（自愈后即
+// prev 原串，供预检候选记账），未回退返回 null。
+// tooNew（档来自更新版本程序）不回退（R11 复审口径）：自愈会把过新档零备份永久覆盖，
+// 与「过新拒读、原档保留」契约冲突——维持既有失败路径，等玩家回新版程序读取。
+// 正常读档路径（主键有效）在首个 return 即出，不触碰 prev、零额外开销；
+// 事务待恢复（txPending）时不插手，回退只发生在普通读档失败场景（恢复流程见 recovery.commands.js）。
+function readRun(index, raw) {
+  const run = reader.parse(index, raw);
+  if (run) return { run, raw };   // 命中/成功：issue 由 parse 清除，行为与基线逐字一致
+  if (raw == null) return { run: null, raw };
+  if (txPending(index)) return { run: null, raw };
+  const issueBefore = reader.issue(index);
+  if (issueBefore === 'tooNew') return { run: null, raw };
+  let prevRaw;
+  try { prevRaw = localStorage.getItem(PREV_KEY(index)); } catch { return { run: null, raw }; }
+  if (prevRaw == null || prevRaw === raw) return { run: null, raw };
+  const prevRun = reader.parse(index, prevRaw);
+  if (!prevRun) {
+    // prev 也无效：清 prev 校验残留，还原主键失败口径（corrupt/tooNew 不被 prev 污染），维持既有失败路径
+    reader.invalidate(index);
+    if (issueBefore) reader.markIssue(index, issueBefore);
+    return { run: null, raw };
+  }
+  try { localStorage.setItem(RUN_KEY(index), prevRaw); }
+  catch { reader.invalidate(index); return { run: null, raw }; }   // 自愈写失败（配额等）：不假称已回退
+  writeBaseline.set(index, prevRaw);   // 推进写基线，使采纳/写入链与自愈后的主档一致
+  console.warn(`[save] 档位 ${index} 主档读取失败，已回退到上一版存档（坏档原串保留于 corrupt 键）`);
+  return { run: reader.parse(index, prevRaw), raw: prevRaw };
 }
 
 const RunStorage = Object.freeze({
@@ -81,9 +115,10 @@ const RunStorage = Object.freeze({
     let raw;
     try { raw = localStorage.getItem(RUN_KEY(index)); }
     catch { reader.markIssue(index, 'readFailed'); return null; }
-    const run = readRaw(index, raw);
-    if (run) loadCandidates.set(run, { index, raw });
-    return run;
+    const found = readRun(index, raw);
+    // U17 回退自愈后主档已被换成 prev 原串：候选必须按生效原串记账，acceptLoad 才能对上
+    if (found.run) loadCandidates.set(found.run, { index, raw: found.raw });
+    return found.run;
   },
   // 全预检成功后，loadGame 在任何运行态副作用前采纳同一对象对应的原串。
   acceptLoad(index, run) {
