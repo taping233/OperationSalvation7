@@ -324,6 +324,15 @@ describe('M1 new semantics in real BattleSession', () => {
     expect(game.hp).toBe(98);
   });
 
+  it('U16 终局守卫：致死段全灭后，余下 selfDamage 不落账（战后 hp 不掉，旧语义为 98）', async () => {
+    const card = { id: 'm1-losehp-kill', name: '恶魔之力·斩杀', cost: 0, type: '法术', dmg: 5, dmgType: 'fixed', desc: '5′，损失 2 点生命。',
+      ...R(ENEMY_ONE, [{ op: 'damage', amountField: 'dmg', target: 'chosenEnemy' }, { op: 'heal', selfDamage: 2 }]) };
+    const game = await startGame([card, filler()], [foe('demon-kill', 4)]);
+    const state = await playCard(game, card, 0);
+    expect(state.foes[0].dead).toBe(true);   // 唯一敌人倒在伤害段 → 本卡即胜利（finish(true) 照常）
+    expect(game.hp).toBe(100);               // 旧语义：余下 selfDamage 胜利结算前照常落账，战后 hp=98
+  });
+
   it('rolls damage hits.range as a random segment count', async () => {
     const card = { id: 'm1-hits-live', name: '元素爆发', cost: 0, type: '法术', dmg: 2, dmgType: 'fixed', desc: '随机段数',
       ...R(ENEMY_ONE, [{ op: 'damage', amountField: 'dmg', target: 'chosenEnemy', hits: { range: [3, 3] } }]) };

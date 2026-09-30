@@ -573,11 +573,17 @@ function createBattleResolution(ports) {
     let lastDamageTargets = [];
     const isDmgType = getDamageTypes().includes(card.type);
     let structuredHit = false;
+    // U16（PENDING #14 老板 2026-09-30 拍板）：STS2 IsEnding 同款终局守卫——敌人全灭
+    // （getAliveFoes 与 exec-play 胜利判定同口径）后，本卡余下 op 一律中止：伤害循环/
+    // 资源循环/文本立即句循环/heal-armor-draw 字段兜底四处入口各查一次。只中止结算，
+    // 不改变 exec-play 的胜利判定与出牌流程；同 op 内的 onKill/吸血 rider 原子保留。
+    const foesAnnihilated = () => getAliveFoes().length === 0;
     // —— 伤害（卡面伤害词条立即结算，不受沉默影响） ——
     if (hasStructuredOnPlay) {
       const type = getDamageTypeMeta()[card.dmgType] ? card.dmgType : fixedDamageType;
       const damageCard = { ...card, desc: '' };
       for (const operation of structuredOnPlay) {
+        if (foesAnnihilated()) break;   // 终局守卫：前序段已全灭，余下伤害段不再结算
         // curse 在循环 2（沉默门之后）由 resolveCurseOperation 结算——伤害先于诅咒（先伤害后诅咒）；
         // acquire/coins 同属循环 2（G3：获取/金币在沉默门后，沉默封印一切非攻击技能效果）；
         // B7 的 blessing 与资源族同在循环 2（先伤害后增益，与文本路径步序一致）
@@ -871,6 +877,7 @@ function createBattleResolution(ports) {
     }
     if (hasStructuredOnPlay) {
       for (const operation of structuredOnPlay) {
+        if (foesAnnihilated()) break;   // 终局守卫：伤害段已全灭，heal.selfDamage/coins/draw 等余下 op 不结算
         if (operation.op === 'damage') continue;
         if (operation.op === 'status' && operation.status === 'freeze' && operation.target === 'allEnemies' &&
             Number.isInteger(operation.duration) && operation.duration > 0) {
@@ -1131,6 +1138,7 @@ function createBattleResolution(ports) {
     });
     let healed = false, armored = false, drawn = false;
     for (const cl of imm) {
+      if (foesAnnihilated()) break;   // 终局守卫：前句伤害已全灭，余下立即句不再结算
       // 双镖首段若已击杀原目标，流血不得借文本执行器的空目标回退串到下一名活敌人。
       if (card.id === 'tt7-bloodpoison' && target && target.dead && /流血/.test(cl)) continue;
       const args = [card, cl, target, { structuredHit, infused, fuelCost, uid, hpAtCast }];
@@ -1141,14 +1149,14 @@ function createBattleResolution(ports) {
       drawn = drawn || res.drawn;
     }
     // 结构化词条兜底（描述未写明但制作坊标注了回复/护甲/抽卡字段时）——纯注能句未注能时同门跳过（第十二批）
-    if (!suppressText && !(infuseLead && !infused) && !healed && !skillOnly && +(card.heal || 0) > 0) {
+    if (!suppressText && !(infuseLead && !infused) && !healed && !skillOnly && !foesAnnihilated() && +(card.heal || 0) > 0) {
       const n = +(card.heal || 0);
       if ((getPlayerStatus().status.healban || 0) > 0) {
         log(`[[icon:heart]] 禁疗中：回复 ${n} 点生命无效（还剩 ${getPlayerStatus().status.healban} 回合）`, 'warn');
       } else { heal(n); addFloat({ unit: 'self', text: '', cls: 'stk sticker-heal', warm: true }); }
       did = true;
     }
-    if (!suppressText && !(infuseLead && !infused) && !armored && !skillOnly && +(card.armor || 0) > 0) {
+    if (!suppressText && !(infuseLead && !infused) && !armored && !skillOnly && !foesAnnihilated() && +(card.armor || 0) > 0) {
       addArmor(+(card.armor || 0));
       log(`[[icon:plate]]获得 ${+(card.armor || 0)} 点护甲`, 'sys');
       did = true;
@@ -1156,7 +1164,7 @@ function createBattleResolution(ports) {
     // 卡面结构化抽卡字段兜底（描述未写「抽 N 张牌」时）——邪能护体 draw:3 依赖此门防未注能白嫖
     const hostedWarlockHandlesItsOwnDraw = card.rules?.battle?.hosted?.includes('warlock') === true;
     if (!suppressText && !(infuseLead && !infused) && !drawn && !skillOnly &&
-        !hostedWarlockHandlesItsOwnDraw && drawOf(card) > 0) {
+        !hostedWarlockHandlesItsOwnDraw && !foesAnnihilated() && drawOf(card) > 0) {
       const n = drawOf(card);
       if (readState().mode === 'boss') {
         const got = drawCards(n);

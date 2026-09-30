@@ -15,7 +15,8 @@ function makeResolver(state) {
     takeDeckBottom: () => [], deckBottomCount: () => 0,
     startSurge: () => {}, getAllCards: () => [], isRandomObtainable: () => false,
     randomBattle: () => 0, getDamageTypes: () => ['武术'], getDamageTypeMeta: () => ({}), fixedDamageType: 'fixed',
-    hasCurse: () => false, getAliveFoes: () => state.foes || [state.target], getGrowth: uid => state.growth?.[uid] || 0,
+    // U16：允许用例注入真实口径的存活过滤（引擎侧为 foes.filter(!dead)，engine.js:103）
+    hasCurse: () => false, getAliveFoes: state.getAliveFoes || (() => state.foes || [state.target]), getGrowth: uid => state.growth?.[uid] || 0,
     findCard: () => null,
     addTempCard: tpl => { events.push(['temp', tpl.name]); return `temp-${events.length}`; },
     queueDiscover: job => events.push(['discover', job]),
@@ -34,7 +35,7 @@ function makeResolver(state) {
     },
     addCoins: n => { state.coins = (state.coins || 0) + n; events.push(['coins', n]); },
     getMyClass: () => state.myClass ?? null,
-    splitClauses: () => ({ immediate: ['可观察顺序'], turnStart: [], battle: [], onInfused: [], onDraw: [], skill: [] }),
+    splitClauses: state.splitClauses || (() => ({ immediate: ['可观察顺序'], turnStart: [], battle: [], onInfused: [], onDraw: [], skill: [] })),
     applyTextEffects: () => { events.push(['text']); state.onText?.(); return { did: true }; },
     registerTurnStart: () => {}, registerBattle: () => false, castRandomSpells: () => Promise.resolve(),
     drawCards: count => { events.push(['draw', count]); return Math.min(count, state.drawnCount ?? count); },
@@ -1050,5 +1051,67 @@ describe('A3 第三批（B7）：结构化 onPlay blessing 与资源族 op', () 
     }
     const pending = setup();
     expect(() => pending.resolver(selfCard({ op: 'summon', name: '步兵', count: 1 }), pending.target, false, 0, null)).toThrow(TypeError);
+  });
+
+  // —— U16（PENDING #14 老板 2026-09-30 拍板）：STS2 IsEnding 同款终局守卫 ——
+  // 敌人全灭后该卡余下 op 一律中止；未全灭时行为逐字不变。
+  const annihilationState = (foes, target, extra = {}) => ({
+    current: { mode: 'boss', playedMovesThisTurn: 0, infuseFuels: 0, grave: [] },
+    playerStatus: { status: {} }, target, foes,
+    getAliveFoes: () => foes.filter(foe => !foe.dead),   // 与引擎同口径：存活敌人过滤 dead
+    hitFoe: (foe, amount) => { if (!foe.dead) { foe.hp -= amount; if (foe.hp <= 0) foe.dead = true; } return amount; },
+    ...extra,
+  });
+  const u16Card = ops => ({
+    id: 'u16-guard', name: '终局守卫靶卡', type: '法术', dmgType: 'fixed', desc: '展示描述',
+    rules: { version: 1, battle: { target: { side: 'enemy', area: false } }, triggers: { onPlay: ops } },
+  });
+
+  it('U16 终局守卫①：致死段全灭后，余下 heal.selfDamage 不落账（旧语义照常扣血）', () => {
+    const only = { hp: 4, maxHp: 4, dead: false, status: {} };
+    const state = annihilationState([only], only);
+    const { resolver, events } = makeResolver(state);
+    resolver(u16Card([{ op: 'damage', amount: 5, target: 'chosenEnemy' }, { op: 'heal', selfDamage: 2 }]), only, false, 0, null);
+    expect(only.dead).toBe(true);
+    expect(events.filter(event => event[0] === 'selfDamage')).toEqual([]);
+  });
+
+  it('U16 终局守卫②：全灭后余下 coins 不落账（旧语义照常加币）', () => {
+    const only = { hp: 4, maxHp: 4, dead: false, status: {} };
+    const state = annihilationState([only], only);
+    const { resolver, events } = makeResolver(state);
+    resolver(u16Card([{ op: 'damage', amount: 5, target: 'chosenEnemy' }, { op: 'coins', n: 3 }]), only, false, 0, null);
+    expect(only.dead).toBe(true);
+    expect(events.filter(event => event[0] === 'coins')).toEqual([]);
+    expect(state.coins ?? 0).toBe(0);
+  });
+
+  it('U16 终局守卫③回归锚：未全灭时余下 op 照常结算（两敌只打倒其一）', () => {
+    const weak = { hp: 4, maxHp: 4, dead: false, status: {} };
+    const strong = { hp: 20, maxHp: 20, dead: false, status: {} };
+    const state = annihilationState([weak, strong], weak);
+    const { resolver, events } = makeResolver(state);
+    resolver(u16Card([
+      { op: 'damage', amount: 5, target: 'chosenEnemy' },
+      { op: 'heal', selfDamage: 2 },
+      { op: 'coins', n: 3 },
+    ]), weak, false, 0, null);
+    expect(weak.dead).toBe(true);
+    expect(strong.dead).toBe(false);
+    expect(events.filter(event => event[0] === 'selfDamage')).toEqual([['selfDamage', 2]]);
+    expect(events.filter(event => event[0] === 'coins')).toEqual([['coins', 3]]);
+  });
+
+  it('U16 终局守卫④：文本路径前句致死全灭后，余下立即句与 heal 字段兜底均不再结算', () => {
+    const only = { hp: 4, maxHp: 4, dead: false, status: {} };
+    const state = annihilationState([only], only, {
+      splitClauses: () => ({ immediate: ['造成5点伤害', '抽2张牌'], turnStart: [], battle: [], onInfused: [], onDraw: [], skill: [] }),
+      onText: () => { only.hp = 0; only.dead = true; },   // 首句伤害致死（模拟文本执行器命中清场）
+    });
+    const { resolver, events } = makeResolver(state);
+    resolver({ id: 'u16-text', name: '文本靶卡', type: '法术', heal: 3, desc: '造成伤害，回复生命' }, only, false, 0, null);
+    expect(only.dead).toBe(true);
+    expect(events.filter(event => event[0] === 'text')).toHaveLength(1);   // 第二句被守卫拦下
+    expect(events.filter(event => event[0] === 'heal')).toEqual([]);       // heal 字段兜底同止
   });
 });
