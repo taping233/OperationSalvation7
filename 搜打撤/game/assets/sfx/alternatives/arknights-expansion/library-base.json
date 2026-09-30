@@ -1,0 +1,569 @@
+{
+  "name": "方舟微改追加三十个",
+  "version": "A3 原质",
+  "featuredLabel": "新增三十个",
+  "featuredTitle": "本批次新增 · 已认可十个在“全部音效”中",
+  "featuredIds": [
+    "cardSelect",
+    "draw",
+    "discard",
+    "pick",
+    "coin",
+    "reveal",
+    "legend",
+    "victory",
+    "defeat",
+    "flee",
+    "hurt",
+    "kill",
+    "shieldUp",
+    "armorBreak",
+    "energyUp",
+    "energyDown",
+    "buffUp",
+    "buffDown",
+    "curse",
+    "curseEnd",
+    "danger",
+    "fireEnter",
+    "altarEnter",
+    "altarActivate",
+    "doorEnter",
+    "shopEnter",
+    "extractionEnter",
+    "extractionSuccess",
+    "extractionFail",
+    "levelup"
+  ],
+  "groups": {
+    "ui": "界面与操作",
+    "cards": "卡牌与背包",
+    "combat": "战斗与状态",
+    "nodes": "探索与节点",
+    "rewards": "奖励与结果",
+    "exploration": "撤离与信号",
+    "growth": "角色成长"
+  },
+  "cues": [
+    {
+      "id": "cardSelect",
+      "label": "选卡",
+      "group": "cards",
+      "note": "短促标记声",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-expansion/ui-bag/cardSelect-base.ogg",
+          "seconds": 0.733083
+        }
+      ]
+    },
+    {
+      "id": "draw",
+      "label": "抽牌",
+      "group": "cards",
+      "note": "纸页抽动",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-expansion/ui-bag/draw-base.ogg",
+          "seconds": 1.077125
+        }
+      ]
+    },
+    {
+      "id": "discard",
+      "label": "弃牌",
+      "group": "cards",
+      "note": "纸页落下",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-expansion/ui-bag/discard-base.ogg",
+          "seconds": 0.926937
+        }
+      ]
+    },
+    {
+      "id": "pick",
+      "label": "物品拿起",
+      "group": "ui",
+      "note": "布料挪动",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-expansion/ui-bag/pick-base.ogg",
+          "seconds": 1.069146
+        }
+      ]
+    },
+    {
+      "id": "coin",
+      "label": "金币",
+      "group": "rewards",
+      "note": "金币碰响",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-expansion/ui-bag/coin-base.ogg",
+          "seconds": 0.68
+        }
+      ]
+    },
+    {
+      "id": "reveal",
+      "label": "奖励揭晓",
+      "group": "rewards",
+      "note": "短促亮音",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-expansion/ui-bag/reveal-base.ogg",
+          "seconds": 0.404083
+        }
+      ]
+    },
+    {
+      "id": "legend",
+      "label": "高稀有奖励",
+      "group": "rewards",
+      "note": "星级亮音",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-expansion/ui-bag/legend-base.ogg",
+          "seconds": 0.306271
+        }
+      ]
+    },
+    {
+      "id": "victory",
+      "label": "战斗胜利",
+      "group": "combat",
+      "note": "胜利提示",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-expansion/ui-bag/victory-base.ogg",
+          "seconds": 1.876833
+        }
+      ]
+    },
+    {
+      "id": "defeat",
+      "label": "战斗失败",
+      "group": "combat",
+      "note": "失败提示",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-expansion/ui-bag/defeat-base.ogg",
+          "seconds": 1.902833
+        }
+      ]
+    },
+    {
+      "id": "flee",
+      "label": "逃离",
+      "group": "combat",
+      "note": "急促撤离提示",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-expansion/ui-bag/flee-base.ogg",
+          "seconds": 0.887333
+        }
+      ]
+    },
+    {
+      "id": "hurt",
+      "label": "受伤",
+      "group": "combat",
+      "note": "暗色短冲击与颗粒尾音",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-expansion/combat-status/hurt-base.ogg",
+          "seconds": 1.128562
+        }
+      ]
+    },
+    {
+      "id": "kill",
+      "label": "击杀",
+      "group": "combat",
+      "note": "低沉落点与短促消散",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-expansion/combat-status/kill-base.ogg",
+          "seconds": 1.532979
+        }
+      ]
+    },
+    {
+      "id": "shieldUp",
+      "label": "护盾增加",
+      "group": "combat",
+      "note": "护盾展开的亮脆包覆声",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-expansion/combat-status/shieldUp-base.ogg",
+          "seconds": 1.238646
+        }
+      ]
+    },
+    {
+      "id": "armorBreak",
+      "label": "破甲",
+      "group": "combat",
+      "note": "坚硬材质崩裂与碎片落尾",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-expansion/combat-status/armorBreak-base.ogg",
+          "seconds": 1.411708
+        }
+      ]
+    },
+    {
+      "id": "energyUp",
+      "label": "能量增加",
+      "group": "combat",
+      "note": "蓄能脉冲与明亮升起感",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-expansion/combat-status/energyUp-base.ogg",
+          "seconds": 0.958688
+        }
+      ]
+    },
+    {
+      "id": "energyDown",
+      "label": "能量消耗",
+      "group": "combat",
+      "note": "能量释放后的短促衰减",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-expansion/combat-status/energyDown-base.ogg",
+          "seconds": 0.966292
+        }
+      ]
+    },
+    {
+      "id": "buffUp",
+      "label": "增益获得",
+      "group": "combat",
+      "note": "增益启动的上扬亮点",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-expansion/combat-status/buffUp-base.ogg",
+          "seconds": 2.070146
+        }
+      ]
+    },
+    {
+      "id": "buffDown",
+      "label": "增益到期",
+      "group": "combat",
+      "note": "状态收束的短尾音",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-expansion/combat-status/buffDown-base.ogg",
+          "seconds": 0.911646
+        }
+      ]
+    },
+    {
+      "id": "curse",
+      "label": "诅咒施加",
+      "group": "combat",
+      "note": "异质摩擦与暗色回落",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-expansion/combat-status/curse-base.ogg",
+          "seconds": 2.946229
+        }
+      ]
+    },
+    {
+      "id": "curseEnd",
+      "label": "诅咒解除",
+      "group": "combat",
+      "note": "电磁解离的短脉冲与消散",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-expansion/combat-status/curseEnd-base.ogg",
+          "seconds": 3.366708
+        }
+      ]
+    },
+    {
+      "id": "danger",
+      "label": "危险预警",
+      "group": "combat",
+      "note": "门禁式警报短响",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-expansion/exploration/danger-base.ogg",
+          "seconds": 1.095292
+        }
+      ]
+    },
+    {
+      "id": "fireEnter",
+      "label": "进入营火",
+      "group": "nodes",
+      "note": "木柴短裂响，营火进入候选",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-expansion/exploration/fireEnter-base.ogg",
+          "seconds": 1.16
+        }
+      ]
+    },
+    {
+      "id": "altarEnter",
+      "label": "进入祭坛",
+      "group": "nodes",
+      "note": "短钟鸣，祭坛进入候选",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-expansion/exploration/altarEnter-base.ogg",
+          "seconds": 2.085187
+        }
+      ]
+    },
+    {
+      "id": "altarActivate",
+      "label": "祭坛激活",
+      "group": "nodes",
+      "note": "装置启动与响应",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-expansion/exploration/altarActivate-base.ogg",
+          "seconds": 2.52925
+        }
+      ]
+    },
+    {
+      "id": "doorEnter",
+      "label": "抵达层间门",
+      "group": "nodes",
+      "note": "轻门轴与开启动作",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-expansion/exploration/doorEnter-base.ogg",
+          "seconds": 0.975625
+        }
+      ]
+    },
+    {
+      "id": "shopEnter",
+      "label": "进入补给站",
+      "group": "nodes",
+      "note": "门铃式交易提示",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-expansion/exploration/shopEnter-base.ogg",
+          "seconds": 1.755167
+        }
+      ]
+    },
+    {
+      "id": "extractionEnter",
+      "label": "撤离信标接通",
+      "group": "exploration",
+      "note": "通信接通的短响应",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-expansion/exploration/extractionEnter-base.ogg",
+          "seconds": 1.632146
+        }
+      ]
+    },
+    {
+      "id": "extractionSuccess",
+      "label": "成功撤离",
+      "group": "rewards",
+      "note": "胜利式结果收束",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-expansion/exploration/extractionSuccess-base.ogg",
+          "seconds": 4.029792
+        }
+      ]
+    },
+    {
+      "id": "extractionFail",
+      "label": "撤离失败",
+      "group": "rewards",
+      "note": "失败式结果提示",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-expansion/exploration/extractionFail-base.ogg",
+          "seconds": 3.048354
+        }
+      ]
+    },
+    {
+      "id": "levelup",
+      "label": "熟练度提升",
+      "group": "growth",
+      "note": "战术增幅式成长反馈",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-expansion/exploration/levelup-base.ogg",
+          "seconds": 1.999521
+        }
+      ]
+    },
+    {
+      "id": "click",
+      "label": "点击",
+      "group": "ui",
+      "loop": false,
+      "note": "复刻站明确注明来自游戏录制的按键点击音；轻配平。",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights/click.ogg",
+          "seconds": 0.217188
+        }
+      ]
+    },
+    {
+      "id": "confirm",
+      "label": "确认候选",
+      "group": "ui",
+      "loop": false,
+      "note": "主界面复刻站的第二种按钮短音，映射确认候选；原游戏确认触发未核验。",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights/confirm.ogg",
+          "seconds": 0.215646
+        }
+      ]
+    },
+    {
+      "id": "card",
+      "label": "出牌",
+      "group": "cards",
+      "loop": false,
+      "note": "原方舟剧情洗牌录音截取一个动作段；纸牌原质感，不追加合成层。",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights/card.ogg",
+          "seconds": 0.747333
+        }
+      ]
+    },
+    {
+      "id": "attackSlash",
+      "label": "刀刃攻击",
+      "group": "combat",
+      "loop": false,
+      "note": "player/p_atk 的刀刃攻击素材，保留原挥击结构。",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights/attackSlash.ogg",
+          "seconds": 1.018083
+        }
+      ]
+    },
+    {
+      "id": "parry",
+      "label": "格挡候选",
+      "group": "combat",
+      "loop": false,
+      "note": "player/p_imp 的 blackshield 命中素材映射格挡；具体角色与原触发未核验。",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights/parry.ogg",
+          "seconds": 0.756083
+        }
+      ]
+    },
+    {
+      "id": "shieldBreak",
+      "label": "破盾候选",
+      "group": "combat",
+      "loop": false,
+      "note": "原方舟玻璃破裂剧情素材映射屏障碎裂候选；并非已核实原版破盾声。",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights/shieldBreak.ogg",
+          "seconds": 1.083229
+        }
+      ]
+    },
+    {
+      "id": "heal",
+      "label": "治疗",
+      "group": "combat",
+      "loop": false,
+      "note": "player/p_atk 的 heal 治疗动作素材，保留原提示与尾音。",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights/heal.ogg",
+          "seconds": 0.765417
+        }
+      ]
+    },
+    {
+      "id": "eventEnter",
+      "label": "事件进入",
+      "group": "nodes",
+      "loop": false,
+      "note": "battle/b_ui 的 whoosh 界面过渡素材，仅在事件进入使用。",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights/eventEnter.ogg",
+          "seconds": 1.257771
+        }
+      ]
+    },
+    {
+      "id": "chestBurst",
+      "label": "开箱奖励候选",
+      "group": "rewards",
+      "loop": false,
+      "note": "battle/b_ui 的 rewardappear 奖励出现素材映射开箱反馈；无新增爆炸层。",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights/chestBurst.ogg",
+          "seconds": 0.669521
+        }
+      ]
+    },
+    {
+      "id": "bossReveal",
+      "label": "Boss 登场候选",
+      "group": "nodes",
+      "loop": false,
+      "note": "battle/b_ui 的 alarmenter 警报进入素材映射 Boss 预警；原登场触发未核验。",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights/bossReveal.ogg",
+          "seconds": 1.376229
+        }
+      ]
+    }
+  ]
+}

@@ -351,11 +351,11 @@
         bar = makeBar('资源加载失败——请刷新页面重试', 'fail');
       }
     }, true);
-    setInterval(function () {
+    var guardTimer = setInterval(function () {
       if (window.SDT) {                     // 就绪即自愈：撤销误报条并停止看护
         if (bar && bar.isConnected) bar.remove();
         bar = null;
-        clearInterval(this);
+        clearInterval(guardTimer);         // 回调内 this 是 Window，clearInterval(this) 从未生效（09-30 深审 WORLD-005）
         return;
       }
       var elapsed = Date.now() - started;
@@ -370,7 +370,7 @@
         close.style.cssText = 'margin-left:12px;background:none;border:0;color:inherit;font:inherit;cursor:pointer';
         close.addEventListener('click', function () { bar.remove(); bar = null; });
         bar.appendChild(close);
-        clearInterval(this);               // 失败条定格，不再轮询（仍可被上方 error 事件唤醒？不再需要）
+        clearInterval(guardTimer);         // 失败条定格，不再轮询
       }
     }, 400);
   })();

@@ -2,7 +2,10 @@
  * 回归目标：ESM 循环导入下模块体在顶层读 game 导致启动崩溃
  *（症状：标题页漏出局内下方控制栏 / 开始游戏·设置按钮无响应）。
  * jsdom 无 canvas/Audio/WebAudio，这里 stub 掉渲染与音频，只验启动接线。 */
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
+
+// 单跑约 5s：全量并行负载下会越过 vitest 默认 5s 超时形成负载 flake，给足裕量
+vi.setConfig({ testTimeout: 20000, hookTimeout: 20000 });
 
 // ---- 环境补桩（必须在动态 import main.js 之前就位） ----
 // 2D 上下文：所有方法返回可链式/可读的哑值

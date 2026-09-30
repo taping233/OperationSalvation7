@@ -1,5 +1,6 @@
-import { afterEach, beforeAll, describe, expect, it } from 'vitest';
+import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
 import { hand } from '../game/src/battle/runtime/battle.runtime.piles.js';
+import { Random } from '../game/src/core/random.js';
 
 window.SDT = window.SDT || {};
 window.SDT.Icons = { img: () => '', TYPE_ART: {} };
@@ -90,10 +91,24 @@ describe('production rules execute independently of display descriptions', () =>
 
   it('priest inserts random cards up to six and heals only for the inserted spells', async () => {
     await start([canonical('tt8-hero-priest'), canonical('starter-attack')], true);
-    await play(0);
-    expect(hand, active.logs.join('\n')).toHaveLength(6);
-    const added = hand.filter(uid => uid !== 'mb-1').map(uid => engine.findCard(uid)?.card);
-    expect(added.every(Boolean)).toBe(true);
-    expect(active.hp).toBe(40 + added.filter(card => card.type === '法术').length * 3);
+    // 获取触发器（阿猫的礼物）可能另送法术，不能把最终手牌都算作牧师直接置入。
+    const spell = Cards.all().find(card => card.type === '法术' && Cards.isRandomObtainable(card)
+      && card.rules && !card.rules.triggers?.onAcquire?.length);
+    expect(spell).toBeTruthy();
+    const pool = [canonical(spell.id), canonical('tt3-skewer')];
+    const previousRandom = Random.snapshot();
+    const catalog = vi.spyOn(Cards, 'all').mockReturnValue(pool);
+    Random.reseed(1);
+    try {
+      await play(0);
+      expect(hand, active.logs.join('\n')).toHaveLength(6);
+      const added = hand.filter(uid => uid !== 'mb-1').map(uid => engine.findCard(uid)?.card);
+      expect(added.every(Boolean)).toBe(true);
+      expect(new Set(added.map(card => card.type))).toEqual(new Set(['法术', '武术']));
+      expect(active.hp).toBe(40 + added.filter(card => card.type === '法术').length * 3);
+    } finally {
+      catalog.mockRestore();
+      Random.restore(previousRandom);
+    }
   });
 });

@@ -991,7 +991,8 @@ function createGameMenuController(deps) {
         <label class="chk vol"><span>音效音量 <span class="set-en">SFX VOL</span></span><input type="range" id="setSfxVol" min="0" max="100" value="${Math.round(SDT.Sound.sfxVolume * 100)}"><b id="setSfxVolVal">${Math.round(SDT.Sound.sfxVolume * 100)}</b></label>
         <p class="hint">侧边栏的 [[icon:gear]] 按钮为全局静音；这里可分别开关音乐与音效、拖动滑条调音量（自动保存）。</p>
         <h3 class="set-h">[[icon:trophy]] 致谢 <span class="set-en">CREDITS</span></h3>
-        <p class="hint">图标来自 game-icons.net —— Lorc、Delapouite、Carl Olsen、Caro Asercion（CC-BY 3.0，详见 assets/icons/game-icons/LICENSE-CC-BY-3.0.md）；音效来自 Kenney.nl（CC0）。</p>
+        <p class="hint">图标来自 game-icons.net —— Lorc、Delapouite、Carl Olsen、Caro Asercion（CC-BY 3.0，详见 assets/icons/game-icons/LICENSE-CC-BY-3.0.md）；当前音效为《明日方舟》源素材轻改试听版。</p>
+        <p><a class="ov-btn" href="./sfx-audition.html?set=alternatives&amp;pack=arknights-runtime" target="_blank" rel="noopener">整套音效试听</a></p>
         <h3 class="set-h">[[icon:book]] 留言库 <span class="set-en">SUGGESTION BOX</span></h3>
         <div class="btn-row"><button class="mini-btn" data-act="openInbox">查看历史留言</button></div>
         <h3 class="set-h">[[icon:chart]] 跑局数据 <span class="set-en">RUN DATA</span></h3>
@@ -1036,7 +1037,9 @@ function createGameMenuController(deps) {
       if (!armDanger('wipeSave', '确认清空全部？')) return;
       clearAllSlots(); UI.log('已清空全部五个档位的存档', 'warn');
     });
-    UI.act('openInbox', openSuggestionInbox);
+    // 设置页入口固定为「返回设置」语义：UI 点击委托会把按钮 dataset 对象当作首参传入，
+    // 直接挂函数引用时 fromTitle=!!dataset 恒为真，返回键误回标题页（09-30 深审 WORLD-004）
+    UI.act('openInbox', () => openSuggestionInbox(false));
     UI.act('openDataPageUi', () => openDataPageUi(true));
     UI.act('closeSettings', () => { UI.hideOverlay(); game.state = prev === 'modal' ? 'idle' : prev; });
     // 勾选即时生效并同步侧边栏

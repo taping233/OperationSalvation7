@@ -121,7 +121,7 @@ export const overlayMethods = {
     if ((!wasOpen || prevMode !== mode) && SDT.Motion && mode !== 'page' && mode !== 'bagpage') SDT.Motion.overlayIn(card);
     // 只在弹窗真正打开/切换模式时播开窗音效——战斗内反复 render 不刷音效
     if (!wasOpen || prevMode !== mode) {
-      SDT.Sound.sfx('open');
+      if (!this.el.ovBody.querySelector('.node-pg, .flow-transition')) SDT.Sound.sfx('open');
       // 焦点导航（game-ui-ux）：显式首焦点优先；否则优先安全的取消/返回
       // 语义，避免确认页默认把不可逆动作放在 Enter 的第一击上。
       requestAnimationFrame(() => {
@@ -135,6 +135,9 @@ export const overlayMethods = {
     // 解码期间页面近乎纯黑、无任何反馈。这里读出 data-asset-key 元素的背景 URL，
     // 未就绪时挂 bg-loading 类（CSS 显示「正在进入…」微提示），图片到齐后自动摘除。
     this._checkPageBg();
+    const soundScene = this.el.ovBody.querySelector('.node-pg, .flow-transition');
+    const soundTone = soundScene && [...soundScene.classList].find(name => name.startsWith('sc-'));
+    SDT.Sound.scene?.(soundTone ? soundTone.slice(3) : null, soundScene?.dataset.assetKey || '');
   },
 
   // U1：整页背景就绪检测。_bgReady 缓存已确认加载过的 URL，重复打开零开销。
@@ -190,6 +193,7 @@ export const overlayMethods = {
     this._inputHandler = null;
     this._hoverHandler = null;
     SDT.Sound.sfx('close');
+    SDT.Sound.scene?.(null);
     const card = this.el.ovBody.parentElement;
     // 不透明整屏页淡出：boss 留言 #52 要求所有界面退出都有过渡动画（200ms 淡出+下移）；
     // room-view（战斗/房间页）例外保持瞬隐——留言 #33 实测整屏淡出每帧全屏重合成是

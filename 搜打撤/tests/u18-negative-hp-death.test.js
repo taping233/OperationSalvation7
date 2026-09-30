@@ -74,7 +74,6 @@ async function playCard(game, card, target) {
 
 const R = (battle, onPlay) => ({ rules: { version: 1, battle, triggers: { onPlay } } });
 const SELF = { target: { side: 'self', area: false } };
-const ENEMY_ONE = { target: { side: 'enemy', area: false } };
 const filler = (id = 'u18-filler') => ({ id, name: '陪衬牌', cost: 0, type: '法术', desc: '' });
 const selfHurt = (n, id) => ({ id, name: 'U18自伤牌', cost: 0, type: '法术', desc: `损失 ${n} 点生命。`,
   ...R(SELF, [{ op: 'heal', selfDamage: n }]) });

@@ -184,20 +184,24 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
     }
     const list = game.ownedCards.filter(o => !!o.safe !== !!toSafe && o.card.name === name);
     if (!list.length) return;
+    // 整堆移动按「格数增量」检查：同名合并按叠放上限切格（第 4 张起另占一格）。
+    // 此前只查有无同名堆就整堆放行，9 张同名可越过安全格/背包容量（09-30 深审 ROOT-02）
+    const cap = game.stackCapOf({ name });
+    const sameSide = game.ownedCards.filter(o => !!o.safe === !!toSafe && !o.stored && o.card.name === name).length;
+    const delta = Math.ceil((sameSide + list.length) / cap) - Math.ceil(sameSide / cap);
     if (toSafe) {
-      const merges = game.ownedCards.some(o => o.safe && o.card.name === name);
-      if (!merges && safeUsed() >= safeCap()) {
-        UI.log(`[[icon:lock]] 安全格已满（${safeUsed()}/${safeCap()} 格），可在基地用口粮升级`, 'warn');
+      if (safeUsed() + delta > safeCap()) {
+        UI.log(`[[icon:lock]] 安全格放不下：本次整叠还需 ${delta} 格（现 ${safeUsed()}/${safeCap()} 格），可在基地用口粮升级`, 'warn');
         return;
       }
     } else {
-      const merges = game.ownedCards.some(o => !o.safe && o.card.name === name);
-      if (!merges && usedSlots() >= bagCap()) {
-        UI.log(`[[icon:bag]] 背包已满（${usedSlots()}/${bagCap()} 格），取不出来`, 'warn');
+      if (usedSlots() + delta > bagCap()) {
+        UI.log(`[[icon:bag]] 背包放不下：本次整叠还需 ${delta} 格（现 ${usedSlots()}/${bagCap()} 格），取不出来`, 'warn');
         return;
       }
     }
     list.forEach(o => { o.safe = toSafe; });
+    SDT.Sound.sfx(toSafe ? 'safeStore' : 'safeRetrieve');
     UI.log(toSafe
       ? `[[icon:lock]] 【${esc(name)}】×${list.length} 已存入安全格（撤离失败时安全运回）`
       : `[[icon:upload]] 【${esc(name)}】×${list.length} 已从安全格取出`, 'sys');
@@ -383,9 +387,15 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
         <div class="ov-btns"><button class="ov-btn ok" data-act="pouchBack">[[icon:arrow]] 收好锦囊</button></div>`);
     };
     UI.act('pouchPut', (d) => {
-      if (stored().length >= 3) { UI.log('[[icon:cards]] 锦囊已满（3 张法术）', 'warn'); return; }
       const stack = bagSpellStacks().find(st => st.card.name === d.name);
       if (!stack) return;
+      // 整叠存入也受 3 张上限：已有数量 + 本次堆数超过即拒收（此前只查已有 ≥3，
+      // 整叠 3 张可与已有 2 张叠成 5/3，09-30 深审 ROOT-04）
+      if (stored().length + stack.count > 3) {
+        UI.log(`[[icon:cards]] 锦囊装不下整叠：已有 ${stored().length}/3 张，本次 ${stack.count} 张`, 'warn');
+        SDT.Sound.sfx('deny');
+        return;
+      }
       stack.uids.forEach(uid => { const o = game.ownedCards.find(x => x.uid === uid); if (o) { o.pouchOf = POUCH_ID; o.stored = 1; } });
       UI.log(`[[icon:cards]] 【<b>${esc(stack.card.name)}</b>】存入法师锦囊`, 'ok');
       saveGame();
@@ -461,9 +471,13 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
     UI.act('pearlTake', (d) => {
       const stack = storedStacks().find(st => st.card.name === d.name);
       if (!stack) return;
-      // 取出需要 1 个背包空格（存入时腾出的格可能已被占用）
-      if (usedSlots() >= bagCap()) {
-        UI.log(`[[icon:bag]] 背包已满（${usedSlots()}/${bagCap()} 格），取不出来`, 'warn');
+      // 取出按「格数增量」检查：整叠 9 张按 3 张/格需 3 格，只查 1 个空格会越界
+      // （09-30 深审 ROOT-03）；同名合并口径与 moveStackSafe 一致
+      const cap = game.stackCapOf(stack.card);
+      const sameBag = game.ownedCards.filter(x => !x.safe && !x.stored && x.card.name === stack.card.name).length;
+      const delta = Math.ceil((sameBag + stack.count) / cap) - Math.ceil(sameBag / cap);
+      if (usedSlots() + delta > bagCap()) {
+        UI.log(`[[icon:bag]] 背包放不下：本次整叠还需 ${delta} 格（现 ${usedSlots()}/${bagCap()} 格），先腾出空间`, 'warn');
         SDT.Sound.sfx('deny');
         return;
       }

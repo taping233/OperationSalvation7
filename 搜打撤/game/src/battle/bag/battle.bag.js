@@ -15,6 +15,7 @@ export function createBattleBag({
   throwIfActionCancelled, findCard,
   triggersM2,
   addEnergy, drawCards, grantSha, queueDiscover, getTurn,
+  processDiscoverQueue, randomDiscoverCard,
 }) {
   function restoreConsumed(n) {
     let cnt = 0;
@@ -189,6 +190,29 @@ export function createBattleBag({
           killed++;
         }
         G.log(killed ? `[[icon:skull]] 消灭了 ${killed} 个敌人` : '[[icon:cross]] 没有符合条件的敌人', killed ? 'sys' : 'dim');
+      } else if (op.op === 'acquire' && op.pool?.kind === 'classAbility') {
+        // BC-09（09-30 深审）：通行证的获取效果此前只排队发现 job（无人消费、池也不被支持），
+        // 道具被消耗却拿不到任何奖励。战斗内与基地 game.bag.rules 同口径直授——
+        // classAbility：随机获得 1 张本职业能力卡（觉醒）
+        const cls = G.myClass || null;
+        const pool = SDT.Cards.all().filter(c => c.type === '能力卡' && (c.cls || null) === cls);
+        if (pool.length) {
+          const got = pool[Math.floor(Random.random('battle') * pool.length)];
+          addTempCard({ ...got });
+          G.log(`[[icon:sparkles]] <b>${esc(card.name)}</b> 觉醒：获得本职业能力卡【<b>${esc(got.name)}</b>】`, 'loot');
+        } else {
+          G.log('[[icon:cross]] 该职业没有可觉醒的能力卡', 'warn');
+        }
+      } else if (op.op === 'acquire' && op.pool?.kind === 'legendary') {
+        // legendary：卡面「抽取 1 张传说卡」——随机池直授 1 张（资格边界走 randomDiscoverCard
+        // 的 isRandomObtainable 单源过滤）
+        const got = randomDiscoverCard(c => c.rarity === '传说');
+        if (got) {
+          addTempCard({ ...got });
+          G.log(`[[icon:cards]] <b>${esc(card.name)}</b>：抽取传说卡【<b>${esc(got.name)}</b>】置入手牌`, 'loot');
+        } else {
+          G.log('[[icon:cross]] 没有可获取的传说卡', 'warn');
+        }
       } else if (op.op === 'acquire' || op.op === 'discover') {
         queueDiscover({ n: amount, pool: op.pool || { kind: '随机' }, dest: op.dest,
           act: op.act, sourceCardId: card.id });
@@ -197,6 +221,7 @@ export function createBattleBag({
     applyKillRewards(null, aliveBefore - alive().length);
     sweepDead();
     if (!alive().length) finish(true);
+    else processDiscoverQueue();   // BC-09：排队的发现面板立即打开（此前无人消费，通行证类道具白耗）
     requestBattleRender();
     return true;
   }
@@ -350,8 +375,10 @@ export function createBattleBag({
           text: r.dealt > 0 ? '-' + r.dealt : '护盾破碎', cls: r.dealt > 0 ? 'dmg' : 'block',
           shieldBreak, hpBefore, hpAfter: t.hp, maxHp: t.maxHp });
         G.log(`[[icon:bag]] <b>背包砸击</b>砸向 ${esc(t.name)}：造成 <b>${r.dealt}</b> 点固定伤害（-2 能量）`, 'sys');
-        applyKillRewards(null, aliveBefore - alive().length);
         sweepDead();
+        // 击杀数必须在 sweepDead 之后取（dealDamage 只扣血不标倒下）：此前先取后清，
+        // 砸击击杀的饮血剑计数恒为 0（09-30 深审 BC-10 复验时发现的次生顺序 bug）
+        applyKillRewards(null, aliveBefore - alive().length);
       }), signal);
       if (!struck) return;
       if (!alive().length) { finish(true); return; }

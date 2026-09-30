@@ -137,7 +137,9 @@ function stageKillBeat() {
     thunder: { color: '#e8e0ff', count: 18, speed: 1.4 },
   };
   const CUE_ATTACKER_ACTION = Object.freeze({ 'player-attack': 'atk', 'player-spell': 'cast' });
-  const CUE_HIT_SOUND = Object.freeze({ hit: 'hit', strike: 'strike' });
+  const CUE_HIT_SOUND = Object.freeze({ hit: 'hit', strike: 'strike',
+    ...Object.fromEntries(['attackSlash', 'attackArrow', 'attackBlunt', 'attackBossHeavy', 'attackFire',
+      'attackIce', 'attackLightning', 'attackPierce', 'attackPoison', 'attackPsychic'].map(id => [id, id])) });
   // 轻量受击火花（P2 补回，替代已删除的 Pixi 粒子通道）：WAAPI 预采样抛散+重力+淡出，
   // 一次性元素即抛即毁、纯 transform/opacity 走合成器，不建常驻渲染管线
   function spawnSparks(ov, figEl, { color = '#ffb34d', count = 12, speed = 1 } = {}) {
@@ -310,7 +312,11 @@ function stageKillBeat() {
       const killBoom = (f.cls || '').includes('sticker-boom');
       const stopMs = (heavy || finisher) && !reduced ? (finisher ? 140 : 100) : killBoom && !reduced ? 120 : 0;
       const cue = f.cue;
-      const cueSound = CUE_HIT_SOUND[cue?.hitSound];
+      const elementSound = { burn: 'attackFire', fire: 'attackFire', poison: 'attackPoison',
+        ice: 'attackIce', lightning: 'attackLightning', arrow: 'attackArrow', blunt: 'attackBlunt',
+        pierce: 'attackPierce', psychic: 'attackPsychic' }[f.tintKey || f.type];
+      const cueSound = isSelf ? 'hurt' : elementSound || CUE_HIT_SOUND[cue?.hitSound]
+        || (cue?.hit === 'target-magic' ? 'attackPsychic' : null);
       if (damage && cueSound) SDT.Sound.sfx(cueSound, cueSound === 'hit'
         ? { rateScale: heavy ? 1.18 : amt >= 5 ? 1.08 : 0.96 } : undefined);
       else if (damage) SDT.Sound.sfx('hit', { rateScale: heavy ? 1.18 : amt >= 5 ? 1.08 : 0.96 });

@@ -175,6 +175,9 @@ import { hudMethods } from './hud.js';
       </div>` : '';
       const el = document.createElement('div');
       el.id = 'cardZoom';
+      // 全屏特写期间暂停战斗层常驻动画（09-30 性能审计 F6，铁律①「不出画面即暂停」；
+      // page-covered 机制只覆盖 #title，特写挂在 body 之外）：关闭时在 close() 入口摘除
+      document.body.classList.add('zoom-open');
       const reducedMotion = photoMode && reduceMotion();   // 权威口径：媒体查询+设置开关（core/motion.js，带缓存）
       if (photoMode) {
         el.classList.add('cz-photo');
@@ -249,6 +252,7 @@ import { hudMethods } from './hud.js';
         noteInput.addEventListener('blur', () => { clearTimeout(noteSaveTimer); saveNote(); });
       }
       const close = (immediate = false) => {
+        document.body.classList.remove('zoom-open');   // 战斗层动画恢复（见上方 zoom-open 挂载处）
         if (closed) {
           if (photoMode && immediate && !removed) {
             clearTimeout(enterTimer);

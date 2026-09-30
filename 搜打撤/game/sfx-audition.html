@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>冬境 · 音效试听</title>
+  <meta name="color-scheme" content="dark">
+  <link rel="stylesheet" href="./css/sfx-audition.css">
+</head>
+<body>
+  <header class="page-head">
+    <div class="brand"><span class="brand-mark" aria-hidden="true">▥</span><span>WINTER / SOUND LAB</span><span class="version">V5</span></div>
+    <div class="heading-row"><div><h1>冬境音效试听</h1><p>点一下播放，找到适合这个世界的声音。</p></div><span id="total" class="total">正在载入音效…</span></div>
+  </header>
+  <section id="pack-panel" class="pack-panel" aria-label="对比试听方案" hidden>
+    <div class="pack-heading"><strong>切换方案，对比同一动作</strong><span id="pack-note"></span></div>
+    <div id="pack-buttons" class="pack-buttons"></div>
+  </section>
+  <main class="workspace">
+    <aside aria-label="音效分类"><h2>按场景听</h2><nav id="categories"></nav><p class="aside-tip">空格 · 播放 / 暂停<br>← → · 上一条 / 下一条<br><span id="variant-key-tip">V · 换个版本</span></p></aside>
+    <section class="library" aria-label="音效列表">
+      <div class="list-tools"><label class="search-box"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="搜索：出牌、营火、撤离…" aria-label="搜索音效"><kbd>/</kbd></label><button id="sequence" class="secondary" aria-pressed="false">连续试听</button></div>
+      <div class="section-head"><h2 id="section-title">全部音效</h2><span id="count"></span></div>
+      <div id="grid" class="sound-grid"><p class="empty">正在准备试听列表…</p></div>
+    </section>
+  </main>
+  <footer class="player" aria-label="试听播放器">
+    <div class="playing-info"><span id="signal" class="signal" aria-hidden="true"><i></i><i></i><i></i><i></i></span><div><strong id="now-title">选一个声音，开始试听</strong><span id="now-detail">109 种音效 · 点击卡片即可播放</span></div></div>
+    <div class="transport"><button id="previous" aria-label="上一条音效" title="上一条">←</button><button id="toggle" class="primary play-main" aria-label="播放或暂停">播放</button><button id="next" aria-label="下一条音效" title="下一条">→</button><button id="variant" class="secondary">换个版本</button><button id="stop" class="quiet">停止</button></div>
+    <div class="progress-row"><span id="elapsed">0:00</span><input id="progress" type="range" min="0" max="1000" value="0" aria-label="播放进度" disabled><span id="duration">0:00</span></div>
+    <div class="volume-row"><label for="volume">音量</label><input id="volume" type="range" min="0" max="100" value="70"><span id="volume-value">70%</span><label class="loop-label"><input id="loop" type="checkbox">循环播放</label></div>
+    <p id="status" class="status" aria-live="polite"></p>
+  </footer>
+  <audio id="audio" preload="none"></audio>
+  <script type="module" src="./src/audio/sfx-audition.js"></script>
+</body>
+</html>

@@ -72,6 +72,11 @@ function createBattleResolution(ports) {
     addFloat({ unit: 'self', text: '', cls: 'stk sticker-heal', warm: true });
     log(`[[icon:heart]] 吸血：回复 ${total} 点生命`, 'ok');
   };
+  // BC-04（09-30 深审）：armor.priceOf:'discovered'（挖宝）的甲必须在玩家选完发现牌后
+  // 按所选牌价格结算——排队时取价（getPriceOfLastDrawn）拿到的是前次抽牌的价格，常见 0/错值。
+  // 这里记录最近一次排队的发现 job，armor op 据此挂 priceArmor 旗（pickDiscover 既有结算通道）。
+  let lastQueuedDiscoverJob = null;
+  const queueDiscoverTracked = job => { lastQueuedDiscoverJob = job; queueDiscover(job); };
   // M1（M 批契约扩展，2026-09-27）：effect-steps.m1.js 的注入端口收口——
   // 全部来自本文件既有端口，不新增引擎侧装配点。
   const m1Deps = { combat, getPlayerStatus, drawCards, grantSha, countDrawnSpells, findCard, log, esc,
@@ -163,7 +168,7 @@ function createBattleResolution(ports) {
     const windupTargets = pickTargets();
     if (!windupTargets.length) return false;
     const type = getDamageTypeMeta()[card.dmgType] ? card.dmgType : fixedDamageType;
-    const cue = attackCue(type);
+    const cue = attackCue(type, card);
     yield { kind: 'windup', targets: windupTargets, ...(cue ? { cue } : {}) };
     // windup 后重算目标（damage 段同款：演出等待期间点选目标可能倒下——同卡先前的 damage 段即可致死）
     const targets = pickTargets().filter(foe => foe && !foe.dead);
@@ -313,7 +318,7 @@ function createBattleResolution(ports) {
       const uids = takeDeckBottom(take);
       const cards = uids.map(u => { const o = findCard(u); return o ? o.card : null; }).filter(Boolean);
       if (cards.length) {
-        queueDiscover({ n: cards.length, explicit: cards, explicitUids: uids, deckBottom: true });
+        queueDiscoverTracked({ n: cards.length, explicit: cards, explicitUids: uids, deckBottom: true, sourceCardId: card.id });
         log(`[[icon:question]] <b>${esc(card.name)}</b>：翻开牌库底 ${cards.length} 张——选 1 张入手，其余放回牌库底`, 'loot');
         return true;
       }
@@ -353,7 +358,7 @@ function createBattleResolution(ports) {
     };
 
     if (dest === 'discover') {
-      queueDiscover({
+      queueDiscoverTracked({
         n: operation.n,
         pred,
         act: ['play', 'playKeep', 'dup'].includes(act) ? act : undefined,
@@ -550,7 +555,9 @@ function createBattleResolution(ports) {
       const uids = takeDeckBottom(take);   // 数组头部 = 牌库底
       const cards = uids.map(u => { const o = findCard(u); return o ? o.card : null; }).filter(Boolean);
       if (cards.length) {
-        queueDiscover({ n: cards.length, explicit: cards, explicitUids: uids, deckBottom: true });
+        // n=1：三张候选就是本次面板，选 1 张入手即完（其余放回牌库底）。此前 n 误传候选数 3，
+        // pickDiscover 的 n>1 分支又排队 2 次随机发现（09-30 深审 BC-05）
+        queueDiscoverTracked({ n: 1, explicit: cards, explicitUids: uids, deckBottom: true });
         log(`[[icon:question]] <b>${esc(card.name)}</b>：翻开牌库底 ${cards.length} 张——选 1 张入手，其余放回牌库底`, 'loot');
       }
       return;
@@ -675,7 +682,7 @@ function createBattleResolution(ports) {
         function* castSegment(segment, label, applyModifiers) {
           const windupTargets = pickTargets();
           if (!windupTargets.length) return { dealt: 0, first: null };
-          const cue = attackCue(type);
+          const cue = attackCue(type, card);
           yield { kind: 'windup', targets: windupTargets, ...(cue ? { cue } : {}) };
           const targets = pickTargets();
           if (!targets.length) return { dealt: 0, first: null };
@@ -801,7 +808,7 @@ function createBattleResolution(ports) {
           ? getAliveFoes()
           : [target && !target.dead ? target : getAliveFoes()[0]].filter(Boolean);
         if (!windupTargets.length) break;
-        const cue = attackCue(type);
+        const cue = attackCue(type, card);
         yield { kind: 'windup', targets: windupTargets, ...(cue ? { cue } : {}) };
         const segmentTargets = isAOE(card)
           ? getAliveFoes()
@@ -842,7 +849,7 @@ function createBattleResolution(ports) {
           for (let k = 0; k < +sm[1]; k++) {
             let next = preferred && !preferred.dead ? preferred : getAliveFoes()[0];
             if (!next) break;
-            const cue = attackCue(type);
+            const cue = attackCue(type, card);
             yield { kind: 'windup', targets: [next], ...(cue ? { cue } : {}) };
             next = preferred && !preferred.dead ? preferred : getAliveFoes()[0];
             if (!next) break;
@@ -860,7 +867,7 @@ function createBattleResolution(ports) {
         const rest = targets.filter(t => !t.dead);
         const recast = rest.length ? rest : getAliveFoes().slice(0, 1);
         log(`[[icon:sparkles]] <b>${esc(card.name)}</b>：击杀敌人，再施放一次`, 'sys');
-        const cue = attackCue(type);
+        const cue = attackCue(type, card);
         if (recast.length) yield { kind: 'windup', targets: recast, ...(cue ? { cue } : {}) };
         let recastHit = false;
         for (const foe of recast) {
@@ -893,7 +900,7 @@ function createBattleResolution(ports) {
           continue;
         }
         if (operation.op === 'discover' && Number.isInteger(operation.count) && operation.count > 0) {
-          queueDiscover({ n: operation.count, pool: operation.pool, costDecayPerTurn: operation.costDecayPerTurn,
+          queueDiscoverTracked({ n: operation.count, pool: operation.pool, costDecayPerTurn: operation.costDecayPerTurn,
             sourceCardId: card.id });
           did = true;
           continue;
@@ -1050,6 +1057,15 @@ function createBattleResolution(ports) {
           // M2：priceOf:'discovered' 护甲锚定发现牌价格（挖宝）；consumeEquip 消耗手牌装备为代价（铸甲）。
           if (operation.consumeEquip !== undefined && !resolveConsumeEquip(card, m2Deps)) {
             // 付不出代价：整段无效（不白拿甲），与手牌代价「付不出即无效果」口径一致
+            continue;
+          }
+          // BC-04（09-30 深审）：priceOf:'discovered' 不在排队时取价——挂 priceArmor 旗给本卡
+          // 刚排队的发现 job，由 pickDiscover 按玩家所选牌的价格结算（与文本路径发现同通道）
+          if (operation.priceOf === 'discovered' && lastQueuedDiscoverJob &&
+              lastQueuedDiscoverJob.sourceCardId === card.id) {
+            lastQueuedDiscoverJob.priceArmor = true;
+            log('[[icon:plate]] 护甲将按你选中的发现牌价格结算', 'sys');
+            did = true;
             continue;
           }
           let amount = operation.amountField !== undefined ? +(card[operation.amountField] || 0)

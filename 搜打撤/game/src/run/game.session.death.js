@@ -54,7 +54,10 @@ export function createDeathSettlement({
     const sumBefore = cls ? SDT.Meta.classSummary(cls).find(c => c.cls === cls) : null;
     const boxSafe = game.ownedCards.some(o => o.safe && o.card && o.card.id === pearlBoxId);
     const saved = cardStacks(true);
-    const cards = game.ownedCards.filter(o => o.safe || (o.stored && boxSafe)).map(o => ({ card: o.card, count: 1 }));
+    // 珍珠盒抢运只覆盖盒中资源（stored 且非 pouchOf）：锦囊（pouchOf）不在盒中，其宿主锦囊
+    // 不安全时里面的法术随锦囊一起丢——此前只看 stored&&boxSafe，把不安全锦囊里的法术
+    // 也错误抢运回基地（09-30 深审 ROOT-05）
+    const cards = game.ownedCards.filter(o => o.safe || (o.stored && !o.pouchOf && boxSafe)).map(o => ({ card: o.card, count: 1 }));
     const token = { kind: 'death', generation, slotId, cards, deathClass: game.myClass, saved, lost, why,
       xpBefore: sumBefore ? sumBefore.xp : null, lvBefore: sumBefore ? sumBefore.lv : null,
       hadCards: game.ownedCards.length > 0, attempt: null, busy: false, promise: null, ephemeral: !slotId };
@@ -75,7 +78,7 @@ export function createDeathSettlement({
       game.runActive = false;
       game.surrenderedRun = false;
       SDT.Agent?.recorder?.recordRun('death', { why: token.why, savedCards: token.saved });   // 跑局统计（数据分析系统）
-      SDT.Sound.sfx('defeat');
+    SDT.Sound.sfx('extractionFail');
       SDT.Sound.music('title');
       if (token.ephemeral) {
         UI.log('[[icon:info]] 测试结算仅更新内存，没有写入基地存档', 'sys');

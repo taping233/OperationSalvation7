@@ -1,0 +1,296 @@
+{
+  "groups": {
+    "combat": "战斗"
+  },
+  "cues": [
+    {
+      "id": "attackArrow",
+      "label": "弓箭攻击",
+      "group": "combat",
+      "note": "箭矢命中",
+      "loop": false,
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/player/p_imp/p_imp_arrow_n.mp3",
+      "source_path": "player/p_imp/p_imp_arrow_n.mp3",
+      "source_sha256": "ddc5439cca56503fea50375cabab0b398292c66633b43ad268c5d9519cb795bc",
+      "original_trigger_verified": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/combat-extra/attackArrow.ogg",
+          "seconds": 0.403583
+        }
+      ]
+    },
+    {
+      "id": "attackBlunt",
+      "label": "钝击攻击",
+      "group": "combat",
+      "note": "钝器撞击",
+      "loop": false,
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/player/p_imp/p_imp_blunt_n.mp3",
+      "source_path": "player/p_imp/p_imp_blunt_n.mp3",
+      "source_sha256": "e65b3bf299fbdc7cd0d65f565c44b5acd1099443418117b3db58975a56d2cf01",
+      "original_trigger_verified": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/combat-extra/attackBlunt.ogg",
+          "seconds": 0.889792
+        }
+      ]
+    },
+    {
+      "id": "attackBossHeavy",
+      "label": "首脑重击",
+      "group": "combat",
+      "note": "重锤冲击",
+      "loop": false,
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/player/p_imp/p_imp_bighammer_s.mp3",
+      "source_path": "player/p_imp/p_imp_bighammer_s.mp3",
+      "source_sha256": "40244006fae1629ec8add0d1cb083a253dde54e79b3a59ac1fd48c2c5e2ebc3c",
+      "original_trigger_verified": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/combat-extra/attackBossHeavy.ogg",
+          "seconds": 1.567937
+        }
+      ]
+    },
+    {
+      "id": "attackFire",
+      "label": "火焰攻击",
+      "group": "combat",
+      "note": "火焰冲击",
+      "loop": false,
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/player/p_imp/p_imp_darkfire_n.mp3",
+      "source_path": "player/p_imp/p_imp_darkfire_n.mp3",
+      "source_sha256": "e03c40963432a4fd71336917e486d25efc18b1250d23c0c405fd1ab0a7b5ab57",
+      "original_trigger_verified": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/combat-extra/attackFire.ogg",
+          "seconds": 1.010583
+        }
+      ]
+    },
+    {
+      "id": "attackIce",
+      "label": "冰霜攻击",
+      "group": "combat",
+      "note": "冰刺碎裂",
+      "loop": false,
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/player/p_imp/p_imp_iceprick_n.mp3",
+      "source_path": "player/p_imp/p_imp_iceprick_n.mp3",
+      "source_sha256": "c201e03b858c5f8f69f21a86988a6dcac49e25003618c1b9d9daef059abb9ac7",
+      "original_trigger_verified": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/combat-extra/attackIce.ogg",
+          "seconds": 0.881479
+        }
+      ]
+    },
+    {
+      "id": "attackLightning",
+      "label": "雷电攻击",
+      "group": "combat",
+      "note": "闪电命中",
+      "loop": false,
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/player/p_imp/p_imp_lightning_n.mp3",
+      "source_path": "player/p_imp/p_imp_lightning_n.mp3",
+      "source_sha256": "9748b51ae0d466b5d9b8ad21172790162ed0c735fbd08148a46326a9783752d4",
+      "original_trigger_verified": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/combat-extra/attackLightning.ogg",
+          "seconds": 0.741667
+        }
+      ]
+    },
+    {
+      "id": "attackPierce",
+      "label": "穿刺攻击",
+      "group": "combat",
+      "note": "枪刺命中",
+      "loop": false,
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/player/p_imp/p_imp_spearstab_n.mp3",
+      "source_path": "player/p_imp/p_imp_spearstab_n.mp3",
+      "source_sha256": "38adfa7f4a3c3310f853f7a65714cfe5420183bafc9a1e91319f2b18aaadf9dd",
+      "original_trigger_verified": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/combat-extra/attackPierce.ogg",
+          "seconds": 0.664521
+        }
+      ]
+    },
+    {
+      "id": "attackPoison",
+      "label": "毒素攻击",
+      "group": "combat",
+      "note": "毒刃收束",
+      "loop": false,
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/player/p_imp/p_imp_snakeknife_end.mp3",
+      "source_path": "player/p_imp/p_imp_snakeknife_end.mp3",
+      "source_sha256": "9bda9513e8458ed071fbb81564ebd75907d4a74c69ebfb01fd6c0ea556e983e2",
+      "original_trigger_verified": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/combat-extra/attackPoison.ogg",
+          "seconds": 0.766958
+        }
+      ]
+    },
+    {
+      "id": "attackPsychic",
+      "label": "精神攻击",
+      "group": "combat",
+      "note": "异质法术冲击",
+      "loop": false,
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/player/p_imp/p_imp_irismag_n.mp3",
+      "source_path": "player/p_imp/p_imp_irismag_n.mp3",
+      "source_sha256": "cf8fb63e82b429a74958edeb8243a57a63e6e030b2670f73952f2d27cda556e0",
+      "original_trigger_verified": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/combat-extra/attackPsychic.ogg",
+          "seconds": 1.215542
+        }
+      ]
+    },
+    {
+      "id": "foeLunge",
+      "label": "敌方突进",
+      "group": "combat",
+      "note": "爪击突进",
+      "loop": false,
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/player/p_atk/p_atk_paw_h.mp3",
+      "source_path": "player/p_atk/p_atk_paw_h.mp3",
+      "source_sha256": "268c6e9d47b3d988ff95c08b695720a5fb18b15db30d35191332cc5859bb220f",
+      "original_trigger_verified": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/combat-extra/foeLunge.ogg",
+          "seconds": 0.609333
+        }
+      ]
+    },
+    {
+      "id": "burn",
+      "label": "焚毁",
+      "group": "combat",
+      "note": "火焰蚀损",
+      "loop": false,
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_char/b_char_fireharm.wav",
+      "source_path": "battle/b_char/b_char_fireharm.wav",
+      "source_sha256": "421e118041d99b807a2b846bc222f0f9afff470f0de8efaac01c1ce31fbd430f",
+      "original_trigger_verified": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/combat-extra/burn.ogg",
+          "seconds": 2.076479
+        }
+      ]
+    },
+    {
+      "id": "phaseSelf",
+      "label": "我方回合",
+      "group": "combat",
+      "note": "己方准备短音",
+      "loop": false,
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_char/b_char_set.wav",
+      "source_path": "battle/b_char/b_char_set.wav",
+      "source_sha256": "9210006c6c837f7eeb28fd3bbe2c372eb566810b1e58eb2e8203b28170533de2",
+      "original_trigger_verified": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/combat-extra/phaseSelf.ogg",
+          "seconds": 1.167104
+        }
+      ]
+    },
+    {
+      "id": "phaseFoe",
+      "label": "敌方回合",
+      "group": "combat",
+      "note": "敌方推进短音",
+      "loop": false,
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_char/b_char_breakingline.wav",
+      "source_path": "battle/b_char/b_char_breakingline.wav",
+      "source_sha256": "06d4466cef0037f8be765dfecbc99d1fca407de1d8bae3b858de491c8411d562",
+      "original_trigger_verified": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/combat-extra/phaseFoe.ogg",
+          "seconds": 1.466708
+        }
+      ]
+    },
+    {
+      "id": "rarePlay",
+      "label": "稀有卡打出",
+      "group": "combat",
+      "note": "稀有技能展开",
+      "loop": false,
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/player/p_skill/p_skill_specialboost.mp3",
+      "source_path": "player/p_skill/p_skill_specialboost.mp3",
+      "source_sha256": "71da186051e4314557c884fed2e5a2ee671a8643cddc3625abaa851175cecf35",
+      "original_trigger_verified": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/combat-extra/rarePlay.ogg",
+          "seconds": 2.341958
+        }
+      ]
+    },
+    {
+      "id": "battleEnter",
+      "label": "战斗开始",
+      "group": "combat",
+      "note": "战斗就绪",
+      "loop": false,
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_char/b_char_botready.wav",
+      "source_path": "battle/b_char/b_char_botready.wav",
+      "source_sha256": "5d80dba5038c9628c53b336ae89a6b020a9fc6cdafd4d39b319fcef52eda45c9",
+      "original_trigger_verified": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/combat-extra/battleEnter.ogg",
+          "seconds": 1.441417
+        }
+      ]
+    },
+    {
+      "id": "bossVictory",
+      "label": "首脑胜利",
+      "group": "combat",
+      "note": "重大胜利提示",
+      "loop": false,
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_ui/b_ui_act3funexwin.wav",
+      "source_path": "battle/b_ui/b_ui_act3funexwin.wav",
+      "source_sha256": "0b96c68e968b52e5c1ba3097e5f32926f4e666a71de2355b0499b2ba5d9500d2",
+      "original_trigger_verified": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/combat-extra/bossVictory.ogg",
+          "seconds": 3.950792
+        }
+      ]
+    },
+    {
+      "id": "runClear",
+      "label": "远征通关",
+      "group": "combat",
+      "note": "通关完成提示",
+      "loop": false,
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_ui/b_ui_act3funwin.wav",
+      "source_path": "battle/b_ui/b_ui_act3funwin.wav",
+      "source_sha256": "f204f618c098bf29f24ed9ca0b1b49d6be3fe176f102deeea49d14c6511bf220",
+      "original_trigger_verified": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/combat-extra/runClear.ogg",
+          "seconds": 3.912417
+        }
+      ]
+    }
+  ]
+}

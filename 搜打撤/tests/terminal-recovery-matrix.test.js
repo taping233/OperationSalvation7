@@ -56,6 +56,25 @@ describe('生产双键结算恢复边界', () => {
     for (let slotId = 1; slotId <= 5; slotId++) RunStorage.remove(slotId);
   });
 
+  it.each([false, true])('终局提交或中断恢复清除旧局 prev（中断=%s）', async interrupted => {
+    const f = seed(1);
+    expect(RunStorage.write(1, { hp: 25 })).toBe(true);
+    f.context.expectedRunRevision = RunStorage.readIdentity(1).value.revision;
+    const prev = 'sdt-run-1-prev';
+    expect(localStorage.getItem(prev)).not.toBeNull();
+    const result = await makeApi(1, { failpoint: point => {
+      if (interrupted && point === 'after-base') throw new Error('simulated restart');
+    } }).commitBaseAndRun(f.context, f.prepared);
+    if (interrupted) {
+      expect(result.code).toBe('SAVE_FAILED_PENDING_RECOVERY');
+      expect(localStorage.getItem(prev)).not.toBeNull();
+      expect((await makeApi(1).recoverSlotIfPending(1)).ok).toBe(true);
+    } else expect(result.ok).toBe(true);
+    expect(localStorage.getItem(f.k.run)).toBeNull();
+    expect(localStorage.getItem(prev)).toBeNull();
+    expect(JSON.parse(localStorage.getItem(f.k.base)).coins).toBe(17);
+  });
+
   it('无日志选档不需要 Web Locks；有空/坏日志或读错误时不能忽略', async () => {
     const f = seed(1);
     const lockRequest = vi.fn(locks.request);

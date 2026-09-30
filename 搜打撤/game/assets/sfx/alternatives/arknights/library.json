@@ -1,0 +1,157 @@
+{
+  "name": "方舟轻调试听库",
+  "version": "A",
+  "featuredLabel": "方舟轻调 · 十个",
+  "featuredTitle": "保留原录音质感，只做轻剪辑与配平；确认、格挡、破盾和登场为候选用途。",
+  "featuredIds": [
+    "click",
+    "confirm",
+    "card",
+    "attackSlash",
+    "parry",
+    "shieldBreak",
+    "heal",
+    "eventEnter",
+    "chestBurst",
+    "bossReveal"
+  ],
+  "groups": {
+    "ui": "界面反馈",
+    "cards": "卡牌动作",
+    "combat": "战斗与状态",
+    "nodes": "事件与登场",
+    "rewards": "开箱奖励"
+  },
+  "cues": [
+    {
+      "id": "click",
+      "label": "点击",
+      "group": "ui",
+      "loop": false,
+      "note": "复刻站明确注明来自游戏录制的按键点击音；轻配平。",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights/click.ogg",
+          "seconds": 0.217188
+        }
+      ]
+    },
+    {
+      "id": "confirm",
+      "label": "确认候选",
+      "group": "ui",
+      "loop": false,
+      "note": "主界面复刻站的第二种按钮短音，映射确认候选；原游戏确认触发未核验。",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights/confirm.ogg",
+          "seconds": 0.215646
+        }
+      ]
+    },
+    {
+      "id": "card",
+      "label": "出牌",
+      "group": "cards",
+      "loop": false,
+      "note": "原方舟剧情洗牌录音截取一个动作段；纸牌原质感，不追加合成层。",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights/card.ogg",
+          "seconds": 0.747333
+        }
+      ]
+    },
+    {
+      "id": "attackSlash",
+      "label": "刀刃攻击",
+      "group": "combat",
+      "loop": false,
+      "note": "player/p_atk 的刀刃攻击素材，保留原挥击结构。",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights/attackSlash.ogg",
+          "seconds": 1.018083
+        }
+      ]
+    },
+    {
+      "id": "parry",
+      "label": "格挡候选",
+      "group": "combat",
+      "loop": false,
+      "note": "player/p_imp 的 blackshield 命中素材映射格挡；具体角色与原触发未核验。",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights/parry.ogg",
+          "seconds": 0.756083
+        }
+      ]
+    },
+    {
+      "id": "shieldBreak",
+      "label": "破盾候选",
+      "group": "combat",
+      "loop": false,
+      "note": "原方舟玻璃破裂剧情素材映射屏障碎裂候选；并非已核实原版破盾声。",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights/shieldBreak.ogg",
+          "seconds": 1.083229
+        }
+      ]
+    },
+    {
+      "id": "heal",
+      "label": "治疗",
+      "group": "combat",
+      "loop": false,
+      "note": "player/p_atk 的 heal 治疗动作素材，保留原提示与尾音。",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights/heal.ogg",
+          "seconds": 0.765417
+        }
+      ]
+    },
+    {
+      "id": "eventEnter",
+      "label": "事件进入",
+      "group": "nodes",
+      "loop": false,
+      "note": "battle/b_ui 的 whoosh 界面过渡素材，仅在事件进入使用。",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights/eventEnter.ogg",
+          "seconds": 1.257771
+        }
+      ]
+    },
+    {
+      "id": "chestBurst",
+      "label": "开箱奖励候选",
+      "group": "rewards",
+      "loop": false,
+      "note": "battle/b_ui 的 rewardappear 奖励出现素材映射开箱反馈；无新增爆炸层。",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights/chestBurst.ogg",
+          "seconds": 0.669521
+        }
+      ]
+    },
+    {
+      "id": "bossReveal",
+      "label": "Boss 登场候选",
+      "group": "nodes",
+      "loop": false,
+      "note": "battle/b_ui 的 alarmenter 警报进入素材映射 Boss 预警；原登场触发未核验。",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights/bossReveal.ogg",
+          "seconds": 1.376229
+        }
+      ]
+    }
+  ]
+}

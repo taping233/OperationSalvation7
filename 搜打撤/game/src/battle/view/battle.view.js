@@ -151,10 +151,19 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
       const fresh = body.firstElementChild;
       fresh._battleToken = token;
       fresh._battleTemplate = fresh.cloneNode(true);
+      fresh._battleHtml = html;   // F4：模板字符串精确签名（见下方复用路径）
       fresh.classList.add('bt-entrance');   // 单位入场演出只挂场次首建；复用渲染绝不再带（令牌守卫）
       animateXpChip(body);
       return;
     }
+    // F4（09-30 性能审计）：html 与上一帧完全一致时，整舞台 rich 宏替换+解析与 12 个
+    // syncBattleSlot 的 outerHTML 序列化比对必然全部无更新——字符串精确相等是零误判
+    // 签名，直接短路（模板含随机内容时永不命中=退化为原行为，无损）。
+    if (stage._battleHtml === html) {
+      animateXpChip(body);
+      return;
+    }
+    stage._battleHtml = html;
     const template = document.createElement('template');
     template.innerHTML = SDT.Icons.rich(html);
     const next = template.content.firstElementChild;
@@ -165,6 +174,7 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
       const fresh = body.firstElementChild;
       fresh._battleToken = token;
       fresh._battleTemplate = fresh.cloneNode(true);
+      fresh._battleHtml = html;
       fresh.classList.add('bt-entrance');
       animateXpChip(body);
       return;

@@ -1,7 +1,10 @@
 import { spawnSync } from 'node:child_process';
 import path from 'node:path';
-import { describe, expect, it } from 'vitest';
+import {describe, expect, it, vi } from 'vitest';
 import { DIRTY_SCAN_ROOTS, parseStagedStatus, planForPaths } from '../scripts/acceptance-gate.mjs';
+
+// tsc 子进程类契约测试固有慢：默认 5s 在全量并行负载下必超时（与 boot.test 同族）
+vi.setConfig({ testTimeout: 20000, hookTimeout: 20000 });
 
 describe('分层验收选择', () => {
   it('测试文件小改只运行该测试', () => {
@@ -25,13 +28,40 @@ describe('分层验收选择', () => {
     expect(plan.tests).toContain('tests/card-render-context.test.js');
   });
 
-  it('数据与公共规则改动回退完整测试', () => {
-    expect(planForPaths(['game/data/pets.json']).mode).toBe('full');
+  it('数据与剧情改动走定向，不再一票全量', () => {
+    const pets = planForPaths(['game/data/pets.json']);
+    expect(pets.mode).toBe('quick');
+    expect(pets.tests).toContain('tests/cards-catalog.test.js');
+    expect(planForPaths(['game/data/cards-sync.json']).tests).toContain('tests/cards-sync-snapshot-guard.test.js');
+    expect(planForPaths(['narrative/events.ink']).tests).toEqual(['tests/compendium.test.js']);
+  });
+
+  it('公共规则与包配置、无契约脚本仍回退完整测试', () => {
     expect(planForPaths(['game/src/core/rule-config.js']).mode).toBe('full');
     expect(planForPaths(['game/src/hub/game.store.js']).mode).toBe('full');
     expect(planForPaths(['scripts/check-syntax.mjs']).mode).toBe('full');
     expect(planForPaths(['vite.config.js']).mode).toBe('full');
+    expect(planForPaths(['package.json']).mode).toBe('full');
     expect(planForPaths(['tests/not-present.test.js']).mode).toBe('full');
+  });
+
+  it('lockfile 单独变化只跑架构哨兵', () => {
+    const plan = planForPaths(['package-lock.json']);
+    expect(plan.mode).toBe('quick');
+    expect(plan.tests).toEqual(['tests/architecture-boundaries.test.js', 'tests/contracts.test.js']);
+  });
+
+  it('fixture 变更定向到引用它的测试', () => {
+    const plan = planForPaths(['tests/fixtures/card-effect-audit-known.json']);
+    expect(plan.mode).toBe('quick');
+    expect(plan.tests).toContain('tests/card-audit.test.js');
+  });
+
+  it('被删除的源文件只跑引用它的测试与架构哨兵', () => {
+    const plan = planForPaths(['game/src/battle/not-present.js']);
+    expect(plan.mode).toBe('quick');
+    expect(plan.tests).toContain('tests/acceptance-gate.test.js');
+    expect(plan.tests).toContain('tests/architecture-boundaries.test.js');
   });
 
   it('已映射的 Agent 工具只运行对应定向测试', () => {
@@ -47,6 +77,23 @@ describe('分层验收选择', () => {
     expect(runProvenance.mode).toBe('quick');
     expect(runProvenance.tests).toEqual(['tests/agent-run-provenance.test.js']);
   });
+  it('目录化后的战斗核心与运行态仍强制完整门', () => {
+    for (const file of ['game/src/battle/core/battle.engine.js', 'game/src/battle/core/battle.core.js',
+      'game/src/battle/runtime/battle.runtime.js', 'game/src/battle/runtime/battle.runtime.session.js']) {
+      const plan = planForPaths([file]);
+      expect(plan.mode).toBe('full');
+      expect(plan.reasons).toContain('公共状态、启动、规则或迁移边界变更需要全量测试');
+    }
+  });
+  it('已有直接契约的流程工具走快门，未知脚本仍全量', () => {
+    const plan = planForPaths(['scripts/workflow-task.mjs']);
+    expect(plan.mode).toBe('quick');
+    expect(plan.tests).toEqual(['tests/workflow-task.test.js']);
+    expect(planForPaths(['scripts/workflow-evidence.mjs']).tests).toContain('tests/workflow-scope.test.js');
+    expect(planForPaths(['scripts/acceptance-gate.mjs']).tests).toEqual(['tests/acceptance-gate.test.js']);
+    expect(planForPaths(['scripts/sync-cards-from-live.mjs']).tests).toContain('tests/sync-cards-from-live.test.js');
+    expect(planForPaths(['scripts/unknown-tool.mjs']).mode).toBe('full');
+  });
 
   it('没有直接覆盖测试的 Agent 工具和其他 game/tools 改动回退完整测试', () => {
     for (const file of ['game/tools/agent-ledger.mjs', 'game/tools/agent-batch.mjs', 'game/tools/bake-card-thumbs.cjs']) {
@@ -60,13 +107,15 @@ describe('分层验收选择', () => {
     expect(DIRTY_SCAN_ROOTS).toContain('搜打撤/game/tools');
   });
 
-  it('没有可确认测试的源码改动回退完整测试', () => {
-    expect(planForPaths(['game/src/battle/not-present.js']).mode).toBe('full');
-  });
-
   it('纯样式修改不冒充 Vitest 验收', () => {
     expect(planForPaths(['game/css/winter.css']).mode).toBe('skip');
     expect(planForPaths(['docs/quality-gates.md']).mode).toBe('skip');
+  });
+  it('文档机器计划明确skip，不输出PASS', () => {
+    const result = spawnSync(process.execPath, ['scripts/acceptance-gate.mjs', '--paths', 'docs/README.md', '--plan', '--json'], { cwd: process.cwd(), encoding: 'utf8' });
+    expect(result.status).toBe(0);
+    expect(JSON.parse(result.stdout)).toMatchObject({ mode: 'skip', tests: [] });
+    expect(result.stdout).not.toContain('PASS');
   });
 
   it('Windows 绝对路径仍映射到项目内测试', () => {

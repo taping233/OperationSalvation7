@@ -43,21 +43,29 @@ const extractionCommands = createExtractionCommands({
 });
 
 export function openFireRest() {
-  game.heal(MAP.rules.fireHeal);
-  UI.log(`[[icon:fire]] <b>进入火堆</b>：自动回复 <b>${MAP.rules.fireHeal}</b> 点生命`, 'ok');
-  // 2026-09-06 留言：火堆界面的音效删掉（原 levelup 提示音）
-  // 2026-09-20 老板：火堆只发本职业卡（randomClassCard 须传 game.myClass，不传会全职业混抽）；
-  //   获得演出带原因文字（营火余烬翻出），不再只靠侧边日志
-  if (Random.random('card') < MAP.rules.fireClassCardChance) {
-    const campCard = SDT.Cards.randomClassCard(game.myClass);
-    if (campCard) {
-      UI.log('[[icon:wood]] 营火余烬里翻出了一张先行者掉落的本职业卡！', 'loot');
-      grantEventCard(campCard, { reason: '营火余烬里翻出的先行者遗落卡 · 本职业限定' });
+  SDT.Sound.scene?.('fire', 'scene-fire-bg');
+  // 复原/发卡只在同一节点的首次进入结算（09-30 深审 WORLD-002）：复原页已挂背包返回钩子，
+  // 但任何仍可达的重入路径（关闭背包兜底回 idle 后再点节点）不得重复回复生命/掷职业卡
+  const cellKey = `${game.layerIdx},${game.trackPos}`;
+  if (game._fireRestKey !== cellKey) {
+    game._fireRestKey = cellKey;
+    game.heal(MAP.rules.fireHeal);
+    UI.log(`[[icon:fire]] <b>进入火堆</b>：自动回复 <b>${MAP.rules.fireHeal}</b> 点生命`, 'ok');
+    // 2026-09-06 留言：火堆界面的音效删掉（原 levelup 提示音）
+    // 2026-09-20 老板：火堆只发本职业卡（randomClassCard 须传 game.myClass，不传会全职业混抽）；
+    //   获得演出带原因文字（营火余烬翻出），不再只靠侧边日志
+    if (Random.random('card') < MAP.rules.fireClassCardChance) {
+      const campCard = SDT.Cards.randomClassCard(game.myClass);
+      if (campCard) {
+        UI.log('[[icon:wood]] 营火余烬里翻出了一张先行者掉落的本职业卡！', 'loot');
+        grantEventCard(campCard, { reason: '营火余烬里翻出的先行者遗落卡 · 本职业限定' });
+      }
     }
   }
   game.state = 'modal';
   openPocketRestore(2, () => {
     consumeCurrentCell();
+    game._fireRestKey = null;
     game.state = 'idle';
     saveGame();
     UI.refresh(game);
@@ -299,7 +307,7 @@ export function openClassChoice(options = {}) {
   UI.act('selClass', (d) => {
     if (d.cls === sel) return;
     sel = d.cls;
-    Sfx.tick();
+    SDT.Sound.sfx('characterSelect');
     render();
   });
   UI.act('clsPool', () => {
@@ -421,6 +429,7 @@ export function openDoorModal(door, cellDef) {
     UI.log(`穿过隔离闸门 → <b>${target.name}</b>`, 'sys');
     // 穿门换层走镜头补间（2026-09-27 二轮动效）：壁纸交叉溶解 + 相机滑入新环，不再硬切
     enterLayer(door.toLayer, door.arriveAt, { glideCam: true });
+    SDT.Sound.sfx('layerEnter');
   });
   UI.act('doorShop', () => openShop('door:' + door.pair));
   UI.refresh(game);
@@ -459,6 +468,7 @@ export function openAltarRitual(def) {
       nodeOpt('altarLeave', '离开', '祭坛保持沉睡——回到当前格子，稍后再来'),
   });
   const markActivated = () => {
+    SDT.Sound.sfx('altarActivate');
     game.altarActivated = true;
     game.visited = game.visited || {};
     game.visited[game.layerIdx + ',' + game.trackPos] = 1;   // 激活成功才消耗本格
@@ -472,6 +482,7 @@ export function openAltarRitual(def) {
     if (!game.usedPocket.length || !restorableN) { UI.log('[[icon:bag]] 消耗口袋里没有可复原的卡牌——先去战斗吧', 'warn'); return; }
     openBagSacrifice(1, (chosen) => {
       game.altarItemSacrificed = true;   // 确认献祭才上锁；取消献祭不上锁
+      SDT.Sound.sfx('altarOffer');
       UI.log(`[[icon:crystal]] 献上道具【<b>${esc(chosen[0].card.name)}</b>】——从消耗口袋复原卡牌（本祭坛的道具献祭已用完）`, 'loot');
       saveGame();
       openPocketRestore(Math.min(2, restorableN), () => { saveGame(); openAltarRitual(def); });
@@ -516,6 +527,7 @@ export function openAltarRitual(def) {
 // 激活后的奖励二选一（弃 3 张已支付）。奖励只能领取一次：进入即置待领标记，
 // 领取消耗标记；离开保留标记——回到本格可直接再进本面板（见 openAltarRitual / resolveCell）
 function openAltarReward() {
+  SDT.Sound.sfx('altarReward');
   game.state = 'modal';
   game.altarRewardPending = true;
   // 2026-09-10 留言 #33：消耗口袋没有可复原卡牌（或全是不可复原的道具/装备）时，
@@ -720,6 +732,7 @@ export function openEmergencyModal() {
     });
   }
   UI.act('payExit', () => {
+    SDT.Sound.sfx('extractionConfirm');
     UI.log('启动撤离信标，准备返回基地', 'sys');
     UI.hideOverlay();
     doExtract();
@@ -780,7 +793,7 @@ export async function doExtract() {
     game.extractionPending = false;
     game.pendingExtraction = started.value;
     game.runActive = true;
-    SDT.Sound.sfx('victory');
+    SDT.Sound.sfx('extractionSuccess');
     SDT.Sound.music('title');
     const { totalPocketCount, lostPocketCount } = started.value;
     if (totalPocketCount > 0) {
@@ -895,7 +908,7 @@ function renderExtractStash() {
     if (!stillThisView()) return;
     if (!saved.ok) { UI.log(`[[icon:cross]] 入库未保存：${saved.message || saved.code}，可重试`, 'warn'); return; }
     if (saved.unchanged) return;
-    Sfx.ding();
+    SDT.Sound.sfx('stashDeposit');
     UI.log(`[[icon:archive]] 【<b>${esc(s.card.name)}</b>】×${take} 已放入仓库`, 'loot');
     extractLeft = saved.value.remainingCards.map(stack => ({ card: { ...stack.card }, count: stack.count }));
     renderExtractStash();
@@ -905,7 +918,7 @@ function renderExtractStash() {
     const saved = await extractionCommands.updateCards(selections, viewRunId, viewSlot);
     if (!stillThisView()) return;
     if (!saved.ok) { UI.log(`[[icon:cross]] 入库未保存：${saved.message || saved.code}，可重试`, 'warn'); return; }
-    if (saved.count) { Sfx.ding(); UI.log(`[[icon:archive]] 全部入库：<b>${saved.count}</b> 张已放入仓库（仓库余 ${B.stashRoom()} 格）`, 'loot'); }
+    if (saved.count) { SDT.Sound.sfx('stashDeposit'); UI.log(`[[icon:archive]] 全部入库：<b>${saved.count}</b> 张已放入仓库（仓库余 ${B.stashRoom()} 格）`, 'loot'); }
     extractLeft = saved.value.remainingCards.map(stack => ({ card: { ...stack.card }, count: stack.count }));
     renderExtractStash();
   });
@@ -923,7 +936,7 @@ function renderExtractStash() {
     const saved = await extractionCommands.updateCards(selections, viewRunId, viewSlot);
     if (!stillThisView()) return;
     if (!saved.ok) { UI.log(`[[icon:cross]] 智能整理未保存：${saved.message || saved.code}，可重试`, 'warn'); return; }
-    if (saved.count) { Sfx.ding(); UI.log(`[[icon:archive]] 智能整理：按价值入库 <b>${saved.count}</b> 张（仓库余 ${B.stashRoom()} 格）`, 'loot'); }
+    if (saved.count) { SDT.Sound.sfx('stashDeposit'); UI.log(`[[icon:archive]] 智能整理：按价值入库 <b>${saved.count}</b> 张（仓库余 ${B.stashRoom()} 格）`, 'loot'); }
     extractLeft = saved.value.remainingCards.map(stack => ({ card: { ...stack.card }, count: stack.count }));
     renderExtractStash();
   });

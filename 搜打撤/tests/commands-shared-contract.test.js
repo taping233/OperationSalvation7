@@ -1,9 +1,12 @@
 // @vitest-environment node
-import { describe, expect, it } from 'vitest';
+import {describe, expect, it, vi } from 'vitest';
 import { API } from 'typescript/unstable/sync';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { fail, successReceipt } from '../game/src/hub/commands.shared.js';
+
+// tsc 子进程类契约测试固有慢：默认 5s 在全量并行负载下必超时（与 boot.test 同族）
+vi.setConfig({ testTimeout: 20000, hookTimeout: 20000 });
 
 const projectRoot = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const sharedPath = path.join(projectRoot, 'game/src/hub/commands.shared.js');

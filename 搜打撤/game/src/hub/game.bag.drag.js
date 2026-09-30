@@ -108,32 +108,48 @@ import { bagSlots } from './game.bag.bridge.js';
     if (bagDropMarked) { bagDropMarked.classList.remove('drop-here'); bagDropMarked = null; }
   }
 
+  // 高回报率鼠标合帧（09-30 性能审计 F2，同 battle.aim.js 模式）：pointermove 只采样坐标，
+  // elementFromPoint 命中检测/浮影定位每显示帧一次——此前逐事件全跑（125-1000Hz 设备上
+  // 每秒数百次强制命中测试 + 布局属性写入）
+  let bagDragFrame = 0;
+  let bagDragPoint = null;
   function onBagDragMove(e) {
     if (!bagDrag) return;
-    const dx = e.clientX - bagDrag.lx, dy = e.clientY - bagDrag.ly;
+    bagDragPoint = { x: e.clientX, y: e.clientY };
+    if (bagDragFrame) return;
+    bagDragFrame = requestAnimationFrame(bagDragFrameStep);
+  }
+  function bagDragFrameStep() {
+    bagDragFrame = 0;
+    if (!bagDrag || !bagDragPoint) return;
+    const x = bagDragPoint.x, y = bagDragPoint.y;
+    bagDragPoint = null;
+    const dx = x - bagDrag.lx, dy = y - bagDrag.ly;
     bagDrag.vx = bagDrag.vx * 0.72 + dx * 0.9;   // 平滑速度 → 3D 倾角
     bagDrag.vy = bagDrag.vy * 0.72 + dy * 0.9;
-    bagDrag.lx = e.clientX; bagDrag.ly = e.clientY;
+    bagDrag.lx = x; bagDrag.ly = y;
     if (!bagDrag.moved) {
-      if (Math.hypot(e.clientX - bagDrag.sx, e.clientY - bagDrag.sy) < 5) return;
+      if (Math.hypot(x - bagDrag.sx, y - bagDrag.sy) < 5) return;
       bagDrag.moved = true;
       makeBagGhost(bagDrag.name);
     }
     if (bagDrag.ghost) {
-      bagDrag.ghost.style.left = e.clientX + 'px';
-      bagDrag.ghost.style.top = e.clientY + 'px';
+      // 浮影定位走合成器 transform（left/top 是布局属性，每帧写会触发布局）
+      bagDrag.ghost.style.transform = `translate3d(${x}px, ${y}px, 0)`;
       const ry = Math.max(-30, Math.min(30, bagDrag.vx * 1.5));
       const rx = Math.max(-22, Math.min(22, -bagDrag.vy * 1.4));
       bagDrag.card3d.style.transform =
         `translate(-50%, -62%) rotateX(${rx.toFixed(1)}deg) rotateY(${ry.toFixed(1)}deg) scale(1.07)`;
     }
     clearBagDropMark();
-    const t = bagDropTarget(e.clientX, e.clientY, bagDrag.cell);
+    const t = bagDropTarget(x, y, bagDrag.cell);
     if (t && t.el) { t.el.classList.add('drop-here'); bagDropMarked = t.el; }
   }
 
   function onBagDragUp(e) {
     window.removeEventListener('pointermove', onBagDragMove);
+    if (bagDragFrame) { cancelAnimationFrame(bagDragFrame); bagDragFrame = 0; }
+    bagDragPoint = null;
     clearBagDropMark();
     // 兜底清一次（战斗悬停等也用 drop-here 类；一次性查询开销可忽略）
     document.querySelectorAll('#ovBody .drop-here').forEach(el => el.classList.remove('drop-here'));

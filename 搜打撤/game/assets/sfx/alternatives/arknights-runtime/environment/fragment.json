@@ -1,0 +1,302 @@
+{
+  "groups": {
+    "ambient": "场景环境",
+    "nodes": "节点与探索"
+  },
+  "cues": [
+    {
+      "id": "altarOffer",
+      "label": "祭坛献祭",
+      "group": "nodes",
+      "loop": false,
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_glassclink.wav",
+      "gain": 0.5,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/environment/altarOffer.ogg",
+          "seconds": 0.9546
+        }
+      ]
+    },
+    {
+      "id": "altarReward",
+      "label": "祭坛回赠",
+      "group": "nodes",
+      "loop": false,
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_magic_3.wav",
+      "gain": 0.5,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/environment/altarReward.ogg",
+          "seconds": 1.7366
+        }
+      ]
+    },
+    {
+      "id": "eggHatch",
+      "label": "宠物孵化",
+      "group": "nodes",
+      "loop": false,
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_icebrk.wav",
+      "gain": 0.5,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/environment/eggHatch.ogg",
+          "seconds": 2.4762
+        }
+      ]
+    },
+    {
+      "id": "petRescue",
+      "label": "救援生物",
+      "group": "nodes",
+      "loop": false,
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_catsmell.wav",
+      "gain": 0.5,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/environment/petRescue.ogg",
+          "seconds": 0.5402
+        }
+      ]
+    },
+    {
+      "id": "eventClue",
+      "label": "发现线索",
+      "group": "nodes",
+      "loop": false,
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_magicwrite.wav",
+      "gain": 0.5,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/environment/eventClue.ogg",
+          "seconds": 2.4762
+        }
+      ]
+    },
+    {
+      "id": "eventComplete",
+      "label": "事件完成",
+      "group": "nodes",
+      "loop": false,
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_magic_2.wav",
+      "gain": 0.5,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/environment/eventComplete.ogg",
+          "seconds": 1.9019
+        }
+      ]
+    },
+    {
+      "id": "eventDanger",
+      "label": "危险事件",
+      "group": "nodes",
+      "loop": false,
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_airdefensealert.wav",
+      "gain": 0.5,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/environment/eventDanger.ogg",
+          "seconds": 2.4707
+        }
+      ]
+    },
+    {
+      "id": "eventSafe",
+      "label": "安全事件",
+      "group": "nodes",
+      "loop": false,
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_magic_1.wav",
+      "gain": 0.5,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/environment/eventSafe.ogg",
+          "seconds": 1.6946
+        }
+      ]
+    },
+    {
+      "id": "extractionConfirm",
+      "label": "确认撤离",
+      "group": "nodes",
+      "loop": false,
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_devicebeep.wav",
+      "gain": 0.5,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/environment/extractionConfirm.ogg",
+          "seconds": 0.1876
+        }
+      ]
+    },
+    {
+      "id": "layerEnter",
+      "label": "进入环层",
+      "group": "nodes",
+      "loop": false,
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_machineactive.wav",
+      "gain": 0.5,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/environment/layerEnter.ogg",
+          "seconds": 2.465
+        }
+      ]
+    },
+    {
+      "id": "searchStart",
+      "label": "搜索物资",
+      "group": "nodes",
+      "loop": false,
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_scan.wav",
+      "gain": 0.5,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/environment/searchStart.ogg",
+          "seconds": 1.4328
+        }
+      ]
+    },
+    {
+      "id": "searchReveal",
+      "label": "搜索揭晓",
+      "group": "nodes",
+      "loop": false,
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_char/b_char_radar.wav",
+      "gain": 0.5,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/environment/searchReveal.ogg",
+          "seconds": 2.4537
+        }
+      ]
+    },
+    {
+      "id": "storyClue",
+      "label": "故事线索",
+      "group": "nodes",
+      "loop": false,
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_book_close.wav",
+      "gain": 0.5,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/environment/storyClue.ogg",
+          "seconds": 1.0329
+        }
+      ]
+    },
+    {
+      "id": "storyComplete",
+      "label": "故事完成",
+      "group": "nodes",
+      "loop": false,
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_piano_start.wav",
+      "gain": 0.5,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/environment/storyComplete.ogg",
+          "seconds": 2.4762
+        }
+      ]
+    },
+    {
+      "id": "windSnowLoop",
+      "label": "风雪环境",
+      "group": "ambient",
+      "loop": true,
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_amb_blizzard.wav",
+      "gain": 0.14,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/environment/windSnowLoop.ogg",
+          "seconds": 11.4147
+        }
+      ]
+    },
+    {
+      "id": "wastelandWindLoop",
+      "label": "荒野风声",
+      "group": "ambient",
+      "loop": true,
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_wind.wav",
+      "gain": 0.14,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/environment/wastelandWindLoop.ogg",
+          "seconds": 4.0711
+        }
+      ]
+    },
+    {
+      "id": "ruinsAirLoop",
+      "label": "废墟气流",
+      "group": "ambient",
+      "loop": true,
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_darkforest.wav",
+      "gain": 0.14,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/environment/ruinsAirLoop.ogg",
+          "seconds": 9.5329
+        }
+      ]
+    },
+    {
+      "id": "pollutionDroneLoop",
+      "label": "污染区环境",
+      "group": "ambient",
+      "loop": true,
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_drone.wav",
+      "gain": 0.14,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/environment/pollutionDroneLoop.ogg",
+          "seconds": 3.7812
+        }
+      ]
+    },
+    {
+      "id": "fireLoop",
+      "label": "营火环境",
+      "group": "ambient",
+      "loop": true,
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_woodcracle.wav",
+      "gain": 0.14,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/environment/fireLoop.ogg",
+          "seconds": 5.5842
+        }
+      ]
+    },
+    {
+      "id": "altarHumLoop",
+      "label": "祭坛环境",
+      "group": "ambient",
+      "loop": true,
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_beamamb.wav",
+      "gain": 0.14,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/environment/altarHumLoop.ogg",
+          "seconds": 5.2613
+        }
+      ]
+    },
+    {
+      "id": "extractionBeaconLoop",
+      "label": "撤离信标环境",
+      "group": "ambient",
+      "loop": true,
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_labamb.wav",
+      "gain": 0.14,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/environment/extractionBeaconLoop.ogg",
+          "seconds": 5.8711
+        }
+      ]
+    }
+  ]
+}

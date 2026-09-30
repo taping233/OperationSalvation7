@@ -175,6 +175,7 @@ import { LEVEL_MAX, addXpToProgress, xpForNext } from './meta-progression.js';
         `${ups ? `（升级了 ${ups} 级！）` : ''}`, 'ok');
     }
     checkCollMilestones();
+    SDT.Sound?.sfx('collectionUnlock');
     return { cls: card.cls, amount, ups };
   }
 
@@ -266,6 +267,7 @@ import { LEVEL_MAX, addXpToProgress, xpForNext } from './meta-progression.js';
     const seen = seenSet();
     const fresh = ACHIEVEMENTS.filter(a => isUnlocked(a) && !isClaimed(a.id) && !seen.has('ach:' + a.id));
     fresh.forEach(a => { seen.add('ach:' + a.id); });
+    if (fresh.length) SDT.Sound?.sfx('achievementUnlock');
     fresh.forEach(a => {
       if (SDT.UI) SDT.UI.log(`[[icon:trophy]] 成就解锁【<b>${a.name}</b>】${a.desc}——回基地领取奖励`, 'loot');
     });

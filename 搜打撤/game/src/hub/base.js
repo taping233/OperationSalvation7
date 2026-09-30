@@ -505,7 +505,7 @@ import { createBaseMetaCommands } from './base-meta.commands.js';
     const unowned = PETS.filter(p => !data.pets[p.id]);
     if (!unowned.length) return { ok: false, why: 'all' };
     const pet = unowned[Math.floor(Random.random('pet') * unowned.length)];
-    return mutate(draft => {
+    const result = mutate(draft => {
       const stack = draft.stash[i];
       stack.count -= 1;
       if (stack.count <= 0) draft.stash.splice(i, 1);
@@ -514,6 +514,8 @@ import { createBaseMetaCommands } from './base-meta.commands.js';
       if (!draft.petSel) draft.petSel = pet.id;
       return { ok: true, pet };
     }, { ok: false, why: 'save' });
+    if (result.ok) window.SDT.Sound?.sfx('eggHatch');
+    return result;
   }
 
   // 按名从仓库取出 n 张（出发准备页选择携带时用）；返回实际取出的张数

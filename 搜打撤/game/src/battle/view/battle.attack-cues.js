@@ -8,7 +8,7 @@ const CUES = Object.freeze({
 });
 
 /** Return a fresh, validated cue or undefined when the damage kind is unknown. */
-export function attackCue(damageKind) {
+export function attackCue(damageKind, card) {
   if (!Object.prototype.hasOwnProperty.call(CUES, damageKind)) return undefined;
   const cue = CUES[damageKind];
   const windupMs = Number(cue?.windupMs);
@@ -16,5 +16,13 @@ export function attackCue(damageKind) {
   if (!['player-attack', 'player-spell'].includes(cue.attacker)) return undefined;
   if (!['target-damage', 'target-magic'].includes(cue.hit)) return undefined;
   if (cue.hitSound !== null && typeof cue.hitSound !== 'string') return undefined;
-  return { windupMs, attacker: cue.attacker, hit: cue.hit, hitSound: cue.hitSound };
+  const name = String(card?.name || '');
+  const materialSounds = [
+    [/雷|电|射线/, 'attackLightning'], [/火|焰|燃|烟火|余烬|灼/, 'attackFire'],
+    [/冰|冻|霜|寒/, 'attackIce'], [/毒|腐化|腐蚀/, 'attackPoison'],
+    [/弓|箭/, 'attackArrow'], [/精神|心灵|幻|梦/, 'attackPsychic'],
+    [/穿刺|突刺|长枪|枪刺|刺击/, 'attackPierce'], [/拳|掌|锤|砸|钝|打击/, 'attackBlunt'],
+  ];
+  const hitSound = materialSounds.find(([pattern]) => pattern.test(name))?.[1] || cue.hitSound;
+  return { windupMs, attacker: cue.attacker, hit: cue.hit, hitSound };
 }

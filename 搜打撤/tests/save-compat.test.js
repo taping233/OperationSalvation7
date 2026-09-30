@@ -107,6 +107,35 @@ describe('固定旧档兼容样本', () => {
     expect(localStorage.getItem('sdt-run-2-prev')).toBeNull();
   });
 
+  it('新局首写清除历史终局遗留 prev，坏主档不能复活旧局', () => {
+    const prev = 'sdt-run-2-prev';
+    localStorage.setItem(prev, JSON.stringify({ version: 2, hp: 10, _r2: { runId: 'completed-run', revision: 1 } }));
+    expect(RunStorage.write(2, { hp: 50 })).toBe(true);
+    expect(localStorage.getItem(prev)).toBeNull();
+    localStorage.setItem(RunStorage.key(2), '{broken-new-run');
+    expect(RunStorage.read(2)).toBeNull();
+    expect(localStorage.getItem(RunStorage.key(2))).toBe('{broken-new-run');
+  });
+
+  it('旧备份无法清理时拒绝新局首写，保留原键与其他档位', () => {
+    const prev = 'sdt-run-2-prev';
+    const old = JSON.stringify({ version: 2, hp: 10 });
+    localStorage.setItem(prev, old);
+    localStorage.setItem(RunStorage.key(3), 'other-slot');
+    const remove = Storage.prototype.removeItem;
+    const blocked = vi.spyOn(Storage.prototype, 'removeItem').mockImplementation(function (key) {
+      if (key === prev) throw new Error('backup cleanup denied');
+      return remove.call(this, key);
+    });
+    try {
+      expect(RunStorage.write(2, { hp: 50 })).toBe(false);
+      expect(RunStorage.lastWriteIssue(2)).toBe('STORAGE');
+      expect(localStorage.getItem(RunStorage.key(2))).toBeNull();
+      expect(localStorage.getItem(prev)).toBe(old);
+      expect(localStorage.getItem(RunStorage.key(3))).toBe('other-slot');
+    } finally { blocked.mockRestore(); }
+  });
+
   it('无编辑基线时也拒绝覆盖另一标签刚创建的对局', () => {
     const latest = JSON.stringify({ version: RunStorage.SAVE_VERSION, hp: 27,
       _r2: { runId: 'new-slot-run', revision: 0 } });

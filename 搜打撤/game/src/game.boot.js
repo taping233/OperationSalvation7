@@ -34,6 +34,7 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
   } });
   function bindInput() {
     let dragging = false, downPos = null, lastPos = null, pointerId = null;
+    let downWorld = null;   // down 时刻锁定的世界坐标（见 pointerdown）
     let hoverFrame = 0, pendingHover = null;
 
     const scheduleHover = (e) => {
@@ -52,6 +53,11 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
       pointerId = e.pointerId;
       canvas.setPointerCapture?.(pointerId);
       downPos = lastPos = { x: e.clientX, y: e.clientY };
+      // 点击意图的世界坐标必须在 down 时刻锁定（09-30 深审 INFRA-07）：自动镜头回中/
+      // 取景 glide 会在 down→up 之间平移相机，up 时再用「当时相机」反推 down 屏幕点
+      // 会得到偏移的世界坐标——快速点击会点偏到别的节点
+      const rd = canvas.getBoundingClientRect();
+      downWorld = cam.screenToWorld(e.clientX - rd.left, e.clientY - rd.top);
       dragging = false;
       game.camDragging = false;
       e.preventDefault();
@@ -82,11 +88,9 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
         const inside = e.clientX >= r.left && e.clientX <= r.right &&
                        e.clientY >= r.top && e.clientY <= r.bottom;
         if (inside) {
-          // 点击意图形成于 pointerdown 那一刻；自动镜头回中/移动会在 down→up 之间平移相机，
-          // 按 up 位置反推世界坐标会点偏到别的节点或落空——节点内容不触发、变成"僵尸节点"。
-          // 所以先按 down 时刻的世界坐标取节点，落空再用 up 位置兜底。
-          const wDown = cam.screenToWorld(downPos.x - r.left, downPos.y - r.top);
-          let n = pickNode(wDown.x, wDown.y, true);
+          // 点击意图形成于 pointerdown 那一刻（世界坐标已在 down 时锁定）；
+          // 落空再用 up 位置兜底（正常点击两者一致）
+          let n = downWorld ? pickNode(downWorld.x, downWorld.y, true) : null;
           if (!n) {
             const wUp = cam.screenToWorld(e.clientX - r.left, e.clientY - r.top);
             n = pickNode(wUp.x, wUp.y, true);
@@ -106,6 +110,7 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
         }
       }
       downPos = null;
+      downWorld = null;
       game.camDragging = false;
       canvas.releasePointerCapture?.(pointerId);
       pointerId = null;
@@ -603,13 +608,33 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
   }
   window.addEventListener('DOMContentLoaded', () => {
     stripNativeTitles(document);
+    // 整页重建（卡牌库/背包/战斗换槽）一批会塞进数百 addedNodes，此前逐节点即时
+    // querySelectorAll；改为收集去重 + rAF 合帧后每根一次性处理（同 icons-bitmap
+    // 观察器的做法）。title 只在悬停时可见，一帧内延迟摘除无感知差异。
+    let titleFlushQueued = false;
+    const titleDirtyRoots = new Set();
+    const flushTitleRoots = () => {
+      titleFlushQueued = false;
+      const roots = Array.from(titleDirtyRoots).filter(Boolean);
+      titleDirtyRoots.clear();
+      roots.forEach((root, i) => {
+        if (!root.isConnected) return;
+        if (roots.some((parent, j) => j !== i && parent !== root && parent.contains && parent.contains(root))) return;
+        stripNativeTitles(root);
+      });
+    };
     const titleObserver = new MutationObserver((muts) => {
       for (const m of muts) {
         if (m.type === 'attributes') {
+          // 单点属性变更即时摘除（无子树扫描成本）
           if (m.target && m.target.getAttribute && m.target.getAttribute('title') != null) m.target.removeAttribute('title');
         } else if (m.type === 'childList') {
-          m.addedNodes.forEach(n => { if (n.nodeType === 1) stripNativeTitles(n); });
+          m.addedNodes.forEach(n => { if (n.nodeType === 1) titleDirtyRoots.add(n); });
         }
+      }
+      if (!titleFlushQueued && titleDirtyRoots.size) {
+        titleFlushQueued = true;
+        (typeof requestAnimationFrame === 'function' ? requestAnimationFrame : setTimeout)(flushTitleRoots);
       }
     });
     titleObserver.observe(document.documentElement, { subtree: true, childList: true, attributes: true, attributeFilter: ['title'] });

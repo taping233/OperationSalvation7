@@ -45,6 +45,9 @@ function drawCards(n) {
       if (hand.length >= effectiveHandMax(R().battleHandMax)) {
         if (ashRune && entry && ['武术', '法术'].includes(entry.card.type)) {
           G.log('[[icon:fire]] <b>灰烬符文</b>：手牌已满，直接释放【' + esc(entry.card.name) + '】', 'sys');
+          // 直释视同已打出：uid 必须留在牌堆簿记里，否则从所有牌区消失、无法洗回
+          // （09-30 深审 BC-02；与 execPlay 普通打出的 discard.push 同口径）
+          discard.push(uid);
           resolveCard(entry.card, alive()[0] || null, false, 0);
           got++;
           continue;
@@ -135,6 +138,10 @@ function deckDraw({ n, type }) {
       }
       // rest 按 pop 序（顶→底）累积，直接 push 会把相对顺序翻转（原顶牌沉底）；reverse 归位
       drawPile.push(...rest.reverse());
+      // BOSS 模式只实抽牌库：搜完仍不足就少抽，不再从全卡池凭空生成套牌外的牌
+      // （09-30 深审 BC-03——武装「从牌库中抽取 2 张装备」牌库没有装备时不得随机补足）
+      if (moved) G.log(`[[icon:cards]] 从牌库抽取 ${moved} 张【${esc(type)}】牌`, 'sys');
+      return moved;
     }
     const pool = SDT.Cards.all().filter(c => c.type === type && c.rarity !== '衍生' && !['生物', '事件'].includes(c.type));
     while (moved < n) {
@@ -142,7 +149,7 @@ function deckDraw({ n, type }) {
       addTempCard(pool[Math.floor(Random.random('battle') * pool.length)]);
       moved++;
     }
-    if (moved) G.log(`[[icon:cards]] ${mode === 'boss' ? '从牌库' : '（普通战斗无牌库，改为直接获得）'}抽取 ${moved} 张【${esc(type)}】牌`, 'sys');
+    if (moved) G.log(`[[icon:cards]] （普通战斗无牌库，改为直接获得）抽取 ${moved} 张【${esc(type)}】牌`, 'sys');
     return moved;
   }
 function releaseHandMatches(key, drawEach, max) {

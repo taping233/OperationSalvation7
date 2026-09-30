@@ -42,7 +42,18 @@ import { restoreAtkDown } from '../effects/effect-steps.m2.js';
       const o = findCard(u0);
       if (o && !unplayableReason(o.card) && effCostOf(o.card, u0) <= energy) {
         G.log('[[icon:bolt]] <b>极速符文</b>：回合结束，打出最左侧的手牌', 'sys');
-        queueCardExecution(u0, o.card, [], alive()[0] || null, false);
+        // 打出完成后必须续接回合结束流程：此前直接 return，action-runner 收口把
+        // 阶段还原 player，敌方阶段/毒伤/敌方攻击全被跳过（09-30 深审 BC-01）
+        const endTurnToken = battleState.token;
+        queueCardExecution(u0, o.card, [], alive()[0] || null, false, false, [], () => {
+          if (!G?.battleActive || battleState.token !== endTurnToken ||
+              battleState.phase === BATTLE_PHASES.VICTORY || battleState.phase === BATTLE_PHASES.DEFEAT) return;
+          transitionTo(BATTLE_PHASES.ENEMY);
+          clearTargetHint();
+          const enemyToken = battleState.token;
+          const stillEnemyPhase = () => G?.battleActive && battleState.token === enemyToken && battleState.phase === BATTLE_PHASES.ENEMY;
+          void resolvePlayerEndTurn(enemyToken, stillEnemyPhase).catch(error => recoverAutoPhaseError(error, enemyToken, BATTLE_PHASES.ENEMY));
+        });
         requestBattleRender();
         return;
       }

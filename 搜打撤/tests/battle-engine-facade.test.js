@@ -13,6 +13,7 @@ const BASELINE_EXPORTS = [
   'intentFor', 'drawCards', 'resolveFoeDefeat', 'sweepDead', 'nestPhase', 'grantSha',
   'findCard', 'infuseOf', 'effCostOf', 'swapCardCosts', 'restore', 'finish',
   'cancelInteraction', 'flee', 'handCurseSpecs', 'getSnapshot', 'snapshotSignature',
+  'getBattleLiveness',
   'processDelayed', 'accrueGrowth', 'resolveCard', 'resolveCardWithFeedback',
   'syncCurseCondEquips', 'useEquipSkill', 'applyKillRewards', 'start',
   'fireTurnEndTriggers', 'addTempCard', 'fireConsumeTriggers', 'toggleDeckCard',
@@ -29,7 +30,7 @@ describe('battle.engine 导出面守卫', () => {
     expect(Object.keys(Engine).sort()).toEqual([...BASELINE_EXPORTS].sort());
   });
 
-  it('基线数量 = 64', () => {
-    expect(BASELINE_EXPORTS.length).toBe(64);
+  it('基线数量 = 65', () => {
+    expect(BASELINE_EXPORTS.length).toBe(65);
   });
 });

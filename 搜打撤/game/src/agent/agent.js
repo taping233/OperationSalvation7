@@ -7,6 +7,7 @@
  *   SDT.Agent.step(decide)        → 观察→决策→执行→等稳 一步
  *   SDT.Agent.autoRun({ decide }) → 连续驱动一局
  *   SDT.Agent.setTurbo(true)      → 快进（演出短路）
+ *   SDT.Agent.scenes.run(name)    → 固定验收剧本（断言+报告 JSON，见 agent.scenes.js）
  * decide 契约：(obs) => action | null（null = 停止驱动）。
  * 协议详情见 docs/agent-protocol.md。
  * ============================================================ */
@@ -19,6 +20,7 @@ import { greedyPolicy, randomPolicy, strategicPolicy } from './agent.policy.js';
 import { decide as llmDecide, loadConfig as llmLoadConfig, saveConfig as llmSaveConfig, isEnabled as llmEnabled } from './agent.llm.js';
 import * as recorder from './agent.recorder.js';
 import * as stats from './agent.stats.js';
+import { runScene, startScene, sceneStatus, listScenes } from './agent.scenes.js';
 import { openDataPage, dataPanelHTML } from './agent.data.js';
 
 const Agent = Object.freeze({
@@ -41,6 +43,7 @@ const Agent = Object.freeze({
     getDriver: recorder.getDriver,
   }),
   stats: Object.freeze({ aggregate: stats.aggregate, brief: stats.brief }),
+  scenes: Object.freeze({ run: runScene, start: startScene, status: sceneStatus, list: listScenes }),
   openDataPage,
   dataPanelHTML,
   isTurbo, setTurbo,

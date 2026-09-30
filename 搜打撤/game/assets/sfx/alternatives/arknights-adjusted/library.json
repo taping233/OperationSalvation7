@@ -1,0 +1,157 @@
+{
+  "name": "方舟微改试听库",
+  "version": "A2",
+  "featuredLabel": "方舟微改 · 十个",
+  "featuredTitle": "保留主体质感，轻调音色、节奏与尾音",
+  "featuredIds": [
+    "click",
+    "confirm",
+    "card",
+    "attackSlash",
+    "parry",
+    "shieldBreak",
+    "heal",
+    "eventEnter",
+    "chestBurst",
+    "bossReveal"
+  ],
+  "groups": {
+    "ui": "界面反馈",
+    "cards": "卡牌动作",
+    "combat": "战斗与状态",
+    "nodes": "事件与登场",
+    "rewards": "开箱奖励"
+  },
+  "cues": [
+    {
+      "id": "click",
+      "label": "点击",
+      "group": "ui",
+      "loop": false,
+      "note": "音色略沉，点击更紧凑",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-adjusted/click.ogg",
+          "seconds": 0.200896
+        }
+      ]
+    },
+    {
+      "id": "confirm",
+      "label": "确认候选",
+      "group": "ui",
+      "loop": false,
+      "note": "确认候选，音高略升、收束更短",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-adjusted/confirm.ogg",
+          "seconds": 0.20525
+        }
+      ]
+    },
+    {
+      "id": "card",
+      "label": "出牌",
+      "group": "cards",
+      "loop": false,
+      "note": "纸牌滑动略快，尾音稍短",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-adjusted/card.ogg",
+          "seconds": 0.685417
+        }
+      ]
+    },
+    {
+      "id": "attackSlash",
+      "label": "刀刃攻击",
+      "group": "combat",
+      "loop": false,
+      "note": "挥击更紧，音色略沉",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-adjusted/attackSlash.ogg",
+          "seconds": 0.97625
+        }
+      ]
+    },
+    {
+      "id": "parry",
+      "label": "格挡候选",
+      "group": "combat",
+      "loop": false,
+      "note": "格挡候选，降低音高与尾音亮度",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-adjusted/parry.ogg",
+          "seconds": 0.742667
+        }
+      ]
+    },
+    {
+      "id": "shieldBreak",
+      "label": "破盾候选",
+      "group": "combat",
+      "loop": false,
+      "note": "碎裂略快，减少尖亮",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-adjusted/shieldBreak.ogg",
+          "seconds": 1.000333
+        }
+      ]
+    },
+    {
+      "id": "heal",
+      "label": "治疗",
+      "group": "combat",
+      "loop": false,
+      "note": "治疗提示略升，展开稍缓",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-adjusted/heal.ogg",
+          "seconds": 0.781083
+        }
+      ]
+    },
+    {
+      "id": "eventEnter",
+      "label": "事件进入",
+      "group": "nodes",
+      "loop": false,
+      "note": "保留吸入与展开，节奏更紧",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-adjusted/eventEnter.ogg",
+          "seconds": 1.209396
+        }
+      ]
+    },
+    {
+      "id": "chestBurst",
+      "label": "开箱奖励候选",
+      "group": "rewards",
+      "loop": false,
+      "note": "奖励反馈略快，收尾更短",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-adjusted/chestBurst.ogg",
+          "seconds": 0.619729
+        }
+      ]
+    },
+    {
+      "id": "bossReveal",
+      "label": "Boss 登场候选",
+      "group": "nodes",
+      "loop": false,
+      "note": "警报预告略沉、稍缓",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-adjusted/bossReveal.ogg",
+          "seconds": 1.418792
+        }
+      ]
+    }
+  ]
+}

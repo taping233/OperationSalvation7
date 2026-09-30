@@ -1,0 +1,40 @@
+C - Action and Material / 动作材质
+All source releases used by these ten audio cues are CC0 1.0 Universal.
+https://creativecommons.org/publicdomain/zero/1.0/
+Optional author credit is retained below; attribution is not a CC0 condition.
+
+StarNinjas: 20 Sword Sound Effects (Attacks and Clashes)
+https://opengameart.org/content/20-sword-sound-effects-attacks-and-clashes
+https://opengameart.org/users/starninjas
+Used: sword.6.ogg and sword_clash.5.ogg, for attackSlash and parry.
+
+Vehicle: Fantasy Sound Effects (Tinysized SFX)
+https://opengameart.org/content/fantasy-sound-effects-tinysized-sfx
+http://www.vehiclemusic.eu
+Original package readme: "Distributed under Creative Commons Zero"
+Used: scissors-close-01.wav, handcuffs-metal-lock-01.wav, book-page-02.wav,
+tube-plastic-whoosh-01.wav, bottle-glass-uncork-01.wav, water-vial-fill-01.wav,
+water-drop-01.wav, drawer-open-01.wav, keyhole-lockbox-turn-01.wav,
+drawer-close-01.wav, coins-shake-01.wav, metal-hammer-hit-02.wav.
+
+rubberduck: 75 CC0 breaking / falling / hit sfx
+https://opengameart.org/content/75-cc0-breaking-falling-hit-sfx
+https://opengameart.org/users/rubberduck
+Used: bfh1_metal_hit_04.ogg and bfh1_glass_breaking_02.ogg, for shieldBreak.
+
+DenisChardonnet / BigSoundBank: Grinding Metal Gate #1 (sound 303)
+https://bigsoundbank.com/grinding-metal-gate-1-s0303.html
+https://bigsoundbank.com/licenses.html
+Original sound page: "CC0 (public domain): Free and royalty-free"
+Used: 0303.mp3, for bossReveal.
+Optional site credit: Additional sounds: Joseph SARDIN - BigSoundBank.com.
+
+Edits (2026-09-30): trim, 48kHz stereo resample, fade, level balance,
+35Hz high-pass, selected source layering/offsets. bossReveal additionally
+uses 0.88x gate / 0.94x hammer speeds and low-pass at 5.8kHz / 7.2kHz.
+Encoded as OGG Vorbis using existing ffmpeg libvorbis quality 5.
+No procedural noise or tone synthesis was added. Not manually auditioned.
+
+Complete original page/license captures, downloaded source archives and
+per-layer processing/hash records are retained in:
+docs/evidence/2026-09-30-sfx-alternatives/C-cc0-action/

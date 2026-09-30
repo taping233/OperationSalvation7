@@ -187,19 +187,21 @@ export function openPickupPage(kind, gain, onDone, skipSearch = false) {
         <span class="ps-ground"><i></i></span>
         <p class="ps-tip">正在搜索物资…</p>
       </div>` });
-  SDT.Sound.sfx('pick');
+  if (!skipSearch) SDT.Sound.sfx('searchStart');
   const main = UI.el.ovBody.querySelector('.node-main');
   const reveal = () => {
     if (!main || !main.isConnected) return;   // 页面已被换掉/关掉就不再揭晓
     main.innerHTML = `<p class="gain-big">${gain}</p>
       <button class="evt-opt ok" data-act="pickupGo"><b>获取并离开</b></button>`;
-    SDT.Sound.sfx('gain');
+    if (!skipSearch) SDT.Sound.sfx('searchReveal');
     const go = main.querySelector('[data-act="pickupGo"]');
     if (go) go.focus({ preventScroll: true });
+    // 注册随揭晓走：closeBackpack 会清空动作表，背包返回的重入路径（skipSearch）此前
+    // 提前 return 不注册，恢复页有按钮无处理器、奖励永远领不出（09-30 深审 WORLD-001）
+    UI.act('pickupGo', () => { setBagReturnHook(null); UI.hideOverlay(); onDone(); });
   };
   if (skipSearch) { reveal(); return; }
   setTimeout(reveal, turboMs(PICKUP_SEARCH_MS));
-  UI.act('pickupGo', () => { setBagReturnHook(null); UI.hideOverlay(); onDone(); });
 }
 
 // ---------- 遭遇组建（设计者 2026-09-02 定版：按环层抽怪，1-3 只，越内层越强） ----------
@@ -301,6 +303,9 @@ export const FIRE_RESTORABLE = (card) => card.type !== '道具' && card.type !==
 export function openPocketRestore(picks, done, opts = {}) {
   game.state = 'modal';
   let left = picks;
+  // 背包返回恢复本页并保留剩余复原次数（09-30 深审 WORLD-002）：关闭背包不再兜底回
+  // idle 导致节点未消耗、火堆奖励可被反复重领
+  setBagReturnHook(() => openPocketRestore(left, done, opts));
   const restorable = () => game.usedPocket.filter(p => FIRE_RESTORABLE(p.card));
   const render = () => {
     const list = restorable();
@@ -334,6 +339,7 @@ export function openPocketRestore(picks, done, opts = {}) {
     if (p.count <= 0) game.usedPocket.splice(game.usedPocket.indexOf(p), 1);
     game.ownedCards.push({ uid: newUid(), card: { ...card } });
     left--;
+    SDT.Sound.sfx('cardRestore');
     UI.log(`[[icon:sparkles]] 【<b>${esc(card.name)}</b>】已复原，回到背包`, 'ok');
     if (left <= 0) finish(); else render();
   });

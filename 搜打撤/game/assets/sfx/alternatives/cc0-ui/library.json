@@ -1,0 +1,157 @@
+{
+  "name": "CC0 冷感界面与工业动作",
+  "version": "B",
+  "featuredLabel": "冷感界面 · 十个",
+  "featuredTitle": "机械触感、真实卡牌与冷感战斗反馈",
+  "featuredIds": [
+    "click",
+    "confirm",
+    "card",
+    "attackSlash",
+    "parry",
+    "shieldBreak",
+    "heal",
+    "eventEnter",
+    "chestBurst",
+    "bossReveal"
+  ],
+  "groups": {
+    "ui": "界面反馈",
+    "cards": "卡牌动作",
+    "combat": "战斗与状态",
+    "nodes": "事件与登场",
+    "rewards": "开箱奖励"
+  },
+  "cues": [
+    {
+      "id": "click",
+      "label": "点击 · 机械触点",
+      "group": "ui",
+      "loop": false,
+      "note": "短促机械反馈，适合点击落点。",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/cc0-ui/click.ogg",
+          "seconds": 0.1179
+        }
+      ]
+    },
+    {
+      "id": "confirm",
+      "label": "确认 · 冷感收束",
+      "group": "ui",
+      "loop": false,
+      "note": "稍厚的确认反馈，用于完成选择。",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/cc0-ui/confirm.ogg",
+          "seconds": 0.2163
+        }
+      ]
+    },
+    {
+      "id": "card",
+      "label": "出牌 · 纸牌滑落",
+      "group": "cards",
+      "loop": false,
+      "note": "纸牌滑动接落桌，强调卡牌动作。",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/cc0-ui/card.ogg",
+          "seconds": 0.7201
+        }
+      ]
+    },
+    {
+      "id": "attackSlash",
+      "label": "斩击 · 刀划冲击",
+      "group": "combat",
+      "loop": false,
+      "note": "刀划为主体，轻冲击加强命中落点。",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/cc0-ui/attackSlash.ogg",
+          "seconds": 0.5501
+        }
+      ]
+    },
+    {
+      "id": "parry",
+      "label": "格挡 · 金属碰撞",
+      "group": "combat",
+      "loop": false,
+      "note": "紧凑的金属碰撞，适合格挡瞬间。",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/cc0-ui/parry.ogg",
+          "seconds": 0.1191
+        }
+      ]
+    },
+    {
+      "id": "shieldBreak",
+      "label": "破盾 · 脆裂冲击",
+      "group": "combat",
+      "loop": false,
+      "note": "裂响接玻璃撞击，保留较长破碎尾部。",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/cc0-ui/shieldBreak.ogg",
+          "seconds": 1.25
+        }
+      ]
+    },
+    {
+      "id": "heal",
+      "label": "回血 · 能量场",
+      "group": "combat",
+      "loop": false,
+      "note": "能量场状态音，适合恢复或充能反馈。",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/cc0-ui/heal.ogg",
+          "seconds": 0.8003
+        }
+      ]
+    },
+    {
+      "id": "eventEnter",
+      "label": "事件 · 机械门开启",
+      "group": "nodes",
+      "loop": false,
+      "note": "机械门开启，强调进入新的事件空间。",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/cc0-ui/eventEnter.ogg",
+          "seconds": 0.5286
+        }
+      ]
+    },
+    {
+      "id": "chestBurst",
+      "label": "开箱 · 金属扣与金币",
+      "group": "rewards",
+      "loop": false,
+      "note": "金属扣打开后接金币声，强调箱体与奖励。",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/cc0-ui/chestBurst.ogg",
+          "seconds": 0.4682
+        }
+      ]
+    },
+    {
+      "id": "bossReveal",
+      "label": "首领 · 低频爆发",
+      "group": "nodes",
+      "loop": false,
+      "note": "低频爆发与自然衰减，适合重型登场。",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/cc0-ui/bossReveal.ogg",
+          "seconds": 1.0001
+        }
+      ]
+    }
+  ]
+}

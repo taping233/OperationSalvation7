@@ -34,7 +34,10 @@ describe('U17 读档失败自动回退 prev 备份', () => {
     expect(localStorage.getItem(RunStorage.corruptKey(1))).toBe('{broken json');
     // 诊断通道记账
     expect(console.warn).toHaveBeenCalledWith(expect.stringContaining('已回退到上一版存档'));
-    // 自愈后写基线一致：随后写入直接成功（不误报 STALE_SLOT）
+    // 读取自愈不推进旧运行态的写基线；必须显式采纳恢复后的候选。
+    expect(RunStorage.write(1, { hp: 3 })).toBe(false);
+    expect(RunStorage.lastWriteIssue(1)).toBe('STALE_SLOT');
+    expect(RunStorage.acceptLoad(1, RunStorage.readForPreflight(1))).toEqual({ ok: true });
     expect(RunStorage.write(1, { hp: 3 })).toBe(true);
     expect(RunStorage.read(1).hp).toBe(3);
   });
@@ -115,5 +118,24 @@ describe('U17 读档失败自动回退 prev 备份', () => {
     localStorage.setItem(RunStorage.key(1), '{broken');
     expect(RunStorage.readIdentity(1)).toMatchObject({ ok: false, code: 'RUN_UNREADABLE' });
     expect(localStorage.getItem(RunStorage.key(1))).toBe('{broken');
+  });
+
+  it('显式 readForLoad 回退后采纳生效原串，兼容后续保存', () => {
+    expect(RunStorage.write(1, { hp: 10 })).toBe(true);
+    expect(RunStorage.write(1, { hp: 20 })).toBe(true);
+    localStorage.setItem(RunStorage.key(1), '{broken');
+    expect(RunStorage.readForLoad(1).hp).toBe(10);
+    expect(RunStorage.write(1, { hp: 9 })).toBe(true);
+  });
+
+  it.each(['read', 'readForPreflight'])('%s 回退另一对局后不授予旧运行态写权', method => {
+    expect(RunStorage.write(1, { hp: 30 })).toBe(true);
+    const backup = JSON.stringify({ version: 2, hp: 12, _r2: { runId: 'other-run', revision: 4 } });
+    localStorage.setItem(prevKey(1), backup);
+    localStorage.setItem(RunStorage.key(1), '{broken');
+    expect(RunStorage[method](1).hp).toBe(12);
+    expect(RunStorage.write(1, { hp: 29 })).toBe(false);
+    expect(RunStorage.lastWriteIssue(1)).toBe('STALE_SLOT');
+    expect(localStorage.getItem(RunStorage.key(1))).toBe(backup);
   });
 });

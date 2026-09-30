@@ -31,6 +31,16 @@ const POLL_MS = 600;
  * tick 里每轮补挂（li 无 .eps-lyr 子元素才写，避免每帧动 DOM）。 */
 const RISK_LABEL = { '低': '低危', '中': '常规', '高': '高危', '极高': '极高危' };
 
+// 层元数据按 MAP 对象记忆化（09-30 性能审计 F12）：layerEncounterMeta 是纯函数，
+// 同一局地图同层结果恒定；600ms 轮询每轮重算纯属浪费。WeakMap 随换局地图 GC 自动清。
+const metaCacheByMap = new WeakMap();
+function layerMetaCached(map, idx) {
+  let arr = metaCacheByMap.get(map);
+  if (!arr) { arr = []; metaCacheByMap.set(map, arr); }
+  if (arr[idx] === undefined) arr[idx] = layerEncounterMeta(map, idx) || null;
+  return arr[idx] || null;
+}
+
 function decorateChapters() {
   const nav = document.getElementById('expeditionChapter');
   const SDT = window.SDT;
@@ -45,7 +55,7 @@ function decorateChapters() {
       return;
     }
     if (li.querySelector('.eps-lyr')) return;
-    const meta = layerEncounterMeta(SDT.MAP, idx);
+    const meta = layerMetaCached(SDT.MAP, idx);
     if (!meta) return;
     const tag = document.createElement('i');
     tag.className = 'eps-lyr';
@@ -138,13 +148,26 @@ function tick() {
 }
 
 let started = false;
+let pollTimer = 0;
+function startPolling() {
+  if (pollTimer || !started) return;
+  pollTimer = setInterval(tick, POLL_MS);
+}
+function stopPolling() {
+  if (!pollTimer) return;
+  clearInterval(pollTimer);
+  pollTimer = 0;
+}
 export function startPocketStrip() {
   if (started) return;
   started = true;
+  // 页面不可见时停表（09-30 性能审计 F10，铁律①精神）：600ms 轮询此前无清理通道，
+  // 后台标签页仍降频空转（decorateChapters + previewExtraction 每轮全跑）
+  document.addEventListener('visibilitychange', () => { document.hidden ? stopPolling() : startPolling(); });
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => setInterval(tick, POLL_MS));
-  } else {
-    setInterval(tick, POLL_MS);
+    document.addEventListener('DOMContentLoaded', () => { if (!document.hidden) startPolling(); });
+  } else if (!document.hidden) {
+    startPolling();
   }
 }
 

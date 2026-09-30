@@ -1,0 +1,628 @@
+{
+  "groups": {
+    "ui": "界面与操作",
+    "cards": "卡牌与背包",
+    "rewards": "奖励与结果"
+  },
+  "cues": [
+    {
+      "id": "hover",
+      "label": "悬停",
+      "group": "ui",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/hover.ogg",
+          "seconds": 0.259604
+        }
+      ],
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_button.wav",
+      "source_path": "avg/d_avg_button.wav",
+      "source_sha256": "0e692fad8e305e679d91039cb119f8c098c4f0d06e92f020391aa09707680f03",
+      "reused_source_ids": [],
+      "source_note": "方舟原声微调；按素材特征映射，原游戏触发未核验",
+      "crop_seconds": [
+        0.0,
+        0.275375
+      ]
+    },
+    {
+      "id": "switch",
+      "label": "切换",
+      "group": "ui",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/switch.ogg",
+          "seconds": 0.834896
+        }
+      ],
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_metallicclick.wav",
+      "source_path": "avg/d_avg_metallicclick.wav",
+      "source_sha256": "5bada63ad6ecb2f5ac65aa03052a1323591f1a7b609ebfbda7d20c126c72357d",
+      "reused_source_ids": [],
+      "source_note": "方舟原声微调；按素材特征映射，原游戏触发未核验",
+      "crop_seconds": [
+        0.069375,
+        0.948812
+      ]
+    },
+    {
+      "id": "open",
+      "label": "打开",
+      "group": "ui",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/open.ogg",
+          "seconds": 1.014667
+        }
+      ],
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_foldingfan.wav",
+      "source_path": "avg/d_avg_foldingfan.wav",
+      "source_sha256": "2ed64f1f679efbbabb472128506263e695d4e2627bdf43822289d279bcd02ed6",
+      "reused_source_ids": [],
+      "source_note": "方舟原声微调；按素材特征映射，原游戏触发未核验",
+      "crop_seconds": [
+        0.018458,
+        1.064
+      ]
+    },
+    {
+      "id": "close",
+      "label": "关闭",
+      "group": "ui",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/close.ogg",
+          "seconds": 1.032917
+        }
+      ],
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_book_close.wav",
+      "source_path": "avg/d_avg_book_close.wav",
+      "source_sha256": "99761d20ca627671f5cb5f1daed526bf0bf657f4e9a6378a76129ba2ed46549f",
+      "reused_source_ids": [],
+      "source_note": "方舟原声微调；按素材特征映射，原游戏触发未核验",
+      "crop_seconds": [
+        0.0,
+        1.084563
+      ]
+    },
+    {
+      "id": "deny",
+      "label": "操作拒绝",
+      "group": "ui",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/deny.ogg",
+          "seconds": 1.043125
+        }
+      ],
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_ui/b_ui_dooralarm.wav",
+      "source_path": "battle/b_ui/b_ui_dooralarm.wav",
+      "source_sha256": "827efb49cbaaaab07faf5390758b6bc8b95ae4678618cd1e2613caf0dd930bde",
+      "reused_source_ids": [
+        "danger"
+      ],
+      "source_note": "方舟原声微调；按素材特征映射，原游戏触发未核验",
+      "crop_seconds": [
+        0.0,
+        1.095292
+      ]
+    },
+    {
+      "id": "error",
+      "label": "错误",
+      "group": "ui",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/error.ogg",
+          "seconds": 0.187562
+        }
+      ],
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_devicebeep.wav",
+      "source_path": "avg/d_avg_devicebeep.wav",
+      "source_sha256": "6e3ffbb96de530c96726367c29cb9731f604bd06e815e71e1085668303a162c1",
+      "reused_source_ids": [],
+      "source_note": "方舟原声微调；按素材特征映射，原游戏触发未核验",
+      "crop_seconds": [
+        0.0,
+        0.19975
+      ]
+    },
+    {
+      "id": "ding",
+      "label": "提示",
+      "group": "ui",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/ding.ogg",
+          "seconds": 2.013125
+        }
+      ],
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_kalimbapizz.wav",
+      "source_path": "avg/d_avg_kalimbapizz.wav",
+      "source_sha256": "34395b60cfb1dda64bbc7ee3f77076d7402175ae000a7c9c22ddfac649c6a9d2",
+      "reused_source_ids": [],
+      "source_note": "方舟原声微调；按素材特征映射，原游戏触发未核验",
+      "crop_seconds": [
+        0.0,
+        2.113792
+      ]
+    },
+    {
+      "id": "drop",
+      "label": "放下",
+      "group": "cards",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/drop.ogg",
+          "seconds": 0.703583
+        }
+      ],
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_pendrop.wav",
+      "source_path": "avg/d_avg_pendrop.wav",
+      "source_sha256": "dd525a8289014a62986a6637b75fcd833575f421cd726f2272938dbf8292a53b",
+      "reused_source_ids": [],
+      "source_note": "方舟原声微调；按素材特征映射，原游戏触发未核验",
+      "crop_seconds": [
+        0.257042,
+        0.998604
+      ]
+    },
+    {
+      "id": "gain",
+      "label": "获得",
+      "group": "rewards",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/gain.ogg",
+          "seconds": 0.466313
+        }
+      ],
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_char/b_char_getcast.wav",
+      "source_path": "battle/b_char/b_char_getcast.wav",
+      "source_sha256": "a1065cd342cb167ed3adaeb7551d2c7b2d2dd05bb20433d5107206a177203036",
+      "reused_source_ids": [],
+      "source_note": "方舟原声微调；按素材特征映射，原游戏触发未核验",
+      "crop_seconds": [
+        0.0,
+        0.492437
+      ]
+    },
+    {
+      "id": "shuffle",
+      "label": "洗牌",
+      "group": "cards",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/shuffle.ogg",
+          "seconds": 1.358083
+        }
+      ],
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_shufflecards.wav",
+      "source_path": "avg/d_avg_shufflecards.wav",
+      "source_sha256": "b518c179879c467b2fd41e95d12dbea890a1a588be49f42f5ae09e5a278022fb",
+      "reused_source_ids": [
+        "card"
+      ],
+      "source_note": "方舟原声微调；按素材特征映射，原游戏触发未核验",
+      "crop_seconds": [
+        0.074021,
+        1.5
+      ]
+    },
+    {
+      "id": "shutter",
+      "label": "快门",
+      "group": "ui",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/shutter.ogg",
+          "seconds": 0.203896
+        }
+      ],
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_fastener.wav",
+      "source_path": "avg/d_avg_fastener.wav",
+      "source_sha256": "ae48fd18d876c7b07389e98d1851a740e05ea78ca95905b45a0655f14fffcf2b",
+      "reused_source_ids": [],
+      "source_note": "方舟原声微调；按素材特征映射，原游戏触发未核验",
+      "crop_seconds": [
+        0.003625,
+        0.220521
+      ]
+    },
+    {
+      "id": "chestShake",
+      "label": "宝箱晃动",
+      "group": "rewards",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/chestShake.ogg",
+          "seconds": 1.750604
+        }
+      ],
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_metalroll.wav",
+      "source_path": "avg/d_avg_metalroll.wav",
+      "source_sha256": "35566006816805b153d6c2ba69b1f994771a5cb079caa69474d73d94ce37fe16",
+      "reused_source_ids": [],
+      "source_note": "方舟原声微调；按素材特征映射，原游戏触发未核验",
+      "crop_seconds": [
+        0.034208,
+        1.872333
+      ]
+    },
+    {
+      "id": "characterSelect",
+      "label": "角色选择",
+      "group": "ui",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/characterSelect.ogg",
+          "seconds": 0.698042
+        }
+      ],
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_ui/b_ui_mark.wav",
+      "source_path": "battle/b_ui/b_ui_mark.wav",
+      "source_sha256": "5fb019f3b0a51ac77d2646147166309de38a9632a70055fd85fa43c2f4c82eb8",
+      "reused_source_ids": [
+        "cardSelect"
+      ],
+      "source_note": "方舟原声微调；按素材特征映射，原游戏触发未核验",
+      "crop_seconds": [
+        0.028979,
+        0.764729
+      ]
+    },
+    {
+      "id": "prepReady",
+      "label": "准备就绪",
+      "group": "ui",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/prepReady.ogg",
+          "seconds": 1.427708
+        }
+      ],
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_char/b_char_botready.wav",
+      "source_path": "battle/b_char/b_char_botready.wav",
+      "source_sha256": "5d80dba5038c9628c53b336ae89a6b020a9fc6cdafd4d39b319fcef52eda45c9",
+      "reused_source_ids": [],
+      "source_note": "方舟原声微调；按素材特征映射，原游戏触发未核验",
+      "crop_seconds": [
+        0.01775,
+        1.516833
+      ]
+    },
+    {
+      "id": "deployStart",
+      "label": "开始部署",
+      "group": "ui",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/deployStart.ogg",
+          "seconds": 1.144875
+        }
+      ],
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_char/b_char_set.wav",
+      "source_path": "battle/b_char/b_char_set.wav",
+      "source_sha256": "9210006c6c837f7eeb28fd3bbe2c372eb566810b1e58eb2e8203b28170533de2",
+      "reused_source_ids": [],
+      "source_note": "方舟原声微调；按素材特征映射，原游戏触发未核验",
+      "crop_seconds": [
+        0.0,
+        1.202125
+      ]
+    },
+    {
+      "id": "collectionUnlock",
+      "label": "藏品解锁",
+      "group": "rewards",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/collectionUnlock.ogg",
+          "seconds": 1.043729
+        }
+      ],
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_mechalock.wav",
+      "source_path": "avg/d_avg_mechalock.wav",
+      "source_sha256": "7f263df166c6e3c7f0ef13fb090cedcfd0c61d770ac6ea0944a1bb26168efb28",
+      "reused_source_ids": [],
+      "source_note": "方舟原声微调；按素材特征映射，原游戏触发未核验",
+      "crop_seconds": [
+        0.00275,
+        1.098667
+      ]
+    },
+    {
+      "id": "achievementUnlock",
+      "label": "成就解锁",
+      "group": "rewards",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/achievementUnlock.ogg",
+          "seconds": 3.837896
+        }
+      ],
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_ui/b_ui_act3funwin.wav",
+      "source_path": "battle/b_ui/b_ui_act3funwin.wav",
+      "source_sha256": "f204f618c098bf29f24ed9ca0b1b49d6be3fe176f102deeea49d14c6511bf220",
+      "reused_source_ids": [
+        "extractionSuccess"
+      ],
+      "source_note": "方舟原声微调；按素材特征映射，原游戏触发未核验",
+      "crop_seconds": [
+        0.076854,
+        4.106646
+      ]
+    },
+    {
+      "id": "tradeBuy",
+      "label": "买入",
+      "group": "ui",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/tradeBuy.ogg",
+          "seconds": 0.613458
+        }
+      ],
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_coin.wav",
+      "source_path": "avg/d_avg_coin.wav",
+      "source_sha256": "558e1ee8dfa622644de764d8abbc1a210b7b0a0d1fde807a46c5760b787702be",
+      "reused_source_ids": [
+        "coin"
+      ],
+      "source_note": "方舟原声微调；按素材特征映射，原游戏触发未核验",
+      "crop_seconds": [
+        0.0,
+        0.682667
+      ]
+    },
+    {
+      "id": "tradeSell",
+      "label": "卖出",
+      "group": "ui",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/tradeSell.ogg",
+          "seconds": 0.584708
+        }
+      ],
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_wadmoney.wav",
+      "source_path": "avg/d_avg_wadmoney.wav",
+      "source_sha256": "38d4c4808e356c7c4fd61635185dbadd3a336f076ef25850d33f4b78eed92a46",
+      "reused_source_ids": [],
+      "source_note": "方舟原声微调；按素材特征映射，原游戏触发未核验",
+      "crop_seconds": [
+        0.0,
+        0.61675
+      ]
+    },
+    {
+      "id": "stashDeposit",
+      "label": "仓库存入",
+      "group": "cards",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/stashDeposit.ogg",
+          "seconds": 0.484
+        }
+      ],
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_clothmovementsp.wav",
+      "source_path": "avg/d_avg_clothmovementsp.wav",
+      "source_sha256": "a4f71827cfa01910b67b679dd240fea75369a63cc8088a510203b57e2a00ab4d",
+      "reused_source_ids": [],
+      "source_note": "方舟原声微调；按素材特征映射，原游戏触发未核验",
+      "crop_seconds": [
+        0.006979,
+        0.495083
+      ]
+    },
+    {
+      "id": "safeEnter",
+      "label": "打开保险箱",
+      "group": "ui",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/safeEnter.ogg",
+          "seconds": 0.458
+        }
+      ],
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_doorknob.wav",
+      "source_path": "avg/d_avg_doorknob.wav",
+      "source_sha256": "fe341041199b95086d77533af439cb9f5285b05be44cddbed5a38fbd9ee87f64",
+      "reused_source_ids": [],
+      "source_note": "方舟原声微调；按素材特征映射，原游戏触发未核验",
+      "crop_seconds": [
+        0.057271,
+        0.540979
+      ]
+    },
+    {
+      "id": "safeStore",
+      "label": "保险箱存入",
+      "group": "cards",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/safeStore.ogg",
+          "seconds": 1.608062
+        }
+      ],
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_handcuff.wav",
+      "source_path": "avg/d_avg_handcuff.wav",
+      "source_sha256": "a41db02a071996f8aea699c97893438b95831ba36f3bc53bde7c96d9257d738f",
+      "reused_source_ids": [],
+      "source_note": "方舟原声微调；按素材特征映射，原游戏触发未核验",
+      "crop_seconds": [
+        0.120792,
+        1.80925
+      ]
+    },
+    {
+      "id": "safeRetrieve",
+      "label": "保险箱取出",
+      "group": "cards",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/safeRetrieve.ogg",
+          "seconds": 2.322021
+        }
+      ],
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_key.wav",
+      "source_path": "avg/d_avg_key.wav",
+      "source_sha256": "99a96543fb565e58259ee13ceab82a959409da6f9e28e17c484f21d3e6d0a513",
+      "reused_source_ids": [],
+      "source_note": "方舟原声微调；按素材特征映射，原游戏触发未核验",
+      "crop_seconds": [
+        0.063,
+        2.501125
+      ]
+    },
+    {
+      "id": "cardRestore",
+      "label": "卡牌修复",
+      "group": "cards",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/cardRestore.ogg",
+          "seconds": 1.588271
+        }
+      ],
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_scroll.wav",
+      "source_path": "avg/d_avg_scroll.wav",
+      "source_sha256": "4121b2d0ce673c85b23b5f0dae303963c20fa785d9f82d43c37bb86c4b54362b",
+      "reused_source_ids": [],
+      "source_note": "方舟原声微调；按素材特征映射，原游戏触发未核验",
+      "crop_seconds": [
+        0.0,
+        1.706667
+      ]
+    },
+    {
+      "id": "runeExchange",
+      "label": "符文兑换",
+      "group": "rewards",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/runeExchange.ogg",
+          "seconds": 2.376458
+        }
+      ],
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_magicchange.wav",
+      "source_path": "avg/d_avg_magicchange.wav",
+      "source_sha256": "ba0232c826b40914f0d050e2713f1377c525d7f15d6a27cf7afd598a3d3f9147",
+      "reused_source_ids": [],
+      "source_note": "方舟原声微调；按素材特征映射，原游戏触发未核验",
+      "crop_seconds": [
+        0.000188,
+        2.495479
+      ]
+    },
+    {
+      "id": "blackMarketWin",
+      "label": "黑市成功",
+      "group": "rewards",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/blackMarketWin.ogg",
+          "seconds": 3.837917
+        }
+      ],
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_ui/b_ui_act3funexwin.wav",
+      "source_path": "battle/b_ui/b_ui_act3funexwin.wav",
+      "source_sha256": "0b96c68e968b52e5c1ba3097e5f32926f4e666a71de2355b0499b2ba5d9500d2",
+      "reused_source_ids": [],
+      "source_note": "方舟原声微调；按素材特征映射，原游戏触发未核验",
+      "crop_seconds": [
+        0.076854,
+        4.106667
+      ]
+    },
+    {
+      "id": "blackMarketLose",
+      "label": "黑市失败",
+      "group": "rewards",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/blackMarketLose.ogg",
+          "seconds": 2.895688
+        }
+      ],
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/battle/b_ui/b_ui_act3funexfail.wav",
+      "source_path": "battle/b_ui/b_ui_act3funexfail.wav",
+      "source_sha256": "0130029c73234d793af8e6f7f9660121f351d994b2db8b52b958a1fd48c116ee",
+      "reused_source_ids": [],
+      "source_note": "方舟原声微调；按素材特征映射，原游戏触发未核验",
+      "crop_seconds": [
+        0.0,
+        3.040479
+      ]
+    },
+    {
+      "id": "recodeStart",
+      "label": "重编码开始",
+      "group": "cards",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/recodeStart.ogg",
+          "seconds": 1.432833
+        }
+      ],
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_scan.wav",
+      "source_path": "avg/d_avg_scan.wav",
+      "source_sha256": "d4af13b6707a93c4b1b66c2a8a43bef8faaed0cbee6baa8f274fa19af7fac4aa",
+      "reused_source_ids": [],
+      "source_note": "方舟原声微调；按素材特征映射，原游戏触发未核验",
+      "crop_seconds": [
+        0.024958,
+        1.529438
+      ]
+    },
+    {
+      "id": "recodeComplete",
+      "label": "重编码完成",
+      "group": "cards",
+      "loop": false,
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/recodeComplete.ogg",
+          "seconds": 0.614875
+        }
+      ],
+      "source_url": "https://raw.githubusercontent.com/PseudoMon/arknights-audio/global-server-voices/avg/d_avg_result.wav",
+      "source_path": "avg/d_avg_result.wav",
+      "source_sha256": "c756fc011f17e18ce51d887ab85ffe5910687b2c49b87d84bef2f6b939b77fdf",
+      "reused_source_ids": [],
+      "source_note": "方舟原声微调；按素材特征映射，原游戏触发未核验",
+      "crop_seconds": [
+        0.137646,
+        0.786062
+      ]
+    }
+  ]
+}

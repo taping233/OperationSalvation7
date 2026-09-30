@@ -4,7 +4,7 @@ const SDT = window.SDT;
 const UI = window.SDT.UI;
 import { scale as uiScale } from '../../ui/ui-scale.js';
 import { esc } from '../../core/shared.js';
-import { commands, getSnapshot, effCostOf, findCard, infuseOf, targetSide, unplayableReason } from '../core/battle.core.js';
+import { commands, getSnapshot, getBattleLiveness, effCostOf, findCard, infuseOf, targetSide, unplayableReason } from '../core/battle.core.js';
   const play = commands.playCard;
   const bagSlam = commands.bagSlam;             // 需求 #9：背包砸击
   const resolveSlam = commands.resolveSlam;
@@ -54,10 +54,13 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
   let clickSelectedUid = null; // 点击选中的指向卡；拖拽路径仍由 aim 独立处理
   let clickTargetSession = null;
   function targetSessionBattleCurrent(token) {
-    // 视图层不直读战斗运行时（架构守卫）：经 core 的快照判定场次与阶段。
-    const snapshot = getSnapshot();
-    return !!snapshot && snapshot.battleToken === token
-      && (snapshot.phase === BATTLE_PHASES.PLAYER || snapshot.phase === BATTLE_PHASES.TARGETING);
+    // 视图层不直读战斗运行时（架构守卫）：经 core 轻查询判定场次与阶段。
+    // F1（09-30 性能审计）：此判定在拖拽期每帧经 hitAt/setHover 触发 2+ 次，原先每次
+    // 都全量组装快照+深签名，而存活只依赖 token/phase 两个标量——改走 getBattleLiveness，
+    // 语义与快照口径逐字等价（同源 battleState.token/phase）。
+    const live = getBattleLiveness();
+    return !!live && live.battleToken === token
+      && (live.phase === BATTLE_PHASES.PLAYER || live.phase === BATTLE_PHASES.TARGETING);
   }
 
   function aimCanvasEnsure() {
@@ -72,7 +75,10 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
   function aimArrowRemove() {
     const s = document.getElementById('aimArrow');
     if (s) s.remove();
+    aimArrowCache = null;
   }
+  // 箭头重绘缓存（F9）：坐标/颜色/画布尺寸全等时跳过 clear+全量重绘（拖拽停顿帧不再空转）
+  let aimArrowCache = null;
   // 更新弯曲箭头：Canvas 绘制二次贝塞尔上弓与箭头，避免矢量 DOM 资源。
   // vr 可传入调用方缓存的 overlay rect（拖拽高频路径避免每次 pointermove 强制读布局）
   function aimArrowUpdate(x1, y1, x2, y2, color, vr) {
@@ -89,6 +95,9 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
       canvas.style.width = `${width}px`;
       canvas.style.height = `${height}px`;
     }
+    const cacheKey = `${x1}|${y1}|${x2}|${y2}|${color}|${canvas.width}x${canvas.height}`;
+    if (aimArrowCache === cacheKey) return;
+    aimArrowCache = cacheKey;
     const ctx = canvas.getContext('2d');
     ctx.setTransform(ratio / zA, 0, 0, ratio / zA, 0, 0);
     ctx.clearRect(0, 0, width, height);
@@ -128,19 +137,27 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     if (!a.stage || !a.targetSession?.isCurrent()) return null;
     let nearest = null;
     let nearestDistance = radius;
-    for (const el of a.stage.querySelectorAll('.bt-foe[data-eidx]')) {
-      const idx = +el.dataset.eidx;
-      if (!a.snap.foes[idx] || a.snap.foes[idx].dead || el.classList.contains('dead')) continue;
-      const figure = el.querySelector('.sts-figure');
-      if (!figure) continue;
-      const rect = figure.getBoundingClientRect();
-      if (!rect.width || !rect.height) continue;
-      const dx = Math.max(rect.left - x, 0, x - rect.right);
-      const dy = Math.max(rect.top - y, 0, y - rect.bottom);
+    // 敌矩形会话缓存（F9）：布局只在战场重绘时变化（resumeAimAfterRender 失效）；
+    // 拖拽帧内 idle 演出走 transform 不动布局，无需逐帧 getBoundingClientRect
+    if (!a.foeRects) {
+      a.foeRects = [];
+      for (const el of a.stage.querySelectorAll('.bt-foe[data-eidx]')) {
+        const idx = +el.dataset.eidx;
+        if (!a.snap.foes[idx] || a.snap.foes[idx].dead || el.classList.contains('dead')) continue;
+        const figure = el.querySelector('.sts-figure');
+        if (!figure) continue;
+        const rect = figure.getBoundingClientRect();
+        if (!rect.width || !rect.height) continue;
+        a.foeRects.push({ idx, el, left: rect.left, top: rect.top, right: rect.right, bottom: rect.bottom });
+      }
+    }
+    for (const foe of a.foeRects) {
+      const dx = Math.max(foe.left - x, 0, x - foe.right);
+      const dy = Math.max(foe.top - y, 0, y - foe.bottom);
       const distance = Math.hypot(dx, dy);
       if (distance < nearestDistance) {
         nearestDistance = distance;
-        nearest = { kind: 'enemy', idx, el };
+        nearest = { kind: 'enemy', idx: foe.idx, el: foe.el };
       }
     }
     return nearest;
@@ -210,6 +227,7 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     a.snap = snapshot;
     a.card = entry.card;
     a.stage = stage;
+    a.foeRects = null;   // 战场重绘后布局可能位移，敌矩形缓存失效（F9）
     a.vr = UI.el.overlay.getBoundingClientRect();
     a.playBlockedReason = cardPlayBlockedReason(a.uid, a.card, snapshot);
     if (a.reasonShown) {

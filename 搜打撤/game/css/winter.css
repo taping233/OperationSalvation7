@@ -658,6 +658,16 @@ body.page-covered #title::after,
 body.page-covered #title *::before,
 body.page-covered #title *::after{animation-play-state:paused}
 
+/* ===== 全屏卡牌特写盖住战斗页时同步暂停战斗层动画（09-30 性能审计 F6，铁律①） =====
+   #cardZoom 挂在 body（ui.showCardZoom），不经 showOverlay 的 page-covered 机制；
+   特写开着时战斗立绘 idle/环境粒子照跑纯烧合成器帧，ui.js 挂/摘 body.zoom-open */
+body.zoom-open .battle-stage,
+body.zoom-open .battle-stage *{animation-play-state:paused}
+body.zoom-open .battle-stage::before,
+body.zoom-open .battle-stage::after,
+body.zoom-open .battle-stage *::before,
+body.zoom-open .battle-stage *::after{animation-play-state:paused}
+
 /* ===== 美术预热进度条（2026-09-08：启动强制预热，首页显示原因与进度） ===== */
 #warmupTip{position:absolute;left:26px;bottom:118px;z-index:5;min-width:280px;max-width:360px;
   padding:10px 14px 12px;border:1px solid #3a55606e;border-radius: var(--radius-panel);

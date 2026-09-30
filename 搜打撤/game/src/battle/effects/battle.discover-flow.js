@@ -77,7 +77,11 @@ export function createBattleDiscoverFlow(ports) {
     /** @type {DiscoverCardPredicate | null} */
     const structuredPred = structuredPool?.kind === 'moves'
       ? card => card.type === '武术' && (structuredPool.cost === undefined || (Number(card.cost) || 0) === structuredPool.cost)
-      : null;
+      // 传说池（闪耀通行证「从传说卡中发现」）：资格边界仍由 buildDiscoverPool 的
+      // isRandomObtainable 统一把关（排除衍生/unrandom/生物/事件等）
+      : structuredPool?.kind === 'legendary'
+        ? card => card.rarity === '传说'
+        : null;
     if (structuredPool && !structuredPred) {
       output.log(`[[icon:cross]] 无法发现：不支持的结构化卡池「${esc(structuredPool.kind || '未知')}」`, 'warn');
       return;
@@ -108,9 +112,11 @@ export function createBattleDiscoverFlow(ports) {
     const options = [];
     const taken = new Set();
     const names = new Set();
+    // 黑暗形态 discoverPlus：候选数 = 3 + N（BC-07 修复——此前误把 job.n 选择次数 +1）
+    const optionCap = 3 + Math.max(0, +(job.optionsPlus || 0));
     /** @param {DiscoverCard | null | undefined} card */
     const clash = card => !!card && (taken.has(card.id) || names.has(card.name));
-    for (let i = 0; i < 3 && options.length < 3; i++) {
+    for (let i = 0; i < optionCap && options.length < optionCap; i++) {
       let card = drawCandidate();
       let guard = 0;
       while (clash(card) && guard++ < 40) card = drawCandidate();
@@ -233,6 +239,7 @@ export function createBattleDiscoverFlow(ports) {
         consumeTempAtTurn: !!consumeTempAtTurn, tempUids, swapPair,
         zeroCost: !!zeroCost, decayEachTurn: !!decayEachTurn,
         costDecayPerTurn, sourceCardId, pool,
+        optionsPlus: queuedState ? state.optionsPlus : undefined,
       });
     } else if (consumeTempAtTurn && tempUids.length) {
       effects.enqueueDelayed({ special: 'consumeTemps', uids: [...tempUids], cardName: '江湖救急' });

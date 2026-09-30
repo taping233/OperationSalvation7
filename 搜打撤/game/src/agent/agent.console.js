@@ -108,7 +108,9 @@ function keysTabHTML() {
 function bindKeysTab(render) {
   const UI = window.SDT.UI;
   UI.act('devcGoto', (d) => {
-    if (jump(d.page)) { UI.hideOverlay(); return; }
+    // jump 成功时 page.enter 已在控制台同层开出目标页（控制台页被顶替=已关闭）；
+    // 此时再 hideOverlay 会把新页的动作表一并清掉（INFRA-02），跳转失败才重绘本页。
+    if (jump(d.page)) return;
     render();
   });
 }

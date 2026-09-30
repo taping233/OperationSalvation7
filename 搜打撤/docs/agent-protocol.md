@@ -7,7 +7,7 @@
 ## 一、决策循环
 
 ```js
-// 外部脚本（浏览器 console / CDP evaluate）自驱循环
+// 由当前平台已授权的内置浏览器接口驱动；这是业务接口示例，不授权外部 CDP 验收。
 SDT.Agent.setTurbo(true);
 for (;;) {
   // step 等待异步命令的真实结果，再等待局面静止。
@@ -158,3 +158,29 @@ for (;;) {
   | B | 背包（既有） | Esc | 关弹层（既有） |
 
   战斗中/对局中的受保护页面会拒绝进入并日志提示，不绕过既有状态守卫。
+
+## 九、验收剧本（SDT.Agent.scenes，2026-10-01）
+
+固定验收剧本库：把「实机验收逐步驱动」压成一次调用。每个场景 = 前置 + 自动驱动 +
+内建断言，跑完返回结构化报告（pass / assertions / final / errors），剧本断言 JSON +
+关键页截图合并构成 B 档实页证据（口径见 quality-gates）。
+
+```js
+SDT.Agent.scenes.list()                    // 场景清单（10 个）
+await SDT.Agent.scenes.run('battle')       // 短场景：直接 await 拿报告
+SDT.Agent.scenes.start('fullrun', { turbo: true })   // 长场景：后台启动
+SDT.Agent.scenes.status('fullrun')         // 轮询 { started, done, report }
+```
+
+| 场景 | 语义 | 前置 |
+|---|---|---|
+| smoke | 标题真实开局→走格→打完首战 | 须在标题页 |
+| battle / boss / shop / event / fire / altar / chest | 单场景验收 | dev 直跳测试局（不占档位、不写存档） |
+| extract | 开局→（直跳第三层）BFS 逐格走到紧急撤离点→献祭 3 卡→撤离结算 | 自动开局，options.fullWalk 走全图 |
+| fullrun | strategic 打到撤离或死亡，断言自然收口+记录落盘 | 自动开局，默认 turbo |
+
+外部 evaluate 只有 3s 级预算：短场景可 `JSON.stringify(await run(...))` 一次取回；
+长场景必须 start+status 分体（`scripts/iab-drive.mjs` 的 `runScene(tab, scene)` 已封装，
+含 PAGE_RELOADED 感知）。场景间前置自动清场（搜刮/教学弹层残留会污染断言）；
+`[SDT.Icons] missing bitmap` 预热告警不入报告错误桶。坑全录：
+`docs/evidence/2026-10-01-acceptance-scenes/README.md`。

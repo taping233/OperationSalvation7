@@ -82,7 +82,9 @@ export function renderExpeditionPanel(panel, game, iconHTML) {
     chapter.innerHTML = `<div class="chapter-kicker">EXPEDITION / ${String(game.layerIdx + 1).padStart(2, '0')}</div><ol>${names.map((name, i) => `<li class="${i === game.layerIdx ? 'current' : i < game.layerIdx ? 'passed' : ''}" ${i === game.layerIdx ? 'aria-current="step"' : ''}><span>0${i + 1}</span>${esc(name)}</li>`).join('')}</ol>`;
   }
   // Stable markup while state is unchanged preserves keyboard focus and avoids DOM churn.
-  const key = JSON.stringify([routes, objective, disabled]);
+  // 差分键用原始值拼接（09-30 性能审计 F8）：本函数挂在 UI.refresh，战斗中每次渲染都会跑，
+  // 此前每次对路线数组做一遍 JSON.stringify——面板被战斗盖住时纯粹白烧
+  const key = `${disabled ? 1 : 0}|${objective.tone}|${objective.text}|${routes.map(r => r.idx).join(',')}`;
   if (panel.dataset.viewKey === key) return;
   panel.dataset.viewKey = key;
   const active = panel.ownerDocument.activeElement?.dataset.routeIndex;

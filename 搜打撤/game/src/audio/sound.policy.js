@@ -9,12 +9,20 @@ const SFX_COOLDOWN_MS = Object.freeze({
   buffUp: 80, buffDown: 120, foeLunge: 60, curse: 60, curseEnd: 160,
   parry: 45, coin: 80, cardSelect: 45, discard: 65, burn: 80, rarePlay: 180,
   danger: 300, energyUp: 45, energyDown: 45, shieldUp: 220, shieldBreak: 100, armorBreak: 120, phase: 180,
+  attackSlash: 45, attackPierce: 45, attackArrow: 45, attackBlunt: 60,
+  attackFire: 80, attackIce: 80, attackLightning: 80, attackPoison: 80, attackPsychic: 80, attackBossHeavy: 120,
+  phaseSelf: 180, phaseFoe: 180, eventEnter: 110, bossReveal: 300,
+  fireEnter: 250, altarEnter: 250, doorEnter: 250, shopEnter: 250, extractionEnter: 250,
+  eventComplete: 180, achievementUnlock: 180, collectionUnlock: 180,
 });
 
 const SFX_PRIORITY = Object.freeze({
   danger: 5, phase: 4, kill: 4, shieldBreak: 5, armorBreak: 5, rarePlay: 4, curseEnd: 4,
   hurt: 3, hit: 3, strike: 3, foeLunge: 3, shieldUp: 2, energyUp: 2, energyDown: 2,
   curse: 2, cardSelect: 1, discard: 1, burn: 1, hover: 0,
+  attackSlash: 3, attackPierce: 3, attackArrow: 3, attackBlunt: 3,
+  attackFire: 3, attackIce: 3, attackLightning: 3, attackPoison: 3, attackPsychic: 3, attackBossHeavy: 4,
+  phaseSelf: 4, phaseFoe: 4, bossReveal: 5,
 });
 
 function shouldPlaySfx(name, now, lastAt = new Map()) {

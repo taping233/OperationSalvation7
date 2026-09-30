@@ -43,7 +43,10 @@ function structuredDamageSpec(card) {
   const unstable = operation.range !== undefined || operation.cond !== undefined || operation.bonus !== undefined ||
     operation.lifesteal === true || operation.graveyard !== undefined || operation.recast !== undefined ||
     operation.schedule !== undefined || operation.target === 'randomEnemy' ||
-    (operation.hits != null && (operation.hits.range !== undefined || operation.hits.perFoe !== undefined));
+    (operation.hits != null && (operation.hits.range !== undefined || operation.hits.perFoe !== undefined ||
+      // 段数=本回合已打出招式数（连续射击）：快照不含该计数，无法精算——降级 unknown 不给错数字
+      // （09-30 深审 BC-08：此前按默认 1 段还标 exact，显示值恒错）
+      operation.hits.perPlayedMoves !== undefined));
   if (unstable) return { unknown: true };
   // target 未声明时解释器按「倒下顺延战场首位」结算——预览按 retarget 式逐段转移处理
   const retarget = operation.retarget === 'livingFoes' || operation.target === undefined;

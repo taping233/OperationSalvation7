@@ -60,7 +60,11 @@ import { esc } from './shared.js';
     const tokenRe=/\[\[icon:[a-z-]+\]\]/;
     const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null),nodes=[];let node;
     while((node=walker.nextNode())){EMOJI_RE.lastIndex=0;if(EMOJI_RE.test(node.nodeValue)||tokenRe.test(node.nodeValue))nodes.push(node);}
-    nodes.forEach(textNode=>{const span=document.createElement('span');span.innerHTML=rich(textNode.nodeValue);const frag=document.createDocumentFragment();while(span.firstChild)frag.appendChild(span.firstChild);textNode.parentNode.replaceChild(frag,textNode);});
+    nodes.forEach(textNode=>{
+      // 文本节点的 nodeValue 是转义前的原文，直接 innerHTML 会把它重新解析成 HTML——
+      // 自定义卡名/备注里的 <img onerror=…> 会变成真实标签（09-30 深审 INFRA-01）。
+      // 先 esc 再进 rich：文本段保持字面显示，图标 img 仍由本模块生成
+      const span=document.createElement('span');span.innerHTML=rich(esc(textNode.nodeValue));const frag=document.createDocumentFragment();while(span.firstChild)frag.appendChild(span.firstChild);textNode.parentNode.replaceChild(frag,textNode);});
     const scrubAttrs=el=>['title','placeholder','aria-label'].forEach(attr=>{if(el&&el.hasAttribute&&el.hasAttribute(attr)){const before=el.getAttribute(attr),after=before.replace(/\s*\[\[icon:[a-z-]+\]\]\s*/g,' ').trim();if(after!==before)el.setAttribute(attr,after);}});
     scrubAttrs(root);
     if(root.querySelectorAll)root.querySelectorAll('[title],[placeholder],[aria-label]').forEach(scrubAttrs);

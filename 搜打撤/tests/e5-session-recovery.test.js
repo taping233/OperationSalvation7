@@ -80,6 +80,54 @@ beforeEach(() => {
 afterEach(() => vi.restoreAllMocks());
 
 describe('E5 real session recovery and persistence results', () => {
+  it('rejected prev fallback cannot authorize the old runtime to overwrite a replacement run', () => {
+    writeRun({ _r2: { runId: 'old-run', revision: 3 } });
+    expect(session.loadGame(1).ok).toBe(true);
+    const seed = session.game.seed;
+    const backup = JSON.stringify({ version: 2, seed: 'replacement', mapSeed: 'replacement',
+      generatorVersion: 99, layoutVersion: 99, layerIdx: 0, trackPos: 0,
+      _r2: { runId: 'replacement-run', revision: 7 } });
+    localStorage.setItem('sdt-run-1-prev', backup);
+    localStorage.setItem(RunStorage.key(1), '{broken');
+    expect(session.loadGame(1)).toMatchObject({ ok: false, code: 'UNSUPPORTED_LEGACY_MAP' });
+    expect(session.game.seed).toBe(seed);
+    expect(session.saveGame()).toBe(false);
+    expect(RunStorage.lastWriteIssue(1)).toBe('STALE_SLOT');
+    expect(localStorage.getItem(RunStorage.key(1))).toBe(backup);
+  });
+
+  it('same-layer load preserves the selected boss in memory and storage; actual layer entry resets it', () => {
+    ordinary({ layerIdx: 3, bossPlan: 2 });
+    expect(session.loadGame(1).ok).toBe(true);
+    expect(session.game.bossPlan).toBe(2);
+    expect(JSON.parse(localStorage.getItem(RunStorage.key(1))).bossPlan).toBe(2);
+    session.enterLayer(0, 0);
+    expect(session.game.bossPlan).toBeNull();
+    expect(JSON.parse(localStorage.getItem(RunStorage.key(1))).bossPlan).toBeNull();
+  });
+
+  it.each([true, false])('checks extraction identity after prev fallback without accepting a mismatch (%s)', matching => {
+    const pending = { version: 1, runId: 'extract-run', phase: 'organizing', requestSeq: 0,
+      remainingCards: [], keptPocket: [], totalPocketCount: 0, lostPocketCount: 0,
+      resources: { wood: 0, rations: 0 } };
+    ordinary({ pendingExtraction: pending, _r2: { runId: matching ? 'extract-run' : 'other-run', revision: 8 } });
+    const backup = localStorage.getItem(RunStorage.key(1));
+    localStorage.setItem('sdt-run-1-prev', backup);
+    localStorage.setItem(RunStorage.key(1), '{broken');
+    const resume = vi.fn(() => ({ ok: true }));
+    session.configureGameRuntime({ resumeExtraction: resume });
+    const result = session.loadGame(1);
+    if (matching) {
+      expect(result.ok).toBe(true);
+      expect(resume).toHaveBeenCalledWith(pending);
+      expect(session.game.pendingExtraction).toEqual(pending);
+    } else {
+      expect(result).toMatchObject({ ok: false, code: 'INVALID_EXTRACTION_IDENTITY' });
+      expect(resume).not.toHaveBeenCalled();
+    }
+    expect(localStorage.getItem(RunStorage.key(1))).toBe(backup);
+  });
+
   it('accepts a minimal historical nest with defaults and unknown extension without saving', () => {
     const raw = writeRun({ version: undefined, extraFutureMetadata: { untouched: true } });
     const baseSave = vi.spyOn(Base, 'save'), runWrite = trackRunWrites();

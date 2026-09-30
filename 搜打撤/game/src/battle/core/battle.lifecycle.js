@@ -132,7 +132,7 @@ export function createBattleLifecycle({
     if (win === false && battleState.phase !== BATTLE_PHASES.DEFEAT) transitionTo(BATTLE_PHASES.DEFEAT);
     clearFeedback();
     set$busy(false);
-    SDT.Sound.sfx(win === true ? 'victory' : win === false ? 'defeat' : 'flee');
+    SDT.Sound.sfx(win === true ? (opts.isBoss ? 'bossVictory' : 'victory') : win === false ? 'defeat' : 'flee');
     const playedCopy = played.slice();
     const consumedCopy = consumed.slice();
     clearBattlePiles(); set$hand([]);
@@ -237,6 +237,7 @@ export function createBattleLifecycle({
     }));
     set$interaction(null);
     SDT.Sound.music('battle');   // 切入战斗氛围
+    SDT.Sound.sfx(opts.isBoss ? 'bossReveal' : 'battleEnter');
     G.state = 'modal';
     const names = foes.map(f => `${f.name}(${f.atk}-${f.hp})`).join('、');
     G.log(`[[icon:swords]] <b>${opts.isBoss ? 'BOSS战' : '遭遇战'}【${esc(names)}】</b>${!opts.isBoss && opts.risk ? ` · 风险<b>${esc(opts.risk)}</b>` : ''}`, 'warn');

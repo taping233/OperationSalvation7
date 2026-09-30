@@ -93,7 +93,7 @@ function readRun(index, raw) {
   }
   try { localStorage.setItem(RUN_KEY(index), prevRaw); }
   catch { reader.invalidate(index); return { run: null, raw }; }   // 自愈写失败（配额等）：不假称已回退
-  writeBaseline.set(index, prevRaw);   // 推进写基线，使采纳/写入链与自愈后的主档一致
+  // 自愈只修复持久原串；读者/预检不授予旧运行态写权，完整装载由 acceptLoad 采纳。
   console.warn(`[save] 档位 ${index} 主档读取失败，已回退到上一版存档（坏档原串保留于 corrupt 键）`);
   return { run: reader.parse(index, prevRaw), raw: prevRaw };
 }
@@ -134,10 +134,11 @@ const RunStorage = Object.freeze({
   },
   // 兼容既有显式读取调用（含空档基线）；生产恢复走预检/采纳两步。
   readForLoad(index) {
+    const run = this.read(index);   // 先完成可能的 prev 自愈，再采纳显式装载的生效原串。
     try { writeBaseline.set(index, localStorage.getItem(RUN_KEY(index))); }
     catch { writeBaseline.delete(index); }
     writeIssues.delete(index);
-    return this.read(index);
+    return run;
   },
   lastWriteIssue(index) { return writeIssues.get(index) || null; },
   // 坏档处理：原串备份到 corrupt 键后返回 null（原键不动，由玩家决定是否覆盖重开）
@@ -168,21 +169,25 @@ const RunStorage = Object.freeze({
       const hasBaseline = writeBaseline.has(index);
       const expectedRaw = writeBaseline.get(index);
       const currentRaw = localStorage.getItem(RUN_KEY(index));
+      // currentRaw 只解析一次（09-30 性能审计 F5：此前无基线分支与身份读取各 parse 一遍，
+      // 每次存档都白付一份大 payload 的 JSON.parse）
+      let currentIdentity = null;
+      if (currentRaw) {
+        try { currentIdentity = JSON.parse(currentRaw)?._r2 || null; } catch { /* 损坏档保留既有显式恢复路径 */ }
+      }
       if (hasBaseline && currentRaw !== expectedRaw) { writeIssues.set(index, 'STALE_SLOT'); return false; }
       if (!hasBaseline && currentRaw !== null) {
-        let existingIdentity = null;
-        try { existingIdentity = JSON.parse(currentRaw)?._r2 || null; } catch { /* 损坏档保留既有显式恢复路径 */ }
         // 新开档从列表页进入时可能没有读档基线；若现代对局已存在，
         // 不允许无基线写入把它覆盖。无身份旧档仍可由恢复流程升级。
-        if (existingIdentity) { writeIssues.set(index, 'STALE_SLOT'); return false; }
+        if (currentIdentity) { writeIssues.set(index, 'STALE_SLOT'); return false; }
       }
-      let persistedIdentity = null;
-      try { persistedIdentity = JSON.parse(currentRaw || 'null')?._r2 || null; } catch { /* 读取失败走新身份 */ }
-      const identity = persistedIdentity || value?._r2 || { runId: newRunId(index), revision: -1 };
+      const identity = currentIdentity || value?._r2 || { runId: newRunId(index), revision: -1 };
       const nextIdentity = { runId: identity.runId, revision: Math.max(-1, Number(identity.revision) || 0) + 1 };
       const nextRaw = JSON.stringify({ ...value, _r2: nextIdentity, version: SAVE_VERSION });
       // 覆盖前把当前好档原串转存 prev 键（尽力而为：失败不影响本次主写）
       if (currentRaw) { try { localStorage.setItem(PREV_KEY(index), currentRaw); } catch { /* 尽力而为 */ } }
+      // 空主键表示新对局：旧终局/中断清理留下的 prev 不得成为新局的回退来源。
+      else localStorage.removeItem(PREV_KEY(index));
       localStorage.setItem(RUN_KEY(index), nextRaw);
       writeBaseline.set(index, nextRaw);
       writeIssues.delete(index);
@@ -208,7 +213,11 @@ const RunStorage = Object.freeze({
     writeIssues.delete(index);
     // 仅事务恢复会调用此入口；恢复已按事务 revision 校验并提交，
     // 因而本标签可将后续写入基线推进到事务后的持久状态。
-    try { writeBaseline.set(index, localStorage.getItem(RUN_KEY(index))); } catch { writeBaseline.delete(index); }
+    let raw;
+    try { raw = localStorage.getItem(RUN_KEY(index)); writeBaseline.set(index, raw); }
+    catch { writeBaseline.delete(index); return; }
+    // 终局两键提交绕过 remove() 删除主档；同步释放它的旧局备份。
+    if (raw === null) { try { localStorage.removeItem(PREV_KEY(index)); } catch { /* 新局首写仍必须清理 */ } }
   },
   migrateLegacy() {
     try {

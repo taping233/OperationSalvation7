@@ -310,6 +310,12 @@ function getSnapshot() {
     storeBattleSnapshot(sig, createBattleSnapshot(input));
     return snapCache;
   }
+  // 瞄准会话的存活判定专用轻查询（09-30 性能审计 F1 最终形态）：完整快照的组装+签名
+  // 每次要付全量遍历，而会话存活只依赖 token/phase 两个标量。同步链内变异必须即时
+  // 重投影（battle-snapshot-integration 契约），快照缓存不能做链级复用——热路径改走这里。
+  function getBattleLiveness() {
+    return { battleToken: battleState.token, phase: battleState.phase };
+  }
 function clearTargetSession(preserveCardUid = null) {
     if (!interaction && battleState.phase !== BATTLE_PHASES.TARGETING) return false;
     const i = interaction;
@@ -362,7 +368,7 @@ function usePotion(uid) { return bag.usePotion(uid); }
 function openBag() { return bag.openBag(); }
 function closeBag() { return bag.closeBag(); }
 
-export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, intentFor, drawCards, resolveFoeDefeat, sweepDead, nestPhase, grantSha, findCard, infuseOf, effCostOf, swapCardCosts, restore, finish, cancelInteraction, flee, handCurseSpecs, getSnapshot, snapshotSignature, processDelayed, accrueGrowth, resolveCard, resolveCardWithFeedback, syncCurseCondEquips, useEquipSkill, applyKillRewards, start, fireTurnEndTriggers, addTempCard, fireConsumeTriggers, toggleDeckCard, cancelDeckSelection, beginBoss, targetSide, unplayableReason, play, toggleInfusePick, cancelInfuse, beginInfuse, confirmInfuse, queueCardExecution, aegisBlocked, foeIdx, hitFoe, matchHandSelectKey, skipHandSelect, pickHandSelect, useItem, bagSlam, resolveDart, resolveSlam, addPlayerCurse, usePotion, openBag, closeBag, pickChoice, pickDiscover, playerTakeHit, frenzyCurse, elCurse };
+export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, intentFor, drawCards, resolveFoeDefeat, sweepDead, nestPhase, grantSha, findCard, infuseOf, effCostOf, swapCardCosts, restore, finish, cancelInteraction, flee, handCurseSpecs, getSnapshot, snapshotSignature, getBattleLiveness, processDelayed, accrueGrowth, resolveCard, resolveCardWithFeedback, syncCurseCondEquips, useEquipSkill, applyKillRewards, start, fireTurnEndTriggers, addTempCard, fireConsumeTriggers, toggleDeckCard, cancelDeckSelection, beginBoss, targetSide, unplayableReason, play, toggleInfusePick, cancelInfuse, beginInfuse, confirmInfuse, queueCardExecution, aegisBlocked, foeIdx, hitFoe, matchHandSelectKey, skipHandSelect, pickHandSelect, useItem, bagSlam, resolveDart, resolveSlam, addPlayerCurse, usePotion, openBag, closeBag, pickChoice, pickDiscover, playerTakeHit, frenzyCurse, elCurse };
 
 /* —— 六段正文（原行 606-2479，逐字）—— */
   // ---------- 生效时刻 / 持续时间 / 生效条件（设计者 2026-09-02 定版） ----------
@@ -431,8 +437,18 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
         if (silenced) {
           G.log(`[[icon:cross]] 沉默中：【${esc(q.cardName)}】的延迟效果无法生效`, 'warn');
         } else {
-          // 合成卡携带原卡 dmgType/type（schema 卡面字段一致性），infuse 清零避免注能门误拦
-          const synthetic = { ...q.srcCard, desc: '', infuse: 0, rules: { version: 1, triggers: { onPlay: q.ops } } };
+          // 合成卡必须携带原卡 battle.target 目标契约（chosenEnemy 段的前置校验读取 side/area
+          // 声明，缺失即 TypeError 把整段延迟卡死）；op 上已到期的 schedule 必须剥离，否则
+          // resolver 会把它再次排进下回合，延迟效果永远执行不到（09-30 深审 BC-06）
+          const srcBattle = q.srcCard?.rules?.battle;
+          const synthetic = {
+            ...q.srcCard, desc: '', infuse: 0,
+            rules: {
+              version: 1,
+              ...(srcBattle?.target ? { battle: { target: srcBattle.target } } : {}),
+              triggers: { onPlay: q.ops.map(op => { const rest = { ...op }; delete rest.schedule; return rest; }) },
+            },
+          };
           resolveCard(synthetic, alive()[0] || null, false, 0, 'm2-scheduled');
         }
         continue;   // 一次性
@@ -532,9 +548,10 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     findCard, addTempCard, sweepDead,
     onHandConsumed: (card, uid) => onHandConsumed(card, uid),
     // M3：registerRule discoverPlus（黑暗形态「每当你发现卡牌时，增加 1 个可选项」）——
-    // 旗标经 pstat.status.discoverPlus，发现面板入队时统一 +1
+    // 旗标经 pstat.status.discoverPlus，发现面板候选数 +N。此前误把 n（选择/获得次数）+1，
+    // 变成多获得一张而不是多看一张（09-30 深审 BC-07）
     queueDiscover: value => discoverQueue.push(
-      (pstat.status.discoverPlus || 0) > 0 ? { ...value, n: (+value.n || 1) + 1 } : value),
+      (pstat.status.discoverPlus || 0) > 0 ? { ...value, optionsPlus: (pstat.status.discoverPlus || 0) } : value),
     splitClauses, applyTextEffects,
     registerTurnStart, registerBattle, castRandomSpells, drawCards, grantSha, hitFoe,
     // G3（A3 第三批）：acquire 族端口——洗入牌库与洗混（deck.insert 文本路径同一底层）、
@@ -774,9 +791,11 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
       Combat.addBlessing(pstat, 'atkUp', killAtkUp * kills);
       G.log(`[[icon:swords]] <b>饮血剑</b>：消灭 ${kills} 个敌人，攻击力 +${killAtkUp * kills}（当前加成 ${pstat.status.atkUp}）`, 'ok');
     }
+    // M2：结构化 triggers.onKill（「击杀时」登记卡）——按实际击杀数逐次触发，且非卡牌来源
+    // （砸击/毒杀/随从等 null source）同样计数；此前 null 提前返回 + 单次触发，AOE 双杀只 +1、
+    // 非卡击杀完全不触发（09-30 深审 BC-10）
+    for (let i = 0; i < kills; i++) triggersM2.fireKill();
     if (!card) return;
-    // M2：结构化 triggers.onKill（「击杀时」登记卡，如饮血剑规则化版本）
-    triggersM2.fireKill();
     const d = String(card.desc || '');
     const armorM = d.match(/击杀(?:敌人)?(?:时|则)?[^。；]*?\+\s*(\d+)\s*甲/);
     if (armorM) {
@@ -1011,6 +1030,8 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     throwIfActionCancelled, findCard, triggersM2,
     addEnergy: amount => { set$energy(energy + (amount)); return energy; },
     drawCards, grantSha, queueDiscover: value => discoverQueue.push(value), getTurn: () => turn,
+    // BC-09（09-30 深审）：通行证类道具战斗内使用——发现面板立即消费 + 传说/职业池直授
+    processDiscoverQueue, randomDiscoverCard,
   });
   const battleLifecycle = createBattleLifecycle({
     session: executionSession, intentFor, cloneData, injectSealCards, applyNestRunes, applyVoidRune,

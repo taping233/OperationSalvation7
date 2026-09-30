@@ -538,8 +538,10 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
           : `<span class="dim">${prog} / ${need}</span>`}
       </div>`;
     }).join('');
+    // 收藏池只取一次（此前每个职业重算一遍 collectPool）
+    const poolAll = M.collectPool();
     const groups = SDT.Cards.CLASSES.map(cls => {
-      const pool = M.collectPool().filter(c => c.cls === cls);
+      const pool = poolAll.filter(c => c.cls === cls);
       const gotN = pool.filter(c => B.isCollected(c)).length;
       const accent = characterFor(cls)?.color || '#d9bb82';
       const slots = pool.map(c => B.isCollected(c)
@@ -569,13 +571,15 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
   function hubAchHTML(hubCollectionView) {
     const M = SDT.Meta, B = SDT.Base;
     const doneN = M.ACHIEVEMENTS.filter(a => M.isUnlocked(a)).length;
+    // 奖励卡 id→卡索引一次建表（此前每个带卡奖励的成就都全库线性扫一遍）
+    const cardById = new Map(SDT.Cards.all().map(c => [c.id, c]));
     const rows = M.ACHIEVEMENTS.map(a => {
       const unlocked = M.isUnlocked(a), claimed = M.isClaimed(a.id);
       let rw = [
         a.reward.wood ? `[[icon:wood]] ×${a.reward.wood}` : '',
         a.reward.rations ? `[[icon:bread]] ×${a.reward.rations}` : '',
         a.reward.keys ? `[[icon:key]] ×${a.reward.keys}` : '',
-        a.reward.card ? `[[icon:cards]] ${(SDT.Cards.all().find(x => x.id === a.reward.card) || {}).name || '稀有卡牌'}` : '',
+        a.reward.card ? `[[icon:cards]] ${(cardById.get(a.reward.card) || {}).name || '稀有卡牌'}` : '',
       ].filter(Boolean).join(' ');
       if (a.back) {
         const bd = (SDT.Cards.CARD_BACKS || []).find(b => b.id === a.back);

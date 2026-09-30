@@ -1,0 +1,157 @@
+{
+  "name": "C · 动作材质",
+  "version": "C",
+  "featuredLabel": "动作材质 · 十个",
+  "featuredTitle": "真实动作，各有材质",
+  "featuredIds": [
+    "click",
+    "confirm",
+    "card",
+    "attackSlash",
+    "parry",
+    "shieldBreak",
+    "heal",
+    "eventEnter",
+    "chestBurst",
+    "bossReveal"
+  ],
+  "groups": {
+    "ui": "界面反馈",
+    "cards": "卡牌动作",
+    "combat": "战斗与状态",
+    "nodes": "事件与登场",
+    "rewards": "开箱奖励"
+  },
+  "cues": [
+    {
+      "id": "click",
+      "label": "点击",
+      "group": "ui",
+      "loop": false,
+      "note": "剪刀闭合的短促轻扣，起音干净。",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/cc0-action/click.ogg",
+          "seconds": 0.165
+        }
+      ]
+    },
+    {
+      "id": "confirm",
+      "label": "确认",
+      "group": "ui",
+      "loop": false,
+      "note": "金属锁扣落定，和点击的轻扣区分。",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/cc0-action/confirm.ogg",
+          "seconds": 0.486875
+        }
+      ]
+    },
+    {
+      "id": "card",
+      "label": "出牌",
+      "group": "cards",
+      "loop": false,
+      "note": "真实纸页滑动，保留纸张摩擦与落点。",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/cc0-action/card.ogg",
+          "seconds": 0.747146
+        }
+      ]
+    },
+    {
+      "id": "attackSlash",
+      "label": "斩击",
+      "group": "combat",
+      "loop": false,
+      "note": "挥动空气先行、刀刃滑切随后，短而锐。",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/cc0-action/attackSlash.ogg",
+          "seconds": 0.53
+        }
+      ]
+    },
+    {
+      "id": "parry",
+      "label": "格挡",
+      "group": "combat",
+      "loop": false,
+      "note": "双刀硬碰的金属顿点，保留自然短响。",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/cc0-action/parry.ogg",
+          "seconds": 0.4265
+        }
+      ]
+    },
+    {
+      "id": "shieldBreak",
+      "label": "破盾",
+      "group": "combat",
+      "loop": false,
+      "note": "护面冲击后玻璃裂散，明确碎裂过程。",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/cc0-action/shieldBreak.ogg",
+          "seconds": 0.422396
+        }
+      ]
+    },
+    {
+      "id": "heal",
+      "label": "治疗",
+      "group": "combat",
+      "loop": false,
+      "note": "药瓶拔塞、药液流动与一滴收尾，温和具体。",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/cc0-action/heal.ogg",
+          "seconds": 1.021917
+        }
+      ]
+    },
+    {
+      "id": "eventEnter",
+      "label": "进入事件",
+      "group": "nodes",
+      "loop": false,
+      "note": "抽屉滑动与木质摩擦，像开启现场档案。",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/cc0-action/eventEnter.ogg",
+          "seconds": 1.135
+        }
+      ]
+    },
+    {
+      "id": "chestBurst",
+      "label": "开启宝箱",
+      "group": "rewards",
+      "loop": false,
+      "note": "转锁、箱体落扣、金币散落，三段动作有次序。",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/cc0-action/chestBurst.ogg",
+          "seconds": 1.325
+        }
+      ]
+    },
+    {
+      "id": "bossReveal",
+      "label": "首脑登场",
+      "group": "nodes",
+      "loop": false,
+      "note": "铁门摩擦展开、重金属锤击落定，克制地增加重量。",
+      "variants": [
+        {
+          "src": "./assets/sfx/alternatives/cc0-action/bossReveal.ogg",
+          "seconds": 1.415
+        }
+      ]
+    }
+  ]
+}

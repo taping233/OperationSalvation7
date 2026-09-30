@@ -10,13 +10,35 @@ const SCRIPT_PATH = process.argv[1] && /acceptance-gate\.mjs$/.test(process.argv
 const PROJECT_ROOT = SCRIPT_PATH ? path.resolve(path.dirname(SCRIPT_PATH), '..') : process.cwd();
 const REPO_ROOT = path.resolve(PROJECT_ROOT, '..');
 const GUARDS = ['tests/architecture-boundaries.test.js', 'tests/contracts.test.js'];
-const TEST_LIMIT = 20;
+const TEST_LIMIT = 30;
 const NEAR_LIMIT = 12;
 const AGENT_TOOL_TESTS = new Map([
   ['game/tools/agent-compare.mjs', ['tests/agent-compare-provenance.test.js']],
   ['game/tools/agent-compare-provenance.mjs', ['tests/agent-compare-provenance.test.js']],
   ['game/tools/agent-run-provenance.mjs', ['tests/agent-run-provenance.test.js']],
 ]);
+// Known project workflow tools have direct contracts; unknown scripts still require full validation.
+const WORKFLOW_TESTS = new Map([
+  ['scripts/workflow.mjs', ['tests/workflow-cli-integration.test.js', 'tests/workflow-tools.test.js', 'tests/workflow-task.test.js']],
+  ['scripts/workflow-task.mjs', ['tests/workflow-task.test.js']],
+  ['scripts/workflow-evidence.mjs', ['tests/workflow-scope.test.js', 'tests/workflow-tools.test.js']],
+  ['scripts/workflow-dependencies.mjs', ['tests/workflow-dependencies.test.js', 'tests/workflow-scope.test.js']],
+  ['scripts/workflow-status.mjs', ['tests/workflow-handoff.test.js', 'tests/workflow-tools.test.js']],
+  ['scripts/handoff-brief.mjs', ['tests/workflow-handoff.test.js']],
+  ['scripts/workflow-ledger.mjs', ['tests/workflow-tools.test.js', 'tests/workflow-task.test.js']],
+  ['scripts/workflow-browser.mjs', ['tests/workflow-browser.test.js']],
+  ['scripts/workflow-memory.mjs', ['tests/workflow-memory.test.js', 'tests/workflow-handoff.test.js']],
+  ['scripts/workflow-staged.mjs', ['tests/workflow-staged.test.js']],
+  ['scripts/index-validation.mjs', ['tests/workflow-index.test.js', 'tests/workflow-cli-integration.test.js']],
+  ['scripts/page-snapshot.mjs', ['tests/workflow-cli-integration.test.js']],
+  ['scripts/workflow-archive.mjs', ['tests/workflow-tools.test.js']],
+  ['scripts/acceptance-gate.mjs', ['tests/acceptance-gate.test.js']],
+  ['scripts/architecture-graph.mjs', ['tests/architecture-boundaries.test.js', 'tests/contracts.test.js']],
+  ['scripts/generate-compendium.mjs', ['tests/compendium.test.js']],
+  ['scripts/sync-cards-from-live.mjs', ['tests/sync-cards-from-live.test.js', 'tests/schema-op-coverage.test.js', 'tests/contracts.test.js']],
+]);
+// 剧情源文件没有 JS 模块依赖图可走：定向到全书生成对比，编译错误由门内剧情编译步骤兜底。
+const NARRATIVE_TESTS = ['tests/compendium.test.js'];
 export const DIRTY_SCAN_ROOTS = ['搜打撤/game/src', '搜打撤/game/tools', '搜打撤/tests'];
 const FULL_SOURCE = [
   /^game\/src\/(main|boot-order|game\.boot)\.js$/,
@@ -25,6 +47,8 @@ const FULL_SOURCE = [
   /^game\/src\/hub\/game\.store\.js$/,
   /^game\/src\/run\/game\.session/,
   /^game\/src\/battle\/(battle\.core|battle\.engine|battle\.runtime)/,
+  /^game\/src\/battle\/core\/battle\.(core|engine)\.js$/,
+  /^game\/src\/battle\/runtime\/battle\.runtime(?:\.[\w-]+)?\.js$/,
   /^game\/src\/cards\/cards\.sync/,
   /^game\/src\/generated\//,
 ];
@@ -42,13 +66,13 @@ function toProjectPath(value) {
   return normalized;
 }
 
-function walkJs(relativeDir) {
+function walkJs(relativeDir, extensions = ['.js']) {
   const result = [];
   const visit = dir => {
     for (const entry of readdirSync(path.join(PROJECT_ROOT, dir), { withFileTypes: true })) {
       const next = path.posix.join(dir, entry.name);
       if (entry.isDirectory()) visit(next);
-      else if (next.endsWith('.js')) result.push(next);
+      else if (extensions.some(ext => next.endsWith(ext))) result.push(next);
     }
   };
   visit(relativeDir);
@@ -56,12 +80,13 @@ function walkJs(relativeDir) {
 }
 
 function reverseImports() {
-  const files = [...walkJs('game/src'), ...walkJs('tests')];
+  const files = [...walkJs('game/src'), ...walkJs('tests'), ...walkJs('game/data', ['.json'])];
   const fileSet = new Set(files);
   const reverse = new Map();
   for (const filename of files) {
     const source = readFileSync(path.join(PROJECT_ROOT, filename), 'utf8');
-    const imports = analyzeModule(source, filename).imports;
+    // JSON 数据文件是叶子节点：不被静态解析，只作为 JS import 的目标参与反向图。
+    const imports = filename.endsWith('.json') ? [] : analyzeModule(source, filename).imports;
     for (const { specifier } of imports) {
       if (!specifier.startsWith('.')) continue;
       const target = path.posix.normalize(path.posix.join(
@@ -102,16 +127,27 @@ export function planForPaths(inputPaths) {
   const reasons = [];
   const tests = new Set();
   const source = relevant.filter(p => p.startsWith('game/src/'));
+  const dataFiles = relevant.filter(p => p.startsWith('game/data/'));
   const tools = relevant.filter(p => p.startsWith('game/tools/'));
+  const scripts = relevant.filter(p => p.startsWith('scripts/'));
   const changedTests = relevant.filter(p => p.startsWith('tests/') && p.endsWith('.test.js'));
-  for (const test of changedTests) tests.add(test);
+  for (const test of changedTests) {
+    if (existsSync(path.join(PROJECT_ROOT, test))) tests.add(test);
+  }
   if (changedTests.some(test => !existsSync(path.join(PROJECT_ROOT, test)))) {
-    reasons.push('测试文件被删除或当前路径不可用');
+    reasons.push('被删除或缺失的测试文件不参与定向选择');
   }
 
-  if (relevant.some(p => p.startsWith('game/data/') || p.startsWith('scripts/')
-    || p.startsWith('narrative/') || ['package.json', 'package-lock.json', 'vite.config.js'].includes(p))) {
-    reasons.push('数据、工具或测试配置变更需要全量测试');
+  const configFull = relevant.filter(p => ['package.json', 'vite.config.js'].includes(p));
+  if (configFull.length) reasons.push('包或构建配置变更需要全量测试');
+  if (relevant.some(p => p.startsWith('narrative/'))) {
+    for (const test of NARRATIVE_TESTS) tests.add(test);
+  }
+  for (const script of scripts) {
+    const mapped = WORKFLOW_TESTS.get(script);
+    if (!mapped || !existsSync(path.join(PROJECT_ROOT, script)) || mapped.some(test => !existsSync(path.join(PROJECT_ROOT, test)))) {
+      reasons.push(script + ' 无完整直接契约，回退全量');
+    } else for (const test of mapped) tests.add(test);
   }
   for (const tool of tools) {
     const mappedTests = AGENT_TOOL_TESTS.get(tool);
@@ -125,23 +161,38 @@ export function planForPaths(inputPaths) {
     }
     for (const test of mappedTests) tests.add(test);
   }
-  if (relevant.some(p => p.startsWith('tests/') && !p.endsWith('.test.js'))) {
-    reasons.push('测试依赖或 fixture 变更需要全量测试');
+  for (const support of relevant.filter(p => p.startsWith('tests/') && !p.endsWith('.test.js'))) {
+    const name = path.posix.basename(support);
+    const consumers = walkJs('tests').filter(candidate => candidate.endsWith('.test.js')
+      && readFileSync(path.join(PROJECT_ROOT, candidate), 'utf8').includes(name));
+    if (!consumers.length) reasons.push(support + ' 没有引用它的测试，无法定向');
+    else for (const consumer of consumers) tests.add(consumer);
   }
   if (source.some(p => !p.endsWith('.js') || FULL_SOURCE.some(pattern => pattern.test(p)))) {
     reasons.push('公共状态、启动、规则或迁移边界变更需要全量测试');
   }
   if (reasons.length) return { mode: 'full', paths: relevant, reasons, tests: [] };
 
-  if (source.length) {
+  if (relevant.includes('package-lock.json') && !configFull.length) {
+    for (const guard of GUARDS) tests.add(guard);
+    reasons.push('lockfile 单独变化只运行架构哨兵');
+  }
+
+  const graphTargets = [...source, ...dataFiles];
+  if (graphTargets.length) {
     let graph;
     try { graph = reverseImports(); }
     catch (error) {
       return { mode: 'full', paths: relevant, reasons: ['依赖图解析失败：' + error.message], tests: [] };
     }
-    for (const file of source) {
+    for (const file of graphTargets) {
       if (!graph.fileSet.has(file)) {
-        reasons.push(file + ' 已删除或不是可解析的源码文件');
+        // 删除/缺失文件：引用它的测试就是回归网（悬空 import 会当场失败），不再整体回退全量。
+        const name = path.posix.basename(file);
+        const referenced = walkJs('tests').filter(candidate => candidate.endsWith('.test.js')
+          && readFileSync(path.join(PROJECT_ROOT, candidate), 'utf8').includes(name));
+        if (referenced.length) for (const test of referenced) tests.add(test);
+        else reasons.push(file + ' 已删除且无测试引用，仅运行架构哨兵');
         continue;
       }
       const direct = nearbyTests(file, graph.reverse, 1);
@@ -155,8 +206,8 @@ export function planForPaths(inputPaths) {
     }
     for (const guard of GUARDS) tests.add(guard);
   }
-  if (reasons.some(reason => reason.includes('没有可确认') || reason.includes('已删除'))) {
-    return { mode: 'full', paths: relevant, reasons, tests: [] };
+  if (reasons.some(reason => reason.includes('没有可确认'))) {
+    return { mode: 'full', paths: relevant, reasons: [], tests: [] };
   }
   if (tests.size > TEST_LIMIT) {
     return { mode: 'full', paths: relevant, reasons: ['定向测试超过 ' + TEST_LIMIT + ' 个文件'], tests: [] };
@@ -194,7 +245,7 @@ function stagedChanges() {
         + [...new Set(dirty)].slice(0, 8).join(', '));
     }
   }
-  return { paths, needsFull: entries.some(entry => !['A', 'M'].includes(entry.status)) };
+  return { paths, needsFull: entries.some(entry => ['R', 'T'].includes(entry.status)) };
 }
 
 function isRelevant(p) {
@@ -273,9 +324,10 @@ async function main() {
   if (staged?.needsFull && plan.mode !== 'skip') {
     plan.mode = 'full';
     plan.tests = [];
-    plan.reasons.push('暂存包含删除、类型变化或重命名，回退完整测试');
+    plan.reasons.push('暂存包含重命名或类型变化，回退完整测试；纯删除按 A 档走定向+架构哨兵');
   }
-  printPlan(plan);
+  if (args.includes('--json')) process.stdout.write(JSON.stringify(plan) + '\n');
+  else printPlan(plan);
   if (!args.includes('--run') || plan.mode === 'skip') return;
   runNode(['scripts/compile-narrative.mjs'], '剧情编译');
   if (staged) stagedChanges();

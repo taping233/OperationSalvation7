@@ -81,14 +81,18 @@ import { turboMs } from '../agent/agent.turbo.js';
   // 带入背包的卡牌才能在战斗中使用；「初始攻击」固定携带、不入库也不会出现在这里。
   let deployPick = null;    // 卡名 => 携带张数（出发准备页的暂存选择）
   // ESM 导入绑定不可赋值：壳侧重置改经 setter（2026-09-22 拆分理顺点）
-  function setDeployPick(v) { deployPick = v; }
+  let deployPickFresh = false;   // 整备入口刚注入过预设选择（随后打开整备页时保留）
+  function setDeployPick(v) { deployPick = v; deployPickFresh = true; }
   let deployHint = '';      // 页内提示（容量不足等）
   let deployJustOpened = false;   // 出发准备页刚打开（只播一次入场动画）
 
   function openDepartPrep() {
     game.state = 'modal';
     deployHint = '';
-    deployPick = {};
+    // 预设应用链路（applyPicks → openDeparture）刚注入的选择必须保留：
+    // 此前无条件清空，应用预设后确认出发只携带初始攻击（09-30 深审 ROOT-01）
+    if (!deployPickFresh) deployPick = {};
+    deployPickFresh = false;
     deployJustOpened = true;   // 页面初次打开时播放入场动画
     // 2026-09-07 留言：仓库卡牌不再自动塞进背包——全部留在左侧，由玩家自己拖
     renderDepartPrep();
@@ -314,6 +318,7 @@ import { turboMs } from '../agent/agent.turbo.js';
       });
     }
     UI.act('confirmDeploy', () => {
+      SDT.Sound.sfx('prepReady');
       // 先选角色，确认角色后才真正创建新局；取消选角可以无损回到整备页，
       // deployPick 仍保留在内存中，因此不会丢失刚才的带入配置。
       const picks = { ...(deployPick || {}) };
@@ -329,6 +334,7 @@ import { turboMs } from '../agent/agent.turbo.js';
               return false;
             }
             deployPick = null;
+            SDT.Sound.sfx('deployStart');
             return true;
           },
         });

@@ -12,7 +12,7 @@ import { normalizeAction, actionId } from './agent.protocol.js';
 import { findUiElement, collectActionKeys, overlayVisible } from './agent.surface.js';
 import { observe, settleSignature, bustSigCache, markUiFailure } from './agent.state.js';
 import { isTurbo } from './agent.turbo.js';
-import { setDriver, battleTick, battleActionTick, battleEnd } from './agent.recorder.js';
+import { setDriver, getDriver, battleTick, battleActionTick, battleEnd } from './agent.recorder.js';
 import { moveTo, reenterCell } from '../run/game.run.flow.js';
 import { startNewGame, game, getActiveSlot } from '../run/game.session.js';
 
@@ -57,10 +57,20 @@ function commandResult(value, id, action) {
 }
 // 高精度时钟（Date.now 在 Windows 粒度 15.6ms，够不着 3ms quiet）
 const nowMs = () => (typeof performance !== 'undefined' && performance.now) ? performance.now() : Date.now();
-// 亚毫秒让位：Node 走 setImmediate（0.1ms 级），浏览器回退 setTimeout(0)
+// 亚毫秒让位：Node 走 setImmediate（0.1ms 级）；浏览器回退走 MessageChannel 泵——
+// setTimeout(0) 在后台标签被 Chrome 钳到 ~350ms/次（实机实测 10 次 3577ms），
+// turbo 步进的 defer 全部吃节流会让每步膨胀到秒级；MessageChannel 不受 timer
+// 节流（实机实测 10 次 1ms）。无 MessageChannel 的极简环境再退 setTimeout(0)
+const channelPump = (typeof MessageChannel === 'function') ? (() => {
+  const ch = new MessageChannel();   // eslint-disable-line no-undef
+  const queue = [];
+  ch.port1.onmessage = () => { const job = queue.shift(); if (job) job(); };
+  ch.port1.start?.();
+  return (resolve) => { queue.push(resolve); ch.port2.postMessage(null); };
+})() : null;
 const defer = () => (typeof globalThis.setImmediate === 'function')
   ? new Promise(resolve => globalThis.setImmediate(resolve))
-  : new Promise(resolve => setTimeout(resolve, 0));
+  : (channelPump ? new Promise(channelPump) : new Promise(resolve => setTimeout(resolve, 0)));
 
 async function awaitCommand(accepted, options) {
   const completion = completions.get(accepted);
@@ -365,7 +375,10 @@ async function autoRun({ decide, maxSteps = 800, onStep, until, driver = 'auto',
     return trace;
   }
   const trace = [];
-  const previousDriver = setDriver(driver);
+  // 先读旧值再写入（INFRA-03）：setDriver 返回的是刚写入的标签，用它当「调用前
+  // 旧驱动」会让 finally 把新标签还原回去（human→autoRun 后仍是 greedy）。
+  const previousDriver = getDriver();
+  setDriver(driver);
   runCancelled = false;
   runAbort = new AbortController();
   // 局级墙钟（2026-09-28 代码线，选入生效）：maxSteps 对 LLM 慢决策不构成时间上限，

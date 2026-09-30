@@ -10,7 +10,9 @@ const $ = (id) => document.getElementById(id);
 
 export const hudMethods = {
   refresh(game) {
-    renderExpeditionPanel($('routePanel'), game, name => SDT.Icons.img(name));
+    // 战斗渲染末尾也会走 UI.refresh：battle 模式下路线面板被整页盖住，直接跳过
+    // （F8 补充；_lastMode==='battle' 的可靠性同 overlay.js 对 page-covered 的既有判断）
+    if (this._lastMode !== 'battle') renderExpeditionPanel($('routePanel'), game, name => SDT.Icons.img(name));
     // 格子结算链回到 idle，才真正退出房间页；战斗→宝箱等中间切页不会闪回地图。
     if (game.state === 'idle' && this._roomActive) this.endRoom();
     const layer = game.curLayer ? game.curLayer() : null;

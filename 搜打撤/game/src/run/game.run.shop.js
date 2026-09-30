@@ -376,7 +376,7 @@ function createShopController({
       slot.sold = true;
       game.ownedCards.push({ uid: newUid(), card: { ...slot.card } });
       shopNotice = `已购入「${slot.card.name}」 · 剩余 ${game.coins} 币`;
-      SDT.Sound.sfx('gain');
+      SDT.Sound.sfx('tradeBuy');
       UI.log(`[[icon:bag]] 购买卡牌【<b>${esc(slot.card.name)}</b>】（- ${slot.price} 币，剩 ${game.coins}）`, 'coin');
       saveGame();
       playBuyCarry(document.querySelectorAll('.shop-board-grid .shop-slot')[+data.i], slot, () => refreshShopSlot(+data.i));
@@ -404,7 +404,7 @@ function createShopController({
       slot.shaReplenish--;
       game.ownedCards.push({ uid: newUid(), card: { ...slot.card } });
       shopNotice = `已补充初始攻击 ×1 · 剩余 ${game.coins} 币`;
-      SDT.Sound.sfx('gain');
+      SDT.Sound.sfx('tradeBuy');
       UI.log(`[[icon:bag]] 补充初始攻击 ×1（- ${slot.price} 币，剩 ${game.coins} · 本站还可补 ${slot.shaReplenish} 张）`, 'coin');
       saveGame();
       playBuyCarry(document.querySelectorAll('.shop-board-grid .shop-slot')[+data.i], slot, () => refreshShopSlot(+data.i));
@@ -421,6 +421,7 @@ function createShopController({
       const price = SDT.Cards.sellPrice(owned.card);
       game.ownedCards.splice(index, 1);
       game.coins += price;
+      SDT.Sound.sfx('tradeSell');
       shopNotice = `已出售「${owned.card.name}」 · 当前 ${game.coins} 币`;
       UI.log(`[[icon:coin]] 出售卡牌【<b>${esc(owned.card.name)}</b>】（+ ${price} 币，现有 ${game.coins}）`, 'coin');
       saveGame();

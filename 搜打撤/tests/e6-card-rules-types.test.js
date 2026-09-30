@@ -1,5 +1,9 @@
 // @vitest-environment node
-import { describe, expect, it } from 'vitest';
+import {describe, expect, it, vi } from 'vitest';
+
+// tsc 子进程类契约测试固有慢：默认 5s 在全量并行负载下必超时（与 boot.test 同族）
+vi.setConfig({ testTimeout: 20000, hookTimeout: 20000 });
+
 import { API } from 'typescript/unstable/sync';
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
@@ -40,6 +44,7 @@ const valid = `
 import { inspectCardRuleCapability } from '../game/src/cards/card-rules.capability.js';
 import { assertCardRulesExecutable, rejectUnsupportedCard } from '../game/src/battle/effects/battle.rule-guard.js';
 import type { BattleOperationName, OperationTarget, CardRuleCapability, AcquireDestination, AcquireAction } from '../game/src/cards/card-rules.capability.types.js';
+
 const operation: BattleOperationName = 'acquire';
 const target: OperationTarget = 'allEnemies';
 const destination: AcquireDestination = 'hand';

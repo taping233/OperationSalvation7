@@ -84,27 +84,21 @@ async function ensureServer() {
 
 // ---------- Edge + CDP ----------
 let edgeProc = null;
-function killStaleAutomationEdge() {
-  // ① 杀绑定本脚本临时档案（perf-wt-b）的 Edge，绝不碰老板自己的浏览器
-  try {
-    execFileSync('powershell', ['-NoProfile', '-Command',
-      'Get-CimInstance Win32_Process -Filter "Name=\'msedge.exe\'" | Where-Object { $_.CommandLine -like \'*perf-wt-b*\' } | ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }'], { stdio: 'ignore', timeout: 30000 });
-  } catch (e) { log('killStaleAutomationEdge(档案匹配)失败（忽略）:', String(e.message).slice(0, 120)); }
-  // ② 杀占用 CDP 端口的进程（僵尸浏览器会顶掉新实例的调试口，必须按端口清场）
-  try {
-    const out = execFileSync('netstat', ['-ano'], { encoding: 'utf8', timeout: 30000 });
-    const pids = new Set();
-    for (const line of out.split('\n')) {
-      if (line.includes(`:${CDP_PORT} `) && /LISTENING/i.test(line)) {
-        const pid = Number(line.trim().split(/\s+/).pop());
-        if (pid) pids.add(pid);
-      }
+function ensureCdpPortFree() {
+  // INFRA-06：不再自动杀任何进程（旧实现按端口 netstat 挑 PID 直接 taskkill /T /F，
+  // 会误杀其他会话/无主进程整棵树）。端口被占=现场归人工：报错退出，只允许
+  // cleanup() 收拾本脚本自己 spawn 的 edgeProc/serverProc。
+  let out = '';
+  try { out = execFileSync('netstat', ['-ano'], { encoding: 'utf8', timeout: 30000 }); }
+  catch (e) { log('netstat 不可用（跳过端口预检，CDP 连不上会自然失败）:', String(e.message).slice(0, 120)); return; }
+  for (const line of out.split('\n')) {
+    if (line.includes(`:${CDP_PORT} `) && /LISTENING/i.test(line)) {
+      const pid = Number(line.trim().split(/\s+/).pop()) || null;
+      throw new Error(`CDP 端口 ${CDP_PORT} 已被${pid ? ` pid=${pid} 的进程` : '其他进程'}占用。`
+        + `本脚本不自动杀进程，请人工核对归属后处置（如 netstat -ano | findstr ":${CDP_PORT}"），`
+        + `确认无主或属旧自动化残留再自行清理，然后重跑。`);
     }
-    for (const pid of pids) {
-      log(`清理占用 CDP 端口 ${CDP_PORT} 的进程 pid=${pid}`);
-      try { execFileSync('taskkill', ['/pid', String(pid), '/T', '/F'], { stdio: 'ignore', timeout: 30000 }); } catch {}
-    }
-  } catch (e) { log('killStaleAutomationEdge(端口)失败（忽略）:', String(e.message).slice(0, 120)); }
+  }
 }
 function killEdgeTree() {
   if (!edgeProc?.pid) return;
@@ -113,7 +107,7 @@ function killEdgeTree() {
 function startEdge(url) {
   const edge = EDGE_CANDIDATES.find(p => fs.existsSync(p));
   if (!edge) throw new Error('找不到 Edge（msedge.exe）');
-  killStaleAutomationEdge();
+  ensureCdpPortFree();
   const flags = [
     ...(argFlag('headed') ? [] : ['--headless=new']),
     `--remote-debugging-port=${CDP_PORT}`,

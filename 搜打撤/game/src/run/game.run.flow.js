@@ -399,6 +399,7 @@ async function tryLastLampEvent() {
     setBagReturnHook(null);
     const output = result.value.output;
     const record = { ...output, mementoId: output.mementoId || null };
+    SDT.Sound.sfx(record.mementoId ? 'storyComplete' : 'eventClue');
     let resultText = lastLampResultText(record.segmentId, record.choiceId);
     try { resultText = choice.choose() || resultText; }
     catch (error) { console.warn('[story] 环境故事结尾解析失败，使用固定结果文案', error); }
@@ -520,7 +521,8 @@ function spendEventCoins(amount, reason) {
   return true;
 }
 
-function openEventCardChoice({ title, sub, cards, action = '选择获得', onPick, asset = 'scene-event-custom-a' }) {
+function openEventCardChoice(args) {
+  const { title, sub, cards, action = '选择获得', onPick, asset = 'scene-event-custom-a' } = args;
   game.state = 'modal';
   const list = (cards || []).filter(Boolean);
   if (!list.length) {
@@ -528,6 +530,9 @@ function openEventCardChoice({ title, sub, cards, action = '选择获得', onPic
     closeEventFlow();
     return;
   }
+  // 背包返回恢复本页（09-30 深审 WORLD-003）：二级选卡页此前无返回钩子，装备征用令等
+  // 已扣款页关一次背包就丢失候选与奖励（节点已消耗、重进不来）。重开不重扣、不重消耗。
+  setBagReturnHook(() => openEventCardChoice(args));
   nodeShell({
     tone: 'event', asset, icon: '[[icon:cards]]', title,
     sub,
@@ -558,6 +563,7 @@ function transformCandidates(card) {
 }
 
 function openEventRecode() {
+  SDT.Sound.sfx('recodeStart');
   game.state = 'modal';
   const eligible = game.ownedCards.filter(o => o && o.card && !o.safe && !o.stored && transformCandidates(o.card).length);
   const need = Math.min(2, eligible.length);
@@ -598,6 +604,7 @@ function openEventRecode() {
         entry.card = { ...after };
         UI.log(`[[icon:recycle]] 【${esc(before.name)}】重编为同类型同稀有度的【${esc(after.name)}】`, 'loot');
       }
+      SDT.Sound.sfx('recodeComplete');
       closeEventFlow();
     });
     UI.refresh(game);
@@ -642,8 +649,9 @@ function openEventGamble() {
       if (settled || !spendEventCoins(3, '黑市抽签')) return;
       attempts++;
       const hit = attempts >= 5 || Random.random('event') < 0.5;
-      if (!hit) { render(true); return; }
+      if (!hit) { SDT.Sound.sfx('blackMarketLose'); render(true); return; }
       settled = true;
+      SDT.Sound.sfx('blackMarketWin');
       prizes.forEach(c => grantEventCard(c));
       UI.log(`[[icon:sparkles]] 黑市闸门弹开：第 ${attempts} 次投币成功，获得 1 张装备与 2 张招式`, 'loot');
       closeEventFlow();

@@ -53,6 +53,10 @@ const OUT_DIR = resolve(process.cwd(), argOf('out', 'output/agent/'));
 const MAX_STEPS = parseInt(argOf('max-steps', '2000'), 10) || 2000;
 const DRIVER = argOf('driver', POLICY);
 const RUN_TIMEOUT_MS = (parseFloat(argOf('timeout', '30')) || 30) * 1000;   // 老板 09-26 定：单局 ≤30s
+// 超时后等待旧 autoRun 收口的自身保护窗（INFRA-05）：stopRun 打断在途 decide 后，
+// runner 最迟在当前步等待链（turbo waitSettle ≤8s / 命令等待 ≤20s）走完时收口；
+// 15s 内仍未收口也继续走（下一局 autoRun 重入守卫会如实上报 already-running）。
+const STOP_SETTLE_WAIT_MS = 15000;
 const MODE = argOf('mode', 'standard');   // standard | nest（nest 走基地「研究所」入口）
 
 const ROOT = resolve(fileURLToPath(import.meta.url), '../../..');   // 搜打撤/
@@ -105,7 +109,12 @@ define('matchMedia', win.matchMedia || ((query) => ({ matches: false, media: que
 // 必 fetch('version.json') → ERR_INVALID_URL（boot 的 .catch 兜住了不中断，但 console.warn
 // 每次启动带 8 行堆栈污染 stderr，supervise 归因报告的 stderr 尾全被它占掉）。
 // 桩返回最小 manifest 让 boot 走正常 then 链，噪音归零；其他 URL 透传原 fetch。
-const realFetch = win.fetch ? win.fetch.bind(win) : (() => Promise.reject(new Error('jsdom 无 fetch')));
+// 2026-10-01（INFRA-04 验收使能，新发现披露）：jsdom 25 根本不提供 window.fetch，
+// 旧回落写成恒拒绝——注释承诺的「其他 URL 透传」从未成立，llm 批跑的绝对地址
+// 端点永远打不出去（decide 静默退化贪心）。按原意图回落 Node 原生 fetch。
+const nativeFetch = typeof fetch === 'function' ? fetch.bind(globalThis) : null;
+const realFetch = win.fetch ? win.fetch.bind(win)
+  : nativeFetch || (() => Promise.reject(new Error('jsdom 无 fetch 且无原生 fetch')));
 win.fetch = (input, init) => {
   const url = typeof input === 'string' ? input : (input && input.url) || String(input);
   if (String(url).includes('version.json')) {
@@ -298,7 +307,11 @@ const cleanup = async () => {
 };
 
 // ---------- 逐局驱动 ----------
-const policyFactory = Agent.policies[POLICY] || Agent.policies.greedy;
+// llm 不在 Agent.policies 门面里（policies 与 llm 是两个独立导出，INFRA-04）：
+// 旧写法 Agent.policies['llm'] 落空后静默回落 greedy，记录却标 llm——假 LLM 数据。
+// 配置完整性由上方 fail-fast 把守，这里按名取正确的决策工厂。
+const policyFactory = POLICY === 'llm' ? Agent.llm.decide
+  : (Agent.policies[POLICY] || Agent.policies.greedy);
 const DEBUG_STEPS = parseInt(argOf('debug-steps', '0'), 10) || 0;
 if (DEBUG_STEPS) globalThis.__sigdbg = true;
 const SCDBG = argOf('scdbg', '0') === '1';
@@ -388,50 +401,63 @@ const runOne = async (i) => {
   lastStepAt = Date.now();
   errorBucket.length = 0;   // 每局错误桶清空（本局抓取）
   noiseBucket.length = 0;
+  let runPromise = null;
   try {
+    runPromise = Agent.autoRun({
+      decide: policyFactory({ resetSlots: true, preferNest: MODE === 'nest' }),
+      driver: DRIVER,
+      maxSteps: MAX_STEPS,
+      onStep: (r, stepIdx) => {
+        const now = Date.now();
+        const stepMs = now - lastStepAt;
+        lastStepAt = now;
+        if (stepMs > maxStepMs) maxStepMs = stepMs;
+        if (stepMs > SLOW_STEP_MS) {
+          slowSteps += 1;
+          console.log(`[slow] 局${i + 1} step${stepIdx}: ${stepMs}ms phase=${r.obs.phase} id=${r.id || 'null'} stalled=${r.settleStalled === true}`);
+        }
+        phaseHist[r.obs.phase] = (phaseHist[r.obs.phase] || 0) + 1;
+        // 按阶段分桶步耗（09-26 耗时查因）：定位哪类步变慢
+        phaseMs[r.obs.phase] = (phaseMs[r.obs.phase] || 0) + stepMs;
+        if (DEBUG_STEPS && stepIdx < DEBUG_STEPS) {
+          // 完整逐步 trace 落 JSON（离散 stdout 拼不出时序真相——09-26 教训）
+          const bodyHead = (document.getElementById('ovBody')?.textContent || '').replace(/\s+/g, ' ').trim();
+          const pt = r.obs.battle?.pendingTarget;
+          fullTrace.push({
+            s: stepIdx, t: Date.now(), phase: r.obs.phase,
+            pick: r.id || null,
+            args: r.action ? (r.action.args ?? r.action.params ?? null) : null,
+            ok: r.res?.ok ?? null, code: r.res?.code || null,
+            pt: pt ? { uid: pt.uid, name: pt.name } : null,
+            e: r.obs.battle?.energy ?? null, turns: r.obs.battle?.turn ?? null,
+            actions: (r.obs.actions || []).map(a => a.id),
+            mv: (r.obs.actions || []).filter(a => a.type === 'move').map(a => `${a.id}|${a.label}|v=${a.visited ? 1 : 0}`),
+            hp: r.obs.battle?.player?.hp ?? r.obs.run?.hp ?? null,
+            hpMax: r.obs.battle?.player?.maxHp ?? r.obs.run?.maxHp ?? null,
+            body: bodyHead.slice(0, 140),
+          });
+        }
+      },
+    });
     trace = await Promise.race([
-      Agent.autoRun({
-        decide: policyFactory({ resetSlots: true, preferNest: MODE === 'nest' }),
-        driver: DRIVER,
-        maxSteps: MAX_STEPS,
-        onStep: (r, stepIdx) => {
-          const now = Date.now();
-          const stepMs = now - lastStepAt;
-          lastStepAt = now;
-          if (stepMs > maxStepMs) maxStepMs = stepMs;
-          if (stepMs > SLOW_STEP_MS) {
-            slowSteps += 1;
-            console.log(`[slow] 局${i + 1} step${stepIdx}: ${stepMs}ms phase=${r.obs.phase} id=${r.id || 'null'} stalled=${r.settleStalled === true}`);
-          }
-          phaseHist[r.obs.phase] = (phaseHist[r.obs.phase] || 0) + 1;
-          // 按阶段分桶步耗（09-26 耗时查因）：定位哪类步变慢
-          phaseMs[r.obs.phase] = (phaseMs[r.obs.phase] || 0) + stepMs;
-          if (DEBUG_STEPS && stepIdx < DEBUG_STEPS) {
-            // 完整逐步 trace 落 JSON（离散 stdout 拼不出时序真相——09-26 教训）
-            const bodyHead = (document.getElementById('ovBody')?.textContent || '').replace(/\s+/g, ' ').trim();
-            const pt = r.obs.battle?.pendingTarget;
-            fullTrace.push({
-              s: stepIdx, t: Date.now(), phase: r.obs.phase,
-              pick: r.id || null,
-              args: r.action ? (r.action.args ?? r.action.params ?? null) : null,
-              ok: r.res?.ok ?? null, code: r.res?.code || null,
-              pt: pt ? { uid: pt.uid, name: pt.name } : null,
-              e: r.obs.battle?.energy ?? null, turns: r.obs.battle?.turn ?? null,
-              actions: (r.obs.actions || []).map(a => a.id),
-              mv: (r.obs.actions || []).filter(a => a.type === 'move').map(a => `${a.id}|${a.label}|v=${a.visited ? 1 : 0}`),
-              hp: r.obs.battle?.player?.hp ?? r.obs.run?.hp ?? null,
-              hpMax: r.obs.battle?.player?.maxHp ?? r.obs.run?.maxHp ?? null,
-              body: bodyHead.slice(0, 140),
-            });
-          }
-        },
-      }),
+      runPromise,
       new Promise((_, reject) => setTimeout(() => reject(new Error('run-timeout')), RUN_TIMEOUT_MS)),
     ]);
   } catch (error) {
     timedOut = String(error?.message || error).includes('run-timeout');
     if (!timedOut) console.error(`[agent-batch] 第 ${i + 1} 局异常：`, error?.message || error);
-    if (timedOut) console.log(`[slow] 局${i + 1} 超时现场：phase=${Agent.phase()} maxStep=${maxStepMs}ms slowSteps=${slowSteps} hist=${JSON.stringify(phaseHist)}`);
+    if (timedOut) {
+      console.log(`[slow] 局${i + 1} 超时现场：phase=${Agent.phase()} maxStep=${maxStepMs}ms slowSteps=${slowSteps} hist=${JSON.stringify(phaseHist)}`);
+      // INFRA-05：超时只拒绝了 race 外壳，真 runner 仍持有本局（runAbort 未清）——
+      // 直接 cleanup 进下一局会拿到 already-running，旧任务还可能在清局后继续操作新现场。
+      // 先请求取消（打断在途 decide），再等旧 runner 收口；带自身保护窗，
+      // 收不了口也放行（下一局重入守卫会如实上报 already-running，不静默吞）。
+      try { Agent.stopRun?.(); } catch { /* 门面未挂载时跳过 */ }
+      await Promise.race([
+        runPromise?.catch?.(() => {}),
+        new Promise(resolve => setTimeout(resolve, STOP_SETTLE_WAIT_MS)),
+      ]);
+    }
   }
   const after = Agent.recorder.listRuns();
   const fresh = after.slice(before);

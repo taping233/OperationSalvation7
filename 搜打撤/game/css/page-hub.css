@@ -399,7 +399,15 @@
   border-color: rgba(217, 187, 130, .8);
   background: linear-gradient(180deg, var(--gold-bright), var(--gold-main) 52%, var(--gold-dim));
   box-shadow: 0 0 6px rgba(217, 187, 130, .45), inset 0 1px 0 rgba(255, 242, 207, .6);
+  position: relative;
+}
+/* 辉光呼吸走伪元素 opacity（合成器通道）——原 filter:brightness 关键帧是逐帧重绘，
+   基地页打开期间常驻烧帧（09-30 性能审计 F7，铁律②） */
+#overlay #hubMain .gate-scale i.lit::after {
+  content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  background: rgba(255, 242, 207, .5); opacity: 0;
   animation: hubKeyBreath 2.8s ease-in-out infinite alternate;
 }
-#overlay #hubMain .gate-scale i.lit.all { animation: none; }
-@keyframes hubKeyBreath { from { filter: brightness(.92); } to { filter: brightness(1.12); } }
+#overlay #hubMain .gate-scale i.lit.all,
+#overlay #hubMain .gate-scale i.lit.all::after { animation: none; }
+@keyframes hubKeyBreath { from { opacity: 0; } to { opacity: 1; } }

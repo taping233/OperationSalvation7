@@ -21,4 +21,4 @@ it('loads isolated real view, plays one card, ends and exits without storage wri
   const card=document.querySelector('.sts-hand .bt-card'),foe=document.querySelector('.sts-foe');card.click();foe.click();await tick(80);
   document.getElementById('qaEnd').click();await tick(1100);document.getElementById('qaReset').click();
   expect(localStorage.getItem('existing-player-save')).toBe('KEEP');expect(writes).not.toHaveBeenCalled();expect(document.getElementById('qaState').textContent).toContain('存储快照=未变化');
-});
+}, 15000); // Real module import and animation waits can exceed the default 5s under full-suite load.

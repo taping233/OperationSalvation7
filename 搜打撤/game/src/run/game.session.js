@@ -254,7 +254,9 @@ function preflightRunMap(slot) {
   if (s.pendingExtraction != null) {
     const pending = validatePendingExtraction(s.pendingExtraction);
     if (!pending.ok) return { ...pending, preserveRun: true };
-    if (!identity.ok || identity.value.runId !== s.pendingExtraction.runId) {
+    // readForPreflight 可能已由 prev 自愈主档，撤离身份须按生效原串重新核验。
+    const effectiveIdentity = RunStorage.readIdentity(slot);
+    if (!effectiveIdentity.ok || effectiveIdentity.value.runId !== s.pendingExtraction.runId) {
       return { ok: false, code: 'INVALID_EXTRACTION_IDENTITY', message: '撤离整理记录与对局身份不一致', preserveRun: true };
     }
   }
@@ -379,7 +381,7 @@ function restoreGame(slot) {
   game.nestActive = false;
   const safeLayer = s.layerIdx;
   const safeIdx = s.trackPos;
-  enterLayer(safeLayer, safeIdx);
+  enterLayer(safeLayer, safeIdx, { preserveBossPlan: true });
   SDT.Sound.music('board');
   UI.log(`[[icon:download]] 已读取【档位 ${slot}】存档`, 'ok');
   if (!game.myClass) runtime.openClassChoice();   // 上次存档时还没选职业：补上开局选择
@@ -530,7 +532,7 @@ function enterLayer(li, atIdx, opts = null) {
   markSeen(safeLayer, safeIdx);
   game.activeLayerBounds = game.layerBounds?.[safeLayer] || null;
   game.hop = 0;
-  game.bossPlan = null;   // 每层 roll 一次首脑预案：层内重进 boss 格不再换人（2026-09-13 老板拍板）
+  if (!opts?.preserveBossPlan) game.bossPlan = null;   // 真正进层重置；读档保留已恢复的首脑预案。
   game.state = 'idle';
   if (cam) {
     // Focus on the currently available choices; unexplored map bounds no longer shrink them.
