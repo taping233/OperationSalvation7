@@ -1,6 +1,6 @@
 # Vite 文档导航
 
-**新会话/新人先读 [QUICKSTART](QUICKSTART.md)**（5 分钟：环境核验→接手→定向验证→提交门）。日常四步、唯一任务记录与按任务摘要见[流程指南](WORKFLOW-TOOLS.md)；STATUS只做导航，执行进度从task.json生成。本目录同时保存现行说明、带时间的工作记录、测试证据和设计预览。按任务读取下方路由；单问不扫描仓库，小改只核对目标与归属，跨域/长任务/接班按根 AGENTS.md 完整接手。带日期的记录只说明当时的工作树与验证边界。
+**新会话/新人先读 [QUICKSTART](QUICKSTART.md)**（5 分钟：环境核验→接手→定向验证→提交门）。日常四步、唯一任务记录与按任务摘要见[流程指南](WORKFLOW-TOOLS.md)；STATUS只做导航，执行进度从task.json生成。本目录同时保存现行说明、带时间的工作记录、测试证据和设计预览。按任务读取下方路由；单问不扫描仓库，小改直接做主动作，跨域/长任务/接班按根 AGENTS.md 接手（10-01 精简：主动作先行）。带日期的记录只说明当时的工作树与验证边界。
 
 制作目标与执行入口见[制作资料总览](production/README.md)；最新全场景性能账本见 [PERF-LEDGER-2026-09-29](PERF-LEDGER-2026-09-29.md)，存档直写红线见 [BASE-DIRECT-WRITE-AUDIT-2026-09-29](BASE-DIRECT-WRITE-AUDIT-2026-09-29.md)。
 
@@ -35,12 +35,12 @@
 
 ### 接手与授权
 
-- 单问：直接答或定向查证；小改：Git/目标归属 → 对应规范 → 必要上下文；跨域/长任务/接班：按根 AGENTS.md 六步核对。
-- `npm run handoff` 只读 Git 与台账，并提示重叠属地、失效路径和提交状态疑点；不自动判定过时或释放占用。补查留言/记忆/任务路由，冲突仍用提交与证据核实。
+- 单问：直接答或定向查证；小改：直接做主动作，对应规范与必要上下文按需读；跨域/长任务/接班：`npm run handoff` 一条命令出简报（原六步核对已废除，10-01 精简），仅当简报显示他人活跃占用或属地冲突时先协调再动手。
+- `npm run handoff` 只读 Git 与台账，并提示重叠属地、失效路径和提交状态疑点；不自动判定过时或释放占用。留言/记忆/任务路由按任务域定向补查，冲突仍用提交与证据核实。
 - 同会话记录命令、目标文件状态与环境，内容/属地/范围/环境未变时复用证据；文档提交改变 HEAD 不自动使相同源码的定向证据失效。
 - 留言按内置浏览器 + 来源地址核验；localStorage 隔离于浏览器配置和 origin。没有可读入口记录未核验，不推断没有留言，不导出整个存储。
 - 审查不授权实施；已授权且范围不变的工作继续完成。删除先列具体路径清单，已批清单不重复确认；回滚/提交/推送/发布/外部写入仍需明确指示。
-- 默认不派工；老板点名后按[派工手册](PARALLEL-DISPATCH-PLAYBOOK.md)划属地。共享文件或工作树/端口/后台任务先登记；普通只读短审查免登记。
+- 默认不派工；老板点名后按[派工手册](PARALLEL-DISPATCH-PLAYBOOK.md)划属地。共享文件或工作树/端口/后台任务动作先行、登记同轮紧随（10-01 精简）；普通只读短审查免登记。
 - 免登与免仪式（10-01 合并版，条件见根 AGENTS.md）：单会话占用时的说明类小修与共享台账小额修改直接编辑+收官核对，免登记免两段式；多会话并发或长任务照常全套。
 
 ### 验收与收官
@@ -81,7 +81,7 @@
 | 玩法与设计 | [设计入口](design.md)、[现行规则](rules.md)、[术语](terminology.md)、[后续路线图](roadmap.md)、[版本记录](changelog.md) |
 | 工程与质量 | [架构](architecture.md)、[开发指南](development.md)、[存档契约](save-format.md)、[质量门](quality-gates.md)、[性能方法与历史基准](performance.md)、[音频系统](audio-system.md) |
 | Agent | [接口协议](agent-protocol.md)、[策略迭代手册](agent-iteration-playbook.md) |
-| 协作流程 | [热点登记](PARALLEL-REGISTRY.md)（改共享文件/长任务先登记）、[待拍板台账](PENDING.md)（挂账唯一真源）、[并行派工手册](PARALLEL-DISPATCH-PLAYBOOK.md) |
+| 协作流程 | [热点登记](PARALLEL-REGISTRY.md)（改共享文件/长任务动作先行、登记同轮紧随）、[待拍板台账](PENDING.md)（挂账唯一真源）、[并行派工手册](PARALLEL-DISPATCH-PLAYBOOK.md) |
 | 美术与素材 | [人物参考](character-bible/README.md)、[界面美术指南入口](UI-ART-OVERHAUL-GUIDE.md)、[运行素材说明](../game/assets/README.md) |
 | 生成数据手册 | [游戏全书](game-compendium.md)：由 `scripts/generate-compendium.mjs` 生成，保留原路径，不手改 |
 | 卡牌规格 | [规格与决策入口](cards/README.md)；[迁移矩阵](M-BATCH-MATRIX.md)和[排除清单](M-BATCH-EXCLUSIONS.md)因测试固定路径留在根目录 |

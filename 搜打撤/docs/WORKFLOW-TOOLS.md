@@ -17,7 +17,7 @@ STATUS 和接手简报只生成/引用摘要。spec保留需求、方案、拆�
 
 ## 定任务
 
-先核对 Git 与属地，按任务路由查已有实现。小修用本次目标、Git差异与交付说明即可，不强制创建task.json；单问与说明小修沿原免登规则。共享文件或长任务仍先登记资源；需要跨会话跟踪时才创建持久任务。输入JSON只需goal、paths、doneWhen，默认planned；明确开工填doing。
+主动作先行（10-01 精简）：Git/属地核对并入 `npm run handoff` 一条命令，按任务路由查已有实现不阻塞启动。小修用本次目标、Git差异与交付说明即可，不强制创建task.json；单问与说明小修沿原免登规则。共享文件或长任务动作先行、登记同轮紧随；需要跨会话跟踪时才创建持久任务。输入JSON只需goal、paths、doneWhen，默认planned；明确开工填doing。
 
 ```powershell
 npm run --silent workflow -- task start --task <编号> --owner Friday --input <任务输入JSON> --json

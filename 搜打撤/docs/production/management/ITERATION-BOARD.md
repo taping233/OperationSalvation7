@@ -29,5 +29,5 @@
 
 - 每轮目标/取舍参考[制作决策簿](DECISIONS.md)与[技术计划](NEXT-CYCLE-TECH-PLAN.md)；它们不等于新任务已启动。
 - 当前占用与未提交归属查[REGISTRY](../../PARALLEL-REGISTRY.md)，确需老板决定的事项查[PENDING](../../PENDING.md)，未排期目标查[roadmap](../../roadmap.md)。
-- 开工先查已有实现；台账预览更新、自动验收记录和原文归档步骤见[流程工具](../../WORKFLOW-TOOLS.md)。
+- 已有实现查询不阻塞开工，按需并行（10-01 精简：主动作先行）；台账预览更新、自动验收记录和原文归档步骤见[流程工具](../../WORKFLOW-TOOLS.md)。
 - 09-30 本工具任务的执行状态与验证统一见[自有交付记录](../../evidence/2026-09-30-workflow-tools/README.md)，不在本页抄录进度。
