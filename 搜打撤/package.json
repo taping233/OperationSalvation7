@@ -9,6 +9,7 @@
     "narrative:compile": "node scripts/compile-narrative.mjs",
     "predev": "npm run narrative:compile",
     "dev": "vite",
+    "web": "node scripts/web-up.mjs",
     "prebuild": "npm run narrative:compile && node scripts/validate-data.mjs",
     "build": "vite build",
     "postbuild": "node scripts/perf-budget.cjs",
