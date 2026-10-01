@@ -1,0 +1,24 @@
+# 行尾统一（10-01）：仓库与工作树文本一律 LF，根治 autocrlf 双向警告与假 M 状态。
+# 修改本文件后需一次性 `git add --renormalize .` 重写 index（一次性大 diff 提交，内容零变化仅行尾）。
+* text=auto eol=lf
+
+# 二进制资产显式豁免（防误归一损坏）
+*.png -text
+*.jpg -text
+*.jpeg -text
+*.gif -text
+*.webp -text
+*.ico -text
+*.zip -text
+*.wav -text
+*.ogg -text
+*.mp3 -text
+*.woff -text
+*.woff2 -text
+*.ttf -text
+*.otf -text
+*.eot -text
+*.pdf -text
+*.exe -text
+*.dll -text
+*.asar -text

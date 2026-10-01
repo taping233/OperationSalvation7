@@ -15,6 +15,7 @@
 | Friday（性能优化第二轮 WF-perf-opt-round2） | game/src/battle/core/battle.engine.js+battle.core.js+view/battle.aim.js+view/battle.view.js（F1 轻查询/F4/F9）、game.boot.js（F3）、battle/runtime/battle.action-runner.js（F5②）、hub/game.hub.pages.js+experience/pocket-strip.js（F12）、ui/hud.js（F8 补充）、tests/battle-engine-facade.test.js（导出基线 64→65）；承接上轮 WF-full-audit-fix-perf 属地；REGISTRY 仅自有行 | 老板指令「继续全量性能优化」：F1 经快照重投影契约否决链缓存后改道 getBattleLiveness、F3 合帧、F4 html 签名短路、F5② idle 存档 2s 兜底、F9 rect/箭头缓存、F12 索引与记忆化；F5③ 复查已有封顶销账；F11+F1 全量版风险评估后不实施挂 PENDING #23；全量 2131 全绿 0 失败、lint/typecheck/语法门绿；已随 d1ae1a2 落库 | 10-01 | 已落库 d1ae1a2 |
 | Friday（照相馆性能专项会话） | ~~game/css/expedition-library.css、game/css/winter.css、game/src/hub/game.cardslib.page.js~~（已随 d2c0d0a 落库）、~~worktree .photolib-acc~~（10-01 核对三文件与主仓库 HEAD 一致/无未落库内容后经老板拍板移除，303M 释放）、~~端口 8137/8138/5333~~（已杀净） | 照相馆性能专项三期：实机验收通过并已落库（d2c0d0a）；worktree 已移除，本条全清 | 09-29 深夜 | 已落库，worktree 已移除（10-01） |
 | Friday（ZCode 本会话，流程提速落地 WF-gate-scripts-only） | scripts/acceptance-gate.mjs（planForPaths 加 packageJsonScriptsOnly 注入选项+packageJsonScriptsOnlyDiff 纯函数+stagedPackageJsonScriptsOnly 组装；skip 分支挂文档一致性守卫）、tests/acceptance-gate.test.js（+4 断言）、docs/quality-gates.md（回退全量口径同步+已知红灯清零回写）、本文件；不碰 game/ 源码 | 老板令「把这些修了」（接耗时复盘）三项：①package.json 仅 scripts 段变更豁免全量门（不豁免=lockfile/vite.config 同变、非 scripts 字段变化、引用缺失）；②红灯三项已清零的口径回写 quality-gates；③skip 提交运行时跑文档一致性守卫（--plan 仍轻量不跑不输出 PASS）。【验证】定向 tests/acceptance-gate 23/23 绿、ESLint 净、--plan/--run 冒烟符合预期 | 10-01 | 编辑中（C 待提交） |
+| Friday（ZCode 代码结构地图 WF-code-map） | 搜打撤/code-map/（index.html 可视化页、generate.mjs 扫描器、data.js 生成物，即无主物品表原 code-map 行，本会话认领）；127.0.0.1:5301 / PID 18424 / python http.server / 本会话 exec 创建；不碰 game/ 源码 | 老板令「检查代码组成做可视化网站，可点击看关系与更小模块；模块大小挂真实代码行数；做好看」：扫描 game/src 254 文件 49,314 行 696 依赖边；力导向图多级下钻（域→battle 子域→文件→导出符号/依赖面板），节点面积∝真实行数、边宽∝引用数，boot 启动链序号高亮、搜索、入口金环；内置浏览器实机验证总览/下钻/详情面板/启动链/搜索全通；完成未提交、不 build，页面待老板过目 | 10-01 | 待验收（页面保留运行） |
 
 
 ## 无主物品（只记录勿动，等认领/处置）
@@ -22,7 +23,7 @@
 | 物品 | 现象 | 发现时间 | 备注 |
 |---|---|---|---|
 | `搜打撤/game/src/audio/sound.js`（已暂存 404 行改动） | 暂存区实质改动（367+/37−，264→594 行）：音效系统重构（合成音软限幅/点击音压缩链/解码队列并发限 2+asset-url/random 导入）；mtime 20:42:45，改动会话不明（音效会话 WF-sfx-listening 属地吻合但其 5391 服务已死且归档称已随 d1ae1a2 落库） | 10-01 21:0x 发现 | **10-01 老板拍板打包提交**：随本会话流程批次一起落库（音效域单独成笔）；`git diff --cached` 可查全文 |
-| `搜打撤/code-map/`（未跟踪） | generate.mjs（code-map 数据生成器，扫 game/src 产 data.js）+data.js，mtime 20:59:29-37，生成会话不明 | 10-01 21:0x 发现 | 未跟踪产物只记录勿动，不 add；等认领或老板处置 |
+| ~~`搜打撤/code-map/`~~ | ~~generate.mjs+data.js+index.html，生成会话不明~~【10-01 认领】即活跃登记 WF-code-map 行（ZCode 会话产出，老板令做的代码结构可视化地图）；仍在迭代与实机验证中 | 10-01 21:0x 发现 | 已认领，移活跃登记 |
 | ~~`搜打撤/package-lock.json`~~ | ~~已修改未提交（M），改动者不明~~【10-01 核实销账】内容 diff 恒为零（行尾假差：npm install 重写为 LF，git 归一后零变化，add 后工作树干净）；当日接力会话 npm install 修复 @cacheable/memory 时触碰，依赖树零变化 | 09-29 深夜登记；10-01 核实 | 无主疑点解除，无实质改动 |
 | node.exe ×2（PID 21272/22356） | 监听 5200（主线 Vite 端口）/5321，REGISTRY 无登记 | 09-29 深夜 | CSS 精修班会话发现；身份未验，未动；认领前勿杀 |
 
