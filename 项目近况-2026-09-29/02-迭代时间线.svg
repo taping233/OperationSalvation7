@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1560" height="880" viewBox="0 0 1560 880" font-family="Microsoft YaHei, PingFang SC, sans-serif">
+  <defs>
+    <marker id="arr2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#39414e"/>
+    </marker>
+  </defs>
+  <rect width="1560" height="880" fill="#0e1116"/>
+  <text x="40" y="52" font-size="28" font-weight="bold" fill="#f0f3f8">近 10 天迭代时间线 · 09-20 → 09-29</text>
+  <text x="40" y="82" font-size="14" fill="#8b93a3">主线 = 搜打撤 Vite；每日多会话并行推进，卡片记当日主成果</text>
+
+  <line x1="80" y1="460" x2="1495" y2="460" stroke="#39414e" stroke-width="2" marker-end="url(#arr2)"/>
+
+  <!-- 连接线 -->
+  <g stroke="#39414e" stroke-width="1.4" stroke-dasharray="4 4">
+    <line x1="150" y1="430" x2="150" y2="451"/>
+    <line x1="307" y1="469" x2="307" y2="490"/>
+    <line x1="464" y1="430" x2="464" y2="451"/>
+    <line x1="621" y1="469" x2="621" y2="490"/>
+    <line x1="778" y1="430" x2="778" y2="451"/>
+    <line x1="935" y1="469" x2="935" y2="490"/>
+    <line x1="1092" y1="430" x2="1092" y2="451"/>
+    <line x1="1249" y1="469" x2="1249" y2="490"/>
+    <line x1="1406" y1="430" x2="1406" y2="451"/>
+  </g>
+
+  <!-- 节点 -->
+  <g fill="#0e1116" stroke-width="2.4">
+    <circle cx="150" cy="460" r="9" stroke="#8b93a3"/>
+    <circle cx="307" cy="460" r="9" stroke="#3fb9a8"/>
+    <circle cx="464" cy="460" r="9" stroke="#9fb0c3"/>
+    <circle cx="621" cy="460" r="9" stroke="#b083f0"/>
+    <circle cx="778" cy="460" r="9" stroke="#ff9bce"/>
+    <circle cx="935" cy="460" r="9" stroke="#f5a524"/>
+    <circle cx="1092" cy="460" r="9" stroke="#7ee2b8"/>
+    <circle cx="1249" cy="460" r="9" stroke="#58a6ff"/>
+    <circle cx="1406" cy="460" r="14" stroke="#e5484d"/>
+    <circle cx="1406" cy="460" r="9" stroke="#e5484d"/>
+  </g>
+
+  <!-- 卡片：上方 -->
+  <g>
+    <rect x="30" y="180" width="240" height="250" rx="10" fill="#151a21" stroke="#8b93a3" stroke-opacity="0.8"/>
+    <text x="44" y="208" font-size="15" font-weight="bold" fill="#f5a524">09-20</text>
+    <text x="44" y="232" font-size="15.5" font-weight="bold" fill="#f0f3f8">交接定版</text>
+    <g font-size="12.5" fill="#aab4c4">
+      <text x="44" y="262">· 四套未提交工作全部落库</text>
+      <text x="44" y="283">· 权威入口 NEXT-AI-HANDOFF</text>
+      <text x="44" y="304">· Godot/Unity/EXE 冻结确认</text>
+    </g>
+
+    <rect x="344" y="180" width="240" height="250" rx="10" fill="#151a21" stroke="#9fb0c3" stroke-opacity="0.8"/>
+    <text x="358" y="208" font-size="15" font-weight="bold" fill="#f5a524">09-23</text>
+    <text x="358" y="232" font-size="15.5" font-weight="bold" fill="#f0f3f8">参考与资产</text>
+    <g font-size="12.5" fill="#aab4c4">
+      <text x="358" y="262">· STS2 v0.107.1 源码解包</text>
+      <text x="358" y="283">· 照相馆字体栈定稿</text>
+      <text x="358" y="304">· 引擎线保持冻结</text>
+    </g>
+
+    <rect x="658" y="180" width="240" height="250" rx="10" fill="#151a21" stroke="#ff9bce" stroke-opacity="0.8"/>
+    <text x="672" y="208" font-size="15" font-weight="bold" fill="#f5a524">09-26</text>
+    <text x="672" y="232" font-size="15.5" font-weight="bold" fill="#f0f3f8">UI 大修循环</text>
+    <g font-size="12.5" fill="#aab4c4">
+      <text x="672" y="262">· 47 单：39 closed</text>
+      <text x="672" y="283">· 7 移交＋1 拍板保留难度</text>
+      <text x="672" y="304">· 次日清晨包络内收官</text>
+    </g>
+
+    <rect x="972" y="180" width="240" height="250" rx="10" fill="#151a21" stroke="#7ee2b8" stroke-opacity="0.8"/>
+    <text x="986" y="208" font-size="15" font-weight="bold" fill="#f5a524">09-28 凌晨</text>
+    <text x="986" y="232" font-size="15.5" font-weight="bold" fill="#f0f3f8">三线协作 9 小时</text>
+    <g font-size="12.5" fill="#aab4c4">
+      <text x="986" y="262">· 代码 / 体验 / 美术收官</text>
+      <text x="986" y="283">· 体验四切片上线</text>
+      <text x="986" y="304">· 全量 1671 用例绿</text>
+    </g>
+
+    <rect x="1286" y="180" width="240" height="250" rx="10" fill="#1a1216" stroke="#e5484d"/>
+    <text x="1300" y="208" font-size="15" font-weight="bold" fill="#e5484d">09-29</text>
+    <text x="1300" y="232" font-size="15.5" font-weight="bold" fill="#f0f3f8">今天</text>
+    <g font-size="12.5" fill="#aab4c4">
+      <text x="1300" y="262">· 待推送 15 个提交</text>
+      <text x="1300" y="283">· 工作区 51 项未提交</text>
+      <text x="1300" y="304">· round6 生产构建未跑</text>
+      <text x="1300" y="325">· 三批收尾待老板处置</text>
+    </g>
+  </g>
+
+  <!-- 卡片：下方 -->
+  <g>
+    <rect x="187" y="490" width="240" height="250" rx="10" fill="#151a21" stroke="#3fb9a8" stroke-opacity="0.8"/>
+    <text x="201" y="518" font-size="15" font-weight="bold" fill="#f5a524">09-22</text>
+    <text x="201" y="542" font-size="15.5" font-weight="bold" fill="#f0f3f8">源码目录化</text>
+    <g font-size="12.5" fill="#aab4c4">
+      <text x="201" y="572">· src 拆 8 功能域 e527fec</text>
+      <text x="201" y="593">· 142 文件 / 798 用例全绿</text>
+      <text x="201" y="614">· 六文件重构手法沉淀</text>
+    </g>
+
+    <rect x="501" y="490" width="240" height="250" rx="10" fill="#151a21" stroke="#b083f0" stroke-opacity="0.8"/>
+    <text x="515" y="518" font-size="15" font-weight="bold" fill="#f5a524">09-25</text>
+    <text x="515" y="542" font-size="15.5" font-weight="bold" fill="#f0f3f8">纵深战役</text>
+    <g font-size="12.5" fill="#aab4c4">
+      <text x="515" y="572">· 卡牌规则化 A1→A3 启动</text>
+      <text x="515" y="593">· 累计 47/181 张接线</text>
+      <text x="515" y="614">· bug 清单连环清账</text>
+    </g>
+
+    <rect x="815" y="490" width="240" height="250" rx="10" fill="#151a21" stroke="#f5a524" stroke-opacity="0.8"/>
+    <text x="829" y="518" font-size="15" font-weight="bold" fill="#f5a524">09-27</text>
+    <text x="829" y="542" font-size="15.5" font-weight="bold" fill="#f0f3f8">四线并发</text>
+    <g font-size="12.5" fill="#aab4c4">
+      <text x="829" y="572">· E 批工程线 6f55166</text>
+      <text x="829" y="593">· M 批规则化 791b2c2</text>
+      <text x="829" y="614">· onetake 动效补全</text>
+      <text x="829" y="635">· 美术 UI 三方并行</text>
+    </g>
+
+    <rect x="1129" y="490" width="240" height="250" rx="10" fill="#151a21" stroke="#58a6ff" stroke-opacity="0.8"/>
+    <text x="1143" y="518" font-size="15" font-weight="bold" fill="#f5a524">09-28 全天</text>
+    <text x="1143" y="542" font-size="15.5" font-weight="bold" fill="#f0f3f8">质量重构六轮</text>
+    <g font-size="12.5" fill="#aab4c4">
+      <text x="1143" y="572">· 96950de → 7c2b6e7</text>
+      <text x="1143" y="593">· 全量 1833 用例绿</text>
+      <text x="1143" y="614">· 首屏预算 290→310 KiB</text>
+      <text x="1143" y="635">· 三名 Luna 并行切片</text>
+    </g>
+  </g>
+
+  <text x="40" y="800" font-size="13" fill="#8b93a3">口径：各日期测试数字为当日全量提交门禁结果，非滚动重跑；同一日期可能多线并作。</text>
+  <text x="40" y="826" font-size="13" fill="#5b6472">09-28 晚另有三批收尾未提交（分层验收门 / 界面美术改善 / 性能探针基线），详见状态板。</text>
+</svg>

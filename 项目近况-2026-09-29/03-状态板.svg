@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1560" height="950" viewBox="0 0 1560 950" font-family="Microsoft YaHei, PingFang SC, sans-serif">
+  <rect width="1560" height="950" fill="#0e1116"/>
+  <text x="40" y="52" font-size="28" font-weight="bold" fill="#f0f3f8">项目状态板 · 2026-09-29</text>
+  <text x="40" y="82" font-size="14" fill="#8b93a3">核对方式：实时 git status（51 项未提交）· git log（HEAD 7c2b6e7，09-28 20:26）· docs/STATUS.md（09-28 20:17）· 未 fetch</text>
+
+  <!-- A 已提交 -->
+  <g>
+    <rect x="40" y="120" width="350" height="610" rx="10" fill="#121a14" stroke="#3fb950" stroke-opacity="0.55"/>
+    <rect x="40" y="120" width="350" height="40" rx="10" fill="#3fb950" fill-opacity="0.14"/>
+    <text x="56" y="146" font-size="16" font-weight="bold" fill="#3fb950">✅ 已提交 · 本地 master</text>
+    <g font-size="13" fill="#c9d1dc">
+      <text x="56" y="192">· 09-28 当日 10 个提交：</text>
+      <text x="72" y="214" fill="#8b93a3">质量重构六轮 96950de→7c2b6e7</text>
+      <text x="56" y="244">· M 批卡牌规则化 791b2c2：</text>
+      <text x="72" y="266" fill="#8b93a3">150 张 = 92 结构化＋58 hosted</text>
+      <text x="56" y="296">· E 批工程线 6f55166：快照/结算/</text>
+      <text x="72" y="318" fill="#8b93a3">异步/存档/规则门</text>
+      <text x="56" y="348">· UI 大修 47 单收口（39 closed）</text>
+      <text x="56" y="378">· 三线 9h 成果基线 be589a2</text>
+      <text x="56" y="408">· 体验四切片：口袋状态条/</text>
+      <text x="72" y="430" fill="#8b93a3">价值档位/火堆提示/风险徽标</text>
+      <text x="56" y="460">· 照相馆懒加载门面＋选片台修复</text>
+      <text x="56" y="490">· onetake 动效（未实机验收）</text>
+    </g>
+  </g>
+
+  <!-- B 已验证未推送 -->
+  <g>
+    <rect x="410" y="120" width="350" height="610" rx="10" fill="#1a160e" stroke="#f5a524" stroke-opacity="0.55"/>
+    <rect x="410" y="120" width="350" height="40" rx="10" fill="#f5a524" fill-opacity="0.12"/>
+    <text x="426" y="146" font-size="16" font-weight="bold" fill="#f5a524">🔶 已验证 · 未推送</text>
+    <g font-size="13" fill="#c9d1dc">
+      <text x="426" y="192">· 本地 ahead 15 / behind 0</text>
+      <text x="442" y="214" fill="#8b93a3">（未 fetch，远端实时未核实）</text>
+      <text x="426" y="244">· 最近全量门禁（09-28 17:26）：</text>
+      <text x="442" y="266" fill="#8b93a3">226 文件 / 1833 用例通过·2 跳过</text>
+      <text x="426" y="296">· typecheck 七配置 / lint /</text>
+      <text x="442" y="318" fill="#8b93a3">语法 253 文件 全部通过</text>
+      <text x="426" y="348">· 干净生产构建：983 模块；</text>
+      <text x="442" y="370" fill="#8b93a3">首屏 JS gzip 300.8 KiB（限 310）</text>
+      <text x="426" y="400">· CSS gzip 125.5 KiB</text>
+      <text x="442" y="422" fill="#8b93a3">包体 85.51 MiB · 重复 0.62 MiB</text>
+      <text x="426" y="452">· 实页烟测：出征/支付/发现/胜利</text>
+      <text x="442" y="474" fill="#8b93a3">控制台无 warn · error</text>
+    </g>
+  </g>
+
+  <!-- C 未提交 -->
+  <g>
+    <rect x="780" y="120" width="350" height="610" rx="10" fill="#171221" stroke="#b083f0" stroke-opacity="0.55"/>
+    <rect x="780" y="120" width="350" height="40" rx="10" fill="#b083f0" fill-opacity="0.12"/>
+    <text x="796" y="146" font-size="16" font-weight="bold" fill="#b083f0">📋 工作区未提交 · 51 项</text>
+    <g font-size="13" fill="#c9d1dc">
+      <text x="796" y="192">· 分层验收门：acceptance-gate.mjs</text>
+      <text x="812" y="214" fill="#8b93a3">＋test:target 入口＋CI/hook 改造</text>
+      <text x="796" y="244">· 界面美术改善批：page-*.css</text>
+      <text x="812" y="266" fill="#8b93a3">等七张样式＋组件调整</text>
+      <text x="796" y="296">· IAB 性能探针：perf-probe</text>
+      <text x="812" y="318" fill="#8b93a3">＋基线报告＋3 个新测试文件</text>
+      <text x="796" y="348">· 归属：09-28 晚三个隔离工作树</text>
+      <text x="812" y="370" fill="#8b93a3">会话收尾，落在共享工作区</text>
+      <text x="796" y="400">· 另含历史临时目录（.ui-loop-</text>
+      <text x="812" y="422" fill="#8b93a3">0926/ 等）与 AGENTS.md 备份</text>
+      <text x="796" y="452">· 处置（提交/删除/保留）待老板拍板</text>
+    </g>
+  </g>
+
+  <!-- D 挂起待拍板 -->
+  <g>
+    <rect x="1150" y="120" width="370" height="610" rx="10" fill="#1c1214" stroke="#e5484d" stroke-opacity="0.55"/>
+    <rect x="1150" y="120" width="370" height="40" rx="10" fill="#e5484d" fill-opacity="0.12"/>
+    <text x="1166" y="146" font-size="16" font-weight="bold" fill="#e5484d">⏳ 挂起 / 待拍板</text>
+    <g font-size="13" fill="#c9d1dc">
+      <text x="1166" y="192">· EXP-003 打包屏文案失真</text>
+      <text x="1182" y="214" fill="#8b93a3">（挂起，待 onetake 域修复）</text>
+      <text x="1166" y="244">· 第六轮后生产构建未复验</text>
+      <text x="1166" y="274">· 研究所完整实页通关未验</text>
+      <text x="1166" y="304">· 全鼠标 / 拖拽流程未覆盖</text>
+      <text x="1166" y="334">· 技术债：Base.data 兼容直写</text>
+      <text x="1182" y="356" fill="#8b93a3">残留；58 张 hosted 卡走文本执行；</text>
+      <text x="1182" y="378" fill="#8b93a3">battle.runtime 未严格化</text>
+      <text x="1166" y="408">· 40+ 条游玩性决策待拍板</text>
+      <text x="1182" y="430" fill="#8b93a3">（ITERATION-BOARD / NEXT-CYCLE）</text>
+    </g>
+  </g>
+
+  <!-- 底部数字瓦片 -->
+  <g text-anchor="middle">
+    <rect x="40" y="770" width="175" height="100" rx="10" fill="#151a21" stroke="#2a313c"/>
+    <text x="127" y="822" font-size="26" font-weight="bold" fill="#f5a524">272</text>
+    <text x="127" y="848" font-size="12" fill="#8b93a3">生产卡库（张）</text>
+    <rect x="228" y="770" width="175" height="100" rx="10" fill="#151a21" stroke="#2a313c"/>
+    <text x="315" y="822" font-size="26" font-weight="bold" fill="#f5a524">221</text>
+    <text x="315" y="848" font-size="12" fill="#8b93a3">rules 覆盖（张）</text>
+    <rect x="416" y="770" width="175" height="100" rx="10" fill="#151a21" stroke="#2a313c"/>
+    <text x="503" y="822" font-size="26" font-weight="bold" fill="#f5a524">58</text>
+    <text x="503" y="848" font-size="12" fill="#8b93a3">hosted 文本执行</text>
+    <rect x="604" y="770" width="175" height="100" rx="10" fill="#151a21" stroke="#2a313c"/>
+    <text x="691" y="822" font-size="26" font-weight="bold" fill="#f5a524">1833</text>
+    <text x="691" y="848" font-size="12" fill="#8b93a3">最近全量用例</text>
+    <rect x="792" y="770" width="175" height="100" rx="10" fill="#151a21" stroke="#2a313c"/>
+    <text x="879" y="822" font-size="26" font-weight="bold" fill="#f5a524">230</text>
+    <text x="879" y="848" font-size="12" fill="#8b93a3">测试文件</text>
+    <rect x="980" y="770" width="175" height="100" rx="10" fill="#151a21" stroke="#2a313c"/>
+    <text x="1067" y="822" font-size="26" font-weight="bold" fill="#f5a524">43</text>
+    <text x="1067" y="848" font-size="12" fill="#8b93a3">样式表（CSS）</text>
+    <rect x="1168" y="770" width="175" height="100" rx="10" fill="#151a21" stroke="#2a313c"/>
+    <text x="1255" y="822" font-size="26" font-weight="bold" fill="#f5a524">983</text>
+    <text x="1255" y="848" font-size="12" fill="#8b93a3">构建模块</text>
+    <rect x="1356" y="770" width="175" height="100" rx="10" fill="#151a21" stroke="#2a313c"/>
+    <text x="1443" y="822" font-size="26" font-weight="bold" fill="#f5a524">310 KiB</text>
+    <text x="1443" y="848" font-size="12" fill="#8b93a3">首屏 JS 预算</text>
+  </g>
+
+  <text x="40" y="916" font-size="13" fill="#5b6472">口径：只读盘点，未改动任何工作区文件；提交 / 推送 / 删除 / 回滚需老板明确指示。生成：Friday · 2026-09-29</text>
+</svg>

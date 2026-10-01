@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1560" height="950" viewBox="0 0 1560 950" font-family="Microsoft YaHei, PingFang SC, sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#5b6472"/>
+    </marker>
+  </defs>
+  <rect width="1560" height="950" fill="#0e1116"/>
+  <text x="40" y="52" font-size="28" font-weight="bold" fill="#f0f3f8">搜打撤 Vite · 前端代码结构图</text>
+  <text x="40" y="82" font-size="14" fill="#8b93a3">包版本 v0.60.0 · 盘点 2026-09-29 · HEAD 7c2b6e7 · src/ 11 域 236 模块 ≈ 46,700 行 · 静态依赖无环（tests/contracts.test.js AST 守卫）</text>
+
+  <!-- ===== 右侧：代码量分布 ===== -->
+  <text x="1030" y="130" font-size="16" font-weight="bold" fill="#c9d1dc">代码量分布（行）</text>
+  <g font-size="13" fill="#aab4c4">
+    <text x="1030" y="168">battle</text><rect x="1155" y="155" width="300" height="18" rx="3" fill="#e5484d"/><text x="1463" y="169" font-size="12" fill="#8b93a3">14,552 · 31%</text>
+    <text x="1030" y="208">hub</text><rect x="1155" y="195" width="171" height="18" rx="3" fill="#f5a524"/><text x="1334" y="209" font-size="12" fill="#8b93a3">8,293 · 18%</text>
+    <text x="1030" y="248">cards</text><rect x="1155" y="235" width="129" height="18" rx="3" fill="#b083f0"/><text x="1292" y="249" font-size="12" fill="#8b93a3">6,242 · 13%</text>
+    <text x="1030" y="288">run</text><rect x="1155" y="275" width="123" height="18" rx="3" fill="#3fb9a8"/><text x="1286" y="289" font-size="12" fill="#8b93a3">5,978 · 13%</text>
+    <text x="1030" y="328">core</text><rect x="1155" y="315" width="63" height="18" rx="3" fill="#58a6ff"/><text x="1226" y="329" font-size="12" fill="#8b93a3">3,044 · 6.5%</text>
+    <text x="1030" y="368">agent</text><rect x="1155" y="355" width="59" height="18" rx="3" fill="#d29922"/><text x="1222" y="369" font-size="12" fill="#8b93a3">2,875 · 6.2%</text>
+    <text x="1030" y="408">ui</text><rect x="1155" y="395" width="54" height="18" rx="3" fill="#7ee2b8"/><text x="1217" y="409" font-size="12" fill="#8b93a3">2,639 · 5.6%</text>
+    <text x="1030" y="448">home</text><rect x="1155" y="435" width="29" height="18" rx="3" fill="#ff9bce"/><text x="1192" y="449" font-size="12" fill="#8b93a3">1,415 · 3.0%</text>
+    <text x="1030" y="488">generated</text><rect x="1155" y="475" width="17" height="18" rx="3" fill="#8b93a3"/><text x="1180" y="489" font-size="12" fill="#8b93a3">822 · 1.8%</text>
+    <text x="1030" y="528">audio</text><rect x="1155" y="515" width="15" height="18" rx="3" fill="#9fb0c3"/><text x="1178" y="529" font-size="12" fill="#8b93a3">730 · 1.6%</text>
+    <text x="1030" y="568">experience</text><rect x="1155" y="555" width="4" height="18" rx="2" fill="#f2c98a"/><text x="1167" y="569" font-size="12" fill="#8b93a3">152 · 0.3%</text>
+  </g>
+  <text x="1030" y="615" font-size="12" fill="#5b6472">合计 ≈ 46,742 行（11 域，另根层 5 文件）</text>
+  <text x="1030" y="637" font-size="12" fill="#5b6472">tests/ 230 文件 · CSS 43 张（不计入上行）</text>
+
+  <!-- ===== 左侧：分层结构（上=高层，下=底座） ===== -->
+  <text x="40" y="110" font-size="11" fill="#5b6472">启动接线（顶层）</text>
+  <rect x="40" y="118" width="960" height="84" rx="8" fill="#161b22" stroke="#f0f3f8" stroke-opacity="0.55"/>
+  <text x="60" y="146" font-size="15" font-weight="bold" fill="#f0f3f8">启动装配 · 根层 5 文件</text>
+  <text x="60" y="170" font-size="12" fill="#aab4c4">index.html（唯一入口，加载 src/main.js）→ main.js 定初始化顺序 → boot-order.js 启动次序 → game.boot.js 引导＋注入 canvas/ctx/日志</text>
+  <text x="60" y="190" font-size="12" fill="#8b93a3">r7a.qa.js / e2.snapshot.qa.js 为 QA 脚本入口；样式级联以 index.html 实际 link 顺序为准（CSS 43 张）</text>
+
+  <line x1="520" y1="204" x2="520" y2="228" stroke="#5b6472" stroke-width="1.6" marker-end="url(#arr)"/>
+  <text x="532" y="222" font-size="11" fill="#5b6472">依赖方向 ↓（高层依赖低层）</text>
+
+  <text x="40" y="246" font-size="11" fill="#5b6472">L3 核心功能域</text>
+  <rect x="40" y="254" width="340" height="128" rx="8" fill="#161b22" stroke="#e5484d" stroke-opacity="0.7"/>
+  <text x="60" y="282" font-size="16" font-weight="bold" fill="#e5484d">battle/ 战斗全域</text>
+  <text x="60" y="300" font-size="12" fill="#8b93a3">72 文件 · 14,552 行 · 占 31%</text>
+  <g font-size="12" fill="#aab4c4">
+    <text x="60" y="322">runtime 五片 · engine · enemy-phase</text>
+    <text x="60" y="340">hand-selection / discover 纯规则族</text>
+    <text x="60" y="358">effect-steps 九节结算流水线</text>
+    <text x="60" y="376">view 六片 · frames 序列帧管线</text>
+  </g>
+  <rect x="392" y="254" width="300" height="128" rx="8" fill="#161b22" stroke="#3fb9a8" stroke-opacity="0.7"/>
+  <text x="412" y="282" font-size="16" font-weight="bold" fill="#3fb9a8">run/ 局内流程</text>
+  <text x="412" y="300" font-size="12" fill="#8b93a3">26 文件 · 5,978 行 · 占 13%</text>
+  <g font-size="12" fill="#aab4c4">
+    <text x="412" y="322">expedition 四层相邻地图</text>
+    <text x="412" y="340">事件 · 商店 · 祭坛</text>
+    <text x="412" y="358">撤离 / 带出预估</text>
+    <text x="412" y="376">run.data 场景与叙事数据</text>
+  </g>
+  <rect x="704" y="254" width="296" height="128" rx="8" fill="#161b22" stroke="#f5a524" stroke-opacity="0.7"/>
+  <text x="724" y="282" font-size="16" font-weight="bold" fill="#f5a524">hub/ 基地（局外）</text>
+  <text x="724" y="300" font-size="12" fill="#8b93a3">47 文件 · 8,293 行 · 占 18%</text>
+  <g font-size="12" fill="#aab4c4">
+    <text x="724" y="322">基地壳＋六页签 · 整备控制器</text>
+    <text x="724" y="340">bag 四片（拖拽 / 结算 / 桥）</text>
+    <text x="724" y="358">base-* 事务命令族（草稿提交）</text>
+    <text x="724" y="376">照相馆懒加载门面</text>
+  </g>
+
+  <line x1="520" y1="384" x2="520" y2="408" stroke="#5b6472" stroke-width="1.6" marker-end="url(#arr)"/>
+  <text x="40" y="428" font-size="11" fill="#5b6472">支撑能力域（跨层复用）</text>
+  <g>
+    <rect x="40" y="436" width="150" height="96" rx="8" fill="#161b22" stroke="#7ee2b8" stroke-opacity="0.6"/>
+    <text x="115" y="462" font-size="13" font-weight="bold" fill="#7ee2b8" text-anchor="middle">ui</text>
+    <text x="115" y="480" font-size="10.5" fill="#8b93a3" text-anchor="middle">10 文件 · 2,639 行</text>
+    <text x="115" y="498" font-size="10.5" fill="#aab4c4" text-anchor="middle">overlay / hud /</text>
+    <text x="115" y="513" font-size="10.5" fill="#aab4c4" text-anchor="middle">cinematics</text>
+    <rect x="202" y="436" width="150" height="96" rx="8" fill="#161b22" stroke="#d29922" stroke-opacity="0.6"/>
+    <text x="277" y="462" font-size="13" font-weight="bold" fill="#d29922" text-anchor="middle">agent</text>
+    <text x="277" y="480" font-size="10.5" fill="#8b93a3" text-anchor="middle">13 文件 · 2,875 行</text>
+    <text x="277" y="498" font-size="10.5" fill="#aab4c4" text-anchor="middle">SDT.Agent 自动游玩</text>
+    <text x="277" y="513" font-size="10.5" fill="#aab4c4" text-anchor="middle">＋LLM 适配</text>
+    <rect x="364" y="436" width="150" height="96" rx="8" fill="#161b22" stroke="#ff9bce" stroke-opacity="0.6"/>
+    <text x="439" y="462" font-size="13" font-weight="bold" fill="#ff9bce" text-anchor="middle">home</text>
+    <text x="439" y="480" font-size="10.5" fill="#8b93a3" text-anchor="middle">8 文件 · 1,415 行</text>
+    <text x="439" y="498" font-size="10.5" fill="#aab4c4" text-anchor="middle">首页 / 标题</text>
+    <text x="439" y="513" font-size="10.5" fill="#aab4c4" text-anchor="middle">ink 叙事</text>
+    <rect x="526" y="436" width="150" height="96" rx="8" fill="#161b22" stroke="#9fb0c3" stroke-opacity="0.6"/>
+    <text x="601" y="462" font-size="13" font-weight="bold" fill="#9fb0c3" text-anchor="middle">audio</text>
+    <text x="601" y="480" font-size="10.5" fill="#8b93a3" text-anchor="middle">3 文件 · 730 行</text>
+    <text x="601" y="498" font-size="10.5" fill="#aab4c4" text-anchor="middle">Howler 双 BGM</text>
+    <text x="601" y="513" font-size="10.5" fill="#aab4c4" text-anchor="middle">＋Kenney 采样</text>
+    <rect x="688" y="436" width="150" height="96" rx="8" fill="#161b22" stroke="#f2c98a" stroke-opacity="0.6"/>
+    <text x="763" y="462" font-size="13" font-weight="bold" fill="#f2c98a" text-anchor="middle">experience</text>
+    <text x="763" y="480" font-size="10.5" fill="#8b93a3" text-anchor="middle">1 文件 · 152 行</text>
+    <text x="763" y="498" font-size="10.5" fill="#aab4c4" text-anchor="middle">pocket-strip</text>
+    <text x="763" y="513" font-size="10.5" fill="#aab4c4" text-anchor="middle">口袋状态条</text>
+    <rect x="850" y="436" width="150" height="96" rx="8" fill="#161b22" stroke="#8b93a3" stroke-opacity="0.6"/>
+    <text x="925" y="462" font-size="13" font-weight="bold" fill="#8b93a3" text-anchor="middle">generated</text>
+    <text x="925" y="480" font-size="10.5" fill="#8b93a3" text-anchor="middle">3 文件 · 822 行</text>
+    <text x="925" y="498" font-size="10.5" fill="#aab4c4" text-anchor="middle">叙事编译产物</text>
+    <text x="925" y="513" font-size="10.5" fill="#aab4c4" text-anchor="middle">等生成数据</text>
+  </g>
+
+  <line x1="520" y1="534" x2="520" y2="558" stroke="#5b6472" stroke-width="1.6" marker-end="url(#arr)"/>
+  <text x="40" y="578" font-size="11" fill="#5b6472">L2 卡牌数据域</text>
+  <rect x="40" y="586" width="960" height="84" rx="8" fill="#161b22" stroke="#b083f0" stroke-opacity="0.7"/>
+  <text x="60" y="614" font-size="16" font-weight="bold" fill="#b083f0">cards/ 卡牌域</text>
+  <text x="1000" y="614" font-size="12" fill="#8b93a3" text-anchor="end">24 文件 · 6,242 行 · 占 13%</text>
+  <text x="60" y="640" font-size="12" fill="#aab4c4">cards.data / rules / sync / consts / catalog · schema v2 增量契约＋解释器 · card-rarity 纯规则 · 生产卡库 272 张（221 有 rules / 51 排除 / 58 hosted）</text>
+
+  <line x1="520" y1="672" x2="520" y2="696" stroke="#5b6472" stroke-width="1.6" marker-end="url(#arr)"/>
+  <text x="40" y="716" font-size="11" fill="#5b6472">L1 底座层</text>
+  <rect x="40" y="724" width="960" height="84" rx="8" fill="#161b22" stroke="#58a6ff" stroke-opacity="0.7"/>
+  <text x="60" y="752" font-size="16" font-weight="bold" fill="#58a6ff">core/ 底座</text>
+  <text x="1000" y="752" font-size="12" fill="#8b93a3" text-anchor="end">29 文件 · 3,044 行 · 占 6.5%</text>
+  <text x="60" y="778" font-size="12" fill="#aab4c4">随机 random-core · 冻结规则源 rule-config · 输入 · Canvas 渲染 renderer＋scheduler · 事件 · 数据 · 诊断门面</text>
+
+  <text x="40" y="848" font-size="13" fill="#8b93a3">分层判据：规则/数据与纯工具 → 状态与领域逻辑 → 功能视图 → 启动接线；核心状态模块禁止反向导入 boot/run/hub/视图（架构守卫违规 0）</text>
+  <text x="40" y="874" font-size="13" fill="#8b93a3">构建实测（09-28 干净目录）：983 模块 · 首屏 JS gzip 300.8 KiB（限 310）· CSS gzip 125.5 KiB · 包体 85.51 MiB</text>
+  <text x="40" y="900" font-size="13" fill="#5b6472">战斗 72 文件含 selection-flow / hand-selection / discover 纯规则族与 effect-steps 九节流水线；基地持久化已收敛为 base-* 事务命令族</text>
+</svg>
