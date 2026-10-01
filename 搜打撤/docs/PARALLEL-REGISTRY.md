@@ -1,7 +1,7 @@
 # 并行会话热点登记（PARALLEL-REGISTRY）
 
-> **规则（09-29 起）**：
-> 1. 会话要改**共享文件**（AGENTS.md / docs 公共文档 / MEMORY.md / 其他会话热点）或开**长任务**（工作树 / 端口服务 / 后台进程）前，先在「活跃登记」加一行；收官/释放后把行移入「近期已释放」。单会话活跃（`npm run handoff` 占用仅本会话）时小额共享台账修改可直接编辑+收官核对，免登记免两段式；占用多于本会话照常全套（10-01 老板拍板）。
+> **规则（09-29 起；10-01 精简：动作先行）**：
+> 1. 会话改**共享文件**（AGENTS.md / docs 公共文档 / MEMORY.md / 其他会话热点）或开**长任务**（工作树 / 端口服务 / 后台进程）：动作先行，登记行同轮紧随补齐——不缺席、不阻塞启动（10-01 老板拍板）；登记表或 `npm run handoff` 显示他人活跃占用同一属地时，先协调再动手。收官/释放后把行移入「近期已释放」。单会话活跃（`npm run handoff` 占用仅本会话）时小额共享台账修改可直接编辑+收官核对，免登记免两段式。
 > 2. 发现**无主改动/文件**（归属不明的 M 文件、陌生未跟踪产物）登记到「无主物品」，**只记录勿动**，等认领或老板处置；认领者把行移入活跃登记。
 > 3. 本文件是占用登记的唯一真源；记忆只放指针。状态用「编辑中 / 待验收 / 完成未提交 / 已交付」；完成未提交必须列路径、归属和证据，编辑结束不等于提交获批，其他会话不能覆盖未提交内容。
 > 4. 服务登记工作目录/端口/PID/创建会话；收官只停本会话创建且身份确认的服务。完成事项移至已释放，工作树等仍需处置的资源保留登记。日期/PID 是记录时点，使用前核实身份。
@@ -13,8 +13,7 @@
 |---|---|---|---|---|
 | Friday（实机验收剧本库 WF-acceptance-scenes） | game/src/agent/agent.scenes.js（新增 10 场景）、game/src/agent/agent.js（+3 行装配）、game/src/agent/agent.runner.js（defer 浏览器分支改 MessageChannel 泵，后台 tab 步进 80 倍加速）、scripts/iab-drive.mjs（收编+runScene 分体轮询）、tests/agent-scenes.test.js（4 项）、docs/agent-protocol.md（第九节）、docs/quality-gates.md（工作树追加 2 条，simplify 暂存未动）、docs/PENDING.md（#21/#25 销账+#26 新挂）、docs/evidence/2026-10-01-acceptance-scenes/（README 十坑+截图）；5345 服务已停（本会话 PID26424 已核杀） | 老板拍板四项全落：SDT.Agent.scenes 十场景、iab-drive 收编、JSON+截图合并证据口径；jsdom 4/4+定向 30/30+lint/语法绿；实机 7 场景过（battle/smoke/shop/chest/fire/event/altar），extract 机制全链路通、收口卡宝箱多箱队列（疑似 chests.js bug，挂 #26）；已随 d1ae1a2 落库 | 10-01 | 已落库 d1ae1a2 |
 | Friday（性能优化第二轮 WF-perf-opt-round2） | game/src/battle/core/battle.engine.js+battle.core.js+view/battle.aim.js+view/battle.view.js（F1 轻查询/F4/F9）、game.boot.js（F3）、battle/runtime/battle.action-runner.js（F5②）、hub/game.hub.pages.js+experience/pocket-strip.js（F12）、ui/hud.js（F8 补充）、tests/battle-engine-facade.test.js（导出基线 64→65）；承接上轮 WF-full-audit-fix-perf 属地；REGISTRY 仅自有行 | 老板指令「继续全量性能优化」：F1 经快照重投影契约否决链缓存后改道 getBattleLiveness、F3 合帧、F4 html 签名短路、F5② idle 存档 2s 兜底、F9 rect/箭头缓存、F12 索引与记忆化；F5③ 复查已有封顶销账；F11+F1 全量版风险评估后不实施挂 PENDING #23；全量 2131 全绿 0 失败、lint/typecheck/语法门绿；已随 d1ae1a2 落库 | 10-01 | 已落库 d1ae1a2 |
-| Friday（照相馆性能专项会话） | ~~game/css/expedition-library.css、game/css/winter.css、game/src/hub/game.cardslib.page.js~~（已随 d2c0d0a 落库）、worktree .photolib-acc（待处置）、~~端口 8137/8138/5333~~（已杀净） | 照相馆性能专项三期：实机验收通过并已落库（d2c0d0a）；仅余隔离工作树处置待拍板 | 09-29 深夜 | 已落库，余 worktree 待拍板 |
-| Friday（夜班流程研究接力 WF-nightshift-gameflow-study） | docs/nightshift/2026-10-01-gameflow-study/（新建自有目录，全部产出在内，含自有 Node 分析工具与静态原型页——只读 game 数据、不修改不运行任何现有 game/、scripts/、tests/ 文件）；REGISTRY 仅本行；不碰 PENDING、quality-gates、README、WORKFLOW-TOOLS、根 AGENTS 及其他会话属地；无服务、不 build、不提交 | 老板指令长线任务（挂到 07:00，01:20 追加要动代码项目层面东西）：按老板 18 节流程做阶段盘点+外部调研+设计假设+创新提案+自有目录内代码工具（卡牌数据分析/设计原型页）；cron 每 50 分钟一轮接力读 PROGRESS.md 续作，≥07:10 首轮收官销本行账 | 10-01 00:52 | 编辑中（自动接力） |
+| Friday（照相馆性能专项会话） | ~~game/css/expedition-library.css、game/css/winter.css、game/src/hub/game.cardslib.page.js~~（已随 d2c0d0a 落库）、~~worktree .photolib-acc~~（10-01 核对三文件与主仓库 HEAD 一致/无未落库内容后经老板拍板移除，303M 释放）、~~端口 8137/8138/5333~~（已杀净） | 照相馆性能专项三期：实机验收通过并已落库（d2c0d0a）；worktree 已移除，本条全清 | 09-29 深夜 | 已落库，worktree 已移除（10-01） |
 
 
 ## 无主物品（只记录勿动，等认领/处置）
@@ -28,6 +27,8 @@
 
 | 会话/来源 | 属地 | 事项 | 时段 |
 |---|---|---|---|
+| Friday（ZCode 本会话，老板指令「改动提交，夜班关掉，其他的全部落库」打包收官） | 活跃登记两行（起服+流程精简、WF-web-launcher）收官销账；5200 服务 PID 4748 已停（本会话创建，taskkill 后端口释放复核）；node_modules 修复（@cacheable/memory 缺失致 ESLint 挂，清代理环境变量 npm install 补齐） | 分组落库：7f23015 流程精简六文档、4711106 /web 固定指令（gate full 全量 2131 绿）、c16aa21 夜班收官终态、2fefeff 杂项（项目近况页+nai-out png/json+codex 配置）；边界拍板：.sfx-work 与 nai zip 入 ignore、.photolib-acc worktree 核对无未落库内容后移除（303M 释放）、PENDING #8 销账 | 10-01 | 已落库 7f23015→2fefeff |
+| Friday（夜班流程研究接力 WF-nightshift-gameflow-study） | docs/nightshift/2026-10-01-gameflow-study/（全部产出：晨报+R1-R9 九份报告+tools/analyze-cards.mjs 卡牌分析工具+prototype/extraction-panel.html 撤离决策原型页）；REGISTRY 仅本行；全程零现有文件修改、零 build、零提交、无服务 | 老板指令长线任务（00:45-07:27）：18 节流程阶段盘点（9 已有基础/6 部分/1 未开始，Top3 缺口=整局验证未执行/新手教学缺失/数值分析缺位）+撤离与卡牌呈现外部调研（含 STS2 本地源码实证）+14 条设计假设+5 项创新提案+两件代码交付物；R7 交叉复审修 R8-D 第 4 层期望 bug（2.5→2.0）并修 R1 过度乐观表述。【10-01 收官】R1-R9 全完成,晨报=MORNING-REPORT.md,PROGRESS 已置 FINISHED。【10-01 补】周期接力任务 automation-bfeb8d82 已由老板拍板停用（CronDelete 删除，接力会话执行）；收官终态随 c16aa21 落库 | 10-01 00:52 登记；10-01 07:27 收官；10-01 落库 c16aa21 |
 | Friday（QUICKSTART+文档梳理 WF-onboard-drill） | docs/QUICKSTART.md（新建）、docs/README.md（挂入口）、根 AGENTS.md（一行指针）；梳理为只读演练；不碰 game/、不 build/提交 | 老板拍板：落 QUICKSTART 上手页；随后以新开发者视角模拟走一遍文档指引找问题。【10-01 收官】QUICKSTART 含环境核验（新克隆挂门陷阱）/混树 isolate 指引；走查：CLI 命令全验证、文档守卫过、路由抽查 6/6、STATUS 为干净导航壳；过时措辞扫描零残留；发现暂存区有并行会话 6 文件（未动）；全部未提交 | 10-01 登记；10-01 收官，完成未提交 |
 | Friday（流程减负落地 WF-workflow-simplify） | scripts/acceptance-gate.mjs、tests/acceptance-gate.test.js、docs/quality-gates.md、docs/PENDING.md、docs/README.md、docs/WORKFLOW-TOOLS.md、docs/PARALLEL-REGISTRY.md 规则节、根 AGENTS.md；不碰 game/、不搬 tests/ 目录、不 build/提交 | 老板拍板四项落地：全量红灯挂账 PENDING #22+口径改 CI 为准、验收门回退面收窄（数据/剧情/fixture/纯删除/lockfile 定向化+脚本映射补 4 项+上限 30）、单会话免仪式规则、验证口径收敛 quality-gates。【10-01 收官】定向 tests/acceptance-gate+workflow-scope 28/28 绿，eslint 改动文件净，docs:check 净；tests 目录物理分层未做，等 fix-perf/acceptance-scenes 收官后另批；全部改动未提交 | 10-01 登记；10-01 按四项完成收官，完成未提交 |
 | Friday（验收分级班·追加，来源记录） | scripts/iab-drive.mjs（未跟踪） | IAB 起手式草稿；来源与 PENDING #21 对齐。历史导入检查不等于实页验收，仍缺内置桥端到端复验；本轮不认领或修改脚本。【10-01 归档】随 Codex 会话暂停一并归档（老板指令），脚本仍待处置（PENDING #21），未入 HEAD 状态不变 | 09-30 登记，待验收/待处置；10-01 归档 |

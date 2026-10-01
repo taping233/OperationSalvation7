@@ -17,7 +17,6 @@
 | 5 | photo-nail 待处置 | 09-19 | 记忆 soudache-cardlib-gallery-40 | |
 | 6 | martial-builtin-sha 死图待批删 | 09-19 | 记忆 soudache-starter-attack-rename-2026-09-19 | 动手前列清单 |
 | 7 | 僵尸 Vite：`.exp-observe/` 5199 端口（PID 21256，09-25 起）杀否 | 09-28 | 记忆 soudache-exp-tri-track-2026-09-28 | 先 tasklist 验身份再杀 |
-| 8 | 工作树/未跟踪杂项去留：`.codex/`、`.photolib-acc/`、`.ui-art-loop-0925/`、`项目近况-2026-09-29/` | 09-29；09-30 补齐 | git status + REGISTRY 照相馆条目 | 等老板处置；具体删除清单尚未批准 |
 | 9 | 照相馆 `?libPerfDiag` DEV 诊断钩子（game.cardslib.page.js）去留：保留=可随时复跑滚动归因五连测，删=一句话即清 | 09-29 | docs/PHOTOLIB-PERF-TASK-2026-09-29.md 遗留3 | 生产构建零开销 |
 | 10 | `game/src/e2.snapshot.qa.js` 删留单议（E2 验收宿主遗产，E 批已归档；knip A 类批其余项已执行销账：renderer.icons 位图管线 289→57 行、getHomeForSlot、openAltarRitual re-export、三个无人 default+matchBlank 死导出词、run-architecture 断言清单腐坏项同步修正；dev-shims 改判误报=dev.html importmap 依赖） | 09-29 深夜 | knip 首跑甄别（09-29 深夜会话） | 其余已执行，本条仅剩 e2.snapshot |
 | 13 | 照相馆照片在 Vite 主线 dev 服全黑：页面相对路径 `assets/thumbs/*.webp` 解析到 `/game/assets/*` 被 SPA fallback 回 text/html（16/16 naturalWidth=0），绝对路径 `/assets/*` 有映射正常；8137 类静态服（game/ 即根）不受影响。修不修（改绝对路径/加 Vite 映射）等拍板 | 09-29 深夜 | CSS 精修班顺带发现（docs/evidence/css-dedupe-2026-09-29/README.md 顺带发现①；HEAD 版 A/B 同现=既有问题） | 影响：以后在 Vite 主线服做照相馆实页验收会被照片黑块干扰 |
@@ -34,6 +33,7 @@
 
 | # | 事项与结果 | 决策时间 | 来源 | 后续 |
 |---|---|---|---|---|
+| ~~8~~ | 已处置（老板拍板「其他的全部落库」+三项明细确认）：`.codex/config.toml` 与 `项目近况-2026-09-29/` 入库、`.ui-art-loop-0925/nai-out` png+json 入库（NAI 原始 zip 入 ignore）、`.photolib-acc` worktree 经三文件 diff 核对与主仓库 HEAD 一致（三期内容均已随 d2c0d0a 落库）后移除（303M 释放）；另 `.sfx-work/`（明日方舟音频 120M，版权素材）老板拍板不入库，入 ignore；随 `2fefeff` 落库 | 10-01 | 本台账 + 老板会话 AskUserQuestion 拍板 | 完结 |
 | ~~22~~ | 已实施：老板授权修复全量 3 红灯——hub-flow-regression 源码形状守卫放宽为有界顺序断言（合法音效插入不再误红，CRLF 教训同族）、boot.test 超时 5s→20s（根治负载 flake）、m7-battle 前会话已修；全量 266 文件/2131 通过/2 跳过/0 失败 EXIT=0（并行 84.5s），修复后首次全绿 | 10-01 | 老板「之前那个红灯你也可以修掉」 | 完结；变异演练另发现 pets 数值覆盖空洞（全链路无人测），归 backlog 另议 |
 | ~~14~~ | 已实施：老板拍板 STS2 式全灭短路，foesAnnihilated 循环守卫及字段兜底，onKill/吸血 rider 原子保留；历史 219 例 + 新 5 例，`8db5b19`，R10 PASS | 09-30 | 夜班 STS2 对照第二批 + journal 延伸 | 完结；句内深化 #19 仍待决 |
 | ~~15~~ | 已实施：老板拍板负血 + 即时死亡；免死钩照旧、展示钳 0、快照真实值；`4f0fae5`，R12 PASS | 09-30 | 同上 | 完结；保存窗口 #20 仍待决 |
