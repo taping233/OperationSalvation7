@@ -21,7 +21,8 @@ STATUS 和接手简报只生成/引用摘要。spec保留需求、方案、拆�
 
 ```powershell
 npm run --silent workflow -- task start --task <编号> --owner Friday --input <任务输入JSON> --json
-# 确认预览后追加 --apply --expect absent
+# 确认预览后追加 --apply --expect absent；单会话无争用可一步 --apply --expect auto（R4，10-01 起：
+# 写前自动复核基线+锁内互斥，他人插手即拒；多会话争用时仍用显式 SHA 两段式）
 npm run --silent handoff -- --task <编号>
 ```
 
@@ -55,6 +56,8 @@ npm run --silent workflow -- verify --task <编号> --tests <逗号分隔测试�
 npm run --silent docs:check -- --json
 npm run --silent workflow -- evidence --input <自动报告JSON> --json
 ```
+
+路径分隔口径（R6，10-01 起）：`workflow verify` 的 `--tests/--paths` 用逗号；`check:staged:plan` 直跑 `acceptance-gate.mjs --paths` 空格与逗号均接受。
 
 自动报告分代码、文档、任务状态、环境。台账变化只提示便宜的状态/链接核对；规则文档变化保留代码候选，补文档检查；代码或环境变化、失败、中断、检查期间代码变化仍使代码证据失效。候选不代替负责人对范围和真实行为的判断。
 
