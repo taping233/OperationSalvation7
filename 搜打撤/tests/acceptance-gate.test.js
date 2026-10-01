@@ -1,7 +1,7 @@
 import { spawnSync } from 'node:child_process';
 import path from 'node:path';
 import {describe, expect, it, vi } from 'vitest';
-import { DIRTY_SCAN_ROOTS, parseStagedStatus, planForPaths } from '../scripts/acceptance-gate.mjs';
+import { DIRTY_SCAN_ROOTS, packageJsonScriptsOnlyDiff, parseStagedStatus, planForPaths } from '../scripts/acceptance-gate.mjs';
 
 // tsc 子进程类契约测试固有慢：默认 5s 在全量并行负载下必超时（与 boot.test 同族）
 vi.setConfig({ testTimeout: 20000, hookTimeout: 20000 });
@@ -49,6 +49,26 @@ describe('分层验收选择', () => {
     const plan = planForPaths(['package-lock.json']);
     expect(plan.mode).toBe('quick');
     expect(plan.tests).toEqual(['tests/architecture-boundaries.test.js', 'tests/contracts.test.js']);
+  });
+
+  it('package.json 仅 scripts 段变更走架构哨兵快门', () => {
+    const plan = planForPaths(['package.json'], { packageJsonScriptsOnly: true });
+    expect(plan.mode).toBe('quick');
+    expect(plan.tests).toEqual(['tests/architecture-boundaries.test.js', 'tests/contracts.test.js']);
+    expect(plan.reasons.join('、')).toContain('仅 scripts 段');
+  });
+
+  it('scripts 豁免不覆盖 lockfile 与构建配置同变', () => {
+    expect(planForPaths(['package.json', 'package-lock.json'], { packageJsonScriptsOnly: true }).mode).toBe('full');
+    expect(planForPaths(['package.json', 'vite.config.js'], { packageJsonScriptsOnly: true }).mode).toBe('full');
+  });
+
+  it('scriptsOnlyDiff 只豁免 scripts 段，其余字段任何变化都不豁免', () => {
+    const base = JSON.stringify({ name: 'x', version: '1', scripts: { dev: 'vite' } });
+    expect(packageJsonScriptsOnlyDiff(base, JSON.stringify({ name: 'x', version: '1', scripts: { dev: 'vite --port 5200' } }))).toBe(true);
+    expect(packageJsonScriptsOnlyDiff(base, JSON.stringify({ name: 'x', version: '1', scripts: {} }))).toBe(true);
+    expect(packageJsonScriptsOnlyDiff(base, JSON.stringify({ name: 'x', version: '2', scripts: { dev: 'vite' } }))).toBe(false);
+    expect(packageJsonScriptsOnlyDiff(base, JSON.stringify({ name: 'x', version: '1', scripts: { dev: 'vite' }, dependencies: { a: '^1' } }))).toBe(false);
   });
 
   it('fixture 变更定向到引用它的测试', () => {

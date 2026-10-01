@@ -14,12 +14,15 @@
 | Friday（实机验收剧本库 WF-acceptance-scenes） | game/src/agent/agent.scenes.js（新增 10 场景）、game/src/agent/agent.js（+3 行装配）、game/src/agent/agent.runner.js（defer 浏览器分支改 MessageChannel 泵，后台 tab 步进 80 倍加速）、scripts/iab-drive.mjs（收编+runScene 分体轮询）、tests/agent-scenes.test.js（4 项）、docs/agent-protocol.md（第九节）、docs/quality-gates.md（工作树追加 2 条，simplify 暂存未动）、docs/PENDING.md（#21/#25 销账+#26 新挂）、docs/evidence/2026-10-01-acceptance-scenes/（README 十坑+截图）；5345 服务已停（本会话 PID26424 已核杀） | 老板拍板四项全落：SDT.Agent.scenes 十场景、iab-drive 收编、JSON+截图合并证据口径；jsdom 4/4+定向 30/30+lint/语法绿；实机 7 场景过（battle/smoke/shop/chest/fire/event/altar），extract 机制全链路通、收口卡宝箱多箱队列（疑似 chests.js bug，挂 #26）；已随 d1ae1a2 落库 | 10-01 | 已落库 d1ae1a2 |
 | Friday（性能优化第二轮 WF-perf-opt-round2） | game/src/battle/core/battle.engine.js+battle.core.js+view/battle.aim.js+view/battle.view.js（F1 轻查询/F4/F9）、game.boot.js（F3）、battle/runtime/battle.action-runner.js（F5②）、hub/game.hub.pages.js+experience/pocket-strip.js（F12）、ui/hud.js（F8 补充）、tests/battle-engine-facade.test.js（导出基线 64→65）；承接上轮 WF-full-audit-fix-perf 属地；REGISTRY 仅自有行 | 老板指令「继续全量性能优化」：F1 经快照重投影契约否决链缓存后改道 getBattleLiveness、F3 合帧、F4 html 签名短路、F5② idle 存档 2s 兜底、F9 rect/箭头缓存、F12 索引与记忆化；F5③ 复查已有封顶销账；F11+F1 全量版风险评估后不实施挂 PENDING #23；全量 2131 全绿 0 失败、lint/typecheck/语法门绿；已随 d1ae1a2 落库 | 10-01 | 已落库 d1ae1a2 |
 | Friday（照相馆性能专项会话） | ~~game/css/expedition-library.css、game/css/winter.css、game/src/hub/game.cardslib.page.js~~（已随 d2c0d0a 落库）、~~worktree .photolib-acc~~（10-01 核对三文件与主仓库 HEAD 一致/无未落库内容后经老板拍板移除，303M 释放）、~~端口 8137/8138/5333~~（已杀净） | 照相馆性能专项三期：实机验收通过并已落库（d2c0d0a）；worktree 已移除，本条全清 | 09-29 深夜 | 已落库，worktree 已移除（10-01） |
+| Friday（ZCode 本会话，流程提速落地 WF-gate-scripts-only） | scripts/acceptance-gate.mjs（planForPaths 加 packageJsonScriptsOnly 注入选项+packageJsonScriptsOnlyDiff 纯函数+stagedPackageJsonScriptsOnly 组装）、tests/acceptance-gate.test.js（+3 断言）、docs/quality-gates.md（回退全量口径同步一句）、本文件；不碰 game/ | 老板令「把这些修了」（接耗时复盘）：package.json 仅 scripts 段变更豁免全量门、定向到架构哨兵；不豁免=lockfile 或 vite.config.js 同变、非 scripts 字段变化、scripts 引用本地文件缺失。【验证】定向 tests/acceptance-gate 22/22 绿（3.4s）、改动文件 ESLint 净、--plan 冒烟正向 quick/反向 full 符合预期、docs:check 净 | 10-01 | 完成未提交 |
 
 
 ## 无主物品（只记录勿动，等认领/处置）
 
 | 物品 | 现象 | 发现时间 | 备注 |
 |---|---|---|---|
+| `搜打撤/game/src/audio/sound.js`（已暂存 404 行改动） | 暂存区实质改动（367+/37−，264→594 行）：音效系统重构（合成音软限幅/点击音压缩链/解码队列并发限 2+asset-url/random 导入）；mtime 20:42:45，改动会话不明（音效会话 WF-sfx-listening 属地吻合但其 5391 服务已死且归档称已随 d1ae1a2 落库） | 10-01 21:0x 发现 | **10-01 老板拍板打包提交**：随本会话流程批次一起落库（音效域单独成笔）；`git diff --cached` 可查全文 |
+| `搜打撤/code-map/`（未跟踪） | generate.mjs（code-map 数据生成器，扫 game/src 产 data.js）+data.js，mtime 20:59:29-37，生成会话不明 | 10-01 21:0x 发现 | 未跟踪产物只记录勿动，不 add；等认领或老板处置 |
 | ~~`搜打撤/package-lock.json`~~ | ~~已修改未提交（M），改动者不明~~【10-01 核实销账】内容 diff 恒为零（行尾假差：npm install 重写为 LF，git 归一后零变化，add 后工作树干净）；当日接力会话 npm install 修复 @cacheable/memory 时触碰，依赖树零变化 | 09-29 深夜登记；10-01 核实 | 无主疑点解除，无实质改动 |
 | node.exe ×2（PID 21272/22356） | 监听 5200（主线 Vite 端口）/5321，REGISTRY 无登记 | 09-29 深夜 | CSS 精修班会话发现；身份未验，未动；认领前勿杀 |
 
@@ -56,3 +59,4 @@
 | Friday（同上） | game/src 6 文件+tests/run-architecture+knip.json、docs/STATUS+PENDING | knip A 类死代码清理双提交（20c4e25+041fd65） | 09-29 深夜，已完成 |
 | Friday（同上） | ui/terminal-settlement.js 新建、death/menu/battle.resolution、evidence/jscpd-2026-09-29/、STATUS+PENDING #12 | jscpd 档一收敛双提交（506ccea+落档） | 09-29 深夜，已完成 |
 | Friday（同上） | SPEC-PROCESS/UI-TOKEN-SYSTEM-PROPOSAL 新建、README 路由、派工手册 repomix 节 | GitHub 调研三项落地（5b3aef7） | 09-29 深夜，已完成 |
+| Friday（音效换回原生会话） | game/src/audio/sound.js 单文件恢复为 d1ae1a2^ 原生版（原生采样+合成回退引擎）；sound.bank/sfx-audition/alternatives 资产保留在库、不再入主链路 | 老板拍板音效换回原生版：arknights-runtime 库不再接入；新接线调用点 Sound.sfx 未知名静默、Sound.scene 走可选链天然兼容；eslint 0 错、定向 5 文件 28 测试绿（sound-bank/policy/scape/boot/r7a-scenes） | 10-01，已完成 |

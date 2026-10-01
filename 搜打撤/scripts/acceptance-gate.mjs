@@ -117,7 +117,40 @@ function nearbyTests(filename, reverse, hops) {
   return [...found].sort();
 }
 
-export function planForPaths(inputPaths) {
+// 仅 scripts 段变更不触依赖树与运行时代码：剔除 scripts 后其余字段逐字节一致才算豁免。
+export function packageJsonScriptsOnlyDiff(headText, currentText) {
+  const withoutScripts = text => {
+    const parsed = JSON.parse(text);
+    delete parsed.scripts;
+    return JSON.stringify(parsed);
+  };
+  return withoutScripts(headText) === withoutScripts(currentText);
+}
+
+function scriptsLocalRefs(scripts) {
+  const refs = new Set();
+  for (const command of Object.values(scripts || {})) {
+    for (const token of String(command).split(/\s+/)) {
+      if (/^(scripts|game\/tools)\//.test(token) || /\.(mjs|cjs)$/.test(token)) refs.add(token);
+    }
+  }
+  return [...refs];
+}
+
+function stagedPackageJsonScriptsOnly(paths) {
+  const projectPaths = paths.map(toProjectPath);
+  if (!projectPaths.includes('package.json')) return false;
+  if (!existsSync(path.join(PROJECT_ROOT, 'package.json'))) return false;
+  const head = spawnSync('git', ['-C', REPO_ROOT, 'show', 'HEAD:搜打撤/package.json'],
+    { encoding: 'utf8', maxBuffer: 4 * 1024 * 1024 });
+  if (head.status !== 0) return false;
+  const current = readFileSync(path.join(PROJECT_ROOT, 'package.json'), 'utf8');
+  if (!packageJsonScriptsOnlyDiff(head.stdout, current)) return false;
+  const refs = scriptsLocalRefs(JSON.parse(current).scripts);
+  return refs.every(ref => existsSync(path.join(PROJECT_ROOT, ref)));
+}
+
+export function planForPaths(inputPaths, options = {}) {
   const paths = [...new Set(inputPaths.map(toProjectPath))].sort();
   const relevant = paths.filter(p => p.startsWith('game/src/') || p.startsWith('game/data/')
     || p.startsWith('game/tools/') || p.startsWith('tests/') || p.startsWith('scripts/') || p.startsWith('narrative/')
@@ -139,7 +172,10 @@ export function planForPaths(inputPaths) {
   }
 
   const configFull = relevant.filter(p => ['package.json', 'vite.config.js'].includes(p));
-  if (configFull.length) reasons.push('包或构建配置变更需要全量测试');
+  const pkgScriptsOnly = options.packageJsonScriptsOnly === true && !relevant.includes('package-lock.json');
+  if (configFull.some(p => p !== 'package.json' || !pkgScriptsOnly)) {
+    reasons.push('包或构建配置变更需要全量测试');
+  }
   if (relevant.some(p => p.startsWith('narrative/'))) {
     for (const test of NARRATIVE_TESTS) tests.add(test);
   }
@@ -176,6 +212,10 @@ export function planForPaths(inputPaths) {
   if (relevant.includes('package-lock.json') && !configFull.length) {
     for (const guard of GUARDS) tests.add(guard);
     reasons.push('lockfile 单独变化只运行架构哨兵');
+  }
+  if (pkgScriptsOnly && !reasons.length) {
+    for (const guard of GUARDS) tests.add(guard);
+    reasons.push('package.json 仅 scripts 段变更：运行架构哨兵，scripts 引用校验已通过');
   }
 
   const graphTargets = [...source, ...dataFiles];
@@ -320,7 +360,7 @@ async function main() {
       if (!existsSync(path.join(PROJECT_ROOT, relative))) throw new Error('路径不存在：' + value);
     }
   }
-  const plan = planForPaths(paths);
+  const plan = planForPaths(paths, { packageJsonScriptsOnly: stagedPackageJsonScriptsOnly(paths) });
   if (staged?.needsFull && plan.mode !== 'skip') {
     plan.mode = 'full';
     plan.tests = [];
