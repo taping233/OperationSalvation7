@@ -217,7 +217,19 @@ export default defineConfig({
   test: {
     root: ROOT,
     environment: 'jsdom',
+    // pool+分环境必须绑定生效（10-01 实测归因）：任单独一项 ≈55s 无收益——forks 进程冷启动贵，
+    // 但 forks 池切掉 93 个零 DOM 文件的 jsdom 后进程初始化大头消失，全量 55.2s→45.0s（-18.5%）。
+    pool: 'forks',
     include: ['tests/**/*.test.js'],
+    // 零 DOM 全局命中的测试切 node 环境。甄别口径：rg 扫 document/window/localStorage/createElement/
+    // requestAnimationFrame 等 DOM 全局关键词零命中 + 全量实证（7 个误报已剔除：battle-architecture/
+    // battle-engine-facade/battle-presentation/combat-feedback/cov-battle-clock/card-library-lazy-boundary/
+    // perf-probe-summary——import 链顶层触 DOM）。再生成：rg 关键词组与 find tests 全集的差集。
+    // 新增测试默认 jsdom（安全默认）；误入清单会显性炸（document is not defined），移出即可。
+    environmentMatchGlobs: [[
+      'tests/{acceptance-gate,agent-compare-provenance,agent-run-provenance,bag-architecture,bag-return-hook,base-departure,base-mutation-types,base-progression-commands,battle-card-inspection,battle-discover-candidates,battle-discover-state,battle-hand-selection-rules,battle-modules,battle-preview-amount,battle-pure-rules,battle-resolution,battle-runtime-state-guard,battle-selection-flow-boundary,battle-settlement-types,battle-snapshot-types,battle-snapshot,battle-victory-progress,card-render-context,card-rules-schema,cards-catalog,characters,combat,commands-shared-contract,cov-motion-primitives,docs-consistency,e6-card-rules-types,encounter-meta,exp003-extraction-pocket-copy,extraction-preview,game-hub-preparation-feature,game-session-browser-boundary,game-store-snapshot,game-store-types,hand-cost-patterns,hub-flow-regression,layered-map-generator,m-execute-consume,m-hosted-contract,m03-home,m04-preview-contract,m04-visual-pack,m06-preparation,m1-data,m2-data,m3-data,m4-data,m5-data,m6-data,m7-data,m8-data,map-connectivity,map-rng-bit-equivalence,mech-sentences,multi-hit-retarget,narrative-coverage,narrative,nest-runemaster,perf-ledger-port-occupancy,photo-studio-presentation,premium-ui-pages,r2a-recovery,r5a-map-snapshot,r5b-dev-info,r5b-route-overlay,r7a-encounter-selector,random,recoverable-pair-contract,recoverable-pair-types,render-scheduler,rule-config,schema-op-coverage,selftest-paths,sound-bank,sound-policy,soundscape,suggestions-store,u4-nightshift-guards,ui-accessibility-regression,vite-card-chunk,workflow-cli-integration,workflow-dependencies,workflow-handoff,workflow-index,workflow-memory,workflow-scope,workflow-staged,workflow-task,workflow-tools}.test.js',
+      'node',
+    ]],
   },
   build: {
     outDir: OUT_DIR,
