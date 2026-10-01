@@ -75,7 +75,8 @@ export function planLedger(root, { kind, action, key, owner, cells }) {
 // Cooperative writer lock + optimistic revision check. External editors do not honor this lock;
 // callers still need the project's file ownership agreement, and must not edit concurrently.
 export function applyLedger(root, plan, expectedSha256) {
-  if (!expectedSha256 || expectedSha256 !== plan.expectedSha256) throw new Error('必须提供预览时的 --expect SHA256');
+  if (!expectedSha256) throw new Error('必须提供预览时的 --expect SHA256（单会话可用 auto）');
+  if (expectedSha256 !== plan.expectedSha256) throw new Error('台账在预览后已变化（或 SHA 抄写有误），重新预览，未写入');
   if (!Object.values(LEDGERS).some(config => config.file === plan.file)) throw new Error('禁止写入非台账文件');
   const target = path.join(root, plan.file);
   const lock = target + '.workflow-lock';

@@ -6,7 +6,7 @@
  *   2) 商店关闭后仍可重开，离开商店格时才写 visited。
  * 场景用固定种子 20260919 第 1 层的直线图：0入口 1战斗 2商店 3宝箱 4火堆 5战斗 6门；
  * enterLayer 落位不触发内容，正好构造「站在宝箱格」的起点。 */
-import { describe, it, expect, beforeAll } from 'vitest';
+import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 
 // 故意恒真：仅给下方 canvas/存储补桩一个块级作用域（lint 静音，不改逻辑）
 // eslint-disable-next-line no-constant-condition
@@ -97,6 +97,12 @@ describe('节点完成/离开后的消耗时机（2026-09-20 定版）', () => {
     game.characterId = 'heixiang';
     game.state = 'idle';
   });
+
+  // 用例内的预热/加载任务可能排 500ms 级 setTimeout（见 beforeAll 注释的 warmBattleRuntime 家族）。
+  // teardown 撤掉 jsdom 全局后迟到触发会抛 "Image is not defined" 类 ReferenceError，被 vitest 记为
+  // unhandled error：全过却 exit 1 的假红（2026-10-01 全量门 3 连跑复现 1 次）。排水让它们在本文件
+  // 环境还活着时触发完，比逐个堵入口通用。
+  afterAll(async () => { await tick(700); });
 
   it('收益完成即锁；商店离开才锁；返回均不重复触发', async () => {
     // 层内类型布局按局随机（种子固定但 skipClassChoice/上游随机源演进都会平移消耗序列，

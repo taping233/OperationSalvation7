@@ -121,7 +121,8 @@ export function planTask(root, { action, id, date, owner, input }) {
 }
 
 export function applyTask(root, plan, expectedSha256) {
-  if (!expectedSha256 || expectedSha256 !== plan.expectedSha256) throw new Error('必须提供预览时的 --expect SHA256（新任务为 absent）');
+  if (!expectedSha256) throw new Error('必须提供预览时的 --expect SHA256（新任务为 absent，单会话可用 auto）');
+  if (expectedSha256 !== plan.expectedSha256) throw new Error('任务在预览后已变化（或 SHA 抄写有误），重新预览，未写入');
   const task = JSON.parse(plan.content);
   if (plan.file !== taskFile(task) || task.owner !== plan.task.owner || task.id !== plan.task.id) throw new Error('任务计划身份不匹配');
   const target = safePath(root, plan.file);

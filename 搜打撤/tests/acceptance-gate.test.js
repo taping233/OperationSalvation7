@@ -36,10 +36,14 @@ describe('分层验收选择', () => {
     expect(planForPaths(['narrative/events.ink']).tests).toEqual(['tests/compendium.test.js']);
   });
 
-  it('公共规则与包配置、无契约脚本仍回退完整测试', () => {
+  it('公共规则与包配置仍回退完整测试；未映射脚本 R2 起回退轻契约', () => {
     expect(planForPaths(['game/src/core/rule-config.js']).mode).toBe('full');
     expect(planForPaths(['game/src/hub/game.store.js']).mode).toBe('full');
-    expect(planForPaths(['scripts/check-syntax.mjs']).mode).toBe('full');
+    // R2（10-01 拍板）：scripts/ 未映射/豁免脚本不再全量，回退契约测试+引用搜索+哨兵。
+    const contract = planForPaths(['scripts/check-syntax.mjs']);
+    expect(contract.mode).toBe('quick');
+    expect(contract.tests).toContain('tests/scripts-contract.test.js');
+    expect(contract.tests).toContain('tests/contracts.test.js');
     expect(planForPaths(['vite.config.js']).mode).toBe('full');
     expect(planForPaths(['package.json']).mode).toBe('full');
     expect(planForPaths(['tests/not-present.test.js']).mode).toBe('full');
@@ -105,14 +109,18 @@ describe('分层验收选择', () => {
       expect(plan.reasons).toContain('公共状态、启动、规则或迁移边界变更需要全量测试');
     }
   });
-  it('已有直接契约的流程工具走快门，未知脚本仍全量', () => {
+  it('已有直接契约的流程工具走快门，未知脚本 R2 起回退轻契约（映射守卫兜底）', () => {
     const plan = planForPaths(['scripts/workflow-task.mjs']);
     expect(plan.mode).toBe('quick');
     expect(plan.tests).toEqual(['tests/workflow-task.test.js']);
     expect(planForPaths(['scripts/workflow-evidence.mjs']).tests).toContain('tests/workflow-scope.test.js');
     expect(planForPaths(['scripts/acceptance-gate.mjs']).tests).toEqual(['tests/acceptance-gate.test.js']);
     expect(planForPaths(['scripts/sync-cards-from-live.mjs']).tests).toContain('tests/sync-cards-from-live.test.js');
-    expect(planForPaths(['scripts/unknown-tool.mjs']).mode).toBe('full');
+    // R2：未知/未登记脚本回退契约测试+哨兵；漏登记由 scripts-contract 守卫标红。
+    const unknown = planForPaths(['scripts/unknown-tool.mjs']);
+    expect(unknown.mode).toBe('quick');
+    expect(unknown.tests).toContain('tests/scripts-contract.test.js');
+    expect(unknown.reasons.join('、')).toContain('回退脚本契约测试');
   });
 
   it('没有直接覆盖测试的 Agent 工具和其他 game/tools 改动回退完整测试', () => {

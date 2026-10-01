@@ -18,7 +18,7 @@ const AGENT_TOOL_TESTS = new Map([
   ['game/tools/agent-run-provenance.mjs', ['tests/agent-run-provenance.test.js']],
 ]);
 // Known project workflow tools have direct contracts; unknown scripts still require full validation.
-const WORKFLOW_TESTS = new Map([
+export const WORKFLOW_TESTS = new Map([
   ['scripts/workflow.mjs', ['tests/workflow-cli-integration.test.js', 'tests/workflow-tools.test.js', 'tests/workflow-task.test.js']],
   ['scripts/workflow-task.mjs', ['tests/workflow-task.test.js']],
   ['scripts/workflow-evidence.mjs', ['tests/workflow-scope.test.js', 'tests/workflow-tools.test.js']],
@@ -37,6 +37,28 @@ const WORKFLOW_TESTS = new Map([
   ['scripts/generate-compendium.mjs', ['tests/compendium.test.js']],
   ['scripts/sync-cards-from-live.mjs', ['tests/sync-cards-from-live.test.js', 'tests/schema-op-coverage.test.js', 'tests/contracts.test.js']],
 ]);
+// R2（2026-10-01 拍板）：明确不配专属映射的脚本——回退脚本契约测试+引用搜索+哨兵，不再全量。
+// 登记在这里的脚本已被 scripts-contract.test.js 的映射守卫覆盖（防新脚本无声漏网）。
+export const EXEMPT_SCRIPTS = new Set([
+  'scripts/asset-audit.cjs',            // 手动资产审计报告工具
+  'scripts/check-syntax.mjs',           // 门内静态检查自身；语法契约由契约测试覆盖
+  'scripts/check-types.mjs',            // 门内静态检查自身（7 tsc 配置）
+  'scripts/check-version.cjs',          // 版本核对小工具
+  'scripts/compile-narrative.mjs',      // 门内剧情编译步骤自身
+  'scripts/doc-retirement-candidates.mjs', // 手动文档退役候选报告
+  'scripts/electron-gpu-info.cjs',      // 桌面版冻结域工具
+  'scripts/electron-title-smoke.mjs',   // 桌面版冻结域工具
+  'scripts/esm-convert.mjs',            // 一次性迁移工具
+  'scripts/esm-fix-setters.mjs',        // 一次性迁移工具
+  'scripts/iab-drive.mjs',              // 内置浏览器驱动（手动验收路径）
+  'scripts/perf-benchmark.cjs',         // 手动性能基准
+  'scripts/perf-budget.cjs',            // build 后置步骤（build 链路自带验证）
+  'scripts/perf-ledger-capture.mjs',    // 手动性能台账采集
+  'scripts/setup-commit-gate.mjs',      // 一次性 hooks 安装工具
+  'scripts/validate-data.mjs',          // 门内数据校验自身
+  'scripts/web-up.mjs',                 // 起服工具（幂等已实机验证）
+]);
+export const SCRIPT_CONTRACT_TEST = 'tests/scripts-contract.test.js';
 // 剧情源文件没有 JS 模块依赖图可走：定向到全书生成对比，编译错误由门内剧情编译步骤兜底。
 const NARRATIVE_TESTS = ['tests/compendium.test.js'];
 export const DIRTY_SCAN_ROOTS = ['搜打撤/game/src', '搜打撤/game/tools', '搜打撤/tests'];
@@ -179,11 +201,24 @@ export function planForPaths(inputPaths, options = {}) {
   if (relevant.some(p => p.startsWith('narrative/'))) {
     for (const test of NARRATIVE_TESTS) tests.add(test);
   }
+  const scriptNotes = [];
   for (const script of scripts) {
     const mapped = WORKFLOW_TESTS.get(script);
-    if (!mapped || !existsSync(path.join(PROJECT_ROOT, script)) || mapped.some(test => !existsSync(path.join(PROJECT_ROOT, test)))) {
-      reasons.push(script + ' 无完整直接契约，回退全量');
-    } else for (const test of mapped) tests.add(test);
+    if (mapped && existsSync(path.join(PROJECT_ROOT, script))
+      && mapped.every(test => existsSync(path.join(PROJECT_ROOT, test)))) {
+      for (const test of mapped) tests.add(test);
+      continue;
+    }
+    // R2：未映射/豁免/被删脚本回退轻契约（语法+映射守卫）+ 引用搜索 + 哨兵，不再整体全量；
+    // 新脚本漏映射由 scripts-contract.test.js 守卫标红，倒逼显式登记。说明延后注入（reasons 非空=全量信号）。
+    if (existsSync(path.join(PROJECT_ROOT, SCRIPT_CONTRACT_TEST))) tests.add(SCRIPT_CONTRACT_TEST);
+    else reasons.push(SCRIPT_CONTRACT_TEST + ' 缺失，脚本回退下限失效');
+    const name = path.posix.basename(script);
+    const consumers = walkJs('tests').filter(candidate => candidate.endsWith('.test.js')
+      && readFileSync(path.join(PROJECT_ROOT, candidate), 'utf8').includes(name));
+    for (const consumer of consumers) tests.add(consumer);
+    for (const guard of GUARDS) tests.add(guard);
+    scriptNotes.push(script + ' 无专属映射，回退脚本契约测试+引用搜索+架构哨兵' + (consumers.length ? '' : '（无测试引用它）'));
   }
   for (const tool of tools) {
     const mappedTests = AGENT_TOOL_TESTS.get(tool);
@@ -208,6 +243,7 @@ export function planForPaths(inputPaths, options = {}) {
     reasons.push('公共状态、启动、规则或迁移边界变更需要全量测试');
   }
   if (reasons.length) return { mode: 'full', paths: relevant, reasons, tests: [] };
+  reasons.push(...scriptNotes);
 
   if (relevant.includes('package-lock.json') && !configFull.length) {
     for (const guard of GUARDS) tests.add(guard);
@@ -258,6 +294,35 @@ export function planForPaths(inputPaths, options = {}) {
   return { mode: 'quick', paths: relevant, reasons, tests: [...tests].sort() };
 }
 
+export function parseUnclaimedPaths(registryText) {
+  // R1（2026-10-01 拍板）：无主物品表第一列反引号内的路径 token；~~删除线~~行已处置，跳过。
+  const paths = [];
+  const section = registryText.split('## 无主物品')[1]?.split(/\n## /)[0] ?? '';
+  for (const line of section.split('\n')) {
+    const cell = line.match(/^\|\s*(~~)?([^|]*)/);
+    if (!cell || cell[1] || cell[2].includes('物品') || cell[2].startsWith('---')) continue;
+    for (const match of cell[2].matchAll(/`([^`]+)`/g)) {
+      const candidate = match[1].trim();
+      if (candidate.includes('/')) paths.push(candidate);
+    }
+  }
+  return paths;
+}
+
+function checkCommitBoundary(repoPaths) {
+  if (process.env.GATE_MANIFEST_OK) return;
+  const registryPath = path.join(PROJECT_ROOT, 'docs/PARALLEL-REGISTRY.md');
+  if (!existsSync(registryPath)) return;
+  const unclaimed = parseUnclaimedPaths(readFileSync(registryPath, 'utf8'));
+  if (!unclaimed.length) return;
+  const hits = repoPaths.filter(p => unclaimed.some(u => p === u || p.startsWith(u) || u.startsWith(p)));
+  if (hits.length) {
+    throw new Error('staged 命中 REGISTRY 无主物品（等认领/老板处置，勿随本次提交带库——26a5254 事故形态）：\n'
+      + hits.map(p => '  ' + p).join('\n')
+      + '\n认领/排除后再提交；确属误报或已有老板拍板时 GATE_MANIFEST_OK=1 显式放行。');
+  }
+}
+
 function gitPathFields(args) {
   return execFileSync('git', ['-c', 'core.quotepath=false', ...args], { cwd: REPO_ROOT })
     .toString('utf8').split('\0').filter(Boolean);
@@ -270,22 +335,45 @@ export function parseStagedStatus(fields) {
   return entries;
 }
 
+export function formatDirtyReport(groups) {
+  const labels = [
+    ['unstaged', '未暂存改动'],
+    ['untracked', '未跟踪新文件'],
+    ['ignored', '被忽略文件'],
+  ];
+  const lines = [];
+  for (const [key, label] of labels) {
+    for (const file of groups[key] || []) lines.push(`  [${label}] ${file}`);
+  }
+  const LIMIT = 12;
+  return lines.length > LIMIT ? [...lines.slice(0, LIMIT), `  …等共 ${lines.length} 项`] : lines;
+}
+
 function stagedChanges() {
   const entries = parseStagedStatus(gitPathFields(['diff', '--cached', '--name-status', '--no-renames', '-z']));
   const paths = entries.map(entry => entry.path);
   const stagedRelevant = paths.map(toProjectPath).filter(isRelevant);
   if (stagedRelevant.length) {
-    const dirty = [...gitPathFields(['diff', '--name-only', '--no-renames', '-z']),
-      ...gitPathFields(['ls-files', '--others', '--exclude-standard', '-z']),
-      ...gitPathFields(['ls-files', '--others', '--ignored', '--exclude-standard', '-z',
-        '--', ...DIRTY_SCAN_ROOTS])]
-      .map(toProjectPath).filter(isRelevant);
-    if (dirty.length) {
-      throw new Error('存在未暂存的 Vite 源码/工具/测试/配置，无法用工作树验证暂存快照：'
-        + [...new Set(dirty)].slice(0, 8).join(', '));
+    const groups = {
+      unstaged: gitPathFields(['diff', '--name-only', '--no-renames', '-z']),
+      untracked: gitPathFields(['ls-files', '--others', '--exclude-standard', '-z']),
+      ignored: gitPathFields(['ls-files', '--others', '--ignored', '--exclude-standard', '-z',
+        '--', ...DIRTY_SCAN_ROOTS]),
+    };
+    for (const key of Object.keys(groups)) {
+      groups[key] = [...new Set(groups[key].map(toProjectPath).filter(isRelevant))];
+    }
+    const dirtyCount = groups.unstaged.length + groups.untracked.length + groups.ignored.length;
+    if (dirtyCount) {
+      throw new Error('存在未暂存/未跟踪/被忽略的 Vite 源码/工具/测试/配置，无法用工作树验证暂存快照'
+        + '（未暂存先 add 或 stash；未跟踪属本次就 add，不属就移走；被忽略文件检查是否 ignore 产物挡路）：\n'
+        + formatDirtyReport(groups).join('\n'));
     }
   }
-  return { paths, needsFull: entries.some(entry => ['R', 'T'].includes(entry.status)) };
+  // needsFull 只对 T（typechange）生效：R（rename）在上方 --no-renames 输出里被拆成 A+D 组合，
+  // 由组合分支兜住——测试改名→「缺失测试」全量；源码改名（引用未同改）→新文件无 importer 全量；
+  // 改名+引用同改→语义等价删除+新增（D 走引用哨兵、A 走定向），安全（2026-10-01 演练实证）。
+  return { paths, needsFull: entries.some(entry => entry.status === 'T') };
 }
 
 function isRelevant(p) {
@@ -318,7 +406,8 @@ async function runStaticChecks() {
     runNodeCaptured(['scripts/check-syntax.mjs'], '语法检查'),
     runNodeCaptured(['scripts/validate-data.mjs'], '内容数据检查'),
     runNodeCaptured(['scripts/check-types.mjs'], '类型契约检查'),
-    runNodeCaptured(['node_modules/eslint/bin/eslint.js', 'game/src', 'tests', 'scripts/acceptance-gate.mjs'], 'ESLint'),
+    runNodeCaptured(['node_modules/eslint/bin/eslint.js', 'game/src', 'tests', 'scripts/acceptance-gate.mjs',
+      '--cache', '--cache-location', 'node_modules/.cache/eslint/.eslintcache'], 'ESLint'),
   ]);
   for (const result of results) {
     process.stdout.write('[gate] ' + result.label + '：' + (result.ok ? 'OK' : 'FAIL') + '\n');
@@ -352,7 +441,11 @@ async function main() {
     throw new Error('用法：acceptance-gate.mjs --staged|--paths <路径...> --plan|--run');
   }
   const staged = pathIndex < 0 ? stagedChanges() : null;
-  const paths = pathIndex >= 0 ? args.slice(pathIndex + 1).filter(a => !a.startsWith('--')) : staged.paths;
+  if (staged) checkCommitBoundary(staged.paths);  // R1 提交边界守卫：无主物品阻断（26a5254 事故防线）
+  // R6：--paths 统一接受空格与逗号分隔（与 workflow verify 的逗号风格互通）。
+  const rawPaths = pathIndex >= 0 ? args.slice(pathIndex + 1).filter(a => !a.startsWith('--')) : null;
+  const paths = pathIndex >= 0
+    ? rawPaths.flatMap(a => a.split(',').map(s => s.trim()).filter(Boolean)) : staged.paths;
   if (pathIndex >= 0 && !paths.length) throw new Error('--paths 后必须给出至少一个项目内路径');
   if (pathIndex >= 0) {
     for (const value of paths) {
@@ -364,7 +457,7 @@ async function main() {
   if (staged?.needsFull && plan.mode !== 'skip') {
     plan.mode = 'full';
     plan.tests = [];
-    plan.reasons.push('暂存包含重命名或类型变化，回退完整测试；纯删除按 A 档走定向+架构哨兵');
+    plan.reasons.push('暂存包含类型变化（file↔symlink 等），回退完整测试；改名场景由 A+D 组合分支兜住，纯删除按 A 档走定向+架构哨兵');
   }
   if (args.includes('--json')) process.stdout.write(JSON.stringify(plan) + '\n');
   else printPlan(plan);
@@ -385,6 +478,9 @@ async function main() {
 }
 
 if (SCRIPT_PATH) {
-  try { main(); }
-  catch (error) { console.error('[gate] FAIL：' + error.message); process.exitCode = 1; }
+  // main 是 async：同步 try/catch 捕不到 rejection，必须挂 catch 才能输出 [gate] FAIL 而非裸堆栈。
+  main().catch(error => {
+    console.error('[gate] FAIL：' + error.message);
+    process.exitCode = 1;
+  });
 }

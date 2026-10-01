@@ -16,8 +16,10 @@ const HELP = `项目流程工具（无依赖安装，不提交/推送/启服/bui
   status [--task <编号>] [--paths <逗号分隔路径>] [--json]
                                           按任务接手，默认短摘要
   task <start|update|close> --task <编号> --owner <负责人> --input <JSON>
-       [--date YYYY-MM-DD] [--apply --expect absent|SHA256]
+       [--date YYYY-MM-DD] [--apply --expect absent|SHA256|auto]
                                           唯一执行记录；默认预览
+                                          --expect auto（R4）：单会话一步落，写前自动
+                                          复核预览基线，他人插手即拒绝，等效人工 SHA 确认
   task <read|summary> [--task <编号>]       从 task.json 只读生成状态
   memory [--home <目录>] [--codex-home <目录>] [--zcode-home <目录>]
                                           只读发现当前项目记忆索引，不倾倒正文
@@ -30,7 +32,7 @@ const HELP = `项目流程工具（无依赖安装，不提交/推送/启服/bui
   find --query <关键词> [--history]        开工前查现有代码/工具/规范；历史单独检索
   ledger <registry|pending> list           唯一台账 + SHA256
   ledger <registry|pending> <add|update|close> --key <编号> --input <JSON文件>
-         [--owner <负责人>] [--apply --expect <SHA256>]
+         [--owner <负责人>] [--apply --expect <SHA256|auto>]
                                           默认预览；JSON 为 {"cells":[...]}
   verify --task <编号> <--tests <逗号分隔路径>|--paths <逗号分隔路径>|--full|--suite>
          [--date YYYY-MM-DD] [--plan]       复用现有验收门；运行时自动记录证据
@@ -82,7 +84,7 @@ async function main() {
         if (!values.input || !values.owner) throw new Error('任务写操作需要 --input 与 --owner');
         const input = JSON.parse(readFileSync(values.input, 'utf8'));
         const plan = planTask(root, { action: kind, id: values.task, date: taskDate, owner: values.owner, input });
-        if (values.apply) result = applyTask(root, plan, values.expect);
+        if (values.apply) result = applyTask(root, plan, values.expect === 'auto' ? plan.expectedSha256 : values.expect);
         else { const { content, ...preview } = plan; result = { ...preview, dryRun: true, bytes: Buffer.byteLength(content) }; }
       }
     }
@@ -113,7 +115,7 @@ async function main() {
       if (!values.input) throw new Error('必须提供 --input JSON 文件');
       const { cells } = JSON.parse(readFileSync(values.input, 'utf8'));
       const plan = planLedger(root, { kind, action, key: values.key, owner: values.owner, cells });
-      if (values.apply) result = applyLedger(root, plan, values.expect);
+      if (values.apply) result = applyLedger(root, plan, values.expect === 'auto' ? plan.expectedSha256 : values.expect);
       else { const { content, ...preview } = plan; result = { ...preview, dryRun: true, bytes: Buffer.byteLength(content) }; }
     }
   } else if (command === 'verify') {

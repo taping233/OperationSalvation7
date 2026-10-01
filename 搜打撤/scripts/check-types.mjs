@@ -1,4 +1,4 @@
-import { spawnSync } from 'node:child_process';
+import { spawn } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const tscPath = fileURLToPath(new URL('../node_modules/typescript/bin/tsc', import.meta.url));
@@ -14,20 +14,25 @@ const configs = [
   'jsconfig.strict-hand-selection.json',
 ];
 
-let failed = false;
-for (const config of configs) {
-  process.stdout.write(`Type-checking ${config}\n`);
-  const result = spawnSync(process.execPath, [tscPath, '--noEmit', '-p', config, '--pretty', 'false'], {
-    encoding: 'utf8',
+// 7 个配置彼此独立：并行跑，按原顺序汇报，任何失败都让整体退出非零。
+function runConfig(config) {
+  return new Promise(resolve => {
+    const child = spawn(process.execPath, [tscPath, '--noEmit', '-p', config, '--pretty', 'false'],
+      { stdio: ['ignore', 'pipe', 'pipe'] });
+    let output = '';
+    child.stdout.on('data', chunk => { output += chunk.toString('utf8'); });
+    child.stderr.on('data', chunk => { output += chunk.toString('utf8'); });
+    child.on('error', error => resolve({ config, ok: false, output: error.message }));
+    child.on('close', code => resolve({ config, ok: code === 0, output }));
   });
-  if (result.stdout) process.stdout.write(result.stdout);
-  if (result.stderr) process.stderr.write(result.stderr);
-  if (result.error) {
-    process.stderr.write(`${result.error.message}\n`);
-    failed = true;
-  } else if (result.status !== 0) {
-    failed = true;
-  }
+}
+
+const results = await Promise.all(configs.map(runConfig));
+let failed = false;
+for (const result of results) {
+  process.stdout.write(`Type-checking ${result.config}\n`);
+  if (result.output) process.stdout.write(result.output);
+  if (!result.ok) failed = true;
 }
 
 process.exitCode = failed ? 1 : 0;
