@@ -138,6 +138,16 @@ describe('分层验收选择', () => {
     expect(result.stdout).not.toContain('PASS');
   });
 
+  it('skip 提交运行时跑文档一致性守卫，规划模式不跑', () => {
+    const planned = spawnSync(process.execPath, ['scripts/acceptance-gate.mjs', '--paths', 'docs/README.md', '--plan'], { cwd: process.cwd(), encoding: 'utf8' });
+    expect(planned.status).toBe(0);
+    expect(planned.stdout).not.toContain('文档一致性守卫');
+    const run = spawnSync(process.execPath, ['scripts/acceptance-gate.mjs', '--paths', 'docs/README.md', '--run'], { cwd: process.cwd(), encoding: 'utf8' });
+    expect(run.status).toBe(0);
+    expect(run.stdout).toContain('文档一致性守卫');
+    expect(run.stdout).not.toContain('PASS');
+  });
+
   it('Windows 绝对路径仍映射到项目内测试', () => {
     const absolute = path.resolve('game/src/cards/card-rarity.js');
     expect(planForPaths([absolute]).tests).toContain('tests/card-render-context.test.js');

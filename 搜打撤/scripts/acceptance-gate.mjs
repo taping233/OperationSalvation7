@@ -368,7 +368,12 @@ async function main() {
   }
   if (args.includes('--json')) process.stdout.write(JSON.stringify(plan) + '\n');
   else printPlan(plan);
-  if (!args.includes('--run') || plan.mode === 'skip') return;
+  if (!args.includes('--run')) return;
+  if (plan.mode === 'skip') {
+    // 纯文档/样式/图片提交的本地门只剩文档一致性守卫：跳过 Vitest 但不裸放行。
+    runNode(['scripts/workflow.mjs', 'docs'], '文档一致性守卫');
+    return;
+  }
   runNode(['scripts/compile-narrative.mjs'], '剧情编译');
   if (staged) stagedChanges();
   await runStaticChecks();

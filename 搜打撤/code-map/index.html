@@ -1,0 +1,732 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>搜打撤 · 代码结构地图</title>
+<style>
+  :root {
+    --bg: #101318; --bg2: #171b22; --panel: #1a2029; --line: #2a323e;
+    --fg: #dfe6ee; --dim: #8b97a5; --accent: #5c9de0;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin: 0; background: var(--bg); color: var(--fg);
+    font: 13px/1.5 "Segoe UI", "Microsoft YaHei", system-ui, sans-serif;
+    overflow: hidden;
+  }
+  header {
+    display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+    padding: 8px 14px; background: var(--bg2); border-bottom: 1px solid var(--line);
+  }
+  header h1 { font-size: 15px; margin: 0; white-space: nowrap; }
+  header h1 small { color: var(--dim); font-weight: normal; margin-left: 8px; font-size: 12px; }
+  .stats { color: var(--dim); font-size: 12px; white-space: nowrap; }
+  .stats b { color: var(--fg); }
+  #searchWrap { position: relative; margin-left: auto; }
+  #search {
+    width: 240px; padding: 5px 10px; border-radius: 6px; border: 1px solid var(--line);
+    background: var(--panel); color: var(--fg); outline: none; font-size: 12px;
+  }
+  #search:focus { border-color: var(--accent); }
+  #searchDrop {
+    display: none; position: absolute; top: 100%; right: 0; min-width: 300px; max-height: 320px;
+    overflow: auto; background: var(--panel); border: 1px solid var(--line); border-radius: 6px;
+    z-index: 30; box-shadow: 0 8px 24px rgba(0,0,0,.5);
+  }
+  #searchDrop .item { padding: 5px 10px; cursor: pointer; display: flex; justify-content: space-between; gap: 12px; }
+  #searchDrop .item:hover { background: #232b37; }
+  #searchDrop .item .p { color: var(--dim); font-size: 11px; }
+  button.tog {
+    padding: 5px 12px; border-radius: 6px; border: 1px solid var(--line);
+    background: var(--panel); color: var(--fg); cursor: pointer; font-size: 12px; white-space: nowrap;
+  }
+  button.tog:hover { border-color: var(--accent); }
+  button.tog.on { background: #24405e; border-color: var(--accent); }
+  #crumb {
+    padding: 5px 14px; font-size: 12px; color: var(--dim);
+    background: var(--bg2); border-bottom: 1px solid var(--line); display: flex; gap: 6px; align-items: center;
+  }
+  #crumb .seg { cursor: pointer; color: var(--accent); }
+  #crumb .seg:hover { text-decoration: underline; }
+  #crumb .cur { color: var(--fg); }
+  main { position: relative; height: calc(100% - 78px); }
+  canvas { display: block; width: 100%; height: 100%; cursor: grab; }
+  canvas.grabbing { cursor: grabbing; }
+  canvas.pointer { cursor: pointer; }
+  #tip {
+    display: none; position: absolute; pointer-events: none; z-index: 20;
+    background: rgba(16,19,24,.94); border: 1px solid var(--line); border-radius: 6px;
+    padding: 6px 9px; font-size: 12px; max-width: 340px;
+  }
+  #tip .t2 { color: var(--dim); font-size: 11px; }
+  aside {
+    position: absolute; top: 0; right: 0; bottom: 0; width: 350px;
+    background: rgba(23,27,34,.97); border-left: 1px solid var(--line);
+    padding: 14px; overflow-y: auto; display: none; z-index: 10;
+  }
+  aside h2 { font-size: 14px; margin: 0 0 2px; word-break: break-all; }
+  aside .desc { color: var(--dim); margin: 6px 0 10px; }
+  aside .badges { margin: 4px 0 10px; display: flex; gap: 6px; flex-wrap: wrap; }
+  .badge {
+    font-size: 11px; padding: 1px 8px; border-radius: 10px; border: 1px solid var(--line); color: var(--dim);
+  }
+  .badge.entry { color: #ffb454; border-color: #7a5a2a; }
+  .badge.dts { color: #8ab4f8; border-color: #3a5a8a; }
+  aside h3 { font-size: 12px; color: var(--dim); margin: 14px 0 6px; text-transform: none; }
+  .chips { display: flex; flex-wrap: wrap; gap: 5px; }
+  .chip {
+    font-size: 11px; padding: 2px 8px; border-radius: 4px;
+    background: #232b37; border: 1px solid var(--line); font-family: Consolas, monospace;
+  }
+  .rel { display: flex; flex-direction: column; gap: 3px; }
+  .rel .row {
+    display: flex; align-items: center; gap: 8px; padding: 4px 8px; border-radius: 6px;
+    background: var(--panel); cursor: pointer; font-family: Consolas, monospace; font-size: 12px;
+  }
+  .rel .row:hover { background: #232b37; }
+  .rel .kind { font-size: 10px; color: var(--dim); border: 1px solid var(--line); border-radius: 3px; padding: 0 4px; font-family: inherit; flex: none; }
+  .rel .ln { margin-left: auto; color: var(--dim); font-size: 11px; flex: none; }
+  #legend {
+    position: absolute; left: 12px; bottom: 12px; z-index: 10;
+    background: rgba(23,27,34,.92); border: 1px solid var(--line); border-radius: 8px;
+    padding: 10px 12px; max-width: 460px;
+  }
+  #legend .doms { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+  #legend .dom { display: flex; align-items: center; gap: 5px; cursor: pointer; font-size: 11px; padding: 2px 7px; border-radius: 5px; background: var(--panel); border: 1px solid var(--line); }
+  #legend .dom:hover { border-color: var(--accent); }
+  #legend .dot { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+  #legend .note { color: var(--dim); font-size: 11px; }
+  #legend .note i { display: inline-block; width: 26px; height: 0; border-top: 2px solid var(--dim); vertical-align: middle; margin: 0 4px 0 8px; }
+  #legend .note i.dash { border-top-style: dashed; }
+  #legend .note i.dot2 { border-top-style: dotted; }
+  #backBtn { display: none; }
+</style>
+</head>
+<body>
+<header>
+  <h1>搜打撤 · 代码结构地图<small id="genAt"></small></h1>
+  <span class="stats" id="stats"></span>
+  <button class="tog" id="flatBtn">文件全图</button>
+  <button class="tog" id="bootBtn">▶ 启动链</button>
+  <div id="searchWrap">
+    <input id="search" placeholder="搜索文件 / 导出符号…" autocomplete="off">
+    <div id="searchDrop"></div>
+  </div>
+</header>
+<div id="crumb"></div>
+<main>
+  <canvas id="cv"></canvas>
+  <div id="tip"></div>
+  <aside id="panel"></aside>
+  <div id="legend"></div>
+</main>
+<script src="./data.js"></script>
+<script>
+'use strict';
+const DATA = window.CODE_MAP_DATA;
+const N = new Map(DATA.nodes.map(n => [n.id, n]));
+
+/* ---------- 域元数据 ---------- */
+const DOMAIN_META = {
+  'agent':      { label: 'Agent 自动化', color: '#e0b64f' },
+  'audio':      { label: '音频',         color: '#4fc3a1' },
+  'battle':     { label: '战斗（总）',   color: '#e05c5c' },
+  'battle/bag':     { label: '战斗·牌堆背包', color: '#e57a5c' },
+  'battle/core':    { label: '战斗·核心规则', color: '#e05c80' },
+  'battle/effects': { label: '战斗·效果结算', color: '#e0905c' },
+  'battle/runtime': { label: '战斗·运行时',   color: '#d95c5c' },
+  'battle/view':    { label: '战斗·表现层',   color: '#c95c9e' },
+  'cards':      { label: '卡牌库',       color: '#b07fe0' },
+  'core':       { label: '引擎底座',     color: '#5c9de0' },
+  'experience': { label: '体验杂项',     color: '#9be05c' },
+  'generated':  { label: '生成物清单',   color: '#8a929e' },
+  'home':       { label: '首页场景',     color: '#e08a4f' },
+  'hub':        { label: '基地 Hub',     color: '#4f7de0' },
+  'run':        { label: '局内流程 Run', color: '#4fe0b0' },
+  'ui':         { label: '通用 UI',      color: '#d0d05c' },
+  'boot-root':  { label: '启动/根模块',  color: '#e05ca8' },
+};
+const metaOf = k => DOMAIN_META[k] || { label: k, color: '#8a929e' };
+const KIND_LABEL = { static: '静态', side: '副作用', dyn: '动态' };
+
+/* ---------- 分组树 ---------- */
+function buildTree() {
+  const root = { id: '__root', key: '__root', name: '总览', kind: 'root', parent: null, children: [], files: [], lines: 0 };
+  const loose = []; // src 根目录文件
+  const byTop = new Map();
+  for (const n of DATA.nodes) {
+    const segs = n.id.split('/');
+    if (segs.length === 1) { loose.push(n); continue; }
+    const top = segs[0];
+    if (top === 'battle' && segs.length > 2) continue; // 稍后按二级处理
+    if (!byTop.has(top)) byTop.set(top, []);
+    byTop.get(top).push(n);
+  }
+  const mkGroup = (key, name, parent) => ({ id: key, key, name, kind: 'domain', parent, children: [], files: [], lines: 0 });
+  for (const [top, files] of byTop) {
+    if (top === 'battle') continue; // battle 用容器组统一处理，避免重复
+    const g = mkGroup(top, metaOf(top).label, root);
+    g.files = files;
+    root.children.push(g);
+  }
+  // battle 容器：5 个二级域 + 散文件
+  const battle = mkGroup('battle', metaOf('battle').label, root);
+  battle.kind = 'container';
+  for (const sub of ['battle/bag', 'battle/core', 'battle/effects', 'battle/runtime', 'battle/view']) {
+    const sg = mkGroup(sub, metaOf(sub).label, battle);
+    sg.kind = 'sub';
+    sg.files = DATA.nodes.filter(n => n.cluster === sub);
+    battle.children.push(sg);
+  }
+  battle.files = DATA.nodes.filter(n => n.id.startsWith('battle/') && !n.id.slice(7).includes('/'));
+  root.children.push(battle);
+  // 根文件组
+  const boot = mkGroup('boot-root', metaOf('boot-root').label, root);
+  boot.files = loose;
+  root.children.push(boot);
+
+  // 行数汇总 + 每文件归属链
+  const sum = g => {
+    g.lines = g.files.reduce((a, n) => a + n.lines, 0) + g.children.reduce((a, c) => a + sum(c), 0);
+    g.nfiles = g.files.length + g.children.reduce((a, c) => a + (c.nfiles || c.files.length), 0);
+    return g.lines;
+  };
+  sum(root);
+  const ownerOf = new Map();
+  const walk = (g, chain) => {
+    const here = g.key === '__root' ? [] : [...chain, g.key];
+    for (const f of g.files) ownerOf.set(f.id, here);
+    for (const c of g.children) walk(c, here);
+  };
+  walk(root, []);
+  for (const n of DATA.nodes) n._chain = ownerOf.get(n.id) || [];
+  root.children.sort((a, b) => b.lines - a.lines);
+  return root;
+}
+const ROOT = buildTree();
+const FLAT = { id: '__flat', key: '__flat', name: '全部文件', kind: 'flat', parent: ROOT, children: [], files: DATA.nodes.slice(), lines: DATA.totalLines };
+
+/* ---------- 视图状态 ---------- */
+let stack = [ROOT];          // 面包屑栈
+let selected = null;          // 选中的文件 node
+let hover = null;
+let bootMode = false;
+const bootSet = new Set(DATA.bootOrder);
+
+/* ---------- 可视节点与聚合边 ---------- */
+let vNodes = [], vEdges = [], simNodes = null;
+
+function visibleGroups() {
+  const m = new Map();
+  const g = stack[stack.length - 1];
+  for (const c of g.children) m.set(c.key, c);
+  return m;
+}
+function buildView() {
+  const g = stack[stack.length - 1];
+  const gmap = visibleGroups();
+  vNodes = [];
+  const visibleFiles = new Set();
+  for (const c of g.children) vNodes.push({ type: 'group', ref: c, x: 0, y: 0, vx: 0, vy: 0 });
+  for (const f of g.files) { visibleFiles.add(f.id); vNodes.push({ type: 'file', ref: f, x: 0, y: 0, vx: 0, vy: 0 }); }
+  const anchor = id => {
+    if (visibleFiles.has(id)) return id;
+    for (const k of N.get(id)._chain) if (gmap.has(k)) return 'G:' + k;
+    return null;
+  };
+  const agg = new Map();
+  for (const l of DATA.links) {
+    const a = anchor(l.s), b = anchor(l.t);
+    if (!a || !b || a === b) continue;
+    const key = a < b ? a + '|' + b : b + '|' + a;
+    let e = agg.get(key);
+    if (!e) { e = { a: a < b ? a : b, b: a < b ? b : a, n: 0, ks: new Set() }; agg.set(key, e); }
+    e.n++; e.ks.add(l.k);
+  }
+  vEdges = [...agg.values()];
+  // 半径：面积 ∝ 真实行数
+  const items = vNodes.map(v => v.type === 'group' ? v.ref.lines : v.ref.lines);
+  const maxL = Math.max(...items, 1);
+  for (const v of vNodes) {
+    const L = v.ref.lines;
+    v.r = v.type === 'group'
+      ? Math.max(14, Math.sqrt(L / maxL) * 58)
+      : Math.max(3.5, Math.sqrt(L / maxL) * 26);
+  }
+  layout();
+  renderCrumb();
+  panelSync();
+}
+
+/* ---------- 力导向布局 ---------- */
+function layout() {
+  const W = cv.clientWidth, H = cv.clientHeight;
+  const idx = new Map(vNodes.map((v, i) => [
+    v.type === 'group' ? 'G:' + v.ref.key : v.ref.id, i]));
+  // 初始：按域散开（同一 anchor 聚在一起）
+  const anchors = [...new Set(vNodes.map(v => v.type === 'group' ? 'G:' + v.ref.key : v.ref.cluster))];
+  const apos = new Map();
+  const nA = anchors.length;
+  anchors.forEach((a, i) => {
+    const ang = (i / nA) * Math.PI * 2;
+    apos.set(a, [Math.cos(ang) * W * 0.3, Math.sin(ang) * H * 0.3]);
+  });
+  for (const v of vNodes) {
+    const a = v.type === 'group' ? 'G:' + v.ref.key : (stack[stack.length - 1].kind === 'flat' ? v.ref.cluster : v.ref.cluster);
+    const [ax, ay] = apos.get(a) || [0, 0];
+    v.x = ax + (Math.random() - .5) * 80;
+    v.y = ay + (Math.random() - .5) * 80;
+    v.vx = v.vy = 0;
+  }
+  const edges = vEdges
+    .map(e => ({ i: idx.get(e.a), j: idx.get(e.b), n: e.n }))
+    .filter(e => e.i !== undefined && e.j !== undefined);
+  // 少节点（域级）视图拉大间距，避免大圆互叠
+  const spread = vNodes.length <= 16;
+  const gapPad = spread ? 90 : 26;
+  const repK = spread ? 4.2 : 2.2;
+  const repRange = spread ? 9 : 4;
+  const restPad = spread ? 170 : 70;
+  const springK = spread ? 0.008 : 0.012;
+  const grav = spread ? 0.005 : 0.012;
+  const IT = vNodes.length > 100 ? 260 : (spread ? 420 : 320);
+  for (let it = 0; it < IT; it++) {
+    const alpha = 1 - it / IT;
+    // 斥力
+    for (let i = 0; i < vNodes.length; i++) {
+      const a = vNodes[i];
+      for (let j = i + 1; j < vNodes.length; j++) {
+        const b = vNodes[j];
+        let dx = b.x - a.x, dy = b.y - a.y;
+        let d2 = dx * dx + dy * dy || 1;
+        const min = a.r + b.r + gapPad;
+        if (d2 < min * min * repRange) {
+          const d = Math.sqrt(d2);
+          const f = (min * repK) / d2 * 40 * alpha;
+          dx /= d; dy /= d;
+          a.vx -= dx * f; a.vy -= dy * f;
+          b.vx += dx * f; b.vy += dy * f;
+        }
+      }
+    }
+    // 弹簧
+    for (const e of edges) {
+      const a = vNodes[e.i], b = vNodes[e.j];
+      const dx = b.x - a.x, dy = b.y - a.y;
+      const d = Math.sqrt(dx * dx + dy * dy) || 1;
+      const rest = a.r + b.r + restPad;
+      const f = (d - rest) * springK * Math.min(e.n, 6);
+      const fx = dx / d * f, fy = dy / d * f;
+      a.vx += fx; a.vy += fy; b.vx -= fx; b.vy -= fy;
+    }
+    // 中心引力 + 同簇微引力
+    for (const v of vNodes) {
+      v.vx -= v.x * grav * alpha;
+      v.vy -= v.y * grav * alpha;
+      v.vx *= 0.82; v.vy *= 0.82;
+      v.x += v.vx; v.y += v.vy;
+    }
+  }
+  fitView();
+}
+function fitView() {
+  const W = cv.clientWidth, H = cv.clientHeight;
+  if (W < 50 || H < 50) { needFit = true; return; } // 画布还没布局（如面板隐藏），等 resize 再 fit
+  let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
+  for (const v of vNodes) {
+    x0 = Math.min(x0, v.x - v.r); y0 = Math.min(y0, v.y - v.r);
+    x1 = Math.max(x1, v.x + v.r); y1 = Math.max(y1, v.y + v.r);
+  }
+  const pad = 70;
+  const s = Math.min((W - pad * 2) / (x1 - x0 || 1), (H - pad * 2) / (y1 - y0 || 1), 2.2);
+  const cx = (x0 + x1) / 2, cy = (y0 + y1) / 2;
+  view = { s, x: W / 2 - cx * s, y: H / 2 - cy * s };
+}
+
+/* ---------- 渲染 ---------- */
+const cv = document.getElementById('cv');
+const ctx = cv.getContext('2d');
+const tip = document.getElementById('tip');
+let view = { s: 1, x: 0, y: 0 };
+let dpr = 1;
+let needFit = false;
+function resize() {
+  dpr = window.devicePixelRatio || 1;
+  cv.width = cv.clientWidth * dpr; cv.height = cv.clientHeight * dpr;
+  if (needFit && cv.clientWidth > 50 && cv.clientHeight > 50) {
+    needFit = false;
+    if (vNodes.length) fitView();
+  }
+}
+new ResizeObserver(resize).observe(cv);
+window.addEventListener('resize', resize);
+resize();
+
+const w2s = (x, y) => [x * view.s + view.x, y * view.s + view.y];
+const s2w = (x, y) => [(x - view.x) / view.s, (y - view.y) / view.s];
+
+function nodeAlpha(v) {
+  if (!bootMode) return 1;
+  const on = v.type === 'group'
+    ? (v.ref.key === '__flat' || v.ref.files.some(f => bootSet.has(f.id)) || v.ref.children.some(c => c.files.some(f => bootSet.has(f.id))))
+    : bootSet.has(v.ref.id);
+  return on ? 1 : 0.10;
+}
+function edgeStrength(e) {
+  if (!bootMode) return 1;
+  const inSet = id => id.startsWith('G:') ? true : bootSet.has(id);
+  return inSet(e.a) && inSet(e.b) ? 1 : 0.06;
+}
+
+function draw() {
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.clearRect(0, 0, cv.clientWidth, cv.clientHeight);
+  if (view.s <= 0 || !vNodes.length) { requestAnimationFrame(draw); return; } // 布局未就绪
+  const g = stack[stack.length - 1];
+  // 边
+  for (const e of vEdges) {
+    const a = vNodes.find(v => (v.type === 'group' ? 'G:' + v.ref.key : v.ref.id) === e.a);
+    const b = vNodes.find(v => (v.type === 'group' ? 'G:' + v.ref.key : v.ref.id) === e.b);
+    if (!a || !b) continue;
+    const [ax, ay] = w2s(a.x, a.y), [bx, by] = w2s(b.x, b.y);
+    const sel = selected && ((e.a === selected.id || e.b === selected.id) || (e.a === 'G:' + selected.cluster && false));
+    const al = (sel ? 0.95 : 0.28) * edgeStrength(e);
+    ctx.strokeStyle = sel ? '#ffd479' : `rgba(140,160,185,${al})`;
+    ctx.lineWidth = Math.min(1 + Math.log2(1 + e.n) * (sel ? 1.6 : 0.9), sel ? 6 : 3.5);
+    ctx.setLineDash(e.ks.size === 1 && e.ks.has('side') ? [6, 5] : (e.ks.size === 1 && e.ks.has('dyn') ? [2, 4] : []));
+    ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(bx, by); ctx.stroke();
+    // 箭头（指向被引用方 b）
+    if (view.s > 0.5 && e.n < 40) {
+      const ang = Math.atan2(by - ay, bx - ax);
+      const rr = b.r * view.s + 4;
+      const hx = bx - Math.cos(ang) * rr, hy = by - Math.sin(ang) * rr;
+      ctx.setLineDash([]);
+      ctx.fillStyle = sel ? '#ffd479' : `rgba(140,160,185,${al})`;
+      ctx.beginPath();
+      ctx.moveTo(hx, hy);
+      ctx.lineTo(hx - Math.cos(ang - 0.42) * 7, hy - Math.sin(ang - 0.42) * 7);
+      ctx.lineTo(hx - Math.cos(ang + 0.42) * 7, hy - Math.sin(ang + 0.42) * 7);
+      ctx.closePath(); ctx.fill();
+    }
+  }
+  ctx.setLineDash([]);
+  // 节点
+  for (const v of vNodes) {
+    const [x, y] = w2s(v.x, v.y);
+    const r = v.r * view.s;
+    if (x < -r - 40 || y < -r - 40 || x > cv.clientWidth + r + 40 || y > cv.clientHeight + r + 40) continue;
+    const m = v.type === 'group' ? metaOf(v.ref.key) : metaOf(v.ref.cluster);
+    const al = nodeAlpha(v);
+    const isSel = selected && v.type === 'file' && v.ref.id === selected.id;
+    // 底色
+    ctx.globalAlpha = al;
+    if (v.type === 'group') {
+      const grad = ctx.createRadialGradient(x, y, 0, x, y, r);
+      grad.addColorStop(0, m.color + 'cc'); grad.addColorStop(1, m.color + '55');
+      ctx.fillStyle = grad;
+      ctx.beginPath(); ctx.arc(x, y, r, 0, 7); ctx.fill();
+      ctx.strokeStyle = m.color; ctx.lineWidth = 1.5; ctx.stroke();
+    } else {
+      ctx.fillStyle = m.color + (isSel ? '' : 'b8');
+      ctx.beginPath(); ctx.arc(x, y, r, 0, 7); ctx.fill();
+      if (v.ref.entry) { // 入口金环
+        ctx.strokeStyle = '#ffb454'; ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.arc(x, y, r + 3, 0, 7); ctx.stroke();
+      }
+      if (isSel || v === hover && v.type === 'file') {
+        ctx.strokeStyle = '#fff'; ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.arc(x, y, r + 3.5, 0, 7); ctx.stroke();
+      }
+    }
+    // 启动链序号
+    if (bootMode && v.type === 'file' && bootSet.has(v.ref.id)) {
+      const i = DATA.bootOrder.indexOf(v.ref.id);
+      ctx.fillStyle = '#ffb454';
+      ctx.beginPath(); ctx.arc(x + r * 0.75, y - r * 0.75, 9, 0, 7); ctx.fill();
+      ctx.fillStyle = '#1a1207'; ctx.font = 'bold 11px Consolas';
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText(String(i + 1), x + r * 0.75, y - r * 0.75 + 0.5);
+    }
+    // 标签
+    const fs = Math.max(10, Math.min(13, r * view.s * 0.32));
+    if (r > 8 || v === hover || isSel) {
+      ctx.font = `${fs}px "Segoe UI","Microsoft YaHei"`;
+      ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+      ctx.fillStyle = `rgba(223,230,238,${al * 0.95})`;
+      ctx.strokeStyle = `rgba(16,19,24,${al * 0.9})`; ctx.lineWidth = 3;
+      const label = v.type === 'group' ? v.ref.name : v.ref.id.split('/').pop();
+      const ly = y + r + 3;
+      ctx.strokeText(label, x, ly); ctx.fillText(label, x, ly);
+      if (v.type === 'group' && r > 26) {
+        ctx.font = `${fs - 1}px "Segoe UI"`;
+        ctx.fillStyle = `rgba(139,151,165,${al})`;
+        const sub = `${v.ref.nfiles || v.ref.files.length} 文件 · ${fmtN(v.ref.lines)} 行`;
+        ctx.fillText(sub, x, ly + fs + 2);
+      } else if (v.type === 'file' && (r > 12 || isSel)) {
+        ctx.font = `${fs - 2}px Consolas`;
+        ctx.fillStyle = `rgba(139,151,165,${al})`;
+        ctx.fillText(fmtN(v.ref.lines) + ' 行', x, ly + fs + 1);
+      }
+    }
+    ctx.globalAlpha = 1;
+  }
+  requestAnimationFrame(draw);
+}
+const fmtN = n => n >= 10000 ? (n / 10000).toFixed(1) + '万' : String(n);
+requestAnimationFrame(draw);
+
+/* ---------- 命中检测 ---------- */
+function pickNode(mx, my) {
+  const [wx, wy] = s2w(mx, my);
+  for (let i = vNodes.length - 1; i >= 0; i--) {
+    const v = vNodes[i];
+    const dx = wx - v.x, dy = wy - v.y;
+    if (dx * dx + dy * dy <= (v.r + 2) * (v.r + 2)) return v;
+  }
+  return null;
+}
+function pickEdge(mx, my) {
+  const [px, py] = s2w(mx, my);
+  let best = null, bd = 8 / view.s;
+  for (const e of vEdges) {
+    const a = vNodes.find(v => (v.type === 'group' ? 'G:' + v.ref.key : v.ref.id) === e.a);
+    const b = vNodes.find(v => (v.type === 'group' ? 'G:' + v.ref.key : v.ref.id) === e.b);
+    if (!a || !b) continue;
+    const vx = b.x - a.x, vy = b.y - a.y;
+    const L2 = vx * vx + vy * vy || 1;
+    let t = ((px - a.x) * vx + (py - a.y) * vy) / L2;
+    t = Math.max(0.15, Math.min(0.85, t));
+    const cx = a.x + vx * t, cy = a.y + vy * t;
+    const d = Math.hypot(px - cx, py - cy);
+    if (d < bd) { bd = d; best = e; }
+  }
+  return best;
+}
+
+/* ---------- 交互 ---------- */
+let drag = null;
+cv.addEventListener('mousedown', ev => {
+  const p = pickNode(ev.offsetX, ev.offsetY);
+  drag = { node: p, sx: ev.offsetX, sy: ev.offsetY, moved: false };
+  if (p) { const [wx, wy] = s2w(ev.offsetX, ev.offsetY); drag.dx = wx - p.x; drag.dy = wy - p.y; }
+});
+window.addEventListener('mousemove', ev => {
+  const rect = cv.getBoundingClientRect();
+  const mx = ev.clientX - rect.left, my = ev.clientY - rect.top;
+  const inCv = mx >= 0 && my >= 0 && mx <= rect.width && my <= rect.height;
+  if (drag) {
+    const dx = mx - drag.sx, dy = my - drag.sy;
+    if (Math.abs(dx) + Math.abs(dy) > 3) drag.moved = true;
+    if (drag.moved) {
+      if (drag.node) {
+        const [wx, wy] = s2w(mx, my);
+        drag.node.x = wx - drag.dx; drag.node.y = wy - drag.dy;
+        drag.node.vx = drag.node.vy = 0;
+      } else {
+        view.x += ev.movementX; view.y += ev.movementY;
+        cv.classList.add('grabbing');
+      }
+    }
+    return;
+  }
+  if (!inCv) { tip.style.display = 'none'; hover = null; return; }
+  const nv = pickNode(mx, my);
+  hover = nv;
+  cv.classList.toggle('pointer', !!nv);
+  const e = nv ? null : pickEdge(mx, my);
+  if (nv) {
+    const m = nv.type === 'group' ? metaOf(nv.ref.key) : metaOf(nv.ref.cluster);
+    tip.innerHTML = nv.type === 'group'
+      ? `<b>${nv.ref.name}</b><div class="t2">${nv.ref.nfiles || nv.ref.files.length} 个文件 · ${nv.ref.lines.toLocaleString()} 行（含子域）<br>点击下钻</div>`
+      : `<b style="color:${m.color}">${nv.ref.id}</b><div class="t2">${nv.ref.lines.toLocaleString()} 行 · ${nv.ref.exports.length} 个导出${nv.ref.entry ? ' · 入口' : ''}<br>点击查看详情</div>`;
+    tip.style.display = 'block';
+    tip.style.left = Math.min(mx + 14, rect.width - 300) + 'px';
+    tip.style.top = (my + 14) + 'px';
+  } else if (e) {
+    const name = id => id.startsWith('G:') ? metaOf(id.slice(2)).label : id;
+    tip.innerHTML = `<b>${name(e.a)}</b> → <b>${name(e.b)}</b><div class="t2">${e.n} 条引用 · ${[...e.ks].map(k => KIND_LABEL[k]).join('/')}</div>`;
+    tip.style.display = 'block';
+    tip.style.left = Math.min(mx + 14, rect.width - 300) + 'px';
+    tip.style.top = (my + 14) + 'px';
+  } else tip.style.display = 'none';
+});
+window.addEventListener('mouseup', ev => {
+  if (!drag) return;
+  const wasDrag = drag.moved, node = drag.node;
+  drag = null;
+  cv.classList.remove('grabbing');
+  if (wasDrag) return;
+  if (node) {
+    if (node.type === 'group') { stack.push(node.ref); buildView(); }
+    else { selected = node.ref; panelSync(); }
+  } else if (ev.target === cv) {
+    selected = null; panelSync();
+  }
+});
+cv.addEventListener('wheel', ev => {
+  ev.preventDefault();
+  const f = ev.deltaY < 0 ? 1.12 : 1 / 1.12;
+  const rect = cv.getBoundingClientRect();
+  const mx = ev.clientX - rect.left, my = ev.clientY - rect.top;
+  view.x = mx - (mx - view.x) * f;
+  view.y = my - (my - view.y) * f;
+  view.s *= f;
+}, { passive: false });
+window.addEventListener('keydown', ev => {
+  if (ev.key === 'Escape' && !ev.isComposing) {
+    if (document.activeElement === searchEl) { searchEl.blur(); return; }
+    if (selected) { selected = null; panelSync(); }
+    else if (stack.length > 1) { stack.pop(); buildView(); }
+  }
+});
+
+/* ---------- 详情面板 ---------- */
+const panel = document.getElementById('panel');
+function relRows(list, dir, myId) {
+  return list.map(({ t, k }) => {
+    const other = dir === 'out' ? t : t;
+    const n = N.get(other);
+    if (!n) return '';
+    return `<div class="row" data-jump="${other}">
+      <span>${dir === 'out' ? '→' : '←'}</span>
+      <span>${other}</span>
+      ${dir === 'out' ? `<span class="kind">${KIND_LABEL[k] || k}</span>` : ''}
+      <span class="ln">${n.lines} 行</span></div>`;
+  }).join('');
+}
+function panelSync() {
+  if (!selected) { panel.style.display = 'none'; return; }
+  const n = selected;
+  const ins = [];
+  for (const o of DATA.nodes) for (const i of o.imports) if (i.t === n.id) ins.push({ t: o.id, k: i.k });
+  const m = metaOf(n.cluster);
+  panel.innerHTML = `
+    <h2 style="color:${m.color}">${n.id}</h2>
+    <div class="badges">
+      <span class="badge">${m.label}</span>
+      <span class="badge">${n.lines.toLocaleString()} 行</span>
+      <span class="badge">${n.kind === 'dts' ? '类型声明' : 'JS 模块'}</span>
+      ${n.entry ? '<span class="badge entry">入口（src 内无人引用）</span>' : ''}
+      ${bootSet.has(n.id) ? `<span class="badge entry">启动序 #${DATA.bootOrder.indexOf(n.id) + 1}</span>` : ''}
+    </div>
+    ${n.desc ? `<div class="desc">${n.desc}</div>` : ''}
+    <h3>导出符号（${n.exports.length}）</h3>
+    <div class="chips">${n.exports.length ? n.exports.map(e => `<span class="chip">${e}</span>`).join('') : '<span class="desc">（无具名导出）</span>'}</div>
+    <h3>引用出向（${n.imports.length}）— 它依赖谁</h3>
+    <div class="rel">${n.imports.length ? relRows(n.imports, 'out') : '<span class="desc">（无 src 内依赖）</span>'}</div>
+    <h3>引用入向（${ins.length}）— 谁依赖它</h3>
+    <div class="rel">${ins.length ? relRows(ins, 'in') : '<span class="desc">（src 内无人引用）</span>'}</div>`;
+  panel.style.display = 'block';
+  panel.querySelectorAll('[data-jump]').forEach(el =>
+    el.addEventListener('click', () => jumpTo(el.dataset.jump)));
+}
+function jumpTo(id) {
+  const n = N.get(id); if (!n) return;
+  // 定位到直接归属组视图并选中
+  const chain = n._chain;
+  let g = ROOT;
+  stack = [ROOT];
+  for (const key of chain) {
+    let next = g.children.find(c => c.key === key);
+    if (key === 'battle' && !next && g === ROOT) next = g.children.find(c => c.key === 'battle');
+    if (next) { stack.push(next); g = next; }
+  }
+  if (!g.files.some(f => f.id === id) && g.children.length) {
+    // 文件在 battle 散文件或子域：补一层
+    const sub = g.children.find(c => c.files.some(f => f.id === id));
+    if (sub) { stack.push(sub); g = sub; }
+  }
+  selected = n;
+  buildView();
+}
+
+/* ---------- 面包屑 / 图例 / 头部 ---------- */
+const crumb = document.getElementById('crumb');
+function renderCrumb() {
+  crumb.innerHTML = '';
+  stack.forEach((g, i) => {
+    const s = document.createElement('span');
+    s.className = i === stack.length - 1 ? 'cur' : 'seg';
+    s.textContent = g.name;
+    s.addEventListener('click', () => { stack = stack.slice(0, i + 1); buildView(); });
+    crumb.appendChild(s);
+    if (i < stack.length - 1) crumb.append(' / ');
+  });
+}
+const legend = document.getElementById('legend');
+{
+  const doms = document.createElement('div');
+  doms.className = 'doms';
+  for (const c of ROOT.children) {
+    const m = metaOf(c.key);
+    const d = document.createElement('span');
+    d.className = 'dom';
+    d.innerHTML = `<span class="dot" style="background:${m.color}"></span>${c.name} <span style="color:var(--dim)">${c.nfiles || c.files.length}</span>`;
+    d.addEventListener('click', () => { stack = [ROOT]; if (c.key !== '__root') stack.push(c); buildView(); });
+    doms.appendChild(d);
+  }
+  legend.appendChild(doms);
+  const note = document.createElement('div');
+  note.className = 'note';
+  note.innerHTML = `节点面积 ∝ 真实代码行数 · 边宽 ∝ 引用次数<i></i>静态<i class="dash"></i>副作用<i class="dot2"></i>动态 · 金环=入口 · 点击域下钻，点击文件看详情，滚轮缩放，拖拽平移/挪节点`;
+  legend.appendChild(note);
+}
+document.getElementById('genAt').textContent = `· 数据 ${DATA.generatedAt}`;
+document.getElementById('stats').innerHTML =
+  `<b>${DATA.totalFiles}</b> 文件 · <b>${DATA.totalLines.toLocaleString()}</b> 行 · <b>${DATA.links.length}</b> 条依赖`;
+
+/* ---------- 工具按钮 ---------- */
+document.getElementById('flatBtn').addEventListener('click', ev => {
+  stack = [ROOT, FLAT];
+  buildView();
+  ev.target.classList.add('on');
+  setTimeout(() => ev.target.classList.remove('on'), 300);
+});
+const bootBtn = document.getElementById('bootBtn');
+bootBtn.addEventListener('click', () => {
+  bootMode = !bootMode;
+  bootBtn.classList.toggle('on', bootMode);
+  if (bootMode && stack[stack.length - 1] === ROOT) { stack = [ROOT, FLAT]; }
+  buildView();
+});
+
+/* ---------- 搜索 ---------- */
+const searchEl = document.getElementById('search');
+const drop = document.getElementById('searchDrop');
+let dropItems = [];
+function doSearch(q) {
+  q = q.trim().toLowerCase();
+  if (!q) { drop.style.display = 'none'; return; }
+  const files = DATA.nodes.filter(n => n.id.toLowerCase().includes(q));
+  const syms = [];
+  for (const n of DATA.nodes) for (const e of n.exports) if (e.toLowerCase().includes(q)) syms.push({ n, e });
+  dropItems = [
+    ...files.slice(0, 10).map(n => ({ type: 'file', n })),
+    ...syms.slice(0, 8).map(({ n, e }) => ({ type: 'sym', n, e })),
+  ].slice(0, 14);
+  drop.innerHTML = dropItems.map((it, i) =>
+    `<div class="item" data-i="${i}"><span>${it.type === 'sym' ? it.e + '()' : it.n.id}</span><span class="p">${it.n.lines} 行 · ${it.n.id}</span></div>`
+  ).join('') || '<div class="item"><span class="p">无匹配</span></div>';
+  drop.style.display = 'block';
+  drop.querySelectorAll('.item[data-i]').forEach(el =>
+    el.addEventListener('mousedown', ev => { ev.preventDefault(); pickSearch(+el.dataset.i); }));
+}
+function pickSearch(i) {
+  const it = dropItems[i]; if (!it) return;
+  drop.style.display = 'none';
+  searchEl.value = it.type === 'sym' ? it.e : it.n.id;
+  jumpTo(it.n.id);
+  searchEl.blur();
+}
+searchEl.addEventListener('input', () => doSearch(searchEl.value));
+searchEl.addEventListener('keydown', ev => {
+  if (ev.key === 'Enter' && dropItems.length) pickSearch(0);
+});
+
+/* ---------- 启动 ---------- */
+buildView();
+</script>
+</body>
+</html>
