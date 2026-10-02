@@ -1,0 +1,823 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-02",
+  "scope": "复用已核38条核心/24款独立游戏/深读与完整源码库；不新增广网搜索",
+  "resources": [
+    {
+      "id": "fp-sts-metrics",
+      "name": "'Slay the Spire': Metrics Driven Design and Balance",
+      "type": "developer-retrospective",
+      "url": "https://www.gdcvault.com/play/1025731/-Slay-the-Spire-Metrics%EF%BB%BF",
+      "localEntry": [
+        "docs/evidence/2026-10-02-production-research/library/catalog.json"
+      ],
+      "license": "页面声明 Informa 版权所有；free content 指观看访问，不代表可下载再分发或游戏资产复用",
+      "use": "优先用于卡牌选取率、不同熟练度通关率及社区反馈的联合诊断；先定义要验证的卡牌问题，再收数",
+      "limits": "本轮补读GDC官方讲义关键页文本与页码；截图接口未返回可检视像素，未读取图表数值。未观看完整演讲，不能补推视频讲解或时间码。讲义受版权保护，只保留索引与短自写摘要，不下载再分发为游戏素材。",
+      "ownership": "仅本地索引与摘要；未下载原文/素材",
+      "status": "reference-only",
+      "systemIds": [
+        "SYS-01",
+        "SYS-05",
+        "SYS-08",
+        "SYS-11",
+        "SYS-17"
+      ],
+      "verifiedAt": "2026-10-02，复用既有来源核验；本计划未重新联网",
+      "uiRequestIds": [
+        "UI-R03"
+      ]
+    },
+    {
+      "id": "fp-itb-postmortem",
+      "name": "Into the Breach Design Postmortem",
+      "type": "developer-retrospective",
+      "url": "https://www.gdcvault.com/play/1026333/-Into-the-Breach-Design",
+      "localEntry": [
+        "docs/evidence/2026-10-02-production-research/library/catalog.json"
+      ],
+      "license": "页面声明 Informa 版权所有；free content 指观看访问，不代表可下载再分发或游戏资产复用",
+      "use": "用作战斗预告、随机节点与四层难度讨论的复盘入口；下一次设计评审先写清应保留的体验约束",
+      "limits": "官方49页讲义关键页文本，未读图表像素或看完整视频；不照搬网格推怪、全确定性和三种攻击。 小实验为研究者建议，未实施；详见DEEP-READS.md。",
+      "ownership": "仅本地索引与摘要；未下载原文/素材",
+      "status": "reference-only",
+      "systemIds": [
+        "SYS-04",
+        "SYS-06",
+        "SYS-08",
+        "SYS-09"
+      ],
+      "verifiedAt": "2026-10-02，复用既有来源核验；本计划未重新联网",
+      "uiRequestIds": [
+        "UI-R03",
+        "UI-R04",
+        "UI-R09"
+      ]
+    },
+    {
+      "id": "fp-riot-prototype",
+      "name": "Prototype: Building a Game's Substance",
+      "type": "studio-process",
+      "url": "https://www.riotgames.com/en/r-and-d-office/prototype-building-a-games-substance",
+      "localEntry": [
+        "docs/evidence/2026-10-02-production-research/library/catalog.json"
+      ],
+      "license": "未见开放复用许可；仅索引和自写摘要，原文/视频/图像不得作为本项目素材再分发",
+      "use": "为新卡牌/新撤退规则建立最小可玩场景；每轮只回答明确玩法问题，不先批量生产完整美术内容",
+      "limits": "完整官方文章正文；大团队原型流程不是修bug阶段门；骨架必须保留影响判断的上下文。 小实验为研究者建议，未实施；详见DEEP-READS.md。",
+      "ownership": "仅本地索引与摘要；未下载原文/素材",
+      "status": "reference-only",
+      "systemIds": [
+        "SYS-04",
+        "SYS-18"
+      ],
+      "verifiedAt": "2026-10-02，复用既有来源核验；本计划未重新联网",
+      "uiRequestIds": []
+    },
+    {
+      "id": "fp-xbox-user-research",
+      "name": "How Xbox Research is Shaping the Future of Game Development",
+      "type": "game-evaluation",
+      "url": "https://developer.microsoft.com/en-us/games/articles/2024/09/how-xbox-research-is-shaping-the-future-of-game-development/",
+      "localEntry": [
+        "docs/evidence/2026-10-02-production-research/library/catalog.json"
+      ],
+      "license": "未见开放复用许可；仅索引和自写摘要，原文/视频/图像不得作为本项目素材再分发",
+      "use": "用于首局引导、卡牌理解、基地界面可用性评估：观察目标玩家边玩边想，按问题选访谈/试玩/问卷",
+      "limits": "完整官方采访正文；原文讨论开发者工具，不提供本游戏样本量/量表；边做边说会改变节奏。 小实验为研究者建议，未实施；详见DEEP-READS.md。",
+      "ownership": "仅本地索引与摘要；未下载原文/素材",
+      "status": "reference-only",
+      "systemIds": [
+        "SYS-04",
+        "SYS-16",
+        "SYS-18"
+      ],
+      "verifiedAt": "2026-10-02，复用既有来源核验；本计划未重新联网",
+      "uiRequestIds": [
+        "UI-R04"
+      ]
+    },
+    {
+      "id": "fp-gamedevbench",
+      "name": "GameDevBench: Evaluating Agentic Capabilities Through Game Development",
+      "type": "ai-production",
+      "url": "https://arxiv.org/html/2602.11103v1",
+      "localEntry": [
+        "docs/evidence/2026-10-02-production-research/library/catalog.json"
+      ],
+      "license": "论文 HTML 标注 CC BY 4.0；不自动覆盖基准仓库和第三方教程资产",
+      "use": "为本项目 AI 美术与 UI 修改制定双重验收：机器状态/规则断言加实际窗口截图和交互；不能仅接受代理文字说已完成",
+      "limits": "固定v1关键方法与误差段落；Godot教程基准不能代表Vite整游戏。正文与Table 2个别数值不一致，不借成功率宣传。 小实验为研究者建议，未实施；详见DEEP-READS.md。",
+      "ownership": "仅本地索引与摘要；未下载原文/素材",
+      "status": "reference-only",
+      "systemIds": [
+        "SYS-03",
+        "SYS-08",
+        "SYS-11",
+        "SYS-16"
+      ],
+      "verifiedAt": "2026-10-02，复用既有来源核验；本计划未重新联网",
+      "uiRequestIds": []
+    },
+    {
+      "id": "kenney-interface-sounds",
+      "name": "Interface Sounds",
+      "type": "art-audio",
+      "url": "https://kenney.nl/assets/interface-sounds",
+      "localEntry": [
+        "docs/evidence/2026-10-02-production-research/library/assets-ui/downloads/kenney_interfaceSounds.zip",
+        "docs/evidence/2026-10-02-production-research/library/assets-ui/downloads/selected/License.txt",
+        "docs/evidence/2026-10-02-production-research/library/assets-ui/downloads/selected/click_001.ogg",
+        "docs/evidence/2026-10-02-production-research/library/assets-ui/downloads/selected/confirmation_001.ogg",
+        "docs/evidence/2026-10-02-production-research/library/assets-ui/downloads/selected/error_001.ogg"
+      ],
+      "license": "Creative Commons CC0 1.0；官方说明可用于商业项目且不要求署名。",
+      "use": "适合评估卡牌选择、节点交互、战利品确认和基地按钮反馈的轻量音效；可先做少量试听筛选。",
+      "limits": "页面播放器未被当前浏览工具支持，未试听样例；已下载源包并核验包内License.txt为CC0。OpenGameArt镜像页提供同一个2020 Interface Sounds包；本目录OGA 2012条目是另一个独立素材包。风格仍需结合项目统一。",
+      "ownership": "已拥有所列本地文件；不等于已安装/集成",
+      "status": "usable",
+      "systemIds": [
+        "SYS-14"
+      ],
+      "verifiedAt": "2026-10-02，复用既有来源核验；本计划未重新联网",
+      "uiRequestIds": [
+        "UI-R10"
+      ]
+    },
+    {
+      "id": "kenney-ui-pack",
+      "name": "UI Pack",
+      "type": "art-audio",
+      "url": "https://kenney.nl/assets/ui-pack",
+      "localEntry": [
+        "docs/evidence/2026-10-02-production-research/library/catalog.json"
+      ],
+      "license": "Creative Commons CC0 1.0；官方支持页说明资源可商用且无需署名。",
+      "use": "可用于原型阶段对按钮、面板、滑条的素材密度与状态覆盖做评估，也可择件评估实际使用。",
+      "limits": "页面未展开逐项预览；该套件是通用风格资源，不能替代项目自己的视觉语言和状态设计。",
+      "ownership": "仅本地索引与摘要；未下载原文/素材",
+      "status": "usable",
+      "systemIds": [
+        "SYS-13"
+      ],
+      "verifiedAt": "2026-10-02，复用既有来源核验；本计划未重新联网",
+      "uiRequestIds": [
+        "UI-R02"
+      ]
+    },
+    {
+      "id": "wcag-contrast-minimum",
+      "name": "Understanding Success Criterion 1.4.3: Contrast (Minimum)",
+      "type": "ui-accessibility",
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html",
+      "localEntry": [
+        "docs/evidence/2026-10-02-production-research/library/catalog.json"
+      ],
+      "license": "W3C说明性文档，仅作规范解释参考，不作为游戏素材。",
+      "use": "适合核查战斗文字、资源数值、状态标签、按钮文字与暗色背景之间的可读性。",
+      "limits": "解释文档明确属于informative，不是额外强制准则；大字阈值与例外须按原定义判断。",
+      "ownership": "仅本地索引与摘要；未下载原文/素材",
+      "status": "reference-only",
+      "systemIds": [
+        "SYS-12"
+      ],
+      "verifiedAt": "2026-10-02，复用既有来源核验；本计划未重新联网",
+      "uiRequestIds": [
+        "UI-R01"
+      ]
+    },
+    {
+      "id": "wcag-use-of-color",
+      "name": "Understanding Success Criterion 1.4.1: Use of Color",
+      "type": "ui-accessibility",
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html",
+      "localEntry": [
+        "docs/evidence/2026-10-02-production-research/library/catalog.json"
+      ],
+      "license": "W3C说明性文档，仅作规范解释参考，不作为游戏素材。",
+      "use": "适用于稀有度、伤害类型、危险节点、卡牌费用和禁用状态的视觉编码。",
+      "limits": "该条款针对颜色作为唯一信息载体；不限制使用色彩作为辅助强调。",
+      "ownership": "仅本地索引与摘要；未下载原文/素材",
+      "status": "reference-only",
+      "systemIds": [
+        "SYS-12"
+      ],
+      "verifiedAt": "2026-10-02，复用既有来源核验；本计划未重新联网",
+      "uiRequestIds": []
+    },
+    {
+      "id": "nng-visual-hierarchy",
+      "name": "Visual Hierarchy in UX: Definition",
+      "type": "ui-accessibility",
+      "url": "https://www.nngroup.com/articles/visual-hierarchy-ux-definition/",
+      "localEntry": [
+        "docs/evidence/2026-10-02-production-research/library/catalog.json"
+      ],
+      "license": "版权文章，仅使用自写摘要，不复用原文或示例图。",
+      "use": "适用于控制战斗屏信息竞争：玩家行动、敌方意图、资源与牌面效果应有明确优先级。",
+      "limits": "文章以网页和产品界面为例；具体信息顺序需结合本游戏战斗决策和玩家测试确定。",
+      "ownership": "仅本地索引与摘要；未下载原文/素材",
+      "status": "reference-only",
+      "systemIds": [
+        "SYS-06",
+        "SYS-12"
+      ],
+      "verifiedAt": "2026-10-02，复用既有来源核验；本计划未重新联网",
+      "uiRequestIds": [
+        "UI-R01",
+        "UI-R02",
+        "UI-R08"
+      ]
+    },
+    {
+      "id": "game-icons-net-risk-extraction-inventory",
+      "name": "Backpack, Hazard sign, and Exit door icons",
+      "type": "art-audio",
+      "url": "https://game-icons.net/",
+      "localEntry": [
+        "docs/evidence/2026-10-02-production-research/library/assets-ui/downloads/game-icons/backpack.svg",
+        "docs/evidence/2026-10-02-production-research/library/assets-ui/downloads/game-icons/hazard-sign.svg",
+        "docs/evidence/2026-10-02-production-research/library/assets-ui/downloads/game-icons/exit-door.svg",
+        "docs/evidence/2026-10-02-production-research/library/assets-ui/downloads/game-icons/ATTRIBUTION.txt"
+      ],
+      "license": "Creative Commons Attribution 3.0 Unported (CC BY 3.0)，需署名作者和标题、链接来源及许可，注明是否修改；不暗示作者背书。",
+      "use": "可作为搜打撤背包/库存入口、风险警告与撤离出口的图标候选，补充现有按钮类资源。",
+      "limits": "只作为小规模候选素材；白色透明版，需在项目配色和明暗背景中检查可辨识度。未抄用竞品素材。若投入游戏发行，必须保留作者、图标标题、来源页和CC BY 3.0许可链接；若制作衍生版本需标注改动。 本轮未做SVG视觉渲染验收。",
+      "ownership": "已拥有所列本地文件；不等于已安装/集成",
+      "status": "usable",
+      "systemIds": [
+        "SYS-12",
+        "SYS-13"
+      ],
+      "verifiedAt": "2026-10-02，复用既有来源核验；本计划未重新联网",
+      "uiRequestIds": [
+        "UI-R06"
+      ]
+    },
+    {
+      "id": "howler",
+      "name": "howler.js：项目既有音频依赖的原始实现",
+      "type": "open-source",
+      "url": "https://github.com/goldfire/howler.js",
+      "localEntry": [
+        "docs/evidence/2026-10-02-production-research/library/downloads/howler/LICENSE.md",
+        "docs/evidence/2026-10-02-production-research/library/downloads/howler/package.json",
+        "docs/evidence/2026-10-02-production-research/library/downloads/howler/src/howler.core.js"
+      ],
+      "license": "MIT",
+      "use": "优先追踪点击/确认/失败音效从动作到播放ID的接线、淡入淡出及解锁；减少额外音频依赖",
+      "limits": "已有依赖不代表全部资产已接线；源文件下载未执行、未试听，需本项目真实动作验收",
+      "ownership": "已拥有所列本地文件；不等于已安装/集成",
+      "status": "evaluate",
+      "systemIds": [
+        "SYS-14"
+      ],
+      "verifiedAt": "2026-10-02，复用既有来源核验；本计划未重新联网",
+      "uiRequestIds": [
+        "UI-R10"
+      ]
+    },
+    {
+      "id": "jsfxr",
+      "name": "jsfxr：小型程序化音效生成源码",
+      "type": "open-source",
+      "url": "https://github.com/chr15m/jsfxr",
+      "localEntry": [
+        "docs/evidence/2026-10-02-production-research/library/downloads/jsfxr/UNLICENSE",
+        "docs/evidence/2026-10-02-production-research/library/downloads/jsfxr/package.json",
+        "docs/evidence/2026-10-02-production-research/library/downloads/jsfxr/sfxr.js",
+        "docs/evidence/2026-10-02-production-research/library/downloads/jsfxr/riffwave.js"
+      ],
+      "license": "Unlicense",
+      "use": "对照项目已有sfx:gen脚本，为卡牌点击、获得战利品、危险提示建立一致短音色",
+      "limits": "8-bit音色可能不合当前视觉气质；本轮不生成或试听声音；Pro商业产品不在此开源许可范围",
+      "ownership": "已拥有所列本地文件；不等于已安装/集成",
+      "status": "evaluate",
+      "systemIds": [
+        "SYS-14"
+      ],
+      "verifiedAt": "2026-10-02，复用既有来源核验；本计划未重新联网",
+      "uiRequestIds": [
+        "UI-R10"
+      ]
+    },
+    {
+      "id": "inkjs",
+      "name": "inkjs：互动叙事运行时与分支选择参考",
+      "type": "open-source",
+      "url": "https://github.com/y-lohse/inkjs",
+      "localEntry": [
+        "docs/evidence/2026-10-02-production-research/library/catalog.json"
+      ],
+      "license": "MIT",
+      "use": "评估四层事件的条件、访问次数与分支选择表达；可借鉴作者内容与运行状态分离",
+      "limits": "本项目已有剧情编译脚本，先对照表达能力再决定是否值得新增依赖；未确认当前版本日期，未下载",
+      "ownership": "仅本地索引与摘要；未下载原文/素材",
+      "status": "evaluate",
+      "systemIds": [
+        "SYS-07"
+      ],
+      "verifiedAt": "2026-10-02，复用既有来源核验；本计划未重新联网",
+      "uiRequestIds": []
+    },
+    {
+      "id": "dexie",
+      "name": "Dexie：IndexedDB事务与版本化数据参考",
+      "type": "open-source",
+      "url": "https://github.com/dexie/Dexie.js",
+      "localEntry": [
+        "docs/evidence/2026-10-02-production-research/library/catalog.json"
+      ],
+      "license": "Apache-2.0；集成时核对NOTICE与依赖许可",
+      "use": "仅当确有存档体积或多实体原子写需要时评估；可参考局外仓库与跑局结果一次提交的事务边界",
+      "limits": "不授权改现行存档，不建议仅为包装API迁移；await非数据库异步工作会影响事务生存期；日期未确认",
+      "ownership": "仅本地索引与摘要；未下载原文/素材",
+      "status": "evaluate",
+      "systemIds": [
+        "SYS-10"
+      ],
+      "verifiedAt": "2026-10-02，复用既有来源核验；本计划未重新联网",
+      "uiRequestIds": []
+    },
+    {
+      "id": "idb",
+      "name": "idb：轻量IndexedDB Promise包装与事务陷阱",
+      "type": "open-source",
+      "url": "https://github.com/jakearchibald/idb",
+      "localEntry": [
+        "docs/evidence/2026-10-02-production-research/library/catalog.json"
+      ],
+      "license": "ISC",
+      "use": "作为现有存档原子性诊断的阅读材料；可帮助区分写入请求完成与事务已提交",
+      "limits": "仅候选且未下载；不能与Dexie同时盲目引入；存档机制当前事实由工程诊断确认；日期未确认",
+      "ownership": "仅本地索引与摘要；未下载原文/素材",
+      "status": "evaluate",
+      "systemIds": [
+        "SYS-10"
+      ],
+      "verifiedAt": "2026-10-02，复用既有来源核验；本计划未重新联网",
+      "uiRequestIds": []
+    },
+    {
+      "id": "vite-features",
+      "name": "Vite官方特性：动态导入与资源组织边界",
+      "type": "tools",
+      "url": "https://vite.dev/guide/features.html",
+      "localEntry": [
+        "docs/evidence/2026-10-02-production-research/library/catalog.json"
+      ],
+      "license": "文档参考；Vite仓库MIT不自动替代第三方素材许可",
+      "use": "为四层场景/卡牌说明/音效配置懒加载评审提供事实，不先重写项目入口",
+      "limits": "在线文档随版本更新；应和当前锁定Vite版本匹配，未确认页面更新日期；本轮不build",
+      "ownership": "仅本地索引与摘要；未下载原文/素材",
+      "status": "reference-only",
+      "systemIds": [
+        "SYS-15"
+      ],
+      "verifiedAt": "2026-10-02，复用既有来源核验；本计划未重新联网",
+      "uiRequestIds": []
+    },
+    {
+      "id": "mdn-autoplay",
+      "name": "MDN：浏览器音频自动播放阻止与真实输入解锁",
+      "type": "tools",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/Media/Guides/Autoplay",
+      "localEntry": [
+        "docs/evidence/2026-10-02-production-research/library/catalog.json"
+      ],
+      "license": "文档参考；MDN内容许可依官方说明，本轮不复制原文或代码",
+      "use": "检查标题页进入、刷新读档和首次卡牌行动是否真正有声；配合已有howler，不只核验素材存在",
+      "limits": "不同浏览器策略不同；本轮仅资料，未做真实点击试听；不能用合成事件宣称真实解锁通过",
+      "ownership": "仅本地索引与摘要；未下载原文/素材",
+      "status": "reference-only",
+      "systemIds": [
+        "SYS-14"
+      ],
+      "verifiedAt": "2026-10-02，复用既有来源核验；本计划未重新联网",
+      "uiRequestIds": [
+        "UI-R10"
+      ]
+    },
+    {
+      "id": "2048-reference",
+      "name": "2048 原作者完整浏览器游戏源码归档（状态与结局流程参考）",
+      "type": "open-source",
+      "url": "https://github.com/gabrielecirulli/2048",
+      "localEntry": [
+        "docs/evidence/2026-10-02-production-research/library/downloads/2048/2048-source.zip",
+        "docs/evidence/2026-10-02-production-research/library/downloads/2048/readable/LICENSE.txt",
+        "docs/evidence/2026-10-02-production-research/library/downloads/2048/readable/README.md",
+        "docs/evidence/2026-10-02-production-research/library/downloads/2048/readable/index.html",
+        "docs/evidence/2026-10-02-production-research/library/downloads/2048/readable/js/animframe_polyfill.js",
+        "docs/evidence/2026-10-02-production-research/library/downloads/2048/readable/js/application.js",
+        "docs/evidence/2026-10-02-production-research/library/downloads/2048/readable/js/bind_polyfill.js",
+        "docs/evidence/2026-10-02-production-research/library/downloads/2048/readable/js/classlist_polyfill.js",
+        "docs/evidence/2026-10-02-production-research/library/downloads/2048/readable/js/game_manager.js",
+        "docs/evidence/2026-10-02-production-research/library/downloads/2048/readable/js/grid.js",
+        "docs/evidence/2026-10-02-production-research/library/downloads/2048/readable/js/html_actuator.js",
+        "docs/evidence/2026-10-02-production-research/library/downloads/2048/readable/js/keyboard_input_manager.js",
+        "docs/evidence/2026-10-02-production-research/library/downloads/2048/readable/js/local_storage_manager.js",
+        "docs/evidence/2026-10-02-production-research/library/downloads/2048/readable/js/tile.js",
+        "docs/evidence/2026-10-02-production-research/library/downloads/2048/readable/style/main.css"
+      ],
+      "license": "MIT（源码）；归档内第三方字体和品牌图像的复用未核实",
+      "use": "仅对照输入→规则→存档→渲染→胜败/继续的分离；与根诊断的通关收束和结局后动作边界相关",
+      "limits": "不是卡牌/roguelike或搜打撤玩法模板；历史全局JS非现行ESM架构；未运行。完整ZIP含Clear Sans字体等资产，此轮只核验代码MIT，不批准字体/logo/图像复用；需要另核第三方授权",
+      "ownership": "已拥有所列本地文件；不等于已安装/集成",
+      "status": "evaluate",
+      "systemIds": [
+        "SYS-02",
+        "SYS-10"
+      ],
+      "verifiedAt": "2026-10-02，复用既有来源核验；本计划未重新联网",
+      "uiRequestIds": []
+    },
+    {
+      "id": "indie-cogmind",
+      "name": "Cogmind",
+      "type": "独立游戏方法参考",
+      "url": "https://www.gridsagegames.com/cogmind/",
+      "additionalUrls": [
+        "https://www.gridsagegames.com/cogmind/",
+        "https://www.gridsagegames.com/blog/2015/10/morgue-files/",
+        "https://www.gridsagegames.com/blog/2020/06/audio-accessibility-features-roguelikes/"
+      ],
+      "localEntry": [
+        "docs/evidence/2026-10-02-production-research/library/indie-games/records.json",
+        "docs/evidence/2026-10-02-production-research/library/indie-games/DEEP-CASES.md"
+      ],
+      "license": "reference-only; copyrighted source; no redistribution or asset reuse permission inferred",
+      "use": "人读结算与机器事件共用事实；保留峰值、关键拐点和损失原因。",
+      "limits": "未亲玩、未核视频/图表像素；官方介绍只支持写明机制。分析建议不证明玩家效果。未核项目代码与页面现状。；不复制庞大终端数据墙；音效字幕不能变成隐藏情报透视。",
+      "ownership": "仅索引与自写分析；未拥有可复用游戏美术/音频/代码，未亲玩",
+      "status": "reference-only",
+      "systemIds": [
+        "SYS-02",
+        "SYS-05",
+        "SYS-09",
+        "SYS-14"
+      ],
+      "verifiedAt": "2026-10-02，复用既有作者来源",
+      "uiRequestIds": [
+        "UI-R05"
+      ]
+    },
+    {
+      "id": "indie-backpack-hero",
+      "name": "Backpack Hero",
+      "type": "独立游戏方法参考",
+      "url": "https://store.steampowered.com/app/1970580/Backpack_Hero/",
+      "additionalUrls": [
+        "https://store.steampowered.com/app/1970580/Backpack_Hero/",
+        "https://thejaspel.itch.io/backpack-hero/devlog/347904/backpack-hero-version-2-hotfix-2",
+        "https://thejaspel.itch.io/backpack-hero/devlog/361238/backpack-hero-archery-update",
+        "https://thejaspel.itch.io/backpack-hero/devlog/636026/backpack-hero-10-is-available-now"
+      ],
+      "localEntry": [
+        "docs/evidence/2026-10-02-production-research/library/indie-games/records.json",
+        "docs/evidence/2026-10-02-production-research/library/indie-games/DEEP-CASES.md"
+      ],
+      "license": "reference-only; copyrighted source; no redistribution or asset reuse permission inferred",
+      "use": "奖励限制和容量展示共同形成取舍；量测终局前多余步骤。",
+      "limits": "未亲玩、未核视频/图表像素；官方介绍只支持写明机制。分析建议不证明玩家效果。未核项目代码与页面现状。；不直接把矩形背包与相邻触发加入现有同名堆叠格；层数不同不能照搬9层。",
+      "ownership": "仅索引与自写分析；未拥有可复用游戏美术/音频/代码，未亲玩",
+      "status": "reference-only",
+      "systemIds": [
+        "SYS-04"
+      ],
+      "verifiedAt": "2026-10-02，复用既有作者来源",
+      "uiRequestIds": []
+    },
+    {
+      "id": "indie-cultist-simulator",
+      "name": "Cultist Simulator",
+      "type": "独立游戏方法参考",
+      "url": "https://store.steampowered.com/app/718670/Cultist_Simulator/",
+      "additionalUrls": [
+        "https://store.steampowered.com/app/718670/Cultist_Simulator/",
+        "https://weatherfactory.biz/the-labyrinth-under-the-skin/"
+      ],
+      "localEntry": [
+        "docs/evidence/2026-10-02-production-research/library/indie-games/records.json",
+        "docs/evidence/2026-10-02-production-research/library/indie-games/DEEP-CASES.md"
+      ],
+      "license": "reference-only; copyrighted source; no redistribution or asset reuse permission inferred",
+      "use": "不可施放原因解释结构规则，同时保留事件发现。",
+      "limits": "未亲玩、未核视频/图表像素；官方介绍只支持写明机制。分析建议不证明玩家效果。未核项目代码与页面现状。；模糊交互不是未知玩法的必要条件；不能用神秘文本替代合法性提示。",
+      "ownership": "仅索引与自写分析；未拥有可复用游戏美术/音频/代码，未亲玩",
+      "status": "reference-only",
+      "systemIds": [
+        "SYS-07"
+      ],
+      "verifiedAt": "2026-10-02，复用既有作者来源",
+      "uiRequestIds": []
+    },
+    {
+      "id": "indie-citizen-sleeper",
+      "name": "Citizen Sleeper",
+      "type": "独立游戏方法参考",
+      "url": "https://www.fellowtraveller.games/citizen-sleeper",
+      "additionalUrls": [
+        "https://www.fellowtraveller.games/citizen-sleeper",
+        "https://www.gamedeveloper.com/business/how-citizen-sleeper-was-inspired-by-tabletop-rpgs-and-gig-work"
+      ],
+      "localEntry": [
+        "docs/evidence/2026-10-02-production-research/library/indie-games/records.json",
+        "docs/evidence/2026-10-02-production-research/library/indie-games/DEEP-CASES.md"
+      ],
+      "license": "reference-only; copyrighted source; no redistribution or asset reuse permission inferred",
+      "use": "让玩家在节点前知道今日/本层资源预算，成功也能带可解释代价。",
+      "limits": "未亲玩、未核视频/图表像素；官方介绍只支持写明机制。分析建议不证明玩家效果。未核项目代码与页面现状。；剧情体量与贫困主题并非搜打撤可直接套用的内容。",
+      "ownership": "仅索引与自写分析；未拥有可复用游戏美术/音频/代码，未亲玩",
+      "status": "reference-only",
+      "systemIds": [
+        "SYS-07"
+      ],
+      "verifiedAt": "2026-10-02，复用既有作者来源",
+      "uiRequestIds": []
+    },
+    {
+      "id": "brogue-source",
+      "name": "Brogue CE 1.15.1完整固定提交源码研究",
+      "type": "完整游戏系统参考",
+      "url": "https://github.com/tmewett/BrogueCE/tree/1ba4240b7a928ddf0ffb772717bf1d433cd63804",
+      "localEntry": [
+        "docs/evidence/2026-10-02-production-research/library/source-study/README.md",
+        "docs/evidence/2026-10-02-production-research/library/source-study/downloads/BrogueCE-v1.15.1-source.zip",
+        "docs/evidence/2026-10-02-production-research/library/source-study/downloads/readable"
+      ],
+      "license": "源码AGPL-3.0-or-later；tiles.png CC BY-SA 4.0；其它资源未逐项核",
+      "use": "学习地图进入/重访、资源消耗顺序、目标取得/撤离/终局冻结分离",
+      "limits": "只借鉴方法，不复制源码或图块；未build/运行/亲玩；不可照搬饥饿或26层返程",
+      "ownership": "已拥有完整固定提交归档和9个阅读文件；不是已安装可运行发行包",
+      "status": "reference-only",
+      "systemIds": [
+        "SYS-01",
+        "SYS-02",
+        "SYS-03"
+      ],
+      "uiRequestIds": [
+        "UI-R05",
+        "UI-R09"
+      ]
+    },
+    {
+      "id": "local-art-pipeline",
+      "name": "现有NovelAI与人物/美术真源",
+      "type": "本项目资源生产入口",
+      "url": null,
+      "localEntry": [
+        "tools/nai_gen.py",
+        "tools/nai_style.py",
+        "tools/nai_guard.py",
+        "docs/character-bible",
+        "game/assets/asset-manifest.json",
+        "docs/asset-audit-debt.md"
+      ],
+      "license": "本项目已有资产逐项来源/授权见清单；已有授权文本不等于本轮核真，未登记或授权待确认项不声明商用通过",
+      "use": "按既有角色、厚涂配方和资产语义补小批缺口，保留实际生成参数与SHA",
+      "limits": "未核凭据/付费额度/第三方当前条款；本计划不调用服务，不用历史手册反推当前模型，也不自动重画全库",
+      "ownership": "已拥有脚本、已有图片和人物说明；外部服务可用性未核",
+      "status": "现有管线优先",
+      "systemIds": [
+        "SYS-13"
+      ],
+      "uiRequestIds": [
+        "UI-R06",
+        "UI-R07",
+        "UI-R08"
+      ]
+    }
+  ],
+  "tools": [
+    {
+      "id": "T-VERIFY",
+      "name": "现有workflow/质量门",
+      "entry": "npm run workflow；docs/WORKFLOW-TOOLS.md；docs/quality-gates.md",
+      "availability": "项目已有脚本",
+      "use": "按范围verify留证；混树staged --plan，遵守index与依赖守卫",
+      "limits": "本计划不执行全量gate/build；实际命令参数先看现有help/文档"
+    },
+    {
+      "id": "T-VITEST",
+      "name": "Vitest与jsdom",
+      "entry": "package.json；npm run test:target；tests/",
+      "availability": "package声明现有依赖；本计划不核整套运行环境",
+      "use": "收益、命令幂等、故障注入、cue和Agent状态定向测试",
+      "limits": "模块测试不等于实页/试听/好玩；不写镜像实现测试"
+    },
+    {
+      "id": "T-BROWSER",
+      "name": "Codex当前内置浏览器",
+      "entry": "当前平台浏览器工具；docs/quality-gates.md",
+      "availability": "下一轮实际验收时确认可用",
+      "use": "当前窗口真实输入、恢复、图像、信息与行为消费点",
+      "limits": "禁替换Edge/CDP/headless；不主动多尺寸；状态造档/调试须标干预"
+    },
+    {
+      "id": "T-AGENT",
+      "name": "现有SDT.Agent",
+      "entry": "game/src/agent/；现有Agent runner/record导出入口",
+      "availability": "项目源码已有",
+      "use": "固定输入配对、轨迹、停止原因、策略比较",
+      "limits": "未核具体命令前不编造CLI；不替代真人理解或平衡"
+    },
+    {
+      "id": "T-DATA",
+      "name": "现有数据/牌效/类型检查",
+      "entry": "npm run validate:data；npm run typecheck；npm run docs:compendium",
+      "availability": "package已有入口",
+      "use": "变更相关schema、迁移、过滤、图鉴一致性",
+      "limits": "不手改cards-sync；类型通过不等于玩法正确"
+    },
+    {
+      "id": "T-NARRATIVE",
+      "name": "现有Ink编译链",
+      "entry": "npm run narrative:compile；scripts/compile-narrative.mjs",
+      "availability": "inkjs在现有dependencies声明，已有编译入口；未另安装",
+      "use": "事件与短收束内容编译、稳定ID和命令提交对账",
+      "limits": "资料库inkjs未下载不代表项目没有依赖；不另换引擎"
+    },
+    {
+      "id": "T-ASSET",
+      "name": "增量资产审计",
+      "entry": "npm run assets:audit；scripts/asset-audit.cjs --check；docs/asset-audit-debt.md",
+      "availability": "项目已有且本次相邻工作已补强",
+      "use": "文件/清单/许可状态/路径/SHA检查，实际资源请求另验",
+      "limits": "不能重新冻结新债以绕过；通过不代表商业授权核真或美术质量通过"
+    },
+    {
+      "id": "T-NAI",
+      "name": "现有NovelAI Python工具",
+      "entry": "tools/nai_gen.py；tools/nai_style.py；tools/nai_guard.py",
+      "availability": "脚本存在；凭据、服务/额度未核",
+      "use": "保持人物身份与厚涂配方，小批图像变体与生成记录",
+      "limits": "不安装/付费调用；美术方向确认与实施授权分开；不输出token"
+    },
+    {
+      "id": "T-AUDIO",
+      "name": "Howler+现有音频库+jsfxr",
+      "entry": "game/src/audio/；npm run sfx:gen；game/scripts/jsfxr-generate.cjs",
+      "availability": "howler/jsfxr在package中声明，既有运行代码；本计划不安装",
+      "use": "统一cue接线、合成短反馈、样本试听与音量时序",
+      "limits": "离线howler源码只作参考；资产库存与可听结果分别验"
+    },
+    {
+      "id": "T-WEB",
+      "name": "现有web-up",
+      "entry": "npm run web；scripts/web-up.mjs",
+      "availability": "服务修复已有37测试/32图片证据",
+      "use": "身份明确的Vite服务和资源健康",
+      "limits": "本计划不再开进程；无主进程勿杀，按端口约定"
+    },
+    {
+      "id": "T-OPTIONAL-PBT",
+      "name": "fast-check（可选）",
+      "entry": "https://github.com/dubzzz/fast-check",
+      "availability": "资料库仅索引；未在当前package依赖中声明，未安装",
+      "use": "仅当复杂状态序列确有难复现失败时再评估性质测试",
+      "limits": "不是这轮必要前置；安装另依授权与范围"
+    },
+    {
+      "id": "T-OPTIONAL-IDB",
+      "name": "idb/Dexie（保留方案）",
+      "entry": "https://github.com/jakearchibald/idb；https://github.com/dexie/Dexie.js",
+      "availability": "仅索引；当前package未声明，未安装",
+      "use": "实际跨键缺陷且当前journal方案不足时比较事务迁移",
+      "limits": "不为架构整齐重做存档；需迁移回退与旧档设计"
+    }
+  ],
+  "uiRequestLinks": [
+    {
+      "id": "UI-R01",
+      "request": "token字阶",
+      "systemIds": [
+        "SYS-12"
+      ],
+      "resourceIds": [
+        "nng-visual-hierarchy",
+        "wcag-contrast-minimum"
+      ],
+      "kind": "制作请求，不是下载素材"
+    },
+    {
+      "id": "UI-R02",
+      "request": "共享壳",
+      "systemIds": [
+        "SYS-12"
+      ],
+      "resourceIds": [
+        "nng-visual-hierarchy",
+        "kenney-ui-pack"
+      ],
+      "kind": "制作请求；Kenney只作备选，不套整包"
+    },
+    {
+      "id": "UI-R03",
+      "request": "卡摘要",
+      "systemIds": [
+        "SYS-06",
+        "SYS-08",
+        "SYS-12"
+      ],
+      "resourceIds": [
+        "fp-itb-postmortem",
+        "fp-sts-metrics"
+      ],
+      "kind": "制作请求，不是下载素材"
+    },
+    {
+      "id": "UI-R04",
+      "request": "风险确认",
+      "systemIds": [
+        "SYS-03",
+        "SYS-04",
+        "SYS-12"
+      ],
+      "resourceIds": [
+        "fp-itb-postmortem",
+        "fp-xbox-user-research"
+      ],
+      "kind": "制作请求，不是下载素材"
+    },
+    {
+      "id": "UI-R05",
+      "request": "终局摘要",
+      "systemIds": [
+        "SYS-02",
+        "SYS-07"
+      ],
+      "resourceIds": [
+        "indie-cogmind",
+        "brogue-source"
+      ],
+      "kind": "制作请求，不是下载素材"
+    },
+    {
+      "id": "UI-R06",
+      "request": "图标",
+      "systemIds": [
+        "SYS-12",
+        "SYS-13"
+      ],
+      "resourceIds": [
+        "game-icons-net-risk-extraction-inventory",
+        "local-art-pipeline"
+      ],
+      "kind": "制作请求；来源素材须独立查许可与归因"
+    },
+    {
+      "id": "UI-R07",
+      "request": "首脑身份",
+      "systemIds": [
+        "SYS-09",
+        "SYS-13"
+      ],
+      "resourceIds": [
+        "local-art-pipeline"
+      ],
+      "kind": "制作请求；优先现有角色资产"
+    },
+    {
+      "id": "UI-R08",
+      "request": "收藏",
+      "systemIds": [
+        "SYS-05",
+        "SYS-12",
+        "SYS-13"
+      ],
+      "resourceIds": [
+        "local-art-pipeline",
+        "nng-visual-hierarchy"
+      ],
+      "kind": "制作请求；保留暖纸收藏语义"
+    },
+    {
+      "id": "UI-R09",
+      "request": "地图",
+      "systemIds": [
+        "SYS-04",
+        "SYS-12"
+      ],
+      "resourceIds": [
+        "fp-itb-postmortem",
+        "brogue-source"
+      ],
+      "kind": "制作请求；不直接移植地图代码"
+    },
+    {
+      "id": "UI-R10",
+      "request": "cue",
+      "systemIds": [
+        "SYS-14"
+      ],
+      "resourceIds": [
+        "howler",
+        "jsfxr",
+        "kenney-interface-sounds",
+        "mdn-autoplay"
+      ],
+      "kind": "制作请求；现有cue接线优先"
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "id": "production-research",
+  "date": "2026-10-02",
+  "owner": "Friday-Codex",
+  "goal": "补完可核查研究并交付详细中文总体改造计划、逐系统/逐页/资源工具分表与本地工作簿，不直接实施游戏改造",
+  "paths": [
+    "docs/evidence/2026-10-02-production-research",
+    "scripts/web-up.mjs",
+    "tests/web-up.test.js"
+  ],
+  "doneWhen": [
+    "资料八类覆盖并附来源许可适用性与实际资源清单，体积不超过20GB",
+    "现状诊断覆盖玩法内容工程美术UI音效文档，区分实证推断未核并给出核心缺口",
+    "分类索引可查阅、证据复核与额度最终记录完成",
+    "资料深读形成具体方法、反例和本项目实验；补独立游戏分群比较与深度案例",
+    "完成辅助四层链路与主图结局采证，正常策略、调试辅助及持久化边界分开记录",
+    "独立页面与重要弹层逐项登记、独立美术批注并标证据边界；所有功能按操作/规则族分析，动态或未执行项显式列出",
+    "交付详细中文总计划及逐系统/逐界面/资源工具分表，工作簿可筛选派工且结构与图像已验证"
+  ],
+  "stage": "partial",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "110基本界面+55变体逐项批注与对标字段，79操作规则族分析，ID/链接/静态检索核对；coverage-final-validation.json",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "新增空档02界面截图及来源留档，STS官方短循环有效采样限定M1；未修改游戏源码",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "19系统/110基本界面/55变体/79功能族/25资源/12工具；工作簿10页签渲染与保存后结构通过，输入SHA与本地链接通过；planning/delivery-validation.json",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "scripts/web-up.mjs及定向tests/web-up.test.js修复完成；37测试/lint通过；同源5336 PID21188保留，内置实页32图0破损；server-repair/",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "最新基本界面45图像依据、2过渡帧、62源码层、1渲染fixture；变体22图像或共享局部、33源码层。逐项计划齐，不是全量实页视觉验收。",
+    "本项目仅补战斗悬停动态采样；参考仅STS官方短循环限定M1，其余动态未实看；音频尚未试听。",
+    "四层链路含10普通战和1首脑调试胜利，不是自然通关/平衡样本；存档异常、动态注册、全部卡牌组合和研究所未全实测。",
+    "工作簿已渲染与ZIP/XML校验，未在Excel应用打开；file资料入口浏览器策略阻塞，检索逻辑以内存验证。",
+    "计划中的游戏改造未实施；已修服务入口不意味着操作系统重启后自动运行。"
+  ],
+  "updatedAt": "2026-10-02T15:44:29.619Z",
+  "deliveryStatus": {
+    "planning": "complete",
+    "library": "complete-with-recorded-limits",
+    "diagnosis": "complete-with-recorded-limits",
+    "allInterfaceLiveVisualAndMotion": "partial",
+    "serviceRepair": "complete"
+  },
+  "closeout": {
+    "editingReleased": true,
+    "unfinishedScope": "全量自然路径、视觉、动效、试听验证仍按逐项证据清单保留；本次新增详细计划已完成交付",
+    "head": "c6ee20684056240fd219fe179cacf5204a6445a4",
+    "remoteComparison": {
+      "source": "local upstream ref; no fetch",
+      "ahead": 49,
+      "behind": 0
+    },
+    "retainedService": {
+      "url": "http://127.0.0.1:5336/",
+      "pid": 21188,
+      "cwd": "D:/素材/代号柒/搜打撤",
+      "reason": "按老板当前使用需求保留；独立后台入口，日志node_modules/.cache/web-up-5336.log"
+    },
+    "gamePlanImplemented": false,
+    "committed": false
+  }
+}

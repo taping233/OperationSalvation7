@@ -1,0 +1,422 @@
+[
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/",
+    "bytes": 0
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/.github/",
+    "bytes": 0
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/.github/get-deps-mingw.ps1",
+    "bytes": 1046
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/.github/workflows/",
+    "bytes": 0
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/.github/workflows/build.yml",
+    "bytes": 4684
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/.github/workflows/test.yml",
+    "bytes": 1268
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/.gitignore",
+    "bytes": 184
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/BUILD.md",
+    "bytes": 2936
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/CHANGELOG.md",
+    "bytes": 33485
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/CONTRIBUTING.md",
+    "bytes": 62
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/LICENSE.txt",
+    "bytes": 34519
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/Makefile",
+    "bytes": 2157
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/README.md",
+    "bytes": 4037
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/bin/",
+    "bytes": 0
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/bin/assets/",
+    "bytes": 0
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/bin/assets/LICENSE.txt",
+    "bytes": 764
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/bin/assets/icon.png",
+    "bytes": 61867
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/bin/assets/tiles.bin",
+    "bytes": 147456
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/bin/assets/tiles.png",
+    "bytes": 405688
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/bin/brogue-cmd.bat",
+    "bytes": 247
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/bin/keymap.txt",
+    "bytes": 708
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/brogue",
+    "bytes": 117
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/changes/",
+    "bytes": 0
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/changes/.keep",
+    "bytes": 0
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/config.mk",
+    "bytes": 663
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/linux/",
+    "bytes": 0
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/linux/brogue-multiuser.sh",
+    "bytes": 610
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/linux/io.github.tmewett.brogue.metainfo.xml",
+    "bytes": 1024
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/linux/make-link-for-desktop.sh",
+    "bytes": 578
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/macos/",
+    "bytes": 0
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/macos/Brogue.icns",
+    "bytes": 242180
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/macos/Info.plist",
+    "bytes": 1230
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/macos/sdl2-deployment-target.patch",
+    "bytes": 532
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/make/",
+    "bytes": 0
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/make/brogue.mk",
+    "bytes": 154
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/make/o.mk",
+    "bytes": 443
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/make/os2.mk",
+    "bytes": 118
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/make/releases.mk",
+    "bytes": 1075
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/make/windows.mk",
+    "bytes": 73
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/os2/",
+    "bytes": 0
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/os2/brogue.def",
+    "bytes": 81
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/os2/icon.ico",
+    "bytes": 11312
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/os2/icon.rc",
+    "bytes": 22
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/",
+    "bytes": 0
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/brogue/",
+    "bytes": 0
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/brogue/Architect.c",
+    "bytes": 159636
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/brogue/Buttons.c",
+    "bytes": 14256
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/brogue/Combat.c",
+    "bytes": 74580
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/brogue/Dijkstra.c",
+    "bytes": 9038
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/brogue/Globals.c",
+    "bytes": 197232
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/brogue/Globals.h",
+    "bytes": 4795
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/brogue/GlobalsBase.c",
+    "bytes": 7487
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/brogue/GlobalsBase.h",
+    "bytes": 4599
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/brogue/Grid.c",
+    "bytes": 17698
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/brogue/IO.c",
+    "bytes": 201239
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/brogue/Items.c",
+    "bytes": 340209
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/brogue/Light.c",
+    "bytes": 14281
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/brogue/MainMenu.c",
+    "bytes": 53439
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/brogue/Math.c",
+    "bytes": 8691
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/brogue/Monsters.c",
+    "bytes": 191636
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/brogue/Movement.c",
+    "bytes": 97317
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/brogue/PowerTables.c",
+    "bytes": 29014
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/brogue/Recordings.c",
+    "bytes": 54158
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/brogue/Rogue.h",
+    "bytes": 143562
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/brogue/RogueMain.c",
+    "bytes": 51826
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/brogue/SeedCatalog.c",
+    "bytes": 13659
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/brogue/Time.c",
+    "bytes": 106177
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/brogue/Utilities.c",
+    "bytes": 1274
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/brogue/Wizard.c",
+    "bytes": 20136
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/platform/",
+    "bytes": 0
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/platform/PlatformDefines.h",
+    "bytes": 981
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/platform/curses-platform.c",
+    "bytes": 6931
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/platform/main.c",
+    "bytes": 11833
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/platform/null-platform.c",
+    "bytes": 806
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/platform/platform.h",
+    "bytes": 3397
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/platform/platformdependent.c",
+    "bytes": 23124
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/platform/sdl2-platform.c",
+    "bytes": 14227
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/platform/term.c",
+    "bytes": 23882
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/platform/term.h",
+    "bytes": 753
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/platform/tiles.c",
+    "bytes": 37088
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/platform/tiles.h",
+    "bytes": 349
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/platform/web-platform.c",
+    "bytes": 10067
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/variants/",
+    "bytes": 0
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/variants/GlobalsBrogue.c",
+    "bytes": 155241
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/variants/GlobalsBrogue.h",
+    "bytes": 973
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/variants/GlobalsBulletBrogue.c",
+    "bytes": 157524
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/variants/GlobalsBulletBrogue.h",
+    "bytes": 991
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/variants/GlobalsRapidBrogue.c",
+    "bytes": 155608
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/variants/GlobalsRapidBrogue.h",
+    "bytes": 988
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/test/",
+    "bytes": 0
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/test/compare_seed_catalog.py",
+    "bytes": 2186
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/test/run_regression_tests.py",
+    "bytes": 2524
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/test/seed_catalogs/",
+    "bytes": 0
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/test/seed_catalogs/seed_catalog_brogue.txt",
+    "bytes": 201205
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/test/seed_catalogs/seed_catalog_bullet_brogue.txt",
+    "bytes": 102041
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/test/seed_catalogs/seed_catalog_rapid_brogue.txt",
+    "bytes": 121856
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/test/update_seed_catalogs.py",
+    "bytes": 1518
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/tools/",
+    "bytes": 0
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/tools/bullet-points",
+    "bytes": 80
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/tools/gha-release",
+    "bytes": 523
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/tools/git-extra-version",
+    "bytes": 1137
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/windows/",
+    "bytes": 0
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/windows/brogue.exe.manifest",
+    "bytes": 495
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/windows/icon.ico",
+    "bytes": 56304
+  },
+  {
+    "path": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/windows/resources.rc",
+    "bytes": 70
+  }
+]

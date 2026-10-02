@@ -1,0 +1,287 @@
+diff --git a/搜打撤/scripts/gate-plan.mjs b/搜打撤/scripts/gate-plan.mjs
+--- a/搜打撤/scripts/gate-plan.mjs
++++ b/搜打撤/scripts/gate-plan.mjs
+@@ -67,7 +67,7 @@
+ export const SCRIPT_CONTRACT_TEST = 'tests/scripts-contract.test.js';
+ // Changes to checks themselves must not silently skip the checks they control.
+ export function isQualityConfigPath(p) {
+-  return /^(?:eslint|vitest|jsconfig|tsconfig)(?:\.[^/]+)?\.(?:js|mjs|cjs|json)$/.test(p)
++  return /^(?:eslint|vitest|vite|jsconfig|tsconfig)(?:\.[^/]+)?\.(?:js|mjs|cjs|json)$/.test(p)
+     || p === '.githooks/pre-commit';
+ }
+ export function isGateRelevantPath(p) {
+diff --git a/搜打撤/tests/quality-config.test.js b/搜打撤/tests/quality-config.test.js
+--- a/搜打撤/tests/quality-config.test.js
++++ b/搜打撤/tests/quality-config.test.js
+@@ -19,7 +19,7 @@
+     const [result] = await eslint.lintText("require('node:fs');", { filePath: 'scripts/fixture.mjs' });
+     expect(result.messages).toContainEqual(expect.objectContaining({ ruleId: 'no-undef' }));
+   });
+-  it.each(['eslint.config.js', 'jsconfig.json', 'jsconfig.strict-ui.json', 'tsconfig.json', 'vitest.config.mjs', '.githooks/pre-commit'])(
++  it.each(['eslint.config.js', 'jsconfig.json', 'jsconfig.strict-ui.json', 'tsconfig.json', 'vitest.config.mjs', 'vite.config.mjs', 'vite.config.cjs', '.githooks/pre-commit'])(
+     '%s 不能skip且仍纳入混树守卫', filePath => {
+       expect(isGateRelevantPath(filePath)).toBe(true);
+       expect(planForPaths([filePath], { root: process.cwd() }).mode).toBe('full');
+diff --git a/搜打撤/tools/nai_guard.py b/搜打撤/tools/nai_guard.py
+--- a/搜打撤/tools/nai_guard.py
++++ b/搜打撤/tools/nai_guard.py
+@@ -120,6 +120,7 @@
+ 
+         Hold the lock through the transport so a 429 is persisted before any
+         waiting process can send. Cooldown fails promptly; ordinary pacing waits.
++        Pace from completion, conservatively covering pre-dispatch save delays.
+         Reservations survive interruption and are never refunded speculatively.
+         """
+         if type(width) is not int or type(height) is not int or min(width, height) <= 0:
+@@ -154,8 +155,15 @@
+             rate['request_pending'] = True
+             _save(self.rate_file, rate)
+             status = request()
++            # The earlier reservation timestamp precedes fsync and dispatch.
++            # Completion is a provable later boundary, so even a slow save or
++            # descheduled process cannot shorten the actual request interval.
++            # Leave the durable pending marker intact if the clock fails.
++            completed_at = self.clock()
++            rate['next_request_at'] = max(rate['next_request_at'],
++                                          math.ceil(completed_at + self.interval))
++            if str(status) == '429':
++                rate['cooldown_until'] = math.ceil(completed_at + self.cooldown)
+             rate['request_pending'] = False
+-            if str(status) == '429':
+-                rate['cooldown_until'] = math.ceil(self.clock() + self.cooldown)
+             _save(self.rate_file, rate)
+             return status
+diff --git a/搜打撤/tools/nai_gen.py b/搜打撤/tools/nai_gen.py
+--- a/搜打撤/tools/nai_gen.py
++++ b/搜打撤/tools/nai_gen.py
+@@ -27,6 +27,7 @@
+ import os
+ import random
+ import subprocess
++import tempfile
+ import zipfile
+ from pathlib import Path
+ from nai_guard import GuardError, RequestGuard
+@@ -118,9 +119,6 @@
+     out.parent.mkdir(parents=True, exist_ok=True)
+     body = build_payload(prompt, uc, char_prompt, width, height, seed, model)
+     seed = body['parameters']['seed']
+-    payload_file = out.with_suffix('.payload.json')
+-    zip_file = out.with_suffix('.zip')
+-    payload_file.write_text(json.dumps(body, ensure_ascii=False), encoding='utf-8')
+ 
+     # 双通道互试（09-24）：Clash/TUN 起来后直连常被掐（000），自动换 socks5h 7890；
+     # 两条都 000 才报网络瞬断。顺序与 [[nai-image-endpoint-network-quirks]] 一致。
+@@ -129,29 +127,40 @@
+         LARGE_USAGE_FILE.parent, free_px_cap=FREE_PX_CAP, quota=LARGE_QUOTA_PER_DAY)
+     transport = transport if transport is not None else _curl_request
+     token = token if token is not None else load_token()
+-    status = ''
+-    for idx, channel in enumerate(channels):
+-        try:
+-            status = str(guard.perform(width, height, lambda: transport(payload_file, zip_file, token, channel)))
+-        except (GuardError, OSError) as error:
+-            raise SystemExit(str(error)) from error
+-        print(f'HTTP {status} seed={seed} {width}x{height} channel={idx}({channel[0]})', flush=True)
+-        if status != '000':
+-            break
+-    if status == '403':
+-        raise SystemExit('NAI HTTP 403：token 失效，立即停手上报老板')
+-    if status == '429':
+-        raise SystemExit('NAI HTTP 429：冷却 15 分钟后重跑')
+-    if status == '000':
+-        raise SystemExit('NAI HTTP 000：网络瞬断，稍候重试')
+-    if status not in ('200', '201'):
+-        raise SystemExit(f'Generation failed (HTTP {status})')
++    # Output names can be shared by concurrent calls (including the default).
++    # Keep each call's payload, response and verification private; only publish
++    # a fully verified image to the requested output. Clean up only this call's
++    # temporary directory, never existing sibling payload/ZIP artifacts.
++    with tempfile.TemporaryDirectory(prefix=out.stem + '.nai-', dir=str(out.parent)) as temporary:
++        temporary = Path(temporary)
++        payload_file = temporary / 'payload.json'
++        zip_file = temporary / 'response.zip'
++        image_file = temporary / 'image.png'
++        payload_file.write_text(json.dumps(body, ensure_ascii=False), encoding='utf-8')
++        status = ''
++        for idx, channel in enumerate(channels):
++            try:
++                status = str(guard.perform(width, height, lambda: transport(payload_file, zip_file, token, channel)))
++            except (GuardError, OSError) as error:
++                raise SystemExit(str(error)) from error
++            print(f'HTTP {status} seed={seed} {width}x{height} channel={idx}({channel[0]})', flush=True)
++            if status != '000':
++                break
++        if status == '403':
++            raise SystemExit('NAI HTTP 403：token 失效，立即停手上报老板')
++        if status == '429':
++            raise SystemExit('NAI HTTP 429：冷却 15 分钟后重跑')
++        if status == '000':
++            raise SystemExit('NAI HTTP 000：网络瞬断，稍候重试')
++        if status not in ('200', '201'):
++            raise SystemExit(f'Generation failed (HTTP {status})')
+ 
+-    with zipfile.ZipFile(zip_file) as z:
+-        out.write_bytes(z.read(z.namelist()[0]))
+-    with Image.open(out) as im:
+-        assert im.size == (width, height), im.size
+-        im.verify()
++        with zipfile.ZipFile(zip_file) as z:
++            image_file.write_bytes(z.read(z.namelist()[0]))
++        with Image.open(image_file) as im:
++            assert im.size == (width, height), im.size
++            im.verify()
++        os.replace(str(image_file), str(out))
+     print(f'SAVED {out} {width}x{height} {out.stat().st_size} bytes', flush=True)
+     return str(out), seed
+ 
+diff --git a/搜打撤/tools/tests/test_nai_guard.py b/搜打撤/tools/tests/test_nai_guard.py
+--- a/搜打撤/tools/tests/test_nai_guard.py
++++ b/搜打撤/tools/tests/test_nai_guard.py
+@@ -4,6 +4,7 @@
+ import json
+ import os
+ import socket
++import stat
+ import subprocess
+ import sys
+ import tempfile
+@@ -11,11 +12,14 @@
+ import types
+ import unittest
+ import zipfile
++from concurrent.futures import ThreadPoolExecutor
+ from pathlib import Path
++from threading import Barrier
+ from unittest.mock import MagicMock, patch
+ 
+ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+ import nai_gen
++import nai_guard
+ from nai_guard import GuardError, RequestGuard
+ 
+ EPOCH = 1_790_928_000
+@@ -96,6 +100,56 @@
+         self.assertEqual(len(self.clock.waits), 2)
+         self.assertFalse(self.guard.usage_file.exists())
+ 
++    def test_delayed_reservation_save_cannot_shorten_dispatch_interval(self):
++        starts = []
++        save = nai_guard._save
++
++        def delayed_save(path, value):
++            save(path, value)
++            if path == self.guard.rate_file and value['request_pending'] and not starts:
++                self.clock.now += 10
++
++        def request():
++            starts.append(self.clock.time())
++            self.clock.now += 2
++            return '200'
++
++        with patch('nai_guard._save', side_effect=delayed_save):
++            self.guard.perform(832, 1216, request)
++            make_guard(self.directory, self.clock).perform(832, 1216, request)
++        self.assertEqual(starts, [EPOCH + 10, EPOCH + 57])
++        self.assertGreaterEqual(starts[1] - starts[0], 45)
++
++    def test_completion_clock_failure_leaves_fail_closed_pending_state(self):
++        self.guard.clock = MagicMock(side_effect=[EPOCH, RuntimeError('offline clock failure')])
++        request = MagicMock(return_value='200')
++        with self.assertRaisesRegex(RuntimeError, 'clock failure'):
++            self.guard.perform(832, 1216, request)
++        request.assert_called_once_with()
++        self.assertTrue(json.loads(self.guard.rate_file.read_text(encoding='utf-8'))['request_pending'])
++        with self.assertRaisesRegex(GuardError, 'interrupted'):
++            make_guard(self.directory, self.clock).perform(
++                832, 1216, lambda: self.fail('failed completion clock sent another request'))
++
++    @unittest.skipIf(os.name == 'nt', 'POSIX directory fsync contract')
++    def test_posix_file_and_directory_fsync_precede_dispatch_and_finalize_response(self):
++        synced = []
++        fsync = os.fsync
++
++        def observe_fsync(descriptor):
++            mode = os.fstat(descriptor).st_mode
++            synced.append('directory' if stat.S_ISDIR(mode) else 'file')
++            self.assertTrue(stat.S_ISDIR(mode) or stat.S_ISREG(mode))
++            return fsync(descriptor)
++
++        def request():
++            self.assertEqual(synced, ['file', 'directory'] * 2)
++            return '200'
++
++        with patch('nai_guard.os.fsync', side_effect=observe_fsync):
++            self.guard.perform(2048, 1152, request)
++        self.assertEqual(synced, ['file', 'directory'] * 3)
++
+     def test_shared_429_blocks_new_instance_without_sending_or_charging(self):
+         self.assertEqual(self.guard.perform(2048, 1152, lambda: '429'), '429')
+         before = self.guard.usage_file.read_bytes()
+@@ -261,6 +315,66 @@
+             nai_gen.generate_image('test', out=out, seed=42, guard=make_guard(self.directory, self.clock),
+                 transport=lambda *args: self.fail('429 retry sent request'), token='offline-fake-token')
+ 
++    def test_concurrent_same_output_keeps_mixed_dimensions_and_archives_private(self):
++        output = self.directory / 'same-output.png'
++        old_payload = output.with_suffix('.payload.json')
++        old_archive = output.with_suffix('.zip')
++        old_payload.write_bytes(b'existing payload')
++        old_archive.write_bytes(b'existing archive')
++        barrier = Barrier(2)
++        paths = []
++        images = []
++
++        def image_open(path):
++            dimensions = json.loads(Path(path).read_text(encoding='utf-8'))['dimensions']
++            image = MagicMock()
++            image.size = tuple(dimensions)
++            image.__enter__.return_value = image
++            images.append(image)
++            return image
++
++        def generate(dimensions, seed):
++            guard = make_guard(self.directory, FakeClock())
++
++            class SynchronizedGuard:
++                def perform(self, width, height, request):
++                    # Both payloads exist before either dispatches. Shared paths
++                    # deterministically replace one caller's dimensions here.
++                    barrier.wait(timeout=10)
++                    return guard.perform(width, height, request)
++
++            def transport(payload, archive, token, channel):
++                body = json.loads(payload.read_text(encoding='utf-8'))
++                self.assertEqual((body['parameters']['width'], body['parameters']['height']), dimensions)
++                self.assertEqual(body['parameters']['seed'], seed)
++                paths.append((payload, archive))
++                image = json.dumps({'dimensions': dimensions, 'seed': seed}).encode('utf-8')
++                with zipfile.ZipFile(archive, 'w') as zipped:
++                    zipped.writestr('image.png', image)
++                return '200'
++
++            return nai_gen.generate_image('test', width=dimensions[0], height=dimensions[1], seed=seed,
++                out=output, guard=SynchronizedGuard(), transport=transport, token='offline-fake-token')
++
++        with patch.object(sys.modules['PIL'].Image, 'open', side_effect=image_open):
++            with ThreadPoolExecutor(max_workers=2) as workers:
++                futures = [workers.submit(generate, dimensions, seed) for dimensions, seed in
++                           (((832, 1216), 42), ((2048, 1152), 43))]
++                results = [future.result(timeout=20) for future in futures]
++        self.assertEqual(results, [(str(output), 42), (str(output), 43)])
++        self.assertEqual(len(paths), 2)
++        self.assertNotEqual(paths[0][0], paths[1][0])
++        self.assertNotEqual(paths[0][1], paths[1][1])
++        self.assertTrue(all(not path.exists() for pair in paths for path in pair))
++        self.assertEqual(list(self.directory.glob('same-output.nai-*')), [])
++        self.assertEqual(old_payload.read_bytes(), b'existing payload')
++        self.assertEqual(old_archive.read_bytes(), b'existing archive')
++        day = datetime.datetime.fromtimestamp(EPOCH).date().isoformat()
++        self.assertEqual(json.loads(self.guard.usage_file.read_text(encoding='utf-8'))[day], 1)
++        self.assertIn(json.loads(output.read_text(encoding='utf-8'))['seed'], (42, 43))
++        for image in images:
++            image.verify.assert_called_once_with()
++
+ 
+ if __name__ == '__main__':
+     if len(sys.argv) == 5 and sys.argv[1] == '--offline-worker':

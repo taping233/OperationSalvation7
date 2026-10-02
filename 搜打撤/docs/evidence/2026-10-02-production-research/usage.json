@@ -1,0 +1,68 @@
+{
+  "recordedAt": "2026-10-02T15:44:29.619Z",
+  "source": "mcp__codex_app__get_usage_limits",
+  "limitId": "codex",
+  "windowDurationMins": 10080,
+  "observations": [
+    {
+      "stage": "handoff",
+      "usedPercent": 37,
+      "remainingPercent": 63
+    },
+    {
+      "stage": "mid-research",
+      "usedPercent": 39,
+      "remainingPercent": 61
+    },
+    {
+      "stage": "closing",
+      "usedPercent": 42,
+      "remainingPercent": 58
+    },
+    {
+      "stage": "approved-continuation",
+      "usedPercent": 49,
+      "remainingPercent": 51
+    },
+    {
+      "stage": "final-completed",
+      "usedPercent": 55,
+      "remainingPercent": 45
+    },
+    {
+      "stage": "interface-coverage-start",
+      "usedPercent": 55,
+      "remainingPercent": 45
+    },
+    {
+      "stage": "coverage-resumed",
+      "usedPercent": 63,
+      "remainingPercent": 37
+    },
+    {
+      "stage": "coverage-partial-handoff",
+      "usedPercent": 71,
+      "remainingPercent": 29
+    },
+    {
+      "stage": "direct-evidence-continuation",
+      "usedPercent": 71,
+      "remainingPercent": 29
+    },
+    {
+      "stage": "detailed-plan-start",
+      "usedPercent": 81,
+      "remainingPercent": 19
+    },
+    {
+      "stage": "detailed-plan-delivered",
+      "usedPercent": 91,
+      "remainingPercent": 9
+    }
+  ],
+  "resetsAt": 1791334892,
+  "note": "账户级共享额度，取整且可能延迟；差额不是本任务精确计费。沿用老板允许更多额度继续改善的授权，未修改账户或全局配置。",
+  "approvedCapUsedPercent": null,
+  "approval": "老板明确：如果更多额度能做得更好，就继续做；未另指定硬上限",
+  "previousCapUsedPercent": 70
+}

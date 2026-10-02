@@ -1,0 +1,52 @@
+{
+  "title": "玩法与内容构成诊断",
+  "head": "c6ee20684056240fd219fe179cacf5204a6445a4",
+  "scope": "只读源码、复用已核对SHA的历史图实验、当前真实函数纯内存A/B；本代理未开浏览器或读写玩家存档，另定向核对主会话本轮首战/教程/返图AX证据",
+  "report": "REPORT.md",
+  "fingerprints": "source-snapshot.json",
+  "findings": [
+    {
+      "id": "GP-01",
+      "title": "清空节点往返仍增加撤离经验",
+      "priority": "P1",
+      "evidenceClass": "当前源码 + 真实函数纯内存A/B",
+      "claim": "当前生成图battle↔fire已清空双向边往返20次，真实撤离begin结算XP20→60，HP/币/口粮/牌不变。",
+      "evidence": ["game/src/run/game.run.flow.js:35-73,113-122", "game/src/hub/extraction.commands.js:52-95,175-181", "probe.json"],
+      "counterEvidence": "行动本身只记统计；须正常清空节点并成功撤离才兑现奖励，时间/输入有成本。结算调用未检验合法出口，探针隔离此先决条件，不表示能在首层直接撤离获利；无实页合法撤离、存档事务或完整全局循环。",
+      "globalCostReview": ["game/src/run/game.session.board.js:8-24", "game/src/hub/base-meta.commands.js:90-92", "game/src/run/game.session.js:189-233", "game/src/game.boot.js:480-484"],
+      "recommendation": "绑定首次有效探索/结算或封顶，保留回头路；用同有效路线A/B与实页成功撤离/重载验证。"
+    },
+    {
+      "id": "GP-02",
+      "title": "首脑胜利第五层指引错误，主地图终局共用通用撤离页",
+      "priority": "P2",
+      "evidenceClass": "当前源码事实；终局感不足为体验推断",
+      "claim": "四层首脑后机械收口存在，但胜利日志指向第五层；主图结束无独立叙事演出，研究所结局不可混算。",
+      "evidence": ["game/src/hub/game.bag.settle.js:294-308", "game/src/run/game.run.altar.js:717-738,951-978", "game/src/run/map-generator.js:8", "game/src/run/game.nest.js:608-620", "docs/production/project/CHARTER.md:24,42"],
+      "counterEvidence": "有首脑击破标题、传说奖励、终局点放行、clear统计，不能称为没有结局或胜利反馈。未实页走完四层。",
+      "recommendation": "先统一第四层指引，再补章程已要求的清晰通关结算与简短收束；研究所不在本轮完整版本验收内。"
+    },
+    {
+      "id": "GP-03",
+      "title": "首次成功撤离选择在第三层才出现",
+      "priority": "P2-design",
+      "evidenceClass": "当前源码 + SHA匹配历史图实验 + 历史接力实页；影响为推断",
+      "claim": "前两层无成功撤离，第三层需要献祭3牌；100种子旧样本紧急出口距开局图距离17–27步。",
+      "evidence": ["game/src/run/game.run.altar.js:679-710", "docs/evidence/2026-10-02-seven-departments-review/v2/quant-map.json", "docs/evidence/2026-09-30-vertical-slice-review/continuation-result.md:3-31"],
+      "counterEvidence": "历史正常接力实页完成第三层撤离及实收；出口晚是设计取舍而非已证实缺陷，路径距离不等于实际时长或必经战斗数。",
+      "recommendation": "先采首次成功/失败路径与消耗规则理解，再决定出口/费用/教学变化。"
+    },
+    {
+      "id": "GP-04",
+      "title": "地图配额和卡库统计缺乏统一口径",
+      "priority": "P2",
+      "evidenceClass": "当前源码/文档 + 当前内存库盘点 + 历史实页",
+      "claim": "rules写13/15/17/15，当前图为7/12/17/17；新库迁移272、历史实页271、原始切片259不可直接比较质量。",
+      "evidence": ["docs/rules.md:8", "game/src/run/map-generator.js:8", "inventory.json", "docs/evidence/2026-10-02-seven-departments-review/v2/browser-evidence.json:8-10"],
+      "counterEvidence": "普通随机池、职业池、能力获取和普通战过滤均有实际代码；目录数量不等同战斗可玩内容，单卡差异原因未核。",
+      "recommendation": "生成可读规则摘要并明确原始/迁移/实页口径；不以数量追加替代体验验证。"
+    }
+  ],
+  "established": ["普通战即时随身牌与首脑编组抽牌存在真实差别", "消耗口袋/复原/带回概率与背包形成实际取舍", "能力卡有碎片兑换与觉醒渠道", "三段跨局故事及终段分支真实接入事件节点", "第四层主图有终局撤离和返回基地收口"],
+  "unverified": ["当前版本第四层真人通关", "合法实页往返后持久化XP实收", "各职业获取率与构筑平衡", "长期重复游玩体验", "272与271单卡差异", "全部事件/宠物/成就可达性"]
+}

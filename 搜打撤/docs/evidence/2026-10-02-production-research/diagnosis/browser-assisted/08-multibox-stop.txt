@@ -1,0 +1,65 @@
+Browser tab: 9, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5336/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/
+	1 container viewport
+		2 button 背包 16/16 满, ID: bagBtnFloat
+			3 text 背包
+			4 text 16/16
+			62 text 满
+		6 container archive 搜刮！职业·密封物资箱 · 第 2 / 2, ID: overlay
+			7 container
+				8 button Description: 关闭, ID: ovCloseX
+				9 heading archive 搜刮！职业·密封物资箱 · 第 2 / 2, Value: 2, ID: ovTitle
+					10 image archive
+					11 text  搜刮！职业·密封物资箱 · 第 2 / 2
+				12 container ovBody
+					13 text FIELD SUPPLY / 02
+					14 text 选一件，继续前行。
+					15 text 背包占用
+					16 container
+						17 text 16  / 16
+					18 container
+						19 text 黑色职业宝箱：只掉落 职业卡牌
+					20 container
+						21 text 从随机  3  张卡牌中选择  1  张 · 另含 
+						22 image coin
+						23 text 1  币 ·  职业卡打出即消散（不进消耗口袋）
+					24 container
+						25 button 收取卡牌：偷袭
+							26 container
+								27 text 0
+								28 image 偷袭
+								29 text 偷袭 武术 · 无专属 攻（ -1 ）。
+								30 image swords
+								31 text -1
+								32 image coin
+								33 text 3
+							34 image coin
+							35 text 3
+						36 button 收取卡牌：潜匿
+							37 container
+								38 text 1
+								39 image 潜匿
+								40 text 潜匿 武术 · 无专属
+								41 image cards
+								42 text 抽 1 进入潜行状态  1 回合 ，抽 1 张牌。
+								43 image coin
+								44 text 3
+							45 image coin
+							46 text 3
+						47 button 收取卡牌：鬼魅之刃
+							48 container
+								49 text 1
+								50 image 鬼魅之刃
+								51 text 鬼魅之刃 武术 · 无专属
+								52 image cards
+								53 text 抽 2 攻（ +1 ），破除隐身时 伤害 +2 ，并抽  2  张牌。
+								54 image swords
+								55 text +1
+								56 image coin
+								57 text 3
+							58 image coin
+							59 text 3
+					60 text 点击一张收下 · 未收取的卡牌将散落
+					61 button 只收金币并离开
+
+The focused UI element is 0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/

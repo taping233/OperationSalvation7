@@ -1,0 +1,22 @@
+Browser tab: 9, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5336/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/
+	1 container viewport
+		2 button 背包 15/16, ID: bagBtnFloat
+			3 text 背包
+			4 text 15/16
+		5 container
+			6 text FIELD ENCOUNTER 04 / 04
+			7 heading demon 首脑巢穴 · 决战, Value: 2
+				8 image demon
+				9 text  首脑巢穴 · 决战
+			10 text 本层首脑： 异能领主（8-48）  · 词缀【元素庇幕】偶数回合减免所有伤害（破甲可克制）——胜利后终局撤离点放行
+			11 button 编组牌库，迎战首脑 从背包选 15 张招式/装备/能力卡，附加 5 张初始攻击（混沌之眼可多带 5 张） ▸
+				12 text 编组牌库，迎战首脑
+				13 text 从背包选 15 张招式/装备/能力卡，附加 5 张初始攻击（混沌之眼可多带 5 张）
+				14 text ▸
+			15 button 暂不挑战 留在当前格子（本格不消耗，可再来） ▸
+				16 text 暂不挑战
+				17 text 留在当前格子（本格不消耗，可再来）
+				18 text ▸
+
+The focused UI element is 11 button 编组牌库，迎战首脑 从背包选 15 张招式/装备/能力卡，附加 5 张初始攻击（混沌之眼可多带 5 张） ▸

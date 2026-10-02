@@ -1,0 +1,23 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import crypto from 'node:crypto';
+const root = process.cwd();
+const read = p => fs.readFileSync(path.join(root,p),'utf8');
+const hash = p => crypto.createHash('sha256').update(fs.readFileSync(path.join(root,p))).digest('hex');
+function files(dir, suffix) { return fs.readdirSync(path.join(root,dir),{withFileTypes:true}).flatMap(e=>e.isDirectory()?files(path.join(dir,e.name),suffix):[path.join(dir,e.name)]).filter(p=>p.endsWith(suffix)); }
+function allFiles(dir) { return fs.readdirSync(path.join(root,dir),{withFileTypes:true}).flatMap(e=>e.isDirectory()?allFiles(path.join(dir,e.name)):[path.join(dir,e.name)]); }
+const sources=files('game/src','.js');
+const sourceStats=sources.map(p=>({path:p,lines:read(p).split(/\r?\n/).length,sha256:hash(p)})).sort((a,b)=>b.lines-a.lines);
+const check=read('scripts/check-types.mjs');
+const configNames=[...check.matchAll(/'((?:jsconfig)[^']+\.json)'/g)].map(m=>m[1]);
+const explicit=new Set(); const configDetails=[];
+for(const p of configNames){const j=JSON.parse(read(p)); const list=j.files??j.include??[]; const js=list.filter(x=>x.endsWith('.js')); js.forEach(x=>explicit.add(x)); configDetails.push({path:p,strict:j.compilerOptions?.strict===true,checkJs:j.compilerOptions?.checkJs===true,explicitFiles:list.length,jsFiles:js.length});}
+const loose=JSON.parse(read('jsconfig.json'));
+const testFiles=files('tests','.test.js');
+const status=(process.env.TASK_STATUS??'').trim().split(/\r?\n/).filter(Boolean);
+const codeDirty=status.filter(s=>/^\s?[MADRCU?]{1,2}\s+(game\/src|game\/data|scripts|tests|jsconfig|package\.json|vite\.config)/.test(s));
+const hist=JSON.parse(read('docs/evidence/2026-10-02-seven-departments-review/measurements.json'));
+const histChecks=hist.inputs.map(x=>({path:x.path,recordedSha256:x.sha256,currentSha256:fs.existsSync(path.join(root,x.path))?hash(x.path):null,matches:fs.existsSync(path.join(root,x.path))&&hash(x.path)===x.sha256}));
+const hashManifest=[...allFiles('game/src'),...allFiles('game/data').filter(p=>p.endsWith('.json')&&!p.includes('assets/')),'package.json','package-lock.json','jsconfig.json',...configNames,'scripts/check-types.mjs','scripts/acceptance-gate.mjs','eslint.config.js','vite.config.js'].filter(p=>fs.existsSync(path.join(root,p))).sort().map(p=>({path:p,sha256:hash(p)}));
+const out={generatedAt:new Date().toISOString(),head:process.env.TASK_HEAD??null,branchStatus:process.env.TASK_BRANCH??null,worktreeStatusEntries:status.length,dirtyInCodeOrGateScope:codeDirty,source:{jsFiles:sources.length,physicalLines:sourceStats.reduce((a,b)=>a+b.lines,0),filesAtLeast300Lines:sourceStats.filter(x=>x.lines>=300).length,filesAtLeast600Lines:sourceStats.filter(x=>x.lines>=600).length,largest:sourceStats.slice(0,20),strictJsUnion:explicit.size,strictFileRatioPercent:+(100*explicit.size/sources.length).toFixed(1),strictConfigs:configDetails,baseJsconfig:{strict:loose.compilerOptions?.strict,checkJs:loose.compilerOptions?.checkJs,explicitFiles:(loose.include??[]).length}},tests:{testFiles:testFiles.length},historicalMeasurements:{path:'docs/evidence/2026-10-02-seven-departments-review/measurements.json',measuredAt:hist.measuredAt,recordedSource:{jsFiles:hist.source.jsFiles,physicalLines:hist.source.physicalLines,strictExplicitFiles:hist.source.strictExplicitFiles,strictSourceJsFiles:hist.source.strictSourceJsFiles,strictSourceJsRatio:hist.source.strictSourceJsRatio},assets:{warnings:hist.assets?.warnings,counts:hist.assets?.counts},inputsChecked:histChecks,matchedInputs:histChecks.filter(x=>x.matches).length,totalInputs:histChecks.length,agentHistoricalBatch:hist.latestHistoricalBatch},agentHistoricalArtifacts:['output/r24-T2-challenger/summary.json','output/r24-T2-champion/summary.json'].map(p=>{const j=JSON.parse(read(p));return {path:p,sha256:hash(p),runs:j.total,overall:j.overall,hasProvenance:!!j.meta?.provenance};}),testAndAcceptance:{matrixPath:'docs/production/qa/ACCEPTANCE-MATRIX.md',currentlyUnexecutedRows:read('docs/production/qa/ACCEPTANCE-MATRIX.md').match(/\| (?:P|A)\d\d \|[^\n]*\| 未执行 \|/g)?.length??null},hashManifest};
+const outPath='docs/evidence/2026-10-02-production-research/diagnosis/engineering/measurements.json'; fs.writeFileSync(path.join(root,outPath),JSON.stringify(out,null,2)+'\n'); console.log(JSON.stringify({outPath,source:out.source,tests:out.tests,matchedHistoricalInputs:out.historicalMeasurements.matchedInputs,totalHistoricalInputs:out.historicalMeasurements.totalInputs,dirtyInCodeOrGateScope:codeDirty.length,agentMetrics:out.agentHistoricalArtifacts.map(x=>({path:x.path,outcomes:x.overall.outcomes,extractRate:x.overall.extractRate,clearRate:x.overall.clearRate}))},null,2));

@@ -1,0 +1,46 @@
+Browser tab: 10, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5336/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/
+	1 container viewport
+		2 button 背包 3/16, ID: bagBtnFloat
+			3 text 背包
+			4 text 3/16
+		5 container swords 遭遇战 · 第 1 回合 · bag 战斗背包, ID: overlay
+			6 container
+				7 button Description: 关闭, ID: ovCloseX
+				8 heading swords 遭遇战 · 第 1 回合 · bag 战斗背包, Value: 2, ID: ovTitle
+					14 image swords
+					15 text  遭遇战 · 第 1 回合 · 
+					16 image bag
+					17 text  战斗背包
+				13 container ovBody
+					18 text 点击道具卡直接使用——回复类 / 能源结晶 / 神秘药水 / 口粮木材战斗内生效，其余道具战后回地图再使
+					19 text 背包里没有道具卡……（道具卡可从宝箱 / 商店获得）
+					20 container
+						21 image lock
+						22 text  安全格  0/2 （空位 2）——点击卡牌把整组存入，撤离失败时只有安全格里的卡牌会抢运回基地
+					23 container
+						24 text 1
+						25 image 潜匿
+						26 text 潜匿
+						27 text 武术 · 无专属
+						28 image cards
+						29 text 抽 1 进入潜行状态  1 回合 ，抽 1 张牌。
+						30 container
+							31 image coin
+							32 text 3
+						33 image lock
+						34 text 存入
+					35 container
+						36 text 0
+						37 image 江湖救急-改
+						38 text 江湖救急-改
+						39 text 武术 · 无专属
+						40 text 随机获得 3 张临时卡牌， 回合开始时 将其 消耗 。
+						41 container
+							42 image coin
+							43 text 3
+						44 image lock
+						45 text 存入
+					46 button ↩ 返回战斗（B）
+
+The focused UI element is 0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/

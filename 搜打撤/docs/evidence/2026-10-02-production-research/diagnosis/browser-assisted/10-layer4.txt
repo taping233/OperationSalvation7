@@ -1,0 +1,221 @@
+Browser tab: 9, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5336/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/
+	1 container app
+		2 container sidebar
+			3 image 无
+			4 container statsPanel
+				5 image Description: 已探明区域简图, ID: miniMap
+				6 text 行动 · 价值
+				153 text 27
+				8 text /
+				9 text 0
+			10 container routePanel
+				154 text 下一步 · 2 条路线 最终区域 · 经祭坛挑战首脑
+				12 container 可前往的相邻节点
+					155 button 遭遇战（节点 2）
+						156 text 遭遇战
+						157 text 准备迎敌 · 胜利后搜刮
+					158 button 未知事件（节点 4）
+						159 text 未知事件
+						160 text 新的机遇，也可能有代价
+				19 text 点击路线或地图亮环前进
+		20 container viewport
+			21 image game
+			22 container Description: 远征章节, ID: expeditionChapter
+				161 text EXPEDITION / 04
+				162 content list
+					163 container
+						164 text 01 第1层 · 外围荒地
+					165 container
+						166 text 02 第2层 · 风雪哨线
+					167 container
+						168 text 03 第3层 · 冻土遗迹
+					169 container
+						170 text 04 第4层 · 污染核心
+			33 container resHud
+				171 text 5
+				35 text 4
+			36 container topBtns
+				37 button btnLocate
+				38 button btnHome
+				39 button btnHelp
+				40 button btnMute
+				41 container
+					42 text 当前生命
+					43 container hpText
+						172 text 38 /38
+			45 button 背包 15/16, ID: bagBtnFloat
+				46 text 背包
+				173 text 15/16
+			49 container Description: 行动记录, ID: logPanel
+				50 button ▾ 行动记录, ID: logToggle
+					174 text ▾ 
+					52 text 行动记录
+				53 container log
+					175 container
+						176 text —— 置身  第4层 · 污染核心 （第4层入口）——
+					177 container
+						178 text 穿过隔离闸门 →  第4层 · 污染核心
+					179 container
+						180 image trash
+						181 text  已丢弃【 净化箭 】×1（无法取回）
+					182 container
+						183 text 获得  2  币（现有 5）
+					184 container
+						185 image archive
+						186 text  获得卡牌【 草甲 】
+					187 container
+						188 image archive
+						189 text  回收了 1  个密封物资箱
+					190 container
+						191 image heart
+						192 text  强化药剂生效：生命上限 +3（38/38）
+					193 container
+						194 image dice
+						195 text  触发事件【 高压急救 】· 生命上限 +3，并回复 3 点生命。
+					196 container
+						197 image heart
+						198 text  一罐能量饮料下肚，回复 6 点生命
+					199 container
+						200 image heart
+						201 text  生命值已满
+					202 container
+						203 image dice
+						204 text  触发事件【 污染空投箱 】· 从木材、口粮、能量饮料、随机药水中选择一项。
+					205 container
+						206 image trash
+						207 text  已丢弃【 致命穿刺 】×1（无法取回）
+					208 container
+						209 image trash
+						210 text  已丢弃【 净化箭 】×1（无法取回）
+					211 container
+						212 image trash
+						213 text  已丢弃【 箭雨 】×1（无法取回）
+					214 container
+						215 image bag
+						216 text  背包已满（16/16 格，同名卡最多叠 3 张——初始攻击/火球 5 张），买不下这张卡
+					217 container
+						218 image bag
+						219 text  购买卡牌【 诅咒之刃 】（- 3 币，剩 3）
+					220 container
+						221 image bag
+						222 text  背包已满（16/16 格，同名卡最多叠 3 张——初始攻击/火球 5 张），买不下这张卡
+					223 container
+						224 image bag
+						225 text  背包已满（16/16 格，同名卡最多叠 3 张——初始攻击/火球 5 张），买不下这张卡
+					226 container
+						227 image bag
+						228 text  背包已满（16/16 格，同名卡最多叠 3 张——初始攻击/火球 5 张），买不下这张卡
+					229 container
+						230 image bag
+						231 text  购买卡牌【 气功波 】（- 2 币，剩 6）
+					232 container
+						233 image bag
+						234 text  购买卡牌【 连弩 】（- 2 币，剩 8）
+					235 container
+						236 image bag
+						237 text  补充初始攻击 ×1（- 1 币，剩 10 · 本站还可补 4 张）
+					238 container
+						239 image trash
+						240 text  已丢弃【 刀剑形态 】×1（无法取回）
+					54 text （你留下开出的卡牌，转身走了……）
+					55 container
+						56 text 获得  1  币（现有 11）
+					57 container
+						58 image bag
+						59 text  背包已满（16/16 格，珍珠盒扩格只收资源卡），【偷袭】掉在了原地…
+					60 container
+						61 image bag
+						62 text  背包已满（16/16 格，珍珠盒扩格只收资源卡），【偷袭】掉在了原地…
+					63 container
+						64 image bag
+						65 text  背包已满（16/16 格，珍珠盒扩格只收资源卡），【偷袭】掉在了原地…
+					66 container
+						67 image bag
+						68 text  背包已满（16/16 格，珍珠盒扩格只收资源卡），【偷袭】掉在了原地…
+					69 container
+						70 image bag
+						71 text  背包已满（16/16 格，珍珠盒扩格只收资源卡），【偷袭】掉在了原地…
+					72 container
+						73 text 获得  1  币（现有 10）
+					74 container
+						75 image archive
+						76 text  获得卡牌【 快意恩仇 】
+					77 container
+						78 image archive
+						79 text  战利品掉落： 2  个职业·密封物资箱
+					80 container
+						81 image archive
+						82 text  出现黑色 职业宝箱 ——只掉落职业卡牌！
+					83 container
+						84 image trophy
+						85 text  战斗胜利！
+					86 container
+						87 image trophy
+						88 text  开发者：直接结算胜利
+					89 container
+						90 image cards
+						91 text  普通战斗无需抽牌：随身  19  张战斗卡直接可打出；道具/资源/事件卡不入手，能力卡只能收藏或编入 BOSS 战牌库 · 每回合固定  2  费
+					92 container
+						93 image question
+						94 text  以一敌多：伤害与群体卡都 拖到任意敌人身上 打出（群体自动命中全体）
+					95 container
+						96 image swords
+						97 text 遭遇战【甲壳变异体(4-7)、甲壳变异体(4-7)】  · 风险 高
+					98 text （你留下开出的卡牌，转身走了……）
+					99 container
+						100 text 获得  1  币（现有 9）
+					101 container
+						102 image archive
+						103 text  回收了 1  个小型物资箱
+					104 container
+						105 image trash
+						106 text  已丢弃【 镭射 】×1（无法取回）
+					107 container
+						108 text 获得  2  币（现有 8）
+					109 container
+						110 image archive
+						111 text  获得卡牌【 诅咒之刃 】
+					112 text （你留下开出的卡牌，转身走了……）
+					113 container
+						114 text 获得  3  币（现有 6）
+					115 container
+						116 image archive
+						117 text  战利品掉落： 1  个职业·军用保险柜， 1  个密封物资箱
+					118 container
+						119 image archive
+						120 text  出现黑色 职业宝箱 ——只掉落职业卡牌！
+					121 container
+						122 image trophy
+						123 text  战斗胜利！
+					124 container
+						125 image trophy
+						126 text  开发者：直接结算胜利
+					127 container
+						128 image cards
+						129 text  普通战斗无需抽牌：随身  19  张战斗卡直接可打出；道具/资源/事件卡不入手，能力卡只能收藏或编入 BOSS 战牌库 · 每回合固定  2  费
+					130 container
+						131 image question
+						132 text  以一敌多：伤害与群体卡都 拖到任意敌人身上 打出（群体自动命中全体）
+					133 container
+						134 image swords
+						135 text 遭遇战【反抗组织掷弹兵(6-4)、反抗组织掷弹兵(6-4)】  · 风险 高
+					136 container
+						137 text 获得  1  币（现有 3）
+					138 container
+						139 image archive
+						140 text  获得卡牌【 连弩 】
+					141 container
+						142 image archive
+						143 text  回收了 1  个小型物资箱
+					144 container
+						145 image sparkles
+						146 text  【 穿刺 】已复原，回到背包
+					147 container
+						148 image sparkles
+						149 text  【 二刀流 】已复原，回到背包
+					150 container
+						151 image archive
+						152 text  获得卡牌【 剑仙形态 】
+
+The focused UI element is 0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/

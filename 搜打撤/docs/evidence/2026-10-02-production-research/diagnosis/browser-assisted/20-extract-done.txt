@@ -1,0 +1,26 @@
+Browser tab: 9, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5336/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/
+	1 container
+		2 text FIELD ENCOUNTER 04 / 04
+		3 heading exit 撤离成功, Value: 2
+			4 image exit
+			5 text  撤离成功
+		6 text 用时  28:42  · 行动  55  次 · 剩余生命  50/58  · 本局携带  22 币 （留在局中） · 物资价值  0
+		7 image home
+		8 text  已运回基地：
+		9 image wood
+		10 text  木材 ×0 · 
+		11 image bread
+		12 text  口粮 ×0 · 
+		13 image archive
+		14 text  仓库  22/25  张 · 
+		15 image sparkles
+		16 text  图鉴  0 下次出发时可以从仓库选择卡牌携带；储备币  0  币留在基地（不进局，用于孵蛋与基地建设）。
+		17 button home 回基地
+			18 image home
+			19 text  回基地
+		20 button runner 再出发
+			21 image runner
+			22 text  再出发
+
+The focused UI element is 0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/

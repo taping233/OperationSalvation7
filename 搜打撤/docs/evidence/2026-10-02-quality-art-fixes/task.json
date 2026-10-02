@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "quality-art-fixes",
+  "date": "2026-10-02",
+  "owner": "Codex",
+  "goal": "修复开发质量工具与美术生产护栏，离线验收并保护其他会话修改",
+  "paths": [
+    "scripts/acceptance-gate.mjs",
+    "scripts/gate-plan.mjs",
+    "scripts/workflow-gate-receipt.mjs",
+    "scripts/asset-audit.cjs",
+    "tools/nai_gen.py",
+    "eslint.config.js",
+    "package.json",
+    "docs/quality-gates.md",
+    "docs/roadmap.md",
+    "scripts/generate-compendium.mjs",
+    "tests/compendium.test.js"
+  ],
+  "doneWhen": [
+    "四并行工作面修复已复核并集成",
+    "定向契约、语法、类型、lint和离线NAI测试有准确证据",
+    "未提交修改保护、Linux未核实项及资产历史债已明确记录"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "report",
+      "report": "docs/evidence/2026-10-02-quality-art-fixes/2026-10-02T07-22-22.321Z-d245f835.json",
+      "result": "passed",
+      "sha256": "a804edaa3f72e8fc509903328d4b9d64ab87c361acff6f523a1df7df027334d7",
+      "verification": "recorded-result-only-not-current-freshness"
+    },
+    {
+      "kind": "manual",
+      "description": "已核对静态四门、14项离线NAI、素材门及仅任务补丁范围",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "Linux真实symlink/执行位与POSIX flock/fsync需云端复核",
+    "10项Windows文件symlink权限跳过；完整游戏套件/build/实页/真实API/PIL出图/远端CI未运行"
+  ],
+  "updatedAt": "2026-10-02T07:29:23.371Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

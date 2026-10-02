@@ -1,0 +1,142 @@
+Browser tab: 10, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5336/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/
+	1 container
+		2 button Description: 关闭, ID: ovCloseX
+		3 container
+			4 text ROLE ARCHIVE // 无
+			5 heading cards 角色卡池档案, Value: 2
+				6 image cards
+				7 text  角色卡池档案
+			8 text 17 CARDS
+			9 container
+				10 text CHARACTER ARCHIVE 无
+				11 container poolPreview
+					12 container
+						13 text 0
+						14 image 飞刃偷袭
+						15 text 飞刃偷袭 武术 · 无专属
+						16 image cards
+						17 text 抽 1 攻（ -3 ），附加 流血 ，抽  1  张牌。
+						18 image swords
+						19 text -3
+						20 image coin
+						21 text 3
+					22 text 类型
+					23 text 武术
+					24 text 稀有度
+					25 text 职业
+					26 text 伤害词条
+					27 text -3
+					28 text 点击卡面可放大查看
+				29 image medal
+				30 text  确认选择「无」后，将从 17 张人物卡中随机获得 1 张角色卡，并与 5 张「初始攻击」一起带入背包。
+			31 container poolGrid
+				32 container
+					33 text 职业
+					34 button 查看 飞刃偷袭 详情
+						35 container
+							36 text 0
+							37 image 飞刃偷袭
+							38 text 飞刃偷袭 武术 · 无专属
+							39 image cards
+							40 text 抽 1 攻（ -3 ），附加 流血 ，抽  1  张牌。
+							41 image swords
+							42 text -3
+							43 image coin
+							44 text 3
+				45 container
+					46 text 职业
+					47 button 查看 金蝉脱壳 详情
+						48 container
+							49 text 0
+							50 image 金蝉脱壳
+							51 text 金蝉脱壳 武术 · 无专属
+							52 image cards
+							53 text 抽 3 消耗 所有手牌，抽  3  张。
+							54 image coin
+							55 text 3
+				56 container
+					57 text 职业
+					58 button 查看 偷袭 详情
+						59 container
+							60 text 0
+							61 image 偷袭
+							62 text 偷袭 武术 · 无专属 攻（ -1 ）。
+							63 image swords
+							64 text -1
+							65 image coin
+							66 text 3
+				67 container
+					68 text 职业
+					69 button 查看 鬼魅之刃 详情
+						70 container
+							71 text 1
+							72 image 鬼魅之刃
+							73 text 鬼魅之刃 武术 · 无专属
+							74 image cards
+							75 text 抽 2 攻（ +1 ），破除隐身时 伤害 +2 ，并抽  2  张牌。
+							76 image swords
+							77 text +1
+							78 image coin
+							79 text 3
+				80 container
+					81 text 职业
+					82 button 查看 快意恩仇 详情
+						83 container
+							84 text 1
+							85 image 快意恩仇
+							86 text 快意恩仇 武术 · 无专属 消耗 2  张初始攻击，攻击  3  次。
+							87 image coin
+							88 text 3
+				89 container
+					90 text 职业
+					91 button 查看 流星箭雨 详情
+						92 container
+							93 text 1
+							94 image 流星箭雨
+							95 text 流星箭雨 武术 · 无专属 攻（ -1 ）；触发  2  次。
+							96 image swords
+							97 text -1
+							98 image coin
+							99 text 3
+				100 container
+					101 text 职业
+					102 button 查看 潜匿 详情
+						103 container
+							104 text 1
+							105 image 潜匿
+							106 text 潜匿 武术 · 无专属
+							107 image cards
+							108 text 抽 1 进入潜行状态  1 回合 ，抽 1 张牌。
+							109 image coin
+							110 text 3
+				111 container
+					112 text 职业
+					113 button 查看 剑仙形态 详情
+						114 container
+							115 text 2
+							116 image 剑仙形态
+							117 text 剑仙形态 武术 · 无专属
+							118 image cards
+							119 text 抽 1 本局对战中， 回合开始时 额外抽  1  张牌。
+							120 image coin
+							121 text 4
+				122 container
+					123 text 棱彩
+					124 button 查看 白梅落影·妄 详情
+						125 container
+							126 text 2
+							127 image 白梅落影·妄
+							128 text 白梅落影·妄 能力卡  · 棱彩 遁入虚空： 净化 自身，潜行  2 回合 ；破隐一击 伤害 翻倍。
+							129 image coin
+							130 text 8
+			131 container poolPager
+				132 button (disabled) ‹ 上一页
+				133 text 第  1  / 2 页 · 共 17 张
+				134 button 下一页 ›
+			135 button medal 返回选角
+				136 image medal
+				137 text  返回选角
+			138 button 出发
+
+The focused UI element is 0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/

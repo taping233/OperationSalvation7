@@ -1,0 +1,652 @@
+{
+  "at": "2026-10-02T10:26:45.201Z",
+  "method": "Existing sourceCardLibrary() sandbox executes fresh card seed/migration chain in memory; no browser, disk save, live profile or source mutation. Cards count is fresh source-effective catalog, not raw dataSlice and not live user custom library.",
+  "cards": {
+    "total": 272,
+    "byType": {
+      "道具": 22,
+      "武术": 64,
+      "资源": 15,
+      "装备": 36,
+      "法术": 79,
+      "事件": 19,
+      "能力卡": 12,
+      "生物": 25
+    },
+    "byCost": {
+      "0": 135,
+      "1": 84,
+      "2": 52,
+      "6": 1
+    },
+    "classCards": {
+      "降临者": 12,
+      "牧师": 11,
+      "法师": 11,
+      "侠客": 11,
+      "战士": 10
+    },
+    "abilityCards": {
+      "侠客": 3,
+      "战士": 2,
+      "牧师": 2,
+      "法师": 2,
+      "降临者": 3
+    },
+    "eventIds": [
+      {
+        "id": "tt6-demondeal",
+        "name": "隧道血契"
+      },
+      {
+        "id": "tt6-bandits",
+        "name": "暴雨劫道"
+      },
+      {
+        "id": "tt6-mystery",
+        "name": "实验室余粮"
+      },
+      {
+        "id": "tt6-goldmine",
+        "name": "塌方采掘点"
+      },
+      {
+        "id": "tt6-goldhammer",
+        "name": "满电动力锤"
+      },
+      {
+        "id": "tt6-relief",
+        "name": "临时救护站"
+      },
+      {
+        "id": "tt6-airdrop",
+        "name": "污染空投箱"
+      },
+      {
+        "id": "tt6-chestdraw",
+        "name": "熔断双箱"
+      },
+      {
+        "id": "tt6-systemsupply",
+        "name": "末班配送无人机"
+      },
+      {
+        "id": "cmtn7qttxqo4",
+        "name": "巷口修鞋匠"
+      },
+      {
+        "id": "ev19-vital",
+        "name": "高压急救"
+      },
+      {
+        "id": "ev19-pearlbox",
+        "name": "遗落的珍珠匣"
+      },
+      {
+        "id": "ev19-fireballs",
+        "name": "双焰走私"
+      },
+      {
+        "id": "ev19-classchest",
+        "name": "黑箱调拨"
+      },
+      {
+        "id": "ev19-recode",
+        "name": "故障重编"
+      },
+      {
+        "id": "ev19-potions",
+        "name": "避难市集药摊"
+      },
+      {
+        "id": "ev19-arrows",
+        "name": "海堤箭库"
+      },
+      {
+        "id": "ev19-gamble",
+        "name": "地下商场黑市"
+      },
+      {
+        "id": "ev19-quartermaster",
+        "name": "装备征用令"
+      }
+    ],
+    "withRules": 221
+  },
+  "map": {
+    "monsters": 15,
+    "monsterBehaviors": {
+      "strike": 2,
+      "volley": 4,
+      "charge": 2,
+      "guard": 2,
+      "burn": 2,
+      "curse": 2,
+      "dragon": 1
+    },
+    "bosses": [
+      {
+        "name": "肃清总督",
+        "atk": 5,
+        "hp": 50,
+        "behavior": "general",
+        "affix": "grow"
+      },
+      {
+        "name": "变异巢母",
+        "atk": 4,
+        "hp": 45,
+        "behavior": "orc_boss",
+        "affix": "frenzy"
+      },
+      {
+        "name": "异能领主",
+        "atk": 8,
+        "hp": 48,
+        "behavior": "element_boss",
+        "affix": "aegis"
+      }
+    ],
+    "historicalReuse": {
+      "path": "docs/evidence/2026-10-02-seven-departments-review/v2/quant-map.json",
+      "sources": [
+        {
+          "path": "game/src/run/map-generator.js",
+          "sha256": "091c65fb971fcd618e897b5fe812117e6783b7fb7ff667f1d767564460cad5ec",
+          "currentSha256": "091c65fb971fcd618e897b5fe812117e6783b7fb7ff667f1d767564460cad5ec",
+          "matches": true
+        },
+        {
+          "path": "game/src/run/layeredMap.js",
+          "sha256": "679e59f0cf4fb2c264ecf0838a1eda9b83ab315ed31b054b32f4816d5c18cd35",
+          "currentSha256": "679e59f0cf4fb2c264ecf0838a1eda9b83ab315ed31b054b32f4816d5c18cd35",
+          "matches": true
+        },
+        {
+          "path": "game/src/run/map-graph.js",
+          "sha256": "0bc103c77976a51284c74a2eabee0b6eb14061c5ee234b97ce733d37f2784db2",
+          "currentSha256": "0bc103c77976a51284c74a2eabee0b6eb14061c5ee234b97ce733d37f2784db2",
+          "matches": true
+        },
+        {
+          "path": "game/src/core/random-core.js",
+          "sha256": "177382f86d8e810a76428bc7aaae450a0b0e3811490220e9d8dc1a39db58b174",
+          "currentSha256": "177382f86d8e810a76428bc7aaae450a0b0e3811490220e9d8dc1a39db58b174",
+          "matches": true
+        }
+      ],
+      "summary": {
+        "generated": 100,
+        "generationFailures": 0,
+        "qualityFailures": 0,
+        "connectivityFailures": 0,
+        "directedReachabilityFailures": 0,
+        "uniqueLayoutShapes": 100,
+        "totalNodes": 5300,
+        "thirdLayerEmergencyMaps": 100,
+        "thirdLayerEmergencyExits": 100,
+        "emergencyX": {
+          "min": 4,
+          "max": 8,
+          "mean": 6.98
+        },
+        "emergencyDistanceFromLayerEntry": {
+          "min": 5,
+          "max": 13,
+          "mean": 9.42
+        },
+        "emergencyDistanceFromRunEntry": {
+          "min": 17,
+          "max": 27,
+          "mean": 22.48
+        }
+      },
+      "layers": [
+        {
+          "layer": 1,
+          "samples": 100,
+          "nodes": {
+            "min": 7,
+            "max": 7,
+            "mean": 7
+          },
+          "typeCounts": {
+            "battle": {
+              "min": 2,
+              "max": 2,
+              "mean": 2
+            },
+            "chest": {
+              "min": 1,
+              "max": 1,
+              "mean": 1
+            },
+            "door": {
+              "min": 1,
+              "max": 1,
+              "mean": 1
+            },
+            "entrance": {
+              "min": 1,
+              "max": 1,
+              "mean": 1
+            },
+            "fire": {
+              "min": 1,
+              "max": 1,
+              "mean": 1
+            },
+            "shop": {
+              "min": 1,
+              "max": 1,
+              "mean": 1
+            }
+          },
+          "branchNodes": {
+            "min": 0,
+            "max": 3,
+            "mean": 1.64
+          },
+          "cycleRank": {
+            "min": 0,
+            "max": 2,
+            "mean": 1.05
+          },
+          "entryToExitDistance": {
+            "min": 3,
+            "max": 6,
+            "mean": 4.34
+          },
+          "emergencyPresentMaps": 0,
+          "emergencyCount": 0
+        },
+        {
+          "layer": 2,
+          "samples": 100,
+          "nodes": {
+            "min": 12,
+            "max": 12,
+            "mean": 12
+          },
+          "typeCounts": {
+            "battle": {
+              "min": 3,
+              "max": 3,
+              "mean": 3
+            },
+            "chest": {
+              "min": 2,
+              "max": 2,
+              "mean": 2
+            },
+            "door": {
+              "min": 1,
+              "max": 1,
+              "mean": 1
+            },
+            "entrance": {
+              "min": 1,
+              "max": 1,
+              "mean": 1
+            },
+            "event": {
+              "min": 2,
+              "max": 2,
+              "mean": 2
+            },
+            "fire": {
+              "min": 1,
+              "max": 1,
+              "mean": 1
+            },
+            "resource": {
+              "min": 1,
+              "max": 1,
+              "mean": 1
+            },
+            "shop": {
+              "min": 1,
+              "max": 1,
+              "mean": 1
+            }
+          },
+          "branchNodes": {
+            "min": 2,
+            "max": 8,
+            "mean": 4.87
+          },
+          "cycleRank": {
+            "min": 1,
+            "max": 4,
+            "mean": 2.8
+          },
+          "entryToExitDistance": {
+            "min": 5,
+            "max": 9,
+            "mean": 6.72
+          },
+          "emergencyPresentMaps": 0,
+          "emergencyCount": 0
+        },
+        {
+          "layer": 3,
+          "samples": 100,
+          "nodes": {
+            "min": 17,
+            "max": 17,
+            "mean": 17
+          },
+          "typeCounts": {
+            "battle": {
+              "min": 4,
+              "max": 4,
+              "mean": 4
+            },
+            "chest": {
+              "min": 4,
+              "max": 4,
+              "mean": 4
+            },
+            "door": {
+              "min": 1,
+              "max": 1,
+              "mean": 1
+            },
+            "emergencyExit": {
+              "min": 1,
+              "max": 1,
+              "mean": 1
+            },
+            "entrance": {
+              "min": 1,
+              "max": 1,
+              "mean": 1
+            },
+            "event": {
+              "min": 3,
+              "max": 3,
+              "mean": 3
+            },
+            "fire": {
+              "min": 1,
+              "max": 1,
+              "mean": 1
+            },
+            "resource": {
+              "min": 1,
+              "max": 1,
+              "mean": 1
+            },
+            "shop": {
+              "min": 1,
+              "max": 1,
+              "mean": 1
+            }
+          },
+          "branchNodes": {
+            "min": 2,
+            "max": 11,
+            "mean": 6.94
+          },
+          "cycleRank": {
+            "min": 1,
+            "max": 6,
+            "mean": 3.78
+          },
+          "entryToExitDistance": {
+            "min": 8,
+            "max": 13,
+            "mean": 10.46
+          },
+          "emergencyPresentMaps": 100,
+          "emergencyCount": 100
+        },
+        {
+          "layer": 4,
+          "samples": 100,
+          "nodes": {
+            "min": 17,
+            "max": 17,
+            "mean": 17
+          },
+          "typeCounts": {
+            "altar": {
+              "min": 1,
+              "max": 1,
+              "mean": 1
+            },
+            "battle": {
+              "min": 4,
+              "max": 4,
+              "mean": 4
+            },
+            "boss": {
+              "min": 1,
+              "max": 1,
+              "mean": 1
+            },
+            "chest": {
+              "min": 4,
+              "max": 4,
+              "mean": 4
+            },
+            "entrance": {
+              "min": 1,
+              "max": 1,
+              "mean": 1
+            },
+            "event": {
+              "min": 2,
+              "max": 2,
+              "mean": 2
+            },
+            "extraction": {
+              "min": 1,
+              "max": 1,
+              "mean": 1
+            },
+            "fire": {
+              "min": 1,
+              "max": 1,
+              "mean": 1
+            },
+            "resource": {
+              "min": 1,
+              "max": 1,
+              "mean": 1
+            },
+            "shop": {
+              "min": 1,
+              "max": 1,
+              "mean": 1
+            }
+          },
+          "branchNodes": {
+            "min": 4,
+            "max": 12,
+            "mean": 7.52
+          },
+          "cycleRank": {
+            "min": 1,
+            "max": 7,
+            "mean": 4.24
+          },
+          "entryToExitDistance": {
+            "min": 7,
+            "max": 13,
+            "mean": 9.22
+          },
+          "emergencyPresentMaps": 0,
+          "emergencyCount": 0
+        }
+      ]
+    }
+  },
+  "meta": {
+    "pets": 6,
+    "petLevelMax": 5,
+    "achievements": 26,
+    "collectionMilestones": 5
+  },
+  "cheapNonDestructiveProbe": {
+    "kind": "pure-growth-calculation-only",
+    "assumption": "Standard mode extraction XP formula 20 + 2 * (turn-1), movement increments turn even on consumed nodes; full route/UI exploit not executed.",
+    "totalXpToLv10": 1890,
+    "at935Actions": {
+      "lv": 10,
+      "xp": 0
+    }
+  },
+  "inputs": [
+    {
+      "path": "docs/production/project/CHARTER.md",
+      "sha256": "f6cd36814b80e13278b143a523a1d39fba026f92d6b819ec715a4c1bee6aafb4",
+      "bytes": 4818
+    },
+    {
+      "path": "docs/production/design/GDD.md",
+      "sha256": "e395aa9c47df4fd8b2768961ebdb35a135934ac48f797d77fac138eb766c4e2d",
+      "bytes": 8297
+    },
+    {
+      "path": "docs/rules.md",
+      "sha256": "f38a14fd2f9ba3beff92518c1125402ba2f1d1548768ed43b5a22206f2066f9a",
+      "bytes": 7958
+    },
+    {
+      "path": "docs/roadmap.md",
+      "sha256": "f8313cf1908d1a21eaf3df23ab3b6267ea59f76d2ba7c8b5ee28e71ea1e5eb59",
+      "bytes": 2462
+    },
+    {
+      "path": "game/src/run/map-generator.js",
+      "sha256": "091c65fb971fcd618e897b5fe812117e6783b7fb7ff667f1d767564460cad5ec",
+      "bytes": 22922
+    },
+    {
+      "path": "game/src/run/game.run.flow.js",
+      "sha256": "52d31e7811be56dd191b5d7a65d4a4124affc6f68c5f0d6698d01c4d7a377788",
+      "bytes": 45730
+    },
+    {
+      "path": "game/src/run/game.run.altar.js",
+      "sha256": "9249104eb75dda983f18dc064edac3810347e8fcba6699bca6994c245d11a7e1",
+      "bytes": 60020
+    },
+    {
+      "path": "game/src/run/game.run.scenes.js",
+      "sha256": "cfb7291a73dd8a0cbe66bfdd812eb057db1fef413ba48226ac11a35fbadecc64",
+      "bytes": 19404
+    },
+    {
+      "path": "game/src/run/game.session.death.js",
+      "sha256": "2d015cc342291a578b0dea775eccb8efe22ac21545f5c6e1754dae38635a894a",
+      "bytes": 9442
+    },
+    {
+      "path": "game/src/run/game.session.modes.js",
+      "sha256": "97bdd16eefa10e6b3e9144299f9920f62cafc15ab117ec2c3f55f05da33fb2a7",
+      "bytes": 1591
+    },
+    {
+      "path": "game/src/run/game.nest.js",
+      "sha256": "72bd4f0f893f1fbf8e5c808c4f8bfd979f30aa095843e58f2f5426b0e0a3f538",
+      "bytes": 35359
+    },
+    {
+      "path": "game/src/run/lab.ending.js",
+      "sha256": "4ebedd8dd70253956410986e19b45d61a3b993514fb5a1dbc4fab1bc01d91b6c",
+      "bytes": 3976
+    },
+    {
+      "path": "game/src/hub/extraction.commands.js",
+      "sha256": "de12dd3792a3f617ca925d001854c161f52fe7dc6080e7cad7f0310ce97b64e0",
+      "bytes": 17320
+    },
+    {
+      "path": "game/src/hub/game.bag.settle.js",
+      "sha256": "7b2d0b64d68f025a90ca9f33f5488f20cbe4e37fb7e8916047e95c5690f91ce1",
+      "bytes": 20904
+    },
+    {
+      "path": "game/src/hub/meta.js",
+      "sha256": "ffaa0fb64b09f0e013b74e276be07cb5b6b062db5ec1f60a4a33363a59c7586a",
+      "bytes": 17323
+    },
+    {
+      "path": "game/src/hub/base.js",
+      "sha256": "34c485c2faf36d8d57bbd59c505bb144c866578f916a302da0955822ddda588f",
+      "bytes": 32759
+    },
+    {
+      "path": "game/src/home/narrative.js",
+      "sha256": "de497a1dd57cccaeeb7da97af2d27a6c84ea3a6eb11cc435110003e52e9647f2",
+      "bytes": 2775
+    },
+    {
+      "path": "game/src/home/story.last-lamp.js",
+      "sha256": "6ce80c708c9c2d760abd0cb08215f4e75de644cbf51c7aa9ff563ae670df1cbc",
+      "bytes": 6481
+    },
+    {
+      "path": "game/src/battle/core/battle.lifecycle.js",
+      "sha256": "fa8aa12cc7644ba12ce1936541bf7d2854d14644684258d130bbd6d0ed490265",
+      "bytes": 20014
+    },
+    {
+      "path": "game/src/battle/core/battle.enemy-intent.js",
+      "sha256": "e0c4c523d0b852409158052db7cf533601196723324c0477416c60c0b1626f91",
+      "bytes": 1841
+    },
+    {
+      "path": "game/src/battle/bag/battle.bag.js",
+      "sha256": "61b7974ab64db51192159ca61b1eefa2e8c0fb0cbba8f0360adf630de7668c88",
+      "bytes": 23644
+    },
+    {
+      "path": "game/src/cards/cards.js",
+      "sha256": "86850b162b7aeed25e3674e2a3bae90bd1e94fa34ae9a5d1b47aafa987b7192a",
+      "bytes": 19355
+    },
+    {
+      "path": "game/src/cards/cards.data.js",
+      "sha256": "a5f3c5ea179207aebb5a39da2d2e72c77cc66c96c4a0e40a752eb9eac0277928",
+      "bytes": 98594
+    },
+    {
+      "path": "game/src/cards/cards.rules.js",
+      "sha256": "58fe30fa3c7f0d86bb5f3d88632b1613ff3972b83bddc814f66ad4aedab8e2c0",
+      "bytes": 17463
+    },
+    {
+      "path": "game/data/map.json",
+      "sha256": "eb2d7147fcd422c06c64d09824a508a6272c166ba034802663087ed3b4dfdcb8",
+      "bytes": 9780
+    },
+    {
+      "path": "game/data/scenes.json",
+      "sha256": "db4b986d110bae604a1ffefb99365040a0393c356b2dd7d4baf5ccac4db3bcf6",
+      "bytes": 11008
+    },
+    {
+      "path": "game/data/achievements.json",
+      "sha256": "feda8996c2f7827f75d3b14769aff4feb3530acfe113f51a3a6fe8d2246de13c",
+      "bytes": 5840
+    },
+    {
+      "path": "game/data/pets.json",
+      "sha256": "3f9b1a714e1a6643b802a73cba270b92f9188ce307615251396177276894a20f",
+      "bytes": 1089
+    },
+    {
+      "path": "game/data/cards-sync.json",
+      "sha256": "d2f38387dd0c49ca90628aeea5334790286de906838b34e6c7aece0652511244",
+      "bytes": 22718
+    },
+    {
+      "path": "scripts/sync-cards-from-live.mjs",
+      "sha256": "f8271d01e7e74e57fe0ea6cbc90896d549459d21ea4b58ecd403387486152d01",
+      "bytes": 16398
+    }
+  ]
+}

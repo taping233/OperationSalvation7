@@ -1,0 +1,19 @@
+Browser tab: 10, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5336/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/
+	1 container Description: 圣盾大图与备注, ID: cardZoom
+		2 button 关闭卡牌大图
+			3 image cross
+		4 container
+			5 text 1
+			6 image 圣盾
+			7 text 圣盾 法术 · 星月专属
+			8 image plate
+			9 text 甲 6 获得  6  点 护甲 ；若你此时 护甲 为  0 ，本牌变为  0  费。
+			10 image coin
+			11 text 3
+		12 image pen
+		13 text 备注
+		14 text 暂无备注
+		15 text Esc 或点击背景收回
+
+The focused UI element is 2 button 关闭卡牌大图

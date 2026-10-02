@@ -1,0 +1,172 @@
+Browser tab: 10, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5336/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/
+	1 container
+		2 button 关闭照相馆
+		3 text 馆藏
+		4 text 271
+		5 text 张
+		6 container 馆藏照片
+			7 container 卡牌类型筛选
+				8 text 馆藏索引
+				9 button 重置筛选
+				10 checkbox 全部 271, Value: 1
+					11 text 全部
+					12 text 271
+				13 checkbox 武术 64, Value: 0
+					14 text 武术
+					15 text 64
+				16 checkbox 法术 79, Value: 0
+					17 text 法术
+					18 text 79
+				19 checkbox 生物 25, Value: 0
+					20 text 生物
+					21 text 25
+				22 checkbox 道具 21, Value: 0
+					23 text 道具
+					24 text 21
+				25 checkbox 装备 36, Value: 0
+					26 text 装备
+					27 text 36
+				28 checkbox 事件 19, Value: 0
+					29 text 事件
+					30 text 19
+				31 checkbox 能力 12, Value: 0
+					32 text 能力
+					33 text 12
+				34 checkbox 资源 15, Value: 0
+					35 text 资源
+					36 text 15
+				37 container
+					38 text 查找照片
+					39 text field (settable) Description: 搜索卡牌, ID: cardSearch
+				40 container
+					41 text 稀有度
+					42 pop up button (collapsed, settable) Description: 按稀有度筛选, Value: 不限稀有度, ID: libRar, Secondary Actions: Expand
+						43 menu
+							44 (selected) 不限稀有度
+							45 初始
+							46 古朴
+							47 稀有
+							48 史诗
+							49 传说
+							50 衍生
+							51 职业
+							52 棱彩
+				53 container
+					54 text 所属人物
+					55 pop up button (collapsed, settable) Description: 按人物筛选, Value: 不限人物, ID: libCls, Secondary Actions: Expand
+						56 menu
+							57 (selected) 不限人物
+							58 通用
+							59 无
+							60 黑像
+							61 白塔
+							62 星月
+							63 常无欲
+				64 container
+					65 text 排列方式
+					66 pop up button (collapsed, settable) Description: 照片排序, Value: 稀有度, ID: libSort, Secondary Actions: Expand
+						67 menu
+							68 (selected) 稀有度
+							69 费用
+							70 名称
+			71 container libGrid
+				72 button 查看照片：禁咒I
+					73 image 禁咒I
+					74 text 禁咒I
+					75 text 法术
+				76 button 查看照片：禁咒II
+					77 image 禁咒II
+					78 text 禁咒II
+					79 text 法术
+				80 button 查看照片：禁咒III
+					81 image 禁咒III
+					82 text 禁咒III
+					83 text 法术
+				84 button 查看照片：禁咒IV
+					85 image 禁咒IV
+					86 text 禁咒IV
+					87 text 法术
+				88 button 查看照片：白梅落影·妄
+					89 image 白梅落影·妄
+					90 text 白梅落影·妄
+					91 text 能力
+				92 button 查看照片：博览者的狂语
+					93 image 博览者的狂语
+					94 text 博览者的狂语
+					95 text 能力
+				96 button 查看照片：充能火山
+					97 image 充能火山
+					98 text 充能火山
+					99 text 能力
+				100 button 查看照片：花开两面
+					101 image 花开两面
+					102 text 花开两面
+					103 text 能力
+				104 button 查看照片：禁术解放
+					105 image 禁术解放
+					106 text 禁术解放
+					107 text 能力
+				108 button 查看照片：浪掷风吟
+					109 image 浪掷风吟
+					110 text 浪掷风吟
+					111 text 能力
+				112 button 查看照片：青龙化身
+					113 image 青龙化身
+					114 text 青龙化身
+					115 text 能力
+				116 button 查看照片：深渊主宰·妲莉薇特
+					117 image 深渊主宰·妲莉薇特
+					118 text 深渊主宰·妲莉薇特
+					119 text 能力
+				120 button 查看照片：圣剑化身
+					121 image 圣剑化身
+					122 text 圣剑化身
+					123 text 能力
+				124 button 查看照片：受缚之残影
+					125 image 受缚之残影
+					126 text 受缚之残影
+					127 text 能力
+				128 button 查看照片：天剑诛魔·云阳
+					129 image 天剑诛魔·云阳
+					130 text 天剑诛魔·云阳
+					131 text 能力
+				132 button 查看照片：无量仙剑·云风
+					133 image 无量仙剑·云风
+					134 text 无量仙剑·云风
+					135 text 能力
+				136 button 查看照片：封印肢体1
+					137 image 封印肢体1
+					138 text 封印肢体1
+					139 text 生物
+				140 button 查看照片：封印肢体2
+					141 image 封印肢体2
+					142 text 封印肢体2
+					143 text 生物
+				144 button 查看照片：封印肢体3
+					145 image 封印肢体3
+					146 text 封印肢体3
+					147 text 生物
+				148 button 查看照片：封印肢体4
+					149 image 封印肢体4
+					150 text 封印肢体4
+					151 text 生物
+		152 container 选中卡牌详情
+			153 container
+				154 text ◆ 选片台 ◆
+			155 container libPreview
+				156 image 禁咒I
+				157 text 禁咒I
+				158 text 费用
+				159 text 0
+				160 text 法术 棱彩
+				161 container
+					162 text 抽到时施放： 夺取  1  点攻击力。
+				163 container
+					164 text 藏品编号 № 99
+				165 button (disabled) ‹ 上一片
+				166 text 1 / 271
+				167 button 下一片 ›
+				168 button 查看大图与背签
+
+The focused UI element is 0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/

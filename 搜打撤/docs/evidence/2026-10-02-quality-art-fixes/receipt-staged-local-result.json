@@ -1,0 +1,44 @@
+{
+  "kind": "receipt-staged-local-regression",
+  "checkedAt": "2026-10-02T07:16:42.646Z",
+  "environment": {
+    "node": "v24.13.0",
+    "platform": "win32",
+    "arch": "x64"
+  },
+  "command": "npm run test:target -- tests/workflow-gate-receipt.test.js tests/workflow-staged.test.js",
+  "execution": "Equivalent direct acceptance-gate --target-tests entry; Node raw UTF-8 log capture",
+  "exitCode": 0,
+  "result": {
+    "testFilesPassed": 2,
+    "testsPassed": 22,
+    "testsSkipped": 10,
+    "testsFailed": 0
+  },
+  "skipReason": "Windows file symlink creation returned EPERM; 10 actual file symlink tests skipped. Windows junction rejection test passed.",
+  "checks": {
+    "syntax": "passed for 3 edited files",
+    "eslint": "passed for 3 edited files",
+    "baselineWhitespace": "no diagnostics from git diff --no-index --check; exit 1 denotes changed files"
+  },
+  "unverified": [
+    "Linux actual npm .bin symlinks and POSIX executable mode await cloud run",
+    "No build, full game tests, browser or remote CI run"
+  ],
+  "log": "docs/evidence/2026-10-02-quality-art-fixes/receipt-staged-final.log",
+  "logSha256": "32fe7f22f95c2d73d14d5239af7b3a8cd7e92ebef2c6ec7285537a7a99818c21",
+  "ownedFilesAfterRun": [
+    {
+      "file": "scripts/workflow-gate-receipt.mjs",
+      "sha256": "d2b3b8499ef9994c65f9dc76b653adad2fa976fd3a1b65ce41e6e33d3c994738"
+    },
+    {
+      "file": "tests/workflow-gate-receipt.test.js",
+      "sha256": "56e711de20f22c84d88f618162f949ed6901ba483af0115df89b64bb9598291a"
+    },
+    {
+      "file": "tests/workflow-staged.test.js",
+      "sha256": "23a90155bc1d21f39bd1505138d45d6e4ea721ff35e434da0700c144b78872c7"
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "page": "https://store.steampowered.com/app/646570/Slay_the_Spire/",
+  "method": "Actual official inline loop played through real UI; current window frame samples, no source media download, not own gameplay/input-latency test",
+  "samples": [
+    {
+      "clip": {
+        "height": 206,
+        "width": 600,
+        "x": 16.166667938232422,
+        "y": 306.2395935058594
+      },
+      "duration": 6.57,
+      "paused": false,
+      "src": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/646570/extras/525fee3b3fedadeaa101f2abbcf8ffca.webm?t=1774015376",
+      "time": 1.782373,
+      "image": "sts-motion-0.jpg",
+      "at": "2026-10-02T13:43:04.225Z"
+    },
+    {
+      "clip": {
+        "height": 206,
+        "width": 600,
+        "x": 16.166667938232422,
+        "y": -279.09375
+      },
+      "duration": 6.57,
+      "paused": false,
+      "src": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/646570/extras/525fee3b3fedadeaa101f2abbcf8ffca.webm?t=1774015376",
+      "time": 3.59688,
+      "image": "sts-motion-1.jpg",
+      "at": "2026-10-02T13:43:05.831Z"
+    },
+    {
+      "clip": {
+        "height": 206,
+        "width": 600,
+        "x": 16.166667938232422,
+        "y": -251.09375
+      },
+      "duration": 6.57,
+      "paused": false,
+      "src": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/646570/extras/525fee3b3fedadeaa101f2abbcf8ffca.webm?t=1774015376",
+      "time": 5.211967,
+      "image": "sts-motion-2.jpg",
+      "at": "2026-10-02T13:43:07.431Z"
+    },
+    {
+      "clip": {
+        "height": 206,
+        "width": 600,
+        "x": 16.166667938232422,
+        "y": -223.09375
+      },
+      "duration": 6.57,
+      "paused": false,
+      "src": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/646570/extras/525fee3b3fedadeaa101f2abbcf8ffca.webm?t=1774015376",
+      "time": 0.174372,
+      "image": "sts-motion-3.jpg",
+      "at": "2026-10-02T13:43:08.964Z"
+    }
+  ]
+}

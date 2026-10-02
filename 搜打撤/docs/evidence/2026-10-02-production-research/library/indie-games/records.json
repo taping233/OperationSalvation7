@@ -1,0 +1,1147 @@
+{
+  "schemaVersion": 1,
+  "title": "代号柒独立游戏比较样本库",
+  "verifiedAt": "2026-10-02",
+  "count": 24,
+  "deepCount": 6,
+  "scope": "四层节点探索/卡牌作为弹药与财产/局外成长/信息音效收束/Agent可观察性",
+  "projectBaseline": {
+    "files": [
+      "README.md",
+      "docs/rules.md"
+    ],
+    "method": "本轮只读README与rules相关段落；不等于代码/实页验证",
+    "facts": [
+      "四层相邻节点探索与单向深入",
+      "普通战斗打出的持有卡进入消耗口袋，火堆可复原",
+      "首脑战打出牌进入弃牌堆，牌库空时洗回",
+      "安全格在死亡/放弃时带回符合条件卡",
+      "成功撤离带回物资和卡牌",
+      "职业收藏消耗仓库卡并换熟练度/收藏进度"
+    ],
+    "unverified": [
+      "代码与文档一致性",
+      "当前窗口UI/音效",
+      "本轮实验实施和玩家数据"
+    ]
+  },
+  "depthDefinitions": {
+    "D1": "至少一个官方开发者/发行商/官方商店介绍经web读取，只支持介绍性机制；不等同作者复盘或亲玩。",
+    "D2": "除官方介绍外，定向深读可读的具名作者文章/访谈/开发日志章节，并提出可证伪设计实验；不等同完整作品体验。"
+  },
+  "selection": "按机制相似性/互补性选样，不以分数、销量、奖项排序。FTL/ITB/STS/DD仅横向介绍，GDC深读沿既有catalog。",
+  "copyrightPolicy": "仅自写短摘要、来源索引与分析；未下载版权全文、游戏、代码、音乐或美术。reference-only不代表来源具有开放许可。",
+  "records": [
+    {
+      "id": "indie-ftl",
+      "game": "FTL: Faster Than Light",
+      "developer": "Subset Games",
+      "category": "暂停式舰船 roguelike",
+      "coverage": [
+        "nodes",
+        "closure"
+      ],
+      "coreTradeoff": "在战斗升级、维修与燃料间配置资源，遭遇允许多种应对。",
+      "failureExtractionClosure": "官方明确永久死亡；战斗中可转移能源尝试逃跑，跑局财产回仓不适用。",
+      "informationPresentation": "暂停给决策留时间；文本遭遇与系统状态同时提供线索。",
+      "metaprogression": "官方明确解锁不同舰船；本轮未核解锁条件。",
+      "projectBorrow": {
+        "kind": "analyst-hypothesis",
+        "summary": "撤退选项的代价应与战斗选项同屏可比。"
+      },
+      "doNotCopy": "舰船全损永久死亡不同于安全格保险；不照搬即时操作压力。",
+      "agentObservability": {
+        "kind": "analyst-hypothesis-no-third-party-agent-api-claim",
+        "summary": "资源、撤退动作、事件结果值得结构化；未核其Agent API。"
+      },
+      "sources": [
+        {
+          "title": "FTL: Faster Than Light 官方介绍",
+          "author": "Subset Games",
+          "url": "https://store.steampowered.com/app/212680/FTL_Faster_Than_Light/",
+          "type": "official-store-description",
+          "verifiedAt": "2026-10-02",
+          "scope": "介绍/玩法文本；不使用媒体评价、评分、销量或用户标签作为结论",
+          "status": "readable"
+        }
+      ],
+      "verificationDepth": "D1-official-description",
+      "deepCase": false,
+      "played": false,
+      "visualAudioVerified": false,
+      "license": "reference-only; copyrighted source; no redistribution or asset reuse permission inferred",
+      "localSourceCopy": false,
+      "limitations": "未亲玩、未核视频/图表像素；官方介绍只支持写明机制。分析建议不证明玩家效果。未核项目代码与页面现状。"
+    },
+    {
+      "id": "indie-into-the-breach",
+      "game": "Into the Breach",
+      "developer": "Subset Games",
+      "category": "回合制战术 roguelike",
+      "coverage": [
+        "information",
+        "closure"
+      ],
+      "coreTradeoff": "已预告敌方攻击下，权衡保护城市和机甲位置。",
+      "failureExtractionClosure": "官方描述失败后向另一时间线送援；携带规则本轮未核。",
+      "informationPresentation": "官方明确敌方攻击预告。",
+      "metaprogression": "官方介绍新武器、驾驶员；跨局细节待核。",
+      "projectBorrow": {
+        "kind": "analyst-hypothesis",
+        "summary": "显示可预测后果，保留未来未知节点作为风险。"
+      },
+      "doNotCopy": "全信息单回合谜题不等同搜刮未知性；不让预测泄露隐藏事件。",
+      "agentObservability": {
+        "kind": "analyst-hypothesis-no-third-party-agent-api-claim",
+        "summary": "观察须包含玩家已经知道的意图和顺序，合法行动可解析。"
+      },
+      "sources": [
+        {
+          "title": "Into the Breach 官方介绍",
+          "author": "Subset Games",
+          "url": "https://store.steampowered.com/app/590380/Into_the_Breach/",
+          "type": "official-store-description",
+          "verifiedAt": "2026-10-02",
+          "scope": "介绍/玩法文本；不使用媒体评价、评分、销量或用户标签作为结论",
+          "status": "readable"
+        }
+      ],
+      "verificationDepth": "D1-official-description",
+      "deepCase": false,
+      "played": false,
+      "visualAudioVerified": false,
+      "license": "reference-only; copyrighted source; no redistribution or asset reuse permission inferred",
+      "localSourceCopy": false,
+      "limitations": "未亲玩、未核视频/图表像素；官方介绍只支持写明机制。分析建议不证明玩家效果。未核项目代码与页面现状。"
+    },
+    {
+      "id": "indie-slay-the-spire",
+      "game": "Slay the Spire",
+      "developer": "Mega Crit",
+      "category": "节点式构筑 roguelike",
+      "coverage": [
+        "nodes",
+        "cards"
+      ],
+      "coreTradeoff": "风险路线、卡牌协同与遗物成本相互影响。",
+      "failureExtractionClosure": "官方目标登顶；本轮未核失败结算与解锁门槛。",
+      "informationPresentation": "路线风险类型和构筑选择由官方介绍确认；意图细节沿既有库待关联。",
+      "metaprogression": "官方有多角色、每日与自定义局；具体解锁机制未核。",
+      "projectBorrow": {
+        "kind": "analyst-hypothesis",
+        "summary": "用地图选择诊断职业卡/火堆/商店的真实机会成本。"
+      },
+      "doNotCopy": "牌是可循环构筑工具，本项目普通战斗持有牌会入消耗口袋，经济语义不同。",
+      "agentObservability": {
+        "kind": "analyst-hypothesis-no-third-party-agent-api-claim",
+        "summary": "路线、职业、卡选择和版本应入跑局记录；未核其Agent接口。"
+      },
+      "sources": [
+        {
+          "title": "Slay the Spire 官方介绍",
+          "author": "Mega Crit",
+          "url": "https://store.steampowered.com/app/646570/Slay_the_Spire/",
+          "type": "official-store-description",
+          "verifiedAt": "2026-10-02",
+          "scope": "介绍/玩法文本；不使用媒体评价、评分、销量或用户标签作为结论",
+          "status": "readable"
+        }
+      ],
+      "verificationDepth": "D1-official-description",
+      "deepCase": false,
+      "played": false,
+      "visualAudioVerified": false,
+      "license": "reference-only; copyrighted source; no redistribution or asset reuse permission inferred",
+      "localSourceCopy": false,
+      "limitations": "未亲玩、未核视频/图表像素；官方介绍只支持写明机制。分析建议不证明玩家效果。未核项目代码与页面现状。"
+    },
+    {
+      "id": "indie-darkest-dungeon",
+      "game": "Darkest Dungeon",
+      "developer": "Red Hook Studios",
+      "category": "队伍远征 RPG",
+      "coverage": [
+        "meta",
+        "closure"
+      ],
+      "coreTradeoff": "身体伤害、压力、疾病共同消耗队伍的远征能力。",
+      "failureExtractionClosure": "官方确认角色永久死亡、城镇治疗；撤退具体罚则本轮未核。",
+      "informationPresentation": "旁白庆祝成功与失败；心理状态具有玩法效果。",
+      "metaprogression": "招募训练英雄、返镇治疗，经营队伍长期状态。",
+      "projectBorrow": {
+        "kind": "analyst-hypothesis",
+        "summary": "结算要交代留下的伤害和可补救的损失。"
+      },
+      "doNotCopy": "多角色心理模拟成本高，不应仅因氛围相似引入新压力条。",
+      "agentObservability": {
+        "kind": "analyst-hypothesis-no-third-party-agent-api-claim",
+        "summary": "把风险来源、治疗成本和损失类别入记录；未核Agent接口。"
+      },
+      "sources": [
+        {
+          "title": "Darkest Dungeon 官方介绍",
+          "author": "Red Hook Studios",
+          "url": "https://store.steampowered.com/app/262060/Darkest_Dungeon/",
+          "type": "official-store-description",
+          "verifiedAt": "2026-10-02",
+          "scope": "介绍/玩法文本；不使用媒体评价、评分、销量或用户标签作为结论",
+          "status": "readable"
+        }
+      ],
+      "verificationDepth": "D1-official-description",
+      "deepCase": false,
+      "played": false,
+      "visualAudioVerified": false,
+      "license": "reference-only; copyrighted source; no redistribution or asset reuse permission inferred",
+      "localSourceCopy": false,
+      "limitations": "未亲玩、未核视频/图表像素；官方介绍只支持写明机制。分析建议不证明玩家效果。未核项目代码与页面现状。"
+    },
+    {
+      "id": "indie-duskers",
+      "game": "Duskers",
+      "developer": "Misfits Attic",
+      "category": "无人机指令式生存探索",
+      "coverage": [
+        "information",
+        "cards"
+      ],
+      "coreTradeoff": "设备是视听渠道也是易损资源，武器稀缺时靠传感器与诱饵探索。",
+      "failureExtractionClosure": "官方明确死亡全失；燃料、维修零件不足也会威胁生存。",
+      "informationPresentation": "命令行、远端麦克风、无人机视野；传感器告知存在而非身份。",
+      "metaprogression": "搜刮并改装无人机与舰船；持续资源，不是本项目基地保险。",
+      "projectBorrow": {
+        "kind": "analyst-hypothesis",
+        "summary": "明确区分已知危险、未知身份、资源匮乏，让不确定性具有来源。"
+      },
+      "doNotCopy": "终端皮肤与失效摄像不能变成本项目基础操作障碍。",
+      "agentObservability": {
+        "kind": "analyst-hypothesis-no-third-party-agent-api-claim",
+        "summary": "有限观察与指令反馈非常相关，但本轮无自动代理接口验证。"
+      },
+      "sources": [
+        {
+          "title": "Duskers 官方介绍",
+          "author": "Misfits Attic",
+          "url": "https://store.steampowered.com/app/254320/Duskers/",
+          "type": "official-store-description",
+          "verifiedAt": "2026-10-02",
+          "scope": "介绍/玩法文本；不使用媒体评价、评分、销量或用户标签作为结论",
+          "status": "readable"
+        }
+      ],
+      "verificationDepth": "D1-official-description",
+      "deepCase": false,
+      "played": false,
+      "visualAudioVerified": false,
+      "license": "reference-only; copyrighted source; no redistribution or asset reuse permission inferred",
+      "localSourceCopy": false,
+      "limitations": "未亲玩、未核视频/图表像素；官方介绍只支持写明机制。分析建议不证明玩家效果。未核项目代码与页面现状。",
+      "blockedSupplement": {
+        "url": "https://misfitsattic.blogspot.com/2014/08/how-duskers-became-thing.html",
+        "status": "blocked-google-sorry",
+        "note": "作者首页可确认链接；正文直取失败，只读搜索摘录，未列为D2深读。"
+      }
+    },
+    {
+      "id": "indie-quasimorph",
+      "game": "Quasimorph",
+      "developer": "Magnum Scriptum",
+      "category": "回合制搜打撤 RPG",
+      "coverage": [
+        "cards",
+        "meta",
+        "closure"
+      ],
+      "coreTradeoff": "携入物资和弹药支持完成合同，同时扩大死亡敞口。",
+      "failureExtractionClosure": "官方明确成功保留带出的东西，死亡失去携入装备，可打印新佣兵。",
+      "informationPresentation": "官方要求数弹药、保养装备；UI具体呈现未实页核验。",
+      "metaprogression": "合同声望、旗舰升级、新技术与资源；克隆延续尝试。",
+      "projectBorrow": {
+        "kind": "analyst-hypothesis",
+        "summary": "把携入成本、消耗、带回净额分别记账，检查安全格是否稀释风险。"
+      },
+      "doNotCopy": "成人恐怖、势力战略和改造深度不是本项目必须范围。",
+      "agentObservability": {
+        "kind": "analyst-hypothesis-no-third-party-agent-api-claim",
+        "summary": "记录gross/net资产、弹药消耗、合同目标；未核其Agent接口。"
+      },
+      "sources": [
+        {
+          "title": "Quasimorph 官方介绍",
+          "author": "Magnum Scriptum",
+          "url": "https://store.steampowered.com/app/2059170/Quasimorph/",
+          "type": "official-store-description",
+          "verifiedAt": "2026-10-02",
+          "scope": "介绍/玩法文本；不使用媒体评价、评分、销量或用户标签作为结论",
+          "status": "readable"
+        }
+      ],
+      "verificationDepth": "D1-official-description",
+      "deepCase": false,
+      "played": false,
+      "visualAudioVerified": false,
+      "license": "reference-only; copyrighted source; no redistribution or asset reuse permission inferred",
+      "localSourceCopy": false,
+      "limitations": "未亲玩、未核视频/图表像素；官方介绍只支持写明机制。分析建议不证明玩家效果。未核项目代码与页面现状。"
+    },
+    {
+      "id": "indie-zero-sievert",
+      "game": "ZERO Sievert",
+      "developer": "CABO Studio",
+      "category": "俯视搜打撤射击",
+      "coverage": [
+        "nodes",
+        "meta",
+        "closure"
+      ],
+      "coreTradeoff": "在程序化地图搜刮装备并争取活着返回。",
+      "failureExtractionClosure": "官方明确安全基地与危险外出；死亡保留政策/不同难度本轮未核。",
+      "informationPresentation": "官方介绍新手教程、武器改造与任务信息；实际HUD未核。",
+      "metaprogression": "基地商人改造站、制作、经验与武器熟练度、阵营声望。",
+      "projectBorrow": {
+        "kind": "analyst-hypothesis",
+        "summary": "新手先理解可回收收益与危险边界，再增加任务数量。"
+      },
+      "doNotCopy": "实时枪械命中、射程和海量配件不应映射为卡牌数量扩张。",
+      "agentObservability": {
+        "kind": "analyst-hypothesis-no-third-party-agent-api-claim",
+        "summary": "地图种子、任务、携入/携出、技能版本需分开；未核其Agent API。"
+      },
+      "sources": [
+        {
+          "title": "ZERO Sievert 官方介绍",
+          "author": "CABO Studio",
+          "url": "https://store.steampowered.com/app/1782120/ZERO_Sievert/",
+          "type": "official-store-description",
+          "verifiedAt": "2026-10-02",
+          "scope": "介绍/玩法文本；不使用媒体评价、评分、销量或用户标签作为结论",
+          "status": "readable"
+        }
+      ],
+      "verificationDepth": "D1-official-description",
+      "deepCase": false,
+      "played": false,
+      "visualAudioVerified": false,
+      "license": "reference-only; copyrighted source; no redistribution or asset reuse permission inferred",
+      "localSourceCopy": false,
+      "limitations": "未亲玩、未核视频/图表像素；官方介绍只支持写明机制。分析建议不证明玩家效果。未核项目代码与页面现状。"
+    },
+    {
+      "id": "indie-cogmind",
+      "game": "Cogmind",
+      "developer": "Grid Sage Games / Josh Ge",
+      "category": "部件更换式战术 roguelike",
+      "coverage": [
+        "cards",
+        "information",
+        "audio",
+        "closure",
+        "agent"
+      ],
+      "coreTradeoff": "部件耗损让构型随行动改变，终局装备不足以描述整局。",
+      "failureExtractionClosure": "作者记录死亡后的成绩单、峰值构型、常用物品和行为统计。",
+      "informationPresentation": "作者解释音效日志保留重要信息，避免比声音额外泄露精确情报。",
+      "metaprogression": "作者强调局内即时适应而非长期角色数值；跨局解锁本轮未核。",
+      "projectBorrow": {
+        "kind": "analyst-hypothesis",
+        "summary": "人读结算与机器事件共用事实；保留峰值、关键拐点和损失原因。"
+      },
+      "doNotCopy": "不复制庞大终端数据墙；音效字幕不能变成隐藏情报透视。",
+      "agentObservability": {
+        "kind": "analyst-hypothesis-no-third-party-agent-api-claim",
+        "summary": "明确区分玩家可知观察与终局审计；行为比最终背包更能解释失败。"
+      },
+      "sources": [
+        {
+          "title": "Cogmind 官方介绍",
+          "author": "Grid Sage Games / Josh Ge",
+          "url": "https://www.gridsagegames.com/cogmind/",
+          "type": "official-studio-or-publisher-page",
+          "verifiedAt": "2026-10-02",
+          "scope": "介绍/玩法文本；不使用媒体评价、评分、销量或用户标签作为结论",
+          "status": "readable"
+        },
+        {
+          "title": "Morgue Files",
+          "author": "Josh Ge / Kyzrati",
+          "url": "https://www.gridsagegames.com/blog/2015/10/morgue-files/",
+          "type": "developer-blog",
+          "publishedOrUpdated": "2015-10-20",
+          "verifiedAt": "2026-10-02",
+          "scope": "Cogmind Score Sheets、Format、Additional Post-Mortem Features：峰值/常用部件、行为统计与人读/机读权衡",
+          "status": "selected-text-read"
+        },
+        {
+          "title": "Audio Accessibility Features for Roguelikes",
+          "author": "Josh Ge / Kyzrati",
+          "url": "https://www.gridsagegames.com/blog/2020/06/audio-accessibility-features-roguelikes/",
+          "type": "developer-blog",
+          "publishedOrUpdated": "2020-06",
+          "verifiedAt": "2026-10-02",
+          "scope": "Challenges、Options、General Audio Settings：声音/视觉信息对等、信息聚合、分通道设置",
+          "status": "selected-text-read"
+        }
+      ],
+      "verificationDepth": "D2-author-design-sections",
+      "deepCase": true,
+      "played": false,
+      "visualAudioVerified": false,
+      "license": "reference-only; copyrighted source; no redistribution or asset reuse permission inferred",
+      "localSourceCopy": false,
+      "limitations": "未亲玩、未核视频/图表像素；官方介绍只支持写明机制。分析建议不证明玩家效果。未核项目代码与页面现状。"
+    },
+    {
+      "id": "indie-caves-of-qud",
+      "game": "Caves of Qud",
+      "developer": "Freehold Games",
+      "category": "系统模拟 roguelike RPG",
+      "coverage": [
+        "information",
+        "meta"
+      ],
+      "coreTradeoff": "变异/装备/派系与环境系统可交互，选择长期改变角色路径。",
+      "failureExtractionClosure": "官网描述永久死亡后可新建角色；其他模式政策本轮未核。",
+      "informationPresentation": "文本世界史、物品与角色描述承载模拟上下文；菜单细节未核。",
+      "metaprogression": "官网侧重局内变异、派系与手工/生成叙事；跨局推进未核。",
+      "projectBorrow": {
+        "kind": "analyst-hypothesis",
+        "summary": "事件来源与物品背景应解释功能，避免只增加装饰文本。"
+      },
+      "doNotCopy": "近无限模拟范围远超四层节点；不能把系统数量当深度。",
+      "agentObservability": {
+        "kind": "analyst-hypothesis-no-third-party-agent-api-claim",
+        "summary": "需记录世界种子和已知上下文；本轮未核Agent API。"
+      },
+      "sources": [
+        {
+          "title": "Caves of Qud 官方介绍",
+          "author": "Freehold Games",
+          "url": "https://cavesofqud.com/",
+          "type": "official-studio-or-publisher-page",
+          "verifiedAt": "2026-10-02",
+          "scope": "介绍/玩法文本；不使用媒体评价、评分、销量或用户标签作为结论",
+          "status": "readable"
+        }
+      ],
+      "verificationDepth": "D1-official-description",
+      "deepCase": false,
+      "played": false,
+      "visualAudioVerified": false,
+      "license": "reference-only; copyrighted source; no redistribution or asset reuse permission inferred",
+      "localSourceCopy": false,
+      "limitations": "未亲玩、未核视频/图表像素；官方介绍只支持写明机制。分析建议不证明玩家效果。未核项目代码与页面现状。"
+    },
+    {
+      "id": "indie-backpack-hero",
+      "game": "Backpack Hero",
+      "developer": "Jaspel / Thejaspel, BinaryCounter, GangsRobin",
+      "category": "背包空间构筑 roguelike",
+      "coverage": [
+        "cards",
+        "meta",
+        "closure",
+        "information"
+      ],
+      "coreTradeoff": "收集数量与位置协同竞争；开发更新限制每次奖励取用数量。",
+      "failureExtractionClosure": "早期更新从12层减到9层，作者称多数胜负在9层已定；现行结算细则未核。",
+      "informationPresentation": "更新明确被动触发顺序、重排时机和重物落下音效。",
+      "metaprogression": "故事模式经营家乡、研究与解锁；独立跑局也存在。",
+      "projectBorrow": {
+        "kind": "analyst-hypothesis",
+        "summary": "奖励限制和容量展示共同形成取舍；量测终局前多余步骤。"
+      },
+      "doNotCopy": "不直接把矩形背包与相邻触发加入现有同名堆叠格；层数不同不能照搬9层。",
+      "agentObservability": {
+        "kind": "analyst-hypothesis-no-third-party-agent-api-claim",
+        "summary": "物品位置、取用上限、顺序和结束触发都应可观察。"
+      },
+      "sources": [
+        {
+          "title": "Backpack Hero 官方介绍",
+          "author": "Jaspel / Thejaspel, BinaryCounter, GangsRobin",
+          "url": "https://store.steampowered.com/app/1970580/Backpack_Hero/",
+          "type": "official-store-description",
+          "verifiedAt": "2026-10-02",
+          "scope": "介绍/玩法文本；不使用媒体评价、评分、销量或用户标签作为结论",
+          "status": "readable"
+        },
+        {
+          "title": "Version 2 Hotfix 2",
+          "author": "Thejaspel",
+          "url": "https://thejaspel.itch.io/backpack-hero/devlog/347904/backpack-hero-version-2-hotfix-2",
+          "type": "developer-devlog",
+          "publishedOrUpdated": "2022-02-16",
+          "verifiedAt": "2026-10-02",
+          "scope": "正文：层数压缩及理由；历史版本，不证明2026平衡",
+          "status": "selected-text-read"
+        },
+        {
+          "title": "Archery Update",
+          "author": "Thejaspel",
+          "url": "https://thejaspel.itch.io/backpack-hero/devlog/361238/backpack-hero-archery-update",
+          "type": "developer-devlog",
+          "publishedOrUpdated": "2022-03-24",
+          "verifiedAt": "2026-10-02",
+          "scope": "正文Changes/Bug-Fixes：奖励取用上限、被动順序、重排时机、音效",
+          "status": "selected-text-read"
+        },
+        {
+          "title": "1.0 is available now",
+          "author": "Thejaspel",
+          "url": "https://thejaspel.itch.io/backpack-hero/devlog/636026/backpack-hero-10-is-available-now",
+          "type": "developer-devlog",
+          "publishedOrUpdated": "2023-11-15",
+          "verifiedAt": "2026-10-02",
+          "scope": "正文：故事模式上线与城镇后续计划；计划不当完成事实",
+          "status": "selected-text-read"
+        }
+      ],
+      "verificationDepth": "D2-author-design-sections",
+      "deepCase": true,
+      "played": false,
+      "visualAudioVerified": false,
+      "license": "reference-only; copyrighted source; no redistribution or asset reuse permission inferred",
+      "localSourceCopy": false,
+      "limitations": "未亲玩、未核视频/图表像素；官方介绍只支持写明机制。分析建议不证明玩家效果。未核项目代码与页面现状。"
+    },
+    {
+      "id": "indie-dome-keeper",
+      "game": "Dome Keeper",
+      "developer": "Bippinbits",
+      "category": "采矿防守 roguelike",
+      "coverage": [
+        "nodes",
+        "closure"
+      ],
+      "coreTradeoff": "下探多得资源与及时返回守住穹顶直接冲突。",
+      "failureExtractionClosure": "官方明确未及时返回有穹顶被毁风险；具体局外保留未核。",
+      "informationPresentation": "敌波到来构成回返节奏；计时器/HUD细节未核。",
+      "metaprogression": "资源用于本局钻头、移速、武器/维修升级；跨局细节未核。",
+      "projectBorrow": {
+        "kind": "analyst-hypothesis",
+        "summary": "深层收益必须伴随可读的回返代价。"
+      },
+      "doNotCopy": "动作计时不适合直接压到回合制卡牌决策，先试节点预算。",
+      "agentObservability": {
+        "kind": "analyst-hypothesis-no-third-party-agent-api-claim",
+        "summary": "记录深入距离、回程花费、超时原因；未核其Agent API。"
+      },
+      "sources": [
+        {
+          "title": "Dome Keeper 官方介绍",
+          "author": "Bippinbits",
+          "url": "https://store.steampowered.com/app/1637320/Dome_Keeper/",
+          "type": "official-store-description",
+          "verifiedAt": "2026-10-02",
+          "scope": "介绍/玩法文本；不使用媒体评价、评分、销量或用户标签作为结论",
+          "status": "readable"
+        }
+      ],
+      "verificationDepth": "D1-official-description",
+      "deepCase": false,
+      "played": false,
+      "visualAudioVerified": false,
+      "license": "reference-only; copyrighted source; no redistribution or asset reuse permission inferred",
+      "localSourceCopy": false,
+      "limitations": "未亲玩、未核视频/图表像素；官方介绍只支持写明机制。分析建议不证明玩家效果。未核项目代码与页面现状。"
+    },
+    {
+      "id": "indie-cultist-simulator",
+      "game": "Cultist Simulator",
+      "developer": "Weather Factory / Alexis Kennedy",
+      "category": "叙事卡牌模拟",
+      "coverage": [
+        "cards",
+        "information",
+        "meta"
+      ],
+      "coreTradeoff": "卡与动作的组合产生叙事；知识探索与无效试错之间需平衡。",
+      "failureExtractionClosure": "官方明确叙事传承跨越死亡；具体继承物品规则未核。",
+      "informationPresentation": "作者用属性类别过滤永远无效的投入，保留待第二张牌才成立的组合谜题。",
+      "metaprogression": "叙事传承与玩家知识累积，非单纯永久加点。",
+      "projectBorrow": {
+        "kind": "analyst-hypothesis",
+        "summary": "不可施放原因解释结构规则，同时保留事件发现。"
+      },
+      "doNotCopy": "模糊交互不是未知玩法的必要条件；不能用神秘文本替代合法性提示。",
+      "agentObservability": {
+        "kind": "analyst-hypothesis-no-third-party-agent-api-claim",
+        "summary": "合法/可能但条件不足/永远无效应可区分；终局审计不可前置泄露。"
+      },
+      "sources": [
+        {
+          "title": "Cultist Simulator 官方介绍",
+          "author": "Weather Factory / Alexis Kennedy",
+          "url": "https://store.steampowered.com/app/718670/Cultist_Simulator/",
+          "type": "official-store-description",
+          "verifiedAt": "2026-10-02",
+          "scope": "介绍/玩法文本；不使用媒体评价、评分、销量或用户标签作为结论",
+          "status": "readable"
+        },
+        {
+          "title": "The Labyrinth Under the Skin",
+          "author": "Alexis Kennedy",
+          "url": "https://weatherfactory.biz/the-labyrinth-under-the-skin/",
+          "type": "developer-blog",
+          "publishedOrUpdated": "2018-04-24",
+          "verifiedAt": "2026-10-02",
+          "scope": "正文：展会无效组合反馈、类别过滤及探索发现的取舍",
+          "status": "selected-text-read"
+        }
+      ],
+      "verificationDepth": "D2-author-design-sections",
+      "deepCase": true,
+      "played": false,
+      "visualAudioVerified": false,
+      "license": "reference-only; copyrighted source; no redistribution or asset reuse permission inferred",
+      "localSourceCopy": false,
+      "limitations": "未亲玩、未核视频/图表像素；官方介绍只支持写明机制。分析建议不证明玩家效果。未核项目代码与页面现状。"
+    },
+    {
+      "id": "indie-citizen-sleeper",
+      "game": "Citizen Sleeper",
+      "developer": "Jump Over the Age / Gareth Damian Martin",
+      "category": "骰子资源叙事 RPG",
+      "coverage": [
+        "nodes",
+        "information",
+        "closure"
+      ],
+      "coreTradeoff": "每天先知道行动骰预算，再把有限能力分配给工作、生存和关系。",
+      "failureExtractionClosure": "作者用进度时钟与带代价成功制造后果；多结局/死亡具体规则未核。",
+      "informationPresentation": "官方明确Dice/Clocks/Drives；作者解释预算在日初可见。",
+      "metaprogression": "关系、路线与技能在一段叙事中推进；不是反复撤离回仓。",
+      "projectBorrow": {
+        "kind": "analyst-hypothesis",
+        "summary": "让玩家在节点前知道今日/本层资源预算，成功也能带可解释代价。"
+      },
+      "doNotCopy": "剧情体量与贫困主题并非搜打撤可直接套用的内容。",
+      "agentObservability": {
+        "kind": "analyst-hypothesis-no-third-party-agent-api-claim",
+        "summary": "时钟、预算和已知概率进入观察；跨局经济不可由本作证明。"
+      },
+      "sources": [
+        {
+          "title": "Citizen Sleeper 官方介绍",
+          "author": "Jump Over the Age / Gareth Damian Martin",
+          "url": "https://www.fellowtraveller.games/citizen-sleeper",
+          "type": "official-studio-or-publisher-page",
+          "verifiedAt": "2026-10-02",
+          "scope": "介绍/玩法文本；不使用媒体评价、评分、销量或用户标签作为结论",
+          "status": "readable"
+        },
+        {
+          "title": "How Citizen Sleeper was inspired by tabletop RPGs and gig work",
+          "author": "Gareth Damian Martin 口述；Joel Couture 提问",
+          "url": "https://www.gamedeveloper.com/business/how-citizen-sleeper-was-inspired-by-tabletop-rpgs-and-gig-work",
+          "type": "developer-interview",
+          "publishedOrUpdated": "2023-03-14",
+          "verifiedAt": "2026-10-02",
+          "scope": "具名开发者回答：每日先掷预算、骰/时钟/带代价成功、统一交互系统",
+          "status": "selected-text-read"
+        }
+      ],
+      "verificationDepth": "D2-author-design-sections",
+      "deepCase": true,
+      "played": false,
+      "visualAudioVerified": false,
+      "license": "reference-only; copyrighted source; no redistribution or asset reuse permission inferred",
+      "localSourceCopy": false,
+      "limitations": "未亲玩、未核视频/图表像素；官方介绍只支持写明机制。分析建议不证明玩家效果。未核项目代码与页面现状。"
+    },
+    {
+      "id": "indie-inscryption",
+      "game": "Inscryption",
+      "developer": "Daniel Mullins Games",
+      "category": "叙事卡牌/密室混合",
+      "coverage": [
+        "cards",
+        "closure",
+        "audio"
+      ],
+      "coreTradeoff": "构筑获取与卡外密室探索共同推进秘密。",
+      "failureExtractionClosure": "官方介绍意外叙事旅程；具体失败机制/章节转换本轮未核，避免剧情推断。",
+      "informationPresentation": "卡内秘密与密室交互共同提供线索；实际音效/动效未核。",
+      "metaprogression": "剧情揭露是推进维度；数值解锁本轮未核。",
+      "projectBorrow": {
+        "kind": "analyst-hypothesis",
+        "summary": "卡面信息、环境和收束可服务同一悬念。"
+      },
+      "doNotCopy": "不复制角色、卡图、剧情反转；神秘性不可遮掉基础规则。",
+      "agentObservability": {
+        "kind": "analyst-hypothesis-no-third-party-agent-api-claim",
+        "summary": "叙事阶段与已解线索值得记录；未核其Agent API。"
+      },
+      "sources": [
+        {
+          "title": "Inscryption 官方介绍",
+          "author": "Daniel Mullins Games",
+          "url": "https://store.steampowered.com/app/1092790/Inscryption/",
+          "type": "official-store-description",
+          "verifiedAt": "2026-10-02",
+          "scope": "介绍/玩法文本；不使用媒体评价、评分、销量或用户标签作为结论",
+          "status": "readable"
+        }
+      ],
+      "verificationDepth": "D1-official-description",
+      "deepCase": false,
+      "played": false,
+      "visualAudioVerified": false,
+      "license": "reference-only; copyrighted source; no redistribution or asset reuse permission inferred",
+      "localSourceCopy": false,
+      "limitations": "未亲玩、未核视频/图表像素；官方介绍只支持写明机制。分析建议不证明玩家效果。未核项目代码与页面现状。"
+    },
+    {
+      "id": "indie-dicey-dungeons",
+      "game": "Dicey Dungeons",
+      "developer": "Terry Cavanagh 与团队",
+      "category": "骰子装备 roguelike",
+      "coverage": [
+        "cards",
+        "information",
+        "audio"
+      ],
+      "coreTradeoff": "随机骰点可见后再分配装备，角色/章节改变资源转换方式。",
+      "failureExtractionClosure": "官方章节式挑战；具体失败和解锁规则本轮未核。",
+      "informationPresentation": "作者维持六面骰的概率直觉；音效从随机抽取感发展到游戏秀主题。",
+      "metaprogression": "多角色与章节规则变体；不证明持续财产养成。",
+      "projectBorrow": {
+        "kind": "analyst-hypothesis",
+        "summary": "职业差异优先改变资源使用方式；音效须与冬日远征行为一致。"
+      },
+      "doNotCopy": "不能把新骰形/复杂概率当内容增量；游戏秀音色与项目主题不同。",
+      "agentObservability": {
+        "kind": "analyst-hypothesis-no-third-party-agent-api-claim",
+        "summary": "骰结果、装备条件、规则版本应记录；本轮未核其Agent API。"
+      },
+      "sources": [
+        {
+          "title": "Dicey Dungeons 官方介绍",
+          "author": "Terry Cavanagh 与团队",
+          "url": "https://store.steampowered.com/app/861540/Dicey_Dungeons/",
+          "type": "official-store-description",
+          "verifiedAt": "2026-10-02",
+          "scope": "介绍/玩法文本；不使用媒体评价、评分、销量或用户标签作为结论",
+          "status": "readable"
+        },
+        {
+          "title": "The Reunion Reunion",
+          "author": "Terry Cavanagh 与开发团队",
+          "url": "https://distractionware.com/blog/2022/07/",
+          "type": "developer-roundtable-on-author-site",
+          "publishedOrUpdated": "2022-07-05",
+          "verifiedAt": "2026-10-02",
+          "scope": "本轮由月归档读取 THE BEGINNING、PUTTING THE TEAM TOGETHER 与末尾规则变体讨论；不是完整视频",
+          "status": "selected-text-read"
+        }
+      ],
+      "verificationDepth": "D2-author-design-sections",
+      "deepCase": true,
+      "played": false,
+      "visualAudioVerified": false,
+      "license": "reference-only; copyrighted source; no redistribution or asset reuse permission inferred",
+      "localSourceCopy": false,
+      "limitations": "未亲玩、未核视频/图表像素；官方介绍只支持写明机制。分析建议不证明玩家效果。未核项目代码与页面现状。"
+    },
+    {
+      "id": "indie-slice-and-dice",
+      "game": "Slice & Dice",
+      "developer": "tann",
+      "category": "骰面英雄战术 roguelike",
+      "coverage": [
+        "information",
+        "closure",
+        "agent"
+      ],
+      "coreTradeoff": "五名英雄各有骰，选择重掷和组合效果以通过连续战斗。",
+      "failureExtractionClosure": "官方明确输一场重新开始；当前基本介绍为20场至首脑。",
+      "informationPresentation": "作者官网明确回合制与undo；战斗预演细节未核。",
+      "metaprogression": "物品/英雄/模式解锁细则本轮未核，不据评论填充。",
+      "projectBorrow": {
+        "kind": "analyst-hypothesis",
+        "summary": "区分可逆试算和不可逆确认，让错误操作少于策略错误。"
+      },
+      "doNotCopy": "撤销不应追回已揭示未知节点或恢复已结算财产。",
+      "agentObservability": {
+        "kind": "analyst-hypothesis-no-third-party-agent-api-claim",
+        "summary": "动作前后状态和撤销边界值得验证；官网称无data不代表提供Agent API。"
+      },
+      "sources": [
+        {
+          "title": "Slice & Dice 官方介绍",
+          "author": "tann",
+          "url": "https://store.steampowered.com/app/1775490/Slice__Dice/",
+          "type": "official-store-description",
+          "verifiedAt": "2026-10-02",
+          "scope": "介绍/玩法文本；不使用媒体评价、评分、销量或用户标签作为结论",
+          "status": "readable"
+        }
+      ],
+      "verificationDepth": "D1-official-description",
+      "deepCase": false,
+      "played": false,
+      "visualAudioVerified": false,
+      "license": "reference-only; copyrighted source; no redistribution or asset reuse permission inferred",
+      "localSourceCopy": false,
+      "limitations": "未亲玩、未核视频/图表像素；官方介绍只支持写明机制。分析建议不证明玩家效果。未核项目代码与页面现状。"
+    },
+    {
+      "id": "indie-wildfrost",
+      "game": "Wildfrost",
+      "developer": "Deadpan Games / Will Lewis 与 Gaziter",
+      "category": "阵列式战术构筑 roguelike",
+      "coverage": [
+        "cards",
+        "meta",
+        "information"
+      ],
+      "coreTradeoff": "卡牌伙伴、元素协同与行动计数安排相互影响。",
+      "failureExtractionClosure": "官方明确每局后返回城镇；死亡/继承具体规则未核。",
+      "informationPresentation": "官方强调动态计数系统帮助计划行动。",
+      "metaprogression": "扩建Snowdwell解锁新卡、挑战与事件。",
+      "projectBorrow": {
+        "kind": "analyst-hypothesis",
+        "summary": "词条时点、计数与出手顺序应支持可预测的卡牌消费。"
+      },
+      "doNotCopy": "复杂召唤阵列不自动适合当前战斗；解锁新卡并不等于永久加伤。",
+      "agentObservability": {
+        "kind": "analyst-hypothesis-no-third-party-agent-api-claim",
+        "summary": "计数器和下一次触发事件可观测；未核其Agent API。"
+      },
+      "sources": [
+        {
+          "title": "Wildfrost 官方介绍",
+          "author": "Deadpan Games / Will Lewis 与 Gaziter",
+          "url": "https://www.wildfrostgame.com/",
+          "type": "official-studio-or-publisher-page",
+          "verifiedAt": "2026-10-02",
+          "scope": "介绍/玩法文本；不使用媒体评价、评分、销量或用户标签作为结论",
+          "status": "readable"
+        }
+      ],
+      "verificationDepth": "D1-official-description",
+      "deepCase": false,
+      "played": false,
+      "visualAudioVerified": false,
+      "license": "reference-only; copyrighted source; no redistribution or asset reuse permission inferred",
+      "localSourceCopy": false,
+      "limitations": "未亲玩、未核视频/图表像素；官方介绍只支持写明机制。分析建议不证明玩家效果。未核项目代码与页面现状。"
+    },
+    {
+      "id": "indie-griftlands",
+      "game": "Griftlands",
+      "developer": "Klei Entertainment",
+      "category": "双牌组叙事构筑 roguelike",
+      "coverage": [
+        "cards",
+        "nodes",
+        "closure"
+      ],
+      "coreTradeoff": "打斗与谈判、任务、友谊和选牌共同影响路线。",
+      "failureExtractionClosure": "官方明确死亡很快且重玩出现新局势；具体继承未核。",
+      "informationPresentation": "以关系和任务赋予卡牌选择语境；战斗HUD细节未核。",
+      "metaprogression": "每局新情况与策略；局外数值推进本轮未核。",
+      "projectBorrow": {
+        "kind": "analyst-hypothesis",
+        "summary": "事件代价可以影响后续节点，记录关系变化的因果。"
+      },
+      "doNotCopy": "双牌组/长文本关系网会扩大规模，不能只为丰富而增系统。",
+      "agentObservability": {
+        "kind": "analyst-hypothesis-no-third-party-agent-api-claim",
+        "summary": "记录任务选择与后续结果关联；未核Agent API。"
+      },
+      "sources": [
+        {
+          "title": "Griftlands 官方介绍",
+          "author": "Klei Entertainment",
+          "url": "https://www.klei.com/games/griftlands",
+          "type": "official-studio-or-publisher-page",
+          "verifiedAt": "2026-10-02",
+          "scope": "介绍/玩法文本；不使用媒体评价、评分、销量或用户标签作为结论",
+          "status": "readable"
+        }
+      ],
+      "verificationDepth": "D1-official-description",
+      "deepCase": false,
+      "played": false,
+      "visualAudioVerified": false,
+      "license": "reference-only; copyrighted source; no redistribution or asset reuse permission inferred",
+      "localSourceCopy": false,
+      "limitations": "未亲玩、未核视频/图表像素；官方介绍只支持写明机制。分析建议不证明玩家效果。未核项目代码与页面现状。"
+    },
+    {
+      "id": "indie-monster-train",
+      "game": "Monster Train",
+      "developer": "Shiny Shoe",
+      "category": "多层防守构筑 roguelike",
+      "coverage": [
+        "cards",
+        "nodes",
+        "information",
+        "meta"
+      ],
+      "coreTradeoff": "三层战场防守，与路线强化卡牌/单位/英雄形成联动。",
+      "failureExtractionClosure": "官方目标守住最后火种；具体失败保留本轮未核。",
+      "informationPresentation": "官方更新增加波次计数、部分首脑预览和个人跑局日志。",
+      "metaprogression": "氏族等级解锁新卡、难度层；不是回仓带回原卡。",
+      "projectBorrow": {
+        "kind": "analyst-hypothesis",
+        "summary": "只预告战略必需信息，结算以跑局记录解释构筑效果。"
+      },
+      "doNotCopy": "三层同时战斗与项目四层探索是不同的层；不复制战场数量。",
+      "agentObservability": {
+        "kind": "analyst-hypothesis-no-third-party-agent-api-claim",
+        "summary": "观察包含波次、预告、卡升级和跑局日志；未核Agent接口。"
+      },
+      "sources": [
+        {
+          "title": "Monster Train 官方介绍",
+          "author": "Shiny Shoe",
+          "url": "https://store.steampowered.com/app/1102190/Monster_Train/",
+          "type": "official-store-description",
+          "verifiedAt": "2026-10-02",
+          "scope": "介绍/玩法文本；不使用媒体评价、评分、销量或用户标签作为结论",
+          "status": "readable"
+        }
+      ],
+      "verificationDepth": "D1-official-description",
+      "deepCase": false,
+      "played": false,
+      "visualAudioVerified": false,
+      "license": "reference-only; copyrighted source; no redistribution or asset reuse permission inferred",
+      "localSourceCopy": false,
+      "limitations": "未亲玩、未核视频/图表像素；官方介绍只支持写明机制。分析建议不证明玩家效果。未核项目代码与页面现状。"
+    },
+    {
+      "id": "indie-balatro",
+      "game": "Balatro",
+      "developer": "LocalThunk",
+      "category": "牌型计分 roguelite",
+      "coverage": [
+        "cards",
+        "information",
+        "closure"
+      ],
+      "coreTradeoff": "有限出牌、弃牌与Joker协同支持达成盲注目标。",
+      "failureExtractionClosure": "官方明确击败最终ante/盲注求胜；失败返还细节未核。",
+      "informationPresentation": "官方有统计页供查最佳牌型与常用Joker；实际动画节奏未核。",
+      "metaprogression": "收集新牌/牌组与不同难度、种子局。",
+      "projectBorrow": {
+        "kind": "analyst-hypothesis",
+        "summary": "把资源净消耗与连锁效果分解，结算展示最关键组合。"
+      },
+      "doNotCopy": "暴涨计分反馈不等于持久财产价值；不能移植赌场主题。",
+      "agentObservability": {
+        "kind": "analyst-hypothesis-no-third-party-agent-api-claim",
+        "summary": "种子、难度、规则和组合结果可比较；未核其Agent API。"
+      },
+      "sources": [
+        {
+          "title": "Balatro 官方介绍",
+          "author": "LocalThunk",
+          "url": "https://store.steampowered.com/app/2379780/Balatro/",
+          "type": "official-store-description",
+          "verifiedAt": "2026-10-02",
+          "scope": "介绍/玩法文本；不使用媒体评价、评分、销量或用户标签作为结论",
+          "status": "readable"
+        }
+      ],
+      "verificationDepth": "D1-official-description",
+      "deepCase": false,
+      "played": false,
+      "visualAudioVerified": false,
+      "license": "reference-only; copyrighted source; no redistribution or asset reuse permission inferred",
+      "localSourceCopy": false,
+      "limitations": "未亲玩、未核视频/图表像素；官方介绍只支持写明机制。分析建议不证明玩家效果。未核项目代码与页面现状。"
+    },
+    {
+      "id": "indie-loop-hero",
+      "game": "Loop Hero",
+      "developer": "Four Quarters",
+      "category": "自动战斗/地形卡循环",
+      "coverage": [
+        "nodes",
+        "cards",
+        "meta"
+      ],
+      "coreTradeoff": "玩家摆放地形、建筑和敌人，为自动行走英雄创造风险与掉落。",
+      "failureExtractionClosure": "官方介绍突破守护者破除循环；撤回比例/死亡保留未核。",
+      "informationPresentation": "以自己布置的路线解释挑战来源；实际退营提示未核。",
+      "metaprogression": "收集资源扩建营地、解锁职业和卡。",
+      "projectBorrow": {
+        "kind": "analyst-hypothesis",
+        "summary": "探索风险可由玩家部分控制，回营升级目标应清楚。"
+      },
+      "doNotCopy": "自动战斗削弱现有主动出牌表达；不能用放置路线替代四层地图。",
+      "agentObservability": {
+        "kind": "analyst-hypothesis-no-third-party-agent-api-claim",
+        "summary": "记录布置、循环次数、营地资源；未核Agent API。"
+      },
+      "sources": [
+        {
+          "title": "Loop Hero 官方介绍",
+          "author": "Four Quarters",
+          "url": "https://store.steampowered.com/app/1282730/Loop_Hero/",
+          "type": "official-store-description",
+          "verifiedAt": "2026-10-02",
+          "scope": "介绍/玩法文本；不使用媒体评价、评分、销量或用户标签作为结论",
+          "status": "readable"
+        }
+      ],
+      "verificationDepth": "D1-official-description",
+      "deepCase": false,
+      "played": false,
+      "visualAudioVerified": false,
+      "license": "reference-only; copyrighted source; no redistribution or asset reuse permission inferred",
+      "localSourceCopy": false,
+      "limitations": "未亲玩、未核视频/图表像素；官方介绍只支持写明机制。分析建议不证明玩家效果。未核项目代码与页面现状。"
+    },
+    {
+      "id": "indie-ring-of-pain",
+      "game": "Ring of Pain",
+      "developer": "Simon Boxer / Twice Different",
+      "category": "环形卡牌地牢",
+      "coverage": [
+        "nodes",
+        "information",
+        "closure",
+        "audio"
+      ],
+      "coreTradeoff": "敌人与奖励到面前，左右移动和装备组合有立即可见代价。",
+      "failureExtractionClosure": "官方介绍逃离/迂回、两条终局；作者2020年仅考虑保存历史结局，不当成已上线。",
+      "informationPresentation": "官方承诺显示选择后果、敌方动作预告；作者追求去掉空走廊。",
+      "metaprogression": "官方介绍装备、难度与每日局解锁；持续财产不是其中心。",
+      "projectBorrow": {
+        "kind": "analyst-hypothesis",
+        "summary": "提升相邻节点决策密度；确认后果可读且结局有关键回看。"
+      },
+      "doNotCopy": "环形动态地牢与单向四层不同；不以删探索动画等同删决策。",
+      "agentObservability": {
+        "kind": "analyst-hypothesis-no-third-party-agent-api-claim",
+        "summary": "预告、移动方向、代价与关键决策进观察；本轮未核Agent API。"
+      },
+      "sources": [
+        {
+          "title": "Ring of Pain 官方介绍",
+          "author": "Simon Boxer / Twice Different",
+          "url": "https://store.steampowered.com/app/998740/Ring_of_Pain/",
+          "type": "official-store-description",
+          "verifiedAt": "2026-10-02",
+          "scope": "介绍/玩法文本；不使用媒体评价、评分、销量或用户标签作为结论",
+          "status": "readable"
+        },
+        {
+          "title": "Developer AMA",
+          "author": "Simon Boxer / sboxle 及 Twice Different 团队",
+          "url": "https://www.reddit.com/r/NintendoSwitch/comments/jsi9x8/",
+          "type": "developer-ama",
+          "publishedOrUpdated": "2020-11-11",
+          "verifiedAt": "2026-10-02",
+          "scope": "只读具名作者回答：移除空走廊、整体体验、统计选择与Gameover计划；忽略玩家评论推断",
+          "status": "selected-text-read"
+        },
+        {
+          "title": "Official Announcements",
+          "author": "Twice Different",
+          "url": "https://steamcommunity.com/app/998740/announcements/",
+          "type": "developer-announcements",
+          "publishedOrUpdated": "2023-10-11 / 2024-10-02",
+          "verifiedAt": "2026-10-02",
+          "scope": "Multiclass Update、下一作公告：选择Item Sets与创新格式意图",
+          "status": "selected-text-read"
+        }
+      ],
+      "verificationDepth": "D2-author-design-sections",
+      "deepCase": true,
+      "played": false,
+      "visualAudioVerified": false,
+      "license": "reference-only; copyrighted source; no redistribution or asset reuse permission inferred",
+      "localSourceCopy": false,
+      "limitations": "未亲玩、未核视频/图表像素；官方介绍只支持写明机制。分析建议不证明玩家效果。未核项目代码与页面现状。"
+    },
+    {
+      "id": "indie-stacklands",
+      "game": "Stacklands",
+      "developer": "Sokpop Collective",
+      "category": "卡牌村庄生存经营",
+      "coverage": [
+        "cards",
+        "meta",
+        "information"
+      ],
+      "coreTradeoff": "牌同时是村民、食物、建筑与资产，出售换钱会失去生产能力。",
+      "failureExtractionClosure": "官方明确每月喂食，缺食村民挨饿；重开/存档政策未核。",
+      "informationPresentation": "卡堆组合与Idea配方卡解释生产。",
+      "metaprogression": "扩展村庄、配方知识和任务；跨局继承本轮未核。",
+      "projectBorrow": {
+        "kind": "analyst-hypothesis",
+        "summary": "同一张卡的用途/售价/长期产能必须可比，避免只按战斗力排序。"
+      },
+      "doNotCopy": "实时堆牌经营与搜打撤是不同节奏；牌的等价转换不可无限套用。",
+      "agentObservability": {
+        "kind": "analyst-hypothesis-no-third-party-agent-api-claim",
+        "summary": "卡实例、堆叠关系、生产计时与交易应区分；未核Agent API。"
+      },
+      "sources": [
+        {
+          "title": "Stacklands 官方介绍",
+          "author": "Sokpop Collective",
+          "url": "https://store.steampowered.com/app/1948280/Stacklands/",
+          "type": "official-store-description",
+          "verifiedAt": "2026-10-02",
+          "scope": "介绍/玩法文本；不使用媒体评价、评分、销量或用户标签作为结论",
+          "status": "readable"
+        }
+      ],
+      "verificationDepth": "D1-official-description",
+      "deepCase": false,
+      "played": false,
+      "visualAudioVerified": false,
+      "license": "reference-only; copyrighted source; no redistribution or asset reuse permission inferred",
+      "localSourceCopy": false,
+      "limitations": "未亲玩、未核视频/图表像素；官方介绍只支持写明机制。分析建议不证明玩家效果。未核项目代码与页面现状。"
+    },
+    {
+      "id": "indie-invisible-inc",
+      "game": "Invisible, Inc.",
+      "developer": "Klei Entertainment",
+      "category": "潜行战术远征",
+      "coverage": [
+        "nodes",
+        "information",
+        "closure"
+      ],
+      "coreTradeoff": "高风险高收益任务中，潜行、精确行动和团队合作决定特工存亡。",
+      "failureExtractionClosure": "官网明确行动可能使特工丧命；撤离路径、报警阈值本轮未核。",
+      "informationPresentation": "官网只证明潜行风险语境；具体预告、观察与回退方式待核。",
+      "metaprogression": "官方DLC扩展战役时间和奖励/危险；主游戏跨局继承未核。",
+      "projectBorrow": {
+        "kind": "analyst-hypothesis",
+        "summary": "以有限信息评估搜刮/救援/返回的机会成本。"
+      },
+      "doNotCopy": "不能把多人特工协作规模作为当前单人卡牌远征必需项。",
+      "agentObservability": {
+        "kind": "analyst-hypothesis-no-third-party-agent-api-claim",
+        "summary": "可用作有限视野基准候选；本轮无接口核验。"
+      },
+      "sources": [
+        {
+          "title": "Invisible, Inc. 官方介绍",
+          "author": "Klei Entertainment",
+          "url": "https://www.klei.com/games/invisible-inc/",
+          "type": "official-studio-or-publisher-page",
+          "verifiedAt": "2026-10-02",
+          "scope": "介绍/玩法文本；不使用媒体评价、评分、销量或用户标签作为结论",
+          "status": "readable"
+        }
+      ],
+      "verificationDepth": "D1-official-description",
+      "deepCase": false,
+      "played": false,
+      "visualAudioVerified": false,
+      "license": "reference-only; copyrighted source; no redistribution or asset reuse permission inferred",
+      "localSourceCopy": false,
+      "limitations": "未亲玩、未核视频/图表像素；官方介绍只支持写明机制。分析建议不证明玩家效果。未核项目代码与页面现状。"
+    }
+  ]
+}

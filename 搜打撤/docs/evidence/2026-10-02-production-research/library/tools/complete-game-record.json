@@ -1,0 +1,30 @@
+{
+  "id": "2048-reference",
+  "title": "2048 原作者完整浏览器游戏源码归档（状态与结局流程参考）",
+  "category": "open-source",
+  "author": "Gabriele Cirulli及贡献者",
+  "publishedOrUpdated": "2024-10-24 (固定提交日期)",
+  "accessedAt": "2026-10-02",
+  "url": "https://github.com/gabrielecirulli/2048",
+  "sourceType": "原作者完整开源游戏",
+  "qualityReason": "原作者仓库MIT；固定commit完整ZIP，静态检查原始JS与LICENSE，不仅链接或库切片",
+  "projectFit": "仅对照输入→规则→存档→渲染→胜败/继续的分离；与根诊断的通关收束和结局后动作边界相关",
+  "limitations": "不是卡牌/roguelike或搜打撤玩法模板；历史全局JS非现行ESM架构；未运行。完整ZIP含Clear Sans字体等资产，此轮只核验代码MIT，不批准字体/logo/图像复用；需要另核第三方授权",
+  "license": "MIT（源码）；归档内第三方字体和品牌图像的复用未核实",
+  "licenseUrl": "https://github.com/gabrielecirulli/2048/blob/478b6ec346e3787f589e4af751378d06ded4cbbc/LICENSE.txt",
+  "useStatus": "evaluate",
+  "takeaways": [
+    "isGameTerminated让失败或未选择继续的胜利状态阻断新动作。",
+    "serialize包含won/over/keepPlaying，刷新恢复与显示层都读取同一状态。",
+    "input、storage、actuator作为GameManager依赖分开，便于沿动作链定位失效环节。"
+  ],
+  "localFiles": [],
+  "bytes": 0,
+  "sha256": null,
+  "version": null,
+  "commit": "478b6ec346e3787f589e4af751378d06ded4cbbc",
+  "verification": {
+    "method": "web打开作者仓库及MIT说明；下载完整ZIP后静态阅读game_manager.js与LICENSE",
+    "scope": "游戏代码流程；字体与品牌资产不在复用许可核验范围"
+  }
+}

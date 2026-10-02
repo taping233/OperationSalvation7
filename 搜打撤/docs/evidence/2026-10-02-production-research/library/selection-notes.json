@@ -1,0 +1,23 @@
+{
+  "excludedFromCoreCatalog": [
+    {
+      "id": "kenney-cc0-terms",
+      "reason": "保留为素材授权补充，在主catalog不重复计算"
+    },
+    {
+      "id": "kenney-ui-sfx-oga",
+      "reason": "已有2020官方Interface Sounds及真实下载，2012旧包保留分组原记录不优先列入"
+    },
+    {
+      "id": "fp-hades-documentary",
+      "reason": "官方纪录片推广入口仅核验范围，未读实质访谈，本版不占核心来源名额"
+    },
+    {
+      "id": "lighthouse",
+      "reason": "与Performance工具参考重合且本轮未运行，保留分组原记录不优先列入"
+    }
+  ],
+  "retainedInOriginalGroupRecords": true,
+  "manualSelection": true,
+  "numericQualityScores": false
+}

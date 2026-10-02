@@ -1,0 +1,250 @@
+{
+  "at": "2026-10-02T11:02:45.478Z",
+  "method": "Actual current moveTo/resolveCell/finishInstant source slices in Node VM; current createLayeredMap/createBaseMetaCommands/createExtractionCommands/applyXpGain imports. Reduced motion synchronous completion; generated adjacent nodes pre-marked consumed. All persistence/UI/render/geometry presentation ports stubbed; no browser, live profile, disk save, battle or full-run simulation.",
+  "limits": [
+    "Generated edge is real; reaching/clearing both nodes and subsequent legal extraction are preconditions, not played in this probe.",
+    "Settlement call does not validate a legal exit; this prerequisite is isolated by the probe. No claim that layer one allows extraction or realized XP gain.",
+    "No active slot: extraction uses actual ephemeral begin branch; persisted transaction branch untested.",
+    "20 inputs do not establish exploit uptake, UI click rate, or full-run economy balance.",
+    "markSeen/preload/render/save are stubs; frame clock not run. Global clock/meta/markSeen/save cost paths reviewed separately as source facts."
+  ],
+  "pair": {
+    "li": 0,
+    "a": 3,
+    "b": 4,
+    "types": [
+      "battle",
+      "fire"
+    ]
+  },
+  "ranges": [
+    {
+      "path": "game/src/run/game.run.flow.js",
+      "startLine": 28,
+      "endLine": 175
+    },
+    {
+      "path": "game/src/run/game.run.scenes.js",
+      "startLine": 164,
+      "endLine": 173
+    }
+  ],
+  "A": {
+    "moves": 0,
+    "settledXp": 20,
+    "before": {
+      "turn": 1,
+      "hp": 25,
+      "coins": 7,
+      "inventory": [
+        {
+          "name": "口粮",
+          "count": 2,
+          "value": 1
+        }
+      ]
+    },
+    "afterMovement": {
+      "turn": 1,
+      "state": "idle",
+      "hp": 25,
+      "coins": 7,
+      "inventory": [
+        {
+          "name": "口粮",
+          "count": 2,
+          "value": 1
+        }
+      ],
+      "ownedCards": [],
+      "usedPocket": []
+    },
+    "baseAfterSettlement": {
+      "wood": 0,
+      "rations": 2,
+      "pocket": [],
+      "classes": {},
+      "characters": {
+        "heixiang": {
+          "lv": 1,
+          "xp": 20
+        }
+      },
+      "stats": {
+        "actions": 0,
+        "extracts": 1,
+        "bestRunCoins": 7,
+        "playSeconds": 0
+      }
+    },
+    "settlement": {
+      "ok": true,
+      "value": {
+        "version": 1,
+        "runId": "ephemeral",
+        "phase": "organizing",
+        "requestSeq": 0,
+        "remainingCards": [],
+        "keptPocket": [],
+        "lostPocketCount": 0,
+        "totalPocketCount": 0,
+        "resources": {
+          "wood": 0,
+          "rations": 2
+        }
+      },
+      "ephemeral": true
+    },
+    "counters": {
+      "saveCalls": 0,
+      "refreshCalls": 0,
+      "logs": [],
+      "actionCalls": 0
+    }
+  },
+  "B": {
+    "moves": 20,
+    "settledXp": 60,
+    "before": {
+      "turn": 1,
+      "hp": 25,
+      "coins": 7,
+      "inventory": [
+        {
+          "name": "口粮",
+          "count": 2,
+          "value": 1
+        }
+      ]
+    },
+    "afterMovement": {
+      "turn": 21,
+      "state": "idle",
+      "hp": 25,
+      "coins": 7,
+      "inventory": [
+        {
+          "name": "口粮",
+          "count": 2,
+          "value": 1
+        }
+      ],
+      "ownedCards": [],
+      "usedPocket": []
+    },
+    "baseAfterSettlement": {
+      "wood": 0,
+      "rations": 2,
+      "pocket": [],
+      "classes": {},
+      "characters": {
+        "heixiang": {
+          "lv": 2,
+          "xp": 10
+        }
+      },
+      "stats": {
+        "actions": 20,
+        "extracts": 1,
+        "bestRunCoins": 7,
+        "playSeconds": 0
+      }
+    },
+    "settlement": {
+      "ok": true,
+      "value": {
+        "version": 1,
+        "runId": "ephemeral",
+        "phase": "organizing",
+        "requestSeq": 0,
+        "remainingCards": [],
+        "keptPocket": [],
+        "lostPocketCount": 0,
+        "totalPocketCount": 0,
+        "resources": {
+          "wood": 0,
+          "rations": 2
+        }
+      },
+      "ephemeral": true
+    },
+    "counters": {
+      "saveCalls": 20,
+      "refreshCalls": 40,
+      "logs": [
+        "[[icon:exit]] 该节点已完成结算，现已变为普通节点",
+        "[[icon:exit]] 该节点已完成结算，现已变为普通节点",
+        "[[icon:exit]] 该节点已完成结算，现已变为普通节点",
+        "[[icon:exit]] 该节点已完成结算，现已变为普通节点",
+        "[[icon:exit]] 该节点已完成结算，现已变为普通节点",
+        "[[icon:exit]] 该节点已完成结算，现已变为普通节点",
+        "[[icon:exit]] 该节点已完成结算，现已变为普通节点",
+        "[[icon:exit]] 该节点已完成结算，现已变为普通节点",
+        "[[icon:exit]] 该节点已完成结算，现已变为普通节点",
+        "[[icon:exit]] 该节点已完成结算，现已变为普通节点",
+        "[[icon:exit]] 该节点已完成结算，现已变为普通节点",
+        "[[icon:exit]] 该节点已完成结算，现已变为普通节点",
+        "[[icon:exit]] 该节点已完成结算，现已变为普通节点",
+        "[[icon:exit]] 该节点已完成结算，现已变为普通节点",
+        "[[icon:exit]] 该节点已完成结算，现已变为普通节点",
+        "[[icon:exit]] 该节点已完成结算，现已变为普通节点",
+        "[[icon:exit]] 该节点已完成结算，现已变为普通节点",
+        "[[icon:exit]] 该节点已完成结算，现已变为普通节点",
+        "[[icon:exit]] 该节点已完成结算，现已变为普通节点",
+        "[[icon:exit]] 该节点已完成结算，现已变为普通节点"
+      ],
+      "actionCalls": 20
+    }
+  },
+  "observed": {
+    "extraMoves": 20,
+    "extraSettledXp": 40,
+    "resourceCostObserved": 0
+  },
+  "sources": [
+    {
+      "path": "game/src/run/game.run.flow.js",
+      "sha256": "52d31e7811be56dd191b5d7a65d4a4124affc6f68c5f0d6698d01c4d7a377788"
+    },
+    {
+      "path": "game/src/run/game.run.scenes.js",
+      "sha256": "cfb7291a73dd8a0cbe66bfdd812eb057db1fef413ba48226ac11a35fbadecc64"
+    },
+    {
+      "path": "game/src/run/layeredMap.js",
+      "sha256": "679e59f0cf4fb2c264ecf0838a1eda9b83ab315ed31b054b32f4816d5c18cd35"
+    },
+    {
+      "path": "game/src/run/map-generator.js",
+      "sha256": "091c65fb971fcd618e897b5fe812117e6783b7fb7ff667f1d767564460cad5ec"
+    },
+    {
+      "path": "game/src/run/map-graph.js",
+      "sha256": "0bc103c77976a51284c74a2eabee0b6eb14061c5ee234b97ce733d37f2784db2"
+    },
+    {
+      "path": "game/src/core/random-core.js",
+      "sha256": "177382f86d8e810a76428bc7aaae450a0b0e3811490220e9d8dc1a39db58b174"
+    },
+    {
+      "path": "game/src/hub/extraction.commands.js",
+      "sha256": "de12dd3792a3f617ca925d001854c161f52fe7dc6080e7cad7f0310ce97b64e0"
+    },
+    {
+      "path": "game/src/hub/base-meta.commands.js",
+      "sha256": "43c53e3edf5d48dabb979e3c94d36788d17acfd3a5e74fc058ee5d898af0476a"
+    },
+    {
+      "path": "game/src/hub/meta-progression.js",
+      "sha256": "b3033c3466f95142eaa221a2e2c28e2e38695d0a65d82cb15b9c3818d88d0de0"
+    },
+    {
+      "path": "game/src/core/characters.js",
+      "sha256": "debf1abce843de26a49adbfaab9b2a8190740939c61bd3ae03a0fe6502afdc7c"
+    },
+    {
+      "path": "game/src/core/rule-config.js",
+      "sha256": "87dee3f7c00a124dc693f504ff957a87ae2f3be7ad1dfcebed661e6487ec762a"
+    }
+  ]
+}

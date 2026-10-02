@@ -1,0 +1,134 @@
+Browser tab: 10, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5336/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/
+	1 container
+		2 button Description: 关闭, ID: ovCloseX
+		3 container
+			4 text ROLE ARCHIVE // 常无欲
+			5 heading cards 角色卡池档案, Value: 2
+				6 image cards
+				7 text  角色卡池档案
+			8 text 15 CARDS
+			9 container
+				10 text CHARACTER ARCHIVE 常无欲
+				11 container poolPreview
+					12 container
+						13 text 2
+						14 image 风暴火球
+						15 text 风暴火球 法术 · 常无欲专属 对全体敌人每人释放 1 次火球。
+						16 image sparkles
+						17 text 4'
+						18 text 法伤
+						19 image coin
+						20 text 3
+					21 text 类型
+					22 text 法术
+					23 text 稀有度
+					24 text 职业
+					25 text 伤害词条
+					26 text 4
+					27 text 点击卡面可放大查看
+				28 image medal
+				29 text  确认选择「常无欲」后，将从 15 张人物卡中随机获得 1 张角色卡，并与 5 张「初始攻击」一起带入背包。
+			30 container poolGrid
+				31 container
+					32 text 职业
+					33 button 查看 风暴火球 详情
+						34 container
+							35 text 2
+							36 image 风暴火球
+							37 text 风暴火球 法术 · 常无欲专属 对全体敌人每人释放 1 次火球。
+							38 image sparkles
+							39 text 4'
+							40 text 法伤
+							41 image coin
+							42 text 3
+				43 container
+					44 text 职业
+					45 button 查看 致命射线 详情
+						46 container
+							47 text 2
+							48 image 致命射线
+							49 text 致命射线 法术 · 常无欲专属 造成 8 点法术 伤害 ，对其附加 3 种随机 诅咒
+							50 image sparkles
+							51 text 8'
+							52 text 法伤
+							53 image coin
+							54 text 3
+				55 container
+					56 text 职业
+					57 button 查看 暗影射击 详情
+						58 container
+							59 text 1
+							60 image 暗影射击
+							61 text 暗影射击 法术 · 常无欲专属 3 ′，若对手处于 诅咒 状态，额外施放  1  次。
+							62 image sparkles
+							63 text 3'
+							64 text 法伤
+				65 container
+					66 text 职业
+					67 button 查看 爆燃火球 详情
+						68 container
+							69 text 1
+							70 image 爆燃火球
+							71 text 爆燃火球 法术 · 常无欲专属 5 ′，受 法伤 加成翻倍；
+							72 image sparkles
+							73 text 5'
+							74 text 法伤
+							75 image coin
+							76 text 3
+				77 container
+					78 text 职业
+					79 button 查看 三重火球 详情
+						80 container
+							81 text 1
+							82 image 三重火球
+							83 text 三重火球 法术 · 常无欲专属 4 ′，将 2 张‘火球’置入手牌。
+							84 image sparkles
+							85 text 4'
+							86 text 法伤
+							87 image coin
+							88 text 3
+				89 container
+					90 text 职业
+					91 button 查看 深渊诅咒 详情
+						92 container
+							93 text 2
+							94 image 深渊诅咒
+							95 text 深渊诅咒 法术 · 常无欲专属
+							96 image cards
+							97 text 抽 1 7 ′，附加禁疗；此时对方身上每有  1  种 诅咒 ，抽  1  张牌。
+							98 image sparkles
+							99 text 7'
+							100 text 法伤
+							101 image coin
+							102 text 3
+				103 container
+					104 text 职业
+					105 button 查看 星陨之力 详情
+						106 container
+							107 text 2
+							108 image 星陨之力
+							109 text 星陨之力 法术 · 常无欲专属
+							110 image crystal
+							111 text 注能 2 注能 ( 2 )： 施放  3  次火球。
+							112 image coin
+							113 text 3
+				114 container
+					115 text 棱彩
+					116 button 查看 受缚之残影 详情
+						117 container
+							118 text 2
+							119 image 受缚之残影
+							120 text 受缚之残影 能力卡  · 棱彩 深海封印： 对战开始时 ，将本牌与四张「封印肢体」洗入 牌库 ；手牌中集齐这  5  张封印之牌后破除封印，化为深渊主宰·妲莉薇特。无法打出。
+							121 image coin
+							122 text 8
+			123 container poolPager
+				124 button (disabled) ‹ 上一页
+				125 text 第  1  / 2 页 · 共 15 张
+				126 button 下一页 ›
+			127 button medal 返回选角
+				128 image medal
+				129 text  返回选角
+			130 button 出发
+
+The focused UI element is 0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/

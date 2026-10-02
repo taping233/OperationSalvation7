@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "production-research",
+  "date": "2026-10-02",
+  "owner": "Friday-Codex",
+  "goal": "按老板返工要求深化制作资料与独立游戏对照，并以现有内置辅助工具推进四层完整链路，校准完成口径，尽量保留50%额度",
+  "paths": [
+    "docs/evidence/2026-10-02-production-research"
+  ],
+  "doneWhen": [
+    "资料八类覆盖并附来源许可适用性与实际资源清单，体积不超过20GB",
+    "现状诊断覆盖玩法内容工程美术UI音效文档，区分实证推断未核并给出核心缺口",
+    "分类索引可查阅、证据复核与额度最终记录完成",
+    "资料深读形成具体方法、反例和本项目实验；补独立游戏分群比较与深度案例",
+    "完成辅助四层链路与主图结局采证，正常策略、调试辅助及持久化边界分开记录"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "资料深读/24游戏6深例/Brogue完整源码与50实物SHA、67项检索检查；verification.json来源与70本地链接通过",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "辅助四层真实相邻路线-祭坛-首脑-终局-20张入库-基地-刷新22/25；10普通战和1首脑调试胜利明确记录",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "无辅助四层平衡、全职业内容、真实XP往返获利A/B、声音听感、HTML视觉、当前全量测试与远端CI未核；旧服务保留"
+  ],
+  "updatedAt": "2026-10-02T12:50:27.887Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

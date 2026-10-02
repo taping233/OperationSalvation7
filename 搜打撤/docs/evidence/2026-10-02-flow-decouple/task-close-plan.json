@@ -1,0 +1,128 @@
+{
+  "file": "docs/evidence/2026-10-02-flow-decouple/task.json",
+  "action": "close",
+  "expectedSha256": "d9cec74b0865903ab56d67ea6c691f1ae553d1863bd296d3813baf77e36d6c72",
+  "before": {
+    "schemaVersion": 1,
+    "id": "flow-decouple",
+    "date": "2026-10-02",
+    "owner": "Friday-Codex",
+    "goal": "局部解耦查询/计划/执行，缩小真实输入契约，修正文档引导并补两条完整路径",
+    "paths": [
+      "scripts/workflow.mjs",
+      "scripts/workflow-status.mjs",
+      "scripts/workflow-ledger.mjs",
+      "scripts/impact-query.mjs",
+      "scripts/acceptance-gate.mjs",
+      "scripts/gate-plan.mjs",
+      "scripts/registry-paths.mjs",
+      "scripts/workflow-ship.mjs",
+      "scripts/workflow-dependencies.mjs",
+      "scripts/workflow-evidence.mjs",
+      "scripts/workflow-gate-receipt.mjs",
+      "scripts/workflow-staged.mjs",
+      "scripts/check-types.mjs",
+      "tests/workflow-cli-integration.test.js",
+      "tests/workflow-dependencies.test.js",
+      "tests/workflow-scope.test.js",
+      "tests/workflow-gate-receipt.test.js",
+      "tests/workflow-staged.test.js",
+      "tests/acceptance-gate.test.js",
+      "tests/workflow-handoff.test.js",
+      "tests/impact-query.test.js",
+      "tests/docs-consistency.test.js",
+      "docs/AGENT-TOOLBOX.md",
+      "docs/WORKFLOW-TOOLS.md",
+      "docs/quality-gates.md",
+      "docs/development.md",
+      "docs/QUICKSTART.md",
+      "docs/PARALLEL-REGISTRY.md"
+    ],
+    "doneWhen": [
+      "help与task查询不依赖验收runner/receipt，纯计划显式root保持旧接口兼容",
+      "常用单项流程测试不再锁无关游戏和全部历史，相关/未知输入保护保留",
+      "工具箱事实准确；小修与混树完整示例通过fixture验证；质量门条件表与预算通过",
+      "三路集成定向检查通过，保留已有现场，不提交/推送"
+    ],
+    "stage": "doing",
+    "checks": [],
+    "unverified": [],
+    "updatedAt": "2026-10-02T03:58:52.312Z"
+  },
+  "task": {
+    "schemaVersion": 1,
+    "id": "flow-decouple",
+    "date": "2026-10-02",
+    "owner": "Friday-Codex",
+    "goal": "局部解耦查询/计划/执行，缩小真实输入契约，修正文档引导并补两条完整路径",
+    "paths": [
+      "scripts/workflow.mjs",
+      "scripts/workflow-status.mjs",
+      "scripts/workflow-ledger.mjs",
+      "scripts/impact-query.mjs",
+      "scripts/acceptance-gate.mjs",
+      "scripts/gate-plan.mjs",
+      "scripts/registry-paths.mjs",
+      "scripts/workflow-ship.mjs",
+      "scripts/workflow-dependencies.mjs",
+      "scripts/workflow-evidence.mjs",
+      "scripts/workflow-gate-receipt.mjs",
+      "scripts/workflow-staged.mjs",
+      "scripts/check-types.mjs",
+      "tests/workflow-cli-integration.test.js",
+      "tests/workflow-dependencies.test.js",
+      "tests/workflow-scope.test.js",
+      "tests/workflow-gate-receipt.test.js",
+      "tests/workflow-staged.test.js",
+      "tests/acceptance-gate.test.js",
+      "tests/workflow-handoff.test.js",
+      "tests/impact-query.test.js",
+      "tests/docs-consistency.test.js",
+      "docs/AGENT-TOOLBOX.md",
+      "docs/WORKFLOW-TOOLS.md",
+      "docs/quality-gates.md",
+      "docs/development.md",
+      "docs/QUICKSTART.md",
+      "docs/PARALLEL-REGISTRY.md",
+      "tests/workflow-ship.test.js",
+      "tests/workflow-index.test.js"
+    ],
+    "doneWhen": [
+      "help与task查询不依赖验收runner/receipt，纯计划显式root保持旧接口兼容",
+      "常用单项流程测试不再锁无关游戏和全部历史，相关/未知输入保护保留",
+      "工具箱事实准确；小修与混树完整示例通过fixture验证；质量门条件表与预算通过",
+      "三路集成定向检查通过，保留已有现场，不提交/推送"
+    ],
+    "stage": "complete-uncommitted",
+    "checks": [
+      {
+        "kind": "report",
+        "report": "docs/evidence/2026-10-02-flow-decouple/2026-10-02T04-15-57.716Z-3589782f.json",
+        "result": "passed",
+        "sha256": "52cccffc3bc4c8c271dba5bc967aa6a491d52e8692c2a2ba17759eb5fad77147",
+        "verification": "recorded-result-only-not-current-freshness"
+      },
+      {
+        "kind": "manual",
+        "description": "触碰12脚本7测试ESLint通过；diff检查通过；45文档340链接0发现；19模块0循环；task669→17输入/0无关docs实测；源预算与真实index核对",
+        "result": "passed"
+      }
+    ],
+    "unverified": [
+      "未跑游戏全量/实页/build；内部流程无玩家行为变化",
+      "未fetch或核远端CI；未提交/推送"
+    ],
+    "updatedAt": "2026-10-02T04:19:34.218Z",
+    "closure": {
+      "kind": "manual",
+      "doneWhenConfirmed": true,
+      "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+    }
+  },
+  "content": "{\n  \"schemaVersion\": 1,\n  \"id\": \"flow-decouple\",\n  \"date\": \"2026-10-02\",\n  \"owner\": \"Friday-Codex\",\n  \"goal\": \"局部解耦查询/计划/执行，缩小真实输入契约，修正文档引导并补两条完整路径\",\n  \"paths\": [\n    \"scripts/workflow.mjs\",\n    \"scripts/workflow-status.mjs\",\n    \"scripts/workflow-ledger.mjs\",\n    \"scripts/impact-query.mjs\",\n    \"scripts/acceptance-gate.mjs\",\n    \"scripts/gate-plan.mjs\",\n    \"scripts/registry-paths.mjs\",\n    \"scripts/workflow-ship.mjs\",\n    \"scripts/workflow-dependencies.mjs\",\n    \"scripts/workflow-evidence.mjs\",\n    \"scripts/workflow-gate-receipt.mjs\",\n    \"scripts/workflow-staged.mjs\",\n    \"scripts/check-types.mjs\",\n    \"tests/workflow-cli-integration.test.js\",\n    \"tests/workflow-dependencies.test.js\",\n    \"tests/workflow-scope.test.js\",\n    \"tests/workflow-gate-receipt.test.js\",\n    \"tests/workflow-staged.test.js\",\n    \"tests/acceptance-gate.test.js\",\n    \"tests/workflow-handoff.test.js\",\n    \"tests/impact-query.test.js\",\n    \"tests/docs-consistency.test.js\",\n    \"docs/AGENT-TOOLBOX.md\",\n    \"docs/WORKFLOW-TOOLS.md\",\n    \"docs/quality-gates.md\",\n    \"docs/development.md\",\n    \"docs/QUICKSTART.md\",\n    \"docs/PARALLEL-REGISTRY.md\",\n    \"tests/workflow-ship.test.js\",\n    \"tests/workflow-index.test.js\"\n  ],\n  \"doneWhen\": [\n    \"help与task查询不依赖验收runner/receipt，纯计划显式root保持旧接口兼容\",\n    \"常用单项流程测试不再锁无关游戏和全部历史，相关/未知输入保护保留\",\n    \"工具箱事实准确；小修与混树完整示例通过fixture验证；质量门条件表与预算通过\",\n    \"三路集成定向检查通过，保留已有现场，不提交/推送\"\n  ],\n  \"stage\": \"complete-uncommitted\",\n  \"checks\": [\n    {\n      \"kind\": \"report\",\n      \"report\": \"docs/evidence/2026-10-02-flow-decouple/2026-10-02T04-15-57.716Z-3589782f.json\",\n      \"result\": \"passed\",\n      \"sha256\": \"52cccffc3bc4c8c271dba5bc967aa6a491d52e8692c2a2ba17759eb5fad77147\",\n      \"verification\": \"recorded-result-only-not-current-freshness\"\n    },\n    {\n      \"kind\": \"manual\",\n      \"description\": \"触碰12脚本7测试ESLint通过；diff检查通过；45文档340链接0发现；19模块0循环；task669→17输入/0无关docs实测；源预算与真实index核对\",\n      \"result\": \"passed\"\n    }\n  ],\n  \"unverified\": [\n    \"未跑游戏全量/实页/build；内部流程无玩家行为变化\",\n    \"未fetch或核远端CI；未提交/推送\"\n  ],\n  \"updatedAt\": \"2026-10-02T04:19:34.218Z\",\n  \"closure\": {\n    \"kind\": \"manual\",\n    \"doneWhenConfirmed\": true,\n    \"statement\": \"负责人按 doneWhen 判断；检查结果不自动证明作品完成\"\n  }\n}\n",
+  "limits": [
+    "预览不写入",
+    "仅任务执行记录；不更新 REGISTRY、STATUS 或需求规格",
+    "手工声明不是独立验收；报告结果未核对当前 freshness"
+  ]
+}

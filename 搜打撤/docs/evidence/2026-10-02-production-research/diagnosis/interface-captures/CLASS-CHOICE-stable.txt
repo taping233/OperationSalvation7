@@ -1,0 +1,55 @@
+Browser tab: 10, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5336/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/
+	1 container
+		2 button Description: 关闭, ID: ovCloseX
+		3 container
+			4 image 无
+			5 container
+				6 text WINTER EXPEDITION · CLASS SELECT
+				7 heading 无, Value: 2
+					8 text 无
+				9 text 侠客 本局人物
+				10 text LV
+				11 text 4
+				12 text 56 / 170 XP
+				13 container
+					14 image medal
+					15 text  出征加成 生命上限 +3
+				16 definition list
+					17 container 专属卡池
+						18 text 专属卡池
+					19 container
+						20 text 17 张
+					21 container 熟练加成
+						22 text 熟练加成
+					23 container
+						24 text +3 生命
+				25 text 擅长物理攻击，可以潜行，精通流血与连击。
+				26 container
+					27 text 皮肤  SKINS
+				28 button 标准
+				29 button 春日·机车
+				30 button 新春·旗袍
+				31 button 盛夏·水枪
+				32 button cards 查看角色卡池（17 张）
+					33 image cards
+					34 text  查看角色卡池（17 张）
+			35 checkbox 无 无, Value: 1
+				36 image 无
+				37 text 无
+			38 checkbox 常无欲 常无欲, Value: 0
+				39 image 常无欲
+				40 text 常无欲
+			41 checkbox 白塔 白塔, Value: 0
+				42 image 白塔
+				43 text 白塔
+			44 checkbox 黑像 黑像, Value: 0
+				45 image 黑像
+				46 text 黑像
+			47 checkbox 星月 星月, Value: 0
+				48 image 星月
+				49 text 星月
+			50 button
+			51 button 出发
+
+The focused UI element is 0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/

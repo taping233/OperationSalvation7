@@ -1,0 +1,63 @@
+{
+  "verifiedAt": "2026-10-02T13:49:17.219Z",
+  "scope": "静态文件/JSON/ID/图片原位链接/HTML脚本与模拟DOM搜索验证；未操作浏览器，不是HTML真实渲染验收",
+  "summary": {
+    "basicInterfaces": 110,
+    "basicImageReviewed": 44,
+    "basicSourceOnly": 66,
+    "variants": 55,
+    "variantImageReviewed": 22,
+    "variantSourceOnly": 33,
+    "independentImagesReviewed": 66,
+    "comparisonS1": 55,
+    "comparisonDesignOnly": 110,
+    "localMotionReviewed": 0,
+    "basicTransitionOnly": 1,
+    "referenceLimitedMotionApplied": 4,
+    "referenceMotionFramesRead": 3
+  },
+  "errors": [],
+  "searchChecks": [
+    {
+      "name": "initial",
+      "expected": 110,
+      "actual": 110,
+      "pass": true
+    },
+    {
+      "name": "source filter",
+      "expected": 66,
+      "actual": 66,
+      "pass": true
+    },
+    {
+      "name": "image filter",
+      "expected": 44,
+      "actual": 44,
+      "pass": true
+    },
+    {
+      "name": "variant search",
+      "expected": 1,
+      "actual": 1,
+      "pass": true
+    }
+  ],
+  "files": [
+    {
+      "path": "ANNOTATIONS.md",
+      "bytes": 512772,
+      "sha256": "8a297b17d3fea9592e799cf1b43c32aeb0e66d907e0cebdbfe603b478cfa7dc6"
+    },
+    {
+      "path": "annotations.json",
+      "bytes": 834615,
+      "sha256": "2f8960b1ba0a4fda5ae3d606885779cbb0d9530ca4a968177bdcb9940a0396ea"
+    },
+    {
+      "path": "index.html",
+      "bytes": 640130,
+      "sha256": "917c7a9255e254aabc685b23fa20ac9bb3787dbf58aec48e063aaddfc18638a8"
+    }
+  ]
+}

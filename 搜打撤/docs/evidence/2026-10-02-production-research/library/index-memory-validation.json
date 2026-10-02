@@ -1,0 +1,354 @@
+{
+  "checkedAt": "2026-10-02T12:19:09.231Z",
+  "result": "passed",
+  "method": "Existing project jsdom; library-authored inline script only; pure memory DOM/events; resource loading disabled by default; no browser or rendering",
+  "indexSha256": "c0a33ea33f823c5494ff35e8c147bae70a72327ae2158bf33381d2d8dcffb336",
+  "checks": [
+    {
+      "name": "default",
+      "passed": true,
+      "detail": "Expected 38; actual 38"
+    },
+    {
+      "name": "eight category options",
+      "passed": true,
+      "detail": "All plus eight categories"
+    },
+    {
+      "name": "category art-audio",
+      "passed": true,
+      "detail": "Expected 3; actual 3"
+    },
+    {
+      "name": "useStatus usable",
+      "passed": true,
+      "detail": "Expected 3; actual 3"
+    },
+    {
+      "name": "downloaded true",
+      "passed": true,
+      "detail": "Expected 7; actual 7"
+    },
+    {
+      "name": "MinHeap search",
+      "passed": true,
+      "detail": "Expected sole rot-js; actual rot-js"
+    },
+    {
+      "name": "clear filters",
+      "passed": true,
+      "detail": "Expected empty controls and 38 records; actual 38"
+    },
+    {
+      "name": "combined filters",
+      "passed": true,
+      "detail": "Expected 4 source subsets plus 2048; actual 5"
+    },
+    {
+      "name": "no match",
+      "passed": true,
+      "detail": "Expected clear empty-state message"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "DEEP-READS.md"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "indie-games/README.md"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "source-study/README.md"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "DEEP-READS.md#1-into-the-breach让信息边界反过来约束玩法"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "DEEP-READS.md#2-riot-prototype把好不好玩收窄成能回答的问题"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "DEEP-READS.md#3-xbox-research研究问题决定测法避免熟人回声"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "DEEP-READS.md#4-gamedevbench验证的是行为也要验证验收任务本身"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "assets-ui/downloads/kenney_interfaceSounds.zip"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "assets-ui/downloads/selected/License.txt"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "assets-ui/downloads/selected/click_001.ogg"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "assets-ui/downloads/selected/confirmation_001.ogg"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "assets-ui/downloads/selected/error_001.ogg"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "assets-ui/downloads/game-icons/backpack.svg"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "assets-ui/downloads/game-icons/hazard-sign.svg"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "assets-ui/downloads/game-icons/exit-door.svg"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "assets-ui/downloads/game-icons/ATTRIBUTION.txt"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "downloads/rot-js/license.txt"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "downloads/rot-js/package.json"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "downloads/rot-js/src/rng.ts"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "downloads/rot-js/src/engine.ts"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "downloads/rot-js/src/eventqueue.ts"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "downloads/rot-js/src/scheduler/scheduler.ts"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "downloads/howler/LICENSE.md"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "downloads/howler/package.json"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "downloads/howler/src/howler.core.js"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "downloads/jsfxr/UNLICENSE"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "downloads/jsfxr/package.json"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "downloads/jsfxr/sfxr.js"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "downloads/jsfxr/riffwave.js"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "downloads/seedrandom/package.json"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "downloads/seedrandom/seedrandom.js"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "downloads/seedrandom/lib/alea.js"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "downloads/2048/2048-source.zip"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "downloads/2048/readable/LICENSE.txt"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "downloads/2048/readable/README.md"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "downloads/2048/readable/index.html"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "downloads/2048/readable/js/animframe_polyfill.js"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "downloads/2048/readable/js/application.js"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "downloads/2048/readable/js/bind_polyfill.js"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "downloads/2048/readable/js/classlist_polyfill.js"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "downloads/2048/readable/js/game_manager.js"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "downloads/2048/readable/js/grid.js"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "downloads/2048/readable/js/html_actuator.js"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "downloads/2048/readable/js/keyboard_input_manager.js"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "downloads/2048/readable/js/local_storage_manager.js"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "downloads/2048/readable/js/tile.js"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "downloads/2048/readable/style/main.css"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "README.md"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "catalog.json"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "download-manifest.json"
+    },
+    {
+      "name": "local reference path",
+      "passed": true,
+      "detail": "validation.json"
+    },
+    {
+      "name": "40 payload links",
+      "passed": true,
+      "detail": "Expected all manifest files, actual 40"
+    },
+    {
+      "name": "link schemes",
+      "passed": true,
+      "detail": "Only local file references or HTTPS sources"
+    },
+    {
+      "name": "unknown permissions",
+      "passed": true,
+      "detail": "No null URL links; readable reference-only license boundary"
+    },
+    {
+      "name": "expandable record details",
+      "passed": true,
+      "detail": "One native details per record"
+    },
+    {
+      "name": "four deep-read links and anchors",
+      "passed": true,
+      "detail": "Each method card links to its explicit anchor"
+    },
+    {
+      "name": "method content searchable",
+      "passed": true,
+      "detail": "Search includes upgraded method and experiment fields"
+    },
+    {
+      "name": "live result count markup",
+      "passed": true,
+      "detail": "Markup only; assistive technology behavior unverified"
+    }
+  ],
+  "errors": [],
+  "browserAcceptance": {
+    "result": "blocked",
+    "reason": "Current-platform built-in browser rejected file URL by URL safety policy: HTTP/HTTPS only. No service, borrowed port, alternate browser or policy workaround used.",
+    "visualVerified": false,
+    "realBrowserInputVerified": false
+  },
+  "limitations": [
+    "DOM/event checks do not prove rendered layout, pixels, keyboard behavior, screen-reader behavior or real browser file-link handling",
+    "User can open index.html locally; external source links require network"
+  ]
+}

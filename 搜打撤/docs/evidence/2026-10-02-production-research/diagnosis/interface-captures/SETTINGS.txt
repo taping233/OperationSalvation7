@@ -1,0 +1,76 @@
+Browser tab: 10, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5336/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/
+	1 container
+		2 button 返回
+		3 heading gear 设置, Value: 2
+			4 image gear
+			5 text  设置
+		6 heading gear 通用 GENERAL, Value: 3
+			7 image gear
+			8 text 通用 GENERAL
+		9 container
+			10 checkbox (settable, integer) Description: 结点编号 NODE NUMBERS, Value: 1, ID: setIndex
+			11 text 结点编号 NODE NUMBERS
+		12 container
+			13 checkbox (settable, integer) Description: 底部操作提示条 HINT BAR, Value: 1, ID: setHint
+			14 text 底部操作提示条 HINT BAR
+		15 container
+			16 checkbox (settable, integer) Description: 环层横幅 LAYER BANNER, Value: 1, ID: setBanner
+			17 text 环层横幅 LAYER BANNER
+		18 container
+			19 checkbox (settable, integer) Description: 开发者模式（测试工具 / 卡牌制作） DEVELOPER, Value: 0, ID: setDev
+			20 text 开发者模式（测试工具 / 卡牌制作） DEVELOPER
+		21 container
+			22 checkbox (settable, integer) Description: 屏幕震动反馈 SCREEN SHAKE, Value: 1, ID: setShake
+			23 text 屏幕震动反馈 SCREEN SHAKE
+		24 container
+			25 checkbox (settable, integer) Description: 减少动态效果 REDUCE MOTION, Value: 0, ID: setReduceMotion
+			26 text 减少动态效果 REDUCE MOTION
+		27 heading gear 音频 AUDIO, Value: 3
+			28 image gear
+			29 text 音频 AUDIO
+		30 container
+			31 checkbox (settable, integer) Description: 背景音乐 MUSIC, Value: 1, ID: setMusic
+			32 text 背景音乐 MUSIC
+		33 container
+			34 text 音乐来源 MUSIC SOURCE
+			35 pop up button (collapsed, settable) 音乐来源 MUSIC SOURCE, Value: 冬境声景, ID: setMusicSource, Secondary Actions: Expand
+				36 menu
+					37 (selected) 冬境声景
+					38 原有曲目
+		39 container
+			40 text 音乐音量 MUSIC VOL
+			41 slider (settable, integer) 音乐音量 MUSIC VOL 100, Value: 100, ID: setMusicVol
+			42 text 100
+		43 container
+			44 checkbox (settable, integer) Description: 音效 SOUND FX, Value: 1, ID: setSfx
+			45 text 音效 SOUND FX
+		46 container
+			47 text 音效音量 SFX VOL
+			48 slider (settable, integer) 音效音量 SFX VOL 100, Value: 100, ID: setSfxVol
+			49 text 100
+		50 container
+			51 text 侧边栏的 
+			52 image gear
+			53 text  按钮为全局静音；这里可分别开关音乐与音效、拖动滑条调音量（自动保存）。
+		54 heading trophy 致谢 CREDITS, Value: 3
+			55 image trophy
+			56 text 致谢 CREDITS
+		57 text 图标来自 game-icons.net —— Lorc、Delapouite、Carl Olsen、Caro Asercion（CC-BY 3.0，详见 assets/icons/game-icons/LICENSE-CC-BY-3.0.md）；当前音效为《明日方舟》源素材轻改试听版。
+		58 link Description: 整套音效试听, Value: 127.0.0.1:5336/sfx-audition.html?set=alternatives&pack=arknights-runtime
+		59 heading book 留言库 SUGGESTION BOX, Value: 3
+			60 image book
+			61 text 留言库 SUGGESTION BOX
+		62 button 查看历史留言
+		63 heading archive 跑局数据 RUN DATA, Value: 3
+			64 image archive
+			65 text 跑局数据 RUN DATA
+		66 button 查看跑局数据
+		67 heading 危险区 DANGER ZONE, Value: 3
+			68 text 危险区 DANGER ZONE
+		69 button 清空格子备注
+		70 button 清空卡牌库
+		71 button 清空全部存档
+		72 text 危险区操作均不可撤销：按钮需点击两次确认（首次点击变为「确认清空？」）。「清空全部存档」会删除全部五个档位的档案。
+
+The focused UI element is 0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/

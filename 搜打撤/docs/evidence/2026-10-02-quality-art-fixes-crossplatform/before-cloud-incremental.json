@@ -1,0 +1,27 @@
+[
+  {
+    "path": "tools/nai_gen.py",
+    "sha256": "b60725773e3056aa98d37038a9b5f1ad8008871a0426f14b9cdb182a35122c5e",
+    "bytes": 8803
+  },
+  {
+    "path": "tools/nai_guard.py",
+    "sha256": "9841e13655016b846ef0f7c07b2530fc57bdbcb557ad351aa8b9ed79701ee710",
+    "bytes": 6839
+  },
+  {
+    "path": "tools/tests/test_nai_guard.py",
+    "sha256": "6103f4fb04867d91c3e6561cda47b9fc90f39f1d05ed42643ac0c96fb1a73fdd",
+    "bytes": 13643
+  },
+  {
+    "path": "scripts/gate-plan.mjs",
+    "sha256": "58a45cdb8e44975db2e859fe2e720fdf6acb070f262716512c1da6b21e90bbef",
+    "bytes": 16561
+  },
+  {
+    "path": "tests/quality-config.test.js",
+    "sha256": "e9e96f1aceabe15ee155b4c17e5b71ba392984c1acb748821554d7764b9adf78",
+    "bytes": 1977
+  }
+]

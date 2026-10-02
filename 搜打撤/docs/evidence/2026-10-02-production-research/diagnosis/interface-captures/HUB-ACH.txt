@@ -1,0 +1,116 @@
+Browser tab: 10, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5336/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/
+	1 container
+		2 button Description: 关闭, ID: ovCloseX
+		3 container hubMain
+			4 container
+				5 heading 远征基地, Value: 2
+					6 text 远征基地
+				7 text 档位 01
+				8 button ← 返回
+				9 button
+				10 image wood
+				11 text  木材  0
+				12 image bread
+				13 text  口粮  0
+				14 image key
+				15 text  钥匙  0
+				16 image coin
+				17 text  储备  0  币
+			18 container
+				19 button flag 出发
+					20 image flag
+					21 text 出发
+				22 button home 仓库
+					23 image home
+					24 text 仓库
+				25 button coin 商店
+					26 image coin
+					27 text 商店
+				28 button tools 升级
+					29 image tools
+					30 text 升级
+				31 button medal 人物
+					32 image medal
+					33 text 人物
+				34 button trophy 成就·收藏
+					35 image trophy
+					36 text 成就·收藏
+			37 container
+				38 text ARCHIVE COLLECTION // 07
+				39 heading 成就·收藏, Value: 3
+					40 text 成就·收藏
+				41 text 卡背、成就与人物收藏分区归档。切换分类不会离开基地，也不会丢失当前浏览位置。
+				42 image notes
+				43 text 见闻纪念 · 1/3 《最后一盏引路灯》的线索已记入档案，等待下一次探索。不影响地图与战力。
+				44 text 卡背
+				45 text 1/7
+				46 text 成就
+				47 text 5/26
+				48 text 人物收藏
+				49 text 0/67
+				50 container 收藏分类
+					51 checkbox cards 卡背图鉴, Value: 1
+						52 image cards
+						53 text  卡背图鉴
+					54 checkbox trophy 成就记录, Value: 0
+						55 image trophy
+						56 text  成就记录
+					57 checkbox sparkles 人物收藏, Value: 0
+						58 image sparkles
+						59 text  人物收藏
+				60 heading cards 卡背图鉴 1 / 7 已解锁, Value: 3
+					61 image cards
+					62 text  卡背图鉴  1 / 7 已解锁
+				63 button cards 行囊粗布 check 使用中
+					64 container
+						65 image cards
+					66 text 行囊粗布
+					67 image check
+					68 text  使用中
+				69 button swords lock 猎手皮纸 lock 成就「猎手」
+					70 container
+						71 image swords
+					72 image lock
+					73 text 猎手皮纸
+					74 image lock
+					75 text  成就「猎手」
+				76 button coin lock 富商锦缎 lock 成就「小有积蓄」
+					77 container
+						78 image coin
+					79 image lock
+					80 text 富商锦缎
+					81 image lock
+					82 text  成就「小有积蓄」
+				83 button pocket lock 仓廪木纹 lock 成就「仓廪充实」
+					84 container
+						85 image pocket
+					86 image lock
+					87 text 仓廪木纹
+					88 image lock
+					89 text  成就「仓廪充实」
+				90 button demon lock 弑神黑曜 lock 成就「弑神者」
+					91 container
+						92 image demon
+					93 image lock
+					94 text 弑神黑曜
+					95 image lock
+					96 text  成就「弑神者」
+				97 button crystal lock 核心星轨 lock 成就「净化征服者」
+					98 container
+						99 image crystal
+					100 image lock
+					101 text 核心星轨
+					102 image lock
+					103 text  成就「净化征服者」
+				104 button paw lock 忠犬爪印 lock 成就「最忠实的伙伴」
+					105 container
+						106 image paw
+					107 image lock
+					108 text 忠犬爪印
+					109 image lock
+					110 text  成就「最忠实的伙伴」
+				111 container
+					112 text 0 1
+
+The focused UI element is 0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/

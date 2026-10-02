@@ -1,0 +1,2115 @@
+{
+  "timestamp": "2026-10-02T10:25:01.412Z",
+  "method": "Read-only static route audit. Literal sfx call sites only; dynamic expressions listed separately. Not playback, decoding, listening, or current browser verification.",
+  "source": {
+    "file": "game/src/audio/sound.js",
+    "sha256": "7616fd3686c0c6d1a3471fba39882ba0e601787e1ad57648b317155f90430698"
+  },
+  "runtime": {
+    "playableKeys": [
+      "armorBreak",
+      "buffDown",
+      "buffUp",
+      "burn",
+      "card",
+      "cardSelect",
+      "chestBurst",
+      "chestShake",
+      "click",
+      "close",
+      "coin",
+      "confirm",
+      "curse",
+      "curseEnd",
+      "danger",
+      "defeat",
+      "deny",
+      "ding",
+      "discard",
+      "draw",
+      "drop",
+      "energyDown",
+      "energyUp",
+      "error",
+      "flee",
+      "foeLunge",
+      "gain",
+      "heal",
+      "hit",
+      "hover",
+      "hurt",
+      "kill",
+      "legend",
+      "levelup",
+      "open",
+      "parry",
+      "phase",
+      "pick",
+      "rarePlay",
+      "reveal",
+      "scene",
+      "shieldBreak",
+      "shieldUp",
+      "shuffle",
+      "shutter",
+      "strike",
+      "switch",
+      "turnFoe",
+      "turnSelf",
+      "victory"
+    ],
+    "literalCallSites": 114,
+    "literalUniqueCueNames": 61,
+    "unhandledCallSites": 23,
+    "unhandledUniqueCueNames": [
+      "altarActivate",
+      "altarOffer",
+      "altarReward",
+      "blackMarketLose",
+      "blackMarketWin",
+      "cardRestore",
+      "characterSelect",
+      "deployStart",
+      "extractionConfirm",
+      "extractionFail",
+      "extractionSuccess",
+      "layerEnter",
+      "prepReady",
+      "recodeComplete",
+      "recodeStart",
+      "searchReveal",
+      "searchStart",
+      "stashDeposit",
+      "tradeBuy",
+      "tradeSell"
+    ],
+    "bankIntegrationReferences": [],
+    "sceneExported": false
+  },
+  "calls": [
+    {
+      "name": "strike",
+      "file": "game/src/battle/bag/battle.bag.js",
+      "line": 338,
+      "playable": true
+    },
+    {
+      "name": "strike",
+      "file": "game/src/battle/bag/battle.bag.js",
+      "line": 369,
+      "playable": true
+    },
+    {
+      "name": "buffUp",
+      "file": "game/src/battle/core/battle.core.js",
+      "line": 19,
+      "playable": true
+    },
+    {
+      "name": "shuffle",
+      "file": "game/src/battle/core/battle.draw.js",
+      "line": 33,
+      "playable": true
+    },
+    {
+      "name": "draw",
+      "file": "game/src/battle/core/battle.draw.js",
+      "line": 88,
+      "playable": true
+    },
+    {
+      "name": "shieldBreak",
+      "file": "game/src/battle/core/battle.enemy-phase.js",
+      "line": 211,
+      "playable": true
+    },
+    {
+      "name": "hurt",
+      "file": "game/src/battle/core/battle.enemy-phase.js",
+      "line": 212,
+      "playable": true
+    },
+    {
+      "name": "shieldBreak",
+      "file": "game/src/battle/core/battle.enemy-phase.js",
+      "line": 226,
+      "playable": true
+    },
+    {
+      "name": "danger",
+      "file": "game/src/battle/core/battle.enemy-phase.js",
+      "line": 246,
+      "playable": true
+    },
+    {
+      "name": "danger",
+      "file": "game/src/battle/core/battle.enemy-phase.js",
+      "line": 256,
+      "playable": true
+    },
+    {
+      "name": "curse",
+      "file": "game/src/battle/core/battle.enemy-phase.js",
+      "line": 258,
+      "playable": true
+    },
+    {
+      "name": "shieldUp",
+      "file": "game/src/battle/core/battle.enemy-phase.js",
+      "line": 282,
+      "playable": true
+    },
+    {
+      "name": "kill",
+      "file": "game/src/battle/core/battle.enemy-phase.js",
+      "line": 303,
+      "playable": true
+    },
+    {
+      "name": "buffDown",
+      "file": "game/src/battle/core/battle.enemy-phase.js",
+      "line": 444,
+      "playable": true
+    },
+    {
+      "name": "curseEnd",
+      "file": "game/src/battle/core/battle.enemy-phase.js",
+      "line": 445,
+      "playable": true
+    },
+    {
+      "name": "flee",
+      "file": "game/src/battle/core/battle.enemy-phase.js",
+      "line": 455,
+      "playable": true
+    },
+    {
+      "name": "armorBreak",
+      "file": "game/src/battle/core/battle.engine.js",
+      "line": 544,
+      "playable": true
+    },
+    {
+      "name": "deny",
+      "file": "game/src/battle/core/battle.engine.js",
+      "line": 988,
+      "playable": true
+    },
+    {
+      "name": "confirm",
+      "file": "game/src/battle/core/battle.engine.js",
+      "line": 992,
+      "playable": true
+    },
+    {
+      "name": "deny",
+      "file": "game/src/battle/core/battle.engine.js",
+      "line": 1053,
+      "playable": true
+    },
+    {
+      "name": "parry",
+      "file": "game/src/battle/core/battle.engine.js",
+      "line": 1099,
+      "playable": true
+    },
+    {
+      "name": "parry",
+      "file": "game/src/battle/core/battle.engine.js",
+      "line": 1175,
+      "playable": true
+    },
+    {
+      "name": "parry",
+      "file": "game/src/battle/core/battle.engine.js",
+      "line": 1368,
+      "playable": true
+    },
+    {
+      "name": "hurt",
+      "file": "game/src/battle/core/battle.engine.js",
+      "line": 1383,
+      "playable": true
+    },
+    {
+      "name": "curse",
+      "file": "game/src/battle/core/battle.engine.js",
+      "line": 1397,
+      "playable": true
+    },
+    {
+      "name": "curse",
+      "file": "game/src/battle/core/battle.engine.js",
+      "line": 1406,
+      "playable": true
+    },
+    {
+      "name": "card",
+      "file": "game/src/battle/core/battle.exec-play.js",
+      "line": 125,
+      "playable": true
+    },
+    {
+      "name": "cardSelect",
+      "file": "game/src/battle/view/battle.aim.js",
+      "line": 369,
+      "playable": true
+    },
+    {
+      "name": "cardSelect",
+      "file": "game/src/battle/view/battle.aim.js",
+      "line": 456,
+      "playable": true
+    },
+    {
+      "name": "phase",
+      "file": "game/src/battle/view/battle.anim.view.js",
+      "line": 70,
+      "playable": true
+    },
+    {
+      "name": "burn",
+      "file": "game/src/battle/view/battle.anim.view.js",
+      "line": 151,
+      "playable": true
+    },
+    {
+      "name": "hover",
+      "file": "game/src/battle/view/battle.hover.js",
+      "line": 57,
+      "playable": true
+    },
+    {
+      "name": "deny",
+      "file": "game/src/battle/view/battle.overlays.js",
+      "line": 172,
+      "playable": true
+    },
+    {
+      "name": "foeLunge",
+      "file": "game/src/battle/view/battle.vfx.js",
+      "line": 298,
+      "playable": true
+    },
+    {
+      "name": "hit",
+      "file": "game/src/battle/view/battle.vfx.js",
+      "line": 322,
+      "playable": true
+    },
+    {
+      "name": "shieldBreak",
+      "file": "game/src/battle/view/battle.vfx.js",
+      "line": 323,
+      "playable": true
+    },
+    {
+      "name": "deny",
+      "file": "game/src/battle/view/battle.view.js",
+      "line": 461,
+      "playable": true
+    },
+    {
+      "name": "deny",
+      "file": "game/src/battle/view/battle.view.js",
+      "line": 495,
+      "playable": true
+    },
+    {
+      "name": "hover",
+      "file": "game/src/game.boot.js",
+      "line": 378,
+      "playable": true
+    },
+    {
+      "name": "levelup",
+      "file": "game/src/hub/base.js",
+      "line": 54,
+      "playable": true
+    },
+    {
+      "name": "click",
+      "file": "game/src/hub/game.bag.drag.js",
+      "line": 55,
+      "playable": true
+    },
+    {
+      "name": "pick",
+      "file": "game/src/hub/game.bag.drag.js",
+      "line": 72,
+      "playable": true
+    },
+    {
+      "name": "drop",
+      "file": "game/src/hub/game.bag.drag.js",
+      "line": 162,
+      "playable": true
+    },
+    {
+      "name": "deny",
+      "file": "game/src/hub/game.bag.drag.js",
+      "line": 175,
+      "playable": true
+    },
+    {
+      "name": "deny",
+      "file": "game/src/hub/game.bag.drag.js",
+      "line": 184,
+      "playable": true
+    },
+    {
+      "name": "gain",
+      "file": "game/src/hub/game.bag.drag.js",
+      "line": 190,
+      "playable": true
+    },
+    {
+      "name": "deny",
+      "file": "game/src/hub/game.bag.js",
+      "line": 396,
+      "playable": true
+    },
+    {
+      "name": "deny",
+      "file": "game/src/hub/game.bag.js",
+      "line": 462,
+      "playable": true
+    },
+    {
+      "name": "gain",
+      "file": "game/src/hub/game.bag.js",
+      "line": 467,
+      "playable": true
+    },
+    {
+      "name": "deny",
+      "file": "game/src/hub/game.bag.js",
+      "line": 481,
+      "playable": true
+    },
+    {
+      "name": "hover",
+      "file": "game/src/hub/game.cardslib.common.js",
+      "line": 29,
+      "playable": true
+    },
+    {
+      "name": "ding",
+      "file": "game/src/hub/game.cardslib.common.js",
+      "line": 30,
+      "playable": true
+    },
+    {
+      "name": "legend",
+      "file": "game/src/hub/game.cardslib.page.js",
+      "line": 450,
+      "playable": true
+    },
+    {
+      "name": "reveal",
+      "file": "game/src/hub/game.cardslib.page.js",
+      "line": 459,
+      "playable": true
+    },
+    {
+      "name": "shutter",
+      "file": "game/src/hub/game.cardslib.page.js",
+      "line": 570,
+      "playable": true
+    },
+    {
+      "name": "prepReady",
+      "file": "game/src/hub/game.hub.depart.js",
+      "line": 333,
+      "playable": false
+    },
+    {
+      "name": "deployStart",
+      "file": "game/src/hub/game.hub.depart.js",
+      "line": 349,
+      "playable": false
+    },
+    {
+      "name": "switch",
+      "file": "game/src/hub/game.hub.js",
+      "line": 210,
+      "playable": true
+    },
+    {
+      "name": "levelup",
+      "file": "game/src/hub/meta.js",
+      "line": 38,
+      "playable": true
+    },
+    {
+      "name": "levelup",
+      "file": "game/src/hub/meta.js",
+      "line": 282,
+      "playable": true
+    },
+    {
+      "name": "levelup",
+      "file": "game/src/hub/meta.js",
+      "line": 298,
+      "playable": true
+    },
+    {
+      "name": "pick",
+      "file": "game/src/run/chests.js",
+      "line": 256,
+      "playable": true
+    },
+    {
+      "name": "reveal",
+      "file": "game/src/run/chests.js",
+      "line": 394,
+      "playable": true
+    },
+    {
+      "name": "legend",
+      "file": "game/src/run/chests.js",
+      "line": 395,
+      "playable": true
+    },
+    {
+      "name": "ding",
+      "file": "game/src/run/chests.js",
+      "line": 396,
+      "playable": true
+    },
+    {
+      "name": "legend",
+      "file": "game/src/run/game.nest.js",
+      "line": 96,
+      "playable": true
+    },
+    {
+      "name": "legend",
+      "file": "game/src/run/game.nest.js",
+      "line": 133,
+      "playable": true
+    },
+    {
+      "name": "characterSelect",
+      "file": "game/src/run/game.run.altar.js",
+      "line": 310,
+      "playable": false
+    },
+    {
+      "name": "layerEnter",
+      "file": "game/src/run/game.run.altar.js",
+      "line": 432,
+      "playable": false
+    },
+    {
+      "name": "altarActivate",
+      "file": "game/src/run/game.run.altar.js",
+      "line": 471,
+      "playable": false
+    },
+    {
+      "name": "altarOffer",
+      "file": "game/src/run/game.run.altar.js",
+      "line": 485,
+      "playable": false
+    },
+    {
+      "name": "altarReward",
+      "file": "game/src/run/game.run.altar.js",
+      "line": 530,
+      "playable": false
+    },
+    {
+      "name": "error",
+      "file": "game/src/run/game.run.altar.js",
+      "line": 704,
+      "playable": true
+    },
+    {
+      "name": "extractionConfirm",
+      "file": "game/src/run/game.run.altar.js",
+      "line": 735,
+      "playable": false
+    },
+    {
+      "name": "extractionSuccess",
+      "file": "game/src/run/game.run.altar.js",
+      "line": 796,
+      "playable": false
+    },
+    {
+      "name": "stashDeposit",
+      "file": "game/src/run/game.run.altar.js",
+      "line": 911,
+      "playable": false
+    },
+    {
+      "name": "stashDeposit",
+      "file": "game/src/run/game.run.altar.js",
+      "line": 921,
+      "playable": false
+    },
+    {
+      "name": "stashDeposit",
+      "file": "game/src/run/game.run.altar.js",
+      "line": 939,
+      "playable": false
+    },
+    {
+      "name": "scene",
+      "file": "game/src/run/game.run.flow.js",
+      "line": 433,
+      "playable": true
+    },
+    {
+      "name": "deny",
+      "file": "game/src/run/game.run.flow.js",
+      "line": 514,
+      "playable": true
+    },
+    {
+      "name": "coin",
+      "file": "game/src/run/game.run.flow.js",
+      "line": 519,
+      "playable": true
+    },
+    {
+      "name": "recodeStart",
+      "file": "game/src/run/game.run.flow.js",
+      "line": 566,
+      "playable": false
+    },
+    {
+      "name": "recodeComplete",
+      "file": "game/src/run/game.run.flow.js",
+      "line": 607,
+      "playable": false
+    },
+    {
+      "name": "blackMarketLose",
+      "file": "game/src/run/game.run.flow.js",
+      "line": 652,
+      "playable": false
+    },
+    {
+      "name": "blackMarketWin",
+      "file": "game/src/run/game.run.flow.js",
+      "line": 654,
+      "playable": false
+    },
+    {
+      "name": "searchStart",
+      "file": "game/src/run/game.run.scenes.js",
+      "line": 190,
+      "playable": false
+    },
+    {
+      "name": "searchReveal",
+      "file": "game/src/run/game.run.scenes.js",
+      "line": 196,
+      "playable": false
+    },
+    {
+      "name": "deny",
+      "file": "game/src/run/game.run.scenes.js",
+      "line": 277,
+      "playable": true
+    },
+    {
+      "name": "deny",
+      "file": "game/src/run/game.run.scenes.js",
+      "line": 336,
+      "playable": true
+    },
+    {
+      "name": "cardRestore",
+      "file": "game/src/run/game.run.scenes.js",
+      "line": 342,
+      "playable": false
+    },
+    {
+      "name": "error",
+      "file": "game/src/run/game.run.shop.js",
+      "line": 363,
+      "playable": true
+    },
+    {
+      "name": "error",
+      "file": "game/src/run/game.run.shop.js",
+      "line": 371,
+      "playable": true
+    },
+    {
+      "name": "tradeBuy",
+      "file": "game/src/run/game.run.shop.js",
+      "line": 379,
+      "playable": false
+    },
+    {
+      "name": "error",
+      "file": "game/src/run/game.run.shop.js",
+      "line": 389,
+      "playable": true
+    },
+    {
+      "name": "error",
+      "file": "game/src/run/game.run.shop.js",
+      "line": 399,
+      "playable": true
+    },
+    {
+      "name": "tradeBuy",
+      "file": "game/src/run/game.run.shop.js",
+      "line": 407,
+      "playable": false
+    },
+    {
+      "name": "tradeSell",
+      "file": "game/src/run/game.run.shop.js",
+      "line": 424,
+      "playable": false
+    },
+    {
+      "name": "deny",
+      "file": "game/src/run/game.session.bag.js",
+      "line": 87,
+      "playable": true
+    },
+    {
+      "name": "coin",
+      "file": "game/src/run/game.session.bag.js",
+      "line": 105,
+      "playable": true
+    },
+    {
+      "name": "heal",
+      "file": "game/src/run/game.session.death.js",
+      "line": 26,
+      "playable": true
+    },
+    {
+      "name": "levelup",
+      "file": "game/src/run/game.session.death.js",
+      "line": 71,
+      "playable": true
+    },
+    {
+      "name": "extractionFail",
+      "file": "game/src/run/game.session.death.js",
+      "line": 81,
+      "playable": false
+    },
+    {
+      "name": "legend",
+      "file": "game/src/ui/cinematics.js",
+      "line": 45,
+      "playable": true
+    },
+    {
+      "name": "hover",
+      "file": "game/src/ui/game.menu.js",
+      "line": 97,
+      "playable": true
+    },
+    {
+      "name": "gain",
+      "file": "game/src/ui/game.menu.js",
+      "line": 99,
+      "playable": true
+    },
+    {
+      "name": "confirm",
+      "file": "game/src/ui/game.menu.js",
+      "line": 383,
+      "playable": true
+    },
+    {
+      "name": "defeat",
+      "file": "game/src/ui/game.menu.js",
+      "line": 858,
+      "playable": true
+    },
+    {
+      "name": "confirm",
+      "file": "game/src/ui/game.menu.js",
+      "line": 1020,
+      "playable": true
+    },
+    {
+      "name": "ding",
+      "file": "game/src/ui/game.menu.js",
+      "line": 1073,
+      "playable": true
+    },
+    {
+      "name": "ding",
+      "file": "game/src/ui/game.menu.js",
+      "line": 1078,
+      "playable": true
+    },
+    {
+      "name": "ding",
+      "file": "game/src/ui/game.menu.js",
+      "line": 1091,
+      "playable": true
+    },
+    {
+      "name": "open",
+      "file": "game/src/ui/overlay.js",
+      "line": 126,
+      "playable": true
+    },
+    {
+      "name": "close",
+      "file": "game/src/ui/overlay.js",
+      "line": 191,
+      "playable": true
+    },
+    {
+      "name": "hover",
+      "file": "game/src/ui/ui.js",
+      "line": 464,
+      "playable": true
+    }
+  ],
+  "dynamic": [
+    {
+      "file": "game/src/battle/core/battle.lifecycle.js",
+      "line": 135,
+      "expression": "win === true ? (opts.isBoss ? 'bossVictory' : 'victory') : win === false ? 'defeat' : 'flee');"
+    },
+    {
+      "file": "game/src/battle/core/battle.lifecycle.js",
+      "line": 240,
+      "expression": "opts.isBoss ? 'bossReveal' : 'battleEnter');"
+    },
+    {
+      "file": "game/src/battle/view/battle.anim.view.js",
+      "line": 130,
+      "expression": "now > prev.energy ? 'energyUp' : 'energyDown');\r"
+    },
+    {
+      "file": "game/src/battle/view/battle.vfx.js",
+      "line": 320,
+      "expression": "cueSound, cueSound === 'hit'\r"
+    },
+    {
+      "file": "game/src/core/renderer.fx.js",
+      "line": 29,
+      "expression": "sfx);"
+    },
+    {
+      "file": "game/src/hub/game.bag.js",
+      "line": 204,
+      "expression": "toSafe ? 'safeStore' : 'safeRetrieve');"
+    },
+    {
+      "file": "game/src/run/game.run.flow.js",
+      "line": 402,
+      "expression": "record.mementoId ? 'storyComplete' : 'eventClue');"
+    },
+    {
+      "file": "game/src/run/lab.ending.js",
+      "line": 47,
+      "expression": "n); } catch { /* 静音环境忽略 */ } };"
+    },
+    {
+      "file": "game/src/ui/cinematics.js",
+      "line": 99,
+      "expression": "legendary ? 'legend' : 'gain');"
+    }
+  ],
+  "catalog": {
+    "path": "game/assets/sfx/alternatives/arknights-runtime/library.json",
+    "name": "方舟微改 · 全部实装音效",
+    "version": "A4",
+    "cueCount": 107,
+    "loopCount": 7,
+    "variants": 107,
+    "missingFiles": [],
+    "cues": [
+      {
+        "id": "cardSelect",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-expansion/ui-bag/cardSelect.ogg",
+            "exists": true,
+            "bytes": 21462
+          }
+        ]
+      },
+      {
+        "id": "draw",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-expansion/ui-bag/draw.ogg",
+            "exists": true,
+            "bytes": 23414
+          }
+        ]
+      },
+      {
+        "id": "discard",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-expansion/ui-bag/discard.ogg",
+            "exists": true,
+            "bytes": 20312
+          }
+        ]
+      },
+      {
+        "id": "pick",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-expansion/ui-bag/pick.ogg",
+            "exists": true,
+            "bytes": 23301
+          }
+        ]
+      },
+      {
+        "id": "coin",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-expansion/ui-bag/coin.ogg",
+            "exists": true,
+            "bytes": 21892
+          }
+        ]
+      },
+      {
+        "id": "reveal",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-expansion/ui-bag/reveal.ogg",
+            "exists": true,
+            "bytes": 11341
+          }
+        ]
+      },
+      {
+        "id": "legend",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-expansion/ui-bag/legend.ogg",
+            "exists": true,
+            "bytes": 14564
+          }
+        ]
+      },
+      {
+        "id": "victory",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-expansion/ui-bag/victory.ogg",
+            "exists": true,
+            "bytes": 44860
+          }
+        ]
+      },
+      {
+        "id": "defeat",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-expansion/ui-bag/defeat.ogg",
+            "exists": true,
+            "bytes": 42461
+          }
+        ]
+      },
+      {
+        "id": "flee",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-expansion/ui-bag/flee.ogg",
+            "exists": true,
+            "bytes": 17234
+          }
+        ]
+      },
+      {
+        "id": "hurt",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-expansion/combat-status/hurt.ogg",
+            "exists": true,
+            "bytes": 22484
+          }
+        ]
+      },
+      {
+        "id": "kill",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-expansion/combat-status/kill.ogg",
+            "exists": true,
+            "bytes": 31741
+          }
+        ]
+      },
+      {
+        "id": "shieldUp",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-expansion/combat-status/shieldUp.ogg",
+            "exists": true,
+            "bytes": 22927
+          }
+        ]
+      },
+      {
+        "id": "armorBreak",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-expansion/combat-status/armorBreak.ogg",
+            "exists": true,
+            "bytes": 25741
+          }
+        ]
+      },
+      {
+        "id": "energyUp",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-expansion/combat-status/energyUp.ogg",
+            "exists": true,
+            "bytes": 22128
+          }
+        ]
+      },
+      {
+        "id": "energyDown",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-expansion/combat-status/energyDown.ogg",
+            "exists": true,
+            "bytes": 19480
+          }
+        ]
+      },
+      {
+        "id": "buffUp",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-expansion/combat-status/buffUp.ogg",
+            "exists": true,
+            "bytes": 44185
+          }
+        ]
+      },
+      {
+        "id": "buffDown",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-expansion/combat-status/buffDown.ogg",
+            "exists": true,
+            "bytes": 23404
+          }
+        ]
+      },
+      {
+        "id": "curse",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-expansion/combat-status/curse.ogg",
+            "exists": true,
+            "bytes": 46144
+          }
+        ]
+      },
+      {
+        "id": "curseEnd",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-expansion/combat-status/curseEnd.ogg",
+            "exists": true,
+            "bytes": 63505
+          }
+        ]
+      },
+      {
+        "id": "danger",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-expansion/exploration/danger.ogg",
+            "exists": true,
+            "bytes": 28204
+          }
+        ]
+      },
+      {
+        "id": "fireEnter",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-expansion/exploration/fireEnter.ogg",
+            "exists": true,
+            "bytes": 33978
+          }
+        ]
+      },
+      {
+        "id": "altarEnter",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-expansion/exploration/altarEnter.ogg",
+            "exists": true,
+            "bytes": 46187
+          }
+        ]
+      },
+      {
+        "id": "altarActivate",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-expansion/exploration/altarActivate.ogg",
+            "exists": true,
+            "bytes": 47670
+          }
+        ]
+      },
+      {
+        "id": "doorEnter",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-expansion/exploration/doorEnter.ogg",
+            "exists": true,
+            "bytes": 24656
+          }
+        ]
+      },
+      {
+        "id": "shopEnter",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-expansion/exploration/shopEnter.ogg",
+            "exists": true,
+            "bytes": 27532
+          }
+        ]
+      },
+      {
+        "id": "extractionEnter",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-expansion/exploration/extractionEnter.ogg",
+            "exists": true,
+            "bytes": 27262
+          }
+        ]
+      },
+      {
+        "id": "extractionSuccess",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-expansion/exploration/extractionSuccess.ogg",
+            "exists": true,
+            "bytes": 100448
+          }
+        ]
+      },
+      {
+        "id": "extractionFail",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-expansion/exploration/extractionFail.ogg",
+            "exists": true,
+            "bytes": 71804
+          }
+        ]
+      },
+      {
+        "id": "levelup",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-expansion/exploration/levelup.ogg",
+            "exists": true,
+            "bytes": 44634
+          }
+        ]
+      },
+      {
+        "id": "click",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-adjusted/click.ogg",
+            "exists": true,
+            "bytes": 8519
+          }
+        ]
+      },
+      {
+        "id": "confirm",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-adjusted/confirm.ogg",
+            "exists": true,
+            "bytes": 10168
+          }
+        ]
+      },
+      {
+        "id": "card",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-adjusted/card.ogg",
+            "exists": true,
+            "bytes": 16661
+          }
+        ]
+      },
+      {
+        "id": "attackSlash",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-adjusted/attackSlash.ogg",
+            "exists": true,
+            "bytes": 17509
+          }
+        ]
+      },
+      {
+        "id": "parry",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-adjusted/parry.ogg",
+            "exists": true,
+            "bytes": 16116
+          }
+        ]
+      },
+      {
+        "id": "shieldBreak",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-adjusted/shieldBreak.ogg",
+            "exists": true,
+            "bytes": 24379
+          }
+        ]
+      },
+      {
+        "id": "heal",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-adjusted/heal.ogg",
+            "exists": true,
+            "bytes": 16701
+          }
+        ]
+      },
+      {
+        "id": "eventEnter",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-adjusted/eventEnter.ogg",
+            "exists": true,
+            "bytes": 23791
+          }
+        ]
+      },
+      {
+        "id": "chestBurst",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-adjusted/chestBurst.ogg",
+            "exists": true,
+            "bytes": 18710
+          }
+        ]
+      },
+      {
+        "id": "bossReveal",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-adjusted/bossReveal.ogg",
+            "exists": true,
+            "bytes": 35444
+          }
+        ]
+      },
+      {
+        "id": "hover",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/hover.ogg",
+            "exists": true,
+            "bytes": 11486
+          }
+        ]
+      },
+      {
+        "id": "switch",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/switch.ogg",
+            "exists": true,
+            "bytes": 16747
+          }
+        ]
+      },
+      {
+        "id": "open",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/open.ogg",
+            "exists": true,
+            "bytes": 19960
+          }
+        ]
+      },
+      {
+        "id": "close",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/close.ogg",
+            "exists": true,
+            "bytes": 18411
+          }
+        ]
+      },
+      {
+        "id": "deny",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/deny.ogg",
+            "exists": true,
+            "bytes": 28497
+          }
+        ]
+      },
+      {
+        "id": "error",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/error.ogg",
+            "exists": true,
+            "bytes": 6921
+          }
+        ]
+      },
+      {
+        "id": "ding",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/ding.ogg",
+            "exists": true,
+            "bytes": 33542
+          }
+        ]
+      },
+      {
+        "id": "drop",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/drop.ogg",
+            "exists": true,
+            "bytes": 18305
+          }
+        ]
+      },
+      {
+        "id": "gain",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/gain.ogg",
+            "exists": true,
+            "bytes": 13161
+          }
+        ]
+      },
+      {
+        "id": "shuffle",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/shuffle.ogg",
+            "exists": true,
+            "bytes": 27494
+          }
+        ]
+      },
+      {
+        "id": "shutter",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/shutter.ogg",
+            "exists": true,
+            "bytes": 10076
+          }
+        ]
+      },
+      {
+        "id": "chestShake",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/chestShake.ogg",
+            "exists": true,
+            "bytes": 38468
+          }
+        ]
+      },
+      {
+        "id": "characterSelect",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/characterSelect.ogg",
+            "exists": true,
+            "bytes": 21355
+          }
+        ]
+      },
+      {
+        "id": "prepReady",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/prepReady.ogg",
+            "exists": true,
+            "bytes": 26168
+          }
+        ]
+      },
+      {
+        "id": "deployStart",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/deployStart.ogg",
+            "exists": true,
+            "bytes": 26565
+          }
+        ]
+      },
+      {
+        "id": "collectionUnlock",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/collectionUnlock.ogg",
+            "exists": true,
+            "bytes": 36082
+          }
+        ]
+      },
+      {
+        "id": "achievementUnlock",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/achievementUnlock.ogg",
+            "exists": true,
+            "bytes": 97329
+          }
+        ]
+      },
+      {
+        "id": "tradeBuy",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/tradeBuy.ogg",
+            "exists": true,
+            "bytes": 21737
+          }
+        ]
+      },
+      {
+        "id": "tradeSell",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/tradeSell.ogg",
+            "exists": true,
+            "bytes": 16681
+          }
+        ]
+      },
+      {
+        "id": "stashDeposit",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/stashDeposit.ogg",
+            "exists": true,
+            "bytes": 14656
+          }
+        ]
+      },
+      {
+        "id": "safeEnter",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/safeEnter.ogg",
+            "exists": true,
+            "bytes": 13719
+          }
+        ]
+      },
+      {
+        "id": "safeStore",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/safeStore.ogg",
+            "exists": true,
+            "bytes": 34859
+          }
+        ]
+      },
+      {
+        "id": "safeRetrieve",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/safeRetrieve.ogg",
+            "exists": true,
+            "bytes": 51216
+          }
+        ]
+      },
+      {
+        "id": "cardRestore",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/cardRestore.ogg",
+            "exists": true,
+            "bytes": 38832
+          }
+        ]
+      },
+      {
+        "id": "runeExchange",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/runeExchange.ogg",
+            "exists": true,
+            "bytes": 56120
+          }
+        ]
+      },
+      {
+        "id": "blackMarketWin",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/blackMarketWin.ogg",
+            "exists": true,
+            "bytes": 96350
+          }
+        ]
+      },
+      {
+        "id": "blackMarketLose",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/blackMarketLose.ogg",
+            "exists": true,
+            "bytes": 68084
+          }
+        ]
+      },
+      {
+        "id": "recodeStart",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/recodeStart.ogg",
+            "exists": true,
+            "bytes": 44297
+          }
+        ]
+      },
+      {
+        "id": "recodeComplete",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/ui-extra/recodeComplete.ogg",
+            "exists": true,
+            "bytes": 16910
+          }
+        ]
+      },
+      {
+        "id": "attackArrow",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/combat-extra/attackArrow.ogg",
+            "exists": true,
+            "bytes": 10156
+          }
+        ]
+      },
+      {
+        "id": "attackBlunt",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/combat-extra/attackBlunt.ogg",
+            "exists": true,
+            "bytes": 15696
+          }
+        ]
+      },
+      {
+        "id": "attackBossHeavy",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/combat-extra/attackBossHeavy.ogg",
+            "exists": true,
+            "bytes": 29152
+          }
+        ]
+      },
+      {
+        "id": "attackFire",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/combat-extra/attackFire.ogg",
+            "exists": true,
+            "bytes": 20025
+          }
+        ]
+      },
+      {
+        "id": "attackIce",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/combat-extra/attackIce.ogg",
+            "exists": true,
+            "bytes": 18859
+          }
+        ]
+      },
+      {
+        "id": "attackLightning",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/combat-extra/attackLightning.ogg",
+            "exists": true,
+            "bytes": 15466
+          }
+        ]
+      },
+      {
+        "id": "attackPierce",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/combat-extra/attackPierce.ogg",
+            "exists": true,
+            "bytes": 14475
+          }
+        ]
+      },
+      {
+        "id": "attackPoison",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/combat-extra/attackPoison.ogg",
+            "exists": true,
+            "bytes": 16443
+          }
+        ]
+      },
+      {
+        "id": "attackPsychic",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/combat-extra/attackPsychic.ogg",
+            "exists": true,
+            "bytes": 23496
+          }
+        ]
+      },
+      {
+        "id": "foeLunge",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/combat-extra/foeLunge.ogg",
+            "exists": true,
+            "bytes": 11716
+          }
+        ]
+      },
+      {
+        "id": "burn",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/combat-extra/burn.ogg",
+            "exists": true,
+            "bytes": 34570
+          }
+        ]
+      },
+      {
+        "id": "phaseSelf",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/combat-extra/phaseSelf.ogg",
+            "exists": true,
+            "bytes": 29521
+          }
+        ]
+      },
+      {
+        "id": "phaseFoe",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/combat-extra/phaseFoe.ogg",
+            "exists": true,
+            "bytes": 32156
+          }
+        ]
+      },
+      {
+        "id": "rarePlay",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/combat-extra/rarePlay.ogg",
+            "exists": true,
+            "bytes": 46739
+          }
+        ]
+      },
+      {
+        "id": "battleEnter",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/combat-extra/battleEnter.ogg",
+            "exists": true,
+            "bytes": 28293
+          }
+        ]
+      },
+      {
+        "id": "bossVictory",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/combat-extra/bossVictory.ogg",
+            "exists": true,
+            "bytes": 99204
+          }
+        ]
+      },
+      {
+        "id": "runClear",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/combat-extra/runClear.ogg",
+            "exists": true,
+            "bytes": 99349
+          }
+        ]
+      },
+      {
+        "id": "altarOffer",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/environment/altarOffer.ogg",
+            "exists": true,
+            "bytes": 24848
+          }
+        ]
+      },
+      {
+        "id": "altarReward",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/environment/altarReward.ogg",
+            "exists": true,
+            "bytes": 37315
+          }
+        ]
+      },
+      {
+        "id": "eggHatch",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/environment/eggHatch.ogg",
+            "exists": true,
+            "bytes": 47795
+          }
+        ]
+      },
+      {
+        "id": "petRescue",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/environment/petRescue.ogg",
+            "exists": true,
+            "bytes": 14379
+          }
+        ]
+      },
+      {
+        "id": "eventClue",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/environment/eventClue.ogg",
+            "exists": true,
+            "bytes": 58984
+          }
+        ]
+      },
+      {
+        "id": "eventComplete",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/environment/eventComplete.ogg",
+            "exists": true,
+            "bytes": 41641
+          }
+        ]
+      },
+      {
+        "id": "eventDanger",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/environment/eventDanger.ogg",
+            "exists": true,
+            "bytes": 40317
+          }
+        ]
+      },
+      {
+        "id": "eventSafe",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/environment/eventSafe.ogg",
+            "exists": true,
+            "bytes": 39447
+          }
+        ]
+      },
+      {
+        "id": "extractionConfirm",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/environment/extractionConfirm.ogg",
+            "exists": true,
+            "bytes": 6944
+          }
+        ]
+      },
+      {
+        "id": "layerEnter",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/environment/layerEnter.ogg",
+            "exists": true,
+            "bytes": 62557
+          }
+        ]
+      },
+      {
+        "id": "searchStart",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/environment/searchStart.ogg",
+            "exists": true,
+            "bytes": 42795
+          }
+        ]
+      },
+      {
+        "id": "searchReveal",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/environment/searchReveal.ogg",
+            "exists": true,
+            "bytes": 38492
+          }
+        ]
+      },
+      {
+        "id": "storyClue",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/environment/storyClue.ogg",
+            "exists": true,
+            "bytes": 18552
+          }
+        ]
+      },
+      {
+        "id": "storyComplete",
+        "loop": false,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/environment/storyComplete.ogg",
+            "exists": true,
+            "bytes": 47007
+          }
+        ]
+      },
+      {
+        "id": "windSnowLoop",
+        "loop": true,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/environment/windSnowLoop.ogg",
+            "exists": true,
+            "bytes": 248071
+          }
+        ]
+      },
+      {
+        "id": "wastelandWindLoop",
+        "loop": true,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/environment/wastelandWindLoop.ogg",
+            "exists": true,
+            "bytes": 87581
+          }
+        ]
+      },
+      {
+        "id": "ruinsAirLoop",
+        "loop": true,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/environment/ruinsAirLoop.ogg",
+            "exists": true,
+            "bytes": 191024
+          }
+        ]
+      },
+      {
+        "id": "pollutionDroneLoop",
+        "loop": true,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/environment/pollutionDroneLoop.ogg",
+            "exists": true,
+            "bytes": 88359
+          }
+        ]
+      },
+      {
+        "id": "fireLoop",
+        "loop": true,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/environment/fireLoop.ogg",
+            "exists": true,
+            "bytes": 146255
+          }
+        ]
+      },
+      {
+        "id": "altarHumLoop",
+        "loop": true,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/environment/altarHumLoop.ogg",
+            "exists": true,
+            "bytes": 75358
+          }
+        ]
+      },
+      {
+        "id": "extractionBeaconLoop",
+        "loop": true,
+        "variants": [
+          {
+            "src": "./assets/sfx/alternatives/arknights-runtime/environment/extractionBeaconLoop.ogg",
+            "exists": true,
+            "bytes": 153024
+          }
+        ]
+      }
+    ]
+  },
+  "disk": {
+    "audioFileCount": 473,
+    "groups": {
+      "game/assets": {
+        "count": 3,
+        "bytes": 12103008
+      },
+      "game/assets/sfx/alternatives/arknights": {
+        "count": 10,
+        "bytes": 196748
+      },
+      "game/assets/sfx/alternatives/arknights-adjusted": {
+        "count": 10,
+        "bytes": 187998
+      },
+      "game/assets/sfx/alternatives/arknights-expansion/combat-status": {
+        "count": 20,
+        "bytes": 662024
+      },
+      "game/assets/sfx/alternatives/arknights-expansion/exploration": {
+        "count": 20,
+        "bytes": 926856
+      },
+      "game/assets/sfx/alternatives/arknights-expansion/ui-bag": {
+        "count": 20,
+        "bytes": 502630
+      },
+      "game/assets/sfx/alternatives/arknights-runtime/combat-extra": {
+        "count": 17,
+        "bytes": 545316
+      },
+      "game/assets/sfx/alternatives/arknights-runtime/environment": {
+        "count": 42,
+        "bytes": 3143157
+      },
+      "game/assets/sfx/alternatives/arknights-runtime/ui-extra": {
+        "count": 29,
+        "bytes": 924028
+      },
+      "game/assets/sfx/alternatives/cc0-action": {
+        "count": 10,
+        "bytes": 158504
+      },
+      "game/assets/sfx/alternatives/cc0-ui": {
+        "count": 10,
+        "bytes": 135457
+      },
+      "game/assets/sfx/battle/additions": {
+        "count": 4,
+        "bytes": 65273
+      },
+      "game/assets/sfx/battle": {
+        "count": 36,
+        "bytes": 529160
+      },
+      "game/assets/sfx": {
+        "count": 17,
+        "bytes": 575022
+      },
+      "game/assets/sfx/jsfxr": {
+        "count": 5,
+        "bytes": 50219
+      },
+      "game/assets/sfx/winter-v5/ambient": {
+        "count": 7,
+        "bytes": 311612
+      },
+      "game/assets/sfx/winter-v5/attacks": {
+        "count": 29,
+        "bytes": 306325
+      },
+      "game/assets/sfx/winter-v5/cards": {
+        "count": 19,
+        "bytes": 184435
+      },
+      "game/assets/sfx/winter-v5/combat": {
+        "count": 45,
+        "bytes": 451893
+      },
+      "game/assets/sfx/winter-v5/exploration": {
+        "count": 31,
+        "bytes": 438668
+      },
+      "game/assets/sfx/winter-v5/growth": {
+        "count": 8,
+        "bytes": 103062
+      },
+      "game/assets/sfx/winter-v5/nodes": {
+        "count": 19,
+        "bytes": 331269
+      },
+      "game/assets/sfx/winter-v5/rewards": {
+        "count": 21,
+        "bytes": 269370
+      },
+      "game/assets/sfx/winter-v5/ui": {
+        "count": 31,
+        "bytes": 249498
+      },
+      "game/assets/sfx/winter-v6-ten": {
+        "count": 10,
+        "bytes": 145046
+      }
+    }
+  }
+}

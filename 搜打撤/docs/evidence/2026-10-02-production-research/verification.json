@@ -1,0 +1,82 @@
+{
+  "checkedAt": "2026-10-02T13:54:15.065Z",
+  "result": "passed",
+  "sourceChecks": {
+    "engineering": {
+      "checked": 275,
+      "mismatches": []
+    },
+    "gameplay": {
+      "checked": 49,
+      "mismatches": []
+    },
+    "experience": {
+      "checked": 23,
+      "mismatches": []
+    },
+    "experienceAdditional": {
+      "checked": 8,
+      "mismatches": []
+    },
+    "memoryProbe": {
+      "checked": 11,
+      "mismatches": []
+    }
+  },
+  "researchFiles": {
+    "jsonParsed": 66,
+    "localMarkdownLinksChecked": 456
+  },
+  "library": {
+    "records": 38,
+    "files": 84,
+    "bytes": 4300546,
+    "payloadShaVerified": 50,
+    "recordedValidation": "library/validation.json",
+    "indexMemoryValidation": "library/index-memory-validation.json",
+    "memoryResult": "passed"
+  },
+  "firstPassBrowser": {
+    "origin": "http://127.0.0.1:5336/",
+    "viewport": {
+      "height": 764,
+      "width": 1183
+    },
+    "originalCaptures": 5,
+    "imageFilesIncludingCorrectExtensionCopies": 10,
+    "ignoredImageFiles": 10,
+    "evidenceManifest": "diagnosis/browser/evidence-manifest.json",
+    "snapshotImport": "browser-ea0418df-c518-47dc-8dd0-00dfb323119d-snapshot.json",
+    "scope": "One normal first-layer supply + battle + reward + consumption tutorial + return to map; no full run/extraction/audio/refresh recovery"
+  },
+  "counterEvidenceReview": [
+    "Extraction probe invokes real functions but isolates legal-exit and persisted-transaction prerequisites",
+    "Global time/action/save paths reviewed; no per-step resource deduction found in these paths",
+    "Main-map common extraction result exists; lab ending is separate",
+    "Generic click/battle sounds and BGM exist; cue gaps are not silence or listening evidence",
+    "Current normal battle and tutorial disprove absent basic click loop",
+    "31/249 strict file ratio is not effective type coverage"
+  ],
+  "limits": [
+    "Source hashes support reuse, not test passage",
+    "Historical 100-seed map evidence is memory geometry only",
+    "No build/game full test/install/downloaded-code execution",
+    "Library file URL browser navigation was security-policy blocked; jsdom is not browser/visual acceptance",
+    "Remote refs/CI not refreshed or checked"
+  ],
+  "errors": [],
+  "assistedBrowser": {
+    "evidence": "diagnosis/browser-assisted/evidence-manifest.json",
+    "viewport": {
+      "width": 658,
+      "height": 764,
+      "dpr": 1.5
+    },
+    "ordinaryDebugWins": 10,
+    "bossDebugWins": 1,
+    "outcome": "clear",
+    "runActiveAfterReload": false,
+    "warehouseAfterReload": "22/25 from 24-stash-after-reload.txt",
+    "scope": "Legal four-layer movement, altar, boss gate/deck, assisted boss victory, extraction, warehouse and reload; not natural completion"
+  }
+}

@@ -1,0 +1,95 @@
+Browser tab: 10, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5336/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/
+	1 container viewport
+		2 button 背包 3/16, ID: bagBtnFloat
+			3 text 背包
+			4 text 3/16
+		5 container crystal 选择要献祭的卡牌, ID: overlay
+			6 container
+				7 button Description: 关闭, ID: ovCloseX
+				8 heading crystal 选择要献祭的卡牌, Value: 2, ID: ovTitle
+					9 image crystal
+					10 text  选择要献祭的卡牌
+				11 container ovBody
+					12 container
+						13 text 选择  3  张卡牌献祭（已选  0 ）
+					14 container
+						15 text 1
+						16 image 初始攻击
+						17 text 初始攻击
+						18 text 武术 · 初始
+						19 text 攻（ +0 ）： 造成等同于攻击力的 伤害 。
+						20 container
+							21 image coin
+							22 text 1
+						23 text 1 费
+					24 container
+						25 text 1
+						26 image 初始攻击
+						27 text 初始攻击
+						28 text 武术 · 初始
+						29 text 攻（ +0 ）： 造成等同于攻击力的 伤害 。
+						30 container
+							31 image coin
+							32 text 1
+						33 text 1 费
+					34 container
+						35 text 1
+						36 image 初始攻击
+						37 text 初始攻击
+						38 text 武术 · 初始
+						39 text 攻（ +0 ）： 造成等同于攻击力的 伤害 。
+						40 container
+							41 image coin
+							42 text 1
+						43 text 1 费
+					44 container
+						45 text 1
+						46 image 初始攻击
+						47 text 初始攻击
+						48 text 武术 · 初始
+						49 text 攻（ +0 ）： 造成等同于攻击力的 伤害 。
+						50 container
+							51 image coin
+							52 text 1
+						53 text 1 费
+					54 container
+						55 text 1
+						56 image 初始攻击
+						57 text 初始攻击
+						58 text 武术 · 初始
+						59 text 攻（ +0 ）： 造成等同于攻击力的 伤害 。
+						60 container
+							61 image coin
+							62 text 1
+						63 text 1 费
+					64 container
+						65 text 1
+						66 image 潜匿
+						67 text 潜匿
+						68 text 武术 · 无专属
+						69 image cards
+						70 text 抽 1 进入潜行状态  1 回合 ，抽 1 张牌。
+						71 container
+							72 image coin
+							73 text 3
+						74 text 1 费
+					75 container
+						76 text 0
+						77 image 江湖救急-改
+						78 text 江湖救急-改
+						79 text 武术 · 无专属
+						80 text 随机获得 3 张临时卡牌， 回合开始时 将其 消耗 。
+						81 container
+							82 image coin
+							83 text 3
+						84 text 0 费
+					85 container
+						86 button (disabled) crystal 确认献祭
+							87 image crystal
+							88 text  确认献祭
+						89 button exit 取消
+							90 image exit
+							91 text  取消
+
+The focused UI element is 89 button exit 取消

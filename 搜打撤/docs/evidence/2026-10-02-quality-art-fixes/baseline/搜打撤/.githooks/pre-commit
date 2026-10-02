@@ -1,0 +1,90 @@
+#!/bin/sh
+# ============================================================================
+# pre-commit —— 日常快速验收；公共边界与阶段收尾仍用完整门禁
+#
+# 【为什么选 pre-commit 而不是 pre-push】
+#   1. 本次事故形态是「提交时没跑测试，红灯用例进主干」，卡在提交瞬间最直接；
+#   2. pre-commit 只检查本次暂存区，判定精确；pre-push 要还原整个推送范围
+#      （新分支 / 多提交 / 删分支等），口径复杂，且发现问题时为时已晚；
+#   3. 远端 CI 仍运行完整测试；本地快速门检查静态契约和邻近测试，
+#      高风险路径自动回退全量，避免普通小改每次都等待整个套件；
+#   4. 演示与日常验证不接触任何远端，风险最小。
+#   完整门禁仍在 CI、公共架构变更和阶段收尾执行。
+#
+# 【触发口径】默认调用 scripts/acceptance-gate.mjs，按暂存路径选择定向
+#   或全量；源码、数据、测试、工具、剧情和配置纳入，纯文档/样式/图片
+#   不运行 Vitest，仍须按改动类型做实页或素材验收。
+#
+# 【强制全量】FORCE_FULL_TESTS=1 保留旧全量路径与 gate-full-test.log。
+#   默认快速路径会直接输出执行的检查和选择理由；失败时阻断提交。
+#
+# 【绕过口】（明知故犯才用）
+#       git commit --no-verify ...          # 标准绕过，整个钩子不执行
+#       SKIP_FULL_TESTS=1 git commit ...    # 兼容旧环境变量，绕过本地门禁
+#       （cmd 下： set SKIP_FULL_TESTS=1 && git commit ...）
+#
+# 【环境】Windows + 中文路径；Git Bash / cmd 双壳均可（Git for Windows 对带
+#   shebang 的钩子统一经 sh 执行）。挂载方式：git config core.hooksPath 指向本
+#   文件所在目录的绝对路径，由 scripts/setup-commit-gate.mjs 一次完成，因此在
+#   仓库任意子目录里提交同样生效；换克隆目录需重新执行一次该脚本。
+# ============================================================================
+
+# 绕过口：环境变量
+if [ -n "$SKIP_FULL_TESTS" ]; then
+  echo "[gate] SKIP_FULL_TESTS set -> local gate SKIPPED, commit is UNVERIFIED."
+  exit 0
+fi
+
+# 失败关闭（fail-closed）：门禁自身出错时也阻断提交
+TOP=$(git rev-parse --show-toplevel) || { echo "[gate] FATAL: git rev-parse failed"; exit 1; }
+cd "$TOP" || { echo "[gate] FATAL: cd $TOP failed"; exit 1; }
+
+# 普通提交先走定向门；旧全量逻辑只供明确强制时使用。
+if [ -z "$FORCE_FULL_TESTS" ]; then
+  ( cd 搜打撤 && node scripts/acceptance-gate.mjs --staged --run )
+  exit $?
+fi
+
+STAGED=$(git -c core.quotepath=false diff --cached --name-only --no-renames) \
+  || { echo "[gate] FATAL: git diff --cached failed"; exit 1; }
+[ -z "$STAGED" ] && exit 0
+
+GATED="$STAGED"
+if [ -z "$GATED" ]; then
+  echo "[gate] OK: no staged changes for forced full suite."
+  exit 0
+fi
+
+echo "[gate] FORCE_FULL_TESTS set -> running full suite for staged changes:"
+printf '%s\n' "$GATED" | sed 's/^/[gate]   - /'
+
+GITDIR=$(git rev-parse --absolute-git-dir) \
+  || { echo "[gate] FATAL: git rev-parse --absolute-git-dir failed"; exit 1; }
+LOG="$GITDIR/gate-full-test.log"
+: > "$LOG" || { echo "[gate] FATAL: cannot write log: $LOG"; exit 1; }
+
+T0=$(date +%s)
+if (set -o pipefail) 2>/dev/null; then
+  set -o pipefail
+  ( cd 搜打撤 && node node_modules/vitest/vitest.mjs run --no-file-parallelism ) 2>&1 | tee -a "$LOG"
+  RC=$?
+else
+  ( cd 搜打撤 && node node_modules/vitest/vitest.mjs run --no-file-parallelism ) > "$LOG" 2>&1
+  RC=$?
+  cat "$LOG"
+fi
+ELAPSED=$(( $(date +%s) - T0 ))
+
+if [ "$RC" -eq 0 ]; then
+  echo "[gate] PASS: full suite green in ${ELAPSED}s -> allowing commit. (log: $LOG)"
+  exit 0
+fi
+
+echo "[gate] FAIL: full suite red in ${ELAPSED}s -> COMMIT BLOCKED."
+echo "[gate] Failing tests (extracted from vitest output):"
+grep -aE '(^|[[:space:]])FAIL[[:space:]]|^[[:space:]]*[×✕][[:space:]]' "$LOG" \
+  | awk '!seen[$0]++' | sed 's/^/[gate]   - /'
+grep -aE '^(Test Files|     Tests)[[:space:]]' "$LOG" | sed 's/^/[gate]   /'
+echo "[gate] Full log: $LOG"
+echo "[gate] Bypass (not recommended): git commit --no-verify  or  SKIP_FULL_TESTS=1"
+exit 1

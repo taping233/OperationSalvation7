@@ -1,0 +1,33 @@
+Browser tab: 10, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5336/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/
+	1 container archive 仓库物品, ID: overlay
+		2 container
+			3 button Description: 关闭, ID: ovCloseX
+			4 heading archive 仓库物品, Value: 2, ID: ovTitle
+				5 image archive
+				6 text  仓库物品
+			7 container
+				8 text 1
+				9 image 不变应万变-改
+				10 text 不变应万变-改
+				11 text 武术 · 无专属
+				12 text 在手牌中时，本牌变为打出的上一张武术牌的 1 费复制。
+				13 container
+					14 image coin
+					15 text 3
+				16 text ×1 张 · 收购价  3 币 /张
+				17 image medal
+				18 text 职业收藏室 ：收藏即用掉这张卡（从仓库移除、不再占格），转化为对应人物的熟练度经验—— 重复收藏重复获得经验 （同一张卡只有首次收藏推进收藏进度）。
+				19 button medal 收藏 1 张（+10 经验 · 卡牌用掉）
+					20 image medal
+					21 text  收藏 1 张（+10 经验 · 卡牌用掉）
+				22 button coin 卖出 1 张（+3）
+					23 image coin
+					24 text  卖出 1 张（+3）
+				25 button (disabled) coin 全部卖出（+3 币）
+					26 image coin
+					27 text  全部卖出（+3 币）
+				28 button ↩ 返回仓库
+				29 text 03
+
+The focused UI element is 28 button ↩ 返回仓库

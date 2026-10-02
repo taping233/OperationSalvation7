@@ -23,16 +23,18 @@ const HUB_TABS = [
   { key: '6', id: 'hubAch', name: '基地·成就收藏', tab: 'ach' },
 ];
 
+// why：守卫拦截时给「快捷键」页签展示的禁用原因文案（静态描述，与 can() 的实时判断一一对应）
 const PAGES = [
   ...HUB_TABS.map(t => ({
     ...t,
+    why: '战斗 / 研究所 / 跑局进行中不可返回基地',
     can: () => !busy() && !inRun(),
     enter: () => openBaseHub(t.tab),
   })),
-  { key: '7', id: 'cardslib', name: '照相馆', can: () => !busy(), enter: () => openCardLibrary() },   // W1-07④：一物一名（标题钮同名为照相馆）
-  { key: '8', id: 'inbox', name: '留言信箱', can: () => !busy(), enter: () => openSuggestionInbox() },
-  { key: '9', id: 'data', name: '跑局数据', can: () => !busy(), enter: () => openDataPageUi() },   // W1-01：走带返回件的包装器
-  { key: '0', id: 'settings', name: '设置', can: () => !busy() && !inRun(), enter: () => openSettings() },
+  { key: '7', id: 'cardslib', name: '照相馆', why: '战斗 / 研究所进行中不可打开', can: () => !busy(), enter: () => openCardLibrary() },   // W1-07④：一物一名（标题钮同名为照相馆）
+  { key: '8', id: 'inbox', name: '留言信箱', why: '战斗 / 研究所进行中不可打开', can: () => !busy(), enter: () => openSuggestionInbox() },
+  { key: '9', id: 'data', name: '跑局数据', why: '战斗 / 研究所进行中不可打开', can: () => !busy(), enter: () => openDataPageUi() },   // W1-01：走带返回件的包装器
+  { key: '0', id: 'settings', name: '设置', why: '战斗 / 研究所 / 跑局进行中不可打开', can: () => !busy() && !inRun(), enter: () => openSettings() },
 ];
 
 function listPages() {

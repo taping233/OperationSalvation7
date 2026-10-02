@@ -1,0 +1,241 @@
+Browser tab: 9, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5336/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/
+	2 container
+		3 button Description: 关闭, ID: ovCloseX
+		4 container hubMain
+			5 container
+				6 heading 远征基地, Value: 2
+					7 text 远征基地
+				8 text 档位 01
+				9 button ← 返回
+				10 button
+				11 image wood
+				12 text  木材  0
+				13 image bread
+				14 text  口粮  0
+				15 image key
+				16 text  钥匙  0
+				17 image coin
+				18 text  储备  0  币
+			19 container
+				20 button flag 出发
+					21 image flag
+					22 text 出发
+				23 button home 仓库
+					24 image home
+					25 text 仓库
+				26 button coin 商店
+					27 image coin
+					28 text 商店
+				29 button tools 升级
+					30 image tools
+					31 text 升级
+				32 button medal 人物
+					33 image medal
+					34 text 人物
+				35 button trophy 成就·收藏
+					36 image trophy
+					37 text 成就·收藏
+			38 container
+				39 text CARD STORAGE // 02
+				40 image coin
+				41 text  卖卡 →  储备币 （商店消费，不进局）　·　
+				42 image key
+				43 text  钥匙 →  复原 口袋卡牌　·　
+				44 image bread
+				45 text  口粮 →  宠物升级 　·　
+				46 image wood
+				47 text  木材 →  扩建 背包/仓库
+				48 heading archive 卡牌仓库, Value: 3
+					49 image archive
+					50 text  卡牌仓库
+				51 container
+					52 text 仓库容量  22  / 25 张 · 
+					53 image sparkles
+					54 text  图鉴  0
+				55 container
+					56 button 连击箭，卖出或收藏
+						57 container
+							58 text 1
+							59 image 连击箭
+							60 text 连击箭 武术 · 古朴
+							61 image swords
+							62 text -1
+							63 image coin
+							64 text 2
+					65 button 铸甲，卖出或收藏
+						66 container
+							67 text 1
+							68 image 铸甲
+							69 text 铸甲 武术 · 稀有
+							70 image plate
+							71 text 甲 10
+							72 image coin
+							73 text 3
+					74 button 不变应万变-改，卖出或收藏
+						75 container
+							76 text 1
+							77 image 不变应万变-改
+							78 text 不变应万变-改 武术 · 无专属
+							79 image coin
+							80 text 3
+					81 button 连弩 ×2，卖出或收藏
+						82 container
+							83 text 0
+							84 image 连弩
+							85 text 连弩 装备 · 古朴
+							86 image cards
+							87 text 抽 1
+							88 image coin
+							89 text 2
+						90 text ×2
+					91 button 快意恩仇，卖出或收藏
+						92 container
+							93 text 1
+							94 image 快意恩仇
+							95 text 快意恩仇 武术 · 无专属
+							96 image coin
+							97 text 3
+					98 button 草甲 ×3，卖出或收藏
+						99 container
+							100 text 0
+							101 image 草甲
+							102 text 草甲 装备 · 古朴
+							103 image plate
+							104 text 甲 5
+							105 image coin
+							106 text 2
+						107 text ×3
+					108 button 矿工炸药，卖出或收藏
+						109 container
+							110 text 0
+							111 image 矿工炸药
+							112 text 矿工炸药 装备 · 古朴
+							113 image coin
+							114 text 2
+					115 button 法力光波，卖出或收藏
+						116 container
+							117 text 1
+							118 image 法力光波
+							119 text 法力光波 法术 · 古朴
+							120 image sparkles
+							121 text 5'
+							122 text 法伤
+							123 image coin
+							124 text 2
+					125 button 冰冻药水 ×3，卖出或收藏
+						126 container
+							127 text 0
+							128 image 冰冻药水
+							129 text 冰冻药水 道具 · 稀有
+							130 image coin
+							131 text 3
+						132 text ×3
+					133 button 剧毒药水，卖出或收藏
+						134 container
+							135 text 0
+							136 image 剧毒药水
+							137 text 剧毒药水 道具 · 稀有
+							138 image coin
+							139 text 3
+					140 button 高端研发，卖出或收藏
+						141 container
+							142 text 1
+							143 image 高端研发
+							144 text 高端研发 法术 · 稀有
+					145 button 生命箭，卖出或收藏
+						146 container
+							147 text 1
+							148 image 生命箭
+							149 text 生命箭 武术 · 古朴
+							150 image swords
+							151 text -1
+							152 image coin
+							153 text 2
+					154 button 口粮，使用材料
+						155 container
+							156 text 0
+							157 image 口粮
+							158 text 口粮 资源 · 稀有
+							159 image coin
+							160 text 3
+						161 text 可使用
+					162 button 包扎，卖出或收藏
+						163 container
+							164 text 1
+							165 image 包扎
+							166 text 包扎 武术 · 古朴
+							167 image heart
+							168 text 回 3
+							169 image plate
+							170 text 甲 3
+					171 button 破甲箭，卖出或收藏
+						172 container
+							173 text 1
+							174 image 破甲箭
+							175 text 破甲箭 武术 · 古朴
+							176 image plate
+							177 text 甲 3
+							178 image swords
+							179 text -1
+							180 image coin
+							181 text 2
+					182 button 法杖，卖出或收藏
+						183 container
+							184 text 0
+							185 image 法杖
+							186 text 法杖 装备 · 古朴
+							187 image coin
+							188 text 2
+					189 button 坚守，卖出或收藏
+						190 container
+							191 text 1
+							192 image 坚守
+							193 text 坚守 武术 · 古朴
+							194 image cards
+							195 text 抽 1
+							196 image plate
+							197 text 甲 5
+							198 image coin
+							199 text 2
+				200 heading pocket 消耗口袋 共 1 张, Value: 3
+					201 image pocket
+					202 text  消耗口袋  共 1 张
+				203 container
+					204 image key
+					205 text  用钥匙复原（古朴1 / 稀有2 / 史诗3 / 传说4）·  下一次出发后口袋清空
+				206 container
+					207 text 0
+					208 image 混沌之眼
+					209 text 混沌之眼 装备 · 传说 对战开始时 ： 血量上限  +10 ， 牌库 上限 +5 。
+					210 image coin
+					211 text 5
+				212 text 混沌之眼 · 传说
+				213 button (disabled) key 复原 ×4
+					214 image key
+					215 text  复原 ×4
+				216 heading archive 物资, Value: 3
+					217 image archive
+					218 text  物资
+				219 button 木材 ×0，基地建设材料，不可卖出
+					220 image wood
+					221 text 0
+					222 text 背包与仓库扩建
+				223 button 口粮 ×0，基地建设材料，不可卖出
+					224 image bread
+					225 text 0
+					226 text 宠物升级
+				227 heading paw 宠物 1 / 6 只 · 携带 1 只出战, Value: 3
+					228 image paw
+					229 text  宠物  1 / 6 只 · 携带 1 只出战
+				230 container
+					231 text 初始宠物「汪汪狗」自动获得；其余只能用 宠物蛋 （宝箱 0.7% 起掉落：每开箱未出 +3%、每打赢一场战斗再 +0.2%）+ 50 币在仓库孵化。宠物在「升级」页用口粮升级，携带不同宠物安全格数量不同。
+				232 image 宠物蛋插画
+				233 image crystal
+				234 text ？？？ · 未孵化 ×5 宠物蛋 + 50 币孵化 · 存蛋时回仓库点蛋
+				235 image paw
+				236 text 汪汪狗 Lv.1
+				237 image check
+				238 text  携带中 生命上限 +5
+
+The focused UI element is 1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/

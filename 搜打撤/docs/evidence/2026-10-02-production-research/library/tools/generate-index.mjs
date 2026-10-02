@@ -1,0 +1,13 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const read = name => JSON.parse(fs.readFileSync(path.join(root, name), 'utf8'));
+const manifest = read('download-manifest.json');
+const payload = JSON.stringify({ catalog: read('catalog.json'), files: manifest.files, failures: manifest.failures }).replace(/</g, '\\u003c');
+const template = fs.readFileSync(path.join(root, 'tools/index.template.html'), 'utf8');
+const indieEntry = ['indie-games/index.html', 'indie-games/README.md'].find(name => fs.existsSync(path.join(root, name)));
+const indieLink = indieEntry ? ' · <a href="' + indieEntry + '">独立游戏对照（官方资料，未亲玩）</a>' : '';
+const studyLink = fs.existsSync(path.join(root, 'source-study/README.md')) ? ' · <a href="source-study/README.md">Brogue CE完整系统源码研究</a>' : '';
+fs.writeFileSync(path.join(root, 'index.html'), template.replace('__LIBRARY_DATA__', payload).replace('__INDIE_LINK__', indieLink).replace('__SOURCE_STUDY_LINK__', studyLink), 'utf8');
+console.log('Generated self-contained index.html; no network or third-party code executed.');

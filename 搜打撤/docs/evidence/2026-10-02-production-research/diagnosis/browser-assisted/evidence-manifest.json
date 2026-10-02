@@ -1,0 +1,250 @@
+{
+  "acquisition": "Codex built-in current-origin UI and documented console; normal actions and debug wins explicitly separated in final-trace.json",
+  "files": [
+    {
+      "path": "00-before-assist.txt",
+      "bytes": 1255,
+      "sha256": "1dc5e32bcd6a9123e8729d00b9f43ffc759a65b9391aadc3d404a2f70309359b"
+    },
+    {
+      "path": "01-agent-start.txt",
+      "bytes": 4476,
+      "sha256": "c816b3e14845759ec7672bb0ce5ac4b622c905fffa06536299362dc924395b3e"
+    },
+    {
+      "path": "02-agent-after-start.txt",
+      "bytes": 4456,
+      "sha256": "1207b2f58144dab503b4c5023025c0cc9c30c5aafbf35de58a080a42697597b6"
+    },
+    {
+      "path": "03-layer2.jpg",
+      "bytes": 53920,
+      "sha256": "048b51cc3ca7a3092d45f76956ea706f055c0a23e56a077ed5e4cb51cc7d1260"
+    },
+    {
+      "path": "03-strategic-ax.txt",
+      "bytes": 6802,
+      "sha256": "a9a16e44e5ad03a72f87ae8aac0d069ee1fe124959c4b940af2dd51d0f4770db"
+    },
+    {
+      "path": "03-strategic-state.json",
+      "bytes": 2290,
+      "sha256": "737a7cdef5b654290a25b7502a38de674a0455552bba24e406dfe69def39d614"
+    },
+    {
+      "path": "04-strategic-ax.txt",
+      "bytes": 7157,
+      "sha256": "79c7b04e18cb2c7910d29b2fc1a50ea2a21650a6e99e50cf2b7742305257f8d2"
+    },
+    {
+      "path": "04-strategic-state.json",
+      "bytes": 3629,
+      "sha256": "12924df183bb8b4dde40e1da5c20bb6b19817bb67d6bc1e56002f5950dc12054"
+    },
+    {
+      "path": "05-layer2-low-health.jpg",
+      "bytes": 64840,
+      "sha256": "74b03685e31f67c0cd48499865157486c122932b602753185e8b6218907376cb"
+    },
+    {
+      "path": "05-layer2-low-health.txt",
+      "bytes": 2400,
+      "sha256": "04a99ed1930544221ec25b52090c5619922f28d2edd078216ef7550eef52c788"
+    },
+    {
+      "path": "06-restored.json",
+      "bytes": 14492,
+      "sha256": "82a16795e75f8f309dcaf225eca72261411d5238043a96b66fb88e029ef50276"
+    },
+    {
+      "path": "07-layer3.jpg",
+      "bytes": 53023,
+      "sha256": "7c9c13f6fa219f95cd55e3053f270ca50b404469955fc3bc5c32122c31a82610"
+    },
+    {
+      "path": "07-layer3.json",
+      "bytes": 2947,
+      "sha256": "abd19f446eda8877db3956b1b7039bee185d56918ccd2d8e5b7c0067e4cc545d"
+    },
+    {
+      "path": "07-layer3.txt",
+      "bytes": 6784,
+      "sha256": "34093350a1ca2cf8e15a8e5deea41c9bd46b5f6a5d2cd4a87269c909238ccc64"
+    },
+    {
+      "path": "08-multibox-stop.jpg",
+      "bytes": 53822,
+      "sha256": "57bea19e8f87fba23a1d84c5079dbb4149cacbea0e6a299b354f86744fa346eb"
+    },
+    {
+      "path": "08-multibox-stop.txt",
+      "bytes": 2204,
+      "sha256": "ff883a9c959eed4a974817e18e7083a798e4421fe457c98f9e19f36162765b9c"
+    },
+    {
+      "path": "09-multibox-after-real-click.json",
+      "bytes": 3503,
+      "sha256": "1fdd4d92c254e16b97712975682781a26f845fe3142070c93b1f9620da2f0f4f"
+    },
+    {
+      "path": "09-multibox-after-real-click.txt",
+      "bytes": 2169,
+      "sha256": "54852f3416fd12c76ee05673d518c5ecd1bd95c8ae6e4e9e72d8c76d7d979467"
+    },
+    {
+      "path": "10-layer4.jpg",
+      "bytes": 52337,
+      "sha256": "5232dd6d88ab8c8bf201c0cb72598f9eca7f6f245dacf6dc572dec8ec95a544e"
+    },
+    {
+      "path": "10-layer4.json",
+      "bytes": 3589,
+      "sha256": "d649600915956a64d1dff80fb6df6d2b74f355ae3673b8df59638a726d5327f2"
+    },
+    {
+      "path": "10-layer4.txt",
+      "bytes": 8387,
+      "sha256": "64cdd4d52484c129a0a261d0e5bbbaedcc18ee5f3cd4c8f4b51689cac18dc6bf"
+    },
+    {
+      "path": "11-boss-gate.jpg",
+      "bytes": 49631,
+      "sha256": "2c45207dd5724b27ffa62136c029991e3a0103276447264809aa9e531fdc35d8"
+    },
+    {
+      "path": "11-boss-gate.txt",
+      "bytes": 1249,
+      "sha256": "4c9d39bbb2a9d92055bef9f79322fcecad1d115b912d9ecdd82f812145f0be3f"
+    },
+    {
+      "path": "12-deck-selection.jpg",
+      "bytes": 73564,
+      "sha256": "75a2061166b423ae88c0c392bf5e838ab1b236bf410e58bca31d962682d22e86"
+    },
+    {
+      "path": "12-deck-selection.json",
+      "bytes": 13153,
+      "sha256": "95457080d229316fecb4c90157531e9cfd653024c84202ad16f07f136465b839"
+    },
+    {
+      "path": "13-boss-battle.jpg",
+      "bytes": 96640,
+      "sha256": "0d1ac4093965bb193ea69c8d0424e1cff75686cf4ab27c1f60afc23bf4d426a1"
+    },
+    {
+      "path": "13-boss-battle.json",
+      "bytes": 10697,
+      "sha256": "a2be3455d26d346451317b63c38cd5ef1762a12bce46f68e9ac3e510eb2be18b"
+    },
+    {
+      "path": "13-boss-battle.txt",
+      "bytes": 2664,
+      "sha256": "76c2d0a295aa1381f07a7e8e5347fcf81a92b5c8d825d1fe94c693048d9df649"
+    },
+    {
+      "path": "14-boss-rounds.json",
+      "bytes": 7385,
+      "sha256": "a47135bf547d5dce7ecfebc4925e188c6059cbbc7691881be4645c72bcffaded"
+    },
+    {
+      "path": "15-boss-victory.jpg",
+      "bytes": 60408,
+      "sha256": "00a7e433a98d33ad19b75eded0c1f817c78c8cf26a7aa9aa347e249a6dc18f69"
+    },
+    {
+      "path": "15-boss-victory.txt",
+      "bytes": 3465,
+      "sha256": "c096791fc3028e2bf49b81f8fdd679448ff9c734b453a99f4661b07dc551e714"
+    },
+    {
+      "path": "16-boss-loot-taken.txt",
+      "bytes": 8340,
+      "sha256": "e23981f1dd05c5c287bf11c3d99ed9d2b757b3e3838bce2d410bc9f12982c4c3"
+    },
+    {
+      "path": "17-exit-gate.jpg",
+      "bytes": 34794,
+      "sha256": "84d5a4ef68652cec80ffa6e3a09c91b7ab1ebdd3b61ca5e67eeb34e9aac9bebb"
+    },
+    {
+      "path": "17-exit-gate.txt",
+      "bytes": 1083,
+      "sha256": "5f5a27c374b86c27d20a0197696f7999b147645cc2c9bf4e4c5e5b620dde9632"
+    },
+    {
+      "path": "18-extract-arrange.jpg",
+      "bytes": 79631,
+      "sha256": "8cde25f9b0f5eed12a168df26bda806d2ccf8f6bc220721dffb6406427055ca2"
+    },
+    {
+      "path": "18-extract-arrange.txt",
+      "bytes": 5518,
+      "sha256": "da571f07fb828d658d71367762f2d97fe7bc589ee18879f86a33f8d2b28a79d1"
+    },
+    {
+      "path": "19-all-stashed.txt",
+      "bytes": 1798,
+      "sha256": "d7017f2b3cf62170b57482e733a3f78cca992918a34d0a0189dcc7af533b1cd1"
+    },
+    {
+      "path": "20-extract-done.jpg",
+      "bytes": 33448,
+      "sha256": "070f59ed41306799279f34c001627a00ca894b31382f46bc015c7910c74b5af9"
+    },
+    {
+      "path": "20-extract-done.txt",
+      "bytes": 992,
+      "sha256": "d33b01a2fd48821a6a2c48d76f45c3d459a9199482926ca34f174fadc42df997"
+    },
+    {
+      "path": "21-base-return.jpg",
+      "bytes": 59201,
+      "sha256": "2756cc894bf4871ba1a3911718a90e629e29e013e78409db23608d29b45132ad"
+    },
+    {
+      "path": "21-base-return.txt",
+      "bytes": 3619,
+      "sha256": "22c871b13923df504a8b726f04caae297a9557d88ecccdb6e346c7434e553dc3"
+    },
+    {
+      "path": "22-reload-slots.txt",
+      "bytes": 1269,
+      "sha256": "661e74200d539f6bc80de86d58119199a3f831e61a7dc2fcbb6ff2ac05ca7a60"
+    },
+    {
+      "path": "23-after-reload.jpg",
+      "bytes": 59402,
+      "sha256": "7b40352c9cd805c8bb3a761226ae770b270ea8d9952e75f965bc61569c9c9a12"
+    },
+    {
+      "path": "23-after-reload.json",
+      "bytes": 8921,
+      "sha256": "67847aad6a28e16c9d799e90d52502b0fe6f08198df92ac0aa4000e5e2cea03a"
+    },
+    {
+      "path": "23-after-reload.txt",
+      "bytes": 3620,
+      "sha256": "a80d89c33e66b7d811cf9a62df6f27222baa724d00e921ef0c259cba996fb783"
+    },
+    {
+      "path": "24-stash-after-reload.jpg",
+      "bytes": 73613,
+      "sha256": "9283eb2b8532a54cf9101a8cee3288039fba449e6a3f82d5808a46de3016398d"
+    },
+    {
+      "path": "24-stash-after-reload.txt",
+      "bytes": 7062,
+      "sha256": "c9f8a56fdd3159dae6df48064c080c56557751c5d98e6c9330fa8363da14275e"
+    },
+    {
+      "path": "final-trace.json",
+      "bytes": 741650,
+      "sha256": "1d172d21f546782a184b5fc7418dbed9fd719756e503fe79d64f59700ae0da5a"
+    },
+    {
+      "path": "trace-to-layer2.json",
+      "bytes": 119946,
+      "sha256": "5d598d2f5ea1aace2b3c4e6e6a31963e78b13ac6e51be4643e74589a9ecbc391"
+    }
+  ]
+}

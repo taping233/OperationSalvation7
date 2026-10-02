@@ -1,0 +1,179 @@
+Browser tab: 9, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5336/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/
+	1 container app
+		2 container sidebar
+			3 image 无
+			4 container statsPanel
+				5 image Description: 已探明区域简图, ID: miniMap
+				6 text 行动 · 价值
+				7 text 15
+				8 text /
+				9 text 0
+			10 container routePanel
+				11 text 下一步 · 2 条路线 撤离已开放 · 找到信标，献祭 3 张卡牌
+				12 container 可前往的相邻节点
+					13 button 物资点（节点 2）
+						14 text 物资点
+						15 text 搜寻卡牌与补给
+					16 button 未知事件（节点 4）
+						17 text 未知事件
+						18 text 新的机遇，也可能有代价
+				19 text 点击路线或地图亮环前进
+		20 container viewport
+			21 image game
+			22 container Description: 远征章节, ID: expeditionChapter
+				23 text EXPEDITION / 03
+				24 content list
+					25 container
+						26 text 01 第1层 · 外围荒地
+					27 container
+						28 text 02 第2层 · 风雪哨线
+					29 container
+						30 text 03 第3层 · 冻土遗迹
+					31 container
+						32 text 04 第4层 · 污染核心 极高危 · 精英 10%
+			33 container resHud
+				34 text 0
+				35 text 4
+			36 container topBtns
+				37 button btnLocate
+				38 button btnHome
+				39 button btnHelp
+				40 button btnMute
+				41 container
+					42 text 当前生命
+					43 container hpText
+						44 text 35 /35
+			45 button 背包 11/16, ID: bagBtnFloat
+				46 text 背包
+				47 text 11/16
+			48 container Description: 行动记录, ID: logPanel
+				49 button ▾ 行动记录, ID: logToggle
+					50 text ▾ 
+					51 text 行动记录
+				52 container log
+					53 container
+						54 text —— 置身  第3层 · 冻土遗迹 （第3层入口）——
+					55 container
+						56 text 穿过隔离闸门 →  第3层 · 冻土遗迹
+					57 container
+						58 image bag
+						59 text  购买卡牌【 矿工炸药 】（- 2 币，剩 0）
+					60 container
+						61 image bag
+						62 text  购买卡牌【 绿化箭 】（- 2 币，剩 2）
+					63 container
+						64 image bag
+						65 text  补充初始攻击 ×1（- 1 币，剩 4 · 本站还可补 4 张）
+					66 container
+						67 text 获得  2  币（现有 5）
+					68 container
+						69 image archive
+						70 text  获得卡牌【 棘刺之地 】
+					71 container
+						72 image archive
+						73 text  战利品掉落： 1  个密封物资箱
+					74 container
+						75 image trophy
+						76 text  战斗胜利！
+					77 container
+						78 image trophy
+						79 text  开发者：直接结算胜利
+					80 container
+						81 image cards
+						82 text  普通战斗无需抽牌：随身  10  张战斗卡直接可打出；道具/资源/事件卡不入手，能力卡只能收藏或编入 BOSS 战牌库 · 每回合固定  2  费
+					83 container
+						84 image question
+						85 text  以一敌多：伤害与群体卡都 拖到任意敌人身上 打出（群体自动命中全体）
+					86 container
+						87 image swords
+						88 text 遭遇战【联邦射手(5-3)、联邦机动兵(5-6)】  · 风险 中
+					89 container
+						90 image fire
+						91 text 进入火堆 ：自动回复  8  点生命
+					92 container
+						93 image heart
+						94 text  恢复  3  点生命（35/35）
+					95 container
+						96 image trophy
+						97 text  成就解锁【 猎手 】累计击败 10 个敌人——回基地领取奖励
+					98 container
+						99 text 获得  1  币（现有 3）
+					100 container
+						101 image archive
+						102 text  获得卡牌【 箭雨 】
+					103 container
+						104 image archive
+						105 text  战利品掉落： 1  个小型物资箱
+					106 container
+						107 image trophy
+						108 text  战斗胜利！
+					109 container
+						110 image trophy
+						111 text  开发者：直接结算胜利
+					112 container
+						113 image cards
+						114 text  普通战斗无需抽牌：随身  9  张战斗卡直接可打出；道具/资源/事件卡不入手，能力卡只能收藏或编入 BOSS 战牌库 · 每回合固定  2  费
+					115 container
+						116 image question
+						117 text  以一敌多：伤害与群体卡都 拖到任意敌人身上 打出（群体自动命中全体）
+					118 container
+						119 image swords
+						120 text 遭遇战【联邦机动兵(5-6)、联邦机动兵(5-6)、联邦机动兵(5-6)】  · 风险 中
+					121 container
+						122 image medal
+						123 text 无  熟练度提升！现在是  Lv.2 （出征 生命上限 +1）
+					124 container
+						125 text 获得  1  币（现有 2）
+					126 container
+						127 image archive
+						128 text  获得卡牌【 净化箭 】
+					129 container
+						130 image archive
+						131 text  战利品掉落： 1  个密封物资箱
+					132 container
+						133 image trophy
+						134 text  战斗胜利！
+					135 container
+						136 image archive
+						137 text  使用过的卡牌： 1  张卡牌进入消耗口袋（本局无法再用），撤离结算时只有 1/3 能带回基地
+					138 container
+						139 image trophy
+						140 text  开发者：直接结算胜利
+					141 container
+						142 image skull
+						143 text 联邦机动兵  被击倒！（剩 1 个敌人）
+					144 container
+						145 image play
+						146 text 饱和打击 （再施放） → 联邦机动兵：造成  7  点法术伤害
+					147 container
+						148 image sparkles
+						149 text 饱和打击 ：击杀敌人，再施放一次
+					150 container
+						151 image skull
+						152 text 联邦机动兵  被击倒！（剩 2 个敌人）
+					153 container
+						154 image play
+						155 text 饱和打击  → 联邦机动兵：造成  7  点法术伤害
+					156 container
+						157 image recycle
+						158 text  已从本场战斗开始处重新进入——战斗内消耗、受伤与状态变化已撤销
+					159 container
+						160 image cards
+						161 text  普通战斗无需抽牌：随身  9  张战斗卡直接可打出；道具/资源/事件卡不入手，能力卡只能收藏或编入 BOSS 战牌库 · 每回合固定  2  费
+					162 container
+						163 image question
+						164 text  以一敌多：伤害与群体卡都 拖到任意敌人身上 打出（群体自动命中全体）
+					165 container
+						166 image swords
+						167 text 遭遇战【联邦机动兵(5-6)、联邦机动兵(5-6)、联邦机动兵(5-6)】  · 风险 中
+					168 container
+						169 image download
+						170 text  已读取【档位 1】存档
+					171 container
+						172 text —— 置身  第2层 · 风雪哨线 （#2 格）——
+					173 container
+						174 image archive
+						175 text  已进入  档位 1 （基地与进度独立保存到该档位）
+
+The focused UI element is 0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/

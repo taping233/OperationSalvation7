@@ -1,0 +1,42 @@
+[
+  {
+    "path": "搜打撤/scripts/compile-narrative.mjs",
+    "sha256": "362f5738c45067477aa5ae2d66fe924e4974c3efa20e12fecdf081bd21f43c3e",
+    "bytes": 1103
+  },
+  {
+    "path": "搜打撤/scripts/esm-convert.mjs",
+    "sha256": "5eb945819debb628a889182035458de4e7ada66a71a9550cb58da24b0567c214",
+    "bytes": 11351
+  },
+  {
+    "path": "搜打撤/scripts/iab-drive.mjs",
+    "sha256": "d56a4b45e365cd705287559fdb18d9a686c770a1dd71d5a5b2b3719bced636fe",
+    "bytes": 10248
+  },
+  {
+    "path": "搜打撤/scripts/perf-benchmark.cjs",
+    "sha256": "0fc8e03802bb8a07f41ef717dffc68595c921fef1b43b4faec6b5d3b1cf7cf81",
+    "bytes": 18721
+  },
+  {
+    "path": "搜打撤/scripts/workflow-staged.mjs",
+    "sha256": "5403f617fd3aed200e15633e3b0785e7a7fd80f9d0ea4a47c34de5ed1f2b02e7",
+    "bytes": 19800
+  },
+  {
+    "path": "搜打撤/scripts/workflow-evidence.mjs",
+    "sha256": "bf29fe9087c9929796723b38fa9d34fcd2e2fdb37b0eb0618aef5ca5ba09360f",
+    "bytes": 15002
+  },
+  {
+    "path": "搜打撤/scripts/workflow-dependencies.mjs",
+    "sha256": "534fa5b554dbfc112c8f683d9ba4c9aa837bc0d53b76e1c7660f3346c0fb129b",
+    "bytes": 10780
+  },
+  {
+    "path": "搜打撤/tests/workflow-scope.test.js",
+    "sha256": "4fa5040a4c0077d8109d9061bc27272a88be9ee2ad2a1fde3df1e8ba34c86688",
+    "bytes": 9877
+  }
+]

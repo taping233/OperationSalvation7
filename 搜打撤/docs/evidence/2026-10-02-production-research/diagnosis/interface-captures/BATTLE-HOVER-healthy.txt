@@ -1,0 +1,91 @@
+Browser tab: 10, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5336/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/
+	1 container viewport
+		2 button 背包 3/16, ID: bagBtnFloat
+			3 text 背包
+			4 text 3/16
+		5 container
+			6 text 冬境街区 · 遭遇
+			7 text 第 1 回合
+			8 text 你的行动 Lv.1 · 0/50 · 差 50 点
+			9 text 我方
+			10 container btSelf
+				11 container
+					12 text 无 你
+				13 container
+					14 text 35/35
+				15 container
+					16 image swords
+					17 text  4
+			18 container
+				19 container
+					20 image swords
+					21 text  攻击 · 5
+				22 image archer
+				23 text 联邦射手
+				24 image swords
+				25 text 5
+				26 container
+					27 text 3/3
+				28 container
+					29 image swords
+					30 text  攻击 · 5
+				31 image archer
+				32 text 联邦射手
+				33 image swords
+				34 text 5
+				35 container
+					36 text 3/3
+				37 container
+					38 image swords
+					39 text  攻击 · 5
+				40 image archer
+				41 text 联邦射手
+				42 image swords
+				43 text 5
+				44 container
+					45 text 3/3
+			46 text 敌方意图
+			47 container
+				48 image bolt
+				49 text 2 /2
+			50 button fire 砸击
+				51 image fire
+				52 text  砸击
+			53 container
+				54 checkbox Description: 初始攻击 · 1 费。费用 1 · 点击选中后点敌人，也可拖到敌人身上打出（悬停看完整描述）, Value: 0
+					55 container
+						56 text 1
+						57 image 初始攻击
+						58 text 初始攻击 武术 · 初始 攻（ +0 ）： 造成等同于攻击力的 伤害 。
+						86 image coin
+						87 text 1
+					59 text ×2
+					60 image swords
+				61 checkbox Description: 潜匿 · 1 费。费用 1 · 点击选中后点自己，也可拖到左侧人物（悬停看完整描述）, Value: 0
+					62 container
+						63 text 1
+						64 image 潜匿
+						65 text 潜匿
+					66 image heart
+				67 checkbox Description: 江湖救急-改 · 0 费。费用 0 · 点击直接打出，也可拖到战场空地（悬停看完整描述）, Value: 0
+					68 container
+						69 text 0
+						70 image 江湖救急-改
+						71 text 江湖救急-改
+					72 image sparkles
+			73 container 战术操作
+				74 button bag 背包
+					75 image bag
+					76 text  背包
+				77 button runner 撤离（判负）
+					78 image runner
+					79 text  撤离（判负）
+				80 button gear 设置
+					81 image gear
+					82 text  设置
+				83 button skip 结束回合
+					84 image skip
+					85 text  结束回合
+
+The focused UI element is 50 button fire 砸击

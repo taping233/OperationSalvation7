@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "id": "production-research",
+  "date": "2026-10-02",
+  "owner": "Friday-Codex",
+  "goal": "并行建立优质制作资料库与游戏现状本质诊断，保留至少50%额度",
+  "paths": [
+    "docs/evidence/2026-10-02-production-research"
+  ],
+  "doneWhen": [
+    "资料八类覆盖并附来源许可适用性与实际资源清单，体积不超过20GB",
+    "现状诊断覆盖玩法内容工程美术UI音效文档，区分实证推断未核并给出核心缺口",
+    "分类索引可查阅、证据复核与额度最终记录完成"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "verification.json复核来源SHA/研究JSON/本地链接/截图来源与资料体积，40实物SHA通过，离线入口58项内存检查通过",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "本轮Codex内置5336当前1183x764窗口完成物资-普通战-战后箱-教程-返图，证据diagnosis/browser；Luna独立交叉复核无阻断项",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "文档守卫与增量素材检查0新增错误；workflow verify总outcome为skip，无游戏测试或build，不是全量通过",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "完整四层首脑通关/完整撤离/刷新恢复、往返XP合法撤离后的持久化实收、长期平衡与全量内容可达未核",
+    "声音未试听；SVG未渲染；下载代码未运行；2048字体品牌复用未核；rot.js三个失败为不完整源码子集",
+    "离线HTML的file URL被内置浏览器安全策略拒绝，仅纯内存筛选检查，未绕过；外链只做定向复核",
+    "当前工作树全量测试与远端CI/远端引用未核，其他会话成果及旧5336/PID6100保留"
+  ],
+  "updatedAt": "2026-10-02T11:17:16.072Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

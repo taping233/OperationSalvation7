@@ -1,0 +1,1020 @@
+[
+  {
+    "id": "GUIDE",
+    "method": "real click: title manual",
+    "at": "2026-10-02T13:07:53.909Z",
+    "headings": [
+      "升格会的冬日猜想",
+      "远征手册",
+      "整备",
+      "探索",
+      "战斗",
+      "撤离"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "GUIDE.jpg",
+    "ax": "GUIDE.txt"
+  },
+  {
+    "id": "HUB-SHOP",
+    "method": "existing guarded quick-nav via documented in-app console: hubShop",
+    "at": "2026-10-02T13:08:32.173Z",
+    "headings": [
+      "远征基地",
+      "远征补给商店",
+      "补给说明"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "HUB-SHOP.jpg",
+    "ax": "HUB-SHOP.txt"
+  },
+  {
+    "id": "HUB-UPGRADE",
+    "method": "existing guarded quick-nav via documented in-app console: hubUpgrade",
+    "at": "2026-10-02T13:08:32.485Z",
+    "headings": [
+      "远征基地",
+      "背包扩建",
+      "仓库扩建",
+      "宠物升级 口粮 2-3-4-5 · 携带中的宠物决定安全格 2 格"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "HUB-UPGRADE.jpg",
+    "ax": "HUB-UPGRADE.txt"
+  },
+  {
+    "id": "HUB-CLASSES",
+    "method": "existing guarded quick-nav via documented in-app console: hubClasses",
+    "at": "2026-10-02T13:08:32.830Z",
+    "headings": [
+      "远征基地",
+      "人物档案",
+      "无",
+      "黑像",
+      "星月",
+      "白塔",
+      "常无欲"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "HUB-CLASSES.jpg",
+    "ax": "HUB-CLASSES.txt"
+  },
+  {
+    "id": "HUB-ACH",
+    "method": "existing guarded quick-nav via documented in-app console: hubAch",
+    "at": "2026-10-02T13:08:33.153Z",
+    "headings": [
+      "远征基地",
+      "成就·收藏",
+      "卡背图鉴 1 / 7 已解锁"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "HUB-ACH.jpg",
+    "ax": "HUB-ACH.txt"
+  },
+  {
+    "id": "SETTINGS",
+    "method": "existing guarded quick-nav via documented in-app console: settings",
+    "at": "2026-10-02T13:08:33.510Z",
+    "headings": [
+      "设置",
+      "通用 GENERAL",
+      "音频 AUDIO",
+      "致谢 CREDITS",
+      "留言库 SUGGESTION BOX",
+      "跑局数据 RUN DATA",
+      "危险区 DANGER ZONE"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "SETTINGS.jpg",
+    "ax": "SETTINGS.txt"
+  },
+  {
+    "id": "INBOX",
+    "method": "existing guarded quick-nav via documented in-app console: inbox",
+    "at": "2026-10-02T13:08:33.807Z",
+    "headings": [
+      "留言库"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "INBOX.jpg",
+    "ax": "INBOX.txt"
+  },
+  {
+    "id": "DATA",
+    "method": "existing guarded quick-nav via documented in-app console: data",
+    "at": "2026-10-02T13:08:34.159Z",
+    "headings": [
+      "跑局数据",
+      "死亡层分布",
+      "高价值带出卡 Top",
+      "按驱动对比",
+      "按职业对比",
+      "按模式对比",
+      "最近 20 局"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "DATA.jpg",
+    "ax": "DATA.txt"
+  },
+  {
+    "id": "COLLECTION-ROOM",
+    "method": "real click: hub collection subtab",
+    "at": "2026-10-02T13:10:53.288Z",
+    "headings": [
+      "远征基地",
+      "成就·收藏",
+      "职业收藏室 收藏进度 0 / 67"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "COLLECTION-ROOM.jpg",
+    "ax": "COLLECTION-ROOM.txt"
+  },
+  {
+    "id": "ACHIEVEMENTS",
+    "method": "real click: achievements subtab",
+    "at": "2026-10-02T13:10:54.181Z",
+    "headings": [
+      "远征基地",
+      "成就·收藏",
+      "成就记录 5 / 26 已解锁"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "ACHIEVEMENTS.jpg",
+    "ax": "ACHIEVEMENTS.txt"
+  },
+  {
+    "id": "STASH-ITEM",
+    "method": "real click: owned class card detail; no sale or collect",
+    "at": "2026-10-02T13:11:06.428Z",
+    "headings": [
+      "仓库物品"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "STASH-ITEM.jpg",
+    "ax": "STASH-ITEM.txt"
+  },
+  {
+    "id": "MATERIAL-ITEM",
+    "method": "real click: stored rations card; no conversion",
+    "at": "2026-10-02T13:12:30.363Z",
+    "headings": [
+      "仓库材料"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "MATERIAL-ITEM.jpg",
+    "ax": "MATERIAL-ITEM.txt"
+  },
+  {
+    "id": "MATERIAL-CONFIRM",
+    "method": "real click use last material -> confirmation only; no confirm",
+    "at": "2026-10-02T13:13:35.321Z",
+    "headings": [
+      "确认使用"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "MATERIAL-CONFIRM.jpg",
+    "ax": "MATERIAL-CONFIRM.txt"
+  },
+  {
+    "id": "HUB-SHOP-stable",
+    "method": "guarded quick-nav; waited finite entry animations",
+    "at": "2026-10-02T13:13:36.845Z",
+    "headings": [
+      "远征基地",
+      "远征补给商店",
+      "补给说明"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "HUB-SHOP-stable.jpg",
+    "ax": "HUB-SHOP-stable.txt"
+  },
+  {
+    "id": "HUB-UPGRADE-stable",
+    "method": "guarded quick-nav; waited finite entry animations",
+    "at": "2026-10-02T13:13:37.859Z",
+    "headings": [
+      "远征基地",
+      "背包扩建",
+      "仓库扩建",
+      "宠物升级 口粮 2-3-4-5 · 携带中的宠物决定安全格 2 格"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "HUB-UPGRADE-stable.jpg",
+    "ax": "HUB-UPGRADE-stable.txt"
+  },
+  {
+    "id": "HUB-CLASSES-stable",
+    "method": "guarded quick-nav; waited finite entry animations",
+    "at": "2026-10-02T13:13:38.890Z",
+    "headings": [
+      "远征基地",
+      "人物档案",
+      "无",
+      "黑像",
+      "星月",
+      "白塔",
+      "常无欲"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "HUB-CLASSES-stable.jpg",
+    "ax": "HUB-CLASSES-stable.txt"
+  },
+  {
+    "id": "HUB-ACH-stable",
+    "method": "guarded quick-nav; waited finite entry animations",
+    "at": "2026-10-02T13:13:40.009Z",
+    "headings": [
+      "远征基地",
+      "成就·收藏",
+      "成就记录 5 / 26 已解锁"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "HUB-ACH-stable.jpg",
+    "ax": "HUB-ACH-stable.txt"
+  },
+  {
+    "id": "SETTINGS-stable",
+    "method": "guarded quick-nav; waited finite entry animations",
+    "at": "2026-10-02T13:13:40.993Z",
+    "headings": [
+      "设置",
+      "通用 GENERAL",
+      "音频 AUDIO",
+      "致谢 CREDITS",
+      "留言库 SUGGESTION BOX",
+      "跑局数据 RUN DATA",
+      "危险区 DANGER ZONE"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "SETTINGS-stable.jpg",
+    "ax": "SETTINGS-stable.txt"
+  },
+  {
+    "id": "PREP-stable",
+    "method": "real click: expedition preparation; no departure",
+    "at": "2026-10-02T13:15:45.284Z",
+    "headings": [
+      "出发整备",
+      "携带卡牌 点击卡面或拖到右侧带入 · 「仓 ×N」=剩余可带数",
+      "背包预览 拖入卡牌即可携带"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "PREP-stable.jpg",
+    "ax": "PREP-stable.txt"
+  },
+  {
+    "id": "CARD-ZOOM",
+    "method": "real click: initial attack preview",
+    "at": "2026-10-02T13:15:55.295Z",
+    "headings": [
+      "出发整备",
+      "携带卡牌 点击卡面或拖到右侧带入 · 「仓 ×N」=剩余可带数",
+      "背包预览 拖入卡牌即可携带"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "CARD-ZOOM.jpg",
+    "ax": "CARD-ZOOM.txt"
+  },
+  {
+    "id": "CLASS-CHOICE-stable",
+    "method": "real click confirm preparation; before role confirmation, no new run",
+    "at": "2026-10-02T13:16:11.113Z",
+    "headings": [
+      "无"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "CLASS-CHOICE-stable.jpg",
+    "ax": "CLASS-CHOICE-stable.txt"
+  },
+  {
+    "id": "CLASS-POOL",
+    "method": "real click: role card pool, before starting new run",
+    "at": "2026-10-02T13:16:24.992Z",
+    "headings": [
+      "角色卡池档案"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "CLASS-POOL.jpg",
+    "ax": "CLASS-POOL.txt"
+  },
+  {
+    "id": "CLASS-POOL-WU",
+    "method": "real AX role selector and card-pool button; shared template variant, no departure",
+    "at": "2026-10-02T13:20:56.159Z",
+    "headings": [
+      "角色卡池档案"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "CLASS-POOL-WU.jpg",
+    "ax": "CLASS-POOL-WU.txt"
+  },
+  {
+    "id": "CLASS-POOL-CHANGWUYU",
+    "method": "real AX role selector and card-pool button; shared template variant, no departure",
+    "at": "2026-10-02T13:20:57.534Z",
+    "headings": [
+      "角色卡池档案"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "CLASS-POOL-CHANGWUYU.jpg",
+    "ax": "CLASS-POOL-CHANGWUYU.txt"
+  },
+  {
+    "id": "CLASS-POOL-BAITA",
+    "method": "real AX role selector and card-pool button; shared template variant, no departure",
+    "at": "2026-10-02T13:20:58.972Z",
+    "headings": [
+      "角色卡池档案"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "CLASS-POOL-BAITA.jpg",
+    "ax": "CLASS-POOL-BAITA.txt"
+  },
+  {
+    "id": "CLASS-POOL-HEIXIANG",
+    "method": "real AX role selector and card-pool button; shared template variant, no departure",
+    "at": "2026-10-02T13:21:00.333Z",
+    "headings": [
+      "角色卡池档案"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "CLASS-POOL-HEIXIANG.jpg",
+    "ax": "CLASS-POOL-HEIXIANG.txt"
+  },
+  {
+    "id": "CLASS-POOL-XINGYUE",
+    "method": "real AX role selector and card-pool button; shared template variant, no departure",
+    "at": "2026-10-02T13:21:01.706Z",
+    "headings": [
+      "角色卡池档案"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "CLASS-POOL-XINGYUE.jpg",
+    "ax": "CLASS-POOL-XINGYUE.txt"
+  },
+  {
+    "id": "CLASS-POOL-DETAIL",
+    "method": "real click: class pool card detail, no card grant",
+    "at": "2026-10-02T13:23:16.329Z",
+    "headings": [
+      "角色卡池档案"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "CLASS-POOL-DETAIL.jpg",
+    "ax": "CLASS-POOL-DETAIL.txt"
+  },
+  {
+    "id": "STUDIO-stable",
+    "method": "guarded existing photo studio; class choice cancelled before departure",
+    "at": "2026-10-02T13:23:41.438Z",
+    "headings": [],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "STUDIO-stable.jpg",
+    "ax": "STUDIO-stable.txt"
+  },
+  {
+    "id": "STUDIO-stable",
+    "method": "guarded photo studio; waited actual lazy-loaded gallery and entry animations",
+    "at": "2026-10-02T13:24:11.282Z",
+    "headings": [],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "STUDIO-stable.jpg",
+    "ax": "STUDIO-stable.txt"
+  },
+  {
+    "id": "STUDIO-DETAIL",
+    "method": "real click: enlarged photograph and reverse notes",
+    "at": "2026-10-02T13:24:24.815Z",
+    "headings": [
+      "禁咒I"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "STUDIO-DETAIL.jpg",
+    "ax": "STUDIO-DETAIL.txt"
+  },
+  {
+    "id": "PREP-GOALS",
+    "method": "real click: empty slot02 planning panel; no preset applied",
+    "at": "2026-10-02T13:35:24.888Z",
+    "headings": [],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "PREP-GOALS.jpg",
+    "ax": "PREP-GOALS.txt"
+  },
+  {
+    "id": "CLASS-GRANT",
+    "method": "normal role confirmation in new slot02",
+    "at": "2026-10-02T13:36:02.340Z",
+    "headings": [
+      "无"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "CLASS-GRANT.jpg",
+    "ax": "CLASS-GRANT.txt"
+  },
+  {
+    "id": "CLASS-GRANT",
+    "method": "normal new slot02: waited actual supply page after character transition",
+    "at": "2026-10-02T13:36:34.697Z",
+    "headings": [
+      "无 · 启程补给"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "CLASS-GRANT.jpg",
+    "ax": "CLASS-GRANT.txt"
+  },
+  {
+    "id": "RUN-SHOP",
+    "method": "existing devJumpNode(shop) in test slot02; constructed node, not natural route",
+    "at": "2026-10-02T13:36:35.707Z",
+    "headings": [
+      "冬境战术补给站"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "RUN-SHOP.jpg",
+    "ax": "RUN-SHOP.txt"
+  },
+  {
+    "id": "RUN-SELL",
+    "method": "real click: sell counter empty-state; no sale",
+    "at": "2026-10-02T13:36:53.593Z",
+    "headings": [
+      "收购台",
+      "商队收购单",
+      "待估物清单"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "RUN-SELL.jpg",
+    "ax": "RUN-SELL.txt"
+  },
+  {
+    "id": "FIRE",
+    "method": "dev node fixture slot02; entering fire may heal/mark visit; not a natural-route test",
+    "at": "2026-10-02T13:37:04.575Z",
+    "headings": [
+      "营火休整"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "FIRE.jpg",
+    "ax": "FIRE.txt"
+  },
+  {
+    "id": "ALTAR",
+    "method": "constructed altar via existing dev tool in slot02; does not prove natural first-layer availability",
+    "at": "2026-10-02T13:37:33.302Z",
+    "headings": [
+      "污染祭坛"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "ALTAR.jpg",
+    "ax": "ALTAR.txt"
+  },
+  {
+    "id": "SACRIFICE",
+    "method": "real click altar sacrifice picker; selection not confirmed",
+    "at": "2026-10-02T13:37:43.158Z",
+    "headings": [
+      "选择要献祭的卡牌"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "SACRIFICE.jpg",
+    "ax": "SACRIFICE.txt"
+  },
+  {
+    "id": "ALTAR-REWARD",
+    "method": "slot02 constructed altar: normal sacrifice of 3 cards confirmed for reward view; no reward chosen",
+    "at": "2026-10-02T13:38:39.419Z",
+    "headings": [
+      "祭坛回赠 · 二选一"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "ALTAR-REWARD.jpg",
+    "ax": "ALTAR-REWARD.txt"
+  },
+  {
+    "id": "EVENT",
+    "method": "existing random event dev node in slot02; no event choice made",
+    "at": "2026-10-02T13:38:49.192Z",
+    "headings": [
+      "塌方采掘点"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "EVENT.jpg",
+    "ax": "EVENT.txt"
+  },
+  {
+    "id": "EVENT-stable",
+    "method": "same slot02 event after all entry animations; no choice yet",
+    "at": "2026-10-02T14:02:26.721Z",
+    "headings": [
+      "塌方采掘点"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "EVENT-stable.jpg",
+    "ax": "EVENT-stable.txt"
+  },
+  {
+    "id": "BATTLE-GRAVE",
+    "method": "existing Battle command in slot02 battle; empty-state render, not a UI entry test",
+    "at": "2026-10-02T14:04:05.764Z",
+    "headings": [
+      "遭遇战 · 第 1 回合 ·  墓地"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "BATTLE-GRAVE.jpg",
+    "ax": "BATTLE-GRAVE.txt"
+  },
+  {
+    "id": "BATTLE-BAG",
+    "method": "existing Battle command in active slot02 battle; no card use or storage action",
+    "at": "2026-10-02T14:04:06.047Z",
+    "headings": [
+      "遭遇战 · 第 1 回合 ·  战斗背包"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "BATTLE-BAG.jpg",
+    "ax": "BATTLE-BAG.txt"
+  },
+  {
+    "id": "BATTLE-SETTINGS",
+    "method": "real click battle settings; options unchanged",
+    "at": "2026-10-02T14:05:57.527Z",
+    "headings": [
+      "战斗设置"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "BATTLE-SETTINGS.jpg",
+    "ax": "BATTLE-SETTINGS.txt"
+  },
+  {
+    "id": "BATTLE-TARGET",
+    "method": "real click initial attack selects target; no enemy confirmed",
+    "at": "2026-10-02T14:07:38.838Z",
+    "headings": [],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "BATTLE-TARGET.jpg",
+    "ax": "BATTLE-TARGET.txt"
+  },
+  {
+    "id": "BATTLE-CHOICE",
+    "method": "renderer fixture only: copied live snapshot + choice display state; no choice clicked, no actual effect/payment",
+    "at": "2026-10-02T14:11:20.402Z",
+    "headings": [
+      "遭遇战 · 第 1 回合 ·  抉择"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "BATTLE-CHOICE.jpg",
+    "ax": "BATTLE-CHOICE.txt"
+  },
+  {
+    "id": "BATTLE-DISCOVER",
+    "method": "renderer fixture only: copied live snapshot + discover display state; no choice clicked, no actual effect/payment",
+    "at": "2026-10-02T14:11:21.095Z",
+    "headings": [
+      "遭遇战 · 第 1 回合 ·  发现"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "BATTLE-DISCOVER.jpg",
+    "ax": "BATTLE-DISCOVER.txt"
+  },
+  {
+    "id": "BATTLE-PAYMENT",
+    "method": "renderer fixture only: copied live snapshot + payment display state; no choice clicked, no actual effect/payment",
+    "at": "2026-10-02T14:11:21.772Z",
+    "headings": [
+      "遭遇战 · 第 1 回合 ·  支付代价：为【神灯】选择"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "BATTLE-PAYMENT.jpg",
+    "ax": "BATTLE-PAYMENT.txt"
+  },
+  {
+    "id": "BATTLE-HOVER-healthy",
+    "method": "protocol mouse hover on actual initial attack; resource service restored",
+    "at": "2026-10-02T15:08:10.569Z",
+    "headings": [],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "BATTLE-HOVER-healthy.jpg",
+    "ax": "BATTLE-HOVER-healthy.txt"
+  },
+  {
+    "id": "TERMINAL-RETRY-healthy",
+    "method": "public terminal renderer with unavailable service fixture and no storage commands; not a real save failure",
+    "at": "2026-10-02T15:10:17.966Z",
+    "headings": [
+      "终局结算未保存"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "TERMINAL-RETRY-healthy.jpg",
+    "ax": "TERMINAL-RETRY-healthy.txt"
+  },
+  {
+    "id": "BATTLE-REWARD-healthy",
+    "method": "test slot02 normal post-debug-victory loot with restored service",
+    "at": "2026-10-02T15:11:05.746Z",
+    "headings": [
+      "搜刮！小型物资箱 · 第 1 / 1"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "BATTLE-REWARD-healthy.jpg",
+    "ax": "BATTLE-REWARD-healthy.txt"
+  },
+  {
+    "id": "AMMO-TUTORIAL-healthy",
+    "method": "real first-victory tutorial in test slot02; no edits",
+    "at": "2026-10-02T15:11:28.815Z",
+    "headings": [
+      "卡牌是消耗品"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "AMMO-TUTORIAL-healthy.jpg",
+    "ax": "AMMO-TUTORIAL-healthy.txt"
+  },
+  {
+    "id": "NOTES-EXPORT-healthy",
+    "method": "existing notes UI opened via public entry; no copy/download/import/delete",
+    "at": "2026-10-02T15:11:50.627Z",
+    "headings": [
+      "导出格子备注"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "NOTES-EXPORT-healthy.jpg",
+    "ax": "NOTES-EXPORT-healthy.txt"
+  },
+  {
+    "id": "NOTES-IMPORT-healthy",
+    "method": "existing notes UI opened via public entry; no copy/download/import/delete",
+    "at": "2026-10-02T15:11:51.274Z",
+    "headings": [
+      "导入格子备注"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "NOTES-IMPORT-healthy.jpg",
+    "ax": "NOTES-IMPORT-healthy.txt"
+  },
+  {
+    "id": "NOTES-CLEAR-healthy",
+    "method": "existing notes UI opened via public entry; no copy/download/import/delete",
+    "at": "2026-10-02T15:11:51.902Z",
+    "headings": [
+      "清空全部备注"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "NOTES-CLEAR-healthy.jpg",
+    "ax": "NOTES-CLEAR-healthy.txt"
+  },
+  {
+    "id": "NODE-NOTE-healthy",
+    "method": "public note editor for current real node; no save/clear",
+    "at": "2026-10-02T15:11:52.576Z",
+    "headings": [
+      "编辑结点备注"
+    ],
+    "title": "升格会的冬日猜想 v0.60.0",
+    "url": "http://127.0.0.1:5336/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 764,
+      "width": 1183
+    },
+    "image": "NODE-NOTE-healthy.jpg",
+    "ax": "NODE-NOTE-healthy.txt"
+  }
+]

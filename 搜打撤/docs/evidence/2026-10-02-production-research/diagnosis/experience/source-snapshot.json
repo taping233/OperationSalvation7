@@ -1,0 +1,175 @@
+{
+  "timestamp": "2026-10-02T10:28:05.609Z",
+  "scope": "Source/file metadata only. Manifest membership and bytes do not prove current display, audio decoding, perceptual quality, or complete content use.",
+  "snapshot": [
+    {
+      "file": "game/src/audio/sound.js",
+      "bytes": 33687,
+      "mtimeUtc": "2026-10-01T12:42:45.963Z",
+      "sha256": "7616fd3686c0c6d1a3471fba39882ba0e601787e1ad57648b317155f90430698"
+    },
+    {
+      "file": "game/src/audio/sound.bank.js",
+      "bytes": 5081,
+      "mtimeUtc": "2026-09-30T15:44:12.712Z",
+      "sha256": "81b9bdf76f7440c6adccdc757b10a1240201830d76f8b4dea695dc9812b0fdf4"
+    },
+    {
+      "file": "game/src/audio/sound.scape.js",
+      "bytes": 6119,
+      "mtimeUtc": "2026-09-23T19:11:59.738Z",
+      "sha256": "d6aa9b4d4b11568743422bd1f8244bec874a0a0039807b30e651dfc0c2e54dc8"
+    },
+    {
+      "file": "game/src/main.js",
+      "bytes": 1975,
+      "mtimeUtc": "2026-09-29T05:01:59.568Z",
+      "sha256": "601be7d60c1c748d752ec5193b6c68b3ff4ffcee2b2585b2175edb74c1d64631"
+    },
+    {
+      "file": "game/src/run/expedition.view.js",
+      "bytes": 7503,
+      "mtimeUtc": "2026-09-30T17:01:22.591Z",
+      "sha256": "c55cf92bb8340afaccc71807a768bc7afd2913de43ea2b9f5d1d8e144c6bb335"
+    },
+    {
+      "file": "game/src/core/node-info.js",
+      "bytes": 1272,
+      "mtimeUtc": "2026-09-28T01:49:22.091Z",
+      "sha256": "90160256d8fdf30359927ba5ac49673971969dea432ab46ff270949558ecfcfd"
+    },
+    {
+      "file": "game/src/hub/game.hub.depart.js",
+      "bytes": 23266,
+      "mtimeUtc": "2026-10-01T23:48:14.011Z",
+      "sha256": "bac138ae4581178bfe1a23554e465c7fc89d254147cdfe5f2266f3398edce9fa"
+    },
+    {
+      "file": "game/src/experience/pocket-strip.js",
+      "bytes": 8985,
+      "mtimeUtc": "2026-09-30T17:30:25.248Z",
+      "sha256": "ce65f366d78d1825c666f9da4ca5a913ff290962aea2d92a21a91887fe933e59"
+    },
+    {
+      "file": "game/css/pocket-strip.css",
+      "bytes": 4692,
+      "mtimeUtc": "2026-09-28T10:04:54.617Z",
+      "sha256": "1a9c662718a4fa58e2d5010217b9b66ff67c9086120a27d7bd10e0a1bd1a8c9a"
+    },
+    {
+      "file": "game/css/cards.css",
+      "bytes": 25509,
+      "mtimeUtc": "2026-10-01T23:48:37.800Z",
+      "sha256": "fd1b10805d60aecf749759762221e909a3028f4a1c2bcef378271f3bcee0fce3"
+    },
+    {
+      "file": "game/css/card-v3.css",
+      "bytes": 12518,
+      "mtimeUtc": "2026-09-28T10:04:53.955Z",
+      "sha256": "8e3798847433d2316ff430c0c71abce6664934416d7e73f7dd096ddc997c0c57"
+    },
+    {
+      "file": "game/css/page-deploy.css",
+      "bytes": 23389,
+      "mtimeUtc": "2026-09-28T15:06:09.141Z",
+      "sha256": "5b07ba1a878cb1e864f5e582a6bacdf015d6bbea1ec870d643dc2c3df27c5006"
+    },
+    {
+      "file": "game/assets/asset-manifest.json",
+      "bytes": 43555,
+      "mtimeUtc": "2026-10-02T07:07:24.096Z",
+      "sha256": "f227ab2816120d28a8f79b642aaf7fa5851713cd6c402b70f12ef25a0dedc255"
+    },
+    {
+      "file": "game/data/art-mapping.json",
+      "bytes": 9267,
+      "mtimeUtc": "2026-09-23T14:28:21.299Z",
+      "sha256": "c344115face1cb32ffc9e9d964ec27014cde1ec6ecf58ed337d91d9139d1378d"
+    },
+    {
+      "file": "game/data/card-notes.json",
+      "bytes": 379,
+      "mtimeUtc": "2026-09-20T08:50:33.304Z",
+      "sha256": "61019fea1f1a74da04a93772b2aa51430b4a2480f6d1331c6ff3c3064f334df4"
+    },
+    {
+      "file": "docs/evidence/2026-10-02-seven-departments-review/v2/current-title.jpg",
+      "bytes": 127300,
+      "mtimeUtc": "2026-10-02T09:53:11.397Z",
+      "sha256": "876f554f4b62c4708856c449e3d9ea6404333296e0a4217dea99fff2328f4189"
+    },
+    {
+      "file": "docs/evidence/2026-10-02-seven-departments-review/v2/current-base.jpg",
+      "bytes": 101924,
+      "mtimeUtc": "2026-10-02T09:53:58.903Z",
+      "sha256": "e149108d4592db15ba6548421695890fef0ed4af9ae6dbebdc49b00192c35fd3"
+    },
+    {
+      "file": "docs/evidence/2026-10-02-seven-departments-review/v2/current-preparation.jpg",
+      "bytes": 79062,
+      "mtimeUtc": "2026-10-02T09:54:33.768Z",
+      "sha256": "91603175a3ba400097b690d99d19413111bdaa5435f46be3f10f77c71b580d8a"
+    },
+    {
+      "file": "docs/evidence/2026-10-02-seven-departments-review/v2/current-character.jpg",
+      "bytes": 75916,
+      "mtimeUtc": "2026-10-02T09:55:20.910Z",
+      "sha256": "ae2dc80080e025ed190baa593ad9d065747200d9a0c49f0bb50ed93d7b4a6c40"
+    },
+    {
+      "file": "docs/evidence/2026-10-02-seven-departments-review/v2/current-supply.jpg",
+      "bytes": 99472,
+      "mtimeUtc": "2026-10-02T09:56:02.916Z",
+      "sha256": "2f99372f918047e6117c97febb75de479bb4f8625303df07f405fffa5d41ee02"
+    },
+    {
+      "file": "docs/evidence/2026-10-02-seven-departments-review/v2/current-map.jpg",
+      "bytes": 79087,
+      "mtimeUtc": "2026-10-02T09:56:28.469Z",
+      "sha256": "ed8d122bc14b6e841cdfd07977236225f56e729e412d0199a3610b8a14b410b2"
+    },
+    {
+      "file": "docs/evidence/2026-10-02-seven-departments-review/v2/current-studio.jpg",
+      "bytes": 135611,
+      "mtimeUtc": "2026-10-02T09:53:26.241Z",
+      "sha256": "561fcf6863040d02eb03cdb7e3498ad92a08da0a8046cced92ebd8810ff70c92"
+    },
+    {
+      "file": "docs/evidence/2026-10-02-seven-departments-review/v2/current-slots.jpg",
+      "bytes": 55537,
+      "mtimeUtc": "2026-10-02T09:53:40.832Z",
+      "sha256": "fef6716479e6cdf844a4a62f85ab375caf1e7c79e2ae56e80a0fa439405ed754"
+    }
+  ],
+  "manifest": {
+    "entries": 271,
+    "categories": {
+      "bgm-cisheng-yuanan.mp3": 1,
+      "bgm-liejie-fuhe.mp3": 1,
+      "bgm-sour-orange-earth.mp3": 1,
+      "brand-mark-codename7.png": 1,
+      "cards": 53,
+      "fonts": 4,
+      "icons": 43,
+      "portraits": 34,
+      "reconstruction": 1,
+      "scenes": 18,
+      "sfx": 49,
+      "slot-bg-knight-fantasy.webp": 1,
+      "ui": 64
+    }
+  },
+  "photoNotes": {
+    "entries": 0,
+    "nonempty": 0
+  },
+  "historicalImages": {
+    "batch": "2026-10-02-seven-departments-review/v2",
+    "viewport": {
+      "width": 1183,
+      "height": 764
+    },
+    "origin": "http://127.0.0.1:5336/",
+    "captureMethod": "Prior session browser-evidence.json: real UI clicks; this session personally viewed all eight files but did not rerun the game."
+  }
+}

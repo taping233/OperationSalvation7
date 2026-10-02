@@ -1,0 +1,81 @@
+{
+  "platform": "linux",
+  "original_bundle_library_file_id": "libfile_b493d4cb4bd081918d1cc6ecaf0bd8f7",
+  "original_bundle_sha256": "c1cdf3e3e4ac14d81217b1a81e9601ccc943393921e0e53f7b039102f517f203",
+  "original_preimages": "all 35 normalized preimages matched, including workflow.mjs reconstructed line",
+  "original_nai_style_sha256": "7e1776ffd716e58a0b3d0f78e362da3a7692cb2d685dd554c36c3aa808922563",
+  "final_js": {
+    "files": 15,
+    "passed": 258,
+    "failed": 0,
+    "excluded": 3,
+    "total_discovered": 261,
+    "success": true
+  },
+  "nai": {
+    "passed": 18,
+    "failed": 0,
+    "skipped": 0,
+    "network": "offline mocks only",
+    "baseline_defects_reproduced": 2
+  },
+  "posix_dependency_copy": {
+    "platform": "linux",
+    "hash": "465d88b92fd43c3e08c32fbceb0831063a448ae7addd53a34564b2a8709ed226",
+    "matchingCopiedHash": "465d88b92fd43c3e08c32fbceb0831063a448ae7addd53a34564b2a8709ed226",
+    "actualBinLinksPreserved": 14,
+    "executableModeChangeInvalidatesHash": true
+  },
+  "static": {
+    "syntax": {
+      "passed": true,
+      "files": 296
+    },
+    "data": true,
+    "lint": true,
+    "typecheck": {
+      "passed": true,
+      "configs": 8
+    },
+    "hook_shell_syntax": true,
+    "docs": {
+      "passed": true,
+      "scanned_files": 46,
+      "findings": 0
+    },
+    "assets": {
+      "errors": 0,
+      "unchanged_historical_warnings": 1162
+    }
+  },
+  "excluded_cases": [
+    {
+      "test": "doctor通过统一入口返回轻预检分项",
+      "reason": "source transfer intentionally lacks repository .git metadata; initially failed, later explicitly excluded, not counted passed"
+    },
+    {
+      "test": "暂存计划命令返回边界与数量",
+      "reason": "source transfer intentionally lacks repository .git metadata; initially failed, later explicitly excluded, not counted passed"
+    },
+    {
+      "test": "Electron 桌面开发态只加载 Vite 构建产物",
+      "reason": "frozen desktop-app/main.js/package.json excluded from source transfer; initially failed, later explicitly excluded, not counted passed"
+    }
+  ],
+  "not_run": [
+    "full game suite",
+    "build",
+    "server",
+    "browser/game UI",
+    "live NAI API",
+    "real PIL-generated image validation",
+    "remote CI",
+    "Windows rerun"
+  ],
+  "notes": [
+    "NAI pacing now conservatively starts the next interval from response completion",
+    "NAI temporary transport artifacts are per-call and cleaned; prior sibling payload/ZIP files are preserved",
+    "OS power-loss behavior, including newly created parent-directory durability, was not tested",
+    "Original source and ready dependency source preserved; no production snapshot Git initialization, commit, stage, push or publish"
+  ]
+}

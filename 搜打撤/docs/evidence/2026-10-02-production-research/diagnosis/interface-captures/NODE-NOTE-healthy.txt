@@ -1,0 +1,25 @@
+Browser tab: 10, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5336/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/
+	1 container viewport
+		2 button 背包 3/16, ID: bagBtnFloat
+			3 text 背包
+			4 text 3/16
+		5 container pen 编辑结点备注, ID: overlay
+			6 container
+				12 button Description: 关闭, ID: ovCloseX
+				8 heading pen 编辑结点备注, Value: 2, ID: ovTitle
+					13 image pen
+					14 text  编辑结点备注
+				11 container ovBody
+					15 text 结点 环1 · #0
+					16 container
+						17 text 第1层 · 外围荒地 · 轨道编号  0
+						18 image door
+						19 text  出生入口：外围入口
+						20 text 事件配置：清扫口
+					21 text entry area (settable) ovNote
+					22 button 保存备注
+					23 button 清空
+					24 button 取消
+
+The focused UI element is 24 button 取消

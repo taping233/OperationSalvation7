@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-02",
+  "platform": "Codex In-app Browser",
+  "origin": "http://127.0.0.1:5336/",
+  "viewport": {"width":1183,"height":764},
+  "input": "真实UI点击；独立端口origin全部五档空，新建档01；正常整备三牌、选无、领取补给、点击相邻遭遇2；无造档/改源码/跳节点/Agent注入",
+  "captures": ["current-title.jpg","current-base.jpg","current-preparation.jpg","current-character.jpg","current-supply.jpg","current-map.jpg","current-studio.jpg","current-slots.jpg"],
+  "catalogVisible": {"total":271,"types":{"武术":64,"法术":79,"生物":25,"道具":21,"装备":36,"事件":19,"能力":12,"资源":15},"scope":"照相馆UI当前清单，不等于全部为战斗卡；各类计数之和271"},
+  "studioSample": {"imageNodes":13,"loaded":13,"scope":"初屏/视口相交卡图节点，含底部部分可见节点；不含档案徽记，不外推271图全加载"},
+  "preparationCard": {"name":"二刀流","widthCssPx":117.375,"heightCssPx":161.86459350585938,"scope":"真实DOM按钮边界，不是画面/卡图原图分辨率；未取得完整文字字号"},
+  "battleObserved": {"enemyCount":3,"hp":"35/35","energy":"2/2","scope":"AX已见正常进入自然第一战；后续截图调用被权限拒绝，未获得本轮战斗图或完成战斗证据"},
+  "officialImage": {"file":"peer-volcano.jpg","source":"peer-volcano-source.json","method":"官方Steam页面已加载1920×1080实机截图，通过pageAssets导出；不是本轮运行火山游戏"},
+  "blocked": [
+    {"action":"继续访问localhost:5336及当前战斗截图","reason":"内置浏览器安全策略返回用户拒绝本请求的权限；未重试其他端口/浏览器/桥接"},
+    {"action":"Steam后续pageAssets导出（尖塔）","reason":"内置浏览器安全策略返回用户拒绝下载页面素材；未改用curl/外部下载/截图来绕过"}
+  ]
+}

@@ -1,0 +1,96 @@
+Browser tab: 10, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5336/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/
+	1 container viewport
+		2 button 背包 3/16, ID: bagBtnFloat
+			3 text 背包
+			4 text 3/16
+		5 container
+			6 text 冬境街区 · 遭遇
+			7 text 第 1 回合
+			8 text 你的行动 Lv.1 · 0/50 · 差 50 点
+			87 text 我方
+			10 container btSelf
+				11 image 无
+				12 container
+					13 text 无 你
+				14 container
+					15 text 35/35
+				16 container
+					17 image swords
+					18 text  4
+			19 container
+				88 button 联邦射手，按 Enter 确认目标
+					89 container
+						90 image swords
+						91 text  攻击 · 5
+					92 image archer
+					93 text 联邦射手
+					94 image swords
+					95 text 5
+					96 container
+						97 text 3/3
+				98 button 联邦射手，按 Enter 确认目标
+					99 container
+						100 image swords
+						101 text  攻击 · 5
+					102 image archer
+					103 text 联邦射手
+					104 image swords
+					105 text 5
+					106 container
+						107 text 3/3
+				108 button 联邦射手，按 Enter 确认目标
+					109 container
+						110 image swords
+						111 text  攻击 · 5
+					112 image archer
+					113 text 联邦射手
+					114 image swords
+					115 text 5
+					116 container
+						117 text 3/3
+			118 text 敌方意图
+			48 container
+				49 image bolt
+				50 text 2 /2
+			51 button fire 砸击
+				52 image fire
+				53 text  砸击
+			54 container
+				55 checkbox Description: 初始攻击 · 1 费。费用 1 · 点击选中后点敌人，也可拖到敌人身上打出（悬停看完整描述）, Value: 1
+					56 container
+						57 text 1
+						58 image 初始攻击
+						59 text 初始攻击 武术 · 初始 攻（ +0 ）： 造成等同于攻击力的 伤害 。
+						119 image coin
+						120 text 1
+					60 text ×2
+					61 image swords
+					121 text 选择目标 · Esc 取消
+				62 checkbox Description: 潜匿 · 1 费。费用 1 · 点击选中后点自己，也可拖到左侧人物（悬停看完整描述）, Value: 0
+					63 container
+						64 text 1
+						65 image 潜匿
+						66 text 潜匿
+					67 image heart
+				68 checkbox Description: 江湖救急-改 · 0 费。费用 0 · 点击直接打出，也可拖到战场空地（悬停看完整描述）, Value: 0
+					69 container
+						70 text 0
+						71 image 江湖救急-改
+						72 text 江湖救急-改
+					73 image sparkles
+			74 container 战术操作
+				75 button bag 背包
+					76 image bag
+					77 text  背包
+				78 button runner 撤离（判负）
+					79 image runner
+					80 text  撤离（判负）
+				81 button gear 设置
+					82 image gear
+					83 text  设置
+				84 button skip 结束回合
+					85 image skip
+					86 text  结束回合
+
+The focused UI element is 55 checkbox Description: 初始攻击 · 1 费。费用 1 · 点击选中后点敌人，也可拖到敌人身上打出（悬停看完整描述）, Value: 1

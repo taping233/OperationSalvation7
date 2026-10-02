@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "baseline": "AFTER original local repair-only.patch, not original source baseline or HEAD",
+  "original_repair_patch_sha256": "14057285a4f0f91e93b3ba8ced641d21df712dfca7854bcfacf26d89469bed16",
+  "patch_sha256": "fcc018629462b0a5eb032ea1085ab3ae0e375a43c62f661071241c478a319ec8",
+  "changed_files": [
+    {
+      "path": "搜打撤/scripts/gate-plan.mjs",
+      "operation": "modify",
+      "before_sha256": "58a45cdb8e44975db2e859fe2e720fdf6acb070f262716512c1da6b21e90bbef",
+      "before_normalized_sha256": "58a45cdb8e44975db2e859fe2e720fdf6acb070f262716512c1da6b21e90bbef",
+      "after_sha256": "3f3c80651f6024c61a9c66b6e44952e915e829bd827db2810d7a7a9656e6e68c",
+      "after_normalized_sha256": "3f3c80651f6024c61a9c66b6e44952e915e829bd827db2810d7a7a9656e6e68c",
+      "baseline_provenance": "verified against original repair bundle after hash; preserved before Linux correction"
+    },
+    {
+      "path": "搜打撤/tests/quality-config.test.js",
+      "operation": "modify",
+      "before_sha256": "e9e96f1aceabe15ee155b4c17e5b71ba392984c1acb748821554d7764b9adf78",
+      "before_normalized_sha256": "e9e96f1aceabe15ee155b4c17e5b71ba392984c1acb748821554d7764b9adf78",
+      "after_sha256": "9d040db71bbf942a9c2df49cb67127c9dfee915860e2690188d8decc708905aa",
+      "after_normalized_sha256": "9d040db71bbf942a9c2df49cb67127c9dfee915860e2690188d8decc708905aa",
+      "baseline_provenance": "verified against original repair bundle after hash; preserved before Linux correction"
+    },
+    {
+      "path": "搜打撤/tools/nai_guard.py",
+      "operation": "modify",
+      "before_sha256": "9841e13655016b846ef0f7c07b2530fc57bdbcb557ad351aa8b9ed79701ee710",
+      "before_normalized_sha256": "9841e13655016b846ef0f7c07b2530fc57bdbcb557ad351aa8b9ed79701ee710",
+      "after_sha256": "0d30fd155c2c78f37eaab7b2b8743d78acd7ae43ca0f9295649625cb785c09a5",
+      "after_normalized_sha256": "0d30fd155c2c78f37eaab7b2b8743d78acd7ae43ca0f9295649625cb785c09a5",
+      "baseline_provenance": "verified against original repair bundle after hash; preserved before Linux correction"
+    },
+    {
+      "path": "搜打撤/tools/nai_gen.py",
+      "operation": "modify",
+      "before_sha256": "b60725773e3056aa98d37038a9b5f1ad8008871a0426f14b9cdb182a35122c5e",
+      "before_normalized_sha256": "b60725773e3056aa98d37038a9b5f1ad8008871a0426f14b9cdb182a35122c5e",
+      "after_sha256": "66a14d7e1d3b9f96b8efb964668913281e8b48364cef2dc721cd889f6eb2a985",
+      "after_normalized_sha256": "66a14d7e1d3b9f96b8efb964668913281e8b48364cef2dc721cd889f6eb2a985",
+      "baseline_provenance": "verified against original repair bundle after hash; preserved before Linux correction"
+    },
+    {
+      "path": "搜打撤/tools/tests/test_nai_guard.py",
+      "operation": "modify",
+      "before_sha256": "6103f4fb04867d91c3e6561cda47b9fc90f39f1d05ed42643ac0c96fb1a73fdd",
+      "before_normalized_sha256": "6103f4fb04867d91c3e6561cda47b9fc90f39f1d05ed42643ac0c96fb1a73fdd",
+      "after_sha256": "694c8b97e5692b960eb0170645aa7496ecc80fc0a53f84426758f27cfda33f8e",
+      "after_normalized_sha256": "694c8b97e5692b960eb0170645aa7496ecc80fc0a53f84426758f27cfda33f8e",
+      "baseline_provenance": "verified against original repair bundle after hash; preserved before Linux correction"
+    }
+  ]
+}

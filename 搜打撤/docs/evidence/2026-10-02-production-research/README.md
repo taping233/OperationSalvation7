@@ -1,0 +1,13 @@
+> 最新交付：[总体改造计划与10页签工作簿](planning/README.md)。19个工作包、110基本界面、55变体，以及资源/工具/架构分表。逐项计划已齐，全量实图和动效验收尚未齐。
+
+# 制作研究最终入口
+
+2026-10-02，Friday。
+
+- [总报告](REPORT.md)：最终四层辅助证据、核心缺口、反证与改造顺序。
+- [本地分类检索](library/index.html)：38核心条目；另有24独立游戏、6深例、4方法卡及Brogue完整源码研究入口。
+- [资料说明](library/README.md)与[验证](library/validation.json)：84文件4,300,546B，合并50实物SHA、3ZIP、67项内存检索检查。
+- [四层采证](diagnosis/browser-assisted/README.md)：10普通战与1首脑调试胜利，正常走图/祭坛/终局/入库/刷新，不能当无辅助通关。
+- [质量复盘](SELF-REVIEW.md)、[任务](task.json)、[总核验](verification.json)、[额度](usage.json)。
+
+资料file页面受浏览器策略限制，未作浏览器视觉验收；本地入口可自行打开。除老板明确授权的[运行服务修复](server-repair/README.md)改动启动脚本和定向测试外，未修改游戏玩法或素材，未build、安装、提交或推送。

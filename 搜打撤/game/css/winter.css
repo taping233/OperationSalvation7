@@ -1679,3 +1679,78 @@ body.cardlib-open #cardZoom.cz-photo .cz-hint{position:relative;z-index:4!import
 .dt-bar-row { display: grid; grid-template-columns: 52px 1fr 34px; align-items: center; gap: 8px; font-size: 12px; }
 .dt-bar-row i { display: block; height: 10px; border-radius: var(--radius-panel);
   background: linear-gradient(90deg, rgba(224,92,92,.9), rgba(224,92,92,.35)); min-width: 2px; }
+
+/* ============================================================
+ * 开发台四页签栅格化（2026-10-03 UI 批次）：常驻开发徽标 / 影响范围标签 /
+ * 按钮与输入栅格 / Agent 状态条 / 快捷键行 / 危险分区（暗红描边）
+ * ============================================================ */
+/* 常驻开发标签：四页签共用，先于一切工具出现（条目：显式开发/影响存档标签先于资源工具） */
+.devc-topbar { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 10px 0 2px; }
+.devc-badge { display: inline-flex; align-items: center; padding: 3px 11px; font-size: 11px; font-weight: 600;
+  letter-spacing: 1.5px; color: #f0d9b0; border: 1px solid rgba(221,184,118,.5);
+  border-radius: 999px; background: rgba(60,45,18,.38); }
+.devc-badge.sub { color: #9fb6bd; border-color: rgba(182,211,214,.32); background: rgba(10,20,28,.5); font-weight: 400; letter-spacing: 1px; }
+
+/* 区头影响范围标签：写明该组命令作用到哪（本局存档 / 当前战斗 / 只读…） */
+.devc-scope { display: inline-block; margin-left: 8px; padding: 1px 8px; font-size: 10.5px; font-weight: 600;
+  letter-spacing: 1px; color: #8fb8c4; border: 1px solid rgba(182,211,214,.3); border-radius: 999px;
+  vertical-align: 1px; background: rgba(14,26,34,.6); }
+.devc-scope.danger { color: #e8a08c; border-color: rgba(214,120,96,.45); background: rgba(60,18,12,.35); }
+/* 调试辅助标注：明确「这步不是自然推进」（如直接胜利） */
+.devc-aux { display: inline-block; margin-left: 6px; padding: 0 6px; font-size: 10px; letter-spacing: 1px;
+  color: #c9a6e8; border: 1px solid rgba(180,138,216,.4); border-radius: 999px; vertical-align: 1px; }
+
+/* 统一栅格：按钮成组等宽、输入成组换行，不再 flex 挤在一行 */
+.devc-btns { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+.devc-btns .hs-btn { width: 100%; margin: 0; }
+.devc-btns .hs-btn.sm { width: auto; justify-self: start; }
+.devc-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 8px; margin-bottom: 10px; }
+.devc-form input { width: 100%; }
+
+/* Agent 状态条：常驻首行——驱动者（真人/Agent）+ 运行态 + 停止出口（随时可达） */
+.devc-statusbar { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 10px 14px;
+  border: 1px solid rgba(182,211,214,.2); border-radius: var(--radius-panel); background: rgba(10,18,24,.5); margin: 6px 0 10px; }
+.devc-driver { font-size: 12.5px; font-weight: 700; letter-spacing: 1px; color: #dfe9ec; }
+.devc-driver.human { color: #8fd8c8; }
+.devc-driver.bot { color: #9aa8ae; }
+.devc-driver.llm { color: #b1a1c4; }
+.devc-driver.sm { font-size: 11px; font-weight: 600; padding: 1px 7px; border: 1px solid rgba(182,211,214,.25);
+  border-radius: 999px; background: rgba(14,26,34,.6); white-space: nowrap; }
+.devc-live { display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; letter-spacing: 1px; color: #8fd8c8; }
+.devc-live::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: currentColor;
+  box-shadow: 0 0 8px currentColor; }
+.devc-live.off { color: #7d949c; }
+.devc-live.off::before { box-shadow: none; }
+.devc-stop { padding: 5px 16px; font-size: 12px; font-weight: 700; letter-spacing: 1px; cursor: pointer;
+  border: 1px solid rgba(214,120,96,.55); border-radius: 7px;
+  background: rgba(40,14,10,.55); color: #e8a08c; transition: all .15s; }
+.devc-stop:hover:not(:disabled) { filter: brightness(1.25); transform: translateY(-1px); }
+.devc-stop:disabled { opacity: .45; cursor: default; }
+
+/* 快捷键页签行：kbd + 名称 + 右侧「进入」或禁用原因（原因可见，不只暗按钮） */
+.devc-keylist { display: flex; flex-direction: column; }
+.devc-keyrow { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 10px;
+  padding: 7px 4px; border-bottom: 1px solid rgba(182,211,214,.1); }
+.devc-keyrow:last-child { border-bottom: none; }
+.devc-keyrow.off .devc-key-name { color: #7d949c; }
+.devc-why { color: #c9958a; font-size: 11.5px; text-align: right; }
+
+/* 危险分区：清空类单独成区，暗红描边 + 文字写明范围，不用金色主按钮样式 */
+.devc-danger-zone { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap;
+  margin-top: 12px; padding: 12px 14px; border: 1px solid rgba(214,120,96,.45);
+  border-radius: var(--radius-panel); background: rgba(60,18,12,.28); }
+.devc-danger-zone .dz-txt b { display: block; color: #e8a08c; font-size: 12.5px; letter-spacing: 1px; margin-bottom: 4px; }
+.devc-danger-zone .dz-txt span { color: #b98d84; font-size: 11.5px; line-height: 1.6; }
+.devc-danger-btn { padding: 10px 18px; font-size: 12.5px; font-weight: 700; letter-spacing: 1px; cursor: pointer;
+  border: 1px solid rgba(214,120,96,.55); border-radius: 8px; background: rgba(40,14,10,.55);
+  color: #e8a08c; transition: all .15s; }
+.devc-danger-btn:hover { filter: brightness(1.25); transform: translateY(-1px); }
+.devc-danger-btn.arm { background: #5c2a20; border-color: #d67860; color: #ffffff; }
+.devc-actions { margin-top: 12px; }
+.devc-actions .ov-btns { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+
+/* 开发壳身份行 / 数据口径行：控制台「数据」页签与跑局数据页同源的身份与样本说明 */
+.devc-shell-note { margin: 6px 0 8px; padding: 7px 12px; font-size: 11.5px; line-height: 1.7; color: #8fb8c4;
+  border-left: 2px solid rgba(182,211,214,.35); background: rgba(14,26,34,.45);
+  border-radius: 0 var(--radius-panel) var(--radius-panel) 0; }
+.devc-shell-note b { color: #b9d2d8; }

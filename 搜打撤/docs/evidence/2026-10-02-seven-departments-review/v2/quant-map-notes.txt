@@ -1,0 +1,329 @@
+# Map measurement: 100 fixed seeds
+UTC: 2026-10-02T09:52:15.811Z
+Generator=3; layout=9
+Seed set: batch-0..batch-99 (matches current generator test batch).
+Direct Node ESM import of current pure generator. validateGeneratedMap on returned graph; existing checkConnectivity on deterministic adapter; independent directed BFS from first-layer authored entry. No browser, game session, save injection, full suite or build.
+
+SUMMARY
+{
+  "generated": 100,
+  "generationFailures": 0,
+  "qualityFailures": 0,
+  "connectivityFailures": 0,
+  "directedReachabilityFailures": 0,
+  "uniqueLayoutShapes": 100,
+  "totalNodes": 5300,
+  "thirdLayerEmergencyMaps": 100,
+  "thirdLayerEmergencyExits": 100,
+  "emergencyX": {
+    "min": 4,
+    "max": 8,
+    "mean": 6.98
+  },
+  "emergencyDistanceFromLayerEntry": {
+    "min": 5,
+    "max": 13,
+    "mean": 9.42
+  },
+  "emergencyDistanceFromRunEntry": {
+    "min": 17,
+    "max": 27,
+    "mean": 22.48
+  }
+}
+
+PER-LAYER NODE TYPE STATS
+[
+  {
+    "layer": 1,
+    "samples": 100,
+    "nodes": {
+      "min": 7,
+      "max": 7,
+      "mean": 7
+    },
+    "typeCounts": {
+      "battle": {
+        "min": 2,
+        "max": 2,
+        "mean": 2
+      },
+      "chest": {
+        "min": 1,
+        "max": 1,
+        "mean": 1
+      },
+      "door": {
+        "min": 1,
+        "max": 1,
+        "mean": 1
+      },
+      "entrance": {
+        "min": 1,
+        "max": 1,
+        "mean": 1
+      },
+      "fire": {
+        "min": 1,
+        "max": 1,
+        "mean": 1
+      },
+      "shop": {
+        "min": 1,
+        "max": 1,
+        "mean": 1
+      }
+    },
+    "branchNodes": {
+      "min": 0,
+      "max": 3,
+      "mean": 1.64
+    },
+    "cycleRank": {
+      "min": 0,
+      "max": 2,
+      "mean": 1.05
+    },
+    "entryToExitDistance": {
+      "min": 3,
+      "max": 6,
+      "mean": 4.34
+    },
+    "emergencyPresentMaps": 0,
+    "emergencyCount": 0
+  },
+  {
+    "layer": 2,
+    "samples": 100,
+    "nodes": {
+      "min": 12,
+      "max": 12,
+      "mean": 12
+    },
+    "typeCounts": {
+      "battle": {
+        "min": 3,
+        "max": 3,
+        "mean": 3
+      },
+      "chest": {
+        "min": 2,
+        "max": 2,
+        "mean": 2
+      },
+      "door": {
+        "min": 1,
+        "max": 1,
+        "mean": 1
+      },
+      "entrance": {
+        "min": 1,
+        "max": 1,
+        "mean": 1
+      },
+      "event": {
+        "min": 2,
+        "max": 2,
+        "mean": 2
+      },
+      "fire": {
+        "min": 1,
+        "max": 1,
+        "mean": 1
+      },
+      "resource": {
+        "min": 1,
+        "max": 1,
+        "mean": 1
+      },
+      "shop": {
+        "min": 1,
+        "max": 1,
+        "mean": 1
+      }
+    },
+    "branchNodes": {
+      "min": 2,
+      "max": 8,
+      "mean": 4.87
+    },
+    "cycleRank": {
+      "min": 1,
+      "max": 4,
+      "mean": 2.8
+    },
+    "entryToExitDistance": {
+      "min": 5,
+      "max": 9,
+      "mean": 6.72
+    },
+    "emergencyPresentMaps": 0,
+    "emergencyCount": 0
+  },
+  {
+    "layer": 3,
+    "samples": 100,
+    "nodes": {
+      "min": 17,
+      "max": 17,
+      "mean": 17
+    },
+    "typeCounts": {
+      "battle": {
+        "min": 4,
+        "max": 4,
+        "mean": 4
+      },
+      "chest": {
+        "min": 4,
+        "max": 4,
+        "mean": 4
+      },
+      "door": {
+        "min": 1,
+        "max": 1,
+        "mean": 1
+      },
+      "emergencyExit": {
+        "min": 1,
+        "max": 1,
+        "mean": 1
+      },
+      "entrance": {
+        "min": 1,
+        "max": 1,
+        "mean": 1
+      },
+      "event": {
+        "min": 3,
+        "max": 3,
+        "mean": 3
+      },
+      "fire": {
+        "min": 1,
+        "max": 1,
+        "mean": 1
+      },
+      "resource": {
+        "min": 1,
+        "max": 1,
+        "mean": 1
+      },
+      "shop": {
+        "min": 1,
+        "max": 1,
+        "mean": 1
+      }
+    },
+    "branchNodes": {
+      "min": 2,
+      "max": 11,
+      "mean": 6.94
+    },
+    "cycleRank": {
+      "min": 1,
+      "max": 6,
+      "mean": 3.78
+    },
+    "entryToExitDistance": {
+      "min": 8,
+      "max": 13,
+      "mean": 10.46
+    },
+    "emergencyPresentMaps": 100,
+    "emergencyCount": 100
+  },
+  {
+    "layer": 4,
+    "samples": 100,
+    "nodes": {
+      "min": 17,
+      "max": 17,
+      "mean": 17
+    },
+    "typeCounts": {
+      "altar": {
+        "min": 1,
+        "max": 1,
+        "mean": 1
+      },
+      "battle": {
+        "min": 4,
+        "max": 4,
+        "mean": 4
+      },
+      "boss": {
+        "min": 1,
+        "max": 1,
+        "mean": 1
+      },
+      "chest": {
+        "min": 4,
+        "max": 4,
+        "mean": 4
+      },
+      "entrance": {
+        "min": 1,
+        "max": 1,
+        "mean": 1
+      },
+      "event": {
+        "min": 2,
+        "max": 2,
+        "mean": 2
+      },
+      "extraction": {
+        "min": 1,
+        "max": 1,
+        "mean": 1
+      },
+      "fire": {
+        "min": 1,
+        "max": 1,
+        "mean": 1
+      },
+      "resource": {
+        "min": 1,
+        "max": 1,
+        "mean": 1
+      },
+      "shop": {
+        "min": 1,
+        "max": 1,
+        "mean": 1
+      }
+    },
+    "branchNodes": {
+      "min": 4,
+      "max": 12,
+      "mean": 7.52
+    },
+    "cycleRank": {
+      "min": 1,
+      "max": 7,
+      "mean": 4.24
+    },
+    "entryToExitDistance": {
+      "min": 7,
+      "max": 13,
+      "mean": 9.22
+    },
+    "emergencyPresentMaps": 0,
+    "emergencyCount": 0
+  }
+]
+
+LIMITS
+- Generator rejects candidate graphs internally before returning: 100 quality passes are post-filter outputs, not first-attempt acceptance rates.
+- Graph reachability ignores player HP, card cost, lock conditions, event outcomes and ability to defeat BOSS; it does not prove gameplay completion or evacuation usability.
+- Node types are map containers: battle count excludes battles started by events or other node contents.
+- Seed set matches batch-0..99 in existing generator test and is reproducible, not a random population sample.
+
+REPRODUCIBLE CORE
+import { generateLayeredMap, validateGeneratedMap } from "./game/src/run/map-generator.js";
+import { createLayeredMap } from "./game/src/run/layeredMap.js";
+import { checkConnectivity } from "./game/src/run/map-graph.js";
+for (let i=0;i<100;i++) { const seed=`batch-${i}`; const map=generateLayeredMap(seed); const q=validateGeneratedMap(map.layers); const c=checkConnectivity(createLayeredMap(seed)); /* Count each layer.nodes by node.type. */ }
+Independent directed BFS: follow exact node.next edges from [0,layers[0].entry]; compare reached keys to all 53 node keys. Layer-entry distance BFS starts from [li,layers[li].entry].
+Per-seed counts, distances, shape hashes and source SHA256 are preserved in quant-map.json.
+Do not relabel graph connectivity as natural-play pass rate.

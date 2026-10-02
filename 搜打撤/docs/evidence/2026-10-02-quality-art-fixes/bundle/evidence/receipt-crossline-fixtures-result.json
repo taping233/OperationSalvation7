@@ -1,0 +1,36 @@
+{
+  "kind": "receipt-crossline-fixture-regression",
+  "checkedAt": "2026-10-02T07:20:54.719Z",
+  "command": "npm run test:target -- tests/workflow-cli-integration.test.js tests/workflow-dependencies.test.js tests/workflow-gate-receipt.test.js",
+  "environment": {
+    "node": "v24.13.0",
+    "platform": "win32",
+    "arch": "x64"
+  },
+  "exitCode": 0,
+  "result": {
+    "testFilesPassed": 3,
+    "testsPassed": 27,
+    "testsSkipped": 10,
+    "testsFailed": 0
+  },
+  "skipReason": "Windows file symlink EPERM; actual .bin links and POSIX executable bits still require Linux verification",
+  "checks": {
+    "syntax": "passed",
+    "eslint": "passed",
+    "baselineWhitespace": "no diagnostics"
+  },
+  "invariant": "Failed receipt light precheck succeeds while workflow-staged.mjs is absent from fixture",
+  "log": "docs/evidence/2026-10-02-quality-art-fixes/receipt-crossline-fixtures.log",
+  "logSha256": "f97d27156a4a7d08997ff8b4bd26828f523f39c2485a2f19ae185fae37582bef",
+  "ownedFilesAfterRun": [
+    {
+      "file": "tests/workflow-cli-integration.test.js",
+      "sha256": "8883b6a285aa334c13bea07dd924f6325b04caffbd7f59b14fbdeae3927d3085"
+    },
+    {
+      "file": "tests/workflow-dependencies.test.js",
+      "sha256": "12181127a5f890da3c8a884780fe6011af4573981b5127b42b0766c54811c1c1"
+    }
+  ]
+}

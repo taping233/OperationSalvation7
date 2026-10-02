@@ -41,6 +41,7 @@
 
 | # | 事项与结果 | 决策时间 | 来源 | 后续 |
 |---|---|---|---|---|
+| 34 | production-research 返工额度 | 10-02 | docs/evidence/2026-10-02-production-research/COORDINATION.md | 老板明确批准“允许至55%，完成关键证据”；从已用49%继续，目标辅助四层/首脑/终局撤离/基地实收和报告整合，不新增游戏修改或提交授权 |
 | ~~8~~ | 已处置（老板拍板「其他的全部落库」+三项明细确认）：`.codex/config.toml` 与 `项目近况-2026-09-29/` 入库、`.ui-art-loop-0925/nai-out` png+json 入库（NAI 原始 zip 入 ignore）、`.photolib-acc` worktree 经三文件 diff 核对与主仓库 HEAD 一致（三期内容均已随 d2c0d0a 落库）后移除（303M 释放）；另 `.sfx-work/`（明日方舟音频 120M，版权素材）老板拍板不入库，入 ignore；随 `2fefeff` 落库 | 10-01 | 本台账 + 老板会话 AskUserQuestion 拍板 | 完结 |
 | ~~22~~ | 已实施：老板授权修复全量 3 红灯——hub-flow-regression 源码形状守卫放宽为有界顺序断言（合法音效插入不再误红，CRLF 教训同族）、boot.test 超时 5s→20s（根治负载 flake）、m7-battle 前会话已修；全量 266 文件/2131 通过/2 跳过/0 失败 EXIT=0（并行 84.5s），修复后首次全绿 | 10-01 | 老板「之前那个红灯你也可以修掉」 | 完结；变异演练另发现 pets 数值覆盖空洞（全链路无人测），归 backlog 另议 |
 | ~~14~~ | 已实施：老板拍板 STS2 式全灭短路，foesAnnihilated 循环守卫及字段兜底，onKill/吸血 rider 原子保留；历史 219 例 + 新 5 例，`8db5b19`，R10 PASS | 09-30 | 夜班 STS2 对照第二批 + journal 延伸 | 完结；句内深化 #19 仍待决 |

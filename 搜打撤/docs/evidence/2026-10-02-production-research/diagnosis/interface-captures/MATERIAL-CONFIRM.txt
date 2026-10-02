@@ -1,0 +1,14 @@
+Browser tab: 10, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5336/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/
+	1 container question 确认使用, ID: overlay
+		2 container
+			3 button Description: 关闭, ID: ovCloseX
+			4 heading question 确认使用, Value: 2, ID: ovTitle
+				5 image question
+				6 text  确认使用
+			7 container ovBody
+				8 text 这是仓库里的最后一张口粮卡，使用后卡牌将消失。
+				9 button 保留，返回仓库
+				10 button 确认使用
+
+The focused UI element is 9 button 保留，返回仓库

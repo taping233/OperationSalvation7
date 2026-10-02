@@ -1,0 +1,110 @@
+/* workflow-ship 收官落库一条龙契约（2026-10-02）：分组/排除/无主阻断/FULL 预估/apply 全链。 */
+import { describe, expect, it, beforeAll, afterAll } from 'vitest';
+import { execFileSync } from 'node:child_process';
+import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { planShip, applyShip } from '../scripts/workflow-ship.mjs';
+
+const roots = [];
+let fixtureRoot = null;
+// quotepath=false：中文路径不断言转义八进制（Windows+中文仓实测坑）。
+const git = (args) => execFileSync('git', ['-C', fixtureRoot, '-c', 'core.quotepath=false', ...args], { stdio: 'pipe', encoding: 'utf8' });
+
+beforeAll(() => {
+  fixtureRoot = mkdtempSync(path.join(os.tmpdir(), 'sdt-ship-test-'));
+  roots.push(fixtureRoot);
+  git(['init', '-q']);
+  git(['config', 'core.autocrlf', 'false']);
+  git(['config', 'core.hooksPath', '']);   // fixture 不挂项目钩子（apply 集成只验证 git 语义）
+  git(['config', 'user.email', 'ship@test']);
+  git(['config', 'user.name', 'ship-test']);
+  const project = path.join(fixtureRoot, '搜打撤');
+  mkdirSync(path.join(project, 'game/src/core'), { recursive: true });
+  mkdirSync(path.join(project, 'tests'), { recursive: true });
+  mkdirSync(path.join(project, 'scripts'), { recursive: true });
+  mkdirSync(path.join(project, 'docs'), { recursive: true });
+  mkdirSync(path.join(project, '.sfx-work'), { recursive: true });
+  writeFileSync(path.join(project, 'game/src/core/registry.js'), 'export const a = 1;\n');
+  writeFileSync(path.join(project, 'tests/x.test.js'), 'export const b = 2;\n');
+  writeFileSync(path.join(project, 'scripts/x.mjs'), 'export const c = 3;\n');
+  writeFileSync(path.join(project, 'docs/README.md'), '# f\n');
+  writeFileSync(path.join(project, '.sfx-work/tmp.bin'), 'x');
+  writeFileSync(path.join(fixtureRoot, '根级散件.txt'), 'x');
+  git(['add', '.']);
+  git(['commit', '-qm', 'base']);
+});
+
+afterAll(() => {
+  for (const root of roots.splice(0)) {
+    const relative = path.relative(os.tmpdir(), root);
+    if (!relative.startsWith('sdt-ship-test-') || relative.includes(path.sep)) throw new Error('拒绝清理非自有 fixture');
+    rmSync(root, { recursive: true, force: true });
+  }
+}, 30_000);
+
+function seedChanges() {
+  const project = path.join(fixtureRoot, '搜打撤');
+  writeFileSync(path.join(project, 'game/src/core/registry.js'), 'export const a = 2;\n');   // FULL_SOURCE 命中
+  writeFileSync(path.join(project, 'tests/x.test.js'), 'export const b = 3;\n');             // code
+  writeFileSync(path.join(project, 'docs/README.md'), '# f2\n');                             // docs
+  writeFileSync(path.join(project, '未知文件.map'), 'x');                                    // unknown
+  writeFileSync(path.join(project, '.sfx-work/tmp2.bin'), 'x');                              // excluded
+  writeFileSync(path.join(project, '__try_probe.json'), '{}');                               // excluded（try 配置模式）
+}
+
+describe('ship 收官落库一条龙', () => {
+  it('干净树：无提交计划但不报错', () => {
+    const plan = planShip(path.join(fixtureRoot, '搜打撤'), {});
+    expect(plan.ok).toBe(false);
+    expect(plan.commits).toEqual([]);
+    expect(plan.blocked).toBeNull();
+  });
+
+  it('混合树：两笔分组+unknown/excluded 分流+FULL 预估', () => {
+    seedChanges();
+    const plan = planShip(path.join(fixtureRoot, '搜打撤'), {});
+    expect(plan.ok).toBe(true);
+    expect(plan.commits).toHaveLength(2);
+    const code = plan.commits.find((c) => c.scope === 'code');
+    const docs = plan.commits.find((c) => c.scope === 'docs');
+    expect(code.paths.sort()).toEqual(['搜打撤/game/src/core/registry.js', '搜打撤/tests/x.test.js'].sort());
+    expect(docs.paths).toEqual(['搜打撤/docs/README.md']);
+    expect(plan.unknownPaths).toContain('搜打撤/未知文件.map');
+    expect(plan.excludedPaths.some((p) => p.includes('.sfx-work'))).toBe(true);
+    expect(plan.excludedPaths.some((p) => p.includes('__try_probe.json'))).toBe(true);
+    expect(plan.expectFull).toBe(true);   // core/ 命中 FULL_SOURCE 近似
+    expect(plan.hints.some((h) => h.includes('48-55s'))).toBe(true);
+  });
+
+  it('staged 预检命中 REGISTRY 无主物品即阻断（26a5254 防线前移）', () => {
+    seedChanges();
+    const project = path.join(fixtureRoot, '搜打撤');
+    const registryPath = path.join(project, 'docs', 'PARALLEL-REGISTRY.md');
+    writeFileSync(registryPath,
+      '# r\n\n## 无主物品\n\n| 物品 | 现象 | 发现时间 | 备注 |\n|---|---|---|---|\n| `搜打撤/未知文件.map` | 演练注入 | 10-02 | 阻断演练 |\n');
+    const plan = planShip(project, {});
+    expect(plan.ok).toBe(false);
+    expect(plan.blocked).toContain('无主物品');
+    expect(plan.blocked).toContain('未知文件.map');
+    writeFileSync(registryPath, '# r\n');
+  });
+
+  it('apply 全链：两笔真实提交落库且工作树只剩 unknown/excluded', () => {
+    seedChanges();
+    const project = path.join(fixtureRoot, '搜打撤');
+    const plan = planShip(project, { message: 'test(vite): ship 集成演练' });
+    expect(plan.ok).toBe(true);
+    const result = applyShip(project, plan);
+    expect(result.ok).toBe(true);
+    expect(result.results).toHaveLength(2);
+    const head1 = git(['log', '-1', '--pretty=%B']).trim();
+    expect(head1).toContain('docs(vite): 收官落库');
+    const head2 = git(['log', '-2', '--pretty=%B']).split('\n\n')[1];
+    expect(head2).toContain('ship 集成演练');
+    const status = git(['status', '--porcelain']).trim().split('\n').filter(Boolean);
+    expect(status.some((l) => l.includes('未知文件.map'))).toBe(true);
+    expect(status.some((l) => l.includes('.sfx-work'))).toBe(true);
+    expect(status.some((l) => l.includes('registry.js') || l.includes('x.test.js') || l.includes('README.md'))).toBe(false);
+  });
+});

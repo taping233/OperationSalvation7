@@ -1,0 +1,67 @@
+{
+  "reviewedAt": "2026-10-02T23:31:38.2213815+08:00",
+  "method": "Artifact Tool render for every sheet; final changed sheets rechecked. Original 11pt body, wrap, no clipped sampled fields. Saved XLSX native feature validation reads ZIP/XML only; Excel application not opened.",
+  "renderedSheetCount": 10,
+  "views": [
+    {
+      "sha256": "843DB5392D438892F4B19033955A32209E654E9F2FB50AC30648609D7EE08BE2",
+      "relativePath": "qa/变体差异.png",
+      "bytes": 381071,
+      "visuallyReviewed": true
+    },
+    {
+      "sha256": "15E5375B10DD66CE84A55CF8C22AD5B42CC784654C68AEA4355604A1F16872BE",
+      "relativePath": "qa/工程工具.png",
+      "bytes": 72813,
+      "visuallyReviewed": true
+    },
+    {
+      "sha256": "AAEA741C98F434D6950146DE612DC06EAACA6D098F421D6AAD5322231C36DABD",
+      "relativePath": "qa/架构功能.png",
+      "bytes": 376585,
+      "visuallyReviewed": true
+    },
+    {
+      "sha256": "8BA55A0B9EDFACEFC51595783AD648C6AA07D9E2F0924F803C30A2F9AAB2C2AA",
+      "relativePath": "qa/阶段与决策.png",
+      "bytes": 67915,
+      "visuallyReviewed": true
+    },
+    {
+      "sha256": "5D621B388689A6523A97F6D3C883345EE20A78DCBF73B8DDADD32D9C6C218BA6",
+      "relativePath": "qa/美术_工具研究所.png",
+      "bytes": 742282,
+      "visuallyReviewed": true
+    },
+    {
+      "sha256": "90A6C978BC73D54D3873F26F0C17070304C19E85744ADA43F34C8ADF6CBF76B6",
+      "relativePath": "qa/美术_入口基地.png",
+      "bytes": 737577,
+      "visuallyReviewed": true
+    },
+    {
+      "sha256": "0F7570D467821D7BF5B410A85A352802066CCB0BC3630299C3FDFE350BBBA8AA",
+      "relativePath": "qa/美术_探索事件.png",
+      "bytes": 860342,
+      "visuallyReviewed": true
+    },
+    {
+      "sha256": "DCC8182414CC9BD52132A0D62C2BAF4A2902674CBBA0D43260E5F0224C1BAE54",
+      "relativePath": "qa/美术_战斗结算.png",
+      "bytes": 619866,
+      "visuallyReviewed": true
+    },
+    {
+      "sha256": "24FA59B0FE85D9C8458AA3FA9FE0EE05E1CE6C63C4CF5D623C0D1093D602B2D3",
+      "relativePath": "qa/资源与参考.png",
+      "bytes": 97506,
+      "visuallyReviewed": true
+    },
+    {
+      "sha256": "0DAD7BF26DCDD4A1CC11B53CC1961E48B5E327EB034F6F96E4728F97E4C526AA",
+      "relativePath": "qa/总体计划.png",
+      "bytes": 288800,
+      "visuallyReviewed": true
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+Browser tab: 10, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5336/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/
+	1 container archive 仓库材料, ID: overlay
+		2 container
+			3 button Description: 关闭, ID: ovCloseX
+			4 heading archive 仓库材料, Value: 2, ID: ovTitle
+				5 image archive
+				6 text  仓库材料
+			7 container
+				8 text 0
+				9 image 口粮
+				10 text 口粮
+				11 text 资源 · 稀有
+				12 text 升级宠物。
+				13 container
+					14 image coin
+					15 text 3
+				16 text ×1 张 · 每张折入 口粮 ×1
+				17 image wood
+				18 text  材料可直接使用变成真正的口粮；材料是基地的根基， 不可卖出换币 。
+				19 button check 使用 1 张
+					20 image check
+					21 text  使用 1 张
+				22 button (disabled) check 全部使用（×1）
+					23 image check
+					24 text  全部使用（×1）
+				25 button ↩ 返回仓库
+				26 text 02
+
+The focused UI element is 25 button ↩ 返回仓库

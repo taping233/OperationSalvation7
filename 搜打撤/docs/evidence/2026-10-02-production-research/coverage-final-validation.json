@@ -1,0 +1,24 @@
+{
+  "at": "2026-10-02T13:54:15.113Z",
+  "sourceInterfaces": 110,
+  "annotationRecords": 110,
+  "missingIds": [],
+  "art": {
+    "basicInterfaces": 110,
+    "basicImageReviewed": 44,
+    "basicSourceOnly": 66,
+    "variants": 55,
+    "variantImageReviewed": 22,
+    "variantSourceOnly": 33,
+    "independentImagesReviewed": 66,
+    "comparisonS1": 55,
+    "comparisonDesignOnly": 110,
+    "localMotionReviewed": 0,
+    "basicTransitionOnly": 1,
+    "referenceLimitedMotionApplied": 4,
+    "referenceMotionFramesRead": 3
+  },
+  "researchVerifierExit": 0,
+  "largeLocalFiles": 1,
+  "boundary": "Directory and analysis coverage; image and motion gaps remain explicit. Not complete visual acceptance."
+}

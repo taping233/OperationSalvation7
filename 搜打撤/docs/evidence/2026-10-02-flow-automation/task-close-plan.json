@@ -1,0 +1,118 @@
+{
+  "file": "docs/evidence/2026-10-02-flow-automation/task.json",
+  "action": "close",
+  "expectedSha256": "dec1709e9d5fb012bb13a253bb6b1f1f4f178399bb6ac2dff58ca22a3e24b6e7",
+  "before": {
+    "schemaVersion": 1,
+    "id": "flow-automation",
+    "date": "2026-10-02",
+    "owner": "Friday-Codex",
+    "goal": "开发管理系统项目适配与自动化：修完整门/预览缺陷，任务直接字段，只读预检，证明状态与失败恢复机读输出",
+    "paths": [
+      "scripts/workflow.mjs",
+      "scripts/gate-plan.mjs",
+      "scripts/workflow-doctor.mjs",
+      "scripts/workflow-task-input.mjs",
+      "scripts/workflow-evidence.mjs",
+      "scripts/acceptance-gate.mjs",
+      "scripts/workflow-gate-receipt.mjs",
+      "scripts/workflow-staged.mjs",
+      "scripts/workflow-ship.mjs",
+      "tests/workflow-doctor.test.js",
+      "tests/workflow-task-input.test.js",
+      "tests/workflow-cli-integration.test.js",
+      "tests/workflow-tools.test.js",
+      "tests/workflow-scope.test.js",
+      "tests/acceptance-gate.test.js",
+      "tests/workflow-staged.test.js",
+      "tests/workflow-ship.test.js",
+      "tests/workflow-gate-receipt.test.js",
+      "tests/docs-consistency.test.js",
+      "docs/WORKFLOW-TOOLS.md",
+      "docs/AGENT-TOOLBOX.md",
+      "docs/QUICKSTART.md",
+      "docs/PARALLEL-REGISTRY.md"
+    ],
+    "doneWhen": [
+      "verify --full实际选full，缺失输入预览拒绝，证明按kind分流",
+      "task直接字段与原JSON接口同模型/锁，减少手工文件而不默认假通过",
+      "doctor轻检查可机读且不运行测试/修改环境；单项失败继续汇总",
+      "ship/staged输出明确noop/blocked/receipt资格及提交失败恢复信息，不自动重试或回滚",
+      "场景集成测试/静态/文档通过，游戏源码/index/HEAD保留"
+    ],
+    "stage": "doing",
+    "checks": [],
+    "unverified": [],
+    "updatedAt": "2026-10-02T04:57:36.755Z"
+  },
+  "task": {
+    "schemaVersion": 1,
+    "id": "flow-automation",
+    "date": "2026-10-02",
+    "owner": "Friday-Codex",
+    "goal": "开发管理系统项目适配与自动化：修完整门/预览缺陷，任务直接字段，只读预检，证明状态与失败恢复机读输出",
+    "paths": [
+      "scripts/workflow.mjs",
+      "scripts/gate-plan.mjs",
+      "scripts/workflow-doctor.mjs",
+      "scripts/workflow-task-input.mjs",
+      "scripts/workflow-evidence.mjs",
+      "scripts/acceptance-gate.mjs",
+      "scripts/workflow-gate-receipt.mjs",
+      "scripts/workflow-staged.mjs",
+      "scripts/workflow-ship.mjs",
+      "tests/workflow-doctor.test.js",
+      "tests/workflow-task-input.test.js",
+      "tests/workflow-cli-integration.test.js",
+      "tests/workflow-tools.test.js",
+      "tests/workflow-scope.test.js",
+      "tests/acceptance-gate.test.js",
+      "tests/workflow-staged.test.js",
+      "tests/workflow-ship.test.js",
+      "tests/workflow-gate-receipt.test.js",
+      "tests/docs-consistency.test.js",
+      "docs/WORKFLOW-TOOLS.md",
+      "docs/AGENT-TOOLBOX.md",
+      "docs/QUICKSTART.md",
+      "docs/PARALLEL-REGISTRY.md"
+    ],
+    "doneWhen": [
+      "verify --full实际选full，缺失输入预览拒绝，证明按kind分流",
+      "task直接字段与原JSON接口同模型/锁，减少手工文件而不默认假通过",
+      "doctor轻检查可机读且不运行测试/修改环境；单项失败继续汇总",
+      "ship/staged输出明确noop/blocked/receipt资格及提交失败恢复信息，不自动重试或回滚",
+      "场景集成测试/静态/文档通过，游戏源码/index/HEAD保留"
+    ],
+    "stage": "complete-uncommitted",
+    "checks": [
+      {
+        "kind": "report",
+        "report": "docs/evidence/2026-10-02-flow-automation/2026-10-02T05-28-22.182Z-3c03b071.json",
+        "result": "passed",
+        "sha256": "a867941ccd85bb7e59658b2889213fd1257f5cd8ef4bb8d5c6146e119d54a0ad",
+        "verification": "recorded-result-only-not-current-freshness"
+      },
+      {
+        "kind": "manual",
+        "description": "9脚本10测试ESLint通过；docs45文件341链接0发现；四页35954B；真实doctor轻预检0阻断；full只预览/stub测试，真实index/游戏源码/HEAD保留",
+        "result": "passed"
+      }
+    ],
+    "unverified": [
+      "未跑实际游戏测试套件/全量/实页/build；内部工具不涉及游戏本体开发",
+      "未fetch或核远端CI；未真实stage/提交/推送"
+    ],
+    "updatedAt": "2026-10-02T06:08:14.115Z",
+    "closure": {
+      "kind": "manual",
+      "doneWhenConfirmed": true,
+      "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+    }
+  },
+  "content": "{\n  \"schemaVersion\": 1,\n  \"id\": \"flow-automation\",\n  \"date\": \"2026-10-02\",\n  \"owner\": \"Friday-Codex\",\n  \"goal\": \"开发管理系统项目适配与自动化：修完整门/预览缺陷，任务直接字段，只读预检，证明状态与失败恢复机读输出\",\n  \"paths\": [\n    \"scripts/workflow.mjs\",\n    \"scripts/gate-plan.mjs\",\n    \"scripts/workflow-doctor.mjs\",\n    \"scripts/workflow-task-input.mjs\",\n    \"scripts/workflow-evidence.mjs\",\n    \"scripts/acceptance-gate.mjs\",\n    \"scripts/workflow-gate-receipt.mjs\",\n    \"scripts/workflow-staged.mjs\",\n    \"scripts/workflow-ship.mjs\",\n    \"tests/workflow-doctor.test.js\",\n    \"tests/workflow-task-input.test.js\",\n    \"tests/workflow-cli-integration.test.js\",\n    \"tests/workflow-tools.test.js\",\n    \"tests/workflow-scope.test.js\",\n    \"tests/acceptance-gate.test.js\",\n    \"tests/workflow-staged.test.js\",\n    \"tests/workflow-ship.test.js\",\n    \"tests/workflow-gate-receipt.test.js\",\n    \"tests/docs-consistency.test.js\",\n    \"docs/WORKFLOW-TOOLS.md\",\n    \"docs/AGENT-TOOLBOX.md\",\n    \"docs/QUICKSTART.md\",\n    \"docs/PARALLEL-REGISTRY.md\"\n  ],\n  \"doneWhen\": [\n    \"verify --full实际选full，缺失输入预览拒绝，证明按kind分流\",\n    \"task直接字段与原JSON接口同模型/锁，减少手工文件而不默认假通过\",\n    \"doctor轻检查可机读且不运行测试/修改环境；单项失败继续汇总\",\n    \"ship/staged输出明确noop/blocked/receipt资格及提交失败恢复信息，不自动重试或回滚\",\n    \"场景集成测试/静态/文档通过，游戏源码/index/HEAD保留\"\n  ],\n  \"stage\": \"complete-uncommitted\",\n  \"checks\": [\n    {\n      \"kind\": \"report\",\n      \"report\": \"docs/evidence/2026-10-02-flow-automation/2026-10-02T05-28-22.182Z-3c03b071.json\",\n      \"result\": \"passed\",\n      \"sha256\": \"a867941ccd85bb7e59658b2889213fd1257f5cd8ef4bb8d5c6146e119d54a0ad\",\n      \"verification\": \"recorded-result-only-not-current-freshness\"\n    },\n    {\n      \"kind\": \"manual\",\n      \"description\": \"9脚本10测试ESLint通过；docs45文件341链接0发现；四页35954B；真实doctor轻预检0阻断；full只预览/stub测试，真实index/游戏源码/HEAD保留\",\n      \"result\": \"passed\"\n    }\n  ],\n  \"unverified\": [\n    \"未跑实际游戏测试套件/全量/实页/build；内部工具不涉及游戏本体开发\",\n    \"未fetch或核远端CI；未真实stage/提交/推送\"\n  ],\n  \"updatedAt\": \"2026-10-02T06:08:14.115Z\",\n  \"closure\": {\n    \"kind\": \"manual\",\n    \"doneWhenConfirmed\": true,\n    \"statement\": \"负责人按 doneWhen 判断；检查结果不自动证明作品完成\"\n  }\n}\n",
+  "limits": [
+    "预览不写入",
+    "仅任务执行记录；不更新 REGISTRY、STATUS 或需求规格",
+    "手工声明不是独立验收；报告结果未核对当前 freshness"
+  ]
+}

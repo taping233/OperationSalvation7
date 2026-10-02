@@ -1,0 +1,115 @@
+{
+  "running": false,
+  "segments": [
+    {
+      "stopReason": "spin",
+      "steps": 37
+    },
+    {
+      "target": 2,
+      "stopReason": "until",
+      "steps": 12
+    }
+  ],
+  "phase": "map",
+  "run": {
+    "active": true,
+    "fought": 1,
+    "mode": "standard",
+    "hp": 32,
+    "maxHp": 35,
+    "coins": 0,
+    "atk": 4,
+    "turn": 8,
+    "layer": 2,
+    "node": 0,
+    "class": "侠客",
+    "characterId": "wu",
+    "bossKilled": false,
+    "state": "idle",
+    "bagCap": 16,
+    "used": 8,
+    "deck": 8,
+    "nodeVisited": false,
+    "inventory": [],
+    "ownedCards": [
+      {
+        "uid": "omuqset852futz",
+        "name": "镭射",
+        "type": "法术",
+        "rarity": "古朴",
+        "safe": false,
+        "sellable": false
+      },
+      {
+        "uid": "omuqset8g73udd",
+        "name": "不变应万变-改",
+        "type": "武术",
+        "rarity": "职业",
+        "safe": false,
+        "sellable": false
+      },
+      {
+        "uid": "omuqukx9bw34wh",
+        "name": "饱和打击",
+        "type": "法术",
+        "rarity": "稀有",
+        "safe": false,
+        "sellable": false
+      },
+      {
+        "uid": "omuqus3vjxyaai",
+        "name": "刀剑形态",
+        "type": "武术",
+        "rarity": "稀有",
+        "safe": false,
+        "sellable": false
+      },
+      {
+        "uid": "omuqxhe5vgjgau",
+        "name": "潜匿",
+        "type": "武术",
+        "rarity": "职业",
+        "safe": false,
+        "sellable": false
+      },
+      {
+        "uid": "omuqxhf4sj32ml",
+        "name": "箭雨",
+        "type": "武术",
+        "rarity": "古朴",
+        "safe": false,
+        "sellable": false
+      },
+      {
+        "uid": "omuqxippuvx0w4",
+        "name": "初始攻击",
+        "type": "武术",
+        "rarity": "初始",
+        "safe": false,
+        "sellable": false
+      },
+      {
+        "uid": "omuqxipq5yp3ao",
+        "name": "净化箭",
+        "type": "武术",
+        "rarity": "古朴",
+        "safe": false,
+        "sellable": false
+      }
+    ],
+    "stash": [
+      {
+        "name": "连击箭",
+        "rarity": "古朴",
+        "type": "武术"
+      },
+      {
+        "name": "铸甲",
+        "rarity": "稀有",
+        "type": "武术"
+      }
+    ]
+  },
+  "ui": ""
+}

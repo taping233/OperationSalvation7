@@ -1,0 +1,125 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5336/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/
+	1 container app
+		2 container sidebar
+			3 image 无
+			4 container statsPanel
+				5 image Description: 已探明区域简图, ID: miniMap
+				6 text 行动 · 价值
+				7 text 3
+				8 text /
+				9 text 0
+			10 container routePanel
+				11 text 下一步 · 2 条路线 下一层闸门在东方向 · 直线约 3 格 · 沿路搜集补给
+				12 container 可前往的相邻节点
+					13 button 入口（节点 1）
+						14 text 入口
+						15 text 已建立的行进路线
+					16 button 火堆（节点 3）
+						17 text 火堆
+						18 text 恢复生命 · 复原消耗卡牌
+				19 text 点击路线或地图亮环前进 Space 选择 · X 确认 · B 背包
+		20 container viewport
+			21 image game
+			22 container Description: 远征章节, ID: expeditionChapter
+				23 text EXPEDITION / 01
+				24 content list
+					25 container
+						26 text 01 第1层 · 外围荒地
+					27 container
+						28 text 02 第2层 · 风雪哨线 常规
+					29 container
+						30 text 03 第3层 · 冻土遗迹 高危 · 精英 3%
+					31 container
+						32 text 04 第4层 · 污染核心 极高危 · 精英 10%
+			33 container resHud
+				34 text 2
+				35 text 4
+			36 container topBtns
+				37 button btnLocate
+				38 button btnHome
+				39 button btnHelp
+				40 button btnMute
+				41 container
+					42 text 当前生命
+					43 container hpText
+						44 text 31 /35
+			45 button 背包 8/16, ID: bagBtnFloat
+				46 text 背包
+				47 text 8/16
+			48 container Description: 行动记录, ID: logPanel
+				49 button ▾ 行动记录, ID: logToggle
+					50 text ▾ 
+					51 text 行动记录
+				52 container log
+					53 container
+						54 text 获得  1  币（现有 2）
+					55 container
+						56 image archive
+						57 text  获得卡牌【 刀剑形态 】
+					58 container
+						59 image archive
+						60 text  战利品掉落： 1  个小型物资箱
+					61 container
+						62 image trophy
+						63 text  战斗胜利！
+					64 container
+						65 image archive
+						66 text  使用过的卡牌： 0  张卡牌进入消耗口袋， 3  张消散了（本局无法再用），撤离结算时只有 1/3 能带回基地
+					67 container
+						68 image recycle
+						69 text 初始攻击 ：变为【初始攻击】的 1 费复制
+					70 container
+						71 image skull
+						72 text 联邦巡防兵  被击倒！（剩 0 个敌人）
+					73 container
+						74 image play
+						75 text 初始攻击  → 联邦巡防兵：造成  4  点攻击伤害（攻击力 +4）
+					76 container
+						77 image demon
+						78 text 联邦巡防兵  攻击：你受到  4  点攻击伤害（31/35）
+					79 container
+						80 image recycle
+						81 text 初始攻击 ：变为【初始攻击】的 1 费复制
+					82 container
+						83 image skull
+						84 text 联邦巡防兵  被击倒！（剩 1 个敌人）
+					85 container
+						86 image play
+						87 text 初始攻击  → 联邦巡防兵：造成  4  点攻击伤害（攻击力 +4）
+					88 container
+						89 image recycle
+						90 text 不变应万变-改 ：变为【初始攻击】的 1 费复制
+					91 container
+						92 image skull
+						93 text 联邦巡防兵  被击倒！（剩 2 个敌人）
+					94 container
+						95 image play
+						96 text 初始攻击  → 联邦巡防兵：造成  4  点攻击伤害（攻击力 +4）
+					97 container
+						98 image cards
+						99 text  普通战斗无需抽牌：随身  11  张战斗卡直接可打出；道具/资源/事件卡不入手，能力卡只能收藏或编入 BOSS 战牌库 · 每回合固定  2  费
+					100 container
+						101 image question
+						102 text  以一敌多：伤害与群体卡都 拖到任意敌人身上 打出（群体自动命中全体）
+					103 container
+						104 image swords
+						105 text 遭遇战【联邦巡防兵(4-4)、联邦巡防兵(4-4)、联邦巡防兵(4-4)】  · 风险 低
+					106 container
+						107 text 获得  1  币（现有 1）
+					108 container
+						109 image archive
+						110 text  获得卡牌【 饱和打击 】
+					111 container
+						112 image archive
+						113 text  回收了 1  个密封物资箱
+					114 container
+						115 image download
+						116 text  已读取【档位 1】存档
+					117 container
+						118 text —— 置身  第1层 · 外围荒地 （外围入口）——
+					119 container
+						120 image archive
+						121 text  已进入  档位 1 （基地与进度独立保存到该档位）
+
+The focused UI element is 0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/

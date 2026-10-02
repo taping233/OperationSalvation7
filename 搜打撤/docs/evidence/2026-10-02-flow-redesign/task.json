@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "flow-redesign",
+  "date": "2026-10-02",
+  "owner": "Friday-Codex",
+  "goal": "三路并行重设计开发流程：准确接手、统一验收与严格证据复用、安全按授权打包、单一文档入口",
+  "paths": [
+    "scripts/workflow-ledger.mjs",
+    "scripts/workflow-status.mjs",
+    "scripts/handoff-brief.mjs",
+    "scripts/impact-query.mjs",
+    "scripts/acceptance-gate.mjs",
+    "scripts/workflow-staged.mjs",
+    "scripts/workflow-evidence.mjs",
+    "scripts/workflow-dependencies.mjs",
+    "scripts/workflow-gate-receipt.mjs",
+    "scripts/workflow-ship.mjs",
+    "scripts/workflow.mjs",
+    "scripts/index-validation.mjs",
+    ".githooks/pre-commit",
+    "README.md",
+    "docs/README.md",
+    "docs/QUICKSTART.md",
+    "docs/WORKFLOW-TOOLS.md",
+    "docs/quality-gates.md",
+    "docs/development.md",
+    "docs/AGENT-TOOLBOX.md",
+    "docs/PARALLEL-DISPATCH-PLAYBOOK.md",
+    "docs/production/README.md",
+    "docs/production/engineering/MAKER-HANDBOOK.md",
+    "docs/production/management/ITERATION-BOARD.md",
+    "tests/workflow-handoff.test.js",
+    "tests/impact-query.test.js",
+    "tests/acceptance-gate.test.js",
+    "tests/workflow-staged.test.js",
+    "tests/workflow-scope.test.js",
+    "tests/workflow-dependencies.test.js",
+    "tests/workflow-gate-receipt.test.js",
+    "tests/workflow-ship.test.js",
+    "tests/workflow-index.test.js",
+    "tests/docs-consistency.test.js",
+    "docs/PARALLEL-REGISTRY.md",
+    "docs/production/engineering/CODE-DATA-WORKFLOW.md",
+    "docs/production/qa/ACCEPTANCE-MATRIX.md"
+  ],
+  "doneWhen": [
+    "台账分类与接手简报无已决/已落库误计",
+    "普通/隔离验收同一计划；有效冻结index报告严格复用",
+    "ship有完成范围、工作树与index基线守卫且无自动授权",
+    "文档守卫同一契约与规则预算通过；流程文档单一口径",
+    "相关测试和集成验证通过；明确剩余未核项"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "report",
+      "report": "docs/evidence/2026-10-02-flow-redesign/2026-10-02T03-29-15.038Z-11ea37f4.json",
+      "result": "passed",
+      "sha256": "6d5a4dffef9a3c4741f52a6036b85f9f30d33004c39496448dec648b815f42b1",
+      "verification": "recorded-result-only-not-current-freshness"
+    },
+    {
+      "kind": "manual",
+      "description": "触碰18个脚本/测试ESLint与diff格式；最终ship/CLI重核；docs:check 45文档332链接0发现；真实index/HEAD保持基线",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "未跑游戏全量、build、游戏浏览器；本批内部流程不要求游戏实页",
+    "远端未fetch，最新改动CI覆盖未核；未提交/推送"
+  ],
+  "updatedAt": "2026-10-02T03:33:42.544Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

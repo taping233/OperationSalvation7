@@ -1,0 +1,26 @@
+{
+  "verifiedAt": "2026-10-02T21:38:26.6452294+08:00",
+  "method": "PowerShell JSON parse and current inventory identifier validation; no game runtime assertion",
+  "cards": 8,
+  "uniqueIds": 8,
+  "staticSeen": 3,
+  "motionSeen": 0,
+  "inventoryFamilies": 110,
+  "mappedFamilies": 110,
+  "invalidFamilyIds": [],
+  "unmappedFamilyIds": [],
+  "copyrightedMediaDownloaded": false,
+  "limits": "Mapping is applicability, not reference scene coverage or project screenshot coverage",
+  "files": [
+    {
+      "sha256": "97C1636139C98793FCDC4854B0365C88DA278EC04CE4CB93A64D9B182F6AA8E1",
+      "bytes": 20321,
+      "name": "records.json"
+    },
+    {
+      "sha256": "232522CE6D703B44E1E8440E8BAC2038BE83B06BB02F48E09A53885707E6A01F",
+      "bytes": 10238,
+      "name": "COMPARATORS.md"
+    }
+  ]
+}

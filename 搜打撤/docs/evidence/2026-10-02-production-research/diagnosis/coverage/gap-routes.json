@@ -1,0 +1,1355 @@
+{
+  "date": "2026-10-02T14:06:55.315Z",
+  "baseline": {
+    "basicInterfaces": 110,
+    "artImageReviewed": 44,
+    "artSourceOnly": 66,
+    "gapRows": 66,
+    "unchangedIds": true
+  },
+  "scope": "仅现存66个基本画面缺口的最短路线，不包括33变体额外任务，不重新扫描、不跑游戏/测试/浏览器。",
+  "urlNote": "Vite root=GAME_ROOT，动态模块URL用/src/...；仓库源路径仍game/src/...。模块须属于当前同origin当前页面，不在外部浏览器调用。",
+  "classificationLegend": {
+    "ui": "正常UI可打开，无需消费确认",
+    "ui-conditional": "正常UI但必须已有真实状态/库存/节点；没有条件就保留缺口，不造持久数据",
+    "ui-with-save": "既有UI但打开就save/exit，不当纯只读",
+    "dev": "现成dev可构造，会改当前Run/随机队列/临时状态，有真档则可能保存，不能冒正常路线",
+    "renderer": "公开renderer+明确snapshot，只证明画面；不是零UI副作用，按钮可能绑真命令",
+    "renderer-with-callback": "公开展示函数用no-op回调，但modal/定时器/hook仍变，需来源恢复",
+    "isolated-test": "没有安全公开renderer；已有依赖注入/vi mock夹具可隔离构造。不是粘贴测试到live的执行指令",
+    "blocked-guard": "当前总开关冻结；不能取图解冻",
+    "blocked-entry": "源码renderer存在但当前主入口未接；要另做隔离host才可，不视为现行UI"
+  },
+  "routes": [
+    {
+      "id": "SLOT-RECOVERY",
+      "name": "读档恢复与进局过场",
+      "classification": "ui-conditional",
+      "entry": "game.session.startNewGame(); 内部enterSlot动作",
+      "parameters": "已有合法Run档；选对应slot",
+      "guards": "配对/版本有效，enteringSlot无并发",
+      "sideEffects": "正常读档会切Base与Run身份、过场及保存恢复",
+      "shortestPath": "标题→五档→进入有Run档；无档不造档",
+      "testFixture": "tests/extraction-recovery-ui.test.js的pending恢复是隔离mock，不复制live storage",
+      "source": {
+        "file": "game/src/ui/game.menu.js",
+        "line": 710,
+        "anchor": "UI.act('enterSlot'"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "TITLE-ACH",
+      "name": "标题成就总览",
+      "classification": "ui",
+      "entry": "标题#mAch；openTitleAchievements为menu内部",
+      "parameters": "无",
+      "guards": "标题页按钮可见",
+      "sideEffects": "读Meta；overlay+game.state",
+      "shortestPath": "标题→成就总览，返回achBack",
+      "testFixture": "inventory入口line433",
+      "source": {
+        "file": "game/src/ui/game.menu.js",
+        "line": 433,
+        "anchor": "function openTitleAchievements"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "SUGGESTION",
+      "name": "右键留言编辑",
+      "classification": "ui",
+      "entry": "菜单openSuggestionBox内部；#sugLayer既有右键接线",
+      "parameters": "当前元素/坐标/page由右键计算",
+      "guards": "现有页面且上下文可辨",
+      "sideEffects": "只打开不保存：输入层；保存才写留言",
+      "shortestPath": "在当前界面右键→记录试玩反馈→取消，不点保存",
+      "testFixture": "game.menu.js:228；不能把查看层当真实发消息",
+      "source": {
+        "file": "game/src/ui/game.menu.js",
+        "line": 228,
+        "anchor": "function openSuggestionBox"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "LEAVE",
+      "name": "离开对局选择",
+      "classification": "ui",
+      "entry": "game.session.openLeaveMenu()",
+      "parameters": "无",
+      "guards": "真实Run在地图；busy先结束",
+      "sideEffects": "game.state=modal；只打开不保存/不放弃",
+      "shortestPath": "地图左上离开按钮→取消",
+      "testFixture": "tests/terminal-settlement.test.js:35，隔离mockUI",
+      "source": {
+        "file": "game/src/ui/game.menu.js",
+        "line": 816,
+        "anchor": "function openLeaveMenu"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "ABANDON-DONE",
+      "name": "放弃行动结算",
+      "classification": "isolated-test",
+      "entry": "createGameMenuController(deps)；abandonRun/finish内部",
+      "parameters": "fake game+Base/terminalCommands/runtime；UI仅桥渲染",
+      "guards": "所有存储/搬运依赖stub，不能拿真实SDT.Base",
+      "sideEffects": "隔离假局terminal结果；真实点击放弃会不可逆结算",
+      "shortestPath": "真实放弃需要另获具体授权；不为取图放弃在途档",
+      "testFixture": "tests/terminal-settlement.test.js:18–58有完整注入deps",
+      "source": {
+        "file": "game/src/ui/game.menu.js",
+        "line": 869,
+        "anchor": "已放弃对局"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "TERMINAL-RETRY",
+      "name": "死亡或放弃保存失败",
+      "classification": "renderer",
+      "entry": "ui/terminal-settlement.runTerminalSettlement(p)",
+      "parameters": "token:{busy:false,promise:null},current:()=>true,game:展示副本,UI:渲染桥,finish:()=>false,command:'abandon',retryAct:'fixtureTerminalRetry',extraPayload:{},terminalCommands:null",
+      "guards": "传null故意走服务不可用；不得注入真实终局命令",
+      "sideEffects": "只渲染失败页/注册重试/refresh副本；不读写档",
+      "shortestPath": "无正常入口可主动制造真实故障；fixture-render-only",
+      "testFixture": "FIXTURE-TERMINAL；测试terminal-settlement契约同注入",
+      "source": {
+        "file": "game/src/ui/terminal-settlement.js",
+        "line": 5,
+        "anchor": "终局结算未保存"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "EXIT-SCREEN",
+      "name": "退出游戏屏",
+      "classification": "ui-with-save",
+      "entry": "game.session.quitGame()；或标题退出按钮",
+      "parameters": "网页运行（非sdtDesktop）",
+      "guards": "运行于网页，不能原生容器退出",
+      "sideEffects": "函数先saveGame；网页显示exitScr，桌面会quit！",
+      "shortestPath": "只在已确认网页环境且接受保存副作用时标题退出→重新进入",
+      "testFixture": "game.menu.js:895；不宣称它是纯展示",
+      "source": {
+        "file": "game/src/ui/game.menu.js",
+        "line": 895,
+        "anchor": "function quitGame"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "HUB-PETS",
+      "name": "仓库宠物区域",
+      "classification": "ui",
+      "entry": "openBaseHub('stash')→hubPetsHTML区域",
+      "parameters": "当前Base",
+      "guards": "无战斗/Run，经quick-nav守卫",
+      "sideEffects": "打开只读，selPet才写Base",
+      "shortestPath": "基地仓库向宠物区域滚动；已有仓库整页图未代替细部",
+      "testFixture": "与HUB-STASH共享区域，不改宠物",
+      "source": {
+        "file": "game/src/hub/game.hub.pages.js",
+        "line": 157,
+        "anchor": "function hubPetsHTML"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "STASH-EGG",
+      "name": "宠物蛋孵化弹层",
+      "classification": "ui-conditional",
+      "entry": "game.hub.pages.openStashItem(i)",
+      "parameters": "i=真实仓库PET_EGG_ID堆索引",
+      "guards": "有蛋；不足币也能看禁用态",
+      "sideEffects": "打开不耗蛋币；hatchEgg才提交",
+      "shortestPath": "仓库→现有宠物蛋→只看→返回；无蛋保留缺口",
+      "testFixture": "命令base-pet-egg，不为图发蛋或改储备",
+      "source": {
+        "file": "game/src/hub/game.hub.pages.js",
+        "line": 180,
+        "anchor": "宠物蛋 + 50 币"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "STASH-RAW",
+      "name": "仓库真实物资说明",
+      "classification": "ui",
+      "entry": "game.hub.pages.openRawItem(kind)",
+      "parameters": "wood / rations / keys，以现有rawItem dataset为准",
+      "guards": "有效kind/已载入Base",
+      "sideEffects": "modal只读；返回renderHub",
+      "shortestPath": "仓库→真实物资条目→返回",
+      "testFixture": "源码openRawItem:403，传值取按钮不猜",
+      "source": {
+        "file": "game/src/hub/game.hub.pages.js",
+        "line": 403,
+        "anchor": "function openRawItem"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "STASH-CONFIRM",
+      "name": "仓库消耗与出售确认",
+      "classification": "ui-conditional",
+      "entry": "内部confirmStashAction(message,run)，由sellOne/sellAll/econpackUse触发",
+      "parameters": "已有真实卡堆，最后一张或全售",
+      "guards": "有库存；只打开确认，不点击stashConfirmOk",
+      "sideEffects": "开框不卖；确认才不可逆消费/卖卡",
+      "shortestPath": "仓库物品→卖出最后1张/全部→取消",
+      "testFixture": "不执行出售；材料确认是不同ID",
+      "source": {
+        "file": "game/src/hub/game.hub.pages.js",
+        "line": 277,
+        "anchor": "const confirmStashAction"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "HUB-HELP",
+      "name": "基地六页签帮助弹层",
+      "classification": "ui",
+      "entry": "SDT.UI.showHelp('hub-'+tab)",
+      "parameters": "tab=deploy/stash/shop/upgrade/classes/ach",
+      "guards": "先开对应基地页让registerHubHelp注册topic",
+      "sideEffects": "只换overlay/register返回动作，不保存资源",
+      "shortestPath": "六页每页问号→返回各原页；六variant独立",
+      "testFixture": "game.hub.js:323+ui/overlay.js:21；未注册topic直接return",
+      "source": {
+        "file": "game/src/hub/game.hub.js",
+        "line": 323,
+        "anchor": "function registerHubHelp"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "CARD-DESIGNER",
+      "name": "卡牌制作器",
+      "classification": "blocked-guard",
+      "entry": "game.cardslib.openCardDesigner(null)→factory.openCardDesigner",
+      "parameters": "null或card，但总开关false",
+      "guards": "CARD_DESIGNER_WRITES_ENABLED=false",
+      "sideEffects": "只会回照相馆，不显示制作器",
+      "shortestPath": "当前UI不能打开；不改开关/源码取图",
+      "testFixture": "制作器renderDesigner内部，无公开绕守卫纯renderer",
+      "source": {
+        "file": "game/src/hub/game.cardslib.designer.js",
+        "line": 102,
+        "anchor": "function renderDesigner"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "CARDS-EXPORT",
+      "name": "卡牌导出",
+      "classification": "ui",
+      "entry": "照相馆开发导出工具→exportCards；createCardDesigner(deps).showCardsExportOverlay()",
+      "parameters": "工厂需set/getCardPage*与openCardLibrary等host deps",
+      "guards": "库已加载；导出工具可见",
+      "sideEffects": "打开只读；copy/download写剪贴板/下载才副作用",
+      "shortestPath": "照相馆→导出工具→导出→只看返回",
+      "testFixture": "factory返回该方法；不要为图下载/复制",
+      "source": {
+        "file": "game/src/hub/game.cardslib.designer.js",
+        "line": 304,
+        "anchor": "function showCardsExportOverlay"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "CARDS-IMPORT",
+      "name": "卡牌导入",
+      "classification": "blocked-guard",
+      "entry": "createCardDesigner(deps).showCardsImportOverlay()",
+      "parameters": "无，真实入口先检查false",
+      "guards": "CARD_DESIGNER_WRITES_ENABLED=false",
+      "sideEffects": "当前直接返回/受外壳拒绝；不支持正常UI打开",
+      "shortestPath": "保持冻结；不改开关；若隔离源码mock只能记构造",
+      "testFixture": "该factory方法亦受开关，不冒充已上线",
+      "source": {
+        "file": "game/src/hub/game.cardslib.designer.js",
+        "line": 330,
+        "anchor": "function showCardsImportOverlay"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "RUN-TRANSITION",
+      "name": "接敌/进节点/读档过场",
+      "classification": "renderer",
+      "entry": "game.run.scenes.showRunTransition(options)",
+      "parameters": "tone:'battle',title:'渲染夹具',detail:'非实际进节点',duration:900",
+      "guards": "捕获来源页；不能在busy战场顶真实动作",
+      "sideEffects": "改modal、overlay、定时continue并恢复状态；不扣资源",
+      "shortestPath": "正常读档/真实邻节点过场可录；构造须标演出fixture",
+      "testFixture": "原参数签名源码113，非真实进节点",
+      "source": {
+        "file": "game/src/run/game.run.scenes.js",
+        "line": 113,
+        "anchor": "export function showRunTransition"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "NODE-SAFE",
+      "name": "空白安全节点页",
+      "classification": "dev",
+      "entry": "game.run.scenes.openBlankSafePage()",
+      "parameters": "无",
+      "guards": "已有真实Run闲置可开，但当前节点未必安全",
+      "sideEffects": "modal；点击Done会finishInstant/保存真实Run",
+      "shortestPath": "优先真实空白节点；直调只证明场景渲染且不要Done",
+      "testFixture": "现成export，不为图改当前节点",
+      "source": {
+        "file": "game/src/run/game.run.scenes.js",
+        "line": 233,
+        "anchor": "export function openBlankSafePage"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "PICKUP",
+      "name": "币/木材/口粮/钥匙拾取",
+      "classification": "renderer-with-callback",
+      "entry": "game.run.scenes.openPickupPage(kind,gain,onDone,skipSearch)",
+      "parameters": "kind:'coin',gain:'+1 币',onDone:()=>{},skipSearch:true",
+      "guards": "来源页面可恢复；不传真实gainCoins回调",
+      "sideEffects": "开modal/拾取演出；pickupGo调用无写入回调但UI改变",
+      "shortestPath": "真实币/木材/口粮/钥匙节点；fixture only需明确no-op",
+      "testFixture": "源码177–206；no-op构造不证获得资源",
+      "source": {
+        "file": "game/src/run/game.run.scenes.js",
+        "line": 177,
+        "anchor": "export function openPickupPage"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "RESOURCE-PICK",
+      "name": "物资投放资源二选一",
+      "classification": "ui-conditional",
+      "entry": "game.run.flow.openResourcePick私有，resolveCell正常分派",
+      "parameters": "当前resource节点，catalog资源池非空",
+      "guards": "Run合法邻节点与包容量",
+      "sideEffects": "真实领取发卡/consume/保存；跳过不consume",
+      "shortestPath": "真实resource节点→仅查看；没有devJumpNode('resource')支持",
+      "testFixture": "不能把chest-medium图当RESOURCE-PICK",
+      "source": {
+        "file": "game/src/run/game.run.flow.js",
+        "line": 176,
+        "anchor": "function openResourcePick"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "CHEST-SEARCH",
+      "name": "宝箱搜寻揭晓",
+      "classification": "dev",
+      "entry": "game.run.devJumpNode('chest-small') 或真实未开箱",
+      "parameters": "kind:'chest-small'/'chest-medium'/'chest-large'",
+      "guards": "devEnsureRun；无战斗；已有Run将沿真实状态",
+      "sideEffects": "随机roll箱、modal/队列；领取会发卡/保存",
+      "shortestPath": "真实宝箱未开先拍；dev明确辅助，勿与真实路径混",
+      "testFixture": "Chests.renderSearch私有；SDT.Chests.open具体入参见原源码206",
+      "source": {
+        "file": "game/src/run/chests.js",
+        "line": 240,
+        "anchor": "function renderSearch"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "AMMO-TUTORIAL",
+      "name": "卡牌消耗教学",
+      "classification": "ui-conditional",
+      "entry": "game.bag.settle内部teachAmmoOnce，由战后结算触发",
+      "parameters": "首次普通卡入usedPocket且未教过",
+      "guards": "真实胜利/首次标记满足",
+      "sideEffects": "战后奖励/教学标记写Run",
+      "shortestPath": "现有current-consumption-tutorial-ax.txt只有AX，不是图；正常首次战后再看",
+      "testFixture": "不能直接把ammoTeachOk当开页动作，private renderer",
+      "source": {
+        "file": "game/src/hub/game.bag.settle.js",
+        "line": 127,
+        "anchor": "卡牌是消耗品"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "BATTLE-SETTLE-RETRY",
+      "name": "战后保存失败恢复",
+      "classification": "isolated-test",
+      "entry": "battle settle内部retry；命令依赖注入失败",
+      "parameters": "fake failed settlement+mockUI，不接真实persist",
+      "guards": "只能隔离fixture，不强制真实配额失败",
+      "sideEffects": "真实重试会提交奖励；隔离mock只留html",
+      "shortestPath": "不在真档造失败；没有公开showRetry renderer",
+      "testFixture": "现有battle结算探针/测试按mock函数失败，不能整个复制live",
+      "source": {
+        "file": "game/src/hub/game.bag.settle.js",
+        "line": 64,
+        "anchor": "战后结算未完成"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "DOOR",
+      "name": "跨层闸门",
+      "classification": "ui-conditional",
+      "entry": "game.run.altar.openDoorModal(door,cellDef)",
+      "parameters": "从当前curLayer().doors取现有door；含pair,toLayer,arriveAt,reverse",
+      "guards": "discoveredPairs为Set、layerData当前有效",
+      "sideEffects": "即使仅打开也game.discoveredPairs.add(pair)；goDoor换层",
+      "shortestPath": "正常落到闸门开页；直调也属辅助且有揭门副作用",
+      "testFixture": "源码414–438，不能用虚造door声称真实跨层",
+      "source": {
+        "file": "game/src/run/game.run.altar.js",
+        "line": 414,
+        "anchor": "export function openDoorModal"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "POCKET-RESTORE",
+      "name": "消耗口袋复原选择",
+      "classification": "ui-conditional",
+      "entry": "game.run.scenes.openPocketRestore(picks,done,opts)",
+      "parameters": "picks:2,done:()=>{},opts:{title:'复原夹具',sub:'仅渲染'}；读取真实usedPocket",
+      "guards": "真实Run/口袋；不点restoreOne",
+      "sideEffects": "modal+bagReturnHook；restoreOne真移牌，fireDone调用done",
+      "shortestPath": "真实火堆/祭坛复原；可no-op回调用既有口袋看空态",
+      "testFixture": "参数公开；no-op不消耗但须恢复来源hook",
+      "source": {
+        "file": "game/src/run/game.run.scenes.js",
+        "line": 303,
+        "anchor": "export function openPocketRestore"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "EVENT-CHOICE",
+      "name": "事件药摊/军需选牌",
+      "classification": "ui-conditional",
+      "entry": "game.run.flow.openEventCardChoice私有",
+      "parameters": "真实药摊/军需事件效果",
+      "guards": "event deck抽到对应分支；军需需3币",
+      "sideEffects": "军需可能先扣3币；领取发牌",
+      "shortestPath": "正常事件到药摊优先；devJumpNode('event')仍随机且可能写局",
+      "testFixture": "没有公开固定事件参数，不追加指定卡到库",
+      "source": {
+        "file": "game/src/run/game.run.flow.js",
+        "line": 524,
+        "anchor": "function openEventCardChoice"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "EVENT-RECODE",
+      "name": "故障重编",
+      "classification": "ui-conditional",
+      "entry": "openEventRecode私有→runEventDeck效果",
+      "parameters": "真实非safe/nonstored可转牌且有同型同稀有池",
+      "guards": "抽到故障重编且eligible>0",
+      "sideEffects": "确认才变牌；开始页面不变牌，无候选直接结束",
+      "shortestPath": "正常/现成dev event随机触发；不能保证一键到该页",
+      "testFixture": "定向源565，已有action不能当公开开页",
+      "source": {
+        "file": "game/src/run/game.run.flow.js",
+        "line": 565,
+        "anchor": "function openEventRecode"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "EVENT-GAMBLE",
+      "name": "赌局抉择",
+      "classification": "ui-conditional",
+      "entry": "openEventGamble私有→runEventDeck效果",
+      "parameters": "真实3张奖池/至少3币可尝试",
+      "guards": "完整prizes<3直接关闭，50%/第五保底",
+      "sideEffects": "尝试扣币与奖励，打开不下注",
+      "shortestPath": "event随机抽到黑市→只看离开；现成dev仍随机",
+      "testFixture": "不调Random/global seed为取图",
+      "source": {
+        "file": "game/src/run/game.run.flow.js",
+        "line": 633,
+        "anchor": "function openEventGamble"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "LAST-LAMP",
+      "name": "最后一盏灯故事选择",
+      "classification": "ui-conditional",
+      "entry": "game.run.flow.runEventDeck()→tryLastLampEvent私有",
+      "parameters": "真实slot/run/story记录绑定",
+      "guards": "故事段可用、currentLastLampPage检查",
+      "sideEffects": "选择提交story与效果，异步load状态",
+      "shortestPath": "正常事件触发已有故事段→只看；不能造持久story进度",
+      "testFixture": "已有叙事命令测试fixture可隔离，不在真档推进",
+      "source": {
+        "file": "game/src/run/game.run.flow.js",
+        "line": 339,
+        "anchor": "async function tryLastLampEvent"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "LAST-LAMP-RESULT",
+      "name": "最后一盏灯结果/保存失败",
+      "classification": "ui-conditional",
+      "entry": "renderLastLampResult私有",
+      "parameters": "真实已提交record,text,binding",
+      "guards": "对应runId/slot有效",
+      "sideEffects": "完成/重试可能保存或结束节点",
+      "shortestPath": "真实故事选择后；没有公开安全独立renderer",
+      "testFixture": "隔离story mock可构造文本，但不能声称真实选择结果",
+      "source": {
+        "file": "game/src/run/game.run.flow.js",
+        "line": 309,
+        "anchor": "function renderLastLampResult"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "ALTAR-FRAGMENT-FAIL",
+      "name": "碎片兑换不可用说明",
+      "classification": "ui-conditional",
+      "entry": "openAltarRitual()→altarFragHero→pool空分支",
+      "parameters": "真实fragments>=2且职业/能力池为空",
+      "guards": "当前职业池为空才能进；一般五职业皆有池",
+      "sideEffects": "失败分支碎片保留；点击前也可能真的授牌并扣2碎片",
+      "shortestPath": "无真实空池不要点碎片换牌为拍错态",
+      "testFixture": "私有nodeShell分支；不清卡库/改myClass人为造失败",
+      "source": {
+        "file": "game/src/run/game.run.altar.js",
+        "line": 506,
+        "anchor": "碎片兑换 · 暂不可用"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "EXIT-PAY",
+      "name": "第三层紧急撤离",
+      "classification": "ui-conditional",
+      "entry": "game.run.altar.openEmergencyModal()",
+      "parameters": "当前第三层emergencyExit真实节点",
+      "guards": "layerIdx===2、3牌可付；其它层停用态",
+      "sideEffects": "仅开modal；payExit献祭+doExtract会结算",
+      "shortestPath": "真实第三层紧急点→只看stayHere返回",
+      "testFixture": "不改trackPos/节点或拿终局出口替图",
+      "source": {
+        "file": "game/src/run/game.run.altar.js",
+        "line": 670,
+        "anchor": "export function openEmergencyModal"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "EXTRACT-RETRY",
+      "name": "撤离快照保存失败",
+      "classification": "isolated-test",
+      "entry": "showExtractionRetry私有；doExtract()故障后进入",
+      "parameters": "测试after-base failpoint，在隔离fake storage",
+      "guards": "真实doExtract会saveGame+begin，不是取图函数",
+      "sideEffects": "真档会结算资源/XP；fixture失败只有mock页",
+      "shortestPath": "无公开安全renderer；用隔离测试路由记录构造，不调用真doExtract制造故障",
+      "testFixture": "tests/extraction-recovery-ui.test.js:48–93 mock/failpoint完整",
+      "source": {
+        "file": "game/src/run/game.run.altar.js",
+        "line": 815,
+        "anchor": "function showExtractionRetry"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "DEATH",
+      "name": "死亡撤离失败结算",
+      "classification": "isolated-test",
+      "entry": "createDeathSettlement(deps)→game.damage/doDeath",
+      "parameters": "fake game、terminalCommands及Base依赖全stub",
+      "guards": "不能对真实game.damage/hp归零",
+      "sideEffects": "真实死亡结算损失Run；隔离假局才可构造",
+      "shortestPath": "真人失败才自然证据；不要为图杀在途局",
+      "testFixture": "tests/terminal-death.test.js、u18-negative-hp-death.test.js仅夹具来源",
+      "source": {
+        "file": "game/src/run/game.session.death.js",
+        "line": 11,
+        "anchor": "撤离失败"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "BAG",
+      "name": "探索背包",
+      "classification": "ui",
+      "entry": "game.bag.showBackpack()；game.debug.showBackpack同函数",
+      "parameters": "无；refreshOnly不要传true绕行为",
+      "guards": "game.runActive且myClass已选，state idle/modal；battle自动转战斗包",
+      "sideEffects": "只开读包，箱队列挂起；use/drag/discard/safe才写",
+      "shortestPath": "地图浮动包/B→拍→关闭回真实来源",
+      "testFixture": "同name堆/空态真实包；不为满包修改ownedCards",
+      "source": {
+        "file": "game/src/hub/game.bag.js",
+        "line": 520,
+        "anchor": "function showBackpack"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "BAG-DISCARD",
+      "name": "背包丢弃确认",
+      "classification": "ui-conditional",
+      "entry": "showDiscardConfirm(name,fromSafe)私有，由现有拖丢弃触发",
+      "parameters": "真实堆name、所在safe来源",
+      "guards": "非starter等可丢；只开确认",
+      "sideEffects": "confirmDragDiscard删整堆保存；cancel原包",
+      "shortestPath": "背包真实堆拖至丢弃区→取消；不confirm",
+      "testFixture": "没有公开只渲染方法，不把旧detailDiscard当现行入口",
+      "source": {
+        "file": "game/src/hub/game.bag.js",
+        "line": 275,
+        "anchor": "function showDiscardConfirm"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "BAG-PEARL",
+      "name": "珍珠盒资源存取",
+      "classification": "ui-conditional",
+      "entry": "openPearlStore私有；inspectStack→pearlStoreZoom",
+      "parameters": "真实tt2-pearlbox在ownedCards",
+      "guards": "现有箱存在；资源候选、cap=boxes*9",
+      "sideEffects": "开modal只读；put/take改stored并保存",
+      "shortestPath": "包→珍珠盒详情→存放资源→返回",
+      "testFixture": "没有箱保持缺口，不给真档添加tt2-pearlbox",
+      "source": {
+        "file": "game/src/hub/game.bag.js",
+        "line": 419,
+        "anchor": "function openPearlStore"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "BAG-POUCH",
+      "name": "法师锦囊法术存取",
+      "classification": "ui-conditional",
+      "entry": "openPouchStore私有；inspectStack→pouchStoreZoom",
+      "parameters": "真实tt7-stratagem在ownedCards",
+      "guards": "现有锦囊；非职业法术候选，容量3",
+      "sideEffects": "开modal只读；put/take改pouchOf/stored并保存",
+      "shortestPath": "包→法师锦囊详情→法术存放→返回",
+      "testFixture": "没有锦囊保持缺口，不直接运行旧showBagCardDetail",
+      "source": {
+        "file": "game/src/hub/game.bag.js",
+        "line": 352,
+        "anchor": "function openPouchStore"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "BATTLE-GRAVE",
+      "name": "战斗墓地",
+      "classification": "renderer",
+      "entry": "battle.overlays.renderGrave(snapshot)；commands.openGrave()自然入口",
+      "parameters": "{grave:[],opts:{isBoss:false},turn:1}空态；真场用getSnapshot",
+      "guards": "自然须有当前战斗；renderer无battleActive守卫，模块已加载",
+      "sideEffects": "renderer换overlay/注册closeGrave/refresh HUD，不写卡；按钮绑定真实命令",
+      "shortestPath": "自然战→墓地→返回最优；无场用FIXTURE-GRAVE仅画面",
+      "testFixture": "fixture不包含有效uid时只能空态，不能伪造findCard表",
+      "source": {
+        "file": "game/src/battle/view/battle.overlays.js",
+        "line": 58,
+        "anchor": "function renderGrave"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "BATTLE-DECK",
+      "name": "首脑战牌库",
+      "classification": "renderer",
+      "entry": "battle.overlays.renderDeckPileView(snapshot)；commands.openDeckView()",
+      "parameters": "{drawPile:[],opts:{isBoss:true},turn:1}空态",
+      "guards": "自然openDeckView仅boss；renderer无模式守卫",
+      "sideEffects": "renderer换overlay/注册closeDeckView/HUD，不写牌；不要点真实命令",
+      "shortestPath": "真实首脑战牌堆→返回；无boss标FIXTURE-DECK",
+      "testFixture": "不是普通战入口，renderer-only不证明boss可达",
+      "source": {
+        "file": "game/src/battle/view/battle.overlays.js",
+        "line": 89,
+        "anchor": "function renderDeckPileView"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "BATTLE-BAG",
+      "name": "战斗背包与安全格",
+      "classification": "renderer",
+      "entry": "battle.overlays.renderBattleBag(snapshot)；commands.openBag()",
+      "parameters": "{opts:{isBoss:false},turn:1}；牌/容量从真实SDT.game读取",
+      "guards": "自然须当前战斗且非忙；renderer无其守卫",
+      "sideEffects": "只渲染仍绑真实useItem/safeMove；点击safeMove.saveGame",
+      "shortestPath": "自然战B/背包→只看返回；无战仅FIXTURE-BATTLE-BAG",
+      "testFixture": "不是完全纯数据，不能fixture传ownedCards替代真实引用",
+      "source": {
+        "file": "game/src/battle/view/battle.overlays.js",
+        "line": 118,
+        "anchor": "function renderBattleBag"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "BATTLE-CHOICE",
+      "name": "战斗牌效抉择",
+      "classification": "renderer",
+      "entry": "battle.view.render(snapshot)，导出render",
+      "parameters": "FIXTURE-CHOICE：完整当前snapshot副本覆盖choosing，清deck/viewing/grave等早优先标志",
+      "guards": "战斗域已加载；非busy稳定页，保存来源",
+      "sideEffects": "drain卡演出队列/hideTooltip/hideUnitFrames/overlay/真实pickChoice绑定",
+      "shortestPath": "真实有抉择牌可正常出牌；夹具只拍不点",
+      "testFixture": "测试selection-flow边界；fixture未写interaction，不证效果续接",
+      "source": {
+        "file": "game/src/battle/view/battle.view.js",
+        "line": 227,
+        "anchor": "if (choosing)"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "BATTLE-PAYMENT",
+      "name": "战斗强制支付/手牌选择",
+      "classification": "renderer",
+      "entry": "battle.view.render(snapshot)",
+      "parameters": "FIXTURE-PAYMENT：hand:[],handSelecting:{act:'payment',n:1,type:'法术',mandatory:true,excludedUids:[],selectedUids:[],payment:{card:fixtureCard}}",
+      "guards": "同CHOICE；hand空避免真实findCard，清其它分支",
+      "sideEffects": "渲染强制支付空态且绑定真实pickHand；勿点/当真死锁",
+      "shortestPath": "已有支付牌真实触发优先；fixture只证明布局",
+      "testFixture": "tests/tt7-hand-payment.test.js有隔离BattleSession真实支付夹具",
+      "source": {
+        "file": "game/src/battle/view/battle.view.js",
+        "line": 240,
+        "anchor": "if (handSelecting)"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "BATTLE-DISCOVER",
+      "name": "战斗发现选牌",
+      "classification": "renderer",
+      "entry": "battle.view.render(snapshot)",
+      "parameters": "FIXTURE-DISCOVER：discovering:{options:[fixtureCard]}，清其它抢优先分支",
+      "guards": "完整snapshot；当前战斗domain已载入",
+      "sideEffects": "drain动画/换overlay/真实pickDiscover绑定；不写发现state",
+      "shortestPath": "真实发现牌触发优先；构造候选不点击",
+      "testFixture": "tests/battle-discover-state.test.js + battle-selection-flow-boundary.test.js",
+      "source": {
+        "file": "game/src/battle/view/battle.view.js",
+        "line": 274,
+        "anchor": "if (discovering)"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "BATTLE-INFUSE",
+      "name": "战斗注能交互条",
+      "classification": "ui-conditional",
+      "entry": "SDT.Battle.commands.beginInfusion(uid)；真实注能牌点击",
+      "parameters": "uid=当前手牌有效infuse>0；无主牌成本不足",
+      "guards": "玩家阶段/非busy/可用/燃料足",
+      "sideEffects": "进入选择临时interaction；cancelInfusion退出；确认才消费",
+      "shortestPath": "现有注能牌→开始→拍条→取消；不发牌凑条件",
+      "testFixture": "tests/n1-infuse-uid-toggle.test.js:34–67，隔离MAIN/FUEL，不替真场卡表",
+      "source": {
+        "file": "game/src/battle/view/battle.view.js",
+        "line": 504,
+        "anchor": "UI.act('btInfuseStart'"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "BATTLE-TARGET",
+      "name": "目标选择与预览层",
+      "classification": "ui-conditional",
+      "entry": "commands.beginCardInteraction(uid) / playCard(uid,null)",
+      "parameters": "当前需enemy/self的手牌uid，多个合法敌人才显示等待；单敌自动",
+      "guards": "合法费用/玩家phase/非busy，非自用立即牌",
+      "sideEffects": "可能自动选单敌并真出牌扣费！不能把无参play当纯渲染",
+      "shortestPath": "正常多敌需目标牌点击→未确认时拍→cancelPendingTarget",
+      "testFixture": "推荐真实UI；isolated session测试是辅助，非真人",
+      "source": {
+        "file": "game/src/battle/view/battle.layers.js",
+        "line": 562,
+        "anchor": "setTargetable(selfUnit"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "BATTLE-SETTINGS",
+      "name": "战斗设置",
+      "classification": "ui",
+      "entry": "战斗已有data-act='btSettings'；handler内部",
+      "parameters": "无",
+      "guards": "当前真实战斗稳定；模块view已渲染",
+      "sideEffects": "只开设置；checkbox改真实音乐/震动/pace偏好",
+      "shortestPath": "战斗齿轮→只看→btSettingsBack重绘",
+      "testFixture": "不可直接_UI._acts触发后宣称实际点击",
+      "source": {
+        "file": "game/src/battle/view/battle.view.js",
+        "line": 414,
+        "anchor": "战斗设置"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "TERM-TIP",
+      "name": "术语说明浮层",
+      "classification": "ui",
+      "entry": "术语[data-term]真实悬停/焦点；term-tips.show私有",
+      "parameters": "当前有效data-term元素",
+      "guards": "已安装事件，termMeta存在",
+      "sideEffects": "tooltip DOM可见；hide后恢复，不改存档",
+      "shortestPath": "手册/卡说明悬停已支持术语→拍浮层",
+      "testFixture": "未知词不显示；无需改全文插入测试词",
+      "source": {
+        "file": "game/src/ui/term-tips.js",
+        "line": 93,
+        "anchor": "function show(el)"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "NODE-NOTE",
+      "name": "结点备注编辑",
+      "classification": "ui",
+      "entry": "game.notes.openCellEditor(li,idx)",
+      "parameters": "当前layerIdx/trackPos或真实node.li/idx；不能传悬空下标",
+      "guards": "对应layerData/logical存在，devMode右键入口",
+      "sideEffects": "modal只打开；saveNote/clearNote写Notes；cancel回idle",
+      "shortestPath": "现有开发右键结点→只看取消",
+      "testFixture": "源码41、game.boot107；不调用保存/清空",
+      "source": {
+        "file": "game/src/hub/game.notes.js",
+        "line": 43,
+        "anchor": "function openCellEditor"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "NOTES-EXPORT",
+      "name": "结点备注导出",
+      "classification": "ui",
+      "entry": "game.notes.showExportOverlay()",
+      "parameters": "无",
+      "guards": "game.state==='idle'；节点坐标有效",
+      "sideEffects": "生成JSON/overlay；不点copy/download无外部写",
+      "shortestPath": "地图备注导出按钮；若隐藏可现成export开页，标程序进入",
+      "testFixture": "复制失败处理明确；clipboard/下载不为取图执行",
+      "source": {
+        "file": "game/src/hub/game.notes.js",
+        "line": 113,
+        "anchor": "function showExportOverlay"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "NOTES-IMPORT",
+      "name": "结点备注导入",
+      "classification": "ui",
+      "entry": "game.notes.showImportOverlay()",
+      "parameters": "无；可保持textarea为空",
+      "guards": "idle",
+      "sideEffects": "modal；doImport才合并写Notes，开页不改数据",
+      "shortestPath": "地图备注导入按钮→空编辑态→取消",
+      "testFixture": "tests/cell-notes-quota.test.js仅写失败语义，不是导入全页图",
+      "source": {
+        "file": "game/src/hub/game.notes.js",
+        "line": 140,
+        "anchor": "function showImportOverlay"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "NOTES-CLEAR",
+      "name": "清空结点备注确认",
+      "classification": "ui",
+      "entry": "game.notes.showClearOverlay()",
+      "parameters": "无",
+      "guards": "idle",
+      "sideEffects": "只开确认不删除；默认焦点closeTools取消",
+      "shortestPath": "现有备注清空按钮→确认框→取消",
+      "testFixture": "不要点doClear；取图许可不授权删除",
+      "source": {
+        "file": "game/src/hub/game.notes.js",
+        "line": 184,
+        "anchor": "function showClearOverlay"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "DEV-DEBUG",
+      "name": "开发台·调试",
+      "classification": "ui",
+      "entry": "game.run.openDevConsole()；Ctrl+L",
+      "parameters": "无",
+      "guards": "打开可全局；debug资源仅在Run/战斗有效",
+      "sideEffects": "开overlay、搜索只读；资源/发卡/战斗按钮会写Run",
+      "shortestPath": "Ctrl+L→调试→关闭；不点加币/发卡/胜利",
+      "testFixture": "源码openDevConsole84；关闭战斗会refreshView",
+      "source": {
+        "file": "game/src/run/game.run.dev.js",
+        "line": 84,
+        "anchor": "function openDevConsole"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "DEV-AGENT",
+      "name": "开发台·Agent",
+      "classification": "ui",
+      "entry": "openDevConsole()→devcTab{tab:'agent'}",
+      "parameters": "真实UI点Agent页签",
+      "guards": "A对象已安装；仅查看无需启动",
+      "sideEffects": "打开只读；run/turbo/保存LLM将改运行/配置",
+      "shortestPath": "开发台→Agent→不启动不保存→关闭",
+      "testFixture": "不复制/导出LLM敏感配置到报告",
+      "source": {
+        "file": "game/src/agent/agent.console.js",
+        "line": 38,
+        "anchor": "function agentTabHTML"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "DEV-DATA",
+      "name": "开发台·数据",
+      "classification": "ui",
+      "entry": "openDevConsole()→devcTab{tab:'data'}",
+      "parameters": "真实页签",
+      "guards": "已载入records",
+      "sideEffects": "查看统计只读；导出/清空才写",
+      "shortestPath": "开发台→数据；与DATA不同壳，单独图",
+      "testFixture": "dataPanelHTML共内容，dataClear不执行",
+      "source": {
+        "file": "game/src/agent/agent.data.js",
+        "line": 35,
+        "anchor": "function dataPanelHTML"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "DEV-KEYS",
+      "name": "开发台·快捷键",
+      "classification": "ui",
+      "entry": "openDevConsole()→devcTab{tab:'keys'}",
+      "parameters": "真实页签",
+      "guards": "quick-nav注册可读",
+      "sideEffects": "只查看；devcGoto会正常路由can检查",
+      "shortestPath": "开发台→快捷键→关闭",
+      "testFixture": "keysTabHTML/bindKeysTab；不要绕can",
+      "source": {
+        "file": "game/src/agent/agent.console.js",
+        "line": 96,
+        "anchor": "function keysTabHTML"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "SFX-AUDITION",
+      "name": "独立音效试听页",
+      "classification": "ui-tool",
+      "entry": "/sfx-audition.html?set=alternatives&pack=arknights-runtime",
+      "parameters": "设置已有试听链接，同内置浏览器平台",
+      "guards": "Vite game root，audio fetch可用",
+      "sideEffects": "仅开页fetch；播放改Audio状态不写存档",
+      "shortestPath": "设置→整套音效试听；当前窗口新tab需父会话安排",
+      "testFixture": "工具页只读画面，未试听别评音质",
+      "source": {
+        "file": "game/src/audio/sfx-audition.js",
+        "line": 66,
+        "anchor": "async function loadLibrary"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "HOME-SCENE",
+      "name": "基地布置场景",
+      "classification": "blocked-entry",
+      "entry": "renderHomeScene内部；home.scene.mountHome({host,view,assets,onIntent})公开",
+      "parameters": "host真实DOM；presentHome(baseSnapshot)给view；onIntent可no-op",
+      "guards": "主renderHub未接；mount需完整home view/assets",
+      "sideEffects": "mount DOM/定时/监听；no-op onIntent不买/不存，源码构造非现行入口",
+      "shortestPath": "纯renderer可隔离挂host，但不是已开放基地页",
+      "testFixture": "不改开关/入口；需新增fixture宿主才可，优先保留暂缓",
+      "source": {
+        "file": "game/src/hub/game.hub.js",
+        "line": 80,
+        "anchor": "function renderHomeScene"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "LAB-DOOR",
+      "name": "研究所大门",
+      "classification": "ui-conditional",
+      "entry": "SDT.Nest.openNestPrep() / game.nest.openNestPrep()",
+      "parameters": "真实Base未解锁且keys>=10",
+      "guards": "不足钥匙仅日志不显示门；nestUnlocked已true直接备战",
+      "sideEffects": "仅开门不扣；labOpen扣10钥匙永久解锁Base",
+      "shortestPath": "基地现有研究所入口→只看labBack；不能改keys/unlocked",
+      "testFixture": "parent待决研究所，不为取图消费10钥匙",
+      "source": {
+        "file": "game/src/run/game.nest.js",
+        "line": 102,
+        "anchor": "export function openNestPrep"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "LAB-PREP",
+      "name": "研究所备战",
+      "classification": "ui-conditional",
+      "entry": "openNestPrep()，enterNestPrep私有",
+      "parameters": "真实nestUnlocked===true；真实仓库/符文",
+      "guards": "已有解锁可直接开，10不同合规堆才可开局",
+      "sideEffects": "清game.nestEquipped临时；开局会操作独立Run/牌盒",
+      "shortestPath": "已有解锁→备战只看返回；未解锁别点labOpen",
+      "testFixture": "无可携牌仍能空态显示；不新造解锁存档",
+      "source": {
+        "file": "game/src/run/game.nest.js",
+        "line": 142,
+        "anchor": "function enterNestPrep"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "LAB-MAP",
+      "name": "研究所地图",
+      "classification": "ui-conditional",
+      "entry": "SDT.Nest.renderNestMap() / game.nest.renderNestMap()",
+      "parameters": "现有合法nestActive与nestPos/cardBox/runes等状态",
+      "guards": "自然需研究所Run；函数直接读nest字段",
+      "sideEffects": "render只开overlay+注册；节点/符文/盒子动作改研究所",
+      "shortestPath": "真实研究所备战开局后→图；不存在Run不能直接拍空字段",
+      "testFixture": "tests/nest-regression.test.js prepRun是隔离fixture，别Object.assign真game",
+      "source": {
+        "file": "game/src/run/game.nest.js",
+        "line": 228,
+        "anchor": "export function renderNestMap"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "LAB-RUNES",
+      "name": "研究所符文法阵",
+      "classification": "ui-conditional",
+      "entry": "openRuneCircle(done)私有；NEST_MAP符文节点",
+      "parameters": "自然节点+现有符文池；done=advance在真实流",
+      "guards": "必须走研究所节点",
+      "sideEffects": "选符文/开盒消耗推进；仅打开不选",
+      "shortestPath": "已有研究所Run→法阵节点→只看",
+      "testFixture": "tests/nest-runemaster.test.js夹具，不强改nestPos",
+      "source": {
+        "file": "game/src/run/game.nest.js",
+        "line": 391,
+        "anchor": "function openRuneCircle"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "LAB-ALTAR",
+      "name": "研究所祭坛",
+      "classification": "ui-conditional",
+      "entry": "openNestAltar(done)私有；NEST_MAP祭坛节点",
+      "parameters": "自然节点及候选/资源",
+      "guards": "研究所Run",
+      "sideEffects": "能力或重掷会扣资/改牌/推进",
+      "shortestPath": "自然研究所祭坛→只看",
+      "testFixture": "没有公开renderer；不能调用private名当export",
+      "source": {
+        "file": "game/src/run/game.nest.js",
+        "line": 417,
+        "anchor": "function openNestAltar"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "LAB-SHOP",
+      "name": "研究所神秘商店",
+      "classification": "ui-conditional",
+      "entry": "openNestShop(done)私有；研究所商店节点",
+      "parameters": "自然节点、coins、各库存",
+      "guards": "研究所Run",
+      "sideEffects": "开页生成库存，购买扣随身币/牌/符文，返回advance",
+      "shortestPath": "自然研究所商店→只看",
+      "testFixture": "与主图openShop不同；不以主图商店图代替",
+      "source": {
+        "file": "game/src/run/game.nest.js",
+        "line": 451,
+        "anchor": "function openNestShop"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "LAB-RETRY",
+      "name": "研究所撤离失败重试",
+      "classification": "isolated-test",
+      "entry": "showNestExtractRetry(pending,message)私有；doNestExtract故障",
+      "parameters": "独立fake nest pending与失败命令",
+      "guards": "真doNestExtract会结算，不能为图调用",
+      "sideEffects": "真实重试写Base/Run与receipt",
+      "shortestPath": "仅隔离测试失败构造，不改真存储",
+      "testFixture": "tests/nest-settlement-transaction.test.js，假storage/commit failure",
+      "source": {
+        "file": "game/src/run/game.nest.js",
+        "line": 519,
+        "anchor": "function showNestExtractRetry"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "LAB-ENDING",
+      "name": "研究所结局演出",
+      "classification": "renderer-with-callback",
+      "entry": "run/lab.ending.playLabEnding(onDone)",
+      "parameters": "onDone:()=>{}；已有三页文案/插画",
+      "guards": "isTurbo false，否则直接onDone；不改变turbo",
+      "sideEffects": "body挂演出、打字timer、click/Enter/Esc监听；finish卸监听DOM；不写档",
+      "shortestPath": "直接函数只是renderer演出，明确非研究所真实通关",
+      "testFixture": "skip或Esc收口；勿把此图用来证明主图结局",
+      "source": {
+        "file": "game/src/run/lab.ending.js",
+        "line": 31,
+        "anchor": "playLabEnding"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    },
+    {
+      "id": "LAB-DONE",
+      "name": "研究所行动结算",
+      "classification": "isolated-test",
+      "entry": "showLabSettlement(s,st)私有",
+      "parameters": "s:kills/killPts/bossPts/hpPts/cards/cardPts/runes/runePts/coinPts/total；st:labTotalScore/labBestScore",
+      "guards": "真流程需nest结算成功；无export seam",
+      "sideEffects": "即使函数仅展示也Agent.recorder.recordRun('clear')，不是只读！",
+      "shortestPath": "不直接调用真函数刷记录；隔离mock recorder才构造",
+      "testFixture": "tests/nest-settlement-transaction.test.js后段，暂缓不展开开发",
+      "source": {
+        "file": "game/src/run/game.nest.js",
+        "line": 633,
+        "anchor": "function showLabSettlement"
+      },
+      "evidence": "路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。",
+      "persistenceRule": "不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件"
+    }
+  ],
+  "fixtures": {
+    "FIXTURE-GRAVE": {
+      "module": "/src/battle/view/battle.overlays.js",
+      "export": "renderGrave",
+      "arguments": [
+        {
+          "grave": [],
+          "opts": {
+            "isBoss": false
+          },
+          "turn": 1
+        }
+      ],
+      "writes": "overlay/return handler/HUD；无牌或存档写，但注册返回绑定真实Battle.commands，不点它验证假场"
+    },
+    "FIXTURE-DECK": {
+      "module": "/src/battle/view/battle.overlays.js",
+      "export": "renderDeckPileView",
+      "arguments": [
+        {
+          "drawPile": [],
+          "opts": {
+            "isBoss": true
+          },
+          "turn": 1
+        }
+      ],
+      "writes": "overlay/return handler/HUD；仅首脑牌库空态像素，不证明当前真实boss模式"
+    },
+    "FIXTURE-BATTLE-BAG": {
+      "module": "/src/battle/view/battle.overlays.js",
+      "export": "renderBattleBag",
+      "arguments": [
+        {
+          "opts": {
+            "isBoss": false
+          },
+          "turn": 1
+        }
+      ],
+      "writes": "读真实SDT.game.ownedCards/safeCap，绑定真写命令；不是纯snapshot函数，不点击使用/存安全格"
+    },
+    "FIXTURE-CHOICE": {
+      "module": "/src/battle/view/battle.view.js",
+      "export": "render",
+      "base": "当前合法getSnapshot()浅副本，不改其原对象；先确认稳定非busy并保存来源",
+      "clear": {
+        "deckSelection": null,
+        "viewingGrave": false,
+        "viewingDeck": false,
+        "viewingBag": false,
+        "handSelecting": null,
+        "discovering": null
+      },
+      "override": {
+        "choosing": {
+          "cardName": "渲染夹具 · 非实际发动",
+          "options": [
+            "选项一",
+            "选项二"
+          ]
+        }
+      },
+      "writes": "takeCardAnims取走演出队列、hideTooltip/帧层、overlay+真实命令绑定；只拍，不pickChoice"
+    },
+    "FIXTURE-PAYMENT": {
+      "module": "/src/battle/view/battle.view.js",
+      "export": "render",
+      "base": "同CHOICE且choosing:null、discovering:null",
+      "override": {
+        "hand": [],
+        "handSelecting": {
+          "act": "payment",
+          "n": 1,
+          "type": "法术",
+          "mandatory": true,
+          "excludedUids": [],
+          "selectedUids": [],
+          "payment": {
+            "card": {
+              "id": "coverage-render-only",
+              "name": "支付夹具",
+              "type": "法术",
+              "cost": 1
+            }
+          }
+        }
+      },
+      "writes": "只显示强制支付空态；不写实际handSelecting、不声称空池死锁发生"
+    },
+    "FIXTURE-DISCOVER": {
+      "module": "/src/battle/view/battle.view.js",
+      "export": "render",
+      "base": "同CHOICE且choosing:null、handSelecting:null",
+      "override": {
+        "discovering": {
+          "options": [
+            {
+              "id": "coverage-render-only",
+              "name": "发现夹具 · 非真实获取",
+              "type": "法术",
+              "cost": 1,
+              "rarity": "古朴",
+              "desc": "仅检验发现弹层布局，不参与玩法。"
+            }
+          ]
+        }
+      },
+      "writes": "只渲染候选，不进入实际discover state；不得点击候选"
+    },
+    "FIXTURE-TERMINAL": {
+      "module": "/src/ui/terminal-settlement.js",
+      "export": "runTerminalSettlement",
+      "parameters": {
+        "token": {
+          "busy": false,
+          "promise": null
+        },
+        "current": "()=>true",
+        "game": "只用于HUD展示的副本",
+        "UI": "只桥showOverlay/act/refresh到展示；不接storage",
+        "finish": "()=>false",
+        "command": "abandon",
+        "retryAct": "fixtureTerminalRetry",
+        "extraPayload": {},
+        "terminalCommands": null
+      },
+      "writes": "命令为空必走服务不可用页；没有真实终局/存储调用；仅失败页渲染证据"
+    }
+  },
+  "refusals": [
+    "不修改老板localStorage、Base/Run、私有set$状态、源码开关或随机seed来强造条件。",
+    "没有真实研究所解锁/在途Run时不付10钥匙、不改nestUnlocked/nestPos；暂缓链保留缺口。",
+    "不执行导入/清空/留言保存发送/放弃/死亡/出发/领奖来补普通阅读页。",
+    "fixture页面点击不得冒充正常功能验证；renderGrave/Deck/View无玩法守卫，恢复须通过真实来源公开重绘/导航。",
+    "已有测试里的localStorage.clear/stubGlobal/vi.doMock/set$仅隔离测试机制，禁止在live照搬。"
+  ],
+  "validation": {
+    "routesEqualExistingGapIds": true,
+    "uniqueRoutes": true,
+    "allCurrentSourceRefs": true
+  }
+}

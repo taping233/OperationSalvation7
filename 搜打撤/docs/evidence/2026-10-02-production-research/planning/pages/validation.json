@@ -1,0 +1,69 @@
+{
+  "checkedAt": "2026-10-02",
+  "checks": {
+    "basicCount": 110,
+    "variantCount": 55,
+    "uniqueIds": true,
+    "inventoryExactMatch": true,
+    "allAffectedPathsExist": true,
+    "allBasicChangesBetween3And6": true,
+    "allRequiredFieldsPresent": true,
+    "noBrokenImagesCountedAsArtDefect": true
+  },
+  "summary": {
+    "basicInterfaces": 110,
+    "variants": 55,
+    "baseEvidence": {
+      "IMAGE_REVIEWED": 45,
+      "TRANSITION_ONLY": 2,
+      "SOURCE_ONLY": 62,
+      "RENDERER_FIXTURE": 1
+    },
+    "variantEvidence": {
+      "IMAGE_REVIEWED_PARTIAL": 22,
+      "SOURCE_ONLY": 33
+    },
+    "priority": {
+      "P2": 70,
+      "P1": 30,
+      "P3": 10
+    },
+    "phase": {
+      "PH3": 64,
+      "PH2": 27,
+      "PH1": 9,
+      "PH4": 10
+    },
+    "phaseDefinitions": {
+      "PH0": "事实与组件基线：当前窗口补稳定帧、结果字段/安全区/来源回退契约；只动获授权范围。",
+      "PH1": "已证高代价问题：标题遮挡、风险确认、保存/净收益事实、错误层数。",
+      "PH2": "核心操作：整备、卡牌阅读、地图、战斗信息与首脑编组。",
+      "PH3": "基地成长、收藏与说明工具的一致性。",
+      "PH4": "暂缓/未接入口：保留计划，解冻授权后再验证和排开发。"
+    },
+    "coverage": {
+      "missingBasicIds": [],
+      "missingVariantIds": [],
+      "duplicates": false,
+      "allAffectedPathsExist": true
+    },
+    "repairCorrection": "server-repair/browser-images.json：恢复后32张可见图已解码，0破图；原断线占位不用于原画质量判断。",
+    "referenceBoundary": "8参考：3 S1静态像素 + 5 D1设计依据；STS仅有限官方宣传短循环M1。本项目仅新增BATTLE悬停上抬/轻放大/描述展开的协议输入采样；不证明FPS、物理真人延迟、出牌动态或音频。",
+    "productionBoundary": "仅计划；未改游戏、未开浏览器、未安装、未build、未提交。未见页先补当前窗口证据；研究所/基地布置不因计划而解冻。",
+    "resourceIdStatus": "UI-R01..UI-R10为资源制作请求，沿planning/systems/resources.json#uiRequestLinks映射真实来源及SYS编号；不冒充已下载素材。",
+    "toolBoundary": "工具列是未来制作/验证选项，不代表已运行或授权安装；游戏实页仅当前平台内置浏览器、当前窗口。",
+    "updatedHealthyImages": [
+      "AMMO-TUTORIAL",
+      "NOTES-CLEAR",
+      "NODE-NOTE",
+      "TERMINAL-RETRY"
+    ],
+    "dispatchGroups": {
+      "入口基地": 36,
+      "探索事件": 28,
+      "战斗结算": 23,
+      "工具研究所": 23
+    },
+    "resourceBridgeVerified": true
+  }
+}

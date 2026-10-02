@@ -1,0 +1,68 @@
+{
+  "checkedAt": "2026-10-02T15:42:39.489Z",
+  "passed": true,
+  "actual": {
+    "pages": 110,
+    "variants": 55,
+    "systems": 19,
+    "resources": 25,
+    "tools": 12,
+    "functionFamilies": 79
+  },
+  "checks": {
+    "inputHashesMatchWorkbook": true,
+    "workbookHashMatches": true,
+    "hardDependenciesAcyclic": true,
+    "localLinksChecked": 16,
+    "libraryWithin20GiB": true
+  },
+  "topologicalOrder": [
+    "SYS-01",
+    "SYS-10",
+    "SYS-02",
+    "SYS-11",
+    "SYS-03",
+    "SYS-12",
+    "SYS-06",
+    "SYS-04",
+    "SYS-05",
+    "SYS-07",
+    "SYS-08",
+    "SYS-14",
+    "SYS-09",
+    "SYS-15",
+    "SYS-13",
+    "SYS-16",
+    "SYS-17",
+    "SYS-18",
+    "SYS-19"
+  ],
+  "workbook": {
+    "path": "workbook\\outputs\\01a0fc3c-b8ec-7d82-851d-26c02dc55f4e\\搜打撤_总体改造计划与分表.xlsx",
+    "bytes": 169079,
+    "sha256": "3c64de4370bcafa489414ea03fe2f521d42a8cd02a98912e4aeff73c2628e057"
+  },
+  "rootVisualSpotReview": [
+    "workbook/qa/总体计划.png",
+    "workbook/qa/美术_战斗结算.png",
+    "workbook/qa/资源与参考.png"
+  ],
+  "librarySize": {
+    "files": 84,
+    "bytes": 4300546,
+    "skippedLinks": []
+  },
+  "researchDirectorySizeBeforeFinalMetadata": {
+    "files": 400,
+    "bytes": 23889211,
+    "skippedLinks": [
+      "planning\\workbook\\node_modules"
+    ]
+  },
+  "limits": [
+    "No Excel application session; reused all-sheet rendering and native ZIP/XML verification.",
+    "No remote-link re-fetch; this pass checks local delivery integrity.",
+    "Not a gameplay, full visual, audio, or motion acceptance run."
+  ],
+  "issues": []
+}

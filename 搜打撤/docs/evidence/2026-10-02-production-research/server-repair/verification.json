@@ -1,0 +1,62 @@
+{
+  "at": "2026-10-02T14:38:44.950Z",
+  "cause": {
+    "port": 5336,
+    "oldPid": 6100,
+    "oldPidPresent": false,
+    "listenerBefore": [],
+    "sampleFilesPresent": true
+  },
+  "startup": {
+    "root": "D:\\素材\\代号柒\\搜打撤",
+    "url": "http://127.0.0.1:5336/",
+    "pid": 21188,
+    "startedAt": "2026-10-02T14:32:51.469Z",
+    "launch": "detached-windowsHide",
+    "log": "D:\\素材\\代号柒\\搜打撤\\node_modules\\.cache\\web-up-5336.log",
+    "checks": [
+      {
+        "path": "/",
+        "status": 200,
+        "type": "text/html",
+        "ok": true
+      },
+      {
+        "path": "/assets/ui/icons/dice.png",
+        "status": 200,
+        "type": "image/png",
+        "ok": true
+      },
+      {
+        "path": "/assets/portraits/battle/wu.webp",
+        "status": 200,
+        "type": "image/webp",
+        "ok": true
+      }
+    ]
+  },
+  "validation": {
+    "tests": "tests/web-up.test.js",
+    "passed": 37,
+    "failed": 0,
+    "durationSeconds": 3.71,
+    "lint": "scripts/web-up.mjs tests/web-up.test.js: exit 0",
+    "nodeSyntax": "passed",
+    "launcherExitedAndServerStillListening": true,
+    "secondLaunchReused": true,
+    "visibleImagesDecoded": 32,
+    "brokenVisibleImages": 0,
+    "pendingVisibleImages": 0
+  },
+  "hashes": [
+    {
+      "path": "scripts/web-up.mjs",
+      "sha256": "15136f981263305426e2b81d6a2bade13dfec0fdae39dca07954ee2f562a8963"
+    },
+    {
+      "path": "tests/web-up.test.js",
+      "sha256": "da6f30932ebc7a90fa45fa9337d3fd7f61c0cdd349b7fd73e0db4ce32216cbfb"
+    }
+  ],
+  "scope": "No build/install/game source/global configuration changes; existing narrative left untouched; new persistent server intentionally retained"
+}

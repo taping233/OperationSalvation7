@@ -1,0 +1,35 @@
+Browser tab: 10, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5336/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/
+	1 container viewport
+		2 button 背包 3/16, ID: bagBtnFloat
+			3 text 背包
+			4 text 3/16
+		5 container
+			6 button Description: 关闭, ID: ovCloseX
+			7 container
+				8 text FIELD ENCOUNTER 01 / 04
+				9 heading medal 无 · 启程补给, Value: 2
+					10 image medal
+					11 text  无 · 启程补给
+				12 text 从无的专属卡池抽得了  2  张职业卡——与 5 张【初始攻击】一起放入背包
+				13 text 1
+				14 image 潜匿
+				15 text 潜匿
+				16 text 武术 · 无专属
+				17 image cards
+				18 text 抽 1 进入潜行状态  1 回合 ，抽 1 张牌。
+				19 container
+					20 image coin
+					21 text 3
+				22 text 0
+				23 image 江湖救急-改
+				24 text 江湖救急-改
+				25 text 武术 · 无专属
+				26 text 随机获得 3 张临时卡牌， 回合开始时 将其 消耗 。
+				27 container
+					28 image coin
+					29 text 3
+				30 text 职业卡带出对局后留在仓库（不占消耗口袋）；本局内打出后与其他卡同规则结算。
+				31 button  获取并离开
+
+The focused UI element is 31 button  获取并离开

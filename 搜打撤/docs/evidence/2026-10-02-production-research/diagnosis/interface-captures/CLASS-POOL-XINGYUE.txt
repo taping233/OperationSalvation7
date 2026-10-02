@@ -1,0 +1,138 @@
+Browser tab: 10, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5336/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/
+	1 container
+		2 button Description: 关闭, ID: ovCloseX
+		3 container
+			4 text ROLE ARCHIVE // 星月
+			5 heading cards 角色卡池档案, Value: 2
+				6 image cards
+				7 text  角色卡池档案
+			8 text 17 CARDS
+			9 container
+				10 text CHARACTER ARCHIVE 星月
+				11 container poolPreview
+					12 container
+						13 text 1
+						14 image 圣盾
+						15 text 圣盾 法术 · 星月专属
+						16 image plate
+						17 text 甲 6 获得  6  点 护甲 ；若你此时 护甲 为  0 ，本牌变为  0  费。
+						18 image coin
+						19 text 3
+					20 text 类型
+					21 text 法术
+					22 text 稀有度
+					23 text 职业
+					24 text 伤害词条
+					25 text 0
+					26 text 点击卡面可放大查看
+				27 image medal
+				28 text  确认选择「星月」后，将从 17 张人物卡中随机获得 1 张角色卡，并与 5 张「初始攻击」一起带入背包。
+			29 container poolGrid
+				30 container
+					31 text 职业
+					32 button 查看 圣盾 详情
+						33 container
+							34 text 1
+							35 image 圣盾
+							36 text 圣盾 法术 · 星月专属
+							37 image plate
+							38 text 甲 6 获得  6  点 护甲 ；若你此时 护甲 为  0 ，本牌变为  0  费。
+							39 image coin
+							40 text 3
+				41 container
+					42 text 职业
+					43 button 查看 花瓣法阵 详情
+						44 container
+							45 text 1
+							46 image 花瓣法阵
+							47 text 花瓣法阵 法术 · 星月专属
+							48 image cards
+							49 text 抽 1
+							50 image heart
+							51 text 回 3 回合开始时 额外抽 1 张牌并回复  3  点 生命 ，持续  3 回合 。
+							52 image coin
+							53 text 3
+				54 container
+					55 text 职业
+					56 button 查看 吞噬 详情
+						57 container
+							58 text 1
+							59 image 吞噬
+							60 text 吞噬 法术 · 星月专属 消灭  1  名 攻击力 4  点及以下小怪。
+							61 image coin
+							62 text 3
+				63 container
+					64 text 职业
+					65 button 查看 禁言术 详情
+						66 container
+							67 text 0
+							68 image 禁言术
+							69 text 禁言术 法术 · 星月专属
+							70 image cards
+							71 text 抽 1 沉默 1  名角色  1 回合 ，抽  1  张牌。
+							72 image coin
+							73 text 3
+				74 container
+					75 text 职业
+					76 button 查看 恶魔之力 详情
+						77 container
+							78 text 1
+							79 image 恶魔之力
+							80 text 恶魔之力 法术 · 星月专属 4 ′，损失  2  点 生命 。
+							81 image sparkles
+							82 text 4'
+							83 text 法伤
+							84 image coin
+							85 text 3
+				86 container
+					87 text 职业
+					88 button 查看 沐愈光辉 详情
+						89 container
+							90 text 1
+							91 image 沐愈光辉
+							92 text 沐愈光辉 法术 · 星月专属 将自身血量回复至  12  血。
+							93 image coin
+							94 text 3
+				95 container
+					96 text 职业
+					97 button 查看 圣光治愈 详情
+						98 container
+							99 text 1
+							100 image 圣光治愈
+							101 text 圣光治愈 法术 · 星月专属
+							102 image crystal
+							103 text 注能 1 注能 （ 1 ）： 回复  2  倍于被 注能 卡牌价格的血量。
+							104 image coin
+							105 text 3
+				106 container
+					107 text 职业
+					108 button 查看 扰敌 详情
+						109 container
+							110 text 1
+							111 image 扰敌
+							112 text 扰敌 法术 · 星月专属 选择 2  名敌人，迫使其相互攻击一次。
+							113 image coin
+							114 text 3
+				115 container
+					116 text 职业
+					117 button 查看 噬血术 详情
+						118 container
+							119 text 1
+							120 image 噬血术
+							121 text 噬血术 法术 · 星月专属 3 ′，回复等量 生命 。
+							122 image sparkles
+							123 text 3'
+							124 text 法伤
+							125 image coin
+							126 text 3
+			127 container poolPager
+				128 button (disabled) ‹ 上一页
+				129 text 第  1  / 2 页 · 共 17 张
+				130 button 下一页 ›
+			131 button medal 返回选角
+				132 image medal
+				133 text  返回选角
+			134 button 出发
+
+The focused UI element is 0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/

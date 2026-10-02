@@ -1,0 +1,91 @@
+{
+  "output": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-02-production-research\\planning\\workbook\\outputs\\01a0fc3c-b8ec-7d82-851d-26c02dc55f4e\\搜打撤_总体改造计划与分表.xlsx",
+  "sheets": [
+    {
+      "name": "总体计划",
+      "frozenRows": 12,
+      "frozenColumns": 3.0,
+      "tableCount": 1,
+      "statusValidationCount": 1
+    },
+    {
+      "name": "阶段与决策",
+      "frozenRows": 5,
+      "frozenColumns": 2.0,
+      "tableCount": 1,
+      "statusValidationCount": 1
+    },
+    {
+      "name": "架构功能",
+      "frozenRows": 5,
+      "frozenColumns": 2.0,
+      "tableCount": 1,
+      "statusValidationCount": 1
+    },
+    {
+      "name": "美术_入口基地",
+      "frozenRows": 5,
+      "frozenColumns": 2.0,
+      "tableCount": 1,
+      "statusValidationCount": 1
+    },
+    {
+      "name": "美术_探索事件",
+      "frozenRows": 5,
+      "frozenColumns": 2.0,
+      "tableCount": 1,
+      "statusValidationCount": 1
+    },
+    {
+      "name": "美术_战斗结算",
+      "frozenRows": 5,
+      "frozenColumns": 2.0,
+      "tableCount": 1,
+      "statusValidationCount": 1
+    },
+    {
+      "name": "美术_工具研究所",
+      "frozenRows": 5,
+      "frozenColumns": 2.0,
+      "tableCount": 1,
+      "statusValidationCount": 1
+    },
+    {
+      "name": "变体差异",
+      "frozenRows": 5,
+      "frozenColumns": 2.0,
+      "tableCount": 1,
+      "statusValidationCount": 1
+    },
+    {
+      "name": "资源与参考",
+      "frozenRows": 5,
+      "frozenColumns": 2.0,
+      "tableCount": 1,
+      "statusValidationCount": 1
+    },
+    {
+      "name": "工程工具",
+      "frozenRows": 5,
+      "frozenColumns": 2.0,
+      "tableCount": 1,
+      "statusValidationCount": 1
+    }
+  ],
+  "formulaCells": 0,
+  "nativeFeatureChecks": [
+    "10 named sheets",
+    "native table filters",
+    "frozen rows and identity columns",
+    "editable status list validation",
+    "gridlines hidden",
+    "row heights within Excel limit",
+    "all source page and variant IDs retained",
+    "maintenance/frozen/verify-first statuses preserved"
+  ],
+  "coverage": {
+    "pages": 110,
+    "variants": 55
+  },
+  "sha256": "3c64de4370bcafa489414ea03fe2f521d42a8cd02a98912e4aeff73c2628e057"
+}

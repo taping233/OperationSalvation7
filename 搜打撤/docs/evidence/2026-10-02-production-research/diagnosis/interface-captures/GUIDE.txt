@@ -1,0 +1,36 @@
+Browser tab: 10, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5336/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/
+	1 container question 远征手册, ID: overlay
+		2 container
+			3 heading question 远征手册, Value: 2, ID: ovTitle
+				4 image question
+				5 text  远征手册
+			6 container ovBody
+				7 button 返回
+				8 text EXPEDITION MANUAL
+				9 container
+					10 text ── 从基地整备，沿相邻节点深入，打完战斗后把带回来的东西安全撤离。 ──
+				11 container
+					12 text 01
+					13 heading 整备, Value: 3
+						14 text 整备
+					15 text 在基地选择玩法、挑选背包卡牌与宠物。初始攻击固定占用 1 格；仓库卡只有放入背包才会带进远征。
+				16 container
+					17 text 02
+					18 heading 探索, Value: 3
+						19 text 探索
+					20 text 直接点击当前节点相邻的下一节点。多条路线时  Space / Enter  切换，单条路线时直接前进； Z  回到上条路线， X  确认前往。
+				21 container
+					22 text 03
+					23 heading 战斗, Value: 3
+						24 text 战斗
+					25 text 手牌按住拖向敌人或自己使用指向卡；没有目标的招式拖到敌我之间空地即可。留意费用与敌方意图，回合结束后敌人会行动。
+				26 container
+					27 text 04
+					28 heading 撤离, Value: 3
+						29 text 撤离
+					30 text 抵达撤离节点并完成结算；安全格中的卡牌会由宠物运回基地，撤离失败时也会抢运安全格卡牌。倒下或放弃会丢失其他本局物资。
+				31 text Space / Enter 切换路线 Z 上条路线 X 确认节点 B 背包 G / F 全景 / 定位 Alt+1-9 / 0 快捷跳页（基地/卡牌库/留言/数据/设置） Esc 关闭页面
+				32 text 鼠标拖拽平移地图，滚轮缩放。地图只开放当前节点的相邻可通行路线；已探索节点的奖励不会重复刷新。
+
+The focused UI element is 7 button 返回

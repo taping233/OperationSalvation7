@@ -1,0 +1,229 @@
+Browser tab: 9, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5336/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/
+	1 container app
+		2 container sidebar
+			3 image 无
+			4 container statsPanel
+				5 image Description: 已探明区域简图, ID: miniMap
+				6 text 行动 · 价值
+				7 text 54
+				8 text /
+				9 text 0
+			10 container routePanel
+				11 text 下一步 · 3 条路线 首脑已击破 · 前往终局撤离点
+				12 container 可前往的相邻节点
+					13 button 物资点（节点 11）
+						14 text 物资点
+						15 text 已探索 · 可通行，物资不再刷新
+					16 button 遭遇战（节点 13）
+						17 text 遭遇战
+						18 text 已探索 · 可通行，物资不再刷新
+					19 button 终局撤离（节点 15）
+						20 text 终局撤离
+						21 text 击败首脑后带回战利品
+				22 text 点击路线或地图亮环前进
+		23 container viewport
+			24 image game
+			25 container Description: 远征章节, ID: expeditionChapter
+				26 text EXPEDITION / 04
+				27 content list
+					28 container
+						29 text 01 第1层 · 外围荒地
+					30 container
+						31 text 02 第2层 · 风雪哨线
+					32 container
+						33 text 03 第3层 · 冻土遗迹
+					34 container
+						35 text 04 第4层 · 污染核心
+			36 container resHud
+				37 text 22
+				38 text 4
+			39 container topBtns
+				40 button btnLocate
+				41 button btnHome
+				42 button btnHelp
+				43 button btnMute
+				44 container
+					45 text 当前生命
+					46 container hpText
+						47 text 50 /58
+			48 button 背包 16/16 满, ID: bagBtnFloat
+				49 text 背包
+				50 text 16/16
+				51 text 满
+			52 container Description: 行动记录, ID: logPanel
+				53 button ▾ 行动记录, ID: logToggle
+					54 text ▾ 
+					55 text 行动记录
+				56 container log
+					57 container
+						58 image trophy
+						59 text  成就解锁【 破壁者 】首次击败污染核心的变异首脑——回基地领取奖励
+					60 container
+						61 image bag
+						62 text  背包已满（16/16 格，珍珠盒扩格只收资源卡），【骷髅王剑】掉在了原地…
+					63 container
+						64 image trophy
+						65 text  首脑宝库开启：额外奖励  1 张传说卡 ！
+					66 container
+						67 image bag
+						68 text  背包已满（16/16 格），【金币】掉在了原地…
+					69 container
+						70 image bag
+						71 text  背包已满（16/16 格，珍珠盒扩格只收资源卡），【神秘召唤】掉在了原地…
+					72 container
+						73 image archive
+						74 text  获得卡牌【 草甲 】
+					75 container
+						76 image archive
+						77 text  获得卡牌【 坚守 】
+					78 container
+						79 image archive
+						80 text  获得卡牌【 法杖 】
+					81 container
+						82 image archive
+						83 text  获得卡牌【 破甲箭 】
+					84 container
+						85 image archive
+						86 text  战利品掉落： 1  个首脑保险柜
+					87 container
+						88 image exit
+						89 text  首脑已击破——第五层的 终局撤离点 已解锁，可无条件撤离
+					90 container
+						91 image trophy
+						92 text BOSS战胜利！
+					93 container
+						94 image archive
+						95 text  使用过的卡牌： 3  张卡牌进入消耗口袋， 2  张消散了（本局无法再用），撤离结算时只有 1/3 能带回基地
+					96 container
+						97 image trophy
+						98 text  开发者：直接结算胜利
+					99 container
+						100 image crystal
+						101 text 异能领主  的元素庇幕展开：伤害被完全减免！（破甲可击碎）
+					102 container
+						103 image crystal
+						104 text 异能领主  的元素庇幕展开：伤害被完全减免！（破甲可击碎）
+					105 container
+						106 image tools
+						107 text  装配【 矿工炸药 】（1/2 件）
+					108 container
+						109 image demon
+						110 text 异能领主  攻击：你受到  8  点攻击伤害（50/58）
+					111 container
+						112 image play
+						113 text 雷殛  → 异能领主：造成  7  点法术伤害
+					114 container
+						115 image cards
+						116 text  牌库上限 +5（BOSS 编组时生效）
+					117 container
+						118 image heart
+						119 text  血量上限 +10（当前上限 58，并回复 10 点）
+					120 container
+						121 image heart
+						122 text  恢复  10  点生命（58/58）
+					123 container
+						124 image cards
+						125 text  牌库上限 +5（BOSS 编组时生效）
+					126 container
+						127 image heart
+						128 text  血量上限 +10（当前上限 48，并回复 10 点）
+					129 container
+						130 image heart
+						131 text  恢复  10  点生命（48/48）
+					132 container
+						133 image bolt
+						134 text  开战被动：混沌之眼 自动生效
+					135 container
+						136 image cards
+						137 text  牌库编成：自选 14 张非道具卡 + 初始攻击 ×4 =  18  张 · 开局抽 5 · 每回合开始抽 1 · 每回合固定  2  费
+					138 container
+						139 image swords
+						140 text BOSS战【异能领主(8-48)】
+					141 container
+						142 image exit
+						143 text  该节点已完成结算，现已变为普通节点
+					144 container
+						145 image crystal
+						146 text  这座祭坛的仪式已经完成，没有什么可做的了
+					147 container
+						148 image exit
+						149 text  该节点已完成结算，现已变为普通节点
+					150 container
+						151 image exit
+						152 text  该节点已完成结算，现已变为普通节点
+					153 container
+						154 image trash
+						155 text  已丢弃【 饱和打击 】×1（无法取回）
+					156 container
+						157 text 获得  2  币（现有 22）
+					158 container
+						159 image archive
+						160 text  获得卡牌【 包扎 】
+					161 container
+						162 image archive
+						163 text  回收了 1  个密封物资箱
+					164 container
+						165 image exit
+						166 text  该节点已完成结算，现已变为普通节点
+					167 container
+						168 image exit
+						169 text  该节点已完成结算，现已变为普通节点
+					170 container
+						171 image exit
+						172 text  该节点已完成结算，现已变为普通节点
+					173 container
+						174 image exit
+						175 text  该节点已完成结算，现已变为普通节点
+					176 container
+						177 image exit
+						178 text  该节点已完成结算，现已变为普通节点
+					179 container
+						180 image exit
+						181 text  该节点已完成结算，现已变为普通节点
+					182 container
+						183 text 获得  2  币（现有 20）
+					184 container
+						185 image archive
+						186 text  获得卡牌【 草甲 】
+					187 text （你留下开出的卡牌，转身走了……）
+					188 container
+						189 text 获得  3  币（现有 18）
+					190 container
+						191 image archive
+						192 text  战利品掉落： 1  个军用保险柜， 1  个密封物资箱
+					193 container
+						194 image trophy
+						195 text  战斗胜利！
+					196 container
+						197 image trophy
+						198 text  开发者：直接结算胜利
+					199 container
+						200 image cards
+						201 text  普通战斗无需抽牌：随身  16  张战斗卡直接可打出；道具/资源/事件卡不入手，能力卡只能收藏或编入 BOSS 战牌库 · 每回合固定  2  费
+					202 container
+						203 image swords
+						204 text 遭遇战【灼热异变体(10-7)】  · 风险 极高
+					205 text （你留下开出的卡牌，转身走了……）
+					206 container
+						207 text 获得  3  币（现有 15）
+					208 text （你留下开出的卡牌，转身走了……）
+					209 container
+						210 text 获得  2  币（现有 12）
+					211 container
+						212 image archive
+						213 text  战利品掉落： 2  个军用保险柜
+					214 container
+						215 image trophy
+						216 text  战斗胜利！
+					217 container
+						218 image trophy
+						219 text  开发者：直接结算胜利
+					220 container
+						221 image cards
+						222 text  普通战斗无需抽牌：随身  16  张战斗卡直接可打出；道具/资源/事件卡不入手，能力卡只能收藏或编入 BOSS 战牌库 · 每回合固定  2  费
+					223 container
+						224 image swords
+						225 text 遭遇战【巨兽「荒渊」(7-40)】  · 风险 精英
+
+The focused UI element is 0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/

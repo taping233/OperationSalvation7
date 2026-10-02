@@ -1,0 +1,141 @@
+{
+  "recordedAt": "2026-10-02T13:54:14.898Z",
+  "acquisition": "Codex cua built-in browser; normal input and current-window screenshot/AX/DOM reads; no synthetic game events or storage mutation",
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-02-production-research/diagnosis/browser/browser-metadata.json",
+      "bytes": 302,
+      "sha256": "4a77d7e2b38b5f52b39bfba772f9f7777699cc6fb0032a382b25b3aa9ac7f540"
+    },
+    {
+      "path": "docs/evidence/2026-10-02-production-research/diagnosis/browser/current-battle-ax.txt",
+      "bytes": 3963,
+      "sha256": "7841a31565f02694e1f00eade33b3c0eb7d3a639868bfb8d919e9f5d34f27150"
+    },
+    {
+      "path": "docs/evidence/2026-10-02-production-research/diagnosis/browser/current-battle-reward-ax.txt",
+      "bytes": 234,
+      "sha256": "c0e73e86df21680727b57ab6cdc27bc926108eae1d815d0e53759379664db5b2"
+    },
+    {
+      "path": "docs/evidence/2026-10-02-production-research/diagnosis/browser/current-battle-reward.jpg",
+      "bytes": 70322,
+      "sha256": "afd3532b6b9a26463dc0c4b62acee388abe97156ba82873a32495ce295e9e56e",
+      "format": "jpeg",
+      "width": 1183,
+      "height": 764,
+      "gitPolicy": "local-only",
+      "byteIdenticalTo": "docs/evidence/2026-10-02-production-research/diagnosis/browser/current-battle-reward.png"
+    },
+    {
+      "path": "docs/evidence/2026-10-02-production-research/diagnosis/browser/current-battle-reward.png",
+      "bytes": 70322,
+      "sha256": "afd3532b6b9a26463dc0c4b62acee388abe97156ba82873a32495ce295e9e56e",
+      "format": "jpeg",
+      "width": 1183,
+      "height": 764,
+      "gitPolicy": "local-only",
+      "originalCapture": true
+    },
+    {
+      "path": "docs/evidence/2026-10-02-production-research/diagnosis/browser/current-battle.jpg",
+      "bytes": 122451,
+      "sha256": "7b8425107c479cfe9a79cc2529bfe5d16638723d677b2fe22216a37980df926d",
+      "format": "jpeg",
+      "width": 1183,
+      "height": 764,
+      "gitPolicy": "local-only",
+      "byteIdenticalTo": "docs/evidence/2026-10-02-production-research/diagnosis/browser/current-battle.png"
+    },
+    {
+      "path": "docs/evidence/2026-10-02-production-research/diagnosis/browser/current-battle.png",
+      "bytes": 122451,
+      "sha256": "7b8425107c479cfe9a79cc2529bfe5d16638723d677b2fe22216a37980df926d",
+      "format": "jpeg",
+      "width": 1183,
+      "height": 764,
+      "gitPolicy": "local-only",
+      "originalCapture": true
+    },
+    {
+      "path": "docs/evidence/2026-10-02-production-research/diagnosis/browser/current-consumption-tutorial-ax.txt",
+      "bytes": 1664,
+      "sha256": "99b3b328ea6e8c8b201f0006986daac85693c66e3ab9634f446e06f91987d1b7"
+    },
+    {
+      "path": "docs/evidence/2026-10-02-production-research/diagnosis/browser/current-map.jpg",
+      "bytes": 75796,
+      "sha256": "cbc946e97ebf703cf4627916cdff61ac980c068260ae3ff6c5f3ed326a6fe04e",
+      "format": "jpeg",
+      "width": 1183,
+      "height": 764,
+      "gitPolicy": "local-only",
+      "byteIdenticalTo": "docs/evidence/2026-10-02-production-research/diagnosis/browser/current-map.png"
+    },
+    {
+      "path": "docs/evidence/2026-10-02-production-research/diagnosis/browser/current-map.png",
+      "bytes": 75796,
+      "sha256": "cbc946e97ebf703cf4627916cdff61ac980c068260ae3ff6c5f3ed326a6fe04e",
+      "format": "jpeg",
+      "width": 1183,
+      "height": 764,
+      "gitPolicy": "local-only",
+      "originalCapture": true
+    },
+    {
+      "path": "docs/evidence/2026-10-02-production-research/diagnosis/browser/current-supply-ax.txt",
+      "bytes": 234,
+      "sha256": "c0e73e86df21680727b57ab6cdc27bc926108eae1d815d0e53759379664db5b2"
+    },
+    {
+      "path": "docs/evidence/2026-10-02-production-research/diagnosis/browser/current-supply.jpg",
+      "bytes": 81599,
+      "sha256": "864fb295d35848085d4ce5b1d08c7ca8f92414ca2b68b2436f1fe9ed4c5f974b",
+      "format": "jpeg",
+      "width": 1183,
+      "height": 764,
+      "gitPolicy": "local-only",
+      "byteIdenticalTo": "docs/evidence/2026-10-02-production-research/diagnosis/browser/current-supply.png"
+    },
+    {
+      "path": "docs/evidence/2026-10-02-production-research/diagnosis/browser/current-supply.png",
+      "bytes": 81599,
+      "sha256": "864fb295d35848085d4ce5b1d08c7ca8f92414ca2b68b2436f1fe9ed4c5f974b",
+      "format": "jpeg",
+      "width": 1183,
+      "height": 764,
+      "gitPolicy": "local-only",
+      "originalCapture": true
+    },
+    {
+      "path": "docs/evidence/2026-10-02-production-research/diagnosis/browser/final-map-ax.txt",
+      "bytes": 4645,
+      "sha256": "ec8c69c757a217d654b1790874ed416b475867327d3d704ef7d0177662cd313a"
+    },
+    {
+      "path": "docs/evidence/2026-10-02-production-research/diagnosis/browser/final-map.jpg",
+      "bytes": 81841,
+      "sha256": "8edb57e83bc5f251d0fc255d858f3da354b893685e04407fe1c71ccd6ffa6071",
+      "format": "jpeg",
+      "width": 1183,
+      "height": 764,
+      "gitPolicy": "local-only",
+      "byteIdenticalTo": "docs/evidence/2026-10-02-production-research/diagnosis/browser/final-map.png"
+    },
+    {
+      "path": "docs/evidence/2026-10-02-production-research/diagnosis/browser/final-map.png",
+      "bytes": 81841,
+      "sha256": "8edb57e83bc5f251d0fc255d858f3da354b893685e04407fe1c71ccd6ffa6071",
+      "format": "jpeg",
+      "width": 1183,
+      "height": 764,
+      "gitPolicy": "local-only",
+      "originalCapture": true
+    },
+    {
+      "path": "docs/evidence/2026-10-02-production-research/diagnosis/browser/final-snapshot.json",
+      "bytes": 3470,
+      "sha256": "7271f7f106a71b8c8011bdafd6ad4611147f795698da290a71edbd124308610b"
+    }
+  ]
+}

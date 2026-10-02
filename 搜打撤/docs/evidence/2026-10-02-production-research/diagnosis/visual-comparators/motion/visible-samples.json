@@ -1,0 +1,104 @@
+[
+  {
+    "states": [
+      {
+        "duration": 6.57,
+        "i": 0,
+        "paused": false,
+        "time": 5.45305,
+        "visible": true
+      },
+      {
+        "duration": 4.53,
+        "i": 1,
+        "paused": false,
+        "time": 0.752526,
+        "visible": false
+      },
+      {
+        "duration": 5.49,
+        "i": 2,
+        "paused": false,
+        "time": 5.246575,
+        "visible": false
+      },
+      {
+        "duration": 5.4,
+        "i": 3,
+        "paused": false,
+        "time": 5.247251,
+        "visible": false
+      }
+    ],
+    "image": "sts-visible-0.jpg",
+    "at": "2026-10-02T13:44:19.930Z"
+  },
+  {
+    "states": [
+      {
+        "duration": 6.57,
+        "i": 0,
+        "paused": false,
+        "time": 6.539875,
+        "visible": true
+      },
+      {
+        "duration": 4.53,
+        "i": 1,
+        "paused": false,
+        "time": 1.839328,
+        "visible": false
+      },
+      {
+        "duration": 5.49,
+        "i": 2,
+        "paused": false,
+        "time": 0.769454,
+        "visible": false
+      },
+      {
+        "duration": 5.4,
+        "i": 3,
+        "paused": false,
+        "time": 0.770527,
+        "visible": false
+      }
+    ],
+    "image": "sts-visible-1.jpg",
+    "at": "2026-10-02T13:44:21.022Z"
+  },
+  {
+    "states": [
+      {
+        "duration": 6.57,
+        "i": 0,
+        "paused": false,
+        "time": 1.04353,
+        "visible": true
+      },
+      {
+        "duration": 4.53,
+        "i": 1,
+        "paused": false,
+        "time": 2.921897,
+        "visible": false
+      },
+      {
+        "duration": 5.49,
+        "i": 2,
+        "paused": false,
+        "time": 1.852022,
+        "visible": false
+      },
+      {
+        "duration": 5.4,
+        "i": 3,
+        "paused": false,
+        "time": 1.853088,
+        "visible": false
+      }
+    ],
+    "image": "sts-visible-2.jpg",
+    "at": "2026-10-02T13:44:22.123Z"
+  }
+]

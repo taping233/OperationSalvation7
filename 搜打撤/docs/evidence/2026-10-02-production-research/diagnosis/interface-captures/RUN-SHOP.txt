@@ -1,0 +1,125 @@
+Browser tab: 10, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5336/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/
+	1 container viewport
+		2 button 背包 3/16, ID: bagBtnFloat
+			3 text 背包
+			4 text 3/16
+		5 container
+			6 button Description: 关闭, ID: ovCloseX
+			7 container
+				8 text TACTICAL SUPPLY // 07
+				9 heading bag 冬境战术补给站 , Value: 2
+					10 image bag
+					11 text  冬境战术补给站 
+					12 button
+				13 button bag 背包
+					14 image bag
+					15 text 背包
+				16 container 远征资源（点击打开背包）
+					17 text 持有卡牌
+					18 text 7
+					19 text 张
+					20 text 当前金币
+					21 text 0
+					22 text 币
+					23 text 背包容量
+					24 text 3/16
+					25 text 格
+				26 text 补给清单
+				27 text 点击货位即可直接购买（价签＝价格） · 随身币不随撤离带回，离局前记得花掉
+				28 container 商店商品
+					29 button 购买「员工通行证B」，4 币
+						30 container
+							31 text 0
+							32 image 员工通行证B
+							33 text 员工通行证B 道具 · 史诗 随机获取  1  张传说卡（不含棱彩卡）。
+							34 image coin
+							35 text 4
+						36 image coin
+						37 text 4
+					38 button 购买「一把钥匙」，2 币
+						39 container
+							40 text 0
+							41 image 一把钥匙
+							42 text 一把钥匙 资源 · 古朴 解锁大门。
+							43 image coin
+							44 text 2
+						45 image coin
+						46 text 2
+					47 button 购买「闪电链」，2 币
+						48 container
+							49 text 1
+							50 image 闪电链
+							51 text 闪电链 法术 · 古朴 3 ′，触发  2  次。
+							52 image sparkles
+							53 text 3'
+							54 text 法伤
+							55 image coin
+							56 text 2
+						57 image coin
+						58 text 2
+					59 button 购买「绿化箭」，2 币
+						60 container
+							61 text 1
+							62 image 绿化箭
+							63 text 绿化箭 武术 · 古朴
+							64 image plate
+							65 text 甲 3 攻（ -1 ）， +3  甲。
+							66 image swords
+							67 text -1
+							68 image coin
+							69 text 2
+						70 image coin
+						71 text 2
+					72 button 购买「大量木材」，3 币
+						73 container
+							74 text 0
+							75 image 大量木材
+							76 text 大量木材 资源 · 稀有 木材 × 2 。
+							77 image coin
+							78 text 4
+						79 image coin
+						80 text 3
+					81 button 购买「不稳定射线」，2 币
+						82 container
+							83 text 1
+							84 image 不稳定射线
+							85 text 不稳定射线 法术 · 古朴 造成 4 -6 点 法伤
+						86 image coin
+						87 text 2
+					88 button 购买「能量饮料」，2 币
+						89 container
+							90 text 0
+							91 image 能量饮料
+							92 text 能量饮料 道具 · 古朴
+							93 image heart
+							94 text 回 6 回复  6  点 生命 。
+							95 image coin
+							96 text 2
+						97 image coin
+						98 text 2
+					99 button 补充初始攻击，1 币，本站余 5 张
+						100 container
+							101 text 1
+							102 image 初始攻击
+							103 text 初始攻击 武术 · 初始 攻（ +0 ）： 造成等同于攻击力的 伤害 。
+						104 image coin
+						105 text 1
+						106 text 余 5
+					107 button 购买神秘货箱，开出随机卡牌，3 币
+						108 image dice
+						109 text ？
+						110 text 随机卡牌
+						111 image coin
+						112 text 3
+					113 button ACQ // 08 cards 收购台 当前没有可出售卡牌 进入 →
+						114 text ACQ // 08
+						115 image cards
+						116 text 收购台
+						117 text 当前没有可出售卡牌
+						118 text 进入 →
+				119 button arrow 离开补给站
+					120 image arrow
+					121 text 离开补给站
+
+The focused UI element is 12 button

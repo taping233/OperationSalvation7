@@ -1,0 +1,28 @@
+Browser tab: 10, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5336/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/
+	1 container viewport
+		2 button 背包 3/16, ID: bagBtnFloat
+			3 text 背包
+			4 text 3/16
+		5 container
+			6 button Description: 关闭, ID: ovCloseX
+			7 container
+				8 text FIELD ENCOUNTER 01 / 04
+				9 heading crystal 祭坛回赠 · 二选一, Value: 2
+					10 image crystal
+					11 text  祭坛回赠 · 二选一
+				12 text 祭坛已苏醒——选择你要的奖励（只能选一次；离开后回到本格可再选）
+				13 button (disabled) ① 复原 3 张消耗卡 + 回复 10 血 消耗口袋里没有可复原的卡牌（道具/装备类消耗不可复原）——此项不可选 ▸
+					14 text ① 复原 3 张消耗卡 + 回复 10 血
+					15 text 消耗口袋里没有可复原的卡牌（道具/装备类消耗不可复原）——此项不可选
+					16 text ▸
+				17 button ② 传说卡 + 装备卡 随机获取 1 张传说卡和 1 张装备卡 ▸
+					18 text ② 传说卡 + 装备卡
+					19 text 随机获取 1 张传说卡和 1 张装备卡
+					20 text ▸
+				21 button 离开 · 稍后再选 祭坛保持苏醒——奖励保留，回到本格可再选（奖励只能领取一次） ▸
+					22 text 离开 · 稍后再选
+					23 text 祭坛保持苏醒——奖励保留，回到本格可再选（奖励只能领取一次）
+					24 text ▸
+
+The focused UI element is 21 button 离开 · 稍后再选 祭坛保持苏醒——奖励保留，回到本格可再选（奖励只能领取一次） ▸

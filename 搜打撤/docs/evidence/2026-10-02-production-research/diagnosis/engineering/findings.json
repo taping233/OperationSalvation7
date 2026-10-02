@@ -1,0 +1,212 @@
+{
+  "title": "工程与交付差距诊断",
+  "scope": "只读静态审计：工程结构、共享状态/存档、类型/测试证据、SDT.Agent 与实验统计、文档流程",
+  "snapshot": {
+    "head": "c6ee20684056240fd219fe179cacf5204a6445a4",
+    "worktree": "master...origin/master [ahead 49]，工作区已有多人未提交改动；本审计不归属或修改这些内容",
+    "reproducibleMeasurements": "measurements.json",
+    "hashManifest": "measurements.json#/hashManifest",
+    "historicalEvidence": "旧 measurements.json 中记录的 20/20 个输入当前 SHA256 均匹配；旧 r24 Agent 批跑产物没有 provenance 元数据，仍按历史证据使用",
+    "evidenceSearchScope": [
+      "现行 quality-gates / ACCEPTANCE-MATRIX",
+      "2026-10-01-acceptance-scenes/README.md",
+      "2026-09-30-vertical-slice-review/review.md 与 continuation-result.md",
+      "2026-10-02-art-live-review-01a0fa8f/REAL-BROWSER-BLOCKER.md",
+      "seven-departments-review/measurements.json 的输入 hash 和历史摘要",
+      "当前 game/src、typecheck 配置与存档契约"
+    ]
+  },
+  "findings": [
+    {
+      "id": "ENG-01",
+      "title": "可交付整局与真人体验缺少现行验收闭环",
+      "severity": "medium",
+      "confidence": "high",
+      "evidenceClass": "当前文档状态 + 历史实验线索；结论影响为推断",
+      "claim": "本次核验范围内未找到当前版本完整四层真人闭环证据。核验范围包括现行 quality-gates / ACCEPTANCE-MATRIX、2026-10-01 acceptance-scenes、2026-09-30 垂直切片试玩及接力、2026-10-02 实机受阻记录。验收矩阵是 09-28 计划页，其未执行状态不代表其它目录无实测。09-30 接力真实完成第三层撤离、返基地和实收，但未达第四层首脑；10-01 固定剧本实机覆盖多个单场景，但 extract 收口受阻且 boss/fullrun 未单独实机；10-02 浏览器检查受阻。Agent A/B 晋级比较 probeUi=false，不能证明真人页面体验。旧 r24 T2 clear=0、extract=46%/49% 是无 provenance 的历史策略线索，不代表当前版本。",
+      "evidence": [
+        {
+          "path": "docs/quality-gates.md",
+          "lines": "77-93",
+          "kind": "current",
+          "detail": "规定内置浏览器验收来源及证据边界。"
+        },
+        {
+          "path": "docs/production/qa/ACCEPTANCE-MATRIX.md",
+          "lines": "3-9,15-33",
+          "kind": "current-plan",
+          "detail": "09-28 计划矩阵记录未执行；它不是所有证据目录的索引。"
+        },
+        {
+          "path": "docs/evidence/2026-10-01-acceptance-scenes/README.md",
+          "lines": "1-35",
+          "kind": "historical-current-artifact",
+          "detail": "固定剧本完成多个场景；extract 收口受阻，boss/fullrun未实机。"
+        },
+        {
+          "path": "docs/evidence/2026-09-30-vertical-slice-review/continuation-result.md",
+          "lines": "1-27",
+          "kind": "historical",
+          "detail": "真实接力完成第三层撤离、返基地与实收；没有四层通关。"
+        },
+        {
+          "path": "docs/evidence/2026-10-02-art-live-review-01a0fa8f/REAL-BROWSER-BLOCKER.md",
+          "lines": "section:已核实事实, section:真实覆盖与未覆盖",
+          "kind": "current",
+          "detail": "该轮没有实机覆盖，记录平台工具受阻。"
+        }
+      ],
+      "counterEvidence": "矩阵未执行并不表示没有其他实测：09-30 确有第三层真人接力撤离和回城实收；10-01 有多个固定剧本的真实内置浏览器单场景通过。本结论只说本次核验范围内没有当前版本完整四层真人闭环证据。",
+      "minimumValidation": "在当前版本及当前平台内置浏览器完成一条真实新档到第四层首脑/撤离路径，至少在地图或战斗检查点刷新恢复，并保存矩阵状态和实页证据。",
+      "classification": "validation_gap"
+    },
+    {
+      "id": "ENG-02",
+      "title": "存档仍有明确报告的部分成功与跨键非原子窗口",
+      "severity": "medium",
+      "confidence": "medium",
+      "evidenceClass": "当前源码和当前架构/存档契约",
+      "claim": "Base/Run 分离存储及部分兼容写入口形成部分成功和跨存储窗口：pet egg 与 elapsed 在持久化失败时可能继续推进内存并返回 persisted:false；出征先提交 Base 再创建 Run。战斗结算的 journal/requestId 幂等恢复以及标准 Base 草稿失败保护，是现有缓解。",
+      "evidence": [
+        {
+          "path": "docs/architecture.md",
+          "lines": "53,68,72",
+          "kind": "current",
+          "detail": "架构明确记录分存储、兼容语义和剩余直写。"
+        },
+        {
+          "path": "game/src/hub/base.js",
+          "lines": "187-218",
+          "kind": "current",
+          "detail": "兼容分支表现为持久化失败时返回 persisted:false。"
+        },
+        {
+          "path": "docs/save-format.md",
+          "lines": "76",
+          "kind": "current",
+          "detail": "装载结果与 persistence 状态可分离。"
+        },
+        {
+          "path": "game/src/hub/battle-settlement.commands.js",
+          "lines": "49,138,182",
+          "kind": "current",
+          "detail": "战斗结算存在 requestId/journal 恢复路径。"
+        }
+      ],
+      "counterEvidence": "明确的 persisted 状态、失败保护、journal/requestId 说明系统已识别并处理部分边界。未检查所有调用方是否把 persisted:false 清晰呈现给玩家，也没有证据表明实际发生数据丢失或玩家可见错误，因此不定性为确认缺陷。",
+      "minimumValidation": "不改实现，先在可丢弃档位上对 quota/write failure 注入一次 pet egg、elapsed、departure 和战斗结算：逐项记录 UI 提示、内存值、Base/Run/journal 原始串，重载确认用户看到的结果与可恢复状态一致。然后把尚未验证的调用点列为确定范围。",
+      "classification": "design_risk"
+    },
+    {
+      "id": "ENG-03",
+      "title": "Strict 类型门覆盖局部，而复杂热点仍集中在大文件",
+      "severity": "low",
+      "confidence": "high",
+      "evidenceClass": "当前源码与配置的可复现统计",
+      "claim": "维护指标：当前 game/src 有 249 个 JS 文件、48,653 行；check-types 实际 strict 配置显式覆盖去重后的 31 个 JS 文件，基础 jsconfig strict=false。31/249 是文件数，不是有效类型覆盖率。52 个文件至少 300 行、20 个至少 600 行，最大 battle.engine.js 为 1,409 行。这些数字定位可审查的维护热点，不单独证明代码质量、缺陷或应拆分。",
+      "evidence": [
+        {
+          "path": "scripts/check-types.mjs",
+          "lines": "4-21",
+          "kind": "current",
+          "detail": "列出实际执行的类型配置。"
+        },
+        {
+          "path": "jsconfig.json",
+          "lines": "1-20",
+          "kind": "current",
+          "detail": "基础配置 strict=false，include受限。"
+        },
+        {
+          "path": "docs/architecture.md",
+          "lines": "72",
+          "kind": "current",
+          "detail": "说明 strict 扩展边界及未严格化范围。"
+        },
+        {
+          "path": "docs/evidence/2026-10-02-production-research/diagnosis/engineering/measurements.json",
+          "lines": "source,hashManifest",
+          "kind": "current",
+          "detail": "包含逐文件行数、strict 配置和 SHA256。"
+        }
+      ],
+      "counterEvidence": "仓库已有模块拆分、依赖边界检查及渐进 strict 扩展；大文件本身不代表职责混乱，架构现状应结合具体变更耦合和故障证据判断。",
+      "minimumValidation": "针对一个具体维护痛点，查看真实职责耦合、变更范围或故障记录；只有证据表明该模块影响修改安全时，再决定 strict 化或拆分。",
+      "classification": "maintenance_indicator"
+    },
+    {
+      "id": "ENG-04",
+      "title": "测试门设计成熟，但它和当前交付实测之间仍有证据断层",
+      "severity": "medium",
+      "confidence": "high",
+      "evidenceClass": "当前文档/工作区与校验过 hash 的历史统计",
+      "claim": "本轮授权限定为只读诊断，未运行任何测试、类型检查或构建，因此没有证明当前共享工作树通过或失败。当前有 274 个 *.test.js 文件；测试文件数量只说明自动化资产规模，不能代替交付状态。HEAD ahead 49 且共享树含源码/测试/门禁改动；quality-gates 要求未提交增量明确标为未覆盖。历史 20/20 输入 hash 匹配只支持复用静态统计，不升级旧验证结论。",
+      "evidence": [
+        {
+          "path": "docs/quality-gates.md",
+          "lines": "34,47,57,91-93",
+          "kind": "current",
+          "detail": "分开描述快检、全量、实页及来源版本边界。"
+        },
+        {
+          "path": "scripts/acceptance-gate.mjs",
+          "lines": "154-183,213-227",
+          "kind": "current",
+          "detail": "实现 quick/full 与实际执行范围选择。"
+        },
+        {
+          "path": "tests/",
+          "lines": "directory",
+          "kind": "current-stat",
+          "detail": "当前轻量统计274个 *.test.js 文件，不等于行为覆盖率。"
+        },
+        {
+          "path": "docs/evidence/2026-10-02-production-research/diagnosis/engineering/measurements.json",
+          "lines": "historicalMeasurements",
+          "kind": "current-recheck",
+          "detail": "历史输入 hash 当前20/20匹配。"
+        }
+      ],
+      "counterEvidence": "项目质量门能按风险做 quick/full 选择，要求报告区分测试、构建和实页证据，并防止混树检查误报通过。本轮不执行是任务边界，不是质量门失败。",
+      "minimumValidation": "清理/隔离出准确的待交付源码状态后，依据 acceptance-gate 对本轮代码变化生成一次 staged plan 和对应的最小 gateReceipt；只在干净或获准的独立环境完成足以覆盖公共状态/存档边界的回归，并把 exact commit 与工作区输入 hash 写入证据。",
+      "classification": "validation_gap"
+    },
+    {
+      "id": "ENG-05",
+      "title": "流程工具有助于归属与证据，但规则密度的实际成本尚未量化",
+      "severity": "low",
+      "confidence": "low",
+      "evidenceClass": "当前规则文本 + 无使用耗时数据；成本结论为推断",
+      "claim": "工作流统一入口、handoff、信息单一归属和小修豁免有明确治理收益；task/verify/evidence/staged/receipt/ship也有较多操作概念。本次没有任务时长、命令数、返工或首次接手数据，无法判断认知成本是否超过收益。",
+      "evidence": [
+        {
+          "path": "docs/WORKFLOW-TOOLS.md",
+          "lines": "1-20,28-55,59-100",
+          "kind": "current",
+          "detail": "当前流程规定目标/主动作/定向反馈/授权收官，并集中 task、verify、evidence、staged、ship 操作。"
+        },
+        {
+          "path": "AGENTS.md",
+          "lines": "13-22",
+          "kind": "current",
+          "detail": "跨会话 handoff 单入口、归属台账、豁免与规则预算。"
+        },
+        {
+          "path": "docs/README.md",
+          "lines": "12-33",
+          "kind": "current",
+          "detail": "项目各事实与责任入口有明确归属，支持减少重复事实维护。"
+        }
+      ],
+      "counterEvidence": "项目存在明确的小修豁免、免仪式路径和流程规则预算；没有实测证据支持“流程过度”的结论。",
+      "minimumValidation": "选 5 个真实任务（小修、普通代码、混树、并行接手、交付验证）各记录操作者从开始到正确收官的时间、实际命令数、返工/阻塞与证据完整度；由第一次接手者独立完成 1 个任务。再删改只针对重复入口或高错点，不按文本长短砍规则。",
+      "classification": "unverified_hypothesis"
+    }
+  ],
+  "scopeLimits": [
+    "没有启动 dev server、浏览器、构建、全量或定向测试、类型检查或安装命令。",
+    "未读取 seven-departments-v2 占用报告，也未重跑旧测试/实验；旧材料仅按明确授权用 measurements.json 和 r24 summaries 作为线索，并重新比较输入 hash。",
+    "20/20 hash 匹配只证明历史 measurements 引用的文件字节相同，不证明报告中的行为结论当前仍成立。",
+    "工作区 HEAD 为 c6ee20684056240fd219fe179cacf5204a6445a4，branch 显示 ahead 49；相关 dirty/untracked 文件按只读现场处理。"
+  ]
+}

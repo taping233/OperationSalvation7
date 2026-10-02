@@ -1,0 +1,88 @@
+{
+  "actions": [
+    {
+      "detail": "档位01继续→物资节点7收饱和打击→入口→遭遇战节点2；真实点击初始攻击3次、两次目标选择、结束回合1次；战后全部收下→教程知道了→地图",
+      "type": "real-input"
+    },
+    {
+      "detail": "最终地图DOM只读；无手改存档/跳节点/合成事件",
+      "type": "static-inspection"
+    },
+    {
+      "detail": "当前1183×764窗口截图，无尺寸切换",
+      "type": "screenshot"
+    }
+  ],
+  "collector": {
+    "browser": "iab",
+    "platform": "Codex",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "console": {
+    "coverage": "collected",
+    "errors": []
+  },
+  "kind": "browser-snapshot",
+  "nodes": [
+    {
+      "attributes": {
+        "id": "hpText"
+      },
+      "identity": "hpText",
+      "key": "health",
+      "rect": {
+        "height": 11.895833969116213,
+        "width": 47.59375,
+        "x": 236.08334350585935,
+        "y": 5.8229169845581055
+      },
+      "selector": "#hpText",
+      "styles": {},
+      "tag": "B",
+      "text": "31/35"
+    },
+    {
+      "attributes": {
+        "id": "log"
+      },
+      "identity": "log",
+      "key": "log",
+      "rect": {
+        "height": 134.2916717529297,
+        "width": 262.16668701171875,
+        "x": 21.0625,
+        "y": 370.1041870117187
+      },
+      "selector": "#log",
+      "styles": {},
+      "tag": "DIV",
+      "text": "获得 1 币（现有 2） 获得卡牌【刀剑形态】 战利品掉落：1 个小型物资箱 战斗胜利！ 使用过的卡牌：0 张卡牌进入消耗口袋，3 张消散了（本局无法再用），撤离结算时只有 1/3 能带回基地 初始攻击：变为【初始攻击】的 1 费复制 联邦巡防兵 被击倒！（剩 0 个敌人） 初始攻击 → 联邦巡防兵：造成 4 点攻击伤害（攻击力 +4） 联邦巡防兵 攻击：你受到 4 点攻击伤害（31/35） 初始攻击：变为【初始攻击】的 1 费复制 联邦巡防兵 被击倒！（剩 1 个敌人） 初始攻击 → 联邦巡防兵：造成 4 点攻击伤害（攻击力 +4） 不变应万变-改：变为【初始攻击】的 1 费复制 联邦巡防兵 被击倒！（剩 2 个敌人） 初始攻击 → 联邦巡防兵：造成 4 点攻击伤害（攻击力 +4） 普通战斗无需抽牌：随身 11 张战斗卡直接可打出；道具/资源/事件卡不入手，能力卡只能收藏或编入 BOSS 战牌库 · 每回合固定 2 费 以一敌多：伤害与群体卡都拖到任意敌人身上打出（群体自动命中全体） 遭遇战【联邦巡防兵(4-4)、联邦巡防兵(4-4)、联邦巡防兵(4-4)】 · 风险低获得 1 币（现有 1） 获得卡牌【饱和打击】 回收了1 个密封物资箱 已读取【档位 1】存档—— 置身 第1层 · 外围荒地（外围入口）—— 已进入 档位 1（基地与进度独立保存到该档位）"
+    }
+  ],
+  "observedAt": "2026-10-02T11:03:28.830Z",
+  "page": {
+    "origin": "http://127.0.0.1:5336",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.5,
+      "height": 764,
+      "width": 1183
+    }
+  },
+  "scene": "production-research-normal-battle-return",
+  "schemaVersion": 1,
+  "screenshots": [
+    "docs/evidence/2026-10-02-production-research/diagnosis/browser/final-map.png"
+  ],
+  "selectors": [
+    {
+      "key": "health",
+      "selector": "#hpText"
+    },
+    {
+      "key": "log",
+      "selector": "#log"
+    }
+  ]
+}

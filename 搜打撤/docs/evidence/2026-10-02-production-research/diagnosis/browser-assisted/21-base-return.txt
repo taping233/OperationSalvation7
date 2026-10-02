@@ -1,0 +1,99 @@
+Browser tab: 9, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5336/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/
+	1 container
+		2 button Description: 关闭, ID: ovCloseX
+		3 container hubMain
+			4 container
+				5 heading 远征基地, Value: 2
+					6 text 远征基地
+				7 text 档位 01
+				8 button ← 返回
+				9 button
+				10 image wood
+				11 text  木材  0
+				12 image bread
+				13 text  口粮  0
+				14 image key
+				15 text  钥匙  0
+				16 image coin
+				17 text  储备  0  币
+			18 container
+				19 button flag 出发
+					20 image flag
+					21 text 出发
+				22 button home 仓库
+					23 image home
+					24 text 仓库
+				25 button coin 商店
+					26 image coin
+					27 text 商店
+				28 button tools 升级
+					29 image tools
+					30 text 升级
+				31 button medal 人物
+					32 image medal
+					33 text 人物
+				34 button trophy 成就·收藏
+					35 image trophy
+					36 text 成就·收藏
+			37 container
+				38 text WINTER EXPEDITION / OUTSKIRTS
+				39 heading flag 外圈远征简报, Value: 3
+					40 image flag
+					41 text  外圈远征简报
+				42 text 从边缘街区切入，搜集资源、识别风险，并把能带回来的东西带回基地。
+				43 text 本局目标
+				44 text 标准搜打撤
+				45 text 规则无修正
+				46 button exit 出发整备 →, ID: btnDeploy
+					47 image exit
+					48 text 出发整备
+					49 text →
+				50 button flag 下一局目标与两套预设
+					51 image flag
+					52 text  下一局目标与两套预设
+				53 container
+					54 text 选择行动模式
+					55 checkbox map 标准搜打撤 完整四层节点图：探索、搜刮与战斗，第四层经祭坛决战首脑后终局撤离。 规则无修正, Value: 1
+						56 image map
+						57 text 标准搜打撤
+						58 text 完整四层节点图：探索、搜刮与战斗，第四层经祭坛决战首脑后终局撤离。
+						59 text 规则无修正
+					60 checkbox Value: 0, fire 精英突袭 敌人与 BOSS 属性 ×1.5，战斗掉落金币 ×1.5，人物经验 +50%，高稀有度卡牌爆率 +20%。高风险高回报。 敌人 ×1.5 · 经验 +50% · 高稀有掉落 +20%
+						61 image fire
+						62 text 精英突袭
+						63 text 敌人与 BOSS 属性 ×1.5，战斗掉落金币 ×1.5，人物经验 +50%，高稀有度卡牌爆率 +20%。高风险高回报。
+						64 text 敌人 ×1.5 · 经验 +50% · 高稀有掉落 +20%
+				65 text MISSION BRIEF
+				66 text 出发前准备
+				67 text 可整备 当前模式
+				68 text 标准搜打撤
+				69 text 完整四层节点图：探索、搜刮与战斗，第四层经祭坛决战首脑后终局撤离。
+				70 text 01
+				71 text 基础参考（角色出发后选择）
+				72 text 35 生命 · 4 攻击
+				73 text 02
+				74 text 携带容量
+				75 text 16 格背包 · 仓库 22/25
+				76 text 03
+				77 text 保护与回收
+				78 text 2 格可用
+				79 text 04
+				80 text 随身储备
+				81 text 开局 0 币（储备币不进局） · 0 口粮
+				82 button 05 深层内容 · 经典生命研究所 / 宝藏大门 （特殊关卡制作中） key 0/10
+					83 text 05
+					84 text 深层内容 · 经典生命研究所 / 宝藏大门 
+					85 text （特殊关卡制作中）
+					86 container
+						87 image key
+						88 text  0/10
+				89 image paw
+				90 text 随队宠物
+				91 text 汪汪狗
+				92 text 携带效果：生命上限 +5
+				93 container
+					94 image map
+					95 text  进入整备后，可从仓库拖入本局携带卡牌；只有装入背包的卡牌才能在远征中使用。
+
+The focused UI element is 8 button ← 返回

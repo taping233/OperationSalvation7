@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">
+<title>代号柒制作资料库</title>
+<style>
+:root{color-scheme:dark;--bg:#111823;--panel:#1b2533;--text:#edf2f7;--muted:#b9c5d3;--accent:#88d8d0;--line:#445366}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 system-ui,"Microsoft YaHei",sans-serif}main{max-width:1200px;margin:auto;padding:32px 24px}h1{margin:0;font-size:30px}h2{font-size:21px;margin:8px 0}p{margin:8px 0}a{color:var(--accent);text-underline-offset:3px;overflow-wrap:anywhere}a:focus-visible,input:focus-visible,select:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #ffd786;outline-offset:3px}.muted{color:var(--muted)}.notice{border-left:4px solid var(--accent);padding:12px 16px;background:var(--panel);margin:20px 0}.filters{display:grid;grid-template-columns:2fr 1.2fr 1fr 1fr;gap:14px}label{display:block;color:var(--muted)}input,select,button{font:inherit;color:var(--text);background:#111823;border:1px solid #8192a6;border-radius:7px;padding:10px;width:100%;min-height:46px}button{width:auto;cursor:pointer;margin:14px 0;background:#243447}.cards{display:grid;gap:18px}article{border:1px solid var(--line);background:var(--panel);border-radius:12px;padding:22px}.badges{display:flex;flex-wrap:wrap;gap:8px}.badge{border:1px solid #72849a;padding:2px 10px;border-radius:20px;font-size:14px}.usable{border-color:#88d8d0}.evaluate{border-color:#ffd786}.field{margin:12px 0}.field strong{display:block;color:#d9e9f6}.field p{margin:3px 0}ul{padding-left:22px}details{border-top:1px solid var(--line);margin-top:16px;padding-top:12px}summary{cursor:pointer;min-height:36px}li{margin:4px 0}.files li{overflow-wrap:anywhere}code{font-size:13px;overflow-wrap:anywhere}.empty{padding:24px;background:var(--panel)}.row{display:flex;gap:18px;flex-wrap:wrap}.sha{color:var(--muted)}footer{padding:24px 0;color:var(--muted)}@media(max-width:800px){.filters{grid-template-columns:1fr 1fr}}@media(max-width:520px){.filters{grid-template-columns:1fr}main{padding:20px 16px}article{padding:16px}}
+</style>
+</head>
+<body><main>
+<header><p class="muted">FRIDAY / 本地制作参考 · 2026-10-02</p><h1>代号柒制作资料库</h1><p>38 条人工筛选来源，八类覆盖。搜索项目问题，先看适用范围与许可，再打开原文或已拥有文件。</p><p><a href="DEEP-READS.md">四份深读方法卡与下一轮实验</a>__INDIE_LINK____SOURCE_STUDY_LINK__</p></header>
+<aside class="notice" aria-label="使用边界"><p><strong>参考资料</strong>供阅读；<strong>可评估源码</strong>需验证兼容；<strong>可复用素材候选</strong>仍须遵守许可。已下载只说明文件在本地。</p><p class="muted">rot.js 子集缺 MinHeap，保留 3 次下载失败；音频未试听，SVG 未渲染，下载代码未执行。文章、视频、2048 字体与品牌资产的复用不在本次批准范围。</p></aside>
+<form id="filters" role="search" onsubmit="return false">
+<div class="filters"><label for="query">搜索标题、用途、作者、许可、局限<input id="query" type="search" placeholder="例如：撤离、音频、MIT、平衡" autocomplete="off"></label><label for="category">类别<select id="category"><option value="">全部类别</option></select></label><label for="useStatus">用途状态<select id="useStatus"><option value="">全部用途</option><option value="reference-only">参考资料</option><option value="evaluate">可评估源码</option><option value="usable">可复用素材候选</option></select></label><label for="downloaded">拥有情况<select id="downloaded"><option value="">全部</option><option value="true">已有本地文件</option><option value="false">未下载</option></select></label></div>
+<button type="reset">清除筛选</button></form>
+<p id="results" role="status" aria-live="polite"></p><section id="cards" class="cards" aria-label="资料列表"></section>
+<noscript><p class="notice">离线筛选需要 JavaScript。可直接阅读 <a href="README.md">README</a> 或 <a href="catalog.json">catalog.json</a>。</p></noscript>
+<footer><p>本页内嵌目录与下载清单，筛选不联网。外部原文需要联网；本地文件链接提供保存/打开入口，代码链接不会被本页执行。</p><p><a href="README.md">阅读顺序与边界</a> · <a href="catalog.json">目录正本</a> · <a href="download-manifest.json">下载与失败清单</a> · <a href="validation.json">验证记录</a></p></footer>
+</main>
+<script id="library-data" type="application/json">__LIBRARY_DATA__</script>
+<script>
+'use strict';
+const data=JSON.parse(document.getElementById('library-data').textContent);
+const categories={'art-audio':'美术 / 音效资源','open-source':'开源原始代码','developer-retrospective':'开发者一手访谈 / 复盘','studio-process':'大厂公开流程','game-evaluation':'游戏 / Agent 评估','ui-accessibility':'UI 版式 / 可访问性','ai-production':'AI 游戏制作经验','tools':'Vite / JS 工具'};
+const statuses={'reference-only':'参考资料','evaluate':'可评估源码','usable':'可复用素材候选'};
+const ids=['query','category','useStatus','downloaded'];
+const fields=Object.fromEntries(ids.map(id=>[id,document.getElementById(id)]));
+const cards=document.getElementById('cards');
+function el(tag,text,cls){const node=document.createElement(tag);if(text!==undefined)node.textContent=text;if(cls)node.className=cls;return node;}
+function link(text,url,download=false){const a=el('a',text);a.href=url;if(download)a.setAttribute('download','');else if(/^https:/.test(url)){a.target='_blank';a.rel='noopener noreferrer';}return a;}
+function field(parent,title,value){if(!value)return;const box=el('div',undefined,'field');box.append(el('strong',title),el('p',value));parent.append(box);}
+for(const [id,label] of Object.entries(categories)){const option=el('option',label+' · '+data.catalog.filter(r=>r.category===id).length);option.value=id;fields.category.append(option);}
+function render(){
+ const tokens=fields.query.value.trim().toLocaleLowerCase().split(/\s+/).filter(Boolean);
+ const list=data.catalog.filter(r=>(!fields.category.value||r.category===fields.category.value)&&(!fields.useStatus.value||r.useStatus===fields.useStatus.value)&&(!fields.downloaded.value||String(r.downloaded)===fields.downloaded.value)&&tokens.every(t=>JSON.stringify(r).toLocaleLowerCase().includes(t)));
+ cards.replaceChildren();document.getElementById('results').textContent='显示 '+list.length+' / '+data.catalog.length+' 条 · 本库 '+data.catalog.filter(r=>r.downloaded).length+' 条已有文件 / '+data.catalog.filter(r=>!r.downloaded).length+' 条未下载 · '+data.failures.length+' 次下载失败（保留）';
+ if(!list.length){cards.append(el('p','没有匹配资料。可减少关键词或清除筛选。','empty'));return;}
+ for(const r of list){
+  const article=el('article');article.id=r.id;const badges=el('div',undefined,'badges');badges.append(el('span',categories[r.category],'badge'),el('span',statuses[r.useStatus],'badge '+r.useStatus),el('span',r.downloaded?'已有文件 · '+r.bytes.toLocaleString()+' bytes':'未下载','badge'));article.append(badges,el('h2',r.title),el('p',r.author+' · '+(r.publishedOrUpdated||'来源未标日期'),'muted'));
+  const links=el('p',undefined,'row');links.append(link('外部原文',r.url));if(r.licenseUrl)links.append(link('许可 / 来源声明',r.licenseUrl));else links.append(el('span','未见开放复用许可；参见来源','muted'));if(r.supplementalReview)links.append(link(r.supplementalReview.pages.length?'官方讲义（关键页 '+r.supplementalReview.pages.join('、')+'）':'深读原始正文',r.supplementalReview.url));if(r.deepRead)links.append(link('深读方法卡',r.deepRead.path+'#'+r.deepRead.anchor));article.append(links);
+  field(article,'适用本项目',r.projectFit);if(r.deepRead){field(article,'可迁移方法',r.deepRead.method);field(article,'拟议小实验（未实施）',r.deepRead.nextExperiment);}field(article,'许可',r.license);field(article,'下载完整性',r.downloadCompleteness);field(article,'核验深度',r.verifiedScope);field(article,'局限',r.limitations);
+  const details=el('details');details.append(el('summary','展开要点、来源核验与本地文件'));field(details,'入选理由',r.qualityReason);const takeaways=el('ul');for(const item of r.takeaways)takeaways.append(el('li',item));details.append(takeaways);field(details,'固定版本 / commit',r.version||r.commit||'未固定软件版本；按来源日期阅读');if(r.version&&r.commit)field(details,'commit',r.commit);field(details,'链接状态',r.linkReview.status+' · '+r.linkReview.scope);
+  const files=data.files.filter(f=>f.id===r.id);if(files.length){const ul=el('ul',undefined,'files');for(const f of files){const li=el('li');li.append(link(f.path,f.path.split('/').map(encodeURIComponent).join('/'),true),el('span',' · '+f.bytes.toLocaleString()+' bytes · '+f.status),el('p','SHA256 '+f.sha256,'sha'));ul.append(li);}details.append(el('strong','已拥有文件（保存 / 打开）'),ul);}else details.append(el('p','没有本地原始资料文件。'));
+  for(const f of data.failures.filter(f=>f.id===r.id))field(details,'失败保留：'+f.path,f.error+'（0 bytes，未拥有）');
+  article.append(details);cards.append(article);
+ }
+}
+for(const node of Object.values(fields))node.addEventListener('input',render);
+document.getElementById('filters').addEventListener('reset',()=>setTimeout(render,0));
+render();
+</script></body></html>

@@ -1,0 +1,42 @@
+{
+  "product": 6.3203125,
+  "enablement": 6.966666666666666,
+  "departments": [
+    {
+      "name": "探索与撤离",
+      "sixDim": 6.275,
+      "playerFour": 6.28125
+    },
+    {
+      "name": "卡牌与战斗",
+      "sixDim": 6.575,
+      "playerFour": 6.65625
+    },
+    {
+      "name": "基地与成长",
+      "sixDim": 6.175,
+      "playerFour": 6.21875
+    },
+    {
+      "name": "界面与内容表现",
+      "sixDim": 5.75,
+      "playerFour": 5.75
+    },
+    {
+      "name": "自动游玩与评估",
+      "sixDim": 6.9,
+      "playerFour": 6.9375
+    },
+    {
+      "name": "开发与质量工具",
+      "sixDim": 7.575,
+      "playerFour": 7.78125
+    },
+    {
+      "name": "设计文档与美术生产",
+      "sixDim": 6.425,
+      "playerFour": 6.53125
+    }
+  ],
+  "pages": 20
+}

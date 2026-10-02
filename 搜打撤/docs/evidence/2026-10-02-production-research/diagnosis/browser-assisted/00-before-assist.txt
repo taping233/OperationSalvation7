@@ -1,0 +1,32 @@
+Browser tab: 5, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5336/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/
+	1 container viewport
+		2 button 背包 8/16, ID: bagBtnFloat
+			3 text 背包
+			4 text 8/16
+		5 container tools 开发者控制台, ID: overlay
+			6 container
+				7 button Description: 关闭, ID: ovCloseX
+				8 heading tools 开发者控制台, Value: 2, ID: ovTitle
+					9 image tools
+					10 text  开发者控制台
+				11 container ovBody
+					12 button 调试
+					13 button Agent
+					14 button 数据
+					15 button 快捷键
+					16 text mapSeed=2129252531 · snapshot=v2 · routeVersion=r5-routes-v1 · status=fallback · fallbackReason=QUALITY_GATE_REJECTED
+					17 text 调试用面板（Ctrl+L 开关）——修改会立即写入本局存档，别在正经挑战里用。
+					18 container
+						19 text 资源
+						20 button +50 币
+						21 button +200 币
+						22 button 回 10 血
+						23 button 回满血
+					24 container
+						25 text 指定卡牌
+						26 text field (settable) devcSearch
+						27 text 输入卡名后点结果发卡（同名堆叠规则照常生效）
+					28 button 关闭（Esc / Ctrl+L）
+
+The focused UI element is 28 button 关闭（Esc / Ctrl+L）

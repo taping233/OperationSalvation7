@@ -1,0 +1,11 @@
+{
+  "command": [
+    "git",
+    "apply",
+    "--check",
+    "repair-only.patch"
+  ],
+  "exit_code": 0,
+  "isolated_baseline_copy": "C:\\Users\\太平\\AppData\\Local\\Temp\\sdt-repair-patch-check-ckfibi95",
+  "checkout_and_index_unchanged": true
+}

@@ -107,9 +107,9 @@ function isRelevant(p) {
   return isGateRelevantPath(p);
 }
 
-function runNode(args, label) {
+function runNode(args, label, opts = {}) {
   process.stdout.write('[gate] ' + label + '\n');
-  const result = spawnSync(process.execPath, args, { cwd: PROJECT_ROOT, stdio: 'inherit' });
+  const result = spawnSync(process.execPath, args, { cwd: PROJECT_ROOT, stdio: 'inherit', env: opts.env });
   if (result.error) throw result.error;
   if (result.status !== 0) throw new Error(label + ' 失败（exit ' + result.status + '）');
 }
@@ -226,7 +226,10 @@ async function main() {
   const testArgs = ['node_modules/vitest/vitest.mjs', 'run',
     ...(plan.mode === 'quick' ? plan.tests : []), '--reporter=dot', '--silent'];
   if (plan.mode === 'full' || plan.tests.length) {
-    runNode(testArgs, plan.mode === 'quick' ? '定向 Vitest（完整测试留给 CI/阶段收尾）' : '全量 Vitest');
+    // 逃生口只在门进程内生效：Vitest 夹具会经 {...process.env} 继承它，导致混树/无主拒绝
+    // 测试被无声放行（10-03 实测泄漏事故）——只对子进程剔除，门进程保留给两次 stagedChanges 复核。
+    const { GATE_MANIFEST_OK: _gateManifestOk, ...childEnv } = process.env;
+    runNode(testArgs, plan.mode === 'quick' ? '定向 Vitest（完整测试留给 CI/阶段收尾）' : '全量 Vitest', { env: childEnv });
   }
   if (staged) stagedChanges();
   process.stdout.write('[gate] PASS：' + plan.mode + ' 验收完成\n');

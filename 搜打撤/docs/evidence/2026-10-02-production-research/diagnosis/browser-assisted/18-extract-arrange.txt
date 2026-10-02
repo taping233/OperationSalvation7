@@ -1,0 +1,171 @@
+Browser tab: 9, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5336/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/
+	1 container viewport
+		2 button 背包 16/16 满, ID: bagBtnFloat
+			3 text 背包
+			4 text 16/16
+			5 text 满
+		6 container exMain
+			7 container
+				8 button
+				9 text 把背包中的物品放回仓库——未入库的卡牌将在撤离中丢失
+				10 image archive
+				11 text  仓库容量  2/25  张
+				12 image coin
+				13 text  随身币不带回（ 22  币留在局中）
+			14 text EXTRACTION REPORT
+			15 text 战利品已回收，正在等待你的入库决定
+			16 text 容量 2/25 · 未入库卡牌会在完成整理时丢失
+			17 container
+				18 heading bag 背包卡牌 点击卡面放入仓库, Value: 3
+					19 image bag
+					20 text  背包卡牌  点击卡面放入仓库
+				21 button 入库 不变应万变-改
+					22 container
+						23 text 1
+						24 image 不变应万变-改
+						25 text 不变应万变-改 武术 · 无专属 在手牌中时，本牌变为打出的上一张武术牌的 1 费复制。
+						26 image coin
+						27 text 3
+				28 button 入库 连弩
+					29 container
+						30 text 0
+						31 image 连弩
+						32 text 连弩 装备 · 古朴
+						33 image cards
+						34 text 抽 1 主动技能 ： 直接释放手牌中的所有‘箭’，每释放 1 张，抽 1 张牌。
+						35 image coin
+						36 text 2
+					37 text ×2
+				38 button 入库 快意恩仇
+					39 container
+						40 text 1
+						41 image 快意恩仇
+						42 text 快意恩仇 武术 · 无专属 消耗 2  张初始攻击，攻击  3  次。
+						43 image coin
+						44 text 3
+				45 button 入库 草甲
+					46 container
+						47 text 0
+						48 image 草甲
+						49 text 草甲 装备 · 古朴
+						50 image plate
+						51 text 甲 5 装备 ： 装备 时获得 5 点 护甲 。
+						52 image coin
+						53 text 2
+					54 text ×3
+				55 button 入库 矿工炸药
+					56 container
+						57 text 0
+						58 image 矿工炸药
+						59 text 矿工炸药 装备 · 古朴 消耗 该牌时，造成  4  点固定 伤害 。
+						60 image coin
+						61 text 2
+				62 button 入库 法力光波
+					63 container
+						64 text 1
+						65 image 法力光波
+						66 text 法力光波 法术 · 古朴 5 点法术 伤害
+						67 image sparkles
+						68 text 5'
+						69 text 法伤
+						70 image coin
+						71 text 2
+				72 button 入库 冰冻药水
+					73 container
+						74 text 0
+						75 image 冰冻药水
+						76 text 冰冻药水 道具 · 稀有 附加 冰冻 ，持续  1 回合 。
+						77 image coin
+						78 text 3
+					79 text ×3
+				80 button 入库 剧毒药水
+					81 container
+						82 text 0
+						83 image 剧毒药水
+						84 text 剧毒药水 道具 · 稀有 对所有敌人附加 1 层 中毒 。
+						85 image coin
+						86 text 3
+				87 button 入库 高端研发
+					88 container
+						89 text 1
+						90 image 高端研发
+						91 text 高端研发 法术 · 稀有 发现 一张 2 费招式，在每个 回合开始时 ，使其 -1 费
+				92 button 入库 生命箭
+					93 container
+						94 text 1
+						95 image 生命箭
+						96 text 生命箭 武术 · 古朴 攻（ -1 ），获得  1  张随机卡牌。
+						97 image swords
+						98 text -1
+						99 image coin
+						100 text 2
+				101 button 入库 口粮
+					102 container
+						103 text 0
+						104 image 口粮
+						105 text 口粮 资源 · 稀有 升级宠物。
+						106 image coin
+						107 text 3
+				108 button 入库 包扎
+					109 container
+						110 text 1
+						111 image 包扎
+						112 text 包扎 武术 · 古朴
+						113 image heart
+						114 text 回 3
+						115 image plate
+						116 text 甲 3 +3  血， +3  甲。
+				117 button 入库 破甲箭
+					118 container
+						119 text 1
+						120 image 破甲箭
+						121 text 破甲箭 武术 · 古朴
+						122 image plate
+						123 text 甲 3 攻（ -1 ），获得  3  点 护甲 。
+						124 image swords
+						125 text -1
+						126 image coin
+						127 text 2
+				128 button 入库 法杖
+					129 container
+						130 text 0
+						131 image 法杖
+						132 text 法杖 装备 · 古朴 法伤 +1 。
+						133 image coin
+						134 text 2
+				135 button 入库 坚守
+					136 container
+						137 text 1
+						138 image 坚守
+						139 text 坚守 武术 · 古朴
+						140 image cards
+						141 text 抽 1
+						142 image plate
+						143 text 甲 5 +5  甲，抽  1  张牌。
+						144 image coin
+						145 text 2
+				146 image cards
+				147 image lock
+				148 text 初始攻击  ×2  · 初始牌不可入库（每局自动携带 5 张） 遗落
+			149 container
+				150 heading archive 自动入库, Value: 3
+					151 image archive
+					152 text  自动入库
+				153 image wood
+				154 text  木材 × 0 已入库（扩建背包/仓库用）
+				155 image bread
+				156 text  口粮 × 0 已入库（升级安全格用）
+				157 image pocket
+				158 text  消耗口袋 每张 1/3 概率保留 · 带回 1 张（基地可复原）· 散失 2 张
+				159 button archive 全部入库（20/20 张可入）
+					160 image archive
+					161 text  全部入库（20/20 张可入）
+				162 button sparkles 智能整理（优先价值最高 · 上限仓库空格）
+					163 image sparkles
+					164 text  智能整理（优先价值最高 · 上限仓库空格）
+				165 button check 完成整理（20 张将丢失）, ID: btnDeploy
+					166 image check
+					167 text  完成整理（20 张将丢失）
+
+The focused UI element is 8 button

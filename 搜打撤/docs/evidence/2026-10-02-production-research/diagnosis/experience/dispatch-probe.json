@@ -1,0 +1,43 @@
+{
+  "method": "Isolated real-registry evaluation with AudioContext setup and final playback bypassed. Cold sample pools. Proves registry dispatch, not audible output or cue reachability.",
+  "sourceSha256": "7616fd3686c0c6d1a3471fba39882ba0e601787e1ad57648b317155f90430698",
+  "sceneExported": false,
+  "results": [
+    {
+      "name": "prepReady",
+      "registered": false
+    },
+    {
+      "name": "deployStart",
+      "registered": false
+    },
+    {
+      "name": "extractionSuccess",
+      "registered": false
+    },
+    {
+      "name": "searchReveal",
+      "registered": false
+    },
+    {
+      "name": "storyComplete",
+      "registered": false
+    },
+    {
+      "name": "attackArrow",
+      "registered": false
+    },
+    {
+      "name": "card",
+      "registered": true
+    },
+    {
+      "name": "victory",
+      "registered": true
+    },
+    {
+      "name": "phase",
+      "registered": true
+    }
+  ]
+}

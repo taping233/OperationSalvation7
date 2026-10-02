@@ -1,0 +1,122 @@
+Browser tab: 10, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5336/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/
+	1 container
+		2 button Description: 关闭, ID: ovCloseX
+		3 container
+			4 text ROLE ARCHIVE // 黑像
+			5 heading cards 角色卡池档案, Value: 2
+				6 image cards
+				7 text  角色卡池档案
+			8 text 13 CARDS
+			9 container
+				10 text CHARACTER ARCHIVE 黑像
+				11 container poolPreview
+					12 container
+						13 text 2
+						14 image 不变应万变
+						15 text 不变应万变 武术 · 黑像专属
+						16 image plate
+						17 text 甲 4 本 回合 所受 伤害 降为  1 ，获得  4  点 护甲 。
+						18 image coin
+						19 text 3
+					20 text 类型
+					21 text 武术
+					22 text 稀有度
+					23 text 职业
+					24 text 伤害词条
+					25 text 0
+					26 text 点击卡面可放大查看
+				27 image medal
+				28 text  确认选择「黑像」后，将从 13 张人物卡中随机获得 1 张角色卡，并与 5 张「初始攻击」一起带入背包。
+			29 container poolGrid
+				30 container
+					31 text 职业
+					32 button 查看 不变应万变 详情
+						33 container
+							34 text 2
+							35 image 不变应万变
+							36 text 不变应万变 武术 · 黑像专属
+							37 image plate
+							38 text 甲 4 本 回合 所受 伤害 降为  1 ，获得  4  点 护甲 。
+							39 image coin
+							40 text 3
+				41 container
+					42 text 职业
+					43 button 查看 急行军 详情
+						44 container
+							45 text 1
+							46 image 急行军
+							47 text 急行军 武术 · 黑像专属
+							48 image cards
+							49 text 抽 2
+							50 image plate
+							51 text 甲 2 抽  2 张牌， +2 甲；若本牌为最后一张手牌，效果触发 2 次。
+							52 image coin
+							53 text 3
+				54 container
+					55 text 职业
+					56 button 查看 坚盾 详情
+						57 container
+							58 text 1
+							59 image 坚盾
+							60 text 坚盾 武术 · 黑像专属
+							61 image plate
+							62 text 甲 8 本 回合 获得  8 点 护甲 ，下 回合开始时 -4  点。
+							63 image coin
+							64 text 3
+				65 container
+					66 text 职业
+					67 button 查看 武装 详情
+						68 container
+							69 text 1
+							70 image 武装
+							71 text 武装 武术 · 黑像专属 从 牌库 中抽取  2  张 装备 牌。
+							72 image coin
+							73 text 3
+				74 container
+					75 text 职业
+					76 button 查看 旋风斩 详情
+						77 container
+							78 text 2
+							79 image 旋风斩
+							80 text 旋风斩 武术 · 黑像专属 攻（ +1 ），目标为敌方全体。
+							81 image swords
+							82 text +1
+							83 image coin
+							84 text 3
+				85 container
+					86 text 职业
+					87 button 查看 破甲重斩 详情
+						88 container
+							89 text 2
+							90 image 破甲重斩
+							91 text 破甲重斩 武术 · 黑像专属
+							92 image plate
+							93 text 甲 4 攻 5 ，附加破甲，持续  2 回合 ；击杀敌人时  +4  甲。
+							94 image swords
+							95 text +5
+							96 image coin
+							97 text 3
+				98 container
+					99 text 职业
+					100 button 查看 全力一击 详情
+						101 container
+							102 text 2
+							103 image 全力一击
+							104 text 全力一击 武术 · 黑像专属
+							105 image cards
+							106 text 抽 1 攻（ +5 ），抽  1  张牌。
+							107 image swords
+							108 text +5
+							109 image coin
+							110 text 2
+			111 container poolPager
+				112 button (disabled) ‹ 上一页
+				113 text 第  1  / 2 页 · 共 13 张
+				114 button 下一页 ›
+			115 button medal 返回选角
+				116 image medal
+				117 text  返回选角
+			118 button 出发
+
+The focused UI element is 0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/

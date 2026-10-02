@@ -1,0 +1,126 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5336/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/
+	1 container viewport
+		2 button 背包 7/16, ID: bagBtnFloat
+			3 text 背包
+			4 text 7/16
+		5 container
+			6 text 冬境街区 · 遭遇
+			7 text 第 1 回合
+			8 text 你的行动 Lv.1 · 0/50 · 差 50 点
+			9 text 我方
+			10 container btSelf
+				11 container
+					12 text 无 你
+				13 container
+					14 text 35/35
+				15 container
+					16 image swords
+					17 text  4
+			18 container
+				19 container
+					20 image swords
+					21 text  攻击 · 4
+				22 image infantry
+				23 text 联邦巡防兵
+				24 image swords
+				25 text 4
+				26 container
+					27 text 4/4
+				28 container
+					29 image swords
+					30 text  攻击 · 4
+				31 image infantry
+				32 text 联邦巡防兵
+				33 image swords
+				34 text 4
+				35 container
+					36 text 4/4
+				37 container
+					38 image swords
+					39 text  攻击 · 4
+				40 image infantry
+				41 text 联邦巡防兵
+				42 image swords
+				43 text 4
+				44 container
+					45 text 4/4
+			46 text 敌方意图
+			47 container
+				48 image bolt
+				49 text 2 /2
+			50 button fire 砸击
+				51 image fire
+				52 text  砸击
+			53 container
+				54 checkbox Description: 初始攻击 · 1 费。费用 1 · 点击选中后点敌人，也可拖到敌人身上打出（悬停看完整描述）, Value: 0
+					55 container
+						56 text 1
+						57 image 初始攻击
+						58 text 初始攻击
+					59 text ×5
+					60 image swords
+				61 checkbox Description: 二刀流 · 1 费。费用 1 · 点击选中后点自己，也可拖到左侧人物（悬停看完整描述）, Value: 0
+					62 container
+						63 text 1
+						64 image 二刀流
+						65 text 二刀流
+					66 image heart
+				67 checkbox Description: 穿刺 · 1 费。费用 1 · 点击选中后点敌人，也可拖到敌人身上打出（悬停看完整描述）, Value: 0
+					68 container
+						69 text 1
+						70 image 穿刺
+						71 text 穿刺
+						72 image swords
+						73 text +2
+					74 image swords
+				75 checkbox Description: 镭射 · 1 费。费用 1 · 点击进入注能（选 1 张手牌消耗强化打出），注能条内也可「不注能直接打出」或拖到敌人身上直打（悬停看完整描述）, Value: 0
+					76 container
+						77 text 1
+						78 image 镭射
+						79 text 镭射
+						80 image sparkles
+						81 text 5'
+						82 text 法伤
+					83 image swords
+					84 button crystal 注能1
+						85 image crystal
+						86 text 注能1
+				87 checkbox Description: 江湖救急-改 · 0 费。费用 0 · 点击直接打出，也可拖到战场空地（悬停看完整描述）, Value: 0
+					88 container
+						89 text 0
+						90 image 江湖救急-改
+						91 text 江湖救急-改 武术 · 无专属 随机获得 3 张临时卡牌， 回合开始时 将其 消耗 。
+						92 image coin
+						93 text 3
+					94 image sparkles
+				95 checkbox Description: 不变应万变-改 · 1 费。费用 1 · 点击直接打出，也可拖到战场空地（悬停看完整描述）, Value: 0
+					96 container
+						97 text 1
+						98 image 不变应万变-改
+						99 text 不变应万变-改
+					100 image sparkles
+				101 checkbox Description: 饱和打击 · 2 费。费用 2 · 点击选中后点敌人，也可拖到敌人身上打出（悬停看完整描述）, Value: 0
+					102 container
+						103 text 2
+						104 image 饱和打击
+						105 text 饱和打击
+						106 image sparkles
+						107 text 7'
+						108 text 法伤
+					109 image swords
+			110 container 战术操作
+				111 button bag 背包
+					112 image bag
+					113 text  背包
+				114 button runner 撤离（判负）
+					115 image runner
+					116 text  撤离（判负）
+				117 button gear 设置
+					118 image gear
+					119 text  设置
+				120 button skip 结束回合
+					121 image skip
+					122 text  结束回合
+
+The focused UI element is 50 button fire 砸击

@@ -1,0 +1,35 @@
+{
+  "source": "main-session exec/write_stdin results; no build, no shared narrative compile, no real API/token",
+  "checks": {
+    "static": {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "7b5790",
+        "wall_time_seconds": 0.000015613,
+        "exit_code": 0,
+        "original_token_count": 184,
+        "output": "Syntax check passed (296 project files).\n\n> codename7-soudache-game@0.60.0 validate:data\n> node scripts/validate-data.mjs\n\n[validate-data] 全部通过（pets 6 / 成就 26 / 怪物 15 / 场景 12 / 同步卡 55）\n\n> codename7-soudache-game@0.60.0 lint\n> eslint game/src game/tools tests scripts \"*config.{js,mjs,cjs}\"\n\n\n> codename7-soudache-game@0.60.0 typecheck\n> node scripts/check-types.mjs\n\nType-checking jsconfig.json\nType-checking jsconfig.battle-settlement.json\nType-checking jsconfig.battle-snapshot.json\nType-checking jsconfig.card-rules.json\nType-checking jsconfig.strict-foundations.json\nType-checking jsconfig.strict-selection.json\nType-checking jsconfig.strict-hand-selection.json\nType-checking jsconfig.strict-ui.json\n"
+      }
+    },
+    "nai": {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "f2fd43",
+        "wall_time_seconds": 0.000015493,
+        "exit_code": 0,
+        "original_token_count": 126,
+        "output": "ok\r\ntest_rate_survives_new_process_instance_and_fractional_clock (test_nai_guard.GuardTests) ... ok\r\ntest_real_transport_uses_literal_argv_without_shell (test_nai_guard.GuardTests) ... ok\r\ntest_response_save_failure_including_429_leaves_fail_closed_pending_state (test_nai_guard.GuardTests) ... ok\r\ntest_shared_429_blocks_new_instance_without_sending_or_charging (test_nai_guard.GuardTests) ... ok\r\n\r\n----------------------------------------------------------------------\r\nRan 14 tests in 1.067s\r\n\r\nOK\r\n"
+      }
+    },
+    "docs": {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "0d2733",
+        "wall_time_seconds": 0.000018298,
+        "exit_code": 0,
+        "original_token_count": 486,
+        "output": "{\"ok\":true,\"schemaVersion\":1,\"root\":\"D:\\\\素材\\\\代号柒\\\\搜打撤\",\"scannedFiles\":[\"../AGENTS.md\",\"README.md\",\"docs/AGENT-TOOLBOX.md\",\"docs/BASE-DIRECT-WRITE-AUDIT-2026-09-29.md\",\"docs/DEBT-CAMPAIGN-2026-10.md\",\"docs/DOCUMENT-ARCHIVE-AUDIT-2026-09-28.md\",\"docs/M-BATCH-EXCLUSIONS.md\",\"docs/M-BATCH-MATRIX.md\",\"docs/PARALLEL-DISPATCH-PLAYBOOK.md\",\"docs/PARALLEL-REGISTRY.md\",\"docs/PENDING.md\",\"docs/PERF-LEDGER-2026-09-29.md\",\"docs/PHOTOLIB-PERF-TASK-2026-09-29.md\",\"docs/QUICKSTART.md\",\"docs/README.md\",\"docs/STATUS.md\",\"docs/UI-ART-OVERHAUL-GUIDE.md\",\"docs/UI-TOKEN-SYSTEM-PROPOSAL.md\",\"docs/WORKFLOW-TOOLS.md\",\"docs/agent-iteration-playbook.md\",\"docs/agent-protocol.md\",\"docs/architecture.md\",\"docs/asset-audit-debt.md\",\"docs/audio-system.md\",\"docs/changelog.md\",\"docs/class-consolidation.md\",\"docs/design.md\",\"docs/development.md\",\"docs/game-compendium.md\",\"docs/performance.md\",\"docs/production/README.md\",\"docs/production/art/VISUAL-BIBLE.md\",\"docs/production/design/GDD.md\",\"docs/production/engineering/AGENT-EXPERIMENTS.md\",\"docs/production/engineering/CODE-DATA-WORKFLOW.md\",\"docs/production/engineering/MAKER-HANDBOOK.md\",\"docs/production/management/DECISIONS.md\",\"docs/production/management/ITERATION-BOARD.md\",\"docs/production/management/NEXT-CYCLE-TECH-PLAN.md\",\"docs/production/project/CHARTER.md\",\"docs/production/qa/ACCEPTANCE-MATRIX.md\",\"docs/quality-gates.md\",\"docs/roadmap.md\",\"docs/rules.md\",\"docs/save-format.md\",\"docs/terminology.md\"],\"checkedRelativeLinks\":346,\"findings\":[],\"reviewRequired\":false,\"limits\":[\"只扫描 docs 根层、production、项目 README/AGENTS 与仓库 AGENTS\",\"跳过 archive/evidence/previews/modules 与代码块\",\"链接仅检查文件可达，不验证标题锚点、运行素材或外部网址\",\"模式命中只作人工复核候选，不证明全项目语义一致\",\"口径真源检测只提示收敛候选，不阻断也不自动改写\",\"无自动写入、移动、删除、提交\"]}\n"
+      }
+    }
+  }
+}

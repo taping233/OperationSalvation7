@@ -1,0 +1,242 @@
+Browser tab: 10, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5336/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/
+	1 container archive 跑局数据, ID: overlay
+		2 container
+			3 button 返回
+			4 text RUN DATA // 09
+			5 heading archive 跑局数据, Value: 2
+				6 image archive
+				7 text  跑局数据
+			8 text 总局数 1 通关率 100% 撤离率 100% 死亡率 0% 均带出价值 47 战斗胜率 100%
+			9 heading 死亡层分布, Value: 3
+				10 text 死亡层分布
+			11 text 暂无死亡记录。
+			12 heading 高价值带出卡 Top, Value: 3
+				13 text 高价值带出卡 Top
+			14 table
+				15 row
+					16 cell
+						17 text 卡牌
+					18 cell
+						19 text 稀有度
+					20 cell
+						21 text 带出
+					22 cell
+						23 text 单价
+				24 row
+					25 cell
+						26 text 冰冻药水
+					27 cell
+						28 text 稀有
+					29 cell
+						30 text 3
+					31 cell
+						32 text 3
+				33 row
+					34 cell
+						35 text 草甲
+					36 cell
+						37 text 古朴
+					38 cell
+						39 text 3
+					40 cell
+						41 text 2
+				42 row
+					43 cell
+						44 text 连弩
+					45 cell
+						46 text 古朴
+					47 cell
+						48 text 2
+					49 cell
+						50 text 2
+				51 row
+					52 cell
+						53 text 不变应万变-改
+					54 cell
+						55 text 职业
+					56 cell
+						57 text 1
+					58 cell
+						59 text 3
+				60 row
+					61 cell
+						62 text 快意恩仇
+					63 cell
+						64 text 职业
+					65 cell
+						66 text 1
+					67 cell
+						68 text 3
+				69 row
+					70 cell
+						71 text 剧毒药水
+					72 cell
+						73 text 稀有
+					74 cell
+						75 text 1
+					76 cell
+						77 text 3
+				78 row
+					79 cell
+						80 text 口粮
+					81 cell
+						82 text 稀有
+					83 cell
+						84 text 1
+					85 cell
+						86 text 3
+				87 row
+					88 cell
+						89 text 初始攻击
+					90 cell
+						91 text 初始
+					92 cell
+						93 text 2
+					94 cell
+						95 text 1
+				96 row
+					97 cell
+						98 text 矿工炸药
+					99 cell
+						100 text 古朴
+					101 cell
+						102 text 1
+					103 cell
+						104 text 2
+				105 row
+					106 cell
+						107 text 法力光波
+					108 cell
+						109 text 古朴
+					110 cell
+						111 text 1
+					112 cell
+						113 text 2
+				114 row
+					115 cell
+						116 text 生命箭
+					117 cell
+						118 text 古朴
+					119 cell
+						120 text 1
+					121 cell
+						122 text 2
+				123 row
+					124 cell
+						125 text 破甲箭
+					126 cell
+						127 text 古朴
+					128 cell
+						129 text 1
+					130 cell
+						131 text 2
+			132 heading 按驱动对比, Value: 3
+				133 text 按驱动对比
+			134 table
+				135 row
+					136 cell
+						137 text 分组
+					138 cell
+						139 text 局数
+					140 cell
+						141 text 通关率
+					142 cell
+						143 text 撤离率
+					144 cell
+						145 text 均价值
+				146 row
+					147 cell
+						148 text human
+					149 cell
+						150 text 1
+					151 cell
+						152 text 100%
+					153 cell
+						154 text 100%
+					155 cell
+						156 text 47
+			157 heading 按职业对比, Value: 3
+				158 text 按职业对比
+			159 table
+				160 row
+					161 cell
+						162 text 分组
+					163 cell
+						164 text 局数
+					165 cell
+						166 text 通关率
+					167 cell
+						168 text 撤离率
+					169 cell
+						170 text 均价值
+				171 row
+					172 cell
+						173 text 侠客
+					174 cell
+						175 text 1
+					176 cell
+						177 text 100%
+					178 cell
+						179 text 100%
+					180 cell
+						181 text 47
+			182 heading 按模式对比, Value: 3
+				183 text 按模式对比
+			184 table
+				185 row
+					186 cell
+						187 text 分组
+					188 cell
+						189 text 局数
+					190 cell
+						191 text 通关率
+					192 cell
+						193 text 撤离率
+					194 cell
+						195 text 均价值
+				196 row
+					197 cell
+						198 text standard
+					199 cell
+						200 text 1
+					201 cell
+						202 text 100%
+					203 cell
+						204 text 100%
+					205 cell
+						206 text 47
+			207 heading 最近 20 局, Value: 3
+				208 text 最近 20 局
+			209 table
+				210 row
+					211 cell
+						212 text 时间
+					213 cell
+						214 text 驱动
+					215 cell
+						216 text 结局
+					217 cell
+						218 text 层
+					219 cell
+						220 text 行动
+					221 cell
+						222 text 带出价值
+				223 row
+					224 cell
+						225 text 10-02 20:43
+					226 cell
+						227 text human
+					228 cell
+						229 text 通关撤离
+					230 cell
+						231 text 4
+					232 cell
+						233 text 56
+					234 cell
+						235 text 47
+			236 button 导出 JSON
+			237 button 导出 CSV
+			238 button 清空记录
+
+The focused UI element is 0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/

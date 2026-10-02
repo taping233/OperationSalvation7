@@ -1,0 +1,215 @@
+Browser tab: 10, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5336/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/
+	1 container
+		2 button Description: 关闭, ID: ovCloseX
+		3 container hubMain
+			4 container
+				5 heading 远征基地, Value: 2
+					6 text 远征基地
+				7 text 档位 01
+				8 button ← 返回
+				9 button
+				10 image wood
+				11 text  木材  0
+				12 image bread
+				13 text  口粮  0
+				14 image key
+				15 text  钥匙  0
+				16 image coin
+				17 text  储备  0  币
+			18 container
+				19 button flag 出发
+					20 image flag
+					21 text 出发
+				22 button home 仓库
+					23 image home
+					24 text 仓库
+				25 button coin 商店
+					26 image coin
+					27 text 商店
+				28 button tools 升级
+					29 image tools
+					30 text 升级
+				31 button medal 人物
+					32 image medal
+					33 text 人物
+				34 button trophy 成就·收藏
+					35 image trophy
+					36 text 成就·收藏
+			37 container
+				38 text ARCHIVE COLLECTION // 07
+				39 heading 成就·收藏, Value: 3
+					40 text 成就·收藏
+				41 text 卡背、成就与人物收藏分区归档。切换分类不会离开基地，也不会丢失当前浏览位置。
+				42 image notes
+				43 text 见闻纪念 · 1/3 《最后一盏引路灯》的线索已记入档案，等待下一次探索。不影响地图与战力。
+				44 text 卡背
+				45 text 1/7
+				46 text 成就
+				47 text 5/26
+				48 text 人物收藏
+				49 text 0/67
+				50 container 收藏分类
+					51 checkbox cards 卡背图鉴, Value: 0
+						52 image cards
+						53 text  卡背图鉴
+					54 checkbox trophy 成就记录, Value: 1
+						55 image trophy
+						56 text  成就记录
+					57 checkbox sparkles 人物收藏, Value: 0
+						58 image sparkles
+						59 text  人物收藏
+				60 heading trophy 成就记录 5 / 26 已解锁, Value: 3
+					61 image trophy
+					62 text  成就记录  5 / 26 已解锁
+				63 container
+					64 image exit
+					65 text 初出茅庐 首次撤离成功 奖励：
+					66 image wood
+					67 text  ×2
+					68 button 领取
+				69 container
+					70 image bag
+					71 text 老练搜刮者 累计撤离成功 3 次 奖励：
+					72 image bread
+					73 text  ×2
+				74 container
+					75 image swords
+					76 text 猎手 累计击败 10 个敌人 奖励：
+					77 image wood
+					78 text  ×2 
+					79 image cards
+					80 text  猎手皮纸
+					81 button 领取
+				82 container
+					83 image skull
+					84 text 破壁者 首次击败污染核心的变异首脑 奖励：
+					85 image wood
+					86 text  ×3 
+					87 image cards
+					88 text  弑神黑曜
+					89 button 领取
+				90 container
+					91 image crystal
+					92 text 净化征服者 击败全部 3 只变异首脑 奖励：
+					93 image bread
+					94 text  ×3 
+					95 image cards
+					96 text  核心星轨
+				97 container
+					98 image coin
+					99 text 小有积蓄 单局撤离时携带 ≥ 30 币 奖励：
+					100 image bread
+					101 text  ×2 
+					102 image cards
+					103 text  富商锦缎
+				104 container
+					105 image archive
+					106 text 仓廪充实 累计运回 20 张卡牌入库 奖励：
+					107 image bread
+					108 text  ×2 
+					109 image cards
+					110 text  仓廪木纹
+					111 button 领取
+				112 container
+					113 image bag
+					114 text 能工巧匠 背包扩建至满级（30 格） 奖励：
+					115 image bread
+					116 text  ×3
+				117 container
+					118 image paw
+					119 text 最忠实的伙伴 宠物安全格升满（6 格） 奖励：
+					120 image wood
+					121 text  ×3 
+					122 image cards
+					123 text  忠犬爪印
+				124 container
+					125 image medal
+					126 text 崭露头角 任意职业熟练度达到 3 级 奖励：
+					127 image wood
+					128 text  ×2
+					129 button 领取
+				130 container
+					131 image coin
+					132 text 珍品收藏家 收藏桌游珍宝「金币」 奖励：
+					133 image wood
+					134 text  ×2
+				135 container
+					136 image medal
+					137 text 传说典藏 收藏任意一张传说卡牌 奖励：
+					138 image bread
+					139 text  ×2
+				140 container
+					141 image home
+					142 text 博物学家 收藏 5 张不同的卡牌 奖励：
+					143 image bread
+					144 text  ×3
+				145 container
+					146 image paw
+					147 text 驯养新手 首次孵化出一只宠物 奖励：
+					148 image bread
+					149 text  ×2
+				150 container
+					151 image crystal
+					152 text 孵蛋专家 累计孵化 3 只宠物 奖励：
+					153 image wood
+					154 text  ×2
+				155 container
+					156 image medal
+					157 text 心有灵犀 任意宠物升到满级（Lv.5） 奖励：
+					158 image wood
+					159 text  ×3
+				160 container
+					161 image home
+					162 text 宠物满堂 集齐全部 6 只宠物 奖励：
+					163 image bread
+					164 text  ×4
+				165 container
+					166 image bolt
+					167 text 无限能源 在一回合内打出 10 张及以上的招式（0 费连招流可达成） 奖励：
+					168 image bread
+					169 text  ×2
+				170 container
+					171 image swords
+					172 text 武器大师 在一场战斗中穿戴 5 件装备及以上 奖励：
+					173 image wood
+					174 text  ×2
+				175 container
+					176 image gem
+					177 text 符文爱好者 仓库拥有 5 块不同属性的符文 奖励：
+					178 image key
+					179 text  ×2
+				180 container
+					181 image exit
+					182 text 拯救者 击败 2 位研究所最终 BOSS 奖励：
+					183 image bread
+					184 text  ×4
+				185 container
+					186 image sparkles
+					187 text 好美的花瓶！ 仓库拥有 1 块双属性的彩虹符文 奖励：
+					188 image key
+					189 text  ×3
+				190 container
+					191 image runner
+					192 text 借过 一回合内击杀完全形态·元素领主的复活体 奖励：
+					193 image wood
+					194 text  ×3
+				195 container
+					196 image gem
+					197 text 实验数据·铜 研究所累计结算分数达 500 奖励：
+					198 image key
+					199 text  ×3
+				200 container
+					201 image gem
+					202 text 实验数据·银 研究所累计结算分数达 1500 奖励：
+					203 image cards
+					204 text  雷殛
+				205 container
+					206 image crystal
+					207 text 实验数据·金 研究所累计结算分数达 4000 奖励：
+					208 image cards
+					209 text  骷髅王剑
+				210 container
+					211 text 0 1
+
+The focused UI element is 0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/

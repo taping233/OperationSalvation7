@@ -1,0 +1,313 @@
+{
+  "date": "2026-10-02",
+  "headProvidedByParent": "c6ee206840",
+  "scope": "Read-only source and prior evidence; report-only writes in this directory.",
+  "evidenceLevels": {
+    "S": "Current source/static route",
+    "P": "Prior real-registry isolated probe, playback bypassed",
+    "H": "Personally reviewed historical real-click image",
+    "U": "Unverified",
+    "B": "Current real-click in-app evidence collected by root, personally reviewed by this agent"
+  },
+  "reuse": {
+    "snapshotFile": "source-snapshot.json",
+    "snapshotHashesChecked": 23,
+    "snapshotHashMismatches": 0,
+    "soundSha256": "7616fd3686c0c6d1a3471fba39882ba0e601787e1ad57648b317155f90430698",
+    "audioAuditSourceMatches": true,
+    "dispatchProbeSourceMatches": true,
+    "reranBroadAudit": false,
+    "literalCallSites": 114,
+    "literalUniqueCueNames": 61,
+    "unhandledLiteralCallSites": 23,
+    "unhandledLiteralUniqueCueNames": 20,
+    "catalogCueCount": 107,
+    "catalogVariantCount": 107,
+    "catalogMissingFiles": 0,
+    "countLimit": "Literal sites only; dynamic cues listed separately. Disk and registry membership do not prove audibility or reachability."
+  },
+  "historicalReview": {
+    "evidenceFile": "docs/evidence/2026-10-02-seven-departments-review/v2/browser-evidence.json",
+    "platform": "Codex In-app Browser",
+    "origin": "http://127.0.0.1:5336/",
+    "viewport": {
+      "width": 1183,
+      "height": 764
+    },
+    "personallyViewedImages": [
+      "current-title.jpg",
+      "current-base.jpg",
+      "current-preparation.jpg",
+      "current-character.jpg",
+      "current-supply.jpg",
+      "current-map.jpg",
+      "current-studio.jpg",
+      "current-slots.jpg"
+    ],
+    "newBrowserCollection": false,
+    "battleImageViewed": false,
+    "battleCompletionVerified": false,
+    "inputProvenance": "Prior evidence declares normal real UI clicks: new slot, preparation, class, supply, adjacent encounter. No invented save or node jump. Battle AX observation is not a battle screenshot.",
+    "limits": "One prior 1183x764 window; no battle/extraction/ending image and no live verification."
+  },
+  "additionalSourceHashes": {
+    "game/src/battle/core/battle.lifecycle.js": "fa8aa12cc7644ba12ce1936541bf7d2854d14644684258d130bbd6d0ed490265",
+    "game/src/battle/view/battle.vfx.js": "43e9b4514b2cbf9710dc5e46442483c985ae2e310f9f2ea6c30fa3f080e99a4a",
+    "game/src/battle/view/battle.layers.js": "e9ff86fe575dec41d755e350f3c2e8f3d2996eb9f417e9a9e1013a11e70ab83e",
+    "game/src/battle/view/battle.intent.view.js": "c2ff4f02f246f330d6b64c2ac2a8dd25b480e769f171abc0376172f9ac2c37b5",
+    "game/src/battle/view/battle.preview.js": "e5ad2df05da767269e5224aa73ab26da5ac8c3b46d1db0736ab17d2a4281432e",
+    "game/src/ui/overlay.js": "e628b164fb1b0b36765997ee9853f29fa94d83672819808c8902b35b663cf557",
+    "game/src/run/game.run.flow.js": "52d31e7811be56dd191b5d7a65d4a4124affc6f68c5f0d6698d01c4d7a377788",
+    "game/src/run/game.run.altar.js": "9249104eb75dda983f18dc064edac3810347e8fcba6699bca6994c245d11a7e1"
+  },
+  "findings": [
+    {
+      "id": "E01",
+      "kind": "confirmed-gap",
+      "priority": "first",
+      "title": "Dedicated cue calls are disconnected from the current registry",
+      "levels": [
+        "S",
+        "P"
+      ],
+      "sources": [
+        "game/src/main.js:16",
+        "game/src/audio/sound.js:183",
+        "game/src/audio/sound.js:272",
+        "game/src/audio/sound.js:336",
+        "game/src/audio/sound.js:417",
+        "game/src/audio/sound.bank.js:14",
+        "game/src/hub/game.hub.depart.js:333",
+        "game/src/hub/game.hub.depart.js:349",
+        "game/src/run/game.run.altar.js:796",
+        "game/src/battle/core/battle.lifecycle.js:135",
+        "game/src/battle/core/battle.lifecycle.js:240",
+        "game/src/battle/view/battle.vfx.js:315",
+        "game/src/run/game.run.flow.js:402",
+        "audio-audit.json",
+        "dispatch-probe.json"
+      ],
+      "counterevidence": [
+        "Global button click exists at sound.js:565",
+        "card/victory/phase probe as registered",
+        "hit/hurt/kill and BGM are present; no claim of complete silence"
+      ],
+      "limit": "Registry gaps and selected branch structure are proven; actual cue reachability and total sound output are untested.",
+      "next": "Contract-test event-to-registry resolution, then normal preparation/search/first-battle in current approved in-app browser with cue logs and listening; separately verify late branches."
+    },
+    {
+      "id": "E02",
+      "kind": "confirmed-gap",
+      "priority": "with-E01",
+      "title": "Overlay scene hooks have no exported Sound.scene method",
+      "levels": [
+        "S",
+        "P"
+      ],
+      "sources": [
+        "game/src/ui/overlay.js:141",
+        "game/src/ui/overlay.js:192",
+        "game/src/run/game.run.altar.js:46",
+        "game/src/audio/sound.js:584",
+        "dispatch-probe.json"
+      ],
+      "counterevidence": [
+        "WinterSoundscape mode routing exists at sound.js:437",
+        "Boss and pressure controls exist",
+        "sfx('scene') at sound.js:303 is a separate registered single cue"
+      ],
+      "limit": "No listening; does not prove that all scenes lack ambience.",
+      "next": "Define scene-versus-mode contract and test public API; compare normal fire scene entry/exit in the current browser."
+    },
+    {
+      "id": "E03",
+      "kind": "confirmed-current-visual-gap",
+      "priority": "visual-first",
+      "title": "Pocket strip overlaps current supply window title",
+      "levels": [
+        "B",
+        "H",
+        "S"
+      ],
+      "sources": [
+        "current-supply.jpg",
+        "current-map.jpg",
+        "game/css/pocket-strip.css:13",
+        "game/css/pocket-strip.css:17",
+        "game/src/experience/pocket-strip.js:107",
+        "../browser/current-supply.png"
+      ],
+      "counterevidence": [
+        "Resource forecast is useful and noninteractive",
+        "Three cards remain readable and root successfully took saturated strike",
+        "Prior career-supply screenshot is a different scene and only supporting historical evidence"
+      ],
+      "limit": "Confirmed visually in one current 1183x764 window and supply node7; no DOM overlap area or other sizes measured.",
+      "next": "After authorized scoped implementation, recheck supply title and card claim plus map forecast in same current in-app window; no more reproduction needed."
+    },
+    {
+      "id": "E04",
+      "kind": "experience-hypothesis",
+      "priority": "after-E03",
+      "title": "Small preparation cards may require excessive reading effort",
+      "levels": [
+        "H",
+        "S"
+      ],
+      "sources": [
+        "current-preparation.jpg",
+        "current-studio.jpg",
+        "browser-evidence.json:preparationCard",
+        "game/src/hub/game.hub.depart.js:116",
+        "game/src/hub/game.hub.depart.js:145",
+        "game/src/hub/game.hub.depart.js:258",
+        "game/css/cards.css:113",
+        "game/css/card-v3.css:102"
+      ],
+      "counterevidence": [
+        "Bag cards support large detail view including fixed starter attack",
+        "Studio has large art/effect detail and filters",
+        "Cost/value/quantity/capacity and primary action are visible"
+      ],
+      "limit": "117x162 CSS boundary is a historical single card; computed style, clipping and actual decision failures untested.",
+      "next": "Inspect one long-effect card in the current window; verify detail discoverability, full rules and pick/remove action before redesign."
+    },
+    {
+      "id": "E05",
+      "kind": "preserve-choice",
+      "priority": "baseline",
+      "title": "Map combines legal next routes, direction and loss-economy forecast",
+      "levels": [
+        "B",
+        "H",
+        "S"
+      ],
+      "sources": [
+        "current-map.jpg",
+        "game/src/run/expedition.view.js:11",
+        "game/src/run/expedition.view.js:43",
+        "game/src/run/expedition.view.js:98",
+        "game/src/core/node-info.js:3",
+        "game/src/experience/pocket-strip.js:45",
+        "../browser/current-map.png"
+      ],
+      "counterevidence": [
+        "Type-level hints are not individual enemy/loot predictions",
+        "Risk probability belongs to layer pool",
+        "Straight-line gate estimate is not path cost; sparse entrance is not whole-run topology"
+      ],
+      "limit": "Decision depth and hidden-information policy require gameplay evidence, not an entrance screenshot.",
+      "next": "Normal route selection feedback loop in current window; only add known facts that do not reveal intended fog."
+    },
+    {
+      "id": "E06",
+      "kind": "preserve-choice-unverified-quality",
+      "priority": "baseline",
+      "title": "Combat already has calculated intent, bounded preview and kill beats",
+      "levels": [
+        "B",
+        "S",
+        "U"
+      ],
+      "sources": [
+        "game/src/battle/view/battle.layers.js:34",
+        "game/src/battle/view/battle.layers.js:691",
+        "game/src/battle/view/battle.layers.js:701",
+        "game/src/battle/view/battle.preview.js:110",
+        "game/src/battle/view/battle.preview.js:129",
+        "game/src/battle/view/battle.vfx.js:308",
+        "../browser/current-battle.png",
+        "../browser/current-battle-ax.txt",
+        "../browser/current-battle-reward.png",
+        "../browser/current-consumption-tutorial-ax.txt",
+        "../browser/browser-metadata.json"
+      ],
+      "counterevidence": [
+        "Current first-turn image shows three enemy attack intents4, HP4/4, player35/35, energy2/2, costs, end-turn and flee controls",
+        "Card row is low/overlapping but no failed play or expansion is proven",
+        "Source/entry image do not prove preview accuracy, kill timing, sound or completion",
+        "One normal battle and post-reward consumption tutorial completed by root; reward image confirms three foes and31/35HP",
+        "No failed card play proven; initial attack target clicks and final single-target auto-selection worked",
+        "Empty captured logs are not whole-chain error-free proof"
+      ],
+      "limit": "One ordinary battle click loop and tutorial confirmed; no dynamic kill sequence, exact preview audit, drag/keyboard, audio, four-layer, extraction or ending quality assessment.",
+      "next": "Do not repeat normal battle click loop. Future implementation validation only: preview-to-damage check, natural kill frames and cue listening; late-game separately."
+    },
+    {
+      "id": "E07",
+      "kind": "preserve-choice",
+      "priority": "baseline",
+      "title": "Shared winter/archive palette and action/card grammar survive deliberate studio variation",
+      "levels": [
+        "H",
+        "S"
+      ],
+      "sources": [
+        "current-title.jpg",
+        "current-base.jpg",
+        "current-preparation.jpg",
+        "current-character.jpg",
+        "current-supply.jpg",
+        "current-map.jpg",
+        "current-studio.jpg",
+        "current-slots.jpg",
+        "game/css/card-v3.css:14",
+        "source-snapshot.json",
+        "browser-evidence.json:studioSample"
+      ],
+      "counterevidence": [
+        "Some card silhouette art differs in polish from large character portraits",
+        "271 manifest entries and 271 catalog items are different populations",
+        "13 loaded first-screen images do not prove complete coverage or rights"
+      ],
+      "limit": "Eight historical screens only; no all-card mapping, asset provenance or release-readiness audit.",
+      "next": "Use one preparation/scenario/detail trio to validate information grammar and mapping before broad art replacement."
+    }
+  ],
+  "unverified": [
+    "Audio listening, decode and mixing",
+    "Dynamic kill frames, exact preview-to-damage comparison",
+    "Keyboard/drag inputs, four-layer/extraction/ending gameplay",
+    "Final small-card computed styles",
+    "Strip/title DOM overlap area and other scenes/sizes",
+    "All-card art coverage and licensing"
+  ],
+  "writes": [
+    "REPORT.md",
+    "findings.json"
+  ],
+  "gameModified": false,
+  "buildRun": false,
+  "servicesStarted": false,
+  "saveModified": false,
+  "committed": false,
+  "currentBrowserReview": {
+    "collector": "root",
+    "origin": "http://127.0.0.1:5336/",
+    "viewport": {
+      "width": 1183,
+      "height": 764
+    },
+    "personallyViewedImages": [
+      "../browser/current-map.png",
+      "../browser/current-supply.png",
+      "../browser/current-battle.png",
+      "../browser/current-battle-reward.png"
+    ],
+    "input": "Normal continue slot01/layer1, supply node7, take saturated strike, entrance, encounter",
+    "hashes": {
+      "current-map.png": "cbc946e97ebf703cf4627916cdff61ac980c068260ae3ff6c5f3ed326a6fe04e",
+      "current-supply.png": "864fb295d35848085d4ce5b1d08c7ca8f92414ca2b68b2436f1fe9ed4c5f974b",
+      "current-battle.png": "7b8425107c479cfe9a79cc2529bfe5d16638723d677b2fe22216a37980df926d"
+    },
+    "audioListened": false,
+    "battleCompleted": true,
+    "completionEvidence": [
+      "../browser/current-battle-reward.png",
+      "../browser/current-consumption-tutorial-ax.txt",
+      "../browser/browser-metadata.json",
+      "../browser/final-map.png"
+    ],
+    "completionScope": "Root normal initial-attack x3 plus one end-turn, three foes defeated, HP35 to31, claim reward, consumption tutorial acknowledged, stable map. Reward image and tutorial AX personally read; final map reported by root."
+  }
+}

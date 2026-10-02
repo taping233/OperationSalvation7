@@ -1,0 +1,187 @@
+Browser tab: 10, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5336/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/
+	1 container depMain
+		2 button 返回
+		3 container
+			4 text DEPARTURE STAGING // 06
+			5 heading bag 出发整备, Value: 2
+				6 image bag
+				7 text  出发整备
+			8 button
+			9 text 玩法【标准搜打撤】 · 点卡面或拖拽带入背包
+			10 image bag
+			11 text  背包  1/16  格
+			12 image coin
+			13 text  开局  0  币
+		14 container
+			15 heading archive 携带卡牌 点击卡面或拖到右侧带入 · 「仓 ×N」=剩余可带数, Value: 3
+				16 image archive
+				17 text  携带卡牌  点击卡面或拖到右侧带入 · 「仓 ×N」=剩余可带数
+			18 container depPool
+				19 checkbox Description: 带入连击箭，还可带 1 张, Value: 0
+					20 container
+						21 text 1
+						22 image 连击箭
+						23 text 连击箭 武术 · 古朴 攻（ -1 ）；如果你打出的上一张牌是武术牌，本牌变为 0 费。
+						24 image swords
+						25 text -1
+						26 image coin
+						27 text 2
+					28 text 仓 ×1
+				29 checkbox Description: 带入铸甲，还可带 1 张, Value: 0
+					30 container
+						31 text 1
+						32 image 铸甲
+						33 text 铸甲 武术 · 稀有
+						34 image plate
+						35 text 甲 10 消耗 1  张 装备 牌， +10 甲。
+						36 image coin
+						37 text 3
+					38 text 仓 ×1
+				39 checkbox Description: 带入连弩，还可带 2 张, Value: 0
+					40 container
+						41 text 0
+						42 image 连弩
+						43 text 连弩 装备 · 古朴
+						44 image cards
+						45 text 抽 1 主动技能 ： 直接释放手牌中的所有‘箭’，每释放 1 张，抽 1 张牌。
+						46 image coin
+						47 text 2
+					48 text 仓 ×2
+				49 checkbox Description: 带入草甲，还可带 3 张, Value: 0
+					50 container
+						51 text 0
+						52 image 草甲
+						53 text 草甲 装备 · 古朴
+						54 image plate
+						55 text 甲 5 装备 ： 装备 时获得 5 点 护甲 。
+						56 image coin
+						57 text 2
+					58 text 仓 ×3
+				59 checkbox Description: 带入矿工炸药，还可带 1 张, Value: 0
+					60 container
+						61 text 0
+						62 image 矿工炸药
+						63 text 矿工炸药 装备 · 古朴 消耗 该牌时，造成  4  点固定 伤害 。
+						64 image coin
+						65 text 2
+					66 text 仓 ×1
+				67 checkbox Description: 带入法力光波，还可带 1 张, Value: 0
+					68 container
+						69 text 1
+						70 image 法力光波
+						71 text 法力光波 法术 · 古朴 5 点法术 伤害
+						72 image sparkles
+						73 text 5'
+						74 text 法伤
+						75 image coin
+						76 text 2
+					77 text 仓 ×1
+				78 checkbox Description: 带入冰冻药水，还可带 3 张, Value: 0
+					79 container
+						80 text 0
+						81 image 冰冻药水
+						82 text 冰冻药水 道具 · 稀有 附加 冰冻 ，持续  1 回合 。
+						83 image coin
+						84 text 3
+					85 text 仓 ×3
+				86 checkbox Description: 带入剧毒药水，还可带 1 张, Value: 0
+					87 container
+						88 text 0
+						89 image 剧毒药水
+						90 text 剧毒药水 道具 · 稀有 对所有敌人附加 1 层 中毒 。
+						91 image coin
+						92 text 3
+					93 text 仓 ×1
+				94 checkbox Description: 带入高端研发，还可带 1 张, Value: 0
+					95 container
+						96 text 1
+						97 image 高端研发
+						98 text 高端研发 法术 · 稀有 发现 一张 2 费招式，在每个 回合开始时 ，使其 -1 费
+					99 text 仓 ×1
+				100 checkbox Description: 带入生命箭，还可带 1 张, Value: 0
+					101 container
+						102 text 1
+						103 image 生命箭
+						104 text 生命箭 武术 · 古朴 攻（ -1 ），获得  1  张随机卡牌。
+						105 image swords
+						106 text -1
+						107 image coin
+						108 text 2
+					109 text 仓 ×1
+				110 checkbox Description: 带入口粮，还可带 1 张, Value: 0
+					111 container
+						112 text 0
+						113 image 口粮
+						114 text 口粮 资源 · 稀有 升级宠物。
+						115 image coin
+						116 text 3
+					117 text 仓 ×1
+				118 checkbox Description: 带入包扎，还可带 1 张, Value: 0
+					119 container
+						120 text 1
+						121 image 包扎
+						122 text 包扎 武术 · 古朴
+						123 image heart
+						124 text 回 3
+						125 image plate
+						126 text 甲 3 +3  血， +3  甲。
+					127 text 仓 ×1
+				128 checkbox Description: 带入破甲箭，还可带 1 张, Value: 0
+					129 container
+						130 text 1
+						131 image 破甲箭
+						132 text 破甲箭 武术 · 古朴
+						133 image plate
+						134 text 甲 3 攻（ -1 ），获得  3  点 护甲 。
+						135 image swords
+						136 text -1
+						137 image coin
+						138 text 2
+					139 text 仓 ×1
+				140 checkbox Description: 带入法杖，还可带 1 张, Value: 0
+					141 container
+						142 text 0
+						143 image 法杖
+						144 text 法杖 装备 · 古朴 法伤 +1 。
+						145 image coin
+						146 text 2
+					147 text 仓 ×1
+				148 checkbox Description: 带入坚守，还可带 1 张, Value: 0
+					149 container
+						150 text 1
+						151 image 坚守
+						152 text 坚守 武术 · 古朴
+						153 image cards
+						154 text 抽 1
+						155 image plate
+						156 text 甲 5 +5  甲，抽  1  张牌。
+						157 image coin
+						158 text 2
+					159 text 仓 ×1
+				160 text （职业卡带出后无法带入对局——留在仓库收藏或出售）
+			161 heading bag 背包预览 拖入卡牌即可携带, Value: 3
+				162 image bag
+				163 text  背包预览  拖入卡牌即可携带
+			164 image paw
+			165 text  携带宠物
+			166 button paw 汪汪狗 Lv.1
+				167 image paw
+				168 text 汪汪狗
+				169 text Lv.1
+			170 container
+				171 text 「 初始攻击 」×5 已默认携带（固定）；首次出征可直接点「确认出发」，想自定义再从左侧把卡带入——只有装入背包的卡才能在对局使用。
+			172 container
+				173 image scroll
+				174 text  当前只带初始攻击出征——卡牌是对局的主要输出手段，空手出战会明显吃力，建议从左侧把卡牌带入背包。
+			175 button 初始攻击 ×5，固定携带，点击查看详情
+				176 container
+					177 text 1
+					178 image 初始攻击
+					179 text 初始攻击 武术 · 初始 攻（ +0 ）： 造成等同于攻击力的 伤害 。
+				180 text ×5
+			181 button exit 确认出发, ID: btnDeploy
+				182 image exit
+				183 text  确认出发
+
+The focused UI element is 0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/

@@ -1,0 +1,121 @@
+[
+  {
+    "path": "source-study/downloads/BrogueCE-v1.15.1-source.zip",
+    "status": "downloaded",
+    "bytes": 1411387,
+    "sha256": "b4b4a7b1f7df62df8c543e94984efb004396af56d1d6db6c63183589f46388e7",
+    "url": "https://codeload.github.com/tmewett/BrogueCE/zip/1ba4240b7a928ddf0ffb772717bf1d433cd63804",
+    "commit": "1ba4240b7a928ddf0ffb772717bf1d433cd63804",
+    "version": "1.15.1",
+    "executed": false,
+    "license": "AGPL-3.0-or-later source; tiles.png separate CC-BY-SA 4.0; icon and other asset reuse not independently approved"
+  },
+  {
+    "path": "source-study/downloads/readable/README.md",
+    "status": "extracted",
+    "bytes": 4037,
+    "sha256": "7e58252e67827e00a24a5caa4c9d5ab47f3cea30026833f5f38d94ef15070cdb",
+    "url": "https://raw.githubusercontent.com/tmewett/BrogueCE/1ba4240b7a928ddf0ffb772717bf1d433cd63804/README.md",
+    "archiveEntry": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/README.md",
+    "commit": "1ba4240b7a928ddf0ffb772717bf1d433cd63804",
+    "version": "1.15.1",
+    "executed": false,
+    "license": "AGPL-3.0+ source; preserve headers"
+  },
+  {
+    "path": "source-study/downloads/readable/LICENSE.txt",
+    "status": "extracted",
+    "bytes": 34519,
+    "sha256": "91b65277959ec273763d28ef002e83a6b3fba57c7a35436c9e5b66536333d720",
+    "url": "https://raw.githubusercontent.com/tmewett/BrogueCE/1ba4240b7a928ddf0ffb772717bf1d433cd63804/LICENSE.txt",
+    "archiveEntry": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/LICENSE.txt",
+    "commit": "1ba4240b7a928ddf0ffb772717bf1d433cd63804",
+    "version": "1.15.1",
+    "executed": false,
+    "license": "AGPL-3.0+ source; preserve headers"
+  },
+  {
+    "path": "source-study/downloads/readable/bin/assets/LICENSE.txt",
+    "status": "extracted",
+    "bytes": 764,
+    "sha256": "b9b40facc880ef072a946afffdaed5260cb8928077df971326e185de35df165d",
+    "url": "https://raw.githubusercontent.com/tmewett/BrogueCE/1ba4240b7a928ddf0ffb772717bf1d433cd63804/bin/assets/LICENSE.txt",
+    "archiveEntry": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/bin/assets/LICENSE.txt",
+    "commit": "1ba4240b7a928ddf0ffb772717bf1d433cd63804",
+    "version": "1.15.1",
+    "executed": false,
+    "license": "per asset declaration"
+  },
+  {
+    "path": "source-study/downloads/readable/src/brogue/Architect.c",
+    "status": "extracted",
+    "bytes": 159636,
+    "sha256": "102add30e7bdf3964e173efa1c84befd8b46fa04c8a2d0d73e651c2e78da6912",
+    "url": "https://raw.githubusercontent.com/tmewett/BrogueCE/1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/brogue/Architect.c",
+    "archiveEntry": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/brogue/Architect.c",
+    "commit": "1ba4240b7a928ddf0ffb772717bf1d433cd63804",
+    "version": "1.15.1",
+    "executed": false,
+    "license": "AGPL-3.0+ source; preserve headers"
+  },
+  {
+    "path": "source-study/downloads/readable/src/brogue/Items.c",
+    "status": "extracted",
+    "bytes": 340209,
+    "sha256": "00b4055fc3dbcc42eda8cfe2d2997b084bd86fbed410064c32f2965279bfa113",
+    "url": "https://raw.githubusercontent.com/tmewett/BrogueCE/1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/brogue/Items.c",
+    "archiveEntry": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/brogue/Items.c",
+    "commit": "1ba4240b7a928ddf0ffb772717bf1d433cd63804",
+    "version": "1.15.1",
+    "executed": false,
+    "license": "AGPL-3.0+ source; preserve headers"
+  },
+  {
+    "path": "source-study/downloads/readable/src/brogue/RogueMain.c",
+    "status": "extracted",
+    "bytes": 51826,
+    "sha256": "d90481e632f785bea01e912e51a03250ac8f9d2aab29c41b9ac0e411bcbf0939",
+    "url": "https://raw.githubusercontent.com/tmewett/BrogueCE/1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/brogue/RogueMain.c",
+    "archiveEntry": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/brogue/RogueMain.c",
+    "commit": "1ba4240b7a928ddf0ffb772717bf1d433cd63804",
+    "version": "1.15.1",
+    "executed": false,
+    "license": "AGPL-3.0+ source; preserve headers"
+  },
+  {
+    "path": "source-study/downloads/readable/src/brogue/Time.c",
+    "status": "extracted",
+    "bytes": 106177,
+    "sha256": "f74edd00b30ecc128c5455afb8660d6a339b740b57dd68d541b53cf08ff4b1b0",
+    "url": "https://raw.githubusercontent.com/tmewett/BrogueCE/1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/brogue/Time.c",
+    "archiveEntry": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/brogue/Time.c",
+    "commit": "1ba4240b7a928ddf0ffb772717bf1d433cd63804",
+    "version": "1.15.1",
+    "executed": false,
+    "license": "AGPL-3.0+ source; preserve headers"
+  },
+  {
+    "path": "source-study/downloads/readable/src/brogue/Rogue.h",
+    "status": "extracted",
+    "bytes": 143562,
+    "sha256": "b3a2d7f801369dadd7e293ac75fb1fd00f2915b620a0961f7e6bbb22dc6ac704",
+    "url": "https://raw.githubusercontent.com/tmewett/BrogueCE/1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/brogue/Rogue.h",
+    "archiveEntry": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/brogue/Rogue.h",
+    "commit": "1ba4240b7a928ddf0ffb772717bf1d433cd63804",
+    "version": "1.15.1",
+    "executed": false,
+    "license": "AGPL-3.0+ source; preserve headers"
+  },
+  {
+    "path": "source-study/downloads/readable/src/brogue/Movement.c",
+    "status": "extracted",
+    "bytes": 97317,
+    "sha256": "69ea5b07feb70792046b513b0c44a40d5018bcc3ee7bbbdbf20bd865cb4f650b",
+    "url": "https://raw.githubusercontent.com/tmewett/BrogueCE/1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/brogue/Movement.c",
+    "archiveEntry": "BrogueCE-1ba4240b7a928ddf0ffb772717bf1d433cd63804/src/brogue/Movement.c",
+    "commit": "1ba4240b7a928ddf0ffb772717bf1d433cd63804",
+    "version": "1.15.1",
+    "executed": false,
+    "license": "AGPL-3.0-or-later source; preserve headers"
+  }
+]

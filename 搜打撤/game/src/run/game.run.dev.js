@@ -106,21 +106,23 @@ function openDevConsole() {
   const notInRun = () => !game.runActive && !game.battleActive;
   const debugBody = () => `
     <div class="devc-grid">
-      <p class="ov-note">调试用面板（Ctrl+L 开关）——修改会立即写入本局存档，别在正经挑战里用。</p>
+      <p class="ov-note">修改会立即写入本局存档，别在正经挑战里用；执行记录写入左侧日志（带「开发者：」前缀，可追溯目标与结果）。</p>
       ${notInRun() ? '<p class="ov-note">资源/发卡/战斗调试仅在对局或战斗中生效——先开一局再回来。</p>' : ''}
-      <section class="devc-sec"><b class="devc-h">资源</b><div class="devc-row">
+      <section class="devc-sec"><b class="devc-h">资源 <span class="devc-scope">写入本局存档</span></b><div class="devc-btns">
         <button class="hs-btn" data-act="devcCoin" data-n="50">+50 币</button><button class="hs-btn" data-act="devcCoin" data-n="200">+200 币</button>
         <button class="hs-btn" data-act="devcHeal" data-n="10">回 10 血</button><button class="hs-btn" data-act="devcHeal" data-n="999">回满血</button>
       </div></section>
-      <section class="devc-sec"><b class="devc-h">指定卡牌</b>
+      <section class="devc-sec"><b class="devc-h">指定卡牌 <span class="devc-scope">发牌写入本局</span></b>
         <input id="devcSearch" class="clib-search" placeholder="输入卡名搜索，如：江湖救急" value="${esc(query.q)}">
         <div class="devc-hits" id="devcHits">${hitsHTML()}</div>
       </section>
-      ${devBattle() ? `<section class="devc-sec"><b class="devc-h">战斗调试</b><div class="devc-row">
+      ${devBattle() ? `<section class="devc-sec"><b class="devc-h">战斗调试 <span class="devc-scope">仅当前战斗</span></b><div class="devc-btns">
         <button class="hs-btn" data-act="devcB" data-k="energy">能量回满</button><button class="hs-btn" data-act="devcB" data-k="draw" data-n="2">抽 2 张</button>
         <button class="hs-btn" data-act="devcB" data-k="heal">生命回满</button><button class="hs-btn" data-act="devcB" data-k="freezeAll">冰冻敌人×2回合</button>
-        <button class="hs-btn" data-act="devcB" data-k="damageAll" data-n="10">全体 10 伤</button><button class="hs-btn" data-act="devcB" data-k="win">直接胜利</button>
-      </div></section>` : ''}
+        <button class="hs-btn" data-act="devcB" data-k="damageAll" data-n="10">全体 10 伤</button><button class="hs-btn" data-act="devcB" data-k="win" title="调试辅助：跳过正常战斗结算，不计入真实战斗胜率结论">直接胜利<span class="devc-aux">辅助</span></button>
+      </div>
+      <p class="ov-note">「直接胜利」是调试辅助结果，不能当自然推进看待。</p></section>` : ''}
+      <p class="ov-note" data-route-debug>${routeInfo()}</p>
     </div>`;
   const TABS = [
     { id: 'debug', name: '调试' },
@@ -132,7 +134,7 @@ function openDevConsole() {
     `<button class="hs-btn sm${t.id === tab ? ' ok' : ''}" data-act="devcTab" data-tab="${t.id}">${t.name}</button>`).join('')}</div>`;
   const bodyOf = () => tab === 'debug' ? debugBody()
     : tab === 'agent' ? agentTabHTML()
-    : tab === 'data' ? dataPanelHTML()
+    : tab === 'data' ? `<div class="devc-shell-note">开发壳视图：数据与「跑局数据」页<b>同源</b>（同一记录与统计规则），本页签只多这层开发入口标注。</div>${dataPanelHTML()}`
     : keysTabHTML();
   const bindTab = () => {
     if (tab === 'debug') {
@@ -157,8 +159,11 @@ function openDevConsole() {
   };
   const render = () => {
     UI.showOverlay('[[icon:tools]] 开发者控制台', `
+      <div class="devc-topbar">
+        <span class="devc-badge">开发工具 · 操作可能影响存档</span>
+        <span class="devc-badge sub">Ctrl+L 开关</span>
+      </div>
       ${tabsHTML()}
-      <p class="ov-note" data-route-debug>${routeInfo()}</p>
       ${bodyOf()}
       <div class="ov-btns"><button class="ov-btn ok" data-act="devcClose">关闭（Esc / Ctrl+L）</button></div>`, 'discover');
     UI._inputHandler = tab === 'debug' ? inputHandler : null;

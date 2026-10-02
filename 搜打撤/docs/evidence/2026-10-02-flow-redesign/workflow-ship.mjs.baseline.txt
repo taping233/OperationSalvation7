@@ -1,0 +1,138 @@
+// workflow-ship.mjs —— 收官落库一条龙（2026-10-02 立项，老板令固化落库流程）。
+// 把「授权→落库完成」压成一条命令：盘点分类 → 混树安全分组 → 逐笔 add+commit（过门禁）→ 销账提醒。
+// 固化的坑（来源：10-02 落库耗时复盘）——
+//   ① 混树守卫反分笔：game/tests/scripts/narrative/包配置互相是验收门相关域，拆开提交必被
+//     stagedChanges 拦（90 项同域未暂存形态），故按「代码一笔+文档一笔」两段式，不 finer；
+//   ② 无主物品误带（26a5254 形态）：入库前用 gate 同款 parseUnclaimedPaths 预检，命中即拒绝并列清单；
+//   ③ 会话中间文件/无主未跟踪：不自动入库，列提示由人工决定；
+//   ④ 大合集触 FULL_SOURCE 48s+ 全量：plan 阶段预估模式与预期耗时，apply 时明示「这是合理成本」；
+//   ⑤ pathspec 相对域坑：统一在 REPO_ROOT 跑 git，路径带 搜打撤/ 前缀，杜绝少前缀返工。
+import { execFileSync } from 'node:child_process';
+import { existsSync, readFileSync } from 'node:fs';
+import path from 'node:path';
+import { parseUnclaimedPaths } from './acceptance-gate.mjs';
+
+const CODE_ROOTS = ['game/', 'tests/', 'scripts/', 'narrative/'];
+const CODE_FILES = ['package.json', 'package-lock.json', 'vite.config.js'];
+const DOC_ROOTS = ['docs/', '.github/'];
+const DOC_FILES = ['README.md', 'AGENTS.md', '.gitignore', '.gitattributes'];
+// 会话中间文件/构建产物模式：永不自动入库（提示人工处置）。
+// __try_* 模式不限层级（去前导 / 锚定）：根目录探针与子目录探针都要命中（实测坑：/\/__try_…$/ 漏根目录）。
+const EXCLUDE_PATTERNS = [/^\.sfx-work\//, /^nul$/i, /\.tmp$/i, /__try_.*\.json$/, /^\.zcode\//, /^code-map\//];
+
+function git(root, args, options = {}) {
+  return execFileSync('git', ['-c', 'core.quotepath=false', ...args],
+    { cwd: root, encoding: 'utf8', maxBuffer: 32 * 1024 * 1024, ...options });
+}
+
+function statusEntries(repoRoot) {
+  // porcelain -z：每条记录一个 NUL 结尾，记录内是「XY<空格>path」（--no-renames 下无 R 的双 NUL 特例）。
+  const out = git(repoRoot, ['status', '--porcelain', '-z', '--no-renames']);
+  return out.split('\0')
+    .filter(Boolean)
+    .map(record => ({ status: record.slice(0, 2), path: record.slice(3) }))
+    .filter(entry => entry.path);
+}
+
+function toProjectPath(value) {
+  const normalized = value.replaceAll('\\', '/');
+  return normalized.startsWith('搜打撤/') ? normalized.slice('搜打撤/'.length) : normalized;
+}
+
+function classify(projectPath) {
+  if (CODE_ROOTS.some(root => projectPath.startsWith(root)) || CODE_FILES.includes(projectPath)) return 'code';
+  if (DOC_ROOTS.some(root => projectPath.startsWith(root)) || DOC_FILES.includes(projectPath)) return 'docs';
+  return 'unknown';
+}
+
+/** 落库计划：分类、两笔分组、排除项、无主预检、FULL 预估与销账提醒。 */
+export function planShip(projectRoot, { message } = {}) {
+  const repoRoot = path.resolve(projectRoot, '..');
+  const entries = statusEntries(repoRoot);
+  const unclaimedHits = [];
+  const registryPath = path.join(projectRoot, 'docs', 'PARALLEL-REGISTRY.md');
+  let unclaimed = [];
+  if (existsSync(registryPath)) {
+    unclaimed = parseUnclaimedPaths(readFileSync(registryPath, 'utf8'));
+  }
+
+  const buckets = { code: [], docs: [], unknown: [], excluded: [] };
+  for (const entry of entries) {
+    const project = toProjectPath(entry.path);
+    const repoRelative = entry.path;
+    if (EXCLUDE_PATTERNS.some(pattern => pattern.test(project))) { buckets.excluded.push(repoRelative); continue; }
+    if (entry.status === '??' && unclaimed.some(u => repoRelative === u || repoRelative.startsWith(u) || u.startsWith(repoRelative))) {
+      unclaimedHits.push(repoRelative);
+      continue;
+    }
+    const kind = classify(project);
+    buckets[kind].push(repoRelative);
+  }
+
+  // FULL_SOURCE 预估：代码笔命中公共边界路径即提示全量预期（口径与 gate FULL_SOURCE 一致的近似前缀）。
+  const fullHints = [
+    /^搜打撤\/game\/src\/(main|boot-order|game\.boot)\.js$/, /^搜打撤\/game\/src\/core\//,
+    /^搜打撤\/game\/src\/hub\/(base$|game\.storage|game\.bag\.settle|battle-settlement)/, /^搜打撤\/game\/src\/run\/game\.session/,
+    /^搜打撤\/game\/src\/battle\/(battle\.core|battle\.engine|battle\.runtime)/, /^搜打撤\/game\/src\/cards\/cards\.sync/,
+  ];
+  const expectFull = buckets.code.some(p => fullHints.some(re => re.test(p)));
+
+  const commits = [];
+  if (buckets.code.length) {
+    commits.push({
+      scope: 'code',
+      paths: buckets.code,
+      message: message
+        ? message
+        : `feat(vite): 收官落库（ship 一条龙）——代码/测试/脚本 ${buckets.code.length} 文件（自动分组；模式预估 ${expectFull ? 'FULL 全量 48s+，公共边界合理成本' : 'quick 定向'}）`,
+    });
+  }
+  if (buckets.docs.length) {
+    commits.push({
+      scope: 'docs',
+      paths: buckets.docs,
+      message: `docs(vite): 收官落库（ship 一条龙）——文档/证据 ${buckets.docs.length} 文件`,
+    });
+  }
+
+  // 销账提醒：REGISTRY 活跃行里标「完成未提交」的（落库后应回写哈希移已释放）。
+  const registryReminders = [];
+  if (existsSync(registryPath)) {
+    const text = readFileSync(registryPath, 'utf8');
+    for (const line of text.split('\n')) {
+      if (line.startsWith('| ') && /(完成未提交|待提交)/.test(line)) {
+        const name = (line.match(/\| ([^|]+（[^|）]+）)/) || [])[1]?.trim();
+        if (name) registryReminders.push(name);
+      }
+    }
+  }
+
+  return {
+    ok: unclaimedHits.length === 0 && commits.length > 0,
+    blocked: unclaimedHits.length ? `staged 预检命中 REGISTRY 无主物品（26a5254 事故形态），先认领/排除：${unclaimedHits.join('、')}` : null,
+    commits,
+    unknownPaths: buckets.unknown,
+    excludedPaths: buckets.excluded,
+    expectFull,
+    registryReminders,
+    hints: [
+      '默认预览不落库；确认后 --apply。',
+      '代码/文档两笔是混树守卫约束下的安全分组，不要试图拆更细（相关域未暂存必拦）。',
+      expectFull ? '代码笔将触发 FULL_SOURCE 全量（约 48-55s），属大合集验整树的合理成本。' : '代码笔预期 quick 定向门。',
+      buckets.unknown.length ? `未识别路径不入库，人工决定：${buckets.unknown.join('、')}` : '',
+    ].filter(Boolean),
+  };
+}
+
+/** 执行落库：逐笔 add+commit（pre-commit 门禁照常生效），返回逐笔结果。 */
+export function applyShip(projectRoot, plan) {
+  if (!plan?.ok) throw new Error(plan?.blocked || '计划为空或被阻断，先看 plan');
+  const repoRoot = path.resolve(projectRoot, '..');
+  const results = [];
+  for (const commit of plan.commits) {
+    git(repoRoot, ['add', '--', ...commit.paths]);
+    const out = git(repoRoot, ['commit', '-m', commit.message]);
+    results.push({ scope: commit.scope, files: commit.paths.length, commitOutput: out.trim().split('\n').slice(-2).join(' | ') });
+  }
+  return { ok: true, results, registryReminders: plan.registryReminders };
+}

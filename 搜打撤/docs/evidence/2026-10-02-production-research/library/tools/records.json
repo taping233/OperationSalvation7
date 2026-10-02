@@ -1,0 +1,394 @@
+[
+  {
+    "id": "rot-js",
+    "title": "rot.js：Roguelike 调度、事件队列与可复现随机源码",
+    "category": "open-source",
+    "author": "Ondřej Žára",
+    "publishedOrUpdated": "2024-11-13 (固定源码提交日期)",
+    "accessedAt": "2026-10-02",
+    "url": "https://github.com/ondras/rot.js",
+    "sourceType": "原作者开源仓库",
+    "qualityReason": "公开TS源码、手册与测试，下载锁定commit而非漂移分支",
+    "projectFit": "可研究四层探索的随机状态、战斗回合锁定及时间队列；不是替换现有节点图生成器",
+    "limitations": "仅下载小源码子集；未编译、运行或证明与当前战斗规则兼容；网格地图算法不等于本项目相邻节点设计",
+    "license": "BSD-3-Clause",
+    "licenseUrl": "https://raw.githubusercontent.com/ondras/rot.js/46782e248c2db9d379a5e4f13bb8323f18dff04b/license.txt",
+    "useStatus": "evaluate",
+    "takeaways": [
+      "随机状态可序列化；固定seed只在同一调用序列下重现。",
+      "回合引擎通过lock/unlock控制推进，可对照玩家选择期间禁止重入的现有实现。"
+    ],
+    "localFiles": [],
+    "bytes": 0,
+    "sha256": null,
+    "version": "2.2.1",
+    "commit": "46782e248c2db9d379a5e4f13bb8323f18dff04b",
+    "verification": {
+      "method": "web.open + 定向正文/许可核对；下载条目另校验固定commit原始字节",
+      "scope": "正文或仓库README；许可页/源码许可头",
+      "additionalUrls": []
+    }
+  },
+  {
+    "id": "howler",
+    "title": "howler.js：项目既有音频依赖的原始实现",
+    "category": "open-source",
+    "author": "James Simpson / GoldFire Studios",
+    "publishedOrUpdated": "2025-11-23 (固定源码提交日期)",
+    "accessedAt": "2026-10-02",
+    "url": "https://github.com/goldfire/howler.js",
+    "sourceType": "原作者开源仓库",
+    "qualityReason": "MIT许可和API说明可核对；本项目package.json已有howler ^2.2.4",
+    "projectFit": "优先追踪点击/确认/失败音效从动作到播放ID的接线、淡入淡出及解锁；减少额外音频依赖",
+    "limitations": "已有依赖不代表全部资产已接线；源文件下载未执行、未试听，需本项目真实动作验收",
+    "license": "MIT",
+    "licenseUrl": "https://raw.githubusercontent.com/goldfire/howler.js/1d3053576a860e9854645493ad6c4a72c6cc6e45/LICENSE.md",
+    "useStatus": "evaluate",
+    "takeaways": [
+      "音频sprite以毫秒偏移和时长定义，同包声音用名字触发。",
+      "play返回声音ID，可按实例管理暂停、音量、结束和播放错误。"
+    ],
+    "localFiles": [],
+    "bytes": 0,
+    "sha256": null,
+    "version": "2.2.4",
+    "commit": "1d3053576a860e9854645493ad6c4a72c6cc6e45",
+    "verification": {
+      "method": "web.open + 定向正文/许可核对；下载条目另校验固定commit原始字节",
+      "scope": "正文或仓库README；许可页/源码许可头",
+      "additionalUrls": []
+    }
+  },
+  {
+    "id": "jsfxr",
+    "title": "jsfxr：小型程序化音效生成源码",
+    "category": "open-source",
+    "author": "Eric Fredricksen / Chris McCormick",
+    "publishedOrUpdated": "2026-05-05 (固定源码提交日期)",
+    "accessedAt": "2026-10-02",
+    "url": "https://github.com/chr15m/jsfxr",
+    "sourceType": "原作者开源仓库",
+    "qualityReason": "公开原始合成器与RIFF封装源码，Unlicense已打开核验",
+    "projectFit": "对照项目已有sfx:gen脚本，为卡牌点击、获得战利品、危险提示建立一致短音色",
+    "limitations": "8-bit音色可能不合当前视觉气质；本轮不生成或试听声音；Pro商业产品不在此开源许可范围",
+    "license": "Unlicense",
+    "licenseUrl": "https://raw.githubusercontent.com/chr15m/jsfxr/b7b6aa27d62f8f356db267276bf54b451555c49d/UNLICENSE",
+    "useStatus": "evaluate",
+    "takeaways": [
+      "参数化短音效可留配置与seed，方便统一音色和复现。",
+      "源码许可明确，仍需试听响度、尖锐频段及大量重复动作的疲劳感。"
+    ],
+    "localFiles": [],
+    "bytes": 0,
+    "sha256": null,
+    "version": "1.4.0",
+    "commit": "b7b6aa27d62f8f356db267276bf54b451555c49d",
+    "verification": {
+      "method": "web.open + 定向正文/许可核对；下载条目另校验固定commit原始字节",
+      "scope": "正文或仓库README；许可页/源码许可头",
+      "additionalUrls": []
+    }
+  },
+  {
+    "id": "seedrandom",
+    "title": "seedrandom：局部随机流与状态回放源码",
+    "category": "open-source",
+    "author": "David Bau",
+    "publishedOrUpdated": "2019-09-14 (README版本发布日期)",
+    "accessedAt": "2026-10-02",
+    "url": "https://github.com/davidbau/seedrandom",
+    "sourceType": "原作者开源仓库",
+    "qualityReason": "固定3.0.5源码，MIT版权及授权直接保存在源码头",
+    "projectFit": "可供Agent配对跑局、撤离收益对比和随机卡牌bug重放评估；先对照现有随机源",
+    "limitations": "不得用全局Math.seedrandom形式污染Math.random；不同调用次数仍使轨迹偏离，非密码安全随机",
+    "license": "MIT（源码头内嵌授权；仓库API没有单独识别LICENSE）",
+    "licenseUrl": "https://raw.githubusercontent.com/davidbau/seedrandom/4460ad325a0a15273a211e509f03ae0beb99511a/seedrandom.js",
+    "useStatus": "evaluate",
+    "takeaways": [
+      "用局部PRNG实例维护探索、掉落和战斗各自随机流，避免视觉随机消耗影响玩法。",
+      "state选项可保存恢复内部状态；回放还需要同版本规则及动作日志。"
+    ],
+    "localFiles": [],
+    "bytes": 0,
+    "sha256": null,
+    "version": "3.0.5",
+    "commit": "4460ad325a0a15273a211e509f03ae0beb99511a",
+    "verification": {
+      "method": "web.open + 定向正文/许可核对；下载条目另校验固定commit原始字节",
+      "scope": "正文或仓库README；许可页/源码许可头",
+      "additionalUrls": []
+    }
+  },
+  {
+    "id": "inkjs",
+    "title": "inkjs：互动叙事运行时与分支选择参考",
+    "category": "open-source",
+    "author": "Yannick Lohse / inkle及贡献者",
+    "publishedOrUpdated": null,
+    "accessedAt": "2026-10-02",
+    "url": "https://github.com/y-lohse/inkjs",
+    "sourceType": "原作者开源仓库",
+    "qualityReason": "README提供浏览器与ESM用法及编译器/引擎边界，MIT已核验",
+    "projectFit": "评估四层事件的条件、访问次数与分支选择表达；可借鉴作者内容与运行状态分离",
+    "limitations": "本项目已有剧情编译脚本，先对照表达能力再决定是否值得新增依赖；未确认当前版本日期，未下载",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/y-lohse/inkjs/blob/master/LICENSE.md",
+    "useStatus": "evaluate",
+    "takeaways": [
+      "Story从JSON创建，Continue与currentChoices分别取文本和可选行动。",
+      "创作编译器与玩家运行时应分开，避免把完整编译工具塞进首屏。"
+    ],
+    "localFiles": [],
+    "bytes": 0,
+    "sha256": null,
+    "version": null,
+    "commit": null,
+    "verification": {
+      "method": "web.open + 定向正文/许可核对；下载条目另校验固定commit原始字节",
+      "scope": "正文或仓库README；许可页/源码许可头",
+      "additionalUrls": []
+    }
+  },
+  {
+    "id": "dexie",
+    "title": "Dexie：IndexedDB事务与版本化数据参考",
+    "category": "open-source",
+    "author": "David Fahlander及贡献者",
+    "publishedOrUpdated": null,
+    "accessedAt": "2026-10-02",
+    "url": "https://github.com/dexie/Dexie.js",
+    "sourceType": "原作者开源仓库与官方事务文档",
+    "qualityReason": "Apache-2.0许可及官方transaction说明均已打开",
+    "projectFit": "仅当确有存档体积或多实体原子写需要时评估；可参考局外仓库与跑局结果一次提交的事务边界",
+    "limitations": "不授权改现行存档，不建议仅为包装API迁移；await非数据库异步工作会影响事务生存期；日期未确认",
+    "license": "Apache-2.0；集成时核对NOTICE与依赖许可",
+    "licenseUrl": "https://github.com/dexie/Dexie.js/blob/master/LICENSE",
+    "useStatus": "evaluate",
+    "takeaways": [
+      "先构造结果再进入事务，避免在事务中等待网络或长计算。",
+      "事务成功与单次put成功分开记录；迁移必须覆盖旧版本和失败恢复。"
+    ],
+    "localFiles": [],
+    "bytes": 0,
+    "sha256": null,
+    "version": null,
+    "commit": null,
+    "verification": {
+      "method": "web.open + 定向正文/许可核对；下载条目另校验固定commit原始字节",
+      "scope": "仓库README、LICENSE及官方事务文档",
+      "additionalUrls": [
+        "https://dexie.org/docs/Dexie/Dexie.transaction()"
+      ]
+    }
+  },
+  {
+    "id": "idb",
+    "title": "idb：轻量IndexedDB Promise包装与事务陷阱",
+    "category": "open-source",
+    "author": "Jake Archibald及贡献者",
+    "publishedOrUpdated": null,
+    "accessedAt": "2026-10-02",
+    "url": "https://github.com/jakearchibald/idb",
+    "sourceType": "原作者开源仓库",
+    "qualityReason": "ISC许可清晰；作者文档明确说明tx.done和自动结束条件",
+    "projectFit": "作为现有存档原子性诊断的阅读材料；可帮助区分写入请求完成与事务已提交",
+    "limitations": "仅候选且未下载；不能与Dexie同时盲目引入；存档机制当前事实由工程诊断确认；日期未确认",
+    "license": "ISC",
+    "licenseUrl": "https://github.com/jakearchibald/idb/blob/main/LICENSE",
+    "useStatus": "evaluate",
+    "takeaways": [
+      "tx.done表示事务提交完成，不能只看单个put回调。",
+      "事务中await fetch会使事务提前关闭；读写流程需要短而连续。"
+    ],
+    "localFiles": [],
+    "bytes": 0,
+    "sha256": null,
+    "version": null,
+    "commit": null,
+    "verification": {
+      "method": "web.open + 定向正文/许可核对；下载条目另校验固定commit原始字节",
+      "scope": "正文或仓库README；许可页/源码许可头",
+      "additionalUrls": []
+    }
+  },
+  {
+    "id": "fast-check",
+    "title": "fast-check：规则不变量、状态序列和缩小失败案例",
+    "category": "tools",
+    "author": "Nicolas Dubien及贡献者",
+    "publishedOrUpdated": null,
+    "accessedAt": "2026-10-02",
+    "url": "https://github.com/dubzzz/fast-check",
+    "sourceType": "原作者开源仓库",
+    "qualityReason": "MIT许可；README展示seed/path重放、shrink与model-based testing",
+    "projectFit": "可用于战利品守恒、背包容量、费用扣除、撤离/死亡互斥，以及Agent动作序列合法性",
+    "limitations": "本轮未安装；先补重要规则的不变量，不能靠海量随机覆盖代替整局真人反馈；日期未确认",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/dubzzz/fast-check/blob/main/LICENSE",
+    "useStatus": "evaluate",
+    "takeaways": [
+      "失败输入可自动缩小，并记录seed和path复现。",
+      "状态机性质测试适合探索→战斗→结算→基地序列，避免只测孤立函数。"
+    ],
+    "localFiles": [],
+    "bytes": 0,
+    "sha256": null,
+    "version": null,
+    "commit": null,
+    "verification": {
+      "method": "web.open + 定向正文/许可核对；下载条目另校验固定commit原始字节",
+      "scope": "正文或仓库README；许可页/源码许可头",
+      "additionalUrls": []
+    }
+  },
+  {
+    "id": "vite-features",
+    "title": "Vite官方特性：动态导入与资源组织边界",
+    "category": "tools",
+    "author": "Vite团队",
+    "publishedOrUpdated": null,
+    "accessedAt": "2026-10-02",
+    "url": "https://vite.dev/guide/features.html",
+    "sourceType": "官方文档",
+    "qualityReason": "本项目直接使用Vite，官方给出glob和dynamic import的具体限制",
+    "projectFit": "为四层场景/卡牌说明/音效配置懒加载评审提供事实，不先重写项目入口",
+    "limitations": "在线文档随版本更新；应和当前锁定Vite版本匹配，未确认页面更新日期；本轮不build",
+    "license": "文档参考；Vite仓库MIT不自动替代第三方素材许可",
+    "licenseUrl": "https://github.com/vitejs/vite/blob/main/LICENSE",
+    "useStatus": "reference-only",
+    "takeaways": [
+      "import.meta.glob参数需字面量，属于Vite专有转换。",
+      "变量动态导入通常只支持一层文件名，深层场景路径应显式映射。"
+    ],
+    "localFiles": [],
+    "bytes": 0,
+    "sha256": null,
+    "version": null,
+    "commit": null,
+    "verification": {
+      "method": "web.open + 定向正文/许可核对；下载条目另校验固定commit原始字节",
+      "scope": "正文或仓库README；许可页/源码许可头",
+      "additionalUrls": []
+    }
+  },
+  {
+    "id": "chrome-performance",
+    "title": "Chrome Performance：运行期主线程与帧耗时诊断",
+    "category": "tools",
+    "author": "Google Chrome DevTools团队",
+    "publishedOrUpdated": "2024-09-17",
+    "accessedAt": "2026-10-02",
+    "url": "https://developer.chrome.com/docs/devtools/performance/overview",
+    "sourceType": "官方工具文档",
+    "qualityReason": "官方将录制、主线程、内存、CSS计算和FPS诊断分开说明",
+    "projectFit": "用于下一轮定位战斗卡牌刷新、节点动画、长局资源增长，先选实际交互窗口",
+    "limitations": "项目只允许当前平台内置浏览器；工具面板未提供时仅参考，不启动外部Chrome/Edge/CDP或headless",
+    "license": "文档CC BY 4.0；代码例Apache-2.0",
+    "licenseUrl": "https://developers.google.com/site-policies",
+    "useStatus": "reference-only",
+    "takeaways": [
+      "加载与运行期性能分别录制，不能用首屏指标代表长局稳定性。",
+      "用主线程和内存证据区分脚本、布局和资源保留，再确认具体动作。"
+    ],
+    "localFiles": [],
+    "bytes": 0,
+    "sha256": null,
+    "version": null,
+    "commit": null,
+    "verification": {
+      "method": "web.open + 定向正文/许可核对；下载条目另校验固定commit原始字节",
+      "scope": "正文或仓库README；许可页/源码许可头",
+      "additionalUrls": []
+    }
+  },
+  {
+    "id": "lighthouse",
+    "title": "Lighthouse：自动审计的适用范围与边界",
+    "category": "tools",
+    "author": "Google Chrome团队",
+    "publishedOrUpdated": "2025-06-02",
+    "accessedAt": "2026-10-02",
+    "url": "https://developer.chrome.com/docs/lighthouse/overview",
+    "sourceType": "官方工具文档",
+    "qualityReason": "官方列出performance/accessibility/best practices等审计类别",
+    "projectFit": "可作为卡牌面板/基地界面的网页技术检查候选；与真人玩法评估分开",
+    "limitations": "未运行；内置浏览器能力不足时不改用外部浏览器；分数不能代表好玩、卡牌平衡或可访问性完全合规",
+    "license": "文档CC BY 4.0；代码例Apache-2.0",
+    "licenseUrl": "https://developers.google.com/site-policies",
+    "useStatus": "reference-only",
+    "takeaways": [
+      "一次报告反映对应URL和环境，需要记录版本、设备和审计模式。",
+      "自动审计适合筛出技术问题，真实卡牌理解和撤离选择仍需玩家观察。"
+    ],
+    "localFiles": [],
+    "bytes": 0,
+    "sha256": null,
+    "version": null,
+    "commit": null,
+    "verification": {
+      "method": "web.open + 定向正文/许可核对；下载条目另校验固定commit原始字节",
+      "scope": "正文或仓库README；许可页/源码许可头",
+      "additionalUrls": []
+    }
+  },
+  {
+    "id": "mdn-autoplay",
+    "title": "MDN：浏览器音频自动播放阻止与真实输入解锁",
+    "category": "tools",
+    "author": "MDN贡献者",
+    "publishedOrUpdated": "2026-09-10",
+    "accessedAt": "2026-10-02",
+    "url": "https://developer.mozilla.org/en-US/docs/Web/Media/Guides/Autoplay",
+    "sourceType": "Web平台维护方文档",
+    "qualityReason": "明确区分无输入自动播放、可听音轨与策略差异，页面更新日期可查",
+    "projectFit": "检查标题页进入、刷新读档和首次卡牌行动是否真正有声；配合已有howler，不只核验素材存在",
+    "limitations": "不同浏览器策略不同；本轮仅资料，未做真实点击试听；不能用合成事件宣称真实解锁通过",
+    "license": "文档参考；MDN内容许可依官方说明，本轮不复制原文或代码",
+    "licenseUrl": "https://developer.mozilla.org/en-US/docs/MDN/Writing_guidelines/Attrib_copyright_license",
+    "useStatus": "reference-only",
+    "takeaways": [
+      "在真实用户动作后启用音频，并处理play Promise失败或播放错误。",
+      "刷新/后台返回需单独验证，不默认已有一次解锁便永远有效。"
+    ],
+    "localFiles": [],
+    "bytes": 0,
+    "sha256": null,
+    "version": null,
+    "commit": null,
+    "verification": {
+      "method": "web.open + 定向正文/许可核对；下载条目另校验固定commit原始字节",
+      "scope": "正文或仓库README；许可页/源码许可头",
+      "additionalUrls": []
+    }
+  },
+  {
+    "id": "2048-reference",
+    "title": "2048 原作者完整浏览器游戏源码归档（状态与结局流程参考）",
+    "category": "open-source",
+    "author": "Gabriele Cirulli及贡献者",
+    "publishedOrUpdated": "2024-10-24 (固定提交日期)",
+    "accessedAt": "2026-10-02",
+    "url": "https://github.com/gabrielecirulli/2048",
+    "sourceType": "原作者完整开源游戏",
+    "qualityReason": "原作者仓库MIT；固定commit完整ZIP，静态检查原始JS与LICENSE，不仅链接或库切片",
+    "projectFit": "仅对照输入→规则→存档→渲染→胜败/继续的分离；与根诊断的通关收束和结局后动作边界相关",
+    "limitations": "不是卡牌/roguelike或搜打撤玩法模板；历史全局JS非现行ESM架构；未运行。完整ZIP含Clear Sans字体等资产，此轮只核验代码MIT，不批准字体/logo/图像复用；需要另核第三方授权",
+    "license": "MIT（源码）；归档内第三方字体和品牌图像的复用未核实",
+    "licenseUrl": "https://github.com/gabrielecirulli/2048/blob/478b6ec346e3787f589e4af751378d06ded4cbbc/LICENSE.txt",
+    "useStatus": "evaluate",
+    "takeaways": [
+      "isGameTerminated让失败或未选择继续的胜利状态阻断新动作。",
+      "serialize包含won/over/keepPlaying，刷新恢复与显示层都读取同一状态。",
+      "input、storage、actuator作为GameManager依赖分开，便于沿动作链定位失效环节。"
+    ],
+    "localFiles": [],
+    "bytes": 0,
+    "sha256": null,
+    "version": null,
+    "commit": "478b6ec346e3787f589e4af751378d06ded4cbbc",
+    "verification": {
+      "method": "web打开作者仓库及MIT说明；下载完整ZIP后静态阅读game_manager.js与LICENSE",
+      "scope": "游戏代码流程；字体与品牌资产不在复用许可核验范围"
+    }
+  }
+]

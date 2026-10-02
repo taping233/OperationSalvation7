@@ -1,0 +1,336 @@
+{
+  "schema_version": 1,
+  "base_head": "c6ee20684056240fd219fe179cacf5204a6445a4",
+  "baseline": "task-start dirty workspace, NOT HEAD; unrelated pre-existing edits are excluded",
+  "patch_sha256": "14057285a4f0f91e93b3ba8ced641d21df712dfca7854bcfacf26d89469bed16",
+  "changed_files": [
+    {
+      "path": "NovelAI生图功能手册-AI接手版.md",
+      "operation": "modify",
+      "before_sha256": "f4ed0434dc8770ca54ff8f49d581a6fac3ade32344a06fb61c58358acdb040f3",
+      "before_normalized_sha256": "f4ed0434dc8770ca54ff8f49d581a6fac3ade32344a06fb61c58358acdb040f3",
+      "after_sha256": "cc1744aaacf51586f3cbd3907a3bbe5cbedcdc335117060ed3250e7d1a33c0d3",
+      "after_normalized_sha256": "cc1744aaacf51586f3cbd3907a3bbe5cbedcdc335117060ed3250e7d1a33c0d3",
+      "baseline_provenance": "saved before this task edited the file"
+    },
+    {
+      "path": "搜打撤/.githooks/pre-commit",
+      "operation": "modify",
+      "before_sha256": "ff69eacf3d01c6d71c6cd6492763f6435d71a46a3dbbc4c54d9e506d70e3c17b",
+      "before_normalized_sha256": "ff69eacf3d01c6d71c6cd6492763f6435d71a46a3dbbc4c54d9e506d70e3c17b",
+      "after_sha256": "47893464ecbcb80013cbd41db3db5cd3db5c7429a0cbffc9dbb0e6912ba52068",
+      "after_normalized_sha256": "47893464ecbcb80013cbd41db3db5cd3db5c7429a0cbffc9dbb0e6912ba52068",
+      "baseline_provenance": "saved before this task edited the file"
+    },
+    {
+      "path": "搜打撤/eslint.config.js",
+      "operation": "modify",
+      "before_sha256": "a00084c92b23a9c7aefb5416f324ee11526cc90901dc69a441517c874dcd02fb",
+      "before_normalized_sha256": "a00084c92b23a9c7aefb5416f324ee11526cc90901dc69a441517c874dcd02fb",
+      "after_sha256": "e29079fdc795c560e4ba742018455f2ba098192581ef847bb3f6e2a32bda26ae",
+      "after_normalized_sha256": "e29079fdc795c560e4ba742018455f2ba098192581ef847bb3f6e2a32bda26ae",
+      "baseline_provenance": "saved before this task edited the file"
+    },
+    {
+      "path": "搜打撤/package.json",
+      "operation": "modify",
+      "before_sha256": "5c3522d7bdfbf8580dd2f0dfbd962dee4545d07dccd1dbdebbb12314ce6c4099",
+      "before_normalized_sha256": "5c3522d7bdfbf8580dd2f0dfbd962dee4545d07dccd1dbdebbb12314ce6c4099",
+      "after_sha256": "7700e3529505ec3917cc1478cb8028afd4efec1325c158f1b3b11db38620b697",
+      "after_normalized_sha256": "7700e3529505ec3917cc1478cb8028afd4efec1325c158f1b3b11db38620b697",
+      "baseline_provenance": "saved before this task edited the file"
+    },
+    {
+      "path": "搜打撤/scripts/acceptance-gate.mjs",
+      "operation": "modify",
+      "before_sha256": "092b3ef221ef25eb33189f5d365cee70180f8c682d367c5581c15c6410e7bc9d",
+      "before_normalized_sha256": "092b3ef221ef25eb33189f5d365cee70180f8c682d367c5581c15c6410e7bc9d",
+      "after_sha256": "5e257fab3034601d773cbb2406d5efe721c57d8e146fb86958955d8ee01d34f3",
+      "after_normalized_sha256": "5e257fab3034601d773cbb2406d5efe721c57d8e146fb86958955d8ee01d34f3",
+      "baseline_provenance": "saved before this task edited the file"
+    },
+    {
+      "path": "搜打撤/scripts/gate-plan.mjs",
+      "operation": "modify",
+      "before_sha256": "4e39d59a5d0cd73467a2b6cb72fe63dcded2d1227ceb2d493ad9928fea2496d8",
+      "before_normalized_sha256": "4e39d59a5d0cd73467a2b6cb72fe63dcded2d1227ceb2d493ad9928fea2496d8",
+      "after_sha256": "58a45cdb8e44975db2e859fe2e720fdf6acb070f262716512c1da6b21e90bbef",
+      "after_normalized_sha256": "58a45cdb8e44975db2e859fe2e720fdf6acb070f262716512c1da6b21e90bbef",
+      "baseline_provenance": "saved before this task edited the file"
+    },
+    {
+      "path": "搜打撤/scripts/workflow-gate-receipt.mjs",
+      "operation": "modify",
+      "before_sha256": "9d91c9dce6c6b2988b9729d3c7b4073de0aca3beec9f543fcffc04d8a65fa697",
+      "before_normalized_sha256": "9d91c9dce6c6b2988b9729d3c7b4073de0aca3beec9f543fcffc04d8a65fa697",
+      "after_sha256": "d2b3b8499ef9994c65f9dc76b653adad2fa976fd3a1b65ce41e6e33d3c994738",
+      "after_normalized_sha256": "d2b3b8499ef9994c65f9dc76b653adad2fa976fd3a1b65ce41e6e33d3c994738",
+      "baseline_provenance": "saved before this task edited the file"
+    },
+    {
+      "path": "搜打撤/tests/workflow-gate-receipt.test.js",
+      "operation": "modify",
+      "before_sha256": "a5fb9950d7d0e33d57f8e79f57c43f3a356841e903ecda79bc3a4ced8f36360d",
+      "before_normalized_sha256": "a5fb9950d7d0e33d57f8e79f57c43f3a356841e903ecda79bc3a4ced8f36360d",
+      "after_sha256": "56e711de20f22c84d88f618162f949ed6901ba483af0115df89b64bb9598291a",
+      "after_normalized_sha256": "56e711de20f22c84d88f618162f949ed6901ba483af0115df89b64bb9598291a",
+      "baseline_provenance": "saved before this task edited the file"
+    },
+    {
+      "path": "搜打撤/tests/acceptance-gate.test.js",
+      "operation": "modify",
+      "before_sha256": "a318705449c7e228f65e9e7e81f941750aa3b746a77ed0ffbe2bfe69c1488dde",
+      "before_normalized_sha256": "a318705449c7e228f65e9e7e81f941750aa3b746a77ed0ffbe2bfe69c1488dde",
+      "after_sha256": "16c63b055cdffa8bd832de6461ebd5824147691d912f0250af616e0549e49e0f",
+      "after_normalized_sha256": "16c63b055cdffa8bd832de6461ebd5824147691d912f0250af616e0549e49e0f",
+      "baseline_provenance": "saved before this task edited the file"
+    },
+    {
+      "path": "搜打撤/tests/workflow-staged.test.js",
+      "operation": "modify",
+      "before_sha256": "268cbdf752fcddcefeb5fd6f84962d199802e5bcae092e9b52d39199e07c053d",
+      "before_normalized_sha256": "268cbdf752fcddcefeb5fd6f84962d199802e5bcae092e9b52d39199e07c053d",
+      "after_sha256": "23a90155bc1d21f39bd1505138d45d6e4ea721ff35e434da0700c144b78872c7",
+      "after_normalized_sha256": "23a90155bc1d21f39bd1505138d45d6e4ea721ff35e434da0700c144b78872c7",
+      "baseline_provenance": "saved before this task edited the file"
+    },
+    {
+      "path": "搜打撤/tools/nai_gen.py",
+      "operation": "modify",
+      "before_sha256": "5ec28ebc18161efbcb73e21a06dfd0bc833c5ec74a5d39598efbc1a2e026b72e",
+      "before_normalized_sha256": "5ec28ebc18161efbcb73e21a06dfd0bc833c5ec74a5d39598efbc1a2e026b72e",
+      "after_sha256": "b60725773e3056aa98d37038a9b5f1ad8008871a0426f14b9cdb182a35122c5e",
+      "after_normalized_sha256": "b60725773e3056aa98d37038a9b5f1ad8008871a0426f14b9cdb182a35122c5e",
+      "baseline_provenance": "saved before this task edited the file"
+    },
+    {
+      "path": "搜打撤/scripts/asset-audit.cjs",
+      "operation": "modify",
+      "before_sha256": "6f96a2d5bf84c9c23d74ea8c0ba8b195a5b17454cc2d3b9d22d712fa3b2d612f",
+      "before_normalized_sha256": "6f96a2d5bf84c9c23d74ea8c0ba8b195a5b17454cc2d3b9d22d712fa3b2d612f",
+      "after_sha256": "b2eb1520637958ab9fbc616dd508a01333b113d64484d0c0ae7310c44597e663",
+      "after_normalized_sha256": "b2eb1520637958ab9fbc616dd508a01333b113d64484d0c0ae7310c44597e663",
+      "baseline_provenance": "saved before this task edited the file"
+    },
+    {
+      "path": "搜打撤/game/assets/asset-manifest.json",
+      "operation": "modify",
+      "before_sha256": "0cad678d72ff90351d4e0284bbfcf093adbac0ad64ea609674de19fceb12c185",
+      "before_normalized_sha256": "0cad678d72ff90351d4e0284bbfcf093adbac0ad64ea609674de19fceb12c185",
+      "after_sha256": "f227ab2816120d28a8f79b642aaf7fa5851713cd6c402b70f12ef25a0dedc255",
+      "after_normalized_sha256": "f227ab2816120d28a8f79b642aaf7fa5851713cd6c402b70f12ef25a0dedc255",
+      "baseline_provenance": "saved before this task edited the file"
+    },
+    {
+      "path": "搜打撤/scripts/generate-compendium.mjs",
+      "operation": "modify",
+      "before_sha256": "239f9582cbd23e6a4a253425c1180f1d952ce1256a4a8c89308a4ae0c82f6efd",
+      "before_normalized_sha256": "f75f34cd7852d262190e960ad5caa3f5af65274df1ca5687011b601c43e3958e",
+      "after_sha256": "8bdc609de4443601d751c747f80b1f2adeb0fa6ea45ec286ba978057f86b8c53",
+      "after_normalized_sha256": "bbe8e956d643bcafc729dedca508d5b773beb9bffbaca06792ca36574c5fa07a",
+      "baseline_provenance": "saved before this task edited the file"
+    },
+    {
+      "path": "搜打撤/tests/compendium.test.js",
+      "operation": "modify",
+      "before_sha256": "240611b2bca8ef777d0874105d5c6319c3f834b67554b6c59713be3583714f0f",
+      "before_normalized_sha256": "240611b2bca8ef777d0874105d5c6319c3f834b67554b6c59713be3583714f0f",
+      "after_sha256": "8f94bf61be7e1e5570a340d54b7ba1522a9ec1fb24240b7a263552b044f0052f",
+      "after_normalized_sha256": "8f94bf61be7e1e5570a340d54b7ba1522a9ec1fb24240b7a263552b044f0052f",
+      "baseline_provenance": "saved before this task edited the file"
+    },
+    {
+      "path": "搜打撤/docs/game-compendium.md",
+      "operation": "modify",
+      "before_sha256": "637a12a5e491a7a508269f4bc14a343f765e39917e755ac316ba1111eb867280",
+      "before_normalized_sha256": "637a12a5e491a7a508269f4bc14a343f765e39917e755ac316ba1111eb867280",
+      "after_sha256": "175f73f240b46170347616177db9e0e8b2fdb2f5b1bdabd9e7d949db92c2cb34",
+      "after_normalized_sha256": "175f73f240b46170347616177db9e0e8b2fdb2f5b1bdabd9e7d949db92c2cb34",
+      "baseline_provenance": "saved before this task edited the file"
+    },
+    {
+      "path": "搜打撤/docs/roadmap.md",
+      "operation": "modify",
+      "before_sha256": "1b0463d09a4298b9064d096a092f6c1bd0a393194629c72e4cef3defa7d4b1e3",
+      "before_normalized_sha256": "1b0463d09a4298b9064d096a092f6c1bd0a393194629c72e4cef3defa7d4b1e3",
+      "after_sha256": "f8313cf1908d1a21eaf3df23ab3b6267ea59f76d2ba7c8b5ee28e71ea1e5eb59",
+      "after_normalized_sha256": "f8313cf1908d1a21eaf3df23ab3b6267ea59f76d2ba7c8b5ee28e71ea1e5eb59",
+      "baseline_provenance": "saved before this task edited the file"
+    },
+    {
+      "path": "搜打撤/docs/quality-gates.md",
+      "operation": "modify",
+      "before_sha256": "e667ebe246de749c7947eee3ba17cfee569dd6fb3cb19b4e23a93504941c8cac",
+      "before_normalized_sha256": "e329668552ca26f634c917a9f424f6195b6f14308164d5ec90e0a865779a6957",
+      "after_sha256": "b2a34d9d2685f91d873c45a0e820d1de3b3f1d8990ae83cc61a31093909e44dc",
+      "after_normalized_sha256": "b269549492d7e617945e43ce59251ad96ee28295dbb9d78cdc0f0a92a44a26de",
+      "baseline_provenance": "saved before this task edited the file"
+    },
+    {
+      "path": "搜打撤/scripts/compile-narrative.mjs",
+      "operation": "modify",
+      "before_sha256": "362f5738c45067477aa5ae2d66fe924e4974c3efa20e12fecdf081bd21f43c3e",
+      "before_normalized_sha256": "362f5738c45067477aa5ae2d66fe924e4974c3efa20e12fecdf081bd21f43c3e",
+      "after_sha256": "8745e3759a3b79074758912ff3cfbd15de7fda957e3602a600afde10531482a7",
+      "after_normalized_sha256": "8745e3759a3b79074758912ff3cfbd15de7fda957e3602a600afde10531482a7",
+      "baseline_provenance": "saved before this task edited the file"
+    },
+    {
+      "path": "搜打撤/scripts/esm-convert.mjs",
+      "operation": "modify",
+      "before_sha256": "5eb945819debb628a889182035458de4e7ada66a71a9550cb58da24b0567c214",
+      "before_normalized_sha256": "5eb945819debb628a889182035458de4e7ada66a71a9550cb58da24b0567c214",
+      "after_sha256": "e89607780624d5a7336b5784722f8d18797af1983a1cb34cc4813d82c5aa7fd8",
+      "after_normalized_sha256": "e89607780624d5a7336b5784722f8d18797af1983a1cb34cc4813d82c5aa7fd8",
+      "baseline_provenance": "saved before this task edited the file"
+    },
+    {
+      "path": "搜打撤/scripts/iab-drive.mjs",
+      "operation": "modify",
+      "before_sha256": "d56a4b45e365cd705287559fdb18d9a686c770a1dd71d5a5b2b3719bced636fe",
+      "before_normalized_sha256": "d56a4b45e365cd705287559fdb18d9a686c770a1dd71d5a5b2b3719bced636fe",
+      "after_sha256": "b084a0979375e246e4e29f6ac000813d00695388da340c5fd2021d7c9a38e7a9",
+      "after_normalized_sha256": "b084a0979375e246e4e29f6ac000813d00695388da340c5fd2021d7c9a38e7a9",
+      "baseline_provenance": "saved before this task edited the file"
+    },
+    {
+      "path": "搜打撤/scripts/perf-benchmark.cjs",
+      "operation": "modify",
+      "before_sha256": "0fc8e03802bb8a07f41ef717dffc68595c921fef1b43b4faec6b5d3b1cf7cf81",
+      "before_normalized_sha256": "0fc8e03802bb8a07f41ef717dffc68595c921fef1b43b4faec6b5d3b1cf7cf81",
+      "after_sha256": "235c204bfa53f723542344744f73d5cb8083263f6486d1366fb15318e79be2a0",
+      "after_normalized_sha256": "235c204bfa53f723542344744f73d5cb8083263f6486d1366fb15318e79be2a0",
+      "baseline_provenance": "saved before this task edited the file"
+    },
+    {
+      "path": "搜打撤/scripts/workflow-staged.mjs",
+      "operation": "modify",
+      "before_sha256": "5403f617fd3aed200e15633e3b0785e7a7fd80f9d0ea4a47c34de5ed1f2b02e7",
+      "before_normalized_sha256": "5403f617fd3aed200e15633e3b0785e7a7fd80f9d0ea4a47c34de5ed1f2b02e7",
+      "after_sha256": "d8dc39b3c4da67892a549f6b8a62d6b06f060935f3f76e9d180430780522a0c6",
+      "after_normalized_sha256": "d8dc39b3c4da67892a549f6b8a62d6b06f060935f3f76e9d180430780522a0c6",
+      "baseline_provenance": "saved before this task edited the file"
+    },
+    {
+      "path": "搜打撤/scripts/workflow-evidence.mjs",
+      "operation": "modify",
+      "before_sha256": "bf29fe9087c9929796723b38fa9d34fcd2e2fdb37b0eb0618aef5ca5ba09360f",
+      "before_normalized_sha256": "bf29fe9087c9929796723b38fa9d34fcd2e2fdb37b0eb0618aef5ca5ba09360f",
+      "after_sha256": "8e4f98911df056b0ef3d4f7d08be371aa3ef9b9073c081eb5bfdb6ddec2ba4d0",
+      "after_normalized_sha256": "8e4f98911df056b0ef3d4f7d08be371aa3ef9b9073c081eb5bfdb6ddec2ba4d0",
+      "baseline_provenance": "saved before this task edited the file"
+    },
+    {
+      "path": "搜打撤/scripts/workflow.mjs",
+      "operation": "modify",
+      "before_sha256": null,
+      "before_normalized_sha256": "af7b927e369a00aa3b348a07efdb2e97352b2a8f5dbfc97e268451a2a5590a4a",
+      "after_sha256": "75b1347a8b95f1a3e1306518f5ddf4584f2ee3bc8f5248a1a0c165176131e091",
+      "after_normalized_sha256": "75b1347a8b95f1a3e1306518f5ddf4584f2ee3bc8f5248a1a0c165176131e091",
+      "baseline_provenance": "reconstructed only the recorded one-line freshness call; normalized before hash is authoritative, original raw-byte hash was not captured"
+    },
+    {
+      "path": "搜打撤/tests/workflow-scope.test.js",
+      "operation": "modify",
+      "before_sha256": "4fa5040a4c0077d8109d9061bc27272a88be9ee2ad2a1fde3df1e8ba34c86688",
+      "before_normalized_sha256": "4fa5040a4c0077d8109d9061bc27272a88be9ee2ad2a1fde3df1e8ba34c86688",
+      "after_sha256": "ed8300493edd9e043f316a3d5ef688237d3705b9b9f9a38a5e31480dee1520cb",
+      "after_normalized_sha256": "ed8300493edd9e043f316a3d5ef688237d3705b9b9f9a38a5e31480dee1520cb",
+      "baseline_provenance": "saved before this task edited the file"
+    },
+    {
+      "path": "搜打撤/tests/workflow-cli-integration.test.js",
+      "operation": "modify",
+      "before_sha256": "17deeb6209925c2b425eea8afb59a75b8f220fd19299d0fa9b10a1223a2bdc37",
+      "before_normalized_sha256": "17deeb6209925c2b425eea8afb59a75b8f220fd19299d0fa9b10a1223a2bdc37",
+      "after_sha256": "8883b6a285aa334c13bea07dd924f6325b04caffbd7f59b14fbdeae3927d3085",
+      "after_normalized_sha256": "8883b6a285aa334c13bea07dd924f6325b04caffbd7f59b14fbdeae3927d3085",
+      "baseline_provenance": "saved before this task edited the file"
+    },
+    {
+      "path": "搜打撤/tests/workflow-dependencies.test.js",
+      "operation": "modify",
+      "before_sha256": "8b4486f88c37b62f41969a8e94e7daa7c853c19aafe3f1031c60db6386f2fdf2",
+      "before_normalized_sha256": "8b4486f88c37b62f41969a8e94e7daa7c853c19aafe3f1031c60db6386f2fdf2",
+      "after_sha256": "12181127a5f890da3c8a884780fe6011af4573981b5127b42b0766c54811c1c1",
+      "after_normalized_sha256": "12181127a5f890da3c8a884780fe6011af4573981b5127b42b0766c54811c1c1",
+      "baseline_provenance": "saved before this task edited the file"
+    },
+    {
+      "path": "搜打撤/tests/quality-config.test.js",
+      "operation": "add",
+      "before_sha256": null,
+      "before_normalized_sha256": null,
+      "after_sha256": "e9e96f1aceabe15ee155b4c17e5b71ba392984c1acb748821554d7764b9adf78",
+      "after_normalized_sha256": "e9e96f1aceabe15ee155b4c17e5b71ba392984c1acb748821554d7764b9adf78",
+      "baseline_provenance": "must be absent"
+    },
+    {
+      "path": "搜打撤/tools/nai_guard.py",
+      "operation": "add",
+      "before_sha256": null,
+      "before_normalized_sha256": null,
+      "after_sha256": "9841e13655016b846ef0f7c07b2530fc57bdbcb557ad351aa8b9ed79701ee710",
+      "after_normalized_sha256": "9841e13655016b846ef0f7c07b2530fc57bdbcb557ad351aa8b9ed79701ee710",
+      "baseline_provenance": "must be absent"
+    },
+    {
+      "path": "搜打撤/tools/tests/test_nai_guard.py",
+      "operation": "add",
+      "before_sha256": null,
+      "before_normalized_sha256": null,
+      "after_sha256": "6103f4fb04867d91c3e6561cda47b9fc90f39f1d05ed42643ac0c96fb1a73fdd",
+      "after_normalized_sha256": "6103f4fb04867d91c3e6561cda47b9fc90f39f1d05ed42643ac0c96fb1a73fdd",
+      "baseline_provenance": "must be absent"
+    },
+    {
+      "path": "搜打撤/scripts/asset-audit-lib.cjs",
+      "operation": "add",
+      "before_sha256": null,
+      "before_normalized_sha256": null,
+      "after_sha256": "46db9b5aafdd5055b95176c2f2d1ad41608a7e1b498d478fca5cf70e1c2a4593",
+      "after_normalized_sha256": "46db9b5aafdd5055b95176c2f2d1ad41608a7e1b498d478fca5cf70e1c2a4593",
+      "baseline_provenance": "must be absent"
+    },
+    {
+      "path": "搜打撤/tests/asset-audit.test.js",
+      "operation": "add",
+      "before_sha256": null,
+      "before_normalized_sha256": null,
+      "after_sha256": "e57279be9915783db37a0189c50dc3f9a9a374cb2d1822614ae1251e65ed929d",
+      "after_normalized_sha256": "e57279be9915783db37a0189c50dc3f9a9a374cb2d1822614ae1251e65ed929d",
+      "baseline_provenance": "must be absent"
+    },
+    {
+      "path": "搜打撤/docs/asset-audit-debt.md",
+      "operation": "add",
+      "before_sha256": null,
+      "before_normalized_sha256": null,
+      "after_sha256": "f1792f17aa4082ea43b9efd9861380cf7efe58574a5cc8996594513097ea6fc8",
+      "after_normalized_sha256": "f1792f17aa4082ea43b9efd9861380cf7efe58574a5cc8996594513097ea6fc8",
+      "baseline_provenance": "must be absent"
+    },
+    {
+      "path": "搜打撤/docs/asset-audit-debt.json",
+      "operation": "add",
+      "before_sha256": null,
+      "before_normalized_sha256": null,
+      "after_sha256": "78c1939df1f63eaa4b5c25265fae6e8ca4a165cfe0421a83df5df6898aaf3666",
+      "after_normalized_sha256": "78c1939df1f63eaa4b5c25265fae6e8ca4a165cfe0421a83df5df6898aaf3666",
+      "baseline_provenance": "must be absent"
+    }
+  ],
+  "unchanged_proof": [
+    {
+      "path": "搜打撤/tools/nai_style.py",
+      "sha256": "7e1776ffd716e58a0b3d0f78e362da3a7692cb2d685dd554c36c3aa808922563"
+    }
+  ],
+  "excluded": [
+    "all other original workspace changes",
+    "PARALLEL-REGISTRY local ownership row",
+    "task state and source baselines",
+    "other sessions evidence",
+    "all media binaries and credentials"
+  ]
+}

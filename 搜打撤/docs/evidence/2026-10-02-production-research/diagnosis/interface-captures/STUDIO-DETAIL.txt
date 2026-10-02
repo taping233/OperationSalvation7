@@ -1,0 +1,27 @@
+Browser tab: 10, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5336/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/
+	1 container Description: 禁咒I大图与备注, ID: cardZoom
+		2 button 收回照片
+			3 image cross
+		4 container
+			5 image 禁咒I
+			6 container 照片背签与卡牌信息
+				7 heading 禁咒I, Value: 2
+					8 text 禁咒I
+				9 text 藏品编号 № 99
+				10 text 类型
+				11 text 法术
+				12 text 稀有度
+				13 text 棱彩
+				14 text 费用
+				15 text 0
+				16 container
+					17 text 抽到时施放： 夺取  1  点攻击力。
+				18 container
+					19 image pen
+					20 text 备注
+					21 text entry area (settable) 备注
+					22 text 尚未撰写
+		23 text 点击照片外或按 Esc 收回 · 背签可编辑
+
+The focused UI element is 2 button 收回照片

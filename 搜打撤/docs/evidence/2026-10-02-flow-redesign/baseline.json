@@ -1,0 +1,19 @@
+{
+  "at": "2026-10-02T03:01:59.233Z",
+  "head": "c6ee206840",
+  "note": "已有17项其他会话未提交现场保留，原文件改动沿已释放WF-flow-efficiency-exec等来源",
+  "files": {
+    "scripts/workflow-ship.mjs": {
+      "sha256": "88c321422c932a1601f0542ef5489200a7099179eff81474c03f0c414e1ca5f3",
+      "mtime": "2026-10-02T02:25:42.297Z"
+    },
+    "tests/workflow-ship.test.js": {
+      "sha256": "662f551d443b3b7dcf82442bb49495755c50e714fdce3a6876468d7bbcc73875",
+      "mtime": "2026-10-02T02:27:45.427Z"
+    },
+    "scripts/workflow.mjs": {
+      "sha256": "80f27067516c249bb092086fca7b1cfd619e1fff1c865cf01d2d19d894c3d126",
+      "mtime": "2026-10-02T01:54:12.241Z"
+    }
+  }
+}

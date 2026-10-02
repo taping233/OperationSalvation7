@@ -1,0 +1,32 @@
+Browser tab: 10, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5336/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/
+	1 container viewport
+		2 button 背包 3/16, ID: bagBtnFloat
+			3 text 背包
+			4 text 3/16
+		5 container
+			6 button Description: 关闭, ID: ovCloseX
+			7 container
+				8 text FIELD ENCOUNTER 01 / 04
+				9 heading crystal 污染祭坛, Value: 2
+					10 image crystal
+					11 text  污染祭坛
+				12 text 弃掉背包中 3 张卡牌激活祭坛，任选一项奖励
+				13 button 弃 3 张 · 激活祭坛 激活后二选一：① 复原 3 张消耗卡 + 回复 10 血；② 随机获取 1 张传说卡和 1 张装备卡 ▸
+					14 text 弃 3 张 · 激活祭坛
+					15 text 激活后二选一：① 复原 3 张消耗卡 + 回复 10 血；② 随机获取 1 张传说卡和 1 张装备卡
+					16 text ▸
+				17 button (disabled) 献上 2 枚员工通行证A碎片（不弃牌） 碎片不足（现有 0/2）——集齐 2 枚后可在任意祭坛直接兑换能力卡 ▸
+					18 text 献上 2 枚员工通行证A碎片（不弃牌）
+					19 text 碎片不足（现有 0/2）——集齐 2 枚后可在任意祭坛直接兑换能力卡
+					20 text ▸
+				21 button (disabled) 献祭道具 · 复原卡牌 背包里没有道具卡——先弄到一张道具卡，再回来献祭复原 ▸
+					22 text 献祭道具 · 复原卡牌
+					23 text 背包里没有道具卡——先弄到一张道具卡，再回来献祭复原
+					24 text ▸
+				25 button 离开 祭坛保持沉睡——回到当前格子，稍后再来 ▸
+					26 text 离开
+					27 text 祭坛保持沉睡——回到当前格子，稍后再来
+					28 text ▸
+
+The focused UI element is 13 button 弃 3 张 · 激活祭坛 激活后二选一：① 复原 3 张消耗卡 + 回复 10 血；② 随机获取 1 张传说卡和 1 张装备卡 ▸

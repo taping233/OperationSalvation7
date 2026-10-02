@@ -1,0 +1,76 @@
+{
+  "accessed_date": "2026-10-02",
+  "timezone": "Asia/Shanghai",
+  "source_policy": "仅五款游戏官方 Steam 商店页。数量是发行方公开描述，不是逐项独立清点；好评率及媒体评分不换算成本报告分数。",
+  "score_anchor": {"game": "火山的女儿", "score": 9, "origin": "老板给定的成品体验参照", "limitation": "不是从结局数量、销量、好评率计算而得；其他四款未被本次重新评分。"},
+  "peers": [
+    {
+      "id": "W01", "name": "火山的女儿",
+      "url": "https://store.steampowered.com/app/1669980/Volcano_Princess/?l=schinese",
+      "source_section": "关于此游戏",
+      "metrics": [
+        {"label": "可选结局", "value": 50, "operator": ">", "unit": "个", "original_scope": "超过50个可选结局；职业结局与情感结局完全分离"},
+        {"label": "情感结局", "value": 12, "operator": "+", "unit": "个", "original_scope": "情感结局12个以上"},
+        {"label": "可攻略男性角色", "value": 5, "operator": "+", "unit": "人", "original_scope": "男女可攻略角色均为5人以上"},
+        {"label": "可攻略女性角色", "value": 5, "operator": "+", "unit": "人", "original_scope": "男女可攻略角色均为5人以上"}
+      ],
+      "comparison": "对照成长选择如何形成职业、情感与可回忆结局，以及多活动之间的反馈。",
+      "cannot_divide": "50+结局不能与本项目26项成就、6种宠物、四层地图直接相除；这些对象不具有相同语义。结局数量不能证明排版舒适或每条路线深度。",
+      "official_image_urls": [
+        {"url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1669980/extras/c4c3a8e9f24377e7861b16cee216ff0d.avif?t=1746063344", "role": "About段落配图，成长/结局附近", "status": "web工具打开返回图像来源；是否包含可分析UI须内置浏览器实看"},
+        {"url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1669980/extras/ec96533ca2d055ed76cba5b4ba214a27.avif?t=1746063344", "role": "About段落配图，成长/结局附近", "status": "页面链接可追溯，web工具图片抓取失败，待内置浏览器核实"},
+        {"url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1669980/extras/f7ccde77183303f3a9fcea46f1a2f008.avif?t=1746063344", "role": "About段落配图，回合制战斗附近", "status": "页面链接可追溯，web工具图片抓取失败，待内置浏览器核实"}
+      ]
+    },
+    {
+      "id": "W02", "name": "杀戮尖塔",
+      "url": "https://store.steampowered.com/app/646570/Slay_the_Spire/?l=english",
+      "source_section": "Slay the Spire left Early Access and comes with",
+      "metrics": [
+        {"label": "角色", "value": 4, "operator": "=", "unit": "个", "original_scope": "Four characters；每个角色有独立牌组"},
+        {"label": "已实现卡牌", "value": 350, "operator": "+", "unit": "张", "original_scope": "350+ fully implemented cards"},
+        {"label": "物品", "value": 200, "operator": "+", "unit": "种", "original_scope": "200+ different items"},
+        {"label": "独特战斗遭遇", "value": 50, "operator": "+", "unit": "种", "original_scope": "50+ unique combat encounters"},
+        {"label": "事件", "value": 50, "operator": "+", "unit": "种", "original_scope": "50+ mysterious events"}
+      ],
+      "comparison": "对照构筑协同、路线风险与遗物交互；角色数量只描述可选构筑入口。",
+      "cannot_divide": "本项目259条去重静态数据含资源、道具、事件、生物，不能除以350+战斗卡来宣称卡牌完成度；敌人数据条数也不等于战斗遭遇组合数量。",
+      "official_image_urls": [{"url": "https://shared.fastly.steamstatic.com/community_assets/images/apps/646570/33ea124ea8c03a9ce7012d34c3b348a351612fca.jpg", "role": "商店页头部素材，非游戏截图列表", "status": "web工具链接可追溯；不得据此分析游戏UI排版"}]
+    },
+    {
+      "id": "W03", "name": "Loop Hero",
+      "url": "https://store.steampowered.com/app/1282730/Loop_Hero/?l=english",
+      "source_section": "About This Game 五个功能段",
+      "metrics": [],
+      "public_loop_features": ["出征前选择可解锁职业与卡牌", "沿随机循环路径放置建筑、地形及敌人卡", "战斗取得更强战利品并即时换装与解锁特性", "资源投入营地升级并增强后续探险", "挑战守关BOSS推进世界拯救目标"],
+      "comparison": "以准备→路径塑造→战利品→营地升级→再次出征的关联检查本项目循环是否形成玩家可理解的反馈。五段是网页描述结构，不是五个独立玩法模式。",
+      "cannot_divide": "此页未给出职业、卡牌或BOSS的精确总量，不能据此补猜数字或与本项目数量相除。",
+      "official_image_urls": [{"url": "https://shared.fastly.steamstatic.com/community_assets/images/apps/1282730/103175f4adb08d82a9937d252629e0a91dce84d5.jpg", "role": "商店页头部素材，非游戏截图列表", "status": "web工具链接可追溯；不得据此分析游戏UI排版"}]
+    },
+    {
+      "id": "W04", "name": "暗黑地牢",
+      "url": "https://store.steampowered.com/app/262060/Darkest_Dungeon/",
+      "source_section": "Core Features",
+      "metrics": [{"label": "可玩英雄职业", "value": 16, "operator": "and counting", "unit": "种", "original_scope": "16 (and counting!) playable hero classes", "caution": "发行方持续增长式口径；不能写成截至本轮精确共16职业，页面未给出本体/DLC统一精确总数。"}],
+      "public_features": ["压力与有意义的角色特质", "战斗成败叙述反馈", "营地治疗与鼓舞", "酒馆或修道院恢复压力", "角色永久死亡及程序地牢"],
+      "comparison": "对照风险沟通、失败后恢复、人物差异和情绪表达，而非要求本项目复制永久死亡。",
+      "cannot_divide": "16职业不能与本项目职业等级、宠物数量、卡牌类别直接相除；职业数量也不证明职业平衡。",
+      "official_image_urls": [{"url": "https://shared.fastly.steamstatic.com/community_assets/images/apps/262060/af219e7f9ed0506cb0954aabb7f24a45e38d28e4.jpg", "role": "商店页头部素材，非游戏截图列表", "status": "web工具链接可追溯；不得据此分析游戏UI排版"}]
+    },
+    {
+      "id": "W05", "name": "Backpack Hero",
+      "url": "https://store.steampowered.com/app/1970580/Backpack_Hero/",
+      "source_section": "About This Game",
+      "metrics": [
+        {"label": "不同物品", "value": 800, "operator": "+", "unit": "种", "original_scope": "800+ distinct items"},
+        {"label": "敌人", "value": 100, "operator": "+", "unit": "种", "original_scope": "over 100+ enemies"},
+        {"label": "英雄对应玩法", "value": 5, "operator": "=", "unit": "种", "original_scope": "5 unique play styles；通过选择不同英雄实现"}
+      ],
+      "public_features": ["背包内位置改变物品效益", "随机地牢与独立跑局", "故事模式中的局外成长", "冒险资源投入城镇建设、研究、英雄/挑战/任务解锁"],
+      "comparison": "对照背包整理是否产生策略价值，以及资源带回后能否改变准备与解锁。",
+      "cannot_divide": "800物品不是800卡牌；100敌人不是100独特遭遇。5种英雄玩法不能直接与本项目6宠物、5存档槽相除，数量不代表玩法差异强度。",
+      "official_image_urls": [{"url": "https://shared.fastly.steamstatic.com/community_assets/images/apps/1970580/19d9b22c941cfc77888e08d5c01161a6e5c7f6c2.jpg", "role": "商店页头部素材，非游戏截图列表", "status": "web工具链接可追溯；不得据此分析游戏UI排版"}]
+    }
+  ],
+  "visual_evidence_limit": "web文本视图没有暴露这五页的游戏截图gallery列表。以上只收录实际页面链接，未推测截图hash、未下载媒体。分析排版时应由当前平台内置浏览器打开实际游戏截图；宣传图只能证明宣传素材构图。"
+}

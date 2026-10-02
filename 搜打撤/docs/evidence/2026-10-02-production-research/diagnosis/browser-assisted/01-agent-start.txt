@@ -1,0 +1,204 @@
+Browser tab: 7, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5336/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/
+	1 container viewport
+		2 button 背包 8/16, ID: bagBtnFloat
+			3 text 背包
+			4 text 8/16
+		5 container tools 开发者控制台, ID: overlay
+			6 container
+				7 button Description: 关闭, ID: ovCloseX
+				8 heading tools 开发者控制台, Value: 2, ID: ovTitle
+					12 image tools
+					13 text  开发者控制台
+				11 container ovBody
+					14 button 调试
+					15 button Agent
+					16 button 数据
+					17 button 快捷键
+					18 text mapSeed=2129252531 · snapshot=v2 · routeVersion=r5-routes-v1 · status=fallback · fallbackReason=QUALITY_GATE_REJECTED
+					19 container
+						20 text 自动跑局
+						21 button 贪心一局（快进）
+						22 button 随机一局
+						23 button (disabled) LLM 一局
+						24 button (disabled) 停止
+						25 button 快进：开
+						26 text 闲置。跑局记录落在「数据」页签，人类玩家的对局同样入账。
+					27 container
+						28 text LLM 接入（OpenAI 兼容，配置只存本机）
+						29 text field (settable) Value: https://api.openai.com/v1, ID: devcLlmUrl
+						30 text field (settable) devcLlmKey
+						31 text field (settable) devcLlmModel
+						32 button 保存配置
+						33 text 未配置（LLM 一局不可用，自动退化贪心）
+					34 container
+						35 text observe 预览（喂给模型的局面 JSON）
+						36 button 刷新
+						37 text {
+ "ok": true,
+ "settle": true,
+ "lastFailed": null,
+ "phase": "overlay",
+ "turn": 4,
+ "run": {
+  "active": true,
+  "fought": 0,
+  "mode": "standard",
+  "hp": 31,
+  "maxHp": 35,
+  "coins": 2,
+  "atk": 4,
+  "turn": 4,
+  "layer": 1,
+  "node": 1,
+  "class": "侠客",
+  "characterId": "wu",
+  "bossKilled": false,
+  "state": "idle",
+  "bagCap": 16,
+  "used": 8,
+  "deck": 9,
+  "nodeVisited": true,
+  "inventory": [],
+  "ownedCards": [
+   {
+    "uid": "omuqset85q97mn",
+    "name": "初始攻击",
+    "type": "武术",
+    "rarity": "初始",
+    "safe": false,
+    "sellable": false
+   },
+   {
+    "uid": "omuqset859apn6",
+    "name": "初始攻击",
+    "type": "武术",
+    "rarity": "初始",
+    "safe": false,
+    "sellable": false
+   },
+   {
+    "uid": "omuqset85iuj91",
+    "name": "二刀流",
+    "type": "武术",
+    "rarity": "稀有",
+    "safe": false,
+    "sellable": false
+   },
+   {
+    "uid": "omuqset85kqlks",
+    "name": "穿刺",
+    "type": "武术",
+    "rarity": "古朴",
+    "safe": false,
+    "sellable": false
+   },
+   {
+    "uid": "omuqset852futz",
+    "name": "镭射",
+    "type": "法术",
+    "rarity": "古朴",
+    "safe": false,
+    "sellable": false
+   },
+   {
+    "uid": "omuqset8g4eezw",
+    "name": "江湖救急-改",
+    "type": "武术",
+    "rarity": "职业",
+    "safe": false,
+    "sellable": false
+   },
+   {
+    "uid": "omuqset8g73udd",
+    "name": "不变应万变-改",
+    "type": "武术",
+    "rarity": "职业",
+    "safe": false,
+    "sellable": false
+   },
+   {
+    "uid": "omuqukx9bw34wh",
+    "name": "饱和打击",
+    "type": "法术",
+    "rarity": "稀有",
+    "safe": false,
+    "sellable": false
+   },
+   {
+    "uid": "omuqus3vjxyaai",
+    "name": "刀剑形态",
+    "type": "武术",
+    "rarity": "稀有",
+    "safe": false,
+    "sellable": false
+   }
+  ],
+  "stash": [
+   {
+    "name": "连击箭",
+    "rarity": "古朴",
+    "type": "武术"
+   },
+   {
+    "name": "铸甲",
+    "rarity": "稀有",
+    "type": "武术"
+   }
+  ]
+ },
+ "battle": null,
+ "ui": {
+  "open": true,
+  "title": "开发者控制台",
+  "actions": [
+   {
+    "type": "ui",
+    "name": "devcTab",
+    "params": {
+     "tab": "debug"
+    },
+    "label": "调试"
+   },
+   {
+    "type": "ui",
+    "name": "devcTab",
+    "params": {
+     "tab": "agent"
+    },
+    "label": "Agent"
+   },
+   {
+    "type": "ui",
+    "name": "devcTab",
+    "params": {
+     "tab": "data"
+    },
+    "label": "数据"
+   },
+   {
+    "type": "ui",
+    "name": "devcTab",
+    "params": {
+     "tab": "keys"
+    },
+    "label": "快捷键"
+   },
+   {
+    "type": "ui",
+    "name": "devcRunGreedy",
+    "params": {},
+    "label": "贪心一局（快进）"
+   },
+   {
+    "type": "ui",
+    "name": "devcRunRandom",
+    "params": {},
+    "label": "随机一局"
+   },
+   {
+    "type": "ui",
+    "name": …（截断）
+					38 button 关闭（Esc / Ctrl+L）
+
+The focused UI element is 0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/

@@ -1,0 +1,16 @@
+Browser tab: 10, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5336/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/
+	1 container Description: 初始攻击大图与备注, ID: cardZoom
+		2 button 关闭卡牌大图
+			3 image cross
+		4 container
+			5 text 1
+			6 image 初始攻击
+			7 text 初始攻击 武术 · 初始 攻（ +0 ）： 造成等同于攻击力的 伤害 。
+		8 image pen
+		9 text 备注
+		10 text 暂无备注
+		11 text ×5 · 初始攻击默认在背包，固定携带不可移除
+		12 text Esc 或点击背景收回
+
+The focused UI element is 2 button 关闭卡牌大图

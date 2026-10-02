@@ -1,0 +1,180 @@
+{
+  "running": false,
+  "segments": [
+    {
+      "stopReason": "spin",
+      "steps": 37
+    },
+    {
+      "target": 2,
+      "stopReason": "until",
+      "steps": 12
+    },
+    {
+      "target": 3,
+      "stopReason": "spin",
+      "steps": 15
+    }
+  ],
+  "phase": "map",
+  "run": {
+    "active": true,
+    "fought": 1,
+    "mode": "standard",
+    "hp": 32,
+    "maxHp": 35,
+    "coins": 1,
+    "atk": 4,
+    "turn": 9,
+    "layer": 2,
+    "node": 1,
+    "class": "侠客",
+    "characterId": "wu",
+    "bossKilled": false,
+    "state": "idle",
+    "bagCap": 16,
+    "used": 9,
+    "deck": 9,
+    "nodeVisited": true,
+    "inventory": [],
+    "ownedCards": [
+      {
+        "uid": "omuqset852futz",
+        "name": "镭射",
+        "type": "法术",
+        "rarity": "古朴",
+        "safe": false,
+        "sellable": false
+      },
+      {
+        "uid": "omuqset8g73udd",
+        "name": "不变应万变-改",
+        "type": "武术",
+        "rarity": "职业",
+        "safe": false,
+        "sellable": false
+      },
+      {
+        "uid": "omuqukx9bw34wh",
+        "name": "饱和打击",
+        "type": "法术",
+        "rarity": "稀有",
+        "safe": false,
+        "sellable": false
+      },
+      {
+        "uid": "omuqus3vjxyaai",
+        "name": "刀剑形态",
+        "type": "武术",
+        "rarity": "稀有",
+        "safe": false,
+        "sellable": false
+      },
+      {
+        "uid": "omuqxhe5vgjgau",
+        "name": "潜匿",
+        "type": "武术",
+        "rarity": "职业",
+        "safe": false,
+        "sellable": false
+      },
+      {
+        "uid": "omuqxhf4sj32ml",
+        "name": "箭雨",
+        "type": "武术",
+        "rarity": "古朴",
+        "safe": false,
+        "sellable": false
+      },
+      {
+        "uid": "omuqxippuvx0w4",
+        "name": "初始攻击",
+        "type": "武术",
+        "rarity": "初始",
+        "safe": false,
+        "sellable": false
+      },
+      {
+        "uid": "omuqxipq5yp3ao",
+        "name": "净化箭",
+        "type": "武术",
+        "rarity": "古朴",
+        "safe": false,
+        "sellable": false
+      },
+      {
+        "uid": "omuqxk4hdtfmrm",
+        "name": "致命穿刺",
+        "type": "武术",
+        "rarity": "古朴",
+        "safe": false,
+        "sellable": false
+      }
+    ],
+    "stash": [
+      {
+        "name": "连击箭",
+        "rarity": "古朴",
+        "type": "武术"
+      },
+      {
+        "name": "铸甲",
+        "rarity": "稀有",
+        "type": "武术"
+      }
+    ]
+  },
+  "ui": "搜刮！小型物资箱 · 第 1 / 1",
+  "actions": [
+    {
+      "type": "move",
+      "li": 1,
+      "idx": 0,
+      "visited": false,
+      "label": "第2层入口（entrance）",
+      "next": [
+        {
+          "li": 1,
+          "idx": 1,
+          "visited": true,
+          "label": "2层·搜刮点（chest）"
+        },
+        {
+          "li": 0,
+          "idx": 5,
+          "visited": false,
+          "label": "通往第2层（door）"
+        }
+      ],
+      "id": "move:1,0"
+    },
+    {
+      "type": "move",
+      "li": 1,
+      "idx": 2,
+      "visited": false,
+      "label": "2层·战斗（battle）",
+      "next": [
+        {
+          "li": 1,
+          "idx": 1,
+          "visited": true,
+          "label": "2层·搜刮点（chest）"
+        },
+        {
+          "li": 1,
+          "idx": 3,
+          "visited": false,
+          "label": "2层·事件（event）"
+        }
+      ],
+      "id": "move:1,2"
+    },
+    {
+      "type": "sys",
+      "name": "reenter",
+      "label": "重开脚下节点",
+      "id": "sys:reenter"
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+Browser tab: 10, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5336/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/
+	1 container
+		2 button Description: 关闭, ID: ovCloseX
+		3 container hubMain
+			4 container
+				5 heading 远征基地, Value: 2
+					6 text 远征基地
+				7 text 档位 01
+				8 button ← 返回
+				9 button
+				10 image wood
+				11 text  木材  0
+				12 image bread
+				13 text  口粮  0
+				14 image key
+				15 text  钥匙  0
+				16 image coin
+				17 text  储备  0  币
+			18 container
+				19 button flag 出发
+					20 image flag
+					21 text 出发
+				22 button home 仓库
+					23 image home
+					24 text 仓库
+				25 button coin 商店
+					26 image coin
+					27 text 商店
+				28 button tools 升级
+					29 image tools
+					30 text 升级
+				31 button medal 人物
+					32 image medal
+					33 text 人物
+				34 button trophy 成就·收藏
+					35 image trophy
+					36 text 成就·收藏
+			37 text TACTICAL SUPPLY // 03
+			38 container
+				39 heading coin 远征补给商店, Value: 3
+					40 image coin
+					41 text  远征补给商店
+				42 text 储备  0  币 · 仓库空格  3  格
+				43 container
+					44 text 1
+					45 image 穿刺
+					46 text 穿刺 武术 · 古朴 攻（ +2 ），附加破甲，持续  1 回合 。
+					47 image swords
+					48 text +2
+					49 image coin
+					50 text 3
+				51 text 穿刺
+				52 text 武术 · 基础招式 · 造成 2 点伤害，无视护甲
+				53 image coin
+				54 text 储备币不足
+				55 button (disabled) coin 6 币
+					56 image coin
+					57 text  6 币
+				58 container
+					59 text 0 1
+				60 container
+					61 text 0
+					62 image 法杖
+					63 text 法杖 装备 · 古朴 法伤 +1 。
+					64 image coin
+					65 text 2
+				66 text 法杖
+				67 text 装备 · 基础装备 · 法伤 +1
+				68 image coin
+				69 text 储备币不足
+				70 button (disabled) coin 6 币
+					71 image coin
+					72 text  6 币
+				73 container
+					74 text 0 2
+				75 image bread
+				76 text 口粮
+				77 text 基地物资 · 基地物资 +1 · 升级宠物
+				78 image coin
+				79 text 储备币不足
+				80 button (disabled) coin 4 币
+					81 image coin
+					82 text  4 币
+				83 container
+					84 text 0 3
+				85 image wood
+				86 text 木材
+				87 text 基地物资 · 基地物资 +1 · 扩建背包与仓库
+				88 image coin
+				89 text 储备币不足
+				90 button (disabled) coin 4 币
+					91 image coin
+					92 text  4 币
+				93 container
+					94 text 0 4
+			95 container
+				96 heading book 补给说明, Value: 3
+					97 image book
+					98 text  补给说明
+				99 text 买下的基础卡直接放入 卡牌仓库 ；出发前在「出发」页勾选带入对局。
+				100 image coin
+				101 text  储备币来源：仓库卖出。储备币不进局、不随对局增减，只用于基地消费。 口粮/木材买入直接折入基地物资（升级宠物 / 扩建）。「初始攻击」每局自动携带、火球为衍生牌，均不在货架。
+
+The focused UI element is 0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/

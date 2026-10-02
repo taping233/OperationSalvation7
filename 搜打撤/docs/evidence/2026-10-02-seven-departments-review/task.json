@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "id": "seven-departments-review",
+  "date": "2026-10-02",
+  "owner": "Friday",
+  "goal": "七部门多维评分与五款成品对标 PDF 调研汇报",
+  "paths": [
+    "docs/evidence/2026-10-02-seven-departments-review",
+    "output/pdf"
+  ],
+  "doneWhen": [
+    "七部门逐项证据与多维评分可复核",
+    "五款对标公开来源及比较边界明确",
+    "PDF 全页渲染检查通过"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "20页PDF六维评分与五款公开对标来源复核，三子代理意见已纳入",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "14文件105测试通过，NAI17通过1平台跳过，计数与边界已核",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "PDF20页渲染全页检查、0越界、28来源链接，页4重叠已修复",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "当前游戏实页、动态听感、全量游戏套件、build、真实生图及远端CI未验"
+  ],
+  "updatedAt": "2026-10-02T09:48:23.812Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

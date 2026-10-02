@@ -1,0 +1,103 @@
+{
+  "time": "2026-10-02T07:00:20.077396+00:00",
+  "head": "c6ee20684056240fd219fe179cacf5204a6445a4",
+  "index": "empty at read-only git check",
+  "remote": "local origin/master 49 behind HEAD; not refreshed",
+  "inputs": [
+    {
+      "path": "搜打撤/scripts/workflow-gate-receipt.mjs",
+      "sha256": "9d91c9dce6c6b2988b9729d3c7b4073de0aca3beec9f543fcffc04d8a65fa697",
+      "bytes": 12637
+    },
+    {
+      "path": "搜打撤/tests/workflow-gate-receipt.test.js",
+      "sha256": "a5fb9950d7d0e33d57f8e79f57c43f3a356841e903ecda79bc3a4ced8f36360d",
+      "bytes": 9939
+    },
+    {
+      "path": "搜打撤/scripts/acceptance-gate.mjs",
+      "sha256": "092b3ef221ef25eb33189f5d365cee70180f8c682d367c5581c15c6410e7bc9d",
+      "bytes": 13063
+    },
+    {
+      "path": "搜打撤/scripts/gate-plan.mjs",
+      "sha256": "4e39d59a5d0cd73467a2b6cb72fe63dcded2d1227ceb2d493ad9928fea2496d8",
+      "bytes": 15719
+    },
+    {
+      "path": "搜打撤/tests/acceptance-gate.test.js",
+      "sha256": "a318705449c7e228f65e9e7e81f941750aa3b746a77ed0ffbe2bfe69c1488dde",
+      "bytes": 18733
+    },
+    {
+      "path": "搜打撤/.githooks/pre-commit",
+      "sha256": "ff69eacf3d01c6d71c6cd6492763f6435d71a46a3dbbc4c54d9e506d70e3c17b",
+      "bytes": 4212
+    },
+    {
+      "path": "搜打撤/eslint.config.js",
+      "sha256": "a00084c92b23a9c7aefb5416f324ee11526cc90901dc69a441517c874dcd02fb",
+      "bytes": 7523
+    },
+    {
+      "path": "搜打撤/package.json",
+      "sha256": "5c3522d7bdfbf8580dd2f0dfbd962dee4545d07dccd1dbdebbb12314ce6c4099",
+      "bytes": 2528
+    },
+    {
+      "path": "搜打撤/tools/nai_gen.py",
+      "sha256": "5ec28ebc18161efbcb73e21a06dfd0bc833c5ec74a5d39598efbc1a2e026b72e",
+      "bytes": 8837
+    },
+    {
+      "path": "搜打撤/tools/nai_style.py",
+      "sha256": "7e1776ffd716e58a0b3d0f78e362da3a7692cb2d685dd554c36c3aa808922563",
+      "bytes": 4602
+    },
+    {
+      "path": "NovelAI生图功能手册-AI接手版.md",
+      "sha256": "f4ed0434dc8770ca54ff8f49d581a6fac3ade32344a06fb61c58358acdb040f3",
+      "bytes": 15507
+    },
+    {
+      "path": "搜打撤/scripts/asset-audit.cjs",
+      "sha256": "6f96a2d5bf84c9c23d74ea8c0ba8b195a5b17454cc2d3b9d22d712fa3b2d612f",
+      "bytes": 4101
+    },
+    {
+      "path": "搜打撤/game/assets/asset-manifest.json",
+      "sha256": "0cad678d72ff90351d4e0284bbfcf093adbac0ad64ea609674de19fceb12c185",
+      "bytes": 41276
+    },
+    {
+      "path": "搜打撤/scripts/generate-compendium.mjs",
+      "sha256": "239f9582cbd23e6a4a253425c1180f1d952ce1256a4a8c89308a4ae0c82f6efd",
+      "bytes": 8027
+    },
+    {
+      "path": "搜打撤/tests/compendium.test.js",
+      "sha256": "240611b2bca8ef777d0874105d5c6319c3f834b67554b6c59713be3583714f0f",
+      "bytes": 2772
+    },
+    {
+      "path": "搜打撤/docs/game-compendium.md",
+      "sha256": "637a12a5e491a7a508269f4bc14a343f765e39917e755ac316ba1111eb867280",
+      "bytes": 32910
+    },
+    {
+      "path": "搜打撤/docs/roadmap.md",
+      "sha256": "1b0463d09a4298b9064d096a092f6c1bd0a393194629c72e4cef3defa7d4b1e3",
+      "bytes": 2338
+    },
+    {
+      "path": "搜打撤/docs/quality-gates.md",
+      "sha256": "e667ebe246de749c7947eee3ba17cfee569dd6fb3cb19b4e23a93504941c8cac",
+      "bytes": 13359
+    },
+    {
+      "path": "搜打撤/docs/PARALLEL-REGISTRY.md",
+      "sha256": "588a88cb55a664b774d95415f200dff298c89b1457e8dd343c9e255493f9cbb4",
+      "bytes": 36185
+    }
+  ]
+}

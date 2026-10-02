@@ -1,0 +1,79 @@
+Browser tab: 7, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5336/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/
+	1 container viewport
+		2 button 背包 9/16, ID: bagBtnFloat
+			3 text 背包
+			4 text 9/16
+		5 container
+			6 text 冬境街区 · 遭遇
+			7 text 第 4 回合
+			8 text 你的行动 Lv.1 · 36/50 · 差 14 点
+			9 text 我方
+			10 container btSelf
+				11 container
+					12 text 无 你
+				13 container
+					14 text 7/35
+				15 container
+					16 image swords
+					17 text  4
+			18 container
+				19 image swords
+				20 text  攻击 · 5
+				21 image cavalry
+				22 text 联邦机动兵
+				23 image swords
+				24 text 5
+				25 text 1/6
+			26 text 敌方意图
+			27 container
+				28 image bolt
+				29 text 2 /2
+			30 button fire 砸击
+				31 image fire
+				32 text  砸击
+			33 container
+				34 checkbox Description: 潜匿 · 1 费。费用 1 · 点击选中后点自己，也可拖到左侧人物（悬停看完整描述）, Value: 0
+					35 container
+						36 text 1
+						37 image 潜匿
+						38 text 潜匿
+					39 image heart
+				40 checkbox Description: 箭雨 · 1 费。费用 1 · 点击选中后点敌人，也可拖到敌人身上打出（悬停看完整描述）, Value: 0
+					41 container
+						42 text 1
+						43 image 箭雨
+						44 text 箭雨
+						45 image swords
+						46 text -1
+					47 image swords
+				48 checkbox Description: 初始攻击 · 1 费。费用 1 · 点击选中后点敌人，也可拖到敌人身上打出（悬停看完整描述）, Value: 0
+					49 container
+						50 text 1
+						51 image 初始攻击
+						52 text 初始攻击
+					53 text ×2
+					54 image swords
+				55 checkbox Description: 净化箭 · 1 费。费用 1 · 点击选中后点敌人，也可拖到敌人身上打出（悬停看完整描述）, Value: 0
+					56 container
+						57 text 1
+						58 image 净化箭
+						59 text 净化箭
+						60 image swords
+						61 text -1
+					62 image swords
+			63 container 战术操作
+				64 button bag 背包
+					65 image bag
+					66 text  背包
+				67 button runner 撤离（判负）
+					68 image runner
+					69 text  撤离（判负）
+				70 button gear 设置
+					71 image gear
+					72 text  设置
+				73 button skip 结束回合
+					74 image skip
+					75 text  结束回合
+
+The focused UI element is 0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/

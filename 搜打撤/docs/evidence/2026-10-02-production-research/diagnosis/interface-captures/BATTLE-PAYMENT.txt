@@ -1,0 +1,20 @@
+Browser tab: 10, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5336/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/
+	1 container viewport
+		2 button 背包 3/16, ID: bagBtnFloat
+			3 text 背包
+			4 text 3/16
+		5 container swords 遭遇战 · 第 1 回合 · cards 支付代价：为【神灯】选择, ID: overlay
+			6 container
+				7 heading swords 遭遇战 · 第 1 回合 · cards 支付代价：为【神灯】选择, Value: 2, ID: ovTitle
+					13 image swords
+					14 text  遭遇战 · 第 1 回合 · 
+					15 image cards
+					16 text  支付代价：为【神灯】选择
+				12 container ovBody
+					17 container
+						18 text 还需支付： 1  张 法术 作为支付代价
+					19 text 手牌中没有符合条件的卡牌
+					20 text 已选手牌和本次牌/燃料不在候选池中；选取后会作为支付代价消耗。
+
+The focused UI element is 5 container swords 遭遇战 · 第 1 回合 · cards 支付代价：为【神灯】选择, ID: overlay

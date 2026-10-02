@@ -1,0 +1,15 @@
+Browser tab: 10, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5336/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/
+	1 container
+		2 button Description: 关闭, ID: ovCloseX
+		3 container
+			4 button 返回设置
+			5 heading book 留言库, Value: 2
+				6 image book
+				7 text  留言库
+			8 container sugBox
+				9 image 雪地邮筒
+				10 text 邮筒还是空的
+				11 text 在游戏任意界面 点击右键 ，就能给制作者写一张留言。 保存后在这里导出 JSON 交给制作者；处理完的留言会盖「已完成」章归档。
+
+The focused UI element is 0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/

@@ -1,0 +1,35 @@
+Browser tab: 9, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5336/".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/
+	2 container
+		3 button 返回主菜单
+		4 text SELECT ARCHIVE 选择存档
+		5 button
+		6 container
+			7 text 档位 01 SLOT 01 基地档案 PLAYTIME 游玩时间  28 分钟 ACHIEVEMENTS 已解锁成就  5 初出茅庐、猎手、破壁者、仓廪充实、崭露头角
+			8 button 进入档位 01
+				9 text 进入存档 
+				10 text ENTER
+			11 button 覆盖重开
+			12 button 删除
+		13 container
+			14 text NEW GAME 档位 02 SLOT 02 空档位 尚未建立存档
+			15 button 在档位 02 开始新游戏
+				16 text 开新档 
+				17 text NEW GAME
+		18 container
+			19 text NEW GAME 档位 03 SLOT 03 空档位 尚未建立存档
+			20 button 在档位 03 开始新游戏
+				21 text 开新档 
+				22 text NEW GAME
+		23 container
+			24 text NEW GAME 档位 04 SLOT 04 空档位 尚未建立存档
+			25 button 在档位 04 开始新游戏
+				26 text 开新档 
+				27 text NEW GAME
+		28 container
+			29 text NEW GAME 档位 05 SLOT 05 空档位 尚未建立存档
+			30 button 在档位 05 开始新游戏
+				31 text 开新档 
+				32 text NEW GAME
+
+The focused UI element is 3 button 返回主菜单

@@ -1,0 +1,66 @@
+{
+  "at": "2026-10-02T13:33:16.562Z",
+  "kind": "coverage artifact consistency only; source SHA evidence reused, source/game/runtime not revalidated",
+  "checks": {
+    "uniqueInterfaceIds": true,
+    "allAnchorsResolved": true,
+    "parseSucceeded": true,
+    "allActionsClassified": true,
+    "allRulesClassified": true,
+    "familyInterfaceRefsExist": true,
+    "variantTemplatesExist": true,
+    "interfaceReportAllIds": true,
+    "functionReportAllIds": true,
+    "savedSourceHashesPresent": true,
+    "filesUnder1MB": true
+  },
+  "counts": {
+    "interfaces": 110,
+    "variants": 55,
+    "functionFamilies": 79,
+    "actions": 275,
+    "dynamicActions": 11,
+    "ruleEntries": 94,
+    "unclassifiedActions": 0,
+    "unclassifiedRules": 0,
+    "unclassifiedListeners": 17
+  },
+  "files": [
+    {
+      "name": "interface-spec.mjs",
+      "bytes": 21886,
+      "sha256": "4c65d43ecc61e5cd16432e3499edeaef42aeacbf4972633bb5d5d940704b4e6e"
+    },
+    {
+      "name": "function-spec.mjs",
+      "bytes": 31090,
+      "sha256": "81deb1d147dda2b955cd6d63f3f73b0eaef8f0090f74fdf78b14e9307b45beed"
+    },
+    {
+      "name": "scan-inventory.mjs",
+      "bytes": 14180,
+      "sha256": "6d2d84536dd0904c699018e5eac26b0488d57acc4109097162f003b7680640b0"
+    },
+    {
+      "name": "build-reports.mjs",
+      "bytes": 15830,
+      "sha256": "6f19914981cbe4d2d5bea447eff9edaf406fd49638b9fa09cd67105f8fdd349a"
+    },
+    {
+      "name": "inventory.json",
+      "bytes": 938131,
+      "sha256": "4a1467f613865b3793d048e28c5682fe73a0ce4cbaf79e79f0a5ed856706d199"
+    },
+    {
+      "name": "INTERFACE-INVENTORY.md",
+      "bytes": 44842,
+      "sha256": "d71db8d718d1bb055ed4f5095b17be252ab0cd8c7bc1a5aee8fdc5ee426ee250"
+    },
+    {
+      "name": "FUNCTION-ANALYSIS.md",
+      "bytes": 82479,
+      "sha256": "32dfb47b3ad5d7508f960a52a550e5327b595448b24d76e2e2da1190d7232378"
+    }
+  ],
+  "passed": true
+}

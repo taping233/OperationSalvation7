@@ -1,0 +1,105 @@
+Browser tab: 10, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5336/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/
+	1 container
+		2 button Description: 关闭, ID: ovCloseX
+		3 container hubMain
+			4 container
+				5 heading 远征基地, Value: 2
+					6 text 远征基地
+				7 text 档位 01
+				8 button ← 返回
+				9 button
+				10 image wood
+				11 text  木材  0
+				12 image bread
+				13 text  口粮  0
+				14 image key
+				15 text  钥匙  0
+				16 image coin
+				17 text  储备  0  币
+			18 container
+				19 button flag 出发
+					20 image flag
+					21 text 出发
+				22 button home 仓库
+					23 image home
+					24 text 仓库
+				25 button coin 商店
+					26 image coin
+					27 text 商店
+				28 button tools 升级
+					29 image tools
+					30 text 升级
+				31 button medal 人物
+					32 image medal
+					33 text 人物
+				34 button trophy 成就·收藏
+					35 image trophy
+					36 text 成就·收藏
+			37 container
+				38 text ARCHIVE COLLECTION // 07
+				39 heading 成就·收藏, Value: 3
+					40 text 成就·收藏
+				41 text 卡背、成就与人物收藏分区归档。切换分类不会离开基地，也不会丢失当前浏览位置。
+				42 image notes
+				43 text 见闻纪念 · 1/3 《最后一盏引路灯》的线索已记入档案，等待下一次探索。不影响地图与战力。
+				44 text 卡背
+				45 text 1/7
+				46 text 成就
+				47 text 5/26
+				48 text 人物收藏
+				49 text 0/67
+				50 container 收藏分类
+					51 checkbox cards 卡背图鉴, Value: 0
+						52 image cards
+						53 text  卡背图鉴
+					54 checkbox trophy 成就记录, Value: 0
+						55 image trophy
+						56 text  成就记录
+					57 checkbox sparkles 人物收藏, Value: 1
+						58 image sparkles
+						59 text  人物收藏
+				60 heading sparkles 职业收藏室 收藏进度 0 / 67, Value: 3
+					61 image sparkles
+					62 text  职业收藏室  收藏进度 0 / 67
+				63 container
+					64 text 收藏的职业卡与能力卡会陈列在这里。收藏即用掉这张卡（从仓库移除、不再占格），转化为对应人物熟练度经验——职业卡  +10  点、能力卡  +50  点， 重复收藏重复获得经验 （同一张卡只有首次收藏推进收藏进度）。收藏 不同 的职业卡与能力卡推进进度，阶段目标各有一次奖励。
+				65 container
+					66 text 收藏 5 张
+					67 image wood
+					68 text  木材 ×3 0 / 5
+				69 container
+					70 text 收藏 15 张
+					71 image bread
+					72 text  口粮 ×5 0 / 15
+				73 container
+					74 text 收藏 30 张
+					75 image key
+					76 text  钥匙 ×10 0 / 30
+				77 container
+					78 text 收藏 45 张
+					79 image medal
+					80 text  传说卡 ×2 0 / 45
+				81 container
+					82 text 收藏 67 张
+					83 image crystal
+					84 text  宠物蛋 ×1 0 / 67
+				85 container
+					86 text 无 侠客 收藏职业卡 +10 经验 · 能力卡 +50 经验 0  / 14 张
+				87 text ？ ？ ？ ？ ？ ？ ？ ？ ？ ？ ？ ？ ？ ？
+				88 container
+					89 text 黑像 战士 收藏职业卡 +10 经验 · 能力卡 +50 经验 0  / 12 张
+				90 text ？ ？ ？ ？ ？ ？ ？ ？ ？ ？ ？ ？
+				91 container
+					92 text 星月 牧师 收藏职业卡 +10 经验 · 能力卡 +50 经验 0  / 13 张
+				93 text ？ ？ ？ ？ ？ ？ ？ ？ ？ ？ ？ ？ ？
+				94 container
+					95 text 白塔 法师 收藏职业卡 +10 经验 · 能力卡 +50 经验 0  / 13 张
+				96 text ？ ？ ？ ？ ？ ？ ？ ？ ？ ？ ？ ？ ？
+				97 container
+					98 text 常无欲 降临者 收藏职业卡 +10 经验 · 能力卡 +50 经验 0  / 15 张
+				99 text ？ ？ ？ ？ ？ ？ ？ ？ ？ ？ ？ ？ ？ ？ ？
+				100 container
+					101 text 0 1
+
+The focused UI element is 0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/

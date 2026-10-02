@@ -1,0 +1,191 @@
+{
+  "measuredAt": "2026-10-02T09:42:04.442Z",
+  "method": "只读实际 dataSlice 导入链；按 id 去重。strict 为配置显式 files 清单，非传递闭包/逐行覆盖率。资产门 paths=[] 为存量债检查。",
+  "cards": {
+    "count": 259,
+    "structured": 13,
+    "types": {
+      "事件": 19,
+      "道具": 22,
+      "资源": 14,
+      "装备": 36,
+      "武术": 59,
+      "法术": 73,
+      "能力卡": 11,
+      "生物": 25
+    },
+    "costs": {
+      "0": 134,
+      "1": 80,
+      "2": 44,
+      "6": 1
+    },
+    "knownAuditClauses": 13
+  },
+  "pets": {
+    "count": 6,
+    "levelMax": 5
+  },
+  "achievements": 26,
+  "sceneContent": 12,
+  "acceptanceSceneCount": 10,
+  "source": {
+    "jsFiles": 249,
+    "physicalLines": 48653,
+    "strictConfigs": [
+      "jsconfig.battle-settlement.json",
+      "jsconfig.battle-snapshot.json",
+      "jsconfig.card-rules.json",
+      "jsconfig.strict-foundations.json",
+      "jsconfig.strict-hand-selection.json",
+      "jsconfig.strict-selection.json",
+      "jsconfig.strict-ui.json"
+    ],
+    "strictExplicitFiles": 37,
+    "strictSourceJsFiles": 31,
+    "strictSourceJsRatio": 12.4,
+    "strictOtherFiles": [
+      "game/src/hub/battle-settlement.commands.types.d.ts",
+      "tests/battle-settlement-types.fixture.ts",
+      "tests/battle-snapshot-types.fixture.ts",
+      "tests/strict-foundations-types.fixture.ts",
+      "tests/strict-hand-selection-types.fixture.ts",
+      "tests/strict-selection-types.fixture.ts"
+    ]
+  },
+  "assets": {
+    "ok": true,
+    "errors": 0,
+    "warnings": 1162,
+    "counts": {
+      "unlisted": 1125,
+      "ghost": 33,
+      "license-pending": 4
+    }
+  },
+  "latestHistoricalBatch": {
+    "runs": 100,
+    "outcomes": {
+      "clear": 0,
+      "extract": 46,
+      "death": 51,
+      "abandon": 3
+    },
+    "clearRate": 0,
+    "extractRate": 46,
+    "deathRate": 51,
+    "surviveRate": 46,
+    "avgLayer": 3,
+    "avgTurns": 48,
+    "avgDurationSec": 2,
+    "avgCarriedValue": 2,
+    "maxCarriedValue": 20,
+    "battles": {
+      "fought": 833,
+      "won": 509
+    },
+    "battleWinRate": 61.1
+  },
+  "inputs": [
+    {
+      "path": "README.md",
+      "bytes": 3174,
+      "sha256": "63dc4feb0ea40c413068ccfcce70cd2ebb5e5f952449a2616e0d2067fd3fac21"
+    },
+    {
+      "path": "docs/PENDING.md",
+      "bytes": 15896,
+      "sha256": "6cd508c50ab77d058209767a2996ca004c212ffac68c8ea1fb9d5c26e1b20111"
+    },
+    {
+      "path": "docs/roadmap.md",
+      "bytes": 2462,
+      "sha256": "f8313cf1908d1a21eaf3df23ab3b6267ea59f76d2ba7c8b5ee28e71ea1e5eb59"
+    },
+    {
+      "path": "docs/DEBT-CAMPAIGN-2026-10.md",
+      "bytes": 4409,
+      "sha256": "5fb6b5daff24081664ae46c50e5099ae114d939df33e88776bfe5817de40da8e"
+    },
+    {
+      "path": "docs/evidence/2026-10-01-full-audit-fix-perf/README.md",
+      "bytes": 12537,
+      "sha256": "ed0fde744a6c6179d56c0144279c5ab27354990741b91512d838890478632d78"
+    },
+    {
+      "path": "docs/evidence/2026-10-01-acceptance-scenes/README.md",
+      "bytes": 6726,
+      "sha256": "8e6b328278b9124ec52dede35cfc5df825bc1d364bf801bce46bf46cc5a07200"
+    },
+    {
+      "path": "docs/evidence/2026-09-30-vertical-slice-review/review.md",
+      "bytes": 13348,
+      "sha256": "243daa153e3db7cc0a42eaf6205ca814c3ec893cfe1c97385773ad2e2945100d"
+    },
+    {
+      "path": "docs/evidence/2026-09-30-vertical-slice-review/continuation-result.md",
+      "bytes": 3726,
+      "sha256": "2b34ce64c333ec57b85ce9ba43b751fd2d26218b48760e2eaa132187249d4294"
+    },
+    {
+      "path": "docs/evidence/2026-10-02-quality-art-fixes/README.md",
+      "bytes": 2773,
+      "sha256": "52e3ba4745cb42c6fa6865b595b7a45287121a06fe68d5ba792eec04ffad98a3"
+    },
+    {
+      "path": "docs/evidence/2026-10-02-quality-art-fixes-crossplatform/README.md",
+      "bytes": 2224,
+      "sha256": "3a825795e6a82525144443d478f8502631d39211e6793e8053ece1866d73bf14"
+    },
+    {
+      "path": "docs/production/engineering/AGENT-EXPERIMENTS.md",
+      "bytes": 6414,
+      "sha256": "cd30e929e7defebb9334f71986b3f5c10329c159f0864bf9ff2052db4b405e43"
+    },
+    {
+      "path": "docs/PERF-LEDGER-2026-09-29.md",
+      "bytes": 8490,
+      "sha256": "6126b2c741dead9120ebbf50221b5297bd65f14c0fe188726c7baa5f4ed314eb"
+    },
+    {
+      "path": "docs/PHOTOLIB-PERF-TASK-2026-09-29.md",
+      "bytes": 21584,
+      "sha256": "7900c055d6f06a25381792c48823d891347326282556df2f21e7bb967126baff"
+    },
+    {
+      "path": "game/src/run/chests.js",
+      "bytes": 25787,
+      "sha256": "37071c99427a5d2f514128a252795269a56bc3ccdfa4bdb1a82ddb1f312d5053"
+    },
+    {
+      "path": "game/src/agent/agent.scenes.js",
+      "bytes": 26558,
+      "sha256": "a9e2d49c00f14856f87bdbe0030af057eadfa48545648f2a488b65c43ebf2145"
+    },
+    {
+      "path": "game/data/pets.json",
+      "bytes": 1089,
+      "sha256": "3f9b1a714e1a6643b802a73cba270b92f9188ce307615251396177276894a20f"
+    },
+    {
+      "path": "game/data/achievements.json",
+      "bytes": 5840,
+      "sha256": "feda8996c2f7827f75d3b14769aff4feb3530acfe113f51a3a6fe8d2246de13c"
+    },
+    {
+      "path": "game/src/hub/game.storage.js",
+      "bytes": 14329,
+      "sha256": "bfef0205e96669582387141e4227595ea715ef0293de0da608d31968344c5d49"
+    },
+    {
+      "path": "output/r24-T2-challenger/summary.json",
+      "bytes": 5013,
+      "sha256": "cbea3184b321af8cb0ea721b2aeedc3f443329fe16e967eaaf629d9a47e65f31"
+    },
+    {
+      "path": "output/agent-ledger.jsonl",
+      "bytes": 24100,
+      "sha256": "16d3fd2e6d9bb38b47205c1b4cf5808b4a6d5e1c836484ce6a8436a88c0b03a8"
+    }
+  ]
+}

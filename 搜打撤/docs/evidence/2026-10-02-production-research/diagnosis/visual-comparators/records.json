@@ -1,0 +1,576 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-10-02",
+  "scope": "独立游戏美术对照；只写自有属地；不亲玩、不下载媒体、不推导优劣评分",
+  "status": "complete-with-explicit-motion-blocker",
+  "evidenceDefinitions": {
+    "S1": "当前平台IAB直接展示官方/作者来源的截图像素；仅支持所见静态截面",
+    "D1": "官方或具名作者文字亲读；仅支持设计依据",
+    "M0": "动效未直接观察；只列后续比较目标，不能推断节奏/手感",
+    "M1": "正常播放的官方动画/视频片段实际观察；须写时间/帧范围，不能当作亲玩"
+  },
+  "records": [
+    {
+      "id": "VC-STS-01",
+      "game": "Slay the Spire",
+      "scene": "Defect战斗、Zap+放大、闪电伤害截面",
+      "staticSeen": true,
+      "motionSeen": true,
+      "sourceURLs": [
+        "https://store.steampowered.com/app/646570/Slay_the_Spire/",
+        "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/646570/ss_01aa3e7759e457bfbf2422f31c325d7b3ba8a6eb.1920x1080.jpg?t=1774015376"
+      ],
+      "staticEvidence": {
+        "level": "S1",
+        "sourceKind": "official-steam-store-screenshot",
+        "method": "IAB独立参考标签getScreenshot实际展示像素",
+        "displaySize": "1280x720",
+        "seenRange": "完整截图；顶部资源、遗物行、中央放大卡、两侧角色、底部手牌与结束回合",
+        "observations": [
+          "资源横条与遗物行位于画面顶边，角色场景占中部，手牌靠底部组成扇形",
+          "放大Zap+卡的费用、标题、插画、类型、效果纵向排列；蓝色外发光同时出现在放大卡和底部手牌边缘",
+          "敌方血条贴角色脚下；白色闪电和伤害数字7出现在受击角色区域，静态截面把来源效果与伤害位置连在同一区域"
+        ]
+      },
+      "motionEvidence": {
+        "level": "M1-limited-official-loop",
+        "seen": true,
+        "observer": "root",
+        "sourcePage": "https://store.steampowered.com/app/646570/Slay_the_Spire/",
+        "sourceMedia": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/646570/extras/525fee3b3fedadeaa101f2abbcf8ffca.webm?t=1774015376",
+        "durationSeconds": 6.57,
+        "samples": "motion/visible-samples.json",
+        "observedTimes": [
+          5.45305,
+          6.539875,
+          1.04353
+        ],
+        "observations": [
+          "目标附近绿色毒圈与Poison/数值反馈会变化，血条和状态图标保留为持续信息层",
+          "循环回到开头后出现短促受击碎片、伤害数字及卡片动作截面；短效层与固定HUD区分"
+        ],
+        "limits": [
+          "官方宣传短循环，非亲玩或交互响应测试",
+          "采样跨循环边界，不据此测量真实动作时长/帧率/输入延迟",
+          "只支持战斗反馈层次；不扩大为卡池/菜单/其他游戏动效已看",
+          "早期motion/sts-motion-0..3裁切区域失配，仅visible-samples及sts-visible-0..2作有效动态像素证据",
+          "未试听，无音频评价"
+        ]
+      },
+      "readScope": "官方Steam介绍文本与一张商店截图；不使用评分、评论作为艺术结论",
+      "comparableDimensions": [
+        "卡面内部层级",
+        "选中/可用态描边",
+        "场景与UI分区",
+        "伤害信息位置"
+      ],
+      "cannotCompare": [
+        "闪电单帧不能证明动效时长、连击节奏或输入响应",
+        "未亲玩、未看卡池/图鉴页，卡池适用仅限卡面结构",
+        "项目普通战持有牌会消耗，STS循环牌语义不同"
+      ],
+      "familyIds": [
+        "BATTLE",
+        "BOSS-BATTLE",
+        "CARD-ZOOM",
+        "CLASS-POOL",
+        "BATTLE-DECK",
+        "BATTLE-GRAVE",
+        "BATTLE-DISCOVER",
+        "BATTLE-TARGET",
+        "BOSS-DECK"
+      ],
+      "application": "战斗/详情可直接对照分层与焦点；卡池、墓地、发现只借卡面可读性，不声称看过STS对应页面"
+    },
+    {
+      "id": "VC-DICEY-01",
+      "game": "Dicey Dungeons",
+      "scene": "Warrior对Dryad，Whip/Pitchfork/Bump/Combat Roll的骰子插槽卡",
+      "staticSeen": true,
+      "motionSeen": false,
+      "sourceURLs": [
+        "https://store.steampowered.com/app/861540/Dicey_Dungeons/",
+        "https://cdn.cloudflare.steamstatic.com/steam/apps/861540/ss_ff6462111212aa9618405e30db7f7229f31e46ba.1920x1080.jpg?t=1661358070"
+      ],
+      "staticEvidence": {
+        "level": "S1",
+        "sourceKind": "official-steam-store-screenshot",
+        "method": "IAB独立参考标签getScreenshot实际展示像素",
+        "displaySize": "1280x720",
+        "seenRange": "完整秋季墓地战斗截图；敌方天赋/血量、中央四卡、底部玩家/骰子、右下结束回合",
+        "observations": [
+          "卡面用大块红、绿、灰底区分功能，标题固定于上沿，骰子虚线插槽占中央，效果在下部",
+          "Pitchfork插槽内MAX4与下方Burn/Shock图标、文字并列，费用约束和作用结果各有位置",
+          "人物与场景使用手绘边缘和较大色块；卡片文字区保持平整背景，环境纹理不进入核心文本框",
+          "敌方信息靠上、玩家资源靠下，End Turn固定右下，形成双方状态与操作区分"
+        ]
+      },
+      "motionEvidence": {
+        "level": "M0",
+        "seen": false,
+        "reason": "只看发行商店截图；另见作者0.17截图但不据历史玩笑敌人画面代表现行版本",
+        "checkTargets": [
+          "骰子拖入合法/非法槽反馈",
+          "消耗骰子到卡效果结算的视觉链",
+          "重掷期间资源计数何时更新",
+          "敌方动作预览如何进入与返回"
+        ]
+      },
+      "readScope": "官方Steam截图实际像素；已有library作者圆桌只用于设计背景，不等于动效观看",
+      "comparableDimensions": [
+        "卡片输入槽与输出效果分区",
+        "图标文字双编码",
+        "功能颜色",
+        "双方状态与结束回合位置",
+        "材质一致性"
+      ],
+      "cannotCompare": [
+        "骰子插槽与本项目付牌/注能不是同一资源语义",
+        "单图不支持拖拽精度、重掷节奏、触感评价",
+        "未看到主菜单与职业牌池完整流程"
+      ],
+      "familyIds": [
+        "BATTLE",
+        "BOSS-BATTLE",
+        "BATTLE-INFUSE",
+        "BATTLE-PAYMENT",
+        "BATTLE-CHOICE",
+        "CARD-ZOOM",
+        "TERM-TIP",
+        "CLASS-CHOICE",
+        "CLASS-POOL"
+      ],
+      "application": "支付/注能可借输入约束与输出效果的分离；人物/牌池只借图形风格和卡面层级，不当页面实测对比"
+    },
+    {
+      "id": "VC-ITB-01",
+      "game": "Into the Breach",
+      "scene": "冰雪战术网格、目标与攻击标记",
+      "staticSeen": true,
+      "motionSeen": false,
+      "sourceURLs": [
+        "https://store.steampowered.com/app/590380/Into_the_Breach/",
+        "https://steamdb.info/app/590380/screenshots/",
+        "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/590380/ss_567488bb66f15710b4fd40eb57446e5d652717f5.jpg"
+      ],
+      "staticEvidence": {
+        "level": "S1",
+        "sourceKind": "official-steam-cdn-asset-indexed-by-steamdb",
+        "provenanceNote": "图链接由SteamDB图库索引发现，像素来自Steam官方app590380商店资产CDN；非声称已亲读SteamDB正文",
+        "method": "IAB独立参考标签getScreenshot实际展示像素",
+        "displaySize": "1280x720",
+        "seenRange": "完整冰雪战术截图；顶部电网、左侧队伍、中央网格、右侧胜利倒计时/Bonus Objectives",
+        "observations": [
+          "中心白色等距网格与周围近黑背景形成独立主舞台，状态面板占四周边缘",
+          "橙色电网格、数字15%、RESET TURN(2)集中上沿；End Turn与暗色Undo Move并列左上",
+          "敌人/机甲附近有方向箭头、星形命中特效截面和地块内标记，空间信息直接放在对应地块",
+          "右侧倒计时数字4与两条目标文字形成固定列表，队伍肖像单列在左"
+        ]
+      },
+      "motionEvidence": {
+        "level": "M0",
+        "seen": false,
+        "reason": "仅静态商店资产",
+        "checkTargets": [
+          "悬停对象后意图路径与覆盖格出现方式",
+          "行动结算后箭头/危险标记更新时点",
+          "目标完成与倒计时减少如何保留上下文",
+          "Undo/Reset的可逆边界说明"
+        ]
+      },
+      "readScope": "官方Steam介绍确认敌方攻击预告；一个官方商店CDN静态截面；未观看动作过程",
+      "comparableDimensions": [
+        "地图/舞台与边缘HUD分离",
+        "对象就地信息",
+        "固定目标列表",
+        "可操作与不可操作按钮区分"
+      ],
+      "cannotCompare": [
+        "战术地块与本项目探索节点不是相同地图",
+        "静态箭头不证明全部攻击预测逻辑",
+        "未看到揭雾、跳层、闸门、读档和首脑入口过场",
+        "无法据截图比较动效速度或操控手感"
+      ],
+      "familyIds": [
+        "MAP",
+        "BATTLE",
+        "BOSS-BATTLE",
+        "BATTLE-TARGET",
+        "PREP-GOALS",
+        "DOOR",
+        "BOSS-GATE",
+        "LAB-MAP"
+      ],
+      "application": "MAP/BATTLE只借对象就地信息与HUD分区；门/入口借风险目标预告的设计目标；LAB-MAP是暂缓域，只列方法不做优劣评判"
+    },
+    {
+      "id": "VC-FTL-01",
+      "game": "FTL: Faster Than Light",
+      "scene": "节点路线、暂停时系统资源、文字遭遇选择（设计依据）",
+      "staticSeen": false,
+      "motionSeen": false,
+      "sourceURLs": [
+        "https://store.steampowered.com/app/212680/FTL_Faster_Than_Light/",
+        "https://subsetgames.com/ftl.html"
+      ],
+      "staticEvidence": {
+        "level": "D1",
+        "sourceKind": "official-store-description",
+        "seenRange": "官方Steam关键特色与玩法介绍文本；Subset官网返回403；未展示官方截图像素",
+        "designBasis": [
+          "官方说明战斗可以暂停评估策略，文字遭遇有多种解决选项",
+          "官方说明管理能量、武器、舰员与逃离决策；资源状态需要支持决策"
+        ]
+      },
+      "motionEvidence": {
+        "level": "M0",
+        "seen": false,
+        "reason": "未播放；新独立IAB标签尝试返回内置浏览器不可用",
+        "checkTargets": [
+          "暂停状态是否持续明确",
+          "地图选点到资源成本确认的过程",
+          "遭遇选择到结果反馈如何保持因果",
+          "资源耗尽时如何标出阻断动作"
+        ]
+      },
+      "readScope": "复用library/indie-games/records.json的官方介绍，本轮IAB亲读Steam关键特色；不采用玩家图库、媒体图或评论",
+      "comparableDimensions": [
+        "设计目标：路线与资源代价同屏可比",
+        "设计目标：状态/选择/结果因果连续",
+        "设计目标：暂停与不可操作态清晰"
+      ],
+      "cannotCompare": [
+        "没有截图像素，不能写颜色、材质、字号或构图观察",
+        "即时暂停式舰船战斗不等同项目回合制卡牌战斗",
+        "永久死亡全损不同于项目保险/安全格；不可照搬损失规则",
+        "未看视频，无动效优劣结论"
+      ],
+      "familyIds": [
+        "MAP",
+        "DOOR",
+        "NODE-SAFE",
+        "RUN-TRANSITION",
+        "BOSS-GATE",
+        "EXIT-PAY",
+        "EXIT-FINAL",
+        "LEAVE",
+        "EVENT",
+        "EVENT-CHOICE",
+        "RUN-SHOP",
+        "RUN-SELL",
+        "PREP",
+        "BATTLE-SETTINGS",
+        "LAB-MAP",
+        "LAB-DOOR",
+        "LAB-PREP"
+      ],
+      "application": "仅作为地图/资源/事件风险预告的条件比较目标；菜单、过场和暂缓LAB没有参考画面观察"
+    },
+    {
+      "id": "VC-DD-01",
+      "game": "Darkest Dungeon",
+      "scene": "城镇队伍长期成长、远征损失与成功/失败收束（设计依据）",
+      "staticSeen": false,
+      "motionSeen": false,
+      "sourceURLs": [
+        "https://www.darkestdungeon.com/darkest-dungeon/",
+        "https://store.steampowered.com/app/262060/Darkest_Dungeon/",
+        "https://img2.storyblok.com/fit-in/1536x768/filters%3Aformat%28jpeg%29/f/127947/1920x1080/a104a66c90/town_event_promo_desktop2.jpeg"
+      ],
+      "staticEvidence": {
+        "level": "D1",
+        "sourceKind": "official-studio-and-store-description",
+        "seenRange": "官网About与Key Feature正文；官方城镇事件图加载失败，未见像素",
+        "designBasis": [
+          "官方以心理压力、伤病和训练队伍解释长期损耗",
+          "官方介绍永久死亡、返镇治疗，旁白回应成功与失败"
+        ]
+      },
+      "motionEvidence": {
+        "level": "M0",
+        "seen": false,
+        "reason": "官方图片加载失败且IAB之后不可用；未播放旁白/视频",
+        "checkTargets": [
+          "远征结果到城镇长期损失的确认链",
+          "升级前后差异与资源扣除是否同区域反馈",
+          "死亡/成功收束中视觉与旁白信息如何互补",
+          "剧情演出是否保留继续/跳过状态"
+        ]
+      },
+      "readScope": "官网文字本轮亲读；永久死亡/治疗/旁白沿library已读官方Steam介绍；未见城镇像素、未听音频",
+      "comparableDimensions": [
+        "设计目标：长期成长与恢复成本可读",
+        "设计目标：结算交代保留、失去和可修复内容",
+        "设计目标：成败反馈具有明确情绪与事实信息"
+      ],
+      "cannotCompare": [
+        "未亲见画面，不能称黑墨材质/色彩/菜单布局已观察",
+        "多英雄压力模拟与项目单角色财产语义不同",
+        "未听旁白不能评价音色、混音或节奏",
+        "基地建筑和项目标签页不是同一空间操作"
+      ],
+      "familyIds": [
+        "TITLE",
+        "HUB-DEPLOY",
+        "HUB-UPGRADE",
+        "HUB-CLASSES",
+        "HUB-ACH",
+        "HUB-ACHIEVEMENTS",
+        "HUB-COLLECTION",
+        "CLASS-CHOICE",
+        "CLASS-GRANT",
+        "HOME-SCENE",
+        "DEATH",
+        "ABANDON-DONE",
+        "EXTRACT-DONE",
+        "FIRE",
+        "POCKET-RESTORE",
+        "SLOTS",
+        "SLOT-RECOVERY",
+        "EXIT-SCREEN",
+        "LAB-ENDING",
+        "LAB-DONE"
+      ],
+      "application": "基地/结算借长期后果与收束方法；标题/人物/存档只设验证目标；暂缓LAB演出不能据此评为已达或未达作品水平"
+    },
+    {
+      "id": "VC-BPH-01",
+      "game": "Backpack Hero",
+      "scene": "物品整理、奖励取用与库存战斗（设计依据）",
+      "staticSeen": false,
+      "motionSeen": false,
+      "sourceURLs": [
+        "https://store.steampowered.com/app/1970580/Backpack_Hero/",
+        "https://thejaspel.itch.io/backpack-hero",
+        "https://thejaspel.itch.io/backpack-hero/devlog/361238/backpack-hero-archery-update",
+        "https://cdn.akamai.steamstatic.com/steam/apps/1970580/ss_34f8989603fae6271448b2c5965096c783a3ee09.1920x1080.jpg?t=1707741983"
+      ],
+      "staticEvidence": {
+        "level": "D1",
+        "sourceKind": "official-author-page-and-devlog",
+        "seenRange": "作者页介绍/鼠标旋转指引与library定向作者Archery Update；官方Steam截图URL已找到但导航未执行，未见像素",
+        "designBasis": [
+          "作者明确物品收集、整理背包与战斗，持物时可旋转",
+          "作者更新讨论奖励取用上限、被动顺序与重排时机，操作规则要有边界"
+        ]
+      },
+      "motionEvidence": {
+        "level": "M0",
+        "seen": false,
+        "reason": "内置浏览器不可用；未执行游戏、未观看拖拽",
+        "checkTargets": [
+          "抓取、旋转、合法放置、取消的四态反馈",
+          "奖励取用上限从候选到已取的连续反馈",
+          "满包/非法位置如何解释",
+          "消耗、出售与普通整理是否明显区分"
+        ]
+      },
+      "readScope": "作者页正文本轮亲读；作者Archery Update仅复用library已读Changes/Bug-Fixes摘要；不采用评论区截图或用户建议",
+      "comparableDimensions": [
+        "设计目标：物品身份与操作状态分离",
+        "设计目标：取用上限可追踪",
+        "设计目标：整理/消耗/出售的后果可区分"
+      ],
+      "cannotCompare": [
+        "未见截图像素，不能写网格/物品图形/背包材质已观察",
+        "空间排列协同是BPH核心，本项目列表财产不需要引入空间拼图",
+        "历史开发日志不证明2026版本时机或平衡",
+        "无动效观察，不评价拖拽手感"
+      ],
+      "familyIds": [
+        "HUB-STASH",
+        "STASH-ITEM",
+        "STASH-RAW",
+        "STASH-MATERIAL",
+        "STASH-EGG",
+        "HUB-PETS",
+        "STASH-CONFIRM",
+        "MATERIAL-CONFIRM",
+        "BAG",
+        "BAG-DISCARD",
+        "BAG-PEARL",
+        "BAG-POUCH",
+        "BATTLE-BAG",
+        "EXTRACT-STASH",
+        "CHEST-SEARCH",
+        "CHEST-PICK",
+        "CHEST-ALL",
+        "PICKUP",
+        "RESOURCE-PICK",
+        "BATTLE-REWARD",
+        "HUB-SHOP",
+        "RUN-SHOP",
+        "RUN-SELL",
+        "EVENT-CHOICE",
+        "SACRIFICE",
+        "ALTAR-REWARD",
+        "LAB-SHOP"
+      ],
+      "application": "背包、奖励、货架、风险确认逐页只用取用/后果检查目标，不能写直接画面优劣"
+    },
+    {
+      "id": "VC-CS-01",
+      "game": "Citizen Sleeper",
+      "scene": "人物叙事、事件行动与骰/时钟/目标（设计依据）",
+      "staticSeen": false,
+      "motionSeen": false,
+      "sourceURLs": [
+        "https://www.fellowtraveller.games/citizen-sleeper",
+        "https://www.gamedeveloper.com/business/how-citizen-sleeper-was-inspired-by-tabletop-rpgs-and-gig-work"
+      ],
+      "staticEvidence": {
+        "level": "D1",
+        "sourceKind": "official-publisher-description-and-developer-interview",
+        "seenRange": "官方页About、Do the Work、Turn Up for Your Friends、Inspired by TTRPG正文；截图与GIF索引只是来源线索，未见像素",
+        "designBasis": [
+          "官方以骰、时钟、目标组织每日行动预算",
+          "人物关系和帮助选择形成持续叙事；library访谈作者描述带代价的成功与统一交互"
+        ]
+      },
+      "motionEvidence": {
+        "level": "M0",
+        "seen": false,
+        "reason": "本轮正常createBrowserTab打开官方页一次返回Browser is not available: iab；未播放GIF，未再救浏览器",
+        "checkTargets": [
+          "人物叙事到选项的阅读顺序",
+          "选择代价与成功结果在确认前后如何展示",
+          "时钟增减/行动消耗如何贴近来源",
+          "长文滚动、继续按钮和焦点如何保持上下文"
+        ]
+      },
+      "readScope": "官方页正文本轮亲读；作者访谈只复用library已读具名开发者回答，不等于完整访谈复读或游戏体验",
+      "comparableDimensions": [
+        "设计目标：角色/正文/选择/代价层级",
+        "设计目标：进度反馈保留因果",
+        "设计目标：行动预算和长文阅读兼容"
+      ],
+      "cannotCompare": [
+        "官方截图和GIF未直接展示，不能写肖像构图、色调或动效已观察",
+        "长篇关系叙事与短节点事件规模不同",
+        "骰/时钟不是项目卡牌/物资预算，不能复制系统",
+        "开发工具借阅读层级方法不等同玩家叙事页"
+      ],
+      "familyIds": [
+        "EVENT",
+        "EVENT-GAMBLE",
+        "EVENT-RECODE",
+        "LAST-LAMP",
+        "LAST-LAMP-RESULT",
+        "ALTAR",
+        "ALTAR-FRAGMENT-FAIL",
+        "INBOX",
+        "SUGGESTION",
+        "GUIDE",
+        "HUB-HELP",
+        "AMMO-TUTORIAL",
+        "TERM-TIP",
+        "CLASS-CHOICE",
+        "CLASS-GRANT",
+        "LAB-ALTAR",
+        "LAB-RUNES",
+        "LAB-ENDING"
+      ],
+      "application": "故事/教学/术语/信箱借阅读与选择反馈方法；暂缓研究所只设阅读/状态比较目标，未亲见对照画面"
+    },
+    {
+      "id": "VC-COG-01",
+      "game": "Cogmind",
+      "scene": "终局摘要、跑局数据、音效视觉冗余和设置（作者设计依据）",
+      "staticSeen": false,
+      "motionSeen": false,
+      "sourceURLs": [
+        "https://www.gridsagegames.com/cogmind/",
+        "https://www.gridsagegames.com/blog/2015/10/morgue-files/",
+        "https://www.gridsagegames.com/blog/2020/06/audio-accessibility-features-roguelikes/"
+      ],
+      "staticEvidence": {
+        "level": "D1",
+        "sourceKind": "developer-blog",
+        "seenRange": "Morgue Files的Cogmind Score Sheets/Format/Additional Post-Mortem Features正文；Audio文章Visible SFX/Audio Log/Challenges正文；插图未展示像素",
+        "designBasis": [
+          "作者将终局摘要与详细跑局记录分层，峰值构型和常用部件补足终局库存不足",
+          "作者给重要声音提供位置标记与文本日志，但限制额外精确情报和重复噪音"
+        ]
+      },
+      "motionEvidence": {
+        "level": "M0",
+        "seen": false,
+        "reason": "作者正文描述闪点、淡出框与声音分类是设计依据；本轮未播放文内动画/未听声音",
+        "checkTargets": [
+          "关键事件是否有文本/视觉替代声音",
+          "同事件多音效是否刷屏",
+          "数字更新与原因关联",
+          "终局摘要到详细记录的层级",
+          "设置更改是否立即有可验证反馈"
+        ]
+      },
+      "readScope": "复用library两篇作者定向深读；本轮web再次亲读对应正文，未看评论、未看全部作者归档；图片/动画索引不算观察",
+      "comparableDimensions": [
+        "设计目标：摘要与细账分层",
+        "设计目标：事实因果与峰值/关键拐点",
+        "设计目标：声音重要信息的视觉冗余",
+        "设计目标：诊断可读性"
+      ],
+      "cannotCompare": [
+        "2015/2020文章是历史设计依据，不声称现行画面或所有设想已上线",
+        "未见像素不评价终端字体、配色、动画质感",
+        "本项目没有同样的听觉空间侦查，不能额外揭露隐藏情报",
+        "Agent/数据开发台与Cogmind玩家UI不等价，只借信息方法"
+      ],
+      "familyIds": [
+        "DATA",
+        "DEATH",
+        "ABANDON-DONE",
+        "EXTRACT-DONE",
+        "TERMINAL-RETRY",
+        "EXTRACT-RETRY",
+        "BATTLE-SETTLE-RETRY",
+        "LAST-LAMP-RESULT",
+        "SETTINGS",
+        "BATTLE-SETTINGS",
+        "SFX-AUDITION",
+        "TITLE-ACH",
+        "HUB-ACHIEVEMENTS",
+        "HUB-COLLECTION",
+        "HUB-BACKS",
+        "STUDIO",
+        "PHOTO-ZOOM",
+        "NODE-NOTE",
+        "NOTES-EXPORT",
+        "NOTES-IMPORT",
+        "NOTES-CLEAR",
+        "CARD-DESIGNER",
+        "CARDS-EXPORT",
+        "CARDS-IMPORT",
+        "DEV-DEBUG",
+        "DEV-AGENT",
+        "DEV-DATA",
+        "DEV-KEYS",
+        "LAB-RETRY",
+        "LAB-DONE"
+      ],
+      "application": "数据/终局/设置以摘要、原因、冗余作条件比较；收藏/照片只借索引与详情分层；工具与暂缓LAB不得当玩家视觉同类评分"
+    }
+  ],
+  "blockers": [
+    {
+      "source": "Darkest Dungeon官方城镇事件图",
+      "url": "https://img2.storyblok.com/fit-in/1536x768/filters%3Aformat%28jpeg%29/f/127947/1920x1080/a104a66c90/town_event_promo_desktop2.jpeg",
+      "status": "not-seen",
+      "reason": "IAB加载失败进入data:错误页，后续goto/close被URL policy阻断；不重试或绕过该来源/控制面"
+    },
+    {
+      "source": "Citizen Sleeper官方页面动效补证",
+      "url": "https://www.fellowtraveller.games/citizen-sleeper",
+      "status": "not-played",
+      "reason": "正常打开新独立IAB标签一次返回Browser is not available: iab；能力定性后停止，不下载/外部浏览器/换控制面"
+    }
+  ],
+  "counts": {
+    "cards": 8,
+    "staticSeen": 3,
+    "motionSeen": 1,
+    "designBasisOnly": 5
+  },
+  "copyright": "只保存自写观察、来源URL与亲读范围；商店截图未下载、未作为可复用资产入库"
+}

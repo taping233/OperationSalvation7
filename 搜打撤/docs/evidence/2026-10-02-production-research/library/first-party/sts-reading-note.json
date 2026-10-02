@@ -1,0 +1,20 @@
+{
+  "id": "fp-sts-metrics",
+  "reviewedAt": "2026-10-02",
+  "url": "https://media.gdcvault.com/gdc2019/presentations/Giovannetti_Anthony_SlayTheSpire.pdf",
+  "author": "Anthony Giovannetti / Mega Crit Games",
+  "source": "GDC 2019 official presentation, 22 pages",
+  "pages": [7, 13, 16, 21],
+  "pageNumbering": "One-based PDF page numbers, not video timestamps",
+  "scope": "Official PDF text extraction on selected pages; screenshot requests returned text references without inspectable pixels in this session. No chart values inferred. Full video not watched; copyrighted PDF not downloaded into library.",
+  "findings": [
+    {"page": 7, "summary": "平衡目标是每张牌有位置，同时避免过度扭曲环境。"},
+    {"page": 13, "summary": "指标提供证据，不能单凭指标下结论。"},
+    {"page": 16, "summary": "用逐级解锁的进阶层级区分玩家熟练度。"},
+    {"page": 21, "summary": "持续迭代、降低反馈门槛，并更频繁更新。"}
+  ],
+  "projectInference": "项目先按卡牌作用、规则版本与策略层级看结果，再观察真人是否理解取舍；Agent胜率不能独自证明手感。此为本项目研究者推论，未实施。",
+  "license": "Copyrighted talk slides; reference-only. Index and short original summaries only; no figures, deck or video redistribution.",
+  "upgradesExistingRecord": true,
+  "coreRecordCountUnchanged": 38
+}

@@ -1,0 +1,137 @@
+{
+  "generatedAt": "2026-10-02T15:29:49.654Z",
+  "inputPaths": [
+    "pages/pages.json",
+    "systems/systems.json",
+    "systems/resources.json"
+  ],
+  "inputHashes": {
+    "pages/pages.json": "ffc58a7bc957b98f3a27954a6213f1b1704dff73218ab6688df58d4cc2eb9a30",
+    "systems/systems.json": "6872ec9dbf669656930e8d5c7df331de87f379912591edb9133d4edd768b37e3",
+    "systems/resources.json": "6e1e2c86299c6c349136e7563bb9b8edd5da1e63747cfb10947365a35fb2d8e1"
+  },
+  "coverage": {
+    "pageRecords": 110,
+    "variantRecords": 55,
+    "systemRecords": 19,
+    "inventoryRecords": 110,
+    "missingPages": [],
+    "duplicatePageIds": false
+  },
+  "sheets": [
+    {
+      "name": "总体计划",
+      "headerRow": 12,
+      "records": 19,
+      "physicalRows": 19,
+      "continuationRows": 0,
+      "range": "A12:N31",
+      "previewPath": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-02-production-research\\planning\\workbook\\qa\\总体计划.png",
+      "minRowHeightPx": 77,
+      "maxRowHeightPx": 172
+    },
+    {
+      "name": "阶段与决策",
+      "headerRow": 5,
+      "records": 10,
+      "physicalRows": 10,
+      "continuationRows": 0,
+      "range": "A5:J15",
+      "previewPath": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-02-production-research\\planning\\workbook\\qa\\阶段与决策.png",
+      "minRowHeightPx": 42,
+      "maxRowHeightPx": 153
+    },
+    {
+      "name": "架构功能",
+      "headerRow": 5,
+      "records": 19,
+      "physicalRows": 19,
+      "continuationRows": 0,
+      "range": "A5:O24",
+      "previewPath": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-02-production-research\\planning\\workbook\\qa\\架构功能.png",
+      "minRowHeightPx": 153,
+      "maxRowHeightPx": 438
+    },
+    {
+      "name": "美术_入口基地",
+      "headerRow": 5,
+      "records": 36,
+      "physicalRows": 36,
+      "continuationRows": 0,
+      "range": "A5:O41",
+      "previewPath": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-02-production-research\\planning\\workbook\\qa\\美术_入口基地.png",
+      "minRowHeightPx": 305,
+      "maxRowHeightPx": 438
+    },
+    {
+      "name": "美术_探索事件",
+      "headerRow": 5,
+      "records": 28,
+      "physicalRows": 30,
+      "continuationRows": 2,
+      "range": "A5:O35",
+      "previewPath": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-02-production-research\\planning\\workbook\\qa\\美术_探索事件.png",
+      "minRowHeightPx": 58,
+      "maxRowHeightPx": 514
+    },
+    {
+      "name": "美术_战斗结算",
+      "headerRow": 5,
+      "records": 23,
+      "physicalRows": 24,
+      "continuationRows": 1,
+      "range": "A5:O29",
+      "previewPath": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-02-production-research\\planning\\workbook\\qa\\美术_战斗结算.png",
+      "minRowHeightPx": 96,
+      "maxRowHeightPx": 495
+    },
+    {
+      "name": "美术_工具研究所",
+      "headerRow": 5,
+      "records": 23,
+      "physicalRows": 23,
+      "continuationRows": 0,
+      "range": "A5:O28",
+      "previewPath": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-02-production-research\\planning\\workbook\\qa\\美术_工具研究所.png",
+      "minRowHeightPx": 286,
+      "maxRowHeightPx": 381
+    },
+    {
+      "name": "变体差异",
+      "headerRow": 5,
+      "records": 55,
+      "physicalRows": 55,
+      "continuationRows": 0,
+      "range": "A5:N60",
+      "previewPath": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-02-production-research\\planning\\workbook\\qa\\变体差异.png",
+      "minRowHeightPx": 229,
+      "maxRowHeightPx": 248
+    },
+    {
+      "name": "资源与参考",
+      "headerRow": 5,
+      "records": 35,
+      "physicalRows": 36,
+      "continuationRows": 1,
+      "range": "A5:L41",
+      "previewPath": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-02-production-research\\planning\\workbook\\qa\\资源与参考.png",
+      "minRowHeightPx": 58,
+      "maxRowHeightPx": 476
+    },
+    {
+      "name": "工程工具",
+      "headerRow": 5,
+      "records": 12,
+      "physicalRows": 12,
+      "continuationRows": 0,
+      "range": "A5:H17",
+      "previewPath": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-02-production-research\\planning\\workbook\\qa\\工程工具.png",
+      "minRowHeightPx": 42,
+      "maxRowHeightPx": 58
+    }
+  ],
+  "formulaErrors": "{\"kind\":\"notice\",\"message\":\"Cell search matched 0 entries.\"}",
+  "finalPath": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-02-production-research\\planning\\workbook\\outputs\\01a0fc3c-b8ec-7d82-851d-26c02dc55f4e\\搜打撤_总体改造计划与分表.xlsx",
+  "bytes": 169079,
+  "sha256": "3c64de4370bcafa489414ea03fe2f521d42a8cd02a98912e4aeff73c2628e057"
+}

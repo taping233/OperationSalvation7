@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "id": "quality-art-fixes-crossplatform",
+  "date": "2026-10-02",
+  "owner": "Codex",
+  "goal": "续接quality-art-fixes：核对并应用云端NAI并发修复增量，完成跨平台复核",
+  "paths": [
+    "scripts/gate-plan.mjs",
+    "tests/quality-config.test.js",
+    "tools/nai_gen.py",
+    "tools/nai_guard.py",
+    "tools/tests/test_nai_guard.py"
+  ],
+  "doneWhen": [
+    "五文件增量补丁前置哈希与本地版本相符",
+    "仅五文件精确增量已应用且NAI离线与质量门定向回归通过",
+    "云端Linux与本地Windows执行边界、未提交归属及证据已记录"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "report",
+      "report": "docs/evidence/2026-10-02-quality-art-fixes-crossplatform/2026-10-02T08-06-03.781Z-0b19ece2.json",
+      "result": "passed",
+      "sha256": "3b033866ee715e07bf4805b48d18a3d0c8a00b73b64bf497fd6aace70d5d4942",
+      "verification": "recorded-result-only-not-current-freshness"
+    },
+    {
+      "kind": "manual",
+      "description": "NAI离线18项中17通过，Windows跳过POSIX fsync一项",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "语法296文件、lint及8组类型配置通过，git diff --check通过",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "云端Linux证据incoming/bundle/VERIFY.md，POSIX符号链接与NAI18项通过",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "完整游戏套件、build、实页、真实NAI出图、远端CI未运行；云端3个环境排除用例不算通过"
+  ],
+  "updatedAt": "2026-10-02T08:08:56.271Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

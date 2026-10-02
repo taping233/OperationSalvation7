@@ -1,0 +1,42 @@
+---Before-file SHA256---
+9841e13655016b846ef0f7c07b2530fc57bdbcb557ad351aa8b9ed79701ee710  /workspace/scratch/b7a53a06c872/repair-check-results/nai-before/nai_guard.py
+b60725773e3056aa98d37038a9b5f1ad8008871a0426f14b9cdb182a35122c5e  /workspace/scratch/b7a53a06c872/repair-check-results/nai-before/nai_gen.py
+6103f4fb04867d91c3e6561cda47b9fc90f39f1d05ed42643ac0c96fb1a73fdd  /workspace/scratch/b7a53a06c872/repair-check-results/nai-before/tests/test_nai_guard.py
+
+---Final-file SHA256---
+0d30fd155c2c78f37eaab7b2b8743d78acd7ae43ca0f9295649625cb785c09a5  tools/nai_guard.py
+66a14d7e1d3b9f96b8efb964668913281e8b48364cef2dc721cd889f6eb2a985  tools/nai_gen.py
+694c8b97e5692b960eb0170645aa7496ecc80fc0a53f84426758f27cfda33f8e  tools/tests/test_nai_guard.py
+
+---Final source anchors---
+tools/nai_guard.py:71:        os.fsync(handle.fileno())
+tools/nai_guard.py:73:    os.replace(temporary, str(path))
+tools/nai_guard.py:77:            os.fsync(directory)
+tools/nai_guard.py:123:        Pace from completion, conservatively covering pre-dispatch save delays.
+tools/nai_guard.py:132:                                          'request_pending': False})
+tools/nai_guard.py:158:            # The earlier reservation timestamp precedes fsync and dispatch.
+tools/nai_guard.py:162:            completed_at = self.clock()
+tools/nai_guard.py:163:            rate['next_request_at'] = max(rate['next_request_at'],
+tools/nai_guard.py:164:                                          math.ceil(completed_at + self.interval))
+tools/nai_guard.py:166:                rate['cooldown_until'] = math.ceil(completed_at + self.cooldown)
+tools/nai_guard.py:167:            rate['request_pending'] = False
+tools/nai_gen.py:134:    with tempfile.TemporaryDirectory(prefix=out.stem + '.nai-', dir=str(out.parent)) as temporary:
+tools/nai_gen.py:138:        image_file = temporary / 'image.png'
+tools/nai_gen.py:159:            image_file.write_bytes(z.read(z.namelist()[0]))
+tools/nai_gen.py:160:        with Image.open(image_file) as im:
+tools/nai_gen.py:163:        os.replace(str(image_file), str(out))
+tools/tests/test_nai_guard.py:67:        self.temporary = tempfile.TemporaryDirectory(prefix='nai-offline-')
+tools/tests/test_nai_guard.py:103:    def test_delayed_reservation_save_cannot_shorten_dispatch_interval(self):
+tools/tests/test_nai_guard.py:123:    def test_completion_clock_failure_leaves_fail_closed_pending_state(self):
+tools/tests/test_nai_guard.py:134:    @unittest.skipIf(os.name == 'nt', 'POSIX directory fsync contract')
+tools/tests/test_nai_guard.py:135:    def test_posix_file_and_directory_fsync_precede_dispatch_and_finalize_response(self):
+tools/tests/test_nai_guard.py:137:        fsync = os.fsync
+tools/tests/test_nai_guard.py:139:        def observe_fsync(descriptor):
+tools/tests/test_nai_guard.py:143:            return fsync(descriptor)
+tools/tests/test_nai_guard.py:149:        with patch('nai_guard.os.fsync', side_effect=observe_fsync):
+tools/tests/test_nai_guard.py:177:        values += [json.dumps({'next_request_at': bad, 'cooldown_until': 0, 'request_pending': False})
+tools/tests/test_nai_guard.py:179:        values += [json.dumps({'next_request_at': 0, 'cooldown_until': bad, 'request_pending': False})
+tools/tests/test_nai_guard.py:230:        replace = os.replace
+tools/tests/test_nai_guard.py:239:        with patch('nai_guard.os.replace', side_effect=fail_response_save):
+tools/tests/test_nai_guard.py:259:        with patch('nai_guard.os.replace', side_effect=OSError('save failed')):
+tools/tests/test_nai_guard.py:318:    def test_concurrent_same_output_keeps_mixed_dimensions_and_archives_private(self):

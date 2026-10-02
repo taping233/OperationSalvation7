@@ -1,0 +1,18 @@
+Browser tab: 10, Title: "升格会的冬日猜想 v0.60.0", URL: "http://127.0.0.1:5336/".
+0 AXWebArea 升格会的冬日猜想 v0.60.0, URL: 127.0.0.1:5336/
+	1 container viewport
+		2 button 背包 3/16, ID: bagBtnFloat
+			3 text 背包
+			4 text 3/16
+		5 container broom 清空全部备注, ID: overlay
+			6 container
+				12 button Description: 关闭, ID: ovCloseX
+				8 heading broom 清空全部备注, Value: 2, ID: ovTitle
+					13 image broom
+					14 text  清空全部备注
+				11 container ovBody
+					15 text 确定删除所有格子备注？此操作不可恢复。
+					16 button 确认清空
+					17 button 取消
+
+The focused UI element is 17 button 取消

@@ -14,6 +14,18 @@ const fmtTime = (ts) => {
   return `${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')} ${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
 };
 const OUTCOME_ZH = { clear: '通关撤离', extract: '撤离', death: '死亡', abandon: '放弃' };
+// 驱动标签：真人 / 脚本 / LLM 分色，让「辅助局」在明细里一眼可辨（不作为自然平衡依据）
+const DRIVER_ZH = {
+  human: { label: '真人', cls: 'human' },
+  greedy: { label: '脚本·贪心', cls: 'bot' },
+  random: { label: '脚本·随机', cls: 'bot' },
+  llm: { label: 'LLM', cls: 'llm' },
+};
+const driverTag = (d) => {
+  const m = DRIVER_ZH[d];
+  return m ? `<span class="devc-driver sm ${m.cls}">${m.label}</span>` : `<span class="devc-driver sm">${esc(d)}</span>`;
+};
+const driverLabel = (d) => DRIVER_ZH[d]?.label || d;
 
 function download(filename, text, mime) {
   const blob = new Blob([text], { type: mime });
@@ -45,12 +57,12 @@ function dataPanelHTML() {
   const splitRows = (title, groups) => {
     const rows = Object.entries(groups)
       .sort((a, b) => b[1].runs - a[1].runs)
-      .map(([key, s]) => `<tr><td>${esc(key)}</td><td>${s.runs}</td><td>${s.clearRate}%</td><td>${s.extractRate}%</td><td>${s.avgCarriedValue}</td></tr>`).join('');
+      .map(([key, s]) => `<tr><td>${esc(driverLabel(key))}</td><td>${s.runs}</td><td>${s.clearRate}%</td><td>${s.extractRate}%</td><td>${s.avgCarriedValue}</td></tr>`).join('');
     return `<section class="hub-card"><h3>${title}</h3>
       <table class="dt-table"><thead><tr><th>分组</th><th>局数</th><th>通关率</th><th>撤离率</th><th>均价值</th></tr></thead><tbody>${rows || '<tr><td colspan="5" class="dim">—</td></tr>'}</tbody></table></section>`;
   };
   const recent = runs.slice(-20).reverse()
-    .map(r => `<tr><td>${fmtTime(r.ts)}</td><td>${esc(r.driver)}</td><td>${OUTCOME_ZH[r.outcome] || esc(r.outcome)}</td><td>${r.maxLayer ?? '—'}</td><td>${r.turns ?? '—'}</td><td>${r.carriedValue}</td></tr>`).join('');
+    .map(r => `<tr><td>${fmtTime(r.ts)}</td><td>${driverTag(r.driver)}</td><td>${OUTCOME_ZH[r.outcome] || esc(r.outcome)}</td><td>${r.maxLayer ?? '—'}</td><td>${r.turns ?? '—'}</td><td>${r.carriedValue}</td></tr>`).join('');
   return `
     <div class="doom-stats" style="margin:8px 0">
       ${summaryCard('总局数', agg.total)}
@@ -60,6 +72,8 @@ function dataPanelHTML() {
       ${summaryCard('均带出价值', o.avgCarriedValue, 'gold')}
       ${summaryCard('战斗胜率', o.battleWinRate + '%')}
     </div>
+    <p class="ov-note">样本 ${agg.total} 局（本地环形缓冲，最多保留 200 局）${agg.total === 0 ? '——当前为空，先跑一局再回来看。' : ''}真人局与辅助局混记，辅助局胜率不作为自然平衡依据。</p>
+    <p class="ov-note">口径：「通关撤离」行记入库卡（savedCards），「撤离」行记带出卡（carriedCards），均为最终确定集合——撤离时未选中的候选不入账。</p>
     <div class="dt-grid">
       <section class="hub-card"><h3>死亡层分布</h3><div class="dt-bars">${layerBars}</div></section>
       <section class="hub-card"><h3>高价值带出卡 Top</h3>
@@ -70,10 +84,14 @@ function dataPanelHTML() {
       <section class="hub-card"><h3>最近 20 局</h3>
         <table class="dt-table"><thead><tr><th>时间</th><th>驱动</th><th>结局</th><th>层</th><th>行动</th><th>带出价值</th></tr></thead><tbody>${recent || '<tr><td colspan="6" class="dim">暂无记录</td></tr>'}</tbody></table></section>
     </div>
-    <div class="ov-btns">
+    <div class="devc-actions"><div class="ov-btns">
       <button class="ov-btn" data-act="dataExportJSON">导出 JSON</button>
       <button class="ov-btn" data-act="dataExportCSV">导出 CSV</button>
-      <button class="ov-btn danger" data-act="dataClear">清空记录</button>
+    </div></div>
+    <div class="devc-danger-zone">
+      <div class="dz-txt"><b>清空本地跑局记录</b>
+        <span>将删除本地全部 ${runs.length} 局记录（含真人局），清空后不可恢复；如需留档请先用上方导出。</span></div>
+      <button class="devc-danger-btn" data-act="dataClear">清空记录</button>
     </div>`;
 }
 

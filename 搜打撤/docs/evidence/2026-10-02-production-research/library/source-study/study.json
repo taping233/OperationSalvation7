@@ -1,0 +1,22 @@
+{
+  "id": "brogue-ce-system-study",
+  "title": "Brogue CE 1.15.1 complete source: levels, consumables, survival pressure and escape ending",
+  "url": "https://github.com/tmewett/BrogueCE",
+  "releaseUrl": "https://github.com/tmewett/BrogueCE/releases/tag/v1.15.1",
+  "version": "1.15.1",
+  "commit": "1ba4240b7a928ddf0ffb772717bf1d433cd63804",
+  "publishedAt": "2026-02-12T22:34:53Z",
+  "accessedAt": "2026-10-02",
+  "category": "complete-open-source-game-study",
+  "useStatus": "reference-only",
+  "downloaded": true,
+  "manifest": "source-study/download-manifest.json",
+  "archiveInventory": "source-study/archive-inventory.json",
+  "readingPath": "source-study/README.md",
+  "verifiedScope": "Maintainer release/tag API, fixed archive inventory, selected original C source ranges, root AGPL and tiles.png asset declaration; no execution or visual review",
+  "systems": ["seeded level generation and visited-level restoration", "consumable validation/confirmation/application/consumption/turn end", "nutrition depletion/starvation and supply metering", "amulet possession versus actual escape", "victory value summary/events/end-state turn guard"],
+  "license": {"source": "AGPL-3.0-or-later according to C source headers; root AGPL v3", "tiles.png": "CC-BY-SA-4.0 according to bin/assets/LICENSE.txt", "otherAssets": "Not individually cleared for project reuse", "integrationApproved": false},
+  "limitations": ["Complete fixed repository ZIP is not an installed playable binary or proof of buildability", "C/SDL architecture not directly portable to Vite", "No card-deck/base progression equivalence", "Static reading does not prove all branches or player experience", "Source and art licenses are not permissive MIT/CC0 reuse"],
+  "thirdPartyCodeExecuted": false,
+  "countedInCore38Catalog": false
+}

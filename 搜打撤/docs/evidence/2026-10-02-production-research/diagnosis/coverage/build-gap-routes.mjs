@@ -1,0 +1,99 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+const dir=path.dirname(fileURLToPath(import.meta.url));
+const inv=JSON.parse(fs.readFileSync(path.join(dir,'inventory.json'),'utf8'));
+const art=JSON.parse(fs.readFileSync(path.join(dir,'../art-annotations/annotations.json'),'utf8'));
+// 仅对现存美术账本44/66缺口给路线；不扫源码，不扩ID，不操作游戏。
+// id|分层|公开入口/内部性|参数|必要守卫|副作用|最短正常入口|已有测试/夹具
+const definitions=`
+SLOT-RECOVERY|ui-conditional|game.session.startNewGame(); 内部enterSlot动作|已有合法Run档；选对应slot|配对/版本有效，enteringSlot无并发|正常读档会切Base与Run身份、过场及保存恢复|标题→五档→进入有Run档；无档不造档|tests/extraction-recovery-ui.test.js的pending恢复是隔离mock，不复制live storage
+TITLE-ACH|ui|标题#mAch；openTitleAchievements为menu内部|无|标题页按钮可见|读Meta；overlay+game.state|标题→成就总览，返回achBack|inventory入口line433
+SUGGESTION|ui|菜单openSuggestionBox内部；#sugLayer既有右键接线|当前元素/坐标/page由右键计算|现有页面且上下文可辨|只打开不保存：输入层；保存才写留言|在当前界面右键→记录试玩反馈→取消，不点保存|game.menu.js:228；不能把查看层当真实发消息
+LEAVE|ui|game.session.openLeaveMenu()|无|真实Run在地图；busy先结束|game.state=modal；只打开不保存/不放弃|地图左上离开按钮→取消|tests/terminal-settlement.test.js:35，隔离mockUI
+ABANDON-DONE|isolated-test|createGameMenuController(deps)；abandonRun/finish内部|fake game+Base/terminalCommands/runtime；UI仅桥渲染|所有存储/搬运依赖stub，不能拿真实SDT.Base|隔离假局terminal结果；真实点击放弃会不可逆结算|真实放弃需要另获具体授权；不为取图放弃在途档|tests/terminal-settlement.test.js:18–58有完整注入deps
+TERMINAL-RETRY|renderer|ui/terminal-settlement.runTerminalSettlement(p)|token:{busy:false,promise:null},current:()=>true,game:展示副本,UI:渲染桥,finish:()=>false,command:'abandon',retryAct:'fixtureTerminalRetry',extraPayload:{},terminalCommands:null|传null故意走服务不可用；不得注入真实终局命令|只渲染失败页/注册重试/refresh副本；不读写档|无正常入口可主动制造真实故障；fixture-render-only|FIXTURE-TERMINAL；测试terminal-settlement契约同注入
+EXIT-SCREEN|ui-with-save|game.session.quitGame()；或标题退出按钮|网页运行（非sdtDesktop）|运行于网页，不能原生容器退出|函数先saveGame；网页显示exitScr，桌面会quit！|只在已确认网页环境且接受保存副作用时标题退出→重新进入|game.menu.js:895；不宣称它是纯展示
+HUB-PETS|ui|openBaseHub('stash')→hubPetsHTML区域|当前Base|无战斗/Run，经quick-nav守卫|打开只读，selPet才写Base|基地仓库向宠物区域滚动；已有仓库整页图未代替细部|与HUB-STASH共享区域，不改宠物
+STASH-EGG|ui-conditional|game.hub.pages.openStashItem(i)|i=真实仓库PET_EGG_ID堆索引|有蛋；不足币也能看禁用态|打开不耗蛋币；hatchEgg才提交|仓库→现有宠物蛋→只看→返回；无蛋保留缺口|命令base-pet-egg，不为图发蛋或改储备
+STASH-RAW|ui|game.hub.pages.openRawItem(kind)|wood / rations / keys，以现有rawItem dataset为准|有效kind/已载入Base|modal只读；返回renderHub|仓库→真实物资条目→返回|源码openRawItem:403，传值取按钮不猜
+STASH-CONFIRM|ui-conditional|内部confirmStashAction(message,run)，由sellOne/sellAll/econpackUse触发|已有真实卡堆，最后一张或全售|有库存；只打开确认，不点击stashConfirmOk|开框不卖；确认才不可逆消费/卖卡|仓库物品→卖出最后1张/全部→取消|不执行出售；材料确认是不同ID
+HUB-HELP|ui|SDT.UI.showHelp('hub-'+tab)|tab=deploy/stash/shop/upgrade/classes/ach|先开对应基地页让registerHubHelp注册topic|只换overlay/register返回动作，不保存资源|六页每页问号→返回各原页；六variant独立|game.hub.js:323+ui/overlay.js:21；未注册topic直接return
+CARD-DESIGNER|blocked-guard|game.cardslib.openCardDesigner(null)→factory.openCardDesigner|null或card，但总开关false|CARD_DESIGNER_WRITES_ENABLED=false|只会回照相馆，不显示制作器|当前UI不能打开；不改开关/源码取图|制作器renderDesigner内部，无公开绕守卫纯renderer
+CARDS-EXPORT|ui|照相馆开发导出工具→exportCards；createCardDesigner(deps).showCardsExportOverlay()|工厂需set/getCardPage*与openCardLibrary等host deps|库已加载；导出工具可见|打开只读；copy/download写剪贴板/下载才副作用|照相馆→导出工具→导出→只看返回|factory返回该方法；不要为图下载/复制
+CARDS-IMPORT|blocked-guard|createCardDesigner(deps).showCardsImportOverlay()|无，真实入口先检查false|CARD_DESIGNER_WRITES_ENABLED=false|当前直接返回/受外壳拒绝；不支持正常UI打开|保持冻结；不改开关；若隔离源码mock只能记构造|该factory方法亦受开关，不冒充已上线
+RUN-TRANSITION|renderer|game.run.scenes.showRunTransition(options)|tone:'battle',title:'渲染夹具',detail:'非实际进节点',duration:900|捕获来源页；不能在busy战场顶真实动作|改modal、overlay、定时continue并恢复状态；不扣资源|正常读档/真实邻节点过场可录；构造须标演出fixture|原参数签名源码113，非真实进节点
+NODE-SAFE|dev|game.run.scenes.openBlankSafePage()|无|已有真实Run闲置可开，但当前节点未必安全|modal；点击Done会finishInstant/保存真实Run|优先真实空白节点；直调只证明场景渲染且不要Done|现成export，不为图改当前节点
+PICKUP|renderer-with-callback|game.run.scenes.openPickupPage(kind,gain,onDone,skipSearch)|kind:'coin',gain:'+1 币',onDone:()=>{},skipSearch:true|来源页面可恢复；不传真实gainCoins回调|开modal/拾取演出；pickupGo调用无写入回调但UI改变|真实币/木材/口粮/钥匙节点；fixture only需明确no-op|源码177–206；no-op构造不证获得资源
+RESOURCE-PICK|ui-conditional|game.run.flow.openResourcePick私有，resolveCell正常分派|当前resource节点，catalog资源池非空|Run合法邻节点与包容量|真实领取发卡/consume/保存；跳过不consume|真实resource节点→仅查看；没有devJumpNode('resource')支持|不能把chest-medium图当RESOURCE-PICK
+CHEST-SEARCH|dev|game.run.devJumpNode('chest-small') 或真实未开箱|kind:'chest-small'/'chest-medium'/'chest-large'|devEnsureRun；无战斗；已有Run将沿真实状态|随机roll箱、modal/队列；领取会发卡/保存|真实宝箱未开先拍；dev明确辅助，勿与真实路径混|Chests.renderSearch私有；SDT.Chests.open具体入参见原源码206
+AMMO-TUTORIAL|ui-conditional|game.bag.settle内部teachAmmoOnce，由战后结算触发|首次普通卡入usedPocket且未教过|真实胜利/首次标记满足|战后奖励/教学标记写Run|现有current-consumption-tutorial-ax.txt只有AX，不是图；正常首次战后再看|不能直接把ammoTeachOk当开页动作，private renderer
+BATTLE-SETTLE-RETRY|isolated-test|battle settle内部retry；命令依赖注入失败|fake failed settlement+mockUI，不接真实persist|只能隔离fixture，不强制真实配额失败|真实重试会提交奖励；隔离mock只留html|不在真档造失败；没有公开showRetry renderer|现有battle结算探针/测试按mock函数失败，不能整个复制live
+DOOR|ui-conditional|game.run.altar.openDoorModal(door,cellDef)|从当前curLayer().doors取现有door；含pair,toLayer,arriveAt,reverse|discoveredPairs为Set、layerData当前有效|即使仅打开也game.discoveredPairs.add(pair)；goDoor换层|正常落到闸门开页；直调也属辅助且有揭门副作用|源码414–438，不能用虚造door声称真实跨层
+POCKET-RESTORE|ui-conditional|game.run.scenes.openPocketRestore(picks,done,opts)|picks:2,done:()=>{},opts:{title:'复原夹具',sub:'仅渲染'}；读取真实usedPocket|真实Run/口袋；不点restoreOne|modal+bagReturnHook；restoreOne真移牌，fireDone调用done|真实火堆/祭坛复原；可no-op回调用既有口袋看空态|参数公开；no-op不消耗但须恢复来源hook
+EVENT-CHOICE|ui-conditional|game.run.flow.openEventCardChoice私有|真实药摊/军需事件效果|event deck抽到对应分支；军需需3币|军需可能先扣3币；领取发牌|正常事件到药摊优先；devJumpNode('event')仍随机且可能写局|没有公开固定事件参数，不追加指定卡到库
+EVENT-RECODE|ui-conditional|openEventRecode私有→runEventDeck效果|真实非safe/nonstored可转牌且有同型同稀有池|抽到故障重编且eligible>0|确认才变牌；开始页面不变牌，无候选直接结束|正常/现成dev event随机触发；不能保证一键到该页|定向源565，已有action不能当公开开页
+EVENT-GAMBLE|ui-conditional|openEventGamble私有→runEventDeck效果|真实3张奖池/至少3币可尝试|完整prizes<3直接关闭，50%/第五保底|尝试扣币与奖励，打开不下注|event随机抽到黑市→只看离开；现成dev仍随机|不调Random/global seed为取图
+LAST-LAMP|ui-conditional|game.run.flow.runEventDeck()→tryLastLampEvent私有|真实slot/run/story记录绑定|故事段可用、currentLastLampPage检查|选择提交story与效果，异步load状态|正常事件触发已有故事段→只看；不能造持久story进度|已有叙事命令测试fixture可隔离，不在真档推进
+LAST-LAMP-RESULT|ui-conditional|renderLastLampResult私有|真实已提交record,text,binding|对应runId/slot有效|完成/重试可能保存或结束节点|真实故事选择后；没有公开安全独立renderer|隔离story mock可构造文本，但不能声称真实选择结果
+ALTAR-FRAGMENT-FAIL|ui-conditional|openAltarRitual()→altarFragHero→pool空分支|真实fragments>=2且职业/能力池为空|当前职业池为空才能进；一般五职业皆有池|失败分支碎片保留；点击前也可能真的授牌并扣2碎片|无真实空池不要点碎片换牌为拍错态|私有nodeShell分支；不清卡库/改myClass人为造失败
+EXIT-PAY|ui-conditional|game.run.altar.openEmergencyModal()|当前第三层emergencyExit真实节点|layerIdx===2、3牌可付；其它层停用态|仅开modal；payExit献祭+doExtract会结算|真实第三层紧急点→只看stayHere返回|不改trackPos/节点或拿终局出口替图
+EXTRACT-RETRY|isolated-test|showExtractionRetry私有；doExtract()故障后进入|测试after-base failpoint，在隔离fake storage|真实doExtract会saveGame+begin，不是取图函数|真档会结算资源/XP；fixture失败只有mock页|无公开安全renderer；用隔离测试路由记录构造，不调用真doExtract制造故障|tests/extraction-recovery-ui.test.js:48–93 mock/failpoint完整
+DEATH|isolated-test|createDeathSettlement(deps)→game.damage/doDeath|fake game、terminalCommands及Base依赖全stub|不能对真实game.damage/hp归零|真实死亡结算损失Run；隔离假局才可构造|真人失败才自然证据；不要为图杀在途局|tests/terminal-death.test.js、u18-negative-hp-death.test.js仅夹具来源
+BAG|ui|game.bag.showBackpack()；game.debug.showBackpack同函数|无；refreshOnly不要传true绕行为|game.runActive且myClass已选，state idle/modal；battle自动转战斗包|只开读包，箱队列挂起；use/drag/discard/safe才写|地图浮动包/B→拍→关闭回真实来源|同name堆/空态真实包；不为满包修改ownedCards
+BAG-DISCARD|ui-conditional|showDiscardConfirm(name,fromSafe)私有，由现有拖丢弃触发|真实堆name、所在safe来源|非starter等可丢；只开确认|confirmDragDiscard删整堆保存；cancel原包|背包真实堆拖至丢弃区→取消；不confirm|没有公开只渲染方法，不把旧detailDiscard当现行入口
+BAG-PEARL|ui-conditional|openPearlStore私有；inspectStack→pearlStoreZoom|真实tt2-pearlbox在ownedCards|现有箱存在；资源候选、cap=boxes*9|开modal只读；put/take改stored并保存|包→珍珠盒详情→存放资源→返回|没有箱保持缺口，不给真档添加tt2-pearlbox
+BAG-POUCH|ui-conditional|openPouchStore私有；inspectStack→pouchStoreZoom|真实tt7-stratagem在ownedCards|现有锦囊；非职业法术候选，容量3|开modal只读；put/take改pouchOf/stored并保存|包→法师锦囊详情→法术存放→返回|没有锦囊保持缺口，不直接运行旧showBagCardDetail
+BATTLE-GRAVE|renderer|battle.overlays.renderGrave(snapshot)；commands.openGrave()自然入口|{grave:[],opts:{isBoss:false},turn:1}空态；真场用getSnapshot|自然须有当前战斗；renderer无battleActive守卫，模块已加载|renderer换overlay/注册closeGrave/refresh HUD，不写卡；按钮绑定真实命令|自然战→墓地→返回最优；无场用FIXTURE-GRAVE仅画面|fixture不包含有效uid时只能空态，不能伪造findCard表
+BATTLE-DECK|renderer|battle.overlays.renderDeckPileView(snapshot)；commands.openDeckView()|{drawPile:[],opts:{isBoss:true},turn:1}空态|自然openDeckView仅boss；renderer无模式守卫|renderer换overlay/注册closeDeckView/HUD，不写牌；不要点真实命令|真实首脑战牌堆→返回；无boss标FIXTURE-DECK|不是普通战入口，renderer-only不证明boss可达
+BATTLE-BAG|renderer|battle.overlays.renderBattleBag(snapshot)；commands.openBag()|{opts:{isBoss:false},turn:1}；牌/容量从真实SDT.game读取|自然须当前战斗且非忙；renderer无其守卫|只渲染仍绑真实useItem/safeMove；点击safeMove.saveGame|自然战B/背包→只看返回；无战仅FIXTURE-BATTLE-BAG|不是完全纯数据，不能fixture传ownedCards替代真实引用
+BATTLE-CHOICE|renderer|battle.view.render(snapshot)，导出render|FIXTURE-CHOICE：完整当前snapshot副本覆盖choosing，清deck/viewing/grave等早优先标志|战斗域已加载；非busy稳定页，保存来源|drain卡演出队列/hideTooltip/hideUnitFrames/overlay/真实pickChoice绑定|真实有抉择牌可正常出牌；夹具只拍不点|测试selection-flow边界；fixture未写interaction，不证效果续接
+BATTLE-PAYMENT|renderer|battle.view.render(snapshot)|FIXTURE-PAYMENT：hand:[],handSelecting:{act:'payment',n:1,type:'法术',mandatory:true,excludedUids:[],selectedUids:[],payment:{card:fixtureCard}}|同CHOICE；hand空避免真实findCard，清其它分支|渲染强制支付空态且绑定真实pickHand；勿点/当真死锁|已有支付牌真实触发优先；fixture只证明布局|tests/tt7-hand-payment.test.js有隔离BattleSession真实支付夹具
+BATTLE-DISCOVER|renderer|battle.view.render(snapshot)|FIXTURE-DISCOVER：discovering:{options:[fixtureCard]}，清其它抢优先分支|完整snapshot；当前战斗domain已载入|drain动画/换overlay/真实pickDiscover绑定；不写发现state|真实发现牌触发优先；构造候选不点击|tests/battle-discover-state.test.js + battle-selection-flow-boundary.test.js
+BATTLE-INFUSE|ui-conditional|SDT.Battle.commands.beginInfusion(uid)；真实注能牌点击|uid=当前手牌有效infuse>0；无主牌成本不足|玩家阶段/非busy/可用/燃料足|进入选择临时interaction；cancelInfusion退出；确认才消费|现有注能牌→开始→拍条→取消；不发牌凑条件|tests/n1-infuse-uid-toggle.test.js:34–67，隔离MAIN/FUEL，不替真场卡表
+BATTLE-TARGET|ui-conditional|commands.beginCardInteraction(uid) / playCard(uid,null)|当前需enemy/self的手牌uid，多个合法敌人才显示等待；单敌自动|合法费用/玩家phase/非busy，非自用立即牌|可能自动选单敌并真出牌扣费！不能把无参play当纯渲染|正常多敌需目标牌点击→未确认时拍→cancelPendingTarget|推荐真实UI；isolated session测试是辅助，非真人
+BATTLE-SETTINGS|ui|战斗已有data-act='btSettings'；handler内部|无|当前真实战斗稳定；模块view已渲染|只开设置；checkbox改真实音乐/震动/pace偏好|战斗齿轮→只看→btSettingsBack重绘|不可直接_UI._acts触发后宣称实际点击
+TERM-TIP|ui|术语[data-term]真实悬停/焦点；term-tips.show私有|当前有效data-term元素|已安装事件，termMeta存在|tooltip DOM可见；hide后恢复，不改存档|手册/卡说明悬停已支持术语→拍浮层|未知词不显示；无需改全文插入测试词
+NODE-NOTE|ui|game.notes.openCellEditor(li,idx)|当前layerIdx/trackPos或真实node.li/idx；不能传悬空下标|对应layerData/logical存在，devMode右键入口|modal只打开；saveNote/clearNote写Notes；cancel回idle|现有开发右键结点→只看取消|源码41、game.boot107；不调用保存/清空
+NOTES-EXPORT|ui|game.notes.showExportOverlay()|无|game.state==='idle'；节点坐标有效|生成JSON/overlay；不点copy/download无外部写|地图备注导出按钮；若隐藏可现成export开页，标程序进入|复制失败处理明确；clipboard/下载不为取图执行
+NOTES-IMPORT|ui|game.notes.showImportOverlay()|无；可保持textarea为空|idle|modal；doImport才合并写Notes，开页不改数据|地图备注导入按钮→空编辑态→取消|tests/cell-notes-quota.test.js仅写失败语义，不是导入全页图
+NOTES-CLEAR|ui|game.notes.showClearOverlay()|无|idle|只开确认不删除；默认焦点closeTools取消|现有备注清空按钮→确认框→取消|不要点doClear；取图许可不授权删除
+DEV-DEBUG|ui|game.run.openDevConsole()；Ctrl+L|无|打开可全局；debug资源仅在Run/战斗有效|开overlay、搜索只读；资源/发卡/战斗按钮会写Run|Ctrl+L→调试→关闭；不点加币/发卡/胜利|源码openDevConsole84；关闭战斗会refreshView
+DEV-AGENT|ui|openDevConsole()→devcTab{tab:'agent'}|真实UI点Agent页签|A对象已安装；仅查看无需启动|打开只读；run/turbo/保存LLM将改运行/配置|开发台→Agent→不启动不保存→关闭|不复制/导出LLM敏感配置到报告
+DEV-DATA|ui|openDevConsole()→devcTab{tab:'data'}|真实页签|已载入records|查看统计只读；导出/清空才写|开发台→数据；与DATA不同壳，单独图|dataPanelHTML共内容，dataClear不执行
+DEV-KEYS|ui|openDevConsole()→devcTab{tab:'keys'}|真实页签|quick-nav注册可读|只查看；devcGoto会正常路由can检查|开发台→快捷键→关闭|keysTabHTML/bindKeysTab；不要绕can
+SFX-AUDITION|ui-tool|/sfx-audition.html?set=alternatives&pack=arknights-runtime|设置已有试听链接，同内置浏览器平台|Vite game root，audio fetch可用|仅开页fetch；播放改Audio状态不写存档|设置→整套音效试听；当前窗口新tab需父会话安排|工具页只读画面，未试听别评音质
+HOME-SCENE|blocked-entry|renderHomeScene内部；home.scene.mountHome({host,view,assets,onIntent})公开|host真实DOM；presentHome(baseSnapshot)给view；onIntent可no-op|主renderHub未接；mount需完整home view/assets|mount DOM/定时/监听；no-op onIntent不买/不存，源码构造非现行入口|纯renderer可隔离挂host，但不是已开放基地页|不改开关/入口；需新增fixture宿主才可，优先保留暂缓
+LAB-DOOR|ui-conditional|SDT.Nest.openNestPrep() / game.nest.openNestPrep()|真实Base未解锁且keys>=10|不足钥匙仅日志不显示门；nestUnlocked已true直接备战|仅开门不扣；labOpen扣10钥匙永久解锁Base|基地现有研究所入口→只看labBack；不能改keys/unlocked|parent待决研究所，不为取图消费10钥匙
+LAB-PREP|ui-conditional|openNestPrep()，enterNestPrep私有|真实nestUnlocked===true；真实仓库/符文|已有解锁可直接开，10不同合规堆才可开局|清game.nestEquipped临时；开局会操作独立Run/牌盒|已有解锁→备战只看返回；未解锁别点labOpen|无可携牌仍能空态显示；不新造解锁存档
+LAB-MAP|ui-conditional|SDT.Nest.renderNestMap() / game.nest.renderNestMap()|现有合法nestActive与nestPos/cardBox/runes等状态|自然需研究所Run；函数直接读nest字段|render只开overlay+注册；节点/符文/盒子动作改研究所|真实研究所备战开局后→图；不存在Run不能直接拍空字段|tests/nest-regression.test.js prepRun是隔离fixture，别Object.assign真game
+LAB-RUNES|ui-conditional|openRuneCircle(done)私有；NEST_MAP符文节点|自然节点+现有符文池；done=advance在真实流|必须走研究所节点|选符文/开盒消耗推进；仅打开不选|已有研究所Run→法阵节点→只看|tests/nest-runemaster.test.js夹具，不强改nestPos
+LAB-ALTAR|ui-conditional|openNestAltar(done)私有；NEST_MAP祭坛节点|自然节点及候选/资源|研究所Run|能力或重掷会扣资/改牌/推进|自然研究所祭坛→只看|没有公开renderer；不能调用private名当export
+LAB-SHOP|ui-conditional|openNestShop(done)私有；研究所商店节点|自然节点、coins、各库存|研究所Run|开页生成库存，购买扣随身币/牌/符文，返回advance|自然研究所商店→只看|与主图openShop不同；不以主图商店图代替
+LAB-RETRY|isolated-test|showNestExtractRetry(pending,message)私有；doNestExtract故障|独立fake nest pending与失败命令|真doNestExtract会结算，不能为图调用|真实重试写Base/Run与receipt|仅隔离测试失败构造，不改真存储|tests/nest-settlement-transaction.test.js，假storage/commit failure
+LAB-ENDING|renderer-with-callback|run/lab.ending.playLabEnding(onDone)|onDone:()=>{}；已有三页文案/插画|isTurbo false，否则直接onDone；不改变turbo|body挂演出、打字timer、click/Enter/Esc监听；finish卸监听DOM；不写档|直接函数只是renderer演出，明确非研究所真实通关|skip或Esc收口；勿把此图用来证明主图结局
+LAB-DONE|isolated-test|showLabSettlement(s,st)私有|s:kills/killPts/bossPts/hpPts/cards/cardPts/runes/runePts/coinPts/total；st:labTotalScore/labBestScore|真流程需nest结算成功；无export seam|即使函数仅展示也Agent.recorder.recordRun('clear')，不是只读！|不直接调用真函数刷记录；隔离mock recorder才构造|tests/nest-settlement-transaction.test.js后段，暂缓不展开开发
+`.trim().split('\n').map(l=>l.split('|'));
+const gaps=art.records.filter(r=>inv.interfaces.some(i=>i.id===r.id)&&!(r.evidence?.length));
+const routes=gaps.map(g=>{
+ const row=definitions.find(r=>r[0]===g.id); if(!row)throw new Error('缺路线: '+g.id);
+ const [id,classification,entry,parameters,guards,sideEffects,shortestPath,testFixture]=row;
+ const src=inv.interfaces.find(i=>i.id===id);
+ return {id,name:src.name,classification,entry,parameters,guards,sideEffects,shortestPath,testFixture,source:src.entry,evidence:'路线S；没有本代理运行/点击/渲染证据。父会话执行后须另记正常UI/现成dev/renderer fixture/隔离测试。',persistenceRule:'不开真实保存/确认消费/删除/领取以拍页；不改localStorage/源码/运行时私有字段来绕过条件'};
+});
+const fixtures={
+ 'FIXTURE-GRAVE':{module:'/src/battle/view/battle.overlays.js',export:'renderGrave',arguments:[{grave:[],opts:{isBoss:false},turn:1}],writes:'overlay/return handler/HUD；无牌或存档写，但注册返回绑定真实Battle.commands，不点它验证假场'},
+ 'FIXTURE-DECK':{module:'/src/battle/view/battle.overlays.js',export:'renderDeckPileView',arguments:[{drawPile:[],opts:{isBoss:true},turn:1}],writes:'overlay/return handler/HUD；仅首脑牌库空态像素，不证明当前真实boss模式'},
+ 'FIXTURE-BATTLE-BAG':{module:'/src/battle/view/battle.overlays.js',export:'renderBattleBag',arguments:[{opts:{isBoss:false},turn:1}],writes:'读真实SDT.game.ownedCards/safeCap，绑定真写命令；不是纯snapshot函数，不点击使用/存安全格'},
+ 'FIXTURE-CHOICE':{module:'/src/battle/view/battle.view.js',export:'render',base:'当前合法getSnapshot()浅副本，不改其原对象；先确认稳定非busy并保存来源',clear:{deckSelection:null,viewingGrave:false,viewingDeck:false,viewingBag:false,handSelecting:null,discovering:null},override:{choosing:{cardName:'渲染夹具 · 非实际发动',options:['选项一','选项二']}},writes:'takeCardAnims取走演出队列、hideTooltip/帧层、overlay+真实命令绑定；只拍，不pickChoice'},
+ 'FIXTURE-PAYMENT':{module:'/src/battle/view/battle.view.js',export:'render',base:'同CHOICE且choosing:null、discovering:null',override:{hand:[],handSelecting:{act:'payment',n:1,type:'法术',mandatory:true,excludedUids:[],selectedUids:[],payment:{card:{id:'coverage-render-only',name:'支付夹具',type:'法术',cost:1}}}},writes:'只显示强制支付空态；不写实际handSelecting、不声称空池死锁发生'},
+ 'FIXTURE-DISCOVER':{module:'/src/battle/view/battle.view.js',export:'render',base:'同CHOICE且choosing:null、handSelecting:null',override:{discovering:{options:[{id:'coverage-render-only',name:'发现夹具 · 非真实获取',type:'法术',cost:1,rarity:'古朴',desc:'仅检验发现弹层布局，不参与玩法。'}]}},writes:'只渲染候选，不进入实际discover state；不得点击候选'},
+ 'FIXTURE-TERMINAL':{module:'/src/ui/terminal-settlement.js',export:'runTerminalSettlement',parameters:{token:{busy:false,promise:null},current:'()=>true',game:'只用于HUD展示的副本',UI:'只桥showOverlay/act/refresh到展示；不接storage',finish:'()=>false',command:'abandon',retryAct:'fixtureTerminalRetry',extraPayload:{},terminalCommands:null},writes:'命令为空必走服务不可用页；没有真实终局/存储调用；仅失败页渲染证据'},
+};
+const report={date:new Date().toISOString(),baseline:{basicInterfaces:inv.interfaces.length,artImageReviewed:art.summary.basicImageReviewed,artSourceOnly:art.summary.basicSourceOnly,gapRows:routes.length,unchangedIds:true},scope:'仅现存66个基本画面缺口的最短路线，不包括33变体额外任务，不重新扫描、不跑游戏/测试/浏览器。',urlNote:'Vite root=GAME_ROOT，动态模块URL用/src/...；仓库源路径仍game/src/...。模块须属于当前同origin当前页面，不在外部浏览器调用。',classificationLegend:{ui:'正常UI可打开，无需消费确认', 'ui-conditional':'正常UI但必须已有真实状态/库存/节点；没有条件就保留缺口，不造持久数据', 'ui-with-save':'既有UI但打开就save/exit，不当纯只读',dev:'现成dev可构造，会改当前Run/随机队列/临时状态，有真档则可能保存，不能冒正常路线',renderer:'公开renderer+明确snapshot，只证明画面；不是零UI副作用，按钮可能绑真命令', 'renderer-with-callback':'公开展示函数用no-op回调，但modal/定时器/hook仍变，需来源恢复', 'isolated-test':'没有安全公开renderer；已有依赖注入/vi mock夹具可隔离构造。不是粘贴测试到live的执行指令','blocked-guard':'当前总开关冻结；不能取图解冻','blocked-entry':'源码renderer存在但当前主入口未接；要另做隔离host才可，不视为现行UI'},routes,fixtures,refusals:['不修改老板localStorage、Base/Run、私有set$状态、源码开关或随机seed来强造条件。','没有真实研究所解锁/在途Run时不付10钥匙、不改nestUnlocked/nestPos；暂缓链保留缺口。','不执行导入/清空/留言保存发送/放弃/死亡/出发/领奖来补普通阅读页。','fixture页面点击不得冒充正常功能验证；renderGrave/Deck/View无玩法守卫，恢复须通过真实来源公开重绘/导航。','已有测试里的localStorage.clear/stubGlobal/vi.doMock/set$仅隔离测试机制，禁止在live照搬。'],validation:{routesEqualExistingGapIds:routes.length===gaps.length&&routes.every(r=>gaps.some(g=>g.id===r.id)),uniqueRoutes:new Set(routes.map(r=>r.id)).size===routes.length,allCurrentSourceRefs:routes.every(r=>r.source.line>0)}};
+fs.writeFileSync(path.join(dir,'gap-routes.json'),JSON.stringify(report,null,2)+'\n');
+const escape=s=>String(s).replaceAll('|','\\|');
+const table=['| 缺图ID / 分层 | 最短入口与参数 | 守卫与副作用 | 夹具/已有测试 |','| --- | --- | --- | --- |',...routes.map(r=>`| ${r.id} · ${escape(r.name)}<br>${r.classification} | ${escape(r.shortestPath)}<br>公开性：${escape(r.entry)}<br>参数：${escape(r.parameters)} | 条件：${escape(r.guards)}<br>副作用：${escape(r.sideEffects)} | ${escape(r.testFixture)}<br>${r.source.file}:${r.source.line} |`)].join('\n');
+const md=`# 剩余画面缺口最短进入路线\n\n2026-10-02。基于现存110界面与美术44实图/66源码层账本；只补这66行，不扩大ID。下表没有执行证据。正常UI、现成dev、renderer夹具、隔离测试分别计证；none不自动升级为图验通过。\n\n优先直接普通UI：BAG、HUB-HELP六主题、NOTES-EXPORT/IMPORT/CLEAR只开不执行、TITLE-ACH、SUGGESTION只开不保存、DEV四页。战斗墓地/首脑牌库/发现/支付/抉择有公开renderer可给明确fixture，但会改overlay/演出层并绑定真实命令，必须记renderer-only。BATTLE-INFUSE和TARGET优先已有真实卡点击，目标可能单敌自动出牌，不能当纯展示。\n\n故障分支：TERMINAL-RETRY有现成参数注入，可terminalCommands:null只渲染不可用；EXTRACT/BATTLE/LAB重试多为私有，没有公开安全故障renderer，需已有隔离mock测试场，不能在真档故障注入。研究所只在真实钥匙/解锁/Run满足时正常可达，暂缓范围不消费资源或造状态。\n\n模块URL按Vite游戏root使用/src/...；源路径game/src/...。完整明确fixture、分层说明与恢复边界见[gap-routes.json](gap-routes.json)。源码S和已读测试只用于路线建议，未运行测试或浏览器。\n\n${table}\n\n原始证据继续按美术报告H/B/A/N区分，静态截图不证明动效。现有测试里的清空存储、stubGlobal、vi.doMock与set$是隔离夹具，不可直接粘到当前游戏执行。冻结制作器、未接布置、未解锁研究所与无法安全构造的故障页允许保留源码层，不以修改持久数据提高覆盖数。\n`;
+fs.writeFileSync(path.join(dir,'GAP-ROUTES.md'),md);
+console.log(JSON.stringify({rows:routes.length,kindCounts:Object.fromEntries(Object.entries(Object.groupBy(routes,r=>r.classification)).map(([k,v])=>[k,v.length])),validation:report.validation,bytes:fs.statSync(path.join(dir,'gap-routes.json')).size},null,2));
