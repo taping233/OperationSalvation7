@@ -1,0 +1,874 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>搜打撤 · 代码体检</title>
+<style>
+  :root {
+    --bg: #0a0d12; --bg-2: #0d1118; --bg-3: #11161f;
+    --line: #1b222e; --line-2: #242e3d;
+    --text: #e7edf5; --dim: #8fa0b5; --faint: #5a6b82;
+    --amber: #f5b455; --red: #ff5f5f; --green: #46d68a; --blue: #5cc8ff;
+    --panel-w: 292px;
+    --mono: "Cascadia Code", "Cascadia Mono", Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 13px/1.55 "Segoe UI", "Microsoft YaHei", system-ui, sans-serif;
+    overflow: hidden; display: flex; flex-direction: column;
+  }
+
+  /* ── 顶栏 ── */
+  header {
+    flex: none; display: flex; align-items: center; gap: 16px;
+    height: 54px; padding: 0 18px;
+    background: var(--bg-2); border-bottom: 1px solid var(--line);
+  }
+  .brand { line-height: 1.2; }
+  .brand .eyebrow { font-family: var(--mono); font-size: 9px; letter-spacing: .24em; color: var(--blue); opacity: .8; }
+  .brand h1 { margin: 1px 0 0; font-size: 15px; font-weight: 650; letter-spacing: .02em; }
+  .kpis { display: flex; gap: 18px; margin-left: 10px; }
+  .kpi { text-align: center; min-width: 52px; }
+  .kpi b { display: block; font: 600 15px var(--mono); color: var(--text); }
+  .kpi span { font-size: 10px; color: var(--faint); letter-spacing: .06em; }
+  .kpi.warn b { color: var(--amber); } .kpi.bad b { color: var(--red); } .kpi.ok b { color: var(--green); }
+  .views { display: flex; background: var(--bg-3); border: 1px solid var(--line); border-radius: 8px; padding: 2px; margin-left: auto; }
+  .views button {
+    border: 0; background: transparent; color: var(--dim); font-size: 12px;
+    padding: 5px 14px; border-radius: 6px; cursor: pointer; font-family: inherit;
+  }
+  .views button.on { background: #1c2736; color: var(--text); }
+  #bootBtn {
+    border: 1px solid var(--line); background: transparent; color: var(--dim);
+    font-size: 12px; padding: 5px 12px; border-radius: 8px; cursor: pointer;
+  }
+  #bootBtn.on { background: rgba(245,180,85,.12); border-color: #6e5426; color: var(--amber); }
+  #searchWrap { position: relative; }
+  #search {
+    width: 220px; padding: 6px 11px; border-radius: 8px; font-size: 12px;
+    border: 1px solid var(--line); background: var(--bg-3); color: var(--text); outline: none;
+  }
+  #search::placeholder { color: var(--faint); }
+  #search:focus { border-color: #3577a8; }
+  #searchDrop {
+    display: none; position: absolute; top: calc(100% + 6px); right: 0; width: 360px; max-height: 330px;
+    overflow: auto; background: #10151d; border: 1px solid var(--line-2); border-radius: 10px;
+    box-shadow: 0 16px 44px rgba(0,0,0,.55); padding: 4px; z-index: 60;
+  }
+  #searchDrop .item { padding: 6px 10px; border-radius: 6px; cursor: pointer; display: flex; justify-content: space-between; gap: 12px; font-family: var(--mono); font-size: 12px; }
+  #searchDrop .item:hover { background: rgba(92,200,255,.08); }
+  #searchDrop .item .p { color: var(--faint); font-size: 11px; }
+
+  /* ── 主体三栏 ── */
+  .layout { flex: 1; display: flex; min-height: 0; }
+
+  /* 体检面板 */
+  #health {
+    flex: none; width: var(--panel-w); overflow-y: auto; padding: 14px;
+    background: var(--bg-2); border-right: 1px solid var(--line);
+  }
+  #health h2 { font: 600 11px var(--mono); letter-spacing: .2em; color: var(--faint); margin: 4px 0 10px; }
+  .check { border: 1px solid var(--line); border-radius: 10px; background: var(--bg-3); margin-bottom: 8px; overflow: hidden; }
+  .check > .head {
+    display: flex; align-items: center; gap: 9px; padding: 9px 12px; cursor: pointer;
+  }
+  .check > .head:hover { background: #151b26; }
+  .check .mark { flex: none; width: 8px; height: 8px; border-radius: 50%; }
+  .check.ok .mark { background: var(--green); box-shadow: 0 0 8px rgba(70,214,138,.5); }
+  .check.warn .mark { background: var(--amber); box-shadow: 0 0 8px rgba(245,180,85,.5); }
+  .check .head .name { flex: 1; font-size: 12.5px; }
+  .check .head .count { font: 600 12px var(--mono); color: var(--dim); }
+  .check.ok .head .count { color: var(--green); }
+  .check.warn .head .count { color: var(--amber); }
+  .check .head .chev { color: var(--faint); font-size: 10px; transition: transform .15s; }
+  .check.open .head .chev { transform: rotate(90deg); }
+  .check .body { display: none; border-top: 1px solid var(--line); padding: 6px; }
+  .check.open .body { display: block; }
+  .hrow {
+    display: flex; align-items: center; gap: 8px; padding: 5px 9px; border-radius: 6px;
+    cursor: pointer; font-family: var(--mono); font-size: 11.5px;
+  }
+  .hrow:hover { background: #1a2331; }
+  .hrow .v { margin-left: auto; color: var(--faint); flex: none; font-size: 10.5px; }
+  .hrow .v.hot { color: var(--amber); }
+  .hrow .dot { width: 7px; height: 7px; border-radius: 2px; flex: none; }
+  .hnote { padding: 6px 10px 8px; color: var(--faint); font-size: 11px; }
+  .filtered { display: none; margin: 2px 0 10px; padding: 7px 11px; border-radius: 8px; background: rgba(245,180,85,.1); border: 1px solid #4d3d1e; color: var(--amber); font-size: 12px; }
+  .filtered button { float: right; background: none; border: 0; color: var(--amber); cursor: pointer; font-size: 12px; padding: 0; }
+
+  /* 主视图 */
+  #stage { flex: 1; position: relative; min-width: 0; }
+  #crumb {
+    position: absolute; top: 10px; left: 12px; z-index: 10;
+    display: flex; align-items: center; gap: 7px;
+    background: rgba(13,17,24,.88); border: 1px solid var(--line); border-radius: 999px;
+    padding: 4px 12px; font-family: var(--mono); font-size: 11px;
+  }
+  #crumb .seg { cursor: pointer; color: var(--blue); }
+  #crumb .seg:hover { text-decoration: underline; }
+  #crumb .sep { color: var(--faint); }
+  #crumb .cur { color: var(--text); font-weight: 600; }
+  #stageScroll { position: absolute; inset: 0; overflow: auto; }
+  #svgWrap { position: relative; }
+  svg { display: block; }
+  .block { cursor: pointer; }
+  .block rect.body { transition: filter .12s; }
+  .block:hover rect.body { filter: brightness(1.35); }
+  .colhead { font: 600 11px var(--mono); fill: var(--dim); letter-spacing: .1em; }
+  .colsub { font: 10px var(--mono); fill: var(--faint); }
+  .grouplabel { font: 10.5px "Segoe UI","Microsoft YaHei"; fill: var(--dim); }
+
+  /* 详情面板 */
+  aside {
+    position: absolute; top: 0; right: 0; bottom: 0; width: 356px; z-index: 20;
+    background: rgba(11,15,21,.96); border-left: 1px solid var(--line-2);
+    padding: 18px; overflow-y: auto; display: none;
+    transform: translateX(16px); opacity: 0; transition: transform .2s ease, opacity .2s ease;
+  }
+  aside.show { transform: none; opacity: 1; }
+  aside .eyebrow { font: 600 9.5px var(--mono); letter-spacing: .2em; margin-bottom: 6px; }
+  aside h2 { font: 650 14px var(--mono); margin: 0; word-break: break-all; }
+  aside .badges { display: flex; gap: 6px; flex-wrap: wrap; margin: 10px 0 4px; }
+  .badge { font: 10.5px var(--mono); padding: 2px 9px; border-radius: 999px; border: 1px solid var(--line-2); color: var(--dim); }
+  .badge.hot { color: var(--amber); border-color: #4d3d1e; }
+  .badge.bad { color: var(--red); border-color: #5a2626; }
+  aside .desc { color: var(--dim); font-size: 12.5px; margin: 8px 0 2px; }
+  aside h3 { font: 600 10px var(--mono); letter-spacing: .18em; color: var(--faint); margin: 20px 0 8px; display: flex; align-items: center; gap: 10px; white-space: nowrap; }
+  aside h3::after { content: ""; height: 1px; background: var(--line); flex: 1; }
+  .chips { display: flex; flex-wrap: wrap; gap: 5px; }
+  .chip { font: 11px var(--mono); padding: 2px 8px; border-radius: 6px; background: #131a26; border: 1px solid var(--line); color: #c3d3e8; }
+  .rel { display: flex; flex-direction: column; gap: 3px; }
+  .rel .row {
+    display: flex; align-items: center; gap: 8px; padding: 5px 9px; border-radius: 7px;
+    background: rgba(19,26,38,.6); cursor: pointer; font: 11.5px var(--mono);
+    border: 1px solid transparent;
+  }
+  .rel .row:hover { background: rgba(92,200,255,.07); border-color: #26527a; }
+  .rel .row.badref { border-color: rgba(255,95,95,.4); }
+  .rel .arrow { flex: none; font-weight: 700; color: var(--dim); }
+  .rel .row.badref .arrow { color: var(--red); }
+  .rel .name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .rel .kind { font-size: 9.5px; color: var(--faint); border: 1px solid var(--line); border-radius: 4px; padding: 0 5px; flex: none; }
+  .rel .ln { margin-left: auto; color: var(--faint); font-size: 10.5px; flex: none; }
+
+  #tip {
+    display: none; position: fixed; pointer-events: none; z-index: 80;
+    background: #10151d; border: 1px solid var(--line-2); border-left: 2px solid var(--blue);
+    border-radius: 8px; padding: 7px 11px; font-size: 12px; max-width: 380px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.5);
+  }
+  #tip .t2 { color: var(--dim); font-size: 11px; margin-top: 2px; }
+
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-thumb { background: #212b3a; border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: #2d3a50; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  @media (prefers-reduced-motion: reduce) { aside { transition: none; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">
+    <div class="eyebrow">OPERATION · SALVATION 7</div>
+    <h1>代码体检</h1>
+  </div>
+  <div class="kpis" id="kpis"></div>
+  <div class="views">
+    <button id="vLayers" class="on">分层架构图</button>
+    <button id="vMatrix">依赖矩阵</button>
+  </div>
+  <button id="bootBtn">启动链</button>
+  <div id="searchWrap">
+    <input id="search" placeholder="搜索文件 / 导出符号…" autocomplete="off">
+    <div id="searchDrop"></div>
+  </div>
+</header>
+<div class="layout">
+  <div id="health"></div>
+  <div id="stage">
+    <div id="crumb"></div>
+    <div id="stageScroll"><div id="svgWrap"></div></div>
+    <aside id="panel"></aside>
+  </div>
+</div>
+<div id="tip"></div>
+<script src="./data.js"></script>
+<script>
+'use strict';
+const DATA = window.CODE_MAP_DATA;
+const N = new Map(DATA.nodes.map(n => [n.id, n]));
+const TAU = Math.PI * 2;
+const tip = document.getElementById('tip');
+
+/* ───────── 域与层 ───────── */
+const DOMAIN_META = {
+  'core': { label: '引擎底座', color: '#5cc8ff', layer: 0 },
+  'generated': { label: '生成物', color: '#7d8ba3', layer: 0 },
+  'cards': { label: '卡牌库', color: '#a88bfa', layer: 1 },
+  'audio': { label: '音频', color: '#4ecdc4', layer: 1 },
+  'ui': { label: '通用 UI', color: '#c9d95c', layer: 1 },
+  'experience': { label: '体验杂项', color: '#8fbf6a', layer: 1 },
+  'battle': { label: '战斗', color: '#ff6b6b', layer: 2 },
+  'run': { label: '局内流程', color: '#3ed9a3', layer: 2 },
+  'hub': { label: '基地 Hub', color: '#7b9cff', layer: 3 },
+  'home': { label: '首页场景', color: '#ff9a62', layer: 3 },
+  'agent': { label: 'Agent', color: '#f5b455', layer: 4 },
+  'boot-root': { label: '启动装配', color: '#ff7ab8', layer: 4 },
+};
+const metaOf = k => DOMAIN_META[k] || { label: k, color: '#7d8ba3', layer: 2 };
+function clusterOf(id) {
+  const seg = id.split('/');
+  if (seg.length === 1) return 'boot-root';   // src 根文件归启动装配
+  return seg[0] === 'battle' ? 'battle' : seg[0];
+}
+for (const n of DATA.nodes) n.cluster = clusterOf(n.id);
+
+const LAYERS = [
+  { key: 0, name: 'L0 · 底座' }, { key: 1, name: 'L1 · 数据与UI' },
+  { key: 2, name: 'L2 · 玩法' }, { key: 3, name: 'L3 · 场景' },
+  { key: 4, name: 'L4 · 装配' },
+];
+
+/* ───────── 体检计算 ───────── */
+// 循环依赖（Tarjan SCC）
+const sccs = (() => {
+  const adj = new Map(DATA.nodes.map(n => [n.id, []]));
+  for (const l of DATA.links) adj.get(l.s)?.push(l.t);
+  const idx = new Map(), low = new Map(), on = new Set(), st = [], out = [];
+  let c = 0;
+  const dfs = v => {
+    idx.set(v, c); low.set(v, c); c++; st.push(v); on.add(v);
+    for (const w of adj.get(v) || []) {
+      if (!idx.has(w)) { dfs(w); low.set(v, Math.min(low.get(v), low.get(w))); }
+      else if (on.has(w)) low.set(v, Math.min(low.get(v), idx.get(w)));
+    }
+    if (low.get(v) === idx.get(v)) {
+      const s = []; let w;
+      do { w = st.pop(); on.delete(w); s.push(w); } while (w !== v);
+      if (s.length > 1) out.push(s);
+    }
+  };
+  for (const n of DATA.nodes) if (!idx.has(n.id)) dfs(n.id);
+  return out;
+})();
+const layerOfId = id => metaOf(clusterOf(id)).layer;
+// 反向引用：底层 import 高层（装配点 main.js/game.boot.js 豁免）
+const BOOT_ASSEMBLY = new Set(['main.js', 'game.boot.js']);
+const violations = DATA.links.filter(l => layerOfId(l.t) > layerOfId(l.s));
+const realViolations = violations.filter(l => !BOOT_ASSEMBLY.has(l.s));
+// 巨型文件
+const BIG = 800;
+const bigFiles = DATA.nodes.filter(n => n.lines >= BIG).sort((a, b) => b.lines - a.lines);
+// 上帝模块（被引用数，排除 L0 小工具？不排除，按真实计数）
+const indeg = new Map();
+for (const l of DATA.links) indeg.set(l.t, (indeg.get(l.t) || 0) + 1);
+const gods = [...indeg.entries()].map(([id, n]) => ({ id, n, node: N.get(id) }))
+  .sort((a, b) => b.n - a.n).slice(0, 10);
+// 孤儿
+const KNOWN_ENTRY = new Set(['main.js', 'e2.snapshot.qa.js', 'r7a.qa.js', 'boot-order.js', 'audio/sfx-audition.js', 'audio/sound.bank.js']);
+const orphans = DATA.nodes.filter(n => n.entry && !KNOWN_ENTRY.has(n.id));
+
+/* ───────── 状态 ───────── */
+let view = 'layers';       // layers | matrix
+let focusDomain = null;    // 域 key：文件粒度
+let focusFile = null;      // 文件 id：详情
+let filter = null;         // {type:'violations'|'big'|'god'|'scc'|'orphan', ids:Set}
+let bootMode = false;
+const bootIdx = id => DATA.bootOrder.indexOf(String(id).replace(/\.(js|d\.ts)$/, ''));
+
+/* ───────── SVG 工具 ───────── */
+const SVGNS = 'http://www.w3.org/2000/svg';
+function el(tag, attrs, parent) {
+  const e = document.createElementNS(SVGNS, tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(e);
+  return e;
+}
+const fmtN = n => n >= 10000 ? (n / 10000).toFixed(1) + '万' : n.toLocaleString();
+
+/* ───────── 分层架构图 ───────── */
+let blockPos = new Map(); // id -> {x,y,w,h} 供边锚定
+function renderLayers() {
+  const wrap = document.getElementById('svgWrap');
+  wrap.innerHTML = '';
+  blockPos = new Map();
+  const W0 = Math.max(document.getElementById('stage').clientWidth, 1180);
+  const colW = Math.min(240, (W0 - 120) / 5 - 40);
+  const gap = (W0 - 120 - colW * 5) / 4;
+  const topPad = 92, bottomPad = 30;
+
+  // 粒度：focusDomain ? 文件 : 域
+  const unit = focusDomain ? 'file' : 'domain';
+  // 收集列内容
+  const cols = LAYERS.map(L => ({ ...L, groups: [] }));
+  if (unit === 'domain') {
+    const byC = new Map();
+    for (const n of DATA.nodes) {
+      if (!byC.has(n.cluster)) byC.set(n.cluster, { key: n.cluster, files: [], lines: 0 });
+      const g = byC.get(n.cluster);
+      g.files.push(n); g.lines += n.lines;
+    }
+    for (const g of byC.values()) {
+      const m = metaOf(g.key);
+      cols[m.layer].groups.push(g);
+    }
+  } else {
+    // 文件粒度：焦点域每文件一块（行数降序）；邻居域按域归组
+    const focusFiles = DATA.nodes.filter(n => n.cluster === focusDomain).sort((a, b) => b.lines - a.lines);
+    const focusIds = new Set(focusFiles.map(n => n.id));
+    const rel = new Map();
+    for (const l of DATA.links) {
+      let other = null;
+      if (focusIds.has(l.s) && N.get(l.t)) other = l.t;
+      else if (focusIds.has(l.t) && N.get(l.s)) other = l.s;
+      if (!other || focusIds.has(other)) continue;
+      const c = clusterOf(other);
+      if (!rel.has(c)) rel.set(c, { key: 'REL:' + c, files: [], lines: 0, dim: true });
+      const g = rel.get(c);
+      if (!g.files.some(f => f.id === other)) { g.files.push(N.get(other)); g.lines += N.get(other).lines; }
+    }
+    for (const L of cols) L.groups = [];
+    for (const f of focusFiles) {
+      cols[layerOfId(f.id)].groups.push({ key: 'F:' + f.id, files: [f], lines: f.lines });
+    }
+    for (const g of rel.values()) {
+      cols[metaOf(g.key.slice(4)).layer].groups.push(g);
+    }
+  }
+  for (const L of cols) L.groups.sort((a, b) => b.lines - a.lines);
+
+  // 布局：域粒度=预算按行数分摊；文件粒度=焦点文件块高∝行数，列高自然伸展
+  const colX = i => 60 + i * (colW + gap);
+  const layouts = [];
+  let H = Math.max(document.getElementById('stage').clientHeight - 20, 560);
+  const usableH = H - topPad - bottomPad;
+  if (unit === 'file') {
+    const maxFileLines = Math.max(...DATA.nodes.filter(n => n.cluster === focusDomain).map(n => n.lines), 1);
+    const colBottoms = [];
+    for (let ci = 0; ci < 5; ci++) {
+      const col = cols[ci];
+      let y = topPad;
+      const items = [];
+      let relTotal = col.groups.filter(g => g.dim).reduce((a, g) => a + g.lines, 0);
+      for (const g of col.groups) {
+        const gh = g.dim
+          ? Math.max(14, 90 * g.lines / Math.max(relTotal, 1) + 6)
+          : Math.max(16, 8 + (g.lines / maxFileLines) * 96);
+        items.push({ g, y, h: gh });
+        y += gh + (g.dim ? 18 + 8 : 3);
+      }
+      colBottoms.push(y);
+      layouts.push(items);
+    }
+    H = Math.max(H, ...colBottoms) + bottomPad + 12;
+  } else {
+    for (let ci = 0; ci < 5; ci++) {
+      const col = cols[ci];
+      const totalLines = col.groups.reduce((a, g) => a + g.lines, 0) || 1;
+      const groupCount = col.groups.length;
+      const gapH = groupCount ? Math.min(18, usableH * 0.3 / groupCount) : 0;
+      const labelH = groupCount ? 15 : 0;
+      const budget = usableH - gapH * (groupCount - 1) - labelH * groupCount;
+      let y = topPad;
+      const items = [];
+      for (const g of col.groups) {
+        const gh = Math.max(10, budget * g.lines / totalLines);
+        items.push({ g, y, h: gh });
+        y += gh + labelH + gapH;
+      }
+      layouts.push(items);
+    }
+  }
+  const svg = el('svg', { width: W0, height: H, viewBox: `0 0 ${W0} ${H}` }, wrap);
+
+  // 列标题 + 参考线
+  for (let ci = 0; ci < 5; ci++) {
+    const x = colX(ci);
+    el('line', { x1: x - 14, y1: topPad - 44, x2: x - 14, y2: H - bottomPad, stroke: '#151c28', 'stroke-width': 1 }, svg);
+    const t = el('text', { x, y: topPad - 52, class: 'colhead' }, svg);
+    t.textContent = LAYERS[ci].name;
+    const colLines = cols[ci].groups.reduce((a, g) => a + g.lines, 0);
+    const colFiles = cols[ci].groups.reduce((a, g) => a + g.files.length, 0);
+    const s = el('text', { x, y: topPad - 36, class: 'colsub' }, svg);
+    s.textContent = unit === 'domain' ? `${cols[ci].groups.length} 域 · ${fmtN(colLines)} 行` : `${colFiles} 文件 · ${fmtN(colLines)} 行`;
+  }
+  // 依赖方向标注
+  const dir = el('text', { x: W0 - 60, y: topPad - 52, class: 'colsub', 'text-anchor': 'end' }, svg);
+  dir.textContent = '依赖方向 → 装配依赖玩法 · 玩法依赖底座 · 红色 = 反向引用';
+
+  // 块
+  const layoutsFlat = [];
+  for (let ci = 0; ci < 5; ci++) {
+    const x = colX(ci);
+    for (const { g, y, h } of layouts[ci]) {
+      const isFileBlock = g.key.startsWith('F:');
+      const m = metaOf(isFileBlock ? g.files[0].cluster : (g.key.startsWith('REL:') ? g.key.slice(4) : g.key));
+      let gy = y, bh = h;
+      if (!isFileBlock && unit === 'file') {
+        // 文件粒度下的关联域组：组标签画在块上方
+        const gl = el('text', { x, y: y + 11, class: 'grouplabel' }, svg);
+        gl.textContent = m.label + '（关联）';
+        gy = y + 16;
+        bh = Math.max(8, h - 2);
+      }
+      layoutsFlat.push({ g, x, y: gy, w: colW, h: bh, m, unit, isFileBlock });
+    }
+  }
+
+  // 块渲染：文件块（焦点域每文件）/ 域块（总览）/ 关联组块（文件粒度下的邻居域）
+  for (const it of layoutsFlat) {
+    const { g, x, y, w, h, m, isFileBlock } = it;
+    const gEl = el('g', { class: 'block', transform: `translate(${x},${y})` }, svg);
+    const isDim = !!g.dim;
+    const isFilterTarget = filter && filter.ids && g.files.some(f => filter.ids.has(f.id));
+    const alpha = isDim ? 0.5 : 1;
+    el('rect', {
+      x: 0, y: 0, width: w, height: h, rx: isFileBlock ? 4 : 6,
+      fill: m.color, 'fill-opacity': (isFilterTarget ? 0.92 : (isFileBlock ? 0.48 : 0.6)) * alpha,
+      stroke: m.color, 'stroke-opacity': (isFilterTarget ? 1 : 0.9) * alpha, 'stroke-width': isFilterTarget ? 2 : 1.1,
+      class: 'body',
+    }, gEl);
+    let name = '', sub = '';
+    if (isFileBlock) {
+      name = g.files[0].id.split('/').pop();
+      if (h > 30) sub = fmtN(g.files[0].lines) + ' 行';
+    } else if (unit === 'domain') {
+      name = m.label;
+      if (h > 34) sub = `${g.files.length} 文件 · ${fmtN(g.lines)} 行`;
+    } else {
+      if (h > 24) name = `${g.files.length} 文件`;
+      if (h > 44) sub = fmtN(g.lines) + ' 行';
+    }
+    if (name) {
+      const t1 = el('text', {
+        x: 8, y: Math.min(17, h / 2 + 4), fill: '#eaf1fa',
+        'font-size': isFileBlock ? 12 : 12.5, 'font-weight': 600,
+        'font-family': isFileBlock ? "'Cascadia Code',Consolas,monospace" : 'inherit',
+      }, gEl);
+      t1.textContent = name;
+    }
+    if (sub) {
+      const t2 = el('text', { x: 8, y: h - 8, fill: '#9fb2c8', 'font-size': 10.5, 'font-family': "'Cascadia Code',Consolas,monospace" }, gEl);
+      t2.textContent = sub;
+    }
+    // boot 序号
+    if (isFileBlock && bootMode && bootIdx(g.files[0].id) >= 0) {
+      const bt = el('text', { x: w - 8, y: 13, 'text-anchor': 'end', fill: '#f5b455', 'font-family': "'Cascadia Code',Consolas,monospace", 'font-size': 10, 'font-weight': 700 }, gEl);
+      bt.textContent = '#' + (bootIdx(g.files[0].id) + 1);
+    }
+    // 登记块位置（同块文件共享同一 rect 引用，供边锚定与同块去重）
+    const rectRef = { x, y, w, h, focus: isFileBlock };
+    for (const f of g.files) blockPos.set(f.id, rectRef);
+    if (unit === 'domain') blockPos.set('G:' + g.key, rectRef);
+
+    gEl.addEventListener('click', ev => { ev.stopPropagation(); unitClick(g, unit); });
+    gEl.addEventListener('mousemove', ev => {
+      tip.style.display = 'block';
+      tip.style.left = Math.min(ev.clientX + 14, innerWidth - 380) + 'px';
+      tip.style.top = (ev.clientY + 14) + 'px';
+      tip.style.borderLeftColor = m.color;
+      tip.innerHTML = isFileBlock
+        ? `<b style="color:${m.color}">${g.files[0].id}</b><div class="t2">${g.files[0].lines.toLocaleString()} 行 · ${g.files[0].exports.length} 导出<br>点击查看依赖详情</div>`
+        : `<b>${m.label}</b><div class="t2">${g.files.length} 文件 · ${g.lines.toLocaleString()} 行 · 层 L${m.layer}<br>${unit === 'domain' ? '点击查看域内文件' : '点击进入该域'}</div>`;
+    });
+    gEl.addEventListener('mouseleave', () => tip.style.display = 'none');
+  }
+
+  // 边（域聚合 或 文件级）
+  drawEdges(svg, unit, layoutsFlat);
+}
+
+function drawEdges(svg, unit, layoutsFlat) {
+  const gEl = el('g', { }, svg);
+  svg.insertBefore(gEl, svg.firstChild.nextSibling); // 边在块下面
+  // 聚合
+  const agg = new Map();
+  const key2 = (a, b) => a + '→' + b;
+  for (const l of DATA.links) {
+    let a, b;
+    if (unit === 'domain') {
+      a = clusterOf(l.s); b = clusterOf(l.t);
+      if (a === b) continue;
+    } else {
+      a = l.s; b = l.t;
+      if (!blockPos.has(a) || !blockPos.has(b)) continue;
+    }
+    const k = key2(a, b);
+    let e = agg.get(k);
+    if (!e) { e = { a, b, n: 0, src: l.s, tgt: l.t }; agg.set(k, e); }
+    e.n++;
+  }
+  const isViol = e => layerOfId(e.tgt) > layerOfId(e.src);
+  const inFilter = e => {
+    if (!filter) return true;
+    if (filter.type === 'violations') return isViol(e);
+    return filter.ids.has(e.src) || filter.ids.has(e.tgt);
+  };
+  const violIds = new Set(realViolations.map(l => l.s + '|' + l.t));
+  const edges = [...agg.values()].sort((a, b) => (isViol(b) ? 1 : 0) - (isViol(a) ? 1 : 0));
+  for (const e of edges) {
+    // 域粒度键已是域 key，文件粒度键是文件 id；直接查块，严禁二次聚类
+    const A = unit === 'domain' ? blockPos.get('G:' + e.a) : blockPos.get(e.a);
+    const B = unit === 'domain' ? blockPos.get('G:' + e.b) : blockPos.get(e.b);
+    if (!A || !B || A === B) continue;
+    if (unit === 'file' && !A.focus && !B.focus) continue; // 文件粒度只画与焦点域相关的边
+    const bad = unit === 'domain'
+      ? layerOfId(e.tgt) > layerOfId(e.src)
+      : violIds.has(e.src + '|' + e.tgt) || layerOfId(e.tgt) > layerOfId(e.src);
+    const active = inFilter(e);
+    // 依相对位置选进出边：目标在右则右出左入，否则左出右入
+    const goRight = (B.x + B.w / 2) >= (A.x + A.w / 2);
+    const dir = goRight ? 1 : -1;
+    const x1 = goRight ? A.x + A.w : A.x;
+    const y1 = A.y + A.h / 2;
+    const x2 = goRight ? B.x : B.x + B.w;
+    const y2 = B.y + B.h / 2;
+    const mx = (x1 + x2) / 2;
+    const p = el('path', {
+      d: `M ${x1} ${y1} C ${mx} ${y1}, ${mx} ${y2}, ${x2 - dir * 3} ${y2}`,
+      fill: 'none',
+      stroke: bad ? '#ff5f5f' : '#7d93b5',
+      'stroke-opacity': active ? (bad ? 0.9 : Math.min(0.38, 0.10 + 0.05 * e.n)) : 0.03,
+      'stroke-width': Math.min(0.9 + Math.log2(1 + e.n) * 0.6, 4),
+    }, gEl);
+    if (bad && active) {
+      el('path', { d: `M ${x2} ${y2} L ${x2 - dir * 8} ${y2 - 3.5} L ${x2 - dir * 8} ${y2 + 3.5} Z`, fill: '#ff5f5f' }, gEl);
+    }
+    p.addEventListener('mousemove', ev => {
+      tip.style.display = 'block';
+      tip.style.left = Math.min(ev.clientX + 14, innerWidth - 380) + 'px';
+      tip.style.top = (ev.clientY + 14) + 'px';
+      tip.style.borderLeftColor = bad ? '#ff5f5f' : '#5cc8ff';
+      tip.innerHTML = `<b>${e.src}</b> → <b>${e.tgt}</b><div class="t2">${e.n} 条引用${bad ? ' · <span style="color:#ff5f5f">反向：L' + layerOfId(e.src) + ' 引用 L' + layerOfId(e.tgt) + '</span>' : ''}</div>`;
+    });
+    p.addEventListener('mouseleave', () => tip.style.display = 'none');
+  }
+}
+
+function unitClick(g, unit) {
+  if (unit === 'domain') {
+    focusDomain = g.key;
+    renderLayers(); renderCrumb();
+  } else if (g.key.startsWith('F:')) {
+    focusFile = g.files[0].id;
+    panelSync(N.get(focusFile));
+  } else {
+    // 关联组块 → 整域跳入
+    focusDomain = g.key.slice(4);
+    focusFile = null;
+    panelSync();
+    renderLayers(); renderCrumb();
+  }
+}
+
+/* ───────── 依赖矩阵 ───────── */
+function renderMatrix() {
+  const wrap = document.getElementById('svgWrap');
+  wrap.innerHTML = '';
+  blockPos = new Map();
+  const doms = Object.keys(DOMAIN_META).filter(k => {
+    const L = metaOf(k).layer;
+    return DATA.nodes.some(n => clusterOf(n.id) === k);
+  }).sort((a, b) => metaOf(a).layer - metaOf(b).layer || b.localeCompare(a));
+  const n = doms.length;
+  const cell = 60, pad = 128, W = pad + cell * n + 60, H = 90 + cell * n + 30;
+  const svg = el('svg', { width: Math.max(W, document.getElementById('stage').clientWidth), height: H, viewBox: `0 0 ${W} ${H}` }, wrap);
+  // 统计
+  const m = new Map(); // 's|t' -> count
+  for (const l of DATA.links) {
+    const a = clusterOf(l.s), b = clusterOf(l.t);
+    const k = a + '|' + b;
+    m.set(k, (m.get(k) || 0) + 1);
+  }
+  const maxN = Math.max(...m.values(), 1);
+  // 反向区提示（上三角：列层 > 行层 = 反向）
+  el('rect', { x: pad, y: 90, width: cell * n, height: cell * n, fill: 'rgba(255,95,95,0.03)' }, svg);
+  const tri = [];
+  for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) if (j > i) tri.push(`M ${pad + i * cell} ${90 + j * cell} h ${cell} v ${cell} h ${-cell} z`);
+  el('path', { d: tri.join(' '), fill: 'rgba(255,95,95,0.045)' }, svg);
+  const t0 = el('text', { x: pad + cell * n - 4, y: 78, 'text-anchor': 'end', fill: '#86545f', 'font-size': 10.5 }, svg);
+  t0.textContent = '右上红区 = 反向引用（低层依赖高层）';
+  // 行列头
+  doms.forEach((d, i) => {
+    const meta = metaOf(d);
+    const xt = el('text', { x: pad + i * cell + cell / 2, y: 86, 'text-anchor': 'middle', fill: meta.color, 'font-size': 10.5, transform: `rotate(-38 ${pad + i * cell + cell / 2} 86)` }, svg);
+    xt.textContent = meta.label;
+    const yt = el('text', { x: pad - 10, y: 90 + i * cell + cell / 2 + 4, 'text-anchor': 'end', fill: meta.color, 'font-size': 10.5 }, svg);
+    yt.textContent = meta.label;
+  });
+  el('text', { x: 8, y: 60, fill: '#5a6b82', 'font-size': 10, transform: 'rotate(-90 8 60)' }, svg).textContent = '';
+  const hint = el('text', { x: 10, y: 30, fill: '#5a6b82', 'font-size': 10.5 }, svg);
+  hint.textContent = '行 → 引用方（横向读） · 列 → 被引用方';
+  // 格子
+  doms.forEach((sd, i) => {
+    doms.forEach((td, j) => {
+      const k = sd + '|' + td;
+      const v = m.get(k) || 0;
+      const x = pad + j * cell, y = 90 + i * cell;
+      const self = sd === td;
+      const bad = j > i && !self; // 反向区
+      const g = el('g', { transform: `translate(${x},${y})` }, svg);
+      el('rect', {
+        x: 1.5, y: 1.5, width: cell - 3, height: cell - 3, rx: 5,
+        fill: v === 0 ? 'rgba(255,255,255,0.015)' : (self ? 'rgba(125,148,179,0.18)' : (bad ? `rgba(255,95,95,${(0.12 + 0.55 * Math.log2(1 + v) / Math.log2(1 + maxN)).toFixed(3)})` : `rgba(92,200,255,${(0.1 + 0.5 * Math.log2(1 + v) / Math.log2(1 + maxN)).toFixed(3)})`)),
+        stroke: v ? (bad ? 'rgba(255,95,95,.4)' : 'rgba(92,200,255,.25)') : 'rgba(255,255,255,.03)',
+      }, g);
+      if (v > 0) {
+        const t = el('text', { x: cell / 2, y: cell / 2 + 4, 'text-anchor': 'middle', 'font-family': 'var(--mono)', 'font-size': 11.5, 'font-weight': 600, fill: v >= 4 || bad ? '#f0f5fb' : '#aebfd4' }, g);
+        t.textContent = v;
+      }
+      if (v > 0) {
+        g.style.cursor = 'pointer';
+        g.addEventListener('click', () => showCellDetail(sd, td));
+        g.addEventListener('mousemove', ev => {
+          tip.style.display = 'block';
+          tip.style.left = Math.min(ev.clientX + 14, innerWidth - 400) + 'px';
+          tip.style.top = (ev.clientY + 14) + 'px';
+          tip.style.borderLeftColor = bad ? '#ff5f5f' : '#5cc8ff';
+          tip.innerHTML = `<b>${metaOf(sd).label}</b> → <b>${metaOf(td).label}</b><div class="t2">${v} 条引用${bad ? ' · <span style="color:#ff5f5f">反向</span>' : ''}${self ? ' · 域内互引' : ''} · 点击看明细</div>`;
+        });
+        g.addEventListener('mouseleave', () => tip.style.display = 'none');
+      }
+    });
+  });
+}
+function showCellDetail(sd, td) {
+  const list = DATA.links.filter(l => clusterOf(l.s) === sd && clusterOf(l.t) === td);
+  const panel = document.getElementById('panel');
+  const rows = list.slice(0, 80).map(l => {
+    const bad = layerOfId(l.t) > layerOfId(l.s);
+    return `<div class="row ${bad ? 'badref' : ''}" data-jump="${l.s}">
+      <span class="arrow ${bad ? '' : ''}" style="${bad ? 'color:var(--red)' : ''}">${bad ? '⚠' : '→'}</span>
+      <span class="name">${l.s.replace(/^.*\//, '')} → ${l.t}</span>
+      <span class="ln">${N.get(l.s).lines}行</span></div>`;
+  }).join('');
+  panel.innerHTML = `
+    <div class="eyebrow" style="color:${metaOf(sd).color}">依赖明细 · ${metaOf(sd).label} → ${metaOf(td).label}</div>
+    <h2>${list.length} 条引用</h2>
+    <div class="badges">${layerOfId(list[0].t) > layerOfId(list[0].s) ? '<span class="badge bad">反向引用区</span>' : ''}</div>
+    <h3>文件对（点击跳转源文件）</h3>
+    <div class="rel">${rows}</div>`;
+  panel.style.display = 'block';
+  panel.getBoundingClientRect();
+  panel.classList.add('show');
+  panel.querySelectorAll('[data-jump]').forEach(e2 => e2.addEventListener('click', () => jumpTo(e2.dataset.jump)));
+}
+
+/* ───────── 体检面板 ───────── */
+function renderHealth() {
+  const h = document.getElementById('health');
+  const vPairAgg = new Map();
+  for (const l of realViolations) {
+    const k = clusterOf(l.s) + ' → ' + clusterOf(l.t);
+    if (!vPairAgg.has(k)) vPairAgg.set(k, []);
+    vPairAgg.get(k).push(l);
+  }
+  const vPairs = [...vPairAgg.entries()].sort((a, b) => b[1].length - a[1].length);
+  h.innerHTML = '';
+  const title = document.createElement('h2'); title.textContent = '体检报告 HEALTH'; h.appendChild(title);
+  const filtered = document.createElement('div'); filtered.className = 'filtered'; filtered.id = 'filterBar';
+  filtered.innerHTML = `筛选中：<span id="filterName"></span><button id="filterOff">✕ 退出</button>`;
+  h.appendChild(filtered);
+
+  const mkCheck = (cls, name, count, bodyHtml, onHead) => {
+    const c = document.createElement('div'); c.className = 'check ' + cls;
+    c.innerHTML = `<div class="head"><span class="mark"></span><span class="name">${name}</span><span class="count">${count}</span><span class="chev">▶</span></div><div class="body">${bodyHtml}</div>`;
+    c.querySelector('.head').addEventListener('click', () => { c.classList.toggle('open'); onHead?.(); });
+    h.appendChild(c);
+    return c;
+  };
+  // 1 循环依赖
+  mkCheck(sccs.length ? 'warn' : 'ok', '循环依赖', sccs.length ? sccs.length + ' 组' : '0 组',
+    sccs.length ? sccs.map(s => `<div class="hrow"><span class="v">${s.length} 文件</span></div>`).join('') + `<div class="hnote">强连通分量检测（Tarjan）。</div>`
+    : `<div class="hnote">Tarjan 强连通分量扫描：254 个模块中未发现任何循环依赖。依赖图是有向无环图（DAG），这非常难得。</div>`);
+  // 2 反向引用
+  mkCheck('warn', '反向引用（低层→高层）', realViolations.length + ' 条',
+    `<div class="hnote">违反「底座→玩法→场景→装配」分层方向；装配点 main.js / game.boot.js 已豁免。</div>` +
+    vPairs.map(([k, ls]) => `<div class="hrow" data-vpair="${k}"><span class="dot" style="background:#ff5f5f"></span><span>${k}</span><span class="v hot">${ls.length} 条</span></div>`).join(''),
+    null).querySelector('.body').addEventListener('click', ev => {
+      const row = ev.target.closest('[data-vpair]');
+      if (!row) return;
+      const key = row.dataset.vpair;
+      const [sa, tb] = key.split(' → ');
+      const ls = vPairAgg.get(key);
+      setFilter('violations', new Set(ls.flatMap(l => [l.s, l.t])), `反向 ${key}`, { pairs: [[sa, tb]] });
+    });
+  // 3 巨型文件
+  mkCheck(bigFiles.length ? 'warn' : 'ok', `巨型文件（≥${BIG} 行）`, bigFiles.length + ' 个',
+    bigFiles.map(f => `<div class="hrow" data-file="${f.id}"><span class="dot" style="background:${metaOf(f.cluster).color}"></span><span>${f.id}</span><span class="v hot">${f.lines}</span></div>`).join('') +
+    `<div class="hnote">全库平均 ${Math.round(DATA.totalLines / DATA.totalFiles)} 行/文件；这些文件是拆分候选。</div>`)
+    .querySelector('.body').addEventListener('click', ev => {
+      const row = ev.target.closest('[data-file]');
+      if (row) setFilter('big', new Set([row.dataset.file]), '巨型文件 ' + row.dataset.file.split('/').pop());
+    });
+  // 4 上帝模块
+  mkCheck('warn', '上帝模块（被引最多）', 'TOP ' + gods.length,
+    gods.map(g2 => `<div class="hrow" data-file="${g2.id}"><span class="dot" style="background:${metaOf(g2.node.cluster).color}"></span><span>${g2.id}</span><span class="v hot">${g2.n} 次</span></div>`).join('') +
+    `<div class="hnote">改动这些文件的风险波及面最大（入口共享工具 core/shared.js 被引 54 次）。</div>`)
+    .querySelector('.body').addEventListener('click', ev => {
+      const row = ev.target.closest('[data-file]');
+      if (row) setFilter('god', new Set([row.dataset.file]), '上帝模块 ' + row.dataset.file.split('/').pop());
+    });
+  // 5 孤儿
+  mkCheck(orphans.length ? 'warn' : 'ok', '孤儿模块（无人引用）', orphans.length + ' 个',
+    orphans.length ? orphans.map(o => `<div class="hrow"><span>${o.id}</span></div>`).join('') : `<div class="hnote">除 6 个已知入口（main.js、QA 页、试听页等）外，无死模块。</div>`);
+
+  document.getElementById('filterOff').addEventListener('click', () => setFilter(null));
+}
+function setFilter(type, ids, name, extra) {
+  filter = type ? { type, ids, name, ...(extra || {}) } : null;
+  const bar = document.getElementById('filterBar');
+  if (filter) {
+    bar.style.display = 'block';
+    document.getElementById('filterName').textContent = filter.name;
+    if (filter.type === 'violations') { view = 'layers'; syncViewBtns(); }
+    render();
+    // 打开第一个相关文件详情
+    if (['big', 'god'].includes(filter.type)) {
+      const id = [...ids][0];
+      focusFile = id; panelSync(N.get(id));
+    } else { focusFile = null; panelSync(); }
+  } else {
+    bar.style.display = 'none';
+    render();
+  }
+}
+
+/* ───────── 详情面板 ───────── */
+const panel = document.getElementById('panel');
+function panelSync(n) {
+  if (!n) { panel.classList.remove('show'); panel.style.display = 'none'; return; }
+  const ins = [];
+  for (const o of DATA.nodes) for (const i of o.imports) if (i.t === n.id) ins.push({ t: o.id, k: i.k });
+  const m = metaOf(n.cluster);
+  const isBig = n.lines >= BIG;
+  const inDeg = indeg.get(n.id) || 0;
+  const kindLabel = { static: '静态', side: '副作用', dyn: '动态' };
+  panel.innerHTML = `
+    <div class="eyebrow" style="color:${m.color}">${m.label.toUpperCase()} · LAYER L${m.layer}${bootIdx(n.id) >= 0 ? ' · BOOT #' + (bootIdx(n.id) + 1) : ''}</div>
+    <h2 style="color:${m.color}">${n.id}</h2>
+    <div class="badges">
+      <span class="badge">${n.lines.toLocaleString()} 行</span>
+      <span class="badge">${n.kind === 'dts' ? '类型声明' : 'JS 模块'}</span>
+      <span class="badge">被引 ${inDeg} 次</span>
+      ${isBig ? '<span class="badge hot">巨型文件</span>' : ''}
+      ${n.entry ? (KNOWN_ENTRY.has(n.id) ? '<span class="badge">入口</span>' : '<span class="badge bad">孤儿</span>') : ''}
+    </div>
+    ${n.desc ? `<div class="desc">${n.desc}</div>` : ''}
+    <h3>导出符号 · ${n.exports.length}</h3>
+    <div class="chips">${n.exports.length ? n.exports.map(e => `<span class="chip">${e}</span>`).join('') : '<span class="desc">无具名导出</span>'}</div>
+    <h3>依赖出向 · ${n.imports.length}（它引用谁）</h3>
+    <div class="rel">${n.imports.length ? n.imports.map(({ t, k }) => {
+      const bad = layerOfId(t) > layerOfId(n.id);
+      return `<div class="row ${bad ? 'badref' : ''}" data-jump="${t}">
+        <span class="arrow">${bad ? '⚠ 反向' : '→'}</span>
+        <span class="name">${t}</span>
+        <span class="kind">${kindLabel[k] || k}</span>
+        <span class="ln">${N.get(t)?.lines ?? ''} 行</span></div>`;
+    }).join('') : '<span class="desc">无 src 内依赖</span>'}</div>
+    <h3>被谁引用 · ${ins.length}</h3>
+    <div class="rel">${ins.length ? ins.map(({ t }) => `<div class="row" data-jump="${t}"><span class="arrow">←</span><span class="name">${t}</span><span class="ln">${N.get(t)?.lines ?? ''} 行</span></div>`).join('') : '<span class="desc">src 内无人引用</span>'}</div>`;
+  panel.style.display = 'block';
+  panel.getBoundingClientRect();
+  panel.classList.add('show');
+  panel.querySelectorAll('[data-jump]').forEach(e2 => e2.addEventListener('click', () => jumpTo(e2.dataset.jump)));
+}
+function jumpTo(id) {
+  const n = N.get(id); if (!n) return;
+  focusDomain = n.cluster;
+  focusFile = id;
+  view = 'layers'; syncViewBtns();
+  render(); renderCrumb();
+  panelSync(n);
+}
+
+/* ───────── 面包屑 / KPI / 视图切换 ───────── */
+const crumb = document.getElementById('crumb');
+function renderCrumb() {
+  crumb.innerHTML = '';
+  const mk = (txt, cls, fn) => {
+    const s = document.createElement('span');
+    s.className = cls; s.textContent = txt;
+    if (fn) s.addEventListener('click', fn);
+    return s;
+  };
+  crumb.appendChild(mk('全部域', view === 'layers' && !focusDomain ? 'cur' : 'seg', () => { focusDomain = null; focusFile = null; panelSync(); render(); renderCrumb(); }));
+  if (view === 'layers' && focusDomain) {
+    crumb.appendChild(mk('›', 'sep'));
+    crumb.appendChild(mk(metaOf(focusDomain).label, 'cur'));
+  }
+  if (view === 'matrix') {
+    crumb.appendChild(mk('›', 'sep'));
+    crumb.appendChild(mk('依赖矩阵', 'cur'));
+  }
+}
+function renderKpis() {
+  const el2 = document.getElementById('kpis');
+  el2.innerHTML = `
+    <div class="kpi"><b>${DATA.totalFiles}</b><span>文件</span></div>
+    <div class="kpi"><b>${DATA.totalLines.toLocaleString()}</b><span>行代码</span></div>
+    <div class="kpi"><b>${DATA.links.length}</b><span>依赖边</span></div>
+    <div class="kpi ${sccs.length ? 'bad' : 'ok'}"><b>${sccs.length}</b><span>循环依赖</span></div>
+    <div class="kpi warn"><b>${realViolations.length}</b><span>反向引用</span></div>
+    <div class="kpi warn"><b>${bigFiles.length}</b><span>巨型文件</span></div>`;
+}
+function syncViewBtns() {
+  document.getElementById('vLayers').classList.toggle('on', view === 'layers');
+  document.getElementById('vMatrix').classList.toggle('on', view === 'matrix');
+}
+document.getElementById('vLayers').addEventListener('click', () => { view = 'layers'; syncViewBtns(); render(); renderCrumb(); });
+document.getElementById('vMatrix').addEventListener('click', () => { view = 'matrix'; syncViewBtns(); render(); renderCrumb(); });
+document.getElementById('bootBtn').addEventListener('click', ev => {
+  bootMode = !bootMode;
+  ev.currentTarget.classList.toggle('on', bootMode);
+  if (bootMode) { focusDomain = 'boot-root'; }
+  render(); renderCrumb();
+});
+
+/* ───────── 渲染入口 ───────── */
+function render() {
+  if (view === 'layers') renderLayers();
+  else renderMatrix();
+}
+
+/* ───────── 搜索 ───────── */
+const searchEl = document.getElementById('search');
+const drop = document.getElementById('searchDrop');
+let dropItems = [];
+function doSearch(q) {
+  q = q.trim().toLowerCase();
+  if (!q) { drop.style.display = 'none'; return; }
+  const files = DATA.nodes.filter(n => n.id.toLowerCase().includes(q));
+  const syms = [];
+  for (const n of DATA.nodes) for (const e of n.exports) if (e.toLowerCase().includes(q)) syms.push({ n, e });
+  dropItems = [...files.slice(0, 10).map(n => ({ type: 'file', n })), ...syms.slice(0, 6).map(({ n, e }) => ({ type: 'sym', n, e }))].slice(0, 14);
+  drop.innerHTML = dropItems.map((it, i) =>
+    `<div class="item" data-i="${i}"><span>${it.type === 'sym' ? it.e + '()' : it.n.id}</span><span class="p">${it.n.lines.toLocaleString()} 行 · ${it.n.id}</span></div>`
+  ).join('') || '<div class="item"><span class="p" style="color:var(--faint)">无匹配</span></div>';
+  drop.style.display = 'block';
+  drop.querySelectorAll('.item[data-i]').forEach(e2 => e2.addEventListener('mousedown', ev => { ev.preventDefault(); const it = dropItems[+e2.dataset.i]; drop.style.display = 'none'; searchEl.value = it.n.id; jumpTo(it.n.id); searchEl.blur(); }));
+}
+searchEl.addEventListener('input', () => doSearch(searchEl.value));
+window.addEventListener('keydown', ev => {
+  if (ev.key === 'Escape' && !ev.isComposing) {
+    if (document.activeElement === searchEl) { searchEl.blur(); return; }
+    if (focusFile) { focusFile = null; panelSync(); }
+    else if (focusDomain) { focusDomain = null; render(); renderCrumb(); }
+    else if (filter) setFilter(null);
+  }
+});
+document.getElementById('stage').addEventListener('click', ev => {
+  if (ev.target.closest('#panel, #crumb')) return;
+});
+
+/* ───────── 启动 ───────── */
+renderKpis();
+renderHealth();
+render();
+renderCrumb();
+</script>
+</body>
+</html>
