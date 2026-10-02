@@ -118,7 +118,7 @@ for (;;) {
 | `agent.surface.js` | 弹层 data-act 动作面扫描（零侵入，不改页面代码） |
 | `agent.runner.js` | act 路由 / settle 等待 / step / autoRun |
 | `agent.policy.js` | 内置随机 / 贪心策略（统计基线） |
-| `agent.turbo.js` | 快进总闸（battle.clock / moveTo / 过场共用） |
+| `../core/turbo.js` | 快进总闸（battle.clock / moveTo / 过场共用；2026-10-02 兼容壳 agent.turbo.js 退役） |
 | `agent.llm.js` | 内置 OpenAI 兼容适配器（见下） |
 | `agent.recorder.js` / `agent.stats.js` | 逐局记录与聚合统计（数据分析系统） |
 

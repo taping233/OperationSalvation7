@@ -8,7 +8,7 @@
 
 09-30 流程工具已补齐：[流程工具与归档办法](WORKFLOW-TOOLS.md)统一接手提示、复用检索、台账更新、验收记录、记忆发现、内置浏览器证据和暂存隔离。修改前原文见[路由归档](archive/workflow-routing-2026-09-30/README.md)与[本轮归档](archive/workflow-completion-2026-09-30/README.md)，历史任务范围不扩大或限制后续明确授权。
 
-2026-09-30 老板批准：项目规则与事实共用，Codex / ZCode 各自适配入口；仅用当前平台内置浏览器。当前直接指令优先，历史经验不扩大授权。
+2026-09-30 老板批准：项目规则与事实共用，Codex / ZCode 各自适配入口；浏览器边界口径见根 AGENTS.md。当前直接指令优先，历史经验不扩大授权。
 
 ### 事实分层与记忆入口
 
@@ -39,16 +39,16 @@
 - `npm run handoff` 只读 Git 与台账，并提示重叠属地、失效路径和提交状态疑点；不自动判定过时或释放占用。留言/记忆/任务路由按任务域定向补查，冲突仍用提交与证据核实。
 - 同会话记录命令、目标文件状态与环境，内容/属地/范围/环境未变时复用证据；文档提交改变 HEAD 不自动使相同源码的定向证据失效。
 - 留言按内置浏览器 + 来源地址核验；localStorage 隔离于浏览器配置和 origin。没有可读入口记录未核验，不推断没有留言，不导出整个存储。
-- 审查不授权实施；已授权且范围不变的工作继续完成。删除先列具体路径清单，已批清单不重复确认；回滚/提交/推送/发布/外部写入仍需明确指示。
-- 默认不派工；老板点名后按[派工手册](PARALLEL-DISPATCH-PLAYBOOK.md)划属地。共享文件或工作树/端口/后台任务动作先行、登记同轮紧随（10-01 精简）；普通只读短审查免登记。
+- 审查不授权实施；删除报批与提交/回滚/推送授权口径见根 AGENTS.md。
+- 默认不派工；老板点名后按[派工手册](PARALLEL-DISPATCH-PLAYBOOK.md)划属地。改共享文件/长任务的登记与免登口径见根 AGENTS.md（10-01 精简版）。
 - 免登与免仪式（10-01 合并版，条件见根 AGENTS.md）：单会话占用时的说明类小修与共享台账小额修改直接编辑+收官核对，免登记免两段式；多会话并发或长任务照常全套。
 
 ### 验收与收官
 
-- 按[质量门](quality-gates.md)选择文档、A 档删除或 B 档语义验收；记录定向/全量/实页各自范围。生成、构建、脚本输出均不能单独宣称完整验收。
-- 两端浏览器能力入口见质量门；仅用当前平台内置浏览器和当前窗口。不可用时记阻塞，继续独立工作，不切外部浏览器。
+- 验收分级与证据口径见[质量门](quality-gates.md)；生成、构建、脚本输出均不能单独宣称完整验收。
+- 两端浏览器能力入口见质量门；边界与阻塞口径见根 AGENTS.md。
 - 收官核对自有 diff、测试结果、未核实项与服务身份；只停本会话创建的服务，再核对端口。完成未提交时标记归属与未提交路径；禁止顺手提交或清理别人现场。
-- 验收证据集中 `docs/evidence/<日期>-<任务>/`，记录时间、代码/文档基线、文件状态、命令与结果、平台/浏览器/origin、证据限制、遗留入口。历史证据只证明当时范围。
+- 验收证据集中 `docs/evidence/<日期>-<任务>/`（细则见 WORKFLOW-TOOLS「信息只维护一次」表）；历史证据只证明当时范围。
 - 自有记录即时更新；已决事项回写来源并移至已决区，编辑占用释放，仍需处置的工作树保留登记。来源不明只记录不动。
 
 ### 工具实施与后续边界
@@ -70,6 +70,7 @@
 | 音频 | [音频系统](audio-system.md) | — |
 | Agent 接口 / 策略 | [接口协议](agent-protocol.md)、[策略迭代手册](agent-iteration-playbook.md) | — |
 | 并行会话 / 派工 | [热点登记](PARALLEL-REGISTRY.md)、[待拍板台账](PENDING.md)、[派工手册](PARALLEL-DISPATCH-PLAYBOOK.md) | — |
+| 工具怎么用（agent 视角） | [Agent 工具箱](AGENT-TOOLBOX.md)（意图→命令查表，含 impact/handoff/剧本/验证） | — |
 | 特性规格 / 流程 | [特性规格流程](SPEC-PROCESS.md)（spec→plan→tasks）、[UI Token 体系提案](UI-TOKEN-SYSTEM-PROPOSAL.md)（下次大修参照） | — |
 | 叙事 / 事件 | [设计入口](design.md)、`narrative/events.ink` | [游戏全书](game-compendium.md)（生成物，不手改） |
 | 文档增删 / 归档 | [状态入口](STATUS.md) | [归档审阅与执行记录](DOCUMENT-ARCHIVE-AUDIT-2026-09-28.md)（移动或删除前必读） |
@@ -80,7 +81,7 @@
 | --- | --- |
 | 玩法与设计 | [设计入口](design.md)、[现行规则](rules.md)、[术语](terminology.md)、[后续路线图](roadmap.md)、[版本记录](changelog.md) |
 | 工程与质量 | [架构](architecture.md)、[开发指南](development.md)、[存档契约](save-format.md)、[质量门](quality-gates.md)、[性能方法与历史基准](performance.md)、[音频系统](audio-system.md) |
-| Agent | [接口协议](agent-protocol.md)、[策略迭代手册](agent-iteration-playbook.md) |
+| Agent | [接口协议](agent-protocol.md)、[策略迭代手册](agent-iteration-playbook.md)、[工具箱](AGENT-TOOLBOX.md)（意图→命令查表） |
 | 协作流程 | [热点登记](PARALLEL-REGISTRY.md)（改共享文件/长任务动作先行、登记同轮紧随）、[待拍板台账](PENDING.md)（挂账唯一真源）、[并行派工手册](PARALLEL-DISPATCH-PLAYBOOK.md) |
 | 美术与素材 | [人物参考](character-bible/README.md)、[界面美术指南入口](UI-ART-OVERHAUL-GUIDE.md)、[运行素材说明](../game/assets/README.md) |
 | 生成数据手册 | [游戏全书](game-compendium.md)：由 `scripts/generate-compendium.mjs` 生成，保留原路径，不手改 |

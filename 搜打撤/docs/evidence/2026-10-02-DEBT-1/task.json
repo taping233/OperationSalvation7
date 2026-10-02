@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "DEBT-1",
+  "date": "2026-10-02",
+  "owner": "Friday",
+  "goal": "状态写入通道收敛：先精确定性（对照#11销账与F1否决两记录），再定收敛方案",
+  "paths": [
+    "docs/DEBT-CAMPAIGN-2026-10.md",
+    "tests/architecture-boundaries.test.js"
+  ],
+  "doneWhen": [
+    "定性文档落档",
+    "方案实施或挂拍板",
+    "守卫+全量绿"
+  ],
+  "stage": "partial",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "定性文档三源对照(#11/F1/源码实测65 setter):现状=受控双轨非失控;方案A维持(推荐)已采纳,B全setter化负收益",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "方案B全setter化是否实施待老板拍板(PENDING#29)"
+  ],
+  "updatedAt": "2026-10-01T16:09:43.902Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

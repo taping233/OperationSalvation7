@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "DEBT-2",
+  "date": "2026-10-02",
+  "owner": "Friday",
+  "goal": "strict扩面渐进:38文件→100+,Flash主力tsc循环",
+  "paths": [
+    "jsconfig.json",
+    "scripts/check-types.mjs"
+  ],
+  "doneWhen": [
+    "试点域strict绿",
+    "批量流程定型",
+    "check-types常驻挂载"
+  ],
+  "stage": "doing",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "第二批 4 文件（feedback.local+diagnostics 依赖先行/hud/route-overlay）strict 零错；jsconfig.strict-ui 统一 @ts-check 形态扩到 8 文件；全量 268/2199 exit 0；flash 两轮 escalate/先例复用均正确",
+      "result": "passed"
+    }
+  ],
+  "unverified": [],
+  "updatedAt": "2026-10-01T17:24:47.410Z"
+}
