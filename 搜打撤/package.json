@@ -39,7 +39,8 @@
     "validate:data": "node scripts/validate-data.mjs",
     "docs:compendium": "vitest run tests/compendium.test.js",
     "page-snapshot": "node scripts/page-snapshot.mjs",
-    "jscpd:baseline": "jscpd --reporters json --output node_modules/.cache/jscpd game/css game/src scripts"
+    "jscpd:baseline": "jscpd --reporters json --output node_modules/.cache/jscpd game/css game/src scripts",
+    "impact": "node scripts/impact-query.mjs"
   },
   "devDependencies": {
     "acorn": "^8.14.0",

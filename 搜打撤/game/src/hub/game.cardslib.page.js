@@ -410,7 +410,7 @@ function renderLibGrid() {
   if (grid) {
     grid.classList.toggle('is-empty', !filtered.length);
     resetLibArtWarmup();
-    stopLibTileObserver();
+    // （函数首行已 stopLibTileObserver，此处无重建语句，重复调用必为空操作——2026-10-02 审计 A 档删）
     grid.innerHTML = libGridContentsHTML(filtered);
     // 上下滚动模式（09-24）：筛选重绘后回顶，否则沿用旧滚动位置会从半截行开始看
     grid.scrollTop = 0;

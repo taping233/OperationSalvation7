@@ -1,3 +1,4 @@
+// @ts-check
 /* 词条讲解浮框（2026-09-20 老板：特殊词条触摸时要有我们自己绘制的文字框描述讲解，如形态/中毒等诅咒）
  * 全局单例 + 事件委托：卡面描述高亮词（descRich 输出的 data-term）与战斗状态角标（bt-curse/bt-buff、
  * 诅咒之刃 chips、敌方狂乱角标）统一由 document 级委托接管，渲染点零改动自动生效。
@@ -9,6 +10,11 @@
 import SDT from '../core/sdt-facade.js';
 import { scale } from './ui-scale.js';
 
+/** 词条讲解条目（TERM_TIPS 值形状；icon 仅部分词条有，缺省 = 纯文字无图标）。
+ * @typedef {{name: string, icon?: string, text: string}} TermMeta
+ */
+
+/** @type {Record<string, TermMeta>} */
 const TERM_TIPS = {
   // —— 诅咒（combat.js CURSE_META，key 对齐状态字段）——
   bleed:   { name: '流血', icon: 'blood',   text: '每层使受到的攻击伤害 +1。层数无上限、不会自然衰减。' },
@@ -44,18 +50,32 @@ const TERM_TIPS = {
 };
 
 // 卡面描述文本词 → 词条 key（仅收有讲解内容的词；伤害/生命/回合等常识词保持纯高亮不弹框）
+/** @type {Record<string, string>} */
 const TERM_ALIAS = {
   '冰冻': 'freeze', '冻结': 'freeze', '中毒': 'poison', '燃烧': 'burn', '灼烧': 'burn',
   '流血': 'bleed', '沉默': 'silence', '诅咒': 'curse', '净化': 'purify', '充能': 'charge',
   '注能': 'infuse', '发现': 'discover', '消耗': 'exhaust', '限定': 'equipSkill', '主动技能': 'equipSkill',
 };
 
+/** 卡面描述文本词 → 词条 key；未收录词返回 null。
+ * @param {string} word
+ * @returns {string|null}
+ */
 export function termKeyFor(word) { return TERM_ALIAS[word] || null; }
-export function termMeta(key) { return TERM_TIPS[key] || null; }
+/** 词条 key → 讲解条目；未知 key 返回 null。
+ * @param {string} key
+ * @returns {TermMeta|null}
+ */
+function termMeta(key) { return TERM_TIPS[key] || null; }
 
+/** @type {HTMLDivElement|null} */
 let tipEl = null;
+/** @type {Element|null} */
 let curEl = null;
 
+/** 惰性创建全局讲解浮框（单例，挂在 document.body）。
+ * @returns {HTMLDivElement}
+ */
 function ensureTip() {
   if (tipEl) return tipEl;
   tipEl = document.createElement('div');
@@ -66,13 +86,17 @@ function ensureTip() {
   return tipEl;
 }
 
+/** 弹出词条讲解框并按视觉坐标定位（zoom 换算口径见 ui-scale 头注）。
+ * @param {Element} el  带 data-term 属性的词条元素
+ * @returns {void}
+ */
 function show(el) {
-  const meta = termMeta(el.getAttribute('data-term'));
+  const meta = termMeta(/** @type {string} */ (el.getAttribute('data-term')));
   if (!meta) return;
   if (curEl === el && tipEl && !tipEl.hidden) return;   // 同一词条重复 over 不重算
   curEl = el;
   const tip = ensureTip();
-  const icon = meta.icon && SDT.Icons && SDT.Icons.img ? SDT.Icons.img(meta.icon) : '';
+  const icon = meta.icon && SDT.Icons && /** @type {{img?: (name: string) => string}} */ (SDT.Icons).img ? /** @type {{img: (name: string) => string}} */ (SDT.Icons).img(meta.icon) : '';
   tip.innerHTML = `${icon}<b>${meta.name}</b><span class="term-tip-sep">——</span>${meta.text}`;
   tip.hidden = false;
   // 定位：ui-scale zoom 挂 html，视觉 px ÷ scale = CSS 布局 px（fixed 定位走布局坐标）
@@ -88,10 +112,16 @@ function show(el) {
   tip.style.top = `${Math.round(top)}px`;
 }
 
+/** 收起浮框并清除当前词条引用。@returns {void} */
 function hide() { curEl = null; if (tipEl) tipEl.hidden = true; }
 
-function closestTerm(t) { return t && t.closest ? t.closest('[data-term]') : null; }
+/** 自事件目标向上找最近的带 data-term 的词条元素。
+ * @param {EventTarget|null} t
+ * @returns {Element|null}
+ */
+function closestTerm(t) { return t && /** @type {Element} */ (t).closest ? /** @type {Element} */ (t).closest('[data-term]') : null; }
 
+/** document 级事件委托接管全部词条触发（悬停即显/按压即显/点击只讲解/滚动收起）。 */
 function initTermTips() {
   // 桌面：悬停即显，移到非词条处即收（pointerover else 分支 = mouseleave 语义的委托版）
   document.addEventListener('pointerover', (e) => {

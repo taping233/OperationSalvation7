@@ -33,6 +33,7 @@ export const WORKFLOW_TESTS = new Map([
   ['scripts/page-snapshot.mjs', ['tests/workflow-cli-integration.test.js']],
   ['scripts/workflow-archive.mjs', ['tests/workflow-tools.test.js']],
   ['scripts/acceptance-gate.mjs', ['tests/acceptance-gate.test.js']],
+  ['scripts/impact-query.mjs', ['tests/impact-query.test.js']],
   ['scripts/architecture-graph.mjs', ['tests/architecture-boundaries.test.js', 'tests/contracts.test.js']],
   ['scripts/generate-compendium.mjs', ['tests/compendium.test.js']],
   ['scripts/sync-cards-from-live.mjs', ['tests/sync-cards-from-live.test.js', 'tests/schema-op-coverage.test.js', 'tests/contracts.test.js']],
@@ -101,7 +102,8 @@ function walkJs(relativeDir, extensions = ['.js']) {
   return result;
 }
 
-function reverseImports() {
+// 导出复用：影响面查询（scripts/impact-query.mjs）与 quick 门同源同口径，不另建解析。
+export function reverseImports() {
   const files = [...walkJs('game/src'), ...walkJs('tests'), ...walkJs('game/data', ['.json'])];
   const fileSet = new Set(files);
   const reverse = new Map();

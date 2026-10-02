@@ -42,7 +42,7 @@
  * 本文件只保留 definitions 数据与批次参数；迁移数据行为不变（m4-data.test.js 守护）。 */
 import { createRuleBackfiller } from './cards.sync.backfiller.js';
 
-export const M4_MARKER_KEY = 'sdt-cards-m4-equip-rules-v1-seeded';
+const M4_MARKER_KEY = 'sdt-cards-m4-equip-rules-v1-seeded';
 
 // 诅咒条件被动（深海咒印/深海印记，矩阵 T6 同草案）：身负诅咒 → 攻+2 法伤+2，解除即收回
 //（动态核算由 battle.equipment.js syncCurseCondEquips 消费；rules 纯装备域，无 battle/triggers）。

@@ -34,7 +34,7 @@ export const Sfx = {
 export const cardHTML = (c, cls, opts) => SDT.Cards.cardHTML(c, cls, opts);
 
 // 页面跳转钩子：game.hub.js 启动时经 configureCardNavigation 注入；
-// 导出 navigation 对象本体，调用方（closeCardPageTop）在调用时读取最新钩子。
+// navigation 本体仅本模块 closeCardPageTop 在调用时读取最新钩子（历史导出零外部引用，2026-10-02 审计 A 档摘除）。
 const navigation = {
   closeBase: () => {},
   renderHub: () => {},
@@ -45,4 +45,4 @@ function configureCardNavigation(hooks) {
   Object.assign(navigation, hooks || {});
 }
 
-export { navigation, configureCardNavigation };
+export { configureCardNavigation };

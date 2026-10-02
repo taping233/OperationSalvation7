@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "lib": [
+      "ESNext",
+      "DOM"
+    ],
+    "allowJs": true,
+    "checkJs": false,
+    "strict": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "types": []
+  },
+  "files": [
+    "game/src/ui/cinematics.js",
+    "game/src/ui/feedback.local.js",
+    "game/src/ui/hud.js",
+    "game/src/ui/route-overlay.js",
+    "game/src/ui/term-tips.js",
+    "game/src/ui/terminal-settlement.js",
+    "game/src/ui/ui-scale.js",
+    "game/src/core/diagnostics.local.js"
+  ]
+}

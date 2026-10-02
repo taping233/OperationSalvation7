@@ -92,4 +92,4 @@ function aggregate(runs) {
   };
 }
 
-export { aggregate, brief, outcomeCounts, rate };
+export { aggregate, brief, rate };

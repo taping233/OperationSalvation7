@@ -12,7 +12,7 @@ import { validateCardRules } from './card-rules.schema.js';
 import { inspectCardRuleCapability } from './card-rules.capability.js';
 
 // E8/m1 同款深相等：键集一致（与键序无关）+ 逐值递归；原始类型走严格相等。
-export function sameSnapshot(left, right) {
+function sameSnapshot(left, right) {
   if (left === right) return true;
   if (!left || !right || typeof left !== 'object' || typeof right !== 'object') return false;
   if (Array.isArray(left) !== Array.isArray(right)) return false;

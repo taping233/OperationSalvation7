@@ -20,7 +20,7 @@ import { RunStorage } from '../hub/game.storage.js';
 import { commitBaseAndRun, readSettlementReceipt, recoverSlot } from '../hub/recovery.commands.js';
 import { createNestSettlementCommands } from '../hub/nest-settlement.commands.js';
 import { startBattle } from '../battle/battle-loader.js';
-import { rollRune, rollAttribute, RUNE_KINDS } from '../battle/runes.js';
+import { rollRune, rollAttribute } from '../battle/runes.js';
 import { on as busOn } from '../core/event-bus.js';
 import { playLabEnding } from './lab.ending.js';
 
@@ -641,13 +641,6 @@ function showLabSettlement(s, st) {
     <p class="ov-note">本次行动 <b>${s.total}</b> 分 · 累计 ${st.labTotalScore} 分（单局最佳 ${st.labBestScore}）</p>
     <div class="ov-btns"><button class="ov-btn ok" data-act="labScoreBack">接收情报，返回基地</button></div>`, true);
   UI.act('labScoreBack', () => exitToTitle());
-}
-
-/* —— 彩虹符文合成（卡扎库斯式）：属性 5 选 1 + 类别 5 选 1 —— */
-export function craftRainbow(baseRune, attr, kindId) {
-  const kind = RUNE_KINDS.find(k => k.id === kindId);
-  if (!kind || kind.id === 'rainbow') return null;
-  return { kind: kind.id, name: kind.name, rarity: '史诗', attrs: [attr], desc: kind.desc, custom: true };
 }
 
 sdtDefine('Nest', { openNestPrep, bindBattleStart, startNestBattle, doNestExtract, renderNestMap });

@@ -252,7 +252,6 @@ preparationFeature = createHubPreparationFeature({
       SDT.Meta.checkUnlocks();
       renderHub();
     });
-    UI.act('upSafe', () => { renderHub(); });   // 保险升级已改为宠物升级（见 upgrade 页每只宠物的按钮）
     UI.act('upPet', (d) => {
       const pet = SDT.Base.petById(d.id);
       if (!SDT.Base.upgradePet(d.id)) return;

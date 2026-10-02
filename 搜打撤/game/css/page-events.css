@@ -167,10 +167,6 @@
 #overlay .card.page:has(.node-pg) .node-panel {
   animation: none;
 }
-@keyframes evtPanelIn {
-  from { opacity: 0; transform: translateX(18px); }
-  to { opacity: 1; transform: none; }
-}
 
 /* ═════════ W6 对话卡 .scene：容器冷青统一调色（纸面材质保留，只扣容器与选项） ═════════ */
 
@@ -193,21 +189,6 @@
 #overlay .card.scene .sc-altar  { --sc-ring: rgba(140, 190, 172, .5);  --sc-core: #173030; --sc-glow: rgba(120, 195, 168, .26); }
 #overlay .card.scene .sc-exit   { --sc-ring: rgba(140, 190, 170, .55); --sc-core: #16302e; --sc-glow: rgba(120, 200, 175, .28); }
 #overlay .card.scene .sc-pick   { --sc-ring: rgba(126, 158, 170, .55); --sc-core: #1c3644; --sc-glow: rgba(102, 168, 182, .28); }
-
-/* W6c 标题/提示：标题冷白提亮；"点击任意处继续"提示从深灰提到冷青灰可读 */
-#overlay .card.scene .scene-title { color: #e6ecea; }
-#overlay .card.scene .scene-hint { color: #7e969c; }
-
-/* W6d 拾获大字结算 .scene-gain：收获时刻转暖金语言（金边 + 金字，呼应资源章） */
-#overlay .card.scene .scene-gain {
-  border-color: rgba(217, 187, 130, .55);
-  background: linear-gradient(180deg, rgba(42, 45, 48, .55), rgba(22, 24, 26, .55));
-  box-shadow: 0 0 22px rgba(217, 187, 130, .18), inset 0 1px 0 rgba(255, 231, 184, .12);
-}
-#overlay .card.scene .scene-gain b {
-  color: #ecd9ad;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, .6), 0 0 18px rgba(217, 187, 130, .35);
-}
 
 /* W6e 对话卡行动键 .scene-ops .ov-btn：hover 金边 + 按压快按慢弹 + 焦点环 */
 #overlay .card.scene .scene-ops .ov-btn {

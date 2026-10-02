@@ -9,7 +9,7 @@ import { escAttr } from '../core/shared.js';
 import { MODES, game, newRun, requestClassChoice } from '../run/game.session.js';
 import { Sfx, _set_cardPageOpen } from './game.cardslib.js';
 import { slots as hubBridge } from './game.hub.bridge.js';   // 别名防局部 slots（槽位数）遮蔽——实机 depBack 曾因此 TypeError
-import { turboMs } from '../agent/agent.turbo.js';
+import { turboMs } from '../core/turbo.js';
   // —— 出发页：选择玩法 + 出征预报 + 宝藏大门 ——
   function hubDeployHTML() {
     const B = SDT.Base;
@@ -240,7 +240,6 @@ import { turboMs } from '../agent/agent.turbo.js';
       renderDepartPrep();
     };
     UI.act('pickAdd', (d) => addPick(d.name));
-    UI.act('pickSub', (d) => subPick(d.name));
     // 需求 #4：出发时携带的宠物（即时保存，出发后生效）
     UI.act('depPet', (d) => {
       if (!SDT.Base.setPet(d.id)) return;
@@ -272,12 +271,25 @@ import { turboMs } from '../agent/agent.turbo.js';
     const bag = document.getElementById('depBag');
     if (pool && bag) {
       if (!window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches) {
+        // 高报告率鼠标合帧（同 game.bag.drag.js onBagDragMove F2 口径）：pointermove 只采样
+        // 事件与坐标，closest 命中测试 / getBoundingClientRect / CSS 变量写入每显示帧一次
+        // ——此前逐事件读写交替（125-1000Hz 设备上每秒数百次强制布局失效）
+        let depSpotFrame = 0;
+        let depSpotEvent = null;
         pool.addEventListener('pointermove', (e) => {
-          const card = e.target.closest?.('.dep-card:not(.picked):not(.drained)');
-          if (!card || !pool.contains(card)) return;
-          const rect = card.getBoundingClientRect();
-          card.style.setProperty('--dep-spot-x', `${e.clientX - rect.left}px`);
-          card.style.setProperty('--dep-spot-y', `${e.clientY - rect.top}px`);
+          depSpotEvent = e;
+          if (depSpotFrame) return;
+          depSpotFrame = requestAnimationFrame(() => {
+            depSpotFrame = 0;
+            const ev = depSpotEvent;
+            depSpotEvent = null;
+            if (!ev || !pool.isConnected) return;
+            const card = ev.target.closest?.('.dep-card:not(.picked):not(.drained)');
+            if (!card || !pool.contains(card)) return;
+            const rect = card.getBoundingClientRect();
+            card.style.setProperty('--dep-spot-x', `${ev.clientX - rect.left}px`);
+            card.style.setProperty('--dep-spot-y', `${ev.clientY - rect.top}px`);
+          });
         });
       }
       const activateOnKey = (e) => {
@@ -360,4 +372,4 @@ import { turboMs } from '../agent/agent.turbo.js';
 
   // —— 仓库页：卡牌仓库（容量 / 卖出 / 收藏）+ 消耗口袋 + 物资 ——
 
-export { hubDeployHTML, openDepartPrep, renderDepartPrep, deploySlotsUsed, deployPick, setDeployPick };
+export { hubDeployHTML, openDepartPrep, deployPick, setDeployPick };

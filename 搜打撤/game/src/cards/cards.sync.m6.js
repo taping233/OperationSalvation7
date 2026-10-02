@@ -33,7 +33,7 @@
  * 本文件只保留 definitions 数据与批次参数；迁移数据行为不变（m6-data.test.js 守护）。 */
 import { createRuleBackfiller } from './cards.sync.backfiller.js';
 
-export const M6_MARKER_KEY = 'sdt-cards-m6-bag-rules-v1-seeded';
+const M6_MARKER_KEY = 'sdt-cards-m6-bag-rules-v1-seeded';
 
 // definitions 值与 A3/m1 同为「卡形部分定义」（{ rules: {...} }），回填只取其 .rules。
 const BAG = (use) => ({ rules: { version: 1, bag: { use } } });

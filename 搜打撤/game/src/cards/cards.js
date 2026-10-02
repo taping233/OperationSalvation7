@@ -146,8 +146,6 @@ function assertValidCardRules(cards) {
     },
 
     // 写入走安全封装（迭代评审 09-20 G-P2）：配额满时裸写曾抛未捕获异常、卡牌设计器无声失败
-
-    // 写入走安全封装（迭代评审 09-20 G-P2）：配额满时裸写曾抛未捕获异常、卡牌设计器无声失败
     saveAll(cards) {
       if (_corruptNoWrite) { warnCorruptNoWrite(); return false; }
       try { assertValidCardRules(cards); }
@@ -213,9 +211,6 @@ function assertValidCardRules(cards) {
 
     // ---- 卡背图案（v0.21）：默认「行囊粗布」恒解锁，其余由成就领取解锁 ----
     // emblem 印在卡背中央；from 说明解锁途径（基地成就页展示）。
-
-    // ---- 卡背图案（v0.21）：默认「行囊粗布」恒解锁，其余由成就领取解锁 ----
-    // emblem 印在卡背中央；from 说明解锁途径（基地成就页展示）。
     CARD_BACKS: [
       { id: 'classic', name: '行囊粗布', icon: 'cards',   from: '默认卡背' },
       { id: 'wolf',    name: '猎手皮纸', icon: 'swords',  from: '成就「猎手」' },
@@ -225,9 +220,6 @@ function assertValidCardRules(cards) {
       { id: 'altar',   name: '核心星轨', icon: 'crystal', from: '成就「净化征服者」' },
       { id: 'pet',     name: '忠犬爪印', icon: 'paw',     from: '成就「最忠实的伙伴」' },
     ],
-
-    // 卡背/卡面渲染已外迁 cards.view.js（2026-09-11 架构批次 1：视图与数据分离）。
-    // SDT.Cards 上保留同名转发，既有调用方（SDT.Cards.cardHTML 等）不受影响。
 
     // 卡背/卡面渲染已外迁 cards.view.js（2026-09-11 架构批次 1：视图与数据分离）。
     // SDT.Cards 上保留同名转发，既有调用方（SDT.Cards.cardHTML 等）不受影响。

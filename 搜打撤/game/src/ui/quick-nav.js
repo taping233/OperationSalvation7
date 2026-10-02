@@ -70,4 +70,4 @@ function installQuickNav() {
 
 installQuickNav();
 
-export { listPages, jump, PAGES };
+export { listPages, jump };

@@ -551,9 +551,9 @@ function enterLayer(li, atIdx, opts = null) {
 
 // ---------- 兼容导出面（与拆分前逐一对应，调用方零改动） ----------
 export { SLOT_COUNT };
-export { FX, MAP, configureGameRuntime, requestClassChoice, game, canvas, ctx, cam, dpr, _set_cam, _set_dpr, curLayer, cellCenter, pick, weighted } from './game.session.kernel.js';
+export { MAP, configureGameRuntime, requestClassChoice, game, canvas, ctx, cam, dpr, _set_cam, _set_dpr, curLayer, cellCenter, pick, weighted } from './game.session.kernel.js';
 export { MODES, modeCfg, scaledEnemy } from './game.session.modes.js';
-export { bagCap, canAcceptCard, cardStacks, safeCap, safeUsed, usedSlots, gainCoins } from './game.session.bag.js';
+export { bagCap, cardStacks, safeCap, safeUsed, usedSlots, gainCoins } from './game.session.bag.js';
 export { buildDerived } from './game.session.map.js';
 export { markSeen, renderMiniMap } from './game.session.board.js';
 export { clearBattleSettlementPending, clearSave, createRunSavePayload, enterLayer, doDeath, exitToTitle, hasRun, loadGame, migrateOldSave, newRun, newUid, openDataPageUi, openLeaveMenu, openSettings, openSuggestionInbox, openTitleGuide, preflightRunMap, quitGame, saveGame, setBattleSettlementPending, setLobby, showTitle, startNewGame, syncPlayTime };

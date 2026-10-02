@@ -61,7 +61,7 @@
  * 本文件只保留 definitions 数据与批次参数；迁移数据行为不变（m3-data.test.js 守护）。 */
 import { createRuleBackfiller } from './cards.sync.backfiller.js';
 
-export const M3_MARKER_KEY = 'sdt-cards-m3-onplay-rules-v3-seeded';
+const M3_MARKER_KEY = 'sdt-cards-m3-onplay-rules-v3-seeded';
 
 const R = (battle, onPlay) => ({ rules: { version: 1, battle, triggers: { onPlay } } });
 const ENEMY_ONE = { target: { side: 'enemy', area: false } };

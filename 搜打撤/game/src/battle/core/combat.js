@@ -58,19 +58,6 @@ const CURSES = ['bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban', 'bu
     return { amount: +m[1], type: null };
   }
 
-  // 预览结算结果（不修改任何状态），战斗界面显示最终数字时用
-  function previewDamage(attacker, target, amount, type) {
-    const st = (target && target.status) || {};
-    const status = {};
-    CURSES.concat(BUFFS).forEach(k => { status[k] = st[k] || 0; });
-    const clone = { status,
-      defense: { shield: (target && target.defense && target.defense.shield) || 0,
-                 armor:  (target && target.defense && target.defense.armor)  || 0,
-                 guard:  !!((target && target.defense) && target.defense.guard) },
-      hp: (target && target.hp) || 0 };
-    return dealDamage(attacker, clone, amount, type);
-  }
-
   // 结算一次伤害。attacker/target 可为任意带 hp/atk/spellPower/status/defense 的对象
   function dealDamage(attacker, target, amount, type) {
     type = type || TYPES.ATTACK;
@@ -95,7 +82,6 @@ const CURSES = ['bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban', 'bu
     }
     // 闪避（祝福，09-20 老板定版）：免疫下一次攻击——完整避开这次攻击并消耗 1 层。
     // 仅对攻击类型生效（法术/固定/真实不可闪避）；非攻击伤害不消耗层数。
-    // 预览走 previewDamage 的浅拷贝，此处扣层不会污染真实状态。
     if ((target.status.dodge || 0) > 0 && type === TYPES.ATTACK) {
       target.status.dodge -= 1;
       r.dodged = true;
@@ -505,7 +491,7 @@ const CURSES = ['bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban', 'bu
     return { pass: failed.length === 0, total, failed, lines };
   }
 
-export { COMBAT_HOOKS, TYPES, TYPE_NAME, dealDamage, previewDamage,
+export { COMBAT_HOOKS, TYPES, TYPE_NAME, dealDamage,
          addBleed, clearBleed,
          CURSES, CURSE_META, addCurse, hasCurse, purify,
          BUFFS, BUFF_META, addBlessing, isStealthed, breakStealth,

@@ -1,4 +1,4 @@
-import SDT, { sdtDefine } from './sdt-facade.js';
+import { sdtDefine } from './sdt-facade.js';
   'use strict';
 import { assetUrl } from './asset-url.js';
 import { esc } from './shared.js';
@@ -109,17 +109,7 @@ import { esc } from './shared.js';
     const target=event.target;
     if(target&&target.tagName==='IMG'&&target.dataset&&target.dataset.assetKey) reportMissing('file',target.getAttribute('src'));
   }, true);
-  // 全量图标预热（2026-09-07 老板指示）：60 枚小 PNG 启动空闲期一次拉进内存，
-  // 之后任何页面首次渲染图标零请求零解码
-  function iconUrls() { const a = []; for (const n of NAMES) a.push(url(n)); return a; }
-  function warmAllIcons() {
-    for (const u of iconUrls()) {
-      const im = new Image();
-      im.decoding = 'async';
-      im.onload = () => { try { im.decode?.()?.catch?.(() => { /* 解码失败：图已显示，忽略 */ }); } catch { /* decode 不可用：预热仅求提前缓存 */ } };
-      im.src = u;
-    }
-  }
-  sdtDefine('Icons', {img,url,rich,hydrate,TYPE_ART,DEFS:{},NAMES,missingKeys,urls:iconUrls,warmAll:warmAllIcons});
-
-export { MAP, ROOT, SDT, esc, missingKeys, reportMissing };
+  // 全量图标预热（2026-09-07 老板指示）已由 game.boot.js 的 collectThumbnailAssets/
+  // collectManifestAssets/warmBatched/prefetchBatched 链接管（2026-10-02 审计 A 档删除
+  // 旧预热链 iconUrls/warmAllIcons 及 SDT.Icons.urls/warmAll/DEFS/missingKeys 挂载）。
+  sdtDefine('Icons', {img,url,rich,hydrate,TYPE_ART,NAMES});

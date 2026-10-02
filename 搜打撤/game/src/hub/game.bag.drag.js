@@ -206,6 +206,4 @@ import { bagSlots } from './game.bag.bridge.js';
 
 
 export function resetBagDrag() { bagDrag = null; }   // 壳侧 showBackpack 刷新时清拖拽（ESM 导入绑定不可赋值，2026-09-22 理顺点）
-bagSlots.bindBagDrag = bindBagDrag;   // 反向注册：壳 showBackpack 渲染后经桥挂拖拽
-
-export { bindBagDrag };
+bagSlots.bindBagDrag = bindBagDrag;   // 反向注册：壳 showBackpack 渲染后经桥挂拖拽（唯一消费链，2026-10-02 审计 A 档摘除无效 export）

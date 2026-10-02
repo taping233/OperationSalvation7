@@ -20,14 +20,12 @@
 /* 长文案折行收口（研究所锁定态键）：极窄容器下允许换行并收紧行距 */
 #btnNest { white-space:normal; line-height:1.35; }
 /* 龙巢（09-20 高级感改造批1）：未解锁态不再内联暗紫底+金底深字（深字压暗底不可读），
-   改 class 双态。二波 C 组三档语义收敛：出发整备=primary 金实心；
-   龙巢解锁态=secondary 深蓝描边金 hover（不再与主行动抢金）；未解锁=locked 灰锁 */
-#overlay .deploy-primary.nest-locked { border-color:rgba(148,163,170,.28); background:linear-gradient(135deg,rgba(30,40,48,.92),rgba(16,24,30,.94)); color:#8fa0a8; box-shadow:none; }
-#overlay .deploy-primary.nest-locked:hover { filter:none; transform:translateY(-1px); border-color:rgba(148,163,170,.5); }
-#overlay .deploy-primary.nest-locked .ic { filter:grayscale(1) brightness(1.5); }
-#overlay #btnNest.deploy-primary:not(.nest-locked) { border-color:rgba(159,183,188,.32); background:linear-gradient(135deg,rgba(36,58,74,.92),rgba(14,30,42,.94)); color:#e8d9a8; box-shadow:none; }
-#overlay #btnNest.deploy-primary:not(.nest-locked):hover { filter:none; transform:translateY(-1px); border-color:var(--gold-main); color:var(--gold-bright); box-shadow:0 0 10px rgba(217,187,130,.16); }
-#overlay #btnNest.deploy-primary:not(.nest-locked) .ic { filter:none; }
+   改 class 双态。二波 C 组语义收敛：出发整备=primary 金实心；
+   龙巢=secondary 深蓝描边金 hover（不再与主行动抢金）。
+   （W2-02 起 #btnNest 仅在解锁后渲染，nest-locked 锁态样式已随重设计删除） */
+#overlay #btnNest.deploy-primary { border-color:rgba(159,183,188,.32); background:linear-gradient(135deg,rgba(36,58,74,.92),rgba(14,30,42,.94)); color:#e8d9a8; box-shadow:none; }
+#overlay #btnNest.deploy-primary:hover { filter:none; transform:translateY(-1px); border-color:var(--gold-main); color:var(--gold-bright); box-shadow:0 0 10px rgba(217,187,130,.16); }
+#overlay #btnNest.deploy-primary .ic { filter:none; }
 /* 金底上的位图图标压成深色剪影（09-20 批1）：exit/lock 原图为青蓝调，直接放金底显脏 */
 #overlay .deploy-primary .ic { filter:brightness(.45) saturate(.9); }
 .deploy-primary span { font-size:21px; line-height:1; }

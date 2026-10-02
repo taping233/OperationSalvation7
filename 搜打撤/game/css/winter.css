@@ -498,8 +498,6 @@ body.page-opaque #sidebar{visibility:hidden}
       高度参差不齐导致按钮高度不一；让卡面统一满格宽 + 10/14 比例，按钮自然对齐 —— */
 #overlay .lib-item .lib-cardwrap{width:100%}
 #overlay .lib-cardwrap .hs-card{width:100%!important}
-/* 滚动中（.scrolling 由 JS 挂）禁用 hover 缩放，消除滑动时逐卡层切换开销 */
-.lib-grid.scrolling .lib-cardwrap{pointer-events:none}
 
 /* 09-20 批4：原「基地浅色化补漏」段（pk-row/ach-row/step-btn 米白底）一并删除，
    同属旧米白主题残留，现役深蓝样式以 expedition-inventory.css 为准。 */
@@ -704,15 +702,6 @@ body.zoom-open .battle-stage *::after{animation-play-state:paused}
 }
 /* 有效稀有度：初始、古朴、稀有、史诗、传说、衍生、职业、棱彩 */
 .hs-card.rv0{--rarity-color:#a9adb2}.hs-card.rv1{--rarity-color:#79a85c}.hs-card.rv2{--rarity-color:#5f9bd3}.hs-card.rv3{--rarity-color:#9a77c2}.hs-card.rv4{--rarity-color:#e5b34f}.hs-card.rv5{--rarity-color:#41bca4}.hs-card.rv6{--rarity-color:#242832}.hs-card.rv7{--rarity-color:#e879b6}.hs-card.rv-prism{--rarity-color:#e879b6}
-/* 类型主体色：武术、法术、生物、道具、装备、事件、能力卡、资源 */
-.hs-card.tp0{--type-body1:#c65d3e;--type-body2:#63251f;--type-art1:#572e39}
-.hs-card.tp1{--type-body1:#4b92b9;--type-body2:#203d67;--type-art1:#203f70}
-.hs-card.tp2{--type-body1:#9b78bc;--type-body2:#4b2d63;--type-art1:#46346f}
-.hs-card.tp3{--type-body1:#d18b45;--type-body2:#70401f;--type-art1:#5a3e2d}
-.hs-card.tp4{--type-body1:#b78951;--type-body2:#5c3e27;--type-art1:#4d3a2d}
-.hs-card.tp5{--type-body1:#5eae9b;--type-body2:#214f4e;--type-art1:#214f58}
-.hs-card.tp6{--type-body1:#d4a94e;--type-body2:#6b431e;--type-art1:#503b2c}
-.hs-card.tp7{--type-body1:#d0833c;--type-body2:#71391f;--type-art1:#263f60}
 .hs-card .hsc-name{
   background:linear-gradient(180deg,var(--rarity-color),color-mix(in srgb,var(--rarity-color),#3b2418 28%))!important;
 }

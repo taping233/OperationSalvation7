@@ -10,7 +10,7 @@ vi.mock('../game/src/run/game.run.flow.js', () => ({ moveTo: () => false, reente
 window.SDT = { UI: {}, Sound: { sfx() {} } };
 const { act, step, autoRun } = await import('../game/src/agent/agent.runner.js');
 const { observe, bustSigCache, markUiFailure } = await import('../game/src/agent/agent.state.js');
-const { setTurbo } = await import('../game/src/agent/agent.turbo.js');
+const { setTurbo } = await import('../game/src/core/turbo.js');
 const { BattleSession } = await import('../game/src/battle/core/battle.core.js');
 const { createGameMenuController } = await import('../game/src/ui/game.menu.js');
 const action = { type: 'ui', name: 'testCommand' };

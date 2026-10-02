@@ -30,6 +30,7 @@ function fixture() {
   writeFileSync(path.join(project, 'scripts/value.txt'), 'base');
   writeFileSync(path.join(project, 'scripts/acceptance-gate.mjs'), `import {readFileSync,existsSync,writeFileSync} from 'node:fs';
 export function planForPaths(paths){return {mode:paths.every(p=>p.endsWith('.md'))?'skip':'full',paths,reasons:[],tests:[]};}
+export function reverseImports(){return {fileSet:new Set(),reverse:new Map()};}
 if(process.argv[1]?.endsWith('acceptance-gate.mjs')){
 const value=readFileSync('scripts/value.txt','utf8');
 if(value==='must-fail') process.exitCode=7;
@@ -60,7 +61,8 @@ describe('Git index 隔离验收', () => {
   it('真实 workflow staged --plan 在冻结Git视图内可执行，且不借用源工作树/index', asyncCase(async () => {
     const f = fixture();
     const sourceScripts = path.resolve('scripts');
-    for (const name of readdirSync(sourceScripts).filter(name => /^workflow.*\.mjs$/.test(name) || name === 'index-validation.mjs')) {
+    // impact-query.mjs：workflow-status.mjs 的属地 token 依赖（WF-code-map 引入）；不复制则快照内 import 链断。
+    for (const name of readdirSync(sourceScripts).filter(name => /^workflow.*\.mjs$/.test(name) || name === 'index-validation.mjs' || name === 'impact-query.mjs')) {
       writeFileSync(path.join(f.project, 'scripts', name), readFileSync(path.join(sourceScripts, name)));
     }
     const gate = path.join(f.project, 'scripts/acceptance-gate.mjs');

@@ -1,11 +1,38 @@
+// @ts-check
 import { validateGeneratedMap } from '../run/map-generator.js';
 import { clone } from '../core/shared.js';
 
+/** 覆盖层数据形状（与 run/layeredMap.js createLayeredMap 输出对齐，仅声明本文件触达的成员）。
+ * @typedef {{ minX: number, maxX: number, minRow: number, maxRow: number }} GridBounds
+ * @typedef {[number, number]} RouteEdge  [目标层下标, 目标格下标]
+ * @typedef {{ type: string, name: string, extraction?: boolean }} NodeDef
+ * @typedef {{ id: string, li: number, idx: number, x: number, row: number, type: string, name: string, next: RouteEdge[], extraction: boolean }} MapNode
+ * @typedef {{ grid: unknown[], fire: boolean, oldIdx: number, def: NodeDef, id: string, row: number, x: number, next: RouteEdge[] }} LogicalNode
+ * @typedef {{ pair: string, at: number, toLayer: number, arriveAt: number, exit: boolean }} LayerDoor
+ * @typedef {{ id: string, name: string, nameEn: string, color: string, generatorVersion: number, layoutVersion: number, gridBounds: GridBounds, nodes: MapNode[], entrances: number[], entranceNames: string[], doors: LayerDoor[], altarEntrances: number[], exit: number, logical: LogicalNode[] }} MapLayer
+ * @typedef {{ nodes: MapNode[], entry: number, exit: number, doors: LayerDoor[], altarEntrances: number[], gridBounds: GridBounds }} RawLayer
+ * @typedef {{ start: number, rejoin: number, supply: number, risk: number }} BranchChoice
+ * @typedef {{ layerIndex: 1, status: 'fallback', fallbackReason: string }} FallbackPlan
+ * @typedef {{ layerIndex: 1, status: 'applied', startNodeId: string, rejoinNodeId: string, supplyNodeId: string, riskNodeId: string, swaps: Array<{aNodeId: string, bNodeId: string, beforeA: string, beforeB: string}>, fallbackReason: null }} AppliedPlan
+ * @typedef {FallbackPlan|AppliedPlan} RoutePlan
+ * @typedef {{ ok: false, code: 'INVALID_ROUTE_INPUT', message: string }} OverlayReject
+ * @typedef {{ ok: true, value: { layerData: MapLayer[], routeVersion: string, status: ('applied'|'fallback'), routePlan: RoutePlan } }} OverlayAccepted
+ * @typedef {OverlayReject|OverlayAccepted} OverlayResult
+ */
 export const ROUTE_VERSION = 'r5-routes-v1';
 const BLOCKED = new Set(['entrance','door','fire','shop','extraction','altar','boss','emergencyExit']);
+/** 质量门不收时的降级回执：原样归还 layerData 快照，路线走 fallback。
+ * @param {MapLayer[]} layerData
+ * @param {string} reason
+ * @returns {OverlayAccepted}
+ */
 const fail = (layerData, reason) => ({ ok:true, value:{ layerData:clone(layerData), routeVersion:ROUTE_VERSION,
   routePlan:{ layerIndex:1, status:'fallback', fallbackReason:reason }, status:'fallback' } });
 
+/** 把会话层拷贝成质量门（validateGeneratedMap）消费的生成器原始层形状。
+ * @param {MapLayer[]} layers
+ * @returns {RawLayer[]}
+ */
 function rawLayers(layers) {
   return layers.map((layer,li)=>({
     nodes:layer.nodes.map((n,idx)=>({ ...n, idx, li, type:n.type ?? layer.logical[idx]?.def?.type,
@@ -15,11 +42,21 @@ function rawLayers(layers) {
   }));
 }
 
+/** 连续战斗上限复核：任一战斗格的同层战斗邻居 ≤1（不制造三连战）。
+ * @param {RawLayer[]} layers
+ * @returns {boolean}
+ */
 function battleAdjacencyOk(layers) {
   return layers.every((layer,li)=>layer.nodes.every(node=>node.type!=='battle' ||
     node.next.filter(([tl,ti])=>tl===li && layer.nodes[ti]?.type==='battle').length<=1));
 }
 
+/** 同步改写一个逻辑格的 def 与显示层（type/name/extraction 三处落盘）。
+ * @param {MapLayer} layer
+ * @param {number} idx
+ * @param {NodeDef} def
+ * @returns {void}
+ */
 function setDef(layer, idx, def) {
   layer.logical[idx].def=clone(def);
   layer.nodes[idx].type=def.type;
@@ -27,8 +64,13 @@ function setDef(layer, idx, def) {
   layer.nodes[idx].extraction=!!def.extraction;
 }
 
+/** 枚举第 2 层全部「双格支线换位」候选对（supply=非战斗支线格，risk=战斗支线格），按字典序稳定排序。
+ * @param {MapLayer} layer
+ * @returns {BranchChoice[]}
+ */
 function candidates(layer) {
   const nodes=layer.logical;
+  /** @param {number} a @param {number} b */
   const adjacent=(a,b)=>nodes[a].next.some(([li,idx])=>li===1&&idx===b);
   const out=[];
   for(let a=0;a<nodes.length;a++) for(let b=a+1;b<nodes.length;b++) {
@@ -46,6 +88,14 @@ function candidates(layer) {
   return out.sort((x,y)=>[x.start,x.rejoin,x.supply,x.risk].join(',').localeCompare([y.start,y.rejoin,y.supply,y.risk].join(','),undefined,{numeric:true}));
 }
 
+/** 路线覆盖层入口：对第 2 层做「支线格 ↔ 宝箱格」换位制造支线环，失败则原样降级（fallback）。
+ * @param {object} p
+ * @param {number} p.generatorVersion  生成器版本（须为 3，否则拒绝输入）
+ * @param {number} p.layoutVersion  布局版本（须为 9，否则拒绝输入）
+ * @param {MapLayer[]} p.layerData  四层地图数据（createLayeredMap 产物）
+ * @param {string} [p.routeVersion]  路线协议版本，缺省取 ROUTE_VERSION
+ * @returns {OverlayResult}
+ */
 export function applyRouteOverlay({ generatorVersion, layoutVersion, layerData, routeVersion=ROUTE_VERSION }) {
   let original=null;
   try {

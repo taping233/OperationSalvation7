@@ -1,13 +1,22 @@
+// @ts-check
 /* ui.cinematics.js —— 卡牌演出与屏幕过渡：数值弹跳、传说特写、卡牌奖励演出队列、
  * 顶层屏幕（标题页/告别屏/留言信箱）进出时序（09-25 自 ui.js 拆出，方法包由 ui.js 组装）。
  * 方法均以 UI.method() 形式调用，内部一律走 this 访问壳上的状态。
  */
 import { esc } from '../core/shared.js';
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
-const SDT = window.SDT;
+/** window.SDT 门面的 cinematics 消费切面：仅声明本文件触达的成员（整体形状由 main.js 装配保证）。
+ * @typedef {object} SdtCinematicsSurface
+ * @property {{pop: (el: HTMLElement) => void, reduceMotion: () => boolean}} [Motion]
+ * @property {{cardHTML: (card: *, cls?: string) => string}} Cards
+ * @property {{sfx: (name: string) => void}} Sound
+ * @property {{runActive: boolean}} [game]
+ */
+const SDT = /** @type {SdtCinematicsSurface} */ (/** @type {any} */ (window).SDT);
 
 export const cinematicsMethods = {
   // 数值变化时弹跳一下（retrigger 动画）
+  /** @param {(HTMLElement|null)} el */
   popNum(el) {
     if (!el) return;
     if (SDT.Motion) { SDT.Motion.pop(el); return; }
@@ -18,6 +27,7 @@ export const cinematicsMethods = {
 
   // 传说卡获得特写（2026-09-07 留言：获得传说物品没有提示和界面）：
   // 全屏暗幕 + 金色光柱 + 大卡面揭晓，点击任意处或 2.8s 后自动收场。
+  /** @param {*} card */
   showLegendGet(card) {
     if (!card) return;
     const old = document.getElementById('legendGet');
@@ -40,8 +50,10 @@ export const cinematicsMethods = {
   // 与传说特写同壳（#cardGet 复用 #legendGet 的样式与动画），传说卡保留金色光柱与
   // legend 音效，其余卡为中性演出 + gain 音效。多张连发走队列逐张播放。
   // reason：可选的获得原因文字（2026-09-20 老板——发牌点要说明为什么给这张牌）
+  /** @type {Array<{card: *, reason: (string|undefined), context: {runActive: boolean}}>} */
   _cardGetQueue: [],
   _cardGetShowing: false,
+  /** @param {*} card @param {string} [reason] */
   showCardReward(card, reason) {
     if (!card) return;
     // 对局归属快照（2026-09-28 代码线）：演出队列自驱与场景解耦，多张连发时玩家
@@ -93,6 +105,7 @@ export const cinematicsMethods = {
   // ---------- 顶层屏幕进出（标题页/告别屏/留言信箱这类 hidden 直切元素） ----------
   // boss 留言 #52（所有界面退出都有过渡动画）延伸到屏幕级：入场动画由 CSS 在
   // display:none→显示时自动重播，这里只负责退场类与隐藏时机；reduce-motion 瞬时完成。
+  /** @param {(HTMLElement & {_scrToken?: number, _scrHiding?: boolean}|null)} el */
   showScreen(el) {
     if (!el) return;
     el._scrToken = (el._scrToken || 0) + 1;   // 作废进行中的隐藏计时
@@ -102,6 +115,7 @@ export const cinematicsMethods = {
     el.hidden = false;
   },
 
+  /** @param {(HTMLElement & {_scrToken?: number, _scrHiding?: boolean}|null)} el @param {(() => void)} [after] */
   hideScreen(el, after) {
     if (!el) return;
     if (el.hidden) { if (after) after(); return; }

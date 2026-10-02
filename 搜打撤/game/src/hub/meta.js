@@ -329,5 +329,4 @@ import { LEVEL_MAX, addXpToProgress, xpForNext } from './meta-progression.js';
     isCollClaimed, pendingColl, claimColl, onCollect, checkCollMilestones, syncCollXp,
   };
 
-export { SDT };
 export { LEVEL_MAX, xpForNext, perkText, addXpToProgress, collectionXpFor };

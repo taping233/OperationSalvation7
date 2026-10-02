@@ -17,12 +17,16 @@ import { esc, escAttr } from '../core/shared.js';
 // （09-23 自 buildCardHTML 体内上移模块顶层并导出——选片台描述复用，卡面行为不变；
 //  buildCardHTML 体内自有局部 const esc，与本模块级 import 同名共存、体内遮蔽照旧。）
 const DESC_TERMS = ['对战开始时', '回合开始时', '回合结束时', '冰冻', '冻结', '中毒', '燃烧', '灼烧', '流血', '护甲', '法伤', '生命', '伤害', '诅咒', '净化', '沉默', '充能', '注能', '发现', '限定', '主动技能', '消耗', '装备', '牌库', '回合', '弃牌', '抽牌', '能量'];
+// 术语 alternation 正则（2026-10-02 审计 A 档上提模块级）：descRich 原每次调用重建 30 词
+// RegExp（卡牌库页首渲数百卡各一次）；词表是模块常量不会变，/g 标志 lastIndex 由
+// replace 自管（每次 replace 从 0 扫描），提升零行为差。
+const DESC_TERM_RE = new RegExp('(' + DESC_TERMS.join('|') + ')', 'g');
 export function descRich(desc) {
   let s = esc(desc);
   s = s.replace(/^([^<>：\n]{1,10})：/, '<b class="d-kw">$1：</b>');
   // 09-20 老板：特殊词条触摸讲解——命中词带 data-term（term-tips.js 全局委托弹自绘讲解框），
   // 伤害/生命/回合等常识词无讲解条目，保持纯高亮不弹框
-  s = s.replace(new RegExp('(' + DESC_TERMS.join('|') + ')', 'g'), (w) => {
+  s = s.replace(DESC_TERM_RE, (w) => {
     const key = termKeyFor(w);
     return key ? `<i class="d-term" data-term="${key}">${w}</i>` : `<i class="d-term">${w}</i>`;
   });

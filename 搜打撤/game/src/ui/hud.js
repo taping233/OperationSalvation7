@@ -1,3 +1,4 @@
+// @ts-check
 /* ui.hud.js —— HUD 常驻区：顶栏回合/经济/血条/背包浮动键刷新、日志面板、tooltip 空转桩
  * （09-25 自 ui.js 拆出，方法包由 ui.js 组装）。
  * 方法均以 UI.method() 形式调用，内部一律走 this 访问壳上的 el 与各 _last* 缓存。
@@ -5,14 +6,59 @@
 import { storeSet } from '../core/storage.js';
 import { renderExpeditionPanel } from '../run/expedition.view.js';
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
-const SDT = window.SDT;
+/** window.SDT 门面的 hud 消费切面：仅声明本文件触达的成员（整体形状由 main.js 装配保证）。
+ * @typedef {object} SdtHudSurface
+ * @property {{img: (name: string) => string, rich: (html: string) => string}} Icons
+ * @property {{classAvatarArt: (cls: string) => string}} [Art]
+ */
+const SDT = /** @type {SdtHudSurface} */ (/** @type {any} */ (window).SDT);
+/** 页面内 getElementById 快捷式。
+ * @type {(id: string) => (HTMLElement|null)}
+ */
 const $ = (id) => document.getElementById(id);
 
+/** refresh 消费的对局运行态切面（game.js 投影；可选性按本文件既有守卫声明）。
+ * @typedef {object} HudGameView
+ * @property {string} state
+ * @property {number} turn
+ * @property {number} hp
+ * @property {number} maxHp
+ * @property {number} coins
+ * @property {number} atk
+ * @property {(string|undefined)} myClass
+ * @property {(boolean|undefined)} runActive
+ * @property {Array<{value: number, count?: number}>} inventory
+ * @property {(() => ({name: string, nameEn?: string}|null))} [curLayer]  当前层切片（无层为 null）
+ * @property {(() => number)} [usedSlots]  背包已占格数（缺省回落 inventory.length）
+ * @property {(() => number)} [bagCap]  背包容量（缺省回落 map.rules.bagSize）
+ * @property {{rules: {bagSize: number}}} map
+ */
+
+/** hudMethods 装配进 UI 壳后的 this 切面：el 由 ui.js 注入；_last* 与 _roomActive 为
+ * 跨帧脏检查缓存（首帧惰性写入）；endRoom/popNum 来自同壳其他方法包
+ * （overlay.js endRoom / cinematics.js popNum，见现文件同批 ui 域装配）。
+ * @typedef {object} HudThis
+ * @property {{layerZh: HTMLElement, layerEn: HTMLElement, statTurn: HTMLElement, statValue: HTMLElement, hpBar: HTMLElement, hpBarWrap: HTMLElement, hpText: HTMLElement, charCoins: HTMLElement, charAtk: HTMLElement, heroAva: HTMLElement, bagCountFloat: (HTMLElement|null), bagBtnFloat: (HTMLElement|null), log: (HTMLElement|null), logPanel: (HTMLElement|null), tooltip: HTMLElement}} el
+ * @property {(string|null|undefined)} _lastMode
+ * @property {boolean} _roomActive
+ * @property {({name: string, nameEn?: string}|null|undefined)} _lastBannerLayer
+ * @property {(number|undefined)} _lastTurn
+ * @property {(number|null|undefined)} _lastValue
+ * @property {(string|null|undefined)} _lastHpKey
+ * @property {(number|null|undefined)} _lastCoins
+ * @property {(number|null|undefined)} _lastAtk
+ * @property {(string|undefined)} _lastHeroCls
+ * @property {(string|undefined)} _lastBagKey
+ * @property {(() => void)} endRoom
+ * @property {((el: (HTMLElement|null)) => void)} popNum
+ */
+
 export const hudMethods = {
+  /** @param {HudGameView} game @this {HudThis} */
   refresh(game) {
     // 战斗渲染末尾也会走 UI.refresh：battle 模式下路线面板被整页盖住，直接跳过
     // （F8 补充；_lastMode==='battle' 的可靠性同 overlay.js 对 page-covered 的既有判断）
-    if (this._lastMode !== 'battle') renderExpeditionPanel($('routePanel'), game, name => SDT.Icons.img(name));
+    if (this._lastMode !== 'battle') renderExpeditionPanel($('routePanel'), game, /** @type {(name: string) => string} */ (name => SDT.Icons.img(name)));
     // 格子结算链回到 idle，才真正退出房间页；战斗→宝箱等中间切页不会闪回地图。
     if (game.state === 'idle' && this._roomActive) this.endRoom();
     const layer = game.curLayer ? game.curLayer() : null;
@@ -22,7 +68,7 @@ export const hudMethods = {
       this.el.layerZh.textContent = layer ? layer.name : '—';
       this.el.layerEn.textContent = layer && layer.nameEn ? layer.nameEn : '';
       // 换层演出：横幅重播一次滑入（一次性动画走合成器；reduce-motion 由 CSS 豁免）
-      const banner = this.el.layerZh.closest('#layerBanner');
+      const banner = /** @type {(HTMLElement|null)} */ (this.el.layerZh.closest('#layerBanner'));
       if (banner) {
         banner.classList.remove('lb-swap');
         void banner.offsetWidth;
@@ -32,7 +78,8 @@ export const hudMethods = {
     const turn = game.turn - 1;
     if (this._lastTurn !== turn) {
       this._lastTurn = turn;
-      this.el.statTurn.textContent = turn;
+      // textContent 直写数字由 DOM 强转字符串（行为不变），类型层断言放行
+      this.el.statTurn.textContent = /** @type {any} */ (turn);
     }
     const valTotal = game.inventory.reduce((a, b) => a + b.value * (b.count || 1), 0);
     if (this._lastValue !== valTotal) {
@@ -58,12 +105,12 @@ export const hudMethods = {
       this.el.hpText.innerHTML = `${dispHp}<span class="hp-rest">/${game.maxHp}</span>`;
     }
     if (this._lastCoins !== game.coins) {
-      this.el.charCoins.textContent = game.coins;
+      this.el.charCoins.textContent = /** @type {any} */ (game.coins);
       if (this._lastCoins != null) this.popNum(this.el.charCoins);
       this._lastCoins = game.coins;
     }
     if (this._lastAtk !== game.atk) {
-      this.el.charAtk.textContent = game.atk;
+      this.el.charAtk.textContent = /** @type {any} */ (game.atk);
       if (this._lastAtk != null) this.popNum(this.el.charAtk);
       this._lastAtk = game.atk;
     }
@@ -89,6 +136,7 @@ export const hudMethods = {
     }
   },
 
+  /** @param {string} msg @param {string} [cls] @this {HudThis} */
   log(msg, cls) {
     if (!this.el.log) return;   // 日志面板已从前台移除，仅保留内部记录入口
     const div = document.createElement('div');
@@ -103,9 +151,10 @@ export const hudMethods = {
       storeSet('sdt-log-collapsed', '0');
     }
     this.el.log.prepend(div);
-    while (this.el.log.children.length > 60) this.el.log.lastChild.remove();
+    while (this.el.log.children.length > 60) /** @type {ChildNode} */ (this.el.log.lastChild).remove();
   },
 
+  /** @this {HudThis} */
   clearLog() {
     if (!this.el.log) return;
     this.el.log.innerHTML = '';
@@ -116,12 +165,16 @@ export const hudMethods = {
     }
   },
 
+  /** 空转桩；参数类型按既有调用点契约声明（battle.layers.js:303、game.boot.js:240/331/355/377）。
+   * @param {number} clientX @param {number} clientY @param {string} title @param {string[]} lines @this {HudThis}
+   */
   showTooltip(clientX, clientY, title, lines) {
     // 2026-09-19 留言 #7：任意界面鼠标停留都不再弹解释框——入口保留但整体空转，
     // 地图节点/顶栏/手牌等调用点零改动，#tooltip 元素永不显示
     void clientX; void clientY; void title; void lines;
   },
 
+  /** @this {HudThis} */
   hideTooltip() { this.el.tooltip.hidden = true; },
 };
 

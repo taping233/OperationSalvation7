@@ -42,7 +42,7 @@ export function requestClassChoice(options) {
 }
 
 // ---------- 会话单例状态 ----------
-export const store = new GameStore(MAP);
+const store = new GameStore(MAP);
 export const game = store.state;
 game.getSnapshot = () => store.getSnapshot();
 

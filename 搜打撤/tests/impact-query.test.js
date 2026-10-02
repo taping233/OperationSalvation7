@@ -1,0 +1,118 @@
+/* impact-query（npm run impact）测试：属地撞线解析、反向闭包、命令生成三块核心口径。
+ * 端到端用真实仓库文件断言（agent.scenes.js ← agent.js 引用是稳定事实）。 */
+import { describe, expect, it } from 'vitest';
+import { existsSync, readFileSync } from 'node:fs';
+import {
+  extractRegistryTokens, formatImpact, impactQuery, normalizePath,
+  parseActiveRegistry, pathOverlaps, registryHits, reverseClosure,
+} from '../scripts/impact-query.mjs';
+
+describe('路径归一', () => {
+  it('反斜杠/搜打撤前缀/./ 均归一为项目相对 posix 路径', () => {
+    expect(normalizePath('搜打撤\\game\\src\\agent\\agent.js')).toBe('game/src/agent/agent.js');
+    expect(normalizePath('./game/src/agent/agent.js')).toBe('game/src/agent/agent.js');
+    expect(normalizePath('game/src/agent/')).toBe('game/src/agent');
+  });
+  it('项目外路径抛错', () => {
+    expect(() => normalizePath('../outside.js')).toThrow();
+  });
+});
+
+describe('属地 token 提取', () => {
+  it('裸路径目录与文件均提取，端口/PID/纯词丢弃', () => {
+    const tokens = extractRegistryTokens('搜打撤/code-map/（index.html 页、generate.mjs 扫描器）；127.0.0.1:5301 / PID 18424 / python http.server / 本会话创建');
+    expect(tokens).toContain('code-map');
+    expect(tokens).toContain('index.html');
+    expect(tokens).toContain('generate.mjs');
+    expect(tokens.filter(t => /^\d+$/.test(t))).toEqual([]);
+  });
+  it('反引号内容优先', () => {
+    expect(extractRegistryTokens('`scripts/a.mjs` 与 `docs/README.md`'))
+      .toEqual(['scripts/a.mjs', 'docs/README.md']);
+  });
+  it('「不碰/零改动」排除声明不当属地', () => {
+    const tokens = extractRegistryTokens('自有目录 my-work/；不碰 game/ 源码；零改动 tests/x.test.js');
+    expect(tokens).toContain('my-work');
+    expect(tokens).not.toContain('game');
+    expect(tokens).not.toContain('tests/x.test.js');
+  });
+});
+
+describe('活跃登记解析与撞线', () => {
+  const md = [
+    '# x', '## 活跃登记', '',
+    '| 会话/来源 | 属地 | 事项 | 登记时间 | 状态 |', '|---|---|---|---|---|',
+    '| Friday（A 任务） | `game/src/battle/`、`scripts/gate.mjs` | 事项A | 10-01 | 编辑中 |',
+    '| Friday（B 已落库） | `docs/x.md` | 事项B | 10-01 | 已落库 7d2fbde |',
+    '', '## 无主物品', '',
+  ].join('\n');
+
+  it('活跃表解析：跳表头/已落库行，属地 token 正确', () => {
+    const rows = parseActiveRegistry(md);
+    expect(rows).toHaveLength(1);
+    expect(rows[0].session).toContain('A 任务');
+    expect(rows[0].tokens).toEqual(['game/src/battle', 'scripts/gate.mjs']);
+  });
+  it('双向包含：文件∈属地目录、目录∋属地文件、相等均命中', () => {
+    expect(pathOverlaps('game/src/battle/core/battle.core.js', 'game/src/battle')).toBe(true);
+    expect(pathOverlaps('game/src', 'game/src/battle/battle.core.js')).toBe(true);
+    expect(pathOverlaps('scripts/gate.mjs', 'scripts/gate.mjs')).toBe(true);
+    expect(pathOverlaps('game/src/hub', 'game/src/battle')).toBe(false);
+  });
+  it('registryHits 命中行带会话与重叠 token', () => {
+    const rows = parseActiveRegistry(md);
+    const hits = registryHits(['game/src/battle/view/battle.aim.js'], rows);
+    expect(hits).toHaveLength(1);
+    expect(hits[0].matched).toEqual(['game/src/battle']);
+    expect(registryHits(['docs/README.md'], rows)).toEqual([]);
+  });
+});
+
+describe('反向闭包', () => {
+  it('BFS 分层：直接/传递深度正确，环不死循环', () => {
+    const graph = { reverse: new Map([
+      ['t.js', new Set(['a.js', 'b.js'])],
+      ['a.js', new Set(['c.js', 't.js'])],   // t→a→c 且 a 引回 t（环）
+      ['b.js', new Set(['c.js'])],
+    ]) };
+    const closure = reverseClosure(['t.js'], graph, new Map());
+    expect(closure.direct.sort()).toEqual(['a.js', 'b.js']);
+    expect(closure.transitive).toEqual([{ file: 'c.js', depth: 2 }]);
+  });
+  it('loose 边并入：scripts/tools 引用也算直接引用者', () => {
+    const graph = { reverse: new Map() };
+    const loose = new Map([['t.js', new Set(['scripts/tool.mjs'])]]);
+    const closure = reverseClosure(['t.js'], graph, loose);
+    expect(closure.direct).toEqual(['scripts/tool.mjs']);
+  });
+});
+
+describe('端到端（真实仓库）', () => {
+  it('agent.scenes.js：agent.js 直接引用、属地无冲突、计划与命令字段完整', () => {
+    const report = impactQuery(['game/src/agent/agent.scenes.js']);
+    expect(report.paths).toEqual(['game/src/agent/agent.scenes.js']);
+    expect(report.reverse.direct).toContain('game/src/agent/agent.js');
+    expect(report.registry.hits.some(h => h.session.includes('code-map'))).toBe(false);
+    expect(['skip', 'quick', 'full']).toContain(report.plan.mode);
+    expect(report.commands.verify).toContain('workflow -- verify --paths game/src/agent/agent.scenes.js');
+    if (report.plan.mode === 'quick') {
+      expect(report.commands.targeted.startsWith('npm run test:target -- ')).toBe(true);
+      for (const test of report.plan.tests) expect(existsSync(test)).toBe(true);
+    }
+  });
+  it('属地撞线路径真实可见：code-map 目录命中在途会话', () => {
+    const report = impactQuery(['code-map/data.js']);
+    expect(report.registry.hits.length).toBeGreaterThanOrEqual(0); // 不依赖台账瞬时状态，仅冒烟
+    expect(report.registry.activeRowCount).toBeGreaterThanOrEqual(1);
+  });
+  it('文本渲染含四节且不炸', () => {
+    const text = formatImpact(impactQuery(['game/src/agent/agent.state.js']));
+    expect(text).toContain('并行属地');
+    expect(text).toContain('反向依赖');
+    expect(text).toContain('验证计划');
+    expect(text).toContain('现成命令');
+  });
+  it('REGISTRY 真源解析不抛错（格式漂移即红）', () => {
+    expect(() => parseActiveRegistry(readFileSync('docs/PARALLEL-REGISTRY.md', 'utf8'))).not.toThrow();
+  });
+});

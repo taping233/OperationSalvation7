@@ -245,16 +245,14 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
         </div>
         <div class="ov-btns"><button class="ov-btn" data-act="stashBack">↩ 返回仓库</button></div>
         </div><!-- /.stash-shell -->`);
-      const useOne = () => {
-        const r = B.useStashMaterial(s.card.name, false);
+      // 使用 one/all 共享体（差异仅 all 标志；材料使用无逐张数量语义）
+      const useStashMaterial = (all) => {
+        const r = B.useStashMaterial(s.card.name, all);
         if (r.ok) { Sfx.ding(); UI.log(r.msg, 'loot'); }
         hubBridge.renderHub();
       };
-      const useAll = () => {
-        const r = B.useStashMaterial(s.card.name, true);
-        if (r.ok) { Sfx.ding(); UI.log(r.msg, 'loot'); }
-        hubBridge.renderHub();
-      };
+      const useOne = () => useStashMaterial(false);
+      const useAll = () => useStashMaterial(true);
       const confirmMaterial = (message, run) => {
         UI.showOverlay('[[icon:question]] 确认使用', `<p class="ov-note">${message}</p><div class="ov-btns">
           <button class="ov-btn" data-act="matConfirmCancel">保留，返回仓库</button>
@@ -334,16 +332,20 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
       if (s.count === 1) { confirmStashAction('这是仓库里的最后一个经济卡包，拆开后卡包将消失。', useEconPack); return; }
       useEconPack();
     });
+    // 收藏 one/all 共享体（差异仅数量、幂等 requestId 与日志文案）
+    const convertStash = async (n, requestId, logText) => {
+      const read = readBase(B.slot);
+      if (!read.ok) { UI.log(homeErrorMessage(read), 'warn'); return; }
+      const result = await convertCollection({ slotId: B.slot, requestId: homeRequestId(requestId), expectedRevision: read.revision }, { stackKey: stackKeyOf(s), count: n });
+      if (!result.ok) { UI.log(result.message || '收藏失败，卡牌未消耗', 'warn'); return; }
+      Sfx.ding();
+      UI.log(logText, 'loot');
+      hubBridge.renderHub();
+    };
     const collectOne = async () => {
       // 2026-09-16 定版（Item 15）：职业卡/能力卡收藏即用掉——重复收藏重复获得经验，进度只记首次
       const first = !B.isCollected(s.card);
-      const read = readBase(B.slot);
-      if (!read.ok) { UI.log(homeErrorMessage(read), 'warn'); return; }
-      const result = await convertCollection({ slotId: B.slot, requestId: homeRequestId('collect-one'), expectedRevision: read.revision }, { stackKey: stackKeyOf(s), count: 1 });
-      if (!result.ok) { UI.log(result.message || '收藏失败，卡牌未消耗', 'warn'); return; }
-      Sfx.ding();
-      UI.log(`[[icon:medal]] 已收藏【<b>${esc(s.card.name)}</b>】并转化为人物经验（卡牌用掉，不再占格${first ? '，收藏进度 +1' : ''}）`, 'loot');
-      hubBridge.renderHub();
+      await convertStash(1, 'collect-one', `[[icon:medal]] 已收藏【<b>${esc(s.card.name)}</b>】并转化为人物经验（卡牌用掉，不再占格${first ? '，收藏进度 +1' : ''}）`);
     };
     UI.act('collCollectOne', () => {
       if (!convertType) return;
@@ -351,14 +353,7 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
     });
     const collectAll = async () => {
       if (!convertType) return;
-      const n = s.count;
-      const read = readBase(B.slot);
-      if (!read.ok) { UI.log(homeErrorMessage(read), 'warn'); return; }
-      const result = await convertCollection({ slotId: B.slot, requestId: homeRequestId('collect-all'), expectedRevision: read.revision }, { stackKey: stackKeyOf(s), count: n });
-      if (!result.ok) { UI.log(result.message || '收藏失败，卡牌未消耗', 'warn'); return; }
-      Sfx.ding();
-      UI.log(`[[icon:medal]] 已收藏【<b>${esc(s.card.name)}</b>】×${n}，全部转化为人物经验（卡牌用掉）`, 'loot');
-      hubBridge.renderHub();
+      await convertStash(s.count, 'collect-all', `[[icon:medal]] 已收藏【<b>${esc(s.card.name)}</b>】×${s.count}，全部转化为人物经验（卡牌用掉）`);
     };
     UI.act('collCollectAll', () => {
       if (!convertType) return;
@@ -379,11 +374,13 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
       SDT.Meta.checkUnlocks();
       hubBridge.renderHub();
     });
-    const sellOne = () => {
-      const r = B.sellStashCards(s.card.name, 1);
+    // 卖出 one/all 共享体（差异仅数量）
+    const sellStash = (n) => {
+      const r = B.sellStashCards(s.card.name, n);
       if (r.ok) { Sfx.ding(); UI.log(r.msg, 'coin'); }
       hubBridge.renderHub();
     };
+    const sellOne = () => sellStash(1);
     UI.act('sellOne', () => {
       if (price >= 5 || s.count === 1) {
         confirmStashAction(`卖出【${esc(s.card.name)}】将获得 ${price} 币${s.count === 1 ? '，这也是仓库里的最后一张' : ''}。`, sellOne);
@@ -391,11 +388,7 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
       }
       sellOne();
     });
-    const sellAll = () => {
-      const r = B.sellStashCards(s.card.name, s.count);
-      if (r.ok) { Sfx.ding(); UI.log(r.msg, 'coin'); }
-      hubBridge.renderHub();
-    };
+    const sellAll = () => sellStash(s.count);
     UI.act('sellAll', () => {
       if (price >= 5 || s.count === 1) {
         confirmStashAction(`卖出【${esc(s.card.name)}】整堆（×${s.count}）将获得 ${price * s.count} 币，操作不可撤回。`, sellAll);
@@ -654,4 +647,4 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
       ${content}`;
   }
 
-export { hubShopHTML, hubStashHTML, hubPetsHTML, openStashItem, openRawItem, hubUpgradeHTML, hubClassesHTML, collRoomHTML, hubAchHTML, HUB_SHOP_GOODS, hubShopGoodsCard };
+export { hubShopHTML, hubStashHTML, openStashItem, openRawItem, hubUpgradeHTML, hubClassesHTML, hubAchHTML, HUB_SHOP_GOODS, hubShopGoodsCard };

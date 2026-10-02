@@ -6,7 +6,7 @@
  * 查询参数，实现发版后的缓存失效。构建号由 vite.config.js 的
  * define(__BUILD_VERSION__) 注入；测试/无构建环境回退 'dev'。
  * ============================================================ */
-export const BUILD_VERSION =
+const BUILD_VERSION =
   typeof __BUILD_VERSION__ !== 'undefined' ? __BUILD_VERSION__ : 'dev';
 
 export function assetUrl(p) {

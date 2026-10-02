@@ -13,7 +13,7 @@ vi.mock('../game/src/run/game.run.flow.js', () => ({ moveTo: () => false, reente
 window.SDT = { UI: {}, Sound: { sfx() {} } };
 const { autoRun } = await import('../game/src/agent/agent.runner.js');
 const { getDriver, setDriver } = await import('../game/src/agent/agent.recorder.js');
-const { setTurbo } = await import('../game/src/agent/agent.turbo.js');
+const { setTurbo } = await import('../game/src/core/turbo.js');
 const { bustSigCache } = await import('../game/src/agent/agent.state.js');
 
 const options = { preSettled: true, allowEmpty: true, quietMs: 1, pollMs: 1, timeoutMs: 100, commandTimeoutMs: 100 };

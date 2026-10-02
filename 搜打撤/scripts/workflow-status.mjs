@@ -3,6 +3,7 @@ import { existsSync, lstatSync, readdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { hash, readLedger, table } from './workflow-ledger.mjs';
 import { discoverMemory } from './workflow-memory.mjs';
+import { extractRegistryTokens } from './impact-query.mjs';
 
 export function git(root, args) {
   return execFileSync('git', args, { cwd: root, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'], maxBuffer: 10 * 1024 * 1024 }).trim();
@@ -99,6 +100,89 @@ export function ledgerWarnings(rows, kind) {
   return warnings;
 }
 
+// 登记行失真核对（10-02）：登记是人工动作会滞后/误标——状态与工作树事实对不上浮疑点，只提示不阻断。
+// 口径：①状态已落库/释放/归档仍留活跃表 → 提示销账移行；②编辑中/进行中但属地全部无未提交改动
+// 且最新 mtime 超 staleMs → 可能登记滞后（实际已收官），核实后再用。属地 token 复用 impact-query 口径。
+export function registryStaleness(root, rows, changedPaths, { now = Date.now(), staleMs = 24 * 3600 * 1000 } = {}) {
+  const warnings = [];
+  const changed = new Set(changedPaths.map(item => item.replaceAll('\\', '/')));
+  const freshestUnder = relative => {
+    const absolute = path.join(root, relative);
+    let freshest = 0;
+    const visit = dir => {
+      for (const entry of readdirSync(dir, { withFileTypes: true })) {
+        const next = path.join(dir, entry.name);
+        if (entry.isDirectory()) visit(next);
+        else { const mtime = lstatSync(next).mtimeMs; if (mtime > freshest) freshest = mtime; }
+      }
+    };
+    visit(absolute);
+    return freshest;
+  };
+  for (const row of rows) {
+    const owner = row.cells[0] ?? '', territory = row.cells[1] ?? '', status = row.cells[4] ?? '';
+    if (/已落库|已释放|归档/.test(status)) {
+      warnings.push({ code: 'settled-row-remains', owner, message: '状态已是落库/释放/归档，建议移入「近期已释放」完成销账' });
+      continue;
+    }
+    if (!/编辑中|进行中/.test(status)) continue;
+    const tokens = extractRegistryTokens(territory);
+    if (!tokens.length) continue;
+    let freshest = 0, anyChanged = false, anyReachable = false;
+    for (const token of tokens) {
+      if (!existsSync(path.join(root, token))) continue;
+      anyReachable = true;
+      const isFile = lstatSync(path.join(root, token)).isFile();
+      if (isFile && changed.has(token)) anyChanged = true;
+      const mtime = isFile ? lstatSync(path.join(root, token)).mtimeMs : freshestUnder(token);
+      if (mtime > freshest) freshest = mtime;
+    }
+    if (anyReachable && !anyChanged && freshest && now - freshest > staleMs) {
+      warnings.push({ code: 'stale-claim', owner,
+        message: `状态${status.trim() || '活跃'}，但属地无未提交改动且最新 mtime 已 ${Math.round((now - freshest) / 3600000)}h 前静止；可能是登记滞后或已收官，核实后销账或续期` });
+    }
+  }
+  return warnings;
+}
+
+// PENDING 活账老化（10-02）：最老五项与超阈值计数，供接手简报提示清账节奏；只统计「提出」列可解析的行。
+export function pendingAging(rows, { now = new Date(), alertDays = 7 } = {}) {
+  const dated = [];
+  for (const row of rows) {
+    const match = (row.cells[2] ?? '').match(/(\d{2})-(\d{2})/);
+    if (!match) continue;
+    let raised = new Date(now.getFullYear(), Number(match[1]) - 1, Number(match[2]));
+    if (raised > now) raised = new Date(now.getFullYear() - 1, Number(match[1]) - 1, Number(match[2]));
+    dated.push({ key: row.key ?? row.cells[0] ?? '?', item: (row.cells[1] ?? '').slice(0, 36), ageDays: Math.floor((now.getTime() - raised.getTime()) / 86400000) });
+  }
+  dated.sort((a, b) => b.ageDays - a.ageDays);
+  return { alertDays, alertCount: dated.filter(item => item.ageDays >= alertDays).length, oldest: dated.slice(0, 5) };
+}
+
+// 无主物品表销账核对（10-02）：行的「现象」描述了工作树状态（已暂存/已修改/未跟踪），
+// 但所指文件当前已不在任何未提交状态——描述与事实不符即提示销账（sound.js 已入库仍挂「待落库」实例）。
+// 已划线行跳过；进程/端口类无文件 token 的行天然不命中。
+export function unownedResolution(rows, changedPaths) {
+  const warnings = [];
+  const changed = new Set(changedPaths.map(item => item.replaceAll('\\', '/')));
+  for (const row of rows) {
+    const cells = Array.isArray(row) ? row : row.cells;
+    const text = cells.join(' ');
+    if (text.includes('~~')) continue;
+    if (!/已暂存|已修改|未跟踪|改动/.test(cells[1] ?? '')) continue;
+    for (const token of extractRegistryTokens(cells[0] + ' ' + (cells[1] ?? ''))) {
+      // 台账 token 与 git 变更路径的前缀形态可能不一致（workingChanges 按仓库 prefix 剥离 搜打撤/），
+      // 裸名、带前缀两个方向都试过才算「仍处于描述状态」
+      const bare = token.replace(/^搜打撤\//, '');
+      if (changed.has(token) || changed.has(bare) || changed.has('搜打撤/' + token)) continue;
+      warnings.push({ code: 'unowned-stale', owner: cells[0].slice(0, 60),
+        message: `现象描述含工作树状态，但 ${token} 当前不在未提交状态；可能已处置未销账，核实后划线` });
+      break;
+    }
+  }
+  return warnings;
+}
+
 function normalizedPath(root, value) {
   if (typeof value !== 'string' || !value.trim()) throw new Error('任务范围路径不能为空');
   let relative = path.isAbsolute(value) ? path.relative(root, value) : value;
@@ -170,6 +254,7 @@ export function handoff(root, options = {}) {
   const source = readFileSync(path.join(root, registry.file), 'utf8');
   const unowned = table(source, '无主物品').rows.map(row => row.cells);
   const warnings = [...ledgerWarnings(registry.rows, 'registry'), ...ledgerWarnings(pending.rows, 'pending')];
+  const aging = pendingAging(pending.rows);
   for (const row of registry.rows) {
     const pointers = row.cells.join(' ').match(/(?:game|scripts|tests|docs)\/[\w./-]+\.(?:md|js|mjs|cjs|json|css)\b/g) ?? [];
     for (const file of new Set(pointers)) if (!existsSync(path.join(root, file))) {
@@ -206,6 +291,8 @@ export function handoff(root, options = {}) {
   const selectedPending = pending.rows.filter(row => relevant(row.cells.join(' ')));
   const selectedUnowned = unowned.filter(cells => relevant(cells.join(' ')));
   const allChanges = workingChanges(root), changes = allChanges.filter(change => !scoped || scopes.some(scope => within(change.path, scope) || (change.originalPath && within(change.originalPath, scope))));
+  warnings.push(...registryStaleness(root, registry.rows, allChanges.map(change => change.path)));
+  warnings.push(...unownedResolution(unowned, allChanges.map(change => change.originalPath ?? change.path)));
   const selectedWarnings = warnings.filter(warning => !scoped || relevant(JSON.stringify(warning))
     || selectedRegistry.some(row => JSON.stringify(warning).includes(row.cells[0]))
     || (warning.kind === 'pending' && selectedPending.some(row => row.key === warning.key))
@@ -222,7 +309,7 @@ export function handoff(root, options = {}) {
   return { schemaVersion: 1, at: new Date().toISOString(), head: git(root, ['rev-parse', 'HEAD']),
     recent: git(root, ['log', '-3', '--oneline']).split('\n'), status: changes.map(change => `${change.status} ${change.path}${change.originalPath ? ' <- ' + change.originalPath : ''}`).join('\n'),
     registry: { ...registry, rows: selectedRegistry }, pending: { ...pending, rows: selectedPending }, unowned: selectedUnowned,
-    warnings: selectedWarnings, memory: discoverMemory(root), changes, scope: { mode: scoped ? 'task-or-paths' : 'global-summary', task: task ?? null, paths: scopes },
+    warnings: selectedWarnings, aging, memory: discoverMemory(root), changes, scope: { mode: scoped ? 'task-or-paths' : 'global-summary', task: task ?? null, paths: scopes },
     taskRecord, recentTasks: (scoped ? evidenceTasks : metadata.entries).slice(0, 3).map(item => ({ file: item.file, id: item.record.id, owner: item.record.owner, stage: item.record.stage, updatedAt: item.record.updatedAt })),
     evidence, counts, omitted, skippedTaskMetadata: metadata.skipped,
     limits: ['远端未 fetch', '留言与实页未核验', '只提示，不修改台账/释放占用', '定向摘要省略其他范围；不代表全局无问题', '只读小任务元数据，不解析日志或验收报告；证据入口不是复用批准'] };
@@ -239,6 +326,10 @@ export function formatHandoff(report) {
   for (const row of report.registry.rows.slice(0, 2)) lines.push(`占用 ${clip(row.cells[0], 60)}｜${clip(row.cells[4], 75)}`);
   for (const row of report.pending.rows.slice(0, 2)) lines.push(`拍板 ${row.key}｜${clip(row.cells[1])}`);
   for (const warning of report.warnings.slice(0, 2)) lines.push(`疑点 ${warning.code}｜${clip(warning.file ?? warning.owner ?? warning.key ?? warning.message)}`);
+  if (report.aging?.oldest?.length) {
+    const top = report.aging.oldest.slice(0, 3).map(item => `${item.key} ${item.ageDays}天`).join('、');
+    lines.push(`⏰ 活账老化：超 ${report.aging.alertDays} 天 ${report.aging.alertCount} 项｜最老 ${top}（落库批次收官时过一遍最老五项，催拍板或销）`);
+  }
   for (const item of report.evidence.slice(0, 2)) lines.push(`证据候选 ${item.readme ?? item.file}`);
   if (!report.scope.task && !report.scope.paths.length) for (const item of report.recentTasks.slice(0, 2)) lines.push(`近期 ${item.id}｜${item.stage ?? '未注明阶段'}｜${item.file}`);
   lines.push(`显示省略：占用 ${Math.max(0, report.registry.rows.length - 2)}／拍板 ${Math.max(0, report.pending.rows.length - 2)}／疑点 ${Math.max(0, report.warnings.length - 2)}／证据 ${Math.max(0, report.evidence.length - 2)}；无主 ${report.unowned.length}（范围外省略 ${report.omitted.unowned}，勿动）`);

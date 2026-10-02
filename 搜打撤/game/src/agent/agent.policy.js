@@ -653,8 +653,14 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
       }
       return self + gamma * (best === -Infinity ? 0 : best);
     };
+    // 单次全量排序，三处消费共享（09-27 冗余审计）：value 依赖 banPrev（score 内
+    // W.geo.ban），但走到兜底时 banPrev 必已复位（forced 命中即 return，未命中已复位），
+    // 与首查同语境可缓存；banPrev 强推分支仍按 banPrev=true 现算——缓存序不与其逐值
+    // 等价（γ 前瞻邻居视角 at.prevNode=curIdx，addEdge 双向存边→每个候选 next 都含
+    // 当前格，禁选会改非回退候选的相对序）
+    const ranked = moves.slice().sort((x, y) => value(y) - value(x));
     if (strategic && prevNode != null) {
-      const first = moves.slice().sort((x, y) => value(y) - value(x))[0];
+      const first = ranked[0];
       if (first && isBack(first)) {
         backToPrevStreak += 1;
         if (backToPrevStreak >= 2) banPrev = true;
@@ -666,7 +672,6 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
         banPrev = false;   // 候选只剩 prevNode：无从破舞，放行交给上层熔断收口
       }
     }
-    const ranked = moves.slice().sort((x, y) => value(y) - value(x));
     if (globalThis.__scdbg && ranked.length) {
       // 全图结构 dump（死锁归因用）：本层所有节点 type + visited + 邻接出边
       try {

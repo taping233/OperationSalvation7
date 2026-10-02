@@ -133,4 +133,3 @@ const production = createPreparationCommands();
 export const setTrackedGoals = production.setTrackedGoals;
 export const savePreset = production.savePreset;
 export const startDeployment = production.startDeployment;
-export { PRESET_IDS, DEFAULT_PRESETS };

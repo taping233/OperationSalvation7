@@ -31,7 +31,8 @@ const PLUGIN_ROOT = () => {
   return root;
 };
 
-const GAME_URL_DEFAULT = 'http://localhost:5334/game/index.html';
+// 默认指向主线 Vite（npm run web，5200 幂等）；验收隔离副本时显式传 url 覆盖。
+const GAME_URL_DEFAULT = 'http://localhost:5200/game/index.html';
 
 /** 每次 js 调用（新 kernel）的第一个动作：setup + 选定 IAB。 */
 export async function setup(url = GAME_URL_DEFAULT) {

@@ -41,7 +41,7 @@ export { POOL_NUM_MAP, parsePoolNoun };
  * 创建有序步骤表。deps 是战斗侧显式端口（与旧 createEffectExecutor 同一套）。
  * 顺序 = 旧 if 链的物理顺序，不得重排。
  */
-export function createEffectSteps(deps) {
+function createEffectSteps(deps) {
   const shared = {
     ...deps,
     esc: deps.escapeHtml,

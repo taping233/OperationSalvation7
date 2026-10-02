@@ -1,3 +1,4 @@
+// @ts-check
 /* ============================================================
  * ui-scale.js —— 全局 UI 等比缩放（2026-09-19）
  *
@@ -13,7 +14,7 @@
  * 两套坐标口径（zoom≠1 时差 zoom 倍，混用必错位）：
  *   视口坐标 = e.clientX/Y、getBoundingClientRect()（显示位置）
  *   布局坐标 = style.left/top、transform、canvas 内部绘制（zoom 缩放前的值）
- * 凡「读显示坐标、写布局坐标」处一律经 rect()/pt() 换算；rect 对 rect 的纯比值
+ * 凡「读显示坐标、写布局坐标」处一律经 rect() 换算；rect 对 rect 的纯比值
  * （缩放比、相对位移比例）两头抵消无需换算。
  * ============================================================ */
 import SDT from '../core/sdt-facade.js';
@@ -27,6 +28,9 @@ let z = 1;
  * At/above the reference resolution the old fit-to-window behaviour remains;
  * below it, the readability floor intentionally leaves a larger CSS layout
  * viewport inside the same physical window.
+ * @param {number} width  视口宽（CSS 像素；非法值按 1 处理）
+ * @param {number} height  视口高（CSS 像素）
+ * @returns {number} 缩放系数（可读性下限 MIN_ZOOM 封底）
  */
 function scaleForViewport(width, height) {
   const w = Number(width), h = Number(height);
@@ -34,6 +38,7 @@ function scaleForViewport(width, height) {
   return Math.max(MIN_ZOOM, Math.min(w / BASE_W, h / BASE_H));
 }
 
+/** 把当前视口的缩放写入 <html>（zoom 属性 + 可读性下限标记），无返回值。 */
 function apply() {
   const fit = Math.min(window.innerWidth / BASE_W, window.innerHeight / BASE_H);
   z = scaleForViewport(window.innerWidth, window.innerHeight);
@@ -46,14 +51,17 @@ apply();
 window.addEventListener('resize', apply);
 
 /* 元素矩形：视口坐标 → 布局坐标（zoom 抵消后即 CSS 布局值） */
+/**
+ * @param {Element} el  任意 DOM 元素
+ * @returns {{left: number, top: number, width: number, height: number, right: number, bottom: number}} 布局坐标矩形
+ */
 function rect(el) {
   const r = el.getBoundingClientRect();
   return { left: r.left / z, top: r.top / z, width: r.width / z, height: r.height / z, right: r.right / z, bottom: r.bottom / z };
 }
-/* 视口坐标点 → 布局坐标点 */
-function pt(x, y) { return { x: x / z, y: y / z }; }
 /* 当前缩放系数 */
+/** @returns {number} 当前全局缩放系数 */
 function scale() { return z; }
 
-SDT.UiScale = { rect, pt, scale, apply, scaleForViewport };
-export { rect, pt, scale, apply, scaleForViewport, BASE_W, BASE_H, MIN_ZOOM };
+SDT.UiScale = { rect, scale, apply, scaleForViewport };
+export { rect, scale, apply, scaleForViewport, BASE_W, BASE_H, MIN_ZOOM };

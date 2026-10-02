@@ -92,4 +92,4 @@ function freezeDataValue(value) {
 
 sdtDefine('GameStore', GameStore);
 
-export { GameStore, createGameState };
+export { GameStore };

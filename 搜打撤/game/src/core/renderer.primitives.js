@@ -1,15 +1,5 @@
 const TAU = Math.PI * 2;
 
-function drawCover(ctx, image, width, height) {
-  const mediaWidth = image.naturalWidth;
-  const mediaHeight = image.naturalHeight;
-  if (!image.complete || !mediaWidth) return;
-  const scale = Math.max(width / mediaWidth, height / mediaHeight);
-  const drawWidth = mediaWidth * scale;
-  const drawHeight = mediaHeight * scale;
-  ctx.drawImage(image, (width - drawWidth) / 2, (height - drawHeight) / 2, drawWidth, drawHeight);
-}
-
 function hash2(x, y) {
   let value = (x * 374761393 + y * 668265263) >>> 0;
   value = ((value ^ (value >>> 13)) * 1274126177) >>> 0;
@@ -50,16 +40,4 @@ function rrect(ctx, x, y, width, height, radius) {
   ctx.closePath();
 }
 
-function fillStroke(ctx, fill, stroke, lineWidth) {
-  if (fill) {
-    ctx.fillStyle = fill;
-    ctx.fill();
-  }
-  if (stroke) {
-    ctx.strokeStyle = stroke;
-    ctx.lineWidth = lineWidth;
-    ctx.stroke();
-  }
-}
-
-export { circle, drawCover, fillStroke, font, hash2, mixHex, rrect, shade };
+export { circle, font, hash2, mixHex, rrect, shade };

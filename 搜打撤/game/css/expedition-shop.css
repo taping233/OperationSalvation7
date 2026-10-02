@@ -108,9 +108,6 @@
 #overlay .sc-shop .shop-price.short { color: #ff9d8a !important; border-color: rgba(255,122,96,.55) !important;
   background: linear-gradient(180deg, rgba(64,26,22,.97), rgba(38,14,12,.97)) !important; }
 #overlay .sc-shop .shop-price.short .ic { filter: grayscale(.4); }
-/* 买不起：货位本体不再整体压灰（观感同已售出易混淆），只把卡面半透明降饱和 */
-#overlay .sc-shop .shop-slot.buy[data-short] { opacity: 1; filter: none; }
-#overlay .sc-shop .shop-slot.buy[data-short]:hover { translate: none; box-shadow: none; }
 #overlay .sc-shop .shop-slot.buy[data-short] .hs-card, #overlay .sc-shop .shop-slot.buy[data-short] .shop-card-mystery {
   opacity: .6; filter: saturate(.6); }
 #overlay .shop-slotnote { color:var(--shop-muted); font-size:11px; margin-top:4px; text-align:center; }
@@ -139,7 +136,7 @@
   position:sticky; bottom:0; align-self:flex-start; margin:0 32px 8px; z-index:2;
   border:1px solid rgba(223,194,141,.42) !important; background:#0d2835 !important; color:#f1eadb !important;
 }
-#overlay .sell-tip, #overlay .shop-sell-empty { color:var(--shop-muted) !important; }
+#overlay .shop-sell-empty { color:var(--shop-muted) !important; }
 /* 收购台无可卖卡时货板跟着 flex:1 撑满整屏，空框一大块；改成随内容收高 */
 #overlay .sell-board { flex: 0 0 auto !important; }
 #overlay .shop-sell { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }

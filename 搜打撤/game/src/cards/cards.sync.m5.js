@@ -55,7 +55,7 @@
  * 深相等校验之后、双门校验之前，以 definition 上点名字段值覆盖卡面。 */
 import { createRuleBackfiller } from './cards.sync.backfiller.js';
 
-export const M5_MARKER_KEY = 'sdt-cards-m5-delayed-rules-v1-seeded';
+const M5_MARKER_KEY = 'sdt-cards-m5-delayed-rules-v1-seeded';
 
 // id → 定义（{ rules } 或带定版卡面改写字段 + { rules }）；rules 风格与 m1/m2 一致（version:1）。
 // 纯触发器卡的 triggers.onPlay: [] 为文本抑制标记（见文件头注释）。

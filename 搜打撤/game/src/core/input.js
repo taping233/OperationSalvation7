@@ -66,5 +66,3 @@ function reset() {
 }
 
 sdtDefine('Input', Object.freeze({ actionFor, rebind, reset, get bindings() { return bindings; }, DEFAULT_BINDINGS }));
-
-export { actionFor };

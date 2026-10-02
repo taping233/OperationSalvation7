@@ -15,7 +15,7 @@ import { sdtDefine } from '../core/sdt-facade.js';
 import { observe, settleSignature, phaseOf } from './agent.state.js';
 import { act, step, autoRun, waitSettle, stopRun } from './agent.runner.js';
 import { normalizeAction, actionId } from './agent.protocol.js';
-import { isTurbo, setTurbo } from './agent.turbo.js';
+import { isTurbo, setTurbo } from '../core/turbo.js';
 import { greedyPolicy, randomPolicy, strategicPolicy } from './agent.policy.js';
 import { decide as llmDecide, loadConfig as llmLoadConfig, saveConfig as llmSaveConfig, isEnabled as llmEnabled } from './agent.llm.js';
 import * as recorder from './agent.recorder.js';
@@ -50,5 +50,3 @@ const Agent = Object.freeze({
 });
 
 sdtDefine('Agent', Agent);
-
-export { observe, act, step, autoRun, waitSettle, isTurbo, setTurbo };

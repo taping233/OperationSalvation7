@@ -222,6 +222,6 @@ const convertCollection = defaults.convertCollection;
 const selectSkin = defaults.selectSkin;
 
 export {
-  createCollectionCommands, getCollection, getCharacter, convertCollection, selectSkin,
+  getCollection, getCharacter, convertCollection, selectSkin,
   stackKeyOf,
 };

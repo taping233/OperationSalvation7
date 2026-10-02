@@ -33,4 +33,4 @@ function nextRandom(state) {
   return { state: s, value: ((value ^ (value >>> 14)) >>> 0) / UINT32_RANGE };
 }
 
-export { UINT32_RANGE, STEP, hashSeed, nextRandom };
+export { hashSeed, nextRandom };

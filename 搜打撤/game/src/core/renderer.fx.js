@@ -30,5 +30,3 @@ const FX = {
   },
 };
 SDT.FX = FX;
-
-export { FX };

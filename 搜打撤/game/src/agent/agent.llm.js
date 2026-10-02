@@ -177,4 +177,4 @@ function decide(options = {}) {
   };
 }
 
-export { decide, loadConfig, saveConfig, isEnabled, parseActionReply, SYSTEM_PROMPT };
+export { decide, loadConfig, saveConfig, isEnabled, parseActionReply };

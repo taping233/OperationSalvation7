@@ -157,4 +157,4 @@ import { ease } from './motion-primitives.js';
 
   SDT.Camera = Camera;
 
-export { SDT, nodeHitRadius };
+export { nodeHitRadius };

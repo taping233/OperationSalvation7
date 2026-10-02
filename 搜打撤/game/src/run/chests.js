@@ -2,7 +2,7 @@ import { sdtDefine } from '../core/sdt-facade.js';
 
 import { Random } from '../core/random.js';
 import { esc, escAttr } from '../core/shared.js';
-import { turboMs } from '../agent/agent.turbo.js';
+import { turboMs } from '../core/turbo.js';
 
   const SDT = window.SDT;
   const UI = SDT.UI;
@@ -424,4 +424,4 @@ import { turboMs } from '../agent/agent.turbo.js';
   }
   sdtDefine('Chests', { rollDrops, dropText, open, rollContents, isOpen: () => !!(cur || queue.length), suspend, resume });
 
-export { G, SDT, UI, render };
+export { SDT };

@@ -1,3 +1,4 @@
+// @ts-check
 /* terminal-settlement.js —— 终局安全提交编排（death / abandon 共用）。
  *
  * 09-29 jscpd 收敛批（PENDING #12 档一）：game.session.death.js 与 game.menu.js
@@ -10,7 +11,21 @@
  */
 import { esc } from '../core/shared.js';
 
+/** 终局安全提交编排的注入契约（与 game.menu 控制器同源）。
+ * @param {object} p
+ * @param {{busy: boolean, promise: (Promise<boolean>|null), ephemeral?: *, attempt?: *, cards?: *}} p.token
+ * @param {() => boolean} p.current  终局态仍成立的守卫（失效即放弃后续提交与提示）
+ * @param {object} p.game  传给 UI.refresh 的对局对象
+ * @param {{showOverlay: (title: string, html: string) => void, act: (name: string, handler: () => void) => void, refresh: (game: object) => void}} p.UI
+ * @param {(levelsGained?: *) => *} p.finish
+ * @param {string} p.command
+ * @param {string} p.retryAct
+ * @param {(number|string)} [p.slotId]
+ * @param {object} p.extraPayload  追加进 createAttempt/projectEphemeral 的附加字段
+ * @param {?({projectEphemeral: (input: object) => *, createAttempt: (input: object) => Promise<{ok: boolean, message?: string, replay?: boolean, attempt?: *, receipt?: {output?: {levelsGained?: number}}}>, commitAttempt: (attempt: *) => Promise<{ok: boolean, message?: string, receipt?: {output?: {levelsGained?: number}}}>})} p.terminalCommands
+ */
 export function runTerminalSettlement({ token, current, game, UI, finish, command, retryAct, slotId, extraPayload, terminalCommands }) {
+  /** @type {(message?: string) => void} */
   const showRetry = message => {
     if (!current()) return;
     token.busy = false;
@@ -25,7 +40,9 @@ export function runTerminalSettlement({ token, current, game, UI, finish, comman
     token.promise = (async () => {
       try {
         if (token.ephemeral) {
-          const projected = terminalCommands.projectEphemeral({ command, cards: token.cards, ...extraPayload });
+          // 契约：ephemeral 分支的 terminalCommands 由调用方保证非空（menu 空值走不了 ephemeral）；类型收窄声明该契约。
+          const commands = /** @type {NonNullable<typeof terminalCommands>} */ (terminalCommands);
+          const projected = commands.projectEphemeral({ command, cards: token.cards, ...extraPayload });
           return finish(projected?.levelsGained);
         }
         if (!terminalCommands) { showRetry('终局安全提交服务不可用'); return false; }
@@ -40,7 +57,7 @@ export function runTerminalSettlement({ token, current, game, UI, finish, comman
         if (!current()) return false;
         if (!committed.ok) { showRetry(committed.message); return false; }
         return finish(committed.receipt?.output?.levelsGained || 0);
-      } catch (error) { showRetry(error && error.message); return false; }
+      } catch (error) { showRetry(/** @type {(string|undefined)} */ (error && /** @type {Error} */ (error).message)); return false; }
     })();
     return token.promise;
   };

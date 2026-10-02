@@ -52,7 +52,3 @@ export function exportNotes() {
   const merged = { ...BASE_NOTES, ...readSavedNotes() };
   return JSON.stringify({ version: notesData.version || 1, _comment: notesData._comment || '', notes: merged }, null, 2);
 }
-
-export function hasManualNotes() {
-  return Object.keys(readSavedNotes()).length > 0;
-}

@@ -34,6 +34,8 @@ const MIGRATIONS = {
 };
 // 读档异常原因存于 reader（index -> 'corrupt' | 'tooNew' | 'readFailed'），供 UI 查询展示
 const writeIssues = new Map();
+// readIdentity 的原串→结果 memo（审计 B-1）：同 raw 直出，省重复 JSON.parse。
+const identityMemo = new Map();
 
 // 2026-09-07 留言：点「开始探索」会卡一下 = openSlotPicker 同步 readSlot×5 + Base.peek×5
 // 全量 JSON.parse。对局存档大（ownedCards/eventLog），指纹缓存在 reader 内统一维护：
@@ -147,11 +149,16 @@ const RunStorage = Object.freeze({
   issue(index) { return reader.issue(index); },
   // R6 只读身份窄口：不迁移、不写回、不为旧档创建 runId。
   // 领域模块用它关联同一探索中的永久提交；私有 _r2 不进入 publicRun。
+  // identity memo（10-02 审计 B-1）：结算链一次胜利最多重复 parse 13 次大 payload 只为取 _r2；
+  // 以原串为键缓存 identity 结果——同 raw 必然同 identity，语义零变化，写侧天然失效（raw 变即 miss）。
   readIdentity(index) {
     if (!Number.isInteger(index) || index < 1 || index > SLOT_COUNT) return Object.freeze({ ok: false, code: 'INVALID_ARGUMENT', message: '档位必须是 1～5' });
     if (txPending(index)) return Object.freeze({ ok: false, code: 'RECOVERY_REQUIRED', message: '该档位存在待恢复事务' });
+    const raw = localStorage.getItem(RUN_KEY(index));
+    const memoHit = identityMemo.get(index);
+    if (raw != null && memoHit && memoHit.raw === raw) return memoHit.result;
     let data;
-    try { data = JSON.parse(localStorage.getItem(RUN_KEY(index)) || 'null'); }
+    try { data = JSON.parse(raw || 'null'); }
     catch { return Object.freeze({ ok: false, code: 'RUN_UNREADABLE', message: '对局存档无法读取' }); }
     if (!data || typeof data !== 'object' || !Number.isInteger(data.version) || data.version < 1 || data.version > SAVE_VERSION) {
       return Object.freeze({ ok: false, code: 'INVALID_STATE', message: '对局存档版本或结构无效' });
@@ -161,7 +168,9 @@ const RunStorage = Object.freeze({
         !Number.isInteger(identity.revision) || identity.revision < 0) {
       return Object.freeze({ ok: false, code: 'INVALID_STATE', message: '对局缺少稳定探索身份' });
     }
-    return Object.freeze({ ok: true, value: Object.freeze({ runId: identity.runId, revision: identity.revision }) });
+    const result = Object.freeze({ ok: true, value: Object.freeze({ runId: identity.runId, revision: identity.revision }) });
+    if (raw != null) identityMemo.set(index, { raw, result });
+    return result;
   },
   write(index, value) {
     if (txPending(index)) { writeIssues.set(index, 'RECOVERY_REQUIRED'); return false; }
@@ -231,4 +240,4 @@ const RunStorage = Object.freeze({
   },
 });
 
-export { OLD_SAVE_KEY, RUN_KEY, RunStorage, SAVE_VERSION, SLOT_COUNT, TX_KEY, txPending };
+export { RUN_KEY, RunStorage, SAVE_VERSION, SLOT_COUNT, TX_KEY, txPending };

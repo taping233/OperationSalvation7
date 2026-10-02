@@ -231,15 +231,21 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
     // 「已知区域」按键已按 09-24 留言 #8 移除；G 键（input.js camOverview）总览保留
 
     // 右上角资源 HUD：悬停显示项目自带提示框（与地图节点同款）
+    // 不变量提到绑定闭包（09-27 冗余审计）：#charCoins 是 index.html 静态节点
+    // （hud.js 只改 textContent）、data-tip 与币/攻分支归属绑定后不变；
+    // 视口矩形随布局可变——按悬停期缓存（mouseenter 重测），mousemove 热路径
+    // 只做坐标换算+数值拼装；金币/攻击数值动态，逐次求值不缓存
     const vpEl = UI.el.viewport;
     document.querySelectorAll('#resHud .chip-mini[data-tip]').forEach(chip => {
+      const hasCoins = !!chip.querySelector('#charCoins');
+      const tip = chip.dataset.tip;
+      let r = null;
       const show = (e) => {
-        const r = vpEl.getBoundingClientRect();
-        const coins = chip.querySelector('#charCoins');
-        const line = coins ? `当前 <b>${game.coins}</b> 币` : `当前 <b>${game.atk}</b> 点 · 攻击伤害 = 卡面值 + 攻击力`;
-        UI.showTooltip(e.clientX - r.left, e.clientY - r.top, chip.dataset.tip, [line]);
+        if (!r) r = vpEl.getBoundingClientRect();
+        const line = hasCoins ? `当前 <b>${game.coins}</b> 币` : `当前 <b>${game.atk}</b> 点 · 攻击伤害 = 卡面值 + 攻击力`;
+        UI.showTooltip(e.clientX - r.left, e.clientY - r.top, tip, [line]);
       };
-      chip.addEventListener('mouseenter', show);
+      chip.addEventListener('mouseenter', (e) => { r = null; show(e); });
       chip.addEventListener('mousemove', show);
       chip.addEventListener('mouseleave', () => UI.hideTooltip());
     });
@@ -747,5 +753,3 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
     }
     requestLoopFrame();
   });
-
-export { resize };

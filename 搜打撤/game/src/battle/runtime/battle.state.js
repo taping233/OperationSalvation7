@@ -52,4 +52,4 @@ function cancelTargeting(state) {
   return state.phase === BATTLE_PHASES.TARGETING ? transitionBattle(state, BATTLE_PHASES.PLAYER) : state;
 }
 
-export { ALLOWED_TRANSITIONS, BATTLE_PHASES, beginTargeting, cancelTargeting, canTransition, createBattleState, transitionBattle };
+export { BATTLE_PHASES, beginTargeting, cancelTargeting, createBattleState, transitionBattle };

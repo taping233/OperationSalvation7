@@ -471,4 +471,4 @@ import { hudMethods } from './hud.js';
 
   SDT.UI = UI;
 
-export { SDT, UI };
+export { UI };

@@ -37,17 +37,6 @@
     src: url('../assets/fonts/notosans-sc-700.woff2') format('woff2');
     font-weight: 700; font-display: swap;
   }
-  /* 思源黑体别名：标题等需要明确品牌字形的组件使用此名称，实际复用同一份 OFL 子集。 */
-  @font-face {
-    font-family: 'Source Han Sans SC';
-    src: url('../assets/fonts/notosans-sc-400.woff2') format('woff2');
-    font-weight: 400; font-display: swap;
-  }
-  @font-face {
-    font-family: 'Source Han Sans SC';
-    src: url('../assets/fonts/notosans-sc-700.woff2') format('woff2');
-    font-weight: 700; font-display: swap;
-  }
   :root {
     --font-ui: 'HarmonyOS Sans SC', 'HarmonyOS Sans', 'Noto Sans SC Sub', 'Microsoft YaHei', 'Segoe UI', sans-serif;
     --ink: #0b0b0b;            /* 页面最深阴影 */
@@ -233,11 +222,6 @@
     border: none; border-right: 1px solid var(--line);
     background: radial-gradient(ellipse at 50% 30%, #353535, #101010 85%);
     box-shadow: inset 0 2px 8px rgba(0,0,0,.55), 0 2px 6px rgba(0,0,0,.4); }
-  /* 职业名：挂在背包按钮下方的小字条 */
-  .hero-name { padding: 5px 8px 6px; text-align: center; font-family: var(--font-display);
-    font-size: 12.5px; font-weight: 700; color: #d9d9d9; letter-spacing: 3px;
-    background: linear-gradient(180deg, #232323, #161616);
-    border-bottom: 1px solid rgba(171,171,171,.14); }
   #hpBarWrap { position: relative; flex: none; height: 17px; width: 100%; background: #0e0e0e;
     border-radius: var(--radius-panel); overflow: hidden; border: 1px solid var(--line2);
     box-shadow: inset 0 2px 4px rgba(0,0,0,.5); }
@@ -272,8 +256,6 @@
   #bagBtn:hover { border-left-color: var(--amber, #d4a44e); color: var(--amber-soft, #e8c87a);
     transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,.45); }
   #bagBtn:active { transform: scale(.97); }
-  #bagBtn .bag-cap { font-size: 19px; font-weight: 700; color: #ececec; line-height: 1;
-    font-variant-numeric: tabular-nums; letter-spacing: 1px; }
   #bagBtn .bag-ic { display: flex; align-items: center; justify-content: center; }
   #bagBtn .bag-ic .ic { width: 22px; height: 22px; opacity: .9; }
   #bagBtn .bag-label { font-family: var(--cal); font-size: 14px;
@@ -340,9 +322,6 @@
   .bag-view .bag-slot .stack-count { position: absolute; right: 2px; bottom: 2px; z-index: 5;
     min-width: 20px; padding: 1px 4px; border-radius: 999px; color: #f0f0f0; background: rgba(12,12,12,.9);
     border: 1px solid rgba(196,196,196,.65); font-size: 9px; font-weight: 800; }
-  .bag-card-detail { display: flex; flex-direction: column; align-items: center; gap: 12px; }
-  .bag-card-detail .hs-card { font-size: min(22px, 2.5vh); }
-  .bag-drop-note { text-align: center; color: #bebebe; font-size: 12px; margin: 8px 0; }
   .tier-bd-S { border-color: #f0c25c; }
   .tier-bd-A { border-color: #888888; }
   .tier-bd-B { border-color: #969696; }

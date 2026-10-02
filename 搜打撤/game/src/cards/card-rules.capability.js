@@ -1,5 +1,5 @@
 // @ts-check
-import { validateCardRules, HOSTED_BATTLE_RULES, HOSTED_CARD_RULES } from './card-rules.schema.js';
+import { validateCardRules, HOSTED_BATTLE_RULES, HOSTED_CARD_RULES, BAG_SUPPORTED_OPS } from './card-rules.schema.js';
 
 /** @typedef {import('./card-rules.capability.types.js').BattleOperationName} BattleOperationName */
 /** @typedef {import('./card-rules.capability.types.js').OperationTarget} OperationTarget */
@@ -25,9 +25,6 @@ const OPERATION_TARGETS = {
   // M3：敌对敌互殴（扰敌）/ 随机复制手牌（刀剑形态）
   foeFight: [], copyRandom: [],
 };
-/** M3：bag.use 结构化分派支持集（battle.bag 结构化分派 + game.bag useStructuredBagRule）。 */
-const BAG_SUPPORTED_OPS = new Set(['heal', 'restoreConsumed', 'energy', 'blessing', 'curse', 'draw', 'damage',
-  'execute', 'acquire', 'discover', 'flee']);
 /** M1：draw.handOps 已接线的手牌操作（金蝉脱壳「消耗所有手牌」/ 弃置）；其余 entry op 仍待后续批次。 */
 const SUPPORTED_HAND_OPS = new Set(['consumeHand', 'dumpHand']);
 /** M1：acquire.filter 已消费的基础键（费用等于 / 费用上限；type 过滤与池名词重叠不放行）。
@@ -140,10 +137,6 @@ export function inspectCardRuleCapability(card) {
     }
     // M2：damage 的 graveyard/schedule 均已接线（registerRule/execute/summon 族同步放行）；
     // draw 的 untilHandN 已接线、handOps 逐 entry 放行（consumeHand/dumpHand），其余待后续批次。
-    const pendingKeys = /** @type {string[]} */ ([]);
-    for (const key of pendingKeys) {
-      if (isObject(operation) && key in operation) reject(`${path}.${key}`, `Unsupported onPlay ${op} parameter '${key}'`);
-    }
     if (op === 'draw' && isObject(operation) && 'handOps' in operation) {
       const handOps = field(operation, 'handOps');
       const entries = isUnknownArray(handOps) ? handOps : [];

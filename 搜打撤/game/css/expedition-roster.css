@@ -7,7 +7,6 @@
 #overlay .cls2-panel { width:min(43%,560px); box-sizing:border-box; padding:clamp(40px,7vh,84px) clamp(30px,4vw,64px) 170px clamp(32px,4vw,64px); background:linear-gradient(90deg,rgba(4,14,22,.97) 55%,rgba(4,14,22,.86) 78%,transparent); }
 #overlay .cls2-panel::after { content:attr(data-wm); position:absolute; z-index:0; left:14px; bottom:150px; font:800 clamp(40px,4vw,62px)/1 ui-monospace,monospace; letter-spacing:.08em; color:rgba(151,199,213,.07); text-transform:uppercase; pointer-events:none; }
 #overlay .cls2-panel > * { position:relative; z-index:1; }
-#overlay .cls2-panel.cls2-preview { border-left:2px solid rgba(105,174,194,.42); }
 #overlay .cls2-eyebrow { color:rgba(117,185,202,.85); font:600 10px ui-monospace,monospace; letter-spacing:.34em; text-transform:uppercase; margin-bottom:18px; }
 #overlay .cls2-name { color:#f2f7f8 !important; font-size:clamp(42px,5vw,74px) !important; letter-spacing:clamp(8px,1.1vw,16px) !important; line-height:1.15; text-shadow:0 0 26px color-mix(in srgb,var(--cls-color,var(--cyan-soft)) 45%,transparent); }
 #overlay .cls2-name::after { content:''; display:block; width:clamp(44px,4vw,72px); height:3px; margin-top:12px; background:var(--cls-color,var(--cyan-soft)); box-shadow:0 0 12px color-mix(in srgb,var(--cls-color,var(--cyan-soft)) 60%,transparent); }
@@ -48,7 +47,6 @@
 #overlay .cls2-strip { bottom:12px; justify-content:center; gap:10px; padding:10px clamp(150px,15vw,230px); }
 #overlay .cls2-face { width:clamp(70px,6.4vw,100px); height:clamp(92px,8.2vw,124px); border-radius:2px; border-color:rgba(119,174,188,.52); background:#0d2633; }
 #overlay .cls2-face b { padding:18px 0 6px; color:#e2edf0; letter-spacing:.18em; }
-#overlay .cls2-face.sel { border-color:#e2c88e; box-shadow:0 0 20px rgba(226,200,142,.3),inset 0 0 0 1px rgba(226,200,142,.55); }
 #overlay .cls2-face:focus-visible { outline:2px solid #79c4d7; outline-offset:3px; }
 #overlay .cls2-nameline { display:flex; align-items:center; }
 #overlay .cls2-confirm { right:clamp(18px,3vw,42px); bottom:22px; width:clamp(190px,19vw,280px); height:58px; gap:14px; padding:0 20px; border-radius:2px; color:#0b202c; background:linear-gradient(115deg,#f7e7bd,var(--gold-main) 58%,#c8a76b); box-shadow:0 8px 26px rgba(0,0,0,.42); } /* 09-25 P2：主确认金钮渐变统一定版配方 #f7e7bd→var(--gold-main)→#c8a76b */
@@ -81,8 +79,7 @@
 @media (max-width:600px) {
   #overlay .cls2-panel { width:68%; padding:22px 14px 128px; }
   #overlay .cls2-fullart { width:94%; opacity:.55; }
-  #overlay .cls2-lv, #overlay .cls2-ability, #overlay .cls2-story { font-size:10px; }
-  #overlay .cls2-ability { max-width:230px; }
+  #overlay .cls2-story { font-size:10px; }
   #overlay .cls2-strip { right:112px; }
   #overlay .cls2-face { width:46px; height:62px; }
   #overlay .cls2-face b { padding-bottom:3px; font-size:9px; }

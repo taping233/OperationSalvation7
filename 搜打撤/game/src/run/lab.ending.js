@@ -8,7 +8,7 @@
  * ============================================================ */
 import { assetUrl } from '../core/asset-url.js';
 import SDT from '../core/sdt-facade.js';
-import { isTurbo } from '../agent/agent.turbo.js';
+import { isTurbo } from '../core/turbo.js';
 
 const PAGES = [
   {

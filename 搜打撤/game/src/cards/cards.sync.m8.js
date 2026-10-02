@@ -9,7 +9,7 @@
  * 本文件只保留 definitions 数据与批次参数；迁移数据行为不变（m8-data.test.js 守护）。 */
 import { createRuleBackfiller } from './cards.sync.backfiller.js';
 
-export const M8_MARKER_KEY = 'sdt-cards-m8-rule-backfill-v1-seeded';
+const M8_MARKER_KEY = 'sdt-cards-m8-rule-backfill-v1-seeded';
 
 const definitions = new Map([
   ['cmtn1r10xnl1', { rules: { version: 1, triggers: { onPlay: [{ op: 'registerRule', rule: 'discoverPlus' }] } } }],

@@ -119,9 +119,11 @@ export const overlayMethods = {
     // CSS 动画互相覆盖造成过渡期跳帧——这里只跑 CSS 那套。
     // bagpage 背包页同理（2026-09-19 留言 #3：展开动画走 .card.bag-page 的 bagIn）
     if ((!wasOpen || prevMode !== mode) && SDT.Motion && mode !== 'page' && mode !== 'bagpage') SDT.Motion.overlayIn(card);
+    // 开窗音效判定与文末场景音取景共用这一次查询（两者间无 DOM 增删，结果一致）
+    const soundScene = this.el.ovBody.querySelector('.node-pg, .flow-transition');
     // 只在弹窗真正打开/切换模式时播开窗音效——战斗内反复 render 不刷音效
     if (!wasOpen || prevMode !== mode) {
-      if (!this.el.ovBody.querySelector('.node-pg, .flow-transition')) SDT.Sound.sfx('open');
+      if (!soundScene) SDT.Sound.sfx('open');
       // 焦点导航（game-ui-ux）：显式首焦点优先；否则优先安全的取消/返回
       // 语义，避免确认页默认把不可逆动作放在 Enter 的第一击上。
       requestAnimationFrame(() => {
@@ -135,7 +137,6 @@ export const overlayMethods = {
     // 解码期间页面近乎纯黑、无任何反馈。这里读出 data-asset-key 元素的背景 URL，
     // 未就绪时挂 bg-loading 类（CSS 显示「正在进入…」微提示），图片到齐后自动摘除。
     this._checkPageBg();
-    const soundScene = this.el.ovBody.querySelector('.node-pg, .flow-transition');
     const soundTone = soundScene && [...soundScene.classList].find(name => name.startsWith('sc-'));
     SDT.Sound.scene?.(soundTone ? soundTone.slice(3) : null, soundScene?.dataset.assetKey || '');
   },
@@ -167,11 +168,6 @@ export const overlayMethods = {
     probe.src = url;
   },
 
-  // 跳转代际令牌（迭代评审 09-20 QA 岗）：exitToTitle 的 immediate 关层即「跳转发生」；
-  // 计划在跳转后迟到的 showOverlay 可自留 token 并用 layerValid() 自检，失败即放弃开层
-  _jumpSeq: 0,
-  layerToken() { return ++this._jumpSeq; },
-  layerValid(t) { return t === this._jumpSeq; },
   // 背包关闭回调（game.bag bindBagMixins 晚绑定注册，避免 ui→bag 静态成环）：
   // Esc/遮罩关背包必须走 closeBackpack 的状态复位，直接 hideOverlay 会把 game.state 卡死在 modal
   _bagCloseHook: null,

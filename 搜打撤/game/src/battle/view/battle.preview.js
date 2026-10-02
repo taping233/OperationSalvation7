@@ -192,4 +192,4 @@ function previewAction({ snapshot, action, cardContext }) {
   });
 }
 
-export { cardRuleHint, normalizeDesc, previewAction, semanticMatch };
+export { cardRuleHint, previewAction };

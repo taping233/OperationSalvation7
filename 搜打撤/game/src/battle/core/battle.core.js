@@ -424,4 +424,4 @@ const BattleSession = Object.freeze({ start, getSnapshot, commands, serialize, r
 
 // 批5 理顺：battle.view 拆片后按名直引（viewApi 原样保留给既有消费方与测试）
 export { AFFIX_META, Combat, R, aegisBlocked, effCostOf, findCard, infuseOf, markDreadShown, pileTip, refillDrawPile, takeFloats, takeCardAnims, targetSide, unplayableReason, matchHandSelectKey, handCurseSpecs, getPreviewContext };
-export { BattleSession, commands, configureBattleRenderer, getSnapshot, getBattleLiveness, restore, serialize, start, viewApi };
+export { BattleSession, commands, configureBattleRenderer, getSnapshot, getBattleLiveness, viewApi };

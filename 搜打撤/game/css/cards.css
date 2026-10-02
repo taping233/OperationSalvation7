@@ -217,12 +217,6 @@
   .type-tab .ic { width: 13px; height: 13px; vertical-align: -0.16em; }
   .type-tab em { font-style: normal; font-size: 10px; color: inherit; opacity: .62; margin-left: 4px; }
   .clib-main { flex: 1; display: flex; min-height: 0; }
-  .clib-preview { width: 276px; min-width: 276px; display: flex; flex-direction: column; align-items: center;
-    justify-content: center; gap: 14px; padding: 14px; border-right: 1px solid #2a2a2a;
-    background: radial-gradient(ellipse at 50% 32%, #232323, #121212 78%); }
-  .clib-preview .pv-empty .ic { width: 54px; height: 54px; opacity: .35; }
-  .clib-preview .pv-hint { color: #8b8b8b; font-size: 12px; text-align: center; line-height: 1.7; }
-  .clib-preview .pv-hint b { color: #dadada; }
   .lib-grid { flex: 1; display: grid; grid-template-columns: repeat(auto-fill, minmax(132px, 1fr));
     gap: 16px 10px; padding: 16px 18px 20px; overflow-y: auto; align-content: start; }
   .lib-grid .hs-card { font-size: 11px; }
@@ -251,9 +245,7 @@
   /* 豁免：卡牌库整页卡片的打开缩放入场（2026-09-12 留言）不受上面的动画禁令影响 */
   @keyframes libCardIn { from { opacity: 0; transform: scale(.86) translateY(14px); } }
   body.cardlib-open #overlay .card.page:has(.card-library-page) { animation: libCardIn .32s cubic-bezier(.22,1.2,.36,1) !important; }
-  .lib-actions { display: flex; gap: 6px; }
   .lib-item { min-width: 0; }
-  .lib-actions .hs-btn { padding: 5px 9px; font-size: 11px; }
   .clib-empty { grid-column: 1 / -1; text-align: center; color: #8b8b8b; padding: 70px 0 60px; }
   .clib-empty-icon .ic { width: 52px; height: 52px; opacity: .4; margin-bottom: 12px; }
 

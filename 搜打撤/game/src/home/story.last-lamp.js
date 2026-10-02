@@ -107,4 +107,4 @@ function prepareLastLampChoice(baseSnapshot, input) {
   } };
 }
 
-export { CHOICES, ENDINGS, MEMENTOS, STORY_ID, inspectLastLamp, makeLastLampEventInstanceId, prepareLastLampChoice, validLastLampEventInstanceId, validateLastLampState };
+export { inspectLastLamp, makeLastLampEventInstanceId, prepareLastLampChoice, validateLastLampState };

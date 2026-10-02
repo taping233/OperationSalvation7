@@ -5,7 +5,6 @@ import { buildFirstSourceCardIndex } from './hosted-catalog-index.js';
 
 // Hosted entries are keyed to fixed production identities. Their execution text
 // comes only from read-only source catalogs, never from a player's saved card.
-export const HOSTED_EXECUTION_CARD_IDS = HOSTED_CARD_RULES;
 
 const SOURCE_CATALOGS = [
   // Source order is part of the contract: the first matching catalog is canonical.
@@ -20,7 +19,7 @@ const CANONICAL_CARD_BY_ID = buildFirstSourceCardIndex(SOURCE_CATALOGS);
 /** Return a battle-only view with canonical effect text while preserving runtime state. */
 export function getHostedExecutionCard(card) {
   if (!card || typeof card !== 'object') return card;
-  const expectedName = HOSTED_EXECUTION_CARD_IDS[card.id];
+  const expectedName = HOSTED_CARD_RULES[card.id];
   const declared = card.rules?.battle?.hosted;
   if (!expectedName || !Array.isArray(declared) || !declared.includes(expectedName)) return card;
   if (card.rules?.triggers || card.rules?.equip || card.rules?.bag) return card;

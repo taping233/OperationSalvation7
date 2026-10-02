@@ -14,7 +14,7 @@ import { RunStorage } from '../hub/game.storage.js';
 import { storyCommands } from '../home/story.commands.js';
 import { setBagReturnHook } from '../hub/bag-return-hook.js';
 import { startBattle } from '../battle/battle-loader.js';
-import { isTurbo } from '../agent/agent.turbo.js';
+import { isTurbo } from '../core/turbo.js';
 import { renderScheduler } from '../core/render-scheduler.js';
 import { buildEncounter, cancelLegacyChainMove, consumeCell, consumeCurrentCell, enterNode, finishInstant, grantEventCard, nodeShell, openBattleCell, openBlankSafePage, openChestsOnCell, openPickupPage, openPocketRestore, openShop, preloadCellScene } from './game.run.scenes.js';
 import { openDoorModal, openFireRest, openAltarRitual, openBossGate, openEmergencyModal } from './game.run.altar.js';

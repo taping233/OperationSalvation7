@@ -11,7 +11,7 @@
 import { normalizeAction, actionId } from './agent.protocol.js';
 import { findUiElement, collectActionKeys, overlayVisible } from './agent.surface.js';
 import { observe, settleSignature, bustSigCache, markUiFailure } from './agent.state.js';
-import { isTurbo } from './agent.turbo.js';
+import { isTurbo } from '../core/turbo.js';
 import { setDriver, getDriver, battleTick, battleActionTick, battleEnd } from './agent.recorder.js';
 import { moveTo, reenterCell } from '../run/game.run.flow.js';
 import { startNewGame, game, getActiveSlot } from '../run/game.session.js';

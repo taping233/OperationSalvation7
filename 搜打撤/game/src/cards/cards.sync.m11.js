@@ -6,7 +6,7 @@
 // （m11-data.test.js 守护）。
 import { createRuleBackfiller } from './cards.sync.backfiller.js';
 
-export const M11_MARKER_KEY = 'sdt-cards-m11-hosted-rules-v1-seeded';
+const M11_MARKER_KEY = 'sdt-cards-m11-hosted-rules-v1-seeded';
 
 export const M11_HOSTED_BY_ID = Object.freeze({
   'cmtn1wnhhym': 'temporary-hand-cards',

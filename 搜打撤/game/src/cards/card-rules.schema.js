@@ -34,8 +34,9 @@ export const HOSTED_CARD_RULES = Object.freeze({
   'tt7-arcanebolt': 'damage-and-draw', 'tt7-provoke': 'foe-fight-select',
 });
 export const HOSTED_BATTLE_RULES = new Set(Object.values(HOSTED_CARD_RULES));
-// M3：bag.use 支持的 op 集（战斗侧 battle.bag 结构化分派 + 地图侧 game.bag useStructuredBagRule）
-const BAG_SUPPORTED_OPS = new Set(['heal', 'restoreConsumed', 'energy', 'blessing', 'curse', 'draw', 'damage',
+// M3：bag.use 支持的 op 集（战斗侧 battle.bag 结构化分派 + 地图侧 game.bag useStructuredBagRule）。
+// 单源定义处（capability.js 侧 import 消费，2026-10-02 审计 A 档消双写漂移面）。
+export const BAG_SUPPORTED_OPS = new Set(['heal', 'restoreConsumed', 'energy', 'blessing', 'curse', 'draw', 'damage',
   'execute', 'acquire', 'discover', 'flee']);
 const RULE_KEYS = new Set(['version', 'battle', 'triggers', 'base', 'bag', 'equip']);
 const TARGET_KEYS = new Set(['side', 'area']);

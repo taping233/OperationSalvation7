@@ -1,6 +1,6 @@
 const freeze = value => { if (!value || typeof value !== 'object' || Object.isFrozen(value)) return value; Object.values(value).forEach(freeze); return Object.freeze(value); };
 
-export const SOURCE_EVIDENCE = freeze({
+const SOURCE_EVIDENCE = freeze({
   randomPool: { sourceId: 'random-obtainable-pool', kind: 'pool', conditions: '进入实际调用通用随机卡池的奖励、发现或商店候选；进入候选池不表示本次必得。', evidenceRef: 'game/src/cards/cards.js:isRandomObtainable + game/src/hub/base.js:shopCards', certainty: 'known' },
   classPool: { sourceId: 'matching-class-pool', kind: 'class-pool', conditions: '选择对应人物职业后，在实际调用职业卡池的火堆、宝箱或祭坛候选中出现；不保证本次必得。', evidenceRef: 'game/src/cards/cards.js:classPool + game/src/run/chests.js:52 + game/src/run/game.run.altar.js:39', certainty: 'known' },
   abilityPool: { sourceId: 'matching-ability-pool', kind: 'class-pool', conditions: '选择对应人物职业后，在实际过滤能力卡的职业候选中出现；不保证本次必得。', evidenceRef: 'game/src/run/game.run.altar.js:473', certainty: 'known' },

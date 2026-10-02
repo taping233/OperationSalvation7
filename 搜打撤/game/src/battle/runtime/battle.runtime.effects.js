@@ -83,7 +83,7 @@ export function resetCostFlags() {
   spellCost1 = false; meleeCost1 = false;
   shaTransform = null; consumeFireballN = 0; lastPlayedType = null;
 }
-export function resetRuneFlags() {
+function resetRuneFlags() {
   nestRunes = []; nestSyn = {};
   timeRune = false; arrowRune = false; unyieldRune = false;
   ashRune = false; unlimitedRune = false; holyRune = false; fireballRuneOn = false; freezeRuneOn = false;

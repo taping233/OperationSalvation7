@@ -90,4 +90,4 @@ function normalizeAction(input) {
   }
 }
 
-export { actionId, normalizeAction, BATTLE_COMMANDS, SYS_COMMANDS };
+export { actionId, normalizeAction };

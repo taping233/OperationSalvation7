@@ -291,7 +291,7 @@ const SDT = window.SDT;
   const NODE_TYPE_COLORS = { battle:'#e98278', coin:'#e0c57d', wood:'#e0c57d', rations:'#e0c57d', chest:'#e0c57d', key:'#e0c57d', fire:'#76c6ad', emergencyExit:'#76c6ad', extraction:'#76c6ad', event:'#82b8d0', shop:'#82b8d0', altar:'#a995d4', boss:'#e98278', entrance:'#76c6ad' };
   function drawIcons(ctx, game) {
     const z = game.cam.zoom, g = nodeGeo(game);
-    const reduced = typeof document !== 'undefined' && document.body?.classList.contains('reduce-motion');
+    const reduced = SDT.Motion ? SDT.Motion.reduceMotion() : false;
     for (const n of g.nodes) {
       const current = isCurrentNode(game, n);
       const legal = g.legalKeys.has(`${n.li},${n.idx}`);
@@ -436,7 +436,7 @@ const SDT = window.SDT;
     const layerPos = game.nodePos[game.layerIdx] || game.nodePos[0];
     // 入口环复活为真呼吸（2026-09-27 动效补全；原 pulse 恒 0.5 只剩静态圆）：
     // 半径随 game.time 正弦起伏；空闲地图零绘制时冻结相位（口径同 drawIcons 当前节点脉冲）
-    const reduced = typeof document !== 'undefined' && document.body?.classList.contains('reduce-motion');
+    const reduced = SDT.Motion ? SDT.Motion.reduceMotion() : false;
     const pulse = reduced ? 0.5 : 0.5 + Math.sin((game.time || 0) * 2.6) * 0.34;
     ctx.save();
     ctx.strokeStyle = 'rgba(90,162,134,0.85)';
@@ -481,7 +481,7 @@ const SDT = window.SDT;
     const z = game.cam.zoom;
     // 复活注释承诺的「上下浮动」（2026-09-27 动效补全；原 bounce 恒 0 箭头钉死）：
     // 0→6 屏幕像素往复，除以 zoom 折算成世界位移保持屏占比一致；减动效停浮
-    const reduced = typeof document !== 'undefined' && document.body?.classList.contains('reduce-motion');
+    const reduced = SDT.Motion ? SDT.Motion.reduceMotion() : false;
     const bounce = reduced ? 0 : (Math.sin((game.time || 0) * 4.4) * .5 + .5) * 6 / z;
     const y = p.y - nodeRadius(p) - 14 - bounce;
     ctx.save();
@@ -601,5 +601,3 @@ const SDT = window.SDT;
   }
 
   SDT.Renderer = { draw };
-
-export { SDT };

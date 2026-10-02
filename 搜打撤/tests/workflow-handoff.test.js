@@ -1,9 +1,9 @@
 import { execFileSync } from 'node:child_process';
-import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, utimesSync, writeFileSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { afterEach, describe, expect, it } from 'vitest';
-import { findSweepCandidates, formatHandoff, handoff } from '../scripts/workflow-status.mjs';
+import { findSweepCandidates, formatHandoff, handoff, pendingAging, registryStaleness, unownedResolution } from '../scripts/workflow-status.mjs';
 
 const roots = [];
 function put(root, file, content) {
@@ -142,5 +142,107 @@ describe('sweep 中断任务检测', () => {
       .candidates.filter(item => item.id === 'done')).toEqual([]);
     expect(findSweepCandidates(root, { maxAgeDays: 30, now: new Date('2026-09-30T12:00:00Z') })
       .candidates.filter(item => ['cards', 'other'].includes(item.id))).toEqual([]);
+  });
+});
+
+describe('登记行失真核对 registryStaleness', () => {
+  const row = (cells, key) => ({ key, cells });
+  function freshRoot() {
+    const root = mkdtempSync(path.join(os.tmpdir(), 'sdt-handoff-stale-'));
+    roots.push(root);
+    put(root, 'game/src/cards/a.js', 'a');
+    put(root, 'game/src/shop/b.js', 'b');
+    const old = new Date(Date.now() - 48 * 3600 * 1000);
+    utimesSync(path.join(root, 'game/src/cards/a.js'), old, old);
+    utimesSync(path.join(root, 'game/src/shop/b.js'), old, old);
+    return root;
+  }
+  it('状态已落库仍留活跃表 → settled-row-remains 提示销账', () => {
+    const root = freshRoot();
+    const warnings = registryStaleness(root, [row(['Friday（A）', 'game/src/cards/', '事项', '10-01', '已落库 7d2fbde'], 'WF-a')], []);
+    expect(warnings).toHaveLength(1);
+    expect(warnings[0].code).toBe('settled-row-remains');
+  });
+  it('编辑中+属地无未提交改动且 mtime 超 24h → stale-claim', () => {
+    const root = freshRoot();
+    const warnings = registryStaleness(root, [row(['Friday（B）', 'game/src/cards/a.js', '事项', '10-01', '编辑中'], 'WF-b')], []);
+    expect(warnings).toHaveLength(1);
+    expect(warnings[0].code).toBe('stale-claim');
+    expect(warnings[0].owner).toContain('B');
+  });
+  it('属地有未提交改动 → 不报停滞', () => {
+    const root = freshRoot();
+    const warnings = registryStaleness(root, [row(['Friday（C）', 'game/src/shop/b.js', '事项', '10-01', '进行中'], 'WF-c')], ['game/src/shop/b.js']);
+    expect(warnings).toEqual([]);
+  });
+  it('待验收/完成未提交状态不做停滞核对；「不碰」排除声明不算属地', () => {
+    const root = freshRoot();
+    const warnings = registryStaleness(root, [
+      row(['Friday（D）', 'game/src/cards/', '事项', '10-01', '待验收'], 'WF-d'),
+      row(['Friday（E）', '自有 x/；不碰 game/ 源码', '事项', '10-01', '编辑中'], 'WF-e'),
+    ], []);
+    expect(warnings).toEqual([]);
+  });
+  it('目录属地按目录内最新 mtime 判定', () => {
+    const root = freshRoot();
+    const warnings = registryStaleness(root, [row(['Friday（F）', 'game/src/cards/', '事项', '10-01', '编辑中'], 'WF-f')], []);
+    expect(warnings).toHaveLength(1);
+    expect(warnings[0].code).toBe('stale-claim');
+  });
+});
+
+describe('PENDING 活账老化 pendingAging', () => {
+  const row = (key, cells) => ({ key, cells });
+  it('按年龄排序取最老五项并计超阈值数', () => {
+    const now = new Date('2026-10-02T00:00:00Z');
+    const rows = [
+      row('1', ['#', '新账', '10-01', 'src', '']),
+      row('2', ['#', '老账', '09-20', 'src', '']),
+      row('3', ['#', '更老', '09-15', 'src', '']),
+      row('4', ['#', '无日期列跳过', '', 'src', '']),
+    ];
+    const aging = pendingAging(rows, { now });
+    expect(aging.oldest[0]).toMatchObject({ key: '3', ageDays: 17 });
+    expect(aging.oldest.map(item => item.key)).toEqual(['3', '2', '1']);
+    expect(aging.alertCount).toBe(2);
+  });
+  it('跨年日期回退到上一年', () => {
+    const now = new Date('2027-01-05T00:00:00Z');
+    const aging = pendingAging([row('9', ['#', '去年账', '12-28', 'src', ''])], { now });
+    expect(aging.oldest[0].ageDays).toBe(8);
+  });
+});
+
+describe('无主物品表销账核对 unownedResolution', () => {
+  const cells = arr => arr;
+  it('现象描述已暂存但文件已干净 → unowned-stale 提示销账', () => {
+    const warnings = unownedResolution([
+      cells(['`搜打撤/game/src/audio/sound.js`（已暂存 404 行改动）', '暂存区实质改动（367+/37−）', '10-01', '老板拍板打包']),
+    ], []);
+    expect(warnings).toHaveLength(1);
+    expect(warnings[0].code).toBe('unowned-stale');
+    expect(warnings[0].message).toContain('sound.js');
+  });
+  it('描述未跟踪且文件确仍未跟踪 → 描述与事实相符不报', () => {
+    const warnings = unownedResolution([
+      cells(['`搜打撤/__try_hud.json`（根目录未跟踪）', 'jsconfig 形态实验配置', '10-02', '勿动']),
+    ], ['搜打撤/__try_hud.json']);
+    expect(warnings).toEqual([]);
+  });
+  it('已划线行与无文件 token 的进程类行不命中', () => {
+    const warnings = unownedResolution([
+      cells(['~~`搜打撤/code-map/`~~', '~~已认领~~', '10-01', '移活跃']),
+      cells(['node.exe ×2（PID 21272/22356）', '监听 5200/5321，改动者不明', '09-29', '勿杀']),
+    ], []);
+    expect(warnings).toEqual([]);
+  });
+});
+
+describe('unownedResolution 裸名前缀兼容', () => {
+  it('台账写裸文件名而 git 路径带 搜打撤/ 前缀时不误报', () => {
+    const warnings = unownedResolution([
+      ['`搜打撤/__try_a.json`、`__try_b.json`（未跟踪）', '实验配置', '10-02', '勿动'],
+    ], ['搜打撤/__try_a.json', '搜打撤/__try_b.json']);
+    expect(warnings).toEqual([]);
   });
 });

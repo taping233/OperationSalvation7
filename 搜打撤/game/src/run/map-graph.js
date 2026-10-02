@@ -78,4 +78,4 @@
     return { ok: unreachable.length === 0, unreachable };
   }
 
-export { buildAdjacency, checkConnectivity };
+export { checkConnectivity };

@@ -458,4 +458,4 @@ import { restoreAtkDown } from '../effects/effect-steps.m2.js';
   }
 
 
-export { endTurn, afterEnemies, surrender };
+export { endTurn, surrender };

@@ -175,5 +175,3 @@ export function planMapRestore(run) {
   const positioned=validateMapSnapshot(made.value,{layerIdx:run.layerIdx,trackPos:run.trackPos}); if(!positioned.ok)return positioned;
   const hydrated=hydrateMapSnapshot(made.value); return hydrated.ok?{ok:true,value:{source:'legacy-3/9',...hydrated.value}}:hydrated;
 }
-
-export { SNAPSHOT_VERSION, ROUTE_SNAPSHOT_VERSION };

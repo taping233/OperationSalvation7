@@ -438,7 +438,7 @@ function createShopController({
     });
   }
 
-  return { generateShopStock, openShop };
+  return { openShop };
 }
 
 export { createShopController };

@@ -16,7 +16,7 @@ import { createShopController } from './game.run.shop.js';
 import { captureBattleContext, startBattle } from '../battle/battle-loader.js';
 import { setBagReturnHook } from '../hub/bag-return-hook.js';
 import { selectEncounterSpec } from './encounter-selector.js';
-import { turboMs } from '../agent/agent.turbo.js';
+import { turboMs } from '../core/turbo.js';
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const SDT = window.SDT;
 const UI = window.SDT.UI;
@@ -45,7 +45,7 @@ export function cancelLegacyChainMove(reason = '即时事件不再自动跳转')
 // ---------- 落脚结算 ----------
 // ---------- 场景演出（v0.10：不同格子进入不同场景，少量对话后开启内容） ----------
 let scenePreload = null;
-export function preloadScene(name) {
+function preloadScene(name) {
   if (!name || (scenePreload && scenePreload.name === name)) return;
   const img = new Image();
   img.decoding = 'async';
@@ -66,7 +66,7 @@ export function preloadCellScene(layer, idx) {
 // 兼容旧调用：只预载最常见的即时节点，不再一次吞入全部事件背景。
 // 其他房间由 preloadCellScene 在路线确认时按目标格预取。
 const _preloaded = new Set();
-export function preloadSceneList(urls) {
+function preloadSceneList(urls) {
   urls.forEach(url => {
     if (!url || _preloaded.has(url)) return;
     _preloaded.add(url);

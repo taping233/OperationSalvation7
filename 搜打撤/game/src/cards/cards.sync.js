@@ -209,10 +209,6 @@ export const syncSlice = {
     // 伤害数值回填（2026-09-04 新增）：描述写明「N′」但 dmg 字段缺失的法术卡
     // 自动补入 dmg 与 spell 伤害类型（如 银刺 5′ / 冰刺 1′ / 闪电链 3′）。
     // 只补缺失值，绝不覆盖已标注的 dmg（每次启动运行）
-
-    // 伤害数值回填（2026-09-04 新增）：描述写明「N′」但 dmg 字段缺失的法术卡
-    // 自动补入 dmg 与 spell 伤害类型（如 银刺 5′ / 冰刺 1′ / 闪电链 3′）。
-    // 只补缺失值，绝不覆盖已标注的 dmg（每次启动运行）
     ensureDmgValues() {
       const cards = SDT.Cards.all();
       let dirty = false;
@@ -252,8 +248,6 @@ export const syncSlice = {
     },
 
     // 卡牌库为空或缺少初始牌时，补入新手卡
-
-    // 卡牌库为空或缺少初始牌时，补入新手卡
     ensureStarters() {
       const cards = SDT.Cards.all();
       // 兼容早期没有 id 的默认资源卡：将历史生成的临时 id 收敛到稳定编号，
@@ -272,9 +266,6 @@ export const syncSlice = {
         SDT.Cards.STARTERS.forEach(c => SDT.Cards.upsert(c));
       }
     },
-
-    // 通用播种：一批卡一个标记，只播一次；已有同名/同 id 的卡跳过。
-    // replacePrefix：同前缀且同 id 的内置卡视为「旧识别」，用最新数据覆盖。
 
     // 通用播种：一批卡一个标记，只播一次；已有同名/同 id 的卡跳过。
     // replacePrefix：同前缀且同 id 的内置卡视为「旧识别」，用最新数据覆盖。
@@ -308,12 +299,6 @@ export const syncSlice = {
     // 同步 name/desc 并补种缺失条目（新增能力者白鸦/烛火/静默/回声），每次启动幂等执行
     // （沿用 ensureShieldToArmor 惯例），保证老存档也拿到新文案与新图鉴；
     // 其他字段与玩家在制作坊的改动不受影响。
-
-    // 敌人图鉴同步（2026-09-09 老板定版：新世界观命名 + 五层分布）。
-    // foe-* 卡名与描述派生自 mapData.js 怪物表（非玩家自制内容），按 id 从 BESTIARY
-    // 同步 name/desc 并补种缺失条目（新增能力者白鸦/烛火/静默/回声），每次启动幂等执行
-    // （沿用 ensureShieldToArmor 惯例），保证老存档也拿到新文案与新图鉴；
-    // 其他字段与玩家在制作坊的改动不受影响。
     ensureFoeRename() {
       try {
         const cards = SDT.Cards.all();
@@ -333,9 +318,6 @@ export const syncSlice = {
 
     // 护盾→护甲术语迁移（设计者 2026-09-04 定版：护盾与护甲同义，统一为护甲；
     // 战后护甲清零）。每次启动把卡牌描述里的「护盾」改写为「护甲」，幂等。
-
-    // 护盾→护甲术语迁移（设计者 2026-09-04 定版：护盾与护甲同义，统一为护甲；
-    // 战后护甲清零）。每次启动把卡牌描述里的「护盾」改写为「护甲」，幂等。
     ensureShieldToArmor() {
       try {
         const cards = SDT.Cards.all();
@@ -346,9 +328,6 @@ export const syncSlice = {
         if (dirty) SDT.Cards.saveAll(cards);
       } catch { /* 隐私模式等场景静默跳过 */ }
     },
-
-    // 「杀」→「初始攻击」术语迁移（2026-09-09 老板定版：效果文本统一写作「初始攻击」，
-    // 卡池无「杀」类型，选牌/释放按卡名匹配）。每次启动幂等改写存量卡面描述。
 
     // 「杀」→「初始攻击」术语迁移（2026-09-09 老板定版：效果文本统一写作「初始攻击」，
     // 卡池无「杀」类型，选牌/释放按卡名匹配）。每次启动幂等改写存量卡面描述。
@@ -387,8 +366,6 @@ export const syncSlice = {
     },
 
     // 设计者定版数据修正（一次性）：爆燃火球描述未写注能收益，删除其注能字段
-
-    // 设计者定版数据修正（一次性）：爆燃火球描述未写注能收益，删除其注能字段
     ensureCardFixes() {
       try {
         if (localStorage.getItem('sdt-mig-burnharvest')) return;
@@ -403,9 +380,6 @@ export const syncSlice = {
 
     // 抉择卡数据修正（一次性，2026-09-08）：神灯的护甲只属于抉择 3°——
     // 结构化 armor 字段会让任何抉择分支都白送 5 甲，删除字段改由选项文本结算
-
-    // 抉择卡数据修正（一次性，2026-09-08）：神灯的护甲只属于抉择 3°——
-    // 结构化 armor 字段会让任何抉择分支都白送 5 甲，删除字段改由选项文本结算
     ensureChoiceFixes() {
       try {
         if (localStorage.getItem('sdt-mig-choice')) return;
@@ -417,10 +391,6 @@ export const syncSlice = {
         localStorage.setItem('sdt-mig-choice', '1');
       } catch { /* 静默跳过 */ }
     },
-
-    // 第十批同步：设计者实机定版双向合并（TT10_KEY 标记，一次性）。按 id 整卡覆盖 + 缺失补种；
-    // 本轮为老板拍板的定版动作，有意覆盖制作坊玩家改动（与 seedBatch 的「尊重玩家」语义不同）；
-    // 并移除同设计重复 id（RETIRE，设计者已在旧 id 上定版同名卡）。
 
     // 第十批同步：设计者实机定版双向合并（TT10_KEY 标记，一次性）。按 id 整卡覆盖 + 缺失补种；
     // 本轮为老板拍板的定版动作，有意覆盖制作坊玩家改动（与 seedBatch 的「尊重玩家」语义不同）；
@@ -548,17 +518,6 @@ export const syncSlice = {
     // 旧版 tt7-* 无 cls 不进职业池，法力补给除外——cls=法师 为仓库定版）；
     // 恶魔之力 tt7-drunksong 已整卡退役（2026-09-13 老板拍板删除，同名双版只留 cc-demon）。
     // 初始牌只剩初始攻击与应急绷带（设计者稿）。
-
-    // 第十一批同步（2026-09-09 老板拍板）：与设计者实机卡库导出（微信接收的
-    // 「搜打撤·代号7_卡牌库_233张.json」，裸数组旧格式）完全对齐——
-    //   · 补入设计者实机有而仓库缺失的 26 张；
-    //   · 39 张仓库独有卡退役（RETIRE_TT11；「新兵操典」种子不带 id，按名字清理）；
-    //   · 25 张共享 id 卡整卡取设计者稿（能力卡 type「能力卡」与敌人图鉴 art
-    //     为仓库实现标记，不回退，见 TABLETOP11 注释）。
-    // 有意结果：不变应万变 新旧两版并存（设计者实机如此；厉兵秣马 cc-prep 已于 2026-09-19 退役，只留 tt7-ironcharge），
-    // 旧版 tt7-* 无 cls 不进职业池，法力补给除外——cls=法师 为仓库定版）；
-    // 恶魔之力 tt7-drunksong 已整卡退役（2026-09-13 老板拍板删除，同名双版只留 cc-demon）。
-    // 初始牌只剩初始攻击与应急绷带（设计者稿）。
     ensureTabletopSync11() {
       try {
         if (localStorage.getItem(TT11_KEY)) return;
@@ -656,8 +615,6 @@ export const syncSlice = {
     },
     // 指定道具定名迁移：保留稳定 id 与存档引用，只更新展示名；
     // 旧内置金疮药并入正式 tt-jinchuangyao，避免仓库里继续存在两个定义。
-    // 指定道具定名迁移：保留稳定 id 与存档引用，只更新展示名；
-    // 旧内置金疮药并入正式 tt-jinchuangyao，避免仓库里继续存在两个定义。
     ensureItemRenames() {
       try {
         if (localStorage.getItem(ITEM_RENAME_KEY)) return;
@@ -704,16 +661,6 @@ export const syncSlice = {
         localStorage.setItem(TT7_KEY_V2, '1');
       } catch { /* 隐私模式等场景静默跳过 */ }
     },
-
-    // 职业整合迁移（设计者 2026-09-05 定版）：原 11 职业 → 5 职业（侠客/战士/牧师/法师/降临者），
-    // 每职业 10-12 张职业卡，不同职业不互通。一次性运行（CC_KEY 标记），之后玩家在制作坊的
-    // 改名/改描述/改稀有度不再被纠正。步骤：
-    //   ① 旧职业卡按 id 改归属并统一为职业卡形态（职业稀有度 + unrandom），按 id 定版更名；
-    //   ② 设计者在制作坊自建的职业卡（id 不在种子表）按卡名收编（只动 cls/稀有度/锁定位）；
-    //   ③ 补种整合新增卡（TABLETOP7/8 中 cc- 前缀定义）并撤下已废弃的占位卡；
-    //   ④ 未入列的旧职业卡退役：去掉 cls 保留在图鉴（不再进任何职业池/随机发放），
-    //      并兜底清掉一切残留旧职业名的归属。
-    // 定版归属总表见 docs/class-consolidation.md。
 
     // 职业整合迁移（设计者 2026-09-05 定版）：原 11 职业 → 5 职业（侠客/战士/牧师/法师/降临者），
     // 每职业 10-12 张职业卡，不同职业不互通。一次性运行（CC_KEY 标记），之后玩家在制作坊的
@@ -842,17 +789,10 @@ export const syncSlice = {
 
     // 能力卡查询（第八批）：heroOf(职业) 返回该职业的能力卡；
     // 2026-09-05 职业整合后每职业 1-3 张能力卡，随机抽 1 张（如侠客：妄/云阳/云风）
-
-    // 能力卡查询（第八批）：heroOf(职业) 返回该职业的能力卡；
-    // 2026-09-05 职业整合后每职业 1-3 张能力卡，随机抽 1 张（如侠客：妄/云阳/云风）
     heroOf(cls) {
       const heroes = SDT.Cards.all().filter(c => c.hero && c.cls === cls);
       return heroes.length ? heroes[Math.floor(Random.random('card') * heroes.length)] : null;
     },
-
-    // 能力卡字段回填：早期制作坊保存会丢掉 cls/hero，导致专属立绘与 heroOf 失效。
-    // 只按 id 补缺失的 cls / hero / tokenOf / unrandom，不覆盖玩家改过的名字与描述。
-    // 另：任何 hero:true 但缺 cls 的卡（如旧对局存档里的副本来源），按 id/名称从能力卡定义表回填。
 
     // 能力卡字段回填：早期制作坊保存会丢掉 cls/hero，导致专属立绘与 heroOf 失效。
     // 只按 id 补缺失的 cls / hero / tokenOf / unrandom，不覆盖玩家改过的名字与描述。
@@ -885,10 +825,6 @@ export const syncSlice = {
     // 能力卡术语迁移（设计者 2026-09-08 定版）：类型「英雄卡」整体更名「能力卡」。
     // 幂等（改完即无目标，无需 key 标记）：卡库由 ensureAbilityRename 处理，
     // 存档内的整卡副本（ownedCards / 仓库 stash / 消耗口袋 pocket）由读档路径调用本函数。
-
-    // 能力卡术语迁移（设计者 2026-09-08 定版）：类型「英雄卡」整体更名「能力卡」。
-    // 幂等（改完即无目标，无需 key 标记）：卡库由 ensureAbilityRename 处理，
-    // 存档内的整卡副本（ownedCards / 仓库 stash / 消耗口袋 pocket）由读档路径调用本函数。
     applyAbilityRename(cards) {
       let dirty = false;
       (Array.isArray(cards) ? cards : []).forEach(c => {
@@ -896,9 +832,6 @@ export const syncSlice = {
       });
       return dirty;
     },
-
-    // 同名不同 ID 且效果不同的现役卡：保留先定义版本原名，后定义版本追加「-改」。
-    // 按稳定 id 迁移，避免名称本身再次参与身份判断；每次启动幂等执行，防止后续同步覆盖回旧名。
 
     // 同名不同 ID 且效果不同的现役卡：保留先定义版本原名，后定义版本追加「-改」。
     // 按稳定 id 迁移，避免名称本身再次参与身份判断；每次启动幂等执行，防止后续同步覆盖回旧名。
@@ -927,11 +860,6 @@ export const syncSlice = {
         if (SDT.Cards.applyAbilityRename(cards)) SDT.Cards.saveAll(cards);
       } catch { /* 隐私模式等场景静默跳过 */ }
     },
-
-    // 能力卡补种（2026-09-09）：老档卡库可能从未播入第八批能力卡本体（TT8_KEY 标记
-    // 已存在时 seedBatch 整批跳过，卡库缺卡不再自愈）。每次启动幂等补种：
-    // 按 id 缺失则补入定义，已存在但类型还是旧「英雄卡」则就地修正。
-    // 只动 11 张能力卡本体，不碰衍生牌与玩家自建卡。
 
     // 能力卡补种（2026-09-09）：老档卡库可能从未播入第八批能力卡本体（TT8_KEY 标记
     // 已存在时 seedBatch 整批跳过，卡库缺卡不再自愈）。每次启动幂等补种：

@@ -237,16 +237,6 @@
   transform: translateY(1px) scale(.97); filter: brightness(1.16);
   transition-duration: .08s;
 }
-/* 未解锁研究所保持暗蓝底（沿用 09-20 双态设计，只 retint 到新金族的弱化线） */
-#overlay #hubMain .deploy-primary.nest-locked {
-  border-color: rgba(217, 187, 130, .35); color: #cfe0e4;
-  background: linear-gradient(135deg, rgba(36, 58, 74, .92), rgba(14, 30, 42, .94));
-  box-shadow: none;
-}
-#overlay #hubMain .deploy-primary.nest-locked:hover {
-  filter: none; border-color: rgba(217, 187, 130, .6);
-  box-shadow: 0 0 14px rgba(217, 187, 130, .12);
-}
 
 /* W4c 行动模式卡：hover 抬升 + 激活态金线（#dfc28d → var(--gold-main) 同族 retint） */
 #overlay #hubMain .mode-card {
@@ -290,16 +280,14 @@
 
 /* W5a 各类按钮统一节奏（ov-btn / mini-btn / step-btn / 价签） */
 #overlay #hubMain .ov-btn,
-#overlay #hubMain .mini-btn,
-#overlay #hubMain .step-btn {
+#overlay #hubMain .mini-btn {
   transition: color var(--hub-fast), background var(--hub-fast), border-color var(--hub-fast),
     box-shadow var(--hub-fast), transform var(--hub-fast), filter var(--hub-fast);
 }
 #overlay #hubMain .ov-btn:hover:not(:disabled),
 #overlay #hubMain .mini-btn:hover:not(:disabled) { transform: translateY(-1px); }
 #overlay #hubMain .ov-btn:active:not(:disabled),
-#overlay #hubMain .mini-btn:active:not(:disabled),
-#overlay #hubMain .step-btn:active:not(:disabled) {
+#overlay #hubMain .mini-btn:active:not(:disabled) {
   transform: translateY(1px) scale(.96); transition-duration: .08s;
 }
 
@@ -370,7 +358,6 @@
   animation: hubCtaGleam 4.6s cubic-bezier(.4, 0, .2, 1) infinite;
 }
 #overlay #hubMain .deploy-primary > * { position: relative; z-index: 1; }
-#overlay #hubMain .deploy-primary.nest-locked::after { animation: none; opacity: 0; }
 @keyframes hubCtaGleam {
   0%, 58% { transform: translateX(-170%) skewX(-18deg); opacity: 0; }
   64% { opacity: .65; }

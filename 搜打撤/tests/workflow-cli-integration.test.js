@@ -26,12 +26,13 @@ describe('流程入口集成', () => {
     expect(result.scannedFiles).toContain('docs/WORKFLOW-TOOLS.md');
     expect(result.findings.some(item => item.kind === 'broken-link')).toBe(false);
   });
-  it('七份类型配置确实纳入证据指纹', async () => {
+  it('八份类型配置确实纳入证据指纹（DEBT-2 strict 扩面起随配置数走）', async () => {
     const { fingerprint } = await import('../scripts/workflow-evidence.mjs');
     const manifest = fingerprint(project).manifest;
     expect(manifest.some(item => item.file === 'jsconfig.strict-hand-selection.json')).toBe(true);
     const configs = manifest.filter(item => /^jsconfig.*\.json$/.test(item.file));
-    expect(configs).toHaveLength(7);
+    expect(configs).toHaveLength(8);
+    expect(configs.some(item => item.file === 'jsconfig.strict-ui.json')).toBe(true);
   });
   it('暂存计划命令返回边界与数量，不倾倒整个仓库index', () => {
     const output = execFileSync(process.execPath, [cli, 'staged', '--plan', '--json'], { encoding: 'utf8', maxBuffer: 2 * 1024 * 1024 });

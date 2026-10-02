@@ -1,6 +1,6 @@
 /* 照相馆轻门面：共享视觉/菜单状态同步可用；页面与制作坊首次进入时按需加载。 */
 import {
-  CARD_DESIGNER_WRITES_ENABLED, Sfx, cardHTML, navigation, configureCardNavigation,
+  CARD_DESIGNER_WRITES_ENABLED, Sfx, cardHTML, configureCardNavigation,
   cardPageOpen, setCardPageOpen, closeCardPageTop as closeCardPageTopNow,
   configurePendingCardPageEntry,
 } from './game.cardslib.common.js';
@@ -88,7 +88,7 @@ const _set_cardPageOpen = (value) => {
 };
 
 export {
-  CARD_DESIGNER_WRITES_ENABLED, Sfx, cardHTML, navigation, configureCardNavigation,
+  CARD_DESIGNER_WRITES_ENABLED, Sfx, cardHTML, configureCardNavigation,
   cardPageOpen, closeCardPageTop, openCardDesigner, openCardLibrary, _set_cardPageOpen,
   cancelPendingPageEntry as cancelPendingCardPageOpen,
 };

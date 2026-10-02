@@ -729,4 +729,4 @@ import { cardRuleHint } from './battle.preview.js';
     });
   }
 
-export { handLayer, battleToken, mountHandLayer, updateHand, mountUnitLayer, updateUnits, showIntentLegend, HAND_PAGE_SIZE };
+export { mountHandLayer, updateHand, mountUnitLayer, updateUnits, showIntentLegend, HAND_PAGE_SIZE };

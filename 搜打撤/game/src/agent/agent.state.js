@@ -379,4 +379,4 @@ function settleSignature() {
   return out;
 }
 
-export { observe, settleSignature, bustSigCache, phaseOf, battleActions, mapActions, markUiFailure };
+export { observe, settleSignature, bustSigCache, phaseOf, markUiFailure };

@@ -13,7 +13,7 @@
  * 新增一行注册表 = 一次定版修订要刷新旧档卡面；删除行 = 不再刷新。 */
 
 /** id → 允许重刷的卡面字段列表。 */
-export const FACE_REFRESH_BY_ID = new Map([
+const FACE_REFRESH_BY_ID = new Map([
   ['tt3-petal', ['heal', 'desc']],   // 2026-09-29 老板裁决 heal 2→3（覆盖 09-27 保留 heal:2 旧裁决）
 ]);
 

@@ -24,7 +24,7 @@
  * 迁移数据行为不变（m1-data.test.js 守护）。 */
 import { createRuleBackfiller } from './cards.sync.backfiller.js';
 
-export const M1_MARKER_KEY = 'sdt-cards-m1-onplay-rules-v1-seeded';
+const M1_MARKER_KEY = 'sdt-cards-m1-onplay-rules-v1-seeded';
 
 const R = (battle, onPlay) => ({ rules: { version: 1, battle, triggers: { onPlay } } });
 const ENEMY_ONE = { target: { side: 'enemy', area: false } };

@@ -12,6 +12,8 @@ const configs = [
   'jsconfig.strict-selection.json',
   // Strict-checks pure hand-selection/discovery rules, not the legacy battle runtime integration.
   'jsconfig.strict-hand-selection.json',
+  // DEBT-2 strict 扩面第一批（10-02）：ui 域四文件纯注释级达标，tsc 门常驻。
+  'jsconfig.strict-ui.json',
 ];
 
 // 7 个配置彼此独立：并行跑，按原顺序汇报，任何失败都让整体退出非零。

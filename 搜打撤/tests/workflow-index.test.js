@@ -69,3 +69,23 @@ describe('现行文档机械复核', () => {
     expect(() => validateDocumentation(path.join(root, 'nonexistent'))).toThrow('docs 目录不可达');
   });
 });
+
+describe('口径真源检测 duplicated-rule', () => {
+  it('真源外现行段的完整表述命中收敛候选，真源文件自身不报', () => {
+    const root = fixture();
+    put(root, 'AGENTS.md', '# 项目约束\n浏览器操作仅用当前平台内置浏览器，只验当前窗口。\n');
+    put(root, 'docs/QUICKSTART.md', '# 上手\n浏览器操作仅用当前平台内置浏览器，多尺寸须明确要求；不可用记录阻塞。\n');
+    const result = validateDocumentation(root);
+    const dup = result.findings.filter(item => item.kind === 'duplicated-rule');
+    expect(dup).toHaveLength(1);
+    expect(dup[0].file).toBe('docs/QUICKSTART.md');
+    expect(dup[0].topic).toBe('内置浏览器边界');
+  });
+  it('指针式引用与历史段不命中', () => {
+    const root = fixture();
+    put(root, 'AGENTS.md', '# 项目约束\nGodot/Unity/EXE 冻结，只开发 Vite。\n');
+    put(root, 'docs/guide.md', '# 指南\n浏览器边界见 AGENTS.md；冻结口径见总纲。\n\n## 2026-09-01 历史记录\n当时决定 Godot/Unity 冻结。\n');
+    const result = validateDocumentation(root);
+    expect(result.findings.filter(item => item.kind === 'duplicated-rule')).toEqual([]);
+  });
+});

@@ -1,10 +1,23 @@
+// @ts-check
+/** 单条诊断记录（即 localStorage 序列化行形状，ui/feedback.local.js 的 DiagnosticRecordView 与之同构）。 */
+/** @typedef {{at: string, source: string, name: string, code: string}} DiagnosticRecord */
+/** console.error 的可包装形状（包装器会附加 __sdtDiagnosticWrapper 标记防重入）。 */
+/** @typedef {((...args: any[]) => void) & {__sdtDiagnosticWrapper?: boolean}} DiagnosticConsoleError */
+/** 运行时诊断宿主切面（globalThis 或测试注入宿主；只声明本文件触达的成员）。 */
+/** @typedef {{
+ *   addEventListener?: ((type: string, listener: (event: any) => void) => void),
+ *   console: {error?: DiagnosticConsoleError},
+ *   __sdtDiagnosticsInstalled?: boolean,
+ * }} DiagnosticsHost */
 const DIAGNOSTICS_KEY = 'sdt-diagnostics-v1';
 const MAX_DIAGNOSTICS = 40;
+/** @type {DiagnosticRecord[]} */
 const memoryRecords = [];
 const SOURCES = new Set(['window.error', 'unhandledrejection', 'event-bus.sync', 'event-bus.async', 'battle-loader', 'console.error']);
 const ERROR_NAMES = new Set(['Error', 'TypeError', 'RangeError', 'ReferenceError', 'SyntaxError', 'URIError', 'EvalError', 'AggregateError', 'DOMException', 'AbortError', 'TimeoutError', 'NetworkError', 'SecurityError', 'QuotaExceededError']);
 const CODES = new Set(['UNKNOWN', 'ABORTED', 'TIMEOUT', 'NETWORK', 'STORAGE']);
 
+/** @param {string} source @param {*} error @param {number} [at] @returns {DiagnosticRecord} */
 function diagnosticRecord(source, error, at = Date.now()) {
   let name = 'Error';
   try {
@@ -29,11 +42,13 @@ function diagnosticRecord(source, error, at = Date.now()) {
   };
 }
 
+/** @param {(Storage|null|undefined)} [storage] @returns {(Storage|null)} */
 function storageOrNull(storage) {
   if (storage) return storage;
   try { return globalThis.localStorage || null; } catch { return null; }
 }
 
+/** @param {Storage} port @returns {(DiagnosticRecord[]|null)} */
 function readStoredDiagnostics(port) {
   try {
     const raw = port.getItem(DIAGNOSTICS_KEY);
@@ -53,7 +68,9 @@ function readStoredDiagnostics(port) {
   } catch { return null; }
 }
 
+/** @param {...(DiagnosticRecord[])} groups @returns {DiagnosticRecord[]} */
 function mergeRecords(...groups) {
+  /** @type {Map<string, DiagnosticRecord>} */
   const unique = new Map();
   for (const item of groups.flat()) {
     if (!item) continue;
@@ -63,6 +80,7 @@ function mergeRecords(...groups) {
   return [...unique.values()].sort((a, b) => Date.parse(a.at) - Date.parse(b.at)).slice(-MAX_DIAGNOSTICS);
 }
 
+/** @param {(Storage|null|undefined)} [storage] @returns {DiagnosticRecord[]} */
 function readLocalDiagnostics(storage) {
   const port = storageOrNull(storage);
   if (!port) return memoryRecords.slice(-MAX_DIAGNOSTICS);
@@ -70,6 +88,7 @@ function readLocalDiagnostics(storage) {
   return mergeRecords(stored || [], memoryRecords);
 }
 
+/** @param {string} source @param {*} error @param {(Storage|null|undefined)} [storage] @param {number} [at] @returns {DiagnosticRecord} */
 function recordDiagnostic(source, error, storage, at = Date.now()) {
   const entry = diagnosticRecord(source, error, at);
   const duplicate = [...memoryRecords].reverse().find(item => item.name === entry.name && item.code === entry.code
@@ -90,11 +109,13 @@ function recordDiagnostic(source, error, storage, at = Date.now()) {
 
 function resetDiagnosticMemory() { memoryRecords.length = 0; }
 
+/** @param {(Storage|null|undefined)} [storage] @returns {({count: number, recent: DiagnosticRecord[]}|null)} */
 function getDiagnosticSummary(storage) {
   const records = readLocalDiagnostics(storage);
   return records.length ? { count: records.length, recent: records.slice(-8) } : null;
 }
 
+/** @param {DiagnosticsHost} [target] @returns {boolean} */
 function installRuntimeDiagnostics(target = globalThis) {
   if (!target || typeof target.addEventListener !== 'function') return false;
   if (target.__sdtDiagnosticsInstalled) return false;
@@ -109,6 +130,7 @@ function installRuntimeDiagnostics(target = globalThis) {
   const originalError = target.console?.error;
   if (typeof originalError === 'function' && !originalError.__sdtDiagnosticWrapper) {
     let recording = false;
+    /** @this {any} @param {...any} args */
     const wrappedError = function (...args) {
       try {
         if (!recording) {
@@ -130,4 +152,4 @@ function installRuntimeDiagnostics(target = globalThis) {
 
 installRuntimeDiagnostics();
 
-export { DIAGNOSTICS_KEY, MAX_DIAGNOSTICS, diagnosticRecord, getDiagnosticSummary, installRuntimeDiagnostics, readLocalDiagnostics, recordDiagnostic, resetDiagnosticMemory };
+export { DIAGNOSTICS_KEY, MAX_DIAGNOSTICS, getDiagnosticSummary, installRuntimeDiagnostics, readLocalDiagnostics, recordDiagnostic, resetDiagnosticMemory };

@@ -28,4 +28,4 @@ function renderCombatPiles({ mode, drawCount, discardCount, graveCount, pileTip,
   return { draw, rest: `${discard}${grave}` };
 }
 
-export { renderCombatPiles, renderPileBadge };
+export { renderCombatPiles };
