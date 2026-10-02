@@ -25,7 +25,7 @@ export function dependencyScope(root, inputs) {
   try {
     if (roots.some(file => /^tests\/workflow/.test(file))) {
       for (const name of readdirSync(path.join(root, 'scripts'))) {
-        if (/^workflow.*\.mjs$/.test(name) || ['acceptance-gate.mjs', 'architecture-graph.mjs', 'index-validation.mjs', 'page-snapshot.mjs'].includes(name)) queue.push('scripts/' + name);
+        if (/^workflow.*\.mjs$/.test(name) || ['acceptance-gate.mjs', 'architecture-graph.mjs', 'index-validation.mjs'].includes(name)) queue.push('scripts/' + name);
       }
     }
     while (queue.length) {
@@ -38,7 +38,7 @@ export function dependencyScope(root, inputs) {
       if (!/\.(?:js|mjs|cjs)$/.test(file)) continue;
       const source = readFileSync(absolute, 'utf8');
       const imports = importsIn(source);
-      const knownWorkflow = /^scripts\/(?:workflow.*|acceptance-gate|architecture-graph|index-validation|page-snapshot)\.mjs$/.test(file) || /^tests\/workflow/.test(file);
+      const knownWorkflow = /^scripts\/(?:workflow.*|acceptance-gate|architecture-graph|index-validation)\.mjs$/.test(file) || /^tests\/workflow/.test(file);
       if (!knownWorkflow && (imports.some(item => /(?:^|:)child_process$/.test(item.specifier))
         || /\b(?:readFileSync|readFile|readdirSync|readdir)\s*\(/.test(source))) throw new Error('动态进程/文件输入需完整范围：' + file);
       for (const { specifier } of imports) {

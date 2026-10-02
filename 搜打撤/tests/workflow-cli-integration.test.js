@@ -1,4 +1,4 @@
-import { execFileSync, spawnSync } from 'node:child_process';
+import { execFileSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -10,15 +10,12 @@ vi.setConfig({ testTimeout: 20000, hookTimeout: 20000 });
 const project = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const cli = path.join(project, 'scripts/workflow.mjs');
 describe('流程入口集成', () => {
-  it('帮助完整暴露记忆、浏览器、隔离与文档能力，旧命令不再启外部浏览器', () => {
+  it('帮助完整暴露记忆、浏览器、隔离与文档能力', () => {
     const help = JSON.parse(execFileSync(process.execPath, [cli, '--help', '--json'], { encoding: 'utf8' }));
     for (const command of ['memory', 'browser import', 'browser compare', 'staged', 'docs']) expect(help.help).toContain(command);
-    const legacy = path.join(project, 'scripts/page-snapshot.mjs');
-    const legacyHelp = JSON.parse(execFileSync(process.execPath, [legacy, '--help', '--json'], { encoding: 'utf8' }));
-    expect(legacyHelp.help).toContain('不启动');
-    const external = spawnSync(process.execPath, [legacy, '--port', '5338', '--json'], { encoding: 'utf8' });
-    expect(external.status).not.toBe(0);
-    expect(JSON.parse(external.stdout).ok).toBe(false);
+    // 旧 page-snapshot 命令已于 10-02 清理：浏览器证据唯一入口为 workflow browser import/compare，
+    // 统一入口的帮助文本本身声明不启动外部浏览器（quality-gates 内置浏览器节为口径真源）。
+    expect(help.help.length).toBeGreaterThan(0);
   });
   it('实际文档索引可从统一命令返回有界、带来源的JSON', () => {
     const result = JSON.parse(execFileSync(process.execPath, [cli, 'docs', '--json'], { encoding: 'utf8' }));

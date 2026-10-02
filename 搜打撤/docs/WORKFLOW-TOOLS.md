@@ -10,7 +10,7 @@
 | 资源占用与未提交归属 | [REGISTRY](PARALLEL-REGISTRY.md)：开工、释放时各登记一次，进度用任务指针 |
 | 老板尚需拍板的事项 | [PENDING](PENDING.md)；已经授权的不重复挂账 |
 | 未来候选 | [roadmap](roadmap.md) |
-| 规则/契约/设计决策 | 对应现行规范；复杂改动才补[规格](SPEC-PROCESS.md) |
+| 规则/契约/设计决策 | 对应现行规范；跨域复杂改动先写清行为与完成标准（旧[规格模板](archive/SPEC-PROCESS.md)按需取用） |
 | 历史与原始证据 | `docs/archive/`、任务证据目录；不抄入当前状态 |
 
 STATUS 和接手简报只生成/引用摘要。spec保留需求、方案、拆分，不再同时维护执行进度；旧任务记录保留原位，不批量迁移或补造task.json。
@@ -63,7 +63,7 @@ npm run --silent workflow -- evidence --input <自动报告JSON> --json
 
 定向报告保存测试与关联静态输入的依赖闭包，复核沿原roots重算；不相关的音效源码不牵连流程测试。动态import、未知进程/文件输入无法证明时保守回退项目范围；full/suite保持项目范围。报告明确validation.mode/executed与outcome，skip不是passed；收官按本地/隔离报告各自的指纹、index、依赖和快照完整性契约核验。
 
-混树准备提交内容用 `npm run --silent check:staged:isolate -- --plan --json`，确认后运行；只验证冻结index，依赖不符拒绝，不混入工作树。内置浏览器采集函数在 `scripts/workflow-browser.mjs`；通过 workflow browser import/compare 导入与比较，旧page-snapshot命令只作同一安全入口，不启动外部浏览器。
+收官落库一条龙（10-02 起）：`npm run --silent workflow -- ship` 盘点分类（代码/文档两笔混树安全分组、排除会话中间文件与 code-map 类待验收产物、REGISTRY 无主物品预检即阻断、FULL_SOURCE 大合集明示 48s+ 全量预期）、`--apply` 逐笔过门禁提交并回显销账提醒（把「授权→落库完成」压成一条命令）；自定义总述加 `--message`。混树准备提交内容用 `npm run --silent check:staged:isolate -- --plan --json`，确认后运行；只验证冻结index，依赖不符拒绝，不混入工作树。内置浏览器证据统一入口 `npm run workflow -- browser import/compare`（采集函数在 `scripts/workflow-browser.mjs`），不启动外部浏览器；旧 page-snapshot 命令名已于 10-02 清理。
 
 ## 收官
 

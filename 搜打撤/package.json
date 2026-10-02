@@ -38,7 +38,6 @@
     "cards:sync": "node scripts/sync-cards-from-live.mjs",
     "validate:data": "node scripts/validate-data.mjs",
     "docs:compendium": "vitest run tests/compendium.test.js",
-    "page-snapshot": "node scripts/page-snapshot.mjs",
     "jscpd:baseline": "jscpd --reporters json --output node_modules/.cache/jscpd game/css game/src scripts",
     "impact": "node scripts/impact-query.mjs"
   },

@@ -1,6 +1,6 @@
 import { spawnSync } from 'node:child_process';
 import path from 'node:path';
-import {describe, expect, it, vi } from 'vitest';
+import { afterAll, describe, expect, it, vi } from 'vitest';
 import { DIRTY_SCAN_ROOTS, packageJsonScriptsOnlyDiff, parseStagedStatus, planForPaths } from '../scripts/acceptance-gate.mjs';
 
 // tsc 子进程类契约测试固有慢：默认 5s 在全量并行负载下必超时（与 boot.test 同族）
@@ -185,5 +185,43 @@ describe('分层验收选择', () => {
         { status: 'D', path: '搜打撤/tests/b.test.js' },
       ]);
     expect(() => parseStagedStatus(['M'])).toThrow('输出不完整');
+  });
+});
+
+describe('混树拒绝与 GATE_MANIFEST_OK 逃生口（10-02 补，机制补全）', () => {
+  const { execFileSync } = require('node:child_process');
+  const { mkdirSync, mkdtempSync, rmSync, writeFileSync } = require('node:fs');
+  const os = require('node:os');
+  const gate = path.resolve('scripts/acceptance-gate.mjs');
+  function mixedFixture() {
+    const repo = mkdtempSync(path.join(os.tmpdir(), 'sdt-gate-mixed-'));
+    const root = path.join(repo, '搜打撤');
+    mkdirSync(path.join(root, 'scripts'), { recursive: true });
+    const gitAt = (...args) => execFileSync('git', ['-c', 'core.autocrlf=false', ...args], { cwd: repo, encoding: 'utf8' });
+    writeFileSync(path.join(root, 'scripts/base.mjs'), 'export const a = 1;\n');
+    gitAt('init', '-q'); gitAt('add', '.');
+    gitAt('-c', 'user.name=F', '-c', 'user.email=f@x.invalid', 'commit', '-qm', 'base');
+    writeFileSync(path.join(root, 'scripts/mine.mjs'), 'export const b = 2;\n');   // 我的暂存
+    gitAt('add', '搜打撤/scripts/mine.mjs');
+    writeFileSync(path.join(root, 'scripts/theirs.mjs'), 'export const c = 3;\n'); // 他人在途未跟踪
+    return { repo, root, gitAt };
+  }
+  const cleanups = [];
+  afterAll(() => { for (const dir of cleanups.splice(0)) rmSync(dir, { recursive: true, force: true }); });
+
+  it('混树（他人在途未跟踪）拒绝 staged 验证', () => {
+    const { repo } = mixedFixture(); cleanups.push(repo);
+    const env = { ...process.env };
+    delete env.GATE_MANIFEST_OK; // 外层 gate 可能带此变量跑测试，拒绝语义必须显式无逃生口
+    const result = spawnSync(process.execPath, [gate, '--staged', '--plan'], { cwd: repo, encoding: 'utf8', env });
+    expect(result.status).not.toBe(0);
+    expect(result.stderr + result.stdout).toContain('无法用工作树验证暂存快照');
+  });
+  it('GATE_MANIFEST_OK=1 显式放行并给出定向计划（与无主阻断共用逃生口）', () => {
+    const { repo } = mixedFixture(); cleanups.push(repo);
+    const result = spawnSync(process.execPath, [gate, '--staged', '--plan'],
+      { cwd: repo, encoding: 'utf8', env: { ...process.env, GATE_MANIFEST_OK: '1' } });
+    expect(result.status).toBe(0);
+    expect(result.stdout).toContain('[gate]');
   });
 });

@@ -65,7 +65,7 @@ npm run docs:compendium
 - 交互优先走当次工具支持的真实输入。输入失效先核实现场；工具明确支持页面求值时可构造功能场景，合成事件需标注，不能当成真实输入/hover 证据。截图发黑先检查转场；启动等待采用工具支持的有界检查，页面疑似旧 bundle 时核对加载来源与缓存，重载前确认不会打断别人的验收。
 - 检查页面 `error`、真实状态和完整交互路径。单张截图、DOM 静态结构或自动化单测不能替代真实页面验收；战斗日志位于 `#log`。
 - 截图证明外观，计算样式 A/B 证明所选属性差异，合成交互证明所构造事件路径，真实输入/hover 证明真实输入路径，刷新/读档证明该存档场景；分别列范围，不互相替代。不得为了截图掩盖真实错误。
-- `scripts/page-snapshot.mjs` 已改为导入/对比当前平台内置浏览器证据，旧外部驱动原文见[归档](archive/workflow-completion-2026-09-30/README.md)。采集由当次内置工具完成，平台/操作声明须核对；窗口/origin/身份不一致记 inconclusive。`scripts/iab-drive.mjs` 已于 2026-10-01 收编纳管（WF-acceptance-scenes，PENDING #21 销账），作为内置浏览器驱动与验收剧本的一行式入口。
+- 浏览器证据统一入口为 `npm run workflow -- browser import/compare`（实现在 `scripts/workflow-browser.mjs`；旧外部驱动原文见[归档](archive/workflow-completion-2026-09-30/README.md)，旧 page-snapshot 命令名已于 10-02 清理）。采集由当次内置工具完成，平台/操作声明须核对；窗口/origin/身份不一致记 inconclusive。`scripts/iab-drive.mjs` 已于 2026-10-01 收编纳管（WF-acceptance-scenes，PENDING #21 销账），作为内置浏览器驱动与验收剧本的一行式入口。
 - 玩家可见变化的 B 档实页验收可用固定剧本（`SDT.Agent.scenes`，协议见 agent-protocol「验收剧本」节）：剧本断言 JSON 当逻辑证据 + 当次内置浏览器关键页截图 1–2 张当视觉证据，两者合并构成实页证据，验收结论仍由执行会话下（2026-10-01 老板拍板）。场景报告与过程坑记录落 `docs/evidence/<日期>-<任务>/`；长场景（>60s）在共享树受并行会话 HMR 重载限制，受阻时以 jsdom 同源测试先行、实机补跑挂 PENDING。
 
 ## CI 状态

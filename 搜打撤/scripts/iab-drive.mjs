@@ -133,7 +133,7 @@ export async function pointerClick(tab, selector, settleMs = 800) {
   })()`).then(async r => { await tab.playwright.waitForTimeout(settleMs); return r; });
 }
 
-/** 计算样式快照（与 scripts/page-snapshot.mjs 同一白名单与身份口径；返回对象）。 */
+/** 计算样式快照（与 workflow-browser 证据导入同一白名单与身份口径；返回对象）。 */
 export async function snap(tab, sels, opts = {}) {
   const props = opts.props || ['display','position','order','z-index','width','height','min-height','aspect-ratio','padding','margin','border-top-width','border-top-color','border-top-left-radius','background-image','background-color','box-shadow','clip-path','color','font-weight','letter-spacing','text-shadow','content-visibility','contain-intrinsic-size','object-position','top','left','bottom'];
   const per = opts.per || 3;

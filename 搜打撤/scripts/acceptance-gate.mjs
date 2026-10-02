@@ -29,8 +29,8 @@ export const WORKFLOW_TESTS = new Map([
   ['scripts/workflow-browser.mjs', ['tests/workflow-browser.test.js']],
   ['scripts/workflow-memory.mjs', ['tests/workflow-memory.test.js', 'tests/workflow-handoff.test.js']],
   ['scripts/workflow-staged.mjs', ['tests/workflow-staged.test.js']],
+  ['scripts/workflow-ship.mjs', ['tests/workflow-ship.test.js']],
   ['scripts/index-validation.mjs', ['tests/workflow-index.test.js', 'tests/workflow-cli-integration.test.js']],
-  ['scripts/page-snapshot.mjs', ['tests/workflow-cli-integration.test.js']],
   ['scripts/workflow-archive.mjs', ['tests/workflow-tools.test.js']],
   ['scripts/acceptance-gate.mjs', ['tests/acceptance-gate.test.js']],
   ['scripts/impact-query.mjs', ['tests/impact-query.test.js']],
@@ -366,9 +366,12 @@ function stagedChanges() {
       groups[key] = [...new Set(groups[key].map(toProjectPath).filter(isRelevant))];
     }
     const dirtyCount = groups.unstaged.length + groups.untracked.length + groups.ignored.length;
-    if (dirtyCount) {
+    if (dirtyCount && !process.env.GATE_MANIFEST_OK) {
+      // GATE_MANIFEST_OK 与无主阻断共用同一显式逃生口：他人无主在途改动既不能 add 也不能 stash，
+      // 已老板拍板且冻结 index 经 check:staged:isolate 另行验证时，凭此放行（显式+留痕，非静默绕过）。
       throw new Error('存在未暂存/未跟踪/被忽略的 Vite 源码/工具/测试/配置，无法用工作树验证暂存快照'
-        + '（未暂存先 add 或 stash；未跟踪属本次就 add，不属就移走；被忽略文件检查是否 ignore 产物挡路）：\n'
+        + '（未暂存先 add 或 stash；未跟踪属本次就 add，不属就移走；被忽略文件检查是否 ignore 产物挡路；'
+        + '无主在途不可动且已 isolate 验证+老板拍板时 GATE_MANIFEST_OK=1 显式放行）：\n'
         + formatDirtyReport(groups).join('\n'));
     }
   }
