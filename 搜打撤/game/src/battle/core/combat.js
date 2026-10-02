@@ -31,7 +31,7 @@ const CURSES = ['bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban', 'bu
     reduce:     { name: '减伤', icon: '[[icon:plate]]', value: true, desc: '每次受到的伤害 -N（真实伤害除外）' },
     dodge:      { name: '闪避', icon: '[[icon:runner]]', value: true, desc: '免疫下一次攻击（每层避开 1 次，完整躲掉该段伤害）' },
     swordForm:  { name: '剑仙形态', icon: '[[icon:sword]]', flag: true, desc: '回合开始时额外抽 1 张' },
-    natureForm: { name: '自然形态', icon: '[[icon:wood]]', flag: true, desc: '回合开始时额外获得 1 点能量' },
+    natureForm: { name: '满月形态', icon: '[[icon:wood]]', flag: true, desc: '回合开始时额外获得 1 点能量' }, // 2026-10-02 老板：形态更名「满月形态」（内部键 natureForm 保留）
     cosmosForm: { name: '宇宙形态', icon: '[[icon:sparkles]]', flag: true, desc: '本局对战所有卡牌变为 1 费' },
   };
 

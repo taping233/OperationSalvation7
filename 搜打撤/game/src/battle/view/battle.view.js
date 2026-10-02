@@ -9,7 +9,7 @@ import { storeGet, storeSet } from '../../core/storage.js';
 import { escAttr } from '../../core/shared.js';
 import { Random } from '../../core/random.js';
 import { on as onBattleEvent } from '../../core/event-bus.js';
-import { groupHandCards } from '../core/battle.hand.js';
+import { groupHandCards, orderHandGroups } from '../core/battle.hand.js';
 import { getPace, setPace } from '../runtime/battle.pace.js';
 import { schedulePresentationMs } from '../runtime/battle.clock.js';
 import { renderCombatPiles } from './battle.piles.view.js';
@@ -42,6 +42,7 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
   const confirmInfuse = commands.confirmInfusion;
   const beginInfuse = commands.beginInfusion;   // 需求 #15：卡面「注能」角标入口
   const bagSlam = commands.bagSlam;             // 需求 #9：背包砸击
+  const slamSkillOf = commands.slamSkill;       // 2026-10-02 老板：砸击换五职业分化技能（含牧师翻面态）
   const endTurn = commands.endTurn;
   const surrender = commands.surrender;   // 玩法定版：主动撤离视为本局失败
   const openGrave = commands.openGrave;
@@ -294,7 +295,8 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     const spellBonus = (player.spellPower || 0) + ((pstat.status && pstat.status.spellUp) || 0);
     // —— 同名卡堆叠（v0.32 杀戮尖塔式手牌）：同名同描述的卡只占一个位置，显示 ×N ——
     // 注能中：注能主卡单独一块展示，其同名燃料照常成组（点击组 = 消耗组内一张）
-    const groups = groupHandCards(cards, infusingNow ? infusing : null);
+    // 初始攻击恒排第一栏最左（2026-10-02 老板）：渲染前稳定分区，hand 数组语义顺序零改动
+    const groups = orderHandGroups(groupHandCards(cards, infusingNow ? infusing : null));
     const N = groups.length;
     // 分栏切页：只渲染当前栏的 12 叠，扇形布局按本栏实际张数计算
     const handPages = Math.max(1, Math.ceil(N / HAND_PAGE_SIZE));
@@ -357,6 +359,8 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
       ? ({ boss_general: 'battle-boss-general', boss_orc: 'battle-boss-orc', boss_elem: 'battle-boss-element' }[foes[0] && foes[0].id] || 'battle-boss-general')
       : 'battle-normal';
     const combatState = combatStateCopy(snapshot);
+    // 背包技能按钮（2026-10-02 老板：砸击换五职业分化技能）：文案/费用/提示按当前职业与翻面态切换
+    const slamSkillInfo = slamSkillOf();
     // W3-02（2026-09-27 R2）：熟练度进度微条（轻做）——局内可见「距升级多近」。
     // XP 模型=终局结算固定 +5（terminal.commands applyDeathOutcome），战斗中不改值，
     // 本 chip 只读 Meta 现值做持续载体（每场战斗渲染时刷新）；结算页（W3-01）负责跳变。
@@ -399,8 +403,9 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
         </div>
         <div class="sts-hand-tools">
           <button class="bt-slam-btn${slamPending ? ' active' : ''}" data-act="btSlam"
-            ${busy || infusingNow || (energy < 2 && !slamPending) ? 'disabled' : ''}
-            title="背包砸击：2 费 · 4 点固定伤害 · 按住拖到敌人身上松手直接释放，也可点击后再点敌人">[[icon:fire]] 砸击</button>
+            ${busy || infusingNow || (energy < slamSkillInfo.cost && !slamPending) ? 'disabled' : ''}
+            title="${escAttr(slamSkillInfo.hint)}${slamSkillInfo.needsTarget
+              ? ' · 按住拖到敌人身上松手直接释放，也可点击后再点敌人' : ' · 点击立即生效'}">[[icon:${slamSkillInfo.icon}]] ${esc(slamSkillInfo.name)}</button>
           ${handPages > 1 ? `<button class="bt-hand-page has-more" data-act="btHandPage" aria-label="还有另一栏手牌，当前第 ${handPage + 1} 栏，共 ${handPages} 栏"
             title="手牌分栏：每栏最多 ${HAND_PAGE_SIZE} 叠，放不下的进第二栏——点击切换第一栏/第二栏">[[icon:cards]] 第 ${handPage + 1}/${handPages} 栏</button>` : ''}
         </div>

@@ -104,7 +104,13 @@ function tick() {
   const game = SDT && SDT.game;
   if (!game) return;
   try { decorateChapters(); } catch { /* 章节装饰失败不阻塞状态条 */ }
-  const visible = !!(game.runActive && game.myClass);
+  // 2026-10-02 老板：搜刮页（chest 弹层）打开时状态条让位——fixed top:92 恰压 .card.chest
+  // 标题中后段；页内 loot-capacity（背包占用）与 fate 行（1/3 带回）已承载同信息，不删内容
+  const chestOpen = (() => {
+    const ov = document.getElementById('overlay');
+    return !!(ov && !ov.hidden && ov.querySelector('.card.chest'));
+  })();
+  const visible = !!(game.runActive && game.myClass) && !chestOpen;
   const el = visible ? ensureEl() : document.getElementById('expPocketStrip');
   if (!el) return;
   if (!visible) { el.hidden = true; return; }

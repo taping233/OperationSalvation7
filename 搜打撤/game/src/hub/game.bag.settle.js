@@ -134,11 +134,16 @@ import { bagSlots } from './game.bag.bridge.js';
       B.markAmmoTaught();   // 2026-09-29 收敛：内存推进+尝试保存的旧语义移入 Base 命令
       game.state = 'modal';
       const shaCard = SDT.Cards.all().find(c => c.id === SDT.Cards.SHA.id) || SDT.Cards.SHA;
+      // 2026-10-02 老板：左列「入口袋」图换真正会进消耗口袋的普通牌（镭射，TT10 定版）——
+      // 原两列都用初始攻击，但它打出即消散，左列用它讲入口袋是误导
+      const pocketCard = SDT.Cards.all().find(c => c.id === 'tt3sp-silverthorn')
+        || (Array.isArray(SDT.Cards.TABLETOP10) && SDT.Cards.TABLETOP10.find(c => c.id === 'tt3sp-silverthorn'))
+        || shaCard;
       UI.showOverlay('[[icon:cards]] 卡牌是消耗品', `
         <div class="ammo-teach">
           <section class="at-col">
             <div class="at-flow">
-              <span class="at-card">${SDT.Cards.cardHTML(shaCard, 'sm')}</span>
+              <span class="at-card">${SDT.Cards.cardHTML(pocketCard, 'sm')}</span>
               <span class="at-arrow">➜</span>
               <span class="at-node"><span class="at-ico">[[icon:pocket]]</span><b>消耗口袋</b></span>
             </div>
@@ -302,10 +307,11 @@ import { bagSlots } from './game.bag.bridge.js';
     if (settlement.phase === 'pocket') settlement.phase = 'transitioned';
     if (settlement.phase === 'transitioned') {
     UI.log(opts.isBoss ? '[[icon:trophy]] <b>BOSS战胜利！</b>' : '[[icon:trophy]] 战斗胜利！', 'ok');
-    // 需求 #13：击败首脑后，第五层终局撤离点无条件放行
+    // 需求 #13：击败首脑后，第四层终局撤离点无条件放行
+    // 2026-10-02 老板：日志「第五层」系旧五层布局残留，主图四层定版后统一为「第四层」
     if (opts.isBoss && win === true && !game.bossKilled) {
       game.bossKilled = true;
-      UI.log('[[icon:exit]] 首脑已击破——第五层的<b>终局撤离点</b>已解锁，可无条件撤离', 'loot');
+      UI.log('[[icon:exit]] 首脑已击破——第四层的<b>终局撤离点</b>已解锁，可无条件撤离', 'loot');
     }
     // A slot-backed victory defers kill/XP progress into the recoverable Base+Run attempt.
     // No-slot play retains the historical in-memory Meta path at this point in the flow.

@@ -6,7 +6,8 @@ import { Random } from '../../core/random.js';
 import * as Combat from '../core/combat.js';
 import { itemTargetSideFor } from '../effects/battle.target-rules.js';
 import { getHostedExecutionCard } from '../effects/battle.hosted.js';
-import { G, foes, mode, energy, busy, infusing, discovering, choosing, handSelecting, viewingGrave, selectingDeck, viewingBag, pstat, floats, consumed, hand, cardAnims, delayed, set$energy, set$viewingBag } from '../runtime/battle.runtime.js';
+import { G, foes, mode, energy, busy, infusing, discovering, choosing, handSelecting, viewingGrave, selectingDeck, viewingBag, pstat, floats, consumed, hand, cardAnims, delayed, set$energy, set$viewingBag, battleState } from '../runtime/battle.runtime.js';
+import { slamSkillFor, SLAM_SKILL_PRIEST_FLIPPED } from './battle.slam-skill.js';
 
 export function createBattleBag({
   requestBattleRender, clearTargetSession, cancelInteraction, beginSpecialTargeting, interactionOf,
@@ -277,16 +278,29 @@ export function createBattleBag({
       requestBattleRender();
     }, '道具动作');
   }
-  // —— 背包砸击（2026-09-16 老板：改回按钮形态——手牌左侧的背包图案按钮，不再向手牌置入令牌；
-  //     2026-09-13 曾改为自动置入手牌的常驻牌，因污染一切手牌检测作废）——
-  // 2 费 · 4 点固定伤害 · 点按钮进入点选，再点一次取消；不占手牌、不进任何手牌检测
+  // —— 背包技能（2026-10-02 老板：背包砸击换成技能，按五职业分化；原砸击=2 费 4 固定伤）——
+  // 技能表单源在 battle.slam-skill.js（view 按钮/aim 拖拽/agent 策略共用）；本文件只管结算。
+  // 牧师翻面态按战斗实例令牌键控（lifecycle 每场 createBattleState 递增 token）：
+  // 新一场自动复位；本局翻一次后固定；读档从本场开头重开 = 新 token，同样复位。
+  let slamFlipToken = 0;
+  function slamSkill() { return slamSkillFor(G ? G.myClass : null, slamFlipToken === battleState.token); }
+  // 伤害类型按 kind 走现有结算链（Combat.dealDamage）：刺客=固定伤；战士=攻击（同初始攻击结算链，
+  // 吃攻/攻升/流血）；降临者火球与牧师翻面=法伤（同深渊降焰 consumeFireballSteps 口径，吃法伤加成）
+  const SLAM_DAMAGE_TYPE = {
+    fixed: () => Combat.TYPES.FIXED,
+    attack: () => Combat.TYPES.ATTACK,
+    fireball: () => Combat.TYPES.SPELL,
+    spell: () => Combat.TYPES.SPELL,
+  };
   function bagSlam() {
     if (busy || infusing || discovering || choosing || handSelecting || viewingGrave || selectingDeck) return;
     if (interactionOf('slam')) { cancelSlam(); return; }
-    if (energy < 2) { G.log('[[icon:bolt]] 能量不足：背包砸击需要 2 点能量', 'warn'); return; }
-    if (!alive().length) { G.log('[[icon:cross]] 场上没有敌人可以砸击', 'warn'); return; }
+    const skill = slamSkill();
+    if (energy < skill.cost) { G.log(`[[icon:bolt]] 能量不足：${esc(skill.name)}需要 ${skill.cost} 点能量`, 'warn'); return; }
+    if (!skill.needsTarget) { resolveSlamSkill(null); return; }   // 无目标技能（法师搜刮/牧师圣疗）点击即结算
+    if (!alive().length) { G.log(`[[icon:cross]] 场上没有敌人可以使用${esc(skill.name)}`, 'warn'); return; }
     beginSpecialTargeting('slam');
-    G.log('[[icon:bag]] <b>背包砸击</b>：点击一名敌人砸下（2 费 · 4 点固定伤害 · 不消耗卡牌）', 'sys');
+    G.log(`[[icon:${skill.icon}]] <b>${esc(skill.name)}</b>：点击一名敌人（${skill.hint}）`, 'sys');
   }
   function cancelSlam() { cancelInteraction(); }
 
@@ -349,32 +363,46 @@ export function createBattleBag({
   function resolveSlam(side) {
     if (!interactionOf('slam')) return;
     if (busy) return;
-    if (energy < 2) { G.log('[[icon:bolt]] 能量不足：背包砸击需要 2 点能量', 'warn'); requestBattleRender(); return; }
-    const t = side != null ? foes[+side] : null;
-    if (!t || t.dead) {
-      G.log('[[icon:cross]] 背包砸击：请重新选择一名存活敌人', 'warn');
+    resolveSlamSkill(side);
+  }
+  // 技能结算统一入口（bagSlam 点选流与无目标直发共用）：费用/效果按当前职业技能表取值
+  function resolveSlamSkill(side) {
+    if (busy) return;
+    const skill = slamSkill();
+    if (energy < skill.cost) { G.log(`[[icon:bolt]] 能量不足：${esc(skill.name)}需要 ${skill.cost} 点能量`, 'warn'); requestBattleRender(); return; }
+    const t = skill.needsTarget ? (side != null ? foes[+side] : null) : null;
+    if (skill.needsTarget && (!t || t.dead)) {
+      G.log(`[[icon:cross]] ${esc(skill.name)}：请重新选择一名存活敌人`, 'warn');
       requestBattleRender();
       return;
     }
     clearTargetSession();
     queueBattleAction(async signal => {
       throwIfActionCancelled(signal);
-      const aliveBefore = alive().length;   // 击杀奖励总账（砸击击杀也计饮血剑，对齐 resolveDart）
+      if (skill.kind === 'heal') { resolveSlamHeal(skill); requestBattleRender(); return; }
+      if (skill.kind === 'acquire') { resolveSlamAcquire(skill); requestBattleRender(); return; }
+      const aliveBefore = alive().length;   // 击杀奖励总账（技能击杀也计饮血剑，对齐 resolveDart）
       const struck = await runStagedSteps(singleTargetHitSteps(t, () => {
-        if (energy < 2) {
-          G.log('[[icon:bolt]] 背包砸击取消：结算时能量已不足，未扣除能量', 'warn');
+        if (energy < skill.cost) {
+          G.log(`[[icon:bolt]] ${esc(skill.name)}取消：结算时能量已不足，未扣除能量`, 'warn');
           return false;
         }
-        set$energy(energy - 2);
+        set$energy(energy - skill.cost);
         SDT.Sound.sfx('strike');
         const hpBefore = t.hp;
         const shieldBefore = t.defense?.shield || 0;
-        const r = Combat.dealDamage({ atk: G.atk }, t, 4, Combat.TYPES.FIXED);
+        // 结算源对齐现有链：战士攻击带攻升（status.atkUp，同打一张初始攻击）；
+        // 火球/牧师翻面带法强与 spellUp（同 battle.engine consumeFireballSteps 深渊降焰口径）
+        const source = skill.kind === 'attack' ? { atk: G.atk, status: pstat.status }
+          : (skill.kind === 'fireball' || skill.kind === 'spell') ? { atk: G.atk, spellPower: G.spellPower || 0, status: pstat.status }
+          : { atk: G.atk };
+        const type = (SLAM_DAMAGE_TYPE[skill.kind] || SLAM_DAMAGE_TYPE.fixed)();
+        const r = Combat.dealDamage(source, t, skill.dmg || 0, type);
         const shieldBreak = shieldBefore > 0 && !(t.defense?.shield || 0);
         if (r.dealt > 0 || shieldBreak) floats.push({ unit: foes.indexOf(t),
           text: r.dealt > 0 ? '-' + r.dealt : '护盾破碎', cls: r.dealt > 0 ? 'dmg' : 'block',
           shieldBreak, hpBefore, hpAfter: t.hp, maxHp: t.maxHp });
-        G.log(`[[icon:bag]] <b>背包砸击</b>砸向 ${esc(t.name)}：造成 <b>${r.dealt}</b> 点固定伤害（-2 能量）`, 'sys');
+        G.log(`[[icon:${skill.icon}]] <b>${esc(skill.name)}</b>${skill.kind === 'fireball' ? '施放 1 次火球 → ' : ' → '}${esc(t.name)}：造成 <b>${r.dealt}</b> 点${Combat.TYPE_NAME[type]}（-${skill.cost} 能量）`, 'sys');
         sweepDead();
         // 击杀数必须在 sweepDead 之后取（dealDamage 只扣血不标倒下）：此前先取后清，
         // 砸击击杀的饮血剑计数恒为 0（09-30 深审 BC-10 复验时发现的次生顺序 bug）
@@ -383,7 +411,38 @@ export function createBattleBag({
       if (!struck) return;
       if (!alive().length) { finish(true); return; }
       requestBattleRender();
-    }, '背包砸击');
+    }, skill.name);
+  }
+  // 牧师·圣疗（2026-10-02 老板）：回复 3 血；使用后本局翻面为「惩戒」（3 点法伤，本局固定）。
+  // 禁疗中也翻面——费用已支付、技能已「使用」；翻面只记一次（token 键控），重复结算不会再次翻转
+  function resolveSlamHeal(skill) {
+    set$energy(energy - skill.cost);
+    const n = skill.heal || 0;
+    if ((pstat.status.healban || 0) > 0) {
+      G.log(`[[icon:heart]] 禁疗中：回复 <b>${n}</b> 点生命无效（还剩 ${pstat.status.healban} 回合）`, 'warn');
+    } else {
+      G.heal(n);
+      floats.push({ unit: 'self', text: '', cls: 'stk sticker-heal', warm: true });
+    }
+    const flipped = SLAM_SKILL_PRIEST_FLIPPED;
+    slamFlipToken = battleState.token;
+    G.log(`[[icon:${skill.icon}]] <b>${esc(skill.name)}</b>：回复 <b>${n}</b> 点生命（-${skill.cost} 能量）`, 'sys');
+    G.log(`[[icon:${flipped.icon}]] <b>${esc(skill.name)}</b>已翻面：技能变为「<b>${esc(flipped.name)}</b>」（${flipped.hint.replace('（已翻面，本局固定）', '')}），本局固定`, 'sys');
+  }
+  // 法师·搜刮（2026-10-02 老板）：随机获得一张卡牌入手牌——取池口径对齐神秘药水
+  // （isRandomObtainable 单源，battle.bag useItem 同款）：普通战置入手牌、BOSS 战洗入牌库
+  function resolveSlamAcquire(skill) {
+    set$energy(energy - skill.cost);
+    const pool = SDT.Cards.all().filter(c => SDT.Cards.isRandomObtainable(c));
+    const got = pool.length ? pool[Math.floor(Random.random('loot') * pool.length)] : null;
+    if (got) {
+      if (mode === 'boss') addDeckCard({ ...got });
+      else addTempCard({ ...got });
+      G.log(`[[icon:${skill.icon}]] <b>${esc(skill.name)}</b>：随机获得【<b>${esc(got.name)}</b>】${mode === 'boss' ? '（洗入牌库）' : '（置入手牌）'}`, 'loot');
+      if (!got.rules?.triggers?.onAcquire?.length) fireCatGift(got);   // 结构化 onAcquire 已由 addTempCard 触发
+    } else {
+      G.log(`[[icon:cross]] ${esc(skill.name)}：没有可获得的卡牌`, 'warn');
+    }
   }
 
   // 药水栏点击：敌方指向道具在多敌时进入点选模式，其余直接生效
@@ -422,5 +481,6 @@ export function createBattleBag({
   return {
     restoreConsumed, battleBagItems, itemUsability, useItem, useBattleEffectItem,
     bagSlam, beginDartStrike, resolveDart, resolveSlam, usePotion, openBag, closeBag,
+    slamSkill,   // 2026-10-02 老板：砸击换五职业分化技能——视图按钮/拖拽读当前职业技能口径
   };
 }

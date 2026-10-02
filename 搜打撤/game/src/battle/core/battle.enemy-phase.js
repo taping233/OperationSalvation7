@@ -347,7 +347,7 @@ import { restoreAtkDown } from '../effects/effect-steps.m2.js';
     // —— 新回合开始：玩家形态祝福 ——
     if ((pstat.status.natureForm || 0) > 0) {
       set$energy(energy + 1);
-      G.log(`[[icon:wood]] <b>自然形态</b>：额外获得 1 点能量（当前 ${energy}/${maxEnergy}）`, 'ok');
+      G.log(`[[icon:wood]] <b>满月形态</b>：额外获得 1 点能量（当前 ${energy}/${maxEnergy}）`, 'ok');
     }
     if ((pstat.status.swordForm || 0) > 0) {
       if (mode === 'boss') {

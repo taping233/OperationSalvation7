@@ -189,7 +189,7 @@ function battleActions(snap) {
   push('endTurn', []);
   push('openBag', []);
   push('flee', []);
-  // 背包砸击：2 费 4 固定伤不吃手牌——手牌卡手时的硬通货
+  // 背包技能：按职业 1-2 费（2026-10-02 老板五职业分化）不吃手牌——手牌卡手时的硬通货
   push('bagSlam', []);
   // 装备主动技能（uid 供 useEquipSkill；passive 装备无主动）
   for (const e of snap.equipped || []) {

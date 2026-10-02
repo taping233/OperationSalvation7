@@ -21,7 +21,8 @@ const BATTLE_COMMANDS = new Set([
   'selectDeckCard', 'confirmDeck', 'cancelDeck',
   'beginInfusion', 'selectInfusion', 'confirmInfusion', 'cancelInfusion',
   'useItem', 'usePotion', 'useEquipSkill',
-  // 砸击三件套：bagSlam（2费4伤的挂起触发）+ resolveSlam/resolveDart（挂起态选目标
+  // 砸击三件套：bagSlam（背包技能挂起触发，按职业 1-2 费——2026-10-02 老板五职业分化）
+  // + resolveSlam/resolveDart（挂起态选目标
   // 出口）——引擎 commands 与动作面都有推送，白名单曾全漏（09-26 实测 334 次
   // BATTLE_COMMAND_UNKNOWN 拒绝，砸击/血毒双镖整条链路走不通，策略卡死到熔断）
   'bagSlam', 'resolveSlam', 'resolveDart',

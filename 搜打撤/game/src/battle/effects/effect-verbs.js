@@ -82,7 +82,7 @@ const VERBS = [
   { id: 'pocketUse', label: '仅背包内可用（复原最多 N 张）', impl: 'game.bag', pattern: /在背包中才能使用|复原最多\s*(?:两|2|3)\s*张/ },
   { id: 'duration', label: '持续 N 回合（时长覆盖）', impl: 'battle.effects', pattern: /持续\s*\d+\s*回合/ },
   { id: 'castTimes', label: '施放 N 次某牌', impl: 'battle.effects', pattern: /施放\s*\d+\s*次/ },
-  { id: 'formSwitch', label: '形态（剑仙/自然/宇宙/形态池）', impl: 'battle.effects', pattern: /剑仙形态|自然形态|宇宙形态|形态/ },
+  { id: 'formSwitch', label: '形态（剑仙/满月/宇宙/形态池）', impl: 'battle.effects', pattern: /剑仙形态|满月形态|宇宙形态|形态/ },
   { id: 'mysteryEffect', label: '随机神秘效果', impl: 'battle.effects', pattern: /随机神秘效果/ },
   { id: 'choiceBranch', label: '抉择（1°/2°/3° 分支）', impl: 'battle.effects', pattern: /抉择[:：]|\d\s*[°′]|其中每置入|集齐两枚碎片/ },
   { id: 'costSwapDiscover', label: '发现两张随机招式并交换费用', impl: 'battle.effects', pattern: /发现两张随机招式/ },

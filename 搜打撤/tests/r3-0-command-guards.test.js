@@ -24,7 +24,9 @@ function makeGame(cards) {
   const logs = [];
   return {
     ownedCards: cards.map(card => ({ uid: `r3-${uidSeq++}`, card: { ...card }, safe: false })),
-    hp: 99, maxHp: 99, atk: 0, spellPower: 0, coins: 0,
+    // atk 4：2026-10-02 老板五职业分化后战士背包技能=攻击一次（伤害=攻击力），
+    // 首脑战砍击守卫的「-4 伤」断言口径不变
+    hp: 99, maxHp: 99, atk: 4, spellPower: 0, coins: 0,
     myClass: '战士', characterId: null, state: 'idle', battleActive: false,
     logs, log(message) { logs.push(String(message).replace(/\[\[[^\]]+\]\]/g, '')); },
     heal(n) { this.hp = Math.min(this.maxHp, this.hp + n); },
@@ -136,7 +138,7 @@ describe('R3-0 真实 commands 交互守卫', () => {
 
     BattleSession.commands.bagSlam();
     BattleSession.commands.resolveSlam(0);
-    await settle();   // 逐击演出（a85b857）后效果才落定：合法一击恰好扣 2 费打 4 伤
+    await settle();   // 逐击演出（a85b857）后效果才落定：合法一击恰好扣 2 费（战士技能=攻击一次，atk 4 → 4 伤）
     const resolved = snap();
     expect(resolved.energy).toBe(initial.energy - 2);
     expect(resolved.foes[0].hp).toBe(initial.foes[0].hp - 4);

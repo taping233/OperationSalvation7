@@ -8,6 +8,7 @@
 
 import { Random } from '../core/random.js';
 import { resolveWeights } from './agent.weights.js';
+import { slamSkillFor } from '../battle/bag/battle.slam-skill.js';   // 2026-10-02 老板：背包技能五职业分化，费用单源取值
 
 const TARGET_KEY = /攻击|伤害|造成|消灭|击|刺|斩/;
 const PREFER_LABEL = /(开始|出发|继续|确认|完成|获取|带走|进入|领取|修复|治疗|休息|入库|整理|留下|收下|全部收下)/;
@@ -362,8 +363,11 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
       const a = targeted ? tryPlay(c, byHp[0].i) : tryPlay(c);
       if (a) return a;
     }
-    // 4.5) 背包砸击：2 费 4 固定伤不吃手牌——手牌打空/卡手时的硬通货（省卡策略）
-    if (e >= W.battle.slamMinEnergy && !tried.has('slam') && acts.some(x => x.name === 'bagSlam')) {
+    // 4.5) 背包技能：按职业 1-2 费不吃手牌（2026-10-02 老板五职业分化，费用单源
+    // battle.slam-skill.js；obs.run.class=职业 rulesetId）——手牌打空/卡手时的硬通货（省卡策略）；
+    // 能量门=min(职业技能费用, slamMinEnergy 权重上限)，未知职业兜底=战士口径
+    const slamCost = slamSkillFor(obs.run?.class || null).cost;
+    if (e >= Math.min(slamCost, W.battle.slamMinEnergy) && !tried.has('slam') && acts.some(x => x.name === 'bagSlam')) {
       const slam = acts.find(x => x.name === 'bagSlam');
       tried.add('slam');
       return slam;

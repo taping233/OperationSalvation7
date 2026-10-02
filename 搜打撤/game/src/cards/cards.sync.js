@@ -971,7 +971,7 @@ export const syncSlice = {
     // （acquire 12 + blessing/energy 4；解释分支已接线——resolveAcquireOperation/
     // resolveBlessingOperation，pool 谓词走 parsePoolNoun 与文本路径同源）。
     // 排除记账：挖宝 priceArmor/武装 deckDraw/破进展三段费用无键、灵能召唤"注能卡"
-    // 池名词不支持（parsePoolNoun 需扩）、自然形态 V（natureForm 形态旗标耦合）、
+    // 池名词不支持（parsePoolNoun 需扩）、满月形态 V（natureForm 形态旗标耦合）、
     // 净化无 purify 键、割蚀/影噬为敌方 atk 操作（blessing 无 target 键）、
     // 剑仙形态 G13、邪能护体注能门高危（N1 明星卡，注能白嫖风险）、H 白名单 3。
     // schema 交叉点：铁甲阵 armor 与潜匿 draw 用字面量 amount（field-anchored 不得

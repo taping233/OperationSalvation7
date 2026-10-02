@@ -187,7 +187,8 @@ import { game } from '../run/game.session.js';
     UI.showOverlay('[[icon:broom]] 清空全部备注', `
       <p class="ov-stats">确定删除所有格子备注？此操作不可恢复。</p>
       <div class="ov-btns">
-        <button class="ov-btn ok" data-act="doClear">确认清空</button>
+        <!-- 2026-10-02 老板：不可恢复的清空改红系危险钮（先例 .ov-btn.danger），不再用金色主钮；默认焦点保持落「取消」 -->
+        <button class="ov-btn danger" data-act="doClear">确认清空</button>
         <button class="ov-btn" data-act="closeTools">取消</button>
       </div>`, undefined, { initialFocus: '[data-act="closeTools"]' });
     UI.act('doClear', () => {

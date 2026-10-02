@@ -212,11 +212,11 @@ export function curseSteps(s) {
         },
       },
       {
-        id: 'buff.natureForm', gate: 'always', label: '自然形态（回合开始额外 1 能量）',
-        when: (ctx) => (/自然形态/.test(ctx.desc) || /回合开始时[^。]*获得\s*\d+\s*点?能量/.test(ctx.desc)) ? true : null,
+        id: 'buff.natureForm', gate: 'always', label: '满月形态（回合开始额外 1 能量）',
+        when: (ctx) => (/满月形态/.test(ctx.desc) || /回合开始时[^。]*获得\s*\d+\s*点?能量/.test(ctx.desc)) ? true : null,
         run: (ctx) => {
           combat.addBlessing(ctx.pstat, 'natureForm');
-          log('[[icon:wood]] <b>祝福·自然形态</b>：回合开始时额外获得 1 点能量（本局对战）', 'ok');
+          log('[[icon:wood]] <b>祝福·满月形态</b>：回合开始时额外获得 1 点能量（本局对战）', 'ok');
           ctx.did = true;
         },
       },

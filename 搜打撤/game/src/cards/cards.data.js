@@ -419,7 +419,7 @@ export const dataSlice = {
       { id: 'tt3-mystery-potion', name: '神秘药水', cost: 0, rarity: '稀有', type: '道具', desc: '回合开始时：变成1张随机招式卡牌，使其费用为0。', dmg: 0, value: 3 },
       { id: 'tt3-blue-potion', name: '恢复药水', cost: 0, rarity: '稀有', type: '道具', desc: '回复 5 点生命，回复1点能量。', dmg: 0, heal: 5, value: 2 },
       { id: 'tt3-treasure-hunt', name: '寻宝', cost: 1, rarity: '古朴', type: '法术', desc: '造成4点法术伤害，发现 1 张牌。', dmg: 4, dmgType: 'spell', value: 2 },
-      { id: 'tt3-nature-form', name: '自然形态', cost: 2, rarity: '稀有', type: '法术', desc: '本局战斗中，能量上限 +1。', dmg: 0, value: 3 },
+      { id: 'tt3-nature-form', cls: '牧师', name: '满月形态', cost: 2, rarity: '职业', type: '法术', desc: '本局战斗中，能量上限 +1。', dmg: 0, value: 3, unrandom: true }, // 2026-10-02 老板：「自然形态」改名「满月形态」并转牧师职业卡（id 不变，存档/卡库按 id 追踪）
       { id: 'tt3-python-potion', name: '火焰药水', cost: 0, rarity: '稀有', type: '道具', desc: '对所有敌人造成2点法伤', dmg: 0, value: 3 },
       { id: 'tt3-chain-lightning', name: '闪电链', cost: 1, rarity: '古朴', type: '法术', desc: '3′，触发 2 次。', dmg: 3, dmgType: 'spell', value: 2 },
       { id: 'tt3-houyi-potion', name: '狂暴药水', cost: 0, rarity: '稀有', type: '道具', desc: '获得 2 点攻击力。持续 1 回合。', dmg: 0, value: 3 },

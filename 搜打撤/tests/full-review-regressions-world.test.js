@@ -112,23 +112,42 @@ describe('09-30 深审 WORLD 组修复回归', () => {
     expect(claimed).toBe(2);
   });
 
-  it('WORLD-002 火堆：背包往返不再重复回复生命/掷卡，完成后正常消耗节点', () => {
+  it('WORLD-002 火堆：从消耗口袋自动发现两张复原（道具不入池），节点一次性结算', () => {
+    H.game.usedPocket = [
+      { uid: 'p1', card: { id: 'x1', name: '烬卡一', type: '武术' }, count: 1 },
+      { uid: 'p2', card: { id: 'x2', name: '烬卡二', type: '武术' }, count: 1 },
+      { uid: 'p3', card: { id: 'x3', name: '行军膏', type: '道具' }, count: 1 },
+    ];
     altar.openFireRest();
-    expect(H.game.hp).toBe(11);
-    expect(H.game.ownedCards).toHaveLength(1);
-    UI.showOverlay('背包', '<button data-act="closeBag">关闭</button>', 'bagpage'); closeCoveredBag();
-    expect(H.game.state).toBe('modal');   // 返回钩子重开复原页（此前兜底回 idle）
-    expect(H.game.hp).toBe(11);           // 不重复回复（此前重进变 21/31）
-    expect(H.game.ownedCards).toHaveLength(1);
-    // 防重复兜底：即使走重入路径（关闭钩子回 idle 后重进节点）也不再发奖
-    setBagReturnHook(null); H.game.state = 'idle';
+    expect(H.game.hp).toBe(11);   // 回血一次（重入不得重复）
+    // 职业卡 + 自动发现两张复原入包；道具卡留在消耗口袋不可复原（发现顺序随机，排序后比对）
+    expect(H.game.ownedCards.map(c => c.card.name).sort()).toEqual(['奖励牌', '烬卡一', '烬卡二'].sort());
+    expect(H.game.usedPocket.map(p => p.card.name)).toEqual(['行军膏']);
+    expect(H.game.state).toBe('idle');
+    expect(H.game.visited['0,1']).toBe(1);
+    expect(H.saves.at(-1).ownedCards).toHaveLength(3);
+    // 已结算节点重进：resolveCell 按 visited 拦截，不再回血/再复原
     flow.reenterCell();
     expect(H.game.hp).toBe(11);
-    expect(H.game.ownedCards).toHaveLength(1);
-    UI._acts.fireDone();
+    expect(H.game.ownedCards).toHaveLength(3);
+  });
+
+  it('WORLD-002b 火堆空池：只回血掷职业卡并给提示，不再打开复原选牌页', () => {
+    altar.openFireRest();
+    expect(H.game.hp).toBe(11);
+    expect(H.game.ownedCards).toHaveLength(1);   // 仅职业卡
     expect(H.game.visited['0,1']).toBe(1);
-    expect(H.saves.at(-1).hp).toBe(11);
     expect(H.saves.at(-1).ownedCards).toHaveLength(1);
+    expect(UI.el.ovBody.querySelector('[data-act="fireDone"]')).toBeNull();   // 不开选牌页
+  });
+
+  it('WORLD-002c 火堆池仅 1 张可复原：发现该张即止（池不足两张全复原）', () => {
+    H.game.usedPocket = [{ uid: 'p1', card: { id: 'x1', name: '孤卡', type: '武术' }, count: 1 }];
+    altar.openFireRest();
+    expect(H.game.ownedCards.map(c => c.card.name)).toEqual(['奖励牌', '孤卡']);
+    expect(H.game.usedPocket).toHaveLength(0);
+    expect(H.game.visited['0,1']).toBe(1);
+    expect(H.saves.at(-1).ownedCards).toHaveLength(2);
   });
 
   it('WORLD-003 事件二级选卡页：开关背包不丢已付奖励（付款一次、节点消耗一次）', async () => {

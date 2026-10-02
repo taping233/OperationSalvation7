@@ -7,6 +7,7 @@ import { esc } from '../../core/shared.js';
 import { commands, getSnapshot, getBattleLiveness, effCostOf, findCard, infuseOf, targetSide, unplayableReason } from '../core/battle.core.js';
   const play = commands.playCard;
   const bagSlam = commands.bagSlam;             // 需求 #9：背包砸击
+  const slamSkillOf = commands.slamSkill;       // 2026-10-02 老板：砸击换五职业分化技能（含牧师翻面态）
   const resolveSlam = commands.resolveSlam;
   const useItemCmd = commands.useItem;
   const cancelPendingTarget = commands.cancelPendingTarget;
@@ -418,10 +419,15 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     const { busy, infusing, discovering, choosing } = snap;
     if (busy || infusing || discovering || choosing || aim) return;
     const uid = el.dataset.uid;
-    // 09-20 老板：砸击改拖动释放——按钮无卡牌 uid，喂伪卡（4 点固定伤害）复用
+    // 09-20 老板：砸击改拖动释放——按钮无卡牌 uid，喂伪卡复用
     // 药水式非跟手指向（红箭头 + 敌人高亮 + 伤害预览）；能量门槛由按钮 disabled 承担
+    // 2026-10-02 老板：伪卡按当前职业技能取文案与数值（战士猛击预览=攻击力）；
+    // 无目标技能（法师搜刮/牧师圣疗）不支持拖拽——点击立即生效
     const isSlam = kind === 'slam';
-    const entry = isSlam ? { card: { name: '背包砸击', desc: '4 点固定伤害', dmg: 4 } } : findCard(uid);
+    const skill = isSlam ? slamSkillOf() : null;
+    if (isSlam && !skill.needsTarget) return;
+    const entry = isSlam ? { card: { name: skill.name, desc: skill.aimDesc,
+      dmg: skill.kind === 'attack' ? (snap.player?.atk || 0) : (skill.dmg || 0) } } : findCard(uid);
     if (!entry) return;
     const side = (kind === 'potion' || isSlam) ? 'enemy' : (targetSide(entry.card) || 'any');   // null = 无目标招式：拖到中间空地即可
     const playBlockedReason = !isSlam && kind !== 'potion' ? cardPlayBlockedReason(uid, entry.card, snap) : '';

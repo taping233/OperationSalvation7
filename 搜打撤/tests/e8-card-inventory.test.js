@@ -22,6 +22,8 @@ const APPROVED_FACE_BY_ID = {
   'tt3-noon-duel': { dmg: 2, dmgType: 'fixed' },
   // 2026-09-29 老板裁决：花瓣法阵 heal 2→3，desc「回复 3」与 before 快照一致故仅 heal 差异。
   'tt3-petal': { heal: 3 },
+  // 2026-10-02 老板拍板：自然形态改名满月形态并转牧师职业卡（id 不变，存档/卡库按 id 追踪；rules 仍由 M 批测试守护）。
+  'tt3-nature-form': { cls: '牧师', name: '满月形态', rarity: '职业', unrandom: true },
 };
 const APPROVED_RULES_BY_ID = Object.fromEntries([
   ...MIGRATED_IDS.map(id => [id, HEAL_RULES]),

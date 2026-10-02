@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { createActionQueue } from '../game/src/battle/core/battle.actions.js';
-import { groupHandCards, fanLayout } from '../game/src/battle/core/battle.hand.js';
+import { groupHandCards, fanLayout, orderHandGroups } from '../game/src/battle/core/battle.hand.js';
 import { assertUniqueZones, moveUid, zoneForUid } from '../game/src/battle/bag/battle.piles.js';
 import { intentSummary, intentViewModel } from '../game/src/battle/view/battle.intent.view.js';
 import { actionFeedback, feedbackClass, feedbackDelay } from '../game/src/battle/view/battle.feedback.js';
@@ -111,8 +111,23 @@ describe('battle architecture foundation', () => {
     expect(fanLayout(0, 15).y).toBe(0);
   });
 
-  it('does not merge different card ids just because their visible text matches', () => {
+  it('orderHandGroups：初始攻击恒排最前（2026-10-02 老板：手牌第一栏最左），其余保持相对顺序、注能主卡居尾', () => {
+    const sha = () => ({ id: 'starter-attack', name: '初始攻击', cost: 1, desc: '攻（+0）：造成等同于攻击力的伤害。' });
     const entries = [
+      { uid: 'a', card: { id: 'tt3-frostfall', name: '霜降', cost: 2, desc: 'x' } },
+      { uid: 's1', card: sha() },
+      { uid: 'b', card: { id: 'tt7-thundergrudge', name: '雷嗔', cost: 3, desc: 'y' } },
+      { uid: 's2', card: sha() },
+    ];
+    const groups = orderHandGroups(groupHandCards(entries));
+    // 初始攻击组（s1+s2 同名堆叠）恒第一；其余组保持入手相对顺序
+    expect(groups.map(group => group.uids)).toEqual([['s1', 's2'], ['a'], ['b']]);
+    // 注能主卡（self 组）不参与排序、保持居尾
+    const infused = orderHandGroups(groupHandCards([{ uid: 's3', card: sha() }, { uid: 'm', card: { id: 'tt3-skewer', name: '穿杨', cost: 2, desc: 'z' } }], { uid: 'm', need: 1, picked: [] }));
+    expect(infused.map(group => group.uids)).toEqual([['s3'], ['m']]);
+  });
+
+  it('does not merge different card ids just because their visible text matches', () => {    const entries = [
       { uid: 'a', card: { id: 'variant-a', name: '同名牌', cost: 1, desc: '相同描述' } },
       { uid: 'b', card: { id: 'variant-b', name: '同名牌', cost: 1, desc: '相同描述' } },
     ];

@@ -45,4 +45,19 @@ function fanLayout(index, count) {
   return { x: +x.toFixed(1), y, rot: 0, scale: 1 };
 }
 
-export { groupHandCards, fanLayout };
+/* —— 初始攻击恒置顶最左（2026-10-02 老板：「初始攻击」在手牌中永远显示在手牌区第一栏最左边）——
+   只改渲染权重：同名堆叠后的组做稳定分区，初始攻击组恒排最前（多张占最左连续位、
+   组间保持入手相对顺序），hand 数组语义顺序与牌局动画逻辑零改动；
+   注能主卡（self 组）不参与排序、保持居尾展示。 */
+const isStarterAttackCard = card => !!card && (card.id === 'starter-attack' || (!card.id && card.name === '初始攻击'));
+function orderHandGroups(groups) {
+  const main = groups.filter(group => group.self);
+  const rest = groups.filter(group => !group.self);
+  return [
+    ...rest.filter(group => isStarterAttackCard(group.card)),
+    ...rest.filter(group => !isStarterAttackCard(group.card)),
+    ...main,
+  ];
+}
+
+export { groupHandCards, fanLayout, orderHandGroups };

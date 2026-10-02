@@ -21,7 +21,7 @@ const BASELINE_EXPORTS = [
   'toggleInfusePick', 'cancelInfuse', 'beginInfuse', 'confirmInfuse',
   'queueCardExecution', 'aegisBlocked', 'foeIdx', 'hitFoe', 'matchHandSelectKey',
   'skipHandSelect', 'pickHandSelect', 'useItem', 'bagSlam', 'resolveDart',
-  'resolveSlam', 'addPlayerCurse', 'usePotion', 'openBag', 'closeBag', 'pickChoice',
+  'resolveSlam', 'slamSkill', 'addPlayerCurse', 'usePotion', 'openBag', 'closeBag', 'pickChoice',
   'pickDiscover', 'playerTakeHit', 'frenzyCurse', 'elCurse',
 ];
 
@@ -30,7 +30,7 @@ describe('battle.engine 导出面守卫', () => {
     expect(Object.keys(Engine).sort()).toEqual([...BASELINE_EXPORTS].sort());
   });
 
-  it('基线数量 = 65', () => {
-    expect(BASELINE_EXPORTS.length).toBe(65);
+  it('基线数量 = 66', () => {
+    expect(BASELINE_EXPORTS.length).toBe(66);
   });
 });

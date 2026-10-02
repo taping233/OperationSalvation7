@@ -32,7 +32,7 @@ const TERM_TIPS = {
   reduce:     { name: '减伤',     icon: 'plate',    text: '每次受到的伤害 -N（真实伤害除外）。' },
   dodge:      { name: '闪避',     icon: 'runner',   text: '免疫下一次攻击——完全避开该次攻击的全部伤害，每层避开 1 次；法术与真实伤害不可闪避，回合结束未用完的层数失效。' },
   swordForm:  { name: '剑仙形态', icon: 'sword',    text: '回合开始时额外抽 1 张。形态是开关型祝福，本局对战常驻。' },
-  natureForm: { name: '自然形态', icon: 'wood',     text: '回合开始时额外获得 1 点能量。形态是开关型祝福，本局对战常驻。' },
+  natureForm: { name: '满月形态', icon: 'wood',     text: '回合开始时额外获得 1 点能量。形态是开关型祝福，本局对战常驻。' },
   cosmosForm: { name: '宇宙形态', icon: 'sparkles', text: '本局对战所有卡牌变为 1 费。形态是开关型祝福，本局对战常驻。' },
   // —— 机制词（卡面描述高亮词）——
   curse:      { name: '诅咒',     text: '负面状态的统称：流血、中毒、冰冻、沉默、破甲、禁疗、灼烧。部分卡牌与「诅咒状态」联动（对被诅咒者增伤、按诅咒种类抽牌等）。' },

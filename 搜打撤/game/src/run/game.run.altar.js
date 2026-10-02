@@ -7,7 +7,7 @@
  * ============================================================ */
 import { CHARACTERS, characterFor, characterName } from '../core/characters.js';
 import { esc, escAttr } from '../core/shared.js';
-import { MAP, MODES, curLayer, enterLayer, exitToTitle, game, getActiveSlot, newUid, saveGame, scaledEnemy } from './game.session.js';
+import { MAP, MODES, bagCap, curLayer, enterLayer, exitToTitle, game, getActiveSlot, newUid, saveGame, scaledEnemy, usedSlots } from './game.session.js';
 import { createExtractionCommands, validatePendingExtraction } from '../hub/extraction.commands.js';
 import { openBaseHub } from '../hub/game.hub.js';
 
@@ -44,8 +44,8 @@ const extractionCommands = createExtractionCommands({
 
 export function openFireRest() {
   SDT.Sound.scene?.('fire', 'scene-fire-bg');
-  // 复原/发卡只在同一节点的首次进入结算（09-30 深审 WORLD-002）：复原页已挂背包返回钩子，
-  // 但任何仍可达的重入路径（关闭背包兜底回 idle 后再点节点）不得重复回复生命/掷职业卡
+  // 复原/发卡只在同一节点的首次进入结算（09-30 深审 WORLD-002）：任何仍可达的重入路径
+  // （未写 visited 就再触发本节点）不得重复回复生命/掷职业卡/重复复原
   const cellKey = `${game.layerIdx},${game.trackPos}`;
   if (game._fireRestKey !== cellKey) {
     game._fireRestKey = cellKey;
@@ -61,15 +61,32 @@ export function openFireRest() {
         grantEventCard(campCard, { reason: '营火余烬里翻出的先行者遗落卡 · 本职业限定' });
       }
     }
+    // 2026-10-02 老板：火堆不再开全列表选牌页——从消耗口袋可复原池随机发现两张并自动复原
+    //（过滤口径沿用 FIRE_RESTORABLE；池不足两张全复原，空池给提示；背包满不复原，同复原页口径）
+    const found = [];
+    for (let i = 0; i < 2; i++) {
+      const pool = game.usedPocket.filter(p => FIRE_RESTORABLE(p.card));
+      if (!pool.length) break;
+      if (usedSlots() >= bagCap()) { SDT.Sound.sfx('deny'); UI.log(`[[icon:bag]] 背包已满（${usedSlots()}/${bagCap()}），无法复原`, 'warn'); break; }
+      const p = pool[Math.floor(Random.random('pocket') * pool.length)];
+      p.count--;
+      if (p.count <= 0) game.usedPocket.splice(game.usedPocket.indexOf(p), 1);
+      game.ownedCards.push({ uid: newUid(), card: { ...p.card } });
+      found.push(p.card);
+    }
+    if (found.length) {
+      UI.log(`[[icon:wood]] 火堆余烬里翻出了 ${found.map(c => `【<b>${esc(c.name)}</b>】`).join('、')}，已复原回背包`, 'loot');
+      for (const c of found) UI.showCardReward(c, '火堆余烬里翻出的消耗卡 · 自动复原');
+    } else {
+      const blockedN = game.usedPocket.length;
+      UI.log(`[[icon:fire]] 火堆静悄悄——消耗口袋里没有可复原的卡牌${blockedN ? `（另有 ${blockedN} 张道具/装备不可在此复原）` : ''}`, 'dim');
+    }
   }
-  game.state = 'modal';
-  openPocketRestore(2, () => {
-    consumeCurrentCell();
-    game._fireRestKey = null;
-    game.state = 'idle';
-    saveGame();
-    UI.refresh(game);
-  });
+  game._fireRestKey = null;
+  consumeCurrentCell();
+  game.state = 'idle';
+  saveGame();
+  UI.refresh(game);
 }
 
 // 消耗口袋复原选牌（picks = 最多复原张数；done = 结束回调）
