@@ -21,7 +21,7 @@
     "check:staged:plan": "node scripts/acceptance-gate.mjs --staged --plan",
     "check:syntax": "node scripts/check-syntax.mjs",
     "typecheck": "node scripts/check-types.mjs",
-    "lint": "eslint game/src tests scripts/acceptance-gate.mjs",
+    "lint": "eslint game/src game/tools tests scripts \"*config.{js,mjs,cjs}\"",
     "check:quality": "npm run check:syntax && npm run validate:data && npm run typecheck && npm run lint && npm test && npm run build",
     "test:watch": "vitest",
     "handoff": "node scripts/handoff-brief.mjs",

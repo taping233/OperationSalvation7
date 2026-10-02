@@ -3,7 +3,8 @@ import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, utimesSync, w
 import os from 'node:os';
 import path from 'node:path';
 import { afterEach, describe, expect, it } from 'vitest';
-import { findSweepCandidates, formatHandoff, handoff, pendingAging, registryStaleness, unownedResolution } from '../scripts/workflow-status.mjs';
+import { commitReferences, findSweepCandidates, formatHandoff, handoff, ledgerWarnings, pendingAging, registryStaleness, unownedResolution } from '../scripts/workflow-status.mjs';
+import { classifyLedgerRow, readLedger } from '../scripts/workflow-ledger.mjs';
 
 const roots = [];
 function put(root, file, content) {
@@ -45,6 +46,55 @@ afterEach(() => {
 });
 
 describe('任务定向接手简报', () => {
+  it('生命周期分类保留审计，完成未提交保护归属但不计编辑占用；已决不计活账', () => {
+    const { root } = fixture();
+    const registry = path.join(root, 'docs/PARALLEL-REGISTRY.md');
+    writeFileSync(registry, readFileSync(registry, 'utf8')
+      .replace('卡牌 | 09-30 | 编辑中', '卡牌 | 09-30 | 完成未提交')
+      .replace('邻域 | 09-30 | 编辑中', '邻域 | 09-30 | 已落库 fd38468'));
+    const pending = path.join(root, 'docs/PENDING.md');
+    writeFileSync(pending, readFileSync(pending, 'utf8').replace('| 1 |', '| ~~1~~ |'));
+    const ledger = readLedger(root, 'registry');
+    expect(ledger.rows).toHaveLength(3);
+    expect(ledger.counts).toMatchObject({ editing: 1, 'complete-uncommitted': 1, settled: 1 });
+    expect(ledger.groups['complete-uncommitted'][0]).toMatchObject({ key: 'WF-cards', isOpen: true, isBlocking: false });
+    const report = handoff(root);
+    expect(report.registry.rows.map(row => row.key)).toEqual(['WF-chinese']);
+    expect(report.registry.completed.map(row => row.key)).toEqual(['WF-cards']);
+    expect(report.registry.settled.map(row => row.key)).toEqual(['WF-other']);
+    expect(report.pending.rows.map(row => row.key)).toEqual(['2']);
+    expect(report.counts).toMatchObject({ registry: 1, completed: 1, settled: 1, pending: 1, resolved: 1 });
+    expect(report.warnings.some(warning => warning.code === 'settled-row-remains')).toBe(false);
+    expect(report.audit.warnings.some(warning => warning.code === 'settled-row-remains')).toBe(true);
+    expect(handoff(root, { details: true }).warnings.some(warning => warning.code === 'settled-row-remains')).toBe(true);
+    expect(formatHandoff(report)).toContain('未提交归属');
+    expect(report.registry.allRows).toHaveLength(3);
+  });
+  it('未知状态保守占用，待验收仍占用；局部完成不吞掉剩余拍板项', () => {
+    expect(classifyLedgerRow({ cells: ['Alice', 'scripts/a.mjs', '', '', '等待结果'] }, 'registry').isBlocking).toBe(true);
+    expect(classifyLedgerRow({ cells: ['Alice', 'scripts/a.mjs', '', '', '待验收'] }, 'registry').isBlocking).toBe(true);
+    expect(classifyLedgerRow({ cells: ['27', '~~六提案~~【部分销账】', '', '', '剩 R5 待拍板'] }, 'pending').isOpen).toBe(true);
+    expect(classifyLedgerRow({ cells: ['21', '完成事项', '', '', '完结'] }, 'pending').isOpen).toBe(false);
+  });
+  it('只对当前编辑属地校验路径，不把历史叙述、划线属地和纯数字日期当异常', () => {
+    const { root } = fixture();
+    const registry = path.join(root, 'docs/PARALLEL-REGISTRY.md');
+    writeFileSync(registry, readFileSync(registry, 'utf8')
+      .replace('game/src/cards/ | 卡牌', 'game/src/cards/；~~scripts/removed.mjs~~；scripts/workflow-{status,ledger}.mjs、handoff-brief.mjs | 卡牌历史 scripts/legacy.mjs，日期 20261002'));
+    const report = handoff(root);
+    expect(report.audit.warnings.filter(warning => ['missing-pointer', 'unconfirmed-commit'].includes(warning.code))).toEqual([]);
+    expect(commitReferences('日期 20261002；统计 1234567；提交 `1234567`；提交 abcdef1'))
+      .toEqual(['1234567', 'abcdef1']);
+  });
+  it('完成未提交和划线属地不报编辑冲突，目录边界重叠会报', () => {
+    const row = (owner, territory, status) => ({ cells: [owner, territory, '', '', status] });
+    const warnings = ledgerWarnings([
+      row('Alice', 'game/src/cards/', '编辑中'), row('Bob', 'game/src/cards/a.js', '编辑中'),
+      row('Chen', 'game/src/cards/', '完成未提交'), row('Dave', '~~game/src/cards/~~ game/src/cards2/', '编辑中'),
+    ], 'registry');
+    expect(warnings).toHaveLength(1);
+    expect(warnings[0]).toMatchObject({ code: 'overlapping-path', owners: ['Alice', 'Bob'] });
+  });
   it('任务 id 与登记 WF-id 同向，目录边界不包含 cards2，JSON 明确省略', () => {
     const { root } = fixture();
     for (const task of ['cards', 'WF-cards']) {
@@ -189,6 +239,16 @@ describe('登记行失真核对 registryStaleness', () => {
     expect(warnings).toHaveLength(1);
     expect(warnings[0].code).toBe('stale-claim');
   });
+  it('目录内含当前改动不报停滞，带项目前缀属地也能归一', () => {
+    const root = freshRoot();
+    const warnings = registryStaleness(root, [row(['Friday（G）', '搜打撤/game/src/cards/', '事项', '10-01', '编辑中'], 'WF-g')], ['game/src/cards/a.js']);
+    expect(warnings).toEqual([]);
+  });
+  it('存在缺失或简写属地时不能凭剩余老文件判整个登记停滞', () => {
+    const root = freshRoot();
+    expect(registryStaleness(root, [row(['Friday（H）', 'game/src/cards/ scripts/workflow-{status,ledger}.mjs', '事项', '10-01', '编辑中'], 'WF-h')], []))
+      .toEqual([]);
+  });
 });
 
 describe('PENDING 活账老化 pendingAging', () => {
@@ -210,6 +270,18 @@ describe('PENDING 活账老化 pendingAging', () => {
     const now = new Date('2027-01-05T00:00:00Z');
     const aging = pendingAging([row('9', ['#', '去年账', '12-28', 'src', ''])], { now });
     expect(aging.oldest[0].ageDays).toBe(8);
+  });
+  it('划线已决、完结项与非法日期不老化，完整年份不会误回退', () => {
+    const now = new Date('2026-10-02T00:00:00Z');
+    const aging = pendingAging([
+      row('1', ['~~1~~', '已決', '09-01', 'src', '']),
+      row('2', ['2', '完结', '09-01', 'src', '完结']),
+      row('3', ['3', '坏日期', '2026-02-30', 'src', '']),
+      row('4', ['4', '未来', '2027-01-01', 'src', '']),
+      row('5', ['5', '老年', '2025-10-01', 'src', '']),
+    ], { now });
+    expect(aging.oldest).toEqual([{ key: '5', item: '老年', ageDays: 366 }]);
+    expect(aging.alertCount).toBe(1);
   });
 });
 

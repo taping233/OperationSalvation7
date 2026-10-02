@@ -10,7 +10,7 @@
 
 ## 流程工具与未排期修复
 
-- 09-30 双端流程规范化后续：内置浏览器快照/驱动适配、handoff 过时状态/失效指针提示、按文件内容与环境复用验收证据；先验证规范再立工具任务，本轮不改脚本或启服。
+- 已有流程入口：内置浏览器 `browser import/compare` 与 `iab-drive`、handoff 维护审计、冻结 index 的 gateReceipt 复核已在当前源码中提供，使用见 [WORKFLOW-TOOLS](WORKFLOW-TOOLS.md)与[工具箱](AGENT-TOOLBOX.md)；客户端兼容性与未覆盖场景仍按实际证据核验，不再把工具存在列为待实现。
 - 原 PENDING #18（夜班 U3 复审 R2）：`closeTopOverlayByEsc` 的 moveCancel 函数级无 IME 守卫。触发需 body 焦点、输入法组合态与 overlay 同时成立；已有 overlay 捕获链与输入焦点守卫覆盖，P3 未排期、未修复。当前行号需实施前重查；不作为等待老板重复批准的活账。
 
 ## M1 内容完整度

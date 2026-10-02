@@ -1,52 +1,18 @@
-# QUICKSTART：5 分钟上手搜打撤开发
+# QUICKSTART：搜打撤开发入口
 
-> 新会话/新开发者从这里开始。本页只指路，现行事实以源码、实时 Git 与台账为准；细节入口在各节末尾。
+本页只指路。日常路径为 **按目标 → 主动作 → 定向反馈 → 按授权收官**，完整办法只在 [WORKFLOW-TOOLS](WORKFLOW-TOOLS.md) 维护；权限与项目边界见根 AGENTS.md。
 
-## 0. 一次性环境核验
-
-- Node 22+，`npm install`（依赖锁定在 package-lock）。
-- **提交门挂载**：`git config core.hooksPath` 应指向 `搜打撤/.githooks`；新克隆/新机器执行一次 `node scripts/setup-commit-gate.mjs`——不挂=提交没有门，红灯用例会直接进主干。
-- 只开发 Vite 版；Godot/Unity/EXE 冻结。游戏验收只用当前平台内置浏览器（当前窗口）；主线 dev 端口 5200，产物 preview 8139。完整口径见根 AGENTS.md。
-
-## 1. 接手（1 分钟）
-
-```sh
-cd 搜打撤 && npm run handoff
-```
-
-一条命令看 HEAD、工作树、并行占用、待拍板。多会话在场时改共享文件：动作先行、登记同轮紧随（细则见根 AGENTS.md）；单会话小修免登记直改。
-
-## 2. 定任务
-
-- 单问直接答；小修直改并验相关范围。
-- 玩法新规则 / 存档契约 / 跨域接口不明确：先用一页规格（[SPEC-PROCESS](SPEC-PROCESS.md)）。
-- 确需老板拍板的进 [PENDING](PENDING.md)，不阻塞手头其他事。
-
-## 3. 做改动 + 验证（秒级）
-
-```sh
-npm run test:target -- tests/<相关测试>.test.js   # 定向测试（秒级）
-npm run check:staged:plan                          # 预演：提交门会选什么
-```
-
-- **混树提醒**：工作树有其他会话的未暂存改动时，`check:staged:plan` 会拒绝并列出来源（设计内保护）；此时用 `npm run check:staged:isolate -- --plan` 冻结 index 单独验证自己的暂存内容。
-
-- 提交钩子按暂存路径**自动**选定向测试并打印理由；分类规则见[质量门](quality-gates.md)。
-- **全量以 CI 为准**；本地全量 `npm test`（并行约 1.5 分钟）只在阶段收尾且 CI 不可用时跑，红灯先查 PENDING。
-- 验收分级（纯文档 / A 档删除 / B 档语义各自怎么验）：[质量门](quality-gates.md)一张表。
-
-## 4. 提交与收官
-
-- `git commit` 触发门：过了就是 PASS，红灯看门打印的理由，按理由处理，不 `--no-verify` 绕过。
-- 提交/推送/发布须老板**明确授权**，任务完成不自动提交；打包提交默认口径见根 AGENTS.md。
-- 收官：handoff 复核 → 登记行销账（`workflow -- ledger registry close`）→ 证据入 `docs/evidence/<日期>-<任务>/`。
-
-## 卡住了找谁
-
-| 情况 | 入口 |
+| 当前需要 | 最短入口 |
 | --- | --- |
-| 工具怎么用（task/ledger/verify/sweep） | [WORKFLOW-TOOLS](WORKFLOW-TOOLS.md) |
-| 测试/验收口径、为什么红了 | [质量门](quality-gates.md)、[开发指南](development.md) |
-| 改某块之前先看什么 | [文档导航·按改动找文档](README.md) |
-| 并行会话冲突、资源占用 | [热点登记](PARALLEL-REGISTRY.md) |
-| 停滞/中断任务盘点 | `npm run --silent workflow -- sweep` |
+| 单问、小改 | 直接答或处理目标，读取相关资料、验证相关范围 |
+| 跨域、长任务、接班或改共享文件 | 在 `搜打撤` 运行 `npm run handoff`，看实时 Git、编辑占用、完成归属与待决策摘要 |
+| 找某块的规范与代码入口 | [文档导航·按改动找文档](README.md#按改动找文档) |
+| 选测试与保留证据 | [流程指南·定向反馈](WORKFLOW-TOOLS.md#定向反馈)、[质量门](quality-gates.md) |
+| 收官或老板已授权提交 | [流程指南·按授权收官](WORKFLOW-TOOLS.md#按授权收官) |
+| 复制普通小修或混树提交示例 | [两条操作路径](WORKFLOW-TOOLS.md#两条操作路径)，跨会话 task 模板按需取用 |
+| 并行派工 | [派工手册](PARALLEL-DISPATCH-PLAYBOOK.md) |
+| 查看工具能力、历史经验 | [Agent 工具箱](AGENT-TOOLBOX.md)、`npm run memory:discover -- --json` |
+
+新机器才核对环境：Node 22、现有依赖与锁文件，以及 `git config core.hooksPath` 是否指向 `搜打撤/.githooks`。缺失项按任务授权补齐；命令示例不授权安装或改 Git 配置。不要每轮重做环境初始化。
+
+检查结果必须列实际范围：定向通过、冻结 index 通过、全量通过、实页通过分别记录；未推送改动不能假定已有 CI 覆盖。红灯按输出定性，完成任务本身不授权提交。

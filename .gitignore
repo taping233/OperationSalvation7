@@ -29,3 +29,18 @@ output/
 /SoudacheGodot/**/obj/
 /SoudacheGodot/build/
 /SoudacheGodot/.render-check/
+
+# evidence 二进制红线（10-02 老板批）：大件/多媒体验收证据不进 git，只记相对路径+SHA256+获取方式（口径在根 AGENTS.md 流程登记节；历史大件处置挂搜打撤/docs/PENDING.md #32）
+搜打撤/docs/evidence/**/*.wav
+搜打撤/docs/evidence/**/*.mp3
+搜打撤/docs/evidence/**/*.ogg
+搜打撤/docs/evidence/**/*.flac
+搜打撤/docs/evidence/**/*.mp4
+搜打撤/docs/evidence/**/*.webm
+搜打撤/docs/evidence/**/*.zip
+搜打撤/docs/evidence/**/*.7z
+搜打撤/docs/evidence/**/*.tar
+搜打撤/docs/evidence/**/*.ttf
+搜打撤/docs/evidence/**/*.otf
+搜打撤/docs/evidence/**/*.woff
+搜打撤/docs/evidence/**/*.woff2

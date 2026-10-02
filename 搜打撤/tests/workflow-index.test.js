@@ -1,6 +1,7 @@
 import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import { createHash } from 'node:crypto';
 import { afterEach, describe, expect, it } from 'vitest';
 import { validateDocumentation } from '../scripts/index-validation.mjs';
 
@@ -43,12 +44,11 @@ describe('现行文档机械复核', () => {
     expect(result.findings.map(item => item.kind)).toEqual(['codex-only-browser', 'fixed-full-acceptance']);
     expect(result.findings.every(item => item.authority === 'current-rule')).toBe(true);
   });
-  it('日期历史段只报告历史候选，禁止自动提交不误报', () => {
+  it('日期历史段与禁止自动提交不产生现行规则噪声', () => {
     const root = fixture();
     put(root, 'docs/RULE.md', '文档状态：现行规范\n## 2026-09-28\n自动提交\n## 当前规则\n不自动提交\n完成后提交代码');
     const result = validateDocumentation(root);
     expect(result.findings).toEqual([
-      expect.objectContaining({ line: 3, authority: 'historical-section', reason: '历史日期段命中，仅提示来源核对，不判定现行冲突' }),
       expect.objectContaining({ line: 6, authority: 'current-rule', kind: 'implicit-commit' }),
     ]);
   });
@@ -87,5 +87,53 @@ describe('口径真源检测 duplicated-rule', () => {
     put(root, 'docs/guide.md', '# 指南\n浏览器边界见 AGENTS.md；冻结口径见总纲。\n\n## 2026-09-01 历史记录\n当时决定 Godot/Unity 冻结。\n');
     const result = validateDocumentation(root);
     expect(result.findings.filter(item => item.kind === 'duplicated-rule')).toEqual([]);
+  });
+  it('包含完整短语的指针与分级导航不报重复规则', () => {
+    const root = fixture();
+    put(root, 'docs/guide.md', '仅用内置浏览器，完整口径见根 AGENTS.md。\n| B 档必须验收 | 见质量门 |\nA 档 / B 档入口见 quality-gates.md。\n每次交付说明最近全量覆盖版本；不要从落库推导固定全量。');
+    expect(validateDocumentation(root).findings.filter(item => item.kind === 'duplicated-rule')).toEqual([]);
+    expect(validateDocumentation(root).findings.filter(item => item.kind === 'fixed-full-acceptance')).toEqual([]);
+  });
+});
+
+describe('文档结构硬契约', () => {
+  function archive(root) {
+    const original = '历史执行器原文字节';
+    put(root, 'docs/archive/workflow-test/original.txt', original);
+    put(root, 'docs/WORKFLOW-TOOLS.md', '# 现行替代入口');
+    const item = { source: 'scripts/retired.mjs', target: 'docs/archive/workflow-test/original.txt', replacedBy: 'docs/WORKFLOW-TOOLS.md',
+      sha256: createHash('sha256').update(original).digest('hex') };
+    put(root, 'docs/archive/workflow-test/manifest.json', JSON.stringify({ items: [item] }));
+    put(root, 'docs/archive/workflow-test/source-manifest.json', JSON.stringify({ items: [] }));
+    return item;
+  }
+  it('允许来源退役；原文字节和替代入口必须仍可核对', () => {
+    const root = fixture();
+    archive(root);
+    expect(validateDocumentation(root).ok).toBe(true);
+    put(root, 'docs/archive/workflow-test/original.txt', '被改写');
+    expect(validateDocumentation(root)).toMatchObject({ ok: false, findings: [expect.objectContaining({ kind: 'invalid-archive-contract', review: false })] });
+  });
+  it('缺失替代入口、越界归档路径都失败', () => {
+    const root = fixture();
+    const item = archive(root);
+    item.replacedBy = 'docs/missing.md';
+    put(root, 'docs/archive/workflow-test/manifest.json', JSON.stringify({ items: [item] }));
+    expect(validateDocumentation(root).ok).toBe(false);
+    item.replacedBy = 'docs/WORKFLOW-TOOLS.md';
+    item.target = '../outside.txt';
+    put(root, '../outside.txt', '历史执行器原文字节');
+    put(root, 'docs/archive/workflow-test/manifest.json', JSON.stringify({ items: [item] }));
+    expect(validateDocumentation(root).ok).toBe(false);
+  });
+  it('预算以 UTF-8 字节计数，域表漂移阻断', () => {
+    const root = fixture();
+    put(root, '../AGENTS.md', '规'.repeat(2049));
+    for (const file of ['README', 'QUICKSTART', 'WORKFLOW-TOOLS', 'quality-gates']) put(root, `docs/${file}.md`, '文'.repeat(3100));
+    put(root, 'game/src/README.md', '| `missing/` | 域 |');
+    mkdirSync(path.join(root, 'game/src/actual'), { recursive: true });
+    const result = validateDocumentation(root);
+    expect(result.ok).toBe(false);
+    expect(result.findings.filter(item => !item.review).map(item => item.kind)).toEqual(['rule-budget', 'rule-budget', 'domain-table-drift']);
   });
 });

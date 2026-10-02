@@ -30,7 +30,7 @@ for (const f of files) if (!fs.existsSync(path.join(SRC_DIR, f))) { console.erro
 function unwrapIIFE(src) {
   let ast;
   try { ast = parse(src, { ecmaVersion: 'latest', sourceType: 'script' }); }
-  catch (e) { throw new Error(`parse 失败: ${e.message}`); }
+  catch (e) { throw new Error(`parse 失败: ${e.message}`, { cause: e }); }
   if (ast.body.length !== 1) return src;
   const only = ast.body[0];
   if (only.type !== 'ExpressionStatement') return src;

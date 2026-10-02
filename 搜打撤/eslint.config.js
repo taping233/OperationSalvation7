@@ -228,6 +228,25 @@ const nodeGlobals = {
   require: 'readonly',
   module: 'writable',
   exports: 'writable',
+  setImmediate: 'readonly',
+  clearImmediate: 'readonly',
+  WebSocket: 'readonly',
+  console: 'readonly',
+  setTimeout: 'readonly',
+  clearTimeout: 'readonly',
+  setInterval: 'readonly',
+  clearInterval: 'readonly',
+  queueMicrotask: 'readonly',
+  structuredClone: 'readonly',
+  fetch: 'readonly',
+  performance: 'readonly',
+  crypto: 'readonly',
+  URL: 'readonly',
+  URLSearchParams: 'readonly',
+  TextEncoder: 'readonly',
+  TextDecoder: 'readonly',
+  AbortController: 'readonly',
+  AbortSignal: 'readonly',
 };
 
 // 项目全局：window.SDT 挂载点与 vite define 注入的构建期常量。
@@ -239,6 +258,33 @@ const projectGlobals = {
 };
 
 export default [
+  {
+    files: ['scripts/**/*.{js,mjs,cjs}', 'game/tools/**/*.{js,mjs,cjs}', '*config.{js,mjs,cjs}'],
+    languageOptions: {
+      ecmaVersion: 'latest',
+      globals: { ...nodeGlobals },
+    },
+    rules: {
+      ...recommendedRules,
+      // Old one-off tools contain unused captures and literal regex escapes. Keep
+      // this expansion focused on correctness instead of bulk cleanup.
+      'no-unused-vars': 'off',
+      'no-useless-assignment': 'off',
+      'no-useless-escape': 'off',
+      'no-empty': ['error', { allowEmptyCatch: true }],
+    },
+  },
+  {
+    files: ['scripts/**/*.{js,mjs}', 'game/tools/**/*.mjs', '*config.{js,mjs}'],
+    languageOptions: {
+      globals: { require: 'off', module: 'off', exports: 'off', __dirname: 'off', __filename: 'off' },
+    },
+  },
+  {
+    // Some asset tools serialize browser callbacks; their DOM globals are intentional.
+    files: ['game/tools/**/*.{js,mjs,cjs}', 'scripts/workflow-browser.mjs', 'scripts/perf-ledger-capture.mjs'],
+    languageOptions: { globals: { ...browserGlobals } },
+  },
   {
     files: ['game/src/**/*.js', 'tests/**/*.js'],
     languageOptions: {

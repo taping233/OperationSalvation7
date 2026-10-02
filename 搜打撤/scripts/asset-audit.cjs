@@ -1,11 +1,13 @@
 const { createHash } = require('node:crypto');
 const { existsSync, readFileSync, readdirSync, statSync } = require('node:fs');
 const path = require('node:path');
+const { auditAssets, inspectAssets } = require('./asset-audit-lib.cjs');
 
 const root = path.resolve(__dirname, '..');
 const sourceRoot = path.join(root, 'game', 'assets');
-const buildRoot = process.argv[2]
-  ? path.resolve(root, process.argv[2])
+const buildArgument = process.argv[2] && !process.argv[2].startsWith('--') ? process.argv[2] : null;
+const buildRoot = buildArgument
+  ? path.resolve(root, buildArgument)
   : path.join(root, 'desktop-app', 'game');
 
 function walk(dir) {
@@ -56,34 +58,32 @@ function duplicateSummary(files, rootDir) {
   });
 }
 
-const source = summarize('Source assets', sourceRoot);
-if (existsSync(buildRoot)) {
-  const build = summarize('Packaged game', buildRoot);
-  console.log(`Package/source ratio: ${(build.bytes / source.bytes * 100).toFixed(1)}%`);
-} else {
-  console.log('Packaged game: not built (run npm run build first)');
-}
-duplicateSummary(source.files, sourceRoot);
-
-// 资产清单校验（create-game-assets）：新增未登记 / 已删仍登记 / 授权待确认的资产都报出来
-const manifestPath = path.join(sourceRoot, 'asset-manifest.json');
-if (existsSync(manifestPath)) {
-  const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
-  const listed = new Map(manifest.assets.map(a => [a.path.replace(/\\/g, '/'), a]));
-  // 文档类（md/txt/gitkeep）不算资产，不参与清单比对
-  const isDoc = f => /\.(md|txt)$/i.test(f) || f.endsWith('.gitkeep') || f === 'asset-manifest.json';
-  const actual = new Set(source.files.map(item => path.relative(sourceRoot, item.file).replace(/\\/g, '/')).filter(p => !isDoc(p)));
-  const unlisted = [...actual].filter(p => !listed.has(p));
-  const ghost = [...listed.keys()].filter(p => !actual.has(p));
-  const noLicense = [...listed.values()].filter(a => actual.has(a.path) && String(a.license || '').startsWith('未登记'));
-  if (unlisted.length || ghost.length || noLicense.length) {
-    console.log(`Manifest drift: ${unlisted.length} unlisted, ${ghost.length} ghost, ${noLicense.length} license-pending`);
-    unlisted.slice(0, 8).forEach(p => console.log(`  + unlisted: ${p}`));
-    ghost.slice(0, 8).forEach(p => console.log(`  - ghost:    ${p}`));
-    noLicense.slice(0, 8).forEach(a => console.log(`  ? license:  ${a.path}`));
-  } else {
-    console.log(`Manifest: all ${actual.size} assets registered with license`);
+function main() {
+  const check = process.argv.includes('--check');
+  const pathsIndex = process.argv.indexOf('--paths-json');
+  if (pathsIndex >= 0 && !process.argv[pathsIndex + 1]) throw new Error('--paths-json requires a JSON array');
+  const paths = pathsIndex >= 0 ? JSON.parse(process.argv[pathsIndex + 1]) : [];
+  if (!check) {
+    const source = summarize('Source assets', sourceRoot);
+    if (existsSync(buildRoot)) {
+      const build = summarize('Packaged game', buildRoot);
+      console.log(`Package/source ratio: ${(build.bytes / source.bytes * 100).toFixed(1)}%`);
+    } else {
+      console.log('Packaged game: not built (run npm run build first)');
+    }
+    duplicateSummary(source.files, sourceRoot);
   }
-} else {
-  console.log('Manifest: asset-manifest.json missing');
+  const result = check ? auditAssets({ root, paths }) : inspectAssets(root);
+  const counts = result.issues.reduce((map, issue) => { map[issue.code] = (map[issue.code] || 0) + 1; return map; }, {});
+  console.log(`Manifest drift: ${JSON.stringify(counts)}`);
+  if (check) {
+    console.log(`Asset check: ${result.errors.length} errors, ${result.warnings.length} unchanged historical warnings (docs/asset-audit-debt.json)`);
+    result.errors.slice(0, 30).forEach(issue => console.error(`  ERROR ${issue.code}: ${issue.path} (${issue.detail})`));
+    if (!result.ok) process.exitCode = 1;
+  } else {
+    result.issues.slice(0, 12).forEach(issue => console.log(`  ${issue.code}: ${issue.path} (${issue.detail})`));
+    console.log('Run --check [--paths-json "[project paths]"] to block new debt and changed assets with unresolved registration.');
+  }
 }
+
+try { main(); } catch (error) { console.error(`Asset audit failed: ${error.message}`); process.exitCode = 1; }

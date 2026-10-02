@@ -1,8 +1,12 @@
 import { describe, expect, it } from 'vitest';
-import { existsSync, readdirSync, readFileSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync } from 'node:fs';
+import os from 'node:os';
+import { parseArgs } from 'node:util';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { createHash } from 'node:crypto';
+import { validateDocumentation } from '../scripts/index-validation.mjs';
+import { applyTask, planTask, readTask } from '../scripts/workflow-task.mjs';
+import { taskInputFromValues } from '../scripts/workflow-task-input.mjs';
 
 // 文档一致性守卫（2026-09-29 体系降本批）：把「文档声称的结构事实」交给测试盯，
 // 漂移当场红，不再依赖人或会话记得对账。范围只覆盖现行文档层（docs 根 +
@@ -34,8 +38,65 @@ const relativeLinkTargets = markdown => {
 };
 
 describe('文档一致性守卫', () => {
-  it('流程工具现行入口与归档索引的链接可达，快照原文不追改', () => {
-    const documents = ['README.md', 'docs/WORKFLOW-TOOLS.md', 'docs/SPEC-PROCESS.md',
+  it('可复制 task 直接字段示例通过适配及真实任务模型，关闭仍为完成未提交', () => {
+    const guide = readFileSync(resolve(repoRoot, 'docs/WORKFLOW-TOOLS.md'), 'utf8');
+    const readExample = action => {
+      const found = guide.match(new RegExp(`# task-${action}-example\\r?\\n([^\\r\\n]+)`));
+      expect(found, `${action} 示例必须保留可复制 CLI`).not.toBeNull();
+      const cli = found[1].split(`workflow -- task ${action} `)[1].split(' | ')[0];
+      const args = [...cli.matchAll(/"([^"]*)"|(\S+)/g)].map(match => match[1] ?? match[2]);
+      const { values } = parseArgs({ args, options: {
+        task: { type: 'string' }, owner: { type: 'string' }, goal: { type: 'string' }, paths: { type: 'string' },
+        'done-when': { type: 'string', multiple: true }, stage: { type: 'string' }, 'done-when-confirmed': { type: 'boolean' },
+        check: { type: 'string', multiple: true }, unverified: { type: 'string', multiple: true }, json: { type: 'boolean' },
+      } });
+      expect(values.task).toBe('WF-example');
+      expect(values.owner).toBe('Friday');
+      return taskInputFromValues(action, values);
+    };
+    const fixture = mkdtempSync(resolve(os.tmpdir(), 'sdt-doc-task-example-'));
+    const identity = { id: 'WF-example', date: '2026-10-02', owner: 'Friday' };
+    const cleanup = () => {
+      const prefix = resolve(os.tmpdir(), 'sdt-doc-task-example-');
+      if (!fixture.startsWith(prefix) || fixture.slice(prefix.length).includes('\\') || fixture.slice(prefix.length).includes('/')) throw new Error('拒绝清理非自有示例 fixture');
+      rmSync(fixture, { recursive: true, force: true });
+    };
+    try {
+      mkdirSync(resolve(fixture, 'docs'), { recursive: true });
+      const start = planTask(fixture, { ...identity, action: 'start', input: readExample('start') });
+      applyTask(fixture, start, 'absent');
+      expect(readTask(fixture, identity).task.stage).toBe('doing');
+      const close = planTask(fixture, { ...identity, action: 'close', input: readExample('close') });
+      applyTask(fixture, close, close.expectedSha256);
+      expect(readTask(fixture, identity).task).toMatchObject({ stage: 'complete-uncommitted', closure: { doneWhenConfirmed: true } });
+      expect(guide).toContain('--apply --expect $closePlan.expectedSha256');
+    } finally {
+      cleanup();
+    }
+  });
+
+  it('混树示例先审查范围，再暂存、冻结、核验类型化 receipt 状态和相同计划执行', () => {
+    const guide = readFileSync(resolve(repoRoot, 'docs/WORKFLOW-TOOLS.md'), 'utf8');
+    const example = guide.slice(guide.indexOf('### 混树：'), guide.indexOf('### 仅需跨会话跟踪时：'));
+    const steps = ['workflow -- ship --paths $completePaths --json', 'git add -- $files', 'workflow -- staged --task WF-example --plan --json',
+      'workflow -- staged --task WF-example --json', '$frozen.validation.reusableReceipt',
+      'workflow -- ship --paths $completePaths --receipt $receipt --json',
+      'workflow -- ship --paths $completePaths --receipt $receipt --apply --expect $ship.planSha256 --json'];
+    let previous = -1;
+    for (const step of steps) {
+      const position = example.indexOf(step);
+      expect(position, step).toBeGreaterThan(previous);
+      previous = position;
+    }
+    expect(example).toContain('空 index 或纯文档 skip 不是 passed receipt');
+    expect(example).toContain('已有明确提交授权');
+    expect(example).toContain('$ship.receiptValidity.eligible');
+    expect(example).toContain('不自动重试');
+  });
+
+  // 隔离快照只含已暂存文件且按 index 字节落盘，档案原文/链接可达在快照内不成立；staged 门内跳过，工作树门与 CI 覆盖。
+  it.skipIf(Boolean(process.env.SDT_STAGED_SNAPSHOT))('流程工具现行入口与归档索引的链接可达，快照原文不追改', () => {
+    const documents = ['README.md', 'docs/WORKFLOW-TOOLS.md',
       'docs/production/management/ITERATION-BOARD.md', 'docs/production/management/NEXT-CYCLE-TECH-PLAN.md',
       'docs/production/engineering/MAKER-HANDBOOK.md', 'docs/production/qa/ACCEPTANCE-MATRIX.md',
       'docs/archive/workflow-2026-09-30/README.md', 'docs/archive/workflow-routing-2026-09-30/README.md',
@@ -46,16 +107,8 @@ describe('文档一致性守卫', () => {
         expect(existsSync(resolve(file, '..', target)), `${document} -> ${target}`).toBe(true);
       }
     }
-    const items = ['workflow-2026-09-30', 'workflow-routing-2026-09-30', 'workflow-completion-2026-09-30'].flatMap(batch =>
-      JSON.parse(readFileSync(resolve(repoRoot, 'docs/archive', batch, 'manifest.json'), 'utf8')).items);
-    items.push(...JSON.parse(readFileSync(resolve(repoRoot, 'docs/archive/workflow-completion-2026-09-30/source-manifest.json'), 'utf8')).items);
-    expect(items).toHaveLength(12);
-    for (const item of items) {
-      expect(existsSync(resolve(repoRoot, item.source))).toBe(true);
-      expect(existsSync(resolve(repoRoot, item.target))).toBe(true);
-      expect(existsSync(resolve(repoRoot, item.replacedBy))).toBe(true);
-      expect(createHash('sha256').update(readFileSync(resolve(repoRoot, item.target))).digest('hex')).toBe(item.sha256);
-    }
+    // 与 docs:check 共用契约：历史 source 可退役，归档原文及现行替代入口不可丢失。
+    expect(validateDocumentation(repoRoot).findings.filter(item => !item.review)).toEqual([]);
   });
   it('src/README 域表与 game/src 顶层目录一一对应（generated 除外，正文单列）', () => {
     const srcDir = resolve(repoRoot, 'game/src');

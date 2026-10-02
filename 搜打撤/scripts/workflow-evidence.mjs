@@ -1,18 +1,20 @@
 import { spawn, spawnSync } from 'node:child_process';
 import { randomUUID } from 'node:crypto';
-import { appendFileSync, existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { appendFileSync, existsSync, mkdirSync, readdirSync, readFileSync, readlinkSync, statSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { hash } from './workflow-ledger.mjs';
 import { currentDocuments, filesUnder, git } from './workflow-status.mjs';
-import { dependencyScope } from './workflow-dependencies.mjs';
+import { dependencyScope, inputInventory } from './workflow-dependencies.mjs';
+import { toProjectPath } from './gate-plan.mjs';
 
 export const WATCHED = ['game/src', 'game/data', 'game/css', 'game/tools', 'tests', 'scripts', 'narrative'];
 export const STATE_FILES = ['docs/PARALLEL-REGISTRY.md', 'docs/PENDING.md', 'docs/STATUS.md'];
 
 function groupForFile(file) {
   const normalized = file.replaceAll('\\', '/');
+  if (normalized === 'docs/asset-audit-debt.json') return 'code';
   if (STATE_FILES.includes(normalized) || /^docs\/evidence\/[^/]+\/task\.json$/.test(normalized)) return 'state';
-  if (normalized.startsWith('docs/') || ['README.md', 'AGENTS.md'].includes(normalized)) return 'docs';
+  if (normalized.startsWith('docs/') || ['README.md', 'AGENTS.md', '../AGENTS.md'].includes(normalized)) return 'docs';
   return 'code';
 }
 
@@ -41,12 +43,14 @@ export function safeId(value) {
   return value;
 }
 
-export function fingerprint(root, { documents = false, roots } = {}) {
+export function fingerprint(root, { documents = false, roots, assets = false } = {}) {
   const selection = roots?.length ? dependencyScope(root, roots) : { mode: 'project', roots: [], reason: '完整项目范围' };
   const files = selection.mode === 'targeted' ? [...selection.files] : [...WATCHED.flatMap(directory => filesUnder(root, directory))];
-  files.push(...STATE_FILES.filter(file => existsSync(path.join(root, file))),
-    ...stateTaskFiles(root));
-  if (documents) {
+  if (selection.mode !== 'targeted' || !selection.contracts?.length || !selection.contracts.every(contract => contract.kind === 'fixture')) {
+    files.push(...STATE_FILES.filter(file => existsSync(path.join(root, file))), ...stateTaskFiles(root));
+  }
+  const allDocuments = documents && selection.mode === 'project';
+  if (allDocuments) {
     files.push(...currentDocuments(root), ...filesUnder(root, 'docs/archive').filter(file => /\.(?:md|json|html|js|css)$/.test(file)));
     if (existsSync(path.join(root, 'README.md'))) files.push('README.md');
   }
@@ -55,12 +59,38 @@ export function fingerprint(root, { documents = false, roots } = {}) {
       if (entry.isFile() && /\.(?:html|js|json)$/.test(entry.name)) files.push('game/' + entry.name);
     }
   }
-  for (const file of ['package.json', 'package-lock.json', 'vite.config.js', 'vite.config.mjs', 'vitest.config.js',
-    'vitest.config.mjs', 'eslint.config.js', 'eslint.config.mjs']) if (existsSync(path.join(root, file))) files.push(file);
+  for (const file of ['package.json', 'package-lock.json', 'vite.config.js', 'vite.config.mjs', 'vite.config.cjs', 'vitest.config.js',
+    'vitest.config.mjs', 'vitest.config.cjs', 'eslint.config.js', 'eslint.config.mjs', 'eslint.config.cjs', '.githooks/pre-commit']) {
+    if (existsSync(path.join(root, file))) files.push(file);
+  }
+  if (assets) files.push(...filesUnder(root, 'game/assets'),
+    ...['docs/asset-audit-debt.json'].filter(file => existsSync(path.join(root, file))));
   for (const entry of readdirSync(root, { withFileTypes: true })) {
     if (entry.isFile() && /^(?:ts|js)config.*\.json$/.test(entry.name)) files.push(entry.name);
   }
   const manifest = [...new Set(files)].sort().map(file => ({ file, sha256: hash(readFileSync(path.join(root, file))) }));
+  if (assets) {
+    const inventory = [];
+    const visit = directory => {
+      if (!existsSync(path.join(root, directory))) return;
+      for (const entry of readdirSync(path.join(root, directory), { withFileTypes: true })) {
+        const file = directory + '/' + entry.name;
+        inventory.push({ file, kind: entry.isSymbolicLink() ? 'link' : entry.isDirectory() ? 'directory' : 'file',
+          ...(entry.isSymbolicLink() ? { target: readlinkSync(path.join(root, file)) } : {}) });
+        if (entry.isDirectory() && !entry.isSymbolicLink()) visit(file);
+      }
+    };
+    visit('game/assets');
+    inventory.sort((a, b) => a.file.localeCompare(b.file));
+    manifest.push({ file: 'game/assets/', kind: 'inventory', sha256: hash(JSON.stringify(inventory)) },
+      { file: 'docs/asset-audit-debt.json', kind: 'existence', sha256: hash(existsSync(path.join(root, 'docs/asset-audit-debt.json')) ? 'present' : 'absent') });
+  }
+  for (const file of selection.existence ?? []) if (!files.includes(file)) {
+    manifest.push({ file, kind: 'existence', sha256: hash(existsSync(path.join(root, file)) ? 'present' : 'absent') });
+  }
+  for (const descriptor of selection.inventories ?? []) manifest.push({ file: descriptor.directory + '/', kind: 'inventory',
+    sha256: hash(JSON.stringify(inputInventory(root, descriptor))) });
+  manifest.sort((a, b) => a.file.localeCompare(b.file) || (a.kind ?? '').localeCompare(b.kind ?? ''));
   const dependencies = {};
   for (const name of ['vitest', 'vite', 'typescript', 'eslint', 'jsdom', 'acorn', 'acorn-walk']) {
     const location = path.join(root, 'node_modules', name, 'package.json');
@@ -69,9 +99,10 @@ export function fingerprint(root, { documents = false, roots } = {}) {
   const environment = { node: process.version, platform: process.platform, arch: process.arch, dependencies,
     ci: process.env.CI ?? null, nodeOptions: process.env.NODE_OPTIONS ?? null,
     forceFullTests: process.env.FORCE_FULL_TESTS ?? null };
-  return { sha256: hash(JSON.stringify({ manifest, environment })), manifest, environment, documents, selection,
+  const coversDocs = allDocuments || manifest.some(entry => groupForFile(entry.file) === 'docs');
+  return { sha256: hash(JSON.stringify({ manifest, environment })), manifest, environment, documents: coversDocs, assets, selection,
     groups: scopeGroups({ manifest, environment }),
-    limits: ['未监控图片/声音、node_modules 字节、浏览器与机器负载；匹配只表示候选证据，不自动免验'] };
+    limits: [(assets ? '已锁资产字节与目录；未监控其他图片/声音' : '未监控图片/声音') + '、node_modules 字节、浏览器与机器负载；匹配只表示候选证据，不自动免验'] };
 }
 
 export function freshness(report, current) {
@@ -124,32 +155,55 @@ export function freshness(report, current) {
 
 export function checkArguments({ tests, paths, full, suite }) {
   if (Number(Boolean(tests)) + Number(Boolean(paths)) + Number(Boolean(full)) + Number(Boolean(suite)) !== 1) throw new Error('必须且只能选 --tests、--paths、--full 或 --suite');
+  for (const list of [tests, paths]) if (list && (!Array.isArray(list) || !list.length || list.some(item => typeof item !== 'string' || !item.trim()))) throw new Error('测试/路径列表不能为空');
   if (tests) return ['scripts/acceptance-gate.mjs', '--target-tests', ...tests];
   if (paths) return ['scripts/acceptance-gate.mjs', '--paths', ...paths, '--run'];
   if (suite) return ['node_modules/vitest/vitest.mjs', 'run', '--reporter=dot', '--silent'];
-  return ['scripts/acceptance-gate.mjs', '--paths', 'scripts/acceptance-gate.mjs', '--run'];
+  return ['scripts/acceptance-gate.mjs', '--full', '--run'];
+}
+
+/** Read-only selection before fingerprints, evidence files or execution. */
+export function previewCheck(root, options) {
+  checkArguments(options);
+  const normalized = { ...options };
+  for (const key of ['tests', 'paths']) if (options[key]) {
+    normalized[key] = options[key].map(file => toProjectPath(file, root));
+    for (const file of normalized[key]) {
+      if (!existsSync(path.join(root, file))) throw new Error('路径不存在：' + file);
+      if (key === 'tests' && (!file.startsWith('tests/') || !file.endsWith('.test.js') || !statSync(path.join(root, file)).isFile())) throw new Error('无效测试文件：' + file);
+    }
+  }
+  const args = checkArguments(normalized);
+  const executable = path.join(root, args[0]);
+  if (!existsSync(executable) || !statSync(executable).isFile()) throw new Error('验证入口不存在：' + args[0]);
+  let selection;
+  if (normalized.tests) selection = { mode: 'targeted', paths: [], tests: normalized.tests, reasons: ['显式测试列表'] };
+  else if (normalized.suite) selection = { mode: 'suite', paths: [], tests: [], reasons: ['显式完整 Vitest 套件；不包含静态门'] };
+  else {
+    const result = spawnSync(process.execPath, [...args.filter(arg => arg !== '--run'), '--plan', '--json'], { cwd: root, encoding: 'utf8', timeout: 15000 });
+    if (result.error) throw result.error;
+    if (result.status !== 0) throw new Error('验证预检失败：' + (result.stderr || result.stdout || `exit ${result.status}`).trim());
+    selection = JSON.parse(result.stdout);
+    if (!['quick', 'full', 'skip'].includes(selection.mode) || !Array.isArray(selection.tests)) throw new Error('验证入口返回无效选择计划');
+    if (normalized.full && selection.mode !== 'full') throw new Error('显式完整门预检未返回 full，拒绝降级执行');
+  }
+  return { dryRun: true, command: [process.execPath, ...args], selection,
+    limits: ['只读预检，未运行检查；实际执行仍重新核对；测试覆盖范围由负责人确认'] };
 }
 
 export async function runCheck(root, options) {
   safeId(options.task);
   if (!/^\d{4}-\d{2}-\d{2}$/.test(options.date ?? '')) throw new Error('日期必须为 YYYY-MM-DD');
-  const args = checkArguments(options);
-  let validation = { mode: options.suite ? 'suite' : 'targeted', executed: true, tests: options.tests ?? [] };
-  if (!options.tests && !options.suite) {
-    const preview = spawnSync(process.execPath, [...args.filter(arg => arg !== '--run'), '--plan', '--json'],
-      { cwd: root, encoding: 'utf8' });
-    if (preview.status === 0) {
-      const selected = JSON.parse(preview.stdout);
-      validation = { mode: selected.mode, executed: selected.mode !== 'skip', tests: selected.tests, reasons: selected.reasons };
-    } else validation = { mode: 'invalid-plan', executed: false, tests: [] };
-  }
+  const preview = previewCheck(root, options);
+  const args = preview.command.slice(1);
+  const validation = { ...preview.selection, executed: preview.selection.mode !== 'skip' };
   const directory = path.join(root, 'docs/evidence', options.date + '-' + options.task);
   mkdirSync(directory, { recursive: true });
   const id = new Date().toISOString().replaceAll(':', '-') + '-' + randomUUID().slice(0, 8);
   const logPath = path.join(directory, id + '.log');
   const reportPath = path.join(directory, id + '.json');
   const selectedRoots = options.tests ?? (validation.mode === 'quick' ? [...(validation.tests ?? []), ...(options.paths ?? [])] : undefined);
-  const scope = { documents: Boolean(options.full || options.suite || options.paths
+  const scope = { assets: Boolean((options.paths || options.full) && validation.mode !== 'skip'), documents: Boolean(options.full || options.suite
     || options.tests?.some(file => /docs-consistency|workflow-cli-integration|workflow-index/.test(file))), roots: selectedRoots };
   const before = fingerprint(root, scope);
   const startedAt = new Date().toISOString();

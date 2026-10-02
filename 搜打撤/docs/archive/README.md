@@ -9,6 +9,7 @@
 | 09-30 流程补完与旧浏览器驱动 | [修改前原文、源码与替代关系](workflow-completion-2026-09-30/README.md)（保留六份文档、旧脚本与根规则） |
 | 09-30 流程工具与旧描述替代 | [原文、哈希与替代入口](workflow-2026-09-30/README.md)（旧规格流程和 09-28 制作看板） |
 | 09-30 双端路由与技术计划导航 | [路由原文与替代关系](workflow-routing-2026-09-30/README.md)（保留前轮未提交规范，修正历史证据入口） |
+| 10-02 特性规格流程归档 | [SPEC-PROCESS](SPEC-PROCESS.md)（spec→plan→tasks 模板留档；引入后零使用，日常承接见 QUICKSTART「定任务」） |
 | 09-27 工程批次 E1–E8 | [批次索引](engineering-2026-09-27/README.md) |
 | 09-27 M 批卡牌迁移 | [结果与交接索引](card-migration-2026-09-27/README.md) |
 | 09-23 卡牌规则计划 | [原计划目录](card-rules-2026-09-23/) |

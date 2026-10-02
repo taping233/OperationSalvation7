@@ -66,6 +66,34 @@ describe('活跃登记解析与撞线', () => {
     expect(hits[0].matched).toEqual(['game/src/battle']);
     expect(registryHits(['docs/README.md'], rows)).toEqual([]);
   });
+  it('与handoff共用生命周期；完成未提交保留归属，已交付/划线只留审计', () => {
+    const source = md.replace('\n## 无主物品', [
+      '| Friday（C 完成） | `game/src/battle/`、~~`scripts/old.mjs`~~ | 事项C | 10-01 | 完成未提交 |',
+      '| Friday（D 已交付） | `game/src/battle/` | 事项D | 10-01 | 已交付 |',
+      '| ~~Friday（E 释放）~~ | `game/src/battle/` | 事项E | 10-01 | 编辑中 |',
+      '| Friday（F 未知） | `game/src/battle/` | 事项F | 10-01 | 处理中待更新 |',
+      '', '## 无主物品',
+    ].join('\n'));
+    const rows = parseActiveRegistry(source);
+    expect(rows.map(row => row.state)).toEqual(['editing', 'complete-uncommitted', 'editing']);
+    expect(rows[1]).toMatchObject({ isBlocking: false, isOpen: true, tokens: ['game/src/battle'] });
+    const hits = registryHits(['game/src/battle/a.js'], rows);
+    expect(hits.map(hit => hit.action)).toEqual(['coordinate-editing', 'retain-ownership', 'coordinate-editing']);
+    const audit = parseActiveRegistry(source, { includeSettled: true });
+    expect(audit.filter(row => !row.isOpen).map(row => row.state)).toEqual(['settled', 'settled', 'released']);
+    expect(registryHits(['game/src/battle/a.js'], audit)).toEqual(hits);
+  });
+  it('文本将完成未提交显示为归属保护，不误写编辑撞线', () => {
+    const completed = parseActiveRegistry(md.replace('编辑中', '完成未提交'));
+    const report = { paths: ['game/src/battle/a.js'],
+      registry: { activeRowCount: 1, editingRowCount: 0, hits: registryHits(['game/src/battle/a.js'], completed) },
+      reverse: { direct: [], transitive: [], srcCount: 0, testCount: 0 },
+      plan: { mode: 'skip', tests: [], reasons: [] }, commands: { verify: 'verify', targeted: '' } };
+    const text = formatImpact(report);
+    expect(text).toContain('无编辑冲突');
+    expect(text).toContain('未提交归属保护');
+    expect(text).not.toContain('动手前先协调');
+  });
 });
 
 describe('反向闭包', () => {
@@ -88,6 +116,7 @@ describe('反向闭包', () => {
 });
 
 describe('端到端（真实仓库）', () => {
+  // 全仓依赖图端到端扫描，满载/快照环境下 5s 默认超时会抖红；放宽到 20s。
   it('agent.scenes.js：agent.js 直接引用、属地无冲突、计划与命令字段完整', () => {
     const report = impactQuery(['game/src/agent/agent.scenes.js']);
     expect(report.paths).toEqual(['game/src/agent/agent.scenes.js']);
@@ -99,7 +128,7 @@ describe('端到端（真实仓库）', () => {
       expect(report.commands.targeted.startsWith('npm run test:target -- ')).toBe(true);
       for (const test of report.plan.tests) expect(existsSync(test)).toBe(true);
     }
-  });
+  }, 20_000);
   it('属地撞线路径真实可见：code-map 目录命中在途会话', () => {
     const report = impactQuery(['code-map/data.js']);
     expect(report.registry.hits.length).toBeGreaterThanOrEqual(0); // 不依赖台账瞬时状态，仅冒烟

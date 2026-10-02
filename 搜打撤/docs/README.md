@@ -1,12 +1,12 @@
 # Vite 文档导航
 
-**新会话/新人先读 [QUICKSTART](QUICKSTART.md)**（5 分钟：环境核验→接手→定向验证→提交门）。日常四步、唯一任务记录与按任务摘要见[流程指南](WORKFLOW-TOOLS.md)；STATUS只做导航，执行进度从task.json生成。本目录同时保存现行说明、带时间的工作记录、测试证据和设计预览。按任务读取下方路由；单问不扫描仓库，小改直接做主动作，跨域/长任务/接班按根 AGENTS.md 接手（10-01 精简：主动作先行）。带日期的记录只说明当时的工作树与验证边界。
+开发从 [QUICKSTART](QUICKSTART.md) 进入；日常路径只在[流程指南](WORKFLOW-TOOLS.md)维护。本页负责按任务定位资料和双端事实入口；带日期记录只说明当时的工作树与验证边界。
 
 制作目标与执行入口见[制作资料总览](production/README.md)；最新全场景性能账本见 [PERF-LEDGER-2026-09-29](PERF-LEDGER-2026-09-29.md)，存档直写红线见 [BASE-DIRECT-WRITE-AUDIT-2026-09-29](BASE-DIRECT-WRITE-AUDIT-2026-09-29.md)。
 
 ## 双端工作流
 
-09-30 流程工具已补齐：[流程工具与归档办法](WORKFLOW-TOOLS.md)统一接手提示、复用检索、台账更新、验收记录、记忆发现、内置浏览器证据和暂存隔离。修改前原文见[路由归档](archive/workflow-routing-2026-09-30/README.md)与[本轮归档](archive/workflow-completion-2026-09-30/README.md)，历史任务范围不扩大或限制后续明确授权。
+Codex / ZCode 共用项目规则和事实，各自适配平台工具。[流程指南](WORKFLOW-TOOLS.md)统一任务、台账、验证、暂存隔离与归档；[路由原文](archive/workflow-routing-2026-09-30/README.md)及[工具原文](archive/workflow-completion-2026-09-30/README.md)仅作历史依据。
 
 2026-09-30 老板批准：项目规则与事实共用，Codex / ZCode 各自适配入口；浏览器边界口径见根 AGENTS.md。当前直接指令优先，历史经验不扩大授权。
 
@@ -16,7 +16,7 @@
 | --- | --- |
 | 两端全局 AGENTS.md | 老板偏好、授权边界、平台工具入口；项目细则引用本仓库 |
 | 根 AGENTS.md | 项目范围、按需接手、协作红线与文档指针；常驻注入不塞历史战报 |
-| 本页 | 任务路由与流程规范；按任务读对应章节 |
+| 本页 / WORKFLOW-TOOLS.md | 本页只导航；后者唯一维护日常流程和命令 |
 | STATUS.md | 简短交付入口、证据、未核实项；HEAD/工作树以实时 Git 为准 |
 | PARALLEL-REGISTRY.md | 唯一占用与归属记录；编辑/验收/完成未提交/已交付分开 |
 | PENDING.md | 唯一待决策台账；backlog 归 roadmap，已决记录回写来源 |
@@ -33,27 +33,9 @@
 
 两端都以源码、实时 Git、现行 docs 为准。上述绝对路径是本机历史核实入口，换机优先用 `npm run memory:discover` 动态发现，不猜项目哈希。记忆索引只存主题钩子与来源；同一经验维护一份正文。工具只读索引，不自动注入整库，也不要求每次读全部记忆。
 
-### 接手与授权
+### 平台适配
 
-- 单问：直接答或定向查证；小改：直接做主动作，对应规范与必要上下文按需读；跨域/长任务/接班：`npm run handoff` 一条命令出简报（原六步核对已废除，10-01 精简），仅当简报显示他人活跃占用或属地冲突时先协调再动手。
-- `npm run handoff` 只读 Git 与台账，并提示重叠属地、失效路径和提交状态疑点；不自动判定过时或释放占用。留言/记忆/任务路由按任务域定向补查，冲突仍用提交与证据核实。
-- 同会话记录命令、目标文件状态与环境，内容/属地/范围/环境未变时复用证据；文档提交改变 HEAD 不自动使相同源码的定向证据失效。
-- 留言按内置浏览器 + 来源地址核验；localStorage 隔离于浏览器配置和 origin。没有可读入口记录未核验，不推断没有留言，不导出整个存储。
-- 审查不授权实施；删除报批与提交/回滚/推送授权口径见根 AGENTS.md。
-- 默认不派工；老板点名后按[派工手册](PARALLEL-DISPATCH-PLAYBOOK.md)划属地。改共享文件/长任务的登记与免登口径见根 AGENTS.md（10-01 精简版）。
-- 免登与免仪式（10-01 合并版，条件见根 AGENTS.md）：单会话占用时的说明类小修与共享台账小额修改直接编辑+收官核对，免登记免两段式；多会话并发或长任务照常全套。
-
-### 验收与收官
-
-- 验收分级与证据口径见[质量门](quality-gates.md)；生成、构建、脚本输出均不能单独宣称完整验收。
-- 两端浏览器能力入口见质量门；边界与阻塞口径见根 AGENTS.md。
-- 收官核对自有 diff、测试结果、未核实项与服务身份；只停本会话创建的服务，再核对端口。完成未提交时标记归属与未提交路径；禁止顺手提交或清理别人现场。
-- 验收证据集中 `docs/evidence/<日期>-<任务>/`（细则见 WORKFLOW-TOOLS「信息只维护一次」表）；历史证据只证明当时范围。
-- 自有记录即时更新；已决事项回写来源并移至已决区，编辑占用释放，仍需处置的工作树保留登记。来源不明只记录不动。
-
-### 工具实施与后续边界
-
-规范、fixture 和真实客户端证据分别记录。[流程工具](WORKFLOW-TOOLS.md)已实现内置浏览器采集导入/对比、动态记忆发现、Git index 暂存隔离和现行文档索引检查；实际平台可用性、依赖与待验内容仍需当次核对，不把工具存在视为完整验收。本入口不构成启服或提交授权。
+浏览器能力与证据边界见[质量门](quality-gates.md#内置浏览器验收)，协作授权见根 AGENTS.md，派工入口见[派工手册](PARALLEL-DISPATCH-PLAYBOOK.md)。留言只有任务需要时核验：确认内置浏览器来源地址与 origin，不可读记未核验，不推断没有留言或导出整个存储。平台记忆不重复保存进度和活账。
 
 ## 按改动找文档
 
@@ -71,7 +53,7 @@
 | Agent 接口 / 策略 | [接口协议](agent-protocol.md)、[策略迭代手册](agent-iteration-playbook.md) | — |
 | 并行会话 / 派工 | [热点登记](PARALLEL-REGISTRY.md)、[待拍板台账](PENDING.md)、[派工手册](PARALLEL-DISPATCH-PLAYBOOK.md) | — |
 | 工具怎么用（agent 视角） | [Agent 工具箱](AGENT-TOOLBOX.md)（意图→命令查表，含 impact/handoff/剧本/验证） | — |
-| 特性规格 / 流程 | [特性规格流程](SPEC-PROCESS.md)（spec→plan→tasks）、[UI Token 体系提案](UI-TOKEN-SYSTEM-PROPOSAL.md)（下次大修参照） | — |
+| 特性规格 / 流程 | [UI Token 体系提案](UI-TOKEN-SYSTEM-PROPOSAL.md)（下次大修参照）；旧规格流程已归档（[archive](archive/SPEC-PROCESS.md)） | — |
 | 叙事 / 事件 | [设计入口](design.md)、`narrative/events.ink` | [游戏全书](game-compendium.md)（生成物，不手改） |
 | 文档增删 / 归档 | [状态入口](STATUS.md) | [归档审阅与执行记录](DOCUMENT-ARCHIVE-AUDIT-2026-09-28.md)（移动或删除前必读） |
 
@@ -82,7 +64,7 @@
 | 玩法与设计 | [设计入口](design.md)、[现行规则](rules.md)、[术语](terminology.md)、[后续路线图](roadmap.md)、[版本记录](changelog.md) |
 | 工程与质量 | [架构](architecture.md)、[开发指南](development.md)、[存档契约](save-format.md)、[质量门](quality-gates.md)、[性能方法与历史基准](performance.md)、[音频系统](audio-system.md) |
 | Agent | [接口协议](agent-protocol.md)、[策略迭代手册](agent-iteration-playbook.md)、[工具箱](AGENT-TOOLBOX.md)（意图→命令查表） |
-| 协作流程 | [热点登记](PARALLEL-REGISTRY.md)（改共享文件/长任务动作先行、登记同轮紧随）、[待拍板台账](PENDING.md)（挂账唯一真源）、[并行派工手册](PARALLEL-DISPATCH-PLAYBOOK.md) |
+| 协作流程 | [日常流程](WORKFLOW-TOOLS.md)、[热点登记](PARALLEL-REGISTRY.md)、[待拍板台账](PENDING.md)、[并行派工手册](PARALLEL-DISPATCH-PLAYBOOK.md) |
 | 美术与素材 | [人物参考](character-bible/README.md)、[界面美术指南入口](UI-ART-OVERHAUL-GUIDE.md)、[运行素材说明](../game/assets/README.md) |
 | 生成数据手册 | [游戏全书](game-compendium.md)：由 `scripts/generate-compendium.mjs` 生成，保留原路径，不手改 |
 | 卡牌规格 | [规格与决策入口](cards/README.md)；[迁移矩阵](M-BATCH-MATRIX.md)和[排除清单](M-BATCH-EXCLUSIONS.md)因测试固定路径留在根目录 |

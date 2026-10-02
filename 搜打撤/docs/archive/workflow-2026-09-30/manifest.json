@@ -5,7 +5,7 @@
   "method": "copy-original-before-revision",
   "items": [
     {
-      "source": "docs/SPEC-PROCESS.md",
+      "source": "docs/archive/SPEC-PROCESS.md",
       "target": "docs/archive/workflow-2026-09-30/originals/docs/SPEC-PROCESS.md",
       "sha256": "9c5ced3e2b16e82f24f6b1e729fb78b9e8c54b9b258c4cf6298a6af0caf10e3e",
       "replacedBy": "docs/WORKFLOW-TOOLS.md"

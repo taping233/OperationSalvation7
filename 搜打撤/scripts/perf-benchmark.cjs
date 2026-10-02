@@ -10,7 +10,7 @@ const URL = `http://127.0.0.1:${PORT}/`;
 const SOAK_MS = Math.max(5000, Number(process.env.SDT_PERF_SOAK_MS) ||
   (process.argv.includes('--soak') ? 10 * 60 * 1000 : 15 * 1000));
 
-function waitForServer(timeoutMs = 15000) {
+function waitForServer(timeoutMs = 15000, readServerLog = () => '') {
   const started = Date.now();
   return new Promise((resolveReady, reject) => {
     const poll = () => {
@@ -21,7 +21,7 @@ function waitForServer(timeoutMs = 15000) {
       });
       const retry = () => {
         if (Date.now() - started > timeoutMs) reject(new Error(`Vite 启动超时。
-${serverLog}`));
+${readServerLog()}`));
         else setTimeout(poll, 200);
       };
       req.on('error', retry);
@@ -47,7 +47,7 @@ async function orchestrate() {
   server.stderr.on('data', chunk => { serverLog += chunk; });
   server.on('exit', code => { serverExitCode = code; });
   try {
-    await waitForServer();
+    await waitForServer(15000, () => serverLog);
     if (serverExitCode != null) {
       throw new Error(`Vite 提前退出（code ${serverExitCode}）。
 ${serverLog}`);

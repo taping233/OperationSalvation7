@@ -2,7 +2,7 @@
  * 在 vitest jsdom 环境装配真实卡牌库后生成文档内容；仅 npm run docs:compendium 写入文件，
  * 并校验文档与运行时数据一致（卡牌计数、退役卡不出现、时点词条样例存在）。 */
 import { describe, it, expect, beforeAll } from 'vitest';
-import { writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { buildCompendium } from '../scripts/generate-compendium.mjs';
 
@@ -36,6 +36,28 @@ beforeAll(() => {
 });
 
 describe('游戏全书与运行时数据一一对应', () => {
+  it('对象型运行场景计数正确且不出现 undefined', () => {
+    expect(Object.keys(DATA.scenes.scenes)).toHaveLength(12);
+    expect(md).toContain('（12 个场景定义）');
+    expect(md).not.toContain('undefined');
+  });
+
+  it.each([
+    ['对象', { scenes: { first: {}, second: {} } }, 2],
+    ['数组', [{}, {}, {}], 3],
+    ['封装数组', { scenes: [{}] }, 1],
+    ['空对象', { scenes: {} }, 0],
+    ['空数组', [], 0],
+    ['未提供', undefined, 0],
+  ])('%s 场景集合计数，内存生成不写文档', (_name, scenes, count) => {
+    const before = readFileSync(OUT);
+    const generated = buildCompendium({ Cards, syncData: DATA.cardsSync,
+      achievements: DATA.achievements, pets: DATA.pets, scenes, mapData: DATA.map, generatedAt: '2026-10-02' });
+    expect(generated).toContain(`（${count} 个场景定义）`);
+    expect(generated).not.toContain('undefined');
+    expect(readFileSync(OUT)).toEqual(before);
+  });
+
   it('生成内容含全部类型章节', () => {
     expect(md).toContain('# 搜打撤 · 代号7 游戏全书');
     for (const t of ['招式（武术）', '法术', '装备', '道具', '资源', '能力卡']) expect(md).toContain(t);

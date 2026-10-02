@@ -3,7 +3,7 @@ import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync
 import os from 'node:os';
 import path from 'node:path';
 import { afterEach, describe, expect, it } from 'vitest';
-import { fingerprint, freshness } from '../scripts/workflow-evidence.mjs';
+import { fingerprint, freshness, runCheck } from '../scripts/workflow-evidence.mjs';
 
 const roots = [];
 function fixture() {
@@ -30,6 +30,20 @@ afterEach(() => {
 });
 
 describe('验收指纹按范围复用', () => {
+  it('显式full的预检、执行与报告都保持full；只执行临时fixture runner', async () => {
+    const root = fixture();
+    mkdirSync(path.join(root, 'scripts'));
+    writeFileSync(path.join(root, 'scripts/acceptance-gate.mjs'), "if (!process.argv.includes('--full')) process.exit(99); if(process.argv.includes('--plan')) console.log(JSON.stringify({mode:'full',paths:[],tests:[],reasons:['fixture']})); else console.log('fixture full executed');");
+    const gitAt = args => execFileSync('git', ['-c', 'core.autocrlf=false', ...args], { cwd: root, stdio: 'pipe' });
+    gitAt(['init', '-q']); gitAt(['add', '.']);
+    gitAt(['-c', 'user.name=Fixture', '-c', 'user.email=fixture@test', 'commit', '-qm', 'base']);
+    const result = await runCheck(root, { task: 'full-mode', date: '2026-10-02', full: true, json: true });
+    const report = JSON.parse(readFileSync(path.join(root, result.report), 'utf8'));
+    expect(result.validation.mode).toBe('full');
+    expect(report.command.slice(1)).toEqual(['scripts/acceptance-gate.mjs', '--full', '--run']);
+    expect(report.validation).toMatchObject({ mode: 'full', executed: true });
+    expect(report.outcome).toBe('passed');
+  });
   it('三份明确台账与唯一目录 task.json 的变化不使代码候选失效', () => {
     const root = fixture();
     for (const file of ['docs/PARALLEL-REGISTRY.md', 'docs/PENDING.md', 'docs/STATUS.md', 'docs/evidence/2026-09-30-fixture/task.json']) {
@@ -58,12 +72,29 @@ describe('验收指纹按范围复用', () => {
   });
   it('代码和工程配置变化仍使代码证据失效', () => {
     const root = fixture();
-    for (const file of ['game/src/code.js', 'vite.config.js', 'package-lock.json']) {
+    mkdirSync(path.join(root, '.githooks'));
+    for (const file of ['game/src/code.js', 'vite.config.js', 'package-lock.json', 'eslint.config.cjs',
+      'vitest.config.mjs', 'jsconfig.tools.json', '.githooks/pre-commit']) {
       const before = fingerprint(root, { documents: true }); writeFileSync(path.join(root, file), 'changed');
       const result = freshness(evidence(before), fingerprint(root, { documents: true }));
       expect(result.result).toBe('stale'); expect(result.codeEligibleForReview).toBe(false);
       expect(result.recheck).toEqual(['code']); expect(result.parts.docs.status).toBe('candidate');
     }
+  });
+  it('资产检查候选锁定字节、新增路径及历史债，显式测试可保留自己的范围', () => {
+    const root = fixture(); mkdirSync(path.join(root, 'game/assets'), { recursive: true });
+    writeFileSync(path.join(root, 'game/assets/sample.png'), 'fixture-image');
+    writeFileSync(path.join(root, 'docs/asset-audit-debt.json'), '{}');
+    const before = fingerprint(root, { assets: true });
+    writeFileSync(path.join(root, 'game/assets/sample.png'), 'modified-image');
+    expect(freshness(evidence(before), fingerprint(root, { assets: true })).codeEligibleForReview).toBe(false);
+    const modified = fingerprint(root, { assets: true });
+    writeFileSync(path.join(root, 'game/assets/new.png'), 'new-image');
+    expect(freshness(evidence(modified), fingerprint(root, { assets: true })).codeEligibleForReview).toBe(false);
+    const added = fingerprint(root, { assets: true });
+    writeFileSync(path.join(root, 'docs/asset-audit-debt.json'), '{"changed":true}');
+    expect(freshness(evidence(added), fingerprint(root, { assets: true })).codeEligibleForReview).toBe(false);
+    expect(fingerprint(root).manifest.some(entry => entry.file.startsWith('game/assets'))).toBe(false);
   });
   it('环境变化独立显示，不能使用旧代码证据', () => {
     const root = fixture(), before = fingerprint(root, { documents: true });

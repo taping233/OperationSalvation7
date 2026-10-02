@@ -6,12 +6,6 @@
  * 生成入口：tests/compendium.test.js（vitest 的 jsdom 环境才能加载 cards.js 的 JSON 数据链），
  * 也可 `npm run docs:compendium`。文档即快照，重跑即同步；手改会被下一次生成覆盖。
  */
-import { readFileSync } from 'node:fs';
-import { fileURLToPath } from 'node:url';
-import { dirname, join } from 'node:path';
-
-const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
-
 export function buildCompendium({ Cards, syncData, achievements, pets, scenes, mapData, generatedAt }) {
   const all = Cards.all();
   const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\|/g, '\\|');
@@ -34,7 +28,8 @@ export function buildCompendium({ Cards, syncData, achievements, pets, scenes, m
   const TYPE_TITLES = { '武术': '招式（武术）', '法术': '法术', '装备': '装备', '道具': '道具', '资源': '资源', '能力卡': '能力卡', '事件': '事件', '生物': '生物（敌人图鉴）' };
   const typeOrder = Object.keys(TYPE_TITLES).filter(t => byType[t]?.length);
   const total = all.length;
-  const sceneList = Array.isArray(scenes) ? scenes : (scenes.scenes || []);
+  const sceneDefinitions = Array.isArray(scenes) ? scenes : (scenes?.scenes ?? []);
+  const sceneList = Array.isArray(sceneDefinitions) ? sceneDefinitions : Object.values(sceneDefinitions);
   const achList = Array.isArray(achievements) ? achievements : (achievements.achievements || []);
   const petList = Array.isArray(pets) ? pets : (pets.list || []);
 

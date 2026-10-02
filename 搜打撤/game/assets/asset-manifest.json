@@ -1,7 +1,7 @@
 {
-  "_comment": "资产清单(create-game-assets模板裁剪版): path/ext/bytes/license。assets:audit 校验未登记文件。",
+  "_comment": "历史清单；bytes与新增sha256为本地文件观察值，原有license声明未重新核实。增量门拒新债，未变历史债见 docs/asset-audit-debt.json。",
   "generated": "2026-09-08",
-  "count": 267,
+  "count": 271,
   "assets": [
     {
       "path": "bgm-cisheng-yuanan.mp3",
@@ -12,7 +12,7 @@
     {
       "path": "bgm-liejie-fuhe.mp3",
       "ext": "mp3",
-      "bytes": 6559763,
+      "bytes": 3951234,
       "license": "项目自有（自制/AI 生成）"
     },
     {
@@ -60,43 +60,43 @@
     {
       "path": "cards/healing.webp",
       "ext": "webp",
-      "bytes": 205232,
+      "bytes": 165144,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "cards/hero-descend.webp",
       "ext": "webp",
-      "bytes": 19698,
+      "bytes": 31676,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "cards/hero-mage.webp",
       "ext": "webp",
-      "bytes": 34380,
+      "bytes": 39372,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "cards/hero-priest.webp",
       "ext": "webp",
-      "bytes": 15952,
+      "bytes": 103666,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "cards/hero-summoner.webp",
       "ext": "webp",
-      "bytes": 26026,
+      "bytes": 71680,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "cards/hero-sword.webp",
       "ext": "webp",
-      "bytes": 19762,
+      "bytes": 44924,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "cards/hero-warrior.webp",
       "ext": "webp",
-      "bytes": 31386,
+      "bytes": 118222,
       "license": "项目自有（自制/AI 生成）"
     },
     {
@@ -108,31 +108,31 @@
     {
       "path": "cards/items/builtin-fuyuanyao.webp",
       "ext": "webp",
-      "bytes": 235552,
+      "bytes": 28726,
       "license": "项目自有（NovelAI V5 生成）"
     },
     {
       "path": "cards/items/starter-emergency-bandage.webp",
       "ext": "webp",
-      "bytes": 286910,
+      "bytes": 32968,
       "license": "项目自有（NovelAI V5 生成）"
     },
     {
       "path": "cards/items/tt-crystal.webp",
       "ext": "webp",
-      "bytes": 176252,
+      "bytes": 31028,
       "license": "项目自有（NovelAI V5 生成）"
     },
     {
       "path": "cards/items/tt-jinchuangyao.webp",
       "ext": "webp",
-      "bytes": 144942,
+      "bytes": 21580,
       "license": "项目自有（NovelAI V5 生成）"
     },
     {
       "path": "cards/items/tt-medneedle.webp",
       "ext": "webp",
-      "bytes": 168538,
+      "bytes": 21420,
       "license": "项目自有（NovelAI V5 生成）"
     },
     {
@@ -144,13 +144,13 @@
     {
       "path": "cards/items/tt-token-gold.webp",
       "ext": "webp",
-      "bytes": 273612,
+      "bytes": 54774,
       "license": "项目自有（NovelAI V5 生成）"
     },
     {
       "path": "cards/items/tt3-blue-potion.webp",
       "ext": "webp",
-      "bytes": 234686,
+      "bytes": 45062,
       "license": "项目自有（NovelAI V5 生成）"
     },
     {
@@ -162,19 +162,19 @@
     {
       "path": "cards/items/tt3-houyi-potion.webp",
       "ext": "webp",
-      "bytes": 218186,
+      "bytes": 34960,
       "license": "项目自有（NovelAI V5 生成）"
     },
     {
       "path": "cards/items/tt3-iceheart-potion.webp",
       "ext": "webp",
-      "bytes": 201668,
+      "bytes": 31016,
       "license": "项目自有（NovelAI V5 生成）"
     },
     {
       "path": "cards/items/tt3-mind-potion.webp",
       "ext": "webp",
-      "bytes": 202210,
+      "bytes": 32994,
       "license": "项目自有（NovelAI V5 生成）"
     },
     {
@@ -186,55 +186,55 @@
     {
       "path": "cards/items/tt3-mystery-potion.webp",
       "ext": "webp",
-      "bytes": 199096,
+      "bytes": 42474,
       "license": "项目自有（NovelAI V5 生成）"
     },
     {
       "path": "cards/items/tt3-python-potion.webp",
       "ext": "webp",
-      "bytes": 171216,
+      "bytes": 25602,
       "license": "项目自有（NovelAI V5 生成）"
     },
     {
       "path": "cards/items/tt3-savior-elixir.webp",
       "ext": "webp",
-      "bytes": 208988,
+      "bytes": 43046,
       "license": "项目自有（NovelAI V5 生成）"
     },
     {
       "path": "cards/items/tt3-turnabout-potion.webp",
       "ext": "webp",
-      "bytes": 125748,
+      "bytes": 19896,
       "license": "项目自有（NovelAI V5 生成）"
     },
     {
       "path": "cards/items/tt3sp-doom.webp",
       "ext": "webp",
-      "bytes": 157540,
+      "bytes": 26182,
       "license": "项目自有（NovelAI V5 生成）"
     },
     {
       "path": "cards/items/tt4-shine-token.webp",
       "ext": "webp",
-      "bytes": 330132,
+      "bytes": 57676,
       "license": "项目自有（NovelAI V5 生成）"
     },
     {
       "path": "cards/items/tt4-smoke-bomb.webp",
       "ext": "webp",
-      "bytes": 259968,
+      "bytes": 33968,
       "license": "项目自有（NovelAI V5 生成）"
     },
     {
       "path": "cards/items/tt4-woodify.webp",
       "ext": "webp",
-      "bytes": 174576,
+      "bytes": 24788,
       "license": "项目自有（NovelAI V5 生成）"
     },
     {
       "path": "cards/martial-melee.webp",
       "ext": "webp",
-      "bytes": 140740,
+      "bytes": 119456,
       "license": "项目自有（自制/AI 生成）"
     },
     {
@@ -264,73 +264,73 @@
     {
       "path": "cards/resources/diamond.webp",
       "ext": "webp",
-      "bytes": 19524,
+      "bytes": 52652,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "cards/resources/econpack.webp",
       "ext": "webp",
-      "bytes": 16994,
+      "bytes": 64642,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "cards/resources/garnet-marble.webp",
       "ext": "webp",
-      "bytes": 34910,
+      "bytes": 55290,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "cards/resources/key-one.webp",
       "ext": "webp",
-      "bytes": 28746,
+      "bytes": 92768,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "cards/resources/key.webp",
       "ext": "webp",
-      "bytes": 21208,
+      "bytes": 44578,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "cards/resources/keys-bunch.webp",
       "ext": "webp",
-      "bytes": 19072,
+      "bytes": 68916,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "cards/resources/ration-double.webp",
       "ext": "webp",
-      "bytes": 15910,
+      "bytes": 71214,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "cards/resources/ration-std.webp",
       "ext": "webp",
-      "bytes": 20786,
+      "bytes": 79050,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "cards/resources/ration.webp",
       "ext": "webp",
-      "bytes": 16694,
+      "bytes": 81554,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "cards/resources/wood-bundle.webp",
       "ext": "webp",
-      "bytes": 35230,
+      "bytes": 85144,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "cards/resources/wood-lots.webp",
       "ext": "webp",
-      "bytes": 35048,
+      "bytes": 80804,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "cards/resources/wood.webp",
       "ext": "webp",
-      "bytes": 28500,
+      "bytes": 59026,
       "license": "项目自有（自制/AI 生成）"
     },
     {
@@ -342,7 +342,7 @@
     {
       "path": "cards/unknown.webp",
       "ext": "webp",
-      "bytes": 211244,
+      "bytes": 176354,
       "license": "项目自有（自制/AI 生成）"
     },
     {
@@ -630,181 +630,181 @@
     {
       "path": "portraits/avatars/changwuyu.webp",
       "ext": "webp",
-      "bytes": 13808,
+      "bytes": 73546,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "portraits/avatars/wu.webp",
       "ext": "webp",
-      "bytes": 13582,
+      "bytes": 91160,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "portraits/cut/enemies/archer.webp",
       "ext": "webp",
-      "bytes": 33982,
+      "bytes": 55014,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "portraits/cut/enemies/bandit.webp",
       "ext": "webp",
-      "bytes": 30448,
+      "bytes": 47274,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "portraits/cut/enemies/boss_elem.webp",
       "ext": "webp",
-      "bytes": 66148,
+      "bytes": 62516,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "portraits/cut/enemies/boss_general.webp",
       "ext": "webp",
-      "bytes": 47258,
+      "bytes": 63070,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "portraits/cut/enemies/boss_orc.webp",
       "ext": "webp",
-      "bytes": 54440,
+      "bytes": 81252,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "portraits/cut/enemies/cavalry.webp",
       "ext": "webp",
-      "bytes": 35460,
+      "bytes": 65114,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "portraits/cut/enemies/dragon.webp",
       "ext": "webp",
-      "bytes": 68010,
+      "bytes": 96222,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "portraits/cut/enemies/fire_el.webp",
       "ext": "webp",
-      "bytes": 47338,
+      "bytes": 50744,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "portraits/cut/enemies/grass_el.webp",
       "ext": "webp",
-      "bytes": 45044,
+      "bytes": 52528,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "portraits/cut/enemies/infantry.webp",
       "ext": "webp",
-      "bytes": 39606,
+      "bytes": 50488,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "portraits/cut/enemies/orc_axe.webp",
       "ext": "webp",
-      "bytes": 52656,
+      "bytes": 81992,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "portraits/cut/enemies/orc_jav.webp",
       "ext": "webp",
-      "bytes": 38764,
+      "bytes": 57644,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "portraits/cut/enemies/water_el.webp",
       "ext": "webp",
-      "bytes": 41898,
+      "bytes": 61476,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "portraits/cut/enemies/wolf_rider.webp",
       "ext": "webp",
-      "bytes": 50730,
+      "bytes": 51156,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "portraits/enemies/archer.webp",
       "ext": "webp",
-      "bytes": 120006,
+      "bytes": 148894,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "portraits/enemies/bandit.webp",
       "ext": "webp",
-      "bytes": 92180,
+      "bytes": 98826,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "portraits/enemies/boss_elem.webp",
       "ext": "webp",
-      "bytes": 189482,
+      "bytes": 126312,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "portraits/enemies/boss_general.webp",
       "ext": "webp",
-      "bytes": 126748,
+      "bytes": 132982,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "portraits/enemies/boss_orc.webp",
       "ext": "webp",
-      "bytes": 148150,
+      "bytes": 158082,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "portraits/enemies/cavalry.webp",
       "ext": "webp",
-      "bytes": 91954,
+      "bytes": 125186,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "portraits/enemies/dragon.webp",
       "ext": "webp",
-      "bytes": 197890,
+      "bytes": 170212,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "portraits/enemies/fire_el.webp",
       "ext": "webp",
-      "bytes": 118450,
+      "bytes": 98710,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "portraits/enemies/grass_el.webp",
       "ext": "webp",
-      "bytes": 131168,
+      "bytes": 98318,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "portraits/enemies/infantry.webp",
       "ext": "webp",
-      "bytes": 127536,
+      "bytes": 104730,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "portraits/enemies/orc_axe.webp",
       "ext": "webp",
-      "bytes": 178348,
+      "bytes": 159650,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "portraits/enemies/orc_jav.webp",
       "ext": "webp",
-      "bytes": 109100,
+      "bytes": 124786,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "portraits/enemies/water_el.webp",
       "ext": "webp",
-      "bytes": 125880,
+      "bytes": 134640,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "portraits/enemies/wolf_rider.webp",
       "ext": "webp",
-      "bytes": 149776,
+      "bytes": 88074,
       "license": "项目自有（自制/AI 生成）"
     },
     {
@@ -816,25 +816,25 @@
     {
       "path": "portraits/full/baita.webp",
       "ext": "webp",
-      "bytes": 600084,
+      "bytes": 162538,
       "license": "项目自有（老板指定立绘）"
     },
     {
       "path": "portraits/full/changwuyu.webp",
       "ext": "webp",
-      "bytes": 513796,
+      "bytes": 116440,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "portraits/full/wu.webp",
       "ext": "webp",
-      "bytes": 417520,
+      "bytes": 121696,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "reconstruction/wallpaper-original.webp",
       "ext": "webp",
-      "bytes": 1138740,
+      "bytes": 1300648,
       "license": "项目自有（自制/AI 生成）"
     },
     {
@@ -846,7 +846,7 @@
     {
       "path": "scenes/event-bandits-anime-v2.webp",
       "ext": "webp",
-      "bytes": 206998,
+      "bytes": 207702,
       "license": "项目自有（自制/AI 生成）"
     },
     {
@@ -858,13 +858,13 @@
     {
       "path": "scenes/scene-altar-anime-v2.webp",
       "ext": "webp",
-      "bytes": 152448,
+      "bytes": 156076,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "scenes/scene-chest-anime-v2.webp",
       "ext": "webp",
-      "bytes": 102936,
+      "bytes": 179290,
       "license": "项目自有（自制/AI 生成）"
     },
     {
@@ -900,49 +900,49 @@
     {
       "path": "scenes/scene-door-anime-v2.webp",
       "ext": "webp",
-      "bytes": 142694,
+      "bytes": 240322,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "scenes/scene-extract-anime-v2.webp",
       "ext": "webp",
-      "bytes": 156082,
+      "bytes": 81954,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "scenes/scene-fire-anime-v2.webp",
       "ext": "webp",
-      "bytes": 142568,
+      "bytes": 173650,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "scenes/scene-pickup-coin-anime-v2.webp",
       "ext": "webp",
-      "bytes": 147814,
+      "bytes": 140330,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "scenes/scene-pickup-key-anime-v2.webp",
       "ext": "webp",
-      "bytes": 137136,
+      "bytes": 183918,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "scenes/scene-pickup-rations-anime-v2.webp",
       "ext": "webp",
-      "bytes": 127542,
+      "bytes": 143736,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "scenes/scene-pickup-wood-anime-v2.webp",
       "ext": "webp",
-      "bytes": 109560,
+      "bytes": 131510,
       "license": "项目自有（自制/AI 生成）"
     },
     {
       "path": "scenes/scene-shop-anime-v2.webp",
       "ext": "webp",
-      "bytes": 127466,
+      "bytes": 118608,
       "license": "项目自有（自制/AI 生成）"
     },
     {
@@ -1314,7 +1314,7 @@
     {
       "path": "ui/icons/coin.png",
       "ext": "png",
-      "bytes": 826,
+      "bytes": 28404,
       "license": "项目自有（自制/AI 生成）"
     },
     {
@@ -1386,7 +1386,7 @@
     {
       "path": "ui/icons/gear.png",
       "ext": "png",
-      "bytes": 1006,
+      "bytes": 17639,
       "license": "项目自有（自制/AI 生成）"
     },
     {
@@ -1604,6 +1604,63 @@
       "ext": "png",
       "bytes": 416,
       "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "ui/photo-studio/wall.webp",
+      "ext": "webp",
+      "bytes": 28308,
+      "sha256": "69906d0b54d450221b3af166978b4030a2fc208a8dd982224572d083395e2d79",
+      "license": "未登记：生成记录存在，授权范围尚未核实",
+      "source": "game/assets/ui/photo-studio-generated-assets.md",
+      "generation": {
+        "date": "2026-09-19",
+        "model": "NovelAI Diffusion V5 Full",
+        "seed": 207888680,
+        "note": "参数与来源仅据既有生成记录；未核验原始输出或授权"
+      }
+    },
+    {
+      "path": "ui/photo-studio/desk.webp",
+      "ext": "webp",
+      "bytes": 22580,
+      "sha256": "cb9b94a8014778d04cffbdc5739ff068639fd5d34f876245f616d4760beddefc",
+      "license": "未登记：生成记录存在，授权范围尚未核实",
+      "source": "game/assets/ui/photo-studio-generated-assets.md",
+      "generation": {
+        "date": "2026-09-19",
+        "model": "NovelAI Diffusion V5 Full",
+        "seed": 438337378,
+        "note": "参数与来源仅据既有生成记录；未核验原始输出或授权"
+      }
+    },
+    {
+      "path": "ui/photo-studio/empty.webp",
+      "ext": "webp",
+      "bytes": 36938,
+      "sha256": "c6771667ba392f0ba9df06deed8486720c3cfda1de57b9f4c64854cfa4fd42ae",
+      "license": "未登记：生成记录存在，授权范围尚未核实",
+      "source": "game/assets/ui/photo-studio-generated-assets.md",
+      "generation": {
+        "date": "2026-09-19",
+        "model": "NovelAI Diffusion V5 Full",
+        "seed": 120616023,
+        "note": "参数与来源仅据既有生成记录；未核验原始输出或授权"
+      }
+    },
+    {
+      "path": "ui/photo-studio/back.webp",
+      "ext": "webp",
+      "bytes": 52468,
+      "sha256": "06fd0d8f0e12a58e43ab2905cd37d88f14fb3a9977f56540cbfad69ab1a043f2",
+      "license": "未登记：生成记录存在，授权范围尚未核实",
+      "source": "game/assets/ui/photo-studio-generated-assets.md",
+      "generation": {
+        "date": "2026-09-19",
+        "model": "NovelAI Diffusion V5 Full",
+        "seed": 1959446116,
+        "note": "参数与来源仅据既有生成记录；未核验原始输出或授权"
+      }
     }
-  ]
+  ],
+  "verified": "2026-10-02"
 }

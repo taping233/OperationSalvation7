@@ -1,30 +1,32 @@
 import { execFileSync, spawn } from 'node:child_process';
 import { createHash, randomUUID } from 'node:crypto';
-import { appendFileSync, chmodSync, existsSync, lstatSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, realpathSync, rmSync, statSync, writeFileSync } from 'node:fs';
+import { appendFileSync, chmodSync, existsSync, lstatSync, mkdirSync, mkdtempSync, readFileSync, realpathSync, rmSync, writeFileSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import { dependencyBytes, gateInputScope, gateReceipt } from './workflow-gate-receipt.mjs';
 
 const sha = value => createHash('sha256').update(value).digest('hex');
 const slash = value => value.replaceAll('\\', '/');
 const LIMITS = ['仅验证 Git index 快照，不含未暂存/未跟踪内容；不含 build、浏览器、远端 CI',
   '项目外暂存路径仅列出，不由 Vite 验收门验证；临时 Git 元数据/index 独立，对象只读引用源对象库',
-  '依赖核对为 npm 锁及各安装包版本证据，不证明每个依赖字节未经本地修改',
+  '依赖核对暂存 npm 锁及安装版本；成功报告另锁依赖字节，排除工具缓存目录',
   '依赖复制到临时目录，检查配置与工具仅采用 index 中版本；未暂存工具修正不自动带入'];
 
 function gitEnvironment(extra = {}) {
   const environment = { ...process.env };
   for (const key of ['GIT_DIR', 'GIT_WORK_TREE', 'GIT_COMMON_DIR', 'GIT_INDEX_FILE', 'GIT_OBJECT_DIRECTORY', 'GIT_ALTERNATE_OBJECT_DIRECTORIES', 'GIT_NAMESPACE']) delete environment[key];
+  delete environment.GATE_RECEIPT;
   return { ...environment, GIT_OPTIONAL_LOCKS: '0', ...extra };
 }
 function git(root, args, env = {}) {
   return execFileSync('git', ['-c', 'core.quotepath=false', ...args], { cwd: root,
     env: gitEnvironment(env), maxBuffer: 128 * 1024 * 1024 });
 }
-function indexFile(repo) {
-  const file = git(repo, ['rev-parse', '--git-path', 'index']).toString().trim();
+function indexFile(repo, env = {}) {
+  const file = git(repo, ['rev-parse', '--git-path', 'index'], env).toString().trim();
   return path.resolve(repo, file);
 }
-function indexHash(repo) { return sha(readFileSync(indexFile(repo))); }
+function indexHash(repo, env = {}) { return sha(readFileSync(indexFile(repo, env))); }
 function safeRelative(file) {
   if (!file || file.includes('\\') || file.includes(':') || file.split('/').some(part => !part || part === '..' || part === '.' || part.toLowerCase() === '.git')) {
     throw new Error('不安全的 index 路径：' + file);
@@ -39,7 +41,7 @@ function records(repo, env = {}) {
     return { mode, object, stage: Number(stage), file };
   });
 }
-function showJson(repo, file) { return JSON.parse(git(repo, ['show', ':' + file]).toString('utf8')); }
+function showJson(repo, file, env = {}) { return JSON.parse(git(repo, ['show', ':' + file], env).toString('utf8')); }
 function installedEvidence(root, lock) {
   const problems = [], versions = {};
   const hidden = path.join(root, 'node_modules/.package-lock.json');
@@ -67,50 +69,64 @@ function installedEvidence(root, lock) {
     stagedLockSha256: sha(JSON.stringify(lock)), node: process.version, platform: process.platform, arch: process.arch };
 }
 
-export function stagedPlan(root) {
+export function stagedPlan(root, options = {}) {
   root = path.resolve(root);
   const repo = git(root, ['rev-parse', '--show-toplevel']).toString('utf8').trim();
   const prefix = slash(path.relative(repo, root));
   if (prefix.startsWith('../')) throw new Error('项目根不在仓库中');
-  const before = indexHash(repo), entries = records(repo), blocked = [];
+  // git commit --only supplies its actual commit view in GIT_INDEX_FILE. Only the
+  // submission caller opts in; standalone isolation continues to ignore inherited Git overrides.
+  const environment = options.commitIndex && process.env.GIT_INDEX_FILE
+    ? { GIT_INDEX_FILE: path.resolve(repo, process.env.GIT_INDEX_FILE) } : {};
+  const before = indexHash(repo, environment), entries = records(repo, environment), blocked = [];
   if (process.env.NODE_OPTIONS) blocked.push('NODE_OPTIONS 存在，无法排除外部加载器/预载脚本；请先明确环境后再验收');
   for (const entry of entries) {
     if (entry.stage !== 0) blocked.push('index 有未解决冲突：' + entry.file);
     if (!['100644', '100755'].includes(entry.mode)) blocked.push('不支持 symlink/gitlink：' + entry.file);
     if (entry.file.split('/').includes('node_modules')) blocked.push('index 不得跟踪 node_modules：' + entry.file);
   }
-  const fields = git(repo, ['diff', '--cached', '--name-status', '--no-renames', '-z']).toString('utf8').split('\0').filter(Boolean);
+  const fields = git(repo, ['diff', '--cached', '--name-status', '--no-renames', '-z'], environment).toString('utf8').split('\0').filter(Boolean);
   if (fields.length % 2) throw new Error('暂存变更输出不完整');
   const allChanges = [];
   for (let i = 0; i < fields.length; i += 2) allChanges.push({ status: fields[i], file: fields[i + 1] });
   const changes = allChanges.filter(({ file }) => !prefix || file.startsWith(prefix + '/')).map(entry => ({ ...entry,
     path: prefix ? entry.file.slice(prefix.length + 1) : entry.file }));
   let dependencies = { ok: false, problems: [], versions: {} };
+  let packageJsonBaselineSha256 = null;
   try {
     const packageFile = prefix ? prefix + '/package.json' : 'package.json';
     const lockFile = prefix ? prefix + '/package-lock.json' : 'package-lock.json';
-    const pkg = showJson(repo, packageFile), lock = showJson(repo, lockFile);
+    const pkg = showJson(repo, packageFile, environment), lock = showJson(repo, lockFile, environment);
+    if (changes.some(change => change.path === 'package.json')) {
+      packageJsonBaselineSha256 = sha(git(repo, ['show', 'HEAD:' + packageFile], environment));
+    }
     for (const key of ['dependencies', 'devDependencies', 'optionalDependencies']) {
       if (JSON.stringify(pkg[key] ?? {}) !== JSON.stringify(lock.packages?.['']?.[key] ?? {})) blocked.push('暂存 package.json 与锁根 ' + key + ' 不匹配');
     }
     dependencies = installedEvidence(root, lock);
     blocked.push(...dependencies.problems);
   } catch (error) { blocked.push('无法证明依赖相符：' + error.message); }
-  if (before !== indexHash(repo)) blocked.push('计划期间 index 已变化');
+  if (before !== indexHash(repo, environment)) blocked.push('计划期间 index 已变化');
   return { schemaVersion: 1, kind: 'staged-snapshot-plan', root, repo, prefix, indexSha256: before,
     changes, outsideProject: allChanges.filter(entry => !changes.some(change => change.file === entry.file)),
-    entries, dependencies, blocked, mode: changes.length ? 'pending-snapshot-selection' : 'skip', limits: LIMITS };
+    entries, dependencies, packageJsonBaselineSha256, blocked, mode: changes.length ? 'pending-snapshot-selection' : 'skip',
+    validation: { executed: false, passed: false, reusableReceipt: false,
+      reason: blocked.length ? 'STAGED_PLAN_BLOCKED' : changes.length ? 'STAGED_PLAN_ONLY' : 'STAGED_EMPTY_INDEX' },
+    nextAction: blocked.length ? 'resolve-plan-blockers' : changes.length ? 'run-frozen-index-validation' : 'select-completed-range-and-review-stage-plan', limits: LIMITS };
 }
 
-function captured(args, cwd, log, json) {
+function captured(args, cwd, log, json, extraEnv = {}) {
   return new Promise(resolve => {
     const child = spawn(process.execPath, args, { cwd, shell: false, stdio: ['ignore', 'pipe', 'pipe'],
-      env: gitEnvironment() });
+      env: gitEnvironment(extraEnv) });
+    let stdout = '', started = false;
+    child.once('spawn', () => { started = true; });
+    child.stdout.on('data', chunk => { stdout += chunk.toString('utf8'); });
     for (const stream of [child.stdout, child.stderr]) stream.on('data', chunk => {
       appendFileSync(log, chunk); (json ? process.stderr : process.stdout).write(chunk);
     });
-    child.once('error', error => resolve({ exitCode: null, error: error.message }));
-    child.once('close', (exitCode, signal) => resolve({ exitCode, signal }));
+    child.once('error', error => resolve({ exitCode: null, error: error.message, started }));
+    child.once('close', (exitCode, signal) => resolve({ exitCode, signal, stdout, started }));
   });
 }
 
@@ -163,16 +179,6 @@ function createSnapshotGit(repo, snapshot, frozenIndex) {
   return { isolatedMetadata: true, head, objectFormat, indexSha256: indexHash(snapshot), objects: 'read-only-alternate' };
 }
 
-function copyDependencies(source, destination) {
-  mkdirSync(destination, { recursive: true });
-  for (const entry of readdirSync(source, { withFileTypes: true })) {
-    const from = path.join(source, entry.name), to = path.join(destination, entry.name);
-    if (entry.isSymbolicLink() && statSync(from).isDirectory()) throw new Error('依赖包含目录链接，拒绝复制：' + from);
-    if (entry.isDirectory()) copyDependencies(from, to);
-    else { writeFileSync(to, readFileSync(from), { flag: 'wx' }); chmodSync(to, statSync(from).mode & 0o777); }
-  }
-}
-
 export async function runStaged(root, options = {}) {
   if (!/^[a-zA-Z0-9][a-zA-Z0-9-]{0,79}$/.test(options.task ?? '') || !/^\d{4}-\d{2}-\d{2}$/.test(options.date ?? '')) {
     throw new Error('隔离验收须指定有效 task 和 YYYY-MM-DD date');
@@ -201,23 +207,23 @@ export async function runStaged(root, options = {}) {
       await exportBlobs(plan.repo, frozenEntries, snapshot);
       report.gitView = createSnapshotGit(plan.repo, snapshot, isolatedIndex);
       const project = path.join(snapshot, plan.prefix);
-      copyDependencies(path.join(plan.root, 'node_modules'), path.join(project, 'node_modules'));
+      const dependenciesBefore = dependencyBytes(plan.root, { destination: path.join(project, 'node_modules') });
       const lock = JSON.parse(readFileSync(path.join(project, 'package-lock.json'), 'utf8'));
       report.dependenciesAfterCopy = installedEvidence(project, lock);
       if (!report.dependenciesAfterCopy.ok || JSON.stringify(report.dependenciesAfterCopy.versions) !== JSON.stringify(plan.dependencies.versions)) throw new Error('复制后依赖证据变化');
-      const selector = path.join(temp, 'select.mjs'), planFile = path.join(temp, 'gate-plan.json');
-      writeFileSync(selector, `import {pathToFileURL} from 'node:url';\nimport {writeFileSync} from 'node:fs';\nimport path from 'node:path';\nconst {planForPaths}=await import(pathToFileURL(path.resolve('scripts/acceptance-gate.mjs')));\nconst changes=${JSON.stringify(plan.changes)};\nconst plan=planForPaths(changes.map(change=>change.path));\nif(changes.some(change=>!['A','M'].includes(change.status))&&plan.mode!=='skip'){plan.mode='full';plan.tests=[];plan.reasons.push('暂存删除/重命名/类型变化，完整测试');}\nwriteFileSync(${JSON.stringify(planFile)},JSON.stringify(plan));\n`);
-      const selection = await captured([selector], project, log, options.json);
+      const selection = await captured(['scripts/acceptance-gate.mjs', '--staged', '--plan', '--json'], project, log, options.json);
       if (selection.exitCode !== 0) throw new Error('快照验收计划选择失败');
-      report.gate = JSON.parse(readFileSync(planFile, 'utf8'));
+      report.gate = JSON.parse(selection.stdout);
       if (indexHash(plan.repo) !== plan.indexSha256) throw new Error('运行前 index 已变化');
       if (report.gate.mode === 'skip') {
         report.outcome = 'skip'; report.exitCode = 0;
         report.limits = [...LIMITS, '计划无相关验收路径，未执行检查，不代表完整验收通过'];
       } else {
-        const gatePaths = report.gate.mode === 'full' ? ['scripts/acceptance-gate.mjs'] : plan.changes.map(change => change.path);
-        report.command = [process.execPath, 'scripts/acceptance-gate.mjs', '--paths', ...gatePaths, '--run'];
-        const execution = await captured(report.command.slice(1), project, log, options.json);
+        report.command = [process.execPath, 'scripts/acceptance-gate.mjs', '--staged', '--run'];
+        // SDT_STAGED_SNAPSHOT：告知测试当前处于隔离快照（按 index 字节落盘，文本 LF 化）；依赖检出态字节的断言据此跳过，工作树门与 CI 覆盖。
+        const execution = await captured(report.command.slice(1), project, log, options.json,
+          { SDT_STAGED_SNAPSHOT: '1' });
+        delete execution.stdout;
         Object.assign(report, execution);
         report.commandExitCode = execution.exitCode;
         report.exitCode = execution.exitCode ?? 1;
@@ -226,7 +232,9 @@ export async function runStaged(root, options = {}) {
       report.indexAfterSha256 = indexHash(plan.repo);
       if (report.indexAfterSha256 !== plan.indexSha256) { report.outcome = 'invalidated'; report.exitCode = 1; report.error = '验收期间源 index 已变化'; }
       report.snapshotIndexAfterSha256 = indexHash(snapshot);
-      if (report.snapshotIndexAfterSha256 !== report.gitView.indexSha256) {
+      report.snapshotIndexExpectedSha256 = sha(JSON.stringify(frozenEntries));
+      report.snapshotIndexContentSha256 = sha(JSON.stringify(records(snapshot)));
+      if (report.snapshotIndexContentSha256 !== report.snapshotIndexExpectedSha256) {
         report.outcome = 'invalidated'; report.exitCode = 1; report.error = '检查改写了冻结快照 index';
       }
       report.snapshotTrackedMutations = frozenEntries.filter(entry => {
@@ -239,8 +247,17 @@ export async function runStaged(root, options = {}) {
         report.outcome = 'invalidated'; report.exitCode = 1;
         report.error = '检查改写了快照中的暂存文件，结果不能代表原 index';
       }
+      if (dependencyBytes(plan.root) !== dependenciesBefore || dependencyBytes(project) !== dependenciesBefore) {
+        report.outcome = 'invalidated'; report.exitCode = 1; report.error = '验收期间源或快照依赖字节变化';
+      }
+      if (report.outcome === 'passed') report.gateReceipt = gateReceipt(plan, report.gate, dependenciesBefore,
+        gateInputScope(project, plan, report.gate));
     }
-  } catch (error) { report.error = error.message; appendFileSync(log, error.message + '\n'); }
+  } catch (error) {
+    report.error = error.message;
+    if (report.outcome === 'passed' || report.outcome === 'skip') { report.outcome = 'failed'; report.exitCode = 1; }
+    appendFileSync(log, error.message + '\n');
+  }
   finally {
     try {
       report.indexAfterSha256 = indexHash(plan.repo);
@@ -250,15 +267,20 @@ export async function runStaged(root, options = {}) {
       try {
         const resolved = realpathSync(temp);
         const relative = path.relative(realpathSync(os.tmpdir()), resolved);
-        if (!relative.startsWith('sdt-staged-') || relative.includes(path.sep) || path.isAbsolute(relative) || !lstatSync(temp).isDirectory()) throw new Error('拒绝清理非自有 temp');
-        rmSync(resolved, { recursive: true, force: true });
-        if (existsSync(resolved) && process.platform === 'win32') {
-          execFileSync('powershell.exe', ['-NoProfile', '-NonInteractive', '-Command',
-            'Remove-Item -LiteralPath $env:SDT_STAGED_CLEANUP_PATH -Recurse -Force -ErrorAction Stop'], {
-            env: { ...process.env, SDT_STAGED_CLEANUP_PATH: resolved }, stdio: 'pipe' });
+        if (!relative.startsWith('sdt-staged-') || relative.includes(path.sep) || path.isAbsolute(relative) || !lstatSync(temp).isDirectory()) {
+          report.outcome = 'cleanup-failed'; report.exitCode = 1; report.cleanupError = '拒绝清理非自有 temp';
+        } else {
+          rmSync(resolved, { recursive: true, force: true });
+          if (existsSync(resolved) && process.platform === 'win32') {
+            execFileSync('powershell.exe', ['-NoProfile', '-NonInteractive', '-Command',
+              'Remove-Item -LiteralPath $env:SDT_STAGED_CLEANUP_PATH -Recurse -Force -ErrorAction Stop'], {
+              env: { ...process.env, SDT_STAGED_CLEANUP_PATH: resolved }, stdio: 'pipe' });
+          }
+          report.snapshotRemoved = !existsSync(resolved);
+          if (!report.snapshotRemoved) {
+            report.outcome = 'cleanup-failed'; report.exitCode = 1; report.cleanupError = '自有 temp 清理未完成：' + resolved;
+          }
         }
-        report.snapshotRemoved = !existsSync(resolved);
-        if (!report.snapshotRemoved) throw new Error('自有 temp 清理未完成：' + resolved);
       } catch (error) {
         report.outcome = 'cleanup-failed'; report.exitCode = 1;
         report.cleanupError = error.message;
@@ -267,7 +289,17 @@ export async function runStaged(root, options = {}) {
     report.endedAt = new Date().toISOString();
     report.log = slash(path.relative(plan.root, log));
     report.logSha256 = sha(readFileSync(log));
+    const passed = report.outcome === 'passed' && report.exitCode === 0 && !report.error && !report.signal;
+    report.validation = { executed: Boolean(report.command) && report.started !== false, passed,
+      reusableReceipt: passed && Boolean(report.gateReceipt),
+      reason: passed ? 'STAGED_PASSED' : report.outcome === 'skip' ? plan.changes.length ? 'STAGED_SKIPPED' : 'STAGED_EMPTY_INDEX'
+        : report.outcome === 'invalidated' ? 'STAGED_INVALIDATED' : report.outcome === 'cleanup-failed' ? 'STAGED_CLEANUP_FAILED'
+          : report.outcome === 'blocked' ? 'STAGED_PLAN_BLOCKED' : 'STAGED_FAILED' };
+    report.nextAction = passed ? 'review-ship-plan-with-receipt' : report.outcome === 'skip'
+      ? plan.changes.length ? 'validate-selected-non-gate-changes' : 'select-completed-range-and-review-stage-plan'
+      : 'inspect-preserved-state-and-revalidate';
     writeFileSync(reportFile, JSON.stringify(report, null, 2) + '\n', { flag: 'wx' });
   }
-  return { report: slash(path.relative(plan.root, reportFile)), exitCode: report.exitCode, outcome: report.outcome, plan: report.gate ?? plan };
+  return { report: slash(path.relative(plan.root, reportFile)), exitCode: report.exitCode, outcome: report.outcome,
+    plan: report.gate ?? plan, validation: report.validation, nextAction: report.nextAction };
 }

@@ -217,6 +217,9 @@ export default defineConfig({
   test: {
     root: ROOT,
     environment: 'jsdom',
+    // 进程孵化型测试（git/node spawn 的流程夹具）在全量并发满载下会抖超 5s 默认上限（10-03 冻结门实测
+    // impact-query/workflow-ship/workflow-staged 轮流抖红）；超时只是上限不是放水，真挂死仍在 20s 显红。
+    testTimeout: 20_000,
     // pool+分环境必须绑定生效（10-01 实测归因）：任单独一项 ≈55s 无收益——forks 进程冷启动贵，
     // 但 forks 池切掉 93 个零 DOM 文件的 jsdom 后进程初始化大头消失，全量 55.2s→45.0s（-18.5%）。
     pool: 'forks',

@@ -4,7 +4,7 @@
 
 | 原文 | 本轮确认的问题 | 现行替代 |
 | --- | --- | --- |
-| `originals/docs/SPEC-PROCESS.md` | 固定“定向→全量→实页”与“双提交”；旧“五目录”口径 | [规格流程](../../SPEC-PROCESS.md)引用现行质量门与授权规则；复用与记录按[流程工具](../../WORKFLOW-TOOLS.md) |
+| `originals/docs/SPEC-PROCESS.md` | 固定“定向→全量→实页”与“双提交”；旧“五目录”口径 | [规格流程](../SPEC-PROCESS.md)（2026-10-02 起归档于 archive 根层）引用现行质量门与授权规则；复用与记录按[流程工具](../../WORKFLOW-TOOLS.md) |
 | `originals/docs/production/management/ITERATION-BOARD.md` | 09-28 执行状态仍冠“当前技术轮”，与 09-30 交付入口时点不同 | [制作看板入口](../../production/management/ITERATION-BOARD.md)只维护迭代办法；执行状态回原任务与[STATUS](../../STATUS.md)核对 |
 
 本批没有删除或搬走原文件，没有更改原文快照，也没有把旧报告里的未完成事项宣判为完成。STATUS/quality-gates/development 等其他未提交文档保持原样；docs/README 的后续导航修正另留原文于下方路由归档，保留上一任务已有规范。

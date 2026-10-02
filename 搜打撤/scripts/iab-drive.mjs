@@ -41,7 +41,7 @@ export async function setup(url = GAME_URL_DEFAULT) {
   const clientUrl = pathToFileURL(join(PLUGIN_ROOT(), 'scripts', 'browser-client.mjs')).href;
   const { setupBrowserRuntime } = await import(clientUrl);
   await setupBrowserRuntime({ globals: globalThis });
-  const browser = await agent.browsers.getForUrl(url);
+  const browser = await globalThis.agent.browsers.getForUrl(url);
   return browser;
 }
 

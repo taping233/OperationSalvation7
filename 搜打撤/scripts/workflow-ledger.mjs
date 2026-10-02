@@ -31,11 +31,19 @@ function identifier(cells, kind) {
   return kind === 'pending' ? cells[0].replaceAll('~', '') : cells[0].match(/WF-[a-zA-Z0-9-]+/)?.[0];
 }
 
+export { classifyLedgerRow, withoutReleasedText } from './registry-paths.mjs';
+import { classifyLedgerRow } from './registry-paths.mjs';
+
 export function readLedger(root, kind) {
   const config = LEDGERS[kind];
   if (!config) throw new Error('台账仅支持 registry / pending');
   const markdown = readFileSync(path.join(root, config.file), 'utf8');
-  return { file: config.file, sha256: hash(markdown), rows: table(markdown, config.active).rows.map(row => ({ key: identifier(row.cells, kind) ?? null, cells: row.cells })) };
+  const rows = table(markdown, config.active).rows.map(row => ({ key: identifier(row.cells, kind) ?? null, cells: row.cells,
+    ...classifyLedgerRow(row, kind) }));
+  const states = kind === 'registry' ? ['editing', 'complete-uncommitted', 'settled', 'released'] : ['open', 'resolved'];
+  const groups = Object.fromEntries(states.map(state => [state, rows.filter(row => row.state === state)]));
+  return { file: config.file, sha256: hash(markdown), rows, groups,
+    counts: Object.fromEntries(states.map(state => [state, groups[state].length])) };
 }
 
 export function planLedger(root, { kind, action, key, owner, cells }) {

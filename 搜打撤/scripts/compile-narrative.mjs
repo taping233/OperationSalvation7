@@ -14,7 +14,7 @@ try {
     errorHandler: (message, type) => errors.push(`${type}: ${message}`),
   }).Compile();
 } catch (error) {
-  throw new Error(errors.length ? `Ink compilation failed:\n${errors.join('\n')}` : error.message);
+  throw new Error(errors.length ? `Ink compilation failed:\n${errors.join('\n')}` : error.message, { cause: error });
 }
 const json = JSON.parse(story.ToJson());
 await mkdir(path.dirname(outputPath), { recursive: true });

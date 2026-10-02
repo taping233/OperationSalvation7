@@ -1,33 +1,33 @@
 # 搜打撤 · 代号7
 
-四层相邻节点探索与卡牌战斗结合的单机搜打撤游戏。当前包版本为 v0.60.0「冬日远征体验改造」；开发范围仅为 Vite 网页版，Godot、Unity 和桌面 EXE 冻结。
+四层相邻节点探索与卡牌战斗结合的单机搜打撤游戏。当前包版本为 v0.60.0「冬日远征体验改造」，主线为 Vite 网页版；开发范围与冻结边界见根 AGENTS.md。
 
-接手先看[项目状态入口](docs/STATUS.md)并核对实时工作区；要改哪一块该看哪份文档，见[文档导航](docs/README.md)的「按改动找文档」路由表。带日期的历史快照与批次记录都在 [docs/archive/](docs/archive/README.md)，只代表当时时点。
+开发从[快速入口](docs/QUICKSTART.md)进入；[文档导航](docs/README.md)按改动定位资料，[项目状态](docs/STATUS.md)提供交付指针。带日期的[历史记录](docs/archive/README.md)只代表当时时点。
 
 ## 快速开始
 
 Vite 网页版开发调试在本目录运行：
 
 ```powershell
-npm install
 npm run dev
 ```
 
-`index.html` 使用 ESM，不能通过 `file://` 直接双击运行。`npm run dev` 由 Vite 读取 `game`；`npm run build` 构建生产版。存在其他会话未提交改动时不在共享工作区构建。
+优先复用现有 Node 22 与锁定依赖；缺失依赖按任务授权处理。`index.html` 使用 ESM，不能通过 `file://` 直接双击运行。`npm run dev` 由 Vite 读取 `game`；构建环境边界见[开发指南](docs/development.md)。
 
 网页版浏览器要求：Chromium 105+ / Edge 常青版 / Firefox 121+（样式层使用 `:has()` 与容器查询 `cqw`，旧内核 WebView 下部分界面样式会退化）。桌面版内置 Electron 44，无此限制。
 
 ## 常用检查
 
-默认只运行相关检查；全量测试用于收尾落库或公共架构改动。下面是命令入口，不要求每次全部执行；构建须先满足工作区约束。
+日常反馈、提交门与 CI 覆盖边界统一见[质量门](docs/quality-gates.md)。这些命令按需选择，不是固定顺序：
 
 ```powershell
-npm test
+npm run test:target -- tests/<相关测试>.test.js
+npm run docs:check
+npm run check:staged:plan
 npm run typecheck
 node game/selftest.js
 node scripts/check-version.cjs
 npm run build
-npm run perf
 ```
 
 ## 当前能力

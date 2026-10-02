@@ -1,6 +1,6 @@
 # 搜打撤 · 代号7 游戏全书（自动生成）
 
-> 本文档由 `scripts/generate-compendium.mjs` 直接读取游戏运行时数据源生成（生成日期 2026-09-23），
+> 本文档由 `scripts/generate-compendium.mjs` 直接读取游戏运行时数据源生成（生成日期 2026-10-02），
 > 卡牌表、敌人表、成就、宠物均与代码一一对应；重跑 `npm run docs:compendium` 即重新同步。
 > 请勿手改本文件——机制疑义以 `game/src/` 源码为准，本文给出每章的数据出处。
 >
@@ -20,7 +20,7 @@
 
 ## 3 战斗系统
 
-- 流程实现：`game/src/battle/battle.core.js`（状态机 + 动作队列，异步演出在动作内等待）、`battle.rules.js`（打出校验）、`battle.deck.js`（牌库/墓地，仅 BOSS 战有牌库）。
+- 流程实现：`game/src/battle/core/battle.core.js`（状态机 + 动作队列，异步演出在动作内等待）、`battle.rules.js`（打出校验）、`battle.deck.js`（牌库/墓地，仅 BOSS 战有牌库）。
 - 伤害口径：`game/src/battle/combat.js`（攻击 = 角色攻击 + 卡面修正；法术受法伤加成；固定伤害无视强化；护甲/格挡/护盾减免）。
 - 诅咒与祝福：`combat.js` CURSES/BUFFS（中毒、流血、灼烧、冰冻、沉默、破甲、禁疗等；灼烧同为诅咒口径）。
 - 注能：卡面「注能」角标主动进入（消耗 N 张手牌强化打出；镭射等可不注能直接打出）；「被注能时」句随注能结算。
@@ -358,16 +358,16 @@
 | 对局地图 | `game/src/run/game.run.flow.js`、`map-generator.js`、`expedition.view.js` | 节点行军、物资格/宝箱/事件/商店/火堆/祭坛/撤离点 |
 | 商店（局内） | `game/src/run/game.run.shop.js` | 战术补给站、收购台、神秘货箱（问号卡面、面板内不重复刷新、买后亮卡） |
 | 祭坛 | `game/src/run/game.run.altar.js` | 碎片兑换能力卡、献祭、复原、撤离整理（全部入库 / 智能整理） |
-| 首脑战 | `game/src/battle/battle.core.js`、`game.nest.js` | 开战装备勾选制、首脑死亡立即结束、保险柜、战后整理（全部带走 / 智能选择） |
+| 首脑战 | `game/src/battle/core/battle.core.js`、`game.nest.js` | 开战装备勾选制、首脑死亡立即结束、保险柜、战后整理（全部带走 / 智能选择） |
 | 存档 | `game/src/hub/game.storage.js` | 五档位、战斗快照随对局存档、旧档卡库刷新与 retire 清理 |
 
 ## 7 事件与场景
 
-- 场景数据真源：`game/data/scenes.json`（undefined 个场景定义）；事件叙事真源 `narrative/`（编译脚本 `scripts/compile-narrative.mjs`）。
+- 场景数据真源：`game/data/scenes.json`（12 个场景定义）；事件叙事真源 `narrative/`（编译脚本 `scripts/compile-narrative.mjs`）。
 
 ## 8 成就
 
-- 数据真源：`game/data/achievements.json`（共 23 项；解锁与奖励逻辑 `game/src/hub/meta.js`）。
+- 数据真源：`game/data/achievements.json`（共 26 项；解锁与奖励逻辑 `game/src/hub/meta.js`）。
 
 | 成就 | 说明 |
 | --- | --- |
@@ -391,9 +391,12 @@
 | 无限能源 | 在一回合内打出 10 张及以上的招式（0 费连招流可达成） |
 | 武器大师 | 在一场战斗中穿戴 5 件装备及以上 |
 | 符文爱好者 | 仓库拥有 5 块不同属性的符文 |
-| 拯救者 | 击败 2 位龙巢最终 BOSS |
+| 拯救者 | 击败 2 位研究所最终 BOSS |
 | 好美的花瓶！ | 仓库拥有 1 块双属性的彩虹符文 |
 | 借过 | 一回合内击杀完全形态·元素领主的复活体 |
+| 实验数据·铜 | 研究所累计结算分数达 500 |
+| 实验数据·银 | 研究所累计结算分数达 1500 |
+| 实验数据·金 | 研究所累计结算分数达 4000 |
 
 ## 9 宠物
 

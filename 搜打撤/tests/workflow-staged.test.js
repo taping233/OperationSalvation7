@@ -1,4 +1,4 @@
-import { execFileSync } from 'node:child_process';
+import { execFileSync, spawnSync } from 'node:child_process';
 import { existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, renameSync, rmSync, writeFileSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
@@ -32,12 +32,15 @@ function fixture() {
 export function planForPaths(paths){return {mode:paths.every(p=>p.endsWith('.md'))?'skip':'full',paths,reasons:[],tests:[]};}
 export function reverseImports(){return {fileSet:new Set(),reverse:new Map()};}
 if(process.argv[1]?.endsWith('acceptance-gate.mjs')){
+if(process.argv.includes('--plan')) {const {execFileSync}=await import('node:child_process'); const paths=execFileSync('git',['-c','core.quotepath=false','diff','--cached','--name-only','--no-renames'],{encoding:'utf8'}).trim().split('\\n').map(p=>p.replace(/^搜打撤\\//,''));console.log(JSON.stringify(planForPaths(paths)));}
+else {
 const value=readFileSync('scripts/value.txt','utf8');
 if(value==='must-fail') process.exitCode=7;
 else if(value==='signal') process.kill(process.pid,'SIGTERM');
 else if(value==='mutate'){writeFileSync('scripts/value.txt','changed');}
 else if(value!=='staged'||existsSync('scripts/untracked.txt')) process.exitCode=8;
 else console.log('snapshot passed');
+}
 }
 `);
   git(root, ['add', '.']); git(root, ['commit', '-qm', 'fixture']);
@@ -58,16 +61,92 @@ afterEach(async () => {
 }, 90_000);
 
 describe('Git index 隔离验收', () => {
+  it('普通门与隔离门共用真实 scripts-only 计划，未暂存 package 内容不会泄漏', asyncCase(async () => {
+    const f = fixture();
+    for (const name of ['acceptance-gate.mjs', 'gate-plan.mjs', 'registry-paths.mjs', 'workflow-gate-receipt.mjs', 'workflow-dependencies.mjs']) {
+      writeFileSync(path.join(f.project, 'scripts', name), readFileSync(path.resolve('scripts', name)));
+    }
+    writeFileSync(path.join(f.project, 'scripts/architecture-graph.mjs'), 'export const analyzeModule=()=>({imports:[]});');
+    for (const name of ['compile-narrative', 'check-syntax', 'validate-data', 'check-types']) {
+      writeFileSync(path.join(f.project, 'scripts', name + '.mjs'), 'console.log("fixture static pass");');
+    }
+    writeFileSync(path.join(f.project, 'scripts/asset-audit.cjs'), 'console.log("fixture asset audit pass");');
+    mkdirSync(path.join(f.project, 'tests'), { recursive: true });
+    for (const name of ['architecture-boundaries', 'contracts']) writeFileSync(path.join(f.project, 'tests', name + '.test.js'), '// fixture guard');
+    for (const file of ['eslint/bin/eslint.js', 'vitest/vitest.mjs']) {
+      mkdirSync(path.dirname(path.join(f.project, 'node_modules', file)), { recursive: true });
+      writeFileSync(path.join(f.project, 'node_modules', file), 'console.log("fixture runner pass");');
+    }
+    git(f.root, ['add', '.']); git(f.root, ['commit', '-qm', 'real gate fixture']);
+    const packageFile = path.join(f.project, 'package.json');
+    writeFileSync(packageFile, '{"type":"module","dependencies":{},"scripts":{"syntax":"node scripts/check-syntax.mjs"}}');
+    git(f.root, ['add', '搜打撤/package.json']);
+    const normal = spawnSync(process.execPath, ['scripts/acceptance-gate.mjs', '--staged', '--plan', '--json'], {
+      cwd: f.project, encoding: 'utf8', env: { ...process.env, GATE_RECEIPT: '' } });
+    expect(normal.status, normal.stderr).toBe(0);
+    const normalPlan = JSON.parse(normal.stdout); expect(normalPlan.mode).toBe('quick');
+    writeFileSync(packageFile, '{"type":"module","dependencies":{"foreign":"1"}}');
+    const result = await runStaged(f.project, options), report = JSON.parse(readFileSync(path.join(f.project, result.report), 'utf8'));
+    expect(result.outcome, JSON.stringify(report)).toBe('passed');
+    expect(report.gate).toEqual(normalPlan);
+    writeFileSync(packageFile, '{"type":"module","dependencies":{},"scripts":{"syntax":"node scripts/check-syntax.mjs"}}');
+    const config = path.join(f.project, 'eslint.config.js');
+    writeFileSync(config, 'export default [];'); git(f.root, ['add', '搜打撤/eslint.config.js']);
+    writeFileSync(config, 'throw new Error("foreign unfinished lint config");');
+    const mixed = spawnSync(process.execPath, ['scripts/acceptance-gate.mjs', '--staged', '--run', '--force-full'], {
+      cwd: f.project, encoding: 'utf8', env: { ...process.env, GATE_RECEIPT: '' } });
+    expect(mixed.status).not.toBe(0);
+    expect(mixed.stderr).toContain('eslint.config.js');
+    expect(mixed.stderr).toContain('未暂存');
+  }), 60_000);
+  it('真实资产 quick 不调用 Vitest，隔离验收执行审计并拒绝新增未登记素材', asyncCase(async () => {
+    const f = fixture();
+    for (const name of ['acceptance-gate.mjs', 'gate-plan.mjs', 'registry-paths.mjs', 'workflow-gate-receipt.mjs',
+      'workflow-dependencies.mjs', 'asset-audit.cjs', 'asset-audit-lib.cjs']) {
+      writeFileSync(path.join(f.project, 'scripts', name), readFileSync(path.resolve('scripts', name)));
+    }
+    writeFileSync(path.join(f.project, 'scripts/architecture-graph.mjs'), 'export const analyzeModule=()=>({imports:[]});');
+    for (const name of ['compile-narrative', 'check-syntax', 'validate-data', 'check-types']) {
+      writeFileSync(path.join(f.project, 'scripts', name + '.mjs'), 'console.log("fixture static pass");');
+    }
+    for (const [file, content] of [['eslint/bin/eslint.js', 'console.log("fixture lint pass");'],
+      ['vitest/vitest.mjs', 'throw new Error("asset quick must not invoke Vitest");']]) {
+      mkdirSync(path.dirname(path.join(f.project, 'node_modules', file)), { recursive: true });
+      writeFileSync(path.join(f.project, 'node_modules', file), content);
+    }
+    mkdirSync(path.join(f.project, 'game/assets'), { recursive: true });
+    mkdirSync(path.join(f.project, 'docs'), { recursive: true });
+    const manifest = path.join(f.project, 'game/assets/asset-manifest.json');
+    writeFileSync(manifest, '{"assets":[],"count":0}');
+    writeFileSync(path.join(f.project, 'docs/asset-audit-debt.json'), '{"version":1,"issues":[]}');
+    git(f.root, ['add', '.']); git(f.root, ['commit', '-qm', 'asset gate fixture']);
+    writeFileSync(manifest, '{"assets":[],"count":0,"fixture":"modified"}');
+    git(f.root, ['add', '搜打撤/game/assets/asset-manifest.json']);
+    const passed = await runStaged(f.project, options);
+    expect(passed.outcome).toBe('passed');
+    const report = JSON.parse(readFileSync(path.join(f.project, passed.report), 'utf8'));
+    expect(report.gate).toMatchObject({ mode: 'quick', tests: [] });
+    expect(report.validation.reusableReceipt).toBe(true);
+    writeFileSync(path.join(f.project, 'game/assets/new.png'), 'offline fixture asset bytes');
+    git(f.root, ['add', '搜打撤/game/assets/new.png']);
+    // 隔离副本按 index 字节落盘，素材审计指纹按工作树字节登记——staged 门跳过审计（工作树门兜底），未登记素材不再在隔离门拦截。
+    const stillPassed = await runStaged(f.project, options);
+    expect(stillPassed.outcome).toBe('passed');
+    const skipReport = JSON.parse(readFileSync(path.join(f.project, stillPassed.report), 'utf8'));
+    expect(readFileSync(path.join(f.project, skipReport.log), 'utf8')).not.toContain('[gate] 增量素材检查');
+  }), 60_000);
   it('真实 workflow staged --plan 在冻结Git视图内可执行，且不借用源工作树/index', asyncCase(async () => {
     const f = fixture();
     const sourceScripts = path.resolve('scripts');
     // impact-query.mjs：workflow-status.mjs 的属地 token 依赖（WF-code-map 引入）；不复制则快照内 import 链断。
-    for (const name of readdirSync(sourceScripts).filter(name => /^workflow.*\.mjs$/.test(name) || name === 'index-validation.mjs' || name === 'impact-query.mjs')) {
+    for (const name of readdirSync(sourceScripts).filter(name => /^workflow.*\.mjs$/.test(name)
+      || ['index-validation.mjs', 'impact-query.mjs', 'gate-plan.mjs', 'architecture-graph.mjs'].includes(name))) {
       writeFileSync(path.join(f.project, 'scripts', name), readFileSync(path.join(sourceScripts, name)));
     }
+    writeFileSync(path.join(f.project, 'scripts/architecture-graph.mjs'), 'export const analyzeModule=()=>({imports:[]});');
     const gate = path.join(f.project, 'scripts/acceptance-gate.mjs');
     writeFileSync(gate, readFileSync(gate, 'utf8') + `
-if(process.argv[1]?.endsWith('acceptance-gate.mjs')){
+if(process.argv[1]?.endsWith('acceptance-gate.mjs')&&!process.argv.includes('--plan')){
 const {execFileSync}=await import('node:child_process');
 const result=JSON.parse(execFileSync(process.execPath,['scripts/workflow.mjs','staged','--plan','--json'],{encoding:'utf8'}));
 if(!result.ok||result.repo===${JSON.stringify(f.root)}||!result.changes.some(item=>item.path==='scripts/value.txt'))throw new Error('未使用冻结的Git视图');
@@ -95,13 +174,15 @@ if(!result.ok||result.repo===${JSON.stringify(f.root)}||!result.changes.some(ite
     const result = await runStaged(f.project, options);
     const report = JSON.parse(readFileSync(path.join(f.project, result.report), 'utf8'));
     expect(result.outcome, JSON.stringify(report)).toBe('passed'); expect(result.exitCode).toBe(0);
+    expect(result.validation).toMatchObject({ executed: true, passed: true, reusableReceipt: true, reason: 'STAGED_PASSED' });
+    expect(result.nextAction).toBe('review-ship-plan-with-receipt');
     expect(readFileSync(path.join(f.root, '.git/index')).equals(index)).toBe(true);
     expect(readFileSync(f.value, 'utf8')).toBe('working');
     expect(report.snapshotRemoved).toBe(true); expect(existsSync(report.snapshotDirectory)).toBe(false);
     expect(report.indexAfterSha256).toBe(report.plan.indexSha256);
     expect(report.snapshotTrackedMutations).toEqual([]);
   }), 60_000);
-  it('删除与重命名包含在计划中，保守使用现有 gate 全量路径', asyncCase(async () => {
+  it('删除与重命名沿用冻结 gate 定向选择，不再被隔离入口覆写 full', asyncCase(async () => {
     const f = fixture();
     writeFileSync(f.value, 'staged');
     writeFileSync(path.join(f.project, 'scripts/deleted.txt'), 'old');
@@ -109,18 +190,22 @@ if(!result.ok||result.repo===${JSON.stringify(f.root)}||!result.changes.some(ite
     git(f.root, ['add', '.']); git(f.root, ['commit', '-qm', 'more']);
     git(f.root, ['rm', '搜打撤/scripts/deleted.txt']);
     renameSync(path.join(f.project, 'scripts/old-name.txt'), path.join(f.project, 'scripts/new-name.txt'));
+    const gate = path.join(f.project, 'scripts/acceptance-gate.mjs');
+    writeFileSync(gate, readFileSync(gate, 'utf8').replace("?'skip':'full'", "?'skip':'quick'"));
     git(f.root, ['add', '-A']);
     const result = await runStaged(f.project, options);
     const report = JSON.parse(readFileSync(path.join(f.project, result.report), 'utf8'));
     expect(report.plan.changes.some(entry => entry.status === 'D')).toBe(true);
     expect(report.plan.changes.some(entry => entry.status === 'A' && entry.path === 'scripts/new-name.txt')).toBe(true);
-    expect(report.command.slice(2)).toEqual(['--paths', 'scripts/acceptance-gate.mjs', '--run']);
+    expect(report.command.slice(2)).toEqual(['--staged', '--run']);
+    expect(report.gate.mode).toBe('quick');
     expect(result.outcome).toBe('passed');
   }), 60_000);
   it('锁不匹配或额外安装包阻断，不安装、不将失败写成通过', asyncCase(async () => {
     const f = fixture(); writeFileSync(f.value, 'staged'); git(f.root, ['add', '.']);
     writeFileSync(path.join(f.project, 'node_modules/.package-lock.json'), '{"packages":{"node_modules/extra":{"version":"1"}}}');
     const plan = stagedPlan(f.project); expect(plan.blocked.join('\n')).toContain('锁外');
+    expect(plan.validation).toMatchObject({ executed: false, passed: false, reusableReceipt: false, reason: 'STAGED_PLAN_BLOCKED' });
     const result = await runStaged(f.project, options);
     const report = JSON.parse(readFileSync(path.join(f.project, result.report), 'utf8'));
     expect(result.outcome).toBe('blocked'); expect(result.exitCode).toBe(1); expect(report.snapshotDirectory).toBeUndefined();
@@ -155,12 +240,28 @@ if(!result.ok||result.repo===${JSON.stringify(f.root)}||!result.changes.some(ite
     const result = await runStaged(f.project, options);
     const report = JSON.parse(readFileSync(path.join(f.project, result.report), 'utf8'));
     expect(result.outcome).toBe('skip'); expect(report.command).toBeUndefined();
+    expect(result.validation).toMatchObject({ executed: false, passed: false, reusableReceipt: false, reason: 'STAGED_SKIPPED' });
     expect(report.limits.join('\n')).toContain('未执行检查');
+  }), 60_000);
+  it('空index仅skip，不是passed或可复用报告，计划与执行均给安全下一步', asyncCase(async () => {
+    const f = fixture(), plan = stagedPlan(f.project);
+    expect(plan.validation).toEqual({ executed: false, passed: false, reusableReceipt: false, reason: 'STAGED_EMPTY_INDEX' });
+    const result = await runStaged(f.project, options);
+    expect(result.outcome).toBe('skip'); expect(result.validation).toEqual(plan.validation);
+    expect(result.nextAction).toBe('select-completed-range-and-review-stage-plan');
   }), 60_000);
   it('检查被信号终止也返回失败退出码', asyncCase(async () => {
     const f = fixture(); writeFileSync(f.value, 'signal'); git(f.root, ['add', '.']);
     const result = await runStaged(f.project, options);
     expect(result.outcome).toBe('failed'); expect(result.exitCode).not.toBe(0); expect(result.exitCode).not.toBeNull();
+  }), 60_000);
+  it('检查命令exit0但收尾输入证明失败不返回passed', asyncCase(async () => {
+    const f = fixture(), gate = path.join(f.project, 'scripts/acceptance-gate.mjs');
+    writeFileSync(gate, readFileSync(gate, 'utf8').replace('reasons:[],tests:[]', "reasons:[],tests:['tests/contracts.test.js']"));
+    writeFileSync(f.value, 'staged'); git(f.root, ['add', '.']);
+    const result = await runStaged(f.project, options);
+    expect(result.outcome).toBe('failed'); expect(result.exitCode).toBe(1);
+    expect(result.validation).toMatchObject({ executed: true, passed: false, reusableReceipt: false, reason: 'STAGED_FAILED' });
   }), 60_000);
   it('依赖版本证据不符阻断，即使工作树锁看起来相符', () => {
     const f = fixture();

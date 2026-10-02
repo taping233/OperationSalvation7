@@ -6,9 +6,7 @@
 
 ### Git 与并行集成
 
-- 本仓库实际包含冻结的 Godot/Unity/EXE 等内容；本项目约束限定本轮产品开发在 `搜打撤/` Vite。提交前先看 `git status --short`、`git log -1` 和当前变更归属。共享工作区有其他会话未提交内容时，不覆盖其文件、不构建、不顺手提交；只读相关 diff 或 `--stat`。
-- 并行工作按文件/目录明确所有者。集成时以实时工作区为准，检查目标文件差异、冲突和调用契约；不可用旧交接或历史快照代替当前状态。集成快照应记录时间、HEAD 与远端差异、证据和未核实项；共享现行记录被占用时另建记录。
-- 删除/移动（含临时文件）须先列出路径并获同意；回滚、提交、推送和发布须有明确指示。禁止 `git clean` / `git checkout` 清理现场。
+- 项目权限、冻结范围和提交授权统一见根 AGENTS.md；日常接手、登记与打包流程见[流程指南](../../WORKFLOW-TOOLS.md)，本页只维护代码与数据的关系。
 
 ### 模块入口
 
@@ -29,7 +27,7 @@
 
 ### 验证与 CI 边界
 
-- 默认定向验证。按改动选择 `check:syntax`、`validate:data`、`typecheck`、`lint`、相关 Vitest、浏览器实页或图片复核。CSS、文案和图片变化应看真实页面/图片。全量 `npx vitest run`（默认并行；2026-09-29 实测解除旧串行规则：234 文件/1888 用例 304.5s→约 55s，连续 4 次全绿）用于收尾落库或公共架构变化；共享工作区有他人半成品时禁止 build。
+- 改动分级、定向反馈、冻结报告复用和 CI 实际覆盖边界只在[质量门](../../quality-gates.md)维护；不要从阶段收尾或落库字样推导固定全量步骤。
 - `.github/workflows/ci.yml`：master push 与 PR 触发；Node 22，`npm ci`、语法/类型/lint，再由 `npm test` 的 pretest 编译剧情、校验数据并执行全量 Vitest；该 workflow 没有构建步骤。
 - `.github/workflows/vite-quality.yml`：master push 与 PR 按 Vite 路径过滤触发；Node 22，`npm ci` 与 `npm run build`（prebuild 处理剧情/数据，postbuild 检查性能预算），不重复全量测试。配置只说明预期流水线，是否实际运行/通过须查对应 Actions 记录。
 - 本地质量门脚本和覆盖限制见[质量门](../../quality-gates.md)。构建成功、静态测试或 Agent 模拟均不单独代表实页完整验收。

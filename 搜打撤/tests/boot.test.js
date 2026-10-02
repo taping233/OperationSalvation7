@@ -481,7 +481,8 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
 
   // IME 家族守卫（game.boot.js 两处 Esc 分支）：中文输入法组合态按 Esc 是取消候选词，
   // 不得误关卡牌大页 / 不得打断加载态强关逻辑。定式对齐 ui.js:79。
-  it('卡牌大页 Esc 关闭与加载态强关：输入法组合态（isComposing / keyCode 229）不误触', { timeout: 15_000 }, async () => {
+  // 真实 timer 等待 + 满载并发下 15s 会抖（10-03 冻结门实测两红两绿）；放宽到 30s 上限，断言本身不变。
+  it('卡牌大页 Esc 关闭与加载态强关：输入法组合态（isComposing / keyCode 229）不误触', { timeout: 30_000 }, async () => {
     const cardsLib = await import('../game/src/hub/game.cardslib.js');
     const { game } = await import('../game/src/run/game.session.js');
     game.state = 'title';

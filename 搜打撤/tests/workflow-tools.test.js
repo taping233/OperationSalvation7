@@ -5,7 +5,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {afterEach, describe, expect, it, vi } from 'vitest';
 import { applyLedger, hash, planLedger, readLedger, table } from '../scripts/workflow-ledger.mjs';
-import { checkArguments, fingerprint, freshness } from '../scripts/workflow-evidence.mjs';
+import { checkArguments, fingerprint, freshness, previewCheck } from '../scripts/workflow-evidence.mjs';
 import { archivePlan, snapshot } from '../scripts/workflow-archive.mjs';
 import { commitReferences, findExisting, ledgerWarnings } from '../scripts/workflow-status.mjs';
 
@@ -127,6 +127,20 @@ describe('验收证据可信边界', () => {
     expect(() => checkArguments({ tests: ['tests/a.test.js'], full: true })).toThrow('只能选');
     expect(checkArguments({ tests: ['tests/a.test.js'] })).toEqual(['scripts/acceptance-gate.mjs', '--target-tests', 'tests/a.test.js']);
     expect(checkArguments({ suite: true })[0]).toBe('node_modules/vitest/vitest.mjs');
+    expect(checkArguments({ full: true })).toEqual(['scripts/acceptance-gate.mjs', '--full', '--run']);
+    expect(() => checkArguments({ tests: [] })).toThrow('不能为空');
+  });
+  it('验证预览先检查路径/测试类型，不创建证据；返回实际测试选择', () => {
+    const root = fixture();
+    mkdirSync(path.join(root, 'scripts')); mkdirSync(path.join(root, 'tests'));
+    writeFileSync(path.join(root, 'scripts/acceptance-gate.mjs'), '// unused for explicit test list');
+    writeFileSync(path.join(root, 'tests/local.test.js'), '// fixture');
+    const report = previewCheck(root, { tests: ['tests/local.test.js'] });
+    expect(report.selection).toMatchObject({ mode: 'targeted', tests: ['tests/local.test.js'] });
+    expect(() => previewCheck(root, { tests: ['tests/missing.test.js'] })).toThrow('路径不存在');
+    expect(() => previewCheck(root, { tests: ['docs/PENDING.md'] })).toThrow('无效测试');
+    expect(() => previewCheck(root, { paths: ['../outside.js'] })).toThrow('不在 Vite');
+    expect(existsSync(path.join(root, 'docs/evidence'))).toBe(false);
   });
 });
 

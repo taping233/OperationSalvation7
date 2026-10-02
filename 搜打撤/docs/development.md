@@ -12,13 +12,12 @@ npm run typecheck
 npm run build
 node game/selftest.js
 node scripts/check-version.cjs
-npm run perf
 npm run assets:audit
 ```
 
-`npm run perf` 是启动 Electron 的历史基准，当前冻结范围不执行。性能历史与方法参考 [全场景账本 PERF-LEDGER-2026-09-29](PERF-LEDGER-2026-09-29.md)；其中工具先核对浏览器实现，仅当前平台内置浏览器可用于复验，外部 CDP 脚本不沿用。开发地址加 `?perfProbe=1` 的探针方法与首次有限范围结果见 [Vite 内置浏览器性能记录](archive/records-2026-09-28/VITE-IAB-PERFORMANCE-2026-09-28.md)，受控平移 drawHz 不能代替真实移动的交付帧率。
+`npm run perf` 是冻结的 Electron 历史基准，不作为当前入口。性能方法参考 [全场景账本 PERF-LEDGER-2026-09-29](PERF-LEDGER-2026-09-29.md)，其中历史脚本须先核对是否满足[质量门](quality-gates.md)的平台边界。开发地址加 `?perfProbe=1` 的探针方法与首次有限范围结果见 [Vite 内置浏览器性能记录](archive/records-2026-09-28/VITE-IAB-PERFORMANCE-2026-09-28.md)，受控平移 drawHz 不能代替真实移动的交付帧率。
 
-CI 在 master 的 push 和 pull request 上依次运行 `check:syntax`、`typecheck`、`lint`，再经 `npm test` 的 pretest 编译剧情与校验数据后运行完整 Vitest；Vite 路径变更另由构建 workflow 检查产物预算。日常定向入口和提交快速门见[质量门](quality-gates.md)。依赖方向与按需加载边界可定向运行 `npm run test:target -- tests/architecture-boundaries.test.js tests/contracts.test.js`；照相馆页面 `game.cardslib.page.js` 只允许由轻门面 `game.cardslib.js` 动态加载。
+日常路径见[流程指南](WORKFLOW-TOOLS.md)，定向反馈、提交门与 CI 实际覆盖统一见[质量门](quality-gates.md)。依赖方向与按需加载边界可定向运行 `npm run test:target -- tests/architecture-boundaries.test.js tests/contracts.test.js`；照相馆页面 `game.cardslib.page.js` 只允许由轻门面 `game.cardslib.js` 动态加载。
 
 历史桌面技术说明（冻结，须老板另行解冻与授权才能执行）：原生 `app://` 不解析 `howler` 等裸模块导入；`desktop-app` 的 `prestart` 先构建 Vite，再从 `desktop-app/game` 加载，`prestart` / `predist` 检查文件与版本。此说明不作为当前开发/验收入口。
 
@@ -29,7 +28,7 @@ CI 在 master 的 push 和 pull request 上依次运行 `check:syntax`、`typech
 - 事件叙事优先修改 `narrative/events.ink`；不要手改 `src/generated/narrative-events.js`，它会在开发、测试和构建前自动重新生成。
 - 领域逻辑不直接操作 DOM；视图不直接修改其他模块的私有状态。
 - 基地购买、拆包、领奖使用 `Base.purchase/openCardPack/grantReward`；复合命令在一个草稿中准备并只持久化一次。不要在 UI 先扣资源、再调用入库、最后忽略保存结果。
-- `npm run typecheck` 汇总七个配置；结算（含经验推进、胜利快照和研究所撤离事务）、战斗快照、基础事务、随机工具、卡牌稀有度/渲染上下文、基地离场、宠物蛋与累计游玩时间命令采用严格检查。第六个 selection 配置只编译战斗选牌工厂的新增外部端口调用契约与正反例，不严格检查该工厂的内部战斗运行态。第七个 hand-selection 配置严格检查纯选牌规则、发现候选/状态 builder 和独立发现流程实现；`battle.selection-flow` 的其余旧战斗交互状态仍未严格检查，runtime/engine 接线也不代表整个战斗域已严格覆盖。一次临时全体 `@ts-check` 探测发现 163 项内部类型诊断，主要来自旧运行态状态和回调；类型检查按边界覆盖，不表示全项目已开启 strict。新端口应补具体 JSDoc 和编译正反例，不能用忽略诊断代替契约。
+- `npm run typecheck` 按 [check-types.mjs 的 configs 清单](../scripts/check-types.mjs)并行检查；精确覆盖以各 jsconfig 的 include 为准，不手写配置个数或序号。selection 只编译新增外部端口调用契约及正反例，hand-selection 检查纯选牌/发现规则与其 fixture，strict-ui 覆盖清单内 UI 模块；旧 battle.selection-flow 运行态与 runtime/engine 接线不因这些配置自动纳入严格覆盖。新端口补具体 JSDoc 与编译正反例，不用忽略诊断代替契约，通过不代表全项目 strict。
 - 样式按页面职责放入 `css/base.css`、`cards.css`、`overlays.css`、`hub.css`、`battle.css` 或 `scenes.css`；主题覆盖文件保持在这些基础样式之后加载。
 - 存档字段或键名如需变化，先添加迁移与固定旧档测试。
 - 构建/实验产物写入已忽略目录，不提交 `dist` 或 `desktop-app/game`；验收报告/截图集中 `docs/evidence/<日期>-<任务>/`，是否提交仍需老板明确授权。

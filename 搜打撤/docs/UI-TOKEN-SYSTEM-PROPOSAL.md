@@ -79,4 +79,4 @@ winter.css / card-v3.css 改写后只包含：token 覆盖 + 该主题特有演�
 - **避开 CSS 热点**：等照相馆（expedition-library.css/cardslib）验收收官后动工；
 - **ui-scale 兼容**：CSS 变量与 zoom 缩放无交互，无风险；
 - **收益声明**：结构重复 -202 行 + 新主题/新页面的边际成本从「抄一套」降为「写覆盖」；
-- 迁移全程按 SPEC-PROCESS 档二规格走（跨域 CSS 改动，符合触发阈值）。
+- 迁移全程按[归档的规格流程](archive/SPEC-PROCESS.md)档二规格走（跨域 CSS 改动，符合其触发阈值）。

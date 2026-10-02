@@ -15,7 +15,7 @@
 #   或全量；源码、数据、测试、工具、剧情和配置纳入，纯文档/样式/图片
 #   不运行 Vitest，仍须按改动类型做实页或素材验收。
 #
-# 【强制全量】FORCE_FULL_TESTS=1 保留旧全量路径与 gate-full-test.log。
+# 【强制全量】FORCE_FULL_TESTS=1 仅强制选择 full，保留暂存/混树守卫与编译/静态检查。
 #   默认快速路径会直接输出执行的检查和选择理由；失败时阻断提交。
 #
 # 【绕过口】（明知故犯才用）
@@ -39,52 +39,10 @@ fi
 TOP=$(git rev-parse --show-toplevel) || { echo "[gate] FATAL: git rev-parse failed"; exit 1; }
 cd "$TOP" || { echo "[gate] FATAL: cd $TOP failed"; exit 1; }
 
-# 普通提交先走定向门；旧全量逻辑只供明确强制时使用。
-if [ -z "$FORCE_FULL_TESTS" ]; then
-  ( cd 搜打撤 && node scripts/acceptance-gate.mjs --staged --run )
-  exit $?
-fi
-
-STAGED=$(git -c core.quotepath=false diff --cached --name-only --no-renames) \
-  || { echo "[gate] FATAL: git diff --cached failed"; exit 1; }
-[ -z "$STAGED" ] && exit 0
-
-GATED="$STAGED"
-if [ -z "$GATED" ]; then
-  echo "[gate] OK: no staged changes for forced full suite."
-  exit 0
-fi
-
-echo "[gate] FORCE_FULL_TESTS set -> running full suite for staged changes:"
-printf '%s\n' "$GATED" | sed 's/^/[gate]   - /'
-
-GITDIR=$(git rev-parse --absolute-git-dir) \
-  || { echo "[gate] FATAL: git rev-parse --absolute-git-dir failed"; exit 1; }
-LOG="$GITDIR/gate-full-test.log"
-: > "$LOG" || { echo "[gate] FATAL: cannot write log: $LOG"; exit 1; }
-
-T0=$(date +%s)
-if (set -o pipefail) 2>/dev/null; then
-  set -o pipefail
-  ( cd 搜打撤 && node node_modules/vitest/vitest.mjs run --no-file-parallelism ) 2>&1 | tee -a "$LOG"
-  RC=$?
+# Both modes use the same guarded chain; forcing full changes only test selection.
+if [ -n "$FORCE_FULL_TESTS" ]; then
+  ( cd 搜打撤 && node scripts/acceptance-gate.mjs --staged --force-full --run )
 else
-  ( cd 搜打撤 && node node_modules/vitest/vitest.mjs run --no-file-parallelism ) > "$LOG" 2>&1
-  RC=$?
-  cat "$LOG"
+  ( cd 搜打撤 && node scripts/acceptance-gate.mjs --staged --run )
 fi
-ELAPSED=$(( $(date +%s) - T0 ))
-
-if [ "$RC" -eq 0 ]; then
-  echo "[gate] PASS: full suite green in ${ELAPSED}s -> allowing commit. (log: $LOG)"
-  exit 0
-fi
-
-echo "[gate] FAIL: full suite red in ${ELAPSED}s -> COMMIT BLOCKED."
-echo "[gate] Failing tests (extracted from vitest output):"
-grep -aE '(^|[[:space:]])FAIL[[:space:]]|^[[:space:]]*[×✕][[:space:]]' "$LOG" \
-  | awk '!seen[$0]++' | sed 's/^/[gate]   - /'
-grep -aE '^(Test Files|     Tests)[[:space:]]' "$LOG" | sed 's/^/[gate]   /'
-echo "[gate] Full log: $LOG"
-echo "[gate] Bypass (not recommended): git commit --no-verify  or  SKIP_FULL_TESTS=1"
-exit 1
+exit $?

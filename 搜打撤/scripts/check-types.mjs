@@ -16,7 +16,7 @@ const configs = [
   'jsconfig.strict-ui.json',
 ];
 
-// 7 个配置彼此独立：并行跑，按原顺序汇报，任何失败都让整体退出非零。
+// configs 清单中的配置彼此独立：并行跑，按原顺序汇报，任何失败都让整体退出非零。
 function runConfig(config) {
   return new Promise(resolve => {
     const child = spawn(process.execPath, [tscPath, '--noEmit', '-p', config, '--pretty', 'false'],
